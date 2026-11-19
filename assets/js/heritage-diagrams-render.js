@@ -330,6 +330,9 @@
         const flatMain = vals.flatMap((v, i) => live[i] ? v.filter((_, j) => main(v, j)) : []);
         const sums = vals.map(v => v.reduce((a, b) => a + Math.max(0, b), 0)), negs = vals.map(v => v.reduce((a, b) => a + Math.min(0, b), 0));
         let lo = Math.min(0, ...(stacked ? negs : flatMain)), hi = Math.max(0, ...(stacked ? sums : flatMain));
+        // ⚙️ fourchette (courbe avec marge) : colonnes basse et haute, ou une colonne ± écart, dessinées en bande (lot B)
+        const fk = mode === 'line' || mode === 'area' ? fourchette(o, series.length, vals, live) : null;
+        if (fk) { lo = Math.min(lo, ...fk.ext); hi = Math.max(hi, ...fk.ext); }
         if (num(o.min) || o.min === '0') lo = num(o.min); if (o.max !== undefined && o.max !== '') hi = num(o.max) || hi;
         // ⚙️ même échelle imposée (petits multiples, lecture dans le temps) : l'axe ne bouge pas d'un dessin à l'autre
         if (Number.isFinite(o.__lo) && Number.isFinite(o.__hi) && o.__hi > o.__lo) { lo = o.__lo; hi = o.__hi; }
@@ -363,7 +366,9 @@
             if (d) svg += `<path d="${d.trim()}" fill="none" stroke="${s.color}" stroke-width="${lw}" stroke-linejoin="round"${VV !== V ? ' stroke-dasharray="6 3"' : ''}/>`;
             pts.forEach((p, i) => { if (!p) return; svg += `<circle cx="${r2(p[0])}" cy="${r2(p[1])}" r="3.5" fill="${s.color}"${pidAttr(cats[i], j, cats[i].label)}><title>${esc(cats[i].label)} — ${esc(s.name)} : ${fmt(vals[i][j])}${esc(unit)}</title></circle>`; if (showV && n <= 24) svg += T(p[0], p[1] - fs * .8, fmt(vals[i][j]), {size: fs * .8, anchor: 'middle'}); });
         };
-        if (mode === 'line' || mode === 'area') series.forEach((s, j) => { if (j !== y2) curve(s, j, V); });
+        if (fk) { const pts = cats.map((c, i) => (c.off || !fk.at(i) ? null : [x0 + band * (i + .5), ...fk.at(i).map(v => y0 + plotH - V(v) * plotH)])).filter(Boolean), fc = color(o.bandColor, series[fk.of].color);
+            if (pts.length > 1) svg += `<path d="M${pts.map(p => `${r2(p[0])} ${r2(p[2])}`).join('L')}L${[...pts].reverse().map(p => `${r2(p[0])} ${r2(p[1])}`).join('L')}Z" fill="${fc}" fill-opacity="${r2(clamp(num(o.bandOp) || 22, 5, 90) / 100)}" stroke="none"><title>${esc(fk.label)}</title></path>`; }
+        if (mode === 'line' || mode === 'area') series.forEach((s, j) => { if (j !== y2 && !fk?.skip.has(j)) curve(s, j, V); });
         else {
             const bars = series.map((s, j) => [s, j]).filter(([, j]) => j !== y2);
             cats.forEach((c, i) => {
@@ -387,11 +392,22 @@
             else svg += rot ? T(x0 + band * (i + .5), y0 + plotH + 8, cut(c.label, 130, fs * .9), {size: fs * .9, anchor: 'end', rotate: -40, baseline: 'hanging'}) : T(x0 + band * (i + .5), y0 + plotH + fs, cut(c.label, band, fs * .9), {size: fs * .9, anchor: 'middle'}); });
         if (o.yLabel) svg += T(horiz ? x0 + plotW / 2 : 2, horiz ? y0 + plotH + fs * 2.4 : y0 - 2, o.yLabel, {size: fs * .85, anchor: horiz ? 'middle' : 'start', weight: 600});
         // ⚙️ les axes, pour ce qu'on pose dessus (lignes de repère, annotations à une date) : heritage-diagram-perso.js
-        const perSeries = series.map((s, j) => ({name: s.name, color: s.color, values: vals.filter((_, i) => live[i]).map(v => v[j])}));
+        const perSeries = series.map((s, j) => ({name: s.name, color: s.color, values: vals.filter((_, i) => live[i]).map(v => v[j])})).filter((_, j) => !fk?.skip.has(j));
         const axis = {dir: horiz ? 'x' : 'y', x0, y0, w: plotW, h: plotH, lo, hi, log, unit: pct ? '%' : o.unit || '', series: perSeries.map((s, j) => (j === y2 ? {...s, right: true} : s)), totals: stacked && !pct ? sums.filter((_, i) => live[i]) : null};
         const yrs = horiz ? [] : cats.map((c, i) => (/^\s*-?\d{3,4}(?!\d)/.test(c.label) ? [when(c.label, false), x0 + band * (i + .5)] : null)).filter(p => p && p[0] !== null);
         const time = yrs.length >= 2 && yrs.length === cats.length && yrs.every((p, i) => !i || p[0] > yrs[i - 1][0]) ? {x0, y0, w: plotW, h: plotH, points: yrs} : null;
-        return {h: y0 + plotH + bottom + (o.yLabel && horiz ? fs * 1.4 : 0), svg, legend: single ? [] : seriesLegend(series, cats, false).map((l, j) => j === y2 ? {...l, label: l.label + ' (axe de droite)', type: 'dash', width: 2} : l), axis, time};
+        return {h: y0 + plotH + bottom + (o.yLabel && horiz ? fs * 1.4 : 0), svg, legend: single ? [] : [...seriesLegend(series, cats, false).map((l, j) => j === y2 ? {...l, label: l.label + ' (axe de droite)', type: 'dash', width: 2} : l).filter((_, j) => !fk?.skip.has(j)), ...(fk ? [{label: fk.label, color: color(o.bandColor, series[fk.of].color)}] : [])], axis, time};
+    }
+    /** la fourchette d'une courbe : o.band = cols (o.bandLo, o.bandHi : n° des colonnes basse et haute) ou pm (o.bandPm : l'écart, autour de o.bandOf) */
+    function fourchette(o, n, vals, live) {
+        const col = (v, d) => { const k = Math.round(num(v) || d) - 1; return k >= 0 && k < n ? k : -1; };
+        let lo = -1, hi = -1, pm = -1, of = 0;
+        if (o.band === 'cols') { lo = col(o.bandLo, 2); hi = col(o.bandHi, 3); if (lo < 0 || hi < 0 || lo === hi) return null; of = [...Array(n).keys()].find(j => j !== lo && j !== hi) ?? lo; }
+        else if (o.band === 'pm') { pm = col(o.bandPm, 2); of = col(o.bandOf, 1); if (pm < 0 || of < 0 || pm === of) return null; }
+        else return null;
+        const at = i => { const v = vals[i]; if (!v) return null; const a = pm >= 0 ? v[of] - Math.abs(v[pm]) : v[lo], b = pm >= 0 ? v[of] + Math.abs(v[pm]) : v[hi]; return Number.isFinite(a) && Number.isFinite(b) ? [Math.min(a, b), Math.max(a, b)] : null; };
+        const ext = vals.flatMap((_, i) => (live[i] && at(i) ? at(i) : []));
+        return {at, ext: ext.length ? ext : [0], of, skip: new Set(pm >= 0 ? [pm] : [lo, hi]), label: i18n(pm >= 0 ? 'Marge (±)' : 'Marge (basse – haute)')};
     }
     function pie(spec, W, fs, mode) {
         const o = spec.o || {}, {cats} = table(spec), items = cats.filter(c => c.v[0] > 0), tot = items.reduce((a, c) => a + c.v[0], 0);
@@ -616,6 +632,12 @@
         centerText: C('centerText', 'Texte au centre (sinon le total)'),
         total: C('total', 'Total au centre', 'check', {def: true}),
     };
+    // 📏 la courbe avec marge (lot B) : la fourchette basse / haute, ou ± écart
+    const onBand = s => s.o?.band === 'cols' || s.o?.band === 'pm';
+    const BAND_OPTS = [C('band', 'Fourchette (marge autour de la courbe)', 'select', {choices: [['', 'Aucune'], ['cols', 'Deux colonnes : basse et haute'], ['pm', 'Une colonne ± écart']]}),
+        C('bandLo', 'Colonne basse (n°)', 'number', {min: 1, max: 24, def: 2, when: s => s.o?.band === 'cols'}), C('bandHi', 'Colonne haute (n°)', 'number', {min: 1, max: 24, def: 3, when: s => s.o?.band === 'cols'}),
+        C('bandPm', 'Colonne de l’écart (n°)', 'number', {min: 1, max: 24, def: 2, when: s => s.o?.band === 'pm'}), C('bandOf', 'Autour de la colonne (n°)', 'number', {min: 1, max: 24, def: 1, when: s => s.o?.band === 'pm'}),
+        C('bandOp', 'Opacité de la marge', 'range', {unit: '%', min: 5, max: 80, def: 22, when: onBand}), C('bandColor', 'Couleur de la marge', 'color', {when: onBand})];
     const KINDS = {
         parliament: {icon: '🏛️', label: 'Parlement, assemblée, conseil', group: 'Assemblées', render: parliament, legend: 'bottom',
             grids: [{key: 'rows', label: 'Les groupes (de gauche à droite)', cols: [C('name', 'Groupe / parti'), C('seats', 'Sièges', 'number'), C('color', 'Couleur', 'color'), C('side', 'Côté (Westminster)', 'select', {choices: SIDES, when: s => s.o?.layout === 'westminster'})]}],
@@ -644,7 +666,7 @@
         bars: {icon: '📶', label: 'Barres horizontales', group: 'Chiffres', render: (s, W, fs) => cartesian(s, W, fs, 'bars'), grids: [TABLE_GRID], options: [O.values, O.unit, O.yLabel], sample: () => sampleTable(false)},
         stacked: {icon: '🧱', label: 'Colonnes empilées', group: 'Chiffres', render: (s, W, fs) => cartesian(s, W, fs, 'stacked'), grids: [TABLE_GRID], options: [O.values, O.height, O.unit, O.yLabel], sample: () => sampleTable(true)},
         stacked100: {icon: '💯', label: 'Colonnes empilées à 100 %', group: 'Chiffres', render: (s, W, fs) => cartesian(s, W, fs, 'stacked100'), grids: [TABLE_GRID], options: [O.values, O.height], sample: () => sampleTable(true)},
-        line: {icon: '📈', label: 'Courbe', group: 'Chiffres', render: (s, W, fs) => cartesian(s, W, fs, 'line'), grids: [TABLE_GRID], options: [O.values, O.height, O.unit, O.yLabel, C('min', 'Axe : minimum'), C('max', 'Axe : maximum')], sample: () => sampleTable(true)},
+        line: {icon: '📈', label: 'Courbe', group: 'Chiffres', render: (s, W, fs) => cartesian(s, W, fs, 'line'), grids: [TABLE_GRID], options: [O.values, O.height, O.unit, O.yLabel, C('min', 'Axe : minimum'), C('max', 'Axe : maximum'), ...BAND_OPTS], sample: () => sampleTable(true)},
         area: {icon: '⛰️', label: 'Aire (courbe remplie)', group: 'Chiffres', render: (s, W, fs) => cartesian(s, W, fs, 'area'), grids: [TABLE_GRID], options: [O.values, O.height, O.unit, O.yLabel], sample: () => sampleTable(true)},
         pie: {icon: '🥧', label: 'Camembert', group: 'Parts', render: (s, W, fs) => pie(s, W, fs, 'pie'), grids: [ONE_SERIES], legend: 'right', options: [O.values, C('pieLabel', 'Sur les parts', 'select', {choices: [['', 'Pourcentage'], ['value', 'Valeur']]}), O.height], sample: () => sampleParts()},
         donut: {icon: '🍩', label: 'Anneau', group: 'Parts', render: (s, W, fs) => pie(s, W, fs, 'donut'), grids: [ONE_SERIES], legend: 'right', options: [O.values, O.hole, O.total, O.centerText, O.height], sample: () => sampleParts()},

@@ -1,0 +1,192 @@
+fr ¦ lt ¦ lv ¦ et
+# Zone « diagrammes-lot-a » : tableau de quartiers, variantes d’un nom, boucles d’implexe, double éventail, nœud papillon, réseau « toute la famille », barres croisées, cercles de parenté, dates incertaines, pyramide d’un recensement, tableau périodique (heritage-diagram-lot-a.js, lib/diagram_lot_a.php)
+(deviné) ¦ (spėjama) ¦ (uzminēts) ¦ (oletatud)
+1 (enfants) ¦ 1 (vaikai) ¦ 1 (bērni) ¦ 1 (lapsed)
+1 (parents) ¦ 1 (tėvai) ¦ 1 (vecāki) ¦ 1 (vanemad)
+16 quartiers ¦ 16 protėvių herbų ¦ 16 senču ģerboņi ¦ 16 esivanema vappi
+20 ans ¦ 20 metų ¦ 20 gadi ¦ 20 aastat
+32 quartiers ¦ 32 protėvių herbai ¦ 32 senču ģerboņi ¦ 32 esivanema vappi
+8 quartiers (arrière-grands-parents) ¦ 8 protėvių herbai (proseneliai) ¦ 8 ģerboņi (vecvecvecāki) ¦ 8 vappi (vanavanavanemad)
+Actes comptés ¦ Skaičiuojami įrašai ¦ Skaitītie ieraksti ¦ Loendatud kirjed
+Ajoute les ancêtres (n° Sosa, nom) et leurs armoiries. ¦ Pridėk protėvius (Sosa nr., vardas) ir jų herbus. ¦ Pievieno senčus (Sosa nr., vārds) un viņu ģerboņus. ¦ Lisa esivanemad (Sosa nr, nimi) ja nende vapid.
+Ajoute les formes du nom : la forme, ses années, le nombre d’actes. ¦ Pridėk pavardės formas: forma, metai, įrašų skaičius. ¦ Pievieno vārda formas: forma, gadi, ierakstu skaits. ¦ Lisa nime vormid: vorm, aastad, kirjete arv.
+Ajoute les personnes recensées : âge, sexe, année. ¦ Pridėk surašytus asmenis: amžius, lytis, metai. ¦ Pievieno skaitītās personas: vecums, dzimums, gads. ¦ Lisa loendatud isikud: vanus, sugu, aasta.
+Ancêtre à trouver ¦ Protėvis, kurį reikia rasti ¦ Sencis, kas jāatrod ¦ Leidmata esivanem
+Ancêtres pris dans ta base : {n} (armoiries : {k}). ¦ Protėviai iš tavo duomenų bazės: {n} (herbai: {k}). ¦ Senči no tavas datubāzes: {n} (ģerboņi: {k}). ¦ Esivanemad sinu andmebaasist: {n} (vapid: {k}).
+Arbre des variantes (formes du nom : {n}). ¦ Variantų medis (pavardės formos: {n}). ¦ Variantu koks (vārda formas: {n}). ¦ Variantide puu (nimevormid: {n}).
+Arbre des variantes d’un nom ¦ Pavardės variantų medis ¦ Vārda variantu koks ¦ Nime variantide puu
+Armoiries (nom) ¦ Herbas (pavadinimas) ¦ Ģerbonis (nosaukums) ¦ Vapp (nimi)
+Au survol seulement ¦ Tik užvedus pelę ¦ Tikai uzbraucot ¦ Ainult kursori all
+Aucun ancêtre connu à cette génération. ¦ Šioje kartoje nėra žinomų protėvių. ¦ Šajā paaudzē nav zināmu senču. ¦ Selles põlvkonnas pole teadaolevat esivanemat.
+Aucun lien entre les couples de ce groupe. ¦ Tarp šios grupės porų ryšių nėra. ¦ Starp šīs grupas pāriem nav saišu. ¦ Selle rühma paaride vahel pole seoseid.
+Aucun recensement dans ta base ¦ Tavo duomenų bazėje nėra surašymų ¦ Tavā datubāzē nav tautas skaitīšanu ¦ Sinu andmebaasis pole rahvaloendusi
+Aucun âge lisible dans ce recensement. ¦ Šiame surašyme nėra įskaitomo amžiaus. ¦ Šajā skaitīšanā nav salasāma vecuma. ¦ Selles loenduses pole loetavat vanust.
+Aucune forme trouvée pour ce nom. ¦ Šiai pavardei formų nerasta. ¦ Šim vārdam formas nav atrastas. ¦ Sellele nimele vorme ei leitud.
+Avec au moins une source ¦ Su bent vienu šaltiniu ¦ Ar vismaz vienu avotu ¦ Vähemalt ühe allikaga
+Axe des années ¦ Metų ašis ¦ Gadu ass ¦ Aastate telg
+Barres croisées (UpSet) ¦ Sukryžiuoti stulpeliai (UpSet) ¦ Krustotas joslas (UpSet) ¦ Ristuvad tulbad (UpSet)
+Barres croisées (ensembles : {n}, combinaisons montrées : {k}). ¦ Sukryžiuoti stulpeliai (aibės: {n}, rodomi deriniai: {k}). ¦ Krustotas joslas (kopas: {n}, rādītās kombinācijas: {k}). ¦ Ristuvad tulbad (hulgad: {n}, näidatud kombinatsioonid: {k}).
+Blason absent ¦ Herbo nėra ¦ Ģerboņa nav ¦ Vapp puudub
+Blasonnement en note (en bas) ¦ Herbo aprašas išnašoje (apačioje) ¦ Ģerboņa apraksts piezīmē (apakšā) ¦ Vapi kirjeldus märkusena (all)
+Boucles d’implexe (chemins : {n}), F = {f}. ¦ Protėvių netekties kilpos (keliai: {n}), F = {f}. ¦ Senču zuduma cilpas (ceļi: {n}), F = {f}. ¦ Esivanemate kao silmused (teed: {n}), F = {f}.
+Boucles plus lointaines pas dessinées : {n} (comptées dans F). ¦ Tolimesnės kilpos nenupieštos: {n} (įskaičiuotos į F). ¦ Tālākas cilpas nav uzzīmētas: {n} (ieskaitītas F). ¦ Kaugemaid silmuseid ei joonistatud: {n} (arvestatud F-i).
+Branche (paternelle, maternelle) ¦ Šaka (tėvo, motinos) ¦ Atzars (tēva, mātes) ¦ Haru (isa, ema)
+Branche maternelle ¦ Motinos šaka ¦ Mātes atzars ¦ Ema haru
+Branche paternelle ¦ Tėvo šaka ¦ Tēva atzars ¦ Isa haru
+Branche « {name} » ¦ Šaka „{name}“ ¦ Atzars “{name}” ¦ Haru „{name}“
+Cases façon tableau périodique ¦ Langeliai kaip periodinė lentelė ¦ Rūtiņas kā periodiskajā tabulā ¦ Lahtrid nagu perioodilisustabelis
+Cases vides pour les ancêtres à trouver ¦ Tušti langeliai nerastiems protėviams ¦ Tukšas rūtiņas neatrastiem senčiem ¦ Tühjad lahtrid leidmata esivanematele
+Ce qu’on dessine ¦ Kas piešiama ¦ Ko zīmē ¦ Mida joonistatakse
+Cercles (2 à 4 ensembles) ¦ Apskritimai (2–4 aibės) ¦ Apļi (2–4 kopas) ¦ Ringid (2–4 hulka)
+Cercles de parenté autour de {name} (personnes : {n}). ¦ Giminystės ratai aplink {name} (asmenys: {n}). ¦ Radniecības apļi ap {name} (personas: {n}). ¦ Sugulusringid {name} ümber (isikud: {n}).
+Chemins trouvés : {n} (F = {f}). ¦ Rasti keliai: {n} (F = {f}). ¦ Atrastie ceļi: {n} (F = {f}). ¦ Leitud teed: {n} (F = {f}).
+Chercher les boucles ¦ Ieškoti kilpų ¦ Meklēt cilpas ¦ Otsi silmuseid
+Chiffre (couleur, éventails) ¦ Skaičius (spalva, vėduoklės) ¦ Skaitlis (krāsa, vēdekļi) ¦ Arv (värv, lehvikud)
+Choisis de 2 à 8 ensembles (là : {n}). ¦ Pasirink nuo 2 iki 8 aibių (dabar: {n}). ¦ Izvēlies 2 līdz 8 kopas (tagad: {n}). ¦ Vali 2 kuni 8 hulka (praegu: {n}).
+Choisis un groupe de noms ou écris un nom. ¦ Pasirink pavardžių grupę arba įrašyk pavardę. ¦ Izvēlies vārdu grupu vai ieraksti vārdu. ¦ Vali nimerühm või kirjuta nimi.
+Choisis un recensement (commune et année). ¦ Pasirink surašymą (savivaldybė ir metai). ¦ Izvēlies skaitīšanu (pagasts un gads). ¦ Vali loendus (vald ja aasta).
+Choisis une personne (« Depuis l’app ») ou écris les boucles à la main. ¦ Pasirink asmenį („Iš programos“) arba įrašyk kilpas ranka. ¦ Izvēlies personu (“No lietotnes”) vai ieraksti cilpas ar roku. ¦ Vali isik („Rakendusest“) või kirjuta silmused käsitsi.
+Coefficient aussi en fraction ¦ Koeficientas ir trupmena ¦ Koeficients arī daļskaitlī ¦ Koefitsient ka murruna
+Coefficient de consanguinité de {name} : F = {f} ¦ {name} giminingumo koeficientas: F = {f} ¦ {name} radniecības koeficients: F = {f} ¦ {name} sugulusaretuse koefitsient: F = {f}
+Combinaisons montrées (les plus grandes) ¦ Rodomi deriniai (didžiausi) ¦ Rādītās kombinācijas (lielākās) ¦ Näidatud kombinatsioonid (suurimad)
+Combinaisons pas montrées : {n} ¦ Nerodomi deriniai: {n} ¦ Nerādītās kombinācijas: {n} ¦ Näitamata kombinatsioonid: {n}
+Commune (titre) ¦ Savivaldybė (pavadinimas) ¦ Pagasts (virsraksts) ¦ Vald (pealkiri)
+Comparer avec le recensement de ¦ Palyginti su surašymu ¦ Salīdzināt ar skaitīšanu ¦ Võrdle loendusega aastast
+Consanguinité de l’ancêtre (%) ¦ Protėvio giminingumas (%) ¦ Senča radniecība (%) ¦ Esivanema sugulusaretus (%)
+Couleur de l’écu (sans image) ¦ Skydo spalva (be paveikslo) ¦ Vairoga krāsa (bez attēla) ¦ Kilbi värv (ilma pildita)
+Couleur des parts ¦ Dalių spalva ¦ Daļu krāsa ¦ Osade värv
+Couleur du côté maternel ¦ Motinos pusės spalva ¦ Mātes puses krāsa ¦ Ema poole värv
+Couleurs des branches ¦ Šakų spalvos ¦ Atzaru krāsas ¦ Harude värvid
+Couple ¦ Pora ¦ Pāris ¦ Paar
+Critères de mauvaise forme. ¦ Netinkami kriterijai. ¦ Nepareizi kritēriji. ¦ Vigased tingimused.
+Côté (paternel, maternel, branches) ¦ Pusė (tėvo, motinos, šakos) ¦ Puse (tēva, mātes, atzari) ¦ Pool (isa, ema, harud)
+Côté maternel ¦ Motinos pusė ¦ Mātes puse ¦ Ema pool
+Côté paternel ¦ Tėvo pusė ¦ Tēva puse ¦ Isa pool
+Date incertaine (fourchette) ¦ Neaiški data (intervalas) ¦ Neskaidrs datums (diapazons) ¦ Ebakindel kuupäev (vahemik)
+Date inconnue ¦ Nežinoma data ¦ Nezināms datums ¦ Tundmatu kuupäev
+Dates sous le nom ¦ Datos po vardu ¦ Datumi zem vārda ¦ Kuupäevad nime all
+De la famille ¦ Iš šeimos ¦ No ģimenes ¦ Perest
+De la famille (oui) ¦ Iš šeimos (taip) ¦ No ģimenes (jā) ¦ Perest (jah)
+De la mère vers l’ancêtre ¦ Nuo motinos iki protėvio ¦ No mātes līdz sencim ¦ Emast esivanemani
+Degrés montrés (jusqu’à) ¦ Rodomi laipsniai (iki) ¦ Rādītās pakāpes (līdz) ¦ Näidatud astmed (kuni)
+Dessin de la fourchette ¦ Intervalo piešinys ¦ Diapazona zīmējums ¦ Vahemiku joonis
+Deux éventails ¦ Dvi vėduoklės ¦ Divi vēdekļi ¦ Kaks lehvikut
+Deviner d’où vient chaque forme (date et ressemblance) ¦ Spėti, iš kur kilo kiekviena forma (data ir panašumas) ¦ Uzminēt katras formas izcelsmi (datums un līdzība) ¦ Arva, kust iga vorm pärineb (kuupäev ja sarnasus)
+Diagramme de Venn (2 à 8 ensembles) ¦ Veno diagrama (2–8 aibės) ¦ Venna diagramma (2–8 kopas) ¦ Venni diagramm (2–8 hulka)
+Diagramme de Venn : {names}. ¦ Veno diagrama: {names}. ¦ Venna diagramma: {names}. ¦ Venni diagramm: {names}.
+Double éventail (ascendants : {up}, descendants : {down}). ¦ Dviguba vėduoklė (protėviai: {up}, palikuonys: {down}). ¦ Dubultvēdeklis (senči: {up}, pēcteči: {down}). ¦ Topeltlehvik (esivanemad: {up}, järeltulijad: {down}).
+Du père vers l’ancêtre ¦ Nuo tėvo iki protėvio ¦ No tēva līdz sencim ¦ Isast esivanemani
+Décédé ou inconnu ¦ Miręs arba nežinoma ¦ Miris vai nezināms ¦ Surnud või teadmata
+En accordéon (branches qu’on plie) ¦ Akordeonas (suskleidžiamos šakos) ¦ Akordeons (salokāmi atzari) ¦ Akordion (kokkuvolditavad harud)
+En cercles (un cercle par degré) ¦ Ratais (vienas ratas laipsniui) ¦ Apļos (viens aplis katrai pakāpei) ¦ Ringidena (üks ring astme kohta)
+En vie ou non ¦ Gyvas ar ne ¦ Dzīvs vai nē ¦ Elus või mitte
+En {year} (contour) ¦ {year} m. (kontūras) ¦ {year}. gadā (kontūra) ¦ Aastal {year} (kontuur)
+Ensemble {x} ¦ Aibė {x} ¦ Kopa {x} ¦ Hulk {x}
+Faire ressortir la famille ¦ Išryškinti šeimą ¦ Izcelt ģimeni ¦ Too pere esile
+Formes prises dans ta base : {n}. ¦ Formos iš tavo duomenų bazės: {n}. ¦ Formas no tavas datubāzes: {n}. ¦ Vormid sinu andmebaasist: {n}.
+Groupe de noms ¦ Pavardžių grupė ¦ Vārdu grupa ¦ Nimerühm
+Générations : {n} côté père, {m} côté mère ¦ Kartos: {n} tėvo pusėje, {m} motinos ¦ Paaudzes: {n} tēva pusē, {m} mātes ¦ Põlvkonnad: {n} isa poolt, {m} ema poolt
+Il faut de 2 à 8 ensembles. ¦ Reikia nuo 2 iki 8 aibių. ¦ Vajag 2 līdz 8 kopas. ¦ Vaja on 2 kuni 8 hulka.
+Image (media/…) ¦ Paveikslas (media/…) ¦ Attēls (media/…) ¦ Pilt (media/…)
+Initiales du prénom et du nom ¦ Vardo ir pavardės inicialai ¦ Vārda un uzvārda iniciāļi ¦ Ees- ja perekonnanime initsiaalid
+La branche ¦ Šaka ¦ Atzars ¦ Haru
+La personne étudiée ¦ Tiriamas asmuo ¦ Pētāmā persona ¦ Uuritav isik
+Le calcul n’est pas prêt. ¦ Skaičiavimas neparuoštas. ¦ Aprēķins nav gatavs. ¦ Arvutus pole valmis.
+Le chemin entre deux personnes ¦ Kelias tarp dviejų asmenų ¦ Ceļš starp divām personām ¦ Tee kahe isiku vahel
+Le nom (2 lettres) ¦ Pavardė (2 raidės) ¦ Uzvārds (2 burti) ¦ Perekonnanimi (2 tähte)
+Le plus proche seulement ¦ Tik artimiausias ¦ Tikai tuvākais ¦ Ainult lähim
+Le prénom (2 lettres) ¦ Vardas (2 raidės) ¦ Vārds (2 burti) ¦ Eesnimi (2 tähte)
+Le recensement de {place} ¦ Surašymas: {place} ¦ Skaitīšana: {place} ¦ Rahvaloendus: {place}
+Les 8, 16 ou 32 ancêtres d’une génération, chacun avec son blason ; un écu vide : armoiries à trouver. ¦ 8, 16 ar 32 vienos kartos protėviai, kiekvienas su savo herbu; tuščias skydas – herbas dar nerastas. ¦ Vienas paaudzes 8, 16 vai 32 senči, katrs ar savu ģerboni; tukšs vairogs: ģerbonis vēl jāatrod. ¦ Ühe põlvkonna 8, 16 või 32 esivanemat oma vapiga; tühi kilp: vapp leidmata.
+Les boucles d’implexe (entre les deux parents) ¦ Protėvių netekties kilpos (tarp tėvų) ¦ Senču zuduma cilpas (starp vecākiem) ¦ Esivanemate kao silmused (vanemate vahel)
+Les boucles d’implexe de {name} ¦ {name} protėvių netekties kilpos ¦ {name} senču zuduma cilpas ¦ {name} esivanemate kao silmused
+Les deux parents de cette personne ne sont pas connus. ¦ Abu šio asmens tėvai nežinomi. ¦ Abi šīs personas vecāki nav zināmi. ¦ Selle isiku mõlemad vanemad pole teada.
+Les ensembles (2 à 8) : A, B, C… H ¦ Aibės (2–8): A, B, C… H ¦ Kopas (2–8): A, B, C… H ¦ Hulgad (2–8): A, B, C… H
+Les formes du nom ¦ Pavardės formos ¦ Vārda formas ¦ Nime vormid
+Les formes du nom {name} ¦ Pavardės {name} formos ¦ Vārda {name} formas ¦ Nime {name} vormid
+Les noms du groupe (ou écrits pareil) et leurs variantes notées, avec leurs années et le nombre d’actes. ¦ Grupės pavardės (arba vienodai rašomos) ir jų užrašyti variantai su metais ir įrašų skaičiumi. ¦ Grupas vārdi (vai rakstīti vienādi) un to pierakstītie varianti ar gadiem un ierakstu skaitu. ¦ Rühma nimed (või samamoodi kirjutatud) ja nende märgitud variandid aastate ja kirjete arvuga.
+Les quartiers de {name} ¦ {name} protėvių herbai ¦ {name} senču ģerboņi ¦ {name} esivanemate vapid
+Les seize quartiers de {name} ¦ {name} šešiolika protėvių herbų ¦ {name} sešpadsmit senču ģerboņi ¦ {name} kuusteist esivanemate vappi
+Liens pris dans l’app : {n}. ¦ Ryšiai iš programos: {n}. ¦ Saites no lietotnes: {n}. ¦ Seosed rakendusest: {n}.
+Losange pour les dates exactes ¦ Rombas tiksliai datai ¦ Rombs precīziem datumiem ¦ Romb täpsete kuupäevade jaoks
+Montrer le calcul (½ puissance n) ¦ Rodyti skaičiavimą (½ laipsniu n) ¦ Rādīt aprēķinu (½ pakāpē n) ¦ Näita arvutust (½ astmes n)
+Montrer l’incertitude des dates ¦ Rodyti datų neapibrėžtumą ¦ Rādīt datumu nenoteiktību ¦ Näita kuupäevade ebakindlust
+Naissances et décès (qui vivait en …) ¦ Gimimai ir mirtys (kas gyveno …) ¦ Dzimšanas un nāves (kas dzīvoja …) ¦ Sünnid ja surmad (kes elas aastal …)
+Nom inconnu ¦ Nežinoma pavardė ¦ Nezināms vārds ¦ Tundmatu nimi
+Nom sous l’écu ¦ Vardas po skydu ¦ Vārds zem vairoga ¦ Nimi kilbi all
+Nom trop long (80 lettres au plus). ¦ Per ilga pavardė (ne daugiau kaip 80 raidžių). ¦ Pārāk garš vārds (ne vairāk par 80 burtiem). ¦ Liiga pikk nimi (kuni 80 tähte).
+Nombre d’actes sous la forme ¦ Įrašų skaičius po forma ¦ Ierakstu skaits zem formas ¦ Kirjete arv vormi all
+Noms les plus portés ¦ Dažniausios pavardės ¦ Biežākie vārdi ¦ Kõige levinumad nimed
+N° Sosa ¦ Sosa nr. ¦ Sosa nr. ¦ Sosa nr
+N° Sosa (ascendants, éventails) ¦ Sosa nr. (protėviai, vėduoklės) ¦ Sosa nr. (senči, vēdekļi) ¦ Sosa nr (esivanemad, lehvikud)
+Nœud papillon (père à gauche, mère à droite) ¦ Peteliškė (tėvas kairėje, motina dešinėje) ¦ Tauriņš (tēvs pa kreisi, māte pa labi) ¦ Kikilips (isa vasakul, ema paremal)
+Ordre des combinaisons ¦ Derinių tvarka ¦ Kombināciju secība ¦ Kombinatsioonide järjestus
+Ou un nom ¦ Arba pavardė ¦ Vai vārds ¦ Või nimi
+Par nombre d’ensembles ¦ Pagal aibių skaičių ¦ Pēc kopu skaita ¦ Hulkade arvu järgi
+Parent (descendants, éventails) ¦ Tėvas ar motina (palikuonys, vėduoklės) ¦ Vecāks (pēcteči, vēdekļi) ¦ Vanem (järeltulijad, lehvikud)
+Personne cachée ¦ Paslėptas asmuo ¦ Paslēpta persona ¦ Peidetud isik
+Personnes recensées : {n} ¦ Surašyti asmenys: {n} ¦ Skaitītās personas: {n} ¦ Loendatud isikud: {n}
+Personnes recensées : {n} en {y1}, {m} en {y2} ¦ Surašyti asmenys: {y1} m. – {n}, {y2} m. – {m} ¦ Skaitītās personas: {y1}. g. – {n}, {y2}. g. – {m} ¦ Loendatud: {y1} – {n}, {y2} – {m}
+Personnes recensées prises dans ta base : {n}. ¦ Surašyti asmenys iš tavo duomenų bazės: {n}. ¦ Skaitītās personas no tavas datubāzes: {n}. ¦ Loendatud isikud sinu andmebaasist: {n}.
+Portraits (arbre dessiné, nœud papillon) ¦ Portretai (pieštas medis, peteliškė) ¦ Portreti (zīmēts koks, tauriņš) ¦ Portreed (joonistatud puu, kikilips)
+Pyramide du recensement de {year} (personnes : {n}). ¦ {year} m. surašymo piramidė (asmenys: {n}). ¦ {year}. gada skaitīšanas piramīda (personas: {n}). ¦ {year}. aasta loenduse püramiid (isikud: {n}).
+Ressortent : les personnes reliées à une fiche (ou au groupe choisi). ¦ Išryškinti: su kortele (ar pasirinkta grupe) susieti asmenys. ¦ Izceltas: ar kartīti (vai izvēlēto grupu) saistītās personas. ¦ Esile tõstetud: kaardiga (või valitud rühmaga) seotud isikud.
+Selon le nombre de descendants ¦ Pagal palikuonių skaičių ¦ Pēc pēcteču skaita ¦ Järeltulijate arvu järgi
+Selon le tableau ¦ Pagal lentelę ¦ Pēc tabulas ¦ Tabeli järgi
+Ses ancêtres au-dessus (place Sosa), ses descendants au-dessous (sous leur parent) ; le chiffre : l’âge au décès. ¦ Protėviai viršuje (Sosa vieta), palikuonys apačioje (po tėvu ar motina); skaičius – mirties amžius. ¦ Senči augšā (Sosa vieta), pēcteči apakšā (zem vecāka); skaitlis: vecums nāves brīdī. ¦ Esivanemad üleval (Sosa koht), järeltulijad all (vanema all); arv: surmavanus.
+Ses ancêtres de la génération choisie (ordre Sosa) et les armoiries reliées à chacun (Listes → Armoiries). ¦ Pasirinktos kartos protėviai (Sosa tvarka) ir su kiekvienu susieti herbai (Sąrašai → Herbai). ¦ Izvēlētās paaudzes senči (Sosa secībā) un katram piesaistītie ģerboņi (Saraksti → Ģerboņi). ¦ Valitud põlvkonna esivanemad (Sosa järjekord) ja igaühega seotud vapid (Loendid → Vapid).
+Seulement l’ancêtre commun le plus proche ¦ Tik artimiausias bendras protėvis ¦ Tikai tuvākais kopīgais sencis ¦ Ainult lähim ühine esivanem
+Sexe inconnu (pas dans la pyramide) : {n} ¦ Nežinoma lytis (ne piramidėje): {n} ¦ Nezināms dzimums (nav piramīdā): {n} ¦ Teadmata sugu (püramiidist väljas): {n}
+Sosa {n} : ancêtre à trouver ¦ Sosa {n}: protėvis dar nerastas ¦ Sosa {n}: sencis jāatrod ¦ Sosa {n}: leidmata esivanem
+Source, note ¦ Šaltinis, pastaba ¦ Avots, piezīme ¦ Allikas, märkus
+Sources sous la forme ¦ Šaltiniai po forma ¦ Avoti zem formas ¦ Allikad vormi all
+Tableau de quartiers (armoiries des ancêtres) ¦ Protėvių herbų lentelė ¦ Senču ģerboņu tabula ¦ Esivanemate vappide tabel
+Tableau de quartiers ({n}), armoiries connues : {k}. ¦ Herbų lentelė ({n}), žinomi herbai: {k}. ¦ Ģerboņu tabula ({n}), zināmie ģerboņi: {k}. ¦ Vappide tabel ({n}), teadaolevad vapid: {k}.
+Tableau périodique : ancêtres trouvés {found} / {total} ({pct} %). ¦ Periodinė lentelė: rasti protėviai {found} / {total} ({pct} %). ¦ Periodiskā tabula: atrastie senči {found} / {total} ({pct} %). ¦ Perioodilisustabel: leitud esivanemad {found} / {total} ({pct} %).
+Taux de recherche (%) ¦ Tyrimo laipsnis (%) ¦ Izpētes pakāpe (%) ¦ Uurituse määr (%)
+Tous les ancêtres répétés ¦ Visi pasikartojantys protėviai ¦ Visi atkārtotie senči ¦ Kõik korduvad esivanemad
+Tous les chemins du père et de la mère vers un même ancêtre (filiations biologiques) et le coefficient de consanguinité (méthode de Wright). ¦ Visi tėvo ir motinos keliai iki to paties protėvio (biologinė kilmė) ir giminingumo koeficientas (Wrighto metodas). ¦ Visi tēva un mātes ceļi līdz tam pašam sencim (bioloģiskā izcelsme) un radniecības koeficients (Raita metode). ¦ Kõik isa ja ema teed sama esivanemani (bioloogiline põlvnemine) ja sugulusaretuse koefitsient (Wrighti meetod).
+Toute la base (qui vivait en …) ¦ Visa duomenų bazė (kas gyveno …) ¦ Visa datubāze (kas dzīvoja …) ¦ Kogu andmebaas (kes elas aastal …)
+Toute la base (qui vivait l’année choisie) ou un recensement (les âges écrits ce jour-là). ¦ Visa duomenų bazė (kas gyveno pasirinktais metais) arba surašymas (tą dieną užrašytas amžius). ¦ Visa datubāze (kas dzīvoja izvēlētajā gadā) vai skaitīšana (tajā dienā rakstītie vecumi). ¦ Kogu andmebaas (kes elas valitud aastal) või loendus (sel päeval kirja pandud vanused).
+Toute la famille, un point par couple ¦ Visa šeima, vienas taškas porai ¦ Visa ģimene, viens punkts katram pārim ¦ Kogu suguvõsa, üks punkt paari kohta
+Trop de critères. ¦ Per daug kriterijų. ¦ Pārāk daudz kritēriju. ¦ Liiga palju tingimusi.
+Trop d’ensembles. ¦ Per daug aibių. ¦ Pārāk daudz kopu. ¦ Liiga palju hulki.
+Trouvé chez le notaire (successions, inventaires) ¦ Rastas pas notarą (palikimai, inventoriai) ¦ Atrasts pie notāra (mantojumi, inventāri) ¦ Leitud notari juurest (pärandid, inventarid)
+Trouvé dans les sources militaires (poilus) ¦ Rastas kariniuose šaltiniuose (Pirmojo pasaulinio karo kariai) ¦ Atrasts militārajos avotos (Pirmā pasaules kara karavīri) ¦ Leitud sõjaväeallikatest (Esimese maailmasõja sõdurid)
+Trouvé dans un recensement ¦ Rastas surašyme ¦ Atrasts skaitīšanā ¦ Leitud loendusest
+Un chiffre (colonne « Chiffre ») ¦ Skaičius (stulpelis „Skaičius“) ¦ Skaitlis (kolonna “Skaitlis”) ¦ Arv (veerg „Arv“)
+Un recensement (commune, année) ¦ Surašymas (savivaldybė, metai) ¦ Skaitīšana (pagasts, gads) ¦ Loendus (vald, aasta)
+Un recensement (âges écrits) ¦ Surašymas (užrašytas amžius) ¦ Skaitīšana (rakstītie vecumi) ¦ Loendus (kirja pandud vanused)
+Une par branche ¦ Viena šakai ¦ Viena katram atzaram ¦ Üks haru kohta
+Une par forme ¦ Viena formai ¦ Viena katrai formai ¦ Üks vormi kohta
+Une seule source : couleur de l’ensemble ¦ Vienas šaltinis: aibės spalva ¦ Viens avots: kopas krāsa ¦ Üks allikas: hulga värv
+Une source précise ¦ Konkretus šaltinis ¦ Konkrēts avots ¦ Kindel allikas
+Vérifie le groupe de personnes. ¦ Patikrink asmenų grupę. ¦ Pārbaudi personu grupu. ¦ Kontrolli isikute rühma.
+actes : {n} ¦ įrašai: {n} ¦ ieraksti: {n} ¦ kirjed: {n}
+vient de {name} ¦ kilo iš {name} ¦ cēlies no {name} ¦ pärineb vormist {name}
+{label} (famille) : {n} ¦ {label} (šeima): {n} ¦ {label} (ģimene): {n} ¦ {label} (pere): {n}
+{names} (seulement) : {n} ¦ {names} (tik): {n} ¦ {names} (tikai): {n} ¦ {names} (ainult): {n}
+{name} : armoiries pas encore trouvées ¦ {name}: herbas dar nerastas ¦ {name}: ģerbonis vēl nav atrasts ¦ {name}: vappi pole veel leitud
+{name} : {n} en tout ¦ {name}: iš viso {n} ¦ {name}: kopā {n} ¦ {name}: kokku {n}
+{place}, {year} ¦ {place}, {year} m. ¦ {place}, {year}. g. ¦ {place}, {year}
+« vers » : plus ou moins (ans) ¦ „apie“: plius minus (metai) ¦ “ap”: plus mīnus (gadi) ¦ „umbes“: pluss-miinus (aastat)
+Âge (recensement) ¦ Amžius (surašymas) ¦ Vecums (skaitīšana) ¦ Vanus (loendus)
+Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Rašyti ryšio rūšį ant linijos (vaiko vardas…) ¦ Rakstīt saites veidu uz līnijas (bērna vārds…) ¦ Kirjuta seose liik joonele (lapse nimi…)
+Écrits s’il y a la place ¦ Užrašyti, jei yra vietos ¦ Rakstīti, ja ir vieta ¦ Kirjutatud, kui ruumi on
+Écu vide ¦ Tuščias skydas ¦ Tukšs vairogs ¦ Tühi kilp
+Épaisseur selon le nombre d’actes ¦ Storis pagal įrašų skaičių ¦ Biezums pēc ierakstu skaita ¦ Paksus kirjete arvu järgi
+— Aucun (le nom écrit à côté) — ¦ — Jokia (šalia įrašyta pavardė) — ¦ — Neviena (blakus ierakstītais vārds) — ¦ — Puudub (kõrvale kirjutatud nimi) —
+— Rien — ¦ — Nieko — ¦ — Nekas — ¦ — Mitte midagi —
+🌿 Les formes d’un nom de ma base ¦ 🌿 Pavardės formos iš mano duomenų bazės ¦ 🌿 Vārda formas no manas datubāzes ¦ 🌿 Nime vormid minu andmebaasist
+🔁 Entre les deux parents de… ¦ 🔁 Tarp abiejų tėvų… ¦ 🔁 Starp abiem vecākiem… ¦ 🔁 Vanemate vahel…
+🔺 Les personnes de ma base ¦ 🔺 Mano duomenų bazės asmenys ¦ 🔺 Manas datubāzes personas ¦ 🔺 Minu andmebaasi isikud
+🛡 Les quartiers d’une personne de ma base ¦ 🛡 Asmens protėvių herbai iš mano bazės ¦ 🛡 Personas senču ģerboņi no manas datubāzes ¦ 🛡 Isiku esivanemate vapid minu andmebaasist
+Choisis de 2 à 8 ensembles : chaque zone compte les personnes de ces ensembles-là seulement. Dès 5 ensembles : barres croisées. ¦ Pasirink 2–8 aibes: kiekviena zona skaičiuoja tik tų aibių asmenis. Nuo 5 aibių: sukryžiuoti stulpeliai. ¦ Izvēlies 2–8 kopas: katra zona skaita tikai šo kopu personas. No 5 kopām: krustotas joslas. ¦ Vali 2–8 hulka: iga ala loeb ainult nende hulkade isikuid. Alates 5 hulgast: ristuvad tulbad.
+Les témoins, parrains et marraines des actes ; ou toute la famille, un point par couple, reliés par leurs enfants. ¦ Įrašų liudytojai ir krikštatėviai; arba visa šeima, taškas porai, sujungti vaikais. ¦ Ierakstu liecinieki un krustvecāki; vai visa ģimene, punkts pārim, saistīti ar bērniem. ¦ Kirjete tunnistajad ja ristivanemad; või kogu suguvõsa, punkt paari kohta, seotud lastega.
+Nom de l’enfant sur le trait ¦ Vaiko vardas ant linijos ¦ Bērna vārds uz līnijas ¦ Lapse nimi joonel
+Par nom de famille ¦ Pagal pavardę ¦ Pēc uzvārda ¦ Perekonnanime järgi
+Par siècle (du mariage) ¦ Pagal šimtmetį (santuokos) ¦ Pēc gadsimta (laulības) ¦ Sajandi järgi (abielu)
+Un point par couple ¦ Vienas taškas porai ¦ Viens punkts pārim ¦ Üks punkt paari kohta
+Un point par personne ¦ Vienas taškas asmeniui ¦ Viens punkts personai ¦ Üks punkt isiku kohta
+🕸 Les liens de ma base ¦ 🕸 Mano duomenų bazės ryšiai ¦ 🕸 Manas datubāzes saites ¦ 🕸 Minu andmebaasi seosed
+Quartiers ¦ Protėvių herbai ¦ Senču ģerboņi ¦ Esivanemate vapid

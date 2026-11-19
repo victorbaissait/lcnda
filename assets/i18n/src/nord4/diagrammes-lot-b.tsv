@@ -1,0 +1,232 @@
+fr ¦ fi ¦ hu
+# Zone « diagrammes-lot-b » : diagramme de Lexis, ternaire, chandeliers, courbe avec marge, horizon, dendrogramme, durée des générations, couverture des sources, trajectoires de vie, alluvial (heritage-diagram-lot-b.js et réglages de heritage-diagram-plus/vie/famille.js, heritage-diagrams-render.js)
+=vie ¦ elämä|elämää ¦ élet|élet
+=période ¦ jakso|jaksoa ¦ időszak|időszak
+Célibataire ¦ Naimaton ¦ Hajadon/nőtlen
+Marié(e) ¦ Naimisissa ¦ Házas
+Remarié(e) ¦ Uudelleen naimisissa ¦ Újraházasodott
+Veuf ou veuve ¦ Leski ¦ Özvegy
+Divorcé(e) ¦ Eronnut ¦ Elvált
+Décédé(e) ¦ Kuollut ¦ Elhunyt
+État civil inconnu ¦ Siviilisääty tuntematon ¦ Családi állapot ismeretlen
+Métier inconnu ¦ Ammatti tuntematon ¦ Foglalkozás ismeretlen
+Pays inconnu ¦ Maa tuntematon ¦ Ország ismeretlen
+Autres états ¦ Muut säädyt ¦ Egyéb állapotok
+Sexe inconnu ¦ Sukupuoli tuntematon ¦ Nem ismeretlen
+Départ (autre commune) ¦ Muutto (toinen kunta) ¦ Elköltözés (másik település)
+Ajoute des personnes : le nom, la naissance et le décès (années ou dates). ¦ Lisää henkilöitä: nimi, syntymä ja kuolema (vuodet tai päivämäärät). ¦ Adj hozzá személyeket: név, születés és halál (évek vagy dátumok).
+Diagramme de Lexis : {n}, de {a} à {b}. ¦ Lexis-kaavio: {n}, {a}–{b}. ¦ Lexis-diagram: {n}, {a}–{b}.
+Choléra ¦ Kolera ¦ Kolera
+Guerre de 1870 ¦ Vuoden 1870 sota ¦ Az 1870-es háború
+Grande Guerre ¦ Ensimmäinen maailmansota ¦ Nagy Háború
+📐 Les vies de ma base ¦ 📐 Elämät tietokannassani ¦ 📐 Az életek az adatbázisomban
+Chaque vie devient une diagonale, de la naissance (âge 0) au décès ; les mariages, les naissances des enfants et les départs posés dessus. ¦ Jokainen elämä on lävistäjä syntymästä (ikä 0) kuolemaan; sen päällä avioliitot, lasten syntymät ja muutot. ¦ Minden élet egy átló a születéstől (0 év) a halálig; rajta a házasságok, a gyermekek születése és az elköltözések.
+Combien de vies au plus ¦ Enintään montako elämää ¦ Legfeljebb hány élet
+Une par nom de famille ¦ Yksi sukunimeä kohden ¦ Családnevenként egy
+Naissances des enfants ¦ Lasten syntymät ¦ A gyermekek születése
+Départs (première commune autre que celle de naissance) ¦ Muutot (ensimmäinen muu kunta kuin syntymäpaikka) ¦ Elköltözések (az első, nem szülőhelyi település)
+Bandes historiques (guerres, épidémies) ¦ Historialliset kaistat (sodat, epidemiat) ¦ Történelmi sávok (háborúk, járványok)
+Personne avec une date de naissance dans ce groupe. ¦ Kenelläkään tässä ryhmässä ei ole syntymäaikaa. ¦ Ebben a csoportban senkinek nincs születési dátuma.
+Diagramme de Lexis ¦ Lexis-kaavio ¦ Lexis-diagram
+Diagramme de Lexis (âge × année : une vie = une diagonale) ¦ Lexis-kaavio (ikä × vuosi: yksi elämä = yksi lävistäjä) ¦ Lexis-diagram (életkor × év: egy élet = egy átló)
+Les années en bas, les âges à gauche : chaque vie monte en diagonale de sa naissance à son décès ; les mariages, les enfants, les départs et les grandes crises s’y lisent d’un coup d’œil. ¦ Vuodet alhaalla, iät vasemmalla: jokainen elämä nousee vinosti syntymästä kuolemaan; avioliitot, lapset, muutot ja suuret kriisit näkyvät yhdellä silmäyksellä. ¦ Lent az évek, bal oldalt az életkor: minden élet átlósan emelkedik a születéstől a halálig; a házasságok, gyermekek, elköltözések és nagy válságok egy pillantással láthatók.
+Les vies ¦ Elämät ¦ Az életek
+Les vies de la famille {name} ¦ {name}-suvun elämät ¦ A {name} család életei
+Personne (même nom que ci-dessus) ¦ Henkilö (sama nimi kuin yllä) ¦ Személy (ugyanaz a név, mint fent)
+Les marques (sur la vie de la personne) ¦ Merkinnät (henkilön elämässä) ¦ Jelölések (a személy életén)
+Bandes historiques ¦ Historialliset kaistat ¦ Történelmi sávok
+Groupe (couleur) ¦ Ryhmä (väri) ¦ Csoport (szín)
+Couleur de chaque groupe (facultatif) ¦ Kunkin ryhmän väri (valinnainen) ¦ Minden csoport színe (nem kötelező)
+Âge au plus ¦ Ikä enintään ¦ Életkor legfeljebb
+Couleur des vies ¦ Elämien väri ¦ Az életek színe
+Homme / femme ¦ Mies / nainen ¦ Férfi / nő
+Montrer les marques ¦ Näytä merkinnät ¦ Jelölések mutatása
+Taille des marques ¦ Merkintöjen koko ¦ Jelölések mérete
+Nom des bandes ¦ Kaistojen nimet ¦ A sávok neve
+Diagonales des générations ¦ Sukupolvien lävistäjät ¦ Nemzedékek átlói
+Nom au bout de chaque vie ¦ Nimi kunkin elämän lopussa ¦ Név minden élet végén
+Épaisseur des vies ¦ Elämien paksuus ¦ Az életek vastagsága
+Ajoute des points : un nom et ses trois parts (des nombres ou des %). ¦ Lisää pisteitä: nimi ja sen kolme osuutta (lukuja tai %). ¦ Adj hozzá pontokat: egy nevet és három részét (számok vagy %).
+Part A ¦ Osuus A ¦ A rész
+Part B ¦ Osuus B ¦ B rész
+Part C ¦ Osuus C ¦ C rész
+Diagramme ternaire : {n} ({a}, {b}, {c}). ¦ Kolmiokaavio: {n} ({a}, {b}, {c}). ¦ Háromszögdiagram: {n} ({a}, {b}, {c}).
+Agriculture ¦ Maatalous ¦ Mezőgazdaság
+Artisanat et industrie ¦ Käsityö ja teollisuus ¦ Kézművesség és ipar
+Commerce et services ¦ Kauppa ja palvelut ¦ Kereskedelem és szolgáltatások
+Agriculture et forêt ¦ Maa- ja metsätalous ¦ Mező- és erdőgazdaság
+Artisanat ¦ Käsityö ¦ Kézművesség
+Industrie, mines ¦ Teollisuus, kaivokset ¦ Ipar, bányászat
+Transports et mer ¦ Liikenne ja meri ¦ Közlekedés és tenger
+Services, domestiques ¦ Palvelut, palvelusväki ¦ Szolgáltatás, cselédek
+Armée et police ¦ Armeija ja poliisi ¦ Hadsereg és rendőrség
+Clergé ¦ Papisto ¦ Papság
+Professions libérales, école, administration ¦ Vapaat ammatit, koulu, hallinto ¦ Szabadfoglalkozás, iskola, közigazgatás
+Rentiers, rangs et statuts ¦ Korkoa eläjät, säädyt ja asemat ¦ Járadékosok, rangok és állások
+Au foyer, sans profession ¦ Kotona, ei ammattia ¦ Háztartásbeli, foglalkozás nélkül
+Autre métier ¦ Muu ammatti ¦ Egyéb foglalkozás
+Tous les autres métiers ¦ Kaikki muut ammatit ¦ Az összes többi foglalkozás
+🔺 Les métiers de ma base ¦ 🔺 Ammatit tietokannassani ¦ 🔺 A foglalkozások az adatbázisomban
+Les métiers (fiche, événements « Profession », recensements) rangés en grands secteurs ; un point par commune de naissance, par décennie ou par famille, placé selon ses trois parts. ¦ Ammatit (kortti, ”Ammatti”-tapahtumat, väestölaskennat) suuriin aloihin ryhmiteltyinä; yksi piste syntymäkuntaa, vuosikymmentä tai sukua kohti, sijoitettuna sen kolmen osuuden mukaan. ¦ A foglalkozások (adatlap, „Foglalkozás” események, népszámlálások) nagy ágazatokba sorolva; településenként, évtizedenként vagy családonként egy pont, a három része szerint elhelyezve.
+Un point par ¦ Yksi piste kohden ¦ Egy pont /
+Décennie de naissance (reliées dans le temps) ¦ Syntymävuosikymmen (yhdistetty ajassa) ¦ Születési évtized (időben összekötve)
+Combien de points au plus ¦ Enintään montako pistettä ¦ Legfeljebb hány pont
+Part du haut ¦ Yläosuus ¦ Felső rész
+Part de gauche ¦ Vasen osuus ¦ Bal oldali rész
+Part de droite ¦ Oikea osuus ¦ Jobb oldali rész
+« Tous les autres métiers » ne peut servir qu’une fois. ¦ ”Kaikki muut ammatit” käy vain kerran. ¦ „Az összes többi foglalkozás” csak egyszer használható.
+Décennies ¦ Vuosikymmenet ¦ Évtizedek
+Aucun métier connu pour ces personnes. ¦ Näille henkilöille ei tunneta ammattia. ¦ Ezeknek a személyeknek nincs ismert foglalkozása.
+Les métiers de ma base, en trois parts ¦ Tietokantani ammatit kolmena osuutena ¦ Az adatbázisom foglalkozásai három részben
+Les métiers de trois villages, siècle par siècle ¦ Kolmen kylän ammatit vuosisata kerrallaan ¦ Három falu foglalkozásai évszázadonként
+Diagramme ternaire (trois parts qui font 100 %) ¦ Kolmiokaavio (kolme osuutta, yhteensä 100 %) ¦ Háromszögdiagram (három rész, együtt 100%)
+Parts ¦ Osuudet ¦ Részek
+Un triangle : chaque point a trois parts (par exemple agriculture, artisanat, commerce) ; plus il est près d’un coin, plus cette part est grande. ¦ Kolmio: jokaisella pisteellä on kolme osuutta (esim. maatalous, käsityö, kauppa); mitä lähempänä kulmaa, sitä suurempi se osuus. ¦ Egy háromszög: minden pontnak három része van (pl. mezőgazdaság, kézművesség, kereskedelem); minél közelebb van egy sarokhoz, annál nagyobb az a rész.
+Les points (trois parts chacun) ¦ Pisteet (kolme osuutta kukin) ¦ A pontok (mindegyik három rész)
+Groupe (couleur, points reliés) ¦ Ryhmä (väri, yhdistetyt pisteet) ¦ Csoport (szín, összekötött pontok)
+Ordre (année…) ¦ Järjestys (vuosi…) ¦ Sorrend (év…)
+Nom de la part du haut ¦ Yläosuuden nimi ¦ A felső rész neve
+Nom de la part de gauche ¦ Vasemman osuuden nimi ¦ A bal oldali rész neve
+Nom de la part de droite ¦ Oikean osuuden nimi ¦ A jobb oldali rész neve
+Couleur du haut ¦ Yläväri ¦ Felső szín
+Couleur de gauche ¦ Vasen väri ¦ Bal oldali szín
+Couleur de droite ¦ Oikea väri ¦ Jobb oldali szín
+Tous les 10 % ¦ 10 %:n välein ¦ 10%-onként
+Tous les 20 % ¦ 20 %:n välein ¦ 20%-onként
+Sans grille ¦ Ilman ruudukkoa ¦ Rács nélkül
+Une par point ¦ Yksi pistettä kohden ¦ Pontonként egy
+Selon le total ¦ Summan mukaan ¦ Az összeg szerint
+Relier les points d’un groupe dans l’ordre ¦ Yhdistä ryhmän pisteet järjestyksessä ¦ Egy csoport pontjainak sorrendben összekötése
+Noms des points ¦ Pisteiden nimet ¦ A pontok neve
+Ajoute des périodes : la date, le prix d’ouverture, de clôture, le plus bas et le plus haut. ¦ Lisää jaksoja: päivämäärä, avaus-, päätös-, alin ja ylin hinta. ¦ Adj hozzá időszakokat: dátum, nyitó, záró, legalacsonyabb és legmagasabb ár.
+ouverture ¦ avaus ¦ nyitó
+clôture ¦ päätös ¦ záró
+plus bas ¦ alin ¦ legalacsonyabb
+plus haut ¦ ylin ¦ legmagasabb
+Hausse (clôture plus haute) ¦ Nousu (korkeampi päätös) ¦ Emelkedés (magasabb záró)
+Baisse (clôture plus basse) ¦ Lasku (matalampi päätös) ¦ Csökkenés (alacsonyabb záró)
+Moyenne mobile sur {n} périodes ¦ Liukuva keskiarvo {n} jaksolta ¦ Mozgóátlag {n} időszakra
+Chandeliers : {n}, de {a} à {b} ({p} %). ¦ Kynttilät: {n}, {a}–{b} ({p} %). ¦ Gyertyák: {n}, {a}–{b} ({p}%).
+Prix du setier de blé au marché de {name} ¦ Vehnätynnyrin hinta {name}n torilla ¦ Egy köböl búza ára a {name}-i piacon
+Disette ¦ Pula ¦ Ínség
+Guerre des farines ¦ Jauhosota ¦ Lisztháború
+Chandeliers (prix du blé, mercuriales) ¦ Kynttilät (vehnän hinta, torihinnat) ¦ Gyertyák (búzaár, piaci árjegyzékek)
+Pour chaque période : le prix au début (ouverture), à la fin (clôture), le plus bas et le plus haut. Vert si le prix monte, rouge s’il baisse ; les années de disette en bandes. ¦ Jokaiselle jaksolle: hinta alussa (avaus), lopussa (päätös), alin ja ylin. Vihreä, jos hinta nousee, punainen, jos laskee; pulavuodet kaistoina. ¦ Minden időszakra: az ár az elején (nyitó), a végén (záró), a legalacsonyabb és a legmagasabb. Zöld, ha emelkedik, piros, ha csökken; az ínséges évek sávokban.
+Les périodes (date, ouverture, clôture, plus bas, plus haut) ¦ Jaksot (päivä, avaus, päätös, alin, ylin) ¦ Időszakok (dátum, nyitó, záró, legalacsonyabb, legmagasabb)
+Date ou période ¦ Päivämäärä tai jakso ¦ Dátum vagy időszak
+Plus bas ¦ Alin ¦ Legalacsonyabb
+Plus haut ¦ Ylin ¦ Legmagasabb
+Les années à part (disette, guerre…) ¦ Erityisvuodet (pula, sota…) ¦ Különleges évek (ínség, háború…)
+Autre unité (écrite) ¦ Muu yksikkö (kirjoitettu) ¦ Más egység (beírva)
+livres ¦ livreä ¦ livre
+sols ¦ soleja ¦ sol
+deniers ¦ denierejä ¦ dénier
+Couleur de la hausse ¦ Nousun väri ¦ Emelkedés színe
+Couleur de la baisse ¦ Laskun väri ¦ Csökkenés színe
+Hausse en creux (bougie vide) ¦ Nousu ontto (tyhjä kynttilä) ¦ Emelkedés üresen (üres gyertya)
+Moyenne mobile (périodes, 0 = non) ¦ Liukuva keskiarvo (jaksot, 0 = ei) ¦ Mozgóátlag (időszakok, 0 = nem)
+Couleur de la moyenne ¦ Keskiarvon väri ¦ Átlag színe
+Années à part en bandes ¦ Erityisvuodet kaistoina ¦ Különleges évek sávként
+Largeur des bougies ¦ Kynttilöiden leveys ¦ Gyertyák szélessége
+Âge au premier mariage ¦ Ikä ensimmäisessä avioliitossa ¦ Életkor az első házasságkor
+Âge au premier enfant ¦ Ikä ensimmäisen lapsen syntyessä ¦ Életkor az első gyermeknél
+± un écart-type ¦ ± yksi keskihajonta ¦ ± egy szórás
+intervalle à 95 % ¦ 95 %:n väli ¦ 95%-os intervallum
+mes ancêtres ¦ esivanhempani ¦ az őseim
+📏 Moyenne et marge : {x} ¦ 📏 Keskiarvo ja vaihteluväli: {x} ¦ 📏 Átlag és sáv: {x}
+Pas assez de personnes datées (au moins 3 par période). ¦ Liian vähän päivättyjä henkilöitä (vähintään 3 jaksoa kohti). ¦ Kevés a dátummal rendelkező személy (időszakonként legalább 3).
+Basse ¦ Ala ¦ Alsó
+Haute ¦ Ylä ¦ Felső
+{x} : moyenne et marge ¦ {x}: keskiarvo ja vaihteluväli ¦ {x}: átlag és sáv
+Marge : un écart-type de part et d’autre, par quart de siècle de naissance ¦ Vaihteluväli: yksi keskihajonta kumpaankin suuntaan syntymän neljännesvuosisadoittain ¦ Sáv: egy szórás mindkét irányban, a születés negyedszázada szerint
+Marge : intervalle de confiance à 95 % de la moyenne, par quart de siècle de naissance ¦ Vaihteluväli: keskiarvon 95 %:n luottamusväli syntymän neljännesvuosisadoittain ¦ Sáv: az átlag 95%-os konfidenciaintervalluma, a születés negyedszázada szerint
+Marge (basse – haute) ¦ Vaihteluväli (ala – ylä) ¦ Sáv (alsó – felső)
+Marge (±) ¦ Vaihteluväli (±) ¦ Sáv (±)
+Fourchette (marge autour de la courbe) ¦ Vaihteluväli (alue käyrän ympärillä) ¦ Sáv (a görbe körül)
+Deux colonnes : basse et haute ¦ Kaksi saraketta: ala ja ylä ¦ Két oszlop: alsó és felső
+Une colonne ± écart ¦ Yksi sarake ± poikkeama ¦ Egy oszlop ± eltérés
+Colonne basse (n°) ¦ Alasarake (nro) ¦ Alsó oszlop (sz.)
+Colonne haute (n°) ¦ Yläsarake (nro) ¦ Felső oszlop (sz.)
+Colonne de l’écart (n°) ¦ Poikkeaman sarake (nro) ¦ Eltérés oszlopa (sz.)
+Autour de la colonne (n°) ¦ Sarakkeen ympärillä (nro) ¦ Az oszlop körül (sz.)
+Opacité de la marge ¦ Vaihteluvälin peittävyys ¦ Sáv átlátszatlansága
+Couleur de la marge ¦ Vaihteluvälin väri ¦ Sáv színe
+Axe : minimum ¦ Akseli: minimi ¦ Tengely: minimum
+Axe : maximum ¦ Akseli: maksimi ¦ Tengely: maximum
+(axe de droite) ¦ (oikea akseli) ¦ (jobb tengely)
+Clôture ¦ Päätös ¦ Záró
+{name} : de {a} à {b}, le plus en {peak} ({v}) ¦ {name}: {a}–{b}, korkein {peak} ({v}) ¦ {name}: {a}–{b}, legtöbb: {peak} ({v})
+Le plus bas ¦ Matalin ¦ Legalacsonyabb
+Le plus haut ¦ Korkein ¦ Legmagasabb
+Négatif (replié) ¦ Negatiivinen (taitettu) ¦ Negatív (visszahajtva)
+Graphique en horizon : {s} séries sur {n} périodes. ¦ Horisonttikaavio: {s} sarjaa, {n} jaksoa. ¦ Horizontdiagram: {s} sorozat, {n} időszak.
+Horizon (bandes repliées) ¦ Horisontti (taitetut kaistat) ¦ Horizont (visszahajtott sávok)
+Collines ¦ Kummut ¦ Dombok
+Nombre de couches ¦ Kerrosten määrä ¦ Rétegek száma
+Teinte des négatifs ¦ Negatiivisten sävy ¦ Negatívok árnyalata
+Chevauchement ¦ Päällekkäisyys ¦ Átfedés
+Courbes douces ¦ Pehmeät käyrät ¦ Lágy görbék
+Trait blanc autour ¦ Valkoinen ääriviiva ¦ Fehér körvonal
+Arbre de regroupement à gauche (dendrogramme) ¦ Ryhmittelypuu vasemmalla (dendrogrammi) ¦ Csoportosító fa balra (dendrogram)
+Groupes de couleur ¦ Väriryhmät ¦ Színcsoportok
+Les branches de l’arbre ¦ Puun haarat ¦ A fa ágai
+Cacher les noms des correspondances ¦ Piilota osumien nimet ¦ Egyezések nevének elrejtése
+Durée des générations ¦ Sukupolvien pituus ¦ A nemzedékek hossza
+Durée des générations — {name} ¦ Sukupolvien pituus — {name} ¦ A nemzedékek hossza — {name}
+Lignée paternelle : une génération = {n} ans en moyenne ¦ Isälinja: yksi sukupolvi = keskimäärin {n} vuotta ¦ Apai ág: egy nemzedék = átlagosan {n} év
+Lignée maternelle : une génération = {n} ans en moyenne ¦ Äitilinja: yksi sukupolvi = keskimäärin {n} vuotta ¦ Anyai ág: egy nemzedék = átlagosan {n} év
+moyenne {n} ans ¦ keskiarvo {n} vuotta ¦ átlag {n} év
+Toutes les naissances du groupe ¦ Kaikki ryhmän syntymät ¦ A csoport összes születése
+Seulement la lignée paternelle directe (père du père…) ¦ Vain suora isälinja (isän isä…) ¦ Csak az egyenes apai ág (apa apja…)
+Seulement la lignée maternelle directe (mère de la mère…) ¦ Vain suora äitilinja (äidin äiti…) ¦ Csak az egyenes anyai ág (anya anyja…)
+Les deux lignées directes ¦ Molemmat suorat linjat ¦ Mindkét egyenes ág
+La personne dont on suit les lignées ¦ Henkilö, jonka linjoja seurataan ¦ A személy, akinek az ágait követjük
+Aucune génération datée dans cette lignée (il faut la naissance de l’enfant et celle du parent). ¦ Tällä linjalla ei ole päivättyä sukupolvea (tarvitaan lapsen ja vanhemman syntymä). ¦ Ebben az ágban nincs keltezett nemzedék (a gyermek és a szülő születése kell).
+Génération (lignée) ¦ Sukupolvi (linja) ¦ Nemzedék (ág)
+Paternelle ¦ Isän ¦ Apai
+Maternelle ¦ Äidin ¦ Anyai
+Relier les points d’une lignée ¦ Yhdistä linjan pisteet ¦ Egy ág pontjainak összekötése
+Ligne de repère ¦ Vertailuviiva ¦ Referenciavonal
+Les générations (lignées) ¦ Sukupolvet (linjat) ¦ A nemzedékek (ágak)
+Pas attendu ¦ Ei odoteta ¦ Nem várható
+Manquant ¦ Puuttuu ¦ Hiányzik
+Ajoute des ancêtres : le numéro Sosa, le nom et, pour chaque acte, sourcé, sans source ou manquant. ¦ Lisää esivanhempia: Sosa-numero, nimi ja kustakin asiakirjasta lähteellinen, lähteetön tai puuttuva. ¦ Adj hozzá ősöket: a Sosa-szám, a név és minden anyakönyvnél: forrással, forrás nélkül vagy hiányzik.
+Une ligne par ancêtre ¦ Yksi rivi esivanhempaa kohden ¦ Ősönként egy sor
+Une ligne par ancêtre (+ recensements, notaire, militaire) ¦ Yksi rivi esivanhempaa kohden (+ väestölaskennat, notaari, sotilas) ¦ Ősönként egy sor (+ népszámlálások, közjegyző, katonaság)
+Fiches militaires ¦ Sotilaskortit ¦ Katonai lapok
+Colonnes en plus ¦ Lisäsarakkeet ¦ További oszlopok
+Recensement, notaire, militaire ¦ Väestölaskenta, notaari, sotilas ¦ Népszámlálás, közjegyző, katonaság
+Recensement seulement ¦ Vain väestölaskenta ¦ Csak népszámlálás
+Les trous d’abord ¦ Aukot ensin ¦ Előbb a hiányok
+Par numéro Sosa ¦ Sosa-numeron mukaan ¦ Sosa-szám szerint
+Ancêtres au plus ¦ Esivanhempia enintään ¦ Ősök legfeljebb
+Axe ¦ Akseli ¦ Tengely
+Ce qu’on suit ¦ Mitä seurataan ¦ Mit követünk
+L’état civil ¦ Siviilisääty ¦ A családi állapot
+L’état civil (célibataire, marié, veuf…) : trajectoires de vie ¦ Siviilisääty (naimaton, naimisissa, leski…): elämänpolut ¦ Családi állapot (egyedülálló, házas, özvegy…): életutak
+La commune ¦ Kunta ¦ A település
+Les lieux de vie ¦ Asuinpaikat ¦ A lakóhelyek
+Un groupe de personnes (critères) ¦ Henkilöryhmä (ehdot) ¦ Személyek csoportja (feltételek)
+Trajectoires de vie ¦ Elämänpolut ¦ Életutak
+Trajectoires de vie de {n}. ¦ Elämänpolut: {n}. ¦ Életutak: {n}.
+Métiers au fil de la vie de {n}. ¦ Ammatit elämän mittaan: {n}. ¦ Foglalkozások az élet során: {n}.
+Les métiers au fil de la vie ¦ Ammatit elämän mittaan ¦ A foglalkozások az élet során
+Les mêmes personnes à plusieurs âges (20, 40, 60 ans…) ¦ Samat henkilöt eri ikävaiheissa (20, 40, 60…) ¦ Ugyanazok a személyek több életkorban (20, 40, 60…)
+Âges des colonnes ¦ Sarakkeiden iät ¦ Az oszlopok életkora
+À {n} ans ¦ {n}-vuotiaana ¦ {n} évesen
+L’état civil des mêmes personnes à {a} ans ¦ Samojen henkilöiden siviilisääty iässä {a} ¦ Ugyanazon személyek családi állapota {a} évesen
+Où vivaient les mêmes personnes à {a} ans ¦ Missä samat henkilöt asuivat iässä {a} ¦ Hol éltek ugyanazok a személyek {a} évesen
+Le métier des mêmes personnes à {a} ans ¦ Samojen henkilöiden ammatti iässä {a} ¦ Ugyanazon személyek foglalkozása {a} évesen
+Le même qu’à l’âge d’avant — {list} ¦ Sama kuin edellisessä iässä — {list} ¦ Ugyanaz, mint az előző életkorban — {list}
+Les mêmes personnes à {n} âges : {l}. ¦ Samat henkilöt {n} iässä: {l}. ¦ Ugyanazok a személyek {n} életkorban: {l}.
+En % de la colonne (au lieu des nombres) ¦ Prosentteina sarakkeesta (lukujen sijaan) ¦ Az oszlop %-ában (számok helyett)
+État civil (trajectoires de vie) ¦ Siviilisääty (elämänpolut) ¦ Családi állapot (életutak)
+Naissance (pour l’axe des âges) ¦ Syntymä (ikäakselia varten) ¦ Születés (az életkor-tengelyhez)
+Début (année ou âge, vide = auto) ¦ Alku (vuosi tai ikä, tyhjä = auto) ¦ Kezdet (év vagy életkor, üres = auto)
+Fin (année ou âge, vide = auto) ¦ Loppu (vuosi tai ikä, tyhjä = auto) ¦ Vége (év vagy életkor, üres = auto)
+Par durée de vie ¦ Eliniän mukaan ¦ Élettartam szerint
+Par état à 50 ans ¦ 50-vuotiaana olleen säädyn mukaan ¦ 50 éves kori állapot szerint
+âge (années) ¦ ikä (vuotta) ¦ életkor (év)
+Vérifie le groupe de personnes et la période. ¦ Tarkista henkilöryhmä ja jakso. ¦ Ellenőrizd a személyek csoportját és az időszakot.
+{n} pris dans ta base. ¦ {n} otettu tietokannastasi. ¦ {n} az adatbázisodból.
+{n} prises dans ta base. ¦ {n} otettu tietokannastasi. ¦ {n} az adatbázisodból.

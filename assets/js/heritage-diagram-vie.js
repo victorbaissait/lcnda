@@ -38,6 +38,7 @@
     const yearOf = v => { const m = String(v ?? '').match(/-?\d{3,4}/); return m ? Number(m[0]) : null; };
     const H_OPT = C('height', 'Hauteur au plus', 'number', {unit: 'px', min: 120, max: 3000});
     const plural = (n, one, many = one + 's') => `${fmt(n, 0)} ${Math.abs(n) >= 2 ? many : one}`;
+    const tplural = (n, one, many) => (window.LCNDA_I18N?.plural ? window.LCNDA_I18N.plural(n, one, many) : plural(n, one, many)); // traduit (lot B)
     const median = a => { const s = [...a].sort((x, y) => x - y); if (!s.length) return null; const m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
     const MONTHS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
     const rgb = c => { const m = String(c).match(/^#([0-9a-f]{6})$/i); return m ? [0, 2, 4].map(i => parseInt(m[1].slice(i, i + 2), 16)) : null; };
@@ -183,21 +184,30 @@
     }
     /* ═════════ D29 👴 Âge des parents à chaque naissance ═════════ */
     function parentage(spec, W, fs) {
-        const o = spec.o || {}, list = rows(spec, 'rows', 6000).map(r => ({child: str(r.child, 120), year: yearOf(r.year), fa: str(r.fa) === '' ? null : num(r.fa), ma: str(r.ma) === '' ? null : num(r.ma), cid: pidList(r.cid)[0] || 0})).filter(r => r.year != null && (r.fa != null || r.ma != null));
+        const o = spec.o || {}, list = rows(spec, 'rows', 6000).map(r => ({child: str(r.child, 120), year: yearOf(r.year), fa: str(r.fa) === '' ? null : num(r.fa), ma: str(r.ma) === '' ? null : num(r.ma), cid: pidList(r.cid)[0] || 0, gen: str(r.gen) === '' ? null : Math.round(num(r.gen)), line: /^[pm]$/.test(str(r.line)) ? str(r.line) : ''})).filter(r => r.year != null && (r.fa != null || r.ma != null));
         if (!list.length) return empty(W, fs, 'Ajoute des naissances : l’année, l’âge du père, l’âge de la mère.');
         const cf = color(o.cFather, '#4e79a7'), cm = color(o.cMother, '#e15759'), who = o.who || 'both';
-        const ys = list.map(r => r.year), y0 = Math.min(...ys), y1 = Math.max(y0 + 1, ...ys), ages = list.flatMap(r => [who !== 'mother' ? r.fa : null, who !== 'father' ? r.ma : null]).filter(v => v != null);
+        // 🌳 lignées directes (lot B) : une ligne par génération de la lignée (père du père… ou mère de la mère…) ; en bas, les années ou les générations
+        const lin = list.some(r => r.line), byGen = o.axis === 'gen' && list.every(r => r.gen !== null);
+        const xs = list.map(r => (byGen ? r.gen : r.year)), y0 = Math.min(...xs), y1 = Math.max(y0 + 1, ...xs), ages = list.flatMap(r => [who !== 'mother' ? r.fa : null, who !== 'father' ? r.ma : null]).filter(v => v != null);
         const h = H(spec, clamp(Math.max(220, W * .5), 160, 1200)), left = textW('80 ans', fs * .78) + 10, bottom = fs * 2.2, top = 6;
-        const ax = vAxis(Math.min(10, ...ages), Math.max(50, ...ages), left, W - 4, top, h - top - bottom, fs, ' ans'), X = y => left + (y - y0) / (y1 - y0) * (W - left - 10);
-        let s = ax.svg; const tk = R.ticks(y0, y1, clamp(Math.round(W / 90), 2, 12));
-        tk.ticks.filter(v => v >= y0 && v <= y1).forEach(v => { s += T(X(v), h - bottom + fs * .9, String(Math.round(v)), {size: fs * .78, anchor: 'middle'}); });
-        const dot = clamp(num(o.dot) || 3, 1, 8), dots = (k, c, label) => list.forEach(r => { const a = r[k]; if (a == null) return; const t = `${r.child} (${r.year}) : ${label} avait ${fmt(a, 1)} ans`; s += `<circle cx="${r2(X(r.year))}" cy="${r2(ax.Y(a))}" r="${dot}" fill="${c}" fill-opacity=".55"${PIDS(r.cid ? [r.cid] : [], t)}>${tip(t)}</circle>`; });
+        const ax = vAxis(Math.min(10, ...ages), Math.max(50, ...ages), left, W - 4, top, h - top - bottom, fs, ' ans'), X = y => left + (y - y0) / (y1 - y0) * (W - left - 10), xOf = r => X(byGen ? r.gen : r.year);
+        let s = ax.svg; const tk = byGen ? {ticks: Array.from({length: y1 - y0 + 1}, (_, i) => y0 + i).filter((g, i, a) => a.length < 16 || i % Math.ceil(a.length / 15) === 0)} : R.ticks(y0, y1, clamp(Math.round(W / 90), 2, 12));
+        tk.ticks.filter(v => v >= y0 && v <= y1).forEach(v => { s += T(X(v), h - bottom + fs * .9, byGen ? i18n('Gén. {g}', {g: String(v)}) : String(Math.round(v)), {size: fs * .78, anchor: 'middle'}); });
+        if (lin && o.connect !== false) [['fa', cf], ['ma', cm]].forEach(([k, c]) => { const pts = list.filter(r => r[k] != null).sort((a, b) => (a.gen ?? a.year) - (b.gen ?? b.year)).map(r => `${r2(xOf(r))},${r2(ax.Y(r[k]))}`); if (pts.length > 1) s += `<polyline points="${pts.join(' ')}" fill="none" stroke="${c}" stroke-width="1.6" stroke-opacity=".7"/>`; });
+        const dot = clamp(num(o.dot) || (lin ? 4.5 : 3), 1, 8), dots = (k, c, label) => list.forEach(r => { const a = r[k]; if (a == null) return; const t = `${r.child} (${r.year}) : ${label} avait ${fmt(a, 1)} ans`; s += `<circle cx="${r2(xOf(r))}" cy="${r2(ax.Y(a))}" r="${dot}" fill="${c}" fill-opacity="${lin ? .9 : .55}"${PIDS(r.cid ? [r.cid] : [], t)}>${tip(t)}</circle>`; });
         if (who !== 'mother') dots('fa', cf, i18n('le père')); if (who !== 'father') dots('ma', cm, i18n('la mère'));
-        if (o.trend !== false) [['fa', cf], ['ma', cm]].forEach(([k, c]) => { if ((k === 'fa' && who === 'mother') || (k === 'ma' && who === 'father')) return;
+        // la ligne de moyenne (ou de médiane) de chaque côté
+        if (o.ref === 'mean' || o.ref === 'median') [['fa', cf], ['ma', cm]].forEach(([k, c]) => { if ((k === 'fa' && who === 'mother') || (k === 'ma' && who === 'father')) return; const v = list.map(r => r[k]).filter(x => x != null); if (!v.length) return;
+            const m = o.ref === 'median' ? median(v) : v.reduce((a, b) => a + b, 0) / v.length, y = ax.Y(m);
+            s += `<line x1="${r2(left)}" x2="${r2(W - 4)}" y1="${r2(y)}" y2="${r2(y)}" stroke="${c}" stroke-width="1.4" stroke-dasharray="6 4"/>` + T(W - 6, y - fs * .55, i18n(o.ref === 'median' ? 'médiane {n} ans' : 'moyenne {n} ans', {n: fmt(m, 1)}), {size: fs * .72, anchor: 'end', fill: c, weight: 600}); });
+        if (o.trend !== false && !lin) [['fa', cf], ['ma', cm]].forEach(([k, c]) => { if ((k === 'fa' && who === 'mother') || (k === 'ma' && who === 'father')) return;
             const by = new Map(); list.forEach(r => { if (r[k] == null) return; const d = Math.floor(r.year / 25) * 25; (by.get(d) || by.set(d, []).get(d)).push(r[k]); });
             const pts = [...by.entries()].sort((a, b) => a[0] - b[0]).filter(([, v]) => v.length >= 2).map(([d, v]) => `${r2(X(clamp(d + 12.5, y0, y1)))},${r2(ax.Y(v.reduce((a, b) => a + b, 0) / v.length))}`);
             if (pts.length > 1) s += `<polyline points="${pts.join(' ')}" fill="none" stroke="${c}" stroke-width="2.6"/>`; });
         const mf = median(list.map(r => r.fa).filter(v => v != null)), mm = median(list.map(r => r.ma).filter(v => v != null));
+        if (lin) { const avg = k => { const v = list.map(r => r[k]).filter(x => x != null); return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null; }, af = avg('fa'), am = avg('ma');
+            return {h, svg: s, legend: legendOf([...(af !== null ? [[i18n('Lignée paternelle : une génération = {n} ans en moyenne', {n: fmt(af, 1)}), cf]] : []), ...(am !== null ? [[i18n('Lignée maternelle : une génération = {n} ans en moyenne', {n: fmt(am, 1)}), cm]] : [])]), desc: i18n('Durée des générations')}; }
         return {h, svg: s, legend: legendOf([[i18n('Âge du père (médiane {n} ans)', {n: fmt(mf, 1)}), cf], [i18n('Âge de la mère (médiane {n} ans)', {n: fmt(mm, 1)}), cm]]), desc: i18n('Âge des parents à chaque naissance')};
     }
     /* ═════════ D30 🤰 Conceptions avant mariage ═════════ */
@@ -251,7 +261,39 @@
         return {h: c.h, svg: c.svg, legend: legendOf(S.map(([, n, col]) => [n, col])), desc: i18n('Part de ceux qui savaient signer')};
     }
     /* ═════════ D36 ✅ Ce que tu as prouvé ═════════ */
+    /* ── ✅ une ligne par ancêtre (lot B) : naissance, mariage, décès (sourcé, sans source, manquant) et les sources en plus ── */
+    const PROOF_STATES = [['s', 'Sourcé'], ['e', 'Sans source'], ['x', 'Manquant'], ['', 'Pas attendu']];
+    function proofPeople(spec, W, fs) {
+        const o = spec.o || {}, st = v => { const t = str(v).toLowerCase(); return /^(s|sourc|2)/.test(t) ? 's' : /^(e|sans|1)/.test(t) ? 'e' : /^(x|manq|0)/.test(t) ? 'x' : ''; };
+        let list = rows(spec, 'people', 4000).map(r => ({sosa: Math.round(num(r.sosa)), name: str(r.name, 120), b: st(r.b), m: st(r.m), d: st(r.d), cens: num(r.cens), nota: num(r.nota), mili: num(r.mili), pid: pidList(r.pid)[0] || 0})).filter(r => r.sosa > 0 || r.name);
+        if (!list.length) return empty(W, fs, 'Ajoute des ancêtres : le numéro Sosa, le nom et, pour chaque acte, sourcé, sans source ou manquant.');
+        const gaps = r => ['b', 'm', 'd'].filter(k => r[k] === 'x').length * 2 + ['b', 'm', 'd'].filter(k => r[k] === 'e').length;
+        list = o.sort === 'gaps' ? [...list].sort((a, b) => gaps(b) - gaps(a) || a.sosa - b.sosa) : [...list].sort((a, b) => a.sosa - b.sosa);
+        list = list.slice(0, clamp(Math.round(num(o.maxRows) || 120), 5, 500));
+        const cs = color(o.cSource, '#2e9e5b'), ce = color(o.cEvent, '#f2c94c'), cx = color(o.cMissing, '#d5dae1'), CL = {s: cs, e: ce, x: cx};
+        const extra = o.cols === 'none' ? [] : o.cols === 'cens' ? [['cens', 'Recensements']] : [['cens', 'Recensements'], ['nota', 'Notaire'], ['mili', 'Militaire']];
+        const cols = [['b', 'Naissance'], ['m', 'Mariage'], ['d', 'Décès'], ...extra], sw = textW('9999', fs * .8) + 8, nw = Math.min(W * .34, Math.max(...list.map(r => textW(r.name, fs * .8))) + 10);
+        const cw = Math.max(fs * 2.4, (W - sw - nw) / cols.length), rowH = clamp(num(o.cellH) || fs * 1.6, 12, 50), top = fs * 1.6;
+        let s = T(sw - 6, fs * .7, 'Sosa', {size: fs * .75, anchor: 'end', weight: 700});
+        cols.forEach(([, n], i) => { s += T(sw + nw + i * cw + cw / 2, fs * .7, cut(i18n(n), cw - 2, fs * .75), {size: fs * .75, anchor: 'middle', weight: 700}); });
+        let lastGen = 0;
+        list.forEach((r, j) => {
+            const y = top + j * (rowH + 2), g = r.sosa > 0 ? Math.floor(Math.log2(r.sosa)) + 1 : 0;
+            if (o.sort !== 'gaps' && g !== lastGen && j) s += `<line x1="0" x2="${r2(W)}" y1="${r2(y - 1)}" y2="${r2(y - 1)}" stroke="currentColor" stroke-opacity=".25"/>`; lastGen = g;
+            s += T(sw - 6, y + rowH / 2, r.sosa ? String(r.sosa) : '', {size: fs * .78, anchor: 'end', op: .75}) + `<g${r.pid ? PIDS([r.pid], r.name) : ''}>${T(sw, y + rowH / 2, cut(r.name, nw - 6, fs * .8), {size: fs * .8})}</g>`;
+            cols.forEach(([k, n], i) => { const x = sw + nw + i * cw + 2, w = cw - 4;
+                if (['b', 'm', 'd'].includes(k)) { if (!r[k]) { s += T(x + w / 2, y + rowH / 2, '—', {size: fs * .78, anchor: 'middle', op: .45}); return; }
+                    const t = `${r.name} · ${i18n(n)} : ${i18n({s: 'Sourcé', e: 'Sans source', x: 'Manquant'}[r[k]])}`; s += `<rect x="${r2(x)}" y="${r2(y)}" width="${r2(w)}" height="${r2(rowH)}" rx="3" fill="${CL[r[k]]}">${tip(t)}</rect>`; return; }
+                const v = r[k], t = `${r.name} · ${i18n(n)} : ${fmt(v, 0)}`;
+                s += `<rect x="${r2(x)}" y="${r2(y)}" width="${r2(w)}" height="${r2(rowH)}" rx="3" fill="${v > 0 ? cs : cx}" fill-opacity="${v > 0 ? .75 : .55}">${tip(t)}</rect>` + (v > 0 ? T(x + w / 2, y + rowH / 2, fmt(v, 0), {size: fs * .72, anchor: 'middle', fill: inkOn(cs)}) : '');
+            });
+        });
+        const h = top + list.length * (rowH + 2), tot = list.reduce((a, r) => { ['b', 'm', 'd'].forEach(k => { if (r[k]) { a.t++; if (r[k] === 's') a.s++; } }); return a; }, {s: 0, t: 0});
+        const sum = o.summary !== false ? i18n('{p} % des actes attendus sont prouvés par une source.', {p: fmt(tot.s / Math.max(1, tot.t) * 100, 0)}) : '';
+        return {h: H(spec, h + (sum ? fs * 1.8 : 0)), svg: s + sentence(W, fs, h + fs, sum), legend: legendOf([['Sourcé', cs], ['Sans source', ce], ['Manquant', cx]]), desc: sum || i18n('Ce que tu as prouvé')};
+    }
     function proof(spec, W, fs) {
+        if (spec.o?.layout === 'people') return proofPeople(spec, W, fs);
         const o = spec.o || {}, list = rows(spec).map(r => ({gen: Math.round(num(r.gen)), expected: num(r.expected), found: num(r.found), ...Object.fromEntries(['b', 'm', 'd'].flatMap(k => ['s', 'e', 'x'].flatMap(t => [[k + t, num(r[k + t])], ['i' + k + t, pidList(r['i' + k + t])]])))})).filter(r => r.gen > 0).sort((a, b) => a.gen - b.gen);
         if (!list.length) return empty(W, fs, 'Ajoute des générations : pour chaque acte, combien sont sourcés, sans source, manquants.');
         const cs = color(o.cSource, '#2e9e5b'), ce = color(o.cEvent, '#f2c94c'), cx = color(o.cMissing, '#d5dae1');
@@ -333,6 +375,7 @@
     const GENS = (def, min, max) => `<label>Générations${sel('gens', Array.from({length: max - min + 1}, (_, i) => [min + i, `${min + i} générations`]), def)}</label>`;
     function bindApp(pane, run) {
         const btn = pane.querySelector('[data-dfa-go]'), msg = pane.querySelector('[data-dfa-msg]'); if (!btn) return;
+        pane.querySelector('[data-dvi="line"]')?.addEventListener('change', e => { const d = pane.querySelector('[data-dvi-lin]'); if (d) d.hidden = !e.target.value; }); // lignées directes (lot B) : la personne suivie
         btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.innerHTML = window.LCNDA_UI.spinner('Lecture de ta généalogie…', {inline: true});
             try { const t = await run(); A().toast?.(t || 'Données prises dans ta base.'); if (msg?.isConnected) msg.textContent = ''; } catch (e) { if (msg) msg.textContent = '⚠️ ' + (e.message || e); } finally { btn.disabled = false; } });
     }
@@ -361,9 +404,17 @@
             async (pane, s) => { const r = await getV({what: 'duration', scope: val(pane, 'scope'), root: rootOf(pane)}); if (!r.rows?.length) throw new Error('Aucun mariage daté dont un des époux a une date de décès.');
                 s.rows = r.rows.map(x => ({couple: x.couple, year: x.year, years: String(x.years), pids: x.pids})); titleIf(s, 'viedurees', 'Durée des mariages');
                 return r.open ? i18n('{n} mariages pris dans ta base ({k} encore en cours ou sans date de décès).', {n: r.rows.length, k: r.open}) : i18n('{n} mariages pris dans ta base.', {n: r.rows.length}); }),
-        vieparents: app('vieparents', () => box('👴 Les naissances de ma base', 'Pour chaque enfant : l’âge de son père et de sa mère le jour de sa naissance.', `${SCOPE}${rootField()}`),
-            async (pane, s) => { const r = await getV({what: 'parentage', scope: val(pane, 'scope'), root: rootOf(pane)}); if (!r.rows?.length) throw new Error('Aucun enfant dont un parent a une date de naissance.');
-                s.rows = r.rows.map(x => ({child: x.child, year: x.year, fa: x.fa, ma: x.ma, cid: String(x.cid)})); titleIf(s, 'vieparents', 'Âge des parents à chaque naissance');
+        vieparents: app('vieparents', () => box('👴 Les naissances de ma base', 'Pour chaque enfant : l’âge de son père et de sa mère le jour de sa naissance.', `${SCOPE}${rootField()}<label>${esc(i18n('Naissances'))}${sel('line', [['', 'Toutes les naissances du groupe'], ['p', 'Seulement la lignée paternelle directe (père du père…)'], ['m', 'Seulement la lignée maternelle directe (mère de la mère…)'], ['pm', 'Les deux lignées directes']].map(([k, l]) => [k, i18n(l)]))}</label><div data-dvi-lin hidden><span class="pk-lab">${esc(i18n('La personne dont on suit les lignées'))}</span>${PK('dvi_lroot', {value: startId()})}</div>`),
+            async (pane, s) => {
+                const line = val(pane, 'line');
+                if (line) { // 🌳 lignées directes (lot B) : calculées dans l'arbre léger (heritage-diagram-lot-b.js)
+                    const LB = ext.diagramLotB; if (!LB) throw new Error('Données inconnues.');
+                    const tr = await LB.tree(), who = Number(pane.querySelector('[name="dvi_lroot"]')?.value) || rootOf(pane), out = [...(line !== 'm' ? LB.lineage(tr, who, 'p') : []), ...(line !== 'p' ? LB.lineage(tr, who, 'm') : [])];
+                    if (!out.length) throw new Error(i18n('Aucune génération datée dans cette lignée (il faut la naissance de l’enfant et celle du parent).'));
+                    s.rows = out; s.o = {...(s.o || {}), axis: 'gen', ref: s.o?.ref || 'mean', trend: false, who: 'both'}; titleIf(s, 'vieparents', i18n('Durée des générations — {name}', {name: LB.nm(tr.byId.get(who))}));
+                    return i18n('{n} générations prises dans ta base.', {n: out.length}); }
+                const r = await getV({what: 'parentage', scope: val(pane, 'scope'), root: rootOf(pane)}); if (!r.rows?.length) throw new Error('Aucun enfant dont un parent a une date de naissance.');
+                s.rows = r.rows.map(x => ({child: x.child, year: x.year, fa: x.fa, ma: x.ma, cid: String(x.cid)})); if (s.o?.axis === 'gen') s.o.axis = ''; titleIf(s, 'vieparents', 'Âge des parents à chaque naissance');
                 return i18n('{n} naissances prises dans ta base.', {n: r.rows.length}); }),
         vieavant: app('vieavant', () => box('🤰 Les premiers enfants de ma base', 'Pour chaque mariage daté au mois près : le premier enfant est-il né avant, ou moins de 8 mois après ?', `${SCOPE}${rootField()}${STEP(100)}<label>« Tôt » : moins de${sel('limit', [[7, '7 mois'], [8, '8 mois'], [9, '9 mois']], 8)}</label>`),
             async (pane, s) => { const r = await getV({what: 'prenup', step: val(pane, 'step'), limit: val(pane, 'limit'), scope: val(pane, 'scope'), root: rootOf(pane)}); if (!r.rows?.length) throw new Error('Aucun mariage daté au mois près avec un enfant daté.');
@@ -381,8 +432,13 @@
             async (pane, s) => { const r = await getV({what: 'sign', step: val(pane, 'step')}); if (!r.rows?.length) throw new Error('Aucune signature notée pour l’instant : dans un événement, choisis « ✍️ A signé : oui / non » pour les époux et les témoins.');
                 s.rows = r.rows.map(x => ({label: x.label, h1: String(x.h1), h0: String(x.h0), f1: String(x.f1), f0: String(x.f0), w1: String(x.w1), w0: String(x.w0)})); titleIf(s, 'viesigner', 'Savoir signer');
                 return i18n('{n} périodes prises dans ta base.', {n: r.rows.length}); }),
-        viepreuves: app('viepreuves', () => box('✅ L’ascendance d’une personne', 'Pour chaque génération d’ancêtres : les naissances, mariages et décès prouvés par une source, présents sans source, ou pas encore trouvés.', `${rootField()}${GENS(6, 2, 12)}`),
-            async (pane, s) => { const r = await getV({what: 'proof', root: rootOf(pane), gens: val(pane, 'gens')}); if (!r.rows?.length) throw new Error('Aucun ancêtre trouvé pour cette personne.');
+        viepreuves: app('viepreuves', () => box('✅ L’ascendance d’une personne', 'Pour chaque génération d’ancêtres : les naissances, mariages et décès prouvés par une source, présents sans source, ou pas encore trouvés.', `${rootField()}${GENS(6, 2, 12)}<label>${esc(i18n('Présentation'))}${sel('layout', [['', i18n('Une ligne par génération')], ['people', i18n('Une ligne par ancêtre (+ recensements, notaire, militaire)')]])}</label>`),
+            async (pane, s) => {
+                if (val(pane, 'layout') === 'people') { // ✅ une ligne par ancêtre (lot B, lib/diagram_lot_b.php)
+                    const r = await A().api('diagram_lot_b', {what: 'coverage', root: rootOf(pane), gens: Math.min(10, Number(val(pane, 'gens')) || 6)}); if (!r.rows?.length) throw new Error('Aucun ancêtre trouvé pour cette personne.');
+                    s.people = r.rows.map(x => ({sosa: String(x.sosa), name: x.name, b: x.b, m: x.m, d: x.d, cens: String(x.cens), nota: String(x.nota), mili: String(x.mili), pid: String(x.pid)})); s.o = {...(s.o || {}), layout: 'people'};
+                    titleIf(s, 'viepreuves', i18n('Ce que j’ai prouvé — {name}', {name: r.root_name})); return i18n('{n} pris dans ta base.', {n: tplural(r.rows.length, 'ancêtre')}); }
+                if (s.o?.layout === 'people') s.o.layout = ''; const r = await getV({what: 'proof', root: rootOf(pane), gens: val(pane, 'gens')}); if (!r.rows?.length) throw new Error('Aucun ancêtre trouvé pour cette personne.');
                 s.rows = r.rows.map(x => ({...x, gen: String(x.gen), expected: String(x.expected), found: String(x.found)})); titleIf(s, 'viepreuves', i18n('Ce que j’ai prouvé — {name}', {name: r.root_name}));
                 return i18n('{n} générations prises dans ta base.', {n: r.rows.length}); }),
         vieregistres: app('vieregistres', () => box('📚 Mes dépouillements et mes actes', 'Pour chaque commune : les années des registres dépouillés (suivi des dépouillements) et des actes trouvés avec une source.', `<label>Communes${sel('top', [[8, '8'], [12, '12'], [20, '20'], [40, '40']], 12)}</label>`),
@@ -422,8 +478,9 @@
             sample: () => ({o: {title: i18n('Durée des mariages'), split: 'century'}, rows: sampleDuration()})},
         vieparents: {icon: '👴', label: 'Âge des parents à chaque naissance (nuage de points)', group: 'Couples et familles', render: parentage, legend: 'bottom', fromApp: APPS.vieparents,
             help: 'Chaque naissance est un point : l’âge du père (et celui de la mère) selon l’année.',
-            grids: [{key: 'rows', label: 'Les naissances', cols: [C('child', 'Enfant'), C('year', 'Année de naissance'), C('fa', 'Âge du père', 'number', {unit: 'ans'}), C('ma', 'Âge de la mère', 'number', {unit: 'ans'})]}],
+            grids: [{key: 'rows', label: 'Les naissances', cols: [C('child', 'Enfant'), C('year', 'Année de naissance'), C('fa', 'Âge du père', 'number', {unit: 'ans'}), C('ma', 'Âge de la mère', 'number', {unit: 'ans'}), C('gen', 'Génération (lignée)', 'number'), C('line', 'Lignée', 'select', {choices: [['', '—'], ['p', 'Paternelle'], ['m', 'Maternelle']]})]}],
             options: [C('who', 'Montrer', 'select', {choices: [['both', 'Le père et la mère'], ['father', 'Le père'], ['mother', 'La mère']], def: 'both'}), C('trend', 'Moyenne par quart de siècle (ligne)', 'check', {def: true}),
+                C('axis', 'En bas', 'select', {choices: [['', 'Les années'], ['gen', 'Les générations (lignées)']]}), C('ref', 'Ligne de repère', 'select', {choices: [['', 'Aucune'], ['mean', 'Moyenne'], ['median', 'Médiane']]}), C('connect', 'Relier les points d’une lignée', 'check', {def: true}),
                 C('cFather', 'Couleur du père', 'color', {def: '#4e79a7'}), C('cMother', 'Couleur de la mère', 'color', {def: '#e15759'}), C('dot', 'Taille des points', 'range', {min: 1, max: 8, step: .5, def: 3}), H_OPT],
             sample: () => ({o: {title: i18n('Âge des parents à chaque naissance')}, rows: sampleParentage()})},
         vieavant: {icon: '🤰', label: 'Conceptions avant mariage (premier enfant « trop tôt »)', group: 'Couples et familles', render: prenup, legend: 'bottom', fromApp: APPS.vieavant,
@@ -448,8 +505,11 @@
             sample: () => ({o: {title: i18n('Savoir signer')}, rows: sampleSign()})},
         viepreuves: {icon: '✅', label: 'Ce que tu as prouvé (actes sourcés par génération)', group: 'Ma recherche', render: proof, legend: 'bottom', fromApp: APPS.viepreuves,
             help: 'Pour chaque génération d’ancêtres : naissances, mariages et décès prouvés par une source (vert), sans source (jaune) ou manquants (gris).',
-            grids: [{key: 'rows', label: 'Les générations', cols: [C('gen', 'Génération', 'number'), C('expected', 'Ancêtres possibles', 'number'), C('found', 'Trouvés', 'number'), ...[['b', 'Naissance'], ['m', 'Mariage'], ['d', 'Décès']].flatMap(([k, n]) => [C(k + 's', `${n} : sourcée`, 'number'), C(k + 'e', `${n} : sans source`, 'number'), C(k + 'x', `${n} : manquante`, 'number')])]}],
-            options: [C('cSource', 'Couleur « sourcé »', 'color', {def: '#2e9e5b'}), C('cEvent', 'Couleur « sans source »', 'color', {def: '#f2c94c'}), C('cMissing', 'Couleur « manquant »', 'color', {def: '#d5dae1'}), C('cellH', 'Hauteur des lignes', 'range', {min: 14, max: 50, def: 24}), C('summary', 'Phrase de résumé', 'check', {def: true})],
+            grids: [{key: 'rows', label: 'Les générations', cols: [C('gen', 'Génération', 'number'), C('expected', 'Ancêtres possibles', 'number'), C('found', 'Trouvés', 'number'), ...[['b', 'Naissance'], ['m', 'Mariage'], ['d', 'Décès']].flatMap(([k, n]) => [C(k + 's', `${n} : sourcée`, 'number'), C(k + 'e', `${n} : sans source`, 'number'), C(k + 'x', `${n} : manquante`, 'number')])]},
+                {key: 'people', label: 'Une ligne par ancêtre', cols: [C('sosa', 'Sosa', 'number'), C('name', 'Nom'), ...[['b', 'Naissance'], ['m', 'Mariage'], ['d', 'Décès']].map(([k, n]) => C(k, n, 'select', {choices: PROOF_STATES})), C('cens', 'Recensements', 'number'), C('nota', 'Actes notariés', 'number'), C('mili', 'Fiches militaires', 'number')]}],
+            options: [C('layout', 'Présentation', 'select', {choices: [['', 'Une ligne par génération'], ['people', 'Une ligne par ancêtre']]}), C('cols', 'Colonnes en plus', 'select', {choices: [['all', 'Recensement, notaire, militaire'], ['cens', 'Recensement seulement'], ['none', 'Aucune']], def: 'all', when: s => s.o?.layout === 'people'}),
+                C('sort', 'Ordre', 'select', {choices: [['', 'Par numéro Sosa'], ['gaps', 'Les trous d’abord']], when: s => s.o?.layout === 'people'}), C('maxRows', 'Ancêtres au plus', 'range', {min: 5, max: 500, def: 120, when: s => s.o?.layout === 'people'}),
+                C('cSource', 'Couleur « sourcé »', 'color', {def: '#2e9e5b'}), C('cEvent', 'Couleur « sans source »', 'color', {def: '#f2c94c'}), C('cMissing', 'Couleur « manquant »', 'color', {def: '#d5dae1'}), C('cellH', 'Hauteur des lignes', 'range', {min: 14, max: 50, def: 24}), C('summary', 'Phrase de résumé', 'check', {def: true})],
             sample: () => ({o: {title: i18n('Ce que j’ai prouvé')}, rows: sampleProof()})},
         vieregistres: {icon: '📚', label: 'Registres consultés (années vues et trous)', group: 'Ma recherche', render: registers, legend: 'bottom', fromApp: APPS.vieregistres,
             help: 'Pour chaque commune, une frise des années : dépouillées, vues sans rien trouver, à faire, actes trouvés ; en rouge pâle, les trous.',

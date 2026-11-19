@@ -1,0 +1,232 @@
+fr ¦ lb
+# Zone « diagrammes-lot-b » : diagramme de Lexis, ternaire, chandeliers, courbe avec marge, horizon, dendrogramme, durée des générations, couverture des sources, trajectoires de vie, alluvial (heritage-diagram-lot-b.js et réglages de heritage-diagram-plus/vie/famille.js, heritage-diagrams-render.js)
+=vie ¦ Liewen|Liewen
+=période ¦ Period|Perioden
+Célibataire ¦ Leedeg
+Marié(e) ¦ Bestuet
+Remarié(e) ¦ Erëm bestuet
+Veuf ou veuve ¦ Witmann oder Witfra
+Divorcé(e) ¦ Gescheet
+Décédé(e) ¦ Verstuerwen
+État civil inconnu ¦ Familljestand onbekannt
+Métier inconnu ¦ Beruff onbekannt
+Pays inconnu ¦ Land onbekannt
+Autres états ¦ Aner Stänn
+Sexe inconnu ¦ Geschlecht onbekannt
+Départ (autre commune) ¦ Fortzuch (aner Gemeng)
+Ajoute des personnes : le nom, la naissance et le décès (années ou dates). ¦ Setz Persounen derbäi: den Numm, d’Gebuert an den Doud (Joer oder Datumen).
+Diagramme de Lexis : {n}, de {a} à {b}. ¦ Lexis-Diagramm: {n}, vun {a} bis {b}.
+Choléra ¦ Cholera
+Guerre de 1870 ¦ Krich vun 1870
+Grande Guerre ¦ Éischte Weltkrich
+📐 Les vies de ma base ¦ 📐 D’Liewen a menger Datebank
+Chaque vie devient une diagonale, de la naissance (âge 0) au décès ; les mariages, les naissances des enfants et les départs posés dessus. ¦ All Liewen gëtt eng Diagonal, vun der Gebuert (Alter 0) bis zum Doud; drop d’Hochzäiten, d’Gebuerte vun de Kanner an d’Fortzich.
+Combien de vies au plus ¦ Wéivill Liewen héchstens
+Une par nom de famille ¦ Eng pro Familljennumm
+Naissances des enfants ¦ Gebuerte vun de Kanner
+Départs (première commune autre que celle de naissance) ¦ Fortzich (éischt Gemeng ausser der Gebuertsplaz)
+Bandes historiques (guerres, épidémies) ¦ Historesch Bänner (Kricher, Epidemien)
+Personne avec une date de naissance dans ce groupe. ¦ Kee mat engem Gebuertsdatum an dësem Grupp.
+Diagramme de Lexis ¦ Lexis-Diagramm
+Diagramme de Lexis (âge × année : une vie = une diagonale) ¦ Lexis-Diagramm (Alter × Joer: e Liewen = eng Diagonal)
+Les années en bas, les âges à gauche : chaque vie monte en diagonale de sa naissance à son décès ; les mariages, les enfants, les départs et les grandes crises s’y lisent d’un coup d’œil. ¦ Ënnen d’Joren, lénks d’Alter: all Liewen klëmmt diagonal vun der Gebuert bis zum Doud; Hochzäiten, Kanner, Fortzich a grouss Kriseën gesäit een op ee Bléck.
+Les vies ¦ D’Liewen
+Les vies de la famille {name} ¦ D’Liewe vun der Famill {name}
+Personne (même nom que ci-dessus) ¦ Persoun (selwechte Numm wéi uewen)
+Les marques (sur la vie de la personne) ¦ D’Markéierungen (um Liewe vun der Persoun)
+Bandes historiques ¦ Historesch Bänner
+Groupe (couleur) ¦ Grupp (Faarf)
+Couleur de chaque groupe (facultatif) ¦ Faarf vun all Grupp (fräiwëlleg)
+Âge au plus ¦ Alter héchstens
+Couleur des vies ¦ Faarf vun de Liewen
+Homme / femme ¦ Mann / Fra
+Montrer les marques ¦ Markéierunge weisen
+Taille des marques ¦ Gréisst vun de Markéierungen
+Nom des bandes ¦ Nimm vun de Bänner
+Diagonales des générations ¦ Diagonale vun de Generatiounen
+Nom au bout de chaque vie ¦ Numm um Enn vun all Liewen
+Épaisseur des vies ¦ Déckt vun de Liewen
+Ajoute des points : un nom et ses trois parts (des nombres ou des %). ¦ Setz Punkten derbäi: en Numm an seng dräi Deeler (Zuelen oder %).
+Part A ¦ Deel A
+Part B ¦ Deel B
+Part C ¦ Deel C
+Diagramme ternaire : {n} ({a}, {b}, {c}). ¦ Dräieckdiagramm: {n} ({a}, {b}, {c}).
+Agriculture ¦ Landwirtschaft
+Artisanat et industrie ¦ Handwierk an Industrie
+Commerce et services ¦ Handel a Servicer
+Agriculture et forêt ¦ Landwirtschaft a Bësch
+Artisanat ¦ Handwierk
+Industrie, mines ¦ Industrie, Minen
+Transports et mer ¦ Transport a Mier
+Services, domestiques ¦ Servicer, Déngschtleit
+Armée et police ¦ Arméi a Police
+Clergé ¦ Klerus
+Professions libérales, école, administration ¦ Fräi Beruffer, Schoul, Verwaltung
+Rentiers, rangs et statuts ¦ Rentner, Stänn an Titelen
+Au foyer, sans profession ¦ Doheem, ouni Beruff
+Autre métier ¦ Anere Beruff
+Tous les autres métiers ¦ All aner Beruffer
+🔺 Les métiers de ma base ¦ 🔺 D’Beruffer a menger Datebank
+Les métiers (fiche, événements « Profession », recensements) rangés en grands secteurs ; un point par commune de naissance, par décennie ou par famille, placé selon ses trois parts. ¦ D’Beruffer (Fiche, Evenementer „Beruff“, Vollekszielungen) a grouss Secteure gesoot; ee Punkt pro Gebuertsgemeng, Joerzéngt oder Famill, no sengen dräi Deeler gesat.
+Un point par ¦ Ee Punkt pro
+Décennie de naissance (reliées dans le temps) ¦ Gebuertsjoerzéngt (an der Zäit verbonnen)
+Combien de points au plus ¦ Wéivill Punkten héchstens
+Part du haut ¦ Ieweschten Deel
+Part de gauche ¦ Lénksen Deel
+Part de droite ¦ Rietsen Deel
+« Tous les autres métiers » ne peut servir qu’une fois. ¦ „All aner Beruffer“ geet just eemol.
+Décennies ¦ Joerzéngten
+Aucun métier connu pour ces personnes. ¦ Kee bekannte Beruff fir dës Persounen.
+Les métiers de ma base, en trois parts ¦ D’Beruffer a menger Datebank, an dräi Deeler
+Les métiers de trois villages, siècle par siècle ¦ D’Beruffer vun dräi Dierfer, Joerhonnert fir Joerhonnert
+Diagramme ternaire (trois parts qui font 100 %) ¦ Dräieckdiagramm (dräi Deeler, zesummen 100 %)
+Parts ¦ Deeler
+Un triangle : chaque point a trois parts (par exemple agriculture, artisanat, commerce) ; plus il est près d’un coin, plus cette part est grande. ¦ En Dräieck: all Punkt huet dräi Deeler (z. B. Landwirtschaft, Handwierk, Handel); wat méi no un engem Eck, wat dee Deel méi grouss ass.
+Les points (trois parts chacun) ¦ D’Punkten (all dräi Deeler)
+Groupe (couleur, points reliés) ¦ Grupp (Faarf, verbonne Punkten)
+Ordre (année…) ¦ Reiefolleg (Joer …)
+Nom de la part du haut ¦ Numm vum ieweschten Deel
+Nom de la part de gauche ¦ Numm vum lénksen Deel
+Nom de la part de droite ¦ Numm vum rietsen Deel
+Couleur du haut ¦ Faarf uewen
+Couleur de gauche ¦ Faarf lénks
+Couleur de droite ¦ Faarf riets
+Tous les 10 % ¦ All 10 %
+Tous les 20 % ¦ All 20 %
+Sans grille ¦ Ouni Gitter
+Une par point ¦ Eng pro Punkt
+Selon le total ¦ No der Zomm
+Relier les points d’un groupe dans l’ordre ¦ D’Punkte vun engem Grupp no der Rei verbannen
+Noms des points ¦ Nimm vun de Punkten
+Ajoute des périodes : la date, le prix d’ouverture, de clôture, le plus bas et le plus haut. ¦ Setz Perioden derbäi: d’Datum, den Ufanks-, Schluss-, niddregsten an héchste Präis.
+ouverture ¦ Ufank
+clôture ¦ Schluss
+plus bas ¦ niddregst
+plus haut ¦ héchst
+Hausse (clôture plus haute) ¦ Hausse (méi héije Schluss)
+Baisse (clôture plus basse) ¦ Baisse (méi déiwe Schluss)
+Moyenne mobile sur {n} périodes ¦ Gleitende Moyenne iwwer {n} Perioden
+Chandeliers : {n}, de {a} à {b} ({p} %). ¦ Käerzen: {n}, vun {a} bis {b} ({p} %).
+Prix du setier de blé au marché de {name} ¦ Präis vun engem Malter Weess um Maart vu(n) {name}
+Disette ¦ Mangel
+Guerre des farines ¦ Miel-Krich
+Chandeliers (prix du blé, mercuriales) ¦ Käerzen (Weesspräis, Maartpräisser)
+Pour chaque période : le prix au début (ouverture), à la fin (clôture), le plus bas et le plus haut. Vert si le prix monte, rouge s’il baisse ; les années de disette en bandes. ¦ Fir all Period: de Präis am Ufank, um Enn, den niddregsten an den héchsten. Gréng wann de Präis klëmmt, rout wann e fällt; d’Mangeljoren als Bänner.
+Les périodes (date, ouverture, clôture, plus bas, plus haut) ¦ D’Perioden (Datum, Ufank, Schluss, niddregst, héchst)
+Date ou période ¦ Datum oder Period
+Plus bas ¦ Niddregst
+Plus haut ¦ Héchst
+Les années à part (disette, guerre…) ¦ Besonnesch Joren (Mangel, Krich …)
+Autre unité (écrite) ¦ Aner Eenheet (geschriwwen)
+livres ¦ Livres
+sols ¦ Sols
+deniers ¦ Denieren
+Couleur de la hausse ¦ Faarf vun der Hausse
+Couleur de la baisse ¦ Faarf vun der Baisse
+Hausse en creux (bougie vide) ¦ Hausse huel (eidel Käerz)
+Moyenne mobile (périodes, 0 = non) ¦ Gleitende Moyenne (Perioden, 0 = neen)
+Couleur de la moyenne ¦ Faarf vun der Moyenne
+Années à part en bandes ¦ Besonnesch Joren als Bänner
+Largeur des bougies ¦ Breet vun de Käerzen
+Âge au premier mariage ¦ Alter beim éischte Bestietnes
+Âge au premier enfant ¦ Alter beim éischte Kand
+± un écart-type ¦ ± eng Standardofweichung
+intervalle à 95 % ¦ 95-%-Intervall
+mes ancêtres ¦ meng Virfahren
+📏 Moyenne et marge : {x} ¦ 📏 Moyenne a Marge: {x}
+Pas assez de personnes datées (au moins 3 par période). ¦ Net genuch datéiert Persounen (mindestens 3 pro Period).
+Basse ¦ Niddreg
+Haute ¦ Héich
+{x} : moyenne et marge ¦ {x}: Moyenne a Marge
+Marge : un écart-type de part et d’autre, par quart de siècle de naissance ¦ Marge: eng Standardofweichung op all Säit, pro Véierelsjoerhonnert vun der Gebuert
+Marge : intervalle de confiance à 95 % de la moyenne, par quart de siècle de naissance ¦ Marge: 95-%-Vertrauensintervall vun der Moyenne, pro Véierelsjoerhonnert vun der Gebuert
+Marge (basse – haute) ¦ Marge (niddreg – héich)
+Marge (±) ¦ Marge (±)
+Fourchette (marge autour de la courbe) ¦ Spannbreet (Marge ronderëm d’Kurv)
+Deux colonnes : basse et haute ¦ Zwou Kolonnen: niddreg an héich
+Une colonne ± écart ¦ Eng Kolonn ± Ofwäichung
+Colonne basse (n°) ¦ Niddreg Kolonn (Nr.)
+Colonne haute (n°) ¦ Héich Kolonn (Nr.)
+Colonne de l’écart (n°) ¦ Kolonn vun der Ofwäichung (Nr.)
+Autour de la colonne (n°) ¦ Ronderëm d’Kolonn (Nr.)
+Opacité de la marge ¦ Deckkraaft vun der Marge
+Couleur de la marge ¦ Faarf vun der Marge
+Axe : minimum ¦ Achs: Minimum
+Axe : maximum ¦ Achs: Maximum
+(axe de droite) ¦ (riets Achs)
+Clôture ¦ Schluss
+{name} : de {a} à {b}, le plus en {peak} ({v}) ¦ {name}: vun {a} bis {b}, am meeschten {peak} ({v})
+Le plus bas ¦ Am niddregsten
+Le plus haut ¦ Am héchsten
+Négatif (replié) ¦ Negativ (ëmgeklappt)
+Graphique en horizon : {s} séries sur {n} périodes. ¦ Horizontdiagramm: {s} Reien iwwer {n} Perioden.
+Horizon (bandes repliées) ¦ Horizont (ëmgeklappte Bänner)
+Collines ¦ Hiwwelen
+Nombre de couches ¦ Zuel vun de Schichten
+Teinte des négatifs ¦ Faarftoun vun den negativen
+Chevauchement ¦ Iwwerlappung
+Courbes douces ¦ Mëll Kurven
+Trait blanc autour ¦ Wäisse Rand
+Arbre de regroupement à gauche (dendrogramme) ¦ Gruppéierungsbam lénks (Dendrogramm)
+Groupes de couleur ¦ Faarfgruppen
+Les branches de l’arbre ¦ D’Äscht vum Bam
+Cacher les noms des correspondances ¦ D’Nimm vun den Treffer verstoppen
+Durée des générations ¦ Dauer vun de Generatiounen
+Durée des générations — {name} ¦ Dauer vun de Generatiounen — {name}
+Lignée paternelle : une génération = {n} ans en moyenne ¦ Pappesäit: eng Generatioun = am Duerchschnëtt {n} Joer
+Lignée maternelle : une génération = {n} ans en moyenne ¦ Mammesäit: eng Generatioun = am Duerchschnëtt {n} Joer
+moyenne {n} ans ¦ Moyenne {n} Joer
+Toutes les naissances du groupe ¦ All Gebuerten am Grupp
+Seulement la lignée paternelle directe (père du père…) ¦ Just déi direkt Pappesäit (Papp vum Papp …)
+Seulement la lignée maternelle directe (mère de la mère…) ¦ Just déi direkt Mammesäit (Mamm vun der Mamm …)
+Les deux lignées directes ¦ Béid direkt Linnen
+La personne dont on suit les lignées ¦ D’Persoun, där hir Linne gefollegt ginn
+Aucune génération datée dans cette lignée (il faut la naissance de l’enfant et celle du parent). ¦ Keng datéiert Generatioun an dëser Linn (d’Gebuert vum Kand a vum Elterendeel muss do sinn).
+Génération (lignée) ¦ Generatioun (Linn)
+Paternelle ¦ Pappesäit
+Maternelle ¦ Mammesäit
+Relier les points d’une lignée ¦ D’Punkte vun enger Linn verbannen
+Ligne de repère ¦ Referenzlinn
+Les générations (lignées) ¦ D’Generatiounen (Linnen)
+Pas attendu ¦ Net erwaart
+Manquant ¦ Feelt
+Ajoute des ancêtres : le numéro Sosa, le nom et, pour chaque acte, sourcé, sans source ou manquant. ¦ Setz Virfahren derbäi: d’Sosa-Nummer, den Numm a fir all Akt: mat Quell, ouni Quell oder feelt.
+Une ligne par ancêtre ¦ Eng Zeil pro Virfahr
+Une ligne par ancêtre (+ recensements, notaire, militaire) ¦ Eng Zeil pro Virfahr (+ Vollekszielungen, Notaire, Militär)
+Fiches militaires ¦ Militärfichen
+Colonnes en plus ¦ Zousätzlech Kolonnen
+Recensement, notaire, militaire ¦ Vollekszielung, Notaire, Militär
+Recensement seulement ¦ Just Vollekszielung
+Les trous d’abord ¦ D’Lächer fir d’éischt
+Par numéro Sosa ¦ No Sosa-Nummer
+Ancêtres au plus ¦ Virfahren héchstens
+Axe ¦ Achs
+Ce qu’on suit ¦ Wat mir verfollegen
+L’état civil ¦ De Familljestand
+L’état civil (célibataire, marié, veuf…) : trajectoires de vie ¦ Familljestand (leedeg, bestuet, Witmann …): Liewenswee
+La commune ¦ D’Gemeng
+Les lieux de vie ¦ D’Wunnplazen
+Un groupe de personnes (critères) ¦ E Grupp vu Persounen (Critèren)
+Trajectoires de vie ¦ Liewenswee
+Trajectoires de vie de {n}. ¦ Liewenswee vun {n}.
+Métiers au fil de la vie de {n}. ¦ Beruffer am Laf vum Liewe vun {n}.
+Les métiers au fil de la vie ¦ D’Beruffer am Laf vum Liewen
+Les mêmes personnes à plusieurs âges (20, 40, 60 ans…) ¦ Déi selwecht Persounen a méi Alteren (20, 40, 60 …)
+Âges des colonnes ¦ Alter vun de Kolonnen
+À {n} ans ¦ Mat {n} Joer
+L’état civil des mêmes personnes à {a} ans ¦ Familljestand vun de selwechte Persounen mat {a} Joer
+Où vivaient les mêmes personnes à {a} ans ¦ Wou déi selwecht Persoune mat {a} Joer gelieft hunn
+Le métier des mêmes personnes à {a} ans ¦ Beruff vun de selwechte Persounen mat {a} Joer
+Le même qu’à l’âge d’avant — {list} ¦ D’selwecht wéi am Alter virdrun — {list}
+Les mêmes personnes à {n} âges : {l}. ¦ Déi selwecht Persounen an {n} Alteren: {l}.
+En % de la colonne (au lieu des nombres) ¦ An % vun der Kolonn (amplaz Zuelen)
+État civil (trajectoires de vie) ¦ Familljestand (Liewenswee)
+Naissance (pour l’axe des âges) ¦ Gebuert (fir d’Altersachs)
+Début (année ou âge, vide = auto) ¦ Ufank (Joer oder Alter, eidel = automatesch)
+Fin (année ou âge, vide = auto) ¦ Enn (Joer oder Alter, eidel = automatesch)
+Par durée de vie ¦ No Liewensdauer
+Par état à 50 ans ¦ No Stand mat 50 Joer
+âge (années) ¦ Alter (Joer)
+Vérifie le groupe de personnes et la période. ¦ Kuck de Grupp vu Persounen an d’Period no.
+{n} pris dans ta base. ¦ {n} aus denger Datebank geholl.
+{n} prises dans ta base. ¦ {n} aus denger Datebank geholl.

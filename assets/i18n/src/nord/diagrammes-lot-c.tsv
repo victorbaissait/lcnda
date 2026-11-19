@@ -1,0 +1,179 @@
+fr ¦ cs ¦ sv ¦ da
+# Zone « diagrammes-lot-c » : grille des recensements, schéma de preuve, arbre de mots (heritage-diagram-lot-c.js), zones des paroisses et carte en étoile (heritage-diagram-cartes.js), cercles d’une journée (heritage-cartes-outils.js)
+Hors de France ¦ Mimo Francii ¦ Utanför Frankrike ¦ Uden for Frankrig
+Ajoute des personnes (nom, naissance, décès), puis leurs recensements (année, statut). ¦ Přidej osoby (jméno, narození, úmrtí) a pak jejich sčítání (rok, stav). ¦ Lägg till personer (namn, födelse, död) och sedan deras folkräkningar (år, status). ¦ Tilføj personer (navn, fødsel, død) og derefter deres folketællinger (år, status).
+Aucune année de recensement entre ces deux dates. ¦ Mezi těmito daty není žádný rok sčítání. ¦ Inget folkräkningsår mellan dessa datum. ¦ Intet tællingsår mellem disse to datoer.
+Plus rien à chercher : tous les recensements sont trouvés ou sans objet. ¦ Už není co hledat: všechna sčítání nalezena nebo bezpředmětná. ¦ Inget kvar att söka: alla folkräkningar hittade eller ej aktuella. ¦ Intet tilbage at søge: alle tællinger fundet eller ikke relevante.
+à chercher : {list} ¦ hledat: {list} ¦ att söka: {list} ¦ at søge: {list}
+non trouvés : {list} ¦ nenalezeno: {list} ¦ ej hittade: {list} ¦ ikke fundet: {list}
+Liste de travail des recensements : {n}. ¦ Pracovní seznam sčítání: {n}. ¦ Arbetslista för folkräkningar: {n}. ¦ Arbejdsliste over folketællinger: {n}.
+Grille des recensements : {n}, {y} recensements, {d} sur {t} cherchés. ¦ Mřížka sčítání: {n}, {y} sčítání, {d} z {t} prohledáno. ¦ Folkräkningsrutnät: {n}, {y} folkräkningar, {d} av {t} sökta. ¦ Tællingsgitter: {n}, {y} tællinger, {d} af {t} søgt.
+Les recensements de la famille {name} ¦ Sčítání rodiny {name} ¦ Familjen {name}s folkräkningar ¦ Familien {name}s folketællinger
+Contre ¦ Proti ¦ Emot ¦ Imod
+Conflit ¦ Rozpor ¦ Konflikt ¦ Konflikt
+Écris la question (Réglages), puis les indices : pour, contre, recherches, conflits. ¦ Napiš otázku (Nastavení) a pak indicie: pro, proti, pátrání, rozpory. ¦ Skriv frågan (Inställningar) och sedan ledtrådarna: för, emot, sökningar, konflikter. ¦ Skriv spørgsmålet (Indstillinger) og derefter sporene: for, imod, søgninger, konflikter.
+Indices contre ¦ Indicie proti ¦ Ledtrådar emot ¦ Spor imod
+Recherches et conflits ¦ Pátrání a rozpory ¦ Sökningar och konflikter ¦ Søgninger og konflikter
+Résolu : {note} ¦ Vyřešeno: {note} ¦ Löst: {note} ¦ Løst: {note}
+À résoudre ¦ K vyřešení ¦ Att lösa ¦ Skal løses
+poids {n} sur 3 ¦ váha {n} ze 3 ¦ vikt {n} av 3 ¦ vægt {n} af 3
+Pas encore de conclusion ¦ Zatím bez závěru ¦ Ingen slutsats ännu ¦ Ingen konklusion endnu
+Schéma de preuve : {a} pour, {b} contre ; certitude : {c}. ¦ Schéma důkazu: {a} pro, {b} proti; jistota: {c}. ¦ Bevisschema: {a} för, {b} emot; säkerhet: {c}. ¦ Bevisdiagram: {a} for, {b} imod; sikkerhed: {c}.
+Antoine MAZAUD est-il le père de Jean MAZAUD (né vers 1818) ? ¦ Je Antoine MAZAUD otcem Jeana MAZAUD (nar. kolem 1818)? ¦ Är Antoine MAZAUD far till Jean MAZAUD (född omkring 1818)? ¦ Er Antoine MAZAUD far til Jean MAZAUD (født omkring 1818)?
+Oui : Antoine MAZAUD est le père de Jean. ¦ Ano: Antoine MAZAUD je Jeanův otec. ¦ Ja: Antoine MAZAUD är Jeans far. ¦ Ja: Antoine MAZAUD er Jeans far.
+Acte de mariage de Jean (1842) : « fils d’Antoine MAZAUD, cultivateur » ¦ Oddací záznam Jeana (1842): „syn Antoina MAZAUD, rolníka“ ¦ Jeans vigselakt (1842): ”son till Antoine MAZAUD, bonde” ¦ Jeans vielsesattest (1842): »søn af Antoine MAZAUD, landmand«
+Registre paroissial, original ¦ Farní matrika, originál ¦ Kyrkobok, original ¦ Kirkebog, original
+Recensement 1836 : Jean, 18 ans, au foyer d’Antoine ¦ Sčítání 1836: Jean, 18 let, v domácnosti Antoina ¦ Folkräkning 1836: Jean, 18 år, i Antoines hushåll ¦ Folketælling 1836: Jean, 18 år, i Antoines husstand
+Recensement 1836, original ¦ Sčítání 1836, originál ¦ Folkräkning 1836, original ¦ Folketælling 1836, original
+Antoine est parrain du premier fils de Jean ¦ Antoine je kmotrem Jeanova prvního syna ¦ Antoine är gudfar till Jeans förste son ¦ Antoine er gudfar til Jeans første søn
+Baptême 1844 ¦ Křest 1844 ¦ Dop 1844 ¦ Dåb 1844
+Un autre Jean MAZAUD, né en 1817 au village voisin ¦ Jiný Jean MAZAUD, nar. 1817 v sousední vsi ¦ En annan Jean MAZAUD, född 1817 i grannbyn ¦ En anden Jean MAZAUD, født 1817 i nabolandsbyen
+Acte de naissance de Jean : registre lacunaire 1815-1820 ¦ Rodný záznam Jeana: matrika neúplná 1815-1820 ¦ Jeans födelseakt: kyrkoboken saknas 1815-1820 ¦ Jeans fødselsattest: kirkebogen mangler 1815-1820
+Âge au décès : 64 ans (né vers 1820) au lieu de 66 ¦ Věk při úmrtí: 64 let (nar. kolem 1820) místo 66 ¦ Ålder vid död: 64 år (född omkring 1820) i stället för 66 ¦ Alder ved død: 64 år (født omkring 1820) i stedet for 66
+Acte de décès 1884 ¦ Úmrtní záznam 1884 ¦ Dödsakt 1884 ¦ Dødsattest 1884
+l’âge déclaré au décès est souvent approximatif ¦ věk uvedený při úmrtí bývá přibližný ¦ den uppgivna åldern vid död är ofta ungefärlig ¦ den angivne alder ved død er ofte omtrentlig
+Écris le mot de départ (Réglages), par exemple « fils de » ou « veuve de ». ¦ Napiš výchozí slovo (Nastavení), například „fils de“ nebo „veuve de“. ¦ Skriv startordet (Inställningar), till exempel ”fils de” eller ”veuve de”. ¦ Skriv startordet (Indstillinger), for eksempel »fils de« eller »veuve de«.
+Colle des transcriptions (une par ligne) ou prends-les « Depuis l’app ». ¦ Vlož přepisy (jeden na řádek) nebo je vezmi „Z aplikace“. ¦ Klistra in transkriptioner (en per rad) eller hämta dem ”Från appen”. ¦ Indsæt transskriptioner (én pr. linje) eller hent dem »Fra appen«.
+« {w} » n’est dans aucun de ces textes. ¦ „{w}“ není v žádném z těchto textů. ¦ ”{w}” finns inte i någon av dessa texter. ¦ »{w}« står ikke i nogen af disse tekster.
+… {n} autres ¦ … {n} dalších ¦ … {n} andra ¦ … {n} andre
+Trop de branches : baisse la profondeur ou le nombre de branches (Réglages). ¦ Příliš mnoho větví: sniž hloubku nebo počet větví (Nastavení). ¦ För många grenar: minska djupet eller antalet grenar (Inställningar). ¦ For mange grene: sænk dybden eller antallet af grene (Indstillinger).
+« {w} » : {n} fois ¦ „{w}“: {n}× ¦ ”{w}”: {n} gånger ¦ »{w}«: {n} gange
+Arbre de mots : « {w} » trouvé {n} fois dans {t}. ¦ Strom slov: „{w}“ nalezeno {n}× v {t}. ¦ Ordträd: ”{w}” hittat {n} gånger i {t}. ¦ Ordtræ: »{w}« fundet {n} gange i {t}.
+Ce qui suit « {w} » dans les actes ¦ Co následuje po „{w}“ v záznamech ¦ Det som följer på ”{w}” i akterna ¦ Det, der følger efter »{w}« i akterne
+{n} lignes prises dans l’arbre : tu peux les corriger dans l’onglet Données. ¦ {n} řádků převzato ze stromu: můžeš je opravit na kartě Data. ¦ {n} rader hämtade från trädet: du kan rätta dem på fliken Data. ¦ {n} rækker hentet fra træet: du kan rette dem under fanen Data.
+🗓️ Les recensements de mon arbre ¦ 🗓️ Sčítání v mém stromu ¦ 🗓️ Folkräkningarna i mitt träd ¦ 🗓️ Folketællingerne i mit træ
+Une ligne par personne, une case par recensement : ce qui est relevé sur les fiches (trouvé, non trouvé…), et « à chercher » pour le reste. Sans groupe choisi : tes ancêtres. ¦ Jeden řádek na osobu, jedno pole na sčítání: co je zapsáno na kartách (nalezeno, nenalezeno…), a „hledat“ pro zbytek. Bez zvolené skupiny: tvoji předkové. ¦ En rad per person, en ruta per folkräkning: det som står på personkorten (hittad, ej hittad…) och ”att söka” för resten. Utan vald grupp: dina anor. ¦ Én række pr. person, én celle pr. tælling: det, der står på personsiderne (fundet, ikke fundet…), og »at søge« for resten. Uden valgt gruppe: dine aner.
+Du recensement de ¦ Od sčítání ¦ Från folkräkningen ¦ Fra tællingen
+à celui de ¦ do sčítání ¦ till den ¦ til den
+Les recensements de {n} ¦ Sčítání: {n} ¦ Folkräkningar för {n} ¦ Folketællinger for {n}
+Personne dans ce groupe ne vivait entre ces deux recensements (il faut au moins une date de naissance ou de décès). ¦ Nikdo z této skupiny nežil mezi těmito sčítáními (je třeba aspoň datum narození nebo úmrtí). ¦ Ingen i gruppen levde mellan dessa folkräkningar (minst ett födelse- eller dödsdatum behövs). ¦ Ingen i gruppen levede mellem disse to tællinger (mindst en fødsels- eller dødsdato kræves).
+{n} sur {t} prises (les premières) : change « Au plus » pour en voir davantage. ¦ Převzato {n} z {t} (první): změň „Nejvýše“, abys viděl víc. ¦ {n} av {t} hämtade (de första): ändra ”Högst” för att se fler. ¦ {n} af {t} hentet (de første): ret »Højst« for at se flere.
+⚖️ Un dossier de preuve ou une hypothèse ¦ ⚖️ Spis důkazu nebo hypotéza ¦ ⚖️ En bevisakt eller en hypotes ¦ ⚖️ En bevissag eller en hypotese
+Choisis un dossier : sa question, ses indices pour et contre, ses recherches et ses conflits, sa conclusion. Une hypothèse à comparer donne une colonne par réponse possible. ¦ Vyber spis: jeho otázku, indicie pro a proti, pátrání a rozpory, závěr. Hypotéza k porovnání dá jeden sloupec na každou možnou odpověď. ¦ Välj en akt: frågan, ledtrådar för och emot, sökningar och konflikter, slutsatsen. En hypotes att jämföra ger en kolumn per möjligt svar. ¦ Vælg en sag: spørgsmålet, spor for og imod, søgninger og konflikter, konklusionen. En hypotese at sammenligne giver én kolonne pr. muligt svar.
+Le dossier ¦ Spis ¦ Akten ¦ Sagen
+Choisis d’abord un dossier. ¦ Nejprve vyber spis. ¦ Välj först en akt. ¦ Vælg først en sag.
+Schéma de preuve ¦ Schéma důkazu ¦ Bevisschema ¦ Bevisdiagram
+Ce dossier n’a encore aucune ligne : ajoute des indices dans le dossier, ou ici à la main. ¦ Spis zatím nemá žádné řádky: přidej indicie do spisu, nebo sem ručně. ¦ Akten har inga rader än: lägg till ledtrådar i akten eller här för hand. ¦ Sagen har ingen rækker endnu: tilføj spor i sagen eller her i hånden.
+Prendre ce dossier ¦ Vzít tento spis ¦ Hämta den här akten ¦ Hent denne sag
+🌿 Les mots de mes transcriptions ¦ 🌿 Slova z mých přepisů ¦ 🌿 Orden i mina transkriptioner ¦ 🌿 Ordene i mine transskriptioner
+Les transcriptions des actes (atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris. ¦ Přepisy záznamů (dílna přepisů) a médií: co následuje po výchozím slově (nebo mu předchází). Berou se jen užitečné kousky vět. ¦ Transkriptioner av akter (transkriptionsverkstaden) och media: det som följer på (eller föregår) startordet. Bara de användbara meningsdelarna tas. ¦ Transskriptioner af akter (transskriptionsværkstedet) og medier: det, der følger efter (eller går forud for) startordet. Kun de nyttige sætningsstumper tages.
+Le mot de départ ¦ Výchozí slovo ¦ Startordet ¦ Startordet
+Ce qui suit ¦ Co následuje ¦ Det som följer ¦ Det, der følger
+Ce qui précède ¦ Co předchází ¦ Det som föregår ¦ Det, der går forud
+Commune (dans le lieu ou le titre de l’acte) ¦ Obec (v místě nebo názvu záznamu) ¦ Kommun (i platsen eller aktens titel) ¦ Kommune (i stedet eller aktens titel)
+Actes pris ¦ Brané záznamy ¦ Akter som tas ¦ Akter der tages
+Actes notariés ¦ Notářské listiny ¦ Notarialhandlingar ¦ Notarielle dokumenter
+Militaires ¦ Vojenské ¦ Militära ¦ Militære
+Lettres ¦ Dopisy ¦ Brev ¦ Breve
+Transcriptions des médias ¦ Přepisy médií ¦ Mediers transkriptioner ¦ Mediers transskriptioner
+Écris le mot de départ (par exemple « fils de »). ¦ Napiš výchozí slovo (například „fils de“). ¦ Skriv startordet (till exempel ”fils de”). ¦ Skriv startordet (for eksempel »fils de«).
+Coche au moins une sorte d’acte. ¦ Zaškrtni aspoň jeden druh záznamu. ¦ Kryssa i minst en sorts akt. ¦ Sæt flueben ved mindst én slags akt.
+Ce qui précède « {w} » dans les actes ¦ Co předchází „{w}“ v záznamech ¦ Det som föregår ”{w}” i akterna ¦ Det, der går forud for »{w}« i akterne
+« {w} » n’est dans aucune transcription de ce choix ({n} lues). ¦ „{w}“ není v žádném přepisu tohoto výběru (přečteno: {n}). ¦ ”{w}” finns inte i någon transkription i urvalet ({n} lästa). ¦ »{w}« står ikke i nogen transskription i dette valg ({n} læst).
+« {w} » : {n} fois, dans {a}. ¦ „{w}“: {n}×, v: {a}. ¦ ”{w}”: {n} gånger, i {a}. ¦ »{w}«: {n} gange, i {a}.
+Dossier sans question ¦ Spis bez otázky ¦ Akt utan fråga ¦ Sag uden spørgsmål
+Aucun dossier pour ce groupe de personnes ¦ Pro tuto skupinu osob není žádný spis ¦ Ingen akt för den här gruppen ¦ Ingen sag for denne gruppe personer
+Ferme l’éditeur, puis clique sur la case pour ouvrir la fiche (bloc « Recensements »). ¦ Zavři editor a klikni na pole, otevře se karta (blok „Sčítání“). ¦ Stäng redigeraren och klicka sedan på rutan för att öppna personkortet (blocket ”Folkräkningar”). ¦ Luk editoren, og klik så på cellen for at åbne personsiden (blokken »Folketællinger«).
+Recensement {yr} : dans le bloc « Recensements » de la fiche. ¦ Sčítání {yr}: v bloku „Sčítání“ na kartě. ¦ Folkräkning {yr}: i blocket ”Folkräkningar” på personkortet. ¦ Folketælling {yr}: i blokken »Folketællinger« på personsiden.
+Grille des recensements (personnes × années) ¦ Mřížka sčítání (osoby × roky) ¦ Folkräkningsrutnät (personer × år) ¦ Tællingsgitter (personer × år)
+Ma recherche ¦ Můj výzkum ¦ Min forskning ¦ Min forskning
+Une ligne par personne, une colonne par recensement : ce qui est trouvé, pas trouvé, et ce qui reste à chercher. ¦ Jeden řádek na osobu, jeden sloupec na sčítání: co je nalezeno, nenalezeno a co zbývá hledat. ¦ En rad per person, en kolumn per folkräkning: det som hittats, inte hittats och det som återstår att söka. ¦ Én række pr. person, én kolonne pr. tælling: det fundne, det ikke fundne og det, der mangler at blive søgt.
+Les personnes (une ligne sans année : naissance, décès) et leurs recensements (une ligne par année) ¦ Osoby (řádek bez roku: narození, úmrtí) a jejich sčítání (jeden řádek na rok) ¦ Personerna (en rad utan år: födelse, död) och deras folkräkningar (en rad per år) ¦ Personerne (en række uden år: fødsel, død) og deres tællinger (én række pr. år)
+Naissance (année) ¦ Narození (rok) ¦ Födelse (år) ¦ Fødsel (år)
+Décès (année) ¦ Úmrtí (rok) ¦ Död (år) ¦ Død (år)
+Recensement (année) ¦ Sčítání (rok) ¦ Folkräkning (år) ¦ Folketælling (år)
+Note (lieu, adresse…) ¦ Poznámka (místo, adresa…) ¦ Anteckning (plats, adress…) ¦ Note (sted, adresse…)
+Grille (une case par recensement) ¦ Mřížka (jedno pole na sčítání) ¦ Rutnät (en ruta per folkräkning) ¦ Gitter (én celle pr. tælling)
+Liste de travail à imprimer (ce qui reste à chercher) ¦ Pracovní seznam k tisku (co zbývá hledat) ¦ Arbetslista att skriva ut (det som återstår att söka) ¦ Arbejdsliste til udskrift (det, der mangler at blive søgt)
+À celui de ¦ Do sčítání ¦ Till den ¦ Til den
+Ou mes années (ex. 1846, 1851, 1872) ¦ Nebo moje roky (např. 1846, 1851, 1872) ¦ Eller mina år (t.ex. 1846, 1851, 1872) ¦ Eller mine år (fx 1846, 1851, 1872)
+Personnes montrées ¦ Zobrazené osoby ¦ Visade personer ¦ Viste personer
+Seulement celles qui ont encore un recensement à chercher ¦ Jen ty, které mají ještě co hledat ¦ Bara de som har en folkräkning kvar att söka ¦ Kun dem, der stadig har en tælling at søge
+Le plus à chercher d’abord ¦ Nejvíc k hledání nejdřív ¦ Mest att söka först ¦ Mest at søge først
+Par naissance ¦ Podle narození ¦ Efter födelse ¦ Efter fødsel
+Par nom ¦ Podle jména ¦ Efter namn ¦ Efter navn
+Couleur « Trouvé » ¦ Barva „Nalezeno“ ¦ Färg ”Hittad” ¦ Farve »Fundet«
+Couleur « Non trouvé » ¦ Barva „Nenalezeno“ ¦ Färg ”Ej hittad” ¦ Farve »Ikke fundet«
+Couleur « À chercher » ¦ Barva „Hledat“ ¦ Färg ”Att söka” ¦ Farve »At søge«
+Couleur « Hors de France » ¦ Barva „Mimo Francii“ ¦ Färg ”Utanför Frankrike” ¦ Farve »Uden for Frankrig«
+Couleur « Pas né / déjà décédé » ¦ Barva „Nenarozen / už zemřel“ ¦ Färg ”Inte född / redan död” ¦ Farve »Ikke født / allerede død«
+Écart entre les cases ¦ Mezera mezi poli ¦ Avstånd mellan rutorna ¦ Afstand mellem cellerne
+Signes dans les cases (✓ ✗ ?) ¦ Značky v polích (✓ ✗ ?) ¦ Tecken i rutorna (✓ ✗ ?) ¦ Tegn i cellerne (✓ ✗ ?)
+Années de vie à côté du nom ¦ Roky života vedle jména ¦ Levnadsår bredvid namnet ¦ Leveår ved siden af navnet
+Schéma de preuve (question, indices pour et contre, conclusion) ¦ Schéma důkazu (otázka, indicie pro a proti, závěr) ¦ Bevisschema (fråga, ledtrådar för och emot, slutsats) ¦ Bevisdiagram (spørgsmål, spor for og imod, konklusion)
+La question en haut, les indices pour et contre (avec leur poids et leur source), les recherches et les conflits, puis la conclusion et sa certitude. ¦ Nahoře otázka, indicie pro a proti (s váhou a zdrojem), pátrání a rozpory, pak závěr a jeho jistota. ¦ Frågan högst upp, ledtrådarna för och emot (med vikt och källa), sökningar och konflikter, sedan slutsatsen och dess säkerhet. ¦ Spørgsmålet øverst, sporene for og imod (med vægt og kilde), søgninger og konflikter, derefter konklusionen og dens sikkerhed.
+Les lignes du dossier (pour, contre, recherche, conflit ; « réponse » pour une hypothèse à plusieurs réponses) ¦ Řádky spisu (pro, proti, pátrání, rozpor; „odpověď“ pro hypotézu s více odpověďmi) ¦ Aktens rader (för, emot, sökning, konflikt; ”svar” för en hypotes med flera svar) ¦ Sagens rækker (for, imod, søgning, konflikt; »svar« for en hypotese med flere svar)
+Indice (ou réponse) ¦ Indicie (nebo odpověď) ¦ Ledtråd (eller svar) ¦ Spor (eller svar)
+Poids (1 à 3) ¦ Váha (1 až 3) ¦ Vikt (1 till 3) ¦ Vægt (1 til 3)
+Pour la réponse… (hypothèse) ¦ Pro odpověď… (hypotéza) ¦ För svaret… (hypotes) ¦ For svaret… (hypotese)
+Note (résolution d’un conflit) ¦ Poznámka (vyřešení rozporu) ¦ Anteckning (lösning av en konflikt) ¦ Note (løsning af en konflikt)
+La conclusion ¦ Závěr ¦ Slutsatsen ¦ Konklusionen
+Montrer les recherches et les conflits (ce qui reste à chercher) ¦ Zobrazit pátrání a rozpory (co zbývá hledat) ¦ Visa sökningar och konflikter (det som återstår att söka) ¦ Vis søgninger og konflikter (det, der mangler at blive søgt)
+Couleur « confirme » ¦ Barva „potvrzuje“ ¦ Färg ”bekräftar” ¦ Farve »bekræfter«
+Couleur « contredit » ¦ Barva „odporuje“ ¦ Färg ”motsäger” ¦ Farve »modsiger«
+Couleur des recherches ¦ Barva pátrání ¦ Färg för sökningar ¦ Farve for søgninger
+Couleur des conflits ¦ Barva rozporů ¦ Färg för konflikter ¦ Farve for konflikter
+Couleur des réponses ¦ Barva odpovědí ¦ Färg för svar ¦ Farve for svar
+Couleur de la question ¦ Barva otázky ¦ Färg för frågan ¦ Farve for spørgsmålet
+Arbre de mots des actes (ce qui suit « fils de »…) ¦ Strom slov ze záznamů (co následuje po „fils de“…) ¦ Ordträd ur akterna (det som följer på ”fils de”…) ¦ Ordtræ fra akterne (det, der følger efter »fils de«…)
+Un mot de départ à gauche ; à droite, les mots qui le suivent dans les actes, plus gros quand ils reviennent souvent. ¦ Výchozí slovo vlevo; vpravo slova, která po něm v záznamech následují, větší, když se opakují často. ¦ Ett startord till vänster; till höger orden som följer i akterna, större när de återkommer ofta. ¦ Et startord til venstre; til højre ordene, der følger i akterne, større når de går igen ofte.
+Les textes (une transcription ou un bout de phrase par ligne) ¦ Texty (jeden přepis nebo kus věty na řádek) ¦ Texterna (en transkription eller meningsdel per rad) ¦ Teksterne (én transskription eller sætningsdel pr. række)
+Acte ou source ¦ Záznam nebo zdroj ¦ Akt eller källa ¦ Akt eller kilde
+Le mot de départ (ex. fils de, veuve de) ¦ Výchozí slovo (např. fils de, veuve de) ¦ Startordet (t.ex. fils de, veuve de) ¦ Startordet (fx fils de, veuve de)
+Profondeur (mots) ¦ Hloubka (slova) ¦ Djup (ord) ¦ Dybde (ord)
+Branches par mot ¦ Větví na slovo ¦ Grenar per ord ¦ Grene pr. ord
+Seulement les mots vus au moins ¦ Jen slova viděná nejméně ¦ Bara ord som setts minst ¦ Kun ord set mindst
+Le reste dans « … autres » ¦ Zbytek v „… dalších“ ¦ Resten i ”… andra” ¦ Resten i »… andre«
+Écrire le nombre de fois ¦ Psát počet výskytů ¦ Skriv antal gånger ¦ Skriv antal gange
+Sans tenir compte des capitales ni des accents ¦ Bez ohledu na velká písmena a diakritiku ¦ Utan hänsyn till versaler och accenter ¦ Uden hensyn til store bogstaver og accenter
+Seulement les actes de (lieu) ¦ Jen záznamy z (místo) ¦ Bara akter från (plats) ¦ Kun akter fra (sted)
+Couleur des mots ¦ Barva slov ¦ Färg på orden ¦ Farve på ordene
+Couleur du mot de départ ¦ Barva výchozího slova ¦ Färg på startordet ¦ Farve på startordet
+⭕ En une journée ¦ ⭕ Za jeden den ¦ ⭕ På en dag ¦ ⭕ På en dag
+Lieu de départ ¦ Místo odjezdu ¦ Startplats ¦ Startsted
+Montrer les lieux de la famille ¦ Zobrazit místa rodiny ¦ Visa familjens platser ¦ Vis familiens steder
+Ce qu’on atteignait en une journée ¦ Kam se došlo za jeden den ¦ Det man nådde på en dag ¦ Det, man nåede på en dag
+Choisis le lieu de départ ¦ Vyber místo odjezdu ¦ Välj startplatsen ¦ Vælg startstedet
+Ce lieu n’a pas de position sur la carte : place-le d’abord. ¦ Toto místo nemá polohu na mapě: nejdřív ho umísti. ¦ Platsen saknar position på kartan: placera den först. ¦ Stedet har ingen position på kortet: placér det først.
+Coche au moins un moyen de voyager ¦ Zaškrtni aspoň jeden způsob cestování ¦ Kryssa i minst ett färdsätt ¦ Sæt flueben ved mindst ét rejsemiddel
+Les fonds de carte ne sont pas chargés. ¦ Podkladové mapy nejsou načteny. ¦ Bakgrundskartorna är inte inlästa. ¦ Baggrundskortene er ikke indlæst.
+Je dessine les cercles… ¦ Kreslím kruhy… ¦ Jag ritar cirklarna… ¦ Jeg tegner cirklerne…
+En {d} jours depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ Za {d} dny z {from}, v roce {year}: vzdušnou čarou asi {list}. ¦ På {d} dagar från {from}, år {year}: fågelvägen ungefär {list}. ¦ På {d} dage fra {from}, i {year}: i fugleflugt cirka {list}.
+En une journée depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ Za jeden den z {from}, v roce {year}: vzdušnou čarou asi {list}. ¦ På en dag från {from}, år {year}: fågelvägen ungefär {list}. ¦ På en dag fra {from}, i {year}: i fugleflugt cirka {list}.
+Rayon (vol d’oiseau) ¦ Poloměr (vzdušnou čarou) ¦ Radie (fågelvägen) ¦ Radius (i fugleflugt)
+Lieux de la famille ¦ Místa rodiny ¦ Familjens platser ¦ Familiens steder
+Le rayon tient compte du détour de la route (réglage « Vitesses et sources »). Un trait pointillé : ce moyen n’existait pas encore cette année-là. ¦ Poloměr počítá s okľukou cesty (nastavení „Rychlosti a zdroje“). Tečkovaně: tento způsob tehdy ještě neexistoval. ¦ Radien tar hänsyn till vägens omväg (inställningen ”Hastigheter och källor”). Prickad linje: färdsättet fanns inte än det året. ¦ Radius tager højde for vejens omvej (indstillingen »Hastigheder og kilder«). Prikket linje: dette rejsemiddel fandtes endnu ikke det år.
+Paroisses (zones autour des églises) ¦ Farnosti (oblasti kolem kostelů) ¦ Socknar (områden runt kyrkorna) ¦ Sogne (områder omkring kirkerne)
+⚠ Paroisses sans position : {list} — choisis-les dans la liste (onglet Données) ou écris « Nom 45.27, 1.77 » ¦ ⚠ Farnosti bez polohy: {list} — vyber je ze seznamu (karta Data) nebo napiš „Název 45.27, 1.77“ ¦ ⚠ Socknar utan position: {list} — välj dem i listan (fliken Data) eller skriv ”Namn 45.27, 1.77” ¦ ⚠ Sogne uden position: {list} — vælg dem på listen (fanen Data) eller skriv »Navn 45.27, 1.77«
+Ajoute des paroisses (une ville de la liste, ou « Depuis l’app ») et leurs chiffres. ¦ Přidej farnosti (obec ze seznamu nebo „Z aplikace“) a jejich čísla. ¦ Lägg till socknar (en ort ur listan eller ”Från appen”) och deras tal. ¦ Tilføj sogne (en by fra listen eller »Fra appen«) og deres tal.
+Zones des paroisses : {n}. ¦ Oblasti farností: {n}. ¦ Sockenområden: {n}. ¦ Sogneområder: {n}.
+Un point à chaque église ¦ Tečka u každého kostela ¦ En prick vid varje kyrka ¦ En prik ved hver kirke
+Limites des départements par-dessus les paroisses ¦ Hranice departementů přes farnosti ¦ Departementsgränser ovanpå socknarna ¦ Departementsgrænser oven på sognene
+Cadrer tout seul sur les paroisses ¦ Automaticky oříznout na farnosti ¦ Anpassa automatiskt efter socknarna ¦ Tilpas automatisk til sognene
+Liens montrés ¦ Zobrazené vazby ¦ Visade kopplingar ¦ Viste forbindelser
+Ceux qui arrivent et ceux qui partent ¦ Příchozí i odchozí ¦ De som kommer och de som lämnar ¦ Dem, der kommer, og dem, der rejser
+Seulement ceux qui arrivent ¦ Jen příchozí ¦ Bara de som kommer ¦ Kun dem, der kommer
+Seulement ceux qui partent ¦ Jen odchozí ¦ Bara de som lämnar ¦ Kun dem, der rejser
+Les liens de {name} ¦ Vazby: {name} ¦ Kopplingarna för {name} ¦ Forbindelserne for {name}
+bleu : conjoints venus ¦ modrá: přišedší manželé ¦ blå: inflyttade makar ¦ blå: tilflyttede ægtefæller
+orange : enfants partis ¦ oranžová: odešlé děti ¦ orange: utflyttade barn ¦ orange: fraflyttede børn
+rouge : émigrés ¦ červená: vystěhovalci ¦ röd: emigranter ¦ rød: emigranter
+Lieux : {list} ¦ Místa: {list} ¦ Platser: {list} ¦ Steder: {list}
+⛪ Au niveau « Paroisses » (Réglages → Niveau de détail) : une zone autour de chaque église, d’après les paroisses d’Ancien Régime de tes lieux ; un lieu sans paroisse compte pour lui-même. ¦ ⛪ Na úrovni „Farnosti“ (Nastavení → Úroveň podrobností): oblast kolem každého kostela podle starých farností tvých míst; místo bez farnosti se počítá samo. ¦ ⛪ På nivån ”Socknar” (Inställningar → Detaljnivå): ett område runt varje kyrka, efter dina platsers gamla socknar; en plats utan socken räknas för sig. ¦ ⛪ På niveauet »Sogne« (Indstillinger → Detaljeniveau): et område omkring hver kirke ud fra dine steders gamle sogne; et sted uden sogn tæller for sig selv.
+✳️ Tous les liens d’un lieu (carte en étoile) ¦ ✳️ Všechny vazby místa (hvězdicová mapa) ¦ ✳️ Alla kopplingar för en plats (stjärnkarta) ¦ ✳️ Alle forbindelser for et sted (stjernekort)
+Le village ¦ Obec ¦ Byn ¦ Landsbyen
+Conjoints venus s’y marier ¦ Manželé, kteří se tam přišli oženit ¦ Makar som kom dit för att gifta sig ¦ Ægtefæller, der kom for at gifte sig der
+Enfants partis (nés ici, morts ou mariés ailleurs) ¦ Odešlé děti (narozené zde, zemřelé nebo oddané jinde) ¦ Utflyttade barn (födda här, döda eller gifta någon annanstans) ¦ Fraflyttede børn (født her, døde eller gift andetsteds)
+Émigrés (morts dans un autre pays) ¦ Vystěhovalci (zemřeli v jiné zemi) ¦ Emigranter (döda i ett annat land) ¦ Emigranter (døde i et andet land)
+Choisis d’abord le village. ¦ Nejprve vyber obec. ¦ Välj först byn. ¦ Vælg først landsbyen.
+Coche au moins une sorte de lien. ¦ Zaškrtni aspoň jeden druh vazby. ¦ Kryssa i minst en sorts koppling. ¦ Sæt flueben ved mindst én slags forbindelse.
+Aucun lien trouvé pour ce lieu (naissance, mariage ou décès ailleurs). ¦ Pro toto místo nenalezena žádná vazba (narození, sňatek nebo úmrtí jinde). ¦ Ingen koppling hittades för platsen (födelse, vigsel eller död någon annanstans). ¦ Ingen forbindelse fundet for stedet (fødsel, vielse eller død andetsteds).
+{n} prises dans l’arbre ({m} lieux rattachés à une paroisse d’Ancien Régime, les autres comptent pour eux-mêmes). ¦ Ze stromu: {n} ({m} míst přiřazeno ke staré farnosti, ostatní se počítají samy). ¦ {n} från trädet ({m} platser kopplade till en gammal socken, de andra räknas för sig). ¦ {n} fra træet ({m} steder knyttet til et gammelt sogn, de andre tæller for sig selv).
+Aucun lieu avec des coordonnées pour ce choix : place d’abord tes lieux sur la carte. ¦ Pro tento výběr není žádné místo se souřadnicemi: nejdřív umísti svá místa na mapu. ¦ Ingen plats med koordinater i urvalet: placera först dina platser på kartan. ¦ Intet sted med koordinater for dette valg: placér først dine steder på kortet.
+sa paroisse ¦ její farnost ¦ dess socken ¦ dens sogn
+leur paroisse ¦ jejich farnost ¦ deras socken ¦ deres sogn
+une paroisse ¦ farnost ¦ en socken ¦ et sogn
+Paroisse sans position : choisis sa commune dans la liste, ou écris « Nom 45.27, 1.77 ». ¦ Farnost bez polohy: vyber její obec ze seznamu nebo napiš „Název 45.27, 1.77“. ¦ Socken utan position: välj dess kommun i listan eller skriv ”Namn 45.27, 1.77”. ¦ Sogn uden position: vælg dets kommune på listen, eller skriv »Navn 45.27, 1.77«.
+Carte en étoile : seulement les liens de ce lieu (vide = tous les flux) ¦ Hvězdicová mapa: jen vazby tohoto místa (prázdné = všechny toky) ¦ Stjärnkarta: bara platsens kopplingar (tomt = alla flöden) ¦ Stjernekort: kun stedets forbindelser (tomt = alle strømme)
+niveau|paroisse ¦ farnost ¦ socken ¦ sogn
+=paroisse ¦ farnost|farnosti|farností ¦ socken|socknar ¦ sogn|sogne

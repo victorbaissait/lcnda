@@ -1,0 +1,232 @@
+fr ¦ el ¦ bg
+# Zone « diagrammes-lot-b » : diagramme de Lexis, ternaire, chandeliers, courbe avec marge, horizon, dendrogramme, durée des générations, couverture des sources, trajectoires de vie, alluvial (heritage-diagram-lot-b.js et réglages de heritage-diagram-plus/vie/famille.js, heritage-diagrams-render.js)
+=vie ¦ ζωή|ζωές ¦ живот|живота
+=période ¦ περίοδος|περίοδοι ¦ период|периода
+Célibataire ¦ Άγαμος/η ¦ Неженен/неомъжена
+Marié(e) ¦ Έγγαμος/η ¦ Женен/омъжена
+Remarié(e) ¦ Ξαναπαντρεμένος/η ¦ Повторно женен/омъжена
+Veuf ou veuve ¦ Χήρος ή χήρα ¦ Вдовец или вдовица
+Divorcé(e) ¦ Διαζευγμένος/η ¦ Разведен/а
+Décédé(e) ¦ Αποβιώσας/ασα ¦ Починал/а
+État civil inconnu ¦ Άγνωστη οικογενειακή κατάσταση ¦ Неизвестно семейно положение
+Métier inconnu ¦ Άγνωστο επάγγελμα ¦ Неизвестна професия
+Pays inconnu ¦ Άγνωστη χώρα ¦ Неизвестна държава
+Autres états ¦ Άλλες καταστάσεις ¦ Други състояния
+Sexe inconnu ¦ Άγνωστο φύλο ¦ Неизвестен пол
+Départ (autre commune) ¦ Αναχώρηση (άλλος δήμος) ¦ Заминаване (друга община)
+Ajoute des personnes : le nom, la naissance et le décès (années ou dates). ¦ Πρόσθεσε άτομα: όνομα, γέννηση και θάνατο (έτη ή ημερομηνίες). ¦ Добави хора: име, раждане и смърт (години или дати).
+Diagramme de Lexis : {n}, de {a} à {b}. ¦ Διάγραμμα Lexis: {n}, από {a} έως {b}. ¦ Диаграма на Лексис: {n}, от {a} до {b}.
+Choléra ¦ Χολέρα ¦ Холера
+Guerre de 1870 ¦ Πόλεμος του 1870 ¦ Войната от 1870 г.
+Grande Guerre ¦ Μεγάλος Πόλεμος ¦ Първата световна война
+📐 Les vies de ma base ¦ 📐 Οι ζωές στη βάση μου ¦ 📐 Животите в моята база
+Chaque vie devient une diagonale, de la naissance (âge 0) au décès ; les mariages, les naissances des enfants et les départs posés dessus. ¦ Κάθε ζωή γίνεται μια διαγώνιος, από τη γέννηση (ηλικία 0) ως τον θάνατο· πάνω της οι γάμοι, οι γεννήσεις παιδιών και οι αναχωρήσεις. ¦ Всеки живот става диагонал от раждането (възраст 0) до смъртта; върху него браковете, ражданията на децата и заминаванията.
+Combien de vies au plus ¦ Πόσες ζωές το πολύ ¦ Колко живота най-много
+Une par nom de famille ¦ Ένα ανά επώνυμο ¦ По един за фамилия
+Naissances des enfants ¦ Γεννήσεις παιδιών ¦ Раждания на децата
+Départs (première commune autre que celle de naissance) ¦ Αναχωρήσεις (πρώτος δήμος εκτός του τόπου γέννησης) ¦ Заминавания (първа община, различна от родната)
+Bandes historiques (guerres, épidémies) ¦ Ιστορικές ζώνες (πόλεμοι, επιδημίες) ¦ Исторически ленти (войни, епидемии)
+Personne avec une date de naissance dans ce groupe. ¦ Κανείς με ημερομηνία γέννησης σε αυτή την ομάδα. ¦ Никой в тази група няма дата на раждане.
+Diagramme de Lexis ¦ Διάγραμμα Lexis ¦ Диаграма на Лексис
+Diagramme de Lexis (âge × année : une vie = une diagonale) ¦ Διάγραμμα Lexis (ηλικία × έτος: μία ζωή = μία διαγώνιος) ¦ Диаграма на Лексис (възраст × година: един живот = един диагонал)
+Les années en bas, les âges à gauche : chaque vie monte en diagonale de sa naissance à son décès ; les mariages, les enfants, les départs et les grandes crises s’y lisent d’un coup d’œil. ¦ Κάτω τα έτη, αριστερά οι ηλικίες: κάθε ζωή ανεβαίνει διαγώνια από τη γέννηση ως τον θάνατο· γάμοι, παιδιά, αναχωρήσεις και μεγάλες κρίσεις φαίνονται με μια ματιά. ¦ Долу годините, вляво възрастта: всеки живот се изкачва по диагонал от раждането до смъртта; браковете, децата, заминаванията и големите кризи се виждат веднага.
+Les vies ¦ Οι ζωές ¦ Животите
+Les vies de la famille {name} ¦ Οι ζωές της οικογένειας {name} ¦ Животите на семейство {name}
+Personne (même nom que ci-dessus) ¦ Άτομο (ίδιο όνομα με παραπάνω) ¦ Лице (същото име като горе)
+Les marques (sur la vie de la personne) ¦ Σημάδια (στη ζωή του ατόμου) ¦ Отметки (върху живота на лицето)
+Bandes historiques ¦ Ιστορικές ζώνες ¦ Исторически ленти
+Groupe (couleur) ¦ Ομάδα (χρώμα) ¦ Група (цвят)
+Couleur de chaque groupe (facultatif) ¦ Χρώμα κάθε ομάδας (προαιρετικό) ¦ Цвят на всяка група (по избор)
+Âge au plus ¦ Ηλικία το πολύ ¦ Възраст най-много
+Couleur des vies ¦ Χρώμα των ζωών ¦ Цвят на животите
+Homme / femme ¦ Άνδρας / γυναίκα ¦ Мъж / жена
+Montrer les marques ¦ Εμφάνιση σημαδιών ¦ Показване на отметките
+Taille des marques ¦ Μέγεθος σημαδιών ¦ Размер на отметките
+Nom des bandes ¦ Ονόματα ζωνών ¦ Имена на лентите
+Diagonales des générations ¦ Διαγώνιοι γενεών ¦ Диагонали на поколенията
+Nom au bout de chaque vie ¦ Όνομα στο τέλος κάθε ζωής ¦ Име в края на всеки живот
+Épaisseur des vies ¦ Πάχος των ζωών ¦ Дебелина на животите
+Ajoute des points : un nom et ses trois parts (des nombres ou des %). ¦ Πρόσθεσε σημεία: ένα όνομα και τα τρία μέρη του (αριθμοί ή %). ¦ Добави точки: име и трите му дяла (числа или %).
+Part A ¦ Μέρος Α ¦ Дял A
+Part B ¦ Μέρος Β ¦ Дял B
+Part C ¦ Μέρος Γ ¦ Дял C
+Diagramme ternaire : {n} ({a}, {b}, {c}). ¦ Τριαδικό διάγραμμα: {n} ({a}, {b}, {c}). ¦ Триъгълна диаграма: {n} ({a}, {b}, {c}).
+Agriculture ¦ Γεωργία ¦ Земеделие
+Artisanat et industrie ¦ Βιοτεχνία και βιομηχανία ¦ Занаяти и промишленост
+Commerce et services ¦ Εμπόριο και υπηρεσίες ¦ Търговия и услуги
+Agriculture et forêt ¦ Γεωργία και δάση ¦ Земеделие и горско стопанство
+Artisanat ¦ Βιοτεχνία ¦ Занаяти
+Industrie, mines ¦ Βιομηχανία, ορυχεία ¦ Промишленост, мини
+Transports et mer ¦ Μεταφορές και θάλασσα ¦ Транспорт и море
+Services, domestiques ¦ Υπηρεσίες, υπηρέτες ¦ Услуги, прислуга
+Armée et police ¦ Στρατός και αστυνομία ¦ Армия и полиция
+Clergé ¦ Κλήρος ¦ Духовенство
+Professions libérales, école, administration ¦ Ελεύθερα επαγγέλματα, σχολείο, διοίκηση ¦ Свободни професии, училище, администрация
+Rentiers, rangs et statuts ¦ Εισοδηματίες, τάξεις και ιδιότητες ¦ Рентиери, съсловия и звания
+Au foyer, sans profession ¦ Οικιακά, χωρίς επάγγελμα ¦ Домакинство, без професия
+Autre métier ¦ Άλλο επάγγελμα ¦ Друга професия
+Tous les autres métiers ¦ Όλα τα άλλα επαγγέλματα ¦ Всички други професии
+🔺 Les métiers de ma base ¦ 🔺 Τα επαγγέλματα στη βάση μου ¦ 🔺 Професиите в моята база
+Les métiers (fiche, événements « Profession », recensements) rangés en grands secteurs ; un point par commune de naissance, par décennie ou par famille, placé selon ses trois parts. ¦ Τα επαγγέλματα (καρτέλα, γεγονότα «Επάγγελμα», απογραφές) σε μεγάλους τομείς· ένα σημείο ανά τόπο γέννησης, δεκαετία ή οικογένεια, τοποθετημένο κατά τα τρία μέρη του. ¦ Професиите (карта, събития „Професия“, преброявания) по големи сектори; една точка на родно място, десетилетие или семейство, поставена според трите си дяла.
+Un point par ¦ Ένα σημείο ανά ¦ По една точка на
+Décennie de naissance (reliées dans le temps) ¦ Δεκαετία γέννησης (συνδεδεμένες στον χρόνο) ¦ Десетилетие на раждане (свързани във времето)
+Combien de points au plus ¦ Πόσα σημεία το πολύ ¦ Колко точки най-много
+Part du haut ¦ Πάνω μέρος ¦ Горен дял
+Part de gauche ¦ Αριστερό μέρος ¦ Ляв дял
+Part de droite ¦ Δεξί μέρος ¦ Десен дял
+« Tous les autres métiers » ne peut servir qu’une fois. ¦ Το «Όλα τα άλλα επαγγέλματα» χρησιμοποιείται μόνο μία φορά. ¦ „Всички други професии“ може да се ползва само веднъж.
+Décennies ¦ Δεκαετίες ¦ Десетилетия
+Aucun métier connu pour ces personnes. ¦ Κανένα γνωστό επάγγελμα για αυτά τα άτομα. ¦ Няма известна професия за тези хора.
+Les métiers de ma base, en trois parts ¦ Τα επαγγέλματα της βάσης μου, σε τρία μέρη ¦ Професиите в моята база, в три дяла
+Les métiers de trois villages, siècle par siècle ¦ Τα επαγγέλματα τριών χωριών, αιώνα με τον αιώνα ¦ Професиите в три села, век след век
+Diagramme ternaire (trois parts qui font 100 %) ¦ Τριαδικό διάγραμμα (τρία μέρη που κάνουν 100 %) ¦ Триъгълна диаграма (три дяла, общо 100 %)
+Parts ¦ Μέρη ¦ Дялове
+Un triangle : chaque point a trois parts (par exemple agriculture, artisanat, commerce) ; plus il est près d’un coin, plus cette part est grande. ¦ Ένα τρίγωνο: κάθε σημείο έχει τρία μέρη (π.χ. γεωργία, βιοτεχνία, εμπόριο)· όσο πιο κοντά σε μια γωνία, τόσο μεγαλύτερο εκείνο το μέρος. ¦ Триъгълник: всяка точка има три дяла (напр. земеделие, занаяти, търговия); колкото по-близо до ъгъл, толкова по-голям е този дял.
+Les points (trois parts chacun) ¦ Τα σημεία (τρία μέρη το καθένα) ¦ Точките (по три дяла)
+Groupe (couleur, points reliés) ¦ Ομάδα (χρώμα, συνδεδεμένα σημεία) ¦ Група (цвят, свързани точки)
+Ordre (année…) ¦ Σειρά (έτος…) ¦ Ред (година…)
+Nom de la part du haut ¦ Όνομα πάνω μέρους ¦ Име на горния дял
+Nom de la part de gauche ¦ Όνομα αριστερού μέρους ¦ Име на левия дял
+Nom de la part de droite ¦ Όνομα δεξιού μέρους ¦ Име на десния дял
+Couleur du haut ¦ Χρώμα πάνω ¦ Цвят горе
+Couleur de gauche ¦ Χρώμα αριστερά ¦ Цвят вляво
+Couleur de droite ¦ Χρώμα δεξιά ¦ Цвят вдясно
+Tous les 10 % ¦ Ανά 10 % ¦ През 10 %
+Tous les 20 % ¦ Ανά 20 % ¦ През 20 %
+Sans grille ¦ Χωρίς πλέγμα ¦ Без мрежа
+Une par point ¦ Ένα ανά σημείο ¦ По един за точка
+Selon le total ¦ Ανάλογα με το σύνολο ¦ Според сбора
+Relier les points d’un groupe dans l’ordre ¦ Σύνδεση των σημείων μιας ομάδας με τη σειρά ¦ Свързване на точките на група поред
+Noms des points ¦ Ονόματα σημείων ¦ Имена на точките
+Ajoute des périodes : la date, le prix d’ouverture, de clôture, le plus bas et le plus haut. ¦ Πρόσθεσε περιόδους: ημερομηνία, τιμή ανοίγματος, κλεισίματος, χαμηλότερη και υψηλότερη. ¦ Добави периоди: дата, цена при отваряне, при затваряне, най-ниска и най-висока.
+ouverture ¦ άνοιγμα ¦ отваряне
+clôture ¦ κλείσιμο ¦ затваряне
+plus bas ¦ χαμηλότερη ¦ най-ниска
+plus haut ¦ υψηλότερη ¦ най-висока
+Hausse (clôture plus haute) ¦ Άνοδος (υψηλότερο κλείσιμο) ¦ Ръст (по-високо затваряне)
+Baisse (clôture plus basse) ¦ Πτώση (χαμηλότερο κλείσιμο) ¦ Спад (по-ниско затваряне)
+Moyenne mobile sur {n} périodes ¦ Κινητός μέσος όρος {n} περιόδων ¦ Плъзгаща средна за {n} периода
+Chandeliers : {n}, de {a} à {b} ({p} %). ¦ Κεριά: {n}, από {a} έως {b} ({p} %). ¦ Свещи: {n}, от {a} до {b} ({p} %).
+Prix du setier de blé au marché de {name} ¦ Τιμή του μέτρου σιταριού στην αγορά του {name} ¦ Цена на мярка жито на пазара в {name}
+Disette ¦ Λειψία ¦ Недоимък
+Guerre des farines ¦ Πόλεμος του αλευριού ¦ Брашнената война
+Chandeliers (prix du blé, mercuriales) ¦ Κεριά (τιμή σιταριού, τιμές αγοράς) ¦ Свещи (цена на житото, пазарни цени)
+Pour chaque période : le prix au début (ouverture), à la fin (clôture), le plus bas et le plus haut. Vert si le prix monte, rouge s’il baisse ; les années de disette en bandes. ¦ Για κάθε περίοδο: η τιμή στην αρχή (άνοιγμα), στο τέλος (κλείσιμο), η χαμηλότερη και η υψηλότερη. Πράσινο αν ανεβαίνει, κόκκινο αν πέφτει· τα χρόνια λειψίας σε ζώνες. ¦ За всеки период: цената в началото, в края, най-ниската и най-високата. Зелено, ако расте, червено, ако пада; годините на недоимък като ленти.
+Les périodes (date, ouverture, clôture, plus bas, plus haut) ¦ Οι περίοδοι (ημερομηνία, άνοιγμα, κλείσιμο, χαμηλότερη, υψηλότερη) ¦ Периодите (дата, отваряне, затваряне, най-ниска, най-висока)
+Date ou période ¦ Ημερομηνία ή περίοδος ¦ Дата или период
+Plus bas ¦ Χαμηλότερη ¦ Най-ниска
+Plus haut ¦ Υψηλότερη ¦ Най-висока
+Les années à part (disette, guerre…) ¦ Ξεχωριστά έτη (λειψία, πόλεμος…) ¦ Особени години (недоимък, война…)
+Autre unité (écrite) ¦ Άλλη μονάδα (γραπτή) ¦ Друга единица (изписана)
+livres ¦ λίβρες ¦ ливри
+sols ¦ σολ ¦ солове
+deniers ¦ δηνάρια ¦ дение
+Couleur de la hausse ¦ Χρώμα ανόδου ¦ Цвят на ръста
+Couleur de la baisse ¦ Χρώμα πτώσης ¦ Цвят на спада
+Hausse en creux (bougie vide) ¦ Άνοδος κούφια (άδειο κερί) ¦ Ръст кух (празна свещ)
+Moyenne mobile (périodes, 0 = non) ¦ Κινητός μέσος (περίοδοι, 0 = όχι) ¦ Плъзгаща средна (периоди, 0 = не)
+Couleur de la moyenne ¦ Χρώμα μέσου όρου ¦ Цвят на средната
+Années à part en bandes ¦ Ξεχωριστά έτη σε ζώνες ¦ Особени години като ленти
+Largeur des bougies ¦ Πλάτος κεριών ¦ Ширина на свещите
+Âge au premier mariage ¦ Ηλικία στον πρώτο γάμο ¦ Възраст при първия брак
+Âge au premier enfant ¦ Ηλικία στο πρώτο παιδί ¦ Възраст при първото дете
+± un écart-type ¦ ± μία τυπική απόκλιση ¦ ± едно стандартно отклонение
+intervalle à 95 % ¦ διάστημα 95 % ¦ интервал 95 %
+mes ancêtres ¦ οι πρόγονοί μου ¦ моите предци
+📏 Moyenne et marge : {x} ¦ 📏 Μέσος όρος και περιθώριο: {x} ¦ 📏 Средна и граница: {x}
+Pas assez de personnes datées (au moins 3 par période). ¦ Δεν υπάρχουν αρκετά άτομα με ημερομηνίες (τουλάχιστον 3 ανά περίοδο). ¦ Твърде малко хора с дати (поне 3 на период).
+Basse ¦ Χαμηλή ¦ Долна
+Haute ¦ Υψηλή ¦ Горна
+{x} : moyenne et marge ¦ {x}: μέσος όρος και περιθώριο ¦ {x}: средна и граница
+Marge : un écart-type de part et d’autre, par quart de siècle de naissance ¦ Περιθώριο: μία τυπική απόκλιση προς κάθε πλευρά, ανά τέταρτο αιώνα γέννησης ¦ Граница: едно стандартно отклонение от двете страни, по четвърт век на раждане
+Marge : intervalle de confiance à 95 % de la moyenne, par quart de siècle de naissance ¦ Περιθώριο: διάστημα εμπιστοσύνης 95 % του μέσου όρου, ανά τέταρτο αιώνα γέννησης ¦ Граница: 95 % доверителен интервал на средната, по четвърт век на раждане
+Marge (basse – haute) ¦ Περιθώριο (χαμηλό – υψηλό) ¦ Граница (долна – горна)
+Marge (±) ¦ Περιθώριο (±) ¦ Граница (±)
+Fourchette (marge autour de la courbe) ¦ Εύρος (περιθώριο γύρω από την καμπύλη) ¦ Диапазон (граница около кривата)
+Deux colonnes : basse et haute ¦ Δύο στήλες: χαμηλή και υψηλή ¦ Две колони: долна и горна
+Une colonne ± écart ¦ Μία στήλη ± απόκλιση ¦ Една колона ± отклонение
+Colonne basse (n°) ¦ Χαμηλή στήλη (αρ.) ¦ Долна колона (№)
+Colonne haute (n°) ¦ Υψηλή στήλη (αρ.) ¦ Горна колона (№)
+Colonne de l’écart (n°) ¦ Στήλη απόκλισης (αρ.) ¦ Колона на отклонението (№)
+Autour de la colonne (n°) ¦ Γύρω από τη στήλη (αρ.) ¦ Около колона (№)
+Opacité de la marge ¦ Αδιαφάνεια περιθωρίου ¦ Плътност на границата
+Couleur de la marge ¦ Χρώμα περιθωρίου ¦ Цвят на границата
+Axe : minimum ¦ Άξονας: ελάχιστο ¦ Ос: минимум
+Axe : maximum ¦ Άξονας: μέγιστο ¦ Ос: максимум
+(axe de droite) ¦ (δεξιός άξονας) ¦ (дясна ос)
+Clôture ¦ Κλείσιμο ¦ Затваряне
+{name} : de {a} à {b}, le plus en {peak} ({v}) ¦ {name}: από {a} έως {b}, το μέγιστο στο {peak} ({v}) ¦ {name}: от {a} до {b}, най-много през {peak} ({v})
+Le plus bas ¦ Το χαμηλότερο ¦ Най-ниско
+Le plus haut ¦ Το υψηλότερο ¦ Най-високо
+Négatif (replié) ¦ Αρνητικό (διπλωμένο) ¦ Отрицателно (сгънато)
+Graphique en horizon : {s} séries sur {n} périodes. ¦ Γράφημα ορίζοντα: {s} σειρές σε {n} περιόδους. ¦ Хоризонтна графика: {s} серии за {n} периода.
+Horizon (bandes repliées) ¦ Ορίζοντας (διπλωμένες ζώνες) ¦ Хоризонт (сгънати ленти)
+Collines ¦ Λόφοι ¦ Хълмове
+Nombre de couches ¦ Αριθμός στρωμάτων ¦ Брой слоеве
+Teinte des négatifs ¦ Απόχρωση αρνητικών ¦ Оттенък на отрицателните
+Chevauchement ¦ Επικάλυψη ¦ Припокриване
+Courbes douces ¦ Ομαλές καμπύλες ¦ Плавни криви
+Trait blanc autour ¦ Λευκό περίγραμμα ¦ Бял контур
+Arbre de regroupement à gauche (dendrogramme) ¦ Δέντρο ομαδοποίησης αριστερά (δενδρόγραμμα) ¦ Дърво на групирането вляво (дендрограма)
+Groupes de couleur ¦ Ομάδες χρωμάτων ¦ Цветови групи
+Les branches de l’arbre ¦ Τα κλαδιά του δέντρου ¦ Клоните на дървото
+Cacher les noms des correspondances ¦ Απόκρυψη ονομάτων αντιστοιχιών ¦ Скриване на имената на съвпаденията
+Durée des générations ¦ Διάρκεια γενεών ¦ Продължителност на поколенията
+Durée des générations — {name} ¦ Διάρκεια γενεών — {name} ¦ Продължителност на поколенията — {name}
+Lignée paternelle : une génération = {n} ans en moyenne ¦ Πατρική γραμμή: μία γενιά = κατά μέσο όρο {n} έτη ¦ Бащина линия: едно поколение = средно {n} години
+Lignée maternelle : une génération = {n} ans en moyenne ¦ Μητρική γραμμή: μία γενιά = κατά μέσο όρο {n} έτη ¦ Майчина линия: едно поколение = средно {n} години
+moyenne {n} ans ¦ μέσος όρος {n} έτη ¦ средно {n} години
+Toutes les naissances du groupe ¦ Όλες οι γεννήσεις της ομάδας ¦ Всички раждания в групата
+Seulement la lignée paternelle directe (père du père…) ¦ Μόνο η άμεση πατρική γραμμή (πατέρας του πατέρα…) ¦ Само пряката бащина линия (баща на бащата…)
+Seulement la lignée maternelle directe (mère de la mère…) ¦ Μόνο η άμεση μητρική γραμμή (μητέρα της μητέρας…) ¦ Само пряката майчина линия (майка на майката…)
+Les deux lignées directes ¦ Και οι δύο άμεσες γραμμές ¦ Двете преки линии
+La personne dont on suit les lignées ¦ Το άτομο του οποίου ακολουθούνται οι γραμμές ¦ Лицето, чиито линии се проследяват
+Aucune génération datée dans cette lignée (il faut la naissance de l’enfant et celle du parent). ¦ Καμία χρονολογημένη γενιά σε αυτή τη γραμμή (χρειάζεται η γέννηση του παιδιού και του γονέα). ¦ Няма датирано поколение в тази линия (нужно е раждането на детето и на родителя).
+Génération (lignée) ¦ Γενιά (γραμμή) ¦ Поколение (линия)
+Paternelle ¦ Πατρική ¦ Бащина
+Maternelle ¦ Μητρική ¦ Майчина
+Relier les points d’une lignée ¦ Σύνδεση σημείων μιας γραμμής ¦ Свързване на точките на линия
+Ligne de repère ¦ Γραμμή αναφοράς ¦ Референтна линия
+Les générations (lignées) ¦ Οι γενιές (γραμμές) ¦ Поколенията (линии)
+Pas attendu ¦ Δεν αναμένεται ¦ Не се очаква
+Manquant ¦ Λείπει ¦ Липсва
+Ajoute des ancêtres : le numéro Sosa, le nom et, pour chaque acte, sourcé, sans source ou manquant. ¦ Πρόσθεσε προγόνους: τον αριθμό Sosa, το όνομα και για κάθε πράξη: με πηγή, χωρίς πηγή ή λείπει. ¦ Добави предци: номер по Соса, име и за всеки акт – с източник, без източник или липсва.
+Une ligne par ancêtre ¦ Μία γραμμή ανά πρόγονο ¦ Един ред на предец
+Une ligne par ancêtre (+ recensements, notaire, militaire) ¦ Μία γραμμή ανά πρόγονο (+ απογραφές, συμβολαιογράφος, στρατός) ¦ Един ред на предец (+ преброявания, нотариус, армия)
+Fiches militaires ¦ Στρατιωτικά δελτία ¦ Военни карти
+Colonnes en plus ¦ Επιπλέον στήλες ¦ Допълнителни колони
+Recensement, notaire, militaire ¦ Απογραφή, συμβολαιογράφος, στρατός ¦ Преброяване, нотариус, армия
+Recensement seulement ¦ Μόνο απογραφή ¦ Само преброяване
+Les trous d’abord ¦ Πρώτα τα κενά ¦ Първо празнините
+Par numéro Sosa ¦ Κατά αριθμό Sosa ¦ По номер по Соса
+Ancêtres au plus ¦ Πρόγονοι το πολύ ¦ Предци най-много
+Axe ¦ Άξονας ¦ Ос
+Ce qu’on suit ¦ Τι ακολουθούμε ¦ Какво проследяваме
+L’état civil ¦ Η οικογενειακή κατάσταση ¦ Семейното положение
+L’état civil (célibataire, marié, veuf…) : trajectoires de vie ¦ Οικογενειακή κατάσταση (άγαμος, έγγαμος, χήρος…): πορείες ζωής ¦ Семейно положение (неженен, женен, вдовец…): житейски пътища
+La commune ¦ Ο δήμος ¦ Общината
+Les lieux de vie ¦ Οι τόποι διαμονής ¦ Местата на живот
+Un groupe de personnes (critères) ¦ Μια ομάδα ατόμων (κριτήρια) ¦ Група хора (критерии)
+Trajectoires de vie ¦ Πορείες ζωής ¦ Житейски пътища
+Trajectoires de vie de {n}. ¦ Πορείες ζωής: {n}. ¦ Житейски пътища: {n}.
+Métiers au fil de la vie de {n}. ¦ Επαγγέλματα στη διάρκεια της ζωής: {n}. ¦ Професии през живота: {n}.
+Les métiers au fil de la vie ¦ Τα επαγγέλματα στη διάρκεια της ζωής ¦ Професиите през живота
+Les mêmes personnes à plusieurs âges (20, 40, 60 ans…) ¦ Τα ίδια άτομα σε διάφορες ηλικίες (20, 40, 60…) ¦ Същите хора на няколко възрасти (20, 40, 60…)
+Âges des colonnes ¦ Ηλικίες των στηλών ¦ Възрасти на колоните
+À {n} ans ¦ Στα {n} ¦ На {n} години
+L’état civil des mêmes personnes à {a} ans ¦ Η οικογενειακή κατάσταση των ίδιων ατόμων στα {a} ¦ Семейното положение на същите хора на {a} години
+Où vivaient les mêmes personnes à {a} ans ¦ Πού ζούσαν τα ίδια άτομα στα {a} ¦ Къде са живели същите хора на {a} години
+Le métier des mêmes personnes à {a} ans ¦ Το επάγγελμα των ίδιων ατόμων στα {a} ¦ Професията на същите хора на {a} години
+Le même qu’à l’âge d’avant — {list} ¦ Το ίδιο με την προηγούμενη ηλικία — {list} ¦ Същото като на предишната възраст — {list}
+Les mêmes personnes à {n} âges : {l}. ¦ Τα ίδια άτομα σε {n} ηλικίες: {l}. ¦ Същите хора на {n} възрасти: {l}.
+En % de la colonne (au lieu des nombres) ¦ Σε % της στήλης (αντί για αριθμούς) ¦ В % от колоната (вместо числа)
+État civil (trajectoires de vie) ¦ Οικογενειακή κατάσταση (πορείες ζωής) ¦ Семейно положение (житейски пътища)
+Naissance (pour l’axe des âges) ¦ Γέννηση (για τον άξονα ηλικιών) ¦ Раждане (за оста на възрастта)
+Début (année ou âge, vide = auto) ¦ Αρχή (έτος ή ηλικία, κενό = αυτόματα) ¦ Начало (година или възраст, празно = авто)
+Fin (année ou âge, vide = auto) ¦ Τέλος (έτος ή ηλικία, κενό = αυτόματα) ¦ Край (година или възраст, празно = авто)
+Par durée de vie ¦ Κατά διάρκεια ζωής ¦ По продължителност на живота
+Par état à 50 ans ¦ Κατά κατάσταση στα 50 ¦ По положение на 50 години
+âge (années) ¦ ηλικία (έτη) ¦ възраст (години)
+Vérifie le groupe de personnes et la période. ¦ Έλεγξε την ομάδα ατόμων και την περίοδο. ¦ Провери групата хора и периода.
+{n} pris dans ta base. ¦ {n} από τη βάση σου. ¦ {n} взети от твоята база.
+{n} prises dans ta base. ¦ {n} από τη βάση σου. ¦ {n} взети от твоята база.

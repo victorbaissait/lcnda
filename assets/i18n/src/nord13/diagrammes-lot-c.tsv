@@ -1,0 +1,179 @@
+fr ¦ el ¦ bg
+# Zone « diagrammes-lot-c » : grille des recensements, schéma de preuve, arbre de mots (heritage-diagram-lot-c.js), zones des paroisses et carte en étoile (heritage-diagram-cartes.js), cercles d’une journée (heritage-cartes-outils.js)
+Hors de France ¦ Εκτός Γαλλίας ¦ Извън Франция
+Ajoute des personnes (nom, naissance, décès), puis leurs recensements (année, statut). ¦ Πρόσθεσε πρόσωπα (όνομα, γέννηση, θάνατος) και μετά τις απογραφές τους (έτος, κατάσταση). ¦ Добави хора (име, раждане, смърт), после техните преброявания (година, статус).
+Aucune année de recensement entre ces deux dates. ¦ Κανένα έτος απογραφής ανάμεσα σε αυτές τις ημερομηνίες. ¦ Няма година на преброяване между тези дати.
+Plus rien à chercher : tous les recensements sont trouvés ou sans objet. ¦ Τίποτα άλλο προς αναζήτηση: όλες οι απογραφές βρέθηκαν ή δεν ισχύουν. ¦ Няма какво повече да се търси: всички преброявания са намерени или неприложими.
+à chercher : {list} ¦ προς αναζήτηση: {list} ¦ за търсене: {list}
+non trouvés : {list} ¦ δεν βρέθηκαν: {list} ¦ ненамерени: {list}
+Liste de travail des recensements : {n}. ¦ Λίστα εργασίας απογραφών: {n}. ¦ Работен списък на преброяванията: {n}.
+Grille des recensements : {n}, {y} recensements, {d} sur {t} cherchés. ¦ Πλέγμα απογραφών: {n}, {y} απογραφές, {d} από {t} αναζητήθηκαν. ¦ Мрежа на преброяванията: {n}, {y} преброявания, {d} от {t} търсени.
+Les recensements de la famille {name} ¦ Οι απογραφές της οικογένειας {name} ¦ Преброяванията на семейство {name}
+Contre ¦ Κατά ¦ Против
+Conflit ¦ Σύγκρουση ¦ Противоречие
+Écris la question (Réglages), puis les indices : pour, contre, recherches, conflits. ¦ Γράψε την ερώτηση (Ρυθμίσεις) και μετά τα στοιχεία: υπέρ, κατά, αναζητήσεις, συγκρούσεις. ¦ Напиши въпроса (Настройки), после уликите: за, против, търсения, противоречия.
+Indices contre ¦ Στοιχεία κατά ¦ Улики против
+Recherches et conflits ¦ Αναζητήσεις και συγκρούσεις ¦ Търсения и противоречия
+Résolu : {note} ¦ Επιλύθηκε: {note} ¦ Решено: {note}
+À résoudre ¦ Προς επίλυση ¦ За решаване
+poids {n} sur 3 ¦ βάρος {n} από 3 ¦ тежест {n} от 3
+Pas encore de conclusion ¦ Χωρίς συμπέρασμα ακόμη ¦ Още няма заключение
+Schéma de preuve : {a} pour, {b} contre ; certitude : {c}. ¦ Σχήμα απόδειξης: {a} υπέρ, {b} κατά· βεβαιότητα: {c}. ¦ Схема на доказателството: {a} за, {b} против; сигурност: {c}.
+Antoine MAZAUD est-il le père de Jean MAZAUD (né vers 1818) ? ¦ Είναι ο Antoine MAZAUD πατέρας του Jean MAZAUD (γενν. περ. 1818); ¦ Антоан МАЗО баща ли е на Жан МАЗО (роден ок. 1818)?
+Oui : Antoine MAZAUD est le père de Jean. ¦ Ναι: ο Antoine MAZAUD είναι ο πατέρας του Jean. ¦ Да: Антоан МАЗО е бащата на Жан.
+Acte de mariage de Jean (1842) : « fils d’Antoine MAZAUD, cultivateur » ¦ Πράξη γάμου του Jean (1842): «γιος του Antoine MAZAUD, καλλιεργητή» ¦ Акт за брак на Жан (1842): „син на Антоан МАЗО, земеделец“
+Registre paroissial, original ¦ Ενοριακό μητρώο, πρωτότυπο ¦ Енорийски регистър, оригинал
+Recensement 1836 : Jean, 18 ans, au foyer d’Antoine ¦ Απογραφή 1836: Jean, 18 ετών, στο νοικοκυριό του Antoine ¦ Преброяване 1836: Жан, 18 г., в домакинството на Антоан
+Recensement 1836, original ¦ Απογραφή 1836, πρωτότυπο ¦ Преброяване 1836, оригинал
+Antoine est parrain du premier fils de Jean ¦ Ο Antoine είναι νονός του πρώτου γιου του Jean ¦ Антоан е кръстник на първия син на Жан
+Baptême 1844 ¦ Βάπτιση 1844 ¦ Кръщение 1844
+Un autre Jean MAZAUD, né en 1817 au village voisin ¦ Άλλος Jean MAZAUD, γενν. 1817 στο διπλανό χωριό ¦ Друг Жан МАЗО, роден 1817 в съседното село
+Acte de naissance de Jean : registre lacunaire 1815-1820 ¦ Ληξιαρχική πράξη γέννησης του Jean: ελλιπές μητρώο 1815-1820 ¦ Акт за раждане на Жан: непълен регистър 1815-1820
+Âge au décès : 64 ans (né vers 1820) au lieu de 66 ¦ Ηλικία θανάτου: 64 (γενν. περ. 1820) αντί για 66 ¦ Възраст при смъртта: 64 г. (роден ок. 1820) вместо 66
+Acte de décès 1884 ¦ Ληξιαρχική πράξη θανάτου 1884 ¦ Акт за смърт 1884
+l’âge déclaré au décès est souvent approximatif ¦ η ηλικία που δηλώνεται στον θάνατο είναι συχνά κατά προσέγγιση ¦ възрастта, посочена при смъртта, често е приблизителна
+Écris le mot de départ (Réglages), par exemple « fils de » ou « veuve de ». ¦ Γράψε τη λέξη αφετηρίας (Ρυθμίσεις), π.χ. «fils de» ή «veuve de». ¦ Напиши началната дума (Настройки), например „fils de“ или „veuve de“.
+Colle des transcriptions (une par ligne) ou prends-les « Depuis l’app ». ¦ Επικόλλησε μεταγραφές (μία ανά γραμμή) ή πάρε τις «Από την εφαρμογή». ¦ Постави преписи (по един на ред) или ги вземи „От приложението“.
+« {w} » n’est dans aucun de ces textes. ¦ Το «{w}» δεν υπάρχει σε κανένα από αυτά τα κείμενα. ¦ „{w}“ няма в нито един от тези текстове.
+… {n} autres ¦ … {n} ακόμη ¦ … още {n}
+Trop de branches : baisse la profondeur ou le nombre de branches (Réglages). ¦ Πάρα πολλά κλαδιά: μείωσε το βάθος ή τον αριθμό κλαδιών (Ρυθμίσεις). ¦ Твърде много клони: намали дълбочината или броя клони (Настройки).
+« {w} » : {n} fois ¦ «{w}»: {n} φορές ¦ „{w}“: {n} пъти
+Arbre de mots : « {w} » trouvé {n} fois dans {t}. ¦ Δέντρο λέξεων: το «{w}» βρέθηκε {n} φορές σε {t}. ¦ Дърво на думите: „{w}“ намерено {n} пъти в {t}.
+Ce qui suit « {w} » dans les actes ¦ Τι ακολουθεί το «{w}» στις πράξεις ¦ Какво следва след „{w}“ в актовете
+{n} lignes prises dans l’arbre : tu peux les corriger dans l’onglet Données. ¦ {n} γραμμές από το δέντρο: μπορείς να τις διορθώσεις στην καρτέλα Δεδομένα. ¦ {n} реда взети от дървото: можеш да ги поправиш в раздела „Данни“.
+🗓️ Les recensements de mon arbre ¦ 🗓️ Οι απογραφές του δέντρου μου ¦ 🗓️ Преброяванията в моето дърво
+Une ligne par personne, une case par recensement : ce qui est relevé sur les fiches (trouvé, non trouvé…), et « à chercher » pour le reste. Sans groupe choisi : tes ancêtres. ¦ Μία γραμμή ανά πρόσωπο, ένα κελί ανά απογραφή: ό,τι σημειώνεται στις καρτέλες (βρέθηκε, δεν βρέθηκε…) και «προς αναζήτηση» για τα υπόλοιπα. Χωρίς ομάδα: οι πρόγονοί σου. ¦ Един ред на човек, едно поле на преброяване: каквото е записано в картите (намерено, ненамерено…), а останалото — „за търсене“. Без избрана група: твоите предци.
+Du recensement de ¦ Από την απογραφή του ¦ От преброяването през
+à celui de ¦ έως την απογραφή του ¦ до преброяването през
+Les recensements de {n} ¦ Οι απογραφές: {n} ¦ Преброявания: {n}
+Personne dans ce groupe ne vivait entre ces deux recensements (il faut au moins une date de naissance ou de décès). ¦ Κανείς από την ομάδα δεν ζούσε μεταξύ αυτών των απογραφών (χρειάζεται τουλάχιστον ημερομηνία γέννησης ή θανάτου). ¦ Никой от групата не е живял между тези преброявания (нужна е поне дата на раждане или смърт).
+{n} sur {t} prises (les premières) : change « Au plus » pour en voir davantage. ¦ Ελήφθησαν {n} από {t} (τα πρώτα): άλλαξε το «Το πολύ» για να δεις περισσότερα. ¦ Взети {n} от {t} (първите): промени „Най-много“, за да видиш повече.
+⚖️ Un dossier de preuve ou une hypothèse ¦ ⚖️ Φάκελος απόδειξης ή υπόθεση ¦ ⚖️ Досие с доказателства или хипотеза
+Choisis un dossier : sa question, ses indices pour et contre, ses recherches et ses conflits, sa conclusion. Une hypothèse à comparer donne une colonne par réponse possible. ¦ Διάλεξε φάκελο: την ερώτηση, τα στοιχεία υπέρ και κατά, τις αναζητήσεις και τις συγκρούσεις, το συμπέρασμα. Μια υπόθεση προς σύγκριση δίνει μία στήλη ανά πιθανή απάντηση. ¦ Избери досие: въпроса, уликите за и против, търсенията и противоречията, заключението. Хипотеза за сравнение дава по колона за всеки възможен отговор.
+Le dossier ¦ Ο φάκελος ¦ Досието
+Choisis d’abord un dossier. ¦ Διάλεξε πρώτα φάκελο. ¦ Първо избери досие.
+Schéma de preuve ¦ Σχήμα απόδειξης ¦ Схема на доказателството
+Ce dossier n’a encore aucune ligne : ajoute des indices dans le dossier, ou ici à la main. ¦ Ο φάκελος δεν έχει ακόμη γραμμές: πρόσθεσε στοιχεία στον φάκελο ή εδώ με το χέρι. ¦ Досието още няма редове: добави улики в досието или тук ръчно.
+Prendre ce dossier ¦ Πάρε αυτόν τον φάκελο ¦ Вземи това досие
+🌿 Les mots de mes transcriptions ¦ 🌿 Οι λέξεις των μεταγραφών μου ¦ 🌿 Думите в моите преписи
+Les transcriptions des actes (atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris. ¦ Οι μεταγραφές πράξεων (εργαστήριο μεταγραφής) και μέσων: ό,τι ακολουθεί (ή προηγείται) τη λέξη αφετηρίας. Λαμβάνονται μόνο τα χρήσιμα κομμάτια φράσεων. ¦ Преписите на актове (работилница за преписи) и медии: какво следва (или предхожда) началната дума. Вземат се само полезните части от изреченията.
+Le mot de départ ¦ Η λέξη αφετηρίας ¦ Началната дума
+Ce qui suit ¦ Τι ακολουθεί ¦ Какво следва
+Ce qui précède ¦ Τι προηγείται ¦ Какво предхожда
+Commune (dans le lieu ou le titre de l’acte) ¦ Δήμος (στον τόπο ή τον τίτλο της πράξης) ¦ Населено място (в мястото или заглавието на акта)
+Actes pris ¦ Πράξεις που λαμβάνονται ¦ Взети актове
+Actes notariés ¦ Συμβολαιογραφικές πράξεις ¦ Нотариални актове
+Militaires ¦ Στρατιωτικές ¦ Военни
+Lettres ¦ Επιστολές ¦ Писма
+Transcriptions des médias ¦ Μεταγραφές μέσων ¦ Преписи на медии
+Écris le mot de départ (par exemple « fils de »). ¦ Γράψε τη λέξη αφετηρίας (π.χ. «fils de»). ¦ Напиши началната дума (например „fils de“).
+Coche au moins une sorte d’acte. ¦ Σημείωσε τουλάχιστον ένα είδος πράξης. ¦ Отметни поне един вид акт.
+Ce qui précède « {w} » dans les actes ¦ Τι προηγείται του «{w}» στις πράξεις ¦ Какво предхожда „{w}“ в актовете
+« {w} » n’est dans aucune transcription de ce choix ({n} lues). ¦ Το «{w}» δεν υπάρχει σε καμία μεταγραφή αυτής της επιλογής ({n} αναγνώστηκαν). ¦ „{w}“ няма в нито един препис от този избор (прочетени: {n}).
+« {w} » : {n} fois, dans {a}. ¦ «{w}»: {n} φορές, σε {a}. ¦ „{w}“: {n} пъти, в {a}.
+Dossier sans question ¦ Φάκελος χωρίς ερώτηση ¦ Досие без въпрос
+Aucun dossier pour ce groupe de personnes ¦ Κανένας φάκελος για αυτή την ομάδα προσώπων ¦ Няма досие за тази група хора
+Ferme l’éditeur, puis clique sur la case pour ouvrir la fiche (bloc « Recensements »). ¦ Κλείσε τον επεξεργαστή και πάτησε το κελί για να ανοίξει η καρτέλα (ενότητα «Απογραφές»). ¦ Затвори редактора, после щракни полето, за да отвориш картата (блок „Преброявания“).
+Recensement {yr} : dans le bloc « Recensements » de la fiche. ¦ Απογραφή {yr}: στην ενότητα «Απογραφές» της καρτέλας. ¦ Преброяване {yr}: в блок „Преброявания“ на картата.
+Grille des recensements (personnes × années) ¦ Πλέγμα απογραφών (πρόσωπα × έτη) ¦ Мрежа на преброяванията (хора × години)
+Ma recherche ¦ Η έρευνά μου ¦ Моето проучване
+Une ligne par personne, une colonne par recensement : ce qui est trouvé, pas trouvé, et ce qui reste à chercher. ¦ Μία γραμμή ανά πρόσωπο, μία στήλη ανά απογραφή: τι βρέθηκε, τι όχι και τι μένει να αναζητηθεί. ¦ Ред на човек, колона на преброяване: какво е намерено, какво не и какво остава да се търси.
+Les personnes (une ligne sans année : naissance, décès) et leurs recensements (une ligne par année) ¦ Τα πρόσωπα (γραμμή χωρίς έτος: γέννηση, θάνατος) και οι απογραφές τους (μία γραμμή ανά έτος) ¦ Хората (ред без година: раждане, смърт) и техните преброявания (по ред на година)
+Naissance (année) ¦ Γέννηση (έτος) ¦ Раждане (година)
+Décès (année) ¦ Θάνατος (έτος) ¦ Смърт (година)
+Recensement (année) ¦ Απογραφή (έτος) ¦ Преброяване (година)
+Note (lieu, adresse…) ¦ Σημείωση (τόπος, διεύθυνση…) ¦ Бележка (място, адрес…)
+Grille (une case par recensement) ¦ Πλέγμα (ένα κελί ανά απογραφή) ¦ Мрежа (поле на преброяване)
+Liste de travail à imprimer (ce qui reste à chercher) ¦ Λίστα εργασίας για εκτύπωση (τι μένει να αναζητηθεί) ¦ Работен списък за печат (какво остава да се търси)
+À celui de ¦ Έως την απογραφή του ¦ До преброяването през
+Ou mes années (ex. 1846, 1851, 1872) ¦ Ή τα δικά μου έτη (π.χ. 1846, 1851, 1872) ¦ Или моите години (напр. 1846, 1851, 1872)
+Personnes montrées ¦ Πρόσωπα που εμφανίζονται ¦ Показани хора
+Seulement celles qui ont encore un recensement à chercher ¦ Μόνο όσα έχουν ακόμη απογραφή προς αναζήτηση ¦ Само тези, които още имат преброяване за търсене
+Le plus à chercher d’abord ¦ Τα περισσότερα προς αναζήτηση πρώτα ¦ Най-много за търсене първо
+Par naissance ¦ Κατά γέννηση ¦ По раждане
+Par nom ¦ Κατά όνομα ¦ По име
+Couleur « Trouvé » ¦ Χρώμα «Βρέθηκε» ¦ Цвят „Намерено“
+Couleur « Non trouvé » ¦ Χρώμα «Δεν βρέθηκε» ¦ Цвят „Ненамерено“
+Couleur « À chercher » ¦ Χρώμα «Προς αναζήτηση» ¦ Цвят „За търсене“
+Couleur « Hors de France » ¦ Χρώμα «Εκτός Γαλλίας» ¦ Цвят „Извън Франция“
+Couleur « Pas né / déjà décédé » ¦ Χρώμα «Αγέννητος / ήδη νεκρός» ¦ Цвят „Нероден / вече починал“
+Écart entre les cases ¦ Κενό ανάμεσα στα κελιά ¦ Разстояние между полетата
+Signes dans les cases (✓ ✗ ?) ¦ Σύμβολα στα κελιά (✓ ✗ ?) ¦ Знаци в полетата (✓ ✗ ?)
+Années de vie à côté du nom ¦ Έτη ζωής δίπλα στο όνομα ¦ Години на живот до името
+Schéma de preuve (question, indices pour et contre, conclusion) ¦ Σχήμα απόδειξης (ερώτηση, στοιχεία υπέρ και κατά, συμπέρασμα) ¦ Схема на доказателството (въпрос, улики за и против, заключение)
+La question en haut, les indices pour et contre (avec leur poids et leur source), les recherches et les conflits, puis la conclusion et sa certitude. ¦ Πάνω η ερώτηση, τα στοιχεία υπέρ και κατά (με βάρος και πηγή), οι αναζητήσεις και οι συγκρούσεις, και μετά το συμπέρασμα και η βεβαιότητά του. ¦ Горе въпросът, уликите за и против (с тежест и източник), търсенията и противоречията, после заключението и сигурността му.
+Les lignes du dossier (pour, contre, recherche, conflit ; « réponse » pour une hypothèse à plusieurs réponses) ¦ Οι γραμμές του φακέλου (υπέρ, κατά, αναζήτηση, σύγκρουση· «απάντηση» για υπόθεση με πολλές απαντήσεις) ¦ Редовете на досието (за, против, търсене, противоречие; „отговор“ за хипотеза с няколко отговора)
+Indice (ou réponse) ¦ Στοιχείο (ή απάντηση) ¦ Улика (или отговор)
+Poids (1 à 3) ¦ Βάρος (1 έως 3) ¦ Тежест (1 до 3)
+Pour la réponse… (hypothèse) ¦ Για την απάντηση… (υπόθεση) ¦ За отговора… (хипотеза)
+Note (résolution d’un conflit) ¦ Σημείωση (επίλυση σύγκρουσης) ¦ Бележка (решение на противоречие)
+La conclusion ¦ Το συμπέρασμα ¦ Заключението
+Montrer les recherches et les conflits (ce qui reste à chercher) ¦ Εμφάνιση αναζητήσεων και συγκρούσεων (τι μένει να αναζητηθεί) ¦ Показвай търсенията и противоречията (какво остава да се търси)
+Couleur « confirme » ¦ Χρώμα «επιβεβαιώνει» ¦ Цвят „потвърждава“
+Couleur « contredit » ¦ Χρώμα «αντικρούει» ¦ Цвят „противоречи“
+Couleur des recherches ¦ Χρώμα αναζητήσεων ¦ Цвят на търсенията
+Couleur des conflits ¦ Χρώμα συγκρούσεων ¦ Цвят на противоречията
+Couleur des réponses ¦ Χρώμα απαντήσεων ¦ Цвят на отговорите
+Couleur de la question ¦ Χρώμα ερώτησης ¦ Цвят на въпроса
+Arbre de mots des actes (ce qui suit « fils de »…) ¦ Δέντρο λέξεων πράξεων (τι ακολουθεί το «fils de»…) ¦ Дърво на думите в актовете (какво следва след „fils de“…)
+Un mot de départ à gauche ; à droite, les mots qui le suivent dans les actes, plus gros quand ils reviennent souvent. ¦ Μια λέξη αφετηρίας αριστερά· δεξιά οι λέξεις που την ακολουθούν στις πράξεις, μεγαλύτερες όταν επανέρχονται συχνά. ¦ Начална дума вляво; вдясно — думите след нея в актовете, по-големи, когато се срещат често.
+Les textes (une transcription ou un bout de phrase par ligne) ¦ Τα κείμενα (μία μεταγραφή ή κομμάτι φράσης ανά γραμμή) ¦ Текстовете (по един препис или част от изречение на ред)
+Acte ou source ¦ Πράξη ή πηγή ¦ Акт или източник
+Le mot de départ (ex. fils de, veuve de) ¦ Η λέξη αφετηρίας (π.χ. fils de, veuve de) ¦ Началната дума (напр. fils de, veuve de)
+Profondeur (mots) ¦ Βάθος (λέξεις) ¦ Дълбочина (думи)
+Branches par mot ¦ Κλαδιά ανά λέξη ¦ Клони на дума
+Seulement les mots vus au moins ¦ Μόνο λέξεις που εμφανίζονται τουλάχιστον ¦ Само думи, срещнати поне
+Le reste dans « … autres » ¦ Τα υπόλοιπα στο «… ακόμη» ¦ Останалото в „… още“
+Écrire le nombre de fois ¦ Γράψε πόσες φορές ¦ Пиши броя пъти
+Sans tenir compte des capitales ni des accents ¦ Χωρίς διάκριση κεφαλαίων και τόνων ¦ Без значение на главни букви и ударения
+Seulement les actes de (lieu) ¦ Μόνο πράξεις από (τόπος) ¦ Само актове от (място)
+Couleur des mots ¦ Χρώμα λέξεων ¦ Цвят на думите
+Couleur du mot de départ ¦ Χρώμα λέξης αφετηρίας ¦ Цвят на началната дума
+⭕ En une journée ¦ ⭕ Σε μία μέρα ¦ ⭕ За един ден
+Lieu de départ ¦ Τόπος αφετηρίας ¦ Място на тръгване
+Montrer les lieux de la famille ¦ Εμφάνιση τόπων της οικογένειας ¦ Покажи местата на семейството
+Ce qu’on atteignait en une journée ¦ Ως πού έφτανε κανείς σε μία μέρα ¦ Докъде се стигаше за един ден
+Choisis le lieu de départ ¦ Διάλεξε τόπο αφετηρίας ¦ Избери място на тръгване
+Ce lieu n’a pas de position sur la carte : place-le d’abord. ¦ Αυτός ο τόπος δεν έχει θέση στον χάρτη: τοποθέτησέ τον πρώτα. ¦ Това място няма позиция на картата: първо го постави.
+Coche au moins un moyen de voyager ¦ Σημείωσε τουλάχιστον ένα μέσο ταξιδιού ¦ Отметни поне едно средство за пътуване
+Les fonds de carte ne sont pas chargés. ¦ Οι χάρτες υποβάθρου δεν έχουν φορτωθεί. ¦ Основите на картите не са заредени.
+Je dessine les cercles… ¦ Σχεδιάζω τους κύκλους… ¦ Рисувам кръговете…
+En {d} jours depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ Σε {d} μέρες από {from}, το {year}: σε ευθεία περίπου {list}. ¦ За {d} дни от {from}, през {year}: по права линия около {list}.
+En une journée depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ Σε μία μέρα από {from}, το {year}: σε ευθεία περίπου {list}. ¦ За един ден от {from}, през {year}: по права линия около {list}.
+Rayon (vol d’oiseau) ¦ Ακτίνα (σε ευθεία) ¦ Радиус (по права линия)
+Lieux de la famille ¦ Τόποι της οικογένειας ¦ Места на семейството
+Le rayon tient compte du détour de la route (réglage « Vitesses et sources »). Un trait pointillé : ce moyen n’existait pas encore cette année-là. ¦ Η ακτίνα λαμβάνει υπόψη την παράκαμψη του δρόμου (ρύθμιση «Ταχύτητες και πηγές»). Διακεκομμένη γραμμή: αυτό το μέσο δεν υπήρχε ακόμη εκείνη τη χρονιά. ¦ Радиусът отчита завоите на пътя (настройка „Скорости и източници“). Пунктир: това средство още не е съществувало през онази година.
+Paroisses (zones autour des églises) ¦ Ενορίες (ζώνες γύρω από τις εκκλησίες) ¦ Енории (зони около църквите)
+⚠ Paroisses sans position : {list} — choisis-les dans la liste (onglet Données) ou écris « Nom 45.27, 1.77 » ¦ ⚠ Ενορίες χωρίς θέση: {list} — διάλεξέ τες από τη λίστα (καρτέλα Δεδομένα) ή γράψε «Όνομα 45.27, 1.77» ¦ ⚠ Енории без позиция: {list} — избери ги от списъка (раздел „Данни“) или напиши „Име 45.27, 1.77“
+Ajoute des paroisses (une ville de la liste, ou « Depuis l’app ») et leurs chiffres. ¦ Πρόσθεσε ενορίες (έναν τόπο από τη λίστα ή «Από την εφαρμογή») και τους αριθμούς τους. ¦ Добави енории (място от списъка или „От приложението“) и техните числа.
+Zones des paroisses : {n}. ¦ Ζώνες ενοριών: {n}. ¦ Зони на енориите: {n}.
+Un point à chaque église ¦ Μια κουκκίδα σε κάθε εκκλησία ¦ Точка при всяка църква
+Limites des départements par-dessus les paroisses ¦ Όρια νομών πάνω από τις ενορίες ¦ Граници на департаментите върху енориите
+Cadrer tout seul sur les paroisses ¦ Αυτόματη πλαισίωση στις ενορίες ¦ Автоматично кадриране по енориите
+Liens montrés ¦ Δεσμοί που εμφανίζονται ¦ Показани връзки
+Ceux qui arrivent et ceux qui partent ¦ Όσοι έρχονται και όσοι φεύγουν ¦ Пристигащите и заминаващите
+Seulement ceux qui arrivent ¦ Μόνο όσοι έρχονται ¦ Само пристигащите
+Seulement ceux qui partent ¦ Μόνο όσοι φεύγουν ¦ Само заминаващите
+Les liens de {name} ¦ Οι δεσμοί του τόπου {name} ¦ Връзките на {name}
+bleu : conjoints venus ¦ μπλε: σύζυγοι που ήρθαν ¦ синьо: дошли съпрузи
+orange : enfants partis ¦ πορτοκαλί: παιδιά που έφυγαν ¦ оранжево: заминали деца
+rouge : émigrés ¦ κόκκινο: μετανάστες ¦ червено: емигранти
+Lieux : {list} ¦ Τόποι: {list} ¦ Места: {list}
+⛪ Au niveau « Paroisses » (Réglages → Niveau de détail) : une zone autour de chaque église, d’après les paroisses d’Ancien Régime de tes lieux ; un lieu sans paroisse compte pour lui-même. ¦ ⛪ Στο επίπεδο «Ενορίες» (Ρυθμίσεις → Επίπεδο λεπτομέρειας): μια ζώνη γύρω από κάθε εκκλησία, κατά τις παλιές ενορίες των τόπων σου· τόπος χωρίς ενορία μετρά μόνος του. ¦ ⛪ На ниво „Енории“ (Настройки → Ниво на детайлност): зона около всяка църква според старите енории на твоите места; място без енория се брои самостоятелно.
+✳️ Tous les liens d’un lieu (carte en étoile) ¦ ✳️ Όλοι οι δεσμοί ενός τόπου (αστεροειδής χάρτης) ¦ ✳️ Всички връзки на едно място (звездна карта)
+Le village ¦ Το χωριό ¦ Селото
+Conjoints venus s’y marier ¦ Σύζυγοι που ήρθαν να παντρευτούν εκεί ¦ Съпрузи, дошли да се венчаят там
+Enfants partis (nés ici, morts ou mariés ailleurs) ¦ Παιδιά που έφυγαν (γεννήθηκαν εδώ, πέθαναν ή παντρεύτηκαν αλλού) ¦ Заминали деца (родени тук, починали или венчани другаде)
+Émigrés (morts dans un autre pays) ¦ Μετανάστες (πέθαναν σε άλλη χώρα) ¦ Емигранти (починали в друга страна)
+Choisis d’abord le village. ¦ Διάλεξε πρώτα το χωριό. ¦ Първо избери селото.
+Coche au moins une sorte de lien. ¦ Σημείωσε τουλάχιστον ένα είδος δεσμού. ¦ Отметни поне един вид връзка.
+Aucun lien trouvé pour ce lieu (naissance, mariage ou décès ailleurs). ¦ Δεν βρέθηκε δεσμός για αυτόν τον τόπο (γέννηση, γάμος ή θάνατος αλλού). ¦ Не е намерена връзка за това място (раждане, брак или смърт другаде).
+{n} prises dans l’arbre ({m} lieux rattachés à une paroisse d’Ancien Régime, les autres comptent pour eux-mêmes). ¦ Από το δέντρο: {n} ({m} τόποι συνδεδεμένοι με παλιά ενορία, οι άλλοι μετρούν μόνοι). ¦ От дървото: {n} ({m} места към стара енория, останалите се броят самостоятелно).
+Aucun lieu avec des coordonnées pour ce choix : place d’abord tes lieux sur la carte. ¦ Κανένας τόπος με συντεταγμένες για αυτή την επιλογή: τοποθέτησε πρώτα τους τόπους σου στον χάρτη. ¦ Няма места с координати за този избор: първо постави местата си на картата.
+sa paroisse ¦ η ενορία του ¦ неговата енория
+leur paroisse ¦ η ενορία τους ¦ тяхната енория
+une paroisse ¦ μια ενορία ¦ енория
+Paroisse sans position : choisis sa commune dans la liste, ou écris « Nom 45.27, 1.77 ». ¦ Ενορία χωρίς θέση: διάλεξε τον δήμο της από τη λίστα ή γράψε «Όνομα 45.27, 1.77». ¦ Енория без позиция: избери нейното селище от списъка или напиши „Име 45.27, 1.77“.
+Carte en étoile : seulement les liens de ce lieu (vide = tous les flux) ¦ Αστεροειδής χάρτης: μόνο οι δεσμοί αυτού του τόπου (κενό = όλες οι ροές) ¦ Звездна карта: само връзките на това място (празно = всички потоци)
+niveau|paroisse ¦ ενορία ¦ енория
+=paroisse ¦ ενορία|ενορίες ¦ енория|енории

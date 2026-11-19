@@ -55,7 +55,7 @@
     const DOM = {971: 'Guadeloupe', 972: 'Martinique', 973: 'Guyane', 974: 'La Réunion', 976: 'Mayotte'};
     // les cartes, leurs niveaux de détail [niveau, fond, nom] et leur cadrage de départ [ouest, sud, est, nord]
     const MAPS = {
-        fr: {label: 'France', levels: [['dep', 'fr-departements', 'Départements'], ['reg', 'fr-regions', 'Régions'], ['com', 'fr-communes', 'Communes (villes)']], view: [-5.2, 41.3, 9.6, 51.15], ctx: true, insets: true, zoneBase: 'fr-departements', zoneWord: ['un département', 'Département', 'des départements', '35, Gers, Côtes-d’Armor…']},
+        fr: {label: 'France', levels: [['dep', 'fr-departements', 'Départements'], ['reg', 'fr-regions', 'Régions'], ['com', 'fr-communes', 'Communes (villes)'], ['par', 'fr-departements', 'Paroisses (zones autour des églises)']], view: [-5.2, 41.3, 9.6, 51.15], ctx: true, insets: true, zoneBase: 'fr-departements', zoneWord: ['un département', 'Département', 'des départements', '35, Gers, Côtes-d’Armor…']},
         be: {label: 'Belgique', levels: [['prov', 'be-provinces', 'Provinces'], ['reg', 'be-regions', 'Régions'], ['com', 'be-communes', 'Communes (villes)']], view: [2.5, 49.47, 6.43, 51.53], ctx: true, zoneBase: 'be-provinces', zoneWord: ['une province', 'Province', 'des provinces', 'Liège, Anvers, Hainaut…']},
         ch: {label: 'Suisse', levels: [['cant', 'ch-cantons', 'Cantons'], ['reg', 'ch-regions', 'Grandes régions'], ['com', 'ch-communes', 'Communes (villes)']], view: [5.92, 45.8, 10.52, 47.84], ctx: true, zoneBase: 'ch-cantons', zoneWord: ['un canton', 'Canton', 'des cantons', 'Vaud, VD, Berne…']},
         lu: {label: 'Luxembourg', levels: [['cant', 'lu-cantons', 'Cantons'], ['com', 'lu-communes', 'Communes (villes)']], view: [5.72, 49.43, 6.55, 50.19], ctx: true, zoneBase: 'lu-cantons', zoneWord: ['un canton', 'Canton', 'des cantons', 'Clervaux, Esch-sur-Alzette…']},
@@ -474,6 +474,7 @@
 
     /* ═════════ 🗺️ Carte colorée par zones ═════════ */
     function choropleth(spec, W, fs) {
+        if (levelOf(spec.o || {})[0] === 'par') return parishMap(spec, W, fs); // ⛪ les zones autour des églises (Voronoï)
         const o0 = spec.o || {}, zb = zoneBaseOf(o0); if (zb) { const w0 = needBases(spec, W, [zb]); if (w0) return w0; } // le cadrage peut dépendre d'un département
         const o = o0, view = viewOf(o), baseId = baseIdOf(o, view), ctxId = ctxIdOf(o, baseId, view);
         const wait = needBases(spec, W, [baseId, ctxId]); if (wait) return wait;
@@ -554,6 +555,83 @@
         return {h: H, svg: out, geo: {uid, pr, w, h, insets: insetGeo}};
     }
 
+    /* ═════════ ⛪ Carte colorée par zones, niveau « Paroisses » : une zone autour de chaque église (diagramme de Voronoï) ═════════
+     * Chaque ligne du tableau est une paroisse, placée par sa position (choisie dans la liste, prise dans l'app, ou « Nom 45.2, 1.7 ») ;
+     * sa zone = les points plus proches de son église que de toute autre ; les zones s'arrêtent au bord des terres, ou au
+     * département choisi (« Zoomer sur un département… » : seules ses paroisses sont gardées). */
+    /** la cellule de Voronoï de chaque site (pixels) : le cadre coupé par les demi-plans « plus près de i que de j » */
+    function voronoi(pts, w, h) {
+        const clip = (poly, ax, ay, bx, by) => { // garde le côté de i (a) de la médiatrice de [a, b]
+            const mx = (ax + bx) / 2, my = (ay + by) / 2, dx = bx - ax, dy = by - ay, side = (x, y) => (x - mx) * dx + (y - my) * dy, out = [];
+            for (let k = 0; k < poly.length; k++) { const [x1, y1] = poly[k], [x2, y2] = poly[(k + 1) % poly.length], s1 = side(x1, y1), s2 = side(x2, y2);
+                if (s1 <= 0) out.push([x1, y1]); if ((s1 < 0 && s2 > 0) || (s1 > 0 && s2 < 0)) { const t = s1 / (s1 - s2); out.push([x1 + (x2 - x1) * t, y1 + (y2 - y1) * t]); } }
+            return out; };
+        return pts.map((a, i) => { let poly = [[-2, -2], [w + 2, -2], [w + 2, h + 2], [-2, h + 2]];
+            // les voisins les plus proches d'abord : la cellule rétrécit vite ; un site au-delà de 2 × le rayon de la cellule ne peut plus la couper
+            const near = pts.map((b, j) => [j, (b.x - a.x) ** 2 + (b.y - a.y) ** 2]).filter(([j]) => j !== i).sort((p, q) => p[1] - q[1]);
+            for (const [j, d2] of near) { const r = Math.max(...poly.map(([x, y]) => (x - a.x) ** 2 + (y - a.y) ** 2)); if (d2 > 4 * r) break; if (d2 < 1e-6) continue; poly = clip(poly, a.x, a.y, pts[j].x, pts[j].y); if (poly.length < 3) break; }
+            return poly; });
+    }
+    const coordIn = s => { const m = String(s ?? '').match(/(-?\d{1,2}(?:[.,]\d+)?)\s*[,;\s]\s*(-?\d{1,3}(?:[.,]\d+)?)\s*\)?\s*$/); if (!m) return null; const la = num(m[1]), lo = num(m[2]); return Math.abs(la) <= 90 && Math.abs(lo) <= 180 ? [lo, la, String(s).replace(/\(?\s*-?\d{1,2}(?:[.,]\d+)?\s*[,;\s]\s*-?\d{1,3}(?:[.,]\d+)?\s*\)?\s*$/, '').trim() || String(s)] : null; };
+    /** les paroisses du tableau : {name, lon, lat, v, has, notes} (sans position : dans « missing ») */
+    function parishesOf(spec) {
+        const agg = new Map(), missing = [];
+        rowsOf(spec, 3000).forEach(r => { const label = String(r.label ?? r.zone ?? '').trim(); if (!label) return;
+            const P = pickedOf(spec, label), c = P ? [Number(P.lon), Number(P.lat), label] : coordIn(label); if (!c) { if (missing.length < 40) missing.push(label.slice(0, 40)); return; }
+            const k = fold(c[2]), e = agg.get(k) || {name: c[2], lon: c[0], lat: c[1], v: 0, has: false, notes: []}; const blank = r.s0 === undefined || r.s0 === null || String(r.s0).trim() === '';
+            if (!blank) { e.v += num(r.s0); e.has = true; } if (r.note) e.notes.push(String(r.note).slice(0, 120)); agg.set(k, e); });
+        return {list: [...agg.values()].slice(0, 1500), missing};
+    }
+    const cutT = (t, max, f) => { t = String(t); if (textW(t, f) <= max) return t; while (t.length > 1 && textW(t + '…', f) > max) t = t.slice(0, -1); return t + '…'; };
+    function parishMap(spec, W, fs) {
+        const o = spec.o || {}, need0 = needBases(spec, W, ['fr-departements', 'monde-50m']); if (need0) return need0;
+        const deps = loaded('fr-departements'), uid = 'dgm' + (++uidSeq), F = parishesOf(spec);
+        const zone = o.frame === 'zone' && String(o.frameZone ?? '').trim() ? matchZone(deps, o.frameZone) : null;
+        let list = zone ? F.list.filter(p => inZone(zone, p.lon, p.lat)) : F.list;
+        let auto = null; // cadrage tout seul : les églises et une marge (au moins 3 km)
+        if (!o.frame && o.fit !== false && list.length) { const lo = list.map(p => p.lon), la = list.map(p => p.lat), x0 = Math.min(...lo), x1 = Math.max(...lo), y0 = Math.min(...la), y1 = Math.max(...la), mx = Math.max(.04, (x1 - x0) * .12), my = Math.max(.03, (y1 - y0) * .12); auto = [x0 - mx, y0 - my, x1 + mx, y1 + my]; }
+        const view = viewOf(o, auto || MAPS.fr.view);
+        const legPos = o.legend === 'none' ? 'none' : 'bottom', w = W;
+        const pr = fitProj(o.proj && o.proj !== 'auto' ? o.proj : autoProj(view), view, w, clamp(num(o.height) || 2400, 120, 3000), !num(o.height)), h = pr.h; pr.allOutre = true;
+        const ctx = loaded('monde-50m'), B = drawBase({...spec, o: {...o, borderColor: o.borderColor || '#ffffff'}}, deps, ctx, pr, w, h, () => ({fill: color(o.noData, '#e4e4e7'), title: ''}), uid);
+        const pts = list.map(p => { const [x, y] = pr.p(p.lon, p.lat); return {...p, x, y}; }).filter(p => isF(p.x) && isF(p.y) && p.x > -w && p.x < 2 * w && p.y > -h && p.y < 2 * h);
+        const cells = voronoi(pts, w, h), vals = pts.filter(p => p.has).map(p => p.v), sc = vals.length ? scaleOf(vals, o) : null, noData = color(o.noData, '#e4e4e7');
+        // la découpe : le département choisi, sinon toutes les terres (les départements)
+        const clipD = zone ? zonePath(zone, pr, w, h, false) : B.zones.map(x => x.d).join('');
+        const line = color(o.borderColor, '#ffffff'), lw = clamp(num(o.borderWidth) || .8, .1, 6), unit = o.unit ? ' ' + String(o.unit).slice(0, 30) : '';
+        let svg = `<g data-geo-map="${uid}">${B.svg}<defs><clipPath id="${uid}v"><path d="${clipD}"/></clipPath></defs><g clip-path="url(#${uid}c)"><g clip-path="url(#${uid}v)" stroke="${line}" stroke-width="${r2(lw)}" stroke-linejoin="round">`;
+        pts.forEach((p, i) => { const c = cells[i]; if (!c || c.length < 3) return; p.area = Math.abs(c.reduce((s, [x, y], k) => { const [x2, y2] = c[(k + 1) % c.length]; return s + x * y2 - x2 * y; }, 0) / 2);
+            p.cx = c.reduce((s, q) => s + q[0], 0) / c.length; p.cy = c.reduce((s, q) => s + q[1], 0) / c.length;
+            svg += `<path class="dgm-z" d="M${c.map(([x, y]) => `${r1(x)} ${r1(y)}`).join('L')}Z" fill="${p.has && sc ? sc.color(p.v) : noData}"><title>${esc(`${p.name} : ${p.has ? fmt(p.v) + unit : i18n('pas de chiffre')}${p.notes.length ? '\n' + p.notes.join('\n') : ''}`)}</title></path>`; });
+        svg += '</g>';
+        // les limites des départements par-dessus, puis les églises
+        if (o.parentLines !== false) svg += `<path d="${B.zones.map(x => x.d).join('')}" fill="none" stroke="${PARENT_LINE}" stroke-opacity=".55" stroke-width="${r2(clamp(lw * 1.4, .5, 3))}" stroke-linejoin="round" pointer-events="none"/>`;
+        if (o.churches !== false) pts.forEach(p => { if (p.x >= 0 && p.x <= w && p.y >= 0 && p.y <= h) svg += `<circle cx="${r1(p.x)}" cy="${r1(p.y)}" r="${r2(clamp(fs * .18, 1.5, 4))}" fill="#1d1d1f" fill-opacity=".75" pointer-events="none"/>`; });
+        // les noms (et chiffres) des paroisses : les plus grandes zones d'abord, sans se chevaucher
+        const lab = o.labels || 'auto', lf = clamp(fs * .72 * (num(o.labelSize) || 1), 6, 40), placed = [];
+        if (lab !== 'none') pts.filter(p => p.area && p.x >= 0 && p.x <= w && p.y >= 0 && p.y <= h).sort((a, b) => b.area - a.area).slice(0, 400).forEach(p => {
+            const lines = []; if (lab !== 'value') lines.push(p.name); if ((lab === 'value' || lab === 'both' || lab === 'auto') && p.has) lines.push(fmt(p.v) + (lab === 'auto' ? '' : unit)); if (!lines.length) return;
+            const tw = Math.max(...lines.map(t => textW(t, lf))), th = lines.length * lf * 1.15; if (lab === 'auto' && (tw > Math.sqrt(p.area) * 1.4 || th > Math.sqrt(p.area))) return;
+            const y0 = p.y + lf * .9, box = [p.x - tw / 2, y0 - lf * .6, p.x + tw / 2, y0 + th - lf * .5];
+            if (box[0] < 0 || box[2] > w || placed.some(b => !(box[2] < b[0] || box[0] > b[2] || box[3] < b[1] || box[1] > b[3]))) return; placed.push(box);
+            const fc = contrast(p.has && sc ? sc.color(p.v) : noData), halo = fc === '#ffffff' ? 'rgba(0,0,0,.35)' : 'rgba(255,255,255,.7)';
+            lines.forEach((t, i) => { svg += T(p.x, y0 + i * lf * 1.15, t, {anchor: 'middle', size: i ? lf * .92 : lf, weight: i ? 400 : 600, fill: fc, halo}); }); });
+        svg += `</g><text x="${r1(w - 4)}" y="${r1(h - 4)}" font-size="${r2(clamp(fs * .62, 7, 12))}" text-anchor="end" fill="#555" fill-opacity=".85">${esc(attrOf(deps, ctx))}</text><rect data-geo-hit="1" width="${r1(w)}" height="${r1(h)}" fill="none" stroke="#c8cdd3" stroke-width=".6"/></g>`;
+        let H = h;
+        if (legPos !== 'none' && sc) { // la légende : les classes, ou le dégradé et quatre chiffres
+            const title = [String(spec.series?.[0]?.name || '').slice(0, 60), o.unit ? `(${String(o.unit).slice(0, 30)})` : ''].filter(Boolean).join(' ');
+            let leg = '', x = 0, y = title ? fs * 1.6 : 0; if (title) leg += T(0, fs * .7, title, {size: fs * .9, weight: 600});
+            const items = sc.classes ? sc.cols.map((c, i) => ({c, t: i === 0 ? i18n('moins de {a}', {a: fmt(sc.br[0])}) : i === sc.cols.length - 1 ? i18n('{a} et plus', {a: fmt(sc.br[i - 1])}) : i18n('de {a} à moins de {b}', {a: fmt(sc.br[i - 1]), b: fmt(sc.br[i])})}))
+                : [0, 1 / 3, 2 / 3, 1].map(t => { const v = sc.lo + (sc.hi - sc.lo) * t; return {c: sc.color(v), t: fmt(Math.round(v * 10) / 10)}; });
+            if (pts.some(p => !p.has)) items.push({c: noData, t: i18n('pas de chiffre')});
+            items.forEach(it => { const iw = fs * 1.9 + textW(it.t, fs * .85) + fs; if (x > 0 && x + iw > W) { x = 0; y += fs * 1.6; } leg += `<rect x="${r1(x)}" y="${r1(y)}" width="${r1(fs * 1.4)}" height="${r1(fs)}" rx="2" fill="${it.c}" stroke="#0002"/>` + T(x + fs * 1.8, y + fs / 2, it.t, {size: fs * .85}); x += iw; });
+            svg += `<g transform="translate(0 ${r1(h + fs * .9)})">${leg}</g>`; H = h + fs * .9 + y + fs * 1.4;
+        }
+        if (F.missing.length && o.showMissing !== false) { svg += T(0, H + fs * .9, cutT(i18n('⚠ Paroisses sans position : {list} — choisis-les dans la liste (onglet Données) ou écris « Nom 45.27, 1.77 »', {list: F.missing.slice(0, 10).join(', ') + (F.missing.length > 10 ? '…' : '')}), W, fs * .78), {size: fs * .78, fill: '#a5552a'}); H += fs * 1.6; }
+        if (!pts.length) svg += T(w / 2, h / 2, i18n('Ajoute des paroisses (une ville de la liste, ou « Depuis l’app ») et leurs chiffres.'), {anchor: 'middle', size: fs, fill: '#555', halo: '#ffffffcc'});
+        return {h: H, svg, geo: {uid, pr, w, h}, desc: i18n('Zones des paroisses : {n}.', {n: pl(pts.length, 'paroisse')})};
+    }
+
     /* ═════════ 🧭 Carte des migrations ═════════ */
     /** un lieu → [lon, lat, nom] : coordonnées tapées, lieux choisis (spec.places), ou centre d'une zone du fond */
     function placeOf(spec, name, bases) {
@@ -567,8 +645,10 @@
     }
     function flowsOf(spec, bases) {
         const agg = new Map(), unknown = new Set(), pts = new Map();
+        const hub = fold(spec.o?.hub || ''), hubDir = spec.o?.hubDir || ''; // ✳️ carte en étoile : seulement les liens d'un lieu
         rowsOf(spec).forEach(r => {
             const v = Math.max(0, num(r.value)); if (!v) return;
+            if (hub) { const a = fold(r.from) === hub || fold(String(r.from ?? '').replace(/\s*\(.*$/, '')) === hub, b = fold(r.to) === hub || fold(String(r.to ?? '').replace(/\s*\(.*$/, '')) === hub; if (hubDir === 'in' ? !b : hubDir === 'out' ? !a : !(a || b)) return; }
             const a = placeOf(spec, r.from, bases), b = placeOf(spec, r.to, bases);
             if (!a && String(r.from ?? '').trim()) unknown.add(String(r.from).slice(0, 40)); if (!b && String(r.to ?? '').trim()) unknown.add(String(r.to).slice(0, 40));
             if (!a || !b) return; const ka = fold(a[2]), kb = fold(b[2]); if (ka === kb) return;
@@ -578,6 +658,12 @@
         return {flows: [...agg.values()].sort((x, y) => y.v - x.v).slice(0, 500), points: [...pts.values()].slice(0, 2000), unknown: [...unknown]};
     }
     /** le cadrage qui montre tous les lieux (avec une marge), sinon celui de la carte */
+    /** un cadrage serré (carte en étoile : quelques villages voisins) : 15 % de marge, au moins 5 km */
+    function tightView(points) {
+        if (!points.length) return null;
+        const lo = points.map(x => x.p[0]), la = points.map(x => x.p[1]), w = Math.min(...lo), e = Math.max(...lo), s = Math.min(...la), n = Math.max(...la), dx = Math.max(.07, (e - w) * .15), dy = Math.max(.05, (n - s) * .15);
+        return [clamp(w - dx, -180, 180), clamp(s - dy, -85, 85), clamp(e + dx, -180, 180), clamp(n + dy, -85, 85)];
+    }
     function fitView(points, o) {
         if (!points.length) return null;
         let w = Infinity, s = Infinity, e = -Infinity, n = -Infinity; points.forEach(({p}) => { w = Math.min(w, p[0]); e = Math.max(e, p[0]); s = Math.min(s, p[1]); n = Math.max(n, p[1]); });
@@ -590,7 +676,7 @@
         const pre = viewOf(o), baseId0 = baseIdOf(o, pre), ctx0 = mapOf(o) === 'monde' || mapOf(o) === 'eu' ? 'monde-50m' : ctxIdOf(o, baseId0, pre);
         const wait0 = needBases(spec, W, [baseId0, ctx0, 'monde-110m']); if (wait0) return wait0;
         const bases = [loaded(baseId0), ctx0 ? loaded(ctx0) : null, loaded('monde-110m')].filter(Boolean);
-        const F = flowsOf(spec, bases), auto = (!o.frame || o.frame === '') && o.fit !== false ? fitView(F.points, o) : null;
+        const F = flowsOf(spec, bases), auto = (!o.frame || o.frame === '') && o.fit !== false ? (String(o.hub || '').trim() ? tightView(F.points) : fitView(F.points, o)) : null; // ✳️ en étoile : au plus près des lieux
         let view = viewOf(o, auto || M.view);
         const baseId = baseIdOf(o, view), ctxId = ctxIdOf(o, baseId, view);
         const wait = needBases(spec, W, [baseId, ctxId]); if (wait) return wait;
@@ -694,21 +780,23 @@
 
     /* ═════════ Réglages, exemples ═════════ */
     const C = (k, label, type = 'text', extra = {}) => ({k, label, type, ...extra});
-    const mapOpts = () => [
+    const mapOpts = ({parishes = false} = {}) => [ // parishes : le niveau « Paroisses » (carte colorée par zones seulement)
         C('map', 'Carte', 'select', {choices: Object.entries(MAPS).map(([k, m]) => [k, m.label]), def: 'fr'}),
-        ...Object.entries(MAPS).filter(([, m]) => m.levels.length > 1).map(([k, m]) => C('level', 'Niveau de détail', 'select', {choices: m.levels.map(([l, , n]) => [l, n]), when: s => mapOf(s.o || {}) === k})),
+        ...Object.entries(MAPS).filter(([, m]) => m.levels.length > 1).map(([k, m]) => C('level', 'Niveau de détail', 'select', {choices: m.levels.filter(([l]) => parishes || l !== 'par').map(([l, , n]) => [l, n]), when: s => mapOf(s.o || {}) === k})),
         ...Object.keys(MAPS).map(k => C('frame', 'Partie de la carte (cadrage)', 'select', {choices: [['', k === 'fr' ? 'France entière' : k === 'monde' ? 'Le monde entier' : `${MAPS[k].label} entière`], ...framesOf(k).map(([f, n]) => [f, n]),
             ...(MAPS[k].zoneWord ? [['zone', `📍 Zoomer sur ${MAPS[k].zoneWord[0]}…`]] : []), ['custom', '✋ Mon cadrage (souris ou cadre tracé)']], when: s => mapOf(s.o || {}) === k})),
         ...Object.entries(MAPS).filter(([, m]) => m.zoneWord).map(([k, m]) => C('frameZone', `${m.zoneWord[1]} (nom ou numéro : ${m.zoneWord[3]})`, 'text', {when: s => mapOf(s.o || {}) === k && s.o?.frame === 'zone'})),
         C('view', 'Mon cadrage : ouest, sud, est, nord (degrés)', 'text', {when: s => s.o?.frame === 'custom'}),
         C('proj', 'Projection', 'select', {choices: [['', 'Automatique'], ['equalearth', 'Equal Earth (monde, surfaces justes)'], ['robinson', 'Robinson (monde)'], ['laea', 'Lambert azimutale équivalente (Europe, pays)'], ['lambert', 'Lambert conique conforme'], ['mercator', 'Mercator']]}),
         C('insets', 'Outre-mer en encarts', 'check', {def: true, when: s => mapOf(s.o || {}) === 'fr' && !s.o?.frame}),
-        ...[['pc', l => l !== 'reg'], ['none', l => l === 'reg']].map(([def, ok]) => C('idf', 'Encart zoomé sur l’Île-de-France', 'select', {choices: [['none', 'Aucun'], ['pc', 'Paris et petite couronne'], ['idf', 'Toute l’Île-de-France']], def, when: s => mapOf(s.o || {}) === 'fr' && ok(levelOf(s.o || {})[0])})),
+        ...[['pc', l => l !== 'reg' && l !== 'par'], ['none', l => l === 'reg']].map(([def, ok]) => C('idf', 'Encart zoomé sur l’Île-de-France', 'select', {choices: [['none', 'Aucun'], ['pc', 'Paris et petite couronne'], ['idf', 'Toute l’Île-de-France']], def, when: s => mapOf(s.o || {}) === 'fr' && ok(levelOf(s.o || {})[0])})),
         ...Object.entries(MAPS).filter(([, m]) => m.zoneWord).map(([k, m]) => C('parentLines', `Limites ${m.zoneWord[2]} par-dessus les communes`, 'check', {def: true, when: s => mapOf(s.o || {}) === k && levelOf(s.o || {})[0] === 'com'})),
         C('context', 'Pays voisins en gris', 'check', {def: true, when: s => !!MAPS[mapOf(s.o || {})].ctx}),
         C('sea', 'Mer en couleur', 'check', {def: true}), C('seaColor', 'Couleur de la mer', 'color', {def: SEA, when: s => s.o?.sea !== false}),
         C('height', 'Hauteur du dessin (px, vide = selon la carte)', 'number', {min: 120, max: 3000})];
-    const CHORO_OPTS = [...mapOpts(),
+    const CHORO_OPTS = [...mapOpts({parishes: true}),
+        C('churches', 'Un point à chaque église', 'check', {def: true, when: s => levelOf(s.o || {})[0] === 'par'}), C('parentLines', 'Limites des départements par-dessus les paroisses', 'check', {def: true, when: s => levelOf(s.o || {})[0] === 'par'}),
+        C('fit', 'Cadrer tout seul sur les paroisses', 'check', {def: true, when: s => levelOf(s.o || {})[0] === 'par' && !s.o?.frame}),
         C('colorMode', 'Couleurs', 'select', {choices: [['', 'Dégradé continu'], ['classes', 'Par classes (tranches)']]}),
         C('ramp', 'Gamme de couleurs', 'select', {choices: [['', 'Bleus'], ['verts', 'Verts'], ['oranges', 'Oranges'], ['rouges', 'Rouges'], ['violets', 'Violets'], ['jaunerouge', 'Du jaune au rouge'], ['bleurouge', 'Du bleu au rouge (écarts)'], ['sepia', 'Sépia (ancien)'], ['gris', 'Gris'], ['perso', 'Mes deux couleurs…']]}),
         C('lowColor', 'Couleur des petits chiffres', 'color', {def: '#eef4fb', when: s => s.o?.ramp === 'perso'}), C('highColor', 'Couleur des grands chiffres', 'color', {def: '#08306b', when: s => s.o?.ramp === 'perso'}),
@@ -722,6 +810,7 @@
         C('labelSize', 'Taille des étiquettes', 'range', {min: .5, max: 2.5, step: .1, def: 1}), C('unit', 'Unité (ex. : naissances, %)'),
         C('hoverAll', 'Bulle aussi sur les zones sans chiffre', 'check', {def: true, when: s => levelOf(s.o || {})[0] !== 'com'}), C('hoverAll', 'Bulle aussi sur les communes sans chiffre (plus lent)', 'check', {def: false, when: s => levelOf(s.o || {})[0] === 'com'}), C('showMissing', 'Signaler les lignes pas trouvées sur la carte', 'check', {def: true})];
     const FLOW_OPTS = [...mapOpts(), C('fit', 'Cadrer tout seul sur les lieux', 'check', {def: true, when: s => !s.o?.frame}),
+        C('hub', 'Carte en étoile : seulement les liens de ce lieu (vide = tous les flux)'), C('hubDir', 'Liens montrés', 'select', {choices: [['', 'Ceux qui arrivent et ceux qui partent'], ['in', 'Seulement ceux qui arrivent'], ['out', 'Seulement ceux qui partent']], when: s => !!String(s.o?.hub || '').trim()}),
         C('maxWidth', 'Épaisseur du plus gros flux', 'range', {min: 2, max: 50, def: 14}), C('minWidth', 'Épaisseur du plus petit flux', 'range', {min: .3, max: 10, step: .1, def: 1.2}),
         C('curve', 'Courbure des flèches', 'range', {unit: '%', min: 0, max: 60, def: 25}), C('arrows', 'Pointes de flèche', 'check', {def: true}), C('opacity', 'Opacité des flèches', 'range', {unit: '%', min: 10, max: 100, def: 75}),
         C('colorBy', 'Couleur des flèches', 'select', {choices: [['', 'Une seule couleur'], ['origin', 'Selon le lieu de départ'], ['dest', 'Selon le lieu d’arrivée']]}), C('flowColor', 'Couleur des flèches', 'color', {def: '#c0392b', when: s => !s.o?.colorBy}),
@@ -830,6 +919,35 @@
         spec.series = [{...(spec.series?.[0] || {}), name: (srcLabel(q) || 'Nombre').replace(/ \(.*\)$/, '').replace(/…$/, '')}];
         return {points: spec.rows.length, lost};
     }
+    /** ✳️ la carte en étoile : les liens d'un lieu (conjoints venus, enfants partis, émigrés), une couleur par sorte de lien */
+    const STAR_COLORS = {in: '#4e79a7', out: '#f28e2b', emig: '#e15759'};
+    async function fillStar(spec, q, hub, links) {
+        const extra = Object.fromEntries(Object.entries(q).filter(([k]) => k.startsWith('dg_') || k === 'rules' || k === 'match'));
+        const r = await A().api('diagram_lot_c', {...extra, what: 'star', place: Number(hub.id), links: links.join(',')}), byId = new Map((r.places || []).map(p => [p.id, p]));
+        const names = new Map(); (r.places || []).forEach(p => { const f = fold(p.name); names.set(f, (names.get(f) || 0) + 1); });
+        const label = p => String(names.get(fold(p.name)) > 1 && (p.county || p.country) ? `${p.name} (${p.county || p.country})` : p.name).slice(0, 80);
+        const places = {}; let lost = 0;
+        spec.rows = (r.flows || []).map(f => { const a = byId.get(f.a), b = byId.get(f.b); if (!a || !b) return null; [a, b].forEach(p => { if (p.lat !== null && p.lon !== null && Number.isFinite(Number(p.lat))) places[fold(label(p))] = {lat: Number(p.lat), lon: Number(p.lon), n: label(p)}; else lost++; });
+            return {from: label(a), to: label(b), value: Number(f.n) || 0, color: STAR_COLORS[f.kind] || ''}; }).filter(Boolean);
+        spec.places = {...(spec.places || {}), ...places};
+        const hubP = byId.get(Number(hub.id)), hl = hubP ? label(hubP) : String(r.hub?.name || hub.title || '').slice(0, 80);
+        spec.o = {...(spec.o || {}), hub: hl, hubDir: '', title: i18n('Les liens de {name}', {name: hl}), subtitle: [links.includes('in') && i18n('bleu : conjoints venus'), links.includes('out') && i18n('orange : enfants partis'), links.includes('emig') && i18n('rouge : émigrés')].filter(Boolean).join(' · ')};
+        return {flows: spec.rows.length, lost};
+    }
+    /** ⛪ niveau « Paroisses » : une ligne par paroisse (place_parishes, sinon le lieu lui-même), sa position dans spec.places (api diagram_lot_c) */
+    async function fillParishes(spec, q) {
+        const count = ['births', 'baptisms', 'deaths', 'burials', 'marriages', 'all', 'sourced'].includes(q.what) ? q.what : q.what === 'people' || q.what === 'surnames' ? 'people' : 'events';
+        const extra = Object.fromEntries(Object.entries(q).filter(([k]) => k !== 'what' && k !== 'type'));
+        const r = await A().api('diagram_lot_c', {...extra, what: 'parishes', count}), sites = Array.isArray(r?.sites) ? r.sites : [];
+        const n = new Map(); sites.forEach(x => { const f = fold(x.name); n.set(f, (n.get(f) || 0) + 1); });
+        const places = {}, rows = sites.map(x => { const label = String(n.get(fold(x.name)) > 1 && x.county ? `${x.name} (${x.county})` : x.name).slice(0, 80);
+            places[fold(label)] = {lat: Number(x.lat), lon: Number(x.lon), n: label, k: 'par'};
+            const others = (x.places || []).filter(pn => fold(pn) !== fold(x.name)); return {label, s0: Number(x.n) || 0, ...(others.length ? {note: i18n('Lieux : {list}', {list: others.slice(0, 8).join(', ')})} : {})}; });
+        spec.rows = rows; spec.places = places;
+        spec.series = [{...(spec.series?.[0] || {}), name: (srcLabel(q) || 'Nombre').replace(/ \(.*\)$/, '').replace(/…$/, '')}];
+        spec.o = spec.o || {}; if (spec.o.unit === 'ans') spec.o.unit = '';
+        return {parishes: rows.length, mapped: Number(r?.mapped) || 0};
+    }
     /** chiffres « tenus à jour » : spec.live = {key: 'geo:<sorte>:<ancêtres 0|1>:<de>:<à>[:<sorte d'événement>]', label} (la fin, seulement pour « type » : les anciennes clés restent bonnes) */
     const parseLive = key => { const m = String(key || '').match(/^geo:([a-z_]+):([01]):(-?\d*):(-?\d*)(?::(\d{1,9}))?$/); if (!m || ![...SRC_ZONES, ...SRC_FLOWS].some(x => x[0] === m[1])) return null; if ((m[1] === 'type') !== !!m[5]) return null;
         const q = {what: m[1]}; if (m[2] === '1') q.ancestors = 1; if (m[3] !== '') q.from = Number(m[3]); if (m[4] !== '') q.to = Number(m[4]); if (m[5]) q.type = Number(m[5]); return q; };
@@ -838,7 +956,7 @@
     /** avant le dessin : le fond (et le fond autour) chargés, les chiffres tenus à jour relus */
     async function resolve(spec) {
         const s = JSON.parse(JSON.stringify(spec || {})), o = s.o || {}, q0 = parseLive(s.live?.key), q = q0 && s.live?.dg && typeof s.live.dg === 'object' ? {...q0, ...Object.fromEntries(Object.entries(s.live.dg).filter(([k, v]) => /^dg_[a-z]+$/.test(k) && (typeof v === 'string' || typeof v === 'number') && String(v).length <= 4000))} : q0; // dg : le groupe de personnes gardé avec « Tenir à jour »
-        if (q) { try { if (s.kind === 'flowmap') await fillFlows(s, q); else if (s.kind === 'bubblemap') await fillBubbles(s, q); else await fillZones(s, q); } catch (_) {} }
+        if (q) { try { if (s.kind === 'flowmap') await fillFlows(s, q); else if (s.kind === 'bubblemap') await fillBubbles(s, q); else if (levelOf(o)[0] === 'par') await fillParishes(s, q); else await fillZones(s, q); } catch (_) {} }
         if (MAPS[mapOf(o)].zoneBase) await load(MAPS[mapOf(o)].zoneBase).catch(() => {}); // cadrage sur un département, « nom (département) »
         const view = viewOf(o), ids = [baseIdOf(o, view), ctxIdOf(o, baseIdOf(o, view), view)];
         const pts = s.kind === 'flowmap' || s.kind === 'bubblemap';
@@ -921,9 +1039,11 @@
         const spec = api.spec(), flows = spec.kind === 'flowmap', bub = spec.kind === 'bubblemap', srcs = flows ? SRC_FLOWS : SRC_ZONES, cur = parseLive(spec.live?.key) || {};
         const P = window.LCNDA_PICKER;
         box.innerHTML = `<h4>📍 ${flows ? i18n('Les migrations de ton arbre') : i18n('Les lieux de ton arbre')}</h4>
-            <p class="muted">${bub ? 'Chaque lieu de ta base devient un rond, plus gros quand plus de personnes y sont nées (mariées, décédées). Les lieux avec des coordonnées sont placés exactement ; les autres sont cherchés par leur nom sur la carte. Le tableau est remplacé.' : flows ? 'Chaque personne relie deux lieux de ta base (ceux qui ont des coordonnées, ou une zone de la carte reconnue). Le tableau est remplacé.' : 'Chaque lieu de ta base est rattaché à sa zone (d’après ses coordonnées, sinon son département, sa région ou son pays ; pour les communes : son code INSEE, puis son nom et son département), puis les zones sont comptées. Le tableau est remplacé.'}</p>
-            <div class="dgm-form"><label>Quoi<select data-dgm-what>${flows ? srcs.map(([k, l]) => `<option value="${k}" ${cur.what === k ? 'selected' : ''}>${esc(l)}</option>`).join('')
+            <p class="muted">${bub ? 'Chaque lieu de ta base devient un rond, plus gros quand plus de personnes y sont nées (mariées, décédées). Les lieux avec des coordonnées sont placés exactement ; les autres sont cherchés par leur nom sur la carte. Le tableau est remplacé.' : flows ? 'Chaque personne relie deux lieux de ta base (ceux qui ont des coordonnées, ou une zone de la carte reconnue). Le tableau est remplacé.' : 'Chaque lieu de ta base est rattaché à sa zone (d’après ses coordonnées, sinon son département, sa région ou son pays ; pour les communes : son code INSEE, puis son nom et son département), puis les zones sont comptées. Le tableau est remplacé.'}</p>${!flows && !bub ? `<p class="muted">${esc(i18n('⛪ Au niveau « Paroisses » (Réglages → Niveau de détail) : une zone autour de chaque église, d’après les paroisses d’Ancien Régime de tes lieux ; un lieu sans paroisse compte pour lui-même.'))}</p>` : ''}
+            <div class="dgm-form"><label>Quoi<select data-dgm-what>${flows ? srcs.map(([k, l]) => `<option value="${k}" ${cur.what === k ? 'selected' : ''}>${esc(l)}</option>`).join('') + `<option value="star">${esc(i18n('✳️ Tous les liens d’un lieu (carte en étoile)'))}</option>`
                 : SRC_GROUPS.map(([g, items]) => `<optgroup label="${esc(g)}">${items.map(([k, l]) => `<option value="${k}" ${cur.what === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</optgroup>`).join('')}</select></label>
+            ${flows ? `<div data-dgm-starbox hidden><span class="pk-lab">${esc(i18n('Le village'))}</span><div data-dgm-hub>${P.pickerField({name: '', hiddenName: false, kind: 'place', inline: true})}</div>
+                ${[['in', 'Conjoints venus s’y marier'], ['out', 'Enfants partis (nés ici, morts ou mariés ailleurs)'], ['emig', 'Émigrés (morts dans un autre pays)']].map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" data-dgm-link="${k}" checked> ${esc(i18n(l))}</label>`).join('')}</div>` : ''}
             ${flows ? '' : `<label data-dgm-typebox ${cur.what === 'type' ? '' : 'hidden'}>Quelle sorte d’événement<select data-dgm-type>${typeOptions(cur.type)}</select></label>`}
             <label class="checkbox-line"><input type="checkbox" data-dgm-anc ${cur.ancestors ? 'checked' : ''}> Seulement mes ancêtres (lignée Sosa)</label>
             <span class="dgm-period"><label>De l’année<input type="number" inputmode="numeric" data-dgm-from value="${esc(cur.from ?? '')}" placeholder="ex. 1700" min="-3000" max="3000"></label><label>à l’année<input type="number" inputmode="numeric" data-dgm-to value="${esc(cur.to ?? '')}" placeholder="ex. 1900" min="-3000" max="3000"></label></span>
@@ -933,18 +1053,30 @@
             <h4>📍 Les lieux du tableau</h4><p class="muted">Un lieu sans position (⚠) : choisis-le dans ta base ou dans les communes et villes du monde, ou tape ses coordonnées dans le tableau (« Rennes 48.11, -1.68 »).</p><div data-dgm-places></div><button type="button" class="button small secondary" data-dgm-find>🔎 Retrouver les lieux sans position</button>` : ''}`;
         const msg = t => { box.querySelector('[data-dgm-msg]').textContent = t; };
         if (!flows) loadTypes().then(() => { const sel = box.querySelector('[data-dgm-type]'); if (sel && box.isConnected) { const v = sel.value || cur.type; sel.innerHTML = typeOptions(v); } });
-        box.querySelector('[data-dgm-what]').addEventListener('change', e => { const tb = box.querySelector('[data-dgm-typebox]'); if (tb) tb.hidden = e.target.value !== 'type'; });
+        box.querySelector('[data-dgm-what]').addEventListener('change', e => { const tb = box.querySelector('[data-dgm-typebox]'); if (tb) tb.hidden = e.target.value !== 'type'; const sb = box.querySelector('[data-dgm-starbox]'); if (sb) sb.hidden = e.target.value !== 'star'; });
+        box.querySelector('[data-dgm-hub]')?.addEventListener('picker-change', e => { box._hub = e.detail?.item || null; });
         const query = () => { const q = {what: box.querySelector('[data-dgm-what]').value}; if (q.what === 'type') q.type = Number(box.querySelector('[data-dgm-type]')?.value) || 0; if (box.querySelector('[data-dgm-anc]').checked) q.ancestors = 1; const f = box.querySelector('[data-dgm-from]').value.trim(), t = box.querySelector('[data-dgm-to]').value.trim(); if (/^-?\d{1,4}$/.test(f)) q.from = Number(f); if (/^-?\d{1,4}$/.test(t)) q.to = Number(t); return {...q, ...(window.LCNDA_EXT?.diagramAppOpts?.extra() || {})}; }; // + le groupe de personnes commun (heritage-diagram-options.js)
         box.querySelector('[data-dgm-go]').addEventListener('click', async e => {
             const b = e.currentTarget, q = query(); if (q.what === 'type' && !q.type) return msg('Choisis d’abord une sorte d’événement.');
+            if (q.what === 'star') { // ✳️ la carte en étoile : les liens d'un lieu (api diagram_lot_c)
+                const hub = box._hub, links = [...box.querySelectorAll('[data-dgm-link]')].filter(x => x.checked).map(x => x.dataset.dgmLink);
+                if (!hub?.id) return msg(i18n('Choisis d’abord le village.')); if (!links.length) return msg(i18n('Coche au moins une sorte de lien.'));
+                b.disabled = true; msg('⏳ ' + i18n('Lecture de l’arbre…'));
+                try { const s = api.spec(), rep = await fillStar(s, q, hub, links); delete s.live;
+                    msg(rep.flows ? '✓ ' + i18n('{n} pris dans l’arbre.', {n: i18n('{n} flux', {n: rep.flows, ctx: 'migration'})}) + (rep.lost ? ' ' + i18n('{n} : voir « Les lieux du tableau ».', {n: pl(rep.lost, 'lieu sans coordonnées', 'lieux sans coordonnées')}) : '') : i18n('Aucun lien trouvé pour ce lieu (naissance, mariage ou décès ailleurs).'));
+                    put(s); paintPlaces?.(); } catch (err) { msg('⛔ ' + (err.message || 'Lecture impossible.')); } finally { b.disabled = false; }
+                return;
+            }
             b.disabled = true; msg('⏳ Lecture de l’arbre…');
             try {
                 const s = api.spec(), prevLabel = box._lastLabel || s.live?.label || '', label = srcLabel(q).replace(/…$/, '') + (q.ancestors ? ' ' + i18n('(mes ancêtres)') : '') + (q.from || q.to ? ` ${q.from ?? '…'}–${q.to ?? '…'}` : '');
-                const rep = flows ? await fillFlows(s, q) : bub ? await fillBubbles(s, q) : await fillZones(s, q);
+                const par = !flows && !bub && levelOf(s.o || {})[0] === 'par'; // ⛪ niveau « Paroisses »
+                const rep = flows ? await fillFlows(s, q) : bub ? await fillBubbles(s, q) : par ? await fillParishes(s, q) : await fillZones(s, q);
                 if (box.querySelector('[data-dgm-live]').checked) { const dg = Object.fromEntries(Object.entries(q).filter(([k]) => k.startsWith('dg_'))); s.live = {key: liveKey(q), label, ...(Object.keys(dg).length ? {dg} : {})}; } else delete s.live;
                 const smp = (flows ? FLOW_SAMPLE() : bub ? BUBBLE_SAMPLE() : CHORO_SAMPLE()).o; if (!s.o.title || s.o.title === smp.title || (prevLabel && s.o.title === prevLabel)) s.o.title = label; box._lastLabel = label; if (s.o.subtitle === smp.subtitle) s.o.subtitle = ''; if (s.o.unit === smp.unit && !flows) s.o.unit = '';
                 if (bub) msg(rep.points ? '✓ ' + i18n('{n} pris dans l’arbre.', {n: pl(rep.points, 'lieu')}) + (rep.lost ? ' ' + i18n(rep.lost > 1 ? '{n} : cherchés par leur nom sur la carte.' : '{n} : cherché par leur nom sur la carte.', {n: pl(rep.lost, 'lieu sans coordonnées', 'lieux sans coordonnées')}) : '') : i18n('Aucun lieu dans ton arbre pour ce choix.'));
                 else if (flows) { if (!rep.flows) { msg(i18n('Aucun déplacement trouvé (il faut deux lieux différents pour une même personne).')); } else msg('✓ ' + i18n('{n} pris dans l’arbre.', {n: i18n('{n} flux', {n: rep.flows, ctx: 'migration'})}) + (rep.lost ? ' ' + i18n('{n} : voir « Les lieux du tableau ».', {n: pl(rep.lost, 'lieu sans coordonnées', 'lieux sans coordonnées')}) : '')); }
+                else if (par) msg(rep.parishes ? '✓ ' + i18n('{n} prises dans l’arbre ({m} lieux rattachés à une paroisse d’Ancien Régime, les autres comptent pour eux-mêmes).', {n: pl(rep.parishes, 'paroisse'), m: rep.mapped}) : i18n('Aucun lieu avec des coordonnées pour ce choix : place d’abord tes lieux sur la carte.'));
                 else msg(rep.zones ? '✓ ' + (rep.avg ? i18n('{n} à {z} (âge moyen sur {p} ; la carte montre des années, pas un nombre).', {n: pl(rep.places - rep.lost, 'lieu rattaché', 'lieux rattachés'), z: pl(rep.zones, 'zone'), p: pl(rep.people, 'personne')}) : i18n('{n} à {z}.', {n: pl(rep.places - rep.lost, 'lieu rattaché', 'lieux rattachés'), z: pl(rep.zones, 'zone')})) + (rep.lost ? ' ' + i18n('{n} hors de cette carte ou sans position ({list}).', {n: pl(rep.lost, 'lieu', 'lieux'), list: rep.lostNames.join(', ') + (rep.lost > rep.lostNames.length ? '…' : '')}) : '') : i18n('Aucun lieu de ton arbre ne tombe sur cette carte : change de carte ou de niveau dans Réglages.'));
                 put(s);
             } catch (err) { msg('⛔ ' + (err.message || 'Lecture impossible.')); } finally { b.disabled = false; }
@@ -990,7 +1122,7 @@
      * zone plus fine que le niveau de la carte) est retenue avec sa position (spec.places) : elle compte dans son
      * département, sa région… tant que la carte n'est pas au niveau des communes. Pastille orange : ligne ambiguë ou inconnue. */
     // niveau → [mot, finesse (0 = commune), « son … », « leur … », un/une]
-    const LV = {com: ['ville', 0, 'sa commune', 'leur commune', 'une ville'], dep: ['département', 1, 'son département', 'leur département', 'un département'], prov: ['province', 1, 'sa province', 'leur province', 'une province'],
+    const LV = {com: ['ville', 0, 'sa commune', 'leur commune', 'une ville'], par: ['paroisse', 0, 'sa paroisse', 'leur paroisse', 'une paroisse'], dep: ['département', 1, 'son département', 'leur département', 'un département'], prov: ['province', 1, 'sa province', 'leur province', 'une province'],
         cant: ['canton', 1, 'son canton', 'leur canton', 'un canton'], nuts2: ['région', 1, 'sa région', 'leur région', 'une région'], reg: ['région', 2, 'sa région', 'leur région', 'une région'],
         nuts1: ['grande région', 2, 'sa grande région', 'leur grande région', 'une grande région'], pays: ['pays', 3, 'son pays', 'leur pays', 'un pays'], cont: ['continent', 4, 'son continent', 'leur continent', 'un continent']};
     const levelWord = (map, lv) => { const w = map === 'ch' && lv === 'reg' ? LV.nuts1 : LV[lv] || ['zone', 1, 'sa zone', 'leur zone', 'une zone']; return [i18n(w[0], {ctx: 'niveau'}), w[1], i18n(w[2]), i18n(w[3]), i18n(w[4])]; };
@@ -1022,6 +1154,7 @@
         const hm = String(q).match(/^(.+?)[\s,(]+([^\s,()]+)\)?\s*$/), head = hm ? nameKey(hm[1]) : '', cb = C.com && loaded(C.com.id), hp = hm && cb ? parentsOf(cb, hm[2]) : new Set();
         const sc = (k, x) => k === x ? 0 : k.startsWith(x) ? 1 : k.includes(' ' + x) ? 2 : 9, out = [];
         for (const L of C.levels) {
+            if (C.here.lv === 'par' && L.lv !== 'com') continue; // ⛪ une paroisse : seulement les communes (pour sa position)
             const b = loaded(L.id); if (!b || (b.communes && qk.length < 2)) continue;
             for (const e of suggIndex(b)) {
                 let s = sc(e.k, qk), alt = '';
@@ -1058,6 +1191,12 @@
     function rowStatus(spec, raw) {
         const C = zoneCtx(spec), base = loaded(C.here.id), s = String(raw ?? '').trim();
         if (!s || !base) return {ok: true};
+        if (C.here.lv === 'par') { // ⛪ une paroisse : il lui faut une position (choisie dans la liste, prise dans l'app, ou écrite)
+            if (pickedOf(spec, s) || coordIn(s)) return {ok: true};
+            const cp = C.com && loaded(C.com.id), mc = cp ? matchCommune(cp, s) : {z: null};
+            if (mc.z) return {auto: {L: C.com, b: cp, z: mc.z}};
+            return {why: 'inconnu', msg: i18n('Paroisse sans position : choisis sa commune dans la liste, ou écris « Nom 45.27, 1.77 ».'), pending: !!(C.com && !cp)};
+        }
         const m = zoneOfRow(spec, base, s); if (m.z) return {ok: true, z: m.z, via: m.via};
         const cb = C.com && loaded(C.com.id);
         if (base.communes && m.why === 'homonymes') return {why: 'homonymes', msg: homonymsMsg(base, s)};

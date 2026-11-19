@@ -1,0 +1,232 @@
+fr ¦ ro
+# Zone « diagrammes-lot-b » : diagramme de Lexis, ternaire, chandeliers, courbe avec marge, horizon, dendrogramme, durée des générations, couverture des sources, trajectoires de vie, alluvial (heritage-diagram-lot-b.js et réglages de heritage-diagram-plus/vie/famille.js, heritage-diagrams-render.js)
+=vie ¦ viață|vieți|de vieți
+=période ¦ perioadă|perioade|de perioade
+Célibataire ¦ Necăsătorit(ă)
+Marié(e) ¦ Căsătorit(ă)
+Remarié(e) ¦ Recăsătorit(ă)
+Veuf ou veuve ¦ Văduv(ă)
+Divorcé(e) ¦ Divorțat(ă)
+Décédé(e) ¦ Decedat(ă)
+État civil inconnu ¦ Stare civilă necunoscută
+Métier inconnu ¦ Meserie necunoscută
+Pays inconnu ¦ Țară necunoscută
+Autres états ¦ Alte stări
+Sexe inconnu ¦ Sex necunoscut
+Départ (autre commune) ¦ Plecare (altă comună)
+Ajoute des personnes : le nom, la naissance et le décès (années ou dates). ¦ Adaugă persoane: numele, nașterea și decesul (ani sau date).
+Diagramme de Lexis : {n}, de {a} à {b}. ¦ Diagrama Lexis: {n}, din {a} până în {b}.
+Choléra ¦ Holeră
+Guerre de 1870 ¦ Războiul din 1870
+Grande Guerre ¦ Marele Război
+📐 Les vies de ma base ¦ 📐 Viețile din baza mea
+Chaque vie devient une diagonale, de la naissance (âge 0) au décès ; les mariages, les naissances des enfants et les départs posés dessus. ¦ Fiecare viață devine o diagonală, de la naștere (vârsta 0) la deces; cu căsătoriile, nașterile copiilor și plecările pe ea.
+Combien de vies au plus ¦ Câte vieți cel mult
+Une par nom de famille ¦ Una pe nume de familie
+Naissances des enfants ¦ Nașterile copiilor
+Départs (première commune autre que celle de naissance) ¦ Plecări (prima comună alta decât cea natală)
+Bandes historiques (guerres, épidémies) ¦ Benzi istorice (războaie, epidemii)
+Personne avec une date de naissance dans ce groupe. ¦ Nimeni cu dată de naștere în acest grup.
+Diagramme de Lexis ¦ Diagrama Lexis
+Diagramme de Lexis (âge × année : une vie = une diagonale) ¦ Diagrama Lexis (vârstă × an: o viață = o diagonală)
+Les années en bas, les âges à gauche : chaque vie monte en diagonale de sa naissance à son décès ; les mariages, les enfants, les départs et les grandes crises s’y lisent d’un coup d’œil. ¦ Anii jos, vârstele în stânga: fiecare viață urcă în diagonală de la naștere la deces; căsătoriile, copiii, plecările și marile crize se văd dintr-o privire.
+Les vies ¦ Viețile
+Les vies de la famille {name} ¦ Viețile familiei {name}
+Personne (même nom que ci-dessus) ¦ Persoană (același nume ca mai sus)
+Les marques (sur la vie de la personne) ¦ Marcajele (pe viața persoanei)
+Bandes historiques ¦ Benzi istorice
+Groupe (couleur) ¦ Grup (culoare)
+Couleur de chaque groupe (facultatif) ¦ Culoarea fiecărui grup (opțional)
+Âge au plus ¦ Vârstă cel mult
+Couleur des vies ¦ Culoarea vieților
+Homme / femme ¦ Bărbat / femeie
+Montrer les marques ¦ Arată marcajele
+Taille des marques ¦ Mărimea marcajelor
+Nom des bandes ¦ Numele benzilor
+Diagonales des générations ¦ Diagonalele generațiilor
+Nom au bout de chaque vie ¦ Numele la capătul fiecărei vieți
+Épaisseur des vies ¦ Grosimea vieților
+Ajoute des points : un nom et ses trois parts (des nombres ou des %). ¦ Adaugă puncte: un nume și cele trei părți (numere sau %).
+Part A ¦ Partea A
+Part B ¦ Partea B
+Part C ¦ Partea C
+Diagramme ternaire : {n} ({a}, {b}, {c}). ¦ Diagramă ternară: {n} ({a}, {b}, {c}).
+Agriculture ¦ Agricultură
+Artisanat et industrie ¦ Meșteșuguri și industrie
+Commerce et services ¦ Comerț și servicii
+Agriculture et forêt ¦ Agricultură și silvicultură
+Artisanat ¦ Meșteșuguri
+Industrie, mines ¦ Industrie, mine
+Transports et mer ¦ Transporturi și mare
+Services, domestiques ¦ Servicii, servitori
+Armée et police ¦ Armată și poliție
+Clergé ¦ Cler
+Professions libérales, école, administration ¦ Profesii liberale, școală, administrație
+Rentiers, rangs et statuts ¦ Rentieri, ranguri și statuturi
+Au foyer, sans profession ¦ Casnic, fără profesie
+Autre métier ¦ Altă meserie
+Tous les autres métiers ¦ Toate celelalte meserii
+🔺 Les métiers de ma base ¦ 🔺 Meseriile din baza mea
+Les métiers (fiche, événements « Profession », recensements) rangés en grands secteurs ; un point par commune de naissance, par décennie ou par famille, placé selon ses trois parts. ¦ Meseriile (fișă, evenimente „Profesie”, recensăminte) grupate pe mari sectoare; un punct pe comună natală, deceniu sau familie, așezat după cele trei părți.
+Un point par ¦ Un punct pe
+Décennie de naissance (reliées dans le temps) ¦ Deceniul nașterii (legate în timp)
+Combien de points au plus ¦ Câte puncte cel mult
+Part du haut ¦ Partea de sus
+Part de gauche ¦ Partea din stânga
+Part de droite ¦ Partea din dreapta
+« Tous les autres métiers » ne peut servir qu’une fois. ¦ „Toate celelalte meserii” se poate folosi o singură dată.
+Décennies ¦ Decenii
+Aucun métier connu pour ces personnes. ¦ Nicio meserie cunoscută pentru aceste persoane.
+Les métiers de ma base, en trois parts ¦ Meseriile din baza mea, în trei părți
+Les métiers de trois villages, siècle par siècle ¦ Meseriile a trei sate, secol cu secol
+Diagramme ternaire (trois parts qui font 100 %) ¦ Diagramă ternară (trei părți care fac 100 %)
+Parts ¦ Părți
+Un triangle : chaque point a trois parts (par exemple agriculture, artisanat, commerce) ; plus il est près d’un coin, plus cette part est grande. ¦ Un triunghi: fiecare punct are trei părți (de exemplu agricultură, meșteșuguri, comerț); cu cât e mai aproape de un colț, cu atât acea parte e mai mare.
+Les points (trois parts chacun) ¦ Punctele (câte trei părți)
+Groupe (couleur, points reliés) ¦ Grup (culoare, puncte legate)
+Ordre (année…) ¦ Ordine (an…)
+Nom de la part du haut ¦ Numele părții de sus
+Nom de la part de gauche ¦ Numele părții din stânga
+Nom de la part de droite ¦ Numele părții din dreapta
+Couleur du haut ¦ Culoarea de sus
+Couleur de gauche ¦ Culoarea din stânga
+Couleur de droite ¦ Culoarea din dreapta
+Tous les 10 % ¦ La fiecare 10 %
+Tous les 20 % ¦ La fiecare 20 %
+Sans grille ¦ Fără grilă
+Une par point ¦ Una pe punct
+Selon le total ¦ După total
+Relier les points d’un groupe dans l’ordre ¦ Leagă în ordine punctele unui grup
+Noms des points ¦ Numele punctelor
+Ajoute des périodes : la date, le prix d’ouverture, de clôture, le plus bas et le plus haut. ¦ Adaugă perioade: data, prețul de deschidere, de închidere, cel mai mic și cel mai mare.
+ouverture ¦ deschidere
+clôture ¦ închidere
+plus bas ¦ minim
+plus haut ¦ maxim
+Hausse (clôture plus haute) ¦ Creștere (închidere mai mare)
+Baisse (clôture plus basse) ¦ Scădere (închidere mai mică)
+Moyenne mobile sur {n} périodes ¦ Medie mobilă pe {n} perioade
+Chandeliers : {n}, de {a} à {b} ({p} %). ¦ Lumânări: {n}, de la {a} la {b} ({p} %).
+Prix du setier de blé au marché de {name} ¦ Prețul baniței de grâu la târgul din {name}
+Disette ¦ Lipsă
+Guerre des farines ¦ Războiul făinii
+Chandeliers (prix du blé, mercuriales) ¦ Lumânări (prețul grâului, mercuriale)
+Pour chaque période : le prix au début (ouverture), à la fin (clôture), le plus bas et le plus haut. Vert si le prix monte, rouge s’il baisse ; les années de disette en bandes. ¦ Pentru fiecare perioadă: prețul la început (deschidere), la sfârșit (închidere), cel mai mic și cel mai mare. Verde dacă urcă, roșu dacă scade; anii de lipsă în benzi.
+Les périodes (date, ouverture, clôture, plus bas, plus haut) ¦ Perioadele (dată, deschidere, închidere, minim, maxim)
+Date ou période ¦ Dată sau perioadă
+Plus bas ¦ Minim
+Plus haut ¦ Maxim
+Les années à part (disette, guerre…) ¦ Anii aparte (lipsă, război…)
+Autre unité (écrite) ¦ Altă unitate (scrisă)
+livres ¦ livre
+sols ¦ soli
+deniers ¦ denieri
+Couleur de la hausse ¦ Culoarea creșterii
+Couleur de la baisse ¦ Culoarea scăderii
+Hausse en creux (bougie vide) ¦ Creștere goală (lumânare goală)
+Moyenne mobile (périodes, 0 = non) ¦ Medie mobilă (perioade, 0 = nu)
+Couleur de la moyenne ¦ Culoarea mediei
+Années à part en bandes ¦ Ani aparte în benzi
+Largeur des bougies ¦ Lățimea lumânărilor
+Âge au premier mariage ¦ Vârsta la prima căsătorie
+Âge au premier enfant ¦ Vârsta la primul copil
+± un écart-type ¦ ± o abatere standard
+intervalle à 95 % ¦ interval de 95 %
+mes ancêtres ¦ strămoșii mei
+📏 Moyenne et marge : {x} ¦ 📏 Medie și marjă: {x}
+Pas assez de personnes datées (au moins 3 par période). ¦ Prea puține persoane datate (cel puțin 3 pe perioadă).
+Basse ¦ Joasă
+Haute ¦ Înaltă
+{x} : moyenne et marge ¦ {x}: medie și marjă
+Marge : un écart-type de part et d’autre, par quart de siècle de naissance ¦ Marjă: o abatere standard de o parte și de alta, pe sfert de secol al nașterii
+Marge : intervalle de confiance à 95 % de la moyenne, par quart de siècle de naissance ¦ Marjă: interval de încredere de 95 % al mediei, pe sfert de secol al nașterii
+Marge (basse – haute) ¦ Marjă (joasă – înaltă)
+Marge (±) ¦ Marjă (±)
+Fourchette (marge autour de la courbe) ¦ Interval (marjă în jurul curbei)
+Deux colonnes : basse et haute ¦ Două coloane: joasă și înaltă
+Une colonne ± écart ¦ O coloană ± abatere
+Colonne basse (n°) ¦ Coloana joasă (nr.)
+Colonne haute (n°) ¦ Coloana înaltă (nr.)
+Colonne de l’écart (n°) ¦ Coloana abaterii (nr.)
+Autour de la colonne (n°) ¦ În jurul coloanei (nr.)
+Opacité de la marge ¦ Opacitatea marjei
+Couleur de la marge ¦ Culoarea marjei
+Axe : minimum ¦ Axă: minim
+Axe : maximum ¦ Axă: maxim
+(axe de droite) ¦ (axa din dreapta)
+Clôture ¦ Închidere
+{name} : de {a} à {b}, le plus en {peak} ({v}) ¦ {name}: de la {a} la {b}, maximul în {peak} ({v})
+Le plus bas ¦ Cel mai jos
+Le plus haut ¦ Cel mai sus
+Négatif (replié) ¦ Negativ (pliat)
+Graphique en horizon : {s} séries sur {n} périodes. ¦ Grafic orizont: {s} serii pe {n} perioade.
+Horizon (bandes repliées) ¦ Orizont (benzi pliate)
+Collines ¦ Dealuri
+Nombre de couches ¦ Număr de straturi
+Teinte des négatifs ¦ Nuanța negativelor
+Chevauchement ¦ Suprapunere
+Courbes douces ¦ Curbe line
+Trait blanc autour ¦ Contur alb
+Arbre de regroupement à gauche (dendrogramme) ¦ Arbore de grupare la stânga (dendrogramă)
+Groupes de couleur ¦ Grupuri de culoare
+Les branches de l’arbre ¦ Ramurile arborelui
+Cacher les noms des correspondances ¦ Ascunde numele potrivirilor
+Durée des générations ¦ Durata generațiilor
+Durée des générations — {name} ¦ Durata generațiilor — {name}
+Lignée paternelle : une génération = {n} ans en moyenne ¦ Linia paternă: o generație = în medie {n} ani
+Lignée maternelle : une génération = {n} ans en moyenne ¦ Linia maternă: o generație = în medie {n} ani
+moyenne {n} ans ¦ medie {n} ani
+Toutes les naissances du groupe ¦ Toate nașterile din grup
+Seulement la lignée paternelle directe (père du père…) ¦ Doar linia paternă directă (tatăl tatălui…)
+Seulement la lignée maternelle directe (mère de la mère…) ¦ Doar linia maternă directă (mama mamei…)
+Les deux lignées directes ¦ Ambele linii directe
+La personne dont on suit les lignées ¦ Persoana ale cărei linii le urmărim
+Aucune génération datée dans cette lignée (il faut la naissance de l’enfant et celle du parent). ¦ Nicio generație datată în această linie (e nevoie de nașterea copilului și a părintelui).
+Génération (lignée) ¦ Generație (linie)
+Paternelle ¦ Paternă
+Maternelle ¦ Maternă
+Relier les points d’une lignée ¦ Leagă punctele unei linii
+Ligne de repère ¦ Linie de referință
+Les générations (lignées) ¦ Generațiile (linii)
+Pas attendu ¦ Nu e așteptat
+Manquant ¦ Lipsă
+Ajoute des ancêtres : le numéro Sosa, le nom et, pour chaque acte, sourcé, sans source ou manquant. ¦ Adaugă strămoși: numărul Sosa, numele și, pentru fiecare act, cu sursă, fără sursă sau lipsă.
+Une ligne par ancêtre ¦ Un rând pe strămoș
+Une ligne par ancêtre (+ recensements, notaire, militaire) ¦ Un rând pe strămoș (+ recensăminte, notar, militar)
+Fiches militaires ¦ Fișe militare
+Colonnes en plus ¦ Coloane în plus
+Recensement, notaire, militaire ¦ Recensământ, notar, militar
+Recensement seulement ¦ Doar recensământ
+Les trous d’abord ¦ Golurile întâi
+Par numéro Sosa ¦ După numărul Sosa
+Ancêtres au plus ¦ Strămoși cel mult
+Axe ¦ Axă
+Ce qu’on suit ¦ Ce urmărim
+L’état civil ¦ Starea civilă
+L’état civil (célibataire, marié, veuf…) : trajectoires de vie ¦ Starea civilă (necăsătorit, căsătorit, văduv…): traiectorii de viață
+La commune ¦ Comuna
+Les lieux de vie ¦ Locurile de viață
+Un groupe de personnes (critères) ¦ Un grup de persoane (criterii)
+Trajectoires de vie ¦ Traiectorii de viață
+Trajectoires de vie de {n}. ¦ Traiectorii de viață: {n}.
+Métiers au fil de la vie de {n}. ¦ Meserii de-a lungul vieții: {n}.
+Les métiers au fil de la vie ¦ Meseriile de-a lungul vieții
+Les mêmes personnes à plusieurs âges (20, 40, 60 ans…) ¦ Aceleași persoane la mai multe vârste (20, 40, 60 de ani…)
+Âges des colonnes ¦ Vârstele coloanelor
+À {n} ans ¦ La {n} ani
+L’état civil des mêmes personnes à {a} ans ¦ Starea civilă a acelorași persoane la {a} ani
+Où vivaient les mêmes personnes à {a} ans ¦ Unde trăiau aceleași persoane la {a} ani
+Le métier des mêmes personnes à {a} ans ¦ Meseria acelorași persoane la {a} ani
+Le même qu’à l’âge d’avant — {list} ¦ La fel ca la vârsta dinainte — {list}
+Les mêmes personnes à {n} âges : {l}. ¦ Aceleași persoane la {n} vârste: {l}.
+En % de la colonne (au lieu des nombres) ¦ În % din coloană (în loc de numere)
+État civil (trajectoires de vie) ¦ Stare civilă (traiectorii de viață)
+Naissance (pour l’axe des âges) ¦ Naștere (pentru axa vârstelor)
+Début (année ou âge, vide = auto) ¦ Început (an sau vârstă, gol = auto)
+Fin (année ou âge, vide = auto) ¦ Sfârșit (an sau vârstă, gol = auto)
+Par durée de vie ¦ După durata vieții
+Par état à 50 ans ¦ După starea la 50 de ani
+âge (années) ¦ vârstă (ani)
+Vérifie le groupe de personnes et la période. ¦ Verifică grupul de persoane și perioada.
+{n} pris dans ta base. ¦ {n} luate din baza ta.
+{n} prises dans ta base. ¦ {n} luate din baza ta.

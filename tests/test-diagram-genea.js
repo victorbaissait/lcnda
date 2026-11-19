@@ -48,7 +48,7 @@ step('les 8 sortes sont rangées (Généalogie, Frises) avec une icône, un nom,
         assert.match(svg, /^<svg[^>]+viewBox="0 0 900 \d+/, k); assert.doesNotMatch(svg, /Dessin impossible/, k);
         assert.ok(svg.length > 1500, k + ' : un vrai dessin');
     }
-    assert.match(R.KINDS.venn.label, /2 à 4/);
+    assert.match(R.KINDS.venn.label, /2 à 8/); // lot A : jusqu’à 8 ensembles (barres croisées dès 5)
 });
 step('SVG valide en XML (fichier .svg exporté, image PNG) : chaque attribut a une valeur', () => {
     // <rect … data-gn-bg/> passait dans la page (HTML) mais rendait le fichier SVG du réseau illisible
@@ -79,7 +79,7 @@ step('dates C4 comprises (jour, mois, année ; républicain ; sans année)', () 
 step('Venn : 2, 3 ou 4 ensembles, toutes les zones placées ; l’ancien Venn se dessine encore', () => {
     for (const [n, z] of [[2, 3], [3, 7], [4, 15]]) { assert.equal(G.ZONES(n).length, z); assert.deepEqual(Object.keys(G.vennLayout(n).at).sort(), [...G.ZONES(n)].sort(), `${n} ensembles`); }
     const fixed = R.KINDS.venn.grids[1].fixed; assert.equal(typeof fixed, 'function');
-    assert.equal(fixed({ sets: [{}, {}] }).length, 3); assert.equal(fixed({ sets: [{}, {}, {}, {}, {}] }).length, 15);
+    assert.equal(fixed({ sets: [{}, {}] }).length, 3); assert.equal(fixed({ sets: [{}, {}, {}, {}, {}] }).length, 31); assert.equal(fixed({ sets: Array(12).fill({}) }).length, 255);
     const old = draw({ kind: 'venn', sets: [{ name: 'A' }, { name: 'B' }, { name: 'C' }], rows: [['A', '120'], ['B', '85'], ['C', '30'], ['AB', '40'], ['AC', '12'], ['BC', '9'], ['ABC', '5']].map(([region, value]) => ({ region, value })) });
     for (const v of ['120', '85', '30', '40', '12', '9', '>5<']) assert.ok(old.includes(v), v);
     const four = draw({ kind: 'venn', ...R.KINDS.venn.sample() });

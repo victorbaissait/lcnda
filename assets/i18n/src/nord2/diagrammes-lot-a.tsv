@@ -1,0 +1,192 @@
+fr ¦ sk ¦ nb
+# Zone « diagrammes-lot-a » : tableau de quartiers, variantes d’un nom, boucles d’implexe, double éventail, nœud papillon, réseau « toute la famille », barres croisées, cercles de parenté, dates incertaines, pyramide d’un recensement, tableau périodique (heritage-diagram-lot-a.js, lib/diagram_lot_a.php)
+(deviné) ¦ (odhadnuté) ¦ (gjettet)
+1 (enfants) ¦ 1 (deti) ¦ 1 (barn)
+1 (parents) ¦ 1 (rodičia) ¦ 1 (foreldre)
+16 quartiers ¦ 16 štvrtí ¦ 16 anevåpen
+20 ans ¦ 20 rokov ¦ 20 år
+32 quartiers ¦ 32 štvrtí ¦ 32 anevåpen
+8 quartiers (arrière-grands-parents) ¦ 8 štvrtí (prarodičia rodičov) ¦ 8 anevåpen (oldeforeldre)
+Actes comptés ¦ Počítané záznamy ¦ Talte akter
+Ajoute les ancêtres (n° Sosa, nom) et leurs armoiries. ¦ Pridaj predkov (č. Sosa, meno) a ich erby. ¦ Legg til aner (Sosa-nr., navn) og våpnene deres.
+Ajoute les formes du nom : la forme, ses années, le nombre d’actes. ¦ Pridaj podoby mena: podoba, jej roky, počet záznamov. ¦ Legg til navnets former: formen, årene, antall akter.
+Ajoute les personnes recensées : âge, sexe, année. ¦ Pridaj sčítané osoby: vek, pohlavie, rok. ¦ Legg til de tellede personene: alder, kjønn, år.
+Ancêtre à trouver ¦ Predok na nájdenie ¦ Ane å finne
+Ancêtres pris dans ta base : {n} (armoiries : {k}). ¦ Predkovia z tvojej databázy: {n} (erby: {k}). ¦ Aner hentet fra databasen din: {n} (våpen: {k}).
+Arbre des variantes (formes du nom : {n}). ¦ Strom variantov (podoby mena: {n}). ¦ Variantenes tre (navneformer: {n}).
+Arbre des variantes d’un nom ¦ Strom variantov mena ¦ Et navns varianttre
+Armoiries (nom) ¦ Erb (názov) ¦ Våpen (navn)
+Au survol seulement ¦ Len po prejdení myšou ¦ Bare ved peking
+Aucun ancêtre connu à cette génération. ¦ V tejto generácii nie je známy žiadny predok. ¦ Ingen kjent ane i denne generasjonen.
+Aucun lien entre les couples de ce groupe. ¦ Medzi pármi tejto skupiny nie je žiadne prepojenie. ¦ Ingen forbindelse mellom parene i denne gruppen.
+Aucun recensement dans ta base ¦ V databáze nie je žiadne sčítanie ¦ Ingen folketelling i databasen din
+Aucun âge lisible dans ce recensement. ¦ V tomto sčítaní nie je čitateľný vek. ¦ Ingen lesbar alder i denne folketellingen.
+Aucune forme trouvée pour ce nom. ¦ Pre toto meno sa nenašla žiadna podoba. ¦ Ingen form funnet for dette navnet.
+Avec au moins une source ¦ S aspoň jedným prameňom ¦ Med minst én kilde
+Axe des années ¦ Os rokov ¦ Årsakse
+Barres croisées (UpSet) ¦ Krížové stĺpce (UpSet) ¦ Kryssede søyler (UpSet)
+Barres croisées (ensembles : {n}, combinaisons montrées : {k}). ¦ Krížové stĺpce (množiny: {n}, zobrazené kombinácie: {k}). ¦ Kryssede søyler (mengder: {n}, viste kombinasjoner: {k}).
+Blason absent ¦ Chýbajúci erb ¦ Manglende våpen
+Blasonnement en note (en bas) ¦ Blazón v poznámke (dole) ¦ Blasonering som note (nederst)
+Boucles d’implexe (chemins : {n}), F = {f}. ¦ Slučky straty predkov (cesty: {n}), F = {f}. ¦ Anetapsløyfer (veier: {n}), F = {f}.
+Boucles plus lointaines pas dessinées : {n} (comptées dans F). ¦ Vzdialenejšie slučky nenakreslené: {n} (započítané do F). ¦ Fjernere sløyfer ikke tegnet: {n} (talt med i F).
+Branche (paternelle, maternelle) ¦ Vetva (otcovská, materská) ¦ Gren (farside, morside)
+Branche maternelle ¦ Materská vetva ¦ Morsiden
+Branche paternelle ¦ Otcovská vetva ¦ Farsiden
+Branche « {name} » ¦ Vetva „{name}“ ¦ Grenen «{name}»
+Cases façon tableau périodique ¦ Políčka ako periodická tabuľka ¦ Ruter som i periodesystemet
+Cases vides pour les ancêtres à trouver ¦ Prázdne políčka pre predkov na nájdenie ¦ Tomme ruter for aner som skal finnes
+Ce qu’on dessine ¦ Čo sa kreslí ¦ Hva som tegnes
+Cercles (2 à 4 ensembles) ¦ Kruhy (2 až 4 množiny) ¦ Sirkler (2 til 4 mengder)
+Cercles de parenté autour de {name} (personnes : {n}). ¦ Kruhy príbuzenstva okolo {name} (osoby: {n}). ¦ Slektssirkler rundt {name} (personer: {n}).
+Chemins trouvés : {n} (F = {f}). ¦ Nájdené cesty: {n} (F = {f}). ¦ Funne veier: {n} (F = {f}).
+Chercher les boucles ¦ Hľadať slučky ¦ Søk etter sløyfene
+Chiffre (couleur, éventails) ¦ Číslo (farba, vejáre) ¦ Tall (farge, vifter)
+Choisis de 2 à 8 ensembles (là : {n}). ¦ Vyber 2 až 8 množín (teraz: {n}). ¦ Velg 2 til 8 mengder (nå: {n}).
+Choisis un groupe de noms ou écris un nom. ¦ Vyber skupinu mien alebo napíš meno. ¦ Velg en navnegruppe eller skriv et navn.
+Choisis un recensement (commune et année). ¦ Vyber sčítanie (obec a rok). ¦ Velg en folketelling (kommune og år).
+Choisis une personne (« Depuis l’app ») ou écris les boucles à la main. ¦ Vyber osobu („Z aplikácie“) alebo napíš slučky ručne. ¦ Velg en person («Fra appen») eller skriv sløyfene for hånd.
+Coefficient aussi en fraction ¦ Koeficient aj ako zlomok ¦ Koeffisient også som brøk
+Coefficient de consanguinité de {name} : F = {f} ¦ Koeficient príbuzenskej plemenitby {name}: F = {f} ¦ Innavlskoeffisient for {name}: F = {f}
+Combinaisons montrées (les plus grandes) ¦ Zobrazené kombinácie (najväčšie) ¦ Viste kombinasjoner (de største)
+Combinaisons pas montrées : {n} ¦ Nezobrazené kombinácie: {n} ¦ Kombinasjoner som ikke vises: {n}
+Commune (titre) ¦ Obec (názov) ¦ Kommune (tittel)
+Comparer avec le recensement de ¦ Porovnať so sčítaním z roku ¦ Sammenlign med folketellingen fra
+Consanguinité de l’ancêtre (%) ¦ Príbuzenská plemenitba predka (%) ¦ Anens innavl (%)
+Couleur de l’écu (sans image) ¦ Farba štítu (bez obrázka) ¦ Skjoldets farge (uten bilde)
+Couleur des parts ¦ Farba dielov ¦ Delenes farge
+Couleur du côté maternel ¦ Farba materskej strany ¦ Farge for morsiden
+Couleurs des branches ¦ Farby vetiev ¦ Grenenes farger
+Couple ¦ Pár ¦ Par
+Critères de mauvaise forme. ¦ Kritériá v zlom tvare. ¦ Feilformede kriterier.
+Côté (paternel, maternel, branches) ¦ Strana (otcovská, materská, vetvy) ¦ Side (farside, morside, grener)
+Côté maternel ¦ Materská strana ¦ Morsiden
+Côté paternel ¦ Otcovská strana ¦ Farsiden
+Date incertaine (fourchette) ¦ Neisté dátum (rozpätie) ¦ Usikker dato (intervall)
+Date inconnue ¦ Neznámy dátum ¦ Ukjent dato
+Dates sous le nom ¦ Dátumy pod menom ¦ Datoer under navnet
+De la famille ¦ Z rodiny ¦ Fra familien
+De la famille (oui) ¦ Z rodiny (áno) ¦ Fra familien (ja)
+De la mère vers l’ancêtre ¦ Od matky k predkovi ¦ Fra moren til anen
+Degrés montrés (jusqu’à) ¦ Zobrazené stupne (do) ¦ Viste grader (opp til)
+Dessin de la fourchette ¦ Kresba rozpätia ¦ Intervallets tegning
+Deux éventails ¦ Dva vejáre ¦ To vifter
+Deviner d’où vient chaque forme (date et ressemblance) ¦ Odhadnúť pôvod každej podoby (dátum a podobnosť) ¦ Gjett hvor hver form kommer fra (dato og likhet)
+Diagramme de Venn (2 à 8 ensembles) ¦ Vennov diagram (2 až 8 množín) ¦ Venndiagram (2 til 8 mengder)
+Diagramme de Venn : {names}. ¦ Vennov diagram: {names}. ¦ Venndiagram: {names}.
+Double éventail (ascendants : {up}, descendants : {down}). ¦ Dvojitý vejár (predkovia: {up}, potomkovia: {down}). ¦ Dobbel vifte (aner: {up}, etterkommere: {down}).
+Du père vers l’ancêtre ¦ Od otca k predkovi ¦ Fra faren til anen
+Décédé ou inconnu ¦ Zosnulý alebo neznámy ¦ Død eller ukjent
+En accordéon (branches qu’on plie) ¦ Harmonika (zbaliteľné vetvy) ¦ Trekkspill (grener som kan felles)
+En cercles (un cercle par degré) ¦ V kruhoch (jeden kruh na stupeň) ¦ I sirkler (én sirkel per grad)
+En vie ou non ¦ Žijúci alebo nie ¦ Levende eller ikke
+En {year} (contour) ¦ V roku {year} (obrys) ¦ I {year} (omriss)
+Ensemble {x} ¦ Množina {x} ¦ Mengde {x}
+Faire ressortir la famille ¦ Zvýrazniť rodinu ¦ Fremhev familien
+Formes prises dans ta base : {n}. ¦ Podoby z tvojej databázy: {n}. ¦ Former fra databasen din: {n}.
+Groupe de noms ¦ Skupina mien ¦ Navnegruppe
+Générations : {n} côté père, {m} côté mère ¦ Generácie: {n} po otcovi, {m} po matke ¦ Generasjoner: {n} på farens side, {m} på morens
+Il faut de 2 à 8 ensembles. ¦ Sú potrebné 2 až 8 množiny. ¦ Det trengs 2 til 8 mengder.
+Image (media/…) ¦ Obrázok (media/…) ¦ Bilde (media/…)
+Initiales du prénom et du nom ¦ Iniciály mena a priezviska ¦ Initialer for fornavn og etternavn
+La branche ¦ Vetva ¦ Grenen
+La personne étudiée ¦ Skúmaná osoba ¦ Personen som studeres
+Le calcul n’est pas prêt. ¦ Výpočet nie je pripravený. ¦ Beregningen er ikke klar.
+Le chemin entre deux personnes ¦ Cesta medzi dvoma osobami ¦ Veien mellom to personer
+Le nom (2 lettres) ¦ Priezvisko (2 písmená) ¦ Etternavnet (2 bokstaver)
+Le plus proche seulement ¦ Len najbližší ¦ Bare den nærmeste
+Le prénom (2 lettres) ¦ Krstné meno (2 písmená) ¦ Fornavnet (2 bokstaver)
+Le recensement de {place} ¦ Sčítanie v {place} ¦ Folketellingen i {place}
+Les 8, 16 ou 32 ancêtres d’une génération, chacun avec son blason ; un écu vide : armoiries à trouver. ¦ 8, 16 alebo 32 predkov jednej generácie, každý so svojím erbom; prázdny štít: erb na nájdenie. ¦ De 8, 16 eller 32 anene i én generasjon, hver med sitt våpen; tomt skjold: våpen som skal finnes.
+Les boucles d’implexe (entre les deux parents) ¦ Slučky straty predkov (medzi rodičmi) ¦ Anetapsløyfer (mellom foreldrene)
+Les boucles d’implexe de {name} ¦ Slučky straty predkov: {name} ¦ Anetapsløyfer for {name}
+Les deux parents de cette personne ne sont pas connus. ¦ Obaja rodičia tejto osoby nie sú známi. ¦ Begge foreldrene til personen er ikke kjent.
+Les ensembles (2 à 8) : A, B, C… H ¦ Množiny (2 až 8): A, B, C… H ¦ Mengdene (2 til 8): A, B, C… H
+Les formes du nom ¦ Podoby mena ¦ Navnets former
+Les formes du nom {name} ¦ Podoby mena {name} ¦ Navnet {name}s former
+Les noms du groupe (ou écrits pareil) et leurs variantes notées, avec leurs années et le nombre d’actes. ¦ Mená zo skupiny (alebo písané rovnako) a ich zapísané varianty s rokmi a počtom záznamov. ¦ Gruppens navn (eller stavet likt) og de noterte variantene, med år og antall akter.
+Les quartiers de {name} ¦ Štvrte: {name} ¦ Anevåpen for {name}
+Les seize quartiers de {name} ¦ Šestnásť štvrtí: {name} ¦ De seksten anevåpnene for {name}
+Liens pris dans l’app : {n}. ¦ Väzby z aplikácie: {n}. ¦ Forbindelser fra appen: {n}.
+Losange pour les dates exactes ¦ Kosoštvorec pre presné dátumy ¦ Rute for nøyaktige datoer
+Montrer le calcul (½ puissance n) ¦ Ukázať výpočet (½ na n) ¦ Vis beregningen (½ opphøyd i n)
+Montrer l’incertitude des dates ¦ Ukázať neistotu dátumov ¦ Vis usikkerheten i datoer
+Naissances et décès (qui vivait en …) ¦ Narodenia a úmrtia (kto žil v roku …) ¦ Fødsler og dødsfall (hvem levde i …)
+Nom inconnu ¦ Neznáme meno ¦ Ukjent navn
+Nom sous l’écu ¦ Meno pod štítom ¦ Navn under skjoldet
+Nom trop long (80 lettres au plus). ¦ Meno je príliš dlhé (najviac 80 písmen). ¦ For langt navn (høyst 80 bokstaver).
+Nombre d’actes sous la forme ¦ Počet záznamov pod podobou ¦ Antall akter under formen
+Noms les plus portés ¦ Najčastejšie mená ¦ Vanligste navn
+N° Sosa ¦ Č. Sosa ¦ Sosa-nr.
+N° Sosa (ascendants, éventails) ¦ Č. Sosa (predkovia, vejáre) ¦ Sosa-nr. (aner, vifter)
+Nœud papillon (père à gauche, mère à droite) ¦ Motýlik (otec vľavo, matka vpravo) ¦ Sløyfe (far til venstre, mor til høyre)
+Ordre des combinaisons ¦ Poradie kombinácií ¦ Kombinasjonenes rekkefølge
+Ou un nom ¦ Alebo meno ¦ Eller et navn
+Par nombre d’ensembles ¦ Podľa počtu množín ¦ Etter antall mengder
+Parent (descendants, éventails) ¦ Rodič (potomkovia, vejáre) ¦ Forelder (etterkommere, vifter)
+Personne cachée ¦ Skrytá osoba ¦ Skjult person
+Personnes recensées : {n} ¦ Sčítané osoby: {n} ¦ Tellede personer: {n}
+Personnes recensées : {n} en {y1}, {m} en {y2} ¦ Sčítané osoby: {n} v roku {y1}, {m} v roku {y2} ¦ Tellede: {n} i {y1}, {m} i {y2}
+Personnes recensées prises dans ta base : {n}. ¦ Sčítané osoby z tvojej databázy: {n}. ¦ Tellede personer fra databasen din: {n}.
+Portraits (arbre dessiné, nœud papillon) ¦ Portréty (kreslený strom, motýlik) ¦ Portretter (tegnet tre, sløyfe)
+Pyramide du recensement de {year} (personnes : {n}). ¦ Pyramída sčítania z roku {year} (osoby: {n}). ¦ Pyramide for folketellingen {year} (personer: {n}).
+Ressortent : les personnes reliées à une fiche (ou au groupe choisi). ¦ Zvýraznené: osoby prepojené s kartou (alebo zvolenou skupinou). ¦ Fremhevet: personer knyttet til et kort (eller til valgt gruppe).
+Selon le nombre de descendants ¦ Podľa počtu potomkov ¦ Etter antall etterkommere
+Selon le tableau ¦ Podľa tabuľky ¦ Ifølge tabellen
+Ses ancêtres au-dessus (place Sosa), ses descendants au-dessous (sous leur parent) ; le chiffre : l’âge au décès. ¦ Predkovia hore (miesto Sosa), potomkovia dole (pod rodičom); číslo: vek pri úmrtí. ¦ Aner over (Sosa-plass), etterkommere under (under forelderen); tallet: alder ved død.
+Ses ancêtres de la génération choisie (ordre Sosa) et les armoiries reliées à chacun (Listes → Armoiries). ¦ Predkovia zvolenej generácie (poradie Sosa) a erby priradené každému (Zoznamy → Erby). ¦ Aner i valgt generasjon (Sosa-rekkefølge) og våpnene knyttet til hver (Lister → Våpen).
+Seulement l’ancêtre commun le plus proche ¦ Len najbližší spoločný predok ¦ Bare den nærmeste felles anen
+Sexe inconnu (pas dans la pyramide) : {n} ¦ Neznáme pohlavie (mimo pyramídy): {n} ¦ Ukjent kjønn (ikke i pyramiden): {n}
+Sosa {n} : ancêtre à trouver ¦ Sosa {n}: predok na nájdenie ¦ Sosa {n}: ane å finne
+Source, note ¦ Prameň, poznámka ¦ Kilde, notat
+Sources sous la forme ¦ Pramene pod podobou ¦ Kilder under formen
+Tableau de quartiers (armoiries des ancêtres) ¦ Tabuľka štvrtí (erby predkov) ¦ Anevåpentavle (anenes våpen)
+Tableau de quartiers ({n}), armoiries connues : {k}. ¦ Tabuľka štvrtí ({n}), známe erby: {k}. ¦ Anevåpentavle ({n}), kjente våpen: {k}.
+Tableau périodique : ancêtres trouvés {found} / {total} ({pct} %). ¦ Periodická tabuľka: nájdení predkovia {found} / {total} ({pct} %). ¦ Periodesystemet: funne aner {found} / {total} ({pct} %).
+Taux de recherche (%) ¦ Miera preskúmania (%) ¦ Forskningsgrad (%)
+Tous les ancêtres répétés ¦ Všetci opakujúci sa predkovia ¦ Alle gjentatte aner
+Tous les chemins du père et de la mère vers un même ancêtre (filiations biologiques) et le coefficient de consanguinité (méthode de Wright). ¦ Všetky cesty otca a matky k tomu istému predkovi (biologický pôvod) a koeficient príbuzenskej plemenitby (Wrightova metóda). ¦ Alle veier fra far og mor til samme ane (biologiske bånd) og innavlskoeffisienten (Wrights metode).
+Toute la base (qui vivait en …) ¦ Celá databáza (kto žil v roku …) ¦ Hele databasen (hvem levde i …)
+Toute la base (qui vivait l’année choisie) ou un recensement (les âges écrits ce jour-là). ¦ Celá databáza (kto žil vo zvolenom roku) alebo sčítanie (vek zapísaný v ten deň). ¦ Hele databasen (hvem levde det valgte året) eller en folketelling (aldrene den dagen).
+Toute la famille, un point par couple ¦ Celá rodina, jeden bod na pár ¦ Hele familien, ett punkt per par
+Trop de critères. ¦ Príliš veľa kritérií. ¦ For mange kriterier.
+Trop d’ensembles. ¦ Príliš veľa množín. ¦ For mange mengder.
+Trouvé chez le notaire (successions, inventaires) ¦ Nájdený u notára (dedičstvá, inventáre) ¦ Funnet hos notarius (arv, skifter)
+Trouvé dans les sources militaires (poilus) ¦ Nájdený vo vojenských prameňoch (vojaci 1. svetovej vojny) ¦ Funnet i militære kilder (soldater i første verdenskrig)
+Trouvé dans un recensement ¦ Nájdený v sčítaní ¦ Funnet i en folketelling
+Un chiffre (colonne « Chiffre ») ¦ Číslo (stĺpec „Číslo“) ¦ Et tall (kolonnen «Tall»)
+Un recensement (commune, année) ¦ Sčítanie (obec, rok) ¦ En folketelling (kommune, år)
+Un recensement (âges écrits) ¦ Sčítanie (zapísaný vek) ¦ En folketelling (skrevne aldre)
+Une par branche ¦ Jedna na vetvu ¦ Én per gren
+Une par forme ¦ Jedna na podobu ¦ Én per form
+Une seule source : couleur de l’ensemble ¦ Jediný prameň: farba množiny ¦ Én kilde: mengdens farge
+Une source précise ¦ Konkrétny prameň ¦ En bestemt kilde
+Vérifie le groupe de personnes. ¦ Skontroluj skupinu osôb. ¦ Sjekk persongruppen.
+actes : {n} ¦ záznamy: {n} ¦ akter: {n}
+vient de {name} ¦ pochádza z {name} ¦ kommer fra {name}
+{label} (famille) : {n} ¦ {label} (rodina): {n} ¦ {label} (familie): {n}
+{names} (seulement) : {n} ¦ {names} (len): {n} ¦ {names} (bare): {n}
+{name} : armoiries pas encore trouvées ¦ {name}: erb zatiaľ nenájdený ¦ {name}: våpen ennå ikke funnet
+{name} : {n} en tout ¦ {name}: spolu {n} ¦ {name}: {n} totalt
+{place}, {year} ¦ {place}, {year} ¦ {place}, {year}
+« vers » : plus ou moins (ans) ¦ „okolo“: plus mínus (roky) ¦ «omkring»: pluss/minus (år)
+Âge (recensement) ¦ Vek (sčítanie) ¦ Alder (folketelling)
+Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Písať druh väzby na čiaru (meno dieťaťa…) ¦ Skriv forbindelsens type på streken (barnets navn…)
+Écrits s’il y a la place ¦ Písané, ak je miesto ¦ Skrevet hvis det er plass
+Écu vide ¦ Prázdny štít ¦ Tomt skjold
+Épaisseur selon le nombre d’actes ¦ Hrúbka podľa počtu záznamov ¦ Tykkelse etter antall akter
+— Aucun (le nom écrit à côté) — ¦ — Žiadna (meno napísané vedľa) — ¦ — Ingen (navnet ved siden av) —
+— Rien — ¦ — Nič — ¦ — Ingenting —
+🌿 Les formes d’un nom de ma base ¦ 🌿 Podoby mena z mojej databázy ¦ 🌿 Formene av et navn i databasen min
+🔁 Entre les deux parents de… ¦ 🔁 Medzi oboma rodičmi… ¦ 🔁 Mellom foreldrene til…
+🔺 Les personnes de ma base ¦ 🔺 Osoby z mojej databázy ¦ 🔺 Personene i databasen min
+🛡 Les quartiers d’une personne de ma base ¦ 🛡 Štvrte osoby z mojej databázy ¦ 🛡 Anevåpnene for en person i databasen min
+Choisis de 2 à 8 ensembles : chaque zone compte les personnes de ces ensembles-là seulement. Dès 5 ensembles : barres croisées. ¦ Vyber 2 až 8 množín: každá oblasť počíta len osoby z týchto množín. Od 5 množín: krížové stĺpce. ¦ Velg 2 til 8 mengder: hver sone teller bare personene i nettopp de mengdene. Fra 5: kryssede søyler.
+Les témoins, parrains et marraines des actes ; ou toute la famille, un point par couple, reliés par leurs enfants. ¦ Svedkovia a krstní rodičia zo záznamov; alebo celá rodina, bod na pár, prepojené deťmi. ¦ Vitner og faddere i aktene; eller hele familien, ett punkt per par, bundet sammen av barna.
+Nom de l’enfant sur le trait ¦ Meno dieťaťa na čiare ¦ Barnets navn på streken
+Par nom de famille ¦ Podľa priezviska ¦ Etter etternavn
+Par siècle (du mariage) ¦ Podľa storočia (sobáša) ¦ Etter århundre (for vigselen)
+Un point par couple ¦ Jeden bod na pár ¦ Ett punkt per par
+Un point par personne ¦ Jeden bod na osobu ¦ Ett punkt per person
+🕸 Les liens de ma base ¦ 🕸 Väzby z mojej databázy ¦ 🕸 Forbindelsene i databasen min
+Quartiers ¦ Štvrte ¦ Anevåpen

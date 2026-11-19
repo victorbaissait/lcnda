@@ -1,0 +1,232 @@
+fr ¦ hr ¦ sl
+# Zone « diagrammes-lot-b » : diagramme de Lexis, ternaire, chandeliers, courbe avec marge, horizon, dendrogramme, durée des générations, couverture des sources, trajectoires de vie, alluvial (heritage-diagram-lot-b.js et réglages de heritage-diagram-plus/vie/famille.js, heritage-diagrams-render.js)
+=vie ¦ život|života|života ¦ življenje|življenji|življenja|življenj
+=période ¦ razdoblje|razdoblja|razdoblja ¦ obdobje|obdobji|obdobja|obdobij
+Célibataire ¦ Neoženjen/neudana ¦ Samski/a
+Marié(e) ¦ Oženjen/udana ¦ Poročen/a
+Remarié(e) ¦ Ponovno oženjen/udana ¦ Ponovno poročen/a
+Veuf ou veuve ¦ Udovac ili udovica ¦ Vdovec ali vdova
+Divorcé(e) ¦ Razveden/a ¦ Ločen/a
+Décédé(e) ¦ Preminuo/la ¦ Umrl/a
+État civil inconnu ¦ Bračno stanje nepoznato ¦ Zakonski stan neznan
+Métier inconnu ¦ Zanimanje nepoznato ¦ Poklic neznan
+Pays inconnu ¦ Zemlja nepoznata ¦ Država neznana
+Autres états ¦ Ostala stanja ¦ Drugi stani
+Sexe inconnu ¦ Spol nepoznat ¦ Spol neznan
+Départ (autre commune) ¦ Odlazak (druga općina) ¦ Odhod (druga občina)
+Ajoute des personnes : le nom, la naissance et le décès (années ou dates). ¦ Dodaj osobe: ime, rođenje i smrt (godine ili datumi). ¦ Dodaj osebe: ime, rojstvo in smrt (leta ali datumi).
+Diagramme de Lexis : {n}, de {a} à {b}. ¦ Lexisov dijagram: {n}, od {a} do {b}. ¦ Lexisov diagram: {n}, od {a} do {b}.
+Choléra ¦ Kolera ¦ Kolera
+Guerre de 1870 ¦ Rat 1870. ¦ Vojna leta 1870
+Grande Guerre ¦ Veliki rat ¦ Velika vojna
+📐 Les vies de ma base ¦ 📐 Životi u mojoj bazi ¦ 📐 Življenja v moji bazi
+Chaque vie devient une diagonale, de la naissance (âge 0) au décès ; les mariages, les naissances des enfants et les départs posés dessus. ¦ Svaki život postaje dijagonala, od rođenja (dob 0) do smrti; na njoj brakovi, rođenja djece i odlasci. ¦ Vsako življenje postane diagonala, od rojstva (starost 0) do smrti; na njej poroke, rojstva otrok in odhodi.
+Combien de vies au plus ¦ Najviše koliko života ¦ Največ koliko življenj
+Une par nom de famille ¦ Jedna po prezimenu ¦ Ena na priimek
+Naissances des enfants ¦ Rođenja djece ¦ Rojstva otrok
+Départs (première commune autre que celle de naissance) ¦ Odlasci (prva općina osim rodne) ¦ Odhodi (prva občina, ki ni rojstna)
+Bandes historiques (guerres, épidémies) ¦ Povijesne trake (ratovi, epidemije) ¦ Zgodovinski pasovi (vojne, epidemije)
+Personne avec une date de naissance dans ce groupe. ¦ Nitko u ovoj skupini nema datum rođenja. ¦ Nihče v tej skupini nima datuma rojstva.
+Diagramme de Lexis ¦ Lexisov dijagram ¦ Lexisov diagram
+Diagramme de Lexis (âge × année : une vie = une diagonale) ¦ Lexisov dijagram (dob × godina: jedan život = jedna dijagonala) ¦ Lexisov diagram (starost × leto: eno življenje = ena diagonala)
+Les années en bas, les âges à gauche : chaque vie monte en diagonale de sa naissance à son décès ; les mariages, les enfants, les départs et les grandes crises s’y lisent d’un coup d’œil. ¦ Dolje godine, lijevo dob: svaki se život dijagonalno penje od rođenja do smrti; brakovi, djeca, odlasci i velike krize vide se na prvi pogled. ¦ Spodaj leta, levo starost: vsako življenje se diagonalno vzpenja od rojstva do smrti; poroke, otroci, odhodi in velike krize so vidni na prvi pogled.
+Les vies ¦ Životi ¦ Življenja
+Les vies de la famille {name} ¦ Životi obitelji {name} ¦ Življenja družine {name}
+Personne (même nom que ci-dessus) ¦ Osoba (isto ime kao gore) ¦ Oseba (isto ime kot zgoraj)
+Les marques (sur la vie de la personne) ¦ Oznake (na životu osobe) ¦ Oznake (na življenju osebe)
+Bandes historiques ¦ Povijesne trake ¦ Zgodovinski pasovi
+Groupe (couleur) ¦ Skupina (boja) ¦ Skupina (barva)
+Couleur de chaque groupe (facultatif) ¦ Boja svake skupine (neobavezno) ¦ Barva vsake skupine (neobvezno)
+Âge au plus ¦ Dob najviše ¦ Starost največ
+Couleur des vies ¦ Boja života ¦ Barva življenj
+Homme / femme ¦ Muškarac / žena ¦ Moški / ženska
+Montrer les marques ¦ Prikaži oznake ¦ Pokaži oznake
+Taille des marques ¦ Veličina oznaka ¦ Velikost oznak
+Nom des bandes ¦ Nazivi traka ¦ Imena pasov
+Diagonales des générations ¦ Dijagonale generacija ¦ Diagonale generacij
+Nom au bout de chaque vie ¦ Ime na kraju svakog života ¦ Ime na koncu vsakega življenja
+Épaisseur des vies ¦ Debljina života ¦ Debelina življenj
+Ajoute des points : un nom et ses trois parts (des nombres ou des %). ¦ Dodaj točke: naziv i njegova tri udjela (brojevi ili %). ¦ Dodaj točke: ime in njegove tri deleže (števila ali %).
+Part A ¦ Udio A ¦ Delež A
+Part B ¦ Udio B ¦ Delež B
+Part C ¦ Udio C ¦ Delež C
+Diagramme ternaire : {n} ({a}, {b}, {c}). ¦ Trokutasti dijagram: {n} ({a}, {b}, {c}). ¦ Trikotni diagram: {n} ({a}, {b}, {c}).
+Agriculture ¦ Poljoprivreda ¦ Kmetijstvo
+Artisanat et industrie ¦ Obrt i industrija ¦ Obrt in industrija
+Commerce et services ¦ Trgovina i usluge ¦ Trgovina in storitve
+Agriculture et forêt ¦ Poljoprivreda i šumarstvo ¦ Kmetijstvo in gozdarstvo
+Artisanat ¦ Obrt ¦ Obrt
+Industrie, mines ¦ Industrija, rudnici ¦ Industrija, rudniki
+Transports et mer ¦ Promet i more ¦ Promet in morje
+Services, domestiques ¦ Usluge, posluga ¦ Storitve, posli
+Armée et police ¦ Vojska i policija ¦ Vojska in policija
+Clergé ¦ Svećenstvo ¦ Duhovščina
+Professions libérales, école, administration ¦ Slobodna zanimanja, škola, uprava ¦ Svobodni poklici, šola, uprava
+Rentiers, rangs et statuts ¦ Rentijeri, staleži i položaji ¦ Rentniki, stanovi in položaji
+Au foyer, sans profession ¦ Kućanstvo, bez zanimanja ¦ Gospodinjstvo, brez poklica
+Autre métier ¦ Drugo zanimanje ¦ Drug poklic
+Tous les autres métiers ¦ Sva ostala zanimanja ¦ Vsi drugi poklici
+🔺 Les métiers de ma base ¦ 🔺 Zanimanja u mojoj bazi ¦ 🔺 Poklici v moji bazi
+Les métiers (fiche, événements « Profession », recensements) rangés en grands secteurs ; un point par commune de naissance, par décennie ou par famille, placé selon ses trois parts. ¦ Zanimanja (kartica, događaji „Zanimanje”, popisi) svrstana u velike sektore; jedna točka po rodnoj općini, desetljeću ili obitelji, smještena prema svoja tri udjela. ¦ Poklici (kartica, dogodki »Poklic«, popisi) razvrščeni v velike sektorje; ena točka na rojstno občino, desetletje ali družino, postavljena po svojih treh deležih.
+Un point par ¦ Jedna točka po ¦ Ena točka na
+Décennie de naissance (reliées dans le temps) ¦ Desetljeće rođenja (povezano u vremenu) ¦ Desetletje rojstva (povezano v času)
+Combien de points au plus ¦ Najviše koliko točaka ¦ Največ koliko točk
+Part du haut ¦ Gornji udio ¦ Zgornji delež
+Part de gauche ¦ Lijevi udio ¦ Levi delež
+Part de droite ¦ Desni udio ¦ Desni delež
+« Tous les autres métiers » ne peut servir qu’une fois. ¦ „Sva ostala zanimanja” može se koristiti samo jednom. ¦ »Vsi drugi poklici« lahko uporabiš le enkrat.
+Décennies ¦ Desetljeća ¦ Desetletja
+Aucun métier connu pour ces personnes. ¦ Nema poznatog zanimanja za te osobe. ¦ Za te osebe ni znanega poklica.
+Les métiers de ma base, en trois parts ¦ Zanimanja u mojoj bazi u tri udjela ¦ Poklici v moji bazi v treh deležih
+Les métiers de trois villages, siècle par siècle ¦ Zanimanja triju sela, stoljeće po stoljeće ¦ Poklici treh vasi, stoletje za stoletjem
+Diagramme ternaire (trois parts qui font 100 %) ¦ Trokutasti dijagram (tri udjela koja čine 100 %) ¦ Trikotni diagram (trije deleži, skupaj 100 %)
+Parts ¦ Udjeli ¦ Deleži
+Un triangle : chaque point a trois parts (par exemple agriculture, artisanat, commerce) ; plus il est près d’un coin, plus cette part est grande. ¦ Trokut: svaka točka ima tri udjela (npr. poljoprivreda, obrt, trgovina); što je bliže kutu, to je taj udio veći. ¦ Trikotnik: vsaka točka ima tri deleže (npr. kmetijstvo, obrt, trgovina); bližje kot je kotu, večji je ta delež.
+Les points (trois parts chacun) ¦ Točke (svaka tri udjela) ¦ Točke (vsaka trije deleži)
+Groupe (couleur, points reliés) ¦ Skupina (boja, povezane točke) ¦ Skupina (barva, povezane točke)
+Ordre (année…) ¦ Redoslijed (godina…) ¦ Vrstni red (leto…)
+Nom de la part du haut ¦ Naziv gornjeg udjela ¦ Ime zgornjega deleža
+Nom de la part de gauche ¦ Naziv lijevog udjela ¦ Ime levega deleža
+Nom de la part de droite ¦ Naziv desnog udjela ¦ Ime desnega deleža
+Couleur du haut ¦ Boja gore ¦ Barva zgoraj
+Couleur de gauche ¦ Boja lijevo ¦ Barva levo
+Couleur de droite ¦ Boja desno ¦ Barva desno
+Tous les 10 % ¦ Svakih 10 % ¦ Vsakih 10 %
+Tous les 20 % ¦ Svakih 20 % ¦ Vsakih 20 %
+Sans grille ¦ Bez mreže ¦ Brez mreže
+Une par point ¦ Jedna po točki ¦ Ena na točko
+Selon le total ¦ Prema zbroju ¦ Glede na vsoto
+Relier les points d’un groupe dans l’ordre ¦ Poveži točke skupine redom ¦ Poveži točke skupine po vrsti
+Noms des points ¦ Nazivi točaka ¦ Imena točk
+Ajoute des périodes : la date, le prix d’ouverture, de clôture, le plus bas et le plus haut. ¦ Dodaj razdoblja: datum, početnu, završnu, najnižu i najvišu cijenu. ¦ Dodaj obdobja: datum, začetno, končno, najnižjo in najvišjo ceno.
+ouverture ¦ otvaranje ¦ začetek
+clôture ¦ zatvaranje ¦ konec
+plus bas ¦ najniže ¦ najnižje
+plus haut ¦ najviše ¦ najvišje
+Hausse (clôture plus haute) ¦ Rast (više zatvaranje) ¦ Rast (višji konec)
+Baisse (clôture plus basse) ¦ Pad (niže zatvaranje) ¦ Padec (nižji konec)
+Moyenne mobile sur {n} périodes ¦ Pomični prosjek kroz {n} razdoblja ¦ Drseče povprečje {n} obdobij
+Chandeliers : {n}, de {a} à {b} ({p} %). ¦ Svijeće: {n}, od {a} do {b} ({p} %). ¦ Sveče: {n}, od {a} do {b} ({p} %).
+Prix du setier de blé au marché de {name} ¦ Cijena mjere pšenice na tržnici u {name} ¦ Cena mernika pšenice na trgu v {name}
+Disette ¦ Nestašica ¦ Pomanjkanje
+Guerre des farines ¦ Rat brašna ¦ Vojna za moko
+Chandeliers (prix du blé, mercuriales) ¦ Svijeće (cijena pšenice, tržni cjenici) ¦ Sveče (cena pšenice, tržni ceniki)
+Pour chaque période : le prix au début (ouverture), à la fin (clôture), le plus bas et le plus haut. Vert si le prix monte, rouge s’il baisse ; les années de disette en bandes. ¦ Za svako razdoblje: cijena na početku (otvaranje), na kraju (zatvaranje), najniža i najviša. Zeleno ako raste, crveno ako pada; godine nestašice u trakama. ¦ Za vsako obdobje: cena na začetku, na koncu, najnižja in najvišja. Zeleno, če raste, rdeče, če pada; leta pomanjkanja v pasovih.
+Les périodes (date, ouverture, clôture, plus bas, plus haut) ¦ Razdoblja (datum, otvaranje, zatvaranje, najniže, najviše) ¦ Obdobja (datum, začetek, konec, najnižje, najvišje)
+Date ou période ¦ Datum ili razdoblje ¦ Datum ali obdobje
+Plus bas ¦ Najniže ¦ Najnižje
+Plus haut ¦ Najviše ¦ Najvišje
+Les années à part (disette, guerre…) ¦ Posebne godine (nestašica, rat…) ¦ Posebna leta (pomanjkanje, vojna…)
+Autre unité (écrite) ¦ Druga jedinica (upisana) ¦ Druga enota (vpisana)
+livres ¦ livre ¦ livre
+sols ¦ sola ¦ solov
+deniers ¦ denijera ¦ denarjev
+Couleur de la hausse ¦ Boja rasta ¦ Barva rasti
+Couleur de la baisse ¦ Boja pada ¦ Barva padca
+Hausse en creux (bougie vide) ¦ Rast šupalj (prazna svijeća) ¦ Rast votel (prazna sveča)
+Moyenne mobile (périodes, 0 = non) ¦ Pomični prosjek (razdoblja, 0 = ne) ¦ Drseče povprečje (obdobja, 0 = ne)
+Couleur de la moyenne ¦ Boja prosjeka ¦ Barva povprečja
+Années à part en bandes ¦ Posebne godine kao trake ¦ Posebna leta kot pasovi
+Largeur des bougies ¦ Širina svijeća ¦ Širina sveč
+Âge au premier mariage ¦ Dob pri prvom braku ¦ Starost ob prvi poroki
+Âge au premier enfant ¦ Dob pri prvom djetetu ¦ Starost ob prvem otroku
+± un écart-type ¦ ± jedna standardna devijacija ¦ ± en standardni odklon
+intervalle à 95 % ¦ interval od 95 % ¦ 95-odstotni interval
+mes ancêtres ¦ moji preci ¦ moji predniki
+📏 Moyenne et marge : {x} ¦ 📏 Prosjek i raspon: {x} ¦ 📏 Povprečje in razpon: {x}
+Pas assez de personnes datées (au moins 3 par période). ¦ Premalo datiranih osoba (barem 3 po razdoblju). ¦ Premalo datiranih oseb (vsaj 3 na obdobje).
+Basse ¦ Donja ¦ Spodnja
+Haute ¦ Gornja ¦ Zgornja
+{x} : moyenne et marge ¦ {x}: prosjek i raspon ¦ {x}: povprečje in razpon
+Marge : un écart-type de part et d’autre, par quart de siècle de naissance ¦ Raspon: jedna standardna devijacija s obje strane, po četvrtini stoljeća rođenja ¦ Razpon: en standardni odklon na vsako stran, po četrt stoletja rojstva
+Marge : intervalle de confiance à 95 % de la moyenne, par quart de siècle de naissance ¦ Raspon: interval pouzdanosti prosjeka od 95 %, po četvrtini stoljeća rođenja ¦ Razpon: 95-odstotni interval zaupanja povprečja, po četrt stoletja rojstva
+Marge (basse – haute) ¦ Raspon (donji – gornji) ¦ Razpon (spodnji – zgornji)
+Marge (±) ¦ Raspon (±) ¦ Razpon (±)
+Fourchette (marge autour de la courbe) ¦ Raspon (pojas oko krivulje) ¦ Razpon (pas okoli krivulje)
+Deux colonnes : basse et haute ¦ Dva stupca: donji i gornji ¦ Dva stolpca: spodnji in zgornji
+Une colonne ± écart ¦ Jedan stupac ± odstupanje ¦ En stolpec ± odmik
+Colonne basse (n°) ¦ Donji stupac (br.) ¦ Spodnji stolpec (št.)
+Colonne haute (n°) ¦ Gornji stupac (br.) ¦ Zgornji stolpec (št.)
+Colonne de l’écart (n°) ¦ Stupac odstupanja (br.) ¦ Stolpec odmika (št.)
+Autour de la colonne (n°) ¦ Oko stupca (br.) ¦ Okoli stolpca (št.)
+Opacité de la marge ¦ Neprozirnost raspona ¦ Prekrivnost razpona
+Couleur de la marge ¦ Boja raspona ¦ Barva razpona
+Axe : minimum ¦ Os: minimum ¦ Os: minimum
+Axe : maximum ¦ Os: maksimum ¦ Os: maksimum
+(axe de droite) ¦ (desna os) ¦ (desna os)
+Clôture ¦ Zatvaranje ¦ Konec
+{name} : de {a} à {b}, le plus en {peak} ({v}) ¦ {name}: od {a} do {b}, najviše u {peak} ({v}) ¦ {name}: od {a} do {b}, največ v {peak} ({v})
+Le plus bas ¦ Najniže ¦ Najnižje
+Le plus haut ¦ Najviše ¦ Najvišje
+Négatif (replié) ¦ Negativno (presavijeno) ¦ Negativno (prepognjeno)
+Graphique en horizon : {s} séries sur {n} périodes. ¦ Horizontski grafikon: {s} serija kroz {n} razdoblja. ¦ Horizontni graf: {s} nizov v {n} obdobjih.
+Horizon (bandes repliées) ¦ Horizont (presavijene trake) ¦ Horizont (prepognjeni pasovi)
+Collines ¦ Brežuljci ¦ Griči
+Nombre de couches ¦ Broj slojeva ¦ Število plasti
+Teinte des négatifs ¦ Nijansa negativnih ¦ Odtenek negativnih
+Chevauchement ¦ Preklapanje ¦ Prekrivanje
+Courbes douces ¦ Glatke krivulje ¦ Gladke krivulje
+Trait blanc autour ¦ Bijeli obrub ¦ Bela obroba
+Arbre de regroupement à gauche (dendrogramme) ¦ Stablo grupiranja lijevo (dendrogram) ¦ Drevo združevanja levo (dendrogram)
+Groupes de couleur ¦ Skupine boja ¦ Barvne skupine
+Les branches de l’arbre ¦ Grane stabla ¦ Veje drevesa
+Cacher les noms des correspondances ¦ Sakrij imena podudaranja ¦ Skrij imena ujemanj
+Durée des générations ¦ Trajanje generacija ¦ Dolžina generacij
+Durée des générations — {name} ¦ Trajanje generacija — {name} ¦ Dolžina generacij — {name}
+Lignée paternelle : une génération = {n} ans en moyenne ¦ Očinska loza: jedna generacija = prosječno {n} godina ¦ Očetova linija: ena generacija = povprečno {n} let
+Lignée maternelle : une génération = {n} ans en moyenne ¦ Majčina loza: jedna generacija = prosječno {n} godina ¦ Materina linija: ena generacija = povprečno {n} let
+moyenne {n} ans ¦ prosjek {n} godina ¦ povprečje {n} let
+Toutes les naissances du groupe ¦ Sva rođenja u skupini ¦ Vsa rojstva v skupini
+Seulement la lignée paternelle directe (père du père…) ¦ Samo izravna očinska loza (otac oca…) ¦ Samo neposredna očetova linija (oče očeta…)
+Seulement la lignée maternelle directe (mère de la mère…) ¦ Samo izravna majčina loza (majka majke…) ¦ Samo neposredna materina linija (mati matere…)
+Les deux lignées directes ¦ Obje izravne loze ¦ Obe neposredni liniji
+La personne dont on suit les lignées ¦ Osoba čije se loze prate ¦ Oseba, katere linije spremljamo
+Aucune génération datée dans cette lignée (il faut la naissance de l’enfant et celle du parent). ¦ Nema datirane generacije u ovoj lozi (potrebno je rođenje djeteta i roditelja). ¦ V tej liniji ni datirane generacije (potrebno je rojstvo otroka in starša).
+Génération (lignée) ¦ Generacija (loza) ¦ Generacija (linija)
+Paternelle ¦ Očinska ¦ Očetova
+Maternelle ¦ Majčina ¦ Materina
+Relier les points d’une lignée ¦ Poveži točke loze ¦ Poveži točke linije
+Ligne de repère ¦ Referentna linija ¦ Referenčna črta
+Les générations (lignées) ¦ Generacije (loze) ¦ Generacije (linije)
+Pas attendu ¦ Ne očekuje se ¦ Ni pričakovano
+Manquant ¦ Nedostaje ¦ Manjka
+Ajoute des ancêtres : le numéro Sosa, le nom et, pour chaque acte, sourcé, sans source ou manquant. ¦ Dodaj pretke: Sosa broj, ime i za svaki zapis: s izvorom, bez izvora ili nedostaje. ¦ Dodaj prednike: številko Sosa, ime in za vsak zapis: z virom, brez vira ali manjka.
+Une ligne par ancêtre ¦ Jedan redak po pretku ¦ Ena vrstica na prednika
+Une ligne par ancêtre (+ recensements, notaire, militaire) ¦ Jedan redak po pretku (+ popisi, bilježnik, vojska) ¦ Ena vrstica na prednika (+ popisi, notar, vojska)
+Fiches militaires ¦ Vojni listovi ¦ Vojaški listi
+Colonnes en plus ¦ Dodatni stupci ¦ Dodatni stolpci
+Recensement, notaire, militaire ¦ Popis, bilježnik, vojska ¦ Popis, notar, vojska
+Recensement seulement ¦ Samo popis ¦ Samo popis
+Les trous d’abord ¦ Najprije praznine ¦ Najprej vrzeli
+Par numéro Sosa ¦ Po Sosa broju ¦ Po številki Sosa
+Ancêtres au plus ¦ Predaka najviše ¦ Prednikov največ
+Axe ¦ Os ¦ Os
+Ce qu’on suit ¦ Što pratimo ¦ Kaj spremljamo
+L’état civil ¦ Bračno stanje ¦ Zakonski stan
+L’état civil (célibataire, marié, veuf…) : trajectoires de vie ¦ Bračno stanje (neoženjen, oženjen, udovac…): životni putovi ¦ Zakonski stan (samski, poročen, vdovec…): življenjske poti
+La commune ¦ Općina ¦ Občina
+Les lieux de vie ¦ Mjesta života ¦ Kraji bivanja
+Un groupe de personnes (critères) ¦ Skupina osoba (kriteriji) ¦ Skupina oseb (merila)
+Trajectoires de vie ¦ Životni putovi ¦ Življenjske poti
+Trajectoires de vie de {n}. ¦ Životni putovi: {n}. ¦ Življenjske poti: {n}.
+Métiers au fil de la vie de {n}. ¦ Zanimanja tijekom života: {n}. ¦ Poklici skozi življenje: {n}.
+Les métiers au fil de la vie ¦ Zanimanja tijekom života ¦ Poklici skozi življenje
+Les mêmes personnes à plusieurs âges (20, 40, 60 ans…) ¦ Iste osobe u više dobi (20, 40, 60…) ¦ Iste osebe pri več starostih (20, 40, 60…)
+Âges des colonnes ¦ Dobi stupaca ¦ Starosti stolpcev
+À {n} ans ¦ S {n} godina ¦ Pri {n} letih
+L’état civil des mêmes personnes à {a} ans ¦ Bračno stanje istih osoba s {a} godina ¦ Zakonski stan istih oseb pri {a} letih
+Où vivaient les mêmes personnes à {a} ans ¦ Gdje su iste osobe živjele s {a} godina ¦ Kje so iste osebe živele pri {a} letih
+Le métier des mêmes personnes à {a} ans ¦ Zanimanje istih osoba s {a} godina ¦ Poklic istih oseb pri {a} letih
+Le même qu’à l’âge d’avant — {list} ¦ Isto kao u prethodnoj dobi — {list} ¦ Enako kot pri prejšnji starosti — {list}
+Les mêmes personnes à {n} âges : {l}. ¦ Iste osobe u {n} dobi: {l}. ¦ Iste osebe pri {n} starostih: {l}.
+En % de la colonne (au lieu des nombres) ¦ U % stupca (umjesto brojeva) ¦ V % stolpca (namesto števil)
+État civil (trajectoires de vie) ¦ Bračno stanje (životni putovi) ¦ Zakonski stan (življenjske poti)
+Naissance (pour l’axe des âges) ¦ Rođenje (za os dobi) ¦ Rojstvo (za os starosti)
+Début (année ou âge, vide = auto) ¦ Početak (godina ili dob, prazno = auto) ¦ Začetek (leto ali starost, prazno = samodejno)
+Fin (année ou âge, vide = auto) ¦ Kraj (godina ili dob, prazno = auto) ¦ Konec (leto ali starost, prazno = samodejno)
+Par durée de vie ¦ Po trajanju života ¦ Po dolžini življenja
+Par état à 50 ans ¦ Po stanju s 50 godina ¦ Po stanu pri 50 letih
+âge (années) ¦ dob (godine) ¦ starost (leta)
+Vérifie le groupe de personnes et la période. ¦ Provjeri skupinu osoba i razdoblje. ¦ Preveri skupino oseb in obdobje.
+{n} pris dans ta base. ¦ {n} uzeto iz tvoje baze. ¦ {n} iz tvoje baze.
+{n} prises dans ta base. ¦ {n} uzeto iz tvoje baze. ¦ {n} iz tvoje baze.

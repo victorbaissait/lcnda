@@ -1,0 +1,192 @@
+fr ¦ hr ¦ sl
+# Zone « diagrammes-lot-a » : tableau de quartiers, variantes d’un nom, boucles d’implexe, double éventail, nœud papillon, réseau « toute la famille », barres croisées, cercles de parenté, dates incertaines, pyramide d’un recensement, tableau périodique (heritage-diagram-lot-a.js, lib/diagram_lot_a.php)
+(deviné) ¦ (pretpostavljeno) ¦ (domnevno)
+1 (enfants) ¦ 1 (djeca) ¦ 1 (otroci)
+1 (parents) ¦ 1 (roditelji) ¦ 1 (starši)
+16 quartiers ¦ 16 četvrti ¦ 16 četrtin
+20 ans ¦ 20 godina ¦ 20 let
+32 quartiers ¦ 32 četvrti ¦ 32 četrtin
+8 quartiers (arrière-grands-parents) ¦ 8 četvrti (pradjedovi i prabake) ¦ 8 četrtin (prastarši)
+Actes comptés ¦ Brojeni zapisi ¦ Šteti zapisi
+Ajoute les ancêtres (n° Sosa, nom) et leurs armoiries. ¦ Dodaj pretke (Sosa br., ime) i njihove grbove. ¦ Dodaj prednike (št. Sosa, ime) in njihove grbe.
+Ajoute les formes du nom : la forme, ses années, le nombre d’actes. ¦ Dodaj oblike imena: oblik, godine, broj zapisa. ¦ Dodaj oblike imena: oblika, leta, število zapisov.
+Ajoute les personnes recensées : âge, sexe, année. ¦ Dodaj popisane osobe: dob, spol, godina. ¦ Dodaj popisane osebe: starost, spol, leto.
+Ancêtre à trouver ¦ Predak za pronaći ¦ Prednik za najti
+Ancêtres pris dans ta base : {n} (armoiries : {k}). ¦ Preci iz tvoje baze: {n} (grbovi: {k}). ¦ Predniki iz tvoje zbirke: {n} (grbi: {k}).
+Arbre des variantes (formes du nom : {n}). ¦ Stablo varijanti (oblici imena: {n}). ¦ Drevo različic (oblike imena: {n}).
+Arbre des variantes d’un nom ¦ Stablo varijanti imena ¦ Drevo različic imena
+Armoiries (nom) ¦ Grb (naziv) ¦ Grb (ime)
+Au survol seulement ¦ Samo pri prelasku mišem ¦ Samo ob premiku miške
+Aucun ancêtre connu à cette génération. ¦ Nema poznatog pretka u ovoj generaciji. ¦ V tej generaciji ni znanega prednika.
+Aucun lien entre les couples de ce groupe. ¦ Nema veze između parova ove skupine. ¦ Med pari te skupine ni povezav.
+Aucun recensement dans ta base ¦ Nema popisa u tvojoj bazi ¦ V tvoji zbirki ni popisov
+Aucun âge lisible dans ce recensement. ¦ U ovom popisu nema čitljive dobi. ¦ V tem popisu ni berljive starosti.
+Aucune forme trouvée pour ce nom. ¦ Za ovo ime nije pronađen nijedan oblik. ¦ Za to ime ni najdene oblike.
+Avec au moins une source ¦ S barem jednim izvorom ¦ Z vsaj enim virom
+Axe des années ¦ Os godina ¦ Os let
+Barres croisées (UpSet) ¦ Ukrštene trake (UpSet) ¦ Prekrižani stolpci (UpSet)
+Barres croisées (ensembles : {n}, combinaisons montrées : {k}). ¦ Ukrštene trake (skupovi: {n}, prikazane kombinacije: {k}). ¦ Prekrižani stolpci (množice: {n}, prikazane kombinacije: {k}).
+Blason absent ¦ Nedostaje grb ¦ Manjkajoč grb
+Blasonnement en note (en bas) ¦ Opis grba u bilješci (dolje) ¦ Opis grba v opombi (spodaj)
+Boucles d’implexe (chemins : {n}), F = {f}. ¦ Petlje gubitka predaka (putovi: {n}), F = {f}. ¦ Zanke izgube prednikov (poti: {n}), F = {f}.
+Boucles plus lointaines pas dessinées : {n} (comptées dans F). ¦ Udaljenije petlje nisu nacrtane: {n} (uračunate u F). ¦ Bolj oddaljene zanke niso narisane: {n} (štete v F).
+Branche (paternelle, maternelle) ¦ Grana (očeva, majčina) ¦ Veja (očetova, materina)
+Branche maternelle ¦ Majčina grana ¦ Materina veja
+Branche paternelle ¦ Očeva grana ¦ Očetova veja
+Branche « {name} » ¦ Grana „{name}” ¦ Veja »{name}«
+Cases façon tableau périodique ¦ Polja kao periodni sustav ¦ Polja kot periodni sistem
+Cases vides pour les ancêtres à trouver ¦ Prazna polja za pretke koje treba naći ¦ Prazna polja za prednike, ki jih je treba najti
+Ce qu’on dessine ¦ Što se crta ¦ Kaj se riše
+Cercles (2 à 4 ensembles) ¦ Krugovi (2 do 4 skupa) ¦ Krogi (2 do 4 množice)
+Cercles de parenté autour de {name} (personnes : {n}). ¦ Krugovi srodstva oko {name} (osobe: {n}). ¦ Krogi sorodstva okoli {name} (osebe: {n}).
+Chemins trouvés : {n} (F = {f}). ¦ Pronađeni putovi: {n} (F = {f}). ¦ Najdene poti: {n} (F = {f}).
+Chercher les boucles ¦ Traži petlje ¦ Poišči zanke
+Chiffre (couleur, éventails) ¦ Broj (boja, lepeze) ¦ Število (barva, pahljače)
+Choisis de 2 à 8 ensembles (là : {n}). ¦ Odaberi 2 do 8 skupova (sada: {n}). ¦ Izberi 2 do 8 množic (zdaj: {n}).
+Choisis un groupe de noms ou écris un nom. ¦ Odaberi skupinu imena ili upiši ime. ¦ Izberi skupino imen ali vpiši ime.
+Choisis un recensement (commune et année). ¦ Odaberi popis (općina i godina). ¦ Izberi popis (občina in leto).
+Choisis une personne (« Depuis l’app ») ou écris les boucles à la main. ¦ Odaberi osobu („Iz aplikacije”) ili ručno upiši petlje. ¦ Izberi osebo (»Iz aplikacije«) ali ročno vpiši zanke.
+Coefficient aussi en fraction ¦ Koeficijent i kao razlomak ¦ Koeficient tudi kot ulomek
+Coefficient de consanguinité de {name} : F = {f} ¦ Koeficijent srodstva za {name}: F = {f} ¦ Koeficient sorodstva za {name}: F = {f}
+Combinaisons montrées (les plus grandes) ¦ Prikazane kombinacije (najveće) ¦ Prikazane kombinacije (največje)
+Combinaisons pas montrées : {n} ¦ Neprikazane kombinacije: {n} ¦ Neprikazane kombinacije: {n}
+Commune (titre) ¦ Općina (naslov) ¦ Občina (naslov)
+Comparer avec le recensement de ¦ Usporedi s popisom iz ¦ Primerjaj s popisom iz leta
+Consanguinité de l’ancêtre (%) ¦ Srodstvo pretka (%) ¦ Sorodstvo prednika (%)
+Couleur de l’écu (sans image) ¦ Boja štita (bez slike) ¦ Barva ščita (brez slike)
+Couleur des parts ¦ Boja dijelova ¦ Barva delov
+Couleur du côté maternel ¦ Boja majčine strane ¦ Barva materine strani
+Couleurs des branches ¦ Boje grana ¦ Barve vej
+Couple ¦ Par ¦ Par
+Critères de mauvaise forme. ¦ Neispravni kriteriji. ¦ Napačni kriteriji.
+Côté (paternel, maternel, branches) ¦ Strana (očeva, majčina, grane) ¦ Stran (očetova, materina, veje)
+Côté maternel ¦ Majčina strana ¦ Materina stran
+Côté paternel ¦ Očeva strana ¦ Očetova stran
+Date incertaine (fourchette) ¦ Nesiguran datum (raspon) ¦ Negotov datum (razpon)
+Date inconnue ¦ Nepoznat datum ¦ Neznan datum
+Dates sous le nom ¦ Datumi ispod imena ¦ Datumi pod imenom
+De la famille ¦ Iz obitelji ¦ Iz družine
+De la famille (oui) ¦ Iz obitelji (da) ¦ Iz družine (da)
+De la mère vers l’ancêtre ¦ Od majke do pretka ¦ Od matere do prednika
+Degrés montrés (jusqu’à) ¦ Prikazani stupnjevi (do) ¦ Prikazane stopnje (do)
+Dessin de la fourchette ¦ Crtež raspona ¦ Risba razpona
+Deux éventails ¦ Dvije lepeze ¦ Dve pahljači
+Deviner d’où vient chaque forme (date et ressemblance) ¦ Pogodi odakle dolazi svaki oblik (datum i sličnost) ¦ Ugani, od kod izvira vsaka oblika (datum in podobnost)
+Diagramme de Venn (2 à 8 ensembles) ¦ Vennov dijagram (2 do 8 skupova) ¦ Vennov diagram (2 do 8 množic)
+Diagramme de Venn : {names}. ¦ Vennov dijagram: {names}. ¦ Vennov diagram: {names}.
+Double éventail (ascendants : {up}, descendants : {down}). ¦ Dvostruka lepeza (preci: {up}, potomci: {down}). ¦ Dvojna pahljača (predniki: {up}, potomci: {down}).
+Du père vers l’ancêtre ¦ Od oca do pretka ¦ Od očeta do prednika
+Décédé ou inconnu ¦ Preminuo ili nepoznato ¦ Umrl ali neznano
+En accordéon (branches qu’on plie) ¦ Harmonika (sklopive grane) ¦ Harmonika (zložljive veje)
+En cercles (un cercle par degré) ¦ U krugovima (jedan krug po stupnju) ¦ V krogih (en krog na stopnjo)
+En vie ou non ¦ Živ ili ne ¦ Živ ali ne
+En {year} (contour) ¦ Godine {year} (obris) ¦ Leta {year} (obris)
+Ensemble {x} ¦ Skup {x} ¦ Množica {x}
+Faire ressortir la famille ¦ Istakni obitelj ¦ Poudari družino
+Formes prises dans ta base : {n}. ¦ Oblici iz tvoje baze: {n}. ¦ Oblike iz tvoje zbirke: {n}.
+Groupe de noms ¦ Skupina imena ¦ Skupina imen
+Générations : {n} côté père, {m} côté mère ¦ Generacije: {n} s očeve strane, {m} s majčine ¦ Generacije: {n} po očetu, {m} po materi
+Il faut de 2 à 8 ensembles. ¦ Potrebno je 2 do 8 skupova. ¦ Potrebnih je 2 do 8 množic.
+Image (media/…) ¦ Slika (media/…) ¦ Slika (media/…)
+Initiales du prénom et du nom ¦ Inicijali imena i prezimena ¦ Začetnici imena in priimka
+La branche ¦ Grana ¦ Veja
+La personne étudiée ¦ Proučavana osoba ¦ Preučevana oseba
+Le calcul n’est pas prêt. ¦ Izračun nije spreman. ¦ Izračun ni pripravljen.
+Le chemin entre deux personnes ¦ Put između dviju osoba ¦ Pot med dvema osebama
+Le nom (2 lettres) ¦ Prezime (2 slova) ¦ Priimek (2 črki)
+Le plus proche seulement ¦ Samo najbliži ¦ Samo najbližji
+Le prénom (2 lettres) ¦ Ime (2 slova) ¦ Ime (2 črki)
+Le recensement de {place} ¦ Popis u {place} ¦ Popis v {place}
+Les 8, 16 ou 32 ancêtres d’une génération, chacun avec son blason ; un écu vide : armoiries à trouver. ¦ 8, 16 ili 32 pretka jedne generacije, svaki sa svojim grbom; prazan štit: grb koji treba naći. ¦ 8, 16 ali 32 prednikov ene generacije, vsak s svojim grbom; prazen ščit: grb, ki ga je treba najti.
+Les boucles d’implexe (entre les deux parents) ¦ Petlje gubitka predaka (između roditelja) ¦ Zanke izgube prednikov (med staršema)
+Les boucles d’implexe de {name} ¦ Petlje gubitka predaka: {name} ¦ Zanke izgube prednikov: {name}
+Les deux parents de cette personne ne sont pas connus. ¦ Oba roditelja ove osobe nisu poznata. ¦ Oba starša te osebe nista znana.
+Les ensembles (2 à 8) : A, B, C… H ¦ Skupovi (2 do 8): A, B, C… H ¦ Množice (2 do 8): A, B, C… H
+Les formes du nom ¦ Oblici imena ¦ Oblike imena
+Les formes du nom {name} ¦ Oblici imena {name} ¦ Oblike imena {name}
+Les noms du groupe (ou écrits pareil) et leurs variantes notées, avec leurs années et le nombre d’actes. ¦ Imena iz skupine (ili jednako napisana) i njihove zabilježene varijante, s godinama i brojem zapisa. ¦ Imena iz skupine (ali enako zapisana) in njihove zapisane različice z leti in številom zapisov.
+Les quartiers de {name} ¦ Četvrti: {name} ¦ Četrtine: {name}
+Les seize quartiers de {name} ¦ Šesnaest četvrti: {name} ¦ Šestnajst četrtin: {name}
+Liens pris dans l’app : {n}. ¦ Veze iz aplikacije: {n}. ¦ Povezave iz aplikacije: {n}.
+Losange pour les dates exactes ¦ Romb za točne datume ¦ Romb za točne datume
+Montrer le calcul (½ puissance n) ¦ Prikaži izračun (½ na n) ¦ Pokaži izračun (½ na n)
+Montrer l’incertitude des dates ¦ Prikaži nesigurnost datuma ¦ Pokaži negotovost datumov
+Naissances et décès (qui vivait en …) ¦ Rođenja i smrti (tko je živio …) ¦ Rojstva in smrti (kdo je živel leta …)
+Nom inconnu ¦ Nepoznato ime ¦ Neznano ime
+Nom sous l’écu ¦ Ime ispod štita ¦ Ime pod ščitom
+Nom trop long (80 lettres au plus). ¦ Predugo ime (najviše 80 slova). ¦ Predolgo ime (največ 80 črk).
+Nombre d’actes sous la forme ¦ Broj zapisa ispod oblika ¦ Število zapisov pod obliko
+Noms les plus portés ¦ Najčešća imena ¦ Najpogostejša imena
+N° Sosa ¦ Sosa br. ¦ Št. Sosa
+N° Sosa (ascendants, éventails) ¦ Sosa br. (preci, lepeze) ¦ Št. Sosa (predniki, pahljače)
+Nœud papillon (père à gauche, mère à droite) ¦ Leptir-mašna (otac lijevo, majka desno) ¦ Metuljček (oče levo, mati desno)
+Ordre des combinaisons ¦ Redoslijed kombinacija ¦ Vrstni red kombinacij
+Ou un nom ¦ Ili ime ¦ Ali ime
+Par nombre d’ensembles ¦ Po broju skupova ¦ Po številu množic
+Parent (descendants, éventails) ¦ Roditelj (potomci, lepeze) ¦ Starš (potomci, pahljače)
+Personne cachée ¦ Skrivena osoba ¦ Skrita oseba
+Personnes recensées : {n} ¦ Popisane osobe: {n} ¦ Popisane osebe: {n}
+Personnes recensées : {n} en {y1}, {m} en {y2} ¦ Popisane osobe: {n} u {y1}., {m} u {y2}. ¦ Popisane osebe: {n} leta {y1}, {m} leta {y2}
+Personnes recensées prises dans ta base : {n}. ¦ Popisane osobe iz tvoje baze: {n}. ¦ Popisane osebe iz tvoje zbirke: {n}.
+Portraits (arbre dessiné, nœud papillon) ¦ Portreti (nacrtano stablo, leptir-mašna) ¦ Portreti (narisano drevo, metuljček)
+Pyramide du recensement de {year} (personnes : {n}). ¦ Piramida popisa iz {year}. (osobe: {n}). ¦ Piramida popisa iz leta {year} (osebe: {n}).
+Ressortent : les personnes reliées à une fiche (ou au groupe choisi). ¦ Istaknute: osobe povezane s karticom (ili odabranom skupinom). ¦ Poudarjene: osebe, povezane s kartico (ali izbrano skupino).
+Selon le nombre de descendants ¦ Prema broju potomaka ¦ Glede na število potomcev
+Selon le tableau ¦ Prema tablici ¦ Glede na tabelo
+Ses ancêtres au-dessus (place Sosa), ses descendants au-dessous (sous leur parent) ; le chiffre : l’âge au décès. ¦ Preci gore (mjesto Sosa), potomci dolje (ispod roditelja); broj: dob pri smrti. ¦ Predniki zgoraj (mesto Sosa), potomci spodaj (pod staršem); število: starost ob smrti.
+Ses ancêtres de la génération choisie (ordre Sosa) et les armoiries reliées à chacun (Listes → Armoiries). ¦ Preci odabrane generacije (redoslijed Sosa) i grbovi povezani sa svakim (Popisi → Grbovi). ¦ Predniki izbrane generacije (vrstni red Sosa) in grbi, povezani z vsakim (Seznami → Grbi).
+Seulement l’ancêtre commun le plus proche ¦ Samo najbliži zajednički predak ¦ Samo najbližji skupni prednik
+Sexe inconnu (pas dans la pyramide) : {n} ¦ Nepoznat spol (izvan piramide): {n} ¦ Neznan spol (ni v piramidi): {n}
+Sosa {n} : ancêtre à trouver ¦ Sosa {n}: predak za pronaći ¦ Sosa {n}: prednik za najti
+Source, note ¦ Izvor, bilješka ¦ Vir, opomba
+Sources sous la forme ¦ Izvori ispod oblika ¦ Viri pod obliko
+Tableau de quartiers (armoiries des ancêtres) ¦ Tablica četvrti (grbovi predaka) ¦ Tabela četrtin (grbi prednikov)
+Tableau de quartiers ({n}), armoiries connues : {k}. ¦ Tablica četvrti ({n}), poznati grbovi: {k}. ¦ Tabela četrtin ({n}), znani grbi: {k}.
+Tableau périodique : ancêtres trouvés {found} / {total} ({pct} %). ¦ Periodni sustav: pronađeni preci {found} / {total} ({pct} %). ¦ Periodni sistem: najdeni predniki {found} / {total} ({pct} %).
+Taux de recherche (%) ¦ Stupanj istraženosti (%) ¦ Stopnja raziskanosti (%)
+Tous les ancêtres répétés ¦ Svi ponovljeni preci ¦ Vsi ponovljeni predniki
+Tous les chemins du père et de la mère vers un même ancêtre (filiations biologiques) et le coefficient de consanguinité (méthode de Wright). ¦ Svi putovi oca i majke do istog pretka (biološko podrijetlo) i koeficijent srodstva (Wrightova metoda). ¦ Vse poti očeta in matere do istega prednika (biološko poreklo) in koeficient sorodstva (Wrightova metoda).
+Toute la base (qui vivait en …) ¦ Cijela baza (tko je živio …) ¦ Celotna zbirka (kdo je živel leta …)
+Toute la base (qui vivait l’année choisie) ou un recensement (les âges écrits ce jour-là). ¦ Cijela baza (tko je živio odabrane godine) ili popis (dob zapisana tog dana). ¦ Celotna zbirka (kdo je živel v izbranem letu) ali popis (starosti, zapisane tisti dan).
+Toute la famille, un point par couple ¦ Cijela obitelj, jedna točka po paru ¦ Vsa družina, ena pika na par
+Trop de critères. ¦ Previše kriterija. ¦ Preveč kriterijev.
+Trop d’ensembles. ¦ Previše skupova. ¦ Preveč množic.
+Trouvé chez le notaire (successions, inventaires) ¦ Pronađen kod bilježnika (ostavine, inventari) ¦ Najden pri notarju (dediščine, inventarji)
+Trouvé dans les sources militaires (poilus) ¦ Pronađen u vojnim izvorima (vojnici Prvog svjetskog rata) ¦ Najden v vojaških virih (vojaki prve svetovne vojne)
+Trouvé dans un recensement ¦ Pronađen u popisu ¦ Najden v popisu
+Un chiffre (colonne « Chiffre ») ¦ Broj (stupac „Broj”) ¦ Število (stolpec »Število«)
+Un recensement (commune, année) ¦ Popis (općina, godina) ¦ Popis (občina, leto)
+Un recensement (âges écrits) ¦ Popis (zapisana dob) ¦ Popis (zapisane starosti)
+Une par branche ¦ Jedna po grani ¦ Ena na vejo
+Une par forme ¦ Jedna po obliku ¦ Ena na obliko
+Une seule source : couleur de l’ensemble ¦ Jedan izvor: boja skupa ¦ En vir: barva množice
+Une source précise ¦ Određeni izvor ¦ Določen vir
+Vérifie le groupe de personnes. ¦ Provjeri skupinu osoba. ¦ Preveri skupino oseb.
+actes : {n} ¦ zapisi: {n} ¦ zapisi: {n}
+vient de {name} ¦ dolazi od {name} ¦ izvira iz {name}
+{label} (famille) : {n} ¦ {label} (obitelj): {n} ¦ {label} (družina): {n}
+{names} (seulement) : {n} ¦ {names} (samo): {n} ¦ {names} (samo): {n}
+{name} : armoiries pas encore trouvées ¦ {name}: grb još nije pronađen ¦ {name}: grb še ni najden
+{name} : {n} en tout ¦ {name}: ukupno {n} ¦ {name}: skupaj {n}
+{place}, {year} ¦ {place}, {year}. ¦ {place}, {year}
+« vers » : plus ou moins (ans) ¦ „oko”: plus-minus (godine) ¦ »okoli«: plus minus (leta)
+Âge (recensement) ¦ Dob (popis) ¦ Starost (popis)
+Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Upiši vrstu veze na crtu (ime djeteta…) ¦ Vrsto povezave napiši na črto (ime otroka…)
+Écrits s’il y a la place ¦ Napisana ako ima mjesta ¦ Izpisana, če je prostor
+Écu vide ¦ Prazan štit ¦ Prazen ščit
+Épaisseur selon le nombre d’actes ¦ Debljina prema broju zapisa ¦ Debelina glede na število zapisov
+— Aucun (le nom écrit à côté) — ¦ — Nijedna (ime upisano pokraj) — ¦ — Brez (ime, vpisano zraven) —
+— Rien — ¦ — Ništa — ¦ — Nič —
+🌿 Les formes d’un nom de ma base ¦ 🌿 Oblici imena iz moje baze ¦ 🌿 Oblike imena iz moje zbirke
+🔁 Entre les deux parents de… ¦ 🔁 Između roditelja… ¦ 🔁 Med staršema…
+🔺 Les personnes de ma base ¦ 🔺 Osobe iz moje baze ¦ 🔺 Osebe iz moje zbirke
+🛡 Les quartiers d’une personne de ma base ¦ 🛡 Četvrti osobe iz moje baze ¦ 🛡 Četrtine osebe iz moje zbirke
+Choisis de 2 à 8 ensembles : chaque zone compte les personnes de ces ensembles-là seulement. Dès 5 ensembles : barres croisées. ¦ Odaberi 2 do 8 skupova: svaka zona broji samo osobe iz tih skupova. Od 5 skupova: ukrštene trake. ¦ Izberi 2 do 8 množic: vsako območje šteje le osebe iz teh množic. Od 5 množic: prekrižani stolpci.
+Les témoins, parrains et marraines des actes ; ou toute la famille, un point par couple, reliés par leurs enfants. ¦ Svjedoci, kumovi i kume iz zapisa; ili cijela obitelj, točka po paru, povezani djecom. ¦ Priče, botri in botre iz zapisov; ali vsa družina, pika na par, povezani z otroki.
+Nom de l’enfant sur le trait ¦ Ime djeteta na crti ¦ Ime otroka na črti
+Par nom de famille ¦ Po prezimenu ¦ Po priimku
+Par siècle (du mariage) ¦ Po stoljeću (vjenčanja) ¦ Po stoletju (poroke)
+Un point par couple ¦ Jedna točka po paru ¦ Ena pika na par
+Un point par personne ¦ Jedna točka po osobi ¦ Ena pika na osebo
+🕸 Les liens de ma base ¦ 🕸 Veze iz moje baze ¦ 🕸 Povezave iz moje zbirke
+Quartiers ¦ Četvrti ¦ Četrtine

@@ -1,0 +1,179 @@
+fr ¦ ro
+# Zone « diagrammes-lot-c » : grille des recensements, schéma de preuve, arbre de mots (heritage-diagram-lot-c.js), zones des paroisses et carte en étoile (heritage-diagram-cartes.js), cercles d’une journée (heritage-cartes-outils.js)
+Hors de France ¦ În afara Franței
+Ajoute des personnes (nom, naissance, décès), puis leurs recensements (année, statut). ¦ Adaugă persoane (nume, naștere, deces), apoi recensămintele lor (an, stare).
+Aucune année de recensement entre ces deux dates. ¦ Niciun an de recensământ între aceste două date.
+Plus rien à chercher : tous les recensements sont trouvés ou sans objet. ¦ Nimic de căutat: toate recensămintele găsite sau fără obiect.
+à chercher : {list} ¦ de căutat: {list}
+non trouvés : {list} ¦ negăsite: {list}
+Liste de travail des recensements : {n}. ¦ Lista de lucru a recensămintelor: {n}.
+Grille des recensements : {n}, {y} recensements, {d} sur {t} cherchés. ¦ Grila recensămintelor: {n}, {y} recensăminte, {d} din {t} căutate.
+Les recensements de la famille {name} ¦ Recensămintele familiei {name}
+Contre ¦ Împotrivă
+Conflit ¦ Conflict
+Écris la question (Réglages), puis les indices : pour, contre, recherches, conflits. ¦ Scrie întrebarea (Setări), apoi indiciile: pentru, împotrivă, căutări, conflicte.
+Indices contre ¦ Indicii împotrivă
+Recherches et conflits ¦ Căutări și conflicte
+Résolu : {note} ¦ Rezolvat: {note}
+À résoudre ¦ De rezolvat
+poids {n} sur 3 ¦ greutate {n} din 3
+Pas encore de conclusion ¦ Încă nicio concluzie
+Schéma de preuve : {a} pour, {b} contre ; certitude : {c}. ¦ Schema dovezii: {a} pentru, {b} împotrivă; certitudine: {c}.
+Antoine MAZAUD est-il le père de Jean MAZAUD (né vers 1818) ? ¦ Este Antoine MAZAUD tatăl lui Jean MAZAUD (născut pe la 1818)?
+Oui : Antoine MAZAUD est le père de Jean. ¦ Da: Antoine MAZAUD este tatăl lui Jean.
+Acte de mariage de Jean (1842) : « fils d’Antoine MAZAUD, cultivateur » ¦ Actul de căsătorie al lui Jean (1842): „fiul lui Antoine MAZAUD, cultivator”
+Registre paroissial, original ¦ Registru parohial, original
+Recensement 1836 : Jean, 18 ans, au foyer d’Antoine ¦ Recensământul 1836: Jean, 18 ani, în gospodăria lui Antoine
+Recensement 1836, original ¦ Recensământul 1836, original
+Antoine est parrain du premier fils de Jean ¦ Antoine este nașul primului fiu al lui Jean
+Baptême 1844 ¦ Botez 1844
+Un autre Jean MAZAUD, né en 1817 au village voisin ¦ Un alt Jean MAZAUD, născut în 1817 în satul vecin
+Acte de naissance de Jean : registre lacunaire 1815-1820 ¦ Actul de naștere al lui Jean: registru lacunar 1815-1820
+Âge au décès : 64 ans (né vers 1820) au lieu de 66 ¦ Vârsta la deces: 64 de ani (născut pe la 1820) în loc de 66
+Acte de décès 1884 ¦ Act de deces 1884
+l’âge déclaré au décès est souvent approximatif ¦ vârsta declarată la deces e adesea aproximativă
+Écris le mot de départ (Réglages), par exemple « fils de » ou « veuve de ». ¦ Scrie cuvântul de pornire (Setări), de exemplu „fils de” sau „veuve de”.
+Colle des transcriptions (une par ligne) ou prends-les « Depuis l’app ». ¦ Lipește transcrieri (câte una pe rând) sau ia-le „Din aplicație”.
+« {w} » n’est dans aucun de ces textes. ¦ „{w}” nu apare în niciunul dintre aceste texte.
+… {n} autres ¦ … alte {n}
+Trop de branches : baisse la profondeur ou le nombre de branches (Réglages). ¦ Prea multe ramuri: scade adâncimea sau numărul de ramuri (Setări).
+« {w} » : {n} fois ¦ „{w}”: de {n} ori
+Arbre de mots : « {w} » trouvé {n} fois dans {t}. ¦ Arbore de cuvinte: „{w}” găsit de {n} ori în {t}.
+Ce qui suit « {w} » dans les actes ¦ Ce urmează după „{w}” în acte
+{n} lignes prises dans l’arbre : tu peux les corriger dans l’onglet Données. ¦ {n} rânduri luate din arbore: le poți corecta în fila Date.
+🗓️ Les recensements de mon arbre ¦ 🗓️ Recensămintele din arborele meu
+Une ligne par personne, une case par recensement : ce qui est relevé sur les fiches (trouvé, non trouvé…), et « à chercher » pour le reste. Sans groupe choisi : tes ancêtres. ¦ Un rând pe persoană, o căsuță pe recensământ: ce e notat în fișe (găsit, negăsit…) și „de căutat” pentru rest. Fără grup ales: strămoșii tăi.
+Du recensement de ¦ De la recensământul din
+à celui de ¦ până la cel din
+Les recensements de {n} ¦ Recensămintele a {n}
+Personne dans ce groupe ne vivait entre ces deux recensements (il faut au moins une date de naissance ou de décès). ¦ Nimeni din acest grup nu trăia între aceste recensăminte (e nevoie de cel puțin o dată de naștere sau deces).
+{n} sur {t} prises (les premières) : change « Au plus » pour en voir davantage. ¦ {n} din {t} luate (primele): schimbă „Cel mult” ca să vezi mai multe.
+⚖️ Un dossier de preuve ou une hypothèse ¦ ⚖️ Un dosar de dovadă sau o ipoteză
+Choisis un dossier : sa question, ses indices pour et contre, ses recherches et ses conflits, sa conclusion. Une hypothèse à comparer donne une colonne par réponse possible. ¦ Alege un dosar: întrebarea, indiciile pentru și împotrivă, căutările și conflictele, concluzia. O ipoteză de comparat dă o coloană pentru fiecare răspuns posibil.
+Le dossier ¦ Dosarul
+Choisis d’abord un dossier. ¦ Alege mai întâi un dosar.
+Schéma de preuve ¦ Schema dovezii
+Ce dossier n’a encore aucune ligne : ajoute des indices dans le dossier, ou ici à la main. ¦ Dosarul nu are încă rânduri: adaugă indicii în dosar sau aici, manual.
+Prendre ce dossier ¦ Ia acest dosar
+🌿 Les mots de mes transcriptions ¦ 🌿 Cuvintele din transcrierile mele
+Les transcriptions des actes (atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris. ¦ Transcrierile actelor (atelierul de transcriere) și ale mediilor: ce urmează (sau precede) cuvântul de pornire. Se iau doar bucățile de frază utile.
+Le mot de départ ¦ Cuvântul de pornire
+Ce qui suit ¦ Ce urmează
+Ce qui précède ¦ Ce precede
+Commune (dans le lieu ou le titre de l’acte) ¦ Localitate (în loc sau în titlul actului)
+Actes pris ¦ Acte luate
+Actes notariés ¦ Acte notariale
+Militaires ¦ Militare
+Lettres ¦ Scrisori
+Transcriptions des médias ¦ Transcrierile mediilor
+Écris le mot de départ (par exemple « fils de »). ¦ Scrie cuvântul de pornire (de exemplu „fils de”).
+Coche au moins une sorte d’acte. ¦ Bifează cel puțin un tip de act.
+Ce qui précède « {w} » dans les actes ¦ Ce precede „{w}” în acte
+« {w} » n’est dans aucune transcription de ce choix ({n} lues). ¦ „{w}” nu apare în nicio transcriere din această selecție ({n} citite).
+« {w} » : {n} fois, dans {a}. ¦ „{w}”: de {n} ori, în {a}.
+Dossier sans question ¦ Dosar fără întrebare
+Aucun dossier pour ce groupe de personnes ¦ Niciun dosar pentru acest grup de persoane
+Ferme l’éditeur, puis clique sur la case pour ouvrir la fiche (bloc « Recensements »). ¦ Închide editorul, apoi dă clic pe căsuță pentru a deschide fișa (blocul „Recensăminte”).
+Recensement {yr} : dans le bloc « Recensements » de la fiche. ¦ Recensământul {yr}: în blocul „Recensăminte” al fișei.
+Grille des recensements (personnes × années) ¦ Grila recensămintelor (persoane × ani)
+Ma recherche ¦ Cercetarea mea
+Une ligne par personne, une colonne par recensement : ce qui est trouvé, pas trouvé, et ce qui reste à chercher. ¦ Un rând pe persoană, o coloană pe recensământ: ce e găsit, negăsit și ce mai e de căutat.
+Les personnes (une ligne sans année : naissance, décès) et leurs recensements (une ligne par année) ¦ Persoanele (un rând fără an: naștere, deces) și recensămintele lor (un rând pe an)
+Naissance (année) ¦ Naștere (an)
+Décès (année) ¦ Deces (an)
+Recensement (année) ¦ Recensământ (an)
+Note (lieu, adresse…) ¦ Notă (loc, adresă…)
+Grille (une case par recensement) ¦ Grilă (o căsuță pe recensământ)
+Liste de travail à imprimer (ce qui reste à chercher) ¦ Listă de lucru de tipărit (ce mai e de căutat)
+À celui de ¦ Până la cel din
+Ou mes années (ex. 1846, 1851, 1872) ¦ Sau anii mei (ex. 1846, 1851, 1872)
+Personnes montrées ¦ Persoane afișate
+Seulement celles qui ont encore un recensement à chercher ¦ Doar cele care mai au un recensământ de căutat
+Le plus à chercher d’abord ¦ Cel mai mult de căutat întâi
+Par naissance ¦ După naștere
+Par nom ¦ După nume
+Couleur « Trouvé » ¦ Culoare „Găsit”
+Couleur « Non trouvé » ¦ Culoare „Negăsit”
+Couleur « À chercher » ¦ Culoare „De căutat”
+Couleur « Hors de France » ¦ Culoare „În afara Franței”
+Couleur « Pas né / déjà décédé » ¦ Culoare „Nenăscut / deja decedat”
+Écart entre les cases ¦ Spațiu între căsuțe
+Signes dans les cases (✓ ✗ ?) ¦ Semne în căsuțe (✓ ✗ ?)
+Années de vie à côté du nom ¦ Anii vieții lângă nume
+Schéma de preuve (question, indices pour et contre, conclusion) ¦ Schema dovezii (întrebare, indicii pentru și împotrivă, concluzie)
+La question en haut, les indices pour et contre (avec leur poids et leur source), les recherches et les conflits, puis la conclusion et sa certitude. ¦ Întrebarea sus, indiciile pentru și împotrivă (cu greutatea și sursa lor), căutările și conflictele, apoi concluzia și certitudinea ei.
+Les lignes du dossier (pour, contre, recherche, conflit ; « réponse » pour une hypothèse à plusieurs réponses) ¦ Rândurile dosarului (pentru, împotrivă, căutare, conflict; „răspuns” pentru o ipoteză cu mai multe răspunsuri)
+Indice (ou réponse) ¦ Indiciu (sau răspuns)
+Poids (1 à 3) ¦ Greutate (1 la 3)
+Pour la réponse… (hypothèse) ¦ Pentru răspunsul… (ipoteză)
+Note (résolution d’un conflit) ¦ Notă (rezolvarea unui conflict)
+La conclusion ¦ Concluzia
+Montrer les recherches et les conflits (ce qui reste à chercher) ¦ Arată căutările și conflictele (ce mai e de căutat)
+Couleur « confirme » ¦ Culoare „confirmă”
+Couleur « contredit » ¦ Culoare „contrazice”
+Couleur des recherches ¦ Culoarea căutărilor
+Couleur des conflits ¦ Culoarea conflictelor
+Couleur des réponses ¦ Culoarea răspunsurilor
+Couleur de la question ¦ Culoarea întrebării
+Arbre de mots des actes (ce qui suit « fils de »…) ¦ Arbore de cuvinte din acte (ce urmează după „fils de”…)
+Un mot de départ à gauche ; à droite, les mots qui le suivent dans les actes, plus gros quand ils reviennent souvent. ¦ Un cuvânt de pornire la stânga; la dreapta, cuvintele care îl urmează în acte, mai mari când revin des.
+Les textes (une transcription ou un bout de phrase par ligne) ¦ Textele (o transcriere sau o bucată de frază pe rând)
+Acte ou source ¦ Act sau sursă
+Le mot de départ (ex. fils de, veuve de) ¦ Cuvântul de pornire (ex. fils de, veuve de)
+Profondeur (mots) ¦ Adâncime (cuvinte)
+Branches par mot ¦ Ramuri pe cuvânt
+Seulement les mots vus au moins ¦ Doar cuvintele văzute cel puțin
+Le reste dans « … autres » ¦ Restul în „… alte”
+Écrire le nombre de fois ¦ Scrie numărul de apariții
+Sans tenir compte des capitales ni des accents ¦ Fără a ține cont de majuscule și diacritice
+Seulement les actes de (lieu) ¦ Doar actele din (loc)
+Couleur des mots ¦ Culoarea cuvintelor
+Couleur du mot de départ ¦ Culoarea cuvântului de pornire
+⭕ En une journée ¦ ⭕ Într-o zi
+Lieu de départ ¦ Loc de plecare
+Montrer les lieux de la famille ¦ Arată locurile familiei
+Ce qu’on atteignait en une journée ¦ Ce se putea atinge într-o zi
+Choisis le lieu de départ ¦ Alege locul de plecare
+Ce lieu n’a pas de position sur la carte : place-le d’abord. ¦ Acest loc nu are poziție pe hartă: plasează-l mai întâi.
+Coche au moins un moyen de voyager ¦ Bifează cel puțin un mijloc de călătorie
+Les fonds de carte ne sont pas chargés. ¦ Hărțile de fundal nu sunt încărcate.
+Je dessine les cercles… ¦ Desenez cercurile…
+En {d} jours depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ În {d} zile de la {from}, în {year}: în linie dreaptă, cam {list}.
+En une journée depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ Într-o zi de la {from}, în {year}: în linie dreaptă, cam {list}.
+Rayon (vol d’oiseau) ¦ Rază (în linie dreaptă)
+Lieux de la famille ¦ Locurile familiei
+Le rayon tient compte du détour de la route (réglage « Vitesses et sources »). Un trait pointillé : ce moyen n’existait pas encore cette année-là. ¦ Raza ține cont de ocolul drumului (setarea „Viteze și surse”). Linie punctată: acest mijloc nu exista încă în acel an.
+Paroisses (zones autour des églises) ¦ Parohii (zone în jurul bisericilor)
+⚠ Paroisses sans position : {list} — choisis-les dans la liste (onglet Données) ou écris « Nom 45.27, 1.77 » ¦ ⚠ Parohii fără poziție: {list} — alege-le din listă (fila Date) sau scrie „Nume 45.27, 1.77”
+Ajoute des paroisses (une ville de la liste, ou « Depuis l’app ») et leurs chiffres. ¦ Adaugă parohii (o localitate din listă sau „Din aplicație”) și cifrele lor.
+Zones des paroisses : {n}. ¦ Zonele parohiilor: {n}.
+Un point à chaque église ¦ Un punct la fiecare biserică
+Limites des départements par-dessus les paroisses ¦ Limitele departamentelor peste parohii
+Cadrer tout seul sur les paroisses ¦ Încadrează automat pe parohii
+Liens montrés ¦ Legături afișate
+Ceux qui arrivent et ceux qui partent ¦ Cei care sosesc și cei care pleacă
+Seulement ceux qui arrivent ¦ Doar cei care sosesc
+Seulement ceux qui partent ¦ Doar cei care pleacă
+Les liens de {name} ¦ Legăturile din {name}
+bleu : conjoints venus ¦ albastru: soți veniți
+orange : enfants partis ¦ portocaliu: copii plecați
+rouge : émigrés ¦ roșu: emigranți
+Lieux : {list} ¦ Locuri: {list}
+⛪ Au niveau « Paroisses » (Réglages → Niveau de détail) : une zone autour de chaque église, d’après les paroisses d’Ancien Régime de tes lieux ; un lieu sans paroisse compte pour lui-même. ¦ ⛪ La nivelul „Parohii” (Setări → Nivel de detaliu): o zonă în jurul fiecărei biserici, după vechile parohii ale locurilor tale; un loc fără parohie contează pentru sine.
+✳️ Tous les liens d’un lieu (carte en étoile) ¦ ✳️ Toate legăturile unui loc (hartă în stea)
+Le village ¦ Satul
+Conjoints venus s’y marier ¦ Soți veniți să se căsătorească acolo
+Enfants partis (nés ici, morts ou mariés ailleurs) ¦ Copii plecați (născuți aici, decedați sau căsătoriți în altă parte)
+Émigrés (morts dans un autre pays) ¦ Emigranți (decedați în altă țară)
+Choisis d’abord le village. ¦ Alege mai întâi satul.
+Coche au moins une sorte de lien. ¦ Bifează cel puțin un tip de legătură.
+Aucun lien trouvé pour ce lieu (naissance, mariage ou décès ailleurs). ¦ Nicio legătură găsită pentru acest loc (naștere, căsătorie sau deces în altă parte).
+{n} prises dans l’arbre ({m} lieux rattachés à une paroisse d’Ancien Régime, les autres comptent pour eux-mêmes). ¦ {n} luate din arbore ({m} locuri legate de o parohie veche, celelalte contează pentru sine).
+Aucun lieu avec des coordonnées pour ce choix : place d’abord tes lieux sur la carte. ¦ Niciun loc cu coordonate pentru această selecție: plasează mai întâi locurile pe hartă.
+sa paroisse ¦ parohia sa
+leur paroisse ¦ parohia lor
+une paroisse ¦ o parohie
+Paroisse sans position : choisis sa commune dans la liste, ou écris « Nom 45.27, 1.77 ». ¦ Parohie fără poziție: alege localitatea din listă sau scrie „Nume 45.27, 1.77”.
+Carte en étoile : seulement les liens de ce lieu (vide = tous les flux) ¦ Hartă în stea: doar legăturile acestui loc (gol = toate fluxurile)
+niveau|paroisse ¦ parohie
+=paroisse ¦ parohie|parohii|de parohii

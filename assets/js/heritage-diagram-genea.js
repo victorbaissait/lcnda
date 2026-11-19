@@ -318,11 +318,14 @@
         const rad = i => o.sizeBy === 'same' ? big * .7 : big * (.45 + .9 * Math.sqrt(g.nodes[i].deg / maxDeg));
         const labelSet = o.labels === 'none' ? new Set() : o.labels === 'all' || g.nodes.length <= 40 ? null : new Set(g.nodes.map((n, i) => [n.deg, i]).sort((a, b) => b[0] - a[0]).slice(0, 30).map(([, i]) => i));
         const X = i => st.x[i] * s + ox, Y = i => st.y[i] * s + oy;
-        let edges = '', nodes = '';
-        g.links.forEach((l, e) => { const c = o.edgeKinds === false ? '#8a94a3' : kc.m.get(l.kind); edges += `<line data-e="${e}" data-a="${l.i}" data-b="${l.j}" x1="${r2(X(l.i))}" y1="${r2(Y(l.i))}" x2="${r2(X(l.j))}" y2="${r2(Y(l.j))}" stroke="${c}" stroke-opacity=".6" stroke-width="${r2(.8 + 3.2 * Math.sqrt(l.w / maxW))}"><title>${esc(`${g.nodes[l.i].name} — ${g.nodes[l.j].name}${l.kind ? ' : ' + l.kind : ''}${l.w !== 1 ? ` (${fmt(l.w)})` : ''}`)}</title></line>`; });
+        let edges = '', nodes = '', elab = '';
+        const writeKinds = o.edgeLabels && g.links.length <= 600;
+        g.links.forEach((l, e) => { const c = o.edgeKinds === false ? '#8a94a3' : kc.m.get(l.kind);
+            if (writeKinds && l.kind) elab += `<text data-el="${e}" x="${r2((X(l.i) + X(l.j)) / 2)}" y="${r2((Y(l.i) + Y(l.j)) / 2)}" font-size="${r2(fs * .68)}" text-anchor="middle" dominant-baseline="middle" fill="currentColor" fill-opacity=".8" stroke="#ffffff" stroke-opacity=".75" stroke-width="${r2(fs * .2)}" paint-order="stroke">${esc(cut(l.kind, fs * 9, fs * .68))}</text>`;
+            edges += `<line data-e="${e}" data-a="${l.i}" data-b="${l.j}" x1="${r2(X(l.i))}" y1="${r2(Y(l.i))}" x2="${r2(X(l.j))}" y2="${r2(Y(l.j))}" stroke="${c}" stroke-opacity=".6" stroke-width="${r2(.8 + 3.2 * Math.sqrt(l.w / maxW))}"><title>${esc(`${g.nodes[l.i].name} — ${g.nodes[l.j].name}${l.kind ? ' : ' + l.kind : ''}${l.w !== 1 ? ` (${fmt(l.w)})` : ''}`)}</title></line>`; });
         g.nodes.forEach((n, i) => { const r = rad(i), lab = !labelSet || labelSet.has(i);
             nodes += `<g data-n="${i}" transform="translate(${r2(X(i))} ${r2(Y(i))})"><circle r="${r2(r)}" fill="${nc.col[i]}" stroke="#fff" stroke-width="1.2"/><title>${esc(`${n.name}${n.group ? ' · ' + n.group : ''} : ${n.deg} lien${n.deg > 1 ? 's' : ''}`)}</title>${lab ? T(0, r + fs * .75, cut(n.name, fs * 12, fs * .85), {size: fs * .85, anchor: 'middle', weight: n.deg === maxDeg ? 700 : 500}) : ''}</g>`; });
-        const svg = `<g data-gn-net="${st.key}" data-fit="${r2(ox)} ${r2(oy)} ${r2(s)}"><rect width="${r2(W)}" height="${r2(H)}" fill="#fff" fill-opacity="0" data-gn-bg=""/><g data-gn-vp=""><g>${edges}</g><g>${nodes}</g></g></g>`;
+        const svg = `<g data-gn-net="${st.key}" data-fit="${r2(ox)} ${r2(oy)} ${r2(s)}"><rect width="${r2(W)}" height="${r2(H)}" fill="#fff" fill-opacity="0" data-gn-bg=""/><g data-gn-vp=""><g>${edges}</g>${elab ? `<g>${elab}</g>` : ''}<g>${nodes}</g></g></g>`;
         const legend = [...nc.legend, ...(o.edgeKinds === false ? [] : kc.kinds.filter(Boolean).slice(0, 12).map(k => ({label: k, color: kc.m.get(k), type: 'line', width: 3})))];
         return {h: H, svg, legend, desc: i18n('Réseau de {n} personnes et {k} liens.', {n: g.nodes.length, k: g.links.length})};
     }
@@ -343,11 +346,28 @@
         io.apply(s); return i18n(r.links.length > 1 ? '{n} liens pris dans l’app.' : '{n} lien pris dans l’app.', {n: r.links.length});
     };
     const netApp = {
-        html: () => `<div class="h-dg-app gn-app"><h4>🕸 Témoins, parrains, marraines</h4><p class="muted">Les personnes notées dans les actes (témoins, parrains, déclarants…) et celles pour qui elles l’ont été. Couleur = nom de famille.</p>
-            <span class="pk-lab">Autour de</span>${PICK_ROOT()}
-            <label>Jusqu’où<select data-gn="depth"><option value="1">Ses liens directs</option><option value="2">Et les liens de ses liens</option><option value="all">Toute ma base (les 2 500 premiers liens)</option></select></label>
+        html: () => `<div class="h-dg-app gn-app"><h4>🕸 Les liens de ma base</h4><p class="muted">Les témoins, parrains et marraines des actes ; ou toute la famille, un point par couple, reliés par leurs enfants.</p>
+            <label>Source<select data-gn="src"><option value="witness">Témoins, parrains, marraines</option><option value="family">Toute la famille, un point par couple</option></select></label>
+            <div data-gn-for="witness"><span class="pk-lab">Autour de</span>${PICK_ROOT()}
+            <label>Jusqu’où<select data-gn="depth"><option value="1">Ses liens directs</option><option value="2">Et les liens de ses liens</option><option value="all">Toute ma base (les 2 500 premiers liens)</option></select></label></div>
+            <div data-gn-for="family" hidden><label>Points<select data-gn="points"><option value="couples">Un point par couple</option><option value="persons">Un point par personne</option></select></label>
+            <label>Couleur<select data-gn="fcolor"><option value="surname">Par nom de famille</option><option value="century">Par siècle (du mariage)</option></select></label>
+            <label class="ui-toggle"><input type="checkbox" data-gn="childname" checked><i></i>Nom de l’enfant sur le trait</label>${ext.diagramLotA?.criteria?.html('network') || ''}</div>
             <button type="button" class="button small" data-gn-go>Prendre ces liens</button><p class="muted" data-gn-msg aria-live="polite"></p></div>`,
-        bind: (pane, io) => bindApp(pane, () => linksFromApp('witness')(pane, io)),
+        bind: (pane, io) => {
+            const srcSel = pane.querySelector('[data-gn="src"]'), sync = () => pane.querySelectorAll('[data-gn-for]').forEach(el => { el.hidden = el.dataset.gnFor !== srcSel.value; });
+            srcSel?.addEventListener('change', sync); sync(); ext.diagramLotA?.criteria?.bind(pane, 'network');
+            bindApp(pane, async () => {
+                if (srcSel?.value !== 'family') return linksFromApp('witness')(pane, io);
+                if (!ext.diagramLotA?.criteria?.check(pane)) throw new Error(i18n('Vérifie le groupe de personnes.'));
+                const points = val(pane, 'points') || 'couples', r = await A().api('diagram_lot_a', {what: 'familygraph', points, color: val(pane, 'fcolor') || 'surname', ...(ext.diagramLotA?.criteria?.params(pane) || {})});
+                if (!r.links?.length) throw new Error(i18n('Aucun lien entre les couples de ce groupe.'));
+                const names = pane.querySelector('[data-gn="childname"]')?.checked !== false;
+                const s = io.spec(); s.rows = r.links.map(l => ({a: l.a, b: l.b, kind: l.kind, weight: ''})); s.nodes = (r.nodes || []).map(n => ({name: n.name, group: n.group || ''})); s.kinds = [];
+                s.o = {...s.o, title: points === 'couples' ? i18n('Toute la famille, un point par couple') : i18n('Toute la famille'), colorBy: '', edgeKinds: points !== 'couples', edgeLabels: points === 'couples' && names, labels: s.o?.labels || ''};
+                io.apply(s); return i18n('Liens pris dans l’app : {n}.', {n: r.links.length});
+            });
+        },
     };
 
     /* ═════════ 🌈 Arcs de liens ═════════ */
@@ -391,7 +411,7 @@
     };
 
     /* ═════════ ⭕ Venn de 2 à 4 ensembles (mêmes données que l'ancien : sets + zones A, B, AB…) ═════════ */
-    const ZONES = n => { const out = []; for (let m = 1; m < 2 ** n; m++) out.push([...'ABCD'.slice(0, n)].filter((_, i) => m & (1 << i)).join('')); return out.sort((a, b) => a.length - b.length || a.localeCompare(b)); };
+    const ZONES = n => { const out = []; n = clamp(Math.round(n) || 2, 2, 8); for (let m = 1; m < 2 ** n; m++) out.push([...'ABCDEFGH'.slice(0, n)].filter((_, i) => m & (1 << i)).join('')); return out.sort((a, b) => a.length - b.length || a.localeCompare(b)); };
     // formes (centre x, y, demi-axes a, b, angle en degrés ; y vers le bas) ; 4 ensembles : 4 ellipses inclinées, les 15 zones existent
     const SHAPES_V = {2: [[-.3, 0, .5, .5, 0], [.3, 0, .5, .5, 0]], 3: [[-.27, -.2, .5, .5, 0], [.27, -.2, .5, .5, 0], [0, .25, .5, .5, 0]],
         4: [[-.2, .2, .9, .35, -40], [-.05, -.4, .9, .35, -40], [.05, -.4, .9, .35, 40], [.2, .2, .9, .35, 40]]};
@@ -413,8 +433,9 @@
         const L = {E, at: best, box: [x0, y0, x1 - x0, y1 - y0]}; vennMem.set(n, L); return L;
     }
     function venn(spec, W, fs) {
-        const o = spec.o || {}, sets = rows(spec, 'sets').slice(0, 4).map((s, i) => ({name: str(s.name, 80) || `Ensemble ${'ABCD'[i]}`, color: pick(spec, i, s.color)}));
-        if (sets.length < 2) return empty(W, fs, 'Il faut 2, 3 ou 4 ensembles.');
+        const o = spec.o || {}, sets = rows(spec, 'sets').slice(0, 8).map((s, i) => ({name: str(s.name, 80) || i18n('Ensemble {x}', {x: 'ABCDEFGH'[i]}), color: pick(spec, i, s.color)}));
+        if (sets.length < 2) return empty(W, fs, 'Il faut de 2 à 8 ensembles.');
+        if (sets.length > 4 || o.shape === 'upset') return upset(spec, sets, W, fs); // 5 ensembles et plus : les barres croisées (UpSet)
         const n = sets.length, reg = {}; rows(spec).forEach(r => { const k = String(r.region || '').replace(/[\s∩]/g, '').toUpperCase(); if (k) reg[[...k].sort().join('')] = str(r.value, 40); });
         const L = vennLayout(n), [bx0, by0, bw, bh] = L.box, side = n === 2 ? fs : clamp(Math.max(...sets.map(x => textW(x.name + ' (0000)', fs * 1.05))) * (n === 4 ? .75 : .35), fs * 2, W * .26), top = fs * 2;
         const sc = Math.min((W - side * 2) / bw, (num(o.height) > 80 ? num(o.height) - top * 2 : 1e9) / bh, 900 / bh), size = sc;
@@ -434,27 +455,64 @@
             const sum = numeric ? Object.entries(reg).filter(([c]) => c.includes('ABCD'[i])).reduce((a, [, v]) => a + num(v), 0) : null;
             const room = right ? W - X(bx) - 8 : left ? X(bx) - 8 : W * .5;
             svg += T(X(bx) + (right ? 6 : left ? -6 : 0), Y(by) + (top ? -fs * .8 : fs * .9), cut(`${sets[i].name}${o.totals !== false && sum ? ` (${fmt(sum, 0)})` : ''}`, Math.max(fs * 3, room), fs * 1.05), {size: fs * 1.05, weight: 700, anchor: right ? 'start' : left ? 'end' : 'middle', fill: mix(sets[i].color, '#000000', .25)}); });
-        return {h: bh * sc + top * 2, svg, legend: [], desc: `Diagramme de Venn de ${n} ensembles : ${sets.map(s => s.name).join(', ')}.`};
+        return {h: bh * sc + top * 2, svg, legend: [], desc: i18n('Diagramme de Venn : {names}.', {n, names: sets.map(s => s.name).join(', ')})};
+    }
+    /**
+     * ▦ Barres croisées (UpSet) : en haut une barre par combinaison d'ensembles (« dans A et C, pas dans les autres »),
+     * dessous la grille des points (les ensembles de la combinaison), à gauche la taille de chaque ensemble.
+     * Les N plus grandes combinaisons ; tri par taille ou par nombre d'ensembles ; ids → un clic ouvre la liste des personnes.
+     */
+    function upset(spec, sets, W, fs) {
+        const o = spec.o || {}, n = sets.length, L = 'ABCDEFGH'.slice(0, n);
+        const combos = rows(spec).map(r => ({code: [...String(r.region || '').toUpperCase().replace(/[^A-H]/g, '')].filter(c => L.includes(c)).sort().join(''), v: num(r.value), ids: String(r.ids ?? '').split(',').map(x => Math.floor(Number(x))).filter(x => x > 0).slice(0, 400)}))
+            .filter(c => c.code && c.v > 0);
+        const merged = new Map(); combos.forEach(c => { const m = merged.get(c.code); if (m) { m.v += c.v; m.ids.push(...c.ids); } else merged.set(c.code, {...c, ids: [...c.ids]}); });
+        let list = [...merged.values()];
+        if (!list.length) return empty(W, fs, 'Écris un nombre dans au moins une combinaison (ex. AB = dans A et B).');
+        list.sort(o.upsetSort === 'degree' ? (a, b) => a.code.length - b.code.length || b.v - a.v || a.code.localeCompare(b.code) : (a, b) => b.v - a.v || a.code.length - b.code.length || a.code.localeCompare(b.code));
+        const nameW = Math.min(W * .3, Math.max(...sets.map(x => textW(x.name, fs * .85))) + 10), sizeW = Math.min(W * .16, fs * 6), left = nameW + sizeW + 8;
+        const room = Math.max(1, Math.floor((W - left - 4) / (fs * 1.5))), top = clamp(Math.round(num(o.top) || 15), 2, 60), shown = list.slice(0, Math.min(top, room));
+        const cw = (W - left - 4) / shown.length, barH = clamp(num(o.height) > 120 ? num(o.height) * .55 : fs * 12, fs * 5, 600), rh = fs * 1.55, y0 = fs * 1.4, gy = y0 + barH + fs * .6;
+        const maxV = Math.max(...shown.map(c => c.v)), totals = sets.map((_, i) => list.filter(c => c.code.includes(L[i])).reduce((a, c) => a + c.v, 0)), maxT = Math.max(1, ...totals);
+        const dot = Math.min(cw * .32, rh * .36), ink = '#3b4352', off = '#c9ced6', bar = color(o.barColor, '#4e79a7');
+        let svg = '';
+        sets.forEach((st, i) => { const y = gy + i * rh;
+            if (i % 2 === 0) svg += `<rect x="${r2(left - 4)}" y="${r2(y)}" width="${r2(W - left + 4)}" height="${r2(rh)}" fill="currentColor" fill-opacity=".045"/>`;
+            const w = totals[i] / maxT * (sizeW - 6);
+            svg += `<rect x="${r2(nameW + sizeW - w)}" y="${r2(y + rh * .2)}" width="${r2(w)}" height="${r2(rh * .6)}" fill="${st.color}"><title>${esc(i18n('{name} : {n} en tout', {name: st.name, n: fmt(totals[i], 0)}))}</title></rect>`;
+            svg += T(nameW - 6, y + rh / 2, cut(st.name, nameW - 8, fs * .85), {size: fs * .85, anchor: 'end', weight: 600}); });
+        shown.forEach((c, k) => { const cx = left + k * cw + cw / 2, h = c.v / maxV * barH, ins = [...c.code].map(ch => L.indexOf(ch)), label = ins.map(i => sets[i].name).join(' ∩ ');
+            const pids = c.ids.length ? ` data-dfa-pids="${c.ids.join(',')}" data-dfa-t="${esc(label)}" style="cursor:pointer"` : '';
+            svg += `<rect x="${r2(cx - cw * .36)}" y="${r2(y0 + barH - h)}" width="${r2(cw * .72)}" height="${r2(Math.max(.5, h))}" fill="${o.barColors && ins.length === 1 ? sets[ins[0]].color : bar}"${pids}><title>${esc(i18n('{names} (seulement) : {n}', {names: label, n: fmt(c.v, 0)}))}</title></rect>`;
+            if (o.values !== false) svg += T(cx, y0 + barH - h - fs * .5, fmt(c.v, 0), {size: Math.min(fs * .75, cw * .5), anchor: 'middle'});
+            const ys = ins.map(i => gy + i * rh + rh / 2);
+            if (ys.length > 1) svg += `<line x1="${r2(cx)}" x2="${r2(cx)}" y1="${r2(Math.min(...ys))}" y2="${r2(Math.max(...ys))}" stroke="${ink}" stroke-width="${r2(Math.max(1.2, dot * .5))}"/>`;
+            sets.forEach((_, i) => { svg += `<circle cx="${r2(cx)}" cy="${r2(gy + i * rh + rh / 2)}" r="${r2(dot)}" fill="${ins.includes(i) ? ink : off}"/>`; }); });
+        svg += `<line x1="${r2(left - 4)}" x2="${r2(W)}" y1="${r2(y0 + barH)}" y2="${r2(y0 + barH)}" stroke="currentColor" stroke-opacity=".3"/>`;
+        const hidden = list.length - shown.length;
+        if (hidden > 0) svg += T(W - 4, y0 - fs * .5, i18n('Combinaisons pas montrées : {n}', {n: hidden}), {size: fs * .72, anchor: 'end', op: .7});
+        return {h: gy + n * rh + 6, svg, legend: [], desc: i18n('Barres croisées (ensembles : {n}, combinaisons montrées : {k}).', {n, k: shown.length})};
     }
     const vennApp = {
-        html: () => `<div class="h-dg-app gn-app"><h4>⭕ Des ensembles de l’app</h4><p class="muted">Choisis 2 à 4 ensembles : chaque zone reçoit le nombre de personnes qui sont dans ces ensembles-là, et pas dans les autres.</p>
+        html: () => `<div class="h-dg-app gn-app"><h4>⭕ Des ensembles de l’app</h4><p class="muted">Choisis de 2 à 8 ensembles : chaque zone compte les personnes de ces ensembles-là seulement. Dès 5 ensembles : barres croisées.</p>
             <span class="pk-lab">Étiquettes</span>${A().pickerField ? A().pickerField({name: 'gn_labels', kind: 'label', multiple: true, placeholder: 'Une étiquette…'}) : ''}
             <span class="pk-lab">Autres ensembles</span><div class="gn-sets" data-gn-sets>${window.LCNDA_UI.spinner('Chargement…')}</div>
-            <span class="pk-lab">Personne de départ (pour « Mes ancêtres »)</span>${PICK_ROOT()}
+            <span class="pk-lab">Personne de départ (pour « Mes ancêtres »)</span>${PICK_ROOT()}${ext.diagramLotA?.criteria?.html('venn') || ''}
             <button type="button" class="button small" data-gn-go>Compter</button><p class="muted" data-gn-msg aria-live="polite"></p></div>`,
         bind: (pane, io) => {
             const box = pane.querySelector('[data-gn-sets]'), names = new Map();
             pane.addEventListener('picker-change', e => { if (e.detail?.name === 'gn_labels') (e.detail.items || []).forEach(it => names.set(Number(it.id), String(it.title || ''))); });
-            get({what: 'venn_sets'}).then(r => { const g = {}; (r.sets || []).forEach(s => { (g[s.group] = g[s.group] || []).push(s); });
+            ext.diagramLotA?.criteria?.bind(pane, 'venn');
+            Promise.all([get({what: 'venn_sets'}), A().api('diagram_lot_a', {what: 'sets_more'}).catch(() => ({sets: []}))]).then(([r0, r1]) => { const r = {sets: [...(r0.sets || []), ...(r1.sets || [])]}; const g = {}; (r.sets || []).forEach(s => { (g[s.group] = g[s.group] || []).push(s); });
                 box.innerHTML = Object.entries(g).map(([grp, l]) => `<fieldset><legend>${esc(grp)}</legend>${l.map(s => `<label class="checkbox-line"><input type="checkbox" value="${esc(s.key)}" data-label="${esc(s.label)}"> ${esc(s.label)}</label>`).join('')}</fieldset>`).join('') || '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Rien d’autre pour l’instant.</span></p>'; }).catch(e => { box.innerHTML = `<p class="muted">${esc(e.message)}</p>`; });
             bindApp(pane, async () => {
                 const lab = pane.querySelector('[name="gn_labels"]')?.value || '', labels = lab.split(',').map(Number).filter(Boolean).map(id => ({key: 'label:' + id, label: ''}));
                 labels.forEach(l => { l.label = names.get(Number(l.key.slice(6))) || 'Étiquette'; });
                 const chosen = [...labels, ...[...box.querySelectorAll('input:checked')].map(c => ({key: c.value, label: c.dataset.label}))];
-                if (chosen.length < 2 || chosen.length > 4) throw new Error(i18n('Choisis 2 à 4 ensembles (là : {n}).', {n: chosen.length}));
-                const r = await get({what: 'venn', keys: chosen.map(c => c.key).join(','), root: rootOf(pane)});
+                if (chosen.length < 2 || chosen.length > 8) throw new Error(i18n('Choisis de 2 à 8 ensembles (là : {n}).', {n: chosen.length}));
+                const r = await A().api('diagram_lot_a', {what: 'upset', keys: chosen.map(c => c.key).join(','), root: rootOf(pane), ...(ext.diagramLotA?.criteria?.params(pane) || {})}); // 2 à 8 ensembles, + le groupe et les critères (lib/diagram_lot_a.php)
                 const s = io.spec(); s.sets = chosen.map((c, i) => ({name: c.label, color: s.sets?.[i]?.color || ''}));
-                s.rows = ZONES(chosen.length).map(z => ({region: z, value: String(r.regions?.[z] || 0)})); s.o = {...s.o, title: chosen.map(c => c.label).join(' · ')};
+                s.rows = ZONES(chosen.length).map(z => ({region: z, value: String(r.regions?.[z] || 0), ...(r.ids?.[z] ? {ids: r.ids[z]} : {})})); s.o = {...s.o, title: chosen.slice(0, 3).map(c => c.label).join(' · ') + (chosen.length > 3 ? ' …' : ''), shape: chosen.length > 4 ? 'upset' : s.o?.shape || ''};
                 const n = Object.values(r.regions || {}).reduce((a, b) => a + b, 0); io.apply(s); return i18n(n > 1 ? '{n} personnes comptées.' : '{n} personne comptée.', {n: fmt(n, 0)});
             });
         },
@@ -503,6 +561,27 @@
     }
     const yearDec = d => (d?.y == null ? null : d.y + ((d.m || 1) - 1) / 12 + ((d.d || 1) - 1) / 365.25);
     ext.diagramParseDay = parseDay;
+    /**
+     * ⏳ L'incertitude d'une date écrite (frises) : « vers 1745 » (± about ans), « avant 1760 », « après 1760 »,
+     * « entre 1740 et 1745 », « 1740/1745 », « mai 1745 » (le mois), « 1745 » (l'année), « 12 thermidor an II » (exacte).
+     * → {lo, hi, mid, exact} en années décimales, ou null.
+     */
+    function dateRange(raw, about = 5) {
+        const t = fold(raw).trim().replace(/\s+/g, ' '); if (!t || t.length > 80) return null;
+        about = clamp(Number(about) || 5, 0, 50); let m;
+        const span = (a, b) => { if (a > b) [a, b] = [b, a]; return {lo: a, hi: b, mid: (a + b) / 2, exact: false}; };
+        if ((m = t.match(/^(?:entre|de|du)\s+(?:le\s+)?(.+?)\s+(?:et|a|au)\s+(?:le\s+)?(.+)$/)) || (m = t.match(/^(\d{3,4})\s*[/–—]\s*(\d{3,4})$/)) || (m = t.match(/^(\d{4})\s*-\s*(\d{4})$/))) {
+            const a = dateRange(m[1], about), b = dateRange(m[2], about); if (a && b) return span(a.lo, b.hi); }
+        if ((m = t.match(/^(?:vers|environ|env\.?|circa|ca\.?|c\.|~|±)\s*(.+)$/)) || (m = t.match(/^(.+?)\s*\?$/))) { const d = dateRange(m[1], about); if (d) return span(d.mid - about, d.mid + about); }
+        if ((m = t.match(/^(?:avant|av\.?|<)\s*(.+)$/))) { const d = dateRange(m[1], about); if (d) return span(d.lo - Math.max(1, about * 2), d.lo); }
+        if ((m = t.match(/^(?:apres|ap\.?|>|depuis)\s*(.+)$/))) { const d = dateRange(m[1], about); if (d) return span(d.hi, d.hi + Math.max(1, about * 2)); }
+        if ((m = t.match(/^(-?\d{3,4})$/))) return span(+m[1], +m[1] + 1);
+        const d = parseDay(raw); if (!d || d.y == null) return null;
+        if (d.approx) return span(d.y - about, d.y + about);
+        if (d.d) { const v = yearDec(d); return {lo: v, hi: v + 1 / 365.25, mid: v, exact: true}; }
+        if (d.m) { const v = yearDec(d); return span(v, v + 1 / 12); }
+        return span(d.y, d.y + 1);
+    }
 
     /* ═════════ 🗓 Calendrier coloré ═════════ */
     const MN = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
@@ -706,7 +785,7 @@
             sample: () => ({o: {title: i18n('Descendance de Jean Martin'), sizeBy: 'desc'}, rows: sampleSun()})},
         network: {icon: '🕸️', label: 'Réseau de relations (témoins, parrains…)', group: 'Généalogie', render: network, legend: 'bottom', fromApp: netApp,
             grids: [LINKS_GRID, NODES_GRID, KINDS_GRID],
-            options: [COLORBY, C('cluster', 'Rapprocher les points de même couleur', 'check'), C('edgeKinds', 'Liens colorés selon leur sorte', 'check', {def: true}), LABELS, C('sizeBy', 'Taille des points', 'select', {choices: [['', 'Selon le nombre de liens'], ['same', 'Tous pareils']]}),
+            options: [COLORBY, C('cluster', 'Rapprocher les points de même couleur', 'check'), C('edgeKinds', 'Liens colorés selon leur sorte', 'check', {def: true}), C('edgeLabels', 'Écrire la sorte du lien sur le trait (nom de l’enfant…)', 'check'), LABELS, C('sizeBy', 'Taille des points', 'select', {choices: [['', 'Selon le nombre de liens'], ['same', 'Tous pareils']]}),
                 C('nodeSize', 'Taille des points', 'range', {min: 3, max: 30, def: 9}), C('strength', 'Écartement', 'range', {min: .2, max: 4, step: .1, def: 1}), C('height', 'Hauteur', 'number', {unit: 'px', min: 220, max: 2400})],
             sample: () => ({o: {title: i18n('Témoins et parrains au village')}, ...sampleNet()})},
         arcs: {icon: '🌈', label: 'Arcs de liens (implexe, mariages entre familles)', group: 'Généalogie', render: arcs, legend: 'bottom', fromApp: arcsApp,
@@ -715,10 +794,12 @@
                 C('side', 'Arcs', 'select', {choices: [['', 'Au-dessus'], ['kind', 'Au-dessus et en dessous selon la sorte'], ['below', 'En dessous']]}), C('arcHeight', 'Hauteur des arcs', 'range', {unit: '%', min: 10, max: 120, def: 55}),
                 {...COLORBY, choices: COLORBY.choices}, C('edgeKinds', 'Arcs colorés selon leur sorte', 'check', {def: true}), C('labels', 'Noms', 'select', {choices: [['', 'Sous la ligne'], ['none', 'Aucun']]})],
             sample: () => ({o: {title: i18n('Mariages entre familles du village'), order: 'degree', colorBy: 'community'}, rows: sampleArcs(), nodes: []})},
-        venn: {icon: '⭕', label: 'Diagramme de Venn (2 à 4 ensembles)', group: 'Généalogie', render: venn, noLegend: true, fromApp: vennApp,
-            grids: [{key: 'sets', label: 'Les ensembles (2 à 4) : A, B, C, D', max: 4, cols: [C('name', 'Nom'), C('color', 'Couleur', 'color')]},
-                {key: 'rows', label: 'Ce qu’on écrit dans chaque zone (AB = dans A et B, pas dans les autres)', fixed: spec => ZONES(clamp(rows(spec, 'sets').length, 2, 4)), cols: [C('region', 'Zone', 'readonly'), C('value', 'Nombre ou texte')]}],
-            options: [C('pct', 'Ajouter le pourcentage', 'check'), C('totals', 'Total de chaque ensemble à côté de son nom', 'check', {def: true}), C('opacity', 'Transparence des formes', 'range', {unit: '%', min: 5, max: 80, def: 30}), H_OPT],
+        venn: {icon: '⭕', label: 'Diagramme de Venn (2 à 8 ensembles)', group: 'Généalogie', render: venn, noLegend: true, fromApp: vennApp,
+            grids: [{key: 'sets', label: 'Les ensembles (2 à 8) : A, B, C… H', max: 8, cols: [C('name', 'Nom'), C('color', 'Couleur', 'color')]},
+                {key: 'rows', label: 'Ce qu’on écrit dans chaque zone (AB = dans A et B, pas dans les autres)', fixed: spec => ZONES(clamp(rows(spec, 'sets').length, 2, 8)), cols: [C('region', 'Zone', 'readonly'), C('value', 'Nombre ou texte')]}],
+            options: [C('shape', 'Forme', 'select', {choices: [['', 'Cercles (2 à 4 ensembles)'], ['upset', 'Barres croisées (UpSet)']]}), C('pct', 'Ajouter le pourcentage', 'check', {when: s => s.o?.shape !== 'upset' && rows(s, 'sets').length <= 4}), C('totals', 'Total de chaque ensemble à côté de son nom', 'check', {def: true, when: s => s.o?.shape !== 'upset' && rows(s, 'sets').length <= 4}), C('opacity', 'Transparence des formes', 'range', {unit: '%', min: 5, max: 80, def: 30, when: s => s.o?.shape !== 'upset' && rows(s, 'sets').length <= 4}),
+                C('top', 'Combinaisons montrées (les plus grandes)', 'range', {min: 2, max: 60, def: 15, when: s => s.o?.shape === 'upset' || rows(s, 'sets').length > 4}), C('upsetSort', 'Ordre des combinaisons', 'select', {choices: [['', 'De la plus grande à la plus petite'], ['degree', 'Par nombre d’ensembles']], when: s => s.o?.shape === 'upset' || rows(s, 'sets').length > 4}),
+                C('barColor', 'Couleur des barres', 'color', {def: '#4e79a7', when: s => s.o?.shape === 'upset' || rows(s, 'sets').length > 4}), C('barColors', 'Une seule source : couleur de l’ensemble', 'check', {when: s => s.o?.shape === 'upset' || rows(s, 'sets').length > 4}), C('values', 'Écrire les nombres', 'check', {def: true, when: s => s.o?.shape === 'upset' || rows(s, 'sets').length > 4}), H_OPT],
             sample: () => ({o: {title: i18n('Mes sources')}, sets: [{name: i18n('État civil')}, {name: i18n('Registres paroissiaux')}, {name: i18n('Notaires')}, {name: i18n('Recensements')}], rows: ZONES(4).map((region, i) => ({region, value: String([120, 85, 30, 64, 40, 12, 22, 9, 15, 11, 5, 6, 4, 3, 2][i])}))})},
         calendar: {icon: '🗓️', label: 'Calendrier coloré (jour par jour)', group: 'Frises', render: calendar, legend: 'bottom', fromApp: calApp,
             grids: [{key: 'rows', label: 'Les dates (une ligne par événement, ou une date et un nombre)', cols: [C('date', 'Date', 'text', {ph: '7 mai 1925, 08/12/1960, 12 thermidor an II'}), C('value', 'Nombre (vide = 1)', 'number'), C('label', 'Quoi')]}],
@@ -741,19 +822,20 @@
     // l'ancien Venn (2 ou 3 ensembles) est remplacé : mêmes données, une zone de plus par ensemble ajouté
     delete K.venn;
     Object.assign(K, NEW);
-    ext.diagramGenea = {parseDay, netState: () => NET, ZONES, vennLayout, hierarchy, graphOf};
+    ext.diagramGenea = {parseDay, dateRange, netState: () => NET, ZONES, vennLayout, hierarchy, graphOf, upset};
 
     /* ═════════ 🕸 Le réseau posé dans la page : la disposition continue par étapes, on glisse les points, on zoome ═════════ */
     function enhance(g) {
         if (g.__gn) return; g.__gn = 1;
         const st = NET.get(g.dataset.gnNet), svg = g.ownerSVGElement; if (!st || !svg) return;
         const [ox, oy, s] = g.dataset.fit.split(' ').map(Number), vp = g.querySelector('[data-gn-vp]');
-        const nodes = [...g.querySelectorAll('[data-n]')], edges = [...g.querySelectorAll('line[data-e]')];
+        const nodes = [...g.querySelectorAll('[data-n]')], edges = [...g.querySelectorAll('line[data-e]')], elabs = [...g.querySelectorAll('text[data-el]')].map(t => [t, edges.findIndex(l => l.dataset.e === t.dataset.el)]).filter(([, k]) => k >= 0);
         const ea = edges.map(e => +e.dataset.a), eb = edges.map(e => +e.dataset.b);
         let z = 1, tx = 0, ty = 0, raf = 0, paused = false, drag = null, pan = null;
         const apply = () => vp.setAttribute('transform', `translate(${r2(tx)} ${r2(ty)}) scale(${r2(z)})`);
         const paint = () => { for (let i = 0; i < nodes.length; i++) nodes[i].setAttribute('transform', `translate(${r2(st.x[i] * s + ox)} ${r2(st.y[i] * s + oy)})`);
-            for (let e = 0; e < edges.length; e++) { const l = edges[e]; l.setAttribute('x1', r2(st.x[ea[e]] * s + ox)); l.setAttribute('y1', r2(st.y[ea[e]] * s + oy)); l.setAttribute('x2', r2(st.x[eb[e]] * s + ox)); l.setAttribute('y2', r2(st.y[eb[e]] * s + oy)); } };
+            for (let e = 0; e < edges.length; e++) { const l = edges[e]; l.setAttribute('x1', r2(st.x[ea[e]] * s + ox)); l.setAttribute('y1', r2(st.y[ea[e]] * s + oy)); l.setAttribute('x2', r2(st.x[eb[e]] * s + ox)); l.setAttribute('y2', r2(st.y[eb[e]] * s + oy)); }
+            for (const [t, e] of elabs) { t.setAttribute('x', r2((st.x[ea[e]] + st.x[eb[e]]) / 2 * s + ox)); t.setAttribute('y', r2((st.y[ea[e]] + st.y[eb[e]]) / 2 * s + oy)); } };
         const loop = () => { raf = 0; if (!g.isConnected) return; if (!paused || drag) { runFor(st, nodes.length > 300 ? 9 : 6, 40); paint(); } if ((st.alpha > .02 && !paused) || drag) raf = requestAnimationFrame(loop); };
         const kick = (a = .25) => { st.alpha = Math.max(st.alpha, a); if (!raf) raf = requestAnimationFrame(loop); };
         const local = (ev, el) => { const m = el.getScreenCTM(); if (!m) return {x: 0, y: 0}; const p = svg.createSVGPoint(); p.x = ev.clientX; p.y = ev.clientY; const q = p.matrixTransform(m.inverse()); return {x: q.x, y: q.y}; };

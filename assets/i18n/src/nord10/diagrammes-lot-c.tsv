@@ -1,0 +1,179 @@
+fr ¦ sq ¦ mt
+# Zone « diagrammes-lot-c » : grille des recensements, schéma de preuve, arbre de mots (heritage-diagram-lot-c.js), zones des paroisses et carte en étoile (heritage-diagram-cartes.js), cercles d’une journée (heritage-cartes-outils.js)
+Hors de France ¦ Jashtë Francës ¦ Barra minn Franza
+Ajoute des personnes (nom, naissance, décès), puis leurs recensements (année, statut). ¦ Shto persona (emër, lindje, vdekje), pastaj regjistrimet e tyre (vit, gjendje). ¦ Żid persuni (isem, twelid, mewt), imbagħad iċ-ċensimenti tagħhom (sena, stat).
+Aucune année de recensement entre ces deux dates. ¦ Asnjë vit regjistrimi midis këtyre dy datave. ¦ L-ebda sena ta’ ċensiment bejn dawn iż-żewġ dati.
+Plus rien à chercher : tous les recensements sont trouvés ou sans objet. ¦ Asgjë për të kërkuar: të gjitha regjistrimet u gjetën ose s’kanë vend. ¦ Xejn aktar x’tfittex: iċ-ċensimenti kollha nstabu jew ma japplikawx.
+à chercher : {list} ¦ për t’u kërkuar: {list} ¦ biex tfittex: {list}
+non trouvés : {list} ¦ nuk u gjetën: {list} ¦ ma nstabux: {list}
+Liste de travail des recensements : {n}. ¦ Lista e punës e regjistrimeve: {n}. ¦ Lista ta’ xogħol taċ-ċensimenti: {n}.
+Grille des recensements : {n}, {y} recensements, {d} sur {t} cherchés. ¦ Rrjeta e regjistrimeve: {n}, {y} regjistrime, {d} nga {t} të kërkuara. ¦ Grilja taċ-ċensimenti: {n}, {y} ċensimenti, {d} minn {t} imfittxija.
+Les recensements de la famille {name} ¦ Regjistrimet e familjes {name} ¦ Iċ-ċensimenti tal-familja {name}
+Contre ¦ Kundër ¦ Kontra
+Conflit ¦ Konflikt ¦ Kunflitt
+Écris la question (Réglages), puis les indices : pour, contre, recherches, conflits. ¦ Shkruaj pyetjen (Cilësimet), pastaj gjurmët: pro, kundër, kërkime, konflikte. ¦ Ikteb il-mistoqsija (Settings), imbagħad l-indizji: favur, kontra, tfittxijiet, kunflitti.
+Indices contre ¦ Gjurmë kundër ¦ Indizji kontra
+Recherches et conflits ¦ Kërkime dhe konflikte ¦ Tfittxijiet u kunflitti
+Résolu : {note} ¦ Zgjidhur: {note} ¦ Solvut: {note}
+À résoudre ¦ Për t’u zgjidhur ¦ Biex jissolva
+poids {n} sur 3 ¦ pesha {n} nga 3 ¦ piż {n} minn 3
+Pas encore de conclusion ¦ Ende pa përfundim ¦ L-ebda konklużjoni s’issa
+Schéma de preuve : {a} pour, {b} contre ; certitude : {c}. ¦ Skema e provës: {a} pro, {b} kundër; siguria: {c}. ¦ Skema tal-prova: {a} favur, {b} kontra; ċertezza: {c}.
+Antoine MAZAUD est-il le père de Jean MAZAUD (né vers 1818) ? ¦ A është Antoine MAZAUD babai i Jean MAZAUD (lindur rreth 1818)? ¦ Antoine MAZAUD huwa missier Jean MAZAUD (imwieled madwar l-1818)?
+Oui : Antoine MAZAUD est le père de Jean. ¦ Po: Antoine MAZAUD është babai i Jean. ¦ Iva: Antoine MAZAUD huwa missier Jean.
+Acte de mariage de Jean (1842) : « fils d’Antoine MAZAUD, cultivateur » ¦ Akti i martesës së Jean (1842): «bir i Antoine MAZAUD, bujk» ¦ Att taż-żwieġ ta’ Jean (1842): «iben Antoine MAZAUD, bidwi»
+Registre paroissial, original ¦ Regjistri i famullisë, origjinal ¦ Reġistru parrokkjali, oriġinali
+Recensement 1836 : Jean, 18 ans, au foyer d’Antoine ¦ Regjistrimi 1836: Jean, 18 vjeç, në familjen e Antoine ¦ Ċensiment 1836: Jean, 18-il sena, fid-dar ta’ Antoine
+Recensement 1836, original ¦ Regjistrimi 1836, origjinal ¦ Ċensiment 1836, oriġinali
+Antoine est parrain du premier fils de Jean ¦ Antoine është kumbari i djalit të parë të Jean ¦ Antoine huwa parrinu tal-ewwel iben ta’ Jean
+Baptême 1844 ¦ Pagëzim 1844 ¦ Magħmudija 1844
+Un autre Jean MAZAUD, né en 1817 au village voisin ¦ Një Jean MAZAUD tjetër, lindur më 1817 në fshatin fqinj ¦ Jean MAZAUD ieħor, imwieled fl-1817 fir-raħal ħdejh
+Acte de naissance de Jean : registre lacunaire 1815-1820 ¦ Akti i lindjes së Jean: regjistër i mangët 1815-1820 ¦ Att tat-twelid ta’ Jean: reġistru nieqes 1815-1820
+Âge au décès : 64 ans (né vers 1820) au lieu de 66 ¦ Mosha në vdekje: 64 vjeç (lindur rreth 1820) në vend të 66 ¦ Età mal-mewt: 64 sena (imwieled madwar l-1820) minflok 66
+Acte de décès 1884 ¦ Akti i vdekjes 1884 ¦ Att tal-mewt 1884
+l’âge déclaré au décès est souvent approximatif ¦ mosha e deklaruar në vdekje shpesh është e përafërt ¦ l-età ddikjarata mal-mewt ħafna drabi hija approssimattiva
+Écris le mot de départ (Réglages), par exemple « fils de » ou « veuve de ». ¦ Shkruaj fjalën fillestare (Cilësimet), për shembull «fils de» ose «veuve de». ¦ Ikteb il-kelma tal-bidu (Settings), pereżempju «fils de» jew «veuve de».
+Colle des transcriptions (une par ligne) ou prends-les « Depuis l’app ». ¦ Ngjit transkriptime (një për rresht) ose merri «Nga aplikacioni». ¦ Waħħal traskrizzjonijiet (waħda għal kull linja) jew ħudhom «Mill-app».
+« {w} » n’est dans aucun de ces textes. ¦ «{w}» nuk gjendet në asnjë nga këto tekste. ¦ «{w}» mhux f’ebda wieħed minn dawn it-testi.
+… {n} autres ¦ … {n} të tjera ¦ … {n} oħrajn
+Trop de branches : baisse la profondeur ou le nombre de branches (Réglages). ¦ Shumë degë: ul thellësinë ose numrin e degëve (Cilësimet). ¦ Wisq fergħat: naqqas il-fond jew l-għadd ta’ fergħat (Settings).
+« {w} » : {n} fois ¦ «{w}»: {n} herë ¦ «{w}»: {n} darba
+Arbre de mots : « {w} » trouvé {n} fois dans {t}. ¦ Pema e fjalëve: «{w}» u gjet {n} herë në {t}. ¦ Siġra tal-kliem: «{w}» instab {n} darba f’{t}.
+Ce qui suit « {w} » dans les actes ¦ Çfarë vjen pas «{w}» në akte ¦ Dak li jiġi wara «{w}» fl-atti
+{n} lignes prises dans l’arbre : tu peux les corriger dans l’onglet Données. ¦ {n} rreshta nga pema: mund t’i korrigjosh te skeda Të dhënat. ¦ {n} ringiela meħuda mis-siġra: tista’ tikkoreġihom fit-tab Data.
+🗓️ Les recensements de mon arbre ¦ 🗓️ Regjistrimet në pemën time ¦ 🗓️ Iċ-ċensimenti fis-siġra tiegħi
+Une ligne par personne, une case par recensement : ce qui est relevé sur les fiches (trouvé, non trouvé…), et « à chercher » pour le reste. Sans groupe choisi : tes ancêtres. ¦ Një rresht për person, një kuti për regjistrim: çfarë është shënuar në skeda (u gjet, nuk u gjet…), dhe «për t’u kërkuar» për të tjerat. Pa grup të zgjedhur: paraardhësit e tu. ¦ Ringiela għal kull persuna, kaxxa għal kull ċensiment: dak li hemm fuq il-fajls (instab, ma nstabx…), u «biex tfittex» għall-bqija. Mingħajr grupp: l-antenati tiegħek.
+Du recensement de ¦ Nga regjistrimi i ¦ Miċ-ċensiment tal-
+à celui de ¦ deri te ai i ¦ sa dak tal-
+Les recensements de {n} ¦ Regjistrimet e {n} ¦ Iċ-ċensimenti ta’ {n}
+Personne dans ce groupe ne vivait entre ces deux recensements (il faut au moins une date de naissance ou de décès). ¦ Askush nga ky grup nuk jetonte midis këtyre regjistrimeve (duhet të paktën një datë lindjeje ose vdekjeje). ¦ Ħadd minn dan il-grupp ma kien jgħix bejn dawn iċ-ċensimenti (trid mill-inqas data ta’ twelid jew mewt).
+{n} sur {t} prises (les premières) : change « Au plus » pour en voir davantage. ¦ U morën {n} nga {t} (të parat): ndrysho «Më së shumti» për të parë më shumë. ¦ {n} minn {t} meħuda (l-ewwel): biddel «L-aktar» biex tara aktar.
+⚖️ Un dossier de preuve ou une hypothèse ¦ ⚖️ Një dosje prove ose një hipotezë ¦ ⚖️ Fajl ta’ prova jew ipoteżi
+Choisis un dossier : sa question, ses indices pour et contre, ses recherches et ses conflits, sa conclusion. Une hypothèse à comparer donne une colonne par réponse possible. ¦ Zgjidh një dosje: pyetjen, gjurmët pro dhe kundër, kërkimet dhe konfliktet, përfundimin. Një hipotezë për krahasim jep një kolonë për çdo përgjigje të mundshme. ¦ Agħżel fajl: il-mistoqsija, l-indizji favur u kontra, it-tfittxijiet u l-kunflitti, il-konklużjoni. Ipoteżi biex tqabbel tagħti kolonna għal kull tweġiba possibbli.
+Le dossier ¦ Dosja ¦ Il-fajl
+Choisis d’abord un dossier. ¦ Zgjidh fillimisht një dosje. ¦ Agħżel fajl l-ewwel.
+Schéma de preuve ¦ Skema e provës ¦ Skema tal-prova
+Ce dossier n’a encore aucune ligne : ajoute des indices dans le dossier, ou ici à la main. ¦ Kjo dosje ende s’ka rreshta: shto gjurmë në dosje ose këtu me dorë. ¦ Dan il-fajl għad m’għandux ringieli: żid indizji fil-fajl, jew hawn bl-idejn.
+Prendre ce dossier ¦ Merr këtë dosje ¦ Ħu dan il-fajl
+🌿 Les mots de mes transcriptions ¦ 🌿 Fjalët e transkriptimeve të mia ¦ 🌿 Il-kliem tat-traskrizzjonijiet tiegħi
+Les transcriptions des actes (atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris. ¦ Transkriptimet e akteve (punishtja e transkriptimit) dhe të mediave: çfarë vjen pas (ose para) fjalës fillestare. Merren vetëm copat e dobishme të fjalive. ¦ It-traskrizzjonijiet tal-atti (il-workshop tat-traskrizzjoni) u tal-midja: dak li jiġi wara (jew qabel) il-kelma tal-bidu. Jittieħdu biss il-biċċiet utli tas-sentenzi.
+Le mot de départ ¦ Fjala fillestare ¦ Il-kelma tal-bidu
+Ce qui suit ¦ Çfarë vjen pas ¦ Dak li jiġi wara
+Ce qui précède ¦ Çfarë vjen para ¦ Dak li jiġi qabel
+Commune (dans le lieu ou le titre de l’acte) ¦ Komuna (në vend ose në titullin e aktit) ¦ Lokalità (fil-post jew fit-titlu tal-att)
+Actes pris ¦ Aktet e marra ¦ Atti meħuda
+Actes notariés ¦ Akte noteriale ¦ Atti nutarili
+Militaires ¦ Ushtarake ¦ Militari
+Lettres ¦ Letra ¦ Ittri
+Transcriptions des médias ¦ Transkriptimet e mediave ¦ Traskrizzjonijiet tal-midja
+Écris le mot de départ (par exemple « fils de »). ¦ Shkruaj fjalën fillestare (për shembull «fils de»). ¦ Ikteb il-kelma tal-bidu (pereżempju «fils de»).
+Coche au moins une sorte d’acte. ¦ Shëno të paktën një lloj akti. ¦ Immarka mill-inqas tip wieħed ta’ att.
+Ce qui précède « {w} » dans les actes ¦ Çfarë vjen para «{w}» në akte ¦ Dak li jiġi qabel «{w}» fl-atti
+« {w} » n’est dans aucune transcription de ce choix ({n} lues). ¦ «{w}» nuk gjendet në asnjë transkriptim të kësaj zgjedhjeje ({n} të lexuara). ¦ «{w}» mhux f’ebda traskrizzjoni ta’ din l-għażla ({n} moqrija).
+« {w} » : {n} fois, dans {a}. ¦ «{w}»: {n} herë, në {a}. ¦ «{w}»: {n} darba, f’{a}.
+Dossier sans question ¦ Dosje pa pyetje ¦ Fajl mingħajr mistoqsija
+Aucun dossier pour ce groupe de personnes ¦ Asnjë dosje për këtë grup personash ¦ L-ebda fajl għal dan il-grupp ta’ persuni
+Ferme l’éditeur, puis clique sur la case pour ouvrir la fiche (bloc « Recensements »). ¦ Mbyll redaktorin, pastaj kliko kutinë për të hapur skedën (blloku «Regjistrimet»). ¦ Agħlaq l-editur, imbagħad ikklikkja l-kaxxa biex tiftaħ il-fajl (blokk «Ċensimenti»).
+Recensement {yr} : dans le bloc « Recensements » de la fiche. ¦ Regjistrimi {yr}: te blloku «Regjistrimet» i skedës. ¦ Ċensiment {yr}: fil-blokk «Ċensimenti» tal-fajl.
+Grille des recensements (personnes × années) ¦ Rrjeta e regjistrimeve (persona × vite) ¦ Grilja taċ-ċensimenti (persuni × snin)
+Ma recherche ¦ Kërkimi im ¦ Ir-riċerka tiegħi
+Une ligne par personne, une colonne par recensement : ce qui est trouvé, pas trouvé, et ce qui reste à chercher. ¦ Një rresht për person, një kolonë për regjistrim: çfarë u gjet, çfarë jo dhe çfarë mbetet për t’u kërkuar. ¦ Ringiela għal kull persuna, kolonna għal kull ċensiment: dak li nstab, dak li ma nstabx, u dak li fadal biex tfittex.
+Les personnes (une ligne sans année : naissance, décès) et leurs recensements (une ligne par année) ¦ Personat (rresht pa vit: lindje, vdekje) dhe regjistrimet e tyre (një rresht për vit) ¦ Il-persuni (ringiela mingħajr sena: twelid, mewt) u ċ-ċensimenti tagħhom (ringiela għal kull sena)
+Naissance (année) ¦ Lindja (viti) ¦ Twelid (sena)
+Décès (année) ¦ Vdekja (viti) ¦ Mewt (sena)
+Recensement (année) ¦ Regjistrimi (viti) ¦ Ċensiment (sena)
+Note (lieu, adresse…) ¦ Shënim (vend, adresë…) ¦ Nota (post, indirizz…)
+Grille (une case par recensement) ¦ Rrjetë (një kuti për regjistrim) ¦ Grilja (kaxxa għal kull ċensiment)
+Liste de travail à imprimer (ce qui reste à chercher) ¦ Listë pune për shtyp (çfarë mbetet për t’u kërkuar) ¦ Lista ta’ xogħol biex tipprintja (dak li fadal biex tfittex)
+À celui de ¦ Deri te ai i ¦ Sa dak tal-
+Ou mes années (ex. 1846, 1851, 1872) ¦ Ose vitet e mia (p.sh. 1846, 1851, 1872) ¦ Jew is-snin tiegħi (eż. 1846, 1851, 1872)
+Personnes montrées ¦ Personat e shfaqura ¦ Persuni murija
+Seulement celles qui ont encore un recensement à chercher ¦ Vetëm ata që kanë ende një regjistrim për t’u kërkuar ¦ Biss dawk li għad għandhom ċensiment biex tfittex
+Le plus à chercher d’abord ¦ Më shumë për t’u kërkuar së pari ¦ L-aktar biex tfittex l-ewwel
+Par naissance ¦ Sipas lindjes ¦ Skont it-twelid
+Par nom ¦ Sipas emrit ¦ Skont l-isem
+Couleur « Trouvé » ¦ Ngjyra «U gjet» ¦ Kulur «Instab»
+Couleur « Non trouvé » ¦ Ngjyra «Nuk u gjet» ¦ Kulur «Ma nstabx»
+Couleur « À chercher » ¦ Ngjyra «Për t’u kërkuar» ¦ Kulur «Biex tfittex»
+Couleur « Hors de France » ¦ Ngjyra «Jashtë Francës» ¦ Kulur «Barra minn Franza»
+Couleur « Pas né / déjà décédé » ¦ Ngjyra «I palindur / tashmë i vdekur» ¦ Kulur «Mhux imwieled / diġà miet»
+Écart entre les cases ¦ Hapësira midis kutive ¦ Spazju bejn il-kaxxi
+Signes dans les cases (✓ ✗ ?) ¦ Shenja në kuti (✓ ✗ ?) ¦ Sinjali fil-kaxxi (✓ ✗ ?)
+Années de vie à côté du nom ¦ Vitet e jetës pranë emrit ¦ Snin tal-ħajja ħdejn l-isem
+Schéma de preuve (question, indices pour et contre, conclusion) ¦ Skema e provës (pyetja, gjurmët pro dhe kundër, përfundimi) ¦ Skema tal-prova (mistoqsija, indizji favur u kontra, konklużjoni)
+La question en haut, les indices pour et contre (avec leur poids et leur source), les recherches et les conflits, puis la conclusion et sa certitude. ¦ Lart pyetja, gjurmët pro dhe kundër (me peshën dhe burimin), kërkimet dhe konfliktet, pastaj përfundimi dhe siguria e tij. ¦ Il-mistoqsija fuq, l-indizji favur u kontra (bil-piż u s-sors), it-tfittxijiet u l-kunflitti, imbagħad il-konklużjoni u ċ-ċertezza tagħha.
+Les lignes du dossier (pour, contre, recherche, conflit ; « réponse » pour une hypothèse à plusieurs réponses) ¦ Rreshtat e dosjes (pro, kundër, kërkim, konflikt; «përgjigje» për një hipotezë me disa përgjigje) ¦ Ir-ringieli tal-fajl (favur, kontra, tfittxija, kunflitt; «tweġiba» għal ipoteżi b’diversi tweġibiet)
+Indice (ou réponse) ¦ Gjurmë (ose përgjigje) ¦ Indizju (jew tweġiba)
+Poids (1 à 3) ¦ Pesha (1 deri 3) ¦ Piż (1 sa 3)
+Pour la réponse… (hypothèse) ¦ Për përgjigjen… (hipotezë) ¦ Għat-tweġiba… (ipoteżi)
+Note (résolution d’un conflit) ¦ Shënim (zgjidhja e një konflikti) ¦ Nota (soluzzjoni ta’ kunflitt)
+La conclusion ¦ Përfundimi ¦ Il-konklużjoni
+Montrer les recherches et les conflits (ce qui reste à chercher) ¦ Shfaq kërkimet dhe konfliktet (çfarë mbetet për t’u kërkuar) ¦ Uri t-tfittxijiet u l-kunflitti (dak li fadal biex tfittex)
+Couleur « confirme » ¦ Ngjyra «konfirmon» ¦ Kulur «jikkonferma»
+Couleur « contredit » ¦ Ngjyra «kundërshton» ¦ Kulur «jikkontradixxi»
+Couleur des recherches ¦ Ngjyra e kërkimeve ¦ Kulur tat-tfittxijiet
+Couleur des conflits ¦ Ngjyra e konflikteve ¦ Kulur tal-kunflitti
+Couleur des réponses ¦ Ngjyra e përgjigjeve ¦ Kulur tat-tweġibiet
+Couleur de la question ¦ Ngjyra e pyetjes ¦ Kulur tal-mistoqsija
+Arbre de mots des actes (ce qui suit « fils de »…) ¦ Pema e fjalëve të akteve (çfarë vjen pas «fils de»…) ¦ Siġra tal-kliem tal-atti (dak li jiġi wara «fils de»…)
+Un mot de départ à gauche ; à droite, les mots qui le suivent dans les actes, plus gros quand ils reviennent souvent. ¦ Një fjalë fillestare majtas; djathtas, fjalët që e pasojnë në akte, më të mëdha kur përsëriten shpesh. ¦ Kelma tal-bidu fuq ix-xellug; fuq il-lemin, il-kliem li jiġi warajha fl-atti, akbar meta jidher spiss.
+Les textes (une transcription ou un bout de phrase par ligne) ¦ Tekstet (një transkriptim ose copë fjalie për rresht) ¦ It-testi (traskrizzjoni jew biċċa sentenza għal kull ringiela)
+Acte ou source ¦ Akt ose burim ¦ Att jew sors
+Le mot de départ (ex. fils de, veuve de) ¦ Fjala fillestare (p.sh. fils de, veuve de) ¦ Il-kelma tal-bidu (eż. fils de, veuve de)
+Profondeur (mots) ¦ Thellësia (fjalë) ¦ Fond (kliem)
+Branches par mot ¦ Degë për fjalë ¦ Fergħat għal kull kelma
+Seulement les mots vus au moins ¦ Vetëm fjalët e para të paktën ¦ Biss kliem li deher mill-inqas
+Le reste dans « … autres » ¦ Të tjerat te «… të tjera» ¦ Il-bqija f’«… oħrajn»
+Écrire le nombre de fois ¦ Shkruaj numrin e herëve ¦ Ikteb kemm-il darba
+Sans tenir compte des capitales ni des accents ¦ Pa marrë parasysh shkronjat e mëdha dhe theksat ¦ Mingħajr ma tqis l-ittri kbar u l-aċċenti
+Seulement les actes de (lieu) ¦ Vetëm aktet nga (vendi) ¦ Biss atti minn (post)
+Couleur des mots ¦ Ngjyra e fjalëve ¦ Kulur tal-kliem
+Couleur du mot de départ ¦ Ngjyra e fjalës fillestare ¦ Kulur tal-kelma tal-bidu
+⭕ En une journée ¦ ⭕ Në një ditë ¦ ⭕ F’ġurnata
+Lieu de départ ¦ Vendi i nisjes ¦ Post tat-tluq
+Montrer les lieux de la famille ¦ Shfaq vendet e familjes ¦ Uri l-postijiet tal-familja
+Ce qu’on atteignait en une journée ¦ Ku arrihej në një ditë ¦ Fejn wieħed kien jasal f’ġurnata
+Choisis le lieu de départ ¦ Zgjidh vendin e nisjes ¦ Agħżel il-post tat-tluq
+Ce lieu n’a pas de position sur la carte : place-le d’abord. ¦ Ky vend nuk ka pozicion në hartë: vendose fillimisht. ¦ Dan il-post m’għandux pożizzjoni fuq il-mappa: poġġih l-ewwel.
+Coche au moins un moyen de voyager ¦ Shëno të paktën një mjet udhëtimi ¦ Immarka mill-inqas mezz wieħed ta’ vjaġġ
+Les fonds de carte ne sont pas chargés. ¦ Hartat bazë nuk janë ngarkuar. ¦ Il-mapep bażi mhumiex mgħobbija.
+Je dessine les cercles… ¦ Po vizatoj rrathët… ¦ Qed inpinġi ċ-ċrieki…
+En {d} jours depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ Në {d} ditë nga {from}, më {year}: në vijë ajrore rreth {list}. ¦ F’{d} ijiem minn {from}, fl-{year}: f’linja dritta madwar {list}.
+En une journée depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ Në një ditë nga {from}, më {year}: në vijë ajrore rreth {list}. ¦ F’ġurnata minn {from}, fl-{year}: f’linja dritta madwar {list}.
+Rayon (vol d’oiseau) ¦ Rrezja (vijë ajrore) ¦ Raġġ (linja dritta)
+Lieux de la famille ¦ Vendet e familjes ¦ Postijiet tal-familja
+Le rayon tient compte du détour de la route (réglage « Vitesses et sources »). Un trait pointillé : ce moyen n’existait pas encore cette année-là. ¦ Rrezja merr parasysh shmangien e rrugës (cilësimi «Shpejtësitë dhe burimet»). Vijë me pika: ky mjet ende nuk ekzistonte atë vit. ¦ Ir-raġġ iqis id-dawra tat-triq (setting «Veloċitajiet u sorsi»). Linja bit-tikek: dan il-mezz kien għadu ma jeżistix dik is-sena.
+Paroisses (zones autour des églises) ¦ Famulli (zona rreth kishave) ¦ Parroċċi (żoni madwar il-knejjes)
+⚠ Paroisses sans position : {list} — choisis-les dans la liste (onglet Données) ou écris « Nom 45.27, 1.77 » ¦ ⚠ Famulli pa pozicion: {list} — zgjidhi nga lista (skeda Të dhënat) ose shkruaj «Emri 45.27, 1.77» ¦ ⚠ Parroċċi mingħajr pożizzjoni: {list} — agħżilhom mil-lista (tab Data) jew ikteb «Isem 45.27, 1.77»
+Ajoute des paroisses (une ville de la liste, ou « Depuis l’app ») et leurs chiffres. ¦ Shto famulli (një vend nga lista ose «Nga aplikacioni») dhe shifrat e tyre. ¦ Żid parroċċi (lokalità mil-lista, jew «Mill-app») u n-numri tagħhom.
+Zones des paroisses : {n}. ¦ Zonat e famullive: {n}. ¦ Żoni tal-parroċċi: {n}.
+Un point à chaque église ¦ Një pikë te çdo kishë ¦ Tikka f’kull knisja
+Limites des départements par-dessus les paroisses ¦ Kufijtë e departamenteve mbi famullitë ¦ Il-fruntieri tad-dipartimenti fuq il-parroċċi
+Cadrer tout seul sur les paroisses ¦ Kornizo vetvetiu famullitë ¦ Ikkwadra waħdu fuq il-parroċċi
+Liens montrés ¦ Lidhjet e shfaqura ¦ Rabtiet murija
+Ceux qui arrivent et ceux qui partent ¦ Ata që vijnë dhe ata që ikin ¦ Dawk li jaslu u dawk li jitilqu
+Seulement ceux qui arrivent ¦ Vetëm ata që vijnë ¦ Biss dawk li jaslu
+Seulement ceux qui partent ¦ Vetëm ata që ikin ¦ Biss dawk li jitilqu
+Les liens de {name} ¦ Lidhjet e {name} ¦ Ir-rabtiet ta’ {name}
+bleu : conjoints venus ¦ blu: bashkëshortë të ardhur ¦ blu: konjuġi li waslu
+orange : enfants partis ¦ portokalli: fëmijë që ikën ¦ oranġjo: tfal li telqu
+rouge : émigrés ¦ e kuqe: emigrantë ¦ aħmar: emigranti
+Lieux : {list} ¦ Vende: {list} ¦ Postijiet: {list}
+⛪ Au niveau « Paroisses » (Réglages → Niveau de détail) : une zone autour de chaque église, d’après les paroisses d’Ancien Régime de tes lieux ; un lieu sans paroisse compte pour lui-même. ¦ ⛪ Në nivelin «Famulli» (Cilësimet → Niveli i detajeve): një zonë rreth çdo kishe, sipas famullive të vjetra të vendeve të tua; një vend pa famulli llogaritet më vete. ¦ ⛪ Fil-livell «Parroċċi» (Settings → Livell ta’ dettall): żona madwar kull knisja, skont il-parroċċi antiki tal-postijiet tiegħek; post mingħajr parroċċa jgħodd għalih innifsu.
+✳️ Tous les liens d’un lieu (carte en étoile) ¦ ✳️ Të gjitha lidhjet e një vendi (hartë yll) ¦ ✳️ Ir-rabtiet kollha ta’ post (mappa stilla)
+Le village ¦ Fshati ¦ Ir-raħal
+Conjoints venus s’y marier ¦ Bashkëshortë që erdhën të martohen atje ¦ Konjuġi li ġew jiżżewġu hemmhekk
+Enfants partis (nés ici, morts ou mariés ailleurs) ¦ Fëmijë që ikën (lindur këtu, vdekur ose martuar gjetkë) ¦ Tfal li telqu (imwielda hawn, mietu jew iżżewġu x’imkien ieħor)
+Émigrés (morts dans un autre pays) ¦ Emigrantë (vdekur në një vend tjetër) ¦ Emigranti (mietu f’pajjiż ieħor)
+Choisis d’abord le village. ¦ Zgjidh fillimisht fshatin. ¦ Agħżel ir-raħal l-ewwel.
+Coche au moins une sorte de lien. ¦ Shëno të paktën një lloj lidhjeje. ¦ Immarka mill-inqas tip wieħed ta’ rabta.
+Aucun lien trouvé pour ce lieu (naissance, mariage ou décès ailleurs). ¦ Asnjë lidhje për këtë vend (lindje, martesë ose vdekje gjetkë). ¦ L-ebda rabta ma nstabet għal dan il-post (twelid, żwieġ jew mewt x’imkien ieħor).
+{n} prises dans l’arbre ({m} lieux rattachés à une paroisse d’Ancien Régime, les autres comptent pour eux-mêmes). ¦ Nga pema: {n} ({m} vende të lidhura me një famulli të vjetër, të tjerat llogariten më vete). ¦ {n} meħuda mis-siġra ({m} postijiet marbuta ma’ parroċċa antika, l-oħrajn jgħoddu għalihom).
+Aucun lieu avec des coordonnées pour ce choix : place d’abord tes lieux sur la carte. ¦ Asnjë vend me koordinata për këtë zgjedhje: vendos fillimisht vendet e tua në hartë. ¦ L-ebda post b’koordinati għal din l-għażla: poġġi l-ewwel il-postijiet tiegħek fuq il-mappa.
+sa paroisse ¦ famullia e tij ¦ il-parroċċa tiegħu
+leur paroisse ¦ famullia e tyre ¦ il-parroċċa tagħhom
+une paroisse ¦ një famulli ¦ parroċċa
+Paroisse sans position : choisis sa commune dans la liste, ou écris « Nom 45.27, 1.77 ». ¦ Famulli pa pozicion: zgjidh komunën e saj nga lista ose shkruaj «Emri 45.27, 1.77». ¦ Parroċċa mingħajr pożizzjoni: agħżel il-lokalità tagħha mil-lista, jew ikteb «Isem 45.27, 1.77».
+Carte en étoile : seulement les liens de ce lieu (vide = tous les flux) ¦ Hartë yll: vetëm lidhjet e këtij vendi (bosh = të gjitha rrjedhat) ¦ Mappa stilla: biss ir-rabtiet ta’ dan il-post (vojt = il-flussi kollha)
+niveau|paroisse ¦ famulli ¦ parroċċa
+=paroisse ¦ famulli|famulli ¦ parroċċa|parroċċi|parroċċi|parroċċa|parroċċa

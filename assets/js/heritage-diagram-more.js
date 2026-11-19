@@ -54,7 +54,8 @@
     /* ═════════ 🧬 Arbre en frise : une barre par vie, rangées par génération ═════════ */
     const BRANCH = {pat: ['Branche paternelle', '#4e79a7'], mat: ['Branche maternelle', '#e15759'], root: ['Personne de départ', '#59a14f']};
     function genbars(spec, W, fs) {
-        const o = spec.o || {};
+        const o = spec.o || {}, unc = !!o.uncertain, about = clamp(num(o.uncAbout) || 5, 1, 25), URANGE = t => ext.diagramGenea?.dateRange?.(t, about) || null;
+        let ugrad = '', useq = 0;
         const list = rows(spec, 'rows', 3000).map((r, i) => {
             const s = Math.floor(num(r.sosa)), g = Math.floor(num(r.gen)) || (s >= 1 ? Math.floor(Math.log2(s)) + 1 : 1);
             let a = when(r.start), b = when(r.end), open = '';
@@ -62,7 +63,8 @@
             if (a === null) { a = b - 30; open = 'start'; }
             if (b === null) { if (a > NOW - 100 && !/^\?/.test(str(r.end))) { b = NOW; open = 'living'; } else { b = a + 25; open = 'end'; } } // « ? » : décès inconnu
             if (b < a) [a, b] = [b, a];
-            return {i, s, g: clamp(g, 1, 30), a, b, open, name: str(r.name, 120) || (s ? `Sosa ${s}` : '?'), group: str(r.group, 60), pid: Math.floor(num(r.pid)) || 0};
+            const ua = unc ? URANGE(r.start) : null, ub = unc && open !== 'living' ? URANGE(r.end) : null;
+            return {i, s, g: clamp(g, 1, 30), a, b, open, name: str(r.name, 120) || (s ? `Sosa ${s}` : '?'), group: str(r.group, 60), pid: Math.floor(num(r.pid)) || 0, ua, ub};
         }).filter(Boolean);
         if (!list.length) return empty(W, fs, 'Ajoute des personnes : un nom, une génération (ou un n° Sosa), une naissance et un décès.');
         const by = o.colorBy || 'branch', cats = new Map();
@@ -92,9 +94,17 @@
             const n = rowsMode ? ps.length : Math.max(1, lanes.length), hh = n * (bh + gap) + gap;
             bands += `<rect x="0" y="${r2(y)}" width="${r2(W)}" height="${r2(hh)}" fill="${gi % 2 ? '#8881' : '#8880'}"/>` + T(4, y + hh / 2, i18n('Gén. {g}', {g: String(g)}), {size: fs * .8, weight: 600, fill: '#667'});
             ps.forEach(p => {
-                const yy = y + gap + p.lane * (bh + gap), xa = X(p.a), xb = X(p.b), w = Math.max(1.5, xb - xa);
+                const yy = y + gap + p.lane * (bh + gap);
+                // ⏳ une date incertaine (« vers 1745 », « avant 1760 ») : la barre pleine commence après la fourchette, la fourchette en dégradé
+                const fa0 = unc && p.ua && !p.ua.exact && p.ua.hi - p.ua.lo > 1.01 ? p.ua : null, fb0 = unc && p.ub && !p.ub.exact && p.ub.hi - p.ub.lo > 1.01 ? p.ub : null;
+                const xa = fa0 ? X(Math.min(fa0.hi, p.b)) : X(p.a), xb = fb0 ? Math.max(xa + 1.5, X(Math.max(fb0.lo, p.a))) : X(p.b), w = Math.max(1.5, xb - xa);
                 const dates = `${Math.round(p.a)}${p.open === 'start' ? ' ?' : ''} – ${p.open === 'living' ? 'aujourd’hui' : p.open === 'end' ? '?' : Math.round(p.b)}`;
                 const fade = p.open === 'end' || p.open === 'start';
+                if (fa0 || fb0) { const gid = 'dmoU' + (++useq) + Math.round(xa); ugrad += `<linearGradient id="${gid}u"><stop offset="0" stop-color="${p.col}" stop-opacity="0"/><stop offset="1" stop-color="${p.col}" stop-opacity=".95"/></linearGradient><linearGradient id="${gid}d"><stop offset="0" stop-color="${p.col}" stop-opacity=".95"/><stop offset="1" stop-color="${p.col}" stop-opacity="0"/></linearGradient>`;
+                    const fz = (x1, x2, d) => (o.uncStyle === 'dash' ? `<rect x="${r2(Math.min(x1, x2))}" y="${r2(yy)}" width="${r2(Math.abs(x2 - x1))}" height="${r2(bh)}" fill="${p.col}" fill-opacity=".14" stroke="${p.col}" stroke-dasharray="3 2"/>` : `<rect x="${r2(Math.min(x1, x2))}" y="${r2(yy)}" width="${r2(Math.abs(x2 - x1))}" height="${r2(bh)}" fill="url(#${gid}${d})"/>`);
+                    if (fa0) body += fz(X(fa0.lo), xa, 'u'); if (fb0) body += fz(xb, X(fb0.hi), 'd'); }
+                if (unc && o.uncDiamond !== false) { const dm = (x, c) => `<path d="M${r2(x)} ${r2(yy - bh * .15)}L${r2(x + bh * .5)} ${r2(yy + bh / 2)}L${r2(x)} ${r2(yy + bh * 1.15)}L${r2(x - bh * .5)} ${r2(yy + bh / 2)}Z" fill="${c}" stroke="#ffffff" stroke-width="1"/>`;
+                    if (p.ua?.exact) body += dm(X(p.ua.lo), p.col); if (p.ub?.exact) body += dm(X(p.ub.lo), p.col); }
                 body += `<g${p.pid ? ` data-dmo-pid="${p.pid}" style="cursor:pointer"` : ''}><rect x="${r2(xa)}" y="${r2(yy)}" width="${r2(w)}" height="${r2(bh)}" rx="${r2(Math.min(3, bh / 3))}" fill="${p.col}"${fade ? ' fill-opacity=".35" stroke-dasharray="3 2"' : ''} stroke="${p.col}" stroke-width="${fade ? 1 : 0}">${tip(`${p.s ? `Sosa ${p.s} · ` : ''}${p.name} (${dates}) · ${p.cat}`)}</rect>`;
                 if (rowsMode) body += T(x0 - 6, yy + bh / 2, cut(p.name, nameW - 8, fs * .85), {size: fs * .85, anchor: 'end'});
                 else { const f = Math.min(fs * .8, bh * .8), t = cut(p.name, w - 6, f); if (t && o.labels !== false) body += T(xa + 3, yy + bh / 2, t, {size: f, fill: fade ? '#333' : contrast(p.col)}); }
@@ -108,7 +118,8 @@
             ev += T(Math.min(xa + 3, W - textW(e.label, fs * .78) - 2), (i % 4) * fs * 1.15 + fs * .55, e.label, {size: fs * .78, fill: e.col, weight: 600, halo: '#ffffffcc'}); });
         const axis = yearAxis(from, to, X, evTop, y - evTop, fs, pw);
         const legend = [...cats].map(([label, c]) => ({label, color: c}));
-        return {h: y + fs * 1.6, svg: bands + axis + ev + body, legend, desc: i18n('Arbre en frise : {n} vies sur {g} générations, de {from} à {to}.', {n: list.length, g: gens.length, from: String(Math.round(from)), to: String(Math.round(to))})};
+        if (unc) legend.push({label: i18n('Date incertaine (fourchette)'), color: '#9aa3ad', ...(o.uncStyle === 'dash' ? {type: 'dash'} : {})});
+        return {h: y + fs * 1.6, svg: (ugrad ? `<defs>${ugrad}</defs>` : '') + bands + axis + ev + body, legend, desc: i18n('Arbre en frise : {n} vies sur {g} générations, de {from} à {to}.', {n: list.length, g: gens.length, from: String(Math.round(from)), to: String(Math.round(to))})};
     }
     function sampleGen() {
         const F = ['Jean', 'Pierre', 'Louis', 'François', 'Joseph', 'Julien', 'René', 'Yves'], M = ['Marie', 'Anne', 'Jeanne', 'Rose', 'Perrine', 'Louise', 'Julienne', 'Hélène'], L = ['MARTIN', 'DURAND', 'PETIT', 'MOREAU', 'GARNIER', 'ROUX', 'FOURNIER', 'GIRARD'];
@@ -232,8 +243,39 @@
         }
         return {m, f, other};
     }
+    /** 🔺 la pyramide d'un recensement : les âges écrits (une ou deux années), la famille qui ressort, la deuxième année en contour */
+    function censusPyr(spec, W, fs) {
+        const o = spec.o || {}, list = rows(spec, 'rows', 20000).map(r => ({age: num(r.age), sex: sexOf(r.sex), y: Math.floor(num(r.census)), fam: /^(oui|yes|x|1|✓|vrai|true)$/i.test(str(r.family)), name: str(r.name, 100)})).filter(r => str(r.age) !== '' && r.age >= 0 && r.age <= 130 && r.y);
+        const years = [...new Set(list.map(r => r.y))].sort((a, b) => a - b); if (!years.length) return empty(W, fs, i18n('Ajoute les personnes recensées : âge, sexe, année.'));
+        const y1 = years.includes(Math.floor(num(o.year))) ? Math.floor(num(o.year)) : years[0], y2 = years.includes(Math.floor(num(o.year2))) && Math.floor(num(o.year2)) !== y1 ? Math.floor(num(o.year2)) : null;
+        const band = [1, 2, 5, 10, 20].includes(num(o.band)) ? num(o.band) : 5, maxAge = clamp(num(o.maxAge) || 90, 20, 120), nb = Math.floor(maxAge / band) + 1;
+        const count = y => { const c = {m: new Array(nb).fill(0), f: new Array(nb).fill(0), fm: new Array(nb).fill(0), ff: new Array(nb).fill(0), other: 0, n: 0};
+            list.filter(r => r.y === y).forEach(r => { c.n++; const i = Math.min(nb - 1, Math.floor(r.age / band)); if (r.sex === 'h') { c.m[i]++; if (r.fam) c.fm[i]++; } else if (r.sex === 'f') { c.f[i]++; if (r.fam) c.ff[i]++; } else c.other++; }); return c; };
+        const A1 = count(y1), A2 = y2 ? count(y2) : null, max = Math.max(1, ...A1.m, ...A1.f, ...(A2 ? [...A2.m, ...A2.f] : []));
+        const labels = Array.from({length: nb}, (_, i) => i === nb - 1 ? i18n('{n} ans et +', {n: i * band}) : band === 1 ? `${i}` : `${i * band}–${i * band + band - 1}`);
+        const labW = Math.max(...labels.map(l => textW(l, fs * .85))) + 14, half = (W - labW) / 2, bh = clamp((num(o.height) || W * .55) / nb - 2, 4, 30), head = fs * 4.6;
+        const cM = color(o.menColor, '#4e79a7'), cF = color(o.womenColor, '#e15759'), dk = c => mix(c, '#000000', .38), famOn = o.family !== false && list.some(r => r.fam), vals = o.values !== false;
+        const place = str(o.place, 80);
+        let svg = T(W / 2, fs * 1.2, place ? i18n('{place}, {year}', {place, year: String(y1)}) : String(y1), {size: fs * 1.8, anchor: 'middle', weight: 800});
+        svg += T(W / 2, fs * 2.6, A2 ? i18n('Personnes recensées : {n} en {y1}, {m} en {y2}', {n: fmt(A1.n, 0), y1: String(y1), m: fmt(A2.n, 0), y2: String(y2)}) : i18n('Personnes recensées : {n}', {n: fmt(A1.n, 0)}), {size: fs * .85, anchor: 'middle', fill: '#666'});
+        svg += T(half - 6, head - fs * .3, i18n('Hommes'), {size: fs * .9, anchor: 'end', weight: 600, fill: cM, baseline: 'auto'}) + T(half + labW + 6, head - fs * .3, i18n('Femmes'), {size: fs * .9, weight: 600, fill: cF, baseline: 'auto'});
+        for (let i = 0; i < nb; i++) {
+            const y = head + (nb - 1 - i) * (bh + 2), wm = A1.m[i] / max * half, wf = A1.f[i] / max * half;
+            svg += `<rect x="${r2(half - wm)}" y="${r2(y)}" width="${r2(wm)}" height="${r2(bh)}" fill="${cM}">${tip(`${labels[i]} : ${A1.m[i]}`)}</rect><rect x="${r2(half + labW)}" y="${r2(y)}" width="${r2(wf)}" height="${r2(bh)}" fill="${cF}">${tip(`${labels[i]} : ${A1.f[i]}`)}</rect>`;
+            if (famOn) { const fm = A1.fm[i] / max * half, ff = A1.ff[i] / max * half; if (fm) svg += `<rect x="${r2(half - fm)}" y="${r2(y)}" width="${r2(fm)}" height="${r2(bh)}" fill="${dk(cM)}">${tip(i18n('{label} (famille) : {n}', {label: labels[i], n: A1.fm[i]}))}</rect>`; if (ff) svg += `<rect x="${r2(half + labW)}" y="${r2(y)}" width="${r2(ff)}" height="${r2(bh)}" fill="${dk(cF)}">${tip(i18n('{label} (famille) : {n}', {label: labels[i], n: A1.ff[i]}))}</rect>`; }
+            if (A2) { const m2 = A2.m[i] / max * half, f2 = A2.f[i] / max * half; svg += `<rect x="${r2(half - m2)}" y="${r2(y + .5)}" width="${r2(m2)}" height="${r2(bh - 1)}" fill="none" stroke="#1d1d1f" stroke-width="1.3" stroke-dasharray="3 2">${tip(`${y2} · ${labels[i]} : ${A2.m[i]}`)}</rect><rect x="${r2(half + labW)}" y="${r2(y + .5)}" width="${r2(f2)}" height="${r2(bh - 1)}" fill="none" stroke="#1d1d1f" stroke-width="1.3" stroke-dasharray="3 2">${tip(`${y2} · ${labels[i]} : ${A2.f[i]}`)}</rect>`; }
+            svg += T(half + labW / 2, y + bh / 2, labels[i], {size: Math.min(fs * .85, bh * .95), anchor: 'middle'});
+            if (vals) svg += T(half - wm - 4, y + bh / 2, A1.m[i] ? fmt(A1.m[i], 0) : '', {size: Math.min(fs * .78, bh), anchor: 'end'}) + T(half + labW + wf + 4, y + bh / 2, A1.f[i] ? fmt(A1.f[i], 0) : '', {size: Math.min(fs * .78, bh)});
+        }
+        let h = head + nb * (bh + 2) + 4;
+        if (A1.other) { svg += T(W / 2, h + fs * .8, i18n('Sexe inconnu (pas dans la pyramide) : {n}', {n: A1.other}), {size: fs * .75, anchor: 'middle', fill: '#666'}); h += fs * 1.6; }
+        const legend = [{label: i18n('Hommes'), color: cM}, {label: i18n('Femmes'), color: cF}, ...(famOn ? [{label: i18n('De la famille'), color: dk(cM)}] : []), ...(A2 ? [{label: i18n('En {year} (contour)', {year: String(y2)}), color: '#1d1d1f', type: 'dash'}] : [])];
+        return {h, svg, legend, desc: i18n('Pyramide du recensement de {year} (personnes : {n}).', {year: String(y1), n: fmt(A1.n, 0)})};
+    }
     function alivePyr(spec, W, fs) {
-        const o = spec.o || {}, people = peopleOf(spec);
+        const o = spec.o || {};
+        if (o.pyrSrc === 'census' || (rows(spec).some(r => str(r.age) !== '' && str(r.census) !== '') && !rows(spec).some(r => str(r.birth)))) return censusPyr(spec, W, fs);
+        const people = peopleOf(spec);
         if (!people.length) return empty(W, fs, 'Ajoute des personnes (naissance, décès, sexe) ou prends celles de ta base (« Depuis l’app »).');
         const band = [1, 2, 5, 10, 20].includes(num(o.band)) ? num(o.band) : 10, maxAge = clamp(num(o.maxAge) || 100, 20, 120), nb = Math.floor(maxAge / band) + 1, unknownAge = clamp(num(o.unknownAge), 0, 110);
         const lo = Math.min(...people.map(p => p[0])), hiB = Math.max(...people.map(p => p[0])), hi = Math.min(NOW, Math.max(hiB, ...people.map(p => p[1] ?? p[0])));
@@ -289,6 +331,7 @@
     }
     function accordion(spec, W, fs) {
         const o = spec.o || {};
+        if (o.layout === 'circles') return kinCircles(spec, W, fs);
         const list = rows(spec, 'rows', 3000).map((r, i) => ({i, key: str(r.key, 40), pkey: str(r.pkey, 40), name: str(r.name, 120), parent: str(r.parent, 120), years: str(r.years, 40), kin: str(r.kin, 80), deg: r.degree === '' || r.degree === undefined ? (str(r.kin) ? 5 : 99) : num(r.degree), sex: sexOf(r.sex), pid: Math.floor(num(r.pid)) || 0})).filter(n => n.name);
         if (!list.length) return empty(W, fs, 'Ajoute des personnes : un nom, la personne au-dessus (vide pour le haut), les années, le lien.');
         list.forEach((n, i) => { n.id = n.key || 'n' + i; });
@@ -320,6 +363,38 @@
         });
         const degs = [...new Set(list.map(n => n.deg))].sort((a, b) => a - b).slice(0, 9);
         return {h: Math.max(rh, vis * rh) + 4, svg: `<g data-acc="" data-acc-rh="${r2(rh)}" data-acc-tr="${r2(tr)}" data-acc-ind="${r2(ind)}">${svg}</g>`, legend: showKin ? [...new Map(degs.map(d => [DEG_NAME(d), degCol(d)]))].map(([label, c]) => ({label, color: c})) : [], desc: i18n(roots.length > 1 ? 'Arbre en accordéon : {n} personnes, {r} sommets.' : 'Arbre en accordéon : {n} personnes, {r} sommet.', {n: list.length, r: roots.length})};
+    }
+    /** ◎ Cercles de parenté : la personne au centre, un cercle par degré (frères et sœurs, oncles, cousins germains…), chacun dans l'ordre de sa branche */
+    function kinCircles(spec, W, fs) {
+        const o = spec.o || {};
+        const list = rows(spec, 'rows', 3000).map((r, i) => ({i, key: str(r.key, 40), pkey: str(r.pkey, 40), name: str(r.name, 120), parent: str(r.parent, 120), years: str(r.years, 40), kin: str(r.kin, 80), deg: r.degree === '' || r.degree === undefined ? (str(r.kin) ? 5 : 99) : num(r.degree), sex: sexOf(r.sex), pid: Math.floor(num(r.pid)) || 0})).filter(n => n.name);
+        if (!list.length) return empty(W, fs, 'Ajoute des personnes : un nom, la personne au-dessus (vide pour le haut), les années, le lien.');
+        list.forEach((n, i) => { n.id = n.key || 'n' + i; });
+        const roots = treeOf(list), order = [], walk = (n, top) => { n.top = top; order.push(n); n.kids.forEach(k => walk(k, top ?? n.kids.indexOf(k))); };
+        roots.forEach(r => { r.top = null; order.push(r); r.kids.forEach((k, j) => walk(k, j)); });
+        const ego = list.find(n => n.deg === 0) || list[0], maxD = clamp(Math.round(num(o.degMax) || 6), 1, 8);
+        const vis = order.filter(n => n !== ego && n.deg >= 1 && n.deg <= maxD);
+        const written = o.circNames ? o.circNames === 'written' : vis.length <= 60, lab = written ? Math.min(W * .2, fs * 7.5) : fs;
+        const Rm = clamp(Math.min(W / 2 - lab - 6, (num(o.height) || W) / 2 - lab), 50, 900), cx = W / 2, cy = Rm + lab + 4;
+        const degs = [...new Set(vis.map(n => Math.round(n.deg)))].sort((a, b) => a - b), ring = d => Rm * (degs.indexOf(Math.round(d)) + 1) / Math.max(1, degs.length);
+        const by = o.circColor || 'degree', LIVING = /(^|\D)(1[89]\d\d|20\d\d)\s*(–|-)?\s*$/;
+        const living = n => LIVING.test(n.years) && !/\d{4}\D+\d{4}/.test(n.years);
+        const colOf = n => by === 'sex' ? SEX[n.sex][1] : by === 'branch' ? (n.top === null || n.top === undefined ? '#9aa3ad' : pick(spec, n.top)) : by === 'living' ? (living(n) ? '#59a14f' : '#9aa3ad') : degCol(n.deg);
+        let svg = '', dots = '', names = '';
+        degs.forEach(d => { const r = ring(d); svg += `<circle cx="${r2(cx)}" cy="${r2(cy)}" r="${r2(r)}" fill="none" stroke="currentColor" stroke-opacity=".14" stroke-width="1"/>` + T(cx, cy - r - fs * .35, DEG_NAME(d), {size: fs * .66, anchor: 'middle', op: .6}); });
+        const pos = new Map([[ego, [cx, cy]]]);
+        vis.forEach((n, k) => { const a = -Math.PI / 2 + TAU * (k + .5) / vis.length, r = ring(n.deg); pos.set(n, [cx + Math.cos(a) * r, cy + Math.sin(a) * r, a]); });
+        vis.forEach(n => { let up = n.up; while (up && !pos.has(up)) up = up.up; const [x, y] = pos.get(n), [px, py] = up ? pos.get(up) : [cx, cy]; svg += `<line x1="${r2(px)}" y1="${r2(py)}" x2="${r2(x)}" y2="${r2(y)}" stroke="currentColor" stroke-opacity=".12" stroke-width="1"/>`; });
+        const dr = clamp(Math.min(fs * .5, TAU * Rm / Math.max(1, vis.length) * .35), 2.5, fs * .6);
+        vis.forEach(n => { const [x, y, a] = pos.get(n), c = colOf(n);
+            dots += `<g${n.pid ? ` data-dmo-pid="${n.pid}" style="cursor:pointer"` : ''}><circle cx="${r2(x)}" cy="${r2(y)}" r="${r2(dr)}" fill="${c}" stroke="#ffffff" stroke-width="1">${tip(`${n.name}${n.years ? ' (' + n.years + ')' : ''}${n.kin ? ' — ' + n.kin : ''}`)}</circle></g>`;
+            if (written) { const right = Math.cos(a) >= 0, deg = a * 180 / Math.PI + (right ? 0 : 180), tx = x + Math.cos(a) * (dr + 3), ty = y + Math.sin(a) * (dr + 3), t = cut(n.name, lab + Rm - ring(n.deg) - 4, fs * .66);
+                if (t) names += `<text x="${r2(tx)}" y="${r2(ty)}" font-size="${r2(fs * .66)}" text-anchor="${right ? 'start' : 'end'}" dominant-baseline="middle" fill="currentColor" transform="rotate(${r2(deg)} ${r2(tx)} ${r2(ty)})">${esc(t)}</text>`; } });
+        const ec = by === 'sex' ? SEX[ego.sex][1] : '#c9a227';
+        dots += `<g${ego.pid ? ` data-dmo-pid="${ego.pid}" style="cursor:pointer"` : ''}><circle cx="${r2(cx)}" cy="${r2(cy)}" r="${r2(Math.max(dr * 1.8, fs * .9))}" fill="${ec}" stroke="#ffffff" stroke-width="1.5">${tip(ego.name)}</circle></g>` + T(cx, cy + Math.max(dr * 1.8, fs * .9) + fs * .8, cut(ego.name, Rm * .8, fs * .85), {size: fs * .85, anchor: 'middle', weight: 800, halo: '#ffffffcc'});
+        const legend = by === 'sex' ? ['h', 'f', ''].map(k => ({label: i18n(SEX[k][0]), color: SEX[k][1]})) : by === 'living' ? [{label: i18n('En vie'), color: '#59a14f'}, {label: i18n('Décédé ou inconnu'), color: '#9aa3ad'}]
+            : by === 'branch' ? (roots[0]?.kids || []).slice(0, 12).map((k, j) => ({label: k.name, color: pick(spec, j)})) : degs.map(d => ({label: DEG_NAME(d), color: degCol(d)}));
+        return {h: cy + Rm + lab + 4, svg: svg + names + dots, legend, desc: i18n('Cercles de parenté autour de {name} (personnes : {n}).', {n: vis.length, name: ego.name})};
     }
     function sampleAcc() {
         const R0 = [['Jean MARTIN × Marie DURAND', '', '1820–1890', 'arrière-grand-père', 3], ['Pierre MARTIN', 'Jean MARTIN × Marie DURAND', '1848–1920', 'grand-père', 2], ['Louis MARTIN', 'Pierre MARTIN', '1875–1950', 'père', 1], ['Moi', 'Louis MARTIN', '1905', 'moi', 0],
@@ -546,6 +621,7 @@
         const lo = numeric ? (o.min !== '' && o.min !== undefined ? num(o.min) : Math.min(...vals.map(num))) : 0, hi = numeric ? (o.max !== '' && o.max !== undefined ? num(o.max) : Math.max(...vals.map(num))) : 1;
         const lowC = color(o.lowColor, '#fde0c5'), highC = color(o.highColor, '#2e7d32'), order = []; vals.forEach(v => { if (!numeric && !order.includes(v)) order.push(v); });
         const colOf = r => { if (!r) return color(o.missingColor, '#e3e5e8'); if (!r.value) return '#c9ced6'; if (numeric) return mix(lowC, highC, hi > lo ? (num(r.value) - lo) / (hi - lo) : 1); return given.get(r.value.toLowerCase()) || pick(spec, order.indexOf(r.value)); };
+        if (o.layout === 'periodic') return periodic(spec, by, colOf, numeric ? {lo, hi, lowC, highC} : null, order, given, gens, W, fs);
         const square = o.layout === 'square', labW = square ? 0 : fs * 3.6, cntW = square ? 0 : fs * 4.6, pw = W - labW - cntW;
         let svg = '', h = 0, found = 0;
         const cellSvg = (s, x, y, w, hh) => { const r = by.get(s), c = colOf(r); if (r) found++;
@@ -572,6 +648,32 @@
         const legend = numeric ? [0, .5, 1].map(t => ({label: fmt(lo + (hi - lo) * t) + (o.unit ? ' ' + o.unit : ''), color: mix(lowC, highC, t)})) : order.slice(0, 16).map(v => ({label: v, color: given.get(v.toLowerCase()) || pick(spec, order.indexOf(v))}));
         legend.push({label: 'Pas encore trouvé', color: color(o.missingColor, '#e3e5e8')});
         return {h, svg, legend, desc: i18n('Quadrillage de {g} générations : {found} ancêtres trouvés sur {total} places ({pct} %).', {g: gens, found, total, pct: fmt(100 * found / total)})};
+    }
+    /** ⚛ façon tableau périodique : une « période » par génération, côté paternel à gauche, maternel à droite ; un symbole, le n° Sosa, le nom, les dates */
+    function periodic(spec, by, colOf, scale, order, given, gens, W, fs) {
+        const o = spec.o || {}, cols = W >= 760 ? 16 : 8, labW = fs * 3.2, cw = Math.min(fs * 4.8, (W - labW - 4) / cols), ch = cw * 1.12, gap = Math.max(1.5, cw * .06), x0 = labW + (W - labW - cols * cw) / 2;
+        const sym = r => { const w = String(r.name || '').split(/\s+/).filter(Boolean), up = x => x ? x.charAt(0).toLocaleUpperCase('fr-FR') : ''; if (!w.length) return '?';
+            if (o.symbol === 'first') return up(w[0]) + (w[0].charAt(1) || '').toLocaleLowerCase('fr-FR'); if (o.symbol === 'last') { const l = w[w.length - 1]; return up(l) + (l.charAt(1) || '').toLocaleLowerCase('fr-FR'); } return up(w[0]) + (w.length > 1 ? up(w[w.length - 1]) : ''); };
+        let svg = '', y = fs * .4, found = 0;
+        const cell = (s, x, yy) => { const r = by.get(s), c = colOf(r); if (r) found++; const ink = contrast(c), t = r ? `Sosa ${s} · ${r.name}${r.value ? ' · ' + r.value : ''}${r.detail ? ' · ' + r.detail : ''}` : `Sosa ${s} · ${i18n('pas encore trouvé')}`;
+            let out = `<g${r?.pid ? ` data-dmo-pid="${r.pid}" style="cursor:pointer"` : ''}><rect x="${r2(x)}" y="${r2(yy)}" width="${r2(cw - gap)}" height="${r2(ch - gap)}" rx="${r2(cw * .06)}" fill="${c}"${r ? '' : ' stroke="#b8bec7" stroke-dasharray="2 2" stroke-width=".8"'} data-dmo-slot="${s}">${tip(t)}</rect>`;
+            const f = cw * .17; if (f >= 4) out += T(x + cw * .08, yy + f * .9, String(s), {size: f, fill: ink, op: .8});
+            if (r) { out += T(x + (cw - gap) / 2, yy + ch * .44, sym(r), {size: cw * .36, anchor: 'middle', weight: 800, fill: ink});
+                if (f >= 4.5) out += T(x + (cw - gap) / 2, yy + ch * .7, cut(r.name, cw - gap - 4, f * 1.02), {size: f * 1.02, anchor: 'middle', fill: ink});
+                if (o.pDates !== false && r.detail && f >= 4.5) out += T(x + (cw - gap) / 2, yy + ch * .86, cut(r.detail, cw - gap - 4, f * .9), {size: f * .9, anchor: 'middle', fill: ink, op: .8}); }
+            return out + '</g>'; };
+        for (let g = 0; g < gens; g++) {
+            const n = 2 ** g, lines = Math.ceil(n / cols);
+            svg += T(labW - 6, y + ch / 2, i18n('Gén. {g}', {g: String(g + 1)}), {size: fs * .74, anchor: 'end', weight: 600, fill: '#556'});
+            if (n === 1) svg += cell(1, x0, y);
+            else if (n < cols) { const h2 = n / 2; for (let k = 0; k < n; k++) svg += cell(n + k, k < h2 ? x0 + k * cw : x0 + (cols - n + k) * cw, y); } // côté paternel à gauche, maternel à droite (le creux au milieu)
+            else for (let k = 0; k < n; k++) svg += cell(n + k, x0 + (k % cols) * cw, y + Math.floor(k / cols) * ch);
+            y += lines * ch + (n >= cols && g < gens - 1 ? fs * .5 : gap * 2);
+        }
+        const total = 2 ** gens - 1;
+        const legend = scale ? [0, .5, 1].map(t => ({label: fmt(scale.lo + (scale.hi - scale.lo) * t) + (o.unit ? ' ' + o.unit : ''), color: mix(scale.lowC, scale.highC, t)})) : order.slice(0, 16).map(v => ({label: v, color: given.get(v.toLowerCase()) || pick(spec, order.indexOf(v))}));
+        legend.push({label: 'Pas encore trouvé', color: color(o.missingColor, '#e3e5e8')});
+        return {h: y + 4, svg, legend, desc: i18n('Tableau périodique : ancêtres trouvés {found} / {total} ({pct} %).', {g: gens, found, total, pct: fmt(100 * found / total)})};
     }
     function sampleGrid() {
         const out = [], L = ['MARTIN', 'DURAND', 'PETIT', 'MOREAU', 'GARNIER', 'ROUX', 'FOURNIER', 'GIRARD', 'BONNET', 'LAMBERT'];
@@ -630,13 +732,32 @@
         }),
     };
     const pyrApp = {
-        html: () => box('🔺 Toutes les personnes de ma base', 'Chaque personne née, et pas encore morte, l’année choisie compte dans sa tranche d’âge. Ensuite : le curseur sous le dessin change l’année, ▶ fait défiler le temps.', `<label>Année de départ<input type="number" data-dm="year" inputmode="numeric" placeholder="ex. 1850"></label><label>Décès inconnu${sel('unk', [[0, 'Ne pas compter la personne'], [60, 'Supposer une vie de 60 ans'], [80, 'Supposer une vie de 80 ans']], 0)}</label>`),
-        bind: (pane, io) => bindApp(pane, async () => {
+        html: () => box('🔺 Les personnes de ma base', 'Toute la base (qui vivait l’année choisie) ou un recensement (les âges écrits ce jour-là).',
+            `<label>${esc(i18n('Source'))}${sel('psrc', [['', 'Toute la base (qui vivait en …)'], ['census', 'Un recensement (commune, année)']], '')}</label>
+            <div data-dm-for="">${'<label>Année de départ<input type="number" data-dm="year" inputmode="numeric" placeholder="ex. 1850"></label>'}<label>Décès inconnu${sel('unk', [[0, 'Ne pas compter la personne'], [60, 'Supposer une vie de 60 ans'], [80, 'Supposer une vie de 80 ans']], 0)}</label></div>
+            <div data-dm-for="census" hidden><label>${esc(i18n('Recensement'))}<select data-dm="census"><option value="">${esc(i18n('Chargement…'))}</option></select></label><label>${esc(i18n('Comparer avec'))}<select data-dm="census2"><option value="">${esc(i18n('— Rien —'))}</option></select></label>
+                <label>${esc(i18n('Tranches d’âge'))}${sel('band', [[5, '5 ans'], [10, '10 ans']], 5)}</label><p class="muted">${esc(i18n('Ressortent : les personnes reliées à une fiche (ou au groupe choisi).'))}</p></div>`),
+        bind: (pane, io) => {
+            const src = pane.querySelector('[data-dm="psrc"]'), cs = pane.querySelector('[data-dm="census"]'), c2 = pane.querySelector('[data-dm="census2"]'); let items = [];
+            const sync = () => pane.querySelectorAll('[data-dm-for]').forEach(el => { el.hidden = el.dataset.dmFor !== (src?.value || ''); });
+            const fill2 = () => { const cur = items[Number(cs?.value)]; if (!c2) return; c2.innerHTML = `<option value="">${esc(i18n('— Rien —'))}</option>` + items.map((x, i) => [x, i]).filter(([x]) => cur && x.place_id === cur.place_id && x.place === cur.place && x.year !== cur.year).map(([x, i]) => `<option value="${i}">${esc(`${x.year} (${x.n})`)}</option>`).join(''); };
+            src?.addEventListener('change', sync); cs?.addEventListener('change', fill2); sync();
+            A().api('diagram_lot_a', {what: 'census_list'}).then(r => { items = r.items || []; if (!cs?.isConnected) return; cs.innerHTML = items.length ? items.map((x, i) => `<option value="${i}">${esc(`${x.place} — ${x.year} (${x.n})`)}</option>`).join('') : `<option value="">${esc(i18n('Aucun recensement dans ta base'))}</option>`; fill2(); }).catch(() => {});
+            bindApp(pane, async () => {
+            if (src?.value === 'census') {
+                const it = items[Number(cs?.value)]; if (!it) throw new Error(i18n('Choisis un recensement (commune et année).')); const it2 = c2?.value !== '' ? items[Number(c2.value)] : null;
+                const r = await A().api('diagram_lot_a', {what: 'census_pyr', place: it.place_id || '', year: it.year, ...(it2 ? {year2: it2.year} : {}), ...(window.LCNDA_EXT?.diagramAppOpts?.extra() || {})});
+                if (!r.rows?.length) throw new Error(i18n('Aucun âge lisible dans ce recensement.'));
+                const s = io.spec(); s.rows = r.rows; s.people = [];
+                s.o = {...s.o, pyrSrc: 'census', year: it.year, year2: it2 ? it2.year : '', band: val(pane, 'band') || '5', place: r.place || it.place, family: true}; titleIf(s, K.alivepyr.sample(), i18n('Le recensement de {place}', {place: r.place || it.place})); io.apply(s);
+                return i18n('Personnes recensées prises dans ta base : {n}.', {n: r.rows.length});
+            }
             const r = await getM({what: 'alive'}); if (!r.people?.length) throw new Error('Aucune personne avec une date de naissance.');
             const s = io.spec(); s.people = r.people; s.rows = []; const y = Number(val(pane, 'year'));
-            s.o = {...s.o, year: y || Math.round((r.from + Math.min(new Date().getFullYear(), r.to + 60)) / 2), unknownAge: Number(val(pane, 'unk')) || 0}; titleIf(s, K.alivepyr.sample(), i18n('Qui vivait en … ?')); io.apply(s);
+            s.o = {...s.o, pyrSrc: '', year: y || Math.round((r.from + Math.min(new Date().getFullYear(), r.to + 60)) / 2), unknownAge: Number(val(pane, 'unk')) || 0}; titleIf(s, K.alivepyr.sample(), i18n('Qui vivait en … ?')); io.apply(s);
             return i18n('{n} personnes prises dans ta base.', {n: r.people.length});
-        }),
+            });
+        },
     };
     const accApp = {
         html: () => box('🪗 Mes ancêtres et leurs descendants', 'Les ancêtres de la personne sur quelques générations, puis tous leurs descendants jusqu’à sa génération : frères et sœurs, oncles, cousins germains, issus de germains… avec le lien de parenté de chacun.', `${rootField()}<label>Remonter de${GENS(2, 5, 1)}</label>`),
@@ -692,10 +813,11 @@
     };
     const centuryN = s => { const m = String(s).match(/^([IVXL]+)e/); if (!m) return 99; const v = {I: 1, V: 5, X: 10, L: 50}; let n = 0, p = 0; [...m[1]].reverse().forEach(ch => { const x = v[ch]; n += x < p ? -x : x; p = Math.max(p, x); }); return n; };
     const gridApp = {
-        html: () => box('🟩 Mes ancêtres (numéros Sosa)', 'Une case par place d’ancêtre ; les cases grises sont les ancêtres pas encore trouvés. Clic sur une case (hors de l’éditeur) : sa fiche.', `${rootField()}<label>Générations${GENS(7, 10, 3)}</label><label>Colorer selon${sel('by', [['complete', 'Ce que je sais (nom, dates, lieux, sources)'], ['score', 'Taux de recherche (%)'], ['state', 'Région de naissance'], ['century', 'Siècle de naissance'], ['occupation', 'Métier'], ['gender', 'Sexe'], ['last', 'Nom de famille']], 'complete')}</label>`),
+        html: () => box('🟩 Mes ancêtres (numéros Sosa)', 'Une case par place d’ancêtre ; les cases grises sont les ancêtres pas encore trouvés. Clic sur une case (hors de l’éditeur) : sa fiche.', `${rootField()}<label>Générations${GENS(7, 10, 3)}</label><label>Colorer selon${sel('by', [['complete', 'Ce que je sais (nom, dates, lieux, sources)'], ['score', 'Taux de recherche (%)'], ['state', 'Région de naissance'], ['century', 'Siècle de naissance'], ['occupation', 'Métier'], ['gender', 'Sexe'], ['last', 'Nom de famille'], ['branch', 'Branche (paternelle, maternelle)']], 'complete')}</label>`),
         bind: (pane, io) => bindApp(pane, async () => {
             const by = val(pane, 'by'), r = await getG({what: 'fan', root: rootOf(pane), gens: val(pane, 'gens')}); if (!r.rows?.length) throw new Error('Aucun ancêtre trouvé pour cette personne.');
             const value = p => by === 'complete' ? (p.sourced && (p.birth || p.death) ? COMPLETE[3][0] : p.birth && p.birth_place && (p.death || p.living) ? COMPLETE[2][0] : p.birth || p.death ? COMPLETE[1][0] : COMPLETE[0][0])
+                : by === 'branch' ? (p.sosa === 1 ? i18n('Personne de départ') : (p.sosa >> Math.max(0, Math.floor(Math.log2(p.sosa)) - 1)) === 2 ? i18n('Branche paternelle') : i18n('Branche maternelle'))
                 : by === 'score' ? String(p.score) : by === 'century' ? (p.birth_year ? i18n('{c}e siècle', {c: roman(Math.ceil(p.birth_year / 100))}) : '') : by === 'gender' ? i18n({male: 'Homme', female: 'Femme'}[p.gender] || 'Inconnu') : str(p[by], 80);
             const s = io.spec(); s.rows = r.rows.map(p => ({sosa: p.sosa, name: p.name, value: value(p), detail: [p.birth ? '° ' + clean(p.birth).slice(0, 10) : '', p.death ? '† ' + clean(p.death).slice(0, 10) : ''].filter(Boolean).join(' '), pid: p.id}));
             s.cats = by === 'complete' ? COMPLETE.map(([v, c]) => ({value: v, color: c})) : by === 'gender' ? [{value: 'Homme', color: '#4e79a7'}, {value: 'Femme', color: '#e15759'}] : [];
@@ -712,7 +834,9 @@
                 {key: 'events', label: 'Les événements historiques en fond (facultatif)', cols: [C('start', 'Début'), C('end', 'Fin'), C('label', 'Nom'), C('color', 'Couleur', 'color')]}],
             options: [C('colorBy', 'Couleur des barres', 'select', {choices: [['branch', 'Branche paternelle ou maternelle'], ['sex', 'Homme ou femme'], ['group', 'Colonne « Groupe »']], def: 'branch'}),
                 C('layout', 'Disposition', 'select', {choices: [['', 'Serrée (noms dans les barres)'], ['rows', 'Une ligne par personne (noms à gauche)']]}), C('order', 'Générations', 'select', {choices: [['', 'Les plus anciennes en haut'], ['young', 'Les plus récentes en haut']]}),
-                C('labels', 'Noms dans les barres', 'check', {def: true, when: s => s.o?.layout !== 'rows'}), C('events', 'Montrer les événements', 'check', {def: true}), C('barHeight', 'Épaisseur des barres', 'range', {min: 4, max: 40, def: 16}), C('from', 'Début (année, vide = auto)'), C('to', 'Fin (année, vide = auto)')],
+                C('labels', 'Noms dans les barres', 'check', {def: true, when: s => s.o?.layout !== 'rows'}), C('events', 'Montrer les événements', 'check', {def: true}), C('barHeight', 'Épaisseur des barres', 'range', {min: 4, max: 40, def: 16}), C('from', 'Début (année, vide = auto)'), C('to', 'Fin (année, vide = auto)'),
+                C('uncertain', 'Montrer l’incertitude des dates', 'check'), C('uncAbout', '« vers » : plus ou moins (ans)', 'range', {min: 1, max: 25, def: 5, when: s => !!s.o?.uncertain}),
+                C('uncStyle', 'Dessin de la fourchette', 'select', {choices: [['', 'Dégradé'], ['dash', 'Pointillés']], when: s => !!s.o?.uncertain}), C('uncDiamond', 'Losange pour les dates exactes', 'check', {def: true, when: s => !!s.o?.uncertain})],
             sample: () => ({o: {title: 'Les vies de mes ancêtres', colorBy: 'branch'}, rows: sampleGen(), events: EVENTS_FR.map(([start, end, label]) => ({start, end, label}))})},
         crises: {icon: '📉', label: 'Naissances, décès et crises', group: 'Frises', render: crises, legend: 'bottom', fromApp: crisesApp,
             grids: [{key: 'rows', label: 'Les années', cols: [C('year', 'Année'), C('births', 'Naissances', 'number'), C('deaths', 'Décès', 'number')]},
@@ -725,14 +849,19 @@
             options: [C('axis', 'Axe', 'select', {choices: [['', 'Les âges (tous partent de 0)'], ['year', 'Les années (calendrier)']]}), C('order', 'Ordre', 'select', {choices: [['', 'Par date de naissance'], ['table', 'Comme dans le tableau']]})],
             sample: () => ({o: {title: i18n('Les enfants de {name}', {name: 'Jean et Marie'})}, rows: sampleSib()})},
         alivepyr: {icon: '🔺', label: 'Pyramide « qui vivait en … »', group: 'Frises', render: alivePyr, legend: 'bottom', fromApp: pyrApp,
-            grids: [{key: 'rows', label: 'Les personnes (à la main ; celles de ta base : « Depuis l’app »)', cols: [C('name', 'Nom'), C('sex', 'Sexe', 'select', {choices: [['', '?'], ['h', 'Homme'], ['f', 'Femme']]}), C('birth', 'Naissance'), C('death', 'Décès')]}],
-            options: [C('year', 'Année montrée', 'number', {min: -3000, max: 3000}), C('band', 'Tranches d’âge', 'select', {choices: [['5', '5 ans'], ['10', '10 ans'], ['20', '20 ans']], def: '10'}), C('maxAge', 'Dernière tranche à partir de', 'number', {unit: 'ans', min: 20, max: 120, def: 90}),
+            grids: [{key: 'rows', label: 'Les personnes (à la main ; celles de ta base : « Depuis l’app »)', cols: [C('name', 'Nom'), C('sex', 'Sexe', 'select', {choices: [['', '?'], ['h', 'Homme'], ['f', 'Femme']]}), C('birth', 'Naissance'), C('death', 'Décès'),
+                C('age', 'Âge (recensement)'), C('census', 'Année du recensement', 'number'), C('family', 'De la famille (oui)')]}],
+            options: [C('pyrSrc', 'Les personnes', 'select', {choices: [['', 'Naissances et décès (qui vivait en …)'], ['census', 'Un recensement (âges écrits)']]}), C('year', 'Année montrée', 'number', {min: -3000, max: 3000}),
+                C('year2', 'Comparer avec le recensement de', 'number', {min: 0, max: 2200, when: s => s.o?.pyrSrc === 'census'}), C('family', 'Faire ressortir la famille', 'check', {def: true, when: s => s.o?.pyrSrc === 'census'}), C('place', 'Commune (titre)', 'text', {when: s => s.o?.pyrSrc === 'census'}), C('band', 'Tranches d’âge', 'select', {choices: [['5', '5 ans'], ['10', '10 ans'], ['20', '20 ans']], def: '10'}), C('maxAge', 'Dernière tranche à partir de', 'number', {unit: 'ans', min: 20, max: 120, def: 90}),
                 C('unknownAge', 'Décès inconnu : supposer une vie de … ans (0 = ne pas compter)', 'number', {min: 0, max: 110, def: 0}), C('fixedScale', 'Même échelle pour toutes les années (lecture)', 'check', {def: true}), C('values', 'Afficher les nombres', 'check', {def: true}),
                 C('menColor', 'Couleur des hommes', 'color', {def: '#4e79a7'}), C('womenColor', 'Couleur des femmes', 'color', {def: '#e15759'}), C('height', 'Hauteur des barres (px, au total)', 'number', {min: 100, max: 2400})],
             sample: () => ({o: {title: i18n('Qui vivait en {year} ?', {year: '1850'}), year: 1850, maxAge: 90}, rows: samplePyr()}), afterDraw: keepApi},
         accordion: {icon: '🪗', label: 'Arbre en accordéon (cousins)', group: 'Généalogie', render: accordion, legend: 'bottom', fromApp: accApp, afterDraw: accAfterDraw,
-            grids: [{key: 'rows', label: 'Les personnes (même nom au-dessus = branche)', cols: [C('name', 'Nom'), C('parent', 'Au-dessus (nom ; vide pour le haut)'), C('years', 'Années'), C('kin', 'Lien de parenté'), C('degree', 'Degré (couleur)', 'number')]}],
-            options: [C('kin', 'Montrer le lien de parenté', 'check', {def: true}), C('open', 'Générations ouvertes au départ (0 = toutes)', 'number', {min: 0, max: 12, def: 0}), C('indent', 'Décalage d’une génération', 'range', {unit: 'px', min: 8, max: 60, def: 20})],
+            grids: [{key: 'rows', label: 'Les personnes (même nom au-dessus = branche)', cols: [C('name', 'Nom'), C('parent', 'Au-dessus (nom ; vide pour le haut)'), C('years', 'Années'), C('kin', 'Lien de parenté'), C('degree', 'Degré (couleur)', 'number'), C('sex', 'Sexe', 'select', {choices: [['', '?'], ['h', 'Homme'], ['f', 'Femme']]})]}],
+            options: [C('layout', 'Disposition', 'select', {choices: [['', 'En accordéon (branches qu’on plie)'], ['circles', 'En cercles (un cercle par degré)']]}),
+                C('kin', 'Montrer le lien de parenté', 'check', {def: true, when: s => s.o?.layout !== 'circles'}), C('open', 'Générations ouvertes au départ (0 = toutes)', 'number', {min: 0, max: 12, def: 0, when: s => s.o?.layout !== 'circles'}), C('indent', 'Décalage d’une génération', 'range', {unit: 'px', min: 8, max: 60, def: 20, when: s => s.o?.layout !== 'circles'}),
+                C('degMax', 'Degrés montrés (jusqu’à)', 'range', {min: 1, max: 8, def: 6, when: s => s.o?.layout === 'circles'}), C('circColor', 'Couleur des points', 'select', {choices: [['', 'Le degré'], ['sex', 'Le sexe'], ['branch', 'La branche'], ['living', 'En vie ou non']], when: s => s.o?.layout === 'circles'}),
+                C('circNames', 'Noms', 'select', {choices: [['', 'Écrits s’il y a la place'], ['written', 'Écrits'], ['hover', 'Au survol seulement']], when: s => s.o?.layout === 'circles'}), C('palette', 'Couleurs des branches', 'select', {choices: Object.keys(R.PALETTES || {vive: 1}).map(k => [k, k.charAt(0).toUpperCase() + k.slice(1)]), when: s => s.o?.layout === 'circles' && s.o?.circColor === 'branch'}), H_OPT],
             sample: () => ({o: {title: 'Mes cousins'}, rows: sampleAcc()})},
         cousinage: {icon: '🧶', label: 'Graphe des cousinages', group: 'Généalogie', render: cousinage, legend: 'bottom', fromApp: cousApp,
             grids: [{key: 'rows', label: 'Les liens (deux personnes et leur lien)', cols: [C('a', 'Personne A'), C('b', 'Personne B'), C('kind', 'Lien (cousins germains…)')]}, {key: 'nodes', label: 'Les personnes (facultatif : famille pour la couleur)', cols: [C('name', 'Nom'), C('group', 'Famille / groupe')]}],
@@ -747,7 +876,8 @@
             options: [], sample: () => ({o: {title: i18n('D’où viennent mes noms')}, rows: sampleSur()})},
         ancestorgrid: {icon: '🟩', label: 'Quadrillage des ancêtres (une case par Sosa)', group: 'Généalogie', render: grid, legend: 'bottom', fromApp: gridApp,
             grids: [{key: 'rows', label: 'Les ancêtres (n° Sosa → valeur)', cols: [C('sosa', 'N° Sosa', 'number'), C('name', 'Nom'), C('value', 'Valeur (chiffre ou catégorie)'), C('detail', 'Détail')]}, {key: 'cats', label: 'Les catégories et leur couleur (facultatif)', cols: [C('value', 'Valeur'), C('color', 'Couleur', 'color')]}],
-            options: [C('layout', 'Disposition', 'select', {choices: [['', 'Une ligne par génération'], ['square', 'Un carré (cases dans l’ordre des numéros)']]}), C('gens', 'Générations', 'range', {min: 2, max: 12, def: 7}),
+            options: [C('layout', 'Disposition', 'select', {choices: [['', 'Une ligne par génération'], ['square', 'Un carré (cases dans l’ordre des numéros)'], ['periodic', 'Cases façon tableau périodique']]}), C('gens', 'Générations', 'range', {min: 2, max: 12, def: 7}),
+                C('symbol', 'Symbole', 'select', {choices: [['', 'Initiales du prénom et du nom'], ['first', 'Le prénom (2 lettres)'], ['last', 'Le nom (2 lettres)']], when: s => s.o?.layout === 'periodic'}), C('pDates', 'Dates sous le nom', 'check', {def: true, when: s => s.o?.layout === 'periodic'}),
                 C('labels', 'Dans les cases', 'select', {choices: [['', 'Le nom (si la place le permet)'], ['sosa', 'Le n° Sosa'], ['both', 'Le nom et le n° Sosa'], ['none', 'Rien']]}), C('scale', 'Couleurs', 'select', {choices: [['', 'Automatique'], ['num', 'Un dégradé (chiffres)'], ['cat', 'Une couleur par catégorie']]}),
                 C('lowColor', 'Couleur des petits chiffres', 'color', {def: '#fde0c5', when: s => s.o?.scale !== 'cat'}), C('highColor', 'Couleur des grands chiffres', 'color', {def: '#2e7d32', when: s => s.o?.scale !== 'cat'}), C('min', 'Dégradé : minimum', 'number', {when: s => s.o?.scale === 'num'}), C('max', 'Dégradé : maximum', 'number', {when: s => s.o?.scale === 'num'}),
                 C('missingColor', 'Couleur des ancêtres pas trouvés', 'color', {def: '#e3e5e8'}), C('rowHeight', 'Hauteur des lignes', 'range', {unit: 'px', min: 6, max: 80, def: 24, when: s => s.o?.layout !== 'square'})],

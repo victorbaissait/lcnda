@@ -1,0 +1,192 @@
+fr ¦ ro
+# Zone « diagrammes-lot-a » : tableau de quartiers, variantes d’un nom, boucles d’implexe, double éventail, nœud papillon, réseau « toute la famille », barres croisées, cercles de parenté, dates incertaines, pyramide d’un recensement, tableau périodique (heritage-diagram-lot-a.js, lib/diagram_lot_a.php)
+(deviné) ¦ (dedus)
+1 (enfants) ¦ 1 (copii)
+1 (parents) ¦ 1 (părinți)
+16 quartiers ¦ 16 sferturi
+20 ans ¦ 20 de ani
+32 quartiers ¦ 32 de sferturi
+8 quartiers (arrière-grands-parents) ¦ 8 sferturi (străbunici)
+Actes comptés ¦ Acte numărate
+Ajoute les ancêtres (n° Sosa, nom) et leurs armoiries. ¦ Adaugă strămoșii (nr. Sosa, nume) și blazoanele lor.
+Ajoute les formes du nom : la forme, ses années, le nombre d’actes. ¦ Adaugă formele numelui: forma, anii ei, numărul de acte.
+Ajoute les personnes recensées : âge, sexe, année. ¦ Adaugă persoanele recenzate: vârstă, sex, an.
+Ancêtre à trouver ¦ Strămoș de găsit
+Ancêtres pris dans ta base : {n} (armoiries : {k}). ¦ Strămoși luați din baza ta: {n} (blazoane: {k}).
+Arbre des variantes (formes du nom : {n}). ¦ Arborele variantelor (forme ale numelui: {n}).
+Arbre des variantes d’un nom ¦ Arborele variantelor unui nume
+Armoiries (nom) ¦ Blazon (nume)
+Au survol seulement ¦ Doar la trecerea mouse-ului
+Aucun ancêtre connu à cette génération. ¦ Niciun strămoș cunoscut în această generație.
+Aucun lien entre les couples de ce groupe. ¦ Nicio legătură între cuplurile acestui grup.
+Aucun recensement dans ta base ¦ Niciun recensământ în baza ta
+Aucun âge lisible dans ce recensement. ¦ Nicio vârstă lizibilă în acest recensământ.
+Aucune forme trouvée pour ce nom. ¦ Nicio formă găsită pentru acest nume.
+Avec au moins une source ¦ Cu cel puțin o sursă
+Axe des années ¦ Axa anilor
+Barres croisées (UpSet) ¦ Bare încrucișate (UpSet)
+Barres croisées (ensembles : {n}, combinaisons montrées : {k}). ¦ Bare încrucișate (mulțimi: {n}, combinații afișate: {k}).
+Blason absent ¦ Blazon lipsă
+Blasonnement en note (en bas) ¦ Blazonare în notă (jos)
+Boucles d’implexe (chemins : {n}), F = {f}. ¦ Bucle de implex (căi: {n}), F = {f}.
+Boucles plus lointaines pas dessinées : {n} (comptées dans F). ¦ Bucle mai îndepărtate nedesenate: {n} (numărate în F).
+Branche (paternelle, maternelle) ¦ Ramură (paternă, maternă)
+Branche maternelle ¦ Ramura maternă
+Branche paternelle ¦ Ramura paternă
+Branche « {name} » ¦ Ramura „{name}”
+Cases façon tableau périodique ¦ Căsuțe ca tabelul periodic
+Cases vides pour les ancêtres à trouver ¦ Căsuțe goale pentru strămoșii de găsit
+Ce qu’on dessine ¦ Ce se desenează
+Cercles (2 à 4 ensembles) ¦ Cercuri (2–4 mulțimi)
+Cercles de parenté autour de {name} (personnes : {n}). ¦ Cercuri de rudenie în jurul lui {name} (persoane: {n}).
+Chemins trouvés : {n} (F = {f}). ¦ Căi găsite: {n} (F = {f}).
+Chercher les boucles ¦ Caută buclele
+Chiffre (couleur, éventails) ¦ Număr (culoare, evantaie)
+Choisis de 2 à 8 ensembles (là : {n}). ¦ Alege între 2 și 8 mulțimi (acum: {n}).
+Choisis un groupe de noms ou écris un nom. ¦ Alege un grup de nume sau scrie un nume.
+Choisis un recensement (commune et année). ¦ Alege un recensământ (comună și an).
+Choisis une personne (« Depuis l’app ») ou écris les boucles à la main. ¦ Alege o persoană („Din aplicație”) sau scrie buclele de mână.
+Coefficient aussi en fraction ¦ Coeficient și ca fracție
+Coefficient de consanguinité de {name} : F = {f} ¦ Coeficientul de consangvinitate al lui {name}: F = {f}
+Combinaisons montrées (les plus grandes) ¦ Combinații afișate (cele mai mari)
+Combinaisons pas montrées : {n} ¦ Combinații neafișate: {n}
+Commune (titre) ¦ Comună (titlu)
+Comparer avec le recensement de ¦ Compară cu recensământul din
+Consanguinité de l’ancêtre (%) ¦ Consangvinitatea strămoșului (%)
+Couleur de l’écu (sans image) ¦ Culoarea scutului (fără imagine)
+Couleur des parts ¦ Culoarea părților
+Couleur du côté maternel ¦ Culoarea părții materne
+Couleurs des branches ¦ Culorile ramurilor
+Couple ¦ Cuplu
+Critères de mauvaise forme. ¦ Criterii greșit formate.
+Côté (paternel, maternel, branches) ¦ Parte (paternă, maternă, ramuri)
+Côté maternel ¦ Partea maternă
+Côté paternel ¦ Partea paternă
+Date incertaine (fourchette) ¦ Dată incertă (interval)
+Date inconnue ¦ Dată necunoscută
+Dates sous le nom ¦ Date sub nume
+De la famille ¦ Din familie
+De la famille (oui) ¦ Din familie (da)
+De la mère vers l’ancêtre ¦ De la mamă la strămoș
+Degrés montrés (jusqu’à) ¦ Grade afișate (până la)
+Dessin de la fourchette ¦ Desenul intervalului
+Deux éventails ¦ Două evantaie
+Deviner d’où vient chaque forme (date et ressemblance) ¦ Ghicește de unde vine fiecare formă (dată și asemănare)
+Diagramme de Venn (2 à 8 ensembles) ¦ Diagramă Venn (2–8 mulțimi)
+Diagramme de Venn : {names}. ¦ Diagramă Venn: {names}.
+Double éventail (ascendants : {up}, descendants : {down}). ¦ Evantai dublu (ascendenți: {up}, descendenți: {down}).
+Du père vers l’ancêtre ¦ De la tată la strămoș
+Décédé ou inconnu ¦ Decedat sau necunoscut
+En accordéon (branches qu’on plie) ¦ Acordeon (ramuri pliabile)
+En cercles (un cercle par degré) ¦ În cercuri (un cerc pe grad)
+En vie ou non ¦ În viață sau nu
+En {year} (contour) ¦ În {year} (contur)
+Ensemble {x} ¦ Mulțimea {x}
+Faire ressortir la famille ¦ Evidențiază familia
+Formes prises dans ta base : {n}. ¦ Forme luate din baza ta: {n}.
+Groupe de noms ¦ Grup de nume
+Générations : {n} côté père, {m} côté mère ¦ Generații: {n} din partea tatălui, {m} din a mamei
+Il faut de 2 à 8 ensembles. ¦ Sunt necesare 2–8 mulțimi.
+Image (media/…) ¦ Imagine (media/…)
+Initiales du prénom et du nom ¦ Inițialele prenumelui și numelui
+La branche ¦ Ramura
+La personne étudiée ¦ Persoana studiată
+Le calcul n’est pas prêt. ¦ Calculul nu este gata.
+Le chemin entre deux personnes ¦ Calea dintre două persoane
+Le nom (2 lettres) ¦ Numele (2 litere)
+Le plus proche seulement ¦ Doar cel mai apropiat
+Le prénom (2 lettres) ¦ Prenumele (2 litere)
+Le recensement de {place} ¦ Recensământul din {place}
+Les 8, 16 ou 32 ancêtres d’une génération, chacun avec son blason ; un écu vide : armoiries à trouver. ¦ Cei 8, 16 sau 32 strămoși ai unei generații, fiecare cu blazonul său; scut gol: blazon de găsit.
+Les boucles d’implexe (entre les deux parents) ¦ Buclele de implex (între cei doi părinți)
+Les boucles d’implexe de {name} ¦ Buclele de implex ale lui {name}
+Les deux parents de cette personne ne sont pas connus. ¦ Cei doi părinți ai acestei persoane nu sunt cunoscuți.
+Les ensembles (2 à 8) : A, B, C… H ¦ Mulțimile (2–8): A, B, C… H
+Les formes du nom ¦ Formele numelui
+Les formes du nom {name} ¦ Formele numelui {name}
+Les noms du groupe (ou écrits pareil) et leurs variantes notées, avec leurs années et le nombre d’actes. ¦ Numele grupului (sau scrise la fel) și variantele notate, cu anii și numărul de acte.
+Les quartiers de {name} ¦ Sferturile lui {name}
+Les seize quartiers de {name} ¦ Cele șaisprezece sferturi ale lui {name}
+Liens pris dans l’app : {n}. ¦ Legături luate din aplicație: {n}.
+Losange pour les dates exactes ¦ Romb pentru datele exacte
+Montrer le calcul (½ puissance n) ¦ Arată calculul (½ la puterea n)
+Montrer l’incertitude des dates ¦ Arată incertitudinea datelor
+Naissances et décès (qui vivait en …) ¦ Nașteri și decese (cine trăia în …)
+Nom inconnu ¦ Nume necunoscut
+Nom sous l’écu ¦ Numele sub scut
+Nom trop long (80 lettres au plus). ¦ Nume prea lung (maximum 80 de litere).
+Nombre d’actes sous la forme ¦ Numărul de acte sub formă
+Noms les plus portés ¦ Cele mai purtate nume
+N° Sosa ¦ Nr. Sosa
+N° Sosa (ascendants, éventails) ¦ Nr. Sosa (ascendenți, evantaie)
+Nœud papillon (père à gauche, mère à droite) ¦ Papion (tatăl în stânga, mama în dreapta)
+Ordre des combinaisons ¦ Ordinea combinațiilor
+Ou un nom ¦ Sau un nume
+Par nombre d’ensembles ¦ După numărul de mulțimi
+Parent (descendants, éventails) ¦ Părinte (descendenți, evantaie)
+Personne cachée ¦ Persoană ascunsă
+Personnes recensées : {n} ¦ Persoane recenzate: {n}
+Personnes recensées : {n} en {y1}, {m} en {y2} ¦ Persoane recenzate: {n} în {y1}, {m} în {y2}
+Personnes recensées prises dans ta base : {n}. ¦ Persoane recenzate luate din baza ta: {n}.
+Portraits (arbre dessiné, nœud papillon) ¦ Portrete (arbore desenat, papion)
+Pyramide du recensement de {year} (personnes : {n}). ¦ Piramida recensământului din {year} (persoane: {n}).
+Ressortent : les personnes reliées à une fiche (ou au groupe choisi). ¦ Evidențiate: persoanele legate de o fișă (sau de grupul ales).
+Selon le nombre de descendants ¦ După numărul de descendenți
+Selon le tableau ¦ După tabel
+Ses ancêtres au-dessus (place Sosa), ses descendants au-dessous (sous leur parent) ; le chiffre : l’âge au décès. ¦ Strămoșii sus (locul Sosa), descendenții jos (sub părinte); cifra: vârsta la deces.
+Ses ancêtres de la génération choisie (ordre Sosa) et les armoiries reliées à chacun (Listes → Armoiries). ¦ Strămoșii generației alese (ordinea Sosa) și blazoanele legate de fiecare (Liste → Blazoane).
+Seulement l’ancêtre commun le plus proche ¦ Doar cel mai apropiat strămoș comun
+Sexe inconnu (pas dans la pyramide) : {n} ¦ Sex necunoscut (în afara piramidei): {n}
+Sosa {n} : ancêtre à trouver ¦ Sosa {n}: strămoș de găsit
+Source, note ¦ Sursă, notă
+Sources sous la forme ¦ Surse sub formă
+Tableau de quartiers (armoiries des ancêtres) ¦ Tabelul sferturilor (blazoanele strămoșilor)
+Tableau de quartiers ({n}), armoiries connues : {k}. ¦ Tabelul sferturilor ({n}), blazoane cunoscute: {k}.
+Tableau périodique : ancêtres trouvés {found} / {total} ({pct} %). ¦ Tabel periodic: strămoși găsiți {found} / {total} ({pct} %).
+Taux de recherche (%) ¦ Rata de cercetare (%)
+Tous les ancêtres répétés ¦ Toți strămoșii repetați
+Tous les chemins du père et de la mère vers un même ancêtre (filiations biologiques) et le coefficient de consanguinité (méthode de Wright). ¦ Toate căile tatălui și ale mamei spre același strămoș (filiații biologice) și coeficientul de consangvinitate (metoda Wright).
+Toute la base (qui vivait en …) ¦ Toată baza (cine trăia în …)
+Toute la base (qui vivait l’année choisie) ou un recensement (les âges écrits ce jour-là). ¦ Toată baza (cine trăia în anul ales) sau un recensământ (vârstele scrise în acea zi).
+Toute la famille, un point par couple ¦ Toată familia, un punct pe cuplu
+Trop de critères. ¦ Prea multe criterii.
+Trop d’ensembles. ¦ Prea multe mulțimi.
+Trouvé chez le notaire (successions, inventaires) ¦ Găsit la notar (succesiuni, inventare)
+Trouvé dans les sources militaires (poilus) ¦ Găsit în sursele militare (soldați din Primul Război Mondial)
+Trouvé dans un recensement ¦ Găsit într-un recensământ
+Un chiffre (colonne « Chiffre ») ¦ Un număr (coloana „Număr”)
+Un recensement (commune, année) ¦ Un recensământ (comună, an)
+Un recensement (âges écrits) ¦ Un recensământ (vârste scrise)
+Une par branche ¦ Una pe ramură
+Une par forme ¦ Una pe formă
+Une seule source : couleur de l’ensemble ¦ O singură sursă: culoarea mulțimii
+Une source précise ¦ O sursă anume
+Vérifie le groupe de personnes. ¦ Verifică grupul de persoane.
+actes : {n} ¦ acte: {n}
+vient de {name} ¦ vine din {name}
+{label} (famille) : {n} ¦ {label} (familie): {n}
+{names} (seulement) : {n} ¦ {names} (doar): {n}
+{name} : armoiries pas encore trouvées ¦ {name}: blazon încă negăsit
+{name} : {n} en tout ¦ {name}: {n} în total
+{place}, {year} ¦ {place}, {year}
+« vers » : plus ou moins (ans) ¦ „pe la”: plus sau minus (ani)
+Âge (recensement) ¦ Vârstă (recensământ)
+Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Scrie felul legăturii pe linie (numele copilului…)
+Écrits s’il y a la place ¦ Scrise dacă este loc
+Écu vide ¦ Scut gol
+Épaisseur selon le nombre d’actes ¦ Grosime după numărul de acte
+— Aucun (le nom écrit à côté) — ¦ — Niciunul (numele scris alături) —
+— Rien — ¦ — Nimic —
+🌿 Les formes d’un nom de ma base ¦ 🌿 Formele unui nume din baza mea
+🔁 Entre les deux parents de… ¦ 🔁 Între cei doi părinți ai…
+🔺 Les personnes de ma base ¦ 🔺 Persoanele din baza mea
+🛡 Les quartiers d’une personne de ma base ¦ 🛡 Sferturile unei persoane din baza mea
+Choisis de 2 à 8 ensembles : chaque zone compte les personnes de ces ensembles-là seulement. Dès 5 ensembles : barres croisées. ¦ Alege 2–8 mulțimi: fiecare zonă numără doar persoanele din acele mulțimi. De la 5: bare încrucișate.
+Les témoins, parrains et marraines des actes ; ou toute la famille, un point par couple, reliés par leurs enfants. ¦ Martorii, nașii și nașele din acte; sau toată familia, un punct pe cuplu, legate prin copii.
+Nom de l’enfant sur le trait ¦ Numele copilului pe linie
+Par nom de famille ¦ După nume de familie
+Par siècle (du mariage) ¦ După secol (al căsătoriei)
+Un point par couple ¦ Un punct pe cuplu
+Un point par personne ¦ Un punct pe persoană
+🕸 Les liens de ma base ¦ 🕸 Legăturile din baza mea
+Quartiers ¦ Sferturi

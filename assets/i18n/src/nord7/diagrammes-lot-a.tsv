@@ -1,0 +1,192 @@
+fr ¦ is
+# Zone « diagrammes-lot-a » : tableau de quartiers, variantes d’un nom, boucles d’implexe, double éventail, nœud papillon, réseau « toute la famille », barres croisées, cercles de parenté, dates incertaines, pyramide d’un recensement, tableau périodique (heritage-diagram-lot-a.js, lib/diagram_lot_a.php)
+(deviné) ¦ (ágiskað)
+1 (enfants) ¦ 1 (börn)
+1 (parents) ¦ 1 (foreldrar)
+16 quartiers ¦ 16 skjaldarmerki
+20 ans ¦ 20 ár
+32 quartiers ¦ 32 skjaldarmerki
+8 quartiers (arrière-grands-parents) ¦ 8 skjaldarmerki (langafar og langömmur)
+Actes comptés ¦ Taldar færslur
+Ajoute les ancêtres (n° Sosa, nom) et leurs armoiries. ¦ Bættu við forfeðrum (Sosa-nr., nafn) og skjaldarmerkjum þeirra.
+Ajoute les formes du nom : la forme, ses années, le nombre d’actes. ¦ Bættu við myndum nafnsins: myndin, árin, fjöldi færslna.
+Ajoute les personnes recensées : âge, sexe, année. ¦ Bættu við fólki í manntalinu: aldur, kyn, ár.
+Ancêtre à trouver ¦ Forfaðir sem á eftir að finna
+Ancêtres pris dans ta base : {n} (armoiries : {k}). ¦ Forfeður úr gagnagrunninum þínum: {n} (skjaldarmerki: {k}).
+Arbre des variantes (formes du nom : {n}). ¦ Afbrigðatré (nafnmyndir: {n}).
+Arbre des variantes d’un nom ¦ Afbrigðatré nafns
+Armoiries (nom) ¦ Skjaldarmerki (heiti)
+Au survol seulement ¦ Aðeins við yfirsvif
+Aucun ancêtre connu à cette génération. ¦ Enginn þekktur forfaðir í þessari kynslóð.
+Aucun lien entre les couples de ce groupe. ¦ Engin tengsl á milli hjóna í þessum hópi.
+Aucun recensement dans ta base ¦ Ekkert manntal í gagnagrunninum þínum
+Aucun âge lisible dans ce recensement. ¦ Enginn læsilegur aldur í þessu manntali.
+Aucune forme trouvée pour ce nom. ¦ Engin mynd fannst fyrir þetta nafn.
+Avec au moins une source ¦ Með að minnsta kosti eina heimild
+Axe des années ¦ Áraás
+Barres croisées (UpSet) ¦ Krosssúlur (UpSet)
+Barres croisées (ensembles : {n}, combinaisons montrées : {k}). ¦ Krosssúlur (mengi: {n}, samsetningar sýndar: {k}).
+Blason absent ¦ Skjaldarmerki vantar
+Blasonnement en note (en bas) ¦ Skjaldarlýsing í neðanmálsgrein
+Boucles d’implexe (chemins : {n}), F = {f}. ¦ Lykkjur forfeðrafækkunar (leiðir: {n}), F = {f}.
+Boucles plus lointaines pas dessinées : {n} (comptées dans F). ¦ Fjarlægari lykkjur ekki teiknaðar: {n} (taldar í F).
+Branche (paternelle, maternelle) ¦ Grein (föðurætt, móðurætt)
+Branche maternelle ¦ Móðurætt
+Branche paternelle ¦ Föðurætt
+Branche « {name} » ¦ Greinin „{name}“
+Cases façon tableau périodique ¦ Reitir eins og lotukerfið
+Cases vides pour les ancêtres à trouver ¦ Tómir reitir fyrir ófundna forfeður
+Ce qu’on dessine ¦ Hvað er teiknað
+Cercles (2 à 4 ensembles) ¦ Hringir (2 til 4 mengi)
+Cercles de parenté autour de {name} (personnes : {n}). ¦ Skyldleikahringir umhverfis {name} (fólk: {n}).
+Chemins trouvés : {n} (F = {f}). ¦ Leiðir fundnar: {n} (F = {f}).
+Chercher les boucles ¦ Leita að lykkjum
+Chiffre (couleur, éventails) ¦ Tala (litur, blævængir)
+Choisis de 2 à 8 ensembles (là : {n}). ¦ Veldu 2 til 8 mengi (núna: {n}).
+Choisis un groupe de noms ou écris un nom. ¦ Veldu nafnahóp eða sláðu inn nafn.
+Choisis un recensement (commune et année). ¦ Veldu manntal (sveitarfélag og ár).
+Choisis une personne (« Depuis l’app ») ou écris les boucles à la main. ¦ Veldu manneskju („Úr forritinu“) eða skrifaðu lykkjurnar inn.
+Coefficient aussi en fraction ¦ Stuðull einnig sem brot
+Coefficient de consanguinité de {name} : F = {f} ¦ Skyldleikastuðull {name}: F = {f}
+Combinaisons montrées (les plus grandes) ¦ Samsetningar sýndar (þær stærstu)
+Combinaisons pas montrées : {n} ¦ Samsetningar ekki sýndar: {n}
+Commune (titre) ¦ Sveitarfélag (fyrirsögn)
+Comparer avec le recensement de ¦ Bera saman við manntal ársins
+Consanguinité de l’ancêtre (%) ¦ Skyldleiki forföðurins (%)
+Couleur de l’écu (sans image) ¦ Litur skjaldar (án myndar)
+Couleur des parts ¦ Litur hluta
+Couleur du côté maternel ¦ Litur móðurættar
+Couleurs des branches ¦ Litir greina
+Couple ¦ Hjón
+Critères de mauvaise forme. ¦ Rangt mótuð skilyrði.
+Côté (paternel, maternel, branches) ¦ Hlið (föðurætt, móðurætt, greinar)
+Côté maternel ¦ Móðurætt
+Côté paternel ¦ Föðurætt
+Date incertaine (fourchette) ¦ Óviss dagsetning (bil)
+Date inconnue ¦ Óþekkt dagsetning
+Dates sous le nom ¦ Dagsetningar undir nafni
+De la famille ¦ Úr fjölskyldunni
+De la famille (oui) ¦ Úr fjölskyldunni (já)
+De la mère vers l’ancêtre ¦ Frá móður til forföður
+Degrés montrés (jusqu’à) ¦ Stig sýnd (allt að)
+Dessin de la fourchette ¦ Teikning bilsins
+Deux éventails ¦ Tveir blævængir
+Deviner d’où vient chaque forme (date et ressemblance) ¦ Giska á uppruna hverrar myndar (dagsetning og líkindi)
+Diagramme de Venn (2 à 8 ensembles) ¦ Venn-mynd (2 til 8 mengi)
+Diagramme de Venn : {names}. ¦ Venn-mynd: {names}.
+Double éventail (ascendants : {up}, descendants : {down}). ¦ Tvöfaldur blævængur (forfeður: {up}, afkomendur: {down}).
+Du père vers l’ancêtre ¦ Frá föður til forföður
+Décédé ou inconnu ¦ Látinn eða óþekkt
+En accordéon (branches qu’on plie) ¦ Harmonikka (greinar sem má fella)
+En cercles (un cercle par degré) ¦ Í hringjum (einn hringur á hvert stig)
+En vie ou non ¦ Á lífi eða ekki
+En {year} (contour) ¦ Árið {year} (útlína)
+Ensemble {x} ¦ Mengi {x}
+Faire ressortir la famille ¦ Draga fram fjölskylduna
+Formes prises dans ta base : {n}. ¦ Myndir úr gagnagrunninum þínum: {n}.
+Groupe de noms ¦ Nafnahópur
+Générations : {n} côté père, {m} côté mère ¦ Kynslóðir: {n} í föðurætt, {m} í móðurætt
+Il faut de 2 à 8 ensembles. ¦ Það þarf 2 til 8 mengi.
+Image (media/…) ¦ Mynd (media/…)
+Initiales du prénom et du nom ¦ Upphafsstafir nafns og eftirnafns
+La branche ¦ Greinin
+La personne étudiée ¦ Manneskjan sem er skoðuð
+Le calcul n’est pas prêt. ¦ Útreikningurinn er ekki tilbúinn.
+Le chemin entre deux personnes ¦ Leiðin milli tveggja manneskja
+Le nom (2 lettres) ¦ Eftirnafnið (2 stafir)
+Le plus proche seulement ¦ Aðeins sá næsti
+Le prénom (2 lettres) ¦ Fornafnið (2 stafir)
+Le recensement de {place} ¦ Manntalið í {place}
+Les 8, 16 ou 32 ancêtres d’une génération, chacun avec son blason ; un écu vide : armoiries à trouver. ¦ 8, 16 eða 32 forfeður einnar kynslóðar, hver með sitt merki; auður skjöldur: merki ófundið.
+Les boucles d’implexe (entre les deux parents) ¦ Lykkjur forfeðrafækkunar (milli foreldra)
+Les boucles d’implexe de {name} ¦ Lykkjur forfeðrafækkunar: {name}
+Les deux parents de cette personne ne sont pas connus. ¦ Báðir foreldrar þessarar manneskju eru ekki þekktir.
+Les ensembles (2 à 8) : A, B, C… H ¦ Mengin (2 til 8): A, B, C… H
+Les formes du nom ¦ Myndir nafnsins
+Les formes du nom {name} ¦ Myndir nafnsins {name}
+Les noms du groupe (ou écrits pareil) et leurs variantes notées, avec leurs années et le nombre d’actes. ¦ Nöfn hópsins (eða eins stafsett) og skráð afbrigði þeirra, með árum og fjölda færslna.
+Les quartiers de {name} ¦ Skjaldarmerki forfeðra: {name}
+Les seize quartiers de {name} ¦ Sextán skjaldarmerki forfeðra: {name}
+Liens pris dans l’app : {n}. ¦ Tengsl úr forritinu: {n}.
+Losange pour les dates exactes ¦ Tígull fyrir nákvæmar dagsetningar
+Montrer le calcul (½ puissance n) ¦ Sýna útreikning (½ í veldinu n)
+Montrer l’incertitude des dates ¦ Sýna óvissu dagsetninga
+Naissances et décès (qui vivait en …) ¦ Fæðingar og andlát (hver lifði árið …)
+Nom inconnu ¦ Óþekkt nafn
+Nom sous l’écu ¦ Nafn undir skildi
+Nom trop long (80 lettres au plus). ¦ Of langt nafn (80 stafir hið mesta).
+Nombre d’actes sous la forme ¦ Fjöldi færslna undir mynd
+Noms les plus portés ¦ Algengustu nöfnin
+N° Sosa ¦ Sosa-nr.
+N° Sosa (ascendants, éventails) ¦ Sosa-nr. (forfeður, blævængir)
+Nœud papillon (père à gauche, mère à droite) ¦ Slaufa (faðir vinstra megin, móðir hægra megin)
+Ordre des combinaisons ¦ Röð samsetninga
+Ou un nom ¦ Eða nafn
+Par nombre d’ensembles ¦ Eftir fjölda mengja
+Parent (descendants, éventails) ¦ Foreldri (afkomendur, blævængir)
+Personne cachée ¦ Falin manneskja
+Personnes recensées : {n} ¦ Fólk í manntalinu: {n}
+Personnes recensées : {n} en {y1}, {m} en {y2} ¦ Fólk í manntalinu: {n} árið {y1}, {m} árið {y2}
+Personnes recensées prises dans ta base : {n}. ¦ Fólk í manntali úr gagnagrunninum þínum: {n}.
+Portraits (arbre dessiné, nœud papillon) ¦ Andlitsmyndir (teiknað tré, slaufa)
+Pyramide du recensement de {year} (personnes : {n}). ¦ Aldurspíramídi manntalsins {year} (fólk: {n}).
+Ressortent : les personnes reliées à une fiche (ou au groupe choisi). ¦ Áhersla á: fólk tengt spjaldi (eða völdum hópi).
+Selon le nombre de descendants ¦ Eftir fjölda afkomenda
+Selon le tableau ¦ Samkvæmt töflunni
+Ses ancêtres au-dessus (place Sosa), ses descendants au-dessous (sous leur parent) ; le chiffre : l’âge au décès. ¦ Forfeður að ofan (Sosa-sæti), afkomendur að neðan (undir foreldri); talan: aldur við andlát.
+Ses ancêtres de la génération choisie (ordre Sosa) et les armoiries reliées à chacun (Listes → Armoiries). ¦ Forfeður valinnar kynslóðar (Sosa-röð) og skjaldarmerki hvers (Listar → Skjaldarmerki).
+Seulement l’ancêtre commun le plus proche ¦ Aðeins næsti sameiginlegi forfaðir
+Sexe inconnu (pas dans la pyramide) : {n} ¦ Óþekkt kyn (ekki í píramídanum): {n}
+Sosa {n} : ancêtre à trouver ¦ Sosa {n}: forfaðir ófundinn
+Source, note ¦ Heimild, athugasemd
+Sources sous la forme ¦ Heimildir undir mynd
+Tableau de quartiers (armoiries des ancêtres) ¦ Skjaldarmerkjatafla forfeðra
+Tableau de quartiers ({n}), armoiries connues : {k}. ¦ Skjaldarmerkjatafla ({n}), þekkt merki: {k}.
+Tableau périodique : ancêtres trouvés {found} / {total} ({pct} %). ¦ Lotukerfi: fundnir forfeður {found} / {total} ({pct} %).
+Taux de recherche (%) ¦ Rannsóknarstig (%)
+Tous les ancêtres répétés ¦ Allir endurteknir forfeður
+Tous les chemins du père et de la mère vers un même ancêtre (filiations biologiques) et le coefficient de consanguinité (méthode de Wright). ¦ Allar leiðir föður og móður til sama forföður (líffræðileg tengsl) og skyldleikastuðullinn (aðferð Wrights).
+Toute la base (qui vivait en …) ¦ Allur gagnagrunnurinn (hver lifði árið …)
+Toute la base (qui vivait l’année choisie) ou un recensement (les âges écrits ce jour-là). ¦ Allur gagnagrunnurinn (hver lifði valið ár) eða manntal (aldur skráður þann dag).
+Toute la famille, un point par couple ¦ Öll fjölskyldan, einn punktur á hver hjón
+Trop de critères. ¦ Of mörg skilyrði.
+Trop d’ensembles. ¦ Of mörg mengi.
+Trouvé chez le notaire (successions, inventaires) ¦ Fannst hjá lögbókanda (dánarbú, skrár)
+Trouvé dans les sources militaires (poilus) ¦ Fannst í herheimildum (hermenn fyrri heimsstyrjaldar)
+Trouvé dans un recensement ¦ Fannst í manntali
+Un chiffre (colonne « Chiffre ») ¦ Tala (dálkurinn „Tala“)
+Un recensement (commune, année) ¦ Manntal (sveitarfélag, ár)
+Un recensement (âges écrits) ¦ Manntal (skráður aldur)
+Une par branche ¦ Einn á hverja grein
+Une par forme ¦ Einn á hverja mynd
+Une seule source : couleur de l’ensemble ¦ Ein heimild: litur mengis
+Une source précise ¦ Ákveðin heimild
+Vérifie le groupe de personnes. ¦ Athugaðu hóp fólks.
+actes : {n} ¦ færslur: {n}
+vient de {name} ¦ kemur frá {name}
+{label} (famille) : {n} ¦ {label} (fjölskylda): {n}
+{names} (seulement) : {n} ¦ {names} (aðeins): {n}
+{name} : armoiries pas encore trouvées ¦ {name}: skjaldarmerki ekki fundið enn
+{name} : {n} en tout ¦ {name}: {n} alls
+{place}, {year} ¦ {place}, {year}
+« vers » : plus ou moins (ans) ¦ „um“: plús/mínus (ár)
+Âge (recensement) ¦ Aldur (manntal)
+Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Skrifa tegund tengsla á línuna (nafn barns…)
+Écrits s’il y a la place ¦ Skrifuð ef pláss er
+Écu vide ¦ Auður skjöldur
+Épaisseur selon le nombre d’actes ¦ Þykkt eftir fjölda færslna
+— Aucun (le nom écrit à côté) — ¦ — Enginn (nafnið við hliðina) —
+— Rien — ¦ — Ekkert —
+🌿 Les formes d’un nom de ma base ¦ 🌿 Myndir nafns í gagnagrunninum mínum
+🔁 Entre les deux parents de… ¦ 🔁 Milli foreldra…
+🔺 Les personnes de ma base ¦ 🔺 Fólkið í gagnagrunninum mínum
+🛡 Les quartiers d’une personne de ma base ¦ 🛡 Skjaldarmerki forfeðra manneskju í grunninum
+Choisis de 2 à 8 ensembles : chaque zone compte les personnes de ces ensembles-là seulement. Dès 5 ensembles : barres croisées. ¦ Veldu 2 til 8 mengi: hvert svæði telur aðeins fólk í þeim mengjum. Frá 5 mengjum: krosssúlur.
+Les témoins, parrains et marraines des actes ; ou toute la famille, un point par couple, reliés par leurs enfants. ¦ Vottar og guðforeldrar í færslum; eða öll fjölskyldan, punktur á hjón, tengd með börnum sínum.
+Nom de l’enfant sur le trait ¦ Nafn barns á línunni
+Par nom de famille ¦ Eftir eftirnafni
+Par siècle (du mariage) ¦ Eftir öld (hjónavígslu)
+Un point par couple ¦ Einn punktur á hjón
+Un point par personne ¦ Einn punktur á manneskju
+🕸 Les liens de ma base ¦ 🕸 Tengslin í gagnagrunninum mínum
+Quartiers ¦ Skjaldarmerki forfeðra

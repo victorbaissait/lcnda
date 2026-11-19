@@ -1,0 +1,232 @@
+fr ¦ ru ¦ uk
+# Zone « diagrammes-lot-b » : diagramme de Lexis, ternaire, chandeliers, courbe avec marge, horizon, dendrogramme, durée des générations, couverture des sources, trajectoires de vie, alluvial (heritage-diagram-lot-b.js et réglages de heritage-diagram-plus/vie/famille.js, heritage-diagrams-render.js)
+=vie ¦ жизнь|жизни|жизней ¦ життя|життя|життів
+=période ¦ период|периода|периодов ¦ період|періоди|періодів
+Célibataire ¦ Холост/не замужем ¦ Неодружений/незаміжня
+Marié(e) ¦ В браке ¦ У шлюбі
+Remarié(e) ¦ Повторно в браке ¦ Повторно в шлюбі
+Veuf ou veuve ¦ Вдовец или вдова ¦ Вдівець або вдова
+Divorcé(e) ¦ В разводе ¦ Розлучений/а
+Décédé(e) ¦ Умер(ла) ¦ Помер(ла)
+État civil inconnu ¦ Семейное положение неизвестно ¦ Сімейний стан невідомий
+Métier inconnu ¦ Профессия неизвестна ¦ Професія невідома
+Pays inconnu ¦ Страна неизвестна ¦ Країна невідома
+Autres états ¦ Другие состояния ¦ Інші стани
+Sexe inconnu ¦ Пол неизвестен ¦ Стать невідома
+Départ (autre commune) ¦ Отъезд (другая коммуна) ¦ Виїзд (інша громада)
+Ajoute des personnes : le nom, la naissance et le décès (années ou dates). ¦ Добавь людей: имя, рождение и смерть (годы или даты). ¦ Додай людей: ім’я, народження і смерть (роки або дати).
+Diagramme de Lexis : {n}, de {a} à {b}. ¦ Диаграмма Лексиса: {n}, с {a} по {b}. ¦ Діаграма Лексіса: {n}, з {a} по {b}.
+Choléra ¦ Холера ¦ Холера
+Guerre de 1870 ¦ Война 1870 года ¦ Війна 1870 року
+Grande Guerre ¦ Первая мировая война ¦ Перша світова війна
+📐 Les vies de ma base ¦ 📐 Жизни в моей базе ¦ 📐 Життя в моїй базі
+Chaque vie devient une diagonale, de la naissance (âge 0) au décès ; les mariages, les naissances des enfants et les départs posés dessus. ¦ Каждая жизнь — диагональ от рождения (возраст 0) до смерти; на ней браки, рождения детей и отъезды. ¦ Кожне життя — діагональ від народження (вік 0) до смерті; на ній шлюби, народження дітей і виїзди.
+Combien de vies au plus ¦ Сколько жизней не больше ¦ Скільки життів щонайбільше
+Une par nom de famille ¦ Один на фамилию ¦ Один на прізвище
+Naissances des enfants ¦ Рождения детей ¦ Народження дітей
+Départs (première commune autre que celle de naissance) ¦ Отъезды (первая коммуна, кроме места рождения) ¦ Виїзди (перша громада, крім місця народження)
+Bandes historiques (guerres, épidémies) ¦ Исторические полосы (войны, эпидемии) ¦ Історичні смуги (війни, епідемії)
+Personne avec une date de naissance dans ce groupe. ¦ Ни у кого в этой группе нет даты рождения. ¦ Ні в кого в цій групі немає дати народження.
+Diagramme de Lexis ¦ Диаграмма Лексиса ¦ Діаграма Лексіса
+Diagramme de Lexis (âge × année : une vie = une diagonale) ¦ Диаграмма Лексиса (возраст × год: жизнь = диагональ) ¦ Діаграма Лексіса (вік × рік: життя = діагональ)
+Les années en bas, les âges à gauche : chaque vie monte en diagonale de sa naissance à son décès ; les mariages, les enfants, les départs et les grandes crises s’y lisent d’un coup d’œil. ¦ Внизу годы, слева возраст: каждая жизнь поднимается по диагонали от рождения до смерти; браки, дети, отъезды и большие кризисы видны сразу. ¦ Унизу роки, ліворуч вік: кожне життя піднімається діагоналлю від народження до смерті; шлюби, діти, виїзди й великі кризи видно одразу.
+Les vies ¦ Жизни ¦ Життя
+Les vies de la famille {name} ¦ Жизни семьи {name} ¦ Життя родини {name}
+Personne (même nom que ci-dessus) ¦ Человек (то же имя, что выше) ¦ Особа (те саме ім’я, що вище)
+Les marques (sur la vie de la personne) ¦ Отметки (на жизни человека) ¦ Позначки (на житті особи)
+Bandes historiques ¦ Исторические полосы ¦ Історичні смуги
+Groupe (couleur) ¦ Группа (цвет) ¦ Група (колір)
+Couleur de chaque groupe (facultatif) ¦ Цвет каждой группы (необязательно) ¦ Колір кожної групи (необов’язково)
+Âge au plus ¦ Возраст не больше ¦ Вік щонайбільше
+Couleur des vies ¦ Цвет жизней ¦ Колір життів
+Homme / femme ¦ Мужчина / женщина ¦ Чоловік / жінка
+Montrer les marques ¦ Показать отметки ¦ Показати позначки
+Taille des marques ¦ Размер отметок ¦ Розмір позначок
+Nom des bandes ¦ Названия полос ¦ Назви смуг
+Diagonales des générations ¦ Диагонали поколений ¦ Діагоналі поколінь
+Nom au bout de chaque vie ¦ Имя в конце каждой жизни ¦ Ім’я в кінці кожного життя
+Épaisseur des vies ¦ Толщина жизней ¦ Товщина життів
+Ajoute des points : un nom et ses trois parts (des nombres ou des %). ¦ Добавь точки: название и три его доли (числа или %). ¦ Додай точки: назву і три її частки (числа або %).
+Part A ¦ Доля A ¦ Частка A
+Part B ¦ Доля B ¦ Частка B
+Part C ¦ Доля C ¦ Частка C
+Diagramme ternaire : {n} ({a}, {b}, {c}). ¦ Тернарная диаграмма: {n} ({a}, {b}, {c}). ¦ Тернарна діаграма: {n} ({a}, {b}, {c}).
+Agriculture ¦ Сельское хозяйство ¦ Сільське господарство
+Artisanat et industrie ¦ Ремёсла и промышленность ¦ Ремесла і промисловість
+Commerce et services ¦ Торговля и услуги ¦ Торгівля і послуги
+Agriculture et forêt ¦ Сельское и лесное хозяйство ¦ Сільське й лісове господарство
+Artisanat ¦ Ремёсла ¦ Ремесла
+Industrie, mines ¦ Промышленность, шахты ¦ Промисловість, шахти
+Transports et mer ¦ Транспорт и море ¦ Транспорт і море
+Services, domestiques ¦ Услуги, прислуга ¦ Послуги, прислуга
+Armée et police ¦ Армия и полиция ¦ Армія і поліція
+Clergé ¦ Духовенство ¦ Духовенство
+Professions libérales, école, administration ¦ Свободные профессии, школа, администрация ¦ Вільні професії, школа, адміністрація
+Rentiers, rangs et statuts ¦ Рантье, сословия и звания ¦ Рантьє, стани й звання
+Au foyer, sans profession ¦ Домохозяйство, без профессии ¦ Домогосподарство, без професії
+Autre métier ¦ Другая профессия ¦ Інша професія
+Tous les autres métiers ¦ Все остальные профессии ¦ Усі інші професії
+🔺 Les métiers de ma base ¦ 🔺 Профессии в моей базе ¦ 🔺 Професії в моїй базі
+Les métiers (fiche, événements « Profession », recensements) rangés en grands secteurs ; un point par commune de naissance, par décennie ou par famille, placé selon ses trois parts. ¦ Профессии (карточка, события «Профессия», переписи) по крупным отраслям; одна точка на место рождения, десятилетие или семью по её трём долям. ¦ Професії (картка, події «Професія», переписи) за великими галузями; одна точка на місце народження, десятиліття або родину за її трьома частками.
+Un point par ¦ Одна точка на ¦ Одна точка на
+Décennie de naissance (reliées dans le temps) ¦ Десятилетие рождения (связаны во времени) ¦ Десятиліття народження (пов’язані в часі)
+Combien de points au plus ¦ Сколько точек не больше ¦ Скільки точок щонайбільше
+Part du haut ¦ Верхняя доля ¦ Верхня частка
+Part de gauche ¦ Левая доля ¦ Ліва частка
+Part de droite ¦ Правая доля ¦ Права частка
+« Tous les autres métiers » ne peut servir qu’une fois. ¦ «Все остальные профессии» можно выбрать только один раз. ¦ «Усі інші професії» можна вибрати лише раз.
+Décennies ¦ Десятилетия ¦ Десятиліття
+Aucun métier connu pour ces personnes. ¦ У этих людей нет известных профессий. ¦ У цих людей немає відомих професій.
+Les métiers de ma base, en trois parts ¦ Профессии моей базы в трёх долях ¦ Професії моєї бази в трьох частках
+Les métiers de trois villages, siècle par siècle ¦ Профессии трёх деревень, век за веком ¦ Професії трьох сіл, століття за століттям
+Diagramme ternaire (trois parts qui font 100 %) ¦ Тернарная диаграмма (три доли, вместе 100 %) ¦ Тернарна діаграма (три частки, разом 100 %)
+Parts ¦ Доли ¦ Частки
+Un triangle : chaque point a trois parts (par exemple agriculture, artisanat, commerce) ; plus il est près d’un coin, plus cette part est grande. ¦ Треугольник: у каждой точки три доли (например, сельское хозяйство, ремёсла, торговля); чем ближе к углу, тем больше эта доля. ¦ Трикутник: кожна точка має три частки (наприклад, сільське господарство, ремесла, торгівля); що ближче до кута, то більша ця частка.
+Les points (trois parts chacun) ¦ Точки (по три доли) ¦ Точки (по три частки)
+Groupe (couleur, points reliés) ¦ Группа (цвет, связанные точки) ¦ Група (колір, пов’язані точки)
+Ordre (année…) ¦ Порядок (год…) ¦ Порядок (рік…)
+Nom de la part du haut ¦ Название верхней доли ¦ Назва верхньої частки
+Nom de la part de gauche ¦ Название левой доли ¦ Назва лівої частки
+Nom de la part de droite ¦ Название правой доли ¦ Назва правої частки
+Couleur du haut ¦ Цвет сверху ¦ Колір угорі
+Couleur de gauche ¦ Цвет слева ¦ Колір ліворуч
+Couleur de droite ¦ Цвет справа ¦ Колір праворуч
+Tous les 10 % ¦ Через каждые 10 % ¦ Через кожні 10 %
+Tous les 20 % ¦ Через каждые 20 % ¦ Через кожні 20 %
+Sans grille ¦ Без сетки ¦ Без сітки
+Une par point ¦ Один на точку ¦ Один на точку
+Selon le total ¦ По сумме ¦ За сумою
+Relier les points d’un groupe dans l’ordre ¦ Соединять точки группы по порядку ¦ З’єднувати точки групи по черзі
+Noms des points ¦ Названия точек ¦ Назви точок
+Ajoute des périodes : la date, le prix d’ouverture, de clôture, le plus bas et le plus haut. ¦ Добавь периоды: дату, цену открытия, закрытия, минимум и максимум. ¦ Додай періоди: дату, ціну відкриття, закриття, мінімум і максимум.
+ouverture ¦ открытие ¦ відкриття
+clôture ¦ закрытие ¦ закриття
+plus bas ¦ минимум ¦ мінімум
+plus haut ¦ максимум ¦ максимум
+Hausse (clôture plus haute) ¦ Рост (закрытие выше) ¦ Зростання (закриття вище)
+Baisse (clôture plus basse) ¦ Падение (закрытие ниже) ¦ Падіння (закриття нижче)
+Moyenne mobile sur {n} périodes ¦ Скользящее среднее за {n} периодов ¦ Ковзне середнє за {n} періодів
+Chandeliers : {n}, de {a} à {b} ({p} %). ¦ Свечи: {n}, с {a} по {b} ({p} %). ¦ Свічки: {n}, з {a} по {b} ({p} %).
+Prix du setier de blé au marché de {name} ¦ Цена сетье пшеницы на рынке {name} ¦ Ціна сетьє пшениці на ринку {name}
+Disette ¦ Недород ¦ Недорід
+Guerre des farines ¦ Мучная война ¦ Борошняна війна
+Chandeliers (prix du blé, mercuriales) ¦ Свечи (цена пшеницы, рыночные цены) ¦ Свічки (ціна пшениці, ринкові ціни)
+Pour chaque période : le prix au début (ouverture), à la fin (clôture), le plus bas et le plus haut. Vert si le prix monte, rouge s’il baisse ; les années de disette en bandes. ¦ Для каждого периода: цена в начале (открытие), в конце (закрытие), минимум и максимум. Зелёный — рост, красный — падение; неурожайные годы полосами. ¦ Для кожного періоду: ціна на початку (відкриття), наприкінці (закриття), мінімум і максимум. Зелений — зростання, червоний — падіння; неврожайні роки смугами.
+Les périodes (date, ouverture, clôture, plus bas, plus haut) ¦ Периоды (дата, открытие, закрытие, минимум, максимум) ¦ Періоди (дата, відкриття, закриття, мінімум, максимум)
+Date ou période ¦ Дата или период ¦ Дата або період
+Plus bas ¦ Минимум ¦ Мінімум
+Plus haut ¦ Максимум ¦ Максимум
+Les années à part (disette, guerre…) ¦ Особые годы (недород, война…) ¦ Особливі роки (недорід, війна…)
+Autre unité (écrite) ¦ Другая единица (вписать) ¦ Інша одиниця (вписати)
+livres ¦ ливров ¦ ліврів
+sols ¦ солей ¦ солів
+deniers ¦ денье ¦ деньє
+Couleur de la hausse ¦ Цвет роста ¦ Колір зростання
+Couleur de la baisse ¦ Цвет падения ¦ Колір падіння
+Hausse en creux (bougie vide) ¦ Рост полым (пустая свеча) ¦ Зростання порожнім (порожня свічка)
+Moyenne mobile (périodes, 0 = non) ¦ Скользящее среднее (периоды, 0 = нет) ¦ Ковзне середнє (періоди, 0 = ні)
+Couleur de la moyenne ¦ Цвет среднего ¦ Колір середнього
+Années à part en bandes ¦ Особые годы полосами ¦ Особливі роки смугами
+Largeur des bougies ¦ Ширина свечей ¦ Ширина свічок
+Âge au premier mariage ¦ Возраст при первом браке ¦ Вік при першому шлюбі
+Âge au premier enfant ¦ Возраст при первом ребёнке ¦ Вік при першій дитині
+± un écart-type ¦ ± одно стандартное отклонение ¦ ± одне стандартне відхилення
+intervalle à 95 % ¦ интервал 95 % ¦ інтервал 95 %
+mes ancêtres ¦ мои предки ¦ мої предки
+📏 Moyenne et marge : {x} ¦ 📏 Среднее и разброс: {x} ¦ 📏 Середнє і розкид: {x}
+Pas assez de personnes datées (au moins 3 par période). ¦ Мало людей с датами (не меньше 3 на период). ¦ Замало людей з датами (щонайменше 3 на період).
+Basse ¦ Нижняя ¦ Нижня
+Haute ¦ Верхняя ¦ Верхня
+{x} : moyenne et marge ¦ {x}: среднее и разброс ¦ {x}: середнє і розкид
+Marge : un écart-type de part et d’autre, par quart de siècle de naissance ¦ Разброс: одно стандартное отклонение в обе стороны, по четвертям века рождения ¦ Розкид: одне стандартне відхилення в обидва боки, за чвертями століття народження
+Marge : intervalle de confiance à 95 % de la moyenne, par quart de siècle de naissance ¦ Разброс: 95-процентный доверительный интервал среднего, по четвертям века рождения ¦ Розкид: 95-відсотковий довірчий інтервал середнього, за чвертями століття народження
+Marge (basse – haute) ¦ Разброс (низ – верх) ¦ Розкид (низ – верх)
+Marge (±) ¦ Разброс (±) ¦ Розкид (±)
+Fourchette (marge autour de la courbe) ¦ Вилка (разброс вокруг кривой) ¦ Діапазон (розкид навколо кривої)
+Deux colonnes : basse et haute ¦ Два столбца: нижний и верхний ¦ Два стовпці: нижній і верхній
+Une colonne ± écart ¦ Один столбец ± отклонение ¦ Один стовпець ± відхилення
+Colonne basse (n°) ¦ Нижний столбец (№) ¦ Нижній стовпець (№)
+Colonne haute (n°) ¦ Верхний столбец (№) ¦ Верхній стовпець (№)
+Colonne de l’écart (n°) ¦ Столбец отклонения (№) ¦ Стовпець відхилення (№)
+Autour de la colonne (n°) ¦ Вокруг столбца (№) ¦ Навколо стовпця (№)
+Opacité de la marge ¦ Непрозрачность разброса ¦ Непрозорість розкиду
+Couleur de la marge ¦ Цвет разброса ¦ Колір розкиду
+Axe : minimum ¦ Ось: минимум ¦ Вісь: мінімум
+Axe : maximum ¦ Ось: максимум ¦ Вісь: максимум
+(axe de droite) ¦ (правая ось) ¦ (права вісь)
+Clôture ¦ Закрытие ¦ Закриття
+{name} : de {a} à {b}, le plus en {peak} ({v}) ¦ {name}: от {a} до {b}, больше всего в {peak} ({v}) ¦ {name}: від {a} до {b}, найбільше у {peak} ({v})
+Le plus bas ¦ Ниже всего ¦ Найнижче
+Le plus haut ¦ Выше всего ¦ Найвище
+Négatif (replié) ¦ Отрицательное (сложено) ¦ Від’ємне (складено)
+Graphique en horizon : {s} séries sur {n} périodes. ¦ Горизонт-график: {s} рядов за {n} периодов. ¦ Горизонт-графік: {s} рядів за {n} періодів.
+Horizon (bandes repliées) ¦ Горизонт (сложенные полосы) ¦ Горизонт (складені смуги)
+Collines ¦ Холмы ¦ Пагорби
+Nombre de couches ¦ Число слоёв ¦ Кількість шарів
+Teinte des négatifs ¦ Оттенок отрицательных ¦ Відтінок від’ємних
+Chevauchement ¦ Перекрытие ¦ Перекриття
+Courbes douces ¦ Плавные кривые ¦ Плавні криві
+Trait blanc autour ¦ Белый контур ¦ Білий контур
+Arbre de regroupement à gauche (dendrogramme) ¦ Дерево группировки слева (дендрограмма) ¦ Дерево групування ліворуч (дендрограма)
+Groupes de couleur ¦ Цветовые группы ¦ Кольорові групи
+Les branches de l’arbre ¦ Ветви дерева ¦ Гілки дерева
+Cacher les noms des correspondances ¦ Скрыть имена совпадений ¦ Сховати імена збігів
+Durée des générations ¦ Длина поколений ¦ Тривалість поколінь
+Durée des générations — {name} ¦ Длина поколений — {name} ¦ Тривалість поколінь — {name}
+Lignée paternelle : une génération = {n} ans en moyenne ¦ Отцовская линия: поколение = в среднем {n} лет ¦ Батьківська лінія: покоління = в середньому {n} років
+Lignée maternelle : une génération = {n} ans en moyenne ¦ Материнская линия: поколение = в среднем {n} лет ¦ Материнська лінія: покоління = в середньому {n} років
+moyenne {n} ans ¦ в среднем {n} лет ¦ в середньому {n} років
+Toutes les naissances du groupe ¦ Все рождения группы ¦ Усі народження групи
+Seulement la lignée paternelle directe (père du père…) ¦ Только прямая отцовская линия (отец отца…) ¦ Лише пряма батьківська лінія (батько батька…)
+Seulement la lignée maternelle directe (mère de la mère…) ¦ Только прямая материнская линия (мать матери…) ¦ Лише пряма материнська лінія (мати матері…)
+Les deux lignées directes ¦ Обе прямые линии ¦ Обидві прямі лінії
+La personne dont on suit les lignées ¦ Человек, чьи линии прослеживаются ¦ Особа, чиї лінії простежуються
+Aucune génération datée dans cette lignée (il faut la naissance de l’enfant et celle du parent). ¦ В этой линии нет датированных поколений (нужны рождение ребёнка и родителя). ¦ У цій лінії немає датованих поколінь (потрібне народження дитини й батька чи матері).
+Génération (lignée) ¦ Поколение (линия) ¦ Покоління (лінія)
+Paternelle ¦ Отцовская ¦ Батьківська
+Maternelle ¦ Материнская ¦ Материнська
+Relier les points d’une lignée ¦ Соединять точки линии ¦ З’єднувати точки лінії
+Ligne de repère ¦ Опорная линия ¦ Опорна лінія
+Les générations (lignées) ¦ Поколения (линии) ¦ Покоління (лінії)
+Pas attendu ¦ Не ожидается ¦ Не очікується
+Manquant ¦ Нет ¦ Немає
+Ajoute des ancêtres : le numéro Sosa, le nom et, pour chaque acte, sourcé, sans source ou manquant. ¦ Добавь предков: номер Сосы, имя и для каждого акта — с источником, без источника или нет. ¦ Додай предків: номер Соси, ім’я і для кожного акта — з джерелом, без джерела або немає.
+Une ligne par ancêtre ¦ Одна строка на предка ¦ Один рядок на предка
+Une ligne par ancêtre (+ recensements, notaire, militaire) ¦ Одна строка на предка (+ переписи, нотариус, армия) ¦ Один рядок на предка (+ переписи, нотаріус, армія)
+Fiches militaires ¦ Военные карточки ¦ Військові картки
+Colonnes en plus ¦ Дополнительные столбцы ¦ Додаткові стовпці
+Recensement, notaire, militaire ¦ Перепись, нотариус, армия ¦ Перепис, нотаріус, армія
+Recensement seulement ¦ Только перепись ¦ Лише перепис
+Les trous d’abord ¦ Сначала пробелы ¦ Спершу прогалини
+Par numéro Sosa ¦ По номеру Сосы ¦ За номером Соси
+Ancêtres au plus ¦ Предков не больше ¦ Предків щонайбільше
+Axe ¦ Ось ¦ Вісь
+Ce qu’on suit ¦ Что прослеживаем ¦ Що простежуємо
+L’état civil ¦ Семейное положение ¦ Сімейний стан
+L’état civil (célibataire, marié, veuf…) : trajectoires de vie ¦ Семейное положение (холост, в браке, вдовец…): жизненные пути ¦ Сімейний стан (неодружений, у шлюбі, вдівець…): життєві шляхи
+La commune ¦ Коммуна ¦ Громада
+Les lieux de vie ¦ Места жизни ¦ Місця життя
+Un groupe de personnes (critères) ¦ Группа людей (критерии) ¦ Група людей (критерії)
+Trajectoires de vie ¦ Жизненные пути ¦ Життєві шляхи
+Trajectoires de vie de {n}. ¦ Жизненные пути: {n}. ¦ Життєві шляхи: {n}.
+Métiers au fil de la vie de {n}. ¦ Профессии на протяжении жизни: {n}. ¦ Професії протягом життя: {n}.
+Les métiers au fil de la vie ¦ Профессии на протяжении жизни ¦ Професії протягом життя
+Les mêmes personnes à plusieurs âges (20, 40, 60 ans…) ¦ Те же люди в разном возрасте (20, 40, 60…) ¦ Ті самі люди в різному віці (20, 40, 60…)
+Âges des colonnes ¦ Возраст столбцов ¦ Вік стовпців
+À {n} ans ¦ В {n} лет ¦ У {n} років
+L’état civil des mêmes personnes à {a} ans ¦ Семейное положение тех же людей в {a} лет ¦ Сімейний стан тих самих людей у {a} років
+Où vivaient les mêmes personnes à {a} ans ¦ Где жили те же люди в {a} лет ¦ Де жили ті самі люди у {a} років
+Le métier des mêmes personnes à {a} ans ¦ Профессия тех же людей в {a} лет ¦ Професія тих самих людей у {a} років
+Le même qu’à l’âge d’avant — {list} ¦ То же, что в предыдущем возрасте — {list} ¦ Те саме, що в попередньому віці — {list}
+Les mêmes personnes à {n} âges : {l}. ¦ Те же люди в {n} возрастах: {l}. ¦ Ті самі люди в {n} віках: {l}.
+En % de la colonne (au lieu des nombres) ¦ В % столбца (вместо чисел) ¦ У % стовпця (замість чисел)
+État civil (trajectoires de vie) ¦ Семейное положение (жизненные пути) ¦ Сімейний стан (життєві шляхи)
+Naissance (pour l’axe des âges) ¦ Рождение (для оси возраста) ¦ Народження (для осі віку)
+Début (année ou âge, vide = auto) ¦ Начало (год или возраст, пусто = авто) ¦ Початок (рік або вік, порожньо = авто)
+Fin (année ou âge, vide = auto) ¦ Конец (год или возраст, пусто = авто) ¦ Кінець (рік або вік, порожньо = авто)
+Par durée de vie ¦ По продолжительности жизни ¦ За тривалістю життя
+Par état à 50 ans ¦ По положению в 50 лет ¦ За станом у 50 років
+âge (années) ¦ возраст (лет) ¦ вік (років)
+Vérifie le groupe de personnes et la période. ¦ Проверь группу людей и период. ¦ Перевір групу людей і період.
+{n} pris dans ta base. ¦ {n} взято из твоей базы. ¦ {n} взято з твоєї бази.
+{n} prises dans ta base. ¦ {n} взято из твоей базы. ¦ {n} взято з твоєї бази.

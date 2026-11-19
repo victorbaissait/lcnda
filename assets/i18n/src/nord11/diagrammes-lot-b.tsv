@@ -1,0 +1,232 @@
+fr ¦ vi ¦ id
+# Zone « diagrammes-lot-b » : diagramme de Lexis, ternaire, chandeliers, courbe avec marge, horizon, dendrogramme, durée des générations, couverture des sources, trajectoires de vie, alluvial (heritage-diagram-lot-b.js et réglages de heritage-diagram-plus/vie/famille.js, heritage-diagrams-render.js)
+=vie ¦ cuộc đời ¦ kehidupan
+=période ¦ giai đoạn ¦ periode
+Célibataire ¦ Độc thân ¦ Lajang
+Marié(e) ¦ Đã kết hôn ¦ Menikah
+Remarié(e) ¦ Tái hôn ¦ Menikah lagi
+Veuf ou veuve ¦ Góa ¦ Duda atau janda
+Divorcé(e) ¦ Đã ly hôn ¦ Bercerai
+Décédé(e) ¦ Đã mất ¦ Meninggal
+État civil inconnu ¦ Tình trạng hôn nhân không rõ ¦ Status pernikahan tidak diketahui
+Métier inconnu ¦ Nghề không rõ ¦ Pekerjaan tidak diketahui
+Pays inconnu ¦ Quốc gia không rõ ¦ Negara tidak diketahui
+Autres états ¦ Tình trạng khác ¦ Status lain
+Sexe inconnu ¦ Giới tính không rõ ¦ Jenis kelamin tidak diketahui
+Départ (autre commune) ¦ Rời đi (xã khác) ¦ Pindah (desa lain)
+Ajoute des personnes : le nom, la naissance et le décès (années ou dates). ¦ Thêm người: tên, ngày sinh và ngày mất (năm hoặc ngày). ¦ Tambahkan orang: nama, kelahiran dan kematian (tahun atau tanggal).
+Diagramme de Lexis : {n}, de {a} à {b}. ¦ Biểu đồ Lexis: {n}, từ {a} đến {b}. ¦ Diagram Lexis: {n}, dari {a} sampai {b}.
+Choléra ¦ Dịch tả ¦ Kolera
+Guerre de 1870 ¦ Chiến tranh 1870 ¦ Perang 1870
+Grande Guerre ¦ Đại chiến ¦ Perang Besar
+📐 Les vies de ma base ¦ 📐 Các cuộc đời trong cơ sở dữ liệu ¦ 📐 Kehidupan di basis data saya
+Chaque vie devient une diagonale, de la naissance (âge 0) au décès ; les mariages, les naissances des enfants et les départs posés dessus. ¦ Mỗi cuộc đời là một đường chéo, từ lúc sinh (0 tuổi) đến lúc mất; trên đó có hôn nhân, con cái chào đời và những lần rời đi. ¦ Setiap kehidupan menjadi diagonal, dari kelahiran (usia 0) sampai kematian; dengan pernikahan, kelahiran anak dan kepindahan di atasnya.
+Combien de vies au plus ¦ Tối đa bao nhiêu cuộc đời ¦ Paling banyak berapa kehidupan
+Une par nom de famille ¦ Một màu cho mỗi họ ¦ Satu per nama keluarga
+Naissances des enfants ¦ Con cái chào đời ¦ Kelahiran anak
+Départs (première commune autre que celle de naissance) ¦ Rời đi (xã đầu tiên khác nơi sinh) ¦ Kepindahan (desa pertama selain tempat lahir)
+Bandes historiques (guerres, épidémies) ¦ Dải lịch sử (chiến tranh, dịch bệnh) ¦ Pita sejarah (perang, wabah)
+Personne avec une date de naissance dans ce groupe. ¦ Không ai trong nhóm này có ngày sinh. ¦ Tidak ada yang memiliki tanggal lahir di grup ini.
+Diagramme de Lexis ¦ Biểu đồ Lexis ¦ Diagram Lexis
+Diagramme de Lexis (âge × année : une vie = une diagonale) ¦ Biểu đồ Lexis (tuổi × năm: một đời = một đường chéo) ¦ Diagram Lexis (usia × tahun: satu kehidupan = satu diagonal)
+Les années en bas, les âges à gauche : chaque vie monte en diagonale de sa naissance à son décès ; les mariages, les enfants, les départs et les grandes crises s’y lisent d’un coup d’œil. ¦ Năm ở dưới, tuổi ở bên trái: mỗi cuộc đời đi chéo lên từ lúc sinh đến lúc mất; hôn nhân, con cái, những lần rời đi và các khủng hoảng lớn hiện ra ngay. ¦ Tahun di bawah, usia di kiri: setiap kehidupan naik secara diagonal dari lahir sampai wafat; pernikahan, anak, kepindahan dan krisis besar terbaca sekilas.
+Les vies ¦ Các cuộc đời ¦ Kehidupan
+Les vies de la famille {name} ¦ Các cuộc đời của gia đình {name} ¦ Kehidupan keluarga {name}
+Personne (même nom que ci-dessus) ¦ Người (cùng tên như trên) ¦ Orang (nama sama seperti di atas)
+Les marques (sur la vie de la personne) ¦ Các dấu (trên cuộc đời của người đó) ¦ Tanda (pada kehidupan orang itu)
+Bandes historiques ¦ Dải lịch sử ¦ Pita sejarah
+Groupe (couleur) ¦ Nhóm (màu) ¦ Grup (warna)
+Couleur de chaque groupe (facultatif) ¦ Màu của từng nhóm (tùy chọn) ¦ Warna tiap grup (opsional)
+Âge au plus ¦ Tuổi tối đa ¦ Usia paling tinggi
+Couleur des vies ¦ Màu các cuộc đời ¦ Warna kehidupan
+Homme / femme ¦ Nam / nữ ¦ Laki-laki / perempuan
+Montrer les marques ¦ Hiện các dấu ¦ Tampilkan tanda
+Taille des marques ¦ Cỡ dấu ¦ Ukuran tanda
+Nom des bandes ¦ Tên các dải ¦ Nama pita
+Diagonales des générations ¦ Đường chéo thế hệ ¦ Diagonal generasi
+Nom au bout de chaque vie ¦ Tên ở cuối mỗi cuộc đời ¦ Nama di ujung tiap kehidupan
+Épaisseur des vies ¦ Độ dày các cuộc đời ¦ Ketebalan kehidupan
+Ajoute des points : un nom et ses trois parts (des nombres ou des %). ¦ Thêm điểm: một tên và ba phần của nó (số hoặc %). ¦ Tambahkan titik: nama dan tiga bagiannya (angka atau %).
+Part A ¦ Phần A ¦ Bagian A
+Part B ¦ Phần B ¦ Bagian B
+Part C ¦ Phần C ¦ Bagian C
+Diagramme ternaire : {n} ({a}, {b}, {c}). ¦ Biểu đồ tam giác: {n} ({a}, {b}, {c}). ¦ Diagram terner: {n} ({a}, {b}, {c}).
+Agriculture ¦ Nông nghiệp ¦ Pertanian
+Artisanat et industrie ¦ Thủ công và công nghiệp ¦ Kerajinan dan industri
+Commerce et services ¦ Thương mại và dịch vụ ¦ Perdagangan dan jasa
+Agriculture et forêt ¦ Nông lâm nghiệp ¦ Pertanian dan kehutanan
+Artisanat ¦ Thủ công ¦ Kerajinan
+Industrie, mines ¦ Công nghiệp, mỏ ¦ Industri, tambang
+Transports et mer ¦ Vận tải và biển ¦ Transportasi dan laut
+Services, domestiques ¦ Dịch vụ, người ở ¦ Jasa, pembantu
+Armée et police ¦ Quân đội và cảnh sát ¦ Tentara dan polisi
+Clergé ¦ Giáo sĩ ¦ Rohaniwan
+Professions libérales, école, administration ¦ Nghề tự do, trường học, hành chính ¦ Profesi bebas, sekolah, administrasi
+Rentiers, rangs et statuts ¦ Người sống bằng lợi tức, tước vị và địa vị ¦ Pemilik rente, pangkat dan status
+Au foyer, sans profession ¦ Ở nhà, không nghề ¦ Di rumah, tanpa pekerjaan
+Autre métier ¦ Nghề khác ¦ Pekerjaan lain
+Tous les autres métiers ¦ Tất cả các nghề khác ¦ Semua pekerjaan lain
+🔺 Les métiers de ma base ¦ 🔺 Nghề nghiệp trong cơ sở dữ liệu ¦ 🔺 Pekerjaan di basis data saya
+Les métiers (fiche, événements « Profession », recensements) rangés en grands secteurs ; un point par commune de naissance, par décennie ou par famille, placé selon ses trois parts. ¦ Nghề nghiệp (hồ sơ, sự kiện “Nghề nghiệp”, điều tra dân số) xếp thành các ngành lớn; mỗi xã nơi sinh, thập kỷ hoặc gia đình là một điểm, đặt theo ba phần của nó. ¦ Pekerjaan (kartu, peristiwa “Pekerjaan”, sensus) dikelompokkan dalam sektor besar; satu titik per tempat lahir, dekade atau keluarga, diletakkan menurut tiga bagiannya.
+Un point par ¦ Một điểm cho mỗi ¦ Satu titik per
+Décennie de naissance (reliées dans le temps) ¦ Thập kỷ sinh (nối theo thời gian) ¦ Dekade kelahiran (terhubung dalam waktu)
+Combien de points au plus ¦ Tối đa bao nhiêu điểm ¦ Paling banyak berapa titik
+Part du haut ¦ Phần trên ¦ Bagian atas
+Part de gauche ¦ Phần trái ¦ Bagian kiri
+Part de droite ¦ Phần phải ¦ Bagian kanan
+« Tous les autres métiers » ne peut servir qu’une fois. ¦ “Tất cả các nghề khác” chỉ dùng được một lần. ¦ “Semua pekerjaan lain” hanya bisa dipakai sekali.
+Décennies ¦ Các thập kỷ ¦ Dekade
+Aucun métier connu pour ces personnes. ¦ Không có nghề nào được biết cho những người này. ¦ Tidak ada pekerjaan yang diketahui untuk orang-orang ini.
+Les métiers de ma base, en trois parts ¦ Nghề nghiệp trong cơ sở dữ liệu, chia ba phần ¦ Pekerjaan di basis data saya, dalam tiga bagian
+Les métiers de trois villages, siècle par siècle ¦ Nghề nghiệp của ba làng, qua từng thế kỷ ¦ Pekerjaan tiga desa, abad demi abad
+Diagramme ternaire (trois parts qui font 100 %) ¦ Biểu đồ tam giác (ba phần cộng lại 100 %) ¦ Diagram terner (tiga bagian berjumlah 100 %)
+Parts ¦ Phần ¦ Bagian
+Un triangle : chaque point a trois parts (par exemple agriculture, artisanat, commerce) ; plus il est près d’un coin, plus cette part est grande. ¦ Một tam giác: mỗi điểm có ba phần (ví dụ nông nghiệp, thủ công, thương mại); càng gần một góc thì phần đó càng lớn. ¦ Segitiga: setiap titik punya tiga bagian (misalnya pertanian, kerajinan, perdagangan); makin dekat ke sudut, makin besar bagian itu.
+Les points (trois parts chacun) ¦ Các điểm (mỗi điểm ba phần) ¦ Titik (masing-masing tiga bagian)
+Groupe (couleur, points reliés) ¦ Nhóm (màu, các điểm được nối) ¦ Grup (warna, titik terhubung)
+Ordre (année…) ¦ Thứ tự (năm…) ¦ Urutan (tahun…)
+Nom de la part du haut ¦ Tên phần trên ¦ Nama bagian atas
+Nom de la part de gauche ¦ Tên phần trái ¦ Nama bagian kiri
+Nom de la part de droite ¦ Tên phần phải ¦ Nama bagian kanan
+Couleur du haut ¦ Màu phía trên ¦ Warna atas
+Couleur de gauche ¦ Màu bên trái ¦ Warna kiri
+Couleur de droite ¦ Màu bên phải ¦ Warna kanan
+Tous les 10 % ¦ Mỗi 10 % ¦ Setiap 10 %
+Tous les 20 % ¦ Mỗi 20 % ¦ Setiap 20 %
+Sans grille ¦ Không lưới ¦ Tanpa kisi
+Une par point ¦ Một màu cho mỗi điểm ¦ Satu per titik
+Selon le total ¦ Theo tổng ¦ Menurut total
+Relier les points d’un groupe dans l’ordre ¦ Nối các điểm của một nhóm theo thứ tự ¦ Hubungkan titik satu grup secara berurutan
+Noms des points ¦ Tên các điểm ¦ Nama titik
+Ajoute des périodes : la date, le prix d’ouverture, de clôture, le plus bas et le plus haut. ¦ Thêm giai đoạn: ngày, giá mở cửa, đóng cửa, thấp nhất và cao nhất. ¦ Tambahkan periode: tanggal, harga pembukaan, penutupan, terendah dan tertinggi.
+ouverture ¦ mở cửa ¦ pembukaan
+clôture ¦ đóng cửa ¦ penutupan
+plus bas ¦ thấp nhất ¦ terendah
+plus haut ¦ cao nhất ¦ tertinggi
+Hausse (clôture plus haute) ¦ Tăng (đóng cửa cao hơn) ¦ Naik (penutupan lebih tinggi)
+Baisse (clôture plus basse) ¦ Giảm (đóng cửa thấp hơn) ¦ Turun (penutupan lebih rendah)
+Moyenne mobile sur {n} périodes ¦ Trung bình trượt trên {n} giai đoạn ¦ Rata-rata bergerak {n} periode
+Chandeliers : {n}, de {a} à {b} ({p} %). ¦ Nến: {n}, từ {a} đến {b} ({p} %). ¦ Lilin: {n}, dari {a} sampai {b} ({p} %).
+Prix du setier de blé au marché de {name} ¦ Giá một đấu lúa mì ở chợ {name} ¦ Harga satu takar gandum di pasar {name}
+Disette ¦ Thiếu đói ¦ Paceklik
+Guerre des farines ¦ Cuộc chiến bột mì ¦ Perang Tepung
+Chandeliers (prix du blé, mercuriales) ¦ Nến (giá lúa mì, bảng giá chợ) ¦ Lilin (harga gandum, daftar harga pasar)
+Pour chaque période : le prix au début (ouverture), à la fin (clôture), le plus bas et le plus haut. Vert si le prix monte, rouge s’il baisse ; les années de disette en bandes. ¦ Mỗi giai đoạn: giá lúc đầu (mở cửa), lúc cuối (đóng cửa), thấp nhất và cao nhất. Xanh nếu giá tăng, đỏ nếu giảm; những năm thiếu đói thành dải. ¦ Untuk tiap periode: harga di awal (pembukaan), di akhir (penutupan), terendah dan tertinggi. Hijau bila naik, merah bila turun; tahun paceklik sebagai pita.
+Les périodes (date, ouverture, clôture, plus bas, plus haut) ¦ Các giai đoạn (ngày, mở cửa, đóng cửa, thấp nhất, cao nhất) ¦ Periode (tanggal, pembukaan, penutupan, terendah, tertinggi)
+Date ou période ¦ Ngày hoặc giai đoạn ¦ Tanggal atau periode
+Plus bas ¦ Thấp nhất ¦ Terendah
+Plus haut ¦ Cao nhất ¦ Tertinggi
+Les années à part (disette, guerre…) ¦ Những năm đặc biệt (thiếu đói, chiến tranh…) ¦ Tahun khusus (paceklik, perang…)
+Autre unité (écrite) ¦ Đơn vị khác (ghi tay) ¦ Satuan lain (ditulis)
+livres ¦ livre ¦ livre
+sols ¦ sol ¦ sol
+deniers ¦ denier ¦ denier
+Couleur de la hausse ¦ Màu khi tăng ¦ Warna naik
+Couleur de la baisse ¦ Màu khi giảm ¦ Warna turun
+Hausse en creux (bougie vide) ¦ Tăng rỗng ruột (nến trống) ¦ Naik berongga (lilin kosong)
+Moyenne mobile (périodes, 0 = non) ¦ Trung bình trượt (giai đoạn, 0 = không) ¦ Rata-rata bergerak (periode, 0 = tidak)
+Couleur de la moyenne ¦ Màu đường trung bình ¦ Warna rata-rata
+Années à part en bandes ¦ Năm đặc biệt thành dải ¦ Tahun khusus sebagai pita
+Largeur des bougies ¦ Độ rộng nến ¦ Lebar lilin
+Âge au premier mariage ¦ Tuổi kết hôn lần đầu ¦ Usia saat menikah pertama
+Âge au premier enfant ¦ Tuổi khi có con đầu lòng ¦ Usia saat anak pertama
+± un écart-type ¦ ± một độ lệch chuẩn ¦ ± satu simpangan baku
+intervalle à 95 % ¦ khoảng 95 % ¦ interval 95 %
+mes ancêtres ¦ tổ tiên của tôi ¦ leluhur saya
+📏 Moyenne et marge : {x} ¦ 📏 Trung bình và biên: {x} ¦ 📏 Rata-rata dan margin: {x}
+Pas assez de personnes datées (au moins 3 par période). ¦ Không đủ người có ngày tháng (ít nhất 3 mỗi giai đoạn). ¦ Orang bertanggal kurang (minimal 3 per periode).
+Basse ¦ Thấp ¦ Rendah
+Haute ¦ Cao ¦ Tinggi
+{x} : moyenne et marge ¦ {x}: trung bình và biên ¦ {x}: rata-rata dan margin
+Marge : un écart-type de part et d’autre, par quart de siècle de naissance ¦ Biên: một độ lệch chuẩn mỗi bên, theo từng phần tư thế kỷ sinh ¦ Margin: satu simpangan baku di kedua sisi, per seperempat abad kelahiran
+Marge : intervalle de confiance à 95 % de la moyenne, par quart de siècle de naissance ¦ Biên: khoảng tin cậy 95 % của trung bình, theo từng phần tư thế kỷ sinh ¦ Margin: selang kepercayaan 95 % rata-rata, per seperempat abad kelahiran
+Marge (basse – haute) ¦ Biên (thấp – cao) ¦ Margin (rendah – tinggi)
+Marge (±) ¦ Biên (±) ¦ Margin (±)
+Fourchette (marge autour de la courbe) ¦ Khoảng (biên quanh đường cong) ¦ Rentang (margin di sekitar kurva)
+Deux colonnes : basse et haute ¦ Hai cột: thấp và cao ¦ Dua kolom: rendah dan tinggi
+Une colonne ± écart ¦ Một cột ± độ lệch ¦ Satu kolom ± simpangan
+Colonne basse (n°) ¦ Cột thấp (số) ¦ Kolom rendah (no.)
+Colonne haute (n°) ¦ Cột cao (số) ¦ Kolom tinggi (no.)
+Colonne de l’écart (n°) ¦ Cột độ lệch (số) ¦ Kolom simpangan (no.)
+Autour de la colonne (n°) ¦ Quanh cột (số) ¦ Di sekitar kolom (no.)
+Opacité de la marge ¦ Độ đục của biên ¦ Opasitas margin
+Couleur de la marge ¦ Màu biên ¦ Warna margin
+Axe : minimum ¦ Trục: tối thiểu ¦ Sumbu: minimum
+Axe : maximum ¦ Trục: tối đa ¦ Sumbu: maksimum
+(axe de droite) ¦ (trục phải) ¦ (sumbu kanan)
+Clôture ¦ Đóng cửa ¦ Penutupan
+{name} : de {a} à {b}, le plus en {peak} ({v}) ¦ {name}: từ {a} đến {b}, cao nhất vào {peak} ({v}) ¦ {name}: dari {a} sampai {b}, tertinggi pada {peak} ({v})
+Le plus bas ¦ Thấp nhất ¦ Terendah
+Le plus haut ¦ Cao nhất ¦ Tertinggi
+Négatif (replié) ¦ Âm (gập lại) ¦ Negatif (dilipat)
+Graphique en horizon : {s} séries sur {n} périodes. ¦ Biểu đồ đường chân trời: {s} chuỗi qua {n} giai đoạn. ¦ Grafik cakrawala: {s} seri dalam {n} periode.
+Horizon (bandes repliées) ¦ Đường chân trời (dải gập) ¦ Cakrawala (pita dilipat)
+Collines ¦ Đồi ¦ Bukit
+Nombre de couches ¦ Số lớp ¦ Jumlah lapisan
+Teinte des négatifs ¦ Sắc độ giá trị âm ¦ Warna nilai negatif
+Chevauchement ¦ Chồng lấn ¦ Tumpang tindih
+Courbes douces ¦ Đường cong mượt ¦ Kurva halus
+Trait blanc autour ¦ Viền trắng ¦ Garis tepi putih
+Arbre de regroupement à gauche (dendrogramme) ¦ Cây phân cụm bên trái (dendrogram) ¦ Pohon pengelompokan di kiri (dendrogram)
+Groupes de couleur ¦ Nhóm màu ¦ Grup warna
+Les branches de l’arbre ¦ Các nhánh của cây ¦ Cabang pohon
+Cacher les noms des correspondances ¦ Ẩn tên các kết quả trùng khớp ¦ Sembunyikan nama kecocokan
+Durée des générations ¦ Độ dài thế hệ ¦ Lama generasi
+Durée des générations — {name} ¦ Độ dài thế hệ — {name} ¦ Lama generasi — {name}
+Lignée paternelle : une génération = {n} ans en moyenne ¦ Dòng cha: một thế hệ = trung bình {n} năm ¦ Garis ayah: satu generasi = rata-rata {n} tahun
+Lignée maternelle : une génération = {n} ans en moyenne ¦ Dòng mẹ: một thế hệ = trung bình {n} năm ¦ Garis ibu: satu generasi = rata-rata {n} tahun
+moyenne {n} ans ¦ trung bình {n} năm ¦ rata-rata {n} tahun
+Toutes les naissances du groupe ¦ Tất cả các lần sinh trong nhóm ¦ Semua kelahiran dalam grup
+Seulement la lignée paternelle directe (père du père…) ¦ Chỉ dòng cha trực hệ (cha của cha…) ¦ Hanya garis ayah langsung (ayah dari ayah…)
+Seulement la lignée maternelle directe (mère de la mère…) ¦ Chỉ dòng mẹ trực hệ (mẹ của mẹ…) ¦ Hanya garis ibu langsung (ibu dari ibu…)
+Les deux lignées directes ¦ Cả hai dòng trực hệ ¦ Kedua garis langsung
+La personne dont on suit les lignées ¦ Người mà ta theo dõi các dòng ¦ Orang yang garisnya diikuti
+Aucune génération datée dans cette lignée (il faut la naissance de l’enfant et celle du parent). ¦ Không có thế hệ nào có ngày tháng trong dòng này (cần ngày sinh của con và của cha/mẹ). ¦ Tidak ada generasi bertanggal di garis ini (perlu kelahiran anak dan orang tuanya).
+Génération (lignée) ¦ Thế hệ (dòng) ¦ Generasi (garis)
+Paternelle ¦ Bên cha ¦ Ayah
+Maternelle ¦ Bên mẹ ¦ Ibu
+Relier les points d’une lignée ¦ Nối các điểm của một dòng ¦ Hubungkan titik satu garis
+Ligne de repère ¦ Đường tham chiếu ¦ Garis acuan
+Les générations (lignées) ¦ Các thế hệ (dòng) ¦ Generasi (garis)
+Pas attendu ¦ Không cần ¦ Tidak diharapkan
+Manquant ¦ Còn thiếu ¦ Belum ada
+Ajoute des ancêtres : le numéro Sosa, le nom et, pour chaque acte, sourcé, sans source ou manquant. ¦ Thêm tổ tiên: số Sosa, tên và với mỗi giấy tờ: có nguồn, không nguồn hoặc còn thiếu. ¦ Tambahkan leluhur: nomor Sosa, nama dan untuk tiap akta: bersumber, tanpa sumber atau belum ada.
+Une ligne par ancêtre ¦ Mỗi tổ tiên một dòng ¦ Satu baris per leluhur
+Une ligne par ancêtre (+ recensements, notaire, militaire) ¦ Mỗi tổ tiên một dòng (+ điều tra dân số, công chứng, quân đội) ¦ Satu baris per leluhur (+ sensus, notaris, militer)
+Fiches militaires ¦ Hồ sơ quân đội ¦ Catatan militer
+Colonnes en plus ¦ Cột thêm ¦ Kolom tambahan
+Recensement, notaire, militaire ¦ Điều tra dân số, công chứng, quân đội ¦ Sensus, notaris, militer
+Recensement seulement ¦ Chỉ điều tra dân số ¦ Hanya sensus
+Les trous d’abord ¦ Chỗ trống trước ¦ Celah dulu
+Par numéro Sosa ¦ Theo số Sosa ¦ Menurut nomor Sosa
+Ancêtres au plus ¦ Tổ tiên tối đa ¦ Leluhur paling banyak
+Axe ¦ Trục ¦ Sumbu
+Ce qu’on suit ¦ Theo dõi gì ¦ Yang diikuti
+L’état civil ¦ Tình trạng hôn nhân ¦ Status pernikahan
+L’état civil (célibataire, marié, veuf…) : trajectoires de vie ¦ Tình trạng hôn nhân (độc thân, kết hôn, góa…): đường đời ¦ Status pernikahan (lajang, menikah, duda…): lintasan hidup
+La commune ¦ Xã ¦ Desa
+Les lieux de vie ¦ Nơi sống ¦ Tempat tinggal
+Un groupe de personnes (critères) ¦ Một nhóm người (tiêu chí) ¦ Sekelompok orang (kriteria)
+Trajectoires de vie ¦ Đường đời ¦ Lintasan hidup
+Trajectoires de vie de {n}. ¦ Đường đời của {n}. ¦ Lintasan hidup {n}.
+Métiers au fil de la vie de {n}. ¦ Nghề nghiệp qua cuộc đời của {n}. ¦ Pekerjaan sepanjang hidup {n}.
+Les métiers au fil de la vie ¦ Nghề nghiệp qua cuộc đời ¦ Pekerjaan sepanjang hidup
+Les mêmes personnes à plusieurs âges (20, 40, 60 ans…) ¦ Cùng những người ở nhiều độ tuổi (20, 40, 60…) ¦ Orang yang sama pada beberapa usia (20, 40, 60…)
+Âges des colonnes ¦ Tuổi của các cột ¦ Usia kolom
+À {n} ans ¦ Lúc {n} tuổi ¦ Pada usia {n}
+L’état civil des mêmes personnes à {a} ans ¦ Tình trạng hôn nhân của cùng những người lúc {a} tuổi ¦ Status pernikahan orang yang sama pada usia {a}
+Où vivaient les mêmes personnes à {a} ans ¦ Nơi cùng những người sống lúc {a} tuổi ¦ Tempat tinggal orang yang sama pada usia {a}
+Le métier des mêmes personnes à {a} ans ¦ Nghề của cùng những người lúc {a} tuổi ¦ Pekerjaan orang yang sama pada usia {a}
+Le même qu’à l’âge d’avant — {list} ¦ Giống như ở độ tuổi trước — {list} ¦ Sama dengan usia sebelumnya — {list}
+Les mêmes personnes à {n} âges : {l}. ¦ Cùng những người ở {n} độ tuổi: {l}. ¦ Orang yang sama pada {n} usia: {l}.
+En % de la colonne (au lieu des nombres) ¦ Theo % của cột (thay cho số) ¦ Dalam % kolom (bukan angka)
+État civil (trajectoires de vie) ¦ Tình trạng hôn nhân (đường đời) ¦ Status pernikahan (lintasan hidup)
+Naissance (pour l’axe des âges) ¦ Ngày sinh (cho trục tuổi) ¦ Kelahiran (untuk sumbu usia)
+Début (année ou âge, vide = auto) ¦ Bắt đầu (năm hoặc tuổi, trống = tự động) ¦ Awal (tahun atau usia, kosong = otomatis)
+Fin (année ou âge, vide = auto) ¦ Kết thúc (năm hoặc tuổi, trống = tự động) ¦ Akhir (tahun atau usia, kosong = otomatis)
+Par durée de vie ¦ Theo tuổi thọ ¦ Menurut lama hidup
+Par état à 50 ans ¦ Theo tình trạng lúc 50 tuổi ¦ Menurut status pada usia 50
+âge (années) ¦ tuổi (năm) ¦ usia (tahun)
+Vérifie le groupe de personnes et la période. ¦ Kiểm tra nhóm người và giai đoạn. ¦ Periksa grup orang dan periodenya.
+{n} pris dans ta base. ¦ Đã lấy {n} từ cơ sở dữ liệu của bạn. ¦ {n} diambil dari basis datamu.
+{n} prises dans ta base. ¦ Đã lấy {n} từ cơ sở dữ liệu của bạn. ¦ {n} diambil dari basis datamu.

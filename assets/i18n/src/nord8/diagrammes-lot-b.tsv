@@ -1,0 +1,232 @@
+fr ¦ tr
+# Zone « diagrammes-lot-b » : diagramme de Lexis, ternaire, chandeliers, courbe avec marge, horizon, dendrogramme, durée des générations, couverture des sources, trajectoires de vie, alluvial (heritage-diagram-lot-b.js et réglages de heritage-diagram-plus/vie/famille.js, heritage-diagrams-render.js)
+=vie ¦ yaşam|yaşam
+=période ¦ dönem|dönem
+Célibataire ¦ Bekâr
+Marié(e) ¦ Evli
+Remarié(e) ¦ Yeniden evli
+Veuf ou veuve ¦ Dul
+Divorcé(e) ¦ Boşanmış
+Décédé(e) ¦ Vefat etmiş
+État civil inconnu ¦ Medeni durum bilinmiyor
+Métier inconnu ¦ Meslek bilinmiyor
+Pays inconnu ¦ Ülke bilinmiyor
+Autres états ¦ Diğer durumlar
+Sexe inconnu ¦ Cinsiyet bilinmiyor
+Départ (autre commune) ¦ Ayrılış (başka belde)
+Ajoute des personnes : le nom, la naissance et le décès (années ou dates). ¦ Kişi ekle: ad, doğum ve ölüm (yıllar veya tarihler).
+Diagramme de Lexis : {n}, de {a} à {b}. ¦ Lexis diyagramı: {n}, {a}–{b}.
+Choléra ¦ Kolera
+Guerre de 1870 ¦ 1870 Savaşı
+Grande Guerre ¦ Büyük Savaş
+📐 Les vies de ma base ¦ 📐 Veritabanımdaki yaşamlar
+Chaque vie devient une diagonale, de la naissance (âge 0) au décès ; les mariages, les naissances des enfants et les départs posés dessus. ¦ Her yaşam doğumdan (yaş 0) ölüme bir köşegen olur; üzerinde evlilikler, çocukların doğumları ve ayrılışlar.
+Combien de vies au plus ¦ En fazla kaç yaşam
+Une par nom de famille ¦ Soyadı başına bir
+Naissances des enfants ¦ Çocukların doğumları
+Départs (première commune autre que celle de naissance) ¦ Ayrılışlar (doğum yeri dışındaki ilk belde)
+Bandes historiques (guerres, épidémies) ¦ Tarihsel bantlar (savaşlar, salgınlar)
+Personne avec une date de naissance dans ce groupe. ¦ Bu grupta doğum tarihi olan kimse yok.
+Diagramme de Lexis ¦ Lexis diyagramı
+Diagramme de Lexis (âge × année : une vie = une diagonale) ¦ Lexis diyagramı (yaş × yıl: bir yaşam = bir köşegen)
+Les années en bas, les âges à gauche : chaque vie monte en diagonale de sa naissance à son décès ; les mariages, les enfants, les départs et les grandes crises s’y lisent d’un coup d’œil. ¦ Altta yıllar, solda yaşlar: her yaşam doğumdan ölüme çapraz yükselir; evlilikler, çocuklar, ayrılışlar ve büyük krizler bir bakışta okunur.
+Les vies ¦ Yaşamlar
+Les vies de la famille {name} ¦ {name} ailesinin yaşamları
+Personne (même nom que ci-dessus) ¦ Kişi (yukarıdakiyle aynı ad)
+Les marques (sur la vie de la personne) ¦ İşaretler (kişinin yaşamı üzerinde)
+Bandes historiques ¦ Tarihsel bantlar
+Groupe (couleur) ¦ Grup (renk)
+Couleur de chaque groupe (facultatif) ¦ Her grubun rengi (isteğe bağlı)
+Âge au plus ¦ En fazla yaş
+Couleur des vies ¦ Yaşamların rengi
+Homme / femme ¦ Erkek / kadın
+Montrer les marques ¦ İşaretleri göster
+Taille des marques ¦ İşaret boyutu
+Nom des bandes ¦ Bant adları
+Diagonales des générations ¦ Kuşak köşegenleri
+Nom au bout de chaque vie ¦ Her yaşamın sonunda ad
+Épaisseur des vies ¦ Yaşamların kalınlığı
+Ajoute des points : un nom et ses trois parts (des nombres ou des %). ¦ Nokta ekle: bir ad ve üç payı (sayılar veya %).
+Part A ¦ Pay A
+Part B ¦ Pay B
+Part C ¦ Pay C
+Diagramme ternaire : {n} ({a}, {b}, {c}). ¦ Üçgen diyagram: {n} ({a}, {b}, {c}).
+Agriculture ¦ Tarım
+Artisanat et industrie ¦ Zanaat ve sanayi
+Commerce et services ¦ Ticaret ve hizmetler
+Agriculture et forêt ¦ Tarım ve ormancılık
+Artisanat ¦ Zanaat
+Industrie, mines ¦ Sanayi, madenler
+Transports et mer ¦ Ulaşım ve deniz
+Services, domestiques ¦ Hizmetler, hizmetçiler
+Armée et police ¦ Ordu ve polis
+Clergé ¦ Ruhban sınıfı
+Professions libérales, école, administration ¦ Serbest meslekler, okul, yönetim
+Rentiers, rangs et statuts ¦ Rantiyeciler, rütbeler ve statüler
+Au foyer, sans profession ¦ Ev hanımı, mesleksiz
+Autre métier ¦ Diğer meslek
+Tous les autres métiers ¦ Diğer tüm meslekler
+🔺 Les métiers de ma base ¦ 🔺 Veritabanımdaki meslekler
+Les métiers (fiche, événements « Profession », recensements) rangés en grands secteurs ; un point par commune de naissance, par décennie ou par famille, placé selon ses trois parts. ¦ Meslekler (fiş, “Meslek” olayları, nüfus sayımları) büyük sektörlere ayrılır; doğum yeri, on yıl veya aile başına bir nokta, üç payına göre yerleştirilir.
+Un point par ¦ Başına bir nokta
+Décennie de naissance (reliées dans le temps) ¦ Doğum on yılı (zamanda bağlı)
+Combien de points au plus ¦ En fazla kaç nokta
+Part du haut ¦ Üst pay
+Part de gauche ¦ Sol pay
+Part de droite ¦ Sağ pay
+« Tous les autres métiers » ne peut servir qu’une fois. ¦ “Diğer tüm meslekler” yalnızca bir kez kullanılabilir.
+Décennies ¦ On yıllar
+Aucun métier connu pour ces personnes. ¦ Bu kişiler için bilinen meslek yok.
+Les métiers de ma base, en trois parts ¦ Veritabanımdaki meslekler, üç pay hâlinde
+Les métiers de trois villages, siècle par siècle ¦ Üç köyün meslekleri, yüzyıl yüzyıl
+Diagramme ternaire (trois parts qui font 100 %) ¦ Üçgen diyagram (toplamı %100 olan üç pay)
+Parts ¦ Paylar
+Un triangle : chaque point a trois parts (par exemple agriculture, artisanat, commerce) ; plus il est près d’un coin, plus cette part est grande. ¦ Bir üçgen: her noktanın üç payı vardır (örneğin tarım, zanaat, ticaret); bir köşeye ne kadar yakınsa o pay o kadar büyüktür.
+Les points (trois parts chacun) ¦ Noktalar (her biri üç pay)
+Groupe (couleur, points reliés) ¦ Grup (renk, bağlı noktalar)
+Ordre (année…) ¦ Sıra (yıl…)
+Nom de la part du haut ¦ Üst payın adı
+Nom de la part de gauche ¦ Sol payın adı
+Nom de la part de droite ¦ Sağ payın adı
+Couleur du haut ¦ Üst renk
+Couleur de gauche ¦ Sol renk
+Couleur de droite ¦ Sağ renk
+Tous les 10 % ¦ Her %10
+Tous les 20 % ¦ Her %20
+Sans grille ¦ Izgarasız
+Une par point ¦ Nokta başına bir
+Selon le total ¦ Toplama göre
+Relier les points d’un groupe dans l’ordre ¦ Bir grubun noktalarını sırayla bağla
+Noms des points ¦ Nokta adları
+Ajoute des périodes : la date, le prix d’ouverture, de clôture, le plus bas et le plus haut. ¦ Dönem ekle: tarih, açılış, kapanış, en düşük ve en yüksek fiyat.
+ouverture ¦ açılış
+clôture ¦ kapanış
+plus bas ¦ en düşük
+plus haut ¦ en yüksek
+Hausse (clôture plus haute) ¦ Yükseliş (daha yüksek kapanış)
+Baisse (clôture plus basse) ¦ Düşüş (daha düşük kapanış)
+Moyenne mobile sur {n} périodes ¦ {n} dönemlik hareketli ortalama
+Chandeliers : {n}, de {a} à {b} ({p} %). ¦ Mumlar: {n}, {a}–{b} (%{p}).
+Prix du setier de blé au marché de {name} ¦ {name} pazarında bir ölçek buğdayın fiyatı
+Disette ¦ Kıtlık
+Guerre des farines ¦ Un Savaşı
+Chandeliers (prix du blé, mercuriales) ¦ Mumlar (buğday fiyatı, pazar fiyatları)
+Pour chaque période : le prix au début (ouverture), à la fin (clôture), le plus bas et le plus haut. Vert si le prix monte, rouge s’il baisse ; les années de disette en bandes. ¦ Her dönem için: başlangıç fiyatı (açılış), bitiş fiyatı (kapanış), en düşük ve en yüksek. Fiyat artarsa yeşil, düşerse kırmızı; kıtlık yılları bant olarak.
+Les périodes (date, ouverture, clôture, plus bas, plus haut) ¦ Dönemler (tarih, açılış, kapanış, en düşük, en yüksek)
+Date ou période ¦ Tarih veya dönem
+Plus bas ¦ En düşük
+Plus haut ¦ En yüksek
+Les années à part (disette, guerre…) ¦ Özel yıllar (kıtlık, savaş…)
+Autre unité (écrite) ¦ Başka birim (yazılı)
+livres ¦ livre
+sols ¦ sol
+deniers ¦ denye
+Couleur de la hausse ¦ Yükseliş rengi
+Couleur de la baisse ¦ Düşüş rengi
+Hausse en creux (bougie vide) ¦ Yükseliş içi boş (boş mum)
+Moyenne mobile (périodes, 0 = non) ¦ Hareketli ortalama (dönem, 0 = yok)
+Couleur de la moyenne ¦ Ortalama rengi
+Années à part en bandes ¦ Özel yıllar bant olarak
+Largeur des bougies ¦ Mum genişliği
+Âge au premier mariage ¦ İlk evlilikte yaş
+Âge au premier enfant ¦ İlk çocukta yaş
+± un écart-type ¦ ± bir standart sapma
+intervalle à 95 % ¦ %95 aralık
+mes ancêtres ¦ atalarım
+📏 Moyenne et marge : {x} ¦ 📏 Ortalama ve aralık: {x}
+Pas assez de personnes datées (au moins 3 par période). ¦ Tarihli kişi yetersiz (dönem başına en az 3).
+Basse ¦ Alt
+Haute ¦ Üst
+{x} : moyenne et marge ¦ {x}: ortalama ve aralık
+Marge : un écart-type de part et d’autre, par quart de siècle de naissance ¦ Aralık: her iki yana bir standart sapma, doğumun çeyrek yüzyılına göre
+Marge : intervalle de confiance à 95 % de la moyenne, par quart de siècle de naissance ¦ Aralık: ortalamanın %95 güven aralığı, doğumun çeyrek yüzyılına göre
+Marge (basse – haute) ¦ Aralık (alt – üst)
+Marge (±) ¦ Aralık (±)
+Fourchette (marge autour de la courbe) ¦ Aralık (eğrinin çevresinde pay)
+Deux colonnes : basse et haute ¦ İki sütun: alt ve üst
+Une colonne ± écart ¦ Bir sütun ± sapma
+Colonne basse (n°) ¦ Alt sütun (no.)
+Colonne haute (n°) ¦ Üst sütun (no.)
+Colonne de l’écart (n°) ¦ Sapma sütunu (no.)
+Autour de la colonne (n°) ¦ Sütun çevresinde (no.)
+Opacité de la marge ¦ Aralık opaklığı
+Couleur de la marge ¦ Aralık rengi
+Axe : minimum ¦ Eksen: en az
+Axe : maximum ¦ Eksen: en çok
+(axe de droite) ¦ (sağ eksen)
+Clôture ¦ Kapanış
+{name} : de {a} à {b}, le plus en {peak} ({v}) ¦ {name}: {a}–{b}, en çok {peak} ({v})
+Le plus bas ¦ En düşük
+Le plus haut ¦ En yüksek
+Négatif (replié) ¦ Negatif (katlanmış)
+Graphique en horizon : {s} séries sur {n} périodes. ¦ Ufuk grafiği: {n} dönemde {s} seri.
+Horizon (bandes repliées) ¦ Ufuk (katlanmış bantlar)
+Collines ¦ Tepeler
+Nombre de couches ¦ Katman sayısı
+Teinte des négatifs ¦ Negatiflerin tonu
+Chevauchement ¦ Örtüşme
+Courbes douces ¦ Yumuşak eğriler
+Trait blanc autour ¦ Beyaz çerçeve
+Arbre de regroupement à gauche (dendrogramme) ¦ Solda kümeleme ağacı (dendrogram)
+Groupes de couleur ¦ Renk grupları
+Les branches de l’arbre ¦ Ağacın dalları
+Cacher les noms des correspondances ¦ Eşleşmelerin adlarını gizle
+Durée des générations ¦ Kuşakların süresi
+Durée des générations — {name} ¦ Kuşakların süresi — {name}
+Lignée paternelle : une génération = {n} ans en moyenne ¦ Baba soyu: bir kuşak = ortalama {n} yıl
+Lignée maternelle : une génération = {n} ans en moyenne ¦ Anne soyu: bir kuşak = ortalama {n} yıl
+moyenne {n} ans ¦ ortalama {n} yıl
+Toutes les naissances du groupe ¦ Gruptaki tüm doğumlar
+Seulement la lignée paternelle directe (père du père…) ¦ Yalnızca doğrudan baba soyu (babanın babası…)
+Seulement la lignée maternelle directe (mère de la mère…) ¦ Yalnızca doğrudan anne soyu (annenin annesi…)
+Les deux lignées directes ¦ Her iki doğrudan soy
+La personne dont on suit les lignées ¦ Soyları izlenen kişi
+Aucune génération datée dans cette lignée (il faut la naissance de l’enfant et celle du parent). ¦ Bu soyda tarihli kuşak yok (çocuğun ve ebeveynin doğumu gerekir).
+Génération (lignée) ¦ Kuşak (soy)
+Paternelle ¦ Baba
+Maternelle ¦ Anne
+Relier les points d’une lignée ¦ Bir soyun noktalarını bağla
+Ligne de repère ¦ Referans çizgisi
+Les générations (lignées) ¦ Kuşaklar (soylar)
+Pas attendu ¦ Beklenmiyor
+Manquant ¦ Eksik
+Ajoute des ancêtres : le numéro Sosa, le nom et, pour chaque acte, sourcé, sans source ou manquant. ¦ Ata ekle: Sosa numarası, ad ve her kayıt için kaynaklı, kaynaksız veya eksik.
+Une ligne par ancêtre ¦ Ata başına bir satır
+Une ligne par ancêtre (+ recensements, notaire, militaire) ¦ Ata başına bir satır (+ sayımlar, noter, askerlik)
+Fiches militaires ¦ Askerlik kayıtları
+Colonnes en plus ¦ Ek sütunlar
+Recensement, notaire, militaire ¦ Sayım, noter, askerlik
+Recensement seulement ¦ Yalnızca sayım
+Les trous d’abord ¦ Önce boşluklar
+Par numéro Sosa ¦ Sosa numarasına göre
+Ancêtres au plus ¦ En fazla ata
+Axe ¦ Eksen
+Ce qu’on suit ¦ İzlenen
+L’état civil ¦ Medeni durum
+L’état civil (célibataire, marié, veuf…) : trajectoires de vie ¦ Medeni durum (bekâr, evli, dul…): yaşam yolları
+La commune ¦ Belde
+Les lieux de vie ¦ Yaşanan yerler
+Un groupe de personnes (critères) ¦ Bir kişi grubu (ölçütler)
+Trajectoires de vie ¦ Yaşam yolları
+Trajectoires de vie de {n}. ¦ Yaşam yolları: {n}.
+Métiers au fil de la vie de {n}. ¦ Yaşam boyunca meslekler: {n}.
+Les métiers au fil de la vie ¦ Yaşam boyunca meslekler
+Les mêmes personnes à plusieurs âges (20, 40, 60 ans…) ¦ Aynı kişiler birkaç yaşta (20, 40, 60…)
+Âges des colonnes ¦ Sütun yaşları
+À {n} ans ¦ {n} yaşında
+L’état civil des mêmes personnes à {a} ans ¦ Aynı kişilerin {a} yaşında medeni durumu
+Où vivaient les mêmes personnes à {a} ans ¦ Aynı kişilerin {a} yaşında yaşadığı yer
+Le métier des mêmes personnes à {a} ans ¦ Aynı kişilerin {a} yaşında mesleği
+Le même qu’à l’âge d’avant — {list} ¦ Bir önceki yaştakiyle aynı — {list}
+Les mêmes personnes à {n} âges : {l}. ¦ Aynı kişiler {n} yaşta: {l}.
+En % de la colonne (au lieu des nombres) ¦ Sütunun %’si olarak (sayılar yerine)
+État civil (trajectoires de vie) ¦ Medeni durum (yaşam yolları)
+Naissance (pour l’axe des âges) ¦ Doğum (yaş ekseni için)
+Début (année ou âge, vide = auto) ¦ Başlangıç (yıl veya yaş, boş = otomatik)
+Fin (année ou âge, vide = auto) ¦ Bitiş (yıl veya yaş, boş = otomatik)
+Par durée de vie ¦ Yaşam süresine göre
+Par état à 50 ans ¦ 50 yaşındaki duruma göre
+âge (années) ¦ yaş (yıl)
+Vérifie le groupe de personnes et la période. ¦ Kişi grubunu ve dönemi kontrol et.
+{n} pris dans ta base. ¦ Veritabanından {n} alındı.
+{n} prises dans ta base. ¦ Veritabanından {n} alındı.
