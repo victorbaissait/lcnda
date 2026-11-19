@@ -119,7 +119,7 @@ function act_transcription_clean_data(PDO $pdo, $data): array
     foreach (array_slice(is_array($data['zones'] ?? null) ? $data['zones'] : [], 0, 2000) as $z) {
         if (!is_array($z)) { continue; }
         $zones[] = ['id' => mb_substr(preg_replace('/[^\w-]/', '', (string) ($z['id'] ?? '')), 0, 24), 'x' => $num($z['x'] ?? 0), 'y' => $num($z['y'] ?? 0), 'w' => $num($z['w'] ?? 0), 'h' => $num($z['h'] ?? 0),
-            's' => max(0, (int) ($z['s'] ?? 0)), 'e' => max(0, (int) ($z['e'] ?? 0)), 'note' => mb_substr(safe_text($z['note'] ?? ''), 0, 300), 'c' => preg_match('/^#[0-9a-f]{6}$/i', (string) ($z['c'] ?? '')) ? $z['c'] : ''];
+            's' => max(0, (int) ($z['s'] ?? 0)), 'e' => max(0, (int) ($z['e'] ?? 0)), 'note' => mb_substr(safe_text($z['note'] ?? ''), 0, 300), 'c' => preg_match('/^#[0-9a-f]{6}$/i', (string) ($z['c'] ?? '')) ? $z['c'] : ''] + (in_array($z['src'] ?? '', ['htr', 'ocr', 'deep'], true) ? ['src' => $z['src']] : []); // src : posée par une lecture (sinon dessinée à la main)
     }
     $people = [];
     foreach (array_slice(is_array($data['people'] ?? null) ? $data['people'] : [], 0, 200) as $p) {
@@ -138,7 +138,9 @@ function act_transcription_clean_data(PDO $pdo, $data): array
         'lvB' => $range($view['lvB'] ?? 0, 0, 200, 0), 'lvW' => $range($view['lvW'] ?? 255, 55, 255, 255), 'lvG' => $range($view['lvG'] ?? 1, .3, 3, 1),
         'bg' => !empty($view['bg']), 'tilt' => $range($view['tilt'] ?? 0, -10, 10, 0), 'mirror' => !empty($view['mirror'])];
     $status = in_array($data['status'] ?? '', ['todo', 'doing', 'done'], true) ? $data['status'] : '';
-    return ['zones' => $zones, 'people' => $people, 'view' => $cleanView, 'status' => $status];
+    // 📜 le texte lu autour de l'acte sur une capture d'écran (« Saint-Amand-Montrond, 1807-1809, N, M, D », « 139 / 268 ») : pour la source
+    $frame = mb_substr(safe_text(is_string($data['frame_text'] ?? null) ? $data['frame_text'] : ''), 0, 600);
+    return ['zones' => $zones, 'people' => $people, 'view' => $cleanView, 'status' => $status] + ($frame !== '' ? ['frame_text' => $frame] : []);
 }
 
 function save_act_transcription(PDO $pdo, array $data): array

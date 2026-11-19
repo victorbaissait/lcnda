@@ -1,0 +1,145 @@
+fr ¦ vi ¦ id
+# Zone « transcription-actes » : recadrage, lecture approfondie (Ollama), « Ce que l’app a trouvé » (heritage-transcribe-acte.js, lib/transcription_actes.php)
+LECTURE AUTOMATIQUE ¦ ĐỌC TỰ ĐỘNG ¦ PEMBACAAN OTOMATIS
+Recadrer sur le texte ? ¦ Cắt theo phần chữ? ¦ Pangkas ke teks?
+Recadrer sur le texte ¦ Cắt theo phần chữ ¦ Pangkas ke teks
+Lire quand même ¦ Vẫn đọc ¦ Tetap baca
+Cette image ressemble à une capture d’écran ¦ Ảnh này trông giống ảnh chụp màn hình ¦ Gambar ini tampak seperti tangkapan layar
+(boutons et bords gris autour) : la lecture sera moins bonne. Télécharge l’image en grand sur le site des archives, ou recadre sur le texte. ¦ (có nút và viền xám xung quanh): việc đọc sẽ kém hơn. Hãy tải ảnh cỡ lớn từ trang web của lưu trữ, hoặc cắt theo phần chữ. ¦ (ada tombol dan tepi abu-abu di sekelilingnya): pembacaan akan lebih buruk. Unduh gambar ukuran besar dari situs arsip, atau pangkas ke teks.
+La zone qui sera lue ¦ Vùng sẽ được đọc ¦ Area yang akan dibaca
+Le cadre bleu montre la zone qui sera lue. Pour choisir toi-même, dessine une zone (▭) puis « ✨ Lire cette zone ». ¦ Khung xanh cho thấy vùng sẽ được đọc. Để tự chọn, hãy vẽ một vùng (▭) rồi « ✨ Đọc vùng này ». ¦ Bingkai biru menunjukkan area yang akan dibaca. Untuk memilih sendiri, gambar sebuah area (▭) lalu « ✨ Baca area ini ».
+La lecture à la main a donné un texte peu sûr ¦ Việc đọc chữ viết tay cho ra văn bản không chắc chắn ¦ Pembacaan tulisan tangan menghasilkan teks yang kurang pasti
+({x} % de mots douteux). Souvent à cause des bords de l’écran autour de l’acte, ou d’une écriture trop difficile pour ce modèle. ¦ ({x} % từ đáng ngờ). Thường do viền màn hình quanh văn bản, hoặc chữ viết quá khó với mô hình này. ¦ ({x} % kata meragukan). Sering karena tepi layar di sekitar akta, atau tulisan yang terlalu sulit untuk model ini.
+Recadrer et relire ¦ Cắt và đọc lại ¦ Pangkas dan baca ulang
+Essayer la lecture approfondie ¦ Thử đọc chuyên sâu ¦ Coba pembacaan mendalam
+LECTURE APPROFONDIE ¦ ĐỌC CHUYÊN SÂU ¦ PEMBACAAN MENDALAM
+Lecture approfondie ¦ Đọc chuyên sâu ¦ Pembacaan mendalam
+Ce qu’il faut ¦ Cần có gì ¦ Yang dibutuhkan
+Ollama (gratuit, open source) et un modèle vision ouvert, au choix : ¦ Ollama (miễn phí, mã nguồn mở) và một mô hình thị giác mở tùy chọn: ¦ Ollama (gratis, sumber terbuka) dan model visi terbuka pilihanmu:
+le meilleur, ≈ {x} Go ¦ tốt nhất, ≈ {x} GB ¦ terbaik, ≈ {x} GB
+plus léger, ≈ {x} Go, pour un ordinateur modeste ¦ nhẹ hơn, ≈ {x} GB, cho máy tính cấu hình khiêm tốn ¦ lebih ringan, ≈ {x} GB, untuk komputer sederhana
+déjà téléchargé ¦ đã tải về ¦ sudah diunduh
+8 Go conseillés (16 Go pour le 8B) · téléchargé une seule fois ¦ nên có 8 GB (16 GB cho bản 8B) · chỉ tải về một lần ¦ disarankan 8 GB (16 GB untuk 8B) · diunduh sekali saja
+≈ 20 à 60 s par page sur un ordinateur récent ¦ ≈ 20 đến 60 giây mỗi trang trên máy tính đời mới ¦ ≈ 20 hingga 60 dtk per halaman di komputer baru
+Confidentialité ¦ Quyền riêng tư ¦ Privasi
+rien ne quitte ton ordinateur ; l’app vérifie qu’Ollama ne répond que sur ton ordinateur ¦ không gì rời khỏi máy tính của bạn; ứng dụng kiểm tra rằng Ollama chỉ trả lời trên máy tính của bạn ¦ tidak ada yang keluar dari komputermu; aplikasi memeriksa bahwa Ollama hanya menjawab di komputermu
+Recherche d’Ollama sur cet ordinateur… ¦ Đang tìm Ollama trên máy tính này… ¦ Mencari Ollama di komputer ini…
+L’adresse d’Ollama n’est pas sur cet ordinateur : la lecture approfondie est refusée. ¦ Địa chỉ của Ollama không nằm trên máy tính này: từ chối đọc chuyên sâu. ¦ Alamat Ollama tidak ada di komputer ini: pembacaan mendalam ditolak.
+Ollama n’est pas encore sur cet ordinateur. ¦ Ollama chưa có trên máy tính này. ¦ Ollama belum ada di komputer ini.
+Installe-le une fois depuis son site (gratuit), lance-le, puis « ↻ Vérifier à nouveau ». ¦ Cài đặt một lần từ trang web của nó (miễn phí), khởi động, rồi « ↻ Kiểm tra lại ». ¦ Pasang sekali dari situsnya (gratis), jalankan, lalu « ↻ Periksa lagi ».
+Ollama est installé mais ne tourne pas. ¦ Ollama đã được cài nhưng chưa chạy. ¦ Ollama sudah terpasang tetapi tidak berjalan.
+Lance l’application Ollama, puis « ↻ Vérifier à nouveau ». ¦ Khởi động ứng dụng Ollama, rồi « ↻ Kiểm tra lại ». ¦ Jalankan aplikasi Ollama, lalu « ↻ Periksa lagi ».
+Prêt : la lecture se fait sur cet ordinateur, sans Internet. ¦ Sẵn sàng: việc đọc diễn ra trên máy tính này, không cần Internet. ¦ Siap: pembacaan dilakukan di komputer ini, tanpa Internet.
+Télécharger Ollama (ollama.com) ¦ Tải Ollama (ollama.com) ¦ Unduh Ollama (ollama.com)
+Installer la lecture approfondie ¦ Cài đặt đọc chuyên sâu ¦ Pasang pembacaan mendalam
+Lire l’acte avec ce modèle ¦ Đọc văn bản bằng mô hình này ¦ Baca akta dengan model ini
+Vérifier à nouveau ¦ Kiểm tra lại ¦ Periksa lagi
+« 🔍 Essayer aussi la lecture approfondie » sur une page déjà lue montre les deux textes côte à côte, et on garde la meilleure. Relis toujours : un modèle peut se tromper sur les noms. ¦ « 🔍 Thử thêm đọc chuyên sâu » trên trang đã đọc sẽ hiện hai văn bản cạnh nhau, và bạn giữ bản tốt hơn. Luôn đọc lại: mô hình có thể sai tên. ¦ « 🔍 Coba juga pembacaan mendalam » pada halaman yang sudah dibaca menampilkan kedua teks berdampingan, dan kamu simpan yang terbaik. Selalu periksa ulang: model bisa salah pada nama.
+Téléchargement du modèle… {done} sur {total} ¦ Đang tải mô hình… {done} / {total} ¦ Mengunduh model… {done} dari {total}
+Téléchargement du modèle… ¦ Đang tải mô hình… ¦ Mengunduh model…
+Lecture approfondie… {n} s ¦ Đang đọc chuyên sâu… {n} giây ¦ Pembacaan mendalam… {n} dtk
+La lecture approfondie n’a pas abouti. ¦ Đọc chuyên sâu không thành công. ¦ Pembacaan mendalam tidak berhasil.
+Les deux lectures côte à côte ¦ Hai bản đọc cạnh nhau ¦ Kedua pembacaan berdampingan
+Le texte lu ¦ Văn bản đã đọc ¦ Teks yang dibaca
+Écriture à la main ¦ Chữ viết tay ¦ Tulisan tangan
+Garder celle-ci ¦ Giữ bản này ¦ Simpan yang ini
+Mettre dans le texte ¦ Đưa vào văn bản ¦ Masukkan ke teks
+La lecture approfondie est installée. ¦ Đã cài đặt đọc chuyên sâu. ¦ Pembacaan mendalam sudah terpasang.
+Défunte ¦ Người quá cố (nữ) ¦ Almarhumah
+Conjointe ¦ Vợ ¦ Istri
+Autre personne ¦ Người khác ¦ Orang lain
+{n} ans → née vers {year} ¦ {n} tuổi → sinh khoảng {year} ¦ {n} tahun → lahir sekitar {year}
+{n} ans → né vers {year} ¦ {n} tuổi → sinh khoảng {year} ¦ {n} tahun → lahir sekitar {year}
+Aucune personne trouvée dans le texte : relis-le, puis « 🧭 Repérer ». ¦ Không tìm thấy người nào trong văn bản: đọc lại, rồi « 🧭 Nhận diện ». ¦ Tidak ada orang yang ditemukan dalam teks: periksa ulang, lalu « 🧭 Kenali ».
+TRANSCRIPTION ¦ CHÉP LẠI ¦ TRANSKRIPSI
+Ce que l’app a trouvé dans l’acte ¦ Những gì ứng dụng tìm thấy trong văn bản ¦ Yang ditemukan aplikasi dalam akta
+Ajouter à la généalogie ¦ Thêm vào phả hệ ¦ Tambahkan ke silsilah
+Garder seulement la transcription ¦ Chỉ giữ bản chép lại ¦ Simpan transkripsinya saja
+demeurant à {place} ¦ cư ngụ tại {place} ¦ tinggal di {place}
+fille de {a} et de {b} ¦ con gái của {a} và {b} ¦ putri dari {a} dan {b}
+fils de {a} et de {b} ¦ con trai của {a} và {b} ¦ putra dari {a} dan {b}
+fille de {a} ¦ con gái của {a} ¦ putri dari {a}
+fils de {a} ¦ con trai của {a} ¦ putra dari {a}
+sœur de {name} ¦ chị/em gái của {name} ¦ saudari dari {name}
+frère de {name} ¦ anh/em trai của {name} ¦ saudara laki-laki dari {name}
+parent de {name} ¦ họ hàng của {name} ¦ kerabat {name}
+conjoint décédé de {name} ¦ người phối ngẫu đã mất của {name} ¦ almarhum pasangan {name}
+conjoint de {name} ¦ người phối ngẫu của {name} ¦ pasangan {name}
+décédée avant l’acte ¦ mất trước văn bản ¦ meninggal sebelum akta
+décédé avant l’acte ¦ mất trước văn bản ¦ meninggal sebelum akta
+Relier à cette fiche ¦ Liên kết với hồ sơ này ¦ Tautkan ke data ini
+Reliée à : ¦ Đã liên kết với: ¦ Ditautkan ke:
+Fiches proches : ¦ Hồ sơ gần giống: ¦ Data yang mirip:
+Fiche existante : ¦ Hồ sơ đã có: ¦ Data yang sudah ada:
+même personne probable ¦ có lẽ cùng một người ¦ kemungkinan orang yang sama
+Pas de fiche · restera dans l’acte avec son rôle, sans créer de fiche ¦ Chưa có hồ sơ · sẽ ở lại trong văn bản với vai trò của mình, không tạo hồ sơ ¦ Tanpa data · tetap di akta dengan perannya, tanpa membuat data
+Aucune fiche : elle sera créée et reliée comme mère de {name} ¦ Chưa có hồ sơ: sẽ được tạo và liên kết là mẹ của {name} ¦ Tidak ada data: akan dibuat dan ditautkan sebagai ibu dari {name}
+Aucune fiche : elle sera créée et reliée comme père de {name} ¦ Chưa có hồ sơ: sẽ được tạo và liên kết là cha của {name} ¦ Tidak ada data: akan dibuat dan ditautkan sebagai ayah dari {name}
+Aucune fiche : elle sera créée ¦ Chưa có hồ sơ: sẽ được tạo ¦ Tidak ada data: akan dibuat
+Témoin seul ¦ Chỉ là nhân chứng ¦ Hanya saksi
+Que faire de cette personne ¦ Làm gì với người này ¦ Apa yang dilakukan dengan orang ini
+Décès estimé avant l’acte ¦ Ước tính đã mất trước văn bản ¦ Kematian diperkirakan sebelum akta
+Gardés dans l’acte, sans fiche ¦ Giữ trong văn bản, không có hồ sơ ¦ Disimpan di akta, tanpa data
+La source ¦ Nguồn ¦ Sumber
+déjà dans ta base, reprise ¦ đã có trong cơ sở dữ liệu, dùng lại ¦ sudah ada di basis datamu, dipakai ulang
+Relever à nouveau ¦ Trích lại ¦ Ekstrak ulang
+Compris : {date} ¦ Đã hiểu: {date} ¦ Dipahami: {date}
+Les personnes ({n}) ¦ Những người ({n}) ¦ Orang-orang ({n})
+Ce que l’acte ajoute aussi ¦ Văn bản còn bổ sung gì ¦ Yang juga ditambahkan akta
+Naissance estimée d’après l’âge (marquée « estimée ») ¦ Năm sinh ước tính theo tuổi (đánh dấu « ước tính ») ¦ Kelahiran diperkirakan dari usia (ditandai « perkiraan »)
+Décès d’avant l’acte (« feu », « veuve de ») ¦ Người mất trước văn bản (« cố », « góa phụ của ») ¦ Kematian sebelum akta (« almarhum », « janda dari »)
+Domiciles ¦ Nơi cư trú ¦ Tempat tinggal
+La source, toute prête ¦ Nguồn, đã sẵn sàng ¦ Sumber, siap pakai
+La même source est déjà dans ta base : elle est reprise au lieu d’en créer une deuxième. ¦ Cùng nguồn này đã có trong cơ sở dữ liệu: sẽ được dùng lại thay vì tạo thêm một nguồn. ¦ Sumber yang sama sudah ada di basis datamu: dipakai ulang alih-alih membuat yang kedua.
+Remplie d’après le champ Source, le nom du fichier et le texte lu autour de l’image. Vérifie avant d’ajouter. ¦ Được điền từ ô Nguồn, tên tệp và chữ đọc được quanh ảnh. Hãy kiểm tra trước khi thêm. ¦ Diisi dari kolom Sumber, nama berkas, dan teks yang terbaca di sekitar gambar. Periksa sebelum menambahkan.
+Remplie d’après le champ Source et le nom du fichier. Vérifie avant d’ajouter. ¦ Được điền từ ô Nguồn và tên tệp. Hãy kiểm tra trước khi thêm. ¦ Diisi dari kolom Sumber dan nama berkas. Periksa sebelum menambahkan.
+Voilà ce qui va entrer dans ta généalogie ¦ Đây là những gì sẽ vào phả hệ của bạn ¦ Inilah yang akan masuk ke silsilahmu
+Rien n’est écrasé : une information différente de la fiche est proposée, jamais imposée. « ↶ Annuler » défait tout l’ajout d’un coup. ¦ Không gì bị ghi đè: thông tin khác với hồ sơ chỉ được đề xuất, không bao giờ áp đặt. « ↶ Hoàn tác » hủy toàn bộ phần thêm trong một lần. ¦ Tidak ada yang ditimpa: informasi yang berbeda dari data hanya diusulkan, tidak pernah dipaksakan. « ↶ Batalkan » membatalkan seluruh penambahan sekaligus.
+C’est elle : relier ¦ Đúng là bà ấy: liên kết ¦ Itu dia: tautkan
+C’est lui : relier ¦ Đúng là ông ấy: liên kết ¦ Itu dia: tautkan
+Ce n’est pas elle ¦ Không phải bà ấy ¦ Bukan dia
+Ce n’est pas lui ¦ Không phải ông ấy ¦ Bukan dia
+ajouter ¦ thêm ¦ tambahkan
+{name} : l’acte et la fiche côte à côte ¦ {name}: văn bản và hồ sơ cạnh nhau ¦ {name}: akta dan data berdampingan
+Dans l’acte ¦ Trong văn bản ¦ Dalam akta
+Fiche · {name} ¦ Hồ sơ · {name} ¦ Data · {name}
+vers {year} ({n} ans) ¦ khoảng {year} ({n} tuổi) ¦ sekitar {year} ({n} tahun)
+{date} avec {name} ¦ {date} với {name} ¦ {date} dengan {name}
+avant le {date} ¦ trước {date} ¦ sebelum {date}
+Les parents sont les mêmes : c’est très probablement elle. ¦ Cha mẹ giống nhau: rất có thể là bà ấy. ¦ Orang tuanya sama: kemungkinan besar dia.
+Les parents sont les mêmes : c’est très probablement lui. ¦ Cha mẹ giống nhau: rất có thể là ông ấy. ¦ Orang tuanya sama: kemungkinan besar dia.
+Les parents ne sont pas les mêmes : vérifie avant de relier. ¦ Cha mẹ không giống nhau: hãy kiểm tra trước khi liên kết. ¦ Orang tuanya tidak sama: periksa sebelum menautkan.
+La date de naissance de la fiche est gardée (elle est plus précise que l’âge de l’acte). ¦ Ngày sinh trong hồ sơ được giữ (chính xác hơn tuổi ghi trong văn bản). ¦ Tanggal lahir di data dipertahankan (lebih tepat daripada usia di akta).
+✓ Acte ajouté : {what} ¦ ✓ Đã thêm văn bản: {what} ¦ ✓ Akta ditambahkan: {what}
+Déjà d’autres parents, lien non fait : {names} ¦ Đã có cha mẹ khác, không liên kết: {names} ¦ Sudah punya orang tua lain, tidak ditautkan: {names}
+Un modèle « vision » ouvert qui tourne sur ton ordinateur (Ollama) : lit mieux les écritures difficiles, plus lent ¦ Một mô hình « thị giác » mở chạy trên máy tính của bạn (Ollama): đọc chữ khó tốt hơn, chậm hơn ¦ Model « visi » terbuka yang berjalan di komputermu (Ollama): membaca tulisan sulit lebih baik, lebih lambat
+L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches ¦ Sự kiện, những người và mối liên hệ, nguồn: liên kết, so sánh hoặc tạo hồ sơ ¦ Peristiwa, orang-orang dan hubungannya, sumber: tautkan, bandingkan, atau buat data
+Ce que l’app a trouvé… ¦ Những gì ứng dụng tìm thấy… ¦ Yang ditemukan aplikasi…
+La lecture approfondie n’est pas chargée. ¦ Chưa nạp đọc chuyên sâu. ¦ Pembacaan mendalam belum dimuat.
+Lecture du texte autour de l’acte… ¦ Đang đọc chữ quanh văn bản… ¦ Membaca teks di sekitar akta…
+Le texte est vide : lis ou écris d’abord l’acte. ¦ Văn bản trống: hãy đọc hoặc gõ văn bản trước. ¦ Teks kosong: baca atau ketik akta terlebih dahulu.
+Personnes gardées dans la transcription, sans créer de fiche. ¦ Đã giữ những người này trong bản chép lại, không tạo hồ sơ. ¦ Orang-orang disimpan di transkripsi, tanpa membuat data.
+Père du défunt ¦ Cha của người quá cố ¦ Ayah almarhum
+Mère du défunt ¦ Mẹ của người quá cố ¦ Ibu almarhum
+Déclarant ¦ Người khai ¦ Pelapor
+Acte de mariage ¦ Văn bản kết hôn ¦ Akta perkawinan
+Acte de baptême ¦ Văn bản rửa tội ¦ Akta baptis
+Acte de naissance ¦ Văn bản khai sinh ¦ Akta kelahiran
+Acte de sépulture ¦ Văn bản an táng ¦ Akta pemakaman
+Registre ¦ Sổ ¦ Register
+Vue ¦ Ảnh số ¦ Gambar
+Vues en tout ¦ Tổng số ảnh ¦ Total gambar
+La lecture approfondie ne parle qu’à Ollama sur cet ordinateur (127.0.0.1) : adresse refusée. ¦ Đọc chuyên sâu chỉ kết nối với Ollama trên máy này (127.0.0.1): địa chỉ bị từ chối. ¦ Pembacaan mendalam hanya berbicara dengan Ollama di komputer ini (127.0.0.1): alamat ditolak.
+Modèle de lecture approfondie inconnu. ¦ Mô hình đọc chuyên sâu không xác định. ¦ Model pembacaan mendalam tidak dikenal.
+La lecture approfondie a besoin de l’extension cURL de PHP. ¦ Đọc chuyên sâu cần phần mở rộng cURL của PHP. ¦ Pembacaan mendalam memerlukan ekstensi cURL PHP.
+Ollama ne répond pas sur cet ordinateur : installe-le (ollama.com), lance-le, puis réessaie. ¦ Ollama không phản hồi trên máy tính này: hãy cài (ollama.com), khởi động, rồi thử lại. ¦ Ollama tidak menjawab di komputer ini: pasang (ollama.com), jalankan, lalu coba lagi.
+Image manquante. ¦ Thiếu ảnh. ¦ Gambar tidak ada.
+Image trop lourde. ¦ Ảnh quá nặng. ¦ Gambar terlalu berat.
+Image trop grande. ¦ Ảnh quá lớn. ¦ Gambar terlalu besar.
+Ce modèle n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Mô hình này chưa được tải về: « ⤓ Cài đặt đọc chuyên sâu ». ¦ Model ini belum diunduh: « ⤓ Pasang pembacaan mendalam ».
+Une fiche à relier n’existe plus : choisis-en une autre. ¦ Một hồ sơ cần liên kết không còn nữa: hãy chọn hồ sơ khác. ¦ Data yang akan ditautkan sudah tidak ada: pilih yang lain.
+Une personne à créer n’a ni prénom ni nom. ¦ Một người cần tạo không có cả tên lẫn họ. ¦ Orang yang akan dibuat tidak punya nama depan maupun nama keluarga.
+Trop de personnes dans un seul acte. ¦ Quá nhiều người trong một văn bản. ¦ Terlalu banyak orang dalam satu akta.
+Annulation impossible : ce n’est pas l’ajout d’un acte. ¦ Không thể hoàn tác: đây không phải là lần thêm một văn bản. ¦ Tidak dapat dibatalkan: ini bukan penambahan akta.
+Le téléchargement du modèle n’a pas abouti. ¦ Tải mô hình không thành công. ¦ Unduhan model tidak berhasil.
+La lecture approfondie a pris trop de temps. ¦ Đọc chuyên sâu mất quá nhiều thời gian. ¦ Pembacaan mendalam memakan waktu terlalu lama.

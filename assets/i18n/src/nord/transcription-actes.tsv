@@ -1,0 +1,145 @@
+fr ¦ cs ¦ sv ¦ da
+# Zone « transcription-actes » : recadrage, lecture approfondie (Ollama), « Ce que l’app a trouvé » (heritage-transcribe-acte.js, lib/transcription_actes.php)
+LECTURE AUTOMATIQUE ¦ AUTOMATICKÉ ČTENÍ ¦ AUTOMATISK LÄSNING ¦ AUTOMATISK LÆSNING
+Recadrer sur le texte ? ¦ Oříznout na text? ¦ Beskära till texten? ¦ Beskære til teksten?
+Recadrer sur le texte ¦ Oříznout na text ¦ Beskär till texten ¦ Beskær til teksten
+Lire quand même ¦ Přesto přečíst ¦ Läs ändå ¦ Læs alligevel
+Cette image ressemble à une capture d’écran ¦ Tento obrázek vypadá jako snímek obrazovky ¦ Den här bilden ser ut som en skärmbild ¦ Billedet ligner et skærmbillede
+(boutons et bords gris autour) : la lecture sera moins bonne. Télécharge l’image en grand sur le site des archives, ou recadre sur le texte. ¦ (tlačítka a šedé okraje kolem): čtení bude horší. Stáhni si obrázek ve velkém z webu archivu, nebo ho ořízni na text. ¦ (knappar och grå kanter runt om): läsningen blir sämre. Ladda ner bilden i stort format från arkivets webbplats, eller beskär till texten. ¦ (knapper og grå kanter omkring): læsningen bliver dårligere. Hent billedet i stor størrelse fra arkivets websted, eller beskær til teksten.
+La zone qui sera lue ¦ Oblast, která se přečte ¦ Området som läses ¦ Området, der bliver læst
+Le cadre bleu montre la zone qui sera lue. Pour choisir toi-même, dessine une zone (▭) puis « ✨ Lire cette zone ». ¦ Modrý rámeček ukazuje oblast, která se přečte. Chceš-li vybrat sám, nakresli oblast (▭) a pak „✨ Přečíst tuto oblast“. ¦ Den blå ramen visar området som läses. För att välja själv, rita ett område (▭) och sedan ”✨ Läs det här området”. ¦ Den blå ramme viser området, der bliver læst. Vil du selv vælge, så tegn et område (▭) og derefter »✨ Læs dette område«.
+La lecture à la main a donné un texte peu sûr ¦ Čtení rukopisu dalo nejistý text ¦ Läsningen av handskrift gav en osäker text ¦ Læsningen af håndskrift gav en usikker tekst
+({x} % de mots douteux). Souvent à cause des bords de l’écran autour de l’acte, ou d’une écriture trop difficile pour ce modèle. ¦ ({x} % pochybných slov). Často kvůli okrajům obrazovky kolem záznamu nebo písmu, které je pro tento model příliš obtížné. ¦ ({x} % tveksamma ord). Ofta på grund av skärmkanterna runt akten, eller en handstil som är för svår för den här modellen. ¦ ({x} % tvivlsomme ord). Ofte på grund af skærmkanterne omkring akten eller en håndskrift, der er for svær for denne model.
+Recadrer et relire ¦ Oříznout a přečíst znovu ¦ Beskär och läs om ¦ Beskær og læs igen
+Essayer la lecture approfondie ¦ Zkusit důkladné čtení ¦ Prova grundlig läsning ¦ Prøv grundig læsning
+LECTURE APPROFONDIE ¦ DŮKLADNÉ ČTENÍ ¦ GRUNDLIG LÄSNING ¦ GRUNDIG LÆSNING
+Lecture approfondie ¦ Důkladné čtení ¦ Grundlig läsning ¦ Grundig læsning
+Ce qu’il faut ¦ Co je potřeba ¦ Det här behövs ¦ Det skal der til
+Ollama (gratuit, open source) et un modèle vision ouvert, au choix : ¦ Ollama (zdarma, open source) a otevřený vizuální model podle výběru: ¦ Ollama (gratis, öppen källkod) och en öppen bildmodell, valfri: ¦ Ollama (gratis, open source) og en åben billedmodel efter eget valg:
+le meilleur, ≈ {x} Go ¦ nejlepší, ≈ {x} GB ¦ den bästa, ≈ {x} GB ¦ den bedste, ≈ {x} GB
+plus léger, ≈ {x} Go, pour un ordinateur modeste ¦ lehčí, ≈ {x} GB, pro skromnější počítač ¦ lättare, ≈ {x} GB, för en enklare dator ¦ lettere, ≈ {x} GB, til en beskeden computer
+déjà téléchargé ¦ už staženo ¦ redan nedladdad ¦ allerede hentet
+8 Go conseillés (16 Go pour le 8B) · téléchargé une seule fois ¦ doporučeno 8 GB (16 GB pro 8B) · stahuje se jen jednou ¦ 8 GB rekommenderas (16 GB för 8B) · laddas ner bara en gång ¦ 8 GB anbefales (16 GB til 8B) · hentes kun én gang
+≈ 20 à 60 s par page sur un ordinateur récent ¦ ≈ 20 až 60 s na stránku na novějším počítači ¦ ≈ 20 till 60 s per sida på en nyare dator ¦ ≈ 20 til 60 s pr. side på en nyere computer
+Confidentialité ¦ Soukromí ¦ Integritet ¦ Fortrolighed
+rien ne quitte ton ordinateur ; l’app vérifie qu’Ollama ne répond que sur ton ordinateur ¦ nic neopustí tvůj počítač; aplikace ověřuje, že Ollama odpovídá jen na tvém počítači ¦ inget lämnar din dator; appen kontrollerar att Ollama bara svarar på din dator ¦ intet forlader din computer; appen tjekker, at Ollama kun svarer på din computer
+Recherche d’Ollama sur cet ordinateur… ¦ Hledám Ollamu na tomto počítači… ¦ Letar efter Ollama på den här datorn… ¦ Leder efter Ollama på denne computer…
+L’adresse d’Ollama n’est pas sur cet ordinateur : la lecture approfondie est refusée. ¦ Adresa Ollamy není na tomto počítači: důkladné čtení je odmítnuto. ¦ Ollamas adress finns inte på den här datorn: grundlig läsning nekas. ¦ Ollamas adresse er ikke på denne computer: grundig læsning afvises.
+Ollama n’est pas encore sur cet ordinateur. ¦ Ollama na tomto počítači ještě není. ¦ Ollama finns inte på den här datorn än. ¦ Ollama er ikke på denne computer endnu.
+Installe-le une fois depuis son site (gratuit), lance-le, puis « ↻ Vérifier à nouveau ». ¦ Nainstaluj ji jednou z jejího webu (zdarma), spusť ji a pak „↻ Zkontrolovat znovu“. ¦ Installera den en gång från dess webbplats (gratis), starta den och sedan ”↻ Kontrollera igen”. ¦ Installer det én gang fra dets websted (gratis), start det, og derefter »↻ Tjek igen«.
+Ollama est installé mais ne tourne pas. ¦ Ollama je nainstalovaná, ale neběží. ¦ Ollama är installerad men körs inte. ¦ Ollama er installeret, men kører ikke.
+Lance l’application Ollama, puis « ↻ Vérifier à nouveau ». ¦ Spusť aplikaci Ollama a pak „↻ Zkontrolovat znovu“. ¦ Starta appen Ollama och sedan ”↻ Kontrollera igen”. ¦ Start appen Ollama, og derefter »↻ Tjek igen«.
+Prêt : la lecture se fait sur cet ordinateur, sans Internet. ¦ Připraveno: čtení probíhá na tomto počítači, bez internetu. ¦ Klart: läsningen sker på den här datorn, utan internet. ¦ Klar: læsningen sker på denne computer, uden internet.
+Télécharger Ollama (ollama.com) ¦ Stáhnout Ollamu (ollama.com) ¦ Ladda ner Ollama (ollama.com) ¦ Hent Ollama (ollama.com)
+Installer la lecture approfondie ¦ Nainstalovat důkladné čtení ¦ Installera grundlig läsning ¦ Installer grundig læsning
+Lire l’acte avec ce modèle ¦ Přečíst záznam tímto modelem ¦ Läs akten med den här modellen ¦ Læs akten med denne model
+Vérifier à nouveau ¦ Zkontrolovat znovu ¦ Kontrollera igen ¦ Tjek igen
+« 🔍 Essayer aussi la lecture approfondie » sur une page déjà lue montre les deux textes côte à côte, et on garde la meilleure. Relis toujours : un modèle peut se tromper sur les noms. ¦ „🔍 Zkusit i důkladné čtení“ na už přečtené stránce ukáže oba texty vedle sebe a ponecháš si lepší. Vždy zkontroluj: model se může splést ve jménech. ¦ ”🔍 Prova även grundlig läsning” på en redan läst sida visar båda texterna sida vid sida, och du behåller den bästa. Korrekturläs alltid: en modell kan ta fel på namn. ¦ »🔍 Prøv også grundig læsning« på en side, der allerede er læst, viser begge tekster side om side, og du beholder den bedste. Læs altid korrektur: en model kan tage fejl af navne.
+Téléchargement du modèle… {done} sur {total} ¦ Stahování modelu… {done} z {total} ¦ Laddar ner modellen… {done} av {total} ¦ Henter modellen… {done} af {total}
+Téléchargement du modèle… ¦ Stahování modelu… ¦ Laddar ner modellen… ¦ Henter modellen…
+Lecture approfondie… {n} s ¦ Důkladné čtení… {n} s ¦ Grundlig läsning… {n} s ¦ Grundig læsning… {n} s
+La lecture approfondie n’a pas abouti. ¦ Důkladné čtení se nepodařilo. ¦ Den grundliga läsningen lyckades inte. ¦ Den grundige læsning lykkedes ikke.
+Les deux lectures côte à côte ¦ Obě čtení vedle sebe ¦ Båda läsningarna sida vid sida ¦ Begge læsninger side om side
+Le texte lu ¦ Přečtený text ¦ Den lästa texten ¦ Den læste tekst
+Écriture à la main ¦ Rukopis ¦ Handskrift ¦ Håndskrift
+Garder celle-ci ¦ Ponechat toto ¦ Behåll den här ¦ Behold denne
+Mettre dans le texte ¦ Vložit do textu ¦ Lägg in i texten ¦ Sæt ind i teksten
+La lecture approfondie est installée. ¦ Důkladné čtení je nainstalováno. ¦ Grundlig läsning är installerad. ¦ Grundig læsning er installeret.
+Défunte ¦ Zesnulá ¦ Avliden (kvinna) ¦ Afdøde (kvinde)
+Conjointe ¦ Manželka ¦ Make (kvinna) ¦ Ægtefælle (kvinde)
+Autre personne ¦ Jiná osoba ¦ Annan person ¦ Anden person
+{n} ans → née vers {year} ¦ {n} let → narozena kolem {year} ¦ {n} år → född omkring {year} ¦ {n} år → født omkring {year}
+{n} ans → né vers {year} ¦ {n} let → narozen kolem {year} ¦ {n} år → född omkring {year} ¦ {n} år → født omkring {year}
+Aucune personne trouvée dans le texte : relis-le, puis « 🧭 Repérer ». ¦ V textu nebyla nalezena žádná osoba: zkontroluj ho a pak „🧭 Rozpoznat“. ¦ Ingen person hittades i texten: läs igenom den och sedan ”🧭 Hitta”. ¦ Ingen person fundet i teksten: læs den igennem og derefter »🧭 Find«.
+TRANSCRIPTION ¦ PŘEPIS ¦ TRANSKRIPTION ¦ TRANSSKRIPTION
+Ce que l’app a trouvé dans l’acte ¦ Co aplikace našla v záznamu ¦ Vad appen hittade i akten ¦ Det, appen fandt i akten
+Ajouter à la généalogie ¦ Přidat do genealogie ¦ Lägg till i släktträdet ¦ Føj til slægtsforskningen
+Garder seulement la transcription ¦ Ponechat jen přepis ¦ Behåll bara transkriptionen ¦ Behold kun transskriptionen
+demeurant à {place} ¦ bytem v {place} ¦ bosatt i {place} ¦ bosat i {place}
+fille de {a} et de {b} ¦ dcera {a} a {b} ¦ dotter till {a} och {b} ¦ datter af {a} og {b}
+fils de {a} et de {b} ¦ syn {a} a {b} ¦ son till {a} och {b} ¦ søn af {a} og {b}
+fille de {a} ¦ dcera {a} ¦ dotter till {a} ¦ datter af {a}
+fils de {a} ¦ syn {a} ¦ son till {a} ¦ søn af {a}
+sœur de {name} ¦ sestra: {name} ¦ syster till {name} ¦ søster til {name}
+frère de {name} ¦ bratr: {name} ¦ bror till {name} ¦ bror til {name}
+parent de {name} ¦ příbuzný: {name} ¦ släkt med {name} ¦ i familie med {name}
+conjoint décédé de {name} ¦ zesnulý manžel: {name} ¦ avliden make till {name} ¦ afdød ægtefælle til {name}
+conjoint de {name} ¦ manžel: {name} ¦ make till {name} ¦ ægtefælle til {name}
+décédée avant l’acte ¦ zemřela před záznamem ¦ död före akten ¦ død før akten
+décédé avant l’acte ¦ zemřel před záznamem ¦ död före akten ¦ død før akten
+Relier à cette fiche ¦ Propojit s tímto záznamem ¦ Länka till den här posten ¦ Knyt til denne post
+Reliée à : ¦ Propojeno s: ¦ Länkad till: ¦ Knyttet til:
+Fiches proches : ¦ Podobné záznamy: ¦ Liknande poster: ¦ Lignende poster:
+Fiche existante : ¦ Existující záznam: ¦ Befintlig post: ¦ Eksisterende post:
+même personne probable ¦ pravděpodobně stejná osoba ¦ troligen samma person ¦ sandsynligvis samme person
+Pas de fiche · restera dans l’acte avec son rôle, sans créer de fiche ¦ Bez záznamu · zůstane v zápisu se svou rolí, bez vytvoření záznamu ¦ Ingen post · stannar i akten med sin roll, utan att en post skapas ¦ Ingen post · bliver i akten med sin rolle, uden at der oprettes en post
+Aucune fiche : elle sera créée et reliée comme mère de {name} ¦ Žádný záznam: vytvoří se a propojí jako matka: {name} ¦ Ingen post: den skapas och länkas som mor till {name} ¦ Ingen post: den oprettes og knyttes som mor til {name}
+Aucune fiche : elle sera créée et reliée comme père de {name} ¦ Žádný záznam: vytvoří se a propojí jako otec: {name} ¦ Ingen post: den skapas och länkas som far till {name} ¦ Ingen post: den oprettes og knyttes som far til {name}
+Aucune fiche : elle sera créée ¦ Žádný záznam: vytvoří se ¦ Ingen post: den skapas ¦ Ingen post: den oprettes
+Témoin seul ¦ Jen svědek ¦ Endast vittne ¦ Kun vidne
+Que faire de cette personne ¦ Co s touto osobou ¦ Vad ska göras med den här personen ¦ Hvad skal der ske med denne person
+Décès estimé avant l’acte ¦ Úmrtí odhadem před záznamem ¦ Död uppskattad före akten ¦ Død anslået før akten
+Gardés dans l’acte, sans fiche ¦ Ponecháni v zápisu, bez záznamu ¦ Behålls i akten, utan post ¦ Beholdt i akten, uden post
+La source ¦ Zdroj ¦ Källan ¦ Kilden
+déjà dans ta base, reprise ¦ už v tvé databázi, použit znovu ¦ redan i din databas, återanvänds ¦ allerede i din database, genbrugt
+Relever à nouveau ¦ Znovu vytěžit ¦ Plocka ut igen ¦ Udtræk igen
+Compris : {date} ¦ Rozpoznáno: {date} ¦ Tolkat: {date} ¦ Forstået: {date}
+Les personnes ({n}) ¦ Osoby ({n}) ¦ Personerna ({n}) ¦ Personerne ({n})
+Ce que l’acte ajoute aussi ¦ Co záznam přidává navíc ¦ Vad akten också tillför ¦ Hvad akten også tilføjer
+Naissance estimée d’après l’âge (marquée « estimée ») ¦ Narození odhadnuté podle věku (označené „odhad“) ¦ Födelse uppskattad från åldern (märkt ”uppskattad”) ¦ Fødsel anslået ud fra alderen (markeret »anslået«)
+Décès d’avant l’acte (« feu », « veuve de ») ¦ Úmrtí před záznamem („zesnulý“, „vdova po“) ¦ Dödsfall före akten (”framlidne”, ”änka efter”) ¦ Dødsfald før akten (»afdøde«, »enke efter«)
+Domiciles ¦ Bydliště ¦ Bostadsorter ¦ Bopæle
+La source, toute prête ¦ Zdroj, hned připravený ¦ Källan, färdig ¦ Kilden, klar
+La même source est déjà dans ta base : elle est reprise au lieu d’en créer une deuxième. ¦ Stejný zdroj už v tvé databázi je: použije se znovu místo vytvoření druhého. ¦ Samma källa finns redan i din databas: den återanvänds i stället för att en till skapas. ¦ Den samme kilde er allerede i din database: den genbruges i stedet for at oprette en ny.
+Remplie d’après le champ Source, le nom du fichier et le texte lu autour de l’image. Vérifie avant d’ajouter. ¦ Vyplněno podle pole Zdroj, názvu souboru a textu přečteného kolem obrázku. Před přidáním zkontroluj. ¦ Ifylld utifrån fältet Källa, filnamnet och texten runt bilden. Kontrollera innan du lägger till. ¦ Udfyldt ud fra feltet Kilde, filnavnet og teksten omkring billedet. Tjek før du tilføjer.
+Remplie d’après le champ Source et le nom du fichier. Vérifie avant d’ajouter. ¦ Vyplněno podle pole Zdroj a názvu souboru. Před přidáním zkontroluj. ¦ Ifylld utifrån fältet Källa och filnamnet. Kontrollera innan du lägger till. ¦ Udfyldt ud fra feltet Kilde og filnavnet. Tjek før du tilføjer.
+Voilà ce qui va entrer dans ta généalogie ¦ Toto se dostane do tvé genealogie ¦ Det här kommer in i ditt släktträd ¦ Det her kommer ind i din slægtsforskning
+Rien n’est écrasé : une information différente de la fiche est proposée, jamais imposée. « ↶ Annuler » défait tout l’ajout d’un coup. ¦ Nic se nepřepíše: údaj odlišný od záznamu se navrhne, nikdy nevnutí. „↶ Zpět“ vrátí celé přidání najednou. ¦ Inget skrivs över: uppgifter som skiljer sig från posten föreslås, tvingas aldrig på. ”↶ Ångra” tar bort hela tillägget på en gång. ¦ Intet overskrives: oplysninger, der afviger fra posten, foreslås, men påtvinges aldrig. »↶ Fortryd« fortryder hele tilføjelsen på én gang.
+C’est elle : relier ¦ Je to ona: propojit ¦ Det är hon: länka ¦ Det er hende: knyt
+C’est lui : relier ¦ Je to on: propojit ¦ Det är han: länka ¦ Det er ham: knyt
+Ce n’est pas elle ¦ To není ona ¦ Det är inte hon ¦ Det er ikke hende
+Ce n’est pas lui ¦ To není on ¦ Det är inte han ¦ Det er ikke ham
+ajouter ¦ přidat ¦ lägg till ¦ tilføj
+{name} : l’acte et la fiche côte à côte ¦ {name}: zápis a záznam vedle sebe ¦ {name}: akten och posten sida vid sida ¦ {name}: akten og posten side om side
+Dans l’acte ¦ V zápisu ¦ I akten ¦ I akten
+Fiche · {name} ¦ Záznam · {name} ¦ Post · {name} ¦ Post · {name}
+vers {year} ({n} ans) ¦ kolem {year} ({n} let) ¦ omkring {year} ({n} år) ¦ omkring {year} ({n} år)
+{date} avec {name} ¦ {date} s: {name} ¦ {date} med {name} ¦ {date} med {name}
+avant le {date} ¦ před {date} ¦ före {date} ¦ før {date}
+Les parents sont les mêmes : c’est très probablement elle. ¦ Rodiče jsou stejní: velmi pravděpodobně je to ona. ¦ Föräldrarna är desamma: det är mycket troligt hon. ¦ Forældrene er de samme: det er meget sandsynligt hende.
+Les parents sont les mêmes : c’est très probablement lui. ¦ Rodiče jsou stejní: velmi pravděpodobně je to on. ¦ Föräldrarna är desamma: det är mycket troligt han. ¦ Forældrene er de samme: det er meget sandsynligt ham.
+Les parents ne sont pas les mêmes : vérifie avant de relier. ¦ Rodiče nejsou stejní: před propojením to ověř. ¦ Föräldrarna är inte desamma: kontrollera innan du länkar. ¦ Forældrene er ikke de samme: tjek før du knytter.
+La date de naissance de la fiche est gardée (elle est plus précise que l’âge de l’acte). ¦ Datum narození ze záznamu zůstává (je přesnější než věk ze zápisu). ¦ Postens födelsedatum behålls (det är exaktare än åldern i akten). ¦ Postens fødselsdato bevares (den er mere præcis end alderen i akten).
+✓ Acte ajouté : {what} ¦ ✓ Zápis přidán: {what} ¦ ✓ Akten tillagd: {what} ¦ ✓ Akten tilføjet: {what}
+Déjà d’autres parents, lien non fait : {names} ¦ Už má jiné rodiče, propojení neprovedeno: {names} ¦ Har redan andra föräldrar, ingen länk gjord: {names} ¦ Har allerede andre forældre, ingen tilknytning: {names}
+Un modèle « vision » ouvert qui tourne sur ton ordinateur (Ollama) : lit mieux les écritures difficiles, plus lent ¦ Otevřený „vizuální“ model běžící na tvém počítači (Ollama): lépe čte obtížná písma, pomaleji ¦ En öppen ”bildmodell” som körs på din dator (Ollama): läser svåra handstilar bättre, långsammare ¦ En åben »billedmodel«, der kører på din computer (Ollama): læser svære håndskrifter bedre, langsommere
+L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches ¦ Událost, osoby a jejich vztahy, zdroj: propojit, porovnat nebo vytvořit záznamy ¦ Händelsen, personerna och deras band, källan: länka, jämför eller skapa poster ¦ Begivenheden, personerne og deres bånd, kilden: knyt, sammenlign eller opret poster
+Ce que l’app a trouvé… ¦ Co aplikace našla… ¦ Vad appen hittade… ¦ Det, appen fandt…
+La lecture approfondie n’est pas chargée. ¦ Důkladné čtení není načteno. ¦ Grundlig läsning är inte inläst. ¦ Grundig læsning er ikke indlæst.
+Lecture du texte autour de l’acte… ¦ Čtení textu kolem zápisu… ¦ Läser texten runt akten… ¦ Læser teksten omkring akten…
+Le texte est vide : lis ou écris d’abord l’acte. ¦ Text je prázdný: nejdřív zápis přečti nebo napiš. ¦ Texten är tom: läs eller skriv först akten. ¦ Teksten er tom: læs eller skriv først akten.
+Personnes gardées dans la transcription, sans créer de fiche. ¦ Osoby ponechány v přepisu, bez vytvoření záznamů. ¦ Personerna behålls i transkriptionen, utan att poster skapas. ¦ Personerne beholdes i transskriptionen, uden at der oprettes poster.
+Père du défunt ¦ Otec zesnulého ¦ Den avlidnes far ¦ Den afdødes far
+Mère du défunt ¦ Matka zesnulého ¦ Den avlidnes mor ¦ Den afdødes mor
+Déclarant ¦ Oznamovatel ¦ Anmälare ¦ Anmelder
+Acte de mariage ¦ Oddací záznam ¦ Vigselakt ¦ Vielsesakt
+Acte de baptême ¦ Křestní záznam ¦ Dopakt ¦ Dåbsakt
+Acte de naissance ¦ Rodný záznam ¦ Födelseakt ¦ Fødselsakt
+Acte de sépulture ¦ Pohřební záznam ¦ Begravningsakt ¦ Begravelsesakt
+Registre ¦ Matrika ¦ Bok ¦ Bog
+Vue ¦ Snímek ¦ Bild ¦ Opslag
+Vues en tout ¦ Snímků celkem ¦ Bilder totalt ¦ Opslag i alt
+La lecture approfondie ne parle qu’à Ollama sur cet ordinateur (127.0.0.1) : adresse refusée. ¦ Důkladné čtení komunikuje jen s Ollamou na tomto počítači (127.0.0.1): adresa odmítnuta. ¦ Grundlig läsning pratar bara med Ollama på den här datorn (127.0.0.1): adressen nekas. ¦ Grundig læsning taler kun med Ollama på denne computer (127.0.0.1): adressen afvist.
+Modèle de lecture approfondie inconnu. ¦ Neznámý model důkladného čtení. ¦ Okänd modell för grundlig läsning. ¦ Ukendt model til grundig læsning.
+La lecture approfondie a besoin de l’extension cURL de PHP. ¦ Důkladné čtení potřebuje rozšíření cURL pro PHP. ¦ Grundlig läsning behöver PHP-tillägget cURL. ¦ Grundig læsning kræver PHP-udvidelsen cURL.
+Ollama ne répond pas sur cet ordinateur : installe-le (ollama.com), lance-le, puis réessaie. ¦ Ollama na tomto počítači neodpovídá: nainstaluj ji (ollama.com), spusť a zkus to znovu. ¦ Ollama svarar inte på den här datorn: installera den (ollama.com), starta den och försök igen. ¦ Ollama svarer ikke på denne computer: installer det (ollama.com), start det, og prøv igen.
+Image manquante. ¦ Chybí obrázek. ¦ Bild saknas. ¦ Billede mangler.
+Image trop lourde. ¦ Obrázek je příliš velký (soubor). ¦ Bilden är för tung. ¦ Billedet er for tungt.
+Image trop grande. ¦ Obrázek je příliš velký. ¦ Bilden är för stor. ¦ Billedet er for stort.
+Ce modèle n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Tento model ještě není stažený: „⤓ Nainstalovat důkladné čtení“. ¦ Den här modellen är inte nedladdad än: ”⤓ Installera grundlig läsning”. ¦ Denne model er ikke hentet endnu: »⤓ Installer grundig læsning«.
+Une fiche à relier n’existe plus : choisis-en une autre. ¦ Záznam k propojení už neexistuje: vyber jiný. ¦ En post att länka finns inte längre: välj en annan. ¦ En post, der skal knyttes, findes ikke længere: vælg en anden.
+Une personne à créer n’a ni prénom ni nom. ¦ Osoba k vytvoření nemá jméno ani příjmení. ¦ En person att skapa saknar både förnamn och efternamn. ¦ En person, der skal oprettes, har hverken fornavn eller efternavn.
+Trop de personnes dans un seul acte. ¦ Příliš mnoho osob v jednom zápisu. ¦ För många personer i en enda akt. ¦ For mange personer i én akt.
+Annulation impossible : ce n’est pas l’ajout d’un acte. ¦ Nelze vrátit: nejde o přidání zápisu. ¦ Kan inte ångras: det här är inte ett tillägg av en akt. ¦ Kan ikke fortrydes: det er ikke tilføjelsen af en akt.
+Le téléchargement du modèle n’a pas abouti. ¦ Stažení modelu se nepodařilo. ¦ Nedladdningen av modellen lyckades inte. ¦ Hentningen af modellen lykkedes ikke.
+La lecture approfondie a pris trop de temps. ¦ Důkladné čtení trvalo příliš dlouho. ¦ Den grundliga läsningen tog för lång tid. ¦ Den grundige læsning tog for lang tid.

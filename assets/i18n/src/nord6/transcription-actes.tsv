@@ -1,0 +1,145 @@
+fr ¦ lt ¦ lv ¦ et
+# Zone « transcription-actes » : recadrage, lecture approfondie (Ollama), « Ce que l’app a trouvé » (heritage-transcribe-acte.js, lib/transcription_actes.php)
+LECTURE AUTOMATIQUE ¦ AUTOMATINIS SKAITYMAS ¦ AUTOMĀTISKA LASĪŠANA ¦ AUTOMAATNE LUGEMINE
+Recadrer sur le texte ? ¦ Apkirpti iki teksto? ¦ Apgriezt līdz tekstam? ¦ Kas kärpida tekstini?
+Recadrer sur le texte ¦ Apkirpti iki teksto ¦ Apgriezt līdz tekstam ¦ Kärbi tekstini
+Lire quand même ¦ Vis tiek skaityti ¦ Tik un tā lasīt ¦ Loe ikkagi
+Cette image ressemble à une capture d’écran ¦ Šis vaizdas panašus į ekrano kopiją ¦ Šis attēls izskatās pēc ekrānuzņēmuma ¦ See pilt näeb välja nagu kuvatõmmis
+(boutons et bords gris autour) : la lecture sera moins bonne. Télécharge l’image en grand sur le site des archives, ou recadre sur le texte. ¦ (mygtukai ir pilki kraštai aplink): skaitymas bus prastesnis. Atsisiųsk didelį vaizdą iš archyvo svetainės arba apkirpk iki teksto. ¦ (pogas un pelēkas malas apkārt): lasīšana būs sliktāka. Lejupielādē lielu attēlu no arhīva vietnes vai apgriez līdz tekstam. ¦ (nupud ja hallid servad ümber): lugemine tuleb halvem. Laadi pilt suurelt arhiivi veebilehelt alla või kärbi tekstini.
+La zone qui sera lue ¦ Sritis, kuri bus skaitoma ¦ Apgabals, kas tiks lasīts ¦ Ala, mida loetakse
+Le cadre bleu montre la zone qui sera lue. Pour choisir toi-même, dessine une zone (▭) puis « ✨ Lire cette zone ». ¦ Mėlynas rėmelis rodo sritį, kuri bus skaitoma. Norėdamas pasirinkti pats, nubraižyk sritį (▭), tada „✨ Skaityti šią sritį“. ¦ Zilais rāmis rāda apgabalu, kas tiks lasīts. Lai izvēlētos pats, uzzīmē apgabalu (▭), tad “✨ Lasīt šo apgabalu”. ¦ Sinine raam näitab ala, mida loetakse. Ise valimiseks joonista ala (▭) ja siis „✨ Loe seda ala“.
+La lecture à la main a donné un texte peu sûr ¦ Rankraščio skaitymas davė nepatikimą tekstą ¦ Rokraksta lasīšana deva nedrošu tekstu ¦ Käekirja lugemine andis ebakindla teksti
+({x} % de mots douteux). Souvent à cause des bords de l’écran autour de l’acte, ou d’une écriture trop difficile pour ce modèle. ¦ ({x} % abejotinų žodžių). Dažnai dėl ekrano kraštų aplink įrašą arba šiam modeliui per sunkios rašysenos. ¦ ({x} % apšaubāmu vārdu). Bieži ekrāna malu dēļ ap ierakstu vai šim modelim pārāk grūta rokraksta dēļ. ¦ ({x} % kahtlasi sõnu). Sageli kirje ümber olevate ekraaniservade või selle mudeli jaoks liiga raske käekirja tõttu.
+Recadrer et relire ¦ Apkirpti ir skaityti iš naujo ¦ Apgriezt un lasīt vēlreiz ¦ Kärbi ja loe uuesti
+Essayer la lecture approfondie ¦ Išbandyti išsamų skaitymą ¦ Izmēģināt padziļinātu lasīšanu ¦ Proovi põhjalikku lugemist
+LECTURE APPROFONDIE ¦ IŠSAMUS SKAITYMAS ¦ PADZIĻINĀTA LASĪŠANA ¦ PÕHJALIK LUGEMINE
+Lecture approfondie ¦ Išsamus skaitymas ¦ Padziļināta lasīšana ¦ Põhjalik lugemine
+Ce qu’il faut ¦ Ko reikia ¦ Kas vajadzīgs ¦ Mida on vaja
+Ollama (gratuit, open source) et un modèle vision ouvert, au choix : ¦ Ollama (nemokama, atvirojo kodo) ir pasirinktas atviras regos modelis: ¦ Ollama (bezmaksas, atvērtā koda) un atvērts redzes modelis pēc izvēles: ¦ Ollama (tasuta, avatud lähtekoodiga) ja valikuline avatud nägemismudel:
+le meilleur, ≈ {x} Go ¦ geriausias, ≈ {x} GB ¦ labākais, ≈ {x} GB ¦ parim, ≈ {x} GB
+plus léger, ≈ {x} Go, pour un ordinateur modeste ¦ lengvesnis, ≈ {x} GB, kuklesniam kompiuteriui ¦ vieglāks, ≈ {x} GB, pieticīgākam datoram ¦ kergem, ≈ {x} GB, tagasihoidlikumale arvutile
+déjà téléchargé ¦ jau atsisiųsta ¦ jau lejupielādēts ¦ juba alla laaditud
+8 Go conseillés (16 Go pour le 8B) · téléchargé une seule fois ¦ rekomenduojama 8 GB (8B – 16 GB) · atsisiunčiama tik kartą ¦ ieteicami 8 GB (8B – 16 GB) · lejupielādē tikai vienreiz ¦ soovitatav 8 GB (8B jaoks 16 GB) · laaditakse alla ainult üks kord
+≈ 20 à 60 s par page sur un ordinateur récent ¦ ≈ 20–60 s puslapiui naujesniame kompiuteryje ¦ ≈ 20–60 s lapai jaunākā datorā ¦ ≈ 20–60 s lehe kohta uuemal arvutil
+Confidentialité ¦ Privatumas ¦ Privātums ¦ Privaatsus
+rien ne quitte ton ordinateur ; l’app vérifie qu’Ollama ne répond que sur ton ordinateur ¦ niekas nepalieka tavo kompiuterio; programa tikrina, kad Ollama atsakytų tik tavo kompiuteryje ¦ nekas neatstāj tavu datoru; lietotne pārbauda, vai Ollama atbild tikai tavā datorā ¦ midagi ei lahku sinu arvutist; rakendus kontrollib, et Ollama vastab ainult sinu arvutis
+Recherche d’Ollama sur cet ordinateur… ¦ Ieškoma Ollama šiame kompiuteryje… ¦ Meklē Ollama šajā datorā… ¦ Otsin Ollamat sellest arvutist…
+L’adresse d’Ollama n’est pas sur cet ordinateur : la lecture approfondie est refusée. ¦ Ollama adresas ne šiame kompiuteryje: išsamus skaitymas atmetamas. ¦ Ollama adrese nav šajā datorā: padziļināta lasīšana tiek atteikta. ¦ Ollama aadress ei ole selles arvutis: põhjalik lugemine on keelatud.
+Ollama n’est pas encore sur cet ordinateur. ¦ Ollama šiame kompiuteryje dar nėra. ¦ Ollama šajā datorā vēl nav. ¦ Ollamat pole veel selles arvutis.
+Installe-le une fois depuis son site (gratuit), lance-le, puis « ↻ Vérifier à nouveau ». ¦ Įdiek jį vieną kartą iš jo svetainės (nemokamai), paleisk, tada „↻ Tikrinti iš naujo“. ¦ Instalē to vienreiz no tā vietnes (bez maksas), palaid un tad “↻ Pārbaudīt vēlreiz”. ¦ Paigalda see üks kord selle veebilehelt (tasuta), käivita ja siis „↻ Kontrolli uuesti“.
+Ollama est installé mais ne tourne pas. ¦ Ollama įdiegta, bet neveikia. ¦ Ollama ir instalēta, bet nedarbojas. ¦ Ollama on paigaldatud, kuid ei tööta.
+Lance l’application Ollama, puis « ↻ Vérifier à nouveau ». ¦ Paleisk programą Ollama, tada „↻ Tikrinti iš naujo“. ¦ Palaid lietotni Ollama, tad “↻ Pārbaudīt vēlreiz”. ¦ Käivita rakendus Ollama ja siis „↻ Kontrolli uuesti“.
+Prêt : la lecture se fait sur cet ordinateur, sans Internet. ¦ Paruošta: skaitoma šiame kompiuteryje, be interneto. ¦ Gatavs: lasīšana notiek šajā datorā, bez interneta. ¦ Valmis: lugemine toimub selles arvutis, ilma internetita.
+Télécharger Ollama (ollama.com) ¦ Atsisiųsti Ollama (ollama.com) ¦ Lejupielādēt Ollama (ollama.com) ¦ Laadi Ollama alla (ollama.com)
+Installer la lecture approfondie ¦ Įdiegti išsamų skaitymą ¦ Instalēt padziļinātu lasīšanu ¦ Paigalda põhjalik lugemine
+Lire l’acte avec ce modèle ¦ Skaityti įrašą šiuo modeliu ¦ Lasīt ierakstu ar šo modeli ¦ Loe kirjet selle mudeliga
+Vérifier à nouveau ¦ Tikrinti iš naujo ¦ Pārbaudīt vēlreiz ¦ Kontrolli uuesti
+« 🔍 Essayer aussi la lecture approfondie » sur une page déjà lue montre les deux textes côte à côte, et on garde la meilleure. Relis toujours : un modèle peut se tromper sur les noms. ¦ „🔍 Išbandyti ir išsamų skaitymą“ jau perskaitytame puslapyje parodo abu tekstus greta, ir pasilieki geresnį. Visada patikrink: modelis gali suklysti dėl vardų. ¦ “🔍 Izmēģināt arī padziļinātu lasīšanu” jau nolasītā lapā parāda abus tekstus blakus, un tu paturi labāko. Vienmēr pārbaudi: modelis var kļūdīties vārdos. ¦ „🔍 Proovi ka põhjalikku lugemist“ juba loetud lehel näitab mõlemat teksti kõrvuti ja jätad parema. Kontrolli alati üle: mudel võib nimedes eksida.
+Téléchargement du modèle… {done} sur {total} ¦ Atsisiunčiamas modelis… {done} iš {total} ¦ Lejupielādē modeli… {done} no {total} ¦ Mudeli allalaadimine… {done} / {total}
+Téléchargement du modèle… ¦ Atsisiunčiamas modelis… ¦ Lejupielādē modeli… ¦ Mudeli allalaadimine…
+Lecture approfondie… {n} s ¦ Išsamus skaitymas… {n} s ¦ Padziļināta lasīšana… {n} s ¦ Põhjalik lugemine… {n} s
+La lecture approfondie n’a pas abouti. ¦ Išsamus skaitymas nepavyko. ¦ Padziļināta lasīšana neizdevās. ¦ Põhjalik lugemine ei õnnestunud.
+Les deux lectures côte à côte ¦ Abu skaitymai greta ¦ Abas lasīšanas blakus ¦ Mõlemad lugemised kõrvuti
+Le texte lu ¦ Perskaitytas tekstas ¦ Nolasītais teksts ¦ Loetud tekst
+Écriture à la main ¦ Rankraštis ¦ Rokraksts ¦ Käekiri
+Garder celle-ci ¦ Palikti šį ¦ Paturēt šo ¦ Jäta see
+Mettre dans le texte ¦ Įdėti į tekstą ¦ Ielikt tekstā ¦ Pane teksti
+La lecture approfondie est installée. ¦ Išsamus skaitymas įdiegtas. ¦ Padziļināta lasīšana ir instalēta. ¦ Põhjalik lugemine on paigaldatud.
+Défunte ¦ Mirusioji ¦ Mirusī ¦ Lahkunu (naine)
+Conjointe ¦ Sutuoktinė ¦ Laulātā (sieva) ¦ Abikaasa (naine)
+Autre personne ¦ Kitas asmuo ¦ Cita persona ¦ Muu isik
+{n} ans → née vers {year} ¦ {n} m. → gimusi apie {year} ¦ {n} g. → dzimusi ap {year} ¦ {n} a → sündinud umbes {year}
+{n} ans → né vers {year} ¦ {n} m. → gimęs apie {year} ¦ {n} g. → dzimis ap {year} ¦ {n} a → sündinud umbes {year}
+Aucune personne trouvée dans le texte : relis-le, puis « 🧭 Repérer ». ¦ Tekste nerasta nė vieno asmens: patikrink jį, tada „🧭 Atpažinti“. ¦ Tekstā nav atrasta neviena persona: pārbaudi to, tad “🧭 Atpazīt”. ¦ Tekstist ei leitud ühtegi isikut: kontrolli seda ja siis „🧭 Tuvasta“.
+TRANSCRIPTION ¦ TRANSKRIPCIJA ¦ TRANSKRIPCIJA ¦ TRANSKRIPTSIOON
+Ce que l’app a trouvé dans l’acte ¦ Ką programa rado įraše ¦ Ko lietotne atrada ierakstā ¦ Mida rakendus kirjest leidis
+Ajouter à la généalogie ¦ Pridėti į genealogiją ¦ Pievienot ģenealoģijai ¦ Lisa sugupuusse
+Garder seulement la transcription ¦ Palikti tik transkripciją ¦ Paturēt tikai transkripciju ¦ Jäta ainult transkriptsioon
+demeurant à {place} ¦ gyvenantis {place} ¦ dzīvo {place} ¦ elukoht {place}
+fille de {a} et de {b} ¦ {a} ir {b} duktė ¦ {a} un {b} meita ¦ {a} ja {b} tütar
+fils de {a} et de {b} ¦ {a} ir {b} sūnus ¦ {a} un {b} dēls ¦ {a} ja {b} poeg
+fille de {a} ¦ {a} duktė ¦ {a} meita ¦ {a} tütar
+fils de {a} ¦ {a} sūnus ¦ {a} dēls ¦ {a} poeg
+sœur de {name} ¦ sesuo: {name} ¦ māsa: {name} ¦ õde: {name}
+frère de {name} ¦ brolis: {name} ¦ brālis: {name} ¦ vend: {name}
+parent de {name} ¦ giminaitis: {name} ¦ radinieks: {name} ¦ sugulane: {name}
+conjoint décédé de {name} ¦ miręs sutuoktinis: {name} ¦ mirušais laulātais: {name} ¦ surnud abikaasa: {name}
+conjoint de {name} ¦ sutuoktinis: {name} ¦ laulātais: {name} ¦ abikaasa: {name}
+décédée avant l’acte ¦ mirė iki įrašo ¦ mirusi pirms ieraksta ¦ surnud enne kirjet
+décédé avant l’acte ¦ mirė iki įrašo ¦ miris pirms ieraksta ¦ surnud enne kirjet
+Relier à cette fiche ¦ Susieti su šiuo įrašu ¦ Saistīt ar šo ierakstu ¦ Seo selle kirjega
+Reliée à : ¦ Susieta su: ¦ Saistīts ar: ¦ Seotud:
+Fiches proches : ¦ Panašūs įrašai: ¦ Līdzīgi ieraksti: ¦ Sarnased kirjed:
+Fiche existante : ¦ Esamas įrašas: ¦ Esošs ieraksts: ¦ Olemasolev kirje:
+même personne probable ¦ tikriausiai tas pats asmuo ¦ visticamāk tā pati persona ¦ tõenäoliselt sama isik
+Pas de fiche · restera dans l’acte avec son rôle, sans créer de fiche ¦ Nėra įrašo · liks akte su savo vaidmeniu, nekuriant įrašo ¦ Nav ieraksta · paliks aktā ar savu lomu, neveidojot ierakstu ¦ Kirjet pole · jääb aktis oma rolliga, kirjet loomata
+Aucune fiche : elle sera créée et reliée comme mère de {name} ¦ Įrašo nėra: jis bus sukurtas ir susietas kaip motina: {name} ¦ Ieraksta nav: tas tiks izveidots un saistīts kā māte: {name} ¦ Kirjet pole: see luuakse ja seotakse emana: {name}
+Aucune fiche : elle sera créée et reliée comme père de {name} ¦ Įrašo nėra: jis bus sukurtas ir susietas kaip tėvas: {name} ¦ Ieraksta nav: tas tiks izveidots un saistīts kā tēvs: {name} ¦ Kirjet pole: see luuakse ja seotakse isana: {name}
+Aucune fiche : elle sera créée ¦ Įrašo nėra: jis bus sukurtas ¦ Ieraksta nav: tas tiks izveidots ¦ Kirjet pole: see luuakse
+Témoin seul ¦ Tik liudytojas ¦ Tikai liecinieks ¦ Ainult tunnistaja
+Que faire de cette personne ¦ Ką daryti su šiuo asmeniu ¦ Ko darīt ar šo personu ¦ Mida selle isikuga teha
+Décès estimé avant l’acte ¦ Mirtis įvertinta iki įrašo ¦ Nāve aplēsta pirms ieraksta ¦ Surm hinnanguliselt enne kirjet
+Gardés dans l’acte, sans fiche ¦ Palikti akte, be įrašo ¦ Paturēti aktā, bez ieraksta ¦ Jäetud akti, ilma kirjeta
+La source ¦ Šaltinis ¦ Avots ¦ Allikas
+déjà dans ta base, reprise ¦ jau tavo duomenų bazėje, panaudotas iš naujo ¦ jau tavā datubāzē, izmantots atkārtoti ¦ juba sinu andmebaasis, kasutatakse uuesti
+Relever à nouveau ¦ Išgauti iš naujo ¦ Iegūt vēlreiz ¦ Eralda uuesti
+Compris : {date} ¦ Suprasta: {date} ¦ Saprasts: {date} ¦ Tõlgendatud: {date}
+Les personnes ({n}) ¦ Asmenys ({n}) ¦ Personas ({n}) ¦ Isikud ({n})
+Ce que l’acte ajoute aussi ¦ Ką įrašas dar prideda ¦ Ko ieraksts vēl pievieno ¦ Mida kirje veel lisab
+Naissance estimée d’après l’âge (marquée « estimée ») ¦ Gimimas įvertintas pagal amžių (pažymėta „apytiksliai“) ¦ Dzimšana aplēsta pēc vecuma (atzīmēta “aplēsts”) ¦ Sünd hinnatud vanuse järgi (märgitud „hinnanguline“)
+Décès d’avant l’acte (« feu », « veuve de ») ¦ Mirtys iki įrašo („velionis“, „našlė“) ¦ Nāves pirms ieraksta (“nelaiķis”, “atraitne”) ¦ Surmad enne kirjet („kadunud“, „lesk“)
+Domiciles ¦ Gyvenamosios vietos ¦ Dzīvesvietas ¦ Elukohad
+La source, toute prête ¦ Šaltinis, paruoštas ¦ Avots, gatavs ¦ Allikas, valmis
+La même source est déjà dans ta base : elle est reprise au lieu d’en créer une deuxième. ¦ Tas pats šaltinis jau yra tavo duomenų bazėje: jis naudojamas iš naujo, užuot kūrus antrą. ¦ Tas pats avots jau ir tavā datubāzē: tas tiek izmantots atkārtoti, nevis veidots otrs. ¦ Sama allikas on juba sinu andmebaasis: seda kasutatakse uuesti, teist ei looda.
+Remplie d’après le champ Source, le nom du fichier et le texte lu autour de l’image. Vérifie avant d’ajouter. ¦ Užpildyta pagal lauką Šaltinis, failo pavadinimą ir aplink vaizdą perskaitytą tekstą. Patikrink prieš pridėdamas. ¦ Aizpildīts pēc lauka Avots, faila nosaukuma un ap attēlu nolasītā teksta. Pārbaudi pirms pievienošanas. ¦ Täidetud välja Allikas, failinime ja pildi ümbert loetud teksti põhjal. Kontrolli enne lisamist.
+Remplie d’après le champ Source et le nom du fichier. Vérifie avant d’ajouter. ¦ Užpildyta pagal lauką Šaltinis ir failo pavadinimą. Patikrink prieš pridėdamas. ¦ Aizpildīts pēc lauka Avots un faila nosaukuma. Pārbaudi pirms pievienošanas. ¦ Täidetud välja Allikas ja failinime põhjal. Kontrolli enne lisamist.
+Voilà ce qui va entrer dans ta généalogie ¦ Štai kas pateks į tavo genealogiją ¦ Lūk, kas nonāks tavā ģenealoģijā ¦ See läheb sinu sugupuusse
+Rien n’est écrasé : une information différente de la fiche est proposée, jamais imposée. « ↶ Annuler » défait tout l’ajout d’un coup. ¦ Niekas neperrašoma: nuo įrašo besiskirianti informacija siūloma, niekada neprimetama. „↶ Anuliuoti“ atšaukia visą pridėjimą iš karto. ¦ Nekas netiek pārrakstīts: no ieraksta atšķirīga informācija tiek ieteikta, nekad uzspiesta. “↶ Atsaukt” atceļ visu pievienošanu uzreiz. ¦ Midagi ei kirjutata üle: kirjest erinev teave pakutakse välja, mitte ei sunnita peale. „↶ Võta tagasi“ tühistab kogu lisamise korraga.
+C’est elle : relier ¦ Tai ji: susieti ¦ Tā ir viņa: saistīt ¦ See on tema: seo
+C’est lui : relier ¦ Tai jis: susieti ¦ Tas ir viņš: saistīt ¦ See on tema: seo
+Ce n’est pas elle ¦ Tai ne ji ¦ Tā nav viņa ¦ See pole tema
+Ce n’est pas lui ¦ Tai ne jis ¦ Tas nav viņš ¦ See pole tema
+ajouter ¦ pridėti ¦ pievienot ¦ lisa
+{name} : l’acte et la fiche côte à côte ¦ {name}: aktas ir įrašas greta ¦ {name}: akts un ieraksts blakus ¦ {name}: akt ja kirje kõrvuti
+Dans l’acte ¦ Akte ¦ Aktā ¦ Aktis
+Fiche · {name} ¦ Įrašas · {name} ¦ Ieraksts · {name} ¦ Kirje · {name}
+vers {year} ({n} ans) ¦ apie {year} ({n} m.) ¦ ap {year} ({n} g.) ¦ umbes {year} ({n} a)
+{date} avec {name} ¦ {date} su: {name} ¦ {date} ar: {name} ¦ {date}, koos: {name}
+avant le {date} ¦ iki {date} ¦ pirms {date} ¦ enne {date}
+Les parents sont les mêmes : c’est très probablement elle. ¦ Tėvai tie patys: labai tikėtina, kad tai ji. ¦ Vecāki ir tie paši: ļoti iespējams, tā ir viņa. ¦ Vanemad on samad: väga tõenäoliselt on see tema.
+Les parents sont les mêmes : c’est très probablement lui. ¦ Tėvai tie patys: labai tikėtina, kad tai jis. ¦ Vecāki ir tie paši: ļoti iespējams, tas ir viņš. ¦ Vanemad on samad: väga tõenäoliselt on see tema.
+Les parents ne sont pas les mêmes : vérifie avant de relier. ¦ Tėvai ne tie patys: patikrink prieš susiedamas. ¦ Vecāki nav tie paši: pārbaudi pirms saistīšanas. ¦ Vanemad ei ole samad: kontrolli enne sidumist.
+La date de naissance de la fiche est gardée (elle est plus précise que l’âge de l’acte). ¦ Įrašo gimimo data paliekama (ji tikslesnė nei amžius akte). ¦ Ieraksta dzimšanas datums tiek saglabāts (tas ir precīzāks par vecumu aktā). ¦ Kirje sünnikuupäev jääb alles (see on täpsem kui vanus aktis).
+✓ Acte ajouté : {what} ¦ ✓ Aktas pridėtas: {what} ¦ ✓ Akts pievienots: {what} ¦ ✓ Akt lisatud: {what}
+Déjà d’autres parents, lien non fait : {names} ¦ Jau turi kitus tėvus, ryšys nesukurtas: {names} ¦ Jau ir citi vecāki, saite nav izveidota: {names} ¦ Juba on teised vanemad, sidet ei loodud: {names}
+Un modèle « vision » ouvert qui tourne sur ton ordinateur (Ollama) : lit mieux les écritures difficiles, plus lent ¦ Atviras „regos“ modelis tavo kompiuteryje (Ollama): geriau skaito sunkią rašyseną, lėtesnis ¦ Atvērts “redzes” modelis tavā datorā (Ollama): labāk lasa grūtus rokrakstus, lēnāks ¦ Avatud „nägemis“-mudel sinu arvutis (Ollama): loeb rasket käekirja paremini, aeglasem
+L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches ¦ Įvykis, asmenys ir jų ryšiai, šaltinis: susieti, palyginti ar sukurti įrašus ¦ Notikums, personas un to saites, avots: saistīt, salīdzināt vai izveidot ierakstus ¦ Sündmus, isikud ja nende seosed, allikas: seo, võrdle või loo kirjed
+Ce que l’app a trouvé… ¦ Ką rado programa… ¦ Ko atrada lietotne… ¦ Mida rakendus leidis…
+La lecture approfondie n’est pas chargée. ¦ Išsamus skaitymas neįkeltas. ¦ Padziļinātā lasīšana nav ielādēta. ¦ Põhjalik lugemine pole laaditud.
+Lecture du texte autour de l’acte… ¦ Skaitomas tekstas aplink aktą… ¦ Lasa tekstu ap aktu… ¦ Akti ümbritseva teksti lugemine…
+Le texte est vide : lis ou écris d’abord l’acte. ¦ Tekstas tuščias: pirmiausia perskaityk arba įrašyk aktą. ¦ Teksts ir tukšs: vispirms nolasi vai ieraksti aktu. ¦ Tekst on tühi: loe või kirjuta esmalt akt.
+Personnes gardées dans la transcription, sans créer de fiche. ¦ Asmenys palikti transkripcijoje, nekuriant įrašų. ¦ Personas paturētas transkripcijā, neveidojot ierakstus. ¦ Isikud jäetakse transkriptsiooni, kirjeid loomata.
+Père du défunt ¦ Mirusiojo tėvas ¦ Mirušā tēvs ¦ Lahkunu isa
+Mère du défunt ¦ Mirusiojo motina ¦ Mirušā māte ¦ Lahkunu ema
+Déclarant ¦ Pareiškėjas ¦ Pieteicējs ¦ Teataja
+Acte de mariage ¦ Santuokos aktas ¦ Laulības akts ¦ Abielukanne
+Acte de baptême ¦ Krikšto aktas ¦ Kristību akts ¦ Ristimiskanne
+Acte de naissance ¦ Gimimo aktas ¦ Dzimšanas akts ¦ Sünnikanne
+Acte de sépulture ¦ Laidojimo aktas ¦ Apbedīšanas akts ¦ Matmiskanne
+Registre ¦ Knyga ¦ Grāmata ¦ Raamat
+Vue ¦ Vaizdas ¦ Attēls ¦ Kaader
+Vues en tout ¦ Iš viso vaizdų ¦ Attēlu kopā ¦ Kaadreid kokku
+La lecture approfondie ne parle qu’à Ollama sur cet ordinateur (127.0.0.1) : adresse refusée. ¦ Išsamus skaitymas jungiasi tik prie Ollama šiame kompiuteryje (127.0.0.1): adresas atmestas. ¦ Padziļinātā lasīšana sazinās tikai ar Ollama šajā datorā (127.0.0.1): adrese noraidīta. ¦ Põhjalik lugemine suhtleb ainult selle arvuti Ollamaga (127.0.0.1): aadress keelatud.
+Modèle de lecture approfondie inconnu. ¦ Nežinomas išsamaus skaitymo modelis. ¦ Nezināms padziļinātās lasīšanas modelis. ¦ Tundmatu põhjaliku lugemise mudel.
+La lecture approfondie a besoin de l’extension cURL de PHP. ¦ Išsamiam skaitymui reikia PHP plėtinio cURL. ¦ Padziļinātajai lasīšanai vajag PHP paplašinājumu cURL. ¦ Põhjalik lugemine vajab PHP laiendust cURL.
+Ollama ne répond pas sur cet ordinateur : installe-le (ollama.com), lance-le, puis réessaie. ¦ Ollama šiame kompiuteryje neatsako: įdiek ją (ollama.com), paleisk ir bandyk dar kartą. ¦ Ollama šajā datorā neatbild: instalē to (ollama.com), palaid un mēģini vēlreiz. ¦ Ollama ei vasta selles arvutis: paigalda see (ollama.com), käivita ja proovi uuesti.
+Image manquante. ¦ Trūksta vaizdo. ¦ Trūkst attēla. ¦ Pilt puudub.
+Image trop lourde. ¦ Vaizdas per sunkus. ¦ Attēls ir pārāk smags. ¦ Pilt on liiga raske.
+Image trop grande. ¦ Vaizdas per didelis. ¦ Attēls ir pārāk liels. ¦ Pilt on liiga suur.
+Ce modèle n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Šis modelis dar neatsisiųstas: „⤓ Įdiegti išsamų skaitymą“. ¦ Šis modelis vēl nav lejupielādēts: “⤓ Instalēt padziļinātu lasīšanu”. ¦ Seda mudelit pole veel alla laaditud: „⤓ Paigalda põhjalik lugemine“.
+Une fiche à relier n’existe plus : choisis-en une autre. ¦ Susietino įrašo nebėra: pasirink kitą. ¦ Saistāmais ieraksts vairs nepastāv: izvēlies citu. ¦ Seotavat kirjet enam pole: vali muu.
+Une personne à créer n’a ni prénom ni nom. ¦ Kuriamas asmuo neturi nei vardo, nei pavardės. ¦ Izveidojamai personai nav ne vārda, ne uzvārda. ¦ Loodaval isikul pole ees- ega perekonnanime.
+Trop de personnes dans un seul acte. ¦ Per daug asmenų viename akte. ¦ Pārāk daudz personu vienā aktā. ¦ Liiga palju isikuid ühes aktis.
+Annulation impossible : ce n’est pas l’ajout d’un acte. ¦ Neįmanoma anuliuoti: tai ne akto pridėjimas. ¦ Atsaukt nav iespējams: tā nav akta pievienošana. ¦ Tagasivõtmine pole võimalik: see pole akti lisamine.
+Le téléchargement du modèle n’a pas abouti. ¦ Modelio atsisiųsti nepavyko. ¦ Modeļa lejupielāde neizdevās. ¦ Mudeli allalaadimine ei õnnestunud.
+La lecture approfondie a pris trop de temps. ¦ Išsamus skaitymas užtruko per ilgai. ¦ Padziļinātā lasīšana ilga pārāk ilgi. ¦ Põhjalik lugemine võttis liiga kaua aega.

@@ -8,6 +8,7 @@ require_once __DIR__ . '/lib/echanges.php'; // ⤓ exports en plus : Pour Genean
 require_once __DIR__ . '/lib/import_autres.php'; // ⤒ RootsMagic (.rmtree, .rmgc) lu directement ; Family Tree Maker (.ftm) refusé avec une phrase claire
 require_once __DIR__ . '/lib/imports.php'; // ⤒ Gramps (.gramps, .gpkg), aperçu avant import, « ↶ Annuler » d'un import, fichiers ADN bruts refusés
 require_once __DIR__ . '/lib/wikidata.php'; // 🌐 identifiant Wikidata d'une fiche, « Compléter depuis Wikidata » à la demande (+ ↶ Annuler)
+require_once __DIR__ . '/lib/transcription_actes.php'; // 📜 Transcription d'actes : 🔍 lecture approfondie (Ollama, sur cet ordinateur), « Ce que l'app a trouvé » → la généalogie (+ ↶ Annuler)
 require_once __DIR__ . '/lib/imports_plus.php'; // ⤒ relevés Nimègue / cercles, tableau de personnes, références RIS / BibTeX ↔ sources, lieux KML / GeoJSON
 require __DIR__ . '/lib/backup.php';   // sauvegarde complète (base + médias), ouverture d'une base .db
 require_once __DIR__ . '/lib/picker.php'; // 🔍 menu de choix unique (assets/js/app-picker.js, docs/PICKER.md)
@@ -382,6 +383,9 @@ try {
             }]);
         } catch (Throwable $e) { json_response(['error' => readable_error_message($e)], 422); }
     }
+    if (in_array($action, TX_DEEP_ACTIONS, true)) { // 🔍 lecture approfondie (lib/transcription_actes.php) : rien n'est écrit dans la base
+        tx_deep_dispatch((string) $action, $isWrite, $payload);
+    }
     if (!$isWrite && $action === 'htr_read_job') {
         try { json_response(htr_read_job(safe_text($_GET['id'] ?? ''))); } catch (Throwable $e) { json_response(['error' => readable_error_message($e)], 422); }
     }
@@ -569,6 +573,7 @@ try {
         'act_transcriptions' => json_response(['items' => act_transcriptions_list($pdo)]),
         'act_transcriptions_page' => json_response(act_transcriptions_page($pdo, $_GET)), // Listes → Transcriptions d'actes (lecture seule, page par page)
         'act_transcription' => json_response(act_transcription_get($pdo, safe_int($_GET['id'] ?? 0))),
+        'act_people_details' => json_response(['people' => act_people_details($pdo, array_map('intval', explode(',', (string) ($_GET['ids'] ?? ''))))]), // 📜 ⇆ Comparer
         'vector_map_places' => json_response(vector_map_places($pdo, (float) ($_GET['n'] ?? 0), (float) ($_GET['s'] ?? 0), (float) ($_GET['w'] ?? 0), (float) ($_GET['e'] ?? 0))),
         'diagram_genea' => json_response(diagram_genea_data($pdo, $_GET)), // 📊 lib/diagram_genea.php
         'diagram_people' => json_response(diagram_people($pdo, array_map('intval', explode(',', (string) ($_GET['ids'] ?? ''))))),
@@ -9998,6 +10003,9 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'delete_act_transcription' => delete_act_transcription($pdo,$data),
             'rename_act_transcription' => rename_act_transcription($pdo,$data),
             'act_match_people' => act_transcription_match_people($pdo, is_array($data['names'] ?? null) ? $data['names'] : []),
+            'act_import_check' => act_import_check($pdo,$data), // 📜 Ce que l'app a trouvé : fiches ressemblantes (lib/transcription_actes.php)
+            'act_import_apply' => act_import_apply($pdo,$data), // 📜 ✓ Ajouter à la généalogie, d'un coup
+            'act_import_undo' => act_import_undo($pdo,$data), // 📜 ↶ Annuler cet ajout
             'delete_vector_doc' => delete_vector_doc($pdo,$data),
             'delete_diagram' => delete_diagram($pdo,$data),
             'link_diagram' => link_diagram($pdo,$data),

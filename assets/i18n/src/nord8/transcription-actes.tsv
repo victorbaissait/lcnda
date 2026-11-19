@@ -1,0 +1,145 @@
+fr ¦ tr
+# Zone « transcription-actes » : recadrage, lecture approfondie (Ollama), « Ce que l’app a trouvé » (heritage-transcribe-acte.js, lib/transcription_actes.php)
+LECTURE AUTOMATIQUE ¦ OTOMATİK OKUMA
+Recadrer sur le texte ? ¦ Metne göre kırpılsın mı?
+Recadrer sur le texte ¦ Metne göre kırp
+Lire quand même ¦ Yine de oku
+Cette image ressemble à une capture d’écran ¦ Bu görüntü bir ekran görüntüsüne benziyor
+(boutons et bords gris autour) : la lecture sera moins bonne. Télécharge l’image en grand sur le site des archives, ou recadre sur le texte. ¦ (çevresinde düğmeler ve gri kenarlar var): okuma daha kötü olur. Görüntüyü arşiv sitesinden büyük boyutta indir ya da metne göre kırp.
+La zone qui sera lue ¦ Okunacak alan
+Le cadre bleu montre la zone qui sera lue. Pour choisir toi-même, dessine une zone (▭) puis « ✨ Lire cette zone ». ¦ Mavi çerçeve okunacak alanı gösterir. Kendin seçmek için bir alan çiz (▭), sonra “✨ Bu alanı oku”.
+La lecture à la main a donné un texte peu sûr ¦ El yazısı okuması belirsiz bir metin verdi
+({x} % de mots douteux). Souvent à cause des bords de l’écran autour de l’acte, ou d’une écriture trop difficile pour ce modèle. ¦ (%{x} şüpheli kelime). Çoğu zaman kaydın çevresindeki ekran kenarları ya da bu model için fazla zor bir el yazısı yüzünden.
+Recadrer et relire ¦ Kırp ve yeniden oku
+Essayer la lecture approfondie ¦ Ayrıntılı okumayı dene
+LECTURE APPROFONDIE ¦ AYRINTILI OKUMA
+Lecture approfondie ¦ Ayrıntılı okuma
+Ce qu’il faut ¦ Gerekenler
+Ollama (gratuit, open source) et un modèle vision ouvert, au choix : ¦ Ollama (ücretsiz, açık kaynak) ve seçeceğin açık bir görü modeli:
+le meilleur, ≈ {x} Go ¦ en iyisi, ≈ {x} GB
+plus léger, ≈ {x} Go, pour un ordinateur modeste ¦ daha hafif, ≈ {x} GB, mütevazı bir bilgisayar için
+déjà téléchargé ¦ zaten indirildi
+8 Go conseillés (16 Go pour le 8B) · téléchargé une seule fois ¦ 8 GB önerilir (8B için 16 GB) · yalnızca bir kez indirilir
+≈ 20 à 60 s par page sur un ordinateur récent ¦ ≈ yeni bir bilgisayarda sayfa başına 20–60 sn
+Confidentialité ¦ Gizlilik
+rien ne quitte ton ordinateur ; l’app vérifie qu’Ollama ne répond que sur ton ordinateur ¦ hiçbir şey bilgisayarından çıkmaz; uygulama Ollama’nın yalnızca senin bilgisayarında yanıt verdiğini denetler
+Recherche d’Ollama sur cet ordinateur… ¦ Bu bilgisayarda Ollama aranıyor…
+L’adresse d’Ollama n’est pas sur cet ordinateur : la lecture approfondie est refusée. ¦ Ollama’nın adresi bu bilgisayarda değil: ayrıntılı okuma reddedildi.
+Ollama n’est pas encore sur cet ordinateur. ¦ Ollama henüz bu bilgisayarda yok.
+Installe-le une fois depuis son site (gratuit), lance-le, puis « ↻ Vérifier à nouveau ». ¦ Bir kez sitesinden kur (ücretsiz), başlat, sonra “↻ Yeniden denetle”.
+Ollama est installé mais ne tourne pas. ¦ Ollama kurulu ama çalışmıyor.
+Lance l’application Ollama, puis « ↻ Vérifier à nouveau ». ¦ Ollama uygulamasını başlat, sonra “↻ Yeniden denetle”.
+Prêt : la lecture se fait sur cet ordinateur, sans Internet. ¦ Hazır: okuma bu bilgisayarda, İnternet olmadan yapılır.
+Télécharger Ollama (ollama.com) ¦ Ollama’yı indir (ollama.com)
+Installer la lecture approfondie ¦ Ayrıntılı okumayı kur
+Lire l’acte avec ce modèle ¦ Kaydı bu modelle oku
+Vérifier à nouveau ¦ Yeniden denetle
+« 🔍 Essayer aussi la lecture approfondie » sur une page déjà lue montre les deux textes côte à côte, et on garde la meilleure. Relis toujours : un modèle peut se tromper sur les noms. ¦ Zaten okunmuş bir sayfada “🔍 Ayrıntılı okumayı da dene” iki metni yan yana gösterir ve iyisini saklarsın. Her zaman gözden geçir: model adlarda yanılabilir.
+Téléchargement du modèle… {done} sur {total} ¦ Model indiriliyor… {done} / {total}
+Téléchargement du modèle… ¦ Model indiriliyor…
+Lecture approfondie… {n} s ¦ Ayrıntılı okuma… {n} sn
+La lecture approfondie n’a pas abouti. ¦ Ayrıntılı okuma başarılı olmadı.
+Les deux lectures côte à côte ¦ İki okuma yan yana
+Le texte lu ¦ Okunan metin
+Écriture à la main ¦ El yazısı
+Garder celle-ci ¦ Bunu sakla
+Mettre dans le texte ¦ Metne ekle
+La lecture approfondie est installée. ¦ Ayrıntılı okuma kuruldu.
+Défunte ¦ Ölen (kadın)
+Conjointe ¦ Eş (kadın)
+Autre personne ¦ Başka kişi
+{n} ans → née vers {year} ¦ {n} yaşında → {year} dolaylarında doğdu
+{n} ans → né vers {year} ¦ {n} yaşında → {year} dolaylarında doğdu
+Aucune personne trouvée dans le texte : relis-le, puis « 🧭 Repérer ». ¦ Metinde kimse bulunamadı: gözden geçir, sonra “🧭 Bul”.
+TRANSCRIPTION ¦ TRANSKRİPSİYON
+Ce que l’app a trouvé dans l’acte ¦ Uygulamanın kayıtta bulduğu
+Ajouter à la généalogie ¦ Soy ağacına ekle
+Garder seulement la transcription ¦ Yalnızca transkripsiyonu sakla
+demeurant à {place} ¦ {place} sakini
+fille de {a} et de {b} ¦ {a} ile {b} kızı
+fils de {a} et de {b} ¦ {a} ile {b} oğlu
+fille de {a} ¦ {a} kızı
+fils de {a} ¦ {a} oğlu
+sœur de {name} ¦ {name} kişisinin kız kardeşi
+frère de {name} ¦ {name} kişisinin erkek kardeşi
+parent de {name} ¦ {name} kişisinin akrabası
+conjoint décédé de {name} ¦ {name} kişisinin ölmüş eşi
+conjoint de {name} ¦ {name} kişisinin eşi
+décédée avant l’acte ¦ kayıttan önce ölmüş
+décédé avant l’acte ¦ kayıttan önce ölmüş
+Relier à cette fiche ¦ Bu kayda bağla
+Reliée à : ¦ Bağlı:
+Fiches proches : ¦ Benzer kayıtlar:
+Fiche existante : ¦ Mevcut kayıt:
+même personne probable ¦ muhtemelen aynı kişi
+Pas de fiche · restera dans l’acte avec son rôle, sans créer de fiche ¦ Kayıt yok · kayıt oluşturmadan rolüyle belgede kalır
+Aucune fiche : elle sera créée et reliée comme mère de {name} ¦ Kayıt yok: oluşturulacak ve {name} kişisinin annesi olarak bağlanacak
+Aucune fiche : elle sera créée et reliée comme père de {name} ¦ Kayıt yok: oluşturulacak ve {name} kişisinin babası olarak bağlanacak
+Aucune fiche : elle sera créée ¦ Kayıt yok: oluşturulacak
+Témoin seul ¦ Yalnızca tanık
+Que faire de cette personne ¦ Bu kişiyle ne yapılacak
+Décès estimé avant l’acte ¦ Kayıttan önce tahmini ölüm
+Gardés dans l’acte, sans fiche ¦ Belgede tutulan, kaydı olmayanlar
+La source ¦ Kaynak
+déjà dans ta base, reprise ¦ zaten veritabanında, yeniden kullanılır
+Relever à nouveau ¦ Yeniden çıkar
+Compris : {date} ¦ Anlaşıldı: {date}
+Les personnes ({n}) ¦ Kişiler ({n})
+Ce que l’acte ajoute aussi ¦ Kaydın ayrıca eklediği
+Naissance estimée d’après l’âge (marquée « estimée ») ¦ Yaşa göre tahmini doğum (“tahmini” olarak işaretli)
+Décès d’avant l’acte (« feu », « veuve de ») ¦ Kayıttan önceki ölümler (“merhum”, “dul eşi”)
+Domiciles ¦ İkamet yerleri
+La source, toute prête ¦ Kaynak, hazır
+La même source est déjà dans ta base : elle est reprise au lieu d’en créer une deuxième. ¦ Aynı kaynak zaten veritabanında: ikincisi oluşturulmak yerine yeniden kullanılır.
+Remplie d’après le champ Source, le nom du fichier et le texte lu autour de l’image. Vérifie avant d’ajouter. ¦ Kaynak alanına, dosya adına ve görüntünün çevresinde okunan metne göre dolduruldu. Eklemeden önce denetle.
+Remplie d’après le champ Source et le nom du fichier. Vérifie avant d’ajouter. ¦ Kaynak alanına ve dosya adına göre dolduruldu. Eklemeden önce denetle.
+Voilà ce qui va entrer dans ta généalogie ¦ Soy ağacına girecekler
+Rien n’est écrasé : une information différente de la fiche est proposée, jamais imposée. « ↶ Annuler » défait tout l’ajout d’un coup. ¦ Hiçbir şeyin üzerine yazılmaz: kayıttan farklı bilgi önerilir, asla dayatılmaz. “↶ Geri al” eklemenin tamamını bir kerede geri alır.
+C’est elle : relier ¦ Bu o: bağla
+C’est lui : relier ¦ Bu o: bağla
+Ce n’est pas elle ¦ Bu o değil
+Ce n’est pas lui ¦ Bu o değil
+ajouter ¦ ekle
+{name} : l’acte et la fiche côte à côte ¦ {name}: belge ve kayıt yan yana
+Dans l’acte ¦ Belgede
+Fiche · {name} ¦ Kayıt · {name}
+vers {year} ({n} ans) ¦ {year} dolayları ({n} yaşında)
+{date} avec {name} ¦ {date}, {name} ile
+avant le {date} ¦ {date} öncesi
+Les parents sont les mêmes : c’est très probablement elle. ¦ Ebeveynler aynı: büyük olasılıkla o.
+Les parents sont les mêmes : c’est très probablement lui. ¦ Ebeveynler aynı: büyük olasılıkla o.
+Les parents ne sont pas les mêmes : vérifie avant de relier. ¦ Ebeveynler aynı değil: bağlamadan önce denetle.
+La date de naissance de la fiche est gardée (elle est plus précise que l’âge de l’acte). ¦ Kayıttaki doğum tarihi korunur (belgedeki yaştan daha kesindir).
+✓ Acte ajouté : {what} ¦ ✓ Belge eklendi: {what}
+Déjà d’autres parents, lien non fait : {names} ¦ Zaten başka ebeveynleri var, bağlantı yapılmadı: {names}
+Un modèle « vision » ouvert qui tourne sur ton ordinateur (Ollama) : lit mieux les écritures difficiles, plus lent ¦ Bilgisayarında çalışan açık bir “görü” modeli (Ollama): zor el yazılarını daha iyi okur, daha yavaş
+L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches ¦ Olay, kişiler ve bağları, kaynak: kayıtları bağla, karşılaştır ya da oluştur
+Ce que l’app a trouvé… ¦ Uygulamanın buldukları…
+La lecture approfondie n’est pas chargée. ¦ Ayrıntılı okuma yüklenmedi.
+Lecture du texte autour de l’acte… ¦ Belgenin çevresindeki metin okunuyor…
+Le texte est vide : lis ou écris d’abord l’acte. ¦ Metin boş: önce belgeyi oku ya da yaz.
+Personnes gardées dans la transcription, sans créer de fiche. ¦ Kişiler kayıt oluşturulmadan transkripsiyonda tutuldu.
+Père du défunt ¦ Ölenin babası
+Mère du défunt ¦ Ölenin annesi
+Déclarant ¦ Bildiren
+Acte de mariage ¦ Evlilik kaydı
+Acte de baptême ¦ Vaftiz kaydı
+Acte de naissance ¦ Doğum kaydı
+Acte de sépulture ¦ Defin kaydı
+Registre ¦ Defter
+Vue ¦ Görüntü
+Vues en tout ¦ Toplam görüntü
+La lecture approfondie ne parle qu’à Ollama sur cet ordinateur (127.0.0.1) : adresse refusée. ¦ Ayrıntılı okuma yalnızca bu bilgisayardaki Ollama ile konuşur (127.0.0.1): adres reddedildi.
+Modèle de lecture approfondie inconnu. ¦ Bilinmeyen ayrıntılı okuma modeli.
+La lecture approfondie a besoin de l’extension cURL de PHP. ¦ Ayrıntılı okuma için PHP’nin cURL eklentisi gerekir.
+Ollama ne répond pas sur cet ordinateur : installe-le (ollama.com), lance-le, puis réessaie. ¦ Ollama bu bilgisayarda yanıt vermiyor: kur (ollama.com), başlat, sonra yeniden dene.
+Image manquante. ¦ Görüntü eksik.
+Image trop lourde. ¦ Görüntü dosyası çok büyük.
+Image trop grande. ¦ Görüntü çok büyük.
+Ce modèle n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Bu model henüz indirilmedi: “⤓ Ayrıntılı okumayı kur”.
+Une fiche à relier n’existe plus : choisis-en une autre. ¦ Bağlanacak bir kayıt artık yok: başka birini seç.
+Une personne à créer n’a ni prénom ni nom. ¦ Oluşturulacak bir kişinin ne adı ne soyadı var.
+Trop de personnes dans un seul acte. ¦ Tek bir belgede çok fazla kişi var.
+Annulation impossible : ce n’est pas l’ajout d’un acte. ¦ Geri alınamaz: bu bir belge ekleme işlemi değil.
+Le téléchargement du modèle n’a pas abouti. ¦ Model indirme başarılı olmadı.
+La lecture approfondie a pris trop de temps. ¦ Ayrıntılı okuma çok uzun sürdü.

@@ -1,0 +1,145 @@
+fr ¦ ro
+# Zone « transcription-actes » : recadrage, lecture approfondie (Ollama), « Ce que l’app a trouvé » (heritage-transcribe-acte.js, lib/transcription_actes.php)
+LECTURE AUTOMATIQUE ¦ CITIRE AUTOMATĂ
+Recadrer sur le texte ? ¦ Decupezi pe text?
+Recadrer sur le texte ¦ Decupează pe text
+Lire quand même ¦ Citește oricum
+Cette image ressemble à une capture d’écran ¦ Imaginea pare o captură de ecran
+(boutons et bords gris autour) : la lecture sera moins bonne. Télécharge l’image en grand sur le site des archives, ou recadre sur le texte. ¦ (butoane și margini gri în jur): citirea va fi mai slabă. Descarcă imaginea mare de pe site-ul arhivelor sau decupează pe text.
+La zone qui sera lue ¦ Zona care va fi citită
+Le cadre bleu montre la zone qui sera lue. Pour choisir toi-même, dessine une zone (▭) puis « ✨ Lire cette zone ». ¦ Cadrul albastru arată zona care va fi citită. Ca să alegi tu, desenează o zonă (▭), apoi „✨ Citește această zonă”.
+La lecture à la main a donné un texte peu sûr ¦ Citirea scrisului de mână a dat un text nesigur
+({x} % de mots douteux). Souvent à cause des bords de l’écran autour de l’acte, ou d’une écriture trop difficile pour ce modèle. ¦ ({x} % cuvinte îndoielnice). Adesea din cauza marginilor ecranului din jurul actului sau a unui scris prea greu pentru acest model.
+Recadrer et relire ¦ Decupează și recitește
+Essayer la lecture approfondie ¦ Încearcă citirea aprofundată
+LECTURE APPROFONDIE ¦ CITIRE APROFUNDATĂ
+Lecture approfondie ¦ Citire aprofundată
+Ce qu’il faut ¦ Ce îți trebuie
+Ollama (gratuit, open source) et un modèle vision ouvert, au choix : ¦ Ollama (gratuit, open source) și un model de vedere deschis, la alegere:
+le meilleur, ≈ {x} Go ¦ cel mai bun, ≈ {x} GB
+plus léger, ≈ {x} Go, pour un ordinateur modeste ¦ mai ușor, ≈ {x} GB, pentru un calculator modest
+déjà téléchargé ¦ deja descărcat
+8 Go conseillés (16 Go pour le 8B) · téléchargé une seule fois ¦ 8 GB recomandați (16 GB pentru 8B) · descărcat o singură dată
+≈ 20 à 60 s par page sur un ordinateur récent ¦ ≈ 20–60 s pe pagină pe un calculator recent
+Confidentialité ¦ Confidențialitate
+rien ne quitte ton ordinateur ; l’app vérifie qu’Ollama ne répond que sur ton ordinateur ¦ nimic nu părăsește calculatorul tău; aplicația verifică faptul că Ollama răspunde doar pe calculatorul tău
+Recherche d’Ollama sur cet ordinateur… ¦ Se caută Ollama pe acest calculator…
+L’adresse d’Ollama n’est pas sur cet ordinateur : la lecture approfondie est refusée. ¦ Adresa Ollama nu este pe acest calculator: citirea aprofundată este refuzată.
+Ollama n’est pas encore sur cet ordinateur. ¦ Ollama nu este încă pe acest calculator.
+Installe-le une fois depuis son site (gratuit), lance-le, puis « ↻ Vérifier à nouveau ». ¦ Instalează-l o dată de pe site-ul lui (gratuit), pornește-l, apoi „↻ Verifică din nou”.
+Ollama est installé mais ne tourne pas. ¦ Ollama este instalat, dar nu rulează.
+Lance l’application Ollama, puis « ↻ Vérifier à nouveau ». ¦ Pornește aplicația Ollama, apoi „↻ Verifică din nou”.
+Prêt : la lecture se fait sur cet ordinateur, sans Internet. ¦ Gata: citirea se face pe acest calculator, fără Internet.
+Télécharger Ollama (ollama.com) ¦ Descarcă Ollama (ollama.com)
+Installer la lecture approfondie ¦ Instalează citirea aprofundată
+Lire l’acte avec ce modèle ¦ Citește actul cu acest model
+Vérifier à nouveau ¦ Verifică din nou
+« 🔍 Essayer aussi la lecture approfondie » sur une page déjà lue montre les deux textes côte à côte, et on garde la meilleure. Relis toujours : un modèle peut se tromper sur les noms. ¦ „🔍 Încearcă și citirea aprofundată” pe o pagină deja citită arată cele două texte unul lângă altul și îl păstrezi pe cel mai bun. Recitește mereu: un model poate greși numele.
+Téléchargement du modèle… {done} sur {total} ¦ Se descarcă modelul… {done} din {total}
+Téléchargement du modèle… ¦ Se descarcă modelul…
+Lecture approfondie… {n} s ¦ Citire aprofundată… {n} s
+La lecture approfondie n’a pas abouti. ¦ Citirea aprofundată nu a reușit.
+Les deux lectures côte à côte ¦ Cele două citiri una lângă alta
+Le texte lu ¦ Textul citit
+Écriture à la main ¦ Scris de mână
+Garder celle-ci ¦ Păstrează-l pe acesta
+Mettre dans le texte ¦ Pune în text
+La lecture approfondie est installée. ¦ Citirea aprofundată este instalată.
+Défunte ¦ Defunctă
+Conjointe ¦ Soție
+Autre personne ¦ Altă persoană
+{n} ans → née vers {year} ¦ {n} ani → născută pe la {year}
+{n} ans → né vers {year} ¦ {n} ani → născut pe la {year}
+Aucune personne trouvée dans le texte : relis-le, puis « 🧭 Repérer ». ¦ Nicio persoană găsită în text: recitește-l, apoi „🧭 Identifică”.
+TRANSCRIPTION ¦ TRANSCRIERE
+Ce que l’app a trouvé dans l’acte ¦ Ce a găsit aplicația în act
+Ajouter à la généalogie ¦ Adaugă la genealogie
+Garder seulement la transcription ¦ Păstrează doar transcrierea
+demeurant à {place} ¦ domiciliat în {place}
+fille de {a} et de {b} ¦ fiica lui {a} și a {b}
+fils de {a} et de {b} ¦ fiul lui {a} și al {b}
+fille de {a} ¦ fiica lui {a}
+fils de {a} ¦ fiul lui {a}
+sœur de {name} ¦ sora lui {name}
+frère de {name} ¦ fratele lui {name}
+parent de {name} ¦ rudă cu {name}
+conjoint décédé de {name} ¦ soțul decedat al {name}
+conjoint de {name} ¦ soțul {name}
+décédée avant l’acte ¦ decedată înaintea actului
+décédé avant l’acte ¦ decedat înaintea actului
+Relier à cette fiche ¦ Leagă de această fișă
+Reliée à : ¦ Legată de:
+Fiches proches : ¦ Fișe apropiate:
+Fiche existante : ¦ Fișă existentă:
+même personne probable ¦ probabil aceeași persoană
+Pas de fiche · restera dans l’acte avec son rôle, sans créer de fiche ¦ Fără fișă · rămâne în act cu rolul său, fără a crea o fișă
+Aucune fiche : elle sera créée et reliée comme mère de {name} ¦ Nicio fișă: va fi creată și legată ca mamă a lui {name}
+Aucune fiche : elle sera créée et reliée comme père de {name} ¦ Nicio fișă: va fi creată și legată ca tată al lui {name}
+Aucune fiche : elle sera créée ¦ Nicio fișă: va fi creată
+Témoin seul ¦ Doar martor
+Que faire de cette personne ¦ Ce faci cu această persoană
+Décès estimé avant l’acte ¦ Deces estimat înaintea actului
+Gardés dans l’acte, sans fiche ¦ Păstrați în act, fără fișă
+La source ¦ Sursa
+déjà dans ta base, reprise ¦ deja în baza ta, reutilizată
+Relever à nouveau ¦ Extrage din nou
+Compris : {date} ¦ Înțeles: {date}
+Les personnes ({n}) ¦ Persoanele ({n})
+Ce que l’acte ajoute aussi ¦ Ce mai adaugă actul
+Naissance estimée d’après l’âge (marquée « estimée ») ¦ Naștere estimată după vârstă (marcată „estimată”)
+Décès d’avant l’acte (« feu », « veuve de ») ¦ Decese dinaintea actului („răposatul”, „văduva lui”)
+Domiciles ¦ Domicilii
+La source, toute prête ¦ Sursa, gata pregătită
+La même source est déjà dans ta base : elle est reprise au lieu d’en créer une deuxième. ¦ Aceeași sursă este deja în baza ta: este reutilizată în loc să se creeze a doua.
+Remplie d’après le champ Source, le nom du fichier et le texte lu autour de l’image. Vérifie avant d’ajouter. ¦ Completată după câmpul Sursă, numele fișierului și textul citit în jurul imaginii. Verifică înainte de a adăuga.
+Remplie d’après le champ Source et le nom du fichier. Vérifie avant d’ajouter. ¦ Completată după câmpul Sursă și numele fișierului. Verifică înainte de a adăuga.
+Voilà ce qui va entrer dans ta généalogie ¦ Iată ce va intra în genealogia ta
+Rien n’est écrasé : une information différente de la fiche est proposée, jamais imposée. « ↶ Annuler » défait tout l’ajout d’un coup. ¦ Nimic nu este suprascris: o informație diferită de fișă este propusă, niciodată impusă. „↶ Anulează” desface toată adăugarea dintr-odată.
+C’est elle : relier ¦ Este ea: leagă
+C’est lui : relier ¦ Este el: leagă
+Ce n’est pas elle ¦ Nu este ea
+Ce n’est pas lui ¦ Nu este el
+ajouter ¦ adaugă
+{name} : l’acte et la fiche côte à côte ¦ {name}: actul și fișa una lângă alta
+Dans l’acte ¦ În act
+Fiche · {name} ¦ Fișă · {name}
+vers {year} ({n} ans) ¦ pe la {year} ({n} ani)
+{date} avec {name} ¦ {date} cu {name}
+avant le {date} ¦ înainte de {date}
+Les parents sont les mêmes : c’est très probablement elle. ¦ Părinții sunt aceiași: foarte probabil este ea.
+Les parents sont les mêmes : c’est très probablement lui. ¦ Părinții sunt aceiași: foarte probabil este el.
+Les parents ne sont pas les mêmes : vérifie avant de relier. ¦ Părinții nu sunt aceiași: verifică înainte de a lega.
+La date de naissance de la fiche est gardée (elle est plus précise que l’âge de l’acte). ¦ Data nașterii din fișă se păstrează (e mai precisă decât vârsta din act).
+✓ Acte ajouté : {what} ¦ ✓ Act adăugat: {what}
+Déjà d’autres parents, lien non fait : {names} ¦ Are deja alți părinți, legătura nu s-a făcut: {names}
+Un modèle « vision » ouvert qui tourne sur ton ordinateur (Ollama) : lit mieux les écritures difficiles, plus lent ¦ Un model „de vedere” deschis care rulează pe calculatorul tău (Ollama): citește mai bine scrisul dificil, mai lent
+L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches ¦ Evenimentul, persoanele și legăturile lor, sursa: leagă, compară sau creează fișele
+Ce que l’app a trouvé… ¦ Ce a găsit aplicația…
+La lecture approfondie n’est pas chargée. ¦ Citirea aprofundată nu este încărcată.
+Lecture du texte autour de l’acte… ¦ Se citește textul din jurul actului…
+Le texte est vide : lis ou écris d’abord l’acte. ¦ Textul este gol: citește sau scrie mai întâi actul.
+Personnes gardées dans la transcription, sans créer de fiche. ¦ Persoanele sunt păstrate în transcriere, fără a crea fișe.
+Père du défunt ¦ Tatăl defunctului
+Mère du défunt ¦ Mama defunctului
+Déclarant ¦ Declarant
+Acte de mariage ¦ Act de căsătorie
+Acte de baptême ¦ Act de botez
+Acte de naissance ¦ Act de naștere
+Acte de sépulture ¦ Act de înmormântare
+Registre ¦ Registru
+Vue ¦ Imagine
+Vues en tout ¦ Imagini în total
+La lecture approfondie ne parle qu’à Ollama sur cet ordinateur (127.0.0.1) : adresse refusée. ¦ Citirea aprofundată comunică doar cu Ollama pe acest calculator (127.0.0.1): adresă refuzată.
+Modèle de lecture approfondie inconnu. ¦ Model de citire aprofundată necunoscut.
+La lecture approfondie a besoin de l’extension cURL de PHP. ¦ Citirea aprofundată are nevoie de extensia cURL a PHP.
+Ollama ne répond pas sur cet ordinateur : installe-le (ollama.com), lance-le, puis réessaie. ¦ Ollama nu răspunde pe acest calculator: instalează-l (ollama.com), pornește-l, apoi încearcă din nou.
+Image manquante. ¦ Lipsește imaginea.
+Image trop lourde. ¦ Imagine prea grea.
+Image trop grande. ¦ Imagine prea mare.
+Ce modèle n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Acest model nu este încă descărcat: „⤓ Instalează citirea aprofundată”.
+Une fiche à relier n’existe plus : choisis-en une autre. ¦ O fișă de legat nu mai există: alege alta.
+Une personne à créer n’a ni prénom ni nom. ¦ O persoană de creat nu are nici prenume, nici nume.
+Trop de personnes dans un seul acte. ¦ Prea multe persoane într-un singur act.
+Annulation impossible : ce n’est pas l’ajout d’un acte. ¦ Anulare imposibilă: nu este adăugarea unui act.
+Le téléchargement du modèle n’a pas abouti. ¦ Descărcarea modelului nu a reușit.
+La lecture approfondie a pris trop de temps. ¦ Citirea aprofundată a durat prea mult.

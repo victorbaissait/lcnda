@@ -1,0 +1,145 @@
+fr ¦ hr ¦ sl
+# Zone « transcription-actes » : recadrage, lecture approfondie (Ollama), « Ce que l’app a trouvé » (heritage-transcribe-acte.js, lib/transcription_actes.php)
+LECTURE AUTOMATIQUE ¦ AUTOMATSKO ČITANJE ¦ SAMODEJNO BRANJE
+Recadrer sur le texte ? ¦ Obrezati na tekst? ¦ Obrežem na besedilo?
+Recadrer sur le texte ¦ Obreži na tekst ¦ Obreži na besedilo
+Lire quand même ¦ Ipak pročitaj ¦ Vseeno preberi
+Cette image ressemble à une capture d’écran ¦ Ova slika izgleda kao snimka zaslona ¦ Ta slika je videti kot posnetek zaslona
+(boutons et bords gris autour) : la lecture sera moins bonne. Télécharge l’image en grand sur le site des archives, ou recadre sur le texte. ¦ (gumbi i sivi rubovi okolo): čitanje će biti lošije. Preuzmi veliku sliku s mrežnog mjesta arhiva ili je obreži na tekst. ¦ (gumbi in sivi robovi okoli): branje bo slabše. Prenesi veliko sliko s spletnega mesta arhiva ali jo obreži na besedilo.
+La zone qui sera lue ¦ Područje koje će se čitati ¦ Območje, ki bo prebrano
+Le cadre bleu montre la zone qui sera lue. Pour choisir toi-même, dessine une zone (▭) puis « ✨ Lire cette zone ». ¦ Plavi okvir pokazuje područje koje će se čitati. Za vlastiti odabir nacrtaj područje (▭), pa „✨ Pročitaj ovo područje”. ¦ Modri okvir kaže območje, ki bo prebrano. Če želiš izbrati sam, nariši območje (▭) in nato »✨ Preberi to območje«.
+La lecture à la main a donné un texte peu sûr ¦ Čitanje rukopisa dalo je nesiguran tekst ¦ Branje rokopisa je dalo negotovo besedilo
+({x} % de mots douteux). Souvent à cause des bords de l’écran autour de l’acte, ou d’une écriture trop difficile pour ce modèle. ¦ ({x} % dvojbenih riječi). Često zbog rubova zaslona oko zapisa ili rukopisa preteškog za ovaj model. ¦ ({x} % dvomljivih besed). Pogosto zaradi robov zaslona okoli zapisa ali pisave, pretežke za ta model.
+Recadrer et relire ¦ Obreži i ponovno pročitaj ¦ Obreži in znova preberi
+Essayer la lecture approfondie ¦ Isprobaj detaljno čitanje ¦ Preizkusi poglobljeno branje
+LECTURE APPROFONDIE ¦ DETALJNO ČITANJE ¦ POGLOBLJENO BRANJE
+Lecture approfondie ¦ Detaljno čitanje ¦ Poglobljeno branje
+Ce qu’il faut ¦ Što je potrebno ¦ Kaj potrebuješ
+Ollama (gratuit, open source) et un modèle vision ouvert, au choix : ¦ Ollama (besplatan, otvorenog koda) i otvoreni model za slike po izboru: ¦ Ollama (brezplačen, odprtokoden) in odprt slikovni model po izbiri:
+le meilleur, ≈ {x} Go ¦ najbolji, ≈ {x} GB ¦ najboljši, ≈ {x} GB
+plus léger, ≈ {x} Go, pour un ordinateur modeste ¦ lakši, ≈ {x} GB, za skromnije računalo ¦ lažji, ≈ {x} GB, za skromnejši računalnik
+déjà téléchargé ¦ već preuzeto ¦ že preneseno
+8 Go conseillés (16 Go pour le 8B) · téléchargé une seule fois ¦ preporučeno 8 GB (16 GB za 8B) · preuzima se samo jednom ¦ priporočeno 8 GB (16 GB za 8B) · prenese se le enkrat
+≈ 20 à 60 s par page sur un ordinateur récent ¦ ≈ 20 do 60 s po stranici na novijem računalu ¦ ≈ 20 do 60 s na stran na novejšem računalniku
+Confidentialité ¦ Privatnost ¦ Zasebnost
+rien ne quitte ton ordinateur ; l’app vérifie qu’Ollama ne répond que sur ton ordinateur ¦ ništa ne napušta tvoje računalo; aplikacija provjerava da Ollama odgovara samo na tvom računalu ¦ nič ne zapusti tvojega računalnika; aplikacija preveri, da Ollama odgovarja le na tvojem računalniku
+Recherche d’Ollama sur cet ordinateur… ¦ Tražim Ollamu na ovom računalu… ¦ Iščem Ollamo na tem računalniku…
+L’adresse d’Ollama n’est pas sur cet ordinateur : la lecture approfondie est refusée. ¦ Adresa Ollame nije na ovom računalu: detaljno čitanje je odbijeno. ¦ Naslov Ollame ni na tem računalniku: poglobljeno branje je zavrnjeno.
+Ollama n’est pas encore sur cet ordinateur. ¦ Ollama još nije na ovom računalu. ¦ Ollame še ni na tem računalniku.
+Installe-le une fois depuis son site (gratuit), lance-le, puis « ↻ Vérifier à nouveau ». ¦ Instaliraj ga jednom s njegove stranice (besplatno), pokreni ga, pa „↻ Provjeri ponovno”. ¦ Enkrat ga namesti z njegove spletne strani (brezplačno), zaženi ga in nato »↻ Znova preveri«.
+Ollama est installé mais ne tourne pas. ¦ Ollama je instalirana, ali ne radi. ¦ Ollama je nameščena, a ne teče.
+Lance l’application Ollama, puis « ↻ Vérifier à nouveau ». ¦ Pokreni aplikaciju Ollama, pa „↻ Provjeri ponovno”. ¦ Zaženi aplikacijo Ollama in nato »↻ Znova preveri«.
+Prêt : la lecture se fait sur cet ordinateur, sans Internet. ¦ Spremno: čitanje se odvija na ovom računalu, bez interneta. ¦ Pripravljeno: branje poteka na tem računalniku, brez interneta.
+Télécharger Ollama (ollama.com) ¦ Preuzmi Ollamu (ollama.com) ¦ Prenesi Ollamo (ollama.com)
+Installer la lecture approfondie ¦ Instaliraj detaljno čitanje ¦ Namesti poglobljeno branje
+Lire l’acte avec ce modèle ¦ Pročitaj zapis ovim modelom ¦ Preberi zapis s tem modelom
+Vérifier à nouveau ¦ Provjeri ponovno ¦ Znova preveri
+« 🔍 Essayer aussi la lecture approfondie » sur une page déjà lue montre les deux textes côte à côte, et on garde la meilleure. Relis toujours : un modèle peut se tromper sur les noms. ¦ „🔍 Isprobaj i detaljno čitanje” na već pročitanoj stranici prikazuje oba teksta jedan uz drugi, a zadržavaš bolji. Uvijek provjeri: model može pogriješiti u imenima. ¦ »🔍 Preizkusi tudi poglobljeno branje« na že prebrani strani pokaže obe besedili drugo ob drugem, obdržiš boljše. Vedno preveri: model se lahko zmoti pri imenih.
+Téléchargement du modèle… {done} sur {total} ¦ Preuzimanje modela… {done} od {total} ¦ Prenašanje modela… {done} od {total}
+Téléchargement du modèle… ¦ Preuzimanje modela… ¦ Prenašanje modela…
+Lecture approfondie… {n} s ¦ Detaljno čitanje… {n} s ¦ Poglobljeno branje… {n} s
+La lecture approfondie n’a pas abouti. ¦ Detaljno čitanje nije uspjelo. ¦ Poglobljeno branje ni uspelo.
+Les deux lectures côte à côte ¦ Oba čitanja jedno uz drugo ¦ Obe branji drugo ob drugem
+Le texte lu ¦ Pročitani tekst ¦ Prebrano besedilo
+Écriture à la main ¦ Rukopis ¦ Rokopis
+Garder celle-ci ¦ Zadrži ovo ¦ Obdrži to
+Mettre dans le texte ¦ Stavi u tekst ¦ Vstavi v besedilo
+La lecture approfondie est installée. ¦ Detaljno čitanje je instalirano. ¦ Poglobljeno branje je nameščeno.
+Défunte ¦ Pokojnica ¦ Pokojnica
+Conjointe ¦ Supruga ¦ Zakonska žena
+Autre personne ¦ Druga osoba ¦ Druga oseba
+{n} ans → née vers {year} ¦ {n} god. → rođena oko {year} ¦ {n} let → rojena okoli {year}
+{n} ans → né vers {year} ¦ {n} god. → rođen oko {year} ¦ {n} let → rojen okoli {year}
+Aucune personne trouvée dans le texte : relis-le, puis « 🧭 Repérer ». ¦ U tekstu nije pronađena nijedna osoba: provjeri ga, pa „🧭 Prepoznaj”. ¦ V besedilu ni bila najdena nobena oseba: preveri ga in nato »🧭 Prepoznaj«.
+TRANSCRIPTION ¦ TRANSKRIPCIJA ¦ PREPIS
+Ce que l’app a trouvé dans l’acte ¦ Što je aplikacija pronašla u zapisu ¦ Kaj je aplikacija našla v zapisu
+Ajouter à la généalogie ¦ Dodaj u rodoslovlje ¦ Dodaj v rodoslovje
+Garder seulement la transcription ¦ Zadrži samo transkripciju ¦ Obdrži samo prepis
+demeurant à {place} ¦ s prebivalištem u {place} ¦ prebivališče {place}
+fille de {a} et de {b} ¦ kći {a} i {b} ¦ hči {a} in {b}
+fils de {a} et de {b} ¦ sin {a} i {b} ¦ sin {a} in {b}
+fille de {a} ¦ kći {a} ¦ hči {a}
+fils de {a} ¦ sin {a} ¦ sin {a}
+sœur de {name} ¦ sestra: {name} ¦ sestra: {name}
+frère de {name} ¦ brat: {name} ¦ brat: {name}
+parent de {name} ¦ rođak: {name} ¦ sorodnik: {name}
+conjoint décédé de {name} ¦ pokojni supružnik: {name} ¦ pokojni zakonec: {name}
+conjoint de {name} ¦ supružnik: {name} ¦ zakonec: {name}
+décédée avant l’acte ¦ umrla prije zapisa ¦ umrla pred zapisom
+décédé avant l’acte ¦ umro prije zapisa ¦ umrl pred zapisom
+Relier à cette fiche ¦ Poveži s ovim zapisom ¦ Poveži s tem zapisom
+Reliée à : ¦ Povezano s: ¦ Povezano z:
+Fiches proches : ¦ Slični zapisi: ¦ Podobni zapisi:
+Fiche existante : ¦ Postojeći zapis: ¦ Obstoječi zapis:
+même personne probable ¦ vjerojatno ista osoba ¦ verjetno ista oseba
+Pas de fiche · restera dans l’acte avec son rôle, sans créer de fiche ¦ Nema zapisa · ostaje u spisu sa svojom ulogom, bez stvaranja zapisa ¦ Ni zapisa · ostane v listini s svojo vlogo, brez ustvarjanja zapisa
+Aucune fiche : elle sera créée et reliée comme mère de {name} ¦ Nema zapisa: bit će stvoren i povezan kao majka: {name} ¦ Ni zapisa: ustvarjen bo in povezan kot mati: {name}
+Aucune fiche : elle sera créée et reliée comme père de {name} ¦ Nema zapisa: bit će stvoren i povezan kao otac: {name} ¦ Ni zapisa: ustvarjen bo in povezan kot oče: {name}
+Aucune fiche : elle sera créée ¦ Nema zapisa: bit će stvoren ¦ Ni zapisa: ustvarjen bo
+Témoin seul ¦ Samo svjedok ¦ Samo priča
+Que faire de cette personne ¦ Što učiniti s ovom osobom ¦ Kaj narediti s to osebo
+Décès estimé avant l’acte ¦ Smrt procijenjena prije zapisa ¦ Smrt ocenjena pred zapisom
+Gardés dans l’acte, sans fiche ¦ Zadržani u spisu, bez zapisa ¦ Ohranjeni v listini, brez zapisa
+La source ¦ Izvor ¦ Vir
+déjà dans ta base, reprise ¦ već u tvojoj bazi, ponovno upotrijebljen ¦ že v tvoji zbirki, uporabljen znova
+Relever à nouveau ¦ Ponovno izdvoji ¦ Znova izlušči
+Compris : {date} ¦ Prepoznato: {date} ¦ Razumljeno: {date}
+Les personnes ({n}) ¦ Osobe ({n}) ¦ Osebe ({n})
+Ce que l’acte ajoute aussi ¦ Što zapis još dodaje ¦ Kaj zapis še doda
+Naissance estimée d’après l’âge (marquée « estimée ») ¦ Rođenje procijenjeno prema dobi (označeno „procjena”) ¦ Rojstvo ocenjeno po starosti (označeno »ocena«)
+Décès d’avant l’acte (« feu », « veuve de ») ¦ Smrti prije zapisa („pokojni”, „udovica”) ¦ Smrti pred zapisom (»pokojni«, »vdova po«)
+Domiciles ¦ Prebivališta ¦ Prebivališča
+La source, toute prête ¦ Izvor, spreman ¦ Vir, pripravljen
+La même source est déjà dans ta base : elle est reprise au lieu d’en créer une deuxième. ¦ Isti izvor već je u tvojoj bazi: ponovno se koristi umjesto stvaranja drugog. ¦ Isti vir je že v tvoji zbirki: uporabi se znova, namesto da bi ustvarili drugega.
+Remplie d’après le champ Source, le nom du fichier et le texte lu autour de l’image. Vérifie avant d’ajouter. ¦ Ispunjeno prema polju Izvor, nazivu datoteke i tekstu pročitanom oko slike. Provjeri prije dodavanja. ¦ Izpolnjeno po polju Vir, imenu datoteke in besedilu, prebranem okoli slike. Preveri pred dodajanjem.
+Remplie d’après le champ Source et le nom du fichier. Vérifie avant d’ajouter. ¦ Ispunjeno prema polju Izvor i nazivu datoteke. Provjeri prije dodavanja. ¦ Izpolnjeno po polju Vir in imenu datoteke. Preveri pred dodajanjem.
+Voilà ce qui va entrer dans ta généalogie ¦ Ovo će ući u tvoje rodoslovlje ¦ To bo vstopilo v tvoje rodoslovje
+Rien n’est écrasé : une information différente de la fiche est proposée, jamais imposée. « ↶ Annuler » défait tout l’ajout d’un coup. ¦ Ništa se ne prepisuje: podatak drukčiji od zapisa predlaže se, nikad ne nameće. „↶ Poništi” odjednom poništava cijelo dodavanje. ¦ Nič ni prepisano: podatek, drugačen od zapisa, je predlagan, nikoli vsiljen. »↶ Razveljavi« razveljavi celotno dodajanje naenkrat.
+C’est elle : relier ¦ To je ona: poveži ¦ To je ona: poveži
+C’est lui : relier ¦ To je on: poveži ¦ To je on: poveži
+Ce n’est pas elle ¦ To nije ona ¦ To ni ona
+Ce n’est pas lui ¦ To nije on ¦ To ni on
+ajouter ¦ dodaj ¦ dodaj
+{name} : l’acte et la fiche côte à côte ¦ {name}: spis i zapis jedan uz drugi ¦ {name}: listina in zapis drug ob drugem
+Dans l’acte ¦ U spisu ¦ V listini
+Fiche · {name} ¦ Zapis · {name} ¦ Zapis · {name}
+vers {year} ({n} ans) ¦ oko {year} ({n} god.) ¦ okoli {year} ({n} let)
+{date} avec {name} ¦ {date} s: {name} ¦ {date} z: {name}
+avant le {date} ¦ prije {date} ¦ pred {date}
+Les parents sont les mêmes : c’est très probablement elle. ¦ Roditelji su isti: vrlo vjerojatno je to ona. ¦ Starša sta ista: zelo verjetno je to ona.
+Les parents sont les mêmes : c’est très probablement lui. ¦ Roditelji su isti: vrlo vjerojatno je to on. ¦ Starša sta ista: zelo verjetno je to on.
+Les parents ne sont pas les mêmes : vérifie avant de relier. ¦ Roditelji nisu isti: provjeri prije povezivanja. ¦ Starša nista ista: preveri pred povezovanjem.
+La date de naissance de la fiche est gardée (elle est plus précise que l’âge de l’acte). ¦ Datum rođenja iz zapisa ostaje (precizniji je od dobi u spisu). ¦ Datum rojstva iz zapisa ostane (je natančnejši od starosti v listini).
+✓ Acte ajouté : {what} ¦ ✓ Spis dodan: {what} ¦ ✓ Listina dodana: {what}
+Déjà d’autres parents, lien non fait : {names} ¦ Već ima druge roditelje, veza nije stvorena: {names} ¦ Že ima druga starša, povezava ni narejena: {names}
+Un modèle « vision » ouvert qui tourne sur ton ordinateur (Ollama) : lit mieux les écritures difficiles, plus lent ¦ Otvoreni „vizualni” model koji radi na tvom računalu (Ollama): bolje čita teške rukopise, sporiji ¦ Odprt »slikovni« model, ki teče na tvojem računalniku (Ollama): bolje bere težke pisave, počasnejši
+L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches ¦ Događaj, osobe i njihove veze, izvor: poveži, usporedi ili stvori zapise ¦ Dogodek, osebe in njihove vezi, vir: poveži, primerjaj ali ustvari zapise
+Ce que l’app a trouvé… ¦ Što je aplikacija pronašla… ¦ Kaj je našla aplikacija…
+La lecture approfondie n’est pas chargée. ¦ Detaljno čitanje nije učitano. ¦ Poglobljeno branje ni naloženo.
+Lecture du texte autour de l’acte… ¦ Čitanje teksta oko spisa… ¦ Branje besedila okoli listine…
+Le texte est vide : lis ou écris d’abord l’acte. ¦ Tekst je prazan: najprije pročitaj ili upiši spis. ¦ Besedilo je prazno: najprej preberi ali vpiši listino.
+Personnes gardées dans la transcription, sans créer de fiche. ¦ Osobe su zadržane u transkripciji, bez stvaranja zapisa. ¦ Osebe ostanejo v prepisu, brez ustvarjanja zapisov.
+Père du défunt ¦ Otac pokojnika ¦ Oče pokojnika
+Mère du défunt ¦ Majka pokojnika ¦ Mati pokojnika
+Déclarant ¦ Prijavitelj ¦ Prijavitelj
+Acte de mariage ¦ Vjenčani zapis ¦ Poročni zapis
+Acte de baptême ¦ Krsni zapis ¦ Krstni zapis
+Acte de naissance ¦ Rodni zapis ¦ Rojstni zapis
+Acte de sépulture ¦ Zapis o ukopu ¦ Pokopni zapis
+Registre ¦ Matična knjiga ¦ Matična knjiga
+Vue ¦ Snimka ¦ Posnetek
+Vues en tout ¦ Snimaka ukupno ¦ Posnetkov skupaj
+La lecture approfondie ne parle qu’à Ollama sur cet ordinateur (127.0.0.1) : adresse refusée. ¦ Detaljno čitanje razgovara samo s Ollamom na ovom računalu (127.0.0.1): adresa odbijena. ¦ Poglobljeno branje komunicira le z Ollamo na tem računalniku (127.0.0.1): naslov zavrnjen.
+Modèle de lecture approfondie inconnu. ¦ Nepoznat model detaljnog čitanja. ¦ Neznan model poglobljenega branja.
+La lecture approfondie a besoin de l’extension cURL de PHP. ¦ Detaljno čitanje treba PHP-ovo proširenje cURL. ¦ Poglobljeno branje potrebuje razširitev cURL za PHP.
+Ollama ne répond pas sur cet ordinateur : installe-le (ollama.com), lance-le, puis réessaie. ¦ Ollama ne odgovara na ovom računalu: instaliraj je (ollama.com), pokreni i pokušaj ponovno. ¦ Ollama se na tem računalniku ne odziva: namesti jo (ollama.com), zaženi in poskusi znova.
+Image manquante. ¦ Nedostaje slika. ¦ Manjka slika.
+Image trop lourde. ¦ Slika je preteška. ¦ Slika je pretežka.
+Image trop grande. ¦ Slika je prevelika. ¦ Slika je prevelika.
+Ce modèle n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Ovaj model još nije preuzet: „⤓ Instaliraj detaljno čitanje”. ¦ Ta model še ni prenesen: »⤓ Namesti poglobljeno branje«.
+Une fiche à relier n’existe plus : choisis-en une autre. ¦ Zapis za povezivanje više ne postoji: odaberi drugi. ¦ Zapis za povezavo ne obstaja več: izberi drugega.
+Une personne à créer n’a ni prénom ni nom. ¦ Osoba za stvaranje nema ni ime ni prezime. ¦ Oseba za ustvarjanje nima ne imena ne priimka.
+Trop de personnes dans un seul acte. ¦ Previše osoba u jednom spisu. ¦ Preveč oseb v eni listini.
+Annulation impossible : ce n’est pas l’ajout d’un acte. ¦ Poništavanje nije moguće: ovo nije dodavanje spisa. ¦ Razveljavitev ni mogoča: to ni dodajanje listine.
+Le téléchargement du modèle n’a pas abouti. ¦ Preuzimanje modela nije uspjelo. ¦ Prenos modela ni uspel.
+La lecture approfondie a pris trop de temps. ¦ Detaljno čitanje trajalo je predugo. ¦ Poglobljeno branje je trajalo predolgo.
