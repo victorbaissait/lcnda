@@ -1614,3 +1614,37 @@ Lien à consolider : {child}, le fils de {parent} ¦ Lidhje për t’u përforcu
 Lien à consolider : {child}, la fille de {parent} ¦ Lidhje për t’u përforcuar: {child}, vajza e {parent} ¦ Rabta li trid tissaħħaħ: {child}, bint {parent}
 Lien à consolider : {child}, l’enfant de {parent} ¦ Lidhje për t’u përforcuar: {child}, fëmija i {parent} ¦ Rabta li trid tissaħħaħ: {child}, it-tifel jew it-tifla ta’ {parent}
 cherche l’acte de naissance ou de baptême qui le nomme ¦ kërko aktin e lindjes ose të pagëzimit që e përmend ¦ fittex l-att tat-twelid jew tal-magħmudija li jsemmih
+# ═════ Poser une question : mariage et enfants (lib/question_famille.php) ═════
+mariées ¦ të martuara ¦ miżżewġa
+mariés ¦ të martuar ¦ miżżewġin
+jamais mariées ¦ kurrë të martuara ¦ qatt miżżewġa
+jamais mariés ¦ kurrë të martuar ¦ qatt miżżewġin
+=au moins {n} mariages ¦ të paktën {n} martesë|të paktën {n} martesa ¦ mill-inqas {n} żwieġ|mill-inqas {n} żwiġijiet|mill-inqas {n} żwiġijiet|mill-inqas {n} żwieġ|mill-inqas {n} żwieġ
+mariées à {n} ans ¦ të martuara në moshën {n} vjeç ¦ miżżewġa fl-età ta’ {n}
+mariés à {n} ans ¦ të martuar në moshën {n} vjeç ¦ miżżewġin fl-età ta’ {n}
+mariées entre {a} et {b} ans ¦ të martuara në moshën {a}–{b} vjeç ¦ miżżewġa fl-età ta’ bejn {a} u {b}
+mariés entre {a} et {b} ans ¦ të martuar në moshën {a}–{b} vjeç ¦ miżżewġin fl-età ta’ bejn {a} u {b}
+mariées après {n} ans ¦ të martuara pas moshës {n} vjeç ¦ miżżewġa wara l-età ta’ {n}
+mariés après {n} ans ¦ të martuar pas moshës {n} vjeç ¦ miżżewġin wara l-età ta’ {n}
+mariées avant {n} ans ¦ të martuara para moshës {n} vjeç ¦ miżżewġa qabel l-età ta’ {n}
+mariés avant {n} ans ¦ të martuar para moshës {n} vjeç ¦ miżżewġin qabel l-età ta’ {n}
+sans enfant ¦ pa fëmijë ¦ mingħajr tfal
+avec des enfants ¦ me fëmijë ¦ bit-tfal
+entre {a} et {b} enfants ¦ {a}–{b} fëmijë ¦ bejn {a} u {b} itfal
+=exactement {n} enfants ¦ saktësisht {n} fëmijë|saktësisht {n} fëmijë ¦ eżatt {n} tifel|eżatt {n} itfal|eżatt {n} itfal|eżatt {n} tifel|eżatt {n} tifel
+=au moins {n} enfants ¦ të paktën {n} fëmijë|të paktën {n} fëmijë ¦ mill-inqas {n} tifel|mill-inqas {n} itfal|mill-inqas {n} itfal|mill-inqas {n} tifel|mill-inqas {n} tifel
+=au plus {n} enfants ¦ më së shumti {n} fëmijë|më së shumti {n} fëmijë ¦ l-aktar {n} tifel|l-aktar {n} itfal|l-aktar {n} itfal|l-aktar {n} tifel|l-aktar {n} tifel
+exactement 1 enfant ¦ saktësisht 1 fëmijë ¦ eżatt 1 tifel
+au plus 1 enfant ¦ më së shumti 1 fëmijë ¦ l-aktar 1 tifel
+nées avant {y} ¦ të lindura para {y} ¦ imwieldin qabel {y}
+nés avant {y} ¦ të lindur para {y} ¦ imwieldin qabel {y}
+nées après {y} ¦ të lindura pas {y} ¦ imwieldin wara {y}
+nés après {y} ¦ të lindur pas {y} ¦ imwieldin wara {y}
+nées en {y} ¦ të lindura në {y} ¦ imwieldin fis-sena {y}
+nés en {y} ¦ të lindur në {y} ¦ imwieldin fis-sena {y}
+nées au {n}e siècle ¦ të lindura në shekullin {n} ¦ imwieldin fis-seklu {n}
+nés au {n}e siècle ¦ të lindur në shekullin {n} ¦ imwieldin fis-seklu {n}
+1 fiche sans date n’a pas pu être vérifiée pour l’âge au mariage (année de naissance ou de mariage inconnue). ¦ 1 skedë pa datë nuk u kontrollua dot për moshën në martesë (viti i lindjes ose i martesës i panjohur). ¦ 1 skeda mingħajr data ma setgħetx tiġi ċċekkjata għall-età fiż-żwieġ (sena tat-twelid jew taż-żwieġ mhux magħrufa).
+={n} fiches sans date n’ont pas pu être vérifiées pour l’âge au mariage (année de naissance ou de mariage inconnue). ¦ {n} skedë pa datë nuk u kontrollua dot për moshën në martesë (viti i lindjes ose i martesës i panjohur).|{n} skeda pa datë nuk u kontrolluan dot për moshën në martesë (viti i lindjes ose i martesës i panjohur). ¦ Skedi mingħajr data li ma setgħux jiġu ċċekkjati għall-età fiż-żwieġ: {n} (sena tat-twelid jew taż-żwieġ mhux magħrufa).|Skedi mingħajr data li ma setgħux jiġu ċċekkjati għall-età fiż-żwieġ: {n} (sena tat-twelid jew taż-żwieġ mhux magħrufa).|Skedi mingħajr data li ma setgħux jiġu ċċekkjati għall-età fiż-żwieġ: {n} (sena tat-twelid jew taż-żwieġ mhux magħrufa).|Skedi mingħajr data li ma setgħux jiġu ċċekkjati għall-età fiż-żwieġ: {n} (sena tat-twelid jew taż-żwieġ mhux magħrufa).|Skedi mingħajr data li ma setgħux jiġu ċċekkjati għall-età fiż-żwieġ: {n} (sena tat-twelid jew taż-żwieġ mhux magħrufa).
+« Jeunes » n’est pas assez précis pour un âge : écris par exemple « mariées avant 20 ans ». ¦ «Jeunes» (të reja) nuk është mjaft e saktë për një moshë: shkruaj për shembull «mariées avant 20 ans». ¦ “Jeunes” (żgħar) mhix preċiża biżżejjed għal età: ikteb pereżempju “mariées avant 20 ans”.
+Venue d’une question : les critères de mariage et d’enfants sont gardés. ¦ Nga një pyetje: kriteret për martesën dhe fëmijët ruhen. ¦ Minn mistoqsija: il-kriterji taż-żwieġ u t-tfal jibqgħu.

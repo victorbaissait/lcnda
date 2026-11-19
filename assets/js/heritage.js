@@ -1682,6 +1682,8 @@
     const searchEvents = {any: 'N’importe quel événement', birth: 'Naissance ou baptême', BIRT: 'Naissance', CHR: 'Baptême', MARR: 'Mariage', death: 'Décès ou inhumation', DEAT: 'Décès', BURI: 'Inhumation', RESI: 'Résidence', OCCU: 'Profession'};
     function criteriaForm(c = {}) {
         const v = k => esc(c[k] ?? '');
+        // mariage, âge au mariage, enfants (venus d'une question) : gardés tels quels quand on relance ou réenregistre
+        const fam = ['married', 'marr_age_min', 'marr_age_max', 'marriages_min', 'children_min', 'children_max'].filter(k => c[k] !== null && c[k] !== undefined && c[k] !== '');
         return `<form id="h-search-form" class="maintenance-panel"><h3>Recherche multicritère</h3><div class="form-grid h-search-grid">
             <label>Nom<input name="last_name" value="${v('last_name')}" placeholder="Dupont"></label>
             <label>Le nom<select name="name_mode"><option value="exact" ${c.name_mode !== 'contains' && c.name_mode !== 'starts' ? 'selected' : ''}>est exactement</option><option value="starts" ${c.name_mode === 'starts' ? 'selected' : ''}>commence par</option><option value="contains" ${c.name_mode === 'contains' ? 'selected' : ''}>contient</option></select></label>
@@ -1693,8 +1695,8 @@
             <label>à<input type="number" name="year_to" value="${v('year_to')}" placeholder="1800"></label>
             <label>Métier<input name="occupation" value="${v('occupation')}" placeholder="tisserand"></label>
             <label>Statut<select name="living"><option value="">Tous</option><option value="deceased" ${c.living === 'deceased' ? 'selected' : ''}>Décédés</option><option value="living" ${c.living === 'living' ? 'selected' : ''}>Vivants</option><option value="unknown" ${c.living === 'unknown' ? 'selected' : ''}>À vérifier</option></select></label></div>
-            ${c.relation && c.relation_of ? `<input type="hidden" name="relation" value="${v('relation')}"><input type="hidden" name="relation_of" value="${v('relation_of')}">` : ''}${c.ancestors ? '<input type="hidden" name="ancestors" value="1">' : ''}
-            ${c.relation && c.relation_of || c.ancestors ? `<p class="h-understood">${c.relation ? i18n('Venue d’une question : seulement les proches de la fiche #{n}.', {n: v('relation_of')}) : i18n('Venue d’une question : seulement les ancêtres de la personne de départ.')} <button type="button" class="link-button" data-h-search-unscope>retirer cette limite</button></p>` : ''}
+            ${c.relation && c.relation_of ? `<input type="hidden" name="relation" value="${v('relation')}"><input type="hidden" name="relation_of" value="${v('relation_of')}">` : ''}${c.ancestors ? '<input type="hidden" name="ancestors" value="1">' : ''}${fam.map(k => `<input type="hidden" name="${k}" value="${v(k)}">`).join('')}
+            ${c.relation && c.relation_of || c.ancestors || fam.length ? `<p class="h-understood">${c.relation ? i18n('Venue d’une question : seulement les proches de la fiche #{n}.', {n: v('relation_of')}) : c.ancestors ? i18n('Venue d’une question : seulement les ancêtres de la personne de départ.') : ''}${fam.length ? ` ${i18n('Venue d’une question : les critères de mariage et d’enfants sont gardés.')}` : ''} <button type="button" class="link-button" data-h-search-unscope>retirer cette limite</button></p>` : ''}
             <p class="muted">Exemple : nom « Dupont », événement « Naissance ou baptême », lieu « Nord », année « à 1800 » = tous les Dupont nés dans le Nord avant 1800.</p>
             <div class="page-actions"><button class="button" type="submit">Chercher</button><button class="button secondary" type="button" data-h-search-save>Enregistrer cette recherche</button></div></form>`;
     }
@@ -1721,7 +1723,7 @@
             } catch (error) { box.innerHTML = empty(error.message); }
         };
         form.addEventListener('submit', event => { event.preventDefault(); st.hSearch = {criteria: criteriaOf(form), id: 0, name: ''}; run(st.hSearch.criteria); });
-        ws.querySelector('[data-h-search-unscope]')?.addEventListener('click', event => { form.querySelectorAll('input[name="relation"],input[name="relation_of"],input[name="ancestors"]').forEach(i => i.remove()); event.target.closest('p').remove(); });
+        ws.querySelector('[data-h-search-unscope]')?.addEventListener('click', event => { form.querySelectorAll('input[name="relation"],input[name="relation_of"],input[name="ancestors"],input[type="hidden"][name^="marr"],input[type="hidden"][name="married"],input[type="hidden"][name^="children"]').forEach(i => i.remove()); event.target.closest('p').remove(); });
         ws.querySelector('[data-h-search-save]').addEventListener('click', async () => {
             const name = (await A().askText({title: 'Enregistrer la recherche', message: 'Nom de cette recherche :', value: st.hSearch.name || '', okLabel: 'Enregistrer'}))?.trim();
             if (!name) return;

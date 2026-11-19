@@ -44,3 +44,4 @@ heritage-tresors-outils.js
 heritage-tresors-papiers.js
 heritage-tresors-voyages.js
 heritage-tresors-widgets.js
+app-sources-ouvertes-8-core.js

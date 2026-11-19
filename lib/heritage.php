@@ -1214,7 +1214,7 @@ function saved_search_criteria(array $c): array
         'same_birthday' => safe_int($c['same_birthday'] ?? 0) ?: null,
         'relation' => array_key_exists((string) ($c['relation'] ?? ''), SEARCH_RELATIONS) ? (string) $c['relation'] : '',
         'relation_of' => array_key_exists((string) ($c['relation'] ?? ''), SEARCH_RELATIONS) ? (safe_int($c['relation_of'] ?? 0) ?: null) : null,
-    ];
+    ] + (function_exists('qf_criteria') ? qf_criteria($c) : []); // mariage et enfants (lib/question_famille.php)
 }
 
 /** Liens de parenté qu'une recherche peut viser (« les enfants de… ») : [singulier, pluriel]. */
@@ -1277,6 +1277,7 @@ function run_saved_search(PDO $pdo, array $criteria): array
         $where[] = 'EXISTS(SELECT 1 FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id WHERE ' . implode(' AND ', $cond) . ')';
         array_push($params, ...$sub);
     }
+    if (function_exists('qf_where')) { [$fw, $fp] = qf_where($c); array_push($where, ...$fw); array_push($params, ...$fp); } // mariage, âge au mariage, enfants
     $relatives = null;
     if ($c['relation'] !== '' && $c['relation_of']) {
         $relatives = search_relatives($pdo, $c['relation'], (int) $c['relation_of']);
@@ -1316,6 +1317,7 @@ function saved_search_label(array $c): string
     elseif ($c['year_to']) { $parts[] = "{$ev} avant {$c['year_to']}"; }
     if ($c['occupation'] !== '') { $parts[] = 'métier ' . $c['occupation']; }
     if ($c['ancestors']) { $parts[] = 'ancêtres seulement'; }
+    if (function_exists('qf_labels')) { array_push($parts, ...qf_labels($c, $c['gender'])); }
     if ($c['same_birthday']) { $parts[] = 'né le même jour que la fiche #' . $c['same_birthday']; }
     if ($c['relation'] !== '' && $c['relation_of']) {
         $n = '';

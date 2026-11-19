@@ -1614,3 +1614,37 @@ Lien à consolider : {child}, le fils de {parent} ¦ Liên kết cần củng c�
 Lien à consolider : {child}, la fille de {parent} ¦ Liên kết cần củng cố: {child}, con gái của {parent} ¦ Tautan perlu diperkuat: {child}, putri {parent}
 Lien à consolider : {child}, l’enfant de {parent} ¦ Liên kết cần củng cố: {child}, con của {parent} ¦ Tautan perlu diperkuat: {child}, anak {parent}
 cherche l’acte de naissance ou de baptême qui le nomme ¦ hãy tìm giấy khai sinh hoặc giấy rửa tội có ghi tên người đó ¦ cari akta kelahiran atau baptis yang menyebut namanya
+# ═════ Poser une question : mariage et enfants (lib/question_famille.php) ═════
+mariées ¦ đã kết hôn ¦ menikah
+mariés ¦ đã kết hôn ¦ menikah
+jamais mariées ¦ chưa từng kết hôn ¦ tidak pernah menikah
+jamais mariés ¦ chưa từng kết hôn ¦ tidak pernah menikah
+=au moins {n} mariages ¦ ít nhất {n} cuộc hôn nhân ¦ paling sedikit {n} pernikahan
+mariées à {n} ans ¦ kết hôn lúc {n} tuổi ¦ menikah pada usia {n}
+mariés à {n} ans ¦ kết hôn lúc {n} tuổi ¦ menikah pada usia {n}
+mariées entre {a} et {b} ans ¦ kết hôn ở tuổi từ {a} đến {b} ¦ menikah pada usia {a}–{b}
+mariés entre {a} et {b} ans ¦ kết hôn ở tuổi từ {a} đến {b} ¦ menikah pada usia {a}–{b}
+mariées après {n} ans ¦ kết hôn sau {n} tuổi ¦ menikah setelah usia {n}
+mariés après {n} ans ¦ kết hôn sau {n} tuổi ¦ menikah setelah usia {n}
+mariées avant {n} ans ¦ kết hôn trước {n} tuổi ¦ menikah sebelum usia {n}
+mariés avant {n} ans ¦ kết hôn trước {n} tuổi ¦ menikah sebelum usia {n}
+sans enfant ¦ không có con ¦ tanpa anak
+avec des enfants ¦ có con ¦ punya anak
+entre {a} et {b} enfants ¦ từ {a} đến {b} con ¦ {a}–{b} anak
+=exactement {n} enfants ¦ đúng {n} con ¦ tepat {n} anak
+=au moins {n} enfants ¦ ít nhất {n} con ¦ paling sedikit {n} anak
+=au plus {n} enfants ¦ nhiều nhất {n} con ¦ paling banyak {n} anak
+exactement 1 enfant ¦ đúng 1 con ¦ tepat 1 anak
+au plus 1 enfant ¦ nhiều nhất 1 con ¦ paling banyak 1 anak
+nées avant {y} ¦ sinh trước năm {y} ¦ lahir sebelum {y}
+nés avant {y} ¦ sinh trước năm {y} ¦ lahir sebelum {y}
+nées après {y} ¦ sinh sau năm {y} ¦ lahir setelah {y}
+nés après {y} ¦ sinh sau năm {y} ¦ lahir setelah {y}
+nées en {y} ¦ sinh năm {y} ¦ lahir tahun {y}
+nés en {y} ¦ sinh năm {y} ¦ lahir tahun {y}
+nées au {n}e siècle ¦ sinh vào thế kỷ {n} ¦ lahir pada abad ke-{n}
+nés au {n}e siècle ¦ sinh vào thế kỷ {n} ¦ lahir pada abad ke-{n}
+1 fiche sans date n’a pas pu être vérifiée pour l’âge au mariage (année de naissance ou de mariage inconnue). ¦ 1 hồ sơ không có ngày không thể kiểm tra tuổi kết hôn (không rõ năm sinh hoặc năm kết hôn). ¦ 1 data tanpa tanggal tidak dapat diperiksa untuk usia saat menikah (tahun lahir atau tahun menikah tidak diketahui).
+={n} fiches sans date n’ont pas pu être vérifiées pour l’âge au mariage (année de naissance ou de mariage inconnue). ¦ {n} hồ sơ không có ngày không thể kiểm tra tuổi kết hôn (không rõ năm sinh hoặc năm kết hôn). ¦ {n} data tanpa tanggal tidak dapat diperiksa untuk usia saat menikah (tahun lahir atau tahun menikah tidak diketahui).
+« Jeunes » n’est pas assez précis pour un âge : écris par exemple « mariées avant 20 ans ». ¦ “Jeunes” (trẻ) chưa đủ chính xác để chỉ một độ tuổi: hãy viết ví dụ “mariées avant 20 ans”. ¦ “Jeunes” (muda) kurang tepat untuk usia: tulis misalnya “mariées avant 20 ans”.
+Venue d’une question : les critères de mariage et d’enfants sont gardés. ¦ Từ một câu hỏi: các tiêu chí về hôn nhân và con cái được giữ lại. ¦ Dari pertanyaan: kriteria pernikahan dan anak tetap disimpan.

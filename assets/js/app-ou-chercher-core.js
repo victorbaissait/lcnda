@@ -57,12 +57,12 @@
         sk: ['slovaquie'], at: ['autriche', 'osterreich', 'austria', 'at', 'autriche hongrie'], hu: ['hongrie', 'magyarorszag', 'hungary', 'hu'],
         dz: ['algerie', 'algeria', 'dz'], ma: ['maroc', 'morocco'], tn: ['tunisie', 'tunisia'], sn: ['senegal'], vn: ['indochine', 'vietnam', 'viet nam', 'cochinchine', 'tonkin', 'annam'],
         nc: ['nouvelle caledonie'], gf: ['guyane'], re: ['la reunion', 'ile bourbon'], gp: ['guadeloupe'], mq: ['martinique'], mg: ['madagascar'],
-        au: ['australie', 'australia'], nz: ['nouvelle zelande', 'new zealand'], ar: ['argentine', 'argentina'], br: ['bresil', 'brasil', 'brazil'], il: ['israel'], lt: ['lituanie'], lv: ['lettonie'], ro: ['roumanie'],
+        au: ['australie', 'australia'], nz: ['nouvelle zelande', 'new zealand'], ar: ['argentine', 'argentina'], br: ['bresil', 'brasil', 'brazil'], il: ['israel'], lt: ['lituanie', 'lietuva', 'lithuania'], lv: ['lettonie', 'latvija', 'latvia'], ee: ['estonie', 'eesti', 'estonia'], ro: ['roumanie'],
     };
     const COUNTRY_NAME = {fr: 'France', it: 'Italie', es: 'Espagne', pt: 'Portugal', de: 'Allemagne', be: 'Belgique', ch: 'Suisse', lu: 'Luxembourg', nl: 'Pays-Bas', gb: 'Royaume-Uni', ie: 'Irlande',
         us: 'États-Unis', ca: 'Canada', pl: 'Pologne', ru: 'Russie', ua: 'Ukraine', no: 'Norvège', se: 'Suède', dk: 'Danemark', fi: 'Finlande', cz: 'Tchéquie', sk: 'Slovaquie', at: 'Autriche', hu: 'Hongrie',
         dz: 'Algérie', ma: 'Maroc', tn: 'Tunisie', sn: 'Sénégal', vn: 'Indochine', nc: 'Nouvelle-Calédonie', gf: 'Guyane', re: 'La Réunion', gp: 'Guadeloupe', mq: 'Martinique', mg: 'Madagascar',
-        au: 'Australie', nz: 'Nouvelle-Zélande', ar: 'Argentine', br: 'Brésil', il: 'Israël', lt: 'Lituanie', lv: 'Lettonie', ro: 'Roumanie'};
+        au: 'Australie', nz: 'Nouvelle-Zélande', ar: 'Argentine', br: 'Brésil', il: 'Israël', lt: 'Lituanie', lv: 'Lettonie', ee: 'Estonie', ro: 'Roumanie'};
     const WORD_TO_CODE = new Map();
     Object.entries(COUNTRY_WORDS).forEach(([c, ws]) => ws.forEach(w => WORD_TO_CODE.set(w, c)));
     const WORLD = /^(international|monde|world|europe.*|tous pays|partout)$/;
@@ -130,7 +130,7 @@
         return `${ne(ctx)} ${ctx.estimated && !ctx.birthKnown ? 'vers' : 'en'} ${ctx.by}${where}`;
     }
     const lifeText = ctx => (ctx.by ? `${ctx.estimated && !ctx.birthKnown ? T('vers') + ' ' : ''}${ctx.by}–${ctx.deathKnown ? ctx.dy : '?'}` : '');
-    const countryIn = (ctx, c) => { const n = COUNTRY_NAME[c] || c; if (I18()) return T('en {country}', {country: T(n)}); return ['Algérie', 'Indochine', 'Italie', 'Espagne', 'Allemagne', 'Irlande', 'Australie', 'Argentine', 'Autriche', 'Ukraine', 'Écosse'].includes(n) ? `en ${n}` : /^[AEIOUÉ]/.test(n) ? `en ${n}` : n === 'États-Unis' || n === 'Pays-Bas' ? `aux ${n}` : `en ${n}`; };
+    const countryIn = (ctx, c) => { const n = COUNTRY_NAME[c] || c; if (I18()) return T('en {country}', {country: T(n)}); return ['Algérie', 'Indochine', 'Italie', 'Espagne', 'Allemagne', 'Irlande', 'Australie', 'Argentine', 'Autriche', 'Ukraine', 'Écosse'].includes(n) ? `en ${n}` : /^[AEIOUÉ]/.test(n) ? `en ${n}` : n === 'États-Unis' || n === 'Pays-Bas' ? `aux ${n}` : ['Royaume-Uni', 'Luxembourg', 'Brésil', 'Danemark', 'Canada', 'Portugal', 'Maroc', 'Sénégal'].includes(n) ? `au ${n}` : `en ${n}`; };
 
     /* ═════ les règles des sites qu'on connaît (clés de « Chercher sur internet » et des lots) ═════ */
     const S = (o) => o;
@@ -138,6 +138,11 @@
     const WAR_DEATHS = [[1870, 1872], [1914, 1921], [1939, 1946], [1946, 1963]];
     const war14 = ctx => T(ctx.profiles.has('soldier') || ctx.profiles.has('mpf') ? (ctx.female ? '{born} : elle a fait la guerre de 14' : '{born} : il a fait la guerre de 14') : (ctx.female ? '{born} : elle a sans doute fait la guerre de 14' : '{born} : il a sans doute fait la guerre de 14'), {born: bornText(ctx)});
     const war39 = ctx => T(ctx.female ? '{born} : elle avait l’âge d’être mobilisé en 1939-1945' : '{born} : il avait l’âge d’être mobilisé en 1939-1945', {born: bornText(ctx)});
+    /** un registre des MORTS d'une guerre (règles avec diedIn) : la phrase, que le décès soit connu ou non */
+    const warDead = ctx => (ctx.deathKnown ? T(ctx.female ? 'Morte en {year} : son nom est peut-être dans ce registre des morts de la guerre' : 'Mort en {year} : son nom est peut-être dans ce registre des morts de la guerre', {year: ctx.dy})
+        : T(ctx.female ? '{born} : si elle est morte à la guerre, son nom est dans ce registre' : '{born} : s’il est mort à la guerre, son nom est dans ce registre', {born: bornText(ctx)}));
+    /** la presse ancienne d'un pays */
+    const pressWhy = c => ctx => T('Les journaux anciens {where} : naissances, mariages, décès, faits divers', {where: countryIn(ctx, c)});
     const RULES = {
         // moteurs de recherche : jamais en tête
         google: S({base: 0.5}), bing: S({base: 0.1}), duckduckgo: S({base: 0.2}), qwant: S({base: 0.2}), ecosia: S({base: 0}), brave: S({base: 0}), startpage: S({base: 0}), yahoo: S({base: 0}), yandex: S({base: 0}), baidu: S({base: 0}), mojeek: S({base: 0}),
@@ -221,6 +226,52 @@
         so5_geneawiki: S({countries: ['fr'], base: 0.4}), so4_geopatronyme: S({countries: ['fr'], missing: ['parents', 'father', 'mother'], base: 0.4, why: ctx => (ctx.last ? T('Où vivaient les {name} entre 1891 et 1990 : pour trouver d’où vient la famille', {name: ctx.last}) : T('Où vivaient les gens de ce nom entre 1891 et 1990 : pour trouver d’où vient la famille'))}),
         so4_cassini: S({countries: ['fr'], base: 0.1}), so4_geneanet_releves: S({countries: ['fr'], missing: ['death'], base: 0.6}), so4_cimetieres_de_france: S({countries: ['fr'], missing: ['death'], base: 0.5}),
         so3_cths: S({profiles: ['inventor', 'artist', 'doctor', 'elected'], base: 0.2}), so3_polytechnique: S({profiles: ['inventor', 'soldier'], require: ['profile'], born: [1775, 1925], sex: 'male', base: 0.1}),
+        // ═════ lot 8 (app-sources-ouvertes-8-core.js) : sites gratuits de France et d'ailleurs ═════
+        // France et outre-mer
+        so8_geneabank: S({countries: ['fr'], missing: ['birth', 'parents', 'father', 'mother', 'marriage', 'death'], base: 1.1, paid: 'partiel', why: () => T('Les relevés de nombreux cercles généalogiques réunis : gratuits si tu es adhérent d’un cercle')}),
+        so8_geneawiki_releves: S({countries: ['fr'], missing: ['birth', 'parents', 'father', 'mother', 'marriage', 'death'], base: 0.8, why: () => T('Les relevés gratuits des bénévoles, rangés par département et par commune')}),
+        so8_francais_libres: S({countries: ['fr'], born: [1900, 1927], profiles: ['resistant', 'soldier'], require: ['profile'], base: 0.2, why: () => T('Les Français libres (1940-1943) : une fiche pour chacun')}),
+        so8_cgj: S({profiles: ['jewish'], require: ['profile'], base: 0.8, why: () => T('Une famille juive : les bases du Cercle de généalogie juive')}),
+        so8_ghcaraibe: S({countries: ['gp', 'mq', 'gf'], base: 1, missing: ['birth', 'parents', 'marriage'], why: () => T('Une famille des Antilles ou de Guyane : les articles et relevés de GHC')}),
+        so8_anchoukaj: S({countries: ['gp', 'mq'], from: 1780, to: 1900, base: 0.8, why: () => T('Les noms donnés aux esclaves libérés en 1848 (Guadeloupe, Martinique)')}),
+        // morts des guerres hors de France : diedIn écarte un décès connu hors des guerres
+        so8_cwgc: S({countries: ['gb', 'ie', 'ca', 'au', 'nz'], born: [1860, 1930], diedIn: [[1914, 1921], [1939, 1947]], profiles: ['soldier'], base: 0.8, why: warDead}),
+        so8_volksbund: S({countries: ['de', 'at'], born: [1855, 1930], diedIn: [[1914, 1921], [1939, 1947]], profiles: ['soldier'], base: 0.8, why: warDead}),
+        so8_wardead_be: S({countries: ['be'], born: [1865, 1937], diedIn: [[1914, 1920], [1939, 1946], [1950, 1956]], profiles: ['soldier'], base: 0.8, why: warDead}),
+        so8_caduti_gg: S({countries: ['it'], born: [1866, 1902], diedIn: [[1915, 1921]], sex: 'male', profiles: ['soldier'], base: 0.8, why: warDead}),
+        so8_ogs_nl: S({countries: ['nl'], born: [1860, 1945], diedIn: [[1939, 1963]], profiles: ['soldier', 'deported', 'resistant'], base: 0.7, why: warDead}),
+        so8_cvwm: S({countries: ['ca'], born: [1860, 1995], diedIn: [[1899, 1902], [1914, 1921], [1939, 1947], [1950, 1954], [2001, 2014]], profiles: ['soldier'], base: 0.8, why: warDead}),
+        so8_abmc: S({countries: ['us'], born: [1860, 1955], diedIn: [[1917, 1921], [1941, 1946], [1950, 1954], [1964, 1975]], profiles: ['soldier'], base: 0.6, why: warDead}),
+        so8_sotasampo: S({countries: ['fi'], born: [1870, 1930], diedIn: [[1939, 1946]], profiles: ['soldier'], base: 0.8, why: warDead}),
+        so8_obd_memorial: S({countries: ['ru', 'ua'], born: [1870, 1930], diedIn: [[1941, 1946]], profiles: ['soldier'], base: 0.8, why: warDead}),
+        // soldats (blessés, disparus et morts) : pas seulement des morts
+        so8_verlustlisten: S({countries: ['de'], born: [1860, 1901], sex: 'male', profiles: ['soldier', 'pow'], base: 0.8, why: war14}),
+        so8_verlustlisten_at: S({countries: ['at', 'hu', 'cz', 'sk'], born: [1860, 1901], sex: 'male', profiles: ['soldier', 'pow'], base: 0.8, why: war14}),
+        // presse ancienne
+        so8_belgicapress: S({countries: ['be'], base: 0.6, why: pressWhy('be')}), so8_eluxemburgensia: S({countries: ['lu'], base: 0.7, why: pressWhy('lu')}),
+        so8_e_newspaperarchives: S({countries: ['ch'], base: 0.6, why: pressWhy('ch')}), so8_hemeroteca_bne: S({countries: ['es'], base: 0.5, why: pressWhy('es')}),
+        so8_ddb_zeitungen: S({countries: ['de'], base: 0.6, why: pressWhy('de')}), so8_welsh_newspapers: S({countries: ['gb'], from: 1804, to: 1919, base: 0.3, why: pressWhy('gb')}),
+        so8_hemeroteca_br: S({countries: ['br'], base: 0.6, why: pressWhy('br')}),
+        // Shoah : ton sobre, seulement si la fiche le dit
+        so8_joodsmonument: S({profiles: ['deported', 'jewish'], require: ['profile'], countries: ['nl'], from: 1933, to: 1945, diedIn: [[1940, 1946]], base: 0.3, why: () => T('Sa fiche dit une déportation : les noms des victimes de la Shoah')}),
+        so8_gedenkbuch: S({profiles: ['deported', 'jewish'], require: ['profile'], countries: ['de'], from: 1933, to: 1945, diedIn: [[1933, 1946]], base: 0.3, why: () => T('Sa fiche dit une déportation : les noms des victimes de la Shoah')}),
+        // registres, recensements, index
+        so8_wiewaswie: S({countries: ['nl'], missing: ['birth', 'parents', 'marriage', 'death'], base: 1.2, paid: 'partiel'}), so8_archieven_nl: S({countries: ['nl'], missing: ['birth', 'parents', 'marriage', 'death'], base: 1.3}),
+        so8_genteam: S({countries: ['at', 'cz', 'hu', 'sk'], missing: ['birth', 'parents', 'marriage', 'death'], base: 1.2}), so8_famn_ch: S({countries: ['ch'], missing: ['parents', 'father', 'mother'], base: 1}),
+        so8_freereg: S({countries: ['gb'], to: 1900, missing: ['birth', 'parents', 'marriage', 'death'], base: 1.2}), so8_tna_discovery: S({countries: ['gb'], base: 0.7}),
+        so8_census_ie: S({countries: ['ie'], from: 1901, to: 1911, base: 1.2}), so8_nli_registers: S({countries: ['ie'], from: 1740, to: 1880, missing: ['birth', 'parents', 'marriage'], base: 1}),
+        so8_szukajwarchiwach: S({countries: ['pl'], missing: ['birth', 'parents', 'marriage', 'death'], base: 1.2}), so8_poznan_project: S({countries: ['pl', 'de'], from: 1800, to: 1899, missing: ['marriage', 'parents'], base: 0.9}),
+        so8_basia: S({countries: ['pl'], missing: ['birth', 'parents', 'marriage', 'death'], base: 0.8}),
+        so8_saaga: S({countries: ['ee'], missing: ['birth', 'parents', 'marriage', 'death'], base: 1.4}), so8_raduraksti: S({countries: ['lv'], to: 1940, missing: ['birth', 'parents', 'marriage', 'death'], base: 1.4}),
+        so8_epaveldas: S({countries: ['lt'], missing: ['birth', 'parents', 'marriage', 'death'], base: 1.3}), so8_actapublica: S({countries: ['cz'], missing: ['birth', 'parents', 'marriage', 'death'], base: 1.2}),
+        so8_glo_records: S({countries: ['us'], from: 1788, to: 1970, base: 0.6}), so8_usgenweb: S({countries: ['us'], missing: ['birth', 'death', 'marriage'], base: 0.8}),
+        so8_nosorigines: S({countries: ['ca'], missing: ['birth', 'parents', 'father', 'mother', 'marriage'], base: 1.2}), so8_automatedgenealogy: S({countries: ['ca'], from: 1851, to: 1911, base: 1}),
+        // émigration
+        so8_ddd_emigrants: S({countries: ['dk'], profiles: ['emigrant'], events: ['EMIG'], from: 1868, to: 1910, base: 0.6}),
+        so8_norwayheritage: S({countries: ['no'], profiles: ['emigrant'], events: ['EMIG'], from: 1825, to: 1925, base: 0.6}),
+        so8_passagierlisten: S({countries: ['de'], profiles: ['emigrant'], events: ['EMIG'], from: 1920, to: 1939, base: 0.5}),
+        so8_stevemorse: S({countries: ['us'], profiles: ['emigrant'], events: ['EMIG', 'IMMI', 'NATU'], base: 0.4}),
+        so8_cemla: S({countries: ['ar'], profiles: ['emigrant'], events: ['IMMI', 'EMIG'], from: 1800, to: 1960, base: 0.8}),
     };
     // les mêmes règles sous l'autre forme de clé (lot 1 : « memoiredeshommes » de l'app = « so_… » du lot)
     const ALIAS = {so_gallica: 'gallica', so_retronews: 'retronews', so_europeana: 'europeana', so6_ancestry: 'ancestry', so6_myheritage: 'myheritage', so6_filae: 'filae', so5_wikitree: 'wikitree'};

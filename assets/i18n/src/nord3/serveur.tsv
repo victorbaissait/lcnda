@@ -1614,3 +1614,37 @@ Lien à consolider : {child}, le fils de {parent} ¦ Legătură de consolidat: {
 Lien à consolider : {child}, la fille de {parent} ¦ Legătură de consolidat: {child}, fiica lui {parent}
 Lien à consolider : {child}, l’enfant de {parent} ¦ Legătură de consolidat: {child}, copilul lui {parent}
 cherche l’acte de naissance ou de baptême qui le nomme ¦ caută actul de naștere sau de botez care îl numește
+# ═════ Poser une question : mariage et enfants (lib/question_famille.php) ═════
+mariées ¦ căsătorite
+mariés ¦ căsătoriți
+jamais mariées ¦ niciodată căsătorite
+jamais mariés ¦ niciodată căsătoriți
+=au moins {n} mariages ¦ cel puțin {n} căsătorie|cel puțin {n} căsătorii|cel puțin {n} de căsătorii
+mariées à {n} ans ¦ căsătorite, vârsta la căsătorie: {n}
+mariés à {n} ans ¦ căsătoriți, vârsta la căsătorie: {n}
+mariées entre {a} et {b} ans ¦ căsătorite, vârsta la căsătorie: {a}–{b}
+mariés entre {a} et {b} ans ¦ căsătoriți, vârsta la căsătorie: {a}–{b}
+mariées après {n} ans ¦ căsătorite, vârsta la căsătorie: peste {n}
+mariés après {n} ans ¦ căsătoriți, vârsta la căsătorie: peste {n}
+mariées avant {n} ans ¦ căsătorite, vârsta la căsătorie: sub {n}
+mariés avant {n} ans ¦ căsătoriți, vârsta la căsătorie: sub {n}
+sans enfant ¦ fără copii
+avec des enfants ¦ cu copii
+entre {a} et {b} enfants ¦ numărul de copii: {a}–{b}
+=exactement {n} enfants ¦ exact {n} copil|exact {n} copii|exact {n} de copii
+=au moins {n} enfants ¦ cel puțin {n} copil|cel puțin {n} copii|cel puțin {n} de copii
+=au plus {n} enfants ¦ cel mult {n} copil|cel mult {n} copii|cel mult {n} de copii
+exactement 1 enfant ¦ exact 1 copil
+au plus 1 enfant ¦ cel mult 1 copil
+nées avant {y} ¦ născute înainte de {y}
+nés avant {y} ¦ născuți înainte de {y}
+nées après {y} ¦ născute după {y}
+nés après {y} ¦ născuți după {y}
+nées en {y} ¦ născute în {y}
+nés en {y} ¦ născuți în {y}
+nées au {n}e siècle ¦ născute în secolul {n}
+nés au {n}e siècle ¦ născuți în secolul {n}
+1 fiche sans date n’a pas pu être vérifiée pour l’âge au mariage (année de naissance ou de mariage inconnue). ¦ 1 fișă fără dată nu a putut fi verificată pentru vârsta la căsătorie (anul nașterii sau al căsătoriei necunoscut).
+={n} fiches sans date n’ont pas pu être vérifiées pour l’âge au mariage (année de naissance ou de mariage inconnue). ¦ Fișe fără dată care nu au putut fi verificate pentru vârsta la căsătorie: {n} (anul nașterii sau al căsătoriei necunoscut).|Fișe fără dată care nu au putut fi verificate pentru vârsta la căsătorie: {n} (anul nașterii sau al căsătoriei necunoscut).|Fișe fără dată care nu au putut fi verificate pentru vârsta la căsătorie: {n} (anul nașterii sau al căsătoriei necunoscut).
+« Jeunes » n’est pas assez précis pour un âge : écris par exemple « mariées avant 20 ans ». ¦ „Jeunes” (tinere) nu este destul de precis pentru o vârstă: scrie de exemplu „mariées avant 20 ans”.
+Venue d’une question : les critères de mariage et d’enfants sont gardés. ¦ Din întrebare: criteriile despre căsătorie și copii sunt păstrate.

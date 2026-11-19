@@ -201,6 +201,7 @@ function qm_keep(array $f, array $p, ?int $year = null): bool
 {
     if ($f['gender'] && $p['gender'] !== $f['gender']) { return false; }
     if ($f['ancestors'] && !isset($f['set'][(int) $p['id']])) { return false; }
+    if (isset($f['fam']) && !isset($f['fam'][(int) $p['id']])) { return false; } // mariage et enfants (qf_ids)
     if (!empty($f['place']) && !isset($f['place']['people'][(int) $p['id']])) { return false; }
     $y = $year ?? $p['by'];
     if (($f['from'] !== null || $f['to'] !== null) && $y === null) { return false; }
@@ -346,6 +347,10 @@ function question_special(PDO $pdo, string $question, int $personId = 0, string 
     $q = trim(preg_replace('/\s+/u', ' ', $question));
     if (mb_strlen($q) > 300) { $q = mb_substr($q, 0, 300); } // une question, pas un texte : le calcul reste rapide
     $t = ' ' . strtolower(ascii_fold($q)) . ' ';
+    // mariage et enfants (« sans enfant », « jamais mariées », « mariées avant 20 ans », « remariées », lib/question_famille.php) :
+    // retirés de la question, puis appliqués comme filtre aux calculs (moyennes, records, âges…) ; « mariées » seul reste dans la question
+    $famC = [];
+    if (function_exists('qf_extract')) { $fx = qf_extract($q, false); if ($fx['crit']) { $famC = $fx['crit']; $q = $fx['q']; $t = ' ' . strtolower(ascii_fold($q)) . ' '; } }
     $animals = qm_about_animals($t);
     // les statistiques portent sur les personnes ; les animaux seulement si la question parle d'animaux
     $people = null; $P = static function () use ($pdo, &$people, $animals) { return $people ??= qm_humans($pdo, $animals); };
@@ -435,6 +440,7 @@ function question_special(PDO $pdo, string $question, int $personId = 0, string 
     }
 
     $f = qm_filters($pdo, $t); $fl = $f['label'];
+    if ($famC) { $f['fam'] = qf_ids($pdo, $famC); array_push($fl, ...qf_labels($famC, $f['gender'])); }
     // un lieu (« à Pernay ») : plusieurs communes de ce nom ont des actes → on demande laquelle
     $plf = qm_place_filter($pdo, $t, $placeKey);
     if ($plf && isset($plf['ask']) && preg_match('/\b(moyen|moyenne|en moyenne|esperance de vie|age median|combien|plus (frequent|frequente|courant|courante|repandu|ancien|ancienne|vieux|vieille|jeune|age|agee)|les plus|le plus|la plus|palmares|classement|top|repartition)\b/', $t)) {

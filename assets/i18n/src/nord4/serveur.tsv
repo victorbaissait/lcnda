@@ -1614,3 +1614,37 @@ Impossible de lancer le service HTR local. ¦ Paikallista HTR-palvelua ei voi k�
 Cette image n’est pas rattachée à la personne ¦ Tätä kuvaa ei ole liitetty henkilöön ¦ Ez a kép nincs a személyhez kapcsolva
 Ordre des médias manquant ¦ Median järjestys puuttuu ¦ Hiányzik a média sorrendje
 Type de média invalide. ¦ Virheellinen mediatyyppi. ¦ Érvénytelen médiatípus.
+# ═════ Poser une question : mariage et enfants (lib/question_famille.php) ═════
+mariées ¦ naimisissa ¦ férjezettek
+mariés ¦ naimisissa ¦ házasok
+jamais mariées ¦ ei koskaan naimisissa ¦ soha nem mentek férjhez
+jamais mariés ¦ ei koskaan naimisissa ¦ soha nem házasodtak
+=au moins {n} mariages ¦ vähintään {n} avioliitto|vähintään {n} avioliittoa ¦ legalább {n} házasság|legalább {n} házasság
+mariées à {n} ans ¦ naimisiin {n}-vuotiaana ¦ {n} évesen mentek férjhez
+mariés à {n} ans ¦ naimisiin {n}-vuotiaana ¦ {n} évesen házasodtak
+mariées entre {a} et {b} ans ¦ naimisiin {a}–{b}-vuotiaana ¦ {a} és {b} éves kor között mentek férjhez
+mariés entre {a} et {b} ans ¦ naimisiin {a}–{b}-vuotiaana ¦ {a} és {b} éves kor között házasodtak
+mariées après {n} ans ¦ naimisiin yli {n}-vuotiaana ¦ {n} éves kor után mentek férjhez
+mariés après {n} ans ¦ naimisiin yli {n}-vuotiaana ¦ {n} éves kor után házasodtak
+mariées avant {n} ans ¦ naimisiin alle {n}-vuotiaana ¦ {n} éves kor előtt mentek férjhez
+mariés avant {n} ans ¦ naimisiin alle {n}-vuotiaana ¦ {n} éves kor előtt házasodtak
+sans enfant ¦ ilman lapsia ¦ gyermektelen
+avec des enfants ¦ joilla on lapsia ¦ gyermekes
+entre {a} et {b} enfants ¦ lapsia {a}–{b} ¦ {a}–{b} gyerek
+=exactement {n} enfants ¦ tasan {n} lapsi|tasan {n} lasta ¦ pontosan {n} gyerek|pontosan {n} gyerek
+=au moins {n} enfants ¦ vähintään {n} lapsi|vähintään {n} lasta ¦ legalább {n} gyerek|legalább {n} gyerek
+=au plus {n} enfants ¦ enintään {n} lapsi|enintään {n} lasta ¦ legfeljebb {n} gyerek|legfeljebb {n} gyerek
+exactement 1 enfant ¦ tasan 1 lapsi ¦ pontosan 1 gyerek
+au plus 1 enfant ¦ enintään 1 lapsi ¦ legfeljebb 1 gyerek
+nées avant {y} ¦ syntyneet ennen vuotta {y} ¦ {y} előtt születtek
+nés avant {y} ¦ syntyneet ennen vuotta {y} ¦ {y} előtt születtek
+nées après {y} ¦ syntyneet vuoden {y} jälkeen ¦ {y} után születtek
+nés après {y} ¦ syntyneet vuoden {y} jälkeen ¦ {y} után születtek
+nées en {y} ¦ syntyneet vuonna {y} ¦ születési év: {y}
+nés en {y} ¦ syntyneet vuonna {y} ¦ születési év: {y}
+nées au {n}e siècle ¦ syntyneet {n}. vuosisadalla ¦ {n}. században születtek
+nés au {n}e siècle ¦ syntyneet {n}. vuosisadalla ¦ {n}. században születtek
+1 fiche sans date n’a pas pu être vérifiée pour l’âge au mariage (année de naissance ou de mariage inconnue). ¦ 1 päivämäärätön tietue jäi tarkistamatta vihkiiän osalta (syntymä- tai vihkivuosi tuntematon). ¦ 1 dátum nélküli lapot nem lehetett ellenőrizni a házasságkötéskori életkor szerint (ismeretlen születési vagy házassági év).
+={n} fiches sans date n’ont pas pu être vérifiées pour l’âge au mariage (année de naissance ou de mariage inconnue). ¦ Päivämäärättömiä tietueita, joita ei voitu tarkistaa vihkiiän osalta: {n} (syntymä- tai vihkivuosi tuntematon).|Päivämäärättömiä tietueita, joita ei voitu tarkistaa vihkiiän osalta: {n} (syntymä- tai vihkivuosi tuntematon). ¦ {n} dátum nélküli lapot nem lehetett ellenőrizni a házasságkötéskori életkor szerint (ismeretlen születési vagy házassági év).|{n} dátum nélküli lapot nem lehetett ellenőrizni a házasságkötéskori életkor szerint (ismeretlen születési vagy házassági év).
+« Jeunes » n’est pas assez précis pour un âge : écris par exemple « mariées avant 20 ans ». ¦ ”Jeunes” (nuoret) ei ole iäksi tarpeeksi tarkka: kirjoita esimerkiksi ”mariées avant 20 ans”. ¦ A „jeunes” (fiatalok) nem elég pontos életkornak: írd például így: „mariées avant 20 ans”.
+Venue d’une question : les critères de mariage et d’enfants sont gardés. ¦ Kysymyksestä: avioliiton ja lasten ehdot säilyvät. ¦ Kérdésből: a házasságra és a gyerekekre vonatkozó feltételek megmaradnak.

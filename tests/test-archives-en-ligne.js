@@ -26,7 +26,7 @@ const js = f => path.join(appRoot, 'assets/js', f);
 const AR = require(js('app-archives-en-ligne-core.js'));
 const REGS = {1: require(js('app-sources-ouvertes-core.js')), 2: require(js('app-sources-ouvertes-2-core.js')), 3: require(js('app-sources-ouvertes-3-core.js')),
     4: require(js('app-sources-ouvertes-4-core.js')), 5: require(js('app-sources-ouvertes-5-core.js')), 6: require(js('app-sources-ouvertes-6-core.js')),
-    7: require(js('app-sources-ouvertes-7-core.js')), socface: require(js('app-socface-core.js'))};
+    7: require(js('app-sources-ouvertes-7-core.js')), 8: require(js('app-sources-ouvertes-8-core.js')), socface: require(js('app-socface-core.js'))};
 const SHOTS = process.env.SHOTS || '';
 const HOSTS = /memoiredeshommes|culture\.gouv|gallica|retronews|europeana|francearchives|archives-nationales|maitron|familysearch|wikitree|archivesportaleurope|idref|bnf\.fr|freebmd|antenati|google\.com|archion|ancestry|myheritage|filae|geneanet/;
 
@@ -68,7 +68,7 @@ const fakeLS = (init = {}) => { const m = new Map(Object.entries(init)); return 
         for (const s of secs) { const k = s.list.findIndex(e => e.paid === 'oui'); if (k >= 0) assert.ok(s.list.slice(k).every(e => e.paid === 'oui' || e.paid === 'bibliotheque'), `${s.id} : payants à la fin`); }
         const free = AR.filter(ALL, {free: true}); assert.ok(!free.some(e => e.paid === 'oui' || e.paid === 'bibliotheque')); assert.ok(free.some(e => e.paid === 'partiel'), 'en partie payant : montré');
         assert.ok(AR.filter(ALL, {q: 'antenati'}).every(e => e.id === 'so3_antenati_nom'));
-        assert.deepEqual(AR.filter(ALL, {zone: 'eu', country: 'Royaume-Uni', free: true}).map(e => e.id).sort(), ['so3_freebmd', 'so3_freecen', 'so6_oldbailey']);
+        assert.deepEqual(AR.filter(ALL, {zone: 'eu', country: 'Royaume-Uni', free: true}).map(e => e.id).sort(), ['so3_freebmd', 'so3_freecen', 'so6_oldbailey', 'so8_cwgc', 'so8_freereg', 'so8_tna_discovery', 'so8_welsh_newspapers']);
         assert.equal(ALL.find(e => e.id === 'so_retronews').paid, 'partiel');
     });
     await t('adresses : celles des lots, avec l’adresse à soi ; prêtes seulement avec un nom (ou un lieu) ; époque', () => {
@@ -109,7 +109,7 @@ const fakeLS = (init = {}) => { const m = new Map(Object.entries(init)); return 
         assert.ok(l2.find(e => e.id === 'so7_ape').hidden && l2.find(e => e.id === 'so3_freebmd').hidden);
         assert.ok(l2.some(e => e.id === 'so7_m1' && e.mine), '« Mes sites » du lot 7');
         assert.equal(AR.url(l2.find(e => e.id === 'so7_m1'), P, REGS), 'https://m.example/?n=Dupont');
-        assert.deepEqual(AR.STORE_KEYS, ['genealogie-sources-ouvertes-sites', ...[2, 3, 4, 5, 6, 7].map(n => `genealogie-sources-ouvertes-${n}-sites`)]);
+        assert.deepEqual(AR.STORE_KEYS, ['genealogie-sources-ouvertes-sites', ...[2, 3, 4, 5, 6, 7, 8].map(n => `genealogie-sources-ouvertes-${n}-sites`)]);
     });
 
     /* ═════ 2. le code ═════ */
@@ -215,7 +215,7 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env: envFor(dir)});
                 await p.click('dialog.ael-search [data-ael-zone="eu"]');
                 assert.ok(await p.isVisible('dialog.ael-search [data-ael-countries]'), 'les pays de la zone');
                 await p.click('dialog.ael-search [data-ael-country="Italie"]');
-                assert.deepEqual(await p.$$eval('dialog.ael-search .ael-site', l => l.map(x => x.dataset.aelSite)), ['so3_antenati_nom']);
+                assert.deepEqual(await p.$$eval('dialog.ael-search .ael-site', l => l.map(x => x.dataset.aelSite)).then(l => l.sort()), ['so3_antenati_nom', 'so8_caduti_gg']);
                 await p.click('dialog.ael-search [data-ael-zone=""]');
                 await p.click('dialog.ael-search [data-ael-theme="mer"]');
                 const mer = await p.$$eval('dialog.ael-search .ael-site', l => l.map(x => x.dataset.aelSite));

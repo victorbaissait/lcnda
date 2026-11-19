@@ -1614,3 +1614,37 @@ Lien à consolider : {child}, le fils de {parent} ¦ Ryšys, kurį reikia sustip
 Lien à consolider : {child}, la fille de {parent} ¦ Ryšys, kurį reikia sustiprinti: {child}, {parent} duktė ¦ Nostiprināma saite: {child}, {parent} meita ¦ Tugevdamist vajav seos: {child}, isiku {parent} tütar
 Lien à consolider : {child}, l’enfant de {parent} ¦ Ryšys, kurį reikia sustiprinti: {child}, {parent} vaikas ¦ Nostiprināma saite: {child}, {parent} bērns ¦ Tugevdamist vajav seos: {child}, isiku {parent} laps
 cherche l’acte de naissance ou de baptême qui le nomme ¦ ieškok gimimo ar krikšto dokumento, kuriame jis paminėtas ¦ meklē dzimšanas vai kristību dokumentu, kurā viņš minēts ¦ otsi sünni- või ristimisdokumenti, milles teda nimetatakse
+# ═════ Poser une question : mariage et enfants (lib/question_famille.php) ═════
+mariées ¦ ištekėjusios ¦ precējušās ¦ abielus
+mariés ¦ susituokę ¦ precējušies ¦ abielus
+jamais mariées ¦ niekada netekėjusios ¦ nekad neprecējušās ¦ kunagi abiellumata
+jamais mariés ¦ niekada nesusituokę ¦ nekad neprecējušies ¦ kunagi abiellumata
+=au moins {n} mariages ¦ bent {n} santuoka|bent {n} santuokos|bent {n} santuokų ¦ vismaz {n} laulību|vismaz {n} laulība|vismaz {n} laulības ¦ vähemalt {n} abielu|vähemalt {n} abielu
+mariées à {n} ans ¦ ištekėjusios, amžius santuokos metu: {n} ¦ precējušās, vecums laulībā: {n} ¦ abiellunud {n}-aastaselt
+mariés à {n} ans ¦ susituokę, amžius santuokos metu: {n} ¦ precējušies, vecums laulībā: {n} ¦ abiellunud {n}-aastaselt
+mariées entre {a} et {b} ans ¦ ištekėjusios, amžius santuokos metu: {a}–{b} ¦ precējušās, vecums laulībā: {a}–{b} ¦ abiellunud {a}–{b}-aastaselt
+mariés entre {a} et {b} ans ¦ susituokę, amžius santuokos metu: {a}–{b} ¦ precējušies, vecums laulībā: {a}–{b} ¦ abiellunud {a}–{b}-aastaselt
+mariées après {n} ans ¦ ištekėjusios, amžius santuokos metu: daugiau nei {n} ¦ precējušās, vecums laulībā: virs {n} ¦ abiellunud vanemana kui {n} aastat
+mariés après {n} ans ¦ susituokę, amžius santuokos metu: daugiau nei {n} ¦ precējušies, vecums laulībā: virs {n} ¦ abiellunud vanemana kui {n} aastat
+mariées avant {n} ans ¦ ištekėjusios, amžius santuokos metu: mažiau nei {n} ¦ precējušās, vecums laulībā: zem {n} ¦ abiellunud nooremana kui {n} aastat
+mariés avant {n} ans ¦ susituokę, amžius santuokos metu: mažiau nei {n} ¦ precējušies, vecums laulībā: zem {n} ¦ abiellunud nooremana kui {n} aastat
+sans enfant ¦ be vaikų ¦ bez bērniem ¦ lasteta
+avec des enfants ¦ su vaikais ¦ ar bērniem ¦ lastega
+entre {a} et {b} enfants ¦ vaikų skaičius: {a}–{b} ¦ bērnu skaits: {a}–{b} ¦ lapsi {a}–{b}
+=exactement {n} enfants ¦ lygiai {n} vaikas|lygiai {n} vaikai|lygiai {n} vaikų ¦ tieši {n} bērnu|tieši {n} bērns|tieši {n} bērni ¦ täpselt {n} laps|täpselt {n} last
+=au moins {n} enfants ¦ bent {n} vaikas|bent {n} vaikai|bent {n} vaikų ¦ vismaz {n} bērnu|vismaz {n} bērns|vismaz {n} bērni ¦ vähemalt {n} laps|vähemalt {n} last
+=au plus {n} enfants ¦ daugiausia {n} vaikas|daugiausia {n} vaikai|daugiausia {n} vaikų ¦ ne vairāk kā {n} bērnu|ne vairāk kā {n} bērns|ne vairāk kā {n} bērni ¦ kõige rohkem {n} laps|kõige rohkem {n} last
+exactement 1 enfant ¦ lygiai 1 vaikas ¦ tieši 1 bērns ¦ täpselt 1 laps
+au plus 1 enfant ¦ daugiausia 1 vaikas ¦ ne vairāk kā 1 bērns ¦ kõige rohkem 1 laps
+nées avant {y} ¦ gimusios iki {y} ¦ dzimušas pirms {y}. gada ¦ sündinud enne {y}
+nés avant {y} ¦ gimę iki {y} ¦ dzimuši pirms {y}. gada ¦ sündinud enne {y}
+nées après {y} ¦ gimusios po {y} ¦ dzimušas pēc {y}. gada ¦ sündinud pärast {y}
+nés après {y} ¦ gimę po {y} ¦ dzimuši pēc {y}. gada ¦ sündinud pärast {y}
+nées en {y} ¦ gimusios {y} m. ¦ dzimušas {y}. gadā ¦ sündinud {y}
+nés en {y} ¦ gimę {y} m. ¦ dzimuši {y}. gadā ¦ sündinud {y}
+nées au {n}e siècle ¦ gimusios {n} amžiuje ¦ dzimušas {n}. gadsimtā ¦ sündinud {n}. sajandil
+nés au {n}e siècle ¦ gimę {n} amžiuje ¦ dzimuši {n}. gadsimtā ¦ sündinud {n}. sajandil
+1 fiche sans date n’a pas pu être vérifiée pour l’âge au mariage (année de naissance ou de mariage inconnue). ¦ 1 įrašo be datos nepavyko patikrinti pagal amžių santuokos metu (nežinomi gimimo ar santuokos metai). ¦ 1 ierakstu bez datuma neizdevās pārbaudīt pēc vecuma laulībā (nezināms dzimšanas vai laulības gads). ¦ 1 kuupäevata kirjet ei saanud abiellumisea järgi kontrollida (sünni- või abiellumisaasta teadmata).
+={n} fiches sans date n’ont pas pu être vérifiées pour l’âge au mariage (année de naissance ou de mariage inconnue). ¦ Įrašai be datos, kurių nepavyko patikrinti pagal amžių santuokos metu: {n} (nežinomi gimimo ar santuokos metai).|Įrašai be datos, kurių nepavyko patikrinti pagal amžių santuokos metu: {n} (nežinomi gimimo ar santuokos metai).|Įrašai be datos, kurių nepavyko patikrinti pagal amžių santuokos metu: {n} (nežinomi gimimo ar santuokos metai). ¦ Ieraksti bez datuma, kurus neizdevās pārbaudīt pēc vecuma laulībā: {n} (nezināms dzimšanas vai laulības gads).|Ieraksti bez datuma, kurus neizdevās pārbaudīt pēc vecuma laulībā: {n} (nezināms dzimšanas vai laulības gads).|Ieraksti bez datuma, kurus neizdevās pārbaudīt pēc vecuma laulībā: {n} (nezināms dzimšanas vai laulības gads). ¦ {n} kuupäevata kirjet ei saanud abiellumisea järgi kontrollida (sünni- või abiellumisaasta teadmata).|{n} kuupäevata kirjet ei saanud abiellumisea järgi kontrollida (sünni- või abiellumisaasta teadmata).
+« Jeunes » n’est pas assez précis pour un âge : écris par exemple « mariées avant 20 ans ». ¦ „Jeunes“ (jaunos) nėra pakankamai tikslu amžiui: parašyk, pavyzdžiui, „mariées avant 20 ans“. ¦ „Jeunes“ (jaunas) nav pietiekami precīzi vecumam: raksti, piemēram, „mariées avant 20 ans“. ¦ „Jeunes“ (noored) ei ole vanuse jaoks piisavalt täpne: kirjuta näiteks „mariées avant 20 ans“.
+Venue d’une question : les critères de mariage et d’enfants sont gardés. ¦ Iš klausimo: santuokos ir vaikų kriterijai išsaugomi. ¦ No jautājuma: laulības un bērnu kritēriji tiek saglabāti. ¦ Küsimusest: abielu ja laste tingimused jäävad alles.

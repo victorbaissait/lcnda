@@ -76,6 +76,7 @@ require_once __DIR__ . '/sciences.php'; // 🔬 inventions, découvertes, public
 require_once __DIR__ . '/blocs.php'; // 📰 🏆 🎓 blocs communs à toute personne : médias, récompenses, formation
 require_once __DIR__ . '/faces.php'; // 🏷️ « Qui est qui ? » : empreintes des visages (reconnaissance en local)
 require_once __DIR__ . '/question_more.php'; // 🔎 questions en français qui demandent un calcul (parenté, records, moyennes…)
+require_once __DIR__ . '/question_famille.php'; // 🔎 questions en français : mariage (âge, remariage, célibataires) et nombre d'enfants
 require_once __DIR__ . '/collections.php';
 require_once __DIR__ . '/heritage.php';
 require_once __DIR__ . '/heritage_tools.php';

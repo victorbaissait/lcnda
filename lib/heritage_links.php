@@ -50,6 +50,10 @@ function question_to_criteria(PDO $pdo, string $question, int $personId = 0): ar
         }
         $understood[] = 'personne de référence introuvable (« moi » = la personne de départ de l’arbre)';
     }
+    // Mariage et enfants (« qui se sont mariées après l'âge de 20 ans », « ayant eu au moins deux enfants », « jamais mariées ») :
+    // lib/question_famille.php ; ces mots sont retirés de la question, le reste se lit comme avant
+    $fam = function_exists('qf_extract') ? qf_extract($q) : ['q' => $q, 'crit' => [], 'mention' => false, 'young' => false];
+    if ($fam['crit'] || $fam['mention']) { $q = $fam['q']; $t = ' ' . strtolower(ascii_fold($q)) . ' '; }
     // Parenté d'une personne nommée : « Adrien Paul Baissait a-t-il eu des enfants ? », « les petites-filles de Marie Dupont »
     $rel = question_relation($pdo, $q, $t, $personId);
     if ($rel && !empty($rel['ask'])) { return ['ask' => $rel, 'criteria' => null, 'understood' => [$rel['labels'][1] . ' de « ' . $rel['word'] . ' »', 'plusieurs fiches']]; }
@@ -73,18 +77,28 @@ function question_to_criteria(PDO $pdo, string $question, int $personId = 0): ar
     }
     $events = ['birth' => '/\b(nee?s?|naissances?|naquit|naquirent|venus? au monde)\b/', 'CHR' => '/\b(baptise(e|s|es)?|baptemes?)\b/', 'MARR' => '/\b(marie(e|s|es)?|mariages?|epouse|ont epouse|se sont maries)\b/',
         'BURI' => '/\b(inhume(e|s|es)?|enterre(e|s|es)?|inhumations?)\b/', 'death' => '/\b(morte?s?|decede(e|s|es)?|deces|meurent|mourut|moururent)\b/', 'RESI' => '/\b(habitai(en)?t|vivai(en)?t|residai(en)?t|domicilie(e|s|es)?|demeurai(en)?t)\b/'];
-    foreach ($events as $key => $re) { if (preg_match($re, $t)) { $c['event'] = $key; $understood[] = ['birth' => 'naissance ou baptême', 'CHR' => 'baptême', 'MARR' => 'mariage', 'BURI' => 'inhumation', 'death' => 'décès ou inhumation', 'RESI' => 'résidence'][$key]; break; } }
+    $eventChip = null;
+    foreach ($events as $key => $re) { if (preg_match($re, $t)) { $c['event'] = $key; $eventChip = count($understood); $understood[] = ['birth' => 'naissance ou baptême', 'CHR' => 'baptême', 'MARR' => 'mariage', 'BURI' => 'inhumation', 'death' => 'décès ou inhumation', 'RESI' => 'résidence'][$key]; break; } }
+    // « mariées » dit sans autre événement : le lieu et les années sont ceux du mariage (comme avant) ; avec « nées… » : il faut un mariage, en plus
+    $famC = $fam['crit'];
+    if ($fam['mention'] && ($famC['married'] ?? '') !== 'no') {
+        if ($c['event'] === 'any') {
+            $c['event'] = 'MARR';
+            if (!isset($famC['marr_age_min']) && !isset($famC['marr_age_max']) && !isset($famC['marriages_min'])) { $understood[] = ($c['gender'] ?? '') === 'female' ? i18n_t('mariées') : i18n_t('mariés'); }
+        } elseif ($c['event'] !== 'MARR') { $famC['married'] = 'yes'; }
+    }
 
     // Années et siècles
     $roman = ['xii' => 12, 'xiii' => 13, 'xiv' => 14, 'xv' => 15, 'xvi' => 16, 'xvii' => 17, 'xviii' => 18, 'xix' => 19, 'xx' => 20, 'xxi' => 21];
-    if (preg_match('/\bentre (\d{4}) et (\d{4})\b/', $t, $m)) { $c['year_from'] = (int) $m[1]; $c['year_to'] = (int) $m[2]; $understood[] = "entre {$m[1]} et {$m[2]}"; }
+    $years = []; // [place dans « J'ai compris », sorte, valeurs] : pour écrire « nées avant 1800 » d'un seul morceau
+    if (preg_match('/\bentre (\d{4}) et (\d{4})\b/', $t, $m)) { $c['year_from'] = (int) $m[1]; $c['year_to'] = (int) $m[2]; $years[] = [count($understood), 'between', [$m[1], $m[2]]]; $understood[] = "entre {$m[1]} et {$m[2]}"; }
     else {
-        if (preg_match('/\bavant (?:l\'an )?(\d{4})\b/', $t, $m)) { $c['year_to'] = (int) $m[1] - 1; $understood[] = "avant {$m[1]}"; }
-        if (preg_match('/\b(?:apres|depuis) (?:l\'an )?(\d{4})\b/', $t, $m)) { $c['year_from'] = (int) $m[1] + 1; $understood[] = "après {$m[1]}"; }
-        if (!isset($c['year_from']) && !isset($c['year_to']) && preg_match('/\ben (\d{4})\b/', $t, $m)) { $c['year_from'] = $c['year_to'] = (int) $m[1]; $understood[] = "en {$m[1]}"; }
+        if (preg_match('/\bavant (?:l\'an )?(\d{4})\b/', $t, $m)) { $c['year_to'] = (int) $m[1] - 1; $years[] = [count($understood), 'before', [$m[1]]]; $understood[] = "avant {$m[1]}"; }
+        if (preg_match('/\b(?:apres|depuis) (?:l\'an )?(\d{4})\b/', $t, $m)) { $c['year_from'] = (int) $m[1] + 1; $years[] = [count($understood), 'after', [$m[1]]]; $understood[] = "après {$m[1]}"; }
+        if (!isset($c['year_from']) && !isset($c['year_to']) && preg_match('/\ben (\d{4})\b/', $t, $m)) { $c['year_from'] = $c['year_to'] = (int) $m[1]; $years[] = [count($understood), 'in', [$m[1]]]; $understood[] = "en {$m[1]}"; }
         if (preg_match('/\b(?:au|du) (xii|xiii|xiv|xv|xvi|xvii|xviii|xix|xx|xxi|\d{2})(?:e|eme|ieme)? siecle\b/', $t, $m)) {
             $n = $roman[$m[1]] ?? (int) $m[1];
-            if ($n) { $c['year_from'] = ($n - 1) * 100 + 1; $c['year_to'] = $n * 100; $understood[] = "au {$n}e siècle"; }
+            if ($n) { $c['year_from'] = ($n - 1) * 100 + 1; $c['year_to'] = $n * 100; $years[] = [count($understood), 'century', [$n]]; $understood[] = "au {$n}e siècle"; }
         }
     }
 
@@ -121,6 +135,16 @@ function question_to_criteria(PDO $pdo, string $question, int $personId = 0): ar
         if (!isset($c['last_name']) && isset($lastNames[$lf = strtolower(ascii_fold(str_replace('’', "'", $word)))])) { $c['last_name'] = $lastNames[$lf]; $c['name_mode'] = 'exact'; $understood[] = "nom : {$lastNames[$lf]}"; continue; }
         if (!isset($c['first_name']) && question_first_name_ids($pdo, $word, true)) { $c['first_name'] = $word; $understood[] = "prénom : {$word}"; }
     }
+    // « nées avant 1800 » plutôt que « naissance ou baptême » + « avant 1800 » (une seule borne d'années)
+    if ($c['event'] === 'birth' && $eventChip !== null && count($years) === 1 && function_exists('qf_birth_label')) {
+        $understood[$eventChip] = qf_birth_label([$years[0][1], $years[0][2]], (string) ($c['gender'] ?? ''));
+        unset($understood[$years[0][0]]); $understood = array_values($understood);
+    }
+    // mariage et enfants : à la fin de « J'ai compris » (« mariées après 20 ans », « au moins 2 enfants »)
+    if ($famC && function_exists('qf_labels')) {
+        foreach (qf_criteria($famC) as $k => $v) { if ($v !== null && $v !== '') { $c[$k] = $v; } }
+        array_push($understood, ...qf_labels($famC, (string) ($c['gender'] ?? '')));
+    }
     // seule la sorte d'événement a été comprise, mais la question donne une date, un âge… qu'on n'a pas su lire : on le dit plutôt que de tout lister
     $onlyEvent = !$rel && $c['event'] !== 'any' && count(array_diff(array_keys($c), ['event'])) === 0;
     if ($onlyEvent && preg_match('/\d|\b(janvier|fevrier|mars|avril|mai|juin|juillet|aout|septembre|octobre|novembre|decembre|an [ivx]+|ans|vendemiaire|brumaire|frimaire|nivose|pluviose|ventose|germinal|floreal|prairial|messidor|thermidor|fructidor|naissance|jour|semaine|annee)\b/', preg_replace('/\b(nee?s?|naissances?)\b/', '', $t, 1))) {
@@ -129,7 +153,7 @@ function question_to_criteria(PDO $pdo, string $question, int $personId = 0): ar
     if (count($understood) === 0) { throw new RuntimeException('Je n’ai pas compris la question. Exemples : « Quels ancêtres étaient boulangers à Lille avant 1850 ? », « Qui est né le même jour que moi ? », « les Dupont mariés dans le Nord au XVIIIe siècle ».'); }
     $criteria = saved_search_criteria($c);
     if (!empty($c['ancestors'])) { $criteria['ancestors'] = 1; }
-    return ['criteria' => $criteria, 'understood' => $understood, 'relation' => $rel];
+    return ['criteria' => $criteria, 'understood' => $understood, 'relation' => $rel, 'young' => $fam['young'] && !isset($c['marr_age_min']) && !isset($c['marr_age_max'])];
 }
 
 /** Mots de parenté (sans accents, en minuscules) → lien, sexe éventuel, [singulier, pluriel] à afficher. Les plus longs d'abord. */
@@ -335,9 +359,67 @@ function same_birthday_ids(PDO $pdo, int $personId): array
     return array_values(array_keys(array_filter($md, static fn($v, $id) => $v === $target && $id !== $personId, ARRAY_FILTER_USE_BOTH)));
 }
 
+/**
+ * Les majuscules d'une question écrite en capitales (« QUELLES SONT LES FEMMES NÉES EN INDRE-ET-LOIRE… ») ou d'un lieu en capitales
+ * (« nées EN INDRE-ET-LOIRE ») : le reste de l'analyse lit les lieux et les noms à leurs majuscules, alors on les remet comme dans la base.
+ *  - un mot (ou 2 à 4 mots) en capitales juste après « à, en, au, dans le, de… » qui est un lieu de la base (commune, département,
+ *    région, pays ; sans tenir compte des accents ni des majuscules) → écrit comme dans la base, et la préposition en minuscules ;
+ *  - si la question est surtout en capitales (au moins 60 % des lettres) : les autres mots en capitales passent en minuscules, sauf
+ *    les noms de famille de la base (« les DUPONT » reste « DUPONT ») et les prénoms de la base (« JEAN » → « Jean » ; pas « MARIE »,
+ *    qui peut être « marié »). Une question en minuscules ou normale ne change pas.
+ */
+function question_normalize_case(PDO $pdo, string $q): string
+{
+    $letters = preg_match_all('/\p{L}/u', $q); $upper = preg_match_all('/\p{Lu}/u', $q);
+    if ($upper < 2) { return $q; }
+    $most = $letters >= 8 && $upper / max(1, $letters) >= 0.6;
+    $key = static fn(string $s) => trim((string) preg_replace('/[^a-z0-9]+/', ' ', strtolower(ascii_fold($s))));
+    $places = [];
+    try {
+        foreach ($pdo->query("SELECT name FROM places UNION SELECT county FROM places UNION SELECT state FROM places UNION SELECT subdivision FROM places UNION SELECT country FROM places")->fetchAll(PDO::FETCH_COLUMN) as $r) {
+            $v = trim((string) $r); if (mb_strlen($v) >= 2) { $places[$key($v)] ??= $v; }
+        }
+    } catch (Throwable $_) {}
+    $lastNames = []; $firstNames = [];
+    if ($most) {
+        foreach ($pdo->query("SELECT DISTINCT last_name FROM persons WHERE trim(COALESCE(last_name,''))<>''")->fetchAll(PDO::FETCH_COLUMN) as $ln) { foreach (question_name_words((string) $ln) as $w) { $lastNames[$w] = true; } }
+        foreach ($pdo->query("SELECT DISTINCT first_name FROM persons WHERE trim(COALESCE(first_name,''))<>''")->fetchAll(PDO::FETCH_COLUMN) as $fn) { foreach (question_name_words((string) $fn) as $w) { $firstNames[$w] = true; } }
+    }
+    preg_match_all('/[\p{L}\p{M}\d]+(?:[\'’-][\p{L}\p{M}\d]+)*/u', $q, $mm, PREG_OFFSET_CAPTURE);
+    $tok = $mm[0]; $n = count($tok); $out = []; // index => texte remplacé
+    $isCaps = static fn(string $w) => preg_match('/\p{L}/u', $w) && mb_strtoupper($w) === $w;
+    $preps = ['a', 'en', 'au', 'aux', 'dans', 'le', 'la', 'les', 'l', 'de', 'du', 'des', 'd', 'pres', 'sur', 'vers'];
+    for ($i = 1; $i < $n; $i++) {
+        if (!$isCaps($tok[$i][0]) || !in_array($key($tok[$i - 1][0]), $preps, true)) { continue; }
+        for ($j = min($n - 1, $i + 3); $j >= $i; $j--) { // le lieu le plus long (« SAINT PIERRE DES CORPS »)
+            $words = array_slice($tok, $i, $j - $i + 1);
+            if (array_filter($words, static fn($w) => !$isCaps($w[0]))) { continue; }
+            $k = $key(implode(' ', array_column($words, 0)));
+            if (strlen($k) < 2 || !isset($places[$k])) { continue; }
+            $out[$i] = [$tok[$i][1], (int) ($tok[$j][1] + strlen($tok[$j][0]) - $tok[$i][1]), $places[$k]];
+            for ($x = $i + 1; $x <= $j; $x++) { $out[$x] = null; }
+            for ($b = $i - 1; $b >= 0 && in_array($key($tok[$b][0]), $preps, true) && $isCaps($tok[$b][0]); $b--) { $out[$b] = [$tok[$b][1], strlen($tok[$b][0]), mb_strtolower($tok[$b][0])]; }
+            $i = $j; break;
+        }
+    }
+    if ($most) {
+        foreach ($tok as $i => [$w, $off]) {
+            if (array_key_exists($i, $out) || !$isCaps($w)) { continue; }
+            $f = $key($w);
+            if (isset($lastNames[$f]) && mb_strlen($w) >= 3) { continue; }  // « les DUPONT »
+            $low = mb_strtolower($w);
+            $out[$i] = [$off, strlen($w), isset($firstNames[$f]) && $f !== 'marie' && mb_strlen($w) >= 3 ? mb_strtoupper(mb_substr($low, 0, 1)) . mb_substr($low, 1) : $low];
+        }
+    }
+    krsort($out);
+    foreach ($out as $r) { if ($r) { $q = substr_replace($q, $r[2], $r[0], $r[1]); } }
+    return $q;
+}
+
 function ask_question(PDO $pdo, string $question, int $personId = 0, string $placeKey = ''): array
 {
     if (mb_strlen($question) > 300) { $question = mb_substr($question, 0, 300); }
+    $question = question_normalize_case($pdo, $question); // une question en capitales : lieux et noms remis comme dans la base
     // les questions qui demandent un calcul (lien de parenté, records, moyennes, fréquences, époques…) : lib/question_more.php
     if (function_exists('question_special') && ($sp = question_special($pdo, $question, $personId, $placeKey))) {
         $ids = array_slice(array_values(array_unique($sp['ids'] ?? [])), 0, 1000);
@@ -423,6 +505,18 @@ function ask_question(PDO $pdo, string $question, int $personId = 0, string $pla
         $homonyms[] = ['id' => (int) $hid, 'name' => question_person_name($pdo, (int) $hid), 'life' => person_life_years($pdo, (int) $hid), 'chosen' => (int) $hid === (int) $r['relation']['person']];
     }
     if ($answer === '' && preg_match('/\bcombien\b/', strtolower(ascii_fold($question)))) { $answer = count($ids) === 1 ? '1 fiche répond à la question.' : count($ids) . ' fiches répondent à la question.'; }
+    // âge au mariage : les fiches mariées sans année de naissance ou de mariage n'ont pas pu être vérifiées (on le dit)
+    $notes = [];
+    if (function_exists('qf_age_unknown') && (($crit['marr_age_min'] ?? null) !== null || ($crit['marr_age_max'] ?? null) !== null)) {
+        try {
+            $wide = run_saved_search($pdo, ['marr_age_min' => null, 'marr_age_max' => null, 'married' => 'yes', 'first_name' => ''] + $crit);
+            if (($crit['first_name'] ?? '') !== '') { $wanted ??= array_flip(question_first_name_ids($pdo, (string) $crit['first_name'], true)); $wide = array_values(array_filter($wide, static fn($id) => isset($wanted[(int) $id]))); }
+            $unk = qf_age_unknown($pdo, $wide);
+            if ($unk > 0) { $notes[] = $unk === 1 ? i18n_t('1 fiche sans date n’a pas pu être vérifiée pour l’âge au mariage (année de naissance ou de mariage inconnue).') : i18n_t('{n} fiches sans date n’ont pas pu être vérifiées pour l’âge au mariage (année de naissance ou de mariage inconnue).', ['n' => $unk]); }
+        } catch (Throwable $_) {}
+    }
+    if (!empty($r['young'])) { $notes[] = i18n_t('« Jeunes » n’est pas assez précis pour un âge : écris par exemple « mariées avant 20 ans ».'); }
+    if ($notes) { $answer = trim($answer . ' ' . implode(' ', $notes)); }
     return ['understood' => $r['understood'], 'answer' => $answer, 'criteria' => $r['criteria'], 'homonyms' => $homonyms, 'count' => count($ids), 'people' => array_values(array_filter(array_map(static fn($id) => $people[$id] ?? null, $ids)))];
 }
 
