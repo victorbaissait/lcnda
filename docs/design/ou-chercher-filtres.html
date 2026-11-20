@@ -1,0 +1,504 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Où chercher : filtres par sorte</title>
+<style>
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2}}
+*{box-sizing:border-box}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:19px;margin:40px 0 6px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.wrap{max-width:1240px;margin:0 auto}
+.sum{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.sum div{background:var(--paper);border:2px solid var(--ink);padding:8px 14px;box-shadow:4px 4px 0 var(--shadow)}
+.sum b{font-size:18px;display:block}.sum span{font-size:12px;color:var(--muted)}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid var(--ink);padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.badge.new{border-color:var(--blue);color:#fff;background:var(--blue)}
+.badge.re{border-color:var(--green);color:var(--green);background:var(--green-bg)}
+.badge.have{border-color:#8a8f99;color:var(--muted);background:var(--grey-bg)}
+.badge.warn{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}.badge.red{border-color:var(--red);color:var(--red);background:var(--red-bg)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px;border-bottom:2px solid var(--ink)}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.num,th.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+tr.tot td{border-top:2px solid var(--ink);font-weight:800}
+code{font:11.5px ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 26px}
+.wide{grid-column:1 / -1}.grid>*{min-width:0}
+.case{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:16px 18px 18px;min-width:0}
+.case .head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.case .tag{font:700 11px/1 system-ui;letter-spacing:.1em;color:var(--blue);text-transform:uppercase}
+.num-b{display:inline-block;background:var(--blue);color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.case h3{margin:8px 0 10px;font-size:17px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.path{font-size:12px;color:var(--blue-ink);background:var(--blue-bg);border:1px dashed #9db8f0;padding:6px 10px;margin:0 0 10px}
+.reuse{font-size:12px;color:var(--green);background:var(--green-bg);border:1px dashed #9bcfa9;padding:7px 10px;margin-top:12px}
+.msg{border-left:4px solid var(--blue);background:var(--blue-bg);padding:9px 12px;font-size:13px;margin:12px 0}
+.msg.warn{border-color:var(--yel);background:var(--yel-bg)}.msg.red{border-color:var(--red);background:var(--red-bg)}
+.dec{border:2px dashed var(--vio);background:var(--vio-bg);padding:10px 14px;margin:14px 0 0;font-size:13px}
+.dec>b:first-child{display:block;font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--vio);margin-bottom:6px}
+.dec ol,.dec ul{margin:4px 0 0;padding-left:20px}.dec li{margin:3px 0}
+.cons{font:800 10px system-ui;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--green);padding:2px 5px;margin-left:4px;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);background:var(--paper);font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 var(--shadow);color:var(--ink);white-space:nowrap}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:var(--line2);box-shadow:none;color:var(--muted)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.mini{font-size:12px;color:var(--muted)}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.edge{margin:10px 0 0;padding-left:18px;font-size:12.5px;color:var(--muted)}.edge li{margin:4px 0}.edge b{color:var(--ink)}
+/* écran de l'app */
+.win{border:2px solid var(--ink);background:var(--paper);min-width:0}
+.win-bar{display:flex;align-items:center;gap:10px;padding:7px 10px;border-bottom:2px solid var(--ink);background:var(--grey-bg);flex-wrap:wrap;justify-content:space-between}
+.win-bar .eyebrow{font:700 10.5px system-ui;letter-spacing:.12em;color:var(--soft);text-transform:uppercase}
+.win-body{padding:12px 14px;min-width:0}
+.ph{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.ph h4{margin:0;font-size:20px}.ph small{display:block;font:700 10.5px system-ui;letter-spacing:.12em;color:var(--soft);text-transform:uppercase}
+.who{display:flex;gap:8px;align-items:center;margin:10px 0 8px;flex-wrap:wrap}
+.who .lab{font-weight:700;font-size:13px}
+.pick{border:1.5px solid var(--line2);padding:5px 9px;font-size:13px;min-width:260px;background:var(--paper)}
+.facts{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 10px}
+.facts span{font-size:12px;border:1px solid var(--line2);background:var(--grey-bg);padding:2px 7px}
+/* barre H10 */
+.lbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:8px 0}
+.lsearch{flex:1 1 220px;border:1.5px solid var(--line2);padding:6px 9px;font-size:13px;color:var(--soft);min-width:0}
+.lbtn{border:1.5px solid var(--line2);padding:6px 10px;font:700 12.5px system-ui;background:var(--paper);white-space:nowrap}
+.lbtn.act{border-color:var(--blue);color:var(--blue)}
+.lbtn .n{background:var(--blue);color:#fff;font:800 10.5px system-ui;padding:1px 5px;margin-left:4px}
+/* pastilles « sorte de source » */
+.kinds{display:flex;gap:6px;flex-wrap:wrap;padding:2px 0 8px;align-items:center}
+.kinds .klab{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-right:2px}
+.k{display:inline-flex;align-items:center;gap:5px;border:1.5px solid var(--line2);padding:4px 9px;font-size:12.5px;background:var(--paper);white-space:nowrap;border-radius:999px}
+.k i{font-style:normal;font:700 11px system-ui;color:var(--soft);font-variant-numeric:tabular-nums}
+.k.on{border-color:var(--blue);background:var(--blue);color:#fff}.k.on i{color:#fff;opacity:.85}
+.k.on:before{content:"✓";font-weight:800}
+.k.zero{opacity:.45;border-style:dashed}
+.k.more{border-style:dashed;color:var(--muted)}
+.k.new{outline:2px dashed var(--blue);outline-offset:2px}
+.kinds.scroll{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;mask-image:linear-gradient(90deg,#000 85%,transparent);padding-right:24px}
+.active{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:12.5px;padding:0 0 8px}
+.active .cnt{color:var(--muted)}
+.chip{border:1.5px solid var(--blue);color:var(--blue-ink);background:var(--blue-bg);padding:2px 8px;font-size:12px;white-space:nowrap}
+.chip:after{content:" ×";font-weight:800}
+.clear{color:var(--blue);text-decoration:underline;font-size:12px}
+/* onglets */
+.tabsx{display:flex;gap:0;flex-wrap:wrap;align-items:center;border-bottom:2px solid var(--ink);margin:2px 0 0}
+.tabsx span{padding:6px 10px;font-size:12.5px;border-right:1px solid var(--line);white-space:nowrap}
+.tabsx span.on{background:var(--blue);color:#fff;font-weight:700}
+.tabsx span small{opacity:.75}
+.tabsx .sp{flex:1}.tabsx .btn{margin:3px 0 3px 6px}
+/* lignes */
+.ol{list-style:none;margin:0;padding:0}
+.ol li{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:4px 10px;padding:9px 4px;border-bottom:1px solid var(--line);align-items:start}
+.ol .ic{font-size:18px;line-height:1.2}
+.ol b{font-size:13.5px}
+.ol .why{font-size:12.5px;color:var(--muted)}
+.ol .cats{display:flex;gap:4px;flex-wrap:wrap;margin-top:3px}
+.ol .cats span{font-size:10.5px;border:1px solid var(--line2);padding:0 5px;color:var(--soft);border-radius:999px}
+.ol .acts{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.ol li.bad{background:repeating-linear-gradient(135deg,transparent 0 8px,var(--red-bg) 8px 16px)}
+.ol li.bad .why{color:var(--red)}
+.flag{font:800 10px system-ui;color:var(--red);border:1.5px solid var(--red);padding:1px 4px;margin-left:4px;white-space:nowrap}
+.outl{list-style:none;margin:0;padding:0;font-size:12.5px}
+.outl li{padding:6px 4px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:24px minmax(0,1fr);gap:6px}
+.outl li small{color:var(--muted);display:block}
+.grp{font:800 10.5px system-ui;letter-spacing:.1em;color:var(--soft);text-transform:uppercase;background:var(--grey-bg);padding:5px 8px;margin-top:8px}
+/* menu Filtrer */
+.menu{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 rgba(0,0,0,.14);max-width:560px;font-size:13px}
+.menu .mg{padding:9px 12px;border-bottom:1px solid var(--line)}
+.menu .mg>b{display:block;font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin-bottom:6px}
+.menu .cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 14px}
+.menu label{display:flex;gap:7px;align-items:center;padding:3px 0}
+.menu label i{margin-left:auto;font-style:normal;font:700 11px system-ui;color:var(--soft)}
+.menu label.z{opacity:.5}
+.cb{width:14px;height:14px;border:2px solid var(--ink);display:inline-block;flex:none}
+.cb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+.rd{width:14px;height:14px;border:2px solid var(--ink);border-radius:50%;display:inline-block;flex:none}
+.rd.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 3px var(--paper)}
+.menu .mf{display:flex;justify-content:space-between;gap:8px;padding:9px 12px;flex-wrap:wrap}
+.tog{display:inline-flex;align-items:center;gap:7px}
+.tog s{width:30px;height:16px;border-radius:9px;background:var(--line2);position:relative;display:inline-block;text-decoration:none}
+.tog s:after{content:"";position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:#fff}
+.tog.on s{background:var(--blue)}.tog.on s:after{left:16px}
+/* vide utile */
+.empty{border:2px dashed var(--line2);padding:16px;text-align:center;margin:10px 0}
+.empty .big{font-size:28px}
+.empty h5{margin:6px 0 4px;font-size:15px}
+.empty p{margin:4px auto;font-size:12.5px;color:var(--muted);max-width:520px}
+.empty ul{text-align:left;max-width:460px;margin:8px auto;font-size:12.5px;color:var(--muted);padding-left:18px}
+.empty .row{justify-content:center;margin-top:10px}
+/* fiche */
+.card{border:2px solid var(--ink);background:var(--paper)}
+.card .ch{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border-bottom:2px solid var(--ink);gap:8px;flex-wrap:wrap}
+.card .cb2{padding:10px}
+.shortcuts{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.shortcuts .k{border-color:var(--ink)}
+.shortcuts .k.first{border-color:var(--blue);color:var(--blue-ink);background:var(--blue-bg);font-weight:700}
+.pmenu{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 rgba(0,0,0,.14);font-size:13px;max-width:330px}
+.pmenu div{padding:6px 10px;border-bottom:1px solid var(--line)}
+.pmenu div.sub2{padding-left:26px;color:var(--muted)}
+.pmenu div.hl{background:var(--blue-bg)}
+/* téléphone */
+.phones{display:grid;grid-template-columns:repeat(2,minmax(0,390px));gap:26px;justify-content:center}
+.phone{width:100%;max-width:390px;border:10px solid #222;border-radius:26px;background:var(--paper);overflow:hidden;margin:0 auto}
+.phone .ptop{display:flex;align-items:center;gap:6px;background:var(--bar);color:var(--bar-ink);padding:8px 10px;font-size:13px;font-weight:700}
+.phone .ptop .sp{flex:1}
+.phone .pbody{padding:10px;font-size:13px}
+.phone .ol li{grid-template-columns:24px minmax(0,1fr)}
+.phone .ol .acts{grid-column:2 / 3;justify-content:flex-start}
+.phone .tabsx span{padding:6px 7px;font-size:12px}
+.cap{font:700 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);text-align:center;margin:0 0 8px}
+@media (max-width:900px){.grid{grid-template-columns:1fr}.phones{grid-template-columns:minmax(0,390px)}}
+@media (max-width:760px){
+ body{padding:14px}
+ .case{padding:12px}
+ .phone{border-width:0;border-radius:0}
+ .pick{min-width:0;flex:1 1 200px}
+ .menu .cols{grid-template-columns:1fr}
+ .ol li{grid-template-columns:24px minmax(0,1fr)}
+ .ol .acts{grid-column:2 / 3;justify-content:flex-start}
+ .tabsx .sp{display:none}
+}
+</style></head><body><div class="wrap">
+
+<h1>🌍 Où chercher ? — trier les sites par sorte de source</h1>
+<p class="sub">Maquette à valider. Demande : « je ne veux que les sites de journaux en ligne, que les actes, que les choses liées au militaire ». Une rangée de <b>pastilles par sorte de source</b> (plusieurs à la fois, avec le nombre de sites), branchée sur la <b>barre H10</b> de l’app, plus le pays, le prix et la langue. Tous les nombres sont <b>calculés avec le vrai moteur</b> (<code>app-ou-chercher-core.js</code>) sur le <b>vrai registre</b> des sites (216), pour une fiche <b>fictive</b> : <b>Jean MAZAUD</b>, soldat, prisonnier de guerre, né en 1777 en Pologne, a vécu en Allemagne, mort en 1822 à Bourges (Cher), parents inconnus.</p>
+<div class="sum">
+ <div><b>0</b><span>Ce qui existe déjà</span></div>
+ <div><b>0b</b><span>Les sortes de source (comptes réels)</span></div>
+ <div><b>1</b><span>La page avec les pastilles</span></div>
+ <div><b>2</b><span>Filtrer ▾</span></div>
+ <div><b>3</b><span>Quand la liste est vide</span></div>
+ <div><b>4</b><span>Écartés, filtrés</span></div>
+ <div><b>5</b><span>Raccourcis depuis la fiche</span></div>
+ <div><b>6</b><span>Téléphone · 390</span></div>
+ <div><b>D</b><span>5 décisions</span></div>
+ <div><b>P</b><span>Petits défauts vus</span></div>
+</div>
+
+<!-- ═════════════ 0. EXISTANT ═════════════ -->
+<h2>0. Ce qui existe déjà <span class="badge have">relevé dans le code</span></h2>
+<p class="sub">Vérifié dans le code avant de dessiner. Rien n’est modifié par cette maquette.</p>
+<div class="case wide"><div class="scrollx"><table style="min-width:900px"><thead><tr><th>Quoi</th><th>Où dans l’app</th><th>Fichier · fonction</th><th>Ce qu’on en fait ici</th></tr></thead><tbody>
+ <tr><td><b>La page « 🌍 Où chercher ? »</b></td><td>Recherche → Type de recherche → 🌍 Où chercher ? ; « Pour qui ? », pastilles de contexte, onglets <b>Proposés · ✓ Déjà cherchés · Écartés</b>, « Gratuites seulement », ↗ Fiche, 🧱 Je bloque ici, 🧩 Murs de brique</td><td><code>heritage-ou-chercher.js</code> <code>page()</code> (onglets <code>data-ouc-tab</code> todo / done / out, 15 lignes puis « Voir les suivants ↓ »)</td><td>Écran 1 : on ajoute la barre H10 et les pastilles au-dessus des onglets <span class="badge re">fait évoluer</span></td></tr>
+ <tr><td><b>Le bloc de la fiche</b></td><td>Fiche → bloc « 🌍 Où chercher ? » : les 5 meilleurs sites + « Tout voir ↗ »</td><td><code>ext.personBlocks.ou_chercher</code>, <code>BLOCK_N = 5</code></td><td>Écran 5 : raccourcis par sorte</td></tr>
+ <tr><td><b>Le moteur de pertinence</b></td><td>Range les sites pour une personne : pays, années, profils (soldat, marin…), ce qui manque, payant ; écarte avec une raison</td><td><code>app-ou-chercher-core.js</code> <code>context()</code>, <code>score()</code>, <code>rank()</code>, <code>RULES</code> (une règle par clé de site), <code>WHERE_PROFILE</code></td><td>Inchangé ; le filtre s’applique <b>après</b> le classement (les comptes suivent)</td></tr>
+ <tr><td><b>Ce que la base dit de la personne</b></td><td>Lieux, pays, département, événements, profils, manques, déjà cherché</td><td><code>lib/ou_chercher.php</code> <code>ouc_person_context()</code> (profil « soldier » : métier contenant soldat, officier, grenadier…, bloc militaire, événement MILI, « prisonnier de guerre »)</td><td>Les pays pour le filtre « Pays »</td></tr>
+ <tr><td><b>Le registre des sites</b></td><td>« Chercher sur internet » + les 8 lots « sources ouvertes » + Mes sites, lus à chaque fois</td><td><code>allSites()</code> : <code>app.js</code> <code>webSearchSites</code> (77 sites) + <code>app-sources-ouvertes-core.js</code> … <code>-8-core.js</code> (139 de plus, doublons retirés) + 1 à 4 lignes « Archives du département » faites à la volée (<code>deptSites()</code>)</td><td>216 sites à classer</td></tr>
+ <tr><td><b>« Gratuites seulement »</b></td><td>Interrupteur sur la page et le bloc ; même réglage que « Archives en ligne »</td><td><code>freeOnly()</code> · clé <code>genealogie-sources-gratuites</code></td><td>Passe dans « Filtrer ▾ » (rubrique Prix) et reste visible en pastille bleue <span class="badge re">fait évoluer</span></td></tr>
+ <tr><td><b>Barre H10</b> 🔍 Chercher · Filtrer ▾ · Trier</td><td>Déjà sur 🧩 Murs de brique (Statut, Ce qui manque, Génération…) et sur la plupart des listes</td><td><code>app-ui.js</code> <code>UI.listBar({key, filters:[{type:'check', options:[[valeur, libellé, pastille, nombre]]}]})</code> : nombres à droite des choix, pastilles bleues « × » des filtres actifs, « Tout effacer », retenu par liste (clé <code>lcnda-listbar:&lt;key&gt;</code>)</td><td>Réutilisée telle quelle ; seule la <b>rangée de pastilles toujours visibles</b> est nouvelle <span class="badge new">nouveau</span></td></tr>
+ <tr><td><b>Une catégorie par site ?</b></td><td>— <b>Non</b>. Trois champs s’en approchent, aucun n’est utilisable seul :</td><td><code>group</code> : 63 valeurs qui mélangent pays et thèmes (« Archives et bases » 36 sites, « guerres », « pologne », « fr_savants »…) · <code>kind</code> : 50 valeurs, et le lot 8 met <code>kind:'acte'</code> par défaut à ses 50 sites (cimetières de guerre et journaux compris) ; 86 sites n’en ont pas · <code>where</code> : des « endroits » (fiche, lieu, militaire, emigration, medecin…) ; 86 sites n’en ont pas</td><td>0b : une liste de sortes, déduite de ces champs + des règles du moteur, puis corrigée à la main</td></tr>
+ <tr><td>Autres champs utiles</td><td>pays, années, payant, icône</td><td><code>country</code> / <code>countries</code> (86 sites sans pays : ceux de <code>app.js</code>), <code>years</code>, <code>paid</code> (false · 'partiel' · true), <code>icon</code>. <b>Aucun champ langue.</b></td><td>Filtres Pays et Prix ; « en français seulement » demande une décision (D5)</td></tr>
+</tbody></table></div></div>
+
+<!-- ═════════════ 0b. CATÉGORIES ═════════════ -->
+<h2>0b. Les sortes de source proposées <span class="badge new">nouveau</span> <span class="badge have">comptes réels</span></h2>
+<p class="sub">Les 216 sites ont été passés dans un classeur qui lit leurs champs actuels (<code>group</code>, <code>kind</code>, <code>where</code>, les <code>profiles</code> / <code>diedIn</code> / <code>missing</code> de leur règle, et quelques mots du nom). Résultat : <b>187 bien classés</b> tout seuls, <b>24 à corriger</b> à la main, <b>5 sans sorte</b> à classer à la main. Un site peut avoir plusieurs sortes : <b>60 sites</b> en ont deux ou plus (moyenne 1,3).</p>
+<div class="case wide"><div class="scrollx"><table style="min-width:980px"><thead><tr><th>Sorte</th><th class="num">Sites</th><th>D’où on la tire (champs actuels)</th><th class="num">MAZAUD : proposés</th><th class="num">écartés</th><th>Exemples</th></tr></thead><tbody>
+ <tr><td><b>📜 Actes</b> <small class="mini">(état civil, paroissiaux)</small></td><td class="num">65</td><td><code>kind</code> acte / etranger_acte / freebmd / hiski ; règle <code>missing</code> naissance ou mariage ; « registres », « état civil »</td><td class="num">18</td><td class="num">46</td><td>Geneteka, Szukaj w Archiwach, Matricula, FamilySearch, Antenati, FreeREG</td></tr>
+ <tr><td><b>📰 Journaux</b></td><td class="num">18</td><td><code>kind</code> presse, <code>group</code> presse, « journaux » dans le nom</td><td class="num">2</td><td class="num">15</td><td>Gallica, RetroNews, Deutsches Zeitungsportal, BelgicaPress, Delpher</td></tr>
+ <tr><td><b>🎖 Militaire et guerres</b></td><td class="num">37</td><td><code>where</code> militaire ; <code>group</code> mdh, matricules, guerres ; règle avec profil soldat ou <code>diedIn</code></td><td class="num">8 <small class="mini">(5 après P4)</small></td><td class="num">29</td><td>Mémoire des hommes, registres matricules, Sainte-Hélène, Léonore, Volksbund</td></tr>
+ <tr><td><b>👥 Recensements et annuaires</b></td><td class="num">9</td><td>« recensement », « annuaire », « listes électorales »</td><td class="num">1</td><td class="num">8</td><td>SocFace, FreeCEN, Bottin, recensements d’Irlande</td></tr>
+ <tr><td><b>⚓ Marins et colonies</b></td><td class="num">9</td><td>profil marin ; <code>kind</code> marin, anom_ec, bagne</td><td class="num">0</td><td class="num">9</td><td>Inscription maritime, Rôles d’équipage, ANOM, GHC</td></tr>
+ <tr><td><b>🚢 Émigration</b> <small class="mini">(l’app dit 🚢 émigré)</small></td><td class="num">14</td><td>profil émigré, événement EMIG, <code>kind</code> passager / ellis / origine / naturalisation</td><td class="num">2</td><td class="num">12</td><td>Ellis Island, Castle Garden, Fichier Origine, CEMLA</td></tr>
+ <tr><td><b>⚰️ Cimetières et décès</b></td><td class="num">25</td><td><code>kind</code> sepulture / mort_service ; « tombes », « décès », « morts »</td><td class="num">5</td><td class="num">20</td><td>matchID, Cimetières de France, Find a Grave, CWGC</td></tr>
+ <tr><td><b>🏛 Notaires, terres et justice</b></td><td class="num">5</td><td>profil notaire / héritage ; <code>kind</code> minutier ; « procès »</td><td class="num">0</td><td class="num">5</td><td>Minutier central, SIV, Old Bailey, BLM GLO</td></tr>
+ <tr><td><b>💼 Métiers</b> <small class="mini">(élus, médecins, cheminots, photographes…)</small></td><td class="num">18</td><td><code>where</code> employeur / medecin / elu / photo / inventeur ; <code>kind</code> these, brevet…</td><td class="num">4</td><td class="num">14</td><td>Sycomore, BIU Santé, Base Daguerre, Maitron</td></tr>
+ <tr><td><b>🧬 Arbres en ligne</b></td><td class="num">11</td><td><code>group</code> « Généalogie » (sauf tombes)</td><td class="num">5</td><td class="num">3</td><td>Geneanet, FamilySearch, WikiTree, Geni</td></tr>
+ <tr><td><b>📚 Bibliothèques et livres</b></td><td class="num">27</td><td><code>group</code> « Notices d’autorité », fr_bn ; <code>kind</code> livre / document / fonds</td><td class="num">8</td><td class="num">19</td><td>Google Livres, Persée, CCFr, Numelyo, IdRef</td></tr>
+ <tr><td><b>🗺 Cartes et lieux</b></td><td class="num">6</td><td><code>kind</code> carte ; « cadastre », « Cassini », « Géopatronyme »</td><td class="num">3</td><td class="num">3</td><td>Géopatronyme, Cassini, GOV, Mapire</td></tr>
+ <tr><td colspan="6" class="mini" style="background:var(--grey-bg)">Trois sortes de plus, rangées derrière « ＋3 » (peu demandées, ou à ton sobre) :</td></tr>
+ <tr><td><b>🕯 Déportation et répression</b></td><td class="num">15</td><td>profil déporté / juif / fusillé / résistant ; <code>kind</code> deportation, juste…</td><td class="num">0</td><td class="num">15</td><td>Mémorial de la Shoah, Arolsen, Maitron des fusillés</td></tr>
+ <tr><td><b>🧭 Guides et modes d’emploi</b></td><td class="num">8</td><td><code>kind</code> aide</td><td class="num">5</td><td class="num">3</td><td>FamilySearch Wiki, GenWiki, Geneawiki</td></tr>
+ <tr><td><b>🔎 Moteurs et encyclopédies</b></td><td class="num">13</td><td><code>group</code> « Moteurs de recherche » + Wikipédia, Wikidata</td><td class="num">0</td><td class="num">13</td><td>Google, Qwant, Wikipédia</td></tr>
+ <tr class="tot"><td>Total</td><td class="num">216 sites</td><td>280 rangements (un site peut être dans 2 sortes)</td><td class="num">43</td><td class="num">168</td><td>+ 5 payants cachés par « Gratuites seulement »</td></tr>
+</tbody></table></div>
+<p class="note">« MAZAUD » : la fiche fictive décrite en tête, « Gratuites seulement » coché. À l’écran, ±2 (la ligne « Archives du Cher » s’ajoute, deux propositions du même site pour la même raison n’en font qu’une). La capture de l’utilisateur montrait 41 / 164.</p>
+<div class="grid" style="margin-top:14px">
+ <div>
+  <b>À classer à la main : 5 sites sans sorte</b>
+  <ul class="edge">
+   <li><b>FranceArchives</b> → 📜 Actes + 📚 Bibliothèques</li>
+   <li><b>Wikipédia</b>, <b>Wikidata</b> → 🔎 Moteurs et encyclopédies</li>
+   <li><b>Archives de Paris — enfants trouvés</b>, <b>FranceArchives — enfants assistés</b> → 📜 Actes (pas de sorte « enfants placés » : 2 sites seulement)</li>
+  </ul>
+ </div>
+ <div>
+  <b>À corriger à la main : 24 sites mal rangés par les champs</b>
+  <ul class="edge">
+   <li><b>NARA</b>, <b>Bibliothèque et Archives Canada</b> : rangés « 📚 » à cause du mot « Bibliothèque » → 📜 + 🚢 + 🎖</li>
+   <li><b>Arolsen</b> (×2), <b>Yad Vashem — Justes</b> : <code>where</code> militaire → 🕯 seulement</li>
+   <li><b>Annuaires anciens</b>, <b>Bottin</b> (Gallica) : rangés « 📰 » à cause de « Gallica » → 👥 (+ 💼)</li>
+   <li><b>Recensements d’Irlande</b>, <b>Automated Genealogy</b> : <code>kind:'acte'</code> par défaut du lot 8 → 👥 seulement</li>
+   <li><b>BLM GLO</b> (concessions de terres) : <code>kind:'acte'</code> → 🏛</li>
+   <li>et 15 retouches d’une sorte en plus ou en moins (PARES + 📜, Europeana + 📰, ABMC + ⚰️, CompGen OFB → 🧬…)</li>
+  </ul>
+ </div>
+</div>
+<div class="dec"><b>Décision 4 · où écrire la sorte d’un site</b>
+ <ol>
+  <li>Une table dans le moteur, à côté des règles : <code>cats: ['militaire', 'deces']</code> dans <code>RULES</code> (même endroit que pays et années) ; un site sans <code>cats</code> est rangé par le classeur ci-dessus, et sinon dans « Autres ». <span class="cons">conseillé</span></li>
+  <li>Un champ <code>cats</code> écrit dans chaque lot (les 77 sites de <code>app.js</code> resteraient sans sorte, il faudrait quand même la table).</li>
+ </ol>
+ Un site ajouté par la personne (« Mes sites ») prend la sorte de sa rubrique, ou « Autres ».
+</div>
+</div>
+
+<!-- ═════════════ 1. LA PAGE ═════════════ -->
+<h2>1. La page, avec les pastilles <span class="badge re">fait évoluer</span></h2>
+<div class="case wide">
+ <div class="head"><span class="tag"><span class="num-b">1</span>Recherche → 🌍 Où chercher ? · ordinateur</span><span><span class="badge new">pastilles</span> <span class="badge re">barre H10</span> <span class="badge have">onglets, lignes</span></span></div>
+ <h3>« 🎖 Militaire » coché : seuls les sites militaires restent, les onglets suivent</h3>
+ <div class="win"><div class="win-body">
+  <div class="ph"><div><small>Recherche</small><h4>🌍 Où chercher ?</h4></div><span class="btn small">🧩 Murs de brique</span></div>
+  <div class="who"><span class="lab">Pour qui ?</span><span class="pick">👤 Jean MAZAUD (1777–1822) ▾</span></div>
+  <div class="facts"><span>1777–1822</span><span>France</span><span>Allemagne</span><span>Pologne</span><span>Cher</span><span>✚ prisonnier de guerre</span><span>🎖 soldat</span><span>❓ parents inconnus</span></div>
+  <div class="lbar"><span class="lsearch">🔍 Chercher un site… (ex. Gallica, matricule)</span><span class="lbtn act">Filtrer ▾<span class="n">2</span></span><span class="lbtn">Trier : Les plus utiles ▾</span></div>
+  <div class="kinds"><span class="klab">Sorte</span>
+   <span class="k">📜 Actes <i>18</i></span><span class="k">📰 Journaux <i>2</i></span><span class="k on">🎖 Militaire <i>8</i></span><span class="k">👥 Recensements <i>1</i></span><span class="k zero">⚓ Marins, colonies <i>0</i></span><span class="k">🚢 Émigration <i>2</i></span><span class="k">⚰️ Cimetières, décès <i>5</i></span><span class="k zero">🏛 Notaires <i>0</i></span><span class="k">💼 Métiers <i>4</i></span><span class="k">🧬 Arbres <i>5</i></span><span class="k">📚 Bibliothèques <i>8</i></span><span class="k">🗺 Cartes <i>3</i></span><span class="k more">＋3 ▾</span>
+  </div>
+  <div class="active"><span class="cnt">8 sites</span><span class="chip">🎖 Militaire</span><span class="chip">💶 Gratuites seulement</span><a class="clear">Tout effacer</a></div>
+  <div class="tabsx"><span class="on">Proposés (8 <small>sur 43</small>)</span><span>✓ Déjà cherchés (0)</span><span>Écartés (29 <small>sur 168</small>)</span><span class="sp"></span><span class="btn small">↗ Fiche</span><span class="btn small">🧱 Je bloque ici</span></div>
+  <ul class="ol">
+   <li><span class="ic">🎖</span><div><b>Médaillés de Sainte-Hélène (soldats de 1792-1815)</b><div class="why">Né en 1777 en Pologne : un soldat de Napoléon a peut-être reçu la médaille de Sainte-Hélène</div><div class="cats"><span>🎖 Militaire</span></div></div><div class="acts"><span class="btn small blue">↗ Chercher</span><span class="btn small">✓ Déjà cherché</span><span class="btn small ghost">⋯</span></div></li>
+   <li><span class="ic">🏅</span><div><b>Léonore (Légion d’honneur)</b><div class="why">Les dossiers de la Légion d’honneur (morts avant 1977)</div><div class="cats"><span>🎖 Militaire</span><span>💼 Métiers</span></div></div><div class="acts"><span class="btn small blue">↗ Chercher</span><span class="btn small">✓ Déjà cherché</span><span class="btn small ghost">⋯</span></div></li>
+   <li><span class="ic">📄</span><div><b>Dossiers d’officiers (SHD)</b><div class="why">Sa fiche dit : soldat</div><div class="cats"><span>🎖 Militaire</span></div></div><div class="acts"><span class="btn small blue">↗ Chercher</span><span class="btn small">✓ Déjà cherché</span><span class="btn small ghost">⋯</span></div></li>
+   <li class="bad"><span class="ic">🎓</span><div><b>Registres de l’École polytechnique</b> <span class="flag">P4</span><div class="why">Né en 1777 à Pologne · Sa fiche dit : soldat</div><div class="cats"><span>🎖 Militaire</span><span>💼 Métiers</span></div></div><div class="acts"><span class="btn small blue">↗ Chercher</span><span class="btn small">✓ Déjà cherché</span><span class="btn small ghost">⋯</span></div></li>
+   <li class="bad"><span class="ic">🛡</span><div><b>Mémorial des gendarmes morts en service</b> <span class="flag">P4</span><div class="why">Sa fiche dit : soldat</div><div class="cats"><span>🎖 Militaire</span><span>⚰️ Décès</span><span>💼 Métiers</span></div></div><div class="acts"><span class="btn small blue">↗ Chercher</span><span class="btn small">✓ Déjà cherché</span><span class="btn small ghost">⋯</span></div></li>
+   <li class="bad"><span class="ic">🏛</span><div><b>MonumentsMorts — monuments aux morts</b> <span class="flag">P4</span><div class="why">Sa fiche dit : soldat</div><div class="cats"><span>🎖 Militaire</span><span>⚰️ Décès</span></div></div><div class="acts"><span class="btn small blue">↗ Chercher</span><span class="btn small">✓ Déjà cherché</span><span class="btn small ghost">⋯</span></div></li>
+   <li class="bad"><span class="ic">🇨🇦</span><div><b>Bibliothèque et Archives Canada — généalogie</b> <span class="flag">P4</span><div class="why">Sa fiche dit : soldat</div><div class="cats"><span>📜 Actes</span><span>🚢 Émigration</span><span>🎖 Militaire</span></div></div><div class="acts"><span class="btn small blue">↗ Chercher</span><span class="btn small">✓ Déjà cherché</span><span class="btn small ghost">⋯</span></div></li>
+   <li class="bad"><span class="ic">🇺🇸</span><div><b>NARA — Archives nationales des États-Unis</b> <span class="flag">P4</span><div class="why">Sa fiche dit : soldat</div><div class="cats"><span>📜 Actes</span><span>🚢 Émigration</span><span>🎖 Militaire</span></div></div><div class="acts"><span class="btn small blue">↗ Chercher</span><span class="btn small">✓ Déjà cherché</span><span class="btn small ghost">⋯</span></div></li>
+  </ul>
+ </div></div>
+ <p class="note">Les lignes hachurées sont ce que le moteur propose <b>aujourd’hui</b> et qui ne devrait pas sortir (voir P4) : une fois la règle corrigée, « 🎖 Militaire » montrerait 3 à 5 sites pour lui (simulé : Sainte-Hélène, Léonore, Officiers SHD, + Polytechnique et MonumentsMorts tant qu’on ne leur donne pas d’années).</p>
+ <ul class="edge">
+  <li><b>Plusieurs pastilles</b> = l’un <b>ou</b> l’autre : 📰 + 📜 montre les journaux et les actes (2 + 18 = 20 sites, un site dans les deux comptant une fois).</li>
+  <li><b>Le nombre de chaque pastille</b> = les sites de cette sorte <b>dans l’onglet ouvert</b>, avec les autres filtres (pays, prix). Sur « Écartés », 🎖 affiche 29.</li>
+  <li><b>Une sorte à 0</b> reste visible en pointillé, à la fin de la rangée ; un clic dessus explique pourquoi (écran 3) au lieu de montrer une page vide.</li>
+  <li><b>Sous chaque site</b>, ses sortes en petit : on comprend pourquoi Léonore est à la fois 🎖 et 💼.</li>
+  <li><b>L’ordre des pastilles</b> : toujours le même (on retrouve les journaux à la même place), pas trié par nombre.</li>
+  <li><b>🔍 Chercher</b> filtre par le nom du site (« Gallica ») ; <b>Trier</b> : Les plus utiles (actuel) · A → Z · Gratuits d’abord.</li>
+ </ul>
+ <div class="reuse"><b>Réutilise :</b> <code>UI.listBar</code> (Chercher, Filtrer ▾ avec nombres, pastilles bleues « × », Tout effacer, mémoire par liste) ; le rendu des lignes <code>rowHtml()</code> ; le moteur <code>rank()</code> tel quel. <b>Nouveau :</b> la rangée de pastilles cliquables, branchée sur le même état que « Filtrer ▾ » (cocher une pastille = cocher la case dans le menu).</div>
+</div>
+
+<!-- ═════════════ 2. FILTRER ═════════════ -->
+<h2>2. Filtrer ▾ <span class="badge re">fait évoluer</span></h2>
+<div class="grid">
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">2</span>le menu Filtrer ▾ ouvert</span><span class="badge re">menu H10</span></div>
+  <h3>Sorte, pays, prix, langue, et ce qu’on retient</h3>
+  <div class="menu">
+   <div class="mg"><b>Sorte de source</b><div class="cols">
+    <label><span class="cb"></span>📜 Actes<i>18</i></label><label><span class="cb"></span>📰 Journaux<i>2</i></label>
+    <label><span class="cb on"></span>🎖 Militaire et guerres<i>8</i></label><label><span class="cb"></span>👥 Recensements, annuaires<i>1</i></label>
+    <label class="z"><span class="cb"></span>⚓ Marins et colonies<i>0</i></label><label><span class="cb"></span>🚢 Émigration<i>2</i></label>
+    <label><span class="cb"></span>⚰️ Cimetières et décès<i>5</i></label><label class="z"><span class="cb"></span>🏛 Notaires, terres, justice<i>0</i></label>
+    <label><span class="cb"></span>💼 Métiers<i>4</i></label><label><span class="cb"></span>🧬 Arbres en ligne<i>5</i></label>
+    <label><span class="cb"></span>📚 Bibliothèques et livres<i>8</i></label><label><span class="cb"></span>🗺 Cartes et lieux<i>3</i></label>
+    <label class="z"><span class="cb"></span>🕯 Déportation, répression<i>0</i></label><label><span class="cb"></span>🧭 Guides<i>5</i></label>
+    <label class="z"><span class="cb"></span>🔎 Moteurs, encyclopédies<i>0</i></label>
+   </div></div>
+   <div class="mg"><b>Pays</b>
+    <label><span class="rd on"></span>Ses pays : France, Allemagne, Pologne<i>43</i></label>
+    <label><span class="rd"></span>Un seul : <span class="pick" style="min-width:0;padding:2px 6px">Pologne ▾</span><i>6</i></label>
+    <label><span class="rd"></span>Sites du monde entier seulement (FamilySearch, Geneanet…)<i>6</i></label>
+   </div>
+   <div class="mg"><b>Prix</b><span class="tog on"><s></s>Gratuites seulement</span> <span class="mini">· 5 payants cachés</span></div>
+   <div class="mg"><b>Langue</b><span class="tog"><s></s>En français seulement</span> <span class="badge warn">D5</span><div class="mini">Sites de France, Belgique, Suisse, Luxembourg, Québec, et les sites du monde qui ont une page en français.</div></div>
+   <div class="mg"><b>Retenir ce choix</b>
+    <label><span class="rd on"></span>Pour toutes les personnes <span class="cons">conseillé</span></label>
+    <label><span class="rd"></span>Pour Jean MAZAUD seulement</label>
+   </div>
+   <div class="mf"><span class="clear">Tout effacer</span><span class="btn small blue">Fermer</span></div>
+  </div>
+  <p class="note">« Pays » ne fait que <b>resserrer</b> : un site d’un pays où il n’a pas vécu est déjà dans « Écartés » (le moteur le fait). « Ses pays » est le réglage de départ, il ne compte pas comme un filtre actif.</p>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag">comment se combinent les filtres</span><span class="badge new">règle</span></div>
+  <h3>Ce qui s’applique, dans quel ordre</h3>
+  <ol class="edge" style="padding-left:20px">
+   <li><b>Le moteur range et écarte</b>, comme aujourd’hui (pays, années, profil, payant).</li>
+   <li><b>Puis les filtres</b> gardent, dans chaque onglet : les sites d’au moins une sorte cochée (<b>ou</b>) <b>et</b> du pays choisi <b>et</b> gratuits <b>et</b> en français si coché.</li>
+   <li><b>Les compteurs des onglets</b> suivent : « Proposés (8 sur 43) », « Écartés (29 sur 168) ». Sans filtre, on revient à « Proposés (43) ».</li>
+   <li><b>Le bloc de la fiche</b> (5 meilleurs sites) n’est <b>pas</b> filtré : il reste le résumé général ; ses raccourcis ouvrent la page filtrée (écran 5).</li>
+  </ol>
+  <div class="msg">Exemple réel : 📰 + 📜 + pays « Pologne » → <b>6 sites</b> (Poznan Project, Szukaj w Archiwach, BaSIA, Geneteka, Matricula, Archives Portal Europe) ; aucun journal polonais dans le registre (écran 3).</div>
+  <div class="dec"><b>Décision 5 · « en français seulement »</b>
+   Aucun site n’a de champ langue. 54 sites sont de pays francophones ; 86 n’ont pas de pays du tout (ceux de « Chercher sur internet »).
+   <ol>
+    <li>Le déduire du pays du site + une courte liste écrite à la main des grands sites du monde qui ont une page en français (FamilySearch, Geneanet, MyHeritage, Find a Grave…). <span class="cons">conseillé</span></li>
+    <li>Ajouter un champ <code>lang</code> aux 216 sites (juste, mais long, et à tenir à jour).</li>
+    <li>Ne pas proposer ce filtre pour l’instant.</li>
+   </ol>
+  </div>
+ </div>
+</div>
+
+<!-- ═════════════ 3. VIDE ═════════════ -->
+<h2>3. Quand un filtre vide la liste <span class="badge new">nouveau</span></h2>
+<div class="grid">
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">3a</span>⚓ coché : 0 proposé</span><span class="badge new">message utile</span></div>
+  <h3>Dire pourquoi, et quoi faire</h3>
+  <div class="active"><span class="cnt">0 site</span><span class="chip">⚓ Marins et colonies</span><span class="chip">💶 Gratuites seulement</span></div>
+  <div class="tabsx"><span class="on">Proposés (0 <small>sur 43</small>)</span><span>✓ Déjà cherchés (0)</span><span>Écartés (9 <small>sur 168</small>)</span></div>
+  <div class="empty"><div class="big">⚓</div><h5>Aucun site ⚓ Marins et colonies pour Jean MAZAUD (1777–1822)</h5>
+   <p>Les 9 sites de cette sorte sont écartés :</p>
+   <ul><li><b>3</b> sont seulement pour les marins : sa fiche ne dit pas « marin »</li><li><b>4</b> sont pour l’outre-mer : pas de lieu aux Antilles, en Guyane, en Nouvelle-Calédonie…</li><li><b>1</b> couvre les marins nés entre 1850 et 1927</li><li><b>1</b> est peu utile pour cette fiche</li></ul>
+   <div class="row"><span class="btn small blue">Voir les 9 sites ⚓ écartés</span><span class="btn small">⚓ Il était marin ? Le dire sur sa fiche</span><span class="btn small ghost">Enlever ⚓</span></div>
+  </div>
+  <p class="note">Les raisons sont regroupées à partir de celles que le moteur donne déjà (« seulement « marin » », « pas de lieu dans ces pays », « né en 1777, hors des années 1850–1927 »).</p>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">3b</span>📰 + pays Pologne : 0 dans tout le registre</span><span class="badge new">message utile</span></div>
+  <h3>Quand aucun site connu ne correspond</h3>
+  <div class="active"><span class="cnt">0 site</span><span class="chip">📰 Journaux</span><span class="chip">Pays : Pologne</span><a class="clear">Tout effacer</a></div>
+  <div class="tabsx"><span class="on">Proposés (0 <small>sur 43</small>)</span><span>✓ Déjà cherchés (0)</span><span>Écartés (0)</span></div>
+  <div class="empty"><div class="big">📰</div><h5>Aucun site 📰 de Pologne parmi les 216 sites que l’app connaît</h5>
+   <p>Pour ses autres pays : <b>2</b> sites 📰 proposés (Gallica pour la France, Deutsches Zeitungsportal pour l’Allemagne) ; <b>15</b> écartés.</p>
+   <div class="row"><span class="btn small blue">📰 Ses autres pays (2)</span><span class="btn small">Voir les 15 sites 📰 écartés</span><span class="btn small ghost">＋ Ajouter un site à moi</span></div>
+  </div>
+  <p class="note">« ＋ Ajouter un site à moi » ouvre « Mes sites » (existant), la sorte 📰 et le pays déjà remplis.</p>
+ </div>
+</div>
+
+<!-- ═════════════ 4. ÉCARTÉS ═════════════ -->
+<h2>4. L’onglet « Écartés », filtré <span class="badge re">fait évoluer</span></h2>
+<div class="case wide">
+ <div class="head"><span class="tag"><span class="num-b">4</span>Écartés · 📰 coché</span><span><span class="badge have">raisons du moteur</span> <span class="badge new">groupées</span></span></div>
+ <h3>Les 15 journaux écartés, rangés par raison</h3>
+ <div class="kinds"><span class="klab">Sorte</span><span class="k">📜 Actes <i>46</i></span><span class="k on">📰 Journaux <i>15</i></span><span class="k">🎖 Militaire <i>29</i></span><span class="k">👥 Recensements <i>8</i></span><span class="k">⚓ Marins, colonies <i>9</i></span><span class="k more">＋7 ▾</span></div>
+ <div class="tabsx"><span>Proposés (2 <small>sur 43</small>)</span><span>✓ Déjà cherchés (0)</span><span class="on">Écartés (15 <small>sur 168</small>)</span></div>
+ <div class="grp">Pas de lieu dans ce pays · 12</div>
+ <ul class="outl">
+  <li><span>🇧🇪</span><div><b>BelgicaPress — journaux belges anciens</b><small>pas de lieu en Belgique</small></div></li>
+  <li><span>🇨🇭</span><div><b>e-newspaperarchives.ch — journaux suisses</b><small>pas de lieu en Suisse</small></div></li>
+  <li><span>🇳🇱</span><div><b>Delpher (Pays-Bas)</b><small>pas de lieu aux Pays-Bas</small></div></li>
+  <li><span>🇺🇸</span><div><b>Chronicling America</b> · <b>Newspapers.com</b><small>pas de lieu aux États-Unis <span class="flag">P3</span> (aujourd’hui : « en États-Unis »)</small></div></li>
+  <li><span>…</span><div><small>Trove, Papers Past, ANNO, Arcanum, Hemeroteca (Espagne, Brésil), Welsh Newspapers</small></div></li>
+ </ul>
+ <div class="grp">Hors de ses années · 1</div>
+ <ul class="outl"><li><span>🇱🇺</span><div><b>eluxemburgensia</b><small>sa vie (1777–1822) n’est pas dans les années du site (1840–2007)</small></div></li></ul>
+ <div class="grp">Peu utile pour cette fiche · 2</div>
+ <ul class="outl"><li><span>📰</span><div><b>Journal officiel (Gallica)</b> · <b>Europeana</b><small>note trop basse</small> <span class="btn small">↗ Chercher quand même</span></div></li></ul>
+ <p class="note">Aujourd’hui l’onglet « Écartés » est une seule liste de 164 lignes. Groupée par raison et filtrée par sorte, elle répond à « pourquoi pas de journaux pour lui ? ». « ↗ Chercher quand même » : seulement pour « peu utile », pas pour un pays ou des années hors sujet.</p>
+</div>
+
+<!-- ═════════════ 5. FICHE ═════════════ -->
+<h2>5. Raccourcis depuis la fiche <span class="badge new">nouveau</span></h2>
+<div class="grid">
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">5a</span>Fiche → bloc 🌍 Où chercher ?</span><span><span class="badge have">bloc</span> <span class="badge new">raccourcis</span></span></div>
+  <h3>« 🎖 Tout le militaire pour lui » en un clic</h3>
+  <div class="card"><div class="ch"><b>🌍 Où chercher ?</b><span class="btn small">Tout voir ↗</span></div><div class="cb2">
+   <p class="mini" style="margin:0 0 6px">Les sites les plus utiles pour Jean MAZAUD, d’après ses lieux, ses dates et ce qui manque.</p>
+   <div class="shortcuts"><span class="k first">🎖 Tout le militaire <i>8</i></span><span class="k">📜 Actes <i>18</i></span><span class="k">⚰️ Décès <i>5</i></span><span class="k">📰 Journaux <i>2</i></span><span class="k">🧬 Arbres <i>5</i></span><span class="k more">⋯</span></div>
+   <ul class="ol">
+    <li><span class="ic">🎖</span><div><b>Médaillés de Sainte-Hélène</b><div class="why">Un soldat de Napoléon a peut-être reçu la médaille</div></div><div class="acts"><span class="btn small blue">↗ Chercher</span></div></li>
+    <li><span class="ic">📜</span><div><b>Poznan Project</b><div class="why">Il a vécu en Pologne</div></div><div class="acts"><span class="btn small blue">↗ Chercher</span></div></li>
+    <li><span class="ic">🏛</span><div><b>Archives du Cher — état civil</b><div class="why">Parents inconnus : son acte de naissance à Bourges (Cher) donne… <span class="flag">P8</span></div></div><div class="acts"><span class="btn small blue">↗ Chercher</span></div></li>
+   </ul>
+  </div></div>
+  <ul class="edge">
+   <li>Les raccourcis = les sortes qui ont <b>au moins 1</b> site proposé, la sorte de son <b>profil</b> en premier et en bleu (🎖 pour un soldat, ⚓ pour un marin, 🚢 pour un émigré, 💼 pour un médecin…), puis les plus fournies ; 5 au plus, le reste sous ⋯.</li>
+   <li>Un clic ouvre la page « Où chercher ? » sur lui, avec cette seule sorte cochée (sans toucher au choix retenu des autres fois : le filtre vient de la fiche, une pastille « depuis sa fiche » le dit).</li>
+  </ul>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">5b</span>Fiche → menu ⋯</span><span class="badge re">fait évoluer</span></div>
+  <h3>Le même raccourci dans le menu de la fiche</h3>
+  <div class="pmenu">
+   <div>✎ Modifier</div><div>🌳 Voir dans l’arbre</div>
+   <div class="hl">🌍 Où chercher ? ▸</div>
+   <div class="sub2">🎖 Le militaire (8)</div><div class="sub2">📜 Les actes (18)</div><div class="sub2">📰 Les journaux (2)</div><div class="sub2">Tout (43)</div>
+   <div>🧱 Je bloque ici</div>
+  </div>
+  <p class="note">Aujourd’hui le menu ⋯ a « 🌍 Où chercher ? » sans sous-menu. Le sous-menu reprend les 3 premiers raccourcis du bloc + « Tout ».</p>
+  <div class="msg">Et depuis un <b>événement militaire</b> de la fiche (bloc militaire, MILI…) : un petit lien « 🎖 Où chercher ses traces militaires ? » ouvre la même page filtrée. <span class="badge warn">à confirmer</span></div>
+ </div>
+</div>
+
+<!-- ═════════════ 6. TÉLÉPHONE ═════════════ -->
+<h2>6. Sur un téléphone (390 px) <span class="badge new">nouveau</span></h2>
+<div class="case wide">
+ <div class="head"><span class="tag"><span class="num-b">6</span>deux façons, à choisir (décision 1)</span><span class="badge re">barre H10 repliée</span></div>
+ <div class="phones" style="margin-top:12px">
+  <div><p class="cap">A · pastilles qui défilent sur une ligne</p>
+   <div class="phone"><div class="ptop">☰ <span class="sp">🌍 Où chercher ?</span>⋯</div><div class="pbody">
+    <div class="who" style="margin-top:0"><span class="pick" style="min-width:0;flex:1">👤 Jean MAZAUD (1777–1822) ▾</span></div>
+    <div class="lbar" style="padding-top:0"><span class="lsearch" style="flex-basis:120px">🔍 Chercher…</span><span class="lbtn act">Filtrer ▾<span class="n">2</span></span></div>
+    <div class="kinds scroll"><span class="k">📜 Actes <i>18</i></span><span class="k">📰 Journaux <i>2</i></span><span class="k on">🎖 Militaire <i>8</i></span><span class="k">👥 Recens. <i>1</i></span><span class="k">🚢 Émigr. <i>2</i></span><span class="k">⚰️ Décès <i>5</i></span></div>
+    <div class="tabsx"><span class="on">Proposés 8</span><span>✓ 0</span><span>Écartés 29</span></div>
+    <ul class="ol">
+     <li><span class="ic">🎖</span><div><b>Médaillés de Sainte-Hélène</b><div class="why">Un soldat de Napoléon a peut-être reçu la médaille</div></div><div class="acts"><span class="btn small blue">↗ Chercher</span><span class="btn small">✓ Déjà cherché</span><span class="btn small ghost">⋯</span></div></li>
+     <li><span class="ic">🏅</span><div><b>Léonore (Légion d’honneur)</b><div class="why">Les dossiers de la Légion d’honneur</div></div><div class="acts"><span class="btn small blue">↗ Chercher</span><span class="btn small">✓ Déjà cherché</span><span class="btn small ghost">⋯</span></div></li>
+    </ul>
+   </div></div>
+  </div>
+  <div><p class="cap">B · seulement « Filtrer ▾ » (s’ouvre en plein écran)</p>
+   <div class="phone"><div class="ptop">✕ <span class="sp">Filtrer</span><span style="font-weight:400;font-size:12px">Tout effacer</span></div><div class="pbody">
+    <div class="menu" style="box-shadow:none;border:0">
+     <div class="mg"><b>Sorte de source</b>
+      <label><span class="cb"></span>📜 Actes<i>18</i></label><label><span class="cb"></span>📰 Journaux<i>2</i></label><label><span class="cb on"></span>🎖 Militaire et guerres<i>8</i></label><label><span class="cb"></span>👥 Recensements, annuaires<i>1</i></label><label><span class="cb"></span>🚢 Émigration<i>2</i></label><label><span class="cb"></span>⚰️ Cimetières et décès<i>5</i></label><label class="mini">＋ 9 autres sortes ▾</label>
+     </div>
+     <div class="mg"><b>Pays</b><label><span class="rd on"></span>Ses pays (3)<i>43</i></label></div>
+     <div class="mg"><b>Prix</b><span class="tog on"><s></s>Gratuites seulement</span></div>
+    </div>
+    <span class="btn blue" style="width:100%;justify-content:center;margin-top:6px">Voir les 8 sites</span>
+   </div></div>
+  </div>
+ </div>
+ <p class="note">Dans les deux cas : « ↗ Fiche » et « 🧱 Je bloque ici » passent dans le menu ⋯ du haut ; les onglets gardent leur nombre sans le « sur 43 » (trop long).</p>
+</div>
+
+<!-- ═════════════ DÉCISIONS ═════════════ -->
+<h2>D. Les décisions à prendre</h2>
+<div class="grid">
+ <div class="dec" style="margin:0"><b>Décision 1 · pastilles toujours visibles, ou dans « Filtrer ▾ »</b>
+  <ol>
+   <li><b>Toujours visibles</b> au-dessus de la liste (ordinateur : une ou deux lignes ; téléphone : une ligne qui défile, façon A), <b>et</b> les mêmes cases dans « Filtrer ▾ ». C’est la demande telle qu’elle est dite (« je ne veux que les journaux ») : un clic, pas deux. <span class="cons">conseillé</span></li>
+   <li>Seulement dans « Filtrer ▾ », comme les autres listes de l’app (Murs de brique…) : plus calme, mais deux clics et la sorte ne se voit qu’en pastille bleue après coup.</li>
+  </ol></div>
+ <div class="dec" style="margin:0"><b>Décision 2 · le choix est retenu pour qui ?</b>
+  <ol>
+   <li><b>Pour toutes les personnes</b> : on travaille souvent « une soirée journaux » sur plusieurs ancêtres ; la pastille bleue « 📰 Journaux × » rappelle toujours le filtre, « Tout effacer » le retire. C’est ce que fait déjà la barre H10 (une mémoire par liste). <span class="cons">conseillé</span></li>
+   <li>Seulement pour cette personne : chaque fiche garde sa sorte (soldat → 🎖) ; risque de croire qu’il n’y a « que 8 sites » en revenant sur lui un mois plus tard.</li>
+   <li>Ne rien retenir : chaque ouverture repart de « tout ».</li>
+  </ol>
+  Exception dans tous les cas : un raccourci de la fiche (écran 5) ouvre la page avec sa sorte sans écraser le choix retenu.</div>
+ <div class="dec" style="margin:0"><b>Décision 3 · un site dans plusieurs sortes ?</b>
+  <ol>
+   <li><b>Oui</b> : 60 sites sur 216 en ont naturellement deux ou plus (MémorialGenWeb = 🎖 + ⚰️, Inscrits maritimes = 🎖 + ⚓, Léonore = 🎖 + 💼). Un site n’apparaît qu’une fois dans la liste, même si deux pastilles cochées le contiennent. <span class="cons">conseillé</span></li>
+   <li>Non, une seule sorte « principale » : plus simple à expliquer, mais « 🎖 Militaire » perdrait les inscrits maritimes, et « ⚰️ Décès » les registres des morts des guerres.</li>
+  </ol></div>
+ <div class="dec" style="margin:0"><b>Décisions 4 et 5</b>
+  <ul><li><b>4</b> · où écrire la sorte d’un site : une table <code>cats</code> dans les règles du moteur (voir 0b). <span class="cons">conseillé</span></li>
+  <li><b>5</b> · « en français seulement » : déduit du pays + courte liste à la main (voir écran 2). <span class="cons">conseillé</span></li>
+  <li>Et une plus petite : les 3 sortes rares (🕯, 🧭, 🔎) derrière « ＋3 », ou visibles comme les autres ? Conseillé : derrière « ＋3 » ; 🕯 garde un ton sobre et n’est jamais mise en avant.</li></ul></div>
+</div>
+
+<!-- ═════════════ PETITS DÉFAUTS ═════════════ -->
+<h2>P. Petits défauts vus sur la capture <span class="badge red">non corrigés</span></h2>
+<p class="sub">Vérifiés dans le code (rien n’est corrigé ici). Les numéros P1–P8 renvoient aux marques rouges des écrans.</p>
+<div class="case wide"><div class="scrollx"><table style="min-width:960px"><thead><tr><th>#</th><th>Ce qu’on voit</th><th>Pourquoi (dans le code)</th><th>Proposition</th></tr></thead><tbody>
+ <tr><td><b>P1</b></td><td>« Né en 1777 <b>à Pologne</b> »</td><td><code>bornText()</code> (<code>app-ou-chercher-core.js</code>) écrit <code>à {lieu}</code> dès qu’il n’y a pas de département ; le « lieu » est le premier morceau du lieu de naissance, ici un nom de pays.</td><td>Si ce morceau est un pays (<code>canonCountry()</code> le reconnaît), utiliser <code>countryIn()</code> : « en Pologne », « au Canada », « aux Pays-Bas ».</td></tr>
+ <tr><td><b>P2</b></td><td>« le cercle généalogique <b>de Cher</b> » ; et ailleurs « Né en 1890 <b>en Cher</b> »</td><td><code>deptText()</code> ne connaît que « dans l’ » (voyelle) ou « en » ; la règle <code>so7_cercle_dept</code> remplace « en » par « de ».</td><td>Une petite table des articles des départements (le Cher, les Landes, la Corrèze…) : « dans le Cher », « du Cher ».</td></tr>
+ <tr><td><b>P3</b></td><td>« pas de lieu <b>en États-Unis</b> » (onglet Écartés)</td><td><code>countryIn()</code> teste « commence par une voyelle → en » <b>avant</b> le cas « États-Unis / Pays-Bas → aux ».</td><td>Tester États-Unis et Pays-Bas en premier.</td></tr>
+ <tr><td><b>P4</b></td><td>Pour un soldat né en 1777 mort en 1822 : <b>Mémorial des gendarmes morts en service</b>, <b>Registres de l’École polytechnique</b>, <b>Bibliothèque et Archives Canada</b>, <b>NARA</b> (et MonumentsMorts), tous avec « Sa fiche dit : soldat »</td><td>Oui, c’est le simple profil « soldat » (posé par <code>ouc_person_context()</code> pour un métier « soldat », « officier »…, un bloc militaire, ou « prisonnier de guerre »). Dans <code>score()</code> :<br>① le champ <code>where: ['fiche','militaire']</code> des lots devient le profil soldat (<code>WHERE_PROFILE.militaire</code>) et s’<b>ajoute</b> aux profils de la règle : la règle des gendarmes dit « gendarme, policier seulement », le lot la contourne ;<br>② un profil trouvé (+5) <b>annule l’exclusion par pays</b> (<code>if (countryMiss &amp;&amp; !ph &amp;&amp; !evh)</code>) : NARA et BAC restent alors qu’il n’a vécu ni aux États-Unis ni au Canada ;<br>③ ces sites n’ont <b>pas d’années</b>, rien n’écarte 1777–1822 ;<br>④ Polytechnique : sa propre règle dit <code>profiles: ['inventor','soldier']</code>, <code>born: [1775, 1925]</code> → né en 1777, +3 +5.</td><td>Règle plus juste :<br>• un « endroit » de lot ne crée un profil que si la règle du site n’en donne pas ;<br>• un profil ne lève l’exclusion par pays que pour un <b>émigré</b> (c’est l’exemple que donne le commentaire du code : « un émigré sans lieu en Amérique ») ;<br>• des années pour les mémoriaux (monuments aux morts : décès à partir de 1870) ;<br>• Polytechnique : « officier » ou « savant », pas « soldat ».<br><b>Simulé</b> avec les deux premiers points : gendarmes → « seulement gendarme, policier », NARA → « pas de lieu aux États-Unis », BAC → « pas de lieu au Canada » ; Proposés 43 → 40, 🎖 8 → 5.</td></tr>
+ <tr><td><b>P5</b></td><td>« Ses années (1777–1822) <b>sont dans</b> celles du site (1745–1810) » (Sainte-Hélène)</td><td>La phrase est écrite dès que sa vie <b>croise</b> les années du site, pas seulement quand elle est dedans.</td><td>« Sa vie (1777–1822) croise les années du site (1745–1810) », ou ne l’écrire que si elle est vraiment dedans.</td></tr>
+ <tr><td><b>P6</b></td><td>Geneteka (index des actes de Pologne) proposé avec « Utile surtout pour « émigré » », pour un homme né en Pologne</td><td>Son lot dit <code>where: ['fiche','emigration']</code> → profil émigré que la fiche n’a pas → « hors sujet » : <code>reasons.length = 0</code> efface « Il a vécu en Pologne ».</td><td>Ne pas traiter en « hors sujet » un site dont le pays correspond.</td></tr>
+ <tr><td><b>P7</b></td><td>« Pologne » absente des pastilles de contexte (1777–1822, France, Allemagne, Cher…) alors que la raison parle de la Pologne</td><td><span class="badge warn">à vérifier sur sa base</span> <code>context()</code> prend d’abord le pays <b>de la fiche du lieu</b>, puis le nom du lieu (<code>canonCountry(e.country) || canonCountry(e.place)</code>) ; si le lieu « Pologne » porte « France » comme pays, ou est rattaché à un département, la Pologne est perdue — et les sites polonais aussi.</td><td>Regarder la fiche du lieu « Pologne » ; et préférer le nom du lieu quand c’est lui-même un pays.</td></tr>
+ <tr><td><b>P8</b></td><td>« Archives du Cher : Parents inconnus : son acte <b>de naissance</b> à Bourges (Cher) donne le nom de ses parents », pour un homme né en Pologne et mort à Bourges</td><td><code>deptSites()</code> (<code>heritage-ou-chercher.js</code>) prend le premier département de sa vie, quel que soit l’événement (ici le décès), et écrit toujours « acte de naissance » quand il n’y a pas de mariage.</td><td>Dire l’acte qui correspond à l’événement du département (« son acte de décès à Bourges… » ; un acte de décès de 1822 donne souvent les parents).</td></tr>
+</tbody></table></div></div>
+
+<h2>Ordre conseillé</h2>
+<div class="case wide"><ol class="edge" style="padding-left:20px">
+ <li><b>La table des sortes</b> (<code>cats</code> dans les règles) + le classeur pour les sites sans sorte ; les 29 retouches de 0b.</li>
+ <li><b>La barre H10</b> sur la page (Chercher, Filtrer ▾ avec Sorte · Pays · Prix), compteurs des onglets « 8 sur 43 ».</li>
+ <li><b>La rangée de pastilles</b> (si décision 1 = visibles), et la version téléphone.</li>
+ <li><b>Les messages de liste vide</b> (écran 3) et l’onglet Écartés groupé (écran 4).</li>
+ <li><b>Les raccourcis de la fiche</b> (écran 5).</li>
+ <li>À part, sans attendre : <b>P1–P8</b> (phrases et règle « soldat »), qui rendent les filtres plus justes.</li>
+</ol></div>
+
+</div></body></html>
