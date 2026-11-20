@@ -266,9 +266,16 @@ try {
         require_once __DIR__ . '/lib/questions_proches.php';
         qp_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if ($action === 'pfam' || $action === 'pfam_write') { // 💌 lettre de famille, 🛡 fiabilité, 🖊 relecture d'une branche, 🌐 traduire le latin (lib/plus_famille.php)
+        require_once __DIR__ . '/lib/plus_famille.php';
+        pfam_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     if (in_array($action, ['pa_list', 'pa_get', 'pa_faces', 'pa_write'], true)) { // 🔍 « Qui est sur cette photo ? » à plusieurs (lib/photo_ask.php)
         require_once __DIR__ . '/lib/photo_ask.php';
         pa_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
+    if ($action === 'successoral' || $action === 'successoral_write') { // ⚖️ généalogiste successoral : dossiers de succession (lib/successoral.php)
+        successoral_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
     if (in_array($action, ['cl_context', 'cl_letter', 'cl_ids', 'cl_templates', 'cl_write'], true)) { // 📮 courriers tout prêts : « Demander l'acte » (lib/courriers_actes.php)
         require_once __DIR__ . '/lib/courriers_actes.php';
@@ -3124,6 +3131,12 @@ function list_data(PDO $pdo): never
     $listKind = safe_text($_GET['kind'] ?? 'human');
     if ($listKind === 'animal') { $genderCond .= " AND p.kind='animal'"; }
     elseif ($listKind !== 'all') { $genderCond .= " AND COALESCE(p.kind,'human')<>'animal'"; }
+    // 🛡 « À revoir avant publication » : note de fiabilité sous le seuil (lib/plus_famille.php) ; liste « persons » seulement
+    if (($_GET['reliability'] ?? '') === 'review' && $type === 'persons') {
+        require_once __DIR__ . '/lib/plus_famille.php';
+        $relIds = array_keys(pfam_rel_review_ids($pdo));
+        $genderCond .= $relIds ? ' AND p.id IN (' . implode(',', array_map('intval', $relIds)) . ')' : ' AND 0';
+    }
     $labelId = safe_int($_GET['label_id'] ?? 0);
     if ($labelId) {
         $genderCond .= " AND EXISTS(SELECT 1 FROM label_links ll WHERE ll.entity_type='person' AND ll.entity_id=p.id AND ll.label_id=?)";
@@ -3169,6 +3182,10 @@ function list_data(PDO $pdo): never
     $hasMore = count($data) > $limit;
     if ($hasMore) $data = array_slice($data, 0, $limit);
     if ($type === 'labels') $data = labels_attach_linked($pdo, $data);
+    if ($type === 'persons' && $data) { // 🛡 la note de fiabilité (colonne « 🛡 Fiabilité » de ⚙️ Colonnes)
+        require_once __DIR__ . '/lib/plus_famille.php';
+        try { $relRun = pfam_rel_run($pdo); foreach ($data as &$relRow) { $relRow['reliability'] = $relRun['scores'][(int) $relRow['id']][0] ?? null; } unset($relRow); } catch (Throwable $_) {}
+    }
     if ($type === 'occupations') $data = occupation_attach_people($pdo, $data, 'occupation');
     if ($type === 'employers') { $mentions = employer_block_mentions($pdo); foreach ($data as &$er) { $er['people'] = employer_people($pdo, (string) $er['id'], $mentions); $er['person_count'] = count($er['people']); } unset($er); }
     $remainingCount = $hasMore ? max(1, count_list_remaining($pdo,$type,$like,$offset + count($data),$genderCond,$genderParams,safe_text($_GET['scope'] ?? ''),safe_int($_GET['person_id'] ?? 0),$reminderMode,$mediaCity,$mediaDateFrom,$mediaDateTo,$sosaRootId,$sosaSort,$sosaMissing,$sosaImpossible,$reminderCategory,$dabovilleSort,$courrierFilter)) : 0;

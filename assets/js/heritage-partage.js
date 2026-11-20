@@ -56,9 +56,10 @@
             ${!r.gd && (st.photos || st.docs) ? UI().notice?.('warn', 'Cet ordinateur ne sait pas réduire les images : elles ne partiront pas.') || '' : ''}`;
     }
 
-    function openShareDialog() {
-        const pr = loadPrefs();
-        const st = {title: defaultTitle(), branches: [], living: pr.living === 'first' ? 'first' : 'hide', photos: pr.photos !== false, docs: pr.docs !== false, notes: pr.notes !== false};
+    /** opts : {review: true} → la case « 🖊 Demander une relecture » cochée ; {branch: {mode, person, personName}} → la branche déjà choisie (fiche → ⋯) */
+    function openShareDialog(opts = {}) {
+        const pr = loadPrefs(), t = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : s); // 🌐
+        const st = {title: defaultTitle(), branches: opts.branch?.person ? [{mode: opts.branch.mode || 'descendants', person: Number(opts.branch.person), personName: opts.branch.personName || '', partner: 0, generations: 60, spouses: true}] : [], living: pr.living === 'first' ? 'first' : 'hide', photos: pr.photos !== false, docs: pr.docs !== false, notes: pr.notes !== false, review: !!opts.review};
         let timer = 0, seq = 0, last = null;
         const dlg = ext.openDialog({eyebrow: 'EXPORTER', title: '📤 Partager avec la famille', wide: true, submitLabel: '📤 Fabriquer la copie (.zip)',
             body: `<p class="muted">Une copie de l’arbre en lecture seule : la famille l’ouvre d’un double-clic, sans l’app ni internet, et ne peut rien y changer.</p>
@@ -74,6 +75,8 @@
                     <label class="checkbox-line"><input type="checkbox" name="docs" ${st.docs ? 'checked' : ''}> 📄 Les actes et documents (avec leur transcription)</label>
                     <label class="checkbox-line"><input type="checkbox" name="notes" ${st.notes ? 'checked' : ''}> 📝 Les notes</label>
                     <p class="muted">Une image où figure une personne vivante ou confidentielle ne part jamais.</p></fieldset></div>
+                <fieldset class="h-fs-fs"><legend>${esc(t('🖊 Relecture'))}</legend><label class="checkbox-line"><input type="checkbox" name="review" ${st.review ? 'checked' : ''}> ${esc(t('🖊 Demander une relecture (le cousin peut cocher et commenter chaque fait)'))}</label>
+                    <p class="muted">${esc(t('La copie montre alors « ✓ D’accord / ✗ Je pense que c’est faux » sur chaque fait, et « ⤓ Renvoyer mes remarques » : un petit fichier .json à importer dans Questions aux proches → « ⤒ Importer les réponses ».'))}</p></fieldset>
                 <section class="h-fs-summary" data-fs-summary aria-live="polite">${UI().spinner?.('Je regarde ce qui partirait…') || ''}</section>`,
             onOpen: d => {
                 const box = d.querySelector('[data-fs-branches]');
@@ -101,6 +104,7 @@
                     const t = e.target; if (t.closest('[data-fs-branches]')) return;
                     if (t.name === 'living') st.living = t.value === 'first' ? 'first' : 'hide';
                     if (['photos', 'docs', 'notes'].includes(t.name)) st[t.name] = t.checked;
+                    if (t.name === 'review') { st.review = t.checked; return; } // 🖊 rien ne change dans « Voilà ce qui part »
                     if (t.name === 'title') st.title = t.value.trim();
                     savePrefs(st); refresh(0);
                 });
@@ -118,13 +122,17 @@
                 try {
                     const url = new URL('api.php', location.href); url.searchParams.set('action', 'family_share_export');
                     Object.entries(params(st)).forEach(([k, v]) => url.searchParams.set(k, String(v)));
+                    if (st.review) { // 🖊 la demande de relecture est rangée avant (lib/plus_famille.php) : son jeton part dans la copie
+                        const rv = await A().api('pfam_write', {}, {method: 'POST', body: {op: 'review_new', title: st.title || defaultTitle(), branches: params(st).branches}});
+                        url.searchParams.set('review', rv.token);
+                    }
                     const r = await fetch(url, {credentials: 'same-origin'});
                     if (!r.ok || !/zip/.test(r.headers.get('content-type') || '')) { const j = await r.json().catch(() => ({})); throw new Error(j.error || 'La copie n’a pas pu être fabriquée.'); }
                     const name = (/filename="([^"]+)"/.exec(r.headers.get('content-disposition') || '') || [])[1] || 'arbre-famille.zip';
                     const blob = await r.blob(), a = document.createElement('a');
                     a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click();
                     setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
-                    A().toast(`Copie prête : ${name}. Envoie ce fichier à la famille ; il s’ouvre avec index.html.`, 'success');
+                    A().toast(st.review ? t('Copie à relire prête : {name}. Le cousin te renverra ses remarques (un fichier .json) : Questions aux proches → « ⤒ Importer les réponses ».', {name}) : `Copie prête : ${name}. Envoie ce fichier à la famille ; il s’ouvre avec index.html.`, 'success');
                     return true;
                 } catch (e) { out.innerHTML = keep; A().toast(e.message, 'error'); return false; }
             }});

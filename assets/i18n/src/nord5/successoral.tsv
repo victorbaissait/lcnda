@@ -1,0 +1,496 @@
+fr ¦ hr ¦ sl
+# Zone « successoral » : ⚖️ généalogiste successoral, dossiers de succession, dévolution (heritage-successoral*.js, lib/successoral.php)
+Les dossiers de succession ne se montrent pas en mode consultation ni en mode simple. ¦ Ostavinski spisi ne prikazuju se u načinu pregledavanja ni u jednostavnom načinu. ¦ Zapuščinski spisi se v načinu ogledovanja in v preprostem načinu ne prikazujejo.
+Successions ¦ Ostavine ¦ Zapuščine
+Listes · Recherche et organisation ¦ Popisi · Istraživanje i organizacija ¦ Seznami · Raziskovanje in organizacija
+Dossiers de succession ¦ Ostavinski spisi ¦ Zapuščinski spisi
+Retrouver les héritiers d’une personne décédée, pour un notaire : un dossier par défunt. À ne pas confondre avec « 🏠 Héritages et successions » (les actes anciens des ancêtres). ¦ Pronaći nasljednike preminule osobe za javnog bilježnika: jedan spis po ostavitelju. Ne miješati s „🏠 Nasljedstva i ostavine” (stare isprave predaka). ¦ Najti dediče umrle osebe za notarja: en spis na zapustnika. Ne zamenjujte z »🏠 Dediščine in zapuščine« (stare listine prednikov).
+＋ Ouvrir un dossier ¦ ＋ Otvori spis ¦ ＋ Odpri spis
+Lecture des dossiers… ¦ Čitanje spisa… ¦ Branje spisov…
+Aucun dossier de succession pour l’instant ¦ Još nema ostavinskog spisa ¦ Še ni zapuščinskega spisa
+Choisis la personne décédée : l’app part des fiches de la base pour trouver ses héritiers, selon le Code civil d’aujourd’hui. ¦ Odaberi preminulu osobu: aplikacija polazi od zapisa u bazi kako bi pronašla njezine nasljednike prema današnjem francuskom Građanskom zakoniku. ¦ Izberi umrlo osebo: aplikacija izhaja iz zapisov v bazi in poišče njene dediče po današnjem francoskem civilnem zakoniku.
+Chercher… (ex. MAZAUD, 2026-014, ROUSSILHE) ¦ Traži… (npr. MAZAUD, 2026-014, ROUSSILHE) ¦ Išči… (npr. MAZAUD, 2026-014, ROUSSILHE)
+Prochaine échéance ¦ Sljedeći rok ¦ Naslednji rok
+A → Z ¦ A → Ž ¦ A → Ž
+Dossier n° {n} ¦ Spis br. {n} ¦ Spis št. {n}
+Prochaine échéance : {d} — {l} ¦ Sljedeći rok: {d} — {l} ¦ Naslednji rok: {d} — {l}
+Échéance passée ¦ Rok je istekao ¦ Rok je potekel
+✎ Modifier ¦ ✎ Uredi ¦ ✎ Uredi
+Aucun dossier ne correspond. ¦ Nijedan spis ne odgovara. ¦ Noben spis ne ustreza.
+Pas en mode consultation ni en mode simple. ¦ Ne u načinu pregledavanja ni u jednostavnom načinu. ¦ Ne v načinu ogledovanja ali v preprostem načinu.
+⚖️ DOSSIER DE SUCCESSION ¦ ⚖️ OSTAVINSKI SPIS ¦ ⚖️ ZAPUŠČINSKI SPIS
+Ouvrir un dossier ¦ Otvori spis ¦ Odpri spis
+Ouvrir le dossier ¦ Otvori spis ¦ Odpri spis
+N° de dossier ¦ Br. spisa ¦ Št. spisa
+fait tout seul : 2026-014 ¦ automatski: 2026-014 ¦ samodejno: 2026-014
+reprise de la fiche ¦ preuzeto iz zapisa ¦ prevzeto iz zapisa
+Dernier domicile ¦ Posljednje prebivalište ¦ Zadnje prebivališče
+Notaire mandant (fiche ou nom) ¦ Javni bilježnik nalogodavac (zapis ili ime) ¦ Notar naročnik (zapis ali ime)
+Réf. du notaire ¦ Oznaka bilježnika ¦ Notarjeva oznaka
+Ouvert le ¦ Otvoren ¦ Odprto
+Testament ¦ Oporuka ¦ Oporoka
+Aucun connu (le notaire interroge le fichier des dernières volontés) ¦ Nijedna poznata (bilježnik provjerava upisnik oporuka) ¦ Nobena znana (notar preveri register oporok)
+Situation (notes) ¦ Stanje (bilješke) ¦ Stanje (opombe)
+🔒 Le dossier reste dans l’app : les héritiers vivants, leurs adresses et leurs parts ne sont dans aucun export. Aucun montant n’est noté. ¦ 🔒 Spis ostaje u aplikaciji: živi nasljednici, njihove adrese i udjeli nisu ni u jednom izvozu. Ne bilježi se nikakav iznos. ¦ 🔒 Spis ostane v aplikaciji: živi dediči, njihovi naslovi in deleži niso v nobenem izvozu. Noben znesek se ne beleži.
+Choisis la personne décédée. ¦ Odaberi preminulu osobu. ¦ Izberi umrlo osebo.
+Dossier enregistré ¦ Spis spremljen ¦ Spis shranjen
+Dossier supprimé ¦ Spis izbrisan ¦ Spis izbrisan
+Lecture du dossier… ¦ Čitanje spisa… ¦ Branje spisa…
+← Tous les dossiers ¦ ← Svi spisi ¦ ← Vsi spisi
+Dossier n° {n} · {t} ¦ Spis br. {n} · {t} ¦ Spis št. {n} · {t}
+Listes · Dossiers de succession ¦ Popisi · Ostavinski spisi ¦ Seznami · Zapuščinski spisi
+↗ Fiche du défunt ¦ ↗ Zapis ostavitelja ¦ ↗ Zapis zapustnika
+🗄 Archiver le dossier clos ¦ 🗄 Arhiviraj zatvoreni spis ¦ 🗄 Arhiviraj zaprti spis
+Dossier archivé : les adresses des vivants ont été retirées, le journal reste. ¦ Spis arhiviran: adrese živih uklonjene su, dnevnik ostaje. ¦ Spis arhiviran: naslovi živih so odstranjeni, dnevnik ostane.
+État du dossier ¦ Stanje spisa ¦ Stanje spisa
+Le défunt n’est plus dans la base. ¦ Ostavitelj više nije u bazi. ¦ Zapustnika ni več v bazi.
+Pas de conjoint dans la base ¦ Nema bračnog druga u bazi ¦ V bazi ni zakonca
+A des descendants ¦ Ima potomke ¦ Ima potomce
+Sans descendant dans la base ¦ Nema potomaka u bazi ¦ V bazi ni potomcev
+Le défunt ¦ Ostavitelj ¦ Zapustnik
+fiche n° {n} ¦ zapis br. {n} ¦ zapis št. {n}
+Le mandat ¦ Nalog ¦ Pooblastilo
+Droit actuel (décès après le 1er janvier 2007) ¦ Važeće pravo (smrt nakon 1. siječnja 2007.) ¦ Veljavno pravo (smrt po 1. januarju 2007)
+Échéances ¦ Rokovi ¦ Roki
+＋ Échéance ¦ ＋ Rok ¦ ＋ Rok
+Dans {n} j ¦ Za {n} d ¦ Čez {n} d
+Aucune échéance. ¦ Nema rokova. ¦ Ni rokov.
+Aussi dans 🗓 Ma semaine de recherche. ¦ Također u 🗓 Moj tjedan istraživanja. ¦ Tudi v 🗓 Moj teden raziskovanja.
+📑 Pièces ¦ 📑 Isprave ¦ 📑 Listine
+🖨 Tableau pour le notaire ¦ 🖨 Tablica za bilježnika ¦ 🖨 Preglednica za notarja
+de son chef ¦ u svoje ime ¦ v svojem imenu
+représenté ¦ predstavljen ¦ zastopan
+sans descendance connue ¦ bez poznatih potomaka ¦ brez znanih potomcev
+degré plus éloigné ¦ udaljeniji stupanj ¦ bolj oddaljena stopnja
+pas de représentation ¦ bez prava predstavljanja ¦ brez vstopne pravice
+pas encore conçu ¦ još nije začet ¦ še ni spočet
+écarté ¦ isključen ¦ izključen
+par représentation ¦ pravom predstavljanja ¦ po vstopni pravici
+de son chef, s’il vit ¦ u svoje ime, ako je živ ¦ v svojem imenu, če živi
+Retenu ¦ Pozvan ¦ Poklican
+Écarté par le conjoint ¦ Isključen zbog bračnog druga ¦ Izključen zaradi zakonca
+Écarté ¦ Isključen ¦ Izključen
+{name} : {share} (art. {art}). ¦ {name}: {share} (čl. {art}). ¦ {name}: {share} (čl. {art}).
+Ou, à son choix, l’usufruit de la totalité (art. 757) : les descendants ont alors la nue-propriété, dans les mêmes proportions. ¦ Ili, po izboru, plodouživanje cijele ostavine (čl. 757): potomci tada imaju golo vlasništvo u istim omjerima. ¦ Ali po izbiri užitek na celoti (čl. 757): potomci imajo tedaj golo lastnino v enakih razmerjih.
+Aucun conjoint dans la base. ¦ Nema bračnog druga u bazi. ¦ V bazi ni zakonca.
+S’il y avait un conjoint, l’app afficherait ici ses droits (art. 757 à 757-2) avant les ordres. ¦ Da postoji bračni drug, aplikacija bi ovdje prikazala njegova prava (čl. 757 do 757-2) prije nasljednih redova. ¦ Če bi obstajal zakonec, bi aplikacija tukaj prikazala njegove pravice (čl. 757 do 757-2) pred dednimi redi.
+{n}e ¦ {n}. ¦ {n}.
+adresse ? ¦ adresa? ¦ naslov?
+Statut retenu dans ce dossier ¦ Stanje usvojeno u ovom spisu ¦ Stanje, sprejeto v tem spisu
+Autre hypothèse ¦ Druga pretpostavka ¦ Druga domneva
+total {t} ¦ ukupno {t} ¦ skupaj {t}
+personne : il reste des branches à chercher. ¦ nitko: ostale su grane za traženje. ¦ nihče: ostajajo veje za iskanje.
+Part en jeu : {s} ¦ Udio u pitanju: {s} ¦ Delež v igri: {s}
+🔍 Chercher ¦ 🔍 Traži ¦ 🔍 Išči
+🌍 Héritier à l’étranger ¦ 🌍 Nasljednik u inozemstvu ¦ 🌍 Dedič v tujini
+❔ Absent ou disparu ¦ ❔ Odsutan ili nestao ¦ ❔ Odsoten ali pogrešan
+📇 Compléter ¦ 📇 Dopuni ¦ 📇 Dopolni
+Type d’adoption ¦ Vrsta posvojenja ¦ Vrsta posvojitve
+Type d’adoption ? ¦ Vrsta posvojenja? ¦ Vrsta posvojitve?
+Plénière ¦ Potpuno ¦ Popolna
+Marié ? ¦ U braku? ¦ Poročen?
+Pas marié (PACS, union libre) ¦ Nije u braku (PACS, izvanbračna zajednica) ¦ Ni poročen (PACS, zunajzakonska skupnost)
+Divorcé ¦ Razveden ¦ Razvezan
+Aucune branche à chercher d’après les fiches. ¦ Prema zapisima nema grane za traženje. ¦ Po zapisih ni veje za iskanje.
+{n}e degré ¦ {n}. stupanj ¦ {n}. kolena
+Calcul indicatif, à faire vérifier par le notaire. Il suit le Code civil en vigueur (art. 731 et suivants), sans testament, sans donation, sans renonciation connue. Il ne tient pas compte du droit de retour légal (art. 738-2, 757-3), des biens à l’étranger ni d’un régime matrimonial. ¦ Okvirni izračun, treba ga provjeriti bilježnik. Slijedi važeći francuski Građanski zakonik (čl. 731 i dalje), bez oporuke, bez darovanja, bez poznatog odricanja. Ne uzima u obzir zakonsko pravo povrata (čl. 738-2, 757-3), imovinu u inozemstvu ni bračni imovinski režim. ¦ Okvirni izračun, ki ga mora preveriti notar. Sledi veljavnemu francoskemu civilnemu zakoniku (čl. 731 in nasl.), brez oporoke, brez darila, brez znane odpovedi. Ne upošteva zakonite pravice do vrnitve (čl. 738-2, 757-3), premoženja v tujini ali premoženjskega režima zakoncev.
+Le conjoint survivant ¦ Preživjeli bračni drug ¦ Preživeli zakonec
+Les ordres d’héritiers (art. 734) : le premier qui a quelqu’un prend tout ¦ Nasljedni redovi (čl. 734): prvi u kojem netko postoji, dobiva sve ¦ Dedni redi (čl. 734): prvi, v katerem je kdo, dobi vse
+Les héritiers trouvés ¦ Pronađeni nasljednici ¦ Najdeni dediči
+🗂 Tables des successions (AD)… ¦ 🗂 Popisi ostavina (arhivi)… ¦ 🗂 Seznami zapuščin (arhivi)…
+Lien avec le défunt ¦ Srodstvo s ostaviteljem ¦ Sorodstvo z zapustnikom
+Vient ¦ Nasljeđuje ¦ Deduje
+Part ¦ Udio ¦ Delež
+Statut retenu ¦ Usvojeno stanje ¦ Sprejeto stanje
+↔ Faire glisser le tableau pour voir les parts. ¦ ↔ Povuci tablicu da vidiš udjele. ¦ ↔ Povleci preglednico za ogled deležev.
+Aucun héritier trouvé jusqu’au 6e degré : sans testament, la succession reviendrait à l’État (art. 539 et 768). Il reste sans doute des branches à chercher. ¦ Nije pronađen nasljednik do 6. stupnja: bez oporuke ostavina bi pripala državi (čl. 539 i 768). Vjerojatno su ostale grane za traženje. ¦ Do 6. kolena ni najden noben dedič: brez oporoke bi zapuščina pripadla državi (čl. 539 in 768). Verjetno ostajajo veje za iskanje.
+Les calculs restent tant que la branche n’est pas tranchée. ¦ Izračuni ostaju dok grana nije razriješena. ¦ Izračuni ostanejo, dokler veja ni razrešena.
+Les branches à chercher ¦ Grane za traženje ¦ Veje za iskanje
+L’hypothèse retenue ¦ Usvojena pretpostavka ¦ Sprejeta domneva
+Ex. : André MAZAUD décédé à Lyon en 1990 sans enfant (acte reçu le 5 déc.). ¦ Npr.: André MAZAUD umro u Lyonu 1990. bez djece (isprava primljena 5. pros.). ¦ Npr.: André MAZAUD je umrl v Lyonu leta 1990 brez otrok (listina prejeta 5. dec.).
+Demandée avant « Remis au notaire » si un héritier reste inconnu. ¦ Traži se prije „Predano bilježniku” ako nasljednik ostane nepoznat. ¦ Zahtevano pred »Predano notarju«, če dedič ostane neznan.
+Les degrés civils (art. 741-743) : on compte les générations jusqu’à l’ancêtre commun, puis on redescend ¦ Stupnjevi srodstva (čl. 741-743): broje se generacije do zajedničkog pretka, zatim natrag dolje ¦ Kolena sorodstva (čl. 741-743): štejejo se generacije do skupnega prednika, nato nazaj navzdol
+LE DÉFUNT ¦ OSTAVITELJ ¦ ZAPUSTNIK
+à retrouver ¦ za pronaći ¦ za najti
+sans descend. ¦ bez potom. ¦ brez potom.
+Héritier vivant, sa part ¦ Živi nasljednik, njegov udio ¦ Živi dedič, njegov delež
+Prédécédé, sa souche ¦ Umro ranije, njegova loza ¦ Umrl prej, njegova veja
+Branche à chercher ¦ Grana za traženje ¦ Veja za iskanje
+Arbre de dévolution ¦ Stablo nasljeđivanja ¦ Drevo dedovanja
+Le défunt au centre, chaque héritier avec sa part ¦ Ostavitelj u sredini, svaki nasljednik sa svojim udjelom ¦ Zapustnik v sredini, vsak dedič s svojim deležem
+⤓ SVG ¦ ⤓ SVG ¦ ⤓ SVG
+↔ Faire glisser le dessin. ¦ ↔ Povuci crtež. ¦ ↔ Povleci risbo.
+Clic sur une case : la fiche ; clic droit : « 🛡 Solidité de ce lien ». Le dessin suit les fiches. ¦ Klik na polje: zapis; desni klik: „🛡 Čvrstoća ove veze”. Crtež prati zapise. ¦ Klik na polje: zapis; desni klik: »🛡 Trdnost te povezave«. Risba sledi zapisom.
+le {d} ¦ {d} ¦ {d}
+État de la pièce ¦ Stanje isprave ¦ Stanje listine
+D’après la fiche ¦ Prema zapisu ¦ Po zapisu
+{n} en main ¦ {n} u ruci ¦ {n} v roki
+{n} demandés ¦ {n} zatraženo ¦ {n} zahtevanih
+Par héritier ¦ Po nasljedniku ¦ Po dediču
+Par acte ¦ Po ispravi ¦ Po listini
+Ce qu’il faut prouver ¦ Što treba dokazati ¦ Kaj je treba dokazati
+↔ Faire glisser le tableau. ¦ ↔ Povuci tablicu. ¦ ↔ Povleci preglednico.
+Rangée dans le Registre de courriers, une demande d’acte met la pièce à « Demandé » ; l’acte attaché à la fiche la met à « En main ». ¦ Zahtjev za ispravu spremljen u Upisnik dopisa postavlja ispravu na „Zatraženo”; isprava priložena zapisu na „U ruci”. ¦ Zahteva za listino, shranjena v Registru dopisov, nastavi listino na »Zahtevano«; listina, pripeta zapisu, na »V roki«.
+Je suis mandaté(e) par {notary}, notaire, pour établir la dévolution de la succession de {name} (dossier {n}, réf. {ref}). ¦ Ovlašten/a sam od {notary}, javnog bilježnika, utvrditi red nasljeđivanja u ostavini {name} (spis {n}, oznaka {ref}). ¦ Pooblaščen/a sem od {notary}, notarja, da ugotovim dedni red v zapuščini po {name} (spis {n}, oznaka {ref}).
+À retrouver ¦ Za pronaći ¦ Za najti
+Adresse ? ¦ Adresa? ¦ Naslov?
+Signé le ¦ Potpisano ¦ Podpisano
+À signer ¦ Za potpis ¦ Za podpis
+✉️ Écrire ¦ ✉️ Piši ¦ ✉️ Piši
+Contrat de révélation, réponses, signatures ¦ Ugovor o otkrivanju, odgovori, potpisi ¦ Pogodba o razkritju, odgovori, podpisi
+📝 Contrat de révélation ¦ 📝 Ugovor o otkrivanju ¦ 📝 Pogodba o razkritju
+✉️ Lettre de premier contact ¦ ✉️ Pismo za prvi kontakt ¦ ✉️ Pismo za prvi stik
+Héritier ¦ Nasljednik ¦ Dedič
+Courrier ¦ Pismo ¦ Pismo
+Contrat ¦ Ugovor ¦ Pogodba
+📝 Le contrat ne nomme pas le défunt avant signature. Écris toi-même le pourcentage d’honoraires et la date limite. Rien n’est envoyé par l’app. ¦ 📝 Ugovor ne imenuje ostavitelja prije potpisa. Postotak naknade i rok upiši sam. Aplikacija ništa ne šalje. ¦ 📝 Pogodba pred podpisom ne imenuje zapustnika. Odstotek plačila in rok vpiši sam. Aplikacija ničesar ne pošilja.
+Chaque courrier va dans le Registre de courriers, avec sa relance. ¦ Svako pismo ide u Upisnik dopisa, s podsjetnikom. ¦ Vsako pismo gre v Register dopisov, z opomnikom.
+↗ Registre de courriers ¦ ↗ Upisnik dopisa ¦ ↗ Register dopisov
+Madame, Monsieur, ¦ Poštovana gospođo, poštovani gospodine, ¦ Spoštovani,
+Généalogiste successoral, je suis chargé(e) par une étude notariale de retrouver les héritiers d’une personne décédée. Mes recherches me laissent penser que vous pourriez faire partie de sa famille. ¦ kao genealog za nasljedstva, javnobilježnički ured povjerio mi je pronalazak nasljednika preminule osobe. Moja istraživanja upućuju na to da biste mogli pripadati njezinoj obitelji. ¦ kot dedni genealog me je notarska pisarna pooblastila, da poiščem dediče umrle osebe. Moje raziskave kažejo, da bi lahko pripadali njeni družini.
+Pour le vérifier, pourriez-vous me confirmer votre date et votre lieu de naissance, ainsi que les noms de vos parents ? Vous pouvez me répondre par courrier, par téléphone ou par courriel. ¦ Kako bismo to provjerili, možete li mi potvrditi datum i mjesto rođenja te imena svojih roditelja? Možete odgovoriti poštom, telefonom ili e-poštom. ¦ Ali mi lahko za preverjanje sporočite datum in kraj rojstva ter imeni staršev? Odgovorite lahko po pošti, telefonu ali e-pošti.
+Cette démarche ne vous engage à rien. ¦ Ovaj korak vas ni na što ne obvezuje. ¦ Ta korak vas k ničemer ne zavezuje.
+Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées. ¦ S poštovanjem, ¦ Lep pozdrav
+CONTRAT DE RÉVÉLATION DE SUCCESSION ¦ UGOVOR O OTKRIVANJU OSTAVINE ¦ POGODBA O RAZKRITJU ZAPUŠČINE
+Entre {heir}, ci-après « l’héritier », et {sender}, généalogiste successoral. ¦ Između {heir}, u daljnjem tekstu „nasljednik”, i {sender}, genealoga za nasljedstva. ¦ Med {heir}, v nadaljevanju »dedič«, in {sender}, dednim genealogom.
+Le généalogiste a découvert une succession en cours dans laquelle l’héritier pourrait avoir des droits. Il s’engage à lui en révéler l’origine (le nom de la personne décédée, l’étude notariale chargée du règlement) dès la signature du présent contrat, et à réunir les actes qui prouvent sa qualité d’héritier. ¦ Genealog je otkrio ostavinu u tijeku u kojoj nasljednik može imati prava. Obvezuje se otkriti mu njezino podrijetlo (ime preminule osobe, nadležni javnobilježnički ured) potpisom ovog ugovora i prikupiti isprave koje dokazuju njegov status nasljednika. ¦ Genealog je odkril zapuščino v teku, v kateri ima dedič lahko pravice. Zavezuje se, da mu ob podpisu te pogodbe razkrije njen izvor (ime umrle osebe, pristojno notarsko pisarno) in zbere listine, ki dokazujejo njegov položaj dediča.
+En contrepartie, l’héritier s’engage à verser au généalogiste des honoraires de ____ % (hors taxes) de l’actif net qui lui reviendra, payables seulement s’il reçoit effectivement une part de la succession. Les frais de recherche sont compris. ¦ Zauzvrat se nasljednik obvezuje platiti genealogu naknadu od ____ % (bez poreza) neto imovine koja mu pripadne, plativu samo ako stvarno primi udio u ostavini. Troškovi istraživanja su uključeni. ¦ V zameno se dedič zavezuje, da genealogu plača plačilo v višini ____ % (brez davka) čistega premoženja, ki mu pripade, plačljivo le, če dejansko prejme delež zapuščine. Stroški raziskovanja so vključeni.
+Cette proposition est valable jusqu’au ____________. ¦ Ova ponuda vrijedi do ____________. ¦ Ta ponudba velja do ____________.
+Fait en deux exemplaires, à ____________, le ____________. ¦ Sastavljeno u dva primjerka, u ____________, dana ____________. ¦ Sestavljeno v dveh izvodih, v ____________, dne ____________.
+L’héritier (« Lu et approuvé », signature) — Le généalogiste ¦ Nasljednik („Pročitano i odobreno”, potpis) — Genealog ¦ Dedič (»Prebrano in odobreno«, podpis) — Genealog
+Je me permets de revenir vers vous au sujet de mon courrier du {sent}, resté sans réponse. Une succession en cours pourrait vous concerner : pourriez-vous me contacter ? ¦ Vraćam se na svoje pismo od {sent}, koje je ostalo bez odgovora. Ostavina u tijeku mogla bi vas se ticati: biste li me mogli kontaktirati? ¦ Vračam se k svojemu pismu z dne {sent}, ki je ostalo brez odgovora. Zapuščina v teku bi vas lahko zadevala: ali me lahko kontaktirate?
+✉️ HÉRITIERS CONTACTÉS ¦ ✉️ KONTAKTIRANI NASLJEDNICI ¦ ✉️ KONTAKTIRANI DEDIČI
+Relance ¦ Podsjetnik ¦ Opomnik
+📋 Ranger dans le Registre de courriers ¦ 📋 Spremi u Upisnik dopisa ¦ 📋 Shrani v Register dopisov
+pas d’adresse dans le Répertoire des vivants ¦ nema adrese u Imeniku živih ¦ ni naslova v Imeniku živih
+Premier contact ¦ Prvi kontakt ¦ Prvi stik
+Contrat de révélation ¦ Ugovor o otkrivanju ¦ Pogodba o razkritju
+Relance dans (jours) ¦ Podsjetnik za (dana) ¦ Opomnik čez (dni)
+Le nom du défunt n’est pas écrit : il est révélé après la signature. ¦ Ime ostavitelja nije napisano: otkriva se nakon potpisa. ¦ Ime zapustnika ni napisano: razkrije se po podpisu.
+La lettre (tu peux la retoucher ; le nom de chaque héritier est mis tout seul) ¦ Pismo (možeš ga urediti; ime svakog nasljednika upisuje se samo) ¦ Pismo (lahko ga urediš; ime vsakega dediča se vstavi samo)
+📝 Traitement de texte ¦ 📝 Uređivač teksta ¦ 📝 Urejevalnik besedil
+Coche au moins un héritier. ¦ Označi barem jednog nasljednika. ¦ Označi vsaj enega dediča.
+Courriers aux héritiers ¦ Pisma nasljednicima ¦ Pisma dedičem
+Recherche d’héritiers ¦ Potraga za nasljednicima ¦ Iskanje dedičev
+Ton logiciel de courriel s’ouvre : relis la lettre et envoie-la toi-même. Rien n’est envoyé par l’app. ¦ Otvara se tvoj program e-pošte: pročitaj pismo i pošalji ga sam. Aplikacija ništa ne šalje. ¦ Odpre se tvoj e-poštni program: preberi pismo in ga pošlji sam. Aplikacija ničesar ne pošilja.
+Premier contact + contrat ¦ Prvi kontakt + ugovor ¦ Prvi stik + pogodba
+{n} rangés dans le Registre de courriers ¦ {n} spremljeno u Upisnik dopisa ¦ Shranjeno v Register dopisov: {n}
+N. ¦ Rođ. ¦ Roj.
+D. ¦ Sm. ¦ Sm.
+M. ¦ Vj. ¦ Por.
+Div. ¦ Razv. ¦ Razv.
+Ren. ¦ Odr. ¦ Odp.
+(à fournir) ¦ (treba dostaviti) ¦ (predložiti)
+repr. {who} ¦ pred. {who} ¦ zast. {who}
+existence à ce jour non établie ¦ postojanje dosad nije utvrđeno ¦ obstoj doslej ni ugotovljen
+TABLEAU GÉNÉALOGIQUE ¦ GENEALOŠKA TABLICA ¦ RODOSLOVNA PREGLEDNICA
+Succession de {name}, décédé(e) à {place} le {date} ¦ Ostavina {name}, preminulog/preminule u {place} dana {date} ¦ Zapuščina po {name}, umrl(i) v {place} dne {date}
+Dossier {n} · Réf. notaire {ref} ¦ Spis {n} · Oznaka bilježnika {ref} ¦ Spis {n} · Notarjeva oznaka {ref}
+Calcul établi d’après les actes cités, art. 731 et suiv. du Code civil, sous réserve de vérification par le notaire. N. = naissance, M. = mariage, D. = décès. ¦ Izračun prema navedenim ispravama, čl. 731 i dalje francuskog Građanskog zakonika, uz pridržaj provjere bilježnika. Rođ. = rođenje, Vj. = vjenčanje, Sm. = smrt. ¦ Izračun po navedenih listinah, čl. 731 in nasl. francoskega civilnega zakonika, s pridržkom notarjevega preverjanja. Roj. = rojstvo, Por. = poroka, Sm. = smrt.
+Communs à tous : {list}. ¦ Zajedničko svima: {list}. ¦ Skupno vsem: {list}.
+Hypothèse retenue : {h} ¦ Usvojena pretpostavka: {h} ¦ Sprejeta domneva: {h}
+à préciser ¦ za precizirati ¦ za natančneje določiti
+Liste des pièces ¦ Popis isprava ¦ Seznam listin
+Page {n} / 3 ¦ Stranica {n} / 3 ¦ Stran {n} / 3
+Un PDF sobre, une source pour chaque lien ¦ Jednostavan PDF, izvor za svaku vezu ¦ Preprost PDF, vir za vsako povezavo
+📝 Ouvrir dans le traitement de texte ¦ 📝 Otvori u uređivaču teksta ¦ 📝 Odpri v urejevalniku besedil
+Joindre les adresses des héritiers ¦ Priloži adrese nasljednika ¦ Priloži naslove dedičev
+Aucune photo ni note privée : les noms, les qualités, les parts et les sources. Pas d’adresse sauf si la case est cochée. ¦ Bez fotografija i privatnih bilješki: imena, svojstva, udjeli i izvori. Adrese samo ako je označeno. ¦ Brez fotografij in zasebnih opomb: imena, položaji, deleži in viri. Naslovi le, če je označeno.
+Tableau généalogique — {n} ¦ Genealoška tablica — {n} ¦ Rodoslovna preglednica — {n}
+Tableau pour le notaire : PDF ou impression (3 pages) ¦ Tablica za bilježnika: PDF ili ispis (3 stranice) ¦ Preglednica za notarja: PDF ali tisk (3 strani)
+Tableau pour le notaire : ouvert dans le traitement de texte ¦ Tablica za bilježnika: otvorena u uređivaču teksta ¦ Preglednica za notarja: odprta v urejevalniku besedil
+Tableau pour le notaire : copie rangée dans les médias ¦ Tablica za bilježnika: kopija spremljena u medije ¦ Preglednica za notarja: kopija shranjena v medijih
+🕓 Journal du dossier {n} ¦ 🕓 Dnevnik spisa {n} ¦ 🕓 Dnevnik spisa {n}
+(on ne peut ni le modifier ni l’effacer) ¦ (ne može se mijenjati ni brisati) ¦ (ni ga mogoče spremeniti ali izbrisati)
+⤓ Exporter le journal (CSV) ¦ ⤓ Izvezi dnevnik (CSV) ¦ ⤓ Izvozi dnevnik (CSV)
+Les changements des fiches restent dans Réglages → Journal des modifications. ¦ Promjene zapisa ostaju i u Postavke → Dnevnik promjena. ¦ Spremembe zapisov ostanejo tudi v Nastavitve → Dnevnik sprememb.
+Action ¦ Radnja ¦ Dejanje
+Journal exporté (CSV) ¦ Dnevnik izvezen (CSV) ¦ Dnevnik izvožen (CSV)
+Le temps passé, les frais, les honoraires des contrats ¦ Utrošeno vrijeme, troškovi, naknade iz ugovora ¦ Porabljeni čas, stroški, plačila po pogodbah
+＋ Temps ¦ ＋ Vrijeme ¦ ＋ Čas
+＋ Frais ¦ ＋ Troškovi ¦ ＋ Stroški
+＋ Honoraires d’un contrat ¦ ＋ Naknada iz ugovora ¦ ＋ Plačilo po pogodbi
+🖨 Relevé ¦ 🖨 Pregled ¦ 🖨 Pregled
+{h} h {m} min passées ¦ Utrošeno {h} h {m} min ¦ Porabljeno {h} h {m} min
+Frais : {s} ¦ Troškovi: {s} ¦ Stroški: {s}
+{n} contrats ¦ Ugovori: {n} ¦ Pogodbe: {n}
+{h} h {m} min ¦ {h} h {m} min ¦ {h} h {m} min
+Rien de noté. ¦ Ništa zabilježeno. ¦ Nič zabeleženega.
+Aucun montant de succession n’est noté. ¦ Ne bilježi se nikakav iznos ostavine. ¦ Noben znesek zapuščine se ne beleži.
+💶 TEMPS ET FRAIS ¦ 💶 VRIJEME I TROŠKOVI ¦ 💶 ČAS IN STROŠKI
+Copie d’acte, déplacement… ¦ Preslika isprave, putovanje… ¦ Kopija listine, pot…
+Recherches aux AD, appels… ¦ Istraživanje u arhivu, pozivi… ¦ Raziskovanje v arhivu, klici…
+Contrat signé ¦ Ugovor potpisan ¦ Pogodba podpisana
+Heures ¦ Sati ¦ Ure
+Minutes ¦ Minute ¦ Minute
+Montant (€) ¦ Iznos (€) ¦ Znesek (€)
+🌍 HÉRITIER À L’ÉTRANGER ¦ 🌍 NASLJEDNIK U INOZEMSTVU ¦ 🌍 DEDIČ V TUJINI
+Chercher {name} hors de France ¦ Traži {name} izvan Francuske ¦ Išči {name} zunaj Francije
+Les services à interroger ¦ Službe kojima se obratiti ¦ Službe, ki jih vprašati
+📮 Demander l’acte au Service central d’état civil ¦ 📮 Zatraži ispravu od Središnje službe matičnih knjiga ¦ 📮 Zahtevaj listino od Osrednje matične službe
+Langue de la lettre ¦ Jezik pisma ¦ Jezik pisma
+Destinataire ¦ Primatelj ¦ Prejemnik
+Registro civil de …, consulat de France à … ¦ Registro civil de …, francuski konzulat u … ¦ Registro civil de …, francoski konzulat v …
+La lettre (dans la langue du pays) ¦ Pismo (na jeziku zemlje) ¦ Pismo (v jeziku države)
+Lettre à l’étranger ¦ Pismo u inozemstvo ¦ Pismo v tujino
+Recherche d’un héritier à l’étranger : {name} ¦ Potraga za nasljednikom u inozemstvu: {name} ¦ Iskanje dediča v tujini: {name}
+Courrier rangé dans le Registre de courriers ¦ Pismo spremljeno u Upisnik dopisa ¦ Pismo shranjeno v Register dopisov
+❔ ABSENTS ET DISPARUS ¦ ❔ ODSUTNI I NESTALI ¦ ❔ ODSOTNI IN POGREŠANI
+{name} : absent ou disparu ? ¦ {name}: odsutan ili nestao? ¦ {name}: odsoten ali pogrešan?
+art. {a} ¦ čl. {a} ¦ čl. {a}
+Le calcul lit ce statut : un présumé absent est compté vivant, sa part est « réservée » ; un déclaré absent est compté comme mort avant. ¦ Izračun čita ovo stanje: osoba za koju se pretpostavlja odsutnost računa se kao živa, njezin udio je „pridržan”; osoba proglašena odsutnom računa se kao ranije umrla. ¦ Izračun bere to stanje: domnevno odsoten se šteje za živega, njegov delež je »pridržan«; razglašen za odsotnega se šteje kot prej umrli.
+Présumé absent ¦ Pretpostavljeno odsutan ¦ Domnevno odsoten
+Déclaré absent ou jugement de décès ¦ Proglašen odsutnim ili umrlim ¦ Razglašen za odsotnega ali za mrtvega
+{name} : statut retenu changé, dévolution recalculée ¦ {name}: usvojeno stanje promijenjeno, nasljeđivanje ponovno izračunato ¦ {name}: sprejeto stanje spremenjeno, dedovanje znova izračunano
+Héritier à retrouver : {name}{born} — vivant ? décédé ? des enfants ? (dossier de succession {n}) ¦ Nasljednik za pronaći: {name}{born} — živ? umro? djeca? (ostavinski spis {n}) ¦ Dedič za najti: {name}{born} — živ? umrl? otroci? (zapuščinski spis {n})
+(né en {y}) ¦ (rođen {y}) ¦ (roj. {y})
+Descendance de {name} (mort avant le défunt) : un enfant reconnu ou naturel ? (dossier de succession {n}) ¦ Potomci {name} (umro prije ostavitelja): priznato ili izvanbračno dijete? (ostavinski spis {n}) ¦ Potomci {name} (umrl pred zapustnikom): priznan ali zunajzakonski otrok? (zapuščinski spis {n})
+Branche à chercher autour de {name} (dossier de succession {n}) ¦ Grana za traženje oko {name} (ostavinski spis {n}) ¦ Veja za iskanje okoli {name} (zapuščinski spis {n})
+Piste ouverte dans le Journal des recherches : {name} ¦ Trag otvoren u Dnevniku istraživanja: {name} ¦ Sled odprta v Dnevniku raziskovanja: {name}
+Piste ajoutée : Recherche → 🗓 Journal des recherches ¦ Trag dodan: Istraživanje → 🗓 Dnevnik istraživanja ¦ Sled dodana: Raziskovanje → 🗓 Dnevnik raziskovanja
+🗂 TABLES DES SUCCESSIONS DES AD ¦ 🗂 POPISI OSTAVINA U ARHIVIMA ¦ 🗂 SEZNAMI ZAPUŠČIN V ARHIVIH
+Dépouiller les tables de successions et absences ¦ Pregledati popise ostavina i odsutnosti ¦ Pregledati sezname zapuščin in odsotnosti
+Ajouter au suivi ¦ Dodaj u praćenje ¦ Dodaj v spremljanje
+Les tables de successions et absences et les mutations par décès (série Q des Archives départementales) donnent la date et le bureau de chaque succession. Coche les personnes à chercher : une ligne « à faire » chacune. ¦ Popisi ostavina i odsutnosti i upisnici prijenosa zbog smrti (serija Q departmanskih arhiva) daju datum i ured svake ostavine. Označi osobe za traženje: po jedan redak „za napraviti”. ¦ Seznami zapuščin in odsotnosti ter registri prenosov zaradi smrti (serija Q departmajskih arhivov) navajajo datum in urad vsake zapuščine. Označi osebe za iskanje: za vsako vrstica »za narediti«.
+Coche au moins une personne. ¦ Označi barem jednu osobu. ¦ Označi vsaj eno osebo.
+Tables des successions et absences, mutations par décès (série Q) : {name}{d} ¦ Popisi ostavina i odsutnosti, prijenosi zbog smrti (serija Q): {name}{d} ¦ Seznami zapuščin in odsotnosti, prenosi zaradi smrti (serija Q): {name}{d}
+Tables des successions : {n} à dépouiller ¦ Popisi ostavina: {n} za pregled ¦ Seznami zapuščin: {n} za pregled
+{n} ajoutés aux dépouillements ¦ {n} dodano u preglede ¦ Dodano v preglede: {n}
+État : {s} ¦ Stanje: {s} ¦ Stanje: {s}
+📋 LISTE DE CONTRÔLE ¦ 📋 KONTROLNI POPIS ¦ 📋 KONTROLNI SEZNAM
+Avant « Remis au notaire » ¦ Prije „Predano bilježniku” ¦ Pred »Predano notarju«
+Remis au notaire ¦ Predano bilježniku ¦ Predano notarju
+Remettre quand même ¦ Ipak predaj ¦ Vseeno predaj
+Tout n’est pas prêt : corrige d’abord, ou remets quand même (ce sera noté au journal). ¦ Nije sve spremno: najprije ispravi ili ipak predaj (bit će zabilježeno u dnevniku). ¦ Ni vse pripravljeno: najprej popravi ali vseeno predaj (zabeleženo bo v dnevniku).
+Les adresses des vivants seront retirées du dossier et de ses courriers. Le journal reste. Continuer ? ¦ Adrese živih bit će uklonjene iz spisa i njegovih pisama. Dnevnik ostaje. Nastaviti? ¦ Naslovi živih bodo odstranjeni iz spisa in njegovih pisem. Dnevnik ostane. Nadaljujem?
+Archiver ¦ Arhiviraj ¦ Arhiviraj
+Dossier archivé. ¦ Spis arhiviran. ¦ Spis arhiviran.
+ÉCHÉANCE ¦ ROK ¦ ROK
+Remettre le tableau généalogique au notaire ¦ Predati genealošku tablicu bilježniku ¦ Predati rodoslovno preglednico notarju
+Remise au notaire ¦ Predaja bilježniku ¦ Predaja notarju
+Rendez-vous ¦ Sastanak ¦ Sestanek
+Échéance ajoutée ¦ Rok dodan ¦ Rok dodan
+Échéance supprimée ¦ Rok izbrisan ¦ Rok izbrisan
+Répertoire des vivants : « ＋ Contact », puis relie la fiche de l’héritier. ¦ Imenik živih: „＋ Kontakt”, zatim poveži zapis nasljednika. ¦ Imenik živih: »＋ Stik«, nato poveži zapis dediča.
+Relevé de temps et de frais — {n} ¦ Pregled vremena i troškova — {n} ¦ Pregled časa in stroškov — {n}
+Arbre de dévolution — {n} ¦ Stablo nasljeđivanja — {n} ¦ Drevo dedovanja — {n}
+Arbre de dévolution imprimé ¦ Stablo nasljeđivanja ispisano ¦ Drevo dedovanja natisnjeno
+Hypothèse retenue enregistrée ¦ Usvojena pretpostavka spremljena ¦ Sprejeta domneva shranjena
+Échéance faite ¦ Rok izvršen ¦ Rok opravljen
+Échéance à faire ¦ Rok za izvršiti ¦ Rok za opraviti
+Pièce : {s} ¦ Isprava: {s} ¦ Listina: {s}
+Courrier mis à jour ¦ Pismo ažurirano ¦ Pismo posodobljeno
+Rechercher les héritiers… ¦ Traži nasljednike… ¦ Išči dediče…
+Pas en mode consultation. ¦ Ne u načinu pregledavanja. ¦ Ne v načinu ogledovanja.
+Les dossiers n’ont pas pu être lus. ¦ Spisi se nisu mogli pročitati. ¦ Spisov ni bilo mogoče prebrati.
+Aucun dossier en cours. ¦ Nema spisa u tijeku. ¦ Ni spisa v teku.
+Dossier {n} ¦ Spis {n} ¦ Spis {n}
+⚖️ Dossiers de succession ¦ ⚖️ Ostavinski spisi ¦ ⚖️ Zapuščinski spisi
+Signé le {d} ¦ Potpisano {d} ¦ Podpisano {d}
+Dossier de succession ¦ Ostavinski spis ¦ Zapuščinski spis
+Tous les courriers ¦ Sva pisma ¦ Vsa pisma
+l’héritier ¦ nasljednik ¦ dedič
+Branche paternelle : {who} ¦ Očeva grana: {who} ¦ Očetova veja: {who}
+Branche maternelle : {who} ¦ Majčina grana: {who} ¦ Materina veja: {who}
+Tous les enfants sont communs : le conjoint choisit l’usufruit de tout, ou le quart en pleine propriété (art. 757). Le calcul montre le quart. ¦ Sva su djeca zajednička: bračni drug bira plodouživanje svega ili četvrtinu u vlasništvu (čl. 757). Izračun prikazuje četvrtinu. ¦ Vsi otroci so skupni: zakonec izbere užitek na vsem ali četrtino v lasti (čl. 757). Izračun prikazuje četrtino.
+Un enfant au moins n’est pas commun aux deux époux : le conjoint reçoit le quart en pleine propriété (art. 757). ¦ Barem jedno dijete nije zajedničko bračnim drugovima: bračni drug dobiva četvrtinu u vlasništvu (čl. 757). ¦ Vsaj en otrok ni skupen obema zakoncema: zakonec dobi četrtino v lasti (čl. 757).
+1er ordre : les enfants et, par représentation, les descendants d’un enfant prédécédé ou renonçant ; partage par souche (art. 735, 752, 753). ¦ 1. red: djeca i, pravom predstavljanja, potomci ranije umrlog djeteta ili djeteta koje se odreklo; dioba po lozama (čl. 735, 752, 753). ¦ 1. dedni red: otroci in po vstopni pravici potomci prej umrlega ali odpovedujočega se otroka; delitev po vejah (čl. 735, 752, 753).
+Sans descendant, avec le père et la mère : la moitié au conjoint, un quart à chaque parent (art. 757-1). ¦ Bez potomaka, s ocem i majkom: polovina bračnom drugu, četvrtina svakom roditelju (čl. 757-1). ¦ Brez potomcev, z očetom in materjo: polovica zakoncu, četrtina vsakemu od staršev (čl. 757-1).
+Sans descendant, avec un seul parent : trois quarts au conjoint, un quart au parent (art. 757-1). ¦ Bez potomaka, s jednim roditeljem: tri četvrtine bračnom drugu, četvrtina roditelju (čl. 757-1). ¦ Brez potomcev, z enim staršem: tri četrtine zakoncu, četrtina staršu (čl. 757-1).
+Sans descendant ni père ni mère : le conjoint recueille toute la succession (art. 757-2). Les frères et sœurs peuvent avoir un droit de retour sur les biens de famille (art. 757-3) : à voir avec le notaire. ¦ Bez potomaka, oca i majke: bračni drug dobiva cijelu ostavinu (čl. 757-2). Braća i sestre mogu imati pravo povrata obiteljske imovine (čl. 757-3): provjeriti s bilježnikom. ¦ Brez potomcev, očeta in matere: zakonec dobi vso zapuščino (čl. 757-2). Bratje in sestre imajo lahko pravico do vrnitve družinskega premoženja (čl. 757-3): preveriti z notarjem.
+Le père et la mère ont chacun un quart, les frères et sœurs (ou leurs descendants) la moitié (art. 738). ¦ Otac i majka dobivaju po četvrtinu, braća i sestre (ili njihovi potomci) polovinu (čl. 738). ¦ Oče in mati dobita vsak četrtino, bratje in sestre (ali njihovi potomci) polovico (čl. 738).
+Le parent survivant a un quart, les frères et sœurs (ou leurs descendants) trois quarts (art. 738). ¦ Preživjeli roditelj dobiva četvrtinu, braća i sestre (ili njihovi potomci) tri četvrtine (čl. 738). ¦ Preživeli starš dobi četrtino, bratje in sestre (ali njihovi potomci) tri četrtine (čl. 738).
+Père et mère décédés : les frères et sœurs ou leurs descendants prennent tout (art. 737). ¦ Otac i majka umrli: braća i sestre ili njihovi potomci dobivaju sve (čl. 737). ¦ Oče in mati umrla: bratje in sestre ali njihovi potomci dobijo vse (čl. 737).
+Frères et sœurs germains, consanguins ou utérins : parts égales, par souche (art. 744, 752-2, 753 ; loi du 3 décembre 2001). ¦ Rođena braća i sestre te polubraća i polusestre po ocu ili po majci: jednaki udjeli, po lozama (čl. 744, 752-2, 753; zakon od 3. prosinca 2001.). ¦ Polnorodni bratje in sestre ter polbratje in polsestre po očetu ali materi: enaki deleži, po vejah (čl. 744, 752-2, 753; zakon z dne 3. decembra 2001).
+Sans descendant ni frère ni sœur : le père et la mère ont chacun la moitié (art. 736). ¦ Bez potomaka i braće i sestara: otac i majka dobivaju po polovinu (čl. 736). ¦ Brez potomcev in bratov ter sester: oče in mati dobita vsak polovico (čl. 736).
+Un seul parent, sans frère ni sœur, mais des ascendants dans l’autre branche : moitié au parent, moitié à ces ascendants (art. 738-1). ¦ Samo jedan roditelj, bez braće i sestara, ali s precima u drugoj grani: polovina roditelju, polovina tim precima (čl. 738-1). ¦ Le en starš, brez bratov in sester, a s predniki v drugi veji: polovica staršu, polovica tem prednikom (čl. 738-1).
+Le parent survivant, seul de son ordre, recueille la succession. ¦ Preživjeli roditelj, jedini u svom redu, dobiva ostavinu. ¦ Preživeli starš, edini v svojem redu, dobi zapuščino.
+3e ordre : moitié pour chaque branche ; dans chacune, l’ascendant le plus proche prend tout (art. 747-748). ¦ 3. red: polovina svakoj grani; u svakoj najbliži predak dobiva sve (čl. 747-748). ¦ 3. dedni red: polovica vsaki veji; v vsaki najbližji prednik dobi vse (čl. 747-748).
+3e ordre : une seule branche a encore un ascendant ; il recueille toute la succession, même les cousins de l’autre branche sont écartés (art. 748). ¦ 3. red: samo jedna grana još ima pretka; on dobiva cijelu ostavinu, čak su i bratići druge grane isključeni (čl. 748). ¦ 3. dedni red: le ena veja ima še prednika; ta dobi vso zapuščino, celo bratranci druge veje so izključeni (čl. 748).
+4e ordre : moitié pour chaque branche ; dans chacune, le collatéral le plus proche en degré prend tout, sans représentation (art. 749-750). ¦ 4. red: polovina svakoj grani; u svakoj stupnjem najbliži pobočni srodnik dobiva sve, bez prava predstavljanja (čl. 749-750). ¦ 4. dedni red: polovica vsaki veji; v vsaki po kolenu najbližji stranski sorodnik dobi vse, brez vstopne pravice (čl. 749-750).
+4e ordre : personne dans une branche, l’autre branche recueille tout (art. 750). ¦ 4. red: nitko u jednoj grani, druga grana dobiva sve (čl. 750). ¦ 4. dedni red: v eni veji nikogar, druga veja dobi vse (čl. 750).
+Les collatéraux ne succèdent pas au-delà du 6e degré (art. 745). ¦ Pobočni srodnici ne nasljeđuju iza 6. stupnja (čl. 745). ¦ Stranski sorodniki ne dedujejo prek 6. kolena (čl. 745).
+Le défunt n’est pas dans la base. ¦ Ostavitelj nije u bazi. ¦ Zapustnika ni v bazi.
+si {name} n’était pas marié avec le défunt (PACS ou union libre) ¦ ako {name} nije bio u braku s ostaviteljem (PACS ili izvanbračna zajednica) ¦ če {name} ni bil poročen z zapustnikom (PACS ali zunajzakonska skupnost)
+si {name} est mort avant, représenté par ses descendants ¦ ako je {name} umro ranije, a predstavljaju ga potomci ¦ če je {name} umrl prej, zastopajo ga njegovi potomci
+si {name} est mort avant sans descendant ¦ ako je {name} umro ranije bez potomaka ¦ če je {name} umrl prej brez potomcev
+Enfants et descendants, avec représentation ¦ Djeca i potomci, s pravom predstavljanja ¦ Otroci in potomci, z vstopno pravico
+Père et mère, frères et sœurs et leurs descendants (« parents privilégiés ») ¦ Otac i majka, braća i sestre i njihovi potomci („povlašteni srodnici”) ¦ Oče in mati, bratje in sestre ter njihovi potomci (»privilegirani sorodniki«)
+Autres ascendants (grands-parents…), fente paternelle / maternelle ¦ Ostali preci (djedovi i bake…), očeva / majčina dioba ¦ Drugi predniki (stari starši…), očetova / materina delitev
+Oncles, tantes, cousins… jusqu’au 6e degré (art. 745) ¦ Stričevi, tete, bratići… do 6. stupnja (čl. 745) ¦ Strici, tete, bratranci… do 6. kolena (čl. 745)
+Vivant au décès ? Mort avant ? Des enfants ? Sa réponse change la part des autres. ¦ Živ u trenutku smrti? Umro ranije? Djeca? Odgovor mijenja udjele ostalih. ¦ Živ ob smrti? Umrl prej? Otroci? Odgovor spremeni deleže drugih.
+Mort avant le défunt, sans descendance connue : un enfant, même reconnu tard, changerait le partage. ¦ Umro prije ostavitelja, bez poznatih potomaka: dijete, čak i kasno priznato, promijenilo bi diobu. ¦ Umrl pred zapustnikom, brez znanih potomcev: otrok, četudi pozno priznan, bi spremenil delitev.
+Aucun enfant du défunt dans la base : à vérifier (mentions en marge de l’acte de naissance, livret de famille). ¦ U bazi nema djece ostavitelja: provjeriti (bilješke na rodnom listu, obiteljska knjižica). ¦ V bazi ni otrok zapustnika: preveriti (zaznamki na rojstnem listu, družinska knjižica).
+Les parents du défunt ne sont pas dans la base : sans eux, l’app ne trouve ni frères, ni sœurs, ni cousins. ¦ Roditelji ostavitelja nisu u bazi: bez njih aplikacija ne nalazi ni braću ni bratiće. ¦ Staršev zapustnika ni v bazi: brez njih aplikacija ne najde ne bratov ne bratrancev.
+Un seul parent du défunt est dans la base : l’autre branche reste à chercher. ¦ U bazi je samo jedan roditelj ostavitelja: drugu granu tek treba tražiti. ¦ V bazi je le en starš zapustnika: drugo vejo je treba še poiskati.
+Adoption : plénière ou simple ? Une adoption plénière coupe les liens avec la famille d’origine. ¦ Posvojenje: potpuno ili nepotpuno? Potpuno posvojenje prekida veze s izvornom obitelji. ¦ Posvojitev: popolna ali nepopolna? Popolna posvojitev pretrga vezi z izvorno družino.
+Couple sans mariage noté : seul un conjoint marié hérite sans testament (pas le partenaire de PACS ni le concubin). ¦ Par bez zabilježenog braka: bez oporuke nasljeđuje samo bračni drug (ne PACS partner ni izvanbračni partner). ¦ Par brez zabeležene poroke: brez oporoke deduje le poročeni zakonec (ne partner PACS ali zunajzakonski partner).
+Un seul parent noté : relie sa fiche à son autre parent (frère germain ou demi-frère). ¦ Zabilježen samo jedan roditelj: poveži zapis s drugim roditeljem (rođeni brat ili polubrat). ¦ Zabeležen le en starš: poveži zapis z drugim staršem (polnorodni ali polbrat).
+Personne dans la branche paternelle jusqu’au 6e degré : oncles, tantes et cousins du père à chercher. ¦ Nitko u očevoj grani do 6. stupnja: tražiti očeve stričeve, tete i bratiće. ¦ V očetovi veji do 6. kolena nikogar: poiskati očetove strice, tete in bratrance.
+Personne dans la branche maternelle jusqu’au 6e degré : oncles, tantes et cousins de la mère à chercher. ¦ Nitko u majčinoj grani do 6. stupnja: tražiti majčine ujake, tete i bratiće. ¦ V materini veji do 6. kolena nikogar: poiskati materine strice, tete in bratrance.
+Vivant, mais pas d’adresse dans le Répertoire des vivants. ¦ Živ, ali bez adrese u Imeniku živih. ¦ Živ, a brez naslova v Imeniku živih.
+Mort après le défunt : sa part passe à ses propres héritiers (sa succession à lui). ¦ Umro nakon ostavitelja: njegov udio prelazi na njegove vlastite nasljednike (njegova vlastita ostavina). ¦ Umrl po zapustniku: delež preide na njegove dediče (njegova lastna zapuščina).
+Présumé absent : sa part est réservée (art. 112 à 132). ¦ Pretpostavljeno odsutan: udio je pridržan (čl. 112 do 132). ¦ Domnevno odsoten: delež je pridržan (čl. 112 do 132).
+Date du décès inconnue : l’app ne peut pas dire qui était mort avant ni quel droit s’applique. ¦ Datum smrti nepoznat: aplikacija ne može reći tko je umro ranije ni koje se pravo primjenjuje. ¦ Datum smrti ni znan: aplikacija ne more povedati, kdo je umrl prej, niti katero pravo velja.
+Décès du {date} : le droit de l’époque n’est pas celui d’aujourd’hui. Avant le 1er juillet 2002 (loi du 3 décembre 2001), le conjoint survivant avait surtout de l’usufruit, les enfants nés hors mariage n’avaient pas tous les mêmes droits et les frères et sœurs de lits différents se partageaient par lignes. Avant le 1er août 1972, les enfants naturels avaient des droits réduits. L’app calcule ici selon le droit actuel : le notaire applique le droit de la date. ¦ Smrt {date}: tadašnje pravo nije današnje. Prije 1. srpnja 2002. (zakon od 3. prosinca 2001.) preživjeli bračni drug imao je uglavnom plodouživanje, djeca rođena izvan braka nisu sva imala ista prava, a braća i sestre iz različitih brakova dijelili su po linijama. Prije 1. kolovoza 1972. izvanbračna djeca imala su smanjena prava. Aplikacija ovdje računa po važećem pravu: bilježnik primjenjuje pravo s datuma. ¦ Smrt dne {date}: tedanje pravo ni današnje. Pred 1. julijem 2002 (zakon z dne 3. decembra 2001) je imel preživeli zakonec predvsem užitek, otroci, rojeni zunaj zakonske zveze, niso imeli vsi enakih pravic, bratje in sestre iz različnih zakonov pa so delili po linijah. Pred 1. avgustom 1972 so imeli nezakonski otroci zmanjšane pravice. Aplikacija tukaj računa po veljavnem pravu: notar uporabi pravo z dneva smrti.
+Décès avant le 1er janvier 2007 (loi du 23 juin 2006) : on ne pouvait pas représenter un héritier qui avait renoncé. ¦ Smrt prije 1. siječnja 2007. (zakon od 23. lipnja 2006.): nasljednika koji se odrekao nije se moglo predstavljati. ¦ Smrt pred 1. januarjem 2007 (zakon z dne 23. junija 2006): dediča, ki se je odpovedal, ni bilo mogoče zastopati.
+Décès en 2002 sans date précise : avant ou après le 1er juillet 2002, le droit change. Précise la date. ¦ Smrt 2002. bez točnog datuma: prije i poslije 1. srpnja 2002. pravo se mijenja. Navedi datum. ¦ Smrt leta 2002 brez natančnega datuma: pred 1. julijem 2002 in po njem se pravo razlikuje. Navedi datum.
+Divorce ¦ Razvod ¦ Razveza
+La naissance de {name} ¦ Rođenje {name} ¦ Rojstvo {name}
+Le décès de {name} ¦ Smrt {name} ¦ Smrt {name}
+Le mariage avec {name}, non dissous ¦ Brak s {name}, nerazveden ¦ Zakonska zveza z {name}, nerazvezana
+Le divorce d’avec {name} ¦ Razvod od {name} ¦ Razveza od {name}
+Pas de conjoint survivant : décès de {name} ¦ Nema preživjelog bračnog druga: smrt {name} ¦ Ni preživelega zakonca: smrt {name}
+{name} est mort avant ¦ {name} je umro ranije ¦ {name} je umrl prej
+Commun à tous ¦ Zajedničko svima ¦ Skupno vsem
+{name} a renoncé à la succession ¦ {name} se odrekao ostavine ¦ {name} se je odpovedal dediščini
+{name} est mort avant (représenté) ¦ {name} je umro ranije (predstavljen) ¦ {name} je umrl prej (zastopan)
+Son nom d’épouse ¦ Njezino prezime u braku ¦ Njen poročni priimek
+{name} (pour l’écarter) ¦ {name} (radi isključenja) ¦ {name} (za izključitev)
+Mort avant le défunt, sans enfant ¦ Umro prije ostavitelja, bez djece ¦ Umrl pred zapustnikom, brez otrok
+Chaque héritier a ses actes : il en manque pour {who}. ¦ Svaki nasljednik ima svoje isprave: nedostaju za {who}. ¦ Vsak dedič ima svoje listine: manjkajo za {who}.
+Chaque héritier a ses actes. ¦ Svaki nasljednik ima svoje isprave. ¦ Vsak dedič ima svoje listine.
+Chaque prédécédé a son acte de décès : {n} manquent. ¦ Svaki ranije umrli ima smrtni list: nedostaje {n}. ¦ Vsak prej umrli ima mrliški list: manjka {n}.
+Chaque prédécédé a son acte de décès. ¦ Svaki ranije umrli ima smrtni list. ¦ Vsak prej umrli ima mrliški list.
+Les branches inconnues ont une explication. ¦ Nepoznate grane imaju objašnjenje. ¦ Neznane veje imajo pojasnilo.
+{n} héritiers ou branches restent « inconnus » sans explication. ¦ Nasljednika ili grana „nepoznatih” bez objašnjenja: {n}. ¦ »Neznanih« dedičev ali vej brez pojasnila: {n}.
+Aucune branche « inconnue ». ¦ Nema „nepoznate” grane. ¦ Ni »neznane« veje.
+L’hypothèse retenue est écrite. ¦ Usvojena pretpostavka je zapisana. ¦ Sprejeta domneva je zapisana.
+Plusieurs hypothèses : écris celle qui est retenue. ¦ Više pretpostavki: napiši koja je usvojena. ¦ Več domnev: zapiši, katera velja.
+Une seule hypothèse. ¦ Jedna pretpostavka. ¦ Ena sama domneva.
+Les parts totalisent 1. ¦ Udjeli zajedno daju 1. ¦ Deleži skupaj dajo 1.
+Les parts ne totalisent pas 1 : à revoir. ¦ Udjeli ne daju 1: treba provjeriti. ¦ Deleži ne dajo 1: preveriti.
+La date du décès demande l’avis du notaire (droit de l’époque ou date inconnue). ¦ Datum smrti traži mišljenje bilježnika (tadašnje pravo ili nepoznat datum). ¦ Datum smrti zahteva notarjevo mnenje (tedanje pravo ali neznan datum).
+{name} ajouté (statut inconnu) ¦ {name} dodan (stanje nepoznato) ¦ {name} dodan (stanje neznano)
+{name} ajouté ({share}) ¦ {name} dodan ({share}) ¦ {name} dodan ({share})
+{name} : {from} → {to} ¦ {name}: {from} → {to} ¦ {name}: {from} → {to}
+{name} retiré ¦ {name} uklonjen ¦ {name} odstranjen
+Ordre retenu : {from} → {to} ¦ Usvojeni red: {from} → {to} ¦ Sprejeti red: {from} → {to}
+descendante à la {n}e génération ¦ potomkinja u {n}. koljenu ¦ potomka v {n}. rodu
+descendant à la {n}e génération ¦ potomak u {n}. koljenu ¦ potomec v {n}. rodu
+ascendante à la {n}e génération ¦ pretkinja u {n}. koljenu ¦ prednica v {n}. rodu
+ascendant à la {n}e génération ¦ predak u {n}. koljenu ¦ prednik v {n}. rodu
+parente au {n}e degré ¦ srodnica u {n}. stupnju ¦ sorodnica v {n}. kolenu
+parent au {n}e degré ¦ srodnik u {n}. stupnju ¦ sorodnik v {n}. kolenu
+petit-fils ¦ unuk ¦ vnuk
+petite-fille ¦ unuka ¦ vnukinja
+arrière-petit-fils ¦ praunuk ¦ pravnuk
+arrière-petite-fille ¦ praunuka ¦ pravnukinja
+arrière-arrière-petit-fils ¦ prapraunuk ¦ prapravnuk
+arrière-arrière-petite-fille ¦ prapraunuka ¦ prapravnukinja
+nièce ¦ nećakinja ¦ nečakinja
+petit-neveu ¦ unuk brata ili sestre ¦ vnuk brata ali sestre
+petite-nièce ¦ unuka brata ili sestre ¦ vnukinja brata ali sestre
+arrière-petit-neveu ¦ praunuk brata ili sestre ¦ pravnuk brata ali sestre
+arrière-petite-nièce ¦ praunuka brata ili sestre ¦ pravnukinja brata ali sestre
+arrière-arrière-petit-neveu ¦ prapraunuk brata ili sestre ¦ prapravnuk brata ali sestre
+arrière-arrière-petite-nièce ¦ prapraunuka brata ili sestre ¦ prapravnukinja brata ali sestre
+cousin germain ¦ bratić ¦ bratranec
+cousine germaine ¦ sestrična ¦ sestrična
+fils de cousin germain ¦ sin bratića ¦ sin bratranca
+fille de cousin germain ¦ kći bratića ¦ hči bratranca
+petit-fils de cousin germain ¦ unuk bratića ¦ vnuk bratranca
+petite-fille de cousin germain ¦ unuka bratića ¦ vnukinja bratranca
+grand-oncle ¦ prastric ¦ prastric
+grand-tante ¦ prateta ¦ prateta
+cousin germain d’un parent ¦ bratić roditelja ¦ bratranec starša
+cousine germaine d’un parent ¦ sestrična roditelja ¦ sestrična starša
+cousin issu de germains ¦ bratić u drugom koljenu ¦ bratranec v drugem kolenu
+cousine issue de germains ¦ sestrična u drugom koljenu ¦ sestrična v drugem kolenu
+arrière-grand-oncle ¦ praprastric ¦ praprastric
+arrière-grand-tante ¦ prapratetka ¦ praprateta
+cousin germain d’un grand-parent ¦ bratić djeda ili bake ¦ bratranec starega starša
+cousine germaine d’un grand-parent ¦ sestrična djeda ili bake ¦ sestrična starega starša
+arrière-arrière-grand-oncle ¦ prapraprastric ¦ prapraprastric
+arrière-arrière-grand-tante ¦ praprapratetka ¦ prapraprateta
+frère germain ¦ rođeni brat ¦ polnorodni brat
+sœur germaine ¦ rođena sestra ¦ polnorodna sestra
+demi-frère (même père) ¦ polubrat (isti otac) ¦ polbrat (isti oče)
+demi-sœur (même père) ¦ polusestra (isti otac) ¦ polsestra (isti oče)
+demi-frère (même mère) ¦ polubrat (ista majka) ¦ polbrat (ista mati)
+demi-sœur (même mère) ¦ polusestra (ista majka) ¦ polsestra (ista mati)
+Père, mère, enfant ¦ Otac, majka, dijete ¦ Oče, mati, otrok
+Frère, sœur, grand-parent, petit-enfant ¦ Brat, sestra, djed ili baka, unuk ¦ Brat, sestra, stari starš, vnuk
+Neveu, nièce, oncle, tante ¦ Nećak, nećakinja, stric, teta ¦ Nečak, nečakinja, stric, teta
+Cousin germain, petit-neveu, grand-oncle ¦ Bratić, unuk brata, prastric ¦ Bratranec, vnuk brata, prastric
+Enfant de cousin germain ¦ Dijete bratića ¦ Otrok bratranca
+Cousin issu de germains (limite) ¦ Bratić u drugom koljenu (granica) ¦ Bratranec v drugem kolenu (meja)
+Présomption d’absence : le juge des tutelles la constate quand une personne a cessé de paraître sans donner de nouvelles. Elle est réputée vivante ; sa part est réservée et gérée. ¦ Pretpostavka odsutnosti: sud je utvrđuje kad se osoba prestala javljati bez vijesti. Smatra se živom; njezin je udio pridržan i njime se upravlja. ¦ Domneva odsotnosti: sodišče jo ugotovi, ko se oseba preneha pojavljati brez sporočila. Šteje se za živo; njen delež je pridržan in upravljan.
+Déclaration d’absence : 10 ans après le jugement de présomption (ou 20 ans sans nouvelles), le tribunal judiciaire la déclare ; le jugement a les effets d’un décès. ¦ Proglašenje odsutnosti: 10 godina nakon presude o pretpostavci (ili 20 godina bez vijesti) sud je proglašava; presuda ima učinke smrti. ¦ Razglasitev odsotnosti: 10 let po sodbi o domnevi (ali 20 let brez vesti) jo sodišče razglasi; sodba ima učinke smrti.
+Jugement déclaratif de décès : pour une disparition dans des circonstances qui mettent la vie en danger (naufrage, catastrophe), sans attendre. ¦ Presuda o proglašenju umrlim: pri nestanku u okolnostima opasnim po život (brodolom, katastrofa), bez čekanja. ¦ Sodba o razglasitvi za mrtvega: pri izginotju v okoliščinah, nevarnih za življenje (brodolom, nesreča), brez čakanja.
+Service central d’état civil (Nantes) : les actes des Français nés, mariés ou morts à l’étranger. ¦ Središnja služba matičnih knjiga (Nantes): isprave Francuza rođenih, vjenčanih ili umrlih u inozemstvu. ¦ Osrednja matična služba (Nantes): listine Francozov, rojenih, poročenih ali umrlih v tujini.
+Le consulat de France du pays : registres d’immatriculation, actes transcrits récents. ¦ Francuski konzulat u zemlji: konzularni upisnici, nedavno prepisane isprave. ¦ Francoski konzulat v državi: konzularni registri, nedavno prepisane listine.
+L’état civil du pays (mairie, registro civil, Standesamt…) : lettre dans la langue du pays. ¦ Matična služba zemlje (općina, registro civil, Standesamt…): pismo na jeziku zemlje. ¦ Matična služba države (občina, registro civil, Standesamt…): pismo v jeziku države.
+Archives nationales d’outre-mer (Aix-en-Provence) : colonies et Algérie avant 1962. ¦ Nacionalni prekomorski arhiv (Aix-en-Provence): kolonije i Alžir prije 1962. ¦ Nacionalni čezmorski arhiv (Aix-en-Provence): kolonije in Alžirija pred letom 1962.
+Ouvert ¦ Otvoren ¦ Odprt
+En recherche ¦ U potrazi ¦ V iskanju
+Héritiers trouvés ¦ Nasljednici pronađeni ¦ Dediči najdeni
+Clos ¦ Zatvoren ¦ Zaprt
+📁 Dossier ¦ 📁 Spis ¦ 📁 Spis
+👥 Héritiers ¦ 👥 Nasljednici ¦ 👥 Dediči
+🌳 Arbre ¦ 🌳 Stablo ¦ 🌳 Drevo
+✉️ Héritiers contactés ¦ ✉️ Kontaktirani nasljednici ¦ ✉️ Kontaktirani dediči
+🖨 Pour le notaire ¦ 🖨 Za bilježnika ¦ 🖨 Za notarja
+🕓 Journal ¦ 🕓 Dnevnik ¦ 🕓 Dnevnik
+💶 Temps et frais ¦ 💶 Vrijeme i troškovi ¦ 💶 Čas in stroški
+Décédé après ¦ Umro kasnije ¦ Umrl pozneje
+Décédée après ¦ Umrla kasnije ¦ Umrla pozneje
+Renonce ¦ Odriče se ¦ Se odpoveduje
+Indigne ¦ Nedostojan ¦ Nevreden
+Absent ¦ Odsutan ¦ Odsoten
+Absente ¦ Odsutna ¦ Odsotna
+Pas encore conçu ¦ Još nije začet ¦ Še ni spočet
+Pas encore conçue ¦ Još nije začeta ¦ Še ni spočeta
+Comme sur la fiche ¦ Kao u zapisu ¦ Kot v zapisu
+Vivant au décès ¦ Živ u trenutku smrti ¦ Živ ob smrti
+Mort avant le défunt ¦ Umro prije ostavitelja ¦ Umrl pred zapustnikom
+Mort après le défunt ¦ Umro nakon ostavitelja ¦ Umrl po zapustniku
+Renonce à la succession ¦ Odriče se ostavine ¦ Se odpoveduje dediščini
+Déclaré absent ¦ Proglašen odsutnim ¦ Razglašen za odsotnega
+Refuse ¦ Odbija ¦ Zavrača
+Rappellera ¦ Nazvat će ¦ Bo poklical nazaj
+✓ En main ¦ ✓ U ruci ¦ ✓ V roki
+📮 Demandé ¦ 📮 Zatraženo ¦ 📮 Zahtevano
+✗ Manquant ¦ ✗ Nedostaje ¦ ✗ Manjka
+Sans objet ¦ Ne primjenjuje se ¦ Ni relevantno
+⏱ Temps ¦ ⏱ Vrijeme ¦ ⏱ Čas
+🧾 Frais ¦ 🧾 Troškovi ¦ 🧾 Stroški
+📝 Contrat ¦ 📝 Ugovor ¦ 📝 Pogodba
+02 — HÉRITIERS ¦ 02 — NASLJEDNICI ¦ 02 — DEDIČI
+Généalogiste successoral ¦ Genealog za nasljedstva ¦ Dedni genealog
+Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ Pronaći nasljednike preminule osobe za javnog bilježnika. ¦ Najti dediče umrle osebe za notarja.
++ ⚖️ Successions. Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Ostavine. Prvi zaslon: „Otvori spis”. ¦ + ⚖️ Zapuščine. Prvi zaslon: »Odpri spis«.
+⚖️ Successions, 📇 Vivants, 📮 Courriers. ¦ ⚖️ Ostavine, 📇 Živi, 📮 Pisma. ¦ ⚖️ Zapuščine, 📇 Živi, 📮 Pisma.
+⚖️ Successions ¦ ⚖️ Ostavine ¦ ⚖️ Zapuščine
+Vivants ¦ Živi ¦ Živi
+Courriers ¦ Pisma ¦ Pisma
+Échéance le {date} ¦ Rok {date} ¦ Rok {date}
+Pour quel héritier ? ¦ Za kojeg nasljednika? ¦ Za katerega dediča?
+Lettre à un héritier ¦ Pismo nasljedniku ¦ Pismo dediču
+ne révèle pas le défunt avant signature ; honoraires et date limite à écrire ¦ ne otkriva ostavitelja prije potpisa; naknadu i rok treba upisati ¦ ne razkrije zapustnika pred podpisom; plačilo in rok je treba vpisati
+premier contact, sans nommer le défunt ¦ prvi kontakt, bez imenovanja ostavitelja ¦ prvi stik, brez navedbe zapustnika
+Il y a déjà un dossier pour cette personne. ¦ Za ovu osobu već postoji spis. ¦ Za to osebo že obstaja spis.
+Date d’ouverture incorrecte. ¦ Neispravan datum otvaranja. ¦ Napačen datum odprtja.
+Notaire introuvable. ¦ Bilježnik nije pronađen. ¦ Notarja ni bilo mogoče najti.
+Passe d’abord par la liste de contrôle avant « Remis au notaire ». ¦ Najprije prođi kontrolni popis prije „Predano bilježniku”. ¦ Najprej pojdi skozi kontrolni seznam pred »Predano notarju«.
+Ce dossier est archivé. ¦ Ovaj je spis arhiviran. ¦ Ta spis je arhiviran.
+Valeur inconnue. ¦ Nepoznata vrijednost. ¦ Neznana vrednost.
+Pièce inconnue. ¦ Nepoznata isprava. ¦ Neznana listina.
+Choisis la date de l’échéance. ¦ Odaberi datum roka. ¦ Izberi datum roka.
+Écris ce qu’il faut faire. ¦ Napiši što treba učiniti. ¦ Zapiši, kaj je treba narediti.
+Échéance introuvable. ¦ Rok nije pronađen. ¦ Roka ni bilo mogoče najti.
+Date incorrecte. ¦ Neispravan datum. ¦ Napačen datum.
+Le pourcentage va de 0 à 100. ¦ Postotak je od 0 do 100. ¦ Odstotek je od 0 do 100.
+Combien de temps ? ¦ Koliko dugo? ¦ Kako dolgo?
+Choisis l’héritier. ¦ Odaberi nasljednika. ¦ Izberi dediča.
+Date de signature incorrecte. ¦ Neispravan datum potpisa. ¦ Napačen datum podpisa.
+Seul un dossier clos peut être archivé. ¦ Arhivirati se može samo zatvoreni spis. ¦ Arhivirati je mogoče le zaprt spis.
+Mode consultation : les dossiers de succession ne se montrent pas. ¦ Način pregledavanja: ostavinski spisi se ne prikazuju. ¦ Način ogledovanja: zapuščinski spisi se ne prikazujejo.
+Rien à noter. ¦ Ništa za zabilježiti. ¦ Ničesar za zabeležiti.
+Calcul manquant. ¦ Nedostaje izračun. ¦ Manjka izračun.
+Dévolution ¦ Nasljedni red ¦ Dedni red
+=héritier ¦ nasljednik|nasljednika|nasljednika ¦ dedič|dediča|dediči|dedičev
+=courrier ¦ pismo|pisma|pisama ¦ pismo|pismi|pisma|pisem
+=dépouillement ¦ pregled|pregleda|pregleda ¦ pregled|pregleda|pregledi|pregledov
+=dossier en cours ¦ spis u tijeku|spisa u tijeku|spisa u tijeku ¦ spis v teku|spisa v teku|spisi v teku|spisov v teku
+=dossier de succession ¦ ostavinski spis|ostavinska spisa|ostavinskih spisa ¦ zapuščinski spis|zapuščinska spisa|zapuščinski spisi|zapuščinskih spisov

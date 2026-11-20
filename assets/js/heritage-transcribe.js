@@ -174,7 +174,8 @@
                     <div class="h-tx-found" data-tx-found></div>
                 </section>
             </div></div>`;
-        document.body.appendChild(dlg); ext.fullInit?.(dlg, 'transcribe', true); dlg.showModal(); // plein écran par défaut ; ⛶ pour passer en fenêtre (retenu)
+        document.body.appendChild(dlg); ext.fullInit?.(dlg, 'transcribe', true); dlg.showModal();
+        dlg.txApi = {get: () => t, touch: () => touch()}; // 🌐 « Traduire » (plus-famille-latin.js) : garder la traduction dans la transcription (t.data.translation) // plein écran par défaut ; ⛶ pour passer en fenêtre (retenu)
         const $ = s => dlg.querySelector(s), area = $('[data-tx-body]'), mirror = $('[data-tx-mirror]'), svg = $('[data-tx-svg]'), world = $('[data-tx-world]'), img = $('[data-tx-img]'), stage = $('[data-tx-stage]');
         const UI = window.LCNDA_UI || {}, STATES = {'modifié': 'dirty', '✓ Enregistré': 'saved', 'Enregistrement…': 'saving'};
         const status = s => { const el = $('[data-tx-status]'); el.title = s || ''; if (STATES[s] && UI.savedStatus) UI.savedStatus(el, STATES[s]); else el.textContent = s || ''; };

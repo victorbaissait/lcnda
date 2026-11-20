@@ -1,0 +1,496 @@
+fr ¦ tr
+# Zone « successoral » : ⚖️ généalogiste successoral, dossiers de succession, dévolution (heritage-successoral*.js, lib/successoral.php)
+Les dossiers de succession ne se montrent pas en mode consultation ni en mode simple. ¦ Miras dosyaları görüntüleme modunda ve basit modda gösterilmez.
+Successions ¦ Miraslar
+Listes · Recherche et organisation ¦ Listeler · Araştırma ve düzen
+Dossiers de succession ¦ Miras dosyaları
+Retrouver les héritiers d’une personne décédée, pour un notaire : un dossier par défunt. À ne pas confondre avec « 🏠 Héritages et successions » (les actes anciens des ancêtres). ¦ Ölmüş bir kişinin mirasçılarını bir noter için bulmak: her ölen için bir dosya. “🏠 Miraslar ve terekeler” ile karıştırılmamalı (ataların eski belgeleri).
+＋ Ouvrir un dossier ¦ ＋ Dosya aç
+Lecture des dossiers… ¦ Dosyalar okunuyor…
+Aucun dossier de succession pour l’instant ¦ Henüz miras dosyası yok
+Choisis la personne décédée : l’app part des fiches de la base pour trouver ses héritiers, selon le Code civil d’aujourd’hui. ¦ Ölen kişiyi seç: uygulama veritabanındaki kayıtlardan yola çıkarak bugünkü Fransız Medeni Kanunu’na göre mirasçılarını bulur.
+Chercher… (ex. MAZAUD, 2026-014, ROUSSILHE) ¦ Ara… (ör. MAZAUD, 2026-014, ROUSSILHE)
+Prochaine échéance ¦ Sonraki süre
+A → Z ¦ A → Z
+Dossier n° {n} ¦ Dosya no. {n}
+Prochaine échéance : {d} — {l} ¦ Sonraki süre: {d} — {l}
+Échéance passée ¦ Süre geçti
+✎ Modifier ¦ ✎ Düzenle
+Aucun dossier ne correspond. ¦ Eşleşen dosya yok.
+Pas en mode consultation ni en mode simple. ¦ Görüntüleme modunda veya basit modda değil.
+⚖️ DOSSIER DE SUCCESSION ¦ ⚖️ MİRAS DOSYASI
+Ouvrir un dossier ¦ Dosya aç
+Ouvrir le dossier ¦ Dosyayı aç
+N° de dossier ¦ Dosya no.
+fait tout seul : 2026-014 ¦ otomatik: 2026-014
+reprise de la fiche ¦ kayıttan alındı
+Dernier domicile ¦ Son ikametgâh
+Notaire mandant (fiche ou nom) ¦ Görevlendiren noter (kayıt veya ad)
+Réf. du notaire ¦ Noterin referansı
+Ouvert le ¦ Açılış
+Testament ¦ Vasiyetname
+Aucun connu (le notaire interroge le fichier des dernières volontés) ¦ Bilinen yok (noter vasiyetname sicilini sorgular)
+Situation (notes) ¦ Durum (notlar)
+🔒 Le dossier reste dans l’app : les héritiers vivants, leurs adresses et leurs parts ne sont dans aucun export. Aucun montant n’est noté. ¦ 🔒 Dosya uygulamada kalır: yaşayan mirasçılar, adresleri ve payları hiçbir dışa aktarımda yer almaz. Hiçbir tutar kaydedilmez.
+Choisis la personne décédée. ¦ Ölen kişiyi seç.
+Dossier enregistré ¦ Dosya kaydedildi
+Dossier supprimé ¦ Dosya silindi
+Lecture du dossier… ¦ Dosya okunuyor…
+← Tous les dossiers ¦ ← Tüm dosyalar
+Dossier n° {n} · {t} ¦ Dosya no. {n} · {t}
+Listes · Dossiers de succession ¦ Listeler · Miras dosyaları
+↗ Fiche du défunt ¦ ↗ Ölenin kaydı
+🗄 Archiver le dossier clos ¦ 🗄 Kapalı dosyayı arşivle
+Dossier archivé : les adresses des vivants ont été retirées, le journal reste. ¦ Dosya arşivlendi: yaşayanların adresleri kaldırıldı, günlük kalıyor.
+État du dossier ¦ Dosyanın durumu
+Le défunt n’est plus dans la base. ¦ Ölen artık veritabanında değil.
+Pas de conjoint dans la base ¦ Veritabanında eş yok
+A des descendants ¦ Altsoyu var
+Sans descendant dans la base ¦ Veritabanında altsoy yok
+Le défunt ¦ Ölen
+fiche n° {n} ¦ kayıt no. {n}
+Le mandat ¦ Görev
+Droit actuel (décès après le 1er janvier 2007) ¦ Yürürlükteki hukuk (1 Ocak 2007’den sonraki ölüm)
+Échéances ¦ Süreler
+＋ Échéance ¦ ＋ Süre
+Dans {n} j ¦ {n} gün sonra
+Aucune échéance. ¦ Süre yok.
+Aussi dans 🗓 Ma semaine de recherche. ¦ Ayrıca 🗓 Araştırma haftam içinde.
+📑 Pièces ¦ 📑 Belgeler
+🖨 Tableau pour le notaire ¦ 🖨 Noter için tablo
+de son chef ¦ kendi hakkıyla
+représenté ¦ halef olunan
+sans descendance connue ¦ bilinen altsoyu yok
+degré plus éloigné ¦ daha uzak derece
+pas de représentation ¦ halefiyet yok
+pas encore conçu ¦ henüz ana rahmine düşmemiş
+écarté ¦ dışlandı
+par représentation ¦ halefiyet yoluyla
+de son chef, s’il vit ¦ kendi hakkıyla, sağsa
+Retenu ¦ Çağrıldı
+Écarté par le conjoint ¦ Eş tarafından dışlandı
+Écarté ¦ Dışlandı
+{name} : {share} (art. {art}). ¦ {name}: {share} (md. {art}).
+Ou, à son choix, l’usufruit de la totalité (art. 757) : les descendants ont alors la nue-propriété, dans les mêmes proportions. ¦ Ya da seçimine göre tamamı üzerinde intifa hakkı (md. 757): altsoy bu durumda aynı oranlarda çıplak mülkiyete sahip olur.
+Aucun conjoint dans la base. ¦ Veritabanında eş yok.
+S’il y avait un conjoint, l’app afficherait ici ses droits (art. 757 à 757-2) avant les ordres. ¦ Bir eş olsaydı uygulama onun haklarını burada (md. 757–757-2) zümrelerden önce gösterirdi.
+{n}e ¦ {n}.
+adresse ? ¦ adres?
+Statut retenu dans ce dossier ¦ Bu dosyada esas alınan durum
+Autre hypothèse ¦ Diğer varsayım
+total {t} ¦ toplam {t}
+personne : il reste des branches à chercher. ¦ kimse yok: aranacak kollar kaldı.
+Part en jeu : {s} ¦ Söz konusu pay: {s}
+🔍 Chercher ¦ 🔍 Ara
+🌍 Héritier à l’étranger ¦ 🌍 Yurt dışındaki mirasçı
+❔ Absent ou disparu ¦ ❔ Gaip veya kayıp
+📇 Compléter ¦ 📇 Tamamla
+Type d’adoption ¦ Evlat edinme türü
+Type d’adoption ? ¦ Evlat edinme türü?
+Plénière ¦ Tam
+Marié ? ¦ Evli mi?
+Pas marié (PACS, union libre) ¦ Evli değil (PACS, birlikte yaşama)
+Divorcé ¦ Boşanmış
+Aucune branche à chercher d’après les fiches. ¦ Kayıtlara göre aranacak kol yok.
+{n}e degré ¦ {n}. derece
+Calcul indicatif, à faire vérifier par le notaire. Il suit le Code civil en vigueur (art. 731 et suivants), sans testament, sans donation, sans renonciation connue. Il ne tient pas compte du droit de retour légal (art. 738-2, 757-3), des biens à l’étranger ni d’un régime matrimonial. ¦ Yol gösterici hesap, noterce doğrulanmalıdır. Yürürlükteki Fransız Medeni Kanunu’nu izler (md. 731 vd.), vasiyetname, bağış ve bilinen reddi miras olmaksızın. Yasal geri dönüş hakkını (md. 738-2, 757-3), yurt dışındaki malları ve mal rejimini dikkate almaz.
+Le conjoint survivant ¦ Sağ kalan eş
+Les ordres d’héritiers (art. 734) : le premier qui a quelqu’un prend tout ¦ Mirasçı zümreleri (md. 734): içinde biri olan ilk zümre her şeyi alır
+Les héritiers trouvés ¦ Bulunan mirasçılar
+🗂 Tables des successions (AD)… ¦ 🗂 Tereke kütükleri (arşivler)…
+Lien avec le défunt ¦ Ölenle akrabalık
+Vient ¦ Geliş
+Part ¦ Pay
+Statut retenu ¦ Esas alınan durum
+↔ Faire glisser le tableau pour voir les parts. ¦ ↔ Payları görmek için tabloyu kaydır.
+Aucun héritier trouvé jusqu’au 6e degré : sans testament, la succession reviendrait à l’État (art. 539 et 768). Il reste sans doute des branches à chercher. ¦ 6. dereceye kadar mirasçı bulunamadı: vasiyetname olmadan tereke devlete kalırdı (md. 539 ve 768). Muhtemelen aranacak kollar var.
+Les calculs restent tant que la branche n’est pas tranchée. ¦ Kol netleşene kadar hesaplar kalır.
+Les branches à chercher ¦ Aranacak kollar
+L’hypothèse retenue ¦ Esas alınan varsayım
+Ex. : André MAZAUD décédé à Lyon en 1990 sans enfant (acte reçu le 5 déc.). ¦ Ör.: André MAZAUD 1990’da Lyon’da çocuksuz öldü (belge 5 Ara.’da alındı).
+Demandée avant « Remis au notaire » si un héritier reste inconnu. ¦ Bir mirasçı bilinmez kalırsa “Notere teslim edildi” öncesinde istenir.
+Les degrés civils (art. 741-743) : on compte les générations jusqu’à l’ancêtre commun, puis on redescend ¦ Akrabalık dereceleri (md. 741-743): ortak ataya kadar kuşaklar sayılır, sonra aşağı inilir
+LE DÉFUNT ¦ ÖLEN
+à retrouver ¦ bulunacak
+sans descend. ¦ altsoyu yok
+Héritier vivant, sa part ¦ Sağ mirasçı, payı
+Prédécédé, sa souche ¦ Önce ölmüş, kökü
+Branche à chercher ¦ Aranacak kol
+Arbre de dévolution ¦ Mirasçılık ağacı
+Le défunt au centre, chaque héritier avec sa part ¦ Ortada ölen, her mirasçı kendi payıyla
+⤓ SVG ¦ ⤓ SVG
+↔ Faire glisser le dessin. ¦ ↔ Çizimi kaydır.
+Clic sur une case : la fiche ; clic droit : « 🛡 Solidité de ce lien ». Le dessin suit les fiches. ¦ Bir kutuya tıkla: kayıt; sağ tıkla: “🛡 Bu bağın sağlamlığı”. Çizim kayıtları izler.
+le {d} ¦ {d}
+État de la pièce ¦ Belgenin durumu
+D’après la fiche ¦ Kayda göre
+{n} en main ¦ {n} elde
+{n} demandés ¦ {n} istendi
+Par héritier ¦ Mirasçıya göre
+Par acte ¦ Belgeye göre
+Ce qu’il faut prouver ¦ Kanıtlanması gereken
+↔ Faire glisser le tableau. ¦ ↔ Tabloyu kaydır.
+Rangée dans le Registre de courriers, une demande d’acte met la pièce à « Demandé » ; l’acte attaché à la fiche la met à « En main ». ¦ Yazışma siciline kaydedilen belge talebi belgeyi “İstendi” yapar; kayda eklenen belge “Elde” yapar.
+Je suis mandaté(e) par {notary}, notaire, pour établir la dévolution de la succession de {name} (dossier {n}, réf. {ref}). ¦ Noter {notary} tarafından {name} terekesinin mirasçılık durumunu belirlemekle görevlendirildim (dosya {n}, ref. {ref}).
+À retrouver ¦ Bulunacak
+Adresse ? ¦ Adres?
+Signé le ¦ İmza tarihi
+À signer ¦ İmzalanacak
+✉️ Écrire ¦ ✉️ Yaz
+Contrat de révélation, réponses, signatures ¦ İfşa sözleşmesi, yanıtlar, imzalar
+📝 Contrat de révélation ¦ 📝 İfşa sözleşmesi
+✉️ Lettre de premier contact ¦ ✉️ İlk temas mektubu
+Héritier ¦ Mirasçı
+Courrier ¦ Mektup
+Contrat ¦ Sözleşme
+📝 Le contrat ne nomme pas le défunt avant signature. Écris toi-même le pourcentage d’honoraires et la date limite. Rien n’est envoyé par l’app. ¦ 📝 Sözleşme imzadan önce ölenin adını vermez. Ücret yüzdesini ve son tarihi kendin yaz. Uygulama hiçbir şey göndermez.
+Chaque courrier va dans le Registre de courriers, avec sa relance. ¦ Her mektup hatırlatmasıyla Yazışma siciline gider.
+↗ Registre de courriers ¦ ↗ Yazışma sicili
+Madame, Monsieur, ¦ Sayın Hanımefendi, Sayın Beyefendi,
+Généalogiste successoral, je suis chargé(e) par une étude notariale de retrouver les héritiers d’une personne décédée. Mes recherches me laissent penser que vous pourriez faire partie de sa famille. ¦ Miras soy araştırmacısı olarak bir noterlik bürosu tarafından ölmüş bir kişinin mirasçılarını bulmakla görevlendirildim. Araştırmalarım, onun ailesinden olabileceğinizi düşündürüyor.
+Pour le vérifier, pourriez-vous me confirmer votre date et votre lieu de naissance, ainsi que les noms de vos parents ? Vous pouvez me répondre par courrier, par téléphone ou par courriel. ¦ Doğrulamak için doğum tarihinizi ve yerinizi, ayrıca anne ve babanızın adlarını bildirebilir misiniz? Posta, telefon veya e-posta ile yanıt verebilirsiniz.
+Cette démarche ne vous engage à rien. ¦ Bu adım sizi hiçbir şekilde bağlamaz.
+Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées. ¦ Saygılarımla,
+CONTRAT DE RÉVÉLATION DE SUCCESSION ¦ TEREKE İFŞA SÖZLEŞMESİ
+Entre {heir}, ci-après « l’héritier », et {sender}, généalogiste successoral. ¦ {heir} (bundan sonra “mirasçı”) ile miras soy araştırmacısı {sender} arasında.
+Le généalogiste a découvert une succession en cours dans laquelle l’héritier pourrait avoir des droits. Il s’engage à lui en révéler l’origine (le nom de la personne décédée, l’étude notariale chargée du règlement) dès la signature du présent contrat, et à réunir les actes qui prouvent sa qualité d’héritier. ¦ Soy araştırmacısı, mirasçının hakları olabileceği süren bir tereke bulmuştur. Bu sözleşmenin imzalanmasıyla terekenin kaynağını (ölenin adı, işi yürüten noterlik bürosu) açıklamayı ve mirasçılık sıfatını kanıtlayan belgeleri toplamayı üstlenir.
+En contrepartie, l’héritier s’engage à verser au généalogiste des honoraires de ____ % (hors taxes) de l’actif net qui lui reviendra, payables seulement s’il reçoit effectivement une part de la succession. Les frais de recherche sont compris. ¦ Karşılığında mirasçı, kendisine düşecek net varlığın ____ %’si (vergiler hariç) tutarında bir ücreti, yalnızca terekeden gerçekten pay alırsa, soy araştırmacısına ödemeyi üstlenir. Araştırma giderleri dahildir.
+Cette proposition est valable jusqu’au ____________. ¦ Bu teklif ____________ tarihine kadar geçerlidir.
+Fait en deux exemplaires, à ____________, le ____________. ¦ İki nüsha olarak, ____________, ____________ tarihinde düzenlenmiştir.
+L’héritier (« Lu et approuvé », signature) — Le généalogiste ¦ Mirasçı (“Okundu ve onaylandı”, imza) — Soy araştırmacısı
+Je me permets de revenir vers vous au sujet de mon courrier du {sent}, resté sans réponse. Une succession en cours pourrait vous concerner : pourriez-vous me contacter ? ¦ Yanıtsız kalan {sent} tarihli mektubumla ilgili olarak size tekrar yazıyorum. Süren bir tereke sizi ilgilendirebilir: benimle iletişime geçebilir misiniz?
+✉️ HÉRITIERS CONTACTÉS ¦ ✉️ İLETİŞİME GEÇİLEN MİRASÇILAR
+Relance ¦ Hatırlatma
+📋 Ranger dans le Registre de courriers ¦ 📋 Yazışma siciline kaydet
+pas d’adresse dans le Répertoire des vivants ¦ Yaşayanlar rehberinde adres yok
+Premier contact ¦ İlk temas
+Contrat de révélation ¦ İfşa sözleşmesi
+Relance dans (jours) ¦ Hatırlatma (gün sonra)
+Le nom du défunt n’est pas écrit : il est révélé après la signature. ¦ Ölenin adı yazılmaz: imzadan sonra açıklanır.
+La lettre (tu peux la retoucher ; le nom de chaque héritier est mis tout seul) ¦ Mektup (düzenleyebilirsin; her mirasçının adı kendiliğinden eklenir)
+📝 Traitement de texte ¦ 📝 Kelime işlemci
+Coche au moins un héritier. ¦ En az bir mirasçı işaretle.
+Courriers aux héritiers ¦ Mirasçılara mektuplar
+Recherche d’héritiers ¦ Mirasçı araştırması
+Ton logiciel de courriel s’ouvre : relis la lettre et envoie-la toi-même. Rien n’est envoyé par l’app. ¦ E-posta programın açılıyor: mektubu oku ve kendin gönder. Uygulama hiçbir şey göndermez.
+Premier contact + contrat ¦ İlk temas + sözleşme
+{n} rangés dans le Registre de courriers ¦ Yazışma siciline kaydedildi: {n}
+N. ¦ D.
+D. ¦ Ö.
+M. ¦ E.
+Div. ¦ Bşn.
+Ren. ¦ Ret
+(à fournir) ¦ (sağlanacak)
+repr. {who} ¦ halefi {who}
+existence à ce jour non établie ¦ varlığı henüz kanıtlanmadı
+TABLEAU GÉNÉALOGIQUE ¦ SOY TABLOSU
+Succession de {name}, décédé(e) à {place} le {date} ¦ {name} terekesi, {place} yerinde {date} tarihinde öldü
+Dossier {n} · Réf. notaire {ref} ¦ Dosya {n} · Noter ref. {ref}
+Calcul établi d’après les actes cités, art. 731 et suiv. du Code civil, sous réserve de vérification par le notaire. N. = naissance, M. = mariage, D. = décès. ¦ Belirtilen belgelere göre hesap, Fransız Medeni Kanunu md. 731 vd., noterin doğrulaması saklı kalmak kaydıyla. D. = doğum, E. = evlilik, Ö. = ölüm.
+Communs à tous : {list}. ¦ Hepsine ortak: {list}.
+Hypothèse retenue : {h} ¦ Esas alınan varsayım: {h}
+à préciser ¦ belirtilecek
+Liste des pièces ¦ Belge listesi
+Page {n} / 3 ¦ Sayfa {n} / 3
+Un PDF sobre, une source pour chaque lien ¦ Sade bir PDF, her bağ için bir kaynak
+📝 Ouvrir dans le traitement de texte ¦ 📝 Kelime işlemcide aç
+Joindre les adresses des héritiers ¦ Mirasçıların adreslerini ekle
+Aucune photo ni note privée : les noms, les qualités, les parts et les sources. Pas d’adresse sauf si la case est cochée. ¦ Fotoğraf ve özel not yok: adlar, sıfatlar, paylar ve kaynaklar. Kutu işaretlenmedikçe adres yok.
+Tableau généalogique — {n} ¦ Soy tablosu — {n}
+Tableau pour le notaire : PDF ou impression (3 pages) ¦ Noter için tablo: PDF veya baskı (3 sayfa)
+Tableau pour le notaire : ouvert dans le traitement de texte ¦ Noter için tablo: kelime işlemcide açıldı
+Tableau pour le notaire : copie rangée dans les médias ¦ Noter için tablo: kopya medyaya kaydedildi
+🕓 Journal du dossier {n} ¦ 🕓 {n} dosyasının günlüğü
+(on ne peut ni le modifier ni l’effacer) ¦ (değiştirilemez ve silinemez)
+⤓ Exporter le journal (CSV) ¦ ⤓ Günlüğü dışa aktar (CSV)
+Les changements des fiches restent dans Réglages → Journal des modifications. ¦ Kayıtlardaki değişiklikler Ayarlar → Değişiklik günlüğü’nde de kalır.
+Action ¦ İşlem
+Journal exporté (CSV) ¦ Günlük dışa aktarıldı (CSV)
+Le temps passé, les frais, les honoraires des contrats ¦ Harcanan zaman, giderler, sözleşme ücretleri
+＋ Temps ¦ ＋ Zaman
+＋ Frais ¦ ＋ Gider
+＋ Honoraires d’un contrat ¦ ＋ Sözleşme ücreti
+🖨 Relevé ¦ 🖨 Döküm
+{h} h {m} min passées ¦ {h} sa {m} dk harcandı
+Frais : {s} ¦ Giderler: {s}
+{n} contrats ¦ Sözleşme: {n}
+{h} h {m} min ¦ {h} sa {m} dk
+Rien de noté. ¦ Kayıt yok.
+Aucun montant de succession n’est noté. ¦ Tereke tutarı kaydedilmez.
+💶 TEMPS ET FRAIS ¦ 💶 ZAMAN VE GİDERLER
+Copie d’acte, déplacement… ¦ Belge sureti, yolculuk…
+Recherches aux AD, appels… ¦ Arşiv araştırmaları, aramalar…
+Contrat signé ¦ Sözleşme imzalandı
+Heures ¦ Saat
+Minutes ¦ Dakika
+Montant (€) ¦ Tutar (€)
+🌍 HÉRITIER À L’ÉTRANGER ¦ 🌍 YURT DIŞINDAKİ MİRASÇI
+Chercher {name} hors de France ¦ {name} kişisini Fransa dışında ara
+Les services à interroger ¦ Başvurulacak kurumlar
+📮 Demander l’acte au Service central d’état civil ¦ 📮 Belgeyi Merkezî Nüfus Hizmeti’nden iste
+Langue de la lettre ¦ Mektubun dili
+Destinataire ¦ Alıcı
+Registro civil de …, consulat de France à … ¦ Registro civil de …, Fransa’nın … konsolosluğu
+La lettre (dans la langue du pays) ¦ Mektup (ülkenin dilinde)
+Lettre à l’étranger ¦ Yurt dışına mektup
+Recherche d’un héritier à l’étranger : {name} ¦ Yurt dışında mirasçı araştırması: {name}
+Courrier rangé dans le Registre de courriers ¦ Mektup Yazışma siciline kaydedildi
+❔ ABSENTS ET DISPARUS ¦ ❔ GAİPLER VE KAYIPLAR
+{name} : absent ou disparu ? ¦ {name}: gaip mi, kayıp mı?
+art. {a} ¦ md. {a}
+Le calcul lit ce statut : un présumé absent est compté vivant, sa part est « réservée » ; un déclaré absent est compté comme mort avant. ¦ Hesap bu durumu dikkate alır: gaip sayılan kişi sağ kabul edilir, payı “ayrılır”; gaipliğine karar verilen önce ölmüş sayılır.
+Présumé absent ¦ Gaip sayılan
+Déclaré absent ou jugement de décès ¦ Gaipliğine veya ölümüne karar verilmiş
+{name} : statut retenu changé, dévolution recalculée ¦ {name}: esas alınan durum değişti, mirasçılık yeniden hesaplandı
+Héritier à retrouver : {name}{born} — vivant ? décédé ? des enfants ? (dossier de succession {n}) ¦ Bulunacak mirasçı: {name}{born} — sağ mı? ölü mü? çocukları? (miras dosyası {n})
+(né en {y}) ¦ (doğ. {y})
+Descendance de {name} (mort avant le défunt) : un enfant reconnu ou naturel ? (dossier de succession {n}) ¦ {name} kişisinin altsoyu (murisden önce öldü): tanınmış veya evlilik dışı bir çocuk? (miras dosyası {n})
+Branche à chercher autour de {name} (dossier de succession {n}) ¦ {name} çevresinde aranacak kol (miras dosyası {n})
+Piste ouverte dans le Journal des recherches : {name} ¦ Araştırma günlüğünde ipucu açıldı: {name}
+Piste ajoutée : Recherche → 🗓 Journal des recherches ¦ İpucu eklendi: Araştırma → 🗓 Araştırma günlüğü
+🗂 TABLES DES SUCCESSIONS DES AD ¦ 🗂 ARŞİVLERİN TEREKE KÜTÜKLERİ
+Dépouiller les tables de successions et absences ¦ Tereke ve gaiplik kütüklerini taramak
+Ajouter au suivi ¦ Takibe ekle
+Les tables de successions et absences et les mutations par décès (série Q des Archives départementales) donnent la date et le bureau de chaque succession. Coche les personnes à chercher : une ligne « à faire » chacune. ¦ Tereke ve gaiplik kütükleri ile ölüm nedeniyle intikal sicilleri (departman arşivlerinin Q serisi) her terekenin tarihini ve dairesini verir. Aranacak kişileri işaretle: her biri için bir “yapılacak” satırı.
+Coche au moins une personne. ¦ En az bir kişi işaretle.
+Tables des successions et absences, mutations par décès (série Q) : {name}{d} ¦ Tereke ve gaiplik kütükleri, ölüm nedeniyle intikaller (Q serisi): {name}{d}
+Tables des successions : {n} à dépouiller ¦ Tereke kütükleri: taranacak {n}
+{n} ajoutés aux dépouillements ¦ Taramalara eklendi: {n}
+État : {s} ¦ Durum: {s}
+📋 LISTE DE CONTRÔLE ¦ 📋 KONTROL LİSTESİ
+Avant « Remis au notaire » ¦ “Notere teslim edildi” öncesi
+Remis au notaire ¦ Notere teslim edildi
+Remettre quand même ¦ Yine de teslim et
+Tout n’est pas prêt : corrige d’abord, ou remets quand même (ce sera noté au journal). ¦ Her şey hazır değil: önce düzelt ya da yine de teslim et (günlüğe yazılır).
+Les adresses des vivants seront retirées du dossier et de ses courriers. Le journal reste. Continuer ? ¦ Yaşayanların adresleri dosyadan ve mektuplarından kaldırılacak. Günlük kalır. Devam edilsin mi?
+Archiver ¦ Arşivle
+Dossier archivé. ¦ Dosya arşivlendi.
+ÉCHÉANCE ¦ SÜRE
+Remettre le tableau généalogique au notaire ¦ Soy tablosunu notere teslim et
+Remise au notaire ¦ Notere teslim
+Rendez-vous ¦ Randevu
+Échéance ajoutée ¦ Süre eklendi
+Échéance supprimée ¦ Süre silindi
+Répertoire des vivants : « ＋ Contact », puis relie la fiche de l’héritier. ¦ Yaşayanlar rehberi: “＋ Kişi”, sonra mirasçının kaydını bağla.
+Relevé de temps et de frais — {n} ¦ Zaman ve gider dökümü — {n}
+Arbre de dévolution — {n} ¦ Mirasçılık ağacı — {n}
+Arbre de dévolution imprimé ¦ Mirasçılık ağacı yazdırıldı
+Hypothèse retenue enregistrée ¦ Esas alınan varsayım kaydedildi
+Échéance faite ¦ Süre tamamlandı
+Échéance à faire ¦ Süre yapılacak
+Pièce : {s} ¦ Belge: {s}
+Courrier mis à jour ¦ Mektup güncellendi
+Rechercher les héritiers… ¦ Mirasçıları ara…
+Pas en mode consultation. ¦ Görüntüleme modunda değil.
+Les dossiers n’ont pas pu être lus. ¦ Dosyalar okunamadı.
+Aucun dossier en cours. ¦ Süren dosya yok.
+Dossier {n} ¦ Dosya {n}
+⚖️ Dossiers de succession ¦ ⚖️ Miras dosyaları
+Signé le {d} ¦ İmza tarihi {d}
+Dossier de succession ¦ Miras dosyası
+Tous les courriers ¦ Tüm mektuplar
+l’héritier ¦ mirasçı
+Branche paternelle : {who} ¦ Baba kolu: {who}
+Branche maternelle : {who} ¦ Anne kolu: {who}
+Tous les enfants sont communs : le conjoint choisit l’usufruit de tout, ou le quart en pleine propriété (art. 757). Le calcul montre le quart. ¦ Tüm çocuklar ortak: eş, her şeyin intifa hakkını veya dörtte birin tam mülkiyetini seçer (md. 757). Hesap dörtte biri gösterir.
+Un enfant au moins n’est pas commun aux deux époux : le conjoint reçoit le quart en pleine propriété (art. 757). ¦ En az bir çocuk iki eşin ortak çocuğu değil: eş dörtte birin tam mülkiyetini alır (md. 757).
+1er ordre : les enfants et, par représentation, les descendants d’un enfant prédécédé ou renonçant ; partage par souche (art. 735, 752, 753). ¦ 1. zümre: çocuklar ve halefiyet yoluyla önce ölmüş ya da mirası reddetmiş çocuğun altsoyu; kök esasına göre paylaşım (md. 735, 752, 753).
+Sans descendant, avec le père et la mère : la moitié au conjoint, un quart à chaque parent (art. 757-1). ¦ Altsoy yok, anne ve baba sağ: yarısı eşe, dörtte biri her bir ebeveyne (md. 757-1).
+Sans descendant, avec un seul parent : trois quarts au conjoint, un quart au parent (art. 757-1). ¦ Altsoy yok, tek ebeveyn sağ: dörtte üçü eşe, dörtte biri ebeveyne (md. 757-1).
+Sans descendant ni père ni mère : le conjoint recueille toute la succession (art. 757-2). Les frères et sœurs peuvent avoir un droit de retour sur les biens de famille (art. 757-3) : à voir avec le notaire. ¦ Altsoy, anne ve baba yok: eş terekenin tamamını alır (md. 757-2). Kardeşlerin aile malları üzerinde geri dönüş hakkı olabilir (md. 757-3): noterle görüşülmeli.
+Le père et la mère ont chacun un quart, les frères et sœurs (ou leurs descendants) la moitié (art. 738). ¦ Baba ve annenin her biri dörtte bir, kardeşler (veya altsoyları) yarısını alır (md. 738).
+Le parent survivant a un quart, les frères et sœurs (ou leurs descendants) trois quarts (art. 738). ¦ Sağ ebeveyn dörtte bir, kardeşler (veya altsoyları) dörtte üç alır (md. 738).
+Père et mère décédés : les frères et sœurs ou leurs descendants prennent tout (art. 737). ¦ Anne ve baba ölü: kardeşler veya altsoyları her şeyi alır (md. 737).
+Frères et sœurs germains, consanguins ou utérins : parts égales, par souche (art. 744, 752-2, 753 ; loi du 3 décembre 2001). ¦ Öz kardeşler ve baba ya da ana bir kardeşler: eşit paylar, kök esasına göre (md. 744, 752-2, 753; 3 Aralık 2001 tarihli kanun).
+Sans descendant ni frère ni sœur : le père et la mère ont chacun la moitié (art. 736). ¦ Altsoy ve kardeş yok: anne ve babanın her biri yarısını alır (md. 736).
+Un seul parent, sans frère ni sœur, mais des ascendants dans l’autre branche : moitié au parent, moitié à ces ascendants (art. 738-1). ¦ Tek ebeveyn, kardeş yok, ama diğer kolda üstsoy var: yarısı ebeveyne, yarısı bu üstsoya (md. 738-1).
+Le parent survivant, seul de son ordre, recueille la succession. ¦ Sağ ebeveyn, zümresinde tek olarak terekeyi alır.
+3e ordre : moitié pour chaque branche ; dans chacune, l’ascendant le plus proche prend tout (art. 747-748). ¦ 3. zümre: her kola yarı; her birinde en yakın üstsoy her şeyi alır (md. 747-748).
+3e ordre : une seule branche a encore un ascendant ; il recueille toute la succession, même les cousins de l’autre branche sont écartés (art. 748). ¦ 3. zümre: yalnız bir kolda hâlâ üstsoy var; terekenin tamamını o alır, diğer kolun kuzenleri bile dışlanır (md. 748).
+4e ordre : moitié pour chaque branche ; dans chacune, le collatéral le plus proche en degré prend tout, sans représentation (art. 749-750). ¦ 4. zümre: her kola yarı; her birinde derece olarak en yakın yan hısım her şeyi alır, halefiyet olmaksızın (md. 749-750).
+4e ordre : personne dans une branche, l’autre branche recueille tout (art. 750). ¦ 4. zümre: bir kolda kimse yok, diğer kol her şeyi alır (md. 750).
+Les collatéraux ne succèdent pas au-delà du 6e degré (art. 745). ¦ Yan hısımlar 6. dereceden ötesinde mirasçı olmaz (md. 745).
+Le défunt n’est pas dans la base. ¦ Ölen veritabanında değil.
+si {name} n’était pas marié avec le défunt (PACS ou union libre) ¦ {name} ölenle evli değilse (PACS veya birlikte yaşama)
+si {name} est mort avant, représenté par ses descendants ¦ {name} önce öldüyse, altsoyu halef olur
+si {name} est mort avant sans descendant ¦ {name} altsoysuz olarak önce öldüyse
+Enfants et descendants, avec représentation ¦ Çocuklar ve altsoy, halefiyetle
+Père et mère, frères et sœurs et leurs descendants (« parents privilégiés ») ¦ Anne ve baba, kardeşler ve altsoyları (“imtiyazlı hısımlar”)
+Autres ascendants (grands-parents…), fente paternelle / maternelle ¦ Diğer üstsoy (büyükanne ve büyükbabalar…), baba / anne kolu paylaşımı
+Oncles, tantes, cousins… jusqu’au 6e degré (art. 745) ¦ Amcalar, teyzeler, kuzenler… 6. dereceye kadar (md. 745)
+Vivant au décès ? Mort avant ? Des enfants ? Sa réponse change la part des autres. ¦ Ölüm anında sağ mı? Önce mi öldü? Çocukları? Yanıt diğerlerinin payını değiştirir.
+Mort avant le défunt, sans descendance connue : un enfant, même reconnu tard, changerait le partage. ¦ Muristen önce öldü, bilinen altsoyu yok: geç tanınmış olsa bile bir çocuk paylaşımı değiştirirdi.
+Aucun enfant du défunt dans la base : à vérifier (mentions en marge de l’acte de naissance, livret de famille). ¦ Veritabanında ölenin çocuğu yok: kontrol edilmeli (doğum kaydındaki şerhler, aile cüzdanı).
+Les parents du défunt ne sont pas dans la base : sans eux, l’app ne trouve ni frères, ni sœurs, ni cousins. ¦ Ölenin anne ve babası veritabanında değil: onlar olmadan uygulama ne kardeş ne kuzen bulur.
+Un seul parent du défunt est dans la base : l’autre branche reste à chercher. ¦ Ölenin yalnız bir ebeveyni veritabanında: diğer kol hâlâ aranmalı.
+Adoption : plénière ou simple ? Une adoption plénière coupe les liens avec la famille d’origine. ¦ Evlat edinme: tam mı, basit mi? Tam evlat edinme köken aileyle bağı koparır.
+Couple sans mariage noté : seul un conjoint marié hérite sans testament (pas le partenaire de PACS ni le concubin). ¦ Evliliği kayıtlı olmayan çift: vasiyetname olmadan yalnızca evli eş mirasçı olur (PACS ortağı veya birlikte yaşadığı kişi değil).
+Un seul parent noté : relie sa fiche à son autre parent (frère germain ou demi-frère). ¦ Yalnız bir ebeveyn kayıtlı: kaydı diğer ebeveyne bağla (öz kardeş veya üvey kardeş).
+Personne dans la branche paternelle jusqu’au 6e degré : oncles, tantes et cousins du père à chercher. ¦ Baba kolunda 6. dereceye kadar kimse yok: babanın amcaları, halaları ve kuzenleri aranmalı.
+Personne dans la branche maternelle jusqu’au 6e degré : oncles, tantes et cousins de la mère à chercher. ¦ Anne kolunda 6. dereceye kadar kimse yok: annenin dayıları, teyzeleri ve kuzenleri aranmalı.
+Vivant, mais pas d’adresse dans le Répertoire des vivants. ¦ Sağ, ama Yaşayanlar rehberinde adresi yok.
+Mort après le défunt : sa part passe à ses propres héritiers (sa succession à lui). ¦ Muristen sonra öldü: payı kendi mirasçılarına geçer (kendi terekesi).
+Présumé absent : sa part est réservée (art. 112 à 132). ¦ Gaip sayılan: payı ayrılır (md. 112 ile 132 arası).
+Date du décès inconnue : l’app ne peut pas dire qui était mort avant ni quel droit s’applique. ¦ Ölüm tarihi bilinmiyor: uygulama kimin önce öldüğünü ve hangi hukukun uygulanacağını söyleyemez.
+Décès du {date} : le droit de l’époque n’est pas celui d’aujourd’hui. Avant le 1er juillet 2002 (loi du 3 décembre 2001), le conjoint survivant avait surtout de l’usufruit, les enfants nés hors mariage n’avaient pas tous les mêmes droits et les frères et sœurs de lits différents se partageaient par lignes. Avant le 1er août 1972, les enfants naturels avaient des droits réduits. L’app calcule ici selon le droit actuel : le notaire applique le droit de la date. ¦ {date} tarihli ölüm: o dönemin hukuku bugünün hukuku değildir. 1 Temmuz 2002’den önce (3 Aralık 2001 tarihli kanun) sağ kalan eşin daha çok intifa hakkı vardı, evlilik dışı doğan çocukların hepsi aynı haklara sahip değildi ve farklı evliliklerden kardeşler soy çizgisine göre paylaşırdı. 1 Ağustos 1972’den önce evlilik dışı çocukların hakları kısıtlıydı. Uygulama burada yürürlükteki hukuka göre hesaplar: noter tarihin hukukunu uygular.
+Décès avant le 1er janvier 2007 (loi du 23 juin 2006) : on ne pouvait pas représenter un héritier qui avait renoncé. ¦ 1 Ocak 2007’den önceki ölüm (23 Haziran 2006 tarihli kanun): mirası reddeden bir mirasçıya halef olunamazdı.
+Décès en 2002 sans date précise : avant ou après le 1er juillet 2002, le droit change. Précise la date. ¦ Kesin tarihi olmayan 2002 ölümü: 1 Temmuz 2002 öncesi ve sonrası hukuk değişir. Tarihi belirt.
+Divorce ¦ Boşanma
+La naissance de {name} ¦ {name} kişisinin doğumu
+Le décès de {name} ¦ {name} kişisinin ölümü
+Le mariage avec {name}, non dissous ¦ {name} ile evlilik, sona ermemiş
+Le divorce d’avec {name} ¦ {name} kişisinden boşanma
+Pas de conjoint survivant : décès de {name} ¦ Sağ kalan eş yok: {name} kişisinin ölümü
+{name} est mort avant ¦ {name} önce öldü
+Commun à tous ¦ Hepsine ortak
+{name} a renoncé à la succession ¦ {name} mirası reddetti
+{name} est mort avant (représenté) ¦ {name} önce öldü (halef olundu)
+Son nom d’épouse ¦ Evlilik soyadı
+{name} (pour l’écarter) ¦ {name} (dışlamak için)
+Mort avant le défunt, sans enfant ¦ Muristen önce öldü, çocuksuz
+Chaque héritier a ses actes : il en manque pour {who}. ¦ Her mirasçının belgeleri var: {who} için eksik.
+Chaque héritier a ses actes. ¦ Her mirasçının belgeleri var.
+Chaque prédécédé a son acte de décès : {n} manquent. ¦ Önce ölen herkesin ölüm kaydı var: {n} eksik.
+Chaque prédécédé a son acte de décès. ¦ Önce ölen herkesin ölüm kaydı var.
+Les branches inconnues ont une explication. ¦ Bilinmeyen kolların açıklaması var.
+{n} héritiers ou branches restent « inconnus » sans explication. ¦ Açıklamasız “bilinmeyen” mirasçı veya kol: {n}.
+Aucune branche « inconnue ». ¦ “Bilinmeyen” kol yok.
+L’hypothèse retenue est écrite. ¦ Esas alınan varsayım yazılı.
+Plusieurs hypothèses : écris celle qui est retenue. ¦ Birkaç varsayım: hangisinin esas alındığını yaz.
+Une seule hypothèse. ¦ Tek varsayım.
+Les parts totalisent 1. ¦ Payların toplamı 1.
+Les parts ne totalisent pas 1 : à revoir. ¦ Payların toplamı 1 değil: gözden geçirilmeli.
+La date du décès demande l’avis du notaire (droit de l’époque ou date inconnue). ¦ Ölüm tarihi noterin görüşünü gerektirir (dönemin hukuku veya bilinmeyen tarih).
+{name} ajouté (statut inconnu) ¦ {name} eklendi (durum bilinmiyor)
+{name} ajouté ({share}) ¦ {name} eklendi ({share})
+{name} : {from} → {to} ¦ {name}: {from} → {to}
+{name} retiré ¦ {name} çıkarıldı
+Ordre retenu : {from} → {to} ¦ Esas alınan zümre: {from} → {to}
+descendante à la {n}e génération ¦ {n}. kuşaktan altsoy
+descendant à la {n}e génération ¦ {n}. kuşaktan altsoy
+ascendante à la {n}e génération ¦ {n}. kuşaktan üstsoy
+ascendant à la {n}e génération ¦ {n}. kuşaktan üstsoy
+parente au {n}e degré ¦ {n}. dereceden hısım
+parent au {n}e degré ¦ {n}. dereceden hısım
+petit-fils ¦ torun (erkek)
+petite-fille ¦ torun (kız)
+arrière-petit-fils ¦ torunun çocuğu (erkek)
+arrière-petite-fille ¦ torunun çocuğu (kız)
+arrière-arrière-petit-fils ¦ torunun torunu (erkek)
+arrière-arrière-petite-fille ¦ torunun torunu (kız)
+nièce ¦ yeğen (kız)
+petit-neveu ¦ kardeşin torunu (erkek)
+petite-nièce ¦ kardeşin torunu (kız)
+arrière-petit-neveu ¦ kardeşin torununun çocuğu (erkek)
+arrière-petite-nièce ¦ kardeşin torununun çocuğu (kız)
+arrière-arrière-petit-neveu ¦ kardeşin torununun torunu (erkek)
+arrière-arrière-petite-nièce ¦ kardeşin torununun torunu (kız)
+cousin germain ¦ birinci dereceden kuzen (erkek)
+cousine germaine ¦ birinci dereceden kuzen (kız)
+fils de cousin germain ¦ kuzenin oğlu
+fille de cousin germain ¦ kuzenin kızı
+petit-fils de cousin germain ¦ kuzenin torunu (erkek)
+petite-fille de cousin germain ¦ kuzenin torunu (kız)
+grand-oncle ¦ büyük amca / büyük dayı
+grand-tante ¦ büyük hala / büyük teyze
+cousin germain d’un parent ¦ bir ebeveynin kuzeni (erkek)
+cousine germaine d’un parent ¦ bir ebeveynin kuzeni (kız)
+cousin issu de germains ¦ ikinci dereceden kuzen (erkek)
+cousine issue de germains ¦ ikinci dereceden kuzen (kız)
+arrière-grand-oncle ¦ büyük büyük amca
+arrière-grand-tante ¦ büyük büyük hala
+cousin germain d’un grand-parent ¦ bir büyük ebeveynin kuzeni (erkek)
+cousine germaine d’un grand-parent ¦ bir büyük ebeveynin kuzeni (kız)
+arrière-arrière-grand-oncle ¦ büyük büyük büyük amca
+arrière-arrière-grand-tante ¦ büyük büyük büyük hala
+frère germain ¦ öz erkek kardeş
+sœur germaine ¦ öz kız kardeş
+demi-frère (même père) ¦ baba bir erkek kardeş
+demi-sœur (même père) ¦ baba bir kız kardeş
+demi-frère (même mère) ¦ anne bir erkek kardeş
+demi-sœur (même mère) ¦ anne bir kız kardeş
+Père, mère, enfant ¦ Baba, anne, çocuk
+Frère, sœur, grand-parent, petit-enfant ¦ Kardeş, büyük ebeveyn, torun
+Neveu, nièce, oncle, tante ¦ Yeğen, amca, teyze
+Cousin germain, petit-neveu, grand-oncle ¦ Kuzen, kardeşin torunu, büyük amca
+Enfant de cousin germain ¦ Kuzenin çocuğu
+Cousin issu de germains (limite) ¦ İkinci dereceden kuzen (sınır)
+Présomption d’absence : le juge des tutelles la constate quand une personne a cessé de paraître sans donner de nouvelles. Elle est réputée vivante ; sa part est réservée et gérée. ¦ Gaiplik karinesi: bir kişi haber vermeden ortadan kaybolduğunda mahkeme bunu tespit eder. Sağ kabul edilir; payı ayrılır ve yönetilir.
+Déclaration d’absence : 10 ans après le jugement de présomption (ou 20 ans sans nouvelles), le tribunal judiciaire la déclare ; le jugement a les effets d’un décès. ¦ Gaiplik kararı: karine kararından 10 yıl sonra (veya 20 yıl haber alınamazsa) mahkeme ilan eder; karar ölümün sonuçlarını doğurur.
+Jugement déclaratif de décès : pour une disparition dans des circonstances qui mettent la vie en danger (naufrage, catastrophe), sans attendre. ¦ Ölüm karinesi kararı: hayati tehlike içeren koşullarda kaybolmada (gemi kazası, felaket), beklemeden.
+Service central d’état civil (Nantes) : les actes des Français nés, mariés ou morts à l’étranger. ¦ Merkezî Nüfus Hizmeti (Nantes): yurt dışında doğan, evlenen veya ölen Fransızların kayıtları.
+Le consulat de France du pays : registres d’immatriculation, actes transcrits récents. ¦ Ülkedeki Fransız konsolosluğu: konsolosluk kayıtları, yakın zamanda tescil edilen kayıtlar.
+L’état civil du pays (mairie, registro civil, Standesamt…) : lettre dans la langue du pays. ¦ Ülkenin nüfus idaresi (belediye, registro civil, Standesamt…): ülke dilinde mektup.
+Archives nationales d’outre-mer (Aix-en-Provence) : colonies et Algérie avant 1962. ¦ Ulusal Denizaşırı Arşivler (Aix-en-Provence): 1962’den önce sömürgeler ve Cezayir.
+Ouvert ¦ Açık
+En recherche ¦ Araştırmada
+Héritiers trouvés ¦ Mirasçılar bulundu
+Clos ¦ Kapalı
+📁 Dossier ¦ 📁 Dosya
+👥 Héritiers ¦ 👥 Mirasçılar
+🌳 Arbre ¦ 🌳 Ağaç
+✉️ Héritiers contactés ¦ ✉️ İletişime geçilen mirasçılar
+🖨 Pour le notaire ¦ 🖨 Noter için
+🕓 Journal ¦ 🕓 Günlük
+💶 Temps et frais ¦ 💶 Zaman ve giderler
+Décédé après ¦ Sonra öldü
+Décédée après ¦ Sonra öldü
+Renonce ¦ Reddediyor
+Indigne ¦ Mirastan yoksun
+Absent ¦ Gaip
+Absente ¦ Gaip
+Pas encore conçu ¦ Henüz ana rahmine düşmemiş
+Pas encore conçue ¦ Henüz ana rahmine düşmemiş
+Comme sur la fiche ¦ Kayıttaki gibi
+Vivant au décès ¦ Ölüm anında sağ
+Mort avant le défunt ¦ Muristen önce öldü
+Mort après le défunt ¦ Muristen sonra öldü
+Renonce à la succession ¦ Mirası reddediyor
+Déclaré absent ¦ Gaipliğine karar verildi
+Refuse ¦ Reddediyor
+Rappellera ¦ Geri arayacak
+✓ En main ¦ ✓ Elde
+📮 Demandé ¦ 📮 İstendi
+✗ Manquant ¦ ✗ Eksik
+Sans objet ¦ Geçerli değil
+⏱ Temps ¦ ⏱ Zaman
+🧾 Frais ¦ 🧾 Giderler
+📝 Contrat ¦ 📝 Sözleşme
+02 — HÉRITIERS ¦ 02 — MİRASÇILAR
+Généalogiste successoral ¦ Miras soy araştırmacısı
+Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ Ölmüş bir kişinin mirasçılarını bir noter için bulmak.
++ ⚖️ Successions. Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Miraslar. İlk ekran: “Dosya aç”.
+⚖️ Successions, 📇 Vivants, 📮 Courriers. ¦ ⚖️ Miraslar, 📇 Yaşayanlar, 📮 Mektuplar.
+⚖️ Successions ¦ ⚖️ Miraslar
+Vivants ¦ Yaşayanlar
+Courriers ¦ Mektuplar
+Échéance le {date} ¦ Süre {date}
+Pour quel héritier ? ¦ Hangi mirasçı için?
+Lettre à un héritier ¦ Bir mirasçıya mektup
+ne révèle pas le défunt avant signature ; honoraires et date limite à écrire ¦ imzadan önce öleni açıklamaz; ücret ve son tarih yazılacak
+premier contact, sans nommer le défunt ¦ ilk temas, ölenin adı verilmeden
+Il y a déjà un dossier pour cette personne. ¦ Bu kişi için zaten bir dosya var.
+Date d’ouverture incorrecte. ¦ Hatalı açılış tarihi.
+Notaire introuvable. ¦ Noter bulunamadı.
+Passe d’abord par la liste de contrôle avant « Remis au notaire ». ¦ “Notere teslim edildi” öncesinde önce kontrol listesinden geç.
+Ce dossier est archivé. ¦ Bu dosya arşivlenmiş.
+Valeur inconnue. ¦ Bilinmeyen değer.
+Pièce inconnue. ¦ Bilinmeyen belge.
+Choisis la date de l’échéance. ¦ Sürenin tarihini seç.
+Écris ce qu’il faut faire. ¦ Yapılması gerekeni yaz.
+Échéance introuvable. ¦ Süre bulunamadı.
+Date incorrecte. ¦ Hatalı tarih.
+Le pourcentage va de 0 à 100. ¦ Yüzde 0 ile 100 arasındadır.
+Combien de temps ? ¦ Ne kadar süre?
+Choisis l’héritier. ¦ Mirasçıyı seç.
+Date de signature incorrecte. ¦ Hatalı imza tarihi.
+Seul un dossier clos peut être archivé. ¦ Yalnızca kapalı bir dosya arşivlenebilir.
+Mode consultation : les dossiers de succession ne se montrent pas. ¦ Görüntüleme modu: miras dosyaları gösterilmez.
+Rien à noter. ¦ Kaydedilecek bir şey yok.
+Calcul manquant. ¦ Hesap eksik.
+Dévolution ¦ Miras sırası
+=héritier ¦ mirasçı|mirasçı
+=courrier ¦ mektup|mektup
+=dépouillement ¦ tarama|tarama
+=dossier en cours ¦ süren dosya|süren dosya
+=dossier de succession ¦ miras dosyası|miras dosyası

@@ -140,7 +140,9 @@ function act_transcription_clean_data(PDO $pdo, $data): array
     $status = in_array($data['status'] ?? '', ['todo', 'doing', 'done'], true) ? $data['status'] : '';
     // 📜 le texte lu autour de l'acte sur une capture d'écran (« Saint-Amand-Montrond, 1807-1809, N, M, D », « 139 / 268 ») : pour la source
     $frame = mb_substr(safe_text(is_string($data['frame_text'] ?? null) ? $data['frame_text'] : ''), 0, 600);
-    return ['zones' => $zones, 'people' => $people, 'view' => $cleanView, 'status' => $status] + ($frame !== '' ? ['frame_text' => $frame] : []);
+    // 🌐 la traduction gardée avec la transcription (« Traduire », lib/plus_famille.php) : du texte, borné
+    $translation = mb_substr(str_replace("\0", '', is_string($data['translation'] ?? null) ? $data['translation'] : ''), 0, 40000);
+    return ['zones' => $zones, 'people' => $people, 'view' => $cleanView, 'status' => $status] + ($frame !== '' ? ['frame_text' => $frame] : []) + ($translation !== '' ? ['translation' => $translation] : []);
 }
 
 function save_act_transcription(PDO $pdo, array $data): array

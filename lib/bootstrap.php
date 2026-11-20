@@ -86,6 +86,7 @@ require_once __DIR__ . '/biographie.php';     // 📖 biographie écrite par l'a
 require_once __DIR__ . '/monde_autour.php';   // 🌍 le monde autour : grands événements et histoire locale
 require_once __DIR__ . '/sante.php';          // 🩺 santé de la famille (privée : cachée au départ, jamais exportée)
 require_once __DIR__ . '/cousinade.php';      // 🎉 organiser une cousinade (descendants vivants, invités, badges, plan de table)
+require_once __DIR__ . '/successoral.php';    // ⚖️ généalogiste successoral : dossiers de succession (jamais exportés)
 require_once __DIR__ . '/metiers_anciens.php'; // 🛠️ fiche d'un métier ancien (dictionnaire livré)
 require_once __DIR__ . '/village.php';
 require_once __DIR__ . '/voters.php';         // cartes d'électeur, dates de vote, droit de vote dans le monde

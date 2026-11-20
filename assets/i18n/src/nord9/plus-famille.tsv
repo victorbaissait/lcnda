@@ -1,0 +1,218 @@
+fr ¦ lb
+# Zone « plus-famille » : 💌 lettre de famille, 🛡 fiabilité par personne, 🖊 relecture d’une branche, 🌐 traduire un acte latin (assets/js/plus-famille*.js, lib/plus_famille.php)
+Fiabilité : {n} sur 100 ¦ Zouverlässegkeet: {n} vun 100
+🛡 Fiabilité ¦ 🛡 Zouverlässegkeet
+Calcul de la note… ¦ Nott gëtt berechent…
+Comment la note est calculée ¦ Wéi d’Nott berechent gëtt
+? Comment c’est calculé ¦ ? Wéi dat berechent gëtt
+en doute : {what} ¦ zweifelhaft: {what}
+date estimée : {what} ¦ geschätzten Datum: {what}
+aucun fait noté (naissance, mariage, décès…) ¦ kee Fakt agedroen (Gebuert, Hochzäit, Doud…)
+sans source : {what} ¦ ouni Quell: {what}
+une source sur la fiche, mais sur aucun fait ¦ eng Quell op der Fiche, mee bei kengem Fakt
+aucune source ¦ keng Quell
+{who} : lien {lvl} ¦ {who}: Link {lvl}
+pas de parents dans la base : cette part ne compte pas ¦ keng Elteren an der Datebank: dësen Deel zielt net
+ajouter une source à : {what} ¦ eng Quell bäisetzen: {what}
+vérifier {what}, marqué « doute » ¦ {what} kontrolléieren, als „zweifelhaft“ markéiert
+confirmer le lien avec {name} (⚖️ dossier de preuve) ¦ de Link mat {name} confirméieren (⚖️ Beweisdossier)
+ajouter ses faits (naissance, mariage, décès) avec leur source ¦ d’Fakten (Gebuert, Hochzäit, Doud) mat hirer Quell bäisetzen
+sur 100 ¦ vun 100
+À revoir avant publication ¦ Virun der Verëffentlechung kucken
+(vivant ou fiche confidentielle : ne part pas à la publication) ¦ (lieweg oder vertraulech Fiche: gëtt net verëffentlecht)
+Seuil « à revoir » : {n} ¦ Schwell „kucken“: {n}
+Pour gagner des points : ¦ Fir Punkten ze gewannen:
+La note n’est pas le score de complétude (qui compte ce qui est rempli) : une fiche peut être bien remplie et peu sûre. ¦ D’Nott ass net de Vollstännegkeetswäert (deen zielt, wat ausgefëllt ass): eng Fiche kann gutt ausgefëllt an awer onsécher sinn.
+Calcul impossible. ¦ Berechnung onméiglech.
+🛡 FIABILITÉ ¦ 🛡 ZOUVERLÄSSEGKEET
+Trois parts, sur 100 chacune, puis une moyenne : ¦ Dräi Deeler, all vun 100, dann en Duerchschnëtt:
+Ses faits (40 %) ¦ D’Fakten (40 %)
+la fiabilité de chaque fait : certain 100, déduit 80, estimé 55, doute 15, non évalué 60 ; une date « vers… », « avant… » compte comme estimée. ¦ d’Zouverlässegkeet vun all Fakt: sécher 100, ofgeleet 80, geschat 55, Zweiwel 15, net bewäert 60; en Datum „ronderëm…“, „virun…“ zielt als geschat.
+Ses sources (35 %) ¦ D’Quellen (35 %)
+la part des faits qui ont une source citée ou un acte en image. ¦ den Undeel vun de Fakten mat zitéierter Quell oder Akt als Bild.
+Ses liens (25 %) ¦ D’Linken (25 %)
+la solidité du lien avec chaque parent : prouvé 100, probable 75, supposé 45, sans source 20, réfuté 0. Sans parents dans la base, cette part ne compte pas. ¦ d’Stäerkt vum Link mat all Elterendeel: beweisen 100, wahrscheinlech 75, ugeholl 45, ouni Quell 20, widderluecht 0. Ouni Elteren an der Datebank zielt dësen Deel net.
+Sous le seuil (50 au départ), la fiche est « à revoir avant publication ». Le seuil se règle dans Réglages → ⚙️ Seuils du contrôle. ¦ Ënner der Schwell (am Ufank 50) ass d’Fiche „virun der Verëffentlechung ze kucken“. D’Schwell stells du an Astellungen → ⚙️ Kontrollschwellen an.
+Rien n’est changé dans ta base : la note est recalculée dès qu’un fait ou une source change. ¦ An denger Datebank gëtt näischt geännert: d’Nott gëtt nei berechent, soubal e Fakt oder eng Quell sech ännert.
+{day} : {first}, {age} ¦ {day}: {first}, {age}
+{day} : il y a {n} ans, {a} et {b} se mariaient ¦ {day}: viru {n} Joer hu {a} an {b} bestuet
+{day} : il y a {n} ans naissait {name} ¦ {day}: viru {n} Joer gouf {name} gebuer
+{what} dans l’arbre : {list} ¦ {what} am Stammbam: {list}
+Nouveau dans les médias : « {title} » ¦ Nei an de Medien: „{title}“
+La lettre des {nm} ¦ De Bréif vun de {nm}
+Bonjour à tous ! Voici les nouvelles de la famille ce mois-ci. ¦ Moien alleguer! Hei sinn d’Neiegkeete vun der Famill vun dësem Mount.
+Photo : {title} ¦ Foto: {title}
+Les anniversaires du mois ¦ D’Gebuertsdeeg vum Mount
+Pas d’anniversaire ce mois-ci. ¦ Dëse Mount kee Gebuertsdag.
+Les dernières découvertes ¦ Déi lescht Entdeckungen
+Rien de nouveau ce mois-ci : à vous de m’envoyer vos souvenirs ! ¦ Näischt Neies dëse Mount: elo sidd dir drun, schéckt mir är Erënnerungen!
+L’ancêtre à l’honneur ¦ Den Ahnen am Spuetlicht
+Avec toute mon affection, ¦ Mat ganz vill Léift,
+Ce qu’on y met ¦ Wat dran kënnt
+🖼 Changer ¦ 🖼 Änneren
+Tout se retouche dans la lettre (clique sur un texte). Les personnes vivantes n’y figurent que par leur prénom et leur âge ; les fiches confidentielles jamais. ¦ Alles gëtt am Bréif geännert (klick op en Text). Lieweg Leit stinn do nëmme mam Virnumm an dem Alter, vertraulech Fichë ni.
+Je remplis la lettre… ¦ De Bréif gëtt ausgefëllt…
+Lettre refaite avec les nouveaux choix ¦ Bréif mat den neie Choixen nei gemaach
+LETTRE DE FAMILLE ¦ FAMILLJEBRÉIF
+La photo de la lettre ¦ D’Foto vum Bréif
+Lettre de famille ¦ Familljebréif
+La lettre du mois remplie toute seule : anniversaires, dernières découvertes, une photo, un ancêtre à l’honneur. Tout se retouche. ¦ De Bréif vum Mount fëllt sech eleng: Gebuertsdeeg, lescht Entdeckungen, eng Foto, en Ahne am Spuetlicht. Alles kann een änneren.
+Lettre gardée : « {title} » (Listes → Lettres de famille) ¦ Bréif gehal: „{title}“ (Lëschten → Familljebréiwer)
+💾 Garder ¦ 💾 Halen
+Ranger la lettre dans Listes → Lettres de famille ¦ De Bréif an Lëschten → Familljebréiwer leeën
+PDF ¦ PDF
+par la fenêtre « Imprimer » (⤓ PDF) ¦ iwwer d’Fënster „Drécken“ (⤓ PDF)
+Image (PNG) ¦ Bild (PNG)
+Ouvre ta messagerie avec la lettre déjà écrite : rien n’est envoyé par l’app ¦ Mécht deng Mail mam fäerdege Bréif op: d’App schéckt näischt
+📝 Retoucher ¦ 📝 Änneren
+Ouvrir la lettre dans le traitement de texte ¦ De Bréif an der Textveraarbechtung opmaachen
+Chers cousins, chères cousines, ¦ Léif Kosinnen a Kosängen,
+Ce que j’ai trouvé ce mois-ci… ¦ Wat ech dëse Mount fonnt hunn…
+Si vous avez des photos, des lettres ou des souvenirs, je serais très heureux de les voir ! ¦ Wann dir Fotoen, Bréiwer oder Erënnerungen hutt, géif ech se ganz gär gesinn!
+Je vous embrasse, ¦ Ech drécken iech,
+📋 Voir dans Listes › Lettres de famille ¦ 📋 An Lëschten › Familljebréiwer kucken
+remplie toute seule : anniversaires du mois, découvertes, photo, ancêtre ¦ fëllt sech eleng: Gebuertsdeeg vum Mount, Entdeckungen, Foto, Ahne
+Lettres de famille ¦ Familljebréiwer
+💌 Lettres de famille ¦ 💌 Familljebréiwer
+Les lettres du mois gardées depuis ✨ Trésors → « 💌 Lettre de famille ». À ne pas confondre avec les « ✉️ Lettres aux descendants », qui s’ouvrent plus tard. ¦ D’Bréiwer vum Mount, gehal aus ✨ Schätz → „💌 Familljebréif“. Net ze verwiessele mat de „✉️ Bréiwer un d’Nokommen“, déi sech méi spéit opmaachen.
+💌 Nouvelle lettre ¦ 💌 Neie Bréif
+Chercher… (titre, mois) ¦ Sichen… (Titel, Mount)
+Supprimer la lettre ¦ Bréif läschen
+Aucune lettre gardée pour l’instant ¦ Nach kee Bréif gehal
+Fais celle du mois dans ✨ Trésors → « 💌 Lettre de famille », puis « 💾 Garder ». ¦ Maach dee vum Mount an ✨ Schätz → „💌 Familljebréif“, dann „💾 Halen“.
+💌 Faire la lettre du mois ¦ 💌 De Bréif vum Mount maachen
+Lettre « {title} » supprimée ¦ Bréif „{title}“ geläscht
+« d’accord », dit {who}. ¦ „d’accord“, seet {who}.
+« faux », dit {who}. ¦ „falsch“, seet {who}.
+Que faire de cette remarque ? ¦ Wat mat dëser Bemierkung maachen?
+✓ Accepter (témoignage) ¦ ✓ Unhuelen (Zeienaussoen)
+✓ Accepter (note sur le fait, « doute ») ¦ ✓ Unhuelen (Notiz beim Fakt, „Zweiwel“)
+{what} par {who} : ajoutés comme témoignage si tu acceptes ¦ {what} vun {who}: als Zeienaussoe bäigesat, wann s du unhëls
+Pour tous : ¦ Fir all:
+Importer les remarques d’une relecture ¦ D’Bemierkunge vun enger Iwwerliesung importéieren
+le fichier « remarques-….json » ¦ de Fichier „remarques-….json“
+Le fichier que ton cousin t’a renvoyé avec « ⤓ Renvoyer mes remarques ». ¦ De Fichier, deen däi Koseng mat „⤓ Meng Bemierkunge zréckschécken“ geschéckt huet.
+Ce fichier est trop gros pour un fichier de remarques. ¦ Dëse Fichier ass ze grouss fir e Bemierkungsfichier.
+<b>{what}</b> de <b>{who}</b> sur « {title} » ({date}). Pour chaque fait : accepte, refuse ou garde pour plus tard ¦ <b>{what}</b> vun <b>{who}</b> iwwer „{title}“ ({date}). Fir all Fakt: unhuelen, ofleenen oder fir méi spéit halen
+Ces remarques ont <b>déjà été importées</b> ¦ Dës Bemierkunge goufen <b>schonn importéiert</b>
+Aucune remarque dans ce fichier ¦ Keng Bemierkung an dësem Fichier
+{what} sur des faits qui ne sont plus dans la base : mises de côté. ¦ {what} iwwer Fakten, déi net méi an der Datebank sinn: op d’Säit geluecht.
+⤒ Importer les remarques ¦ ⤒ D’Bemierkungen importéieren
+{what} (relecture de {who}) ¦ {what} (Iwwerliesung vun {who})
+Remarques de {who} gardées avec la relecture. ¦ Bemierkunge vun {who} bei der Iwwerliesung gehal.
+relu par {who} ¦ iwwerlies vun {who}
+En attente des remarques ¦ Waart op d’Bemierkungen
+{n} à ranger ¦ {n} ze sortéieren
+tout est rangé ¦ alles sortéiert
+Envoyé, en attente des remarques ¦ Geschéckt, waart op d’Bemierkungen
+Supprimer la relecture ¦ Iwwerliesung läschen
+Relectures de branche ¦ Iwwerliesunge vu Branchen
+＋ Demander une relecture… ¦ ＋ Ëm eng Iwwerliesung bieden…
+Aucune relecture : « 📤 Partager avec la famille » avec la case « 🖊 Demander une relecture », ou fiche → ⋯ → « 🖊 Faire relire cette branche… ». ¦ Keng Iwwerliesung: „📤 Mat der Famill deelen“ mam Kästchen „🖊 Ëm eng Iwwerliesung bieden“, oder Fiche → ⋯ → „🖊 Dës Branche iwwerliese loossen…“.
+Relecture « {title} » supprimée ¦ Iwwerliesung „{title}“ geläscht
+Faire relire cette branche… ¦ Dës Branche iwwerliese loossen…
+{who} pense que c’est faux : {c} ¦ {who} mengt, dat et falsch ass: {c}
+{who} est d’accord ¦ {who} ass d’accord
+Remarque refusée ¦ Bemierkung ofgeleent
+Remarque notée sur le fait ¦ Bemierkung beim Fakt notéiert
+Témoignage ajouté ¦ Zeienaussoe bäigesat
+« je pense que c’est faux » ¦ „ech mengen, dat ass falsch“
+« d’accord » ¦ „d’accord“
+Corriger le fait ¦ De Fakt verbesseren
+ouvre le fait ; la remarque reste jusqu’à « Noter » ou « Refuser » ¦ mécht de Fakt op; d’Bemierkung bleift bis „Notéieren“ oder „Ofleenen“
+Noter (note sur le fait, « doute ») ¦ Notéieren (Notiz beim Fakt, „Zweiwel“)
+Accepter (témoignage) ¦ Unhuelen (Zeienaussoen)
+🖊 Remarque de relecture ¦ 🖊 Bemierkung vun der Iwwerliesung
+l’année {y} ¦ d’Joer {y}
+Traduire ¦ Iwwersetzen
+Le mot à mot tout de suite, la traduction complète si le modèle de la lecture approfondie est installé ¦ Direkt Wuert fir Wuert, déi ganz Iwwersetzung, wann de Modell vun der verdéifter Liesung installéiert ass
+latin → français ¦ Latäin → Franséisch
+Revenir au texte ¦ Zréck op den Text
+Écris ou lis d’abord le texte de l’acte : la traduction part du texte transcrit. ¦ Schreif oder lies fir d’éischt den Text vum Akt: d’Iwwersetzung geet vum transkribéierten Text aus.
+L’acte (latin, transcrit) ¦ Den Akt (Latäin, transkribéiert)
+vert : formule connue ¦ gréng: bekannt Formel
+bleu : mot du dictionnaire ¦ blo: Wuert aus dem Wierderbuch
+pointillé : peu sûr ¦ punktéiert: onsécher
+Niveau 1 · mot à mot sans installation ¦ Niveau 1 · Wuert fir Wuert ouni Installatioun
+Aucun mot reconnu. ¦ Kee Wuert erkannt.
+Date : {d} ¦ Datum: {d}
+Niveau 2 · traduction complète ¦ Niveau 2 · ganz Iwwersetzung
+Je regarde si le modèle est installé… ¦ Ech kucken, ob de Modell installéiert ass…
+📋 Garder dans la transcription ¦ 📋 An der Transkriptioun halen
+Copier la traduction ¦ Iwwersetzung kopéieren
+📝 Mise au propre ¦ 📝 Proper Kopie
+Le niveau 1 marche toujours, sans rien installer. Les noms, dates et rôles repérés partent ensuite, comme d’habitude, dans « Ce que l’app a trouvé ». ¦ Niveau 1 geet ëmmer, ouni Installatioun. Fonnt Nimm, Datumer a Rollen ginn duerno wéi gewinnt an „Wat d’App fonnt huet“.
+✓ Les deux lectures sont d’accord sur les noms, la date et les rôles. ¦ ✓ Béid Liesunge stëmmen bei Nimm, Datum a Rollen iwwereneen.
+À vérifier : la traduction complète ne dit pas la même chose pour : {list} ¦ Ze kontrolléieren: déi ganz Iwwersetzung seet eppes anescht bei: {list}
+Traduction copiée. ¦ Iwwersetzung kopéiert.
+Copie impossible dans ce navigateur. ¦ Kopéieren ass an dësem Browser net méiglech.
+Traduction gardée dans la transcription (enregistre avec ⌘S) ¦ Iwwersetzung an der Transkriptioun gehal (mat ⌘S späicheren)
+Traduction en cours (le modèle tourne sur cet ordinateur)… ¦ Iwwersetzung leeft (de Modell leeft op dësem Computer)…
+La traduction n’a pas abouti. ¦ D’Iwwersetzung huet net geklappt.
+La traduction gardée avec cette transcription. ¦ D’Iwwersetzung, déi mat dëser Transkriptioun gehal gouf.
+↻ Retraduire ¦ ↻ Nach eng Kéier iwwersetzen
+Le modèle de la lecture approfondie est installé : la traduction complète prend quelques dizaines de secondes. ¦ De Modell vun der verdéifter Liesung ass installéiert: déi ganz Iwwersetzung dauert e puer Dosen Sekonnen.
+🌐 Traduire tout l’acte ¦ 🌐 De ganzen Akt iwwersetzen
+La traduction complète utilise le modèle de la lecture approfondie (Ollama, ≈ 6 Go, rien ne part sur Internet). ¦ Déi ganz Iwwersetzung benotzt de Modell vun der verdéifter Liesung (Ollama, ≈ 6 GB, näischt geet op den Internet).
+Le niveau 1 marche toujours. ¦ Niveau 1 geet ëmmer.
+Transcription d’acte ¦ Transkriptioun vun engem Akt
+Traduction ¦ Iwwersetzung
+Mots difficiles et abréviations ¦ Schwéier Wierder an Ofkierzungen
+Les personnes de l’acte ¦ D’Persounen am Akt
+=fait certain ¦ sécher Fakt|sécher Fakten
+=fait déduit ¦ ofgeleete Fakt|ofgeleete Fakten
+=fait estimé ¦ geschate Fakt|geschate Fakten
+=fait en doute ¦ zweifelhafte Fakt|zweifelhaft Fakten
+=fait non évalué ¦ net bewäerte Fakt|net bewäert Fakten
+=fait ¦ Fakt|Fakten
+=fiche à revoir ¦ ze kuckend Fiche|ze kuckend Fichen
+=fait confirmé ¦ confirméierte Fakt|confirméiert Fakten
+=remarque notée ¦ notéiert Bemierkung|notéiert Bemierkungen
+=remarque pour plus tard ¦ Bemierkung fir méi spéit|Bemierkunge fir méi spéit
+=relecture ¦ Iwwerliesung|Iwwerliesungen
+Très sûr ¦ Ganz sécher
+Assez sûr ¦ Zimlech sécher
+Peu sûr ¦ Onsécher
+prouvé ¦ beweisen
+probable ¦ wahrscheinlech
+réfuté ¦ widderluecht
+parent ¦ Elterendeel
+baptisé(e) ¦ gedeeft
+note sous ¦ Nott ënner
+{a} sur {n} ont une source ¦ {a} vun {n} hunn eng Quell
+{a} sur {n} a une source ¦ {a} vun {n} huet eng Quell
+{n} sont à revoir avant publication (note sous {min}). ¦ {n} sinn virun der Verëffentlechung ze kucken (Nott ënner {min}).
+{n} est à revoir avant publication (note sous {min}). ¦ {n} ass virun der Verëffentlechung ze kucken (Nott ënner {min}).
+La fiabilité n’a pas pu être calculée. ¦ D’Zouverlässegkeet konnt net berechent ginn.
+Aucune fiche à revoir avant publication, bravo ! ¦ Keng Fiche virun der Verëffentlechung ze kucken, bravo!
+Pas encore de fiche à publier. ¦ Nach keng Fiche fir ze verëffentlechen.
+{n} sous {min} sur 100 ¦ {n} ënner {min} vun 100
+🛡 Fiches les moins fiables ¦ 🛡 Mannst zouverlässeg Fichen
+Listes → Personnes, filtrée sur « À revoir avant publication » ¦ Lëschten → Persounen, gefiltert op „Virun der Verëffentlechung kucken“
+Les voir ¦ Se kucken
+Les laisser de côté ¦ Ewechloossen
+Exporter quand même ¦ Trotzdeem exportéieren
+Transcription ¦ Transkriptioun
+🖊 Relecture ¦ 🖊 Iwwerliesung
+🖊 Demander une relecture (le cousin peut cocher et commenter chaque fait) ¦ 🖊 Ëm eng Iwwerliesung bieden (de Koseng kann all Fakt ukräizen a kommentéieren)
+La copie montre alors « ✓ D’accord / ✗ Je pense que c’est faux » sur chaque fait, et « ⤓ Renvoyer mes remarques » : un petit fichier .json à importer dans Questions aux proches → « ⤒ Importer les réponses ». ¦ D’Kopie weist dann bei all Fakt „✓ D’accord / ✗ Ech mengen, dat ass falsch“ an „⤓ Meng Bemierkunge zréckschécken“: e klenge .json-Fichier fir an de Froen un d’Noen → „⤒ Äntwerten importéieren“ anzeliesen.
+Copie à relire prête : {name}. Le cousin te renverra ses remarques (un fichier .json) : Questions aux proches → « ⤒ Importer les réponses ». ¦ Kopie fir ze iwwerliesen prett: {name}. De Koseng schéckt dir seng Bemierkungen zréck (e .json-Fichier): Froen un d’Noen → „⤒ Äntwerten importéieren“.
+Donne un titre à la lettre. ¦ Gëff dem Bréif en Titel.
+Lettre introuvable. ¦ Bréif net fonnt.
+Relecture introuvable. ¦ Iwwerliesung net fonnt.
+Remarque introuvable. ¦ Bemierkung net fonnt.
+Ce n’est pas un fichier de remarques de relecture. ¦ Dat ass kee Bemierkungsfichier vun enger Iwwerliesung.
+Cette relecture n’est pas dans cette base (ou elle a été supprimée). ¦ Dës Iwwerliesung ass net an dëser Datebank (oder gouf geläscht).
+Ce fait n’existe plus. ¦ Dëse Fakt gëtt et net méi.
+Cette remarque est déjà rangée. ¦ Dës Bemierkung ass schonn sortéiert.
+Il n’y a pas encore de texte à traduire. ¦ Et gëtt nach keen Text fir ze iwwersetzen.
+Le modèle de la lecture approfondie n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ De Modell vun der verdéifter Liesung ass nach net erofgelueden: „⤓ Verdéift Liesung installéieren“.
+Ces outils ne sont pas encore prêts : relance l’app. ¦ Dës Tools sinn nach net prett: start d’App nei.
+Cette demande de relecture n’existe plus. ¦ Dës Ufro fir eng Iwwerliesung gëtt et net méi.
+{who} confirme : {fact}. ¦ {who} confirméiert: {fact}.
+Confirmé par {who} : {fact} ¦ Confirméiert vun {who}: {fact}
+{who}, relecture « {title} », le {date} ¦ {who}, Iwwerliesung „{title}“, den {date}
+Relecture d’une branche ¦ Iwwerliesung vun enger Branche
+{who} pense que c’est faux. ¦ {who} mengt, dat et falsch ass.
+relecture « {title} », le {date} ¦ Iwwerliesung „{title}“, den {date}
+💬 Remarque de {who} ¦ 💬 Bemierkung vun {who}

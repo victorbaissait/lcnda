@@ -1,0 +1,218 @@
+fr ¦ is
+# Zone « plus-famille » : 💌 lettre de famille, 🛡 fiabilité par personne, 🖊 relecture d’une branche, 🌐 traduire un acte latin (assets/js/plus-famille*.js, lib/plus_famille.php)
+Fiabilité : {n} sur 100 ¦ Áreiðanleiki: {n} af 100
+🛡 Fiabilité ¦ 🛡 Áreiðanleiki
+Calcul de la note… ¦ Reikna einkunn…
+Comment la note est calculée ¦ Hvernig einkunnin er reiknuð
+? Comment c’est calculé ¦ ? Hvernig þetta er reiknað
+en doute : {what} ¦ vafasamt: {what}
+date estimée : {what} ¦ áætluð dagsetning: {what}
+aucun fait noté (naissance, mariage, décès…) ¦ engin staðreynd skráð (fæðing, hjónaband, andlát…)
+sans source : {what} ¦ án heimildar: {what}
+une source sur la fiche, mais sur aucun fait ¦ heimild á spjaldinu en á engri staðreynd
+aucune source ¦ engin heimild
+{who} : lien {lvl} ¦ {who}: tengsl {lvl}
+pas de parents dans la base : cette part ne compte pas ¦ engir foreldrar í grunninum: þessi hluti telst ekki
+ajouter une source à : {what} ¦ bæta við heimild: {what}
+vérifier {what}, marqué « doute » ¦ athuga {what}, merkt „vafasamt“
+confirmer le lien avec {name} (⚖️ dossier de preuve) ¦ staðfesta tengslin við {name} (⚖️ sönnunarmappa)
+ajouter ses faits (naissance, mariage, décès) avec leur source ¦ bæta við staðreyndum (fæðing, hjónaband, andlát) með heimild
+sur 100 ¦ af 100
+À revoir avant publication ¦ Fara yfir fyrir birtingu
+(vivant ou fiche confidentielle : ne part pas à la publication) ¦ (á lífi eða trúnaðarspjald: ekki birt)
+Seuil « à revoir » : {n} ¦ Mörk „fara yfir“: {n}
+Pour gagner des points : ¦ Til að fá fleiri stig:
+La note n’est pas le score de complétude (qui compte ce qui est rempli) : une fiche peut être bien remplie et peu sûre. ¦ Einkunnin er ekki fyllingarstig (sem telur það sem er útfyllt): spjald getur verið vel útfyllt en samt óöruggt.
+Calcul impossible. ¦ Útreikningur ekki mögulegur.
+🛡 FIABILITÉ ¦ 🛡 ÁREIÐANLEIKI
+Trois parts, sur 100 chacune, puis une moyenne : ¦ Þrír hlutar, hver af 100, síðan meðaltal:
+Ses faits (40 %) ¦ Staðreyndir (40%)
+la fiabilité de chaque fait : certain 100, déduit 80, estimé 55, doute 15, non évalué 60 ; une date « vers… », « avant… » compte comme estimée. ¦ áreiðanleiki hverrar staðreyndar: viss 100, ályktuð 80, áætluð 55, vafi 15, ómetin 60; dagsetning „um…“, „fyrir…“ telst áætluð.
+Ses sources (35 %) ¦ Heimildir (35%)
+la part des faits qui ont une source citée ou un acte en image. ¦ hlutfall staðreynda með tilvitnaða heimild eða mynd af skjali.
+Ses liens (25 %) ¦ Tengsl (25%)
+la solidité du lien avec chaque parent : prouvé 100, probable 75, supposé 45, sans source 20, réfuté 0. Sans parents dans la base, cette part ne compte pas. ¦ styrkur tengsla við hvort foreldri: sannað 100, líklegt 75, ætlað 45, án heimildar 20, hrakið 0. Án foreldra í grunninum telst hlutinn ekki.
+Sous le seuil (50 au départ), la fiche est « à revoir avant publication ». Le seuil se règle dans Réglages → ⚙️ Seuils du contrôle. ¦ Undir mörkunum (50 í upphafi) þarf að „fara yfir spjaldið fyrir birtingu“. Mörkin eru stillt í Stillingar → ⚙️ Mörk eftirlits.
+Rien n’est changé dans ta base : la note est recalculée dès qu’un fait ou une source change. ¦ Engu er breytt í grunninum: einkunnin er endurreiknuð um leið og staðreynd eða heimild breytist.
+{day} : {first}, {age} ¦ {day}: {first}, {age}
+{day} : il y a {n} ans, {a} et {b} se mariaient ¦ {day}: fyrir {n} árum giftust {a} og {b}
+{day} : il y a {n} ans naissait {name} ¦ {day}: fyrir {n} árum fæddist {name}
+{what} dans l’arbre : {list} ¦ {what} í trénu: {list}
+Nouveau dans les médias : « {title} » ¦ Nýtt í miðlum: „{title}“
+La lettre des {nm} ¦ Bréf {nm}-fjölskyldunnar
+Bonjour à tous ! Voici les nouvelles de la famille ce mois-ci. ¦ Halló öll! Hér eru fjölskyldufréttir mánaðarins.
+Photo : {title} ¦ Mynd: {title}
+Les anniversaires du mois ¦ Afmæli mánaðarins
+Pas d’anniversaire ce mois-ci. ¦ Engin afmæli í þessum mánuði.
+Les dernières découvertes ¦ Nýjustu uppgötvanir
+Rien de nouveau ce mois-ci : à vous de m’envoyer vos souvenirs ! ¦ Ekkert nýtt í þessum mánuði: nú sendið þið mér minningarnar ykkar!
+L’ancêtre à l’honneur ¦ Forfaðir mánaðarins
+Avec toute mon affection, ¦ Með ástarkveðju,
+Ce qu’on y met ¦ Hvað fer í það
+🖼 Changer ¦ 🖼 Skipta um
+Tout se retouche dans la lettre (clique sur un texte). Les personnes vivantes n’y figurent que par leur prénom et leur âge ; les fiches confidentielles jamais. ¦ Öllu má breyta í bréfinu (smelltu á texta). Fólk á lífi birtist aðeins með fornafni og aldri, trúnaðarspjöld aldrei.
+Je remplis la lettre… ¦ Fylli út bréfið…
+Lettre refaite avec les nouveaux choix ¦ Bréfið endurgert með nýju vali
+LETTRE DE FAMILLE ¦ FJÖLSKYLDUBRÉF
+La photo de la lettre ¦ Mynd bréfsins
+Lettre de famille ¦ Fjölskyldubréf
+La lettre du mois remplie toute seule : anniversaires, dernières découvertes, une photo, un ancêtre à l’honneur. Tout se retouche. ¦ Mánaðarbréfið fyllist út sjálft: afmæli, nýjustu uppgötvanir, mynd, forfaðir í brennidepli. Öllu má breyta.
+Lettre gardée : « {title} » (Listes → Lettres de famille) ¦ Bréf geymt: „{title}“ (Listar → Fjölskyldubréf)
+💾 Garder ¦ 💾 Geyma
+Ranger la lettre dans Listes → Lettres de famille ¦ Setja bréfið í Listar → Fjölskyldubréf
+PDF ¦ PDF
+par la fenêtre « Imprimer » (⤓ PDF) ¦ í glugganum „Prenta“ (⤓ PDF)
+Image (PNG) ¦ Mynd (PNG)
+Ouvre ta messagerie avec la lettre déjà écrite : rien n’est envoyé par l’app ¦ Opnar tölvupóstinn með bréfinu tilbúnu: forritið sendir ekkert
+📝 Retoucher ¦ 📝 Lagfæra
+Ouvrir la lettre dans le traitement de texte ¦ Opna bréfið í ritvinnslunni
+Chers cousins, chères cousines, ¦ Kæru frændsystkin,
+Ce que j’ai trouvé ce mois-ci… ¦ Það sem ég fann í mánuðinum…
+Si vous avez des photos, des lettres ou des souvenirs, je serais très heureux de les voir ! ¦ Ef þið eigið myndir, bréf eða minningar þætti mér vænt um að sjá þær!
+Je vous embrasse, ¦ Kær kveðja,
+📋 Voir dans Listes › Lettres de famille ¦ 📋 Sjá í Listar › Fjölskyldubréf
+remplie toute seule : anniversaires du mois, découvertes, photo, ancêtre ¦ fyllist út sjálft: afmæli mánaðarins, uppgötvanir, mynd, forfaðir
+Lettres de famille ¦ Fjölskyldubréf
+💌 Lettres de famille ¦ 💌 Fjölskyldubréf
+Les lettres du mois gardées depuis ✨ Trésors → « 💌 Lettre de famille ». À ne pas confondre avec les « ✉️ Lettres aux descendants », qui s’ouvrent plus tard. ¦ Mánaðarbréf geymd úr ✨ Fjársjóðir → „💌 Fjölskyldubréf“. Ekki rugla saman við „✉️ Bréf til afkomenda“, sem opnast síðar.
+💌 Nouvelle lettre ¦ 💌 Nýtt bréf
+Chercher… (titre, mois) ¦ Leita… (titill, mánuður)
+Supprimer la lettre ¦ Eyða bréfinu
+Aucune lettre gardée pour l’instant ¦ Ekkert bréf geymt enn
+Fais celle du mois dans ✨ Trésors → « 💌 Lettre de famille », puis « 💾 Garder ». ¦ Gerðu bréf mánaðarins í ✨ Fjársjóðir → „💌 Fjölskyldubréf“, síðan „💾 Geyma“.
+💌 Faire la lettre du mois ¦ 💌 Gera bréf mánaðarins
+Lettre « {title} » supprimée ¦ Bréfinu „{title}“ eytt
+« d’accord », dit {who}. ¦ „sammála“, segir {who}.
+« faux », dit {who}. ¦ „rangt“, segir {who}.
+Que faire de cette remarque ? ¦ Hvað á að gera við athugasemdina?
+✓ Accepter (témoignage) ¦ ✓ Samþykkja (vitnisburður)
+✓ Accepter (note sur le fait, « doute ») ¦ ✓ Samþykkja (athugasemd við staðreynd, „vafi“)
+{what} par {who} : ajoutés comme témoignage si tu acceptes ¦ {what} frá {who}: bætt við sem vitnisburði ef þú samþykkir
+Pour tous : ¦ Fyrir öll:
+Importer les remarques d’une relecture ¦ Flytja inn athugasemdir yfirlestrar
+le fichier « remarques-….json » ¦ skráin „remarques-….json“
+Le fichier que ton cousin t’a renvoyé avec « ⤓ Renvoyer mes remarques ». ¦ Skráin sem frændi þinn sendi til baka með „⤓ Senda athugasemdir mínar“.
+Ce fichier est trop gros pour un fichier de remarques. ¦ Skráin er of stór fyrir athugasemdaskrá.
+<b>{what}</b> de <b>{who}</b> sur « {title} » ({date}). Pour chaque fait : accepte, refuse ou garde pour plus tard ¦ <b>{what}</b> frá <b>{who}</b> um „{title}“ ({date}). Fyrir hverja staðreynd: samþykkja, hafna eða geyma til síðar
+Ces remarques ont <b>déjà été importées</b> ¦ Þessar athugasemdir hafa <b>þegar verið fluttar inn</b>
+Aucune remarque dans ce fichier ¦ Engar athugasemdir í skránni
+{what} sur des faits qui ne sont plus dans la base : mises de côté. ¦ {what} um staðreyndir sem eru ekki lengur í grunninum: lagt til hliðar.
+⤒ Importer les remarques ¦ ⤒ Flytja inn athugasemdir
+{what} (relecture de {who}) ¦ {what} (yfirlestur: {who})
+Remarques de {who} gardées avec la relecture. ¦ Athugasemdir frá {who} geymdar með yfirlestrinum.
+relu par {who} ¦ yfirlesið af {who}
+En attente des remarques ¦ Bíður eftir athugasemdum
+{n} à ranger ¦ {n} eftir að flokka
+tout est rangé ¦ allt flokkað
+Envoyé, en attente des remarques ¦ Sent, bíður eftir athugasemdum
+Supprimer la relecture ¦ Eyða yfirlestrinum
+Relectures de branche ¦ Yfirlestur greina
+＋ Demander une relecture… ¦ ＋ Biðja um yfirlestur…
+Aucune relecture : « 📤 Partager avec la famille » avec la case « 🖊 Demander une relecture », ou fiche → ⋯ → « 🖊 Faire relire cette branche… ». ¦ Enginn yfirlestur: „📤 Deila með fjölskyldunni“ með reitnum „🖊 Biðja um yfirlestur“, eða spjald → ⋯ → „🖊 Láta lesa yfir þessa grein…“.
+Relecture « {title} » supprimée ¦ Yfirlestrinum „{title}“ eytt
+Faire relire cette branche… ¦ Láta lesa yfir þessa grein…
+{who} pense que c’est faux : {c} ¦ {who} telur þetta rangt: {c}
+{who} est d’accord ¦ {who} er sammála
+Remarque refusée ¦ Athugasemd hafnað
+Remarque notée sur le fait ¦ Athugasemd skráð við staðreyndina
+Témoignage ajouté ¦ Vitnisburði bætt við
+« je pense que c’est faux » ¦ „ég held að þetta sé rangt“
+« d’accord » ¦ „sammála“
+Corriger le fait ¦ Leiðrétta staðreyndina
+ouvre le fait ; la remarque reste jusqu’à « Noter » ou « Refuser » ¦ opnar staðreyndina; athugasemdin er áfram þar til „Skrá“ eða „Hafna“
+Noter (note sur le fait, « doute ») ¦ Skrá (athugasemd við staðreynd, „vafi“)
+Accepter (témoignage) ¦ Samþykkja (vitnisburður)
+🖊 Remarque de relecture ¦ 🖊 Athugasemd úr yfirlestri
+l’année {y} ¦ árið {y}
+Traduire ¦ Þýða
+Le mot à mot tout de suite, la traduction complète si le modèle de la lecture approfondie est installé ¦ Orð fyrir orð strax, öll þýðingin ef líkan djúplesturs er uppsett
+latin → français ¦ latína → franska
+Revenir au texte ¦ Aftur í textann
+Écris ou lis d’abord le texte de l’acte : la traduction part du texte transcrit. ¦ Skrifaðu eða lestu fyrst texta skjalsins: þýðingin byggir á uppskrifaða textanum.
+L’acte (latin, transcrit) ¦ Skjalið (latína, uppskrifað)
+vert : formule connue ¦ grænt: þekkt orðalag
+bleu : mot du dictionnaire ¦ blátt: orð úr orðabók
+pointillé : peu sûr ¦ punktalína: óvíst
+Niveau 1 · mot à mot sans installation ¦ Stig 1 · orð fyrir orð án uppsetningar
+Aucun mot reconnu. ¦ Ekkert orð þekktist.
+Date : {d} ¦ Dagsetning: {d}
+Niveau 2 · traduction complète ¦ Stig 2 · öll þýðingin
+Je regarde si le modèle est installé… ¦ Athuga hvort líkanið sé uppsett…
+📋 Garder dans la transcription ¦ 📋 Geyma í uppskriftinni
+Copier la traduction ¦ Afrita þýðinguna
+📝 Mise au propre ¦ 📝 Hreinrit
+Le niveau 1 marche toujours, sans rien installer. Les noms, dates et rôles repérés partent ensuite, comme d’habitude, dans « Ce que l’app a trouvé ». ¦ Stig 1 virkar alltaf, án uppsetningar. Nöfn, dagsetningar og hlutverk sem finnast fara svo eins og venjulega í „Það sem forritið fann“.
+✓ Les deux lectures sont d’accord sur les noms, la date et les rôles. ¦ ✓ Báðir lestrar eru sammála um nöfn, dagsetningu og hlutverk.
+À vérifier : la traduction complète ne dit pas la même chose pour : {list} ¦ Til athugunar: öll þýðingin segir annað um: {list}
+Traduction copiée. ¦ Þýðingin afrituð.
+Copie impossible dans ce navigateur. ¦ Ekki hægt að afrita í þessum vafra.
+Traduction gardée dans la transcription (enregistre avec ⌘S) ¦ Þýðingin geymd í uppskriftinni (vista með ⌘S)
+Traduction en cours (le modèle tourne sur cet ordinateur)… ¦ Þýðing í gangi (líkanið keyrir á þessari tölvu)…
+La traduction n’a pas abouti. ¦ Þýðingin tókst ekki.
+La traduction gardée avec cette transcription. ¦ Þýðingin sem geymd er með uppskriftinni.
+↻ Retraduire ¦ ↻ Þýða aftur
+Le modèle de la lecture approfondie est installé : la traduction complète prend quelques dizaines de secondes. ¦ Líkan djúplesturs er uppsett: öll þýðingin tekur nokkra tugi sekúndna.
+🌐 Traduire tout l’acte ¦ 🌐 Þýða allt skjalið
+La traduction complète utilise le modèle de la lecture approfondie (Ollama, ≈ 6 Go, rien ne part sur Internet). ¦ Öll þýðingin notar líkan djúplesturs (Ollama, ≈ 6 GB, ekkert fer á netið).
+Le niveau 1 marche toujours. ¦ Stig 1 virkar alltaf.
+Transcription d’acte ¦ Uppskrift skjals
+Traduction ¦ Þýðing
+Mots difficiles et abréviations ¦ Erfið orð og skammstafanir
+Les personnes de l’acte ¦ Fólkið í skjalinu
+=fait certain ¦ viss staðreynd|vissar staðreyndir
+=fait déduit ¦ ályktuð staðreynd|ályktaðar staðreyndir
+=fait estimé ¦ áætluð staðreynd|áætlaðar staðreyndir
+=fait en doute ¦ vafasöm staðreynd|vafasamar staðreyndir
+=fait non évalué ¦ ómetin staðreynd|ómetnar staðreyndir
+=fait ¦ staðreynd|staðreyndir
+=fiche à revoir ¦ spjald til yfirferðar|spjöld til yfirferðar
+=fait confirmé ¦ staðfest staðreynd|staðfestar staðreyndir
+=remarque notée ¦ skráð athugasemd|skráðar athugasemdir
+=remarque pour plus tard ¦ athugasemd til síðar|athugasemdir til síðar
+=relecture ¦ yfirlestur|yfirlestrar
+Très sûr ¦ Mjög öruggt
+Assez sûr ¦ Nokkuð öruggt
+Peu sûr ¦ Óöruggt
+prouvé ¦ sannað
+probable ¦ líklegt
+réfuté ¦ hrakið
+parent ¦ foreldri
+baptisé(e) ¦ skírð(ur)
+note sous ¦ einkunn undir
+{a} sur {n} ont une source ¦ {a} af {n} hafa heimild
+{a} sur {n} a une source ¦ {a} af {n} hefur heimild
+{n} sont à revoir avant publication (note sous {min}). ¦ {n}: fara þarf yfir fyrir birtingu (einkunn undir {min}).
+{n} est à revoir avant publication (note sous {min}). ¦ {n}: fara þarf yfir fyrir birtingu (einkunn undir {min}).
+La fiabilité n’a pas pu être calculée. ¦ Ekki tókst að reikna áreiðanleikann.
+Aucune fiche à revoir avant publication, bravo ! ¦ Ekkert spjald til yfirferðar fyrir birtingu, vel gert!
+Pas encore de fiche à publier. ¦ Engin spjöld til birtingar enn.
+{n} sous {min} sur 100 ¦ {n} undir {min} af 100
+🛡 Fiches les moins fiables ¦ 🛡 Óáreiðanlegustu spjöldin
+Listes → Personnes, filtrée sur « À revoir avant publication » ¦ Listar → Fólk, síað á „Fara yfir fyrir birtingu“
+Les voir ¦ Sjá þau
+Les laisser de côté ¦ Sleppa þeim
+Exporter quand même ¦ Flytja samt út
+Transcription ¦ Uppskrift
+🖊 Relecture ¦ 🖊 Yfirlestur
+🖊 Demander une relecture (le cousin peut cocher et commenter chaque fait) ¦ 🖊 Biðja um yfirlestur (frændinn getur merkt við og skrifað um hverja staðreynd)
+La copie montre alors « ✓ D’accord / ✗ Je pense que c’est faux » sur chaque fait, et « ⤓ Renvoyer mes remarques » : un petit fichier .json à importer dans Questions aux proches → « ⤒ Importer les réponses ». ¦ Afritið sýnir þá „✓ Sammála / ✗ Ég held að þetta sé rangt“ við hverja staðreynd og „⤓ Senda athugasemdir mínar“: litla .json-skrá sem flutt er inn í Spurningar til ættingja → „⤒ Flytja inn svör“.
+Copie à relire prête : {name}. Le cousin te renverra ses remarques (un fichier .json) : Questions aux proches → « ⤒ Importer les réponses ». ¦ Afrit til yfirlesturs tilbúið: {name}. Frændinn sendir athugasemdirnar til baka (.json-skrá): Spurningar til ættingja → „⤒ Flytja inn svör“.
+Donne un titre à la lettre. ¦ Gefðu bréfinu titil.
+Lettre introuvable. ¦ Bréfið fannst ekki.
+Relecture introuvable. ¦ Yfirlesturinn fannst ekki.
+Remarque introuvable. ¦ Athugasemdin fannst ekki.
+Ce n’est pas un fichier de remarques de relecture. ¦ Þetta er ekki athugasemdaskrá yfirlesturs.
+Cette relecture n’est pas dans cette base (ou elle a été supprimée). ¦ Þessi yfirlestur er ekki í þessum grunni (eða honum var eytt).
+Ce fait n’existe plus. ¦ Þessi staðreynd er ekki lengur til.
+Cette remarque est déjà rangée. ¦ Þessi athugasemd er þegar flokkuð.
+Il n’y a pas encore de texte à traduire. ¦ Enginn texti til að þýða enn.
+Le modèle de la lecture approfondie n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Líkan djúplesturs hefur ekki verið sótt: „⤓ Setja upp djúplestur“.
+Ces outils ne sont pas encore prêts : relance l’app. ¦ Þessi verkfæri eru ekki tilbúin: endurræstu forritið.
+Cette demande de relecture n’existe plus. ¦ Þessi beiðni um yfirlestur er ekki lengur til.
+{who} confirme : {fact}. ¦ {who} staðfestir: {fact}.
+Confirmé par {who} : {fact} ¦ Staðfest af {who}: {fact}
+{who}, relecture « {title} », le {date} ¦ {who}, yfirlestur „{title}“, {date}
+Relecture d’une branche ¦ Yfirlestur greinar
+{who} pense que c’est faux. ¦ {who} telur þetta rangt.
+relecture « {title} », le {date} ¦ yfirlestur „{title}“, {date}
+💬 Remarque de {who} ¦ 💬 Athugasemd frá {who}

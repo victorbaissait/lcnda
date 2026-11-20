@@ -1,0 +1,218 @@
+fr ¦ ro
+# Zone « plus-famille » : 💌 lettre de famille, 🛡 fiabilité par personne, 🖊 relecture d’une branche, 🌐 traduire un acte latin (assets/js/plus-famille*.js, lib/plus_famille.php)
+Fiabilité : {n} sur 100 ¦ Fiabilitate: {n} din 100
+🛡 Fiabilité ¦ 🛡 Fiabilitate
+Calcul de la note… ¦ Se calculează nota…
+Comment la note est calculée ¦ Cum se calculează nota
+? Comment c’est calculé ¦ ? Cum se calculează
+en doute : {what} ¦ îndoielnic: {what}
+date estimée : {what} ¦ dată estimată: {what}
+aucun fait noté (naissance, mariage, décès…) ¦ niciun fapt notat (naștere, căsătorie, deces…)
+sans source : {what} ¦ fără sursă: {what}
+une source sur la fiche, mais sur aucun fait ¦ o sursă pe fișă, dar pe niciun fapt
+aucune source ¦ nicio sursă
+{who} : lien {lvl} ¦ {who}: legătură {lvl}
+pas de parents dans la base : cette part ne compte pas ¦ fără părinți în bază: această parte nu contează
+ajouter une source à : {what} ¦ adaugă o sursă la: {what}
+vérifier {what}, marqué « doute » ¦ verifică {what}, marcat „îndoielnic”
+confirmer le lien avec {name} (⚖️ dossier de preuve) ¦ confirmă legătura cu {name} (⚖️ dosar de dovezi)
+ajouter ses faits (naissance, mariage, décès) avec leur source ¦ adaugă faptele (naștere, căsătorie, deces) cu sursa lor
+sur 100 ¦ din 100
+À revoir avant publication ¦ De revăzut înainte de publicare
+(vivant ou fiche confidentielle : ne part pas à la publication) ¦ (în viață sau fișă confidențială: nu se publică)
+Seuil « à revoir » : {n} ¦ Prag „de revăzut”: {n}
+Pour gagner des points : ¦ Pentru a câștiga puncte:
+La note n’est pas le score de complétude (qui compte ce qui est rempli) : une fiche peut être bien remplie et peu sûre. ¦ Nota nu este scorul de completitudine (care numără ce e completat): o fișă poate fi bine completată și totuși nesigură.
+Calcul impossible. ¦ Calcul imposibil.
+🛡 FIABILITÉ ¦ 🛡 FIABILITATE
+Trois parts, sur 100 chacune, puis une moyenne : ¦ Trei părți, fiecare din 100, apoi o medie:
+Ses faits (40 %) ¦ Faptele (40 %)
+la fiabilité de chaque fait : certain 100, déduit 80, estimé 55, doute 15, non évalué 60 ; une date « vers… », « avant… » compte comme estimée. ¦ fiabilitatea fiecărui fapt: sigur 100, dedus 80, estimat 55, îndoielnic 15, neevaluat 60; o dată „pe la…”, „înainte de…” contează ca estimată.
+Ses sources (35 %) ¦ Sursele (35 %)
+la part des faits qui ont une source citée ou un acte en image. ¦ partea faptelor care au o sursă citată sau un act în imagine.
+Ses liens (25 %) ¦ Legăturile (25 %)
+la solidité du lien avec chaque parent : prouvé 100, probable 75, supposé 45, sans source 20, réfuté 0. Sans parents dans la base, cette part ne compte pas. ¦ soliditatea legăturii cu fiecare părinte: dovedită 100, probabilă 75, presupusă 45, fără sursă 20, infirmată 0. Fără părinți în bază, partea nu contează.
+Sous le seuil (50 au départ), la fiche est « à revoir avant publication ». Le seuil se règle dans Réglages → ⚙️ Seuils du contrôle. ¦ Sub prag (50 la început), fișa este „de revăzut înainte de publicare”. Pragul se reglează în Setări → ⚙️ Pragurile verificării.
+Rien n’est changé dans ta base : la note est recalculée dès qu’un fait ou une source change. ¦ Nimic nu se schimbă în baza ta: nota se recalculează imediat ce se schimbă un fapt sau o sursă.
+{day} : {first}, {age} ¦ {day}: {first}, {age}
+{day} : il y a {n} ans, {a} et {b} se mariaient ¦ {day}: acum {n} ani, {a} și {b} se căsătoreau
+{day} : il y a {n} ans naissait {name} ¦ {day}: acum {n} ani se năștea {name}
+{what} dans l’arbre : {list} ¦ {what} în arbore: {list}
+Nouveau dans les médias : « {title} » ¦ Nou în media: „{title}”
+La lettre des {nm} ¦ Scrisoarea familiei {nm}
+Bonjour à tous ! Voici les nouvelles de la famille ce mois-ci. ¦ Bună tuturor! Iată veștile familiei din luna aceasta.
+Photo : {title} ¦ Fotografie: {title}
+Les anniversaires du mois ¦ Aniversările lunii
+Pas d’anniversaire ce mois-ci. ¦ Nicio aniversare luna aceasta.
+Les dernières découvertes ¦ Ultimele descoperiri
+Rien de nouveau ce mois-ci : à vous de m’envoyer vos souvenirs ! ¦ Nimic nou luna aceasta: e rândul vostru să-mi trimiteți amintirile!
+L’ancêtre à l’honneur ¦ Strămoșul la loc de cinste
+Avec toute mon affection, ¦ Cu toată dragostea,
+Ce qu’on y met ¦ Ce punem în ea
+🖼 Changer ¦ 🖼 Schimbă
+Tout se retouche dans la lettre (clique sur un texte). Les personnes vivantes n’y figurent que par leur prénom et leur âge ; les fiches confidentielles jamais. ¦ Totul se retușează în scrisoare (dă clic pe un text). Persoanele în viață apar doar cu prenumele și vârsta; fișele confidențiale niciodată.
+Je remplis la lettre… ¦ Completez scrisoarea…
+Lettre refaite avec les nouveaux choix ¦ Scrisoare refăcută cu noile alegeri
+LETTRE DE FAMILLE ¦ SCRISOARE DE FAMILIE
+La photo de la lettre ¦ Fotografia scrisorii
+Lettre de famille ¦ Scrisoare de familie
+La lettre du mois remplie toute seule : anniversaires, dernières découvertes, une photo, un ancêtre à l’honneur. Tout se retouche. ¦ Scrisoarea lunii se completează singură: aniversări, ultimele descoperiri, o fotografie, un strămoș la loc de cinste. Totul se retușează.
+Lettre gardée : « {title} » (Listes → Lettres de famille) ¦ Scrisoare păstrată: „{title}” (Liste → Scrisori de familie)
+💾 Garder ¦ 💾 Păstrează
+Ranger la lettre dans Listes → Lettres de famille ¦ Pune scrisoarea în Liste → Scrisori de familie
+PDF ¦ PDF
+par la fenêtre « Imprimer » (⤓ PDF) ¦ prin fereastra „Tipărește” (⤓ PDF)
+Image (PNG) ¦ Imagine (PNG)
+Ouvre ta messagerie avec la lettre déjà écrite : rien n’est envoyé par l’app ¦ Deschide e-mailul cu scrisoarea deja scrisă: aplicația nu trimite nimic
+📝 Retoucher ¦ 📝 Retușează
+Ouvrir la lettre dans le traitement de texte ¦ Deschide scrisoarea în editorul de text
+Chers cousins, chères cousines, ¦ Dragi veri și verișoare,
+Ce que j’ai trouvé ce mois-ci… ¦ Ce am găsit luna aceasta…
+Si vous avez des photos, des lettres ou des souvenirs, je serais très heureux de les voir ! ¦ Dacă aveți fotografii, scrisori sau amintiri, aș fi foarte bucuros să le văd!
+Je vous embrasse, ¦ Vă îmbrățișez,
+📋 Voir dans Listes › Lettres de famille ¦ 📋 Vezi în Liste › Scrisori de familie
+remplie toute seule : anniversaires du mois, découvertes, photo, ancêtre ¦ se completează singură: aniversările lunii, descoperiri, fotografie, strămoș
+Lettres de famille ¦ Scrisori de familie
+💌 Lettres de famille ¦ 💌 Scrisori de familie
+Les lettres du mois gardées depuis ✨ Trésors → « 💌 Lettre de famille ». À ne pas confondre avec les « ✉️ Lettres aux descendants », qui s’ouvrent plus tard. ¦ Scrisorile lunii păstrate din ✨ Comori → „💌 Scrisoare de familie”. A nu se confunda cu „✉️ Scrisorile către urmași”, care se deschid mai târziu.
+💌 Nouvelle lettre ¦ 💌 Scrisoare nouă
+Chercher… (titre, mois) ¦ Caută… (titlu, lună)
+Supprimer la lettre ¦ Șterge scrisoarea
+Aucune lettre gardée pour l’instant ¦ Nicio scrisoare păstrată deocamdată
+Fais celle du mois dans ✨ Trésors → « 💌 Lettre de famille », puis « 💾 Garder ». ¦ Fă-o pe cea a lunii în ✨ Comori → „💌 Scrisoare de familie”, apoi „💾 Păstrează”.
+💌 Faire la lettre du mois ¦ 💌 Fă scrisoarea lunii
+Lettre « {title} » supprimée ¦ Scrisoarea „{title}” a fost ștearsă
+« d’accord », dit {who}. ¦ „de acord”, spune {who}.
+« faux », dit {who}. ¦ „greșit”, spune {who}.
+Que faire de cette remarque ? ¦ Ce facem cu această observație?
+✓ Accepter (témoignage) ¦ ✓ Acceptă (mărturie)
+✓ Accepter (note sur le fait, « doute ») ¦ ✓ Acceptă (notă la fapt, „îndoielnic”)
+{what} par {who} : ajoutés comme témoignage si tu acceptes ¦ {what} de {who}: adăugate ca mărturie dacă accepți
+Pour tous : ¦ Pentru toate:
+Importer les remarques d’une relecture ¦ Importă observațiile unei revizuiri
+le fichier « remarques-….json » ¦ fișierul „remarques-….json”
+Le fichier que ton cousin t’a renvoyé avec « ⤓ Renvoyer mes remarques ». ¦ Fișierul pe care ți l-a trimis vărul tău cu „⤓ Trimite-mi observațiile”.
+Ce fichier est trop gros pour un fichier de remarques. ¦ Fișierul este prea mare pentru un fișier de observații.
+<b>{what}</b> de <b>{who}</b> sur « {title} » ({date}). Pour chaque fait : accepte, refuse ou garde pour plus tard ¦ <b>{what}</b> de la <b>{who}</b> despre „{title}” ({date}). Pentru fiecare fapt: acceptă, refuză sau păstrează pentru mai târziu
+Ces remarques ont <b>déjà été importées</b> ¦ Aceste observații <b>au fost deja importate</b>
+Aucune remarque dans ce fichier ¦ Nicio observație în acest fișier
+{what} sur des faits qui ne sont plus dans la base : mises de côté. ¦ {what} despre fapte care nu mai sunt în bază: puse deoparte.
+⤒ Importer les remarques ¦ ⤒ Importă observațiile
+{what} (relecture de {who}) ¦ {what} (revizuire de {who})
+Remarques de {who} gardées avec la relecture. ¦ Observațiile lui {who} păstrate cu revizuirea.
+relu par {who} ¦ revizuit de {who}
+En attente des remarques ¦ În așteptarea observațiilor
+{n} à ranger ¦ {n} de rânduit
+tout est rangé ¦ totul e rânduit
+Envoyé, en attente des remarques ¦ Trimis, în așteptarea observațiilor
+Supprimer la relecture ¦ Șterge revizuirea
+Relectures de branche ¦ Revizuiri de ramură
+＋ Demander une relecture… ¦ ＋ Cere o revizuire…
+Aucune relecture : « 📤 Partager avec la famille » avec la case « 🖊 Demander une relecture », ou fiche → ⋯ → « 🖊 Faire relire cette branche… ». ¦ Nicio revizuire: „📤 Partajează cu familia” cu bifa „🖊 Cere o revizuire”, sau fișă → ⋯ → „🖊 Cere revizuirea acestei ramuri…”.
+Relecture « {title} » supprimée ¦ Revizuirea „{title}” a fost ștearsă
+Faire relire cette branche… ¦ Cere revizuirea acestei ramuri…
+{who} pense que c’est faux : {c} ¦ {who} crede că e greșit: {c}
+{who} est d’accord ¦ {who} este de acord
+Remarque refusée ¦ Observație refuzată
+Remarque notée sur le fait ¦ Observație notată la fapt
+Témoignage ajouté ¦ Mărturie adăugată
+« je pense que c’est faux » ¦ „cred că e greșit”
+« d’accord » ¦ „de acord”
+Corriger le fait ¦ Corectează faptul
+ouvre le fait ; la remarque reste jusqu’à « Noter » ou « Refuser » ¦ deschide faptul; observația rămâne până la „Notează” sau „Refuză”
+Noter (note sur le fait, « doute ») ¦ Notează (notă la fapt, „îndoielnic”)
+Accepter (témoignage) ¦ Acceptă (mărturie)
+🖊 Remarque de relecture ¦ 🖊 Observație de revizuire
+l’année {y} ¦ anul {y}
+Traduire ¦ Tradu
+Le mot à mot tout de suite, la traduction complète si le modèle de la lecture approfondie est installé ¦ Imediat cuvânt cu cuvânt, traducerea completă dacă modelul lecturii aprofundate este instalat
+latin → français ¦ latină → franceză
+Revenir au texte ¦ Înapoi la text
+Écris ou lis d’abord le texte de l’acte : la traduction part du texte transcrit. ¦ Scrie sau citește întâi textul actului: traducerea pornește de la textul transcris.
+L’acte (latin, transcrit) ¦ Actul (latină, transcris)
+vert : formule connue ¦ verde: formulă cunoscută
+bleu : mot du dictionnaire ¦ albastru: cuvânt din dicționar
+pointillé : peu sûr ¦ punctat: nesigur
+Niveau 1 · mot à mot sans installation ¦ Nivelul 1 · cuvânt cu cuvânt fără instalare
+Aucun mot reconnu. ¦ Niciun cuvânt recunoscut.
+Date : {d} ¦ Data: {d}
+Niveau 2 · traduction complète ¦ Nivelul 2 · traducere completă
+Je regarde si le modèle est installé… ¦ Verific dacă modelul este instalat…
+📋 Garder dans la transcription ¦ 📋 Păstrează în transcriere
+Copier la traduction ¦ Copiază traducerea
+📝 Mise au propre ¦ 📝 Varianta curată
+Le niveau 1 marche toujours, sans rien installer. Les noms, dates et rôles repérés partent ensuite, comme d’habitude, dans « Ce que l’app a trouvé ». ¦ Nivelul 1 merge mereu, fără instalare. Numele, datele și rolurile găsite merg apoi, ca de obicei, în „Ce a găsit aplicația”.
+✓ Les deux lectures sont d’accord sur les noms, la date et les rôles. ¦ ✓ Cele două lecturi se potrivesc la nume, dată și roluri.
+À vérifier : la traduction complète ne dit pas la même chose pour : {list} ¦ De verificat: traducerea completă spune altceva la: {list}
+Traduction copiée. ¦ Traducere copiată.
+Copie impossible dans ce navigateur. ¦ Copiere imposibilă în acest browser.
+Traduction gardée dans la transcription (enregistre avec ⌘S) ¦ Traducere păstrată în transcriere (salvează cu ⌘S)
+Traduction en cours (le modèle tourne sur cet ordinateur)… ¦ Se traduce (modelul rulează pe acest calculator)…
+La traduction n’a pas abouti. ¦ Traducerea nu a reușit.
+La traduction gardée avec cette transcription. ¦ Traducerea păstrată cu această transcriere.
+↻ Retraduire ¦ ↻ Tradu din nou
+Le modèle de la lecture approfondie est installé : la traduction complète prend quelques dizaines de secondes. ¦ Modelul lecturii aprofundate este instalat: traducerea completă durează câteva zeci de secunde.
+🌐 Traduire tout l’acte ¦ 🌐 Tradu tot actul
+La traduction complète utilise le modèle de la lecture approfondie (Ollama, ≈ 6 Go, rien ne part sur Internet). ¦ Traducerea completă folosește modelul lecturii aprofundate (Ollama, ≈ 6 GB, nimic nu pleacă pe Internet).
+Le niveau 1 marche toujours. ¦ Nivelul 1 merge mereu.
+Transcription d’acte ¦ Transcriere de act
+Traduction ¦ Traducere
+Mots difficiles et abréviations ¦ Cuvinte dificile și abrevieri
+Les personnes de l’acte ¦ Persoanele din act
+=fait certain ¦ fapt sigur|fapte sigure|de fapte sigure
+=fait déduit ¦ fapt dedus|fapte deduse|de fapte deduse
+=fait estimé ¦ fapt estimat|fapte estimate|de fapte estimate
+=fait en doute ¦ fapt îndoielnic|fapte îndoielnice|de fapte îndoielnice
+=fait non évalué ¦ fapt neevaluat|fapte neevaluate|de fapte neevaluate
+=fait ¦ fapt|fapte|de fapte
+=fiche à revoir ¦ fișă de revăzut|fișe de revăzut|de fișe de revăzut
+=fait confirmé ¦ fapt confirmat|fapte confirmate|de fapte confirmate
+=remarque notée ¦ observație notată|observații notate|de observații notate
+=remarque pour plus tard ¦ observație pentru mai târziu|observații pentru mai târziu|de observații pentru mai târziu
+=relecture ¦ revizuire|revizuiri|de revizuiri
+Très sûr ¦ Foarte sigur
+Assez sûr ¦ Destul de sigur
+Peu sûr ¦ Nesigur
+prouvé ¦ dovedită
+probable ¦ probabilă
+réfuté ¦ infirmată
+parent ¦ părinte
+baptisé(e) ¦ botezat(ă)
+note sous ¦ notă sub
+{a} sur {n} ont une source ¦ {a} din {n} au o sursă
+{a} sur {n} a une source ¦ {a} din {n} are o sursă
+{n} sont à revoir avant publication (note sous {min}). ¦ {n} sunt de revăzut înainte de publicare (notă sub {min}).
+{n} est à revoir avant publication (note sous {min}). ¦ {n} este de revăzut înainte de publicare (notă sub {min}).
+La fiabilité n’a pas pu être calculée. ¦ Fiabilitatea nu a putut fi calculată.
+Aucune fiche à revoir avant publication, bravo ! ¦ Nicio fișă de revăzut înainte de publicare, bravo!
+Pas encore de fiche à publier. ¦ Încă nicio fișă de publicat.
+{n} sous {min} sur 100 ¦ {n} sub {min} din 100
+🛡 Fiches les moins fiables ¦ 🛡 Fișele cele mai puțin sigure
+Listes → Personnes, filtrée sur « À revoir avant publication » ¦ Liste → Persoane, filtrată pe „De revăzut înainte de publicare”
+Les voir ¦ Vezi-le
+Les laisser de côté ¦ Lasă-le deoparte
+Exporter quand même ¦ Exportă oricum
+Transcription ¦ Transcriere
+🖊 Relecture ¦ 🖊 Revizuire
+🖊 Demander une relecture (le cousin peut cocher et commenter chaque fait) ¦ 🖊 Cere o revizuire (vărul poate bifa și comenta fiecare fapt)
+La copie montre alors « ✓ D’accord / ✗ Je pense que c’est faux » sur chaque fait, et « ⤓ Renvoyer mes remarques » : un petit fichier .json à importer dans Questions aux proches → « ⤒ Importer les réponses ». ¦ Copia arată atunci „✓ De acord / ✗ Cred că e greșit” la fiecare fapt și „⤓ Trimite-mi observațiile”: un mic fișier .json de importat în Întrebări pentru apropiați → „⤒ Importă răspunsurile”.
+Copie à relire prête : {name}. Le cousin te renverra ses remarques (un fichier .json) : Questions aux proches → « ⤒ Importer les réponses ». ¦ Copia de revizuit e gata: {name}. Vărul îți va trimite observațiile (un fișier .json): Întrebări pentru apropiați → „⤒ Importă răspunsurile”.
+Donne un titre à la lettre. ¦ Dă un titlu scrisorii.
+Lettre introuvable. ¦ Scrisoare negăsită.
+Relecture introuvable. ¦ Revizuire negăsită.
+Remarque introuvable. ¦ Observație negăsită.
+Ce n’est pas un fichier de remarques de relecture. ¦ Nu este un fișier de observații de revizuire.
+Cette relecture n’est pas dans cette base (ou elle a été supprimée). ¦ Această revizuire nu e în această bază (sau a fost ștearsă).
+Ce fait n’existe plus. ¦ Acest fapt nu mai există.
+Cette remarque est déjà rangée. ¦ Această observație e deja rânduită.
+Il n’y a pas encore de texte à traduire. ¦ Încă nu există text de tradus.
+Le modèle de la lecture approfondie n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Modelul lecturii aprofundate nu este încă descărcat: „⤓ Instalează lectura aprofundată”.
+Ces outils ne sont pas encore prêts : relance l’app. ¦ Aceste unelte nu sunt încă gata: repornește aplicația.
+Cette demande de relecture n’existe plus. ¦ Această cerere de revizuire nu mai există.
+{who} confirme : {fact}. ¦ {who} confirmă: {fact}.
+Confirmé par {who} : {fact} ¦ Confirmat de {who}: {fact}
+{who}, relecture « {title} », le {date} ¦ {who}, revizuirea „{title}”, pe {date}
+Relecture d’une branche ¦ Revizuirea unei ramuri
+{who} pense que c’est faux. ¦ {who} crede că e greșit.
+relecture « {title} », le {date} ¦ revizuirea „{title}”, pe {date}
+💬 Remarque de {who} ¦ 💬 Observație de la {who}

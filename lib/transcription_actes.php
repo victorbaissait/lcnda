@@ -211,7 +211,7 @@ function tx_deep_run(string $dir): void
         $img = trim((string) @file_get_contents($dir . '/image.b64'));
         $text = ''; $last = 0; $err = '';
         $r = tx_deep_http('POST', '/api/chat', ['model' => $tag, 'stream' => true, 'keep_alive' => '5m', 'options' => ['temperature' => 0, 'num_ctx' => 8192],
-            'messages' => [['role' => 'user', 'content' => (string) ($job['prompt'] ?? ''), 'images' => [$img]]]], 1800, static function (array $j) use (&$text, &$last, &$err, $put, $cancelled) {
+            'messages' => [['role' => 'user', 'content' => (string) ($job['prompt'] ?? '')] + ($img !== '' ? ['images' => [$img]] : [])]], 1800, static function (array $j) use (&$text, &$last, &$err, $put, $cancelled) {
             if (!empty($j['error'])) { $err = mb_substr((string) $j['error'], 0, 300); return false; }
             $text .= (string) ($j['message']['content'] ?? '');
             if (mb_strlen($text) > 60000) { return false; }

@@ -1,0 +1,496 @@
+fr ¦ ru ¦ uk
+# Zone « successoral » : ⚖️ généalogiste successoral, dossiers de succession, dévolution (heritage-successoral*.js, lib/successoral.php)
+Les dossiers de succession ne se montrent pas en mode consultation ni en mode simple. ¦ Наследственные дела не показываются в режиме показа и в простом режиме. ¦ Спадкові справи не показуються в режимі показу та простому режимі.
+Successions ¦ Наследства ¦ Спадщини
+Listes · Recherche et organisation ¦ Списки · Поиск и организация ¦ Списки · Пошук і організація
+Dossiers de succession ¦ Наследственные дела ¦ Спадкові справи
+Retrouver les héritiers d’une personne décédée, pour un notaire : un dossier par défunt. À ne pas confondre avec « 🏠 Héritages et successions » (les actes anciens des ancêtres). ¦ Найти наследников умершего для нотариуса: одно дело на каждого наследодателя. Не путать с «🏠 Наследство и наследования» (старые акты предков). ¦ Знайти спадкоємців померлого для нотаріуса: одна справа на кожного спадкодавця. Не плутати з «🏠 Спадщина та спадкування» (старі акти предків).
+＋ Ouvrir un dossier ¦ ＋ Открыть дело ¦ ＋ Відкрити справу
+Lecture des dossiers… ¦ Чтение дел… ¦ Читання справ…
+Aucun dossier de succession pour l’instant ¦ Наследственных дел пока нет ¦ Спадкових справ ще немає
+Choisis la personne décédée : l’app part des fiches de la base pour trouver ses héritiers, selon le Code civil d’aujourd’hui. ¦ Выбери наследодателя: приложение исходит из записей базы, чтобы найти его наследников по действующему Гражданскому кодексу Франции. ¦ Вибери спадкодавця: застосунок виходить із записів бази, щоб знайти його спадкоємців за чинним Цивільним кодексом Франції.
+Chercher… (ex. MAZAUD, 2026-014, ROUSSILHE) ¦ Поиск… (напр. MAZAUD, 2026-014, ROUSSILHE) ¦ Пошук… (напр. MAZAUD, 2026-014, ROUSSILHE)
+Prochaine échéance ¦ Ближайший срок ¦ Найближчий строк
+A → Z ¦ А → Я ¦ А → Я
+Dossier n° {n} ¦ Дело № {n} ¦ Справа № {n}
+Prochaine échéance : {d} — {l} ¦ Ближайший срок: {d} — {l} ¦ Найближчий строк: {d} — {l}
+Échéance passée ¦ Срок пропущен ¦ Строк минув
+✎ Modifier ¦ ✎ Изменить ¦ ✎ Змінити
+Aucun dossier ne correspond. ¦ Нет подходящих дел. ¦ Немає відповідних справ.
+Pas en mode consultation ni en mode simple. ¦ Недоступно в режиме показа или простом режиме. ¦ Недоступно в режимі показу чи простому режимі.
+⚖️ DOSSIER DE SUCCESSION ¦ ⚖️ НАСЛЕДСТВЕННОЕ ДЕЛО ¦ ⚖️ СПАДКОВА СПРАВА
+Ouvrir un dossier ¦ Открыть дело ¦ Відкрити справу
+Ouvrir le dossier ¦ Открыть дело ¦ Відкрити справу
+N° de dossier ¦ № дела ¦ № справи
+fait tout seul : 2026-014 ¦ автоматически: 2026-014 ¦ автоматично: 2026-014
+reprise de la fiche ¦ взято из записи ¦ взято із запису
+Dernier domicile ¦ Последнее место жительства ¦ Останнє місце проживання
+Notaire mandant (fiche ou nom) ¦ Нотариус-заказчик (запись или имя) ¦ Нотаріус-замовник (запис або ім’я)
+Réf. du notaire ¦ Номер дела у нотариуса ¦ Номер справи в нотаріуса
+Ouvert le ¦ Открыто ¦ Відкрито
+Testament ¦ Завещание ¦ Заповіт
+Aucun connu (le notaire interroge le fichier des dernières volontés) ¦ Неизвестно (нотариус проверяет реестр завещаний) ¦ Невідомо (нотаріус перевіряє реєстр заповітів)
+Situation (notes) ¦ Обстоятельства (заметки) ¦ Обставини (нотатки)
+🔒 Le dossier reste dans l’app : les héritiers vivants, leurs adresses et leurs parts ne sont dans aucun export. Aucun montant n’est noté. ¦ 🔒 Дело остаётся в приложении: живые наследники, их адреса и доли не попадают ни в один экспорт. Никакие суммы не записываются. ¦ 🔒 Справа залишається в застосунку: живі спадкоємці, їхні адреси та частки не потрапляють у жоден експорт. Жодні суми не записуються.
+Choisis la personne décédée. ¦ Выбери наследодателя. ¦ Вибери спадкодавця.
+Dossier enregistré ¦ Дело сохранено ¦ Справу збережено
+Dossier supprimé ¦ Дело удалено ¦ Справу видалено
+Lecture du dossier… ¦ Чтение дела… ¦ Читання справи…
+← Tous les dossiers ¦ ← Все дела ¦ ← Усі справи
+Dossier n° {n} · {t} ¦ Дело № {n} · {t} ¦ Справа № {n} · {t}
+Listes · Dossiers de succession ¦ Списки · Наследственные дела ¦ Списки · Спадкові справи
+↗ Fiche du défunt ¦ ↗ Запись наследодателя ¦ ↗ Запис спадкодавця
+🗄 Archiver le dossier clos ¦ 🗄 Архивировать закрытое дело ¦ 🗄 Архівувати закриту справу
+Dossier archivé : les adresses des vivants ont été retirées, le journal reste. ¦ Дело в архиве: адреса живых удалены, журнал сохранён. ¦ Справу заархівовано: адреси живих видалено, журнал збережено.
+État du dossier ¦ Статус дела ¦ Стан справи
+Le défunt n’est plus dans la base. ¦ Наследодателя больше нет в базе. ¦ Спадкодавця більше немає в базі.
+Pas de conjoint dans la base ¦ В базе нет супруга ¦ У базі немає подружжя
+A des descendants ¦ Есть потомки ¦ Є нащадки
+Sans descendant dans la base ¦ В базе нет потомков ¦ У базі немає нащадків
+Le défunt ¦ Наследодатель ¦ Спадкодавець
+fiche n° {n} ¦ запись № {n} ¦ запис № {n}
+Le mandat ¦ Поручение ¦ Доручення
+Droit actuel (décès après le 1er janvier 2007) ¦ Действующее право (смерть после 1 января 2007 г.) ¦ Чинне право (смерть після 1 січня 2007 р.)
+Échéances ¦ Сроки ¦ Строки
+＋ Échéance ¦ ＋ Срок ¦ ＋ Строк
+Dans {n} j ¦ Через {n} дн. ¦ Через {n} дн.
+Aucune échéance. ¦ Сроков нет. ¦ Строків немає.
+Aussi dans 🗓 Ma semaine de recherche. ¦ Также в 🗓 Моей исследовательской неделе. ¦ Також у 🗓 Моєму дослідницькому тижні.
+📑 Pièces ¦ 📑 Документы ¦ 📑 Документи
+🖨 Tableau pour le notaire ¦ 🖨 Таблица для нотариуса ¦ 🖨 Таблиця для нотаріуса
+de son chef ¦ по собственному праву ¦ за власним правом
+représenté ¦ представлен ¦ представлений
+sans descendance connue ¦ потомки неизвестны ¦ нащадки невідомі
+degré plus éloigné ¦ более дальняя степень ¦ дальший ступінь
+pas de représentation ¦ без представления ¦ без представлення
+pas encore conçu ¦ ещё не зачат ¦ ще не зачатий
+écarté ¦ исключён ¦ усунутий
+par représentation ¦ по праву представления ¦ за правом представлення
+de son chef, s’il vit ¦ по собственному праву, если жив ¦ за власним правом, якщо живий
+Retenu ¦ Призван ¦ Закликаний
+Écarté par le conjoint ¦ Исключён супругом ¦ Усунутий подружжям
+Écarté ¦ Исключён ¦ Усунутий
+{name} : {share} (art. {art}). ¦ {name}: {share} (ст. {art}). ¦ {name}: {share} (ст. {art}).
+Ou, à son choix, l’usufruit de la totalité (art. 757) : les descendants ont alors la nue-propriété, dans les mêmes proportions. ¦ Или, по его выбору, узуфрукт на всё имущество (ст. 757): тогда потомки получают голую собственность в тех же долях. ¦ Або, на його вибір, узуфрукт на все майно (ст. 757): тоді нащадки отримують голу власність у тих самих частках.
+Aucun conjoint dans la base. ¦ В базе нет супруга. ¦ У базі немає подружжя.
+S’il y avait un conjoint, l’app afficherait ici ses droits (art. 757 à 757-2) avant les ordres. ¦ Если бы был супруг, приложение показало бы здесь его права (ст. 757–757-2) до очередей. ¦ Якби було подружжя, застосунок показав би тут його права (ст. 757–757-2) перед чергами.
+{n}e ¦ {n} ¦ {n}
+adresse ? ¦ адрес? ¦ адреса?
+Statut retenu dans ce dossier ¦ Статус, принятый в этом деле ¦ Статус, прийнятий у цій справі
+Autre hypothèse ¦ Другая гипотеза ¦ Інша гіпотеза
+total {t} ¦ итого {t} ¦ разом {t}
+personne : il reste des branches à chercher. ¦ никто: остаются ветви для поиска. ¦ нікого: лишаються гілки для пошуку.
+Part en jeu : {s} ¦ Доля под вопросом: {s} ¦ Частка під питанням: {s}
+🔍 Chercher ¦ 🔍 Искать ¦ 🔍 Шукати
+🌍 Héritier à l’étranger ¦ 🌍 Наследник за границей ¦ 🌍 Спадкоємець за кордоном
+❔ Absent ou disparu ¦ ❔ Отсутствующий или пропавший ¦ ❔ Відсутній або зниклий
+📇 Compléter ¦ 📇 Заполнить ¦ 📇 Заповнити
+Type d’adoption ¦ Вид усыновления ¦ Вид усиновлення
+Type d’adoption ? ¦ Вид усыновления? ¦ Вид усиновлення?
+Plénière ¦ Полное ¦ Повне
+Marié ? ¦ В браке? ¦ У шлюбі?
+Pas marié (PACS, union libre) ¦ Не в браке (PACS, сожительство) ¦ Не в шлюбі (PACS, співжиття)
+Divorcé ¦ В разводе ¦ Розлучений
+Aucune branche à chercher d’après les fiches. ¦ По записям искать больше некого. ¦ За записами шукати більше нікого.
+{n}e degré ¦ степень {n} ¦ ступінь {n}
+Calcul indicatif, à faire vérifier par le notaire. Il suit le Code civil en vigueur (art. 731 et suivants), sans testament, sans donation, sans renonciation connue. Il ne tient pas compte du droit de retour légal (art. 738-2, 757-3), des biens à l’étranger ni d’un régime matrimonial. ¦ Ориентировочный расчёт, должен проверить нотариус. Следует действующему Гражданскому кодексу Франции (ст. 731 и сл.), без завещания, без дарений, без известных отказов. Не учитывает законное право возврата (ст. 738-2, 757-3), имущество за границей и режим имущества супругов. ¦ Орієнтовний розрахунок, має перевірити нотаріус. Відповідає чинному Цивільному кодексу Франції (ст. 731 і наст.), без заповіту, без дарувань, без відомих відмов. Не враховує законне право повернення (ст. 738-2, 757-3), майно за кордоном і режим майна подружжя.
+Le conjoint survivant ¦ Переживший супруг ¦ Той з подружжя, хто пережив
+Les ordres d’héritiers (art. 734) : le premier qui a quelqu’un prend tout ¦ Очереди наследников (ст. 734): первая очередь, в которой кто-то есть, получает всё ¦ Черги спадкоємців (ст. 734): перша черга, у якій хтось є, отримує все
+Les héritiers trouvés ¦ Найденные наследники ¦ Знайдені спадкоємці
+🗂 Tables des successions (AD)… ¦ 🗂 Реестры наследств (архивы)… ¦ 🗂 Реєстри спадщин (архіви)…
+Lien avec le défunt ¦ Родство с наследодателем ¦ Спорідненість зі спадкодавцем
+Vient ¦ Наследует ¦ Успадковує
+Part ¦ Доля ¦ Частка
+Statut retenu ¦ Принятый статус ¦ Прийнятий статус
+↔ Faire glisser le tableau pour voir les parts. ¦ ↔ Прокрути таблицу, чтобы увидеть долю. ¦ ↔ Прокрути таблицю, щоб побачити частку.
+Aucun héritier trouvé jusqu’au 6e degré : sans testament, la succession reviendrait à l’État (art. 539 et 768). Il reste sans doute des branches à chercher. ¦ До 6-й степени наследников не найдено: при отсутствии завещания наследство переходит государству (ст. 539 и 768). Вероятно, остаются ветви для поиска. ¦ До 6-го ступеня спадкоємців не знайдено: без заповіту спадщина переходить державі (ст. 539 і 768). Імовірно, лишаються гілки для пошуку.
+Les calculs restent tant que la branche n’est pas tranchée. ¦ Расчёты сохраняются, пока ветвь не выяснена. ¦ Розрахунки зберігаються, доки гілку не з’ясовано.
+Les branches à chercher ¦ Ветви для поиска ¦ Гілки для пошуку
+L’hypothèse retenue ¦ Принятая гипотеза ¦ Прийнята гіпотеза
+Ex. : André MAZAUD décédé à Lyon en 1990 sans enfant (acte reçu le 5 déc.). ¦ Напр.: André MAZAUD умер в Лионе в 1990 г. бездетным (акт получен 5 дек.). ¦ Напр.: André MAZAUD помер у Ліоні 1990 р. бездітним (акт отримано 5 груд.).
+Demandée avant « Remis au notaire » si un héritier reste inconnu. ¦ Обязательно перед «Передано нотариусу», если наследник остаётся неизвестным. ¦ Обов’язково перед «Передано нотаріусу», якщо спадкоємець лишається невідомим.
+Les degrés civils (art. 741-743) : on compte les générations jusqu’à l’ancêtre commun, puis on redescend ¦ Гражданские степени (ст. 741–743): считают поколения до общего предка, затем вниз ¦ Цивільні ступені (ст. 741–743): рахують покоління до спільного предка, потім униз
+LE DÉFUNT ¦ НАСЛЕДОДАТЕЛЬ ¦ СПАДКОДАВЕЦЬ
+à retrouver ¦ найти ¦ знайти
+sans descend. ¦ без потомк. ¦ без нащ.
+Héritier vivant, sa part ¦ Живой наследник, его доля ¦ Живий спадкоємець, його частка
+Prédécédé, sa souche ¦ Умер раньше, его колено ¦ Помер раніше, його коліно
+Branche à chercher ¦ Ветвь для поиска ¦ Гілка для пошуку
+Arbre de dévolution ¦ Древо наследования ¦ Дерево спадкування
+Le défunt au centre, chaque héritier avec sa part ¦ Наследодатель в центре, каждый наследник со своей долей ¦ Спадкодавець у центрі, кожен спадкоємець зі своєю часткою
+⤓ SVG ¦ ⤓ SVG ¦ ⤓ SVG
+↔ Faire glisser le dessin. ¦ ↔ Прокрути рисунок. ¦ ↔ Прокрути малюнок.
+Clic sur une case : la fiche ; clic droit : « 🛡 Solidité de ce lien ». Le dessin suit les fiches. ¦ Щелчок по блоку: запись; правый щелчок: «🛡 Надёжность этой связи». Рисунок следует за записями. ¦ Клік по блоку: запис; правий клік: «🛡 Надійність цього зв’язку». Малюнок іде за записами.
+le {d} ¦ {d} ¦ {d}
+État de la pièce ¦ Статус документа ¦ Стан документа
+D’après la fiche ¦ По записи ¦ За записом
+{n} en main ¦ {n} на руках ¦ {n} на руках
+{n} demandés ¦ {n} запрошено ¦ {n} запитано
+Par héritier ¦ По наследнику ¦ За спадкоємцем
+Par acte ¦ По акту ¦ За актом
+Ce qu’il faut prouver ¦ Что нужно доказать ¦ Що треба довести
+↔ Faire glisser le tableau. ¦ ↔ Прокрути таблицу. ¦ ↔ Прокрути таблицю.
+Rangée dans le Registre de courriers, une demande d’acte met la pièce à « Demandé » ; l’acte attaché à la fiche la met à « En main ». ¦ Запрос акта, сохранённый в Журнале писем, переводит документ в «Запрошено»; акт, привязанный к записи, — в «На руках». ¦ Запит акта, збережений у Журналі листів, переводить документ у «Запитано»; акт, прив’язаний до запису, — у «На руках».
+Je suis mandaté(e) par {notary}, notaire, pour établir la dévolution de la succession de {name} (dossier {n}, réf. {ref}). ¦ Мне поручено {notary}, нотариусом, установить порядок наследования после {name} (дело {n}, номер {ref}). ¦ Мені доручено {notary}, нотаріусом, встановити порядок спадкування після {name} (справа {n}, номер {ref}).
+À retrouver ¦ Найти ¦ Знайти
+Adresse ? ¦ Адрес? ¦ Адреса?
+Signé le ¦ Подписано ¦ Підписано
+À signer ¦ На подпись ¦ На підпис
+✉️ Écrire ¦ ✉️ Написать ¦ ✉️ Написати
+Contrat de révélation, réponses, signatures ¦ Договор о раскрытии, ответы, подписи ¦ Договір про розкриття, відповіді, підписи
+📝 Contrat de révélation ¦ 📝 Договор о раскрытии ¦ 📝 Договір про розкриття
+✉️ Lettre de premier contact ¦ ✉️ Письмо первого контакта ¦ ✉️ Лист першого контакту
+Héritier ¦ Наследник ¦ Спадкоємець
+Courrier ¦ Письмо ¦ Лист
+Contrat ¦ Договор ¦ Договір
+📝 Le contrat ne nomme pas le défunt avant signature. Écris toi-même le pourcentage d’honoraires et la date limite. Rien n’est envoyé par l’app. ¦ 📝 Договор не называет наследодателя до подписания. Процент вознаграждения и срок действия вписываешь ты. Приложение ничего не отправляет. ¦ 📝 Договір не називає спадкодавця до підписання. Відсоток винагороди та строк дії вписуєш ти. Застосунок нічого не надсилає.
+Chaque courrier va dans le Registre de courriers, avec sa relance. ¦ Каждое письмо попадает в Журнал писем, с напоминанием. ¦ Кожен лист потрапляє в Журнал листів, з нагадуванням.
+↗ Registre de courriers ¦ ↗ Журнал писем ¦ ↗ Журнал листів
+Madame, Monsieur, ¦ Уважаемая госпожа, уважаемый господин, ¦ Шановна пані, шановний пане,
+Généalogiste successoral, je suis chargé(e) par une étude notariale de retrouver les héritiers d’une personne décédée. Mes recherches me laissent penser que vous pourriez faire partie de sa famille. ¦ как генеалог по наследственным делам, я получил от нотариальной конторы поручение найти наследников умершего лица. Мои поиски позволяют предположить, что вы можете принадлежать к его семье. ¦ як генеалог у спадкових справах, я отримав від нотаріальної контори доручення знайти спадкоємців померлої особи. Мої пошуки дають підстави вважати, що ви можете належати до її родини.
+Pour le vérifier, pourriez-vous me confirmer votre date et votre lieu de naissance, ainsi que les noms de vos parents ? Vous pouvez me répondre par courrier, par téléphone ou par courriel. ¦ Чтобы это проверить, не могли бы вы подтвердить дату и место вашего рождения, а также имена ваших родителей? Ответить можно по почте, по телефону или по электронной почте. ¦ Щоб це перевірити, чи не могли б ви підтвердити дату й місце свого народження, а також імена своїх батьків? Відповісти можна поштою, телефоном або електронною поштою.
+Cette démarche ne vous engage à rien. ¦ Этот шаг ни к чему вас не обязывает. ¦ Цей крок ні до чого вас не зобов’язує.
+Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées. ¦ С уважением, ¦ З повагою,
+CONTRAT DE RÉVÉLATION DE SUCCESSION ¦ ДОГОВОР О РАСКРЫТИИ НАСЛЕДСТВА ¦ ДОГОВІР ПРО РОЗКРИТТЯ СПАДЩИНИ
+Entre {heir}, ci-après « l’héritier », et {sender}, généalogiste successoral. ¦ Между {heir}, далее «наследник», и {sender}, генеалогом по наследственным делам. ¦ Між {heir}, далі «спадкоємець», і {sender}, генеалогом у спадкових справах.
+Le généalogiste a découvert une succession en cours dans laquelle l’héritier pourrait avoir des droits. Il s’engage à lui en révéler l’origine (le nom de la personne décédée, l’étude notariale chargée du règlement) dès la signature du présent contrat, et à réunir les actes qui prouvent sa qualité d’héritier. ¦ Генеалог обнаружил открытое наследство, на которое наследник может иметь права. Он обязуется раскрыть его происхождение (имя наследодателя, ведущую дело нотариальную контору) сразу после подписания настоящего договора и собрать акты, подтверждающие статус наследника. ¦ Генеалог виявив відкриту спадщину, на яку спадкоємець може мати права. Він зобов’язується розкрити її походження (ім’я спадкодавця, нотаріальну контору, що веде справу) одразу після підписання цього договору та зібрати акти, що підтверджують статус спадкоємця.
+En contrepartie, l’héritier s’engage à verser au généalogiste des honoraires de ____ % (hors taxes) de l’actif net qui lui reviendra, payables seulement s’il reçoit effectivement une part de la succession. Les frais de recherche sont compris. ¦ Взамен наследник обязуется уплатить генеалогу вознаграждение в размере ____ % (без налогов) от чистого имущества, причитающегося ему, подлежащее уплате лишь в случае, если он действительно получит долю в наследстве. Расходы на поиск включены. ¦ Натомість спадкоємець зобов’язується сплатити генеалогу винагороду в розмірі ____ % (без податків) від чистого майна, що йому припадає, яка підлягає сплаті лише в разі, якщо він справді отримає частку спадщини. Витрати на пошук включено.
+Cette proposition est valable jusqu’au ____________. ¦ Предложение действительно до ____________. ¦ Пропозиція дійсна до ____________.
+Fait en deux exemplaires, à ____________, le ____________. ¦ Составлено в двух экземплярах, в ____________, ____________. ¦ Складено у двох примірниках, у ____________, ____________.
+L’héritier (« Lu et approuvé », signature) — Le généalogiste ¦ Наследник («Прочитано и одобрено», подпись) — Генеалог ¦ Спадкоємець («Прочитано й схвалено», підпис) — Генеалог
+Je me permets de revenir vers vous au sujet de mon courrier du {sent}, resté sans réponse. Une succession en cours pourrait vous concerner : pourriez-vous me contacter ? ¦ Возвращаюсь к своему письму от {sent}, оставшемуся без ответа. Открытое наследство может касаться вас: не могли бы вы связаться со мной? ¦ Повертаюся до свого листа від {sent}, що лишився без відповіді. Відкрита спадщина може стосуватися вас: чи не могли б ви зв’язатися зі мною?
+✉️ HÉRITIERS CONTACTÉS ¦ ✉️ НАСЛЕДНИКИ, С КОТОРЫМИ СВЯЗАЛИСЬ ¦ ✉️ СПАДКОЄМЦІ, З ЯКИМИ ЗВ’ЯЗАЛИСЯ
+Relance ¦ Напоминание ¦ Нагадування
+📋 Ranger dans le Registre de courriers ¦ 📋 Сохранить в Журнале писем ¦ 📋 Зберегти в Журналі листів
+pas d’adresse dans le Répertoire des vivants ¦ нет адреса в Справочнике живых ¦ немає адреси в Довіднику живих
+Premier contact ¦ Первый контакт ¦ Перший контакт
+Contrat de révélation ¦ Договор о раскрытии ¦ Договір про розкриття
+Relance dans (jours) ¦ Напомнить через (дней) ¦ Нагадати через (днів)
+Le nom du défunt n’est pas écrit : il est révélé après la signature. ¦ Имя наследодателя не пишется: оно раскрывается после подписания. ¦ Ім’я спадкодавця не пишеться: його розкривають після підписання.
+La lettre (tu peux la retoucher ; le nom de chaque héritier est mis tout seul) ¦ Письмо (можно изменить; имя каждого наследника подставляется само) ¦ Лист (можна змінити; ім’я кожного спадкоємця підставляється само)
+📝 Traitement de texte ¦ 📝 Текстовый редактор ¦ 📝 Текстовий редактор
+Coche au moins un héritier. ¦ Отметь хотя бы одного наследника. ¦ Познач хоча б одного спадкоємця.
+Courriers aux héritiers ¦ Письма наследникам ¦ Листи спадкоємцям
+Recherche d’héritiers ¦ Поиск наследников ¦ Пошук спадкоємців
+Ton logiciel de courriel s’ouvre : relis la lettre et envoie-la toi-même. Rien n’est envoyé par l’app. ¦ Откроется твоя почтовая программа: перечитай письмо и отправь его сам. Приложение ничего не отправляет. ¦ Відкриється твоя поштова програма: перечитай лист і надішли його сам. Застосунок нічого не надсилає.
+Premier contact + contrat ¦ Первый контакт + договор ¦ Перший контакт + договір
+{n} rangés dans le Registre de courriers ¦ Сохранено в Журнале писем: {n} ¦ Збережено в Журналі листів: {n}
+N. ¦ Род. ¦ Нар.
+D. ¦ Ум. ¦ Пом.
+M. ¦ Бр. ¦ Шл.
+Div. ¦ Разв. ¦ Розл.
+Ren. ¦ Отк. ¦ Відм.
+(à fournir) ¦ (указать) ¦ (надати)
+repr. {who} ¦ предст. {who} ¦ предст. {who}
+existence à ce jour non établie ¦ существование не установлено ¦ існування не встановлено
+TABLEAU GÉNÉALOGIQUE ¦ ГЕНЕАЛОГИЧЕСКАЯ ТАБЛИЦА ¦ ГЕНЕАЛОГІЧНА ТАБЛИЦЯ
+Succession de {name}, décédé(e) à {place} le {date} ¦ Наследство {name}, умер(ла) в {place} {date} ¦ Спадщина {name}, помер(ла) у {place} {date}
+Dossier {n} · Réf. notaire {ref} ¦ Дело {n} · Номер у нотариуса {ref} ¦ Справа {n} · Номер у нотаріуса {ref}
+Calcul établi d’après les actes cités, art. 731 et suiv. du Code civil, sous réserve de vérification par le notaire. N. = naissance, M. = mariage, D. = décès. ¦ Расчёт по указанным актам, ст. 731 и сл. Гражданского кодекса Франции, при условии проверки нотариусом. Род. = рождение, Бр. = брак, Ум. = смерть. ¦ Розрахунок за вказаними актами, ст. 731 і наст. Цивільного кодексу Франції, за умови перевірки нотаріусом. Нар. = народження, Шл. = шлюб, Пом. = смерть.
+Communs à tous : {list}. ¦ Общие для всех: {list}. ¦ Спільні для всіх: {list}.
+Hypothèse retenue : {h} ¦ Принятая гипотеза: {h} ¦ Прийнята гіпотеза: {h}
+à préciser ¦ уточнить ¦ уточнити
+Liste des pièces ¦ Опись документов ¦ Опис документів
+Page {n} / 3 ¦ Страница {n} / 3 ¦ Сторінка {n} / 3
+Un PDF sobre, une source pour chaque lien ¦ Простой PDF, источник для каждой связи ¦ Простий PDF, джерело для кожного зв’язку
+📝 Ouvrir dans le traitement de texte ¦ 📝 Открыть в текстовом редакторе ¦ 📝 Відкрити в текстовому редакторі
+Joindre les adresses des héritiers ¦ Приложить адреса наследников ¦ Додати адреси спадкоємців
+Aucune photo ni note privée : les noms, les qualités, les parts et les sources. Pas d’adresse sauf si la case est cochée. ¦ Ни фотографий, ни личных заметок: имена, статусы, доли и источники. Адреса — только если отмечен флажок. ¦ Ні фото, ні особистих нотаток: імена, статуси, частки та джерела. Адреси — лише якщо позначено прапорець.
+Tableau généalogique — {n} ¦ Генеалогическая таблица — {n} ¦ Генеалогічна таблиця — {n}
+Tableau pour le notaire : PDF ou impression (3 pages) ¦ Таблица для нотариуса: PDF или печать (3 страницы) ¦ Таблиця для нотаріуса: PDF або друк (3 сторінки)
+Tableau pour le notaire : ouvert dans le traitement de texte ¦ Таблица для нотариуса: открыта в текстовом редакторе ¦ Таблиця для нотаріуса: відкрито в текстовому редакторі
+Tableau pour le notaire : copie rangée dans les médias ¦ Таблица для нотариуса: копия сохранена в медиатеке ¦ Таблиця для нотаріуса: копію збережено в медіатеці
+🕓 Journal du dossier {n} ¦ 🕓 Журнал дела {n} ¦ 🕓 Журнал справи {n}
+(on ne peut ni le modifier ni l’effacer) ¦ (нельзя изменить или удалить) ¦ (не можна змінити чи видалити)
+⤓ Exporter le journal (CSV) ¦ ⤓ Экспорт журнала (CSV) ¦ ⤓ Експорт журналу (CSV)
+Les changements des fiches restent dans Réglages → Journal des modifications. ¦ Изменения записей также остаются в Настройки → Журнал изменений. ¦ Зміни записів також лишаються в Налаштування → Журнал змін.
+Action ¦ Действие ¦ Дія
+Journal exporté (CSV) ¦ Журнал экспортирован (CSV) ¦ Журнал експортовано (CSV)
+Le temps passé, les frais, les honoraires des contrats ¦ Затраченное время, расходы, вознаграждения по договорам ¦ Витрачений час, витрати, винагороди за договорами
+＋ Temps ¦ ＋ Время ¦ ＋ Час
+＋ Frais ¦ ＋ Расход ¦ ＋ Витрата
+＋ Honoraires d’un contrat ¦ ＋ Вознаграждение по договору ¦ ＋ Винагорода за договором
+🖨 Relevé ¦ 🖨 Отчёт ¦ 🖨 Звіт
+{h} h {m} min passées ¦ Затрачено {h} ч {m} мин ¦ Витрачено {h} год {m} хв
+Frais : {s} ¦ Расходы: {s} ¦ Витрати: {s}
+{n} contrats ¦ Договоры: {n} ¦ Договори: {n}
+{h} h {m} min ¦ {h} ч {m} мин ¦ {h} год {m} хв
+Rien de noté. ¦ Ничего не записано. ¦ Нічого не записано.
+Aucun montant de succession n’est noté. ¦ Никакие суммы наследства не записываются. ¦ Жодні суми спадщини не записуються.
+💶 TEMPS ET FRAIS ¦ 💶 ВРЕМЯ И РАСХОДЫ ¦ 💶 ЧАС І ВИТРАТИ
+Copie d’acte, déplacement… ¦ Копия акта, поездка… ¦ Копія акта, поїздка…
+Recherches aux AD, appels… ¦ Поиск в архивах, звонки… ¦ Пошук в архівах, дзвінки…
+Contrat signé ¦ Подписанный договор ¦ Підписаний договір
+Heures ¦ Часы ¦ Години
+Minutes ¦ Минуты ¦ Хвилини
+Montant (€) ¦ Сумма (€) ¦ Сума (€)
+🌍 HÉRITIER À L’ÉTRANGER ¦ 🌍 НАСЛЕДНИК ЗА ГРАНИЦЕЙ ¦ 🌍 СПАДКОЄМЕЦЬ ЗА КОРДОНОМ
+Chercher {name} hors de France ¦ Найти {name} за пределами Франции ¦ Знайти {name} за межами Франції
+Les services à interroger ¦ Службы, к которым обратиться ¦ Служби, до яких звернутися
+📮 Demander l’acte au Service central d’état civil ¦ 📮 Запросить акт в Центральной службе актов гражданского состояния ¦ 📮 Запросити акт у Центральній службі актів цивільного стану
+Langue de la lettre ¦ Язык письма ¦ Мова листа
+Destinataire ¦ Адресат ¦ Адресат
+Registro civil de …, consulat de France à … ¦ Registro civil de …, консульство Франции в … ¦ Registro civil de …, консульство Франції в …
+La lettre (dans la langue du pays) ¦ Письмо (на языке страны) ¦ Лист (мовою країни)
+Lettre à l’étranger ¦ Письмо за границу ¦ Лист за кордон
+Recherche d’un héritier à l’étranger : {name} ¦ Поиск наследника за границей: {name} ¦ Пошук спадкоємця за кордоном: {name}
+Courrier rangé dans le Registre de courriers ¦ Письмо сохранено в Журнале писем ¦ Лист збережено в Журналі листів
+❔ ABSENTS ET DISPARUS ¦ ❔ ОТСУТСТВУЮЩИЕ И ПРОПАВШИЕ ¦ ❔ ВІДСУТНІ ТА ЗНИКЛІ
+{name} : absent ou disparu ? ¦ {name}: отсутствующий или пропавший? ¦ {name}: відсутній чи зниклий?
+art. {a} ¦ ст. {a} ¦ ст. {a}
+Le calcul lit ce statut : un présumé absent est compté vivant, sa part est « réservée » ; un déclaré absent est compté comme mort avant. ¦ Расчёт читает этот статус: предполагаемо отсутствующий считается живым, его доля «резервируется»; объявленный отсутствующим считается умершим раньше. ¦ Розрахунок читає цей статус: імовірно відсутній вважається живим, його частка «резервується»; оголошений відсутнім вважається таким, що помер раніше.
+Présumé absent ¦ Предполагаемо отсутствующий ¦ Імовірно відсутній
+Déclaré absent ou jugement de décès ¦ Объявлен отсутствующим или решение о признании умершим ¦ Оголошений відсутнім або рішення про визнання померлим
+{name} : statut retenu changé, dévolution recalculée ¦ {name}: принятый статус изменён, наследование пересчитано ¦ {name}: прийнятий статус змінено, спадкування перераховано
+Héritier à retrouver : {name}{born} — vivant ? décédé ? des enfants ? (dossier de succession {n}) ¦ Наследник для поиска: {name}{born} — жив? умер? дети? (наследственное дело {n}) ¦ Спадкоємець для пошуку: {name}{born} — живий? помер? діти? (спадкова справа {n})
+(né en {y}) ¦ (род. в {y}) ¦ (нар. {y})
+Descendance de {name} (mort avant le défunt) : un enfant reconnu ou naturel ? (dossier de succession {n}) ¦ Потомки {name} (умер(ла) раньше наследодателя): признанный или внебрачный ребёнок? (наследственное дело {n}) ¦ Нащадки {name} (помер(ла) раніше за спадкодавця): визнана чи позашлюбна дитина? (спадкова справа {n})
+Branche à chercher autour de {name} (dossier de succession {n}) ¦ Ветвь для поиска вокруг {name} (наследственное дело {n}) ¦ Гілка для пошуку навколо {name} (спадкова справа {n})
+Piste ouverte dans le Journal des recherches : {name} ¦ Направление открыто в Журнале поисков: {name} ¦ Напрям відкрито в Журналі пошуків: {name}
+Piste ajoutée : Recherche → 🗓 Journal des recherches ¦ Направление добавлено: Поиск → 🗓 Журнал поисков ¦ Напрям додано: Пошук → 🗓 Журнал пошуків
+🗂 TABLES DES SUCCESSIONS DES AD ¦ 🗂 РЕЕСТРЫ НАСЛЕДСТВ В АРХИВАХ ¦ 🗂 РЕЄСТРИ СПАДЩИН В АРХІВАХ
+Dépouiller les tables de successions et absences ¦ Просмотреть реестры наследств и отсутствий ¦ Переглянути реєстри спадщин і відсутностей
+Ajouter au suivi ¦ Добавить в отслеживание ¦ Додати до відстеження
+Les tables de successions et absences et les mutations par décès (série Q des Archives départementales) donnent la date et le bureau de chaque succession. Coche les personnes à chercher : une ligne « à faire » chacune. ¦ Реестры наследств и отсутствий и реестры переходов в связи со смертью (серия Q департаментских архивов) дают дату и контору каждого наследства. Отметь лиц, которых нужно найти: по одной строке «сделать» на каждого. ¦ Реєстри спадщин і відсутностей та реєстри переходів у зв’язку зі смертю (серія Q департаментських архівів) дають дату й контору кожної спадщини. Познач осіб, яких треба знайти: по одному рядку «зробити» на кожну.
+Coche au moins une personne. ¦ Отметь хотя бы одно лицо. ¦ Познач хоча б одну особу.
+Tables des successions et absences, mutations par décès (série Q) : {name}{d} ¦ Реестры наследств и отсутствий, переходы в связи со смертью (серия Q): {name}{d} ¦ Реєстри спадщин і відсутностей, переходи у зв’язку зі смертю (серія Q): {name}{d}
+Tables des successions : {n} à dépouiller ¦ Реестры наследств: просмотреть {n} ¦ Реєстри спадщин: переглянути {n}
+{n} ajoutés aux dépouillements ¦ Добавлено к просмотрам: {n} ¦ Додано до переглядів: {n}
+État : {s} ¦ Статус: {s} ¦ Стан: {s}
+📋 LISTE DE CONTRÔLE ¦ 📋 КОНТРОЛЬНЫЙ СПИСОК ¦ 📋 КОНТРОЛЬНИЙ СПИСОК
+Avant « Remis au notaire » ¦ Перед «Передано нотариусу» ¦ Перед «Передано нотаріусу»
+Remis au notaire ¦ Передано нотариусу ¦ Передано нотаріусу
+Remettre quand même ¦ Всё равно передать ¦ Однаково передати
+Tout n’est pas prêt : corrige d’abord, ou remets quand même (ce sera noté au journal). ¦ Не всё готово: сначала исправь или всё равно передай (будет записано в журнал). ¦ Не все готово: спершу виправ або однаково передай (буде записано в журнал).
+Les adresses des vivants seront retirées du dossier et de ses courriers. Le journal reste. Continuer ? ¦ Адреса живых будут удалены из дела и его писем. Журнал сохраняется. Продолжить? ¦ Адреси живих буде видалено зі справи та її листів. Журнал зберігається. Продовжити?
+Archiver ¦ Архивировать ¦ Архівувати
+Dossier archivé. ¦ Дело в архиве. ¦ Справу заархівовано.
+ÉCHÉANCE ¦ СРОК ¦ СТРОК
+Remettre le tableau généalogique au notaire ¦ Передать генеалогическую таблицу нотариусу ¦ Передати генеалогічну таблицю нотаріусу
+Remise au notaire ¦ Передача нотариусу ¦ Передача нотаріусу
+Rendez-vous ¦ Встреча ¦ Зустріч
+Échéance ajoutée ¦ Срок добавлен ¦ Строк додано
+Échéance supprimée ¦ Срок удалён ¦ Строк видалено
+Répertoire des vivants : « ＋ Contact », puis relie la fiche de l’héritier. ¦ Справочник живых: «＋ Контакт», затем привяжи запись наследника. ¦ Довідник живих: «＋ Контакт», потім прив’яжи запис спадкоємця.
+Relevé de temps et de frais — {n} ¦ Отчёт о времени и расходах — {n} ¦ Звіт про час і витрати — {n}
+Arbre de dévolution — {n} ¦ Древо наследования — {n} ¦ Дерево спадкування — {n}
+Arbre de dévolution imprimé ¦ Древо наследования напечатано ¦ Дерево спадкування надруковано
+Hypothèse retenue enregistrée ¦ Принятая гипотеза сохранена ¦ Прийняту гіпотезу збережено
+Échéance faite ¦ Срок выполнен ¦ Строк виконано
+Échéance à faire ¦ Срок к выполнению ¦ Строк до виконання
+Pièce : {s} ¦ Документ: {s} ¦ Документ: {s}
+Courrier mis à jour ¦ Письмо обновлено ¦ Лист оновлено
+Rechercher les héritiers… ¦ Поиск наследников… ¦ Пошук спадкоємців…
+Pas en mode consultation. ¦ Недоступно в режиме показа. ¦ Недоступно в режимі показу.
+Les dossiers n’ont pas pu être lus. ¦ Не удалось прочитать дела. ¦ Не вдалося прочитати справи.
+Aucun dossier en cours. ¦ Нет текущих дел. ¦ Немає поточних справ.
+Dossier {n} ¦ Дело {n} ¦ Справа {n}
+⚖️ Dossiers de succession ¦ ⚖️ Наследственные дела ¦ ⚖️ Спадкові справи
+Signé le {d} ¦ Подписано {d} ¦ Підписано {d}
+Dossier de succession ¦ Наследственное дело ¦ Спадкова справа
+Tous les courriers ¦ Все письма ¦ Усі листи
+l’héritier ¦ наследник ¦ спадкоємець
+Branche paternelle : {who} ¦ Отцовская ветвь: {who} ¦ Батьківська гілка: {who}
+Branche maternelle : {who} ¦ Материнская ветвь: {who} ¦ Материнська гілка: {who}
+Tous les enfants sont communs : le conjoint choisit l’usufruit de tout, ou le quart en pleine propriété (art. 757). Le calcul montre le quart. ¦ Все дети общие: супруг выбирает узуфрукт на всё имущество или четверть в полной собственности (ст. 757). Расчёт показывает четверть. ¦ Усі діти спільні: той з подружжя вибирає узуфрукт на все майно або чверть у повній власності (ст. 757). Розрахунок показує чверть.
+Un enfant au moins n’est pas commun aux deux époux : le conjoint reçoit le quart en pleine propriété (art. 757). ¦ Хотя бы один ребёнок не является общим для обоих супругов: супруг получает четверть в полной собственности (ст. 757). ¦ Принаймні одна дитина не є спільною для обох із подружжя: той з подружжя отримує чверть у повній власності (ст. 757).
+1er ordre : les enfants et, par représentation, les descendants d’un enfant prédécédé ou renonçant ; partage par souche (art. 735, 752, 753). ¦ Первая очередь: дети и, по праву представления, потомки ребёнка, умершего раньше или отказавшегося; раздел по коленам (ст. 735, 752, 753). ¦ Перша черга: діти та, за правом представлення, нащадки дитини, що померла раніше або відмовилася; поділ за колінами (ст. 735, 752, 753).
+Sans descendant, avec le père et la mère : la moitié au conjoint, un quart à chaque parent (art. 757-1). ¦ Без потомков, при живых отце и матери: половина супругу, по четверти каждому из родителей (ст. 757-1). ¦ Без нащадків, за живих батька й матері: половина подружжю, по чверті кожному з батьків (ст. 757-1).
+Sans descendant, avec un seul parent : trois quarts au conjoint, un quart au parent (art. 757-1). ¦ Без потомков, при одном родителе: три четверти супругу, четверть родителю (ст. 757-1). ¦ Без нащадків, за одного з батьків: три чверті подружжю, чверть одному з батьків (ст. 757-1).
+Sans descendant ni père ni mère : le conjoint recueille toute la succession (art. 757-2). Les frères et sœurs peuvent avoir un droit de retour sur les biens de famille (art. 757-3) : à voir avec le notaire. ¦ Без потомков, отца и матери: супруг получает всё наследство (ст. 757-2). Братья и сёстры могут иметь право возврата на семейное имущество (ст. 757-3): уточнить у нотариуса. ¦ Без нащадків, батька й матері: той з подружжя отримує всю спадщину (ст. 757-2). Брати й сестри можуть мати право повернення на родинне майно (ст. 757-3): уточнити в нотаріуса.
+Le père et la mère ont chacun un quart, les frères et sœurs (ou leurs descendants) la moitié (art. 738). ¦ Отец и мать получают по четверти, братья и сёстры (или их потомки) — половину (ст. 738). ¦ Батько й мати отримують по чверті, брати й сестри (або їхні нащадки) — половину (ст. 738).
+Le parent survivant a un quart, les frères et sœurs (ou leurs descendants) trois quarts (art. 738). ¦ Переживший родитель получает четверть, братья и сёстры (или их потомки) — три четверти (ст. 738). ¦ Той з батьків, хто пережив, отримує чверть, брати й сестри (або їхні нащадки) — три чверті (ст. 738).
+Père et mère décédés : les frères et sœurs ou leurs descendants prennent tout (art. 737). ¦ Отец и мать умерли: братья и сёстры или их потомки получают всё (ст. 737). ¦ Батько й мати померли: брати й сестри або їхні нащадки отримують усе (ст. 737).
+Frères et sœurs germains, consanguins ou utérins : parts égales, par souche (art. 744, 752-2, 753 ; loi du 3 décembre 2001). ¦ Полнородные и неполнородные братья и сёстры по отцу или по матери: равные доли, по коленам (ст. 744, 752-2, 753; закон от 3 декабря 2001 г.). ¦ Повнорідні та неповнорідні брати й сестри по батькові чи по матері: рівні частки, за колінами (ст. 744, 752-2, 753; закон від 3 грудня 2001 р.).
+Sans descendant ni frère ni sœur : le père et la mère ont chacun la moitié (art. 736). ¦ Без потомков, братьев и сестёр: отец и мать получают по половине (ст. 736). ¦ Без нащадків, братів і сестер: батько й мати отримують по половині (ст. 736).
+Un seul parent, sans frère ni sœur, mais des ascendants dans l’autre branche : moitié au parent, moitié à ces ascendants (art. 738-1). ¦ Только один родитель, без братьев и сестёр, но с восходящими родственниками в другой ветви: половина родителю, половина этим восходящим (ст. 738-1). ¦ Лише один із батьків, без братів і сестер, але з висхідними родичами в іншій гілці: половина одному з батьків, половина цим висхідним (ст. 738-1).
+Le parent survivant, seul de son ordre, recueille la succession. ¦ Переживший родитель, единственный в своей очереди, получает всё наследство. ¦ Той з батьків, хто пережив, єдиний у своїй черзі, отримує всю спадщину.
+3e ordre : moitié pour chaque branche ; dans chacune, l’ascendant le plus proche prend tout (art. 747-748). ¦ Третья очередь: по половине каждой ветви; в каждой ближайший восходящий родственник получает всё (ст. 747–748). ¦ Третя черга: по половині кожній гілці; у кожній найближчий висхідний родич отримує все (ст. 747–748).
+3e ordre : une seule branche a encore un ascendant ; il recueille toute la succession, même les cousins de l’autre branche sont écartés (art. 748). ¦ Третья очередь: восходящий родственник есть только в одной ветви; он получает всё наследство, даже двоюродные братья и сёстры другой ветви исключены (ст. 748). ¦ Третя черга: висхідний родич є лише в одній гілці; він отримує всю спадщину, навіть двоюрідні брати й сестри іншої гілки усунуті (ст. 748).
+4e ordre : moitié pour chaque branche ; dans chacune, le collatéral le plus proche en degré prend tout, sans représentation (art. 749-750). ¦ Четвёртая очередь: по половине каждой ветви; в каждой ближайший по степени боковой родственник получает всё, без представления (ст. 749–750). ¦ Четверта черга: по половині кожній гілці; у кожній найближчий за ступенем бічний родич отримує все, без представлення (ст. 749–750).
+4e ordre : personne dans une branche, l’autre branche recueille tout (art. 750). ¦ Четвёртая очередь: в одной ветви никого нет, другая ветвь получает всё (ст. 750). ¦ Четверта черга: в одній гілці нікого немає, інша гілка отримує все (ст. 750).
+Les collatéraux ne succèdent pas au-delà du 6e degré (art. 745). ¦ Боковые родственники не наследуют дальше 6-й степени (ст. 745). ¦ Бічні родичі не успадковують далі 6-го ступеня (ст. 745).
+Le défunt n’est pas dans la base. ¦ Наследодателя нет в базе. ¦ Спадкодавця немає в базі.
+si {name} n’était pas marié avec le défunt (PACS ou union libre) ¦ если {name} не был(а) в браке с наследодателем (PACS или сожительство) ¦ якщо {name} не був(ла) у шлюбі зі спадкодавцем (PACS або співжиття)
+si {name} est mort avant, représenté par ses descendants ¦ если {name} умер(ла) раньше, представлен(а) своими потомками ¦ якщо {name} помер(ла) раніше, представлений(а) своїми нащадками
+si {name} est mort avant sans descendant ¦ если {name} умер(ла) раньше без потомков ¦ якщо {name} помер(ла) раніше без нащадків
+Enfants et descendants, avec représentation ¦ Дети и потомки, по праву представления ¦ Діти та нащадки, за правом представлення
+Père et mère, frères et sœurs et leurs descendants (« parents privilégiés ») ¦ Отец и мать, братья и сёстры и их потомки («привилегированные родственники») ¦ Батько й мати, брати й сестри та їхні нащадки («привілейовані родичі»)
+Autres ascendants (grands-parents…), fente paternelle / maternelle ¦ Другие восходящие родственники (дедушки и бабушки…), раздел между отцовской и материнской ветвями ¦ Інші висхідні родичі (дідусі й бабусі…), поділ між батьківською та материнською гілками
+Oncles, tantes, cousins… jusqu’au 6e degré (art. 745) ¦ Дяди, тёти, двоюродные братья и сёстры… до 6-й степени (ст. 745) ¦ Дядьки, тітки, двоюрідні брати й сестри… до 6-го ступеня (ст. 745)
+Vivant au décès ? Mort avant ? Des enfants ? Sa réponse change la part des autres. ¦ Жив на момент смерти? Умер раньше? Дети? Ответ меняет доли остальных. ¦ Живий на момент смерті? Помер раніше? Діти? Відповідь змінює частки інших.
+Mort avant le défunt, sans descendance connue : un enfant, même reconnu tard, changerait le partage. ¦ Умер раньше наследодателя, потомки неизвестны: ребёнок, даже поздно признанный, меняет раздел. ¦ Помер раніше за спадкодавця, нащадки невідомі: дитина, навіть пізно визнана, змінює поділ.
+Aucun enfant du défunt dans la base : à vérifier (mentions en marge de l’acte de naissance, livret de famille). ¦ В базе нет детей наследодателя: нужно проверить (отметки на полях акта о рождении, семейная книжка). ¦ У базі немає дітей спадкодавця: треба перевірити (позначки на полях акта про народження, сімейна книжка).
+Les parents du défunt ne sont pas dans la base : sans eux, l’app ne trouve ni frères, ni sœurs, ni cousins. ¦ Родителей наследодателя нет в базе: без них приложение не находит ни братьев и сестёр, ни двоюродных. ¦ Батьків спадкодавця немає в базі: без них застосунок не знаходить ні братів і сестер, ні двоюрідних.
+Un seul parent du défunt est dans la base : l’autre branche reste à chercher. ¦ В базе только один родитель наследодателя: другую ветвь ещё нужно найти. ¦ У базі лише один із батьків спадкодавця: іншу гілку ще треба знайти.
+Adoption : plénière ou simple ? Une adoption plénière coupe les liens avec la famille d’origine. ¦ Усыновление: полное или простое? Полное усыновление прекращает связи с семьёй происхождения. ¦ Усиновлення: повне чи просте? Повне усиновлення припиняє зв’язки з родиною походження.
+Couple sans mariage noté : seul un conjoint marié hérite sans testament (pas le partenaire de PACS ni le concubin). ¦ Пара без записанного брака: при отсутствии завещания наследует только супруг в браке (не партнёр по PACS и не сожитель). ¦ Пара без записаного шлюбу: без заповіту успадковує лише той з подружжя, хто в шлюбі (не партнер за PACS і не співмешканець).
+Un seul parent noté : relie sa fiche à son autre parent (frère germain ou demi-frère). ¦ Записан только один родитель: привяжи запись ко второму родителю (полнородный брат или неполнородный). ¦ Записано лише одного з батьків: прив’яжи запис до другого з батьків (повнорідний чи неповнорідний брат).
+Personne dans la branche paternelle jusqu’au 6e degré : oncles, tantes et cousins du père à chercher. ¦ До 6-й степени в отцовской ветви никого: нужно найти дядей и двоюродных по отцу. ¦ До 6-го ступеня в батьківській гілці нікого: треба знайти дядьків і двоюрідних по батькові.
+Personne dans la branche maternelle jusqu’au 6e degré : oncles, tantes et cousins de la mère à chercher. ¦ До 6-й степени в материнской ветви никого: нужно найти дядей и двоюродных по матери. ¦ До 6-го ступеня в материнській гілці нікого: треба знайти дядьків і двоюрідних по матері.
+Vivant, mais pas d’adresse dans le Répertoire des vivants. ¦ Жив, но нет адреса в Справочнике живых. ¦ Живий, але немає адреси в Довіднику живих.
+Mort après le défunt : sa part passe à ses propres héritiers (sa succession à lui). ¦ Умер после наследодателя: его доля переходит к его собственным наследникам (его собственное наследство). ¦ Помер після спадкодавця: його частка переходить до його власних спадкоємців (його власна спадщина).
+Présumé absent : sa part est réservée (art. 112 à 132). ¦ Предполагаемо отсутствующий: его доля резервируется (ст. 112–132). ¦ Імовірно відсутній: його частку резервують (ст. 112–132).
+Date du décès inconnue : l’app ne peut pas dire qui était mort avant ni quel droit s’applique. ¦ Дата смерти неизвестна: приложение не может сказать, кто умер раньше, ни какое право применяется. ¦ Дата смерті невідома: застосунок не може сказати, хто помер раніше, ні яке право застосовується.
+Décès du {date} : le droit de l’époque n’est pas celui d’aujourd’hui. Avant le 1er juillet 2002 (loi du 3 décembre 2001), le conjoint survivant avait surtout de l’usufruit, les enfants nés hors mariage n’avaient pas tous les mêmes droits et les frères et sœurs de lits différents se partageaient par lignes. Avant le 1er août 1972, les enfants naturels avaient des droits réduits. L’app calcule ici selon le droit actuel : le notaire applique le droit de la date. ¦ Смерть {date}: право того времени не совпадает с нынешним. До 1 июля 2002 г. (закон от 3 декабря 2001 г.) переживший супруг имел главным образом узуфрукт, дети, рождённые вне брака, имели не одинаковые права, а братья и сёстры от разных браков делили наследство по линиям. До 1 августа 1972 г. внебрачные дети имели урезанные права. Приложение считает здесь по действующему праву: нотариус применит право на дату смерти. ¦ Смерть {date}: право того часу не збігається з нинішнім. До 1 липня 2002 р. (закон від 3 грудня 2001 р.) той з подружжя, хто пережив, мав здебільшого узуфрукт, діти, народжені поза шлюбом, мали не однакові права, а брати й сестри від різних шлюбів ділили спадщину за лініями. До 1 серпня 1972 р. позашлюбні діти мали урізані права. Застосунок рахує тут за чинним правом: нотаріус застосує право на дату смерті.
+Décès avant le 1er janvier 2007 (loi du 23 juin 2006) : on ne pouvait pas représenter un héritier qui avait renoncé. ¦ Смерть до 1 января 2007 г. (закон от 23 июня 2006 г.): отказавшийся наследник не мог быть представлен. ¦ Смерть до 1 січня 2007 р. (закон від 23 червня 2006 р.): спадкоємця, що відмовився, не можна було представити.
+Décès en 2002 sans date précise : avant ou après le 1er juillet 2002, le droit change. Précise la date. ¦ Смерть в 2002 г. без точной даты: до или после 1 июля 2002 г. право различается. Уточни дату. ¦ Смерть 2002 р. без точної дати: до чи після 1 липня 2002 р. право різне. Уточни дату.
+Divorce ¦ Развод ¦ Розлучення
+La naissance de {name} ¦ Рождение {name} ¦ Народження {name}
+Le décès de {name} ¦ Смерть {name} ¦ Смерть {name}
+Le mariage avec {name}, non dissous ¦ Брак с {name}, не расторгнут ¦ Шлюб із {name}, не розірваний
+Le divorce d’avec {name} ¦ Развод с {name} ¦ Розлучення з {name}
+Pas de conjoint survivant : décès de {name} ¦ Нет пережившего супруга: смерть {name} ¦ Немає подружжя, що пережило: смерть {name}
+{name} est mort avant ¦ {name} умер(ла) раньше ¦ {name} помер(ла) раніше
+Commun à tous ¦ Общие для всех ¦ Спільні для всіх
+{name} a renoncé à la succession ¦ {name} отказался(ась) от наследства ¦ {name} відмовився(лася) від спадщини
+{name} est mort avant (représenté) ¦ {name} умер(ла) раньше (представлен(а)) ¦ {name} помер(ла) раніше (представлений(а))
+Son nom d’épouse ¦ Фамилия в браке ¦ Прізвище в шлюбі
+{name} (pour l’écarter) ¦ {name} (исключить) ¦ {name} (усунути)
+Mort avant le défunt, sans enfant ¦ Умер раньше наследодателя, бездетным ¦ Помер раніше за спадкодавця, бездітним
+Chaque héritier a ses actes : il en manque pour {who}. ¦ У каждого наследника есть его акты: не хватает для {who}. ¦ Кожен спадкоємець має свої акти: бракує для {who}.
+Chaque héritier a ses actes. ¦ У каждого наследника есть его акты. ¦ Кожен спадкоємець має свої акти.
+Chaque prédécédé a son acte de décès : {n} manquent. ¦ У каждого умершего раньше есть акт о смерти: не хватает {n}. ¦ Кожен, хто помер раніше, має акт про смерть: бракує {n}.
+Chaque prédécédé a son acte de décès. ¦ У каждого умершего раньше есть акт о смерти. ¦ Кожен, хто помер раніше, має акт про смерть.
+Les branches inconnues ont une explication. ¦ У неизвестных ветвей есть объяснение. ¦ Невідомі гілки мають пояснення.
+{n} héritiers ou branches restent « inconnus » sans explication. ¦ Наследники или ветви «неизвестны» без объяснения: {n}. ¦ Спадкоємці або гілки «невідомі» без пояснення: {n}.
+Aucune branche « inconnue ». ¦ Нет «неизвестных» ветвей. ¦ Немає «невідомих» гілок.
+L’hypothèse retenue est écrite. ¦ Принятая гипотеза записана. ¦ Прийняту гіпотезу записано.
+Plusieurs hypothèses : écris celle qui est retenue. ¦ Несколько гипотез: запиши принятую. ¦ Кілька гіпотез: запиши прийняту.
+Une seule hypothèse. ¦ Одна гипотеза. ¦ Одна гіпотеза.
+Les parts totalisent 1. ¦ Сумма долей равна 1. ¦ Сума часток дорівнює 1.
+Les parts ne totalisent pas 1 : à revoir. ¦ Сумма долей не равна 1: пересмотреть. ¦ Сума часток не дорівнює 1: переглянути.
+La date du décès demande l’avis du notaire (droit de l’époque ou date inconnue). ¦ Дата смерти требует мнения нотариуса (право того времени или неизвестная дата). ¦ Дата смерті потребує думки нотаріуса (право того часу або невідома дата).
+{name} ajouté (statut inconnu) ¦ {name} добавлен(а) (статус неизвестен) ¦ {name} додано (статус невідомий)
+{name} ajouté ({share}) ¦ {name} добавлен(а) ({share}) ¦ {name} додано ({share})
+{name} : {from} → {to} ¦ {name}: {from} → {to} ¦ {name}: {from} → {to}
+{name} retiré ¦ {name} удалён(а) ¦ {name} вилучено
+Ordre retenu : {from} → {to} ¦ Принятая очередь: {from} → {to} ¦ Прийнята черга: {from} → {to}
+descendante à la {n}e génération ¦ потомок (жен.) в {n}-м поколении ¦ нащадок (жін.) у {n}-му поколінні
+descendant à la {n}e génération ¦ потомок в {n}-м поколении ¦ нащадок у {n}-му поколінні
+ascendante à la {n}e génération ¦ предок (жен.) в {n}-м поколении ¦ предок (жін.) у {n}-му поколінні
+ascendant à la {n}e génération ¦ предок в {n}-м поколении ¦ предок у {n}-му поколінні
+parente au {n}e degré ¦ родственница {n}-й степени ¦ родичка {n}-го ступеня
+parent au {n}e degré ¦ родственник {n}-й степени ¦ родич {n}-го ступеня
+petit-fils ¦ внук ¦ онук
+petite-fille ¦ внучка ¦ онука
+arrière-petit-fils ¦ правнук ¦ правнук
+arrière-petite-fille ¦ правнучка ¦ правнучка
+arrière-arrière-petit-fils ¦ праправнук ¦ праправнук
+arrière-arrière-petite-fille ¦ праправнучка ¦ праправнучка
+nièce ¦ племянница ¦ племінниця
+petit-neveu ¦ внучатый племянник ¦ внучатий племінник
+petite-nièce ¦ внучатая племянница ¦ внучата племінниця
+arrière-petit-neveu ¦ правнучатый племянник ¦ правнучатий племінник
+arrière-petite-nièce ¦ правнучатая племянница ¦ правнучата племінниця
+arrière-arrière-petit-neveu ¦ праправнучатый племянник ¦ праправнучатий племінник
+arrière-arrière-petite-nièce ¦ праправнучатая племянница ¦ праправнучата племінниця
+cousin germain ¦ двоюродный брат ¦ двоюрідний брат
+cousine germaine ¦ двоюродная сестра ¦ двоюрідна сестра
+fils de cousin germain ¦ сын двоюродного брата или сестры ¦ син двоюрідного брата чи сестри
+fille de cousin germain ¦ дочь двоюродного брата или сестры ¦ донька двоюрідного брата чи сестри
+petit-fils de cousin germain ¦ внук двоюродного брата или сестры ¦ онук двоюрідного брата чи сестри
+petite-fille de cousin germain ¦ внучка двоюродного брата или сестры ¦ онука двоюрідного брата чи сестри
+grand-oncle ¦ двоюродный дед ¦ двоюрідний дід
+grand-tante ¦ двоюродная бабушка ¦ двоюрідна баба
+cousin germain d’un parent ¦ двоюродный брат одного из родителей ¦ двоюрідний брат одного з батьків
+cousine germaine d’un parent ¦ двоюродная сестра одного из родителей ¦ двоюрідна сестра одного з батьків
+cousin issu de germains ¦ троюродный брат ¦ троюрідний брат
+cousine issue de germains ¦ троюродная сестра ¦ троюрідна сестра
+arrière-grand-oncle ¦ двоюродный прадед ¦ двоюрідний прадід
+arrière-grand-tante ¦ двоюродная прабабушка ¦ двоюрідна прабаба
+cousin germain d’un grand-parent ¦ двоюродный брат деда или бабушки ¦ двоюрідний брат діда чи баби
+cousine germaine d’un grand-parent ¦ двоюродная сестра деда или бабушки ¦ двоюрідна сестра діда чи баби
+arrière-arrière-grand-oncle ¦ двоюродный прапрадед ¦ двоюрідний прапрадід
+arrière-arrière-grand-tante ¦ двоюродная прапрабабушка ¦ двоюрідна прапрабаба
+frère germain ¦ полнородный брат ¦ повнорідний брат
+sœur germaine ¦ полнородная сестра ¦ повнорідна сестра
+demi-frère (même père) ¦ единокровный брат (тот же отец) ¦ єдинокровний брат (той самий батько)
+demi-sœur (même père) ¦ единокровная сестра (тот же отец) ¦ єдинокровна сестра (той самий батько)
+demi-frère (même mère) ¦ единоутробный брат (та же мать) ¦ єдиноутробний брат (та сама мати)
+demi-sœur (même mère) ¦ единоутробная сестра (та же мать) ¦ єдиноутробна сестра (та сама мати)
+Père, mère, enfant ¦ Отец, мать, ребёнок ¦ Батько, мати, дитина
+Frère, sœur, grand-parent, petit-enfant ¦ Брат, сестра, дедушка или бабушка, внук ¦ Брат, сестра, дід чи баба, онук
+Neveu, nièce, oncle, tante ¦ Племянник, племянница, дядя, тётя ¦ Племінник, племінниця, дядько, тітка
+Cousin germain, petit-neveu, grand-oncle ¦ Двоюродный брат, внучатый племянник, двоюродный дед ¦ Двоюрідний брат, внучатий племінник, двоюрідний дід
+Enfant de cousin germain ¦ Ребёнок двоюродного брата или сестры ¦ Дитина двоюрідного брата чи сестри
+Cousin issu de germains (limite) ¦ Троюродный брат или сестра (предел) ¦ Троюрідний брат чи сестра (межа)
+Présomption d’absence : le juge des tutelles la constate quand une personne a cessé de paraître sans donner de nouvelles. Elle est réputée vivante ; sa part est réservée et gérée. ¦ Презумпция отсутствия: судья констатирует её, когда человек перестаёт появляться и не даёт о себе знать. Он считается живым; его доля резервируется и управляется. ¦ Презумпція відсутності: суддя констатує її, коли людина перестає з’являтися й не дає про себе знати. Вона вважається живою; її частку резервують і нею управляють.
+Déclaration d’absence : 10 ans après le jugement de présomption (ou 20 ans sans nouvelles), le tribunal judiciaire la déclare ; le jugement a les effets d’un décès. ¦ Объявление отсутствующим: через 10 лет после решения о презумпции (или 20 лет без известий) суд объявляет отсутствие; решение влечёт последствия смерти. ¦ Оголошення відсутнім: через 10 років після рішення про презумпцію (або 20 років без звісток) суд оголошує відсутність; рішення має наслідки смерті.
+Jugement déclaratif de décès : pour une disparition dans des circonstances qui mettent la vie en danger (naufrage, catastrophe), sans attendre. ¦ Решение о признании умершим: при исчезновении в обстоятельствах, угрожавших жизни (кораблекрушение, катастрофа), без ожидания. ¦ Рішення про визнання померлим: у разі зникнення за обставин, що загрожували життю (корабельна аварія, катастрофа), без очікування.
+Service central d’état civil (Nantes) : les actes des Français nés, mariés ou morts à l’étranger. ¦ Центральная служба актов гражданского состояния (Нант): акты французов, родившихся, вступивших в брак или умерших за границей. ¦ Центральна служба актів цивільного стану (Нант): акти французів, що народилися, одружилися або померли за кордоном.
+Le consulat de France du pays : registres d’immatriculation, actes transcrits récents. ¦ Консульство Франции в стране: консульские реестры, недавно транскрибированные акты. ¦ Консульство Франції в країні: консульські реєстри, нещодавно транскрибовані акти.
+L’état civil du pays (mairie, registro civil, Standesamt…) : lettre dans la langue du pays. ¦ Органы ЗАГС страны (мэрия, registro civil, Standesamt…): письмо на языке страны. ¦ Органи РАЦС країни (мерія, registro civil, Standesamt…): лист мовою країни.
+Archives nationales d’outre-mer (Aix-en-Provence) : colonies et Algérie avant 1962. ¦ Национальные заморские архивы (Экс-ан-Прованс): колонии и Алжир до 1962 г. ¦ Національні заморські архіви (Екс-ан-Прованс): колонії та Алжир до 1962 р.
+Ouvert ¦ Открыто ¦ Відкрито
+En recherche ¦ Идёт поиск ¦ Іде пошук
+Héritiers trouvés ¦ Наследники найдены ¦ Спадкоємців знайдено
+Clos ¦ Закрыто ¦ Закрито
+📁 Dossier ¦ 📁 Дело ¦ 📁 Справа
+👥 Héritiers ¦ 👥 Наследники ¦ 👥 Спадкоємці
+🌳 Arbre ¦ 🌳 Древо ¦ 🌳 Дерево
+✉️ Héritiers contactés ¦ ✉️ Связь с наследниками ¦ ✉️ Зв’язок зі спадкоємцями
+🖨 Pour le notaire ¦ 🖨 Для нотариуса ¦ 🖨 Для нотаріуса
+🕓 Journal ¦ 🕓 Журнал ¦ 🕓 Журнал
+💶 Temps et frais ¦ 💶 Время и расходы ¦ 💶 Час і витрати
+Décédé après ¦ Умер позже ¦ Помер пізніше
+Décédée après ¦ Умерла позже ¦ Померла пізніше
+Renonce ¦ Отказывается ¦ Відмовляється
+Indigne ¦ Недостойный ¦ Негідний
+Absent ¦ Отсутствующий ¦ Відсутній
+Absente ¦ Отсутствующая ¦ Відсутня
+Pas encore conçu ¦ Ещё не зачат ¦ Ще не зачатий
+Pas encore conçue ¦ Ещё не зачата ¦ Ще не зачата
+Comme sur la fiche ¦ Как в записи ¦ Як у записі
+Vivant au décès ¦ Жив на момент смерти ¦ Живий на момент смерті
+Mort avant le défunt ¦ Умер раньше наследодателя ¦ Помер раніше за спадкодавця
+Mort après le défunt ¦ Умер после наследодателя ¦ Помер після спадкодавця
+Renonce à la succession ¦ Отказывается от наследства ¦ Відмовляється від спадщини
+Déclaré absent ¦ Объявлен отсутствующим ¦ Оголошений відсутнім
+Refuse ¦ Отказывается ¦ Відмовляється
+Rappellera ¦ Перезвонит ¦ Передзвонить
+✓ En main ¦ ✓ На руках ¦ ✓ На руках
+📮 Demandé ¦ 📮 Запрошено ¦ 📮 Запитано
+✗ Manquant ¦ ✗ Отсутствует ¦ ✗ Бракує
+Sans objet ¦ Не применимо ¦ Не застосовується
+⏱ Temps ¦ ⏱ Время ¦ ⏱ Час
+🧾 Frais ¦ 🧾 Расходы ¦ 🧾 Витрати
+📝 Contrat ¦ 📝 Договор ¦ 📝 Договір
+02 — HÉRITIERS ¦ 02 — НАСЛЕДНИКИ ¦ 02 — СПАДКОЄМЦІ
+Généalogiste successoral ¦ Генеалог по наследственным делам ¦ Генеалог у спадкових справах
+Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ Найти наследников умершего для нотариуса. ¦ Знайти спадкоємців померлого для нотаріуса.
++ ⚖️ Successions. Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Наследства. Первый экран: «Открыть дело». ¦ + ⚖️ Спадщини. Перший екран: «Відкрити справу».
+⚖️ Successions, 📇 Vivants, 📮 Courriers. ¦ ⚖️ Наследства, 📇 Живые, 📮 Письма. ¦ ⚖️ Спадщини, 📇 Живі, 📮 Листи.
+⚖️ Successions ¦ ⚖️ Наследства ¦ ⚖️ Спадщини
+Vivants ¦ Живые ¦ Живі
+Courriers ¦ Письма ¦ Листи
+Échéance le {date} ¦ Срок {date} ¦ Строк {date}
+Pour quel héritier ? ¦ Для какого наследника? ¦ Для якого спадкоємця?
+Lettre à un héritier ¦ Письмо наследнику ¦ Лист спадкоємцю
+ne révèle pas le défunt avant signature ; honoraires et date limite à écrire ¦ не раскрывает наследодателя до подписания; вознаграждение и срок действия вписать ¦ не розкриває спадкодавця до підписання; винагороду та строк дії вписати
+premier contact, sans nommer le défunt ¦ первый контакт, без имени наследодателя ¦ перший контакт, без імені спадкодавця
+Il y a déjà un dossier pour cette personne. ¦ Для этого лица дело уже есть. ¦ Для цієї особи справа вже є.
+Date d’ouverture incorrecte. ¦ Неверная дата открытия. ¦ Неправильна дата відкриття.
+Notaire introuvable. ¦ Нотариус не найден. ¦ Нотаріуса не знайдено.
+Passe d’abord par la liste de contrôle avant « Remis au notaire ». ¦ Сначала пройди контрольный список перед «Передано нотариусу». ¦ Спершу пройди контрольний список перед «Передано нотаріусу».
+Ce dossier est archivé. ¦ Это дело в архиве. ¦ Цю справу заархівовано.
+Valeur inconnue. ¦ Неизвестное значение. ¦ Невідоме значення.
+Pièce inconnue. ¦ Неизвестный документ. ¦ Невідомий документ.
+Choisis la date de l’échéance. ¦ Выбери дату срока. ¦ Вибери дату строку.
+Écris ce qu’il faut faire. ¦ Напиши, что нужно сделать. ¦ Напиши, що треба зробити.
+Échéance introuvable. ¦ Срок не найден. ¦ Строк не знайдено.
+Date incorrecte. ¦ Неверная дата. ¦ Неправильна дата.
+Le pourcentage va de 0 à 100. ¦ Процент — от 0 до 100. ¦ Відсоток — від 0 до 100.
+Combien de temps ? ¦ Сколько времени? ¦ Скільки часу?
+Choisis l’héritier. ¦ Выбери наследника. ¦ Вибери спадкоємця.
+Date de signature incorrecte. ¦ Неверная дата подписания. ¦ Неправильна дата підписання.
+Seul un dossier clos peut être archivé. ¦ Архивировать можно только закрытое дело. ¦ Архівувати можна лише закриту справу.
+Mode consultation : les dossiers de succession ne se montrent pas. ¦ Режим показа: наследственные дела скрыты. ¦ Режим показу: спадкові справи приховано.
+Rien à noter. ¦ Нечего записывать. ¦ Нічого записувати.
+Calcul manquant. ¦ Нет расчёта. ¦ Немає розрахунку.
+Dévolution ¦ Порядок наследования ¦ Порядок спадкування
+=héritier ¦ наследник|наследника|наследников ¦ спадкоємець|спадкоємці|спадкоємців
+=courrier ¦ письмо|письма|писем ¦ лист|листи|листів
+=dépouillement ¦ разбор|разбора|разборов ¦ розбір|розбори|розборів
+=dossier en cours ¦ дело в работе|дела в работе|дел в работе ¦ справа в роботі|справи в роботі|справ у роботі
+=dossier de succession ¦ наследственное дело|наследственных дела|наследственных дел ¦ спадкова справа|спадкові справи|спадкових справ

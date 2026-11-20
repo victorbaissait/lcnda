@@ -43,6 +43,7 @@ const CONTROLE_SEUILS = [
     'baptism_days' => [90, 15, 365, 5],
     'burial_days' => [15, 3, 90, 1],
     'dup_min' => [60, 40, 95, 5],
+    'reliability_min' => [50, 20, 90, 5], // 🛡 fiabilité d'une fiche : « à revoir avant publication » en dessous (lib/plus_famille.php)
 ];
 
 function controle_seuils(PDO $pdo): array

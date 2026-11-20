@@ -1,0 +1,496 @@
+fr ¦ lt ¦ lv ¦ et
+# Zone « successoral » : ⚖️ généalogiste successoral, dossiers de succession, dévolution (heritage-successoral*.js, lib/successoral.php)
+Les dossiers de succession ne se montrent pas en mode consultation ni en mode simple. ¦ Paveldėjimo bylos nerodomos peržiūros ir paprastame režimuose. ¦ Mantojuma lietas netiek rādītas skatīšanas režīmā un vienkāršajā režīmā. ¦ Pärimistoimikuid ei näidata vaatamisrežiimis ega lihtsas režiimis.
+Successions ¦ Paveldėjimai ¦ Mantojumi ¦ Pärandid
+Listes · Recherche et organisation ¦ Sąrašai · Tyrimai ir organizavimas ¦ Saraksti · Izpēte un organizēšana ¦ Loendid · Uurimine ja korraldamine
+Dossiers de succession ¦ Paveldėjimo bylos ¦ Mantojuma lietas ¦ Pärimistoimikud
+Retrouver les héritiers d’une personne décédée, pour un notaire : un dossier par défunt. À ne pas confondre avec « 🏠 Héritages et successions » (les actes anciens des ancêtres). ¦ Surasti mirusio asmens įpėdinius notarui: viena byla vienam mirusiajam. Nepainioti su „🏠 Palikimai ir paveldėjimai“ (senieji protėvių dokumentai). ¦ Atrast mirušas personas mantiniekus notāram: viena lieta katram mirušajam. Nejaukt ar “🏠 Mantojumi un mantojuma lietas” (senču vecie dokumenti). ¦ Lahkunu pärijate otsimine notarile: üks toimik iga lahkunu kohta. Mitte segi ajada loendiga „🏠 Pärandid ja pärimised” (esivanemate vanad dokumendid).
+＋ Ouvrir un dossier ¦ ＋ Atidaryti bylą ¦ ＋ Atvērt lietu ¦ ＋ Ava toimik
+Lecture des dossiers… ¦ Skaitomos bylos… ¦ Lasa lietas… ¦ Toimikute lugemine…
+Aucun dossier de succession pour l’instant ¦ Paveldėjimo bylų dar nėra ¦ Vēl nav nevienas mantojuma lietas ¦ Pärimistoimikuid veel pole
+Choisis la personne décédée : l’app part des fiches de la base pour trouver ses héritiers, selon le Code civil d’aujourd’hui. ¦ Pasirink mirusį asmenį: programa remiasi duomenų bazės įrašais ir randa jo įpėdinius pagal dabartinį Prancūzijos civilinį kodeksą. ¦ Izvēlies mirušo personu: lietotne balstās uz datubāzes ierakstiem un atrod mantiniekus pēc pašreizējā Francijas Civilkodeksa. ¦ Vali lahkunu: rakendus lähtub andmebaasi kirjetest ja leiab tema pärijad kehtiva Prantsuse tsiviilseadustiku järgi.
+Chercher… (ex. MAZAUD, 2026-014, ROUSSILHE) ¦ Ieškoti… (pvz., MAZAUD, 2026-014, ROUSSILHE) ¦ Meklēt… (piem., MAZAUD, 2026-014, ROUSSILHE) ¦ Otsi… (nt MAZAUD, 2026-014, ROUSSILHE)
+Prochaine échéance ¦ Artimiausias terminas ¦ Nākamais termiņš ¦ Järgmine tähtaeg
+A → Z ¦ A → Ž ¦ A → Ž ¦ A → Ü
+Dossier n° {n} ¦ Byla Nr. {n} ¦ Lieta Nr. {n} ¦ Toimik nr {n}
+Prochaine échéance : {d} — {l} ¦ Artimiausias terminas: {d} — {l} ¦ Nākamais termiņš: {d} — {l} ¦ Järgmine tähtaeg: {d} — {l}
+Échéance passée ¦ Terminas praėjo ¦ Termiņš nokavēts ¦ Tähtaeg möödas
+✎ Modifier ¦ ✎ Keisti ¦ ✎ Labot ¦ ✎ Muuda
+Aucun dossier ne correspond. ¦ Jokia byla neatitinka. ¦ Neviena lieta neatbilst. ¦ Ükski toimik ei sobi.
+Pas en mode consultation ni en mode simple. ¦ Ne peržiūros ar paprastame režime. ¦ Ne skatīšanas vai vienkāršajā režīmā. ¦ Mitte vaatamisrežiimis ega lihtsas režiimis.
+⚖️ DOSSIER DE SUCCESSION ¦ ⚖️ PAVELDĖJIMO BYLA ¦ ⚖️ MANTOJUMA LIETA ¦ ⚖️ PÄRIMISTOIMIK
+Ouvrir un dossier ¦ Atidaryti bylą ¦ Atvērt lietu ¦ Ava toimik
+Ouvrir le dossier ¦ Atidaryti bylą ¦ Atvērt lietu ¦ Ava toimik
+N° de dossier ¦ Bylos Nr. ¦ Lietas Nr. ¦ Toimiku nr
+fait tout seul : 2026-014 ¦ automatiškai: 2026-014 ¦ automātiski: 2026-014 ¦ automaatselt: 2026-014
+reprise de la fiche ¦ paimta iš įrašo ¦ ņemts no ieraksta ¦ võetud kirjest
+Dernier domicile ¦ Paskutinė gyvenamoji vieta ¦ Pēdējā dzīvesvieta ¦ Viimane elukoht
+Notaire mandant (fiche ou nom) ¦ Pavedęs notaras (įrašas arba vardas) ¦ Pilnvarotājs notārs (ieraksts vai vārds) ¦ Volitav notar (kirje või nimi)
+Réf. du notaire ¦ Notaro nuoroda ¦ Notāra atsauce ¦ Notari viide
+Ouvert le ¦ Atidaryta ¦ Atvērta ¦ Avatud
+Testament ¦ Testamentas ¦ Testaments ¦ Testament
+Aucun connu (le notaire interroge le fichier des dernières volontés) ¦ Nežinomas (notaras tikrina testamentų registrą) ¦ Neviens nav zināms (notārs pārbauda testamentu reģistru) ¦ Teadaolevalt puudub (notar kontrollib testamendiregistrit)
+Situation (notes) ¦ Padėtis (pastabos) ¦ Situācija (piezīmes) ¦ Olukord (märkmed)
+🔒 Le dossier reste dans l’app : les héritiers vivants, leurs adresses et leurs parts ne sont dans aucun export. Aucun montant n’est noté. ¦ 🔒 Byla lieka programoje: gyvi įpėdiniai, jų adresai ir dalys nepatenka į jokį eksportą. Jokia suma nefiksuojama. ¦ 🔒 Lieta paliek lietotnē: dzīvie mantinieki, viņu adreses un daļas nav nevienā eksportā. Nekādas summas netiek pierakstītas. ¦ 🔒 Toimik jääb rakendusse: elavad pärijad, nende aadressid ja osad ei ole üheski ekspordis. Summasid ei märgita.
+Choisis la personne décédée. ¦ Pasirink mirusį asmenį. ¦ Izvēlies mirušo personu. ¦ Vali lahkunu.
+Dossier enregistré ¦ Byla išsaugota ¦ Lieta saglabāta ¦ Toimik salvestatud
+Dossier supprimé ¦ Byla ištrinta ¦ Lieta dzēsta ¦ Toimik kustutatud
+Lecture du dossier… ¦ Skaitoma byla… ¦ Lasa lietu… ¦ Toimiku lugemine…
+← Tous les dossiers ¦ ← Visos bylos ¦ ← Visas lietas ¦ ← Kõik toimikud
+Dossier n° {n} · {t} ¦ Byla Nr. {n} · {t} ¦ Lieta Nr. {n} · {t} ¦ Toimik nr {n} · {t}
+Listes · Dossiers de succession ¦ Sąrašai · Paveldėjimo bylos ¦ Saraksti · Mantojuma lietas ¦ Loendid · Pärimistoimikud
+↗ Fiche du défunt ¦ ↗ Mirusiojo įrašas ¦ ↗ Mirušā ieraksts ¦ ↗ Lahkunu kirje
+🗄 Archiver le dossier clos ¦ 🗄 Archyvuoti uždarytą bylą ¦ 🗄 Arhivēt slēgto lietu ¦ 🗄 Arhiveeri suletud toimik
+Dossier archivé : les adresses des vivants ont été retirées, le journal reste. ¦ Byla archyvuota: gyvųjų adresai pašalinti, žurnalas lieka. ¦ Lieta arhivēta: dzīvo adreses dzēstas, žurnāls paliek. ¦ Toimik arhiveeritud: elavate aadressid eemaldati, logi jääb.
+État du dossier ¦ Bylos būsena ¦ Lietas stāvoklis ¦ Toimiku olek
+Le défunt n’est plus dans la base. ¦ Mirusiojo nebėra duomenų bazėje. ¦ Mirušā vairs nav datubāzē. ¦ Lahkunut pole enam andmebaasis.
+Pas de conjoint dans la base ¦ Duomenų bazėje nėra sutuoktinio ¦ Datubāzē nav laulātā ¦ Andmebaasis pole abikaasat
+A des descendants ¦ Turi palikuonių ¦ Ir pēcnācēji ¦ On järeltulijaid
+Sans descendant dans la base ¦ Duomenų bazėje nėra palikuonių ¦ Datubāzē nav pēcnācēju ¦ Andmebaasis pole järeltulijaid
+Le défunt ¦ Mirusysis ¦ Mirušais ¦ Lahkunu
+fiche n° {n} ¦ įrašas Nr. {n} ¦ ieraksts Nr. {n} ¦ kirje nr {n}
+Le mandat ¦ Pavedimas ¦ Pilnvarojums ¦ Volitus
+Droit actuel (décès après le 1er janvier 2007) ¦ Galiojanti teisė (mirtis po 2007 m. sausio 1 d.) ¦ Spēkā esošās tiesības (nāve pēc 2007. gada 1. janvāra) ¦ Kehtiv õigus (surm pärast 1. jaanuari 2007)
+Échéances ¦ Terminai ¦ Termiņi ¦ Tähtajad
+＋ Échéance ¦ ＋ Terminas ¦ ＋ Termiņš ¦ ＋ Tähtaeg
+Dans {n} j ¦ Po {n} d. ¦ Pēc {n} d. ¦ {n} p pärast
+Aucune échéance. ¦ Terminų nėra. ¦ Nav termiņu. ¦ Tähtaegu pole.
+Aussi dans 🗓 Ma semaine de recherche. ¦ Taip pat 🗓 Mano tyrimų savaitė. ¦ Arī 🗓 Mana izpētes nedēļa. ¦ Ka 🗓 Minu uurimisnädal.
+📑 Pièces ¦ 📑 Dokumentai ¦ 📑 Dokumenti ¦ 📑 Dokumendid
+🖨 Tableau pour le notaire ¦ 🖨 Lentelė notarui ¦ 🖨 Tabula notāram ¦ 🖨 Tabel notarile
+de son chef ¦ savo vardu ¦ savā vārdā ¦ omal õigusel
+représenté ¦ atstovaujamas ¦ pārstāvēts ¦ esindatud
+sans descendance connue ¦ nėra žinomų palikuonių ¦ nav zināmu pēcnācēju ¦ teadaolevaid järeltulijaid pole
+degré plus éloigné ¦ tolimesnis laipsnis ¦ tālāka pakāpe ¦ kaugem aste
+pas de représentation ¦ be atstovavimo ¦ bez pārstāvības ¦ ilma esindusõiguseta
+pas encore conçu ¦ dar nepradėtas ¦ vēl nav ieņemts ¦ veel eostamata
+écarté ¦ pašalintas ¦ izslēgts ¦ välja jäetud
+par représentation ¦ atstovavimo teise ¦ pārstāvības kārtā ¦ esindusõiguse alusel
+de son chef, s’il vit ¦ savo vardu, jei gyvas ¦ savā vārdā, ja dzīvs ¦ omal õigusel, kui elus
+Retenu ¦ Pašauktas ¦ Aicināts ¦ Kutsutud
+Écarté par le conjoint ¦ Pašalintas dėl sutuoktinio ¦ Izslēgts laulātā dēļ ¦ Abikaasa jätab välja
+Écarté ¦ Pašalintas ¦ Izslēgts ¦ Välja jäetud
+{name} : {share} (art. {art}). ¦ {name}: {share} ({art} str.). ¦ {name}: {share} ({art}. pants). ¦ {name}: {share} (§ {art}).
+Ou, à son choix, l’usufruit de la totalité (art. 757) : les descendants ont alors la nue-propriété, dans les mêmes proportions. ¦ Arba savo pasirinkimu – uzufruktas visam turtui (757 str.): palikuonys tada turi nuogąją nuosavybę tomis pačiomis dalimis. ¦ Vai pēc izvēles lietojuma tiesības uz visu (757. pants): pēcnācējiem tad ir kailīpašums tādās pašās proporcijās. ¦ Või valikul kasutusvaldus kogu pärandile (§ 757): järeltulijatel on siis paljas omand samades osades.
+Aucun conjoint dans la base. ¦ Duomenų bazėje nėra sutuoktinio. ¦ Datubāzē nav laulātā. ¦ Andmebaasis pole abikaasat.
+S’il y avait un conjoint, l’app afficherait ici ses droits (art. 757 à 757-2) avant les ordres. ¦ Jei būtų sutuoktinis, programa čia parodytų jo teises (757–757-2 str.) prieš eiles. ¦ Ja būtu laulātais, lietotne šeit parādītu viņa tiesības (757.–757-2. pants) pirms šķirām. ¦ Kui oleks abikaasa, näitaks rakendus siin tema õigusi (§ 757–757-2) enne pärijate järke.
+{n}e ¦ {n} ¦ {n}. ¦ {n}.
+adresse ? ¦ adresas? ¦ adrese? ¦ aadress?
+Statut retenu dans ce dossier ¦ Šioje byloje priimta būsena ¦ Šajā lietā pieņemtais stāvoklis ¦ Selles toimikus arvestatud olek
+Autre hypothèse ¦ Kita hipotezė ¦ Cita hipotēze ¦ Teine oletus
+total {t} ¦ iš viso {t} ¦ kopā {t} ¦ kokku {t}
+personne : il reste des branches à chercher. ¦ niekas: dar liko šakų paieškai. ¦ neviens: vēl ir zari, ko meklēt. ¦ mitte keegi: otsida on veel harusid.
+Part en jeu : {s} ¦ Sprendžiama dalis: {s} ¦ Daļa uz spēles: {s} ¦ Kaalul olev osa: {s}
+🔍 Chercher ¦ 🔍 Ieškoti ¦ 🔍 Meklēt ¦ 🔍 Otsi
+🌍 Héritier à l’étranger ¦ 🌍 Įpėdinis užsienyje ¦ 🌍 Mantinieks ārzemēs ¦ 🌍 Pärija välismaal
+❔ Absent ou disparu ¦ ❔ Nesantis arba dingęs ¦ ❔ Prombūtnē vai pazudis ¦ ❔ Eemalviibiv või kadunud
+📇 Compléter ¦ 📇 Papildyti ¦ 📇 Papildināt ¦ 📇 Täienda
+Type d’adoption ¦ Įvaikinimo rūšis ¦ Adopcijas veids ¦ Lapsendamise liik
+Type d’adoption ? ¦ Įvaikinimo rūšis? ¦ Adopcijas veids? ¦ Lapsendamise liik?
+Plénière ¦ Visiškas ¦ Pilna ¦ Täielik
+Marié ? ¦ Susituokęs? ¦ Precējies? ¦ Abielus?
+Pas marié (PACS, union libre) ¦ Nesusituokęs (PACS, partnerystė be santuokos) ¦ Nav precējies (PACS, kopdzīve) ¦ Pole abielus (PACS, vabaabielu)
+Divorcé ¦ Išsiskyręs ¦ Šķīries ¦ Lahutatud
+Aucune branche à chercher d’après les fiches. ¦ Pagal įrašus nėra šakos paieškai. ¦ Pēc ierakstiem nav zaru, ko meklēt. ¦ Kirjete järgi pole otsitavaid harusid.
+{n}e degré ¦ {n} laipsnis ¦ {n}. pakāpe ¦ {n}. aste
+Calcul indicatif, à faire vérifier par le notaire. Il suit le Code civil en vigueur (art. 731 et suivants), sans testament, sans donation, sans renonciation connue. Il ne tient pas compte du droit de retour légal (art. 738-2, 757-3), des biens à l’étranger ni d’un régime matrimonial. ¦ Orientacinis skaičiavimas, kurį turi patikrinti notaras. Remiamasi galiojančiu Prancūzijos civiliniu kodeksu (731 str. ir toliau), be testamento, be dovanojimo, be žinomo atsisakymo. Neatsižvelgiama į įstatyminę grąžinimo teisę (738-2, 757-3 str.), turtą užsienyje ir sutuoktinių turto režimą. ¦ Orientējošs aprēķins, ko jāpārbauda notāram. Tas balstās uz spēkā esošo Francijas Civilkodeksu (731. pants un turpmākie), bez testamenta, bez dāvinājuma, bez zināmas atteikšanās. Tas neņem vērā likumīgās atgriešanas tiesības (738-2., 757-3. pants), īpašumu ārzemēs un laulāto mantisko attiecību režīmu. ¦ Ligikaudne arvutus, notar peab kontrollima. Järgib kehtivat Prantsuse tsiviilseadustikku (§ 731 jj), ilma testamendi, kingituse ja teadaoleva loobumiseta. Ei arvesta seadusjärgset tagasilangemisõigust (§ 738-2, 757-3), välismaist vara ega abikaasade varasuhet.
+Le conjoint survivant ¦ Pergyvenęs sutuoktinis ¦ Pārdzīvojušais laulātais ¦ Üleelanud abikaasa
+Les ordres d’héritiers (art. 734) : le premier qui a quelqu’un prend tout ¦ Įpėdinių eilės (734 str.): pirmoji, kurioje yra kas nors, gauna viską ¦ Mantinieku šķiras (734. pants): pirmā, kurā kāds ir, saņem visu ¦ Pärijate järgud (§ 734): esimene, kus keegi on, saab kõik
+Les héritiers trouvés ¦ Rasti įpėdiniai ¦ Atrastie mantinieki ¦ Leitud pärijad
+🗂 Tables des successions (AD)… ¦ 🗂 Paveldėjimų sąrašai (archyvai)… ¦ 🗂 Mantojumu saraksti (arhīvi)… ¦ 🗂 Pärandiregistrid (arhiivid)…
+Lien avec le défunt ¦ Giminystė su mirusiuoju ¦ Radniecība ar mirušo ¦ Sugulus lahkunuga
+Vient ¦ Paveldi ¦ Manto ¦ Pärib
+Part ¦ Dalis ¦ Daļa ¦ Osa
+Statut retenu ¦ Priimta būsena ¦ Pieņemtais stāvoklis ¦ Arvestatud olek
+↔ Faire glisser le tableau pour voir les parts. ¦ ↔ Paslink lentelę, kad matytum dalis. ¦ ↔ Velc tabulu, lai redzētu daļas. ¦ ↔ Lohista tabelit osade nägemiseks.
+Aucun héritier trouvé jusqu’au 6e degré : sans testament, la succession reviendrait à l’État (art. 539 et 768). Il reste sans doute des branches à chercher. ¦ Iki 6 laipsnio įpėdinių nerasta: be testamento palikimas atitektų valstybei (539 ir 768 str.). Tikriausiai dar liko šakų paieškai. ¦ Līdz 6. pakāpei mantinieks nav atrasts: bez testamenta mantojums pienāktos valstij (539. un 768. pants). Visticamāk vēl ir zari, ko meklēt. ¦ Kuni 6. astmeni pärijat ei leitud: testamendita läheks pärand riigile (§ 539 ja 768). Ilmselt on veel harusid otsida.
+Les calculs restent tant que la branche n’est pas tranchée. ¦ Skaičiavimai lieka, kol šaka neišspręsta. ¦ Aprēķini paliek, kamēr zars nav izšķirts. ¦ Arvutused jäävad, kuni haru on lahendatud.
+Les branches à chercher ¦ Šakos paieškai ¦ Meklējamie zari ¦ Otsitavad harud
+L’hypothèse retenue ¦ Priimta hipotezė ¦ Pieņemtā hipotēze ¦ Valitud oletus
+Ex. : André MAZAUD décédé à Lyon en 1990 sans enfant (acte reçu le 5 déc.). ¦ Pvz.: André MAZAUD mirė Lione 1990 m., vaikų neturėjo (dokumentas gautas gruod. 5 d.). ¦ Piem.: André MAZAUD miris Lionā 1990. gadā bez bērniem (dokuments saņemts 5. dec.). ¦ Nt: André MAZAUD suri Lyonis 1990 lastetuna (dokument saadud 5. dets.).
+Demandée avant « Remis au notaire » si un héritier reste inconnu. ¦ Reikalaujama prieš „Perduota notarui“, jei įpėdinis lieka nežinomas. ¦ Prasīts pirms “Nodots notāram”, ja mantinieks paliek nezināms. ¦ Nõutakse enne olekut „Notarile üle antud”, kui pärija jääb tundmatuks.
+Les degrés civils (art. 741-743) : on compte les générations jusqu’à l’ancêtre commun, puis on redescend ¦ Giminystės laipsniai (741–743 str.): skaičiuojamos kartos iki bendro protėvio, paskui žemyn ¦ Radniecības pakāpes (741.–743. pants): skaita paaudzes līdz kopējam sencim, tad atpakaļ lejup ¦ Sugulusastmed (§ 741–743): loetakse põlvkonnad ühise esivanemani, siis tagasi alla
+LE DÉFUNT ¦ MIRUSYSIS ¦ MIRUŠAIS ¦ LAHKUNU
+à retrouver ¦ surasti ¦ jāatrod ¦ leida
+sans descend. ¦ be palik. ¦ bez pēcn. ¦ järelt.
+Héritier vivant, sa part ¦ Gyvas įpėdinis, jo dalis ¦ Dzīvs mantinieks, viņa daļa ¦ Elav pärija, tema osa
+Prédécédé, sa souche ¦ Miręs anksčiau, jo kamienas ¦ Miris agrāk, viņa cilts ¦ Varem surnud, tema tüvi
+Branche à chercher ¦ Šaka paieškai ¦ Meklējamais zars ¦ Otsitav haru
+Arbre de dévolution ¦ Paveldėjimo medis ¦ Mantošanas koks ¦ Pärimispuu
+Le défunt au centre, chaque héritier avec sa part ¦ Mirusysis centre, kiekvienas įpėdinis su savo dalimi ¦ Mirušais centrā, katrs mantinieks ar savu daļu ¦ Lahkunu keskel, iga pärija oma osaga
+⤓ SVG ¦ ⤓ SVG ¦ ⤓ SVG ¦ ⤓ SVG
+↔ Faire glisser le dessin. ¦ ↔ Paslink piešinį. ¦ ↔ Velc zīmējumu. ¦ ↔ Lohista joonist.
+Clic sur une case : la fiche ; clic droit : « 🛡 Solidité de ce lien ». Le dessin suit les fiches. ¦ Spustelėjus langelį – įrašas; dešiniuoju – „🛡 Šio ryšio tvirtumas“. Piešinys seka įrašus. ¦ Klikšķis uz lodziņa: ieraksts; labais klikšķis: “🛡 Šīs saites stiprums”. Zīmējums seko ierakstiem. ¦ Klõps kastil: kirje; paremklõps: „🛡 Selle seose tugevus”. Joonis järgib kirjeid.
+le {d} ¦ {d} ¦ {d} ¦ {d}
+État de la pièce ¦ Dokumento būsena ¦ Dokumenta stāvoklis ¦ Dokumendi olek
+D’après la fiche ¦ Pagal įrašą ¦ Pēc ieraksta ¦ Kirje järgi
+{n} en main ¦ {n} turima ¦ {n} rokā ¦ {n} käes
+{n} demandés ¦ {n} užsakyta ¦ {n} pieprasīti ¦ {n} tellitud
+Par héritier ¦ Pagal įpėdinį ¦ Pa mantiniekiem ¦ Pärijate kaupa
+Par acte ¦ Pagal dokumentą ¦ Pa dokumentiem ¦ Dokumentide kaupa
+Ce qu’il faut prouver ¦ Ką reikia įrodyti ¦ Kas jāpierāda ¦ Mida tuleb tõendada
+↔ Faire glisser le tableau. ¦ ↔ Paslink lentelę. ¦ ↔ Velc tabulu. ¦ ↔ Lohista tabelit.
+Rangée dans le Registre de courriers, une demande d’acte met la pièce à « Demandé » ; l’acte attaché à la fiche la met à « En main ». ¦ Laiškų registre išsaugotas dokumento užklausimas nustato būseną „Užsakyta“; prie įrašo pridėtas dokumentas – „Turima“. ¦ Vēstuļu reģistrā saglabāts dokumenta pieprasījums iestata stāvokli “Pieprasīts”; ierakstam pievienots dokuments – “Rokā”. ¦ Kirjaregistrisse salvestatud dokumenditellimus seab dokumendi olekusse „Tellitud”; kirjele lisatud dokument olekusse „Käes”.
+Je suis mandaté(e) par {notary}, notaire, pour établir la dévolution de la succession de {name} (dossier {n}, réf. {ref}). ¦ Esu įgaliotas (-a) notaro {notary} nustatyti paveldėjimo tvarką po {name} mirties (byla {n}, nuor. {ref}). ¦ Esmu pilnvarots(-a) no notāra {notary} noteikt mantošanas kārtību pēc {name} nāves (lieta {n}, atsauce {ref}). ¦ Olen notar {notary} volitusel määramas pärimise korda {name} pärandis (toimik {n}, viide {ref}).
+À retrouver ¦ Surasti ¦ Jāatrod ¦ Leida
+Adresse ? ¦ Adresas? ¦ Adrese? ¦ Aadress?
+Signé le ¦ Pasirašyta ¦ Parakstīts ¦ Allkirjastatud
+À signer ¦ Pasirašyti ¦ Jāparaksta ¦ Allkirjastada
+✉️ Écrire ¦ ✉️ Rašyti ¦ ✉️ Rakstīt ¦ ✉️ Kirjuta
+Contrat de révélation, réponses, signatures ¦ Atskleidimo sutartis, atsakymai, parašai ¦ Atklāšanas līgums, atbildes, paraksti ¦ Avaldamisleping, vastused, allkirjad
+📝 Contrat de révélation ¦ 📝 Atskleidimo sutartis ¦ 📝 Atklāšanas līgums ¦ 📝 Avaldamisleping
+✉️ Lettre de premier contact ¦ ✉️ Pirmojo kontakto laiškas ¦ ✉️ Pirmā kontakta vēstule ¦ ✉️ Esimese kontakti kiri
+Héritier ¦ Įpėdinis ¦ Mantinieks ¦ Pärija
+Courrier ¦ Laiškas ¦ Vēstule ¦ Kiri
+Contrat ¦ Sutartis ¦ Līgums ¦ Leping
+📝 Le contrat ne nomme pas le défunt avant signature. Écris toi-même le pourcentage d’honoraires et la date limite. Rien n’est envoyé par l’app. ¦ 📝 Sutartyje mirusysis neįvardijamas iki pasirašymo. Atlygio procentą ir terminą įrašyk pats. Programa nieko nesiunčia. ¦ 📝 Līgums līdz parakstīšanai nenosauc mirušo. Atlīdzības procentu un termiņu ieraksti pats. Lietotne neko nesūta. ¦ 📝 Leping ei nimeta lahkunut enne allkirjastamist. Tasu protsendi ja tähtaja kirjuta ise. Rakendus ei saada midagi.
+Chaque courrier va dans le Registre de courriers, avec sa relance. ¦ Kiekvienas laiškas patenka į Laiškų registrą su priminimu. ¦ Katra vēstule nonāk Vēstuļu reģistrā ar atgādinājumu. ¦ Iga kiri läheb Kirjaregistrisse koos meeldetuletusega.
+↗ Registre de courriers ¦ ↗ Laiškų registras ¦ ↗ Vēstuļu reģistrs ¦ ↗ Kirjaregister
+Madame, Monsieur, ¦ Gerbiamoji, gerbiamasis, ¦ Godātā kundze, godātais kungs! ¦ Lugupeetud proua, lugupeetud härra
+Généalogiste successoral, je suis chargé(e) par une étude notariale de retrouver les héritiers d’une personne décédée. Mes recherches me laissent penser que vous pourriez faire partie de sa famille. ¦ kaip paveldėjimo genealogui notarų biuras man pavedė surasti mirusio asmens įpėdinius. Mano tyrimai leidžia manyti, kad galite priklausyti jo šeimai. ¦ Kā mantojuma ģenealogam notāra birojs man uzdevis atrast mirušas personas mantiniekus. Mana izpēte liek domāt, ka jūs varētu piederēt pie viņa ģimenes. ¦ pärimisgenealoogina on notaribüroo andnud mulle ülesande leida lahkunu pärijad. Minu uurimus viitab sellele, et võite kuuluda tema perekonda.
+Pour le vérifier, pourriez-vous me confirmer votre date et votre lieu de naissance, ainsi que les noms de vos parents ? Vous pouvez me répondre par courrier, par téléphone ou par courriel. ¦ Ar galėtumėte, kad tai patikrinčiau, nurodyti savo gimimo datą ir vietą bei tėvų vardus? Galite atsakyti paštu, telefonu ar el. paštu. ¦ Vai pārbaudei varētu apstiprināt savu dzimšanas datumu un vietu, kā arī vecāku vārdus? Varat atbildēt pa pastu, tālruni vai e-pastu. ¦ Kas saaksite kontrolliks kinnitada oma sünniaja ja -koha ning vanemate nimed? Võite vastata posti, telefoni või e-posti teel.
+Cette démarche ne vous engage à rien. ¦ Šis žingsnis jūsų niekuo neįpareigoja. ¦ Šis solis jūs ne pie kā nesaista. ¦ See samm ei kohusta teid millekski.
+Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées. ¦ Pagarbiai ¦ Ar cieņu ¦ Lugupidamisega
+CONTRAT DE RÉVÉLATION DE SUCCESSION ¦ PALIKIMO ATSKLEIDIMO SUTARTIS ¦ MANTOJUMA ATKLĀŠANAS LĪGUMS ¦ PÄRANDI AVALDAMISE LEPING
+Entre {heir}, ci-après « l’héritier », et {sender}, généalogiste successoral. ¦ Tarp {heir}, toliau – „įpėdinis“, ir {sender}, paveldėjimo genealogo. ¦ Starp {heir}, turpmāk “mantinieks”, un {sender}, mantojuma ģenealogu. ¦ {heir}, edaspidi „pärija”, ja {sender}, pärimisgenealoog, vahel.
+Le généalogiste a découvert une succession en cours dans laquelle l’héritier pourrait avoir des droits. Il s’engage à lui en révéler l’origine (le nom de la personne décédée, l’étude notariale chargée du règlement) dès la signature du présent contrat, et à réunir les actes qui prouvent sa qualité d’héritier. ¦ Genealogas aptiko vykstantį paveldėjimą, kuriame įpėdinis gali turėti teisių. Jis įsipareigoja pasirašius šią sutartį atskleisti jo kilmę (mirusiojo vardą, atsakingą notarų biurą) ir surinkti dokumentus, įrodančius įpėdinio statusą. ¦ Ģenealogs ir atklājis notiekošu mantojumu, kurā mantiniekam var būt tiesības. Viņš apņemas, parakstot šo līgumu, atklāt tā izcelsmi (mirušā vārdu, atbildīgo notāra biroju) un savākt dokumentus, kas pierāda mantinieka statusu. ¦ Genealoog on avastanud käimasoleva pärimise, milles pärijal võivad olla õigused. Ta kohustub lepingu allkirjastamisel avaldama selle päritolu (lahkunu nime, vastutava notaribüroo) ja koguma dokumendid, mis tõendavad pärija staatust.
+En contrepartie, l’héritier s’engage à verser au généalogiste des honoraires de ____ % (hors taxes) de l’actif net qui lui reviendra, payables seulement s’il reçoit effectivement une part de la succession. Les frais de recherche sont compris. ¦ Mainais įpėdinis įsipareigoja sumokėti genealogui ____ % (be mokesčių) jam tenkančio grynojo turto atlygį, mokamą tik tuo atveju, jei jis iš tikrųjų gaus palikimo dalį. Paieškos išlaidos įskaičiuotos. ¦ Pretī mantinieks apņemas samaksāt ģenealogam atlīdzību ____ % (bez nodokļiem) apmērā no viņam pienākošās neto mantas, maksājamu tikai tad, ja viņš patiešām saņem daļu no mantojuma. Izpētes izdevumi ir iekļauti. ¦ Vastutasuks kohustub pärija maksma genealoogile tasu ____ % (maksudeta) talle langevast netovarast, ainult juhul, kui ta tegelikult saab osa pärandist. Uurimiskulud on hinnas.
+Cette proposition est valable jusqu’au ____________. ¦ Šis pasiūlymas galioja iki ____________. ¦ Šis piedāvājums ir spēkā līdz ____________. ¦ See pakkumine kehtib kuni ____________.
+Fait en deux exemplaires, à ____________, le ____________. ¦ Sudaryta dviem egzemplioriais, ____________, ____________. ¦ Sastādīts divos eksemplāros, ____________, ____________. ¦ Koostatud kahes eksemplaris, ____________, ____________.
+L’héritier (« Lu et approuvé », signature) — Le généalogiste ¦ Įpėdinis („Perskaičiau ir sutinku“, parašas) — Genealogas ¦ Mantinieks (“Izlasīts un apstiprināts”, paraksts) — Ģenealogs ¦ Pärija („Loetud ja heaks kiidetud”, allkiri) — Genealoog
+Je me permets de revenir vers vous au sujet de mon courrier du {sent}, resté sans réponse. Une succession en cours pourrait vous concerner : pourriez-vous me contacter ? ¦ Grįžtu prie savo {sent} laiško, į kurį neatsakėte. Vykstantis paveldėjimas gali jus liesti: ar galėtumėte susisiekti? ¦ Atgriežos pie savas {sent} vēstules, kas palikusi bez atbildes. Notiekošs mantojums var skart jūs: vai varētu ar mani sazināties? ¦ Pöördun tagasi oma {sent} kirja juurde, millele vastust ei tulnud. Käimasolev pärimine võib teid puudutada: kas saaksite minuga ühendust võtta?
+✉️ HÉRITIERS CONTACTÉS ¦ ✉️ SUSISIEKTI ĮPĖDINIAI ¦ ✉️ UZRUNĀTIE MANTINIEKI ¦ ✉️ KONTAKTEERITUD PÄRIJAD
+Relance ¦ Priminimas ¦ Atgādinājums ¦ Meeldetuletus
+📋 Ranger dans le Registre de courriers ¦ 📋 Išsaugoti Laiškų registre ¦ 📋 Saglabāt Vēstuļu reģistrā ¦ 📋 Salvesta Kirjaregistrisse
+pas d’adresse dans le Répertoire des vivants ¦ nėra adreso Gyvųjų adresyne ¦ nav adreses Dzīvo adrešu grāmatā ¦ elavate kataloogis pole aadressi
+Premier contact ¦ Pirmasis kontaktas ¦ Pirmais kontakts ¦ Esimene kontakt
+Contrat de révélation ¦ Atskleidimo sutartis ¦ Atklāšanas līgums ¦ Avaldamisleping
+Relance dans (jours) ¦ Priminimas po (dienų) ¦ Atgādinājums pēc (dienām) ¦ Meeldetuletus (päeva pärast)
+Le nom du défunt n’est pas écrit : il est révélé après la signature. ¦ Mirusiojo vardas neįrašytas: jis atskleidžiamas po pasirašymo. ¦ Mirušā vārds nav ierakstīts: to atklāj pēc parakstīšanas. ¦ Lahkunu nime ei kirjutata: see avaldatakse pärast allkirjastamist.
+La lettre (tu peux la retoucher ; le nom de chaque héritier est mis tout seul) ¦ Laiškas (gali jį keisti; kiekvieno įpėdinio vardas įrašomas automatiškai) ¦ Vēstule (vari to labot; katra mantinieka vārds tiek ielikts automātiski) ¦ Kiri (võid seda muuta; iga pärija nimi lisatakse automaatselt)
+📝 Traitement de texte ¦ 📝 Teksto rengyklė ¦ 📝 Teksta redaktors ¦ 📝 Tekstitöötlus
+Coche au moins un héritier. ¦ Pažymėk bent vieną įpėdinį. ¦ Atzīmē vismaz vienu mantinieku. ¦ Märgi vähemalt üks pärija.
+Courriers aux héritiers ¦ Laiškai įpėdiniams ¦ Vēstules mantiniekiem ¦ Kirjad pärijatele
+Recherche d’héritiers ¦ Įpėdinių paieška ¦ Mantinieku meklēšana ¦ Pärijate otsimine
+Ton logiciel de courriel s’ouvre : relis la lettre et envoie-la toi-même. Rien n’est envoyé par l’app. ¦ Atsidaro tavo el. pašto programa: perskaityk laišką ir išsiųsk pats. Programa nieko nesiunčia. ¦ Atveras tava e-pasta programma: pārlasi vēstuli un nosūti pats. Lietotne neko nesūta. ¦ Avaneb sinu e-posti programm: loe kiri üle ja saada ise. Rakendus ei saada midagi.
+Premier contact + contrat ¦ Pirmasis kontaktas + sutartis ¦ Pirmais kontakts + līgums ¦ Esimene kontakt + leping
+{n} rangés dans le Registre de courriers ¦ Išsaugota Laiškų registre: {n} ¦ Saglabāts Vēstuļu reģistrā: {n} ¦ Kirjaregistrisse salvestatud: {n}
+N. ¦ Gim. ¦ Dz. ¦ Sünd.
+D. ¦ Mir. ¦ M. ¦ Surm
+M. ¦ Sant. ¦ Laul. ¦ Ab.
+Div. ¦ Skyr. ¦ Šķ. ¦ Lahut.
+Ren. ¦ Atsis. ¦ Atteik. ¦ Loob.
+(à fournir) ¦ (pateikti) ¦ (jāiesniedz) ¦ (esitada)
+repr. {who} ¦ atst. {who} ¦ pārst. {who} ¦ esind. {who}
+existence à ce jour non établie ¦ egzistavimas iki šiol nenustatytas ¦ pastāvēšana līdz šim nav noskaidrota ¦ olemasolu seni tuvastamata
+TABLEAU GÉNÉALOGIQUE ¦ GENEALOGINĖ LENTELĖ ¦ ĢENEALOĢISKĀ TABULA ¦ SUGUTABEL
+Succession de {name}, décédé(e) à {place} le {date} ¦ {name} palikimas, mirė {place}, {date} ¦ {name} mantojums, miris {place}, {date} ¦ {name} pärand, suri {place}, {date}
+Dossier {n} · Réf. notaire {ref} ¦ Byla {n} · Notaro nuor. {ref} ¦ Lieta {n} · Notāra atsauce {ref} ¦ Toimik {n} · Notari viide {ref}
+Calcul établi d’après les actes cités, art. 731 et suiv. du Code civil, sous réserve de vérification par le notaire. N. = naissance, M. = mariage, D. = décès. ¦ Skaičiavimas pagal nurodytus dokumentus, Prancūzijos civilinio kodekso 731 str. ir toliau, su sąlyga, kad patikrins notaras. Gim. = gimimas, Sant. = santuoka, Mir. = mirtis. ¦ Aprēķins pēc minētajiem dokumentiem, Francijas Civilkodeksa 731. pants un turpmākie, ar notāra pārbaudes atrunu. Dz. = dzimšana, Laul. = laulība, M. = miršana. ¦ Arvutus viidatud dokumentide põhjal, Prantsuse tsiviilseadustiku § 731 jj, notari kontrolli reservatsiooniga. Sünd. = sünd, Ab. = abiellumine, Surm = surm.
+Communs à tous : {list}. ¦ Bendra visiems: {list}. ¦ Kopīgs visiem: {list}. ¦ Kõigile ühine: {list}.
+Hypothèse retenue : {h} ¦ Priimta hipotezė: {h} ¦ Pieņemtā hipotēze: {h} ¦ Valitud oletus: {h}
+à préciser ¦ patikslinti ¦ jāprecizē ¦ täpsustada
+Liste des pièces ¦ Dokumentų sąrašas ¦ Dokumentu saraksts ¦ Dokumentide loend
+Page {n} / 3 ¦ Puslapis {n} / 3 ¦ Lappuse {n} / 3 ¦ Lehekülg {n} / 3
+Un PDF sobre, une source pour chaque lien ¦ Kuklus PDF, šaltinis kiekvienam ryšiui ¦ Vienkāršs PDF, avots katrai saitei ¦ Lihtne PDF, allikas iga seose kohta
+📝 Ouvrir dans le traitement de texte ¦ 📝 Atidaryti teksto rengyklėje ¦ 📝 Atvērt teksta redaktorā ¦ 📝 Ava tekstitöötluses
+Joindre les adresses des héritiers ¦ Pridėti įpėdinių adresus ¦ Pievienot mantinieku adreses ¦ Lisa pärijate aadressid
+Aucune photo ni note privée : les noms, les qualités, les parts et les sources. Pas d’adresse sauf si la case est cochée. ¦ Jokių nuotraukų ir asmeninių pastabų: vardai, statusai, dalys ir šaltiniai. Adresai tik pažymėjus langelį. ¦ Bez fotoattēliem un privātām piezīmēm: vārdi, statusi, daļas un avoti. Adreses tikai, ja atzīmēts. ¦ Fotosid ja isiklikke märkmeid pole: nimed, staatused, osad ja allikad. Aadressid ainult märkimisel.
+Tableau généalogique — {n} ¦ Genealoginė lentelė — {n} ¦ Ģenealoģiskā tabula — {n} ¦ Sugutabel — {n}
+Tableau pour le notaire : PDF ou impression (3 pages) ¦ Lentelė notarui: PDF arba spausdinimas (3 puslapiai) ¦ Tabula notāram: PDF vai druka (3 lappuses) ¦ Tabel notarile: PDF või trükk (3 lehekülge)
+Tableau pour le notaire : ouvert dans le traitement de texte ¦ Lentelė notarui: atidaryta teksto rengyklėje ¦ Tabula notāram: atvērta teksta redaktorā ¦ Tabel notarile: avatud tekstitöötluses
+Tableau pour le notaire : copie rangée dans les médias ¦ Lentelė notarui: kopija išsaugota medijoje ¦ Tabula notāram: kopija saglabāta multividē ¦ Tabel notarile: koopia salvestatud meediasse
+🕓 Journal du dossier {n} ¦ 🕓 Bylos {n} žurnalas ¦ 🕓 Lietas {n} žurnāls ¦ 🕓 Toimiku {n} logi
+(on ne peut ni le modifier ni l’effacer) ¦ (jo negalima keisti ar ištrinti) ¦ (to nevar labot vai dzēst) ¦ (seda ei saa muuta ega kustutada)
+⤓ Exporter le journal (CSV) ¦ ⤓ Eksportuoti žurnalą (CSV) ¦ ⤓ Eksportēt žurnālu (CSV) ¦ ⤓ Ekspordi logi (CSV)
+Les changements des fiches restent dans Réglages → Journal des modifications. ¦ Įrašų pakeitimai lieka ir Nustatymai → Pakeitimų žurnalas. ¦ Ierakstu izmaiņas paliek arī Iestatījumi → Izmaiņu žurnāls. ¦ Kirjete muudatused jäävad ka Seaded → Muudatuste logi.
+Action ¦ Veiksmas ¦ Darbība ¦ Toiming
+Journal exporté (CSV) ¦ Žurnalas eksportuotas (CSV) ¦ Žurnāls eksportēts (CSV) ¦ Logi eksporditud (CSV)
+Le temps passé, les frais, les honoraires des contrats ¦ Sugaištas laikas, išlaidos, sutarčių atlygiai ¦ Patērētais laiks, izdevumi, līgumu atlīdzības ¦ Kulutatud aeg, kulud, lepingute tasud
+＋ Temps ¦ ＋ Laikas ¦ ＋ Laiks ¦ ＋ Aeg
+＋ Frais ¦ ＋ Išlaidos ¦ ＋ Izdevumi ¦ ＋ Kulud
+＋ Honoraires d’un contrat ¦ ＋ Sutarties atlygis ¦ ＋ Līguma atlīdzība ¦ ＋ Lepingu tasu
+🖨 Relevé ¦ 🖨 Ataskaita ¦ 🖨 Pārskats ¦ 🖨 Aruanne
+{h} h {m} min passées ¦ Sugaišta {h} val. {m} min. ¦ Patērētas {h} st. {m} min ¦ Kulutatud {h} t {m} min
+Frais : {s} ¦ Išlaidos: {s} ¦ Izdevumi: {s} ¦ Kulud: {s}
+{n} contrats ¦ Sutartys: {n} ¦ Līgumi: {n} ¦ Lepinguid: {n}
+{h} h {m} min ¦ {h} val. {m} min. ¦ {h} st. {m} min ¦ {h} t {m} min
+Rien de noté. ¦ Nieko neužrašyta. ¦ Nekas nav pierakstīts. ¦ Midagi pole märgitud.
+Aucun montant de succession n’est noté. ¦ Palikimo suma nefiksuojama. ¦ Mantojuma summa netiek pierakstīta. ¦ Pärandi summat ei märgita.
+💶 TEMPS ET FRAIS ¦ 💶 LAIKAS IR IŠLAIDOS ¦ 💶 LAIKS UN IZDEVUMI ¦ 💶 AEG JA KULUD
+Copie d’acte, déplacement… ¦ Dokumento kopija, kelionė… ¦ Dokumenta kopija, brauciens… ¦ Dokumendi koopia, sõit…
+Recherches aux AD, appels… ¦ Paieškos archyvuose, skambučiai… ¦ Meklēšana arhīvos, zvani… ¦ Uurimine arhiivides, kõned…
+Contrat signé ¦ Sutartis pasirašyta ¦ Līgums parakstīts ¦ Leping allkirjastatud
+Heures ¦ Valandos ¦ Stundas ¦ Tunnid
+Minutes ¦ Minutės ¦ Minūtes ¦ Minutid
+Montant (€) ¦ Suma (€) ¦ Summa (€) ¦ Summa (€)
+🌍 HÉRITIER À L’ÉTRANGER ¦ 🌍 ĮPĖDINIS UŽSIENYJE ¦ 🌍 MANTINIEKS ĀRZEMĒS ¦ 🌍 PÄRIJA VÄLISMAAL
+Chercher {name} hors de France ¦ Ieškoti {name} už Prancūzijos ribų ¦ Meklēt {name} ārpus Francijas ¦ Otsi isikut {name} väljaspool Prantsusmaad
+Les services à interroger ¦ Institucijos, į kurias kreiptis ¦ Iestādes, kurām jautāt ¦ Pöördutavad asutused
+📮 Demander l’acte au Service central d’état civil ¦ 📮 Užsakyti dokumentą Centrinėje civilinės metrikacijos tarnyboje ¦ 📮 Pieprasīt dokumentu Centrālajā civilstāvokļa dienestā ¦ 📮 Telli dokument Keskselt perekonnaseisuametilt
+Langue de la lettre ¦ Laiško kalba ¦ Vēstules valoda ¦ Kirja keel
+Destinataire ¦ Gavėjas ¦ Saņēmējs ¦ Saaja
+Registro civil de …, consulat de France à … ¦ Registro civil de …, Prancūzijos konsulatas … ¦ Registro civil de …, Francijas konsulāts … ¦ Registro civil de …, Prantsusmaa konsulaat …
+La lettre (dans la langue du pays) ¦ Laiškas (šalies kalba) ¦ Vēstule (valsts valodā) ¦ Kiri (riigi keeles)
+Lettre à l’étranger ¦ Laiškas į užsienį ¦ Vēstule uz ārzemēm ¦ Kiri välismaale
+Recherche d’un héritier à l’étranger : {name} ¦ Įpėdinio paieška užsienyje: {name} ¦ Mantinieka meklēšana ārzemēs: {name} ¦ Pärija otsimine välismaal: {name}
+Courrier rangé dans le Registre de courriers ¦ Laiškas išsaugotas Laiškų registre ¦ Vēstule saglabāta Vēstuļu reģistrā ¦ Kiri salvestatud Kirjaregistrisse
+❔ ABSENTS ET DISPARUS ¦ ❔ NESANTYS IR DINGĘ ¦ ❔ PROMBŪTNĒ ESOŠIE UN PAZUDUŠIE ¦ ❔ EEMALVIIBIVAD JA KADUNUD
+{name} : absent ou disparu ? ¦ {name}: nesantis ar dingęs? ¦ {name}: prombūtnē vai pazudis? ¦ {name}: eemalviibiv või kadunud?
+art. {a} ¦ {a} str. ¦ {a}. pants ¦ § {a}
+Le calcul lit ce statut : un présumé absent est compté vivant, sa part est « réservée » ; un déclaré absent est compté comme mort avant. ¦ Skaičiavimas skaito šią būseną: tariamai nesantis laikomas gyvu, jo dalis „rezervuojama“; paskelbtas nesančiu laikomas mirusiu anksčiau. ¦ Aprēķins ņem vērā šo stāvokli: iespējami prombūtnē esošs tiek uzskatīts par dzīvu, viņa daļa “rezervēta”; par prombūtnē esošu atzīts tiek uzskatīts par mirušu agrāk. ¦ Arvutus arvestab seda olekut: eeldatavalt eemalviibiv loetakse elavaks, tema osa „reserveeritakse”; eemalviibivaks tunnistatu loetakse varem surnuks.
+Présumé absent ¦ Tariamai nesantis ¦ Iespējami prombūtnē ¦ Eeldatavalt eemalviibiv
+Déclaré absent ou jugement de décès ¦ Paskelbtas nesančiu ar mirusiu ¦ Atzīts par prombūtnē esošu vai mirušu ¦ Tunnistatud eemalviibivaks või surnuks
+{name} : statut retenu changé, dévolution recalculée ¦ {name}: priimta būsena pakeista, paveldėjimas perskaičiuotas ¦ {name}: pieņemtais stāvoklis mainīts, mantošana pārrēķināta ¦ {name}: arvestatud olek muudetud, pärimine ümber arvutatud
+Héritier à retrouver : {name}{born} — vivant ? décédé ? des enfants ? (dossier de succession {n}) ¦ Ieškomas įpėdinis: {name}{born} — gyvas? miręs? vaikai? (paveldėjimo byla {n}) ¦ Jāatrod mantinieks: {name}{born} — dzīvs? miris? bērni? (mantojuma lieta {n}) ¦ Leitav pärija: {name}{born} — elus? surnud? lapsed? (pärimistoimik {n})
+(né en {y}) ¦ (gim. {y}) ¦ (dz. {y}) ¦ (sünd. {y})
+Descendance de {name} (mort avant le défunt) : un enfant reconnu ou naturel ? (dossier de succession {n}) ¦ {name} palikuonys (mirė anksčiau už palikėją): pripažintas ar nesantuokinis vaikas? (paveldėjimo byla {n}) ¦ {name} pēcnācēji (miris pirms mantojuma atstājēja): atzīts vai ārlaulības bērns? (mantojuma lieta {n}) ¦ {name} järeltulijad (suri enne pärandajat): tunnustatud või abieluväline laps? (pärimistoimik {n})
+Branche à chercher autour de {name} (dossier de succession {n}) ¦ Šaka paieškai apie {name} (paveldėjimo byla {n}) ¦ Meklējamais zars ap {name} (mantojuma lieta {n}) ¦ Otsitav haru isiku {name} ümber (pärimistoimik {n})
+Piste ouverte dans le Journal des recherches : {name} ¦ Pėdsakas atidarytas Tyrimų žurnale: {name} ¦ Pavediens atvērts Izpētes žurnālā: {name} ¦ Jälg avatud uurimislogis: {name}
+Piste ajoutée : Recherche → 🗓 Journal des recherches ¦ Pėdsakas pridėtas: Tyrimai → 🗓 Tyrimų žurnalas ¦ Pavediens pievienots: Izpēte → 🗓 Izpētes žurnāls ¦ Jälg lisatud: Uurimine → 🗓 Uurimislogi
+🗂 TABLES DES SUCCESSIONS DES AD ¦ 🗂 ARCHYVŲ PAVELDĖJIMŲ SĄRAŠAI ¦ 🗂 ARHĪVU MANTOJUMU SARAKSTI ¦ 🗂 ARHIIVIDE PÄRANDIREGISTRID
+Dépouiller les tables de successions et absences ¦ Peržiūrėti paveldėjimų ir nebuvimo sąrašus ¦ Pārskatīt mantojumu un prombūtnes sarakstus ¦ Läbi töötada pärandite ja eemalviibimise registrid
+Ajouter au suivi ¦ Įtraukti į stebėseną ¦ Pievienot uzraudzībai ¦ Lisa jälgimisse
+Les tables de successions et absences et les mutations par décès (série Q des Archives départementales) donnent la date et le bureau de chaque succession. Coche les personnes à chercher : une ligne « à faire » chacune. ¦ Paveldėjimų ir nebuvimo sąrašai bei turto perėjimo mirties atveju registrai (departamentų archyvų Q serija) nurodo kiekvieno paveldėjimo datą ir įstaigą. Pažymėk ieškomus asmenis: kiekvienam po eilutę „atlikti“. ¦ Mantojumu un prombūtnes saraksti un nāves gadījuma pārejas reģistri (departamentu arhīvu Q sērija) norāda katra mantojuma datumu un iestādi. Atzīmē meklējamās personas: katrai rinda “jāizdara”. ¦ Pärandite ja eemalviibimise registrid ning surmajärgsete üleminekute registrid (departemangu arhiivide Q-seeria) annavad iga pärandi kuupäeva ja ameti. Märgi otsitavad isikud: igaühele rida „teha”.
+Coche au moins une personne. ¦ Pažymėk bent vieną asmenį. ¦ Atzīmē vismaz vienu personu. ¦ Märgi vähemalt üks isik.
+Tables des successions et absences, mutations par décès (série Q) : {name}{d} ¦ Paveldėjimų ir nebuvimo sąrašai, perėjimai mirties atveju (Q serija): {name}{d} ¦ Mantojumu un prombūtnes saraksti, pārejas nāves gadījumā (Q sērija): {name}{d} ¦ Pärandite ja eemalviibimise registrid, surmajärgsed üleminekud (Q-seeria): {name}{d}
+Tables des successions : {n} à dépouiller ¦ Paveldėjimų sąrašai: {n} peržiūrėti ¦ Mantojumu saraksti: {n} pārskatāmi ¦ Pärandiregistrid: {n} läbi töötada
+{n} ajoutés aux dépouillements ¦ Įtraukta į peržiūras: {n} ¦ Pievienots pārskatiem: {n} ¦ Läbitöötamistesse lisatud: {n}
+État : {s} ¦ Būsena: {s} ¦ Stāvoklis: {s} ¦ Olek: {s}
+📋 LISTE DE CONTRÔLE ¦ 📋 KONTROLINIS SĄRAŠAS ¦ 📋 PĀRBAUDES SARAKSTS ¦ 📋 KONTROLLNIMEKIRI
+Avant « Remis au notaire » ¦ Prieš „Perduota notarui“ ¦ Pirms “Nodots notāram” ¦ Enne olekut „Notarile üle antud”
+Remis au notaire ¦ Perduota notarui ¦ Nodots notāram ¦ Notarile üle antud
+Remettre quand même ¦ Vis tiek perduoti ¦ Tomēr nodot ¦ Anna siiski üle
+Tout n’est pas prêt : corrige d’abord, ou remets quand même (ce sera noté au journal). ¦ Ne viskas paruošta: pirmiau pataisyk arba vis tiek perduok (bus užrašyta žurnale). ¦ Ne viss ir gatavs: vispirms izlabo vai tomēr nodod (tiks pierakstīts žurnālā). ¦ Kõik pole valmis: paranda esmalt või anna siiski üle (see märgitakse logisse).
+Les adresses des vivants seront retirées du dossier et de ses courriers. Le journal reste. Continuer ? ¦ Gyvųjų adresai bus pašalinti iš bylos ir jos laiškų. Žurnalas lieka. Tęsti? ¦ Dzīvo adreses tiks dzēstas no lietas un tās vēstulēm. Žurnāls paliek. Turpināt? ¦ Elavate aadressid eemaldatakse toimikust ja selle kirjadest. Logi jääb. Jätkata?
+Archiver ¦ Archyvuoti ¦ Arhivēt ¦ Arhiveeri
+Dossier archivé. ¦ Byla archyvuota. ¦ Lieta arhivēta. ¦ Toimik arhiveeritud.
+ÉCHÉANCE ¦ TERMINAS ¦ TERMIŅŠ ¦ TÄHTAEG
+Remettre le tableau généalogique au notaire ¦ Perduoti genealoginę lentelę notarui ¦ Nodot ģenealoģisko tabulu notāram ¦ Anna sugutabel notarile üle
+Remise au notaire ¦ Perdavimas notarui ¦ Nodošana notāram ¦ Üleandmine notarile
+Rendez-vous ¦ Susitikimas ¦ Tikšanās ¦ Kohtumine
+Échéance ajoutée ¦ Terminas pridėtas ¦ Termiņš pievienots ¦ Tähtaeg lisatud
+Échéance supprimée ¦ Terminas ištrintas ¦ Termiņš dzēsts ¦ Tähtaeg kustutatud
+Répertoire des vivants : « ＋ Contact », puis relie la fiche de l’héritier. ¦ Gyvųjų adresynas: „＋ Kontaktas“, paskui susiek įpėdinio įrašą. ¦ Dzīvo adrešu grāmata: “＋ Kontakts”, pēc tam sasaisti mantinieka ierakstu. ¦ Elavate kataloog: „＋ Kontakt”, seejärel seo pärija kirje.
+Relevé de temps et de frais — {n} ¦ Laiko ir išlaidų ataskaita — {n} ¦ Laika un izdevumu pārskats — {n} ¦ Aja ja kulude aruanne — {n}
+Arbre de dévolution — {n} ¦ Paveldėjimo medis — {n} ¦ Mantošanas koks — {n} ¦ Pärimispuu — {n}
+Arbre de dévolution imprimé ¦ Paveldėjimo medis išspausdintas ¦ Mantošanas koks izdrukāts ¦ Pärimispuu prinditud
+Hypothèse retenue enregistrée ¦ Priimta hipotezė išsaugota ¦ Pieņemtā hipotēze saglabāta ¦ Valitud oletus salvestatud
+Échéance faite ¦ Terminas įvykdytas ¦ Termiņš izpildīts ¦ Tähtaeg täidetud
+Échéance à faire ¦ Terminas neįvykdytas ¦ Termiņš jāizpilda ¦ Tähtaeg täita
+Pièce : {s} ¦ Dokumentas: {s} ¦ Dokuments: {s} ¦ Dokument: {s}
+Courrier mis à jour ¦ Laiškas atnaujintas ¦ Vēstule atjaunināta ¦ Kiri uuendatud
+Rechercher les héritiers… ¦ Ieškoti įpėdinių… ¦ Meklēt mantiniekus… ¦ Otsi pärijaid…
+Pas en mode consultation. ¦ Ne peržiūros režime. ¦ Ne skatīšanas režīmā. ¦ Mitte vaatamisrežiimis.
+Les dossiers n’ont pas pu être lus. ¦ Nepavyko perskaityti bylų. ¦ Lietas nevarēja nolasīt. ¦ Toimikuid ei õnnestunud lugeda.
+Aucun dossier en cours. ¦ Nėra vykdomų bylų. ¦ Nav lietu darbā. ¦ Pooleli toimikuid pole.
+Dossier {n} ¦ Byla {n} ¦ Lieta {n} ¦ Toimik {n}
+⚖️ Dossiers de succession ¦ ⚖️ Paveldėjimo bylos ¦ ⚖️ Mantojuma lietas ¦ ⚖️ Pärimistoimikud
+Signé le {d} ¦ Pasirašyta {d} ¦ Parakstīts {d} ¦ Allkirjastatud {d}
+Dossier de succession ¦ Paveldėjimo byla ¦ Mantojuma lieta ¦ Pärimistoimik
+Tous les courriers ¦ Visi laiškai ¦ Visas vēstules ¦ Kõik kirjad
+l’héritier ¦ įpėdinis ¦ mantinieks ¦ pärija
+Branche paternelle : {who} ¦ Tėvo šaka: {who} ¦ Tēva zars: {who} ¦ Isapoolne haru: {who}
+Branche maternelle : {who} ¦ Motinos šaka: {who} ¦ Mātes zars: {who} ¦ Emapoolne haru: {who}
+Tous les enfants sont communs : le conjoint choisit l’usufruit de tout, ou le quart en pleine propriété (art. 757). Le calcul montre le quart. ¦ Visi vaikai bendri: sutuoktinis renkasi uzufruktą visam turtui arba ketvirtadalį nuosavybės teise (757 str.). Skaičiavimas rodo ketvirtadalį. ¦ Visi bērni ir kopīgi: laulātais izvēlas lietojuma tiesības uz visu vai ceturtdaļu īpašumā (757. pants). Aprēķins rāda ceturtdaļu. ¦ Kõik lapsed on ühised: abikaasa valib kasutusvalduse kogu varale või veerandi täisomandisse (§ 757). Arvutus näitab veerandit.
+Un enfant au moins n’est pas commun aux deux époux : le conjoint reçoit le quart en pleine propriété (art. 757). ¦ Bent vienas vaikas nėra bendras abiem sutuoktiniams: sutuoktinis gauna ketvirtadalį nuosavybės teise (757 str.). ¦ Vismaz viens bērns nav kopīgs abiem laulātajiem: laulātais saņem ceturtdaļu īpašumā (757. pants). ¦ Vähemalt üks laps pole abikaasade ühine: abikaasa saab veerandi täisomandisse (§ 757).
+1er ordre : les enfants et, par représentation, les descendants d’un enfant prédécédé ou renonçant ; partage par souche (art. 735, 752, 753). ¦ 1 eilė: vaikai ir, atstovavimo teise, anksčiau mirusio ar atsisakiusio vaiko palikuonys; dalijama pagal kamienus (735, 752, 753 str.). ¦ 1. šķira: bērni un, pārstāvības kārtā, agrāk miruša vai atteikušās bērna pēcnācēji; dalīšana pa ciltīm (735., 752., 753. pants). ¦ 1. järk: lapsed ja esindusõiguse alusel varem surnud või loobunud lapse järeltulijad; jagamine tüvede kaupa (§ 735, 752, 753).
+Sans descendant, avec le père et la mère : la moitié au conjoint, un quart à chaque parent (art. 757-1). ¦ Be palikuonių, su tėvu ir motina: pusė sutuoktiniui, po ketvirtadalį tėvams (757-1 str.). ¦ Bez pēcnācējiem, ar tēvu un māti: puse laulātajam, ceturtdaļa katram no vecākiem (757-1. pants). ¦ Järeltulijateta, isa ja emaga: pool abikaasale, veerand kummalegi vanemale (§ 757-1).
+Sans descendant, avec un seul parent : trois quarts au conjoint, un quart au parent (art. 757-1). ¦ Be palikuonių, su vienu iš tėvų: trys ketvirtadaliai sutuoktiniui, ketvirtadalis tėvui ar motinai (757-1 str.). ¦ Bez pēcnācējiem, ar vienu no vecākiem: trīs ceturtdaļas laulātajam, ceturtdaļa vecākam (757-1. pants). ¦ Järeltulijateta, ühe vanemaga: kolm veerandit abikaasale, veerand vanemale (§ 757-1).
+Sans descendant ni père ni mère : le conjoint recueille toute la succession (art. 757-2). Les frères et sœurs peuvent avoir un droit de retour sur les biens de famille (art. 757-3) : à voir avec le notaire. ¦ Be palikuonių, tėvo ir motinos: sutuoktinis gauna visą palikimą (757-2 str.). Broliai ir seserys gali turėti grąžinimo teisę į šeimos turtą (757-3 str.): aptarti su notaru. ¦ Bez pēcnācējiem, tēva un mātes: laulātais saņem visu mantojumu (757-2. pants). Brāļiem un māsām var būt atgriešanas tiesības uz ģimenes mantu (757-3. pants): jāapspriež ar notāru. ¦ Järeltulijateta, isa ja emata: abikaasa saab kogu pärandi (§ 757-2). Õdedel-vendadel võib olla tagasilangemisõigus perekonnavarale (§ 757-3): arutada notariga.
+Le père et la mère ont chacun un quart, les frères et sœurs (ou leurs descendants) la moitié (art. 738). ¦ Tėvas ir motina gauna po ketvirtadalį, broliai ir seserys (ar jų palikuonys) – pusę (738 str.). ¦ Tēvs un māte saņem katrs ceturtdaļu, brāļi un māsas (vai viņu pēcnācēji) – pusi (738. pants). ¦ Isa ja ema saavad kumbki veerandi, õed-vennad (või nende järeltulijad) poole (§ 738).
+Le parent survivant a un quart, les frères et sœurs (ou leurs descendants) trois quarts (art. 738). ¦ Gyvas likęs iš tėvų gauna ketvirtadalį, broliai ir seserys (ar jų palikuonys) – tris ketvirtadalius (738 str.). ¦ Pārdzīvojušais no vecākiem saņem ceturtdaļu, brāļi un māsas (vai viņu pēcnācēji) – trīs ceturtdaļas (738. pants). ¦ Ellujäänud vanem saab veerandi, õed-vennad (või nende järeltulijad) kolm veerandit (§ 738).
+Père et mère décédés : les frères et sœurs ou leurs descendants prennent tout (art. 737). ¦ Tėvas ir motina mirę: broliai ir seserys ar jų palikuonys gauna viską (737 str.). ¦ Tēvs un māte miruši: brāļi un māsas vai viņu pēcnācēji saņem visu (737. pants). ¦ Isa ja ema surnud: õed-vennad või nende järeltulijad saavad kõik (§ 737).
+Frères et sœurs germains, consanguins ou utérins : parts égales, par souche (art. 744, 752-2, 753 ; loi du 3 décembre 2001). ¦ Tikri broliai ir seserys bei įbroliai ir įseserės iš tėvo ar motinos pusės: lygios dalys, pagal kamienus (744, 752-2, 753 str.; 2001 m. gruodžio 3 d. įstatymas). ¦ Īstie brāļi un māsas un pusbrāļi un pusmāsas no tēva vai mātes puses: vienādas daļas, pa ciltīm (744., 752-2., 753. pants; 2001. gada 3. decembra likums). ¦ Täisõed-vennad ning isa- või emapoolsed poolõed-vennad: võrdsed osad, tüvede kaupa (§ 744, 752-2, 753; 3. detsembri 2001 seadus).
+Sans descendant ni frère ni sœur : le père et la mère ont chacun la moitié (art. 736). ¦ Be palikuonių ir brolių bei seserų: tėvas ir motina gauna po pusę (736 str.). ¦ Bez pēcnācējiem un brāļiem vai māsām: tēvs un māte saņem katrs pusi (736. pants). ¦ Järeltulijateta ja õdede-vendadeta: isa ja ema saavad kumbki poole (§ 736).
+Un seul parent, sans frère ni sœur, mais des ascendants dans l’autre branche : moitié au parent, moitié à ces ascendants (art. 738-1). ¦ Tik vienas iš tėvų, be brolių ir seserų, bet su protėviais kitoje šakoje: pusė tėvui ar motinai, pusė tiems protėviams (738-1 str.). ¦ Tikai viens no vecākiem, bez brāļiem un māsām, bet ar senčiem otrā zarā: puse vecākam, puse šiem senčiem (738-1. pants). ¦ Ainult üks vanem, õdesid-vendi pole, kuid teises harus on esivanemaid: pool vanemale, pool neile esivanematele (§ 738-1).
+Le parent survivant, seul de son ordre, recueille la succession. ¦ Gyvas likęs iš tėvų, vienintelis savo eilėje, gauna palikimą. ¦ Pārdzīvojušais no vecākiem, vienīgais savā šķirā, saņem mantojumu. ¦ Ellujäänud vanem, oma järgus ainus, saab pärandi.
+3e ordre : moitié pour chaque branche ; dans chacune, l’ascendant le plus proche prend tout (art. 747-748). ¦ 3 eilė: pusė kiekvienai šakai; kiekvienoje artimiausias protėvis gauna viską (747–748 str.). ¦ 3. šķira: puse katram zaram; katrā tuvākais sencis saņem visu (747.–748. pants). ¦ 3. järk: pool kummalegi harule; kummaski saab lähim esivanem kõik (§ 747–748).
+3e ordre : une seule branche a encore un ascendant ; il recueille toute la succession, même les cousins de l’autre branche sont écartés (art. 748). ¦ 3 eilė: tik viena šaka dar turi protėvį; jis gauna visą palikimą, net kitos šakos pusbroliai pašalinami (748 str.). ¦ 3. šķira: tikai vienā zarā vēl ir sencis; viņš saņem visu mantojumu, pat otra zara brālēni ir izslēgti (748. pants). ¦ 3. järk: ainult ühes harus on veel esivanem; tema saab kogu pärandi, ka teise haru nõod jäävad välja (§ 748).
+4e ordre : moitié pour chaque branche ; dans chacune, le collatéral le plus proche en degré prend tout, sans représentation (art. 749-750). ¦ 4 eilė: pusė kiekvienai šakai; kiekvienoje laipsniu artimiausias šoninis giminaitis gauna viską, be atstovavimo (749–750 str.). ¦ 4. šķira: puse katram zaram; katrā pakāpē tuvākais sānu līnijas radinieks saņem visu, bez pārstāvības (749.–750. pants). ¦ 4. järk: pool kummalegi harule; kummaski saab astmelt lähim külgsugulane kõik, ilma esindusõiguseta (§ 749–750).
+4e ordre : personne dans une branche, l’autre branche recueille tout (art. 750). ¦ 4 eilė: vienoje šakoje nieko, kita šaka gauna viską (750 str.). ¦ 4. šķira: vienā zarā neviena, otrs zars saņem visu (750. pants). ¦ 4. järk: ühes harus pole kedagi, teine haru saab kõik (§ 750).
+Les collatéraux ne succèdent pas au-delà du 6e degré (art. 745). ¦ Šoniniai giminaičiai nepaveldi toliau nei 6 laipsnis (745 str.). ¦ Sānu līnijas radinieki nemanto tālāk par 6. pakāpi (745. pants). ¦ Külgsugulased ei päri kaugemalt kui 6. aste (§ 745).
+Le défunt n’est pas dans la base. ¦ Mirusiojo nėra duomenų bazėje. ¦ Mirušā nav datubāzē. ¦ Lahkunut pole andmebaasis.
+si {name} n’était pas marié avec le défunt (PACS ou union libre) ¦ jei {name} nebuvo susituokęs su mirusiuoju (PACS ar partnerystė be santuokos) ¦ ja {name} nebija precējies ar mirušo (PACS vai kopdzīve) ¦ kui {name} polnud lahkunuga abielus (PACS või vabaabielu)
+si {name} est mort avant, représenté par ses descendants ¦ jei {name} mirė anksčiau, jam atstovauja palikuonys ¦ ja {name} nomira agrāk, viņu pārstāv pēcnācēji ¦ kui {name} suri varem, teda esindavad järeltulijad
+si {name} est mort avant sans descendant ¦ jei {name} mirė anksčiau be palikuonių ¦ ja {name} nomira agrāk bez pēcnācējiem ¦ kui {name} suri varem järeltulijateta
+Enfants et descendants, avec représentation ¦ Vaikai ir palikuonys, su atstovavimu ¦ Bērni un pēcnācēji, ar pārstāvību ¦ Lapsed ja järeltulijad, esindusõigusega
+Père et mère, frères et sœurs et leurs descendants (« parents privilégiés ») ¦ Tėvas ir motina, broliai ir seserys bei jų palikuonys („privilegijuoti giminaičiai“) ¦ Tēvs un māte, brāļi un māsas un viņu pēcnācēji (“priviliģētie radinieki”) ¦ Isa ja ema, õed-vennad ja nende järeltulijad („privilegeeritud sugulased”)
+Autres ascendants (grands-parents…), fente paternelle / maternelle ¦ Kiti protėviai (seneliai…), tėvo / motinos šakų dalijimas ¦ Citi senči (vecvecāki…), tēva / mātes zaru dalīšana ¦ Teised esivanemad (vanavanemad…), isa- / emapoolne jagamine
+Oncles, tantes, cousins… jusqu’au 6e degré (art. 745) ¦ Dėdės, tetos, pusbroliai… iki 6 laipsnio (745 str.) ¦ Tēvoči, tantes, brālēni… līdz 6. pakāpei (745. pants) ¦ Onud, tädid, nõod… kuni 6. astmeni (§ 745)
+Vivant au décès ? Mort avant ? Des enfants ? Sa réponse change la part des autres. ¦ Gyvas mirties metu? Miręs anksčiau? Vaikai? Atsakymas keičia kitų dalis. ¦ Dzīvs nāves brīdī? Miris agrāk? Bērni? Atbilde maina citu daļas. ¦ Elus surma ajal? Suri varem? Lapsed? Vastus muudab teiste osi.
+Mort avant le défunt, sans descendance connue : un enfant, même reconnu tard, changerait le partage. ¦ Mirė anksčiau už palikėją, žinomų palikuonių nėra: vaikas, net vėlai pripažintas, pakeistų dalijimą. ¦ Miris pirms mantojuma atstājēja, bez zināmiem pēcnācējiem: bērns, pat vēlu atzīts, mainītu dalīšanu. ¦ Suri enne pärandajat, teadaolevaid järeltulijaid pole: laps, ka hilja tunnustatud, muudaks jagamist.
+Aucun enfant du défunt dans la base : à vérifier (mentions en marge de l’acte de naissance, livret de famille). ¦ Duomenų bazėje nėra palikėjo vaikų: patikrinti (žymos gimimo įraše, šeimos knygelė). ¦ Datubāzē nav mirušā bērnu: jāpārbauda (atzīmes dzimšanas reģistrā, ģimenes grāmatiņa). ¦ Andmebaasis pole pärandaja lapsi: kontrollida (sünniakti märked, perekonnaraamat).
+Les parents du défunt ne sont pas dans la base : sans eux, l’app ne trouve ni frères, ni sœurs, ni cousins. ¦ Palikėjo tėvų nėra duomenų bazėje: be jų programa neranda nei brolių, nei pusbrolių. ¦ Mirušā vecāku nav datubāzē: bez viņiem lietotne neatrod ne brāļus, ne brālēnus. ¦ Pärandaja vanemaid pole andmebaasis: ilma nendeta ei leia rakendus õdesid-vendi ega nõbusid.
+Un seul parent du défunt est dans la base : l’autre branche reste à chercher. ¦ Duomenų bazėje yra tik vienas iš palikėjo tėvų: kitos šakos dar reikia ieškoti. ¦ Datubāzē ir tikai viens no mirušā vecākiem: otrs zars vēl jāmeklē. ¦ Andmebaasis on ainult üks pärandaja vanem: teist haru tuleb veel otsida.
+Adoption : plénière ou simple ? Une adoption plénière coupe les liens avec la famille d’origine. ¦ Įvaikinimas: visiškas ar paprastas? Visiškas įvaikinimas nutraukia ryšius su kilmės šeima. ¦ Adopcija: pilna vai vienkārša? Pilna adopcija pārtrauc saites ar izcelsmes ģimeni. ¦ Lapsendamine: täielik või lihtne? Täielik lapsendamine katkestab sidemed päritoluperega.
+Couple sans mariage noté : seul un conjoint marié hérite sans testament (pas le partenaire de PACS ni le concubin). ¦ Pora be užrašytos santuokos: be testamento paveldi tik sutuoktinis (ne PACS partneris ar sugyventinis). ¦ Pāris bez pierakstītas laulības: bez testamenta manto tikai laulātais (ne PACS partneris, ne kopdzīves partneris). ¦ Paar, kelle abielu pole märgitud: testamendita pärib ainult abikaasa (mitte PACS-partner ega vabaabielupartner).
+Un seul parent noté : relie sa fiche à son autre parent (frère germain ou demi-frère). ¦ Užrašytas tik vienas iš tėvų: susiek įrašą su kitu iš tėvų (tikras brolis ar įbrolis). ¦ Pierakstīts tikai viens no vecākiem: sasaisti ierakstu ar otru vecāku (īstais brālis vai pusbrālis). ¦ Märgitud on ainult üks vanem: seo kirje teise vanemaga (täis- või poolõde-vend).
+Personne dans la branche paternelle jusqu’au 6e degré : oncles, tantes et cousins du père à chercher. ¦ Tėvo šakoje iki 6 laipsnio nieko: ieškoti tėvo dėdžių, tetų ir pusbrolių. ¦ Tēva zarā līdz 6. pakāpei neviena: jāmeklē tēva tēvoči, tantes un brālēni. ¦ Isapoolses harus kuni 6. astmeni pole kedagi: otsida isa onusid, tädisid ja nõbusid.
+Personne dans la branche maternelle jusqu’au 6e degré : oncles, tantes et cousins de la mère à chercher. ¦ Motinos šakoje iki 6 laipsnio nieko: ieškoti motinos dėdžių, tetų ir pusbrolių. ¦ Mātes zarā līdz 6. pakāpei neviena: jāmeklē mātes tēvoči, tantes un brālēni. ¦ Emapoolses harus kuni 6. astmeni pole kedagi: otsida ema onusid, tädisid ja nõbusid.
+Vivant, mais pas d’adresse dans le Répertoire des vivants. ¦ Gyvas, bet nėra adreso Gyvųjų adresyne. ¦ Dzīvs, bet nav adreses Dzīvo adrešu grāmatā. ¦ Elus, kuid elavate kataloogis pole aadressi.
+Mort après le défunt : sa part passe à ses propres héritiers (sa succession à lui). ¦ Mirė po palikėjo: jo dalis pereina jo paties įpėdiniams (jo paties palikimas). ¦ Miris pēc mantojuma atstājēja: viņa daļa pāriet viņa paša mantiniekiem (viņa paša mantojums). ¦ Suri pärast pärandajat: tema osa läheb tema enda pärijatele (tema enda pärand).
+Présumé absent : sa part est réservée (art. 112 à 132). ¦ Tariamai nesantis: jo dalis rezervuojama (112–132 str.). ¦ Iespējami prombūtnē: daļa rezervēta (112.–132. pants). ¦ Eeldatavalt eemalviibiv: osa on reserveeritud (§ 112–132).
+Date du décès inconnue : l’app ne peut pas dire qui était mort avant ni quel droit s’applique. ¦ Mirties data nežinoma: programa negali pasakyti, kas mirė anksčiau, nei kokia teisė taikoma. ¦ Nāves datums nav zināms: lietotne nevar pateikt, kurš nomira agrāk, ne kādas tiesības piemērot. ¦ Surmakuupäev teadmata: rakendus ei saa öelda, kes suri varem ega millist õigust kohaldada.
+Décès du {date} : le droit de l’époque n’est pas celui d’aujourd’hui. Avant le 1er juillet 2002 (loi du 3 décembre 2001), le conjoint survivant avait surtout de l’usufruit, les enfants nés hors mariage n’avaient pas tous les mêmes droits et les frères et sœurs de lits différents se partageaient par lignes. Avant le 1er août 1972, les enfants naturels avaient des droits réduits. L’app calcule ici selon le droit actuel : le notaire applique le droit de la date. ¦ Mirtis {date}: tuometinė teisė nėra dabartinė. Iki 2002 m. liepos 1 d. (2001 m. gruodžio 3 d. įstatymas) pergyvenęs sutuoktinis daugiausia turėjo uzufruktą, ne santuokoje gimę vaikai neturėjo visi vienodų teisių, o broliai ir seserys iš skirtingų santuokų dalijosi pagal linijas. Iki 1972 m. rugpjūčio 1 d. nesantuokiniai vaikai turėjo ribotas teises. Programa čia skaičiuoja pagal galiojančią teisę: notaras taiko datos teisę. ¦ Nāve {date}: toreizējās tiesības nav šodienas tiesības. Līdz 2002. gada 1. jūlijam (2001. gada 3. decembra likums) pārdzīvojušajam laulātajam galvenokārt bija lietojuma tiesības, ārpus laulības dzimušajiem bērniem ne visiem bija vienādas tiesības, un brāļi un māsas no dažādām laulībām dalīja pa līnijām. Līdz 1972. gada 1. augustam ārlaulības bērniem bija ierobežotas tiesības. Lietotne šeit rēķina pēc spēkā esošajām tiesībām: notārs piemēro datuma tiesības. ¦ Surm {date}: tolleaegne õigus pole tänane. Enne 1. juulit 2002 (3. detsembri 2001 seadus) oli üleelanud abikaasal peamiselt kasutusvaldus, väljaspool abielu sündinud lastel polnud kõigil samu õigusi ning eri abieludest õed-vennad jagasid liinide kaupa. Enne 1. augustit 1972 olid abieluvälistel lastel piiratud õigused. Rakendus arvutab siin kehtiva õiguse järgi: notar kohaldab kuupäeva õigust.
+Décès avant le 1er janvier 2007 (loi du 23 juin 2006) : on ne pouvait pas représenter un héritier qui avait renoncé. ¦ Mirtis iki 2007 m. sausio 1 d. (2006 m. birželio 23 d. įstatymas): atsisakiusiam įpėdiniui atstovauti nebuvo galima. ¦ Nāve pirms 2007. gada 1. janvāra (2006. gada 23. jūnija likums): mantinieku, kurš atteicies, nevarēja pārstāvēt. ¦ Surm enne 1. jaanuari 2007 (23. juuni 2006 seadus): loobunud pärijat ei saanud esindada.
+Décès en 2002 sans date précise : avant ou après le 1er juillet 2002, le droit change. Précise la date. ¦ Mirtis 2002 m. be tikslios datos: iki ir po 2002 m. liepos 1 d. teisė skiriasi. Nurodyk datą. ¦ Nāve 2002. gadā bez precīza datuma: pirms un pēc 2002. gada 1. jūlija tiesības atšķiras. Norādi datumu. ¦ Surm 2002. aastal ilma täpse kuupäevata: enne ja pärast 1. juulit 2002 õigus erineb. Täpsusta kuupäev.
+Divorce ¦ Skyrybos ¦ Šķiršanās ¦ Lahutus
+La naissance de {name} ¦ {name} gimimas ¦ {name} dzimšana ¦ {name} sünd
+Le décès de {name} ¦ {name} mirtis ¦ {name} nāve ¦ {name} surm
+Le mariage avec {name}, non dissous ¦ Santuoka su {name}, nenutraukta ¦ Laulība ar {name}, nešķirta ¦ Abielu isikuga {name}, lahutamata
+Le divorce d’avec {name} ¦ Skyrybos su {name} ¦ Šķiršanās no {name} ¦ Lahutus isikust {name}
+Pas de conjoint survivant : décès de {name} ¦ Nėra pergyvenusio sutuoktinio: {name} mirtis ¦ Nav pārdzīvojuša laulātā: {name} nāve ¦ Üleelanud abikaasat pole: {name} surm
+{name} est mort avant ¦ {name} mirė anksčiau ¦ {name} nomira agrāk ¦ {name} suri varem
+Commun à tous ¦ Bendra visiems ¦ Kopīgs visiem ¦ Kõigile ühine
+{name} a renoncé à la succession ¦ {name} atsisakė palikimo ¦ {name} atteicās no mantojuma ¦ {name} loobus pärandist
+{name} est mort avant (représenté) ¦ {name} mirė anksčiau (atstovaujamas) ¦ {name} nomira agrāk (pārstāvēts) ¦ {name} suri varem (esindatud)
+Son nom d’épouse ¦ Jos pavardė po santuokos ¦ Viņas uzvārds laulībā ¦ Tema abielunimi
+{name} (pour l’écarter) ¦ {name} (pašalinimui) ¦ {name} (izslēgšanai) ¦ {name} (välja jätmiseks)
+Mort avant le défunt, sans enfant ¦ Mirė anksčiau už palikėją, be vaikų ¦ Miris pirms mantojuma atstājēja, bez bērniem ¦ Suri enne pärandajat, lastetu
+Chaque héritier a ses actes : il en manque pour {who}. ¦ Kiekvienas įpėdinis turi savo dokumentus: trūksta {who}. ¦ Katram mantiniekam ir savi dokumenti: trūkst {who}. ¦ Igal pärijal on oma dokumendid: puudu on {who} puhul.
+Chaque héritier a ses actes. ¦ Kiekvienas įpėdinis turi savo dokumentus. ¦ Katram mantiniekam ir savi dokumenti. ¦ Igal pärijal on oma dokumendid.
+Chaque prédécédé a son acte de décès : {n} manquent. ¦ Kiekvienas anksčiau miręs turi mirties įrašą: trūksta {n}. ¦ Katram agrāk mirušajam ir miršanas reģistrs: trūkst {n}. ¦ Igal varem surnul on surmaakt: puudu {n}.
+Chaque prédécédé a son acte de décès. ¦ Kiekvienas anksčiau miręs turi mirties įrašą. ¦ Katram agrāk mirušajam ir miršanas reģistrs. ¦ Igal varem surnul on surmaakt.
+Les branches inconnues ont une explication. ¦ Nežinomos šakos turi paaiškinimą. ¦ Nezināmajiem zariem ir paskaidrojums. ¦ Tundmatutel harudel on selgitus.
+{n} héritiers ou branches restent « inconnus » sans explication. ¦ „Nežinomų“ įpėdinių ar šakų be paaiškinimo: {n}. ¦ “Nezināmu” mantinieku vai zaru bez paskaidrojuma: {n}. ¦ Selgituseta „tundmatuid” pärijaid või harusid: {n}.
+Aucune branche « inconnue ». ¦ Nėra „nežinomų“ šakų. ¦ Nav “nezināmu” zaru. ¦ „Tundmatut” haru pole.
+L’hypothèse retenue est écrite. ¦ Priimta hipotezė užrašyta. ¦ Pieņemtā hipotēze ir pierakstīta. ¦ Valitud oletus on kirja pandud.
+Plusieurs hypothèses : écris celle qui est retenue. ¦ Kelios hipotezės: užrašyk, kuri priimta. ¦ Vairākas hipotēzes: ieraksti, kura pieņemta. ¦ Mitu oletust: kirjuta, milline on valitud.
+Une seule hypothèse. ¦ Viena hipotezė. ¦ Viena hipotēze. ¦ Üks oletus.
+Les parts totalisent 1. ¦ Dalių suma lygi 1. ¦ Daļu summa ir 1. ¦ Osade summa on 1.
+Les parts ne totalisent pas 1 : à revoir. ¦ Dalių suma nelygi 1: reikia peržiūrėti. ¦ Daļu summa nav 1: jāpārskata. ¦ Osade summa pole 1: üle vaadata.
+La date du décès demande l’avis du notaire (droit de l’époque ou date inconnue). ¦ Mirties datai reikia notaro nuomonės (tuometinė teisė ar nežinoma data). ¦ Nāves datumam vajadzīgs notāra viedoklis (toreizējās tiesības vai nezināms datums). ¦ Surmakuupäev vajab notari arvamust (tolleaegne õigus või teadmata kuupäev).
+{name} ajouté (statut inconnu) ¦ {name} pridėtas (būsena nežinoma) ¦ {name} pievienots (stāvoklis nezināms) ¦ {name} lisatud (olek teadmata)
+{name} ajouté ({share}) ¦ {name} pridėtas ({share}) ¦ {name} pievienots ({share}) ¦ {name} lisatud ({share})
+{name} : {from} → {to} ¦ {name}: {from} → {to} ¦ {name}: {from} → {to} ¦ {name}: {from} → {to}
+{name} retiré ¦ {name} pašalintas ¦ {name} noņemts ¦ {name} eemaldatud
+Ordre retenu : {from} → {to} ¦ Priimta eilė: {from} → {to} ¦ Pieņemtā šķira: {from} → {to} ¦ Valitud järk: {from} → {to}
+descendante à la {n}e génération ¦ palikuonė {n} kartoje ¦ pēcnācēja {n}. paaudzē ¦ järeltulija {n}. põlvkonnas
+descendant à la {n}e génération ¦ palikuonis {n} kartoje ¦ pēcnācējs {n}. paaudzē ¦ järeltulija {n}. põlvkonnas
+ascendante à la {n}e génération ¦ protėvė {n} kartoje ¦ senču māte {n}. paaudzē ¦ esivanem {n}. põlvkonnas
+ascendant à la {n}e génération ¦ protėvis {n} kartoje ¦ sencis {n}. paaudzē ¦ esivanem {n}. põlvkonnas
+parente au {n}e degré ¦ giminaitė {n} laipsnio ¦ radiniece {n}. pakāpē ¦ sugulane {n}. astmes
+parent au {n}e degré ¦ giminaitis {n} laipsnio ¦ radinieks {n}. pakāpē ¦ sugulane {n}. astmes
+petit-fils ¦ vaikaitis ¦ mazdēls ¦ lapselaps (poiss)
+petite-fille ¦ vaikaitė ¦ mazmeita ¦ lapselaps (tüdruk)
+arrière-petit-fils ¦ provaikaitis ¦ mazmazdēls ¦ lapselapselaps (poiss)
+arrière-petite-fille ¦ provaikaitė ¦ mazmazmeita ¦ lapselapselaps (tüdruk)
+arrière-arrière-petit-fils ¦ proprovaikaitis ¦ mazmazmazdēls ¦ lapselapselapselaps (poiss)
+arrière-arrière-petite-fille ¦ proprovaikaitė ¦ mazmazmazmeita ¦ lapselapselapselaps (tüdruk)
+nièce ¦ dukterėčia ¦ brāļameita / māsasmeita ¦ vennatütar / õetütar
+petit-neveu ¦ brolio ar sesers vaikaitis ¦ brāļa vai māsas mazdēls ¦ õe-venna lapselaps (poiss)
+petite-nièce ¦ brolio ar sesers vaikaitė ¦ brāļa vai māsas mazmeita ¦ õe-venna lapselaps (tüdruk)
+arrière-petit-neveu ¦ brolio ar sesers provaikaitis ¦ brāļa vai māsas mazmazdēls ¦ õe-venna lapselapselaps (poiss)
+arrière-petite-nièce ¦ brolio ar sesers provaikaitė ¦ brāļa vai māsas mazmazmeita ¦ õe-venna lapselapselaps (tüdruk)
+arrière-arrière-petit-neveu ¦ brolio ar sesers proprovaikaitis ¦ brāļa vai māsas mazmazmazdēls ¦ õe-venna lapselapselapselaps (poiss)
+arrière-arrière-petite-nièce ¦ brolio ar sesers proprovaikaitė ¦ brāļa vai māsas mazmazmazmeita ¦ õe-venna lapselapselapselaps (tüdruk)
+cousin germain ¦ pusbrolis ¦ brālēns ¦ nõbu
+cousine germaine ¦ pusseserė ¦ māsīca ¦ nõbu
+fils de cousin germain ¦ pusbrolio sūnus ¦ brālēna dēls ¦ nõbu poeg
+fille de cousin germain ¦ pusbrolio duktė ¦ brālēna meita ¦ nõbu tütar
+petit-fils de cousin germain ¦ pusbrolio vaikaitis ¦ brālēna mazdēls ¦ nõbu lapselaps (poiss)
+petite-fille de cousin germain ¦ pusbrolio vaikaitė ¦ brālēna mazmeita ¦ nõbu lapselaps (tüdruk)
+grand-oncle ¦ senelio brolis ¦ vectēva brālis ¦ vanaonu
+grand-tante ¦ senelio sesuo ¦ vectēva māsa ¦ vanatädi
+cousin germain d’un parent ¦ vieno iš tėvų pusbrolis ¦ viena no vecākiem brālēns ¦ vanema nõbu
+cousine germaine d’un parent ¦ vieno iš tėvų pusseserė ¦ viena no vecākiem māsīca ¦ vanema nõbu
+cousin issu de germains ¦ antros eilės pusbrolis ¦ otrās pakāpes brālēns ¦ teise astme nõbu
+cousine issue de germains ¦ antros eilės pusseserė ¦ otrās pakāpes māsīca ¦ teise astme nõbu
+arrière-grand-oncle ¦ prosenelio brolis ¦ vecvectēva brālis ¦ vanavanaonu
+arrière-grand-tante ¦ prosenelio sesuo ¦ vecvectēva māsa ¦ vanavanatädi
+cousin germain d’un grand-parent ¦ senelio pusbrolis ¦ vecvecāka brālēns ¦ vanavanema nõbu
+cousine germaine d’un grand-parent ¦ senelio pusseserė ¦ vecvecāka māsīca ¦ vanavanema nõbu
+arrière-arrière-grand-oncle ¦ proprosenelio brolis ¦ vecvecvectēva brālis ¦ vanavanavanaonu
+arrière-arrière-grand-tante ¦ proprosenelio sesuo ¦ vecvecvectēva māsa ¦ vanavanavanatädi
+frère germain ¦ tikras brolis ¦ īstais brālis ¦ täisvend
+sœur germaine ¦ tikra sesuo ¦ īstā māsa ¦ täisõde
+demi-frère (même père) ¦ įbrolis (tas pats tėvas) ¦ pusbrālis (tas pats tēvs) ¦ poolvend (sama isa)
+demi-sœur (même père) ¦ įseserė (tas pats tėvas) ¦ pusmāsa (tas pats tēvs) ¦ poolõde (sama isa)
+demi-frère (même mère) ¦ įbrolis (ta pati motina) ¦ pusbrālis (tā pati māte) ¦ poolvend (sama ema)
+demi-sœur (même mère) ¦ įseserė (ta pati motina) ¦ pusmāsa (tā pati māte) ¦ poolõde (sama ema)
+Père, mère, enfant ¦ Tėvas, motina, vaikas ¦ Tēvs, māte, bērns ¦ Isa, ema, laps
+Frère, sœur, grand-parent, petit-enfant ¦ Brolis, sesuo, senelis, vaikaitis ¦ Brālis, māsa, vecvecāks, mazbērns ¦ Vend, õde, vanavanem, lapselaps
+Neveu, nièce, oncle, tante ¦ Sūnėnas, dukterėčia, dėdė, teta ¦ Brāļadēls, māsasmeita, tēvocis, tante ¦ Vennapoeg, õetütar, onu, tädi
+Cousin germain, petit-neveu, grand-oncle ¦ Pusbrolis, brolio vaikaitis, senelio brolis ¦ Brālēns, brāļa mazdēls, vectēva brālis ¦ Nõbu, õe-venna lapselaps, vanaonu
+Enfant de cousin germain ¦ Pusbrolio vaikas ¦ Brālēna bērns ¦ Nõbu laps
+Cousin issu de germains (limite) ¦ Antros eilės pusbrolis (riba) ¦ Otrās pakāpes brālēns (robeža) ¦ Teise astme nõbu (piir)
+Présomption d’absence : le juge des tutelles la constate quand une personne a cessé de paraître sans donner de nouvelles. Elle est réputée vivante ; sa part est réservée et gérée. ¦ Nebuvimo prezumpcija: teismas ją nustato, kai asmuo nustojo pasirodyti ir neduoda žinių. Jis laikomas gyvu; jo dalis rezervuojama ir valdoma. ¦ Prombūtnes prezumpcija: tiesa to konstatē, ja persona vairs neparādās un nedod ziņas. Viņu uzskata par dzīvu; viņa daļa tiek rezervēta un pārvaldīta. ¦ Eemalviibimise eeldus: kohus tuvastab selle, kui isik on lakanud ilmumast ja teateid andmast. Teda peetakse elavaks; tema osa reserveeritakse ja seda hallatakse.
+Déclaration d’absence : 10 ans après le jugement de présomption (ou 20 ans sans nouvelles), le tribunal judiciaire la déclare ; le jugement a les effets d’un décès. ¦ Paskelbimas nesančiu: praėjus 10 metų po prezumpcijos sprendimo (ar 20 metų be žinių), teismas jį paskelbia; sprendimas turi mirties padarinius. ¦ Prombūtnes pasludināšana: 10 gadus pēc prezumpcijas sprieduma (vai 20 gadus bez ziņām) tiesa to pasludina; spriedumam ir nāves sekas. ¦ Eemalviibivaks tunnistamine: 10 aastat pärast eelduse otsust (või 20 aastat teateta) kuulutab kohus selle välja; otsusel on surma tagajärjed.
+Jugement déclaratif de décès : pour une disparition dans des circonstances qui mettent la vie en danger (naufrage, catastrophe), sans attendre. ¦ Sprendimas paskelbti mirusiu: dingus gyvybei pavojingomis aplinkybėmis (laivo sudužimas, katastrofa), nelaukiant. ¦ Spriedums par atzīšanu par mirušu: pazušanas gadījumā dzīvībai bīstamos apstākļos (kuģa bojāeja, katastrofa), bez gaidīšanas. ¦ Surnuks tunnistamise otsus: eluohtlikes oludes kadumise korral (laevahukk, katastroof), ootamata.
+Service central d’état civil (Nantes) : les actes des Français nés, mariés ou morts à l’étranger. ¦ Centrinė civilinės metrikacijos tarnyba (Nantas): užsienyje gimusių, susituokusių ar mirusių prancūzų įrašai. ¦ Centrālais civilstāvokļa dienests (Nanta): ārzemēs dzimušo, laulāto vai mirušo francūžu reģistri. ¦ Keskne perekonnaseisuamet (Nantes): välismaal sündinud, abiellunud või surnud prantslaste aktid.
+Le consulat de France du pays : registres d’immatriculation, actes transcrits récents. ¦ Prancūzijos konsulatas šalyje: konsuliniai registrai, neseniai perrašyti įrašai. ¦ Francijas konsulāts valstī: konsulārie reģistri, nesen pārrakstīti reģistri. ¦ Prantsusmaa konsulaat riigis: konsulaarregistrid, hiljuti üle kantud aktid.
+L’état civil du pays (mairie, registro civil, Standesamt…) : lettre dans la langue du pays. ¦ Šalies civilinės metrikacijos tarnyba (savivaldybė, registro civil, Standesamt…): laiškas šalies kalba. ¦ Valsts civilstāvokļa dienests (pašvaldība, registro civil, Standesamt…): vēstule valsts valodā. ¦ Riigi perekonnaseisuamet (vald, registro civil, Standesamt…): kiri riigi keeles.
+Archives nationales d’outre-mer (Aix-en-Provence) : colonies et Algérie avant 1962. ¦ Nacionaliniai užjūrio archyvai (Aix-en-Provence): kolonijos ir Alžyras iki 1962 m. ¦ Nacionālie aizjūras arhīvi (Eksanprovansa): kolonijas un Alžīrija līdz 1962. gadam. ¦ Riiklikud ülemereterritooriumide arhiivid (Aix-en-Provence): kolooniad ja Alžeeria enne 1962.
+Ouvert ¦ Atidaryta ¦ Atvērta ¦ Avatud
+En recherche ¦ Ieškoma ¦ Meklēšanā ¦ Otsimisel
+Héritiers trouvés ¦ Įpėdiniai rasti ¦ Mantinieki atrasti ¦ Pärijad leitud
+Clos ¦ Uždaryta ¦ Slēgta ¦ Suletud
+📁 Dossier ¦ 📁 Byla ¦ 📁 Lieta ¦ 📁 Toimik
+👥 Héritiers ¦ 👥 Įpėdiniai ¦ 👥 Mantinieki ¦ 👥 Pärijad
+🌳 Arbre ¦ 🌳 Medis ¦ 🌳 Koks ¦ 🌳 Puu
+✉️ Héritiers contactés ¦ ✉️ Susisiekti įpėdiniai ¦ ✉️ Uzrunātie mantinieki ¦ ✉️ Kontakteeritud pärijad
+🖨 Pour le notaire ¦ 🖨 Notarui ¦ 🖨 Notāram ¦ 🖨 Notarile
+🕓 Journal ¦ 🕓 Žurnalas ¦ 🕓 Žurnāls ¦ 🕓 Logi
+💶 Temps et frais ¦ 💶 Laikas ir išlaidos ¦ 💶 Laiks un izdevumi ¦ 💶 Aeg ja kulud
+Décédé après ¦ Mirė vėliau ¦ Miris vēlāk ¦ Suri hiljem
+Décédée après ¦ Mirė vėliau ¦ Mirusi vēlāk ¦ Suri hiljem
+Renonce ¦ Atsisako ¦ Atsakās ¦ Loobub
+Indigne ¦ Nevertas ¦ Necienīgs ¦ Pärimisvõimetu
+Absent ¦ Nesantis ¦ Prombūtnē ¦ Eemal
+Absente ¦ Nesanti ¦ Prombūtnē ¦ Eemal
+Pas encore conçu ¦ Dar nepradėtas ¦ Vēl nav ieņemts ¦ Veel eostamata
+Pas encore conçue ¦ Dar nepradėta ¦ Vēl nav ieņemta ¦ Veel eostamata
+Comme sur la fiche ¦ Kaip įraše ¦ Kā ierakstā ¦ Nagu kirjes
+Vivant au décès ¦ Gyvas mirties metu ¦ Dzīvs nāves brīdī ¦ Elus surma ajal
+Mort avant le défunt ¦ Mirė anksčiau už palikėją ¦ Miris pirms mantojuma atstājēja ¦ Suri enne pärandajat
+Mort après le défunt ¦ Mirė po palikėjo ¦ Miris pēc mantojuma atstājēja ¦ Suri pärast pärandajat
+Renonce à la succession ¦ Atsisako palikimo ¦ Atsakās no mantojuma ¦ Loobub pärandist
+Déclaré absent ¦ Paskelbtas nesančiu ¦ Atzīts par prombūtnē esošu ¦ Tunnistatud eemalviibivaks
+Refuse ¦ Atsisako ¦ Atsaka ¦ Keeldub
+Rappellera ¦ Perskambins ¦ Atzvanīs ¦ Helistab tagasi
+✓ En main ¦ ✓ Turima ¦ ✓ Rokā ¦ ✓ Käes
+📮 Demandé ¦ 📮 Užsakyta ¦ 📮 Pieprasīts ¦ 📮 Tellitud
+✗ Manquant ¦ ✗ Trūksta ¦ ✗ Trūkst ¦ ✗ Puudub
+Sans objet ¦ Netaikoma ¦ Neattiecas ¦ Ei kohaldu
+⏱ Temps ¦ ⏱ Laikas ¦ ⏱ Laiks ¦ ⏱ Aeg
+🧾 Frais ¦ 🧾 Išlaidos ¦ 🧾 Izdevumi ¦ 🧾 Kulud
+📝 Contrat ¦ 📝 Sutartis ¦ 📝 Līgums ¦ 📝 Leping
+02 — HÉRITIERS ¦ 02 — ĮPĖDINIAI ¦ 02 — MANTINIEKI ¦ 02 — PÄRIJAD
+Généalogiste successoral ¦ Paveldėjimo genealogas ¦ Mantojuma ģenealogs ¦ Pärimisgenealoog
+Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ Surasti mirusio asmens įpėdinius notarui. ¦ Atrast mirušas personas mantiniekus notāram. ¦ Lahkunu pärijate otsimine notarile.
++ ⚖️ Successions. Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Paveldėjimai. Pirmasis ekranas: „Atidaryti bylą“. ¦ + ⚖️ Mantojumi. Pirmais ekrāns: “Atvērt lietu”. ¦ + ⚖️ Pärandid. Esimene kuva: „Ava toimik”.
+⚖️ Successions, 📇 Vivants, 📮 Courriers. ¦ ⚖️ Paveldėjimai, 📇 Gyvieji, 📮 Laiškai. ¦ ⚖️ Mantojumi, 📇 Dzīvie, 📮 Vēstules. ¦ ⚖️ Pärandid, 📇 Elavad, 📮 Kirjad.
+⚖️ Successions ¦ ⚖️ Paveldėjimai ¦ ⚖️ Mantojumi ¦ ⚖️ Pärandid
+Vivants ¦ Gyvieji ¦ Dzīvie ¦ Elavad
+Courriers ¦ Laiškai ¦ Vēstules ¦ Kirjad
+Échéance le {date} ¦ Terminas {date} ¦ Termiņš {date} ¦ Tähtaeg {date}
+Pour quel héritier ? ¦ Kuriam įpėdiniui? ¦ Kuram mantiniekam? ¦ Millisele pärijale?
+Lettre à un héritier ¦ Laiškas įpėdiniui ¦ Vēstule mantiniekam ¦ Kiri pärijale
+ne révèle pas le défunt avant signature ; honoraires et date limite à écrire ¦ neatskleidžia mirusiojo iki pasirašymo; atlygį ir terminą įrašyti ¦ neatklāj mirušo pirms parakstīšanas; atlīdzība un termiņš jāieraksta ¦ ei avalda lahkunut enne allkirja; tasu ja tähtaeg kirjutada
+premier contact, sans nommer le défunt ¦ pirmasis kontaktas, neįvardijant mirusiojo ¦ pirmais kontakts, nenosaucot mirušo ¦ esimene kontakt, lahkunut nimetamata
+Il y a déjà un dossier pour cette personne. ¦ Šiam asmeniui byla jau yra. ¦ Šai personai jau ir lieta. ¦ Sellele isikule on juba toimik.
+Date d’ouverture incorrecte. ¦ Neteisinga atidarymo data. ¦ Nepareizs atvēršanas datums. ¦ Vale avamiskuupäev.
+Notaire introuvable. ¦ Notaras nerastas. ¦ Notārs nav atrasts. ¦ Notarit ei leitud.
+Passe d’abord par la liste de contrôle avant « Remis au notaire ». ¦ Pirmiau pereik kontrolinį sąrašą prieš „Perduota notarui“. ¦ Vispirms izej cauri pārbaudes sarakstam pirms “Nodots notāram”. ¦ Läbi esmalt kontrollnimekiri enne olekut „Notarile üle antud”.
+Ce dossier est archivé. ¦ Ši byla archyvuota. ¦ Šī lieta ir arhivēta. ¦ See toimik on arhiveeritud.
+Valeur inconnue. ¦ Nežinoma reikšmė. ¦ Nezināma vērtība. ¦ Tundmatu väärtus.
+Pièce inconnue. ¦ Nežinomas dokumentas. ¦ Nezināms dokuments. ¦ Tundmatu dokument.
+Choisis la date de l’échéance. ¦ Pasirink termino datą. ¦ Izvēlies termiņa datumu. ¦ Vali tähtaja kuupäev.
+Écris ce qu’il faut faire. ¦ Parašyk, ką reikia padaryti. ¦ Ieraksti, kas jādara. ¦ Kirjuta, mida teha tuleb.
+Échéance introuvable. ¦ Terminas nerastas. ¦ Termiņš nav atrasts. ¦ Tähtaega ei leitud.
+Date incorrecte. ¦ Neteisinga data. ¦ Nepareizs datums. ¦ Vale kuupäev.
+Le pourcentage va de 0 à 100. ¦ Procentas nuo 0 iki 100. ¦ Procents ir no 0 līdz 100. ¦ Protsent on 0–100.
+Combien de temps ? ¦ Kiek laiko? ¦ Cik ilgi? ¦ Kui kaua?
+Choisis l’héritier. ¦ Pasirink įpėdinį. ¦ Izvēlies mantinieku. ¦ Vali pärija.
+Date de signature incorrecte. ¦ Neteisinga pasirašymo data. ¦ Nepareizs parakstīšanas datums. ¦ Vale allkirjastamise kuupäev.
+Seul un dossier clos peut être archivé. ¦ Archyvuoti galima tik uždarytą bylą. ¦ Arhivēt var tikai slēgtu lietu. ¦ Arhiveerida saab ainult suletud toimikut.
+Mode consultation : les dossiers de succession ne se montrent pas. ¦ Peržiūros režimas: paveldėjimo bylos nerodomos. ¦ Skatīšanas režīms: mantojuma lietas netiek rādītas. ¦ Vaatamisrežiim: pärimistoimikuid ei näidata.
+Rien à noter. ¦ Nėra ko užrašyti. ¦ Nav ko pierakstīt. ¦ Pole midagi märkida.
+Calcul manquant. ¦ Trūksta skaičiavimo. ¦ Trūkst aprēķina. ¦ Arvutus puudub.
+Dévolution ¦ Paveldėjimo eilė ¦ Mantošanas kārtība ¦ Pärimisjärjekord
+=héritier ¦ įpėdinis|įpėdiniai|įpėdinių ¦ mantinieku|mantinieks|mantinieki ¦ pärija|pärijat
+=courrier ¦ laiškas|laiškai|laiškų ¦ vēstuļu|vēstule|vēstules ¦ kiri|kirja
+=dépouillement ¦ peržiūra|peržiūros|peržiūrų ¦ pārskatu|pārskats|pārskati ¦ läbitöötamine|läbitöötamist
+=dossier en cours ¦ vykdoma byla|vykdomos bylos|vykdomų bylų ¦ aktīvu lietu|aktīva lieta|aktīvas lietas ¦ pooleli toimik|pooleli toimikut
+=dossier de succession ¦ paveldėjimo byla|paveldėjimo bylos|paveldėjimo bylų ¦ mantojuma lietu|mantojuma lieta|mantojuma lietas ¦ pärimistoimik|pärimistoimikut

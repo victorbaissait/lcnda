@@ -1,0 +1,218 @@
+fr ¦ lt ¦ lv ¦ et
+# Zone « plus-famille » : 💌 lettre de famille, 🛡 fiabilité par personne, 🖊 relecture d’une branche, 🌐 traduire un acte latin (assets/js/plus-famille*.js, lib/plus_famille.php)
+Fiabilité : {n} sur 100 ¦ Patikimumas: {n} iš 100 ¦ Uzticamība: {n} no 100 ¦ Usaldusväärsus: {n}/100
+🛡 Fiabilité ¦ 🛡 Patikimumas ¦ 🛡 Uzticamība ¦ 🛡 Usaldusväärsus
+Calcul de la note… ¦ Skaičiuojamas balas… ¦ Aprēķina vērtējumu… ¦ Hinde arvutamine…
+Comment la note est calculée ¦ Kaip skaičiuojamas balas ¦ Kā aprēķina vērtējumu ¦ Kuidas hinne arvutatakse
+? Comment c’est calculé ¦ ? Kaip skaičiuojama ¦ ? Kā tiek aprēķināts ¦ ? Kuidas see arvutatakse
+en doute : {what} ¦ abejotina: {what} ¦ apšaubāms: {what} ¦ kahtlane: {what}
+date estimée : {what} ¦ apytikslė data: {what} ¦ aptuvens datums: {what} ¦ hinnanguline kuupäev: {what}
+aucun fait noté (naissance, mariage, décès…) ¦ nėra užrašytų faktų (gimimas, santuoka, mirtis…) ¦ nav pierakstītu faktu (dzimšana, laulība, nāve…) ¦ ühtegi fakti pole märgitud (sünd, abielu, surm…)
+sans source : {what} ¦ be šaltinio: {what} ¦ bez avota: {what} ¦ allikata: {what}
+une source sur la fiche, mais sur aucun fait ¦ šaltinis kortelėje, bet ne prie fakto ¦ avots kartītē, bet ne pie fakta ¦ allikas kaardil, aga mitte ühegi fakti juures
+aucune source ¦ nėra šaltinių ¦ nav avotu ¦ allikaid pole
+{who} : lien {lvl} ¦ {who}: ryšys {lvl} ¦ {who}: saite {lvl} ¦ {who}: seos {lvl}
+pas de parents dans la base : cette part ne compte pas ¦ bazėje nėra tėvų: ši dalis neskaičiuojama ¦ datubāzē nav vecāku: šī daļa netiek skaitīta ¦ andmebaasis pole vanemaid: see osa ei loe
+ajouter une source à : {what} ¦ pridėti šaltinį: {what} ¦ pievienot avotu: {what} ¦ lisada allikas: {what}
+vérifier {what}, marqué « doute » ¦ patikrinti {what}, pažymėta „abejotina“ ¦ pārbaudīt {what}, atzīmēts “apšaubāms” ¦ kontrollida {what}, märgitud „kahtlane”
+confirmer le lien avec {name} (⚖️ dossier de preuve) ¦ patvirtinti ryšį su {name} (⚖️ įrodymų byla) ¦ apstiprināt saiti ar {name} (⚖️ pierādījumu lieta) ¦ kinnitada seos isikuga {name} (⚖️ tõendite toimik)
+ajouter ses faits (naissance, mariage, décès) avec leur source ¦ pridėti faktus (gimimas, santuoka, mirtis) su šaltiniu ¦ pievienot faktus (dzimšana, laulība, nāve) ar avotu ¦ lisada faktid (sünd, abielu, surm) koos allikaga
+sur 100 ¦ iš 100 ¦ no 100 ¦ / 100
+À revoir avant publication ¦ Peržiūrėti prieš skelbiant ¦ Pārskatīt pirms publicēšanas ¦ Üle vaadata enne avaldamist
+(vivant ou fiche confidentielle : ne part pas à la publication) ¦ (gyvas arba konfidenciali kortelė: neskelbiama) ¦ (dzīvs vai konfidenciāla kartīte: netiek publicēta) ¦ (elus või konfidentsiaalne kaart: ei avaldata)
+Seuil « à revoir » : {n} ¦ Riba „peržiūrėti“: {n} ¦ Slieksnis “pārskatīt”: {n} ¦ Lävi „üle vaadata”: {n}
+Pour gagner des points : ¦ Kaip gauti daugiau taškų: ¦ Lai iegūtu punktus: ¦ Punktide saamiseks:
+La note n’est pas le score de complétude (qui compte ce qui est rempli) : une fiche peut être bien remplie et peu sûre. ¦ Balas nėra užpildymo rodiklis (jis skaičiuoja, kas užpildyta): kortelė gali būti gerai užpildyta, bet nepatikima. ¦ Vērtējums nav pilnīguma rādītājs (tas skaita aizpildīto): kartīte var būt labi aizpildīta, bet neuzticama. ¦ Hinne ei ole täielikkuse näitaja (see loeb täidetut): kaart võib olla hästi täidetud, kuid ebakindel.
+Calcul impossible. ¦ Apskaičiuoti nepavyko. ¦ Aprēķins nav iespējams. ¦ Arvutus pole võimalik.
+🛡 FIABILITÉ ¦ 🛡 PATIKIMUMAS ¦ 🛡 UZTICAMĪBA ¦ 🛡 USALDUSVÄÄRSUS
+Trois parts, sur 100 chacune, puis une moyenne : ¦ Trys dalys, kiekviena iš 100, tada vidurkis: ¦ Trīs daļas, katra no 100, tad vidējais: ¦ Kolm osa, igaüks 100-st, siis keskmine:
+Ses faits (40 %) ¦ Faktai (40 %) ¦ Fakti (40 %) ¦ Faktid (40%)
+la fiabilité de chaque fait : certain 100, déduit 80, estimé 55, doute 15, non évalué 60 ; une date « vers… », « avant… » compte comme estimée. ¦ kiekvieno fakto patikimumas: tikras 100, išvestas 80, apytikslis 55, abejotinas 15, neįvertintas 60; data „apie…“, „prieš…“ laikoma apytiksle. ¦ katra fakta uzticamība: drošs 100, secināts 80, aptuvens 55, apšaubāms 15, nenovērtēts 60; datums “ap…”, “pirms…” skaitās aptuvens. ¦ iga fakti usaldusväärsus: kindel 100, järeldatud 80, hinnanguline 55, kahtlane 15, hindamata 60; kuupäev „umbes…”, „enne…” loeb hinnanguliseks.
+Ses sources (35 %) ¦ Šaltiniai (35 %) ¦ Avoti (35 %) ¦ Allikad (35%)
+la part des faits qui ont une source citée ou un acte en image. ¦ faktų, turinčių cituotą šaltinį ar įrašo vaizdą, dalis. ¦ faktu daļa, kam ir citēts avots vai akta attēls. ¦ allikaga või akti pildiga faktide osa.
+Ses liens (25 %) ¦ Ryšiai (25 %) ¦ Saites (25 %) ¦ Seosed (25%)
+la solidité du lien avec chaque parent : prouvé 100, probable 75, supposé 45, sans source 20, réfuté 0. Sans parents dans la base, cette part ne compte pas. ¦ ryšio su kiekvienu iš tėvų tvirtumas: įrodytas 100, tikėtinas 75, spėjamas 45, be šaltinio 20, paneigtas 0. Be tėvų bazėje ši dalis neskaičiuojama. ¦ saites stiprums ar katru vecāku: pierādīta 100, ticama 75, pieņemta 45, bez avota 20, atspēkota 0. Bez vecākiem datubāzē šī daļa netiek skaitīta. ¦ seose tugevus kummagi vanemaga: tõestatud 100, tõenäoline 75, oletatav 45, allikata 20, ümber lükatud 0. Ilma vanemateta see osa ei loe.
+Sous le seuil (50 au départ), la fiche est « à revoir avant publication ». Le seuil se règle dans Réglages → ⚙️ Seuils du contrôle. ¦ Žemiau ribos (iš pradžių 50) kortelė yra „peržiūrėtina prieš skelbiant“. Ribą nustatai Nustatymai → ⚙️ Tikrinimo ribos. ¦ Zem sliekšņa (sākumā 50) kartīte ir “jāpārskata pirms publicēšanas”. Slieksni iestata Iestatījumi → ⚙️ Pārbaudes sliekšņi. ¦ Lävest allpool (alguses 50) on kaart „üle vaadata enne avaldamist”. Läve saab seada: Seaded → ⚙️ Kontrolli läved.
+Rien n’est changé dans ta base : la note est recalculée dès qu’un fait ou une source change. ¦ Tavo bazėje niekas nekeičiama: balas perskaičiuojamas, kai pasikeičia faktas ar šaltinis. ¦ Tavā datubāzē nekas netiek mainīts: vērtējums tiek pārrēķināts, tiklīdz mainās fakts vai avots. ¦ Sinu andmebaasis ei muudeta midagi: hinne arvutatakse uuesti, kui fakt või allikas muutub.
+{day} : {first}, {age} ¦ {day}: {first}, {age} ¦ {day}: {first}, {age} ¦ {day}: {first}, {age}
+{day} : il y a {n} ans, {a} et {b} se mariaient ¦ {day}: prieš {n} m. susituokė {a} ir {b} ¦ {day}: pirms {n} gadiem salaulājās {a} un {b} ¦ {day}: {n} aastat tagasi abiellusid {a} ja {b}
+{day} : il y a {n} ans naissait {name} ¦ {day}: prieš {n} m. gimė {name} ¦ {day}: pirms {n} gadiem piedzima {name} ¦ {day}: {n} aastat tagasi sündis {name}
+{what} dans l’arbre : {list} ¦ {what} medyje: {list} ¦ {what} kokā: {list} ¦ {what} puus: {list}
+Nouveau dans les médias : « {title} » ¦ Nauja medijose: „{title}“ ¦ Jauns medijos: “{title}” ¦ Uus meedias: „{title}”
+La lettre des {nm} ¦ {nm} šeimos laiškas ¦ {nm} ģimenes vēstule ¦ Perekond {nm} kiri
+Bonjour à tous ! Voici les nouvelles de la famille ce mois-ci. ¦ Sveiki visi! Štai šio mėnesio šeimos naujienos. ¦ Sveiki visi! Lūk, ģimenes ziņas šajā mēnesī. ¦ Tere kõigile! Siin on perekonna selle kuu uudised.
+Photo : {title} ¦ Nuotrauka: {title} ¦ Fotogrāfija: {title} ¦ Foto: {title}
+Les anniversaires du mois ¦ Mėnesio sukaktys ¦ Mēneša jubilejas ¦ Kuu tähtpäevad
+Pas d’anniversaire ce mois-ci. ¦ Šį mėnesį sukakčių nėra. ¦ Šomēnes jubileju nav. ¦ Sel kuul tähtpäevi pole.
+Les dernières découvertes ¦ Naujausi atradimai ¦ Jaunākie atklājumi ¦ Viimased avastused
+Rien de nouveau ce mois-ci : à vous de m’envoyer vos souvenirs ! ¦ Šį mėnesį nieko naujo: dabar jūs atsiųskite man savo prisiminimus! ¦ Šomēnes nekā jauna: tagad jūs atsūtiet man savas atmiņas! ¦ Sel kuul pole midagi uut: nüüd saatke teie mulle oma mälestusi!
+L’ancêtre à l’honneur ¦ Dėmesio centre – protėvis ¦ Godināmais sencis ¦ Esivanem tähelepanu keskmes
+Avec toute mon affection, ¦ Su meile, ¦ Ar mīlestību, ¦ Armastusega,
+Ce qu’on y met ¦ Kas į jį įeina ¦ Ko tajā ietver ¦ Mis sinna läheb
+🖼 Changer ¦ 🖼 Pakeisti ¦ 🖼 Mainīt ¦ 🖼 Vaheta
+Tout se retouche dans la lettre (clique sur un texte). Les personnes vivantes n’y figurent que par leur prénom et leur âge ; les fiches confidentielles jamais. ¦ Viską galima taisyti laiške (spustelėk tekstą). Gyvi žmonės nurodomi tik vardu ir amžiumi, konfidencialios kortelės – niekada. ¦ Visu var labot vēstulē (noklikšķini uz teksta). Dzīvie redzami tikai ar vārdu un vecumu, konfidenciālās kartītes nekad. ¦ Kirjas saab kõike muuta (klõpsa tekstil). Elavad on näha vaid eesnime ja vanusega, konfidentsiaalsed kaardid mitte kunagi.
+Je remplis la lettre… ¦ Pildomas laiškas… ¦ Aizpildu vēstuli… ¦ Kirja täitmine…
+Lettre refaite avec les nouveaux choix ¦ Laiškas perdarytas pagal naujus pasirinkimus ¦ Vēstule pārveidota ar jaunajām izvēlēm ¦ Kiri tehtud uute valikutega uuesti
+LETTRE DE FAMILLE ¦ ŠEIMOS LAIŠKAS ¦ ĢIMENES VĒSTULE ¦ PEREKIRI
+La photo de la lettre ¦ Laiško nuotrauka ¦ Vēstules fotogrāfija ¦ Kirja foto
+Lettre de famille ¦ Šeimos laiškas ¦ Ģimenes vēstule ¦ Perekiri
+La lettre du mois remplie toute seule : anniversaires, dernières découvertes, une photo, un ancêtre à l’honneur. Tout se retouche. ¦ Mėnesio laiškas užpildomas pats: sukaktys, naujausi atradimai, nuotrauka, protėvis dėmesio centre. Viską galima taisyti. ¦ Mēneša vēstule aizpildās pati: jubilejas, jaunākie atklājumi, fotogrāfija, godināmais sencis. Visu var labot. ¦ Kuu kiri täitub ise: tähtpäevad, viimased avastused, foto, esivanem tähelepanu keskmes. Kõike saab muuta.
+Lettre gardée : « {title} » (Listes → Lettres de famille) ¦ Laiškas išsaugotas: „{title}“ (Sąrašai → Šeimos laiškai) ¦ Vēstule saglabāta: “{title}” (Saraksti → Ģimenes vēstules) ¦ Kiri hoitud: „{title}” (Loendid → Perekirjad)
+💾 Garder ¦ 💾 Išsaugoti ¦ 💾 Saglabāt ¦ 💾 Hoia alles
+Ranger la lettre dans Listes → Lettres de famille ¦ Įdėti laišką į Sąrašai → Šeimos laiškai ¦ Ievietot vēstuli: Saraksti → Ģimenes vēstules ¦ Pane kiri: Loendid → Perekirjad
+PDF ¦ PDF ¦ PDF ¦ PDF
+par la fenêtre « Imprimer » (⤓ PDF) ¦ per langą „Spausdinti“ (⤓ PDF) ¦ ar logu “Drukāt” (⤓ PDF) ¦ akna „Prindi” kaudu (⤓ PDF)
+Image (PNG) ¦ Vaizdas (PNG) ¦ Attēls (PNG) ¦ Pilt (PNG)
+Ouvre ta messagerie avec la lettre déjà écrite : rien n’est envoyé par l’app ¦ Atidaro el. paštą su parašytu laišku: programa nieko nesiunčia ¦ Atver e-pastu ar jau uzrakstītu vēstuli: lietotne neko nesūta ¦ Avab e-posti valmis kirjaga: rakendus ei saada midagi
+📝 Retoucher ¦ 📝 Taisyti ¦ 📝 Labot ¦ 📝 Muuda
+Ouvrir la lettre dans le traitement de texte ¦ Atidaryti laišką teksto rengyklėje ¦ Atvērt vēstuli teksta redaktorā ¦ Ava kiri tekstitöötluses
+Chers cousins, chères cousines, ¦ Mieli pusbroliai ir pusseserės, ¦ Mīļie brālēni un māsīcas, ¦ Kallid nõod,
+Ce que j’ai trouvé ce mois-ci… ¦ Ką radau šį mėnesį… ¦ Ko atradu šomēnes… ¦ Mida ma sel kuul leidsin…
+Si vous avez des photos, des lettres ou des souvenirs, je serais très heureux de les voir ! ¦ Jei turite nuotraukų, laiškų ar prisiminimų, mielai pamatyčiau! ¦ Ja jums ir fotogrāfijas, vēstules vai atmiņas, labprāt tās redzētu! ¦ Kui teil on fotosid, kirju või mälestusi, näeksin neid hea meelega!
+Je vous embrasse, ¦ Apkabinu, ¦ Apskauju, ¦ Kallistan,
+📋 Voir dans Listes › Lettres de famille ¦ 📋 Žiūrėti: Sąrašai › Šeimos laiškai ¦ 📋 Skatīt: Saraksti › Ģimenes vēstules ¦ 📋 Vaata: Loendid › Perekirjad
+remplie toute seule : anniversaires du mois, découvertes, photo, ancêtre ¦ užsipildo pats: mėnesio sukaktys, atradimai, nuotrauka, protėvis ¦ aizpildās pati: mēneša jubilejas, atklājumi, foto, sencis ¦ täitub ise: kuu tähtpäevad, avastused, foto, esivanem
+Lettres de famille ¦ Šeimos laiškai ¦ Ģimenes vēstules ¦ Perekirjad
+💌 Lettres de famille ¦ 💌 Šeimos laiškai ¦ 💌 Ģimenes vēstules ¦ 💌 Perekirjad
+Les lettres du mois gardées depuis ✨ Trésors → « 💌 Lettre de famille ». À ne pas confondre avec les « ✉️ Lettres aux descendants », qui s’ouvrent plus tard. ¦ Mėnesio laiškai, išsaugoti iš ✨ Lobiai → „💌 Šeimos laiškas“. Nepainiok su „✉️ Laiškais palikuonims“, kurie atsidaro vėliau. ¦ Mēneša vēstules, saglabātas no ✨ Dārgumi → “💌 Ģimenes vēstule”. Nejaukt ar “✉️ Vēstulēm pēcnācējiem”, kas atveras vēlāk. ¦ Kuu kirjad, hoitud jaotisest ✨ Aarded → „💌 Perekiri”. Mitte segi ajada „✉️ Kirjadega järeltulijatele”, mis avanevad hiljem.
+💌 Nouvelle lettre ¦ 💌 Naujas laiškas ¦ 💌 Jauna vēstule ¦ 💌 Uus kiri
+Chercher… (titre, mois) ¦ Ieškoti… (pavadinimas, mėnuo) ¦ Meklēt… (nosaukums, mēnesis) ¦ Otsi… (pealkiri, kuu)
+Supprimer la lettre ¦ Ištrinti laišką ¦ Dzēst vēstuli ¦ Kustuta kiri
+Aucune lettre gardée pour l’instant ¦ Kol kas nėra išsaugotų laiškų ¦ Pagaidām nav saglabātu vēstuļu ¦ Hoitud kirju veel pole
+Fais celle du mois dans ✨ Trésors → « 💌 Lettre de famille », puis « 💾 Garder ». ¦ Padaryk mėnesio laišką: ✨ Lobiai → „💌 Šeimos laiškas“, tada „💾 Išsaugoti“. ¦ Izveido mēneša vēstuli: ✨ Dārgumi → “💌 Ģimenes vēstule”, tad “💾 Saglabāt”. ¦ Tee kuu kiri: ✨ Aarded → „💌 Perekiri”, siis „💾 Hoia alles”.
+💌 Faire la lettre du mois ¦ 💌 Padaryti mėnesio laišką ¦ 💌 Izveidot mēneša vēstuli ¦ 💌 Tee kuu kiri
+Lettre « {title} » supprimée ¦ Laiškas „{title}“ ištrintas ¦ Vēstule “{title}” izdzēsta ¦ Kiri „{title}” kustutatud
+« d’accord », dit {who}. ¦ „sutinku“, sako {who}. ¦ “piekrītu”, saka {who}. ¦ „nõus”, ütleb {who}.
+« faux », dit {who}. ¦ „klaidinga“, sako {who}. ¦ “nepareizi”, saka {who}. ¦ „vale”, ütleb {who}.
+Que faire de cette remarque ? ¦ Ką daryti su šia pastaba? ¦ Ko darīt ar šo piezīmi? ¦ Mida selle märkusega teha?
+✓ Accepter (témoignage) ¦ ✓ Priimti (liudijimas) ¦ ✓ Pieņemt (liecība) ¦ ✓ Nõustu (tunnistus)
+✓ Accepter (note sur le fait, « doute ») ¦ ✓ Priimti (pastaba prie fakto, „abejotina“) ¦ ✓ Pieņemt (piezīme pie fakta, “apšaubāms”) ¦ ✓ Nõustu (märkus faktile, „kahtlane”)
+{what} par {who} : ajoutés comme témoignage si tu acceptes ¦ {what} ({who}): pridedami kaip liudijimas, jei priimi ¦ {what} ({who}): pievieno kā liecību, ja pieņem ¦ {what} ({who}): lisatakse tunnistusena, kui nõustud
+Pour tous : ¦ Visiems: ¦ Visiem: ¦ Kõigile:
+Importer les remarques d’une relecture ¦ Importuoti peržiūros pastabas ¦ Importēt pārskatīšanas piezīmes ¦ Impordi ülevaatuse märkused
+le fichier « remarques-….json » ¦ failas „remarques-….json“ ¦ fails “remarques-….json” ¦ fail „remarques-….json”
+Le fichier que ton cousin t’a renvoyé avec « ⤓ Renvoyer mes remarques ». ¦ Failas, kurį pusbrolis grąžino mygtuku „⤓ Grąžinti mano pastabas“. ¦ Fails, ko brālēns atsūtīja ar “⤓ Atsūtīt manas piezīmes”. ¦ Fail, mille nõbu saatis nupuga „⤓ Saada mu märkused tagasi”.
+Ce fichier est trop gros pour un fichier de remarques. ¦ Failas per didelis pastabų failui. ¦ Fails ir par lielu piezīmju failam. ¦ Fail on märkuste faili jaoks liiga suur.
+<b>{what}</b> de <b>{who}</b> sur « {title} » ({date}). Pour chaque fait : accepte, refuse ou garde pour plus tard ¦ <b>{what}</b> nuo <b>{who}</b> apie „{title}“ ({date}). Kiekvienam faktui: priimk, atmesk arba palik vėlesniam laikui ¦ <b>{what}</b> no <b>{who}</b> par “{title}” ({date}). Katram faktam: pieņem, noraidi vai atstāj vēlākam ¦ <b>{what}</b> isikult <b>{who}</b> teemal „{title}” ({date}). Iga fakti puhul: nõustu, keeldu või jäta hilisemaks
+Ces remarques ont <b>déjà été importées</b> ¦ Šios pastabos <b>jau importuotos</b> ¦ Šīs piezīmes <b>jau ir importētas</b> ¦ Need märkused on <b>juba imporditud</b>
+Aucune remarque dans ce fichier ¦ Šiame faile pastabų nėra ¦ Šajā failā nav piezīmju ¦ Selles failis pole märkusi
+{what} sur des faits qui ne sont plus dans la base : mises de côté. ¦ {what} apie faktus, kurių bazėje nebėra: atidėta. ¦ {what} par faktiem, kuru vairs nav datubāzē: atliktas malā. ¦ {what} faktide kohta, mida andmebaasis enam pole: kõrvale pandud.
+⤒ Importer les remarques ¦ ⤒ Importuoti pastabas ¦ ⤒ Importēt piezīmes ¦ ⤒ Impordi märkused
+{what} (relecture de {who}) ¦ {what} (peržiūra: {who}) ¦ {what} (pārskatīja {who}) ¦ {what} (ülevaatus: {who})
+Remarques de {who} gardées avec la relecture. ¦ {who} pastabos išsaugotos su peržiūra. ¦ {who} piezīmes saglabātas kopā ar pārskatīšanu. ¦ Märkused ({who}) hoitud koos ülevaatusega.
+relu par {who} ¦ peržiūrėjo: {who} ¦ pārskatīja: {who} ¦ üle vaadanud: {who}
+En attente des remarques ¦ Laukiama pastabų ¦ Gaida piezīmes ¦ Ootab märkusi
+{n} à ranger ¦ {n} sutvarkyti ¦ {n} jāsakārto ¦ {n} korrastada
+tout est rangé ¦ viskas sutvarkyta ¦ viss sakārtots ¦ kõik korras
+Envoyé, en attente des remarques ¦ Išsiųsta, laukiama pastabų ¦ Nosūtīts, gaida piezīmes ¦ Saadetud, ootab märkusi
+Supprimer la relecture ¦ Ištrinti peržiūrą ¦ Dzēst pārskatīšanu ¦ Kustuta ülevaatus
+Relectures de branche ¦ Šakų peržiūros ¦ Zaru pārskatīšanas ¦ Harude ülevaatused
+＋ Demander une relecture… ¦ ＋ Paprašyti peržiūros… ¦ ＋ Lūgt pārskatīšanu… ¦ ＋ Palu ülevaatust…
+Aucune relecture : « 📤 Partager avec la famille » avec la case « 🖊 Demander une relecture », ou fiche → ⋯ → « 🖊 Faire relire cette branche… ». ¦ Peržiūrų nėra: „📤 Bendrinti su šeima“ su langeliu „🖊 Paprašyti peržiūros“ arba kortelė → ⋯ → „🖊 Duoti peržiūrėti šią šaką…“. ¦ Nav pārskatīšanu: “📤 Kopīgot ar ģimeni” ar rūtiņu “🖊 Lūgt pārskatīšanu” vai kartīte → ⋯ → “🖊 Dot pārskatīt šo zaru…”. ¦ Ülevaatusi pole: „📤 Jaga perega” märkeruuduga „🖊 Palu ülevaatust” või kaart → ⋯ → „🖊 Lase see haru üle vaadata…”.
+Relecture « {title} » supprimée ¦ Peržiūra „{title}“ ištrinta ¦ Pārskatīšana “{title}” izdzēsta ¦ Ülevaatus „{title}” kustutatud
+Faire relire cette branche… ¦ Duoti peržiūrėti šią šaką… ¦ Dot pārskatīt šo zaru… ¦ Lase see haru üle vaadata…
+{who} pense que c’est faux : {c} ¦ {who} mano, kad tai klaidinga: {c} ¦ {who} domā, ka tas ir nepareizi: {c} ¦ {who} arvab, et see on vale: {c}
+{who} est d’accord ¦ {who} sutinka ¦ {who} piekrīt ¦ {who} on nõus
+Remarque refusée ¦ Pastaba atmesta ¦ Piezīme noraidīta ¦ Märkus tagasi lükatud
+Remarque notée sur le fait ¦ Pastaba užrašyta prie fakto ¦ Piezīme pierakstīta pie fakta ¦ Märkus lisatud faktile
+Témoignage ajouté ¦ Liudijimas pridėtas ¦ Liecība pievienota ¦ Tunnistus lisatud
+« je pense que c’est faux » ¦ „manau, kad tai klaidinga“ ¦ “domāju, ka tas ir nepareizi” ¦ „arvan, et see on vale”
+« d’accord » ¦ „sutinku“ ¦ “piekrītu” ¦ „nõus”
+Corriger le fait ¦ Taisyti faktą ¦ Labot faktu ¦ Paranda fakt
+ouvre le fait ; la remarque reste jusqu’à « Noter » ou « Refuser » ¦ atidaro faktą; pastaba lieka iki „Užrašyti“ arba „Atmesti“ ¦ atver faktu; piezīme paliek līdz “Pierakstīt” vai “Noraidīt” ¦ avab fakti; märkus jääb kuni „Märgi üles” või „Keeldu”
+Noter (note sur le fait, « doute ») ¦ Užrašyti (pastaba prie fakto, „abejotina“) ¦ Pierakstīt (piezīme pie fakta, “apšaubāms”) ¦ Märgi üles (märkus faktile, „kahtlane”)
+Accepter (témoignage) ¦ Priimti (liudijimas) ¦ Pieņemt (liecība) ¦ Nõustu (tunnistus)
+🖊 Remarque de relecture ¦ 🖊 Peržiūros pastaba ¦ 🖊 Pārskatīšanas piezīme ¦ 🖊 Ülevaatuse märkus
+l’année {y} ¦ {y} metai ¦ {y}. gads ¦ aasta {y}
+Traduire ¦ Versti ¦ Tulkot ¦ Tõlgi
+Le mot à mot tout de suite, la traduction complète si le modèle de la lecture approfondie est installé ¦ Iš karto pažodžiui, visas vertimas, jei įdiegtas gilaus skaitymo modelis ¦ Uzreiz vārds pa vārdam, pilns tulkojums, ja ir instalēts padziļinātās lasīšanas modelis ¦ Kohe sõna-sõnalt, täielik tõlge, kui süvalugemise mudel on paigaldatud
+latin → français ¦ lotynų → prancūzų ¦ latīņu → franču ¦ ladina → prantsuse
+Revenir au texte ¦ Grįžti į tekstą ¦ Atpakaļ pie teksta ¦ Tagasi teksti juurde
+Écris ou lis d’abord le texte de l’acte : la traduction part du texte transcrit. ¦ Pirmiau įrašyk ar nuskaityk įrašo tekstą: vertimas daromas iš transkribuoto teksto. ¦ Vispirms ieraksti vai nolasi akta tekstu: tulkojums sākas no pārrakstītā teksta. ¦ Kirjuta või loe kõigepealt akti tekst: tõlge lähtub transkribeeritud tekstist.
+L’acte (latin, transcrit) ¦ Įrašas (lotynų k., transkribuotas) ¦ Akts (latīņu valodā, pārrakstīts) ¦ Akt (ladina, transkribeeritud)
+vert : formule connue ¦ žalia: žinoma formulė ¦ zaļš: zināma formula ¦ roheline: tuntud vormel
+bleu : mot du dictionnaire ¦ mėlyna: žodyno žodis ¦ zils: vārdnīcas vārds ¦ sinine: sõnastiku sõna
+pointillé : peu sûr ¦ taškuota: neaišku ¦ punktēts: neskaidrs ¦ punktiir: ebakindel
+Niveau 1 · mot à mot sans installation ¦ 1 lygis · pažodžiui be diegimo ¦ 1. līmenis · vārds pa vārdam bez instalēšanas ¦ Tase 1 · sõna-sõnalt ilma paigalduseta
+Aucun mot reconnu. ¦ Neatpažintas nė vienas žodis. ¦ Neviens vārds nav atpazīts. ¦ Ühtegi sõna ei tuntud ära.
+Date : {d} ¦ Data: {d} ¦ Datums: {d} ¦ Kuupäev: {d}
+Niveau 2 · traduction complète ¦ 2 lygis · visas vertimas ¦ 2. līmenis · pilns tulkojums ¦ Tase 2 · täielik tõlge
+Je regarde si le modèle est installé… ¦ Tikrinu, ar modelis įdiegtas… ¦ Pārbaudu, vai modelis ir instalēts… ¦ Kontrollin, kas mudel on paigaldatud…
+📋 Garder dans la transcription ¦ 📋 Išsaugoti transkripcijoje ¦ 📋 Saglabāt pārrakstā ¦ 📋 Hoia transkriptsioonis
+Copier la traduction ¦ Kopijuoti vertimą ¦ Kopēt tulkojumu ¦ Kopeeri tõlge
+📝 Mise au propre ¦ 📝 Švarraštis ¦ 📝 Tīrraksts ¦ 📝 Puhtand
+Le niveau 1 marche toujours, sans rien installer. Les noms, dates et rôles repérés partent ensuite, comme d’habitude, dans « Ce que l’app a trouvé ». ¦ 1 lygis veikia visada, be diegimo. Rasti vardai, datos ir vaidmenys kaip įprasta keliauja į „Ką rado programa“. ¦ 1. līmenis darbojas vienmēr, bez instalēšanas. Atrastie vārdi, datumi un lomas pēc tam kā parasti nonāk “Ko atrada lietotne”. ¦ Tase 1 töötab alati, ilma paigalduseta. Leitud nimed, kuupäevad ja rollid lähevad siis nagu tavaliselt jaotisse „Mida rakendus leidis”.
+✓ Les deux lectures sont d’accord sur les noms, la date et les rôles. ¦ ✓ Abu skaitymai sutampa dėl vardų, datos ir vaidmenų. ¦ ✓ Abi lasīšanas sakrīt vārdos, datumā un lomās. ¦ ✓ Mõlemad lugemised ühtivad nimede, kuupäeva ja rollide osas.
+À vérifier : la traduction complète ne dit pas la même chose pour : {list} ¦ Patikrinti: visas vertimas kitaip sako apie: {list} ¦ Jāpārbauda: pilnajā tulkojumā ir citādi par: {list} ¦ Kontrollida: täielik tõlge ütleb teisiti: {list}
+Traduction copiée. ¦ Vertimas nukopijuotas. ¦ Tulkojums nokopēts. ¦ Tõlge kopeeritud.
+Copie impossible dans ce navigateur. ¦ Šioje naršyklėje kopijuoti negalima. ¦ Šajā pārlūkā nevar kopēt. ¦ Selles brauseris ei saa kopeerida.
+Traduction gardée dans la transcription (enregistre avec ⌘S) ¦ Vertimas išsaugotas transkripcijoje (išsaugok ⌘S) ¦ Tulkojums saglabāts pārrakstā (saglabā ar ⌘S) ¦ Tõlge hoitud transkriptsioonis (salvesta ⌘S)
+Traduction en cours (le modèle tourne sur cet ordinateur)… ¦ Verčiama (modelis veikia šiame kompiuteryje)… ¦ Notiek tulkošana (modelis darbojas šajā datorā)… ¦ Tõlkimine käib (mudel töötab selles arvutis)…
+La traduction n’a pas abouti. ¦ Vertimas nepavyko. ¦ Tulkošana neizdevās. ¦ Tõlge ei õnnestunud.
+La traduction gardée avec cette transcription. ¦ Su šia transkripcija išsaugotas vertimas. ¦ Ar šo pārrakstu saglabātais tulkojums. ¦ Selle transkriptsiooniga hoitud tõlge.
+↻ Retraduire ¦ ↻ Versti iš naujo ¦ ↻ Tulkot vēlreiz ¦ ↻ Tõlgi uuesti
+Le modèle de la lecture approfondie est installé : la traduction complète prend quelques dizaines de secondes. ¦ Gilaus skaitymo modelis įdiegtas: visas vertimas trunka kelias dešimtis sekundžių. ¦ Padziļinātās lasīšanas modelis ir instalēts: pilns tulkojums aizņem dažus desmitus sekunžu. ¦ Süvalugemise mudel on paigaldatud: täielik tõlge võtab mõnikümmend sekundit.
+🌐 Traduire tout l’acte ¦ 🌐 Versti visą įrašą ¦ 🌐 Tulkot visu aktu ¦ 🌐 Tõlgi kogu akt
+La traduction complète utilise le modèle de la lecture approfondie (Ollama, ≈ 6 Go, rien ne part sur Internet). ¦ Visas vertimas naudoja gilaus skaitymo modelį (Ollama, ≈ 6 GB, niekas nesiunčiama į internetą). ¦ Pilnais tulkojums izmanto padziļinātās lasīšanas modeli (Ollama, ≈ 6 GB, nekas nenonāk internetā). ¦ Täielik tõlge kasutab süvalugemise mudelit (Ollama, ≈ 6 GB, midagi ei lähe internetti).
+Le niveau 1 marche toujours. ¦ 1 lygis veikia visada. ¦ 1. līmenis darbojas vienmēr. ¦ Tase 1 töötab alati.
+Transcription d’acte ¦ Įrašo transkripcija ¦ Akta pārraksts ¦ Akti transkriptsioon
+Traduction ¦ Vertimas ¦ Tulkojums ¦ Tõlge
+Mots difficiles et abréviations ¦ Sunkūs žodžiai ir santrumpos ¦ Grūti vārdi un saīsinājumi ¦ Rasked sõnad ja lühendid
+Les personnes de l’acte ¦ Įrašo asmenys ¦ Akta personas ¦ Akti isikud
+=fait certain ¦ tikras faktas|tikri faktai|tikrų faktų ¦ droši fakti|drošs fakts|droši fakti ¦ kindel fakt|kindlat fakti
+=fait déduit ¦ išvestas faktas|išvesti faktai|išvestų faktų ¦ secināti fakti|secināts fakts|secināti fakti ¦ järeldatud fakt|järeldatud fakti
+=fait estimé ¦ apytikslis faktas|apytiksliai faktai|apytikslių faktų ¦ aptuveni fakti|aptuvens fakts|aptuveni fakti ¦ hinnanguline fakt|hinnangulist fakti
+=fait en doute ¦ abejotinas faktas|abejotini faktai|abejotinų faktų ¦ apšaubāmi fakti|apšaubāms fakts|apšaubāmi fakti ¦ kahtlane fakt|kahtlast fakti
+=fait non évalué ¦ neįvertintas faktas|neįvertinti faktai|neįvertintų faktų ¦ nenovērtēti fakti|nenovērtēts fakts|nenovērtēti fakti ¦ hindamata fakt|hindamata fakti
+=fait ¦ faktas|faktai|faktų ¦ fakti|fakts|fakti ¦ fakt|fakti
+=fiche à revoir ¦ peržiūrėtina kortelė|peržiūrėtinos kortelės|peržiūrėtinų kortelių ¦ pārskatāmas kartītes|pārskatāma kartīte|pārskatāmas kartītes ¦ ülevaadatav kaart|ülevaadatavat kaarti
+=fait confirmé ¦ patvirtintas faktas|patvirtinti faktai|patvirtintų faktų ¦ apstiprināti fakti|apstiprināts fakts|apstiprināti fakti ¦ kinnitatud fakt|kinnitatud fakti
+=remarque notée ¦ užrašyta pastaba|užrašytos pastabos|užrašytų pastabų ¦ pierakstītas piezīmes|pierakstīta piezīme|pierakstītas piezīmes ¦ märgitud märkus|märgitud märkust
+=remarque pour plus tard ¦ pastaba vėlesniam laikui|pastabos vėlesniam laikui|pastabų vėlesniam laikui ¦ piezīmes vēlākam|piezīme vēlākam|piezīmes vēlākam ¦ märkus hilisemaks|märkust hilisemaks
+=relecture ¦ peržiūra|peržiūros|peržiūrų ¦ pārskatīšanas|pārskatīšana|pārskatīšanas ¦ ülevaatus|ülevaatust
+Très sûr ¦ Labai patikima ¦ Ļoti droši ¦ Väga kindel
+Assez sûr ¦ Gana patikima ¦ Diezgan droši ¦ Üsna kindel
+Peu sûr ¦ Nepatikima ¦ Neuzticami ¦ Ebakindel
+prouvé ¦ įrodytas ¦ pierādīta ¦ tõestatud
+probable ¦ tikėtinas ¦ ticama ¦ tõenäoline
+réfuté ¦ paneigtas ¦ atspēkota ¦ ümber lükatud
+parent ¦ tėvas ar motina ¦ vecāks ¦ vanem
+baptisé(e) ¦ pakrikštytas(-a) ¦ kristīts(-a) ¦ ristitud
+note sous ¦ balas žemiau ¦ vērtējums zem ¦ hinne alla
+{a} sur {n} ont une source ¦ {a} iš {n} turi šaltinį ¦ {a} no {n} ir avots ¦ {a} {n}-st on allikaga
+{a} sur {n} a une source ¦ {a} iš {n} turi šaltinį ¦ {a} no {n} ir avots ¦ {a} {n}-st on allikaga
+{n} sont à revoir avant publication (note sous {min}). ¦ {n} – peržiūrėti prieš skelbiant (balas žemiau {min}). ¦ {n} – jāpārskata pirms publicēšanas (vērtējums zem {min}). ¦ {n} – üle vaadata enne avaldamist (hinne alla {min}).
+{n} est à revoir avant publication (note sous {min}). ¦ {n} – peržiūrėti prieš skelbiant (balas žemiau {min}). ¦ {n} – jāpārskata pirms publicēšanas (vērtējums zem {min}). ¦ {n} – üle vaadata enne avaldamist (hinne alla {min}).
+La fiabilité n’a pas pu être calculée. ¦ Nepavyko apskaičiuoti patikimumo. ¦ Uzticamību neizdevās aprēķināt. ¦ Usaldusväärsust ei õnnestunud arvutada.
+Aucune fiche à revoir avant publication, bravo ! ¦ Nėra kortelių peržiūrėti prieš skelbiant, šaunu! ¦ Nav kartīšu, kas jāpārskata pirms publicēšanas, lieliski! ¦ Ühtegi kaarti pole vaja enne avaldamist üle vaadata, tubli!
+Pas encore de fiche à publier. ¦ Kol kas nėra kortelių skelbti. ¦ Vēl nav kartīšu publicēšanai. ¦ Avaldatavaid kaarte veel pole.
+{n} sous {min} sur 100 ¦ {n} žemiau {min} iš 100 ¦ {n} zem {min} no 100 ¦ {n} alla {min}/100
+🛡 Fiches les moins fiables ¦ 🛡 Mažiausiai patikimos kortelės ¦ 🛡 Visneuzticamākās kartītes ¦ 🛡 Kõige vähem usaldusväärsed kaardid
+Listes → Personnes, filtrée sur « À revoir avant publication » ¦ Sąrašai → Asmenys, filtras „Peržiūrėti prieš skelbiant“ ¦ Saraksti → Personas, filtrs “Pārskatīt pirms publicēšanas” ¦ Loendid → Isikud, filter „Üle vaadata enne avaldamist”
+Les voir ¦ Peržiūrėti ¦ Skatīt tās ¦ Vaata neid
+Les laisser de côté ¦ Praleisti ¦ Izlaist tās ¦ Jäta välja
+Exporter quand même ¦ Vis tiek eksportuoti ¦ Tomēr eksportēt ¦ Ekspordi ikkagi
+Transcription ¦ Transkripcija ¦ Pārraksts ¦ Transkriptsioon
+🖊 Relecture ¦ 🖊 Peržiūra ¦ 🖊 Pārskatīšana ¦ 🖊 Ülevaatus
+🖊 Demander une relecture (le cousin peut cocher et commenter chaque fait) ¦ 🖊 Paprašyti peržiūros (pusbrolis gali pažymėti ir komentuoti kiekvieną faktą) ¦ 🖊 Lūgt pārskatīšanu (brālēns var atzīmēt un komentēt katru faktu) ¦ 🖊 Palu ülevaatust (nõbu saab iga fakti märkida ja kommenteerida)
+La copie montre alors « ✓ D’accord / ✗ Je pense que c’est faux » sur chaque fait, et « ⤓ Renvoyer mes remarques » : un petit fichier .json à importer dans Questions aux proches → « ⤒ Importer les réponses ». ¦ Kopijoje prie kiekvieno fakto tada rodoma „✓ Sutinku / ✗ Manau, kad klaidinga“ ir „⤓ Grąžinti mano pastabas“: mažas .json failas, importuojamas per Klausimai artimiesiems → „⤒ Importuoti atsakymus“. ¦ Kopijā tad pie katra fakta ir “✓ Piekrītu / ✗ Domāju, ka nepareizi” un “⤓ Atsūtīt manas piezīmes”: neliels .json fails, ko importē sadaļā Jautājumi tuviniekiem → “⤒ Importēt atbildes”. ¦ Koopia näitab siis iga fakti juures „✓ Nõus / ✗ Arvan, et see on vale” ja „⤓ Saada mu märkused tagasi”: väike .json-fail, mille impordid jaotises Küsimused lähedastele → „⤒ Impordi vastused”.
+Copie à relire prête : {name}. Le cousin te renverra ses remarques (un fichier .json) : Questions aux proches → « ⤒ Importer les réponses ». ¦ Kopija peržiūrai paruošta: {name}. Pusbrolis grąžins pastabas (.json failas): Klausimai artimiesiems → „⤒ Importuoti atsakymus“. ¦ Kopija pārskatīšanai gatava: {name}. Brālēns atsūtīs piezīmes (.json fails): Jautājumi tuviniekiem → “⤒ Importēt atbildes”. ¦ Ülevaatamiseks koopia valmis: {name}. Nõbu saadab märkused tagasi (.json-fail): Küsimused lähedastele → „⤒ Impordi vastused”.
+Donne un titre à la lettre. ¦ Suteik laiškui pavadinimą. ¦ Piešķir vēstulei nosaukumu. ¦ Anna kirjale pealkiri.
+Lettre introuvable. ¦ Laiškas nerastas. ¦ Vēstule nav atrasta. ¦ Kirja ei leitud.
+Relecture introuvable. ¦ Peržiūra nerasta. ¦ Pārskatīšana nav atrasta. ¦ Ülevaatust ei leitud.
+Remarque introuvable. ¦ Pastaba nerasta. ¦ Piezīme nav atrasta. ¦ Märkust ei leitud.
+Ce n’est pas un fichier de remarques de relecture. ¦ Tai ne peržiūros pastabų failas. ¦ Tas nav pārskatīšanas piezīmju fails. ¦ See ei ole ülevaatuse märkuste fail.
+Cette relecture n’est pas dans cette base (ou elle a été supprimée). ¦ Šios peržiūros nėra šioje bazėje (arba ji ištrinta). ¦ Šīs pārskatīšanas nav šajā datubāzē (vai tā ir dzēsta). ¦ Seda ülevaatust selles andmebaasis pole (või see on kustutatud).
+Ce fait n’existe plus. ¦ Šio fakto nebėra. ¦ Šis fakts vairs nepastāv. ¦ Seda fakti enam pole.
+Cette remarque est déjà rangée. ¦ Ši pastaba jau sutvarkyta. ¦ Šī piezīme jau ir sakārtota. ¦ See märkus on juba korras.
+Il n’y a pas encore de texte à traduire. ¦ Kol kas nėra teksto vertimui. ¦ Vēl nav teksta tulkošanai. ¦ Tõlgitavat teksti veel pole.
+Le modèle de la lecture approfondie n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Gilaus skaitymo modelis dar neatsisiųstas: „⤓ Įdiegti gilų skaitymą“. ¦ Padziļinātās lasīšanas modelis vēl nav lejupielādēts: “⤓ Instalēt padziļināto lasīšanu”. ¦ Süvalugemise mudel pole veel alla laaditud: „⤓ Paigalda süvalugemine”.
+Ces outils ne sont pas encore prêts : relance l’app. ¦ Šie įrankiai dar neparuošti: paleisk programą iš naujo. ¦ Šie rīki vēl nav gatavi: restartē lietotni. ¦ Need tööriistad pole veel valmis: käivita rakendus uuesti.
+Cette demande de relecture n’existe plus. ¦ Šio peržiūros prašymo nebėra. ¦ Šis pārskatīšanas pieprasījums vairs nepastāv. ¦ Seda ülevaatuse palvet enam pole.
+{who} confirme : {fact}. ¦ {who} patvirtina: {fact}. ¦ {who} apstiprina: {fact}. ¦ {who} kinnitab: {fact}.
+Confirmé par {who} : {fact} ¦ Patvirtino {who}: {fact} ¦ Apstiprināja {who}: {fact} ¦ Kinnitas {who}: {fact}
+{who}, relecture « {title} », le {date} ¦ {who}, peržiūra „{title}“, {date} ¦ {who}, pārskatīšana “{title}”, {date} ¦ {who}, ülevaatus „{title}”, {date}
+Relecture d’une branche ¦ Šakos peržiūra ¦ Zara pārskatīšana ¦ Haru ülevaatus
+{who} pense que c’est faux. ¦ {who} mano, kad tai klaidinga. ¦ {who} domā, ka tas ir nepareizi. ¦ {who} arvab, et see on vale.
+relecture « {title} », le {date} ¦ peržiūra „{title}“, {date} ¦ pārskatīšana “{title}”, {date} ¦ ülevaatus „{title}”, {date}
+💬 Remarque de {who} ¦ 💬 {who} pastaba ¦ 💬 {who} piezīme ¦ 💬 Märkus: {who}

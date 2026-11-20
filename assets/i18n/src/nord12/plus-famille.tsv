@@ -1,0 +1,218 @@
+fr ¦ ru ¦ uk
+# Zone « plus-famille » : 💌 lettre de famille, 🛡 fiabilité par personne, 🖊 relecture d’une branche, 🌐 traduire un acte latin (assets/js/plus-famille*.js, lib/plus_famille.php)
+Fiabilité : {n} sur 100 ¦ Надёжность: {n} из 100 ¦ Надійність: {n} зі 100
+🛡 Fiabilité ¦ 🛡 Надёжность ¦ 🛡 Надійність
+Calcul de la note… ¦ Считаем оценку… ¦ Обчислюємо оцінку…
+Comment la note est calculée ¦ Как считается оценка ¦ Як обчислюється оцінка
+? Comment c’est calculé ¦ ? Как это считается ¦ ? Як це обчислюється
+en doute : {what} ¦ под сомнением: {what} ¦ під сумнівом: {what}
+date estimée : {what} ¦ примерная дата: {what} ¦ приблизна дата: {what}
+aucun fait noté (naissance, mariage, décès…) ¦ нет записанных фактов (рождение, брак, смерть…) ¦ немає записаних фактів (народження, шлюб, смерть…)
+sans source : {what} ¦ без источника: {what} ¦ без джерела: {what}
+une source sur la fiche, mais sur aucun fait ¦ источник на карточке, но ни у одного факта ¦ джерело на картці, але в жодного факту
+aucune source ¦ нет источников ¦ немає джерел
+{who} : lien {lvl} ¦ {who}: связь {lvl} ¦ {who}: зв’язок {lvl}
+pas de parents dans la base : cette part ne compte pas ¦ нет родителей в базе: эта часть не учитывается ¦ немає батьків у базі: ця частина не враховується
+ajouter une source à : {what} ¦ добавить источник к: {what} ¦ додати джерело до: {what}
+vérifier {what}, marqué « doute » ¦ проверить {what}, отмечено «сомнение» ¦ перевірити {what}, позначено «сумнів»
+confirmer le lien avec {name} (⚖️ dossier de preuve) ¦ подтвердить связь с {name} (⚖️ досье доказательств) ¦ підтвердити зв’язок з {name} (⚖️ досьє доказів)
+ajouter ses faits (naissance, mariage, décès) avec leur source ¦ добавить факты (рождение, брак, смерть) с источником ¦ додати факти (народження, шлюб, смерть) з джерелом
+sur 100 ¦ из 100 ¦ зі 100
+À revoir avant publication ¦ Проверить перед публикацией ¦ Перевірити перед публікацією
+(vivant ou fiche confidentielle : ne part pas à la publication) ¦ (живой или конфиденциальная карточка: не публикуется) ¦ (жива особа або конфіденційна картка: не публікується)
+Seuil « à revoir » : {n} ¦ Порог «проверить»: {n} ¦ Поріг «перевірити»: {n}
+Pour gagner des points : ¦ Чтобы набрать баллы: ¦ Щоб набрати бали:
+La note n’est pas le score de complétude (qui compte ce qui est rempli) : une fiche peut être bien remplie et peu sûre. ¦ Оценка — это не полнота (она считает заполненное): карточка может быть хорошо заполнена и всё же ненадёжна. ¦ Оцінка — це не повнота (вона рахує заповнене): картка може бути добре заповнена, але ненадійна.
+Calcul impossible. ¦ Расчёт невозможен. ¦ Обчислення неможливе.
+🛡 FIABILITÉ ¦ 🛡 НАДЁЖНОСТЬ ¦ 🛡 НАДІЙНІСТЬ
+Trois parts, sur 100 chacune, puis une moyenne : ¦ Три части, каждая из 100, затем среднее: ¦ Три частини, кожна зі 100, потім середнє:
+Ses faits (40 %) ¦ Факты (40 %) ¦ Факти (40 %)
+la fiabilité de chaque fait : certain 100, déduit 80, estimé 55, doute 15, non évalué 60 ; une date « vers… », « avant… » compte comme estimée. ¦ надёжность каждого факта: точно 100, выведено 80, примерно 55, сомнение 15, не оценено 60; дата «около…», «до…» считается примерной. ¦ надійність кожного факту: точно 100, виведено 80, приблизно 55, сумнів 15, не оцінено 60; дата «близько…», «до…» вважається приблизною.
+Ses sources (35 %) ¦ Источники (35 %) ¦ Джерела (35 %)
+la part des faits qui ont une source citée ou un acte en image. ¦ доля фактов с указанным источником или изображением акта. ¦ частка фактів із зазначеним джерелом або зображенням акта.
+Ses liens (25 %) ¦ Связи (25 %) ¦ Зв’язки (25 %)
+la solidité du lien avec chaque parent : prouvé 100, probable 75, supposé 45, sans source 20, réfuté 0. Sans parents dans la base, cette part ne compte pas. ¦ прочность связи с каждым родителем: доказано 100, вероятно 75, предположительно 45, без источника 20, опровергнуто 0. Без родителей в базе эта часть не учитывается. ¦ міцність зв’язку з кожним із батьків: доведено 100, ймовірно 75, припущено 45, без джерела 20, спростовано 0. Без батьків у базі ця частина не враховується.
+Sous le seuil (50 au départ), la fiche est « à revoir avant publication ». Le seuil se règle dans Réglages → ⚙️ Seuils du contrôle. ¦ Ниже порога (сначала 50) карточка «проверить перед публикацией». Порог задаётся в Настройки → ⚙️ Пороги проверки. ¦ Нижче порогу (спочатку 50) картка «перевірити перед публікацією». Поріг задається в Налаштування → ⚙️ Пороги перевірки.
+Rien n’est changé dans ta base : la note est recalculée dès qu’un fait ou une source change. ¦ В базе ничего не меняется: оценка пересчитывается, как только меняется факт или источник. ¦ У базі нічого не змінюється: оцінка переобчислюється, щойно змінюється факт або джерело.
+{day} : {first}, {age} ¦ {day}: {first}, {age} ¦ {day}: {first}, {age}
+{day} : il y a {n} ans, {a} et {b} se mariaient ¦ {day}: {n} лет назад поженились {a} и {b} ¦ {day}: {n} років тому одружилися {a} і {b}
+{day} : il y a {n} ans naissait {name} ¦ {day}: {n} лет назад родился(-ась) {name} ¦ {day}: {n} років тому народився(-лася) {name}
+{what} dans l’arbre : {list} ¦ {what} в древе: {list} ¦ {what} у дереві: {list}
+Nouveau dans les médias : « {title} » ¦ Новое в медиа: «{title}» ¦ Нове в медіа: «{title}»
+La lettre des {nm} ¦ Письмо семьи {nm} ¦ Лист родини {nm}
+Bonjour à tous ! Voici les nouvelles de la famille ce mois-ci. ¦ Всем привет! Вот новости семьи за этот месяц. ¦ Привіт усім! Ось новини родини за цей місяць.
+Photo : {title} ¦ Фото: {title} ¦ Фото: {title}
+Les anniversaires du mois ¦ Годовщины месяца ¦ Річниці місяця
+Pas d’anniversaire ce mois-ci. ¦ В этом месяце годовщин нет. ¦ Цього місяця річниць немає.
+Les dernières découvertes ¦ Последние находки ¦ Останні знахідки
+Rien de nouveau ce mois-ci : à vous de m’envoyer vos souvenirs ! ¦ В этом месяце ничего нового: теперь ваша очередь присылать воспоминания! ¦ Цього місяця нічого нового: тепер ваша черга надсилати спогади!
+L’ancêtre à l’honneur ¦ Предок в центре внимания ¦ Предок у центрі уваги
+Avec toute mon affection, ¦ С любовью, ¦ З любов’ю,
+Ce qu’on y met ¦ Что войдёт ¦ Що ввійде
+🖼 Changer ¦ 🖼 Заменить ¦ 🖼 Змінити
+Tout se retouche dans la lettre (clique sur un texte). Les personnes vivantes n’y figurent que par leur prénom et leur âge ; les fiches confidentielles jamais. ¦ Всё правится прямо в письме (щёлкни по тексту). Живые указаны только по имени и возрасту, конфиденциальные карточки — никогда. ¦ Усе редагується прямо в листі (клацни текст). Живі вказані лише іменем і віком, конфіденційні картки — ніколи.
+Je remplis la lettre… ¦ Заполняю письмо… ¦ Заповнюю лист…
+Lettre refaite avec les nouveaux choix ¦ Письмо переделано с новыми параметрами ¦ Лист переділано з новими параметрами
+LETTRE DE FAMILLE ¦ СЕМЕЙНОЕ ПИСЬМО ¦ СІМЕЙНИЙ ЛИСТ
+La photo de la lettre ¦ Фото письма ¦ Фото листа
+Lettre de famille ¦ Семейное письмо ¦ Сімейний лист
+La lettre du mois remplie toute seule : anniversaires, dernières découvertes, une photo, un ancêtre à l’honneur. Tout se retouche. ¦ Письмо месяца заполняется само: годовщины, последние находки, фото, предок в центре внимания. Всё можно поправить. ¦ Лист місяця заповнюється сам: річниці, останні знахідки, фото, предок у центрі уваги. Усе можна виправити.
+Lettre gardée : « {title} » (Listes → Lettres de famille) ¦ Письмо сохранено: «{title}» (Списки → Семейные письма) ¦ Лист збережено: «{title}» (Списки → Сімейні листи)
+💾 Garder ¦ 💾 Сохранить ¦ 💾 Зберегти
+Ranger la lettre dans Listes → Lettres de famille ¦ Положить письмо в Списки → Семейные письма ¦ Покласти лист у Списки → Сімейні листи
+PDF ¦ PDF ¦ PDF
+par la fenêtre « Imprimer » (⤓ PDF) ¦ через окно «Печать» (⤓ PDF) ¦ через вікно «Друк» (⤓ PDF)
+Image (PNG) ¦ Изображение (PNG) ¦ Зображення (PNG)
+Ouvre ta messagerie avec la lettre déjà écrite : rien n’est envoyé par l’app ¦ Открывает почту с готовым письмом: приложение ничего не отправляет ¦ Відкриває пошту з готовим листом: застосунок нічого не надсилає
+📝 Retoucher ¦ 📝 Доработать ¦ 📝 Доопрацювати
+Ouvrir la lettre dans le traitement de texte ¦ Открыть письмо в текстовом редакторе ¦ Відкрити лист у текстовому редакторі
+Chers cousins, chères cousines, ¦ Дорогие кузены и кузины, ¦ Дорогі кузени й кузини,
+Ce que j’ai trouvé ce mois-ci… ¦ Что я нашёл в этом месяце… ¦ Що я знайшов цього місяця…
+Si vous avez des photos, des lettres ou des souvenirs, je serais très heureux de les voir ! ¦ Если у вас есть фото, письма или воспоминания, буду очень рад их увидеть! ¦ Якщо у вас є фото, листи чи спогади, дуже радо їх побачу!
+Je vous embrasse, ¦ Обнимаю вас, ¦ Обіймаю вас,
+📋 Voir dans Listes › Lettres de famille ¦ 📋 Смотреть в Списки › Семейные письма ¦ 📋 Переглянути в Списки › Сімейні листи
+remplie toute seule : anniversaires du mois, découvertes, photo, ancêtre ¦ заполняется само: годовщины месяца, находки, фото, предок ¦ заповнюється сам: річниці місяця, знахідки, фото, предок
+Lettres de famille ¦ Семейные письма ¦ Сімейні листи
+💌 Lettres de famille ¦ 💌 Семейные письма ¦ 💌 Сімейні листи
+Les lettres du mois gardées depuis ✨ Trésors → « 💌 Lettre de famille ». À ne pas confondre avec les « ✉️ Lettres aux descendants », qui s’ouvrent plus tard. ¦ Письма месяца, сохранённые из ✨ Сокровища → «💌 Семейное письмо». Не путать с «✉️ Письмами потомкам», которые откроются позже. ¦ Листи місяця, збережені з ✨ Скарби → «💌 Сімейний лист». Не плутати з «✉️ Листами нащадкам», які відкриються пізніше.
+💌 Nouvelle lettre ¦ 💌 Новое письмо ¦ 💌 Новий лист
+Chercher… (titre, mois) ¦ Искать… (название, месяц) ¦ Шукати… (назва, місяць)
+Supprimer la lettre ¦ Удалить письмо ¦ Видалити лист
+Aucune lettre gardée pour l’instant ¦ Пока нет сохранённых писем ¦ Поки немає збережених листів
+Fais celle du mois dans ✨ Trésors → « 💌 Lettre de famille », puis « 💾 Garder ». ¦ Сделай письмо месяца в ✨ Сокровища → «💌 Семейное письмо», затем «💾 Сохранить». ¦ Зроби лист місяця в ✨ Скарби → «💌 Сімейний лист», потім «💾 Зберегти».
+💌 Faire la lettre du mois ¦ 💌 Сделать письмо месяца ¦ 💌 Зробити лист місяця
+Lettre « {title} » supprimée ¦ Письмо «{title}» удалено ¦ Лист «{title}» видалено
+« d’accord », dit {who}. ¦ «согласен», говорит {who}. ¦ «згоден», каже {who}.
+« faux », dit {who}. ¦ «неверно», говорит {who}. ¦ «неправильно», каже {who}.
+Que faire de cette remarque ? ¦ Что делать с этим замечанием? ¦ Що робити з цим зауваженням?
+✓ Accepter (témoignage) ¦ ✓ Принять (свидетельство) ¦ ✓ Прийняти (свідчення)
+✓ Accepter (note sur le fait, « doute ») ¦ ✓ Принять (заметка к факту, «сомнение») ¦ ✓ Прийняти (нотатка до факту, «сумнів»)
+{what} par {who} : ajoutés comme témoignage si tu acceptes ¦ {what} от {who}: добавятся как свидетельство, если примешь ¦ {what} від {who}: додадуться як свідчення, якщо приймеш
+Pour tous : ¦ Для всех: ¦ Для всіх:
+Importer les remarques d’une relecture ¦ Импорт замечаний проверки ¦ Імпорт зауважень перевірки
+le fichier « remarques-….json » ¦ файл «remarques-….json» ¦ файл «remarques-….json»
+Le fichier que ton cousin t’a renvoyé avec « ⤓ Renvoyer mes remarques ». ¦ Файл, который кузен прислал кнопкой «⤓ Отправить мои замечания». ¦ Файл, який кузен надіслав кнопкою «⤓ Надіслати мої зауваження».
+Ce fichier est trop gros pour un fichier de remarques. ¦ Файл слишком велик для файла замечаний. ¦ Файл завеликий для файлу зауважень.
+<b>{what}</b> de <b>{who}</b> sur « {title} » ({date}). Pour chaque fait : accepte, refuse ou garde pour plus tard ¦ <b>{what}</b> от <b>{who}</b> по «{title}» ({date}). Для каждого факта: принять, отклонить или отложить ¦ <b>{what}</b> від <b>{who}</b> щодо «{title}» ({date}). Для кожного факту: прийняти, відхилити або відкласти
+Ces remarques ont <b>déjà été importées</b> ¦ Эти замечания <b>уже импортированы</b> ¦ Ці зауваження <b>уже імпортовано</b>
+Aucune remarque dans ce fichier ¦ В этом файле нет замечаний ¦ У цьому файлі немає зауважень
+{what} sur des faits qui ne sont plus dans la base : mises de côté. ¦ {what} о фактах, которых больше нет в базе: отложены. ¦ {what} про факти, яких уже немає в базі: відкладено.
+⤒ Importer les remarques ¦ ⤒ Импортировать замечания ¦ ⤒ Імпортувати зауваження
+{what} (relecture de {who}) ¦ {what} (проверка: {who}) ¦ {what} (перевірка: {who})
+Remarques de {who} gardées avec la relecture. ¦ Замечания от {who} сохранены с проверкой. ¦ Зауваження від {who} збережено з перевіркою.
+relu par {who} ¦ проверил(а): {who} ¦ перевірив(ла): {who}
+En attente des remarques ¦ Ожидаются замечания ¦ Очікуємо зауваження
+{n} à ranger ¦ {n} к разбору ¦ {n} до розгляду
+tout est rangé ¦ всё разобрано ¦ усе розглянуто
+Envoyé, en attente des remarques ¦ Отправлено, ожидаются замечания ¦ Надіслано, очікуємо зауваження
+Supprimer la relecture ¦ Удалить проверку ¦ Видалити перевірку
+Relectures de branche ¦ Проверки ветвей ¦ Перевірки гілок
+＋ Demander une relecture… ¦ ＋ Попросить проверку… ¦ ＋ Попросити перевірку…
+Aucune relecture : « 📤 Partager avec la famille » avec la case « 🖊 Demander une relecture », ou fiche → ⋯ → « 🖊 Faire relire cette branche… ». ¦ Проверок нет: «📤 Поделиться с семьёй» с флажком «🖊 Попросить проверку» или карточка → ⋯ → «🖊 Отдать ветвь на проверку…». ¦ Перевірок немає: «📤 Поділитися з родиною» з позначкою «🖊 Попросити перевірку» або картка → ⋯ → «🖊 Віддати гілку на перевірку…».
+Relecture « {title} » supprimée ¦ Проверка «{title}» удалена ¦ Перевірку «{title}» видалено
+Faire relire cette branche… ¦ Отдать ветвь на проверку… ¦ Віддати гілку на перевірку…
+{who} pense que c’est faux : {c} ¦ {who} считает, что это неверно: {c} ¦ {who} вважає, що це неправильно: {c}
+{who} est d’accord ¦ {who} согласен(-на) ¦ {who} згоден(-на)
+Remarque refusée ¦ Замечание отклонено ¦ Зауваження відхилено
+Remarque notée sur le fait ¦ Замечание записано к факту ¦ Зауваження записано до факту
+Témoignage ajouté ¦ Свидетельство добавлено ¦ Свідчення додано
+« je pense que c’est faux » ¦ «я думаю, что это неверно» ¦ «я думаю, що це неправильно»
+« d’accord » ¦ «согласен» ¦ «згоден»
+Corriger le fait ¦ Исправить факт ¦ Виправити факт
+ouvre le fait ; la remarque reste jusqu’à « Noter » ou « Refuser » ¦ открывает факт; замечание остаётся до «Записать» или «Отклонить» ¦ відкриває факт; зауваження лишається до «Записати» або «Відхилити»
+Noter (note sur le fait, « doute ») ¦ Записать (заметка к факту, «сомнение») ¦ Записати (нотатка до факту, «сумнів»)
+Accepter (témoignage) ¦ Принять (свидетельство) ¦ Прийняти (свідчення)
+🖊 Remarque de relecture ¦ 🖊 Замечание проверки ¦ 🖊 Зауваження перевірки
+l’année {y} ¦ {y} год ¦ {y} рік
+Traduire ¦ Перевести ¦ Перекласти
+Le mot à mot tout de suite, la traduction complète si le modèle de la lecture approfondie est installé ¦ Сразу пословно, полный перевод — если установлена модель углублённого чтения ¦ Одразу дослівно, повний переклад — якщо встановлено модель поглибленого читання
+latin → français ¦ латынь → французский ¦ латина → французька
+Revenir au texte ¦ Назад к тексту ¦ Назад до тексту
+Écris ou lis d’abord le texte de l’acte : la traduction part du texte transcrit. ¦ Сначала напиши или распознай текст акта: перевод делается по расшифровке. ¦ Спочатку напиши або розпізнай текст акта: переклад робиться за транскрипцією.
+L’acte (latin, transcrit) ¦ Акт (латынь, расшифровка) ¦ Акт (латина, транскрипція)
+vert : formule connue ¦ зелёный: известная формула ¦ зелений: відома формула
+bleu : mot du dictionnaire ¦ синий: слово из словаря ¦ синій: слово зі словника
+pointillé : peu sûr ¦ пунктир: неуверенно ¦ пунктир: непевно
+Niveau 1 · mot à mot sans installation ¦ Уровень 1 · пословно без установки ¦ Рівень 1 · дослівно без встановлення
+Aucun mot reconnu. ¦ Слова не распознаны. ¦ Слова не розпізнано.
+Date : {d} ¦ Дата: {d} ¦ Дата: {d}
+Niveau 2 · traduction complète ¦ Уровень 2 · полный перевод ¦ Рівень 2 · повний переклад
+Je regarde si le modèle est installé… ¦ Проверяю, установлена ли модель… ¦ Перевіряю, чи встановлено модель…
+📋 Garder dans la transcription ¦ 📋 Сохранить в расшифровке ¦ 📋 Зберегти в транскрипції
+Copier la traduction ¦ Копировать перевод ¦ Копіювати переклад
+📝 Mise au propre ¦ 📝 Беловик ¦ 📝 Чистовик
+Le niveau 1 marche toujours, sans rien installer. Les noms, dates et rôles repérés partent ensuite, comme d’habitude, dans « Ce que l’app a trouvé ». ¦ Уровень 1 работает всегда, без установки. Найденные имена, даты и роли затем, как обычно, уходят в «Что нашло приложение». ¦ Рівень 1 працює завжди, без встановлення. Знайдені імена, дати й ролі потім, як зазвичай, ідуть у «Що знайшов застосунок».
+✓ Les deux lectures sont d’accord sur les noms, la date et les rôles. ¦ ✓ Оба прочтения совпадают по именам, дате и ролям. ¦ ✓ Обидва прочитання збігаються в іменах, даті й ролях.
+À vérifier : la traduction complète ne dit pas la même chose pour : {list} ¦ Проверить: полный перевод говорит иное о: {list} ¦ Перевірити: повний переклад каже інше про: {list}
+Traduction copiée. ¦ Перевод скопирован. ¦ Переклад скопійовано.
+Copie impossible dans ce navigateur. ¦ Копирование невозможно в этом браузере. ¦ Копіювання неможливе в цьому браузері.
+Traduction gardée dans la transcription (enregistre avec ⌘S) ¦ Перевод сохранён в расшифровке (сохрани ⌘S) ¦ Переклад збережено в транскрипції (збережи ⌘S)
+Traduction en cours (le modèle tourne sur cet ordinateur)… ¦ Идёт перевод (модель работает на этом компьютере)… ¦ Триває переклад (модель працює на цьому комп’ютері)…
+La traduction n’a pas abouti. ¦ Перевод не удался. ¦ Переклад не вдався.
+La traduction gardée avec cette transcription. ¦ Перевод, сохранённый с этой расшифровкой. ¦ Переклад, збережений із цією транскрипцією.
+↻ Retraduire ¦ ↻ Перевести заново ¦ ↻ Перекласти знову
+Le modèle de la lecture approfondie est installé : la traduction complète prend quelques dizaines de secondes. ¦ Модель углублённого чтения установлена: полный перевод занимает несколько десятков секунд. ¦ Модель поглибленого читання встановлено: повний переклад триває кілька десятків секунд.
+🌐 Traduire tout l’acte ¦ 🌐 Перевести весь акт ¦ 🌐 Перекласти весь акт
+La traduction complète utilise le modèle de la lecture approfondie (Ollama, ≈ 6 Go, rien ne part sur Internet). ¦ Полный перевод использует модель углублённого чтения (Ollama, ≈ 6 ГБ, ничего не уходит в Интернет). ¦ Повний переклад використовує модель поглибленого читання (Ollama, ≈ 6 ГБ, нічого не йде в Інтернет).
+Le niveau 1 marche toujours. ¦ Уровень 1 работает всегда. ¦ Рівень 1 працює завжди.
+Transcription d’acte ¦ Расшифровка акта ¦ Транскрипція акта
+Traduction ¦ Перевод ¦ Переклад
+Mots difficiles et abréviations ¦ Трудные слова и сокращения ¦ Складні слова й скорочення
+Les personnes de l’acte ¦ Лица в акте ¦ Особи в акті
+=fait certain ¦ точный факт|точных факта|точных фактов ¦ точний факт|точні факти|точних фактів
+=fait déduit ¦ выведенный факт|выведенных факта|выведенных фактов ¦ виведений факт|виведені факти|виведених фактів
+=fait estimé ¦ примерный факт|примерных факта|примерных фактов ¦ приблизний факт|приблизні факти|приблизних фактів
+=fait en doute ¦ сомнительный факт|сомнительных факта|сомнительных фактов ¦ сумнівний факт|сумнівні факти|сумнівних фактів
+=fait non évalué ¦ неоценённый факт|неоценённых факта|неоценённых фактов ¦ неоцінений факт|неоцінені факти|неоцінених фактів
+=fait ¦ факт|факта|фактов ¦ факт|факти|фактів
+=fiche à revoir ¦ карточка к проверке|карточки к проверке|карточек к проверке ¦ картка до перевірки|картки до перевірки|карток до перевірки
+=fait confirmé ¦ подтверждённый факт|подтверждённых факта|подтверждённых фактов ¦ підтверджений факт|підтверджені факти|підтверджених фактів
+=remarque notée ¦ записанное замечание|записанных замечания|записанных замечаний ¦ записане зауваження|записані зауваження|записаних зауважень
+=remarque pour plus tard ¦ замечание на потом|замечания на потом|замечаний на потом ¦ зауваження на потім|зауваження на потім|зауважень на потім
+=relecture ¦ проверка|проверки|проверок ¦ перевірка|перевірки|перевірок
+Très sûr ¦ Очень надёжно ¦ Дуже надійно
+Assez sûr ¦ Довольно надёжно ¦ Досить надійно
+Peu sûr ¦ Ненадёжно ¦ Ненадійно
+prouvé ¦ доказана ¦ доведений
+probable ¦ вероятна ¦ ймовірний
+réfuté ¦ опровергнута ¦ спростований
+parent ¦ родитель ¦ батько чи мати
+baptisé(e) ¦ крещёный(-ая) ¦ хрещений(-а)
+note sous ¦ оценка ниже ¦ оцінка нижче
+{a} sur {n} ont une source ¦ {a} из {n} имеют источник ¦ {a} з {n} мають джерело
+{a} sur {n} a une source ¦ {a} из {n} имеет источник ¦ {a} з {n} має джерело
+{n} sont à revoir avant publication (note sous {min}). ¦ {n} — проверить перед публикацией (оценка ниже {min}). ¦ {n} — перевірити перед публікацією (оцінка нижче {min}).
+{n} est à revoir avant publication (note sous {min}). ¦ {n} — проверить перед публикацией (оценка ниже {min}). ¦ {n} — перевірити перед публікацією (оцінка нижче {min}).
+La fiabilité n’a pas pu être calculée. ¦ Не удалось рассчитать надёжность. ¦ Не вдалося обчислити надійність.
+Aucune fiche à revoir avant publication, bravo ! ¦ Нет карточек к проверке перед публикацией, браво! ¦ Немає карток для перевірки перед публікацією, браво!
+Pas encore de fiche à publier. ¦ Пока нет карточек для публикации. ¦ Поки немає карток для публікації.
+{n} sous {min} sur 100 ¦ {n} ниже {min} из 100 ¦ {n} нижче {min} зі 100
+🛡 Fiches les moins fiables ¦ 🛡 Наименее надёжные карточки ¦ 🛡 Найменш надійні картки
+Listes → Personnes, filtrée sur « À revoir avant publication » ¦ Списки → Люди, фильтр «Проверить перед публикацией» ¦ Списки → Люди, фільтр «Перевірити перед публікацією»
+Les voir ¦ Показать их ¦ Показати їх
+Les laisser de côté ¦ Исключить их ¦ Виключити їх
+Exporter quand même ¦ Всё равно экспортировать ¦ Усе одно експортувати
+Transcription ¦ Расшифровка ¦ Транскрипція
+🖊 Relecture ¦ 🖊 Проверка ¦ 🖊 Перевірка
+🖊 Demander une relecture (le cousin peut cocher et commenter chaque fait) ¦ 🖊 Попросить проверку (кузен может отметить и прокомментировать каждый факт) ¦ 🖊 Попросити перевірку (кузен може позначити й прокоментувати кожен факт)
+La copie montre alors « ✓ D’accord / ✗ Je pense que c’est faux » sur chaque fait, et « ⤓ Renvoyer mes remarques » : un petit fichier .json à importer dans Questions aux proches → « ⤒ Importer les réponses ». ¦ Копия тогда показывает у каждого факта «✓ Согласен / ✗ Я думаю, что это неверно» и «⤓ Отправить мои замечания»: небольшой файл .json, который импортируется в Вопросы близким → «⤒ Импортировать ответы». ¦ Копія тоді показує біля кожного факту «✓ Згоден / ✗ Я думаю, що це неправильно» і «⤓ Надіслати мої зауваження»: невеликий файл .json, який імпортується в Питання близьким → «⤒ Імпортувати відповіді».
+Copie à relire prête : {name}. Le cousin te renverra ses remarques (un fichier .json) : Questions aux proches → « ⤒ Importer les réponses ». ¦ Копия для проверки готова: {name}. Кузен пришлёт замечания (файл .json): Вопросы близким → «⤒ Импортировать ответы». ¦ Копія для перевірки готова: {name}. Кузен надішле зауваження (файл .json): Питання близьким → «⤒ Імпортувати відповіді».
+Donne un titre à la lettre. ¦ Дай письму название. ¦ Дай листу назву.
+Lettre introuvable. ¦ Письмо не найдено. ¦ Лист не знайдено.
+Relecture introuvable. ¦ Проверка не найдена. ¦ Перевірку не знайдено.
+Remarque introuvable. ¦ Замечание не найдено. ¦ Зауваження не знайдено.
+Ce n’est pas un fichier de remarques de relecture. ¦ Это не файл замечаний проверки. ¦ Це не файл зауважень перевірки.
+Cette relecture n’est pas dans cette base (ou elle a été supprimée). ¦ Этой проверки нет в базе (или она удалена). ¦ Цієї перевірки немає в базі (або її видалено).
+Ce fait n’existe plus. ¦ Этого факта больше нет. ¦ Цього факту вже немає.
+Cette remarque est déjà rangée. ¦ Это замечание уже разобрано. ¦ Це зауваження вже розглянуто.
+Il n’y a pas encore de texte à traduire. ¦ Пока нет текста для перевода. ¦ Поки немає тексту для перекладу.
+Le modèle de la lecture approfondie n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Модель углублённого чтения ещё не загружена: «⤓ Установить углублённое чтение». ¦ Модель поглибленого читання ще не завантажено: «⤓ Встановити поглиблене читання».
+Ces outils ne sont pas encore prêts : relance l’app. ¦ Эти инструменты ещё не готовы: перезапусти приложение. ¦ Ці інструменти ще не готові: перезапусти застосунок.
+Cette demande de relecture n’existe plus. ¦ Этого запроса на проверку больше нет. ¦ Цього запиту на перевірку вже немає.
+{who} confirme : {fact}. ¦ {who} подтверждает: {fact}. ¦ {who} підтверджує: {fact}.
+Confirmé par {who} : {fact} ¦ Подтвердил(а) {who}: {fact} ¦ Підтвердив(ла) {who}: {fact}
+{who}, relecture « {title} », le {date} ¦ {who}, проверка «{title}», {date} ¦ {who}, перевірка «{title}», {date}
+Relecture d’une branche ¦ Проверка ветви ¦ Перевірка гілки
+{who} pense que c’est faux. ¦ {who} считает, что это неверно. ¦ {who} вважає, що це неправильно.
+relecture « {title} », le {date} ¦ проверка «{title}», {date} ¦ перевірка «{title}», {date}
+💬 Remarque de {who} ¦ 💬 Замечание от {who} ¦ 💬 Зауваження від {who}

@@ -70,3 +70,12 @@ a { color: var(--fs-blue); }
     .fs-lightbox { padding: 3.5rem .6rem 1rem; }
     .fs-prev, .fs-next { top: auto; bottom: .6rem; }
 }
+/* 🖊 relecture demandée (lib/plus_famille.php) */
+.fs-rv-bar{max-width:1100px;margin:12px auto 0;padding:10px 14px;border:2px solid #2a6fdb;border-radius:10px;background:#eef4ff}
+.fs-rv-bar p{margin:0 0 8px}.fs-rv-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.fs-rv-row input{padding:6px 8px;border:1px solid #9aa4b2;border-radius:6px;font:inherit}
+.fs-rv{display:flex;flex-wrap:wrap;gap:6px;align-items:flex-start;margin:4px 0 6px}
+.fs-rv-b{border:1px solid #b9c2cf;background:#fff;border-radius:999px;padding:3px 10px;font:inherit;font-size:13px;cursor:pointer}
+.fs-rv-b.is-ok[aria-pressed="true"]{background:#1f8a4c;border-color:#1f8a4c;color:#fff}.fs-rv-b.is-no[aria-pressed="true"]{background:#c93636;border-color:#c93636;color:#fff}
+.fs-rv-c{flex:1 1 100%;min-height:2.6em;padding:6px 8px;border:1px solid #b9c2cf;border-radius:6px;font:inherit}
+@media (prefers-color-scheme: dark){.fs-rv-bar{background:#1b2436;border-color:#6ea8ff}.fs-rv-b{background:#222833;color:#eee;border-color:#4a5262}.fs-rv-c,.fs-rv-row input{background:#1a1e26;color:#eee;border-color:#4a5262}}
+.fs-rv-warn{color:#c93636;font-weight:600}

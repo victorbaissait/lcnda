@@ -119,6 +119,7 @@ function semaine_rappels(PDO $pdo): array
             'open' => $standalone ? ['kind' => 'list', 'list' => 'reminders'] : ['kind' => 'investigation', 'id' => (int) ($r['investigation_id'] ?? 0)],
             'done_label' => i18n_t('Fait'), 'snooze' => 'date'];
     }
+    if (function_exists('succ_semaine_items')) { try { $out = array_merge($out, succ_semaine_items($pdo)); } catch (Throwable $_) {} } // ⚖️ échéances des dossiers de succession (lib/successoral.php)
     return $out;
 }
 
@@ -368,6 +369,7 @@ function semaine_parse_key(string $key): array
     if (preg_match('/^rappel:([si]):(\d{1,10})$/', $key, $m)) { return ['rappel', (int) $m[2], $m[1]]; }
     if (preg_match('/^(courrier|visite|piste|hypo|socface|entraide):(\d{1,10})$/', $key, $m)) { return [$m[1], (int) $m[2], '']; }
     if (preg_match('/^manque:\d{1,10}:[a-z]{2,20}:\d{1,4}$/', $key)) { return ['manque', 0, '']; }
+    if (preg_match('/^succ:(\d{1,10})$/', $key, $m)) { return ['succ', (int) $m[1], '']; } // ⚖️ échéance d'un dossier de succession
     if (preg_match('/^mur:\d{1,10}:\d{6}$/', $key)) { return ['mur', 0, '']; } // 🧩 mur de la semaine : une marque « fait »
     if (preg_match('/^solidite:\d{1,10}:\d{1,10}:\d{6}$/', $key)) { return ['solidite', 0, '']; } // 🛡 lien fragile de la semaine : une marque « fait »
     if (preg_match('/^controle:[\p{L}\p{N}:_.,\- ]{1,160}$/u', $key)) { return ['controle', 0, '']; }
@@ -436,6 +438,9 @@ function semaine_mark(PDO $pdo, array $data): array
                 $r = socface_verify($pdo, ['census_id' => $id, 'verified' => 1]);
                 $prev['verified'] = (int) ($r['before'] ?? 0); $label = 'Vérifié sur l’image';
                 break;
+            case 'succ':
+                $prev['done'] = succ_semaine_done($pdo, $id, 1); $label = 'Fait';
+                break;
             case 'entraide':
                 $s = $pdo->prepare('SELECT status FROM help_requests WHERE id=?'); $s->execute([$id]); $r = $s->fetch();
                 if (!$r) { throw new RuntimeException('Demande introuvable.'); }
@@ -500,6 +505,9 @@ function semaine_restore_real(PDO $pdo, string $sort, int $id, string $sub, arra
             break;
         case 'socface':
             if (array_key_exists('verified', $p) && function_exists('socface_verify')) { socface_verify($pdo, ['census_id' => $id, 'verified' => (int) $p['verified'] ? 1 : 0]); }
+            break;
+        case 'succ':
+            if (array_key_exists('done', $p) && function_exists('succ_semaine_done')) { succ_semaine_done($pdo, $id, (int) $p['done']); }
             break;
         case 'entraide':
             $st = (string) ($p['status'] ?? '');

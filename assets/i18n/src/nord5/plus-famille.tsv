@@ -1,0 +1,218 @@
+fr ¦ hr ¦ sl
+# Zone « plus-famille » : 💌 lettre de famille, 🛡 fiabilité par personne, 🖊 relecture d’une branche, 🌐 traduire un acte latin (assets/js/plus-famille*.js, lib/plus_famille.php)
+Fiabilité : {n} sur 100 ¦ Pouzdanost: {n} od 100 ¦ Zanesljivost: {n} od 100
+🛡 Fiabilité ¦ 🛡 Pouzdanost ¦ 🛡 Zanesljivost
+Calcul de la note… ¦ Izračun ocjene… ¦ Izračun ocene…
+Comment la note est calculée ¦ Kako se računa ocjena ¦ Kako se izračuna ocena
+? Comment c’est calculé ¦ ? Kako se računa ¦ ? Kako se izračuna
+en doute : {what} ¦ upitno: {what} ¦ dvomljivo: {what}
+date estimée : {what} ¦ procijenjeni datum: {what} ¦ ocenjen datum: {what}
+aucun fait noté (naissance, mariage, décès…) ¦ nema zabilježenih činjenica (rođenje, brak, smrt…) ¦ ni zabeleženih dejstev (rojstvo, poroka, smrt…)
+sans source : {what} ¦ bez izvora: {what} ¦ brez vira: {what}
+une source sur la fiche, mais sur aucun fait ¦ izvor na kartici, ali ni na jednoj činjenici ¦ vir na kartici, a pri nobenem dejstvu
+aucune source ¦ nema izvora ¦ ni vira
+{who} : lien {lvl} ¦ {who}: veza {lvl} ¦ {who}: vez {lvl}
+pas de parents dans la base : cette part ne compte pas ¦ nema roditelja u bazi: ovaj dio se ne broji ¦ ni staršev v bazi: ta del ne šteje
+ajouter une source à : {what} ¦ dodati izvor za: {what} ¦ dodati vir za: {what}
+vérifier {what}, marqué « doute » ¦ provjeriti {what}, označeno „upitno” ¦ preveriti {what}, označeno »dvomljivo«
+confirmer le lien avec {name} (⚖️ dossier de preuve) ¦ potvrditi vezu s {name} (⚖️ dokazni spis) ¦ potrditi vez z {name} (⚖️ dokazna mapa)
+ajouter ses faits (naissance, mariage, décès) avec leur source ¦ dodati činjenice (rođenje, brak, smrt) s izvorom ¦ dodati dejstva (rojstvo, poroka, smrt) z virom
+sur 100 ¦ od 100 ¦ od 100
+À revoir avant publication ¦ Provjeriti prije objave ¦ Pregledati pred objavo
+(vivant ou fiche confidentielle : ne part pas à la publication) ¦ (živ ili povjerljiva kartica: ne objavljuje se) ¦ (živ ali zaupna kartica: se ne objavi)
+Seuil « à revoir » : {n} ¦ Prag „provjeriti”: {n} ¦ Prag »pregledati«: {n}
+Pour gagner des points : ¦ Za više bodova: ¦ Za več točk:
+La note n’est pas le score de complétude (qui compte ce qui est rempli) : une fiche peut être bien remplie et peu sûre. ¦ Ocjena nije ocjena potpunosti (ona broji što je ispunjeno): kartica može biti dobro ispunjena, a nepouzdana. ¦ Ocena ni ocena popolnosti (ta šteje, kar je izpolnjeno): kartica je lahko dobro izpolnjena in vseeno negotova.
+Calcul impossible. ¦ Izračun nije moguć. ¦ Izračun ni mogoč.
+🛡 FIABILITÉ ¦ 🛡 POUZDANOST ¦ 🛡 ZANESLJIVOST
+Trois parts, sur 100 chacune, puis une moyenne : ¦ Tri dijela, svaki od 100, zatim prosjek: ¦ Trije deli, vsak od 100, nato povprečje:
+Ses faits (40 %) ¦ Činjenice (40 %) ¦ Dejstva (40 %)
+la fiabilité de chaque fait : certain 100, déduit 80, estimé 55, doute 15, non évalué 60 ; une date « vers… », « avant… » compte comme estimée. ¦ pouzdanost svake činjenice: sigurno 100, zaključeno 80, procijenjeno 55, upitno 15, neocijenjeno 60; datum „oko…”, „prije…” računa se kao procjena. ¦ zanesljivost vsakega dejstva: gotovo 100, sklepano 80, ocenjeno 55, dvomljivo 15, neocenjeno 60; datum »okoli…«, »pred…« šteje kot ocena.
+Ses sources (35 %) ¦ Izvori (35 %) ¦ Viri (35 %)
+la part des faits qui ont une source citée ou un acte en image. ¦ udio činjenica s citiranim izvorom ili slikom zapisa. ¦ delež dejstev z navedenim virom ali sliko listine.
+Ses liens (25 %) ¦ Veze (25 %) ¦ Vezi (25 %)
+la solidité du lien avec chaque parent : prouvé 100, probable 75, supposé 45, sans source 20, réfuté 0. Sans parents dans la base, cette part ne compte pas. ¦ čvrstoća veze sa svakim roditeljem: dokazana 100, vjerojatna 75, pretpostavljena 45, bez izvora 20, opovrgnuta 0. Bez roditelja u bazi ovaj dio se ne broji. ¦ trdnost vezi z vsakim staršem: dokazana 100, verjetna 75, domnevna 45, brez vira 20, ovržena 0. Brez staršev v bazi ta del ne šteje.
+Sous le seuil (50 au départ), la fiche est « à revoir avant publication ». Le seuil se règle dans Réglages → ⚙️ Seuils du contrôle. ¦ Ispod praga (na početku 50) kartica je „za provjeru prije objave”. Prag se podešava u Postavke → ⚙️ Pragovi provjere. ¦ Pod pragom (na začetku 50) je kartica »za pregled pred objavo«. Prag nastaviš v Nastavitve → ⚙️ Pragovi preverjanja.
+Rien n’est changé dans ta base : la note est recalculée dès qu’un fait ou une source change. ¦ U tvojoj bazi ništa se ne mijenja: ocjena se ponovno računa čim se promijeni činjenica ili izvor. ¦ V tvoji bazi se nič ne spremeni: ocena se znova izračuna, ko se spremeni dejstvo ali vir.
+{day} : {first}, {age} ¦ {day}: {first}, {age} ¦ {day}: {first}, {age}
+{day} : il y a {n} ans, {a} et {b} se mariaient ¦ {day}: prije {n} godina vjenčali su se {a} i {b} ¦ {day}: pred {n} leti sta se poročila {a} in {b}
+{day} : il y a {n} ans naissait {name} ¦ {day}: prije {n} godina rodio/rodila se {name} ¦ {day}: pred {n} leti se je rodil(a) {name}
+{what} dans l’arbre : {list} ¦ {what} u stablu: {list} ¦ {what} v drevesu: {list}
+Nouveau dans les médias : « {title} » ¦ Novo u medijima: „{title}” ¦ Novo med mediji: »{title}«
+La lettre des {nm} ¦ Pismo obitelji {nm} ¦ Pismo družine {nm}
+Bonjour à tous ! Voici les nouvelles de la famille ce mois-ci. ¦ Pozdrav svima! Evo obiteljskih novosti ovog mjeseca. ¦ Pozdravljeni vsi! Tu so družinske novice tega meseca.
+Photo : {title} ¦ Fotografija: {title} ¦ Fotografija: {title}
+Les anniversaires du mois ¦ Rođendani i obljetnice mjeseca ¦ Obletnice meseca
+Pas d’anniversaire ce mois-ci. ¦ Ovaj mjesec nema rođendana. ¦ Ta mesec ni obletnic.
+Les dernières découvertes ¦ Najnovija otkrića ¦ Najnovejša odkritja
+Rien de nouveau ce mois-ci : à vous de m’envoyer vos souvenirs ! ¦ Ovaj mjesec ništa novo: sad vi meni pošaljite svoje uspomene! ¦ Ta mesec nič novega: zdaj mi vi pošljite svoje spomine!
+L’ancêtre à l’honneur ¦ Predak u središtu pozornosti ¦ Prednik v središču pozornosti
+Avec toute mon affection, ¦ S ljubavlju, ¦ Z vso ljubeznijo,
+Ce qu’on y met ¦ Što ulazi u nju ¦ Kaj vključimo
+🖼 Changer ¦ 🖼 Promijeni ¦ 🖼 Zamenjaj
+Tout se retouche dans la lettre (clique sur un texte). Les personnes vivantes n’y figurent que par leur prénom et leur âge ; les fiches confidentielles jamais. ¦ Sve se uređuje u pismu (klikni na tekst). Živi se pojavljuju samo s imenom i dobi, povjerljive kartice nikad. ¦ Vse se ureja v pismu (klikni besedilo). Živi so navedeni le z imenom in starostjo, zaupne kartice nikoli.
+Je remplis la lettre… ¦ Ispunjavam pismo… ¦ Izpolnjujem pismo…
+Lettre refaite avec les nouveaux choix ¦ Pismo ponovno napravljeno s novim odabirom ¦ Pismo znova narejeno z novo izbiro
+LETTRE DE FAMILLE ¦ OBITELJSKO PISMO ¦ DRUŽINSKO PISMO
+La photo de la lettre ¦ Fotografija pisma ¦ Fotografija pisma
+Lettre de famille ¦ Obiteljsko pismo ¦ Družinsko pismo
+La lettre du mois remplie toute seule : anniversaires, dernières découvertes, une photo, un ancêtre à l’honneur. Tout se retouche. ¦ Mjesečno pismo ispunjava se samo: obljetnice, najnovija otkrića, fotografija, predak u središtu. Sve se može urediti. ¦ Mesečno pismo se izpolni samo: obletnice, najnovejša odkritja, fotografija, prednik v središču. Vse se da urediti.
+Lettre gardée : « {title} » (Listes → Lettres de famille) ¦ Pismo spremljeno: „{title}” (Popisi → Obiteljska pisma) ¦ Pismo shranjeno: »{title}« (Seznami → Družinska pisma)
+💾 Garder ¦ 💾 Spremi ¦ 💾 Shrani
+Ranger la lettre dans Listes → Lettres de famille ¦ Spremi pismo u Popisi → Obiteljska pisma ¦ Shrani pismo v Seznami → Družinska pisma
+PDF ¦ PDF ¦ PDF
+par la fenêtre « Imprimer » (⤓ PDF) ¦ kroz prozor „Ispis” (⤓ PDF) ¦ prek okna »Natisni« (⤓ PDF)
+Image (PNG) ¦ Slika (PNG) ¦ Slika (PNG)
+Ouvre ta messagerie avec la lettre déjà écrite : rien n’est envoyé par l’app ¦ Otvara e-poštu s već napisanim pismom: aplikacija ništa ne šalje ¦ Odpre e-pošto z že napisanim pismom: aplikacija ne pošlje ničesar
+📝 Retoucher ¦ 📝 Uredi ¦ 📝 Uredi
+Ouvrir la lettre dans le traitement de texte ¦ Otvori pismo u obradi teksta ¦ Odpri pismo v urejevalniku besedil
+Chers cousins, chères cousines, ¦ Dragi rođaci i rođakinje, ¦ Dragi bratranci in sestrične,
+Ce que j’ai trouvé ce mois-ci… ¦ Što sam pronašao ovaj mjesec… ¦ Kaj sem našel ta mesec…
+Si vous avez des photos, des lettres ou des souvenirs, je serais très heureux de les voir ! ¦ Ako imate fotografije, pisma ili uspomene, rado bih ih vidio! ¦ Če imate fotografije, pisma ali spomine, bi jih z veseljem videl!
+Je vous embrasse, ¦ Grlim vas, ¦ Objemam vas,
+📋 Voir dans Listes › Lettres de famille ¦ 📋 Prikaži u Popisi › Obiteljska pisma ¦ 📋 Prikaži v Seznami › Družinska pisma
+remplie toute seule : anniversaires du mois, découvertes, photo, ancêtre ¦ ispunjava se samo: obljetnice mjeseca, otkrića, fotografija, predak ¦ izpolni se samo: obletnice meseca, odkritja, fotografija, prednik
+Lettres de famille ¦ Obiteljska pisma ¦ Družinska pisma
+💌 Lettres de famille ¦ 💌 Obiteljska pisma ¦ 💌 Družinska pisma
+Les lettres du mois gardées depuis ✨ Trésors → « 💌 Lettre de famille ». À ne pas confondre avec les « ✉️ Lettres aux descendants », qui s’ouvrent plus tard. ¦ Mjesečna pisma spremljena iz ✨ Blago → „💌 Obiteljsko pismo”. Ne miješati s „✉️ Pismima potomcima”, koja se otvaraju kasnije. ¦ Mesečna pisma, shranjena iz ✨ Zakladi → »💌 Družinsko pismo«. Ne zamenjuj z »✉️ Pismi potomcem«, ki se odprejo pozneje.
+💌 Nouvelle lettre ¦ 💌 Novo pismo ¦ 💌 Novo pismo
+Chercher… (titre, mois) ¦ Traži… (naslov, mjesec) ¦ Išči… (naslov, mesec)
+Supprimer la lettre ¦ Izbriši pismo ¦ Izbriši pismo
+Aucune lettre gardée pour l’instant ¦ Još nema spremljenih pisama ¦ Še ni shranjenih pisem
+Fais celle du mois dans ✨ Trésors → « 💌 Lettre de famille », puis « 💾 Garder ». ¦ Napravi mjesečno u ✨ Blago → „💌 Obiteljsko pismo”, zatim „💾 Spremi”. ¦ Naredi mesečno v ✨ Zakladi → »💌 Družinsko pismo«, nato »💾 Shrani«.
+💌 Faire la lettre du mois ¦ 💌 Napravi mjesečno pismo ¦ 💌 Naredi mesečno pismo
+Lettre « {title} » supprimée ¦ Pismo „{title}” izbrisano ¦ Pismo »{title}« izbrisano
+« d’accord », dit {who}. ¦ „slažem se”, kaže {who}. ¦ »se strinjam«, pravi {who}.
+« faux », dit {who}. ¦ „pogrešno”, kaže {who}. ¦ »napačno«, pravi {who}.
+Que faire de cette remarque ? ¦ Što učiniti s ovom napomenom? ¦ Kaj storiti s to pripombo?
+✓ Accepter (témoignage) ¦ ✓ Prihvati (svjedočanstvo) ¦ ✓ Sprejmi (pričevanje)
+✓ Accepter (note sur le fait, « doute ») ¦ ✓ Prihvati (bilješka uz činjenicu, „upitno”) ¦ ✓ Sprejmi (opomba ob dejstvu, »dvomljivo«)
+{what} par {who} : ajoutés comme témoignage si tu acceptes ¦ {what} od {who}: dodaju se kao svjedočanstvo ako prihvatiš ¦ {what} od {who}: dodana kot pričevanje, če sprejmeš
+Pour tous : ¦ Za sve: ¦ Za vse:
+Importer les remarques d’une relecture ¦ Uvezi napomene iz pregleda ¦ Uvozi pripombe pregleda
+le fichier « remarques-….json » ¦ datoteka „remarques-….json” ¦ datoteka »remarques-….json«
+Le fichier que ton cousin t’a renvoyé avec « ⤓ Renvoyer mes remarques ». ¦ Datoteka koju ti je rođak vratio s „⤓ Pošalji moje napomene”. ¦ Datoteka, ki ti jo je bratranec vrnil z »⤓ Vrni moje pripombe«.
+Ce fichier est trop gros pour un fichier de remarques. ¦ Datoteka je prevelika za datoteku napomena. ¦ Datoteka je prevelika za datoteko pripomb.
+<b>{what}</b> de <b>{who}</b> sur « {title} » ({date}). Pour chaque fait : accepte, refuse ou garde pour plus tard ¦ <b>{what}</b> od <b>{who}</b> o „{title}” ({date}). Za svaku činjenicu: prihvati, odbij ili ostavi za kasnije ¦ <b>{what}</b> od <b>{who}</b> o »{title}« ({date}). Za vsako dejstvo: sprejmi, zavrni ali pusti za pozneje
+Ces remarques ont <b>déjà été importées</b> ¦ Ove napomene <b>već su uvezene</b> ¦ Te pripombe so <b>že uvožene</b>
+Aucune remarque dans ce fichier ¦ U ovoj datoteci nema napomena ¦ V tej datoteki ni pripomb
+{what} sur des faits qui ne sont plus dans la base : mises de côté. ¦ {what} o činjenicama kojih više nema u bazi: ostavljeno po strani. ¦ {what} o dejstvih, ki jih ni več v bazi: odloženo.
+⤒ Importer les remarques ¦ ⤒ Uvezi napomene ¦ ⤒ Uvozi pripombe
+{what} (relecture de {who}) ¦ {what} (pregled: {who}) ¦ {what} (pregled: {who})
+Remarques de {who} gardées avec la relecture. ¦ Napomene od {who} spremljene uz pregled. ¦ Pripombe od {who} shranjene s pregledom.
+relu par {who} ¦ pregledao/la: {who} ¦ pregledal(a): {who}
+En attente des remarques ¦ Čeka se na napomene ¦ Čaka na pripombe
+{n} à ranger ¦ {n} za riješiti ¦ {n} za urediti
+tout est rangé ¦ sve je riješeno ¦ vse je urejeno
+Envoyé, en attente des remarques ¦ Poslano, čeka se na napomene ¦ Poslano, čaka na pripombe
+Supprimer la relecture ¦ Izbriši pregled ¦ Izbriši pregled
+Relectures de branche ¦ Pregledi grana ¦ Pregledi vej
+＋ Demander une relecture… ¦ ＋ Zatraži pregled… ¦ ＋ Prosi za pregled…
+Aucune relecture : « 📤 Partager avec la famille » avec la case « 🖊 Demander une relecture », ou fiche → ⋯ → « 🖊 Faire relire cette branche… ». ¦ Nema pregleda: „📤 Podijeli s obitelji” s okvirom „🖊 Zatraži pregled”, ili kartica → ⋯ → „🖊 Daj pregledati ovu granu…”. ¦ Ni pregledov: »📤 Deli z družino« s potrditvijo »🖊 Prosi za pregled«, ali kartica → ⋯ → »🖊 Daj v pregled to vejo…«.
+Relecture « {title} » supprimée ¦ Pregled „{title}” izbrisan ¦ Pregled »{title}« izbrisan
+Faire relire cette branche… ¦ Daj pregledati ovu granu… ¦ Daj v pregled to vejo…
+{who} pense que c’est faux : {c} ¦ {who} misli da je pogrešno: {c} ¦ {who} meni, da je napačno: {c}
+{who} est d’accord ¦ {who} se slaže ¦ {who} se strinja
+Remarque refusée ¦ Napomena odbijena ¦ Pripomba zavrnjena
+Remarque notée sur le fait ¦ Napomena zabilježena uz činjenicu ¦ Pripomba zapisana ob dejstvu
+Témoignage ajouté ¦ Svjedočanstvo dodano ¦ Pričevanje dodano
+« je pense que c’est faux » ¦ „mislim da je pogrešno” ¦ »mislim, da je napačno«
+« d’accord » ¦ „slažem se” ¦ »se strinjam«
+Corriger le fait ¦ Ispravi činjenicu ¦ Popravi dejstvo
+ouvre le fait ; la remarque reste jusqu’à « Noter » ou « Refuser » ¦ otvara činjenicu; napomena ostaje do „Zabilježi” ili „Odbij” ¦ odpre dejstvo; pripomba ostane do »Zapiši« ali »Zavrni«
+Noter (note sur le fait, « doute ») ¦ Zabilježi (bilješka uz činjenicu, „upitno”) ¦ Zapiši (opomba ob dejstvu, »dvomljivo«)
+Accepter (témoignage) ¦ Prihvati (svjedočanstvo) ¦ Sprejmi (pričevanje)
+🖊 Remarque de relecture ¦ 🖊 Napomena iz pregleda ¦ 🖊 Pripomba pregleda
+l’année {y} ¦ godina {y} ¦ leto {y}
+Traduire ¦ Prevedi ¦ Prevedi
+Le mot à mot tout de suite, la traduction complète si le modèle de la lecture approfondie est installé ¦ Odmah riječ po riječ, cijeli prijevod ako je instaliran model dubinskog čitanja ¦ Takoj beseda za besedo, celoten prevod, če je nameščen model poglobljenega branja
+latin → français ¦ latinski → francuski ¦ latinščina → francoščina
+Revenir au texte ¦ Natrag na tekst ¦ Nazaj na besedilo
+Écris ou lis d’abord le texte de l’acte : la traduction part du texte transcrit. ¦ Najprije napiši ili pročitaj tekst zapisa: prijevod polazi od prepisanog teksta. ¦ Najprej napiši ali preberi besedilo listine: prevod izhaja iz prepisa.
+L’acte (latin, transcrit) ¦ Zapis (latinski, prepisan) ¦ Listina (latinsko, prepisano)
+vert : formule connue ¦ zeleno: poznata formula ¦ zeleno: znana formula
+bleu : mot du dictionnaire ¦ plavo: riječ iz rječnika ¦ modro: beseda iz slovarja
+pointillé : peu sûr ¦ točkasto: nesigurno ¦ pikčasto: negotovo
+Niveau 1 · mot à mot sans installation ¦ Razina 1 · riječ po riječ bez instalacije ¦ Raven 1 · beseda za besedo brez namestitve
+Aucun mot reconnu. ¦ Nijedna riječ nije prepoznata. ¦ Nobena beseda ni prepoznana.
+Date : {d} ¦ Datum: {d} ¦ Datum: {d}
+Niveau 2 · traduction complète ¦ Razina 2 · cijeli prijevod ¦ Raven 2 · celoten prevod
+Je regarde si le modèle est installé… ¦ Provjeravam je li model instaliran… ¦ Preverjam, ali je model nameščen…
+📋 Garder dans la transcription ¦ 📋 Spremi u prijepis ¦ 📋 Shrani v prepis
+Copier la traduction ¦ Kopiraj prijevod ¦ Kopiraj prevod
+📝 Mise au propre ¦ 📝 Čistopis ¦ 📝 Čistopis
+Le niveau 1 marche toujours, sans rien installer. Les noms, dates et rôles repérés partent ensuite, comme d’habitude, dans « Ce que l’app a trouvé ». ¦ Razina 1 uvijek radi, bez instalacije. Pronađena imena, datumi i uloge zatim kao i obično idu u „Što je aplikacija pronašla”. ¦ Raven 1 deluje vedno, brez namestitve. Najdena imena, datumi in vloge gredo nato kot običajno v »Kaj je aplikacija našla«.
+✓ Les deux lectures sont d’accord sur les noms, la date et les rôles. ¦ ✓ Oba čitanja slažu se u imenima, datumu i ulogama. ¦ ✓ Obe branji se ujemata v imenih, datumu in vlogah.
+À vérifier : la traduction complète ne dit pas la même chose pour : {list} ¦ Za provjeru: cijeli prijevod kaže drugačije za: {list} ¦ Za preveriti: celoten prevod pravi drugače pri: {list}
+Traduction copiée. ¦ Prijevod kopiran. ¦ Prevod kopiran.
+Copie impossible dans ce navigateur. ¦ Kopiranje nije moguće u ovom pregledniku. ¦ Kopiranje v tem brskalniku ni mogoče.
+Traduction gardée dans la transcription (enregistre avec ⌘S) ¦ Prijevod spremljen u prijepis (spremi s ⌘S) ¦ Prevod shranjen v prepis (shrani s ⌘S)
+Traduction en cours (le modèle tourne sur cet ordinateur)… ¦ Prevođenje u tijeku (model radi na ovom računalu)… ¦ Prevajanje poteka (model teče na tem računalniku)…
+La traduction n’a pas abouti. ¦ Prijevod nije uspio. ¦ Prevod ni uspel.
+La traduction gardée avec cette transcription. ¦ Prijevod spremljen uz ovaj prijepis. ¦ Prevod, shranjen s tem prepisom.
+↻ Retraduire ¦ ↻ Prevedi ponovno ¦ ↻ Prevedi znova
+Le modèle de la lecture approfondie est installé : la traduction complète prend quelques dizaines de secondes. ¦ Model dubinskog čitanja je instaliran: cijeli prijevod traje nekoliko desetaka sekundi. ¦ Model poglobljenega branja je nameščen: celoten prevod traja nekaj deset sekund.
+🌐 Traduire tout l’acte ¦ 🌐 Prevedi cijeli zapis ¦ 🌐 Prevedi celotno listino
+La traduction complète utilise le modèle de la lecture approfondie (Ollama, ≈ 6 Go, rien ne part sur Internet). ¦ Cijeli prijevod koristi model dubinskog čitanja (Ollama, ≈ 6 GB, ništa ne ide na internet). ¦ Celoten prevod uporablja model poglobljenega branja (Ollama, ≈ 6 GB, nič ne gre na splet).
+Le niveau 1 marche toujours. ¦ Razina 1 uvijek radi. ¦ Raven 1 deluje vedno.
+Transcription d’acte ¦ Prijepis zapisa ¦ Prepis listine
+Traduction ¦ Prijevod ¦ Prevod
+Mots difficiles et abréviations ¦ Teške riječi i kratice ¦ Težke besede in okrajšave
+Les personnes de l’acte ¦ Osobe u zapisu ¦ Osebe v listini
+=fait certain ¦ sigurna činjenica|sigurne činjenice|sigurnih činjenica ¦ gotovo dejstvo|gotovi dejstvi|gotova dejstva|gotovih dejstev
+=fait déduit ¦ zaključena činjenica|zaključene činjenice|zaključenih činjenica ¦ sklepano dejstvo|sklepani dejstvi|sklepana dejstva|sklepanih dejstev
+=fait estimé ¦ procijenjena činjenica|procijenjene činjenice|procijenjenih činjenica ¦ ocenjeno dejstvo|ocenjeni dejstvi|ocenjena dejstva|ocenjenih dejstev
+=fait en doute ¦ upitna činjenica|upitne činjenice|upitnih činjenica ¦ dvomljivo dejstvo|dvomljivi dejstvi|dvomljiva dejstva|dvomljivih dejstev
+=fait non évalué ¦ neocijenjena činjenica|neocijenjene činjenice|neocijenjenih činjenica ¦ neocenjeno dejstvo|neocenjeni dejstvi|neocenjena dejstva|neocenjenih dejstev
+=fait ¦ činjenica|činjenice|činjenica ¦ dejstvo|dejstvi|dejstva|dejstev
+=fiche à revoir ¦ kartica za provjeru|kartice za provjeru|kartica za provjeru ¦ kartica za pregled|kartici za pregled|kartice za pregled|kartic za pregled
+=fait confirmé ¦ potvrđena činjenica|potvrđene činjenice|potvrđenih činjenica ¦ potrjeno dejstvo|potrjeni dejstvi|potrjena dejstva|potrjenih dejstev
+=remarque notée ¦ zabilježena napomena|zabilježene napomene|zabilježenih napomena ¦ zapisana pripomba|zapisani pripombi|zapisane pripombe|zapisanih pripomb
+=remarque pour plus tard ¦ napomena za kasnije|napomene za kasnije|napomena za kasnije ¦ pripomba za pozneje|pripombi za pozneje|pripombe za pozneje|pripomb za pozneje
+=relecture ¦ pregled|pregleda|pregleda ¦ pregled|pregleda|pregledi|pregledov
+Très sûr ¦ Vrlo sigurno ¦ Zelo zanesljivo
+Assez sûr ¦ Prilično sigurno ¦ Kar zanesljivo
+Peu sûr ¦ Nesigurno ¦ Nezanesljivo
+prouvé ¦ dokazana ¦ dokazana
+probable ¦ vjerojatna ¦ verjetna
+réfuté ¦ opovrgnuta ¦ ovržena
+parent ¦ roditelj ¦ starš
+baptisé(e) ¦ kršten(a) ¦ krščen(a)
+note sous ¦ ocjena ispod ¦ ocena pod
+{a} sur {n} ont une source ¦ {a} od {n} ima izvor ¦ {a} od {n} ima vir
+{a} sur {n} a une source ¦ {a} od {n} ima izvor ¦ {a} od {n} ima vir
+{n} sont à revoir avant publication (note sous {min}). ¦ {n} — za provjeru prije objave (ocjena ispod {min}). ¦ {n} — za pregled pred objavo (ocena pod {min}).
+{n} est à revoir avant publication (note sous {min}). ¦ {n} — za provjeru prije objave (ocjena ispod {min}). ¦ {n} — za pregled pred objavo (ocena pod {min}).
+La fiabilité n’a pas pu être calculée. ¦ Pouzdanost se nije mogla izračunati. ¦ Zanesljivosti ni bilo mogoče izračunati.
+Aucune fiche à revoir avant publication, bravo ! ¦ Nema kartica za provjeru prije objave, bravo! ¦ Nobene kartice za pregled pred objavo, bravo!
+Pas encore de fiche à publier. ¦ Još nema kartica za objavu. ¦ Še ni kartic za objavo.
+{n} sous {min} sur 100 ¦ {n} ispod {min} od 100 ¦ {n} pod {min} od 100
+🛡 Fiches les moins fiables ¦ 🛡 Najmanje pouzdane kartice ¦ 🛡 Najmanj zanesljive kartice
+Listes → Personnes, filtrée sur « À revoir avant publication » ¦ Popisi → Osobe, filtrirano na „Provjeriti prije objave” ¦ Seznami → Osebe, filtrirano na »Pregledati pred objavo«
+Les voir ¦ Prikaži ih ¦ Prikaži jih
+Les laisser de côté ¦ Izostavi ih ¦ Izpusti jih
+Exporter quand même ¦ Ipak izvezi ¦ Vseeno izvozi
+Transcription ¦ Prijepis ¦ Prepis
+🖊 Relecture ¦ 🖊 Pregled ¦ 🖊 Pregled
+🖊 Demander une relecture (le cousin peut cocher et commenter chaque fait) ¦ 🖊 Zatraži pregled (rođak može označiti i komentirati svaku činjenicu) ¦ 🖊 Prosi za pregled (bratranec lahko označi in komentira vsako dejstvo)
+La copie montre alors « ✓ D’accord / ✗ Je pense que c’est faux » sur chaque fait, et « ⤓ Renvoyer mes remarques » : un petit fichier .json à importer dans Questions aux proches → « ⤒ Importer les réponses ». ¦ Kopija tada uz svaku činjenicu pokazuje „✓ Slažem se / ✗ Mislim da je pogrešno” i „⤓ Pošalji moje napomene”: malu .json datoteku za uvoz u Pitanja bližnjima → „⤒ Uvezi odgovore”. ¦ Kopija takrat ob vsakem dejstvu pokaže »✓ Se strinjam / ✗ Mislim, da je napačno« in »⤓ Vrni moje pripombe«: majhno datoteko .json za uvoz v Vprašanja bližnjim → »⤒ Uvozi odgovore«.
+Copie à relire prête : {name}. Le cousin te renverra ses remarques (un fichier .json) : Questions aux proches → « ⤒ Importer les réponses ». ¦ Kopija za pregled spremna: {name}. Rođak će ti vratiti napomene (.json datoteka): Pitanja bližnjima → „⤒ Uvezi odgovore”. ¦ Kopija za pregled pripravljena: {name}. Bratranec ti bo vrnil pripombe (datoteka .json): Vprašanja bližnjim → »⤒ Uvozi odgovore«.
+Donne un titre à la lettre. ¦ Daj pismu naslov. ¦ Daj pismu naslov.
+Lettre introuvable. ¦ Pismo nije pronađeno. ¦ Pisma ni mogoče najti.
+Relecture introuvable. ¦ Pregled nije pronađen. ¦ Pregleda ni mogoče najti.
+Remarque introuvable. ¦ Napomena nije pronađena. ¦ Pripombe ni mogoče najti.
+Ce n’est pas un fichier de remarques de relecture. ¦ Ovo nije datoteka napomena iz pregleda. ¦ To ni datoteka pripomb pregleda.
+Cette relecture n’est pas dans cette base (ou elle a été supprimée). ¦ Ovog pregleda nema u bazi (ili je izbrisan). ¦ Tega pregleda ni v tej bazi (ali je bil izbrisan).
+Ce fait n’existe plus. ¦ Ova činjenica više ne postoji. ¦ To dejstvo ne obstaja več.
+Cette remarque est déjà rangée. ¦ Ova napomena je već riješena. ¦ Ta pripomba je že urejena.
+Il n’y a pas encore de texte à traduire. ¦ Još nema teksta za prijevod. ¦ Besedila za prevod še ni.
+Le modèle de la lecture approfondie n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Model dubinskog čitanja još nije preuzet: „⤓ Instaliraj dubinsko čitanje”. ¦ Model poglobljenega branja še ni prenesen: »⤓ Namesti poglobljeno branje«.
+Ces outils ne sont pas encore prêts : relance l’app. ¦ Ovi alati još nisu spremni: ponovno pokreni aplikaciju. ¦ Ta orodja še niso pripravljena: znova zaženi aplikacijo.
+Cette demande de relecture n’existe plus. ¦ Ovaj zahtjev za pregled više ne postoji. ¦ Ta prošnja za pregled ne obstaja več.
+{who} confirme : {fact}. ¦ {who} potvrđuje: {fact}. ¦ {who} potrjuje: {fact}.
+Confirmé par {who} : {fact} ¦ Potvrdio/la {who}: {fact} ¦ Potrdil(a) {who}: {fact}
+{who}, relecture « {title} », le {date} ¦ {who}, pregled „{title}”, {date} ¦ {who}, pregled »{title}«, {date}
+Relecture d’une branche ¦ Pregled grane ¦ Pregled veje
+{who} pense que c’est faux. ¦ {who} misli da je pogrešno. ¦ {who} meni, da je napačno.
+relecture « {title} », le {date} ¦ pregled „{title}”, {date} ¦ pregled »{title}«, {date}
+💬 Remarque de {who} ¦ 💬 Napomena od {who} ¦ 💬 Pripomba od {who}

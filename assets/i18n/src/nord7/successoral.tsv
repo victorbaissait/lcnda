@@ -1,0 +1,496 @@
+fr ¦ is
+# Zone « successoral » : ⚖️ généalogiste successoral, dossiers de succession, dévolution (heritage-successoral*.js, lib/successoral.php)
+Les dossiers de succession ne se montrent pas en mode consultation ni en mode simple. ¦ Dánarbúsmál eru ekki sýnd í skoðunarham né einföldum ham.
+Successions ¦ Dánarbú
+Listes · Recherche et organisation ¦ Listar · Rannsóknir og skipulag
+Dossiers de succession ¦ Dánarbúsmál
+Retrouver les héritiers d’une personne décédée, pour un notaire : un dossier par défunt. À ne pas confondre avec « 🏠 Héritages et successions » (les actes anciens des ancêtres). ¦ Finna erfingja látins einstaklings fyrir lögbókanda: eitt mál fyrir hvern látinn. Ekki að rugla við „🏠 Arfur og dánarbú“ (gömul skjöl forfeðra).
+＋ Ouvrir un dossier ¦ ＋ Opna mál
+Lecture des dossiers… ¦ Les málin…
+Aucun dossier de succession pour l’instant ¦ Ekkert dánarbúsmál enn
+Choisis la personne décédée : l’app part des fiches de la base pour trouver ses héritiers, selon le Code civil d’aujourd’hui. ¦ Veldu hinn látna: forritið byggir á færslunum í gagnagrunninum og finnur erfingjana samkvæmt gildandi frönskum einkamálalögum.
+Chercher… (ex. MAZAUD, 2026-014, ROUSSILHE) ¦ Leita… (t.d. MAZAUD, 2026-014, ROUSSILHE)
+Prochaine échéance ¦ Næsti frestur
+A → Z ¦ A → Ö
+Dossier n° {n} ¦ Mál nr. {n}
+Prochaine échéance : {d} — {l} ¦ Næsti frestur: {d} — {l}
+Échéance passée ¦ Frestur liðinn
+✎ Modifier ¦ ✎ Breyta
+Aucun dossier ne correspond. ¦ Ekkert mál passar.
+Pas en mode consultation ni en mode simple. ¦ Ekki í skoðunarham né einföldum ham.
+⚖️ DOSSIER DE SUCCESSION ¦ ⚖️ DÁNARBÚSMÁL
+Ouvrir un dossier ¦ Opna mál
+Ouvrir le dossier ¦ Opna málið
+N° de dossier ¦ Málsnúmer
+fait tout seul : 2026-014 ¦ sjálfkrafa: 2026-014
+reprise de la fiche ¦ tekið úr færslunni
+Dernier domicile ¦ Síðasta heimili
+Notaire mandant (fiche ou nom) ¦ Lögbókandi sem veitir umboð (færsla eða nafn)
+Réf. du notaire ¦ Tilvísun lögbókanda
+Ouvert le ¦ Opnað
+Testament ¦ Erfðaskrá
+Aucun connu (le notaire interroge le fichier des dernières volontés) ¦ Engin þekkt (lögbókandi kannar erfðaskrárskrána)
+Situation (notes) ¦ Staða (athugasemdir)
+🔒 Le dossier reste dans l’app : les héritiers vivants, leurs adresses et leurs parts ne sont dans aucun export. Aucun montant n’est noté. ¦ 🔒 Málið verður kyrrt í forritinu: lifandi erfingjar, heimilisföng þeirra og hlutir eru ekki í neinum útflutningi. Engar fjárhæðir eru skráðar.
+Choisis la personne décédée. ¦ Veldu hinn látna.
+Dossier enregistré ¦ Mál vistað
+Dossier supprimé ¦ Máli eytt
+Lecture du dossier… ¦ Les málið…
+← Tous les dossiers ¦ ← Öll mál
+Dossier n° {n} · {t} ¦ Mál nr. {n} · {t}
+Listes · Dossiers de succession ¦ Listar · Dánarbúsmál
+↗ Fiche du défunt ¦ ↗ Færsla hins látna
+🗄 Archiver le dossier clos ¦ 🗄 Setja lokað mál í skjalasafn
+Dossier archivé : les adresses des vivants ont été retirées, le journal reste. ¦ Mál sett í skjalasafn: heimilisföng lifandi fjarlægð, dagbókin helst.
+État du dossier ¦ Staða málsins
+Le défunt n’est plus dans la base. ¦ Hinn látni er ekki lengur í gagnagrunninum.
+Pas de conjoint dans la base ¦ Enginn maki í gagnagrunninum
+A des descendants ¦ Á afkomendur
+Sans descendant dans la base ¦ Engir afkomendur í gagnagrunninum
+Le défunt ¦ Hinn látni
+fiche n° {n} ¦ færsla nr. {n}
+Le mandat ¦ Umboðið
+Droit actuel (décès après le 1er janvier 2007) ¦ Gildandi réttur (andlát eftir 1. janúar 2007)
+Échéances ¦ Frestir
+＋ Échéance ¦ ＋ Frestur
+Dans {n} j ¦ Eftir {n} d
+Aucune échéance. ¦ Enginn frestur.
+Aussi dans 🗓 Ma semaine de recherche. ¦ Einnig í 🗓 Rannsóknarvikan mín.
+📑 Pièces ¦ 📑 Skjöl
+🖨 Tableau pour le notaire ¦ 🖨 Tafla fyrir lögbókanda
+de son chef ¦ í eigin rétti
+représenté ¦ fyrir hönd
+sans descendance connue ¦ engir þekktir afkomendur
+degré plus éloigné ¦ fjarlægari liður
+pas de représentation ¦ engin staðgönguerfð
+pas encore conçu ¦ ekki enn getinn
+écarté ¦ útilokaður
+par représentation ¦ með staðgönguerfð
+de son chef, s’il vit ¦ í eigin rétti, ef á lífi
+Retenu ¦ Kallaður
+Écarté par le conjoint ¦ Útilokaður af maka
+Écarté ¦ Útilokaður
+{name} : {share} (art. {art}). ¦ {name}: {share} (gr. {art}).
+Ou, à son choix, l’usufruit de la totalité (art. 757) : les descendants ont alors la nue-propriété, dans les mêmes proportions. ¦ Eða, að eigin vali, afnotaréttur að öllu (gr. 757): afkomendur eiga þá beina eignarréttinn í sömu hlutföllum.
+Aucun conjoint dans la base. ¦ Enginn maki í gagnagrunninum.
+S’il y avait un conjoint, l’app afficherait ici ses droits (art. 757 à 757-2) avant les ordres. ¦ Ef maki væri til sýndi forritið réttindi hans hér (gr. 757 til 757-2) á undan erfðaröðunum.
+{n}e ¦ {n}.
+adresse ? ¦ heimilisfang?
+Statut retenu dans ce dossier ¦ Staða sem lögð er til grundvallar í málinu
+Autre hypothèse ¦ Önnur tilgáta
+total {t} ¦ samtals {t}
+personne : il reste des branches à chercher. ¦ enginn: enn eru greinar til að leita.
+Part en jeu : {s} ¦ Hlutur í húfi: {s}
+🔍 Chercher ¦ 🔍 Leita
+🌍 Héritier à l’étranger ¦ 🌍 Erfingi erlendis
+❔ Absent ou disparu ¦ ❔ Fjarverandi eða horfinn
+📇 Compléter ¦ 📇 Fylla út
+Type d’adoption ¦ Tegund ættleiðingar
+Type d’adoption ? ¦ Tegund ættleiðingar?
+Plénière ¦ Full
+Marié ? ¦ Giftur?
+Pas marié (PACS, union libre) ¦ Ekki giftur (PACS, sambúð)
+Divorcé ¦ Fráskilinn
+Aucune branche à chercher d’après les fiches. ¦ Samkvæmt færslunum er engin grein til að leita.
+{n}e degré ¦ {n}. liður
+Calcul indicatif, à faire vérifier par le notaire. Il suit le Code civil en vigueur (art. 731 et suivants), sans testament, sans donation, sans renonciation connue. Il ne tient pas compte du droit de retour légal (art. 738-2, 757-3), des biens à l’étranger ni d’un régime matrimonial. ¦ Leiðbeinandi útreikningur sem lögbókandi þarf að yfirfara. Hann fylgir gildandi frönskum einkamálalögum (gr. 731 o.áfr.), án erfðaskrár, án gjafar, án þekkts afsals. Hann tekur ekki tillit til lögbundins endurfallsréttar (gr. 738-2, 757-3), eigna erlendis né fjárskipta hjóna.
+Le conjoint survivant ¦ Eftirlifandi maki
+Les ordres d’héritiers (art. 734) : le premier qui a quelqu’un prend tout ¦ Erfðaraðir (gr. 734): fyrsta röðin þar sem einhver er fær allt
+Les héritiers trouvés ¦ Erfingjar sem fundust
+🗂 Tables des successions (AD)… ¦ 🗂 Dánarbúaskrár (skjalasöfn)…
+Lien avec le défunt ¦ Skyldleiki við hinn látna
+Vient ¦ Erfir
+Part ¦ Hlutur
+Statut retenu ¦ Staða lögð til grundvallar
+↔ Faire glisser le tableau pour voir les parts. ¦ ↔ Dragðu töfluna til að sjá hlutina.
+Aucun héritier trouvé jusqu’au 6e degré : sans testament, la succession reviendrait à l’État (art. 539 et 768). Il reste sans doute des branches à chercher. ¦ Enginn erfingi fannst upp að 6. lið: án erfðaskrár rynni arfurinn til ríkisins (gr. 539 og 768). Líklega eru enn greinar til að leita.
+Les calculs restent tant que la branche n’est pas tranchée. ¦ Útreikningarnir haldast þar til greinin er útkljáð.
+Les branches à chercher ¦ Greinar til að leita
+L’hypothèse retenue ¦ Valin tilgáta
+Ex. : André MAZAUD décédé à Lyon en 1990 sans enfant (acte reçu le 5 déc.). ¦ T.d.: André MAZAUD lést í Lyon 1990 barnlaus (skjal móttekið 5. des.).
+Demandée avant « Remis au notaire » si un héritier reste inconnu. ¦ Krafist fyrir „Afhent lögbókanda“ ef erfingi er áfram óþekktur.
+Les degrés civils (art. 741-743) : on compte les générations jusqu’à l’ancêtre commun, puis on redescend ¦ Skyldleikaliðir (gr. 741-743): taldar eru kynslóðir upp að sameiginlegum forföður og svo niður aftur
+LE DÉFUNT ¦ HINN LÁTNI
+à retrouver ¦ að finna
+sans descend. ¦ án afk.
+Héritier vivant, sa part ¦ Lifandi erfingi, hlutur hans
+Prédécédé, sa souche ¦ Látinn áður, leggur hans
+Branche à chercher ¦ Grein til að leita
+Arbre de dévolution ¦ Erfðatré
+Le défunt au centre, chaque héritier avec sa part ¦ Hinn látni í miðju, hver erfingi með sinn hlut
+⤓ SVG ¦ ⤓ SVG
+↔ Faire glisser le dessin. ¦ ↔ Dragðu teikninguna.
+Clic sur une case : la fiche ; clic droit : « 🛡 Solidité de ce lien ». Le dessin suit les fiches. ¦ Smell á reit: færslan; hægrismell: „🛡 Styrkur þessara tengsla“. Teikningin fylgir færslunum.
+le {d} ¦ {d}
+État de la pièce ¦ Staða skjals
+D’après la fiche ¦ Samkvæmt færslu
+{n} en main ¦ {n} í hendi
+{n} demandés ¦ {n} pöntuð
+Par héritier ¦ Eftir erfingja
+Par acte ¦ Eftir skjali
+Ce qu’il faut prouver ¦ Það sem þarf að sanna
+↔ Faire glisser le tableau. ¦ ↔ Dragðu töfluna.
+Rangée dans le Registre de courriers, une demande d’acte met la pièce à « Demandé » ; l’acte attaché à la fiche la met à « En main ». ¦ Skjalapöntun vistuð í Bréfaskránni setur skjalið á „Pantað“; skjal tengt færslunni setur það á „Í hendi“.
+Je suis mandaté(e) par {notary}, notaire, pour établir la dévolution de la succession de {name} (dossier {n}, réf. {ref}). ¦ Ég hef umboð frá {notary}, lögbókanda, til að ákvarða erfðaröð í dánarbúi {name} (mál {n}, tilv. {ref}).
+À retrouver ¦ Að finna
+Adresse ? ¦ Heimilisfang?
+Signé le ¦ Undirritað
+À signer ¦ Til undirritunar
+✉️ Écrire ¦ ✉️ Skrifa
+Contrat de révélation, réponses, signatures ¦ Uppljóstrunarsamningur, svör, undirskriftir
+📝 Contrat de révélation ¦ 📝 Uppljóstrunarsamningur
+✉️ Lettre de premier contact ¦ ✉️ Bréf um fyrstu samskipti
+Héritier ¦ Erfingi
+Courrier ¦ Bréf
+Contrat ¦ Samningur
+📝 Le contrat ne nomme pas le défunt avant signature. Écris toi-même le pourcentage d’honoraires et la date limite. Rien n’est envoyé par l’app. ¦ 📝 Samningurinn nefnir ekki hinn látna fyrir undirritun. Skrifaðu sjálf(ur) þóknunarhlutfall og frest. Forritið sendir ekkert.
+Chaque courrier va dans le Registre de courriers, avec sa relance. ¦ Hvert bréf fer í Bréfaskrána með áminningu.
+↗ Registre de courriers ¦ ↗ Bréfaskrá
+Madame, Monsieur, ¦ Ágæta frú, ágæti herra,
+Généalogiste successoral, je suis chargé(e) par une étude notariale de retrouver les héritiers d’une personne décédée. Mes recherches me laissent penser que vous pourriez faire partie de sa famille. ¦ sem erfðaættfræðingi hefur lögbókandaskrifstofa falið mér að finna erfingja látins einstaklings. Rannsóknir mínar benda til þess að þér gætuð tilheyrt fjölskyldu hans.
+Pour le vérifier, pourriez-vous me confirmer votre date et votre lieu de naissance, ainsi que les noms de vos parents ? Vous pouvez me répondre par courrier, par téléphone ou par courriel. ¦ Gætuð þér, til staðfestingar, gefið upp fæðingardag og -stað og nöfn foreldra yðar? Þér getið svarað bréflega, í síma eða með tölvupósti.
+Cette démarche ne vous engage à rien. ¦ Þetta skref skuldbindur yður ekki til neins.
+Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées. ¦ Virðingarfyllst
+CONTRAT DE RÉVÉLATION DE SUCCESSION ¦ SAMNINGUR UM UPPLJÓSTRUN DÁNARBÚS
+Entre {heir}, ci-après « l’héritier », et {sender}, généalogiste successoral. ¦ Milli {heir}, hér eftir „erfinginn“, og {sender}, erfðaættfræðings.
+Le généalogiste a découvert une succession en cours dans laquelle l’héritier pourrait avoir des droits. Il s’engage à lui en révéler l’origine (le nom de la personne décédée, l’étude notariale chargée du règlement) dès la signature du présent contrat, et à réunir les actes qui prouvent sa qualité d’héritier. ¦ Ættfræðingurinn hefur fundið óskipt dánarbú þar sem erfinginn kann að eiga réttindi. Hann skuldbindur sig til að upplýsa um uppruna þess (nafn hins látna, ábyrga lögbókandaskrifstofu) við undirritun samnings þessa og safna skjölum sem sanna stöðu erfingjans.
+En contrepartie, l’héritier s’engage à verser au généalogiste des honoraires de ____ % (hors taxes) de l’actif net qui lui reviendra, payables seulement s’il reçoit effectivement une part de la succession. Les frais de recherche sont compris. ¦ Í staðinn skuldbindur erfinginn sig til að greiða ættfræðingnum þóknun sem nemur ____ % (án skatta) af hreinni eign sem honum fellur í skaut, eingöngu ef hann fær í raun hlut í búinu. Rannsóknarkostnaður er innifalinn.
+Cette proposition est valable jusqu’au ____________. ¦ Tilboð þetta gildir til ____________.
+Fait en deux exemplaires, à ____________, le ____________. ¦ Gert í tveimur eintökum, í ____________, þann ____________.
+L’héritier (« Lu et approuvé », signature) — Le généalogiste ¦ Erfinginn („Lesið og samþykkt“, undirskrift) — Ættfræðingurinn
+Je me permets de revenir vers vous au sujet de mon courrier du {sent}, resté sans réponse. Une succession en cours pourrait vous concerner : pourriez-vous me contacter ? ¦ Ég leyfi mér að vísa til bréfs míns frá {sent} sem hefur ekki verið svarað. Óskipt dánarbú gæti varðað yður: gætuð þér haft samband við mig?
+✉️ HÉRITIERS CONTACTÉS ¦ ✉️ ERFINGJAR SEM HAFT VAR SAMBAND VIÐ
+Relance ¦ Áminning
+📋 Ranger dans le Registre de courriers ¦ 📋 Vista í Bréfaskrána
+pas d’adresse dans le Répertoire des vivants ¦ ekkert heimilisfang í Skrá yfir lifandi
+Premier contact ¦ Fyrstu samskipti
+Contrat de révélation ¦ Uppljóstrunarsamningur
+Relance dans (jours) ¦ Áminning eftir (daga)
+Le nom du défunt n’est pas écrit : il est révélé après la signature. ¦ Nafn hins látna er ekki skrifað: það er upplýst eftir undirritun.
+La lettre (tu peux la retoucher ; le nom de chaque héritier est mis tout seul) ¦ Bréfið (þú getur breytt því; nafn hvers erfingja er sett inn sjálfkrafa)
+📝 Traitement de texte ¦ 📝 Ritvinnsla
+Coche au moins un héritier. ¦ Hakaðu við að minnsta kosti einn erfingja.
+Courriers aux héritiers ¦ Bréf til erfingjanna
+Recherche d’héritiers ¦ Leit að erfingjum
+Ton logiciel de courriel s’ouvre : relis la lettre et envoie-la toi-même. Rien n’est envoyé par l’app. ¦ Tölvupóstforritið þitt opnast: lestu bréfið og sendu það sjálf(ur). Forritið sendir ekkert.
+Premier contact + contrat ¦ Fyrstu samskipti + samningur
+{n} rangés dans le Registre de courriers ¦ Vistað í Bréfaskrána: {n}
+N. ¦ F.
+D. ¦ D.
+M. ¦ G.
+Div. ¦ Sk.
+Ren. ¦ Afs.
+(à fournir) ¦ (skal útvega)
+repr. {who} ¦ f.h. {who}
+existence à ce jour non établie ¦ tilvist ekki staðfest enn
+TABLEAU GÉNÉALOGIQUE ¦ ÆTTARTAFLA
+Succession de {name}, décédé(e) à {place} le {date} ¦ Dánarbú {name}, lést í {place} þann {date}
+Dossier {n} · Réf. notaire {ref} ¦ Mál {n} · Tilv. lögbókanda {ref}
+Calcul établi d’après les actes cités, art. 731 et suiv. du Code civil, sous réserve de vérification par le notaire. N. = naissance, M. = mariage, D. = décès. ¦ Útreikningur samkvæmt tilgreindum skjölum, gr. 731 o.áfr. frönsku einkamálalaganna, með fyrirvara um yfirferð lögbókanda. F. = fæðing, G. = gifting, D. = dauði.
+Communs à tous : {list}. ¦ Sameiginlegt öllum: {list}.
+Hypothèse retenue : {h} ¦ Valin tilgáta: {h}
+à préciser ¦ á eftir að tilgreina
+Liste des pièces ¦ Skjalalisti
+Page {n} / 3 ¦ Síða {n} / 3
+Un PDF sobre, une source pour chaque lien ¦ Einfalt PDF, heimild fyrir hver tengsl
+📝 Ouvrir dans le traitement de texte ¦ 📝 Opna í ritvinnslu
+Joindre les adresses des héritiers ¦ Láta heimilisföng erfingja fylgja
+Aucune photo ni note privée : les noms, les qualités, les parts et les sources. Pas d’adresse sauf si la case est cochée. ¦ Engar myndir né einkaathugasemdir: nöfn, staða, hlutir og heimildir. Engin heimilisföng nema hakað sé við.
+Tableau généalogique — {n} ¦ Ættartafla — {n}
+Tableau pour le notaire : PDF ou impression (3 pages) ¦ Tafla fyrir lögbókanda: PDF eða útprentun (3 síður)
+Tableau pour le notaire : ouvert dans le traitement de texte ¦ Tafla fyrir lögbókanda: opnuð í ritvinnslu
+Tableau pour le notaire : copie rangée dans les médias ¦ Tafla fyrir lögbókanda: afrit vistað í miðlum
+🕓 Journal du dossier {n} ¦ 🕓 Dagbók máls {n}
+(on ne peut ni le modifier ni l’effacer) ¦ (ekki er hægt að breyta henni né eyða)
+⤓ Exporter le journal (CSV) ¦ ⤓ Flytja út dagbók (CSV)
+Les changements des fiches restent dans Réglages → Journal des modifications. ¦ Breytingar á færslum haldast einnig í Stillingar → Breytingaskrá.
+Action ¦ Aðgerð
+Journal exporté (CSV) ¦ Dagbók flutt út (CSV)
+Le temps passé, les frais, les honoraires des contrats ¦ Tími, kostnaður, þóknun samninga
+＋ Temps ¦ ＋ Tími
+＋ Frais ¦ ＋ Kostnaður
+＋ Honoraires d’un contrat ¦ ＋ Þóknun samnings
+🖨 Relevé ¦ 🖨 Yfirlit
+{h} h {m} min passées ¦ {h} klst. {m} mín. varið
+Frais : {s} ¦ Kostnaður: {s}
+{n} contrats ¦ Samningar: {n}
+{h} h {m} min ¦ {h} klst. {m} mín.
+Rien de noté. ¦ Ekkert skráð.
+Aucun montant de succession n’est noté. ¦ Engin fjárhæð dánarbúsins er skráð.
+💶 TEMPS ET FRAIS ¦ 💶 TÍMI OG KOSTNAÐUR
+Copie d’acte, déplacement… ¦ Afrit skjals, ferðalag…
+Recherches aux AD, appels… ¦ Leit í skjalasöfnum, símtöl…
+Contrat signé ¦ Samningur undirritaður
+Heures ¦ Klukkustundir
+Minutes ¦ Mínútur
+Montant (€) ¦ Upphæð (€)
+🌍 HÉRITIER À L’ÉTRANGER ¦ 🌍 ERFINGI ERLENDIS
+Chercher {name} hors de France ¦ Leita að {name} utan Frakklands
+Les services à interroger ¦ Stofnanir til að spyrja
+📮 Demander l’acte au Service central d’état civil ¦ 📮 Panta skjalið hjá miðlægu þjóðskránni
+Langue de la lettre ¦ Tungumál bréfsins
+Destinataire ¦ Viðtakandi
+Registro civil de …, consulat de France à … ¦ Registro civil de …, franska ræðismannsskrifstofan í …
+La lettre (dans la langue du pays) ¦ Bréfið (á tungumáli landsins)
+Lettre à l’étranger ¦ Bréf til útlanda
+Recherche d’un héritier à l’étranger : {name} ¦ Leit að erfingja erlendis: {name}
+Courrier rangé dans le Registre de courriers ¦ Bréf vistað í Bréfaskrána
+❔ ABSENTS ET DISPARUS ¦ ❔ FJARVERANDI OG HORFNIR
+{name} : absent ou disparu ? ¦ {name}: fjarverandi eða horfinn?
+art. {a} ¦ gr. {a}
+Le calcul lit ce statut : un présumé absent est compté vivant, sa part est « réservée » ; un déclaré absent est compté comme mort avant. ¦ Útreikningurinn les þessa stöðu: sá sem talinn er fjarverandi telst á lífi, hlutur hans „frátekinn“; sá sem lýstur er fjarverandi telst látinn áður.
+Présumé absent ¦ Talinn fjarverandi
+Déclaré absent ou jugement de décès ¦ Lýstur fjarverandi eða látinn
+{name} : statut retenu changé, dévolution recalculée ¦ {name}: staða breytt, erfðir endurreiknaðar
+Héritier à retrouver : {name}{born} — vivant ? décédé ? des enfants ? (dossier de succession {n}) ¦ Erfingi að finna: {name}{born} — á lífi? látinn? börn? (dánarbúsmál {n})
+(né en {y}) ¦ (f. {y})
+Descendance de {name} (mort avant le défunt) : un enfant reconnu ou naturel ? (dossier de succession {n}) ¦ Afkomendur {name} (lést á undan arfleifanda): viðurkennt barn eða utan hjónabands? (dánarbúsmál {n})
+Branche à chercher autour de {name} (dossier de succession {n}) ¦ Grein til að leita kringum {name} (dánarbúsmál {n})
+Piste ouverte dans le Journal des recherches : {name} ¦ Slóð opnuð í Rannsóknardagbók: {name}
+Piste ajoutée : Recherche → 🗓 Journal des recherches ¦ Slóð bætt við: Rannsóknir → 🗓 Rannsóknardagbók
+🗂 TABLES DES SUCCESSIONS DES AD ¦ 🗂 DÁNARBÚASKRÁR SKJALASAFNA
+Dépouiller les tables de successions et absences ¦ Fara yfir skrár um dánarbú og fjarvistir
+Ajouter au suivi ¦ Bæta við eftirfylgni
+Les tables de successions et absences et les mutations par décès (série Q des Archives départementales) donnent la date et le bureau de chaque succession. Coche les personnes à chercher : une ligne « à faire » chacune. ¦ Skrár um dánarbú og fjarvistir og um yfirfærslur við andlát (Q-röð héraðsskjalasafna) gefa dagsetningu og skrifstofu hvers dánarbús. Hakaðu við þá sem á að leita að: ein lína „að gera“ fyrir hvern.
+Coche au moins une personne. ¦ Hakaðu við að minnsta kosti einn einstakling.
+Tables des successions et absences, mutations par décès (série Q) : {name}{d} ¦ Skrár um dánarbú og fjarvistir, yfirfærslur við andlát (Q-röð): {name}{d}
+Tables des successions : {n} à dépouiller ¦ Dánarbúaskrár: {n} til yfirferðar
+{n} ajoutés aux dépouillements ¦ Bætt við yfirferðir: {n}
+État : {s} ¦ Staða: {s}
+📋 LISTE DE CONTRÔLE ¦ 📋 GÁTLISTI
+Avant « Remis au notaire » ¦ Áður en „Afhent lögbókanda“
+Remis au notaire ¦ Afhent lögbókanda
+Remettre quand même ¦ Afhenda samt
+Tout n’est pas prêt : corrige d’abord, ou remets quand même (ce sera noté au journal). ¦ Ekki er allt tilbúið: lagaðu fyrst eða afhentu samt (það verður skráð í dagbókina).
+Les adresses des vivants seront retirées du dossier et de ses courriers. Le journal reste. Continuer ? ¦ Heimilisföng lifandi verða fjarlægð úr málinu og bréfum þess. Dagbókin helst. Halda áfram?
+Archiver ¦ Setja í skjalasafn
+Dossier archivé. ¦ Mál sett í skjalasafn.
+ÉCHÉANCE ¦ FRESTUR
+Remettre le tableau généalogique au notaire ¦ Afhenda lögbókanda ættartöfluna
+Remise au notaire ¦ Afhending til lögbókanda
+Rendez-vous ¦ Fundur
+Échéance ajoutée ¦ Fresti bætt við
+Échéance supprimée ¦ Fresti eytt
+Répertoire des vivants : « ＋ Contact », puis relie la fiche de l’héritier. ¦ Skrá yfir lifandi: „＋ Tengiliður“, tengdu svo færslu erfingjans.
+Relevé de temps et de frais — {n} ¦ Yfirlit yfir tíma og kostnað — {n}
+Arbre de dévolution — {n} ¦ Erfðatré — {n}
+Arbre de dévolution imprimé ¦ Erfðatré prentað
+Hypothèse retenue enregistrée ¦ Valin tilgáta vistuð
+Échéance faite ¦ Frestur kláraður
+Échéance à faire ¦ Frestur ókláraður
+Pièce : {s} ¦ Skjal: {s}
+Courrier mis à jour ¦ Bréf uppfært
+Rechercher les héritiers… ¦ Leita að erfingjunum…
+Pas en mode consultation. ¦ Ekki í skoðunarham.
+Les dossiers n’ont pas pu être lus. ¦ Ekki tókst að lesa málin.
+Aucun dossier en cours. ¦ Ekkert mál í gangi.
+Dossier {n} ¦ Mál {n}
+⚖️ Dossiers de succession ¦ ⚖️ Dánarbúsmál
+Signé le {d} ¦ Undirritað {d}
+Dossier de succession ¦ Dánarbúsmál
+Tous les courriers ¦ Öll bréf
+l’héritier ¦ erfinginn
+Branche paternelle : {who} ¦ Föðurgrein: {who}
+Branche maternelle : {who} ¦ Móðurgrein: {who}
+Tous les enfants sont communs : le conjoint choisit l’usufruit de tout, ou le quart en pleine propriété (art. 757). Le calcul montre le quart. ¦ Öll börnin eru sameiginleg: makinn velur afnotarétt að öllu eða fjórðung í fullri eign (gr. 757). Útreikningurinn sýnir fjórðunginn.
+Un enfant au moins n’est pas commun aux deux époux : le conjoint reçoit le quart en pleine propriété (art. 757). ¦ Að minnsta kosti eitt barn er ekki sameiginlegt hjónunum: makinn fær fjórðung í fullri eign (gr. 757).
+1er ordre : les enfants et, par représentation, les descendants d’un enfant prédécédé ou renonçant ; partage par souche (art. 735, 752, 753). ¦ 1. röð: börnin og, með staðgönguerfð, afkomendur barns sem lést áður eða afsalaði sér; skipting eftir leggjum (gr. 735, 752, 753).
+Sans descendant, avec le père et la mère : la moitié au conjoint, un quart à chaque parent (art. 757-1). ¦ Án afkomenda, með föður og móður: helmingur til maka, fjórðungur til hvors foreldris (gr. 757-1).
+Sans descendant, avec un seul parent : trois quarts au conjoint, un quart au parent (art. 757-1). ¦ Án afkomenda, með einu foreldri: þrír fjórðu til maka, fjórðungur til foreldris (gr. 757-1).
+Sans descendant ni père ni mère : le conjoint recueille toute la succession (art. 757-2). Les frères et sœurs peuvent avoir un droit de retour sur les biens de famille (art. 757-3) : à voir avec le notaire. ¦ Án afkomenda, föður og móður: makinn fær allt búið (gr. 757-2). Systkini kunna að eiga endurfallsrétt að ættareignum (gr. 757-3): kanna með lögbókanda.
+Le père et la mère ont chacun un quart, les frères et sœurs (ou leurs descendants) la moitié (art. 738). ¦ Faðir og móðir fá hvort sinn fjórðung, systkinin (eða afkomendur þeirra) helminginn (gr. 738).
+Le parent survivant a un quart, les frères et sœurs (ou leurs descendants) trois quarts (art. 738). ¦ Eftirlifandi foreldri fær fjórðung, systkinin (eða afkomendur þeirra) þrjá fjórðu (gr. 738).
+Père et mère décédés : les frères et sœurs ou leurs descendants prennent tout (art. 737). ¦ Faðir og móðir látin: systkinin eða afkomendur þeirra fá allt (gr. 737).
+Frères et sœurs germains, consanguins ou utérins : parts égales, par souche (art. 744, 752-2, 753 ; loi du 3 décembre 2001). ¦ Alsystkini og hálfsystkini samfeðra eða sammæðra: jafnir hlutir, eftir leggjum (gr. 744, 752-2, 753; lög frá 3. desember 2001).
+Sans descendant ni frère ni sœur : le père et la mère ont chacun la moitié (art. 736). ¦ Án afkomenda og systkina: faðir og móðir fá hvort sinn helming (gr. 736).
+Un seul parent, sans frère ni sœur, mais des ascendants dans l’autre branche : moitié au parent, moitié à ces ascendants (art. 738-1). ¦ Aðeins eitt foreldri, engin systkini, en forfeður í hinni greininni: helmingur til foreldris, helmingur til þessara forfeðra (gr. 738-1).
+Le parent survivant, seul de son ordre, recueille la succession. ¦ Eftirlifandi foreldri, eitt í sinni röð, fær búið.
+3e ordre : moitié pour chaque branche ; dans chacune, l’ascendant le plus proche prend tout (art. 747-748). ¦ 3. röð: helmingur til hvorrar greinar; í hvorri fær nánasti forfaðir allt (gr. 747-748).
+3e ordre : une seule branche a encore un ascendant ; il recueille toute la succession, même les cousins de l’autre branche sont écartés (art. 748). ¦ 3. röð: aðeins önnur greinin á enn forföður; hann fær allt búið, jafnvel frændsystkin hinnar greinarinnar eru útilokuð (gr. 748).
+4e ordre : moitié pour chaque branche ; dans chacune, le collatéral le plus proche en degré prend tout, sans représentation (art. 749-750). ¦ 4. röð: helmingur til hvorrar greinar; í hvorri fær liðnánasti hliðarættingi allt, án staðgönguerfðar (gr. 749-750).
+4e ordre : personne dans une branche, l’autre branche recueille tout (art. 750). ¦ 4. röð: enginn í annarri greininni, hin greinin fær allt (gr. 750).
+Les collatéraux ne succèdent pas au-delà du 6e degré (art. 745). ¦ Hliðarættingjar erfa ekki fjarlægar en 6. lið (gr. 745).
+Le défunt n’est pas dans la base. ¦ Hinn látni er ekki í gagnagrunninum.
+si {name} n’était pas marié avec le défunt (PACS ou union libre) ¦ ef {name} var ekki giftur hinum látna (PACS eða sambúð)
+si {name} est mort avant, représenté par ses descendants ¦ ef {name} lést áður, fyrir hönd afkomenda sinna
+si {name} est mort avant sans descendant ¦ ef {name} lést áður án afkomenda
+Enfants et descendants, avec représentation ¦ Börn og afkomendur, með staðgönguerfð
+Père et mère, frères et sœurs et leurs descendants (« parents privilégiés ») ¦ Faðir og móðir, systkini og afkomendur þeirra („forréttindaættingjar“)
+Autres ascendants (grands-parents…), fente paternelle / maternelle ¦ Aðrir forfeður (afar og ömmur…), skipting föður- / móðurgreinar
+Oncles, tantes, cousins… jusqu’au 6e degré (art. 745) ¦ Föðurbræður, frænkur, frændsystkin… upp að 6. lið (gr. 745)
+Vivant au décès ? Mort avant ? Des enfants ? Sa réponse change la part des autres. ¦ Á lífi við andlátið? Lést áður? Börn? Svarið breytir hlut annarra.
+Mort avant le défunt, sans descendance connue : un enfant, même reconnu tard, changerait le partage. ¦ Lést á undan arfleifanda, engir þekktir afkomendur: barn, jafnvel seint viðurkennt, myndi breyta skiptingunni.
+Aucun enfant du défunt dans la base : à vérifier (mentions en marge de l’acte de naissance, livret de famille). ¦ Engin börn hins látna í gagnagrunninum: kanna (spássíufærslur á fæðingarvottorði, fjölskyldubók).
+Les parents du défunt ne sont pas dans la base : sans eux, l’app ne trouve ni frères, ni sœurs, ni cousins. ¦ Foreldrar hins látna eru ekki í gagnagrunninum: án þeirra finnur forritið hvorki systkini né frændsystkin.
+Un seul parent du défunt est dans la base : l’autre branche reste à chercher. ¦ Aðeins annað foreldri hins látna er í gagnagrunninum: hina greinina þarf enn að leita.
+Adoption : plénière ou simple ? Une adoption plénière coupe les liens avec la famille d’origine. ¦ Ættleiðing: full eða einföld? Full ættleiðing rýfur tengslin við upprunafjölskylduna.
+Couple sans mariage noté : seul un conjoint marié hérite sans testament (pas le partenaire de PACS ni le concubin). ¦ Par án skráðs hjónabands: án erfðaskrár erfir aðeins giftur maki (ekki PACS-sambúðaraðili né sambýlingur).
+Un seul parent noté : relie sa fiche à son autre parent (frère germain ou demi-frère). ¦ Aðeins annað foreldri skráð: tengdu færsluna við hitt foreldrið (alsystkini eða hálfsystkini).
+Personne dans la branche paternelle jusqu’au 6e degré : oncles, tantes et cousins du père à chercher. ¦ Enginn í föðurgrein upp að 6. lið: leita þarf föðurbræðra, föðursystra og frændsystkina föður.
+Personne dans la branche maternelle jusqu’au 6e degré : oncles, tantes et cousins de la mère à chercher. ¦ Enginn í móðurgrein upp að 6. lið: leita þarf móðurbræðra, móðursystra og frændsystkina móður.
+Vivant, mais pas d’adresse dans le Répertoire des vivants. ¦ Á lífi, en ekkert heimilisfang í Skrá yfir lifandi.
+Mort après le défunt : sa part passe à ses propres héritiers (sa succession à lui). ¦ Lést eftir arfleifanda: hlutur hans fer til hans eigin erfingja (hans eigið dánarbú).
+Présumé absent : sa part est réservée (art. 112 à 132). ¦ Talinn fjarverandi: hlutur hans er frátekinn (gr. 112 til 132).
+Date du décès inconnue : l’app ne peut pas dire qui était mort avant ni quel droit s’applique. ¦ Dánardagur óþekktur: forritið getur ekki sagt hver lést fyrst né hvaða réttur gildir.
+Décès du {date} : le droit de l’époque n’est pas celui d’aujourd’hui. Avant le 1er juillet 2002 (loi du 3 décembre 2001), le conjoint survivant avait surtout de l’usufruit, les enfants nés hors mariage n’avaient pas tous les mêmes droits et les frères et sœurs de lits différents se partageaient par lignes. Avant le 1er août 1972, les enfants naturels avaient des droits réduits. L’app calcule ici selon le droit actuel : le notaire applique le droit de la date. ¦ Andlát {date}: réttur þess tíma er ekki réttur dagsins í dag. Fyrir 1. júlí 2002 (lög frá 3. desember 2001) hafði eftirlifandi maki einkum afnotarétt, börn fædd utan hjónabands höfðu ekki öll sömu réttindi og systkini úr ólíkum hjónaböndum skiptu eftir línum. Fyrir 1. ágúst 1972 höfðu börn utan hjónabands skert réttindi. Forritið reiknar hér samkvæmt gildandi rétti: lögbókandi beitir rétti dagsetningarinnar.
+Décès avant le 1er janvier 2007 (loi du 23 juin 2006) : on ne pouvait pas représenter un héritier qui avait renoncé. ¦ Andlát fyrir 1. janúar 2007 (lög frá 23. júní 2006): ekki var hægt að koma í stað erfingja sem hafði afsalað sér.
+Décès en 2002 sans date précise : avant ou après le 1er juillet 2002, le droit change. Précise la date. ¦ Andlát árið 2002 án nákvæmrar dagsetningar: rétturinn er annar fyrir og eftir 1. júlí 2002. Tilgreindu dagsetninguna.
+Divorce ¦ Skilnaður
+La naissance de {name} ¦ Fæðing {name}
+Le décès de {name} ¦ Andlát {name}
+Le mariage avec {name}, non dissous ¦ Hjónaband með {name}, ekki slitið
+Le divorce d’avec {name} ¦ Skilnaður frá {name}
+Pas de conjoint survivant : décès de {name} ¦ Enginn eftirlifandi maki: andlát {name}
+{name} est mort avant ¦ {name} lést áður
+Commun à tous ¦ Sameiginlegt öllum
+{name} a renoncé à la succession ¦ {name} afsalaði sér arfinum
+{name} est mort avant (représenté) ¦ {name} lést áður (staðgengill)
+Son nom d’épouse ¦ Hennar gifta nafn
+{name} (pour l’écarter) ¦ {name} (til að útiloka)
+Mort avant le défunt, sans enfant ¦ Lést á undan arfleifanda, barnlaus
+Chaque héritier a ses actes : il en manque pour {who}. ¦ Hver erfingi hefur sín skjöl: vantar fyrir {who}.
+Chaque héritier a ses actes. ¦ Hver erfingi hefur sín skjöl.
+Chaque prédécédé a son acte de décès : {n} manquent. ¦ Hver sem lést áður hefur dánarvottorð: {n} vantar.
+Chaque prédécédé a son acte de décès. ¦ Hver sem lést áður hefur dánarvottorð.
+Les branches inconnues ont une explication. ¦ Óþekktu greinarnar hafa skýringu.
+{n} héritiers ou branches restent « inconnus » sans explication. ¦ „Óþekktir“ erfingjar eða greinar án skýringar: {n}.
+Aucune branche « inconnue ». ¦ Engin „óþekkt“ grein.
+L’hypothèse retenue est écrite. ¦ Valda tilgátan er skrifuð.
+Plusieurs hypothèses : écris celle qui est retenue. ¦ Margar tilgátur: skrifaðu hver er valin.
+Une seule hypothèse. ¦ Ein tilgáta.
+Les parts totalisent 1. ¦ Hlutirnir eru samtals 1.
+Les parts ne totalisent pas 1 : à revoir. ¦ Hlutirnir eru ekki samtals 1: þarf að yfirfara.
+La date du décès demande l’avis du notaire (droit de l’époque ou date inconnue). ¦ Dánardagurinn krefst álits lögbókanda (réttur þess tíma eða óþekkt dagsetning).
+{name} ajouté (statut inconnu) ¦ {name} bætt við (staða óþekkt)
+{name} ajouté ({share}) ¦ {name} bætt við ({share})
+{name} : {from} → {to} ¦ {name}: {from} → {to}
+{name} retiré ¦ {name} fjarlægður
+Ordre retenu : {from} → {to} ¦ Valin röð: {from} → {to}
+descendante à la {n}e génération ¦ afkomandi í {n}. lið
+descendant à la {n}e génération ¦ afkomandi í {n}. lið
+ascendante à la {n}e génération ¦ formóðir í {n}. lið
+ascendant à la {n}e génération ¦ forfaðir í {n}. lið
+parente au {n}e degré ¦ ættingi í {n}. lið
+parent au {n}e degré ¦ ættingi í {n}. lið
+petit-fils ¦ barnabarn (drengur)
+petite-fille ¦ barnabarn (stúlka)
+arrière-petit-fils ¦ barnabarnabarn (drengur)
+arrière-petite-fille ¦ barnabarnabarn (stúlka)
+arrière-arrière-petit-fils ¦ barnabarnabarnabarn (drengur)
+arrière-arrière-petite-fille ¦ barnabarnabarnabarn (stúlka)
+nièce ¦ bróðurdóttir / systurdóttir
+petit-neveu ¦ systkinabarnabarn (drengur)
+petite-nièce ¦ systkinabarnabarn (stúlka)
+arrière-petit-neveu ¦ systkinabarnabarnabarn (drengur)
+arrière-petite-nièce ¦ systkinabarnabarnabarn (stúlka)
+arrière-arrière-petit-neveu ¦ systkinabarnabarnabarnabarn (drengur)
+arrière-arrière-petite-nièce ¦ systkinabarnabarnabarnabarn (stúlka)
+cousin germain ¦ systkinabarn (frændi)
+cousine germaine ¦ systkinabarn (frænka)
+fils de cousin germain ¦ sonur systkinabarns
+fille de cousin germain ¦ dóttir systkinabarns
+petit-fils de cousin germain ¦ sonarsonur systkinabarns
+petite-fille de cousin germain ¦ sonardóttir systkinabarns
+grand-oncle ¦ afabróðir / ömmubróðir
+grand-tante ¦ afasystir / ömmusystir
+cousin germain d’un parent ¦ systkinabarn foreldris (frændi)
+cousine germaine d’un parent ¦ systkinabarn foreldris (frænka)
+cousin issu de germains ¦ þremenningur
+cousine issue de germains ¦ þremenningur
+arrière-grand-oncle ¦ langafabróðir
+arrière-grand-tante ¦ langafasystir
+cousin germain d’un grand-parent ¦ systkinabarn afa eða ömmu (frændi)
+cousine germaine d’un grand-parent ¦ systkinabarn afa eða ömmu (frænka)
+arrière-arrière-grand-oncle ¦ langalangafabróðir
+arrière-arrière-grand-tante ¦ langalangafasystir
+frère germain ¦ albróðir
+sœur germaine ¦ alsystir
+demi-frère (même père) ¦ hálfbróðir (samfeðra)
+demi-sœur (même père) ¦ hálfsystir (samfeðra)
+demi-frère (même mère) ¦ hálfbróðir (sammæðra)
+demi-sœur (même mère) ¦ hálfsystir (sammæðra)
+Père, mère, enfant ¦ Faðir, móðir, barn
+Frère, sœur, grand-parent, petit-enfant ¦ Bróðir, systir, afi eða amma, barnabarn
+Neveu, nièce, oncle, tante ¦ Bróðursonur, systurdóttir, frændi, frænka
+Cousin germain, petit-neveu, grand-oncle ¦ Systkinabarn, systkinabarnabarn, afabróðir
+Enfant de cousin germain ¦ Barn systkinabarns
+Cousin issu de germains (limite) ¦ Þremenningur (mörk)
+Présomption d’absence : le juge des tutelles la constate quand une personne a cessé de paraître sans donner de nouvelles. Elle est réputée vivante ; sa part est réservée et gérée. ¦ Ætluð fjarvist: dómstóll staðfestir hana þegar einstaklingur hættir að láta sjá sig án þess að gefa fréttir. Hann telst á lífi; hlutur hans er frátekinn og honum stjórnað.
+Déclaration d’absence : 10 ans après le jugement de présomption (ou 20 ans sans nouvelles), le tribunal judiciaire la déclare ; le jugement a les effets d’un décès. ¦ Yfirlýsing um fjarvist: 10 árum eftir úrskurð um ætlaða fjarvist (eða 20 árum án frétta) lýsir dómstóll henni yfir; úrskurðurinn hefur áhrif andláts.
+Jugement déclaratif de décès : pour une disparition dans des circonstances qui mettent la vie en danger (naufrage, catastrophe), sans attendre. ¦ Úrskurður um að einstaklingur teljist látinn: við hvarf við lífshættulegar aðstæður (skipsskaði, slys), án biðar.
+Service central d’état civil (Nantes) : les actes des Français nés, mariés ou morts à l’étranger. ¦ Miðlæg þjóðskrá (Nantes): skjöl Frakka sem fæddust, giftust eða létust erlendis.
+Le consulat de France du pays : registres d’immatriculation, actes transcrits récents. ¦ Franska ræðismannsskrifstofan í landinu: ræðismannaskrár, nýlega yfirfærð skjöl.
+L’état civil du pays (mairie, registro civil, Standesamt…) : lettre dans la langue du pays. ¦ Þjóðskrá landsins (ráðhús, registro civil, Standesamt…): bréf á tungumáli landsins.
+Archives nationales d’outre-mer (Aix-en-Provence) : colonies et Algérie avant 1962. ¦ Þjóðskjalasafn handan hafsins (Aix-en-Provence): nýlendur og Alsír fyrir 1962.
+Ouvert ¦ Opnað
+En recherche ¦ Í leit
+Héritiers trouvés ¦ Erfingjar fundnir
+Clos ¦ Lokað
+📁 Dossier ¦ 📁 Mál
+👥 Héritiers ¦ 👥 Erfingjar
+🌳 Arbre ¦ 🌳 Tré
+✉️ Héritiers contactés ¦ ✉️ Erfingjar sem haft var samband við
+🖨 Pour le notaire ¦ 🖨 Fyrir lögbókanda
+🕓 Journal ¦ 🕓 Dagbók
+💶 Temps et frais ¦ 💶 Tími og kostnaður
+Décédé après ¦ Lést síðar
+Décédée après ¦ Lést síðar
+Renonce ¦ Afsalar sér
+Indigne ¦ Óverðugur
+Absent ¦ Fjarverandi
+Absente ¦ Fjarverandi
+Pas encore conçu ¦ Ekki enn getinn
+Pas encore conçue ¦ Ekki enn getin
+Comme sur la fiche ¦ Eins og í færslu
+Vivant au décès ¦ Á lífi við andlátið
+Mort avant le défunt ¦ Lést á undan arfleifanda
+Mort après le défunt ¦ Lést eftir arfleifanda
+Renonce à la succession ¦ Afsalar sér arfinum
+Déclaré absent ¦ Lýstur fjarverandi
+Refuse ¦ Hafnar
+Rappellera ¦ Hringir aftur
+✓ En main ¦ ✓ Í hendi
+📮 Demandé ¦ 📮 Pantað
+✗ Manquant ¦ ✗ Vantar
+Sans objet ¦ Á ekki við
+⏱ Temps ¦ ⏱ Tími
+🧾 Frais ¦ 🧾 Kostnaður
+📝 Contrat ¦ 📝 Samningur
+02 — HÉRITIERS ¦ 02 — ERFINGJAR
+Généalogiste successoral ¦ Erfðaættfræðingur
+Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ Finna erfingja látins einstaklings fyrir lögbókanda.
++ ⚖️ Successions. Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Dánarbú. Fyrsti skjár: „Opna mál“.
+⚖️ Successions, 📇 Vivants, 📮 Courriers. ¦ ⚖️ Dánarbú, 📇 Lifandi, 📮 Bréf.
+⚖️ Successions ¦ ⚖️ Dánarbú
+Vivants ¦ Lifandi
+Courriers ¦ Bréf
+Échéance le {date} ¦ Frestur {date}
+Pour quel héritier ? ¦ Fyrir hvaða erfingja?
+Lettre à un héritier ¦ Bréf til erfingja
+ne révèle pas le défunt avant signature ; honoraires et date limite à écrire ¦ upplýsir ekki um hinn látna fyrir undirritun; þóknun og frestur fylltur út
+premier contact, sans nommer le défunt ¦ fyrstu samskipti, án þess að nefna hinn látna
+Il y a déjà un dossier pour cette personne. ¦ Það er þegar til mál fyrir þennan einstakling.
+Date d’ouverture incorrecte. ¦ Röng opnunardagsetning.
+Notaire introuvable. ¦ Lögbókandi fannst ekki.
+Passe d’abord par la liste de contrôle avant « Remis au notaire ». ¦ Farðu fyrst í gegnum gátlistann áður en „Afhent lögbókanda“.
+Ce dossier est archivé. ¦ Þetta mál er í skjalasafni.
+Valeur inconnue. ¦ Óþekkt gildi.
+Pièce inconnue. ¦ Óþekkt skjal.
+Choisis la date de l’échéance. ¦ Veldu dagsetningu frests.
+Écris ce qu’il faut faire. ¦ Skrifaðu hvað þarf að gera.
+Échéance introuvable. ¦ Frestur fannst ekki.
+Date incorrecte. ¦ Röng dagsetning.
+Le pourcentage va de 0 à 100. ¦ Hlutfallið er frá 0 til 100.
+Combien de temps ? ¦ Hversu lengi?
+Choisis l’héritier. ¦ Veldu erfingjann.
+Date de signature incorrecte. ¦ Röng undirritunardagsetning.
+Seul un dossier clos peut être archivé. ¦ Aðeins lokað mál má setja í skjalasafn.
+Mode consultation : les dossiers de succession ne se montrent pas. ¦ Skoðunarhamur: dánarbúsmál eru ekki sýnd.
+Rien à noter. ¦ Ekkert að skrá.
+Calcul manquant. ¦ Útreikning vantar.
+Dévolution ¦ Erfðaröð
+=héritier ¦ erfingi|erfingjar
+=courrier ¦ bréf|bréf
+=dépouillement ¦ yfirferð|yfirferðir
+=dossier en cours ¦ opið mál|opin mál
+=dossier de succession ¦ dánarbúsmál|dánarbúsmál

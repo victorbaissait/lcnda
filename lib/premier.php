@@ -78,7 +78,7 @@ function premier_clean_settings($raw): array
     return $out;
 }
 
-const PREMIER_USAGES = ['genealogie', 'lignee', 'recensement', 'maison', 'artiste', 'archives', 'nom', 'entreprise', 'souvenirs'];
+const PREMIER_USAGES = ['genealogie', 'lignee', 'recensement', 'maison', 'artiste', 'archives', 'nom', 'entreprise', 'souvenirs', 'successoral'];
 
 function premier_dispatch(string $action, array $data): array
 {

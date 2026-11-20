@@ -6,7 +6,7 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  * 1. La base d'exemple fabriquée par scripts/exemple-base.php : 35 à 50 personnes sur 5 générations, AUCUNE naissance
  *    après 1950, aucun vivant, tout le monde a son décès, lieux réels avec coordonnées, photos, sources, notes,
  *    un recensement ; deux fabrications donnent la même base.
- * 2. Base vide (vrai « php -S ») : l'écran montre « Je veux faire autre chose ▾ », 9 usages au clavier, Échap replie ;
+ * 2. Base vide (vrai « php -S ») : l'écran montre « Je veux faire autre chose ▾ », 10 usages au clavier, Échap replie ;
  *    « 🎨 Catalogue » + « Commencer avec une base vide » → les onglets de l'usage, le premier écran, la visite proposée ;
  *    plus jamais l'écran ensuite ; Réglages → Apparence → « 🧭 Usage de l'app » (combiner, le dernier ne s'éteint pas) ;
  *    « 🧪 Essayer avec une base d'exemple » → une généalogie à part avec son bandeau, rien d'écrit dans la vraie base,
@@ -104,14 +104,14 @@ async function server(dir) {
     const d1 = tmp('vide'); dirs.push(d1);
     const b1 = await server(d1);
     const page = await newPage(b1);
-    await t('écran d’installation : lien discret replié, 9 usages, « 🌳 Ma généalogie » choisie d’office', async () => {
+    await t('écran d’installation : lien discret replié, 10 usages, « 🌳 Ma généalogie » choisie d’office', async () => {
         await page.waitForSelector('.pl-other');
         assert.equal(await page.evaluate(() => window.GENEALOGY_READY), false);
         assert.equal(await page.isVisible('#pl-fold'), false);
         assert.match(await page.textContent('#install-import-form button[type=submit]'), /⤒ Importer/);
         assert.equal(await page.getAttribute('#install-import-form', 'data-k-import'), '');
         await page.click('.pl-other');
-        assert.equal(await page.locator('[data-pl-usage]').count(), 9);
+        assert.equal(await page.locator('[data-pl-usage]').count(), 10); // + ⚖️ Généalogiste successoral
         assert.equal(await page.getAttribute('[data-pl-usage].is-on', 'data-pl-usage'), 'genealogie');
         assert.ok(await page.isVisible('[data-pl-example]') && await page.isVisible('[data-pl-empty-any]'));
         if (shots) await page.screenshot({path: path.join(shots, 'premier-1440.png'), fullPage: true});
@@ -133,6 +133,7 @@ async function server(dir) {
         await booted(page); await page.waitForTimeout(1200);
         const tabs = await visibleTabs(page);
         assert.ok(tabs.includes('catalogue') && tabs.includes('personnes') && !tabs.includes('animaux'), tabs.join(','));
+        await page.waitForFunction(() => window.LCNDA_APP.state.module === 'catalogue', null, {timeout: 6000}).catch(() => {}); // premier écran : posé un peu après le démarrage
         assert.equal(await page.evaluate(() => window.LCNDA_APP.state.module), 'catalogue');
         const tour = await page.evaluate(() => typeof window.LCNDA_APP.offerTour);
         if (tour === 'function') assert.match(await page.textContent('body'), /petite visite/i, 'la visite est proposée à la fin du premier lancement');
@@ -167,10 +168,10 @@ async function server(dir) {
         tabs = await visibleTabs(page);
         assert.ok(tabs.includes('personnes') && !tabs.includes('animaux'), tabs.join(','));
     });
-    await t('« 🧭 Revoir le premier lancement » : la fenêtre, ses 9 usages, « Enregistrer » avec ↶ Annuler', async () => {
+    await t('« 🧭 Revoir le premier lancement » : la fenêtre, ses 10 usages, « Enregistrer » avec ↶ Annuler', async () => {
         await page.evaluate(() => window.LCNDA_EXT.premierLancement.open());
         await page.waitForSelector('#pl-dialog [data-pl-usage]');
-        assert.equal(await page.locator('#pl-dialog [data-pl-usage]').count(), 9);
+        assert.equal(await page.locator('#pl-dialog [data-pl-usage]').count(), 10);
         await page.click('#pl-dialog [data-pl-usage="souvenirs"]');
         await page.click('#pl-dialog button[type=submit]');
         await page.waitForTimeout(400);

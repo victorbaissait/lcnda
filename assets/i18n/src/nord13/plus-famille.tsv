@@ -1,0 +1,218 @@
+fr ¦ el ¦ bg
+# Zone « plus-famille » : 💌 lettre de famille, 🛡 fiabilité par personne, 🖊 relecture d’une branche, 🌐 traduire un acte latin (assets/js/plus-famille*.js, lib/plus_famille.php)
+Fiabilité : {n} sur 100 ¦ Αξιοπιστία: {n} στα 100 ¦ Надеждност: {n} от 100
+🛡 Fiabilité ¦ 🛡 Αξιοπιστία ¦ 🛡 Надеждност
+Calcul de la note… ¦ Υπολογισμός βαθμού… ¦ Изчисляване на оценката…
+Comment la note est calculée ¦ Πώς υπολογίζεται ο βαθμός ¦ Как се изчислява оценката
+? Comment c’est calculé ¦ ? Πώς υπολογίζεται ¦ ? Как се изчислява
+en doute : {what} ¦ αμφίβολο: {what} ¦ съмнително: {what}
+date estimée : {what} ¦ εκτιμώμενη ημερομηνία: {what} ¦ приблизителна дата: {what}
+aucun fait noté (naissance, mariage, décès…) ¦ κανένα γεγονός (γέννηση, γάμος, θάνατος…) ¦ няма записани факти (раждане, брак, смърт…)
+sans source : {what} ¦ χωρίς πηγή: {what} ¦ без източник: {what}
+une source sur la fiche, mais sur aucun fait ¦ πηγή στην καρτέλα, αλλά σε κανένα γεγονός ¦ източник в картона, но при нито един факт
+aucune source ¦ καμία πηγή ¦ няма източници
+{who} : lien {lvl} ¦ {who}: σύνδεση {lvl} ¦ {who}: връзка {lvl}
+pas de parents dans la base : cette part ne compte pas ¦ κανένας γονιός στη βάση: αυτό το μέρος δεν μετρά ¦ няма родители в базата: тази част не се брои
+ajouter une source à : {what} ¦ προσθήκη πηγής σε: {what} ¦ добавяне на източник към: {what}
+vérifier {what}, marqué « doute » ¦ έλεγχος: {what}, σημειωμένο «αμφίβολο» ¦ проверка на {what}, отбелязано „съмнение“
+confirmer le lien avec {name} (⚖️ dossier de preuve) ¦ επιβεβαίωση σύνδεσης με {name} (⚖️ φάκελος απόδειξης) ¦ потвърждаване на връзката с {name} (⚖️ доказателствено досие)
+ajouter ses faits (naissance, mariage, décès) avec leur source ¦ προσθήκη γεγονότων (γέννηση, γάμος, θάνατος) με πηγή ¦ добавяне на фактите (раждане, брак, смърт) с източник
+sur 100 ¦ στα 100 ¦ от 100
+À revoir avant publication ¦ Για έλεγχο πριν από τη δημοσίευση ¦ За преглед преди публикуване
+(vivant ou fiche confidentielle : ne part pas à la publication) ¦ (εν ζωή ή εμπιστευτική καρτέλα: δεν δημοσιεύεται) ¦ (жив или поверителен картон: не се публикува)
+Seuil « à revoir » : {n} ¦ Όριο «για έλεγχο»: {n} ¦ Праг „за преглед“: {n}
+Pour gagner des points : ¦ Για να κερδίσεις πόντους: ¦ За да спечелиш точки:
+La note n’est pas le score de complétude (qui compte ce qui est rempli) : une fiche peut être bien remplie et peu sûre. ¦ Ο βαθμός δεν είναι η πληρότητα (που μετρά τι έχει συμπληρωθεί): μια καρτέλα μπορεί να είναι πλήρης αλλά αναξιόπιστη. ¦ Оценката не е пълнотата (тя брои попълненото): картонът може да е добре попълнен, но ненадежден.
+Calcul impossible. ¦ Ο υπολογισμός δεν είναι δυνατός. ¦ Изчислението е невъзможно.
+🛡 FIABILITÉ ¦ 🛡 ΑΞΙΟΠΙΣΤΙΑ ¦ 🛡 НАДЕЖДНОСТ
+Trois parts, sur 100 chacune, puis une moyenne : ¦ Τρία μέρη, το καθένα στα 100, και μετά μέσος όρος: ¦ Три части, всяка от 100, после средно:
+Ses faits (40 %) ¦ Τα γεγονότα (40%) ¦ Фактите (40 %)
+la fiabilité de chaque fait : certain 100, déduit 80, estimé 55, doute 15, non évalué 60 ; une date « vers… », « avant… » compte comme estimée. ¦ η αξιοπιστία κάθε γεγονότος: βέβαιο 100, συναγόμενο 80, εκτιμώμενο 55, αμφίβολο 15, αξιολόγητο 60· ημερομηνία «περίπου…», «πριν…» μετρά ως εκτιμώμενη. ¦ надеждността на всеки факт: сигурно 100, изведено 80, приблизително 55, съмнение 15, неоценено 60; дата „около…“, „преди…“ се брои за приблизителна.
+Ses sources (35 %) ¦ Οι πηγές (35%) ¦ Източниците (35 %)
+la part des faits qui ont une source citée ou un acte en image. ¦ το ποσοστό γεγονότων με πηγή ή εικόνα πράξης. ¦ делът на фактите с цитиран източник или образ на акт.
+Ses liens (25 %) ¦ Οι συνδέσεις (25%) ¦ Връзките (25 %)
+la solidité du lien avec chaque parent : prouvé 100, probable 75, supposé 45, sans source 20, réfuté 0. Sans parents dans la base, cette part ne compte pas. ¦ η ισχύς της σύνδεσης με κάθε γονιό: αποδεδειγμένη 100, πιθανή 75, υποτιθέμενη 45, χωρίς πηγή 20, διαψευσμένη 0. Χωρίς γονείς στη βάση, αυτό το μέρος δεν μετρά. ¦ здравината на връзката с всеки родител: доказана 100, вероятна 75, предполагаема 45, без източник 20, опровергана 0. Без родители в базата тази част не се брои.
+Sous le seuil (50 au départ), la fiche est « à revoir avant publication ». Le seuil se règle dans Réglages → ⚙️ Seuils du contrôle. ¦ Κάτω από το όριο (αρχικά 50) η καρτέλα είναι «για έλεγχο πριν από τη δημοσίευση». Το όριο ρυθμίζεται στις Ρυθμίσεις → ⚙️ Όρια ελέγχου. ¦ Под прага (първоначално 50) картонът е „за преглед преди публикуване“. Прагът се настройва в Настройки → ⚙️ Прагове на проверката.
+Rien n’est changé dans ta base : la note est recalculée dès qu’un fait ou une source change. ¦ Τίποτα δεν αλλάζει στη βάση σου: ο βαθμός ξαναϋπολογίζεται μόλις αλλάξει γεγονός ή πηγή. ¦ В базата нищо не се променя: оценката се преизчислява щом се промени факт или източник.
+{day} : {first}, {age} ¦ {day}: {first}, {age} ¦ {day}: {first}, {age}
+{day} : il y a {n} ans, {a} et {b} se mariaient ¦ {day}: πριν από {n} χρόνια παντρεύτηκαν οι {a} και {b} ¦ {day}: преди {n} години се венчаха {a} и {b}
+{day} : il y a {n} ans naissait {name} ¦ {day}: πριν από {n} χρόνια γεννήθηκε ο/η {name} ¦ {day}: преди {n} години е роден(а) {name}
+{what} dans l’arbre : {list} ¦ {what} στο δέντρο: {list} ¦ {what} в дървото: {list}
+Nouveau dans les médias : « {title} » ¦ Νέο στα πολυμέσα: «{title}» ¦ Ново в медиите: „{title}“
+La lettre des {nm} ¦ Η επιστολή της οικογένειας {nm} ¦ Писмото на семейство {nm}
+Bonjour à tous ! Voici les nouvelles de la famille ce mois-ci. ¦ Γεια σε όλους! Ιδού τα νέα της οικογένειας αυτόν τον μήνα. ¦ Здравейте на всички! Ето новините на семейството този месец.
+Photo : {title} ¦ Φωτογραφία: {title} ¦ Снимка: {title}
+Les anniversaires du mois ¦ Οι επέτειοι του μήνα ¦ Годишнините на месеца
+Pas d’anniversaire ce mois-ci. ¦ Καμία επέτειος αυτόν τον μήνα. ¦ Този месец няма годишнини.
+Les dernières découvertes ¦ Οι τελευταίες ανακαλύψεις ¦ Последните открития
+Rien de nouveau ce mois-ci : à vous de m’envoyer vos souvenirs ! ¦ Τίποτα καινούργιο αυτόν τον μήνα: σειρά σας να μου στείλετε τις αναμνήσεις σας! ¦ Нищо ново този месец: ваш ред е да ми изпратите спомените си!
+L’ancêtre à l’honneur ¦ Ο πρόγονος του μήνα ¦ Прародителят на фокус
+Avec toute mon affection, ¦ Με όλη μου την αγάπη, ¦ С обич,
+Ce qu’on y met ¦ Τι περιλαμβάνει ¦ Какво влиза
+🖼 Changer ¦ 🖼 Αλλαγή ¦ 🖼 Смяна
+Tout se retouche dans la lettre (clique sur un texte). Les personnes vivantes n’y figurent que par leur prénom et leur âge ; les fiches confidentielles jamais. ¦ Όλα διορθώνονται στην επιστολή (κάνε κλικ σε κείμενο). Οι ζωντανοί εμφανίζονται μόνο με το όνομα και την ηλικία · οι εμπιστευτικές καρτέλες ποτέ. ¦ Всичко се поправя в писмото (щракни върху текст). Живите са само с име и възраст, поверителните картони – никога.
+Je remplis la lettre… ¦ Συμπληρώνεται η επιστολή… ¦ Попълвам писмото…
+Lettre refaite avec les nouveaux choix ¦ Η επιστολή ξαναγράφτηκε με τις νέες επιλογές ¦ Писмото е преработено с новите избори
+LETTRE DE FAMILLE ¦ ΟΙΚΟΓΕΝΕΙΑΚΗ ΕΠΙΣΤΟΛΗ ¦ СЕМЕЙНО ПИСМО
+La photo de la lettre ¦ Η φωτογραφία της επιστολής ¦ Снимката на писмото
+Lettre de famille ¦ Οικογενειακή επιστολή ¦ Семейно писмо
+La lettre du mois remplie toute seule : anniversaires, dernières découvertes, une photo, un ancêtre à l’honneur. Tout se retouche. ¦ Η επιστολή του μήνα συμπληρώνεται μόνη της: επέτειοι, τελευταίες ανακαλύψεις, μια φωτογραφία, ένας πρόγονος. Όλα διορθώνονται. ¦ Писмото на месеца се попълва само: годишнини, последни открития, снимка, прародител на фокус. Всичко се поправя.
+Lettre gardée : « {title} » (Listes → Lettres de famille) ¦ Η επιστολή φυλάχτηκε: «{title}» (Λίστες → Οικογενειακές επιστολές) ¦ Писмото е запазено: „{title}“ (Списъци → Семейни писма)
+💾 Garder ¦ 💾 Φύλαξη ¦ 💾 Запази
+Ranger la lettre dans Listes → Lettres de famille ¦ Αρχειοθέτηση στις Λίστες → Οικογενειακές επιστολές ¦ Прибери писмото в Списъци → Семейни писма
+PDF ¦ PDF ¦ PDF
+par la fenêtre « Imprimer » (⤓ PDF) ¦ από το παράθυρο «Εκτύπωση» (⤓ PDF) ¦ през прозореца „Печат“ (⤓ PDF)
+Image (PNG) ¦ Εικόνα (PNG) ¦ Изображение (PNG)
+Ouvre ta messagerie avec la lettre déjà écrite : rien n’est envoyé par l’app ¦ Ανοίγει το email με την επιστολή έτοιμη: η εφαρμογή δεν στέλνει τίποτα ¦ Отваря пощата с готовото писмо: приложението не изпраща нищо
+📝 Retoucher ¦ 📝 Επεξεργασία ¦ 📝 Поправи
+Ouvrir la lettre dans le traitement de texte ¦ Άνοιγμα στον επεξεργαστή κειμένου ¦ Отвори писмото в текстовия редактор
+Chers cousins, chères cousines, ¦ Αγαπητά ξαδέρφια, ¦ Мили братовчеди,
+Ce que j’ai trouvé ce mois-ci… ¦ Τι βρήκα αυτόν τον μήνα… ¦ Какво открих този месец…
+Si vous avez des photos, des lettres ou des souvenirs, je serais très heureux de les voir ! ¦ Αν έχετε φωτογραφίες, γράμματα ή αναμνήσεις, θα χαρώ πολύ να τις δω! ¦ Ако имате снимки, писма или спомени, ще се радвам много да ги видя!
+Je vous embrasse, ¦ Σας φιλώ, ¦ Прегръщам ви,
+📋 Voir dans Listes › Lettres de famille ¦ 📋 Προβολή στις Λίστες › Οικογενειακές επιστολές ¦ 📋 Виж в Списъци › Семейни писма
+remplie toute seule : anniversaires du mois, découvertes, photo, ancêtre ¦ συμπληρώνεται μόνη: επέτειοι του μήνα, ανακαλύψεις, φωτογραφία, πρόγονος ¦ попълва се само: годишнини на месеца, открития, снимка, прародител
+Lettres de famille ¦ Οικογενειακές επιστολές ¦ Семейни писма
+💌 Lettres de famille ¦ 💌 Οικογενειακές επιστολές ¦ 💌 Семейни писма
+Les lettres du mois gardées depuis ✨ Trésors → « 💌 Lettre de famille ». À ne pas confondre avec les « ✉️ Lettres aux descendants », qui s’ouvrent plus tard. ¦ Οι επιστολές του μήνα από τους ✨ Θησαυρούς → «💌 Οικογενειακή επιστολή». Μην τις μπερδεύεις με τα «✉️ Γράμματα στους απογόνους», που ανοίγουν αργότερα. ¦ Писмата на месеца, запазени от ✨ Съкровища → „💌 Семейно писмо“. Да не се бъркат с „✉️ Писма до потомците“, които се отварят по-късно.
+💌 Nouvelle lettre ¦ 💌 Νέα επιστολή ¦ 💌 Ново писмо
+Chercher… (titre, mois) ¦ Αναζήτηση… (τίτλος, μήνας) ¦ Търсене… (заглавие, месец)
+Supprimer la lettre ¦ Διαγραφή επιστολής ¦ Изтрий писмото
+Aucune lettre gardée pour l’instant ¦ Δεν υπάρχει ακόμη αποθηκευμένη επιστολή ¦ Засега няма запазени писма
+Fais celle du mois dans ✨ Trésors → « 💌 Lettre de famille », puis « 💾 Garder ». ¦ Φτιάξε του μήνα στους ✨ Θησαυρούς → «💌 Οικογενειακή επιστολή», μετά «💾 Φύλαξη». ¦ Направи писмото на месеца в ✨ Съкровища → „💌 Семейно писмо“, после „💾 Запази“.
+💌 Faire la lettre du mois ¦ 💌 Φτιάξε την επιστολή του μήνα ¦ 💌 Направи писмото на месеца
+Lettre « {title} » supprimée ¦ Η επιστολή «{title}» διαγράφηκε ¦ Писмото „{title}“ е изтрито
+« d’accord », dit {who}. ¦ «συμφωνώ», λέει ο/η {who}. ¦ „съгласен“, казва {who}.
+« faux », dit {who}. ¦ «λάθος», λέει ο/η {who}. ¦ „грешно“, казва {who}.
+Que faire de cette remarque ? ¦ Τι να γίνει με αυτή την παρατήρηση; ¦ Какво да се направи с тази бележка?
+✓ Accepter (témoignage) ¦ ✓ Αποδοχή (μαρτυρία) ¦ ✓ Приеми (свидетелство)
+✓ Accepter (note sur le fait, « doute ») ¦ ✓ Αποδοχή (σημείωση στο γεγονός, «αμφίβολο») ¦ ✓ Приеми (бележка към факта, „съмнение“)
+{what} par {who} : ajoutés comme témoignage si tu acceptes ¦ {what} από {who}: προστίθενται ως μαρτυρία αν τα αποδεχτείς ¦ {what} от {who}: добавят се като свидетелство, ако приемеш
+Pour tous : ¦ Για όλα: ¦ За всички:
+Importer les remarques d’une relecture ¦ Εισαγωγή παρατηρήσεων ανάγνωσης ¦ Внасяне на бележки от преглед
+le fichier « remarques-….json » ¦ το αρχείο «remarques-….json» ¦ файлът „remarques-….json“
+Le fichier que ton cousin t’a renvoyé avec « ⤓ Renvoyer mes remarques ». ¦ Το αρχείο που σου έστειλε ο ξάδερφος με «⤓ Αποστολή των παρατηρήσεών μου». ¦ Файлът, който братовчед ти върна с „⤓ Върни моите бележки“.
+Ce fichier est trop gros pour un fichier de remarques. ¦ Το αρχείο είναι πολύ μεγάλο για αρχείο παρατηρήσεων. ¦ Файлът е твърде голям за файл с бележки.
+<b>{what}</b> de <b>{who}</b> sur « {title} » ({date}). Pour chaque fait : accepte, refuse ou garde pour plus tard ¦ <b>{what}</b> από <b>{who}</b> για «{title}» ({date}). Για κάθε γεγονός: αποδοχή, απόρριψη ή για αργότερα ¦ <b>{what}</b> от <b>{who}</b> за „{title}“ ({date}). За всеки факт: приеми, откажи или остави за по-късно
+Ces remarques ont <b>déjà été importées</b> ¦ Αυτές οι παρατηρήσεις <b>έχουν ήδη εισαχθεί</b> ¦ Тези бележки <b>вече са внесени</b>
+Aucune remarque dans ce fichier ¦ Καμία παρατήρηση σε αυτό το αρχείο ¦ Няма бележки в този файл
+{what} sur des faits qui ne sont plus dans la base : mises de côté. ¦ {what} για γεγονότα που δεν υπάρχουν πια στη βάση: παραμερίστηκαν. ¦ {what} за факти, които вече ги няма в базата: оставени настрана.
+⤒ Importer les remarques ¦ ⤒ Εισαγωγή παρατηρήσεων ¦ ⤒ Внеси бележките
+{what} (relecture de {who}) ¦ {what} (ανάγνωση από {who}) ¦ {what} (преглед от {who})
+Remarques de {who} gardées avec la relecture. ¦ Οι παρατηρήσεις του/της {who} φυλάχτηκαν με την ανάγνωση. ¦ Бележките от {who} са запазени с прегледа.
+relu par {who} ¦ ελέγχθηκε από {who} ¦ прегледано от {who}
+En attente des remarques ¦ Αναμονή παρατηρήσεων ¦ Очакват се бележки
+{n} à ranger ¦ {n} προς τακτοποίηση ¦ {n} за подреждане
+tout est rangé ¦ όλα τακτοποιημένα ¦ всичко е подредено
+Envoyé, en attente des remarques ¦ Στάλθηκε, αναμονή παρατηρήσεων ¦ Изпратено, очакват се бележки
+Supprimer la relecture ¦ Διαγραφή ανάγνωσης ¦ Изтрий прегледа
+Relectures de branche ¦ Αναγνώσεις κλάδων ¦ Прегледи на клонове
+＋ Demander une relecture… ¦ ＋ Ζήτησε ανάγνωση… ¦ ＋ Поискай преглед…
+Aucune relecture : « 📤 Partager avec la famille » avec la case « 🖊 Demander une relecture », ou fiche → ⋯ → « 🖊 Faire relire cette branche… ». ¦ Καμία ανάγνωση: «📤 Κοινοποίηση στην οικογένεια» με το πλαίσιο «🖊 Ζήτησε ανάγνωση», ή καρτέλα → ⋯ → «🖊 Δώσε αυτόν τον κλάδο για ανάγνωση…». ¦ Няма прегледи: „📤 Сподели със семейството“ с отметка „🖊 Поискай преглед“ или картон → ⋯ → „🖊 Дай този клон за преглед…“.
+Relecture « {title} » supprimée ¦ Η ανάγνωση «{title}» διαγράφηκε ¦ Прегледът „{title}“ е изтрит
+Faire relire cette branche… ¦ Δώσε αυτόν τον κλάδο για ανάγνωση… ¦ Дай този клон за преглед…
+{who} pense que c’est faux : {c} ¦ Ο/Η {who} πιστεύει ότι είναι λάθος: {c} ¦ {who} смята, че е грешно: {c}
+{who} est d’accord ¦ Ο/Η {who} συμφωνεί ¦ {who} е съгласен(-на)
+Remarque refusée ¦ Η παρατήρηση απορρίφθηκε ¦ Бележката е отхвърлена
+Remarque notée sur le fait ¦ Η παρατήρηση σημειώθηκε στο γεγονός ¦ Бележката е записана към факта
+Témoignage ajouté ¦ Η μαρτυρία προστέθηκε ¦ Свидетелството е добавено
+« je pense que c’est faux » ¦ «νομίζω ότι είναι λάθος» ¦ „мисля, че е грешно“
+« d’accord » ¦ «συμφωνώ» ¦ „съгласен“
+Corriger le fait ¦ Διόρθωση γεγονότος ¦ Поправи факта
+ouvre le fait ; la remarque reste jusqu’à « Noter » ou « Refuser » ¦ ανοίγει το γεγονός· η παρατήρηση μένει ως «Σημείωση» ή «Απόρριψη» ¦ отваря факта; бележката остава до „Запиши“ или „Откажи“
+Noter (note sur le fait, « doute ») ¦ Σημείωση (στο γεγονός, «αμφίβολο») ¦ Запиши (бележка към факта, „съмнение“)
+Accepter (témoignage) ¦ Αποδοχή (μαρτυρία) ¦ Приеми (свидетелство)
+🖊 Remarque de relecture ¦ 🖊 Παρατήρηση ανάγνωσης ¦ 🖊 Бележка от преглед
+l’année {y} ¦ το έτος {y} ¦ годината {y}
+Traduire ¦ Μετάφραση ¦ Преведи
+Le mot à mot tout de suite, la traduction complète si le modèle de la lecture approfondie est installé ¦ Αμέσως λέξη προς λέξη, πλήρης μετάφραση αν είναι εγκατεστημένο το μοντέλο της σε βάθος ανάγνωσης ¦ Веднага дума по дума, пълен превод, ако моделът за задълбочено четене е инсталиран
+latin → français ¦ λατινικά → γαλλικά ¦ латински → френски
+Revenir au texte ¦ Επιστροφή στο κείμενο ¦ Обратно към текста
+Écris ou lis d’abord le texte de l’acte : la traduction part du texte transcrit. ¦ Γράψε ή διάβασε πρώτα το κείμενο της πράξης: η μετάφραση ξεκινά από το μεταγραμμένο κείμενο. ¦ Първо напиши или прочети текста на акта: преводът тръгва от преписания текст.
+L’acte (latin, transcrit) ¦ Η πράξη (λατινικά, μεταγραμμένη) ¦ Актът (латински, преписан)
+vert : formule connue ¦ πράσινο: γνωστή διατύπωση ¦ зелено: позната формула
+bleu : mot du dictionnaire ¦ μπλε: λέξη του λεξικού ¦ синьо: дума от речника
+pointillé : peu sûr ¦ διακεκομμένο: αβέβαιο ¦ пунктир: несигурно
+Niveau 1 · mot à mot sans installation ¦ Επίπεδο 1 · λέξη προς λέξη χωρίς εγκατάσταση ¦ Ниво 1 · дума по дума без инсталиране
+Aucun mot reconnu. ¦ Καμία λέξη δεν αναγνωρίστηκε. ¦ Няма разпознати думи.
+Date : {d} ¦ Ημερομηνία: {d} ¦ Дата: {d}
+Niveau 2 · traduction complète ¦ Επίπεδο 2 · πλήρης μετάφραση ¦ Ниво 2 · пълен превод
+Je regarde si le modèle est installé… ¦ Ελέγχω αν το μοντέλο είναι εγκατεστημένο… ¦ Проверявам дали моделът е инсталиран…
+📋 Garder dans la transcription ¦ 📋 Φύλαξη στη μεταγραφή ¦ 📋 Запази в преписа
+Copier la traduction ¦ Αντιγραφή μετάφρασης ¦ Копирай превода
+📝 Mise au propre ¦ 📝 Καθαρογραφή ¦ 📝 Чистовик
+Le niveau 1 marche toujours, sans rien installer. Les noms, dates et rôles repérés partent ensuite, comme d’habitude, dans « Ce que l’app a trouvé ». ¦ Το επίπεδο 1 λειτουργεί πάντα, χωρίς εγκατάσταση. Τα ονόματα, οι ημερομηνίες και οι ρόλοι πηγαίνουν μετά, όπως πάντα, στο «Τι βρήκε η εφαρμογή». ¦ Ниво 1 работи винаги, без инсталиране. Откритите имена, дати и роли после както обикновено отиват в „Какво намери приложението“.
+✓ Les deux lectures sont d’accord sur les noms, la date et les rôles. ¦ ✓ Οι δύο αναγνώσεις συμφωνούν σε ονόματα, ημερομηνία και ρόλους. ¦ ✓ Двете четения съвпадат по имена, дата и роли.
+À vérifier : la traduction complète ne dit pas la même chose pour : {list} ¦ Για έλεγχο: η πλήρης μετάφραση λέει άλλο για: {list} ¦ За проверка: пълният превод казва друго за: {list}
+Traduction copiée. ¦ Η μετάφραση αντιγράφηκε. ¦ Преводът е копиран.
+Copie impossible dans ce navigateur. ¦ Η αντιγραφή δεν γίνεται σε αυτό το πρόγραμμα περιήγησης. ¦ Копирането е невъзможно в този браузър.
+Traduction gardée dans la transcription (enregistre avec ⌘S) ¦ Η μετάφραση φυλάχτηκε στη μεταγραφή (αποθήκευσε με ⌘S) ¦ Преводът е запазен в преписа (запиши с ⌘S)
+Traduction en cours (le modèle tourne sur cet ordinateur)… ¦ Μετάφραση σε εξέλιξη (το μοντέλο τρέχει σε αυτόν τον υπολογιστή)… ¦ Превежда се (моделът работи на този компютър)…
+La traduction n’a pas abouti. ¦ Η μετάφραση δεν ολοκληρώθηκε. ¦ Преводът не успя.
+La traduction gardée avec cette transcription. ¦ Η μετάφραση που φυλάχτηκε με αυτή τη μεταγραφή. ¦ Преводът, запазен с този препис.
+↻ Retraduire ¦ ↻ Νέα μετάφραση ¦ ↻ Преведи отново
+Le modèle de la lecture approfondie est installé : la traduction complète prend quelques dizaines de secondes. ¦ Το μοντέλο της σε βάθος ανάγνωσης είναι εγκατεστημένο: η πλήρης μετάφραση διαρκεί μερικές δεκάδες δευτερόλεπτα. ¦ Моделът за задълбочено четене е инсталиран: пълният превод отнема няколко десетки секунди.
+🌐 Traduire tout l’acte ¦ 🌐 Μετάφραση όλης της πράξης ¦ 🌐 Преведи целия акт
+La traduction complète utilise le modèle de la lecture approfondie (Ollama, ≈ 6 Go, rien ne part sur Internet). ¦ Η πλήρης μετάφραση χρησιμοποιεί το μοντέλο της σε βάθος ανάγνωσης (Ollama, ≈ 6 GB, τίποτα δεν πάει στο Internet). ¦ Пълният превод използва модела за задълбочено четене (Ollama, ≈ 6 GB, нищо не отива в интернет).
+Le niveau 1 marche toujours. ¦ Το επίπεδο 1 λειτουργεί πάντα. ¦ Ниво 1 работи винаги.
+Transcription d’acte ¦ Μεταγραφή πράξης ¦ Препис на акт
+Traduction ¦ Μετάφραση ¦ Превод
+Mots difficiles et abréviations ¦ Δύσκολες λέξεις και συντομογραφίες ¦ Трудни думи и съкращения
+Les personnes de l’acte ¦ Τα πρόσωπα της πράξης ¦ Лицата в акта
+=fait certain ¦ βέβαιο γεγονός|βέβαια γεγονότα ¦ сигурен факт|сигурни факта
+=fait déduit ¦ συναγόμενο γεγονός|συναγόμενα γεγονότα ¦ изведен факт|изведени факта
+=fait estimé ¦ εκτιμώμενο γεγονός|εκτιμώμενα γεγονότα ¦ приблизителен факт|приблизителни факта
+=fait en doute ¦ αμφίβολο γεγονός|αμφίβολα γεγονότα ¦ съмнителен факт|съмнителни факта
+=fait non évalué ¦ αξιολόγητο γεγονός|αξιολόγητα γεγονότα ¦ неоценен факт|неоценени факта
+=fait ¦ γεγονός|γεγονότα ¦ факт|факта
+=fiche à revoir ¦ καρτέλα για έλεγχο|καρτέλες για έλεγχο ¦ картон за преглед|картона за преглед
+=fait confirmé ¦ επιβεβαιωμένο γεγονός|επιβεβαιωμένα γεγονότα ¦ потвърден факт|потвърдени факта
+=remarque notée ¦ σημειωμένη παρατήρηση|σημειωμένες παρατηρήσεις ¦ записана бележка|записани бележки
+=remarque pour plus tard ¦ παρατήρηση για αργότερα|παρατηρήσεις για αργότερα ¦ бележка за по-късно|бележки за по-късно
+=relecture ¦ ανάγνωση|αναγνώσεις ¦ преглед|прегледа
+Très sûr ¦ Πολύ αξιόπιστο ¦ Много надеждно
+Assez sûr ¦ Αρκετά αξιόπιστο ¦ Доста надеждно
+Peu sûr ¦ Αναξιόπιστο ¦ Ненадеждно
+prouvé ¦ αποδεδειγμένη ¦ доказана
+probable ¦ πιθανή ¦ вероятна
+réfuté ¦ διαψευσμένη ¦ опровергана
+parent ¦ γονιός ¦ родител
+baptisé(e) ¦ βαπτισμένος/η ¦ кръстен(а)
+note sous ¦ βαθμός κάτω από ¦ оценка под
+{a} sur {n} ont une source ¦ {a} από {n} έχουν πηγή ¦ {a} от {n} имат източник
+{a} sur {n} a une source ¦ {a} από {n} έχει πηγή ¦ {a} от {n} има източник
+{n} sont à revoir avant publication (note sous {min}). ¦ {n} για έλεγχο πριν από τη δημοσίευση (βαθμός κάτω από {min}). ¦ {n} за преглед преди публикуване (оценка под {min}).
+{n} est à revoir avant publication (note sous {min}). ¦ {n} για έλεγχο πριν από τη δημοσίευση (βαθμός κάτω από {min}). ¦ {n} за преглед преди публикуване (оценка под {min}).
+La fiabilité n’a pas pu être calculée. ¦ Η αξιοπιστία δεν υπολογίστηκε. ¦ Надеждността не можа да се изчисли.
+Aucune fiche à revoir avant publication, bravo ! ¦ Καμία καρτέλα για έλεγχο πριν από τη δημοσίευση, μπράβο! ¦ Няма картони за преглед преди публикуване, браво!
+Pas encore de fiche à publier. ¦ Δεν υπάρχει ακόμη καρτέλα για δημοσίευση. ¦ Все още няма картони за публикуване.
+{n} sous {min} sur 100 ¦ {n} κάτω από {min} στα 100 ¦ {n} под {min} от 100
+🛡 Fiches les moins fiables ¦ 🛡 Οι λιγότερο αξιόπιστες καρτέλες ¦ 🛡 Най-малко надеждни картони
+Listes → Personnes, filtrée sur « À revoir avant publication » ¦ Λίστες → Πρόσωπα, φίλτρο «Για έλεγχο πριν από τη δημοσίευση» ¦ Списъци → Хора, филтър „За преглед преди публикуване“
+Les voir ¦ Προβολή ¦ Виж ги
+Les laisser de côté ¦ Παράλειψη ¦ Изключи ги
+Exporter quand même ¦ Εξαγωγή ούτως ή άλλως ¦ Все пак експортирай
+Transcription ¦ Μεταγραφή ¦ Препис
+🖊 Relecture ¦ 🖊 Ανάγνωση ¦ 🖊 Преглед
+🖊 Demander une relecture (le cousin peut cocher et commenter chaque fait) ¦ 🖊 Ζήτησε ανάγνωση (ο ξάδερφος μπορεί να σημειώσει και να σχολιάσει κάθε γεγονός) ¦ 🖊 Поискай преглед (братовчедът може да отбележи и коментира всеки факт)
+La copie montre alors « ✓ D’accord / ✗ Je pense que c’est faux » sur chaque fait, et « ⤓ Renvoyer mes remarques » : un petit fichier .json à importer dans Questions aux proches → « ⤒ Importer les réponses ». ¦ Το αντίγραφο δείχνει τότε σε κάθε γεγονός «✓ Συμφωνώ / ✗ Νομίζω ότι είναι λάθος» και «⤓ Αποστολή των παρατηρήσεών μου»: ένα μικρό αρχείο .json για εισαγωγή στις Ερωτήσεις στους οικείους → «⤒ Εισαγωγή απαντήσεων». ¦ Копието показва тогава при всеки факт „✓ Съгласен / ✗ Мисля, че е грешно“ и „⤓ Върни моите бележки“: малък файл .json за внасяне във Въпроси към близките → „⤒ Внеси отговорите“.
+Copie à relire prête : {name}. Le cousin te renverra ses remarques (un fichier .json) : Questions aux proches → « ⤒ Importer les réponses ». ¦ Το αντίγραφο για ανάγνωση είναι έτοιμο: {name}. Ο ξάδερφος θα σου στείλει τις παρατηρήσεις (αρχείο .json): Ερωτήσεις στους οικείους → «⤒ Εισαγωγή απαντήσεων». ¦ Копието за преглед е готово: {name}. Братовчедът ще ти върне бележките (файл .json): Въпроси към близките → „⤒ Внеси отговорите“.
+Donne un titre à la lettre. ¦ Δώσε τίτλο στην επιστολή. ¦ Дай заглавие на писмото.
+Lettre introuvable. ¦ Η επιστολή δεν βρέθηκε. ¦ Писмото не е намерено.
+Relecture introuvable. ¦ Η ανάγνωση δεν βρέθηκε. ¦ Прегледът не е намерен.
+Remarque introuvable. ¦ Η παρατήρηση δεν βρέθηκε. ¦ Бележката не е намерена.
+Ce n’est pas un fichier de remarques de relecture. ¦ Αυτό δεν είναι αρχείο παρατηρήσεων ανάγνωσης. ¦ Това не е файл с бележки от преглед.
+Cette relecture n’est pas dans cette base (ou elle a été supprimée). ¦ Αυτή η ανάγνωση δεν υπάρχει στη βάση (ή διαγράφηκε). ¦ Този преглед го няма в базата (или е изтрит).
+Ce fait n’existe plus. ¦ Αυτό το γεγονός δεν υπάρχει πια. ¦ Този факт вече не съществува.
+Cette remarque est déjà rangée. ¦ Η παρατήρηση έχει ήδη τακτοποιηθεί. ¦ Тази бележка вече е подредена.
+Il n’y a pas encore de texte à traduire. ¦ Δεν υπάρχει ακόμη κείμενο για μετάφραση. ¦ Все още няма текст за превод.
+Le modèle de la lecture approfondie n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Το μοντέλο της σε βάθος ανάγνωσης δεν έχει κατέβει ακόμη: «⤓ Εγκατάσταση σε βάθος ανάγνωσης». ¦ Моделът за задълбочено четене още не е изтеглен: „⤓ Инсталирай задълбоченото четене“.
+Ces outils ne sont pas encore prêts : relance l’app. ¦ Αυτά τα εργαλεία δεν είναι ακόμη έτοιμα: επανεκκίνησε την εφαρμογή. ¦ Тези инструменти още не са готови: рестартирай приложението.
+Cette demande de relecture n’existe plus. ¦ Αυτό το αίτημα ανάγνωσης δεν υπάρχει πια. ¦ Тази заявка за преглед вече не съществува.
+{who} confirme : {fact}. ¦ Ο/Η {who} επιβεβαιώνει: {fact}. ¦ {who} потвърждава: {fact}.
+Confirmé par {who} : {fact} ¦ Επιβεβαιώθηκε από {who}: {fact} ¦ Потвърдено от {who}: {fact}
+{who}, relecture « {title} », le {date} ¦ {who}, ανάγνωση «{title}», {date} ¦ {who}, преглед „{title}“, {date}
+Relecture d’une branche ¦ Ανάγνωση κλάδου ¦ Преглед на клон
+{who} pense que c’est faux. ¦ Ο/Η {who} πιστεύει ότι είναι λάθος. ¦ {who} смята, че е грешно.
+relecture « {title} », le {date} ¦ ανάγνωση «{title}», {date} ¦ преглед „{title}“, {date}
+💬 Remarque de {who} ¦ 💬 Παρατήρηση από {who} ¦ 💬 Бележка от {who}

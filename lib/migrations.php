@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 88;
+const SCHEMA_VERSION = 90;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -109,6 +109,8 @@ function migration_steps(): array
         86 => 'schema_v86',
         87 => 'schema_v87',
         88 => 'schema_v88',
+        89 => 'schema_v89',
+        90 => 'schema_v90',
     ];
 }
 
@@ -2571,4 +2573,24 @@ function schema_v88(PDO $pdo): void
 {
     if (!function_exists('preuve_schema')) { require_once __DIR__ . '/preuve.php'; }
     preuve_schema($pdo);
+}
+
+/** 89 : 💌 Lettres de famille gardées (family_letters : mois, titre, ce qu'on y met, texte modifié ; supprimée = deleted_at),
+ *  🖊 relectures d'une branche par un cousin (family_reviews : envoi, jeton, réponses ; family_review_items : une remarque
+ *  par fait, « d'accord » ou « faux », décision ✓ / ✕ et ce qu'elle a créé pour « ↶ Annuler ») ; la 🛡 fiabilité par
+ *  personne est calculée à la lecture (lib/plus_famille.php). */
+function schema_v89(PDO $pdo): void
+{
+    if (!function_exists('pfam_schema')) { require_once __DIR__ . '/plus_famille.php'; }
+    pfam_schema($pdo);
+}
+
+/** 90 : ⚖️ Généalogiste successoral — les dossiers de succession (succ_cases : défunt, notaire mandant, n° et réf., état,
+ *  statuts établis à la main, hypothèse retenue), échéances (succ_deadlines), pièces justificatives (succ_pieces), journal
+ *  horodaté qu'on ne peut ni modifier ni effacer (succ_journal), temps et frais (succ_fees) ; courriers.succ_case_id,
+ *  succ_kind, reponse, signe_le (lib/successoral.php). La dévolution est calculée à la lecture. */
+function schema_v90(PDO $pdo): void
+{
+    if (!function_exists('successoral_schema')) { require_once __DIR__ . '/successoral.php'; }
+    successoral_schema($pdo);
 }

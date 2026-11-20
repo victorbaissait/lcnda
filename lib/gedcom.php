@@ -506,6 +506,12 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
     $persons = $share ? $allPersons : array_values(array_filter($allPersons, 'export_person_allowed'));
     // living=drop : les vivants et les fiches confidentielles sont retirés du fichier (au lieu d'y rester anonymes)
     if ($share && $hidden && ($_GET['living'] ?? '') === 'drop') { $persons = array_values(array_filter($persons, static fn($p) => !isset($hidden[(int) $p['id']]))); }
+    // 🛡 « Les laisser de côté » : les fiches à revoir avant publication (note de fiabilité sous le seuil) ne partent pas (lib/plus_famille.php)
+    if ($share && ($_GET['rel_skip'] ?? '') === '1') {
+        if (!function_exists('pfam_rel_review_ids')) { require_once __DIR__ . '/plus_famille.php'; }
+        $relSkip = pfam_rel_review_ids($pdo);
+        if ($relSkip) { $persons = array_values(array_filter($persons, static fn($p) => !isset($relSkip[(int) $p['id']]))); }
+    }
     $visible = array_fill_keys(array_map(static fn($p) => (int) $p['id'], $persons), true);
     $genderById = [];
     foreach ($allPersons as $gp) { $genderById[(int) $gp['id']] = (string) ($gp['gender'] ?? 'unknown'); }
