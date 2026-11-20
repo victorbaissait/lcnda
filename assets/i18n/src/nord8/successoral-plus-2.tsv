@@ -449,10 +449,8 @@ Lien vers la page de suivi ¦ Takip sayfasına bağlantı
 Pas de lien (on copie le numéro) ¦ Bağlantı yok (numara kopyalanır)
 Adresse de la page de suivi, avec {numero} (https:// seulement). ¦ Takip sayfasının adresi, {numero} ile (yalnızca https://).
 🧾 Devis et factures ¦ 🧾 Teklifler ve faturalar
-Un seul registre : numérotation continue même si les dossiers sont dans plusieurs généalogies. ¦ Tek defter: dosyalar birkaç ağaçta olsa bile kesintisiz numaralandırma.
 Un seul registre pour le cabinet ¦ Büro için tek defter
 Dans la généalogie des dossiers ¦ Dosyaların ağacında
-Le compteur ne recule jamais ; un brouillon effacé ne consomme pas de numéro. ¦ Sayaç asla geri gitmez; silinen bir taslak numara tüketmez.
 F-2026-0042 (remis à 1 chaque année) ¦ F-2026-0042 (her yıl 1'den)
 Compteur unique (F-0042) ¦ Tek sayaç (F-0042)
 La ligne « temps passé » proposée sur la facture. ¦ Faturada önerilen “harcanan süre” satırı.
@@ -608,3 +606,30 @@ Un devis accepté ne se modifie plus. ¦ Kabul edilmiş bir teklif artık deği�
 J−{n} ¦ G−{n}
 =descendant rattaché ¦ bağlı torun|bağlı torun
 =échange noté ¦ kayıtlı görüşme|kayıtlı görüşme
+# corrections : préfixes, émission datée du jour, INSEE, fiches verrouillées, registre partagé
+le même jour que le défunt, ou une date incomplète : l’ordre des décès n’est pas connu ; le statut reste « Inconnu », à vérifier sur les actes. ¦ mirasbırakanla aynı gün ya da eksik bir tarih: ölümlerin sırası bilinmiyor; durum “Bilinmiyor” olarak kalır, belgelerden kontrol et.
+Sur la fiche de {n} : un décès en {d} (date incomplète dans le fichier), source « Fichier des personnes décédées (INSEE) », avec la date du relevé. ¦ {n} kaydında: {d} yılında bir ölüm (dosyada eksik tarih), kaynak “Ölen kişiler dosyası (INSEE)”, okuma tarihiyle.
+Ce préfixe est déjà celui des factures, des avoirs ou des devis : choisis-en un autre (les trois doivent être différents). ¦ Bu önek zaten faturaların, iade faturalarının ya da tekliflerin: başka birini seç (üçü de farklı olmalı).
+Préfixe refusé : de 1 à 6 lettres ou chiffres, sans accent. ¦ Önek reddedildi: 1 ile 6 arası harf ya da rakam, aksansız.
+Un seul registre : numérotation continue même si les dossiers sont dans plusieurs généalogies. Passer de l’un à l’autre repartirait d’un autre compteur (numéros en double) : ce choix est bloqué dès la première facture émise. ¦ Tek defter: dosyalar birkaç soy ağacında olsa da kesintisiz numaralandırma. Birinden ötekine geçmek başka bir sayaçtan yeniden başlar (yinelenen numaralar): bu seçim ilk fatura kesilince kilitlenir.
+Le compteur ne recule jamais ; un brouillon effacé ne consomme pas de numéro. Bloqué dès la première facture émise. ¦ Sayaç hiç geri gitmez; silinen taslak numara harcamaz. İlk fatura kesilince kilitlenir.
+Une facture est déjà émise dans ce registre : le registre et la numérotation ne se changent plus (sinon, des numéros en double). ¦ Bu defterde zaten bir fatura kesildi: defter ve numaralandırma artık değiştirilemez (yoksa yinelenen numaralar olur).
+La dernière pièce émise est datée après aujourd’hui : vérifie la date de l’ordinateur avant d’émettre. ¦ Son kesilen belge bugünden sonraki bir tarihi taşıyor: kesmeden önce bilgisayarın tarihini kontrol et.
+Émettre le devis ¦ Teklifi kes
+Émettre la facture ¦ Faturayı kes
+À l’émission, la pièce prend la date du jour et le prochain numéro du registre ; le numéro donné s’affiche une fois émise. ¦ Kesildiğinde belge bugünün tarihini ve defterin sıradaki numarasını alır; verilen numara kesildikten sonra görünür.
+Émettre le devis ? Il prend la date du jour et le prochain numéro du registre ; il reste modifiable tant qu’il n’est pas accepté. ¦ Teklif kesilsin mi? Bugünün tarihini ve defterin sıradaki numarasını alır; kabul edilene kadar değiştirilebilir.
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. Émettre la facture ? Elle prend la date du jour et le prochain numéro du registre. ¦ Kesilmiş bir fatura artık değiştirilemez ya da silinemez. Düzeltmek için: iade faturası. Fatura kesilsin mi? Bugünün tarihini ve defterin sıradaki numarasını alır.
+{n} émise le {d} ¦ {n}, {d} tarihinde kesildi
+Ce devis a déjà sa facture (brouillon ou émise) : ouvre-la dans le registre. ¦ Bu teklifin zaten faturası var (taslak ya da kesilmiş): defterde aç.
+Fiche verrouillée : le décès n’est pas écrit. Déverrouille la fiche d’abord, ou choisis « Seulement le statut du dossier » dans les réglages. ¦ Kilitli kayıt: ölüm yazılmadı. Önce kaydın kilidini aç ya da ayarlarda “Yalnızca dosya durumu”nu seç.
+Fiche verrouillée : les réponses ne sont pas écrites sur la fiche. Déverrouille-la d’abord. ¦ Kilitli kayıt: yanıtlar kayda yazılmadı. Önce kilidini aç.
+Fiche verrouillée : les réponses ne sont pas retirées. Déverrouille-la d’abord. ¦ Kilitli kayıt: yanıtlar geri alınmadı. Önce kilidini aç.
+💶 Un reversement reste en attente, et un héritier a été trop payé (plus reversé que reçu) : archiver quand même ? ¦ 💶 Bir ödeme hâlâ bekliyor ve bir mirasçıya fazla ödendi (alınandan çok ödendi): yine de arşivlensin mi?
+💶 Trop versé : un héritier a reçu plus que ce que le notaire a versé pour lui (reste négatif) : archiver quand même ? ¦ 💶 Fazla ödendi: bir mirasçı, noterin onun için yatırdığından fazlasını aldı (eksi bakiye): yine de arşivlensin mi?
+Cette pièce appartient à une généalogie verrouillée par un mot de passe : ouvre-la d’abord. ¦ Bu belge parolayla kilitli bir soy ağacına ait: önce onu aç.
+Cette généalogie est protégée par un mot de passe : l’archive doit être chiffrée. Choisis un mot de passe pour l’archive. ¦ Bu soy ağacı parolayla korunuyor: arşiv şifrelenmeli. Arşiv için bir parola seç.
+Cette généalogie est protégée par un mot de passe : la copie pour le notaire doit être chiffrée (coche « Mot de passe »). ¦ Bu soy ağacı parolayla korunuyor: noter kopyası şifrelenmeli (“Parola”yı işaretle).
+Cette généalogie est protégée par un mot de passe : ce qui en sort est toujours chiffré. ¦ Bu soy ağacı parolayla korunuyor: ondan çıkan her şey her zaman şifrelidir.
+Copie chiffrée · {n} ¦ Şifreli kopya · {n}
+Pièce introuvable. ¦ Belge bulunamadı.

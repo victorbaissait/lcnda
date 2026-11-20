@@ -571,21 +571,28 @@ function heritage_overview(PDO $pdo): array
 
 /* ─── 🚗 Circuits « sur les traces de mes ancêtres » ─────────────────── */
 
-function h_parents(PDO $pdo, int $id): array
+/**
+ * Les parents d'une personne. $blood : seulement les liens de sang ou d'adoption (« biological » / « adopted », comme succ_links),
+ * sans le beau-parent (« step ») ni la famille d'accueil (« foster ») : pour la parenté élargie (grands-parents, oncles, neveux, cousins…).
+ */
+function h_parents(PDO $pdo, int $id, bool $blood = false): array
 {
-    $stmt = $pdo->prepare('SELECT f.partner1_id, f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=?');
+    $stmt = $pdo->prepare('SELECT f.partner1_id, f.partner2_id, fc.relation_to_partner1 AS r1, fc.relation_to_partner2 AS r2 FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=?');
     $stmt->execute([$id]);
     $out = [];
-    foreach ($stmt->fetchAll() as $f) { foreach ([$f['partner1_id'], $f['partner2_id']] as $p) { if ((int) $p) { $out[] = (int) $p; } } }
+    foreach ($stmt->fetchAll() as $f) { foreach ([[$f['partner1_id'], $f['r1']], [$f['partner2_id'], $f['r2']]] as [$p, $r]) { if ((int) $p && !($blood && h_not_blood($r))) { $out[] = (int) $p; } } }
     return array_values(array_unique($out));
 }
+/** un lien parent → enfant qui n'est ni de sang ni d'adoption (beau-parent, famille d'accueil) */
+function h_not_blood(mixed $rel): bool { return in_array((string) $rel, ['step', 'foster'], true); }
 
-function h_children(PDO $pdo, array $parentIds): array
+function h_children(PDO $pdo, array $parentIds, bool $blood = false): array
 {
     $parentIds = array_values(array_filter(array_map('intval', $parentIds)));
     if (!$parentIds) { return []; }
     $marks = implode(',', array_fill(0, count($parentIds), '?'));
-    $stmt = $pdo->prepare("SELECT DISTINCT fc.child_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE f.partner1_id IN ($marks) OR f.partner2_id IN ($marks)");
+    $cond = $blood ? "(f.partner1_id IN ($marks) AND COALESCE(fc.relation_to_partner1,'') NOT IN ('step','foster')) OR (f.partner2_id IN ($marks) AND COALESCE(fc.relation_to_partner2,'') NOT IN ('step','foster'))" : "f.partner1_id IN ($marks) OR f.partner2_id IN ($marks)";
+    $stmt = $pdo->prepare("SELECT DISTINCT fc.child_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE $cond");
     $stmt->execute([...$parentIds, ...$parentIds]);
     return array_map('intval', $stmt->fetchAll(PDO::FETCH_COLUMN));
 }
@@ -1238,9 +1245,9 @@ function search_relatives(PDO $pdo, string $relation, int $id): array
         'great_grandchildren' => h_children($pdo, h_children($pdo, h_children($pdo, [$id]))),
         'descendants' => array_keys(h_descendants($pdo, [$id], 30, false)),
         'parents' => h_parents($pdo, $id),
-        'grandparents' => array_merge(...array_map(static fn($p) => h_parents($pdo, $p), h_parents($pdo, $id) ?: [0])),
+        'grandparents' => array_merge(...array_map(static fn($p) => h_parents($pdo, $p, true), h_parents($pdo, $id, true) ?: [0])), // de sang ou d'adoption
         'ancestors_of' => array_keys(h_ancestors($pdo, $id, 40)),
-        'siblings' => h_children($pdo, h_parents($pdo, $id)),
+        'siblings' => h_children($pdo, h_parents($pdo, $id, true), true), // pas les quasi-frères (enfant d'un beau-parent)
         'spouses' => (static function () use ($pdo, $id) {
             $s = $pdo->prepare('SELECT CASE WHEN partner1_id=? THEN partner2_id ELSE partner1_id END FROM families WHERE partner1_id=? OR partner2_id=?');
             $s->execute([$id, $id, $id]);
@@ -1254,12 +1261,13 @@ function search_relatives(PDO $pdo, string $relation, int $id): array
 /** La parenté élargie : arrière-grands-parents, côté paternel / maternel, oncles et tantes, neveux et nièces, alliés, parrains et marraines. */
 function search_relatives_more(PDO $pdo, string $relation, int $id): array
 {
-    $par = static fn(int $x): array => h_parents($pdo, $x);
+    // les liens de sang ou d'adoption seulement (pas « step » / « foster », comme succ_links) : le conjoint d'un parent est un beau-parent
+    $par = static fn(int $x): array => h_parents($pdo, $x, true);
     $sp = static fn(int $x): array => search_relatives($pdo, 'spouses', $x);
-    $sib = static fn(int $x): array => array_values(array_diff(h_children($pdo, h_parents($pdo, $x)), [$x]));
+    $sib = static fn(int $x): array => array_values(array_diff(h_children($pdo, h_parents($pdo, $x, true), true), [$x]));
     $many = static fn(callable $f, array $ids): array => $ids ? array_merge(...array_map($f, $ids)) : [];
     $side = static function (string $g) use ($pdo, $id): array {
-        $ids = h_parents($pdo, $id); if (!$ids) { return []; }
+        $ids = h_parents($pdo, $id, true); if (!$ids) { return []; }
         $s = $pdo->prepare('SELECT id FROM persons WHERE gender=? AND id IN (' . implode(',', array_map('intval', $ids)) . ')'); $s->execute([$g]);
         return array_map('intval', $s->fetchAll(PDO::FETCH_COLUMN));
     };
@@ -1279,12 +1287,12 @@ function search_relatives_more(PDO $pdo, string $relation, int $id): array
         'uncles' => $many($sib, $par($id)),
         'uncles_p' => $many($sib, $side('male')),
         'uncles_m' => $many($sib, $side('female')),
-        'nephews' => h_children($pdo, $sib($id)),
+        'nephews' => h_children($pdo, $sib($id), true),
         // beaux-parents : les parents du conjoint, et le conjoint d'un parent (qui n'est pas lui-même un parent)
         'parents_in_law' => array_merge($many($par, $sp($id)), array_diff($many($sp, $par($id)), $par($id))),
         'siblings_in_law' => array_merge($many($sp, $sib($id)), $many($sib, $sp($id))),
         // gendres et belles-filles : le conjoint d'un enfant, et l'enfant du conjoint (qui n'est pas son propre enfant)
-        'children_in_law' => array_merge($many($sp, h_children($pdo, [$id])), array_diff(h_children($pdo, $sp($id)), h_children($pdo, [$id]))),
+        'children_in_law' => array_merge($many($sp, h_children($pdo, [$id], true)), array_diff(h_children($pdo, $sp($id), true), h_children($pdo, [$id], true))),
         'godparents' => $god($godUp), 'godfathers' => $god($godUp, 'm'), 'godmothers' => $god($godUp, 'f'),
         'godchildren' => $god($godDown),
         default => [],

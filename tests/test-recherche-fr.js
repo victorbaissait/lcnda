@@ -234,7 +234,7 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env});
         await t('rfr_names : une ligne par nom de fiche et par variante, remplie à la première recherche', async () => {
             await people('Pierre');
             const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', `require 'lib/bootstrap.php'; $p=db(); echo $p->query('PRAGMA user_version')->fetchColumn(),'|',$p->query('SELECT count(*) FROM rfr_names')->fetchColumn(),'|',$p->query("SELECT first_canons FROM rfr_names WHERE person_id=2 AND src=0")->fetchColumn();`], {cwd: appRoot, env, encoding: 'utf8'});
-            eq(r.stdout, '96|15| l:pierre ');
+            const [ver, ...rest] = r.stdout.split('|'); assert.ok(Number(ver) >= 96, 'structure n°96 ou plus : ' + r.stdout); eq(rest.join('|'), '15| l:pierre ');
         });
         await t('Personnes : exact d’abord, puis variantes (nom de mariage, latin, abréviation), puis phonétique', async () => {
             let d = await people('Pierre');

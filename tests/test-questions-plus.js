@@ -82,6 +82,7 @@ const QUESTIONS = ['les enfants de Pierre Mazaud', 'les enfants de Petrus Mazeau
     'les tantes de Sophie Durand', 'les neveux de Yves Le Gall', 'les beaux-parents de Marie Le Gall', 'la belle-mère de Marie Le Gall', 'les gendres de Petrus Mazaud', 'les beaux-frères de Jean Durand', 'le parrain de Jean Combes',
     'les filleuls de Jean Martin', 'les enfans de Petrus Mazaud', 'les boulangés', 'la femme de Jean Durand', 'morts en 1916', 'quels actes me manquent', 'où chercher Petrus Mazaud', 'les héritiers de Petrus Mazaud',
     'les héritiers de Rose Mazaud', 'dossiers en retard', 'quels héritiers n\'ont pas répondu', 'pièces manquantes', 'héritiers introuvables', 'les doublons', 'les enfants de Jean', 'qui est né le même jour que moi',
+    'les enfants de ma sœur', 'le mari de ma tante', 'les frères de mon père', 'les enfants de mon oncle', 'les ancêtres de ma mère', 'les cousins de mes parents',
     `qui est Xss ${XSS}`];
 const askAll = (kiosk = false) => JSON.parse(php(String.raw`
 require 'lib/paths.php'; require 'lib/bootstrap.php'; require 'tests/api_functions.php';
@@ -170,8 +171,35 @@ echo json_encode($o, JSON_UNESCAPED_UNICODE);
         assert.ok(r.facts.some(f => f[0] === 'Enfants' && /^2 — /.test(f[1])));
         assert.deepEqual(ids('parle-moi de Pierre Mazaud'), [9]);
     });
+    await t('deux liens enchaînés : « les enfants de ma sœur », « les frères de mon père », « le mari de ma tante » ne répondent jamais sur « moi »', () => {
+        assert.match(u('les enfants de ma sœur'), /« ma sœur » = Sophie Durand/); assert.match(q('les enfants de ma sœur').answer, /Sophie Durand/); assert.doesNotMatch(q('les enfants de ma sœur').answer, /Moi Durand/);
+        assert.match(u('les frères de mon père'), /frères de Jean Durand/); assert.doesNotMatch(q('les frères de mon père').answer, /père\./);
+        assert.deepEqual(ids('les enfants de mon oncle'), [13]); assert.match(u('les enfants de mon oncle'), /« mon oncle » = Yves Le Gall/);
+        assert.match(q('le mari de ma tante').answer, /Aucune tante/); assert.doesNotMatch(u('le mari de ma tante'), /conjoints de Moi Durand/);
+        assert.match(u('les ancêtres de ma mère'), /« ma mère » = Marie Le Gall/); assert.ok(!ids('les ancêtres de ma mère').includes(5), 'pas les ancêtres paternels');
+        assert.deepEqual(ids('les cousins de mes parents'), [2, 3], 'deux parents : la réponse sur « mes parents » seulement'); assert.match(q('les cousins de mes parents').answer, /pose la question avec le nom/);
+    });
     await t('« le même jour que moi » inchangé', () => assert.deepEqual(ids('qui est né le même jour que moi'), [3]));
 
+    await t('parenté élargie : un beau-parent (« step ») ou une famille d’accueil (« foster ») ne compte pas comme parent (grands-parents, oncles, frères, cousins) ; il est un beau-parent', () => {
+        // une copie de la base : Berthe (40), seconde femme de Louis (5), notée « step » pour Jean (2) ; Luc (41), fils de Berthe, « step » pour Louis
+        const d2 = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-qplus-step-'));
+        for (const f of fs.readdirSync(dir)) if (/^genealogy\.sqlite/.test(f)) fs.copyFileSync(path.join(dir, f), path.join(d2, f));
+        const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
+require 'lib/paths.php'; require 'lib/bootstrap.php'; require 'tests/api_functions.php'; $pdo = db();
+$pdo->exec("INSERT INTO persons(id,first_name,last_name,gender) VALUES(40,'Berthe','Roux','female'),(41,'Luc','Roux','male'),(42,'Zoé','Roux','female')");
+$pdo->exec("INSERT INTO families(id,partner1_id,partner2_id) VALUES(40,5,40),(41,41,NULL)");
+$pdo->exec("INSERT INTO family_children(family_id,child_id,relation_to_partner1,relation_to_partner2) VALUES(40,2,'biological','step'),(40,41,'step','biological'),(41,42,'foster','biological')");
+$o = []; foreach (['mes grands-parents paternels', 'les grands-parents de Moi Durand', 'les frères de Jean Durand', 'les oncles de Moi Durand', 'les neveux de Luc Roux', 'les beaux-parents de Jean Durand', 'les cousins de Zoé Roux', 'les parents de Jean Durand'] as $q) { $x = ask_question($pdo, $q); $o[$q] = array_map(fn($p) => (int) $p['id'], $x['people'] ?? []); sort($o[$q]); }
+echo json_encode($o, JSON_UNESCAPED_UNICODE);`], { cwd: appRoot, env: { ...env, GENEALOGY_DATA_DIR: d2, GENEALOGY_MEDIA_DIR: path.join(d2, 'media') }, encoding: 'utf8' });
+        fs.rmSync(d2, {recursive: true, force: true});
+        assert.equal(r.status, 0, r.stderr); const o = JSON.parse(r.stdout.trim().split('\n').pop());
+        assert.deepEqual(o['mes grands-parents paternels'], [5, 6], 'pas Berthe'); assert.ok(!o['les grands-parents de Moi Durand'].includes(40));
+        assert.deepEqual(o['les frères de Jean Durand'], [], 'Luc, fils de la belle-mère, n’est pas un frère'); assert.ok(!o['les oncles de Moi Durand'].includes(41));
+        assert.deepEqual(o['les neveux de Luc Roux'], []); assert.ok(o['les beaux-parents de Jean Durand'].includes(40), 'la seconde femme du père : une belle-mère');
+        assert.deepEqual(o['les cousins de Zoé Roux'], [], 'famille d’accueil : pas de cousins par elle');
+        assert.ok(o['les parents de Jean Durand'].includes(5), 'le lien direct « parents » ne change pas');
+    });
     /* ── 4. renvois ── */
     await t('renvois : Que manque-t-il ?, Où chercher ?, Contrôle de la base (doublons)', () => {
         assert.equal(q('quels actes me manquent').open[0].kind, 'gaps'); assert.ok(q('quels actes me manquent').rows.length <= 3);

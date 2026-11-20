@@ -449,10 +449,8 @@ Lien vers la page de suivi ¦ Link spre pagina de urmărire
 Pas de lien (on copie le numéro) ¦ Fără link (numărul se copiază)
 Adresse de la page de suivi, avec {numero} (https:// seulement). ¦ Adresa paginii de urmărire, cu {numero} (doar https://).
 🧾 Devis et factures ¦ 🧾 Oferte și facturi
-Un seul registre : numérotation continue même si les dossiers sont dans plusieurs généalogies. ¦ Un singur registru: numerotare continuă, chiar dacă dosarele sunt în mai mulți arbori.
 Un seul registre pour le cabinet ¦ Un singur registru pentru birou
 Dans la généalogie des dossiers ¦ În arborele dosarelor
-Le compteur ne recule jamais ; un brouillon effacé ne consomme pas de numéro. ¦ Contorul nu dă niciodată înapoi; o ciornă ștearsă nu consumă un număr.
 F-2026-0042 (remis à 1 chaque année) ¦ F-2026-0042 (de la 1 în fiecare an)
 Compteur unique (F-0042) ¦ Contor unic (F-0042)
 La ligne « temps passé » proposée sur la facture. ¦ Rândul „timp petrecut” propus pe factură.
@@ -608,3 +606,30 @@ Un devis accepté ne se modifie plus. ¦ O ofertă acceptată nu se mai modific�
 J−{n} ¦ Z−{n}
 =descendant rattaché ¦ descendent atașat|descendenți atașați|de descendenți atașați
 =échange noté ¦ schimb notat|schimburi notate|de schimburi notate
+# corrections : préfixes, émission datée du jour, INSEE, fiches verrouillées, registre partagé
+le même jour que le défunt, ou une date incomplète : l’ordre des décès n’est pas connu ; le statut reste « Inconnu », à vérifier sur les actes. ¦ în aceeași zi cu defunctul sau o dată incompletă: ordinea deceselor nu se cunoaște; statutul rămâne „Necunoscut”, de verificat în acte.
+Sur la fiche de {n} : un décès en {d} (date incomplète dans le fichier), source « Fichier des personnes décédées (INSEE) », avec la date du relevé. ¦ Pe fișa lui {n}: un deces în {d} (dată incompletă în fișier), sursa „Fișierul persoanelor decedate (INSEE)”, cu data consultării.
+Ce préfixe est déjà celui des factures, des avoirs ou des devis : choisis-en un autre (les trois doivent être différents). ¦ Acest prefix este deja cel al facturilor, notelor de credit sau devizelor: alege altul (toate trei trebuie să fie diferite).
+Préfixe refusé : de 1 à 6 lettres ou chiffres, sans accent. ¦ Prefix refuzat: de la 1 la 6 litere sau cifre, fără diacritice.
+Un seul registre : numérotation continue même si les dossiers sont dans plusieurs généalogies. Passer de l’un à l’autre repartirait d’un autre compteur (numéros en double) : ce choix est bloqué dès la première facture émise. ¦ Un singur registru: numerotare continuă chiar dacă dosarele sunt în mai multe genealogii. Trecerea de la unul la altul ar reporni de la alt contor (numere duble): alegerea se blochează de la prima factură emisă.
+Le compteur ne recule jamais ; un brouillon effacé ne consomme pas de numéro. Bloqué dès la première facture émise. ¦ Contorul nu dă niciodată înapoi; o ciornă ștearsă nu consumă număr. Blocat de la prima factură emisă.
+Une facture est déjà émise dans ce registre : le registre et la numérotation ne se changent plus (sinon, des numéros en double). ¦ În acest registru a fost deja emisă o factură: registrul și numerotarea nu se mai schimbă (altfel, numere duble).
+La dernière pièce émise est datée après aujourd’hui : vérifie la date de l’ordinateur avant d’émettre. ¦ Ultimul document emis are o dată ulterioară zilei de azi: verifică data calculatorului înainte de a emite.
+Émettre le devis ¦ Emite devizul
+Émettre la facture ¦ Emite factura
+À l’émission, la pièce prend la date du jour et le prochain numéro du registre ; le numéro donné s’affiche une fois émise. ¦ La emitere, documentul primește data zilei și următorul număr din registru; numărul dat se afișează după emitere.
+Émettre le devis ? Il prend la date du jour et le prochain numéro du registre ; il reste modifiable tant qu’il n’est pas accepté. ¦ Emiți devizul? Primește data zilei și următorul număr din registru; rămâne modificabil cât timp nu e acceptat.
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. Émettre la facture ? Elle prend la date du jour et le prochain numéro du registre. ¦ O factură emisă nu mai poate fi modificată sau ștearsă. Pentru corectare: o notă de credit. Emiți factura? Primește data zilei și următorul număr din registru.
+{n} émise le {d} ¦ {n} emisă la {d}
+Ce devis a déjà sa facture (brouillon ou émise) : ouvre-la dans le registre. ¦ Acest deviz are deja factura lui (ciornă sau emisă): deschide-o în registru.
+Fiche verrouillée : le décès n’est pas écrit. Déverrouille la fiche d’abord, ou choisis « Seulement le statut du dossier » dans les réglages. ¦ Fișă blocată: decesul nu se scrie. Deblochează mai întâi fișa sau alege „Doar statutul dosarului” în setări.
+Fiche verrouillée : les réponses ne sont pas écrites sur la fiche. Déverrouille-la d’abord. ¦ Fișă blocată: răspunsurile nu se scriu pe fișă. Deblocheaz-o mai întâi.
+Fiche verrouillée : les réponses ne sont pas retirées. Déverrouille-la d’abord. ¦ Fișă blocată: răspunsurile nu se retrag. Deblocheaz-o mai întâi.
+💶 Un reversement reste en attente, et un héritier a été trop payé (plus reversé que reçu) : archiver quand même ? ¦ 💶 O plată este încă în așteptare, iar un moștenitor a primit prea mult (plătit mai mult decât s-a primit): arhivezi totuși?
+💶 Trop versé : un héritier a reçu plus que ce que le notaire a versé pour lui (reste négatif) : archiver quand même ? ¦ 💶 Plătit în plus: un moștenitor a primit mai mult decât a virat notarul pentru el (rest negativ): arhivezi totuși?
+Cette pièce appartient à une généalogie verrouillée par un mot de passe : ouvre-la d’abord. ¦ Acest document aparține unei genealogii blocate cu parolă: deschide-o mai întâi.
+Cette généalogie est protégée par un mot de passe : l’archive doit être chiffrée. Choisis un mot de passe pour l’archive. ¦ Această genealogie este protejată cu parolă: arhiva trebuie criptată. Alege o parolă pentru arhivă.
+Cette généalogie est protégée par un mot de passe : la copie pour le notaire doit être chiffrée (coche « Mot de passe »). ¦ Această genealogie este protejată cu parolă: copia pentru notar trebuie criptată (bifează „Parolă”).
+Cette généalogie est protégée par un mot de passe : ce qui en sort est toujours chiffré. ¦ Această genealogie este protejată cu parolă: ce iese din ea este mereu criptat.
+Copie chiffrée · {n} ¦ Copie criptată · {n}
+Pièce introuvable. ¦ Document negăsit.

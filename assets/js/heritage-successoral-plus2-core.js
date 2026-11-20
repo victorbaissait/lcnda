@@ -36,8 +36,8 @@
             {key: 'rec_link', def: 'yes', options: [['yes', 'Lien vers la page de suivi'], ['no', 'Pas de lien (on copie le numéro)']], help: 'L’app n’interroge jamais La Poste : le lien ouvre la page dans ton navigateur, tu notes toi-même l’AR.'},
             {key: 'rec_url', def: 'https://www.laposte.fr/outils/suivre-vos-envois?code={numero}', text: true, help: 'Adresse de la page de suivi, avec {numero} (https:// seulement).'}]},
         {tool: '🧾 Devis et factures', items: [
-            {key: 'inv_register', def: 'cabinet', options: [['cabinet', 'Un seul registre pour le cabinet'], ['genealogy', 'Dans la généalogie des dossiers']], help: 'Un seul registre : numérotation continue même si les dossiers sont dans plusieurs généalogies.'},
-            {key: 'inv_numbering', def: 'yearly', options: [['yearly', 'F-2026-0042 (remis à 1 chaque année)'], ['single', 'Compteur unique (F-0042)']], help: 'Le compteur ne recule jamais ; un brouillon effacé ne consomme pas de numéro.'},
+            {key: 'inv_register', def: 'cabinet', options: [['cabinet', 'Un seul registre pour le cabinet'], ['genealogy', 'Dans la généalogie des dossiers']], help: 'Un seul registre : numérotation continue même si les dossiers sont dans plusieurs généalogies. Passer de l’un à l’autre repartirait d’un autre compteur (numéros en double) : ce choix est bloqué dès la première facture émise.'},
+            {key: 'inv_numbering', def: 'yearly', options: [['yearly', 'F-2026-0042 (remis à 1 chaque année)'], ['single', 'Compteur unique (F-0042)']], help: 'Le compteur ne recule jamais ; un brouillon effacé ne consomme pas de numéro. Bloqué dès la première facture émise.'},
             {key: 'inv_time', def: 'unchecked', options: [['unchecked', 'Temps décoché quand il y a une commission'], ['checked', 'Temps toujours coché']], help: 'La ligne « temps passé » proposée sur la facture.'},
             {key: 'inv_prefix_f', def: 'F', prefix: true, help: 'Préfixe des factures.'}, {key: 'inv_prefix_a', def: 'A', prefix: true, help: 'Préfixe des avoirs.'}, {key: 'inv_prefix_d', def: 'D', prefix: true, help: 'Préfixe des devis.'}]},
         {tool: '📈 Activité', items: [

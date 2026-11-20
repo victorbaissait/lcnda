@@ -790,6 +790,7 @@ function successoral_dispatch(PDO $pdo, string $action, bool $isWrite, array $pa
             if ($op === 'archive_download' && !succ_kiosk()) { access_log_add($pdo, 'export', '', null, '', 'succ_archive'); } // 📜 lib/verrou.php
             $res = successoral_api_get($pdo, $_GET);
             if ($op === 'get' && !succ_kiosk() && !empty($res['id'])) { access_case_open($pdo, (int) $res['id']); } // 📂 une fois par séance
+            if ($op === 'p2_map' && !succ_kiosk() && function_exists('access_log_add')) { $mc = safe_int($_GET['case_id'] ?? 0); access_log_add($pdo, 'case_open', 'case', $mc ?: null, $mc && function_exists('access_case_label') ? access_case_label($pdo, $mc) : '', 'succ_map'); } // 🗺 les adresses des héritiers
             json_response($res);
         }
         if ($isWrite && $action === 'successoral_write') {

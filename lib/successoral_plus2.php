@@ -65,6 +65,17 @@ function succ_p2_settings_clean(mixed $d, ?array $base = null): array
         if ($rule === 'prefix') { $t = strtoupper(trim((string) $v)); if (preg_match('/^[A-Z0-9]{1,6}$/', $t)) { $s[$k] = $t; } continue; }
         if ($rule === 'url') { $u = trim((string) $v); if ($u === '' || (strlen($u) <= 300 && preg_match('{^https://[a-z0-9.-]+(/[^\s<>"]*)?$}i', $u) && str_contains($u, '{numero}'))) { $s[$k] = $u; } }
     }
+    // 🧾 trois préfixes différents (factures, avoirs, devis) : sinon l'avoir prendrait le numéro d'une facture et ne serait jamais émis.
+    // Un préfixe qui en double un autre est refusé : l'ancien est gardé, sinon la valeur par défaut.
+    $P = ['inv_prefix_f', 'inv_prefix_a', 'inv_prefix_d'];
+    $old = array_merge(succ_p2_defaults(), is_array($base) ? array_intersect_key($base, SUCC_P2_SPEC) : []);
+    $order = array_merge(array_filter($P, static fn($k) => $s[$k] !== $old[$k]), ['inv_prefix_a', 'inv_prefix_d', 'inv_prefix_f']); // le préfixe changé d'abord ; celui des factures en dernier
+    foreach (array_unique($order) as $k) {
+        $others = static fn() => array_map(static fn($j) => $s[$j], array_values(array_diff($P, [$k])));
+        if (!in_array($s[$k], $others(), true)) { continue; }
+        foreach ([$old[$k], SUCC_P2_SPEC[$k][0]] as $try) { if (preg_match('/^[A-Z0-9]{1,6}$/', (string) $try) && !in_array($try, $others(), true)) { $s[$k] = $try; continue 2; } }
+        for ($i = 2; in_array($s[$k], $others(), true) && $i < 100; $i++) { $s[$k] = SUCC_P2_SPEC[$k][0] . $i; }
+    }
     return $s;
 }
 function succ_p2_cabinet_clean(mixed $d, ?array $base = null): array
@@ -154,7 +165,21 @@ const SUCC_P2_MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', '
 function succ_p2_fr_date(string $iso): string
 {
     if (!preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $iso, $m)) { return $iso; }
+    if (!checkdate((int) $m[2], (int) $m[3], (int) $m[1])) { return (int) $m[2] >= 1 && (int) $m[2] <= 12 ? SUCC_P2_MONTHS[(int) $m[2] - 1] . ' ' . $m[1] : $m[1]; } // « 1985-00-00 » → « 1985 »
     return (int) $m[3] . ' ' . SUCC_P2_MONTHS[(int) $m[2] - 1] . ' ' . $m[1];
+}
+/** une date du fichier INSEE (« 19850312 », « 19850000 », « 19850300 ») : iso seulement si elle est complète et existe, sinon l'année seule */
+function succ_p2_insee_date(string $dd): array
+{
+    if (!preg_match('/^(\d{4})(\d{2})(\d{2})$/', $dd, $m)) { return ['iso' => '', 'year' => null, 'text' => $dd]; }
+    if (checkdate((int) $m[2], (int) $m[3], (int) $m[1])) { $iso = "$m[1]-$m[2]-$m[3]"; return ['iso' => $iso, 'year' => (int) $m[1], 'text' => succ_p2_fr_date($iso)]; }
+    return ['iso' => '', 'year' => (int) $m[1] ?: null, 'text' => (int) $m[1] ? $m[1] : ''];
+}
+/** le statut retenu d'après la date du décès INSEE : « avant » ou « après » le défunt seulement si les deux dates sont complètes et différentes */
+function succ_p2_insee_status(string $iso, string $death): string
+{
+    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $iso) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $death) || $iso === $death) { return 'unknown'; } // le même jour : l'ordre des décès n'est pas connu
+    return $iso < $death ? 'dead_before' : 'dead_after';
 }
 /** les héritiers « vivants » du dossier (avec une part, ou rattachés comme héritiers), sans décès sur la fiche */
 function succ_p2_living_heirs(PDO $pdo, array $c): array
@@ -269,7 +294,7 @@ function succ_p2_insee_pistes(PDO $pdo, array $c, ?int $threshold = null): array
             $pistes[] = ['insee_id' => (int) $row['id'], 'key' => $key, 'score' => $sc['score'], 'cap' => $sc['cap'], 'detail' => $sc['detail'],
                 'nom' => (string) $row['nom'], 'prenoms' => (string) $row['prenoms'], 'sexe' => (string) $row['sexe'], 'naissance' => (string) $row['date_naissance'],
                 'lieu_naissance' => trim((string) $row['commune_naissance'] . ' ' . ((string) $row['pays_naissance'] !== '' ? '(' . $row['pays_naissance'] . ')' : '')), 'code_naissance' => (string) $row['code_lieu_naissance'],
-                'deces' => strlen($dd) === 8 ? substr($dd, 0, 4) . '-' . substr($dd, 4, 2) . '-' . substr($dd, 6, 2) : $dd, 'lieu_deces' => (string) $row['commune_deces'], 'acte' => (string) $row['numero_acte_deces'],
+                'deces' => ($DD = succ_p2_insee_date($dd))['iso'] ?: $DD['text'], 'status' => succ_p2_insee_status($DD['iso'], (string) ($c['death_iso'] ?? '')), 'lieu_deces' => (string) $row['commune_deces'], 'acte' => (string) $row['numero_acte_deces'],
                 'same' => ($no[$pid . '|' . $key] ?? '') === 'same'];
         }
         usort($pistes, static fn($a, $b) => $b['score'] <=> $a['score']);
@@ -302,14 +327,15 @@ function succ_p2_insee_confirm(PDO $pdo, array $d): array
     $pid = safe_int($d['person_id'] ?? 0); if (!succ_person_ok($pdo, $pid)) { throw new LcndaBadInput('Fiche introuvable.'); }
     $s = $pdo->prepare('SELECT * FROM insee_deces WHERE id=?'); $s->execute([safe_int($d['insee_id'] ?? 0)]); $row = $s->fetch(PDO::FETCH_ASSOC);
     if (!$row) { throw new LcndaBadInput('Ligne INSEE introuvable.'); }
-    $dd = (string) $row['date_deces']; $iso = strlen($dd) === 8 ? substr($dd, 0, 4) . '-' . substr($dd, 4, 2) . '-' . substr($dd, 6, 2) : '';
+    $dd = (string) $row['date_deces']; $D = succ_p2_insee_date($dd); $iso = $D['iso'];
     $mode = in_array($d['mode'] ?? '', ['both', 'case'], true) ? (string) $d['mode'] : succ_p2_set()['insee_write'];
     $eventId = null;
+    if ($mode === 'both' && function_exists('person_is_locked') && person_is_locked($pdo, $pid)) { throw new LcndaBadInput('Fiche verrouillée : le décès n’est pas écrit. Déverrouille la fiche d’abord, ou choisis « Seulement le statut du dossier » dans les réglages.'); }
     if ($mode === 'both') {
         $tag = succ_p2_tag_id($pdo, 'DEAT'); if (!$tag) { throw new LcndaBadInput('Type d’événement « Décès » introuvable.'); }
         $note = 'Source : Fichier des personnes décédées (INSEE), acte n° ' . ($row['numero_acte_deces'] ?: '—') . ', fichier importé, relevé le ' . succ_p2_fr_date(date('Y-m-d')) . '.';
         $pdo->prepare("INSERT INTO events(scope, person_id, event_type_id, date_text, year, sort_date, place_id, description) VALUES('person',?,?,?,?,?,?,?)")
-            ->execute([$pid, $tag, $iso ? succ_p2_fr_date($iso) : $dd, $iso ? (int) substr($iso, 0, 4) : ((int) $row['annee_deces'] ?: null), $iso ?: null, succ_p2_place_id($pdo, (string) $row['commune_deces']), $note]);
+            ->execute([$pid, $tag, $D['text'] !== '' ? $D['text'] : $dd, $D['year'] ?? ((int) $row['annee_deces'] ?: null), $iso ?: null, succ_p2_place_id($pdo, (string) $row['commune_deces']), $note]);
         $eventId = (int) $pdo->lastInsertId();
         $prevStatus = (string) $pdo->query('SELECT living_status FROM persons WHERE id=' . $pid)->fetchColumn();
         $pdo->prepare("UPDATE persons SET living_status='deceased', updated_at=CURRENT_TIMESTAMP WHERE id=?")->execute([$pid]);
@@ -318,13 +344,13 @@ function succ_p2_insee_confirm(PDO $pdo, array $d): array
     }
     // le statut retenu dans ce dossier : d'après la date du décès du défunt (le moteur garde la règle)
     $death = (string) $c['death_iso'];
-    $status = $iso !== '' && preg_match('/^\d{4}-\d{2}-\d{2}$/', $death) ? ($iso < $death ? 'dead_before' : 'dead_after') : 'unknown';
+    $status = succ_p2_insee_status($iso, $death);
     $ov = succ_override($pdo, ['case_id' => $cid, 'person_id' => $pid, 'field' => 'status', 'value' => $status]);
     $key = succ_p2_insee_key($row);
     $pdo->prepare("INSERT INTO succ_insee_checks(case_id, person_id, insee_key, insee_id, score, verdict, event_id, prev_json) VALUES(?,?,?,?,?, 'same', ?, ?)")
         ->execute([$cid, $pid, $key, (int) $row['id'], safe_int($d['score'] ?? 0), $eventId, json_encode(['status' => $ov['prev'], 'living' => $prevStatus ?? null])]);
     $chk = (int) $pdo->lastInsertId();
-    succ_journal($pdo, $cid, 'calc', '⚰️ ' . succ_person_name($pdo, $pid) . ' marqué(e) décédé(e) d’après le fichier INSEE (' . ($iso ? succ_p2_fr_date($iso) : $dd) . ', acte n° ' . ($row['numero_acte_deces'] ?: '—') . ')' . ($mode === 'both' ? ' : décès écrit sur la fiche' : ' : statut du dossier seulement'));
+    succ_journal($pdo, $cid, 'calc', '⚰️ ' . succ_person_name($pdo, $pid) . ' marqué(e) décédé(e) d’après le fichier INSEE (' . ($D['text'] !== '' ? $D['text'] : $dd) . ', acte n° ' . ($row['numero_acte_deces'] ?: '—') . ')' . ($mode === 'both' ? ' : décès écrit sur la fiche' : ' : statut du dossier seulement'));
     succ_touch($pdo, $cid);
     return ['check_id' => $chk, 'status' => $status, 'event_id' => $eventId, 'mode' => $mode];
 }
@@ -544,13 +570,18 @@ function succ_p2_due_items(PDO $pdo, int $caseId, string $until): array
         // 💶 un reversement en attente depuis plus de 30 jours (sans nom ni montant)
         $f = $pdo->prepare("SELECT person_id, MIN(CASE WHEN sens='recu' THEN day END) AS first, SUM(CASE WHEN sens='recu' THEN amount_cents ELSE -amount_cents END) AS rest FROM succ_funds WHERE case_id=? AND deleted_at IS NULL GROUP BY person_id"); $f->execute([$caseId]);
         $late = array_filter($f->fetchAll(PDO::FETCH_ASSOC), static fn($r) => (int) $r['rest'] > 0 && $r['first'] && $r['first'] <= date('Y-m-d', strtotime('-30 days')));
-        if ($late) { $out[] = ['kind' => 'p2funds', 'id' => $caseId, 'due' => $today, 'label' => '💶 Un reversement en attente', 'sort' => 'funds']; }
+        $opt = succ_p2_options($pdo, $caseId);
+        // ✓ fait : caché tant que les reversements en attente ne changent pas ; ⏭ reporter : caché jusqu'à la date choisie
+        $fs = is_array($opt['funds_seen'] ?? null) ? $opt['funds_seen'] : [];
+        if ($late && !(($fs['sig'] ?? '') === succ_p2_funds_sig($late)) && !(($fs['until'] ?? '') > $today)) { $out[] = ['kind' => 'p2funds', 'id' => $caseId, 'due' => $today, 'label' => '💶 Un reversement en attente', 'sort' => 'funds']; }
         // 📅 une copie d'acte bientôt trop ancienne (durée de validité tapée par toi)
         $warn = (int) $set['validity_warn'];
         $p = $pdo->prepare("SELECT piece_key, issued_on, valid_months FROM succ_pieces WHERE case_id=? AND issued_on<>'' AND valid_months>0"); $p->execute([$caseId]);
         foreach ($p->fetchAll(PDO::FETCH_ASSOC) as $r) {
             $end = date('Y-m-d', strtotime((string) $r['issued_on'] . ' +' . (int) $r['valid_months'] . ' months'));
             $at = date('Y-m-d', strtotime($end . ' -' . $warn . ' days'));
+            $vs = is_array($opt['valid_seen'][(string) $r['piece_key']] ?? null) ? $opt['valid_seen'][(string) $r['piece_key']] : [];
+            if (($vs['end'] ?? '') === $end || ($vs['until'] ?? '') > $today) { continue; } // ✓ vu pour cette copie (une nouvelle copie revient) ; ⏭ reporté
             if ($at <= $until) { $out[] = ['kind' => 'p2valid', 'id' => $caseId . ':' . $r['piece_key'], 'due' => max($at, $today), 'label' => '📅 Copie d’acte trop ancienne le ' . $end . ' (' . $r['piece_key'] . ')', 'sort' => 'validity']; }
         }
     } catch (Throwable $_) {}
@@ -567,6 +598,8 @@ function succ_p2_insee_bell(PDO $pdo, array $caseRow): ?array
     foreach (succ_p2_insee_pistes($pdo, $caseRow) as $h) { foreach ($h['pistes'] as $p) { if (!$p['same']) { $n++; $best = max($best, $p['score']); } } }
     return ['kind' => 'p2insee', 'id' => (int) $caseRow['id'], 'due' => date('Y-m-d'), 'label' => $n ? '⚰️ ' . $n . ' nouvelle(s) piste(s) INSEE (score ' . $best . ')' : '⚰️ Nouveau fichier INSEE : rien de nouveau', 'sort' => 'insee', 'n' => $n];
 }
+/** 💶 l'état des reversements en attente (qui, combien), en empreinte : « ✓ fait » le cache tant qu'il ne change pas */
+function succ_p2_funds_sig(array $rows): string { $x = []; foreach ($rows as $r) { $x[(int) $r['person_id']] = (int) $r['rest']; } ksort($x); return hash('sha256', json_encode($x)); }
 /** ✓ fait / ⏭ reporter / ↶ pour les lignes de la cloche venues de ces outils */
 function succ_p2_due_mark(PDO $pdo, array $d): array
 {
@@ -600,6 +633,21 @@ function succ_p2_due_mark(PDO $pdo, array $d): array
             $cid = (int) explode(':', $id)[0]; $o = succ_p2_options($b, $cid); $prev = ['o' => array_intersect_key($o, array_flip(['insee_seen', 'funds_seen', 'valid_seen']))];
             if ($act === 'undo') { foreach (['insee_seen', 'funds_seen', 'valid_seen'] as $k) { unset($o[$k]); } $o = array_merge($o, is_array($d['prev']['o'] ?? null) ? array_intersect_key($d['prev']['o'], array_flip(['insee_seen', 'funds_seen', 'valid_seen'])) : []); }
             elseif ($kind === 'p2insee') { $o['insee_seen'] = succ_p2_insee_stats($b)['import'] ?? 0; }
+            else {
+                $to = $act === 'done' ? '' : succ_txt($d['to'] ?? date('Y-m-d', strtotime('+7 days')), 10);
+                if ($to !== '' && !succ_date_ok($to)) { throw new LcndaBadInput('Date incorrecte.'); }
+                if ($kind === 'p2funds') {
+                    $f = $b->prepare("SELECT person_id, SUM(CASE WHEN sens='recu' THEN amount_cents ELSE -amount_cents END) AS rest FROM succ_funds WHERE case_id=? AND deleted_at IS NULL GROUP BY person_id"); $f->execute([$cid]);
+                    $o['funds_seen'] = $act === 'done' ? ['sig' => succ_p2_funds_sig(array_filter($f->fetchAll(PDO::FETCH_ASSOC), static fn($r) => (int) $r['rest'] > 0)), 'at' => date('Y-m-d')] : ['until' => $to];
+                } else {
+                    $key = (string) (explode(':', $id, 2)[1] ?? ''); if ($key === '') { throw new LcndaBadInput('Pièce introuvable.'); }
+                    $p = $b->prepare("SELECT issued_on, valid_months FROM succ_pieces WHERE case_id=? AND piece_key=?"); $p->execute([$cid, $key]); $pr = $p->fetch(PDO::FETCH_ASSOC);
+                    if (!$pr) { throw new LcndaBadInput('Pièce introuvable.'); }
+                    $vs = is_array($o['valid_seen'] ?? null) ? $o['valid_seen'] : [];
+                    $vs[$key] = $act === 'done' ? ['end' => date('Y-m-d', strtotime((string) $pr['issued_on'] . ' +' . (int) $pr['valid_months'] . ' months'))] : ['until' => $to];
+                    $o['valid_seen'] = $vs;
+                }
+            }
             succ_p2_options_save($b, $cid, $o);
             return ['prev' => $prev];
         }
@@ -844,7 +892,9 @@ function succ_p2_docx_text(array $d): array
     $tmp = tempnam(sys_get_temp_dir(), 'lcnda-docx'); file_put_contents($tmp, $bin);
     try {
         $z = new ZipArchive(); if ($z->open($tmp) !== true) { throw new LcndaBadInput('Ce fichier n’est pas un .docx.'); }
-        $xml = $z->getFromName('word/document.xml'); $z->close();
+        $st = $z->statName('word/document.xml'); // la taille décompressée d'abord : une « bombe » zip n'est jamais décompressée
+        if (!is_array($st) || (int) $st['size'] > 20_000_000) { $z->close(); throw new LcndaBadInput('Ce fichier n’est pas un .docx.'); }
+        $xml = $z->getFromName('word/document.xml', 20_000_001); $z->close();
         if (!is_string($xml) || strlen($xml) > 20_000_000) { throw new LcndaBadInput('Ce fichier n’est pas un .docx.'); }
         $xml = (string) preg_replace(['#</w:p>#', '#<w:tab/>#', '#<w:br\s*/>#'], ["\n\n", "\t", "\n"], $xml);
         $text = html_entity_decode(strip_tags($xml), ENT_QUOTES | ENT_XML1, 'UTF-8');
@@ -938,6 +988,8 @@ function succ_p2_q_apply(PDO $pdo, array $d): array
     $made = ['persons' => [], 'families' => [], 'events' => [], 'contacts' => [], 'contact_prev' => [], 'deadlines' => []];
     $n = 0;
     $person = succ_persons($pdo, [$pid])[$pid] ?? null;
+    $touches = array_filter(array_keys($on), static fn($k) => $k === 'birth' || $k === 'children' || $k === 'address' || str_starts_with((string) $k, 'spouse:'));
+    if ($touches && function_exists('person_is_locked') && person_is_locked($pdo, $pid)) { throw new LcndaBadInput('Fiche verrouillée : les réponses ne sont pas écrites sur la fiche. Déverrouille-la d’abord.'); }
     $fam = static function (int $a, ?int $b) use ($pdo, $person): int {
         $female = ($person['gender'] ?? '') === 'female';
         $pdo->prepare('INSERT INTO families(partner1_id, partner2_id) VALUES(?,?)')->execute($female ? [$b, $a] : [$a, $b]);
@@ -948,7 +1000,12 @@ function succ_p2_q_apply(PDO $pdo, array $d): array
         if ($r['key'] === 'birth') {
             $tag = succ_p2_tag_id($pdo, 'BIRT'); $iso = succ_iso((string) $r['date']);
             $ev = $person['birth']['event_id'] ?? 0;
-            if ($ev) { $s = $pdo->prepare('SELECT date_text, year, sort_date, place_id, description FROM events WHERE id=?'); $s->execute([$ev]); $made['event_prev'][$ev] = $s->fetch(PDO::FETCH_ASSOC); $pdo->prepare('UPDATE events SET date_text=?, year=?, sort_date=?, place_id=COALESCE(?, place_id), description=trim(description || ? ) WHERE id=?')->execute([$r['date'], $iso ? (int) substr($iso, 0, 4) : null, strlen($iso) === 10 ? $iso : null, succ_p2_place_id($pdo, (string) $r['place']), "\n" . $src, $ev]); }
+            if ($ev) {
+                $s = $pdo->prepare('SELECT date_text, year, sort_date, place_id, description FROM events WHERE id=?'); $s->execute([$ev]); $old = $s->fetch(PDO::FETCH_ASSOC); $made['event_prev'][$ev] = $old;
+                // seulement les champs remplis : une réponse sans date garde la date de la fiche, une réponse sans lieu garde le lieu
+                $hasDate = trim((string) $r['date']) !== '';
+                $pdo->prepare('UPDATE events SET date_text=?, year=?, sort_date=?, place_id=COALESCE(?, place_id), description=trim(description || ? ) WHERE id=?')->execute([$hasDate ? $r['date'] : (string) $old['date_text'], $hasDate ? ($iso ? (int) substr($iso, 0, 4) : null) : $old['year'], $hasDate ? (strlen($iso) === 10 ? $iso : null) : $old['sort_date'], trim((string) $r['place']) !== '' ? succ_p2_place_id($pdo, (string) $r['place']) : null, "\n" . $src, $ev]);
+            }
             elseif ($tag) { $pdo->prepare("INSERT INTO events(scope, person_id, event_type_id, date_text, year, sort_date, place_id, description) VALUES('person',?,?,?,?,?,?,?)")->execute([$pid, $tag, $r['date'], $iso ? (int) substr($iso, 0, 4) : null, strlen($iso) === 10 ? $iso : null, succ_p2_place_id($pdo, (string) $r['place']), $src]); $made['events'][] = (int) $pdo->lastInsertId(); }
             $n++;
         } elseif (str_starts_with($r['key'], 'spouse:')) {
@@ -973,7 +1030,7 @@ function succ_p2_q_apply(PDO $pdo, array $d): array
             }
         } elseif ($r['key'] === 'address') {
             $s = $pdo->prepare('SELECT * FROM living_contacts WHERE person_id=? ORDER BY updated_at DESC, id DESC LIMIT 1'); $s->execute([$pid]); $old = $s->fetch(PDO::FETCH_ASSOC);
-            if ($old) { $made['contact_prev'][] = $old; $pdo->prepare('UPDATE living_contacts SET address=?, postal_code=?, city=?, phone_mobile=CASE WHEN ?<>\'\' THEN ? ELSE phone_mobile END, email=CASE WHEN ?<>\'\' THEN ? ELSE email END, notes=CASE WHEN notes=\'\' THEN ? ELSE notes || char(10) || ? END, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$r['address'], $r['postal_code'], $r['city'], $r['phone'], $r['phone'], $r['email'], $r['email'], $src, $src, (int) $old['id']]); }
+            if ($old) { $made['contact_prev'][] = $old; $pdo->prepare('UPDATE living_contacts SET address=CASE WHEN ?<>\'\' THEN ? ELSE address END, postal_code=CASE WHEN ?<>\'\' THEN ? ELSE postal_code END, city=CASE WHEN ?<>\'\' THEN ? ELSE city END, phone_mobile=CASE WHEN ?<>\'\' THEN ? ELSE phone_mobile END, email=CASE WHEN ?<>\'\' THEN ? ELSE email END, notes=CASE WHEN notes=\'\' THEN ? ELSE notes || char(10) || ? END, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$r['address'], $r['address'], $r['postal_code'], $r['postal_code'], $r['city'], $r['city'], $r['phone'], $r['phone'], $r['email'], $r['email'], $src, $src, (int) $old['id']]); }
             else { $pdo->prepare('INSERT INTO living_contacts(person_id, first_name, last_name, address, postal_code, city, phone_mobile, email, notes) VALUES(?,?,?,?,?,?,?,?,?)')->execute([$pid, (string) ($person['first'] ?? ''), (string) ($person['last'] ?? ''), $r['address'], $r['postal_code'], $r['city'], $r['phone'], $r['email'], $src]); $made['contacts'][] = (int) $pdo->lastInsertId(); }
             $n++;
         } elseif ($r['key'] === 'family') {
@@ -985,32 +1042,52 @@ function succ_p2_q_apply(PDO $pdo, array $d): array
         }
     }
     foreach ($made['persons'] as $x) { if (function_exists('rebuild_search')) { try { rebuild_search($pdo, $x); } catch (Throwable $_) {} } }
-    if ($chk['token'] !== '') { $pdo->prepare('UPDATE succ_questionnaires SET answered_at=CURRENT_TIMESTAMP, applied_json=? WHERE token=?')->execute([json_encode($made), $chk['token']]); }
+    // ce qui a été écrit reste côté serveur : « ↶ Annuler » ne défait que cela (jamais une liste venue du navigateur)
+    $undoToken = $chk['token'];
+    if ($undoToken !== '') { $pdo->prepare('UPDATE succ_questionnaires SET answered_at=CURRENT_TIMESTAMP, applied_json=? WHERE token=?')->execute([json_encode($made), $undoToken]); }
+    else { $undoToken = 'papier-' . bin2hex(random_bytes(12)); $pdo->prepare("INSERT INTO succ_questionnaires(case_id, person_id, token, fields_json, answered_at, applied_json) VALUES(?,?,?,?, CURRENT_TIMESTAMP, ?)")->execute([$cid, $pid, $undoToken, json_encode(['paper' => true]), json_encode($made)]); }
     succ_journal($pdo, $cid, 'edit', '📋 Réponses de ' . $chk['name'] . ' : ' . $n . ' changement(s) écrit(s)' . ($chk['paper'] ? ' (questionnaire papier)' : ''));
     if (function_exists('log_change')) { log_change($pdo, 'person', $pid, 'update', 'Réponses au questionnaire d’héritier écrites'); }
-    return ['changes' => $n, 'made' => $made, 'persons' => count($made['persons'])];
+    return ['changes' => $n, 'made' => $made, 'persons' => count($made['persons']), 'undo_token' => $undoToken];
 }
 function succ_p2_q_undo_apply(PDO $pdo, array $d): array
 {
     $cid = safe_int($d['case_id'] ?? 0); succ_row($pdo, $cid);
-    $m = is_array($d['made'] ?? null) ? $d['made'] : [];
+    // ce qui a été écrit, relu côté serveur (succ_questionnaires.applied_json) : jamais la liste envoyée par le navigateur
+    $s = $pdo->prepare("SELECT id, person_id, applied_json, fields_json FROM succ_questionnaires WHERE token=? AND case_id=? AND applied_json<>''"); $s->execute([(string) ($d['token'] ?? ''), $cid]); $q = $s->fetch(PDO::FETCH_ASSOC);
+    $m = $q ? json_decode((string) $q['applied_json'], true) : null;
+    if (!is_array($m)) { throw new LcndaBadInput('Rien à annuler.'); }
+    $persons = array_values(array_filter(array_map('intval', (array) ($m['persons'] ?? []))));
+    // une fiche verrouillée depuis (créée par les réponses, ou l'héritier lui-même) : rien n'est défait
+    if (function_exists('person_is_locked')) { foreach (array_merge($persons, [(int) $q['person_id']]) as $x) { if (person_is_locked($pdo, $x)) { throw new LcndaBadInput('Fiche verrouillée : les réponses ne sont pas retirées. Déverrouille-la d’abord.'); } } }
     foreach (array_map('intval', (array) ($m['events'] ?? [])) as $id) { $pdo->prepare('DELETE FROM events WHERE id=?')->execute([$id]); }
     foreach ((array) ($m['event_prev'] ?? []) as $id => $p) { if (is_array($p)) { $pdo->prepare('UPDATE events SET date_text=?, year=?, sort_date=?, place_id=?, description=? WHERE id=?')->execute([(string) ($p['date_text'] ?? ''), $p['year'] ?? null, $p['sort_date'] ?? null, $p['place_id'] ?? null, (string) ($p['description'] ?? ''), (int) $id]); } }
     foreach (array_map('intval', (array) ($m['families'] ?? [])) as $id) { $pdo->prepare('DELETE FROM family_children WHERE family_id=?')->execute([$id]); $pdo->prepare('DELETE FROM families WHERE id=?')->execute([$id]); }
-    foreach (array_map('intval', (array) ($m['persons'] ?? [])) as $id) { $pdo->prepare('DELETE FROM succ_case_persons WHERE person_id=? AND case_id=?')->execute([$id, $cid]); $pdo->prepare('DELETE FROM events WHERE person_id=?')->execute([$id]); $pdo->prepare('DELETE FROM persons WHERE id=?')->execute([$id]); }
-    foreach (array_map('intval', (array) ($m['contacts'] ?? [])) as $id) { $pdo->prepare('DELETE FROM living_contacts WHERE id=?')->execute([$id]); }
+    foreach ($persons as $id) {
+        $pdo->prepare('DELETE FROM succ_case_persons WHERE person_id=? AND case_id=?')->execute([$id, $cid]);
+        // la suppression ordinaire d'une fiche : corbeille (Historique → Restaurer), journal des changements, liens défaits
+        if (function_exists('delete_person')) { try { delete_person($pdo, ['id' => $id]); } catch (RuntimeException $e) { if (!str_contains($e->getMessage(), 'introuvable')) { throw $e; } } }
+        else { $pdo->prepare('DELETE FROM events WHERE person_id=?')->execute([$id]); $pdo->prepare('DELETE FROM persons WHERE id=?')->execute([$id]); }
+    }
+    foreach (array_map('intval', (array) ($m['contacts'] ?? [])) as $id) { $pdo->prepare('DELETE FROM living_contacts WHERE id=? AND person_id=?')->execute([$id, (int) $q['person_id']]); }
     foreach ((array) ($m['contact_prev'] ?? []) as $p) { if (is_array($p)) { $pdo->prepare('UPDATE living_contacts SET address=?, postal_code=?, city=?, phone_mobile=?, email=?, notes=? WHERE id=?')->execute([(string) $p['address'], (string) $p['postal_code'], (string) $p['city'], (string) ($p['phone_mobile'] ?? ''), (string) $p['email'], (string) $p['notes'], (int) $p['id']]); } }
     foreach (array_map('intval', (array) ($m['deadlines'] ?? [])) as $id) { $pdo->prepare('UPDATE succ_deadlines SET deleted_at=CURRENT_TIMESTAMP WHERE id=? AND case_id=?')->execute([$id, $cid]); }
     if (array_key_exists('note_prev', $m)) { $pdo->prepare('UPDATE succ_cases SET hypothesis_note=? WHERE id=?')->execute([succ_txt($m['note_prev'], 4000, true), $cid]); }
-    if (($t = (string) ($d['token'] ?? '')) !== '') { $pdo->prepare("UPDATE succ_questionnaires SET answered_at=NULL, applied_json='' WHERE token=? AND case_id=?")->execute([$t, $cid]); }
+    $paper = !empty((json_decode((string) $q['fields_json'], true) ?: [])['paper']);
+    if ($paper) { $pdo->prepare('DELETE FROM succ_questionnaires WHERE id=?')->execute([(int) $q['id']]); }
+    else { $pdo->prepare("UPDATE succ_questionnaires SET answered_at=NULL, applied_json='' WHERE id=?")->execute([(int) $q['id']]); }
+    if (function_exists('log_change')) { log_change($pdo, 'person', (int) $q['person_id'], 'update', 'Réponses au questionnaire d’héritier retirées'); }
     succ_journal($pdo, $cid, 'edit', '↶ Réponses au questionnaire annulées');
     return ['ok' => true];
 }
 
 /* ═════════ 7. 🤝 Copie pour le notaire : la liste des copies faites (pas les fichiers), le registre ═════════ */
+/** 🔐 la généalogie ouverte est protégée par un mot de passe (Verrou) : archive et copie pour le notaire seulement chiffrées */
+function succ_p2_protected(): bool { try { return function_exists('glock_info') && !empty(glock_info()['locked']); } catch (Throwable $_) { return false; } }
 function succ_p2_notary_copy(PDO $pdo, array $d): array
 {
     $c = succ_row($pdo, safe_int($d['case_id'] ?? 0)); $cid = (int) $c['id'];
+    if (empty($d['encrypted']) && succ_p2_protected()) { throw new LcndaBadInput('Cette généalogie est protégée par un mot de passe : la copie pour le notaire doit être chiffrée (coche « Mot de passe »).'); }
     $o = succ_p2_options($pdo, $cid); $list = is_array($o['notary_copies'] ?? null) ? $o['notary_copies'] : [];
     $v = count($list) + 1;
     $row = ['v' => $v, 'at' => date('Y-m-d H:i'), 'addresses' => !empty($d['addresses']), 'encrypted' => !empty($d['encrypted']), 'pieces' => max(0, safe_int($d['pieces'] ?? 0)), 'research' => !empty($d['research'])];
@@ -1025,9 +1102,19 @@ function succ_p2_piece_media(PDO $pdo, int $caseId): array
     $c = succ_row($pdo, $caseId);
     $did = (int) $c['deceased_id']; if (!$did) { return []; }
     $graph = succ_graph($pdo, $did); [$acts] = succ_acts($pdo, $graph, $caseId);
+    // 🙈 les fiches confidentielles laissées hors du calcul (réglage « private_heirs » décoché) : leurs actes ne partent pas non plus
+    // (même règle que withoutPrivate du moteur : toute fiche « privée » sauf le défunt ; un mariage dont l'un des deux l'est)
+    $priv = [];
+    if (function_exists('succ_settings') && empty(succ_settings()['private_heirs'])) { foreach ($graph['persons'] as $id => $p) { if (!empty($p['private']) && (int) $id !== $did) { $priv[(int) $id] = true; } } }
+    $unions = []; foreach ($graph['unions'] ?? [] as $u) { $unions[(string) ($u['id'] ?? '')] = [(int) ($u['a'] ?? 0), (int) ($u['b'] ?? 0)]; }
     $out = [];
     foreach ($acts as $key => $a) {
         if (empty($a['media']) || empty($a['event_id'])) { continue; }
+        if ($priv) {
+            [$pre, $ref] = explode(':', (string) $key, 2) + [1 => ''];
+            if (($pre === 'N' || $pre === 'D') && isset($priv[(int) $ref])) { continue; }
+            if (($pre === 'M' || $pre === 'V') && (isset($priv[$unions[$ref][0] ?? 0]) || isset($priv[$unions[$ref][1] ?? 0]))) { continue; }
+        }
         $s = $pdo->prepare("SELECT m.id, m.filename, m.media_type, m.title FROM media m WHERE m.id=(SELECT confidence_media_id FROM events WHERE id=?) UNION SELECT m.id, m.filename, m.media_type, m.title FROM media m JOIN media_links ml ON ml.media_id=m.id WHERE ml.entity_type='event' AND ml.entity_id=? LIMIT 4");
         try { $s->execute([(int) $a['event_id'], (int) $a['event_id']]); } catch (Throwable $_) { continue; }
         foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $m) { if (preg_match('/\.(jpe?g|png|webp|gif)$/i', (string) $m['filename']) && (string) $m['filename'] !== '' && !str_contains((string) $m['filename'], '..')) { $out[] = ['key' => (string) $key, 'id' => (int) $m['id'], 'filename' => (string) $m['filename'], 'title' => (string) $m['title'], 'size' => (int) @filesize(MEDIA_DIR . '/' . $m['filename'])]; } }
@@ -1170,7 +1257,7 @@ function succ_p2_bundle(PDO $pdo, int $caseId): array
 {
     $q = static function (string $sql) use ($pdo, $caseId): array { try { $s = $pdo->prepare($sql); $s->execute([$caseId]); return $s->fetchAll(PDO::FETCH_ASSOC); } catch (Throwable $_) { return []; } };
     $inv = [];
-    try { $inv = array_values(array_filter(succ_inv_list(succ_inv_pdo($pdo), ['case_number' => (string) succ_row($pdo, $caseId, true)['number']]), static fn($x) => $x['number'] !== '')); } catch (Throwable $_) {}
+    try { $inv = array_values(array_filter(succ_inv_list(succ_inv_pdo($pdo), ['case_number' => (string) succ_row($pdo, $caseId, true)['number']]), static fn($x) => $x['number'] !== '' && $x['genealogy'] === (string) GENEALOGY_ID)); /* les pièces de CE dossier : même n° de dossier ET même généalogie */ } catch (Throwable $_) {}
     return ['p2_calls' => $q('SELECT * FROM succ_calls WHERE case_id=?'), 'p2_funds' => $q('SELECT * FROM succ_funds WHERE case_id=?'), 'p2_insee' => $q('SELECT * FROM succ_insee_checks WHERE case_id=?'),
         'p2_questionnaires' => $q('SELECT * FROM succ_questionnaires WHERE case_id=?'), 'p2_invoices_copy' => $inv];
 }
@@ -1191,17 +1278,25 @@ function succ_p2_archive_file(PDO $pdo, array $d): array
     $pw = is_string($d['password'] ?? null) ? (string) $d['password'] : '';
     if ($mode === 'required' && $pw === '') { throw new LcndaBadInput('Le mot de passe est obligatoire (réglage).'); }
     if ($mode === 'none') { $pw = ''; }
+    // 🔐 une généalogie protégée par un mot de passe : l'archive ne sort jamais en clair (quel que soit le réglage)
+    if ($pw === '' && succ_p2_protected()) { throw new LcndaBadInput('Cette généalogie est protégée par un mot de passe : l’archive doit être chiffrée. Choisis un mot de passe pour l’archive.'); }
     if ($pw !== '' && mb_strlen($pw) < 8) { throw new LcndaBadInput('Mot de passe trop court (8 caractères au moins).'); }
     $id = safe_int($d['id'] ?? 0);
+    $number = ''; try { $number = (string) succ_row($pdo, $id, true)['number']; } catch (Throwable $_) {}
     if (succ_p2_ready($pdo)) {
         $s = $pdo->prepare("SELECT person_id, SUM(CASE WHEN sens='recu' THEN amount_cents ELSE -amount_cents END) AS r FROM succ_funds WHERE case_id=? AND deleted_at IS NULL GROUP BY person_id HAVING r<>0"); $s->execute([$id]);
-        if ($s->fetchColumn() !== false && empty($d['funds_ok'])) { throw new LcndaBadInput('💶 Un reversement reste en attente : archiver quand même ?'); }
+        $rest = array_map('intval', $s->fetchAll(PDO::FETCH_COLUMN, 1));
+        $due = (bool) array_filter($rest, static fn($r) => $r > 0); $over = (bool) array_filter($rest, static fn($r) => $r < 0); // reste à reverser / trop versé
+        if (($due || $over) && empty($d['funds_ok'])) {
+            throw new LcndaBadInput($due && $over ? '💶 Un reversement reste en attente, et un héritier a été trop payé (plus reversé que reçu) : archiver quand même ?'
+                : ($due ? '💶 Un reversement reste en attente : archiver quand même ?' : '💶 Trop versé : un héritier a reçu plus que ce que le notaire a versé pour lui (reste négatif) : archiver quand même ?'));
+        }
     }
     $r = succ_archive_file($pdo, $d);
     if ($pw !== '') {
         if (!function_exists('vault_encrypt_file')) { require_once __DIR__ . '/heritage_more.php'; }
         $path = succ_archive_dir() . '/' . $r['token']; $tmp = $path . '.chiffre';
-        vault_encrypt_file($path, $tmp, $pw, ['kind' => 'lcnda-succ', 'number' => (string) ($r['file'] ?? '')]);
+        vault_encrypt_file($path, $tmp, $pw, ['kind' => 'lcnda-succ', 'number' => $number]); // l'en-tête (lisible sans le mot de passe) : le numéro du dossier seulement, jamais le nom du défunt
         @unlink($path); rename($tmp, $path);
         $r['encrypted'] = true;
     }
@@ -1263,7 +1358,7 @@ function succ_p2_get(PDO $pdo, string $op, array $g): ?array
     if (!str_starts_with($op, 'p2_')) { return null; }
     succ_p2_ensure($pdo);
     return match ($op) {
-        'p2_settings' => ['p2' => succ_p2_set(), 'cabinet' => succ_p2_cabinet(), 'defaults' => succ_p2_defaults()],
+        'p2_settings' => ['p2' => succ_p2_set(), 'cabinet' => succ_p2_cabinet(), 'defaults' => succ_p2_defaults(), 'protected' => succ_p2_protected()],
         'p2_insee_stats' => succ_p2_insee_stats($pdo),
         'p2_research' => succ_p2_research($pdo, safe_int($g['case_id'] ?? 0), safe_int($g['person_id'] ?? 0)),
         'p2_map' => succ_p2_map($pdo, $g),

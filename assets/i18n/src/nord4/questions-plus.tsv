@@ -66,3 +66,6 @@ Poser la question : « {q} » ¦ Kysy: ”{q}” ¦ Kérdés feltevése: „{q}�
 Questions dans la recherche rapide (⌘K) ¦ Kysymykset pikahaussa (⌘K) ¦ Kérdések a gyorskeresőben (⌘K)
 Répondre aux questions dans la recherche rapide ¦ Vastaa kysymyksiin pikahaussa ¦ Kérdések megválaszolása a gyorskeresőben
 « les enfants de Pierre Mazaud » : la réponse courte s’affiche dans la liste ; sinon seulement « Poser la question » ¦ ”les enfants de Pierre Mazaud”: lyhyt vastaus näkyy luettelossa; muuten vain ”Kysy” ¦ „les enfants de Pierre Mazaud”: a rövid válasz megjelenik a listában; különben csak „Kérdés feltevése”
+Pour aller plus loin, pose la question avec le nom de la personne voulue. ¦ Jatkaaksesi kysy kysymys sen henkilön nimellä, jota tarkoitat. ¦ A folytatáshoz tedd fel a kérdést a keresett személy nevével.
+« {a} » cherché d’abord ¦ ”{a}” haettu ensin ¦ „{a}” először megkeresve
+« {a} » = {name} ¦ ”{a}” = {name} ¦ „{a}” = {name}

@@ -485,7 +485,7 @@ function ask_question(PDO $pdo, string $question, int $personId = 0, string $pla
     if (!function_exists('qp_rewrite')) { return ask_question_base($pdo, $question, $personId, $placeKey); }
     $rw = qp_rewrite($pdo, $question);
     $q = $rw['q']; if ($rw['person'] && !$personId) { $personId = $rw['person']; }
-    $finish = static function (array $r) use ($rw): array {
+    $finish = static function (array $r) use (&$rw): array {
         if (isset($r['understood']) && is_array($r['understood'])) {
             $u = array_map(static fn($x) => is_string($x) && isset($rw['replace']) ? strtr($x, $rw['replace']) : $x, $r['understood']);
             $r['understood'] = array_values(array_unique(array_merge($rw['notes'], $u), SORT_REGULAR));
@@ -499,6 +499,22 @@ function ask_question(PDO $pdo, string $question, int $personId = 0, string $pla
         unset($sp['ids']);
         return $sp;
     };
+    // « les enfants de ma sœur » : d'abord « ma sœur » (sur la personne de départ), puis le premier lien sur la personne trouvée
+    if (!empty($rw['chain'])) {
+        $c = $rw['chain'];
+        $in = ask_question_base($pdo, $c['inner'], (int) $c['root'], $placeKey);
+        $ids = array_values(array_unique(array_map('intval', array_merge(array_column($in['people'] ?? [], 'id'), $in['ids'] ?? []))));
+        $one = count($ids) === 1 ? (qm_people($pdo)[$ids[0]] ?? null) : null;
+        $name = $one ? qm_name($one) : '';
+        if (!$one || qm_find_people($pdo, $name) !== [$ids[0]]) {
+            // personne, ou plusieurs personnes (ou un homonyme) : la réponse sur « ma sœur » seulement, jamais une réponse sur « moi »
+            if ($ids) { $in['answer'] = trim(($in['answer'] ?? '') . ' ' . i18n_t('Pour aller plus loin, pose la question avec le nom de la personne voulue.')); }
+            $in['understood'] = array_merge([i18n_t('« {a} » cherché d’abord', ['a' => $c['said']])], $in['understood'] ?? []);
+            return $finish($in);
+        }
+        $q = substr_replace($q, $name, (int) $c['start'], (int) $c['len']); $personId = $ids[0];
+        $rw['notes'][] = i18n_t('« {a} » = {name}', ['a' => $c['said'], 'name' => $name]);
+    }
     if ($d = qp_direct($pdo, $q, $personId)) { return $finish($people($d)); }
     $neg = qp_negations($q);
     if ($neg['crit']) { $q = $neg['q']; }
@@ -568,9 +584,9 @@ function ask_question_base(PDO $pdo, string $question, int $personId = 0, string
     $rel = $r['relation'] ?? null;
     $sibKind = []; $sibNote = '';
     if ($rel && $rel['relation'] === 'siblings') {
-        $mine = h_parents($pdo, (int) $rel['person']);
+        $mine = h_parents($pdo, (int) $rel['person'], true);
         $kindOf = static function (int $sid) use ($pdo, $mine) {
-            $theirs = h_parents($pdo, $sid); $common = array_values(array_intersect($mine, $theirs));
+            $theirs = h_parents($pdo, $sid, true); $common = array_values(array_intersect($mine, $theirs));
             if (count($mine) >= 2 && count($theirs) >= 2) { return count($common) >= 2 ? ['full'] : ['half', $common[0] ?? 0]; }
             return ['unknown', $common[0] ?? 0];
         };

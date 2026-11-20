@@ -66,3 +66,6 @@ Poser la question : « {q} » ¦ Položit otázku: „{q}“ ¦ Ställ frågan: 
 Questions dans la recherche rapide (⌘K) ¦ Otázky v rychlém hledání (⌘K) ¦ Frågor i snabbsökningen (⌘K) ¦ Spørgsmål i hurtigsøgningen (⌘K)
 Répondre aux questions dans la recherche rapide ¦ Odpovídat na otázky v rychlém hledání ¦ Svara på frågor i snabbsökningen ¦ Besvar spørgsmål i hurtigsøgningen
 « les enfants de Pierre Mazaud » : la réponse courte s’affiche dans la liste ; sinon seulement « Poser la question » ¦ „les enfants de Pierre Mazaud“: krátká odpověď se ukáže v seznamu; jinak jen „Položit otázku“ ¦ ”les enfants de Pierre Mazaud”: det korta svaret visas i listan; annars bara ”Ställ frågan” ¦ »les enfants de Pierre Mazaud«: det korte svar vises i listen; ellers kun »Stil spørgsmålet«
+Pour aller plus loin, pose la question avec le nom de la personne voulue. ¦ Chceš-li pokračovat, polož otázku se jménem dané osoby. ¦ För att gå vidare, ställ frågan med namnet på personen du menar. ¦ For at komme videre, stil spørgsmålet med navnet på den person, du mener.
+« {a} » cherché d’abord ¦ „{a}“ hledáno nejdřív ¦ ”{a}” söks först ¦ «{a}« søgt først
+« {a} » = {name} ¦ „{a}“ = {name} ¦ ”{a}” = {name} ¦ «{a}« = {name}

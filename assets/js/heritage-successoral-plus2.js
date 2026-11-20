@@ -41,6 +41,7 @@
     const cfg = () => C().settings(SET?.p2);
     SP.cfg = cfg; SP.cabinet = () => SET?.cabinet || {};
     SP.siret = () => SET?.cabinet?.siret || '';
+    SP.protected = () => !!SET?.protected; // 🔐 généalogie protégée par un mot de passe : archive et copie pour le notaire toujours chiffrées
     async function loadSettings(force = false) {
         if (SET && !force) return SET;
         try { SET = await get('p2_settings'); } catch (_) { SET = SET || {p2: {}, cabinet: {}}; }
@@ -69,7 +70,7 @@
     };
     async function saveSetting(patch, label, key = 'p2') {
         const prev = key === 'p2' ? {...cfg()} : {...(SET?.cabinet || {})};
-        let r; try { r = await post({op: 'settings_save', settings: {[key]: patch}}); } catch (e) { return toast(e.message, 'error'); }
+        let r; try { r = await post({op: 'settings_save', settings: {[key]: patch}}); } catch (e) { toast(e.message, 'error'); return false; }
         SET = {...(SET || {}), p2: r.settings.p2, cabinet: r.settings.cabinet};
         const back = Object.fromEntries(Object.keys(patch).map(k => [k, prev[k]]));
         A().undoToast(i18n('Réglage enregistré : {what}', {what: label}), {undo: async () => { const r2 = await post({op: 'settings_save', settings: {[key]: back}}); SET = {...SET, p2: r2.settings.p2, cabinet: r2.settings.cabinet}; ext.succDossiers?.refreshSettings?.(); ext.successoral?.forget?.(); }});
@@ -86,7 +87,15 @@
         if (cust || v === '__custom') { const n = Number((cust || t.closest('.sp2-custom').querySelector('[data-sp2-custom]')).value); if (!Number.isInteger(n) || n < it.custom[0] || n > it.custom[1]) return; v = n; }
         else if (typeof it.def === 'number') v = Number(v);
         if (t.dataset.sp2Text !== undefined && it.text && v && !C().trackUrl(v, '1')) return toast(i18n('Adresse refusée : https:// et {numero} sont obligatoires.'), 'error');
-        saveSetting({[key]: v}, `${i18n(it.help).split(/[.:]/)[0]} → ${it.options ? optLabel(it, v) : v}`);
+        const was = cfg()[key];
+        const restore = () => { if (it.prefix || it.text) t.value = String(was ?? ''); else { const o = document.querySelector(`#sp2-reglages [name="sp2-set-${key}"][value="${CSS.escape(String(was))}"]`) || document.querySelector(`#sp2-reglages [name="sp2-set-${key}"][value="__custom"]`); if (o) o.checked = true; } };
+        if (it.prefix) {
+            v = String(v).trim().toUpperCase();
+            // 🧾 factures, avoirs et devis : trois préfixes différents (sinon l'avoir prendrait un numéro de facture et ne serait pas émis)
+            if (['inv_prefix_f', 'inv_prefix_a', 'inv_prefix_d'].some(k => k !== key && String(cfg()[k]) === v)) { restore(); return toast(i18n('Ce préfixe est déjà celui des factures, des avoirs ou des devis : choisis-en un autre (les trois doivent être différents).'), 'error'); }
+            if (!/^[A-Z0-9]{1,6}$/.test(v)) { restore(); return toast(i18n('Préfixe refusé : de 1 à 6 lettres ou chiffres, sans accent.'), 'error'); }
+        }
+        saveSetting({[key]: v}, `${i18n(it.help).split(/[.:]/)[0]} → ${it.options ? optLabel(it, v) : v}`).then(ok => { if (ok === false) restore(); });
     });
     document.addEventListener('click', e => {
         const b = e.target.closest?.('[data-sp2-setlink]'); if (!b) return;
@@ -149,11 +158,13 @@
         }
         const s = r.stats, set = cfg();
         const cover = `${esc(i18n('fichier importé : décès {a} → {b}', {a: String(s.from), b: String(s.to)}))}${s.from > 1975 ? ` · ${esc(i18n('un décès plus ancien ne peut pas être trouvé'))}` : ''}`;
+        // « avant » / « après » le défunt seulement si les deux dates sont complètes et différentes (même règle que succ_p2_insee_status)
+        const inseeStatus = p => p.status || (/^\d{4}-\d{2}-\d{2}$/.test(p.deces || '') && /^\d{4}-\d{2}-\d{2}$/.test(death) && p.deces !== death ? (p.deces < death ? 'dead_before' : 'dead_after') : 'unknown');
         const one = (h, p) => {
-            const before = death && p.deces && p.deces < death;
+            const st = inseeStatus(p);
             return `<div class="sp2-piste${p.score >= 80 ? ' is-strong' : ''}" data-sp2-piste="${h.person_id}:${p.insee_id}"><div class="sp2-piste-head"><b>${esc(p.prenoms)} ${esc(p.nom)}</b> ${badge(`${p.score} / 100`, p.score >= 80 ? 'red' : p.score >= 60 ? 'yellow' : 'grey')}
                 ${p.cap < 100 ? `<small class="muted">${esc(i18n('plafonné à {n}', {n: p.cap}))}</small>` : ''}</div>${critHtml(p)}
-                <p>† ${esc(fmtDate(p.deces))}${p.lieu_deces ? ', ' + esc(p.lieu_deces) : ''}${p.acte ? ' · ' + esc(i18n('acte n° {n}', {n: p.acte})) : ''} · ${esc(before ? i18n('avant le défunt : si c’est cette personne, ses enfants viennent à sa place (représentation).') : i18n('après le défunt : sa part passe à ses propres héritiers.'))}</p>
+                <p>† ${esc(fmtDate(p.deces))}${p.lieu_deces ? ', ' + esc(p.lieu_deces) : ''}${p.acte ? ' · ' + esc(i18n('acte n° {n}', {n: p.acte})) : ''} · ${esc(st === 'dead_before' ? i18n('avant le défunt : si c’est cette personne, ses enfants viennent à sa place (représentation).') : st === 'dead_after' ? i18n('après le défunt : sa part passe à ses propres héritiers.') : i18n('le même jour que le défunt, ou une date incomplète : l’ordre des décès n’est pas connu ; le statut reste « Inconnu », à vérifier sur les actes.'))}</p>
                 ${p.detail?.abroad ? `<p class="ui-hint">${esc(i18n('Les Français nés à l’étranger ont leur acte au Service central d’état civil (Nantes).'))}</p>` : ''}
                 ${p.same ? badge(i18n('déjà confirmé'), 'green') : D.archived ? '' : `<div class="succ-acts"><button type="button" class="button small" data-sp2-insee-yes="${h.person_id}:${p.insee_id}:${p.score}">✓ ${esc(i18n('C’est cette personne'))}</button><button type="button" class="button small secondary" data-sp2-insee-no="${h.person_id}:${p.insee_id}:${p.score}">✕ ${esc(i18n('Pas la même personne'))}</button><button type="button" class="button small secondary" data-sp2-insee-later>${esc(i18n('Plus tard'))}</button></div>`}</div>`;
         };
@@ -186,8 +197,8 @@
                 if (yes) {
                     const [pid, iid, sc] = yes.dataset.sp2InseeYes.split(':').map(Number);
                     const h = r.heirs.find(x => x.person_id === pid), p = h?.pistes.find(x => x.insee_id === iid); if (!p) return;
-                    const before = death && p.deces < death, mode = cfg().insee_write;
-                    const ok = await A().confirmBox(`${mode === 'both' ? i18n('Sur la fiche de {n} : un décès le {d}, source « Fichier des personnes décédées (INSEE) », avec la date du relevé.', {n: h.name, d: fmtDate(p.deces)}) + ' ' : ''}${i18n('Dans ce dossier : statut retenu « {s} » ; le calcul est refait.', {s: i18n(before ? 'Mort avant le défunt' : 'Mort après le défunt')})}`, {title: i18n('Ce qui va changer'), okLabel: i18n('Noter')});
+                    const st = inseeStatus(p), mode = cfg().insee_write;
+                    const ok = await A().confirmBox(`${mode === 'both' ? (/^\d{4}-\d{2}-\d{2}$/.test(p.deces || '') ? i18n('Sur la fiche de {n} : un décès le {d}, source « Fichier des personnes décédées (INSEE) », avec la date du relevé.', {n: h.name, d: fmtDate(p.deces)}) : i18n('Sur la fiche de {n} : un décès en {d} (date incomplète dans le fichier), source « Fichier des personnes décédées (INSEE) », avec la date du relevé.', {n: h.name, d: p.deces})) + ' ' : ''}${i18n('Dans ce dossier : statut retenu « {s} » ; le calcul est refait.', {s: i18n(st === 'dead_before' ? 'Mort avant le défunt' : st === 'dead_after' ? 'Mort après le défunt' : 'Inconnu')})}`, {title: i18n('Ce qui va changer'), okLabel: i18n('Noter')});
                     if (!ok) return;
                     let x; try { x = await post({op: 'p2_insee_confirm', case_id: D.id, person_id: pid, insee_id: iid, score: sc}); } catch (err) { return toast(err.message, 'error'); }
                     d.close();
@@ -419,7 +430,7 @@
                 const keys = [...f.querySelectorAll('[data-sp2-qk]:checked')].map(x => x.dataset.sp2Qk);
                 if (!keys.length) return;
                 let x; try { x = await post({op: 'p2_q_apply', case_id: D.id, keys, ...src}); } catch (e) { toast(e.message, 'error'); return false; }
-                A().undoToast(i18n('{n} écrits. Calcul refait.', {n: plural(x.changes, 'changement')}), {undo: async () => { await post({op: 'p2_q_undo_apply', case_id: D.id, made: x.made, token: r.token}); reload(); }});
+                A().undoToast(i18n('{n} écrits. Calcul refait.', {n: plural(x.changes, 'changement')}), {undo: async () => { await post({op: 'p2_q_undo_apply', case_id: D.id, token: x.undo_token || r.token}); reload(); }});
                 reload();
             }});
     }
@@ -654,15 +665,16 @@
     }
 
     /* ═════ 15. 📦 Archive de fin de dossier ═════ */
+    const archMode = () => SP.protected() ? 'required' : cfg().archive_password; // 🔐 généalogie protégée : jamais d'archive en clair
     SP.archiveExtraHtml = D => {
-        const mode = cfg().archive_password;
+        const mode = archMode();
         return `<div class="sp2-archive"><p><b>${esc(i18n('Part aussi'))}</b> : ${esc(i18n('📞 échanges · 💶 fonds · ⚰️ vérifications INSEE · 🧾 copie des factures (le registre, lui, ne change pas)'))}</p>
-            ${mode === 'none' ? '' : `${mode === 'required' ? `<p><b>🔐 ${esc(i18n('Mot de passe (obligatoire)'))}</b></p>` : ck(i18n('🔐 Mot de passe'), 'name="arch_pw_on"', true)}
+            ${mode === 'none' ? '' : `${mode === 'required' ? `<p><b>🔐 ${esc(i18n('Mot de passe (obligatoire)'))}</b></p>${SP.protected() ? `<p class="ui-hint">${esc(i18n('Cette généalogie est protégée par un mot de passe : ce qui en sort est toujours chiffré.'))}</p>` : ''}` : ck(i18n('🔐 Mot de passe'), 'name="arch_pw_on"', true)}
             <div class="succ-2" data-sp2-archpw><label>${esc(i18n('Mot de passe'))}<input type="password" name="arch_pw" autocomplete="new-password" minlength="8"></label><label>${esc(i18n('Encore une fois'))}<input type="password" name="arch_pw2" autocomplete="new-password"></label></div>
             <p class="ui-hint">${esc(i18n('AES-256, comme les sauvegardes protégées. Oublié = archive perdue. Le réimport le demande.'))} ${setLink('archive_password')}</p>`}</div>`;
     };
     SP.archivePassword = f => {
-        const mode = cfg().archive_password; if (mode === 'none') return '';
+        const mode = archMode(); if (mode === 'none') return '';
         if (mode !== 'required' && !f.arch_pw_on?.checked) return '';
         const a = f.arch_pw?.value || '', b = f.arch_pw2?.value || '';
         if (a.length < 8) { UI().fail(f.arch_pw, i18n('Mot de passe trop court (8 caractères au moins).')); return false; }

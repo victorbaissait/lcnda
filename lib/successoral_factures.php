@@ -55,6 +55,38 @@ function succ_inv_write(PDO $pdo, callable $fn): array
     $b->exec('BEGIN IMMEDIATE');
     try { $r = $fn($b); $b->exec('COMMIT'); return $r; } catch (Throwable $e) { try { $b->exec('ROLLBACK'); } catch (Throwable $_) {} throw $e; }
 }
+/**
+ * 🔐 Le registre du cabinet est commun à toutes les généalogies : les pièces d'une AUTRE généalogie verrouillée par un mot de passe
+ * ne sont ni lues (liste, CSV, tableau de bord) ni modifiées (avoir, payée, devis…) ; seules celles de la généalogie ouverte et des
+ * généalogies non verrouillées le sont. Les généalogies verrouillées sont seulement comptées (« n bases verrouillées non lues »).
+ */
+function succ_inv_hidden_gids(): array
+{
+    static $memo = null;
+    if ($memo !== null) { return $memo; }
+    $memo = [];
+    if (!function_exists('glock_genealogy_locked') || !function_exists('succ_genealogies')) { return $memo; }
+    try { foreach (succ_genealogies() as $gid => $_) { $gid = (string) $gid; if ($gid !== (string) GENEALOGY_ID && glock_genealogy_locked($gid)) { $memo[] = $gid; } } } catch (Throwable $_) {}
+    return $memo;
+}
+/** la condition SQL « pas une pièce d'une autre généalogie verrouillée » : [sql, paramètres] */
+function succ_inv_visible_sql(string $col = 'genealogy'): array
+{
+    $h = succ_inv_hidden_gids();
+    return $h ? [$col . ' NOT IN (' . implode(',', array_fill(0, count($h), '?')) . ')', $h] : ['1=1', []];
+}
+/** combien d'autres généalogies verrouillées ont des pièces dans ce registre (rien d'autre n'est dit) */
+function succ_inv_locked_count(PDO $b): int
+{
+    $h = succ_inv_hidden_gids(); if (!$h) { return 0; }
+    try { $s = $b->prepare('SELECT COUNT(DISTINCT genealogy) FROM succ_invoices WHERE genealogy IN (' . implode(',', array_fill(0, count($h), '?')) . ')'); $s->execute($h); return (int) $s->fetchColumn(); } catch (Throwable $_) { return 0; }
+}
+/** au moins une facture, un avoir ou un devis numéroté dans ce registre (sans créer le registre du cabinet s'il n'existe pas) */
+function succ_inv_has_emitted(PDO $pdo, string $mode): bool
+{
+    if ($mode === 'cabinet' && !is_file(succ_inv_cabinet_path())) { return false; }
+    try { return (bool) succ_inv_pdo($pdo, $mode)->query("SELECT 1 FROM succ_invoices WHERE number<>'' LIMIT 1")->fetchColumn(); } catch (Throwable $_) { return false; }
+}
 /** « 20 », « 5,5 », « 0 » → 2000, 550, 0 (points de base) ; null si ce n'est pas un taux */
 function succ_inv_rate(string $t): ?int
 {
@@ -88,6 +120,7 @@ function succ_inv_row(PDO $b, int $id): array
 {
     $s = $b->prepare('SELECT * FROM succ_invoices WHERE id=?'); $s->execute([$id]); $r = $s->fetch(PDO::FETCH_ASSOC);
     if (!$r) { throw new LcndaBadInput('Facture introuvable.'); }
+    if (in_array((string) $r['genealogy'], succ_inv_hidden_gids(), true)) { throw new LcndaBadInput('Cette pièce appartient à une généalogie verrouillée par un mot de passe : ouvre-la d’abord.'); } // 🔐
     return $r;
 }
 function succ_inv_out(PDO $b, array $r): array
@@ -101,7 +134,7 @@ function succ_inv_out(PDO $b, array $r): array
 }
 function succ_inv_list(PDO $b, array $q = []): array
 {
-    $w = []; $p = [];
+    [$vis, $p] = succ_inv_visible_sql(); $w = [$vis];
     if (($q['case_number'] ?? '') !== '') { $w[] = 'case_number=?'; $p[] = (string) $q['case_number']; }
     if (preg_match('/^\d{4}$/', (string) ($q['year'] ?? ''))) { $w[] = "(substr(day,1,4)=? OR number='')"; $p[] = (string) $q['year']; }
     $s = $b->prepare('SELECT * FROM succ_invoices' . ($w ? ' WHERE ' . implode(' AND ', $w) : '') . " ORDER BY CASE WHEN number='' THEN 0 ELSE 1 END, emitted_at DESC, id DESC LIMIT 2000"); $s->execute($p);
@@ -126,6 +159,22 @@ function succ_inv_take(PDO $b, string $kind, string $day): string
     $s = $b->prepare('SELECT 1 FROM succ_invoices WHERE number=?'); $s->execute([$num]);
     if ($s->fetchColumn()) { throw new LcndaBadInput('Numéro déjà pris : renuméroter le brouillon.'); }
     return $num;
+}
+/**
+ * 🧾 la date du jour d'une émission (facture, devis, avoir) : celle de l'ordinateur de l'utilisateur (« today », envoyée par le
+ * navigateur : le serveur compte en UTC), acceptée seulement à un jour près de la date du serveur ; sinon celle du serveur.
+ * Jamais avant la dernière pièce émise de la même sorte : les numéros suivent les dates.
+ */
+function succ_inv_today(PDO $b, array $d, string $kind): string
+{
+    $srv = date('Y-m-d'); $t = (string) ($d['today'] ?? '');
+    $day = succ_date_ok($t) && abs(strtotime($t . ' 12:00:00') - strtotime($srv . ' 12:00:00')) <= 86400 ? $t : $srv;
+    $s = $b->prepare("SELECT MAX(day) FROM succ_invoices WHERE kind=? AND number<>''"); $s->execute([$kind]); $last = (string) $s->fetchColumn();
+    if ($last !== '' && $day < $last) {
+        if ($last > max($srv, $t)) { throw new LcndaBadInput('La dernière pièce émise est datée après aujourd’hui : vérifie la date de l’ordinateur avant d’émettre.'); }
+        $day = $last;
+    }
+    return $day;
 }
 const SUCC_INV_LOCKED = 'Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir.';
 function succ_inv_save(PDO $pdo, array $d): array
@@ -179,10 +228,12 @@ function succ_inv_emit(PDO $pdo, array $d): array
         if ($r['number'] !== '') { throw new LcndaBadInput('Déjà émise.'); }
         if ($r['kind'] !== 'devis' && ($r['rate_bp'] === null || $r['rate_text'] === '')) { throw new LcndaBadInput('Choisis toi-même le taux de TVA (avec ton comptable) avant d’émettre.'); }
         if (!(int) $b->query('SELECT count(*) FROM succ_invoice_lines WHERE invoice_id=' . (int) $r['id'])->fetchColumn()) { throw new LcndaBadInput('La facture n’a aucune ligne.'); }
-        $num = succ_inv_take($b, (string) $r['kind'], (string) $r['day']);
-        $b->prepare("UPDATE succ_invoices SET number=?, status='emitted', emitted_at=CURRENT_TIMESTAMP, mentions=?, cabinet_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=? AND number=''")
-            ->execute([$num, (string) $cab['mentions'], json_encode(array_intersect_key($cab, array_flip(['name', 'address', 'siret', 'vat'])), JSON_UNESCAPED_UNICODE), (int) $r['id']]);
-        return ['id' => (int) $r['id'], 'number' => $num];
+        // à l'émission, la pièce prend la date du jour (le brouillon ne garde sa date que tant qu'il est brouillon) : numéros et dates dans le même ordre
+        $day = succ_inv_today($b, $d, (string) $r['kind']);
+        $num = succ_inv_take($b, (string) $r['kind'], $day);
+        $b->prepare("UPDATE succ_invoices SET number=?, day=?, status='emitted', emitted_at=CURRENT_TIMESTAMP, mentions=?, cabinet_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=? AND number=''")
+            ->execute([$num, $day, (string) $cab['mentions'], json_encode(array_intersect_key($cab, array_flip(['name', 'address', 'siret', 'vat'])), JSON_UNESCAPED_UNICODE), (int) $r['id']]);
+        return ['id' => (int) $r['id'], 'number' => $num, 'day' => $day, 'draft_day' => (string) $r['day']];
     });
 }
 /** 🧾 un avoir : les lignes de la facture en négatif, son propre numéro, lien vers la facture ; émis tout de suite */
@@ -194,7 +245,7 @@ function succ_inv_avoir(PDO $pdo, array $d): array
         $f = succ_inv_row($b, safe_int($d['id'] ?? 0));
         if ($f['kind'] !== 'facture' || $f['number'] === '') { throw new LcndaBadInput('Un avoir corrige une facture émise.'); }
         $s = $b->prepare("SELECT number FROM succ_invoices WHERE kind='avoir' AND ref_id=?"); $s->execute([(int) $f['id']]); if ($s->fetchColumn()) { throw new LcndaBadInput('Cette facture a déjà un avoir.'); }
-        $day = date('Y-m-d');
+        $day = succ_inv_today($b, $d, 'avoir');
         $lines = []; $l = $b->prepare('SELECT pos, label, qty_milli, unit_cents FROM succ_invoice_lines WHERE invoice_id=? ORDER BY pos, id'); $l->execute([(int) $f['id']]);
         foreach ($l->fetchAll(PDO::FETCH_ASSOC) as $x) { $lines[] = ['pos' => (int) $x['pos'], 'label' => (string) $x['label'], 'qty_milli' => (int) $x['qty_milli'], 'unit_cents' => -(int) $x['unit_cents']]; }
         $T = succ_inv_totals($lines, $f['rate_bp'] === null ? null : (int) $f['rate_bp']);
@@ -204,7 +255,7 @@ function succ_inv_avoir(PDO $pdo, array $d): array
             ->execute([$num, $day, $f['client_name'], $f['client_address'], $f['person_id'], $f['case_number'], $f['case_title'], $f['genealogy'], $f['rate_text'], $f['rate_bp'], $T['ht'], $T['vat'], $T['ttc'], (string) $cab['mentions'], json_encode(array_intersect_key($cab, array_flip(['name', 'address', 'siret', 'vat'])), JSON_UNESCAPED_UNICODE), (int) $f['id']]);
         $id = (int) $b->lastInsertId();
         foreach ($T['lines'] as $x) { $b->prepare('INSERT INTO succ_invoice_lines(invoice_id, pos, label, qty_milli, unit_cents, total_cents) VALUES(?,?,?,?,?,?)')->execute([$id, $x['pos'], $x['label'], $x['qty_milli'], $x['unit_cents'], $x['total_cents']]); }
-        return ['id' => $id, 'number' => $num];
+        return ['id' => $id, 'number' => $num, 'day' => $day];
     });
 }
 function succ_inv_paid(PDO $pdo, array $d): array
@@ -224,6 +275,9 @@ function succ_inv_quote(PDO $pdo, array $d, string $act): array
         $q = succ_inv_row($b, safe_int($d['id'] ?? 0));
         if ($q['kind'] !== 'devis') { throw new LcndaBadInput('Ce n’est pas un devis.'); }
         if ($act === 'accept') { $b->prepare("UPDATE succ_invoices SET status=? WHERE id=?")->execute([empty($d['undo']) ? 'accepted' : 'emitted', (int) $q['id']]); return ['ok' => true]; }
+        // une seule facture par devis (brouillon ou émise) : sinon le même devis serait facturé deux fois
+        $s = $b->prepare("SELECT number FROM succ_invoices WHERE kind='facture' AND ref_id=? LIMIT 1"); $s->execute([(int) $q['id']]);
+        if ($s->fetch()) { throw new LcndaBadInput('Ce devis a déjà sa facture (brouillon ou émise) : ouvre-la dans le registre.'); }
         $b->prepare("INSERT INTO succ_invoices(kind, day, client_name, client_address, person_id, case_number, case_title, genealogy, rate_text, rate_bp, total_ht, total_vat, total_ttc, ref_id) SELECT 'facture', ?, client_name, client_address, person_id, case_number, case_title, genealogy, rate_text, rate_bp, total_ht, total_vat, total_ttc, id FROM succ_invoices WHERE id=?")->execute([date('Y-m-d'), (int) $q['id']]);
         $id = (int) $b->lastInsertId();
         $b->prepare('INSERT INTO succ_invoice_lines(invoice_id, pos, label, qty_milli, unit_cents, total_cents) SELECT ?, pos, label, qty_milli, unit_cents, total_cents FROM succ_invoice_lines WHERE invoice_id=?')->execute([$id, (int) $q['id']]);
@@ -237,7 +291,8 @@ function succ_inv_csv(PDO $pdo, array $g): never
     $cell = static function (string $v): string { if ($v !== '' && strpbrk($v[0], '=+-@') !== false && !preg_match('/^-?\d/', $v)) { $v = "'" . $v; } return '"' . str_replace('"', '""', $v) . '"'; };
     $eur = static fn(int $c): string => ($c < 0 ? '-' : '') . intdiv(abs($c), 100) . ',' . str_pad((string) (abs($c) % 100), 2, '0', STR_PAD_LEFT);
     $lines = [implode(';', array_map($cell, ['n°', 'date', 'client', 'dossier', 'généalogie', 'HT', 'taux', 'TVA', 'TTC', 'payée le', 'moyen']))];
-    $s = $b->prepare("SELECT * FROM succ_invoices WHERE number<>'' AND kind<>'devis' AND substr(day,1,4)=? ORDER BY number"); $s->execute([$year]);
+    [$vis, $vp] = succ_inv_visible_sql();
+    $s = $b->prepare("SELECT * FROM succ_invoices WHERE number<>'' AND kind<>'devis' AND substr(day,1,4)=? AND $vis ORDER BY number"); $s->execute([$year, ...$vp]);
     foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $r) { $lines[] = implode(';', array_map($cell, [(string) $r['number'], (string) $r['day'], (string) $r['client_name'], (string) $r['case_number'], (string) $r['genealogy'], $eur((int) $r['total_ht']), (string) $r['rate_text'], $eur((int) $r['total_vat']), $eur((int) $r['total_ttc']), (string) $r['paid_on'], (string) $r['paid_how']])); }
     if (!empty($g['funds']) && succ_p2_has($pdo, 'succ_funds')) {
         $lines[] = ''; $lines[] = implode(';', array_map($cell, ['fonds', 'date', 'dossier', 'sens', 'montant', 'moyen']));
@@ -338,7 +393,8 @@ function succ_activity(PDO $pdo, array $g): array
     $inv = ['ht' => 0, 'ttc' => 0, 'paid_ht' => 0, 'paid_ttc' => 0, 'quarters' => [], 'count' => 0];
     try {
         $b = succ_inv_pdo($pdo);
-        $s = $b->prepare("SELECT day, total_ht, total_ttc, paid_on, genealogy FROM succ_invoices WHERE number<>'' AND kind IN ('facture','avoir')"); $s->execute();
+        [$vis, $vp] = succ_inv_visible_sql();
+        $s = $b->prepare("SELECT day, total_ht, total_ttc, paid_on, genealogy FROM succ_invoices WHERE number<>'' AND kind IN ('facture','avoir') AND $vis"); $s->execute($vp);
         foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $r) {
             if ($only !== '' && (string) $r['genealogy'] !== $only) { continue; }
             $q = substr((string) $r['day'], 0, 4) . '-T' . (intdiv((int) substr((string) $r['day'], 5, 2) - 1, 3) + 1);
@@ -361,7 +417,8 @@ function succ_fact_get(PDO $pdo, string $op, array $g): array
 {
     return match ($op) {
         'p2_invoices' => ['items' => succ_inv_list(succ_inv_pdo($pdo), $g), 'register' => succ_p2_set()['inv_register'], 'next' => ['facture' => succ_inv_peek(succ_inv_pdo($pdo), 'facture', date('Y-m-d')), 'devis' => succ_inv_peek(succ_inv_pdo($pdo), 'devis', date('Y-m-d'))],
-            'last_rate' => (string) (succ_inv_pdo($pdo)->query("SELECT rate_text FROM succ_invoices WHERE number<>'' AND kind='facture' AND rate_text<>'' ORDER BY emitted_at DESC, id DESC LIMIT 1")->fetchColumn() ?: ''), 'cabinet_missing' => succ_inv_missing(succ_p2_cabinet(), false)],
+            'last_rate' => (static function () use ($pdo): string { [$vis, $vp] = succ_inv_visible_sql(); $s = succ_inv_pdo($pdo)->prepare("SELECT rate_text FROM succ_invoices WHERE number<>'' AND kind='facture' AND rate_text<>'' AND $vis ORDER BY emitted_at DESC, id DESC LIMIT 1"); $s->execute($vp); return (string) ($s->fetchColumn() ?: ''); })(),
+            'cabinet_missing' => succ_inv_missing(succ_p2_cabinet(), false), 'locked' => succ_inv_locked_count(succ_inv_pdo($pdo))],
         'p2_invoice_csv' => succ_inv_csv($pdo, $g),
         'p2_activity' => succ_activity($pdo, $g),
         default => throw new LcndaBadInput('Demande inconnue.'),

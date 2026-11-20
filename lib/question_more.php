@@ -240,7 +240,8 @@ function qm_find_people(PDO $pdo, string $q): array
 function qm_parents(PDO $pdo, int $id): array
 {
     static $map = null;
-    if ($map === null) { $map = []; foreach ($pdo->query('SELECT fc.child_id, f.partner1_id, f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id') as $r) { foreach ([$r['partner1_id'], $r['partner2_id']] as $x) { if ($x) { $map[(int) $r['child_id']][] = (int) $x; } } } }
+    // de sang ou d'adoption seulement (pas le beau-parent « step », ni la famille d'accueil « foster ») : liens de parenté, cousins
+    if ($map === null) { $map = []; foreach ($pdo->query('SELECT fc.child_id, f.partner1_id, f.partner2_id, fc.relation_to_partner1 AS r1, fc.relation_to_partner2 AS r2 FROM family_children fc JOIN families f ON f.id=fc.family_id') as $r) { foreach ([[$r['partner1_id'], $r['r1']], [$r['partner2_id'], $r['r2']]] as [$x, $rel]) { if ($x && !in_array((string) $rel, ['step', 'foster'], true)) { $map[(int) $r['child_id']][] = (int) $x; } } } }
     return $map[$id] ?? [];
 }
 function qm_ancestors(PDO $pdo, int $id, int $max = 30): array
@@ -290,7 +291,7 @@ function qm_kinship(PDO $pdo, int $x, int $y): ?array
 function qm_children_map(PDO $pdo): array
 {
     static $map = null;
-    if ($map === null) { $map = []; foreach ($pdo->query('SELECT fc.child_id, f.partner1_id, f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id') as $r) { foreach ([$r['partner1_id'], $r['partner2_id']] as $x) { if ($x) { $map[(int) $x][(int) $r['child_id']] = true; } } } }
+    if ($map === null) { $map = []; foreach ($pdo->query('SELECT fc.child_id, f.partner1_id, f.partner2_id, fc.relation_to_partner1 AS r1, fc.relation_to_partner2 AS r2 FROM family_children fc JOIN families f ON f.id=fc.family_id') as $r) { foreach ([[$r['partner1_id'], $r['r1']], [$r['partner2_id'], $r['r2']]] as [$x, $rel]) { if ($x && !in_array((string) $rel, ['step', 'foster'], true)) { $map[(int) $x][(int) $r['child_id']] = true; } } } }
     return $map;
 }
 /** les cousins d'une personne : id => degré (1 = germain, 2 = issu de germains…), d'après l'ancêtre commun le plus proche */

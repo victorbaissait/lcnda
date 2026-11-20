@@ -181,7 +181,8 @@
                 <button type="button" class="button small secondary" data-sp2-line-add>＋ ${esc(i18n('Une ligne'))}</button>
                 <div class="succ-2"><label>${esc(i18n('Taux de TVA (%) — choisi par toi'))}<input name="rate_text" inputmode="decimal" maxlength="8" value="${esc(x.rate_text || '')}" placeholder="${esc(i18n('ton taux'))}"></label><div data-sp2-tot class="sp2-tot"></div></div>
                 <p class="ui-hint">${esc(INV.last_rate ? i18n('Repris de ta dernière facture ; jamais deviné.') : i18n('Aucun taux proposé : tape celui que t’a indiqué ton comptable.'))}</p>
-                <div class="cl-out"><button type="button" class="button small secondary" data-sp2-inv-preview>🖨 ${esc(i18n('Aperçu'))}</button><button type="button" class="button small" data-sp2-inv-emit>${esc(x.kind === 'devis' ? i18n('Émettre le devis n° {n}', {n: INV.next.devis}) : i18n('Émettre la facture n° {n}', {n: INV.next.facture}))}</button>${H().setLink('inv_numbering')}</div></div>`,
+                <div class="cl-out"><button type="button" class="button small secondary" data-sp2-inv-preview>🖨 ${esc(i18n('Aperçu'))}</button><button type="button" class="button small" data-sp2-inv-emit>${esc(x.kind === 'devis' ? i18n('Émettre le devis') : i18n('Émettre la facture'))}</button>${H().setLink('inv_numbering')}</div>
+                <p class="ui-hint">${esc(i18n('À l’émission, la pièce prend la date du jour et le prochain numéro du registre ; le numéro donné s’affiche une fois émise.'))}</p></div>`,
             onOpen: d => {
                 const f = d.querySelector('form'), tb = d.querySelector('[data-sp2-lines]');
                 const paint = () => {
@@ -199,9 +200,9 @@
                 };
                 d.querySelector('[data-sp2-inv-preview]').addEventListener('click', () => printInv({...x, number: '', day: f.day.value, client_name: f.client_name.value, client_address: f.client_address.value, rate_text: f.rate_text.value, ...C().totals(read(), C().rate(f.rate_text.value)), lines: C().totals(read(), null).lines, case_number: D?.number || inv?.case_number || ''}, D?.id));
                 d.querySelector('[data-sp2-inv-emit]').addEventListener('click', async () => {
-                    const next = x.kind === 'devis' ? INV.next.devis : INV.next.facture;
-                    if (!await A().confirmBox(x.kind === 'devis' ? i18n('Émettre le devis {n} ? Il reste modifiable tant qu’il n’est pas accepté.', {n: next}) : i18n('Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. Émettre {n} ?', {n: next}), {title: i18n('Émettre'), okLabel: i18n('Émettre')})) return;
-                    try { await save(); const r = await T.post({op: 'p2_inv_emit', id: x.id}); d.close(); toast(i18n('{n} émise', {n: r.number}), 'success'); H().reload(); } catch (err) { toast(err.message, 'error'); }
+                    // le numéro n'est pas annoncé d'avance (un autre poste peut émettre entre-temps) : celui que le serveur donne est affiché ensuite
+                    if (!await A().confirmBox(x.kind === 'devis' ? i18n('Émettre le devis ? Il prend la date du jour et le prochain numéro du registre ; il reste modifiable tant qu’il n’est pas accepté.') : i18n('Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. Émettre la facture ? Elle prend la date du jour et le prochain numéro du registre.'), {title: i18n('Émettre'), okLabel: i18n('Émettre')})) return;
+                    try { await save(); const r = await T.post({op: 'p2_inv_emit', id: x.id, today: H().today()}); d.close(); toast(i18n('{n} émise le {d}', {n: r.number, d: H().fmtDate(r.day)}), 'success'); H().reload(); } catch (err) { toast(err.message, 'error'); }
                 });
                 paint();
                 d._sp2save = save;
@@ -214,7 +215,7 @@
         const kindTxt = x => ({facture: i18n('Facture'), avoir: i18n('Avoir'), devis: i18n('Devis')}[x.kind]);
         const st = x => !x.number ? H().badge(i18n('brouillon'), 'grey') : x.kind === 'devis' ? H().badge(x.status === 'accepted' ? i18n('accepté') : i18n('émis'), x.status === 'accepted' ? 'green' : 'blue') : x.kind === 'avoir' ? H().badge(i18n('avoir'), 'violet') : x.paid_on ? H().badge(i18n('✓ payée le {d}', {d: H().fmtDate(x.paid_on)}), 'green') : H().badge(i18n('attendue'), 'yellow');
         ext.openDialog({eyebrow: '🧾', title: caseNumber ? i18n('Dossier {n}', {n: caseNumber}) : INV.register === 'cabinet' ? i18n('Tout le cabinet') : i18n('Cette généalogie'), wide: true, submitLabel: i18n('Fermer'),
-            body: `<div data-sp2-reg></div><div class="cl-out"><label>${esc(i18n('Période'))} <select name="year">${years.map(y => `<option>${esc(y)}</option>`).join('')}</select></label><label class="checkbox-line"><input type="checkbox" name="funds"> ${esc(i18n('avec les mouvements de fonds'))}</label><button type="button" class="button small secondary" data-sp2-csv>⤓ ${esc(i18n('CSV pour le comptable'))}</button></div>
+            body: `${INV.locked ? UI().notice('info', i18n('{n} base(s) verrouillée(s) non lue(s)', {n: INV.locked})) : ''}<div data-sp2-reg></div><div class="cl-out"><label>${esc(i18n('Période'))} <select name="year">${years.map(y => `<option>${esc(y)}</option>`).join('')}</select></label><label class="checkbox-line"><input type="checkbox" name="funds"> ${esc(i18n('avec les mouvements de fonds'))}</label><button type="button" class="button small secondary" data-sp2-csv>⤓ ${esc(i18n('CSV pour le comptable'))}</button></div>
                 <p class="ui-hint">${esc(i18n('Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir.'))} ${H().setLink('inv_register')}</p>`,
             onOpen: d => {
                 const box = d.querySelector('[data-sp2-reg]');
@@ -227,7 +228,7 @@
                     box.innerHTML = list.length ? `<div class="succ-scroll"><table class="succ-table"><thead><tr><th>${esc(i18n('N°'))}</th><th>${esc(i18n('Date'))}</th><th>${esc(i18n('Dossier'))}</th><th>${esc(i18n('Client'))}</th><th>${esc(i18n('TTC'))}</th><th></th><th></th></tr></thead><tbody data-i18n-off>${list.map(x => `<tr><td><b>${esc(x.number || '—')}</b> <small class="muted">${esc(kindTxt(x))}</small></td><td>${esc(H().fmtDate(x.day))}</td><td>${esc(x.case_number)}</td><td>${esc(x.client_name)}</td><td class="sp2-num">${money(x.ttc)}</td><td>${st(x)}</td>
                         <td class="sp2-inv-act"><button type="button" class="icon-button small" data-sp2-inv-print="${x.id}" aria-label="🖨" title="🖨">🖨</button>${!x.number || (x.kind === 'devis' && x.status !== 'accepted') ? `<button type="button" class="icon-button small" data-sp2-inv-edit="${x.id}" aria-label="${esc(i18n('✎ Modifier'))}">✎</button>` : ''}${!x.number ? `<button type="button" class="icon-button small" data-sp2-inv-del="${x.id}" aria-label="${esc(i18n('Supprimer'))}">🗑</button>` : ''}
                         ${x.kind === 'facture' && x.number && !INV.items.some(y => y.kind === 'avoir' && y.ref_id === x.id) ? `<button type="button" class="button small secondary" data-sp2-inv-avoir="${x.id}">${esc(i18n('🧾 Faire un avoir'))}</button>` : ''}${x.kind === 'facture' && x.number ? `<button type="button" class="button small secondary" data-sp2-inv-paid="${x.id}">${esc(i18n('Payée…'))}</button>` : ''}
-                        ${x.kind === 'devis' && x.number && x.status !== 'accepted' ? `<button type="button" class="button small secondary" data-sp2-q-accept="${x.id}">${esc(i18n('Accepté'))}</button>` : ''}${x.kind === 'devis' && x.number ? `<button type="button" class="button small secondary" data-sp2-q-transform="${x.id}">${esc(i18n('Transformer en facture'))}</button>` : ''}</td></tr>`).join('')}</tbody></table></div>`
+                        ${x.kind === 'devis' && x.number && x.status !== 'accepted' ? `<button type="button" class="button small secondary" data-sp2-q-accept="${x.id}">${esc(i18n('Accepté'))}</button>` : ''}${x.kind === 'devis' && x.number && !INV.items.some(y => y.kind === 'facture' && y.ref_id === x.id) ? `<button type="button" class="button small secondary" data-sp2-q-transform="${x.id}">${esc(i18n('Transformer en facture'))}</button>` : ''}</td></tr>`).join('')}</tbody></table></div>`
                         : A().empty(i18n('Pas encore de facture.'), {icon: '🧾'});
                 };
                 draw();
@@ -241,7 +242,7 @@
                         if ((n = id('[data-sp2-inv-print]'))) return printInv(find(n), H().cur()?.id);
                         if ((n = id('[data-sp2-inv-edit]'))) { d.close(); const D = H().cur(); return invoiceDialog(D, ext.successoral?.currentR?.(), {inv: find(n)}); }
                         if ((n = id('[data-sp2-inv-del]'))) { const r = await T.post({op: 'p2_inv_delete', id: n}); A().undoToast(i18n('Brouillon supprimé (aucun numéro consommé)'), {undo: async () => { await T.post({op: 'p2_inv_save', kind: r.prev.kind, day: r.prev.day, client_name: r.prev.client_name, client_address: r.prev.client_address, person_id: r.prev.person_id, case_number: r.prev.case_number, case_title: r.prev.case_title, rate_text: r.prev.rate_text, lines: r.prev.lines}); }}); return again(); }
-                        if ((n = id('[data-sp2-inv-avoir]'))) { if (!await A().confirmBox(i18n('L’avoir reprend les lignes de la facture en négatif, avec son propre numéro. Il ne peut plus être modifié.'), {title: i18n('🧾 Faire un avoir'), okLabel: i18n('Émettre')})) return; const r = await T.post({op: 'p2_inv_avoir', id: n}); toast(i18n('{n} émise', {n: r.number}), 'success'); return again(); }
+                        if ((n = id('[data-sp2-inv-avoir]'))) { if (!await A().confirmBox(i18n('L’avoir reprend les lignes de la facture en négatif, avec son propre numéro. Il ne peut plus être modifié.'), {title: i18n('🧾 Faire un avoir'), okLabel: i18n('Émettre')})) return; const r = await T.post({op: 'p2_inv_avoir', id: n, today: H().today()}); toast(i18n('{n} émise le {d}', {n: r.number, d: H().fmtDate(r.day)}), 'success'); return again(); }
                         if ((n = id('[data-sp2-inv-paid]'))) { const x = find(n); const v = await A().askText({title: i18n('Payée'), message: i18n('Date (AAAA-MM-JJ) et moyen, ex. : 2026-11-20 virement'), value: x.paid_on ? `${x.paid_on} ${x.paid_how}` : `${H().today()} `, okLabel: i18n('Enregistrer')}); if (v == null) return; const [on, ...how] = String(v).trim().split(/\s+/); const r = await T.post({op: 'p2_inv_paid', id: n, paid_on: on || '', paid_how: how.join(' ')}); A().undoToast(i18n('Paiement noté'), {undo: async () => { await T.post({op: 'p2_inv_paid', id: n, ...r.prev}); again(); }}); return again(); }
                         if ((n = id('[data-sp2-q-accept]'))) { await T.post({op: 'p2_inv_accept', id: n}); A().undoToast(i18n('Devis accepté'), {undo: async () => { await T.post({op: 'p2_inv_accept', id: n, undo: 1}); again(); }}); return again(); }
                         if ((n = id('[data-sp2-q-transform]'))) { const r = await T.post({op: 'p2_inv_from_quote', id: n}); toast(i18n('Brouillon de facture prêt')); await again(); const x = INV.items.find(y => y.id === r.id); if (x) { d.close(); invoiceDialog(H().cur(), ext.successoral?.currentR?.(), {inv: x}); } }
@@ -298,7 +299,7 @@
         body.querySelectorAll('[data-sp2-ttc]').forEach(b => b.addEventListener('click', () => { ACT.ttc = b.dataset.sp2Ttc === '1'; SP.activity(body); }));
         body.querySelector('[data-sp2-from]')?.addEventListener('change', e => { ACT.from = e.target.value; SP.activity(body); });
         body.querySelector('[data-sp2-to]')?.addEventListener('change', e => { ACT.to = e.target.value; SP.activity(body); });
-        body.querySelector('[data-sp2-act-csv]').addEventListener('click', () => { const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`; H().dl(`activite-${r.from}-${r.to}.csv`, new Blob(['﻿' + [['dossier', 'heures'], ...r.time.map(x => [x.label, String(x.hours).replace('.', ',')]), [], ['trimestre', 'facturé', 'encaissé'], ...qs.map(([qq, v]) => [qq, C().money(amt(v), '', ','), C().money((ACT.ttc ? v.paid_ttc : v.paid_ht) || 0, '', ',')])].map(l => l.map(q).join(';')).join('\r\n')], {type: 'text/csv'})); });
+        body.querySelector('[data-sp2-act-csv]').addEventListener('click', () => { const csvEur = c => C().money(c, '', ',').replace('−', '-'); /* un tableur lit « - », pas « − » (U+2212) */ const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`; H().dl(`activite-${r.from}-${r.to}.csv`, new Blob(['﻿' + [['dossier', 'heures'], ...r.time.map(x => [x.label, String(x.hours).replace('.', ',')]), [], ['trimestre', 'facturé', 'encaissé'], ...qs.map(([qq, v]) => [qq, csvEur(amt(v)), csvEur((ACT.ttc ? v.paid_ttc : v.paid_ht) || 0)])].map(l => l.map(q).join(';')).join('\r\n')], {type: 'text/csv'})); });
     };
 
     /* ═════ 7. 🤝 Copie du dossier pour le notaire (chiffrée dans le navigateur ; l'app garde la liste, pas les fichiers) ═════ */
@@ -319,7 +320,8 @@
                 ${H().ck(i18n('Adresses des héritiers'), 'name="addresses"', set.nc_addresses === 'yes')}
                 ${H().ck(i18n('🕵️ Joindre les recherches faites'), 'name="research"', set.research_join === 'yes')}
                 <p class="ui-hint">${esc(i18n('Journal, échanges, temps, factures ne partent jamais.'))}</p>
-                <span class="pk-lab">${esc(i18n('Protection'))}</span>${H().ck(i18n('🔐 Mot de passe'), 'name="pw_on"', set.nc_password === 'yes')}
+                <span class="pk-lab">${esc(i18n('Protection'))}</span>${H().ck(i18n('🔐 Mot de passe'), SP.protected() ? 'name="pw_on" disabled' : 'name="pw_on"', SP.protected() || set.nc_password === 'yes')}
+                ${SP.protected() ? `<p class="ui-hint">${esc(i18n('Cette généalogie est protégée par un mot de passe : ce qui en sort est toujours chiffré.'))}</p>` : ''}
                 <div class="succ-2" data-sp2-ncpw><label>${esc(i18n('Mot de passe'))}<input type="password" name="pw" autocomplete="new-password"></label><label>${esc(i18n('Encore une fois'))}<input type="password" name="pw2" autocomplete="new-password"></label></div>
                 <p class="ui-hint">${esc(i18n('Le fichier est chiffré (AES-256) ; la page demande le mot de passe à l’ouverture. Donne-le au notaire par un autre moyen (téléphone, SMS). Oublié = fichier illisible, même pour toi (refais-en un).'))}</p>
                 <div data-sp2-ncsum></div><p class="ui-hint">${esc(i18n('Copie v{n} ; l’app garde la liste des copies faites, pas les fichiers.', {n: v}))} ${H().setLink('nc_password')}</p></div>`,
@@ -329,7 +331,7 @@
                 d.addEventListener('change', paint); paint();
             },
             onSubmit: async f => {
-                const enc = f.pw_on.checked;
+                const enc = f.pw_on.checked || SP.protected();
                 if (enc) { if (f.pw.value.length < 8) return UI().fail(f.pw, i18n('Mot de passe trop court (8 caractères au moins).')); if (f.pw.value !== f.pw2.value) return UI().fail(f.pw2, i18n('Les deux mots de passe ne sont pas les mêmes.')); }
                 const btn = f.closest('dialog').querySelector('[type=submit]'); if (btn) btn.disabled = true;
                 try {
@@ -349,11 +351,15 @@
                         tabs.push({label: i18n('Recherches'), html: parts.join('') || `<p>—</p>`});
                     }
                     const foot = i18n('Copie v{v} du {d}, calcul indicatif : à vérifier par l’étude.', {v, d: H().fmtDate(H().today())});
-                    const page = C().notaryPage({title: i18n('{n} · {t}', {n: D.number, t: D.title}), foot, tabs, lang: window.LCNDA_I18N?.lang || 'fr', T: {locked: i18n('Copie protégée par un mot de passe.'), password: i18n('Mot de passe'), open: i18n('Ouvrir'), wrong: i18n('Mot de passe incorrect.')}});
+                    // chiffrée : ni le titre du dossier ni le nom du défunt en clair (titre, en-tête, nom du fichier) ; le vrai titre est dans la partie chiffrée
+                    const full = i18n('{n} · {t}', {n: D.number, t: D.title});
+                    if (enc) tabs[0].html = `<h2>${esc(full)}</h2>` + tabs[0].html;
+                    const page = C().notaryPage({title: enc ? i18n('Copie chiffrée · {n}', {n: D.number}) : full, foot, tabs, lang: window.LCNDA_I18N?.lang || 'fr', T: {locked: i18n('Copie protégée par un mot de passe.'), password: i18n('Mot de passe'), open: i18n('Ouvrir'), wrong: i18n('Mot de passe incorrect.')}});
                     const html = enc ? page.wrap(page.lockScript(await C().encrypt(page.body, f.pw.value))) : page.wrap(page.body);
-                    const last = String(D.deceased || '').split(' ').pop().replace(/[^A-Za-zÀ-ÿ0-9]+/g, '-');
-                    H().dl(`dossier-${D.number}-${last}-notaire-v${v}.html`, new Blob([html], {type: 'text/html'}));
+                    const last = enc ? '' : String(D.deceased || '').split(' ').pop().replace(/[^A-Za-zÀ-ÿ0-9]+/g, '-');
+                    // noté au registre d'abord : s'il refuse, rien n'est téléchargé
                     await T.post({op: 'p2_notary_copy', case_id: D.id, addresses: f.addresses.checked ? 1 : 0, encrypted: enc ? 1 : 0, pieces: f.pieces.checked ? media.length : 0, research: f.research.checked ? 1 : 0});
+                    H().dl(`dossier-${D.number}${last ? '-' + last : ''}-notaire-v${v}${enc ? '-chiffree' : ''}.html`, new Blob([html], {type: 'text/html'}));
                     toast(i18n('Copie v{n} fabriquée', {n: v}), 'success'); H().reload();
                 } catch (e) { toast(e.message, 'error'); if (btn) btn.disabled = false; return false; }
             }});

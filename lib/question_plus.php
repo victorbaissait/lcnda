@@ -101,7 +101,7 @@ function qp_root_name(PDO $pdo): array
  */
 function qp_rewrite(PDO $pdo, string $q): array
 {
-    $notes = []; $person = 0; $replace = [];
+    $notes = []; $person = 0; $replace = []; $chain = null;
     // ── fautes de frappe sur les mots-clés
     $vocab = qp_vocab($pdo); $common = array_flip(QP_COMMON); $names = null;
     $q = (string) preg_replace_callback('/(?<![\p{L}\p{M}])[\p{L}\p{M}]{5,}(?![\p{L}\p{M}])/u', static function ($m) use ($pdo, $vocab, $common, &$names, &$notes) {
@@ -199,16 +199,27 @@ function qp_rewrite(PDO $pdo, string $q): array
             $phrase = implode(' ', $take); $pk = qp_key($phrase);
             if ($take && !preg_match('/\b(ancetres?|aieux|ascendants?)\b/', $pk) && $pk !== 'propres') {
                 $start = $m[0][1]; $len = strlen($m[1][0]) + (strlen($m[0][0]) - strlen($m[1][0]) - strlen($m[2][0])) + strlen($phrase);
-                $q = substr_replace($q, 'les ' . $phrase . ' de ' . $rootName, $start, $len);
-                $person = $root; $me();
+                // « les enfants de ma sœur », « le mari de ma tante » : un lien de parenté avant « ma / mon / mes » → deux liens à enchaîner
+                // (ask_question cherche d'abord « ma sœur », puis le premier lien sur cette personne ; jamais sur « moi »)
+                $kin = $relWords + array_flip(['ancetre', 'ancetres', 'aieux', 'ascendant', 'ascendants', 'descendant', 'heritier', 'heritiers', 'famille', 'fratrie', 'cousinade', 'proches']);
+                unset($kin['et'], $kin['propres']);
+                $chained = false;
+                if (preg_match('/([\p{L}\p{M}\'’-]+)\s+(?:de|du|des|d[\'’])\s*$/iu', substr($q, 0, $start), $bm)) {
+                    $bw = qp_words($bm[1]); $chained = (bool) $bw; foreach ($bw as $x) { if (!isset($kin[$x])) { $chained = false; } }
+                }
+                if ($chained) { $chain = ['inner' => 'les ' . $phrase . ' de ' . $rootName, 'said' => substr($q, $start, $len), 'start' => $start, 'len' => $len, 'root' => $root]; $me(); }
+                else {
+                    $q = substr_replace($q, 'les ' . $phrase . ' de ' . $rootName, $start, $len);
+                    $person = $root; $me();
+                }
             }
         }
         // « les ancêtres de moi », « les cousins de moi » (pas « même jour que moi », déjà compris)
-        if (!$person && preg_match('/(?<![\p{L}])(de|d’|d\')\s*moi(?![\p{L}])(?!\s+\p{Lu})/iu', $q)) {
+        if (!$person && !$chain && preg_match('/(?<![\p{L}])(de|d’|d\')\s*moi(?![\p{L}])(?!\s+\p{Lu})/iu', $q)) {
             $q = (string) preg_replace('/(?<![\p{L}])(?:de|d’|d\')\s*moi(?![\p{L}])/iu', 'de ' . $rootName, $q, 1); $person = $root; $me();
         }
     }
-    return ['q' => $q, 'notes' => array_values(array_unique($notes)), 'person' => $person, 'replace' => $replace];
+    return ['q' => $q, 'notes' => array_values(array_unique($notes)), 'person' => $person, 'replace' => $replace, 'chain' => $chain];
 }
 
 /* ═════════ 2. Réponses directes ═════════ */
@@ -238,28 +249,43 @@ function qp_loose_person(PDO $pdo, string $text, array $skipWords = []): ?array
     foreach ($skipWords as $w) { foreach (qp_words((string) $w) as $x) { $stop[$x] = true; } } // les mots de parenté de la question
     $set = function_exists('rfr_settings') ? rfr_settings($pdo) : RFR_DEFAULTS;
     $n = count($tok); $best = null;
-    $persons = null;
+    // ⏱ une seule lecture des fiches par requête (index des clés de nom et de leur son), et un budget de temps : au-delà, rien n'est
+    // retenu (la question n'est pas « comprise » plutôt que d'attendre une minute sur une grosse base)
+    $t0 = microtime(true); $budget = (float) ($GLOBALS['QP_LOOSE_BUDGET'] ?? 1.5);
+    $idx = null; $cand = [];
+    $firstOk = static function (array &$P, int $i, string $fCanon, string $first): bool {
+        $P[$i][3] ??= array_column(rfr_first_forms($P[$i][1]), 'canon');
+        return in_array($fCanon, $P[$i][3], true) || rfr_first_key($P[$i][1]) === rfr_first_key($first);
+    };
     for ($len = min(4, $n); $len >= 2 && !$best; $len--) {
         for ($i = 0; $i + $len <= $n && !$best; $i++) {
+            if (microtime(true) - $t0 > $budget) { return null; } // trop long : pas de « personne citée » devinée
             $w = array_slice($tok, $i, $len);
             $bad = false; foreach ($w as $x) { if (isset($stop[qp_key($x)]) || preg_match('/\d/', $x) || array_intersect_key(array_flip(qp_words($x)), $stop) && count(qp_words($x)) > 1) { $bad = true; } }
             if ($bad) { continue; }
-            if ($persons === null) {
-                $persons = [];
-                foreach ($pdo->query("SELECT id, COALESCE(first_name,'') AS f, COALESCE(last_name,'') AS l FROM persons WHERE trim(COALESCE(first_name,''))<>'' AND trim(COALESCE(last_name,''))<>''") as $r) { $persons[] = [(int) $r['id'], (string) $r['f'], (string) $r['l']]; }
-            }
+            $idx ??= qp_loose_index($pdo);
             for ($k = $len - 1; $k >= 1 && !$best; $k--) {
                 $first = implode(' ', array_slice($w, 0, $k)); $last = implode(' ', array_slice($w, $k));
                 $fq = rfr_first_query($first, $set); $fCanon = $fq ? $fq['canon'] : rfr_first_key($first);
-                $lk = rfr_name_keys($last);
+                // les fiches de même nom (une clé en commun) ou d'un nom qui sonne pareil, cherchées dans l'index (une fois par nom essayé)
+                if (!isset($cand[$last])) {
+                    $lk = rfr_name_keys($last); $same = []; $near = [];
+                    foreach ($lk['keys'] as $key) { foreach ($idx['key'][$key] ?? [] as $pi) { $same[$pi] = true; } }
+                    $ph = (string) $lk['phon'];
+                    if ($ph !== '') {
+                        foreach ($idx['phon'][$ph[0]] ?? [] as $len2 => $list) {
+                            if (abs($len2 - strlen($ph)) > 2) { continue; }
+                            foreach ($list as $pk => $ids) { if (rfr_phon_near($ph, (string) $pk)) { foreach ($ids as $pi) { $near[$pi] = true; } } }
+                        }
+                    }
+                    $cand[$last] = [$same, $near];
+                }
+                [$same, $near] = $cand[$last];
                 $hits = [];
-                foreach ($persons as [$id, $pf, $pl]) {
-                    $pk = rfr_name_keys($pl);
-                    $sameLast = array_intersect($lk['keys'], $pk['keys']) || $lk['bare'] === $pk['bare'];
-                    if (!$sameLast && !rfr_phon_near($lk['phon'], $pk['phon'])) { continue; }
-                    $forms = array_column(rfr_first_forms($pf), 'canon');
-                    if (!in_array($fCanon, $forms, true) && rfr_first_key($pf) !== rfr_first_key($first)) { continue; }
-                    $hits[] = ['id' => $id, 'exact' => ($sameLast ? 1 : 0) + (rfr_first_key($pf) === rfr_first_key($first) ? 1 : 0)];
+                foreach (array_keys($same + $near) as $pi) {
+                    if (!$firstOk($idx['p'], $pi, $fCanon, $first)) { continue; }
+                    [$id, $pf] = $idx['p'][$pi];
+                    $hits[] = ['id' => $id, 'exact' => (isset($same[$pi]) ? 1 : 0) + (rfr_first_key($pf) === rfr_first_key($first) ? 1 : 0)];
                 }
                 if (!$hits) { continue; }
                 usort($hits, static fn($a, $b) => $b['exact'] <=> $a['exact'] ?: $a['id'] <=> $b['id']);
@@ -269,6 +295,30 @@ function qp_loose_person(PDO $pdo, string $text, array $skipWords = []): ?array
         }
     }
     return $best;
+}
+
+/**
+ * L'index des fiches pour qp_loose_person, fait une fois par requête : [p => [[id, prénom, nom, formes du prénom (au besoin)]],
+ * key => [clé de nom => [n°…]], phon => [1re lettre => [longueur => [son => [n°…]]]]] (le même son pour beaucoup de fiches : une fois).
+ */
+function qp_loose_index(PDO $pdo): array
+{
+    static $memo = [];
+    $sig = spl_object_id($pdo) . ':' . implode(':', $pdo->query("SELECT COUNT(*), COALESCE(MAX(id),0) FROM persons")->fetch(PDO::FETCH_NUM));
+    if (isset($memo[$sig])) { return $memo[$sig]; }
+    $out = ['p' => [], 'key' => [], 'phon' => []]; $byName = [];
+    foreach ($pdo->query("SELECT id, COALESCE(first_name,'') AS f, COALESCE(last_name,'') AS l FROM persons WHERE trim(COALESCE(first_name,''))<>'' AND trim(COALESCE(last_name,''))<>''") as $r) {
+        $i = count($out['p']); $l = (string) $r['l']; $out['p'][] = [(int) $r['id'], (string) $r['f'], $l, null];
+        $byName[$l][] = $i;
+    }
+    foreach ($byName as $l => $ids) { // un même nom de famille : ses clés une seule fois
+        $nk = rfr_name_keys((string) $l);
+        foreach ($nk['keys'] as $key) { foreach ($ids as $i) { $out['key'][$key][] = $i; } }
+        $ph = (string) $nk['phon'];
+        if ($ph !== '') { foreach ($ids as $i) { $out['phon'][$ph[0]][strlen($ph)][$ph][] = $i; } }
+    }
+    $memo = [$sig => $out]; // une seule base gardée
+    return $out;
 }
 
 /** les faits d'une fiche (résumé de « qui est X ? ») */
@@ -370,6 +420,7 @@ function qp_direct(PDO $pdo, string $q, int $personId = 0): ?array
         $c = qp_succ_case_of($pdo, $pid);
         if (!$c) { return qm_answer($u, i18n_t('Aucun dossier de succession pour {name}. Le dossier calcule les héritiers d’après l’arbre.', ['name' => $name]), ['ids' => [$pid], 'open' => [['kind' => 'succ_new', 'id' => $pid, 'label' => i18n_t('⚖️ Rechercher les héritiers…')]]]); }
         $snap = json_decode((string) $c['snapshot_json'], true);
+        if (function_exists('access_log_add')) { access_log_add($pdo, 'case_open', 'case', (int) $c['id'], function_exists('access_case_label') ? access_case_label($pdo, (int) $c['id']) : '', 'question_heirs'); } // 📜 comme l'ouverture du dossier
         $open = [['kind' => 'succ_case', 'id' => (int) $c['id'], 'label' => i18n_t('Ouvrir le dossier')]];
         if (!is_array($snap) || !is_array($snap['shares'] ?? null)) { return qm_answer($u, i18n_t('Dossier {d} : les héritiers n’ont pas encore été calculés. Ouvre le dossier pour faire le calcul.', ['d' => qp_case_label($c)]), ['open' => $open]); }
         $rows = []; $ids = [];

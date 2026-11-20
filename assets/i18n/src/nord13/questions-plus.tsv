@@ -66,3 +66,6 @@ Poser la question : « {q} » ¦ Κάνε την ερώτηση: «{q}» ¦ За
 Questions dans la recherche rapide (⌘K) ¦ Ερωτήσεις στη γρήγορη αναζήτηση (⌘K) ¦ Въпроси в бързото търсене (⌘K)
 Répondre aux questions dans la recherche rapide ¦ Απάντηση σε ερωτήσεις στη γρήγορη αναζήτηση ¦ Отговаряй на въпроси в бързото търсене
 « les enfants de Pierre Mazaud » : la réponse courte s’affiche dans la liste ; sinon seulement « Poser la question » ¦ «les enfants de Pierre Mazaud»: η σύντομη απάντηση εμφανίζεται στη λίστα· αλλιώς μόνο «Κάνε την ερώτηση» ¦ „les enfants de Pierre Mazaud“: краткият отговор се показва в списъка; иначе само „Задай въпроса“
+Pour aller plus loin, pose la question avec le nom de la personne voulue. ¦ Για να συνεχίσεις, κάνε την ερώτηση με το όνομα του προσώπου που εννοείς. ¦ За да продължиш, задай въпроса с името на човека, когото имаш предвид.
+« {a} » cherché d’abord ¦ «{a}»: αναζητήθηκε πρώτα ¦ първо е потърсено „{a}“
+« {a} » = {name} ¦ «{a}» = {name} ¦ „{a}“ = {name}

@@ -449,10 +449,8 @@ Lien vers la page de suivi ¦ Link op d’Suivi-Säit
 Pas de lien (on copie le numéro) ¦ Kee Link (d’Nummer gëtt kopéiert)
 Adresse de la page de suivi, avec {numero} (https:// seulement). ¦ Adress vun der Suivi-Säit, mat {numero} (nëmmen https://).
 🧾 Devis et factures ¦ 🧾 Deviser a Rechnungen
-Un seul registre : numérotation continue même si les dossiers sont dans plusieurs généalogies. ¦ Een eenzege Register: duerchgoend Nummeréierung, och wann d’Dossieren a méi Beem sinn.
 Un seul registre pour le cabinet ¦ Een eenzege Register fir de Büro
 Dans la généalogie des dossiers ¦ Am Bam vun den Dossieren
-Le compteur ne recule jamais ; un brouillon effacé ne consomme pas de numéro. ¦ De Compteur geet ni zeréck; e geläschten Entworf verbraucht keng Nummer.
 F-2026-0042 (remis à 1 chaque année) ¦ F-2026-0042 (all Joer vun 1 un)
 Compteur unique (F-0042) ¦ Een eenzege Compteur (F-0042)
 La ligne « temps passé » proposée sur la facture. ¦ D’Linn „verbraucht Zäit“, déi op der Rechnung proposéiert gëtt.
@@ -608,3 +606,30 @@ Un devis accepté ne se modifie plus. ¦ En akzeptéierten Devis gëtt net méi 
 J−{n} ¦ D−{n}
 =descendant rattaché ¦ zougeuerdnete Nokomm|zougeuerdnet Nokommen
 =échange noté ¦ notéierte Kontakt|notéiert Kontakter
+# corrections : préfixes, émission datée du jour, INSEE, fiches verrouillées, registre partagé
+le même jour que le défunt, ou une date incomplète : l’ordre des décès n’est pas connu ; le statut reste « Inconnu », à vérifier sur les actes. ¦ deeselwechten Dag wéi de Verstuerwenen, oder en onvollstännegen Datum: d’Reiefolleg vun den Doudesfäll ass net bekannt; de Status bleift „Onbekannt“, op den Akten ze kontrolléieren.
+Sur la fiche de {n} : un décès en {d} (date incomplète dans le fichier), source « Fichier des personnes décédées (INSEE) », avec la date du relevé. ¦ Op der Fiche vu(n) {n}: en Doud am Joer {d} (onvollstännegen Datum am Fichier), Quell „Fichier vun de verstuerwene Persounen (INSEE)“, mam Datum vum Nokucken.
+Ce préfixe est déjà celui des factures, des avoirs ou des devis : choisis-en un autre (les trois doivent être différents). ¦ Dëse Präfix gëtt schonn fir Rechnungen, Gutschrëften oder Offerten benotzt: wiel en aneren (all dräi mussen ënnerschiddlech sinn).
+Préfixe refusé : de 1 à 6 lettres ou chiffres, sans accent. ¦ Präfix refuséiert: 1 bis 6 Buschtawen oder Zifferen, ouni Akzenter.
+Un seul registre : numérotation continue même si les dossiers sont dans plusieurs généalogies. Passer de l’un à l’autre repartirait d’un autre compteur (numéros en double) : ce choix est bloqué dès la première facture émise. ¦ Een eenzegt Register: duerchgoend Nummeréierung, och wann d’Dossieren a méi Genealogien sinn. E Wiessel géif mat engem anere Compteur nei ufänken (duebel Nummeren): dëse Choix ass gespaart, soubal déi éischt Rechnung ausgestallt ass.
+Le compteur ne recule jamais ; un brouillon effacé ne consomme pas de numéro. Bloqué dès la première facture émise. ¦ De Compteur geet ni zeréck; e geläschten Entworf brauch keng Nummer. Gespaart, soubal déi éischt Rechnung ausgestallt ass.
+Une facture est déjà émise dans ce registre : le registre et la numérotation ne se changent plus (sinon, des numéros en double). ¦ An dësem Register ass schonn eng Rechnung ausgestallt: Register an Nummeréierung kënnen net méi geännert ginn (soss duebel Nummeren).
+La dernière pièce émise est datée après aujourd’hui : vérifie la date de l’ordinateur avant d’émettre. ¦ Dat lescht ausgestallt Dokument ass no haut datéiert: kontrolléier den Datum vum Computer, ier s du ausstells.
+Émettre le devis ¦ Offert ausstellen
+Émettre la facture ¦ Rechnung ausstellen
+À l’émission, la pièce prend la date du jour et le prochain numéro du registre ; le numéro donné s’affiche une fois émise. ¦ Beim Ausstellen kritt d’Dokument den Datum vun haut an déi nächst Nummer vum Register; déi ginn Nummer gëtt duerno gewisen.
+Émettre le devis ? Il prend la date du jour et le prochain numéro du registre ; il reste modifiable tant qu’il n’est pas accepté. ¦ Offert ausstellen? Si kritt den Datum vun haut an déi nächst Nummer vum Register; si bleift ännerbar, soulaang se net ugeholl ass.
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. Émettre la facture ? Elle prend la date du jour et le prochain numéro du registre. ¦ Eng ausgestallt Rechnung kann net méi geännert oder geläscht ginn. Fir ze korrigéieren: eng Gutschrëft. Rechnung ausstellen? Si kritt den Datum vun haut an déi nächst Nummer vum Register.
+{n} émise le {d} ¦ {n} ausgestallt den {d}
+Ce devis a déjà sa facture (brouillon ou émise) : ouvre-la dans le registre. ¦ Dës Offert huet schonn hir Rechnung (Entworf oder ausgestallt): maach se am Register op.
+Fiche verrouillée : le décès n’est pas écrit. Déverrouille la fiche d’abord, ou choisis « Seulement le statut du dossier » dans les réglages. ¦ Gespaart Fiche: den Doud gëtt net agedroen. Maach d’Fiche fir d’éischt op, oder wiel „Nëmmen de Status vum Dossier“ an den Astellungen.
+Fiche verrouillée : les réponses ne sont pas écrites sur la fiche. Déverrouille-la d’abord. ¦ Gespaart Fiche: d’Äntwerten ginn net op d’Fiche geschriwwen. Maach se fir d’éischt op.
+Fiche verrouillée : les réponses ne sont pas retirées. Déverrouille-la d’abord. ¦ Gespaart Fiche: d’Äntwerten ginn net ewechgeholl. Maach se fir d’éischt op.
+💶 Un reversement reste en attente, et un héritier a été trop payé (plus reversé que reçu) : archiver quand même ? ¦ 💶 Eng Auszuelung steet nach aus, an engem Ierwe gouf ze vill bezuelt (méi ausbezuelt wéi kritt): trotzdeem archivéieren?
+💶 Trop versé : un héritier a reçu plus que ce que le notaire a versé pour lui (reste négatif) : archiver quand même ? ¦ 💶 Ze vill bezuelt: en Ierwe krut méi, wéi den Notaire fir hien iwwerwisen huet (negativen Rescht): trotzdeem archivéieren?
+Cette pièce appartient à une généalogie verrouillée par un mot de passe : ouvre-la d’abord. ¦ Dëst Dokument gehéiert zu enger Genealogie, déi mat engem Passwuert gespaart ass: maach se fir d’éischt op.
+Cette généalogie est protégée par un mot de passe : l’archive doit être chiffrée. Choisis un mot de passe pour l’archive. ¦ Dës Genealogie ass mat engem Passwuert geschützt: d’Archiv muss verschlësselt sinn. Wiel e Passwuert fir d’Archiv.
+Cette généalogie est protégée par un mot de passe : la copie pour le notaire doit être chiffrée (coche « Mot de passe »). ¦ Dës Genealogie ass mat engem Passwuert geschützt: d’Kopie fir den Notaire muss verschlësselt sinn (kräiz „Passwuert“ un).
+Cette généalogie est protégée par un mot de passe : ce qui en sort est toujours chiffré. ¦ Dës Genealogie ass mat engem Passwuert geschützt: wat erausgeet, ass ëmmer verschlësselt.
+Copie chiffrée · {n} ¦ Verschlësselt Kopie · {n}
+Pièce introuvable. ¦ Dokument net fonnt.

@@ -100,10 +100,15 @@ function succ_settings_clean(array $d, ?array $base = null): array
     }
     return $s;
 }
-function succ_settings_save(array $d): array
+function succ_settings_save(array $d, ?PDO $pdo = null): array
 {
     $prev = succ_settings();
     $next = succ_settings_clean($d, $prev);
+    // 🧾 le registre et la numérotation des factures sont figés dès la première facture émise (sinon : un autre compteur, des numéros en double)
+    if ($pdo && function_exists('succ_inv_has_emitted') && (($next['p2']['inv_register'] ?? '') !== ($prev['p2']['inv_register'] ?? '') || ($next['p2']['inv_numbering'] ?? '') !== ($prev['p2']['inv_numbering'] ?? ''))
+        && succ_inv_has_emitted($pdo, (string) ($prev['p2']['inv_register'] ?? 'cabinet'))) {
+        throw new LcndaBadInput('Une facture est déjà émise dans ce registre : le registre et la numérotation ne se changent plus (sinon, des numéros en double).');
+    }
     $json = json_encode($next, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     $file = succ_settings_path();
     if ($json === false || @file_put_contents($file . '.tmp', $json, LOCK_EX) === false || !@rename($file . '.tmp', $file)) { throw new RuntimeException('Impossible d’enregistrer les réglages des dossiers.'); }
@@ -1172,7 +1177,7 @@ function succ_dossiers_post(PDO $pdo, string $op, array $d): ?array
     succ_dossiers_ensure($pdo);
     $cid = static fn() => safe_int($d['case_id'] ?? 0);
     return match ($op) {
-        'settings_save' => succ_settings_save(is_array($d['settings'] ?? null) ? $d['settings'] : []),
+        'settings_save' => succ_settings_save(is_array($d['settings'] ?? null) ? $d['settings'] : [], $pdo),
         'target' => succ_target_for_new($d),
         'attach' => (static function () use ($pdo, $d, $cid) {
             $c = succ_row($pdo, $cid()); $pid = safe_int($d['person_id'] ?? 0); if (!succ_person_ok($pdo, $pid)) { throw new LcndaBadInput('Fiche introuvable.'); }

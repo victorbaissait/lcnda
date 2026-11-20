@@ -166,7 +166,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
             const r = php(`echo json_encode([(int) $pdo->query('PRAGMA user_version')->fetchColumn(), array_map(fn($t) => (int) $pdo->query("SELECT count(*) FROM sqlite_master WHERE name='$t'")->fetchColumn(), ['succ_insee_checks','succ_calls','succ_funds','succ_questionnaires','succ_template_versions','succ_invoices','succ_invoice_lines','succ_invoice_counters']),
                 array_map(fn($c) => (int) $pdo->query("SELECT count(*) FROM pragma_table_info('$c[0]') WHERE name='$c[1]'")->fetchColumn(), [['courriers','recommande_num'],['courriers','ar_date'],['courriers','template_version'],['courriers','reponse_le'],['succ_deadlines','origin'],['succ_deadlines','reminders'],['succ_deadlines','important'],['succ_cases','merged_into'],['succ_pieces','issued_on'],['succ_pieces','valid_months'],['succ_calls','origin_case_id']])]);`);
             const [v, tables, cols] = JSON.parse(r.stdout); assert.equal(v, 97); assert.ok(tables.every(x => x === 1), JSON.stringify(tables)); assert.ok(cols.every(x => x === 1), JSON.stringify(cols));
-            const src = fs.readFileSync(path.join(appRoot, 'lib/migrations.php'), 'utf8'); assert.match(src, /\/\/ 96 : recherche à la française/); assert.match(src, /97 => 'schema_v97'/);
+            const src = fs.readFileSync(path.join(appRoot, 'lib/migrations.php'), 'utf8'); assert.match(src, /schema_v96/); assert.match(src, /97 => 'schema_v97'/);
         });
         await t('serveur : réglages — les valeurs conseillées au départ, toutes les options permises, une valeur inconnue ignorée, seuil et relance réglables', async () => {
             let s = await get('p2_settings'); assert.equal(s.p2.insee_threshold, 40); assert.equal(s.p2.archive_password, 'proposed'); assert.deepEqual(s.cabinet.required, ['name']);
@@ -292,17 +292,25 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
             await w({ op: 'p2_inv_save', id: q.id, client_name: 'Luc MAZAUD', rate_text: '20', lines: [{ label: 'Recherche', qty: 1, unit_cents: 60000 }] });
             await w({ op: 'p2_inv_accept', id: q.id }); await bad({ op: 'p2_inv_save', id: q.id, rate_text: '20', lines: [] }, /accepté/);
             const f = await w({ op: 'p2_inv_from_quote', id: q.id }); assert.equal((await get('p2_invoices')).items.find(x => x.id === f.id).ttc, 72000);
+            await bad({ op: 'p2_inv_from_quote', id: q.id }, /déjà sa facture/, 'une seule facture par devis');
             await w({ op: 'p2_inv_delete', id: f.id });
-            await set({ inv_numbering: 'single' });
-            const s1 = await w({ op: 'p2_inv_save', kind: 'facture', day: `${Y}-12-01`, client_name: 'S', rate_text: '20', lines: [{ label: 'x', qty: 1, unit_cents: 100 }] });
-            assert.equal((await w({ op: 'p2_inv_emit', id: s1.id })).number, 'F-0001', 'compteur unique');
-            await set({ inv_numbering: 'yearly', inv_register: 'genealogy' });
+            const f2 = await w({ op: 'p2_inv_from_quote', id: q.id }); await w({ op: 'p2_inv_delete', id: f2.id }); // le brouillon effacé : le devis peut de nouveau être facturé
+            // registre et numérotation figés dès la première pièce émise (sinon : un autre compteur, des numéros en double)
+            await bad({ op: 'settings_save', settings: { p2: { inv_numbering: 'single' } } }, /déjà émise dans ce registre/);
+            await bad({ op: 'settings_save', settings: { p2: { inv_register: 'genealogy' } } }, /déjà émise dans ce registre/);
+            const direct = p2 => { const r = php(`succ_settings_save(json_decode(base64_decode('${Buffer.from(JSON.stringify({ p2 })).toString('base64')}'), true)); echo 'ok';`); assert.equal(r.stdout, 'ok', r.stderr); }; // sans la vérification (essai seulement)
+            direct({ inv_register: 'genealogy' });
             const g1 = await w({ op: 'p2_inv_save', kind: 'facture', day: `${Y}-12-02`, client_name: 'G', rate_text: '20', lines: [{ label: 'x', qty: 1, unit_cents: 100 }] });
             assert.equal((await w({ op: 'p2_inv_emit', id: g1.id })).number, `F-${Y}-0001`, 'registre de la généalogie : son propre compteur');
             assert.equal(php(`echo (int) $pdo->query("SELECT count(*) FROM succ_invoices WHERE number<>''")->fetchColumn();`).stdout, '1');
-            await set({ inv_register: 'cabinet' });
+            await bad({ op: 'settings_save', settings: { p2: { inv_register: 'cabinet' } } }, /déjà émise dans ce registre/);
+            direct({ inv_numbering: 'single' });
+            const s1 = await w({ op: 'p2_inv_save', kind: 'facture', day: `${Y}-12-01`, client_name: 'S', rate_text: '20', lines: [{ label: 'x', qty: 1, unit_cents: 100 }] });
+            assert.equal((await w({ op: 'p2_inv_emit', id: s1.id })).number, 'F-0001', 'compteur unique');
+            direct({ inv_numbering: 'yearly', inv_register: 'cabinet' });
+            const today = php(`echo date('Y-m-d');`).stdout;
             const csv = await api('successoral', { op: 'p2_invoice_csv', year: Y });
-            assert.match(csv._type || '', /text\/csv/); assert.match(csv._raw, /^\ufeff"n°";"date";"client"/); assert.match(csv._raw, new RegExp(`"F-${Y}-0001";"${Y}-11-20";"Luc MAZAUD";"2026-014";"[^"]*";"2246,00";"20";"449,20";"2695,20"`)); assert.match(csv._raw, /"-120,00"/);
+            assert.match(csv._type || '', /text\/csv/); assert.match(csv._raw, /^\ufeff"n°";"date";"client"/); assert.match(csv._raw, new RegExp(`"F-${Y}-0001";"${today}";"Luc MAZAUD";"2026-014";"[^"]*";"2246,00";"20";"449,20";"2695,20"`)); assert.match(csv._raw, /"-120,00"/);
             const log = accessLog(); assert.ok(log.some(x => x.what === 'succ_invoice_csv')); assert.ok(log.some(x => x.what === 'succ_invoice')); assert.doesNotMatch(JSON.stringify(log), /2695|2 695|449/, 'jamais un montant au registre');
         });
         await t('serveur : 💶 fonds — seulement des mouvements tapés (aucun actif net), corrigés avec ↶, rappel « reversement en attente » sans nom ni montant', async () => {
