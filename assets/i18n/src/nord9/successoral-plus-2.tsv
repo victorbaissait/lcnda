@@ -1,0 +1,610 @@
+fr ¦ lb
+# Zone « successoral-plus-2 » : ⚖️ outils de plus du généalogiste successoral (heritage-successoral-plus2*.js, lib/successoral_plus2.php, lib/successoral_factures.php)
+Réglages de cet outil ¦ Astellunge vun dësem Tool
+(conseillé) ¦ (recommandéiert)
+Autre : ¦ Anerer:
+Outils du dossier : réglages ¦ Tools vum Dossier: Astellungen
+Chaque choix se change ici ; l’option conseillée est celle du départ. ¦ All Wiel änners du hei; déi recommandéiert ass de Standard.
+Réglage enregistré : {what} ¦ Astellung gespäichert: {what}
+Adresse refusée : https:// et {numero} sont obligatoires. ¦ Adress refuséiert: https:// an {numero} sinn obligatoresch.
+Carte des héritiers (dossiers en cours) ¦ Kaart vun den Ierwen (lafend Dossieren)
+Délai de réponse par organisme ¦ Äntwertzäit pro Büro
+🙈 Écran partagé ¦ 🙈 Gedeelten Ecran
+Fusionner avec un autre dossier… ¦ Mat engem aneren Dossier fusionéieren…
+Annuler la dernière fusion ¦ Lescht Fusioun réckgängeg maachen
+nom de naissance ¦ Gebuertsnumm
+prénom ¦ Virnumm
+né(e) le {d} ¦ gebuer {d}
+même mois ¦ selwechte Mount
+même année ¦ selwecht Joer
+± 1 an ¦ ± 1 Joer
+date inconnue ¦ Datum onbekannt
+date de naissance différente ¦ aneren Gebuertsdatum
+même département ¦ selwecht Departement
+lieu inconnu sur la fiche ¦ Plaz op der Kaart onbekannt
+lieu : {p} ¦ Plaz: {p}
+Le fichier des décès n’est pas dans l’app. ¦ De Fichier vun de Stierffäll ass net an der App.
+⤒ Importer les décès ¦ ⤒ Stierffäll importéieren
+L’import se fait une seule fois, depuis data.gouv.fr (environ 25 millions de lignes depuis 1970), ou par années choisies. ¦ Den Import gëtt eng Kéier gemaach, vun data.gouv.fr (ronn 25 Millioune Linnen zënter 1970), oder fir déi gewielte Joren.
+fichier importé : décès {a} → {b} ¦ importéierte Fichier: Stierffäll {a} → {b}
+un décès plus ancien ne peut pas être trouvé ¦ e fréiere Stierffall ka net fonnt ginn
+plafonné à {n} ¦ limitéiert op {n}
+acte n° {n} ¦ Akt Nr. {n}
+avant le défunt : si c’est cette personne, ses enfants viennent à sa place (représentation). ¦ virum Verstuerwenen: wann et dës Persoun ass, ierwen hir Kanner op hirer Plaz (Representatioun).
+après le défunt : sa part passe à ses propres héritiers. ¦ nom Verstuerwenen: säin Deel geet op seng eege Ierwen iwwer.
+Les Français nés à l’étranger ont leur acte au Service central d’état civil (Nantes). ¦ Fransousen, déi am Ausland gebuer sinn, hunn hiren Akt beim Service central d’état civil (Nantes).
+déjà confirmé ¦ scho confirméiert
+C’est cette personne ¦ Dat ass dës Persoun
+Pas la même personne ¦ Net déi selwecht Persoun
+Nom de naissance inconnu : cherché sous {n}, pistes moins sûres ¦ Gebuertsnumm onbekannt: gesicht als {n}, manner sécher Spueren
+Deux personnes se ressemblent : demande l’acte avant de choisir ¦ Zwou Persoune gläichen sech: frot den Akt un, ier s du wiels
+rien trouvé dans le fichier ¦ näischt am Fichier fonnt
+« Rien trouvé » ne veut pas dire « vivant » (un décès à l’étranger manque souvent). ¦ „Näischt fonnt“ heescht net „lieweg“ (e Stierffall am Ausland feelt dacks).
+Les héritiers « vivants » comparés au fichier des décès ¦ „Lieweg“ Ierwe mam Fichier vun de Stierffäll verglach
+pistes à partir de {n} ¦ Spuere vun {n} un
+Aucun héritier « vivant » à vérifier dans ce dossier. ¦ Keen „liewegen“ Ierwen ze kontrolléieren an dësem Dossier.
+Comment c’est calculé ¦ Wéi et gerechent gëtt
+Le nom de naissance, sans accents ni tirets ; jamais le nom d’épouse (l’INSEE donne le nom de naissance). ¦ Gebuertsnumm, ouni Akzenter an Bindestricher; ni den Numm no der Hochzäit (den INSEE hält de Gebuertsnumm).
+Le premier prénom de la fiche parmi les prénoms INSEE ; Jean-Pierre = Jean Pierre. ¦ Den éischte Virnumm vun der Kaart ënnert den INSEE-Virnimm; Jean-Pierre = Jean Pierre.
+Jour exact 30 · même mois 20 · même année 12 · ± 1 an 6 ; sans date : plafond 70. ¦ Exakten Dag 30 · selwechte Mount 20 · selwecht Joer 12 · ± 1 Joer 6; ouni Datum: maximal 70.
+La commune ; même département 10 ; né à l’étranger : le pays (plafond 80). ¦ Gemeng; selwecht Departement 10; am Ausland gebuer: d’Land (maximal 80).
+Différent : la piste est écartée. ¦ Soss: d’Spuer gëtt verworf.
+Pistes écartées ({n}) ¦ Verworfe Spueren ({n})
+Piste remise ¦ Spuer zeréckgesat
+« Pas la même personne » retenu : cette piste ne reviendra plus ¦ „Net déi selwecht Persoun“ gemierkt: dës Spuer kënnt net méi zeréck
+Sur la fiche de {n} : un décès le {d}, source « Fichier des personnes décédées (INSEE) », avec la date du relevé. ¦ Op der Kaart vun {n}: Stierffall {d}, Quell „Fichier vun de verstuerwene Persounen (INSEE)“, mam Datum vun der Kontroll.
+Dans ce dossier : statut retenu « {s} » ; le calcul est refait. ¦ An dësem Dossier: Status „{s}“ behalen; d’Berechnung gëtt nei gemaach.
+Ce qui va changer ¦ Wat sech ännert
+{n} marqué(e) décédé(e) (INSEE). Calcul refait. ¦ {n} als verstuerwen markéiert (INSEE). Berechnung nei gemaach.
+Vérifier les décès ¦ Stierffäll kontrolléieren
+Questionnaire… ¦ Froebou…
+⚰️ INSEE : {n} piste(s) ¦ ⚰️ INSEE: {n} Spueren
+⚰️ vérifié le {d} ¦ ⚰️ kontrolléiert {d}
+🕵️ Recherches ¦ 🕵️ Recherchen
+📞 Noter un échange ¦ 📞 E Kontakt notéieren
+Ouvrir un dossier lié ¦ De verlinkten Dossier opmaachen
+Dossiers liés ¦ Verlinkten Dossieren
+Succession de {n} ¦ Ierfschaft vun {n}
+dossier d’origine {n} ¦ Urspronksdossier {n}
+Deux défunts, deux calculs : les successions restent distinctes. ¦ Zwee Verstuerwener, zwou Berechnungen: d’Ierfschafte bleiwe getrennt.
+Aucun héritier trouvé d’après les fiches. ¦ Kee Ierwen no de Kaarte fonnt.
+Échanges ¦ Kontakter
+Noter un échange ¦ E Kontakt notéieren
+Les courriers du Registre ne sont pas recopiés ici : ils sont montrés en gris, en lecture. ¦ D’Bréiwer aus dem Register ginn net hei kopéiert: si gi gro gewisen, nëmme fir ze liesen.
+Chercher… (personne, résumé) ¦ Sichen… (Persoun, Resumé)
+du dossier fusionné ¦ aus dem fusionéierten Dossier
+Registre de courriers, n° {n} ¦ Courrier-Register, Nr. {n}
+Aucun échange noté. ¦ Kee Kontakt notéiert.
+✎ Corriger un échange ¦ ✎ De Kontakt korrigéieren
+＋ Noter un échange ¦ ＋ E Kontakt notéieren
+Avec (héritier, notaire, mairie…) ¦ Mat wiem (Ierwen, Notaire, Gemeng…)
+Prochaine action ¦ Nächste Schrëtt
+Durée (minutes) ¦ Dauer (Minutten)
+⏱ Compter la durée dans 💶 Temps ¦ ⏱ D’Zäit an 💶 Zäit zielen
+C’est une recherche (va dans 🕵️ Recherches) ¦ Et ass eng Recherche (geet an 🕵️ Recherchen)
+Avec une date, une échéance va dans le dossier et dans la 🔔 cloche (jamais le résumé). ¦ Mat engem Datum geet d’Frist an den Dossier an an d’🔔 Klack (ni de Resumé).
+Échange corrigé (noté au 🕓 Journal) ¦ Kontakt korrigéiert (an 🕓 Journal agedroen)
+Échange noté ¦ Kontakt notéiert
+Trois fois « ne répond pas » de suite : noter 🔇 ne répond pas ? ¦ Dräimol hannereneen „äntwert net“: 🔇 äntwert net notéieren?
+Recommandé ¦ Recommandéiert
+Envoyé en recommandé ¦ Recommandéiert geschéckt
+N° du recommandé ¦ Nr. vum Recommandé
+Numéro inhabituel, gardé tel quel. ¦ Ongewéinlech Nummer, esou behalen.
+AR reçu le ¦ Empfangsbestätegung ukomm
+Relance si rien après (jours) ¦ Erënnerung, wann näischt no (Deeg)
+Réponse reçue le ¦ Äntwert ukomm
+Retour du courrier ¦ Bréif zréckkomm
+pli non distribué ¦ Empfänger net ofgeholl
+destinataire inconnu ¦ Empfänger onbekannt
+AR reçu aujourd’hui ¦ Empfangsbestätegung haut
+Suivre en ligne ¦ Online verfollegen
+Copier le numéro ¦ D’Nummer kopéieren
+L’app ne fait aucune requête : le lien ouvre la page de suivi dans ton navigateur ; tu notes toi-même la date de l’AR. ¦ D’App schéckt keng Ufro: de Link mécht d’Suivi-Säit an dengem Browser op; den Datum vun der Empfangsbestätegung dréis du selwer an.
+Tape d’abord le numéro. ¦ Schreif fir d’éischt d’Nummer.
+Numéro copié ¦ Nummer kopéiert
+Courrier revenu : noter 🔎 introuvable pour cet héritier ? ¦ De Bréif ass zréckkomm: 🔎 net fonnt fir dësen Ierwen notéieren?
+✓ AR {d} ¦ ✓ Bestätegung {d}
+revenu ¦ zréckkomm
+📮 sans AR · {n} j ¦ 📮 ouni Bestätegung · {n} D
+Recommandés ¦ Recommandéen
+Sans AR ¦ Ouni Bestätegung
+{n} recommandés, {m} sans accusé ¦ {n} Recommandéen, {m} ouni Bestätegung
+Importer des réponses… ¦ Äntwerten importéieren…
+Saisir un questionnaire papier ¦ E Pabeier-Froebou agi
+📮 Recommandé ¦ 📮 Recommandé
+Questionnaires ¦ Froebéi
+préparé le {d} ¦ virbereet {d}
+réponses écrites le {d} ¦ Äntwerten agedroen {d}
+Questionnaire ¦ Froebou
+au sujet d’une succession ¦ iwwer eng Ierfschaft
+Vous ¦ Dir
+Nom de naissance ¦ Gebuertsnumm
+Conjoint(s) ¦ Ehepartner
+Date du mariage (ou PACS) ¦ Datum vun der Hochzäit (oder vum Partenariat)
+Adresse, téléphone, courriel ¦ Adress, Telefon, E-Mail
+Code postal ¦ Postcode
+Autres membres de la famille connus ¦ Aner bekannt Familljememberen
+Frères, sœurs, cousins…, avec un moyen de les joindre ¦ Bridder, Schwësteren, Koseng…, mat engem Wee, fir se ze erreechen
+Documents que vous pouvez fournir ¦ Dokumenter, déi Dir liwwere kënnt
+livret de famille ¦ Familljebuch
+acte de naissance ¦ Gebuertsakt
+acte de mariage ¦ Hochzäitsakt
+jugement ¦ Uerteel
+Vos réponses restent sur cet appareil tant que vous n’envoyez rien. ¦ Är Äntwerte bleiwen op dësem Apparat, soulaang Dir näischt schéckt.
+Enregistrer mes réponses ¦ Meng Äntwerte späicheren
+Un questionnaire à envoyer ¦ Froebou fir ze schécken
+Fabriquer et ranger au Registre ¦ Erstellen an am Register klasséieren
+Ce qu’on demande ¦ Wat mer froen
+Ta question ¦ Deng Fro
+Comment l’envoyer ¦ Wéi een en schéckt
+Ce qui est pré-rempli ¦ Wat virausgefëllt ass
+Jamais le nom du défunt ni un montant : « au sujet d’une succession ». Le fichier s’ouvre d’un double-clic, sans internet ; l’héritier renvoie un petit fichier. ¦ Ni den Numm vum Verstuerwenen oder e Betrag: „iwwer eng Ierfschaft“. De Fichier mécht sech mat engem Duebelklick op, ouni Internet; den Ierwe schéckt e klenge Fichier zréck.
+{n} prêts, rangés au Registre de courriers ¦ {n} virbereet, am Courrier-Register klasséiert
+Ce fichier ne vient pas d’un questionnaire de ce dossier. ¦ Dëse Fichier kënnt net vun engem Froebou vun dësem Dossier.
+Revoir avant d’écrire ¦ Iwwerkucken, ier en agedroe gëtt
+Enfants (un par ligne : prénom, année) ¦ Kanner (eent pro Linn: Numm, Joer)
+Documents promis ¦ Versprach Dokumenter
+Réponses de {n} ¦ Äntwerte vun {n}
+Écrire les changements cochés ¦ Déi ugekräizten Ännerungen androen
+Une réponse a déjà été importée le {d} : compare avec celle-ci. ¦ Eng Äntwert gouf schonn {d} importéiert: vergläich se mat dëser.
+fichier vérifié ✓ (bon questionnaire, pas modifié) ¦ Fichier kontrolléiert ✓ (dee richtege Froebou, net geännert)
+Coche ce qui doit aller dans le dossier. Rien n’est écrit sans ta revue ; « source : déclaration de l’héritier » accompagne tout ce qui est écrit. ¦ Kräiz u wat an den Dossier soll. Näischt gëtt ouni deng Kontroll agedroen; alles Agedroent kritt „Quell: Erklärung vum Ierwen“.
+Dans la base ¦ An der Datebank
+« Famille connue » va en note du dossier, jamais en fiches. Les enfants créent des fiches reliées à l’héritier. Les documents promis deviennent une échéance. ¦ „Bekannt Famill“ geet an d’Notiz vum Dossier, ni an d’Kaarten. D’Kanner maache Kaarten, déi mam Ierwe verlinkt sinn. Déi versprach Dokumenter ginn eng Frist.
+{n} écrits. Calcul refait. ¦ {n} agedroen. Berechnung nei gemaach.
+passée ¦ vergaangen
+dans {n} j ¦ an {n} D
+était le {d} ¦ war {d}
+Une date importante ¦ Wichtegen Datum
+Mes dates importantes ¦ Meng wichteg Datumer
+D’où vient cette date ¦ Vu wou kënnt dësen Datum
+Les dates que le notaire t’a données, rappelées à temps. ¦ D’Datumer, déi den Notaire dir ginn huet, fristgerecht erënnert.
+L’app ne calcule aucun délai légal : elle ne connaît pas ta situation. ¦ D’App rechent keng gesetzlech Frist: si kennt deng Situatioun net.
+✎ Modifier la date ¦ ✎ Den Datum änneren
+＋ Une date importante ¦ ＋ E wichtegen Datum
+D’où vient cette date (obligatoire) ¦ Vu wou kënnt dësen Datum (obligatoresch)
+ex. : Me VIALLE, courriel du 4 nov. ¦ z. B.: Me VIALLE, Mail vum 4.11.
+Date déplacée : l’ancienne reste en dessous et la modification est notée au 🕓 Journal. ¦ Datum verluecht: deen ale bleift drënner an d’Ännerung gëtt an 🕓 Journal agedroen.
+Date modifiée ¦ Datum geännert
+Date importante ajoutée ¦ Wichtegen Datum dobäigesat
+🔗 {a} liens ne reposent que sur une pièce, {b} sur aucune. Ce n’est pas une erreur : c’est à vérifier avant la remise. ¦ 🔗 {a} Verbindunge stinn op engem eenzege Beweis, {b} op kengem. Et ass kee Feeler: virun der Iwwerreechung ze kontrolléieren.
+🔗 Chaque lien repose sur assez de pièces. ¦ 🔗 All Verbindung steet op genuch Beweiser.
+Voir les liens ¦ D’Verbindunge gesinn
+Une lettre par service ({n}) ¦ Ee Bréif pro Büro ({n})
+délivrée le {d} ¦ ausgestallt {d}
+valable jusqu’au {d} ¦ gëlteg bis {d}
+📅 Date de délivrance ¦ 📅 Datum vun der Ausstellung
+Chaque maillon : combien de pièces le prouvent ¦ All Glidd: wéi vill Beweiser et belleeën
+Héritier concerné ¦ Betraffenen Ierwen
+dossier de preuve « prouvé » ¦ Beweisdossier „bewisen“
+1 pièce, jugée suffisante le {d} ¦ 1 Beweis, als genuch ugesinn {d}
+Demander l’acte ¦ Den Akt ufroen
+✓ Une pièce me suffit ici ¦ ✓ Ee Beweis geet mer hei duer
+Une « pièce » = une source citée sur l’acte (deux copies du même acte comptent pour une) ; un dossier de preuve « prouvé » compte pour une de plus. ¦ „Beweis“ = d’Quell bei engem Evenement (zwou Kopie vum selwechten Akt zielen als eng); de Beweisdossier „bewisen“ zielt als nach eng.
+Noté au 🕓 Journal ¦ An 🕓 Journal agedroen
+Remise bloquée (réglage) ¦ Iwwerreechung blockéiert (Astellung)
+Des liens ont trop peu de pièces : la remise est bloquée tant qu’ils ne sont pas complétés (ou « Une pièce me suffit ici »). ¦ E puer Verbindungen hunn ze wéineg Beweiser: d’Iwwerreechung ass blockéiert, bis se ergänzt sinn (oder „Ee Beweis geet mer hei duer“).
+Pour une recherche, je vous serais reconnaissant(e) de m’adresser une copie des actes suivants : ¦ Fir eng Recherche wier ech Iech dankbar, wann Dir mir eng Kopie vun dësen Akte schécke kéint:
+Les actes manquants, regroupés ¦ Feelend Akten, gruppéiert
+Une seule lettre par service au lieu d’une par acte : moins de timbres, moins de relances. Relis et corrige chaque lettre. ¦ Ee Bréif pro Büro amplaz ee pro Akt: manner Timberen, manner Erënnerungen. Lies a korrigéier all Bréif.
+{n} rangées dans le Registre de courriers ¦ {n} am Courrier-Register klasséiert
+Copie délivrée le ¦ Kopie ausgestallt
+Durée de validité demandée par ton notaire (mois) ¦ Gëltegkeetsdauer, déi däin Notaire verlaangt (Méint)
+Aucune durée par défaut : c’est toi qui la tapes. La 🔔 cloche prévient avant qu’elle ne soit trop ancienne. ¦ Keng Standarddauer: du dréis se an. D’🔔 Klack warnt, ier se ze al ass.
+Date de délivrance notée ¦ Datum vun der Ausstellung notéiert
+recherches négatives : {n} ¦ {n} Recherchen ouni Resultat
+« Rien trouvé » est un résultat utile : il montre la diligence au notaire. ¦ „Näischt fonnt“ ass e nëtzlecht Resultat: et weist dem Notaire deng Grëndlechkeet.
+Aucune recherche notée pour cette personne. ¦ Keng Recherche fir dës Persoun notéiert.
+Rien n’est recopié : les lignes viennent du 🗓 Journal des recherches, des ⚰️ vérifications INSEE et des 📞 échanges marqués « recherche ». ¦ Näischt gëtt kopéiert: d’Linne kommen aus dem 🗓 Fuerschungsjournal, aus de ⚰️ INSEE-Kontrollen an aus de 📞 Kontakter mam Vermierk „Recherche“.
+Noter une recherche ¦ Eng Recherche notéieren
+Pour le notaire ¦ Fir den Notaire
+Recherches faites — {n} ¦ Gemaachte Recherchen — {n}
+＋ Noter une recherche ¦ ＋ Eng Recherche notéieren
+Où (service, site, mairie…) ¦ Wou (Archiven, Site, Gemeng…)
+Ce qui a été trouvé ¦ Wat fonnt gouf
+Écrit un dépouillement dans le 🗓 Journal des recherches (comme « Où chercher »). ¦ Dréit eng Lieskaart an 🗓 Fuerschungsjournal an (wéi „Wou sichen“).
+Recherche notée ¦ Recherche notéiert
+Carte des héritiers ¦ Kaart vun den Ierwen
+au numéro (BAN) ¦ bis op d’Hausnummer (BAN)
+Hors carte ¦ Ausserhalb vun der Kaart
+à l’étranger ({c}) ¦ am Ausland ({c})
+commune pas placée ({c}) ¦ Gemeng net placéiert ({c})
+adresse inconnue ¦ Adress onbekannt
+Où vivent les héritiers ¦ Wou d’Ierwe wunnen
+Tous les dossiers en cours ¦ All lafend Dossieren
+Aucune adresse d’héritier placée sur la carte. ¦ Keng Adress vun engem Ierwen op der Kaart placéiert.
+héritier (adresse connue, au niveau de la commune) ¦ Ierwen (Adress bekannt, um Niveau vun der Gemeng)
+notaire connu de l’app ¦ Notaire, deen d’App kennt
+Rien n’est envoyé en ligne. ¦ Näischt gëtt online geschéckt.
+La BAN n’est pas encore téléchargée : position à la commune. ¦ BAN nach net erofgelueden: Positioun um Niveau vun der Gemeng.
+Image de la carte (sans noms) ¦ Bild vun der Kaart (ouni Nimm)
+Par organisme, d’après le Registre ¦ Pro Büro, aus dem Register
+Organisme ¦ Büro
+pas assez de courriers ¦ wéineg Bréiwer
+De l’envoi à la réponse reçue (demandes d’actes des dossiers). Aide à prévoir la remise et à relancer au bon moment. ¦ Vum Schécken bis zur kritter Äntwert (Aktenufroe vun den Dossieren). Hëlleft dir, d’Iwwerreechung ze plangen an zur Zäit ze relancéieren.
+Pas encore de réponse notée dans le Registre. ¦ Nach keng Äntwert am Register notéiert.
+Sa part passe dans sa propre succession : ouvrir un dossier lié pour {n} ? ¦ Säin Deel geet a seng eegen Ierfschaft: e verlinkten Dossier fir {n} opmaachen?
+🔗 Dossier lié ¦ 🔗 Verlinkten Dossier
+Ouvrir le dossier lié ¦ E verlinkten Dossier opmaachen
+Dossier lié {n} ouvert ({what}) ¦ Verlinkten Dossier {n} opgemaach ({what})
+Aucun autre dossier en cours dans cette généalogie (d’abord ⇄ Déplacer s’il est dans une autre). ¦ Keen anere lafenden Dossier an dësem Bam (fir d’éischt ⇄ Réckelen, wann en an engem aneren ass).
+Fusionner avec un autre dossier ¦ Mat engem aneren Dossier fusionéieren
+Le dossier à réunir dans {n} ¦ Dossier fir mat {n} ze fusionéieren
+Le numéro du dossier réuni n’est pas réutilisé. ↶ Annuler sépare à nouveau, comme avant. ¦ D’Nummer vum fusionéierten Dossier gëtt net nach eng Kéier benotzt. ↶ Réckgängeg trennt se nees wéi virdrun.
+Ce qui ¦ Wat
+Ce qui se passe ¦ Wat geschitt
+{a} déjà communes, {b} ajoutées ¦ {a} gemeinsam, {b} dobäigesat
+{d} en double gardée(s) une fois ¦ Duebeler eng Kéier behalen: {d}
+rattachés, chacun garde son dossier d’origine en étiquette ¦ dobäigesat, jidderee behält säin Urspronksdossier als Etikett
+rattachés ; les factures émises ne changent pas ¦ dobäigesat; ausgestallte Rechnunge ginn net geännert
+mis bout à bout, chaque ligne marquée de son dossier ¦ hannereneen, all Linn mat sengem Dossier markéiert
+Deux notaires différents : lequel garder ? ¦ Zwee verschidden Notairen: wéi ee behalen?
+Dossiers réunis ¦ Dossieren fusionéiert
+Copie à envoyer au notaire ¦ Kopie fir den Notaire
+Copie à envoyer au notaire… ¦ Kopie fir den Notaire…
+Un fichier que le notaire ouvre d’un double-clic, sans rien pouvoir modifier, chiffré si tu le veux. ¦ E Fichier, deen den Notaire mat engem Duebelklick opmécht an an deem hie näischt ännere kann, verschlësselt, wann s du wëlls.
+Part aussi ¦ Geet och mat
+📞 échanges · 💶 fonds · ⚰️ vérifications INSEE · 🧾 copie des factures (le registre, lui, ne change pas) ¦ 📞 Kontakter · 💶 Fongen · ⚰️ INSEE-Kontrollen · 🧾 Kopie vun de Rechnungen (de Register selwer ännert sech net)
+Mot de passe (obligatoire) ¦ Passwuert (obligatoresch)
+🔐 Mot de passe ¦ 🔐 Passwuert
+AES-256, comme les sauvegardes protégées. Oublié = archive perdue. Le réimport le demande. ¦ AES-256, wéi déi geschützt Backuppen. Vergiess = Archiv verluer. De Reimport freet dono.
+Mot de passe trop court (8 caractères au moins). ¦ D’Passwuert ass ze kuerz (mindestens 8 Zeechen).
+Les deux mots de passe ne sont pas les mêmes. ¦ Déi zwee Passwierder sinn net d’selwecht.
+Mot de passe de l’archive ¦ Passwuert vum Archiv
+🙈 Écran partagé : noms, adresses et montants masqués ¦ 🙈 Gedeelten Ecran: Nimm, Adressen a Beträg verstoppt
+Échange mis à la corbeille ¦ Kontakt an de Pabeierkuerf geréckelt
+Fusion annulée : les deux dossiers sont séparés comme avant ¦ Fusioun réckgängeg gemaach: déi zwee Dossiere sinn ewéi virdru getrennt
+Mon cabinet (factures) ¦ Mäi Büro (Rechnungen)
+L’app ne connaît ni ton statut, ni ton régime de TVA, ni les mentions que ta facture doit porter : c’est toi qui les écris, avec ton comptable. L’app les recopie telles quelles. ¦ D’App kennt däi Statut, däi TVA-Regime an d’Mentiounen, déi deng Rechnung muss hunn, net: du schreifs se mat dengem Comptabel. D’App iwwerhëlt se ouni se z’änneren.
+Mentions à imprimer sur chaque facture (ton texte) ¦ Mentiounen, déi op all Rechnung gedréckt ginn (däin Text)
+vide : à écrire avec ton comptable ¦ eidel: mat dengem Comptabel schreiwen
+Champs obligatoires pour émettre une facture ¦ Obligatoresch Felder fir eng Rechnung auszestellen
+Un champ que tu as déclaré obligatoire et laissé vide : la facture n’est pas émise. ¦ E Feld, dat s du als obligatoresch markéiert an eidel gelooss hues: d’Rechnung gëtt net ausgestallt.
+🏢 Mon cabinet ¦ 🏢 Mäi Büro
+EXEMPLE NON JURIDIQUE — à faire écrire ou relire par ton conseil avant tout usage. ¦ NET-JURISTESCHT BEISPILL — looss et virun all Notzung vun dengem Beroder schreiwen oder iwwerpréiwen.
+ton titre ¦ däin Titel
+ton texte : écrit ou relu par ton conseil ¦ däin Text: vun dengem Beroder geschriwwen oder iwwerpréift
+Mes modèles de contrat ¦ Meng Kontraktmodeller
+Ton contrat, avec des champs que l’app remplit ¦ Däi Kontrakt, mat de Felder, déi d’App ausfëllt
+Enregistrer la version ¦ D’Versioun späicheren
+L’app ne fournit aucun texte de contrat : c’est un acte qui t’engage et qui engage l’héritier, à faire écrire ou relire par ton conseil. L’app remplit des champs et garde l’historique de tes versions. ¦ D’App liwwert keen Kontrakttext: et ass en Akt, deen dech an den Ierwe bënnt; looss en vun dengem Beroder schreiwen oder iwwerpréiwen. D’App fëllt d’Felder aus a behält d’Geschicht vun dene Versiounen.
+＋ Nouveau modèle ¦ ＋ Neie Modell
+Mon contrat ¦ Mäi Kontrakt
+Versions ¦ Versiounen
+Écris ou importe ton contrat ¦ Schreif oder importéier däi Kontrakt
+Importer un .docx / .txt ¦ .docx / .txt importéieren
+Aperçu pour un héritier ¦ Virschau fir den Ierwen
+{defunt} n’existe pas : le nom du défunt n’est jamais dans un courrier envoyé avant signature. {pourcentage} vient de 💶 « Honoraires d’un contrat ». ¦ {defunt} gëtt et net: den Numm vum Verstuerwenen ass ni an engem Bréif, deen virun der Ënnerschrëft geschéckt gëtt. {pourcentage} kënnt aus 💶 „Honorar vum Kontrakt“.
+version {n} ¦ Versioun {n}
+Champ inconnu : {f} (ligne {l}). Corrige-le avant d’enregistrer. ¦ Onbekannt Feld: {f} (Linn {l}). Korrigéier et ier s du späichers.
+% à noter ¦ % anzedroen
+Champ vide : {f} ¦ Eidelt Feld: {f}
+Version {n} enregistrée (Mes modèles) ¦ Versioun {n} gespäichert (Meng Modeller)
+Fonds par héritier ¦ Fonge pro Ierwen
+Aucun montant de succession : l’app ne connaît ni l’actif, ni le passif. On note seulement des mouvements réels que tu as vus passer. ¦ Kee Betrag vun der Ierfschaft: d’App kennt weder Aktiva nach Passiva. Du notéiers nëmmen déi richteg Beweegungen, déi s du gesinn hues.
+Reçu du notaire ¦ Vum Notaire kritt
+Frais refacturés ¦ Weiderverrechent Fraisen
+Reversé ¦ Ausbezuelt
+Reste dû ¦ Nach ze bezuelen
+pas de contrat ¦ ouni Kontrakt
+reversé de trop : {s} ¦ ze vill ausbezuelt: {s}
+✓ soldé ¦ ✓ ofgerechent
+à reverser ¦ auszebezuelen
+Mouvements ¦ Beweegungen
+＋ Noter un mouvement ¦ ＋ Eng Beweegung notéieren
+Commission = % du contrat × montant reçu. Reste dû = reçu − commission − frais − reversé. ¦ Kommissioun = % vum Kontrakt × kritte Betrag. Rescht = kritt − Kommissioun − Fraisen − ausbezuelt.
+✎ Corriger un mouvement ¦ ✎ D’Beweegung korrigéieren
+Commission proposée : {p} % de {r} = {c} (modifiable) ¦ Proposéiert Kommissioun: {p} % vun {r} = {c} (änneren méiglech)
+virement, chèque… ¦ Iwwerweisung, Scheck…
+Versé à (représentant, si mineur ou sous tutelle) ¦ Ausbezuelt (dem Vertrieder, wann ëmmerjäreg oder ënner Tutelle)
+Montant incorrect. ¦ Ongültege Betrag.
+Mouvement corrigé ¦ Beweegung korrigéiert
+Mouvement noté ¦ Beweegung notéiert
+versé à {n} ¦ {n} ausbezuelt
+Décompte — {n} ¦ Ofrechnung — {n}
+Aucun mouvement noté. ¦ Keng Beweegung notéiert.
+Reste à reverser ¦ Nach auszebezuelen
+Noter un mouvement ¦ Eng Beweegung notéieren
+Décompte pour l’héritier ¦ Ofrechnung fir den Ierwen
+Facturer la commission ¦ D’Kommissioun verrechnen
+Facture ¦ Rechnung
+Avoir ¦ Gutschrëft
+Devis ¦ Devis
+N° de TVA ¦ TVA-Nummer
+BROUILLON ¦ ENTWURF
+ÉMIS ¦ AUSGESTALLT
+ÉMISE ¦ AUSGESTALLT
+Client ¦ Client
+Total HT ¦ Total ouni TVA
+TVA {r} % ¦ TVA {r} %
+Total TTC ¦ Total mat TVA
+Commission du contrat de révélation ({p} % de la part reçue : {r}) ¦ Kommissioun no dem Opdeckungskontrakt ({p} % vum kritten Deel: {r})
+Commission du contrat de révélation ({p} %) ¦ Kommissioun no dem Opdeckungskontrakt ({p} %)
+Temps passé ({h} h {m}) ¦ Verbraucht Zäit ({h} h {m})
+Frais ¦ Fraisen
+🧾 DEVIS ¦ 🧾 DEVIS
+🧾 FACTURE ¦ 🧾 RECHNUNG
+{k} {n} ¦ {k} {n}
+Brouillon, pas encore numéroté ¦ Entworf, nach ouni Nummer
+Garder en brouillon ¦ Als Entworf behalen
+Ce que l’app ne fait pas : elle ne connaît ni ton statut, ni ton régime de TVA, ni les mentions que ta facture doit porter. C’est toi qui choisis le taux et qui écris les mentions (avec ton comptable). L’app numérote sans trou, interdit de modifier une facture émise, fait les additions et garde tout. ¦ Wat d’App net mécht: si kennt däi Statut, däi TVA-Regime an déi obligatoresch Mentiounen net. Du wiels den Taux a schreifs d’Mentiounen (mat dengem Comptabel). D’App nummeréiert ouni Lück, verbitt d’Ännere vun enger ausgestallter Rechnung, addéiert an hält alles.
+🏢 Mon cabinet : des champs obligatoires sont vides ({f}) : la facture ne pourra pas être émise. ¦ 🏢 Mäi Büro: obligatoresch Felder eidel ({f}): d’Rechnung kann net ausgestallt ginn.
+Adresse du client ¦ Adress vum Client
+Prix HT ¦ Präis ouni TVA
+Taux de TVA (%) — choisi par toi ¦ TVA-Taux (%) — vun dir gewielt
+ton taux ¦ däin Taux
+Repris de ta dernière facture ; jamais deviné. ¦ Aus denger leschter Rechnung iwwerholl; ni geroden.
+Aucun taux proposé : tape celui que t’a indiqué ton comptable. ¦ Keen Taux proposéiert: schreif deen, deen däi Comptabel dir ginn huet.
+Émettre le devis n° {n} ¦ Devis Nr. {n} ausstellen
+Émettre la facture n° {n} ¦ Rechnung Nr. {n} ausstellen
+Sur la facture ¦ Op der Rechnung
+à remplir ¦ auszefëllen
+⏱ Temps passé : non coché, compris dans la commission ¦ ⏱ Verbraucht Zäit: net ugekräizt, an der Kommissioun abegraff
+taux à choisir ¦ Taux ze wielen
+Émettre le devis {n} ? Il reste modifiable tant qu’il n’est pas accepté. ¦ Den Devis {n} ausstellen? E kann nach geännert ginn, soulaang en net akzeptéiert ass.
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. Émettre {n} ? ¦ Eng ausgestallt Rechnung kann net méi geännert oder geläscht ginn. Eng Gutschrëft korrigéiert se. {n} ausstellen?
+Émettre ¦ Ausstellen
+{n} émise ¦ {n} ausgestallt
+Brouillon gardé ¦ Entworf behalen
+brouillon ¦ Entworf
+émis ¦ ausgestallt
+avoir ¦ Gutschrëft
+✓ payée le {d} ¦ ✓ bezuelt {d}
+attendue ¦ erwaart
+Tout le cabinet ¦ De ganze Büro
+avec les mouvements de fonds ¦ mat de Fongebeweegungen
+CSV pour le comptable ¦ CSV fir de Comptabel
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. ¦ Eng ausgestallt Rechnung kann net méi geännert oder geläscht ginn. Eng Gutschrëft korrigéiert se.
+Chercher… (n°, client, dossier) ¦ Sichen… (Nr., Client, Dossier)
+TTC ¦ mat TVA
+🧾 Faire un avoir ¦ 🧾 Eng Gutschrëft ausstellen
+Payée… ¦ Bezuelt…
+Accepté ¦ Akzeptéiert
+Transformer en facture ¦ An eng Rechnung ëmwandelen
+Pas encore de facture. ¦ Nach keng Rechnung.
+Brouillon supprimé (aucun numéro consommé) ¦ Entworf geläscht (keng Nummer verbraucht)
+L’avoir reprend les lignes de la facture en négatif, avec son propre numéro. Il ne peut plus être modifié. ¦ D’Gutschrëft iwwerhëlt d’Linne vun der Rechnung mat engem Minus, mat hirer eegener Nummer. Si kann net méi geännert ginn.
+Payée ¦ Bezuelt
+Date (AAAA-MM-JJ) et moyen, ex. : 2026-11-20 virement ¦ Datum (JJJJ-MM-DD) a Manéier, z. B.: 2026-11-20 Iwwerweisung
+Paiement noté ¦ Bezuelung notéiert
+Devis accepté ¦ Devis akzeptéiert
+Brouillon de facture prêt ¦ Rechnungsentworf prett
+Registre des factures ¦ Register vun de Rechnungen
+Factures du dossier ¦ Rechnunge vum Dossier
+Devis et factures ¦ Deviser a Rechnungen
+Faire un devis ¦ En Devis erstellen
+Faire une facture ¦ Eng Rechnung erstellen
+Pas encore de facture pour ce dossier. ¦ Nach keng Rechnung fir dësen Dossier.
+HT ¦ ouni TVA
+{n} base(s) verrouillée(s) non lue(s) ¦ {n} gespaart Datebanken net gelies
+Dossiers ouverts ¦ Oppen Dossieren
+dont {n} clos ¦ dovun {n} zou
+Délai moyen (ouvert → remis) ¦ Duerchschnëttlech Dauer (op → iwwerreecht)
+sur {n} dossiers remis ¦ op {n} iwwerreechten Dossieren
+pas assez de dossiers pour une moyenne ¦ ze wéineg Dossiere fir en Duerchschnëtt
+Contrats signés / refusés ¦ Kontrakter ënnerschriwwen / refuséiert
+{p} % signés · {n} sans réponse ¦ {p} % ënnerschriwwen · {n} ouni Äntwert
+Facturé / encaissé ({k}) ¦ Verrechent / akasséiert ({k})
+encaissé {a} · reste {b} ¦ {a} akasséiert · {b} Rescht
+Pas encore de facture : seuls le temps et les contrats sont comptés ¦ Nach keng Rechnung: nëmmen Zäit a Kontrakter ginn gezielt
+{n} en cours depuis {m} mois en moyenne ¦ {n} lafend, am Duerchschnëtt {m} Méint
+Temps passé par dossier (heures) ¦ Verbraucht Zäit pro Dossier (Stonnen)
+Aucun temps noté. ¦ Keng Zäit notéiert.
+Voir en tableau ¦ Als Tabell gesinn
+Facturé et encaissé par trimestre ({k}) ¦ Verrechent an akasséiert pro Trimester ({k})
+Facturé ¦ Verrechent
+Encaissé ¦ Akasséiert
+Aucun nom d’héritier dans cette vue : des numéros de dossier et des totaux. Rien n’est écrit. ¦ Keen Numm vun engem Ierwen an dëser Usiicht: Dossiersnummeren an Totalen. Näischt gëtt geschriwwen.
+Pour {n} ¦ Fir {n}
+le notaire ¦ Notaire
+⤓ Fabriquer la copie ¦ ⤓ D’Kopie erstellen
+Ce qui part ¦ Wat mat geet
+Tableau des héritiers et parts, arbre, chaîne de filiation (comme le PDF) ¦ Tabell vun den Ierwen an Deeler, Bam, Filiatiounskette (wéi am PDF)
+📑 Pièces (images des actes) ¦ 📑 Beweiser (Biller vun den Akten)
+Adresses des héritiers ¦ Adresse vun den Ierwen
+🕵️ Joindre les recherches faites ¦ 🕵️ Déi gemaachte Recherchen derbäileeën
+Journal, échanges, temps, factures ne partent jamais. ¦ Journal, Kontakter, Zäit a Rechnunge ginn ni mat.
+Protection ¦ Schutz
+Le fichier est chiffré (AES-256) ; la page demande le mot de passe à l’ouverture. Donne-le au notaire par un autre moyen (téléphone, SMS). Oublié = fichier illisible, même pour toi (refais-en un). ¦ De Fichier ass verschlësselt (AES-256); d’Säit freet beim Opmaache nom Passwuert. Gëff et dem Notaire op engem anere Wee (Telefon, SMS). Vergiess = onliesbare Fichier, och fir dech (maach en neien).
+Copie v{n} ; l’app garde la liste des copies faites, pas les fichiers. ¦ Kopie v{n}; d’App hält d’Lëscht vun de gemaachte Kopien, net d’Fichieren.
+Voilà ce qui part : {h} héritiers, {p} pièces, {a} adresse(s). ¦ Geet mat: {h} Ierwen, {p} Beweiser, {a} Adressen.
+Fiche confidentielle : {n} retirée (calcul inchangé). ¦ Vertraulech Kaart: {n} ausgelooss (Berechnung onverännert).
+une branche n’est pas tranchée ¦ eng Branche ass net entscheet
+Fichier trop lourd pour un courriel (plus de 20 Mo). Continuer quand même ? ¦ De Fichier ass ze grouss fir eng Mail (iwwer 20 MB). Trotzdeem weidermaachen?
+🤝 Copie pour le notaire ¦ 🤝 Kopie fir den Notaire
+Copie v{v} du {d}, calcul indicatif : à vérifier par l’étude. ¦ Kopie v{v} vum {d}, indikativ Berechnung: vum Notariat ze kontrolléieren.
+{n} · {t} ¦ {n} · {t}
+Copie protégée par un mot de passe. ¦ Kopie mat Passwuert geschützt.
+Copie v{n} fabriquée ¦ Kopie v{n} erstallt
+Mouvement supprimé ¦ Beweegung geläscht
+⚰️ Décès d’un héritier ¦ ⚰️ Stierffall vun engem Ierwen
+Ce que « ✓ C’est lui » écrit : la fiche sert aussi aux autres dossiers. ¦ Wat „✓ Dat ass dës Persoun“ androt: d’Kaart déngt och aneren Dossieren.
+Le décès sur la fiche et le statut du dossier ¦ Stierffall op der Kaart a Status am Dossier
+Seulement le statut du dossier ¦ Nëmme Status am Dossier
+Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de bruit, risque d’en rater. ¦ D’Spuere ginn ab dësem Score gewisen (vun 100). Méi héich: manner Rauschen, Risiko eng ze verpassen.
+Après chaque nouvel import du fichier INSEE : vérifier les dossiers en cours tout seul (jamais de changement sans ton clic). ¦ No all neien Import vum INSEE-Fichier: déi lafend Dossieren eleng kontrolléieren (ni eng Ännerung ouni däi Klick).
+Automatique, dans la cloche ¦ Automatesch, an der Klack
+Seulement à la main ¦ Nëmmen manuell
+📋 Questionnaire ¦ 📋 Froebou
+Ce que l’héritier te renvoie après avoir rempli le questionnaire. ¦ Wat den Ierwen dir nom Ausfëllen zréckschéckt.
+Un petit fichier .json ¦ E klenge .json-Fichier
+La page .html remplie ¦ Déi ausgefëllt .html-Säit
+Pré-rempli : son nom et sa naissance seulement, jamais le défunt ni un montant. ¦ Virausgefëllt: nëmme säin Numm a seng Gebuert, ni de Verstuerwenen oder e Betrag.
+Pré-rempli (ce qui le concerne) ¦ Virausgefëllt (wat hien ugeet)
+Tout vide ¦ Alles eidel
+📞 Échanges ¦ 📞 Kontakter
+Où noter et relire les appels, courriels et visites. ¦ Wou Uriff, Mailen a Visitte notéiert a gelies ginn.
+Un onglet du dossier et un raccourci dans 👥 Héritiers ¦ Dossiersonglet an Ofkierzung an 👥 Ierwen
+Seulement dans 👥 Héritiers ¦ Nëmmen an 👥 Ierwen
+Les courriers du Registre dans la liste des échanges. ¦ D’Bréiwer aus dem Register an der Lëscht vun de Kontakter.
+Montrés en gris, en lecture ¦ Gro gewisen, nëmme fir ze liesen
+Pas montrés ¦ Net gewisen
+📮 Recommandés ¦ 📮 Recommandéen
+Relance quand l’accusé de réception n’est pas revenu (réglable aussi pour chaque courrier). ¦ Erënnerung, wann d’Empfangsbestätegung net zréckkomm ass (och pro Bréif astellbar).
+15 jours ¦ 15 Deeg
+8 jours ¦ 8 Deeg
+21 jours ¦ 21 Deeg
+L’app n’interroge jamais La Poste : le lien ouvre la page dans ton navigateur, tu notes toi-même l’AR. ¦ D’App freet ni La Poste: de Link mécht d’Säit an dengem Browser op, d’Bestätegung dréis du selwer an.
+Lien vers la page de suivi ¦ Link op d’Suivi-Säit
+Pas de lien (on copie le numéro) ¦ Kee Link (d’Nummer gëtt kopéiert)
+Adresse de la page de suivi, avec {numero} (https:// seulement). ¦ Adress vun der Suivi-Säit, mat {numero} (nëmmen https://).
+🧾 Devis et factures ¦ 🧾 Deviser a Rechnungen
+Un seul registre : numérotation continue même si les dossiers sont dans plusieurs généalogies. ¦ Een eenzege Register: duerchgoend Nummeréierung, och wann d’Dossieren a méi Beem sinn.
+Un seul registre pour le cabinet ¦ Een eenzege Register fir de Büro
+Dans la généalogie des dossiers ¦ Am Bam vun den Dossieren
+Le compteur ne recule jamais ; un brouillon effacé ne consomme pas de numéro. ¦ De Compteur geet ni zeréck; e geläschten Entworf verbraucht keng Nummer.
+F-2026-0042 (remis à 1 chaque année) ¦ F-2026-0042 (all Joer vun 1 un)
+Compteur unique (F-0042) ¦ Een eenzege Compteur (F-0042)
+La ligne « temps passé » proposée sur la facture. ¦ D’Linn „verbraucht Zäit“, déi op der Rechnung proposéiert gëtt.
+Temps décoché quand il y a une commission ¦ Zäit net ugekräizt, wann et eng Kommissioun gëtt
+Temps toujours coché ¦ Zäit ëmmer ugekräizt
+Préfixe des factures. ¦ Prefix vun de Rechnungen.
+Préfixe des avoirs. ¦ Prefix vun de Gutschrëften.
+Préfixe des devis. ¦ Prefix vun den Deviser.
+📈 Activité ¦ 📈 Aktivitéit
+La période montrée en ouvrant le tableau de bord. ¦ Period, déi beim Opmaache vum Tableau gewise gëtt.
+L’année en cours ¦ Dëst Joer
+Les 12 derniers mois ¦ Lescht 12 Méint
+Les montants facturés et encaissés. ¦ Verrechent an akasséiert Beträg.
+Au choix (bouton) ¦ No Wonsch (Schalter)
+La copie contient des actes et des noms de vivants. ¦ D’Kopie enthält Akten an Nimm vu liewegen Persounen.
+Mot de passe coché au départ ¦ Passwuert vun Ufank un ugekräizt
+Décoché au départ ¦ Vun Ufank un net ugekräizt
+Le notaire reçoit souvent les adresses à part. ¦ Den Notaire kritt d’Adressen dacks separat.
+Adresses décochées au départ ¦ Adresse vun Ufank un net ugekräizt
+Cochées au départ ¦ Vun Ufank un ugekräizt
+🗺 Carte des héritiers ¦ 🗺 Kaart vun den Ierwen
+Rien n’est envoyé en ligne : la commune vient de la base ; le numéro, seulement si la BAN du département est déjà dans l’app (🗺️ Plan des adresses). ¦ Näischt gëtt online geschéckt: d’Gemeng kënnt aus der Datebank; d’Hausnummer nëmmen, wann d’BAN vum Departement schonn an der App ass (🗺️ Adressplang).
+Le numéro de rue (BAN déjà téléchargée) ¦ Hausnummer (BAN schonn erofgelueden)
+L’app n’a pas d’annuaire des notaires et n’en invente pas. ¦ D’App huet keng Lëscht vun Notairen an erfënnt keen.
+Les notaires de tes dossiers et contacts ¦ D’Notaire vun dengen Dossieren a Kontakter
+Pas de notaires ¦ Keng Notairen
+Le brouillon de contrat écrit par l’app. Un contrat t’engage : fais-le écrire ou relire par ton conseil. ¦ Kontraktentworf, deen d’App geschriwwen huet. E Kontrakt bënnt dech: looss en vun dengem Beroder schreiwen oder iwwerpréiwen.
+Retiré : page vide avec les champs ¦ Ewechgeholl: eidel Säit mat de Felder
+Gardé, marqué « exemple non juridique » ¦ Behalen, markéiert „net-juristescht Beispill“
+Chaque contrat rangé retient la version utilisée. ¦ All klasséierte Kontrakt erënnert sech un déi benotzt Versioun.
+Toutes les versions gardées ¦ All Versioune behalen
+Seulement la dernière ¦ Nëmmen déi lescht
+💶 Fonds ¦ 💶 Fongen
+Commission = % du contrat × montant reçu. ¦ Kommissioun = % vum Kontrakt × kritte Betrag.
+Calculée puis modifiable ¦ Gerechent, dann änneren méiglech
+Toujours tapée à la main ¦ Ëmmer mat der Hand geschriwwen
+Le décompte à l’héritier. ¦ Ofrechnung fir den Ierwen.
+Décompte imprimable ¦ Ofrechnung zum Drécken
+Écran seulement ¦ Nëmmen Ecran
+🔗 Double preuve ¦ 🔗 Duebele Beweis
+Le seuil d’un lien solide. ¦ Schwell vun enger zolitter Verbindung.
+Deux pièces par lien ¦ Zwee Beweiser pro Verbindung
+Une seule (signaler seulement « aucune ») ¦ Nëmmen een (nëmmen „keen“ signaléieren)
+Dans la liste « avant de remettre ». ¦ An der Lëscht „virun der Iwwerreechung“.
+« À revoir » (n’empêche rien) ¦ „Ze iwwerkucken“ (blockéiert näischt)
+Bloquant ¦ Blockéierend
+🗓 Dates importantes ¦ 🗓 Wichteg Datumer
+Les rappels proposés pour une nouvelle date (réglables pour chaque date). L’app ne calcule aucun délai légal. ¦ Erënnerungen, déi fir en neien Datum proposéiert ginn (pro Datum astellbar). D’App rechent keng gesetzlech Frist.
+J−30, J−7, J−1 ¦ D−30, D−7, D−1
+J−7 seulement ¦ Nëmmen D−7
+Où les voir dans 📁 Dossier. ¦ Wou s du se am 📁 Dossier gesäis.
+Dans les échéances, avec un drapeau 🗓 ¦ An de Fristen, mam Badge 🗓
+Un bloc à part ¦ Separate Block
+👥 Fusion de dossiers ¦ 👥 Fusioun vun Dossieren
+Les successions restent distinctes : le calcul n’est jamais mélangé. ¦ D’Ierfschafte bleiwe getrennt: d’Berechnung gëtt ni gemëscht.
+Deux défunts, deux calculs côte à côte ¦ Zwee Verstuerwener, zwou Berechnungen nieftenee
+Dossiers liés (recherches en commun) ¦ Verlinkten Dossieren (gemeinsam Recherchen)
+Combien de temps la fusion peut être annulée. ¦ Wéi laang eng Fusioun réckgängeg gemaach ka ginn.
+↶ pendant 30 jours ¦ ↶ während 30 Deeg
+↶ tant que rien n’a été ajouté ¦ ↶ soulaang näischt dobäigesat gouf
+Joindre les recherches faites au dossier du notaire. ¦ Déi gemaachte Recherchen dem Dossier fir den Notaire derbäileeën.
+Coché au départ ¦ Vun Ufank un ugekräizt
+📦 Archive ¦ 📦 Archiv
+Le mot de passe de l’archive de fin de dossier. Oublié = archive perdue. ¦ Passwuert vum Archiv um Enn vun engem Dossier. Vergiess = Archiv verluer.
+Proposé, coché ¦ Proposéiert, ugekräizt
+Pas proposé ¦ Net proposéiert
+💡 Autres idées ¦ 💡 Nach aner Iddien
+🔗 Le dossier lié d’un héritier mort après le défunt. ¦ 🔗 Verlinkten Dossier fir en Ierwen, deen nom Verstuerwene gestuerwen ass.
+Ses descendants rattachés ¦ Seng Nokomme verlinkt
+📮 Une lettre par service : quels actes. ¦ 📮 Ee Bréif pro Büro: wéi eng Akten.
+Manquants et déjà demandés ¦ Feelend a schonn ugefrot
+⏳ Délai de réponse par organisme. ¦ ⏳ Äntwertzäit pro Büro.
+⏳ Nombre de courriers avant de donner un délai. ¦ ⏳ Zuel vu Bréiwer, ier eng Zäit gewise gëtt.
+📅 La cloche prévient avant qu’une copie d’acte soit trop ancienne (durée tapée par toi pour chaque pièce). ¦ 📅 D’Klack warnt, ier eng Aktekopie ze al ass (d’Dauer dréis du pro Beweis an).
+7 jours ¦ 7 Deeg
+🙈 Écran partagé : ce qui remplace les noms. ¦ 🙈 Gedeelten Ecran: wat d’Nimm ersetzt.
+Initiales ¦ Initialen
+Numéros (Héritier 1, 2…) ¦ Nummeren (Ierwen 1, 2…)
+🙈 Écran partagé : les montants. ¦ 🙈 Gedeelten Ecran: d’Beträg.
+Montants masqués ¦ Beträg verstoppt
+Montants visibles ¦ Beträg siichtbar
+avec AR ¦ mat Empfangsbestätegung
+sans AR ¦ ouni Empfangsbestätegung
+lettre suivie ¦ verfollegt Sendung
+pas en recommandé ¦ net recommandéiert
+Son état civil ¦ Säin Zivilstand
+nom de naissance, prénoms, date et lieu de naissance ¦ Gebuertsnumm, Virnimm, Datum a Plaz vun der Gebuert
+mariage, PACS, divorce, dates ¦ Hochzäit, Partenariat, Scheedung, Datumer
+prénoms, dates de naissance, décédés ? ¦ Nimm, Gebuertsdatumer, verstuerwen?
+avec un moyen de les joindre ¦ mat engem Wee, fir se ze erreechen
+Documents qu’il peut fournir ¦ Dokumenter, déi hie liwwere kann
+livret de famille, actes, jugement… ¦ Familljebuch, Akten, Uerteel…
+Une question à toi ¦ Deng Fro
+💾 Fichier à remplir ¦ 💾 Fichier zum Ausfëllen
+🖨 Papier (PDF) ¦ 🖨 Pabeier (PDF)
+Ce qui le concerne ¦ Wat hien ugeet
+Famille connue ¦ Bekannt Famill
+Sa question ¦ Seng Fro
+Reversé à l’héritier ¦ Dem Ierwen ausbezuelt
+SIRET ¦ SIRET
+Mentions ¦ Mentiounen
+Trimestre ¦ Trimester
+Personnes rattachées ¦ Verlinkte Kaarten
+Courriers, échanges, fonds ¦ Bréiwer, Kontakter, Fongen
+Temps et frais, échéances ¦ Zäit a Fraisen, Fristen
+Questionnaire d’héritier fabriqué ¦ Froebou fir den Ierwen erstallt
+Réponses d’un questionnaire écrites ¦ Äntwerte vum Froebou agedroen
+Copie du dossier pour le notaire ¦ Kopie vum Dossier fir den Notaire
+Facture émise ou imprimée ¦ Rechnung ausgestallt oder gedréckt
+Registre des factures (CSV) ¦ Register vun de Rechnungen (CSV)
+Décompte des fonds imprimé ¦ Ofrechnung vun de Fonge gedréckt
+Recherches faites (pour le notaire) ¦ Gemaachte Recherchen (fir den Notaire)
+Image de la carte des héritiers ¦ Bild vun der Ierwenkaart
+Contrat imprimé ¦ Kontrakt gedréckt
+Dossiers fusionnés ¦ Dossieren fusionéiert
+chiffrée ¦ verschlësselt
+sans mot de passe ¦ ouni Passwuert
+avec les adresses ¦ mat Adressen
+sans adresse ¦ ouni Adress
+deux défunts ¦ zwee Verstuerwener
+dossiers liés ¦ verlinkten Dossieren
+Aucune lettre à ranger. ¦ Kee Bréif ze klasséieren.
+Avec qui ? ¦ Mat wiem?
+Ce dossier est archivé : rouvre-le d’abord. ¦ Dësen Dossier ass archivéiert: maach en fir d’éischt nees op.
+Ce fichier n’est pas un .docx. ¦ Dëse Fichier ass keen .docx.
+Ce n’est pas un devis. ¦ Dat ass keen Devis.
+Cette facture a déjà un avoir. ¦ Dës Rechnung huet schonn eng Gutschrëft.
+Choisis la date. ¦ Wiel en Datum.
+Choisis toi-même le taux de TVA (avec ton comptable) avant d’émettre. ¦ Wiel den TVA-Taux selwer (mat dengem Comptabel), ier s du ausstells.
+Choisis un autre dossier. ¦ Wiel en aneren Dossier.
+Dossier clos ou archivé : rouvre-le d’abord. ¦ Dossier zou oder archivéiert: maach en fir d’éischt nees op.
+Déjà émise. ¦ Schonn ausgestallt.
+Facture introuvable. ¦ Rechnung net fonnt.
+La facture n’a aucune ligne. ¦ D’Rechnung huet keng Linn.
+La fusion date de plus de 30 jours : elle ne peut plus être annulée. ¦ D’Fusioun ass méi al wéi 30 Deeg: si kann net méi réckgängeg gemaach ginn.
+Le mot de passe est obligatoire (réglage). ¦ D’Passwuert ass obligatoresch (Astellung).
+Ligne INSEE introuvable. ¦ INSEE-Linn net fonnt.
+Ligne incorrecte : quantité ou prix. ¦ Ongülteg Linn: Quantitéit oder Präis.
+Mouvement introuvable. ¦ Beweegung net fonnt.
+Numéro déjà pris : renuméroter le brouillon. ¦ Nummer scho vergi: nummeréier den Entworf nei.
+Où as-tu cherché ? ¦ Wou hues du gesicht?
+Quelque chose a été ajouté depuis la fusion : elle ne peut plus être annulée. ¦ Zënter der Fusioun gouf eppes dobäigesat: si kann net méi réckgängeg gemaach ginn.
+Seule une facture émise peut être payée. ¦ Nëmmen eng ausgestallt Rechnung ka bezuelt ginn.
+Taux de TVA incorrect (ex. : le taux que t’a indiqué ton comptable). ¦ Ongültegen TVA-Taux (z. B.: deen, deen däi Comptabel dir ginn huet).
+Type d’événement « Décès » introuvable. ¦ Den Evenementstyp „Stierffall“ gouf net fonnt.
+Un avoir corrige une facture émise. ¦ Eng Gutschrëft korrigéiert eng ausgestallt Rechnung.
+Un devis accepté ne se modifie plus. ¦ En akzeptéierten Devis gëtt net méi geännert.
+« D’où vient cette date » est obligatoire. ¦ „Vu wou kënnt dësen Datum“ ass obligatoresch.
+Échange introuvable. ¦ Kontakt net fonnt.
+💶 Un reversement reste en attente : archiver quand même ? ¦ 💶 Eng Auszuelung waart nach: trotzdeem archivéieren?
+🔐 Archive protégée : tape son mot de passe. ¦ 🔐 Geschützten Archiv: schreif säi Passwuert.
+🏢 Mon cabinet : un champ que tu as déclaré obligatoire est vide ({f}) : la facture n’est pas émise. ¦ 🏢 Mäi Büro: e Feld, dat s du als obligatoresch markéiert hues, ass eidel ({f}): d’Rechnung gëtt net ausgestallt.
+J−{n} ¦ D−{n}
+=descendant rattaché ¦ zougeuerdnete Nokomm|zougeuerdnet Nokommen
+=échange noté ¦ notéierte Kontakt|notéiert Kontakter

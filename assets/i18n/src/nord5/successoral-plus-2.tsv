@@ -1,0 +1,610 @@
+fr ¦ hr ¦ sl
+# Zone « successoral-plus-2 » : ⚖️ outils de plus du généalogiste successoral (heritage-successoral-plus2*.js, lib/successoral_plus2.php, lib/successoral_factures.php)
+Réglages de cet outil ¦ Postavke ovog alata ¦ Nastavitve tega orodja
+(conseillé) ¦ (preporučeno) ¦ (priporočeno)
+Autre : ¦ Ostalo: ¦ Drugo:
+Outils du dossier : réglages ¦ Alati predmeta: postavke ¦ Orodja zadeve: nastavitve
+Chaque choix se change ici ; l’option conseillée est celle du départ. ¦ Svaki izbor mijenjaš ovdje; preporučeni je zadani. ¦ Vsako izbiro spremeniš tukaj; priporočena je privzeta.
+Réglage enregistré : {what} ¦ Postavka spremljena: {what} ¦ Nastavitev shranjena: {what}
+Adresse refusée : https:// et {numero} sont obligatoires. ¦ Adresa odbijena: https:// i {numero} su obavezni. ¦ Naslov zavrnjen: https:// in {numero} sta obvezna.
+Carte des héritiers (dossiers en cours) ¦ Karta nasljednika (predmeti u tijeku) ¦ Zemljevid dedičev (zadeve v teku)
+Délai de réponse par organisme ¦ Vrijeme odgovora po uredu ¦ Odzivni čas po uradu
+🙈 Écran partagé ¦ 🙈 Dijeljeni zaslon ¦ 🙈 Deljeni zaslon
+Fusionner avec un autre dossier… ¦ Spoji s drugim predmetom… ¦ Združi z drugo zadevo…
+Annuler la dernière fusion ¦ Poništi posljednje spajanje ¦ Razveljavi zadnjo združitev
+nom de naissance ¦ rođeno prezime ¦ rojstni priimek
+prénom ¦ ime ¦ ime
+né(e) le {d} ¦ rođen(a) {d} ¦ rojen(a) {d}
+même mois ¦ isti mjesec ¦ isti mesec
+même année ¦ ista godina ¦ isto leto
+± 1 an ¦ ± 1 godina ¦ ± 1 leto
+date inconnue ¦ datum nepoznat ¦ datum neznan
+date de naissance différente ¦ drugi datum rođenja ¦ drug datum rojstva
+même département ¦ isti departman ¦ isti departma
+lieu inconnu sur la fiche ¦ mjesto na kartici nepoznato ¦ kraj na kartici neznan
+lieu : {p} ¦ mjesto: {p} ¦ kraj: {p}
+Le fichier des décès n’est pas dans l’app. ¦ Datoteka umrlih nije u aplikaciji. ¦ Datoteke umrlih ni v aplikaciji.
+⤒ Importer les décès ¦ ⤒ Uvezi smrti ¦ ⤒ Uvozi smrti
+L’import se fait une seule fois, depuis data.gouv.fr (environ 25 millions de lignes depuis 1970), ou par années choisies. ¦ Uvoz se radi jednom, s data.gouv.fr (oko 25 milijuna redaka od 1970.), ili za odabrane godine. ¦ Uvoz se opravi enkrat, z data.gouv.fr (približno 25 milijonov vrstic od leta 1970), ali za izbrana leta.
+fichier importé : décès {a} → {b} ¦ uvezena datoteka: smrti {a} → {b} ¦ uvožena datoteka: smrti {a} → {b}
+un décès plus ancien ne peut pas être trouvé ¦ ranija smrt ne može se pronaći ¦ zgodnejše smrti ni mogoče najti
+plafonné à {n} ¦ ograničeno na {n} ¦ omejeno na {n}
+acte n° {n} ¦ isprava br. {n} ¦ listina št. {n}
+avant le défunt : si c’est cette personne, ses enfants viennent à sa place (représentation). ¦ prije ostavitelja: ako je to ta osoba, umjesto nje nasljeđuju njezina djeca (pravo predstavljanja). ¦ pred zapustnikom: če je to ta oseba, namesto nje dedujejo njeni otroci (pravica predstavljanja).
+après le défunt : sa part passe à ses propres héritiers. ¦ nakon ostavitelja: njezin dio prelazi na njezine vlastite nasljednike. ¦ po zapustniku: njen delež preide na njene lastne dediče.
+Les Français nés à l’étranger ont leur acte au Service central d’état civil (Nantes). ¦ Francuzi rođeni u inozemstvu imaju ispravu u Središnjem matičnom uredu (Nantes). ¦ Francozi, rojeni v tujini, imajo listino na Centralnem matičnem uradu (Nantes).
+déjà confirmé ¦ već potvrđeno ¦ že potrjeno
+C’est cette personne ¦ To je ta osoba ¦ To je ta oseba
+Pas la même personne ¦ Nije ista osoba ¦ Ni ista oseba
+Nom de naissance inconnu : cherché sous {n}, pistes moins sûres ¦ Rođeno prezime nepoznato: traženo kao {n}, manje sigurni tragovi ¦ Rojstni priimek neznan: iskano kot {n}, manj zanesljive sledi
+Deux personnes se ressemblent : demande l’acte avant de choisir ¦ Dvije osobe sliče: zatraži ispravu prije odabira ¦ Dve osebi sta si podobni: zahtevaj listino, preden izbereš
+rien trouvé dans le fichier ¦ u datoteci ništa nije pronađeno ¦ v datoteki ni ničesar
+« Rien trouvé » ne veut pas dire « vivant » (un décès à l’étranger manque souvent). ¦ „Ništa pronađeno“ ne znači „živ“ (smrt u inozemstvu često nedostaje). ¦ „Nič najdeno“ ne pomeni „živ“ (smrt v tujini pogosto manjka).
+Les héritiers « vivants » comparés au fichier des décès ¦ „Živi“ nasljednici uspoređeni s datotekom umrlih ¦ „Živi“ dediči, primerjani z datoteko umrlih
+pistes à partir de {n} ¦ tragovi od {n} ¦ sledi od {n}
+Aucun héritier « vivant » à vérifier dans ce dossier. ¦ U ovom predmetu nema „živog“ nasljednika za provjeru. ¦ V tej zadevi ni „živega“ dediča za preverjanje.
+Comment c’est calculé ¦ Kako se računa ¦ Kako se izračuna
+Le nom de naissance, sans accents ni tirets ; jamais le nom d’épouse (l’INSEE donne le nom de naissance). ¦ Rođeno prezime, bez naglasaka i crtica; nikad prezime po braku (INSEE vodi rođeno prezime). ¦ Rojstni priimek, brez naglasov in vezajev; nikoli priimek po poroki (INSEE vodi rojstni priimek).
+Le premier prénom de la fiche parmi les prénoms INSEE ; Jean-Pierre = Jean Pierre. ¦ Prvo ime s kartice među imenima iz INSEE-a; Jean-Pierre = Jean Pierre. ¦ Prvo ime s kartice med imeni INSEE; Jean-Pierre = Jean Pierre.
+Jour exact 30 · même mois 20 · même année 12 · ± 1 an 6 ; sans date : plafond 70. ¦ Točan dan 30 · isti mjesec 20 · ista godina 12 · ± 1 godina 6; bez datuma: najviše 70. ¦ Točen dan 30 · isti mesec 20 · isto leto 12 · ± 1 leto 6; brez datuma: največ 70.
+La commune ; même département 10 ; né à l’étranger : le pays (plafond 80). ¦ Općina; isti departman 10; rođen u inozemstvu: država (najviše 80). ¦ Občina; isti departma 10; rojen v tujini: država (največ 80).
+Différent : la piste est écartée. ¦ Inače: trag se odbacuje. ¦ Sicer: sled se zavrže.
+Pistes écartées ({n}) ¦ Odbačeni tragovi ({n}) ¦ Zavržene sledi ({n})
+Piste remise ¦ Trag vraćen ¦ Sled obnovljena
+« Pas la même personne » retenu : cette piste ne reviendra plus ¦ „Nije ista osoba“ zapamćeno: ovaj se trag neće vratiti ¦ „Ni ista oseba“ zapomnjeno: ta sled se ne bo vrnila
+Sur la fiche de {n} : un décès le {d}, source « Fichier des personnes décédées (INSEE) », avec la date du relevé. ¦ Na kartici za {n}: smrt {d}, izvor „Datoteka umrlih osoba (INSEE)“, s datumom provjere. ¦ Na kartici {n}: smrt {d}, vir „Datoteka umrlih oseb (INSEE)“, z datumom preverjanja.
+Dans ce dossier : statut retenu « {s} » ; le calcul est refait. ¦ U ovom predmetu: status „{s}“ zadržan; izračun se ponavlja. ¦ V tej zadevi: status „{s}“ ohranjen; izračun se ponovi.
+Ce qui va changer ¦ Što se mijenja ¦ Kaj se spremeni
+{n} marqué(e) décédé(e) (INSEE). Calcul refait. ¦ {n} označen(a) kao preminuo/la (INSEE). Izračun ponovljen. ¦ {n} označen(a) kot umrl(a) (INSEE). Izračun ponovljen.
+Vérifier les décès ¦ Provjeri smrti ¦ Preveri smrti
+Questionnaire… ¦ Upitnik… ¦ Vprašalnik…
+⚰️ INSEE : {n} piste(s) ¦ ⚰️ INSEE: {n} tragova ¦ ⚰️ INSEE: {n} sledi
+⚰️ vérifié le {d} ¦ ⚰️ provjereno {d} ¦ ⚰️ preverjeno {d}
+🕵️ Recherches ¦ 🕵️ Istraživanja ¦ 🕵️ Poizvedbe
+📞 Noter un échange ¦ 📞 Zabilježi kontakt ¦ 📞 Zapiši stik
+Ouvrir un dossier lié ¦ Otvori povezani predmet ¦ Odpri povezano zadevo
+Dossiers liés ¦ Povezani predmeti ¦ Povezane zadeve
+Succession de {n} ¦ Ostavina za {n} ¦ Zapuščina {n}
+dossier d’origine {n} ¦ izvorni predmet {n} ¦ izvorna zadeva {n}
+Deux défunts, deux calculs : les successions restent distinctes. ¦ Dva pokojnika, dva izračuna: ostavine ostaju odvojene. ¦ Dva pokojnika, dva izračuna: zapuščini ostaneta ločeni.
+Aucun héritier trouvé d’après les fiches. ¦ Prema karticama nije pronađen nijedan nasljednik. ¦ Po karticah ni najden noben dedič.
+Échanges ¦ Kontakti ¦ Stiki
+Noter un échange ¦ Zabilježi kontakt ¦ Zapiši stik
+Les courriers du Registre ne sont pas recopiés ici : ils sont montrés en gris, en lecture. ¦ Pisma iz upisnika ne kopiraju se ovdje: prikazana su sivo, samo za čitanje. ¦ Pisma iz evidence se sem ne kopirajo: prikazana so sivo, samo za branje.
+Chercher… (personne, résumé) ¦ Traži… (osoba, sažetak) ¦ Išči… (oseba, povzetek)
+du dossier fusionné ¦ iz spojenog predmeta ¦ iz združene zadeve
+Registre de courriers, n° {n} ¦ Upisnik dopisa, br. {n} ¦ Evidenca dopisov, št. {n}
+Aucun échange noté. ¦ Nijedan kontakt nije zabilježen. ¦ Noben stik ni zapisan.
+✎ Corriger un échange ¦ ✎ Ispravi kontakt ¦ ✎ Popravi stik
+＋ Noter un échange ¦ ＋ Zabilježi kontakt ¦ ＋ Zapiši stik
+Avec (héritier, notaire, mairie…) ¦ S kim (nasljednik, javni bilježnik, općina…) ¦ S kom (dedič, notar, občina…)
+Prochaine action ¦ Sljedeći korak ¦ Naslednji korak
+Durée (minutes) ¦ Trajanje (minute) ¦ Trajanje (minute)
+⏱ Compter la durée dans 💶 Temps ¦ ⏱ Uračunaj vrijeme u 💶 Vrijeme ¦ ⏱ Prištej čas v 💶 Čas
+C’est une recherche (va dans 🕵️ Recherches) ¦ To je istraživanje (ide u 🕵️ Istraživanja) ¦ To je poizvedba (gre v 🕵️ Poizvedbe)
+Avec une date, une échéance va dans le dossier et dans la 🔔 cloche (jamais le résumé). ¦ S datumom rok ide u predmet i u 🔔 zvono (nikad sažetak). ¦ Z datumom gre rok v zadevo in v 🔔 zvonček (nikoli povzetek).
+Échange corrigé (noté au 🕓 Journal) ¦ Kontakt ispravljen (upisan u 🕓 Dnevnik) ¦ Stik popravljen (vpisan v 🕓 Dnevnik)
+Échange noté ¦ Kontakt zabilježen ¦ Stik zapisan
+Trois fois « ne répond pas » de suite : noter 🔇 ne répond pas ? ¦ Tri puta zaredom „ne odgovara“: zabilježiti 🔇 ne odgovara? ¦ Trikrat zapored „ne odgovarja“: zapišem 🔇 ne odgovarja?
+Recommandé ¦ Preporučeno ¦ Priporočeno
+Envoyé en recommandé ¦ Poslano preporučeno ¦ Poslano priporočeno
+N° du recommandé ¦ Br. preporučene pošiljke ¦ Št. priporočene pošiljke
+Numéro inhabituel, gardé tel quel. ¦ Neuobičajen broj, zadržan kakav jest. ¦ Nenavadna številka, ohranjena, kot je.
+AR reçu le ¦ Povratnica stigla ¦ Povratnica prispela
+Relance si rien après (jours) ¦ Podsjetnik ako ništa nakon (dana) ¦ Opomnik, če nič po (dneh)
+Réponse reçue le ¦ Odgovor stigao ¦ Odgovor prispel
+Retour du courrier ¦ Pismo vraćeno ¦ Pismo vrnjeno
+pli non distribué ¦ primatelj nije podigao ¦ naslovnik ni prevzel
+destinataire inconnu ¦ primatelj nepoznat ¦ naslovnik neznan
+AR reçu aujourd’hui ¦ Povratnica danas ¦ Povratnica danes
+Suivre en ligne ¦ Prati na mreži ¦ Sledi na spletu
+Copier le numéro ¦ Kopiraj broj ¦ Kopiraj številko
+L’app ne fait aucune requête : le lien ouvre la page de suivi dans ton navigateur ; tu notes toi-même la date de l’AR. ¦ Aplikacija ne šalje nikakav zahtjev: poveznica otvara stranicu praćenja u tvom pregledniku; datum povratnice upisuješ sam. ¦ Aplikacija ne pošlje nobene zahteve: povezava odpre stran za sledenje v tvojem brskalniku; datum povratnice vpišeš sam.
+Tape d’abord le numéro. ¦ Najprije upiši broj. ¦ Najprej vpiši številko.
+Numéro copié ¦ Broj kopiran ¦ Številka kopirana
+Courrier revenu : noter 🔎 introuvable pour cet héritier ? ¦ Pismo se vratilo: zabilježiti 🔎 nije pronađen za ovog nasljednika? ¦ Pismo se je vrnilo: zapišem 🔎 ni najden za tega dediča?
+✓ AR {d} ¦ ✓ Povratnica {d} ¦ ✓ Povratnica {d}
+revenu ¦ vraćeno ¦ vrnjeno
+📮 sans AR · {n} j ¦ 📮 bez povratnice · {n} d ¦ 📮 brez povratnice · {n} d
+Recommandés ¦ Preporučene pošiljke ¦ Priporočene pošiljke
+Sans AR ¦ Bez povratnice ¦ Brez povratnice
+{n} recommandés, {m} sans accusé ¦ {n} preporučenih, {m} bez povratnice ¦ {n} priporočenih, {m} brez povratnice
+Importer des réponses… ¦ Uvezi odgovore… ¦ Uvozi odgovore…
+Saisir un questionnaire papier ¦ Unesi papirnati upitnik ¦ Vnesi papirni vprašalnik
+📮 Recommandé ¦ 📮 Preporučeno ¦ 📮 Priporočeno
+Questionnaires ¦ Upitnici ¦ Vprašalniki
+préparé le {d} ¦ pripremljeno {d} ¦ pripravljeno {d}
+réponses écrites le {d} ¦ odgovori uneseni {d} ¦ odgovori vneseni {d}
+Questionnaire ¦ Upitnik ¦ Vprašalnik
+au sujet d’une succession ¦ u vezi s ostavinom ¦ v zvezi z zapuščino
+Vous ¦ Vi ¦ Vi
+Nom de naissance ¦ Rođeno prezime ¦ Rojstni priimek
+Conjoint(s) ¦ Bračni drug(ovi) ¦ Zakonec / zakonca
+Date du mariage (ou PACS) ¦ Datum braka (ili partnerstva) ¦ Datum poroke (ali partnerstva)
+Adresse, téléphone, courriel ¦ Adresa, telefon, e-pošta ¦ Naslov, telefon, e-pošta
+Code postal ¦ Poštanski broj ¦ Poštna številka
+Autres membres de la famille connus ¦ Ostali poznati članovi obitelji ¦ Drugi znani družinski člani
+Frères, sœurs, cousins…, avec un moyen de les joindre ¦ Braća, sestre, rođaci…, s načinom kako ih dobiti ¦ Bratje, sestre, bratranci…, z načinom, kako jih doseči
+Documents que vous pouvez fournir ¦ Dokumenti koje možete dostaviti ¦ Dokumenti, ki jih lahko predložite
+livret de famille ¦ obiteljska knjižica ¦ družinska knjižica
+acte de naissance ¦ izvadak iz matice rođenih ¦ rojstni list
+acte de mariage ¦ izvadak iz matice vjenčanih ¦ poročni list
+jugement ¦ presuda ¦ sodba
+Vos réponses restent sur cet appareil tant que vous n’envoyez rien. ¦ Vaši odgovori ostaju na ovom uređaju dok ništa ne pošaljete. ¦ Vaši odgovori ostanejo na tej napravi, dokler ničesar ne pošljete.
+Enregistrer mes réponses ¦ Spremi moje odgovore ¦ Shrani moje odgovore
+Un questionnaire à envoyer ¦ Upitnik za slanje ¦ Vprašalnik za pošiljanje
+Fabriquer et ranger au Registre ¦ Izradi i spremi u upisnik ¦ Ustvari in vloži v evidenco
+Ce qu’on demande ¦ Što pitamo ¦ Kaj sprašujemo
+Ta question ¦ Tvoje pitanje ¦ Tvoje vprašanje
+Comment l’envoyer ¦ Kako ga poslati ¦ Kako ga poslati
+Ce qui est pré-rempli ¦ Što je unaprijed ispunjeno ¦ Kaj je vnaprej izpolnjeno
+Jamais le nom du défunt ni un montant : « au sujet d’une succession ». Le fichier s’ouvre d’un double-clic, sans internet ; l’héritier renvoie un petit fichier. ¦ Nikad ime ostavitelja ni iznos: „u vezi s ostavinom“. Datoteka se otvara dvoklikom, bez interneta; nasljednik vraća malu datoteku. ¦ Nikoli ime zapustnika ali znesek: „v zvezi z zapuščino“. Datoteka se odpre z dvoklikom, brez interneta; dedič vrne majhno datoteko.
+{n} prêts, rangés au Registre de courriers ¦ {n} pripremljeno, spremljeno u upisnik dopisa ¦ {n} pripravljenih, vloženih v evidenco dopisov
+Ce fichier ne vient pas d’un questionnaire de ce dossier. ¦ Ova datoteka ne potječe iz upitnika ovog predmeta. ¦ Ta datoteka ne izvira iz vprašalnika te zadeve.
+Revoir avant d’écrire ¦ Pregledaj prije unosa ¦ Preglej pred vnosom
+Enfants (un par ligne : prénom, année) ¦ Djeca (jedno po retku: ime, godina) ¦ Otroci (eden na vrstico: ime, leto)
+Documents promis ¦ Obećani dokumenti ¦ Obljubljeni dokumenti
+Réponses de {n} ¦ Odgovori od {n} ¦ Odgovori od {n}
+Écrire les changements cochés ¦ Unesi označene promjene ¦ Vnesi označene spremembe
+Une réponse a déjà été importée le {d} : compare avec celle-ci. ¦ Odgovor je već uvezen {d}: usporedi ga s ovim. ¦ Odgovor je bil že uvožen {d}: primerjaj ga s tem.
+fichier vérifié ✓ (bon questionnaire, pas modifié) ¦ datoteka provjerena ✓ (pravi upitnik, neizmijenjen) ¦ datoteka preverjena ✓ (pravi vprašalnik, nespremenjen)
+Coche ce qui doit aller dans le dossier. Rien n’est écrit sans ta revue ; « source : déclaration de l’héritier » accompagne tout ce qui est écrit. ¦ Označi što ide u predmet. Ništa se ne unosi bez tvoje provjere; sve uneseno nosi „izvor: izjava nasljednika“. ¦ Označi, kaj gre v zadevo. Nič se ne vnese brez tvojega pregleda; vse vneseno nosi „vir: izjava dediča“.
+Dans la base ¦ U bazi ¦ V bazi
+« Famille connue » va en note du dossier, jamais en fiches. Les enfants créent des fiches reliées à l’héritier. Les documents promis deviennent une échéance. ¦ „Poznata obitelj“ ide u bilješku predmeta, nikad u kartice. Djeca stvaraju kartice povezane s nasljednikom. Obećani dokumenti postaju rok. ¦ „Znana družina“ gre v opombo zadeve, nikoli v kartice. Otroci ustvarijo kartice, povezane z dedičem. Obljubljeni dokumenti postanejo rok.
+{n} écrits. Calcul refait. ¦ {n} uneseno. Izračun ponovljen. ¦ {n} vneseno. Izračun ponovljen.
+passée ¦ prošlo ¦ preteklo
+dans {n} j ¦ za {n} d ¦ čez {n} d
+était le {d} ¦ bilo {d} ¦ je bilo {d}
+Une date importante ¦ Važan datum ¦ Pomemben datum
+Mes dates importantes ¦ Moji važni datumi ¦ Moji pomembni datumi
+D’où vient cette date ¦ Odakle je ovaj datum ¦ Od kod je ta datum
+Les dates que le notaire t’a données, rappelées à temps. ¦ Datumi koje ti je dao javni bilježnik, na vrijeme podsjećeni. ¦ Datumi, ki ti jih je dal notar, pravočasno opomnjeni.
+L’app ne calcule aucun délai légal : elle ne connaît pas ta situation. ¦ Aplikacija ne računa nikakav zakonski rok: ne poznaje tvoju situaciju. ¦ Aplikacija ne računa nobenega zakonskega roka: ne pozna tvojega položaja.
+✎ Modifier la date ¦ ✎ Promijeni datum ¦ ✎ Spremeni datum
+＋ Une date importante ¦ ＋ Važan datum ¦ ＋ Pomemben datum
+D’où vient cette date (obligatoire) ¦ Odakle je ovaj datum (obavezno) ¦ Od kod je ta datum (obvezno)
+ex. : Me VIALLE, courriel du 4 nov. ¦ npr.: Me VIALLE, e-pošta od 4. 11. ¦ npr.: Me VIALLE, e-pošta z dne 4. 11.
+Date déplacée : l’ancienne reste en dessous et la modification est notée au 🕓 Journal. ¦ Datum pomaknut: stari ostaje ispod, a promjena se upisuje u 🕓 Dnevnik. ¦ Datum premaknjen: stari ostane spodaj, sprememba se vpiše v 🕓 Dnevnik.
+Date modifiée ¦ Datum promijenjen ¦ Datum spremenjen
+Date importante ajoutée ¦ Važan datum dodan ¦ Pomemben datum dodan
+🔗 {a} liens ne reposent que sur une pièce, {b} sur aucune. Ce n’est pas une erreur : c’est à vérifier avant la remise. ¦ 🔗 {a} veza počiva na jednom dokazu, {b} ni na jednom. To nije pogreška: provjeriti prije predaje. ¦ 🔗 {a} povezav sloni na enem samem dokazu, {b} na nobenem. To ni napaka: preveriti pred predajo.
+🔗 Chaque lien repose sur assez de pièces. ¦ 🔗 Svaka veza počiva na dovoljno dokaza. ¦ 🔗 Vsaka povezava sloni na dovolj dokazih.
+Voir les liens ¦ Prikaži veze ¦ Prikaži povezave
+Une lettre par service ({n}) ¦ Jedno pismo po uredu ({n}) ¦ Eno pismo na urad ({n})
+délivrée le {d} ¦ izdano {d} ¦ izdano {d}
+valable jusqu’au {d} ¦ vrijedi do {d} ¦ velja do {d}
+📅 Date de délivrance ¦ 📅 Datum izdavanja ¦ 📅 Datum izdaje
+Chaque maillon : combien de pièces le prouvent ¦ Svaka karika: koliko je dokaza potvrđuje ¦ Vsak člen: koliko dokazov ga dokazuje
+Héritier concerné ¦ Dotični nasljednik ¦ Zadevni dedič
+dossier de preuve « prouvé » ¦ dokazni spis „dokazano“ ¦ dokazni spis „dokazano“
+1 pièce, jugée suffisante le {d} ¦ 1 dokaz, smatran dovoljnim {d} ¦ 1 dokaz, ocenjen kot zadosten {d}
+Demander l’acte ¦ Zatraži ispravu ¦ Zahtevaj listino
+✓ Une pièce me suffit ici ¦ ✓ Ovdje mi je dovoljan jedan dokaz ¦ ✓ Tukaj mi zadostuje en dokaz
+Une « pièce » = une source citée sur l’acte (deux copies du même acte comptent pour une) ; un dossier de preuve « prouvé » compte pour une de plus. ¦ „Dokaz“ = izvor naveden uz događaj (dvije kopije iste isprave broje se kao jedna); dokazni spis „dokazano“ broji se kao još jedan. ¦ „Dokaz“ = vir, naveden pri dogodku (dve kopiji iste listine štejeta kot ena); dokazni spis „dokazano“ šteje kot še eden.
+Noté au 🕓 Journal ¦ Upisano u 🕓 Dnevnik ¦ Vpisano v 🕓 Dnevnik
+Remise bloquée (réglage) ¦ Predaja blokirana (postavka) ¦ Predaja blokirana (nastavitev)
+Des liens ont trop peu de pièces : la remise est bloquée tant qu’ils ne sont pas complétés (ou « Une pièce me suffit ici »). ¦ Neke veze imaju premalo dokaza: predaja je blokirana dok se ne dopune (ili „Ovdje mi je dovoljan jedan dokaz“). ¦ Nekatere povezave imajo premalo dokazov: predaja je blokirana, dokler jih ne dopolniš (ali „Tukaj mi zadostuje en dokaz“).
+Pour une recherche, je vous serais reconnaissant(e) de m’adresser une copie des actes suivants : ¦ Za potrebe istraživanja bio bih vam zahvalan da mi pošaljete presliku sljedećih isprava: ¦ Za potrebe poizvedbe bi vam bil hvaležen, če bi mi poslali kopijo naslednjih listin:
+Les actes manquants, regroupés ¦ Isprave koje nedostaju, grupirane ¦ Manjkajoče listine, združene
+Une seule lettre par service au lieu d’une par acte : moins de timbres, moins de relances. Relis et corrige chaque lettre. ¦ Jedno pismo po uredu umjesto jednog po ispravi: manje marki, manje podsjetnika. Pročitaj i ispravi svako pismo. ¦ Eno samo pismo na urad namesto enega na listino: manj znamk, manj opomnikov. Preberi in popravi vsako pismo.
+{n} rangées dans le Registre de courriers ¦ {n} spremljeno u upisnik dopisa ¦ {n} vloženih v evidenco dopisov
+Copie délivrée le ¦ Preslika izdana ¦ Kopija izdana
+Durée de validité demandée par ton notaire (mois) ¦ Rok valjanosti koji traži tvoj javni bilježnik (mjeseci) ¦ Rok veljavnosti, ki ga zahteva tvoj notar (meseci)
+Aucune durée par défaut : c’est toi qui la tapes. La 🔔 cloche prévient avant qu’elle ne soit trop ancienne. ¦ Nema zadanog roka: upisuješ ga ti. 🔔 Zvono upozorava prije nego što postane prestar. ¦ Ni privzetega roka: vpišeš ga ti. 🔔 Zvonček opozori, preden postane prestara.
+Date de délivrance notée ¦ Datum izdavanja zabilježen ¦ Datum izdaje zapisan
+recherches négatives : {n} ¦ {n} istraživanja bez rezultata ¦ {n} poizvedb brez rezultata
+« Rien trouvé » est un résultat utile : il montre la diligence au notaire. ¦ „Ništa pronađeno“ koristan je rezultat: javnom bilježniku pokazuje tvoju temeljitost. ¦ „Nič najdeno“ je koristen rezultat: notarju pokaže tvojo temeljitost.
+Aucune recherche notée pour cette personne. ¦ Za ovu osobu nije zabilježeno nijedno istraživanje. ¦ Za to osebo ni zapisana nobena poizvedba.
+Rien n’est recopié : les lignes viennent du 🗓 Journal des recherches, des ⚰️ vérifications INSEE et des 📞 échanges marqués « recherche ». ¦ Ništa se ne kopira: retci dolaze iz 🗓 Dnevnika istraživanja, ⚰️ provjera INSEE-a i 📞 kontakata označenih „istraživanje“. ¦ Nič se ne kopira: vrstice prihajajo iz 🗓 Dnevnika raziskav, ⚰️ preverjanj INSEE in 📞 stikov, označenih „poizvedba“.
+Noter une recherche ¦ Zabilježi istraživanje ¦ Zapiši poizvedbo
+Pour le notaire ¦ Za javnog bilježnika ¦ Za notarja
+Recherches faites — {n} ¦ Provedena istraživanja — {n} ¦ Opravljene poizvedbe — {n}
+＋ Noter une recherche ¦ ＋ Zabilježi istraživanje ¦ ＋ Zapiši poizvedbo
+Où (service, site, mairie…) ¦ Gdje (arhiv, web-mjesto, općina…) ¦ Kje (arhiv, spletišče, občina…)
+Ce qui a été trouvé ¦ Što je pronađeno ¦ Kaj je bilo najdeno
+Écrit un dépouillement dans le 🗓 Journal des recherches (comme « Où chercher »). ¦ Upisuje bilješku u 🗓 Dnevnik istraživanja (kao „Gdje tražiti“). ¦ Vpiše zapisek v 🗓 Dnevnik raziskav (kot „Kje iskati“).
+Recherche notée ¦ Istraživanje zabilježeno ¦ Poizvedba zapisana
+Carte des héritiers ¦ Karta nasljednika ¦ Zemljevid dedičev
+au numéro (BAN) ¦ do kućnog broja (BAN) ¦ do hišne številke (BAN)
+Hors carte ¦ Izvan karte ¦ Zunaj zemljevida
+à l’étranger ({c}) ¦ u inozemstvu ({c}) ¦ v tujini ({c})
+commune pas placée ({c}) ¦ općina nije smještena ({c}) ¦ občina ni umeščena ({c})
+adresse inconnue ¦ adresa nepoznata ¦ naslov neznan
+Où vivent les héritiers ¦ Gdje nasljednici žive ¦ Kje živijo dediči
+Tous les dossiers en cours ¦ Svi predmeti u tijeku ¦ Vse zadeve v teku
+Aucune adresse d’héritier placée sur la carte. ¦ Na karti nije smještena nijedna adresa nasljednika. ¦ Na zemljevidu ni umeščen noben naslov dediča.
+héritier (adresse connue, au niveau de la commune) ¦ nasljednik (adresa poznata, na razini općine) ¦ dedič (naslov znan, na ravni občine)
+notaire connu de l’app ¦ javni bilježnik poznat aplikaciji ¦ notar, ki ga aplikacija pozna
+Rien n’est envoyé en ligne. ¦ Ništa se ne šalje na mrežu. ¦ Nič se ne pošlje na splet.
+La BAN n’est pas encore téléchargée : position à la commune. ¦ BAN još nije preuzet: položaj na razini općine. ¦ BAN še ni prenesen: položaj na ravni občine.
+Image de la carte (sans noms) ¦ Slika karte (bez imena) ¦ Slika zemljevida (brez imen)
+Par organisme, d’après le Registre ¦ Po uredu, iz upisnika ¦ Po uradu, iz evidence
+Organisme ¦ Ured ¦ Urad
+pas assez de courriers ¦ malo pisama ¦ malo pisem
+De l’envoi à la réponse reçue (demandes d’actes des dossiers). Aide à prévoir la remise et à relancer au bon moment. ¦ Od slanja do primljenog odgovora (zahtjevi za isprave iz predmeta). Pomaže planirati predaju i podsjetiti na vrijeme. ¦ Od pošiljanja do prejetega odgovora (zahteve za listine iz zadev). Pomaga načrtovati predajo in pravočasno opomniti.
+Pas encore de réponse notée dans le Registre. ¦ U upisniku još nije zabilježen nijedan odgovor. ¦ V evidenci še ni zapisan noben odgovor.
+Sa part passe dans sa propre succession : ouvrir un dossier lié pour {n} ? ¦ Njegov dio prelazi u njegovu vlastitu ostavinu: otvoriti povezani predmet za {n}? ¦ Njegov delež preide v njegovo lastno zapuščino: odprem povezano zadevo za {n}?
+🔗 Dossier lié ¦ 🔗 Povezani predmet ¦ 🔗 Povezana zadeva
+Ouvrir le dossier lié ¦ Otvori povezani predmet ¦ Odpri povezano zadevo
+Dossier lié {n} ouvert ({what}) ¦ Povezani predmet {n} otvoren ({what}) ¦ Povezana zadeva {n} odprta ({what})
+Aucun autre dossier en cours dans cette généalogie (d’abord ⇄ Déplacer s’il est dans une autre). ¦ U ovom stablu nema drugog predmeta u tijeku (najprije ⇄ Premjesti ako je u drugom). ¦ V tem drevesu ni druge zadeve v teku (najprej ⇄ Premakni, če je v drugem).
+Fusionner avec un autre dossier ¦ Spoji s drugim predmetom ¦ Združi z drugo zadevo
+Le dossier à réunir dans {n} ¦ Predmet za spajanje s {n} ¦ Zadeva za združitev z {n}
+Le numéro du dossier réuni n’est pas réutilisé. ↶ Annuler sépare à nouveau, comme avant. ¦ Broj spojenog predmeta neće se ponovno koristiti. ↶ Poništi ih opet razdvaja kao prije. ¦ Številka združene zadeve ne bo ponovno uporabljena. ↶ Razveljavi ju spet loči kot prej.
+Ce qui ¦ Što ¦ Kaj
+Ce qui se passe ¦ Što se događa ¦ Kaj se zgodi
+{a} déjà communes, {b} ajoutées ¦ {a} zajedničkih, {b} dodano ¦ {a} skupnih, {b} dodanih
+{d} en double gardée(s) une fois ¦ duplikati zadržani jednom: {d} ¦ dvojniki ohranjeni enkrat: {d}
+rattachés, chacun garde son dossier d’origine en étiquette ¦ dodano, svaki zadržava svoj izvorni predmet kao oznaku ¦ dodano, vsak ohrani izvorno zadevo kot oznako
+rattachés ; les factures émises ne changent pas ¦ dodano; izdani računi se ne mijenjaju ¦ dodano; izdani računi se ne spremenijo
+mis bout à bout, chaque ligne marquée de son dossier ¦ jedno za drugim, svaki redak označen svojim predmetom ¦ eden za drugim, vsaka vrstica označena s svojo zadevo
+Deux notaires différents : lequel garder ? ¦ Dva različita javna bilježnika: kojeg zadržati? ¦ Dva različna notarja: katerega obdržim?
+Dossiers réunis ¦ Predmeti spojeni ¦ Zadevi združeni
+Copie à envoyer au notaire ¦ Preslika za javnog bilježnika ¦ Kopija za notarja
+Copie à envoyer au notaire… ¦ Preslika za javnog bilježnika… ¦ Kopija za notarja…
+Un fichier que le notaire ouvre d’un double-clic, sans rien pouvoir modifier, chiffré si tu le veux. ¦ Datoteka koju javni bilježnik otvara dvoklikom i u kojoj ne može ništa promijeniti, šifrirana ako želiš. ¦ Datoteka, ki jo notar odpre z dvoklikom in v njej ne more ničesar spremeniti, šifrirana, če želiš.
+Part aussi ¦ Ide i ¦ Gre tudi
+📞 échanges · 💶 fonds · ⚰️ vérifications INSEE · 🧾 copie des factures (le registre, lui, ne change pas) ¦ 📞 kontakti · 💶 sredstva · ⚰️ provjere INSEE-a · 🧾 preslika računa (sam upisnik se ne mijenja) ¦ 📞 stiki · 💶 sredstva · ⚰️ preverjanja INSEE · 🧾 kopija računov (sama evidenca se ne spremeni)
+Mot de passe (obligatoire) ¦ Lozinka (obavezno) ¦ Geslo (obvezno)
+🔐 Mot de passe ¦ 🔐 Lozinka ¦ 🔐 Geslo
+AES-256, comme les sauvegardes protégées. Oublié = archive perdue. Le réimport le demande. ¦ AES-256, kao zaštićene sigurnosne kopije. Zaboravljena = arhiva izgubljena. Ponovni uvoz će je tražiti. ¦ AES-256, kot zaščitene varnostne kopije. Pozabljeno = arhiv izgubljen. Ponovni uvoz ga bo zahteval.
+Mot de passe trop court (8 caractères au moins). ¦ Lozinka je prekratka (najmanje 8 znakova). ¦ Geslo je prekratko (vsaj 8 znakov).
+Les deux mots de passe ne sont pas les mêmes. ¦ Dvije lozinke nisu iste. ¦ Gesli se ne ujemata.
+Mot de passe de l’archive ¦ Lozinka arhive ¦ Geslo arhiva
+🙈 Écran partagé : noms, adresses et montants masqués ¦ 🙈 Dijeljeni zaslon: imena, adrese i iznosi skriveni ¦ 🙈 Deljeni zaslon: imena, naslovi in zneski skriti
+Échange mis à la corbeille ¦ Kontakt premješten u koš ¦ Stik premaknjen v koš
+Fusion annulée : les deux dossiers sont séparés comme avant ¦ Spajanje poništeno: dva su predmeta odvojena kao prije ¦ Združitev razveljavljena: zadevi sta ločeni kot prej
+Mon cabinet (factures) ¦ Moj ured (računi) ¦ Moja pisarna (računi)
+L’app ne connaît ni ton statut, ni ton régime de TVA, ni les mentions que ta facture doit porter : c’est toi qui les écris, avec ton comptable. L’app les recopie telles quelles. ¦ Aplikacija ne poznaje tvoj status, tvoj PDV režim ni podatke koje tvoj račun mora sadržavati: pišeš ih ti sa svojim knjigovođom. Aplikacija ih preuzima bez promjene. ¦ Aplikacija ne pozna tvojega statusa, tvojega režima DDV niti podatkov, ki jih mora imeti tvoj račun: napišeš jih ti s svojim računovodjo. Aplikacija jih prevzame brez sprememb.
+Mentions à imprimer sur chaque facture (ton texte) ¦ Podaci tiskani na svakom računu (tvoj tekst) ¦ Podatki, natisnjeni na vsakem računu (tvoje besedilo)
+vide : à écrire avec ton comptable ¦ prazno: napiši sa svojim knjigovođom ¦ prazno: napiši s svojim računovodjo
+Champs obligatoires pour émettre une facture ¦ Obavezna polja za izdavanje računa ¦ Obvezna polja za izdajo računa
+Un champ que tu as déclaré obligatoire et laissé vide : la facture n’est pas émise. ¦ Polje koje si označio kao obavezno i ostavio prazno: račun se ne izdaje. ¦ Polje, ki si ga označil kot obvezno in pustil prazno: račun se ne izda.
+🏢 Mon cabinet ¦ 🏢 Moj ured ¦ 🏢 Moja pisarna
+EXEMPLE NON JURIDIQUE — à faire écrire ou relire par ton conseil avant tout usage. ¦ NEPRAVNI PRIMJER — prije bilo kakve uporabe neka ga sastavi ili provjeri tvoj savjetnik. ¦ NEPRAVNI PRIMER — pred kakršno koli uporabo naj ga sestavi ali preveri tvoj svetovalec.
+ton titre ¦ tvoj naslov ¦ tvoj naslov
+ton texte : écrit ou relu par ton conseil ¦ tvoj tekst: sastavio ili provjerio tvoj savjetnik ¦ tvoje besedilo: sestavil ali preveril tvoj svetovalec
+Mes modèles de contrat ¦ Moji predlošci ugovora ¦ Moje predloge pogodb
+Ton contrat, avec des champs que l’app remplit ¦ Tvoj ugovor, s poljima koja aplikacija ispunjava ¦ Tvoja pogodba s polji, ki jih izpolni aplikacija
+Enregistrer la version ¦ Spremi verziju ¦ Shrani različico
+L’app ne fournit aucun texte de contrat : c’est un acte qui t’engage et qui engage l’héritier, à faire écrire ou relire par ton conseil. L’app remplit des champs et garde l’historique de tes versions. ¦ Aplikacija ne daje nikakav tekst ugovora: to je isprava koja obvezuje tebe i nasljednika; neka ga sastavi ili provjeri tvoj savjetnik. Aplikacija ispunjava polja i čuva povijest tvojih verzija. ¦ Aplikacija ne priskrbi nobenega besedila pogodbe: to je listina, ki zavezuje tebe in dediča; naj jo sestavi ali preveri tvoj svetovalec. Aplikacija izpolni polja in hrani zgodovino tvojih različic.
+＋ Nouveau modèle ¦ ＋ Novi predložak ¦ ＋ Nova predloga
+Mon contrat ¦ Moj ugovor ¦ Moja pogodba
+Versions ¦ Verzije ¦ Različice
+Écris ou importe ton contrat ¦ Napiši ili uvezi svoj ugovor ¦ Napiši ali uvozi svojo pogodbo
+Importer un .docx / .txt ¦ Uvezi .docx / .txt ¦ Uvozi .docx / .txt
+Aperçu pour un héritier ¦ Pregled za nasljednika ¦ Predogled za dediča
+{defunt} n’existe pas : le nom du défunt n’est jamais dans un courrier envoyé avant signature. {pourcentage} vient de 💶 « Honoraires d’un contrat ». ¦ {defunt} ne postoji: ime ostavitelja nikad nije u pismu poslanom prije potpisa. {pourcentage} dolazi iz 💶 „Naknada iz ugovora“. ¦ {defunt} ne obstaja: ime zapustnika nikoli ni v pismu, poslanem pred podpisom. {pourcentage} prihaja iz 💶 „Honorar iz pogodbe“.
+version {n} ¦ verzija {n} ¦ različica {n}
+Champ inconnu : {f} (ligne {l}). Corrige-le avant d’enregistrer. ¦ Nepoznato polje: {f} (redak {l}). Ispravi ga prije spremanja. ¦ Neznano polje: {f} (vrstica {l}). Popravi ga pred shranjevanjem.
+% à noter ¦ % za upisati ¦ % za vpis
+Champ vide : {f} ¦ Prazno polje: {f} ¦ Prazno polje: {f}
+Version {n} enregistrée (Mes modèles) ¦ Verzija {n} spremljena (Moji predlošci) ¦ Različica {n} shranjena (Moje predloge)
+Fonds par héritier ¦ Sredstva po nasljedniku ¦ Sredstva po dediču
+Aucun montant de succession : l’app ne connaît ni l’actif, ni le passif. On note seulement des mouvements réels que tu as vus passer. ¦ Nema iznosa ostavine: aplikacija ne poznaje ni aktivu ni pasivu. Bilježiš samo stvarna kretanja koja si vidio. ¦ Brez zneska zapuščine: aplikacija ne pozna ne aktive ne pasive. Zapisuješ le dejanske premike, ki si jih videl.
+Reçu du notaire ¦ Primljeno od javnog bilježnika ¦ Prejeto od notarja
+Frais refacturés ¦ Prefakturirani troškovi ¦ Prefakturirani stroški
+Reversé ¦ Isplaćeno ¦ Izplačano
+Reste dû ¦ Preostaje za platiti ¦ Ostane za plačilo
+pas de contrat ¦ bez ugovora ¦ brez pogodbe
+reversé de trop : {s} ¦ preplaćeno: {s} ¦ preveč izplačano: {s}
+✓ soldé ¦ ✓ podmireno ¦ ✓ poravnano
+à reverser ¦ za isplatu ¦ za izplačilo
+Mouvements ¦ Kretanja ¦ Premiki
+＋ Noter un mouvement ¦ ＋ Zabilježi kretanje ¦ ＋ Zapiši premik
+Commission = % du contrat × montant reçu. Reste dû = reçu − commission − frais − reversé. ¦ Provizija = % iz ugovora × primljeni iznos. Preostaje = primljeno − provizija − troškovi − isplaćeno. ¦ Provizija = % iz pogodbe × prejeti znesek. Ostane = prejeto − provizija − stroški − izplačano.
+✎ Corriger un mouvement ¦ ✎ Ispravi kretanje ¦ ✎ Popravi premik
+Commission proposée : {p} % de {r} = {c} (modifiable) ¦ Predložena provizija: {p} % od {r} = {c} (može se mijenjati) ¦ Predlagana provizija: {p} % od {r} = {c} (spremenljivo)
+virement, chèque… ¦ prijenos, ček… ¦ nakazilo, ček…
+Versé à (représentant, si mineur ou sous tutelle) ¦ Isplaćeno (zastupniku ako je maloljetan ili pod skrbništvom) ¦ Izplačano (zastopniku, če je mladoleten ali pod skrbništvom)
+Montant incorrect. ¦ Neispravan iznos. ¦ Neveljaven znesek.
+Mouvement corrigé ¦ Kretanje ispravljeno ¦ Premik popravljen
+Mouvement noté ¦ Kretanje zabilježeno ¦ Premik zapisan
+versé à {n} ¦ {n} isplaćeno ¦ {n} izplačano
+Décompte — {n} ¦ Obračun — {n} ¦ Obračun — {n}
+Aucun mouvement noté. ¦ Nijedno kretanje nije zabilježeno. ¦ Noben premik ni zapisan.
+Reste à reverser ¦ Preostaje za isplatiti ¦ Ostane za izplačilo
+Noter un mouvement ¦ Zabilježi kretanje ¦ Zapiši premik
+Décompte pour l’héritier ¦ Obračun za nasljednika ¦ Obračun za dediča
+Facturer la commission ¦ Fakturiraj proviziju ¦ Zaračunaj provizijo
+Facture ¦ Račun ¦ Račun
+Avoir ¦ Odobrenje ¦ Dobropis
+Devis ¦ Ponuda ¦ Ponudba
+N° de TVA ¦ PDV ID broj ¦ ID za DDV
+BROUILLON ¦ NACRT ¦ OSNUTEK
+ÉMIS ¦ IZDANO ¦ IZDANO
+ÉMISE ¦ IZDAN ¦ IZDAN
+Client ¦ Klijent ¦ Stranka
+Total HT ¦ Ukupno bez PDV-a ¦ Skupaj brez DDV
+TVA {r} % ¦ PDV {r} % ¦ DDV {r} %
+Total TTC ¦ Ukupno s PDV-om ¦ Skupaj z DDV
+Commission du contrat de révélation ({p} % de la part reçue : {r}) ¦ Provizija prema ugovoru o otkrivanju ({p} % od primljenog dijela: {r}) ¦ Provizija po pogodbi o razkritju ({p} % prejetega deleža: {r})
+Commission du contrat de révélation ({p} %) ¦ Provizija prema ugovoru o otkrivanju ({p} %) ¦ Provizija po pogodbi o razkritju ({p} %)
+Temps passé ({h} h {m}) ¦ Utrošeno vrijeme ({h} h {m}) ¦ Porabljen čas ({h} h {m})
+Frais ¦ Troškovi ¦ Stroški
+🧾 DEVIS ¦ 🧾 PONUDA ¦ 🧾 PONUDBA
+🧾 FACTURE ¦ 🧾 RAČUN ¦ 🧾 RAČUN
+{k} {n} ¦ {k} {n} ¦ {k} {n}
+Brouillon, pas encore numéroté ¦ Nacrt, još bez broja ¦ Osnutek, še brez številke
+Garder en brouillon ¦ Zadrži kao nacrt ¦ Obdrži kot osnutek
+Ce que l’app ne fait pas : elle ne connaît ni ton statut, ni ton régime de TVA, ni les mentions que ta facture doit porter. C’est toi qui choisis le taux et qui écris les mentions (avec ton comptable). L’app numérote sans trou, interdit de modifier une facture émise, fait les additions et garde tout. ¦ Što aplikacija ne radi: ne poznaje tvoj status, PDV režim ni obavezne podatke. Stopu biraš ti, podatke pišeš ti (sa svojim knjigovođom). Aplikacija numerira bez praznina, zabranjuje mijenjanje izdanog računa, zbraja i sve čuva. ¦ Česa aplikacija ne počne: ne pozna tvojega statusa, režima DDV niti obveznih podatkov. Stopnjo izbereš ti, podatke napišeš ti (s svojim računovodjo). Aplikacija oštevilči brez vrzeli, prepove spreminjanje izdanega računa, sešteje in vse ohrani.
+🏢 Mon cabinet : des champs obligatoires sont vides ({f}) : la facture ne pourra pas être émise. ¦ 🏢 Moj ured: obavezna polja su prazna ({f}): račun neće moći biti izdan. ¦ 🏢 Moja pisarna: obvezna polja so prazna ({f}): računa ne bo mogoče izdati.
+Adresse du client ¦ Adresa klijenta ¦ Naslov stranke
+Prix HT ¦ Cijena bez PDV-a ¦ Cena brez DDV
+Taux de TVA (%) — choisi par toi ¦ Stopa PDV-a (%) — koju biraš ti ¦ Stopnja DDV (%) — izbereš jo ti
+ton taux ¦ tvoja stopa ¦ tvoja stopnja
+Repris de ta dernière facture ; jamais deviné. ¦ Preuzeto s tvog posljednjeg računa; nikad pogođeno. ¦ Prevzeto z zadnjega računa; nikoli uganjeno.
+Aucun taux proposé : tape celui que t’a indiqué ton comptable. ¦ Nijedna stopa nije predložena: upiši onu koju ti je dao knjigovođa. ¦ Nobena stopnja ni predlagana: vpiši tisto, ki ti jo je dal računovodja.
+Émettre le devis n° {n} ¦ Izdaj ponudu br. {n} ¦ Izdaj ponudbo št. {n}
+Émettre la facture n° {n} ¦ Izdaj račun br. {n} ¦ Izdaj račun št. {n}
+Sur la facture ¦ Na računu ¦ Na računu
+à remplir ¦ za ispuniti ¦ za izpolniti
+⏱ Temps passé : non coché, compris dans la commission ¦ ⏱ Utrošeno vrijeme: nije označeno, uključeno u proviziju ¦ ⏱ Porabljen čas: ni označen, vključen v provizijo
+taux à choisir ¦ stopu treba odabrati ¦ stopnjo izberi
+Émettre le devis {n} ? Il reste modifiable tant qu’il n’est pas accepté. ¦ Izdati ponudu {n}? Može se mijenjati dok nije prihvaćena. ¦ Izdam ponudbo {n}? Dokler ni sprejeta, jo je mogoče spreminjati.
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. Émettre {n} ? ¦ Izdani račun više se ne može mijenjati ni brisati. Ispravlja ga odobrenje. Izdati {n}? ¦ Izdanega računa ni več mogoče spremeniti ali izbrisati. Popravi ga dobropis. Izdam {n}?
+Émettre ¦ Izdaj ¦ Izdaj
+{n} émise ¦ {n} izdan ¦ {n} izdan
+Brouillon gardé ¦ Nacrt zadržan ¦ Osnutek ohranjen
+brouillon ¦ nacrt ¦ osnutek
+émis ¦ izdan ¦ izdan
+avoir ¦ odobrenje ¦ dobropis
+✓ payée le {d} ¦ ✓ plaćeno {d} ¦ ✓ plačano {d}
+attendue ¦ očekivano ¦ pričakovano
+Tout le cabinet ¦ Cijeli ured ¦ Vsa pisarna
+avec les mouvements de fonds ¦ s kretanjima sredstava ¦ s premiki sredstev
+CSV pour le comptable ¦ CSV za knjigovođu ¦ CSV za računovodjo
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. ¦ Izdani račun više se ne može mijenjati ni brisati. Ispravlja ga odobrenje. ¦ Izdanega računa ni več mogoče spremeniti ali izbrisati. Popravi ga dobropis.
+Chercher… (n°, client, dossier) ¦ Traži… (br., klijent, predmet) ¦ Išči… (št., stranka, zadeva)
+TTC ¦ s PDV-om ¦ z DDV
+🧾 Faire un avoir ¦ 🧾 Izdaj odobrenje ¦ 🧾 Izdaj dobropis
+Payée… ¦ Plaćeno… ¦ Plačano…
+Accepté ¦ Prihvaćeno ¦ Sprejeto
+Transformer en facture ¦ Pretvori u račun ¦ Pretvori v račun
+Pas encore de facture. ¦ Još nema računa. ¦ Še ni računa.
+Brouillon supprimé (aucun numéro consommé) ¦ Nacrt izbrisan (nijedan broj nije potrošen) ¦ Osnutek izbrisan (nobena številka ni porabljena)
+L’avoir reprend les lignes de la facture en négatif, avec son propre numéro. Il ne peut plus être modifié. ¦ Odobrenje preuzima retke računa s negativnim predznakom, s vlastitim brojem. Više se ne može mijenjati. ¦ Dobropis prevzame vrstice računa z negativnim predznakom, z lastno številko. Ni ga več mogoče spremeniti.
+Payée ¦ Plaćeno ¦ Plačano
+Date (AAAA-MM-JJ) et moyen, ex. : 2026-11-20 virement ¦ Datum (GGGG-MM-DD) i način, npr.: 2026-11-20 prijenos ¦ Datum (LLLL-MM-DD) in način, npr.: 2026-11-20 nakazilo
+Paiement noté ¦ Plaćanje zabilježeno ¦ Plačilo zapisano
+Devis accepté ¦ Ponuda prihvaćena ¦ Ponudba sprejeta
+Brouillon de facture prêt ¦ Nacrt računa spreman ¦ Osnutek računa pripravljen
+Registre des factures ¦ Upisnik računa ¦ Evidenca računov
+Factures du dossier ¦ Računi predmeta ¦ Računi zadeve
+Devis et factures ¦ Ponude i računi ¦ Ponudbe in računi
+Faire un devis ¦ Izradi ponudu ¦ Ustvari ponudbo
+Faire une facture ¦ Izradi račun ¦ Ustvari račun
+Pas encore de facture pour ce dossier. ¦ Za ovaj predmet još nema računa. ¦ Za to zadevo še ni računa.
+HT ¦ bez PDV-a ¦ brez DDV
+{n} base(s) verrouillée(s) non lue(s) ¦ {n} zaključanih baza nepročitano ¦ {n} zaklenjenih baz neprebranih
+Dossiers ouverts ¦ Otvoreni predmeti ¦ Odprte zadeve
+dont {n} clos ¦ od toga {n} zatvoreno ¦ od tega {n} zaprtih
+Délai moyen (ouvert → remis) ¦ Prosječno trajanje (otvoreno → predano) ¦ Povprečno trajanje (odprto → predano)
+sur {n} dossiers remis ¦ na {n} predanih predmeta ¦ na {n} predanih zadevah
+pas assez de dossiers pour une moyenne ¦ premalo predmeta za prosjek ¦ premalo zadev za povprečje
+Contrats signés / refusés ¦ Ugovori potpisani / odbijeni ¦ Pogodbe podpisane / zavrnjene
+{p} % signés · {n} sans réponse ¦ {p} % potpisano · {n} bez odgovora ¦ {p} % podpisanih · {n} brez odgovora
+Facturé / encaissé ({k}) ¦ Fakturirano / naplaćeno ({k}) ¦ Zaračunano / izterjano ({k})
+encaissé {a} · reste {b} ¦ {a} naplaćeno · {b} preostaje ¦ {a} izterjano · {b} ostane
+Pas encore de facture : seuls le temps et les contrats sont comptés ¦ Još nema računa: broje se samo vrijeme i ugovori ¦ Še ni računa: štejeta se le čas in pogodbe
+{n} en cours depuis {m} mois en moyenne ¦ {n} u tijeku, prosječno {m} mjeseci ¦ {n} v teku, povprečno {m} mesecev
+Temps passé par dossier (heures) ¦ Utrošeno vrijeme po predmetu (sati) ¦ Porabljen čas po zadevi (ure)
+Aucun temps noté. ¦ Nema zabilježenog vremena. ¦ Ni zapisanega časa.
+Voir en tableau ¦ Prikaži kao tablicu ¦ Prikaži kot tabelo
+Facturé et encaissé par trimestre ({k}) ¦ Fakturirano i naplaćeno po tromjesečju ({k}) ¦ Zaračunano in izterjano po četrtletjih ({k})
+Facturé ¦ Fakturirano ¦ Zaračunano
+Encaissé ¦ Naplaćeno ¦ Izterjano
+Aucun nom d’héritier dans cette vue : des numéros de dossier et des totaux. Rien n’est écrit. ¦ U ovom prikazu nema imena nasljednika: brojevi predmeta i zbrojevi. Ništa se ne zapisuje. ¦ V tem pogledu ni imen dedičev: številke zadev in vsote. Nič se ne zapiše.
+Pour {n} ¦ Za {n} ¦ Za {n}
+le notaire ¦ javni bilježnik ¦ notar
+⤓ Fabriquer la copie ¦ ⤓ Izradi presliku ¦ ⤓ Ustvari kopijo
+Ce qui part ¦ Što ide ¦ Kaj gre
+Tableau des héritiers et parts, arbre, chaîne de filiation (comme le PDF) ¦ Tablica nasljednika i udjela, stablo, lanac srodstva (kao PDF) ¦ Tabela dedičev in deležev, drevo, veriga sorodstva (kot PDF)
+📑 Pièces (images des actes) ¦ 📑 Dokazi (slike isprava) ¦ 📑 Dokazi (slike listin)
+Adresses des héritiers ¦ Adrese nasljednika ¦ Naslovi dedičev
+🕵️ Joindre les recherches faites ¦ 🕵️ Priloži provedena istraživanja ¦ 🕵️ Priloži opravljene poizvedbe
+Journal, échanges, temps, factures ne partent jamais. ¦ Dnevnik, kontakti, vrijeme i računi nikad ne idu. ¦ Dnevnik, stiki, čas in računi nikoli ne gredo.
+Protection ¦ Zaštita ¦ Zaščita
+Le fichier est chiffré (AES-256) ; la page demande le mot de passe à l’ouverture. Donne-le au notaire par un autre moyen (téléphone, SMS). Oublié = fichier illisible, même pour toi (refais-en un). ¦ Datoteka je šifrirana (AES-256); stranica pri otvaranju traži lozinku. Daj je javnom bilježniku drugim putem (telefon, SMS). Zaboravljena = nečitljiva datoteka, i za tebe (izradi novu). ¦ Datoteka je šifrirana (AES-256); stran ob odpiranju zahteva geslo. Daj ga notarju po drugi poti (telefon, SMS). Pozabljeno = neberljiva datoteka, tudi zate (ustvari novo).
+Copie v{n} ; l’app garde la liste des copies faites, pas les fichiers. ¦ Preslika v{n}; aplikacija čuva popis izrađenih preslika, ne datoteke. ¦ Kopija v{n}; aplikacija hrani seznam ustvarjenih kopij, ne datotek.
+Voilà ce qui part : {h} héritiers, {p} pièces, {a} adresse(s). ¦ Ide: {h} nasljednika, {p} dokaza, {a} adresa. ¦ Gre: {h} dedičev, {p} dokazov, {a} naslovov.
+Fiche confidentielle : {n} retirée (calcul inchangé). ¦ Povjerljiva kartica: {n} izostavljen(a) (izračun nepromijenjen). ¦ Zaupna kartica: {n} izpuščen(a) (izračun nespremenjen).
+une branche n’est pas tranchée ¦ jedna grana nije odlučena ¦ ena veja ni odločena
+Fichier trop lourd pour un courriel (plus de 20 Mo). Continuer quand même ? ¦ Datoteka je prevelika za e-poštu (više od 20 MB). Ipak nastaviti? ¦ Datoteka je prevelika za e-pošto (nad 20 MB). Vseeno nadaljujem?
+🤝 Copie pour le notaire ¦ 🤝 Preslika za javnog bilježnika ¦ 🤝 Kopija za notarja
+Copie v{v} du {d}, calcul indicatif : à vérifier par l’étude. ¦ Preslika v{v} od {d}, okvirni izračun: provjerava javnobilježnički ured. ¦ Kopija v{v} z dne {d}, okvirni izračun: preveri notarska pisarna.
+{n} · {t} ¦ {n} · {t} ¦ {n} · {t}
+Copie protégée par un mot de passe. ¦ Preslika zaštićena lozinkom. ¦ Kopija, zaščitena z geslom.
+Copie v{n} fabriquée ¦ Preslika v{n} izrađena ¦ Kopija v{n} ustvarjena
+Mouvement supprimé ¦ Kretanje izbrisano ¦ Premik izbrisan
+⚰️ Décès d’un héritier ¦ ⚰️ Smrt nasljednika ¦ ⚰️ Smrt dediča
+Ce que « ✓ C’est lui » écrit : la fiche sert aussi aux autres dossiers. ¦ Što upisuje „✓ To je ta osoba“: kartica služi i drugim predmetima. ¦ Kaj vpiše „✓ To je ta oseba“: kartica služi tudi drugim zadevam.
+Le décès sur la fiche et le statut du dossier ¦ Smrt na kartici i status u predmetu ¦ Smrt na kartici in status v zadevi
+Seulement le statut du dossier ¦ Samo status u predmetu ¦ Samo status v zadevi
+Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de bruit, risque d’en rater. ¦ Tragovi se prikazuju od ovog rezultata (od 100). Više: manje šuma, rizik da se neki propusti. ¦ Sledi se prikažejo od tega rezultata (od 100). Višje: manj šuma, tveganje, da kakšno zgrešiš.
+Après chaque nouvel import du fichier INSEE : vérifier les dossiers en cours tout seul (jamais de changement sans ton clic). ¦ Nakon svakog novog uvoza INSEE datoteke: sam provjeri predmete u tijeku (nikad promjena bez tvog klika). ¦ Po vsakem novem uvozu datoteke INSEE: sam preveri zadeve v teku (nikoli sprememba brez tvojega klika).
+Automatique, dans la cloche ¦ Automatski, u zvonu ¦ Samodejno, v zvončku
+Seulement à la main ¦ Samo ručno ¦ Samo ročno
+📋 Questionnaire ¦ 📋 Upitnik ¦ 📋 Vprašalnik
+Ce que l’héritier te renvoie après avoir rempli le questionnaire. ¦ Što ti nasljednik vraća nakon ispunjavanja. ¦ Kaj ti dedič vrne po izpolnitvi.
+Un petit fichier .json ¦ Mala .json datoteka ¦ Majhna datoteka .json
+La page .html remplie ¦ Ispunjena .html stranica ¦ Izpolnjena stran .html
+Pré-rempli : son nom et sa naissance seulement, jamais le défunt ni un montant. ¦ Unaprijed ispunjeno: samo njegovo ime i rođenje, nikad ostavitelj ni iznos. ¦ Vnaprej izpolnjeno: samo njegovo ime in rojstvo, nikoli zapustnik ali znesek.
+Pré-rempli (ce qui le concerne) ¦ Unaprijed ispunjeno (što se njega tiče) ¦ Vnaprej izpolnjeno (kar zadeva njega)
+Tout vide ¦ Sve prazno ¦ Vse prazno
+📞 Échanges ¦ 📞 Kontakti ¦ 📞 Stiki
+Où noter et relire les appels, courriels et visites. ¦ Gdje se bilježe i čitaju pozivi, e-pošta i posjeti. ¦ Kje se zapisujejo in berejo klici, e-pošta in obiski.
+Un onglet du dossier et un raccourci dans 👥 Héritiers ¦ Kartica predmeta i prečac u 👥 Nasljednicima ¦ Zavihek zadeve in bližnjica v 👥 Dedičih
+Seulement dans 👥 Héritiers ¦ Samo u 👥 Nasljednicima ¦ Samo v 👥 Dedičih
+Les courriers du Registre dans la liste des échanges. ¦ Pisma iz upisnika na popisu kontakata. ¦ Pisma iz evidence na seznamu stikov.
+Montrés en gris, en lecture ¦ Prikazano sivo, samo za čitanje ¦ Prikazana sivo, samo za branje
+Pas montrés ¦ Nije prikazano ¦ Niso prikazana
+📮 Recommandés ¦ 📮 Preporučene pošiljke ¦ 📮 Priporočene pošiljke
+Relance quand l’accusé de réception n’est pas revenu (réglable aussi pour chaque courrier). ¦ Podsjetnik kad se povratnica nije vratila (može se podesiti i po pismu). ¦ Opomnik, ko se povratnica ni vrnila (nastavljivo tudi po pismu).
+15 jours ¦ 15 dana ¦ 15 dni
+8 jours ¦ 8 dana ¦ 8 dni
+21 jours ¦ 21 dan ¦ 21 dni
+L’app n’interroge jamais La Poste : le lien ouvre la page dans ton navigateur, tu notes toi-même l’AR. ¦ Aplikacija nikad ne upituje La Poste: poveznica otvara stranicu u tvom pregledniku, povratnicu upisuješ sam. ¦ Aplikacija nikoli ne povprašuje La Poste: povezava odpre stran v tvojem brskalniku, povratnico vpišeš sam.
+Lien vers la page de suivi ¦ Poveznica na stranicu praćenja ¦ Povezava na stran za sledenje
+Pas de lien (on copie le numéro) ¦ Bez poveznice (broj se kopira) ¦ Brez povezave (številka se kopira)
+Adresse de la page de suivi, avec {numero} (https:// seulement). ¦ Adresa stranice praćenja, s {numero} (samo https://). ¦ Naslov strani za sledenje, z {numero} (samo https://).
+🧾 Devis et factures ¦ 🧾 Ponude i računi ¦ 🧾 Ponudbe in računi
+Un seul registre : numérotation continue même si les dossiers sont dans plusieurs généalogies. ¦ Jedan upisnik: neprekinuto numeriranje, čak i ako su predmeti u više stabala. ¦ Ena sama evidenca: zvezno številčenje, tudi če so zadeve v več drevesih.
+Un seul registre pour le cabinet ¦ Jedan upisnik za ured ¦ Ena evidenca za pisarno
+Dans la généalogie des dossiers ¦ U stablu predmeta ¦ V drevesu zadev
+Le compteur ne recule jamais ; un brouillon effacé ne consomme pas de numéro. ¦ Brojač nikad ne ide unatrag; izbrisani nacrt ne troši broj. ¦ Števec nikoli ne gre nazaj; izbrisan osnutek ne porabi številke.
+F-2026-0042 (remis à 1 chaque année) ¦ F-2026-0042 (od 1 svake godine) ¦ F-2026-0042 (vsako leto od 1)
+Compteur unique (F-0042) ¦ Jedinstveni brojač (F-0042) ¦ En sam števec (F-0042)
+La ligne « temps passé » proposée sur la facture. ¦ Redak „utrošeno vrijeme“ predložen na računu. ¦ Vrstica „porabljen čas“, predlagana na računu.
+Temps décoché quand il y a une commission ¦ Vrijeme nije označeno ako postoji provizija ¦ Čas ni označen, če je provizija
+Temps toujours coché ¦ Vrijeme uvijek označeno ¦ Čas vedno označen
+Préfixe des factures. ¦ Prefiks računa. ¦ Predpona računov.
+Préfixe des avoirs. ¦ Prefiks odobrenja. ¦ Predpona dobropisov.
+Préfixe des devis. ¦ Prefiks ponuda. ¦ Predpona ponudb.
+📈 Activité ¦ 📈 Aktivnost ¦ 📈 Dejavnost
+La période montrée en ouvrant le tableau de bord. ¦ Razdoblje prikazano pri otvaranju nadzorne ploče. ¦ Obdobje, prikazano ob odprtju nadzorne plošče.
+L’année en cours ¦ Ova godina ¦ Letos
+Les 12 derniers mois ¦ Zadnjih 12 mjeseci ¦ Zadnjih 12 mesecev
+Les montants facturés et encaissés. ¦ Fakturirani i naplaćeni iznosi. ¦ Zaračunani in izterjani zneski.
+Au choix (bouton) ¦ Po želji (prekidač) ¦ Po želji (stikalo)
+La copie contient des actes et des noms de vivants. ¦ Preslika sadrži isprave i imena živih osoba. ¦ Kopija vsebuje listine in imena živih oseb.
+Mot de passe coché au départ ¦ Lozinka označena na početku ¦ Geslo označeno na začetku
+Décoché au départ ¦ Nije označeno na početku ¦ Ni označeno na začetku
+Le notaire reçoit souvent les adresses à part. ¦ Javni bilježnik često dobiva adrese odvojeno. ¦ Notar pogosto prejme naslove ločeno.
+Adresses décochées au départ ¦ Adrese nisu označene na početku ¦ Naslovi niso označeni na začetku
+Cochées au départ ¦ Označeno na početku ¦ Označeno na začetku
+🗺 Carte des héritiers ¦ 🗺 Karta nasljednika ¦ 🗺 Zemljevid dedičev
+Rien n’est envoyé en ligne : la commune vient de la base ; le numéro, seulement si la BAN du département est déjà dans l’app (🗺️ Plan des adresses). ¦ Ništa se ne šalje na mrežu: općina dolazi iz baze; kućni broj samo ako je BAN departmana već u aplikaciji (🗺️ Plan adresa). ¦ Nič se ne pošlje na splet: občina prihaja iz baze; hišna številka samo, če je BAN departmaja že v aplikaciji (🗺️ Načrt naslovov).
+Le numéro de rue (BAN déjà téléchargée) ¦ Kućni broj (BAN već preuzet) ¦ Hišna številka (BAN že prenesen)
+L’app n’a pas d’annuaire des notaires et n’en invente pas. ¦ Aplikacija nema popis javnih bilježnika i ne izmišlja nijednog. ¦ Aplikacija nima seznama notarjev in si nobenega ne izmisli.
+Les notaires de tes dossiers et contacts ¦ Javni bilježnici tvojih predmeta i kontakata ¦ Notarji tvojih zadev in stikov
+Pas de notaires ¦ Bez javnih bilježnika ¦ Brez notarjev
+Le brouillon de contrat écrit par l’app. Un contrat t’engage : fais-le écrire ou relire par ton conseil. ¦ Nacrt ugovora koji je sastavila aplikacija. Ugovor te obvezuje: neka ga sastavi ili provjeri tvoj savjetnik. ¦ Osnutek pogodbe, ki ga je sestavila aplikacija. Pogodba te zavezuje: naj jo sestavi ali preveri tvoj svetovalec.
+Retiré : page vide avec les champs ¦ Uklonjen: prazna stranica s poljima ¦ Odstranjen: prazna stran s polji
+Gardé, marqué « exemple non juridique » ¦ Zadržan, označen „nepravni primjer“ ¦ Ohranjen, označen „nepravni primer“
+Chaque contrat rangé retient la version utilisée. ¦ Svaki spremljeni ugovor pamti korištenu verziju. ¦ Vsaka vložena pogodba si zapomni uporabljeno različico.
+Toutes les versions gardées ¦ Sve verzije zadržane ¦ Vse različice ohranjene
+Seulement la dernière ¦ Samo posljednja ¦ Samo zadnja
+💶 Fonds ¦ 💶 Sredstva ¦ 💶 Sredstva
+Commission = % du contrat × montant reçu. ¦ Provizija = % iz ugovora × primljeni iznos. ¦ Provizija = % iz pogodbe × prejeti znesek.
+Calculée puis modifiable ¦ Izračunato, zatim promjenjivo ¦ Izračunano, nato spremenljivo
+Toujours tapée à la main ¦ Uvijek upisano ručno ¦ Vedno napisano ročno
+Le décompte à l’héritier. ¦ Obračun za nasljednika. ¦ Obračun za dediča.
+Décompte imprimable ¦ Obračun za ispis ¦ Obračun za tisk
+Écran seulement ¦ Samo zaslon ¦ Samo zaslon
+🔗 Double preuve ¦ 🔗 Dvostruki dokaz ¦ 🔗 Dvojni dokaz
+Le seuil d’un lien solide. ¦ Prag čvrste veze. ¦ Prag trdne povezave.
+Deux pièces par lien ¦ Dva dokaza po vezi ¦ Dva dokaza na povezavo
+Une seule (signaler seulement « aucune ») ¦ Samo jedan (signaliziraj samo „nijedan“) ¦ Samo eden (opozori samo na „nobenega“)
+Dans la liste « avant de remettre ». ¦ Na popisu „prije predaje“. ¦ Na seznamu „pred predajo“.
+« À revoir » (n’empêche rien) ¦ „Za pregled“ (ništa ne blokira) ¦ „Za pregled“ (nič ne blokira)
+Bloquant ¦ Blokirajuće ¦ Blokirajoče
+🗓 Dates importantes ¦ 🗓 Važni datumi ¦ 🗓 Pomembni datumi
+Les rappels proposés pour une nouvelle date (réglables pour chaque date). L’app ne calcule aucun délai légal. ¦ Podsjetnici predloženi za novi datum (podesivi po datumu). Aplikacija ne računa nikakav zakonski rok. ¦ Opomniki, predlagani za nov datum (nastavljivi po datumu). Aplikacija ne računa nobenega zakonskega roka.
+J−30, J−7, J−1 ¦ D−30, D−7, D−1 ¦ D−30, D−7, D−1
+J−7 seulement ¦ Samo D−7 ¦ Samo D−7
+Où les voir dans 📁 Dossier. ¦ Gdje ih vidiš u 📁 Predmetu. ¦ Kje jih vidiš v 📁 Zadevi.
+Dans les échéances, avec un drapeau 🗓 ¦ U rokovima, s oznakom 🗓 ¦ V rokih, z oznako 🗓
+Un bloc à part ¦ Zaseban blok ¦ Ločen blok
+👥 Fusion de dossiers ¦ 👥 Spajanje predmeta ¦ 👥 Združevanje zadev
+Les successions restent distinctes : le calcul n’est jamais mélangé. ¦ Ostavine ostaju odvojene: izračun se nikad ne miješa. ¦ Zapuščine ostanejo ločene: izračun se nikoli ne meša.
+Deux défunts, deux calculs côte à côte ¦ Dva pokojnika, dva izračuna jedan uz drugi ¦ Dva pokojnika, dva izračuna drug ob drugem
+Dossiers liés (recherches en commun) ¦ Povezani predmeti (zajednička istraživanja) ¦ Povezane zadeve (skupne poizvedbe)
+Combien de temps la fusion peut être annulée. ¦ Koliko se dugo spajanje može poništiti. ¦ Kako dolgo je mogoče združitev razveljaviti.
+↶ pendant 30 jours ¦ ↶ 30 dana ¦ ↶ 30 dni
+↶ tant que rien n’a été ajouté ¦ ↶ dok se ništa ne doda ¦ ↶ dokler ni nič dodano
+Joindre les recherches faites au dossier du notaire. ¦ Priloži provedena istraživanja spisu za javnog bilježnika. ¦ Priloži opravljene poizvedbe spisu za notarja.
+Coché au départ ¦ Označeno na početku ¦ Označeno na začetku
+📦 Archive ¦ 📦 Arhiva ¦ 📦 Arhiv
+Le mot de passe de l’archive de fin de dossier. Oublié = archive perdue. ¦ Lozinka arhive na kraju predmeta. Zaboravljena = arhiva izgubljena. ¦ Geslo arhiva ob koncu zadeve. Pozabljeno = arhiv izgubljen.
+Proposé, coché ¦ Predloženo, označeno ¦ Predlagano, označeno
+Pas proposé ¦ Nije predloženo ¦ Ni predlagano
+💡 Autres idées ¦ 💡 Još ideja ¦ 💡 Še nekaj idej
+🔗 Le dossier lié d’un héritier mort après le défunt. ¦ 🔗 Povezani predmet za nasljednika preminulog nakon ostavitelja. ¦ 🔗 Povezana zadeva za dediča, umrlega po zapustniku.
+Ses descendants rattachés ¦ Njegovi potomci pridruženi ¦ Njegovi potomci pripeti
+📮 Une lettre par service : quels actes. ¦ 📮 Jedno pismo po uredu: koje isprave. ¦ 📮 Eno pismo na urad: katere listine.
+Manquants et déjà demandés ¦ Nedostajuće i već zatražene ¦ Manjkajoče in že zahtevane
+⏳ Délai de réponse par organisme. ¦ ⏳ Vrijeme odgovora po uredu. ¦ ⏳ Odzivni čas po uradu.
+⏳ Nombre de courriers avant de donner un délai. ¦ ⏳ Broj pisama prije prikaza vremena. ¦ ⏳ Število pisem, preden se prikaže čas.
+📅 La cloche prévient avant qu’une copie d’acte soit trop ancienne (durée tapée par toi pour chaque pièce). ¦ 📅 Zvono upozorava prije nego što preslika isprave postane prestara (rok upisuješ po dokazu). ¦ 📅 Zvonček opozori, preden je kopija listine prestara (rok vpišeš po dokazu).
+7 jours ¦ 7 dana ¦ 7 dni
+🙈 Écran partagé : ce qui remplace les noms. ¦ 🙈 Dijeljeni zaslon: što zamjenjuje imena. ¦ 🙈 Deljeni zaslon: kaj nadomesti imena.
+Initiales ¦ Inicijali ¦ Začetnice
+Numéros (Héritier 1, 2…) ¦ Brojevi (Nasljednik 1, 2…) ¦ Številke (Dedič 1, 2…)
+🙈 Écran partagé : les montants. ¦ 🙈 Dijeljeni zaslon: iznosi. ¦ 🙈 Deljeni zaslon: zneski.
+Montants masqués ¦ Iznosi skriveni ¦ Zneski skriti
+Montants visibles ¦ Iznosi vidljivi ¦ Zneski vidni
+avec AR ¦ s povratnicom ¦ s povratnico
+sans AR ¦ bez povratnice ¦ brez povratnice
+lettre suivie ¦ praćena pošiljka ¦ sledena pošiljka
+pas en recommandé ¦ nije preporučeno ¦ ni priporočeno
+Son état civil ¦ Njegovo osobno stanje ¦ Njegovo osebno stanje
+nom de naissance, prénoms, date et lieu de naissance ¦ rođeno prezime, imena, datum i mjesto rođenja ¦ rojstni priimek, imena, datum in kraj rojstva
+mariage, PACS, divorce, dates ¦ brak, partnerstvo, razvod, datumi ¦ poroka, partnerstvo, razveza, datumi
+prénoms, dates de naissance, décédés ? ¦ imena, datumi rođenja, preminuli? ¦ imena, datumi rojstva, umrli?
+avec un moyen de les joindre ¦ s načinom kako ih dobiti ¦ z načinom, kako jih doseči
+Documents qu’il peut fournir ¦ Dokumenti koje može dostaviti ¦ Dokumenti, ki jih lahko predloži
+livret de famille, actes, jugement… ¦ obiteljska knjižica, isprave, presuda… ¦ družinska knjižica, listine, sodba…
+Une question à toi ¦ Tvoje pitanje ¦ Tvoje vprašanje
+💾 Fichier à remplir ¦ 💾 Datoteka za ispuniti ¦ 💾 Datoteka za izpolnitev
+🖨 Papier (PDF) ¦ 🖨 Papir (PDF) ¦ 🖨 Papir (PDF)
+Ce qui le concerne ¦ Što se njega tiče ¦ Kar zadeva njega
+Famille connue ¦ Poznata obitelj ¦ Znana družina
+Sa question ¦ Njegovo pitanje ¦ Njegovo vprašanje
+Reversé à l’héritier ¦ Isplaćeno nasljedniku ¦ Izplačano dediču
+SIRET ¦ SIRET ¦ SIRET
+Mentions ¦ Podaci ¦ Podatki
+Trimestre ¦ Tromjesečje ¦ Četrtletje
+Personnes rattachées ¦ Pridružene kartice ¦ Pripete kartice
+Courriers, échanges, fonds ¦ Pisma, kontakti, sredstva ¦ Pisma, stiki, sredstva
+Temps et frais, échéances ¦ Vrijeme i troškovi, rokovi ¦ Čas in stroški, roki
+Questionnaire d’héritier fabriqué ¦ Upitnik za nasljednika izrađen ¦ Vprašalnik za dediča ustvarjen
+Réponses d’un questionnaire écrites ¦ Odgovori na upitnik uneseni ¦ Odgovori vprašalnika vneseni
+Copie du dossier pour le notaire ¦ Preslika predmeta za javnog bilježnika ¦ Kopija zadeve za notarja
+Facture émise ou imprimée ¦ Račun izdan ili ispisan ¦ Račun izdan ali natisnjen
+Registre des factures (CSV) ¦ Upisnik računa (CSV) ¦ Evidenca računov (CSV)
+Décompte des fonds imprimé ¦ Obračun sredstava ispisan ¦ Obračun sredstev natisnjen
+Recherches faites (pour le notaire) ¦ Provedena istraživanja (za javnog bilježnika) ¦ Opravljene poizvedbe (za notarja)
+Image de la carte des héritiers ¦ Slika karte nasljednika ¦ Slika zemljevida dedičev
+Contrat imprimé ¦ Ugovor ispisan ¦ Pogodba natisnjena
+Dossiers fusionnés ¦ Predmeti spojeni ¦ Zadevi združeni
+chiffrée ¦ šifrirano ¦ šifrirano
+sans mot de passe ¦ bez lozinke ¦ brez gesla
+avec les adresses ¦ s adresama ¦ z naslovi
+sans adresse ¦ bez adrese ¦ brez naslova
+deux défunts ¦ dva pokojnika ¦ dva pokojnika
+dossiers liés ¦ povezani predmeti ¦ povezane zadeve
+Aucune lettre à ranger. ¦ Nema pisma za spremanje. ¦ Ni pisma za vložitev.
+Avec qui ? ¦ S kim? ¦ S kom?
+Ce dossier est archivé : rouvre-le d’abord. ¦ Ovaj je predmet arhiviran: najprije ga ponovno otvori. ¦ Ta zadeva je arhivirana: najprej jo znova odpri.
+Ce fichier n’est pas un .docx. ¦ Ova datoteka nije .docx. ¦ Ta datoteka ni .docx.
+Ce n’est pas un devis. ¦ Ovo nije ponuda. ¦ To ni ponudba.
+Cette facture a déjà un avoir. ¦ Ovaj račun već ima odobrenje. ¦ Ta račun že ima dobropis.
+Choisis la date. ¦ Odaberi datum. ¦ Izberi datum.
+Choisis toi-même le taux de TVA (avec ton comptable) avant d’émettre. ¦ Prije izdavanja sam odaberi stopu PDV-a (sa svojim knjigovođom). ¦ Pred izdajo sam izberi stopnjo DDV (s svojim računovodjo).
+Choisis un autre dossier. ¦ Odaberi drugi predmet. ¦ Izberi drugo zadevo.
+Dossier clos ou archivé : rouvre-le d’abord. ¦ Predmet zatvoren ili arhiviran: najprije ga ponovno otvori. ¦ Zadeva zaprta ali arhivirana: najprej jo znova odpri.
+Déjà émise. ¦ Već izdan. ¦ Že izdan.
+Facture introuvable. ¦ Račun nije pronađen. ¦ Račun ni najden.
+La facture n’a aucune ligne. ¦ Račun nema nijedan redak. ¦ Račun nima nobene vrstice.
+La fusion date de plus de 30 jours : elle ne peut plus être annulée. ¦ Spajanje je starije od 30 dana: više se ne može poništiti. ¦ Združitev je starejša od 30 dni: ni je več mogoče razveljaviti.
+Le mot de passe est obligatoire (réglage). ¦ Lozinka je obavezna (postavka). ¦ Geslo je obvezno (nastavitev).
+Ligne INSEE introuvable. ¦ Redak INSEE-a nije pronađen. ¦ Vrstica INSEE ni najdena.
+Ligne incorrecte : quantité ou prix. ¦ Neispravan redak: količina ili cijena. ¦ Neveljavna vrstica: količina ali cena.
+Mouvement introuvable. ¦ Kretanje nije pronađeno. ¦ Premik ni najden.
+Numéro déjà pris : renuméroter le brouillon. ¦ Broj je već zauzet: prenumeriraj nacrt. ¦ Številka je že zasedena: preštevilči osnutek.
+Où as-tu cherché ? ¦ Gdje si tražio? ¦ Kje si iskal?
+Quelque chose a été ajouté depuis la fusion : elle ne peut plus être annulée. ¦ Nešto je dodano nakon spajanja: više se ne može poništiti. ¦ Od združitve je bilo nekaj dodano: ni je več mogoče razveljaviti.
+Seule une facture émise peut être payée. ¦ Platiti se može samo izdani račun. ¦ Plačati je mogoče le izdan račun.
+Taux de TVA incorrect (ex. : le taux que t’a indiqué ton comptable). ¦ Neispravna stopa PDV-a (npr.: stopa koju ti je dao knjigovođa). ¦ Neveljavna stopnja DDV (npr.: stopnja, ki ti jo je dal računovodja).
+Type d’événement « Décès » introuvable. ¦ Vrsta događaja „Smrt“ nije pronađena. ¦ Vrste dogodka „Smrt“ ni bilo mogoče najti.
+Un avoir corrige une facture émise. ¦ Odobrenje ispravlja izdani račun. ¦ Dobropis popravi izdan račun.
+Un devis accepté ne se modifie plus. ¦ Prihvaćena ponuda više se ne mijenja. ¦ Sprejeta ponudba se ne spreminja več.
+« D’où vient cette date » est obligatoire. ¦ „Odakle je ovaj datum“ je obavezno. ¦ „Od kod je ta datum“ je obvezno.
+Échange introuvable. ¦ Kontakt nije pronađen. ¦ Stik ni najden.
+💶 Un reversement reste en attente : archiver quand même ? ¦ 💶 Isplata još čeka: ipak arhivirati? ¦ 💶 Izplačilo še čaka: vseeno arhiviram?
+🔐 Archive protégée : tape son mot de passe. ¦ 🔐 Zaštićena arhiva: upiši njezinu lozinku. ¦ 🔐 Zaščiten arhiv: vpiši njegovo geslo.
+🏢 Mon cabinet : un champ que tu as déclaré obligatoire est vide ({f}) : la facture n’est pas émise. ¦ 🏢 Moj ured: polje koje si označio kao obavezno je prazno ({f}): račun se ne izdaje. ¦ 🏢 Moja pisarna: polje, ki si ga označil kot obvezno, je prazno ({f}): račun se ne izda.
+J−{n} ¦ D−{n} ¦ D−{n}
+=descendant rattaché ¦ pridruženi potomak|pridružena potomka|pridruženih potomaka ¦ pripeti potomec|pripeta potomca|pripeti potomci|pripetih potomcev
+=échange noté ¦ zabilježeni kontakt|zabilježena kontakta|zabilježenih kontakata ¦ zapisan stik|zapisana stika|zapisani stiki|zapisanih stikov

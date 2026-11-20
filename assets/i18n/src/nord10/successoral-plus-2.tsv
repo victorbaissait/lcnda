@@ -1,0 +1,610 @@
+fr ¦ sq ¦ mt
+# Zone « successoral-plus-2 » : ⚖️ outils de plus du généalogiste successoral (heritage-successoral-plus2*.js, lib/successoral_plus2.php, lib/successoral_factures.php)
+Réglages de cet outil ¦ Cilësimet e këtij mjeti ¦ Is-settings ta’ din l-għodda
+(conseillé) ¦ (e rekomanduar) ¦ (rakkomandat)
+Autre : ¦ Tjetër: ¦ Oħrajn:
+Outils du dossier : réglages ¦ Mjetet e dosjes: cilësimet ¦ Għodod tal-fajl: settings
+Chaque choix se change ici ; l’option conseillée est celle du départ. ¦ Çdo zgjedhje e ndryshon këtu; e rekomanduara është e parazgjedhura. ¦ Kull għażla tbiddilha hawn; dik rakkomandata hija l-default.
+Réglage enregistré : {what} ¦ Cilësimi u ruajt: {what} ¦ Setting issejvjat: {what}
+Adresse refusée : https:// et {numero} sont obligatoires. ¦ Adresa u refuzua: https:// dhe {numero} janë të detyrueshme. ¦ Indirizz miċħud: https:// u {numero} huma obbligatorji.
+Carte des héritiers (dossiers en cours) ¦ Harta e trashëgimtarëve (dosje në vazhdim) ¦ Mappa tal-werrieta (fajls għaddejjin)
+Délai de réponse par organisme ¦ Koha e përgjigjes sipas zyrës ¦ Ħin ta’ tweġiba skont l-uffiċċju
+🙈 Écran partagé ¦ 🙈 Ekran i ndarë ¦ 🙈 Skrin maqsum
+Fusionner avec un autre dossier… ¦ Bashko me një dosje tjetër… ¦ Għaqqad ma’ fajl ieħor…
+Annuler la dernière fusion ¦ Anulo bashkimin e fundit ¦ Ħassar l-aħħar għaqda
+nom de naissance ¦ mbiemri i lindjes ¦ kunjom tat-twelid
+prénom ¦ emri ¦ isem
+né(e) le {d} ¦ lindur {d} ¦ imwieled/imwielda {d}
+même mois ¦ i njëjti muaj ¦ l-istess xahar
+même année ¦ i njëjti vit ¦ l-istess sena
+± 1 an ¦ ± 1 vit ¦ ± sena
+date inconnue ¦ data e panjohur ¦ data mhux magħrufa
+date de naissance différente ¦ datë tjetër lindjeje ¦ data tat-twelid oħra
+même département ¦ i njëjti departament ¦ l-istess dipartiment
+lieu inconnu sur la fiche ¦ vendi në skedë i panjohur ¦ post fuq il-karta mhux magħruf
+lieu : {p} ¦ vendi: {p} ¦ post: {p}
+Le fichier des décès n’est pas dans l’app. ¦ Skedari i vdekjeve nuk është në aplikacion. ¦ Il-fajl tal-imwiet mhux fl-app.
+⤒ Importer les décès ¦ ⤒ Importo vdekjet ¦ ⤒ Importa l-imwiet
+L’import se fait une seule fois, depuis data.gouv.fr (environ 25 millions de lignes depuis 1970), ou par années choisies. ¦ Importi bëhet një herë, nga data.gouv.fr (rreth 25 milionë rreshta që nga 1970), ose për vitet e zgjedhura. ¦ L-importazzjoni ssir darba, minn data.gouv.fr (madwar 25 miljun linja mill-1970), jew għas-snin magħżula.
+fichier importé : décès {a} → {b} ¦ skedar i importuar: vdekjet {a} → {b} ¦ fajl importat: imwiet {a} → {b}
+un décès plus ancien ne peut pas être trouvé ¦ një vdekje më e hershme nuk mund të gjendet ¦ mewt aktar kmieni ma tistax tinstab
+plafonné à {n} ¦ kufizuar në {n} ¦ limitat għal {n}
+acte n° {n} ¦ akti nr. {n} ¦ att nru {n}
+avant le défunt : si c’est cette personne, ses enfants viennent à sa place (représentation). ¦ para të ndjerit: nëse është ky person, në vend të tij trashëgojnë fëmijët e tij (përfaqësim). ¦ qabel id-decujus: jekk hija din il-persuna, minflokha jirtu wliedha (rappreżentazzjoni).
+après le défunt : sa part passe à ses propres héritiers. ¦ pas të ndjerit: pjesa e tij kalon te trashëgimtarët e tij. ¦ wara d-decujus: is-sehem tagħha jgħaddi lill-werrieta tagħha stess.
+Les Français nés à l’étranger ont leur acte au Service central d’état civil (Nantes). ¦ Francezët e lindur jashtë vendit e kanë aktin në Shërbimin qendror të gjendjes civile (Nantes). ¦ Il-Franċiżi mwielda barra għandhom l-att tagħhom fis-Servizz ċentrali tal-istat ċivili (Nantes).
+déjà confirmé ¦ tashmë e konfirmuar ¦ diġà kkonfermat
+C’est cette personne ¦ Është ky person ¦ Hija din il-persuna
+Pas la même personne ¦ Nuk është i njëjti person ¦ Mhix l-istess persuna
+Nom de naissance inconnu : cherché sous {n}, pistes moins sûres ¦ Mbiemri i lindjes i panjohur: kërkuar si {n}, gjurmë më pak të sigurta ¦ Kunjom tat-twelid mhux magħruf: imfittex bħala {n}, traċċi inqas żguri
+Deux personnes se ressemblent : demande l’acte avant de choisir ¦ Dy persona ngjajnë: kërko aktin para se të zgjedhësh ¦ Żewġ persuni jixxiebhu: itlob l-att qabel tagħżel
+rien trouvé dans le fichier ¦ asgjë e gjetur në skedar ¦ xejn ma nstab fil-fajl
+« Rien trouvé » ne veut pas dire « vivant » (un décès à l’étranger manque souvent). ¦ «Asgjë e gjetur» nuk do të thotë «gjallë» (vdekja jashtë vendit shpesh mungon). ¦ “Xejn ma nstab” ma jfissirx “ħaj” (mewt barra ħafna drabi tkun nieqsa).
+Les héritiers « vivants » comparés au fichier des décès ¦ Trashëgimtarët «të gjallë» krahasuar me skedarin e vdekjeve ¦ Werrieta “ħajjin” imqabbla mal-fajl tal-imwiet
+pistes à partir de {n} ¦ gjurmë nga {n} ¦ traċċi minn {n}
+Aucun héritier « vivant » à vérifier dans ce dossier. ¦ Asnjë trashëgimtar «i gjallë» për t’u kontrolluar në këtë dosje. ¦ Ebda werriet “ħaj” x’jiġi ċċekkjat f’dan il-fajl.
+Comment c’est calculé ¦ Si llogaritet ¦ Kif jinħadem
+Le nom de naissance, sans accents ni tirets ; jamais le nom d’épouse (l’INSEE donne le nom de naissance). ¦ Mbiemri i lindjes, pa theks dhe viza; kurrë mbiemri i martesës (INSEE mban mbiemrin e lindjes). ¦ Kunjom tat-twelid, mingħajr aċċenti u siżjenti; qatt kunjom miż-żwieġ (l-INSEE iżomm il-kunjom tat-twelid).
+Le premier prénom de la fiche parmi les prénoms INSEE ; Jean-Pierre = Jean Pierre. ¦ Emri i parë i skedës mes emrave të INSEE; Jean-Pierre = Jean Pierre. ¦ L-ewwel isem tal-karta fost l-ismijiet tal-INSEE; Jean-Pierre = Jean Pierre.
+Jour exact 30 · même mois 20 · même année 12 · ± 1 an 6 ; sans date : plafond 70. ¦ Dita e saktë 30 · i njëjti muaj 20 · i njëjti vit 12 · ± 1 vit 6; pa datë: maksimumi 70. ¦ Jum eżatt 30 · l-istess xahar 20 · l-istess sena 12 · ± sena 6; mingħajr data: massimu 70.
+La commune ; même département 10 ; né à l’étranger : le pays (plafond 80). ¦ Komuna; i njëjti departament 10; lindur jashtë vendit: vendi (maksimumi 80). ¦ Komun; l-istess dipartiment 10; imwieled barra: il-pajjiż (massimu 80).
+Différent : la piste est écartée. ¦ Përndryshe: gjurma hidhet poshtë. ¦ Inkella: it-traċċa titwarrab.
+Pistes écartées ({n}) ¦ Gjurmë të hedhura poshtë ({n}) ¦ Traċċi mwarrba ({n})
+Piste remise ¦ Gjurma u rikthye ¦ Traċċa rritornata
+« Pas la même personne » retenu : cette piste ne reviendra plus ¦ «Nuk është i njëjti person» u mbajt mend: kjo gjurmë nuk do të kthehet ¦ “Mhix l-istess persuna” miftakra: din it-traċċa mhux se terġa’ lura
+Sur la fiche de {n} : un décès le {d}, source « Fichier des personnes décédées (INSEE) », avec la date du relevé. ¦ Në skedën e {n}: vdekja {d}, burimi «Skedari i personave të vdekur (INSEE)», me datën e kontrollit. ¦ Fuq il-karta ta’ {n}: mewt {d}, sors “Fajl tal-persuni mejta (INSEE)”, bid-data taċ-ċekk.
+Dans ce dossier : statut retenu « {s} » ; le calcul est refait. ¦ Në këtë dosje: statusi «{s}» u mbajt; llogaritja bëhet sërish. ¦ F’dan il-fajl: status “{s}” miżmum; il-kalkolu jerġa’ jsir.
+Ce qui va changer ¦ Çfarë ndryshon ¦ X’jinbidel
+{n} marqué(e) décédé(e) (INSEE). Calcul refait. ¦ {n} u shënua i/e vdekur (INSEE). Llogaritja u bë sërish. ¦ {n} immarkat/a bħala mejjet/mejta (INSEE). Kalkolu reġa’ sar.
+Vérifier les décès ¦ Kontrollo vdekjet ¦ Iċċekkja l-imwiet
+Questionnaire… ¦ Pyetësor… ¦ Kwestjonarju…
+⚰️ INSEE : {n} piste(s) ¦ ⚰️ INSEE: {n} gjurmë ¦ ⚰️ INSEE: {n} traċċi
+⚰️ vérifié le {d} ¦ ⚰️ kontrolluar {d} ¦ ⚰️ iċċekkjat {d}
+🕵️ Recherches ¦ 🕵️ Kërkime ¦ 🕵️ Riċerki
+📞 Noter un échange ¦ 📞 Shëno një kontakt ¦ 📞 Niżżel kuntatt
+Ouvrir un dossier lié ¦ Hap dosjen e lidhur ¦ Iftaħ il-fajl marbut
+Dossiers liés ¦ Dosje të lidhura ¦ Fajls marbuta
+Succession de {n} ¦ Trashëgimia e {n} ¦ Wirt ta’ {n}
+dossier d’origine {n} ¦ dosja origjinale {n} ¦ fajl oriġinali {n}
+Deux défunts, deux calculs : les successions restent distinctes. ¦ Dy të ndjerë, dy llogaritje: trashëgimitë mbeten të ndara. ¦ Żewġ mejtin, żewġ kalkoli: il-wirtijiet jibqgħu separati.
+Aucun héritier trouvé d’après les fiches. ¦ Asnjë trashëgimtar i gjetur sipas skedave. ¦ Ebda werriet ma nstab skont il-karti.
+Échanges ¦ Kontakte ¦ Kuntatti
+Noter un échange ¦ Shëno një kontakt ¦ Niżżel kuntatt
+Les courriers du Registre ne sont pas recopiés ici : ils sont montrés en gris, en lecture. ¦ Letrat e regjistrit nuk kopjohen këtu: shfaqen gri, vetëm për lexim. ¦ L-ittri tar-reġistru mhumiex ikkupjati hawn: jidhru griż, għall-qari biss.
+Chercher… (personne, résumé) ¦ Kërko… (person, përmbledhje) ¦ Fittex… (persuna, sommarju)
+du dossier fusionné ¦ nga dosja e bashkuar ¦ mill-fajl magħqud
+Registre de courriers, n° {n} ¦ Regjistri i korrespondencës, nr. {n} ¦ Reġistru tal-korrispondenza, nru {n}
+Aucun échange noté. ¦ Asnjë kontakt i shënuar. ¦ Ebda kuntatt imniżżel.
+✎ Corriger un échange ¦ ✎ Korrigjo kontaktin ¦ ✎ Ikkoreġi l-kuntatt
+＋ Noter un échange ¦ ＋ Shëno një kontakt ¦ ＋ Niżżel kuntatt
+Avec (héritier, notaire, mairie…) ¦ Me kë (trashëgimtar, noter, bashki…) ¦ Ma’ min (werriet, nutar, kunsill lokali…)
+Prochaine action ¦ Hapi tjetër ¦ Il-pass li jmiss
+Durée (minutes) ¦ Kohëzgjatja (minuta) ¦ Tul (minuti)
+⏱ Compter la durée dans 💶 Temps ¦ ⏱ Llogarit kohën te 💶 Koha ¦ ⏱ Għodd il-ħin fi 💶 Ħin
+C’est une recherche (va dans 🕵️ Recherches) ¦ Është një kërkim (shkon te 🕵️ Kërkime) ¦ Hija riċerka (tmur fi 🕵️ Riċerki)
+Avec une date, une échéance va dans le dossier et dans la 🔔 cloche (jamais le résumé). ¦ Me një datë, afati shkon në dosje dhe në 🔔 zile (kurrë përmbledhja). ¦ B’data, l-iskadenza tmur fil-fajl u fil-🔔 qanpiena (qatt is-sommarju).
+Échange corrigé (noté au 🕓 Journal) ¦ Kontakti u korrigjua (shkruar në 🕓 Ditar) ¦ Kuntatt ikkoreġut (imdaħħal fil-🕓 Ġurnal)
+Échange noté ¦ Kontakti u shënua ¦ Kuntatt imniżżel
+Trois fois « ne répond pas » de suite : noter 🔇 ne répond pas ? ¦ Tri herë rresht «nuk përgjigjet»: të shënohet 🔇 nuk përgjigjet? ¦ Tliet darbiet wara xulxin “ma jwieġibx”: tniżżel 🔇 ma jwieġibx?
+Recommandé ¦ Rekomande ¦ Reġistrata
+Envoyé en recommandé ¦ Dërguar rekomande ¦ Mibgħuta reġistrata
+N° du recommandé ¦ Nr. i rekomandesë ¦ Nru tal-ittra reġistrata
+Numéro inhabituel, gardé tel quel. ¦ Numër i pazakontë, mbajtur siç është. ¦ Numru mhux tas-soltu, miżmum kif inhu.
+AR reçu le ¦ Dëftesa e marrjes mbërriti ¦ Avviż ta’ riċevuta wasal
+Relance si rien après (jours) ¦ Kujtesë nëse asgjë pas (ditësh) ¦ Tfakkira jekk xejn wara (jiem)
+Réponse reçue le ¦ Përgjigja mbërriti ¦ Tweġiba waslet
+Retour du courrier ¦ Letër e kthyer ¦ Ittra rritornata
+pli non distribué ¦ marrësi nuk e tërhoqi ¦ id-destinatarju ma ġabarhiex
+destinataire inconnu ¦ marrës i panjohur ¦ destinatarju mhux magħruf
+AR reçu aujourd’hui ¦ Dëftesa e marrjes sot ¦ Avviż ta’ riċevuta llum
+Suivre en ligne ¦ Ndiq në internet ¦ Segwi onlajn
+Copier le numéro ¦ Kopjo numrin ¦ Ikkopja n-numru
+L’app ne fait aucune requête : le lien ouvre la page de suivi dans ton navigateur ; tu notes toi-même la date de l’AR. ¦ Aplikacioni nuk dërgon asnjë kërkesë: lidhja hap faqen e gjurmimit në shfletuesin tënd; datën e dëftesës e shënon vetë. ¦ L-app ma tibgħat l-ebda talba: il-link jiftaħ il-paġna tat-traċċar fil-browser tiegħek; id-data tal-avviż tniżżilha int.
+Tape d’abord le numéro. ¦ Shkruaj fillimisht numrin. ¦ Ikteb in-numru l-ewwel.
+Numéro copié ¦ Numri u kopjua ¦ Numru kkupjat
+Courrier revenu : noter 🔎 introuvable pour cet héritier ? ¦ Letra u kthye: të shënohet 🔎 nuk gjendet për këtë trashëgimtar? ¦ L-ittra reġgħet lura: tniżżel 🔎 ma nstabx għal dan il-werriet?
+✓ AR {d} ¦ ✓ Dëftesë {d} ¦ ✓ Avviż {d}
+revenu ¦ e kthyer ¦ rritornata
+📮 sans AR · {n} j ¦ 📮 pa dëftesë · {n} d ¦ 📮 mingħajr avviż · {n} j
+Recommandés ¦ Rekomande ¦ Ittri reġistrati
+Sans AR ¦ Pa dëftesë ¦ Mingħajr avviż
+{n} recommandés, {m} sans accusé ¦ {n} rekomande, {m} pa dëftesë ¦ {n} reġistrati, {m} mingħajr avviż
+Importer des réponses… ¦ Importo përgjigjet… ¦ Importa t-tweġibiet…
+Saisir un questionnaire papier ¦ Fut një pyetësor letre ¦ Daħħal kwestjonarju tal-karta
+📮 Recommandé ¦ 📮 Rekomande ¦ 📮 Reġistrata
+Questionnaires ¦ Pyetësorë ¦ Kwestjonarji
+préparé le {d} ¦ përgatitur {d} ¦ ippreparat {d}
+réponses écrites le {d} ¦ përgjigjet u futën {d} ¦ tweġibiet imdaħħla {d}
+Questionnaire ¦ Pyetësor ¦ Kwestjonarju
+au sujet d’une succession ¦ lidhur me një trashëgimi ¦ dwar wirt
+Vous ¦ Ju ¦ Inti
+Nom de naissance ¦ Mbiemri i lindjes ¦ Kunjom tat-twelid
+Conjoint(s) ¦ Bashkëshorti(ët) ¦ Konjuġi
+Date du mariage (ou PACS) ¦ Data e martesës (ose e partneritetit) ¦ Data taż-żwieġ (jew tas-sħubija)
+Adresse, téléphone, courriel ¦ Adresa, telefoni, email-i ¦ Indirizz, telefon, email
+Code postal ¦ Kodi postar ¦ Kodiċi postali
+Autres membres de la famille connus ¦ Anëtarë të tjerë të njohur të familjes ¦ Membri oħra magħrufa tal-familja
+Frères, sœurs, cousins…, avec un moyen de les joindre ¦ Vëllezër, motra, kushërinj…, me një mënyrë për t’i kontaktuar ¦ Aħwa, kuġini…, b’mod kif tilħaqhom
+Documents que vous pouvez fournir ¦ Dokumente që mund të jepni ¦ Dokumenti li tista’ tipprovdi
+livret de famille ¦ libreza e familjes ¦ ktieb tal-familja
+acte de naissance ¦ akti i lindjes ¦ att tat-twelid
+acte de mariage ¦ akti i martesës ¦ att taż-żwieġ
+jugement ¦ vendim gjyqësor ¦ sentenza
+Vos réponses restent sur cet appareil tant que vous n’envoyez rien. ¦ Përgjigjet tuaja mbeten në këtë pajisje derisa të dërgoni diçka. ¦ It-tweġibiet tiegħek jibqgħu fuq dan l-apparat sakemm ma tibgħat xejn.
+Enregistrer mes réponses ¦ Ruaj përgjigjet e mia ¦ Issejvja t-tweġibiet tiegħi
+Un questionnaire à envoyer ¦ Pyetësor për t’u dërguar ¦ Kwestjonarju biex jintbagħat
+Fabriquer et ranger au Registre ¦ Krijo dhe arkivo në regjistër ¦ Oħloq u ffajlja fir-reġistru
+Ce qu’on demande ¦ Çfarë pyesim ¦ X’nistaqsu
+Ta question ¦ Pyetja jote ¦ Il-mistoqsija tiegħek
+Comment l’envoyer ¦ Si ta dërgosh ¦ Kif tibgħatu
+Ce qui est pré-rempli ¦ Çfarë është e paraplotësuar ¦ X’inhu mimli minn qabel
+Jamais le nom du défunt ni un montant : « au sujet d’une succession ». Le fichier s’ouvre d’un double-clic, sans internet ; l’héritier renvoie un petit fichier. ¦ Kurrë emri i të ndjerit apo një shumë: «lidhur me një trashëgimi». Skedari hapet me klikim të dyfishtë, pa internet; trashëgimtari kthen një skedar të vogël. ¦ Qatt l-isem tad-decujus jew ammont: “dwar wirt”. Il-fajl jinfetaħ b’double-click, mingħajr internet; il-werriet jibgħat lura fajl żgħir.
+{n} prêts, rangés au Registre de courriers ¦ {n} të përgatitur, arkivuar në regjistrin e korrespondencës ¦ {n} ippreparati, iffajljati fir-reġistru tal-korrispondenza
+Ce fichier ne vient pas d’un questionnaire de ce dossier. ¦ Ky skedar nuk vjen nga një pyetësor i kësaj dosjeje. ¦ Dan il-fajl ma ġiex minn kwestjonarju ta’ dan il-fajl.
+Revoir avant d’écrire ¦ Rishiko para futjes ¦ Irrevedi qabel tidħol
+Enfants (un par ligne : prénom, année) ¦ Fëmijët (një për rresht: emri, viti) ¦ Tfal (wieħed għal kull linja: isem, sena)
+Documents promis ¦ Dokumente të premtuara ¦ Dokumenti mwiegħda
+Réponses de {n} ¦ Përgjigjet e {n} ¦ Tweġibiet minn {n}
+Écrire les changements cochés ¦ Fut ndryshimet e shënuara ¦ Daħħal il-bidliet immarkati
+Une réponse a déjà été importée le {d} : compare avec celle-ci. ¦ Një përgjigje është importuar tashmë {d}: krahasoje me këtë. ¦ Tweġiba diġà ġiet importata {d}: qabbilha ma’ din.
+fichier vérifié ✓ (bon questionnaire, pas modifié) ¦ skedari u verifikua ✓ (pyetësori i duhur, i pandryshuar) ¦ fajl ivverifikat ✓ (il-kwestjonarju t-tajjeb, mhux mibdul)
+Coche ce qui doit aller dans le dossier. Rien n’est écrit sans ta revue ; « source : déclaration de l’héritier » accompagne tout ce qui est écrit. ¦ Shëno çfarë hyn në dosje. Asgjë nuk futet pa rishikimin tënd; çdo gjë e futur mban «burimi: deklarata e trashëgimtarit». ¦ Immarka x’jidħol fil-fajl. Xejn ma jidħol mingħajr ir-reviżjoni tiegħek; kull ma jidħol iġorr “sors: dikjarazzjoni tal-werriet”.
+Dans la base ¦ Në bazë ¦ Fid-database
+« Famille connue » va en note du dossier, jamais en fiches. Les enfants créent des fiches reliées à l’héritier. Les documents promis deviennent une échéance. ¦ «Familja e njohur» shkon në shënimin e dosjes, kurrë në skeda. Fëmijët krijojnë skeda të lidhura me trashëgimtarin. Dokumentet e premtuara bëhen një afat. ¦ Il-“familja magħrufa” tmur fin-nota tal-fajl, qatt fil-karti. It-tfal joħolqu karti marbuta mal-werriet. Id-dokumenti mwiegħda jsiru skadenza.
+{n} écrits. Calcul refait. ¦ {n} të futura. Llogaritja u bë sërish. ¦ {n} imdaħħla. Kalkolu reġa’ sar.
+passée ¦ kaluar ¦ għadda
+dans {n} j ¦ pas {n} d ¦ fi {n} j
+était le {d} ¦ ishte {d} ¦ kien {d}
+Une date importante ¦ Datë e rëndësishme ¦ Data importanti
+Mes dates importantes ¦ Datat e mia të rëndësishme ¦ Id-dati importanti tiegħi
+D’où vient cette date ¦ Nga vjen kjo datë ¦ Minn fejn ġejja din id-data
+Les dates que le notaire t’a données, rappelées à temps. ¦ Datat që të ka dhënë noteri, të kujtuara në kohë. ¦ Id-dati li tak in-nutar, imfakkra fil-ħin.
+L’app ne calcule aucun délai légal : elle ne connaît pas ta situation. ¦ Aplikacioni nuk llogarit asnjë afat ligjor: nuk e njeh situatën tënde. ¦ L-app ma tikkalkula l-ebda skadenza legali: ma tafx is-sitwazzjoni tiegħek.
+✎ Modifier la date ¦ ✎ Ndrysho datën ¦ ✎ Biddel id-data
+＋ Une date importante ¦ ＋ Një datë e rëndësishme ¦ ＋ Data importanti
+D’où vient cette date (obligatoire) ¦ Nga vjen kjo datë (e detyrueshme) ¦ Minn fejn ġejja din id-data (obbligatorju)
+ex. : Me VIALLE, courriel du 4 nov. ¦ p.sh.: Me VIALLE, email i 4/11 ¦ eż.: Me VIALLE, email tal-4/11
+Date déplacée : l’ancienne reste en dessous et la modification est notée au 🕓 Journal. ¦ Data u zhvendos: e vjetra mbetet poshtë dhe ndryshimi shkruhet në 🕓 Ditar. ¦ Data mċaqalqa: il-qadima tibqa’ taħt u l-bidla tiddaħħal fil-🕓 Ġurnal.
+Date modifiée ¦ Data u ndryshua ¦ Data mibdula
+Date importante ajoutée ¦ Data e rëndësishme u shtua ¦ Data importanti miżjuda
+🔗 {a} liens ne reposent que sur une pièce, {b} sur aucune. Ce n’est pas une erreur : c’est à vérifier avant la remise. ¦ 🔗 {a} lidhje mbështeten në një provë të vetme, {b} në asnjë. Nuk është gabim: për t’u kontrolluar para dorëzimit. ¦ 🔗 {a} rabtiet jistrieħu fuq prova waħda, {b} fuq l-ebda waħda. Mhux żball: iċċekkja qabel il-konsenja.
+🔗 Chaque lien repose sur assez de pièces. ¦ 🔗 Çdo lidhje mbështetet në prova të mjaftueshme. ¦ 🔗 Kull rabta tistrieħ fuq provi biżżejjed.
+Voir les liens ¦ Shiko lidhjet ¦ Ara r-rabtiet
+Une lettre par service ({n}) ¦ Një letër për zyrë ({n}) ¦ Ittra waħda għal kull uffiċċju ({n})
+délivrée le {d} ¦ lëshuar {d} ¦ maħruġ {d}
+valable jusqu’au {d} ¦ e vlefshme deri {d} ¦ validu sa {d}
+📅 Date de délivrance ¦ 📅 Data e lëshimit ¦ 📅 Data tal-ħruġ
+Chaque maillon : combien de pièces le prouvent ¦ Çdo hallkë: sa prova e vërtetojnë ¦ Kull ħolqa: kemm-il prova jagħtuha
+Héritier concerné ¦ Trashëgimtari në fjalë ¦ Werriet ikkonċernat
+dossier de preuve « prouvé » ¦ dosje prove «e provuar» ¦ fajl ta’ prova “ippruvat”
+1 pièce, jugée suffisante le {d} ¦ 1 provë, e konsideruar e mjaftueshme {d} ¦ Prova waħda, meqjusa biżżejjed {d}
+Demander l’acte ¦ Kërko aktin ¦ Itlob l-att
+✓ Une pièce me suffit ici ¦ ✓ Këtu më mjafton një provë ¦ ✓ Hawn prova waħda tkun biżżejjed għalija
+Une « pièce » = une source citée sur l’acte (deux copies du même acte comptent pour une) ; un dossier de preuve « prouvé » compte pour une de plus. ¦ «Provë» = burimi i cituar në një ngjarje (dy kopje të të njëjtit akt numërohen si një); dosja e provës «e provuar» numërohet si edhe një. ¦ “Prova” = is-sors iċċitat f’avveniment (żewġ kopji tal-istess att jgħoddu bħala waħda); il-fajl ta’ prova “ippruvat” jgħodd bħala waħda oħra.
+Noté au 🕓 Journal ¦ Shkruar në 🕓 Ditar ¦ Imdaħħal fil-🕓 Ġurnal
+Remise bloquée (réglage) ¦ Dorëzimi i bllokuar (cilësim) ¦ Konsenja mblukkata (setting)
+Des liens ont trop peu de pièces : la remise est bloquée tant qu’ils ne sont pas complétés (ou « Une pièce me suffit ici »). ¦ Disa lidhje kanë shumë pak prova: dorëzimi është i bllokuar derisa të plotësohen (ose «Këtu më mjafton një provë»). ¦ Xi rabtiet għandhom ftit wisq provi: il-konsenja hija mblukkata sakemm jiġu kkompletati (jew “Hawn prova waħda tkun biżżejjed għalija”).
+Pour une recherche, je vous serais reconnaissant(e) de m’adresser une copie des actes suivants : ¦ Për nevoja kërkimi, do t’ju isha mirënjohës nëse do të më dërgonit një kopje të akteve të mëposhtme: ¦ Għal riċerka, inkun grat jekk tibagħtuli kopja tal-atti li ġejjin:
+Les actes manquants, regroupés ¦ Akte që mungojnë, të grupuara ¦ Atti neqsin, miġbura
+Une seule lettre par service au lieu d’une par acte : moins de timbres, moins de relances. Relis et corrige chaque lettre. ¦ Një letër e vetme për zyrë në vend të një për akt: më pak pulla, më pak kujtesa. Lexo dhe korrigjo çdo letër. ¦ Ittra waħda għal kull uffiċċju minflok waħda għal kull att: inqas bolol, inqas tfakkiriet. Aqra u kkoreġi kull ittra.
+{n} rangées dans le Registre de courriers ¦ {n} të arkivuara në regjistrin e korrespondencës ¦ {n} iffajljati fir-reġistru tal-korrispondenza
+Copie délivrée le ¦ Kopje e lëshuar ¦ Kopja maħruġa
+Durée de validité demandée par ton notaire (mois) ¦ Afati i vlefshmërisë që kërkon noteri yt (muaj) ¦ Żmien ta’ validità mitlub min-nutar tiegħek (xhur)
+Aucune durée par défaut : c’est toi qui la tapes. La 🔔 cloche prévient avant qu’elle ne soit trop ancienne. ¦ Asnjë afat i parazgjedhur: e fut ti. 🔔 Zilja paralajmëron para se të bëhet shumë e vjetër. ¦ Ebda żmien default: iddaħħlu int. Il-🔔 qanpiena twissik qabel ma tkun qadima wisq.
+Date de délivrance notée ¦ Data e lëshimit u shënua ¦ Data tal-ħruġ imniżżla
+recherches négatives : {n} ¦ {n} kërkime pa rezultat ¦ {n} riċerki mingħajr riżultat
+« Rien trouvé » est un résultat utile : il montre la diligence au notaire. ¦ «Asgjë e gjetur» është rezultat i dobishëm: i tregon noterit seriozitetin tënd. ¦ “Xejn ma nstab” huwa riżultat utli: juri lin-nutar ir-reqqa tiegħek.
+Aucune recherche notée pour cette personne. ¦ Asnjë kërkim i shënuar për këtë person. ¦ Ebda riċerka mniżżla għal din il-persuna.
+Rien n’est recopié : les lignes viennent du 🗓 Journal des recherches, des ⚰️ vérifications INSEE et des 📞 échanges marqués « recherche ». ¦ Asgjë nuk kopjohet: rreshtat vijnë nga 🗓 Ditari i kërkimit, nga ⚰️ kontrollet e INSEE dhe nga 📞 kontaktet e shënuara «kërkim». ¦ Xejn ma jiġi kkupjat: il-linji ġejjin mill-🗓 Ġurnal tar-riċerka, mill-⚰️ kontrolli tal-INSEE u mill-📞 kuntatti mmarkati “riċerka”.
+Noter une recherche ¦ Shëno një kërkim ¦ Niżżel riċerka
+Pour le notaire ¦ Për noterin ¦ Għan-nutar
+Recherches faites — {n} ¦ Kërkime të kryera — {n} ¦ Riċerki magħmula — {n}
+＋ Noter une recherche ¦ ＋ Shëno një kërkim ¦ ＋ Niżżel riċerka
+Où (service, site, mairie…) ¦ Ku (arkiv, faqe, bashki…) ¦ Fejn (arkivji, sit, kunsill lokali…)
+Ce qui a été trouvé ¦ Çfarë u gjet ¦ X’instab
+Écrit un dépouillement dans le 🗓 Journal des recherches (comme « Où chercher »). ¦ Shkruan një shënim leximi në 🗓 Ditarin e kërkimit (si «Ku të kërkosh»). ¦ Iddaħħal skeda tal-qari fil-🗓 Ġurnal tar-riċerka (bħal “Fejn tfittex”).
+Recherche notée ¦ Kërkimi u shënua ¦ Riċerka mniżżla
+Carte des héritiers ¦ Harta e trashëgimtarëve ¦ Mappa tal-werrieta
+au numéro (BAN) ¦ deri te numri i shtëpisë (BAN) ¦ sal-numru tad-dar (BAN)
+Hors carte ¦ Jashtë hartës ¦ Barra l-mappa
+à l’étranger ({c}) ¦ jashtë vendit ({c}) ¦ barra l-pajjiż ({c})
+commune pas placée ({c}) ¦ komuna e pavendosur ({c}) ¦ komun mhux imqiegħed ({c})
+adresse inconnue ¦ adresë e panjohur ¦ indirizz mhux magħruf
+Où vivent les héritiers ¦ Ku jetojnë trashëgimtarët ¦ Fejn jgħixu l-werrieta
+Tous les dossiers en cours ¦ Të gjitha dosjet në vazhdim ¦ Il-fajls kollha għaddejjin
+Aucune adresse d’héritier placée sur la carte. ¦ Asnjë adresë trashëgimtari e vendosur në hartë. ¦ Ebda indirizz ta’ werriet imqiegħed fuq il-mappa.
+héritier (adresse connue, au niveau de la commune) ¦ trashëgimtar (adresa e njohur, në nivel komune) ¦ werriet (indirizz magħruf, fil-livell tal-komun)
+notaire connu de l’app ¦ noter i njohur nga aplikacioni ¦ nutar magħruf mill-app
+Rien n’est envoyé en ligne. ¦ Asgjë nuk dërgohet në internet. ¦ Xejn ma jintbagħat onlajn.
+La BAN n’est pas encore téléchargée : position à la commune. ¦ BAN ende e pashkarkuar: pozicion në nivel komune. ¦ BAN għadu mhux imniżżel: pożizzjoni fil-livell tal-komun.
+Image de la carte (sans noms) ¦ Imazhi i hartës (pa emra) ¦ Immaġni tal-mappa (mingħajr ismijiet)
+Par organisme, d’après le Registre ¦ Sipas zyrës, nga regjistri ¦ Skont l-uffiċċju, mir-reġistru
+Organisme ¦ Zyra ¦ Uffiċċju
+pas assez de courriers ¦ pak letra ¦ ftit ittri
+De l’envoi à la réponse reçue (demandes d’actes des dossiers). Aide à prévoir la remise et à relancer au bon moment. ¦ Nga dërgimi te përgjigja e marrë (kërkesa aktesh nga dosjet). Të ndihmon të planifikosh dorëzimin dhe të kujtosh në kohë. ¦ Mill-bgħit sat-tweġiba riċevuta (talbiet għal atti mill-fajls). Jgħinek tippjana l-konsenja u tfakkar fil-ħin.
+Pas encore de réponse notée dans le Registre. ¦ Asnjë përgjigje e shënuar ende në regjistër. ¦ Ebda tweġiba mniżżla s’issa fir-reġistru.
+Sa part passe dans sa propre succession : ouvrir un dossier lié pour {n} ? ¦ Pjesa e tij kalon në trashëgiminë e tij: të hapet një dosje e lidhur për {n}? ¦ Is-sehem tiegħu jgħaddi fil-wirt tiegħu stess: tiftaħ fajl marbut għal {n}?
+🔗 Dossier lié ¦ 🔗 Dosje e lidhur ¦ 🔗 Fajl marbut
+Ouvrir le dossier lié ¦ Hap një dosje të lidhur ¦ Iftaħ fajl marbut
+Dossier lié {n} ouvert ({what}) ¦ Dosja e lidhur {n} u hap ({what}) ¦ Fajl marbut {n} miftuħ ({what})
+Aucun autre dossier en cours dans cette généalogie (d’abord ⇄ Déplacer s’il est dans une autre). ¦ Asnjë dosje tjetër në vazhdim në këtë pemë (⇄ Zhvendose fillimisht nëse është në një tjetër). ¦ Ebda fajl ieħor għaddej f’din is-siġra (⇄ Ċaqilqu l-ewwel jekk hu f’oħra).
+Fusionner avec un autre dossier ¦ Bashko me një dosje tjetër ¦ Għaqqad ma’ fajl ieħor
+Le dossier à réunir dans {n} ¦ Dosje për t’u bashkuar me {n} ¦ Fajl li se jingħaqad ma’ {n}
+Le numéro du dossier réuni n’est pas réutilisé. ↶ Annuler sépare à nouveau, comme avant. ¦ Numri i dosjes së bashkuar nuk do të ripërdoret. ↶ Anulo i ndan sërish si më parë. ¦ In-numru tal-fajl magħqud mhux se jerġa’ jintuża. ↶ Ħassar jerġa’ jifridhom bħal qabel.
+Ce qui ¦ Çfarë ¦ X’inhu
+Ce qui se passe ¦ Çfarë ndodh ¦ X’jiġri
+{a} déjà communes, {b} ajoutées ¦ {a} të përbashkëta, {b} të shtuara ¦ {a} komuni, {b} miżjuda
+{d} en double gardée(s) une fois ¦ dublikatat të mbajtura një herë: {d} ¦ duplikati miżmuma darba: {d}
+rattachés, chacun garde son dossier d’origine en étiquette ¦ të shtuara, secila mban dosjen origjinale si etiketë ¦ miżjuda, kull wieħed iżomm il-fajl oriġinali bħala tikketta
+rattachés ; les factures émises ne changent pas ¦ të shtuara; faturat e lëshuara nuk ndryshojnë ¦ miżjuda; fatturi maħruġa ma jinbidlux
+mis bout à bout, chaque ligne marquée de son dossier ¦ njëra pas tjetrës, çdo rresht i shënuar me dosjen e vet ¦ wara xulxin, kull linja mmarkata bil-fajl tagħha
+Deux notaires différents : lequel garder ? ¦ Dy noterë të ndryshëm: cilin të mbash? ¦ Żewġ nutara differenti: liema żżomm?
+Dossiers réunis ¦ Dosjet u bashkuan ¦ Fajls magħquda
+Copie à envoyer au notaire ¦ Kopje për noterin ¦ Kopja għan-nutar
+Copie à envoyer au notaire… ¦ Kopje për noterin… ¦ Kopja għan-nutar…
+Un fichier que le notaire ouvre d’un double-clic, sans rien pouvoir modifier, chiffré si tu le veux. ¦ Një skedar që noteri e hap me klikim të dyfishtë dhe ku nuk mund të ndryshojë asgjë, i enkriptuar nëse do. ¦ Fajl li n-nutar jiftaħ b’double-click u li fih ma jista’ jibdel xejn, ikkriptat jekk trid.
+Part aussi ¦ Shkojnë gjithashtu ¦ Imorru wkoll
+📞 échanges · 💶 fonds · ⚰️ vérifications INSEE · 🧾 copie des factures (le registre, lui, ne change pas) ¦ 📞 kontakte · 💶 fonde · ⚰️ kontrolle INSEE · 🧾 kopja e faturave (vetë regjistri nuk ndryshon) ¦ 📞 kuntatti · 💶 fondi · ⚰️ kontrolli INSEE · 🧾 kopja tal-fatturi (ir-reġistru nnifsu ma jinbidilx)
+Mot de passe (obligatoire) ¦ Fjalëkalimi (i detyrueshëm) ¦ Password (obbligatorja)
+🔐 Mot de passe ¦ 🔐 Fjalëkalimi ¦ 🔐 Password
+AES-256, comme les sauvegardes protégées. Oublié = archive perdue. Le réimport le demande. ¦ AES-256, si kopjet rezervë të mbrojtura. I harruar = arkiv i humbur. Riimportimi do ta kërkojë. ¦ AES-256, bħall-backups protetti. Minsija = arkivju mitluf. L-importazzjoni mill-ġdid se titlobha.
+Mot de passe trop court (8 caractères au moins). ¦ Fjalëkalimi është shumë i shkurtër (të paktën 8 karaktere). ¦ Il-password hija qasira wisq (mill-inqas 8 karattri).
+Les deux mots de passe ne sont pas les mêmes. ¦ Dy fjalëkalimet nuk përputhen. ¦ Iż-żewġ passwords mhumiex l-istess.
+Mot de passe de l’archive ¦ Fjalëkalimi i arkivit ¦ Password tal-arkivju
+🙈 Écran partagé : noms, adresses et montants masqués ¦ 🙈 Ekran i ndarë: emrat, adresat dhe shumat të fshehura ¦ 🙈 Skrin maqsum: ismijiet, indirizzi u ammonti moħbija
+Échange mis à la corbeille ¦ Kontakti u zhvendos në kosh ¦ Kuntatt imċaqlaq fil-barmil
+Fusion annulée : les deux dossiers sont séparés comme avant ¦ Bashkimi u anulua: dy dosjet janë të ndara si më parë ¦ Għaqda mħassra: iż-żewġ fajls huma separati bħal qabel
+Mon cabinet (factures) ¦ Zyra ime (faturat) ¦ L-uffiċċju tiegħi (fatturi)
+L’app ne connaît ni ton statut, ni ton régime de TVA, ni les mentions que ta facture doit porter : c’est toi qui les écris, avec ton comptable. L’app les recopie telles quelles. ¦ Aplikacioni nuk e njeh statusin tënd, regjimin tënd të TVSH-së apo shënimet që duhet të ketë fatura jote: i shkruan ti me kontabilistin tënd. Aplikacioni i merr pa i ndryshuar. ¦ L-app ma tafx l-istatus tiegħek, ir-reġim tal-VAT tiegħek jew l-indikazzjonijiet li għandha jkollha l-fattura tiegħek: tiktibhom int mal-accountant tiegħek. L-app tieħuhom mingħajr ma tbiddilhom.
+Mentions à imprimer sur chaque facture (ton texte) ¦ Shënime të shtypura në çdo faturë (teksti yt) ¦ Indikazzjonijiet stampati fuq kull fattura (it-test tiegħek)
+vide : à écrire avec ton comptable ¦ bosh: shkruaje me kontabilistin tënd ¦ vojt: iktbu mal-accountant tiegħek
+Champs obligatoires pour émettre une facture ¦ Fusha të detyrueshme për të lëshuar një faturë ¦ Oqsma obbligatorji biex toħroġ fattura
+Un champ que tu as déclaré obligatoire et laissé vide : la facture n’est pas émise. ¦ Një fushë që e shënove të detyrueshme dhe e le bosh: fatura nuk lëshohet. ¦ Qasam li mmarkajt obbligatorju u ħallejtu vojt: il-fattura ma toħroġx.
+🏢 Mon cabinet ¦ 🏢 Zyra ime ¦ 🏢 L-uffiċċju tiegħi
+EXEMPLE NON JURIDIQUE — à faire écrire ou relire par ton conseil avant tout usage. ¦ SHEMBULL JO JURIDIK — para çdo përdorimi jepja këshilltarit tënd ta hartojë ose ta kontrollojë. ¦ EŻEMPJU MHUX ĠURIDIKU — qabel kull użu, ħalli lill-konsulent tiegħek jiktbu jew jiċċekkjah.
+ton titre ¦ titulli yt ¦ it-titlu tiegħek
+ton texte : écrit ou relu par ton conseil ¦ teksti yt: hartuar ose kontrolluar nga këshilltari yt ¦ it-test tiegħek: miktub jew iċċekkjat mill-konsulent tiegħek
+Mes modèles de contrat ¦ Modelet e mia të kontratës ¦ Il-mudelli tal-kuntratt tiegħi
+Ton contrat, avec des champs que l’app remplit ¦ Kontrata jote, me fushat që plotëson aplikacioni ¦ Il-kuntratt tiegħek, bl-oqsma li timla l-app
+Enregistrer la version ¦ Ruaj versionin ¦ Issejvja l-verżjoni
+L’app ne fournit aucun texte de contrat : c’est un acte qui t’engage et qui engage l’héritier, à faire écrire ou relire par ton conseil. L’app remplit des champs et garde l’historique de tes versions. ¦ Aplikacioni nuk jep asnjë tekst kontrate: është një akt që të detyron ty dhe trashëgimtarin; jepja këshilltarit tënd ta hartojë ose ta kontrollojë. Aplikacioni plotëson fushat dhe mban historikun e versioneve të tua. ¦ L-app ma tipprovdi l-ebda test ta’ kuntratt: huwa att li jorbtek lilek u lill-werriet; ħalli lill-konsulent tiegħek jiktbu jew jiċċekkjah. L-app timla l-oqsma u żżomm l-istorja tal-verżjonijiet tiegħek.
+＋ Nouveau modèle ¦ ＋ Model i ri ¦ ＋ Mudell ġdid
+Mon contrat ¦ Kontrata ime ¦ Il-kuntratt tiegħi
+Versions ¦ Versionet ¦ Verżjonijiet
+Écris ou importe ton contrat ¦ Shkruaj ose importo kontratën tënde ¦ Ikteb jew importa l-kuntratt tiegħek
+Importer un .docx / .txt ¦ Importo .docx / .txt ¦ Importa .docx / .txt
+Aperçu pour un héritier ¦ Pamje paraprake për trashëgimtarin ¦ Dehra minn qabel għall-werriet
+{defunt} n’existe pas : le nom du défunt n’est jamais dans un courrier envoyé avant signature. {pourcentage} vient de 💶 « Honoraires d’un contrat ». ¦ {defunt} nuk ekziston: emri i të ndjerit nuk është kurrë në një letër të dërguar para nënshkrimit. {pourcentage} vjen nga 💶 «Honorari i kontratës». ¦ {defunt} ma jeżistix: l-isem tad-decujus qatt mhu f’ittra mibgħuta qabel il-firma. {pourcentage} ġej minn 💶 “Onorarju tal-kuntratt”.
+version {n} ¦ versioni {n} ¦ verżjoni {n}
+Champ inconnu : {f} (ligne {l}). Corrige-le avant d’enregistrer. ¦ Fushë e panjohur: {f} (rreshti {l}). Korrigjoje para ruajtjes. ¦ Qasam mhux magħruf: {f} (linja {l}). Ikkoreġih qabel tissejvja.
+% à noter ¦ % për t’u plotësuar ¦ % biex jiddaħħal
+Champ vide : {f} ¦ Fushë bosh: {f} ¦ Qasam vojt: {f}
+Version {n} enregistrée (Mes modèles) ¦ Versioni {n} u ruajt (Modelet e mia) ¦ Verżjoni {n} issejvjata (Il-mudelli tiegħi)
+Fonds par héritier ¦ Fondet sipas trashëgimtarit ¦ Fondi skont il-werriet
+Aucun montant de succession : l’app ne connaît ni l’actif, ni le passif. On note seulement des mouvements réels que tu as vus passer. ¦ Asnjë shumë e trashëgimisë: aplikacioni nuk njeh as aktivin, as pasivin. Shënon vetëm lëvizjet reale që ke parë të kalojnë. ¦ Ebda ammont tal-wirt: l-app ma taf la l-assi u lanqas l-obbligazzjonijiet. Tniżżel biss il-movimenti reali li rajt jgħaddu.
+Reçu du notaire ¦ Marrë nga noteri ¦ Riċevut min-nutar
+Frais refacturés ¦ Shpenzime të rifaturuara ¦ Spejjeż iffatturati mill-ġdid
+Reversé ¦ Paguar ¦ Imħallas
+Reste dû ¦ Mbetet për t’u paguar ¦ Fadal biex jitħallas
+pas de contrat ¦ pa kontratë ¦ mingħajr kuntratt
+reversé de trop : {s} ¦ paguar më shumë: {s} ¦ imħallas iżjed: {s}
+✓ soldé ¦ ✓ shlyer ¦ ✓ issaldat
+à reverser ¦ për t’u paguar ¦ biex jitħallas
+Mouvements ¦ Lëvizjet ¦ Movimenti
+＋ Noter un mouvement ¦ ＋ Shëno një lëvizje ¦ ＋ Niżżel moviment
+Commission = % du contrat × montant reçu. Reste dû = reçu − commission − frais − reversé. ¦ Komisioni = % e kontratës × shuma e marrë. Mbetet = marrë − komision − shpenzime − paguar. ¦ Kummissjoni = % tal-kuntratt × ammont riċevut. Fadal = riċevut − kummissjoni − spejjeż − imħallas.
+✎ Corriger un mouvement ¦ ✎ Korrigjo lëvizjen ¦ ✎ Ikkoreġi l-moviment
+Commission proposée : {p} % de {r} = {c} (modifiable) ¦ Komisioni i propozuar: {p} % e {r} = {c} (i ndryshueshëm) ¦ Kummissjoni proposta: {p} % ta’ {r} = {c} (tista’ tinbidel)
+virement, chèque… ¦ transfertë, çek… ¦ trasferiment, ċekk…
+Versé à (représentant, si mineur ou sous tutelle) ¦ Paguar (përfaqësuesit nëse është i mitur ose nën kujdestari) ¦ Imħallas (lir-rappreżentant jekk minorenni jew taħt tutela)
+Montant incorrect. ¦ Shumë e pavlefshme. ¦ Ammont invalidu.
+Mouvement corrigé ¦ Lëvizja u korrigjua ¦ Moviment ikkoreġut
+Mouvement noté ¦ Lëvizja u shënua ¦ Moviment imniżżel
+versé à {n} ¦ {n} paguar ¦ {n} imħallas
+Décompte — {n} ¦ Pasqyra — {n} ¦ Rendikont — {n}
+Aucun mouvement noté. ¦ Asnjë lëvizje e shënuar. ¦ Ebda moviment imniżżel.
+Reste à reverser ¦ Mbetet për t’u paguar ¦ Fadal biex jitħallas
+Noter un mouvement ¦ Shëno një lëvizje ¦ Niżżel moviment
+Décompte pour l’héritier ¦ Pasqyra për trashëgimtarin ¦ Rendikont għall-werriet
+Facturer la commission ¦ Fatura komisionin ¦ Iffattura l-kummissjoni
+Facture ¦ Faturë ¦ Fattura
+Avoir ¦ Notë krediti ¦ Nota ta’ kreditu
+Devis ¦ Ofertë ¦ Kwotazzjoni
+N° de TVA ¦ Nr. TVSH ¦ Nru tal-VAT
+BROUILLON ¦ DRAFT ¦ ABBOZZ
+ÉMIS ¦ LËSHUAR ¦ MAĦRUĠ
+ÉMISE ¦ LËSHUAR ¦ MAĦRUĠA
+Client ¦ Klienti ¦ Klijent
+Total HT ¦ Totali pa TVSH ¦ Total mingħajr VAT
+TVA {r} % ¦ TVSH {r} % ¦ VAT {r} %
+Total TTC ¦ Totali me TVSH ¦ Total bil-VAT
+Commission du contrat de révélation ({p} % de la part reçue : {r}) ¦ Komision sipas kontratës së zbulimit ({p} % e pjesës së marrë: {r}) ¦ Kummissjoni skont il-kuntratt ta’ żvelar ({p} % tas-sehem riċevut: {r})
+Commission du contrat de révélation ({p} %) ¦ Komision sipas kontratës së zbulimit ({p} %) ¦ Kummissjoni skont il-kuntratt ta’ żvelar ({p} %)
+Temps passé ({h} h {m}) ¦ Koha e shpenzuar ({h} orë {m}) ¦ Ħin mgħoddi ({h} siegħa {m})
+Frais ¦ Shpenzime ¦ Spejjeż
+🧾 DEVIS ¦ 🧾 OFERTË ¦ 🧾 KWOTAZZJONI
+🧾 FACTURE ¦ 🧾 FATURË ¦ 🧾 FATTURA
+{k} {n} ¦ {k} {n} ¦ {k} {n}
+Brouillon, pas encore numéroté ¦ Draft, ende pa numër ¦ Abbozz, għadu mingħajr numru
+Garder en brouillon ¦ Mbaje si draft ¦ Żommu bħala abbozz
+Ce que l’app ne fait pas : elle ne connaît ni ton statut, ni ton régime de TVA, ni les mentions que ta facture doit porter. C’est toi qui choisis le taux et qui écris les mentions (avec ton comptable). L’app numérote sans trou, interdit de modifier une facture émise, fait les additions et garde tout. ¦ Çfarë nuk bën aplikacioni: nuk e njeh statusin tënd, regjimin e TVSH-së apo shënimet e detyrueshme. Normën e zgjedh ti, shënimet i shkruan ti (me kontabilistin tënd). Aplikacioni numëron pa boshllëqe, ndalon ndryshimin e një fature të lëshuar, mbledh dhe ruan gjithçka. ¦ X’ma tagħmilx l-app: ma tafx l-istatus tiegħek, ir-reġim tal-VAT jew l-indikazzjonijiet obbligatorji. Ir-rata tagħżilha int, l-indikazzjonijiet tiktibhom int (mal-accountant tiegħek). L-app tinnumera mingħajr vojt, tipprojbixxi l-bidla ta’ fattura maħruġa, tgħodd u żżomm kollox.
+🏢 Mon cabinet : des champs obligatoires sont vides ({f}) : la facture ne pourra pas être émise. ¦ 🏢 Zyra ime: fusha të detyrueshme bosh ({f}): fatura nuk do të mund të lëshohet. ¦ 🏢 L-uffiċċju tiegħi: oqsma obbligatorji vojta ({f}): il-fattura ma tkunx tista’ toħroġ.
+Adresse du client ¦ Adresa e klientit ¦ Indirizz tal-klijent
+Prix HT ¦ Çmimi pa TVSH ¦ Prezz mingħajr VAT
+Taux de TVA (%) — choisi par toi ¦ Norma e TVSH-së (%) — e zgjedhur nga ti ¦ Rata tal-VAT (%) — magħżula minnek
+ton taux ¦ norma jote ¦ ir-rata tiegħek
+Repris de ta dernière facture ; jamais deviné. ¦ Marrë nga fatura jote e fundit; kurrë e hamendësuar. ¦ Meħuda mill-aħħar fattura tiegħek; qatt maqtugħa.
+Aucun taux proposé : tape celui que t’a indiqué ton comptable. ¦ Asnjë normë e propozuar: shkruaj atë që të ka dhënë kontabilisti. ¦ Ebda rata proposta: ikteb dik li tak l-accountant tiegħek.
+Émettre le devis n° {n} ¦ Lësho ofertën nr. {n} ¦ Oħroġ il-kwotazzjoni nru {n}
+Émettre la facture n° {n} ¦ Lësho faturën nr. {n} ¦ Oħroġ il-fattura nru {n}
+Sur la facture ¦ Në faturë ¦ Fuq il-fattura
+à remplir ¦ për t’u plotësuar ¦ biex timtela
+⏱ Temps passé : non coché, compris dans la commission ¦ ⏱ Koha e shpenzuar: e pashënuar, e përfshirë në komision ¦ ⏱ Ħin mgħoddi: mhux immarkat, inkluż fil-kummissjoni
+taux à choisir ¦ norma për t’u zgjedhur ¦ rata x’tagħżel
+Émettre le devis {n} ? Il reste modifiable tant qu’il n’est pas accepté. ¦ Të lëshohet oferta {n}? Mund të ndryshohet derisa të pranohet. ¦ Toħroġ il-kwotazzjoni {n}? Tista’ tinbidel sakemm ma tiġix aċċettata.
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. Émettre {n} ? ¦ Një faturë e lëshuar nuk mund të ndryshohet më as të fshihet. Një notë krediti e korrigjon. Të lëshohet {n}? ¦ Fattura maħruġa ma tistax tibqa’ tinbidel jew titħassar. Nota ta’ kreditu tikkoreġiha. Toħroġ {n}?
+Émettre ¦ Lësho ¦ Oħroġ
+{n} émise ¦ {n} u lëshua ¦ {n} maħruġa
+Brouillon gardé ¦ Drafti u mbajt ¦ Abbozz miżmum
+brouillon ¦ draft ¦ abbozz
+émis ¦ lëshuar ¦ maħruġa
+avoir ¦ notë krediti ¦ nota ta’ kreditu
+✓ payée le {d} ¦ ✓ paguar {d} ¦ ✓ imħallsa {d}
+attendue ¦ pritet ¦ mistennija
+Tout le cabinet ¦ E gjithë zyra ¦ L-uffiċċju kollu
+avec les mouvements de fonds ¦ me lëvizjet e fondeve ¦ bil-movimenti tal-fondi
+CSV pour le comptable ¦ CSV për kontabilistin ¦ CSV għall-accountant
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. ¦ Një faturë e lëshuar nuk mund të ndryshohet më as të fshihet. Një notë krediti e korrigjon. ¦ Fattura maħruġa ma tistax tibqa’ tinbidel jew titħassar. Nota ta’ kreditu tikkoreġiha.
+Chercher… (n°, client, dossier) ¦ Kërko… (nr., klient, dosje) ¦ Fittex… (nru, klijent, fajl)
+TTC ¦ me TVSH ¦ bil-VAT
+🧾 Faire un avoir ¦ 🧾 Lësho një notë krediti ¦ 🧾 Oħroġ nota ta’ kreditu
+Payée… ¦ Paguar… ¦ Imħallsa…
+Accepté ¦ Pranuar ¦ Aċċettata
+Transformer en facture ¦ Shndërro në faturë ¦ Ibdel f’fattura
+Pas encore de facture. ¦ Ende asnjë faturë. ¦ Għad m’hemm l-ebda fattura.
+Brouillon supprimé (aucun numéro consommé) ¦ Drafti u fshi (asnjë numër i konsumuar) ¦ Abbozz imħassar (ebda numru ma ntuża)
+L’avoir reprend les lignes de la facture en négatif, avec son propre numéro. Il ne peut plus être modifié. ¦ Nota e kreditit merr rreshtat e faturës me shenjë minus, me numrin e vet. Nuk mund të ndryshohet më. ¦ In-nota ta’ kreditu tieħu l-linji tal-fattura b’sinjal negattiv, bin-numru tagħha. Ma tistax tibqa’ tinbidel.
+Payée ¦ Paguar ¦ Imħallsa
+Date (AAAA-MM-JJ) et moyen, ex. : 2026-11-20 virement ¦ Data (VVVV-MM-DD) dhe mënyra, p.sh.: 2026-11-20 transfertë ¦ Data (SSSS-XX-JJ) u mod, eż.: 2026-11-20 trasferiment
+Paiement noté ¦ Pagesa u shënua ¦ Ħlas imniżżel
+Devis accepté ¦ Oferta u pranua ¦ Kwotazzjoni aċċettata
+Brouillon de facture prêt ¦ Drafti i faturës gati ¦ Abbozz ta’ fattura lest
+Registre des factures ¦ Regjistri i faturave ¦ Reġistru tal-fatturi
+Factures du dossier ¦ Faturat e dosjes ¦ Fatturi tal-fajl
+Devis et factures ¦ Oferta dhe fatura ¦ Kwotazzjonijiet u fatturi
+Faire un devis ¦ Krijo një ofertë ¦ Oħloq kwotazzjoni
+Faire une facture ¦ Krijo një faturë ¦ Oħloq fattura
+Pas encore de facture pour ce dossier. ¦ Ende asnjë faturë për këtë dosje. ¦ Għad m’hemm l-ebda fattura għal dan il-fajl.
+HT ¦ pa TVSH ¦ mingħajr VAT
+{n} base(s) verrouillée(s) non lue(s) ¦ {n} baza të kyçura të palexuara ¦ {n} databases imsakkra mhux moqrija
+Dossiers ouverts ¦ Dosje të hapura ¦ Fajls miftuħa
+dont {n} clos ¦ nga të cilat {n} të mbyllura ¦ minnhom {n} magħluqa
+Délai moyen (ouvert → remis) ¦ Kohëzgjatja mesatare (hapur → dorëzuar) ¦ Tul medju (miftuħ → ikkonsenjat)
+sur {n} dossiers remis ¦ mbi {n} dosje të dorëzuara ¦ fuq {n} fajls ikkonsenjati
+pas assez de dossiers pour une moyenne ¦ shumë pak dosje për një mesatare ¦ ftit wisq fajls għal medja
+Contrats signés / refusés ¦ Kontrata të nënshkruara / refuzuara ¦ Kuntratti ffirmati / miċħuda
+{p} % signés · {n} sans réponse ¦ {p} % të nënshkruara · {n} pa përgjigje ¦ {p} % iffirmati · {n} mingħajr tweġiba
+Facturé / encaissé ({k}) ¦ Faturuar / arkëtuar ({k}) ¦ Iffatturat / miġbur ({k})
+encaissé {a} · reste {b} ¦ {a} arkëtuar · {b} mbetet ¦ {a} miġbur · {b} fadal
+Pas encore de facture : seuls le temps et les contrats sont comptés ¦ Ende asnjë faturë: numërohen vetëm koha dhe kontratat ¦ Għad m’hemm l-ebda fattura: jingħaddu biss il-ħin u l-kuntratti
+{n} en cours depuis {m} mois en moyenne ¦ {n} në vazhdim, mesatarisht {m} muaj ¦ {n} għaddejjin, medja ta’ {m} xhur
+Temps passé par dossier (heures) ¦ Koha e shpenzuar për dosje (orë) ¦ Ħin mgħoddi għal kull fajl (sigħat)
+Aucun temps noté. ¦ Asnjë kohë e shënuar. ¦ Ebda ħin imniżżel.
+Voir en tableau ¦ Shiko si tabelë ¦ Ara bħala tabella
+Facturé et encaissé par trimestre ({k}) ¦ Faturuar dhe arkëtuar sipas tremujorit ({k}) ¦ Iffatturat u miġbur skont it-trimestru ({k})
+Facturé ¦ Faturuar ¦ Iffatturat
+Encaissé ¦ Arkëtuar ¦ Miġbur
+Aucun nom d’héritier dans cette vue : des numéros de dossier et des totaux. Rien n’est écrit. ¦ Asnjë emër trashëgimtari në këtë pamje: numra dosjesh dhe totale. Asgjë nuk shkruhet. ¦ Ebda isem ta’ werriet f’din il-veduta: numri tal-fajls u totali. Xejn ma jinkiteb.
+Pour {n} ¦ Për {n} ¦ Għal {n}
+le notaire ¦ noteri ¦ nutar
+⤓ Fabriquer la copie ¦ ⤓ Krijo kopjen ¦ ⤓ Oħloq il-kopja
+Ce qui part ¦ Çfarë shkon ¦ X’imur
+Tableau des héritiers et parts, arbre, chaîne de filiation (comme le PDF) ¦ Tabela e trashëgimtarëve dhe e pjesëve, pema, zinxhiri i prejardhjes (si PDF-ja) ¦ Tabella tal-werrieta u tas-sehem, siġra, katina tal-filjazzjoni (bħall-PDF)
+📑 Pièces (images des actes) ¦ 📑 Prova (imazhe aktesh) ¦ 📑 Provi (immaġnijiet tal-atti)
+Adresses des héritiers ¦ Adresat e trashëgimtarëve ¦ Indirizzi tal-werrieta
+🕵️ Joindre les recherches faites ¦ 🕵️ Bashkëngjit kërkimet e kryera ¦ 🕵️ Waħħal ir-riċerki magħmula
+Journal, échanges, temps, factures ne partent jamais. ¦ Ditari, kontaktet, koha dhe faturat nuk shkojnë kurrë. ¦ Il-ġurnal, il-kuntatti, il-ħin u l-fatturi qatt ma jmorru.
+Protection ¦ Mbrojtja ¦ Protezzjoni
+Le fichier est chiffré (AES-256) ; la page demande le mot de passe à l’ouverture. Donne-le au notaire par un autre moyen (téléphone, SMS). Oublié = fichier illisible, même pour toi (refais-en un). ¦ Skedari është i enkriptuar (AES-256); faqja kërkon fjalëkalimin në hapje. Jepja noterit me një rrugë tjetër (telefon, SMS). I harruar = skedar i palexueshëm, edhe për ty (krijo një tjetër). ¦ Il-fajl huwa kkriptat (AES-256); il-paġna titlob il-password meta tinfetaħ. Agħtiha lin-nutar b’mod ieħor (telefon, SMS). Minsija = fajl li ma jinqarax, anki għalik (oħloq ieħor).
+Copie v{n} ; l’app garde la liste des copies faites, pas les fichiers. ¦ Kopja v{n}; aplikacioni ruan listën e kopjeve të krijuara, jo skedarët. ¦ Kopja v{n}; l-app iżżomm il-lista tal-kopji maħluqa, mhux il-fajls.
+Voilà ce qui part : {h} héritiers, {p} pièces, {a} adresse(s). ¦ Shkojnë: {h} trashëgimtarë, {p} prova, {a} adresa. ¦ Imorru: {h} werrieta, {p} provi, {a} indirizzi.
+Fiche confidentielle : {n} retirée (calcul inchangé). ¦ Skedë konfidenciale: {n} u la jashtë (llogaritja e pandryshuar). ¦ Karta kunfidenzjali: {n} imħollija barra (kalkolu mhux mibdul).
+une branche n’est pas tranchée ¦ një degë nuk është vendosur ¦ fergħa waħda mhix deċiża
+Fichier trop lourd pour un courriel (plus de 20 Mo). Continuer quand même ? ¦ Skedari është shumë i madh për email (mbi 20 MB). Të vazhdohet gjithsesi? ¦ Il-fajl huwa kbir wisq għal email (aktar minn 20 MB). Tkompli xorta?
+🤝 Copie pour le notaire ¦ 🤝 Kopje për noterin ¦ 🤝 Kopja għan-nutar
+Copie v{v} du {d}, calcul indicatif : à vérifier par l’étude. ¦ Kopja v{v} e {d}, llogaritje treguese: për t’u kontrolluar nga zyra noteriale. ¦ Kopja v{v} tal-{d}, kalkolu indikattiv: biex jiġi ċċekkjat mill-uffiċċju notarili.
+{n} · {t} ¦ {n} · {t} ¦ {n} · {t}
+Copie protégée par un mot de passe. ¦ Kopje e mbrojtur me fjalëkalim. ¦ Kopja protetta b’password.
+Copie v{n} fabriquée ¦ Kopja v{n} u krijua ¦ Kopja v{n} maħluqa
+Mouvement supprimé ¦ Lëvizja u fshi ¦ Moviment imħassar
+⚰️ Décès d’un héritier ¦ ⚰️ Vdekja e një trashëgimtari ¦ ⚰️ Il-mewt ta’ werriet
+Ce que « ✓ C’est lui » écrit : la fiche sert aussi aux autres dossiers. ¦ Çfarë shkruan «✓ Është ky person»: skeda u shërben edhe dosjeve të tjera. ¦ X’jiddaħħal “✓ Hija din il-persuna”: il-karta sservi wkoll fajls oħra.
+Le décès sur la fiche et le statut du dossier ¦ Vdekja në skedë dhe statusi në dosje ¦ Mewt fuq il-karta u status fil-fajl
+Seulement le statut du dossier ¦ Vetëm statusi në dosje ¦ Status fil-fajl biss
+Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de bruit, risque d’en rater. ¦ Gjurmët shfaqen nga ky rezultat (nga 100). Më lart: më pak zhurmë, rrezik të humbasësh ndonjë. ¦ It-traċċi jidhru minn dan il-punteġġ (minn 100). Ogħla: inqas storbju, riskju li titlef waħda.
+Après chaque nouvel import du fichier INSEE : vérifier les dossiers en cours tout seul (jamais de changement sans ton clic). ¦ Pas çdo importi të ri të skedarit INSEE: kontrollo vetë dosjet në vazhdim (kurrë ndryshim pa klikimin tënd). ¦ Wara kull importazzjoni ġdida tal-fajl INSEE: iċċekkja l-fajls għaddejjin waħedha (qatt bidla mingħajr il-klikk tiegħek).
+Automatique, dans la cloche ¦ Automatikisht, në zile ¦ Awtomatikament, fil-qanpiena
+Seulement à la main ¦ Vetëm me dorë ¦ Manwalment biss
+📋 Questionnaire ¦ 📋 Pyetësor ¦ 📋 Kwestjonarju
+Ce que l’héritier te renvoie après avoir rempli le questionnaire. ¦ Çfarë të kthen trashëgimtari pasi e plotëson. ¦ X’jibagħtlek lura l-werriet wara li jimlieh.
+Un petit fichier .json ¦ Një skedar i vogël .json ¦ Fajl .json żgħir
+La page .html remplie ¦ Faqja .html e plotësuar ¦ Il-paġna .html mimlija
+Pré-rempli : son nom et sa naissance seulement, jamais le défunt ni un montant. ¦ Paraplotësuar: vetëm emri dhe lindja e tij, kurrë i ndjeri apo një shumë. ¦ Mimli minn qabel: l-isem u t-twelid tiegħu biss, qatt id-decujus jew ammont.
+Pré-rempli (ce qui le concerne) ¦ Paraplotësuar (çfarë e prek atë) ¦ Mimli minn qabel (dak li jikkonċernah)
+Tout vide ¦ Gjithçka bosh ¦ Kollox vojt
+📞 Échanges ¦ 📞 Kontakte ¦ 📞 Kuntatti
+Où noter et relire les appels, courriels et visites. ¦ Ku shënohen dhe lexohen telefonatat, email-et dhe vizitat. ¦ Fejn jitniżżlu u jinqraw it-telefonati, l-emails u ż-żjarat.
+Un onglet du dossier et un raccourci dans 👥 Héritiers ¦ Skeda e dosjes dhe shkurtore te 👥 Trashëgimtarët ¦ Tab tal-fajl u shortcut f’👥 Werrieta
+Seulement dans 👥 Héritiers ¦ Vetëm te 👥 Trashëgimtarët ¦ F’👥 Werrieta biss
+Les courriers du Registre dans la liste des échanges. ¦ Letrat e regjistrit në listën e kontakteve. ¦ L-ittri tar-reġistru fil-lista tal-kuntatti.
+Montrés en gris, en lecture ¦ Shfaqur gri, vetëm për lexim ¦ Murija griż, għall-qari biss
+Pas montrés ¦ Të pashfaqura ¦ Mhux murija
+📮 Recommandés ¦ 📮 Rekomande ¦ 📮 Ittri reġistrati
+Relance quand l’accusé de réception n’est pas revenu (réglable aussi pour chaque courrier). ¦ Kujtesë kur dëftesa e marrjes nuk është kthyer (rregullohet edhe për çdo letër). ¦ Tfakkira meta l-avviż ta’ riċevuta ma jkunx wasal lura (tista’ tiġi aġġustata għal kull ittra).
+15 jours ¦ 15 ditë ¦ 15-il jum
+8 jours ¦ 8 ditë ¦ 8 ijiem
+21 jours ¦ 21 ditë ¦ 21 jum
+L’app n’interroge jamais La Poste : le lien ouvre la page dans ton navigateur, tu notes toi-même l’AR. ¦ Aplikacioni nuk pyet kurrë La Poste: lidhja hap faqen në shfletuesin tënd, dëftesën e shënon vetë. ¦ L-app qatt ma tistaqsi lil La Poste: il-link jiftaħ il-paġna fil-browser tiegħek, l-avviż tniżżlu int.
+Lien vers la page de suivi ¦ Lidhje te faqja e gjurmimit ¦ Link għall-paġna tat-traċċar
+Pas de lien (on copie le numéro) ¦ Pa lidhje (numri kopjohet) ¦ Ebda link (in-numru jiġi kkupjat)
+Adresse de la page de suivi, avec {numero} (https:// seulement). ¦ Adresa e faqes së gjurmimit, me {numero} (vetëm https://). ¦ Indirizz tal-paġna tat-traċċar, b’{numero} (https:// biss).
+🧾 Devis et factures ¦ 🧾 Oferta dhe fatura ¦ 🧾 Kwotazzjonijiet u fatturi
+Un seul registre : numérotation continue même si les dossiers sont dans plusieurs généalogies. ¦ Një regjistër i vetëm: numërim i vazhdueshëm, edhe nëse dosjet janë në disa pemë. ¦ Reġistru wieħed: numerazzjoni kontinwa, anki jekk il-fajls ikunu f’diversi siġar.
+Un seul registre pour le cabinet ¦ Një regjistër i vetëm për zyrën ¦ Reġistru wieħed għall-uffiċċju
+Dans la généalogie des dossiers ¦ Në pemën e dosjeve ¦ Fis-siġra tal-fajls
+Le compteur ne recule jamais ; un brouillon effacé ne consomme pas de numéro. ¦ Numëruesi nuk kthehet kurrë mbrapa; një draft i fshirë nuk konsumon numër. ¦ Il-counter qatt ma jmur lura; abbozz imħassar ma jużax numru.
+F-2026-0042 (remis à 1 chaque année) ¦ F-2026-0042 (nga 1 çdo vit) ¦ F-2026-0042 (minn 1 kull sena)
+Compteur unique (F-0042) ¦ Numërues i vetëm (F-0042) ¦ Counter wieħed (F-0042)
+La ligne « temps passé » proposée sur la facture. ¦ Rreshti «koha e shpenzuar» i propozuar në faturë. ¦ Il-linja “ħin mgħoddi” proposta fuq il-fattura.
+Temps décoché quand il y a une commission ¦ Koha e pashënuar nëse ka komision ¦ Ħin mhux immarkat jekk hemm kummissjoni
+Temps toujours coché ¦ Koha gjithmonë e shënuar ¦ Ħin dejjem immarkat
+Préfixe des factures. ¦ Parashtesa e faturave. ¦ Prefiss tal-fatturi.
+Préfixe des avoirs. ¦ Parashtesa e notave të kreditit. ¦ Prefiss tan-noti ta’ kreditu.
+Préfixe des devis. ¦ Parashtesa e ofertave. ¦ Prefiss tal-kwotazzjonijiet.
+📈 Activité ¦ 📈 Aktiviteti ¦ 📈 Attività
+La période montrée en ouvrant le tableau de bord. ¦ Periudha e shfaqur kur hapet paneli. ¦ Perjodu muri meta jinfetaħ il-pannell.
+L’année en cours ¦ Ky vit ¦ Din is-sena
+Les 12 derniers mois ¦ 12 muajt e fundit ¦ L-aħħar 12-il xahar
+Les montants facturés et encaissés. ¦ Shumat e faturuara dhe të arkëtuara. ¦ Ammonti ffatturati u miġbura.
+Au choix (bouton) ¦ Sipas kërkesës (çelës) ¦ Fuq talba (swiċċ)
+La copie contient des actes et des noms de vivants. ¦ Kopja përmban akte dhe emra personash të gjallë. ¦ Il-kopja fiha atti u ismijiet ta’ persuni ħajjin.
+Mot de passe coché au départ ¦ Fjalëkalimi i shënuar që në fillim ¦ Password immarkata mill-bidu
+Décoché au départ ¦ I pashënuar në fillim ¦ Mhux immarkat mill-bidu
+Le notaire reçoit souvent les adresses à part. ¦ Noteri shpesh i merr adresat veçmas. ¦ In-nutar spiss jirċievi l-indirizzi separatament.
+Adresses décochées au départ ¦ Adresat të pashënuara në fillim ¦ Indirizzi mhux immarkati mill-bidu
+Cochées au départ ¦ Të shënuara në fillim ¦ Immarkat mill-bidu
+🗺 Carte des héritiers ¦ 🗺 Harta e trashëgimtarëve ¦ 🗺 Mappa tal-werrieta
+Rien n’est envoyé en ligne : la commune vient de la base ; le numéro, seulement si la BAN du département est déjà dans l’app (🗺️ Plan des adresses). ¦ Asgjë nuk dërgohet në internet: komuna vjen nga baza; numri i shtëpisë vetëm nëse BAN e departamentit është tashmë në aplikacion (🗺️ Plani i adresave). ¦ Xejn ma jintbagħat onlajn: il-komun ġej mid-database; in-numru tad-dar biss jekk il-BAN tad-dipartiment diġà tkun fl-app (🗺️ Pjan tal-indirizzi).
+Le numéro de rue (BAN déjà téléchargée) ¦ Numri i shtëpisë (BAN tashmë e shkarkuar) ¦ Numru tad-dar (BAN diġà mniżżel)
+L’app n’a pas d’annuaire des notaires et n’en invente pas. ¦ Aplikacioni nuk ka listë noterësh dhe nuk shpik asnjë. ¦ L-app m’għandhiex lista ta’ nutara u ma tivvintax.
+Les notaires de tes dossiers et contacts ¦ Noterët e dosjeve dhe kontakteve të tua ¦ In-nutara tal-fajls u tal-kuntatti tiegħek
+Pas de notaires ¦ Pa noterë ¦ Ebda nutara
+Le brouillon de contrat écrit par l’app. Un contrat t’engage : fais-le écrire ou relire par ton conseil. ¦ Draft kontrate i hartuar nga aplikacioni. Një kontratë të detyron: jepja këshilltarit tënd ta hartojë ose ta kontrollojë. ¦ Abbozz ta’ kuntratt miktub mill-app. Kuntratt jorbtek: ħalli lill-konsulent tiegħek jiktbu jew jiċċekkjah.
+Retiré : page vide avec les champs ¦ Hequr: faqe bosh me fushat ¦ Imneħħi: paġna vojta bl-oqsma
+Gardé, marqué « exemple non juridique » ¦ Mbajtur, shënuar «shembull jo juridik» ¦ Miżmum, immarkat “eżempju mhux ġuridiku”
+Chaque contrat rangé retient la version utilisée. ¦ Çdo kontratë e arkivuar mban mend versionin e përdorur. ¦ Kull kuntratt iffajljat jiftakar il-verżjoni użata.
+Toutes les versions gardées ¦ Të gjitha versionet mbahen ¦ Il-verżjonijiet kollha miżmuma
+Seulement la dernière ¦ Vetëm i fundit ¦ L-aħħar waħda biss
+💶 Fonds ¦ 💶 Fondet ¦ 💶 Fondi
+Commission = % du contrat × montant reçu. ¦ Komisioni = % e kontratës × shuma e marrë. ¦ Kummissjoni = % tal-kuntratt × ammont riċevut.
+Calculée puis modifiable ¦ I llogaritur, pastaj i ndryshueshëm ¦ Ikkalkulata, imbagħad tista’ tinbidel
+Toujours tapée à la main ¦ Gjithmonë i shkruar me dorë ¦ Dejjem miktuba bl-idejn
+Le décompte à l’héritier. ¦ Pasqyra për trashëgimtarin. ¦ Rendikont għall-werriet.
+Décompte imprimable ¦ Pasqyrë për shtyp ¦ Rendikont għall-istampar
+Écran seulement ¦ Vetëm ekran ¦ Skrin biss
+🔗 Double preuve ¦ 🔗 Provë e dyfishtë ¦ 🔗 Prova doppja
+Le seuil d’un lien solide. ¦ Pragu i një lidhjeje të fortë. ¦ Limitu ta’ rabta soda.
+Deux pièces par lien ¦ Dy prova për lidhje ¦ Żewġ provi għal kull rabta
+Une seule (signaler seulement « aucune ») ¦ Vetëm një (sinjalizo vetëm «asnjë») ¦ Waħda biss (sinjala biss “ebda waħda”)
+Dans la liste « avant de remettre ». ¦ Në listën «para dorëzimit». ¦ Fil-lista “qabel il-konsenja”.
+« À revoir » (n’empêche rien) ¦ «Për t’u rishikuar» (nuk bllokon asgjë) ¦ “Biex tiġi riveduta” (ma timblokka xejn)
+Bloquant ¦ Bllokues ¦ Timblokka
+🗓 Dates importantes ¦ 🗓 Data të rëndësishme ¦ 🗓 Dati importanti
+Les rappels proposés pour une nouvelle date (réglables pour chaque date). L’app ne calcule aucun délai légal. ¦ Kujtesa të propozuara për një datë të re (të rregullueshme për çdo datë). Aplikacioni nuk llogarit asnjë afat ligjor. ¦ Tfakkiriet proposti għal data ġdida (aġġustabbli għal kull data). L-app ma tikkalkula l-ebda skadenza legali.
+J−30, J−7, J−1 ¦ D−30, D−7, D−1 ¦ J−30, J−7, J−1
+J−7 seulement ¦ Vetëm D−7 ¦ J−7 biss
+Où les voir dans 📁 Dossier. ¦ Ku i sheh në 📁 Dosje. ¦ Fejn tarahom fil-📁 Fajl.
+Dans les échéances, avec un drapeau 🗓 ¦ Te afatet, me distinktivin 🗓 ¦ Fl-iskadenzi, bil-badge 🗓
+Un bloc à part ¦ Bllok më vete ¦ Blokk separat
+👥 Fusion de dossiers ¦ 👥 Bashkimi i dosjeve ¦ 👥 Għaqda tal-fajls
+Les successions restent distinctes : le calcul n’est jamais mélangé. ¦ Trashëgimitë mbeten të ndara: llogaritja nuk përzihet kurrë. ¦ Il-wirtijiet jibqgħu separati: il-kalkolu qatt ma jitħallat.
+Deux défunts, deux calculs côte à côte ¦ Dy të ndjerë, dy llogaritje krah për krah ¦ Żewġ mejtin, żewġ kalkoli ħdejn xulxin
+Dossiers liés (recherches en commun) ¦ Dosje të lidhura (kërkime të përbashkëta) ¦ Fajls marbuta (riċerki komuni)
+Combien de temps la fusion peut être annulée. ¦ Sa kohë mund të anulohet një bashkim. ¦ Kemm iddum tista’ titħassar għaqda.
+↶ pendant 30 jours ¦ ↶ për 30 ditë ¦ ↶ għal 30 jum
+↶ tant que rien n’a été ajouté ¦ ↶ sa kohë nuk është shtuar asgjë ¦ ↶ sakemm ma jiżdied xejn
+Joindre les recherches faites au dossier du notaire. ¦ Bashkëngjit kërkimet e kryera në dosjen për noterin. ¦ Waħħal ir-riċerki magħmula mal-fajl għan-nutar.
+Coché au départ ¦ Të shënuara në fillim ¦ Immarkat mill-bidu
+📦 Archive ¦ 📦 Arkivi ¦ 📦 Arkivju
+Le mot de passe de l’archive de fin de dossier. Oublié = archive perdue. ¦ Fjalëkalimi i arkivit në fund të një dosjeje. I harruar = arkiv i humbur. ¦ Password tal-arkivju fl-aħħar ta’ fajl. Minsija = arkivju mitluf.
+Proposé, coché ¦ I propozuar, i shënuar ¦ Propost, immarkat
+Pas proposé ¦ I papropozuar ¦ Mhux propost
+💡 Autres idées ¦ 💡 Ide të tjera ¦ 💡 Ideat oħra
+🔗 Le dossier lié d’un héritier mort après le défunt. ¦ 🔗 Dosje e lidhur për një trashëgimtar të vdekur pas të ndjerit. ¦ 🔗 Fajl marbut għal werriet li miet wara d-decujus.
+Ses descendants rattachés ¦ Pasardhësit e tij të lidhur ¦ Id-dixxendenti tiegħu marbuta
+📮 Une lettre par service : quels actes. ¦ 📮 Një letër për zyrë: cilat akte. ¦ 📮 Ittra waħda għal kull uffiċċju: liema atti.
+Manquants et déjà demandés ¦ Ato që mungojnë dhe ato të kërkuara tashmë ¦ Neqsin u diġà mitluba
+⏳ Délai de réponse par organisme. ¦ ⏳ Koha e përgjigjes sipas zyrës. ¦ ⏳ Ħin ta’ tweġiba skont l-uffiċċju.
+⏳ Nombre de courriers avant de donner un délai. ¦ ⏳ Numri i letrave para se të shfaqet një kohë. ¦ ⏳ Numru ta’ ittri qabel jintwera ħin.
+📅 La cloche prévient avant qu’une copie d’acte soit trop ancienne (durée tapée par toi pour chaque pièce). ¦ 📅 Zilja paralajmëron para se një kopje akti të bëhet shumë e vjetër (afatin e fut për çdo provë). ¦ 📅 Il-qanpiena twissik qabel ma kopja ta’ att issir qadima wisq (iż-żmien iddaħħlu għal kull prova).
+7 jours ¦ 7 ditë ¦ 7 ijiem
+🙈 Écran partagé : ce qui remplace les noms. ¦ 🙈 Ekran i ndarë: çfarë zëvendëson emrat. ¦ 🙈 Skrin maqsum: x’jieħu post l-ismijiet.
+Initiales ¦ Inicialet ¦ Inizjali
+Numéros (Héritier 1, 2…) ¦ Numra (Trashëgimtari 1, 2…) ¦ Numri (Werriet 1, 2…)
+🙈 Écran partagé : les montants. ¦ 🙈 Ekran i ndarë: shumat. ¦ 🙈 Skrin maqsum: l-ammonti.
+Montants masqués ¦ Shumat të fshehura ¦ Ammonti moħbija
+Montants visibles ¦ Shumat të dukshme ¦ Ammonti viżibbli
+avec AR ¦ me dëftesë marrjeje ¦ b’avviż ta’ riċevuta
+sans AR ¦ pa dëftesë marrjeje ¦ mingħajr avviż ta’ riċevuta
+lettre suivie ¦ dërgesë e gjurmuar ¦ bgħit traċċat
+pas en recommandé ¦ jo rekomande ¦ mhux reġistrata
+Son état civil ¦ Gjendja e tij civile ¦ L-istat ċivili tiegħu
+nom de naissance, prénoms, date et lieu de naissance ¦ mbiemri i lindjes, emrat, data dhe vendi i lindjes ¦ kunjom tat-twelid, ismijiet, data u post tat-twelid
+mariage, PACS, divorce, dates ¦ martesë, partneritet, divorc, data ¦ żwieġ, sħubija, divorzju, dati
+prénoms, dates de naissance, décédés ? ¦ emra, data lindjeje, të vdekur? ¦ ismijiet, dati tat-twelid, mejtin?
+avec un moyen de les joindre ¦ me një mënyrë për t’i kontaktuar ¦ b’mod kif tilħaqhom
+Documents qu’il peut fournir ¦ Dokumente që mund të japë ¦ Dokumenti li jista’ jipprovdi
+livret de famille, actes, jugement… ¦ libreza e familjes, akte, vendim… ¦ ktieb tal-familja, atti, sentenza…
+Une question à toi ¦ Pyetja jote ¦ Il-mistoqsija tiegħek
+💾 Fichier à remplir ¦ 💾 Skedar për t’u plotësuar ¦ 💾 Fajl biex jimtela
+🖨 Papier (PDF) ¦ 🖨 Letër (PDF) ¦ 🖨 Karta (PDF)
+Ce qui le concerne ¦ Çfarë e prek atë ¦ Dak li jikkonċernah
+Famille connue ¦ Familja e njohur ¦ Familja magħrufa
+Sa question ¦ Pyetja e tij ¦ Il-mistoqsija tiegħu
+Reversé à l’héritier ¦ Paguar trashëgimtarit ¦ Imħallas lill-werriet
+SIRET ¦ SIRET ¦ SIRET
+Mentions ¦ Shënime ¦ Indikazzjonijiet
+Trimestre ¦ Tremujori ¦ Trimestru
+Personnes rattachées ¦ Skeda të lidhura ¦ Karti marbuta
+Courriers, échanges, fonds ¦ Letra, kontakte, fonde ¦ Ittri, kuntatti, fondi
+Temps et frais, échéances ¦ Koha dhe shpenzimet, afatet ¦ Ħin u spejjeż, skadenzi
+Questionnaire d’héritier fabriqué ¦ Pyetësori i trashëgimtarit u krijua ¦ Kwestjonarju tal-werriet maħluq
+Réponses d’un questionnaire écrites ¦ Përgjigjet e pyetësorit u futën ¦ Tweġibiet tal-kwestjonarju mdaħħla
+Copie du dossier pour le notaire ¦ Kopja e dosjes për noterin ¦ Kopja tal-fajl għan-nutar
+Facture émise ou imprimée ¦ Fatura u lëshua ose u shtyp ¦ Fattura maħruġa jew stampata
+Registre des factures (CSV) ¦ Regjistri i faturave (CSV) ¦ Reġistru tal-fatturi (CSV)
+Décompte des fonds imprimé ¦ Pasqyra e fondeve u shtyp ¦ Rendikont tal-fondi stampat
+Recherches faites (pour le notaire) ¦ Kërkime të kryera (për noterin) ¦ Riċerki magħmula (għan-nutar)
+Image de la carte des héritiers ¦ Imazhi i hartës së trashëgimtarëve ¦ Immaġni tal-mappa tal-werrieta
+Contrat imprimé ¦ Kontrata u shtyp ¦ Kuntratt stampat
+Dossiers fusionnés ¦ Dosjet u bashkuan ¦ Fajls magħquda
+chiffrée ¦ e enkriptuar ¦ ikkriptata
+sans mot de passe ¦ pa fjalëkalim ¦ mingħajr password
+avec les adresses ¦ me adresa ¦ bl-indirizzi
+sans adresse ¦ pa adresë ¦ mingħajr indirizz
+deux défunts ¦ dy të ndjerë ¦ żewġ mejtin
+dossiers liés ¦ dosje të lidhura ¦ fajls marbuta
+Aucune lettre à ranger. ¦ Asnjë letër për t’u arkivuar. ¦ Ebda ittra biex tiġi ffajljata.
+Avec qui ? ¦ Me kë? ¦ Ma’ min?
+Ce dossier est archivé : rouvre-le d’abord. ¦ Kjo dosje është e arkivuar: rihape fillimisht. ¦ Dan il-fajl huwa arkivjat: erġa’ iftaħu l-ewwel.
+Ce fichier n’est pas un .docx. ¦ Ky skedar nuk është .docx. ¦ Dan il-fajl mhux .docx.
+Ce n’est pas un devis. ¦ Kjo nuk është ofertë. ¦ Din mhix kwotazzjoni.
+Cette facture a déjà un avoir. ¦ Kjo faturë ka tashmë një notë krediti. ¦ Din il-fattura diġà għandha nota ta’ kreditu.
+Choisis la date. ¦ Zgjidh një datë. ¦ Agħżel data.
+Choisis toi-même le taux de TVA (avec ton comptable) avant d’émettre. ¦ Zgjidh vetë normën e TVSH-së (me kontabilistin tënd) para lëshimit. ¦ Agħżel ir-rata tal-VAT int stess (mal-accountant tiegħek) qabel toħroġ.
+Choisis un autre dossier. ¦ Zgjidh një dosje tjetër. ¦ Agħżel fajl ieħor.
+Dossier clos ou archivé : rouvre-le d’abord. ¦ Dosje e mbyllur ose e arkivuar: rihape fillimisht. ¦ Fajl magħluq jew arkivjat: erġa’ iftaħu l-ewwel.
+Déjà émise. ¦ E lëshuar tashmë. ¦ Diġà maħruġa.
+Facture introuvable. ¦ Fatura nuk u gjet. ¦ Fattura ma nstabitx.
+La facture n’a aucune ligne. ¦ Fatura nuk ka asnjë rresht. ¦ Il-fattura m’għandha l-ebda linja.
+La fusion date de plus de 30 jours : elle ne peut plus être annulée. ¦ Bashkimi është më i vjetër se 30 ditë: nuk mund të anulohet më. ¦ L-għaqda hija eqdem minn 30 jum: ma tistax titħassar aktar.
+Le mot de passe est obligatoire (réglage). ¦ Fjalëkalimi është i detyrueshëm (cilësim). ¦ Il-password hija obbligatorja (setting).
+Ligne INSEE introuvable. ¦ Rreshti INSEE nuk u gjet. ¦ Linja INSEE ma nstabitx.
+Ligne incorrecte : quantité ou prix. ¦ Rresht i pavlefshëm: sasia ose çmimi. ¦ Linja invalida: kwantità jew prezz.
+Mouvement introuvable. ¦ Lëvizja nuk u gjet. ¦ Moviment ma nstabx.
+Numéro déjà pris : renuméroter le brouillon. ¦ Numri është i zënë: rinumëro draftin. ¦ Numru diġà meħud: erġa’ nnumera l-abbozz.
+Où as-tu cherché ? ¦ Ku kërkove? ¦ Fejn fittixt?
+Quelque chose a été ajouté depuis la fusion : elle ne peut plus être annulée. ¦ Diçka është shtuar që nga bashkimi: nuk mund të anulohet më. ¦ Żdied xi ħaġa mill-għaqda ’l hawn: ma tistax titħassar aktar.
+Seule une facture émise peut être payée. ¦ Vetëm një faturë e lëshuar mund të paguhet. ¦ Fattura maħruġa biss tista’ titħallas.
+Taux de TVA incorrect (ex. : le taux que t’a indiqué ton comptable). ¦ Normë e pavlefshme TVSH-je (p.sh.: norma që të ka dhënë kontabilisti). ¦ Rata tal-VAT invalida (eż.: ir-rata li tak l-accountant tiegħek).
+Type d’événement « Décès » introuvable. ¦ Lloji i ngjarjes «Vdekje» nuk u gjet. ¦ It-tip ta’ avveniment “Mewt” ma nstabx.
+Un avoir corrige une facture émise. ¦ Një notë krediti korrigjon një faturë të lëshuar. ¦ Nota ta’ kreditu tikkoreġi fattura maħruġa.
+Un devis accepté ne se modifie plus. ¦ Një ofertë e pranuar nuk ndryshohet më. ¦ Kwotazzjoni aċċettata ma tibqax tinbidel.
+« D’où vient cette date » est obligatoire. ¦ «Nga vjen kjo datë» është e detyrueshme. ¦ “Minn fejn ġejja din id-data” hija obbligatorja.
+Échange introuvable. ¦ Kontakti nuk u gjet. ¦ Kuntatt ma nstabx.
+💶 Un reversement reste en attente : archiver quand même ? ¦ 💶 Një pagesë është ende në pritje: të arkivohet gjithsesi? ¦ 💶 Ħlas għadu pendenti: tarkivja xorta?
+🔐 Archive protégée : tape son mot de passe. ¦ 🔐 Arkiv i mbrojtur: shkruaj fjalëkalimin e tij. ¦ 🔐 Arkivju protett: ikteb il-password tiegħu.
+🏢 Mon cabinet : un champ que tu as déclaré obligatoire est vide ({f}) : la facture n’est pas émise. ¦ 🏢 Zyra ime: një fushë që e shënove të detyrueshme është bosh ({f}): fatura nuk lëshohet. ¦ 🏢 L-uffiċċju tiegħi: qasam li mmarkajt obbligatorju huwa vojt ({f}): il-fattura ma toħroġx.
+J−{n} ¦ D−{n} ¦ J−{n}
+=descendant rattaché ¦ pasardhës i lidhur|pasardhës të lidhur ¦ dixxendent marbut|dixxendenti marbuta|dixxendenti marbuta|dixxendent marbut|dixxendent marbut
+=échange noté ¦ kontakt i shënuar|kontakte të shënuara ¦ kuntatt imniżżel|kuntatti mniżżla|kuntatti mniżżla|kuntatt imniżżel|kuntatt imniżżel

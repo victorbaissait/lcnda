@@ -119,7 +119,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
             assert.match(php("echo $pdo->query(\"SELECT count(*) FROM sqlite_master WHERE type='table' AND name IN ('succ_case_persons','succ_homonym_no')\")->fetchColumn();").stdout, /^2$/);
             assert.match(php("echo $pdo->query(\"SELECT count(*) FROM pragma_table_info('succ_cases') WHERE name IN ('progress','progress_json')\")->fetchColumn();").stdout, /^2$/);
             const s = await get('settings');
-            assert.deepEqual(s.settings, { store: '', apart_id: '', outside: 'grey', archive_addresses: 'remove', refuse_done: true, weights: [10, 15, 20, 10, 15, 20, 10], move_shared: 'copy', nodossier: 'fold', private_heirs: true });
+            const { p2, cabinet, ...rest } = s.settings; assert.deepEqual(rest, { store: '', apart_id: '', outside: 'grey', archive_addresses: 'remove', refuse_done: true, weights: [10, 15, 20, 10, 15, 20, 10], move_shared: 'copy', nodossier: 'fold', private_heirs: true }); assert.equal(p2.insee_threshold, 40, 'outils de plus : les valeurs conseillées (successoral_plus2.php)'); assert.deepEqual(cabinet.required, ['name']);
             const r = await w({ op: 'settings_save', settings: { outside: 'hide', weights: [10, 10, 10, 10, 10, 10, 40], nodossier: 'bof' } });
             assert.equal(r.settings.outside, 'hide'); assert.equal(r.settings.nodossier, 'fold', 'valeur inconnue ignorée'); assert.equal(r.prev.outside, 'grey');
             await w({ op: 'settings_save', settings: { outside: r.prev.outside, weights: r.prev.weights } });

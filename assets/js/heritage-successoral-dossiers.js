@@ -315,7 +315,7 @@
             <div><b>${esc(i18n('Avancement : un héritier qui refuse de signer'))}</b><label class="succ-radio"><input type="checkbox" data-succ-set="refuse_done"${st.refuse_done ? ' checked' : ''}> ${esc(i18n('compte comme « fait » (étape 5)'))}</label></div>
             <div><b>${esc(i18n('Avancement : poids des 7 étapes'))}</b><div class="succ-weights">${S().STEP_LABELS.map((l, i) => `<label>${i + 1}. ${esc(i18n(l))}<input type="number" min="0" max="100" value="${Number(w[i]) || 0}" data-succ-weight="${i}"></label>`).join('')}</div>
             <button type="button" class="button small secondary" data-succ-wreset>${esc(i18n('↺ Remettre comme au départ'))}</button></div>
-            </div></div></section>`;
+            </div>${ext.succPlus2?.settingsHtml?.(st) || '' /* ⚖️ les réglages des outils de plus (heritage-successoral-plus2.js) */}</div></section>`;
     }
     async function saveSetting(patch, label) {
         const prev = {...cfg()};
@@ -353,7 +353,7 @@
     async function openSetting(which = 'private') {
         const st = A().state; st.maintenanceTab = 'design'; await A().setModule('maintenance');
         for (let i = 0; i < 60; i++) {
-            const el = document.getElementById(which === 'private' ? 'succ-set-private' : 'succ-reglages');
+            const el = document.getElementById(which === 'private' ? 'succ-set-private' : String(which).startsWith('sp2-') ? which : 'succ-reglages'); // « sp2-… » : un outil de plus
             if (el) { el.scrollIntoView({behavior: 'smooth', block: 'center'}); el.classList.add('succ-flash'); setTimeout(() => el.classList.remove('succ-flash'), 2400); el.querySelector('input')?.focus({preventScroll: true}); return; }
             await new Promise(r => setTimeout(r, 120));
         }
@@ -430,6 +430,7 @@
     const synced = new Map();
     ext.succDossiers = ext.succDossiers || {};
     ext.succDossiers.openSetting = openSetting;
+    ext.succDossiers.refreshSettings = () => { SET = null; return refreshSettingsPanel(); }; // ⚖️ après un réglage des outils de plus
     ext.succDossiers.memDirty = () => { MEM.at = 0; };
     ext.succDossiers.afterCompute = async (D, R, P_) => {
         if (!D?.id || !R || R.error || D.archived || hidden()) return;
@@ -763,17 +764,23 @@
             body: `<p>${esc(i18n('Le fichier {file} contient : le dossier, le journal, les pièces et leurs images, les courriers, l’arbre de dévolution (SVG), le tableau pour le notaire et les fiches rattachées ({n}).', {file: name, n}))}</p>
                 <div class="succ-store" role="radiogroup"><label class="succ-store-opt"><input type="radio" name="addr" value="keep"${keep ? ' checked' : ''}> <span><b>${esc(i18n('Garder les adresses des vivants dans le fichier'))}</b><small>${esc(i18n('utile si le notaire rouvre la succession'))}</small></span></label>
                 <label class="succ-store-opt"><input type="radio" name="addr" value="remove"${keep ? '' : ' checked'}> <span><b>${esc(i18n('Retirer les adresses'))}</b><small>${esc(i18n('comme l’archivage actuel'))}</small></span></label></div>
-                <p>${esc(i18n('Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base ({n}). Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste ({k}). Une sauvegarde est faite avant.', {n: rm.remove.length, k: rm.keep.length}))}</p>`,
+                <p>${esc(i18n('Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base ({n}). Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste ({k}). Une sauvegarde est faite avant.', {n: rm.remove.length, k: rm.keep.length}))}</p>
+                ${ext.succPlus2?.archiveExtraHtml?.(D) || '' /* 📦 ce qui part en plus, mot de passe (heritage-successoral-plus2.js) */}`,
             onSubmit: async f => {
                 const keepAddr = f.querySelector('[name=addr]:checked')?.value === 'keep';
+                const pw = ext.succPlus2?.archivePassword ? ext.succPlus2.archivePassword(f) : ''; if (pw === false) return false;
                 const svg = ext.successoral?.treeSvg ? ext.successoral.treeSvg(D, R) : '';
                 const html = ext.successoral?.notaryHtml ? ext.successoral.notaryHtml(D, R, keepAddr) : '';
-                let r; try { r = await post({op: 'archive_file', id: D.id, keep_addresses: keepAddr ? 1 : 0, svg, notary_html: html}); } catch (e) { toast(e.message, 'error'); return false; }
+                const send = extra => post({op: 'archive_file', id: D.id, keep_addresses: keepAddr ? 1 : 0, svg, notary_html: html, ...(pw ? {password: pw} : {}), ...extra});
+                let r; try { r = await send({}); } catch (e) {
+                    if (!/^💶/.test(e.message) || !(await A().confirmBox(e.message, {title: i18n('🗄 Archiver le dossier clos'), okLabel: i18n('Archiver')}))) { if (!/^💶/.test(e.message)) toast(e.message, 'error'); return false; }
+                    try { r = await send({funds_ok: 1}); } catch (e2) { toast(e2.message, 'error'); return false; }
+                }
                 invalidate();
                 const a = document.createElement('a'); a.href = `api.php?action=successoral&op=archive_download&token=${encodeURIComponent(r.token)}&g=${encodeURIComponent(window.LCNDA_GENEALOGY || 'main')}`; a.download = r.file; document.body.appendChild(a); a.click(); a.remove();
                 if (filterIds().includes(D.id)) setFilter(filterIds().filter(x => x !== D.id), {reload: false});
                 A().undoToast(i18n('Dossier {n} archivé dans « {file} » et retiré ({what})', {n: D.number, file: r.file, what: plural(r.removed, 'fiche retirée', 'fiches retirées')}),
-                    {undo: async () => { const x = await post({op: 'reimport', token: r.token, to: gidOf()}); invalidate(); ext.successoral?.openCase?.(x.case_id); }});
+                    {undo: async () => { const x = await post({op: 'reimport', token: r.token, to: gidOf(), ...(pw ? {password: pw} : {})}); invalidate(); ext.successoral?.openCase?.(x.case_id); }});
                 ext.successoral?.openCase?.(0);
             }});
     }
@@ -789,7 +796,13 @@
                 up = j.result;
             } catch (e) { return toast(e.message, 'error'); }
             await settings(true);
-            let pv; try { pv = await get('reimport_preview', {token: up.token, to: gidOf()}); } catch (e) { return toast(e.message, 'error'); }
+            let pv, pw = '';
+            try { pv = await get('reimport_preview', {token: up.token, to: gidOf()}); } catch (e) {
+                // 📦 archive protégée : le mot de passe est demandé, envoyé seulement par POST (jamais dans l'adresse)
+                if (!/^🔐/.test(e.message) || !ext.succPlus2?.askArchivePassword) return toast(e.message, 'error');
+                pw = await ext.succPlus2.askArchivePassword(); if (!pw) return;
+                try { pv = await post({op: 'p2_reimport_preview', token: up.token, to: gidOf(), password: pw}); } catch (e2) { return toast(e2.message, 'error'); }
+            }
             const gens = (SET.genealogies || []).filter(g => !g.example);
             ext.openDialog({eyebrow: i18n('⤒ RÉIMPORTER'), title: file.name, wide: true, submitLabel: i18n('⤒ Réimporter le dossier'),
                 body: `<p>${esc(i18n('Dossier {n} ({name}{closed}), {what}.', {n: pv.number, name: pv.deceased, closed: pv.closed ? ', ' + i18n('clos le {d}', {d: fmtDate(pv.closed)}) : '', what: plural(pv.persons, 'fiche')}))}</p>
@@ -797,7 +810,7 @@
                     <label>${esc(i18n('Dans'))}<select name="to">${gens.map(g => `<option value="${esc(g.id)}"${g.id === gidOf() ? ' selected' : ''}>${g.main ? '🌳' : '⚖️'} ${esc(g.name)}</option>`).join('')}</select></label>`,
                 onSubmit: async f => {
                     const to = f.elements.to.value;
-                    let r; try { r = await post({op: 'reimport', token: up.token, to}); } catch (e) { toast(e.message, 'error'); return false; }
+                    let r; try { r = await post({op: 'reimport', token: up.token, to, ...(pw ? {password: pw} : {})}); } catch (e) { toast(e.message, 'error'); return false; }
                     invalidate();
                     if (r.here) {
                         A().undoToast(i18n('Dossier {n} réimporté ({what})', {n: pv.number, what: plural(r.persons, 'fiche')}), {undo: async () => { await post({op: 'reimport_undo', case_id: r.case_id}); invalidate(); ext.successoral?.openCase?.(0); }});

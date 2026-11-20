@@ -1,0 +1,610 @@
+fr ¦ tr
+# Zone « successoral-plus-2 » : ⚖️ outils de plus du généalogiste successoral (heritage-successoral-plus2*.js, lib/successoral_plus2.php, lib/successoral_factures.php)
+Réglages de cet outil ¦ Bu aracın ayarları
+(conseillé) ¦ (önerilen)
+Autre : ¦ Diğer:
+Outils du dossier : réglages ¦ Dosya araçları: ayarlar
+Chaque choix se change ici ; l’option conseillée est celle du départ. ¦ Her seçimi buradan değiştirirsin; önerilen varsayılandır.
+Réglage enregistré : {what} ¦ Ayar kaydedildi: {what}
+Adresse refusée : https:// et {numero} sont obligatoires. ¦ Adres reddedildi: https:// ve {numero} zorunludur.
+Carte des héritiers (dossiers en cours) ¦ Mirasçılar haritası (süren dosyalar)
+Délai de réponse par organisme ¦ Daireye göre yanıt süresi
+🙈 Écran partagé ¦ 🙈 Paylaşılan ekran
+Fusionner avec un autre dossier… ¦ Başka bir dosyayla birleştir…
+Annuler la dernière fusion ¦ Son birleştirmeyi geri al
+nom de naissance ¦ doğum soyadı
+prénom ¦ ad
+né(e) le {d} ¦ doğum {d}
+même mois ¦ aynı ay
+même année ¦ aynı yıl
+± 1 an ¦ ± 1 yıl
+date inconnue ¦ tarih bilinmiyor
+date de naissance différente ¦ farklı doğum tarihi
+même département ¦ aynı departman
+lieu inconnu sur la fiche ¦ kartta yer bilinmiyor
+lieu : {p} ¦ yer: {p}
+Le fichier des décès n’est pas dans l’app. ¦ Ölüm dosyası uygulamada yok.
+⤒ Importer les décès ¦ ⤒ Ölümleri içe aktar
+L’import se fait une seule fois, depuis data.gouv.fr (environ 25 millions de lignes depuis 1970), ou par années choisies. ¦ İçe aktarma bir kez yapılır, data.gouv.fr'den (1970'ten beri yaklaşık 25 milyon satır) veya seçilen yıllar için.
+fichier importé : décès {a} → {b} ¦ içe aktarılan dosya: ölümler {a} → {b}
+un décès plus ancien ne peut pas être trouvé ¦ daha eski bir ölüm bulunamaz
+plafonné à {n} ¦ {n} ile sınırlı
+acte n° {n} ¦ kayıt no. {n}
+avant le défunt : si c’est cette personne, ses enfants viennent à sa place (représentation). ¦ murisden önce: bu kişiyse, onun yerine çocukları mirasçı olur (halefiyet).
+après le défunt : sa part passe à ses propres héritiers. ¦ murisden sonra: payı kendi mirasçılarına geçer.
+Les Français nés à l’étranger ont leur acte au Service central d’état civil (Nantes). ¦ Yurt dışında doğan Fransızların kaydı Merkezi Nüfus Dairesi'ndedir (Nantes).
+déjà confirmé ¦ zaten onaylandı
+C’est cette personne ¦ Bu kişi
+Pas la même personne ¦ Aynı kişi değil
+Nom de naissance inconnu : cherché sous {n}, pistes moins sûres ¦ Doğum soyadı bilinmiyor: {n} olarak arandı, daha az kesin izler
+Deux personnes se ressemblent : demande l’acte avant de choisir ¦ İki kişi birbirine benziyor: seçmeden önce kaydı iste
+rien trouvé dans le fichier ¦ dosyada hiçbir şey bulunamadı
+« Rien trouvé » ne veut pas dire « vivant » (un décès à l’étranger manque souvent). ¦ “Hiçbir şey bulunamadı” “hayatta” demek değildir (yurt dışındaki ölüm çoğu zaman eksiktir).
+Les héritiers « vivants » comparés au fichier des décès ¦ “Hayatta” mirasçılar ölüm dosyasıyla karşılaştırıldı
+pistes à partir de {n} ¦ {n} puandan itibaren izler
+Aucun héritier « vivant » à vérifier dans ce dossier. ¦ Bu dosyada kontrol edilecek “hayatta” mirasçı yok.
+Comment c’est calculé ¦ Nasıl hesaplanır
+Le nom de naissance, sans accents ni tirets ; jamais le nom d’épouse (l’INSEE donne le nom de naissance). ¦ Doğum soyadı, aksan ve tire olmadan; asla evlilik soyadı değil (INSEE doğum soyadını tutar).
+Le premier prénom de la fiche parmi les prénoms INSEE ; Jean-Pierre = Jean Pierre. ¦ Karttaki ilk ad, INSEE adları arasında; Jean-Pierre = Jean Pierre.
+Jour exact 30 · même mois 20 · même année 12 · ± 1 an 6 ; sans date : plafond 70. ¦ Tam gün 30 · aynı ay 20 · aynı yıl 12 · ± 1 yıl 6; tarihsiz: en çok 70.
+La commune ; même département 10 ; né à l’étranger : le pays (plafond 80). ¦ Belediye; aynı departman 10; yurt dışında doğmuş: ülke (en çok 80).
+Différent : la piste est écartée. ¦ Aksi halde: iz reddedilir.
+Pistes écartées ({n}) ¦ Reddedilen izler ({n})
+Piste remise ¦ İz geri getirildi
+« Pas la même personne » retenu : cette piste ne reviendra plus ¦ “Aynı kişi değil” hatırlandı: bu iz geri gelmeyecek
+Sur la fiche de {n} : un décès le {d}, source « Fichier des personnes décédées (INSEE) », avec la date du relevé. ¦ {n} kartında: ölüm {d}, kaynak “Ölen kişiler dosyası (INSEE)”, kontrol tarihiyle.
+Dans ce dossier : statut retenu « {s} » ; le calcul est refait. ¦ Bu dosyada: “{s}” durumu tutuldu; hesap yeniden yapılır.
+Ce qui va changer ¦ Ne değişir
+{n} marqué(e) décédé(e) (INSEE). Calcul refait. ¦ {n} ölmüş olarak işaretlendi (INSEE). Hesap yeniden yapıldı.
+Vérifier les décès ¦ Ölümleri kontrol et
+Questionnaire… ¦ Anket…
+⚰️ INSEE : {n} piste(s) ¦ ⚰️ INSEE: {n} iz
+⚰️ vérifié le {d} ¦ ⚰️ kontrol edildi {d}
+🕵️ Recherches ¦ 🕵️ Araştırmalar
+📞 Noter un échange ¦ 📞 Bir görüşme not et
+Ouvrir un dossier lié ¦ Bağlı dosyayı aç
+Dossiers liés ¦ Bağlı dosyalar
+Succession de {n} ¦ {n} mirası
+dossier d’origine {n} ¦ kaynak dosya {n}
+Deux défunts, deux calculs : les successions restent distinctes. ¦ İki ölü, iki hesap: miraslar ayrı kalır.
+Aucun héritier trouvé d’après les fiches. ¦ Kartlara göre mirasçı bulunamadı.
+Échanges ¦ Görüşmeler
+Noter un échange ¦ Bir görüşme not et
+Les courriers du Registre ne sont pas recopiés ici : ils sont montrés en gris, en lecture. ¦ Kayıt defterindeki mektuplar buraya kopyalanmaz: gri, salt okunur görünürler.
+Chercher… (personne, résumé) ¦ Ara… (kişi, özet)
+du dossier fusionné ¦ birleştirilen dosyadan
+Registre de courriers, n° {n} ¦ Yazışma defteri, no. {n}
+Aucun échange noté. ¦ Not edilmiş görüşme yok.
+✎ Corriger un échange ¦ ✎ Görüşmeyi düzelt
+＋ Noter un échange ¦ ＋ Bir görüşme not et
+Avec (héritier, notaire, mairie…) ¦ Kiminle (mirasçı, noter, belediye…)
+Prochaine action ¦ Sonraki adım
+Durée (minutes) ¦ Süre (dakika)
+⏱ Compter la durée dans 💶 Temps ¦ ⏱ Süreyi 💶 Zaman'a say
+C’est une recherche (va dans 🕵️ Recherches) ¦ Bu bir araştırma (🕵️ Araştırmalar'a gider)
+Avec une date, une échéance va dans le dossier et dans la 🔔 cloche (jamais le résumé). ¦ Tarihle birlikte süre dosyaya ve 🔔 zile gider (özet asla).
+Échange corrigé (noté au 🕓 Journal) ¦ Görüşme düzeltildi (🕓 Günlük'e yazıldı)
+Échange noté ¦ Görüşme not edildi
+Trois fois « ne répond pas » de suite : noter 🔇 ne répond pas ? ¦ Üst üste üç kez “yanıt vermiyor”: 🔇 yanıt vermiyor not edilsin mi?
+Recommandé ¦ Taahhütlü
+Envoyé en recommandé ¦ Taahhütlü gönderildi
+N° du recommandé ¦ Taahhütlü gönderi no.
+Numéro inhabituel, gardé tel quel. ¦ Alışılmadık numara, olduğu gibi tutuldu.
+AR reçu le ¦ Alındı belgesi geldi
+Relance si rien après (jours) ¦ Şu kadar (gün) sonra hiçbir şey yoksa hatırlatma
+Réponse reçue le ¦ Yanıt geldi
+Retour du courrier ¦ Mektup iade
+pli non distribué ¦ alıcı teslim almadı
+destinataire inconnu ¦ alıcı bilinmiyor
+AR reçu aujourd’hui ¦ Alındı belgesi bugün
+Suivre en ligne ¦ Çevrimiçi takip et
+Copier le numéro ¦ Numarayı kopyala
+L’app ne fait aucune requête : le lien ouvre la page de suivi dans ton navigateur ; tu notes toi-même la date de l’AR. ¦ Uygulama hiçbir istek göndermez: bağlantı takip sayfasını tarayıcında açar; alındı belgesinin tarihini sen girersin.
+Tape d’abord le numéro. ¦ Önce numarayı yaz.
+Numéro copié ¦ Numara kopyalandı
+Courrier revenu : noter 🔎 introuvable pour cet héritier ? ¦ Mektup geri döndü: bu mirasçı için 🔎 bulunamadı not edilsin mi?
+✓ AR {d} ¦ ✓ Alındı {d}
+revenu ¦ iade
+📮 sans AR · {n} j ¦ 📮 alındısız · {n} g
+Recommandés ¦ Taahhütlü gönderiler
+Sans AR ¦ Alındısız
+{n} recommandés, {m} sans accusé ¦ {n} taahhütlü, {m} alındısız
+Importer des réponses… ¦ Yanıtları içe aktar…
+Saisir un questionnaire papier ¦ Kâğıt anketi gir
+📮 Recommandé ¦ 📮 Taahhütlü
+Questionnaires ¦ Anketler
+préparé le {d} ¦ hazırlandı {d}
+réponses écrites le {d} ¦ yanıtlar girildi {d}
+Questionnaire ¦ Anket
+au sujet d’une succession ¦ bir miras hakkında
+Vous ¦ Siz
+Nom de naissance ¦ Doğum soyadı
+Conjoint(s) ¦ Eş(ler)
+Date du mariage (ou PACS) ¦ Evlilik (veya birliktelik) tarihi
+Adresse, téléphone, courriel ¦ Adres, telefon, e-posta
+Code postal ¦ Posta kodu
+Autres membres de la famille connus ¦ Bilinen diğer aile üyeleri
+Frères, sœurs, cousins…, avec un moyen de les joindre ¦ Erkek ve kız kardeşler, kuzenler…, onlara ulaşma yoluyla
+Documents que vous pouvez fournir ¦ Sağlayabileceğiniz belgeler
+livret de famille ¦ aile cüzdanı
+acte de naissance ¦ doğum kaydı
+acte de mariage ¦ evlilik kaydı
+jugement ¦ mahkeme kararı
+Vos réponses restent sur cet appareil tant que vous n’envoyez rien. ¦ Yanıtlarınız hiçbir şey göndermediğiniz sürece bu cihazda kalır.
+Enregistrer mes réponses ¦ Yanıtlarımı kaydet
+Un questionnaire à envoyer ¦ Gönderilecek anket
+Fabriquer et ranger au Registre ¦ Oluştur ve deftere kaydet
+Ce qu’on demande ¦ Ne soruyoruz
+Ta question ¦ Senin sorun
+Comment l’envoyer ¦ Nasıl gönderilir
+Ce qui est pré-rempli ¦ Ne önceden dolduruldu
+Jamais le nom du défunt ni un montant : « au sujet d’une succession ». Le fichier s’ouvre d’un double-clic, sans internet ; l’héritier renvoie un petit fichier. ¦ Asla murisin adı veya bir tutar yok: “bir miras hakkında”. Dosya çift tıklamayla, internetsiz açılır; mirasçı küçük bir dosya geri gönderir.
+{n} prêts, rangés au Registre de courriers ¦ {n} hazırlandı, yazışma defterine kaydedildi
+Ce fichier ne vient pas d’un questionnaire de ce dossier. ¦ Bu dosya bu dosyanın bir anketinden gelmiyor.
+Revoir avant d’écrire ¦ Girmeden önce gözden geçir
+Enfants (un par ligne : prénom, année) ¦ Çocuklar (satır başına bir: ad, yıl)
+Documents promis ¦ Söz verilen belgeler
+Réponses de {n} ¦ {n} yanıtları
+Écrire les changements cochés ¦ İşaretli değişiklikleri gir
+Une réponse a déjà été importée le {d} : compare avec celle-ci. ¦ Bir yanıt zaten içe aktarıldı {d}: bununla karşılaştır.
+fichier vérifié ✓ (bon questionnaire, pas modifié) ¦ dosya doğrulandı ✓ (doğru anket, değiştirilmemiş)
+Coche ce qui doit aller dans le dossier. Rien n’est écrit sans ta revue ; « source : déclaration de l’héritier » accompagne tout ce qui est écrit. ¦ Dosyaya girecekleri işaretle. Senin incelemen olmadan hiçbir şey girilmez; girilen her şey “kaynak: mirasçının beyanı” taşır.
+Dans la base ¦ Veritabanında
+« Famille connue » va en note du dossier, jamais en fiches. Les enfants créent des fiches reliées à l’héritier. Les documents promis deviennent une échéance. ¦ “Bilinen aile” dosya notuna gider, asla kartlara değil. Çocuklar mirasçıya bağlı kartlar oluşturur. Söz verilen belgeler bir süre olur.
+{n} écrits. Calcul refait. ¦ {n} girildi. Hesap yeniden yapıldı.
+passée ¦ geçti
+dans {n} j ¦ {n} g içinde
+était le {d} ¦ {d} idi
+Une date importante ¦ Önemli tarih
+Mes dates importantes ¦ Önemli tarihlerim
+D’où vient cette date ¦ Bu tarih nereden geliyor
+Les dates que le notaire t’a données, rappelées à temps. ¦ Noterin sana verdiği tarihler, zamanında hatırlatılır.
+L’app ne calcule aucun délai légal : elle ne connaît pas ta situation. ¦ Uygulama hiçbir yasal süre hesaplamaz: durumunu bilmez.
+✎ Modifier la date ¦ ✎ Tarihi değiştir
+＋ Une date importante ¦ ＋ Önemli bir tarih
+D’où vient cette date (obligatoire) ¦ Bu tarih nereden geliyor (zorunlu)
+ex. : Me VIALLE, courriel du 4 nov. ¦ örn.: Me VIALLE, 4/11 tarihli e-posta
+Date déplacée : l’ancienne reste en dessous et la modification est notée au 🕓 Journal. ¦ Tarih taşındı: eskisi altta kalır ve değişiklik 🕓 Günlük'e yazılır.
+Date modifiée ¦ Tarih değiştirildi
+Date importante ajoutée ¦ Önemli tarih eklendi
+🔗 {a} liens ne reposent que sur une pièce, {b} sur aucune. Ce n’est pas une erreur : c’est à vérifier avant la remise. ¦ 🔗 {a} bağ tek bir kanıta, {b} bağ hiçbir kanıta dayanıyor. Bu bir hata değil: teslimden önce kontrol edilmeli.
+🔗 Chaque lien repose sur assez de pièces. ¦ 🔗 Her bağ yeterli kanıta dayanıyor.
+Voir les liens ¦ Bağları gör
+Une lettre par service ({n}) ¦ Daire başına bir mektup ({n})
+délivrée le {d} ¦ düzenlendi {d}
+valable jusqu’au {d} ¦ {d} tarihine kadar geçerli
+📅 Date de délivrance ¦ 📅 Düzenlenme tarihi
+Chaque maillon : combien de pièces le prouvent ¦ Her halka: kaç kanıt onu gösteriyor
+Héritier concerné ¦ İlgili mirasçı
+dossier de preuve « prouvé » ¦ kanıt dosyası “kanıtlandı”
+1 pièce, jugée suffisante le {d} ¦ 1 kanıt, yeterli sayıldı {d}
+Demander l’acte ¦ Kaydı iste
+✓ Une pièce me suffit ici ¦ ✓ Burada tek kanıt bana yeter
+Une « pièce » = une source citée sur l’acte (deux copies du même acte comptent pour une) ; un dossier de preuve « prouvé » compte pour une de plus. ¦ “Kanıt” = bir olayda belirtilen kaynak (aynı kaydın iki kopyası bir sayılır); “kanıtlandı” kanıt dosyası bir tane daha sayılır.
+Noté au 🕓 Journal ¦ Günlüğe yazıldı (🕓)
+Remise bloquée (réglage) ¦ Teslim engellendi (ayar)
+Des liens ont trop peu de pièces : la remise est bloquée tant qu’ils ne sont pas complétés (ou « Une pièce me suffit ici »). ¦ Bazı bağların kanıtı çok az: tamamlanana kadar teslim engellenir (veya “Burada tek kanıt bana yeter”).
+Pour une recherche, je vous serais reconnaissant(e) de m’adresser une copie des actes suivants : ¦ Bir araştırma için aşağıdaki kayıtların bir kopyasını gönderirseniz minnettar olurum:
+Les actes manquants, regroupés ¦ Eksik kayıtlar, gruplanmış
+Une seule lettre par service au lieu d’une par acte : moins de timbres, moins de relances. Relis et corrige chaque lettre. ¦ Kayıt başına bir yerine daire başına tek mektup: daha az pul, daha az hatırlatma. Her mektubu oku ve düzelt.
+{n} rangées dans le Registre de courriers ¦ {n} yazışma defterine kaydedildi
+Copie délivrée le ¦ Kopya düzenlendi
+Durée de validité demandée par ton notaire (mois) ¦ Noterinin istediği geçerlilik süresi (ay)
+Aucune durée par défaut : c’est toi qui la tapes. La 🔔 cloche prévient avant qu’elle ne soit trop ancienne. ¦ Varsayılan süre yok: sen girersin. 🔔 Zil çok eskimeden önce uyarır.
+Date de délivrance notée ¦ Düzenlenme tarihi not edildi
+recherches négatives : {n} ¦ Sonuçsuz {n} araştırma
+« Rien trouvé » est un résultat utile : il montre la diligence au notaire. ¦ “Hiçbir şey bulunamadı” yararlı bir sonuçtur: notere titizliğini gösterir.
+Aucune recherche notée pour cette personne. ¦ Bu kişi için not edilmiş araştırma yok.
+Rien n’est recopié : les lignes viennent du 🗓 Journal des recherches, des ⚰️ vérifications INSEE et des 📞 échanges marqués « recherche ». ¦ Hiçbir şey kopyalanmaz: satırlar 🗓 Araştırma günlüğünden, ⚰️ INSEE kontrollerinden ve “araştırma” işaretli 📞 görüşmelerden gelir.
+Noter une recherche ¦ Bir araştırma not et
+Pour le notaire ¦ Noter için
+Recherches faites — {n} ¦ Yapılan araştırmalar — {n}
+＋ Noter une recherche ¦ ＋ Bir araştırma not et
+Où (service, site, mairie…) ¦ Nerede (arşiv, site, belediye…)
+Ce qui a été trouvé ¦ Ne bulundu
+Écrit un dépouillement dans le 🗓 Journal des recherches (comme « Où chercher »). ¦ Araştırma günlüğüne 🗓 bir okuma notu yazar (“Nerede aranmalı” gibi).
+Recherche notée ¦ Araştırma not edildi
+Carte des héritiers ¦ Mirasçılar haritası
+au numéro (BAN) ¦ kapı numarasına kadar (BAN)
+Hors carte ¦ Harita dışında
+à l’étranger ({c}) ¦ yurt dışında ({c})
+commune pas placée ({c}) ¦ belediye yerleştirilmedi ({c})
+adresse inconnue ¦ adres bilinmiyor
+Où vivent les héritiers ¦ Mirasçılar nerede yaşıyor
+Tous les dossiers en cours ¦ Tüm süren dosyalar
+Aucune adresse d’héritier placée sur la carte. ¦ Haritaya yerleştirilmiş mirasçı adresi yok.
+héritier (adresse connue, au niveau de la commune) ¦ mirasçı (adres biliniyor, belediye düzeyinde)
+notaire connu de l’app ¦ uygulamanın bildiği noter
+Rien n’est envoyé en ligne. ¦ Çevrimiçi hiçbir şey gönderilmez.
+La BAN n’est pas encore téléchargée : position à la commune. ¦ BAN henüz indirilmedi: belediye düzeyinde konum.
+Image de la carte (sans noms) ¦ Harita görüntüsü (adsız)
+Par organisme, d’après le Registre ¦ Daireye göre, defterden
+Organisme ¦ Daire
+pas assez de courriers ¦ az mektup
+De l’envoi à la réponse reçue (demandes d’actes des dossiers). Aide à prévoir la remise et à relancer au bon moment. ¦ Gönderimden alınan yanıta kadar (dosyaların kayıt talepleri). Teslimi planlamana ve zamanında hatırlatmana yardımcı olur.
+Pas encore de réponse notée dans le Registre. ¦ Defterde henüz not edilmiş yanıt yok.
+Sa part passe dans sa propre succession : ouvrir un dossier lié pour {n} ? ¦ Payı kendi mirasına geçer: {n} için bağlı bir dosya açılsın mı?
+🔗 Dossier lié ¦ 🔗 Bağlı dosya
+Ouvrir le dossier lié ¦ Bağlı bir dosya aç
+Dossier lié {n} ouvert ({what}) ¦ Bağlı dosya {n} açıldı ({what})
+Aucun autre dossier en cours dans cette généalogie (d’abord ⇄ Déplacer s’il est dans une autre). ¦ Bu ağaçta süren başka dosya yok (başkasındaysa önce ⇄ Taşı).
+Fusionner avec un autre dossier ¦ Başka bir dosyayla birleştir
+Le dossier à réunir dans {n} ¦ {n} ile birleştirilecek dosya
+Le numéro du dossier réuni n’est pas réutilisé. ↶ Annuler sépare à nouveau, comme avant. ¦ Birleştirilen dosyanın numarası yeniden kullanılmayacak. ↶ Geri al onları eskisi gibi ayırır.
+Ce qui ¦ Ne
+Ce qui se passe ¦ Ne olur
+{a} déjà communes, {b} ajoutées ¦ {a} ortak, {b} eklendi
+{d} en double gardée(s) une fois ¦ kopyalar bir kez tutuldu: {d}
+rattachés, chacun garde son dossier d’origine en étiquette ¦ eklendi, her biri kaynak dosyasını etiket olarak tutar
+rattachés ; les factures émises ne changent pas ¦ eklendi; düzenlenmiş faturalar değişmez
+mis bout à bout, chaque ligne marquée de son dossier ¦ art arda, her satır kendi dosyasıyla işaretli
+Deux notaires différents : lequel garder ? ¦ İki farklı noter: hangisi tutulsun?
+Dossiers réunis ¦ Dosyalar birleştirildi
+Copie à envoyer au notaire ¦ Noter için kopya
+Copie à envoyer au notaire… ¦ Noter için kopya…
+Un fichier que le notaire ouvre d’un double-clic, sans rien pouvoir modifier, chiffré si tu le veux. ¦ Noterin çift tıklayarak açtığı ve hiçbir şey değiştiremeyeceği bir dosya, istersen şifreli.
+Part aussi ¦ Ayrıca gider
+📞 échanges · 💶 fonds · ⚰️ vérifications INSEE · 🧾 copie des factures (le registre, lui, ne change pas) ¦ 📞 görüşmeler · 💶 fonlar · ⚰️ INSEE kontrolleri · 🧾 faturaların kopyası (defterin kendisi değişmez)
+Mot de passe (obligatoire) ¦ Parola (zorunlu)
+🔐 Mot de passe ¦ 🔐 Parola
+AES-256, comme les sauvegardes protégées. Oublié = archive perdue. Le réimport le demande. ¦ AES-256, korumalı yedekler gibi. Unutulursa = arşiv kaybolur. Yeniden içe aktarma onu soracak.
+Mot de passe trop court (8 caractères au moins). ¦ Parola çok kısa (en az 8 karakter).
+Les deux mots de passe ne sont pas les mêmes. ¦ İki parola aynı değil.
+Mot de passe de l’archive ¦ Arşiv parolası
+🙈 Écran partagé : noms, adresses et montants masqués ¦ 🙈 Paylaşılan ekran: adlar, adresler ve tutarlar gizli
+Échange mis à la corbeille ¦ Görüşme çöpe taşındı
+Fusion annulée : les deux dossiers sont séparés comme avant ¦ Birleştirme geri alındı: iki dosya eskisi gibi ayrı
+Mon cabinet (factures) ¦ Ofisim (faturalar)
+L’app ne connaît ni ton statut, ni ton régime de TVA, ni les mentions que ta facture doit porter : c’est toi qui les écris, avec ton comptable. L’app les recopie telles quelles. ¦ Uygulama statünü, KDV rejimini veya faturanın taşıması gereken ibareleri bilmez: bunları muhasebecinle sen yazarsın. Uygulama onları değiştirmeden kullanır.
+Mentions à imprimer sur chaque facture (ton texte) ¦ Her faturaya basılan ibareler (senin metnin)
+vide : à écrire avec ton comptable ¦ boş: muhasebecinle yaz
+Champs obligatoires pour émettre une facture ¦ Fatura düzenlemek için zorunlu alanlar
+Un champ que tu as déclaré obligatoire et laissé vide : la facture n’est pas émise. ¦ Zorunlu olarak işaretleyip boş bıraktığın bir alan: fatura düzenlenmez.
+🏢 Mon cabinet ¦ 🏢 Ofisim
+EXEMPLE NON JURIDIQUE — à faire écrire ou relire par ton conseil avant tout usage. ¦ HUKUKİ OLMAYAN ÖRNEK — herhangi bir kullanımdan önce danışmanına yazdır veya kontrol ettir.
+ton titre ¦ başlığın
+ton texte : écrit ou relu par ton conseil ¦ metnin: danışmanın tarafından yazıldı veya kontrol edildi
+Mes modèles de contrat ¦ Sözleşme şablonlarım
+Ton contrat, avec des champs que l’app remplit ¦ Sözleşmen, uygulamanın doldurduğu alanlarla
+Enregistrer la version ¦ Sürümü kaydet
+L’app ne fournit aucun texte de contrat : c’est un acte qui t’engage et qui engage l’héritier, à faire écrire ou relire par ton conseil. L’app remplit des champs et garde l’historique de tes versions. ¦ Uygulama hiçbir sözleşme metni sağlamaz: seni ve mirasçıyı bağlayan bir belgedir; danışmanına yazdır veya kontrol ettir. Uygulama alanları doldurur ve sürümlerinin geçmişini tutar.
+＋ Nouveau modèle ¦ ＋ Yeni şablon
+Mon contrat ¦ Sözleşmem
+Versions ¦ Sürümler
+Écris ou importe ton contrat ¦ Sözleşmeni yaz veya içe aktar
+Importer un .docx / .txt ¦ .docx / .txt içe aktar
+Aperçu pour un héritier ¦ Mirasçı için önizleme
+{defunt} n’existe pas : le nom du défunt n’est jamais dans un courrier envoyé avant signature. {pourcentage} vient de 💶 « Honoraires d’un contrat ». ¦ {defunt} yok: murisin adı imzadan önce gönderilen bir mektupta asla yer almaz. {pourcentage} 💶 “Sözleşme ücreti”nden gelir.
+version {n} ¦ sürüm {n}
+Champ inconnu : {f} (ligne {l}). Corrige-le avant d’enregistrer. ¦ Bilinmeyen alan: {f} (satır {l}). Kaydetmeden önce düzelt.
+% à noter ¦ % girilecek
+Champ vide : {f} ¦ Boş alan: {f}
+Version {n} enregistrée (Mes modèles) ¦ Sürüm {n} kaydedildi (Şablonlarım)
+Fonds par héritier ¦ Mirasçıya göre fonlar
+Aucun montant de succession : l’app ne connaît ni l’actif, ni le passif. On note seulement des mouvements réels que tu as vus passer. ¦ Miras tutarı yok: uygulama ne aktifi ne pasifi bilir. Yalnızca gördüğün gerçek hareketleri not edersin.
+Reçu du notaire ¦ Noterden alınan
+Frais refacturés ¦ Yeniden faturalanan masraflar
+Reversé ¦ Ödenen
+Reste dû ¦ Kalan ödeme
+pas de contrat ¦ sözleşmesiz
+reversé de trop : {s} ¦ fazla ödendi: {s}
+✓ soldé ¦ ✓ kapandı
+à reverser ¦ ödenecek
+Mouvements ¦ Hareketler
+＋ Noter un mouvement ¦ ＋ Bir hareket not et
+Commission = % du contrat × montant reçu. Reste dû = reçu − commission − frais − reversé. ¦ Komisyon = sözleşme % × alınan tutar. Kalan = alınan − komisyon − masraflar − ödenen.
+✎ Corriger un mouvement ¦ ✎ Hareketi düzelt
+Commission proposée : {p} % de {r} = {c} (modifiable) ¦ Önerilen komisyon: {r} tutarının % {p} kadarı = {c} (değiştirilebilir)
+virement, chèque… ¦ havale, çek…
+Versé à (représentant, si mineur ou sous tutelle) ¦ Ödenen (reşit değilse veya vesayet altındaysa temsilciye)
+Montant incorrect. ¦ Geçersiz tutar.
+Mouvement corrigé ¦ Hareket düzeltildi
+Mouvement noté ¦ Hareket not edildi
+versé à {n} ¦ {n} ödendi
+Décompte — {n} ¦ Hesap dökümü — {n}
+Aucun mouvement noté. ¦ Not edilmiş hareket yok.
+Reste à reverser ¦ Ödenecek kalan
+Noter un mouvement ¦ Bir hareket not et
+Décompte pour l’héritier ¦ Mirasçı için hesap dökümü
+Facturer la commission ¦ Komisyonu faturalandır
+Facture ¦ Fatura
+Avoir ¦ İade faturası
+Devis ¦ Teklif
+N° de TVA ¦ KDV no.
+BROUILLON ¦ TASLAK
+ÉMIS ¦ DÜZENLENDİ
+ÉMISE ¦ DÜZENLENDİ
+Client ¦ Müşteri
+Total HT ¦ KDV hariç toplam
+TVA {r} % ¦ KDV % {r}
+Total TTC ¦ KDV dahil toplam
+Commission du contrat de révélation ({p} % de la part reçue : {r}) ¦ Açıklama sözleşmesine göre komisyon (alınan payın % {p} kadarı: {r})
+Commission du contrat de révélation ({p} %) ¦ Açıklama sözleşmesine göre komisyon (% {p})
+Temps passé ({h} h {m}) ¦ Harcanan süre ({h} sa {m})
+Frais ¦ Masraflar
+🧾 DEVIS ¦ 🧾 TEKLİF
+🧾 FACTURE ¦ 🧾 FATURA
+{k} {n} ¦ {k} {n}
+Brouillon, pas encore numéroté ¦ Taslak, henüz numarasız
+Garder en brouillon ¦ Taslak olarak tut
+Ce que l’app ne fait pas : elle ne connaît ni ton statut, ni ton régime de TVA, ni les mentions que ta facture doit porter. C’est toi qui choisis le taux et qui écris les mentions (avec ton comptable). L’app numérote sans trou, interdit de modifier une facture émise, fait les additions et garde tout. ¦ Uygulamanın yapmadığı: statünü, KDV rejimini veya zorunlu ibareleri bilmez. Oranı sen seçer, ibareleri sen yazarsın (muhasebecinle). Uygulama boşluksuz numaralar, düzenlenmiş faturanın değiştirilmesini yasaklar, toplar ve her şeyi saklar.
+🏢 Mon cabinet : des champs obligatoires sont vides ({f}) : la facture ne pourra pas être émise. ¦ 🏢 Ofisim: zorunlu alanlar boş ({f}): fatura düzenlenemeyecek.
+Adresse du client ¦ Müşteri adresi
+Prix HT ¦ KDV hariç fiyat
+Taux de TVA (%) — choisi par toi ¦ KDV oranı (%) — senin seçtiğin
+ton taux ¦ senin oranın
+Repris de ta dernière facture ; jamais deviné. ¦ Son faturandan alındı; asla tahmin edilmez.
+Aucun taux proposé : tape celui que t’a indiqué ton comptable. ¦ Önerilen oran yok: muhasebecinin verdiğini yaz.
+Émettre le devis n° {n} ¦ {n} numaralı teklifi düzenle
+Émettre la facture n° {n} ¦ {n} numaralı faturayı düzenle
+Sur la facture ¦ Faturada
+à remplir ¦ doldurulacak
+⏱ Temps passé : non coché, compris dans la commission ¦ ⏱ Harcanan süre: işaretsiz, komisyona dahil
+taux à choisir ¦ oran seçilecek
+Émettre le devis {n} ? Il reste modifiable tant qu’il n’est pas accepté. ¦ {n} teklifi düzenlensin mi? Kabul edilmediği sürece değiştirilebilir.
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. Émettre {n} ? ¦ Düzenlenmiş bir fatura artık değiştirilemez veya silinemez. Bir iade faturası onu düzeltir. {n} düzenlensin mi?
+Émettre ¦ Düzenle
+{n} émise ¦ {n} düzenlendi
+Brouillon gardé ¦ Taslak tutuldu
+brouillon ¦ taslak
+émis ¦ düzenlendi
+avoir ¦ iade
+✓ payée le {d} ¦ ✓ ödendi {d}
+attendue ¦ bekleniyor
+Tout le cabinet ¦ Tüm büro
+avec les mouvements de fonds ¦ fon hareketleriyle
+CSV pour le comptable ¦ Muhasebeci için CSV
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. ¦ Düzenlenmiş bir fatura artık değiştirilemez veya silinemez. Bir iade faturası onu düzeltir.
+Chercher… (n°, client, dossier) ¦ Ara… (no., müşteri, dosya)
+TTC ¦ KDV dahil
+🧾 Faire un avoir ¦ 🧾 İade faturası düzenle
+Payée… ¦ Ödendi…
+Accepté ¦ Kabul edildi
+Transformer en facture ¦ Faturaya dönüştür
+Pas encore de facture. ¦ Henüz fatura yok.
+Brouillon supprimé (aucun numéro consommé) ¦ Taslak silindi (hiçbir numara kullanılmadı)
+L’avoir reprend les lignes de la facture en négatif, avec son propre numéro. Il ne peut plus être modifié. ¦ İade faturası faturanın satırlarını eksi işaretle, kendi numarasıyla alır. Artık değiştirilemez.
+Payée ¦ Ödendi
+Date (AAAA-MM-JJ) et moyen, ex. : 2026-11-20 virement ¦ Tarih (YYYY-AA-GG) ve yöntem, örn.: 2026-11-20 havale
+Paiement noté ¦ Ödeme not edildi
+Devis accepté ¦ Teklif kabul edildi
+Brouillon de facture prêt ¦ Fatura taslağı hazır
+Registre des factures ¦ Fatura defteri
+Factures du dossier ¦ Dosyanın faturaları
+Devis et factures ¦ Teklifler ve faturalar
+Faire un devis ¦ Teklif oluştur
+Faire une facture ¦ Fatura oluştur
+Pas encore de facture pour ce dossier. ¦ Bu dosya için henüz fatura yok.
+HT ¦ KDV hariç
+{n} base(s) verrouillée(s) non lue(s) ¦ {n} kilitli veritabanı okunmadı
+Dossiers ouverts ¦ Açık dosyalar
+dont {n} clos ¦ bunların {n} tanesi kapandı
+Délai moyen (ouvert → remis) ¦ Ortalama süre (açık → teslim)
+sur {n} dossiers remis ¦ {n} teslim edilen dosya üzerinden
+pas assez de dossiers pour une moyenne ¦ ortalama için çok az dosya
+Contrats signés / refusés ¦ İmzalanan / reddedilen sözleşmeler
+{p} % signés · {n} sans réponse ¦ % {p} imzalandı · {n} yanıtsız
+Facturé / encaissé ({k}) ¦ Faturalanan / tahsil edilen ({k})
+encaissé {a} · reste {b} ¦ {a} tahsil edildi · {b} kalan
+Pas encore de facture : seuls le temps et les contrats sont comptés ¦ Henüz fatura yok: yalnızca süre ve sözleşmeler sayılır
+{n} en cours depuis {m} mois en moyenne ¦ {n} sürüyor, ortalama {m} ay
+Temps passé par dossier (heures) ¦ Dosya başına harcanan süre (saat)
+Aucun temps noté. ¦ Not edilmiş süre yok.
+Voir en tableau ¦ Tablo olarak gör
+Facturé et encaissé par trimestre ({k}) ¦ Çeyreğe göre faturalanan ve tahsil edilen ({k})
+Facturé ¦ Faturalanan
+Encaissé ¦ Tahsil edilen
+Aucun nom d’héritier dans cette vue : des numéros de dossier et des totaux. Rien n’est écrit. ¦ Bu görünümde mirasçı adı yok: dosya numaraları ve toplamlar. Hiçbir şey yazılmaz.
+Pour {n} ¦ {n} için
+le notaire ¦ noter
+⤓ Fabriquer la copie ¦ ⤓ Kopyayı oluştur
+Ce qui part ¦ Ne gider
+Tableau des héritiers et parts, arbre, chaîne de filiation (comme le PDF) ¦ Mirasçılar ve paylar tablosu, ağaç, soy zinciri (PDF gibi)
+📑 Pièces (images des actes) ¦ 📑 Kanıtlar (kayıt görüntüleri)
+Adresses des héritiers ¦ Mirasçıların adresleri
+🕵️ Joindre les recherches faites ¦ 🕵️ Yapılan araştırmaları ekle
+Journal, échanges, temps, factures ne partent jamais. ¦ Günlük, görüşmeler, süre ve faturalar asla gitmez.
+Protection ¦ Koruma
+Le fichier est chiffré (AES-256) ; la page demande le mot de passe à l’ouverture. Donne-le au notaire par un autre moyen (téléphone, SMS). Oublié = fichier illisible, même pour toi (refais-en un). ¦ Dosya şifreli (AES-256); sayfa açılışta parolayı sorar. Notere başka bir yoldan ver (telefon, SMS). Unutulursa = okunamaz dosya, senin için de (yenisini oluştur).
+Copie v{n} ; l’app garde la liste des copies faites, pas les fichiers. ¦ Kopya v{n}; uygulama oluşturulan kopyaların listesini tutar, dosyaları değil.
+Voilà ce qui part : {h} héritiers, {p} pièces, {a} adresse(s). ¦ Gider: {h} mirasçı, {p} kanıt, {a} adres.
+Fiche confidentielle : {n} retirée (calcul inchangé). ¦ Gizli kart: {n} çıkarıldı (hesap değişmedi).
+une branche n’est pas tranchée ¦ bir kol karara bağlanmadı
+Fichier trop lourd pour un courriel (plus de 20 Mo). Continuer quand même ? ¦ Dosya bir e-posta için çok büyük (20 MB üzeri). Yine de devam edilsin mi?
+🤝 Copie pour le notaire ¦ 🤝 Noter için kopya
+Copie v{v} du {d}, calcul indicatif : à vérifier par l’étude. ¦ {d} tarihli kopya v{v}, gösterge niteliğinde hesap: noterlik tarafından kontrol edilmeli.
+{n} · {t} ¦ {n} · {t}
+Copie protégée par un mot de passe. ¦ Parolayla korunan kopya.
+Copie v{n} fabriquée ¦ Kopya v{n} oluşturuldu
+Mouvement supprimé ¦ Hareket silindi
+⚰️ Décès d’un héritier ¦ ⚰️ Bir mirasçının ölümü
+Ce que « ✓ C’est lui » écrit : la fiche sert aussi aux autres dossiers. ¦ “✓ Bu kişi” neyi yazar: kart başka dosyalara da hizmet eder.
+Le décès sur la fiche et le statut du dossier ¦ Kartta ölüm ve dosyada durum
+Seulement le statut du dossier ¦ Yalnızca dosyada durum
+Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de bruit, risque d’en rater. ¦ İzler bu puandan itibaren görünür (100 üzerinden). Daha yüksek: daha az gürültü, birini kaçırma riski.
+Après chaque nouvel import du fichier INSEE : vérifier les dossiers en cours tout seul (jamais de changement sans ton clic). ¦ INSEE dosyasının her yeni içe aktarımından sonra: süren dosyaları kendiliğinden kontrol et (senin tıklaman olmadan asla değişiklik yok).
+Automatique, dans la cloche ¦ Otomatik, zilde
+Seulement à la main ¦ Yalnızca elle
+📋 Questionnaire ¦ 📋 Anket
+Ce que l’héritier te renvoie après avoir rempli le questionnaire. ¦ Mirasçının doldurduktan sonra sana geri gönderdiği.
+Un petit fichier .json ¦ Küçük bir .json dosyası
+La page .html remplie ¦ Doldurulmuş .html sayfası
+Pré-rempli : son nom et sa naissance seulement, jamais le défunt ni un montant. ¦ Önceden doldurulmuş: yalnızca adı ve doğumu, asla muris veya tutar.
+Pré-rempli (ce qui le concerne) ¦ Önceden doldurulmuş (onu ilgilendiren)
+Tout vide ¦ Hepsi boş
+📞 Échanges ¦ 📞 Görüşmeler
+Où noter et relire les appels, courriels et visites. ¦ Aramaların, e-postaların ve ziyaretlerin nerede not edilip okunduğu.
+Un onglet du dossier et un raccourci dans 👥 Héritiers ¦ Dosya sekmesi ve 👥 Mirasçılar'da kısayol
+Seulement dans 👥 Héritiers ¦ Yalnızca 👥 Mirasçılar'da
+Les courriers du Registre dans la liste des échanges. ¦ Görüşme listesinde defterdeki mektuplar.
+Montrés en gris, en lecture ¦ Gri, salt okunur gösterilir
+Pas montrés ¦ Gösterilmez
+📮 Recommandés ¦ 📮 Taahhütlü gönderiler
+Relance quand l’accusé de réception n’est pas revenu (réglable aussi pour chaque courrier). ¦ Alındı belgesi dönmediğinde hatırlatma (mektup başına da ayarlanabilir).
+15 jours ¦ 15 gün
+8 jours ¦ 8 gün
+21 jours ¦ 21 gün
+L’app n’interroge jamais La Poste : le lien ouvre la page dans ton navigateur, tu notes toi-même l’AR. ¦ Uygulama La Poste'u asla sorgulamaz: bağlantı sayfayı tarayıcında açar, alındıyı sen girersin.
+Lien vers la page de suivi ¦ Takip sayfasına bağlantı
+Pas de lien (on copie le numéro) ¦ Bağlantı yok (numara kopyalanır)
+Adresse de la page de suivi, avec {numero} (https:// seulement). ¦ Takip sayfasının adresi, {numero} ile (yalnızca https://).
+🧾 Devis et factures ¦ 🧾 Teklifler ve faturalar
+Un seul registre : numérotation continue même si les dossiers sont dans plusieurs généalogies. ¦ Tek defter: dosyalar birkaç ağaçta olsa bile kesintisiz numaralandırma.
+Un seul registre pour le cabinet ¦ Büro için tek defter
+Dans la généalogie des dossiers ¦ Dosyaların ağacında
+Le compteur ne recule jamais ; un brouillon effacé ne consomme pas de numéro. ¦ Sayaç asla geri gitmez; silinen bir taslak numara tüketmez.
+F-2026-0042 (remis à 1 chaque année) ¦ F-2026-0042 (her yıl 1'den)
+Compteur unique (F-0042) ¦ Tek sayaç (F-0042)
+La ligne « temps passé » proposée sur la facture. ¦ Faturada önerilen “harcanan süre” satırı.
+Temps décoché quand il y a une commission ¦ Komisyon varsa süre işaretsiz
+Temps toujours coché ¦ Süre her zaman işaretli
+Préfixe des factures. ¦ Faturaların öneki.
+Préfixe des avoirs. ¦ İade faturalarının öneki.
+Préfixe des devis. ¦ Tekliflerin öneki.
+📈 Activité ¦ 📈 Etkinlik
+La période montrée en ouvrant le tableau de bord. ¦ Panoyu açınca gösterilen dönem.
+L’année en cours ¦ Bu yıl
+Les 12 derniers mois ¦ Son 12 ay
+Les montants facturés et encaissés. ¦ Faturalanan ve tahsil edilen tutarlar.
+Au choix (bouton) ¦ İsteğe bağlı (anahtar)
+La copie contient des actes et des noms de vivants. ¦ Kopya, kayıtları ve yaşayan kişilerin adlarını içerir.
+Mot de passe coché au départ ¦ Parola baştan işaretli
+Décoché au départ ¦ Baştan işaretsiz
+Le notaire reçoit souvent les adresses à part. ¦ Noter adresleri çoğu zaman ayrı alır.
+Adresses décochées au départ ¦ Adresler baştan işaretsiz
+Cochées au départ ¦ Baştan işaretli
+🗺 Carte des héritiers ¦ 🗺 Mirasçılar haritası
+Rien n’est envoyé en ligne : la commune vient de la base ; le numéro, seulement si la BAN du département est déjà dans l’app (🗺️ Plan des adresses). ¦ Çevrimiçi hiçbir şey gönderilmez: belediye veritabanından gelir; kapı numarası yalnızca departmanın BAN'ı zaten uygulamadaysa (🗺️ Adres planı).
+Le numéro de rue (BAN déjà téléchargée) ¦ Kapı numarası (BAN zaten indirildi)
+L’app n’a pas d’annuaire des notaires et n’en invente pas. ¦ Uygulamanın noter listesi yoktur ve hiçbirini uydurmaz.
+Les notaires de tes dossiers et contacts ¦ Dosyalarının ve kişilerinin noterleri
+Pas de notaires ¦ Noter yok
+Le brouillon de contrat écrit par l’app. Un contrat t’engage : fais-le écrire ou relire par ton conseil. ¦ Uygulamanın yazdığı sözleşme taslağı. Bir sözleşme seni bağlar: danışmanına yazdır veya kontrol ettir.
+Retiré : page vide avec les champs ¦ Kaldırıldı: alanlarla boş sayfa
+Gardé, marqué « exemple non juridique » ¦ Tutuldu, “hukuki olmayan örnek” işaretli
+Chaque contrat rangé retient la version utilisée. ¦ Kaydedilen her sözleşme kullanılan sürümü hatırlar.
+Toutes les versions gardées ¦ Tüm sürümler tutulur
+Seulement la dernière ¦ Yalnızca sonuncusu
+💶 Fonds ¦ 💶 Fonlar
+Commission = % du contrat × montant reçu. ¦ Komisyon = sözleşme % × alınan tutar.
+Calculée puis modifiable ¦ Hesaplanır, sonra değiştirilebilir
+Toujours tapée à la main ¦ Her zaman elle yazılır
+Le décompte à l’héritier. ¦ Mirasçı için hesap dökümü.
+Décompte imprimable ¦ Yazdırılacak döküm
+Écran seulement ¦ Yalnızca ekran
+🔗 Double preuve ¦ 🔗 Çift kanıt
+Le seuil d’un lien solide. ¦ Sağlam bir bağın eşiği.
+Deux pièces par lien ¦ Bağ başına iki kanıt
+Une seule (signaler seulement « aucune ») ¦ Yalnızca bir (yalnızca “hiç”i bildir)
+Dans la liste « avant de remettre ». ¦ “Teslimden önce” listesinde.
+« À revoir » (n’empêche rien) ¦ “Gözden geçirilecek” (hiçbir şeyi engellemez)
+Bloquant ¦ Engelleyici
+🗓 Dates importantes ¦ 🗓 Önemli tarihler
+Les rappels proposés pour une nouvelle date (réglables pour chaque date). L’app ne calcule aucun délai légal. ¦ Yeni bir tarih için önerilen hatırlatmalar (tarih başına ayarlanabilir). Uygulama hiçbir yasal süre hesaplamaz.
+J−30, J−7, J−1 ¦ G−30, G−7, G−1
+J−7 seulement ¦ Yalnızca G−7
+Où les voir dans 📁 Dossier. ¦ Onları 📁 Dosya'da nerede görürsün.
+Dans les échéances, avec un drapeau 🗓 ¦ Sürelerde, 🗓 rozetiyle
+Un bloc à part ¦ Ayrı blok
+👥 Fusion de dossiers ¦ 👥 Dosya birleştirme
+Les successions restent distinctes : le calcul n’est jamais mélangé. ¦ Miraslar ayrı kalır: hesap asla karıştırılmaz.
+Deux défunts, deux calculs côte à côte ¦ İki ölü, yan yana iki hesap
+Dossiers liés (recherches en commun) ¦ Bağlı dosyalar (ortak araştırmalar)
+Combien de temps la fusion peut être annulée. ¦ Bir birleştirme ne kadar süre geri alınabilir.
+↶ pendant 30 jours ¦ ↶ 30 gün boyunca
+↶ tant que rien n’a été ajouté ¦ ↶ hiçbir şey eklenmediği sürece
+Joindre les recherches faites au dossier du notaire. ¦ Yapılan araştırmaları noter dosyasına ekle.
+Coché au départ ¦ Baştan işaretli
+📦 Archive ¦ 📦 Arşiv
+Le mot de passe de l’archive de fin de dossier. Oublié = archive perdue. ¦ Bir dosyanın sonunda arşiv parolası. Unutulursa = arşiv kaybolur.
+Proposé, coché ¦ Önerilir, işaretli
+Pas proposé ¦ Önerilmez
+💡 Autres idées ¦ 💡 Başka fikirler
+🔗 Le dossier lié d’un héritier mort après le défunt. ¦ 🔗 Murisden sonra ölen bir mirasçı için bağlı dosya.
+Ses descendants rattachés ¦ Altsoyu bağlandı
+📮 Une lettre par service : quels actes. ¦ 📮 Daire başına bir mektup: hangi kayıtlar.
+Manquants et déjà demandés ¦ Eksik olanlar ve zaten istenenler
+⏳ Délai de réponse par organisme. ¦ ⏳ Daireye göre yanıt süresi.
+⏳ Nombre de courriers avant de donner un délai. ¦ ⏳ Bir süre gösterilmeden önceki mektup sayısı.
+📅 La cloche prévient avant qu’une copie d’acte soit trop ancienne (durée tapée par toi pour chaque pièce). ¦ 📅 Zil, bir kayıt kopyası çok eskimeden önce uyarır (süreyi kanıt başına girersin).
+7 jours ¦ 7 gün
+🙈 Écran partagé : ce qui remplace les noms. ¦ 🙈 Paylaşılan ekran: adların yerine ne gelir.
+Initiales ¦ Baş harfler
+Numéros (Héritier 1, 2…) ¦ Numaralar (Mirasçı 1, 2…)
+🙈 Écran partagé : les montants. ¦ 🙈 Paylaşılan ekran: tutarlar.
+Montants masqués ¦ Tutarlar gizli
+Montants visibles ¦ Tutarlar görünür
+avec AR ¦ alındı belgeli
+sans AR ¦ alındı belgesiz
+lettre suivie ¦ takipli gönderi
+pas en recommandé ¦ taahhütlü değil
+Son état civil ¦ Medeni durumu
+nom de naissance, prénoms, date et lieu de naissance ¦ doğum soyadı, adlar, doğum tarihi ve yeri
+mariage, PACS, divorce, dates ¦ evlilik, birliktelik, boşanma, tarihler
+prénoms, dates de naissance, décédés ? ¦ adlar, doğum tarihleri, ölmüş mü?
+avec un moyen de les joindre ¦ onlara ulaşma yoluyla
+Documents qu’il peut fournir ¦ Sağlayabileceği belgeler
+livret de famille, actes, jugement… ¦ aile cüzdanı, kayıtlar, karar…
+Une question à toi ¦ Senin sorun
+💾 Fichier à remplir ¦ 💾 Doldurulacak dosya
+🖨 Papier (PDF) ¦ 🖨 Kâğıt (PDF)
+Ce qui le concerne ¦ Onu ilgilendiren
+Famille connue ¦ Bilinen aile
+Sa question ¦ Onun sorusu
+Reversé à l’héritier ¦ Mirasçıya ödenen
+SIRET ¦ SIRET
+Mentions ¦ İbareler
+Trimestre ¦ Çeyrek
+Personnes rattachées ¦ Bağlı kartlar
+Courriers, échanges, fonds ¦ Mektuplar, görüşmeler, fonlar
+Temps et frais, échéances ¦ Süre ve masraflar, süreler
+Questionnaire d’héritier fabriqué ¦ Mirasçı anketi oluşturuldu
+Réponses d’un questionnaire écrites ¦ Anket yanıtları girildi
+Copie du dossier pour le notaire ¦ Noter için dosya kopyası
+Facture émise ou imprimée ¦ Fatura düzenlendi veya yazdırıldı
+Registre des factures (CSV) ¦ Fatura defteri (CSV)
+Décompte des fonds imprimé ¦ Fon dökümü yazdırıldı
+Recherches faites (pour le notaire) ¦ Yapılan araştırmalar (noter için)
+Image de la carte des héritiers ¦ Mirasçılar haritasının görüntüsü
+Contrat imprimé ¦ Sözleşme yazdırıldı
+Dossiers fusionnés ¦ Dosyalar birleştirildi
+chiffrée ¦ şifreli
+sans mot de passe ¦ parolasız
+avec les adresses ¦ adreslerle
+sans adresse ¦ adressiz
+deux défunts ¦ iki ölü
+dossiers liés ¦ bağlı dosyalar
+Aucune lettre à ranger. ¦ Kaydedilecek mektup yok.
+Avec qui ? ¦ Kiminle?
+Ce dossier est archivé : rouvre-le d’abord. ¦ Bu dosya arşivlendi: önce yeniden aç.
+Ce fichier n’est pas un .docx. ¦ Bu dosya bir .docx değil.
+Ce n’est pas un devis. ¦ Bu bir teklif değil.
+Cette facture a déjà un avoir. ¦ Bu faturanın zaten bir iadesi var.
+Choisis la date. ¦ Bir tarih seç.
+Choisis toi-même le taux de TVA (avec ton comptable) avant d’émettre. ¦ Düzenlemeden önce KDV oranını kendin seç (muhasebecinle).
+Choisis un autre dossier. ¦ Başka bir dosya seç.
+Dossier clos ou archivé : rouvre-le d’abord. ¦ Dosya kapalı veya arşivlenmiş: önce yeniden aç.
+Déjà émise. ¦ Zaten düzenlendi.
+Facture introuvable. ¦ Fatura bulunamadı.
+La facture n’a aucune ligne. ¦ Faturanın hiç satırı yok.
+La fusion date de plus de 30 jours : elle ne peut plus être annulée. ¦ Birleştirme 30 günden eski: artık geri alınamaz.
+Le mot de passe est obligatoire (réglage). ¦ Parola zorunludur (ayar).
+Ligne INSEE introuvable. ¦ INSEE satırı bulunamadı.
+Ligne incorrecte : quantité ou prix. ¦ Geçersiz satır: miktar veya fiyat.
+Mouvement introuvable. ¦ Hareket bulunamadı.
+Numéro déjà pris : renuméroter le brouillon. ¦ Numara zaten alınmış: taslağı yeniden numarala.
+Où as-tu cherché ? ¦ Nerede aradın?
+Quelque chose a été ajouté depuis la fusion : elle ne peut plus être annulée. ¦ Birleştirmeden bu yana bir şey eklendi: artık geri alınamaz.
+Seule une facture émise peut être payée. ¦ Yalnızca düzenlenmiş bir fatura ödenebilir.
+Taux de TVA incorrect (ex. : le taux que t’a indiqué ton comptable). ¦ Geçersiz KDV oranı (örn.: muhasebecinin verdiği oran).
+Type d’événement « Décès » introuvable. ¦ “Ölüm” olay türü bulunamadı.
+Un avoir corrige une facture émise. ¦ İade faturası düzenlenmiş bir faturayı düzeltir.
+Un devis accepté ne se modifie plus. ¦ Kabul edilmiş bir teklif artık değiştirilmez.
+« D’où vient cette date » est obligatoire. ¦ “Bu tarih nereden geliyor” zorunludur.
+Échange introuvable. ¦ Görüşme bulunamadı.
+💶 Un reversement reste en attente : archiver quand même ? ¦ 💶 Bir ödeme hâlâ bekliyor: yine de arşivlensin mi?
+🔐 Archive protégée : tape son mot de passe. ¦ 🔐 Korumalı arşiv: parolasını yaz.
+🏢 Mon cabinet : un champ que tu as déclaré obligatoire est vide ({f}) : la facture n’est pas émise. ¦ 🏢 Ofisim: zorunlu olarak işaretlediğin bir alan boş ({f}): fatura düzenlenmez.
+J−{n} ¦ G−{n}
+=descendant rattaché ¦ bağlı torun|bağlı torun
+=échange noté ¦ kayıtlı görüşme|kayıtlı görüşme

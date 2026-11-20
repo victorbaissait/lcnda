@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 96;
+const SCHEMA_VERSION = 97;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -117,6 +117,7 @@ function migration_steps(): array
         94 => 'schema_v94',
         95 => 'schema_v95',
         96 => 'schema_v96',
+        97 => 'schema_v97',
     ];
 }
 
@@ -2655,3 +2656,13 @@ function schema_v96(PDO $pdo): void
     rfr_refresh($pdo, true);
 }
 
+/** 97 : ⚖️ successoral, quinze outils de plus (lib/successoral_plus2.php) : ⚰️ vérifications INSEE (succ_insee_checks), 📞 échanges
+ * (succ_calls), 💶 fonds par héritier (succ_funds), 📋 questionnaires (succ_questionnaires), 📝 versions de tes modèles
+ * (succ_template_versions), 🧾 registre des factures quand il est dans la généalogie (succ_invoices, lignes, compteurs) ;
+ * colonnes : 📮 recommandés, réponse reçue le et version du modèle sur courriers, 🗓 dates importantes sur succ_deadlines,
+ * 👥 fusion (succ_cases.merged_into, origin_case_id), 📅 date de délivrance et validité sur succ_pieces. */
+function schema_v97(PDO $pdo): void
+{
+    if (!function_exists('succ_p2_schema')) { require_once __DIR__ . '/successoral.php'; }
+    succ_p2_schema($pdo);
+}

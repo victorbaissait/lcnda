@@ -30,7 +30,7 @@ const SUCC_ROLES = ['deceased', 'heir', 'inter', 'witness', 'verify'];
 const SUCC_HOWS = ['open', 'calc', 'hand', 'filter', 'import', 'homonym', 'move'];
 const SUCC_ROLE_LABELS = ['deceased' => 'défunt', 'heir' => 'héritier', 'inter' => 'intermédiaire', 'witness' => 'témoin', 'verify' => 'à vérifier'];
 const SUCC_SETTINGS_DEFAULT = ['store' => '', 'apart_id' => '', 'outside' => 'grey', 'archive_addresses' => 'remove', 'refuse_done' => true,
-    'weights' => [10, 15, 20, 10, 15, 20, 10], 'move_shared' => 'copy', 'nodossier' => 'fold', 'private_heirs' => true];
+    'weights' => [10, 15, 20, 10, 15, 20, 10], 'move_shared' => 'copy', 'nodossier' => 'fold', 'private_heirs' => true, 'p2' => [], 'cabinet' => []];
 const SUCC_CONTACT_STATES = ['', 'introuvable', 'silence'];
 const SUCC_CONTACT_LABELS = ['' => 'rien de noté', 'introuvable' => 'introuvable', 'silence' => 'ne répond pas'];
 const SUCC_ARCHIVE_EXT = '.lcnda-succ.zip';
@@ -92,6 +92,8 @@ function succ_settings_clean(array $d, ?array $base = null): array
     if (array_key_exists('private_heirs', $d)) { $s['private_heirs'] = (bool) $d['private_heirs']; }
     if (array_key_exists('move_shared', $d) && in_array($d['move_shared'], ['copy', 'refuse'], true)) { $s['move_shared'] = (string) $d['move_shared']; }
     if (array_key_exists('nodossier', $d) && in_array($d['nodossier'], ['fold', 'hide'], true)) { $s['nodossier'] = (string) $d['nodossier']; }
+    // ⚖️ outils de plus : un réglage par décision de la maquette (successoral_plus2.php), 🏢 Mon cabinet
+    if (function_exists('succ_p2_settings_clean')) { $s['p2'] = succ_p2_settings_clean($d['p2'] ?? [], is_array($s['p2'] ?? null) ? $s['p2'] : []); $s['cabinet'] = succ_p2_cabinet_clean($d['cabinet'] ?? [], is_array($s['cabinet'] ?? null) ? $s['cabinet'] : []); }
     if (array_key_exists('weights', $d) && is_array($d['weights']) && count($d['weights']) === 7) {
         $w = array_map(static fn($x) => max(0, min(100, (int) $x)), array_values($d['weights']));
         if (array_sum($w) > 0) { $s['weights'] = $w; }
@@ -165,11 +167,11 @@ function succ_media_dir_of(string $id): string { return $id === '' ? SHARED_MEDI
 
 /* ═════════ 1d. La vue d'ensemble : un résumé lu dans chaque base ═════════ */
 /** seulement succ_cases (et la prochaine échéance) : jamais un héritier vivant ni une adresse */
-function succ_index_rows(PDO $pdo): array
+function succ_index_rows(PDO $pdo, bool $active = false): array
 {
     if (!(int) $pdo->query("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='succ_cases'")->fetchColumn()) { return []; }
     $hasProg = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('succ_cases') WHERE name='progress_json'")->fetchColumn();
-    $rows = $pdo->query("SELECT c.id, c.number, c.title, c.state, c.notary_text, c.notary_person_id, c.deceased_id, c.opened_at, c.updated_at, c.snapshot_json" . ($hasProg ? ', c.progress, c.progress_json' : ", NULL AS progress, '' AS progress_json") . ",
+    $rows = $pdo->query("SELECT c.id, c.number, c.title, c.state, c.notary_text, c.notary_person_id, c.deceased_id, c.opened_at, c.updated_at, c.snapshot_json, c.options_json" . ($hasProg ? ', c.progress, c.progress_json' : ", NULL AS progress, '' AS progress_json") . ",
         (SELECT MIN(due) FROM succ_deadlines d WHERE d.case_id=c.id AND d.deleted_at IS NULL AND d.done=0) AS next_due,
         (SELECT COUNT(*) FROM succ_deadlines d WHERE d.case_id=c.id AND d.deleted_at IS NULL AND d.done=0 AND d.due<date('now','localtime')) AS late
         FROM succ_cases c WHERE c.deleted_at IS NULL ORDER BY c.number")->fetchAll(PDO::FETCH_ASSOC);
@@ -191,7 +193,9 @@ function succ_index_rows(PDO $pdo): array
             'pieces' => is_array($prog['pieces'] ?? null) ? $prog['pieces'] : null, 'found' => is_array($prog['heirs'] ?? null) ? $prog['heirs'] : null,
             'minutes' => (int) ($pdo->query('SELECT COALESCE(SUM(minutes),0) FROM succ_fees WHERE case_id=' . (int) $r['id'] . " AND kind='time' AND deleted_at IS NULL")->fetchColumn()),
             // 🔔 la cloche : échéances et relances jusqu'à 7 jours devant (pas pour un dossier clos ou archivé)
-            'due_items' => in_array((string) $r['state'], ['clos', 'archive'], true) || !function_exists('succ_due_items') ? [] : succ_due_items($pdo, (int) $r['id'])];
+            'due_items' => in_array((string) $r['state'], ['clos', 'archive'], true) || !function_exists('succ_due_items') ? [] : array_merge(succ_due_items($pdo, (int) $r['id']),
+                // ⚰️ après un nouvel import INSEE : seulement dans la généalogie ouverte (successoral_plus2.php)
+                $active && function_exists('succ_p2_insee_bell') && ($ib = succ_p2_insee_bell($pdo, ['id' => (int) $r['id'], 'deceased_id' => $did, 'options_json' => (string) ($r['options_json'] ?? ''), 'snapshot_json' => (string) $r['snapshot_json']])) ? [$ib] : [])];
     }
     return $out;
 }
@@ -203,7 +207,7 @@ function succ_index(PDO $pdo): array
         // 🔐 une autre généalogie protégée par un mot de passe : rien n'est lu, seulement « verrouillée »
         if (!$g['active'] && function_exists('glock_genealogy_locked') && glock_genealogy_locked((string) $id)) { $b['locked'] = true; $bases[] = $b; continue; }
         try {
-            if ($g['active']) { $b['cases'] = succ_index_rows($pdo); }
+            if ($g['active']) { $b['cases'] = succ_index_rows($pdo, true); }
             elseif ($ro = succ_open_ro($g['path'])) { $b['cases'] = succ_index_rows($ro); $ro = null; }
         } catch (Throwable $_) { $b['error'] = true; }
         $bases[] = $b;
@@ -660,7 +664,8 @@ function succ_bundle_case(PDO $pdo, int $caseId, array $opts = []): array
     }
     return $b + ['format' => 'lcnda-succ', 'version' => 1, 'made_at' => date('c'), 'addresses' => $keepAddr,
         'case' => $c, 'case_persons' => $cp, 'deadlines' => $q('SELECT * FROM succ_deadlines WHERE case_id=?'), 'pieces' => $q('SELECT * FROM succ_pieces WHERE case_id=?'),
-        'journal' => $q('SELECT * FROM succ_journal WHERE case_id=? ORDER BY id'), 'fees' => $q('SELECT * FROM succ_fees WHERE case_id=?'), 'courriers' => $courriers];
+        'journal' => $q('SELECT * FROM succ_journal WHERE case_id=? ORDER BY id'), 'fees' => $q('SELECT * FROM succ_fees WHERE case_id=?'), 'courriers' => $courriers]
+        + (function_exists('succ_p2_bundle') && succ_p2_ready($pdo) ? succ_p2_bundle($pdo, $caseId) : []); // 📞 💶 ⚰️ 📋 et copie des factures (successoral_plus2.php)
 }
 function succ_insert(PDO $to, string $table, array $row, array $set = [], bool $keepId = false): int
 {
@@ -779,6 +784,7 @@ function succ_bundle_import(PDO $to, array $b, string $mediaTo, ?callable $media
         $how = (string) ($opts['how'] ?? 'move');
         foreach ($b['case_persons'] ?? [] as $r) { if (isset($pmap[(int) $r['person_id']])) { $to->prepare('INSERT OR IGNORE INTO succ_case_persons(case_id, person_id, role, how) VALUES(?,?,?,?)')->execute([$caseId, $pmap[(int) $r['person_id']], in_array($r['role'], SUCC_ROLES, true) ? $r['role'] : 'verify', in_array($how, SUCC_HOWS, true) ? $how : 'move']); } }
         if ($set['deceased_id']) { $to->prepare("INSERT OR IGNORE INTO succ_case_persons(case_id, person_id, role, how) VALUES(?,?, 'deceased', 'open')")->execute([$caseId, $set['deceased_id']]); }
+        if (function_exists('succ_p2_bundle_import')) { succ_p2_bundle_import($to, $b, $caseId, $pmap, $cmap); } // ⚖️ outils de plus
     }
     return ['map' => $pmap, 'case_id' => $caseId, 'similar' => $similar];
 }
@@ -1056,6 +1062,7 @@ function succ_archive_path(string $token): string
 /** lire une archive : le lot et ses médias */
 function succ_archive_read(string $path): array
 {
+    if (function_exists('succ_p2_archive_open')) { $path = succ_p2_archive_open($path); } // 📦 archive chiffrée : déchiffrée à part (successoral_plus2.php)
     $zip = new ZipArchive();
     if ($zip->open($path) !== true) { throw new LcndaBadInput('Ce fichier n’est pas une archive de dossier de succession.'); }
     $raw = $zip->getFromName('dossier.json');
@@ -1072,6 +1079,7 @@ function succ_archive_upload(): string
     $name = date('Ymd-His') . '-dossier-reimport-' . bin2hex(random_bytes(3)) . SUCC_ARCHIVE_EXT;
     $dest = succ_archive_dir() . '/' . $name;
     if (!move_uploaded_file((string) $f['tmp_name'], $dest)) { throw new LcndaBadInput('Le fichier n’a pas été reçu.'); }
+    if (function_exists('succ_p2_archive_encrypted') && succ_p2_archive_encrypted($dest)) { return $name; } // 📦 protégée : lue après le mot de passe
     [$b, $zip] = succ_archive_read($dest); $zip->close();
     return $name;
 }

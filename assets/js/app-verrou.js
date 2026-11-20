@@ -214,11 +214,15 @@
     const EXP = {csv: 'CSV', gedcom: 'GEDCOM', plus: 'Autre format', json: 'JSON', sqlite: 'Base .db', backup: 'Sauvegarde complète', report: 'Rapport de recherche', book: 'Livre de famille',
         sync: 'Paquet du travail à deux', vault: 'Copie chez un cousin', museum: 'Musée de famille', list: 'Liste', block: 'Bloc', share: 'Partage avec la famille', website: 'Site web',
         website_publish: 'Site web publié', offsite: 'Copie hors de l’ordinateur', access_csv: 'Registre « Qui a vu quoi » (CSV)', succ_archive: 'Archive du dossier (.zip)',
-        succ_move: 'Dossier déplacé vers une autre généalogie', succ_journal_csv: 'Journal du dossier (CSV)', succ_pdf: 'Tableau, arbre ou parts imprimés'};
+        succ_move: 'Dossier déplacé vers une autre généalogie', succ_journal_csv: 'Journal du dossier (CSV)', succ_pdf: 'Tableau, arbre ou parts imprimés',
+        // ⚖️ outils de plus (lib/successoral_plus2.php)
+        succ_questionnaire: 'Questionnaire d’héritier fabriqué', succ_answers: 'Réponses d’un questionnaire écrites', succ_notary_copy: 'Copie du dossier pour le notaire', succ_invoice: 'Facture émise ou imprimée', succ_invoice_csv: 'Registre des factures (CSV)',
+        succ_decompte: 'Décompte des fonds imprimé', succ_research: 'Recherches faites (pour le notaire)', succ_map: 'Image de la carte des héritiers', succ_contract: 'Contrat imprimé', succ_merge: 'Dossiers fusionnés'};
     const WHY = {open: 'pour ouvrir la généalogie', change: 'pour changer le mot de passe', remove: 'pour retirer le mot de passe', minutes: 'pour changer le délai', backup: 'pour une sauvegarde protégée'};
     const MONTHS = [[3, '3 mois'], [6, '6 mois'], [12, '12 mois'], [36, '3 ans'], [0, 'tout garder']];
     function whatText(r) {
         const [code, n] = String(r.what || '').split('|');
+        if (r.kind === 'export' && /^succ_(archive|notary_copy|merge)$/.test(code)) { const W = {enc: 'chiffrée', plain: 'sans mot de passe', addr: 'avec les adresses', noaddr: 'sans adresse', two: 'deux défunts', linked: 'dossiers liés'}; return [i18n(EXP[code]), ...String(r.what).split('|').slice(1).map(x => (W[x] ? i18n(W[x]) : x))].join(' · '); } // ⚖️ « chiffrée oui / non »
         if (r.kind === 'export') return code === 'dashboard_csv' ? i18n('Tableau de bord des dossiers (CSV) · dossiers : {n}', {n: Number(n) || 0}) : i18n(EXP[code] || 'Export') + (n ? ` (${n})` : '');
         if (r.kind === 'print') return i18n(EXP[code] || 'Impression ou PDF');
         if (r.kind === 'letters') return code === 'unfile' ? i18n('Lettres retirées (↶ Annuler) : {n}', {n: Number(n) || 0}) : i18n('Lettres rangées : {n}', {n: Number(n) || 0});

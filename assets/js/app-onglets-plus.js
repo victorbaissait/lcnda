@@ -173,7 +173,7 @@
             const show = plusOn() && !kiosk() && !simple() && win.GENEALOGY_READY !== false;
             if (!show) { b?.remove(); return; }
             if (!b) { b = doc.createElement('button'); b.type = 'button'; b.className = 'nav-add-tab'; b.dataset.tabPlus = ''; b.innerHTML = '<span aria-hidden="true">＋</span><b class="nav-add-txt"></b>'; }
-            const t = i18n('Ajouter un onglet'); if (b.title !== t) { b.title = t; b.setAttribute('aria-label', t); b.querySelector('.nav-add-txt').textContent = i18n('＋ Ajouter un onglet').replace(/^＋\s*/, ''); }
+            const t = i18n('Ajouter un onglet'); if (b.getAttribute('aria-label') !== t) { b.title = t; b.setAttribute('aria-label', t); b.querySelector('.nav-add-txt').textContent = i18n('＋ Ajouter un onglet').replace(/^＋\s*/, ''); }
             if (n.lastElementChild !== b) n.appendChild(b); // toujours le dernier (applyMenuOrder range les autres)
         }
         /* ── Réglages → Menus : le bouton, la case « Montrer le ＋ », « Retirer » sur les raccourcis ── */

@@ -277,7 +277,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
                 const np = await pg.textContent('.succ-npreview'); assert.match(np, /TABLEAU GÉNÉALOGIQUE/); assert.match(np, /Suzanne MAZAUD/); assert.doesNotMatch(np, /place de l’Église/, 'pas d’adresse sans la case');
                 await pg.check('[data-succ-naddr]'); assert.match(await pg.textContent('.succ-npreview'), /place de l’Église/);
                 await pg.click('[data-succ-tab="contacts"]'); await pg.click('[data-succ-letter="contrat"]'); await pg.waitForSelector('dialog[open] textarea[name=letter]');
-                const letter = await pg.inputValue('dialog[open] textarea[name=letter]'); assert.match(letter, /CONTRAT DE RÉVÉLATION/); assert.doesNotMatch(letter, /Marcel/, 'le défunt n’est pas révélé');
+                const letter = await pg.inputValue('dialog[open] textarea[name=letter]'); assert.doesNotMatch(letter, /CONTRAT DE RÉVÉLATION/, 'le brouillon de l’app est retiré par défaut (réglage contract_builtin, heritage-successoral-plus2b.js)'); assert.match(letter, /\{siret\}/, 'une page vide avec les champs'); assert.doesNotMatch(letter, /Marcel/, 'le défunt n’est pas révélé');
                 await shot(pg, 'contrat'); await pg.keyboard.press('Escape');
                 const items = await pg.evaluate(() => window.LCNDA_EXT.personMoreItems.map(f => { try { return f({person: {id: 10, living_status: 'deceased'}, events: []})?.label; } catch (_) { return null; } }).filter(Boolean));
                 assert.ok(items.includes('Rechercher les héritiers…'));
@@ -296,7 +296,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
                     const { ctx, pg, errs } = await open(w0, h0, dark, '#successoral');
                     const ux = async name => { fs.mkdirSync(UX, { recursive: true }); await pg.screenshot({ path: path.join(UX, `ux-${name}-${tag}.png`), fullPage: true }); };
                     await pg.waitForSelector('.succ-views [data-succ-view="cases"].is-active');
-                    assert.deepEqual(await pg.$$eval('.succ-views [data-succ-view]', bs => bs.map(b => b.textContent.trim())), ['Dossiers', 'Héritiers à contacter', 'Courriers']);
+                    assert.deepEqual(await pg.$$eval('.succ-views [data-succ-view]', bs => bs.map(b => b.textContent.trim())), ['Dossiers', 'Héritiers à contacter', 'Courriers', '📈 Activité']); // 📈 Activité : heritage-successoral-plus2b.js
                     assert.equal(await pg.locator('.main-nav [data-board="ct_usvivants"], .main-nav [data-board="ct_uscourriers"]').count(), 0);
                     await noSide(pg); await ux('dossiers');
                     // 👥 Héritiers à contacter

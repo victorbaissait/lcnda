@@ -59,6 +59,7 @@ function succ_due_items(PDO $pdo, int $caseId): array
         $c->execute([$caseId, $until]);
         foreach ($c->fetchAll(PDO::FETCH_ASSOC) as $k) { $out[] = ['kind' => 'relance', 'id' => (int) $k['id'], 'due' => (string) $k['relance_date'], 'label' => 'Relance courrier n° ' . (int) $k['id'] . ' — ' . (SUCC_LETTER_KIND_LABELS[(string) $k['succ_kind']] ?? 'courrier'), 'sort' => (string) $k['succ_kind']]; }
     } catch (Throwable $_) {}
+    if (function_exists('succ_p2_due_items')) { $out = array_merge($out, succ_p2_due_items($pdo, $caseId, $until)); } // 🗓 📮 💶 📅 (successoral_plus2.php)
     return $out;
 }
 

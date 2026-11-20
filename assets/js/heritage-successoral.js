@@ -45,7 +45,9 @@
     const STATES = [['ouvert', 'Ouvert'], ['recherche', 'En recherche'], ['trouves', 'Héritiers trouvés'], ['remis', 'Remis au notaire'], ['clos', 'Clos']];
     const stateLabel = s => i18n((STATES.find(x => x[0] === s) || [0, s === 'archive' ? 'Archivé' : s])[1]);
     const stateKind = s => ({ouvert: 'grey', recherche: 'blue', trouves: 'green', remis: 'violet', clos: 'grey', archive: 'grey'}[s] || 'grey');
-    const TABS = [['dossier', '📁 Dossier'], ['heirs', '👥 Héritiers'], ['people', '🧑‍🤝‍🧑 Personnes'], ['tree', '🌳 Arbre'], ['pieces', '📑 Pièces'], ['contacts', '✉️ Héritiers contactés'], ['notary', '🖨 Pour le notaire'], ['journal', '🕓 Journal'], ['fees', '💶 Temps et frais']];
+    const TABS0 = [['dossier', '📁 Dossier'], ['heirs', '👥 Héritiers'], ['people', '🧑‍🤝‍🧑 Personnes'], ['tree', '🌳 Arbre'], ['pieces', '📑 Pièces'], ['contacts', '✉️ Héritiers contactés'], ['notary', '🖨 Pour le notaire'], ['journal', '🕓 Journal'], ['fees', '💶 Temps et frais']];
+    const P2 = () => ext.succPlus2 || {}; // ⚖️ outils de plus (heritage-successoral-plus2.js) : 📞 onglet Échanges (réglage), 📈 vue Activité, ajouts aux onglets
+    const tabsOf = () => (P2().tabs ? P2().tabs(TABS0) : TABS0);
     const NOTICE = {info: 'ℹ️', warn: '⚠️', error: '⛔', ok: '✓'};
     /** un message K8 dont le texte contient des liens (les articles de loi) : déjà échappé */
     const noticeHtml = (k, html) => `<div class="ui-notice ui-notice-${k}" role="${k === 'error' ? 'alert' : 'status'}"><span class="ui-notice-ico" aria-hidden="true">${NOTICE[k]}</span><span>${html}</span></div>`;
@@ -72,7 +74,8 @@
     const prevShown = ext.listShown;
     ext.listShown = k => (k === LIST ? !hidden() : prevShown ? prevShown(k) : true);
 
-    const VIEWS = [['cases', 'Dossiers'], ['heirs', 'Héritiers à contacter'], ['mail', 'Courriers']]; // le sélecteur en haut de la liste (retenu : « lcnda-succ-view »)
+    const VIEWS0 = [['cases', 'Dossiers'], ['heirs', 'Héritiers à contacter'], ['mail', 'Courriers']]; // le sélecteur en haut de la liste (retenu : « lcnda-succ-view »)
+    const viewsOf = () => (P2().views ? P2().views(VIEWS0) : VIEWS0); // + 📈 Activité
     let cur = {id: 0, data: null, R: null, tab: store.get('lcnda-succ-tab', 'dossier'), where: 'list', pieceView: 'heir', view: store.get('lcnda-succ-view', 'cases')};
     const ws = () => document.getElementById('workspace');
     const sameTurn = token => token === undefined || !A().state || token === A().state.workspaceToken;
@@ -96,15 +99,17 @@
         if (hidden()) { w.innerHTML = `<section class="page">${UI().notice('info', i18n('Les dossiers de succession ne se montrent pas en mode consultation ni en mode simple.'))}<p>${LAW_BTN()}</p></section>`; return; } // ⚖️ la recherche reste : ce n'est qu'un lien
         if (cur.id) return renderCase(w, token);
         const where = cur.where === 'tab' ? i18n('Successions') : i18n('Listes · Recherche et organisation');
+        const VIEWS = viewsOf();
         if (!VIEWS.some(v => v[0] === cur.view)) cur.view = 'cases';
         w.innerHTML = `<section class="page succ-page">${UI().pageHeader({title: i18n('Dossiers de succession'), icon: '⚖️', where,
             help: i18n('Retrouver les héritiers d’une personne décédée, pour un notaire : un dossier par défunt. À ne pas confondre avec « 🏠 Héritages et successions » (les actes anciens des ancêtres).'),
-            actions: [LAW_BTN(), `<button type="button" class="button" data-succ-new>${esc(i18n('＋ Ouvrir un dossier'))}</button>`], more: [...(ext.succDossiers?.boardMore?.() || []), `<button type="button" data-succ-b8all>📜 ${esc(i18n('Qui a vu quoi'))}</button>`]})}
+            actions: [LAW_BTN(), `<button type="button" class="button" data-succ-new>${esc(i18n('＋ Ouvrir un dossier'))}</button>`], more: [...(ext.succDossiers?.boardMore?.() || []), ...(P2().boardMore?.() || []), `<button type="button" data-succ-b8all>📜 ${esc(i18n('Qui a vu quoi'))}</button>`]})}
             <div class="segmented succ-views" role="tablist" aria-label="${esc(i18n('Que montrer'))}">${VIEWS.map(([k, l]) => `<button type="button" role="tab" data-succ-view="${k}" class="${cur.view === k ? 'is-active' : ''}" aria-selected="${cur.view === k}">${esc(i18n(l))}</button>`).join('')}</div>
             <div data-succ-body>${UI().spinner(i18n(cur.view === 'heirs' ? 'Lecture des héritiers…' : cur.view === 'mail' ? 'Lecture des courriers…' : 'Lecture des dossiers…'))}</div></section>`;
         const body = w.querySelector('[data-succ-body]');
         if (cur.view === 'heirs') return heirsBoard(body, token);
         if (cur.view === 'mail') return mailBoard(body, token);
+        if (!VIEWS0.some(v => v[0] === cur.view) && P2().view) return P2().view(cur.view, body, token); // 📈 Activité
         if (ext.succDossiers?.board) return ext.succDossiers.board(body, token); // 4. le tableau de bord des dossiers (toutes les généalogies)
         let d; try { d = await get('list'); } catch (e) { body.innerHTML = UI().notice('error', e.message); return; }
         if (!sameTurn(token)) return;
@@ -246,6 +251,7 @@
                 : `<tr><td colspan="7">${esc(i18n('Aucun courrier ne correspond.'))}</td></tr>`;
         }
         draw();
+        try { P2().mailExtra?.(body, mailRows); } catch (_) {} // 📮 recommandés (heritage-successoral-plus2.js)
     }
     /** ouvrir un courrier de succession : la lettre, la réponse et la signature */
     function mailDialog(r) {
@@ -336,11 +342,12 @@
             w.innerHTML = `<section class="page succ-page">${UI().spinner(i18n('Lecture du dossier…'))}</section>`;
             try { cur.data = await get('get', {id: cur.id}); } catch (e) { cur.id = 0; w.innerHTML = `<section class="page">${UI().notice('error', e.message)}<p><button type="button" class="button secondary" data-succ-back>${esc(i18n('← Tous les dossiers'))}</button></p></section>`; return; }
             if (!sameTurn(token)) return;
+            try { P2().prepare?.(cur.data); } catch (_) {} // 👥 journal d'un dossier fusionné, marqué
             cur.R = cur.data.deceased_id ? computeCase(cur.data) : null;
             noteRecalc(cur.data, cur.R);
             if (cur.R && !cur.R.error) { try { ext.succDossiers?.afterCompute?.(cur.data, cur.R, piecesOf(cur.data, cur.R)); } catch (_) {} } // héritiers et intermédiaires rattachés, avancement gardé
         }
-        const D = cur.data, R = cur.R;
+        const D = cur.data, R = cur.R, TABS = tabsOf();
         if (!TABS.some(t => t[0] === cur.tab)) cur.tab = 'dossier';
         const dead = D.graph.persons[D.deceased_id];
         const years = dead ? [dead.birth?.year, dead.death?.year].filter(Boolean).join('-') : '';
@@ -350,15 +357,17 @@
         w.innerHTML = `<section class="page succ-page" data-succ-case="${D.id}">${UI().pageHeader({title: i18n('Dossier n° {n} · {t}', {n: D.number, t: D.title}), icon: '⚖️', where: cur.where === 'tab' ? i18n('Successions') : i18n('Listes · Dossiers de succession'),
             help: [D.deceased ? `${esc(D.deceased)}${years ? ` (${esc(years)})` : ''}` : '', badge(stateLabel(D.state), stateKind(D.state))].filter(Boolean).join(' '),
             back: `<button type="button" class="button small secondary" data-succ-back>${esc(i18n('← Tous les dossiers'))}</button>`,
-            actions: [`<span class="succ-chrono-slot" data-succ-chrono-slot>${OUT().chronoButton?.(D) || ''}</span>`, `<button type="button" class="button secondary" data-succ-loi="case" title="${esc(i18n('⚖️ Un doute sur la loi ?'))}">${esc(i18n('⚖️ Un doute ?'))}</button>`, ...(D.archived ? [] : [`<button type="button" class="button secondary" data-succ-edit="${D.id}">${esc(i18n('✎ Modifier'))}</button>`])],
-            more: [D.deceased_id ? `<button type="button" data-h-person="${D.deceased_id}">${esc(i18n('↗ Fiche du défunt'))}</button>` : '', D.state === 'clos' ? `<button type="button" data-succ-archive>${esc(i18n('🗄 Archiver le dossier clos'))}</button>` : '', ...(ext.succDossiers?.caseMore?.(D) || []), `<button type="button" class="danger" data-succ-del="${D.id}">${esc(i18n('🗑 Supprimer'))}</button>`]})}
+            actions: [`<span class="succ-chrono-slot" data-succ-chrono-slot>${OUT().chronoButton?.(D) || ''}</span>`, ...(P2().caseActions?.(D) || []), `<button type="button" class="button secondary" data-succ-loi="case" title="${esc(i18n('⚖️ Un doute sur la loi ?'))}">${esc(i18n('⚖️ Un doute ?'))}</button>`, ...(D.archived ? [] : [`<button type="button" class="button secondary" data-succ-edit="${D.id}">${esc(i18n('✎ Modifier'))}</button>`])],
+            more: [D.deceased_id ? `<button type="button" data-h-person="${D.deceased_id}">${esc(i18n('↗ Fiche du défunt'))}</button>` : '', D.state === 'clos' ? `<button type="button" data-succ-archive>${esc(i18n('🗄 Archiver le dossier clos'))}</button>` : '', ...(ext.succDossiers?.caseMore?.(D) || []), ...(P2().caseMore?.(D) || []), `<button type="button" class="danger" data-succ-del="${D.id}">${esc(i18n('🗑 Supprimer'))}</button>`]})}
             ${D.archived ? UI().notice('info', i18n('Dossier archivé : les adresses des vivants ont été retirées, le journal reste.')) : `<div class="succ-steps" role="group" aria-label="${esc(i18n('État du dossier'))}">${STATES.map(([k, l], i) => `<button type="button" class="succ-step${i < stIdx ? ' is-done' : ''}${i === stIdx ? ' is-on' : ''}" data-succ-state="${k}" aria-pressed="${i === stIdx}">${i < stIdx ? '✓ ' : ''}${esc(i18n(l))}</button>`).join('')}</div>`}
             <div class="segmented succ-tabs" role="tablist">${TABS.map(([k, l]) => `<button type="button" role="tab" data-succ-tab="${k}" class="${cur.tab === k ? 'is-active' : ''}" aria-selected="${cur.tab === k}">${esc(tabLabel(k, l))}</button>`).join('')}</div>
             <div data-succ-tabbody></div></section>`;
         const body = w.querySelector('[data-succ-tabbody]');
         try { OUT().onCase?.(D, cur.tab, (TABS.find(x => x[0] === cur.tab) || [])[1]); } catch (_) {} // ⏱ les onglets ouverts pendant le comptage
         if (!D.deceased_id || !R || R.error) { body.innerHTML = UI().notice('error', R?.error || i18n('Le défunt n’est plus dans la base.')); return; }
-        ({dossier: tabDossier, heirs: (b, D_, R_) => { if (OUT().euroMode?.() === 'eur') { b.innerHTML = `${OUT().heirsSwitch()}<div data-succ-eur></div>`; return OUT().heirsEuros(b.querySelector('[data-succ-eur]'), D_, R_); } tabHeirs(b, D_, R_); if (OUT().heirsSwitch) b.insertAdjacentHTML('afterbegin', OUT().heirsSwitch()); ext.succDossiers?.heirsExtra?.(b, D_); }, people: (b, D_) => ext.succDossiers?.tabPeople?.(b, D_), tree: tabTree, pieces: tabPieces, contacts: tabContacts, notary: tabNotary, journal: tabJournal, fees: tabFees})[cur.tab](body, D, R, P_);
+        const own = {dossier: tabDossier, heirs: (b, D_, R_) => { if (OUT().euroMode?.() === 'eur') { b.innerHTML = `${OUT().heirsSwitch()}<div data-succ-eur></div>`; return OUT().heirsEuros(b.querySelector('[data-succ-eur]'), D_, R_); } tabHeirs(b, D_, R_); if (OUT().heirsSwitch) b.insertAdjacentHTML('afterbegin', OUT().heirsSwitch()); ext.succDossiers?.heirsExtra?.(b, D_); }, people: (b, D_) => ext.succDossiers?.tabPeople?.(b, D_), tree: tabTree, pieces: tabPieces, contacts: tabContacts, notary: tabNotary, journal: tabJournal, fees: tabFees};
+        if (own[cur.tab]) own[cur.tab](body, D, R, P_); else P2().tab?.(cur.tab, body, D, R, P_); // 📞 Échanges
+        try { P2().after?.(cur.tab, body, D, R, P_); } catch (e) { console.error(e); } // ⚖️ ajouts des outils de plus à chaque onglet
     }
 
     /* ── 📁 Dossier ── */
@@ -383,7 +392,7 @@
             ${dl.length ? `<ul class="succ-deadlines">${dl.map(x => { const n = daysTo(x.due); const k = x.done ? 'grey' : n < 0 ? 'red' : n <= 14 ? 'yellow' : 'blue';
                 return `<li class="${x.done ? 'is-done' : ''}">${UI().checkHtml ? UI().checkHtml('', {checked: x.done, attrs: `data-succ-dl-done="${x.id}" aria-label="${esc(i18n('Fait'))}"`}) : ''}<b>${esc(fmtDate(x.due))}</b><span>${esc(x.label)}</span>${badge(x.done ? i18n('Fait') : n < 0 ? i18n('Passée') : n === 0 ? i18n('Aujourd’hui') : i18n('Dans {n} j', {n}), k)}<button type="button" class="icon-button small" data-succ-dl-del="${x.id}" title="${esc(i18n('Supprimer'))}" aria-label="${esc(i18n('Supprimer'))}">🗑</button></li>`; }).join('')}</ul>` : A().empty(i18n('Aucune échéance.'), {icon: '🗓'})}
             <p class="ui-hint">${esc(i18n('Aussi dans 🗓 Ma semaine de recherche.'))}</p></section>
-            <div class="succ-quick">${TABS.slice(1).map(([k, l]) => `<button type="button" class="button secondary" data-succ-tab="${k}">${esc(k === 'pieces' ? `${i18n('📑 Pièces')} (${P_.counts.have} / ${P_.counts.total})` : k === 'notary' ? i18n('🖨 Tableau pour le notaire') : i18n(l))}</button>`).join('')}</div>`;
+            <div class="succ-quick">${tabsOf().slice(1).map(([k, l]) => `<button type="button" class="button secondary" data-succ-tab="${k}">${esc(k === 'pieces' ? `${i18n('📑 Pièces')} (${P_.counts.have} / ${P_.counts.total})` : k === 'notary' ? i18n('🖨 Tableau pour le notaire') : i18n(l))}</button>`).join('')}</div>`;
     }
 
     /* ── 👥 Héritiers et dévolution ── */
@@ -558,9 +567,15 @@
     /** les modèles (aussi dans le traitement de texte) : rien n'y révèle le défunt avant la signature */
     const TEMPLATES = {
         contact: () => [i18n('Madame, Monsieur,'), i18n('Généalogiste successoral, je suis chargé(e) par une étude notariale de retrouver les héritiers d’une personne décédée. Mes recherches me laissent penser que vous pourriez faire partie de sa famille.'), i18n('Pour le vérifier, pourriez-vous me confirmer votre date et votre lieu de naissance, ainsi que les noms de vos parents ? Vous pouvez me répondre par courrier, par téléphone ou par courriel.'), i18n('Cette démarche ne vous engage à rien.'), i18n('Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées.')].join('\n\n'),
-        contrat: () => [i18n('CONTRAT DE RÉVÉLATION DE SUCCESSION'), i18n('Entre {heir}, ci-après « l’héritier », et {sender}, généalogiste successoral.'), i18n('Le généalogiste a découvert une succession en cours dans laquelle l’héritier pourrait avoir des droits. Il s’engage à lui en révéler l’origine (le nom de la personne décédée, l’étude notariale chargée du règlement) dès la signature du présent contrat, et à réunir les actes qui prouvent sa qualité d’héritier.'), i18n('En contrepartie, l’héritier s’engage à verser au généalogiste des honoraires de ____ % (hors taxes) de l’actif net qui lui reviendra, payables seulement s’il reçoit effectivement une part de la succession. Les frais de recherche sont compris.'), i18n('Cette proposition est valable jusqu’au ____________.'), i18n('Fait en deux exemplaires, à ____________, le ____________.'), i18n('L’héritier (« Lu et approuvé », signature) — Le généalogiste')].join('\n\n'),
-        relance: () => [i18n('Madame, Monsieur,'), i18n('Je me permets de revenir vers vous au sujet de mon courrier du {sent}, resté sans réponse. Une succession en cours pourrait vous concerner : pourriez-vous me contacter ?'), i18n('Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées.')].join('\n\n'),
+        // 📝 réglage « contract_builtin » (heritage-successoral-plus2.js) : retiré par défaut (page vide avec les champs), ou gardé marqué « exemple non juridique »
+        contrat: () => (P2().contractText ? P2().contractText(BUILTIN_CONTRACT) : BUILTIN_CONTRACT()),
     };
+    function BUILTIN_CONTRACT() {
+        return [i18n('CONTRAT DE RÉVÉLATION DE SUCCESSION'), i18n('Entre {heir}, ci-après « l’héritier », et {sender}, généalogiste successoral.'), i18n('Le généalogiste a découvert une succession en cours dans laquelle l’héritier pourrait avoir des droits. Il s’engage à lui en révéler l’origine (le nom de la personne décédée, l’étude notariale chargée du règlement) dès la signature du présent contrat, et à réunir les actes qui prouvent sa qualité d’héritier.'), i18n('En contrepartie, l’héritier s’engage à verser au généalogiste des honoraires de ____ % (hors taxes) de l’actif net qui lui reviendra, payables seulement s’il reçoit effectivement une part de la succession. Les frais de recherche sont compris.'), i18n('Cette proposition est valable jusqu’au ____________.'), i18n('Fait en deux exemplaires, à ____________, le ____________.'), i18n('L’héritier (« Lu et approuvé », signature) — Le généalogiste')].join('\n\n');
+    }
+    Object.assign(TEMPLATES, {
+        relance: () => [i18n('Madame, Monsieur,'), i18n('Je me permets de revenir vers vous au sujet de mon courrier du {sent}, resté sans réponse. Une succession en cours pourrait vous concerner : pourriez-vous me contacter ?'), i18n('Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées.')].join('\n\n'),
+    });
     const fillT = (s, v) => String(s).replace(/\{(\w+)\}/g, (m, k) => (v[k] != null ? v[k] : m));
     const sender = () => { const c = store.get('genealogie-courriers-lettres', {}) || {}; return c.sender || {}; };
     /* ── ✉️ Courriers en série (B6) : la même lettre à plusieurs héritiers, des champs, un aperçu par lettre, rangée d'un coup ──
@@ -676,6 +691,7 @@
                         made.push(...(r.ids || []));
                     }
                 } catch (e) { toast(e.message, 'error'); if (made.length) await post({op: 'unfile_letters', case_id: D.id, ids: made}).catch(() => {}); return false; }
+                try { await P2().afterLetters?.(D, made, form.kind.value); } catch (_) {} // 📝 la version de ton modèle retenue sur chaque contrat rangé
                 const rel = Number(form.relance_jours.value) || 0, relDay = rel ? (() => { const dd = new Date(form.date_envoi.value + 'T12:00:00'); dd.setDate(dd.getDate() + rel); return dd.toISOString().slice(0, 10); })() : '';
                 A().undoToast(relDay ? i18n('{n} rangés dans le Registre de courriers, relance le {d}', {n: plural(made.length, 'courrier'), d: fmtDate(relDay)}) : i18n('{n} rangés dans le Registre de courriers', {n: plural(made.length, 'courrier')}),
                     {undo: async () => { await post({op: 'unfile_letters', case_id: D.id, ids: made}); reload(); }});
