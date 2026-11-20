@@ -666,6 +666,7 @@
         ['simple', '#mode-simple-open', '🧓', 'Mode simple'],
         ['calc', '#calculette-open', '🧮', 'Calculette'],
         ['report', '#report-problem-open', '🐞', 'Signaler un bug'],
+        ['bell', '#succ-bell-open', '🔔', 'Échéances du jour (usage successoral seulement)'], // 🔔 retards et aujourd'hui, tous les dossiers (heritage-successoral-outils.js)
         ['succ', '#succ-filter-open', '⚖️', 'Dossiers de succession (usage successoral seulement)'], // ⚖️ filtre de toute l'app (heritage-successoral-dossiers.js)
         ['genealogies', '#genealogy-switch', '🌳', 'Mes généalogies (changer, en créer une autre)'],
     ];
@@ -693,7 +694,7 @@
     const tbRun = key => { const t = tbTools().find(x => x.key === key); if (!t) return; if (topbarCfg().mode[key] === 'new' && t.create) return t.create(); return t.go(); };
     function topbarSetMode(k, m) { if (!isTool(k)) return; const c = topbarCfg(); if (m === 'new') c.mode[k] = 'new'; else delete c.mode[k]; lsSet(TB_KEY, c); applyTopbar(); }
     const isTool = k => /^(et|enq|act)_/.test(k);
-    const tbItems = () => [...TB_ITEMS.filter(b => b[0] !== 'succ' || succUsage()), ...tbTools().map(t => [t.key, '#tb-go-' + t.key, t.icon, t.label, t.group])];
+    const tbItems = () => [...TB_ITEMS.filter(b => !['succ', 'bell'].includes(b[0]) || succUsage()), ...tbTools().map(t => [t.key, '#tb-go-' + t.key, t.icon, t.label, t.group])];
     const tbKeys = () => tbItems().map(b => b[0]);
     function topbarCfg() {
         const v = lsGet(TB_KEY, {}) || {}, keys = tbKeys();

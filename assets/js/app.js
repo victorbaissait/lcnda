@@ -1338,6 +1338,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         if(type==='module'&&Object.prototype.hasOwnProperty.call(modules,value)&&value!=='jeu')return setModule(value);
         if(type==='list'){state.listType=value;return setModule('listes');}
         if(type==='maint'){state.maintenanceTab=value;return setModule('maintenance');}
+        if(type==='search'&&/^[a-z_]{2,40}$/.test(value)){state.researchKind=value;return setModule('recherche');} // 🌍 « Où chercher ? » (＋ Ajouter un onglet, app-onglets-plus.js)
         if(type==='graph'){state.graphMode=value;state.graphStatsFrozenColors=null;return setModule('graphiques');}
         if(type==='stat'){state.graphMode='stats';state.graphStatsType=value;state.graphStatsFrozenColors=null;return setModule('graphiques');}
         if(type==='mylist'&&Number(value)){state.maintenanceTab='my_lists';state.hListOpen=Number(value);return setModule('maintenance');}

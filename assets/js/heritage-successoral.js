@@ -28,7 +28,8 @@
     const plural = (n, w, many) => (A()?.plural ? A().plural(n, w, many) : `${n} ${w}`);
     const LIST = 'successoral';
     const get = (op, q = {}) => A().api('successoral', {op, ...q});
-    const post = async body => { const r = await A().api('successoral_write', {}, {method: 'POST', body}); return r.result || r; };
+    const post = async body => { const r = await A().api('successoral_write', {}, {method: 'POST', body}); try { window.dispatchEvent(new CustomEvent('lcnda:succ-changed', {detail: {op: body?.op}})); } catch (_) {} return r.result || r; }; // 🔔 la cloche se relit après chaque changement
+    const OUT = () => ext.succOutils || {}, OC = () => window.LCNDA_SUCC_OUTILS; // ⏱ 🔔 📋 📊 heritage-successoral-outils.js, ✉️ 🧾 heritage-successoral-outils-core.js
     const toast = (...a) => A().toast(...a);
     const kiosk = () => document.body?.classList.contains('is-kiosk');
     const simple = () => document.documentElement.classList.contains('ms-open');
@@ -78,6 +79,7 @@
     /** ouvrir un dossier (0 = la liste), dans l'onglet ⚖️ Successions s'il est montré, sinon dans Listes */
     function openCase(id = 0, tab = '') {
         cur.id = Number(id) || 0; cur.data = null; cur.R = null; if (tab) cur.tab = tab;
+        OUT().forget?.(cur.id); // 📊 l'actif net tapé est effacé quand on quitte le dossier
         const st = A().state, nav = document.querySelector('.main-nav .nav-item[data-module="successoral"]:not([data-board])');
         if (st.module === 'successoral' || (nav && nav.style.display !== 'none' && st.module !== 'listes')) { if (st.module === 'successoral') render(); else A().setModule('successoral'); return; }
         st.listType = LIST; if (st.module === 'listes') { A().renderSidebar?.(); ext.lists[LIST](); } else A().setModule('listes');
@@ -348,14 +350,15 @@
         w.innerHTML = `<section class="page succ-page" data-succ-case="${D.id}">${UI().pageHeader({title: i18n('Dossier n° {n} · {t}', {n: D.number, t: D.title}), icon: '⚖️', where: cur.where === 'tab' ? i18n('Successions') : i18n('Listes · Dossiers de succession'),
             help: [D.deceased ? `${esc(D.deceased)}${years ? ` (${esc(years)})` : ''}` : '', badge(stateLabel(D.state), stateKind(D.state))].filter(Boolean).join(' '),
             back: `<button type="button" class="button small secondary" data-succ-back>${esc(i18n('← Tous les dossiers'))}</button>`,
-            actions: [`<button type="button" class="button secondary" data-succ-loi="case" title="${esc(i18n('⚖️ Un doute sur la loi ?'))}">${esc(i18n('⚖️ Un doute ?'))}</button>`, ...(D.archived ? [] : [`<button type="button" class="button secondary" data-succ-edit="${D.id}">${esc(i18n('✎ Modifier'))}</button>`])],
+            actions: [`<span class="succ-chrono-slot" data-succ-chrono-slot>${OUT().chronoButton?.(D) || ''}</span>`, `<button type="button" class="button secondary" data-succ-loi="case" title="${esc(i18n('⚖️ Un doute sur la loi ?'))}">${esc(i18n('⚖️ Un doute ?'))}</button>`, ...(D.archived ? [] : [`<button type="button" class="button secondary" data-succ-edit="${D.id}">${esc(i18n('✎ Modifier'))}</button>`])],
             more: [D.deceased_id ? `<button type="button" data-h-person="${D.deceased_id}">${esc(i18n('↗ Fiche du défunt'))}</button>` : '', D.state === 'clos' ? `<button type="button" data-succ-archive>${esc(i18n('🗄 Archiver le dossier clos'))}</button>` : '', ...(ext.succDossiers?.caseMore?.(D) || []), `<button type="button" class="danger" data-succ-del="${D.id}">${esc(i18n('🗑 Supprimer'))}</button>`]})}
             ${D.archived ? UI().notice('info', i18n('Dossier archivé : les adresses des vivants ont été retirées, le journal reste.')) : `<div class="succ-steps" role="group" aria-label="${esc(i18n('État du dossier'))}">${STATES.map(([k, l], i) => `<button type="button" class="succ-step${i < stIdx ? ' is-done' : ''}${i === stIdx ? ' is-on' : ''}" data-succ-state="${k}" aria-pressed="${i === stIdx}">${i < stIdx ? '✓ ' : ''}${esc(i18n(l))}</button>`).join('')}</div>`}
             <div class="segmented succ-tabs" role="tablist">${TABS.map(([k, l]) => `<button type="button" role="tab" data-succ-tab="${k}" class="${cur.tab === k ? 'is-active' : ''}" aria-selected="${cur.tab === k}">${esc(tabLabel(k, l))}</button>`).join('')}</div>
             <div data-succ-tabbody></div></section>`;
         const body = w.querySelector('[data-succ-tabbody]');
+        try { OUT().onCase?.(D, cur.tab, (TABS.find(x => x[0] === cur.tab) || [])[1]); } catch (_) {} // ⏱ les onglets ouverts pendant le comptage
         if (!D.deceased_id || !R || R.error) { body.innerHTML = UI().notice('error', R?.error || i18n('Le défunt n’est plus dans la base.')); return; }
-        ({dossier: tabDossier, heirs: (b, D_, R_) => { tabHeirs(b, D_, R_); ext.succDossiers?.heirsExtra?.(b, D_); }, people: (b, D_) => ext.succDossiers?.tabPeople?.(b, D_), tree: tabTree, pieces: tabPieces, contacts: tabContacts, notary: tabNotary, journal: tabJournal, fees: tabFees})[cur.tab](body, D, R, P_);
+        ({dossier: tabDossier, heirs: (b, D_, R_) => { if (OUT().euroMode?.() === 'eur') { b.innerHTML = `${OUT().heirsSwitch()}<div data-succ-eur></div>`; return OUT().heirsEuros(b.querySelector('[data-succ-eur]'), D_, R_); } tabHeirs(b, D_, R_); if (OUT().heirsSwitch) b.insertAdjacentHTML('afterbegin', OUT().heirsSwitch()); ext.succDossiers?.heirsExtra?.(b, D_); }, people: (b, D_) => ext.succDossiers?.tabPeople?.(b, D_), tree: tabTree, pieces: tabPieces, contacts: tabContacts, notary: tabNotary, journal: tabJournal, fees: tabFees})[cur.tab](body, D, R, P_);
     }
 
     /* ── 📁 Dossier ── */
@@ -546,7 +549,7 @@
                 <td>${contrat && !ro ? `<input type="date" data-succ-signed="${contrat.id}" value="${esc(contrat.signe_le || '')}" aria-label="${esc(i18n('Signé le'))}">${contrat.signe_le ? ' ' + badge(i18n('Signé'), 'green') : last?.reponse === 'yes' ? ' ' + badge(i18n('À signer'), 'yellow') : ''}` : '—'}</td>
                 <td>${ro || r.unknown ? '' : `<button type="button" class="button small secondary" data-succ-write="${r.id}">${esc(i18n('✉️ Écrire'))}</button>`}</td></tr>`;
         };
-        body.innerHTML = `<section class="succ-box"><div class="succ-box-head"><h3>${esc(i18n('Contrat de révélation, réponses, signatures'))}</h3>${ro ? '' : `<div class="succ-acts"><button type="button" class="button" data-succ-letter="contrat">${esc(i18n('📝 Contrat de révélation'))}</button><button type="button" class="button secondary" data-succ-letter="contact">${esc(i18n('✉️ Lettre de premier contact'))}</button></div>`}</div>
+        body.innerHTML = `<section class="succ-box"><div class="succ-box-head"><h3>${esc(i18n('Contrat de révélation, réponses, signatures'))}</h3>${ro ? '' : `<div class="succ-acts"><button type="button" class="button" data-succ-letter="contrat">${esc(i18n('📝 Contrat de révélation'))}</button><button type="button" class="button secondary" data-succ-letter="contact">${esc(i18n('✉️ Lettre de premier contact'))}</button><button type="button" class="button secondary" data-succ-serial>${esc(i18n('✉️ Courrier à plusieurs…'))}</button></div>`}</div>
             <div class="succ-scroll"><table class="succ-table"><thead><tr><th>${esc(i18n('Héritier'))}</th><th>${esc(i18n('Courrier'))}</th><th>${esc(i18n('Envoyé'))}</th><th>${esc(i18n('Réponse'))}</th><th>${esc(i18n('Contrat'))}</th><th></th></tr></thead><tbody>${heirs.map(tr).join('')}</tbody></table></div>
             <p class="ui-hint succ-swipe">${esc(i18n('↔ Faire glisser le tableau.'))}</p>
             <p class="ui-hint">${esc(i18n('📝 Le contrat ne nomme pas le défunt avant signature. Écris toi-même le pourcentage d’honoraires et la date limite. Rien n’est envoyé par l’app.'))}</p>
@@ -560,79 +563,181 @@
     };
     const fillT = (s, v) => String(s).replace(/\{(\w+)\}/g, (m, k) => (v[k] != null ? v[k] : m));
     const sender = () => { const c = store.get('genealogie-courriers-lettres', {}) || {}; return c.sender || {}; };
-    function letterDialog(D, R, kind, only = 0) {
-        const heirs = heirsToContact(R).filter(r => !r.unknown && (!only || r.id === only));
-        const sel = new Set(heirs.filter(r => only || D.addresses?.[r.id]).map(r => r.id));
-        const s = sender();
-        let edited = false;
-        const addrOf = r => [r?.name, ...(D.addresses?.[r?.id]?.lines || [])].filter(Boolean).join('\n');
-        return ext.openDialog({eyebrow: i18n('✉️ HÉRITIERS CONTACTÉS'), title: kind === 'contrat' ? i18n('📝 Contrat de révélation') : kind === 'relance' ? i18n('Relance') : i18n('✉️ Lettre de premier contact'), wide: true, submitLabel: i18n('📋 Ranger dans le Registre de courriers'),
-            body: `<div class="succ-letter"><div class="succ-letter-side"><span class="pk-lab">${esc(i18n('À qui'))}</span><ul class="succ-letter-who">${heirs.map(r => `<li>${UI().checkHtml(r.name, {checked: sel.has(r.id), attrs: `data-succ-to="${r.id}"`, sub: D.addresses?.[r.id] ? (D.addresses[r.id].lines || []).join(', ') : i18n('pas d’adresse dans le Répertoire des vivants')})}</li>`).join('')}</ul>
-                <label>${esc(i18n('Modèle'))}<select name="kind"><option value="contact"${kind === 'contact' ? ' selected' : ''}>${esc(i18n('Premier contact'))}</option><option value="contrat"${kind === 'contrat' ? ' selected' : ''}>${esc(i18n('Contrat de révélation'))}</option><option value="relance"${kind === 'relance' ? ' selected' : ''}>${esc(i18n('Relance'))}</option></select></label>
+    /* ── ✉️ Courriers en série (B6) : la même lettre à plusieurs héritiers, des champs, un aperçu par lettre, rangée d'un coup ──
+     * Décochés d'office : sans adresse, 🔎 introuvable, 🔇 ne répond pas (signalés) ; jamais ceux dont l'existence n'est pas
+     * établie. Champs : {civilité} {prénom} {nom} {adresse} {qualité} {dossier} {notaire} (contrat) {date} {envoyé_le}
+     * (le courrier précédent) {expéditeur} ; le nom du défunt n'est jamais un champ. Modèles à soi : la généalogie des dossiers. */
+    const SERIAL_KINDS = [['contact', 'Premier contact'], ['contrat', 'Contrat de révélation'], ['relance', 'Relance']];
+    function letterDialog(D, R, kind, only = 0, serial = false) {
+        const O_ = OC();
+        const all = O_.recipients(D, R).filter(r => !only || r.id === only);
+        const sel = new Set(all.filter(r => only ? true : r.checked).map(r => r.id));
+        const s = sender(), senderTxt = [s.name, s.address].filter(Boolean).join(', ');
+        const own = new Map(); // ✎ lettres retouchées à la main, par héritier
+        let edited = false, mine = [], at = 0, view = 'model';
+        const why = r => r.why === 'introuvable' ? `🔎 ${i18n('introuvable')}${r.since ? ' ' + i18n('depuis le {d}', {d: fmtDate(r.since)}) : ''} · ${i18n('décoché')}` : r.why === 'silence' ? `🔇 ${i18n('ne répond pas')}${r.since ? ' ' + i18n('depuis le {d}', {d: fmtDate(r.since)}) : ''} · ${i18n('décoché')}` : r.why === 'noaddr' ? `${i18n('pas d’adresse dans le Répertoire des vivants')} · ${i18n('décoché')}` : '';
+        const sub = r => [r.address, why(r), r.last ? i18n('déjà écrit le {d} ({k})', {d: fmtDate(r.last.date), k: kindLabel(r.last.kind).toLocaleLowerCase()}) : ''].filter(Boolean).join(' · ');
+        const chips = k => O_.FIELDS.filter(f => f !== 'notaire' || k === 'contrat').map(f => `<button type="button" class="succ-chip" data-succ-field="${f}">{${esc(f)}}</button>`).join('');
+        return ext.openDialog({eyebrow: i18n('✉️ HÉRITIERS CONTACTÉS'), title: serial || all.length > 1 ? i18n('✉️ Courriers en série · {n}', {n: D.number}) : kind === 'contrat' ? i18n('📝 Contrat de révélation') : kind === 'relance' ? i18n('Relance') : i18n('✉️ Lettre de premier contact'), wide: true, submitLabel: i18n('📋 Ranger dans le Registre de courriers'),
+            body: `<div class="succ-letter succ-serial"><div class="succ-letter-side"><p class="succ-serial-count" data-succ-scount></p><span class="pk-lab">${esc(i18n('À qui'))}</span><ul class="succ-letter-who">${all.map(r => `<li class="${r.why ? 'is-off' : ''}">${UI().checkHtml(r.name, {checked: sel.has(r.id), attrs: `data-succ-to="${r.id}"`, sub: sub(r)})}</li>`).join('')}</ul>
+                <p class="ui-hint">${esc(i18n('Les héritiers dont l’existence n’est pas établie ne sont pas dans la liste. Les décochés peuvent être cochés à la main (une lettre sans adresse est alors imprimée sans bloc adresse).'))}</p>
+                <label>${esc(i18n('Modèle'))}<select name="kind">${SERIAL_KINDS.map(([k, l]) => `<option value="${k}"${kind === k ? ' selected' : ''}>${esc(i18n(l))}</option>`).join('')}<optgroup label="${esc(i18n('Mes modèles'))}" data-succ-mine></optgroup></select></label>
                 <div class="form-grid"><label>${esc(i18n('Envoyé le'))}<input type="date" name="date_envoi" value="${today()}"></label><label>${esc(i18n('Relance dans (jours)'))}<input type="number" name="relance_jours" min="0" max="365" value="30"></label></div>
                 <p class="ui-hint">${esc(i18n('Le nom du défunt n’est pas écrit : il est révélé après la signature.'))}</p></div>
-                <div class="succ-letter-main"><label>${esc(i18n('La lettre (tu peux la retoucher ; le nom de chaque héritier est mis tout seul)'))}<textarea name="letter" rows="18" maxlength="20000" class="cl-letter"></textarea></label>
-                <div class="cl-out"><button type="button" class="button small secondary" data-out="print">${esc(i18n('🖨 Imprimer ou ⤓ PDF'))}</button><button type="button" class="button small secondary" data-out="wp">${esc(i18n('📝 Traitement de texte'))}</button><button type="button" class="button small secondary" data-out="mail">${esc(i18n('✉️ Courriel prêt'))}</button></div></div></div>`,
+                <div class="succ-letter-main"><div class="segmented succ-serial-view" role="tablist"><button type="button" role="tab" data-succ-sview="model" class="is-active" aria-selected="true">${esc(i18n('Modèle'))}</button><button type="button" role="tab" data-succ-sview="preview" aria-selected="false">${esc(i18n('Aperçu'))}</button></div>
+                <div data-succ-smodel><span class="pk-lab">${esc(i18n('La lettre · clic sur un champ pour l’insérer'))}</span><div class="succ-chips" data-succ-chips>${chips(kind)}</div>
+                <label class="sr-only" for="succ-serial-letter">${esc(i18n('La lettre'))}</label><textarea id="succ-serial-letter" name="letter" rows="16" maxlength="20000" class="cl-letter"></textarea>
+                <p class="ui-hint">${esc(i18n('{envoyé_le} : la date du courrier précédent à cet héritier ; {date} : la date d’envoi de celui-ci.'))}</p></div>
+                <div data-succ-spreview hidden><div class="succ-serial-nav"><button type="button" class="icon-button small" data-succ-snav="-1" aria-label="${esc(i18n('Lettre précédente'))}">‹</button><b data-succ-sat></b><button type="button" class="icon-button small" data-succ-snav="1" aria-label="${esc(i18n('Lettre suivante'))}">›</button></div>
+                    <div class="succ-serial-page" data-succ-spage data-i18n-off></div>
+                    <div class="succ-acts"><button type="button" class="button small secondary" data-succ-sedit>${esc(i18n('✎ Retoucher cette lettre'))}</button><button type="button" class="button small secondary" data-succ-sback hidden>${esc(i18n('↺ Revenir au modèle'))}</button></div>
+                    <textarea name="own" rows="12" maxlength="20000" class="cl-letter" data-succ-sown hidden aria-label="${esc(i18n('✎ Retoucher cette lettre'))}"></textarea></div>
+                <div data-succ-swarn></div>
+                <div class="cl-out"><button type="button" class="button small secondary" data-succ-tpl-save>${esc(i18n('＋ Enregistrer comme modèle'))}</button><button type="button" class="button small secondary" data-out="print">${esc(i18n('🖨 Imprimer ou ⤓ PDF'))}</button><button type="button" class="button small secondary" data-out="wp">${esc(i18n('📝 Traitement de texte'))}</button><button type="button" class="button small secondary" data-out="mail">${esc(i18n('✉️ Courriel prêt'))}</button></div>
+                <p class="succ-serial-prog" data-succ-sprog hidden></p></div></div>`,
             onOpen: d => {
                 const f = d.querySelector('form');
-                const senderTxt = [s.name, s.address].filter(Boolean).join(', ') || i18n('ton nom et ton adresse');
-                const paint = () => { if (!edited) f.letter.value = fillT(TEMPLATES[f.kind.value](), {sender: senderTxt, sent: fmtDate((D.courriers.find(c => c.person_id === only && c.kind !== 'acte') || {}).date_envoi) || '…'}); };
+                const chosen = () => all.filter(r => sel.has(r.id));
+                const vals = r => O_.letterValues(D, r, {t: i18n, date: fmtDate(f.date_envoi.value), sent: r.last ? fmtDate(r.last.date) : '', sender: senderTxt || ''});
+                const textOf = r => (own.has(r.id) ? own.get(r.id) : O_.fillLetter(f.letter.value, vals(r)).text);
+                const bad = () => O_.unknownFields(f.letter.value, O_.FIELDS.filter(x => x !== 'notaire' || f.kind.value === 'contrat' || mine.some(m => `t${m.id}` === f.kind.value)));
+                const paint = () => {
+                    const k = f.kind.value, m = mine.find(x => `t${x.id}` === k);
+                    if (!edited) f.letter.value = m ? m.body : TEMPLATES[TEMPLATES[k] ? k : 'contact']();
+                    d.querySelector('[data-succ-chips]').innerHTML = chips(m ? 'contrat' : k);
+                    refresh();
+                };
+                const refresh = () => {
+                    const list = chosen();
+                    d.querySelector('[data-succ-scount]').textContent = i18n('Lettres prêtes : {n} sur {m}', {n: list.length, m: all.length});
+                    const b = bad();
+                    d.querySelector('[data-succ-swarn]').innerHTML = b.length ? UI().notice('warn', i18n('Champ inconnu : {f} (ligne {l}). Corrige-le avant de ranger les lettres.', {f: b.map(x => `{${x.name}}`).join(', '), l: b.map(x => x.line).join(', ')})) : '';
+                    const out = d.querySelector('[data-succ-tpl-save]').closest('.cl-out');
+                    out.querySelector('[data-out="print"]').textContent = list.length > 1 ? i18n('🖨 Imprimer les {n}', {n: list.length}) : i18n('🖨 Imprimer ou ⤓ PDF');
+                    if (view === 'preview') drawPreview();
+                };
+                const drawPreview = () => {
+                    const list = chosen(); const page = d.querySelector('[data-succ-spage]');
+                    if (!list.length) { page.innerHTML = `<p class="muted">${esc(i18n('Coche au moins un héritier.'))}</p>`; d.querySelector('[data-succ-sat]').textContent = ''; return; }
+                    at = Math.max(0, Math.min(at, list.length - 1)); const r = list[at];
+                    d.querySelector('[data-succ-sat]').textContent = i18n('Lettre {i} / {n} · {name}', {i: at + 1, n: list.length, name: r.name});
+                    const addr = [r.name, ...(D.addresses?.[r.id]?.lines || [])];
+                    const body = own.has(r.id) ? esc(own.get(r.id)) : O_.fillLetter(f.letter.value, vals(r)).parts.map(p => p.empty ? `<mark class="succ-empty" title="${esc(i18n('Champ vide : la ligne s’écrit sans le mot'))}">{${esc(p.field)}}</mark>` : p.field ? `<span class="succ-filled">${esc(p.text)}</span>` : esc(p.text)).join('');
+                    page.innerHTML = `${D.addresses?.[r.id] ? `<p class="succ-serial-addr">${addr.map(esc).join('<br>')}</p>` : ''}${own.has(r.id) ? `<p class="succ-serial-own">${esc(i18n('✎ modifiée à la main'))}</p>` : ''}<div class="succ-serial-text">${body}</div>${senderTxt ? '' : `<p class="ui-hint">${esc(i18n('Ton nom et ton adresse : Listes → Registre de courriers → ✉️ Lettres (expéditeur).'))}</p>`}`;
+                    const ta = d.querySelector('[data-succ-sown]'); ta.hidden = true;
+                    d.querySelector('[data-succ-sback]').hidden = !own.has(r.id);
+                };
+                const setView = v => { view = v; d.querySelectorAll('[data-succ-sview]').forEach(b => { const on = b.dataset.succSview === v; b.classList.toggle('is-active', on); b.setAttribute('aria-selected', String(on)); }); d.querySelector('[data-succ-smodel]').hidden = v !== 'model'; d.querySelector('[data-succ-spreview]').hidden = v !== 'preview'; refresh(); };
                 paint();
-                f.letter.addEventListener('input', () => { edited = true; });
-                f.kind.addEventListener('change', () => { edited = false; paint(); });
-                d.addEventListener('change', e => { const b = e.target.closest('[data-succ-to]'); if (b) { const id = Number(b.dataset.succTo); b.checked ? sel.add(id) : sel.delete(id); } });
-                d.addEventListener('click', e => {
+                get('tpl_list').then(r => { mine = r.items || []; const g = d.querySelector('[data-succ-mine]'); g.innerHTML = mine.map(m => `<option value="t${m.id}">${esc(m.name)}</option>`).join(''); if (!mine.length) g.label = i18n('Mes modèles (aucun pour l’instant)'); }).catch(() => {});
+                f.letter.addEventListener('input', () => { edited = true; refresh(); });
+                f.kind.addEventListener('change', async () => { if (edited && !(await A().confirmBox(i18n('Remplacer ta lettre par ce modèle ?'), {title: i18n('Changer de modèle'), okLabel: i18n('Remplacer')}))) return; edited = false; paint(); });
+                f.date_envoi.addEventListener('change', refresh);
+                d.addEventListener('change', e => { const b = e.target.closest('[data-succ-to]'); if (b) { const id = Number(b.dataset.succTo); b.checked ? sel.add(id) : sel.delete(id); refresh(); } });
+                d.addEventListener('click', async e => {
+                    const fl = e.target.closest('[data-succ-field]');
+                    if (fl) { const ta = f.letter, tok = `{${fl.dataset.succField}}`, a = ta.selectionStart ?? ta.value.length; ta.setRangeText(tok, a, ta.selectionEnd ?? a, 'end'); ta.focus(); edited = true; return refresh(); }
+                    const sv = e.target.closest('[data-succ-sview]'); if (sv) return setView(sv.dataset.succSview);
+                    const nv = e.target.closest('[data-succ-snav]'); if (nv) { at += Number(nv.dataset.succSnav); return drawPreview(); }
+                    if (e.target.closest('[data-succ-sedit]')) { const r = chosen()[at]; if (!r) return; const ta = d.querySelector('[data-succ-sown]'); ta.value = textOf(r); ta.hidden = false; ta.focus(); ta.oninput = () => { own.set(r.id, ta.value); d.querySelector('[data-succ-sback]').hidden = false; }; return; }
+                    if (e.target.closest('[data-succ-sback]')) { const r = chosen()[at]; if (r && await A().confirmBox(i18n('Oublier les retouches de la lettre à {name} ?', {name: r.name}), {title: i18n('↺ Revenir au modèle'), okLabel: i18n('Revenir au modèle')})) { own.delete(r.id); drawPreview(); } return; }
+                    if (e.target.closest('[data-succ-tpl-save]')) {
+                        if (!f.letter.value.trim()) return toast(i18n('La lettre est vide.'), 'error');
+                        const name = String(await A().askText({title: i18n('＋ Enregistrer comme modèle'), message: i18n('Nom du modèle'), value: '', okLabel: i18n('Enregistrer')}) || '').trim(); if (!name) return;
+                        try { const r = await post({op: 'tpl_save', name, kind: SERIAL_KINDS.some(x => x[0] === f.kind.value) ? f.kind.value : 'autre', body: f.letter.value}); mine.push({id: r.id, name, body: f.letter.value}); const g = d.querySelector('[data-succ-mine]'); g.insertAdjacentHTML('beforeend', `<option value="t${r.id}">${esc(name)}</option>`); g.label = i18n('Mes modèles');
+                            A().undoToast(i18n('Modèle « {name} » enregistré (Mes modèles, communs à tous les dossiers de cette généalogie)', {name}), {undo: async () => { await post({op: 'tpl_delete', id: r.id}); g.querySelector(`option[value="t${r.id}"]`)?.remove(); }}); } catch (err) { toast(err.message, 'error'); }
+                        return;
+                    }
                     const out = e.target.closest('[data-out]')?.dataset.out; if (!out) return;
-                    const list = heirs.filter(r => sel.has(r.id)); if (!list.length) return toast(i18n('Coche au moins un héritier.'), 'error');
-                    const texts = list.map(r => ({r, text: fillT(f.letter.value, {heir: r.name, sender: [s.name, s.address].filter(Boolean).join(', ') || i18n('ton nom et ton adresse'), sent: '…'})}));
-                    if (out === 'print') UI().openPrintDialog({title: i18n('Courriers aux héritiers'), key: 'courrier', html: texts.map(({r, text}) => `<section data-k-page class="succ-print-letter" style="page-break-after:always;font:11pt/1.5 Georgia,serif;white-space:pre-wrap"><p style="text-align:right">${esc(addrOf(r))}</p>${esc(text)}</section>`).join(''), paper: 'A4', orientation: 'portrait', photos: false});
-                    if (out === 'wp') { const html = texts.map(({r, text}) => `<p>${esc(addrOf(r)).replace(/\n/g, '<br>')}</p>` + text.split(/\n{2,}/).map(p => `<p>${esc(p).replace(/\n/g, '<br>')}</p>`).join('')).join('<p><br></p>'); ext.openTextDoc?.({data: ext.textDocTools?.dataOf ? ext.textDocTools.dataOf(html) : null, name: i18n('Courriers aux héritiers')}); }
+                    const list = chosen(); if (!list.length) return toast(i18n('Coche au moins un héritier.'), 'error');
+                    if (bad().length) return toast(i18n('Corrige d’abord le champ inconnu.'), 'error');
+                    const texts = list.map(r => ({r, text: textOf(r)}));
+                    const addrOf = r => (D.addresses?.[r.id] ? [r.name, ...(D.addresses[r.id].lines || [])].join('\n') : '');
+                    if (out === 'print') UI().openPrintDialog({title: i18n('Courriers aux héritiers'), key: 'courrier', html: texts.map(({r, text}) => `<section data-k-page class="succ-print-letter" style="page-break-after:always;font:11pt/1.5 Georgia,serif;white-space:pre-wrap">${addrOf(r) ? `<p style="text-align:right">${esc(addrOf(r))}</p>` : ''}${esc(text)}</section>`).join(''), paper: 'A4', orientation: 'portrait', photos: false});
+                    if (out === 'wp') { const html = texts.map(({r, text}) => (addrOf(r) ? `<p>${esc(addrOf(r)).replace(/\n/g, '<br>')}</p>` : '') + text.split(/\n{2,}/).map(p => `<p>${esc(p).replace(/\n/g, '<br>')}</p>`).join('')).join('<p><br></p>'); ext.openTextDoc?.({data: ext.textDocTools?.dataOf ? ext.textDocTools.dataOf(html) : null, name: i18n('Courriers aux héritiers')}); }
                     if (out === 'mail') { const to = list.map(r => D.addresses?.[r.id]?.email).filter(Boolean); const a = document.createElement('a'); a.href = `mailto:${encodeURIComponent(to.join(','))}?subject=${encodeURIComponent(i18n('Recherche d’héritiers'))}&body=${encodeURIComponent(texts[0].text.slice(0, 1800))}`; a.rel = 'noopener'; document.body.appendChild(a); a.click(); a.remove(); toast(i18n('Ton logiciel de courriel s’ouvre : relis la lettre et envoie-la toi-même. Rien n’est envoyé par l’app.')); }
                 });
+                d._succSerial = {chosen, textOf, bad};
             },
             onSubmit: async form => {
-                const list = heirs.filter(r => sel.has(r.id)); if (!list.length) return UI().fail(form.letter, i18n('Coche au moins un héritier.'));
+                const dlg = form.closest('dialog'), x = dlg._succSerial, list = x.chosen();
+                if (!list.length) return UI().fail(form.letter, i18n('Coche au moins un héritier.'));
                 if (!form.letter.value.trim()) return UI().fail(form.letter, i18n('La lettre est vide.'));
-                const made = [];
+                if (x.bad().length) return UI().fail(form.letter, i18n('Corrige d’abord le champ inconnu.'));
+                const k = SERIAL_KINDS.some(y => y[0] === form.kind.value) ? form.kind.value : 'contact';
+                const objet = k === 'contrat' ? i18n('Premier contact + contrat') : k === 'relance' ? i18n('Relance') : i18n('Premier contact');
+                const made = [], prog = dlg.querySelector('[data-succ-sprog]');
                 try {
-                    for (const r of list) {
-                        const text = fillT(form.letter.value, {heir: r.name, sender: [s.name, s.address].filter(Boolean).join(', ') || '', sent: '…'});
-                        const res = await post({op: 'file_letter', case_id: D.id, person_id: r.id, kind: form.kind.value, letter: text, objet: form.kind.value === 'contrat' ? i18n('Premier contact + contrat') : form.kind.value === 'relance' ? i18n('Relance') : i18n('Premier contact'),
-                            date_envoi: form.date_envoi.value, relance_jours: Number(form.relance_jours.value) || 0, recipient_address: (D.addresses?.[r.id]?.lines || []).join('\n'), recipient_email: D.addresses?.[r.id]?.email || ''});
-                        made.push(res.courrier_id);
+                    for (let i = 0; i < list.length; i += 50) { // plus de 50 héritiers : par paquets, la barre d'avancement ; ↶ Annuler reste en une fois
+                        if (list.length > 50) { prog.hidden = false; prog.innerHTML = `${esc(i18n('Rangement : {n} sur {m}', {n: i, m: list.length}))} <progress max="${list.length}" value="${i}"></progress>`; }
+                        const part = list.slice(i, i + 50);
+                        const r = await post({op: 'file_letters', case_id: D.id, kind: k, objet, date_envoi: form.date_envoi.value, relance_jours: Number(form.relance_jours.value) || 0, quiet: i + 50 < list.length ? 1 : 0,
+                            letters: part.map(h => ({person_id: h.id, letter: x.textOf(h), recipient_address: (D.addresses?.[h.id]?.lines || []).join('\n'), recipient_email: D.addresses?.[h.id]?.email || ''}))});
+                        made.push(...(r.ids || []));
                     }
-                } catch (e) { toast(e.message, 'error'); return false; }
-                A().undoToast(i18n('{n} rangés dans le Registre de courriers', {n: plural(made.length, 'courrier')}), {undo: async () => { for (const id of made) await post({op: 'unfile_letter', case_id: D.id, courrier_id: id}); reload(); }});
+                } catch (e) { toast(e.message, 'error'); if (made.length) await post({op: 'unfile_letters', case_id: D.id, ids: made}).catch(() => {}); return false; }
+                const rel = Number(form.relance_jours.value) || 0, relDay = rel ? (() => { const dd = new Date(form.date_envoi.value + 'T12:00:00'); dd.setDate(dd.getDate() + rel); return dd.toISOString().slice(0, 10); })() : '';
+                A().undoToast(relDay ? i18n('{n} rangés dans le Registre de courriers, relance le {d}', {n: plural(made.length, 'courrier'), d: fmtDate(relDay)}) : i18n('{n} rangés dans le Registre de courriers', {n: plural(made.length, 'courrier')}),
+                    {undo: async () => { await post({op: 'unfile_letters', case_id: D.id, ids: made}); reload(); }});
                 reload();
             }});
     }
 
-    /* ── 🖨 Tableau généalogique pour le notaire (3 pages : tableau, arbre, pièces) ── */
+    /* ── 🖨 Tableau généalogique pour le notaire : tableau, arbre, 🧾 chaîne de filiation (B4), liste des pièces ── */
     const abbr = (D, key) => { const a = D.acts?.[key]; const k = key[0]; const l = {N: i18n('N.'), D: i18n('D.'), M: i18n('M.'), V: i18n('Div.'), R: i18n('Ren.')}[k] || ''; return a ? [l, a.place, a.year].filter(Boolean).join(' ') : `${l} ${i18n('(à fournir)')}`; };
-    function notaryHtml(D, R, P_, {addresses = false} = {}) {
+    const NPAGES = [['table', 'Tableau'], ['tree', 'Arbre'], ['chain', 'Chaîne par héritier'], ['pieces', 'Liste des pièces']];
+    const npages = () => ({table: true, tree: true, chain: true, pieces: true, ...(store.get('lcnda-succ-npages', {}) || {})}); // cochées d'office (la chaîne aussi)
+    /** la qualité d'un héritier, avec les représentés (« nièce, repr. Louise ») */
+    const qualityOf = (R, r) => { const rep = []; let x = R.rows.find(y => y.id === r.id); while (x?.parent) { const pr = R.rows.find(y => y.id === x.parent); if (!pr) break; rep.unshift(pr.name.split(' ')[0]); x = pr; } return r.kin + (rep.length ? ', ' + i18n('repr. {who}', {who: rep.length > 1 ? i18n('{a} et {b}', {a: rep.slice(0, -1).join(', '), b: rep[rep.length - 1]}) : rep[0]}) : '') + (r.unknown ? ' — ' + i18n('existence à ce jour non établie') : ''); };
+    /** 🧾 la chaîne de filiation : pour chaque héritier, du défunt vers lui, chaque acte avec sa cote ; aucun texte de loi recopié */
+    function chainHtml(D, R, P_) {
+        const ch = OC().filiationChain(D, R, P_);
+        const cell = 'padding:1mm 2mm;vertical-align:top';
+        const state = st => st.state === 'have' ? (st.sources.length ? esc(st.sources.join(' ; ')) : `<i>${esc(i18n('en main, cote non notée'))}</i>`)
+            : st.state === 'asked' ? `<i>${esc(st.asked?.date ? i18n('demandé le {d}', {d: fmtDate(st.asked.date)}) : i18n('demandé'))}</i>` : `<i class="succ-chain-miss" style="font-style:italic">${esc(i18n('acte à fournir'))}</i>`;
+        const line = st => `<tr><td style="${cell};white-space:nowrap"><b>${esc((abbr(D, st.key).split(' ')[0]))}</b></td><td style="${cell}">${st.seen ? `${esc(st.what)} <small>${esc(i18n('(commun, voir {n})', {n: st.seen}))}</small>` : `${esc(st.what)}${st.act ? ', ' + esc(st.act) : ''} · ${state(st)}`}</td></tr>`;
+        const arts = OC().citedArticles(R);
+        const head = `<h1 style="font:700 15pt Georgia,serif;text-align:center;margin:0 0 3mm">${esc(i18n('CHAÎNE DE FILIATION'))}</h1><p style="text-align:center;margin:0 0 5mm">${esc(i18n('Succession de {name}, décédé(e) à {place} le {date}', {name: D.deceased, place: D.death_place_text || '…', date: D.death_date_text || '…'}))}<br>${esc(i18n('Dossier {n} · Réf. notaire {ref}', {n: D.number, ref: D.notary_ref || '—'}))}</p>`;
+        const heirs = ch.map(h => { const r = R.rows.find(x => x.id === h.id) || h; return `<h2 style="font:700 11.5pt Georgia,serif;margin:4mm 0 1mm">${esc(`${h.n}. ${h.name} — ${qualityOf(R, r)} — ${h.share}`)}</h2><table class="succ-chain" style="width:100%;border-collapse:collapse;font:10pt Georgia,serif"><tbody>${h.steps.map(line).join('') || `<tr><td style="${cell}">—</td></tr>`}</tbody></table>`; }).join('');
+        const foot = `<p style="font:9pt Georgia,serif;margin-top:5mm">${esc(i18n('Calcul établi d’après les actes cités, sous réserve de vérification par le notaire.'))}${arts.length ? ' ' + law(esc(i18n('Code civil, articles cités pour ce dossier : art. {list}.', {list: arts.join(', ')}))) : ''} ${esc(i18n('N. = naissance, M. = mariage, D. = décès.'))}</p>`;
+        return head + heirs + foot;
+    }
+    function notaryHtml(D, R, P_, {addresses = false, pages = null} = {}) {
+        const pg = {table: true, tree: true, chain: true, pieces: true, ...(pages || {})};
         const heirs = R.rows.filter(r => (r.role === 'heir' || r.role === 'parent' || r.role === 'spouse') && r.share !== '0');
         const groupOf = id => P_.groups.find(g => g.heirs?.includes(id));
         const common = P_.groups.find(g => g.key === 'common');
-        const quality = r => { const rep = []; let x = R.rows.find(y => y.id === r.id); while (x?.parent) { const pr = R.rows.find(y => y.id === x.parent); if (!pr) break; rep.unshift(pr.name.split(' ')[0]); x = pr; } return r.kin + (rep.length ? ', ' + i18n('repr. {who}', {who: rep.length > 1 ? i18n('{a} et {b}', {a: rep.slice(0, -1).join(', '), b: rep[rep.length - 1]}) : rep[0]}) : '') + (r.unknown ? ' — ' + i18n('existence à ce jour non établie') : ''); };
+        const quality = r => qualityOf(R, r);
         const srcs = r => { const g = groupOf(r.id); const keys = P_.perHeir?.[r.id] || (g ? g.items : []).map(i => i.key); const list = keys.map(k => abbr(D, k) + ((D.acts?.[k]?.sources || []).length ? ` [${D.acts[k].sources.join(' ; ')}]` : '')); return list.join(' ; ') || '—'; };
         const head = `<h1 style="font:700 16pt Georgia,serif;text-align:center;margin:0 0 4mm">${esc(i18n('TABLEAU GÉNÉALOGIQUE'))}</h1><p style="text-align:center;margin:0 0 6mm">${esc(i18n('Succession de {name}, décédé(e) à {place} le {date}', {name: D.deceased, place: D.death_place_text || '…', date: D.death_date_text || '…'}))}<br>${esc(i18n('Dossier {n} · Réf. notaire {ref}', {n: D.number, ref: D.notary_ref || '—'}))}</p>`;
         const table = `<table style="width:100%;border-collapse:collapse;font:10pt Georgia,serif" class="succ-ntable"><thead><tr>${['Héritier', 'Qualité', 'Part', 'Sources du lien'].map(h => `<th style="border-bottom:1.5px solid #000;text-align:left;padding:2mm">${esc(i18n(h))}</th>`).join('')}${addresses ? `<th style="border-bottom:1.5px solid #000;text-align:left;padding:2mm">${esc(i18n('Adresse'))}</th>` : ''}</tr></thead><tbody>${heirs.map(r => `<tr><td style="padding:2mm;border-bottom:.5px solid #999">${esc(r.name)}</td><td style="padding:2mm;border-bottom:.5px solid #999">${esc(quality(r))}</td><td style="padding:2mm;border-bottom:.5px solid #999"><b>${esc(r.share)}</b></td><td style="padding:2mm;border-bottom:.5px solid #999">${esc(srcs(r))}</td>${addresses ? `<td style="padding:2mm;border-bottom:.5px solid #999">${esc((D.addresses?.[r.id]?.lines || []).join(', '))}</td>` : ''}</tr>`).join('')}</tbody></table>`;
         const foot = `<p style="font:9pt Georgia,serif;margin-top:6mm">${law(esc(i18n('Calcul établi d’après les actes cités, art. 731 et suiv. du Code civil, sous réserve de vérification par le notaire. N. = naissance, M. = mariage, D. = décès.')))} ${common ? esc(i18n('Communs à tous : {list}.', {list: common.items.map(i => abbr(D, i.key)).join(' ; ')})) : ''}</p>${R.hypotheses.length ? `<p style="font:9pt Georgia,serif">${esc(i18n('Hypothèse retenue : {h}', {h: D.hypothesis_note || i18n('à préciser')}))}</p>` : ''}${R.warnings.map(w => `<p style="font:9pt Georgia,serif">⚠ ${esc(w.text)}</p>`).join('')}`;
         const p3 = `<h2 style="font:700 13pt Georgia,serif">${esc(i18n('Liste des pièces'))}</h2><table style="width:100%;border-collapse:collapse;font:9.5pt Georgia,serif"><tbody>${P_.list.filter(i => i.state !== 'na').map(i => `<tr><td style="padding:1.5mm;border-bottom:.5px solid #bbb">${esc(i.what)}</td><td style="padding:1.5mm;border-bottom:.5px solid #bbb">${esc(i.act)}</td><td style="padding:1.5mm;border-bottom:.5px solid #bbb">${esc((D.acts?.[i.key]?.sources || []).join(' ; ') || '—')}</td><td style="padding:1.5mm;border-bottom:.5px solid #bbb">${esc(i18n(STATE_P[i.state][0]))}</td></tr>`).join('')}</tbody></table>`;
-        const page = (inner, n) => `<section data-k-page class="succ-npage" style="page-break-after:always;padding:2mm">${inner}<p style="font:8pt Georgia,serif;text-align:right;color:#555">${esc(i18n('Page {n} / 3', {n}))}</p></section>`;
-        return page(head + table + foot, 1) + page(`<h2 style="font:700 13pt Georgia,serif">${esc(i18n('Arbre de dévolution'))}</h2><div style="max-width:100%">${treeSvg(D, R, {print: true}).replace('<svg ', '<svg style="max-width:100%;height:auto" ')}</div>`, 2) + page(p3, 3);
+        const parts = [pg.table && head + table + foot, pg.tree && `<h2 style="font:700 13pt Georgia,serif">${esc(i18n('Arbre de dévolution'))}</h2><div style="max-width:100%">${treeSvg(D, R, {print: true}).replace('<svg ', '<svg style="max-width:100%;height:auto" ')}</div>`, pg.chain && chainHtml(D, R, P_), pg.pieces && p3].filter(Boolean);
+        const total = parts.length;
+        const page = (inner, n) => `<section data-k-page class="succ-npage" style="page-break-after:always;padding:2mm">${inner}<p style="font:8pt Georgia,serif;text-align:right;color:#555">${esc(i18n('Page {n} / {t}', {n, t: total}))}</p></section>`;
+        return parts.map((x, i) => page(x, i + 1)).join('') || `<p class="muted">${esc(i18n('Coche au moins une page.'))}</p>`;
+    }
+    const npagesTxt = pg => { const n = Object.values(pg).filter(Boolean).length; return pg.chain ? i18n('Tableau pour le notaire : PDF ({n} pages, avec chaîne par héritier)', {n}) : i18n('Tableau pour le notaire : PDF ({n} pages)', {n}); };
+    async function printNotary(D, R, P_, {addresses = false} = {}) {
+        const pg = npages();
+        await UI().openPrintDialog({title: i18n('Tableau généalogique — {n}', {n: D.number}), key: 'succ-notaire', html: notaryHtml(D, R, P_, {addresses, pages: pg}), paper: 'A4', orientation: 'portrait', photos: false});
+        journal(D, 'pdf', npagesTxt(pg) + (addresses ? '' : ' — ' + i18n('sans adresses')));
     }
     function tabNotary(body, D, R, P_) {
         let withAddr = false;
         const paint = () => {
-            body.innerHTML = `<section class="succ-box"><div class="succ-box-head"><h3>${esc(i18n('Un PDF sobre, une source pour chaque lien'))}</h3><div class="succ-acts">
+            const pg = npages();
+            body.innerHTML = `${OUT().checklistHtml ? `<details class="succ-box succ-ck-box" open><summary><b>${esc(i18n('📋 Avant de remettre'))}</b> <small class="muted">${esc(i18n('ça avertit, ça n’empêche pas'))}</small></summary>${OUT().checklistHtml(D, R, P_, {ro: D.archived || ['clos', 'archive'].includes(D.state)})}</details>` : ''}
+                <section class="succ-box"><div class="succ-box-head"><h3>${esc(i18n('Un PDF sobre, une source pour chaque lien'))}</h3><div class="succ-acts">
                 <button type="button" class="button" data-succ-nprint>${esc(i18n('🖨 Imprimer ou ⤓ PDF'))}</button><button type="button" class="button secondary" data-succ-nwp>${esc(i18n('📝 Ouvrir dans le traitement de texte'))}</button><button type="button" class="button secondary" data-succ-nmedia>${esc(i18n('📁 Copie dans les médias'))}</button></div></div>
-                ${UI().checkHtml(i18n('Joindre les adresses des héritiers'), {checked: withAddr, attrs: 'data-succ-naddr'})}
-                <div class="succ-npreview" data-i18n-off>${notaryHtml(D, R, P_, {addresses: withAddr})}</div>
+                <fieldset class="succ-npages"><legend>${esc(i18n('Ce que contient le PDF'))}</legend>${NPAGES.map(([k, l]) => UI().checkHtml(i18n(l), {checked: pg[k], attrs: `data-succ-npage="${k}"`})).join('')}${UI().checkHtml(i18n('Joindre les adresses des héritiers'), {checked: withAddr, attrs: 'data-succ-naddr'})}</fieldset>
+                <div class="succ-npreview" data-i18n-off>${notaryHtml(D, R, P_, {addresses: withAddr, pages: pg})}</div>
                 <p class="ui-hint">${esc(i18n('Aucune photo ni note privée : les noms, les qualités, les parts et les sources. Pas d’adresse sauf si la case est cochée.'))}</p></section>`;
             body.querySelector('[data-succ-naddr]').addEventListener('change', e => { withAddr = e.target.checked; paint(); });
-            body.querySelector('[data-succ-nprint]').addEventListener('click', async () => { await UI().openPrintDialog({title: i18n('Tableau généalogique — {n}', {n: D.number}), key: 'succ-notaire', html: notaryHtml(D, R, P_, {addresses: withAddr}), paper: 'A4', orientation: 'portrait', photos: false}); journal(D, 'pdf', i18n('Tableau pour le notaire : PDF ou impression (3 pages)')); });
-            body.querySelector('[data-succ-nwp]').addEventListener('click', () => { ext.openTextDoc?.({data: ext.textDocTools?.dataOf ? ext.textDocTools.dataOf(notaryHtml(D, R, P_, {addresses: withAddr}).replace(/<section[^>]*>/g, '').replace(/<\/section>/g, '')) : null, name: i18n('Tableau généalogique — {n}', {n: D.number})}); journal(D, 'pdf', i18n('Tableau pour le notaire : ouvert dans le traitement de texte')); });
+            body.querySelectorAll('[data-succ-npage]').forEach(c => c.addEventListener('change', () => { store.set('lcnda-succ-npages', {...npages(), [c.dataset.succNpage]: c.checked}); paint(); }));
+            body.querySelector('[data-succ-nprint]').addEventListener('click', () => printNotary(D, R, P_, {addresses: withAddr}));
+            body.querySelector('[data-succ-nwp]').addEventListener('click', () => { ext.openTextDoc?.({data: ext.textDocTools?.dataOf ? ext.textDocTools.dataOf(notaryHtml(D, R, P_, {addresses: withAddr, pages: npages()}).replace(/<section[^>]*>/g, '').replace(/<\/section>/g, '')) : null, name: i18n('Tableau généalogique — {n}', {n: D.number})}); journal(D, 'pdf', i18n('Tableau pour le notaire : ouvert dans le traitement de texte')); });
             body.querySelector('[data-succ-nmedia]').addEventListener('click', async e => {
                 const T = window.LCNDA_TEXT; if (!T?.toDocx || !T?.fromText) return toast(i18n('Copie impossible : le moteur de documents n’est pas chargé.'), 'error');
                 const btn = e.currentTarget; btn.disabled = true;
@@ -704,26 +809,32 @@
 
     /* ── 💶 Temps et frais ── */
     const money = c => (window.LCNDA_I18N?.fmtNumber ? window.LCNDA_I18N.fmtNumber(c / 100, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : (c / 100).toLocaleString('fr-FR', {minimumFractionDigits: 2})) + ' €';
+    let feeRate = ''; // ⏱ temps × taux horaire sur le relevé imprimé (facultatif, jamais un montant de succession, jamais gardé)
+    document.addEventListener('input', e => { if (e.target.matches?.('[data-succ-rate]')) feeRate = e.target.value; });
     function tabFees(body, D) {
         const ro = D.archived, F_ = S().fees(D.fees);
         const KIND = {time: '⏱ Temps', cost: '🧾 Frais', percent: '📝 Contrat'};
         body.innerHTML = `<section class="succ-box"><div class="succ-box-head"><h3>${esc(i18n('Le temps passé, les frais, les honoraires des contrats'))}</h3><div class="succ-acts">${ro ? '' : `<button type="button" class="button small" data-succ-fee="time">${esc(i18n('＋ Temps'))}</button><button type="button" class="button small secondary" data-succ-fee="cost">${esc(i18n('＋ Frais'))}</button><button type="button" class="button small secondary" data-succ-fee="percent">${esc(i18n('＋ Honoraires d’un contrat'))}</button>`}<button type="button" class="button small secondary" data-succ-fee-print>${esc(i18n('🖨 Relevé'))}</button></div></div>
             <div class="succ-fee-sum">${badge(i18n('{h} h {m} min passées', {h: F_.hours, m: F_.mins}), 'blue')} ${badge(i18n('Frais : {s}', {s: money(F_.cents)}), 'grey')} ${badge(i18n('{n} contrats', {n: F_.pcts.length}), 'violet')}</div>
-            ${D.fees.length ? `<div class="succ-scroll"><table class="succ-table"><thead><tr><th>${esc(i18n('Date'))}</th><th>${esc(i18n('Sorte'))}</th><th>${esc(i18n('Quoi'))}</th><th>${esc(i18n('Valeur'))}</th><th></th></tr></thead><tbody>${D.fees.map(f => `<tr><td>${esc(fmtDate(f.day))}</td><td>${esc(i18n(KIND[f.kind]))}</td><td>${esc(f.label)}${f.person_id ? ` <small class="muted">${esc(nameOf(D, f.person_id))}</small>` : ''}</td><td>${f.kind === 'time' ? esc(i18n('{h} h {m} min', {h: Math.floor(f.minutes / 60), m: f.minutes % 60})) : f.kind === 'cost' ? esc(money(f.amount_cents)) : esc(`${f.percent} %`)}</td><td>${ro ? '' : `<button type="button" class="icon-button small" data-succ-fee-del="${f.id}" aria-label="${esc(i18n('Supprimer'))}" title="${esc(i18n('Supprimer'))}">🗑</button>`}</td></tr>`).join('')}</tbody></table></div>` : A().empty(i18n('Rien de noté.'), {icon: '💶'})}
+            ${D.fees.length ? `<div class="succ-scroll"><table class="succ-table"><thead><tr><th>${esc(i18n('Date'))}</th><th>${esc(i18n('Sorte'))}</th><th>${esc(i18n('Quoi'))}</th><th>${esc(i18n('Valeur'))}</th><th></th></tr></thead><tbody>${D.fees.map(f => `<tr><td>${esc(fmtDate(f.day))}</td><td>${esc(i18n(KIND[f.kind]))}</td><td>${f.source === 'chrono' ? `<span title="${esc(i18n('Compté par le chronomètre'))}" aria-label="${esc(i18n('Compté par le chronomètre'))}">⏱</span> ` : ''}${esc(f.label)}${f.person_id ? ` <small class="muted">${esc(nameOf(D, f.person_id))}</small>` : ''}</td><td>${f.kind === 'time' ? esc(i18n('{h} h {m} min', {h: Math.floor(f.minutes / 60), m: f.minutes % 60})) : f.kind === 'cost' ? esc(money(f.amount_cents)) : esc(`${f.percent} %`)}</td><td>${ro ? '' : `<button type="button" class="icon-button small" data-succ-fee-edit="${f.id}" aria-label="${esc(i18n('✎ Modifier'))}" title="${esc(i18n('✎ Modifier'))}">✎</button><button type="button" class="icon-button small" data-succ-fee-del="${f.id}" aria-label="${esc(i18n('Supprimer'))}" title="${esc(i18n('Supprimer'))}">🗑</button>`}</td></tr>`).join('')}</tbody></table></div>` : A().empty(i18n('Rien de noté.'), {icon: '💶'})}
+            <label class="succ-rate">${esc(i18n('Taux horaire pour le relevé (facultatif, pas gardé)'))}<span><input type="number" min="0" step="0.5" inputmode="decimal" data-succ-rate value="${esc(feeRate || '')}"> ${esc(i18n('€ / h'))}</span></label>
             <p class="ui-hint">${esc(i18n('Aucun montant de succession n’est noté.'))}</p></section>`;
     }
-    function feeDialog(D, kind) {
+    function feeDialog(D, kind, fee = null) {
         const heirs = heirsToContact(cur.R);
-        ext.openDialog({eyebrow: i18n('💶 TEMPS ET FRAIS'), title: kind === 'time' ? i18n('＋ Temps') : kind === 'cost' ? i18n('＋ Frais') : i18n('＋ Honoraires d’un contrat'), submitLabel: i18n('Enregistrer'),
+        ext.openDialog({eyebrow: i18n('💶 TEMPS ET FRAIS'), title: fee ? i18n('✎ Modifier la ligne') : kind === 'time' ? i18n('＋ Temps') : kind === 'cost' ? i18n('＋ Frais') : i18n('＋ Honoraires d’un contrat'), submitLabel: i18n('Enregistrer'),
+            onOpen: d => { if (!fee) return; const f = d.querySelector('form'); f.day.value = fee.day || today(); f.label.value = fee.label || ''; if (kind === 'time') { f.h.value = Math.floor(fee.minutes / 60); f.m.value = fee.minutes % 60; } if (kind === 'cost') f.amount.value = (fee.amount_cents / 100).toFixed(2); if (kind === 'percent') { f.percent.value = fee.percent ?? ''; f.person_id.value = String(fee.person_id || ''); } },
             body: `<div class="succ-form"><label>${esc(i18n('Date'))}<input type="date" name="day" value="${today()}"></label><label>${esc(i18n('Quoi'))}<input name="label" maxlength="300" placeholder="${esc(kind === 'cost' ? i18n('Copie d’acte, déplacement…') : kind === 'time' ? i18n('Recherches aux AD, appels…') : i18n('Contrat signé'))}"></label>
                 ${kind === 'time' ? `<div class="form-grid"><label>${esc(i18n('Heures'))}<input type="number" name="h" min="0" max="999" value="1"></label><label>${esc(i18n('Minutes'))}<input type="number" name="m" min="0" max="59" value="0"></label></div>` : kind === 'cost' ? `<label>${esc(i18n('Montant (€)'))}<input type="number" name="amount" min="0" step="0.01" value=""></label>` : `<label>${esc(i18n('Pourcentage'))}<input type="number" name="percent" min="0" max="100" step="0.5" value=""></label><label>${esc(i18n('Héritier'))}<select name="person_id"><option value="">—</option>${heirs.map(r => `<option value="${r.id}">${esc(r.name)}</option>`).join('')}</select></label>`}</div>`,
             onSubmit: async form => {
-                const b = {op: 'fee_save', case_id: D.id, kind, day: form.day.value, label: form.label.value};
+                const b = {op: 'fee_save', case_id: D.id, kind, day: form.day.value, label: form.label.value, ...(fee ? {id: fee.id} : {})};
                 if (kind === 'time') b.minutes = (Number(form.h.value) || 0) * 60 + (Number(form.m.value) || 0);
                 if (kind === 'cost') b.amount_cents = Math.round((Number(form.amount.value) || 0) * 100);
                 if (kind === 'percent') { b.percent = form.percent.value; b.person_id = Number(form.person_id.value) || 0; }
                 let r; try { r = await post(b); } catch (e) { toast(e.message, 'error'); return false; }
-                A().undoToast(i18n('Noté'), {undo: async () => { await post({op: 'fee_delete', case_id: D.id, id: r.id}); reload(); }}); reload();
+                if (fee) A().undoToast(i18n('Ligne modifiée'), {undo: async () => { await post({op: 'fee_save', case_id: D.id, id: fee.id, kind, day: fee.day, label: fee.label, minutes: fee.minutes, amount_cents: fee.amount_cents, percent: fee.percent, person_id: fee.person_id || 0}); reload(); }});
+                else A().undoToast(i18n('Noté'), {undo: async () => { await post({op: 'fee_delete', case_id: D.id, id: r.id}); reload(); }});
+                reload();
             }});
     }
 
@@ -808,11 +919,12 @@
     /* ═════ État : liste de contrôle avant « Remis au notaire » ═════ */
     async function setState(D, R, st) {
         if (st === D.state) return;
-        const go = async checked => {
-            let r; try { r = await post({op: 'state', id: D.id, state: st, checked}); } catch (e) { return toast(e.message, 'error'); }
+        const go = async (checked, summary = '') => {
+            let r; try { r = await post({op: 'state', id: D.id, state: st, checked, ...(summary ? {summary} : {})}); } catch (e) { return toast(e.message, 'error'); }
             A().undoToast(i18n('État : {s}', {s: stateLabel(st)}), {undo: async () => { await post({op: 'state', id: D.id, state: r.prev, undo: 1}); reload(); }}); reload();
         };
         if (st !== 'remis') return go(0);
+        if (OUT().notaryDialog) return OUT().notaryDialog(D, R, piecesOf(D, R), go, () => printNotary(D, R, piecesOf(D, R), {})); // 📋 Avant de remettre (avertit, n'empêche pas)
         const ck = S().checklist(R, piecesOf(D, R), D, i18n);
         ext.openDialog({eyebrow: i18n('📋 LISTE DE CONTRÔLE'), title: i18n('Avant « Remis au notaire »'), submitLabel: ck.ok ? i18n('Remis au notaire') : i18n('Remettre quand même'),
             body: `<ul class="succ-check">${ck.items.map(i => `<li class="${i.ok ? 'is-ok' : 'is-no'}"><span aria-hidden="true">${i.ok ? '✓' : '✗'}</span>${esc(i.text)}</li>`).join('')}</ul>${ck.ok ? '' : UI().notice('warn', i18n('Tout n’est pas prêt : corrige d’abord, ou remets quand même (ce sera noté au journal).'))}`,
@@ -838,7 +950,10 @@
         const md = t.closest('[data-succ-mdel]'); if (md) { e.preventDefault(); const id = Number(md.dataset.succMdel); return A().deleteWithUndo({action: 'delete_courrier', body: {id}, type: 'courrier', id, message: 'Courrier supprimé du registre', after: () => render()}); }
         if (!cur.data || !t.closest('[data-succ-case], dialog')) return;
         const D = cur.data, R = cur.R;
-        const tab = t.closest('[data-succ-tab]'); if (tab) { cur.tab = tab.dataset.succTab; store.set('lcnda-succ-tab', cur.tab); return render(); }
+        const tab = t.closest('[data-succ-tab]'); if (tab) { t.closest('dialog')?.close?.(); cur.tab = tab.dataset.succTab; store.set('lcnda-succ-tab', cur.tab); return render(); }
+        const em = t.closest('[data-succ-eur-mode]'); if (em) { OUT().setEuroMode?.(em.dataset.succEurMode); return render(); }
+        const fed = t.closest('[data-succ-fee-edit]'); if (fed) { const f = D.fees.find(x => x.id === Number(fed.dataset.succFeeEdit)); if (f) feeDialog(D, f.kind, f); return; }
+        const sl = t.closest('[data-succ-serial]'); if (sl) return letterDialog(D, R, 'contact', 0, true);
         const st = t.closest('[data-succ-state]'); if (st) return setState(D, R, st.dataset.succState);
         if (t.closest('[data-succ-archive]')) { if (await A().confirmBox(i18n('Les adresses des vivants seront retirées du dossier et de ses courriers. Le journal reste. Continuer ?'), {title: i18n('🗄 Archiver le dossier clos'), okLabel: i18n('Archiver')})) { try { await post({op: 'archive', id: D.id}); toast(i18n('Dossier archivé.')); } catch (err) { toast(err.message, 'error'); } reload(); } return; }
         if (t.closest('[data-succ-dl-add]')) return ext.openDialog({eyebrow: i18n('ÉCHÉANCE'), title: i18n('＋ Échéance'), submitLabel: i18n('Enregistrer'), body: `<div class="succ-form"><label>${esc(i18n('Date'))}<input type="date" name="due" value="${today()}"></label><label>${esc(i18n('À faire'))}<input name="label" maxlength="300" placeholder="${esc(i18n('Remettre le tableau généalogique au notaire'))}"></label><label>${esc(i18n('Sorte'))}<select name="kind"><option value="remise">${esc(i18n('Remise au notaire'))}</option><option value="relance">${esc(i18n('Relance'))}</option><option value="declaration">${esc(i18n('Déclaration de succession'))}</option><option value="rdv">${esc(i18n('Rendez-vous'))}</option><option value="autre">${esc(i18n('Autre'))}</option></select></label></div>`,
@@ -856,7 +971,7 @@
         const wr = t.closest('[data-succ-write]'); if (wr) { const pid = Number(wr.dataset.succWrite); return letterDialog(D, R, D.courriers.some(c => c.person_id === pid && c.kind !== 'acte') ? 'relance' : 'contact', pid); }
         const fe = t.closest('[data-succ-fee]'); if (fe) return feeDialog(D, fe.dataset.succFee);
         const fd = t.closest('[data-succ-fee-del]'); if (fd) { const id = Number(fd.dataset.succFeeDel); await post({op: 'fee_delete', case_id: D.id, id}).catch(err => toast(err.message, 'error')); A().undoToast(i18n('Supprimé'), {undo: async () => { await post({op: 'fee_restore', case_id: D.id, id}); reload(); }}); return reload(); }
-        if (t.closest('[data-succ-fee-print]')) { const F_ = S().fees(D.fees); return UI().openPrintDialog({title: i18n('Relevé de temps et de frais — {n}', {n: D.number}), key: 'succ-releve', paper: 'A4', photos: false, html: `<section data-k-page style="font:10.5pt Georgia,serif"><h1 style="font-size:15pt">${esc(i18n('Relevé de temps et de frais — {n}', {n: D.number}))}</h1><p>${esc(D.title)}</p><table style="width:100%;border-collapse:collapse">${D.fees.map(f => `<tr><td style="border-bottom:.5px solid #999;padding:1.5mm">${esc(fmtDate(f.day))}</td><td style="border-bottom:.5px solid #999;padding:1.5mm">${esc(f.label)}</td><td style="border-bottom:.5px solid #999;padding:1.5mm;text-align:right">${f.kind === 'time' ? esc(i18n('{h} h {m} min', {h: Math.floor(f.minutes / 60), m: f.minutes % 60})) : f.kind === 'cost' ? esc(money(f.amount_cents)) : esc(f.percent + ' %')}</td></tr>`).join('')}</table><p><b>${esc(i18n('{h} h {m} min passées', {h: F_.hours, m: F_.mins}))} · ${esc(i18n('Frais : {s}', {s: money(F_.cents)}))}</b></p></section>`}); }
+        if (t.closest('[data-succ-fee-print]')) { const F_ = S().fees(D.fees); return UI().openPrintDialog({title: i18n('Relevé de temps et de frais — {n}', {n: D.number}), key: 'succ-releve', paper: 'A4', photos: false, html: `<section data-k-page style="font:10.5pt Georgia,serif"><h1 style="font-size:15pt">${esc(i18n('Relevé de temps et de frais — {n}', {n: D.number}))}</h1><p>${esc(D.title)}</p><table style="width:100%;border-collapse:collapse">${D.fees.map(f => `<tr><td style="border-bottom:.5px solid #999;padding:1.5mm">${esc(fmtDate(f.day))}</td><td style="border-bottom:.5px solid #999;padding:1.5mm">${esc(f.label)}</td><td style="border-bottom:.5px solid #999;padding:1.5mm;text-align:right">${f.kind === 'time' ? esc(i18n('{h} h {m} min', {h: Math.floor(f.minutes / 60), m: f.minutes % 60})) : f.kind === 'cost' ? esc(money(f.amount_cents)) : esc(f.percent + ' %')}</td></tr>`).join('')}</table><p><b>${esc(i18n('{h} h {m} min passées', {h: F_.hours, m: F_.mins}))} · ${esc(i18n('Frais : {s}', {s: money(F_.cents)}))}</b></p>${Number(String(feeRate).replace(',', '.')) > 0 ? `<p>${esc(i18n('Temps × taux horaire ({r} € / h) : {s}', {r: String(feeRate).replace('.', ','), s: money(Math.round(F_.minutes * Number(String(feeRate).replace(',', '.')) * 100 / 60))}))}</p>` : ''}</section>`}); }
         if (t.closest('[data-succ-tree-print]')) { UI().openPrintDialog({title: i18n('Arbre de dévolution — {n}', {n: D.number}), key: 'succ-arbre', paper: 'A4', orientation: 'landscape', photos: false, html: `<section data-k-page>${treeSvg(D, R, {print: true}).replace('<svg ', '<svg style="max-width:100%;height:auto" ')}</section>`}); return journal(D, 'pdf', i18n('Arbre de dévolution imprimé')); }
         if (t.closest('[data-succ-tree-svg]')) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([treeSvg(D, R, {print: true})], {type: 'image/svg+xml'})); a.download = `devolution-${D.number}.svg`; document.body.appendChild(a); a.click(); a.remove(); return; }
         const node = t.closest('[data-succ-node]'); if (node) { return A().openPersonById(Number(node.dataset.succNode)); }

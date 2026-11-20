@@ -743,3 +743,233 @@ Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Jen
 Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Odkaz odmítnut: jen adresa https:// z Légifrance, Service-public nebo EUR-Lex. ¦ Länken nekades: bara en https://-adress från Légifrance, Service-public eller EUR-Lex. ¦ Link afvist: kun en https://-adresse fra Légifrance, Service-public eller EUR-Lex.
 Noté au journal du dossier {n}. ¦ Zapsáno do deníku spisu {n}. ¦ Antecknat i loggen för ärende {n}. ¦ Noteret i loggen for sag {n}.
 Écris d’abord ta question. ¦ Nejdřív napiš svou otázku. ¦ Skriv din fråga först. ¦ Skriv dit spørgsmål først.
+# ⚖️ Outils du successoral (⏱ 🔔 📋 🧾 📊 ✉️) et ＋ Ajouter un onglet (docs/design/onglets-et-successoral-outils.html)
+⏱ Compter le temps passé sur ce dossier ¦ ⏱ Počítat čas strávený na tomto spisu ¦ ⏱ Räkna tiden för det här ärendet ¦ ⏱ Tæl tiden brugt på denne sag
+{n} min ¦ {n} min ¦ {n} min ¦ {n} min
+⏸️ Pause ¦ ⏸️ Pauza ¦ ⏸️ Paus ¦ ⏸️ Pause
+▶️ Reprendre ¦ ▶️ Pokračovat ¦ ▶️ Fortsätt ¦ ▶️ Fortsæt
+⏹️ Arrêter et noter ¦ ⏹️ Zastavit a zapsat ¦ ⏹️ Stoppa och anteckna ¦ ⏹️ Stop og notér
+Moins d’une minute : rien à noter. ¦ Méně než minuta: nic k zapsání. ¦ Mindre än en minut: inget att anteckna. ¦ Under et minut: intet at notere.
+Noter le temps passé ¦ Zapsat strávený čas ¦ Anteckna tiden ¦ Notér den brugte tid
+Noter {t} ¦ Zapsat {t} ¦ Anteckna {t} ¦ Notér {t}
+Proposé d’après les onglets ouverts ; à corriger si besoin. Date : {d}. ¦ Navrženo podle otevřených záložek; v případě potřeby oprav. Datum: {d}. ¦ Föreslaget utifrån de öppnade flikarna; rätta vid behov. Datum: {d}. ¦ Foreslået ud fra de åbne faner; ret til om nødvendigt. Dato: {d}.
+Minuit passé : une ligne par jour. ¦ Po půlnoci: jeden řádek na den. ¦ Efter midnatt: en rad per dag. ¦ Efter midnat: én linje pr. dag.
+Jeter ce temps ¦ Zahodit tento čas ¦ Släng den här tiden ¦ Kassér denne tid
+Jeter ce temps ? ¦ Zahodit tento čas? ¦ Släng den här tiden? ¦ Kassér denne tid?
+Jeter ¦ Zahodit ¦ Släng ¦ Kassér
+{t} d’affilée : c’est bien ça ? ¦ {t} v kuse: je to správně? ¦ {t} i sträck: stämmer det? ¦ {t} i træk: passer det?
+Plus de 10 h d’affilée ¦ Víc než 10 h v kuse ¦ Mer än 10 h i sträck ¦ Over 10 t i træk
+Noter quand même ¦ Přesto zapsat ¦ Anteckna ändå ¦ Notér alligevel
+⏱ {t} notées dans le dossier {n} ¦ ⏱ {t} zapsáno do spisu {n} ¦ ⏱ {t} antecknade i ärende {n} ¦ ⏱ {t} noteret i sag {n}
+Le chronomètre compte pour {n}. ¦ Stopky počítají pro {n}. ¦ Tidtagaruret räknar för {n}. ¦ Stopuret tæller for {n}.
+⏹️ Noter et passer à {n} ¦ ⏹️ Zapsat a přejít na {n} ¦ ⏹️ Anteckna och gå till {n} ¦ ⏹️ Notér og skift til {n}
+Continuer sur {n} ¦ Pokračovat se {n} ¦ Fortsätt med {n} ¦ Fortsæt med {n}
+Rien touché depuis 10 min : chronomètre en pause à {h}. ¦ 10 min se ničeho nedotkl: stopky pozastaveny v {h}. ¦ Inget rört på 10 min: tidtagaruret pausat kl. {h}. ¦ Intet rørt i 10 min: stopuret sat på pause kl. {h}.
+Compter aussi ces 10 min ¦ Započítat i těchto 10 min ¦ Räkna även de här 10 min ¦ Tæl også disse 10 min
+⏱ {n} : {t} comptées avant la fermeture. ¦ ⏱ {n}: {t} napočítáno před zavřením. ¦ ⏱ {n}: {t} räknade före stängningen. ¦ ⏱ {n}: {t} talt før lukningen.
+Noter ¦ Zapsat ¦ Anteckna ¦ Notér
+Échéances du jour : {n} à faire (retards et aujourd’hui) ¦ Dnešní lhůty: {n} k vyřízení (zpožděné a dnešní) ¦ Dagens tidsfrister: {n} att göra (försenade och i dag) ¦ Dagens frister: {n} at gøre (forsinkede og i dag)
+🔔 Échéances du jour ¦ 🔔 Dnešní lhůty ¦ 🔔 Dagens tidsfrister ¦ 🔔 Dagens frister
+⏰ Rappel ¦ ⏰ Připomínka ¦ ⏰ Påminnelse ¦ ⏰ Påmindelse
+prévu le {d} ¦ plánováno na {d} ¦ planerad {d} ¦ planlagt {d}
+✓ Fait ¦ ✓ Hotovo ¦ ✓ Klart ¦ ✓ Udført
+⏭ Demain (ou lundi) ¦ ⏭ Zítra (nebo v pondělí) ¦ ⏭ I morgon (eller måndag) ¦ ⏭ I morgen (eller mandag)
+↗ Ouvrir le dossier ¦ ↗ Otevřít spis ¦ ↗ Öppna ärendet ¦ ↗ Åbn sagen
+voir ▾ ¦ zobrazit ▾ ¦ visa ▾ ¦ vis ▾
+Rien pour aujourd’hui. ¦ Na dnešek nic. ¦ Inget för i dag. ¦ Intet for i dag.
+Prochaine : {d} ({n}) ¦ Příští: {d} ({n}) ¦ Nästa: {d} ({n}) ¦ Næste: {d} ({n})
+🔔 À faire · {d} ¦ 🔔 K vyřízení · {d} ¦ 🔔 Att göra · {d} ¦ 🔔 At gøre · {d}
+Cette généalogie ¦ Tato genealogie ¦ Den här släktforskningen ¦ Denne slægtsforskning
+⚖️ {name} : impossible de lire les échéances ¦ ⚖️ {name}: lhůty nelze přečíst ¦ ⚖️ {name}: tidsfristerna kan inte läsas ¦ ⚖️ {name}: fristerne kan ikke læses
+✓ fait · ⏭ demain / lundi · ↗ ouvre le dossier (change de généalogie si besoin) ¦ ✓ hotovo · ⏭ zítra / pondělí · ↗ otevře spis (v případě potřeby přepne genealogii) ¦ ✓ klart · ⏭ i morgon / måndag · ↗ öppnar ärendet (byter släktforskning vid behov) ¦ ✓ udført · ⏭ i morgen / mandag · ↗ åbner sagen (skifter slægtsforskning om nødvendigt)
+Ajouter mes rappels ¦ Přidat moje připomínky ¦ Lägg till mina påminnelser ¦ Tilføj mine påmindelser
+Bulle de l’ordinateur à l’ouverture de l’app ¦ Upozornění počítače při otevření aplikace ¦ Avisering från datorn när appen öppnas ¦ Besked fra computeren når appen åbner
+🗓 Ma semaine ¦ 🗓 Můj týden ¦ 🗓 Min vecka ¦ 🗓 Min uge
+Reporté au {d} ¦ Odloženo na {d} ¦ Uppskjutet till {d} ¦ Udsat til {d}
+✓ Fait : {l} ¦ ✓ Hotovo: {l} ¦ ✓ Klart: {l} ¦ ✓ Udført: {l}
+Reporté au {d} : {l} ¦ Odloženo na {d}: {l} ¦ Uppskjutet till {d}: {l} ¦ Udsat til {d}: {l}
+Points prêts : {n} sur {m} ¦ Hotové body: {n} z {m} ¦ Punkter klara: {n} av {m} ¦ Punkter klar: {n} af {m}
+À revoir : {n} ¦ K revizi: {n} ¦ Att se över: {n} ¦ Skal ses igen: {n}
+Manque : {n} ¦ Chybí: {n} ¦ Saknas: {n} ¦ Mangler: {n}
+📋 AVANT DE REMETTRE ¦ 📋 PŘED PŘEDÁNÍM ¦ 📋 FÖRE ÖVERLÄMNANDET ¦ 📋 FØR OVERDRAGELSEN
+Avant de remettre · {n} ¦ Před předáním · {n} ¦ Före överlämnandet · {n} ¦ Før overdragelsen · {n}
+Passer à « Remis au notaire » ¦ Přepnout na „Předáno notáři“ ¦ Byt till ”Överlämnat till notarien” ¦ Skift til »Overdraget til notaren«
+Ça avertit, ça n’empêche pas : tu peux remettre quand même, ce sera noté au journal. ¦ Varuje, nebrání: můžeš přesto předat, zapíše se to do deníku. ¦ Det varnar, det hindrar inte: du kan överlämna ändå, det antecknas i loggen. ¦ Den advarer, den forhindrer ikke: du kan overdrage alligevel, det noteres i loggen.
+🖨 Imprimer quand même ¦ 🖨 Přesto vytisknout ¦ 🖨 Skriv ut ändå ¦ 🖨 Udskriv alligevel
+Montant ¦ Částka ¦ Belopp ¦ Beløb
+non signé ¦ nepodepsáno ¦ ej undertecknat ¦ ikke underskrevet
+Commission ¦ Provize ¦ Provision ¦ Provision
+Reste à l’héritier ¦ Zůstává dědici ¦ Kvar till arvingen ¦ Tilbage til arvingen
+Arrondi au centime : chaque part est arrondie au centime inférieur, puis les centimes qui restent vont aux parts qui en ont perdu le plus. Le total tombe juste. ¦ Zaokrouhleno na cent: každý podíl se zaokrouhlí dolů na cent, zbývající centy jdou podílům, které ztratily nejvíc. Součet přesně sedí. ¦ Avrundat till hela cent: varje andel avrundas nedåt till cent, sedan går de återstående centen till de andelar som förlorat mest. Summan blir exakt. ¦ Afrundet til øre: hver andel rundes ned til øre, og de resterende øre går til de andele, der har tabt mest. Summen går præcis op.
+Tape l’actif net en euros pour voir la part de chacun. ¦ Napiš čistá aktiva v eurech a uvidíš podíl každého. ¦ Skriv nettotillgångarna i euro för att se var och ens andel. ¦ Skriv nettoformuen i euro for at se hver enkelts andel.
+Tape un montant en euros (ex. 187 450,00). ¦ Napiš částku v eurech (např. 187 450,00). ¦ Skriv ett belopp i euro (t.ex. 187 450,00). ¦ Skriv et beløb i euro (f.eks. 187 450,00).
+Plus d’un milliard d’euros : c’est bien ça ? ¦ Víc než miliarda eur: je to správně? ¦ Mer än en miljard euro: stämmer det? ¦ Over en milliard euro: passer det?
+Oui, calculer ¦ Ano, spočítat ¦ Ja, räkna ¦ Ja, beregn
+Si le conjoint choisit l’usufruit de la totalité : pas de montant en euros (sa valeur dépend de son âge, c’est un barème fiscal) ; demande la valeur au notaire, pour lui et pour les nus-propriétaires. ¦ Pokud si manžel zvolí požívací právo k celku: žádná částka v eurech (jeho hodnota závisí na věku, je to daňová tabulka); zeptej se notáře na hodnotu, pro něj i pro holé vlastníky. ¦ Om maken väljer nyttjanderätt till hela kvarlåtenskapen: inget belopp i euro (värdet beror på åldern, det är en skattetabell); fråga notarien om värdet, för maken och för de nakna ägarna. ¦ Hvis ægtefællen vælger brugsretten til det hele: intet beløb i euro (værdien afhænger af alderen, det er en skattetabel); spørg notaren om værdien, for ægtefællen og for ejerne uden brugsret.
+Autre hypothèse, {h} ¦ Jiná hypotéza, {h} ¦ Annan hypotes, {h} ¦ Anden hypotese, {h}
+📊 Part de chacun en euros ¦ 📊 Podíl každého v eurech ¦ 📊 Var och ens andel i euro ¦ 📊 Hver enkelts andel i euro
+Fractions ¦ Zlomky ¦ Bråk ¦ Brøker
+💶 En euros ¦ 💶 V eurech ¦ 💶 I euro ¦ 💶 I euro
+⤓ Copier le tableau ¦ ⤓ Kopírovat tabulku ¦ ⤓ Kopiera tabellen ¦ ⤓ Kopiér tabellen
+Actif net à partager (tapé par toi) ¦ Čistá aktiva k rozdělení (zadaná tebou) ¦ Nettotillgångar att dela (inskrivna av dig) ¦ Nettoformue der skal deles (skrevet af dig)
+D’après le notaire. Pas gardé : effacé quand tu fermes le dossier. ¦ Podle notáře. Neukládá se: smaže se, když zavřeš spis. ¦ Enligt notarien. Sparas inte: raderas när du stänger ärendet. ¦ Ifølge notaren. Gemmes ikke: slettes, når du lukker sagen.
+Hors droits de succession et frais : l’app ne calcule pas l’impôt. Ces montants sont un ordre d’idée, à faire vérifier par le notaire. ¦ Bez dědické daně a nákladů: aplikace daň nepočítá. Tyto částky jsou orientační, ať je ověří notář. ¦ Utan arvsskatt och kostnader: appen beräknar inte skatten. Beloppen är ungefärliga och ska kontrolleras av notarien. ¦ Uden arveafgift og omkostninger: appen beregner ikke skatten. Beløbene er et skøn, som notaren skal kontrollere.
+Commission = le % écrit dans « ＋ Honoraires d’un contrat » × le montant, arrondie au centime le plus proche, sans TVA ajoutée ; reste = montant − commission. ¦ Provize = % zapsané v „＋ Odměna ze smlouvy“ × částka, zaokrouhlená na nejbližší cent, bez přidané DPH; zůstává = částka − provize. ¦ Provision = det % som står i ”＋ Arvode enligt avtal” × beloppet, avrundat till närmaste cent, utan tillagd moms; kvar = belopp − provision. ¦ Provision = den % der står i »＋ Honorar fra en aftale« × beløbet, afrundet til nærmeste øre, uden tillagt moms; tilbage = beløb − provision.
+Tableau copié. ¦ Tabulka zkopírována. ¦ Tabellen kopierad. ¦ Tabellen kopieret.
+Parts en euros — {n} ¦ Podíly v eurech — {n} ¦ Andelar i euro — {n} ¦ Andele i euro — {n}
+Parts en euros imprimées ¦ Podíly v eurech vytištěny ¦ Andelar i euro utskrivna ¦ Andele i euro udskrevet
+✉️ Courrier à plusieurs… ¦ ✉️ Dopis více dědicům… ¦ ✉️ Brev till flera… ¦ ✉️ Brev til flere…
+décoché ¦ nezaškrtnuto ¦ avmarkerad ¦ fravalgt
+déjà écrit le {d} ({k}) ¦ už psáno {d} ({k}) ¦ redan skrivet {d} ({k}) ¦ allerede skrevet {d} ({k})
+✉️ Courriers en série · {n} ¦ ✉️ Hromadné dopisy · {n} ¦ ✉️ Massbrev · {n} ¦ ✉️ Brevfletning · {n}
+Les héritiers dont l’existence n’est pas établie ne sont pas dans la liste. Les décochés peuvent être cochés à la main (une lettre sans adresse est alors imprimée sans bloc adresse). ¦ Dědicové, jejichž existence není prokázána, v seznamu nejsou. Nezaškrtnuté lze zaškrtnout ručně (dopis bez adresy se pak vytiskne bez bloku adresy). ¦ Arvingar vars existens inte är fastställd finns inte i listan. Avmarkerade kan markeras för hand (ett brev utan adress skrivs då ut utan adressblock). ¦ Arvinger, hvis eksistens ikke er fastslået, er ikke på listen. Fravalgte kan vælges i hånden (et brev uden adresse udskrives så uden adresseblok).
+La lettre · clic sur un champ pour l’insérer ¦ Dopis · kliknutím na pole ho vložíš ¦ Brevet · klicka på ett fält för att infoga det ¦ Brevet · klik på et felt for at indsætte det
+{envoyé_le} : la date du courrier précédent à cet héritier ; {date} : la date d’envoi de celui-ci. ¦ {envoyé_le}: datum předchozího dopisu tomuto dědici; {date}: datum odeslání tohoto. ¦ {envoyé_le}: datumet för det förra brevet till den här arvingen; {date}: datumet då det här skickas. ¦ {envoyé_le}: datoen for det forrige brev til denne arving; {date}: datoen, hvor dette sendes.
+Lettre précédente ¦ Předchozí dopis ¦ Föregående brev ¦ Forrige brev
+Lettre suivante ¦ Další dopis ¦ Nästa brev ¦ Næste brev
+✎ Retoucher cette lettre ¦ ✎ Upravit tento dopis ¦ ✎ Redigera det här brevet ¦ ✎ Ret dette brev
+↺ Revenir au modèle ¦ ↺ Zpět na šablonu ¦ ↺ Tillbaka till mallen ¦ ↺ Tilbage til skabelonen
+＋ Enregistrer comme modèle ¦ ＋ Uložit jako šablonu ¦ ＋ Spara som mall ¦ ＋ Gem som skabelon
+Lettres prêtes : {n} sur {m} ¦ Hotové dopisy: {n} z {m} ¦ Brev klara: {n} av {m} ¦ Breve klar: {n} af {m}
+Champ inconnu : {f} (ligne {l}). Corrige-le avant de ranger les lettres. ¦ Neznámé pole: {f} (řádek {l}). Oprav ho, než dopisy založíš. ¦ Okänt fält: {f} (rad {l}). Rätta det innan du lägger in breven. ¦ Ukendt felt: {f} (linje {l}). Ret det, før du lægger brevene ind.
+🖨 Imprimer les {n} ¦ 🖨 Vytisknout {n} ¦ 🖨 Skriv ut de {n} ¦ 🖨 Udskriv de {n}
+Lettre {i} / {n} · {name} ¦ Dopis {i} / {n} · {name} ¦ Brev {i} / {n} · {name} ¦ Brev {i} / {n} · {name}
+Champ vide : la ligne s’écrit sans le mot ¦ Prázdné pole: řádek se napíše bez toho slova ¦ Tomt fält: raden skrivs utan ordet ¦ Tomt felt: linjen skrives uden ordet
+✎ modifiée à la main ¦ ✎ upraveno ručně ¦ ✎ ändrat för hand ¦ ✎ ændret i hånden
+Ton nom et ton adresse : Listes → Registre de courriers → ✉️ Lettres (expéditeur). ¦ Tvé jméno a adresa: Seznamy → Evidence korespondence → ✉️ Dopisy (odesílatel). ¦ Ditt namn och din adress: Listor → Brevregister → ✉️ Brev (avsändare). ¦ Dit navn og din adresse: Lister → Brevregister → ✉️ Breve (afsender).
+Mes modèles (aucun pour l’instant) ¦ Moje šablony (zatím žádná) ¦ Mina mallar (inga ännu) ¦ Mine skabeloner (ingen endnu)
+Remplacer ta lettre par ce modèle ? ¦ Nahradit tvůj dopis touto šablonou? ¦ Ersätta ditt brev med den här mallen? ¦ Erstat dit brev med denne skabelon?
+Changer de modèle ¦ Změnit šablonu ¦ Byt mall ¦ Skift skabelon
+Oublier les retouches de la lettre à {name} ? ¦ Zapomenout úpravy dopisu pro {name}? ¦ Glömma ändringarna i brevet till {name}? ¦ Glem ændringerne i brevet til {name}?
+Revenir au modèle ¦ Zpět na šablonu ¦ Tillbaka till mallen ¦ Tilbage til skabelonen
+Modèle « {name} » enregistré (Mes modèles, communs à tous les dossiers de cette généalogie) ¦ Šablona „{name}“ uložena (Moje šablony, společné pro všechny spisy této genealogie) ¦ Mallen ”{name}” sparad (Mina mallar, gemensamma för alla ärenden i den här släktforskningen) ¦ Skabelonen »{name}« gemt (Mine skabeloner, fælles for alle sager i denne slægtsforskning)
+Corrige d’abord le champ inconnu. ¦ Nejdřív oprav neznámé pole. ¦ Rätta först det okända fältet. ¦ Ret først det ukendte felt.
+Rangement : {n} sur {m} ¦ Zakládání: {n} z {m} ¦ Inläggning: {n} av {m} ¦ Indlægning: {n} af {m}
+{n} rangés dans le Registre de courriers, relance le {d} ¦ {n} založeno v Evidenci korespondence, urgence {d} ¦ {n} inlagda i Brevregistret, påminnelse {d} ¦ {n} lagt i Brevregistret, rykker {d}
+en main, cote non notée ¦ v ruce, signatura nezapsána ¦ i handen, signum inte antecknat ¦ i hånden, signatur ikke noteret
+demandé le {d} ¦ vyžádáno {d} ¦ begärt {d} ¦ bestilt {d}
+demandé ¦ vyžádáno ¦ begärt ¦ bestilt
+acte à fournir ¦ listinu je třeba dodat ¦ handling ska lämnas ¦ dokument skal skaffes
+(commun, voir {n}) ¦ (společné, viz {n}) ¦ (gemensam, se {n}) ¦ (fælles, se {n})
+CHAÎNE DE FILIATION ¦ ŘETĚZ PŮVODU ¦ HÄRSTAMNINGSKEDJA ¦ AFSTAMNINGSKÆDE
+Calcul établi d’après les actes cités, sous réserve de vérification par le notaire. ¦ Výpočet podle uvedených listin, s výhradou ověření notářem. ¦ Beräkning utifrån de anförda handlingarna, med förbehåll för notariens kontroll. ¦ Beregning ud fra de anførte dokumenter, med forbehold for notarens kontrol.
+Code civil, articles cités pour ce dossier : art. {list}. ¦ Občanský zákoník, články uvedené pro tento spis: art. {list}. ¦ Civillagen, artiklar anförda för det här ärendet: art. {list}. ¦ Civilloven, artikler anført for denne sag: art. {list}.
+N. = naissance, M. = mariage, D. = décès. ¦ Nar. = narození, Sň. = sňatek, Úm. = úmrtí. ¦ F. = född, V. = vigsel, D. = död. ¦ F. = fødsel, V. = vielse, D. = død.
+Page {n} / {t} ¦ Strana {n} / {t} ¦ Sida {n} / {t} ¦ Side {n} / {t}
+Coche au moins une page. ¦ Zaškrtni aspoň jednu stranu. ¦ Markera minst en sida. ¦ Markér mindst én side.
+Tableau pour le notaire : PDF ({n} pages, avec chaîne par héritier) ¦ Tabulka pro notáře: PDF ({n} stran, s řetězem každého dědice) ¦ Tabell för notarien: PDF ({n} sidor, med kedjan för varje arvinge) ¦ Tabel til notaren: PDF ({n} sider, med kæden for hver arving)
+Tableau pour le notaire : PDF ({n} pages) ¦ Tabulka pro notáře: PDF ({n} stran) ¦ Tabell för notarien: PDF ({n} sidor) ¦ Tabel til notaren: PDF ({n} sider)
+sans adresses ¦ bez adres ¦ utan adresser ¦ uden adresser
+📋 Avant de remettre ¦ 📋 Před předáním ¦ 📋 Före överlämnandet ¦ 📋 Før overdragelsen
+ça avertit, ça n’empêche pas ¦ varuje, nebrání ¦ det varnar, det hindrar inte ¦ den advarer, den forhindrer ikke
+Ce que contient le PDF ¦ Co obsahuje PDF ¦ Vad PDF:en innehåller ¦ Hvad PDF’en indeholder
+Compté par le chronomètre ¦ Napočítáno stopkami ¦ Räknat av tidtagaruret ¦ Talt af stopuret
+Taux horaire pour le relevé (facultatif, pas gardé) ¦ Hodinová sazba pro výkaz (nepovinné, neukládá se) ¦ Timpris för sammanställningen (valfritt, sparas inte) ¦ Timepris til opgørelsen (valgfri, gemmes ikke)
+€ / h ¦ € / h ¦ € / h ¦ € / t
+✎ Modifier la ligne ¦ ✎ Upravit řádek ¦ ✎ Ändra raden ¦ ✎ Ret linjen
+Ligne modifiée ¦ Řádek upraven ¦ Raden ändrad ¦ Linjen rettet
+Temps × taux horaire ({r} € / h) : {s} ¦ Čas × hodinová sazba ({r} € / h): {s} ¦ Tid × timpris ({r} € / h): {s} ¦ Tid × timepris ({r} € / t): {s}
+Ajouté depuis « ＋ Ajouter un onglet ». ¦ Přidáno přes „＋ Přidat záložku“. ¦ Tillagd via ”＋ Lägg till en flik”. ¦ Tilføjet via »＋ Tilføj en fane«.
+✓ Onglet « {name} » ajouté ¦ ✓ Záložka „{name}“ přidána ¦ ✓ Fliken ”{name}” tillagd ¦ ✓ Fanen »{name}« tilføjet
+Onglet « {name} » caché ¦ Záložka „{name}“ skryta ¦ Fliken ”{name}” dold ¦ Fanen »{name}« skjult
+conseillé pour toi ¦ doporučeno pro tebe ¦ rekommenderad för dig ¦ anbefalet til dig
+montré par ton usage ¦ zobrazeno tvým použitím ¦ visad av din användning ¦ vist af din brug
+Conseillés pour toi ¦ Doporučeno pro tebe ¦ Rekommenderade för dig ¦ Anbefalet til dig
+Tout le reste ▾ ¦ Všechno ostatní ▾ ¦ Allt annat ▾ ¦ Alt det andet ▾
+Qu’est-ce que tu veux avoir sous la main ? ¦ Co chceš mít po ruce? ¦ Vad vill du ha nära till hands? ¦ Hvad vil du have ved hånden?
+Ton usage : {u} ¦ Tvé použití: {u} ¦ Din användning: {u} ¦ Din brug: {u}
+Chercher un onglet ¦ Hledat záložku ¦ Sök en flik ¦ Søg efter en fane
+🔍 Chercher un onglet… (courrier, acte, agenda) ¦ 🔍 Hledat záložku… (dopis, listina, kalendář) ¦ 🔍 Sök en flik… (brev, handling, kalender) ¦ 🔍 Søg efter en fane… (brev, dokument, kalender)
+Conseillés ({n}) ¦ Doporučené ({n}) ¦ Rekommenderade ({n}) ¦ Anbefalede ({n})
+Déjà dans le menu ({n}) ¦ Už v nabídce ({n}) ¦ Redan i menyn ({n}) ¦ Allerede i menuen ({n})
+Aucun onglet ne correspond. ¦ Žádná záložka neodpovídá. ¦ Ingen flik matchar. ¦ Ingen fane passer.
+Une carte cochée = l’onglet est dans le menu. Cocher l’ajoute à la fin du menu ; décocher le cache (un raccourci est caché, pas effacé). ¦ Zaškrtnutá karta = záložka je v nabídce. Zaškrtnutí ji přidá na konec nabídky; odškrtnutí ji skryje (zkratka se skryje, nesmaže). ¦ Ett markerat kort = fliken finns i menyn. Att markera lägger till den sist i menyn; att avmarkera döljer den (en genväg döljs, raderas inte). ¦ Et markeret kort = fanen er i menuen. At markere tilføjer den sidst i menuen; at fravælge skjuler den (en genvej skjules, slettes ikke).
+↗ Faire un onglet à moi (Éditeur d’onglets) ¦ ↗ Udělat vlastní záložku (Editor záložek) ¦ ↗ Gör en egen flik (Flikredigerare) ¦ ↗ Lav min egen fane (Faneeditor)
+MENU ¦ NABÍDKA ¦ MENY ¦ MENU
+＋ Ajouter un onglet ¦ ＋ Přidat záložku ¦ ＋ Lägg till en flik ¦ ＋ Tilføj en fane
+Ajouter un onglet ¦ Přidat záložku ¦ Lägg till en flik ¦ Tilføj en fane
+＋ Ajouter un onglet… ¦ ＋ Přidat záložku… ¦ ＋ Lägg till en flik… ¦ ＋ Tilføj en fane…
+Montrer le ＋ au bout du menu ¦ Zobrazit ＋ na konci nabídky ¦ Visa ＋ sist i menyn ¦ Vis ＋ sidst i menuen
+Retirer ce raccourci du menu (un onglet de l’app ne se retire pas : il se cache) ¦ Odebrat tuto zkratku z nabídky (záložka aplikace se neodebírá: skryje se) ¦ Ta bort den här genvägen från menyn (en flik i appen tas inte bort: den döljs) ¦ Fjern denne genvej fra menuen (en fane i appen fjernes ikke: den skjules)
+Onglet « {name} » retiré du menu ¦ Záložka „{name}“ odebrána z nabídky ¦ Fliken ”{name}” borttagen från menyn ¦ Fanen »{name}« fjernet fra menuen
+Le ＋ est au bout du menu ¦ ＋ je na konci nabídky ¦ ＋ finns sist i menyn ¦ ＋ er sidst i menuen
+Le ＋ n’est plus au bout du menu ¦ ＋ už není na konci nabídky ¦ ＋ finns inte längre sist i menyn ¦ ＋ er ikke længere sidst i menuen
+Recherches : {what} ¦ Pátrání: {what} ¦ Efterforskningar: {what} ¦ Undersøgelser: {what}
+Recherches ¦ Pátrání ¦ Efterforskningar ¦ Undersøgelser
+Acte de décès de {name} en main ¦ Úmrtní list {name} v ruce ¦ Dödsbevis för {name} i handen ¦ Dødsattest for {name} i hånden
+Acte de décès de {name} pas en main ¦ Úmrtní list {name} chybí ¦ Dödsbevis för {name} saknas ¦ Dødsattest for {name} mangler
+demandé, pas encore reçu ¦ vyžádáno, zatím nedošlo ¦ begärt, inte mottaget än ¦ bestilt, ikke modtaget endnu
+Arbre de dévolution complet ¦ Strom dědické posloupnosti úplný ¦ Arvsföljdsträdet komplett ¦ Arvefølgetræet fuldstændigt
+Aucune branche à chercher. ¦ Žádná větev k hledání. ¦ Ingen gren att söka. ¦ Ingen gren at søge.
+Branches encore à chercher : {n} ¦ Větve, které je třeba ještě hledat: {n} ¦ Grenar kvar att söka: {n} ¦ Grene der stadig skal søges: {n}
+Héritiers dont l’existence n’est pas établie : {n} ¦ Dědicové, jejichž existence není prokázána: {n} ¦ Arvingar vars existens inte är fastställd: {n} ¦ Arvinger, hvis eksistens ikke er fastslået: {n}
+Liens prouvés par aucun acte : {n} ¦ Vazby nedoložené žádnou listinou: {n} ¦ Band som ingen handling bevisar: {n} ¦ Bånd som intet dokument beviser: {n}
+{what} (relie {who} au défunt) ¦ {what} (spojuje {who} se zesnulým) ¦ {what} (förbinder {who} med den avlidne) ¦ {what} (forbinder {who} med afdøde)
+Chaque lien est prouvé par un acte ¦ Každá vazba je doložena listinou ¦ Varje band bevisas av en handling ¦ Hvert bånd er bevist af et dokument
+Actes demandés, pas encore reçus : {n} ¦ Vyžádané listiny, zatím nedošlé: {n} ¦ Begärda handlingar, inte mottagna än: {n} ¦ Bestilte dokumenter, ikke modtaget endnu: {n}
+{what} · demandé le {d} ¦ {what} · vyžádáno {d} ¦ {what} · begärt {d} ¦ {what} · bestilt {d}
+(courrier n° {n}) ¦ (dopis č. {n}) ¦ (brev nr {n}) ¦ (brev nr. {n})
+Adresses des héritiers vivants : {n} sur {m} ¦ Adresy žijících dědiců: {n} z {m} ¦ Adresser till levande arvingar: {n} av {m} ¦ Adresser på levende arvinger: {n} af {m}
+Aucun héritier vivant à joindre ¦ Žádný žijící dědic ke kontaktu ¦ Ingen levande arvinge att nå ¦ Ingen levende arving at nå
+Contrats signés (ou refus noté) : {n} sur {m} ¦ Podepsané smlouvy (nebo zapsané odmítnutí): {n} z {m} ¦ Avtal undertecknade (eller avslag antecknat): {n} av {m} ¦ Aftaler underskrevet (eller afslag noteret): {n} af {m}
+Aucun contrat à faire signer ¦ Žádná smlouva k podpisu ¦ Inget avtal att få undertecknat ¦ Ingen aftale at få underskrevet
+Contrats pas encore signés : {n} ¦ Dosud nepodepsané smlouvy: {n} ¦ Avtal ännu inte undertecknade: {n} ¦ Aftaler endnu ikke underskrevet: {n}
+{name} a répondu « oui », pas de date de signature ¦ {name} odpověděl(a) „ano“, bez data podpisu ¦ {name} svarade ”ja”, inget datum för underskrift ¦ {name} svarede »ja«, ingen dato for underskrift
+Héritiers introuvables ou silencieux : {n} ¦ Nedohledatelní nebo neodpovídající dědicové: {n} ¦ Arvingar som inte går att hitta eller inte svarar: {n} ¦ Arvinger der ikke kan findes eller ikke svarer: {n}
+Parts : le total fait bien 1 ¦ Podíly: součet je opravdu 1 ¦ Andelar: summan blir verkligen 1 ¦ Andele: summen er netop 1
+Les parts ne totalisent pas 1 : à revoir ¦ Podíly nedávají 1: k revizi ¦ Andelarna blir inte 1: se över ¦ Andelene giver ikke 1: skal ses igen
+Échéances en retard : {n} ¦ Zpožděné lhůty: {n} ¦ Försenade tidsfrister: {n} ¦ Forsinkede frister: {n}
+Aucune échéance en retard ¦ Žádná zpožděná lhůta ¦ Ingen försenad tidsfrist ¦ Ingen forsinket frist
+Remis au notaire avec {miss} manque(s) et {warn} point(s) à revoir ({what}) ¦ Předáno notáři, chybí: {miss}, k revizi: {warn} ({what}) ¦ Överlämnat till notarien med saknade: {miss} och att se över: {warn} ({what}) ¦ Overdraget til notaren med mangler: {miss} og punkter at se igen: {warn} ({what})
+Madame ¦ Paní ¦ Fru ¦ Fru
+Monsieur ¦ Pan ¦ Herr ¦ Hr.
+Tes photos, actes, lettres de A à Z, rangés en dossiers. ¦ Tvé fotky, listiny, dopisy od A do Z, roztříděné do složek. ¦ Dina foton, handlingar, brev från A till Ö, ordnade i mappar. ¦ Dine fotos, dokumenter, breve fra A til Å, ordnet i mapper.
+Lettres à ouvrir plus tard, recettes, musée de famille. ¦ Dopisy k otevření později, recepty, rodinné muzeum. ¦ Brev att öppna senare, recept, familjemuseum. ¦ Breve til at åbne senere, opskrifter, familiemuseum.
+Fiches thématiques : un métier, une guerre, un village. ¦ Tematické karty: řemeslo, válka, vesnice. ¦ Temablad: ett yrke, ett krig, en by. ¦ Temakort: et erhverv, en krig, en landsby.
+Tes correspondances ADN et leurs liens. ¦ Tvé shody DNA a jejich vazby. ¦ Dina DNA-matchningar och deras band. ¦ Dine DNA-match og deres bånd.
+Les œuvres d’un artiste, albums, expositions. ¦ Díla umělce, alba, výstavy. ¦ En konstnärs verk, album, utställningar. ¦ En kunstners værker, album, udstillinger.
+Pedigree, portées. (Suivi des animaux : à part.) ¦ Rodokmen, vrhy. (Sledování zvířat: zvlášť.) ¦ Stamtavla, kullar. (Uppföljning av djur: separat.) ¦ Stamtavle, kuld. (Opfølgning af dyr: for sig.)
+Baguage, puces, observations, trajets. ¦ Kroužkování, čipy, pozorování, trasy. ¦ Ringmärkning, chip, observationer, färdvägar. ¦ Ringmærkning, chips, observationer, ruter.
+Dossiers de succession, pour un notaire. ¦ Dědické spisy, pro notáře. ¦ Arvsärenden, för en notarie. ¦ Dødsbosager, til en notar.
+Le Registre de courriers : demandes d’actes, relances, réponses. ¦ Evidence korespondence: žádosti o listiny, urgence, odpovědi. ¦ Brevregistret: begäran om handlingar, påminnelser, svar. ¦ Brevregistret: anmodninger om dokumenter, rykkere, svar.
+Listes → Archives et sources → Registre de courriers ¦ Seznamy → Archivy a prameny → Evidence korespondence ¦ Listor → Arkiv och källor → Brevregister ¦ Lister → Arkiver og kilder → Brevregister
+Tes actes recopiés, mot à mot. ¦ Tvé opsané listiny, slovo od slova. ¦ Dina avskrivna handlingar, ord för ord. ¦ Dine afskrevne dokumenter, ord for ord.
+Listes → Archives et sources ¦ Seznamy → Archivy a prameny ¦ Listor → Arkiv och källor ¦ Lister → Arkiver og kilder
+Visites, rendez-vous, relances, à la semaine. ¦ Návštěvy, schůzky, urgence, po týdnech. ¦ Besök, möten, påminnelser, vecka för vecka. ¦ Besøg, aftaler, rykkere, uge for uge.
+Listes → Recherche et organisation ¦ Seznamy → Výzkum a organizace ¦ Listor → Forskning och organisation ¦ Lister → Forskning og organisering
+Les choses à faire, avec leur date. ¦ Věci k vyřízení, s datem. ¦ Saker att göra, med datum. ¦ Ting der skal gøres, med dato.
+Toutes les images, sons, vidéos en tableau. ¦ Všechny obrázky, zvuky, videa v tabulce. ¦ Alla bilder, ljud, videor i en tabell. ¦ Alle billeder, lyde, videoer i en tabel.
+Listes → Médias et documents ¦ Seznamy → Média a dokumenty ¦ Listor → Media och dokument ¦ Lister → Medier og dokumenter
+Questionnaires pour recueillir les souvenirs. ¦ Dotazníky ke sběru vzpomínek. ¦ Frågeformulär för att samla minnen. ¦ Spørgeskemaer til at samle minder.
+Les maisons, pièce par pièce, et qui y a vécu. ¦ Domy, místnost po místnosti, a kdo v nich žil. ¦ Husen, rum för rum, och vem som bodde där. ¦ Husene, rum for rum, og hvem der boede der.
+Listes → Lieux et maisons ¦ Seznamy → Místa a domy ¦ Listor → Platser och hus ¦ Lister → Steder og huse
+Adresses et contacts des cousins vivants. ¦ Adresy a kontakty žijících bratranců a sestřenic. ¦ Adresser och kontakter till levande kusiner. ¦ Adresser og kontakter til levende fætre og kusiner.
+Listes → Personnes et familles ¦ Seznamy → Osoby a rodiny ¦ Listor → Personer och familjer ¦ Lister → Personer og familier
+Les dépôts, leurs cotes, leurs horaires. ¦ Archivy, jejich signatury, otevírací doby. ¦ Arkiven, deras signum, deras öppettider. ¦ Arkiverne, deres signaturer, deres åbningstider.
+Le planificateur : quoi consulter, où, quand. ¦ Plánovač: co prohlédnout, kde, kdy. ¦ Planeraren: vad som ska ses, var, när. ¦ Planlæggeren: hvad der skal ses, hvor, hvornår.
+Qui a hérité de quoi d’après les actes anciens. ¦ Kdo co zdědil podle starých listin. ¦ Vem som ärvde vad enligt gamla handlingar. ¦ Hvem der arvede hvad ifølge gamle dokumenter.
+Les bons sites pour la personne ouverte. ¦ Správné weby pro otevřenou osobu. ¦ Rätt webbplatser för den öppna personen. ¦ De rette websteder for den åbne person.
+Recherche → Type de recherche ¦ Hledání → Druh hledání ¦ Sök → Typ av sökning ¦ Søgning → Søgetype
+Trouver et fusionner les fiches en double. ¦ Najít a sloučit zdvojené záznamy. ¦ Hitta och slå ihop dubbletter. ¦ Find og flet dubletter.
+Réglages → Fusion de doublons ¦ Nastavení → Slučování duplicit ¦ Inställningar → Sammanslagning av dubbletter ¦ Indstillinger → Fletning af dubletter
+Dates impossibles, liens bizarres. ¦ Nemožná data, podivné vazby. ¦ Omöjliga datum, konstiga band. ¦ Umulige datoer, mærkelige bånd.
+Réglages → Contrôle de la base ¦ Nastavení → Kontrola databáze ¦ Inställningar → Kontroll av databasen ¦ Indstillinger → Kontrol af databasen
+Le nom étudié ¦ Zkoumané příjmení ¦ Det studerade namnet ¦ Det undersøgte navn
+Les porteurs d’un nom, ses variantes. ¦ Nositelé příjmení, jeho varianty. ¦ Bärarna av ett namn, dess varianter. ¦ Bærerne af et navn, dets varianter.
+Graphiques → statistique des noms ¦ Grafy → statistika příjmení ¦ Diagram → namnstatistik ¦ Diagrammer → navnestatistik
+L’entreprise ¦ Podnik ¦ Företaget ¦ Virksomheden
+Employeurs, salariés, membres. ¦ Zaměstnavatelé, zaměstnanci, členové. ¦ Arbetsgivare, anställda, medlemmar. ¦ Arbejdsgivere, ansatte, medlemmer.
+Listes → Employeurs ¦ Seznamy → Zaměstnavatelé ¦ Listor → Arbetsgivare ¦ Lister → Arbejdsgivere
+Des parties de l’app, cachées au départ ¦ Části aplikace, na začátku skryté ¦ Delar av appen, dolda från början ¦ Dele af appen, skjult i starten
+Elles existent déjà : cocher les montre dans le menu. ¦ Už existují: zaškrtnutí je zobrazí v nabídce. ¦ De finns redan: att markera visar dem i menyn. ¦ De findes allerede: at markere viser dem i menuen.
+Un raccourci vers une liste ¦ Zkratka k seznamu ¦ En genväg till en lista ¦ En genvej til en liste
+Il devient un « onglet à soi » (Éditeur d’onglets). ¦ Stane se „vlastní záložkou“ (Editor záložek). ¦ Den blir en ”egen flik” (Flikredigerare). ¦ Den bliver en »egen fane« (Faneeditor).
+Un raccourci vers un outil ¦ Zkratka k nástroji ¦ En genväg till ett verktyg ¦ En genvej til et værktøj
+Chaîne par héritier ¦ Řetěz každého dědice ¦ Kedja för varje arvinge ¦ Kæde for hver arving
+✉️ Contactés ¦ ✉️ Kontaktovaní ¦ ✉️ Kontaktade ¦ ✉️ Kontaktede
+📇 Répertoire des vivants ¦ 📇 Adresář žijících ¦ 📇 Register över levande ¦ 📇 Register over levende
+Échéances du jour (usage successoral seulement) ¦ Dnešní lhůty (jen použití pro dědická řízení) ¦ Dagens tidsfrister (endast användning för arvsutredning) ¦ Dagens frister (kun brug til arveudredning)
+Ce dossier est clos : rien ne s’y note. ¦ Tento spis je uzavřený: nic se do něj nezapisuje. ¦ Det här ärendet är avslutat: inget antecknas i det. ¦ Denne sag er lukket: der noteres intet i den.
+Donne un nom au modèle. ¦ Pojmenuj šablonu. ¦ Ge mallen ett namn. ¦ Giv skabelonen et navn.
+Trop de lettres d’un coup (60 au plus). ¦ Příliš mnoho dopisů najednou (nejvýš 60). ¦ För många brev på en gång (högst 60). ¦ For mange breve på én gang (højst 60).
+Échéances du jour ¦ Dnešní lhůty ¦ Dagens tidsfrister ¦ Dagens frister

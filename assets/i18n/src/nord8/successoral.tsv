@@ -743,3 +743,233 @@ Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Yal
 Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Bağlantı reddedildi: yalnızca Légifrance, Service-public veya EUR-Lex sitelerinden bir https:// adresi.
 Noté au journal du dossier {n}. ¦ {n} dosyasının günlüğüne not edildi.
 Écris d’abord ta question. ¦ Önce sorunu yaz.
+# ⚖️ Outils du successoral (⏱ 🔔 📋 🧾 📊 ✉️) et ＋ Ajouter un onglet (docs/design/onglets-et-successoral-outils.html)
+⏱ Compter le temps passé sur ce dossier ¦ ⏱ Bu dosyaya harcanan süreyi say
+{n} min ¦ {n} dk
+⏸️ Pause ¦ ⏸️ Duraklat
+▶️ Reprendre ¦ ▶️ Sürdür
+⏹️ Arrêter et noter ¦ ⏹️ Durdur ve kaydet
+Moins d’une minute : rien à noter. ¦ Bir dakikadan az: kaydedilecek bir şey yok.
+Noter le temps passé ¦ Harcanan süreyi kaydet
+Noter {t} ¦ {t} kaydet
+Proposé d’après les onglets ouverts ; à corriger si besoin. Date : {d}. ¦ Açılan sekmelere göre önerildi; gerekirse düzelt. Tarih: {d}.
+Minuit passé : une ligne par jour. ¦ Gece yarısından sonra: gün başına bir satır.
+Jeter ce temps ¦ Bu süreyi at
+Jeter ce temps ? ¦ Bu süre atılsın mı?
+Jeter ¦ At
+{t} d’affilée : c’est bien ça ? ¦ {t} aralıksız: doğru mu?
+Plus de 10 h d’affilée ¦ Aralıksız 10 saatten fazla
+Noter quand même ¦ Yine de kaydet
+⏱ {t} notées dans le dossier {n} ¦ ⏱ {t}, {n} dosyasına kaydedildi
+Le chronomètre compte pour {n}. ¦ Kronometre {n} için sayıyor.
+⏹️ Noter et passer à {n} ¦ ⏹️ Kaydet ve {n} dosyasına geç
+Continuer sur {n} ¦ {n} ile devam et
+Rien touché depuis 10 min : chronomètre en pause à {h}. ¦ 10 dakikadır hiçbir şeye dokunulmadı: kronometre {h} itibarıyla duraklatıldı.
+Compter aussi ces 10 min ¦ Bu 10 dakikayı da say
+⏱ {n} : {t} comptées avant la fermeture. ¦ ⏱ {n}: kapanmadan önce {t} sayıldı.
+Noter ¦ Kaydet
+Échéances du jour : {n} à faire (retards et aujourd’hui) ¦ Günün süreleri: {n} yapılacak (geciken ve bugün)
+🔔 Échéances du jour ¦ 🔔 Günün süreleri
+⏰ Rappel ¦ ⏰ Hatırlatma
+prévu le {d} ¦ planlanan tarih: {d}
+✓ Fait ¦ ✓ Yapıldı
+⏭ Demain (ou lundi) ¦ ⏭ Yarın (veya pazartesi)
+↗ Ouvrir le dossier ¦ ↗ Dosyayı aç
+voir ▾ ¦ göster ▾
+Rien pour aujourd’hui. ¦ Bugün için bir şey yok.
+Prochaine : {d} ({n}) ¦ Sonraki: {d} ({n})
+🔔 À faire · {d} ¦ 🔔 Yapılacaklar · {d}
+Cette généalogie ¦ Bu soy ağacı
+⚖️ {name} : impossible de lire les échéances ¦ ⚖️ {name}: süreler okunamıyor
+✓ fait · ⏭ demain / lundi · ↗ ouvre le dossier (change de généalogie si besoin) ¦ ✓ yapıldı · ⏭ yarın / pazartesi · ↗ dosyayı açar (gerekirse soy ağacını değiştirir)
+Ajouter mes rappels ¦ Hatırlatmalarımı ekle
+Bulle de l’ordinateur à l’ouverture de l’app ¦ Uygulama açılırken bilgisayar bildirimi
+🗓 Ma semaine ¦ 🗓 Haftam
+Reporté au {d} ¦ {d} tarihine ertelendi
+✓ Fait : {l} ¦ ✓ Yapıldı: {l}
+Reporté au {d} : {l} ¦ {d} tarihine ertelendi: {l}
+Points prêts : {n} sur {m} ¦ Hazır maddeler: {n} / {m}
+À revoir : {n} ¦ Gözden geçirilecek: {n}
+Manque : {n} ¦ Eksik: {n}
+📋 AVANT DE REMETTRE ¦ 📋 TESLİMDEN ÖNCE
+Avant de remettre · {n} ¦ Teslimden önce · {n}
+Passer à « Remis au notaire » ¦ “Notere teslim edildi” durumuna geç
+Ça avertit, ça n’empêche pas : tu peux remettre quand même, ce sera noté au journal. ¦ Uyarır, engellemez: yine de teslim edebilirsin, günlüğe yazılır.
+🖨 Imprimer quand même ¦ 🖨 Yine de yazdır
+Montant ¦ Tutar
+non signé ¦ imzalanmadı
+Commission ¦ Komisyon
+Reste à l’héritier ¦ Mirasçıya kalan
+Arrondi au centime : chaque part est arrondie au centime inférieur, puis les centimes qui restent vont aux parts qui en ont perdu le plus. Le total tombe juste. ¦ Kuruşa yuvarlandı: her pay kuruşa aşağı yuvarlanır, kalan kuruşlar en çok kaybeden paylara gider. Toplam tam tutar.
+Tape l’actif net en euros pour voir la part de chacun. ¦ Herkesin payını görmek için net mal varlığını avro olarak yaz.
+Tape un montant en euros (ex. 187 450,00). ¦ Avro cinsinden bir tutar yaz (ör. 187 450,00).
+Plus d’un milliard d’euros : c’est bien ça ? ¦ Bir milyar avrodan fazla: doğru mu?
+Oui, calculer ¦ Evet, hesapla
+Si le conjoint choisit l’usufruit de la totalité : pas de montant en euros (sa valeur dépend de son âge, c’est un barème fiscal) ; demande la valeur au notaire, pour lui et pour les nus-propriétaires. ¦ Eş tüm mirasın intifa hakkını seçerse: avro tutarı yok (değeri yaşa bağlıdır, bir vergi tablosudur); değeri, eş ve çıplak mülkiyet sahipleri için notere sor.
+Autre hypothèse, {h} ¦ Başka bir varsayım, {h}
+📊 Part de chacun en euros ¦ 📊 Herkesin payı avro olarak
+Fractions ¦ Kesirler
+💶 En euros ¦ 💶 Avro olarak
+⤓ Copier le tableau ¦ ⤓ Tabloyu kopyala
+Actif net à partager (tapé par toi) ¦ Paylaştırılacak net mal varlığı (senin yazdığın)
+D’après le notaire. Pas gardé : effacé quand tu fermes le dossier. ¦ Notere göre. Saklanmaz: dosyayı kapattığında silinir.
+Hors droits de succession et frais : l’app ne calcule pas l’impôt. Ces montants sont un ordre d’idée, à faire vérifier par le notaire. ¦ Veraset vergisi ve masraflar hariç: uygulama vergiyi hesaplamaz. Bu tutarlar fikir vermek içindir, noter tarafından doğrulanmalıdır.
+Commission = le % écrit dans « ＋ Honoraires d’un contrat » × le montant, arrondie au centime le plus proche, sans TVA ajoutée ; reste = montant − commission. ¦ Komisyon = “＋ Sözleşme ücreti” içine yazılan % × tutar, en yakın kuruşa yuvarlanır, KDV eklenmez; kalan = tutar − komisyon.
+Tableau copié. ¦ Tablo kopyalandı.
+Parts en euros — {n} ¦ Avro olarak paylar — {n}
+Parts en euros imprimées ¦ Avro olarak paylar yazdırıldı
+✉️ Courrier à plusieurs… ¦ ✉️ Birden çok kişiye mektup…
+décoché ¦ işaret kaldırıldı
+déjà écrit le {d} ({k}) ¦ zaten yazıldı: {d} ({k})
+✉️ Courriers en série · {n} ¦ ✉️ Toplu mektuplar · {n}
+Les héritiers dont l’existence n’est pas établie ne sont pas dans la liste. Les décochés peuvent être cochés à la main (une lettre sans adresse est alors imprimée sans bloc adresse). ¦ Varlığı kanıtlanmamış mirasçılar listede yok. İşareti kaldırılanlar elle işaretlenebilir (adressiz bir mektup o zaman adres bloğu olmadan yazdırılır).
+La lettre · clic sur un champ pour l’insérer ¦ Mektup · eklemek için bir alana tıkla
+{envoyé_le} : la date du courrier précédent à cet héritier ; {date} : la date d’envoi de celui-ci. ¦ {envoyé_le}: bu mirasçıya gönderilen önceki mektubun tarihi; {date}: bu mektubun gönderilme tarihi.
+Lettre précédente ¦ Önceki mektup
+Lettre suivante ¦ Sonraki mektup
+✎ Retoucher cette lettre ¦ ✎ Bu mektubu düzelt
+↺ Revenir au modèle ¦ ↺ Şablona dön
+＋ Enregistrer comme modèle ¦ ＋ Şablon olarak kaydet
+Lettres prêtes : {n} sur {m} ¦ Hazır mektuplar: {n} / {m}
+Champ inconnu : {f} (ligne {l}). Corrige-le avant de ranger les lettres. ¦ Bilinmeyen alan: {f} (satır {l}). Mektupları kaydetmeden önce düzelt.
+🖨 Imprimer les {n} ¦ 🖨 {n} mektubu yazdır
+Lettre {i} / {n} · {name} ¦ Mektup {i} / {n} · {name}
+Champ vide : la ligne s’écrit sans le mot ¦ Boş alan: satır o sözcük olmadan yazılır
+✎ modifiée à la main ¦ ✎ elle değiştirildi
+Ton nom et ton adresse : Listes → Registre de courriers → ✉️ Lettres (expéditeur). ¦ Adın ve adresin: Listeler → Yazışma kaydı → ✉️ Mektuplar (gönderen).
+Mes modèles (aucun pour l’instant) ¦ Şablonlarım (henüz yok)
+Remplacer ta lettre par ce modèle ? ¦ Mektubun bu şablonla değiştirilsin mi?
+Changer de modèle ¦ Şablonu değiştir
+Oublier les retouches de la lettre à {name} ? ¦ {name} için mektuptaki düzeltmeler unutulsun mu?
+Revenir au modèle ¦ Şablona dön
+Modèle « {name} » enregistré (Mes modèles, communs à tous les dossiers de cette généalogie) ¦ “{name}” şablonu kaydedildi (Şablonlarım, bu soy ağacının tüm dosyaları için ortak)
+Corrige d’abord le champ inconnu. ¦ Önce bilinmeyen alanı düzelt.
+Rangement : {n} sur {m} ¦ Kaydetme: {n} / {m}
+{n} rangés dans le Registre de courriers, relance le {d} ¦ {n}, Yazışma kaydına kaydedildi, hatırlatma {d}
+en main, cote non notée ¦ elde, arşiv numarası yazılmadı
+demandé le {d} ¦ istendi: {d}
+demandé ¦ istendi
+acte à fournir ¦ sağlanacak belge
+(commun, voir {n}) ¦ (ortak, bkz. {n})
+CHAÎNE DE FILIATION ¦ SOY ZİNCİRİ
+Calcul établi d’après les actes cités, sous réserve de vérification par le notaire. ¦ Belirtilen belgelere göre hesap, noterin doğrulaması saklı kalmak kaydıyla.
+Code civil, articles cités pour ce dossier : art. {list}. ¦ Medeni Kanun, bu dosya için belirtilen maddeler: art. {list}.
+N. = naissance, M. = mariage, D. = décès. ¦ D. = doğum, E. = evlilik, Ö. = ölüm.
+Page {n} / {t} ¦ Sayfa {n} / {t}
+Coche au moins une page. ¦ En az bir sayfa işaretle.
+Tableau pour le notaire : PDF ({n} pages, avec chaîne par héritier) ¦ Noter için tablo: PDF ({n} sayfa, her mirasçının zinciriyle)
+Tableau pour le notaire : PDF ({n} pages) ¦ Noter için tablo: PDF ({n} sayfa)
+sans adresses ¦ adressiz
+📋 Avant de remettre ¦ 📋 Teslimden önce
+ça avertit, ça n’empêche pas ¦ uyarır, engellemez
+Ce que contient le PDF ¦ PDF neyi içeriyor
+Compté par le chronomètre ¦ Kronometreyle sayıldı
+Taux horaire pour le relevé (facultatif, pas gardé) ¦ Döküm için saat ücreti (isteğe bağlı, saklanmaz)
+€ / h ¦ € / sa
+✎ Modifier la ligne ¦ ✎ Satırı değiştir
+Ligne modifiée ¦ Satır değiştirildi
+Temps × taux horaire ({r} € / h) : {s} ¦ Süre × saat ücreti ({r} € / sa): {s}
+Ajouté depuis « ＋ Ajouter un onglet ». ¦ “＋ Sekme ekle” üzerinden eklendi.
+✓ Onglet « {name} » ajouté ¦ ✓ “{name}” sekmesi eklendi
+Onglet « {name} » caché ¦ “{name}” sekmesi gizlendi
+conseillé pour toi ¦ senin için önerilen
+montré par ton usage ¦ kullanımına göre gösterilen
+Conseillés pour toi ¦ Senin için önerilenler
+Tout le reste ▾ ¦ Geri kalan her şey ▾
+Qu’est-ce que tu veux avoir sous la main ? ¦ Neyi elinin altında tutmak istersin?
+Ton usage : {u} ¦ Kullanımın: {u}
+Chercher un onglet ¦ Sekme ara
+🔍 Chercher un onglet… (courrier, acte, agenda) ¦ 🔍 Sekme ara… (mektup, belge, ajanda)
+Conseillés ({n}) ¦ Önerilenler ({n})
+Déjà dans le menu ({n}) ¦ Zaten menüde ({n})
+Aucun onglet ne correspond. ¦ Hiçbir sekme eşleşmiyor.
+Une carte cochée = l’onglet est dans le menu. Cocher l’ajoute à la fin du menu ; décocher le cache (un raccourci est caché, pas effacé). ¦ İşaretli kart = sekme menüde. İşaretlemek onu menünün sonuna ekler; işareti kaldırmak gizler (kısayol gizlenir, silinmez).
+↗ Faire un onglet à moi (Éditeur d’onglets) ¦ ↗ Kendi sekmemi yap (Sekme düzenleyici)
+MENU ¦ MENÜ
+＋ Ajouter un onglet ¦ ＋ Sekme ekle
+Ajouter un onglet ¦ Sekme ekle
+＋ Ajouter un onglet… ¦ ＋ Sekme ekle…
+Montrer le ＋ au bout du menu ¦ ＋ işaretini menünün sonunda göster
+Retirer ce raccourci du menu (un onglet de l’app ne se retire pas : il se cache) ¦ Bu kısayolu menüden kaldır (uygulamanın bir sekmesi kaldırılmaz: gizlenir)
+Onglet « {name} » retiré du menu ¦ “{name}” sekmesi menüden kaldırıldı
+Le ＋ est au bout du menu ¦ ＋ menünün sonunda
+Le ＋ n’est plus au bout du menu ¦ ＋ artık menünün sonunda değil
+Recherches : {what} ¦ Araştırmalar: {what}
+Recherches ¦ Araştırmalar
+Acte de décès de {name} en main ¦ {name} ölüm belgesi elde
+Acte de décès de {name} pas en main ¦ {name} ölüm belgesi eksik
+demandé, pas encore reçu ¦ istendi, henüz gelmedi
+Arbre de dévolution complet ¦ Mirasçılık ağacı tamam
+Aucune branche à chercher. ¦ Aranacak dal yok.
+Branches encore à chercher : {n} ¦ Hâlâ aranacak dallar: {n}
+Héritiers dont l’existence n’est pas établie : {n} ¦ Varlığı kanıtlanmamış mirasçılar: {n}
+Liens prouvés par aucun acte : {n} ¦ Hiçbir belgeyle kanıtlanmamış bağlar: {n}
+{what} (relie {who} au défunt) ¦ {what} ({who} ile ölen kişiyi bağlar)
+Chaque lien est prouvé par un acte ¦ Her bağ bir belgeyle kanıtlanmış
+Actes demandés, pas encore reçus : {n} ¦ İstenen, henüz gelmeyen belgeler: {n}
+{what} · demandé le {d} ¦ {what} · istendi: {d}
+(courrier n° {n}) ¦ (mektup no. {n})
+Adresses des héritiers vivants : {n} sur {m} ¦ Yaşayan mirasçıların adresleri: {n} / {m}
+Aucun héritier vivant à joindre ¦ Ulaşılacak yaşayan mirasçı yok
+Contrats signés (ou refus noté) : {n} sur {m} ¦ İmzalanan sözleşmeler (veya not edilen ret): {n} / {m}
+Aucun contrat à faire signer ¦ İmzalatılacak sözleşme yok
+Contrats pas encore signés : {n} ¦ Henüz imzalanmamış sözleşmeler: {n}
+{name} a répondu « oui », pas de date de signature ¦ {name} “evet” dedi, imza tarihi yok
+Héritiers introuvables ou silencieux : {n} ¦ Bulunamayan veya yanıt vermeyen mirasçılar: {n}
+Parts : le total fait bien 1 ¦ Paylar: toplam gerçekten 1
+Les parts ne totalisent pas 1 : à revoir ¦ Paylar toplamı 1 değil: gözden geçir
+Échéances en retard : {n} ¦ Geciken süreler: {n}
+Aucune échéance en retard ¦ Geciken süre yok
+Remis au notaire avec {miss} manque(s) et {warn} point(s) à revoir ({what}) ¦ Notere teslim edildi, eksik: {miss}, gözden geçirilecek: {warn} ({what})
+Madame ¦ Hanımefendi
+Monsieur ¦ Beyefendi
+Tes photos, actes, lettres de A à Z, rangés en dossiers. ¦ Fotoğrafların, belgelerin, mektupların A’dan Z’ye, klasörlerde.
+Lettres à ouvrir plus tard, recettes, musée de famille. ¦ Daha sonra açılacak mektuplar, tarifler, aile müzesi.
+Fiches thématiques : un métier, une guerre, un village. ¦ Konu kartları: bir meslek, bir savaş, bir köy.
+Tes correspondances ADN et leurs liens. ¦ DNA eşleşmelerin ve bağları.
+Les œuvres d’un artiste, albums, expositions. ¦ Bir sanatçının eserleri, albümler, sergiler.
+Pedigree, portées. (Suivi des animaux : à part.) ¦ Soy kütüğü, batınlar. (Hayvan takibi: ayrı.)
+Baguage, puces, observations, trajets. ¦ Halkalama, çipler, gözlemler, güzergâhlar.
+Dossiers de succession, pour un notaire. ¦ Veraset dosyaları, bir noter için.
+Le Registre de courriers : demandes d’actes, relances, réponses. ¦ Yazışma kaydı: belge talepleri, hatırlatmalar, yanıtlar.
+Listes → Archives et sources → Registre de courriers ¦ Listeler → Arşivler ve kaynaklar → Yazışma kaydı
+Tes actes recopiés, mot à mot. ¦ Kopyaladığın belgeler, kelimesi kelimesine.
+Listes → Archives et sources ¦ Listeler → Arşivler ve kaynaklar
+Visites, rendez-vous, relances, à la semaine. ¦ Ziyaretler, randevular, hatırlatmalar, hafta hafta.
+Listes → Recherche et organisation ¦ Listeler → Araştırma ve düzen
+Les choses à faire, avec leur date. ¦ Yapılacaklar, tarihleriyle.
+Toutes les images, sons, vidéos en tableau. ¦ Tüm resimler, sesler, videolar bir tabloda.
+Listes → Médias et documents ¦ Listeler → Medya ve belgeler
+Questionnaires pour recueillir les souvenirs. ¦ Anıları toplamak için anketler.
+Les maisons, pièce par pièce, et qui y a vécu. ¦ Evler, oda oda, ve içinde kimlerin yaşadığı.
+Listes → Lieux et maisons ¦ Listeler → Yerler ve evler
+Adresses et contacts des cousins vivants. ¦ Yaşayan kuzenlerin adresleri ve iletişim bilgileri.
+Listes → Personnes et familles ¦ Listeler → Kişiler ve aileler
+Les dépôts, leurs cotes, leurs horaires. ¦ Arşivler, numaraları, çalışma saatleri.
+Le planificateur : quoi consulter, où, quand. ¦ Planlayıcı: neye bakılacak, nerede, ne zaman.
+Qui a hérité de quoi d’après les actes anciens. ¦ Eski belgelere göre kim neyi miras aldı.
+Les bons sites pour la personne ouverte. ¦ Açık kişi için doğru siteler.
+Recherche → Type de recherche ¦ Arama → Arama türü
+Trouver et fusionner les fiches en double. ¦ Çift kayıtları bul ve birleştir.
+Réglages → Fusion de doublons ¦ Ayarlar → Çiftleri birleştirme
+Dates impossibles, liens bizarres. ¦ İmkânsız tarihler, tuhaf bağlar.
+Réglages → Contrôle de la base ¦ Ayarlar → Veritabanı denetimi
+Le nom étudié ¦ İncelenen soyadı
+Les porteurs d’un nom, ses variantes. ¦ Bir soyadını taşıyanlar, varyantları.
+Graphiques → statistique des noms ¦ Grafikler → soyadı istatistiği
+L’entreprise ¦ Şirket
+Employeurs, salariés, membres. ¦ İşverenler, çalışanlar, üyeler.
+Listes → Employeurs ¦ Listeler → İşverenler
+Des parties de l’app, cachées au départ ¦ Uygulamanın başta gizli bölümleri
+Elles existent déjà : cocher les montre dans le menu. ¦ Zaten varlar: işaretlemek onları menüde gösterir.
+Un raccourci vers une liste ¦ Bir listeye kısayol
+Il devient un « onglet à soi » (Éditeur d’onglets). ¦ “Kendi sekmen” olur (Sekme düzenleyici).
+Un raccourci vers un outil ¦ Bir araca kısayol
+Chaîne par héritier ¦ Her mirasçının zinciri
+✉️ Contactés ¦ ✉️ İletişim kurulanlar
+📇 Répertoire des vivants ¦ 📇 Yaşayanlar rehberi
+Échéances du jour (usage successoral seulement) ¦ Günün süreleri (yalnızca veraset kullanımı)
+Ce dossier est clos : rien ne s’y note. ¦ Bu dosya kapalı: içine hiçbir şey kaydedilmez.
+Donne un nom au modèle. ¦ Şablona bir ad ver.
+Trop de lettres d’un coup (60 au plus). ¦ Bir seferde çok fazla mektup (en fazla 60).
+Échéances du jour ¦ Günün süreleri

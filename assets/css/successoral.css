@@ -227,3 +227,90 @@ body.is-kiosk .succ-cst, html.ms-open .succ-cst { display: none !important; }
 .succ-loi-jr .ui-hint { margin: 0; }
 .succ-journal li span { overflow-wrap: anywhere; }
 @media (max-width: 520px) { .succ-loi-go { grid-template-columns: 1fr; } }
+
+/* ── ⚖️ Outils (heritage-successoral-outils.js, docs/design/onglets-et-successoral-outils.html B1–B6) ── */
+.succ-bell-panel, .succ-chrono-float, .succ-serial { --succ-line: #d8dde6; --succ-soft: #f5f7fb; --succ-text2: #5a6270; --succ-blue: #2563eb; --succ-red: #c62828; --succ-yellow-bg: #fff4c2; }
+:root[data-theme="dark"] .succ-bell-panel, :root[data-theme="dark"] .succ-chrono-float, :root[data-theme="dark"] .succ-serial { --succ-line: #3a404c; --succ-soft: #1d2129; --succ-text2: #a5abb6; --succ-blue: #7aa7ff; --succ-red: #ff8a80; --succ-yellow-bg: #4a4220; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .succ-bell-panel, :root:not([data-theme="light"]) .succ-chrono-float, :root:not([data-theme="light"]) .succ-serial { --succ-line: #3a404c; --succ-soft: #1d2129; --succ-text2: #a5abb6; --succ-blue: #7aa7ff; --succ-red: #ff8a80; --succ-yellow-bg: #4a4220; } }
+/* B1 ⏱ chronomètre */
+.succ-chrono-slot { display: inline-flex; }
+.succ-chrono-grp { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px; border: 1px solid var(--succ-line); border-radius: 999px; padding: 3px 4px 3px 10px; }
+.succ-chrono-grp.is-on { border-color: var(--succ-blue); }
+.succ-chrono-clock b { font-variant-numeric: tabular-nums; }
+.succ-chrono-short { display: none; }
+.succ-chrono-float { position: fixed; right: 16px; bottom: 16px; z-index: 60; max-width: min(420px, calc(100vw - 32px)); background: var(--card-bg, #fff); color: var(--ink, #111); border: 1px solid var(--succ-line); border-radius: 12px; box-shadow: 0 6px 22px rgba(0,0,0,.18); padding: 8px 10px; font-size: .9rem; }
+.succ-chrono-float.is-on { border-color: var(--succ-blue); }
+.succ-chrono-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.succ-chrono-row b { font-variant-numeric: tabular-nums; }
+.succ-chrono-msg { margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--succ-line); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.succ-chrono-days { margin: 0; padding-left: 18px; }
+body.is-kiosk .succ-chrono-float, html.ms-open .succ-chrono-float, body.is-kiosk #succ-bell-open, html.ms-open #succ-bell-open, body.is-kiosk .succ-bell-panel, html.ms-open .succ-bell-panel { display: none !important; }
+/* B2 🔔 échéances du jour */
+.succ-bell-btn { position: relative; }
+.succ-bell-n { position: absolute; top: -4px; right: -6px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 9px; background: #d32f2f; color: #fff; font: 700 11px/18px system-ui, sans-serif; text-align: center; }
+.succ-bell-panel { position: fixed; z-index: 70; max-height: min(78vh, 640px); overflow: auto; background: var(--card-bg, #fff); color: var(--ink, #111); border: 1px solid var(--succ-line); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.2); padding: 10px 12px; }
+.succ-bell-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
+.succ-bell-scope { margin-bottom: 8px; }
+.succ-bell-sec h4, .succ-bell-sec summary { margin: 8px 0 4px; font-size: .86rem; color: var(--succ-text2); cursor: default; }
+.succ-bell-sec summary { cursor: pointer; }
+.succ-bell-sec ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.succ-bell-row { display: flex; gap: 8px; align-items: flex-start; padding: 6px 8px; border-radius: 8px; background: var(--succ-soft); }
+.succ-bell-txt { flex: 1 1 auto; min-width: 0; display: grid; gap: 2px; overflow-wrap: anywhere; }
+.succ-bell-txt small { color: var(--succ-text2); }
+.succ-bell-acts { display: flex; gap: 2px; flex: 0 0 auto; }
+.succ-bell-none { margin: 8px 0; }
+.succ-bell-err { color: var(--succ-text2); font-size: .86rem; margin: 4px 0; }
+.succ-bell-foot { border-top: 1px solid var(--succ-line); margin-top: 8px; padding-top: 6px; display: grid; gap: 4px; justify-items: start; }
+/* B3 📋 avant de remettre */
+.succ-ck-box > summary { cursor: pointer; margin-bottom: 8px; }
+.succ-ck-sum { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 8px; }
+.succ-ck-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.succ-ck-list li { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start; padding: 6px 8px; border-radius: 8px; background: var(--succ-soft, #f5f7fb); }
+.succ-ck-list li.is-miss { box-shadow: inset 3px 0 0 #d32f2f; }
+.succ-ck-list li.is-warn { box-shadow: inset 3px 0 0 #e6a700; }
+.succ-ck-list li.is-ok { box-shadow: inset 3px 0 0 #2e7d32; }
+.succ-ck-ic { width: 1.4em; text-align: center; flex: 0 0 auto; font-weight: 700; }
+.succ-ck-list li.is-ok .succ-ck-ic { color: #2e7d32; }
+.succ-ck-list li.is-miss .succ-ck-ic { color: #d32f2f; }
+.succ-ck-t { flex: 1 1 260px; display: grid; gap: 2px; min-width: 0; overflow-wrap: anywhere; }
+.succ-ck-t small { color: var(--succ-text2, #5a6270); }
+/* B4 🧾 chaîne de filiation, pages du PDF */
+.succ-npages { display: flex; flex-wrap: wrap; gap: 4px 16px; border: 1px solid var(--succ-line); border-radius: 8px; padding: 6px 10px; margin: 0 0 10px; }
+.succ-npreview .succ-chain-miss { color: #c62828; }
+/* B5 📊 parts en euros */
+.succ-eur-switch { margin: 0 0 12px; }
+.succ-eur-in { display: grid; gap: 4px; max-width: 360px; font-weight: 600; }
+.succ-eur-in span { display: flex; align-items: center; gap: 6px; font-weight: 400; }
+.succ-eur-in input { flex: 1 1 auto; font-size: 1.1rem; text-align: right; font-variant-numeric: tabular-nums; }
+.succ-eur .succ-eur-n { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.succ-eur tr.is-zero td { color: var(--succ-text2); }
+.succ-eur-ns { color: var(--succ-orange, #c2650d); }
+.succ-eur-ask { padding: 10px 12px; border-radius: 8px; background: var(--succ-soft); }
+.succ-eur-hyp { margin: 14px 0 6px; font-size: .92rem; }
+/* B6 ✉️ courriers en série */
+.succ-serial .succ-letter-who li.is-off .ui-check-sub, .succ-serial .succ-letter-who li.is-off small { color: var(--succ-text2); }
+.succ-chips { display: flex; flex-wrap: wrap; gap: 4px; margin: 4px 0 6px; }
+.succ-chip { border: 1px dashed var(--succ-line); background: var(--succ-soft); color: inherit; border-radius: 6px; padding: 2px 7px; font: .82rem ui-monospace, monospace; cursor: pointer; }
+.succ-chip:hover { border-color: var(--succ-blue); }
+.succ-serial-view { margin-bottom: 8px; }
+.succ-serial-nav { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.succ-serial-page { border: 1px solid var(--succ-line); border-radius: 8px; padding: 14px 16px; background: var(--card-bg, #fff); white-space: pre-wrap; font: 11pt/1.5 Georgia, serif; max-height: 52vh; overflow: auto; overflow-wrap: anywhere; }
+.succ-serial-addr { text-align: right; margin: 0 0 12px; white-space: normal; }
+.succ-serial-own { color: var(--succ-text2); font: italic .85rem system-ui, sans-serif; margin: 0 0 6px; }
+.succ-serial-page mark.succ-empty { background: var(--succ-yellow-bg); color: inherit; border-radius: 3px; padding: 0 2px; }
+.succ-serial-count { font-weight: 600; margin: 0 0 6px; }
+.succ-serial-prog progress { width: 100%; }
+.succ-rate { display: grid; gap: 4px; margin-top: 10px; max-width: 360px; }
+.succ-rate span { display: flex; align-items: center; gap: 6px; }
+@media (max-width: 720px) {
+    .succ-chrono-clock > small:not(.succ-chrono-short), .succ-chrono-clock b { display: none; }
+    .succ-chrono-short { display: inline; }
+    .succ-chrono-float { left: 16px; right: 16px; bottom: 12px; max-width: none; }
+    .succ-eur { min-width: 0; }
+    .succ-eur thead { display: none; }
+    .succ-eur tr { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 10px; padding: 8px 0; border-bottom: 1px solid var(--succ-line); }
+    .succ-eur td, .succ-eur th { border: 0; padding: 2px 0; text-align: left !important; }
+    .succ-eur td[data-label]::before { content: attr(data-label); display: block; font-size: .75rem; color: var(--succ-text2); }
+    .succ-eur td:first-child { grid-column: 1 / -1; }
+    .succ-ck-go { margin-left: 2em; }
+}

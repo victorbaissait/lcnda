@@ -743,3 +743,233 @@ Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Doa
 Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Link refuzat: doar o adresă https:// de pe Légifrance, Service-public sau EUR-Lex.
 Noté au journal du dossier {n}. ¦ Notat în jurnalul dosarului {n}.
 Écris d’abord ta question. ¦ Scrie mai întâi întrebarea.
+# ⚖️ Outils du successoral (⏱ 🔔 📋 🧾 📊 ✉️) et ＋ Ajouter un onglet (docs/design/onglets-et-successoral-outils.html)
+⏱ Compter le temps passé sur ce dossier ¦ ⏱ Numără timpul petrecut cu acest dosar
+{n} min ¦ {n} min
+⏸️ Pause ¦ ⏸️ Pauză
+▶️ Reprendre ¦ ▶️ Reia
+⏹️ Arrêter et noter ¦ ⏹️ Oprește și notează
+Moins d’une minute : rien à noter. ¦ Mai puțin de un minut: nimic de notat.
+Noter le temps passé ¦ Notează timpul petrecut
+Noter {t} ¦ Notează {t}
+Proposé d’après les onglets ouverts ; à corriger si besoin. Date : {d}. ¦ Propus după filele deschise; corectează dacă e nevoie. Data: {d}.
+Minuit passé : une ligne par jour. ¦ După miezul nopții: un rând pe zi.
+Jeter ce temps ¦ Aruncă acest timp
+Jeter ce temps ? ¦ Arunci acest timp?
+Jeter ¦ Aruncă
+{t} d’affilée : c’est bien ça ? ¦ {t} fără pauză: e corect?
+Plus de 10 h d’affilée ¦ Peste 10 h fără pauză
+Noter quand même ¦ Notează totuși
+⏱ {t} notées dans le dossier {n} ¦ ⏱ {t} notate în dosarul {n}
+Le chronomètre compte pour {n}. ¦ Cronometrul numără pentru {n}.
+⏹️ Noter et passer à {n} ¦ ⏹️ Notează și treci la {n}
+Continuer sur {n} ¦ Continuă cu {n}
+Rien touché depuis 10 min : chronomètre en pause à {h}. ¦ Nimic atins de 10 min: cronometrul în pauză la {h}.
+Compter aussi ces 10 min ¦ Numără și aceste 10 min
+⏱ {n} : {t} comptées avant la fermeture. ¦ ⏱ {n}: {t} numărate înainte de închidere.
+Noter ¦ Notează
+Échéances du jour : {n} à faire (retards et aujourd’hui) ¦ Termenele zilei: {n} de făcut (întârzieri și azi)
+🔔 Échéances du jour ¦ 🔔 Termenele zilei
+⏰ Rappel ¦ ⏰ Memento
+prévu le {d} ¦ prevăzut pe {d}
+✓ Fait ¦ ✓ Făcut
+⏭ Demain (ou lundi) ¦ ⏭ Mâine (sau luni)
+↗ Ouvrir le dossier ¦ ↗ Deschide dosarul
+voir ▾ ¦ vezi ▾
+Rien pour aujourd’hui. ¦ Nimic pentru azi.
+Prochaine : {d} ({n}) ¦ Următorul: {d} ({n})
+🔔 À faire · {d} ¦ 🔔 De făcut · {d}
+Cette généalogie ¦ Această genealogie
+⚖️ {name} : impossible de lire les échéances ¦ ⚖️ {name}: termenele nu pot fi citite
+✓ fait · ⏭ demain / lundi · ↗ ouvre le dossier (change de généalogie si besoin) ¦ ✓ făcut · ⏭ mâine / luni · ↗ deschide dosarul (schimbă genealogia dacă e nevoie)
+Ajouter mes rappels ¦ Adaugă mementourile mele
+Bulle de l’ordinateur à l’ouverture de l’app ¦ Notificare a calculatorului la deschiderea aplicației
+🗓 Ma semaine ¦ 🗓 Săptămâna mea
+Reporté au {d} ¦ Amânat pe {d}
+✓ Fait : {l} ¦ ✓ Făcut: {l}
+Reporté au {d} : {l} ¦ Amânat pe {d}: {l}
+Points prêts : {n} sur {m} ¦ Puncte gata: {n} din {m}
+À revoir : {n} ¦ De revăzut: {n}
+Manque : {n} ¦ Lipsește: {n}
+📋 AVANT DE REMETTRE ¦ 📋 ÎNAINTE DE PREDARE
+Avant de remettre · {n} ¦ Înainte de predare · {n}
+Passer à « Remis au notaire » ¦ Treci la „Predat notarului”
+Ça avertit, ça n’empêche pas : tu peux remettre quand même, ce sera noté au journal. ¦ Avertizează, nu împiedică: poți preda totuși, va fi notat în jurnal.
+🖨 Imprimer quand même ¦ 🖨 Tipărește totuși
+Montant ¦ Sumă
+non signé ¦ nesemnat
+Commission ¦ Comision
+Reste à l’héritier ¦ Rămâne moștenitorului
+Arrondi au centime : chaque part est arrondie au centime inférieur, puis les centimes qui restent vont aux parts qui en ont perdu le plus. Le total tombe juste. ¦ Rotunjit la cent: fiecare cotă e rotunjită în jos la cent, apoi cenții rămași merg la cotele care au pierdut cel mai mult. Totalul iese exact.
+Tape l’actif net en euros pour voir la part de chacun. ¦ Scrie activul net în euro ca să vezi partea fiecăruia.
+Tape un montant en euros (ex. 187 450,00). ¦ Scrie o sumă în euro (ex. 187 450,00).
+Plus d’un milliard d’euros : c’est bien ça ? ¦ Peste un miliard de euro: e corect?
+Oui, calculer ¦ Da, calculează
+Si le conjoint choisit l’usufruit de la totalité : pas de montant en euros (sa valeur dépend de son âge, c’est un barème fiscal) ; demande la valeur au notaire, pour lui et pour les nus-propriétaires. ¦ Dacă soțul alege uzufructul totalității: nicio sumă în euro (valoarea depinde de vârstă, e un barem fiscal); cere valoarea notarului, pentru el și pentru nudii proprietari.
+Autre hypothèse, {h} ¦ Altă ipoteză, {h}
+📊 Part de chacun en euros ¦ 📊 Partea fiecăruia în euro
+Fractions ¦ Fracții
+💶 En euros ¦ 💶 În euro
+⤓ Copier le tableau ¦ ⤓ Copiază tabelul
+Actif net à partager (tapé par toi) ¦ Activ net de împărțit (scris de tine)
+D’après le notaire. Pas gardé : effacé quand tu fermes le dossier. ¦ După notar. Nu se păstrează: se șterge când închizi dosarul.
+Hors droits de succession et frais : l’app ne calcule pas l’impôt. Ces montants sont un ordre d’idée, à faire vérifier par le notaire. ¦ Fără taxe de succesiune și cheltuieli: aplicația nu calculează impozitul. Aceste sume sunt orientative, de verificat de notar.
+Commission = le % écrit dans « ＋ Honoraires d’un contrat » × le montant, arrondie au centime le plus proche, sans TVA ajoutée ; reste = montant − commission. ¦ Comision = procentul scris în „＋ Onorariul unui contract” × suma, rotunjit la cel mai apropiat cent, fără TVA adăugat; rămâne = sumă − comision.
+Tableau copié. ¦ Tabel copiat.
+Parts en euros — {n} ¦ Cote în euro — {n}
+Parts en euros imprimées ¦ Cote în euro tipărite
+✉️ Courrier à plusieurs… ¦ ✉️ Scrisoare către mai mulți…
+décoché ¦ debifat
+déjà écrit le {d} ({k}) ¦ deja scris pe {d} ({k})
+✉️ Courriers en série · {n} ¦ ✉️ Scrisori în serie · {n}
+Les héritiers dont l’existence n’est pas établie ne sont pas dans la liste. Les décochés peuvent être cochés à la main (une lettre sans adresse est alors imprimée sans bloc adresse). ¦ Moștenitorii a căror existență nu e stabilită nu sunt în listă. Cei debifați pot fi bifați de mână (o scrisoare fără adresă se tipărește atunci fără bloc de adresă).
+La lettre · clic sur un champ pour l’insérer ¦ Scrisoarea · clic pe un câmp ca să-l inserezi
+{envoyé_le} : la date du courrier précédent à cet héritier ; {date} : la date d’envoi de celui-ci. ¦ {envoyé_le}: data scrisorii anterioare către acest moștenitor; {date}: data trimiterii acesteia.
+Lettre précédente ¦ Scrisoarea anterioară
+Lettre suivante ¦ Scrisoarea următoare
+✎ Retoucher cette lettre ¦ ✎ Retușează această scrisoare
+↺ Revenir au modèle ¦ ↺ Înapoi la model
+＋ Enregistrer comme modèle ¦ ＋ Salvează ca model
+Lettres prêtes : {n} sur {m} ¦ Scrisori gata: {n} din {m}
+Champ inconnu : {f} (ligne {l}). Corrige-le avant de ranger les lettres. ¦ Câmp necunoscut: {f} (rândul {l}). Corectează-l înainte de a îndosaria scrisorile.
+🖨 Imprimer les {n} ¦ 🖨 Tipărește cele {n}
+Lettre {i} / {n} · {name} ¦ Scrisoarea {i} / {n} · {name}
+Champ vide : la ligne s’écrit sans le mot ¦ Câmp gol: rândul se scrie fără cuvânt
+✎ modifiée à la main ¦ ✎ modificată de mână
+Ton nom et ton adresse : Listes → Registre de courriers → ✉️ Lettres (expéditeur). ¦ Numele și adresa ta: Liste → Registrul corespondenței → ✉️ Scrisori (expeditor).
+Mes modèles (aucun pour l’instant) ¦ Modelele mele (niciunul deocamdată)
+Remplacer ta lettre par ce modèle ? ¦ Înlocuiești scrisoarea ta cu acest model?
+Changer de modèle ¦ Schimbă modelul
+Oublier les retouches de la lettre à {name} ? ¦ Uiți retușurile scrisorii către {name}?
+Revenir au modèle ¦ Înapoi la model
+Modèle « {name} » enregistré (Mes modèles, communs à tous les dossiers de cette généalogie) ¦ Modelul „{name}” salvat (Modelele mele, comune tuturor dosarelor din această genealogie)
+Corrige d’abord le champ inconnu. ¦ Corectează mai întâi câmpul necunoscut.
+Rangement : {n} sur {m} ¦ Îndosariere: {n} din {m}
+{n} rangés dans le Registre de courriers, relance le {d} ¦ {n} îndosariate în Registrul corespondenței, revenire pe {d}
+en main, cote non notée ¦ în mână, cotă nenotată
+demandé le {d} ¦ cerut pe {d}
+demandé ¦ cerut
+acte à fournir ¦ act de furnizat
+(commun, voir {n}) ¦ (comun, vezi {n})
+CHAÎNE DE FILIATION ¦ LANȚ DE FILIAȚIE
+Calcul établi d’après les actes cités, sous réserve de vérification par le notaire. ¦ Calcul făcut după actele citate, sub rezerva verificării de către notar.
+Code civil, articles cités pour ce dossier : art. {list}. ¦ Codul civil, articole citate pentru acest dosar: art. {list}.
+N. = naissance, M. = mariage, D. = décès. ¦ N. = naștere, C. = căsătorie, D. = deces.
+Page {n} / {t} ¦ Pagina {n} / {t}
+Coche au moins une page. ¦ Bifează cel puțin o pagină.
+Tableau pour le notaire : PDF ({n} pages, avec chaîne par héritier) ¦ Tabel pentru notar: PDF ({n} pagini, cu lanțul fiecărui moștenitor)
+Tableau pour le notaire : PDF ({n} pages) ¦ Tabel pentru notar: PDF ({n} pagini)
+sans adresses ¦ fără adrese
+📋 Avant de remettre ¦ 📋 Înainte de predare
+ça avertit, ça n’empêche pas ¦ avertizează, nu împiedică
+Ce que contient le PDF ¦ Ce conține PDF-ul
+Compté par le chronomètre ¦ Numărat de cronometru
+Taux horaire pour le relevé (facultatif, pas gardé) ¦ Tarif orar pentru situație (opțional, nu se păstrează)
+€ / h ¦ € / h
+✎ Modifier la ligne ¦ ✎ Modifică rândul
+Ligne modifiée ¦ Rând modificat
+Temps × taux horaire ({r} € / h) : {s} ¦ Timp × tarif orar ({r} € / h): {s}
+Ajouté depuis « ＋ Ajouter un onglet ». ¦ Adăugat din „＋ Adaugă o filă”.
+✓ Onglet « {name} » ajouté ¦ ✓ Fila „{name}” adăugată
+Onglet « {name} » caché ¦ Fila „{name}” ascunsă
+conseillé pour toi ¦ recomandat pentru tine
+montré par ton usage ¦ arătat de utilizarea ta
+Conseillés pour toi ¦ Recomandate pentru tine
+Tout le reste ▾ ¦ Tot restul ▾
+Qu’est-ce que tu veux avoir sous la main ? ¦ Ce vrei să ai la îndemână?
+Ton usage : {u} ¦ Utilizarea ta: {u}
+Chercher un onglet ¦ Caută o filă
+🔍 Chercher un onglet… (courrier, acte, agenda) ¦ 🔍 Caută o filă… (scrisoare, act, agendă)
+Conseillés ({n}) ¦ Recomandate ({n})
+Déjà dans le menu ({n}) ¦ Deja în meniu ({n})
+Aucun onglet ne correspond. ¦ Nicio filă nu corespunde.
+Une carte cochée = l’onglet est dans le menu. Cocher l’ajoute à la fin du menu ; décocher le cache (un raccourci est caché, pas effacé). ¦ O fișă bifată = fila e în meniu. Bifarea o adaugă la sfârșitul meniului; debifarea o ascunde (o scurtătură e ascunsă, nu ștearsă).
+↗ Faire un onglet à moi (Éditeur d’onglets) ¦ ↗ Fă o filă a mea (Editor de file)
+MENU ¦ MENIU
+＋ Ajouter un onglet ¦ ＋ Adaugă o filă
+Ajouter un onglet ¦ Adaugă o filă
+＋ Ajouter un onglet… ¦ ＋ Adaugă o filă…
+Montrer le ＋ au bout du menu ¦ Arată ＋ la sfârșitul meniului
+Retirer ce raccourci du menu (un onglet de l’app ne se retire pas : il se cache) ¦ Scoate această scurtătură din meniu (o filă a aplicației nu se scoate: se ascunde)
+Onglet « {name} » retiré du menu ¦ Fila „{name}” scoasă din meniu
+Le ＋ est au bout du menu ¦ ＋ e la sfârșitul meniului
+Le ＋ n’est plus au bout du menu ¦ ＋ nu mai e la sfârșitul meniului
+Recherches : {what} ¦ Cercetări: {what}
+Recherches ¦ Cercetări
+Acte de décès de {name} en main ¦ Act de deces al lui {name} în mână
+Acte de décès de {name} pas en main ¦ Actul de deces al lui {name} lipsește
+demandé, pas encore reçu ¦ cerut, încă neprimit
+Arbre de dévolution complet ¦ Arborele devoluțiunii complet
+Aucune branche à chercher. ¦ Nicio ramură de căutat.
+Branches encore à chercher : {n} ¦ Ramuri încă de căutat: {n}
+Héritiers dont l’existence n’est pas établie : {n} ¦ Moștenitori a căror existență nu e stabilită: {n}
+Liens prouvés par aucun acte : {n} ¦ Legături nedovedite de niciun act: {n}
+{what} (relie {who} au défunt) ¦ {what} (leagă {who} de defunct)
+Chaque lien est prouvé par un acte ¦ Fiecare legătură e dovedită de un act
+Actes demandés, pas encore reçus : {n} ¦ Acte cerute, încă neprimite: {n}
+{what} · demandé le {d} ¦ {what} · cerut pe {d}
+(courrier n° {n}) ¦ (scrisoarea nr. {n})
+Adresses des héritiers vivants : {n} sur {m} ¦ Adresele moștenitorilor în viață: {n} din {m}
+Aucun héritier vivant à joindre ¦ Niciun moștenitor în viață de contactat
+Contrats signés (ou refus noté) : {n} sur {m} ¦ Contracte semnate (sau refuz notat): {n} din {m}
+Aucun contrat à faire signer ¦ Niciun contract de semnat
+Contrats pas encore signés : {n} ¦ Contracte încă nesemnate: {n}
+{name} a répondu « oui », pas de date de signature ¦ {name} a răspuns „da”, fără dată de semnare
+Héritiers introuvables ou silencieux : {n} ¦ Moștenitori de negăsit sau care nu răspund: {n}
+Parts : le total fait bien 1 ¦ Cote: totalul face într-adevăr 1
+Les parts ne totalisent pas 1 : à revoir ¦ Cotele nu fac 1: de revăzut
+Échéances en retard : {n} ¦ Termene întârziate: {n}
+Aucune échéance en retard ¦ Niciun termen întârziat
+Remis au notaire avec {miss} manque(s) et {warn} point(s) à revoir ({what}) ¦ Predat notarului cu lipsuri: {miss} și puncte de revăzut: {warn} ({what})
+Madame ¦ Doamnă
+Monsieur ¦ Domnule
+Tes photos, actes, lettres de A à Z, rangés en dossiers. ¦ Fotografiile, actele, scrisorile tale de la A la Z, ordonate în dosare.
+Lettres à ouvrir plus tard, recettes, musée de famille. ¦ Scrisori de deschis mai târziu, rețete, muzeu de familie.
+Fiches thématiques : un métier, une guerre, un village. ¦ Fișe tematice: o meserie, un război, un sat.
+Tes correspondances ADN et leurs liens. ¦ Potrivirile tale ADN și legăturile lor.
+Les œuvres d’un artiste, albums, expositions. ¦ Operele unui artist, albume, expoziții.
+Pedigree, portées. (Suivi des animaux : à part.) ¦ Pedigree, fătări. (Urmărirea animalelor: separat.)
+Baguage, puces, observations, trajets. ¦ Inelare, cipuri, observații, trasee.
+Dossiers de succession, pour un notaire. ¦ Dosare de succesiune, pentru un notar.
+Le Registre de courriers : demandes d’actes, relances, réponses. ¦ Registrul corespondenței: cereri de acte, reveniri, răspunsuri.
+Listes → Archives et sources → Registre de courriers ¦ Liste → Arhive și surse → Registrul corespondenței
+Tes actes recopiés, mot à mot. ¦ Actele tale transcrise, cuvânt cu cuvânt.
+Listes → Archives et sources ¦ Liste → Arhive și surse
+Visites, rendez-vous, relances, à la semaine. ¦ Vizite, întâlniri, reveniri, pe săptămână.
+Listes → Recherche et organisation ¦ Liste → Cercetare și organizare
+Les choses à faire, avec leur date. ¦ Lucrurile de făcut, cu data lor.
+Toutes les images, sons, vidéos en tableau. ¦ Toate imaginile, sunetele, videoclipurile într-un tabel.
+Listes → Médias et documents ¦ Liste → Media și documente
+Questionnaires pour recueillir les souvenirs. ¦ Chestionare pentru a strânge amintirile.
+Les maisons, pièce par pièce, et qui y a vécu. ¦ Casele, cameră cu cameră, și cine a locuit în ele.
+Listes → Lieux et maisons ¦ Liste → Locuri și case
+Adresses et contacts des cousins vivants. ¦ Adrese și contacte ale verilor în viață.
+Listes → Personnes et familles ¦ Liste → Persoane și familii
+Les dépôts, leurs cotes, leurs horaires. ¦ Arhivele, cotele lor, programul lor.
+Le planificateur : quoi consulter, où, quand. ¦ Planificatorul: ce să consulți, unde, când.
+Qui a hérité de quoi d’après les actes anciens. ¦ Cine a moștenit ce după actele vechi.
+Les bons sites pour la personne ouverte. ¦ Site-urile potrivite pentru persoana deschisă.
+Recherche → Type de recherche ¦ Căutare → Tipul căutării
+Trouver et fusionner les fiches en double. ¦ Găsește și unește fișele duble.
+Réglages → Fusion de doublons ¦ Setări → Unirea duplicatelor
+Dates impossibles, liens bizarres. ¦ Date imposibile, legături ciudate.
+Réglages → Contrôle de la base ¦ Setări → Controlul bazei
+Le nom étudié ¦ Numele studiat
+Les porteurs d’un nom, ses variantes. ¦ Purtătorii unui nume, variantele lui.
+Graphiques → statistique des noms ¦ Grafice → statistica numelor
+L’entreprise ¦ Întreprinderea
+Employeurs, salariés, membres. ¦ Angajatori, salariați, membri.
+Listes → Employeurs ¦ Liste → Angajatori
+Des parties de l’app, cachées au départ ¦ Părți ale aplicației, ascunse la început
+Elles existent déjà : cocher les montre dans le menu. ¦ Există deja: bifarea le arată în meniu.
+Un raccourci vers une liste ¦ O scurtătură către o listă
+Il devient un « onglet à soi » (Éditeur d’onglets). ¦ Devine o „filă a ta” (Editor de file).
+Un raccourci vers un outil ¦ O scurtătură către un instrument
+Chaîne par héritier ¦ Lanțul fiecărui moștenitor
+✉️ Contactés ¦ ✉️ Contactați
+📇 Répertoire des vivants ¦ 📇 Registrul celor în viață
+Échéances du jour (usage successoral seulement) ¦ Termenele zilei (doar utilizare succesorală)
+Ce dossier est clos : rien ne s’y note. ¦ Acest dosar e închis: nu se mai notează nimic în el.
+Donne un nom au modèle. ¦ Dă un nume modelului.
+Trop de lettres d’un coup (60 au plus). ¦ Prea multe scrisori deodată (cel mult 60).
+Échéances du jour ¦ Termenele zilei

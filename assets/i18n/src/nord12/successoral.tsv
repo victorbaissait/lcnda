@@ -743,3 +743,233 @@ Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Т�
 Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Ссылка отклонена: только адрес https:// с Légifrance, Service-public или EUR-Lex. ¦ Посилання відхилено: лише адреса https:// з Légifrance, Service-public або EUR-Lex.
 Noté au journal du dossier {n}. ¦ Записано в журнал дела {n}. ¦ Записано до журналу справи {n}.
 Écris d’abord ta question. ¦ Сначала напиши свой вопрос. ¦ Спочатку напиши своє питання.
+# ⚖️ Outils du successoral (⏱ 🔔 📋 🧾 📊 ✉️) et ＋ Ajouter un onglet (docs/design/onglets-et-successoral-outils.html)
+⏱ Compter le temps passé sur ce dossier ¦ ⏱ Считать время, потраченное на это дело ¦ ⏱ Рахувати час, витрачений на цю справу
+{n} min ¦ {n} мин ¦ {n} хв
+⏸️ Pause ¦ ⏸️ Пауза ¦ ⏸️ Пауза
+▶️ Reprendre ¦ ▶️ Продолжить ¦ ▶️ Продовжити
+⏹️ Arrêter et noter ¦ ⏹️ Остановить и записать ¦ ⏹️ Зупинити й записати
+Moins d’une minute : rien à noter. ¦ Меньше минуты: нечего записывать. ¦ Менше хвилини: нічого записувати.
+Noter le temps passé ¦ Записать потраченное время ¦ Записати витрачений час
+Noter {t} ¦ Записать {t} ¦ Записати {t}
+Proposé d’après les onglets ouverts ; à corriger si besoin. Date : {d}. ¦ Предложено по открытым вкладкам; исправь, если нужно. Дата: {d}. ¦ Запропоновано за відкритими вкладками; виправ, якщо треба. Дата: {d}.
+Minuit passé : une ligne par jour. ¦ После полуночи: одна строка на день. ¦ Після опівночі: один рядок на день.
+Jeter ce temps ¦ Отбросить это время ¦ Відкинути цей час
+Jeter ce temps ? ¦ Отбросить это время? ¦ Відкинути цей час?
+Jeter ¦ Отбросить ¦ Відкинути
+{t} d’affilée : c’est bien ça ? ¦ {t} подряд: это так? ¦ {t} поспіль: це так?
+Plus de 10 h d’affilée ¦ Больше 10 ч подряд ¦ Понад 10 год поспіль
+Noter quand même ¦ Всё равно записать ¦ Усе одно записати
+⏱ {t} notées dans le dossier {n} ¦ ⏱ {t} записано в дело {n} ¦ ⏱ {t} записано до справи {n}
+Le chronomètre compte pour {n}. ¦ Секундомер считает для {n}. ¦ Секундомір рахує для {n}.
+⏹️ Noter et passer à {n} ¦ ⏹️ Записать и перейти к {n} ¦ ⏹️ Записати й перейти до {n}
+Continuer sur {n} ¦ Продолжить с {n} ¦ Продовжити з {n}
+Rien touché depuis 10 min : chronomètre en pause à {h}. ¦ 10 мин ничего не трогали: секундомер на паузе с {h}. ¦ 10 хв нічого не торкалися: секундомір на паузі з {h}.
+Compter aussi ces 10 min ¦ Учесть и эти 10 мин ¦ Врахувати й ці 10 хв
+⏱ {n} : {t} comptées avant la fermeture. ¦ ⏱ {n}: {t} насчитано до закрытия. ¦ ⏱ {n}: {t} пораховано до закриття.
+Noter ¦ Записать ¦ Записати
+Échéances du jour : {n} à faire (retards et aujourd’hui) ¦ Сроки на сегодня: {n} сделать (просроченные и сегодняшние) ¦ Строки на сьогодні: {n} зробити (прострочені й сьогоднішні)
+🔔 Échéances du jour ¦ 🔔 Сроки на сегодня ¦ 🔔 Строки на сьогодні
+⏰ Rappel ¦ ⏰ Напоминание ¦ ⏰ Нагадування
+prévu le {d} ¦ запланировано на {d} ¦ заплановано на {d}
+✓ Fait ¦ ✓ Сделано ¦ ✓ Зроблено
+⏭ Demain (ou lundi) ¦ ⏭ Завтра (или в понедельник) ¦ ⏭ Завтра (або в понеділок)
+↗ Ouvrir le dossier ¦ ↗ Открыть дело ¦ ↗ Відкрити справу
+voir ▾ ¦ показать ▾ ¦ показати ▾
+Rien pour aujourd’hui. ¦ На сегодня ничего. ¦ На сьогодні нічого.
+Prochaine : {d} ({n}) ¦ Следующий: {d} ({n}) ¦ Наступний: {d} ({n})
+🔔 À faire · {d} ¦ 🔔 Сделать · {d} ¦ 🔔 Зробити · {d}
+Cette généalogie ¦ Эта генеалогия ¦ Ця генеалогія
+⚖️ {name} : impossible de lire les échéances ¦ ⚖️ {name}: сроки не удаётся прочитать ¦ ⚖️ {name}: строки не вдається прочитати
+✓ fait · ⏭ demain / lundi · ↗ ouvre le dossier (change de généalogie si besoin) ¦ ✓ сделано · ⏭ завтра / понедельник · ↗ открывает дело (при необходимости меняет генеалогию) ¦ ✓ зроблено · ⏭ завтра / понеділок · ↗ відкриває справу (за потреби змінює генеалогію)
+Ajouter mes rappels ¦ Добавить мои напоминания ¦ Додати мої нагадування
+Bulle de l’ordinateur à l’ouverture de l’app ¦ Уведомление компьютера при открытии приложения ¦ Сповіщення комп’ютера під час відкриття застосунку
+🗓 Ma semaine ¦ 🗓 Моя неделя ¦ 🗓 Мій тиждень
+Reporté au {d} ¦ Перенесено на {d} ¦ Перенесено на {d}
+✓ Fait : {l} ¦ ✓ Сделано: {l} ¦ ✓ Зроблено: {l}
+Reporté au {d} : {l} ¦ Перенесено на {d}: {l} ¦ Перенесено на {d}: {l}
+Points prêts : {n} sur {m} ¦ Готовые пункты: {n} из {m} ¦ Готові пункти: {n} з {m}
+À revoir : {n} ¦ Проверить: {n} ¦ Перевірити: {n}
+Manque : {n} ¦ Не хватает: {n} ¦ Бракує: {n}
+📋 AVANT DE REMETTRE ¦ 📋 ПЕРЕД ПЕРЕДАЧЕЙ ¦ 📋 ПЕРЕД ПЕРЕДАННЯМ
+Avant de remettre · {n} ¦ Перед передачей · {n} ¦ Перед переданням · {n}
+Passer à « Remis au notaire » ¦ Перевести в «Передано нотариусу» ¦ Перевести в «Передано нотаріусу»
+Ça avertit, ça n’empêche pas : tu peux remettre quand même, ce sera noté au journal. ¦ Предупреждает, не запрещает: можешь всё равно передать, это запишется в журнал. ¦ Попереджає, не забороняє: можеш усе одно передати, це запишеться в журнал.
+🖨 Imprimer quand même ¦ 🖨 Всё равно напечатать ¦ 🖨 Усе одно надрукувати
+Montant ¦ Сумма ¦ Сума
+non signé ¦ не подписан ¦ не підписано
+Commission ¦ Комиссия ¦ Комісія
+Reste à l’héritier ¦ Остаётся наследнику ¦ Залишається спадкоємцю
+Arrondi au centime : chaque part est arrondie au centime inférieur, puis les centimes qui restent vont aux parts qui en ont perdu le plus. Le total tombe juste. ¦ Округлено до цента: каждая доля округляется вниз до цента, оставшиеся центы идут долям, которые потеряли больше всего. Итог сходится точно. ¦ Округлено до цента: кожну частку округлюють униз до цента, решта центів іде часткам, які втратили найбільше. Підсумок сходиться точно.
+Tape l’actif net en euros pour voir la part de chacun. ¦ Введи чистые активы в евро, чтобы увидеть долю каждого. ¦ Введи чисті активи в євро, щоб побачити частку кожного.
+Tape un montant en euros (ex. 187 450,00). ¦ Введи сумму в евро (напр. 187 450,00). ¦ Введи суму в євро (напр. 187 450,00).
+Plus d’un milliard d’euros : c’est bien ça ? ¦ Больше миллиарда евро: это так? ¦ Понад мільярд євро: це так?
+Oui, calculer ¦ Да, рассчитать ¦ Так, розрахувати
+Si le conjoint choisit l’usufruit de la totalité : pas de montant en euros (sa valeur dépend de son âge, c’est un barème fiscal) ; demande la valeur au notaire, pour lui et pour les nus-propriétaires. ¦ Если супруг выберет узуфрукт на всё наследство: суммы в евро нет (её величина зависит от возраста, это налоговая шкала); спроси нотариуса о стоимости, для супруга и для голых собственников. ¦ Якщо подружжя обере узуфрукт на всю спадщину: суми в євро немає (її розмір залежить від віку, це податкова шкала); запитай нотаріуса про вартість, для подружжя і для голих власників.
+Autre hypothèse, {h} ¦ Другая гипотеза, {h} ¦ Інша гіпотеза, {h}
+📊 Part de chacun en euros ¦ 📊 Доля каждого в евро ¦ 📊 Частка кожного в євро
+Fractions ¦ Дроби ¦ Дроби
+💶 En euros ¦ 💶 В евро ¦ 💶 У євро
+⤓ Copier le tableau ¦ ⤓ Скопировать таблицу ¦ ⤓ Скопіювати таблицю
+Actif net à partager (tapé par toi) ¦ Чистые активы к разделу (введены тобой) ¦ Чисті активи до поділу (введені тобою)
+D’après le notaire. Pas gardé : effacé quand tu fermes le dossier. ¦ По данным нотариуса. Не сохраняется: стирается, когда закрываешь дело. ¦ За даними нотаріуса. Не зберігається: стирається, коли закриваєш справу.
+Hors droits de succession et frais : l’app ne calcule pas l’impôt. Ces montants sont un ordre d’idée, à faire vérifier par le notaire. ¦ Без налога на наследство и расходов: приложение не считает налог. Эти суммы ориентировочные, их должен проверить нотариус. ¦ Без податку на спадщину й витрат: застосунок не рахує податок. Ці суми орієнтовні, їх має перевірити нотаріус.
+Commission = le % écrit dans « ＋ Honoraires d’un contrat » × le montant, arrondie au centime le plus proche, sans TVA ajoutée ; reste = montant − commission. ¦ Комиссия = % из «＋ Вознаграждение по договору» × сумма, округлённая до ближайшего цента, без добавленного НДС; остаётся = сумма − комиссия. ¦ Комісія = % із «＋ Винагорода за договором» × сума, округлена до найближчого цента, без доданого ПДВ; залишається = сума − комісія.
+Tableau copié. ¦ Таблица скопирована. ¦ Таблицю скопійовано.
+Parts en euros — {n} ¦ Доли в евро — {n} ¦ Частки в євро — {n}
+Parts en euros imprimées ¦ Доли в евро напечатаны ¦ Частки в євро надруковано
+✉️ Courrier à plusieurs… ¦ ✉️ Письмо нескольким… ¦ ✉️ Лист кільком…
+décoché ¦ снята отметка ¦ знято позначку
+déjà écrit le {d} ({k}) ¦ уже писали {d} ({k}) ¦ уже писали {d} ({k})
+✉️ Courriers en série · {n} ¦ ✉️ Письма по списку · {n} ¦ ✉️ Листи за списком · {n}
+Les héritiers dont l’existence n’est pas établie ne sont pas dans la liste. Les décochés peuvent être cochés à la main (une lettre sans adresse est alors imprimée sans bloc adresse). ¦ Наследников, чьё существование не установлено, в списке нет. Тех, у кого снята отметка, можно отметить вручную (письмо без адреса тогда печатается без блока адреса). ¦ Спадкоємців, чиє існування не встановлено, у списку немає. Тих, з кого знято позначку, можна позначити вручну (лист без адреси тоді друкується без блоку адреси).
+La lettre · clic sur un champ pour l’insérer ¦ Письмо · нажми на поле, чтобы вставить его ¦ Лист · натисни на поле, щоб вставити його
+{envoyé_le} : la date du courrier précédent à cet héritier ; {date} : la date d’envoi de celui-ci. ¦ {envoyé_le}: дата предыдущего письма этому наследнику; {date}: дата отправки этого. ¦ {envoyé_le}: дата попереднього листа цьому спадкоємцю; {date}: дата надсилання цього.
+Lettre précédente ¦ Предыдущее письмо ¦ Попередній лист
+Lettre suivante ¦ Следующее письмо ¦ Наступний лист
+✎ Retoucher cette lettre ¦ ✎ Поправить это письмо ¦ ✎ Поправити цей лист
+↺ Revenir au modèle ¦ ↺ Вернуться к шаблону ¦ ↺ Повернутися до шаблону
+＋ Enregistrer comme modèle ¦ ＋ Сохранить как шаблон ¦ ＋ Зберегти як шаблон
+Lettres prêtes : {n} sur {m} ¦ Готовые письма: {n} из {m} ¦ Готові листи: {n} з {m}
+Champ inconnu : {f} (ligne {l}). Corrige-le avant de ranger les lettres. ¦ Неизвестное поле: {f} (строка {l}). Исправь его, прежде чем подшивать письма. ¦ Невідоме поле: {f} (рядок {l}). Виправ його, перш ніж підшивати листи.
+🖨 Imprimer les {n} ¦ 🖨 Напечатать {n} ¦ 🖨 Надрукувати {n}
+Lettre {i} / {n} · {name} ¦ Письмо {i} / {n} · {name} ¦ Лист {i} / {n} · {name}
+Champ vide : la ligne s’écrit sans le mot ¦ Пустое поле: строка пишется без этого слова ¦ Порожнє поле: рядок пишеться без цього слова
+✎ modifiée à la main ¦ ✎ изменено вручную ¦ ✎ змінено вручну
+Ton nom et ton adresse : Listes → Registre de courriers → ✉️ Lettres (expéditeur). ¦ Твоё имя и адрес: Списки → Реестр писем → ✉️ Письма (отправитель). ¦ Твоє ім’я та адреса: Списки → Реєстр листів → ✉️ Листи (відправник).
+Mes modèles (aucun pour l’instant) ¦ Мои шаблоны (пока ни одного) ¦ Мої шаблони (поки жодного)
+Remplacer ta lettre par ce modèle ? ¦ Заменить твоё письмо этим шаблоном? ¦ Замінити твій лист цим шаблоном?
+Changer de modèle ¦ Сменить шаблон ¦ Змінити шаблон
+Oublier les retouches de la lettre à {name} ? ¦ Забыть правки письма для {name}? ¦ Забути правки листа для {name}?
+Revenir au modèle ¦ Вернуться к шаблону ¦ Повернутися до шаблону
+Modèle « {name} » enregistré (Mes modèles, communs à tous les dossiers de cette généalogie) ¦ Шаблон «{name}» сохранён (Мои шаблоны, общие для всех дел этой генеалогии) ¦ Шаблон «{name}» збережено (Мої шаблони, спільні для всіх справ цієї генеалогії)
+Corrige d’abord le champ inconnu. ¦ Сначала исправь неизвестное поле. ¦ Спочатку виправ невідоме поле.
+Rangement : {n} sur {m} ¦ Подшивка: {n} из {m} ¦ Підшивання: {n} з {m}
+{n} rangés dans le Registre de courriers, relance le {d} ¦ {n} подшито в Реестр писем, напоминание {d} ¦ {n} підшито до Реєстру листів, нагадування {d}
+en main, cote non notée ¦ на руках, шифр не записан ¦ на руках, шифр не записано
+demandé le {d} ¦ запрошен {d} ¦ запитано {d}
+demandé ¦ запрошен ¦ запитано
+acte à fournir ¦ акт нужно предоставить ¦ акт треба надати
+(commun, voir {n}) ¦ (общий, см. {n}) ¦ (спільний, див. {n})
+CHAÎNE DE FILIATION ¦ ЦЕПОЧКА ПРОИСХОЖДЕНИЯ ¦ ЛАНЦЮЖОК ПОХОДЖЕННЯ
+Calcul établi d’après les actes cités, sous réserve de vérification par le notaire. ¦ Расчёт по указанным актам, при условии проверки нотариусом. ¦ Розрахунок за вказаними актами, за умови перевірки нотаріусом.
+Code civil, articles cités pour ce dossier : art. {list}. ¦ Гражданский кодекс, статьи, указанные для этого дела: art. {list}. ¦ Цивільний кодекс, статті, вказані для цієї справи: art. {list}.
+N. = naissance, M. = mariage, D. = décès. ¦ Род. = рождение, Бр. = брак, Ум. = смерть. ¦ Нар. = народження, Шл. = шлюб, Пом. = смерть.
+Page {n} / {t} ¦ Страница {n} / {t} ¦ Сторінка {n} / {t}
+Coche au moins une page. ¦ Отметь хотя бы одну страницу. ¦ Познач хоча б одну сторінку.
+Tableau pour le notaire : PDF ({n} pages, avec chaîne par héritier) ¦ Таблица для нотариуса: PDF ({n} стр., с цепочкой каждого наследника) ¦ Таблиця для нотаріуса: PDF ({n} стор., з ланцюжком кожного спадкоємця)
+Tableau pour le notaire : PDF ({n} pages) ¦ Таблица для нотариуса: PDF ({n} стр.) ¦ Таблиця для нотаріуса: PDF ({n} стор.)
+sans adresses ¦ без адресов ¦ без адрес
+📋 Avant de remettre ¦ 📋 Перед передачей ¦ 📋 Перед переданням
+ça avertit, ça n’empêche pas ¦ предупреждает, не запрещает ¦ попереджає, не забороняє
+Ce que contient le PDF ¦ Что содержит PDF ¦ Що містить PDF
+Compté par le chronomètre ¦ Посчитано секундомером ¦ Пораховано секундоміром
+Taux horaire pour le relevé (facultatif, pas gardé) ¦ Почасовая ставка для отчёта (необязательно, не сохраняется) ¦ Погодинна ставка для звіту (необов’язково, не зберігається)
+€ / h ¦ € / ч ¦ € / год
+✎ Modifier la ligne ¦ ✎ Изменить строку ¦ ✎ Змінити рядок
+Ligne modifiée ¦ Строка изменена ¦ Рядок змінено
+Temps × taux horaire ({r} € / h) : {s} ¦ Время × почасовая ставка ({r} € / ч): {s} ¦ Час × погодинна ставка ({r} € / год): {s}
+Ajouté depuis « ＋ Ajouter un onglet ». ¦ Добавлено через «＋ Добавить вкладку». ¦ Додано через «＋ Додати вкладку».
+✓ Onglet « {name} » ajouté ¦ ✓ Вкладка «{name}» добавлена ¦ ✓ Вкладку «{name}» додано
+Onglet « {name} » caché ¦ Вкладка «{name}» скрыта ¦ Вкладку «{name}» приховано
+conseillé pour toi ¦ рекомендовано тебе ¦ рекомендовано тобі
+montré par ton usage ¦ показано из-за твоего использования ¦ показано через твоє використання
+Conseillés pour toi ¦ Рекомендовано тебе ¦ Рекомендовано тобі
+Tout le reste ▾ ¦ Всё остальное ▾ ¦ Усе інше ▾
+Qu’est-ce que tu veux avoir sous la main ? ¦ Что ты хочешь иметь под рукой? ¦ Що ти хочеш мати під рукою?
+Ton usage : {u} ¦ Твоё использование: {u} ¦ Твоє використання: {u}
+Chercher un onglet ¦ Искать вкладку ¦ Шукати вкладку
+🔍 Chercher un onglet… (courrier, acte, agenda) ¦ 🔍 Искать вкладку… (письмо, акт, ежедневник) ¦ 🔍 Шукати вкладку… (лист, акт, щоденник)
+Conseillés ({n}) ¦ Рекомендованные ({n}) ¦ Рекомендовані ({n})
+Déjà dans le menu ({n}) ¦ Уже в меню ({n}) ¦ Уже в меню ({n})
+Aucun onglet ne correspond. ¦ Ни одна вкладка не подходит. ¦ Жодна вкладка не підходить.
+Une carte cochée = l’onglet est dans le menu. Cocher l’ajoute à la fin du menu ; décocher le cache (un raccourci est caché, pas effacé). ¦ Отмеченная карточка = вкладка в меню. Отметка добавляет её в конец меню; снятие отметки скрывает её (ярлык скрывается, а не удаляется). ¦ Позначена картка = вкладка в меню. Позначення додає її в кінець меню; зняття позначки приховує її (ярлик приховується, а не видаляється).
+↗ Faire un onglet à moi (Éditeur d’onglets) ¦ ↗ Сделать свою вкладку (Редактор вкладок) ¦ ↗ Зробити свою вкладку (Редактор вкладок)
+MENU ¦ МЕНЮ ¦ МЕНЮ
+＋ Ajouter un onglet ¦ ＋ Добавить вкладку ¦ ＋ Додати вкладку
+Ajouter un onglet ¦ Добавить вкладку ¦ Додати вкладку
+＋ Ajouter un onglet… ¦ ＋ Добавить вкладку… ¦ ＋ Додати вкладку…
+Montrer le ＋ au bout du menu ¦ Показывать ＋ в конце меню ¦ Показувати ＋ у кінці меню
+Retirer ce raccourci du menu (un onglet de l’app ne se retire pas : il se cache) ¦ Убрать этот ярлык из меню (вкладка приложения не убирается: она скрывается) ¦ Прибрати цей ярлик із меню (вкладка застосунку не прибирається: вона приховується)
+Onglet « {name} » retiré du menu ¦ Вкладка «{name}» убрана из меню ¦ Вкладку «{name}» прибрано з меню
+Le ＋ est au bout du menu ¦ ＋ в конце меню ¦ ＋ у кінці меню
+Le ＋ n’est plus au bout du menu ¦ ＋ больше не в конце меню ¦ ＋ більше не в кінці меню
+Recherches : {what} ¦ Поиски: {what} ¦ Пошуки: {what}
+Recherches ¦ Поиски ¦ Пошуки
+Acte de décès de {name} en main ¦ Свидетельство о смерти {name} на руках ¦ Свідоцтво про смерть {name} на руках
+Acte de décès de {name} pas en main ¦ Свидетельства о смерти {name} нет ¦ Свідоцтва про смерть {name} немає
+demandé, pas encore reçu ¦ запрошено, ещё не получено ¦ запитано, ще не отримано
+Arbre de dévolution complet ¦ Дерево наследования полное ¦ Дерево спадкування повне
+Aucune branche à chercher. ¦ Ветвей для поиска нет. ¦ Гілок для пошуку немає.
+Branches encore à chercher : {n} ¦ Ветви, которые ещё нужно искать: {n} ¦ Гілки, які ще треба шукати: {n}
+Héritiers dont l’existence n’est pas établie : {n} ¦ Наследники, чьё существование не установлено: {n} ¦ Спадкоємці, чиє існування не встановлено: {n}
+Liens prouvés par aucun acte : {n} ¦ Связи, не подтверждённые ни одним актом: {n} ¦ Зв’язки, не підтверджені жодним актом: {n}
+{what} (relie {who} au défunt) ¦ {what} (связывает {who} с умершим) ¦ {what} (пов’язує {who} з померлим)
+Chaque lien est prouvé par un acte ¦ Каждая связь подтверждена актом ¦ Кожен зв’язок підтверджено актом
+Actes demandés, pas encore reçus : {n} ¦ Запрошенные, ещё не полученные акты: {n} ¦ Запитані, ще не отримані акти: {n}
+{what} · demandé le {d} ¦ {what} · запрошен {d} ¦ {what} · запитано {d}
+(courrier n° {n}) ¦ (письмо № {n}) ¦ (лист № {n})
+Adresses des héritiers vivants : {n} sur {m} ¦ Адреса живых наследников: {n} из {m} ¦ Адреси живих спадкоємців: {n} з {m}
+Aucun héritier vivant à joindre ¦ Нет живого наследника для связи ¦ Немає живого спадкоємця для зв’язку
+Contrats signés (ou refus noté) : {n} sur {m} ¦ Подписанные договоры (или записанный отказ): {n} из {m} ¦ Підписані договори (або записана відмова): {n} з {m}
+Aucun contrat à faire signer ¦ Нет договора на подпись ¦ Немає договору на підпис
+Contrats pas encore signés : {n} ¦ Ещё не подписанные договоры: {n} ¦ Ще не підписані договори: {n}
+{name} a répondu « oui », pas de date de signature ¦ {name} ответил(а) «да», даты подписи нет ¦ {name} відповів(ла) «так», дати підпису немає
+Héritiers introuvables ou silencieux : {n} ¦ Ненайденные или не отвечающие наследники: {n} ¦ Незнайдені або спадкоємці, які не відповідають: {n}
+Parts : le total fait bien 1 ¦ Доли: итог действительно 1 ¦ Частки: підсумок справді 1
+Les parts ne totalisent pas 1 : à revoir ¦ Доли не дают 1: проверить ¦ Частки не дають 1: перевірити
+Échéances en retard : {n} ¦ Просроченные сроки: {n} ¦ Прострочені строки: {n}
+Aucune échéance en retard ¦ Просроченных сроков нет ¦ Прострочених строків немає
+Remis au notaire avec {miss} manque(s) et {warn} point(s) à revoir ({what}) ¦ Передано нотариусу, не хватает: {miss}, проверить: {warn} ({what}) ¦ Передано нотаріусу, бракує: {miss}, перевірити: {warn} ({what})
+Madame ¦ Госпожа ¦ Пані
+Monsieur ¦ Господин ¦ Пан
+Tes photos, actes, lettres de A à Z, rangés en dossiers. ¦ Твои фото, акты, письма от А до Я, разложенные по папкам. ¦ Твої фото, акти, листи від А до Я, розкладені по теках.
+Lettres à ouvrir plus tard, recettes, musée de famille. ¦ Письма, чтобы открыть позже, рецепты, семейный музей. ¦ Листи, щоб відкрити пізніше, рецепти, родинний музей.
+Fiches thématiques : un métier, une guerre, un village. ¦ Тематические карточки: ремесло, война, деревня. ¦ Тематичні картки: ремесло, війна, село.
+Tes correspondances ADN et leurs liens. ¦ Твои совпадения ДНК и их связи. ¦ Твої збіги ДНК та їхні зв’язки.
+Les œuvres d’un artiste, albums, expositions. ¦ Произведения художника, альбомы, выставки. ¦ Твори митця, альбоми, виставки.
+Pedigree, portées. (Suivi des animaux : à part.) ¦ Родословная, помёты. (Наблюдение за животными: отдельно.) ¦ Родовід, посліди. (Спостереження за тваринами: окремо.)
+Baguage, puces, observations, trajets. ¦ Кольцевание, чипы, наблюдения, маршруты. ¦ Кільцювання, чипи, спостереження, маршрути.
+Dossiers de succession, pour un notaire. ¦ Наследственные дела, для нотариуса. ¦ Спадкові справи, для нотаріуса.
+Le Registre de courriers : demandes d’actes, relances, réponses. ¦ Реестр писем: запросы актов, напоминания, ответы. ¦ Реєстр листів: запити актів, нагадування, відповіді.
+Listes → Archives et sources → Registre de courriers ¦ Списки → Архивы и источники → Реестр писем ¦ Списки → Архіви та джерела → Реєстр листів
+Tes actes recopiés, mot à mot. ¦ Твои переписанные акты, слово в слово. ¦ Твої переписані акти, слово в слово.
+Listes → Archives et sources ¦ Списки → Архивы и источники ¦ Списки → Архіви та джерела
+Visites, rendez-vous, relances, à la semaine. ¦ Визиты, встречи, напоминания, по неделям. ¦ Візити, зустрічі, нагадування, по тижнях.
+Listes → Recherche et organisation ¦ Списки → Исследования и организация ¦ Списки → Дослідження та організація
+Les choses à faire, avec leur date. ¦ Дела, которые нужно сделать, с датой. ¦ Справи, які треба зробити, з датою.
+Toutes les images, sons, vidéos en tableau. ¦ Все изображения, звуки, видео в таблице. ¦ Усі зображення, звуки, відео в таблиці.
+Listes → Médias et documents ¦ Списки → Медиа и документы ¦ Списки → Медіа та документи
+Questionnaires pour recueillir les souvenirs. ¦ Анкеты, чтобы собрать воспоминания. ¦ Анкети, щоб зібрати спогади.
+Les maisons, pièce par pièce, et qui y a vécu. ¦ Дома, комната за комнатой, и кто в них жил. ¦ Будинки, кімната за кімнатою, і хто в них жив.
+Listes → Lieux et maisons ¦ Списки → Места и дома ¦ Списки → Місця та будинки
+Adresses et contacts des cousins vivants. ¦ Адреса и контакты живых двоюродных братьев и сестёр. ¦ Адреси й контакти живих двоюрідних братів і сестер.
+Listes → Personnes et familles ¦ Списки → Люди и семьи ¦ Списки → Люди та родини
+Les dépôts, leurs cotes, leurs horaires. ¦ Архивы, их шифры, часы работы. ¦ Архіви, їхні шифри, години роботи.
+Le planificateur : quoi consulter, où, quand. ¦ Планировщик: что смотреть, где, когда. ¦ Планувальник: що дивитися, де, коли.
+Qui a hérité de quoi d’après les actes anciens. ¦ Кто что унаследовал по старым актам. ¦ Хто що успадкував за старими актами.
+Les bons sites pour la personne ouverte. ¦ Подходящие сайты для открытого человека. ¦ Відповідні сайти для відкритої людини.
+Recherche → Type de recherche ¦ Поиск → Тип поиска ¦ Пошук → Тип пошуку
+Trouver et fusionner les fiches en double. ¦ Найти и объединить дубли. ¦ Знайти й об’єднати дублікати.
+Réglages → Fusion de doublons ¦ Настройки → Объединение дублей ¦ Налаштування → Об’єднання дублікатів
+Dates impossibles, liens bizarres. ¦ Невозможные даты, странные связи. ¦ Неможливі дати, дивні зв’язки.
+Réglages → Contrôle de la base ¦ Настройки → Проверка базы ¦ Налаштування → Перевірка бази
+Le nom étudié ¦ Изучаемая фамилия ¦ Досліджуване прізвище
+Les porteurs d’un nom, ses variantes. ¦ Носители фамилии, её варианты. ¦ Носії прізвища, його варіанти.
+Graphiques → statistique des noms ¦ Графики → статистика фамилий ¦ Графіки → статистика прізвищ
+L’entreprise ¦ Предприятие ¦ Підприємство
+Employeurs, salariés, membres. ¦ Работодатели, сотрудники, члены. ¦ Роботодавці, працівники, члени.
+Listes → Employeurs ¦ Списки → Работодатели ¦ Списки → Роботодавці
+Des parties de l’app, cachées au départ ¦ Части приложения, сначала скрытые ¦ Частини застосунку, спочатку приховані
+Elles existent déjà : cocher les montre dans le menu. ¦ Они уже есть: отметка показывает их в меню. ¦ Вони вже є: позначка показує їх у меню.
+Un raccourci vers une liste ¦ Ярлык к списку ¦ Ярлик до списку
+Il devient un « onglet à soi » (Éditeur d’onglets). ¦ Становится «твоей вкладкой» (Редактор вкладок). ¦ Стає «твоєю вкладкою» (Редактор вкладок).
+Un raccourci vers un outil ¦ Ярлык к инструменту ¦ Ярлик до інструмента
+Chaîne par héritier ¦ Цепочка каждого наследника ¦ Ланцюжок кожного спадкоємця
+✉️ Contactés ¦ ✉️ Связались ¦ ✉️ Зв’язалися
+📇 Répertoire des vivants ¦ 📇 Справочник живых ¦ 📇 Довідник живих
+Échéances du jour (usage successoral seulement) ¦ Сроки на сегодня (только для наследственных дел) ¦ Строки на сьогодні (лише для спадкових справ)
+Ce dossier est clos : rien ne s’y note. ¦ Это дело закрыто: в него ничего не записывается. ¦ Цю справу закрито: до неї нічого не записується.
+Donne un nom au modèle. ¦ Дай шаблону название. ¦ Дай шаблону назву.
+Trop de lettres d’un coup (60 au plus). ¦ Слишком много писем сразу (не больше 60). ¦ Забагато листів одразу (не більше 60).
+Échéances du jour ¦ Сроки на сегодня ¦ Строки на сьогодні

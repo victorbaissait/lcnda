@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 92;
+const SCHEMA_VERSION = 93;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -113,6 +113,7 @@ function migration_steps(): array
         90 => 'schema_v90',
         91 => 'schema_v91',
         92 => 'schema_v92',
+        93 => 'schema_v93',
     ];
 }
 
@@ -2611,4 +2612,13 @@ function schema_v92(PDO $pdo): void
 {
     if (!function_exists('succ_contact_schema')) { require_once __DIR__ . '/successoral_dossiers.php'; }
     succ_contact_schema($pdo);
+}
+
+/** 93 : ⚖️ Outils du successoral — les modèles de courriers à soi (succ_templates, dans la généalogie des dossiers) et
+ * d'où vient une ligne de temps (succ_fees.source = « chrono » : comptée par le ⏱ chronomètre). lib/successoral_outils.php */
+function schema_v93(PDO $pdo): void
+{
+    if (!function_exists('succ_outils_schema')) { require_once __DIR__ . '/successoral.php'; }
+    if (!(bool) $pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='succ_fees'")->fetchColumn() && function_exists('successoral_schema')) { successoral_schema($pdo); }
+    succ_outils_schema($pdo);
 }

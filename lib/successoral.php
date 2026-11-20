@@ -26,6 +26,7 @@ declare(strict_types=1);
  */
 
 require_once __DIR__ . '/successoral_dossiers.php'; // rangement, filtre ⚖️, rattachement, tableau de bord, archive en fichier (migration 91)
+require_once __DIR__ . '/successoral_outils.php'; // ⏱ chronomètre, 🔔 échéances, ✉️ courriers en série, modèles à soi (migration 93)
 
 const SUCC_STATES = ['ouvert', 'recherche', 'trouves', 'remis', 'clos', 'archive'];
 const SUCC_STATE_LABELS = ['ouvert' => 'Ouvert', 'recherche' => 'En recherche', 'trouves' => 'Héritiers trouvés', 'remis' => 'Remis au notaire', 'clos' => 'Clos', 'archive' => 'Archivé'];
@@ -295,7 +296,8 @@ function succ_case_out(PDO $pdo, array $r): array
     $dl = $pdo->prepare('SELECT id, due, label, kind, done FROM succ_deadlines WHERE case_id=? AND deleted_at IS NULL ORDER BY due, id'); $dl->execute([$id]);
     $pc = $pdo->prepare('SELECT piece_key, state, courrier_id, media_id, note, updated_at FROM succ_pieces WHERE case_id=?'); $pc->execute([$id]);
     $jr = $pdo->prepare('SELECT id, at, kind, text FROM succ_journal WHERE case_id=? ORDER BY at DESC, id DESC'); $jr->execute([$id]);
-    $fe = $pdo->prepare('SELECT id, kind, day, label, minutes, amount_cents, percent, person_id FROM succ_fees WHERE case_id=? AND deleted_at IS NULL ORDER BY day DESC, id DESC'); $fe->execute([$id]);
+    $src = function_exists('succ_outils_ready') && succ_outils_ready($pdo) ? 'source' : "'' AS source"; // ⏱ « chrono » : compté par le chronomètre (migration 93)
+    $fe = $pdo->prepare("SELECT id, kind, day, label, minutes, amount_cents, percent, person_id, $src FROM succ_fees WHERE case_id=? AND deleted_at IS NULL ORDER BY day DESC, id DESC"); $fe->execute([$id]);
     $pieces = [];
     foreach ($pc->fetchAll(PDO::FETCH_ASSOC) as $p) { $pieces[(string) $p['piece_key']] = ['state' => (string) $p['state'], 'courrier_id' => (int) $p['courrier_id'] ?: null, 'note' => (string) $p['note'], 'updated_at' => (string) $p['updated_at']]; }
     $courriers = [];
@@ -332,7 +334,7 @@ function succ_case_out(PDO $pdo, array $r): array
         'overrides' => json_decode((string) $r['overrides_json'], true) ?: new stdClass(), 'snapshot' => json_decode((string) $r['snapshot_json'], true) ?: null, 'options' => json_decode((string) $r['options_json'], true) ?: new stdClass(),
         'deadlines' => array_map(static fn($d) => ['id' => (int) $d['id'], 'due' => (string) $d['due'], 'label' => (string) $d['label'], 'kind' => (string) $d['kind'], 'done' => (int) $d['done'] === 1], $dl->fetchAll(PDO::FETCH_ASSOC)),
         'pieces' => $pieces ?: new stdClass(), 'journal' => array_map(static fn($j) => ['id' => (int) $j['id'], 'at' => (string) $j['at'], 'kind' => (string) $j['kind'], 'text' => (string) $j['text']], $jr->fetchAll(PDO::FETCH_ASSOC)),
-        'fees' => array_map(static fn($f) => ['id' => (int) $f['id'], 'kind' => (string) $f['kind'], 'day' => (string) $f['day'], 'label' => (string) $f['label'], 'minutes' => (int) $f['minutes'], 'amount_cents' => (int) $f['amount_cents'], 'percent' => $f['percent'] === null ? null : (float) $f['percent'], 'person_id' => (int) $f['person_id'] ?: null], $fe->fetchAll(PDO::FETCH_ASSOC)),
+        'fees' => array_map(static fn($f) => ['id' => (int) $f['id'], 'kind' => (string) $f['kind'], 'day' => (string) $f['day'], 'label' => (string) $f['label'], 'minutes' => (int) $f['minutes'], 'amount_cents' => (int) $f['amount_cents'], 'percent' => $f['percent'] === null ? null : (float) $f['percent'], 'person_id' => (int) $f['person_id'] ?: null, 'source' => (string) $f['source']], $fe->fetchAll(PDO::FETCH_ASSOC)),
         'courriers' => $courriers, 'graph' => $graph, 'acts' => $acts ?: new stdClass(), 'asked' => $asked ?: new stdClass(), 'addresses' => $addresses ?: new stdClass(),
         // 🔎 introuvable / 🔇 ne répond pas (succ_case_persons, migration 92) ; le réglage « fiches confidentielles comptées » (successoral.json)
         'contact' => (function_exists('succ_contacts_of') ? succ_contacts_of($pdo, $id) : []) ?: new stdClass(), 'count_private' => function_exists('succ_settings') ? (bool) succ_settings()['private_heirs'] : true,
@@ -458,7 +460,8 @@ function succ_set_state(PDO $pdo, array $d): array
     if ($st === 'remis' && empty($d['checked']) && empty($d['undo'])) { throw new LcndaBadInput('Passe d’abord par la liste de contrôle avant « Remis au notaire ».'); }
     if ($c['state'] === 'archive') { throw new LcndaBadInput('Ce dossier est archivé.'); }
     $pdo->prepare('UPDATE succ_cases SET state=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$st, $id]);
-    succ_journal($pdo, $id, 'state', 'État : ' . (SUCC_STATE_LABELS[$c['state']] ?? $c['state']) . ' → ' . SUCC_STATE_LABELS[$st] . ($st === 'remis' && !empty($d['checked']) ? (($d['checked'] ?? '') === 'forced' ? ' (liste de contrôle incomplète : remis quand même)' : ' (liste de contrôle faite)') : ''));
+    succ_journal($pdo, $id, 'state', 'État : ' . (SUCC_STATE_LABELS[$c['state']] ?? $c['state']) . ' → ' . SUCC_STATE_LABELS[$st] . ($st === 'remis' && !empty($d['checked']) ? (($d['checked'] ?? '') === 'forced' ? ' (liste de contrôle incomplète : remis quand même)' : ' (liste de contrôle faite)') : '')
+        . ($st === 'remis' && ($d['checked'] ?? '') === 'forced' && ($sum = succ_txt($d['summary'] ?? '', 600)) !== '' ? ' — ' . $sum : '')); // 📋 « Remis au notaire avec 1 manque et 2 points à revoir (…) »
     return ['id' => $id, 'prev' => (string) $c['state']];
 }
 
@@ -582,7 +585,7 @@ function succ_file_letter(PDO $pdo, array $d): array
     $addr = $c['state'] === 'archive' ? '' : succ_txt($d['recipient_address'] ?? '', 600, true);
     $json = json_encode(['tool' => 'succ', 'kind' => $kind, 'recipient_address' => $addr, 'recipient_email' => succ_txt($d['recipient_email'] ?? '', 160)], JSON_UNESCAPED_UNICODE);
     $pdo->prepare('UPDATE courriers SET person_id=?, succ_case_id=?, succ_kind=?, letter_json=? WHERE id=?')->execute([$pid, $cid, $kind, $json, $kid]);
-    succ_journal($pdo, $cid, 'courrier', 'Courrier n° ' . $kid . ' « ' . ['contact' => 'premier contact', 'contrat' => 'contrat de révélation', 'relance' => 'relance', 'etranger' => 'héritier à l’étranger'][$kind] . ' » rangé dans le registre : ' . $name);
+    if (empty($d['quiet'])) { succ_journal($pdo, $cid, 'courrier', 'Courrier n° ' . $kid . ' « ' . ['contact' => 'premier contact', 'contrat' => 'contrat de révélation', 'relance' => 'relance', 'etranger' => 'héritier à l’étranger'][$kind] . ' » rangé dans le registre : ' . $name); } // ✉️ une série : une seule ligne (succ_file_letters)
     if (function_exists('log_change')) { log_change($pdo, 'courrier', $kid, 'create', 'Courrier ajouté : ' . $objet . ' — ' . $name); }
     succ_touch($pdo, $cid);
     return ['courrier_id' => $kid];
@@ -682,7 +685,9 @@ function successoral_api_get(PDO $pdo, array $g): array
 {
     if (succ_kiosk()) { throw new RuntimeException('Mode consultation : les dossiers de succession ne se montrent pas.'); }
     if (!succ_ready($pdo)) { successoral_schema($pdo); }
+    succ_outils_ensure($pdo);
     $op = scalar_text($g['op'] ?? 'list', 'op');
+    $tools = succ_outils_get($pdo, $op, $g); if ($tools !== null) { return $tools; } // ✉️ modèles à soi (successoral_outils.php)
     if ($op === 'archive_download') { succ_archive_download((string) ($g['token'] ?? '')); }
     $more = succ_dossiers_get($pdo, $op, $g); if ($more !== null) { return $more; } // ⚖️ dossiers : rangement, filtre, rattachement (successoral_dossiers.php)
     return match ($op) {
@@ -707,7 +712,9 @@ function successoral_api_post(PDO $pdo, array $d): array
 {
     if (succ_kiosk()) { throw new RuntimeException('Mode consultation : rien ne peut être modifié.'); }
     if (!succ_ready($pdo)) { successoral_schema($pdo); }
+    succ_outils_ensure($pdo);
     $op = scalar_text($d['op'] ?? '', 'op');
+    $tools = succ_outils_post($pdo, $op, $d); if ($tools !== null) { return $tools; } // ⏱ 🔔 ✉️ (successoral_outils.php)
     $more = succ_dossiers_post($pdo, $op, $d); if ($more !== null) { return $more; } // ⚖️ dossiers (successoral_dossiers.php)
     return match ($op) {
         'save' => succ_save($pdo, $d),

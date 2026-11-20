@@ -67,6 +67,13 @@ const backups = (dir) => (fs.existsSync(path.join(dir, 'backups')) ? fs.readdirS
     assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM persons")), 1, 'la personne a disparu');
   });
 
+  await step('structure n°93 : ⚖️ modèles de courriers à soi (succ_templates) et source des lignes de temps (succ_fees.source, ⏱ chronomètre)', async () => {
+    const dir = path.join(tmp, 'ancienne');
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='succ_templates'")), 1);
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM pragma_table_info('succ_fees') WHERE name='source'")), 1);
+    assert.ok(expected >= 93);
+  });
+
   await step('la copie de sécurité est une base complète, dans l’état d’avant la mise à jour', async () => {
     const dir = path.join(tmp, 'ancienne');
     const copy = path.join(dir, 'backups', backups(dir)[0]);

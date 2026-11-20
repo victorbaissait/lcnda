@@ -743,3 +743,233 @@ Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Në
 Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Link refuséiert: nëmmen eng https://-Adress vu Légifrance, Service-public oder EUR-Lex.
 Noté au journal du dossier {n}. ¦ Am Journal vum Dossier {n} notéiert.
 Écris d’abord ta question. ¦ Schreif fir d’éischt deng Fro.
+# ⚖️ Outils du successoral (⏱ 🔔 📋 🧾 📊 ✉️) et ＋ Ajouter un onglet (docs/design/onglets-et-successoral-outils.html)
+⏱ Compter le temps passé sur ce dossier ¦ ⏱ D’Zäit fir dësen Dossier zielen
+{n} min ¦ {n} Min.
+⏸️ Pause ¦ ⏸️ Paus
+▶️ Reprendre ¦ ▶️ Weidermaachen
+⏹️ Arrêter et noter ¦ ⏹️ Stoppen an notéieren
+Moins d’une minute : rien à noter. ¦ Manner wéi eng Minutt: näischt ze notéieren.
+Noter le temps passé ¦ D’Zäit notéieren
+Noter {t} ¦ {t} notéieren
+Proposé d’après les onglets ouverts ; à corriger si besoin. Date : {d}. ¦ Proposéiert no den opgemaachten Reiteren; wann néideg verbesseren. Datum: {d}.
+Minuit passé : une ligne par jour. ¦ No Mëtternuecht: eng Zeil pro Dag.
+Jeter ce temps ¦ Dës Zäit verwerfen
+Jeter ce temps ? ¦ Dës Zäit verwerfen?
+Jeter ¦ Verwerfen
+{t} d’affilée : c’est bien ça ? ¦ {t} um Stéck: stëmmt dat?
+Plus de 10 h d’affilée ¦ Méi wéi 10 St. um Stéck
+Noter quand même ¦ Trotzdeem notéieren
+⏱ {t} notées dans le dossier {n} ¦ ⏱ {t} am Dossier {n} notéiert
+Le chronomètre compte pour {n}. ¦ D’Stoppauer zielt fir {n}.
+⏹️ Noter et passer à {n} ¦ ⏹️ Notéieren an op {n} wiesselen
+Continuer sur {n} ¦ Mat {n} weidermaachen
+Rien touché depuis 10 min : chronomètre en pause à {h}. ¦ Zënter 10 Min. näischt ugeréiert: Stoppauer ëm {h} gestoppt.
+Compter aussi ces 10 min ¦ Dës 10 Min. och zielen
+⏱ {n} : {t} comptées avant la fermeture. ¦ ⏱ {n}: {t} virum Zoumaachen gezielt.
+Noter ¦ Notéieren
+Échéances du jour : {n} à faire (retards et aujourd’hui) ¦ Delaie vum Dag: {n} ze maachen (iwwerfälleg an haut)
+🔔 Échéances du jour ¦ 🔔 Delaie vum Dag
+⏰ Rappel ¦ ⏰ Erënnerung
+prévu le {d} ¦ geplangt den {d}
+✓ Fait ¦ ✓ Gemaach
+⏭ Demain (ou lundi) ¦ ⏭ Muer (oder e Méindeg)
+↗ Ouvrir le dossier ¦ ↗ Dossier opmaachen
+voir ▾ ¦ weisen ▾
+Rien pour aujourd’hui. ¦ Näischt fir haut.
+Prochaine : {d} ({n}) ¦ Nächst: {d} ({n})
+🔔 À faire · {d} ¦ 🔔 Ze maachen · {d}
+Cette généalogie ¦ Dës Genealogie
+⚖️ {name} : impossible de lire les échéances ¦ ⚖️ {name}: d’Delaie kënnen net gelies ginn
+✓ fait · ⏭ demain / lundi · ↗ ouvre le dossier (change de généalogie si besoin) ¦ ✓ gemaach · ⏭ muer / Méindeg · ↗ mécht den Dossier op (wiesselt wann néideg d’Genealogie)
+Ajouter mes rappels ¦ Meng Erënnerungen derbäisetzen
+Bulle de l’ordinateur à l’ouverture de l’app ¦ Notifikatioun vum Computer beim Opmaache vun der App
+🗓 Ma semaine ¦ 🗓 Meng Woch
+Reporté au {d} ¦ Verluecht op den {d}
+✓ Fait : {l} ¦ ✓ Gemaach: {l}
+Reporté au {d} : {l} ¦ Verluecht op den {d}: {l}
+Points prêts : {n} sur {m} ¦ Punkte prett: {n} vun {m}
+À revoir : {n} ¦ Ze kontrolléieren: {n}
+Manque : {n} ¦ Feelt: {n}
+📋 AVANT DE REMETTRE ¦ 📋 VIR DER IWWERGAB
+Avant de remettre · {n} ¦ Vir der Iwwergab · {n}
+Passer à « Remis au notaire » ¦ Op „Dem Notaire iwwerginn“ setzen
+Ça avertit, ça n’empêche pas : tu peux remettre quand même, ce sera noté au journal. ¦ Et warnt, et verhënnert näischt: du kanns trotzdeem iwwerginn, et gëtt am Journal notéiert.
+🖨 Imprimer quand même ¦ 🖨 Trotzdeem drécken
+Montant ¦ Betrag
+non signé ¦ net ënnerschriwwen
+Commission ¦ Kommissioun
+Reste à l’héritier ¦ Bleift dem Ierwen
+Arrondi au centime : chaque part est arrondie au centime inférieur, puis les centimes qui restent vont aux parts qui en ont perdu le plus. Le total tombe juste. ¦ Op de Cent ofgerënnt: all Deel gëtt op de Cent erofgerënnt, déi iwwreg Cente ginn un d’Deeler, déi am meeschte verluer hunn. D’Zomm stëmmt genee.
+Tape l’actif net en euros pour voir la part de chacun. ¦ Tipp dat nett Verméigen an Euro an, fir den Deel vun all Persoun ze gesinn.
+Tape un montant en euros (ex. 187 450,00). ¦ Tipp e Betrag an Euro an (z. B. 187 450,00).
+Plus d’un milliard d’euros : c’est bien ça ? ¦ Méi wéi eng Milliard Euro: stëmmt dat?
+Oui, calculer ¦ Jo, rechnen
+Si le conjoint choisit l’usufruit de la totalité : pas de montant en euros (sa valeur dépend de son âge, c’est un barème fiscal) ; demande la valeur au notaire, pour lui et pour les nus-propriétaires. ¦ Wiel de Bestuet den Notzen vum ganze Bierf: kee Betrag an Euro (säi Wäert hänkt vum Alter of, et ass eng Steiertabell); fro den Notaire no dem Wäert, fir hien a fir d’Proprietairë ouni Notzen.
+Autre hypothèse, {h} ¦ Aner Hypothes, {h}
+📊 Part de chacun en euros ¦ 📊 Deel vun all Persoun an Euro
+Fractions ¦ Brécher
+💶 En euros ¦ 💶 An Euro
+⤓ Copier le tableau ¦ ⤓ Tabell kopéieren
+Actif net à partager (tapé par toi) ¦ Nett Verméigen ze deelen (vun dir agetippt)
+D’après le notaire. Pas gardé : effacé quand tu fermes le dossier. ¦ Laut Notaire. Net gespäichert: geläscht, wann s du den Dossier zoumaachs.
+Hors droits de succession et frais : l’app ne calcule pas l’impôt. Ces montants sont un ordre d’idée, à faire vérifier par le notaire. ¦ Ouni Ierfschaftssteier a Käschten: d’App rechent keng Steier. Dës Beträg sinn eng Iddi, vum Notaire ze kontrolléieren.
+Commission = le % écrit dans « ＋ Honoraires d’un contrat » × le montant, arrondie au centime le plus proche, sans TVA ajoutée ; reste = montant − commission. ¦ Kommissioun = de % aus „＋ Honorar vun engem Kontrakt“ × Betrag, op den noosten Cent gerënnt, ouni derbäigesaten TVA; bleift = Betrag − Kommissioun.
+Tableau copié. ¦ Tabell kopéiert.
+Parts en euros — {n} ¦ Deeler an Euro — {n}
+Parts en euros imprimées ¦ Deeler an Euro gedréckt
+✉️ Courrier à plusieurs… ¦ ✉️ Bréif u méi Leit…
+décoché ¦ ofgewielt
+déjà écrit le {d} ({k}) ¦ schonn de {d} geschriwwen ({k})
+✉️ Courriers en série · {n} ¦ ✉️ Serienbréiwer · {n}
+Les héritiers dont l’existence n’est pas établie ne sont pas dans la liste. Les décochés peuvent être cochés à la main (une lettre sans adresse est alors imprimée sans bloc adresse). ¦ Ierwen, där hir Existenz net etabléiert ass, sti net op der Lëscht. Ofgewielter kënne mat der Hand ugekräizt ginn (e Bréif ouni Adress gëtt dann ouni Adressblock gedréckt).
+La lettre · clic sur un champ pour l’insérer ¦ De Bréif · klick op e Feld, fir et anzesetzen
+{envoyé_le} : la date du courrier précédent à cet héritier ; {date} : la date d’envoi de celui-ci. ¦ {envoyé_le}: den Datum vum leschte Bréif un dësen Ierwen; {date}: den Datum, wou dëse fortgeschéckt gëtt.
+Lettre précédente ¦ Virege Bréif
+Lettre suivante ¦ Nächste Bréif
+✎ Retoucher cette lettre ¦ ✎ Dëse Bréif iwwerschaffen
+↺ Revenir au modèle ¦ ↺ Zréck op d’Virlag
+＋ Enregistrer comme modèle ¦ ＋ Als Virlag späicheren
+Lettres prêtes : {n} sur {m} ¦ Bréiwer prett: {n} vun {m}
+Champ inconnu : {f} (ligne {l}). Corrige-le avant de ranger les lettres. ¦ Onbekannt Feld: {f} (Zeil {l}). Verbesser et, ier s du d’Bréiwer ofleeës.
+🖨 Imprimer les {n} ¦ 🖨 Déi {n} drécken
+Lettre {i} / {n} · {name} ¦ Bréif {i} / {n} · {name}
+Champ vide : la ligne s’écrit sans le mot ¦ Eidelt Feld: d’Zeil gëtt ouni dat Wuert geschriwwen
+✎ modifiée à la main ¦ ✎ mat der Hand geännert
+Ton nom et ton adresse : Listes → Registre de courriers → ✉️ Lettres (expéditeur). ¦ Däin Numm an deng Adress: Lëschten → Register vun de Bréiwer → ✉️ Bréiwer (Ofsender).
+Mes modèles (aucun pour l’instant) ¦ Meng Virlagen (nach keng)
+Remplacer ta lettre par ce modèle ? ¦ Däi Bréif duerch dës Virlag ersetzen?
+Changer de modèle ¦ Virlag wiesselen
+Oublier les retouches de la lettre à {name} ? ¦ D’Ännerunge vum Bréif un {name} vergiessen?
+Revenir au modèle ¦ Zréck op d’Virlag
+Modèle « {name} » enregistré (Mes modèles, communs à tous les dossiers de cette généalogie) ¦ Virlag „{name}“ gespäichert (Meng Virlagen, gemeinsam fir all d’Dossiere vun dëser Genealogie)
+Corrige d’abord le champ inconnu. ¦ Verbesser fir d’éischt dat onbekannt Feld.
+Rangement : {n} sur {m} ¦ Ofleeën: {n} vun {m}
+{n} rangés dans le Registre de courriers, relance le {d} ¦ {n} am Register vun de Bréiwer ofgeluecht, Erënnerung den {d}
+en main, cote non notée ¦ an der Hand, Cote net notéiert
+demandé le {d} ¦ ugefrot den {d}
+demandé ¦ ugefrot
+acte à fournir ¦ Akt ze liwweren
+(commun, voir {n}) ¦ (gemeinsam, kuck {n})
+CHAÎNE DE FILIATION ¦ ABSTAMMUNGSKETT
+Calcul établi d’après les actes cités, sous réserve de vérification par le notaire. ¦ Rechnung no den uginnten Akten, ënner Viirbehalt vun der Iwwerpréiwung duerch den Notaire.
+Code civil, articles cités pour ce dossier : art. {list}. ¦ Code civil, fir dësen Dossier uginnten Artikelen: art. {list}.
+N. = naissance, M. = mariage, D. = décès. ¦ G. = Gebuert, B. = Bestietnes, D. = Doud.
+Page {n} / {t} ¦ Säit {n} / {t}
+Coche au moins une page. ¦ Kräiz op d’mannst eng Säit un.
+Tableau pour le notaire : PDF ({n} pages, avec chaîne par héritier) ¦ Tabell fir den Notaire: PDF ({n} Säiten, mat der Kett vun all Ierwen)
+Tableau pour le notaire : PDF ({n} pages) ¦ Tabell fir den Notaire: PDF ({n} Säiten)
+sans adresses ¦ ouni Adressen
+📋 Avant de remettre ¦ 📋 Vir der Iwwergab
+ça avertit, ça n’empêche pas ¦ et warnt, et verhënnert näischt
+Ce que contient le PDF ¦ Wat am PDF ass
+Compté par le chronomètre ¦ Vun der Stoppauer gezielt
+Taux horaire pour le relevé (facultatif, pas gardé) ¦ Stonnesaz fir d’Opstellung (fräiwëlleg, net gespäichert)
+€ / h ¦ € / St.
+✎ Modifier la ligne ¦ ✎ Zeil änneren
+Ligne modifiée ¦ Zeil geännert
+Temps × taux horaire ({r} € / h) : {s} ¦ Zäit × Stonnesaz ({r} € / St.): {s}
+Ajouté depuis « ＋ Ajouter un onglet ». ¦ Iwwer „＋ Reiter derbäisetzen“ derbäigesat.
+✓ Onglet « {name} » ajouté ¦ ✓ Reiter „{name}“ derbäigesat
+Onglet « {name} » caché ¦ Reiter „{name}“ verstoppt
+conseillé pour toi ¦ fir dech recommandéiert
+montré par ton usage ¦ duerch däi Gebrauch gewisen
+Conseillés pour toi ¦ Fir dech recommandéiert
+Tout le reste ▾ ¦ Alles anescht ▾
+Qu’est-ce que tu veux avoir sous la main ? ¦ Wat wëlls du bei der Hand hunn?
+Ton usage : {u} ¦ Däi Gebrauch: {u}
+Chercher un onglet ¦ E Reiter sichen
+🔍 Chercher un onglet… (courrier, acte, agenda) ¦ 🔍 E Reiter sichen… (Bréif, Akt, Agenda)
+Conseillés ({n}) ¦ Recommandéiert ({n})
+Déjà dans le menu ({n}) ¦ Schonn am Menü ({n})
+Aucun onglet ne correspond. ¦ Kee Reiter passt.
+Une carte cochée = l’onglet est dans le menu. Cocher l’ajoute à la fin du menu ; décocher le cache (un raccourci est caché, pas effacé). ¦ Eng ugekräizte Kaart = de Reiter ass am Menü. Ukräizen setzt en um Enn vum Menü derbäi; ofwielen verstoppt en (eng Ofkierzung gëtt verstoppt, net geläscht).
+↗ Faire un onglet à moi (Éditeur d’onglets) ¦ ↗ Mäin eegene Reiter maachen (Editeur fir Reiteren)
+MENU ¦ MENÜ
+＋ Ajouter un onglet ¦ ＋ Reiter derbäisetzen
+Ajouter un onglet ¦ Reiter derbäisetzen
+＋ Ajouter un onglet… ¦ ＋ Reiter derbäisetzen…
+Montrer le ＋ au bout du menu ¦ Den ＋ um Enn vum Menü weisen
+Retirer ce raccourci du menu (un onglet de l’app ne se retire pas : il se cache) ¦ Dës Ofkierzung aus dem Menü huelen (e Reiter vun der App gëtt net ewechgeholl: e gëtt verstoppt)
+Onglet « {name} » retiré du menu ¦ Reiter „{name}“ aus dem Menü geholl
+Le ＋ est au bout du menu ¦ Den ＋ ass um Enn vum Menü
+Le ＋ n’est plus au bout du menu ¦ Den ＋ ass net méi um Enn vum Menü
+Recherches : {what} ¦ Recherchen: {what}
+Recherches ¦ Recherchen
+Acte de décès de {name} en main ¦ Doudesakt vum {name} an der Hand
+Acte de décès de {name} pas en main ¦ Doudesakt vum {name} feelt
+demandé, pas encore reçu ¦ ugefrot, nach net kritt
+Arbre de dévolution complet ¦ Ierffollegebam komplett
+Aucune branche à chercher. ¦ Keen Zweig ze sichen.
+Branches encore à chercher : {n} ¦ Zweige nach ze sichen: {n}
+Héritiers dont l’existence n’est pas établie : {n} ¦ Ierwen, där hir Existenz net etabléiert ass: {n}
+Liens prouvés par aucun acte : {n} ¦ Bänn, déi duerch keen Akt beluecht sinn: {n}
+{what} (relie {who} au défunt) ¦ {what} (verbënnt {who} mam Verstuerwenen)
+Chaque lien est prouvé par un acte ¦ All Band ass duerch en Akt beluecht
+Actes demandés, pas encore reçus : {n} ¦ Ugefroten, nach net kritt Akten: {n}
+{what} · demandé le {d} ¦ {what} · ugefrot den {d}
+(courrier n° {n}) ¦ (Bréif Nr. {n})
+Adresses des héritiers vivants : {n} sur {m} ¦ Adresse vun de liewegen Ierwen: {n} vun {m}
+Aucun héritier vivant à joindre ¦ Kee liewegen Ierf ze erreechen
+Contrats signés (ou refus noté) : {n} sur {m} ¦ Kontrakter ënnerschriwwen (oder Refus notéiert): {n} vun {m}
+Aucun contrat à faire signer ¦ Kee Kontrakt ze ënnerschreiwen
+Contrats pas encore signés : {n} ¦ Kontrakter nach net ënnerschriwwen: {n}
+{name} a répondu « oui », pas de date de signature ¦ {name} huet „jo“ geäntwert, keen Datum vun der Ënnerschrëft
+Héritiers introuvables ou silencieux : {n} ¦ Ierwen, déi net ze fanne sinn oder net äntweren: {n}
+Parts : le total fait bien 1 ¦ Deeler: d’Zomm ass wierklech 1
+Les parts ne totalisent pas 1 : à revoir ¦ D’Deeler maachen net 1: ze kontrolléieren
+Échéances en retard : {n} ¦ Iwwerfälleg Delaien: {n}
+Aucune échéance en retard ¦ Keen iwwerfällegen Delai
+Remis au notaire avec {miss} manque(s) et {warn} point(s) à revoir ({what}) ¦ Dem Notaire iwwerginn, feelt: {miss}, ze kontrolléieren: {warn} ({what})
+Madame ¦ Madame
+Monsieur ¦ Här
+Tes photos, actes, lettres de A à Z, rangés en dossiers. ¦ Deng Fotoen, Akten, Bréiwer vun A bis Z, an Ordner gesat.
+Lettres à ouvrir plus tard, recettes, musée de famille. ¦ Bréiwer fir méi spéit opzemaachen, Rezepter, Familljemusée.
+Fiches thématiques : un métier, une guerre, un village. ¦ Theemekaarten: e Beruff, e Krich, en Duerf.
+Tes correspondances ADN et leurs liens. ¦ Deng ADN-Treffer an hir Bänn.
+Les œuvres d’un artiste, albums, expositions. ¦ D’Wierker vun engem Kënschtler, Alben, Ausstellungen.
+Pedigree, portées. (Suivi des animaux : à part.) ¦ Stammbam, Wëerf. (Déierebeobachtung: apart.)
+Baguage, puces, observations, trajets. ¦ Beréngung, Chippen, Beobachtungen, Weeër.
+Dossiers de succession, pour un notaire. ¦ Ierfschaftsdossieren, fir en Notaire.
+Le Registre de courriers : demandes d’actes, relances, réponses. ¦ De Register vun de Bréiwer: Aktufroen, Erënnerungen, Äntwerten.
+Listes → Archives et sources → Registre de courriers ¦ Lëschten → Archiver a Quellen → Register vun de Bréiwer
+Tes actes recopiés, mot à mot. ¦ Deng ofgeschriwwen Akten, Wuert fir Wuert.
+Listes → Archives et sources ¦ Lëschten → Archiver a Quellen
+Visites, rendez-vous, relances, à la semaine. ¦ Visitten, Rendez-vousen, Erënnerungen, Woch fir Woch.
+Listes → Recherche et organisation ¦ Lëschten → Recherche an Organisatioun
+Les choses à faire, avec leur date. ¦ D’Saachen ze maachen, mat hirem Datum.
+Toutes les images, sons, vidéos en tableau. ¦ All Biller, Téin, Videoen an enger Tabell.
+Listes → Médias et documents ¦ Lëschten → Medien an Dokumenter
+Questionnaires pour recueillir les souvenirs. ¦ Questionnairen, fir Erënnerungen ze sammelen.
+Les maisons, pièce par pièce, et qui y a vécu. ¦ D’Haiser, Zëmmer fir Zëmmer, a wien do gewunnt huet.
+Listes → Lieux et maisons ¦ Lëschten → Plazen an Haiser
+Adresses et contacts des cousins vivants. ¦ Adressen a Kontakter vu liewege Koséngen.
+Listes → Personnes et familles ¦ Lëschten → Persounen a Famillen
+Les dépôts, leurs cotes, leurs horaires. ¦ D’Archiven, hir Cotten, hir Ëffnungszäiten.
+Le planificateur : quoi consulter, où, quand. ¦ De Planer: wat kucken, wou, wéini.
+Qui a hérité de quoi d’après les actes anciens. ¦ Wien wat no alen Akte geierft huet.
+Les bons sites pour la personne ouverte. ¦ Déi richteg Websäite fir déi opgemaachte Persoun.
+Recherche → Type de recherche ¦ Sich → Zort vu Sich
+Trouver et fusionner les fiches en double. ¦ Duebel Fichen fannen a fusionéieren.
+Réglages → Fusion de doublons ¦ Astellungen → Fusioun vun Duebelen
+Dates impossibles, liens bizarres. ¦ Onméiglech Datumer, komesch Bänn.
+Réglages → Contrôle de la base ¦ Astellungen → Kontroll vun der Datebank
+Le nom étudié ¦ Den ënnersichten Numm
+Les porteurs d’un nom, ses variantes. ¦ D’Leit mat engem Numm, seng Varianten.
+Graphiques → statistique des noms ¦ Grafiken → Nummestatistik
+L’entreprise ¦ D’Entreprise
+Employeurs, salariés, membres. ¦ Patronen, Salariéen, Memberen.
+Listes → Employeurs ¦ Lëschten → Patronen
+Des parties de l’app, cachées au départ ¦ Deeler vun der App, am Ufank verstoppt
+Elles existent déjà : cocher les montre dans le menu. ¦ Si gëtt et schonn: ukräizen weist se am Menü.
+Un raccourci vers une liste ¦ Eng Ofkierzung op eng Lëscht
+Il devient un « onglet à soi » (Éditeur d’onglets). ¦ Si gëtt en „eegene Reiter“ (Editeur fir Reiteren).
+Un raccourci vers un outil ¦ Eng Ofkierzung op en Tool
+Chaîne par héritier ¦ Kett vun all Ierwen
+✉️ Contactés ¦ ✉️ Kontaktéiert
+📇 Répertoire des vivants ¦ 📇 Verzeechnes vun de Liewegen
+Échéances du jour (usage successoral seulement) ¦ Delaie vum Dag (nëmme Gebrauch fir Ierfschaftsrecherchen)
+Ce dossier est clos : rien ne s’y note. ¦ Dësen Dossier ass zou: do gëtt näischt méi notéiert.
+Donne un nom au modèle. ¦ Gëff der Virlag en Numm.
+Trop de lettres d’un coup (60 au plus). ¦ Ze vill Bréiwer op eemol (héchstens 60).
+Échéances du jour ¦ Delaie vum Dag

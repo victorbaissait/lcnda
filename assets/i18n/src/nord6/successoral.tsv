@@ -743,3 +743,233 @@ Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Tik
 Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Nuoroda atmesta: tik https:// adresas iš Légifrance, Service-public ar EUR-Lex. ¦ Saite noraidīta: tikai https:// adrese no Légifrance, Service-public vai EUR-Lex. ¦ Link lükati tagasi: ainult https://-aadress saitidelt Légifrance, Service-public või EUR-Lex.
 Noté au journal du dossier {n}. ¦ Užrašyta bylos {n} žurnale. ¦ Pierakstīts lietas {n} žurnālā. ¦ Märgitud toimiku {n} logisse.
 Écris d’abord ta question. ¦ Pirmiausia parašyk klausimą. ¦ Vispirms uzraksti jautājumu. ¦ Kirjuta kõigepealt oma küsimus.
+# ⚖️ Outils du successoral (⏱ 🔔 📋 🧾 📊 ✉️) et ＋ Ajouter un onglet (docs/design/onglets-et-successoral-outils.html)
+⏱ Compter le temps passé sur ce dossier ¦ ⏱ Skaičiuoti šiai bylai skirtą laiką ¦ ⏱ Skaitīt šai lietai veltīto laiku ¦ ⏱ Loe sellele toimikule kulunud aega
+{n} min ¦ {n} min ¦ {n} min ¦ {n} min
+⏸️ Pause ¦ ⏸️ Pauzė ¦ ⏸️ Pauze ¦ ⏸️ Paus
+▶️ Reprendre ¦ ▶️ Tęsti ¦ ▶️ Turpināt ¦ ▶️ Jätka
+⏹️ Arrêter et noter ¦ ⏹️ Sustabdyti ir užrašyti ¦ ⏹️ Apturēt un pierakstīt ¦ ⏹️ Peata ja kirjuta üles
+Moins d’une minute : rien à noter. ¦ Mažiau nei minutė: nėra ko užrašyti. ¦ Mazāk par minūti: nav ko pierakstīt. ¦ Vähem kui minut: pole midagi üles kirjutada.
+Noter le temps passé ¦ Užrašyti skirtą laiką ¦ Pierakstīt veltīto laiku ¦ Kirjuta kulunud aeg üles
+Noter {t} ¦ Užrašyti {t} ¦ Pierakstīt {t} ¦ Kirjuta üles {t}
+Proposé d’après les onglets ouverts ; à corriger si besoin. Date : {d}. ¦ Pasiūlyta pagal atidarytas korteles; prireikus pataisyk. Data: {d}. ¦ Ieteikts pēc atvērtajām cilnēm; vajadzības gadījumā izlabo. Datums: {d}. ¦ Pakutud avatud vahekaartide põhjal; paranda vajadusel. Kuupäev: {d}.
+Minuit passé : une ligne par jour. ¦ Po vidurnakčio: viena eilutė per dieną. ¦ Pēc pusnakts: viena rinda dienā. ¦ Pärast keskööd: üks rida päevas.
+Jeter ce temps ¦ Išmesti šį laiką ¦ Atmest šo laiku ¦ Viska see aeg ära
+Jeter ce temps ? ¦ Išmesti šį laiką? ¦ Atmest šo laiku? ¦ Kas viskad selle aja ära?
+Jeter ¦ Išmesti ¦ Atmest ¦ Viska ära
+{t} d’affilée : c’est bien ça ? ¦ {t} be pertraukos: ar teisingai? ¦ {t} bez pārtraukuma: vai pareizi? ¦ {t} järjest: kas on õige?
+Plus de 10 h d’affilée ¦ Daugiau nei 10 h be pertraukos ¦ Vairāk nekā 10 h bez pārtraukuma ¦ Üle 10 h järjest
+Noter quand même ¦ Vis tiek užrašyti ¦ Tomēr pierakstīt ¦ Kirjuta ikkagi üles
+⏱ {t} notées dans le dossier {n} ¦ ⏱ {t} užrašyta byloje {n} ¦ ⏱ {t} pierakstīts lietā {n} ¦ ⏱ {t} kirjutatud toimikusse {n}
+Le chronomètre compte pour {n}. ¦ Chronometras skaičiuoja bylai {n}. ¦ Hronometrs skaita lietai {n}. ¦ Stopper loeb toimikule {n}.
+⏹️ Noter et passer à {n} ¦ ⏹️ Užrašyti ir pereiti prie {n} ¦ ⏹️ Pierakstīt un pāriet uz {n} ¦ ⏹️ Kirjuta üles ja mine toimikule {n}
+Continuer sur {n} ¦ Tęsti su {n} ¦ Turpināt ar {n} ¦ Jätka toimikuga {n}
+Rien touché depuis 10 min : chronomètre en pause à {h}. ¦ 10 min nieko neliesta: chronometras sustabdytas {h}. ¦ 10 min nekas nav aiztikts: hronometrs apturēts {h}. ¦ 10 min pole midagi puudutatud: stopper peatatud kell {h}.
+Compter aussi ces 10 min ¦ Įskaičiuoti ir šias 10 min ¦ Ieskaitīt arī šīs 10 min ¦ Arvesta ka need 10 min
+⏱ {n} : {t} comptées avant la fermeture. ¦ ⏱ {n}: {t} suskaičiuota prieš uždarant. ¦ ⏱ {n}: {t} saskaitīts pirms aizvēršanas. ¦ ⏱ {n}: {t} loetud enne sulgemist.
+Noter ¦ Užrašyti ¦ Pierakstīt ¦ Kirjuta üles
+Échéances du jour : {n} à faire (retards et aujourd’hui) ¦ Šios dienos terminai: {n} atlikti (vėluojantys ir šiandienos) ¦ Dienas termiņi: {n} jāizdara (nokavētie un šodienas) ¦ Päeva tähtajad: {n} teha (hilinenud ja tänased)
+🔔 Échéances du jour ¦ 🔔 Šios dienos terminai ¦ 🔔 Dienas termiņi ¦ 🔔 Päeva tähtajad
+⏰ Rappel ¦ ⏰ Priminimas ¦ ⏰ Atgādinājums ¦ ⏰ Meeldetuletus
+prévu le {d} ¦ numatyta {d} ¦ paredzēts {d} ¦ kavandatud {d}
+✓ Fait ¦ ✓ Atlikta ¦ ✓ Izdarīts ¦ ✓ Tehtud
+⏭ Demain (ou lundi) ¦ ⏭ Rytoj (arba pirmadienį) ¦ ⏭ Rīt (vai pirmdien) ¦ ⏭ Homme (või esmaspäeval)
+↗ Ouvrir le dossier ¦ ↗ Atidaryti bylą ¦ ↗ Atvērt lietu ¦ ↗ Ava toimik
+voir ▾ ¦ rodyti ▾ ¦ rādīt ▾ ¦ näita ▾
+Rien pour aujourd’hui. ¦ Šiandien nieko. ¦ Šodien nekā. ¦ Täna pole midagi.
+Prochaine : {d} ({n}) ¦ Kitas: {d} ({n}) ¦ Nākamais: {d} ({n}) ¦ Järgmine: {d} ({n})
+🔔 À faire · {d} ¦ 🔔 Atlikti · {d} ¦ 🔔 Jāizdara · {d} ¦ 🔔 Teha · {d}
+Cette généalogie ¦ Ši genealogija ¦ Šī ģenealoģija ¦ See sugupuu
+⚖️ {name} : impossible de lire les échéances ¦ ⚖️ {name}: terminų nepavyksta perskaityti ¦ ⚖️ {name}: termiņus nevar nolasīt ¦ ⚖️ {name}: tähtaegu ei saa lugeda
+✓ fait · ⏭ demain / lundi · ↗ ouvre le dossier (change de généalogie si besoin) ¦ ✓ atlikta · ⏭ rytoj / pirmadienį · ↗ atidaro bylą (prireikus pakeičia genealogiją) ¦ ✓ izdarīts · ⏭ rīt / pirmdien · ↗ atver lietu (vajadzības gadījumā pārslēdz ģenealoģiju) ¦ ✓ tehtud · ⏭ homme / esmaspäev · ↗ avab toimiku (vajadusel vahetab sugupuud)
+Ajouter mes rappels ¦ Pridėti mano priminimus ¦ Pievienot manus atgādinājumus ¦ Lisa minu meeldetuletused
+Bulle de l’ordinateur à l’ouverture de l’app ¦ Kompiuterio pranešimas atidarius programėlę ¦ Datora paziņojums, atverot lietotni ¦ Arvuti teade rakenduse avamisel
+🗓 Ma semaine ¦ 🗓 Mano savaitė ¦ 🗓 Mana nedēļa ¦ 🗓 Minu nädal
+Reporté au {d} ¦ Atidėta iki {d} ¦ Atlikts uz {d} ¦ Edasi lükatud kuni {d}
+✓ Fait : {l} ¦ ✓ Atlikta: {l} ¦ ✓ Izdarīts: {l} ¦ ✓ Tehtud: {l}
+Reporté au {d} : {l} ¦ Atidėta iki {d}: {l} ¦ Atlikts uz {d}: {l} ¦ Edasi lükatud kuni {d}: {l}
+Points prêts : {n} sur {m} ¦ Paruošti punktai: {n} iš {m} ¦ Gatavie punkti: {n} no {m} ¦ Valmis punktid: {n}/{m}
+À revoir : {n} ¦ Peržiūrėti: {n} ¦ Jāpārskata: {n} ¦ Üle vaadata: {n}
+Manque : {n} ¦ Trūksta: {n} ¦ Trūkst: {n} ¦ Puudub: {n}
+📋 AVANT DE REMETTRE ¦ 📋 PRIEŠ PERDUODANT ¦ 📋 PIRMS NODOŠANAS ¦ 📋 ENNE ÜLEANDMIST
+Avant de remettre · {n} ¦ Prieš perduodant · {n} ¦ Pirms nodošanas · {n} ¦ Enne üleandmist · {n}
+Passer à « Remis au notaire » ¦ Perjungti į „Perduota notarui“ ¦ Pārslēgt uz “Nodots notāram” ¦ Lülita olekusse „Notarile üle antud”
+Ça avertit, ça n’empêche pas : tu peux remettre quand même, ce sera noté au journal. ¦ Įspėja, nedraudžia: vis tiek gali perduoti, tai bus užrašyta žurnale. ¦ Brīdina, neliedz: vari tomēr nodot, tas tiks pierakstīts žurnālā. ¦ See hoiatab, ei takista: võid ikkagi üle anda, see märgitakse logisse.
+🖨 Imprimer quand même ¦ 🖨 Vis tiek spausdinti ¦ 🖨 Tomēr drukāt ¦ 🖨 Prindi ikkagi
+Montant ¦ Suma ¦ Summa ¦ Summa
+non signé ¦ nepasirašyta ¦ nav parakstīts ¦ allkirjastamata
+Commission ¦ Komisinis ¦ Komisija ¦ Vahendustasu
+Reste à l’héritier ¦ Lieka įpėdiniui ¦ Paliek mantiniekam ¦ Jääb pärijale
+Arrondi au centime : chaque part est arrondie au centime inférieur, puis les centimes qui restent vont aux parts qui en ont perdu le plus. Le total tombe juste. ¦ Suapvalinta iki cento: kiekviena dalis suapvalinama žemyn iki cento, likę centai atitenka dalims, kurios prarado daugiausia. Suma sutampa tiksliai. ¦ Noapaļots līdz centam: katra daļa tiek noapaļota uz leju līdz centam, atlikušie centi tiek daļām, kas zaudēja visvairāk. Kopsumma sanāk precīza. ¦ Ümardatud sendini: iga osa ümardatakse sendini allapoole, ülejäänud sendid lähevad osadele, mis kaotasid kõige rohkem. Kogusumma tuleb täpne.
+Tape l’actif net en euros pour voir la part de chacun. ¦ Įrašyk grynąjį turtą eurais, kad pamatytum kiekvieno dalį. ¦ Ieraksti tīros aktīvus eiro, lai redzētu katra daļu. ¦ Sisesta netovara eurodes, et näha igaühe osa.
+Tape un montant en euros (ex. 187 450,00). ¦ Įrašyk sumą eurais (pvz., 187 450,00). ¦ Ieraksti summu eiro (piem., 187 450,00). ¦ Sisesta summa eurodes (nt 187 450,00).
+Plus d’un milliard d’euros : c’est bien ça ? ¦ Daugiau nei milijardas eurų: ar teisingai? ¦ Vairāk nekā miljards eiro: vai pareizi? ¦ Üle miljardi euro: kas on õige?
+Oui, calculer ¦ Taip, skaičiuoti ¦ Jā, aprēķināt ¦ Jah, arvuta
+Si le conjoint choisit l’usufruit de la totalité : pas de montant en euros (sa valeur dépend de son âge, c’est un barème fiscal) ; demande la valeur au notaire, pour lui et pour les nus-propriétaires. ¦ Jei sutuoktinis pasirenka viso palikimo uzufruktą: jokios sumos eurais (jo vertė priklauso nuo amžiaus, tai mokesčių lentelė); vertės paklausk notaro, jam ir nuosavybės be uzufrukto savininkams. ¦ Ja laulātais izvēlas visa mantojuma lietojuma tiesības: nav summas eiro (vērtība atkarīga no vecuma, tā ir nodokļu tabula); vaicā notāram vērtību gan viņam, gan kailajiem īpašniekiem. ¦ Kui abikaasa valib kogu pärandvara kasutusvalduse: summat eurodes pole (väärtus sõltub vanusest, see on maksutabel); küsi väärtust notarilt, nii abikaasale kui ka paljale omanikule.
+Autre hypothèse, {h} ¦ Kita hipotezė, {h} ¦ Cita hipotēze, {h} ¦ Muu hüpotees, {h}
+📊 Part de chacun en euros ¦ 📊 Kiekvieno dalis eurais ¦ 📊 Katra daļa eiro ¦ 📊 Igaühe osa eurodes
+Fractions ¦ Trupmenos ¦ Daļskaitļi ¦ Murrud
+💶 En euros ¦ 💶 Eurais ¦ 💶 Eiro ¦ 💶 Eurodes
+⤓ Copier le tableau ¦ ⤓ Kopijuoti lentelę ¦ ⤓ Kopēt tabulu ¦ ⤓ Kopeeri tabel
+Actif net à partager (tapé par toi) ¦ Dalijamas grynasis turtas (įrašytas tavęs) ¦ Sadalāmie tīrie aktīvi (ierakstīti tevis) ¦ Jagatav netovara (sinu sisestatud)
+D’après le notaire. Pas gardé : effacé quand tu fermes le dossier. ¦ Pagal notarą. Nesaugoma: ištrinama, kai uždarai bylą. ¦ Pēc notāra. Netiek saglabāts: dzēsts, kad aizver lietu. ¦ Notari järgi. Ei salvestata: kustutatakse, kui toimiku sulged.
+Hors droits de succession et frais : l’app ne calcule pas l’impôt. Ces montants sont un ordre d’idée, à faire vérifier par le notaire. ¦ Be paveldėjimo mokesčio ir išlaidų: programėlė mokesčio neskaičiuoja. Šios sumos yra apytikslės, jas turi patikrinti notaras. ¦ Bez mantojuma nodokļa un izdevumiem: lietotne nodokli nerēķina. Šīs summas ir aptuvenas, tās jāpārbauda notāram. ¦ Ilma pärandimaksu ja kuludeta: rakendus maksu ei arvuta. Need summad on ligikaudsed, notar peab need üle kontrollima.
+Commission = le % écrit dans « ＋ Honoraires d’un contrat » × le montant, arrondie au centime le plus proche, sans TVA ajoutée ; reste = montant − commission. ¦ Komisinis = procentas, įrašytas „＋ Sutarties atlygis“ × suma, suapvalinta iki artimiausio cento, be pridėto PVM; lieka = suma − komisinis. ¦ Komisija = “＋ Līguma atlīdzība” ierakstītais % × summa, noapaļota līdz tuvākajam centam, bez pievienota PVN; paliek = summa − komisija. ¦ Vahendustasu = „＋ Lepingu tasu” alla kirjutatud % × summa, ümardatud lähima sendini, ilma lisatud käibemaksuta; jääb = summa − vahendustasu.
+Tableau copié. ¦ Lentelė nukopijuota. ¦ Tabula nokopēta. ¦ Tabel kopeeritud.
+Parts en euros — {n} ¦ Dalys eurais — {n} ¦ Daļas eiro — {n} ¦ Osad eurodes — {n}
+Parts en euros imprimées ¦ Dalys eurais išspausdintos ¦ Daļas eiro izdrukātas ¦ Osad eurodes prinditud
+✉️ Courrier à plusieurs… ¦ ✉️ Laiškas keliems… ¦ ✉️ Vēstule vairākiem… ¦ ✉️ Kiri mitmele…
+décoché ¦ nepažymėta ¦ atzīme noņemta ¦ märge eemaldatud
+déjà écrit le {d} ({k}) ¦ jau rašyta {d} ({k}) ¦ jau rakstīts {d} ({k}) ¦ juba kirjutatud {d} ({k})
+✉️ Courriers en série · {n} ¦ ✉️ Serijiniai laiškai · {n} ¦ ✉️ Sērijveida vēstules · {n} ¦ ✉️ Seeriakirjad · {n}
+Les héritiers dont l’existence n’est pas établie ne sont pas dans la liste. Les décochés peuvent être cochés à la main (une lettre sans adresse est alors imprimée sans bloc adresse). ¦ Įpėdinių, kurių egzistavimas nenustatytas, sąraše nėra. Nepažymėtus galima pažymėti ranka (laiškas be adreso tada spausdinamas be adreso bloko). ¦ Mantinieku, kuru esība nav noskaidrota, sarakstā nav. Neatzīmētos var atzīmēt ar roku (vēstule bez adreses tad tiek drukāta bez adreses bloka). ¦ Pärijaid, kelle olemasolu pole kindlaks tehtud, loendis ei ole. Märkimata saab käsitsi märkida (aadressita kiri prinditakse siis aadressiplokita).
+La lettre · clic sur un champ pour l’insérer ¦ Laiškas · spustelėk lauką, kad jį įterptum ¦ Vēstule · noklikšķini uz lauka, lai to ievietotu ¦ Kiri · klõpsa väljal, et see lisada
+{envoyé_le} : la date du courrier précédent à cet héritier ; {date} : la date d’envoi de celui-ci. ¦ {envoyé_le}: ankstesnio laiško šiam įpėdiniui data; {date}: šio laiško išsiuntimo data. ¦ {envoyé_le}: iepriekšējās vēstules šim mantiniekam datums; {date}: šīs nosūtīšanas datums. ¦ {envoyé_le}: sellele pärijale saadetud eelmise kirja kuupäev; {date}: selle kirja saatmise kuupäev.
+Lettre précédente ¦ Ankstesnis laiškas ¦ Iepriekšējā vēstule ¦ Eelmine kiri
+Lettre suivante ¦ Kitas laiškas ¦ Nākamā vēstule ¦ Järgmine kiri
+✎ Retoucher cette lettre ¦ ✎ Pataisyti šį laišką ¦ ✎ Labot šo vēstuli ¦ ✎ Paranda seda kirja
+↺ Revenir au modèle ¦ ↺ Grįžti prie šablono ¦ ↺ Atpakaļ pie veidnes ¦ ↺ Tagasi malli juurde
+＋ Enregistrer comme modèle ¦ ＋ Išsaugoti kaip šabloną ¦ ＋ Saglabāt kā veidni ¦ ＋ Salvesta mallina
+Lettres prêtes : {n} sur {m} ¦ Paruošti laiškai: {n} iš {m} ¦ Gatavās vēstules: {n} no {m} ¦ Valmis kirjad: {n}/{m}
+Champ inconnu : {f} (ligne {l}). Corrige-le avant de ranger les lettres. ¦ Nežinomas laukas: {f} (eilutė {l}). Pataisyk jį prieš įregistruodamas laiškus. ¦ Nezināms lauks: {f} ({l}. rinda). Izlabo to, pirms reģistrē vēstules. ¦ Tundmatu väli: {f} (rida {l}). Paranda see enne kirjade registreerimist.
+🖨 Imprimer les {n} ¦ 🖨 Spausdinti {n} ¦ 🖨 Drukāt {n} ¦ 🖨 Prindi {n}
+Lettre {i} / {n} · {name} ¦ Laiškas {i} / {n} · {name} ¦ Vēstule {i} / {n} · {name} ¦ Kiri {i} / {n} · {name}
+Champ vide : la ligne s’écrit sans le mot ¦ Tuščias laukas: eilutė parašoma be to žodžio ¦ Tukšs lauks: rinda tiek rakstīta bez vārda ¦ Tühi väli: rida kirjutatakse ilma selle sõnata
+✎ modifiée à la main ¦ ✎ pakeista ranka ¦ ✎ mainīta ar roku ¦ ✎ käsitsi muudetud
+Ton nom et ton adresse : Listes → Registre de courriers → ✉️ Lettres (expéditeur). ¦ Tavo vardas ir adresas: Sąrašai → Korespondencijos registras → ✉️ Laiškai (siuntėjas). ¦ Tavs vārds un adrese: Saraksti → Vēstuļu reģistrs → ✉️ Vēstules (sūtītājs). ¦ Sinu nimi ja aadress: Loendid → Kirjavahetuse register → ✉️ Kirjad (saatja).
+Mes modèles (aucun pour l’instant) ¦ Mano šablonai (kol kas nėra) ¦ Manas veidnes (pagaidām neviena) ¦ Minu mallid (veel pole)
+Remplacer ta lettre par ce modèle ? ¦ Pakeisti tavo laišką šiuo šablonu? ¦ Aizstāt tavu vēstuli ar šo veidni? ¦ Kas asendad oma kirja selle malliga?
+Changer de modèle ¦ Keisti šabloną ¦ Mainīt veidni ¦ Vaheta malli
+Oublier les retouches de la lettre à {name} ? ¦ Pamiršti laiško, skirto {name}, pataisas? ¦ Aizmirst vēstules, kas adresēta {name}, labojumus? ¦ Kas unustad kirja ({name}) parandused?
+Revenir au modèle ¦ Grįžti prie šablono ¦ Atpakaļ pie veidnes ¦ Tagasi malli juurde
+Modèle « {name} » enregistré (Mes modèles, communs à tous les dossiers de cette généalogie) ¦ Šablonas „{name}“ išsaugotas (Mano šablonai, bendri visoms šios genealogijos byloms) ¦ Veidne “{name}” saglabāta (Manas veidnes, kopīgas visām šīs ģenealoģijas lietām) ¦ Mall „{name}” salvestatud (Minu mallid, ühised selle sugupuu kõigile toimikutele)
+Corrige d’abord le champ inconnu. ¦ Pirma pataisyk nežinomą lauką. ¦ Vispirms izlabo nezināmo lauku. ¦ Paranda kõigepealt tundmatu väli.
+Rangement : {n} sur {m} ¦ Registravimas: {n} iš {m} ¦ Reģistrēšana: {n} no {m} ¦ Registreerimine: {n}/{m}
+{n} rangés dans le Registre de courriers, relance le {d} ¦ {n} įregistruota Korespondencijos registre, priminimas {d} ¦ {n} reģistrēts Vēstuļu reģistrā, atgādinājums {d} ¦ {n} registreeritud Kirjavahetuse registrisse, meeldetuletus {d}
+en main, cote non notée ¦ turima, šifras neužrašytas ¦ rokā, šifrs nav pierakstīts ¦ käes, viide üles kirjutamata
+demandé le {d} ¦ paprašyta {d} ¦ pieprasīts {d} ¦ taotletud {d}
+demandé ¦ paprašyta ¦ pieprasīts ¦ taotletud
+acte à fournir ¦ dokumentą reikia pateikti ¦ dokuments jāiesniedz ¦ dokument tuleb esitada
+(commun, voir {n}) ¦ (bendras, žr. {n}) ¦ (kopīgs, sk. {n}) ¦ (ühine, vt {n})
+CHAÎNE DE FILIATION ¦ KILMĖS GRANDINĖ ¦ IZCELSMES ĶĒDE ¦ PÕLVNEMISAHEL
+Calcul établi d’après les actes cités, sous réserve de vérification par le notaire. ¦ Skaičiavimas pagal nurodytus dokumentus, su sąlyga, kad patikrins notaras. ¦ Aprēķins pēc minētajiem dokumentiem, ar notāra pārbaudes atrunu. ¦ Arvutus viidatud dokumentide põhjal, notari kontrolli reservatsiooniga.
+Code civil, articles cités pour ce dossier : art. {list}. ¦ Civilinis kodeksas, šiai bylai nurodyti straipsniai: art. {list}. ¦ Civillikums, šai lietai minētie panti: art. {list}. ¦ Tsiviilseadustik, selle toimiku jaoks viidatud paragrahvid: art. {list}.
+N. = naissance, M. = mariage, D. = décès. ¦ Gim. = gimimas, Sant. = santuoka, Mir. = mirtis. ¦ Dz. = dzimšana, Laul. = laulība, M. = miršana. ¦ Sünd. = sünd, Ab. = abiellumine, Surm = surm.
+Page {n} / {t} ¦ Puslapis {n} / {t} ¦ Lappuse {n} / {t} ¦ Lehekülg {n} / {t}
+Coche au moins une page. ¦ Pažymėk bent vieną puslapį. ¦ Atzīmē vismaz vienu lappusi. ¦ Märgi vähemalt üks lehekülg.
+Tableau pour le notaire : PDF ({n} pages, avec chaîne par héritier) ¦ Lentelė notarui: PDF ({n} psl., su kiekvieno įpėdinio grandine) ¦ Tabula notāram: PDF ({n} lpp., ar katra mantinieka ķēdi) ¦ Tabel notarile: PDF ({n} lk, iga pärija ahelaga)
+Tableau pour le notaire : PDF ({n} pages) ¦ Lentelė notarui: PDF ({n} psl.) ¦ Tabula notāram: PDF ({n} lpp.) ¦ Tabel notarile: PDF ({n} lk)
+sans adresses ¦ be adresų ¦ bez adresēm ¦ aadressideta
+📋 Avant de remettre ¦ 📋 Prieš perduodant ¦ 📋 Pirms nodošanas ¦ 📋 Enne üleandmist
+ça avertit, ça n’empêche pas ¦ įspėja, nedraudžia ¦ brīdina, neliedz ¦ see hoiatab, ei takista
+Ce que contient le PDF ¦ Ką turi PDF ¦ Ko satur PDF ¦ Mida PDF sisaldab
+Compté par le chronomètre ¦ Suskaičiavo chronometras ¦ Saskaitīja hronometrs ¦ Stopperi loetud
+Taux horaire pour le relevé (facultatif, pas gardé) ¦ Valandinis įkainis ataskaitai (neprivaloma, nesaugoma) ¦ Stundas likme pārskatam (nav obligāti, netiek saglabāta) ¦ Tunnihind väljavõtte jaoks (valikuline, ei salvestata)
+€ / h ¦ € / h ¦ € / h ¦ € / h
+✎ Modifier la ligne ¦ ✎ Keisti eilutę ¦ ✎ Mainīt rindu ¦ ✎ Muuda rida
+Ligne modifiée ¦ Eilutė pakeista ¦ Rinda mainīta ¦ Rida muudetud
+Temps × taux horaire ({r} € / h) : {s} ¦ Laikas × valandinis įkainis ({r} € / h): {s} ¦ Laiks × stundas likme ({r} € / h): {s} ¦ Aeg × tunnihind ({r} € / h): {s}
+Ajouté depuis « ＋ Ajouter un onglet ». ¦ Pridėta per „＋ Pridėti kortelę“. ¦ Pievienots no “＋ Pievienot cilni”. ¦ Lisatud kohast „＋ Lisa vahekaart”.
+✓ Onglet « {name} » ajouté ¦ ✓ Kortelė „{name}“ pridėta ¦ ✓ Cilne “{name}” pievienota ¦ ✓ Vahekaart „{name}” lisatud
+Onglet « {name} » caché ¦ Kortelė „{name}“ paslėpta ¦ Cilne “{name}” paslēpta ¦ Vahekaart „{name}” peidetud
+conseillé pour toi ¦ rekomenduojama tau ¦ ieteikta tev ¦ soovitatud sulle
+montré par ton usage ¦ rodoma dėl tavo naudojimo ¦ parādīta tava lietojuma dēļ ¦ näidatud sinu kasutuse järgi
+Conseillés pour toi ¦ Rekomenduojama tau ¦ Ieteiktas tev ¦ Soovitatud sulle
+Tout le reste ▾ ¦ Visa kita ▾ ¦ Viss pārējais ▾ ¦ Kõik muu ▾
+Qu’est-ce que tu veux avoir sous la main ? ¦ Ką nori turėti po ranka? ¦ Ko vēlies turēt pa rokai? ¦ Mida tahad käepärast hoida?
+Ton usage : {u} ¦ Tavo naudojimas: {u} ¦ Tavs lietojums: {u} ¦ Sinu kasutus: {u}
+Chercher un onglet ¦ Ieškoti kortelės ¦ Meklēt cilni ¦ Otsi vahekaarti
+🔍 Chercher un onglet… (courrier, acte, agenda) ¦ 🔍 Ieškoti kortelės… (laiškas, dokumentas, kalendorius) ¦ 🔍 Meklēt cilni… (vēstule, dokuments, kalendārs) ¦ 🔍 Otsi vahekaarti… (kiri, dokument, kalender)
+Conseillés ({n}) ¦ Rekomenduojamos ({n}) ¦ Ieteiktās ({n}) ¦ Soovitatud ({n})
+Déjà dans le menu ({n}) ¦ Jau meniu ({n}) ¦ Jau izvēlnē ({n}) ¦ Juba menüüs ({n})
+Aucun onglet ne correspond. ¦ Jokia kortelė neatitinka. ¦ Neviena cilne neatbilst. ¦ Ükski vahekaart ei sobi.
+Une carte cochée = l’onglet est dans le menu. Cocher l’ajoute à la fin du menu ; décocher le cache (un raccourci est caché, pas effacé). ¦ Pažymėta kortelė = ji yra meniu. Pažymėjus pridedama meniu gale; nuėmus žymę paslepiama (nuoroda paslepiama, ne ištrinama). ¦ Atzīmēta kartīte = cilne ir izvēlnē. Atzīmēšana to pievieno izvēlnes beigās; atzīmes noņemšana to paslēpj (saīsne tiek paslēpta, nevis dzēsta). ¦ Märgitud kaart = vahekaart on menüüs. Märkimine lisab selle menüü lõppu; märke eemaldamine peidab selle (otsetee peidetakse, mitte ei kustutata).
+↗ Faire un onglet à moi (Éditeur d’onglets) ¦ ↗ Sukurti savo kortelę (Kortelių redaktorius) ¦ ↗ Izveidot savu cilni (Cilņu redaktors) ¦ ↗ Tee oma vahekaart (Vahekaartide redaktor)
+MENU ¦ MENIU ¦ IZVĒLNE ¦ MENÜÜ
+＋ Ajouter un onglet ¦ ＋ Pridėti kortelę ¦ ＋ Pievienot cilni ¦ ＋ Lisa vahekaart
+Ajouter un onglet ¦ Pridėti kortelę ¦ Pievienot cilni ¦ Lisa vahekaart
+＋ Ajouter un onglet… ¦ ＋ Pridėti kortelę… ¦ ＋ Pievienot cilni… ¦ ＋ Lisa vahekaart…
+Montrer le ＋ au bout du menu ¦ Rodyti ＋ meniu gale ¦ Rādīt ＋ izvēlnes beigās ¦ Näita ＋ menüü lõpus
+Retirer ce raccourci du menu (un onglet de l’app ne se retire pas : il se cache) ¦ Pašalinti šią nuorodą iš meniu (programėlės kortelė nepašalinama: ji paslepiama) ¦ Noņemt šo saīsni no izvēlnes (lietotnes cilne netiek noņemta: tā tiek paslēpta) ¦ Eemalda see otsetee menüüst (rakenduse vahekaarti ei eemaldata: see peidetakse)
+Onglet « {name} » retiré du menu ¦ Kortelė „{name}“ pašalinta iš meniu ¦ Cilne “{name}” noņemta no izvēlnes ¦ Vahekaart „{name}” eemaldatud menüüst
+Le ＋ est au bout du menu ¦ ＋ yra meniu gale ¦ ＋ ir izvēlnes beigās ¦ ＋ on menüü lõpus
+Le ＋ n’est plus au bout du menu ¦ ＋ nebėra meniu gale ¦ ＋ vairs nav izvēlnes beigās ¦ ＋ pole enam menüü lõpus
+Recherches : {what} ¦ Paieškos: {what} ¦ Meklējumi: {what} ¦ Uuringud: {what}
+Recherches ¦ Paieškos ¦ Meklējumi ¦ Uuringud
+Acte de décès de {name} en main ¦ {name} mirties liudijimas turimas ¦ {name} miršanas apliecība ir rokā ¦ Isiku {name} surmatunnistus olemas
+Acte de décès de {name} pas en main ¦ {name} mirties liudijimo trūksta ¦ {name} miršanas apliecības trūkst ¦ Isiku {name} surmatunnistus puudub
+demandé, pas encore reçu ¦ paprašyta, dar negauta ¦ pieprasīts, vēl nav saņemts ¦ taotletud, veel saamata
+Arbre de dévolution complet ¦ Paveldėjimo medis išsamus ¦ Mantošanas koks pilnīgs ¦ Pärimispuu täielik
+Aucune branche à chercher. ¦ Nėra šakos, kurios reikėtų ieškoti. ¦ Nav meklējamu zaru. ¦ Pole otsitavat haru.
+Branches encore à chercher : {n} ¦ Šakos, kurių dar reikia ieškoti: {n} ¦ Zari, kas vēl jāmeklē: {n} ¦ Veel otsitavad harud: {n}
+Héritiers dont l’existence n’est pas établie : {n} ¦ Įpėdiniai, kurių egzistavimas nenustatytas: {n} ¦ Mantinieki, kuru esība nav noskaidrota: {n} ¦ Pärijad, kelle olemasolu pole kindlaks tehtud: {n}
+Liens prouvés par aucun acte : {n} ¦ Ryšiai, neįrodyti jokiu dokumentu: {n} ¦ Saites, ko nepierāda neviens dokuments: {n} ¦ Sidemed, mida ükski dokument ei tõenda: {n}
+{what} (relie {who} au défunt) ¦ {what} (sieja {who} su mirusiuoju) ¦ {what} (saista {who} ar mirušo) ¦ {what} (seob {who} lahkunuga)
+Chaque lien est prouvé par un acte ¦ Kiekvienas ryšys įrodytas dokumentu ¦ Katru saiti pierāda dokuments ¦ Iga side on dokumendiga tõendatud
+Actes demandés, pas encore reçus : {n} ¦ Paprašyti, dar negauti dokumentai: {n} ¦ Pieprasīti, vēl nesaņemti dokumenti: {n} ¦ Taotletud, veel saamata dokumendid: {n}
+{what} · demandé le {d} ¦ {what} · paprašyta {d} ¦ {what} · pieprasīts {d} ¦ {what} · taotletud {d}
+(courrier n° {n}) ¦ (laiškas Nr. {n}) ¦ (vēstule Nr. {n}) ¦ (kiri nr {n})
+Adresses des héritiers vivants : {n} sur {m} ¦ Gyvų įpėdinių adresai: {n} iš {m} ¦ Dzīvo mantinieku adreses: {n} no {m} ¦ Elus pärijate aadressid: {n}/{m}
+Aucun héritier vivant à joindre ¦ Nėra gyvo įpėdinio, su kuriuo susisiekti ¦ Nav dzīva mantinieka, ar ko sazināties ¦ Pole elus pärijat, kellega ühendust võtta
+Contrats signés (ou refus noté) : {n} sur {m} ¦ Pasirašytos sutartys (arba užrašytas atsisakymas): {n} iš {m} ¦ Parakstīti līgumi (vai pierakstīts atteikums): {n} no {m} ¦ Allkirjastatud lepingud (või märgitud keeldumine): {n}/{m}
+Aucun contrat à faire signer ¦ Nėra sutarties pasirašyti ¦ Nav līguma, ko parakstīt ¦ Pole lepingut allkirjastamiseks
+Contrats pas encore signés : {n} ¦ Dar nepasirašytos sutartys: {n} ¦ Vēl neparakstīti līgumi: {n} ¦ Veel allkirjastamata lepingud: {n}
+{name} a répondu « oui », pas de date de signature ¦ {name} atsakė „taip“, be pasirašymo datos ¦ {name} atbildēja “jā”, bez paraksta datuma ¦ {name} vastas „jah”, allkirjastamise kuupäev puudub
+Héritiers introuvables ou silencieux : {n} ¦ Nerandami arba neatsakantys įpėdiniai: {n} ¦ Neatrodami vai neatbildoši mantinieki: {n} ¦ Leidmata või mittevastavad pärijad: {n}
+Parts : le total fait bien 1 ¦ Dalys: suma tikrai lygi 1 ¦ Daļas: kopsumma tiešām ir 1 ¦ Osad: kogusumma on tõesti 1
+Les parts ne totalisent pas 1 : à revoir ¦ Dalys nesudaro 1: peržiūrėti ¦ Daļas nedod 1: jāpārskata ¦ Osad ei anna kokku 1: üle vaadata
+Échéances en retard : {n} ¦ Vėluojantys terminai: {n} ¦ Nokavēti termiņi: {n} ¦ Hilinenud tähtajad: {n}
+Aucune échéance en retard ¦ Nėra vėluojančių terminų ¦ Nav nokavētu termiņu ¦ Hilinenud tähtaegu pole
+Remis au notaire avec {miss} manque(s) et {warn} point(s) à revoir ({what}) ¦ Perduota notarui, trūksta: {miss}, peržiūrėti: {warn} ({what}) ¦ Nodots notāram, trūkst: {miss}, jāpārskata: {warn} ({what}) ¦ Notarile üle antud, puudub: {miss}, üle vaadata: {warn} ({what})
+Madame ¦ Ponia ¦ Kundze ¦ Proua
+Monsieur ¦ Pone ¦ Kungs ¦ Härra
+Tes photos, actes, lettres de A à Z, rangés en dossiers. ¦ Tavo nuotraukos, dokumentai, laiškai nuo A iki Ž, sudėti į aplankus. ¦ Tavas fotogrāfijas, dokumenti, vēstules no A līdz Ž, sakārtoti mapēs. ¦ Sinu fotod, dokumendid, kirjad A-st Ö-ni, kaustadesse sorditud.
+Lettres à ouvrir plus tard, recettes, musée de famille. ¦ Vėliau atidaromi laiškai, receptai, šeimos muziejus. ¦ Vēstules atvēršanai vēlāk, receptes, ģimenes muzejs. ¦ Hiljem avatavad kirjad, retseptid, perekonna muuseum.
+Fiches thématiques : un métier, une guerre, un village. ¦ Teminės kortelės: amatas, karas, kaimas. ¦ Tematiskās kartītes: amats, karš, ciems. ¦ Teemakaardid: amet, sõda, küla.
+Tes correspondances ADN et leurs liens. ¦ Tavo DNR atitikmenys ir jų ryšiai. ¦ Tavas DNS sakritības un to saites. ¦ Sinu DNA-vasted ja nende sidemed.
+Les œuvres d’un artiste, albums, expositions. ¦ Menininko kūriniai, albumai, parodos. ¦ Mākslinieka darbi, albumi, izstādes. ¦ Kunstniku teosed, albumid, näitused.
+Pedigree, portées. (Suivi des animaux : à part.) ¦ Kilmės knyga, vados. (Gyvūnų stebėjimas: atskirai.) ¦ Ciltsraksti, metieni. (Dzīvnieku uzraudzība: atsevišķi.) ¦ Põlvnemisraamat, pesakonnad. (Loomade jälgimine: eraldi.)
+Baguage, puces, observations, trajets. ¦ Žiedavimas, lustai, stebėjimai, maršrutai. ¦ Gredzenošana, čipi, novērojumi, maršruti. ¦ Rõngastamine, kiibid, vaatlused, teekonnad.
+Dossiers de succession, pour un notaire. ¦ Paveldėjimo bylos, notarui. ¦ Mantojuma lietas notāram. ¦ Pärimistoimikud, notarile.
+Le Registre de courriers : demandes d’actes, relances, réponses. ¦ Korespondencijos registras: dokumentų prašymai, priminimai, atsakymai. ¦ Vēstuļu reģistrs: dokumentu pieprasījumi, atgādinājumi, atbildes. ¦ Kirjavahetuse register: dokumenditaotlused, meeldetuletused, vastused.
+Listes → Archives et sources → Registre de courriers ¦ Sąrašai → Archyvai ir šaltiniai → Korespondencijos registras ¦ Saraksti → Arhīvi un avoti → Vēstuļu reģistrs ¦ Loendid → Arhiivid ja allikad → Kirjavahetuse register
+Tes actes recopiés, mot à mot. ¦ Tavo nurašyti dokumentai, žodis po žodžio. ¦ Tavi pārrakstītie dokumenti, vārds pa vārdam. ¦ Sinu ümberkirjutatud dokumendid, sõna-sõnalt.
+Listes → Archives et sources ¦ Sąrašai → Archyvai ir šaltiniai ¦ Saraksti → Arhīvi un avoti ¦ Loendid → Arhiivid ja allikad
+Visites, rendez-vous, relances, à la semaine. ¦ Apsilankymai, susitikimai, priminimai, savaitėmis. ¦ Apmeklējumi, tikšanās, atgādinājumi, pa nedēļām. ¦ Külastused, kohtumised, meeldetuletused, nädalate kaupa.
+Listes → Recherche et organisation ¦ Sąrašai → Tyrimai ir organizavimas ¦ Saraksti → Pētniecība un organizēšana ¦ Loendid → Uurimistöö ja korraldus
+Les choses à faire, avec leur date. ¦ Darbai su jų datomis. ¦ Darāmās lietas ar to datumu. ¦ Tehtavad asjad koos kuupäevaga.
+Toutes les images, sons, vidéos en tableau. ¦ Visi vaizdai, garsai, vaizdo įrašai lentelėje. ¦ Visi attēli, skaņas, video tabulā. ¦ Kõik pildid, helid, videod tabelis.
+Listes → Médias et documents ¦ Sąrašai → Medija ir dokumentai ¦ Saraksti → Mediji un dokumenti ¦ Loendid → Meedia ja dokumendid
+Questionnaires pour recueillir les souvenirs. ¦ Klausimynai prisiminimams rinkti. ¦ Anketas atmiņu vākšanai. ¦ Küsimustikud mälestuste kogumiseks.
+Les maisons, pièce par pièce, et qui y a vécu. ¦ Namai, kambarys po kambario, ir kas juose gyveno. ¦ Mājas, istaba pa istabai, un kas tajās dzīvoja. ¦ Majad, tuba toa haaval, ja kes neis elas.
+Listes → Lieux et maisons ¦ Sąrašai → Vietos ir namai ¦ Saraksti → Vietas un mājas ¦ Loendid → Kohad ja majad
+Adresses et contacts des cousins vivants. ¦ Gyvų pusbrolių ir pusseserių adresai ir kontaktai. ¦ Dzīvo brālēnu un māsīcu adreses un kontakti. ¦ Elus nõbude aadressid ja kontaktid.
+Listes → Personnes et familles ¦ Sąrašai → Asmenys ir šeimos ¦ Saraksti → Personas un ģimenes ¦ Loendid → Isikud ja pered
+Les dépôts, leurs cotes, leurs horaires. ¦ Archyvai, jų šifrai, darbo laikas. ¦ Arhīvi, to šifri, darba laiki. ¦ Arhiivid, nende viited, lahtiolekuajad.
+Le planificateur : quoi consulter, où, quand. ¦ Planuoklis: ką peržiūrėti, kur, kada. ¦ Plānotājs: ko skatīt, kur, kad. ¦ Planeerija: mida vaadata, kus, millal.
+Qui a hérité de quoi d’après les actes anciens. ¦ Kas ką paveldėjo pagal senus dokumentus. ¦ Kas ko mantoja pēc veciem dokumentiem. ¦ Kes mida pärandas vanade dokumentide järgi.
+Les bons sites pour la personne ouverte. ¦ Tinkamos svetainės atidarytam asmeniui. ¦ Piemērotās vietnes atvērtajai personai. ¦ Õiged veebilehed avatud isiku jaoks.
+Recherche → Type de recherche ¦ Paieška → Paieškos tipas ¦ Meklēšana → Meklēšanas veids ¦ Otsing → Otsingu liik
+Trouver et fusionner les fiches en double. ¦ Rasti ir sujungti pasikartojančius įrašus. ¦ Atrast un apvienot dubultos ierakstus. ¦ Leia ja ühenda topeltkirjed.
+Réglages → Fusion de doublons ¦ Nustatymai → Dublikatų sujungimas ¦ Iestatījumi → Dublikātu apvienošana ¦ Seaded → Duplikaatide ühendamine
+Dates impossibles, liens bizarres. ¦ Neįmanomos datos, keisti ryšiai. ¦ Neiespējami datumi, dīvainas saites. ¦ Võimatud kuupäevad, veidrad sidemed.
+Réglages → Contrôle de la base ¦ Nustatymai → Duomenų bazės patikra ¦ Iestatījumi → Datubāzes pārbaude ¦ Seaded → Andmebaasi kontroll
+Le nom étudié ¦ Tiriama pavardė ¦ Pētītais uzvārds ¦ Uuritav perekonnanimi
+Les porteurs d’un nom, ses variantes. ¦ Pavardės nešiotojai, jos variantai. ¦ Uzvārda nesēji, tā varianti. ¦ Perekonnanime kandjad, selle variandid.
+Graphiques → statistique des noms ¦ Diagramos → pavardžių statistika ¦ Diagrammas → uzvārdu statistika ¦ Graafikud → nimede statistika
+L’entreprise ¦ Įmonė ¦ Uzņēmums ¦ Ettevõte
+Employeurs, salariés, membres. ¦ Darbdaviai, darbuotojai, nariai. ¦ Darba devēji, darbinieki, biedri. ¦ Tööandjad, töötajad, liikmed.
+Listes → Employeurs ¦ Sąrašai → Darbdaviai ¦ Saraksti → Darba devēji ¦ Loendid → Tööandjad
+Des parties de l’app, cachées au départ ¦ Programėlės dalys, iš pradžių paslėptos ¦ Lietotnes daļas, sākumā paslēptas ¦ Rakenduse osad, alguses peidetud
+Elles existent déjà : cocher les montre dans le menu. ¦ Jos jau yra: pažymėjus jos rodomos meniu. ¦ Tās jau pastāv: atzīmējot tās parādās izvēlnē. ¦ Need on juba olemas: märkimine näitab neid menüüs.
+Un raccourci vers une liste ¦ Nuoroda į sąrašą ¦ Saīsne uz sarakstu ¦ Otsetee loendisse
+Il devient un « onglet à soi » (Éditeur d’onglets). ¦ Ji tampa „tavo kortele“ (Kortelių redaktorius). ¦ Tā kļūst par “tavu cilni” (Cilņu redaktors). ¦ Sellest saab „oma vahekaart” (Vahekaartide redaktor).
+Un raccourci vers un outil ¦ Nuoroda į įrankį ¦ Saīsne uz rīku ¦ Otsetee tööriista juurde
+Chaîne par héritier ¦ Kiekvieno įpėdinio grandinė ¦ Katra mantinieka ķēde ¦ Iga pärija ahel
+✉️ Contactés ¦ ✉️ Susisiekta ¦ ✉️ Sazinātie ¦ ✉️ Kontakteeritud
+📇 Répertoire des vivants ¦ 📇 Gyvųjų sąrašas ¦ 📇 Dzīvo personu saraksts ¦ 📇 Elavate register
+Échéances du jour (usage successoral seulement) ¦ Šios dienos terminai (tik paveldėjimo naudojimui) ¦ Dienas termiņi (tikai mantojuma lietojumam) ¦ Päeva tähtajad (ainult pärimisuurija kasutuses)
+Ce dossier est clos : rien ne s’y note. ¦ Ši byla uždaryta: į ją nieko neužrašoma. ¦ Šī lieta ir slēgta: tajā nekas netiek pierakstīts. ¦ See toimik on suletud: sinna ei kirjutata midagi.
+Donne un nom au modèle. ¦ Suteik šablonui pavadinimą. ¦ Piešķir veidnei nosaukumu. ¦ Anna mallile nimi.
+Trop de lettres d’un coup (60 au plus). ¦ Per daug laiškų iš karto (daugiausia 60). ¦ Pārāk daudz vēstuļu uzreiz (ne vairāk kā 60). ¦ Liiga palju kirju korraga (kõige rohkem 60).
+Échéances du jour ¦ Šios dienos terminai ¦ Dienas termiņi ¦ Päeva tähtajad

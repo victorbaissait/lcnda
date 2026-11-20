@@ -58,9 +58,11 @@
         after = cleanSet(after);
         const out = {};
         let hidden = jparse(get('genealogie-menu-hidden'), []); if (!Array.isArray(hidden)) hidden = [];
+        let added = jparse(get('genealogie-menu-added'), []); if (!Array.isArray(added)) added = []; // ＋ Ajouter un onglet : jamais caché par un usage (app-onglets-plus.js)
         MANAGED.forEach(tab => {
             const now = shows(after, tab);
             if (before && shows(before, tab) === now) return;
+            if (!now && added.includes(tab)) return;
             if (!before && tab === 'personnes' && now) return; // base neuve : Personnes est déjà là
             if (!before && !now && FLAGGED.includes(tab)) return; // base neuve : déjà caché au départ
             hidden = now ? hidden.filter(x => x !== tab) : (hidden.includes(tab) ? hidden : [...hidden, tab]);

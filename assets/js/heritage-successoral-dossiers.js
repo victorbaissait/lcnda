@@ -1000,4 +1000,5 @@
     ext.succDossiers.refresh = () => { invalidate(); hasCases = null; paintButton(); paintBanner(); };
     ext.succDossiers.beforeNew = beforeNew;
     ext.succDossiers.moveDialog = moveDialog;
+    ext.succDossiers.openElsewhere = openElsewhere; // 🔔 la cloche : ↗ un dossier d'une autre généalogie (heritage-successoral-outils.js)
 })();

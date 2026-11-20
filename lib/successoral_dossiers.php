@@ -187,7 +187,9 @@ function succ_index_rows(PDO $pdo): array
             'heirs' => is_array($snap['shares'] ?? null) ? count($snap['shares']) : 0, 'unknown' => is_array($snap['unknown'] ?? null) ? count($snap['unknown']) : 0,
             'progress' => $r['progress'] === null ? null : (int) $r['progress'], 'steps' => is_array($prog['steps'] ?? null) ? $prog['steps'] : null,
             'pieces' => is_array($prog['pieces'] ?? null) ? $prog['pieces'] : null, 'found' => is_array($prog['heirs'] ?? null) ? $prog['heirs'] : null,
-            'minutes' => (int) ($pdo->query('SELECT COALESCE(SUM(minutes),0) FROM succ_fees WHERE case_id=' . (int) $r['id'] . " AND kind='time' AND deleted_at IS NULL")->fetchColumn())];
+            'minutes' => (int) ($pdo->query('SELECT COALESCE(SUM(minutes),0) FROM succ_fees WHERE case_id=' . (int) $r['id'] . " AND kind='time' AND deleted_at IS NULL")->fetchColumn()),
+            // 🔔 la cloche : échéances et relances jusqu'à 7 jours devant (pas pour un dossier clos ou archivé)
+            'due_items' => in_array((string) $r['state'], ['clos', 'archive'], true) || !function_exists('succ_due_items') ? [] : succ_due_items($pdo, (int) $r['id'])];
     }
     return $out;
 }
