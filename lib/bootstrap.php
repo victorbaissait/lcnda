@@ -1359,6 +1359,8 @@ function log_change(PDO $pdo, string $entityType, ?int $entityId, string $action
         $before ? json_encode($before, JSON_UNESCAPED_UNICODE) : null,
         $after ? json_encode($after, JSON_UNESCAPED_UNICODE) : null,
     ]);
+    // ⚖️ une fiche créée pendant que le filtre ⚖️ est actif est rattachée d'office au(x) dossier(s) du filtre (lib/successoral_dossiers.php)
+    if ($entityType === 'person' && $action === 'create' && $entityId && !empty($_SERVER['HTTP_X_LCNDA_SUCC']) && function_exists('succ_auto_attach')) { succ_auto_attach($pdo, (int) $entityId); }
 }
 
 function safe_int(mixed $value, int $fallback = 0): int

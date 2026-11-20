@@ -523,3 +523,185 @@ Dévolution ¦ Perimysjärjestys ¦ Öröklési rend
 =dépouillement ¦ läpikäynti|läpikäyntiä ¦ feldolgozás|feldolgozás
 =dossier en cours ¦ käynnissä oleva kansio|käynnissä olevaa kansiota ¦ folyamatban lévő ügy|folyamatban lévő ügy
 =dossier de succession ¦ perunkirjoituskansio|perunkirjoituskansiota ¦ hagyatéki ügy|hagyatéki ügy
+
+# ⚖️ Dossiers de succession : rangement, filtre ⚖️, rattachement, tableau de bord, garde-fous, widget, vue par dossier
+Dossiers de succession : filtre {what} (cliquer pour changer) ¦ Perunkirjoituskansiot: suodatin {what} (vaihda napsauttamalla) ¦ Hagyatéki ügyek: szűrő {what} (kattints a módosításhoz)
+Dossiers de succession : ne montrer qu’un ou plusieurs dossiers ¦ Perunkirjoituskansiot: näytä vain yksi tai useampi kansio ¦ Hagyatéki ügyek: csak egy vagy néhány ügy mutatása
+Plusieurs ¦ Useampi ¦ Több
+⚖️ Ne montrer que ceux-ci ¦ ⚖️ Näytä vain nämä ¦ ⚖️ Csak ezek mutatása
+Aucun dossier dans cette généalogie. ¦ Tässä sukupuussa ei ole kansioita. ¦ Ebben a családfában nincs ügy.
+Dans une autre généalogie ¦ Toisessa sukupuussa ¦ Egy másik családfában
+Tous les dossiers… ¦ Kaikki kansiot… ¦ Minden ügy…
+Seulement le dossier {n} ¦ Vain kansio {n} ¦ Csak a(z) {n} ügy
+Seulement {what} : {list} ¦ Vain {what}: {list} ¦ Csak {what}: {list}
+1 dossier · {state} ¦ 1 kansio · {state} ¦ 1 ügy · {state}
+⚖️ Dossier {n} ¦ ⚖️ Kansio {n} ¦ ⚖️ {n} ügy
+Ce dossier est dans une autre généalogie ¦ Tämä kansio on toisessa sukupuussa ¦ Ez az ügy egy másik családfában van
+Ouvrir « {name} » ¦ Avaa ”{name}” ¦ „{name}” megnyitása
+Il est rangé dans « {name} ». Pour le montrer, l’app ouvre cette généalogie (tes réglages d’ici sont gardés) et y active le filtre ⚖️ {n}. ¦ Se on tallessa sukupuussa ”{name}”. Näyttääkseen sen sovellus avaa tuon sukupuun (asetuksesi täällä säilyvät) ja ottaa siellä käyttöön suodattimen ⚖️ {n}. ¦ A(z) „{name}” családfában van. A megmutatásához az alkalmazás megnyitja azt a családfát (az itteni beállításaid megmaradnak), és ott bekapcsolja a ⚖️ {n} szűrőt.
+Tes nouveaux dossiers vont dans « {name} ». ¦ Uudet kansiosi menevät sukupuuhun ”{name}”. ¦ Az új ügyeid ide kerülnek: „{name}”.
+Ouvrir le dossier ici quand même ¦ Avaa kansio silti tähän ¦ Az ügy megnyitása mégis itt
+Où ranger tes dossiers ? ¦ Mihin kansiosi tallennetaan? ¦ Hová kerüljenek az ügyeid?
+conseillé ici ¦ suositeltu tähän ¦ itt ajánlott
+Nom de la nouvelle généalogie ¦ Uuden sukupuun nimi ¦ Az új családfa neve
+⚖️ Dossier de succession ¦ ⚖️ Perunkirjoituskansio ¦ ⚖️ Hagyatéki ügy
+Ta généalogie ouverte a {n} : la ranger à part évite de mélanger les héritiers de tes clients avec ta propre famille. Ce n’est qu’un conseil. ¦ Avoimessa sukupuussasi on {n}: erillään pitäminen estää asiakkaidesi perillisten sekoittumisen omaan sukuusi. Se on vain neuvo. ¦ A megnyitott családfádban {n} van: a külön tárolás miatt ügyfeleid örökösei nem keverednek a saját családoddal. Ez csak tanács.
+Tu pourras changer d’avis : Réglages → Apparence → 🧭 Usage de l’app → « ⚖️ Où ranger les dossiers ». Les dossiers déjà ouverts ne bougent pas tout seuls. ¦ Voit muuttaa mieltäsi: Asetukset → Ulkoasu → 🧭 Sovelluksen käyttö → ”⚖️ Mihin kansiot tallennetaan”. Jo avatut kansiot eivät siirry itsestään. ¦ Meggondolhatod magad: Beállítások → Megjelenés → 🧭 Az alkalmazás használata → „⚖️ Hová kerüljenek az ügyek”. A már megnyitott ügyek maguktól nem költöznek.
+Créer « ⚖️ Dossiers de succession » et ouvrir le dossier ¦ Luo ”⚖️ Perunkirjoituskansiot” ja avaa kansio ¦ „⚖️ Hagyatéki ügyek” létrehozása és az ügy megnyitása
+Créer la généalogie et ouvrir le dossier ¦ Luo sukupuu ja avaa kansio ¦ A családfa létrehozása és az ügy megnyitása
+Rangement des dossiers : {what} ¦ Kansioiden paikka: {what} ¦ Az ügyek helye: {what}
+Généalogiste successoral : réglages des dossiers ¦ Perintögenealogi: kansioiden asetukset ¦ Örökléskutató genealógus: az ügyek beállításai
+Où ranger les dossiers ¦ Mihin kansiot tallennetaan ¦ Hová kerüljenek az ügyek
+Les nouveaux dossiers vont… ¦ Uudet kansiot menevät… ¦ Az új ügyek ide kerülnek…
+Dans « {name} » ¦ Sukupuuhun ”{name}” ¦ Ide: „{name}”
+Les dossiers et où ils sont ¦ Kansiot ja niiden paikat ¦ Az ügyek és helyük
+⇄ Déplacer… ¦ ⇄ Siirrä… ¦ ⇄ Áthelyezés…
+Aucun dossier pour l’instant. ¦ Ei vielä kansioita. ¦ Még nincs ügy.
+Réglages des dossiers ¦ Kansioiden asetukset ¦ Az ügyek beállításai
+Arbre et graphiques filtrés par ⚖️ : les fiches hors dossier ¦ ⚖️-suodatettu puu ja kaaviot: kansion ulkopuoliset kortit ¦ ⚖️ szűrővel szűrt fa és diagramok: az ügyön kívüli adatlapok
+Archive d’un dossier clos : adresses des héritiers vivants ¦ Suljetun kansion arkisto: elävien perillisten osoitteet ¦ Lezárt ügy archívuma: élő örökösök címei
+Déplacer un dossier dont une fiche est aussi dans ta famille ¦ Kansion siirto, kun sen kortti on myös suvussasi ¦ Ügy áthelyezése, ha egy adatlapja a családodban is szerepel
+« Sans dossier » dans la vue par dossier ¦ ”Ei kansiota” kansioittaisessa näkymässä ¦ „Ügy nélkül” az ügyenkénti nézetben
+Avancement : un héritier qui refuse de signer ¦ Edistyminen: perillinen, joka kieltäytyy allekirjoittamasta ¦ Előrehaladás: aláírást megtagadó örökös
+compte comme « fait » (étape 5) ¦ lasketaan ”tehdyksi” (vaihe 5) ¦ „elvégzettnek” számít (5. lépés)
+Avancement : poids des 7 étapes ¦ Edistyminen: 7 vaiheen painot ¦ Előrehaladás: a 7 lépés súlya
+Réglage des dossiers enregistré : {what} ¦ Kansioiden asetus tallennettu: {what} ¦ Az ügyek beállítása mentve: {what}
+poids des 7 étapes ¦ 7 vaiheen painot ¦ a 7 lépés súlya
+⇄ DÉPLACER UN DOSSIER ¦ ⇄ SIIRRÄ KANSIO ¦ ⇄ ÜGY ÁTHELYEZÉSE
+{n} → ? ¦ {n} → ? ¦ {n} → ?
+⇄ Déplacer ({what}) ¦ ⇄ Siirrä ({what}) ¦ ⇄ Áthelyezés ({what})
+Vers ¦ Kohde ¦ Ide
+＋ Une nouvelle généalogie pour ce dossier ¦ ＋ Uusi sukupuu tälle kansiolle ¦ ＋ Új családfa ennek az ügynek
+Ce qui part : le dossier, son journal, ses pièces, ses courriers, ses échéances, et les fiches qui lui sont rattachées (défunt, héritiers, intermédiaires) avec leurs actes et médias. Une fiche aussi rattachée à un autre dossier ou à ta famille est copiée, pas déplacée. ¦ Mukaan lähtee: kansio, sen loki, asiakirjat, kirjeet, määräajat ja siihen liitetyt kortit (vainaja, perilliset, välihenkilöt) asiakirjoineen ja medioineen. Kortti, joka on liitetty myös toiseen kansioon tai sukuusi, kopioidaan eikä siirretä. ¦ Ami átkerül: az ügy, a naplója, iratai, levelei, határidői és a hozzá rendelt adatlapok (elhunyt, örökösök, közvetítők) irataikkal és médiáikkal. Egy másik ügyhöz vagy a családodhoz is rendelt adatlap másolódik, nem költözik.
+Déplacement refusé (réglage) : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Siirto estetty (asetus): nämä kortit ovat myös suvussasi tai toisessa kansiossa: {names}. ¦ Áthelyezés elutasítva (beállítás): ezek az adatlapok a családodban vagy egy másik ügyben is szerepelnek: {names}.
+Copiées (elles restent aussi ici) : {names}. ¦ Kopioitu (jäävät myös tänne): {names}. ¦ Másolva (itt is megmaradnak): {names}.
+Une copie de sauvegarde des deux généalogies est faite avant. Le journal du dossier note « Déplacé de … vers … ». ¦ Ensin tehdään varmuuskopio molemmista sukupuista. Kansion loki merkitsee ”Siirretty … → …”. ¦ Előbb mindkét családfáról biztonsági mentés készül. Az ügy naplója rögzíti: „Áthelyezve innen: … ide: …”.
+Dossier {n} déplacé vers « {to} » ({what}) ¦ Kansio {n} siirretty sukupuuhun ”{to}” ({what}) ¦ A(z) {n} ügy áthelyezve ide: „{to}” ({what})
+⤓ Reprendre la fiche depuis Ma généalogie ¦ ⤓ Ota kortti Sukupuustani ¦ ⤓ Adatlap átvétele a Családfámból
+copie de la fiche, jusqu’aux grands-parents et tous leurs descendants connus, sans photos ¦ kortin kopio isovanhempiin asti ja kaikki heidän tunnetut jälkeläisensä, ilman kuvia ¦ az adatlap másolata a nagyszülőkig és minden ismert leszármazottjukig, fényképek nélkül
+⤓ REPRENDRE UNE FICHE ¦ ⤓ OTA KORTTI ¦ ⤓ ADATLAP ÁTVÉTELE
+Reprendre la fiche du défunt ¦ Ota vainajan kortti ¦ Az elhunyt adatlapjának átvétele
+Chercher la fiche ¦ Etsi kortti ¦ Adatlap keresése
+Prénom, nom… ¦ Etunimi, sukunimi… ¦ Utónév, vezetéknév…
+Copiées : la fiche, ses parents et grands-parents, tous leurs descendants connus et leurs conjoints, avec les dates et les lieux ; sans photos. Rien n’est changé dans l’autre généalogie. ¦ Kopioidaan: kortti, vanhemmat ja isovanhemmat, kaikki tunnetut jälkeläiset ja heidän puolisonsa päivämäärineen ja paikkoineen; ilman kuvia. Toisessa sukupuussa ei muutu mitään. ¦ Másolva: az adatlap, a szülők és nagyszülők, minden ismert leszármazott és házastársaik, dátumokkal és helyekkel; fényképek nélkül. A másik családfában semmi sem változik.
+{what} reprises de l’autre généalogie. ¦ {what} otettu toisesta sukupuusta. ¦ {what} átvéve a másik családfából.
+Dossiers… ¦ Kansiot… ¦ Ügyek…
+{name} dans quels dossiers ? ¦ {name} missä kansioissa? ¦ {name} mely ügyekben?
+(calculé) ¦ (laskettu) ¦ (számított)
+Rôles : défunt · héritier · intermédiaire · témoin · à vérifier. « Héritier » mis par le calcul s’affiche « (calculé) ». ¦ Roolit: vainaja · perillinen · välihenkilö · todistaja · tarkistettava. Laskennan asettama ”perillinen” näkyy muodossa ”(laskettu)”. ¦ Szerepek: elhunyt · örökös · közvetítő · tanú · ellenőrizendő. A számítás által beállított „örökös” mellett „(számított)” áll.
+Dossiers de {name} enregistrés ¦ Henkilön {name} kansiot tallennettu ¦ {name} ügyei mentve
+Les dossiers de cette fiche ¦ Tämän kortin kansiot ¦ Ennek az adatlapnak az ügyei
+hors du dossier {n} ¦ kansion {n} ulkopuolella ¦ a(z) {n} ügyön kívül
+＋ Rattacher ¦ ＋ Liitä ¦ ＋ Hozzárendelés
+Fiche rattachée au dossier {n} ¦ Kortti liitetty kansioon {n} ¦ Adatlap hozzárendelve a(z) {n} ügyhöz
+Rattachée au dossier {n} : {who} ¦ Liitetty kansioon {n}: {who} ¦ Hozzárendelve a(z) {n} ügyhöz: {who}
+Lecture des fiches du dossier… ¦ Luetaan kansion kortteja… ¦ Az ügy adatlapjainak beolvasása…
+Les fiches du dossier ¦ Kansion kortit ¦ Az ügy adatlapjai
+Rattacher ¦ Liitä ¦ Hozzárendelés
+Retirées à la main ({n}) : jamais remises toutes seules ¦ Poistettu käsin ({n}): ei koskaan palauteta automaattisesti ¦ Kézzel eltávolítva ({n}): soha nem kerülnek vissza maguktól
+Fiche à comparer : « {name}{year} » ressemble à une fiche déjà dans cette base. Jamais fusionnée toute seule. ¦ Verrattava kortti: ”{name}{year}” muistuttaa korttia, joka on jo tässä tietokannassa. Ei koskaan yhdistetä automaattisesti. ¦ Összehasonlítandó adatlap: „{name}{year}” hasonlít egy már meglévő adatlapra. Soha nem vonódik össze magától.
+née {y} ¦ synt. {y} ¦ szül. {y}
+Homonyme possible : « {name}{year} » existe aussi dans le dossier {n}. Jamais relié tout seul. ¦ Mahdollinen kaima: ”{name}{year}” on myös kansiossa {n}. Ei koskaan liitetä automaattisesti. ¦ Lehetséges névrokon: „{name}{year}” a(z) {n} ügyben is szerepel. Soha nem kapcsolódik magától.
+⇆ Comparer ¦ ⇆ Vertaa ¦ ⇆ Összehasonlítás
+C’est la même personne : rattacher aussi ¦ Sama henkilö: liitä myös ¦ Ugyanaz a személy: hozzárendelés ehhez is
+Pas la même ¦ Ei sama ¦ Nem ugyanaz
+Fiche retirée du dossier {n} ¦ Kortti poistettu kansiosta {n} ¦ Adatlap eltávolítva a(z) {n} ügyből
+Fiche remise dans le dossier {n} ¦ Kortti palautettu kansioon {n} ¦ Adatlap visszatéve a(z) {n} ügybe
+Homonyme rattaché aussi au dossier {n} (à vérifier) ¦ Kaima liitetty myös kansioon {n} (tarkistettava) ¦ Névrokon a(z) {n} ügyhöz is hozzárendelve (ellenőrizendő)
+Noté : ce n’est pas la même personne ¦ Merkitty: ei sama henkilö ¦ Rögzítve: nem ugyanaz a személy
+Rôle : {r} ¦ Rooli: {r} ¦ Szerep: {r}
+⚠️ illisible : {names} ¦ ⚠️ lukukelvoton: {names} ¦ ⚠️ olvashatatlan: {names}
+Chercher… (n°, défunt, notaire) ¦ Hae… (nro, vainaja, notaari) ¦ Keresés… (sz., elhunyt, közjegyző)
+Toutes les généalogies ¦ Kaikki sukupuut ¦ Minden családfa
+Tous les notaires ¦ Kaikki notaarit ¦ Minden közjegyző
+Prochaine échéance (retards d’abord) ¦ Seuraava määräaika (myöhästyneet ensin) ¦ Következő határidő (késők elöl)
+Avancement le plus bas ¦ Pienin edistyminen ¦ Legkisebb előrehaladás
+{d} · passée ¦ {d} · umpeutunut ¦ {d} · lejárt
+Trouvés : {n} ¦ Löydetty: {n} ¦ Megtalálva: {n}
+À trouver : {n} ¦ Löydettävä: {n} ¦ Megtalálandó: {n}
+{h} h {m} ¦ {h} t {m} ¦ {h} ó {m}
+Cocher le dossier {n} ¦ Valitse kansio {n} ¦ A(z) {n} ügy kijelölése
+Échéance : {d} ¦ Määräaika: {d} ¦ Határidő: {d}
+Héritiers ¦ Perilliset ¦ Örökösök
+Avancement ¦ Edistyminen ¦ Előrehaladás
+Cochés : {n} ¦ Valittu: {n} ¦ Kijelölve: {n}
+Les dossiers cochés sont dans des généalogies différentes : choisis-en dans une seule. ¦ Valitut kansiot ovat eri sukupuissa: valitse vain yhdestä. ¦ A kijelölt ügyek különböző családfákban vannak: csak egyből válassz.
+Dossiers exportés (CSV) ¦ Kansiot viety (CSV) ¦ Ügyek exportálva (CSV)
+⤒ Réimporter un dossier archivé… ¦ ⤒ Tuo arkistoitu kansio uudelleen… ¦ ⤒ Archivált ügy újbóli importálása…
+⚠️ FUSION ¦ ⚠️ YHDISTÄMINEN ¦ ⚠️ ÖSSZEVONÁS
+Ces deux fiches sont dans des dossiers différents ¦ Nämä kaksi korttia ovat eri kansioissa ¦ Ez a két adatlap különböző ügyekben van
+Fusionner quand même ¦ Yhdistä silti ¦ Összevonás mégis
+{a} et {b}. Fusionner relie les deux successions et change les parts des deux dossiers. Vérifie avec des actes (naissance, parents) avant. ¦ {a} ja {b}. Yhdistäminen kytkee kaksi perintöä yhteen ja muuttaa osuudet molemmissa kansioissa. Tarkista ensin asiakirjoista (syntymä, vanhemmat). ¦ {a} és {b}. Az összevonás összeköti a két hagyatékot, és mindkét ügyben megváltoztatja a részeket. Előbb ellenőrizd iratokkal (születés, szülők).
+⇆ Comparer d’abord ¦ ⇆ Vertaa ensin ¦ ⇆ Előbb összehasonlítás
+Si on fusionne : noté dans le journal des deux dossiers, et les deux sont recalculés. ¦ Jos yhdistät: merkitään molempien kansioiden lokiin, ja molemmat lasketaan uudelleen. ¦ Összevonáskor: mindkét ügy naplójába bekerül, és mindkettő újraszámolódik.
+🗄 Archiver dans un fichier et retirer… ¦ 🗄 Arkistoi tiedostoon ja poista… ¦ 🗄 Archiválás fájlba és eltávolítás…
+🗄 ARCHIVER LE DOSSIER {n} ¦ 🗄 ARKISTOI KANSIO {n} ¦ 🗄 A(Z) {n} ÜGY ARCHIVÁLÁSA
+Dans un fichier, puis retirer de la base ¦ Tiedostoon ja sitten pois tietokannasta ¦ Fájlba, majd eltávolítás az adatbázisból
+⤓ Enregistrer le fichier puis retirer ¦ ⤓ Tallenna tiedosto ja poista sitten ¦ ⤓ Fájl mentése, majd eltávolítás
+Le fichier {file} contient : le dossier, le journal, les pièces et leurs images, les courriers, l’arbre de dévolution (SVG), le tableau pour le notaire et les fiches rattachées ({n}). ¦ Tiedosto {file} sisältää: kansion, lokin, asiakirjat kuvineen, kirjeet, perimysjärjestyksen puun (SVG), taulukon notaarille ja liitetyt kortit ({n}). ¦ A(z) {file} fájl tartalma: az ügy, a napló, az iratok és képeik, a levelek, az öröklési fa (SVG), a közjegyzőnek szóló táblázat és a hozzárendelt adatlapok ({n}).
+Garder les adresses des vivants dans le fichier ¦ Säilytä elävien osoitteet tiedostossa ¦ Az élők címeinek megtartása a fájlban
+utile si le notaire rouvre la succession ¦ hyödyllinen, jos notaari avaa perinnön uudelleen ¦ hasznos, ha a közjegyző újranyitja a hagyatékot
+Retirer les adresses ¦ Poista osoitteet ¦ Címek eltávolítása
+comme l’archivage actuel ¦ kuten nykyinen arkistointi ¦ mint a mostani archiválás
+Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base ({n}). Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste ({k}). Une sauvegarde est faite avant. ¦ Sen jälkeen vain tähän kansioon kuuluvat kortit poistetaan tietokannasta ({n}). Kortti, joka on liitetty myös toiseen kansioon (tai sukuusi), jää ({k}). Ensin tehdään varmuuskopio. ¦ Ezután a csak ehhez az ügyhöz tartozó adatlapok kikerülnek az adatbázisból ({n}). Egy másik ügyhöz (vagy a családodhoz) is rendelt adatlap marad ({k}). Előbb biztonsági mentés készül.
+Dossier {n} archivé dans « {file} » et retiré ({what}) ¦ Kansio {n} arkistoitu tiedostoon ”{file}” ja poistettu ({what}) ¦ A(z) {n} ügy archiválva ide: „{file}” és eltávolítva ({what})
+⤒ RÉIMPORTER ¦ ⤒ TUO UUDELLEEN ¦ ⤒ ÚJBÓLI IMPORTÁLÁS
+⤒ Réimporter le dossier ¦ ⤒ Tuo kansio uudelleen ¦ ⤒ Az ügy újbóli importálása
+Dossier {n} ({name}{closed}), {what}. ¦ Kansio {n} ({name}{closed}), {what}. ¦ {n} ügy ({name}{closed}), {what}.
+clos le {d} ¦ suljettu {d} ¦ lezárva: {d}
+{what} ressemblent à des fiches déjà dans cette base ({names}) : elles seront proposées à la comparaison, jamais fusionnées seules. ¦ {what} muistuttavat kortteja, jotka ovat jo tässä tietokannassa ({names}): ne tarjotaan vertailtaviksi, ei koskaan yhdistetä automaattisesti. ¦ {what} hasonlít már meglévő adatlapokra ({names}): összehasonlításra kerülnek, magától soha nem vonódnak össze.
+Dossier {n} réimporté ({what}) ¦ Kansio {n} tuotu uudelleen ({what}) ¦ A(z) {n} ügy újra importálva ({what})
+Dossier {n} réimporté dans « {name} ». ¦ Kansio {n} tuotu uudelleen sukupuuhun ”{name}”. ¦ A(z) {n} ügy újra importálva ide: „{name}”.
+⚖️ Mes dossiers de succession ¦ ⚖️ Omat perunkirjoituskansioni ¦ ⚖️ Hagyatéki ügyeim
+Aucun dossier de succession. ¦ Ei perunkirjoituskansioita. ¦ Nincs hagyatéki ügy.
+Étapes (7) ¦ Vaiheet (7) ¦ Lépések (7)
+{step} : {done} sur {total} ¦ {step}: {done}/{total} ¦ {step}: {done} / {total}
+Quels dossiers ¦ Mitkä kansiot ¦ Mely ügyek
+Le filtre ¦ Suodatin ¦ A szűrő
+Vue actuelle ¦ Nykyinen näkymä ¦ Jelenlegi nézet
+Alt + ↑ / ↓ : changer l’ordre (rangement à la main) ¦ Alt + ↑ / ↓: muuta järjestystä (käsin) ¦ Alt + ↑ / ↓: sorrend módosítása (kézi)
+Sans dossier ¦ Ei kansiota ¦ Ügy nélkül
+Ranger les dossiers : ¦ Järjestä kansiot: ¦ Ügyek rendezése:
+… cherche un nom pour voir les autres. ¦ … hae nimellä nähdäksesi muut. ¦ … keress egy nevet a többiek megtekintéséhez.
+Ordre des dossiers changé ¦ Kansioiden järjestys muutettu ¦ Az ügyek sorrendje módosítva
+Dans cette généalogie ¦ Tässä sukupuussa ¦ Ebben a családfában
+Le défunt et ses héritiers sont des fiches de ta famille. Simple, mais tout se mélange. ¦ Vainaja ja perilliset ovat sukusi kortteja. Yksinkertaista, mutta kaikki sekoittuu. ¦ Az elhunyt és örökösei a családod adatlapjai. Egyszerű, de minden összekeveredik.
+Dans une généalogie à part pour tous mes dossiers ¦ Erillisessä sukupuussa kaikille kansioilleni ¦ Külön családfában az összes ügyemnek
+Une base professionnelle « ⚖️ Dossiers de succession », créée dans 🌳 Mes généalogies. Tes dossiers y sont tous ensemble ; ta famille reste à part. ¦ Ammatillinen tietokanta ”⚖️ Perunkirjoituskansiot”, luotu kohdassa 🌳 Sukupuuni. Kaikki kansiosi ovat siellä yhdessä; sukusi pysyy erillään. ¦ Egy szakmai adatbázis, „⚖️ Hagyatéki ügyek”, a 🌳 Családfáim alatt létrehozva. Minden ügyed együtt van ott; a családod külön marad.
+Une généalogie par dossier ¦ Yksi sukupuu kansiota kohden ¦ Ügyenként egy családfa
+Chaque dossier a sa propre base (« ⚖️ 2026-014 MAZAUD »). Le plus étanche ; à réserver aux grosses successions. ¦ Jokaisella kansiolla on oma tietokanta (”⚖️ 2026-014 MAZAUD”). Tiivein erottelu; suurille perinnöille. ¦ Minden ügynek saját adatbázisa van („⚖️ 2026-014 MAZAUD”). A legjobban elkülönített; nagy hagyatékokhoz.
+défunt ¦ vainaja ¦ elhunyt
+intermédiaire ¦ välihenkilö ¦ közvetítő
+Un par dossier ¦ Yksi kansiota kohden ¦ Ügyenként egy
+Un filtre ¦ Suodatin ¦ Egy szűrő
+Compteurs ¦ Laskurit ¦ Számlálók
+à l’ouverture ¦ avattaessa ¦ megnyitáskor
+calcul ¦ laskenta ¦ számítás
+à la main ¦ käsin ¦ kézzel
+créée pendant le filtre ¦ luotu suodattimen aikana ¦ a szűrő alatt létrehozva
+réimport ¦ uudelleentuonti ¦ újraimportálás
+homonyme ¦ kaima ¦ névrokon
+déplacée ¦ siirretty ¦ áthelyezve
+grisées, sans nom ¦ harmaana, ilman nimeä ¦ szürkén, név nélkül
+cachées ¦ piilotettu ¦ elrejtve
+retirées du fichier ¦ poistettu tiedostosta ¦ eltávolítva a fájlból
+gardées dans le fichier ¦ säilytetty tiedostossa ¦ megtartva a fájlban
+copier la fiche ¦ kopioi kortti ¦ az adatlap másolása
+refuser le déplacement ¦ estä siirto ¦ az áthelyezés elutasítása
+replié ¦ koottu ¦ összecsukva
+Défunt et acte de décès ¦ Vainaja ja kuolinasiakirja ¦ Elhunyt és halotti anyakönyv
+Adresses ¦ Osoitteet ¦ Címek
+Contrats signés ¦ Allekirjoitetut sopimukset ¦ Aláírt szerződések
+Déplacement refusé : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Siirto estetty: nämä kortit ovat myös suvussasi tai toisessa kansiossa: {names}. ¦ Áthelyezés elutasítva: ezek az adatlapok a családodban vagy egy másik ügyben is szerepelnek: {names}.
+Impossible d’enregistrer les réglages des dossiers. ¦ Kansioiden asetuksia ei voitu tallentaa. ¦ Az ügyek beállításai nem menthetők.
+Cette généalogie est encore vide. ¦ Tämä sukupuu on vielä tyhjä. ¦ Ez a családfa még üres.
+Rôle inconnu. ¦ Tuntematon rooli. ¦ Ismeretlen szerep.
+Fiches inconnues. ¦ Tuntemattomat kortit. ¦ Ismeretlen adatlapok.
+Choisis une autre généalogie. ¦ Valitse toinen sukupuu. ¦ Válassz másik családfát.
+Impossible de créer le fichier d’archive. ¦ Arkistotiedostoa ei voitu luoda. ¦ Az archívumfájl nem hozható létre.
+Fichier introuvable. ¦ Tiedostoa ei löydy. ¦ A fájl nem található.
+Ce fichier n’est pas une archive de dossier de succession. ¦ Tämä tiedosto ei ole perunkirjoituskansion arkisto. ¦ Ez a fájl nem hagyatéki ügy archívuma.
+Le fichier n’a pas été reçu. ¦ Tiedostoa ei vastaanotettu. ¦ A fájl nem érkezett meg.
+Le défunt reste dans son dossier. ¦ Vainaja pysyy kansiossaan. ¦ Az elhunyt az ügyében marad.
+🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Henkilöt ¦ 🧑‍🤝‍🧑 Személyek
+Dossiers de succession (usage successoral seulement) ¦ Perunkirjoituskansiot (vain perintögenealogin käytössä) ¦ Hagyatéki ügyek (csak örökléskutató használatban)

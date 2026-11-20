@@ -523,3 +523,185 @@ Dévolution ¦ Dědická posloupnost ¦ Arvsordning ¦ Arvefølge
 =dépouillement ¦ excerpce|excerpce|excerpcí ¦ genomgång|genomgångar ¦ gennemgang|gennemgange
 =dossier en cours ¦ rozpracovaná složka|rozpracované složky|rozpracovaných složek ¦ pågående ärende|pågående ärenden ¦ igangværende sag|igangværende sager
 =dossier de succession ¦ dědická složka|dědické složky|dědických složek ¦ dödsboärende|dödsboärenden ¦ dødsbosag|dødsbosager
+
+# ⚖️ Dossiers de succession : rangement, filtre ⚖️, rattachement, tableau de bord, garde-fous, widget, vue par dossier
+Dossiers de succession : filtre {what} (cliquer pour changer) ¦ Dědické spisy: filtr {what} (kliknutím změníš) ¦ Dödsboärenden: filter {what} (klicka för att ändra) ¦ Dødsbosager: filter {what} (klik for at ændre)
+Dossiers de succession : ne montrer qu’un ou plusieurs dossiers ¦ Dědické spisy: zobrazit jen jeden nebo několik spisů ¦ Dödsboärenden: visa bara ett eller flera ärenden ¦ Dødsbosager: vis kun én eller flere sager
+Plusieurs ¦ Několik ¦ Flera ¦ Flere
+⚖️ Ne montrer que ceux-ci ¦ ⚖️ Zobrazit jen tyto ¦ ⚖️ Visa bara dessa ¦ ⚖️ Vis kun disse
+Aucun dossier dans cette généalogie. ¦ V tomto rodokmenu není žádný spis. ¦ Inget ärende i det här släktträdet. ¦ Ingen sag i dette slægtstræ.
+Dans une autre généalogie ¦ V jiném rodokmenu ¦ I ett annat släktträd ¦ I et andet slægtstræ
+Tous les dossiers… ¦ Všechny spisy… ¦ Alla ärenden… ¦ Alle sager…
+Seulement le dossier {n} ¦ Jen spis {n} ¦ Bara ärende {n} ¦ Kun sag {n}
+Seulement {what} : {list} ¦ Jen {what}: {list} ¦ Bara {what}: {list} ¦ Kun {what}: {list}
+1 dossier · {state} ¦ 1 spis · {state} ¦ 1 ärende · {state} ¦ 1 sag · {state}
+⚖️ Dossier {n} ¦ ⚖️ Spis {n} ¦ ⚖️ Ärende {n} ¦ ⚖️ Sag {n}
+Ce dossier est dans une autre généalogie ¦ Tento spis je v jiném rodokmenu ¦ Det här ärendet finns i ett annat släktträd ¦ Denne sag ligger i et andet slægtstræ
+Ouvrir « {name} » ¦ Otevřít „{name}“ ¦ Öppna ”{name}” ¦ Åbn »{name}«
+Il est rangé dans « {name} ». Pour le montrer, l’app ouvre cette généalogie (tes réglages d’ici sont gardés) et y active le filtre ⚖️ {n}. ¦ Je uložen v „{name}“. Aby ho aplikace ukázala, otevře tento rodokmen (tvá nastavení zde zůstanou) a zapne v něm filtr ⚖️ {n}. ¦ Den ligger i ”{name}”. För att visa den öppnar appen det släktträdet (dina inställningar här behålls) och slår på filtret ⚖️ {n} där. ¦ Den ligger i »{name}«. For at vise den åbner appen dette slægtstræ (dine indstillinger her bevares) og slår filteret ⚖️ {n} til der.
+Tes nouveaux dossiers vont dans « {name} ». ¦ Tvé nové spisy jdou do „{name}“. ¦ Dina nya ärenden hamnar i ”{name}”. ¦ Dine nye sager kommer i »{name}«.
+Ouvrir le dossier ici quand même ¦ Přesto otevřít spis zde ¦ Öppna ärendet här ändå ¦ Åbn sagen her alligevel
+Où ranger tes dossiers ? ¦ Kam ukládat tvé spisy? ¦ Var ska dina ärenden ligga? ¦ Hvor skal dine sager ligge?
+conseillé ici ¦ doporučeno zde ¦ rekommenderas här ¦ anbefales her
+Nom de la nouvelle généalogie ¦ Název nového rodokmenu ¦ Namn på det nya släktträdet ¦ Navn på det nye slægtstræ
+⚖️ Dossier de succession ¦ ⚖️ Dědický spis ¦ ⚖️ Dödsboärende ¦ ⚖️ Dødsbosag
+Ta généalogie ouverte a {n} : la ranger à part évite de mélanger les héritiers de tes clients avec ta propre famille. Ce n’est qu’un conseil. ¦ Tvůj otevřený rodokmen má {n}: oddělené uložení zabrání smíchání dědiců tvých klientů s tvou vlastní rodinou. Je to jen rada. ¦ Ditt öppna släktträd har {n}: att hålla dem separat undviker att blanda dina klienters arvingar med din egen familj. Det är bara ett råd. ¦ Dit åbne slægtstræ har {n}: at holde dem adskilt undgår at blande dine klienters arvinger med din egen familie. Det er kun et råd.
+Tu pourras changer d’avis : Réglages → Apparence → 🧭 Usage de l’app → « ⚖️ Où ranger les dossiers ». Les dossiers déjà ouverts ne bougent pas tout seuls. ¦ Můžeš si to rozmyslet: Nastavení → Vzhled → 🧭 Použití aplikace → „⚖️ Kam ukládat spisy“. Již otevřené spisy se samy nepřesunou. ¦ Du kan ändra dig: Inställningar → Utseende → 🧭 Användning av appen → ”⚖️ Var ärendena ska ligga”. Ärenden som redan är öppnade flyttas inte av sig själva. ¦ Du kan skifte mening: Indstillinger → Udseende → 🧭 Brug af appen → »⚖️ Hvor sagerne skal ligge«. Sager, der allerede er åbnet, flytter sig ikke af sig selv.
+Créer « ⚖️ Dossiers de succession » et ouvrir le dossier ¦ Vytvořit „⚖️ Dědické spisy“ a otevřít spis ¦ Skapa ”⚖️ Dödsboärenden” och öppna ärendet ¦ Opret »⚖️ Dødsbosager« og åbn sagen
+Créer la généalogie et ouvrir le dossier ¦ Vytvořit rodokmen a otevřít spis ¦ Skapa släktträdet och öppna ärendet ¦ Opret slægtstræet og åbn sagen
+Rangement des dossiers : {what} ¦ Ukládání spisů: {what} ¦ Var ärendena hamnar: {what} ¦ Hvor sagerne kommer: {what}
+Généalogiste successoral : réglages des dossiers ¦ Dědický genealog: nastavení spisů ¦ Arvsgenealog: inställningar för ärendena ¦ Arvegenealog: indstillinger for sagerne
+Où ranger les dossiers ¦ Kam ukládat spisy ¦ Var ärendena ska ligga ¦ Hvor sagerne skal ligge
+Les nouveaux dossiers vont… ¦ Nové spisy jdou… ¦ Nya ärenden hamnar… ¦ Nye sager kommer…
+Dans « {name} » ¦ Do „{name}“ ¦ I ”{name}” ¦ I »{name}«
+Les dossiers et où ils sont ¦ Spisy a kde jsou ¦ Ärendena och var de finns ¦ Sagerne og hvor de ligger
+⇄ Déplacer… ¦ ⇄ Přesunout… ¦ ⇄ Flytta… ¦ ⇄ Flyt…
+Aucun dossier pour l’instant. ¦ Zatím žádný spis. ¦ Inget ärende ännu. ¦ Ingen sag endnu.
+Réglages des dossiers ¦ Nastavení spisů ¦ Inställningar för ärendena ¦ Indstillinger for sagerne
+Arbre et graphiques filtrés par ⚖️ : les fiches hors dossier ¦ Strom a grafy s filtrem ⚖️: karty mimo spis ¦ Träd och diagram filtrerade med ⚖️: poster utanför ärendet ¦ Træ og diagrammer filtreret med ⚖️: poster uden for sagen
+Archive d’un dossier clos : adresses des héritiers vivants ¦ Archiv uzavřeného spisu: adresy žijících dědiců ¦ Arkiv för ett stängt ärende: adresser till levande arvingar ¦ Arkiv for en lukket sag: adresser på levende arvinger
+Déplacer un dossier dont une fiche est aussi dans ta famille ¦ Přesun spisu, jehož karta je i ve tvé rodině ¦ Flytta ett ärende vars post också finns i din familj ¦ Flytte en sag, hvis post også er i din familie
+« Sans dossier » dans la vue par dossier ¦ „Bez spisu“ v zobrazení podle spisů ¦ ”Utan ärende” i visningen per ärende ¦ »Uden sag« i visningen pr. sag
+Avancement : un héritier qui refuse de signer ¦ Postup: dědic, který odmítá podepsat ¦ Framsteg: en arvinge som vägrar skriva under ¦ Fremskridt: en arving, der nægter at skrive under
+compte comme « fait » (étape 5) ¦ počítá se jako „hotovo“ (krok 5) ¦ räknas som ”klar” (steg 5) ¦ tæller som »gjort« (trin 5)
+Avancement : poids des 7 étapes ¦ Postup: váha 7 kroků ¦ Framsteg: vikt för de 7 stegen ¦ Fremskridt: vægt for de 7 trin
+Réglage des dossiers enregistré : {what} ¦ Nastavení spisů uloženo: {what} ¦ Inställning för ärendena sparad: {what} ¦ Indstilling for sagerne gemt: {what}
+poids des 7 étapes ¦ váha 7 kroků ¦ vikt för de 7 stegen ¦ vægt for de 7 trin
+⇄ DÉPLACER UN DOSSIER ¦ ⇄ PŘESUNOUT SPIS ¦ ⇄ FLYTTA ETT ÄRENDE ¦ ⇄ FLYT EN SAG
+{n} → ? ¦ {n} → ? ¦ {n} → ? ¦ {n} → ?
+⇄ Déplacer ({what}) ¦ ⇄ Přesunout ({what}) ¦ ⇄ Flytta ({what}) ¦ ⇄ Flyt ({what})
+Vers ¦ Kam ¦ Till ¦ Til
+＋ Une nouvelle généalogie pour ce dossier ¦ ＋ Nový rodokmen pro tento spis ¦ ＋ Ett nytt släktträd för det här ärendet ¦ ＋ Et nyt slægtstræ til denne sag
+Ce qui part : le dossier, son journal, ses pièces, ses courriers, ses échéances, et les fiches qui lui sont rattachées (défunt, héritiers, intermédiaires) avec leurs actes et médias. Une fiche aussi rattachée à un autre dossier ou à ta famille est copiée, pas déplacée. ¦ Co odchází: spis, jeho deník, doklady, dopisy, lhůty a karty k němu připojené (zůstavitel, dědicové, prostředníci) s jejich záznamy a médii. Karta připojená i k jinému spisu nebo k tvé rodině se zkopíruje, nepřesune. ¦ Det som flyttas: ärendet, dess logg, handlingar, brev, frister och posterna kopplade till det (den avlidne, arvingar, mellanled) med deras handlingar och media. En post som också är kopplad till ett annat ärende eller till din familj kopieras, flyttas inte. ¦ Det, der flyttes: sagen, dens log, bilag, breve, frister og de tilknyttede poster (afdøde, arvinger, mellemled) med deres akter og medier. En post, der også er knyttet til en anden sag eller til din familie, kopieres, flyttes ikke.
+Déplacement refusé (réglage) : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Přesun odmítnut (nastavení): tyto karty jsou i ve tvé rodině nebo v jiném spisu: {names}. ¦ Flytt nekad (inställning): dessa poster finns också i din familj eller i ett annat ärende: {names}. ¦ Flytning afvist (indstilling): disse poster er også i din familie eller i en anden sag: {names}.
+Copiées (elles restent aussi ici) : {names}. ¦ Zkopírováno (zůstává i zde): {names}. ¦ Kopierade (de stannar också här): {names}. ¦ Kopieret (de bliver også her): {names}.
+Une copie de sauvegarde des deux généalogies est faite avant. Le journal du dossier note « Déplacé de … vers … ». ¦ Předtem se udělá záloha obou rodokmenů. Deník spisu zapíše „Přesunuto z … do …“. ¦ Först görs en säkerhetskopia av båda släktträden. Ärendets logg noterar ”Flyttad från … till …”. ¦ Først tages en sikkerhedskopi af begge slægtstræer. Sagens log noterer »Flyttet fra … til …«.
+Dossier {n} déplacé vers « {to} » ({what}) ¦ Spis {n} přesunut do „{to}“ ({what}) ¦ Ärende {n} flyttat till ”{to}” ({what}) ¦ Sag {n} flyttet til »{to}« ({what})
+⤓ Reprendre la fiche depuis Ma généalogie ¦ ⤓ Převzít kartu z Mého rodokmenu ¦ ⤓ Hämta posten från Mitt släktträd ¦ ⤓ Hent posten fra Mit slægtstræ
+copie de la fiche, jusqu’aux grands-parents et tous leurs descendants connus, sans photos ¦ kopie karty až po prarodiče a všechny jejich známé potomky, bez fotografií ¦ kopia av posten, upp till far- och morföräldrar och alla deras kända ättlingar, utan foton ¦ kopi af posten, op til bedsteforældrene og alle deres kendte efterkommere, uden fotos
+⤓ REPRENDRE UNE FICHE ¦ ⤓ PŘEVZÍT KARTU ¦ ⤓ HÄMTA EN POST ¦ ⤓ HENT EN POST
+Reprendre la fiche du défunt ¦ Převzít kartu zůstavitele ¦ Hämta den avlidnes post ¦ Hent afdødes post
+Chercher la fiche ¦ Hledat kartu ¦ Sök posten ¦ Søg posten
+Prénom, nom… ¦ Jméno, příjmení… ¦ Förnamn, efternamn… ¦ Fornavn, efternavn…
+Copiées : la fiche, ses parents et grands-parents, tous leurs descendants connus et leurs conjoints, avec les dates et les lieux ; sans photos. Rien n’est changé dans l’autre généalogie. ¦ Zkopírováno: karta, její rodiče a prarodiče, všichni jejich známí potomci a jejich manželé, s daty a místy; bez fotografií. V druhém rodokmenu se nic nemění. ¦ Kopieras: posten, föräldrar och far- och morföräldrar, alla kända ättlingar och deras makar, med datum och platser; utan foton. Inget ändras i det andra släktträdet. ¦ Kopieres: posten, forældre og bedsteforældre, alle kendte efterkommere og deres ægtefæller, med datoer og steder; uden fotos. Intet ændres i det andet slægtstræ.
+{what} reprises de l’autre généalogie. ¦ {what} převzato z druhého rodokmenu. ¦ {what} hämtade från det andra släktträdet. ¦ {what} hentet fra det andet slægtstræ.
+Dossiers… ¦ Spisy… ¦ Ärenden… ¦ Sager…
+{name} dans quels dossiers ? ¦ {name} ve kterých spisech? ¦ {name} i vilka ärenden? ¦ {name} i hvilke sager?
+(calculé) ¦ (vypočteno) ¦ (beräknad) ¦ (beregnet)
+Rôles : défunt · héritier · intermédiaire · témoin · à vérifier. « Héritier » mis par le calcul s’affiche « (calculé) ». ¦ Role: zůstavitel · dědic · prostředník · svědek · ke kontrole. „Dědic“ nastavený výpočtem má „(vypočteno)“. ¦ Roller: avliden · arvinge · mellanled · vittne · att kontrollera. ”Arvinge” satt av beräkningen visas ”(beräknad)”. ¦ Roller: afdød · arving · mellemled · vidne · skal tjekkes. »Arving« sat af beregningen vises »(beregnet)«.
+Dossiers de {name} enregistrés ¦ Spisy {name} uloženy ¦ Ärenden för {name} sparade ¦ Sager for {name} gemt
+Les dossiers de cette fiche ¦ Spisy této karty ¦ Den här postens ärenden ¦ Denne posts sager
+hors du dossier {n} ¦ mimo spis {n} ¦ utanför ärende {n} ¦ uden for sag {n}
+＋ Rattacher ¦ ＋ Připojit ¦ ＋ Koppla ¦ ＋ Tilknyt
+Fiche rattachée au dossier {n} ¦ Karta připojena ke spisu {n} ¦ Post kopplad till ärende {n} ¦ Post knyttet til sag {n}
+Rattachée au dossier {n} : {who} ¦ Připojeno ke spisu {n}: {who} ¦ Kopplad till ärende {n}: {who} ¦ Knyttet til sag {n}: {who}
+Lecture des fiches du dossier… ¦ Načítání karet spisu… ¦ Läser ärendets poster… ¦ Læser sagens poster…
+Les fiches du dossier ¦ Karty spisu ¦ Ärendets poster ¦ Sagens poster
+Rattacher ¦ Připojit ¦ Koppla ¦ Tilknyt
+Retirées à la main ({n}) : jamais remises toutes seules ¦ Odebrané ručně ({n}): nikdy se samy nevrátí ¦ Borttagna för hand ({n}): läggs aldrig tillbaka automatiskt ¦ Fjernet manuelt ({n}): sættes aldrig tilbage automatisk
+Fiche à comparer : « {name}{year} » ressemble à une fiche déjà dans cette base. Jamais fusionnée toute seule. ¦ Karta k porovnání: „{name}{year}“ se podobá kartě, která už v databázi je. Nikdy se nesloučí sama. ¦ Post att jämföra: ”{name}{year}” liknar en post som redan finns i databasen. Slås aldrig ihop automatiskt. ¦ Post at sammenligne: »{name}{year}« ligner en post, der allerede er i databasen. Flettes aldrig automatisk.
+née {y} ¦ nar. {y} ¦ född {y} ¦ født {y}
+Homonyme possible : « {name}{year} » existe aussi dans le dossier {n}. Jamais relié tout seul. ¦ Možná shoda jmen: „{name}{year}“ je i ve spisu {n}. Nikdy se nepropojí sama. ¦ Möjlig namne: ”{name}{year}” finns också i ärende {n}. Kopplas aldrig automatiskt. ¦ Mulig navnebror: »{name}{year}« findes også i sag {n}. Tilknyttes aldrig automatisk.
+⇆ Comparer ¦ ⇆ Porovnat ¦ ⇆ Jämför ¦ ⇆ Sammenlign
+C’est la même personne : rattacher aussi ¦ Je to stejná osoba: připojit také ¦ Det är samma person: koppla också ¦ Det er den samme person: tilknyt også
+Pas la même ¦ Není to stejná ¦ Inte samma ¦ Ikke den samme
+Fiche retirée du dossier {n} ¦ Karta odebrána ze spisu {n} ¦ Post borttagen från ärende {n} ¦ Post fjernet fra sag {n}
+Fiche remise dans le dossier {n} ¦ Karta vrácena do spisu {n} ¦ Post tillbaka i ärende {n} ¦ Post sat tilbage i sag {n}
+Homonyme rattaché aussi au dossier {n} (à vérifier) ¦ Shoda jmen připojena i ke spisu {n} (ke kontrole) ¦ Namne kopplad också till ärende {n} (att kontrollera) ¦ Navnebror også knyttet til sag {n} (skal tjekkes)
+Noté : ce n’est pas la même personne ¦ Zapsáno: není to stejná osoba ¦ Noterat: inte samma person ¦ Noteret: ikke den samme person
+Rôle : {r} ¦ Role: {r} ¦ Roll: {r} ¦ Rolle: {r}
+⚠️ illisible : {names} ¦ ⚠️ nečitelné: {names} ¦ ⚠️ oläsbar: {names} ¦ ⚠️ ulæselig: {names}
+Chercher… (n°, défunt, notaire) ¦ Hledat… (č., zůstavitel, notář) ¦ Sök… (nr, avliden, notarie) ¦ Søg… (nr., afdød, notar)
+Toutes les généalogies ¦ Všechny rodokmeny ¦ Alla släktträd ¦ Alle slægtstræer
+Tous les notaires ¦ Všichni notáři ¦ Alla notarier ¦ Alle notarer
+Prochaine échéance (retards d’abord) ¦ Nejbližší lhůta (nejprve zpoždění) ¦ Nästa frist (försenade först) ¦ Næste frist (forsinkede først)
+Avancement le plus bas ¦ Nejnižší postup ¦ Lägsta framsteg ¦ Laveste fremskridt
+{d} · passée ¦ {d} · uplynula ¦ {d} · passerad ¦ {d} · overskredet
+Trouvés : {n} ¦ Nalezeno: {n} ¦ Hittade: {n} ¦ Fundet: {n}
+À trouver : {n} ¦ K nalezení: {n} ¦ Att hitta: {n} ¦ Skal findes: {n}
+{h} h {m} ¦ {h} h {m} ¦ {h} h {m} ¦ {h} t {m}
+Cocher le dossier {n} ¦ Zaškrtnout spis {n} ¦ Markera ärende {n} ¦ Markér sag {n}
+Échéance : {d} ¦ Lhůta: {d} ¦ Frist: {d} ¦ Frist: {d}
+Héritiers ¦ Dědicové ¦ Arvingar ¦ Arvinger
+Avancement ¦ Postup ¦ Framsteg ¦ Fremskridt
+Cochés : {n} ¦ Zaškrtnuto: {n} ¦ Markerade: {n} ¦ Markeret: {n}
+Les dossiers cochés sont dans des généalogies différentes : choisis-en dans une seule. ¦ Zaškrtnuté spisy jsou v různých rodokmenech: vyber je jen z jednoho. ¦ De markerade ärendena finns i olika släktträd: välj bara från ett. ¦ De markerede sager ligger i forskellige slægtstræer: vælg kun fra ét.
+Dossiers exportés (CSV) ¦ Spisy exportovány (CSV) ¦ Ärenden exporterade (CSV) ¦ Sager eksporteret (CSV)
+⤒ Réimporter un dossier archivé… ¦ ⤒ Znovu importovat archivovaný spis… ¦ ⤒ Importera ett arkiverat ärende igen… ¦ ⤒ Genimportér en arkiveret sag…
+⚠️ FUSION ¦ ⚠️ SLOUČENÍ ¦ ⚠️ SAMMANSLAGNING ¦ ⚠️ FLETNING
+Ces deux fiches sont dans des dossiers différents ¦ Tyto dvě karty jsou v různých spisech ¦ De här två posterna finns i olika ärenden ¦ Disse to poster er i forskellige sager
+Fusionner quand même ¦ Přesto sloučit ¦ Slå ihop ändå ¦ Flet alligevel
+{a} et {b}. Fusionner relie les deux successions et change les parts des deux dossiers. Vérifie avec des actes (naissance, parents) avant. ¦ {a} a {b}. Sloučení propojí oba dědické případy a změní podíly v obou spisech. Nejdřív to ověř v matrikách (narození, rodiče). ¦ {a} och {b}. Sammanslagning knyter ihop de två dödsbona och ändrar andelarna i båda ärendena. Kontrollera först med handlingar (födelse, föräldrar). ¦ {a} og {b}. Fletning forbinder de to dødsboer og ændrer andelene i begge sager. Tjek først med kirkebøger (fødsel, forældre).
+⇆ Comparer d’abord ¦ ⇆ Nejdřív porovnat ¦ ⇆ Jämför först ¦ ⇆ Sammenlign først
+Si on fusionne : noté dans le journal des deux dossiers, et les deux sont recalculés. ¦ Po sloučení: zapsáno v deníku obou spisů a oba se přepočítají. ¦ Vid sammanslagning: noteras i båda ärendenas logg, och båda räknas om. ¦ Ved fletning: noteres i begge sagers log, og begge genberegnes.
+🗄 Archiver dans un fichier et retirer… ¦ 🗄 Archivovat do souboru a odebrat… ¦ 🗄 Arkivera i en fil och ta bort… ¦ 🗄 Arkivér i en fil og fjern…
+🗄 ARCHIVER LE DOSSIER {n} ¦ 🗄 ARCHIVOVAT SPIS {n} ¦ 🗄 ARKIVERA ÄRENDE {n} ¦ 🗄 ARKIVÉR SAG {n}
+Dans un fichier, puis retirer de la base ¦ Do souboru, pak odebrat z databáze ¦ Till en fil, sedan ta bort ur databasen ¦ Til en fil, derefter fjern fra databasen
+⤓ Enregistrer le fichier puis retirer ¦ ⤓ Uložit soubor a pak odebrat ¦ ⤓ Spara filen och ta sedan bort ¦ ⤓ Gem filen og fjern derefter
+Le fichier {file} contient : le dossier, le journal, les pièces et leurs images, les courriers, l’arbre de dévolution (SVG), le tableau pour le notaire et les fiches rattachées ({n}). ¦ Soubor {file} obsahuje: spis, deník, doklady a jejich obrázky, dopisy, strom dědické posloupnosti (SVG), tabulku pro notáře a připojené karty ({n}). ¦ Filen {file} innehåller: ärendet, loggen, handlingarna och deras bilder, breven, arvsträdet (SVG), tabellen för notarien och de kopplade posterna ({n}). ¦ Filen {file} indeholder: sagen, loggen, bilagene og deres billeder, brevene, arvetræet (SVG), tabellen til notaren og de tilknyttede poster ({n}).
+Garder les adresses des vivants dans le fichier ¦ Ponechat adresy žijících v souboru ¦ Behåll de levandes adresser i filen ¦ Behold de levendes adresser i filen
+utile si le notaire rouvre la succession ¦ užitečné, pokud notář dědictví znovu otevře ¦ bra om notarien öppnar dödsboet igen ¦ nyttigt, hvis notaren genåbner dødsboet
+Retirer les adresses ¦ Odebrat adresy ¦ Ta bort adresserna ¦ Fjern adresserne
+comme l’archivage actuel ¦ jako dosavadní archivace ¦ som den nuvarande arkiveringen ¦ som den nuværende arkivering
+Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base ({n}). Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste ({k}). Une sauvegarde est faite avant. ¦ Potom se karty, které slouží jen tomuto spisu, odeberou z databáze ({n}). Karta připojená i k jinému spisu (nebo k tvé rodině) zůstane ({k}). Předtem se udělá záloha. ¦ Sedan tas poster som bara hör till det här ärendet bort ur databasen ({n}). En post som också är kopplad till ett annat ärende (eller till din familj) stannar ({k}). Först görs en säkerhetskopia. ¦ Derefter fjernes de poster, der kun hører til denne sag, fra databasen ({n}). En post, der også er knyttet til en anden sag (eller din familie), bliver ({k}). Først tages en sikkerhedskopi.
+Dossier {n} archivé dans « {file} » et retiré ({what}) ¦ Spis {n} archivován do „{file}“ a odebrán ({what}) ¦ Ärende {n} arkiverat i ”{file}” och borttaget ({what}) ¦ Sag {n} arkiveret i »{file}« og fjernet ({what})
+⤒ RÉIMPORTER ¦ ⤒ ZNOVU IMPORTOVAT ¦ ⤒ IMPORTERA IGEN ¦ ⤒ GENIMPORTÉR
+⤒ Réimporter le dossier ¦ ⤒ Znovu importovat spis ¦ ⤒ Importera ärendet igen ¦ ⤒ Genimportér sagen
+Dossier {n} ({name}{closed}), {what}. ¦ Spis {n} ({name}{closed}), {what}. ¦ Ärende {n} ({name}{closed}), {what}. ¦ Sag {n} ({name}{closed}), {what}.
+clos le {d} ¦ uzavřen {d} ¦ stängd {d} ¦ lukket {d}
+{what} ressemblent à des fiches déjà dans cette base ({names}) : elles seront proposées à la comparaison, jamais fusionnées seules. ¦ {what} se podobá kartám, které už v databázi jsou ({names}): budou nabídnuty k porovnání, nikdy se nesloučí samy. ¦ {what} liknar poster som redan finns i databasen ({names}): de föreslås för jämförelse, slås aldrig ihop automatiskt. ¦ {what} ligner poster, der allerede er i databasen ({names}): de foreslås til sammenligning, flettes aldrig automatisk.
+Dossier {n} réimporté ({what}) ¦ Spis {n} znovu importován ({what}) ¦ Ärende {n} importerat igen ({what}) ¦ Sag {n} genimporteret ({what})
+Dossier {n} réimporté dans « {name} ». ¦ Spis {n} znovu importován do „{name}“. ¦ Ärende {n} importerat igen i ”{name}”. ¦ Sag {n} genimporteret i »{name}«.
+⚖️ Mes dossiers de succession ¦ ⚖️ Moje dědické spisy ¦ ⚖️ Mina dödsboärenden ¦ ⚖️ Mine dødsbosager
+Aucun dossier de succession. ¦ Žádný dědický spis. ¦ Inget dödsboärende. ¦ Ingen dødsbosag.
+Étapes (7) ¦ Kroky (7) ¦ Steg (7) ¦ Trin (7)
+{step} : {done} sur {total} ¦ {step}: {done} z {total} ¦ {step}: {done} av {total} ¦ {step}: {done} af {total}
+Quels dossiers ¦ Které spisy ¦ Vilka ärenden ¦ Hvilke sager
+Le filtre ¦ Filtr ¦ Filtret ¦ Filteret
+Vue actuelle ¦ Současné zobrazení ¦ Nuvarande vy ¦ Nuværende visning
+Alt + ↑ / ↓ : changer l’ordre (rangement à la main) ¦ Alt + ↑ / ↓: změnit pořadí (ručně) ¦ Alt + ↑ / ↓: ändra ordningen (för hand) ¦ Alt + ↑ / ↓: skift rækkefølgen (manuelt)
+Sans dossier ¦ Bez spisu ¦ Utan ärende ¦ Uden sag
+Ranger les dossiers : ¦ Řadit spisy: ¦ Ordna ärendena: ¦ Ordn sagerne:
+… cherche un nom pour voir les autres. ¦ … vyhledej jméno a uvidíš ostatní. ¦ … sök ett namn för att se de andra. ¦ … søg et navn for at se de andre.
+Ordre des dossiers changé ¦ Pořadí spisů změněno ¦ Ordningen på ärendena ändrad ¦ Sagernes rækkefølge ændret
+Dans cette généalogie ¦ V tomto rodokmenu ¦ I det här släktträdet ¦ I dette slægtstræ
+Le défunt et ses héritiers sont des fiches de ta famille. Simple, mais tout se mélange. ¦ Zůstavitel a jeho dědicové jsou karty tvé rodiny. Jednoduché, ale všechno se smíchá. ¦ Den avlidne och arvingarna är poster i din familj. Enkelt, men allt blandas. ¦ Afdøde og arvingerne er poster i din familie. Enkelt, men alt blandes.
+Dans une généalogie à part pour tous mes dossiers ¦ V samostatném rodokmenu pro všechny mé spisy ¦ I ett separat släktträd för alla mina ärenden ¦ I et separat slægtstræ til alle mine sager
+Une base professionnelle « ⚖️ Dossiers de succession », créée dans 🌳 Mes généalogies. Tes dossiers y sont tous ensemble ; ta famille reste à part. ¦ Profesní databáze „⚖️ Dědické spisy“, vytvořená v 🌳 Mé rodokmeny. Tvé spisy jsou tam všechny pohromadě; tvá rodina zůstane stranou. ¦ En yrkesdatabas ”⚖️ Dödsboärenden”, skapad i 🌳 Mina släktträd. Alla dina ärenden finns där tillsammans; din familj hålls separat. ¦ En professionel database »⚖️ Dødsbosager«, oprettet i 🌳 Mine slægtstræer. Alle dine sager ligger der samlet; din familie holdes adskilt.
+Une généalogie par dossier ¦ Jeden rodokmen na spis ¦ Ett släktträd per ärende ¦ Ét slægtstræ pr. sag
+Chaque dossier a sa propre base (« ⚖️ 2026-014 MAZAUD »). Le plus étanche ; à réserver aux grosses successions. ¦ Každý spis má vlastní databázi („⚖️ 2026-014 MAZAUD“). Nejlépe oddělené; pro velká dědictví. ¦ Varje ärende har sin egen databas (”⚖️ 2026-014 MAZAUD”). Mest avskilt; för stora dödsbon. ¦ Hver sag har sin egen database (»⚖️ 2026-014 MAZAUD«). Mest adskilt; til store dødsboer.
+défunt ¦ zůstavitel ¦ avliden ¦ afdød
+intermédiaire ¦ prostředník ¦ mellanled ¦ mellemled
+Un par dossier ¦ Jeden na spis ¦ Ett per ärende ¦ Én pr. sag
+Un filtre ¦ Filtr ¦ Ett filter ¦ Et filter
+Compteurs ¦ Počítadla ¦ Räknare ¦ Tællere
+à l’ouverture ¦ při otevření ¦ vid öppning ¦ ved åbning
+calcul ¦ výpočet ¦ beräkning ¦ beregning
+à la main ¦ ručně ¦ för hand ¦ manuelt
+créée pendant le filtre ¦ vytvořena během filtru ¦ skapad under filtret ¦ oprettet under filteret
+réimport ¦ nový import ¦ återimport ¦ genimport
+homonyme ¦ shoda jmen ¦ namne ¦ navnebror
+déplacée ¦ přesunuta ¦ flyttad ¦ flyttet
+grisées, sans nom ¦ šedé, bez jména ¦ grå, utan namn ¦ grå, uden navn
+cachées ¦ skryté ¦ dolda ¦ skjulte
+retirées du fichier ¦ odebrány ze souboru ¦ borttagna ur filen ¦ fjernet fra filen
+gardées dans le fichier ¦ ponechány v souboru ¦ behållna i filen ¦ beholdt i filen
+copier la fiche ¦ zkopírovat kartu ¦ kopiera posten ¦ kopiér posten
+refuser le déplacement ¦ odmítnout přesun ¦ neka flytten ¦ afvis flytningen
+replié ¦ sbaleno ¦ hopfällt ¦ foldet sammen
+Défunt et acte de décès ¦ Zůstavitel a úmrtní zápis ¦ Avliden och dödsbevis ¦ Afdød og dødsattest
+Adresses ¦ Adresy ¦ Adresser ¦ Adresser
+Contrats signés ¦ Podepsané smlouvy ¦ Underskrivna avtal ¦ Underskrevne aftaler
+Déplacement refusé : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Přesun odmítnut: tyto karty jsou i ve tvé rodině nebo v jiném spisu: {names}. ¦ Flytt nekad: dessa poster finns också i din familj eller i ett annat ärende: {names}. ¦ Flytning afvist: disse poster er også i din familie eller i en anden sag: {names}.
+Impossible d’enregistrer les réglages des dossiers. ¦ Nastavení spisů nelze uložit. ¦ Det gick inte att spara inställningarna för ärendena. ¦ Indstillingerne for sagerne kunne ikke gemmes.
+Cette généalogie est encore vide. ¦ Tento rodokmen je zatím prázdný. ¦ Det här släktträdet är fortfarande tomt. ¦ Dette slægtstræ er stadig tomt.
+Rôle inconnu. ¦ Neznámá role. ¦ Okänd roll. ¦ Ukendt rolle.
+Fiches inconnues. ¦ Neznámé karty. ¦ Okända poster. ¦ Ukendte poster.
+Choisis une autre généalogie. ¦ Vyber jiný rodokmen. ¦ Välj ett annat släktträd. ¦ Vælg et andet slægtstræ.
+Impossible de créer le fichier d’archive. ¦ Archivní soubor nelze vytvořit. ¦ Det gick inte att skapa arkivfilen. ¦ Arkivfilen kunne ikke oprettes.
+Fichier introuvable. ¦ Soubor nenalezen. ¦ Filen hittades inte. ¦ Filen blev ikke fundet.
+Ce fichier n’est pas une archive de dossier de succession. ¦ Tento soubor není archivem dědického spisu. ¦ Den här filen är inte ett arkiv för ett dödsboärende. ¦ Denne fil er ikke et arkiv for en dødsbosag.
+Le fichier n’a pas été reçu. ¦ Soubor nedorazil. ¦ Filen togs inte emot. ¦ Filen blev ikke modtaget.
+Le défunt reste dans son dossier. ¦ Zůstavitel zůstává ve svém spisu. ¦ Den avlidne stannar i sitt ärende. ¦ Afdøde bliver i sin sag.
+🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Osoby ¦ 🧑‍🤝‍🧑 Personer ¦ 🧑‍🤝‍🧑 Personer
+Dossiers de succession (usage successoral seulement) ¦ Dědické spisy (jen při použití dědického genealoga) ¦ Dödsboärenden (bara vid användning som arvsgenealog) ¦ Dødsbosager (kun ved brug som arvegenealog)

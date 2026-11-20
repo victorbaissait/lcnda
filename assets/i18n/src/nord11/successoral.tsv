@@ -523,3 +523,185 @@ Dévolution ¦ Thứ tự thừa kế ¦ Urutan pewarisan
 =dépouillement ¦ lượt rà soát ¦ penelusuran
 =dossier en cours ¦ hồ sơ đang mở ¦ berkas berjalan
 =dossier de succession ¦ hồ sơ thừa kế ¦ berkas warisan
+
+# ⚖️ Dossiers de succession : rangement, filtre ⚖️, rattachement, tableau de bord, garde-fous, widget, vue par dossier
+Dossiers de succession : filtre {what} (cliquer pour changer) ¦ Hồ sơ thừa kế: bộ lọc {what} (bấm để đổi) ¦ Berkas warisan: filter {what} (klik untuk mengubah)
+Dossiers de succession : ne montrer qu’un ou plusieurs dossiers ¦ Hồ sơ thừa kế: chỉ hiện một hoặc vài hồ sơ ¦ Berkas warisan: tampilkan hanya satu atau beberapa berkas
+Plusieurs ¦ Nhiều hồ sơ ¦ Beberapa
+⚖️ Ne montrer que ceux-ci ¦ ⚖️ Chỉ hiện những hồ sơ này ¦ ⚖️ Tampilkan hanya ini
+Aucun dossier dans cette généalogie. ¦ Không có hồ sơ nào trong gia phả này. ¦ Tidak ada berkas di silsilah ini.
+Dans une autre généalogie ¦ Trong một gia phả khác ¦ Di silsilah lain
+Tous les dossiers… ¦ Tất cả hồ sơ… ¦ Semua berkas…
+Seulement le dossier {n} ¦ Chỉ hồ sơ {n} ¦ Hanya berkas {n}
+Seulement {what} : {list} ¦ Chỉ {what}: {list} ¦ Hanya {what}: {list}
+1 dossier · {state} ¦ 1 hồ sơ · {state} ¦ 1 berkas · {state}
+⚖️ Dossier {n} ¦ ⚖️ Hồ sơ {n} ¦ ⚖️ Berkas {n}
+Ce dossier est dans une autre généalogie ¦ Hồ sơ này nằm trong một gia phả khác ¦ Berkas ini ada di silsilah lain
+Ouvrir « {name} » ¦ Mở “{name}” ¦ Buka “{name}”
+Il est rangé dans « {name} ». Pour le montrer, l’app ouvre cette généalogie (tes réglages d’ici sont gardés) et y active le filtre ⚖️ {n}. ¦ Hồ sơ được cất trong “{name}”. Để hiện nó, ứng dụng mở gia phả đó (cài đặt của bạn ở đây được giữ) và bật bộ lọc ⚖️ {n} ở đó. ¦ Berkas ini disimpan di “{name}”. Untuk menampilkannya, aplikasi membuka silsilah itu (pengaturanmu di sini tetap tersimpan) dan menyalakan filter ⚖️ {n} di sana.
+Tes nouveaux dossiers vont dans « {name} ». ¦ Hồ sơ mới của bạn sẽ vào “{name}”. ¦ Berkas barumu masuk ke “{name}”.
+Ouvrir le dossier ici quand même ¦ Vẫn mở hồ sơ ở đây ¦ Tetap buka berkas di sini
+Où ranger tes dossiers ? ¦ Cất hồ sơ của bạn ở đâu? ¦ Di mana menyimpan berkasmu?
+conseillé ici ¦ nên dùng ở đây ¦ disarankan di sini
+Nom de la nouvelle généalogie ¦ Tên gia phả mới ¦ Nama silsilah baru
+⚖️ Dossier de succession ¦ ⚖️ Hồ sơ thừa kế ¦ ⚖️ Berkas warisan
+Ta généalogie ouverte a {n} : la ranger à part évite de mélanger les héritiers de tes clients avec ta propre famille. Ce n’est qu’un conseil. ¦ Gia phả đang mở của bạn có {n}: cất riêng giúp không lẫn người thừa kế của khách hàng với gia đình bạn. Đây chỉ là lời khuyên. ¦ Silsilah yang terbuka punya {n}: menyimpannya terpisah mencegah ahli waris klienmu bercampur dengan keluargamu sendiri. Ini hanya saran.
+Tu pourras changer d’avis : Réglages → Apparence → 🧭 Usage de l’app → « ⚖️ Où ranger les dossiers ». Les dossiers déjà ouverts ne bougent pas tout seuls. ¦ Bạn có thể đổi ý: Cài đặt → Giao diện → 🧭 Cách dùng ứng dụng → “⚖️ Cất hồ sơ ở đâu”. Hồ sơ đã mở không tự di chuyển. ¦ Kamu bisa berubah pikiran: Pengaturan → Tampilan → 🧭 Penggunaan aplikasi → “⚖️ Tempat menyimpan berkas”. Berkas yang sudah dibuka tidak pindah sendiri.
+Créer « ⚖️ Dossiers de succession » et ouvrir le dossier ¦ Tạo “⚖️ Hồ sơ thừa kế” và mở hồ sơ ¦ Buat “⚖️ Berkas warisan” dan buka berkas
+Créer la généalogie et ouvrir le dossier ¦ Tạo gia phả và mở hồ sơ ¦ Buat silsilah dan buka berkas
+Rangement des dossiers : {what} ¦ Nơi cất hồ sơ: {what} ¦ Tempat berkas: {what}
+Généalogiste successoral : réglages des dossiers ¦ Nhà phả hệ học về thừa kế: cài đặt hồ sơ ¦ Genealog warisan: pengaturan berkas
+Où ranger les dossiers ¦ Cất hồ sơ ở đâu ¦ Tempat menyimpan berkas
+Les nouveaux dossiers vont… ¦ Hồ sơ mới vào… ¦ Berkas baru masuk ke…
+Dans « {name} » ¦ Vào “{name}” ¦ Di “{name}”
+Les dossiers et où ils sont ¦ Các hồ sơ và nơi cất ¦ Berkas dan lokasinya
+⇄ Déplacer… ¦ ⇄ Di chuyển… ¦ ⇄ Pindahkan…
+Aucun dossier pour l’instant. ¦ Chưa có hồ sơ nào. ¦ Belum ada berkas.
+Réglages des dossiers ¦ Cài đặt hồ sơ ¦ Pengaturan berkas
+Arbre et graphiques filtrés par ⚖️ : les fiches hors dossier ¦ Cây và biểu đồ lọc theo ⚖️: các hồ sơ người ngoài hồ sơ thừa kế ¦ Pohon dan grafik dengan filter ⚖️: profil di luar berkas
+Archive d’un dossier clos : adresses des héritiers vivants ¦ Lưu trữ hồ sơ đã đóng: địa chỉ người thừa kế còn sống ¦ Arsip berkas yang ditutup: alamat ahli waris yang masih hidup
+Déplacer un dossier dont une fiche est aussi dans ta famille ¦ Di chuyển hồ sơ có một người cũng thuộc gia đình bạn ¦ Memindahkan berkas yang profilnya juga ada di keluargamu
+« Sans dossier » dans la vue par dossier ¦ “Không thuộc hồ sơ” trong cách xem theo hồ sơ ¦ “Tanpa berkas” dalam tampilan per berkas
+Avancement : un héritier qui refuse de signer ¦ Tiến độ: người thừa kế từ chối ký ¦ Kemajuan: ahli waris yang menolak menandatangani
+compte comme « fait » (étape 5) ¦ tính là “đã xong” (bước 5) ¦ dihitung “selesai” (langkah 5)
+Avancement : poids des 7 étapes ¦ Tiến độ: trọng số của 7 bước ¦ Kemajuan: bobot 7 langkah
+Réglage des dossiers enregistré : {what} ¦ Đã lưu cài đặt hồ sơ: {what} ¦ Pengaturan berkas disimpan: {what}
+poids des 7 étapes ¦ trọng số của 7 bước ¦ bobot 7 langkah
+⇄ DÉPLACER UN DOSSIER ¦ ⇄ DI CHUYỂN HỒ SƠ ¦ ⇄ PINDAHKAN BERKAS
+{n} → ? ¦ {n} → ? ¦ {n} → ?
+⇄ Déplacer ({what}) ¦ ⇄ Di chuyển ({what}) ¦ ⇄ Pindahkan ({what})
+Vers ¦ Đến ¦ Ke
+＋ Une nouvelle généalogie pour ce dossier ¦ ＋ Một gia phả mới cho hồ sơ này ¦ ＋ Silsilah baru untuk berkas ini
+Ce qui part : le dossier, son journal, ses pièces, ses courriers, ses échéances, et les fiches qui lui sont rattachées (défunt, héritiers, intermédiaires) avec leurs actes et médias. Une fiche aussi rattachée à un autre dossier ou à ta famille est copiée, pas déplacée. ¦ Những gì được chuyển: hồ sơ, nhật ký, giấy tờ, thư từ, thời hạn và những người gắn với hồ sơ (người mất, người thừa kế, người trung gian) cùng giấy tờ và tệp đa phương tiện. Người cũng gắn với hồ sơ khác hay với gia đình bạn sẽ được sao chép, không di chuyển. ¦ Yang dipindahkan: berkas, jurnalnya, dokumen, surat, tenggat, dan profil yang terkait (pewaris, ahli waris, perantara) beserta akta dan medianya. Profil yang juga terkait berkas lain atau keluargamu disalin, bukan dipindahkan.
+Déplacement refusé (réglage) : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Từ chối di chuyển (cài đặt): những người này cũng thuộc gia đình bạn hoặc hồ sơ khác: {names}. ¦ Pemindahan ditolak (pengaturan): profil ini juga ada di keluargamu atau di berkas lain: {names}.
+Copiées (elles restent aussi ici) : {names}. ¦ Đã sao chép (vẫn ở lại đây): {names}. ¦ Disalin (tetap ada juga di sini): {names}.
+Une copie de sauvegarde des deux généalogies est faite avant. Le journal du dossier note « Déplacé de … vers … ». ¦ Trước tiên sẽ sao lưu cả hai gia phả. Nhật ký hồ sơ ghi “Đã chuyển từ … sang …”. ¦ Lebih dulu dibuat cadangan kedua silsilah. Jurnal berkas mencatat “Dipindahkan dari … ke …”.
+Dossier {n} déplacé vers « {to} » ({what}) ¦ Đã chuyển hồ sơ {n} sang “{to}” ({what}) ¦ Berkas {n} dipindahkan ke “{to}” ({what})
+⤓ Reprendre la fiche depuis Ma généalogie ¦ ⤓ Lấy hồ sơ người từ Gia phả của tôi ¦ ⤓ Ambil profil dari Silsilah saya
+copie de la fiche, jusqu’aux grands-parents et tous leurs descendants connus, sans photos ¦ bản sao hồ sơ người, lên đến ông bà và mọi con cháu đã biết của họ, không có ảnh ¦ salinan profil, sampai kakek-nenek dan semua keturunan mereka yang diketahui, tanpa foto
+⤓ REPRENDRE UNE FICHE ¦ ⤓ LẤY HỒ SƠ NGƯỜI ¦ ⤓ AMBIL PROFIL
+Reprendre la fiche du défunt ¦ Lấy hồ sơ của người đã mất ¦ Ambil profil pewaris
+Chercher la fiche ¦ Tìm hồ sơ người ¦ Cari profil
+Prénom, nom… ¦ Tên, họ… ¦ Nama depan, nama belakang…
+Copiées : la fiche, ses parents et grands-parents, tous leurs descendants connus et leurs conjoints, avec les dates et les lieux ; sans photos. Rien n’est changé dans l’autre généalogie. ¦ Được sao chép: hồ sơ người, cha mẹ và ông bà, mọi con cháu đã biết và vợ chồng của họ, kèm ngày tháng và nơi chốn; không có ảnh. Gia phả kia không thay đổi gì. ¦ Disalin: profil, orang tua dan kakek-nenek, semua keturunan yang diketahui dan pasangan mereka, dengan tanggal dan tempat; tanpa foto. Tidak ada yang berubah di silsilah lain.
+{what} reprises de l’autre généalogie. ¦ {what} lấy từ gia phả kia. ¦ {what} diambil dari silsilah lain.
+Dossiers… ¦ Hồ sơ… ¦ Berkas…
+{name} dans quels dossiers ? ¦ {name} thuộc những hồ sơ nào? ¦ {name} di berkas mana saja?
+(calculé) ¦ (tính toán) ¦ (dihitung)
+Rôles : défunt · héritier · intermédiaire · témoin · à vérifier. « Héritier » mis par le calcul s’affiche « (calculé) ». ¦ Vai trò: người mất · người thừa kế · người trung gian · người làm chứng · cần kiểm tra. “Người thừa kế” do phép tính đặt sẽ hiện “(tính toán)”. ¦ Peran: pewaris · ahli waris · perantara · saksi · perlu dicek. “Ahli waris” yang ditetapkan perhitungan tampil “(dihitung)”.
+Dossiers de {name} enregistrés ¦ Đã lưu hồ sơ của {name} ¦ Berkas {name} disimpan
+Les dossiers de cette fiche ¦ Các hồ sơ của người này ¦ Berkas profil ini
+hors du dossier {n} ¦ ngoài hồ sơ {n} ¦ di luar berkas {n}
+＋ Rattacher ¦ ＋ Gắn vào ¦ ＋ Kaitkan
+Fiche rattachée au dossier {n} ¦ Đã gắn người vào hồ sơ {n} ¦ Profil dikaitkan ke berkas {n}
+Rattachée au dossier {n} : {who} ¦ Đã gắn vào hồ sơ {n}: {who} ¦ Dikaitkan ke berkas {n}: {who}
+Lecture des fiches du dossier… ¦ Đang đọc những người trong hồ sơ… ¦ Membaca profil berkas…
+Les fiches du dossier ¦ Những người trong hồ sơ ¦ Profil berkas
+Rattacher ¦ Gắn vào ¦ Kaitkan
+Retirées à la main ({n}) : jamais remises toutes seules ¦ Đã gỡ bằng tay ({n}): không bao giờ tự gắn lại ¦ Dilepas manual ({n}): tidak pernah dikembalikan otomatis
+Fiche à comparer : « {name}{year} » ressemble à une fiche déjà dans cette base. Jamais fusionnée toute seule. ¦ Cần so sánh: “{name}{year}” giống một hồ sơ người đã có trong cơ sở dữ liệu này. Không bao giờ tự gộp. ¦ Profil untuk dibandingkan: “{name}{year}” mirip profil yang sudah ada di basis data ini. Tidak pernah digabung otomatis.
+née {y} ¦ sinh {y} ¦ lahir {y}
+Homonyme possible : « {name}{year} » existe aussi dans le dossier {n}. Jamais relié tout seul. ¦ Có thể trùng tên: “{name}{year}” cũng có trong hồ sơ {n}. Không bao giờ tự gắn. ¦ Kemungkinan senama: “{name}{year}” juga ada di berkas {n}. Tidak pernah dikaitkan otomatis.
+⇆ Comparer ¦ ⇆ So sánh ¦ ⇆ Bandingkan
+C’est la même personne : rattacher aussi ¦ Là cùng một người: gắn luôn ¦ Orang yang sama: kaitkan juga
+Pas la même ¦ Không phải cùng người ¦ Bukan orang yang sama
+Fiche retirée du dossier {n} ¦ Đã gỡ người khỏi hồ sơ {n} ¦ Profil dilepas dari berkas {n}
+Fiche remise dans le dossier {n} ¦ Đã gắn lại người vào hồ sơ {n} ¦ Profil dikembalikan ke berkas {n}
+Homonyme rattaché aussi au dossier {n} (à vérifier) ¦ Người trùng tên cũng được gắn vào hồ sơ {n} (cần kiểm tra) ¦ Senama juga dikaitkan ke berkas {n} (perlu dicek)
+Noté : ce n’est pas la même personne ¦ Đã ghi: không phải cùng một người ¦ Dicatat: bukan orang yang sama
+Rôle : {r} ¦ Vai trò: {r} ¦ Peran: {r}
+⚠️ illisible : {names} ¦ ⚠️ không đọc được: {names} ¦ ⚠️ tidak terbaca: {names}
+Chercher… (n°, défunt, notaire) ¦ Tìm… (số, người mất, công chứng viên) ¦ Cari… (no., pewaris, notaris)
+Toutes les généalogies ¦ Tất cả gia phả ¦ Semua silsilah
+Tous les notaires ¦ Tất cả công chứng viên ¦ Semua notaris
+Prochaine échéance (retards d’abord) ¦ Thời hạn kế tiếp (trễ hạn trước) ¦ Tenggat berikutnya (yang terlambat dulu)
+Avancement le plus bas ¦ Tiến độ thấp nhất ¦ Kemajuan terendah
+{d} · passée ¦ {d} · đã quá hạn ¦ {d} · lewat
+Trouvés : {n} ¦ Đã tìm thấy: {n} ¦ Ditemukan: {n}
+À trouver : {n} ¦ Cần tìm: {n} ¦ Perlu dicari: {n}
+{h} h {m} ¦ {h} giờ {m} ¦ {h} jam {m}
+Cocher le dossier {n} ¦ Đánh dấu hồ sơ {n} ¦ Centang berkas {n}
+Échéance : {d} ¦ Thời hạn: {d} ¦ Tenggat: {d}
+Héritiers ¦ Người thừa kế ¦ Ahli waris
+Avancement ¦ Tiến độ ¦ Kemajuan
+Cochés : {n} ¦ Đã đánh dấu: {n} ¦ Dicentang: {n}
+Les dossiers cochés sont dans des généalogies différentes : choisis-en dans une seule. ¦ Các hồ sơ đã đánh dấu thuộc những gia phả khác nhau: chỉ chọn trong một gia phả. ¦ Berkas yang dicentang ada di silsilah yang berbeda: pilih dari satu saja.
+Dossiers exportés (CSV) ¦ Đã xuất hồ sơ (CSV) ¦ Berkas diekspor (CSV)
+⤒ Réimporter un dossier archivé… ¦ ⤒ Nhập lại một hồ sơ đã lưu trữ… ¦ ⤒ Impor ulang berkas yang diarsipkan…
+⚠️ FUSION ¦ ⚠️ GỘP ¦ ⚠️ PENGGABUNGAN
+Ces deux fiches sont dans des dossiers différents ¦ Hai hồ sơ người này thuộc những hồ sơ thừa kế khác nhau ¦ Dua profil ini ada di berkas yang berbeda
+Fusionner quand même ¦ Vẫn gộp ¦ Tetap gabungkan
+{a} et {b}. Fusionner relie les deux successions et change les parts des deux dossiers. Vérifie avec des actes (naissance, parents) avant. ¦ {a} và {b}. Gộp sẽ nối hai vụ thừa kế và đổi phần chia ở cả hai hồ sơ. Hãy kiểm tra trước bằng giấy tờ (khai sinh, cha mẹ). ¦ {a} dan {b}. Penggabungan menghubungkan kedua warisan dan mengubah bagian di kedua berkas. Periksa dulu dengan akta (kelahiran, orang tua).
+⇆ Comparer d’abord ¦ ⇆ So sánh trước ¦ ⇆ Bandingkan dulu
+Si on fusionne : noté dans le journal des deux dossiers, et les deux sont recalculés. ¦ Nếu gộp: ghi vào nhật ký của cả hai hồ sơ, và cả hai được tính lại. ¦ Jika digabung: dicatat di jurnal kedua berkas, dan keduanya dihitung ulang.
+🗄 Archiver dans un fichier et retirer… ¦ 🗄 Lưu trữ vào tệp và gỡ khỏi cơ sở dữ liệu… ¦ 🗄 Arsipkan ke sebuah file lalu hapus…
+🗄 ARCHIVER LE DOSSIER {n} ¦ 🗄 LƯU TRỮ HỒ SƠ {n} ¦ 🗄 ARSIPKAN BERKAS {n}
+Dans un fichier, puis retirer de la base ¦ Vào một tệp, rồi gỡ khỏi cơ sở dữ liệu ¦ Ke sebuah file, lalu hapus dari basis data
+⤓ Enregistrer le fichier puis retirer ¦ ⤓ Lưu tệp rồi gỡ ¦ ⤓ Simpan file lalu hapus
+Le fichier {file} contient : le dossier, le journal, les pièces et leurs images, les courriers, l’arbre de dévolution (SVG), le tableau pour le notaire et les fiches rattachées ({n}). ¦ Tệp {file} gồm: hồ sơ, nhật ký, giấy tờ và hình ảnh, thư từ, cây thừa kế (SVG), bảng cho công chứng viên và những người đã gắn ({n}). ¦ File {file} berisi: berkas, jurnal, dokumen dan gambarnya, surat, pohon pewarisan (SVG), tabel untuk notaris, dan profil terkait ({n}).
+Garder les adresses des vivants dans le fichier ¦ Giữ địa chỉ người còn sống trong tệp ¦ Simpan alamat orang yang masih hidup di file
+utile si le notaire rouvre la succession ¦ hữu ích nếu công chứng viên mở lại vụ thừa kế ¦ berguna jika notaris membuka kembali warisan
+Retirer les adresses ¦ Gỡ địa chỉ ¦ Hapus alamat
+comme l’archivage actuel ¦ như cách lưu trữ hiện nay ¦ seperti pengarsipan saat ini
+Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base ({n}). Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste ({k}). Une sauvegarde est faite avant. ¦ Sau đó, những người chỉ dùng cho hồ sơ này được gỡ khỏi cơ sở dữ liệu ({n}). Người cũng gắn với hồ sơ khác (hoặc gia đình bạn) được giữ lại ({k}). Trước tiên sẽ sao lưu. ¦ Lalu profil yang hanya dipakai berkas ini dihapus dari basis data ({n}). Profil yang juga terkait berkas lain (atau keluargamu) tetap ada ({k}). Lebih dulu dibuat cadangan.
+Dossier {n} archivé dans « {file} » et retiré ({what}) ¦ Đã lưu trữ hồ sơ {n} vào “{file}” và gỡ ({what}) ¦ Berkas {n} diarsipkan ke “{file}” dan dihapus ({what})
+⤒ RÉIMPORTER ¦ ⤒ NHẬP LẠI ¦ ⤒ IMPOR ULANG
+⤒ Réimporter le dossier ¦ ⤒ Nhập lại hồ sơ ¦ ⤒ Impor ulang berkas
+Dossier {n} ({name}{closed}), {what}. ¦ Hồ sơ {n} ({name}{closed}), {what}. ¦ Berkas {n} ({name}{closed}), {what}.
+clos le {d} ¦ đóng ngày {d} ¦ ditutup {d}
+{what} ressemblent à des fiches déjà dans cette base ({names}) : elles seront proposées à la comparaison, jamais fusionnées seules. ¦ {what} giống những người đã có trong cơ sở dữ liệu này ({names}): sẽ được đề nghị so sánh, không bao giờ tự gộp. ¦ {what} mirip profil yang sudah ada di basis data ini ({names}): akan diusulkan untuk dibandingkan, tidak pernah digabung otomatis.
+Dossier {n} réimporté ({what}) ¦ Đã nhập lại hồ sơ {n} ({what}) ¦ Berkas {n} diimpor ulang ({what})
+Dossier {n} réimporté dans « {name} ». ¦ Đã nhập lại hồ sơ {n} vào “{name}”. ¦ Berkas {n} diimpor ulang ke “{name}”.
+⚖️ Mes dossiers de succession ¦ ⚖️ Hồ sơ thừa kế của tôi ¦ ⚖️ Berkas warisan saya
+Aucun dossier de succession. ¦ Không có hồ sơ thừa kế. ¦ Tidak ada berkas warisan.
+Étapes (7) ¦ Các bước (7) ¦ Langkah (7)
+{step} : {done} sur {total} ¦ {step}: {done}/{total} ¦ {step}: {done} dari {total}
+Quels dossiers ¦ Những hồ sơ nào ¦ Berkas mana
+Le filtre ¦ Bộ lọc ¦ Filternya
+Vue actuelle ¦ Cách xem hiện tại ¦ Tampilan saat ini
+Alt + ↑ / ↓ : changer l’ordre (rangement à la main) ¦ Alt + ↑ / ↓: đổi thứ tự (bằng tay) ¦ Alt + ↑ / ↓: ubah urutan (manual)
+Sans dossier ¦ Không thuộc hồ sơ ¦ Tanpa berkas
+Ranger les dossiers : ¦ Xếp hồ sơ: ¦ Urutkan berkas:
+… cherche un nom pour voir les autres. ¦ … tìm một cái tên để xem những người khác. ¦ … cari nama untuk melihat yang lain.
+Ordre des dossiers changé ¦ Đã đổi thứ tự hồ sơ ¦ Urutan berkas diubah
+Dans cette généalogie ¦ Trong gia phả này ¦ Di silsilah ini
+Le défunt et ses héritiers sont des fiches de ta famille. Simple, mais tout se mélange. ¦ Người mất và người thừa kế là những người trong gia đình bạn. Đơn giản nhưng mọi thứ lẫn vào nhau. ¦ Pewaris dan ahli warisnya adalah profil keluargamu. Sederhana, tapi semuanya bercampur.
+Dans une généalogie à part pour tous mes dossiers ¦ Trong một gia phả riêng cho mọi hồ sơ của tôi ¦ Di silsilah terpisah untuk semua berkas saya
+Une base professionnelle « ⚖️ Dossiers de succession », créée dans 🌳 Mes généalogies. Tes dossiers y sont tous ensemble ; ta famille reste à part. ¦ Một cơ sở dữ liệu nghề nghiệp “⚖️ Hồ sơ thừa kế”, tạo trong 🌳 Gia phả của tôi. Mọi hồ sơ của bạn ở chung đó; gia đình bạn ở riêng. ¦ Basis data profesional “⚖️ Berkas warisan”, dibuat di 🌳 Silsilah saya. Semua berkasmu ada di sana bersama; keluargamu tetap terpisah.
+Une généalogie par dossier ¦ Một gia phả cho mỗi hồ sơ ¦ Satu silsilah per berkas
+Chaque dossier a sa propre base (« ⚖️ 2026-014 MAZAUD »). Le plus étanche ; à réserver aux grosses successions. ¦ Mỗi hồ sơ có cơ sở dữ liệu riêng (“⚖️ 2026-014 MAZAUD”). Kín nhất; dành cho các vụ thừa kế lớn. ¦ Setiap berkas punya basis datanya sendiri (“⚖️ 2026-014 MAZAUD”). Paling terpisah; untuk warisan besar.
+défunt ¦ người mất ¦ pewaris
+intermédiaire ¦ người trung gian ¦ perantara
+Un par dossier ¦ Mỗi hồ sơ một gia phả ¦ Satu per berkas
+Un filtre ¦ Một bộ lọc ¦ Sebuah filter
+Compteurs ¦ Bộ đếm ¦ Penghitung
+à l’ouverture ¦ khi mở ¦ saat dibuka
+calcul ¦ tính toán ¦ perhitungan
+à la main ¦ bằng tay ¦ manual
+créée pendant le filtre ¦ tạo trong lúc lọc ¦ dibuat selama filter
+réimport ¦ nhập lại ¦ impor ulang
+homonyme ¦ trùng tên ¦ senama
+déplacée ¦ đã di chuyển ¦ dipindahkan
+grisées, sans nom ¦ màu xám, không tên ¦ abu-abu, tanpa nama
+cachées ¦ ẩn ¦ disembunyikan
+retirées du fichier ¦ bỏ khỏi tệp ¦ dihapus dari file
+gardées dans le fichier ¦ giữ trong tệp ¦ disimpan di file
+copier la fiche ¦ sao chép hồ sơ người ¦ salin profil
+refuser le déplacement ¦ từ chối di chuyển ¦ tolak pemindahan
+replié ¦ thu gọn ¦ diciutkan
+Défunt et acte de décès ¦ Người mất và giấy chứng tử ¦ Pewaris dan akta kematian
+Adresses ¦ Địa chỉ ¦ Alamat
+Contrats signés ¦ Hợp đồng đã ký ¦ Kontrak yang ditandatangani
+Déplacement refusé : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Từ chối di chuyển: những người này cũng thuộc gia đình bạn hoặc hồ sơ khác: {names}. ¦ Pemindahan ditolak: profil ini juga ada di keluargamu atau di berkas lain: {names}.
+Impossible d’enregistrer les réglages des dossiers. ¦ Không lưu được cài đặt hồ sơ. ¦ Pengaturan berkas tidak dapat disimpan.
+Cette généalogie est encore vide. ¦ Gia phả này vẫn còn trống. ¦ Silsilah ini masih kosong.
+Rôle inconnu. ¦ Vai trò không rõ. ¦ Peran tidak dikenal.
+Fiches inconnues. ¦ Hồ sơ người không rõ. ¦ Profil tidak dikenal.
+Choisis une autre généalogie. ¦ Hãy chọn gia phả khác. ¦ Pilih silsilah lain.
+Impossible de créer le fichier d’archive. ¦ Không tạo được tệp lưu trữ. ¦ File arsip tidak dapat dibuat.
+Fichier introuvable. ¦ Không tìm thấy tệp. ¦ File tidak ditemukan.
+Ce fichier n’est pas une archive de dossier de succession. ¦ Tệp này không phải tệp lưu trữ hồ sơ thừa kế. ¦ File ini bukan arsip berkas warisan.
+Le fichier n’a pas été reçu. ¦ Chưa nhận được tệp. ¦ File tidak diterima.
+Le défunt reste dans son dossier. ¦ Người mất vẫn ở trong hồ sơ của mình. ¦ Pewaris tetap di berkasnya.
+🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Mọi người ¦ 🧑‍🤝‍🧑 Orang
+Dossiers de succession (usage successoral seulement) ¦ Hồ sơ thừa kế (chỉ khi dùng cho thừa kế) ¦ Berkas warisan (hanya untuk penggunaan warisan)

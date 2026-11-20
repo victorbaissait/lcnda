@@ -523,3 +523,185 @@ Dévolution ¦ Rendi i trashëgimisë ¦ Devoluzzjoni
 =dépouillement ¦ shqyrtim|shqyrtime ¦ spoll|spolli|spolli|spoll|spoll
 =dossier en cours ¦ dosje në punë|dosje në punë ¦ fajl miftuħ|fajls miftuħa|fajls miftuħa|fajl miftuħ|fajl miftuħ
 =dossier de succession ¦ dosje trashëgimie|dosje trashëgimie ¦ fajl tas-suċċessjoni|fajls tas-suċċessjoni|fajls tas-suċċessjoni|fajl tas-suċċessjoni|fajl tas-suċċessjoni
+
+# ⚖️ Dossiers de succession : rangement, filtre ⚖️, rattachement, tableau de bord, garde-fous, widget, vue par dossier
+Dossiers de succession : filtre {what} (cliquer pour changer) ¦ Dosje trashëgimie: filtri {what} (kliko për ta ndryshuar) ¦ Fajls tas-suċċessjoni: filtru {what} (ikklikkja biex tibdel)
+Dossiers de succession : ne montrer qu’un ou plusieurs dossiers ¦ Dosje trashëgimie: shfaq vetëm një ose disa dosje ¦ Fajls tas-suċċessjoni: uri fajl wieħed jew aktar biss
+Plusieurs ¦ Disa ¦ Diversi
+⚖️ Ne montrer que ceux-ci ¦ ⚖️ Shfaq vetëm këto ¦ ⚖️ Uri dawn biss
+Aucun dossier dans cette généalogie. ¦ Asnjë dosje në këtë gjenealogji. ¦ L-ebda fajl f’din il-ġenealoġija.
+Dans une autre généalogie ¦ Në një gjenealogji tjetër ¦ F’ġenealoġija oħra
+Tous les dossiers… ¦ Të gjitha dosjet… ¦ Il-fajls kollha…
+Seulement le dossier {n} ¦ Vetëm dosja {n} ¦ Il-fajl {n} biss
+Seulement {what} : {list} ¦ Vetëm {what}: {list} ¦ {what} biss: {list}
+1 dossier · {state} ¦ 1 dosje · {state} ¦ fajl 1 · {state}
+⚖️ Dossier {n} ¦ ⚖️ Dosja {n} ¦ ⚖️ Fajl {n}
+Ce dossier est dans une autre généalogie ¦ Kjo dosje është në një gjenealogji tjetër ¦ Dan il-fajl jinsab f’ġenealoġija oħra
+Ouvrir « {name} » ¦ Hap «{name}» ¦ Iftaħ “{name}”
+Il est rangé dans « {name} ». Pour le montrer, l’app ouvre cette généalogie (tes réglages d’ici sont gardés) et y active le filtre ⚖️ {n}. ¦ Ruhet në «{name}». Për ta shfaqur, aplikacioni hap atë gjenealogji (cilësimet e tua këtu ruhen) dhe aktivizon atje filtrin ⚖️ {n}. ¦ Jinsab f’“{name}”. Biex juriha, l-app tiftaħ dik il-ġenealoġija (is-settings tiegħek hawn jinżammu) u tixgħel hemm il-filtru ⚖️ {n}.
+Tes nouveaux dossiers vont dans « {name} ». ¦ Dosjet e tua të reja shkojnë te «{name}». ¦ Il-fajls il-ġodda tiegħek imorru f’“{name}”.
+Ouvrir le dossier ici quand même ¦ Hape dosjen këtu gjithsesi ¦ Iftaħ il-fajl hawn xorta waħda
+Où ranger tes dossiers ? ¦ Ku t’i ruash dosjet e tua? ¦ Fejn għandhom jinżammu l-fajls tiegħek?
+conseillé ici ¦ rekomandohet këtu ¦ rakkomandat hawn
+Nom de la nouvelle généalogie ¦ Emri i gjenealogjisë së re ¦ L-isem tal-ġenealoġija l-ġdida
+⚖️ Dossier de succession ¦ ⚖️ Dosje trashëgimie ¦ ⚖️ Fajl tas-suċċessjoni
+Ta généalogie ouverte a {n} : la ranger à part évite de mélanger les héritiers de tes clients avec ta propre famille. Ce n’est qu’un conseil. ¦ Gjenealogjia jote e hapur ka {n}: ruajtja veçmas shmang përzierjen e trashëgimtarëve të klientëve me familjen tënde. Është vetëm këshillë. ¦ Il-ġenealoġija miftuħa tiegħek għandha {n}: iż-żamma separata tevita li l-werrieta tal-klijenti jitħalltu mal-familja tiegħek. Huwa biss parir.
+Tu pourras changer d’avis : Réglages → Apparence → 🧭 Usage de l’app → « ⚖️ Où ranger les dossiers ». Les dossiers déjà ouverts ne bougent pas tout seuls. ¦ Mund të ndërrosh mendje: Cilësimet → Pamja → 🧭 Përdorimi i aplikacionit → «⚖️ Ku ruhen dosjet». Dosjet e hapura nuk lëvizin vetë. ¦ Tista’ tibdel fehmtek: Settings → Dehra → 🧭 Użu tal-app → “⚖️ Fejn jinżammu l-fajls”. Il-fajls diġà miftuħa ma jiċċaqilqux waħedhom.
+Créer « ⚖️ Dossiers de succession » et ouvrir le dossier ¦ Krijo «⚖️ Dosje trashëgimie» dhe hap dosjen ¦ Oħloq “⚖️ Fajls tas-suċċessjoni” u iftaħ il-fajl
+Créer la généalogie et ouvrir le dossier ¦ Krijo gjenealogjinë dhe hap dosjen ¦ Oħloq il-ġenealoġija u iftaħ il-fajl
+Rangement des dossiers : {what} ¦ Ku shkojnë dosjet: {what} ¦ Fejn imorru l-fajls: {what}
+Généalogiste successoral : réglages des dossiers ¦ Gjenealog trashëgimish: cilësimet e dosjeve ¦ Ġenealoġista tas-suċċessjonijiet: settings tal-fajls
+Où ranger les dossiers ¦ Ku ruhen dosjet ¦ Fejn jinżammu l-fajls
+Les nouveaux dossiers vont… ¦ Dosjet e reja shkojnë… ¦ Il-fajls il-ġodda jmorru…
+Dans « {name} » ¦ Te «{name}» ¦ F’“{name}”
+Les dossiers et où ils sont ¦ Dosjet dhe ku janë ¦ Il-fajls u fejn jinsabu
+⇄ Déplacer… ¦ ⇄ Zhvendos… ¦ ⇄ Ċaqlaq…
+Aucun dossier pour l’instant. ¦ Ende asnjë dosje. ¦ L-ebda fajl s’issa.
+Réglages des dossiers ¦ Cilësimet e dosjeve ¦ Settings tal-fajls
+Arbre et graphiques filtrés par ⚖️ : les fiches hors dossier ¦ Pema dhe grafikët me filtrin ⚖️: kartelat jashtë dosjes ¦ Siġra u graffs iffiltrati b’⚖️: skedi barra l-fajl
+Archive d’un dossier clos : adresses des héritiers vivants ¦ Arkivi i një dosjeje të mbyllur: adresat e trashëgimtarëve të gjallë ¦ Arkivju ta’ fajl magħluq: indirizzi tal-werrieta ħajjin
+Déplacer un dossier dont une fiche est aussi dans ta famille ¦ Zhvendosja e një dosjeje me kartelë që është edhe në familjen tënde ¦ Iċċaqlaq fajl li skeda tiegħu tinsab ukoll fil-familja tiegħek
+« Sans dossier » dans la vue par dossier ¦ «Pa dosje» te pamja sipas dosjeve ¦ “Mingħajr fajl” fil-veduta skont il-fajl
+Avancement : un héritier qui refuse de signer ¦ Ecuria: trashëgimtar që refuzon të nënshkruajë ¦ Progress: werriet li jirrifjuta jiffirma
+compte comme « fait » (étape 5) ¦ llogaritet si «bërë» (hapi 5) ¦ jgħodd bħala “magħmul” (pass 5)
+Avancement : poids des 7 étapes ¦ Ecuria: pesha e 7 hapave ¦ Progress: piż tas-7 passi
+Réglage des dossiers enregistré : {what} ¦ Cilësimi i dosjeve u ruajt: {what} ¦ Setting tal-fajls issejvjat: {what}
+poids des 7 étapes ¦ pesha e 7 hapave ¦ piż tas-7 passi
+⇄ DÉPLACER UN DOSSIER ¦ ⇄ ZHVENDOS NJË DOSJE ¦ ⇄ ĊAQLAQ FAJL
+{n} → ? ¦ {n} → ? ¦ {n} → ?
+⇄ Déplacer ({what}) ¦ ⇄ Zhvendos ({what}) ¦ ⇄ Ċaqlaq ({what})
+Vers ¦ Drejt ¦ Lejn
+＋ Une nouvelle généalogie pour ce dossier ¦ ＋ Një gjenealogji e re për këtë dosje ¦ ＋ Ġenealoġija ġdida għal dan il-fajl
+Ce qui part : le dossier, son journal, ses pièces, ses courriers, ses échéances, et les fiches qui lui sont rattachées (défunt, héritiers, intermédiaires) avec leurs actes et médias. Une fiche aussi rattachée à un autre dossier ou à ta famille est copiée, pas déplacée. ¦ Çfarë largohet: dosja, ditari, dokumentet, letrat, afatet dhe kartelat e lidhura me të (i ndjeri, trashëgimtarët, ndërmjetësit) me aktet dhe mediat e tyre. Një kartelë e lidhur edhe me një dosje tjetër ose me familjen tënde kopjohet, nuk zhvendoset. ¦ X’jitlaq: il-fajl, ir-reġistru, id-dokumenti, l-ittri, l-iskadenzi u l-iskedi marbuta miegħu (il-mejjet, werrieta, intermedjarji) bl-atti u l-midja tagħhom. Skeda marbuta wkoll ma’ fajl ieħor jew mal-familja tiegħek tiġi kkupjata, mhux imċaqalqa.
+Déplacement refusé (réglage) : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Zhvendosja u refuzua (cilësim): këto kartela janë edhe në familjen tënde ose në një dosje tjetër: {names}. ¦ Ċaqlieq miċħud (setting): dawn l-iskedi jinsabu wkoll fil-familja tiegħek jew f’fajl ieħor: {names}.
+Copiées (elles restent aussi ici) : {names}. ¦ U kopjuan (mbeten edhe këtu): {names}. ¦ Ikkupjati (jibqgħu wkoll hawn): {names}.
+Une copie de sauvegarde des deux généalogies est faite avant. Le journal du dossier note « Déplacé de … vers … ». ¦ Më parë bëhet një kopje rezervë e të dy gjenealogjive. Ditari i dosjes shënon «U zhvendos nga … te …». ¦ L-ewwel issir kopja ta’ riżerva taż-żewġ ġenealoġiji. Ir-reġistru tal-fajl jikteb “Imċaqlaq minn … għal …”.
+Dossier {n} déplacé vers « {to} » ({what}) ¦ Dosja {n} u zhvendos te «{to}» ({what}) ¦ Fajl {n} imċaqlaq għal “{to}” ({what})
+⤓ Reprendre la fiche depuis Ma généalogie ¦ ⤓ Merr kartelën nga Gjenealogjia ime ¦ ⤓ Ħu l-iskeda minn Il-ġenealoġija tiegħi
+copie de la fiche, jusqu’aux grands-parents et tous leurs descendants connus, sans photos ¦ kopje e kartelës, deri te gjyshërit dhe të gjithë pasardhësit e tyre të njohur, pa foto ¦ kopja tal-iskeda, sal-nanniet u d-dixxendenti magħrufa kollha tagħhom, mingħajr ritratti
+⤓ REPRENDRE UNE FICHE ¦ ⤓ MERR NJË KARTELË ¦ ⤓ ĦU SKEDA
+Reprendre la fiche du défunt ¦ Merr kartelën e të ndjerit ¦ Ħu l-iskeda tal-mejjet
+Chercher la fiche ¦ Kërko kartelën ¦ Fittex l-iskeda
+Prénom, nom… ¦ Emri, mbiemri… ¦ Isem, kunjom…
+Copiées : la fiche, ses parents et grands-parents, tous leurs descendants connus et leurs conjoints, avec les dates et les lieux ; sans photos. Rien n’est changé dans l’autre généalogie. ¦ Kopjohen: kartela, prindërit dhe gjyshërit, të gjithë pasardhësit e njohur dhe bashkëshortët e tyre, me data dhe vende; pa foto. Asgjë nuk ndryshon në gjenealogjinë tjetër. ¦ Jiġu kkupjati: l-iskeda, il-ġenituri u n-nanniet, id-dixxendenti magħrufa kollha u l-konjuġi tagħhom, b’dati u postijiet; mingħajr ritratti. Xejn ma jinbidel fil-ġenealoġija l-oħra.
+{what} reprises de l’autre généalogie. ¦ {what} u morën nga gjenealogjia tjetër. ¦ {what} meħuda mill-ġenealoġija l-oħra.
+Dossiers… ¦ Dosjet… ¦ Fajls…
+{name} dans quels dossiers ? ¦ {name} në cilat dosje? ¦ {name} f’liema fajls?
+(calculé) ¦ (e llogaritur) ¦ (ikkalkulat)
+Rôles : défunt · héritier · intermédiaire · témoin · à vérifier. « Héritier » mis par le calcul s’affiche « (calculé) ». ¦ Rolet: i ndjeri · trashëgimtar · ndërmjetës · dëshmitar · për t’u kontrolluar. «Trashëgimtari» i vendosur nga llogaritja shfaq «(e llogaritur)». ¦ Rwoli: mejjet · werriet · intermedjarju · xhud · biex jiġi vverifikat. “Werriet” imqiegħed mill-kalkolu juri “(ikkalkulat)”.
+Dossiers de {name} enregistrés ¦ Dosjet e {name} u ruajtën ¦ Il-fajls ta’ {name} issejvjati
+Les dossiers de cette fiche ¦ Dosjet e kësaj kartele ¦ Il-fajls ta’ din l-iskeda
+hors du dossier {n} ¦ jashtë dosjes {n} ¦ barra l-fajl {n}
+＋ Rattacher ¦ ＋ Lidh ¦ ＋ Orbot
+Fiche rattachée au dossier {n} ¦ Kartela u lidh me dosjen {n} ¦ Skeda marbuta mal-fajl {n}
+Rattachée au dossier {n} : {who} ¦ U lidh me dosjen {n}: {who} ¦ Marbuta mal-fajl {n}: {who}
+Lecture des fiches du dossier… ¦ Po lexohen kartelat e dosjes… ¦ Qed jinqraw l-iskedi tal-fajl…
+Les fiches du dossier ¦ Kartelat e dosjes ¦ L-iskedi tal-fajl
+Rattacher ¦ Lidh ¦ Orbot
+Retirées à la main ({n}) : jamais remises toutes seules ¦ Hequr me dorë ({n}): nuk rikthehen kurrë vetë ¦ Imneħħija bl-idejn ({n}): qatt ma jitqiegħdu lura waħedhom
+Fiche à comparer : « {name}{year} » ressemble à une fiche déjà dans cette base. Jamais fusionnée toute seule. ¦ Kartelë për krahasim: «{name}{year}» i ngjan një kartele që është tashmë në këtë bazë. Nuk bashkohet kurrë vetë. ¦ Skeda biex titqabbel: “{name}{year}” tixbah skeda li diġà tinsab f’din il-bażi. Qatt ma tingħaqad waħedha.
+née {y} ¦ lindur {y} ¦ imwielda {y}
+Homonyme possible : « {name}{year} » existe aussi dans le dossier {n}. Jamais relié tout seul. ¦ Emërnjëjtë i mundshëm: «{name}{year}» ekziston edhe në dosjen {n}. Nuk lidhet kurrë vetë. ¦ Omonimu possibbli: “{name}{year}” jinsab ukoll fil-fajl {n}. Qatt ma jintrabat waħdu.
+⇆ Comparer ¦ ⇆ Krahaso ¦ ⇆ Qabbel
+C’est la même personne : rattacher aussi ¦ Është i njëjti person: lidhe edhe atë ¦ Hija l-istess persuna: orbotha wkoll
+Pas la même ¦ Nuk është i njëjti ¦ Mhux l-istess
+Fiche retirée du dossier {n} ¦ Kartela u hoq nga dosja {n} ¦ Skeda mneħħija mill-fajl {n}
+Fiche remise dans le dossier {n} ¦ Kartela u rikthye në dosjen {n} ¦ Skeda mqiegħda lura fil-fajl {n}
+Homonyme rattaché aussi au dossier {n} (à vérifier) ¦ Emërnjëjti u lidh edhe me dosjen {n} (për t’u kontrolluar) ¦ Omonimu marbut ukoll mal-fajl {n} (biex jiġi vverifikat)
+Noté : ce n’est pas la même personne ¦ U shënua: nuk është i njëjti person ¦ Innotat: mhux l-istess persuna
+Rôle : {r} ¦ Roli: {r} ¦ Rwol: {r}
+⚠️ illisible : {names} ¦ ⚠️ i palexueshëm: {names} ¦ ⚠️ ma jinqarax: {names}
+Chercher… (n°, défunt, notaire) ¦ Kërko… (nr., i ndjeri, noter) ¦ Fittex… (nru, mejjet, nutar)
+Toutes les généalogies ¦ Të gjitha gjenealogjitë ¦ Il-ġenealoġiji kollha
+Tous les notaires ¦ Të gjithë noterët ¦ In-nutara kollha
+Prochaine échéance (retards d’abord) ¦ Afati i ardhshëm (të vonuarat së pari) ¦ L-iskadenza li jmiss (dawk tard l-ewwel)
+Avancement le plus bas ¦ Ecuria më e ulët ¦ L-inqas progress
+{d} · passée ¦ {d} · ka kaluar ¦ {d} · skadut
+Trouvés : {n} ¦ Gjetur: {n} ¦ Misjuba: {n}
+À trouver : {n} ¦ Për t’u gjetur: {n} ¦ Biex jinstabu: {n}
+{h} h {m} ¦ {h} orë {m} ¦ {h} siegħa {m}
+Cocher le dossier {n} ¦ Shëno dosjen {n} ¦ Immarka l-fajl {n}
+Échéance : {d} ¦ Afati: {d} ¦ Skadenza: {d}
+Héritiers ¦ Trashëgimtarët ¦ Werrieta
+Avancement ¦ Ecuria ¦ Progress
+Cochés : {n} ¦ Të shënuara: {n} ¦ Immarkati: {n}
+Les dossiers cochés sont dans des généalogies différentes : choisis-en dans une seule. ¦ Dosjet e shënuara janë në gjenealogji të ndryshme: zgjidh vetëm nga një. ¦ Il-fajls immarkati jinsabu f’ġenealoġiji differenti: agħżel minn waħda biss.
+Dossiers exportés (CSV) ¦ Dosjet u eksportuan (CSV) ¦ Fajls esportati (CSV)
+⤒ Réimporter un dossier archivé… ¦ ⤒ Riimporto një dosje të arkivuar… ¦ ⤒ Erġa’ importa fajl arkivjat…
+⚠️ FUSION ¦ ⚠️ BASHKIM ¦ ⚠️ GĦAQDA
+Ces deux fiches sont dans des dossiers différents ¦ Këto dy kartela janë në dosje të ndryshme ¦ Dawn iż-żewġ skedi jinsabu f’fajls differenti
+Fusionner quand même ¦ Bashkoji gjithsesi ¦ Għaqqad xorta waħda
+{a} et {b}. Fusionner relie les deux successions et change les parts des deux dossiers. Vérifie avec des actes (naissance, parents) avant. ¦ {a} dhe {b}. Bashkimi lidh të dyja trashëgimitë dhe ndryshon pjesët në të dyja dosjet. Kontrollo më parë me akte (lindje, prindër). ¦ {a} u {b}. L-għaqda torbot iż-żewġ suċċessjonijiet u tibdel l-ishma fiż-żewġ fajls. Ivverifika l-ewwel bl-atti (twelid, ġenituri).
+⇆ Comparer d’abord ¦ ⇆ Krahaso së pari ¦ ⇆ Qabbel l-ewwel
+Si on fusionne : noté dans le journal des deux dossiers, et les deux sont recalculés. ¦ Nëse bashkohen: shënohet në ditarin e të dyja dosjeve dhe të dyja rillogariten. ¦ Jekk jingħaqdu: jinkiteb fir-reġistru taż-żewġ fajls, u t-tnejn jerġgħu jiġu kkalkulati.
+🗄 Archiver dans un fichier et retirer… ¦ 🗄 Arkivo në një skedar dhe hiq… ¦ 🗄 Arkivja f’fajl u neħħi…
+🗄 ARCHIVER LE DOSSIER {n} ¦ 🗄 ARKIVO DOSJEN {n} ¦ 🗄 ARKIVJA L-FAJL {n}
+Dans un fichier, puis retirer de la base ¦ Në një skedar, pastaj hiqe nga baza ¦ F’fajl, imbagħad neħħi mill-bażi
+⤓ Enregistrer le fichier puis retirer ¦ ⤓ Ruaj skedarin pastaj hiq ¦ ⤓ Issejvja l-fajl u mbagħad neħħi
+Le fichier {file} contient : le dossier, le journal, les pièces et leurs images, les courriers, l’arbre de dévolution (SVG), le tableau pour le notaire et les fiches rattachées ({n}). ¦ Skedari {file} përmban: dosjen, ditarin, dokumentet dhe imazhet e tyre, letrat, pemën e trashëgimisë (SVG), tabelën për noterin dhe kartelat e lidhura ({n}). ¦ Il-fajl {file} fih: il-fajl, ir-reġistru, id-dokumenti u l-immaġni tagħhom, l-ittri, is-siġra tas-suċċessjoni (SVG), it-tabella għan-nutar u l-iskedi marbuta ({n}).
+Garder les adresses des vivants dans le fichier ¦ Mbaj adresat e të gjallëve në skedar ¦ Żomm l-indirizzi tal-ħajjin fil-fajl
+utile si le notaire rouvre la succession ¦ e dobishme nëse noteri rihap trashëgiminë ¦ utli jekk in-nutar jerġa’ jiftaħ is-suċċessjoni
+Retirer les adresses ¦ Hiq adresat ¦ Neħħi l-indirizzi
+comme l’archivage actuel ¦ si arkivimi aktual ¦ bħall-arkivjar attwali
+Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base ({n}). Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste ({k}). Une sauvegarde est faite avant. ¦ Pastaj kartelat që shërbejnë vetëm për këtë dosje hiqen nga baza ({n}). Një kartelë e lidhur edhe me një dosje tjetër (ose me familjen tënde) mbetet ({k}). Më parë bëhet një kopje rezervë. ¦ Imbagħad l-iskedi li jservu biss lil dan il-fajl jitneħħew mill-bażi ({n}). Skeda marbuta wkoll ma’ fajl ieħor (jew mal-familja tiegħek) tibqa’ ({k}). L-ewwel issir kopja ta’ riżerva.
+Dossier {n} archivé dans « {file} » et retiré ({what}) ¦ Dosja {n} u arkivua te «{file}» dhe u hoq ({what}) ¦ Fajl {n} arkivjat f’“{file}” u mneħħi ({what})
+⤒ RÉIMPORTER ¦ ⤒ RIIMPORTO ¦ ⤒ ERĠA’ IMPORTA
+⤒ Réimporter le dossier ¦ ⤒ Riimporto dosjen ¦ ⤒ Erġa’ importa l-fajl
+Dossier {n} ({name}{closed}), {what}. ¦ Dosja {n} ({name}{closed}), {what}. ¦ Fajl {n} ({name}{closed}), {what}.
+clos le {d} ¦ mbyllur më {d} ¦ magħluq fl-{d}
+{what} ressemblent à des fiches déjà dans cette base ({names}) : elles seront proposées à la comparaison, jamais fusionnées seules. ¦ {what} u ngjajnë kartelave që janë tashmë në këtë bazë ({names}): do të propozohen për krahasim, kurrë nuk bashkohen vetë. ¦ {what} jixbhu skedi li diġà jinsabu f’din il-bażi ({names}): se jiġu proposti għat-tqabbil, qatt ma jingħaqdu waħedhom.
+Dossier {n} réimporté ({what}) ¦ Dosja {n} u riimportua ({what}) ¦ Fajl {n} reġa’ ġie importat ({what})
+Dossier {n} réimporté dans « {name} ». ¦ Dosja {n} u riimportua te «{name}». ¦ Fajl {n} reġa’ ġie importat f’“{name}”.
+⚖️ Mes dossiers de succession ¦ ⚖️ Dosjet e mia të trashëgimisë ¦ ⚖️ Il-fajls tas-suċċessjoni tiegħi
+Aucun dossier de succession. ¦ Asnjë dosje trashëgimie. ¦ L-ebda fajl tas-suċċessjoni.
+Étapes (7) ¦ Hapat (7) ¦ Passi (7)
+{step} : {done} sur {total} ¦ {step}: {done} nga {total} ¦ {step}: {done} minn {total}
+Quels dossiers ¦ Cilat dosje ¦ Liema fajls
+Le filtre ¦ Filtri ¦ Il-filtru
+Vue actuelle ¦ Pamja aktuale ¦ Veduta attwali
+Alt + ↑ / ↓ : changer l’ordre (rangement à la main) ¦ Alt + ↑ / ↓: ndrysho renditjen (me dorë) ¦ Alt + ↑ / ↓: ibdel l-ordni (bl-idejn)
+Sans dossier ¦ Pa dosje ¦ Mingħajr fajl
+Ranger les dossiers : ¦ Rendit dosjet: ¦ Ordna l-fajls:
+… cherche un nom pour voir les autres. ¦ … kërko një emër për të parë të tjerët. ¦ … fittex isem biex tara l-oħrajn.
+Ordre des dossiers changé ¦ Renditja e dosjeve u ndryshua ¦ L-ordni tal-fajls inbidel
+Dans cette généalogie ¦ Në këtë gjenealogji ¦ F’din il-ġenealoġija
+Le défunt et ses héritiers sont des fiches de ta famille. Simple, mais tout se mélange. ¦ I ndjeri dhe trashëgimtarët e tij janë kartela të familjes tënde. E thjeshtë, por gjithçka përzihet. ¦ Il-mejjet u l-werrieta tiegħu huma skedi tal-familja tiegħek. Sempliċi, iżda kollox jitħallat.
+Dans une généalogie à part pour tous mes dossiers ¦ Në një gjenealogji më vete për të gjitha dosjet e mia ¦ F’ġenealoġija separata għall-fajls kollha tiegħi
+Une base professionnelle « ⚖️ Dossiers de succession », créée dans 🌳 Mes généalogies. Tes dossiers y sont tous ensemble ; ta famille reste à part. ¦ Një bazë profesionale «⚖️ Dosje trashëgimie», e krijuar te 🌳 Gjenealogjitë e mia. Të gjitha dosjet e tua janë atje bashkë; familja jote mbetet veçmas. ¦ Bażi professjonali “⚖️ Fajls tas-suċċessjoni”, maħluqa f’🌳 Il-ġenealoġiji tiegħi. Il-fajls kollha tiegħek jinsabu hemm flimkien; il-familja tiegħek tibqa’ separata.
+Une généalogie par dossier ¦ Një gjenealogji për çdo dosje ¦ Ġenealoġija waħda għal kull fajl
+Chaque dossier a sa propre base (« ⚖️ 2026-014 MAZAUD »). Le plus étanche ; à réserver aux grosses successions. ¦ Çdo dosje ka bazën e vet («⚖️ 2026-014 MAZAUD»). Më e ndara; për trashëgimi të mëdha. ¦ Kull fajl għandu l-bażi tiegħu (“⚖️ 2026-014 MAZAUD”). L-aktar separat; għal suċċessjonijiet kbar.
+défunt ¦ i ndjeri ¦ mejjet
+intermédiaire ¦ ndërmjetës ¦ intermedjarju
+Un par dossier ¦ Një për dosje ¦ Wieħed għal kull fajl
+Un filtre ¦ Një filtër ¦ Filtru
+Compteurs ¦ Numëruesit ¦ Għaddadi
+à l’ouverture ¦ në hapje ¦ mal-ftuħ
+calcul ¦ llogaritje ¦ kalkolu
+à la main ¦ me dorë ¦ bl-idejn
+créée pendant le filtre ¦ krijuar gjatë filtrit ¦ maħluqa waqt il-filtru
+réimport ¦ riimport ¦ importazzjoni mill-ġdid
+homonyme ¦ emërnjëjtë ¦ omonimu
+déplacée ¦ zhvendosur ¦ imċaqalqa
+grisées, sans nom ¦ gri, pa emër ¦ griżi, mingħajr isem
+cachées ¦ të fshehura ¦ moħbija
+retirées du fichier ¦ hequr nga skedari ¦ imneħħija mill-fajl
+gardées dans le fichier ¦ mbajtur në skedar ¦ miżmuma fil-fajl
+copier la fiche ¦ kopjo kartelën ¦ ikkopja l-iskeda
+refuser le déplacement ¦ refuzo zhvendosjen ¦ irrifjuta ċ-ċaqliq
+replié ¦ e palosur ¦ magħluq
+Défunt et acte de décès ¦ I ndjeri dhe akti i vdekjes ¦ Mejjet u att tal-mewt
+Adresses ¦ Adresat ¦ Indirizzi
+Contrats signés ¦ Kontrata të nënshkruara ¦ Kuntratti ffirmati
+Déplacement refusé : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Zhvendosja u refuzua: këto kartela janë edhe në familjen tënde ose në një dosje tjetër: {names}. ¦ Ċaqlieq miċħud: dawn l-iskedi jinsabu wkoll fil-familja tiegħek jew f’fajl ieħor: {names}.
+Impossible d’enregistrer les réglages des dossiers. ¦ Cilësimet e dosjeve nuk mund të ruhen. ¦ Is-settings tal-fajls ma setgħux jiġu ssejvjati.
+Cette généalogie est encore vide. ¦ Kjo gjenealogji është ende bosh. ¦ Din il-ġenealoġija għadha vojta.
+Rôle inconnu. ¦ Rol i panjohur. ¦ Rwol mhux magħruf.
+Fiches inconnues. ¦ Kartela të panjohura. ¦ Skedi mhux magħrufa.
+Choisis une autre généalogie. ¦ Zgjidh një gjenealogji tjetër. ¦ Agħżel ġenealoġija oħra.
+Impossible de créer le fichier d’archive. ¦ Skedari i arkivit nuk mund të krijohet. ¦ Il-fajl tal-arkivju ma setax jinħoloq.
+Fichier introuvable. ¦ Skedari nuk u gjet. ¦ Il-fajl ma nstabx.
+Ce fichier n’est pas une archive de dossier de succession. ¦ Ky skedar nuk është arkiv i një dosjeje trashëgimie. ¦ Dan il-fajl mhuwiex arkivju ta’ fajl tas-suċċessjoni.
+Le fichier n’a pas été reçu. ¦ Skedari nuk u mor. ¦ Il-fajl ma waslx.
+Le défunt reste dans son dossier. ¦ I ndjeri mbetet në dosjen e tij. ¦ Il-mejjet jibqa’ fil-fajl tiegħu.
+🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Personat ¦ 🧑‍🤝‍🧑 Persuni
+Dossiers de succession (usage successoral seulement) ¦ Dosje trashëgimie (vetëm në përdorimin për trashëgimi) ¦ Fajls tas-suċċessjoni (għall-użu tas-suċċessjoni biss)

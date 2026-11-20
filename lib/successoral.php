@@ -21,8 +21,11 @@ declare(strict_types=1);
  *  - les échéances vont aussi dans « 🗓 Ma semaine de recherche » (succ_semaine_items, lu par lib/semaine.php).
  * Confidentialité : les dossiers (vivants, adresses, parts) ne sortent jamais : aucun export (GEDCOM, site, partage famille,
  * livre, mode simple) ne lit ces tables ; en mode consultation rien ne se lit ni ne s'écrit. Aucun montant de succession.
- * Tables (migration 90) : succ_cases, succ_deadlines, succ_pieces, succ_journal (jamais modifié ni effacé), succ_fees.
+ * Tables (migration 90) : succ_cases, succ_deadlines, succ_pieces, succ_journal (jamais modifié ni effacé), succ_fees ;
+ * migration 91 (lib/successoral_dossiers.php) : succ_case_persons, succ_homonym_no, avancement gardé.
  */
+
+require_once __DIR__ . '/successoral_dossiers.php'; // rangement, filtre ⚖️, rattachement, tableau de bord, archive en fichier (migration 91)
 
 const SUCC_STATES = ['ouvert', 'recherche', 'trouves', 'remis', 'clos', 'archive'];
 const SUCC_STATE_LABELS = ['ouvert' => 'Ouvert', 'recherche' => 'En recherche', 'trouves' => 'Héritiers trouvés', 'remis' => 'Remis au notaire', 'clos' => 'Clos', 'archive' => 'Archivé'];
@@ -398,6 +401,7 @@ function succ_save(PDO $pdo, array $d): array
         $cols = array_keys($vals);
         $pdo->prepare('INSERT INTO succ_cases(' . implode(',', $cols) . ') VALUES(' . implode(',', array_fill(0, count($cols), '?')) . ')')->execute(array_values($vals));
         $id = (int) $pdo->lastInsertId();
+        if (succ_dossiers_ready($pdo)) { succ_attach($pdo, $id, (int) $vals['deceased_id'], 'deceased', 'open'); } // le défunt est rattaché à l'ouverture
         $notary = !empty($vals['notary_person_id']) ? succ_person_name($pdo, (int) $vals['notary_person_id']) : ($vals['notary_text'] ?? '');
         succ_journal($pdo, $id, 'open', $notary !== '' ? 'Dossier ouvert, mandant : ' . $notary : 'Dossier ouvert');
         if (!empty($vals['death_iso']) && preg_match('/^\d{4}-\d{2}-\d{2}$/', $vals['death_iso'])) {
@@ -410,6 +414,10 @@ function succ_save(PDO $pdo, array $d): array
     }
     if (!$vals) { return ['id' => $id]; }
     $prev = array_intersect_key($old, $vals);
+    if (isset($vals['deceased_id']) && (int) $vals['deceased_id'] !== (int) $old['deceased_id'] && succ_dossiers_ready($pdo)) {
+        if ((int) $old['deceased_id']) { $pdo->prepare("UPDATE succ_case_persons SET role='verify' WHERE case_id=? AND person_id=? AND role='deceased'")->execute([$id, (int) $old['deceased_id']]); }
+        succ_attach($pdo, $id, (int) $vals['deceased_id'], 'deceased', 'open');
+    }
     $sets = implode(', ', array_map(static fn($c) => "$c=?", array_keys($vals)));
     $pdo->prepare("UPDATE succ_cases SET $sets, updated_at=CURRENT_TIMESTAMP WHERE id=?")->execute([...array_values($vals), $id]);
     $what = array_keys(array_diff_assoc(array_map('strval', array_intersect_key($vals, $old)), array_map('strval', $prev)));
@@ -651,6 +659,8 @@ function successoral_api_get(PDO $pdo, array $g): array
     if (succ_kiosk()) { throw new RuntimeException('Mode consultation : les dossiers de succession ne se montrent pas.'); }
     if (!succ_ready($pdo)) { successoral_schema($pdo); }
     $op = scalar_text($g['op'] ?? 'list', 'op');
+    if ($op === 'archive_download') { succ_archive_download((string) ($g['token'] ?? '')); }
+    $more = succ_dossiers_get($pdo, $op, $g); if ($more !== null) { return $more; } // ⚖️ dossiers : rangement, filtre, rattachement (successoral_dossiers.php)
     return match ($op) {
         'list' => ['items' => succ_list($pdo)],
         'get' => succ_case_out($pdo, succ_row($pdo, safe_int($g['id'] ?? 0))),
@@ -674,6 +684,7 @@ function successoral_api_post(PDO $pdo, array $d): array
     if (succ_kiosk()) { throw new RuntimeException('Mode consultation : rien ne peut être modifié.'); }
     if (!succ_ready($pdo)) { successoral_schema($pdo); }
     $op = scalar_text($d['op'] ?? '', 'op');
+    $more = succ_dossiers_post($pdo, $op, $d); if ($more !== null) { return $more; } // ⚖️ dossiers (successoral_dossiers.php)
     return match ($op) {
         'save' => succ_save($pdo, $d),
         'delete', 'restore' => (static function () use ($pdo, $d, $op) {
@@ -718,6 +729,16 @@ function successoral_dispatch(PDO $pdo, string $action, bool $isWrite, array $pa
     try {
         if (!$isWrite && $action === 'successoral') { json_response(successoral_api_get($pdo, $_GET)); }
         if ($isWrite && $action === 'successoral_write') {
+            // déplacer ou archiver dans un fichier : une copie de sauvegarde d'abord (des deux généalogies), hors transaction
+            $op = (string) ($payload['op'] ?? '');
+            if (in_array($op, ['move', 'archive_file'], true) && !succ_kiosk()) {
+                succ_dossiers_ensure($pdo);
+                succ_row($pdo, safe_int($payload['case_id'] ?? $payload['id'] ?? 0));
+                succ_backup($pdo, DATA_DIR . '/backups', $op === 'move' ? 'deplacement-dossier' : 'archivage-dossier');
+                $to = (string) ($payload['to'] ?? '');
+                $gs = succ_genealogies();
+                if ($op === 'move' && $to !== succ_gid() && isset($gs[$to]) && ($ro = succ_open_ro($gs[$to]['path']))) { succ_backup($ro, succ_dir_of($to) . '/backups', 'arrivee-dossier'); $ro = null; }
+            }
             $pdo->beginTransaction();
             try { $out = successoral_api_post($pdo, $payload); $pdo->commit(); }
             catch (Throwable $e) { if ($pdo->inTransaction()) { $pdo->rollBack(); } throw $e; }

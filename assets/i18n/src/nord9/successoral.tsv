@@ -523,3 +523,185 @@ Dévolution ¦ Ierffolleg
 =dépouillement ¦ Auswäertung|Auswäertungen
 =dossier en cours ¦ lafende Dossier|lafend Dossieren
 =dossier de succession ¦ Ierfschaftsdossier|Ierfschaftsdossieren
+
+# ⚖️ Dossiers de succession : rangement, filtre ⚖️, rattachement, tableau de bord, garde-fous, widget, vue par dossier
+Dossiers de succession : filtre {what} (cliquer pour changer) ¦ Ierfschaftsdossiere: Filter {what} (klick fir z’änneren)
+Dossiers de succession : ne montrer qu’un ou plusieurs dossiers ¦ Ierfschaftsdossiere: nëmmen een oder e puer Dossiere weisen
+Plusieurs ¦ E puer
+⚖️ Ne montrer que ceux-ci ¦ ⚖️ Nëmmen déi weisen
+Aucun dossier dans cette généalogie. ¦ Keen Dossier an dëser Genealogie.
+Dans une autre généalogie ¦ An enger anerer Genealogie
+Tous les dossiers… ¦ All d’Dossiere…
+Seulement le dossier {n} ¦ Nëmmen den Dossier {n}
+Seulement {what} : {list} ¦ Nëmmen {what}: {list}
+1 dossier · {state} ¦ 1 Dossier · {state}
+⚖️ Dossier {n} ¦ ⚖️ Dossier {n}
+Ce dossier est dans une autre généalogie ¦ Dësen Dossier ass an enger anerer Genealogie
+Ouvrir « {name} » ¦ „{name}“ opmaachen
+Il est rangé dans « {name} ». Pour le montrer, l’app ouvre cette généalogie (tes réglages d’ici sont gardés) et y active le filtre ⚖️ {n}. ¦ E läit an „{name}“. Fir en ze weisen, mécht d’App déi Genealogie op (deng Astellungen hei bleiwen) an aktivéiert do de Filter ⚖️ {n}.
+Tes nouveaux dossiers vont dans « {name} ». ¦ Deng nei Dossiere kommen an „{name}“.
+Ouvrir le dossier ici quand même ¦ Den Dossier trotzdeem hei opmaachen
+Où ranger tes dossiers ? ¦ Wou solle deng Dossiere leien?
+conseillé ici ¦ hei ugeroden
+Nom de la nouvelle généalogie ¦ Numm vun der neier Genealogie
+⚖️ Dossier de succession ¦ ⚖️ Ierfschaftsdossier
+Ta généalogie ouverte a {n} : la ranger à part évite de mélanger les héritiers de tes clients avec ta propre famille. Ce n’est qu’un conseil. ¦ Deng opgemaach Genealogie huet {n}: se separat ze halen, vermeit, datt d’Ierwe vun dene Clienten sech mat denger eegener Famill vermëschen. Et ass nëmmen e Rot.
+Tu pourras changer d’avis : Réglages → Apparence → 🧭 Usage de l’app → « ⚖️ Où ranger les dossiers ». Les dossiers déjà ouverts ne bougent pas tout seuls. ¦ Du kanns et der nach anescht iwwerleeën: Astellungen → Ausgesinn → 🧭 Notzung vun der App → „⚖️ Wou d’Dossiere leien“. Dossieren, déi schonn op sinn, réckelen net vum selwen.
+Créer « ⚖️ Dossiers de succession » et ouvrir le dossier ¦ „⚖️ Ierfschaftsdossiere“ uleeën an den Dossier opmaachen
+Créer la généalogie et ouvrir le dossier ¦ D’Genealogie uleeën an den Dossier opmaachen
+Rangement des dossiers : {what} ¦ Wou d’Dossiere kommen: {what}
+Généalogiste successoral : réglages des dossiers ¦ Ierwesicher: Astellunge vun den Dossieren
+Où ranger les dossiers ¦ Wou d’Dossiere leien
+Les nouveaux dossiers vont… ¦ Nei Dossiere kommen…
+Dans « {name} » ¦ An „{name}“
+Les dossiers et où ils sont ¦ D’Dossieren a wou se sinn
+⇄ Déplacer… ¦ ⇄ Réckelen…
+Aucun dossier pour l’instant. ¦ Nach keen Dossier.
+Réglages des dossiers ¦ Astellunge vun den Dossieren
+Arbre et graphiques filtrés par ⚖️ : les fiches hors dossier ¦ Bam a Grafike mam Filter ⚖️: Fiche baussent dem Dossier
+Archive d’un dossier clos : adresses des héritiers vivants ¦ Archiv vun engem zouene Dossier: Adressen vun de liewegen Ierwen
+Déplacer un dossier dont une fiche est aussi dans ta famille ¦ En Dossier réckelen, vun deem eng Fiche och an denger Famill ass
+« Sans dossier » dans la vue par dossier ¦ „Ouni Dossier“ an der Usiicht no Dossier
+Avancement : un héritier qui refuse de signer ¦ Fortschrëtt: en Ierw, deen d’Ënnerschrëft refuséiert
+compte comme « fait » (étape 5) ¦ zielt als „gemaach“ (Schrëtt 5)
+Avancement : poids des 7 étapes ¦ Fortschrëtt: Gewiicht vun de 7 Schrëtt
+Réglage des dossiers enregistré : {what} ¦ Astellung vun den Dossieren gespäichert: {what}
+poids des 7 étapes ¦ Gewiicht vun de 7 Schrëtt
+⇄ DÉPLACER UN DOSSIER ¦ ⇄ EN DOSSIER RÉCKELEN
+{n} → ? ¦ {n} → ?
+⇄ Déplacer ({what}) ¦ ⇄ Réckelen ({what})
+Vers ¦ No
+＋ Une nouvelle généalogie pour ce dossier ¦ ＋ Eng nei Genealogie fir dësen Dossier
+Ce qui part : le dossier, son journal, ses pièces, ses courriers, ses échéances, et les fiches qui lui sont rattachées (défunt, héritiers, intermédiaires) avec leurs actes et médias. Une fiche aussi rattachée à un autre dossier ou à ta famille est copiée, pas déplacée. ¦ Wat matgeet: den Dossier, säi Journal, seng Pièce, seng Bréiwer, seng Fristen an d’Fichen, déi drun hänken (Verstuerwenen, Ierwen, Zwëschenglieder) mat hiren Akten a Medien. Eng Fiche, déi och un en aneren Dossier oder un deng Famill hänkt, gëtt kopéiert, net geréckelt.
+Déplacement refusé (réglage) : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Réckele refuséiert (Astellung): dës Fiche sinn och an denger Famill oder an engem aneren Dossier: {names}.
+Copiées (elles restent aussi ici) : {names}. ¦ Kopéiert (si bleiwen och hei): {names}.
+Une copie de sauvegarde des deux généalogies est faite avant. Le journal du dossier note « Déplacé de … vers … ». ¦ Virdrun gëtt eng Sécherheetskopie vu béide Genealogië gemaach. De Journal vum Dossier notéiert „Geréckelt vun … op …“.
+Dossier {n} déplacé vers « {to} » ({what}) ¦ Dossier {n} op „{to}“ geréckelt ({what})
+⤓ Reprendre la fiche depuis Ma généalogie ¦ ⤓ D’Fiche aus Menger Genealogie iwwerhuelen
+copie de la fiche, jusqu’aux grands-parents et tous leurs descendants connus, sans photos ¦ Kopie vun der Fiche bis bei d’Grousselteren an all hir bekannt Nokommen, ouni Fotoen
+⤓ REPRENDRE UNE FICHE ¦ ⤓ ENG FICHE IWWERHUELEN
+Reprendre la fiche du défunt ¦ D’Fiche vum Verstuerwenen iwwerhuelen
+Chercher la fiche ¦ D’Fiche sichen
+Prénom, nom… ¦ Virnumm, Numm…
+Copiées : la fiche, ses parents et grands-parents, tous leurs descendants connus et leurs conjoints, avec les dates et les lieux ; sans photos. Rien n’est changé dans l’autre généalogie. ¦ Kopéiert ginn: d’Fiche, hir Elteren a Grousselteren, all bekannt Nokommen an hir Partner, mat Datumen a Plazen; ouni Fotoen. An der anerer Genealogie ännert sech näischt.
+{what} reprises de l’autre généalogie. ¦ {what} aus der anerer Genealogie iwwerholl.
+Dossiers… ¦ Dossieren…
+{name} dans quels dossiers ? ¦ {name} a wéi engen Dossieren?
+(calculé) ¦ (berechent)
+Rôles : défunt · héritier · intermédiaire · témoin · à vérifier. « Héritier » mis par le calcul s’affiche « (calculé) ». ¦ Rollen: Verstuerwenen · Ierw · Zwëschenglidd · Zeien · ze kontrolléieren. En „Ierw“, deen d’Berechnung gesat huet, weist „(berechent)“.
+Dossiers de {name} enregistrés ¦ Dossiere vum {name} gespäichert
+Les dossiers de cette fiche ¦ D’Dossiere vun dëser Fiche
+hors du dossier {n} ¦ baussent dem Dossier {n}
+＋ Rattacher ¦ ＋ Zouuerdnen
+Fiche rattachée au dossier {n} ¦ Fiche dem Dossier {n} zougeuerdnet
+Rattachée au dossier {n} : {who} ¦ Dem Dossier {n} zougeuerdnet: {who}
+Lecture des fiches du dossier… ¦ D’Fiche vum Dossier gi gelies…
+Les fiches du dossier ¦ D’Fiche vum Dossier
+Rattacher ¦ Zouuerdnen
+Retirées à la main ({n}) : jamais remises toutes seules ¦ Mat der Hand ewechgeholl ({n}): ni vum selwe erëm drugesat
+Fiche à comparer : « {name}{year} » ressemble à une fiche déjà dans cette base. Jamais fusionnée toute seule. ¦ Fiche fir ze vergläichen: „{name}{year}“ gläicht enger Fiche, déi schonn an dëser Datebank ass. Ni vum selwe fusionéiert.
+née {y} ¦ gebuer {y}
+Homonyme possible : « {name}{year} » existe aussi dans le dossier {n}. Jamais relié tout seul. ¦ Méiglechen Nummébrudder: „{name}{year}“ gëtt et och am Dossier {n}. Ni vum selwe verbonnen.
+⇆ Comparer ¦ ⇆ Vergläichen
+C’est la même personne : rattacher aussi ¦ Et ass déiselwecht Persoun: och zouuerdnen
+Pas la même ¦ Net déiselwecht
+Fiche retirée du dossier {n} ¦ Fiche aus dem Dossier {n} ewechgeholl
+Fiche remise dans le dossier {n} ¦ Fiche erëm an den Dossier {n} gesat
+Homonyme rattaché aussi au dossier {n} (à vérifier) ¦ Nummébrudder och dem Dossier {n} zougeuerdnet (ze kontrolléieren)
+Noté : ce n’est pas la même personne ¦ Notéiert: net déiselwecht Persoun
+Rôle : {r} ¦ Roll: {r}
+⚠️ illisible : {names} ¦ ⚠️ net liesbar: {names}
+Chercher… (n°, défunt, notaire) ¦ Sichen… (Nr., Verstuerwenen, Notaire)
+Toutes les généalogies ¦ All d’Genealogien
+Tous les notaires ¦ All d’Notairen
+Prochaine échéance (retards d’abord) ¦ Nächst Frist (Retarden als éischt)
+Avancement le plus bas ¦ Klengste Fortschrëtt
+{d} · passée ¦ {d} · ofgelaf
+Trouvés : {n} ¦ Fonnt: {n}
+À trouver : {n} ¦ Ze fannen: {n}
+{h} h {m} ¦ {h} St. {m}
+Cocher le dossier {n} ¦ Den Dossier {n} ukräizen
+Échéance : {d} ¦ Frist: {d}
+Héritiers ¦ Ierwen
+Avancement ¦ Fortschrëtt
+Cochés : {n} ¦ Ugekräizt: {n}
+Les dossiers cochés sont dans des généalogies différentes : choisis-en dans une seule. ¦ Déi ugekräizt Dossiere sinn a verschiddene Genealogien: wiel se nëmmen aus enger.
+Dossiers exportés (CSV) ¦ Dossieren exportéiert (CSV)
+⤒ Réimporter un dossier archivé… ¦ ⤒ En archivéierten Dossier nees importéieren…
+⚠️ FUSION ¦ ⚠️ FUSIOUN
+Ces deux fiches sont dans des dossiers différents ¦ Dës zwou Fiche sinn a verschiddenen Dossieren
+Fusionner quand même ¦ Trotzdeem fusionéieren
+{a} et {b}. Fusionner relie les deux successions et change les parts des deux dossiers. Vérifie avec des actes (naissance, parents) avant. ¦ {a} an {b}. D’Fusioun verbënnt déi zwou Ierfschaften an ännert d’Undeeler an deenen zwee Dossieren. Kontrolléier et virdrun mat Akten (Gebuert, Elteren).
+⇆ Comparer d’abord ¦ ⇆ Fir d’éischt vergläichen
+Si on fusionne : noté dans le journal des deux dossiers, et les deux sont recalculés. ¦ Bei enger Fusioun: am Journal vu béiden Dossieren notéiert, a béid ginn nei berechent.
+🗄 Archiver dans un fichier et retirer… ¦ 🗄 An eng Datei archivéieren an ewechhuelen…
+🗄 ARCHIVER LE DOSSIER {n} ¦ 🗄 DEN DOSSIER {n} ARCHIVÉIEREN
+Dans un fichier, puis retirer de la base ¦ An eng Datei, dann aus der Datebank ewechhuelen
+⤓ Enregistrer le fichier puis retirer ¦ ⤓ D’Datei späicheren an dann ewechhuelen
+Le fichier {file} contient : le dossier, le journal, les pièces et leurs images, les courriers, l’arbre de dévolution (SVG), le tableau pour le notaire et les fiches rattachées ({n}). ¦ D’Datei {file} enthält: den Dossier, de Journal, d’Pièce mat hire Biller, d’Bréiwer, den Ierffollegbam (SVG), d’Tabell fir den Notaire an déi zougeuerdent Fichen ({n}).
+Garder les adresses des vivants dans le fichier ¦ D’Adresse vun de Liewegen an der Datei halen
+utile si le notaire rouvre la succession ¦ nëtzlech, wann den Notaire d’Ierfschaft nees opmécht
+Retirer les adresses ¦ D’Adressen ewechhuelen
+comme l’archivage actuel ¦ wéi dat aktuellt Archivéieren
+Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base ({n}). Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste ({k}). Une sauvegarde est faite avant. ¦ Dono ginn d’Fichen, déi nëmmen dësem Dossier déngen, aus der Datebank ewechgeholl ({n}). Eng Fiche, déi och un en aneren Dossier (oder deng Famill) hänkt, bleift ({k}). Virdrun gëtt eng Sécherheetskopie gemaach.
+Dossier {n} archivé dans « {file} » et retiré ({what}) ¦ Dossier {n} an „{file}“ archivéiert an ewechgeholl ({what})
+⤒ RÉIMPORTER ¦ ⤒ NEES IMPORTÉIEREN
+⤒ Réimporter le dossier ¦ ⤒ Den Dossier nees importéieren
+Dossier {n} ({name}{closed}), {what}. ¦ Dossier {n} ({name}{closed}), {what}.
+clos le {d} ¦ zougemaach den {d}
+{what} ressemblent à des fiches déjà dans cette base ({names}) : elles seront proposées à la comparaison, jamais fusionnées seules. ¦ {what} gläichen Fichen, déi schonn an dëser Datebank sinn ({names}): si ginn zum Vergläichen ugebueden, ni vum selwe fusionéiert.
+Dossier {n} réimporté ({what}) ¦ Dossier {n} nees importéiert ({what})
+Dossier {n} réimporté dans « {name} ». ¦ Dossier {n} nees an „{name}“ importéiert.
+⚖️ Mes dossiers de succession ¦ ⚖️ Meng Ierfschaftsdossieren
+Aucun dossier de succession. ¦ Keen Ierfschaftsdossier.
+Étapes (7) ¦ Schrëtt (7)
+{step} : {done} sur {total} ¦ {step}: {done} vun {total}
+Quels dossiers ¦ Wéi eng Dossieren
+Le filtre ¦ De Filter
+Vue actuelle ¦ Aktuell Usiicht
+Alt + ↑ / ↓ : changer l’ordre (rangement à la main) ¦ Alt + ↑ / ↓: d’Reiefolleg änneren (mat der Hand)
+Sans dossier ¦ Ouni Dossier
+Ranger les dossiers : ¦ D’Dossieren uerdnen:
+… cherche un nom pour voir les autres. ¦ … sich en Numm, fir déi aner ze gesinn.
+Ordre des dossiers changé ¦ Reiefolleg vun den Dossieren geännert
+Dans cette généalogie ¦ An dëser Genealogie
+Le défunt et ses héritiers sont des fiches de ta famille. Simple, mais tout se mélange. ¦ De Verstuerwenen a seng Ierwe sinn Fiche vun denger Famill. Einfach, mee alles vermëscht sech.
+Dans une généalogie à part pour tous mes dossiers ¦ An enger separater Genealogie fir all meng Dossieren
+Une base professionnelle « ⚖️ Dossiers de succession », créée dans 🌳 Mes généalogies. Tes dossiers y sont tous ensemble ; ta famille reste à part. ¦ Eng beruflech Datebank „⚖️ Ierfschaftsdossiere“, ugeluecht an 🌳 Meng Genealogien. All deng Dossiere sinn do zesummen; deng Famill bleift separat.
+Une généalogie par dossier ¦ Eng Genealogie pro Dossier
+Chaque dossier a sa propre base (« ⚖️ 2026-014 MAZAUD »). Le plus étanche ; à réserver aux grosses successions. ¦ All Dossier huet seng eege Datebank („⚖️ 2026-014 MAZAUD“). Am dichtsten; fir grouss Ierfschaften.
+défunt ¦ Verstuerwenen
+intermédiaire ¦ Zwëschenglidd
+Un par dossier ¦ Eng pro Dossier
+Un filtre ¦ E Filter
+Compteurs ¦ Zieler
+à l’ouverture ¦ beim Opmaachen
+calcul ¦ Berechnung
+à la main ¦ mat der Hand
+créée pendant le filtre ¦ während dem Filter ugeluecht
+réimport ¦ nees importéiert
+homonyme ¦ Nummébrudder
+déplacée ¦ geréckelt
+grisées, sans nom ¦ gro, ouni Numm
+cachées ¦ verstoppt
+retirées du fichier ¦ aus der Datei ewechgeholl
+gardées dans le fichier ¦ an der Datei behalen
+copier la fiche ¦ d’Fiche kopéieren
+refuser le déplacement ¦ d’Réckele refuséieren
+replié ¦ zougeklappt
+Défunt et acte de décès ¦ Verstuerwenen an Doudesakt
+Adresses ¦ Adressen
+Contrats signés ¦ Ënnerschriwwe Kontrakter
+Déplacement refusé : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Réckele refuséiert: dës Fiche sinn och an denger Famill oder an engem aneren Dossier: {names}.
+Impossible d’enregistrer les réglages des dossiers. ¦ D’Astellunge vun den Dossiere konnten net gespäichert ginn.
+Cette généalogie est encore vide. ¦ Dës Genealogie ass nach eidel.
+Rôle inconnu. ¦ Onbekannt Roll.
+Fiches inconnues. ¦ Onbekannt Fichen.
+Choisis une autre généalogie. ¦ Wiel eng aner Genealogie.
+Impossible de créer le fichier d’archive. ¦ D’Archivdatei konnt net ugeluecht ginn.
+Fichier introuvable. ¦ Datei net fonnt.
+Ce fichier n’est pas une archive de dossier de succession. ¦ Dës Datei ass keen Archiv vun engem Ierfschaftsdossier.
+Le fichier n’a pas été reçu. ¦ D’Datei ass net ukomm.
+Le défunt reste dans son dossier. ¦ De Verstuerwene bleift a sengem Dossier.
+🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Persounen
+Dossiers de succession (usage successoral seulement) ¦ Ierfschaftsdossieren (nëmme bei der Notzung als Ierwesicher)

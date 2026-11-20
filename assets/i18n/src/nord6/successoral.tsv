@@ -523,3 +523,185 @@ Dévolution ¦ Paveldėjimo eilė ¦ Mantošanas kārtība ¦ Pärimisjärjekord
 =dépouillement ¦ peržiūra|peržiūros|peržiūrų ¦ pārskatu|pārskats|pārskati ¦ läbitöötamine|läbitöötamist
 =dossier en cours ¦ vykdoma byla|vykdomos bylos|vykdomų bylų ¦ aktīvu lietu|aktīva lieta|aktīvas lietas ¦ pooleli toimik|pooleli toimikut
 =dossier de succession ¦ paveldėjimo byla|paveldėjimo bylos|paveldėjimo bylų ¦ mantojuma lietu|mantojuma lieta|mantojuma lietas ¦ pärimistoimik|pärimistoimikut
+
+# ⚖️ Dossiers de succession : rangement, filtre ⚖️, rattachement, tableau de bord, garde-fous, widget, vue par dossier
+Dossiers de succession : filtre {what} (cliquer pour changer) ¦ Paveldėjimo bylos: filtras {what} (spustelėk, kad pakeistum) ¦ Mantojuma lietas: filtrs {what} (noklikšķini, lai mainītu) ¦ Pärimistoimikud: filter {what} (muutmiseks klõpsa)
+Dossiers de succession : ne montrer qu’un ou plusieurs dossiers ¦ Paveldėjimo bylos: rodyti tik vieną ar kelias bylas ¦ Mantojuma lietas: rādīt tikai vienu vai vairākas lietas ¦ Pärimistoimikud: näita ainult üht või mitut toimikut
+Plusieurs ¦ Kelios ¦ Vairākas ¦ Mitu
+⚖️ Ne montrer que ceux-ci ¦ ⚖️ Rodyti tik šias ¦ ⚖️ Rādīt tikai šīs ¦ ⚖️ Näita ainult neid
+Aucun dossier dans cette généalogie. ¦ Šioje genealogijoje bylų nėra. ¦ Šajā ģenealoģijā nav lietu. ¦ Selles sugupuus pole toimikut.
+Dans une autre généalogie ¦ Kitoje genealogijoje ¦ Citā ģenealoģijā ¦ Teises sugupuus
+Tous les dossiers… ¦ Visos bylos… ¦ Visas lietas… ¦ Kõik toimikud…
+Seulement le dossier {n} ¦ Tik byla {n} ¦ Tikai lieta {n} ¦ Ainult toimik {n}
+Seulement {what} : {list} ¦ Tik {what}: {list} ¦ Tikai {what}: {list} ¦ Ainult {what}: {list}
+1 dossier · {state} ¦ 1 byla · {state} ¦ 1 lieta · {state} ¦ 1 toimik · {state}
+⚖️ Dossier {n} ¦ ⚖️ Byla {n} ¦ ⚖️ Lieta {n} ¦ ⚖️ Toimik {n}
+Ce dossier est dans une autre généalogie ¦ Ši byla yra kitoje genealogijoje ¦ Šī lieta ir citā ģenealoģijā ¦ See toimik on teises sugupuus
+Ouvrir « {name} » ¦ Atverti „{name}“ ¦ Atvērt „{name}“ ¦ Ava „{name}“
+Il est rangé dans « {name} ». Pour le montrer, l’app ouvre cette généalogie (tes réglages d’ici sont gardés) et y active le filtre ⚖️ {n}. ¦ Ji laikoma „{name}“. Kad ją parodytų, programėlė atveria tą genealogiją (tavo nustatymai čia išlieka) ir įjungia ten filtrą ⚖️ {n}. ¦ Tā glabājas „{name}“. Lai to parādītu, lietotne atver to ģenealoģiju (tavi iestatījumi šeit saglabājas) un ieslēdz tur filtru ⚖️ {n}. ¦ See asub sugupuus „{name}“. Selle näitamiseks avab rakendus selle sugupuu (sinu siinsed seaded jäävad alles) ja lülitab seal sisse filtri ⚖️ {n}.
+Tes nouveaux dossiers vont dans « {name} ». ¦ Tavo naujos bylos keliauja į „{name}“. ¦ Tavas jaunās lietas nonāk „{name}“. ¦ Sinu uued toimikud lähevad sugupuusse „{name}“.
+Ouvrir le dossier ici quand même ¦ Vis tiek atverti bylą čia ¦ Tomēr atvērt lietu šeit ¦ Ava toimik siiski siin
+Où ranger tes dossiers ? ¦ Kur laikyti tavo bylas? ¦ Kur glabāt tavas lietas? ¦ Kus hoida su toimikuid?
+conseillé ici ¦ rekomenduojama čia ¦ ieteicams šeit ¦ siin soovitatav
+Nom de la nouvelle généalogie ¦ Naujos genealogijos pavadinimas ¦ Jaunās ģenealoģijas nosaukums ¦ Uue sugupuu nimi
+⚖️ Dossier de succession ¦ ⚖️ Paveldėjimo byla ¦ ⚖️ Mantojuma lieta ¦ ⚖️ Pärimistoimik
+Ta généalogie ouverte a {n} : la ranger à part évite de mélanger les héritiers de tes clients avec ta propre famille. Ce n’est qu’un conseil. ¦ Tavo atvertoje genealogijoje yra {n}: laikant atskirai, tavo klientų įpėdiniai nesusimaišo su tavo šeima. Tai tik patarimas. ¦ Tavā atvērtajā ģenealoģijā ir {n}: glabājot atsevišķi, tavu klientu mantinieki nesajaucas ar tavu ģimeni. Tas ir tikai ieteikums. ¦ Sinu avatud sugupuus on {n}: eraldi hoidmine väldib klientide pärijate segunemist sinu oma perega. See on vaid soovitus.
+Tu pourras changer d’avis : Réglages → Apparence → 🧭 Usage de l’app → « ⚖️ Où ranger les dossiers ». Les dossiers déjà ouverts ne bougent pas tout seuls. ¦ Gali persigalvoti: Nustatymai → Išvaizda → 🧭 Programėlės naudojimas → „⚖️ Kur laikyti bylas“. Jau atvertos bylos pačios nesikelia. ¦ Vari pārdomāt: Iestatījumi → Izskats → 🧭 Lietotnes lietojums → „⚖️ Kur glabāt lietas“. Jau atvērtās lietas pašas nepārvietojas. ¦ Võid meelt muuta: Seaded → Välimus → 🧭 Rakenduse kasutus → „⚖️ Kus toimikuid hoida“. Juba avatud toimikud ise ei liigu.
+Créer « ⚖️ Dossiers de succession » et ouvrir le dossier ¦ Sukurti „⚖️ Paveldėjimo bylos“ ir atverti bylą ¦ Izveidot „⚖️ Mantojuma lietas“ un atvērt lietu ¦ Loo „⚖️ Pärimistoimikud“ ja ava toimik
+Créer la généalogie et ouvrir le dossier ¦ Sukurti genealogiją ir atverti bylą ¦ Izveidot ģenealoģiju un atvērt lietu ¦ Loo sugupuu ja ava toimik
+Rangement des dossiers : {what} ¦ Kur keliauja bylos: {what} ¦ Kur nonāk lietas: {what} ¦ Kuhu toimikud lähevad: {what}
+Généalogiste successoral : réglages des dossiers ¦ Paveldėjimo genealogas: bylų nustatymai ¦ Mantojuma ģenealogs: lietu iestatījumi ¦ Pärimisgenealoog: toimikute seaded
+Où ranger les dossiers ¦ Kur laikyti bylas ¦ Kur glabāt lietas ¦ Kus toimikuid hoida
+Les nouveaux dossiers vont… ¦ Naujos bylos keliauja… ¦ Jaunās lietas nonāk… ¦ Uued toimikud lähevad…
+Dans « {name} » ¦ Į „{name}“ ¦ Uz „{name}“ ¦ Sugupuusse „{name}“
+Les dossiers et où ils sont ¦ Bylos ir kur jos yra ¦ Lietas un kur tās atrodas ¦ Toimikud ja nende asukoht
+⇄ Déplacer… ¦ ⇄ Perkelti… ¦ ⇄ Pārvietot… ¦ ⇄ Teisalda…
+Aucun dossier pour l’instant. ¦ Bylų dar nėra. ¦ Lietu vēl nav. ¦ Toimikuid veel pole.
+Réglages des dossiers ¦ Bylų nustatymai ¦ Lietu iestatījumi ¦ Toimikute seaded
+Arbre et graphiques filtrés par ⚖️ : les fiches hors dossier ¦ Medis ir diagramos su filtru ⚖️: įrašai už bylos ribų ¦ Koks un diagrammas ar filtru ⚖️: ieraksti ārpus lietas ¦ Puu ja diagrammid filtriga ⚖️: toimikuvälised kaardid
+Archive d’un dossier clos : adresses des héritiers vivants ¦ Uždarytos bylos archyvas: gyvų įpėdinių adresai ¦ Slēgtas lietas arhīvs: dzīvo mantinieku adreses ¦ Suletud toimiku arhiiv: elus pärijate aadressid
+Déplacer un dossier dont une fiche est aussi dans ta famille ¦ Bylos perkėlimas, kai jos įrašas yra ir tavo šeimoje ¦ Lietas pārvietošana, ja tās ieraksts ir arī tavā ģimenē ¦ Toimiku teisaldamine, kui selle kaart on ka sinu peres
+« Sans dossier » dans la vue par dossier ¦ „Be bylos“ rodinyje pagal bylas ¦ „Bez lietas“ skatā pa lietām ¦ „Toimikuta“ toimikupõhises vaates
+Avancement : un héritier qui refuse de signer ¦ Pažanga: įpėdinis, kuris atsisako pasirašyti ¦ Progress: mantinieks, kas atsakās parakstīt ¦ Edenemine: pärija, kes keeldub allkirjastamast
+compte comme « fait » (étape 5) ¦ skaičiuojama kaip „atlikta“ (5 žingsnis) ¦ skaitās „paveikts“ (5. solis) ¦ loetakse „tehtuks“ (5. samm)
+Avancement : poids des 7 étapes ¦ Pažanga: 7 žingsnių svoris ¦ Progress: 7 soļu svars ¦ Edenemine: 7 sammu kaal
+Réglage des dossiers enregistré : {what} ¦ Bylų nustatymas išsaugotas: {what} ¦ Lietu iestatījums saglabāts: {what} ¦ Toimikute seade salvestatud: {what}
+poids des 7 étapes ¦ 7 žingsnių svoris ¦ 7 soļu svars ¦ 7 sammu kaal
+⇄ DÉPLACER UN DOSSIER ¦ ⇄ PERKELTI BYLĄ ¦ ⇄ PĀRVIETOT LIETU ¦ ⇄ TEISALDA TOIMIK
+{n} → ? ¦ {n} → ? ¦ {n} → ? ¦ {n} → ?
+⇄ Déplacer ({what}) ¦ ⇄ Perkelti ({what}) ¦ ⇄ Pārvietot ({what}) ¦ ⇄ Teisalda ({what})
+Vers ¦ Į ¦ Uz ¦ Kuhu
+＋ Une nouvelle généalogie pour ce dossier ¦ ＋ Nauja genealogija šiai bylai ¦ ＋ Jauna ģenealoģija šai lietai ¦ ＋ Uus sugupuu sellele toimikule
+Ce qui part : le dossier, son journal, ses pièces, ses courriers, ses échéances, et les fiches qui lui sont rattachées (défunt, héritiers, intermédiaires) avec leurs actes et médias. Une fiche aussi rattachée à un autre dossier ou à ta famille est copiée, pas déplacée. ¦ Kas keliauja: byla, jos žurnalas, dokumentai, laiškai, terminai ir su ja susieti įrašai (palikėjas, įpėdiniai, tarpininkai) su jų aktais ir medija. Įrašas, susietas ir su kita byla ar tavo šeima, nukopijuojamas, o ne perkeliamas. ¦ Kas aiziet: lieta, tās žurnāls, dokumenti, vēstules, termiņi un ar to saistītie ieraksti (mantojuma atstājējs, mantinieki, starpnieki) ar viņu aktiem un multividi. Ieraksts, kas saistīts arī ar citu lietu vai tavu ģimeni, tiek kopēts, nevis pārvietots. ¦ Mis liigub: toimik, selle logi, dokumendid, kirjad, tähtajad ja sellega seotud kaardid (pärandaja, pärijad, vahelülid) koos nende aktide ja meediaga. Kaart, mis on seotud ka teise toimiku või sinu perega, kopeeritakse, mitte ei teisaldata.
+Déplacement refusé (réglage) : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Perkėlimas atmestas (nustatymas): šie įrašai yra ir tavo šeimoje arba kitoje byloje: {names}. ¦ Pārvietošana noraidīta (iestatījums): šie ieraksti ir arī tavā ģimenē vai citā lietā: {names}. ¦ Teisaldamine keelatud (seade): need kaardid on ka sinu peres või teises toimikus: {names}.
+Copiées (elles restent aussi ici) : {names}. ¦ Nukopijuota (lieka ir čia): {names}. ¦ Nokopēts (paliek arī šeit): {names}. ¦ Kopeeritud (jäävad ka siia): {names}.
+Une copie de sauvegarde des deux généalogies est faite avant. Le journal du dossier note « Déplacé de … vers … ». ¦ Pirmiausia padaroma abiejų genealogijų atsarginė kopija. Bylos žurnale įrašoma „Perkelta iš … į …“. ¦ Vispirms tiek izveidota abu ģenealoģiju rezerves kopija. Lietas žurnālā tiek ierakstīts „Pārvietots no … uz …“. ¦ Esmalt tehakse mõlemast sugupuust varukoopia. Toimiku logisse märgitakse „Teisaldatud … → …“.
+Dossier {n} déplacé vers « {to} » ({what}) ¦ Byla {n} perkelta į „{to}“ ({what}) ¦ Lieta {n} pārvietota uz „{to}“ ({what}) ¦ Toimik {n} teisaldatud sugupuusse „{to}“ ({what})
+⤓ Reprendre la fiche depuis Ma généalogie ¦ ⤓ Perimti įrašą iš Mano genealogijos ¦ ⤓ Pārņemt ierakstu no Manas ģenealoģijas ¦ ⤓ Võta kaart Minu sugupuust
+copie de la fiche, jusqu’aux grands-parents et tous leurs descendants connus, sans photos ¦ įrašo kopija iki senelių ir visų jų žinomų palikuonių, be nuotraukų ¦ ieraksta kopija līdz vecvecākiem un visiem viņu zināmajiem pēcnācējiem, bez fotoattēliem ¦ kaardi koopia vanavanemateni ja kõik nende teadaolevad järeltulijad, ilma fotodeta
+⤓ REPRENDRE UNE FICHE ¦ ⤓ PERIMTI ĮRAŠĄ ¦ ⤓ PĀRŅEMT IERAKSTU ¦ ⤓ VÕTA KAART
+Reprendre la fiche du défunt ¦ Perimti palikėjo įrašą ¦ Pārņemt mantojuma atstājēja ierakstu ¦ Võta pärandaja kaart
+Chercher la fiche ¦ Ieškoti įrašo ¦ Meklēt ierakstu ¦ Otsi kaarti
+Prénom, nom… ¦ Vardas, pavardė… ¦ Vārds, uzvārds… ¦ Eesnimi, perekonnanimi…
+Copiées : la fiche, ses parents et grands-parents, tous leurs descendants connus et leurs conjoints, avec les dates et les lieux ; sans photos. Rien n’est changé dans l’autre généalogie. ¦ Kopijuojama: įrašas, tėvai ir seneliai, visi žinomi palikuonys ir jų sutuoktiniai, su datomis ir vietomis; be nuotraukų. Kitoje genealogijoje niekas nesikeičia. ¦ Tiek kopēts: ieraksts, vecāki un vecvecāki, visi zināmie pēcnācēji un viņu laulātie, ar datumiem un vietām; bez fotoattēliem. Otrā ģenealoģijā nekas nemainās. ¦ Kopeeritakse: kaart, vanemad ja vanavanemad, kõik teadaolevad järeltulijad ja nende abikaasad, kuupäevade ja kohtadega; ilma fotodeta. Teises sugupuus ei muutu midagi.
+{what} reprises de l’autre généalogie. ¦ {what} perimta iš kitos genealogijos. ¦ {what} pārņemti no otras ģenealoģijas. ¦ {what} võetud teisest sugupuust.
+Dossiers… ¦ Bylos… ¦ Lietas… ¦ Toimikud…
+{name} dans quels dossiers ? ¦ {name} kuriose bylose? ¦ {name} kurās lietās? ¦ {name} millistes toimikutes?
+(calculé) ¦ (apskaičiuota) ¦ (aprēķināts) ¦ (arvutatud)
+Rôles : défunt · héritier · intermédiaire · témoin · à vérifier. « Héritier » mis par le calcul s’affiche « (calculé) ». ¦ Vaidmenys: palikėjas · įpėdinis · tarpininkas · liudytojas · patikrinti. Skaičiavimo nustatytas „įpėdinis“ rodomas „(apskaičiuota)“. ¦ Lomas: mantojuma atstājējs · mantinieks · starpnieks · liecinieks · jāpārbauda. Aprēķina iestatītais „mantinieks“ rāda „(aprēķināts)“. ¦ Rollid: pärandaja · pärija · vahelüli · tunnistaja · kontrollida. Arvutuse määratud „pärija“ juures on „(arvutatud)“.
+Dossiers de {name} enregistrés ¦ {name} bylos išsaugotos ¦ {name} lietas saglabātas ¦ Isiku {name} toimikud salvestatud
+Les dossiers de cette fiche ¦ Šio įrašo bylos ¦ Šī ieraksta lietas ¦ Selle kaardi toimikud
+hors du dossier {n} ¦ už bylos {n} ribų ¦ ārpus lietas {n} ¦ väljaspool toimikut {n}
+＋ Rattacher ¦ ＋ Susieti ¦ ＋ Piesaistīt ¦ ＋ Seo
+Fiche rattachée au dossier {n} ¦ Įrašas susietas su byla {n} ¦ Ieraksts piesaistīts lietai {n} ¦ Kaart seotud toimikuga {n}
+Rattachée au dossier {n} : {who} ¦ Susieta su byla {n}: {who} ¦ Piesaistīts lietai {n}: {who} ¦ Seotud toimikuga {n}: {who}
+Lecture des fiches du dossier… ¦ Skaitomi bylos įrašai… ¦ Nolasa lietas ierakstus… ¦ Toimiku kaartide lugemine…
+Les fiches du dossier ¦ Bylos įrašai ¦ Lietas ieraksti ¦ Toimiku kaardid
+Rattacher ¦ Susieti ¦ Piesaistīt ¦ Seo
+Retirées à la main ({n}) : jamais remises toutes seules ¦ Pašalinti rankiniu būdu ({n}): niekada negrąžinami savaime ¦ Noņemti ar roku ({n}): nekad netiek atlikti atpakaļ paši ¦ Käsitsi eemaldatud ({n}): ei panda kunagi ise tagasi
+Fiche à comparer : « {name}{year} » ressemble à une fiche déjà dans cette base. Jamais fusionnée toute seule. ¦ Įrašas palyginti: „{name}{year}“ panašus į įrašą, kuris jau yra šioje bazėje. Niekada nesujungiamas savaime. ¦ Ieraksts salīdzināšanai: „{name}{year}“ līdzinās ierakstam, kas jau ir šajā datubāzē. Nekad netiek apvienots pats. ¦ Võrreldav kaart: „{name}{year}“ sarnaneb kaardiga, mis on juba selles andmebaasis. Ei liideta kunagi ise.
+née {y} ¦ gim. {y} ¦ dz. {y} ¦ sünd. {y}
+Homonyme possible : « {name}{year} » existe aussi dans le dossier {n}. Jamais relié tout seul. ¦ Galimas bendrapavardis: „{name}{year}“ yra ir byloje {n}. Niekada nesusiejamas savaime. ¦ Iespējams vārdabrālis: „{name}{year}“ ir arī lietā {n}. Nekad netiek piesaistīts pats. ¦ Võimalik nimekaim: „{name}{year}“ on ka toimikus {n}. Ei seota kunagi ise.
+⇆ Comparer ¦ ⇆ Palyginti ¦ ⇆ Salīdzināt ¦ ⇆ Võrdle
+C’est la même personne : rattacher aussi ¦ Tai tas pats asmuo: susieti ir ¦ Tā ir tā pati persona: piesaistīt arī ¦ See on sama isik: seo ka
+Pas la même ¦ Ne tas pats ¦ Ne tā pati ¦ Mitte sama
+Fiche retirée du dossier {n} ¦ Įrašas pašalintas iš bylos {n} ¦ Ieraksts noņemts no lietas {n} ¦ Kaart eemaldatud toimikust {n}
+Fiche remise dans le dossier {n} ¦ Įrašas grąžintas į bylą {n} ¦ Ieraksts atlikts atpakaļ lietā {n} ¦ Kaart pandud tagasi toimikusse {n}
+Homonyme rattaché aussi au dossier {n} (à vérifier) ¦ Bendrapavardis susietas ir su byla {n} (patikrinti) ¦ Vārdabrālis piesaistīts arī lietai {n} (jāpārbauda) ¦ Nimekaim seotud ka toimikuga {n} (kontrollida)
+Noté : ce n’est pas la même personne ¦ Pažymėta: tai ne tas pats asmuo ¦ Atzīmēts: tā nav tā pati persona ¦ Märgitud: see pole sama isik
+Rôle : {r} ¦ Vaidmuo: {r} ¦ Loma: {r} ¦ Roll: {r}
+⚠️ illisible : {names} ¦ ⚠️ neįskaitoma: {names} ¦ ⚠️ nelasāms: {names} ¦ ⚠️ loetamatu: {names}
+Chercher… (n°, défunt, notaire) ¦ Ieškoti… (nr., palikėjas, notaras) ¦ Meklēt… (nr., mantojuma atstājējs, notārs) ¦ Otsi… (nr, pärandaja, notar)
+Toutes les généalogies ¦ Visos genealogijos ¦ Visas ģenealoģijas ¦ Kõik sugupuud
+Tous les notaires ¦ Visi notarai ¦ Visi notāri ¦ Kõik notarid
+Prochaine échéance (retards d’abord) ¦ Artimiausias terminas (pirma pavėluoti) ¦ Tuvākais termiņš (vispirms nokavētie) ¦ Järgmine tähtaeg (hilinenud enne)
+Avancement le plus bas ¦ Mažiausia pažanga ¦ Mazākais progress ¦ Väikseim edenemine
+{d} · passée ¦ {d} · praėjo ¦ {d} · nokavēts ¦ {d} · möödas
+Trouvés : {n} ¦ Rasta: {n} ¦ Atrasti: {n} ¦ Leitud: {n}
+À trouver : {n} ¦ Rasti: {n} ¦ Jāatrod: {n} ¦ Leida: {n}
+{h} h {m} ¦ {h} val. {m} ¦ {h} st. {m} ¦ {h} t {m}
+Cocher le dossier {n} ¦ Pažymėti bylą {n} ¦ Atzīmēt lietu {n} ¦ Märgi toimik {n}
+Échéance : {d} ¦ Terminas: {d} ¦ Termiņš: {d} ¦ Tähtaeg: {d}
+Héritiers ¦ Įpėdiniai ¦ Mantinieki ¦ Pärijad
+Avancement ¦ Pažanga ¦ Progress ¦ Edenemine
+Cochés : {n} ¦ Pažymėta: {n} ¦ Atzīmēti: {n} ¦ Märgitud: {n}
+Les dossiers cochés sont dans des généalogies différentes : choisis-en dans une seule. ¦ Pažymėtos bylos yra skirtingose genealogijose: rinkis tik iš vienos. ¦ Atzīmētās lietas ir dažādās ģenealoģijās: izvēlies tikai no vienas. ¦ Märgitud toimikud on eri sugupuudes: vali ainult ühest.
+Dossiers exportés (CSV) ¦ Bylos eksportuotos (CSV) ¦ Lietas eksportētas (CSV) ¦ Toimikud eksporditud (CSV)
+⤒ Réimporter un dossier archivé… ¦ ⤒ Iš naujo importuoti archyvuotą bylą… ¦ ⤒ Atkārtoti importēt arhivētu lietu… ¦ ⤒ Impordi arhiveeritud toimik uuesti…
+⚠️ FUSION ¦ ⚠️ SUJUNGIMAS ¦ ⚠️ APVIENOŠANA ¦ ⚠️ LIITMINE
+Ces deux fiches sont dans des dossiers différents ¦ Šie du įrašai yra skirtingose bylose ¦ Šie divi ieraksti ir dažādās lietās ¦ Need kaks kaarti on eri toimikutes
+Fusionner quand même ¦ Vis tiek sujungti ¦ Tomēr apvienot ¦ Liida siiski
+{a} et {b}. Fusionner relie les deux successions et change les parts des deux dossiers. Vérifie avec des actes (naissance, parents) avant. ¦ {a} ir {b}. Sujungus abu paveldėjimai susiejami ir pasikeičia dalys abiejose bylose. Pirmiausia patikrink aktais (gimimas, tėvai). ¦ {a} un {b}. Apvienošana sasaista abus mantojumus un maina daļas abās lietās. Vispirms pārbaudi ar aktiem (dzimšana, vecāki). ¦ {a} ja {b}. Liitmine seob kaks pärandit ja muudab osi mõlemas toimikus. Kontrolli enne aktidega (sünd, vanemad).
+⇆ Comparer d’abord ¦ ⇆ Pirma palyginti ¦ ⇆ Vispirms salīdzināt ¦ ⇆ Võrdle enne
+Si on fusionne : noté dans le journal des deux dossiers, et les deux sont recalculés. ¦ Sujungus: įrašoma abiejų bylų žurnale, ir abi perskaičiuojamos. ¦ Apvienojot: atzīmēts abu lietu žurnālā, un abas tiek pārrēķinātas. ¦ Liitmisel: märgitakse mõlema toimiku logisse ja mõlemad arvutatakse ümber.
+🗄 Archiver dans un fichier et retirer… ¦ 🗄 Archyvuoti į failą ir pašalinti… ¦ 🗄 Arhivēt failā un noņemt… ¦ 🗄 Arhiveeri faili ja eemalda…
+🗄 ARCHIVER LE DOSSIER {n} ¦ 🗄 ARCHYVUOTI BYLĄ {n} ¦ 🗄 ARHIVĒT LIETU {n} ¦ 🗄 ARHIVEERI TOIMIK {n}
+Dans un fichier, puis retirer de la base ¦ Į failą, paskui pašalinti iš bazės ¦ Failā, pēc tam noņemt no datubāzes ¦ Faili, seejärel eemalda andmebaasist
+⤓ Enregistrer le fichier puis retirer ¦ ⤓ Išsaugoti failą ir pašalinti ¦ ⤓ Saglabāt failu un tad noņemt ¦ ⤓ Salvesta fail ja seejärel eemalda
+Le fichier {file} contient : le dossier, le journal, les pièces et leurs images, les courriers, l’arbre de dévolution (SVG), le tableau pour le notaire et les fiches rattachées ({n}). ¦ Faile {file} yra: byla, žurnalas, dokumentai ir jų vaizdai, laiškai, paveldėjimo medis (SVG), lentelė notarui ir susieti įrašai ({n}). ¦ Failā {file} ir: lieta, žurnāls, dokumenti un to attēli, vēstules, mantošanas koks (SVG), tabula notāram un piesaistītie ieraksti ({n}). ¦ Fail {file} sisaldab: toimikut, logi, dokumente ja nende pilte, kirju, pärimispuud (SVG), tabelit notarile ja seotud kaarte ({n}).
+Garder les adresses des vivants dans le fichier ¦ Palikti gyvųjų adresus faile ¦ Paturēt dzīvo adreses failā ¦ Jäta elusate aadressid faili
+utile si le notaire rouvre la succession ¦ naudinga, jei notaras vėl atvers paveldėjimą ¦ noderīgi, ja notārs atkal atver mantojumu ¦ kasulik, kui notar pärimise uuesti avab
+Retirer les adresses ¦ Pašalinti adresus ¦ Noņemt adreses ¦ Eemalda aadressid
+comme l’archivage actuel ¦ kaip dabartinis archyvavimas ¦ kā pašreizējā arhivēšana ¦ nagu praegune arhiveerimine
+Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base ({n}). Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste ({k}). Une sauvegarde est faite avant. ¦ Tada įrašai, naudojami tik šioje byloje, pašalinami iš bazės ({n}). Įrašas, susietas ir su kita byla (ar tavo šeima), lieka ({k}). Pirmiausia padaroma atsarginė kopija. ¦ Pēc tam ieraksti, kas kalpo tikai šai lietai, tiek noņemti no datubāzes ({n}). Ieraksts, kas saistīts arī ar citu lietu (vai tavu ģimeni), paliek ({k}). Vispirms tiek izveidota rezerves kopija. ¦ Seejärel eemaldatakse andmebaasist kaardid, mis kuuluvad ainult sellesse toimikusse ({n}). Kaart, mis on seotud ka teise toimiku (või sinu perega), jääb ({k}). Esmalt tehakse varukoopia.
+Dossier {n} archivé dans « {file} » et retiré ({what}) ¦ Byla {n} archyvuota į „{file}“ ir pašalinta ({what}) ¦ Lieta {n} arhivēta failā „{file}“ un noņemta ({what}) ¦ Toimik {n} arhiveeritud faili „{file}“ ja eemaldatud ({what})
+⤒ RÉIMPORTER ¦ ⤒ IMPORTUOTI IŠ NAUJO ¦ ⤒ IMPORTĒT ATKĀRTOTI ¦ ⤒ IMPORDI UUESTI
+⤒ Réimporter le dossier ¦ ⤒ Iš naujo importuoti bylą ¦ ⤒ Atkārtoti importēt lietu ¦ ⤒ Impordi toimik uuesti
+Dossier {n} ({name}{closed}), {what}. ¦ Byla {n} ({name}{closed}), {what}. ¦ Lieta {n} ({name}{closed}), {what}. ¦ Toimik {n} ({name}{closed}), {what}.
+clos le {d} ¦ uždaryta {d} ¦ slēgta {d} ¦ suletud {d}
+{what} ressemblent à des fiches déjà dans cette base ({names}) : elles seront proposées à la comparaison, jamais fusionnées seules. ¦ {what} panašūs į įrašus, kurie jau yra šioje bazėje ({names}): jie bus pasiūlyti palyginti, niekada nesujungti savaime. ¦ {what} līdzinās ierakstiem, kas jau ir šajā datubāzē ({names}): tie tiks piedāvāti salīdzināšanai, nekad netiks apvienoti paši. ¦ {what} sarnanevad kaartidega, mis on juba selles andmebaasis ({names}): need pakutakse võrdlemiseks, kunagi ei liideta ise.
+Dossier {n} réimporté ({what}) ¦ Byla {n} importuota iš naujo ({what}) ¦ Lieta {n} importēta atkārtoti ({what}) ¦ Toimik {n} uuesti imporditud ({what})
+Dossier {n} réimporté dans « {name} ». ¦ Byla {n} importuota iš naujo į „{name}“. ¦ Lieta {n} atkārtoti importēta „{name}“. ¦ Toimik {n} uuesti imporditud sugupuusse „{name}“.
+⚖️ Mes dossiers de succession ¦ ⚖️ Mano paveldėjimo bylos ¦ ⚖️ Manas mantojuma lietas ¦ ⚖️ Minu pärimistoimikud
+Aucun dossier de succession. ¦ Paveldėjimo bylų nėra. ¦ Nav mantojuma lietu. ¦ Pärimistoimikuid pole.
+Étapes (7) ¦ Žingsniai (7) ¦ Soļi (7) ¦ Sammud (7)
+{step} : {done} sur {total} ¦ {step}: {done} iš {total} ¦ {step}: {done} no {total} ¦ {step}: {done}/{total}
+Quels dossiers ¦ Kurios bylos ¦ Kuras lietas ¦ Millised toimikud
+Le filtre ¦ Filtras ¦ Filtrs ¦ Filter
+Vue actuelle ¦ Dabartinis rodinys ¦ Pašreizējais skats ¦ Praegune vaade
+Alt + ↑ / ↓ : changer l’ordre (rangement à la main) ¦ Alt + ↑ / ↓: keisti tvarką (rankiniu būdu) ¦ Alt + ↑ / ↓: mainīt secību (ar roku) ¦ Alt + ↑ / ↓: muuda järjekorda (käsitsi)
+Sans dossier ¦ Be bylos ¦ Bez lietas ¦ Toimikuta
+Ranger les dossiers : ¦ Rikiuoti bylas: ¦ Kārtot lietas: ¦ Järjesta toimikud:
+… cherche un nom pour voir les autres. ¦ … ieškok vardo, kad pamatytum kitus. ¦ … meklē vārdu, lai redzētu pārējos. ¦ … otsi nime, et teisi näha.
+Ordre des dossiers changé ¦ Bylų tvarka pakeista ¦ Lietu secība mainīta ¦ Toimikute järjekord muudetud
+Dans cette généalogie ¦ Šioje genealogijoje ¦ Šajā ģenealoģijā ¦ Selles sugupuus
+Le défunt et ses héritiers sont des fiches de ta famille. Simple, mais tout se mélange. ¦ Palikėjas ir jo įpėdiniai yra tavo šeimos įrašai. Paprasta, bet viskas susimaišo. ¦ Mantojuma atstājējs un viņa mantinieki ir tavas ģimenes ieraksti. Vienkārši, bet viss sajaucas. ¦ Pärandaja ja tema pärijad on sinu pere kaardid. Lihtne, aga kõik seguneb.
+Dans une généalogie à part pour tous mes dossiers ¦ Atskiroje genealogijoje visoms mano byloms ¦ Atsevišķā ģenealoģijā visām manām lietām ¦ Eraldi sugupuus kõigi minu toimikute jaoks
+Une base professionnelle « ⚖️ Dossiers de succession », créée dans 🌳 Mes généalogies. Tes dossiers y sont tous ensemble ; ta famille reste à part. ¦ Profesinė bazė „⚖️ Paveldėjimo bylos“, sukurta 🌳 Mano genealogijos. Visos tavo bylos ten kartu; tavo šeima lieka atskirai. ¦ Profesionāla datubāze „⚖️ Mantojuma lietas“, izveidota 🌳 Manas ģenealoģijas. Visas tavas lietas ir tur kopā; tava ģimene paliek atsevišķi. ¦ Tööalane andmebaas „⚖️ Pärimistoimikud“, loodud jaotises 🌳 Minu sugupuud. Kõik su toimikud on seal koos; su pere jääb eraldi.
+Une généalogie par dossier ¦ Viena genealogija vienai bylai ¦ Viena ģenealoģija katrai lietai ¦ Üks sugupuu toimiku kohta
+Chaque dossier a sa propre base (« ⚖️ 2026-014 MAZAUD »). Le plus étanche ; à réserver aux grosses successions. ¦ Kiekviena byla turi savo bazę („⚖️ 2026-014 MAZAUD“). Labiausiai atskirta; dideliems paveldėjimams. ¦ Katrai lietai ir sava datubāze („⚖️ 2026-014 MAZAUD“). Visnoslēgtākais; lieliem mantojumiem. ¦ Igal toimikul on oma andmebaas („⚖️ 2026-014 MAZAUD“). Kõige eraldatum; suurte pärandite jaoks.
+défunt ¦ palikėjas ¦ mantojuma atstājējs ¦ pärandaja
+intermédiaire ¦ tarpininkas ¦ starpnieks ¦ vahelüli
+Un par dossier ¦ Viena bylai ¦ Viena katrai lietai ¦ Üks toimiku kohta
+Un filtre ¦ Filtras ¦ Filtrs ¦ Üks filter
+Compteurs ¦ Skaitikliai ¦ Skaitītāji ¦ Loendurid
+à l’ouverture ¦ atveriant ¦ atverot ¦ avamisel
+calcul ¦ skaičiavimas ¦ aprēķins ¦ arvutus
+à la main ¦ rankiniu būdu ¦ ar roku ¦ käsitsi
+créée pendant le filtre ¦ sukurta filtro metu ¦ izveidots filtra laikā ¦ loodud filtri ajal
+réimport ¦ pakartotinis importas ¦ atkārtots imports ¦ uuesti import
+homonyme ¦ bendrapavardis ¦ vārdabrālis ¦ nimekaim
+déplacée ¦ perkelta ¦ pārvietots ¦ teisaldatud
+grisées, sans nom ¦ pilkos, be vardo ¦ pelēki, bez vārda ¦ hallid, nimeta
+cachées ¦ paslėptos ¦ paslēpti ¦ peidetud
+retirées du fichier ¦ pašalinti iš failo ¦ noņemti no faila ¦ failist eemaldatud
+gardées dans le fichier ¦ palikti faile ¦ paturēti failā ¦ faili jäetud
+copier la fiche ¦ kopijuoti įrašą ¦ kopēt ierakstu ¦ kopeeri kaart
+refuser le déplacement ¦ atmesti perkėlimą ¦ noraidīt pārvietošanu ¦ keela teisaldamine
+replié ¦ suskleista ¦ sakļauts ¦ kokku pandud
+Défunt et acte de décès ¦ Palikėjas ir mirties aktas ¦ Mantojuma atstājējs un miršanas akts ¦ Pärandaja ja surmaakt
+Adresses ¦ Adresai ¦ Adreses ¦ Aadressid
+Contrats signés ¦ Pasirašytos sutartys ¦ Parakstīti līgumi ¦ Allkirjastatud lepingud
+Déplacement refusé : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Perkėlimas atmestas: šie įrašai yra ir tavo šeimoje arba kitoje byloje: {names}. ¦ Pārvietošana noraidīta: šie ieraksti ir arī tavā ģimenē vai citā lietā: {names}. ¦ Teisaldamine keelatud: need kaardid on ka sinu peres või teises toimikus: {names}.
+Impossible d’enregistrer les réglages des dossiers. ¦ Nepavyko išsaugoti bylų nustatymų. ¦ Neizdevās saglabāt lietu iestatījumus. ¦ Toimikute seadeid ei õnnestunud salvestada.
+Cette généalogie est encore vide. ¦ Ši genealogija dar tuščia. ¦ Šī ģenealoģija vēl ir tukša. ¦ See sugupuu on veel tühi.
+Rôle inconnu. ¦ Nežinomas vaidmuo. ¦ Nezināma loma. ¦ Tundmatu roll.
+Fiches inconnues. ¦ Nežinomi įrašai. ¦ Nezināmi ieraksti. ¦ Tundmatud kaardid.
+Choisis une autre généalogie. ¦ Pasirink kitą genealogiją. ¦ Izvēlies citu ģenealoģiju. ¦ Vali teine sugupuu.
+Impossible de créer le fichier d’archive. ¦ Nepavyko sukurti archyvo failo. ¦ Neizdevās izveidot arhīva failu. ¦ Arhiivifaili ei õnnestunud luua.
+Fichier introuvable. ¦ Failas nerastas. ¦ Fails nav atrasts. ¦ Faili ei leitud.
+Ce fichier n’est pas une archive de dossier de succession. ¦ Šis failas nėra paveldėjimo bylos archyvas. ¦ Šis fails nav mantojuma lietas arhīvs. ¦ See fail ei ole pärimistoimiku arhiiv.
+Le fichier n’a pas été reçu. ¦ Failas negautas. ¦ Fails netika saņemts. ¦ Faili ei saadud kätte.
+Le défunt reste dans son dossier. ¦ Palikėjas lieka savo byloje. ¦ Mantojuma atstājējs paliek savā lietā. ¦ Pärandaja jääb oma toimikusse.
+🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Asmenys ¦ 🧑‍🤝‍🧑 Personas ¦ 🧑‍🤝‍🧑 Isikud
+Dossiers de succession (usage successoral seulement) ¦ Paveldėjimo bylos (tik paveldėjimo naudojimui) ¦ Mantojuma lietas (tikai mantojuma lietojumam) ¦ Pärimistoimikud (ainult pärimisgenealoogi kasutuses)

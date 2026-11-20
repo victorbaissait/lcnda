@@ -523,3 +523,185 @@ Dévolution ¦ Порядок наследования ¦ Порядок спа�
 =dépouillement ¦ разбор|разбора|разборов ¦ розбір|розбори|розборів
 =dossier en cours ¦ дело в работе|дела в работе|дел в работе ¦ справа в роботі|справи в роботі|справ у роботі
 =dossier de succession ¦ наследственное дело|наследственных дела|наследственных дел ¦ спадкова справа|спадкові справи|спадкових справ
+
+# ⚖️ Dossiers de succession : rangement, filtre ⚖️, rattachement, tableau de bord, garde-fous, widget, vue par dossier
+Dossiers de succession : filtre {what} (cliquer pour changer) ¦ Наследственные дела: фильтр {what} (нажми, чтобы изменить) ¦ Спадкові справи: фільтр {what} (натисни, щоб змінити)
+Dossiers de succession : ne montrer qu’un ou plusieurs dossiers ¦ Наследственные дела: показать только одно или несколько дел ¦ Спадкові справи: показати лише одну чи кілька справ
+Plusieurs ¦ Несколько ¦ Кілька
+⚖️ Ne montrer que ceux-ci ¦ ⚖️ Показать только эти ¦ ⚖️ Показати лише ці
+Aucun dossier dans cette généalogie. ¦ В этой генеалогии нет дел. ¦ У цій генеалогії немає справ.
+Dans une autre généalogie ¦ В другой генеалогии ¦ В іншій генеалогії
+Tous les dossiers… ¦ Все дела… ¦ Усі справи…
+Seulement le dossier {n} ¦ Только дело {n} ¦ Лише справа {n}
+Seulement {what} : {list} ¦ Только {what}: {list} ¦ Лише {what}: {list}
+1 dossier · {state} ¦ 1 дело · {state} ¦ 1 справа · {state}
+⚖️ Dossier {n} ¦ ⚖️ Дело {n} ¦ ⚖️ Справа {n}
+Ce dossier est dans une autre généalogie ¦ Это дело находится в другой генеалогии ¦ Ця справа в іншій генеалогії
+Ouvrir « {name} » ¦ Открыть «{name}» ¦ Відкрити «{name}»
+Il est rangé dans « {name} ». Pour le montrer, l’app ouvre cette généalogie (tes réglages d’ici sont gardés) et y active le filtre ⚖️ {n}. ¦ Оно хранится в «{name}». Чтобы показать его, приложение открывает эту генеалогию (твои настройки здесь сохраняются) и включает там фильтр ⚖️ {n}. ¦ Вона зберігається в «{name}». Щоб показати її, застосунок відкриває цю генеалогію (твої налаштування тут зберігаються) і вмикає там фільтр ⚖️ {n}.
+Tes nouveaux dossiers vont dans « {name} ». ¦ Твои новые дела попадают в «{name}». ¦ Твої нові справи потрапляють до «{name}».
+Ouvrir le dossier ici quand même ¦ Всё равно открыть дело здесь ¦ Усе одно відкрити справу тут
+Où ranger tes dossiers ? ¦ Где хранить твои дела? ¦ Де зберігати твої справи?
+conseillé ici ¦ рекомендуется здесь ¦ рекомендовано тут
+Nom de la nouvelle généalogie ¦ Название новой генеалогии ¦ Назва нової генеалогії
+⚖️ Dossier de succession ¦ ⚖️ Наследственное дело ¦ ⚖️ Спадкова справа
+Ta généalogie ouverte a {n} : la ranger à part évite de mélanger les héritiers de tes clients avec ta propre famille. Ce n’est qu’un conseil. ¦ В твоей открытой генеалогии {n}: если хранить отдельно, наследники твоих клиентов не смешаются с твоей семьёй. Это лишь совет. ¦ У твоїй відкритій генеалогії {n}: якщо зберігати окремо, спадкоємці твоїх клієнтів не змішаються з твоєю родиною. Це лише порада.
+Tu pourras changer d’avis : Réglages → Apparence → 🧭 Usage de l’app → « ⚖️ Où ranger les dossiers ». Les dossiers déjà ouverts ne bougent pas tout seuls. ¦ Можно передумать: Настройки → Внешний вид → 🧭 Использование приложения → «⚖️ Где хранить дела». Уже открытые дела сами не переносятся. ¦ Можна передумати: Налаштування → Вигляд → 🧭 Використання застосунку → «⚖️ Де зберігати справи». Уже відкриті справи самі не переносяться.
+Créer « ⚖️ Dossiers de succession » et ouvrir le dossier ¦ Создать «⚖️ Наследственные дела» и открыть дело ¦ Створити «⚖️ Спадкові справи» і відкрити справу
+Créer la généalogie et ouvrir le dossier ¦ Создать генеалогию и открыть дело ¦ Створити генеалогію і відкрити справу
+Rangement des dossiers : {what} ¦ Где хранятся дела: {what} ¦ Де зберігаються справи: {what}
+Généalogiste successoral : réglages des dossiers ¦ Генеалог по наследственным делам: настройки дел ¦ Генеалог у спадкових справах: налаштування справ
+Où ranger les dossiers ¦ Где хранить дела ¦ Де зберігати справи
+Les nouveaux dossiers vont… ¦ Новые дела попадают… ¦ Нові справи потрапляють…
+Dans « {name} » ¦ В «{name}» ¦ До «{name}»
+Les dossiers et où ils sont ¦ Дела и где они находятся ¦ Справи і де вони
+⇄ Déplacer… ¦ ⇄ Перенести… ¦ ⇄ Перенести…
+Aucun dossier pour l’instant. ¦ Пока нет ни одного дела. ¦ Поки що немає жодної справи.
+Réglages des dossiers ¦ Настройки дел ¦ Налаштування справ
+Arbre et graphiques filtrés par ⚖️ : les fiches hors dossier ¦ Дерево и графики с фильтром ⚖️: карточки вне дела ¦ Дерево й графіки з фільтром ⚖️: картки поза справою
+Archive d’un dossier clos : adresses des héritiers vivants ¦ Архив закрытого дела: адреса живых наследников ¦ Архів закритої справи: адреси живих спадкоємців
+Déplacer un dossier dont une fiche est aussi dans ta famille ¦ Перенос дела, карточка которого есть и в твоей семье ¦ Перенесення справи, картка якої є й у твоїй родині
+« Sans dossier » dans la vue par dossier ¦ «Без дела» в представлении по делам ¦ «Без справи» у поданні за справами
+Avancement : un héritier qui refuse de signer ¦ Ход работы: наследник, который отказывается подписать ¦ Хід роботи: спадкоємець, який відмовляється підписати
+compte comme « fait » (étape 5) ¦ считается «сделано» (шаг 5) ¦ вважається «зроблено» (крок 5)
+Avancement : poids des 7 étapes ¦ Ход работы: вес 7 шагов ¦ Хід роботи: вага 7 кроків
+Réglage des dossiers enregistré : {what} ¦ Настройка дел сохранена: {what} ¦ Налаштування справ збережено: {what}
+poids des 7 étapes ¦ вес 7 шагов ¦ вага 7 кроків
+⇄ DÉPLACER UN DOSSIER ¦ ⇄ ПЕРЕНЕСТИ ДЕЛО ¦ ⇄ ПЕРЕНЕСТИ СПРАВУ
+{n} → ? ¦ {n} → ? ¦ {n} → ?
+⇄ Déplacer ({what}) ¦ ⇄ Перенести ({what}) ¦ ⇄ Перенести ({what})
+Vers ¦ Куда ¦ Куди
+＋ Une nouvelle généalogie pour ce dossier ¦ ＋ Новая генеалогия для этого дела ¦ ＋ Нова генеалогія для цієї справи
+Ce qui part : le dossier, son journal, ses pièces, ses courriers, ses échéances, et les fiches qui lui sont rattachées (défunt, héritiers, intermédiaires) avec leurs actes et médias. Une fiche aussi rattachée à un autre dossier ou à ta famille est copiée, pas déplacée. ¦ Что переносится: дело, его журнал, документы, письма, сроки и привязанные к нему карточки (наследодатель, наследники, промежуточные лица) с их актами и медиа. Карточка, привязанная и к другому делу или к твоей семье, копируется, а не переносится. ¦ Що переноситься: справа, її журнал, документи, листи, строки та прив’язані до неї картки (спадкодавець, спадкоємці, проміжні особи) з їхніми актами й медіа. Картка, прив’язана й до іншої справи чи до твоєї родини, копіюється, а не переноситься.
+Déplacement refusé (réglage) : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Перенос отклонён (настройка): эти карточки есть и в твоей семье или в другом деле: {names}. ¦ Перенесення відхилено (налаштування): ці картки є й у твоїй родині чи в іншій справі: {names}.
+Copiées (elles restent aussi ici) : {names}. ¦ Скопированы (остаются и здесь): {names}. ¦ Скопійовано (залишаються й тут): {names}.
+Une copie de sauvegarde des deux généalogies est faite avant. Le journal du dossier note « Déplacé de … vers … ». ¦ Сначала делается резервная копия обеих генеалогий. Журнал дела записывает «Перенесено из … в …». ¦ Спершу робиться резервна копія обох генеалогій. Журнал справи записує «Перенесено з … до …».
+Dossier {n} déplacé vers « {to} » ({what}) ¦ Дело {n} перенесено в «{to}» ({what}) ¦ Справу {n} перенесено до «{to}» ({what})
+⤓ Reprendre la fiche depuis Ma généalogie ¦ ⤓ Взять карточку из Моей генеалогии ¦ ⤓ Узяти картку з Моєї генеалогії
+copie de la fiche, jusqu’aux grands-parents et tous leurs descendants connus, sans photos ¦ копия карточки до бабушек и дедушек и всех их известных потомков, без фото ¦ копія картки до бабусь і дідусів та всіх їхніх відомих нащадків, без фото
+⤓ REPRENDRE UNE FICHE ¦ ⤓ ВЗЯТЬ КАРТОЧКУ ¦ ⤓ УЗЯТИ КАРТКУ
+Reprendre la fiche du défunt ¦ Взять карточку наследодателя ¦ Узяти картку спадкодавця
+Chercher la fiche ¦ Найти карточку ¦ Знайти картку
+Prénom, nom… ¦ Имя, фамилия… ¦ Ім’я, прізвище…
+Copiées : la fiche, ses parents et grands-parents, tous leurs descendants connus et leurs conjoints, avec les dates et les lieux ; sans photos. Rien n’est changé dans l’autre généalogie. ¦ Копируются: карточка, её родители и бабушки с дедушками, все известные потомки и их супруги, с датами и местами; без фото. В другой генеалогии ничего не меняется. ¦ Копіюються: картка, її батьки й бабусі з дідусями, усі відомі нащадки та їхні подружжя, з датами й місцями; без фото. В іншій генеалогії нічого не змінюється.
+{what} reprises de l’autre généalogie. ¦ {what} взяты из другой генеалогии. ¦ {what} узято з іншої генеалогії.
+Dossiers… ¦ Дела… ¦ Справи…
+{name} dans quels dossiers ? ¦ {name} в каких делах? ¦ {name} у яких справах?
+(calculé) ¦ (вычислено) ¦ (обчислено)
+Rôles : défunt · héritier · intermédiaire · témoin · à vérifier. « Héritier » mis par le calcul s’affiche « (calculé) ». ¦ Роли: наследодатель · наследник · промежуточное лицо · свидетель · проверить. «Наследник», заданный расчётом, показан с пометкой «(вычислено)». ¦ Ролі: спадкодавець · спадкоємець · проміжна особа · свідок · перевірити. «Спадкоємець», заданий розрахунком, показано з позначкою «(обчислено)».
+Dossiers de {name} enregistrés ¦ Дела {name} сохранены ¦ Справи {name} збережено
+Les dossiers de cette fiche ¦ Дела этой карточки ¦ Справи цієї картки
+hors du dossier {n} ¦ вне дела {n} ¦ поза справою {n}
+＋ Rattacher ¦ ＋ Привязать ¦ ＋ Прив’язати
+Fiche rattachée au dossier {n} ¦ Карточка привязана к делу {n} ¦ Картку прив’язано до справи {n}
+Rattachée au dossier {n} : {who} ¦ Привязано к делу {n}: {who} ¦ Прив’язано до справи {n}: {who}
+Lecture des fiches du dossier… ¦ Чтение карточек дела… ¦ Читання карток справи…
+Les fiches du dossier ¦ Карточки дела ¦ Картки справи
+Rattacher ¦ Привязать ¦ Прив’язати
+Retirées à la main ({n}) : jamais remises toutes seules ¦ Убраны вручную ({n}): никогда не возвращаются сами ¦ Прибрано вручну ({n}): ніколи не повертаються самі
+Fiche à comparer : « {name}{year} » ressemble à une fiche déjà dans cette base. Jamais fusionnée toute seule. ¦ Карточка для сравнения: «{name}{year}» похожа на карточку, уже имеющуюся в этой базе. Никогда не объединяется сама. ¦ Картка для порівняння: «{name}{year}» схожа на картку, що вже є в цій базі. Ніколи не об’єднується сама.
+née {y} ¦ род. {y} ¦ нар. {y}
+Homonyme possible : « {name}{year} » existe aussi dans le dossier {n}. Jamais relié tout seul. ¦ Возможный однофамилец: «{name}{year}» есть и в деле {n}. Никогда не привязывается сам. ¦ Можливий однофамілець: «{name}{year}» є й у справі {n}. Ніколи не прив’язується сам.
+⇆ Comparer ¦ ⇆ Сравнить ¦ ⇆ Порівняти
+C’est la même personne : rattacher aussi ¦ Это тот же человек: привязать тоже ¦ Це та сама особа: прив’язати теж
+Pas la même ¦ Не тот же ¦ Не та сама
+Fiche retirée du dossier {n} ¦ Карточка убрана из дела {n} ¦ Картку прибрано зі справи {n}
+Fiche remise dans le dossier {n} ¦ Карточка возвращена в дело {n} ¦ Картку повернуто до справи {n}
+Homonyme rattaché aussi au dossier {n} (à vérifier) ¦ Однофамилец тоже привязан к делу {n} (проверить) ¦ Однофамільця теж прив’язано до справи {n} (перевірити)
+Noté : ce n’est pas la même personne ¦ Записано: это не тот же человек ¦ Записано: це не та сама особа
+Rôle : {r} ¦ Роль: {r} ¦ Роль: {r}
+⚠️ illisible : {names} ¦ ⚠️ не читается: {names} ¦ ⚠️ не читається: {names}
+Chercher… (n°, défunt, notaire) ¦ Найти… (№, наследодатель, нотариус) ¦ Знайти… (№, спадкодавець, нотаріус)
+Toutes les généalogies ¦ Все генеалогии ¦ Усі генеалогії
+Tous les notaires ¦ Все нотариусы ¦ Усі нотаріуси
+Prochaine échéance (retards d’abord) ¦ Ближайший срок (сначала просроченные) ¦ Найближчий строк (спершу прострочені)
+Avancement le plus bas ¦ Наименьший ход работы ¦ Найменший хід роботи
+{d} · passée ¦ {d} · прошёл ¦ {d} · минув
+Trouvés : {n} ¦ Найдено: {n} ¦ Знайдено: {n}
+À trouver : {n} ¦ Найти: {n} ¦ Знайти: {n}
+{h} h {m} ¦ {h} ч {m} ¦ {h} год {m}
+Cocher le dossier {n} ¦ Отметить дело {n} ¦ Позначити справу {n}
+Échéance : {d} ¦ Срок: {d} ¦ Строк: {d}
+Héritiers ¦ Наследники ¦ Спадкоємці
+Avancement ¦ Ход работы ¦ Хід роботи
+Cochés : {n} ¦ Отмечено: {n} ¦ Позначено: {n}
+Les dossiers cochés sont dans des généalogies différentes : choisis-en dans une seule. ¦ Отмеченные дела находятся в разных генеалогиях: выбери их только из одной. ¦ Позначені справи в різних генеалогіях: вибери їх лише з однієї.
+Dossiers exportés (CSV) ¦ Дела выгружены (CSV) ¦ Справи вивантажено (CSV)
+⤒ Réimporter un dossier archivé… ¦ ⤒ Снова импортировать архивное дело… ¦ ⤒ Знову імпортувати архівну справу…
+⚠️ FUSION ¦ ⚠️ ОБЪЕДИНЕНИЕ ¦ ⚠️ ОБ’ЄДНАННЯ
+Ces deux fiches sont dans des dossiers différents ¦ Эти две карточки находятся в разных делах ¦ Ці дві картки в різних справах
+Fusionner quand même ¦ Всё равно объединить ¦ Усе одно об’єднати
+{a} et {b}. Fusionner relie les deux successions et change les parts des deux dossiers. Vérifie avec des actes (naissance, parents) avant. ¦ {a} и {b}. Объединение связывает два наследства и меняет доли в обоих делах. Сначала проверь по актам (рождение, родители). ¦ {a} і {b}. Об’єднання пов’язує дві спадщини й змінює частки в обох справах. Спершу перевір за актами (народження, батьки).
+⇆ Comparer d’abord ¦ ⇆ Сначала сравнить ¦ ⇆ Спершу порівняти
+Si on fusionne : noté dans le journal des deux dossiers, et les deux sont recalculés. ¦ При объединении: записывается в журнал обоих дел, и оба пересчитываются. ¦ Під час об’єднання: записується в журнал обох справ, і обидві перераховуються.
+🗄 Archiver dans un fichier et retirer… ¦ 🗄 Архивировать в файл и убрать… ¦ 🗄 Архівувати у файл і прибрати…
+🗄 ARCHIVER LE DOSSIER {n} ¦ 🗄 АРХИВИРОВАТЬ ДЕЛО {n} ¦ 🗄 АРХІВУВАТИ СПРАВУ {n}
+Dans un fichier, puis retirer de la base ¦ В файл, затем убрать из базы ¦ У файл, потім прибрати з бази
+⤓ Enregistrer le fichier puis retirer ¦ ⤓ Сохранить файл и затем убрать ¦ ⤓ Зберегти файл і потім прибрати
+Le fichier {file} contient : le dossier, le journal, les pièces et leurs images, les courriers, l’arbre de dévolution (SVG), le tableau pour le notaire et les fiches rattachées ({n}). ¦ Файл {file} содержит: дело, журнал, документы и их изображения, письма, дерево наследования (SVG), таблицу для нотариуса и привязанные карточки ({n}). ¦ Файл {file} містить: справу, журнал, документи та їхні зображення, листи, дерево спадкування (SVG), таблицю для нотаріуса й прив’язані картки ({n}).
+Garder les adresses des vivants dans le fichier ¦ Оставить адреса живых в файле ¦ Залишити адреси живих у файлі
+utile si le notaire rouvre la succession ¦ полезно, если нотариус снова откроет наследство ¦ корисно, якщо нотаріус знову відкриє спадщину
+Retirer les adresses ¦ Убрать адреса ¦ Прибрати адреси
+comme l’archivage actuel ¦ как при нынешней архивации ¦ як під час теперішньої архівації
+Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base ({n}). Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste ({k}). Une sauvegarde est faite avant. ¦ Затем карточки, нужные только этому делу, убираются из базы ({n}). Карточка, привязанная и к другому делу (или к твоей семье), остаётся ({k}). Сначала делается резервная копия. ¦ Потім картки, потрібні лише цій справі, прибираються з бази ({n}). Картка, прив’язана й до іншої справи (чи до твоєї родини), залишається ({k}). Спершу робиться резервна копія.
+Dossier {n} archivé dans « {file} » et retiré ({what}) ¦ Дело {n} архивировано в «{file}» и убрано ({what}) ¦ Справу {n} архівовано в «{file}» і прибрано ({what})
+⤒ RÉIMPORTER ¦ ⤒ СНОВА ИМПОРТИРОВАТЬ ¦ ⤒ ЗНОВУ ІМПОРТУВАТИ
+⤒ Réimporter le dossier ¦ ⤒ Снова импортировать дело ¦ ⤒ Знову імпортувати справу
+Dossier {n} ({name}{closed}), {what}. ¦ Дело {n} ({name}{closed}), {what}. ¦ Справа {n} ({name}{closed}), {what}.
+clos le {d} ¦ закрыто {d} ¦ закрито {d}
+{what} ressemblent à des fiches déjà dans cette base ({names}) : elles seront proposées à la comparaison, jamais fusionnées seules. ¦ {what} похожи на карточки, уже имеющиеся в этой базе ({names}): их предложат сравнить, они никогда не объединятся сами. ¦ {what} схожі на картки, що вже є в цій базі ({names}): їх запропонують порівняти, вони ніколи не об’єднаються самі.
+Dossier {n} réimporté ({what}) ¦ Дело {n} снова импортировано ({what}) ¦ Справу {n} знову імпортовано ({what})
+Dossier {n} réimporté dans « {name} ». ¦ Дело {n} снова импортировано в «{name}». ¦ Справу {n} знову імпортовано до «{name}».
+⚖️ Mes dossiers de succession ¦ ⚖️ Мои наследственные дела ¦ ⚖️ Мої спадкові справи
+Aucun dossier de succession. ¦ Нет наследственных дел. ¦ Немає спадкових справ.
+Étapes (7) ¦ Шаги (7) ¦ Кроки (7)
+{step} : {done} sur {total} ¦ {step}: {done} из {total} ¦ {step}: {done} з {total}
+Quels dossiers ¦ Какие дела ¦ Які справи
+Le filtre ¦ Фильтр ¦ Фільтр
+Vue actuelle ¦ Текущий вид ¦ Поточний вигляд
+Alt + ↑ / ↓ : changer l’ordre (rangement à la main) ¦ Alt + ↑ / ↓: изменить порядок (вручную) ¦ Alt + ↑ / ↓: змінити порядок (вручну)
+Sans dossier ¦ Без дела ¦ Без справи
+Ranger les dossiers : ¦ Порядок дел: ¦ Порядок справ:
+… cherche un nom pour voir les autres. ¦ … найди имя, чтобы увидеть остальных. ¦ … знайди ім’я, щоб побачити інших.
+Ordre des dossiers changé ¦ Порядок дел изменён ¦ Порядок справ змінено
+Dans cette généalogie ¦ В этой генеалогии ¦ У цій генеалогії
+Le défunt et ses héritiers sont des fiches de ta famille. Simple, mais tout se mélange. ¦ Наследодатель и его наследники — карточки твоей семьи. Просто, но всё смешивается. ¦ Спадкодавець і його спадкоємці — картки твоєї родини. Просто, але все змішується.
+Dans une généalogie à part pour tous mes dossiers ¦ В отдельной генеалогии для всех моих дел ¦ В окремій генеалогії для всіх моїх справ
+Une base professionnelle « ⚖️ Dossiers de succession », créée dans 🌳 Mes généalogies. Tes dossiers y sont tous ensemble ; ta famille reste à part. ¦ Профессиональная база «⚖️ Наследственные дела», созданная в 🌳 Мои генеалогии. Все твои дела там вместе; твоя семья остаётся отдельно. ¦ Професійна база «⚖️ Спадкові справи», створена в 🌳 Мої генеалогії. Усі твої справи там разом; твоя родина залишається окремо.
+Une généalogie par dossier ¦ Одна генеалогия на дело ¦ Одна генеалогія на справу
+Chaque dossier a sa propre base (« ⚖️ 2026-014 MAZAUD »). Le plus étanche ; à réserver aux grosses successions. ¦ У каждого дела своя база («⚖️ 2026-014 MAZAUD»). Самый изолированный вариант; для крупных наследств. ¦ Кожна справа має власну базу («⚖️ 2026-014 MAZAUD»). Найізольованіший варіант; для великих спадщин.
+défunt ¦ наследодатель ¦ спадкодавець
+intermédiaire ¦ промежуточное лицо ¦ проміжна особа
+Un par dossier ¦ Одна на дело ¦ Одна на справу
+Un filtre ¦ Фильтр ¦ Фільтр
+Compteurs ¦ Счётчики ¦ Лічильники
+à l’ouverture ¦ при открытии ¦ під час відкриття
+calcul ¦ расчёт ¦ розрахунок
+à la main ¦ вручную ¦ вручну
+créée pendant le filtre ¦ создана во время фильтра ¦ створена під час фільтра
+réimport ¦ повторный импорт ¦ повторний імпорт
+homonyme ¦ однофамилец ¦ однофамілець
+déplacée ¦ перенесена ¦ перенесено
+grisées, sans nom ¦ серые, без имени ¦ сірі, без імені
+cachées ¦ скрыты ¦ приховані
+retirées du fichier ¦ убраны из файла ¦ прибрано з файлу
+gardées dans le fichier ¦ оставлены в файле ¦ залишено у файлі
+copier la fiche ¦ скопировать карточку ¦ скопіювати картку
+refuser le déplacement ¦ отклонить перенос ¦ відхилити перенесення
+replié ¦ свёрнут ¦ згорнуто
+Défunt et acte de décès ¦ Наследодатель и акт о смерти ¦ Спадкодавець і акт про смерть
+Adresses ¦ Адреса ¦ Адреси
+Contrats signés ¦ Подписанные договоры ¦ Підписані договори
+Déplacement refusé : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Перенос отклонён: эти карточки есть и в твоей семье или в другом деле: {names}. ¦ Перенесення відхилено: ці картки є й у твоїй родині чи в іншій справі: {names}.
+Impossible d’enregistrer les réglages des dossiers. ¦ Не удалось сохранить настройки дел. ¦ Не вдалося зберегти налаштування справ.
+Cette généalogie est encore vide. ¦ Эта генеалогия пока пуста. ¦ Ця генеалогія поки порожня.
+Rôle inconnu. ¦ Неизвестная роль. ¦ Невідома роль.
+Fiches inconnues. ¦ Неизвестные карточки. ¦ Невідомі картки.
+Choisis une autre généalogie. ¦ Выбери другую генеалогию. ¦ Вибери іншу генеалогію.
+Impossible de créer le fichier d’archive. ¦ Не удалось создать файл архива. ¦ Не вдалося створити файл архіву.
+Fichier introuvable. ¦ Файл не найден. ¦ Файл не знайдено.
+Ce fichier n’est pas une archive de dossier de succession. ¦ Этот файл не архив наследственного дела. ¦ Цей файл не є архівом спадкової справи.
+Le fichier n’a pas été reçu. ¦ Файл не получен. ¦ Файл не отримано.
+Le défunt reste dans son dossier. ¦ Наследодатель остаётся в своём деле. ¦ Спадкодавець залишається у своїй справі.
+🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Люди ¦ 🧑‍🤝‍🧑 Люди
+Dossiers de succession (usage successoral seulement) ¦ Наследственные дела (только при использовании генеалога по наследствам) ¦ Спадкові справи (лише для використання генеалогом у спадкових справах)

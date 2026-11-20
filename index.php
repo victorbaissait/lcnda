@@ -72,7 +72,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/photo-courriers.css?v=2">
     <link rel="stylesheet" href="assets/css/sante.css?v=1">
     <link rel="stylesheet" href="assets/css/cousinade.css?v=1">
-    <link rel="stylesheet" href="assets/css/successoral.css?v=2">
+    <link rel="stylesheet" href="assets/css/successoral.css?v=3">
     <link rel="stylesheet" href="assets/css/indicateurs.css?v=2">
     <link rel="stylesheet" href="assets/css/mode-simple.css?v=7">
     <link rel="stylesheet" href="assets/css/formats.css?v=1">
@@ -137,6 +137,7 @@ header('X-Content-Type-Options: nosniff');
             <button type="button" class="screen-tool" id="kiosk-toggle" title="Mode consultation : la famille peut tout parcourir sans rien modifier" aria-label="Mode consultation"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></button>
             <button type="button" class="screen-tool ms-entry" id="mode-simple-open" hidden title="Mode simple : montrer l’arbre à quelqu’un qui n’est pas à l’aise avec l’ordinateur (gros boutons, rien à modifier)" aria-label="Mode simple"><span aria-hidden="true">🧓</span><span class="ms-entry-t">Mode simple</span></button>
             <button type="button" class="screen-tool" id="report-problem-open" data-report-problem title="Signaler un bug : décris ce qui ne marche pas, un rapport technique sans ta généalogie est préparé" aria-label="Signaler un bug"><span aria-hidden="true">🐞</span></button>
+            <button type="button" class="screen-tool succ-filter-btn" id="succ-filter-open" hidden title="Dossiers de succession : ne montrer qu’un ou plusieurs dossiers" aria-label="Dossiers de succession" aria-haspopup="true"><span aria-hidden="true">⚖️</span><span data-succ-flabel hidden></span></button>
             <button type="button" class="screen-tool genealogy-switch" id="genealogy-switch" title="Mes généalogies : changer, en créer une autre" aria-label="Mes généalogies"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5v4M5 16.5V14h14v2.5M12 11.5V14"/></svg><span data-gen-name hidden></span></button>
             <span class="status-dot"></span>
             <span id="database-status">Base locale</span>
@@ -1164,11 +1165,11 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script src="assets/js/app-journal.js?v=2"></script>
 <?= i18n_page_script() ?>
-<script src="assets/js/app-i18n.js?v=37"></script>
+<script src="assets/js/app-i18n.js?v=38"></script>
 <script>window.LCNDA_GENEALOGY = <?= json_encode(GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID) ?>;window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
 <script src="assets/js/app-fond.js?v=9" defer></script>
 <script src="assets/js/app-accord.js?v=1" defer></script>
-<script src="assets/js/app.js?v=558" defer></script>
+<script src="assets/js/app.js?v=559" defer></script>
 <script src="assets/js/app-indicateurs.js?v=2" defer></script>
 <script src="assets/js/app-picker.js?v=27" defer></script>
 <script src="assets/js/app-media-picker.js?v=4" defer></script>
@@ -1275,7 +1276,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-calendar-more.js?v=6" defer></script>
 <script src="assets/js/heritage-lecture-autrefois.js?v=5" defer></script>
 <script src="assets/js/heritage-links.js?v=23" defer></script>
-<script src="assets/js/heritage-more.js?v=348" defer></script>
+<script src="assets/js/heritage-more.js?v=349" defer></script>
 <script src="assets/js/heritage-controle.js?v=9" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
 <script src="assets/js/heritage-research.js?v=40" defer></script>
@@ -1342,7 +1343,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-tresors-listes.js?v=6" defer></script>
 <script src="assets/js/heritage-retouch-simple.js?v=15" defer></script>
 <script src="assets/js/heritage-fiches.js?v=26" defer></script>
-<script src="assets/js/heritage-genealogies.js?v=5" defer></script>
+<script src="assets/js/heritage-genealogies.js?v=6" defer></script>
 <script src="assets/js/heritage-periodicals.js?v=17" defer></script>
 <script src="assets/js/heritage-diagrams-render.js?v=11" defer></script>
 <script src="assets/js/heritage-diagrams.js?v=33" defer></script>
@@ -1444,8 +1445,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-sante.js?v=2" defer></script>
 <script src="assets/js/app-cousinade-core.js?v=1" defer></script>
 <script src="assets/js/heritage-cousinade.js?v=4" defer></script>
-<script src="assets/js/heritage-successoral-core.js?v=1" defer></script>
-<script src="assets/js/heritage-successoral.js?v=2" defer></script>
+<script src="assets/js/heritage-successoral-core.js?v=2" defer></script>
+<script src="assets/js/heritage-successoral.js?v=3" defer></script>
+<script src="assets/js/heritage-successoral-dossiers.js?v=1" defer></script>
 <script src="assets/js/heritage-blocs-school.js?v=3" defer></script>
 <script src="assets/js/heritage-creations.js?v=5" defer></script>
 <script src="assets/js/heritage-onglets-documents.js?v=2" defer></script>
@@ -1529,7 +1531,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-imports-plus-core.js?v=2" defer></script>
 <script src="assets/js/heritage-imports-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-photos-import.js?v=2" defer></script>
-<script src="assets/js/app-apparence.js?v=24" defer></script>
+<script src="assets/js/app-apparence.js?v=25" defer></script>
 <script src="assets/js/app-designs.js?v=24" defer></script>
 <script src="assets/js/app-sections.js?v=10" defer></script>
 <script src="assets/js/app-premier.js?v=6" defer></script>

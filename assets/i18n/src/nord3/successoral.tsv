@@ -523,3 +523,185 @@ Dévolution ¦ Devoluțiune
 =dépouillement ¦ extras|extrase|de extrase
 =dossier en cours ¦ dosar în lucru|dosare în lucru|de dosare în lucru
 =dossier de succession ¦ dosar de succesiune|dosare de succesiune|de dosare de succesiune
+
+# ⚖️ Dossiers de succession : rangement, filtre ⚖️, rattachement, tableau de bord, garde-fous, widget, vue par dossier
+Dossiers de succession : filtre {what} (cliquer pour changer) ¦ Dosare de succesiune: filtru {what} (clic pentru a schimba)
+Dossiers de succession : ne montrer qu’un ou plusieurs dossiers ¦ Dosare de succesiune: arată doar unul sau mai multe dosare
+Plusieurs ¦ Mai multe
+⚖️ Ne montrer que ceux-ci ¦ ⚖️ Arată doar acestea
+Aucun dossier dans cette généalogie. ¦ Niciun dosar în această genealogie.
+Dans une autre généalogie ¦ Într-o altă genealogie
+Tous les dossiers… ¦ Toate dosarele…
+Seulement le dossier {n} ¦ Doar dosarul {n}
+Seulement {what} : {list} ¦ Doar {what}: {list}
+1 dossier · {state} ¦ 1 dosar · {state}
+⚖️ Dossier {n} ¦ ⚖️ Dosarul {n}
+Ce dossier est dans une autre généalogie ¦ Acest dosar este într-o altă genealogie
+Ouvrir « {name} » ¦ Deschide „{name}”
+Il est rangé dans « {name} ». Pour le montrer, l’app ouvre cette généalogie (tes réglages d’ici sont gardés) et y active le filtre ⚖️ {n}. ¦ Este păstrat în „{name}”. Pentru a-l arăta, aplicația deschide acea genealogie (setările tale de aici se păstrează) și activează acolo filtrul ⚖️ {n}.
+Tes nouveaux dossiers vont dans « {name} ». ¦ Dosarele tale noi merg în „{name}”.
+Ouvrir le dossier ici quand même ¦ Deschide totuși dosarul aici
+Où ranger tes dossiers ? ¦ Unde îți păstrezi dosarele?
+conseillé ici ¦ recomandat aici
+Nom de la nouvelle généalogie ¦ Numele noii genealogii
+⚖️ Dossier de succession ¦ ⚖️ Dosar de succesiune
+Ta généalogie ouverte a {n} : la ranger à part évite de mélanger les héritiers de tes clients avec ta propre famille. Ce n’est qu’un conseil. ¦ Genealogia ta deschisă are {n}: păstrarea separată evită amestecarea moștenitorilor clienților tăi cu propria ta familie. E doar un sfat.
+Tu pourras changer d’avis : Réglages → Apparence → 🧭 Usage de l’app → « ⚖️ Où ranger les dossiers ». Les dossiers déjà ouverts ne bougent pas tout seuls. ¦ Poți să te răzgândești: Setări → Aspect → 🧭 Utilizarea aplicației → „⚖️ Unde se păstrează dosarele”. Dosarele deja deschise nu se mută singure.
+Créer « ⚖️ Dossiers de succession » et ouvrir le dossier ¦ Creează „⚖️ Dosare de succesiune” și deschide dosarul
+Créer la généalogie et ouvrir le dossier ¦ Creează genealogia și deschide dosarul
+Rangement des dossiers : {what} ¦ Unde merg dosarele: {what}
+Généalogiste successoral : réglages des dossiers ¦ Genealogist succesoral: setările dosarelor
+Où ranger les dossiers ¦ Unde se păstrează dosarele
+Les nouveaux dossiers vont… ¦ Dosarele noi merg…
+Dans « {name} » ¦ În „{name}”
+Les dossiers et où ils sont ¦ Dosarele și unde sunt
+⇄ Déplacer… ¦ ⇄ Mută…
+Aucun dossier pour l’instant. ¦ Încă niciun dosar.
+Réglages des dossiers ¦ Setările dosarelor
+Arbre et graphiques filtrés par ⚖️ : les fiches hors dossier ¦ Arbore și grafice filtrate cu ⚖️: fișele din afara dosarului
+Archive d’un dossier clos : adresses des héritiers vivants ¦ Arhiva unui dosar închis: adresele moștenitorilor în viață
+Déplacer un dossier dont une fiche est aussi dans ta famille ¦ Mutarea unui dosar cu o fișă care e și în familia ta
+« Sans dossier » dans la vue par dossier ¦ „Fără dosar” în vizualizarea pe dosare
+Avancement : un héritier qui refuse de signer ¦ Progres: un moștenitor care refuză să semneze
+compte comme « fait » (étape 5) ¦ contează ca „făcut” (pasul 5)
+Avancement : poids des 7 étapes ¦ Progres: ponderea celor 7 pași
+Réglage des dossiers enregistré : {what} ¦ Setare a dosarelor salvată: {what}
+poids des 7 étapes ¦ ponderea celor 7 pași
+⇄ DÉPLACER UN DOSSIER ¦ ⇄ MUTĂ UN DOSAR
+{n} → ? ¦ {n} → ?
+⇄ Déplacer ({what}) ¦ ⇄ Mută ({what})
+Vers ¦ Către
+＋ Une nouvelle généalogie pour ce dossier ¦ ＋ O genealogie nouă pentru acest dosar
+Ce qui part : le dossier, son journal, ses pièces, ses courriers, ses échéances, et les fiches qui lui sont rattachées (défunt, héritiers, intermédiaires) avec leurs actes et médias. Une fiche aussi rattachée à un autre dossier ou à ta famille est copiée, pas déplacée. ¦ Ce pleacă: dosarul, jurnalul, actele, scrisorile, termenele și fișele legate de el (defunct, moștenitori, intermediari) cu actele și fișierele media. O fișă legată și de alt dosar sau de familia ta este copiată, nu mutată.
+Déplacement refusé (réglage) : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Mutare refuzată (setare): aceste fișe sunt și în familia ta sau în alt dosar: {names}.
+Copiées (elles restent aussi ici) : {names}. ¦ Copiate (rămân și aici): {names}.
+Une copie de sauvegarde des deux généalogies est faite avant. Le journal du dossier note « Déplacé de … vers … ». ¦ Mai întâi se face o copie de siguranță a ambelor genealogii. Jurnalul dosarului notează „Mutat din … în …”.
+Dossier {n} déplacé vers « {to} » ({what}) ¦ Dosarul {n} mutat în „{to}” ({what})
+⤓ Reprendre la fiche depuis Ma généalogie ¦ ⤓ Preia fișa din Genealogia mea
+copie de la fiche, jusqu’aux grands-parents et tous leurs descendants connus, sans photos ¦ copie a fișei, până la bunici și toți descendenții lor cunoscuți, fără fotografii
+⤓ REPRENDRE UNE FICHE ¦ ⤓ PREIA O FIȘĂ
+Reprendre la fiche du défunt ¦ Preia fișa defunctului
+Chercher la fiche ¦ Caută fișa
+Prénom, nom… ¦ Prenume, nume…
+Copiées : la fiche, ses parents et grands-parents, tous leurs descendants connus et leurs conjoints, avec les dates et les lieux ; sans photos. Rien n’est changé dans l’autre généalogie. ¦ Copiate: fișa, părinții și bunicii, toți descendenții lor cunoscuți și soții lor, cu date și locuri; fără fotografii. Nimic nu se schimbă în cealaltă genealogie.
+{what} reprises de l’autre généalogie. ¦ {what} preluate din cealaltă genealogie.
+Dossiers… ¦ Dosare…
+{name} dans quels dossiers ? ¦ {name} în ce dosare?
+(calculé) ¦ (calculat)
+Rôles : défunt · héritier · intermédiaire · témoin · à vérifier. « Héritier » mis par le calcul s’affiche « (calculé) ». ¦ Roluri: defunct · moștenitor · intermediar · martor · de verificat. „Moștenitor” pus de calcul apare „(calculat)”.
+Dossiers de {name} enregistrés ¦ Dosarele lui {name} salvate
+Les dossiers de cette fiche ¦ Dosarele acestei fișe
+hors du dossier {n} ¦ în afara dosarului {n}
+＋ Rattacher ¦ ＋ Leagă
+Fiche rattachée au dossier {n} ¦ Fișă legată de dosarul {n}
+Rattachée au dossier {n} : {who} ¦ Legată de dosarul {n}: {who}
+Lecture des fiches du dossier… ¦ Se citesc fișele dosarului…
+Les fiches du dossier ¦ Fișele dosarului
+Rattacher ¦ Leagă
+Retirées à la main ({n}) : jamais remises toutes seules ¦ Scoase manual ({n}): nu se mai pun la loc singure
+Fiche à comparer : « {name}{year} » ressemble à une fiche déjà dans cette base. Jamais fusionnée toute seule. ¦ Fișă de comparat: „{name}{year}” seamănă cu o fișă deja în această bază. Nu se unește niciodată singură.
+née {y} ¦ născută {y}
+Homonyme possible : « {name}{year} » existe aussi dans le dossier {n}. Jamais relié tout seul. ¦ Posibil omonim: „{name}{year}” există și în dosarul {n}. Nu se leagă niciodată singur.
+⇆ Comparer ¦ ⇆ Compară
+C’est la même personne : rattacher aussi ¦ E aceeași persoană: leag-o și pe ea
+Pas la même ¦ Nu e aceeași
+Fiche retirée du dossier {n} ¦ Fișă scoasă din dosarul {n}
+Fiche remise dans le dossier {n} ¦ Fișă pusă la loc în dosarul {n}
+Homonyme rattaché aussi au dossier {n} (à vérifier) ¦ Omonim legat și de dosarul {n} (de verificat)
+Noté : ce n’est pas la même personne ¦ Notat: nu e aceeași persoană
+Rôle : {r} ¦ Rol: {r}
+⚠️ illisible : {names} ¦ ⚠️ ilizibil: {names}
+Chercher… (n°, défunt, notaire) ¦ Caută… (nr., defunct, notar)
+Toutes les généalogies ¦ Toate genealogiile
+Tous les notaires ¦ Toți notarii
+Prochaine échéance (retards d’abord) ¦ Termenul următor (întârzierile întâi)
+Avancement le plus bas ¦ Cel mai mic progres
+{d} · passée ¦ {d} · depășit
+Trouvés : {n} ¦ Găsiți: {n}
+À trouver : {n} ¦ De găsit: {n}
+{h} h {m} ¦ {h} h {m}
+Cocher le dossier {n} ¦ Bifează dosarul {n}
+Échéance : {d} ¦ Termen: {d}
+Héritiers ¦ Moștenitori
+Avancement ¦ Progres
+Cochés : {n} ¦ Bifate: {n}
+Les dossiers cochés sont dans des généalogies différentes : choisis-en dans une seule. ¦ Dosarele bifate sunt în genealogii diferite: alege doar dintr-una.
+Dossiers exportés (CSV) ¦ Dosare exportate (CSV)
+⤒ Réimporter un dossier archivé… ¦ ⤒ Reimportă un dosar arhivat…
+⚠️ FUSION ¦ ⚠️ UNIRE
+Ces deux fiches sont dans des dossiers différents ¦ Aceste două fișe sunt în dosare diferite
+Fusionner quand même ¦ Unește totuși
+{a} et {b}. Fusionner relie les deux successions et change les parts des deux dossiers. Vérifie avec des actes (naissance, parents) avant. ¦ {a} și {b}. Unirea leagă cele două succesiuni și schimbă cotele în ambele dosare. Verifică întâi cu acte (naștere, părinți).
+⇆ Comparer d’abord ¦ ⇆ Compară întâi
+Si on fusionne : noté dans le journal des deux dossiers, et les deux sont recalculés. ¦ Dacă unești: se notează în jurnalul ambelor dosare și ambele sunt recalculate.
+🗄 Archiver dans un fichier et retirer… ¦ 🗄 Arhivează într-un fișier și scoate…
+🗄 ARCHIVER LE DOSSIER {n} ¦ 🗄 ARHIVEAZĂ DOSARUL {n}
+Dans un fichier, puis retirer de la base ¦ Într-un fișier, apoi scoate din bază
+⤓ Enregistrer le fichier puis retirer ¦ ⤓ Salvează fișierul și apoi scoate
+Le fichier {file} contient : le dossier, le journal, les pièces et leurs images, les courriers, l’arbre de dévolution (SVG), le tableau pour le notaire et les fiches rattachées ({n}). ¦ Fișierul {file} conține: dosarul, jurnalul, actele și imaginile lor, scrisorile, arborele devoluțiunii (SVG), tabelul pentru notar și fișele legate ({n}).
+Garder les adresses des vivants dans le fichier ¦ Păstrează adresele celor în viață în fișier
+utile si le notaire rouvre la succession ¦ util dacă notarul redeschide succesiunea
+Retirer les adresses ¦ Scoate adresele
+comme l’archivage actuel ¦ ca arhivarea actuală
+Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base ({n}). Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste ({k}). Une sauvegarde est faite avant. ¦ Apoi fișele care servesc doar acestui dosar sunt scoase din bază ({n}). O fișă legată și de alt dosar (sau de familia ta) rămâne ({k}). Mai întâi se face o copie de siguranță.
+Dossier {n} archivé dans « {file} » et retiré ({what}) ¦ Dosarul {n} arhivat în „{file}” și scos ({what})
+⤒ RÉIMPORTER ¦ ⤒ REIMPORTĂ
+⤒ Réimporter le dossier ¦ ⤒ Reimportă dosarul
+Dossier {n} ({name}{closed}), {what}. ¦ Dosarul {n} ({name}{closed}), {what}.
+clos le {d} ¦ închis la {d}
+{what} ressemblent à des fiches déjà dans cette base ({names}) : elles seront proposées à la comparaison, jamais fusionnées seules. ¦ {what} seamănă cu fișe deja în această bază ({names}): vor fi propuse spre comparare, niciodată unite singure.
+Dossier {n} réimporté ({what}) ¦ Dosarul {n} reimportat ({what})
+Dossier {n} réimporté dans « {name} ». ¦ Dosarul {n} reimportat în „{name}”.
+⚖️ Mes dossiers de succession ¦ ⚖️ Dosarele mele de succesiune
+Aucun dossier de succession. ¦ Niciun dosar de succesiune.
+Étapes (7) ¦ Pași (7)
+{step} : {done} sur {total} ¦ {step}: {done} din {total}
+Quels dossiers ¦ Ce dosare
+Le filtre ¦ Filtrul
+Vue actuelle ¦ Vizualizarea actuală
+Alt + ↑ / ↓ : changer l’ordre (rangement à la main) ¦ Alt + ↑ / ↓: schimbă ordinea (manual)
+Sans dossier ¦ Fără dosar
+Ranger les dossiers : ¦ Ordonează dosarele:
+… cherche un nom pour voir les autres. ¦ … caută un nume ca să vezi restul.
+Ordre des dossiers changé ¦ Ordinea dosarelor schimbată
+Dans cette généalogie ¦ În această genealogie
+Le défunt et ses héritiers sont des fiches de ta famille. Simple, mais tout se mélange. ¦ Defunctul și moștenitorii lui sunt fișe din familia ta. Simplu, dar totul se amestecă.
+Dans une généalogie à part pour tous mes dossiers ¦ Într-o genealogie separată pentru toate dosarele mele
+Une base professionnelle « ⚖️ Dossiers de succession », créée dans 🌳 Mes généalogies. Tes dossiers y sont tous ensemble ; ta famille reste à part. ¦ O bază profesională „⚖️ Dosare de succesiune”, creată în 🌳 Genealogiile mele. Toate dosarele tale sunt acolo împreună; familia ta rămâne separat.
+Une généalogie par dossier ¦ O genealogie pe dosar
+Chaque dossier a sa propre base (« ⚖️ 2026-014 MAZAUD »). Le plus étanche ; à réserver aux grosses successions. ¦ Fiecare dosar are propria bază („⚖️ 2026-014 MAZAUD”). Cel mai etanș; pentru succesiunile mari.
+défunt ¦ defunct
+intermédiaire ¦ intermediar
+Un par dossier ¦ Unul pe dosar
+Un filtre ¦ Un filtru
+Compteurs ¦ Contoare
+à l’ouverture ¦ la deschidere
+calcul ¦ calcul
+à la main ¦ manual
+créée pendant le filtre ¦ creată în timpul filtrului
+réimport ¦ reimport
+homonyme ¦ omonim
+déplacée ¦ mutată
+grisées, sans nom ¦ gri, fără nume
+cachées ¦ ascunse
+retirées du fichier ¦ scoase din fișier
+gardées dans le fichier ¦ păstrate în fișier
+copier la fiche ¦ copiază fișa
+refuser le déplacement ¦ refuză mutarea
+replié ¦ restrâns
+Défunt et acte de décès ¦ Defunct și act de deces
+Adresses ¦ Adrese
+Contrats signés ¦ Contracte semnate
+Déplacement refusé : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Mutare refuzată: aceste fișe sunt și în familia ta sau în alt dosar: {names}.
+Impossible d’enregistrer les réglages des dossiers. ¦ Nu se pot salva setările dosarelor.
+Cette généalogie est encore vide. ¦ Această genealogie este încă goală.
+Rôle inconnu. ¦ Rol necunoscut.
+Fiches inconnues. ¦ Fișe necunoscute.
+Choisis une autre généalogie. ¦ Alege o altă genealogie.
+Impossible de créer le fichier d’archive. ¦ Nu se poate crea fișierul de arhivă.
+Fichier introuvable. ¦ Fișier negăsit.
+Ce fichier n’est pas une archive de dossier de succession. ¦ Acest fișier nu este o arhivă de dosar de succesiune.
+Le fichier n’a pas été reçu. ¦ Fișierul nu a fost primit.
+Le défunt reste dans son dossier. ¦ Defunctul rămâne în dosarul său.
+🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Persoane
+Dossiers de succession (usage successoral seulement) ¦ Dosare de succesiune (doar la utilizarea succesorală)

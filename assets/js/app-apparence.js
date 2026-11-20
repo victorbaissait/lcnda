@@ -666,8 +666,11 @@
         ['simple', '#mode-simple-open', '🧓', 'Mode simple'],
         ['calc', '#calculette-open', '🧮', 'Calculette'],
         ['report', '#report-problem-open', '🐞', 'Signaler un bug'],
+        ['succ', '#succ-filter-open', '⚖️', 'Dossiers de succession (usage successoral seulement)'], // ⚖️ filtre de toute l'app (heritage-successoral-dossiers.js)
         ['genealogies', '#genealogy-switch', '🌳', 'Mes généalogies (changer, en créer une autre)'],
     ];
+    /** ⚖️ seulement en usage « Généalogiste successoral » : sinon la ligne n'apparaît pas dans la liste */
+    const succUsage = () => { const c = lsGet('genealogie-usage', null); return Array.isArray(c?.usages) && c.usages.includes('successoral'); };
     const TB_OWN = ['simple', 'calc']; // ces deux-là : leur réglage à eux
     /* Les raccourcis vers les outils, cachés au départ (cochés un par un) : chaque outil de 🛠️ Outils de modification
      * (Listes → Outils de modification, sur son onglet) et chaque partie d'Enquêtes (🔍 Enquêtes, 🧭 Battue, 📚 Atelier, 🧩 Tableaux).
@@ -690,7 +693,7 @@
     const tbRun = key => { const t = tbTools().find(x => x.key === key); if (!t) return; if (topbarCfg().mode[key] === 'new' && t.create) return t.create(); return t.go(); };
     function topbarSetMode(k, m) { if (!isTool(k)) return; const c = topbarCfg(); if (m === 'new') c.mode[k] = 'new'; else delete c.mode[k]; lsSet(TB_KEY, c); applyTopbar(); }
     const isTool = k => /^(et|enq|act)_/.test(k);
-    const tbItems = () => [...TB_ITEMS, ...tbTools().map(t => [t.key, '#tb-go-' + t.key, t.icon, t.label, t.group])];
+    const tbItems = () => [...TB_ITEMS.filter(b => b[0] !== 'succ' || succUsage()), ...tbTools().map(t => [t.key, '#tb-go-' + t.key, t.icon, t.label, t.group])];
     const tbKeys = () => tbItems().map(b => b[0]);
     function topbarCfg() {
         const v = lsGet(TB_KEY, {}) || {}, keys = tbKeys();

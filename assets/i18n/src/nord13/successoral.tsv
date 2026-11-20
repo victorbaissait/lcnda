@@ -523,3 +523,185 @@ Dévolution ¦ Σειρά διαδοχής ¦ Ред на наследяване
 =dépouillement ¦ αποδελτίωση|αποδελτιώσεις ¦ преглед|прегледа
 =dossier en cours ¦ ανοιχτός φάκελος|ανοιχτοί φάκελοι ¦ текуща преписка|текущи преписки
 =dossier de succession ¦ φάκελος κληρονομιάς|φάκελοι κληρονομιάς ¦ наследствена преписка|наследствени преписки
+
+# ⚖️ Dossiers de succession : rangement, filtre ⚖️, rattachement, tableau de bord, garde-fous, widget, vue par dossier
+Dossiers de succession : filtre {what} (cliquer pour changer) ¦ Φάκελοι κληρονομιάς: φίλτρο {what} (πάτα για αλλαγή) ¦ Наследствени преписки: филтър {what} (щракни, за да промениш)
+Dossiers de succession : ne montrer qu’un ou plusieurs dossiers ¦ Φάκελοι κληρονομιάς: εμφάνιση μόνο ενός ή μερικών φακέλων ¦ Наследствени преписки: показвай само една или няколко преписки
+Plusieurs ¦ Μερικοί ¦ Няколко
+⚖️ Ne montrer que ceux-ci ¦ ⚖️ Μόνο αυτοί ¦ ⚖️ Само тези
+Aucun dossier dans cette généalogie. ¦ Κανένας φάκελος σε αυτή τη γενεαλογία. ¦ Няма преписки в тази генеалогия.
+Dans une autre généalogie ¦ Σε άλλη γενεαλογία ¦ В друга генеалогия
+Tous les dossiers… ¦ Όλοι οι φάκελοι… ¦ Всички преписки…
+Seulement le dossier {n} ¦ Μόνο ο φάκελος {n} ¦ Само преписка {n}
+Seulement {what} : {list} ¦ Μόνο {what}: {list} ¦ Само {what}: {list}
+1 dossier · {state} ¦ 1 φάκελος · {state} ¦ 1 преписка · {state}
+⚖️ Dossier {n} ¦ ⚖️ Φάκελος {n} ¦ ⚖️ Преписка {n}
+Ce dossier est dans une autre généalogie ¦ Αυτός ο φάκελος είναι σε άλλη γενεαλογία ¦ Тази преписка е в друга генеалогия
+Ouvrir « {name} » ¦ Άνοιγμα «{name}» ¦ Отвори „{name}“
+Il est rangé dans « {name} ». Pour le montrer, l’app ouvre cette généalogie (tes réglages d’ici sont gardés) et y active le filtre ⚖️ {n}. ¦ Βρίσκεται στο «{name}». Για να τον δείξει, η εφαρμογή ανοίγει εκείνη τη γενεαλογία (οι ρυθμίσεις σου εδώ κρατιούνται) και ενεργοποιεί εκεί το φίλτρο ⚖️ {n}. ¦ Тя е в „{name}“. За да я покаже, приложението отваря тази генеалогия (настройките ти тук се запазват) и включва там филтъра ⚖️ {n}.
+Tes nouveaux dossiers vont dans « {name} ». ¦ Οι νέοι φάκελοί σου πηγαίνουν στο «{name}». ¦ Новите ти преписки отиват в „{name}“.
+Ouvrir le dossier ici quand même ¦ Άνοιγμα του φακέλου εδώ παρ’ όλα αυτά ¦ Отвори преписката тук въпреки това
+Où ranger tes dossiers ? ¦ Πού να φυλάγονται οι φάκελοί σου; ¦ Къде да се пазят преписките ти?
+conseillé ici ¦ συνιστάται εδώ ¦ препоръчва се тук
+Nom de la nouvelle généalogie ¦ Όνομα της νέας γενεαλογίας ¦ Име на новата генеалогия
+⚖️ Dossier de succession ¦ ⚖️ Φάκελος κληρονομιάς ¦ ⚖️ Наследствена преписка
+Ta généalogie ouverte a {n} : la ranger à part évite de mélanger les héritiers de tes clients avec ta propre famille. Ce n’est qu’un conseil. ¦ Η ανοιχτή γενεαλογία σου έχει {n}: αν τους κρατάς χωριστά, οι κληρονόμοι των πελατών σου δεν ανακατεύονται με τη δική σου οικογένεια. Είναι μόνο συμβουλή. ¦ Отворената ти генеалогия има {n}: ако ги пазиш отделно, наследниците на клиентите ти не се смесват със собственото ти семейство. Това е само съвет.
+Tu pourras changer d’avis : Réglages → Apparence → 🧭 Usage de l’app → « ⚖️ Où ranger les dossiers ». Les dossiers déjà ouverts ne bougent pas tout seuls. ¦ Μπορείς να αλλάξεις γνώμη: Ρυθμίσεις → Εμφάνιση → 🧭 Χρήση της εφαρμογής → «⚖️ Πού φυλάγονται οι φάκελοι». Οι ήδη ανοιγμένοι φάκελοι δεν μετακινούνται μόνοι τους. ¦ Можеш да размислиш: Настройки → Външен вид → 🧭 Употреба на приложението → „⚖️ Къде се пазят преписките“. Вече отворените преписки не се местят сами.
+Créer « ⚖️ Dossiers de succession » et ouvrir le dossier ¦ Δημιουργία «⚖️ Φάκελοι κληρονομιάς» και άνοιγμα του φακέλου ¦ Създай „⚖️ Наследствени преписки“ и отвори преписката
+Créer la généalogie et ouvrir le dossier ¦ Δημιουργία της γενεαλογίας και άνοιγμα του φακέλου ¦ Създай генеалогията и отвори преписката
+Rangement des dossiers : {what} ¦ Πού πηγαίνουν οι φάκελοι: {what} ¦ Къде отиват преписките: {what}
+Généalogiste successoral : réglages des dossiers ¦ Γενεαλόγος κληρονομιών: ρυθμίσεις φακέλων ¦ Генеалог по наследствени дела: настройки на преписките
+Où ranger les dossiers ¦ Πού φυλάγονται οι φάκελοι ¦ Къде се пазят преписките
+Les nouveaux dossiers vont… ¦ Οι νέοι φάκελοι πηγαίνουν… ¦ Новите преписки отиват…
+Dans « {name} » ¦ Στο «{name}» ¦ В „{name}“
+Les dossiers et où ils sont ¦ Οι φάκελοι και πού βρίσκονται ¦ Преписките и къде са
+⇄ Déplacer… ¦ ⇄ Μετακίνηση… ¦ ⇄ Премести…
+Aucun dossier pour l’instant. ¦ Κανένας φάκελος ακόμα. ¦ Все още няма преписки.
+Réglages des dossiers ¦ Ρυθμίσεις φακέλων ¦ Настройки на преписките
+Arbre et graphiques filtrés par ⚖️ : les fiches hors dossier ¦ Δέντρο και γραφήματα με φίλτρο ⚖️: οι καρτέλες εκτός φακέλου ¦ Дърво и графики с филтър ⚖️: картоните извън преписката
+Archive d’un dossier clos : adresses des héritiers vivants ¦ Αρχείο κλειστού φακέλου: διευθύνσεις των ζωντανών κληρονόμων ¦ Архив на приключена преписка: адреси на живите наследници
+Déplacer un dossier dont une fiche est aussi dans ta famille ¦ Μετακίνηση φακέλου του οποίου μια καρτέλα είναι και στην οικογένειά σου ¦ Местене на преписка, чийто картон е и в семейството ти
+« Sans dossier » dans la vue par dossier ¦ «Χωρίς φάκελο» στην προβολή ανά φάκελο ¦ „Без преписка“ в изгледа по преписки
+Avancement : un héritier qui refuse de signer ¦ Πρόοδος: κληρονόμος που αρνείται να υπογράψει ¦ Напредък: наследник, който отказва да подпише
+compte comme « fait » (étape 5) ¦ μετράει ως «έγινε» (βήμα 5) ¦ брои се за „направено“ (стъпка 5)
+Avancement : poids des 7 étapes ¦ Πρόοδος: βάρος των 7 βημάτων ¦ Напредък: тежест на 7-те стъпки
+Réglage des dossiers enregistré : {what} ¦ Ρύθμιση φακέλων αποθηκεύτηκε: {what} ¦ Настройката на преписките е запазена: {what}
+poids des 7 étapes ¦ βάρος των 7 βημάτων ¦ тежест на 7-те стъпки
+⇄ DÉPLACER UN DOSSIER ¦ ⇄ ΜΕΤΑΚΙΝΗΣΗ ΦΑΚΕΛΟΥ ¦ ⇄ ПРЕМЕСТИ ПРЕПИСКА
+{n} → ? ¦ {n} → ? ¦ {n} → ?
+⇄ Déplacer ({what}) ¦ ⇄ Μετακίνηση ({what}) ¦ ⇄ Премести ({what})
+Vers ¦ Προς ¦ Към
+＋ Une nouvelle généalogie pour ce dossier ¦ ＋ Νέα γενεαλογία για αυτόν τον φάκελο ¦ ＋ Нова генеалогия за тази преписка
+Ce qui part : le dossier, son journal, ses pièces, ses courriers, ses échéances, et les fiches qui lui sont rattachées (défunt, héritiers, intermédiaires) avec leurs actes et médias. Une fiche aussi rattachée à un autre dossier ou à ta famille est copiée, pas déplacée. ¦ Τι φεύγει: ο φάκελος, το ημερολόγιό του, τα έγγραφα, οι επιστολές, οι προθεσμίες και οι καρτέλες που συνδέονται μαζί του (θανών, κληρονόμοι, ενδιάμεσοι) με τις πράξεις και τα πολυμέσα τους. Μια καρτέλα συνδεδεμένη και με άλλον φάκελο ή με την οικογένειά σου αντιγράφεται, δεν μετακινείται. ¦ Какво се мести: преписката, дневникът ѝ, документите, писмата, сроковете и свързаните с нея картони (наследодател, наследници, междинни лица) с техните актове и медии. Картон, свързан и с друга преписка или със семейството ти, се копира, не се мести.
+Déplacement refusé (réglage) : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Η μετακίνηση απορρίφθηκε (ρύθμιση): αυτές οι καρτέλες είναι και στην οικογένειά σου ή σε άλλον φάκελο: {names}. ¦ Местенето е отказано (настройка): тези картони са и в семейството ти или в друга преписка: {names}.
+Copiées (elles restent aussi ici) : {names}. ¦ Αντιγράφηκαν (μένουν και εδώ): {names}. ¦ Копирани (остават и тук): {names}.
+Une copie de sauvegarde des deux généalogies est faite avant. Le journal du dossier note « Déplacé de … vers … ». ¦ Πρώτα γίνεται αντίγραφο ασφαλείας και των δύο γενεαλογιών. Το ημερολόγιο του φακέλου σημειώνει «Μετακινήθηκε από … σε …». ¦ Първо се прави резервно копие на двете генеалогии. Дневникът на преписката отбелязва „Преместена от … в …“.
+Dossier {n} déplacé vers « {to} » ({what}) ¦ Ο φάκελος {n} μετακινήθηκε στο «{to}» ({what}) ¦ Преписка {n} е преместена в „{to}“ ({what})
+⤓ Reprendre la fiche depuis Ma généalogie ¦ ⤓ Πάρε την καρτέλα από τη Γενεαλογία μου ¦ ⤓ Вземи картона от Моята генеалогия
+copie de la fiche, jusqu’aux grands-parents et tous leurs descendants connus, sans photos ¦ αντίγραφο της καρτέλας, ως τους παππούδες και όλους τους γνωστούς απογόνους τους, χωρίς φωτογραφίες ¦ копие на картона до бабите и дядовците и всичките им известни потомци, без снимки
+⤓ REPRENDRE UNE FICHE ¦ ⤓ ΠΑΡΕ ΚΑΡΤΕΛΑ ¦ ⤓ ВЗЕМИ КАРТОН
+Reprendre la fiche du défunt ¦ Πάρε την καρτέλα του θανόντος ¦ Вземи картона на наследодателя
+Chercher la fiche ¦ Αναζήτηση της καρτέλας ¦ Търси картона
+Prénom, nom… ¦ Όνομα, επώνυμο… ¦ Име, фамилия…
+Copiées : la fiche, ses parents et grands-parents, tous leurs descendants connus et leurs conjoints, avec les dates et les lieux ; sans photos. Rien n’est changé dans l’autre généalogie. ¦ Αντιγράφονται: η καρτέλα, οι γονείς και οι παππούδες, όλοι οι γνωστοί απόγονοι και οι σύζυγοί τους, με ημερομηνίες και τόπους· χωρίς φωτογραφίες. Τίποτα δεν αλλάζει στην άλλη γενεαλογία. ¦ Копират се: картонът, родителите и бабите и дядовците, всички известни потомци и съпрузите им, с дати и места; без снимки. В другата генеалогия нищо не се променя.
+{what} reprises de l’autre généalogie. ¦ {what} πάρθηκαν από την άλλη γενεαλογία. ¦ {what} взети от другата генеалогия.
+Dossiers… ¦ Φάκελοι… ¦ Преписки…
+{name} dans quels dossiers ? ¦ {name} σε ποιους φακέλους; ¦ {name} в кои преписки?
+(calculé) ¦ (υπολογισμένο) ¦ (изчислено)
+Rôles : défunt · héritier · intermédiaire · témoin · à vérifier. « Héritier » mis par le calcul s’affiche « (calculé) ». ¦ Ρόλοι: θανών · κληρονόμος · ενδιάμεσος · μάρτυρας · προς έλεγχο. Ο «κληρονόμος» που ορίζει ο υπολογισμός δείχνει «(υπολογισμένο)». ¦ Роли: наследодател · наследник · междинно лице · свидетел · за проверка. „Наследник“, зададен от изчислението, се показва „(изчислено)“.
+Dossiers de {name} enregistrés ¦ Οι φάκελοι του/της {name} αποθηκεύτηκαν ¦ Преписките на {name} са запазени
+Les dossiers de cette fiche ¦ Οι φάκελοι αυτής της καρτέλας ¦ Преписките на този картон
+hors du dossier {n} ¦ εκτός φακέλου {n} ¦ извън преписка {n}
+＋ Rattacher ¦ ＋ Σύνδεση ¦ ＋ Свържи
+Fiche rattachée au dossier {n} ¦ Η καρτέλα συνδέθηκε με τον φάκελο {n} ¦ Картонът е свързан с преписка {n}
+Rattachée au dossier {n} : {who} ¦ Συνδέθηκε με τον φάκελο {n}: {who} ¦ Свързано с преписка {n}: {who}
+Lecture des fiches du dossier… ¦ Ανάγνωση των καρτελών του φακέλου… ¦ Четене на картоните на преписката…
+Les fiches du dossier ¦ Οι καρτέλες του φακέλου ¦ Картоните на преписката
+Rattacher ¦ Σύνδεση ¦ Свържи
+Retirées à la main ({n}) : jamais remises toutes seules ¦ Αφαιρέθηκαν με το χέρι ({n}): δεν ξαναμπαίνουν ποτέ μόνες τους ¦ Махнати ръчно ({n}): никога не се връщат сами
+Fiche à comparer : « {name}{year} » ressemble à une fiche déjà dans cette base. Jamais fusionnée toute seule. ¦ Καρτέλα για σύγκριση: η «{name}{year}» μοιάζει με καρτέλα που υπάρχει ήδη σε αυτή τη βάση. Δεν συγχωνεύεται ποτέ μόνη της. ¦ Картон за сравнение: „{name}{year}“ прилича на картон, който вече е в тази база. Никога не се слива сам.
+née {y} ¦ γενν. {y} ¦ род. {y}
+Homonyme possible : « {name}{year} » existe aussi dans le dossier {n}. Jamais relié tout seul. ¦ Πιθανή συνωνυμία: η «{name}{year}» υπάρχει και στον φάκελο {n}. Δεν συνδέεται ποτέ μόνη της. ¦ Възможен съименник: „{name}{year}“ го има и в преписка {n}. Никога не се свързва сам.
+⇆ Comparer ¦ ⇆ Σύγκριση ¦ ⇆ Сравни
+C’est la même personne : rattacher aussi ¦ Είναι το ίδιο πρόσωπο: σύνδεση και αυτής ¦ Същият човек е: свържи и него
+Pas la même ¦ Δεν είναι το ίδιο ¦ Не е същият
+Fiche retirée du dossier {n} ¦ Η καρτέλα αφαιρέθηκε από τον φάκελο {n} ¦ Картонът е махнат от преписка {n}
+Fiche remise dans le dossier {n} ¦ Η καρτέλα ξαναμπήκε στον φάκελο {n} ¦ Картонът е върнат в преписка {n}
+Homonyme rattaché aussi au dossier {n} (à vérifier) ¦ Ο συνώνυμος συνδέθηκε και με τον φάκελο {n} (προς έλεγχο) ¦ Съименникът е свързан и с преписка {n} (за проверка)
+Noté : ce n’est pas la même personne ¦ Σημειώθηκε: δεν είναι το ίδιο πρόσωπο ¦ Отбелязано: не е същият човек
+Rôle : {r} ¦ Ρόλος: {r} ¦ Роля: {r}
+⚠️ illisible : {names} ¦ ⚠️ δυσανάγνωστο: {names} ¦ ⚠️ нечетимо: {names}
+Chercher… (n°, défunt, notaire) ¦ Αναζήτηση… (αρ., θανών, συμβολαιογράφος) ¦ Търси… (№, наследодател, нотариус)
+Toutes les généalogies ¦ Όλες οι γενεαλογίες ¦ Всички генеалогии
+Tous les notaires ¦ Όλοι οι συμβολαιογράφοι ¦ Всички нотариуси
+Prochaine échéance (retards d’abord) ¦ Επόμενη προθεσμία (πρώτα οι καθυστερημένες) ¦ Следващ срок (първо просрочените)
+Avancement le plus bas ¦ Η χαμηλότερη πρόοδος ¦ Най-нисък напредък
+{d} · passée ¦ {d} · έληξε ¦ {d} · изтекъл
+Trouvés : {n} ¦ Βρέθηκαν: {n} ¦ Намерени: {n}
+À trouver : {n} ¦ Προς εύρεση: {n} ¦ За намиране: {n}
+{h} h {m} ¦ {h} ώ {m} ¦ {h} ч {m}
+Cocher le dossier {n} ¦ Επιλογή του φακέλου {n} ¦ Отметни преписка {n}
+Échéance : {d} ¦ Προθεσμία: {d} ¦ Срок: {d}
+Héritiers ¦ Κληρονόμοι ¦ Наследници
+Avancement ¦ Πρόοδος ¦ Напредък
+Cochés : {n} ¦ Επιλεγμένοι: {n} ¦ Отметнати: {n}
+Les dossiers cochés sont dans des généalogies différentes : choisis-en dans une seule. ¦ Οι επιλεγμένοι φάκελοι είναι σε διαφορετικές γενεαλογίες: διάλεξε μόνο από μία. ¦ Отметнатите преписки са в различни генеалогии: избери само от една.
+Dossiers exportés (CSV) ¦ Οι φάκελοι εξήχθησαν (CSV) ¦ Преписките са изнесени (CSV)
+⤒ Réimporter un dossier archivé… ¦ ⤒ Επανεισαγωγή αρχειοθετημένου φακέλου… ¦ ⤒ Отново внеси архивирана преписка…
+⚠️ FUSION ¦ ⚠️ ΣΥΓΧΩΝΕΥΣΗ ¦ ⚠️ СЛИВАНЕ
+Ces deux fiches sont dans des dossiers différents ¦ Αυτές οι δύο καρτέλες είναι σε διαφορετικούς φακέλους ¦ Тези два картона са в различни преписки
+Fusionner quand même ¦ Συγχώνευση παρ’ όλα αυτά ¦ Слей въпреки това
+{a} et {b}. Fusionner relie les deux successions et change les parts des deux dossiers. Vérifie avec des actes (naissance, parents) avant. ¦ {a} και {b}. Η συγχώνευση συνδέει τις δύο κληρονομιές και αλλάζει τα μερίδια και στους δύο φακέλους. Έλεγξε πρώτα με πράξεις (γέννηση, γονείς). ¦ {a} и {b}. Сливането свързва двете наследства и променя дяловете в двете преписки. Първо провери с актове (раждане, родители).
+⇆ Comparer d’abord ¦ ⇆ Πρώτα σύγκριση ¦ ⇆ Първо сравни
+Si on fusionne : noté dans le journal des deux dossiers, et les deux sont recalculés. ¦ Αν γίνει συγχώνευση: σημειώνεται στο ημερολόγιο και των δύο φακέλων, και ξαναϋπολογίζονται και οι δύο. ¦ При сливане: отбелязва се в дневника на двете преписки и двете се преизчисляват.
+🗄 Archiver dans un fichier et retirer… ¦ 🗄 Αρχειοθέτηση σε αρχείο και αφαίρεση… ¦ 🗄 Архивирай във файл и махни…
+🗄 ARCHIVER LE DOSSIER {n} ¦ 🗄 ΑΡΧΕΙΟΘΕΤΗΣΗ ΤΟΥ ΦΑΚΕΛΟΥ {n} ¦ 🗄 АРХИВИРАЙ ПРЕПИСКА {n}
+Dans un fichier, puis retirer de la base ¦ Σε αρχείο, μετά αφαίρεση από τη βάση ¦ Във файл, после махни от базата
+⤓ Enregistrer le fichier puis retirer ¦ ⤓ Αποθήκευση του αρχείου και μετά αφαίρεση ¦ ⤓ Запази файла и после махни
+Le fichier {file} contient : le dossier, le journal, les pièces et leurs images, les courriers, l’arbre de dévolution (SVG), le tableau pour le notaire et les fiches rattachées ({n}). ¦ Το αρχείο {file} περιέχει: τον φάκελο, το ημερολόγιο, τα έγγραφα και τις εικόνες τους, τις επιστολές, το δέντρο διαδοχής (SVG), τον πίνακα για τον συμβολαιογράφο και τις συνδεδεμένες καρτέλες ({n}). ¦ Файлът {file} съдържа: преписката, дневника, документите и изображенията им, писмата, дървото на наследяването (SVG), таблицата за нотариуса и свързаните картони ({n}).
+Garder les adresses des vivants dans le fichier ¦ Κράτα τις διευθύνσεις των ζωντανών στο αρχείο ¦ Запази адресите на живите във файла
+utile si le notaire rouvre la succession ¦ χρήσιμο αν ο συμβολαιογράφος ξανανοίξει την κληρονομιά ¦ полезно, ако нотариусът отново отвори наследството
+Retirer les adresses ¦ Αφαίρεση των διευθύνσεων ¦ Махни адресите
+comme l’archivage actuel ¦ όπως η σημερινή αρχειοθέτηση ¦ като сегашното архивиране
+Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base ({n}). Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste ({k}). Une sauvegarde est faite avant. ¦ Μετά, οι καρτέλες που χρησιμεύουν μόνο σε αυτόν τον φάκελο αφαιρούνται από τη βάση ({n}). Καρτέλα συνδεδεμένη και με άλλον φάκελο (ή με την οικογένειά σου) μένει ({k}). Πρώτα γίνεται αντίγραφο ασφαλείας. ¦ После картоните, нужни само за тази преписка, се махат от базата ({n}). Картон, свързан и с друга преписка (или със семейството ти), остава ({k}). Първо се прави резервно копие.
+Dossier {n} archivé dans « {file} » et retiré ({what}) ¦ Ο φάκελος {n} αρχειοθετήθηκε στο «{file}» και αφαιρέθηκε ({what}) ¦ Преписка {n} е архивирана в „{file}“ и махната ({what})
+⤒ RÉIMPORTER ¦ ⤒ ΕΠΑΝΕΙΣΑΓΩΓΗ ¦ ⤒ ОТНОВО ВНЕСИ
+⤒ Réimporter le dossier ¦ ⤒ Επανεισαγωγή του φακέλου ¦ ⤒ Отново внеси преписката
+Dossier {n} ({name}{closed}), {what}. ¦ Φάκελος {n} ({name}{closed}), {what}. ¦ Преписка {n} ({name}{closed}), {what}.
+clos le {d} ¦ έκλεισε στις {d} ¦ приключена на {d}
+{what} ressemblent à des fiches déjà dans cette base ({names}) : elles seront proposées à la comparaison, jamais fusionnées seules. ¦ {what} μοιάζουν με καρτέλες που υπάρχουν ήδη σε αυτή τη βάση ({names}): θα προταθούν για σύγκριση, ποτέ δεν συγχωνεύονται μόνες τους. ¦ {what} приличат на картони, които вече са в тази база ({names}): ще бъдат предложени за сравнение, никога не се сливат сами.
+Dossier {n} réimporté ({what}) ¦ Ο φάκελος {n} επανεισήχθη ({what}) ¦ Преписка {n} е внесена отново ({what})
+Dossier {n} réimporté dans « {name} ». ¦ Ο φάκελος {n} επανεισήχθη στο «{name}». ¦ Преписка {n} е внесена отново в „{name}“.
+⚖️ Mes dossiers de succession ¦ ⚖️ Οι φάκελοι κληρονομιάς μου ¦ ⚖️ Моите наследствени преписки
+Aucun dossier de succession. ¦ Κανένας φάκελος κληρονομιάς. ¦ Няма наследствени преписки.
+Étapes (7) ¦ Βήματα (7) ¦ Стъпки (7)
+{step} : {done} sur {total} ¦ {step}: {done} από {total} ¦ {step}: {done} от {total}
+Quels dossiers ¦ Ποιοι φάκελοι ¦ Кои преписки
+Le filtre ¦ Το φίλτρο ¦ Филтърът
+Vue actuelle ¦ Τρέχουσα προβολή ¦ Текущ изглед
+Alt + ↑ / ↓ : changer l’ordre (rangement à la main) ¦ Alt + ↑ / ↓: αλλαγή σειράς (με το χέρι) ¦ Alt + ↑ / ↓: смени реда (ръчно)
+Sans dossier ¦ Χωρίς φάκελο ¦ Без преписка
+Ranger les dossiers : ¦ Ταξινόμηση φακέλων: ¦ Подреди преписките:
+… cherche un nom pour voir les autres. ¦ … ψάξε ένα όνομα για να δεις τους άλλους. ¦ … потърси име, за да видиш останалите.
+Ordre des dossiers changé ¦ Η σειρά των φακέλων άλλαξε ¦ Редът на преписките е променен
+Dans cette généalogie ¦ Σε αυτή τη γενεαλογία ¦ В тази генеалогия
+Le défunt et ses héritiers sont des fiches de ta famille. Simple, mais tout se mélange. ¦ Ο θανών και οι κληρονόμοι του είναι καρτέλες της οικογένειάς σου. Απλό, αλλά όλα ανακατεύονται. ¦ Наследодателят и наследниците му са картони от семейството ти. Просто, но всичко се смесва.
+Dans une généalogie à part pour tous mes dossiers ¦ Σε ξεχωριστή γενεαλογία για όλους τους φακέλους μου ¦ В отделна генеалогия за всичките ми преписки
+Une base professionnelle « ⚖️ Dossiers de succession », créée dans 🌳 Mes généalogies. Tes dossiers y sont tous ensemble ; ta famille reste à part. ¦ Μια επαγγελματική βάση «⚖️ Φάκελοι κληρονομιάς», που δημιουργείται στις 🌳 Γενεαλογίες μου. Όλοι οι φάκελοί σου είναι εκεί μαζί· η οικογένειά σου μένει χωριστά. ¦ Професионална база „⚖️ Наследствени преписки“, създадена в 🌳 Моите генеалогии. Всичките ти преписки са там заедно; семейството ти остава отделно.
+Une généalogie par dossier ¦ Μία γενεαλογία ανά φάκελο ¦ По една генеалогия за преписка
+Chaque dossier a sa propre base (« ⚖️ 2026-014 MAZAUD »). Le plus étanche ; à réserver aux grosses successions. ¦ Κάθε φάκελος έχει τη δική του βάση («⚖️ 2026-014 MAZAUD»). Το πιο στεγανό· για μεγάλες κληρονομιές. ¦ Всяка преписка има своя база („⚖️ 2026-014 MAZAUD“). Най-изолирано; за големи наследства.
+défunt ¦ θανών ¦ наследодател
+intermédiaire ¦ ενδιάμεσος ¦ междинно лице
+Un par dossier ¦ Ένας ανά φάκελο ¦ По една за преписка
+Un filtre ¦ Ένα φίλτρο ¦ Филтър
+Compteurs ¦ Μετρητές ¦ Броячи
+à l’ouverture ¦ στο άνοιγμα ¦ при отваряне
+calcul ¦ υπολογισμός ¦ изчисление
+à la main ¦ με το χέρι ¦ ръчно
+créée pendant le filtre ¦ δημιουργήθηκε κατά το φίλτρο ¦ създаден по време на филтъра
+réimport ¦ επανεισαγωγή ¦ повторно внасяне
+homonyme ¦ συνώνυμος ¦ съименник
+déplacée ¦ μετακινήθηκε ¦ преместен
+grisées, sans nom ¦ γκρίζες, χωρίς όνομα ¦ сиви, без име
+cachées ¦ κρυφές ¦ скрити
+retirées du fichier ¦ αφαιρούνται από το αρχείο ¦ махнати от файла
+gardées dans le fichier ¦ μένουν στο αρχείο ¦ запазени във файла
+copier la fiche ¦ αντιγραφή της καρτέλας ¦ копирай картона
+refuser le déplacement ¦ άρνηση της μετακίνησης ¦ откажи местенето
+replié ¦ μαζεμένο ¦ свито
+Défunt et acte de décès ¦ Θανών και ληξιαρχική πράξη θανάτου ¦ Наследодател и акт за смърт
+Adresses ¦ Διευθύνσεις ¦ Адреси
+Contrats signés ¦ Υπογεγραμμένα συμβόλαια ¦ Подписани договори
+Déplacement refusé : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Η μετακίνηση απορρίφθηκε: αυτές οι καρτέλες είναι και στην οικογένειά σου ή σε άλλον φάκελο: {names}. ¦ Местенето е отказано: тези картони са и в семейството ти или в друга преписка: {names}.
+Impossible d’enregistrer les réglages des dossiers. ¦ Δεν ήταν δυνατή η αποθήκευση των ρυθμίσεων φακέλων. ¦ Настройките на преписките не можаха да се запазят.
+Cette généalogie est encore vide. ¦ Αυτή η γενεαλογία είναι ακόμα άδεια. ¦ Тази генеалогия все още е празна.
+Rôle inconnu. ¦ Άγνωστος ρόλος. ¦ Непозната роля.
+Fiches inconnues. ¦ Άγνωστες καρτέλες. ¦ Непознати картони.
+Choisis une autre généalogie. ¦ Διάλεξε άλλη γενεαλογία. ¦ Избери друга генеалогия.
+Impossible de créer le fichier d’archive. ¦ Δεν ήταν δυνατή η δημιουργία του αρχείου αρχειοθέτησης. ¦ Архивният файл не можа да се създаде.
+Fichier introuvable. ¦ Το αρχείο δεν βρέθηκε. ¦ Файлът не е намерен.
+Ce fichier n’est pas une archive de dossier de succession. ¦ Αυτό το αρχείο δεν είναι αρχείο φακέλου κληρονομιάς. ¦ Този файл не е архив на наследствена преписка.
+Le fichier n’a pas été reçu. ¦ Το αρχείο δεν παραλήφθηκε. ¦ Файлът не е получен.
+Le défunt reste dans son dossier. ¦ Ο θανών μένει στον φάκελό του. ¦ Наследодателят остава в преписката си.
+🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Πρόσωπα ¦ 🧑‍🤝‍🧑 Хора
+Dossiers de succession (usage successoral seulement) ¦ Φάκελοι κληρονομιάς (μόνο στη χρήση κληρονομιών) ¦ Наследствени преписки (само при употреба за наследства)

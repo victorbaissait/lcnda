@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 90;
+const SCHEMA_VERSION = 91;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -111,6 +111,7 @@ function migration_steps(): array
         88 => 'schema_v88',
         89 => 'schema_v89',
         90 => 'schema_v90',
+        91 => 'schema_v91',
     ];
 }
 
@@ -2593,4 +2594,11 @@ function schema_v90(PDO $pdo): void
 {
     if (!function_exists('successoral_schema')) { require_once __DIR__ . '/successoral.php'; }
     successoral_schema($pdo);
+}
+
+/** ⚖️ Dossiers de succession : les fiches rattachées à chaque dossier (rôle), les homonymes écartés, l'avancement gardé */
+function schema_v91(PDO $pdo): void
+{
+    if (!function_exists('succ_dossiers_schema')) { require_once __DIR__ . '/successoral_dossiers.php'; }
+    succ_dossiers_schema($pdo);
 }

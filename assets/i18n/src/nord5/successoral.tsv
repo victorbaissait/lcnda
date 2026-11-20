@@ -523,3 +523,185 @@ Dévolution ¦ Nasljedni red ¦ Dedni red
 =dépouillement ¦ pregled|pregleda|pregleda ¦ pregled|pregleda|pregledi|pregledov
 =dossier en cours ¦ spis u tijeku|spisa u tijeku|spisa u tijeku ¦ spis v teku|spisa v teku|spisi v teku|spisov v teku
 =dossier de succession ¦ ostavinski spis|ostavinska spisa|ostavinskih spisa ¦ zapuščinski spis|zapuščinska spisa|zapuščinski spisi|zapuščinskih spisov
+
+# ⚖️ Dossiers de succession : rangement, filtre ⚖️, rattachement, tableau de bord, garde-fous, widget, vue par dossier
+Dossiers de succession : filtre {what} (cliquer pour changer) ¦ Ostavinski spisi: filtar {what} (klikni za promjenu) ¦ Zapuščinski spisi: filter {what} (klikni za spremembo)
+Dossiers de succession : ne montrer qu’un ou plusieurs dossiers ¦ Ostavinski spisi: prikaži samo jedan ili više spisa ¦ Zapuščinski spisi: prikaži samo enega ali več spisov
+Plusieurs ¦ Više ¦ Več
+⚖️ Ne montrer que ceux-ci ¦ ⚖️ Prikaži samo ove ¦ ⚖️ Prikaži samo te
+Aucun dossier dans cette généalogie. ¦ U ovom rodoslovlju nema spisa. ¦ V tem rodoslovju ni spisa.
+Dans une autre généalogie ¦ U drugom rodoslovlju ¦ V drugem rodoslovju
+Tous les dossiers… ¦ Svi spisi… ¦ Vsi spisi…
+Seulement le dossier {n} ¦ Samo spis {n} ¦ Samo spis {n}
+Seulement {what} : {list} ¦ Samo {what}: {list} ¦ Samo {what}: {list}
+1 dossier · {state} ¦ 1 spis · {state} ¦ 1 spis · {state}
+⚖️ Dossier {n} ¦ ⚖️ Spis {n} ¦ ⚖️ Spis {n}
+Ce dossier est dans une autre généalogie ¦ Ovaj spis je u drugom rodoslovlju ¦ Ta spis je v drugem rodoslovju
+Ouvrir « {name} » ¦ Otvori „{name}” ¦ Odpri »{name}«
+Il est rangé dans « {name} ». Pour le montrer, l’app ouvre cette généalogie (tes réglages d’ici sont gardés) et y active le filtre ⚖️ {n}. ¦ Spremljen je u „{name}”. Da bi ga prikazala, aplikacija otvara to rodoslovlje (tvoje postavke ovdje ostaju) i ondje uključuje filtar ⚖️ {n}. ¦ Shranjen je v »{name}«. Da ga prikaže, aplikacija odpre to rodoslovje (tvoje nastavitve tukaj ostanejo) in tam vklopi filter ⚖️ {n}.
+Tes nouveaux dossiers vont dans « {name} ». ¦ Tvoji novi spisi idu u „{name}”. ¦ Tvoji novi spisi gredo v »{name}«.
+Ouvrir le dossier ici quand même ¦ Ipak otvori spis ovdje ¦ Vseeno odpri spis tukaj
+Où ranger tes dossiers ? ¦ Gdje spremati tvoje spise? ¦ Kam shranjevati tvoje spise?
+conseillé ici ¦ preporučeno ovdje ¦ priporočeno tukaj
+Nom de la nouvelle généalogie ¦ Naziv novog rodoslovlja ¦ Ime novega rodoslovja
+⚖️ Dossier de succession ¦ ⚖️ Ostavinski spis ¦ ⚖️ Zapuščinski spis
+Ta généalogie ouverte a {n} : la ranger à part évite de mélanger les héritiers de tes clients avec ta propre famille. Ce n’est qu’un conseil. ¦ Tvoje otvoreno rodoslovlje ima {n}: odvojeno spremanje sprječava miješanje nasljednika tvojih klijenata s tvojom obitelji. To je samo savjet. ¦ Tvoje odprto rodoslovje ima {n}: ločeno shranjevanje prepreči mešanje dedičev tvojih strank s tvojo družino. To je le nasvet.
+Tu pourras changer d’avis : Réglages → Apparence → 🧭 Usage de l’app → « ⚖️ Où ranger les dossiers ». Les dossiers déjà ouverts ne bougent pas tout seuls. ¦ Možeš se predomisliti: Postavke → Izgled → 🧭 Upotreba aplikacije → „⚖️ Gdje spremati spise”. Već otvoreni spisi ne sele se sami. ¦ Lahko si premisliš: Nastavitve → Videz → 🧭 Uporaba aplikacije → »⚖️ Kam shranjevati spise«. Že odprti spisi se ne selijo sami.
+Créer « ⚖️ Dossiers de succession » et ouvrir le dossier ¦ Stvori „⚖️ Ostavinski spisi” i otvori spis ¦ Ustvari »⚖️ Zapuščinski spisi« in odpri spis
+Créer la généalogie et ouvrir le dossier ¦ Stvori rodoslovlje i otvori spis ¦ Ustvari rodoslovje in odpri spis
+Rangement des dossiers : {what} ¦ Gdje idu spisi: {what} ¦ Kam gredo spisi: {what}
+Généalogiste successoral : réglages des dossiers ¦ Genealog za nasljedstva: postavke spisa ¦ Dedni genealog: nastavitve spisov
+Où ranger les dossiers ¦ Gdje spremati spise ¦ Kam shranjevati spise
+Les nouveaux dossiers vont… ¦ Novi spisi idu… ¦ Novi spisi gredo…
+Dans « {name} » ¦ U „{name}” ¦ V »{name}«
+Les dossiers et où ils sont ¦ Spisi i gdje se nalaze ¦ Spisi in kje so
+⇄ Déplacer… ¦ ⇄ Premjesti… ¦ ⇄ Premakni…
+Aucun dossier pour l’instant. ¦ Još nema spisa. ¦ Še ni spisa.
+Réglages des dossiers ¦ Postavke spisa ¦ Nastavitve spisov
+Arbre et graphiques filtrés par ⚖️ : les fiches hors dossier ¦ Stablo i grafikoni s filtrom ⚖️: zapisi izvan spisa ¦ Drevo in grafikoni s filtrom ⚖️: zapisi zunaj spisa
+Archive d’un dossier clos : adresses des héritiers vivants ¦ Arhiva zatvorenog spisa: adrese živih nasljednika ¦ Arhiv zaprtega spisa: naslovi živih dedičev
+Déplacer un dossier dont une fiche est aussi dans ta famille ¦ Premještanje spisa čiji je zapis i u tvojoj obitelji ¦ Premik spisa, katerega zapis je tudi v tvoji družini
+« Sans dossier » dans la vue par dossier ¦ „Bez spisa” u prikazu po spisima ¦ »Brez spisa« v pogledu po spisih
+Avancement : un héritier qui refuse de signer ¦ Napredak: nasljednik koji odbija potpisati ¦ Napredek: dedič, ki noče podpisati
+compte comme « fait » (étape 5) ¦ računa se kao „gotovo” (korak 5) ¦ šteje kot »opravljeno« (korak 5)
+Avancement : poids des 7 étapes ¦ Napredak: težina 7 koraka ¦ Napredek: teža 7 korakov
+Réglage des dossiers enregistré : {what} ¦ Postavka spisa spremljena: {what} ¦ Nastavitev spisov shranjena: {what}
+poids des 7 étapes ¦ težina 7 koraka ¦ teža 7 korakov
+⇄ DÉPLACER UN DOSSIER ¦ ⇄ PREMJESTI SPIS ¦ ⇄ PREMAKNI SPIS
+{n} → ? ¦ {n} → ? ¦ {n} → ?
+⇄ Déplacer ({what}) ¦ ⇄ Premjesti ({what}) ¦ ⇄ Premakni ({what})
+Vers ¦ U ¦ V
+＋ Une nouvelle généalogie pour ce dossier ¦ ＋ Novo rodoslovlje za ovaj spis ¦ ＋ Novo rodoslovje za ta spis
+Ce qui part : le dossier, son journal, ses pièces, ses courriers, ses échéances, et les fiches qui lui sont rattachées (défunt, héritiers, intermédiaires) avec leurs actes et médias. Une fiche aussi rattachée à un autre dossier ou à ta famille est copiée, pas déplacée. ¦ Što odlazi: spis, njegov dnevnik, isprave, pisma, rokovi i zapisi povezani s njim (ostavitelj, nasljednici, posrednici) s njihovim ispravama i medijima. Zapis povezan i s drugim spisom ili s tvojom obitelji kopira se, ne premješta. ¦ Kaj gre: spis, njegov dnevnik, listine, pisma, roki in zapisi, povezani z njim (zapustnik, dediči, posredniki), z njihovimi listinami in mediji. Zapis, povezan tudi z drugim spisom ali s tvojo družino, se kopira, ne premakne.
+Déplacement refusé (réglage) : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Premještanje odbijeno (postavka): ovi zapisi su i u tvojoj obitelji ili u drugom spisu: {names}. ¦ Premik zavrnjen (nastavitev): ti zapisi so tudi v tvoji družini ali v drugem spisu: {names}.
+Copiées (elles restent aussi ici) : {names}. ¦ Kopirano (ostaju i ovdje): {names}. ¦ Kopirano (ostanejo tudi tukaj): {names}.
+Une copie de sauvegarde des deux généalogies est faite avant. Le journal du dossier note « Déplacé de … vers … ». ¦ Prije se radi sigurnosna kopija obaju rodoslovlja. Dnevnik spisa bilježi „Premješteno iz … u …”. ¦ Najprej se naredi varnostna kopija obeh rodoslovij. Dnevnik spisa zapiše »Premaknjeno iz … v …«.
+Dossier {n} déplacé vers « {to} » ({what}) ¦ Spis {n} premješten u „{to}” ({what}) ¦ Spis {n} premaknjen v »{to}« ({what})
+⤓ Reprendre la fiche depuis Ma généalogie ¦ ⤓ Preuzmi zapis iz Mojeg rodoslovlja ¦ ⤓ Prevzemi zapis iz Mojega rodoslovja
+copie de la fiche, jusqu’aux grands-parents et tous leurs descendants connus, sans photos ¦ kopija zapisa do djedova i baka i svih njihovih poznatih potomaka, bez fotografija ¦ kopija zapisa do starih staršev in vseh njihovih znanih potomcev, brez fotografij
+⤓ REPRENDRE UNE FICHE ¦ ⤓ PREUZMI ZAPIS ¦ ⤓ PREVZEMI ZAPIS
+Reprendre la fiche du défunt ¦ Preuzmi zapis ostavitelja ¦ Prevzemi zapis zapustnika
+Chercher la fiche ¦ Traži zapis ¦ Poišči zapis
+Prénom, nom… ¦ Ime, prezime… ¦ Ime, priimek…
+Copiées : la fiche, ses parents et grands-parents, tous leurs descendants connus et leurs conjoints, avec les dates et les lieux ; sans photos. Rien n’est changé dans l’autre généalogie. ¦ Kopirano: zapis, roditelji i djedovi i bake, svi poznati potomci i njihovi supružnici, s datumima i mjestima; bez fotografija. U drugom se rodoslovlju ništa ne mijenja. ¦ Kopirano: zapis, starši in stari starši, vsi znani potomci in njihovi zakonci, z datumi in kraji; brez fotografij. V drugem rodoslovju se nič ne spremeni.
+{what} reprises de l’autre généalogie. ¦ {what} preuzeto iz drugog rodoslovlja. ¦ {what} prevzeto iz drugega rodoslovja.
+Dossiers… ¦ Spisi… ¦ Spisi…
+{name} dans quels dossiers ? ¦ {name} u kojim spisima? ¦ {name} v katerih spisih?
+(calculé) ¦ (izračunato) ¦ (izračunano)
+Rôles : défunt · héritier · intermédiaire · témoin · à vérifier. « Héritier » mis par le calcul s’affiche « (calculé) ». ¦ Uloge: ostavitelj · nasljednik · posrednik · svjedok · za provjeru. „Nasljednik” postavljen izračunom prikazuje „(izračunato)”. ¦ Vloge: zapustnik · dedič · posrednik · priča · za preverjanje. »Dedič«, ki ga nastavi izračun, ima oznako »(izračunano)«.
+Dossiers de {name} enregistrés ¦ Spisi za {name} spremljeni ¦ Spisi za {name} shranjeni
+Les dossiers de cette fiche ¦ Spisi ovog zapisa ¦ Spisi tega zapisa
+hors du dossier {n} ¦ izvan spisa {n} ¦ zunaj spisa {n}
+＋ Rattacher ¦ ＋ Poveži ¦ ＋ Poveži
+Fiche rattachée au dossier {n} ¦ Zapis povezan sa spisom {n} ¦ Zapis povezan s spisom {n}
+Rattachée au dossier {n} : {who} ¦ Povezano sa spisom {n}: {who} ¦ Povezano s spisom {n}: {who}
+Lecture des fiches du dossier… ¦ Čitanje zapisa spisa… ¦ Branje zapisov spisa…
+Les fiches du dossier ¦ Zapisi spisa ¦ Zapisi spisa
+Rattacher ¦ Poveži ¦ Poveži
+Retirées à la main ({n}) : jamais remises toutes seules ¦ Uklonjeni ručno ({n}): nikad se ne vraćaju sami ¦ Ročno odstranjeni ({n}): nikoli se ne vrnejo sami
+Fiche à comparer : « {name}{year} » ressemble à une fiche déjà dans cette base. Jamais fusionnée toute seule. ¦ Zapis za usporedbu: „{name}{year}” sliči zapisu koji je već u bazi. Nikad se ne spaja sam. ¦ Zapis za primerjavo: »{name}{year}« je podoben zapisu, ki je že v bazi. Nikoli se ne združi sam.
+née {y} ¦ rođ. {y} ¦ roj. {y}
+Homonyme possible : « {name}{year} » existe aussi dans le dossier {n}. Jamais relié tout seul. ¦ Moguća istoimenost: „{name}{year}” postoji i u spisu {n}. Nikad se ne povezuje sam. ¦ Možen soimenjak: »{name}{year}« obstaja tudi v spisu {n}. Nikoli se ne poveže sam.
+⇆ Comparer ¦ ⇆ Usporedi ¦ ⇆ Primerjaj
+C’est la même personne : rattacher aussi ¦ Ista je osoba: poveži i nju ¦ Ista oseba je: poveži tudi njo
+Pas la même ¦ Nije ista ¦ Ni ista
+Fiche retirée du dossier {n} ¦ Zapis uklonjen iz spisa {n} ¦ Zapis odstranjen iz spisa {n}
+Fiche remise dans le dossier {n} ¦ Zapis vraćen u spis {n} ¦ Zapis vrnjen v spis {n}
+Homonyme rattaché aussi au dossier {n} (à vérifier) ¦ Istoimenik povezan i sa spisom {n} (za provjeru) ¦ Soimenjak povezan tudi s spisom {n} (za preverjanje)
+Noté : ce n’est pas la même personne ¦ Zabilježeno: nije ista osoba ¦ Zabeleženo: ni ista oseba
+Rôle : {r} ¦ Uloga: {r} ¦ Vloga: {r}
+⚠️ illisible : {names} ¦ ⚠️ nečitljivo: {names} ¦ ⚠️ neberljivo: {names}
+Chercher… (n°, défunt, notaire) ¦ Traži… (br., ostavitelj, javni bilježnik) ¦ Išči… (št., zapustnik, notar)
+Toutes les généalogies ¦ Sva rodoslovlja ¦ Vsa rodoslovja
+Tous les notaires ¦ Svi javni bilježnici ¦ Vsi notarji
+Prochaine échéance (retards d’abord) ¦ Sljedeći rok (prvo zakašnjeli) ¦ Naslednji rok (najprej zamujeni)
+Avancement le plus bas ¦ Najmanji napredak ¦ Najmanjši napredek
+{d} · passée ¦ {d} · istekao ¦ {d} · potekel
+Trouvés : {n} ¦ Pronađeno: {n} ¦ Najdeno: {n}
+À trouver : {n} ¦ Za pronaći: {n} ¦ Za najti: {n}
+{h} h {m} ¦ {h} h {m} ¦ {h} h {m}
+Cocher le dossier {n} ¦ Označi spis {n} ¦ Označi spis {n}
+Échéance : {d} ¦ Rok: {d} ¦ Rok: {d}
+Héritiers ¦ Nasljednici ¦ Dediči
+Avancement ¦ Napredak ¦ Napredek
+Cochés : {n} ¦ Označeno: {n} ¦ Označeno: {n}
+Les dossiers cochés sont dans des généalogies différentes : choisis-en dans une seule. ¦ Označeni spisi su u različitim rodoslovljima: odaberi ih samo iz jednog. ¦ Označeni spisi so v različnih rodoslovjih: izberi jih samo iz enega.
+Dossiers exportés (CSV) ¦ Spisi izvezeni (CSV) ¦ Spisi izvoženi (CSV)
+⤒ Réimporter un dossier archivé… ¦ ⤒ Ponovno uvezi arhivirani spis… ¦ ⤒ Znova uvozi arhiviran spis…
+⚠️ FUSION ¦ ⚠️ SPAJANJE ¦ ⚠️ ZDRUŽEVANJE
+Ces deux fiches sont dans des dossiers différents ¦ Ova dva zapisa su u različitim spisima ¦ Ta dva zapisa sta v različnih spisih
+Fusionner quand même ¦ Ipak spoji ¦ Vseeno združi
+{a} et {b}. Fusionner relie les deux successions et change les parts des deux dossiers. Vérifie avec des actes (naissance, parents) avant. ¦ {a} i {b}. Spajanje povezuje dvije ostavine i mijenja udjele u oba spisa. Prvo provjeri u ispravama (rođenje, roditelji). ¦ {a} in {b}. Združitev poveže obe zapuščini in spremeni deleže v obeh spisih. Najprej preveri v listinah (rojstvo, starši).
+⇆ Comparer d’abord ¦ ⇆ Prvo usporedi ¦ ⇆ Najprej primerjaj
+Si on fusionne : noté dans le journal des deux dossiers, et les deux sont recalculés. ¦ Ako se spoje: bilježi se u dnevniku oba spisa i oba se ponovno izračunavaju. ¦ Ob združitvi: zapisano v dnevniku obeh spisov in oba se znova izračunata.
+🗄 Archiver dans un fichier et retirer… ¦ 🗄 Arhiviraj u datoteku i ukloni… ¦ 🗄 Arhiviraj v datoteko in odstrani…
+🗄 ARCHIVER LE DOSSIER {n} ¦ 🗄 ARHIVIRAJ SPIS {n} ¦ 🗄 ARHIVIRAJ SPIS {n}
+Dans un fichier, puis retirer de la base ¦ U datoteku, zatim ukloni iz baze ¦ V datoteko, nato odstrani iz baze
+⤓ Enregistrer le fichier puis retirer ¦ ⤓ Spremi datoteku pa ukloni ¦ ⤓ Shrani datoteko in nato odstrani
+Le fichier {file} contient : le dossier, le journal, les pièces et leurs images, les courriers, l’arbre de dévolution (SVG), le tableau pour le notaire et les fiches rattachées ({n}). ¦ Datoteka {file} sadrži: spis, dnevnik, isprave i njihove slike, pisma, stablo nasljeđivanja (SVG), tablicu za javnog bilježnika i povezane zapise ({n}). ¦ Datoteka {file} vsebuje: spis, dnevnik, listine in njihove slike, pisma, dedno drevo (SVG), tabelo za notarja in povezane zapise ({n}).
+Garder les adresses des vivants dans le fichier ¦ Zadrži adrese živih u datoteci ¦ Obdrži naslove živih v datoteki
+utile si le notaire rouvre la succession ¦ korisno ako javni bilježnik ponovno otvori ostavinu ¦ koristno, če notar znova odpre zapuščino
+Retirer les adresses ¦ Ukloni adrese ¦ Odstrani naslove
+comme l’archivage actuel ¦ kao dosadašnje arhiviranje ¦ kot dosedanje arhiviranje
+Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base ({n}). Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste ({k}). Une sauvegarde est faite avant. ¦ Zatim se zapisi koji služe samo ovom spisu uklanjaju iz baze ({n}). Zapis povezan i s drugim spisom (ili s tvojom obitelji) ostaje ({k}). Prije se radi sigurnosna kopija. ¦ Nato se zapisi, ki služijo samo temu spisu, odstranijo iz baze ({n}). Zapis, povezan tudi z drugim spisom (ali s tvojo družino), ostane ({k}). Najprej se naredi varnostna kopija.
+Dossier {n} archivé dans « {file} » et retiré ({what}) ¦ Spis {n} arhiviran u „{file}” i uklonjen ({what}) ¦ Spis {n} arhiviran v »{file}« in odstranjen ({what})
+⤒ RÉIMPORTER ¦ ⤒ PONOVNO UVEZI ¦ ⤒ ZNOVA UVOZI
+⤒ Réimporter le dossier ¦ ⤒ Ponovno uvezi spis ¦ ⤒ Znova uvozi spis
+Dossier {n} ({name}{closed}), {what}. ¦ Spis {n} ({name}{closed}), {what}. ¦ Spis {n} ({name}{closed}), {what}.
+clos le {d} ¦ zatvoren {d} ¦ zaprt {d}
+{what} ressemblent à des fiches déjà dans cette base ({names}) : elles seront proposées à la comparaison, jamais fusionnées seules. ¦ {what} sliči zapisima koji su već u bazi ({names}): bit će ponuđeni za usporedbu, nikad spojeni sami. ¦ {what} je podobno zapisom, ki so že v bazi ({names}): ponujeni bodo za primerjavo, nikoli združeni sami.
+Dossier {n} réimporté ({what}) ¦ Spis {n} ponovno uvezen ({what}) ¦ Spis {n} znova uvožen ({what})
+Dossier {n} réimporté dans « {name} ». ¦ Spis {n} ponovno uvezen u „{name}”. ¦ Spis {n} znova uvožen v »{name}«.
+⚖️ Mes dossiers de succession ¦ ⚖️ Moji ostavinski spisi ¦ ⚖️ Moji zapuščinski spisi
+Aucun dossier de succession. ¦ Nema ostavinskog spisa. ¦ Ni zapuščinskega spisa.
+Étapes (7) ¦ Koraci (7) ¦ Koraki (7)
+{step} : {done} sur {total} ¦ {step}: {done} od {total} ¦ {step}: {done} od {total}
+Quels dossiers ¦ Koji spisi ¦ Kateri spisi
+Le filtre ¦ Filtar ¦ Filter
+Vue actuelle ¦ Trenutačni prikaz ¦ Trenutni pogled
+Alt + ↑ / ↓ : changer l’ordre (rangement à la main) ¦ Alt + ↑ / ↓: promijeni redoslijed (ručno) ¦ Alt + ↑ / ↓: spremeni vrstni red (ročno)
+Sans dossier ¦ Bez spisa ¦ Brez spisa
+Ranger les dossiers : ¦ Poredaj spise: ¦ Razvrsti spise:
+… cherche un nom pour voir les autres. ¦ … potraži ime da vidiš ostale. ¦ … poišči ime, da vidiš ostale.
+Ordre des dossiers changé ¦ Redoslijed spisa promijenjen ¦ Vrstni red spisov spremenjen
+Dans cette généalogie ¦ U ovom rodoslovlju ¦ V tem rodoslovju
+Le défunt et ses héritiers sont des fiches de ta famille. Simple, mais tout se mélange. ¦ Ostavitelj i njegovi nasljednici su zapisi tvoje obitelji. Jednostavno, ali sve se miješa. ¦ Zapustnik in njegovi dediči so zapisi tvoje družine. Preprosto, a vse se pomeša.
+Dans une généalogie à part pour tous mes dossiers ¦ U zasebnom rodoslovlju za sve moje spise ¦ V ločenem rodoslovju za vse moje spise
+Une base professionnelle « ⚖️ Dossiers de succession », créée dans 🌳 Mes généalogies. Tes dossiers y sont tous ensemble ; ta famille reste à part. ¦ Profesionalna baza „⚖️ Ostavinski spisi”, stvorena u 🌳 Moja rodoslovlja. Svi su tvoji spisi ondje zajedno; tvoja obitelj ostaje odvojena. ¦ Poklicna baza »⚖️ Zapuščinski spisi«, ustvarjena v 🌳 Moja rodoslovja. Vsi tvoji spisi so tam skupaj; tvoja družina ostane ločena.
+Une généalogie par dossier ¦ Jedno rodoslovlje po spisu ¦ Eno rodoslovje na spis
+Chaque dossier a sa propre base (« ⚖️ 2026-014 MAZAUD »). Le plus étanche ; à réserver aux grosses successions. ¦ Svaki spis ima vlastitu bazu („⚖️ 2026-014 MAZAUD”). Najodvojenije; za velike ostavine. ¦ Vsak spis ima svojo bazo (»⚖️ 2026-014 MAZAUD«). Najbolj ločeno; za velike zapuščine.
+défunt ¦ ostavitelj ¦ zapustnik
+intermédiaire ¦ posrednik ¦ posrednik
+Un par dossier ¦ Jedno po spisu ¦ Eno na spis
+Un filtre ¦ Filtar ¦ Filter
+Compteurs ¦ Brojači ¦ Števci
+à l’ouverture ¦ pri otvaranju ¦ ob odprtju
+calcul ¦ izračun ¦ izračun
+à la main ¦ ručno ¦ ročno
+créée pendant le filtre ¦ stvoreno tijekom filtra ¦ ustvarjeno med filtrom
+réimport ¦ ponovni uvoz ¦ ponovni uvoz
+homonyme ¦ istoimenik ¦ soimenjak
+déplacée ¦ premješteno ¦ premaknjeno
+grisées, sans nom ¦ sivo, bez imena ¦ sivo, brez imena
+cachées ¦ skriveno ¦ skrito
+retirées du fichier ¦ uklonjene iz datoteke ¦ odstranjeni iz datoteke
+gardées dans le fichier ¦ zadržane u datoteci ¦ obdržani v datoteki
+copier la fiche ¦ kopiraj zapis ¦ kopiraj zapis
+refuser le déplacement ¦ odbij premještanje ¦ zavrni premik
+replié ¦ sklopljeno ¦ zloženo
+Défunt et acte de décès ¦ Ostavitelj i smrtni list ¦ Zapustnik in mrliški list
+Adresses ¦ Adrese ¦ Naslovi
+Contrats signés ¦ Potpisani ugovori ¦ Podpisane pogodbe
+Déplacement refusé : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Premještanje odbijeno: ovi zapisi su i u tvojoj obitelji ili u drugom spisu: {names}. ¦ Premik zavrnjen: ti zapisi so tudi v tvoji družini ali v drugem spisu: {names}.
+Impossible d’enregistrer les réglages des dossiers. ¦ Nije moguće spremiti postavke spisa. ¦ Nastavitev spisov ni mogoče shraniti.
+Cette généalogie est encore vide. ¦ Ovo je rodoslovlje još prazno. ¦ To rodoslovje je še prazno.
+Rôle inconnu. ¦ Nepoznata uloga. ¦ Neznana vloga.
+Fiches inconnues. ¦ Nepoznati zapisi. ¦ Neznani zapisi.
+Choisis une autre généalogie. ¦ Odaberi drugo rodoslovlje. ¦ Izberi drugo rodoslovje.
+Impossible de créer le fichier d’archive. ¦ Nije moguće stvoriti arhivsku datoteku. ¦ Arhivske datoteke ni mogoče ustvariti.
+Fichier introuvable. ¦ Datoteka nije pronađena. ¦ Datoteke ni mogoče najti.
+Ce fichier n’est pas une archive de dossier de succession. ¦ Ova datoteka nije arhiva ostavinskog spisa. ¦ Ta datoteka ni arhiv zapuščinskega spisa.
+Le fichier n’a pas été reçu. ¦ Datoteka nije primljena. ¦ Datoteka ni bila prejeta.
+Le défunt reste dans son dossier. ¦ Ostavitelj ostaje u svom spisu. ¦ Zapustnik ostane v svojem spisu.
+🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Osobe ¦ 🧑‍🤝‍🧑 Osebe
+Dossiers de succession (usage successoral seulement) ¦ Ostavinski spisi (samo pri upotrebi za nasljedstva) ¦ Zapuščinski spisi (samo pri dedni uporabi)

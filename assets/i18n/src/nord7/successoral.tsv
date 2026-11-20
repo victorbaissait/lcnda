@@ -523,3 +523,185 @@ Dévolution ¦ Erfðaröð
 =dépouillement ¦ yfirferð|yfirferðir
 =dossier en cours ¦ opið mál|opin mál
 =dossier de succession ¦ dánarbúsmál|dánarbúsmál
+
+# ⚖️ Dossiers de succession : rangement, filtre ⚖️, rattachement, tableau de bord, garde-fous, widget, vue par dossier
+Dossiers de succession : filtre {what} (cliquer pour changer) ¦ Dánarbúsmál: sía {what} (smelltu til að breyta)
+Dossiers de succession : ne montrer qu’un ou plusieurs dossiers ¦ Dánarbúsmál: sýna aðeins eitt eða fleiri mál
+Plusieurs ¦ Nokkur
+⚖️ Ne montrer que ceux-ci ¦ ⚖️ Sýna aðeins þessi
+Aucun dossier dans cette généalogie. ¦ Ekkert mál í þessari ættfræði.
+Dans une autre généalogie ¦ Í annarri ættfræði
+Tous les dossiers… ¦ Öll mál…
+Seulement le dossier {n} ¦ Aðeins mál {n}
+Seulement {what} : {list} ¦ Aðeins {what}: {list}
+1 dossier · {state} ¦ 1 mál · {state}
+⚖️ Dossier {n} ¦ ⚖️ Mál {n}
+Ce dossier est dans une autre généalogie ¦ Þetta mál er í annarri ættfræði
+Ouvrir « {name} » ¦ Opna „{name}“
+Il est rangé dans « {name} ». Pour le montrer, l’app ouvre cette généalogie (tes réglages d’ici sont gardés) et y active le filtre ⚖️ {n}. ¦ Það er geymt í „{name}“. Til að sýna það opnar appið þá ættfræði (stillingarnar þínar hér haldast) og kveikir þar á síunni ⚖️ {n}.
+Tes nouveaux dossiers vont dans « {name} ». ¦ Nýju málin þín fara í „{name}“.
+Ouvrir le dossier ici quand même ¦ Opna málið hér samt
+Où ranger tes dossiers ? ¦ Hvar á að geyma málin þín?
+conseillé ici ¦ mælt með hér
+Nom de la nouvelle généalogie ¦ Heiti nýju ættfræðinnar
+⚖️ Dossier de succession ¦ ⚖️ Dánarbúsmál
+Ta généalogie ouverte a {n} : la ranger à part évite de mélanger les héritiers de tes clients avec ta propre famille. Ce n’est qu’un conseil. ¦ Opna ættfræðin þín hefur {n}: að geyma þau sér kemur í veg fyrir að erfingjar viðskiptavina blandist þinni eigin fjölskyldu. Þetta er aðeins ráð.
+Tu pourras changer d’avis : Réglages → Apparence → 🧭 Usage de l’app → « ⚖️ Où ranger les dossiers ». Les dossiers déjà ouverts ne bougent pas tout seuls. ¦ Þú getur skipt um skoðun: Stillingar → Útlit → 🧭 Notkun appsins → „⚖️ Hvar málin eru geymd“. Mál sem þegar eru opin flytjast ekki sjálf.
+Créer « ⚖️ Dossiers de succession » et ouvrir le dossier ¦ Búa til „⚖️ Dánarbúsmál“ og opna málið
+Créer la généalogie et ouvrir le dossier ¦ Búa til ættfræðina og opna málið
+Rangement des dossiers : {what} ¦ Hvert málin fara: {what}
+Généalogiste successoral : réglages des dossiers ¦ Erfðaættfræðingur: stillingar mála
+Où ranger les dossiers ¦ Hvar málin eru geymd
+Les nouveaux dossiers vont… ¦ Ný mál fara…
+Dans « {name} » ¦ Í „{name}“
+Les dossiers et où ils sont ¦ Málin og hvar þau eru
+⇄ Déplacer… ¦ ⇄ Færa…
+Aucun dossier pour l’instant. ¦ Ekkert mál enn.
+Réglages des dossiers ¦ Stillingar mála
+Arbre et graphiques filtrés par ⚖️ : les fiches hors dossier ¦ Tré og gröf síuð með ⚖️: færslur utan málsins
+Archive d’un dossier clos : adresses des héritiers vivants ¦ Safn lokaðs máls: heimilisföng lifandi erfingja
+Déplacer un dossier dont une fiche est aussi dans ta famille ¦ Að færa mál þar sem færsla er líka í fjölskyldu þinni
+« Sans dossier » dans la vue par dossier ¦ „Án máls“ í sýn eftir málum
+Avancement : un héritier qui refuse de signer ¦ Framvinda: erfingi sem neitar að undirrita
+compte comme « fait » (étape 5) ¦ telst „lokið“ (skref 5)
+Avancement : poids des 7 étapes ¦ Framvinda: vægi 7 skrefanna
+Réglage des dossiers enregistré : {what} ¦ Stilling mála vistuð: {what}
+poids des 7 étapes ¦ vægi 7 skrefanna
+⇄ DÉPLACER UN DOSSIER ¦ ⇄ FÆRA MÁL
+{n} → ? ¦ {n} → ?
+⇄ Déplacer ({what}) ¦ ⇄ Færa ({what})
+Vers ¦ Til
+＋ Une nouvelle généalogie pour ce dossier ¦ ＋ Ný ættfræði fyrir þetta mál
+Ce qui part : le dossier, son journal, ses pièces, ses courriers, ses échéances, et les fiches qui lui sont rattachées (défunt, héritiers, intermédiaires) avec leurs actes et médias. Une fiche aussi rattachée à un autre dossier ou à ta famille est copiée, pas déplacée. ¦ Það sem fer: málið, dagbók þess, skjöl, bréf, frestir og færslurnar tengdar því (látni, erfingjar, milliliðir) með gerningum og miðlum. Færsla sem er líka tengd öðru máli eða fjölskyldu þinni er afrituð, ekki færð.
+Déplacement refusé (réglage) : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Flutningi hafnað (stilling): þessar færslur eru líka í fjölskyldu þinni eða í öðru máli: {names}.
+Copiées (elles restent aussi ici) : {names}. ¦ Afritaðar (verða líka hér): {names}.
+Une copie de sauvegarde des deux généalogies est faite avant. Le journal du dossier note « Déplacé de … vers … ». ¦ Fyrst er tekið öryggisafrit af báðum ættfræðunum. Dagbók málsins skráir „Fært frá … til …“.
+Dossier {n} déplacé vers « {to} » ({what}) ¦ Mál {n} fært í „{to}“ ({what})
+⤓ Reprendre la fiche depuis Ma généalogie ¦ ⤓ Sækja færsluna úr Ættfræðinni minni
+copie de la fiche, jusqu’aux grands-parents et tous leurs descendants connus, sans photos ¦ afrit af færslunni, upp að öfum og ömmum og öllum þekktum afkomendum þeirra, án mynda
+⤓ REPRENDRE UNE FICHE ¦ ⤓ SÆKJA FÆRSLU
+Reprendre la fiche du défunt ¦ Sækja færslu hins látna
+Chercher la fiche ¦ Leita að færslunni
+Prénom, nom… ¦ Fornafn, eftirnafn…
+Copiées : la fiche, ses parents et grands-parents, tous leurs descendants connus et leurs conjoints, avec les dates et les lieux ; sans photos. Rien n’est changé dans l’autre généalogie. ¦ Afritað: færslan, foreldrar og afar og ömmur, allir þekktir afkomendur og makar þeirra, með dagsetningum og stöðum; án mynda. Engu er breytt í hinni ættfræðinni.
+{what} reprises de l’autre généalogie. ¦ {what} sóttar úr hinni ættfræðinni.
+Dossiers… ¦ Mál…
+{name} dans quels dossiers ? ¦ {name} í hvaða málum?
+(calculé) ¦ (reiknað)
+Rôles : défunt · héritier · intermédiaire · témoin · à vérifier. « Héritier » mis par le calcul s’affiche « (calculé) ». ¦ Hlutverk: látni · erfingi · milliliður · vottur · til athugunar. „Erfingi“ sem útreikningurinn setur sýnir „(reiknað)“.
+Dossiers de {name} enregistrés ¦ Mál {name} vistuð
+Les dossiers de cette fiche ¦ Mál þessarar færslu
+hors du dossier {n} ¦ utan máls {n}
+＋ Rattacher ¦ ＋ Tengja
+Fiche rattachée au dossier {n} ¦ Færsla tengd máli {n}
+Rattachée au dossier {n} : {who} ¦ Tengd máli {n}: {who}
+Lecture des fiches du dossier… ¦ Les færslur málsins…
+Les fiches du dossier ¦ Færslur málsins
+Rattacher ¦ Tengja
+Retirées à la main ({n}) : jamais remises toutes seules ¦ Fjarlægðar handvirkt ({n}): aldrei settar sjálfkrafa aftur
+Fiche à comparer : « {name}{year} » ressemble à une fiche déjà dans cette base. Jamais fusionnée toute seule. ¦ Færsla til samanburðar: „{name}{year}“ líkist færslu sem er þegar í gagnagrunninum. Aldrei sameinuð sjálfkrafa.
+née {y} ¦ f. {y}
+Homonyme possible : « {name}{year} » existe aussi dans le dossier {n}. Jamais relié tout seul. ¦ Hugsanlegur nafni: „{name}{year}“ er líka í máli {n}. Aldrei tengt sjálfkrafa.
+⇆ Comparer ¦ ⇆ Bera saman
+C’est la même personne : rattacher aussi ¦ Sama manneskjan: tengja líka
+Pas la même ¦ Ekki sú sama
+Fiche retirée du dossier {n} ¦ Færsla fjarlægð úr máli {n}
+Fiche remise dans le dossier {n} ¦ Færsla sett aftur í mál {n}
+Homonyme rattaché aussi au dossier {n} (à vérifier) ¦ Nafni líka tengdur máli {n} (til athugunar)
+Noté : ce n’est pas la même personne ¦ Skráð: ekki sama manneskjan
+Rôle : {r} ¦ Hlutverk: {r}
+⚠️ illisible : {names} ¦ ⚠️ ólæsilegt: {names}
+Chercher… (n°, défunt, notaire) ¦ Leita… (nr., látni, lögbókandi)
+Toutes les généalogies ¦ Allar ættfræðir
+Tous les notaires ¦ Allir lögbókendur
+Prochaine échéance (retards d’abord) ¦ Næsti frestur (seinir fyrst)
+Avancement le plus bas ¦ Minnsta framvinda
+{d} · passée ¦ {d} · liðinn
+Trouvés : {n} ¦ Fundnir: {n}
+À trouver : {n} ¦ Ófundnir: {n}
+{h} h {m} ¦ {h} klst. {m}
+Cocher le dossier {n} ¦ Merkja mál {n}
+Échéance : {d} ¦ Frestur: {d}
+Héritiers ¦ Erfingjar
+Avancement ¦ Framvinda
+Cochés : {n} ¦ Merkt: {n}
+Les dossiers cochés sont dans des généalogies différentes : choisis-en dans une seule. ¦ Merktu málin eru í ólíkum ættfræðum: veldu aðeins úr einni.
+Dossiers exportés (CSV) ¦ Mál flutt út (CSV)
+⤒ Réimporter un dossier archivé… ¦ ⤒ Flytja aftur inn safnað mál…
+⚠️ FUSION ¦ ⚠️ SAMEINING
+Ces deux fiches sont dans des dossiers différents ¦ Þessar tvær færslur eru í ólíkum málum
+Fusionner quand même ¦ Sameina samt
+{a} et {b}. Fusionner relie les deux successions et change les parts des deux dossiers. Vérifie avec des actes (naissance, parents) avant. ¦ {a} og {b}. Sameining tengir dánarbúin tvö og breytir hlutum í báðum málum. Athugaðu fyrst með skjölum (fæðing, foreldrar).
+⇆ Comparer d’abord ¦ ⇆ Bera saman fyrst
+Si on fusionne : noté dans le journal des deux dossiers, et les deux sont recalculés. ¦ Ef sameinað: skráð í dagbók beggja mála og bæði reiknuð upp á nýtt.
+🗄 Archiver dans un fichier et retirer… ¦ 🗄 Safna í skrá og fjarlægja…
+🗄 ARCHIVER LE DOSSIER {n} ¦ 🗄 SAFNA MÁLI {n}
+Dans un fichier, puis retirer de la base ¦ Í skrá, síðan fjarlægja úr gagnagrunninum
+⤓ Enregistrer le fichier puis retirer ¦ ⤓ Vista skrána og fjarlægja svo
+Le fichier {file} contient : le dossier, le journal, les pièces et leurs images, les courriers, l’arbre de dévolution (SVG), le tableau pour le notaire et les fiches rattachées ({n}). ¦ Skráin {file} inniheldur: málið, dagbókina, skjölin og myndir þeirra, bréfin, erfðatréð (SVG), töfluna fyrir lögbókandann og tengdu færslurnar ({n}).
+Garder les adresses des vivants dans le fichier ¦ Halda heimilisföngum lifandi í skránni
+utile si le notaire rouvre la succession ¦ gagnlegt ef lögbókandinn opnar dánarbúið aftur
+Retirer les adresses ¦ Fjarlægja heimilisföngin
+comme l’archivage actuel ¦ eins og núverandi geymsla
+Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base ({n}). Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste ({k}). Une sauvegarde est faite avant. ¦ Síðan eru færslur sem tilheyra aðeins þessu máli fjarlægðar úr gagnagrunninum ({n}). Færsla sem er líka tengd öðru máli (eða fjölskyldu þinni) verður eftir ({k}). Fyrst er tekið öryggisafrit.
+Dossier {n} archivé dans « {file} » et retiré ({what}) ¦ Mál {n} safnað í „{file}“ og fjarlægt ({what})
+⤒ RÉIMPORTER ¦ ⤒ FLYTJA AFTUR INN
+⤒ Réimporter le dossier ¦ ⤒ Flytja málið aftur inn
+Dossier {n} ({name}{closed}), {what}. ¦ Mál {n} ({name}{closed}), {what}.
+clos le {d} ¦ lokað {d}
+{what} ressemblent à des fiches déjà dans cette base ({names}) : elles seront proposées à la comparaison, jamais fusionnées seules. ¦ {what} líkjast færslum sem eru þegar í gagnagrunninum ({names}): þær verða boðnar til samanburðar, aldrei sameinaðar sjálfkrafa.
+Dossier {n} réimporté ({what}) ¦ Mál {n} flutt aftur inn ({what})
+Dossier {n} réimporté dans « {name} ». ¦ Mál {n} flutt aftur inn í „{name}“.
+⚖️ Mes dossiers de succession ¦ ⚖️ Dánarbúsmálin mín
+Aucun dossier de succession. ¦ Ekkert dánarbúsmál.
+Étapes (7) ¦ Skref (7)
+{step} : {done} sur {total} ¦ {step}: {done} af {total}
+Quels dossiers ¦ Hvaða mál
+Le filtre ¦ Sían
+Vue actuelle ¦ Núverandi sýn
+Alt + ↑ / ↓ : changer l’ordre (rangement à la main) ¦ Alt + ↑ / ↓: breyta röðinni (handvirkt)
+Sans dossier ¦ Án máls
+Ranger les dossiers : ¦ Raða málum:
+… cherche un nom pour voir les autres. ¦ … leitaðu að nafni til að sjá hin.
+Ordre des dossiers changé ¦ Röð mála breytt
+Dans cette généalogie ¦ Í þessari ættfræði
+Le défunt et ses héritiers sont des fiches de ta famille. Simple, mais tout se mélange. ¦ Hinn látni og erfingjar hans eru færslur í fjölskyldu þinni. Einfalt, en allt blandast.
+Dans une généalogie à part pour tous mes dossiers ¦ Í sérstakri ættfræði fyrir öll málin mín
+Une base professionnelle « ⚖️ Dossiers de succession », créée dans 🌳 Mes généalogies. Tes dossiers y sont tous ensemble ; ta famille reste à part. ¦ Fagleg gagnagrunnur „⚖️ Dánarbúsmál“, búinn til í 🌳 Ættfræðirnar mínar. Öll málin þín eru þar saman; fjölskylda þín er sér.
+Une généalogie par dossier ¦ Ein ættfræði fyrir hvert mál
+Chaque dossier a sa propre base (« ⚖️ 2026-014 MAZAUD »). Le plus étanche ; à réserver aux grosses successions. ¦ Hvert mál hefur eigin gagnagrunn („⚖️ 2026-014 MAZAUD“). Þéttast; fyrir stór dánarbú.
+défunt ¦ látni
+intermédiaire ¦ milliliður
+Un par dossier ¦ Eitt fyrir hvert mál
+Un filtre ¦ Sía
+Compteurs ¦ Teljarar
+à l’ouverture ¦ við opnun
+calcul ¦ útreikningur
+à la main ¦ handvirkt
+créée pendant le filtre ¦ búin til meðan sían var virk
+réimport ¦ endurinnflutningur
+homonyme ¦ nafni
+déplacée ¦ færð
+grisées, sans nom ¦ gráar, nafnlausar
+cachées ¦ faldar
+retirées du fichier ¦ fjarlægð úr skránni
+gardées dans le fichier ¦ haldið í skránni
+copier la fiche ¦ afrita færsluna
+refuser le déplacement ¦ hafna flutningnum
+replié ¦ lokað
+Défunt et acte de décès ¦ Látni og dánarvottorð
+Adresses ¦ Heimilisföng
+Contrats signés ¦ Undirritaðir samningar
+Déplacement refusé : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Flutningi hafnað: þessar færslur eru líka í fjölskyldu þinni eða í öðru máli: {names}.
+Impossible d’enregistrer les réglages des dossiers. ¦ Ekki tókst að vista stillingar mála.
+Cette généalogie est encore vide. ¦ Þessi ættfræði er enn tóm.
+Rôle inconnu. ¦ Óþekkt hlutverk.
+Fiches inconnues. ¦ Óþekktar færslur.
+Choisis une autre généalogie. ¦ Veldu aðra ættfræði.
+Impossible de créer le fichier d’archive. ¦ Ekki tókst að búa til safnskrána.
+Fichier introuvable. ¦ Skrá fannst ekki.
+Ce fichier n’est pas une archive de dossier de succession. ¦ Þessi skrá er ekki safn dánarbúsmáls.
+Le fichier n’a pas été reçu. ¦ Skráin barst ekki.
+Le défunt reste dans son dossier. ¦ Hinn látni verður áfram í sínu máli.
+🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Fólk
+Dossiers de succession (usage successoral seulement) ¦ Dánarbúsmál (aðeins við notkun sem erfðaættfræðingur)

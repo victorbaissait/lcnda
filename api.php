@@ -438,6 +438,10 @@ try {
     if ($isWrite && !in_array($action, $uploadActions, true)) {
         handle_write($pdo, $action, $payload);
     }
+    // ⚖️ filtre des dossiers de succession (bouton ⚖️) : Personnes, recherche, listes et carte ne lisent que les fiches rattachées
+    if (!$isWrite && isset($_GET['succ_cases']) && function_exists('succ_shadow_filter') && (in_array($action, ['people', 'quick_search', 'map'], true) || ($action === 'list' && in_array((string) ($_GET['type'] ?? 'persons'), ['persons', 'events', 'places', 'media', 'sources'], true)))) {
+        succ_shadow_filter($pdo, succ_filter_cases());
+    }
 
     match ($action) {
         'bootstrap' => bootstrap_data($pdo),
@@ -2755,6 +2759,7 @@ function tree_data(PDO $pdo, int $id): never
         // en option : les lieux de naissance et de décès (arbre décoratif)
         if(($_GET['places']??'')==='1'&&$people){$pm=implode(',',array_fill(0,count($people),'?'));$ps=$pdo->prepare("SELECT e.person_id,t.gedcom_tag,pl.name FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN places pl ON pl.id=e.place_id WHERE e.person_id IN ($pm) AND t.gedcom_tag IN ('BIRT','DEAT','CHR','BAPM','BURI') ORDER BY e.id");$ps->execute(array_keys($people));foreach($ps->fetchAll() as $r){$pid=(int)$r['person_id'];$k=in_array($r['gedcom_tag'],['BIRT','CHR','BAPM'],true)?'birth_place':'death_place';if(isset($people[$pid])&&empty($people[$pid][$k]))$people[$pid][$k]=(string)$r['name'];}}
     }
+    if(function_exists('succ_tree_mask'))succ_tree_mask($pdo,$people); // ⚖️ filtre des dossiers : les fiches hors dossier, sans nom (grisées ou cachées)
     $seen=[];$tree=tree_node_from_maps($id,$depth,$people,$relations,$seen);
     if($mode==='descendants')attach_tree_partners($tree,$partners,$people);
     json_response(['mode'=>$mode,'depth'=>$depth,'nodeCount'=>count($seen),'tree'=>$tree]);
@@ -11293,6 +11298,7 @@ function merge_people(PDO $pdo,array $data): array
     }
     $pdo->prepare("INSERT INTO name_variants(person_id,type,first_name,middle_name,last_name,source_note,position) VALUES(?,'merged',?,?,?,'Nom conservé avant fusion de la fiche #{$source}',(SELECT COALESCE(max(position),0)+1 FROM name_variants WHERE person_id=?))")->execute([$target,$b['first_name']??'',$b['middle_name']??'',$b['last_name']??'',$target]);
     merge_person_references($pdo,$target,$source);
+    if(function_exists('succ_after_merge'))succ_after_merge($pdo,$target,$source); // ⚖️ les dossiers de succession des deux fiches (rattachements, journal des deux)
     if(function_exists('periodical_links_person'))periodical_links_person($pdo,$source,$target);
     if(function_exists('diagram_links_person'))diagram_links_person($pdo,$source,$target);
     if(function_exists('dna_links_person'))dna_links_person($pdo,$source,$target);

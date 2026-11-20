@@ -674,5 +674,83 @@
     const ABROAD_ACTS = {fr: {N: 'naissance', M: 'mariage', D: 'décès'}, en: {N: 'birth', M: 'marriage', D: 'death'}, es: {N: 'nacimiento', M: 'matrimonio', D: 'defunción'}, it: {N: 'nascita', M: 'matrimonio', D: 'morte'}, de: {N: 'Geburt', M: 'Heirat', D: 'Sterbe'}, pt: {N: 'nascimento', M: 'casamento', D: 'óbito'}};
     const abroadLetter = (lang, v) => fill(ABROAD_LETTERS[lang] || ABROAD_LETTERS.fr, {...v, act: (ABROAD_ACTS[lang] || ABROAD_ACTS.fr)[v.actKind || 'N']});
 
-    return {LAW, LAW_ARTICLES, lawUrl, lawVerified, lawCited, lawLinks, F, add, sub, mul, div, str, parse, pct, sumAll, cmpDate, kinLabel, DEGREES, compute, relation, pieces, checklist, snapshot, diffLines, csvCell, journalCsv, fees, ABSENCE, ABROAD, abroadLetter, ABROAD_LETTERS, name, KIN};
+
+    /* ═════ ⚖️ Dossiers : avancement, fiches rattachées, ordre des dossiers (docs/design/successoral-dossiers.html, 3a, 6b, 7) ═════ */
+    const STEP_KEYS = ['deceased', 'tree', 'heirs', 'addresses', 'contracts', 'pieces', 'notary'];
+    const STEP_LABELS = ['Défunt et acte de décès', 'Arbre de dévolution', 'Héritiers trouvés', 'Adresses', 'Contrats signés', 'Pièces', 'Remis au notaire'];
+    const WEIGHTS = [10, 15, 20, 10, 15, 20, 10];
+    const TO_FIND = new Set(['unknown', 'branch', 'parents', 'kids', 'lit', 'nodesc', 'adoption', 'marriage']);
+    /** le % d'une liste de fractions (0 à 1) pondérées ; arrondi à l'entier */
+    function progressPct(fracs, weights = WEIGHTS) {
+        const w = (Array.isArray(weights) && weights.length === 7 ? weights : WEIGHTS).map(x => Math.max(0, Number(x) || 0));
+        const tot = w.reduce((a, b) => a + b, 0) || 1;
+        return Math.round(fracs.reduce((s, f, i) => s + w[i] * Math.max(0, Math.min(1, Number(f) || 0)), 0) / tot * 100);
+    }
+    /**
+     * L'avancement d'un dossier : 7 étapes pondérées, chacune faite en partie (0 à 1). Un dossier clos vaut 100 %.
+     * D : le dossier (state, deceased_id, hypothesis_note, addresses, courriers) ; R : compute() ; P : pieces().
+     * opts.weights : les 7 poids (10, 15, 20, 10, 15, 20, 10) ; opts.refuseDone : un héritier qui refuse de signer compte comme fait.
+     */
+    function progress(D, R, P, opts = {}) {
+        const weights = Array.isArray(opts.weights) && opts.weights.length === 7 ? opts.weights : WEIGHTS;
+        const refuseDone = opts.refuseDone !== false;
+        const closed = ['clos', 'archive'].includes(D?.state);
+        const rows = R && !R.error ? R.rows : [];
+        const heirs = rows.filter(r => ['heir', 'parent', 'spouse'].includes(r.role) && r.share !== '0');
+        const known = heirs.filter(r => !r.unknown);
+        const living = known.filter(r => ['surv', 'abs'].includes(r.timing));
+        const addr = D?.addresses || {};
+        const withAddr = living.filter(r => addr[r.id] || addr[String(r.id)]);
+        const cs = D?.courriers || [];
+        const signed = living.filter(r => cs.some(c => Number(c.person_id) === r.id && c.kind !== 'acte' && (c.signe_le || (refuseDone && c.reponse === 'no'))));
+        const deathHave = P ? (P.list || []).some(i => i.key === 'D:' + D.deceased_id && i.state === 'have') : false;
+        const search = (R?.search || []).filter(s => TO_FIND.has(s.kind));
+        const groups = P ? (P.groups || []).filter(g => g.key !== 'common' && !g.exclude).length : 0;
+        const branches = Math.max(groups + (R?.search || []).filter(s => s.kind === 'branch').length, search.length, 1);
+        const note = String(D?.hypothesis_note || '').trim();
+        const treeFrac = !R || R.error ? 0 : note ? 1 : (R.totalOk && !search.length ? 1 : Math.max(0, 1 - search.length / branches));
+        const pc = P?.counts || {have: 0, total: 0};
+        const steps = [
+            {frac: (D?.deceased_id ? 0.5 : 0) + (deathHave ? 0.5 : 0), done: (D?.deceased_id ? 1 : 0) + (deathHave ? 1 : 0), total: 2},
+            {frac: treeFrac, done: Math.max(0, branches - search.length), total: branches},
+            {frac: heirs.length ? known.length / heirs.length : 0, done: known.length, total: heirs.length},
+            {frac: living.length ? withAddr.length / living.length : 0, done: withAddr.length, total: living.length},
+            {frac: living.length ? signed.length / living.length : 0, done: signed.length, total: living.length},
+            {frac: pc.total ? pc.have / pc.total : 0, done: pc.have || 0, total: pc.total || 0},
+            {frac: ['remis', 'clos', 'archive'].includes(D?.state) ? 1 : 0, done: ['remis', 'clos', 'archive'].includes(D?.state) ? 1 : 0, total: 1},
+        ].map((s, i) => ({key: STEP_KEYS[i], w: Number(weights[i]) || 0, ...s, frac: closed ? 1 : Math.round(Math.max(0, Math.min(1, s.frac)) * 1000) / 1000}));
+        return {pct: closed ? 100 : progressPct(steps.map(s => s.frac), weights), steps, pieces: {have: pc.have || 0, total: pc.total || 0}, heirs: {found: known.length, unknown: heirs.length - known.length}};
+    }
+    /** ce que le calcul parcourt : les héritiers (avec une part) et les intermédiaires (souches, écartés, ancêtres jusqu'à l'ancêtre commun) */
+    function members(R) {
+        if (!R || R.error || !R._ctx) return {heirs: [], inter: []};
+        const C = R._ctx, dead = C.dead;
+        const heirs = new Set(R.rows.filter(r => ['heir', 'parent', 'spouse'].includes(r.role) && r.share !== '0').map(r => r.id));
+        const inter = new Set(R.rows.filter(r => !heirs.has(r.id)).map(r => r.id));
+        const climb = (from, to, depth) => { if (from === to) return [from]; if (depth <= 0) return null; for (const p of C.legalParents(from)) { const r = climb(p, to, depth - 1); if (r) return [from, ...r]; } return null; };
+        for (const id of [...heirs, ...inter]) {
+            const rel = relation(C, id); if (!rel || rel.anc == null) continue;
+            (climb(dead, rel.anc, rel.a) || []).forEach(x => inter.add(x));
+            (climb(id, rel.anc, rel.b) || []).forEach(x => inter.add(x));
+        }
+        heirs.forEach(x => inter.delete(x)); inter.delete(dead);
+        const real = x => !!C.G.P[x];
+        return {heirs: [...heirs].filter(real), inter: [...inter].filter(real)};
+    }
+    /** l'ordre des dossiers de la vue « ⚖️ Par dossier » : A → Z (n°, puis nom du défunt) ou à la main (les nouveaux à la fin) */
+    function orderCases(cases, view = {}) {
+        const az = [...cases].sort((a, b) => String(a.number || '').localeCompare(String(b.number || ''), 'fr', {numeric: true}) || String(a.deceased || '').localeCompare(String(b.deceased || ''), 'fr') || a.id - b.id);
+        if (view.order !== 'hand') return az;
+        const hand = (Array.isArray(view.hand) ? view.hand : []).map(Number);
+        const pos = id => { const i = hand.indexOf(Number(id)); return i < 0 ? Infinity : i; };
+        return az.map((c, i) => ({c, i})).sort((x, y) => (pos(x.c.id) - pos(y.c.id)) || (x.i - y.i)).map(x => x.c);
+    }
+    /** déplacer un dossier dans l'ordre à la main (Alt + ↑ / ↓, ⠿) : la nouvelle liste des n° de dossiers */
+    function moveCase(orderIds, id, delta) {
+        const list = orderIds.map(Number), i = list.indexOf(Number(id)); if (i < 0) return list;
+        const j = Math.max(0, Math.min(list.length - 1, i + delta)); if (i === j) return list;
+        list.splice(j, 0, list.splice(i, 1)[0]); return list;
+    }
+
+    return {STEP_KEYS, STEP_LABELS, WEIGHTS, progress, progressPct, members, orderCases, moveCase, LAW, LAW_ARTICLES, lawUrl, lawVerified, lawCited, lawLinks, F, add, sub, mul, div, str, parse, pct, sumAll, cmpDate, kinLabel, DEGREES, compute, relation, pieces, checklist, snapshot, diffLines, csvCell, journalCsv, fees, ABSENCE, ABROAD, abroadLetter, ABROAD_LETTERS, name, KIN};
 });

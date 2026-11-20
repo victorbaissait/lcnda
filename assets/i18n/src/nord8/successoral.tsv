@@ -523,3 +523,185 @@ Dévolution ¦ Miras sırası
 =dépouillement ¦ tarama|tarama
 =dossier en cours ¦ süren dosya|süren dosya
 =dossier de succession ¦ miras dosyası|miras dosyası
+
+# ⚖️ Dossiers de succession : rangement, filtre ⚖️, rattachement, tableau de bord, garde-fous, widget, vue par dossier
+Dossiers de succession : filtre {what} (cliquer pour changer) ¦ Miras dosyaları: filtre {what} (değiştirmek için tıkla)
+Dossiers de succession : ne montrer qu’un ou plusieurs dossiers ¦ Miras dosyaları: yalnızca bir veya birkaç dosyayı göster
+Plusieurs ¦ Birkaç
+⚖️ Ne montrer que ceux-ci ¦ ⚖️ Yalnızca bunları göster
+Aucun dossier dans cette généalogie. ¦ Bu soy ağacında dosya yok.
+Dans une autre généalogie ¦ Başka bir soy ağacında
+Tous les dossiers… ¦ Tüm dosyalar…
+Seulement le dossier {n} ¦ Yalnızca {n} dosyası
+Seulement {what} : {list} ¦ Yalnızca {what}: {list}
+1 dossier · {state} ¦ 1 dosya · {state}
+⚖️ Dossier {n} ¦ ⚖️ {n} dosyası
+Ce dossier est dans une autre généalogie ¦ Bu dosya başka bir soy ağacında
+Ouvrir « {name} » ¦ “{name}” aç
+Il est rangé dans « {name} ». Pour le montrer, l’app ouvre cette généalogie (tes réglages d’ici sont gardés) et y active le filtre ⚖️ {n}. ¦ “{name}” içinde duruyor. Göstermek için uygulama o soy ağacını açar (buradaki ayarların korunur) ve orada ⚖️ {n} filtresini açar.
+Tes nouveaux dossiers vont dans « {name} ». ¦ Yeni dosyaların “{name}” içine gider.
+Ouvrir le dossier ici quand même ¦ Dosyayı yine de burada aç
+Où ranger tes dossiers ? ¦ Dosyaların nerede dursun?
+conseillé ici ¦ burada önerilir
+Nom de la nouvelle généalogie ¦ Yeni soy ağacının adı
+⚖️ Dossier de succession ¦ ⚖️ Miras dosyası
+Ta généalogie ouverte a {n} : la ranger à part évite de mélanger les héritiers de tes clients avec ta propre famille. Ce n’est qu’un conseil. ¦ Açık soy ağacında {n} var: ayrı tutmak müşterilerinin mirasçılarını kendi ailenle karıştırmanı önler. Bu yalnızca bir öneri.
+Tu pourras changer d’avis : Réglages → Apparence → 🧭 Usage de l’app → « ⚖️ Où ranger les dossiers ». Les dossiers déjà ouverts ne bougent pas tout seuls. ¦ Fikrini değiştirebilirsin: Ayarlar → Görünüm → 🧭 Uygulamanın kullanımı → “⚖️ Dosyalar nerede durur”. Zaten açılmış dosyalar kendiliğinden taşınmaz.
+Créer « ⚖️ Dossiers de succession » et ouvrir le dossier ¦ “⚖️ Miras dosyaları” oluştur ve dosyayı aç
+Créer la généalogie et ouvrir le dossier ¦ Soy ağacını oluştur ve dosyayı aç
+Rangement des dossiers : {what} ¦ Dosyaların yeri: {what}
+Généalogiste successoral : réglages des dossiers ¦ Miras soy araştırmacısı: dosya ayarları
+Où ranger les dossiers ¦ Dosyalar nerede durur
+Les nouveaux dossiers vont… ¦ Yeni dosyalar gider…
+Dans « {name} » ¦ “{name}” içine
+Les dossiers et où ils sont ¦ Dosyalar ve nerede oldukları
+⇄ Déplacer… ¦ ⇄ Taşı…
+Aucun dossier pour l’instant. ¦ Henüz dosya yok.
+Réglages des dossiers ¦ Dosya ayarları
+Arbre et graphiques filtrés par ⚖️ : les fiches hors dossier ¦ ⚖️ ile süzülen ağaç ve grafikler: dosya dışındaki kayıtlar
+Archive d’un dossier clos : adresses des héritiers vivants ¦ Kapatılmış dosyanın arşivi: yaşayan mirasçıların adresleri
+Déplacer un dossier dont une fiche est aussi dans ta famille ¦ Bir kaydı ailende de olan dosyayı taşımak
+« Sans dossier » dans la vue par dossier ¦ Dosyaya göre görünümde “Dosyasız”
+Avancement : un héritier qui refuse de signer ¦ İlerleme: imzalamayı reddeden mirasçı
+compte comme « fait » (étape 5) ¦ “yapıldı” sayılır (adım 5)
+Avancement : poids des 7 étapes ¦ İlerleme: 7 adımın ağırlığı
+Réglage des dossiers enregistré : {what} ¦ Dosya ayarı kaydedildi: {what}
+poids des 7 étapes ¦ 7 adımın ağırlığı
+⇄ DÉPLACER UN DOSSIER ¦ ⇄ DOSYA TAŞI
+{n} → ? ¦ {n} → ?
+⇄ Déplacer ({what}) ¦ ⇄ Taşı ({what})
+Vers ¦ Hedef
+＋ Une nouvelle généalogie pour ce dossier ¦ ＋ Bu dosya için yeni bir soy ağacı
+Ce qui part : le dossier, son journal, ses pièces, ses courriers, ses échéances, et les fiches qui lui sont rattachées (défunt, héritiers, intermédiaires) avec leurs actes et médias. Une fiche aussi rattachée à un autre dossier ou à ta famille est copiée, pas déplacée. ¦ Taşınanlar: dosya, günlüğü, belgeleri, mektupları, süreleri ve ona bağlı kayıtlar (ölen kişi, mirasçılar, aracılar) kayıtları ve medyalarıyla. Başka bir dosyaya veya ailene de bağlı bir kayıt taşınmaz, kopyalanır.
+Déplacement refusé (réglage) : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Taşıma reddedildi (ayar): bu kayıtlar ailende veya başka bir dosyada da var: {names}.
+Copiées (elles restent aussi ici) : {names}. ¦ Kopyalandı (burada da kalırlar): {names}.
+Une copie de sauvegarde des deux généalogies est faite avant. Le journal du dossier note « Déplacé de … vers … ». ¦ Önce iki soy ağacının yedeği alınır. Dosyanın günlüğü “… konumundan … konumuna taşındı” diye not eder.
+Dossier {n} déplacé vers « {to} » ({what}) ¦ {n} dosyası “{to}” içine taşındı ({what})
+⤓ Reprendre la fiche depuis Ma généalogie ¦ ⤓ Kaydı Soy ağacımdan al
+copie de la fiche, jusqu’aux grands-parents et tous leurs descendants connus, sans photos ¦ kaydın kopyası, büyükanne ve büyükbabalara kadar ve bilinen tüm torunlarıyla, fotoğrafsız
+⤓ REPRENDRE UNE FICHE ¦ ⤓ KAYIT AL
+Reprendre la fiche du défunt ¦ Ölen kişinin kaydını al
+Chercher la fiche ¦ Kaydı ara
+Prénom, nom… ¦ Ad, soyadı…
+Copiées : la fiche, ses parents et grands-parents, tous leurs descendants connus et leurs conjoints, avec les dates et les lieux ; sans photos. Rien n’est changé dans l’autre généalogie. ¦ Kopyalanır: kayıt, anne-babası ve büyükanne-büyükbabaları, bilinen tüm torunları ve eşleri, tarih ve yerleriyle; fotoğrafsız. Diğer soy ağacında hiçbir şey değişmez.
+{what} reprises de l’autre généalogie. ¦ {what} diğer soy ağacından alındı.
+Dossiers… ¦ Dosyalar…
+{name} dans quels dossiers ? ¦ {name} hangi dosyalarda?
+(calculé) ¦ (hesaplandı)
+Rôles : défunt · héritier · intermédiaire · témoin · à vérifier. « Héritier » mis par le calcul s’affiche « (calculé) ». ¦ Roller: ölen kişi · mirasçı · aracı · tanık · kontrol edilecek. Hesaplamanın koyduğu “mirasçı” “(hesaplandı)” olarak görünür.
+Dossiers de {name} enregistrés ¦ {name} için dosyalar kaydedildi
+Les dossiers de cette fiche ¦ Bu kaydın dosyaları
+hors du dossier {n} ¦ {n} dosyası dışında
+＋ Rattacher ¦ ＋ Bağla
+Fiche rattachée au dossier {n} ¦ Kayıt {n} dosyasına bağlandı
+Rattachée au dossier {n} : {who} ¦ {n} dosyasına bağlandı: {who}
+Lecture des fiches du dossier… ¦ Dosyanın kayıtları okunuyor…
+Les fiches du dossier ¦ Dosyanın kayıtları
+Rattacher ¦ Bağla
+Retirées à la main ({n}) : jamais remises toutes seules ¦ Elle çıkarılanlar ({n}): asla kendiliğinden geri konmaz
+Fiche à comparer : « {name}{year} » ressemble à une fiche déjà dans cette base. Jamais fusionnée toute seule. ¦ Karşılaştırılacak kayıt: “{name}{year}” bu veritabanında zaten olan bir kayda benziyor. Asla kendiliğinden birleştirilmez.
+née {y} ¦ d. {y}
+Homonyme possible : « {name}{year} » existe aussi dans le dossier {n}. Jamais relié tout seul. ¦ Olası adaş: “{name}{year}” {n} dosyasında da var. Asla kendiliğinden bağlanmaz.
+⇆ Comparer ¦ ⇆ Karşılaştır
+C’est la même personne : rattacher aussi ¦ Aynı kişi: bunu da bağla
+Pas la même ¦ Aynı değil
+Fiche retirée du dossier {n} ¦ Kayıt {n} dosyasından çıkarıldı
+Fiche remise dans le dossier {n} ¦ Kayıt {n} dosyasına geri kondu
+Homonyme rattaché aussi au dossier {n} (à vérifier) ¦ Adaş {n} dosyasına da bağlandı (kontrol edilecek)
+Noté : ce n’est pas la même personne ¦ Not edildi: aynı kişi değil
+Rôle : {r} ¦ Rol: {r}
+⚠️ illisible : {names} ¦ ⚠️ okunamıyor: {names}
+Chercher… (n°, défunt, notaire) ¦ Ara… (no, ölen kişi, noter)
+Toutes les généalogies ¦ Tüm soy ağaçları
+Tous les notaires ¦ Tüm noterler
+Prochaine échéance (retards d’abord) ¦ Sonraki süre (gecikenler önce)
+Avancement le plus bas ¦ En düşük ilerleme
+{d} · passée ¦ {d} · geçti
+Trouvés : {n} ¦ Bulunan: {n}
+À trouver : {n} ¦ Bulunacak: {n}
+{h} h {m} ¦ {h} sa {m}
+Cocher le dossier {n} ¦ {n} dosyasını işaretle
+Échéance : {d} ¦ Süre: {d}
+Héritiers ¦ Mirasçılar
+Avancement ¦ İlerleme
+Cochés : {n} ¦ İşaretli: {n}
+Les dossiers cochés sont dans des généalogies différentes : choisis-en dans une seule. ¦ İşaretli dosyalar farklı soy ağaçlarında: yalnızca birinden seç.
+Dossiers exportés (CSV) ¦ Dosyalar dışa aktarıldı (CSV)
+⤒ Réimporter un dossier archivé… ¦ ⤒ Arşivlenmiş bir dosyayı yeniden içe aktar…
+⚠️ FUSION ¦ ⚠️ BİRLEŞTİRME
+Ces deux fiches sont dans des dossiers différents ¦ Bu iki kayıt farklı dosyalarda
+Fusionner quand même ¦ Yine de birleştir
+{a} et {b}. Fusionner relie les deux successions et change les parts des deux dossiers. Vérifie avec des actes (naissance, parents) avant. ¦ {a} ve {b}. Birleştirmek iki mirası birbirine bağlar ve iki dosyadaki payları değiştirir. Önce belgelerle (doğum, anne-baba) kontrol et.
+⇆ Comparer d’abord ¦ ⇆ Önce karşılaştır
+Si on fusionne : noté dans le journal des deux dossiers, et les deux sont recalculés. ¦ Birleştirilirse: iki dosyanın günlüğüne yazılır ve ikisi de yeniden hesaplanır.
+🗄 Archiver dans un fichier et retirer… ¦ 🗄 Bir dosyaya arşivle ve çıkar…
+🗄 ARCHIVER LE DOSSIER {n} ¦ 🗄 {n} DOSYASINI ARŞİVLE
+Dans un fichier, puis retirer de la base ¦ Bir dosyaya, sonra veritabanından çıkar
+⤓ Enregistrer le fichier puis retirer ¦ ⤓ Dosyayı kaydet, sonra çıkar
+Le fichier {file} contient : le dossier, le journal, les pièces et leurs images, les courriers, l’arbre de dévolution (SVG), le tableau pour le notaire et les fiches rattachées ({n}). ¦ {file} dosyası şunları içerir: dosya, günlük, belgeler ve görüntüleri, mektuplar, miras ağacı (SVG), noter için tablo ve bağlı kayıtlar ({n}).
+Garder les adresses des vivants dans le fichier ¦ Yaşayanların adreslerini dosyada tut
+utile si le notaire rouvre la succession ¦ noter mirası yeniden açarsa işe yarar
+Retirer les adresses ¦ Adresleri çıkar
+comme l’archivage actuel ¦ şimdiki arşivleme gibi
+Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base ({n}). Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste ({k}). Une sauvegarde est faite avant. ¦ Sonra yalnızca bu dosyaya yarayan kayıtlar veritabanından çıkarılır ({n}). Başka bir dosyaya (ya da ailene) de bağlı bir kayıt kalır ({k}). Önce yedek alınır.
+Dossier {n} archivé dans « {file} » et retiré ({what}) ¦ {n} dosyası “{file}” içine arşivlendi ve çıkarıldı ({what})
+⤒ RÉIMPORTER ¦ ⤒ YENİDEN İÇE AKTAR
+⤒ Réimporter le dossier ¦ ⤒ Dosyayı yeniden içe aktar
+Dossier {n} ({name}{closed}), {what}. ¦ {n} dosyası ({name}{closed}), {what}.
+clos le {d} ¦ {d} tarihinde kapatıldı
+{what} ressemblent à des fiches déjà dans cette base ({names}) : elles seront proposées à la comparaison, jamais fusionnées seules. ¦ {what} bu veritabanında zaten olan kayıtlara benziyor ({names}): karşılaştırma için önerilecekler, asla kendiliğinden birleştirilmeyecekler.
+Dossier {n} réimporté ({what}) ¦ {n} dosyası yeniden içe aktarıldı ({what})
+Dossier {n} réimporté dans « {name} ». ¦ {n} dosyası “{name}” içine yeniden aktarıldı.
+⚖️ Mes dossiers de succession ¦ ⚖️ Miras dosyalarım
+Aucun dossier de succession. ¦ Miras dosyası yok.
+Étapes (7) ¦ Adımlar (7)
+{step} : {done} sur {total} ¦ {step}: {done} / {total}
+Quels dossiers ¦ Hangi dosyalar
+Le filtre ¦ Filtre
+Vue actuelle ¦ Geçerli görünüm
+Alt + ↑ / ↓ : changer l’ordre (rangement à la main) ¦ Alt + ↑ / ↓: sırayı değiştir (elle)
+Sans dossier ¦ Dosyasız
+Ranger les dossiers : ¦ Dosyaları sırala:
+… cherche un nom pour voir les autres. ¦ … diğerlerini görmek için bir ad ara.
+Ordre des dossiers changé ¦ Dosyaların sırası değişti
+Dans cette généalogie ¦ Bu soy ağacında
+Le défunt et ses héritiers sont des fiches de ta famille. Simple, mais tout se mélange. ¦ Ölen kişi ve mirasçıları ailenin kayıtlarıdır. Basit ama her şey karışır.
+Dans une généalogie à part pour tous mes dossiers ¦ Tüm dosyalarım için ayrı bir soy ağacında
+Une base professionnelle « ⚖️ Dossiers de succession », créée dans 🌳 Mes généalogies. Tes dossiers y sont tous ensemble ; ta famille reste à part. ¦ Mesleki bir veritabanı “⚖️ Miras dosyaları”, 🌳 Soy ağaçlarım içinde oluşturulur. Tüm dosyaların orada bir arada; ailen ayrı kalır.
+Une généalogie par dossier ¦ Dosya başına bir soy ağacı
+Chaque dossier a sa propre base (« ⚖️ 2026-014 MAZAUD »). Le plus étanche ; à réserver aux grosses successions. ¦ Her dosyanın kendi veritabanı var (“⚖️ 2026-014 MAZAUD”). En ayrık olanı; büyük miraslar için.
+défunt ¦ ölen kişi
+intermédiaire ¦ aracı
+Un par dossier ¦ Dosya başına bir
+Un filtre ¦ Bir filtre
+Compteurs ¦ Sayaçlar
+à l’ouverture ¦ açılışta
+calcul ¦ hesaplama
+à la main ¦ elle
+créée pendant le filtre ¦ filtre sırasında oluşturuldu
+réimport ¦ yeniden aktarım
+homonyme ¦ adaş
+déplacée ¦ taşındı
+grisées, sans nom ¦ gri, adsız
+cachées ¦ gizli
+retirées du fichier ¦ dosyadan çıkarıldı
+gardées dans le fichier ¦ dosyada tutuldu
+copier la fiche ¦ kaydı kopyala
+refuser le déplacement ¦ taşımayı reddet
+replié ¦ kapalı
+Défunt et acte de décès ¦ Ölen kişi ve ölüm kaydı
+Adresses ¦ Adresler
+Contrats signés ¦ İmzalı sözleşmeler
+Déplacement refusé : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Taşıma reddedildi: bu kayıtlar ailende veya başka bir dosyada da var: {names}.
+Impossible d’enregistrer les réglages des dossiers. ¦ Dosya ayarları kaydedilemedi.
+Cette généalogie est encore vide. ¦ Bu soy ağacı henüz boş.
+Rôle inconnu. ¦ Bilinmeyen rol.
+Fiches inconnues. ¦ Bilinmeyen kayıtlar.
+Choisis une autre généalogie. ¦ Başka bir soy ağacı seç.
+Impossible de créer le fichier d’archive. ¦ Arşiv dosyası oluşturulamadı.
+Fichier introuvable. ¦ Dosya bulunamadı.
+Ce fichier n’est pas une archive de dossier de succession. ¦ Bu dosya bir miras dosyası arşivi değil.
+Le fichier n’a pas été reçu. ¦ Dosya alınamadı.
+Le défunt reste dans son dossier. ¦ Ölen kişi kendi dosyasında kalır.
+🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Kişiler
+Dossiers de succession (usage successoral seulement) ¦ Miras dosyaları (yalnızca miras kullanımında)

@@ -37,7 +37,7 @@
     const STATES = [['ouvert', 'Ouvert'], ['recherche', 'En recherche'], ['trouves', 'Héritiers trouvés'], ['remis', 'Remis au notaire'], ['clos', 'Clos']];
     const stateLabel = s => i18n((STATES.find(x => x[0] === s) || [0, s === 'archive' ? 'Archivé' : s])[1]);
     const stateKind = s => ({ouvert: 'grey', recherche: 'blue', trouves: 'green', remis: 'violet', clos: 'grey', archive: 'grey'}[s] || 'grey');
-    const TABS = [['dossier', '📁 Dossier'], ['heirs', '👥 Héritiers'], ['tree', '🌳 Arbre'], ['pieces', '📑 Pièces'], ['contacts', '✉️ Héritiers contactés'], ['notary', '🖨 Pour le notaire'], ['journal', '🕓 Journal'], ['fees', '💶 Temps et frais']];
+    const TABS = [['dossier', '📁 Dossier'], ['heirs', '👥 Héritiers'], ['people', '🧑‍🤝‍🧑 Personnes'], ['tree', '🌳 Arbre'], ['pieces', '📑 Pièces'], ['contacts', '✉️ Héritiers contactés'], ['notary', '🖨 Pour le notaire'], ['journal', '🕓 Journal'], ['fees', '💶 Temps et frais']];
     const NOTICE = {info: 'ℹ️', warn: '⚠️', error: '⛔', ok: '✓'};
     /** un message K8 dont le texte contient des liens (les articles de loi) : déjà échappé */
     const noticeHtml = (k, html) => `<div class="ui-notice ui-notice-${k}" role="${k === 'error' ? 'alert' : 'status'}"><span class="ui-notice-ico" aria-hidden="true">${NOTICE[k]}</span><span>${html}</span></div>`;
@@ -48,7 +48,7 @@
     const reg = () => {
         const app = A(); if (!app?.defaultListTypes) return false;
         if (!app.defaultListTypes.some(x => x[0] === LIST)) app.defaultListTypes.push([LIST, '33b', '⚖️ Dossiers de succession']);
-        if (app.defaultDashboardBlocks && !app.defaultDashboardBlocks.some(x => x[0] === 'succ_widget')) { app.defaultDashboardBlocks.push(['succ_widget', '⚖️ Dossiers de succession']); if (app.defaultDashboardBlockSpans) app.defaultDashboardBlockSpans.succ_widget = '6'; }
+        if (app.defaultDashboardBlocks && !app.defaultDashboardBlocks.some(x => x[0] === 'succ_widget')) { app.defaultDashboardBlocks.push(['succ_widget', '⚖️ Mes dossiers de succession']); /* même clé : le widget d'avant devient la vue d'ensemble (heritage-successoral-dossiers.js) */ if (app.defaultDashboardBlockSpans) app.defaultDashboardBlockSpans.succ_widget = '6'; }
         return true;
     };
     if (!reg()) document.addEventListener('DOMContentLoaded', reg, {once: true});
@@ -67,7 +67,10 @@
         st.listType = LIST; if (st.module === 'listes') { A().renderSidebar?.(); ext.lists[LIST](); } else A().setModule('listes');
     }
     ext.lists[LIST] = (token = A().state?.workspaceToken) => { cur.where = 'list'; return render(token); };
-    ext.successoral = {render: token => { cur.where = 'tab'; return render(token); }, openCase, openFor, compute: computeCase, S: () => S()};
+    ext.successoral = {render: token => { cur.where = 'tab'; return render(token); }, openCase, openFor, compute: computeCase, S: () => S(),
+        // pour heritage-successoral-dossiers.js : le dossier ouvert, ＋ Ouvrir un dossier, l'arbre et le tableau du notaire (archive en fichier)
+        newCase: (pid = 0) => caseDialog(null, pid), current: () => cur.data, currentR: () => cur.R, reload: () => reload(),
+        treeSvg: (D, R) => treeSvg(D, R, {print: true}), notaryHtml: (D, R, addresses = false) => notaryHtml(D, R, piecesOf(D, R), {addresses})};
 
     async function render(token) {
         const w = ws(); if (!w) return;
@@ -77,12 +80,13 @@
         if (!VIEWS.some(v => v[0] === cur.view)) cur.view = 'cases';
         w.innerHTML = `<section class="page succ-page">${UI().pageHeader({title: i18n('Dossiers de succession'), icon: '⚖️', where,
             help: i18n('Retrouver les héritiers d’une personne décédée, pour un notaire : un dossier par défunt. À ne pas confondre avec « 🏠 Héritages et successions » (les actes anciens des ancêtres).'),
-            actions: [`<button type="button" class="button" data-succ-new>${esc(i18n('＋ Ouvrir un dossier'))}</button>`]})}
+            actions: [`<button type="button" class="button" data-succ-new>${esc(i18n('＋ Ouvrir un dossier'))}</button>`], more: ext.succDossiers?.boardMore?.() || []})}
             <div class="segmented succ-views" role="tablist" aria-label="${esc(i18n('Que montrer'))}">${VIEWS.map(([k, l]) => `<button type="button" role="tab" data-succ-view="${k}" class="${cur.view === k ? 'is-active' : ''}" aria-selected="${cur.view === k}">${esc(i18n(l))}</button>`).join('')}</div>
             <div data-succ-body>${UI().spinner(i18n(cur.view === 'heirs' ? 'Lecture des héritiers…' : cur.view === 'mail' ? 'Lecture des courriers…' : 'Lecture des dossiers…'))}</div></section>`;
         const body = w.querySelector('[data-succ-body]');
         if (cur.view === 'heirs') return heirsBoard(body, token);
         if (cur.view === 'mail') return mailBoard(body, token);
+        if (ext.succDossiers?.board) return ext.succDossiers.board(body, token); // 4. le tableau de bord des dossiers (toutes les généalogies)
         let d; try { d = await get('list'); } catch (e) { body.innerHTML = UI().notice('error', e.message); return; }
         if (!sameTurn(token)) return;
         const rows = d.items || [];
@@ -247,7 +251,7 @@
         const d = data || {};
         const notaryVal = d.notary_person_id ? d.notary_person_id : d.notary_text ? `txt:${d.notary_text}` : null;
         return ext.openDialog({eyebrow: i18n('⚖️ DOSSIER DE SUCCESSION'), title: data ? i18n('Modifier le dossier') : i18n('Ouvrir un dossier'), wide: true, submitLabel: data ? i18n('Enregistrer') : i18n('Ouvrir le dossier'),
-            body: `<div class="succ-form">
+            body: `<div class="succ-form">${data ? '' : ext.succCaseDialogExtra?.() || ''}
                 <div class="succ-2"><div><span class="pk-lab">${esc(i18n('La personne décédée'))}</span>${P().pickerField({name: 'deceased_id', kind: 'person', animals: false, value: d.deceased_id || deceased || null})}</div>
                 <label>${esc(i18n('N° de dossier'))}<input name="number" maxlength="40" value="${esc(d.number || '')}" placeholder="${esc(i18n('fait tout seul : 2026-014'))}"></label></div>
                 <div class="succ-2"><label>${esc(i18n('Date du décès'))}<input name="death_date_text" maxlength="120" value="${esc(d.death_date_text || '')}" placeholder="${esc(i18n('reprise de la fiche'))}"></label>
@@ -312,6 +316,7 @@
             if (!sameTurn(token)) return;
             cur.R = cur.data.deceased_id ? computeCase(cur.data) : null;
             noteRecalc(cur.data, cur.R);
+            if (cur.R && !cur.R.error) { try { ext.succDossiers?.afterCompute?.(cur.data, cur.R, piecesOf(cur.data, cur.R)); } catch (_) {} } // héritiers et intermédiaires rattachés, avancement gardé
         }
         const D = cur.data, R = cur.R;
         if (!TABS.some(t => t[0] === cur.tab)) cur.tab = 'dossier';
@@ -324,13 +329,13 @@
             help: [D.deceased ? `${esc(D.deceased)}${years ? ` (${esc(years)})` : ''}` : '', badge(stateLabel(D.state), stateKind(D.state))].filter(Boolean).join(' '),
             back: `<button type="button" class="button small secondary" data-succ-back>${esc(i18n('← Tous les dossiers'))}</button>`,
             actions: D.archived ? [] : [`<button type="button" class="button secondary" data-succ-edit="${D.id}">${esc(i18n('✎ Modifier'))}</button>`],
-            more: [D.deceased_id ? `<button type="button" data-h-person="${D.deceased_id}">${esc(i18n('↗ Fiche du défunt'))}</button>` : '', D.state === 'clos' ? `<button type="button" data-succ-archive>${esc(i18n('🗄 Archiver le dossier clos'))}</button>` : '', `<button type="button" class="danger" data-succ-del="${D.id}">${esc(i18n('🗑 Supprimer'))}</button>`]})}
+            more: [D.deceased_id ? `<button type="button" data-h-person="${D.deceased_id}">${esc(i18n('↗ Fiche du défunt'))}</button>` : '', D.state === 'clos' ? `<button type="button" data-succ-archive>${esc(i18n('🗄 Archiver le dossier clos'))}</button>` : '', ...(ext.succDossiers?.caseMore?.(D) || []), `<button type="button" class="danger" data-succ-del="${D.id}">${esc(i18n('🗑 Supprimer'))}</button>`]})}
             ${D.archived ? UI().notice('info', i18n('Dossier archivé : les adresses des vivants ont été retirées, le journal reste.')) : `<div class="succ-steps" role="group" aria-label="${esc(i18n('État du dossier'))}">${STATES.map(([k, l], i) => `<button type="button" class="succ-step${i < stIdx ? ' is-done' : ''}${i === stIdx ? ' is-on' : ''}" data-succ-state="${k}" aria-pressed="${i === stIdx}">${i < stIdx ? '✓ ' : ''}${esc(i18n(l))}</button>`).join('')}</div>`}
             <div class="segmented succ-tabs" role="tablist">${TABS.map(([k, l]) => `<button type="button" role="tab" data-succ-tab="${k}" class="${cur.tab === k ? 'is-active' : ''}" aria-selected="${cur.tab === k}">${esc(tabLabel(k, l))}</button>`).join('')}</div>
             <div data-succ-tabbody></div></section>`;
         const body = w.querySelector('[data-succ-tabbody]');
         if (!D.deceased_id || !R || R.error) { body.innerHTML = UI().notice('error', R?.error || i18n('Le défunt n’est plus dans la base.')); return; }
-        ({dossier: tabDossier, heirs: tabHeirs, tree: tabTree, pieces: tabPieces, contacts: tabContacts, notary: tabNotary, journal: tabJournal, fees: tabFees})[cur.tab](body, D, R, P_);
+        ({dossier: tabDossier, heirs: (b, D_, R_) => { tabHeirs(b, D_, R_); ext.succDossiers?.heirsExtra?.(b, D_); }, people: (b, D_) => ext.succDossiers?.tabPeople?.(b, D_), tree: tabTree, pieces: tabPieces, contacts: tabContacts, notary: tabNotary, journal: tabJournal, fees: tabFees})[cur.tab](body, D, R, P_);
     }
 
     /* ── 📁 Dossier ── */
@@ -742,7 +747,7 @@
     /* ═════ Les clics ═════ */
     document.addEventListener('click', async e => {
         const t = e.target; if (!t.closest) return;
-        if (t.closest('[data-succ-new]')) { e.preventDefault(); return caseDialog(); }
+        if (t.closest('[data-succ-new]')) { e.preventDefault(); if (ext.succDossiers?.beforeNew && await ext.succDossiers.beforeNew()) return; return caseDialog(); } // 1. la première fois : où ranger les dossiers
         const op = t.closest('[data-succ-open]'); if (op) { e.preventDefault(); return openCase(op.dataset.succOpen); }
         if (t.closest('[data-succ-back]')) { e.preventDefault(); return openCase(0); }
         const ed = t.closest('[data-succ-edit]'); if (ed) { e.preventDefault(); const id = Number(ed.dataset.succEdit); const D = cur.data?.id === id ? cur.data : await get('get', {id}).catch(err => (toast(err.message, 'error'), null)); if (D) caseDialog(D); return; }
