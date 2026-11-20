@@ -1,0 +1,561 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dossiers de succession : rangement, filtre, tableau de bord</title>
+<style>
+*{box-sizing:border-box}
+body{background:#f4f5f7;padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:#111;margin:0;line-height:1.45}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:19px;margin:38px 0 6px}
+.sub{color:#555;margin:0 0 18px;font-size:14px;max-width:980px}
+.wrap{max-width:1240px;margin:0 auto}
+.sum{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.sum div{background:#fff;border:2px solid #111;padding:8px 14px;box-shadow:4px 4px 0 rgba(5,93,255,.25)}
+.sum b{font-size:20px;display:block}.sum span{font-size:12px;color:#555}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid #111;padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap}
+.badge.new{border-color:#055dff;color:#fff;background:#055dff}
+.badge.re{border-color:#1a7f37;color:#1a7f37;background:#eaf6ee}
+.badge.have{border-color:#8a8f99;color:#555;background:#f1f2f4}
+.badge.ok{border-color:#1a7f37;color:#1a7f37}.badge.warn{border-color:#b08800;color:#7a5d00;background:#fff8d6}.badge.red{border-color:#c62828;color:#c62828;background:#fdecec}.badge.blue{border-color:#055dff;color:#055dff}.badge.grey{border-color:#8a8f99;color:#555}.badge.violet{border-color:#8a3ffc;color:#6929c4;background:#f3ecff}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#666;text-align:left;padding:8px;border-bottom:2px solid #111}
+td{padding:7px 8px;border-bottom:1px solid #eceef2;vertical-align:top}
+code{font:11.5px ui-monospace,Menlo,Consolas,monospace;color:#444;word-break:break-word}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px 26px}
+.wide{grid-column:1 / -1}
+.case{background:#fff;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.25);padding:16px 18px 18px;min-width:0}
+.case .head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.case .tag{font:700 11px/1 system-ui;letter-spacing:.1em;color:#055dff;text-transform:uppercase}
+.case h3{margin:8px 0 10px;font-size:17px}
+.note{font-size:12.5px;color:#555;margin:10px 0 0}
+.path{font-size:12px;color:#1a3d8f;background:#eef4ff;border:1px dashed #9db8f0;padding:6px 10px;margin:0 0 10px}
+.path b{color:#055dff}
+.reuse{font-size:12px;color:#1a5d2c;background:#f1f9f3;border:1px dashed #9bcfa9;padding:7px 10px;margin-top:12px}
+.reuse b{color:#1a7f37}
+.msg{border-left:4px solid #055dff;background:#eef4ff;padding:9px 12px;font-size:13px;margin:12px 0}
+.msg.warn{border-color:#d4a800;background:#fff8d6}.msg.ok{border-color:#1a7f37;background:#eaf6ee}.msg.red{border-color:#c62828;background:#fdecec}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid #111;background:#fff;font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 rgba(5,93,255,.25);color:#111;white-space:nowrap}
+.btn.blue{background:#055dff;border-color:#055dff;color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:#c9ced8;box-shadow:none;color:#444}
+.btn.red{border-color:#c62828;color:#c62828;box-shadow:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.lab{display:block;font-weight:700;font-size:13px;margin:12px 0 6px}
+.input{border:1.5px solid #c9ced8;padding:5px 8px;font-size:13.5px;background:#fff;width:100%;min-height:30px}
+.k{color:#666}
+.seg{display:inline-flex;border:2px solid #111;flex-wrap:wrap;max-width:100%}.seg span{padding:5px 9px;font:700 12px system-ui;border-right:1.5px solid #111;background:#fff}.seg span:last-child{border-right:0}.seg span.on{background:#055dff;color:#fff}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.scrollx>table{min-width:760px}
+.hint{font-size:11.5px;color:#777;margin-top:4px;display:none}
+/* fenêtre de l'app (faux écran) */
+.win{border:2px solid #111;background:#fff;min-width:0}
+.win-bar{display:flex;align-items:center;gap:10px;padding:7px 10px;border-bottom:2px solid #111;background:#fafbfc;flex-wrap:wrap}
+.win-bar .eyebrow{font:700 10.5px system-ui;letter-spacing:.12em;color:#666;text-transform:uppercase}
+.win-bar b{font-size:14px}
+.win-body{padding:12px;min-width:0}
+.win-foot{display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;border-top:2px solid #111;flex-wrap:wrap}
+/* choix radio en cartes */
+.choice{display:grid;gap:8px}
+.choice label{display:grid;grid-template-columns:22px 1fr;gap:8px;border:2px solid #c9ced8;padding:9px 10px;font-size:13px;background:#fff}
+.choice label.on{border-color:#055dff;box-shadow:inset 0 0 0 1px #055dff;background:#f3f7ff}
+.choice label b{display:block;font-size:13.5px}
+.choice .dot{width:16px;height:16px;border:2px solid #111;border-radius:50%;margin-top:2px}
+.choice .on .dot{background:radial-gradient(#055dff 45%,#fff 50%)}
+.choice small{color:#555}
+/* barre du haut de l'app */
+.topbar{display:flex;align-items:center;gap:6px;background:#141414;color:#fff;padding:8px 10px;flex-wrap:wrap}
+.topbar .nav{display:flex;gap:14px;font-weight:700;font-size:13px;flex:1 1 auto;min-width:0;overflow:hidden;white-space:nowrap}
+.topbar .nav span.on{background:#055dff;padding:2px 8px}
+.tool{border:1.5px solid #fff;min-width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;padding:0 6px;gap:5px;white-space:nowrap}
+.tool.succ{border-color:#ffd166;color:#ffd166;font-weight:700}
+.tool.succ.on{background:#ffd166;color:#111}
+.banner{display:flex;align-items:center;gap:10px;background:#fff4d1;border-bottom:2px solid #d4a800;padding:7px 12px;font-size:13px;flex-wrap:wrap}
+.banner b{font-weight:800}.banner .x{margin-left:auto;border:1.5px solid #111;background:#fff;padding:1px 8px;font-weight:700}
+.menu{border:2px solid #111;background:#fff;box-shadow:5px 5px 0 rgba(0,0,0,.12);font-size:13px;max-width:360px}
+.menu div{padding:7px 10px;border-bottom:1px solid #eceef2;display:flex;gap:8px;align-items:center}
+.menu div.sep{padding:4px 10px;font:700 10.5px system-ui;letter-spacing:.1em;color:#666;text-transform:uppercase;background:#fafbfc}
+.menu div.on{background:#eef4ff;font-weight:700}
+.menu .cb{width:14px;height:14px;border:2px solid #111;display:inline-block;flex:none}
+.menu .cb.on{background:#055dff;border-color:#055dff;box-shadow:inset 0 0 0 2px #fff}
+.menu small{color:#777;margin-left:auto;white-space:nowrap}
+.menu .ext{color:#6929c4}
+/* barres d'avancement */
+.bar{height:10px;background:#eceef2;border:1px solid #c9ced8;position:relative;min-width:80px}
+.bar i{position:absolute;left:0;top:0;bottom:0;background:#055dff}
+.bar.late i{background:#c62828}.bar.done i{background:#1a7f37}
+.steps{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;min-width:140px}
+.steps i{height:10px;background:#eceef2;border:1px solid #c9ced8}
+.steps i.f{background:#055dff;border-color:#055dff}.steps i.h{background:linear-gradient(90deg,#055dff 50%,#eceef2 50%)}
+/* widgets */
+.dash{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;background:#eef0f4;padding:12px;border:2px solid #111;min-width:0}
+.wd{background:#fff;border:2px solid #111;padding:10px 12px;min-width:0}
+.wd h4{margin:0 0 6px;font-size:14px;display:flex;justify-content:space-between;gap:6px;align-items:center;flex-wrap:wrap}
+.s2{grid-column:span 2}.s3{grid-column:span 3}.s6{grid-column:span 6}
+.counts{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:4px 0 8px}
+.counts div{border:1.5px solid #c9ced8;padding:5px 6px;text-align:center;font-size:11px;color:#555;min-width:0}
+.counts b{display:block;font-size:18px;color:#111}
+.wl{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:12.5px}
+.wl li{display:grid;grid-template-columns:minmax(0,1fr) 90px 40px;gap:8px;align-items:center}
+.wl li .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wl li.late .nm{color:#c62828;font-weight:700}
+.due{font-size:12px;margin-top:8px;border-top:1px solid #eceef2;padding-top:6px}
+.due div{display:flex;gap:6px;justify-content:space-between;flex-wrap:wrap}
+.due .r{color:#c62828;font-weight:700}
+.chk{width:14px;height:14px;border:2px solid #111;display:inline-block;vertical-align:-2px}
+.chk.on{background:#055dff;border-color:#055dff;box-shadow:inset 0 0 0 2px #fff}
+.tabs{display:flex;gap:0;border-bottom:2px solid #111;flex-wrap:wrap;font-size:13px}
+.tabs span{padding:7px 10px;border-right:1px solid #e3e5ea;white-space:nowrap}
+.tabs span.on{background:#055dff;color:#fff;font-weight:700}
+.chip{display:inline-flex;gap:4px;align-items:center;border:1.5px solid #055dff;color:#055dff;background:#eef4ff;font:700 11.5px system-ui;padding:2px 7px}
+.person{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.ph{width:44px;height:44px;border:2px solid #111;background:#f1f2f4;display:flex;align-items:center;justify-content:center;font-size:22px;flex:none}
+.qs{background:#fff;border:2px solid #111;padding:14px 18px;box-shadow:6px 6px 0 rgba(5,93,255,.25)}
+.qs li{margin:0 0 8px}
+.formula td:first-child{font-weight:700;white-space:nowrap}
+.mini{font-size:12px;color:#555}
+/* 7. colonne de gauche des Personnes */
+.app2{display:grid;grid-template-columns:290px minmax(0,1fr);border:2px solid #111;background:#fff;min-width:0}
+.side{border-right:2px solid #111;padding:10px;min-width:0;background:#fbfbfc}
+.side .segx{display:grid;grid-template-columns:1fr 1fr;border:2px solid #111;margin-bottom:8px}
+.side .segx span{padding:6px 4px;text-align:center;font:700 12px system-ui;border-right:1.5px solid #111;background:#fff}.side .segx span:last-child{border-right:0}
+.side .segx span.on{background:#055dff;color:#fff}
+.tray{border:1.5px solid #c9ced8;margin:0 0 6px;background:#fff}
+.tray>.th{display:flex;align-items:center;gap:6px;padding:6px 8px;font-size:13px;font-weight:700;background:#f3f5f9}
+.tray>.th .grip{color:#888;cursor:grab}.tray>.th .n{margin-left:auto;font-weight:400;color:#666;font-size:12px}
+.tray.closed>.pl{display:none}
+.pl{list-style:none;margin:0;padding:0}
+.pl li{display:flex;gap:7px;align-items:center;padding:5px 8px;border-top:1px solid #eceef2;font-size:13px;min-width:0}
+.pl li .dot{width:8px;height:8px;border-radius:50%;background:#1a7f37;flex:none}.pl li .dot.d{background:#8a8f99}
+.pl li b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.pl li small{color:#777;margin-left:auto;white-space:nowrap}
+.pl li .chip{font-size:10.5px;padding:1px 5px}
+.pl li.on{background:#eef4ff}
+.ordrow{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:12px;margin:0 0 8px}
+@media (max-width:760px){ .app2{grid-template-columns:1fr} .side{border-right:0;border-bottom:2px solid #111} .app2 .wsp{display:none} }
+@media (max-width:900px){
+ .grid{grid-template-columns:1fr}
+ .dash{grid-template-columns:1fr}
+ .s2,.s3,.s6{grid-column:auto}
+}
+@media (max-width:760px){
+ body{padding:14px}
+ .hint{display:block}
+ .counts{grid-template-columns:repeat(2,1fr)}
+ .topbar .nav{display:none}
+ .wl li{grid-template-columns:minmax(0,1fr) 70px 36px}
+}
+</style></head><body><div class="wrap">
+
+<h1>⚖️ Dossiers de succession : rangement, filtre, tableau de bord</h1>
+<p class="sub">Maquette à valider (usage « ⚖️ Généalogiste successoral »). Tout ce qui est dessiné ici est <b>fictif</b> (dossiers 2026-011 à 2026-016, familles MAZAUD, LACOMBE, ROUSSILHE, PEYRAT, BESSE, VIALLE). Les chemins de menu sont ceux de l’app actuelle ; ce qui est nouveau porte le badge <span class="badge new">nouveau</span>, ce qui existe déjà <span class="badge have">existe</span>.</p>
+<div class="sum">
+ <div><b>1</b><span>Où ranger les dossiers</span></div>
+ <div><b>2</b><span>Bouton ⚖️ : filtre de toute l’app</span></div>
+ <div><b>3</b><span>Rattacher les personnes</span></div>
+ <div><b>4</b><span>Tableau de bord des dossiers</span></div>
+ <div><b>5</b><span>Garde-fous</span></div>
+ <div><b>6</b><span>Widget « ⚖️ Mes dossiers de succession »</span></div>
+ <div><b>7</b><span>Personnes : vue par dossier</span></div>
+</div>
+
+<!-- ═════════════ 1. RANGEMENT ═════════════ -->
+<h2>1. Où ranger les dossiers <span class="badge new">nouveau</span></h2>
+<p class="sub">Demandé une seule fois, au premier « ＋ Ouvrir un dossier ». Changeable ensuite dans les Réglages. On s’appuie sur « 🌳 Mes généalogies » (bouton <code>#genealogy-switch</code>, en haut à droite) : chaque généalogie y est <b>complètement séparée</b> (sa base, ses médias, ses réglages, ses sauvegardes), rangée dans <code>genealogies/&lt;id&gt;/</code>.</p>
+<div class="grid">
+ <div class="case">
+  <div class="head"><span class="tag">1a · premier « ＋ Ouvrir un dossier »</span><span class="badge new">nouveau</span></div>
+  <div class="path">⚖️ Successions → bouton <b>＋ Ouvrir un dossier</b> (la toute première fois seulement)</div>
+  <div class="win">
+   <div class="win-bar"><div><div class="eyebrow">⚖️ Dossiers de succession</div><b>Où ranger tes dossiers ?</b></div></div>
+   <div class="win-body">
+    <div class="choice">
+     <label><span class="dot"></span><span><b>Dans cette généalogie</b><small>« Ma généalogie ». Le défunt et ses héritiers sont des fiches de ta famille. Simple, mais tout se mélange.</small></span></label>
+     <label class="on"><span class="dot"></span><span><b>Dans une généalogie à part pour tous mes dossiers</b> <span class="badge ok">conseillé ici</span><small>Une base professionnelle « ⚖️ Dossiers de succession », créée dans 🌳 Mes généalogies. Tes dossiers y sont tous ensemble ; ta famille reste à part.</small></span></label>
+     <label><span class="dot"></span><span><b>Une généalogie par dossier</b><small>Chaque dossier a sa propre base (« ⚖️ 2026-014 MAZAUD »). Le plus étanche ; à réserver aux grosses successions.</small></span></label>
+    </div>
+    <div class="msg warn">💡 Ta généalogie ouverte a <b>4 812 fiches</b> et des photos de famille : la ranger à part évite de mélanger les héritiers de tes clients avec ta propre famille. Ce n’est qu’un conseil.</div>
+    <p class="note">Tu pourras changer d’avis : Réglages → Apparence → 🧭 Usage de l’app → « ⚖️ Où ranger les dossiers ». Les dossiers déjà ouverts ne bougent pas tout seuls.</p>
+   </div>
+   <div class="win-foot"><span class="btn ghost">Annuler</span><span class="btn blue">Créer « ⚖️ Dossiers de succession » et ouvrir le dossier</span></div>
+  </div>
+  <p class="note">Le choix « à part » crée la généalogie (même chose que 🌳 Mes généalogies → « ＋ Créer et ouvrir »), y active l’usage successoral, puis ouvre la fenêtre « Ouvrir un dossier » <b>dans cette base</b>. Le défunt n’y existe pas encore : la fenêtre propose « ＋ Nouvelle personne » ou « ⤓ Reprendre la fiche depuis Ma généalogie » (copie de la fiche, de ses parents et enfants, sans photos).</p>
+ </div>
+
+ <div class="case">
+  <div class="head"><span class="tag">1b · Réglages, modifiable ensuite</span><span class="badge new">nouveau</span></div>
+  <div class="path">Réglages → Apparence → <b>🧭 Usage de l’app</b> → carte « ⚖️ Généalogiste successoral » → <b>⚖️ Où ranger les dossiers</b></div>
+  <div class="win"><div class="win-body">
+   <span class="lab">Les nouveaux dossiers vont…</span>
+   <div class="seg"><span>Dans cette généalogie</span><span class="on">Dans « ⚖️ Dossiers de succession »</span><span>Un par dossier</span></div>
+   <span class="lab">Les dossiers et où ils sont</span>
+   <div class="scrollx"><table><thead><tr><th>Dossier</th><th>Rangé dans</th><th></th></tr></thead><tbody>
+    <tr><td>2026-011 PEYRAT</td><td>🌳 Ma généalogie</td><td><span class="btn small">⇄ Déplacer…</span></td></tr>
+    <tr><td>2026-014 MAZAUD</td><td>⚖️ Dossiers de succession</td><td><span class="btn small">⇄ Déplacer…</span></td></tr>
+    <tr><td>2026-016 VIALLE</td><td>⚖️ 2026-016 VIALLE</td><td><span class="btn small">⇄ Déplacer…</span></td></tr>
+   </tbody></table></div>
+  </div></div>
+  <div class="win" style="margin-top:14px">
+   <div class="win-bar"><div><div class="eyebrow">⇄ Déplacer un dossier</div><b>2026-011 PEYRAT → ?</b></div></div>
+   <div class="win-body">
+    <span class="lab">Vers</span><div class="input">⚖️ Dossiers de succession ▾</div>
+    <p class="note">Ce qui part : le dossier, son journal, ses pièces, ses courriers, ses échéances, et <b>les fiches qui lui sont rattachées</b> (défunt, héritiers, intermédiaires) avec leurs actes et médias. Une fiche aussi rattachée à un autre dossier ou à ta famille est <b>copiée</b>, pas déplacée.</p>
+    <div class="msg">Une copie de sauvegarde des deux généalogies est faite avant. Le journal du dossier note « Déplacé de Ma généalogie vers ⚖️ Dossiers de succession le 20 nov. 2026 ».</div>
+   </div>
+   <div class="win-foot"><span class="btn ghost">Annuler</span><span class="btn blue">⇄ Déplacer (37 fiches)</span></div>
+  </div>
+ </div>
+
+ <div class="case">
+  <div class="head"><span class="tag">1c · 🌳 Mes généalogies</span><span class="badge have">existe</span><span class="badge new">+ marque ⚖️</span></div>
+  <div class="path">En haut à droite → <b>🌳 Mes généalogies</b> (<code>#genealogy-switch</code>)</div>
+  <div class="win">
+   <div class="win-bar"><div><div class="eyebrow">Mes généalogies</div><b>Changer de généalogie</b></div></div>
+   <div class="win-body">
+    <table><tbody>
+     <tr><td>🌳 <b>Ma généalogie</b><br><small class="k">principale · 412 Mo · ouverte</small></td><td><span class="badge ok">✓ Ouverte</span></td></tr>
+     <tr><td>⚖️ <b>Dossiers de succession</b><br><small class="k">8,4 Mo · 4 dossiers en cours</small></td><td><span class="btn small">Ouvrir</span></td></tr>
+     <tr><td>⚖️ <b>2026-016 VIALLE</b><br><small class="k">1,1 Mo · 1 dossier · remis au notaire</small></td><td><span class="btn small">Ouvrir</span></td></tr>
+    </tbody></table>
+   </div>
+  </div>
+  <p class="note">Seule nouveauté ici : l’icône ⚖️ et la ligne « N dossiers en cours » pour une généalogie qui contient des dossiers.</p>
+ </div>
+
+ <div class="case">
+  <div class="head"><span class="tag">1d · Vue d’ensemble quand les dossiers sont dans plusieurs bases</span><span class="badge new">nouveau</span></div>
+  <div class="msg ok"><b>En une phrase :</b> chaque dossier reste dans sa généalogie ; pour la vue d’ensemble, l’app <b>lit à la volée, sans rien écrire</b>, un petit résumé (n°, défunt, état, échéance, avancement) dans chaque généalogie qui a des dossiers. Rien n’est recopié ailleurs, donc rien ne peut se contredire.</div>
+  <table class="formula"><tbody>
+   <tr><td>Retenu</td><td><b>Index léger lu dans chaque base</b> (lecture seule). Une seule vérité : la base où est le dossier. Si une base est mise de côté ou effacée, ses dossiers disparaissent simplement de la vue.</td></tr>
+   <tr><td>Écarté</td><td>Registre central recopié : plus rapide, mais il peut dire « en recherche » alors que le dossier est clos (copie en retard, restauration d’une sauvegarde, base copiée sur un autre ordinateur).</td></tr>
+   <tr><td>Ce qui est lu</td><td>Seulement <code>succ_cases</code> (n°, titre, état, notaire, échéance, compteurs). Jamais les héritiers vivants ni leurs adresses : ils ne sont lus qu’en ouvrant la base.</td></tr>
+   <tr><td>Rapidité</td><td>Résumé gardé en mémoire 1 minute ; relu à l’ouverture de ⚖️ Successions et du widget. Une base illisible est signalée « ⚠️ illisible » sans bloquer les autres.</td></tr>
+  </tbody></table>
+ </div>
+</div>
+
+<!-- ═════════════ 2. BOUTON ⚖️ ═════════════ -->
+<h2>2. Le bouton ⚖️ : ne montrer qu’un ou plusieurs dossiers <span class="badge new">nouveau</span></h2>
+<p class="sub">Parmi les boutons en haut à droite, visible seulement en usage successoral. Réglable comme les autres : Réglages → Apparence → <b>Boutons en haut à droite</b> (cocher, ⠿ glisser, Alt + ↑ / ↓, « ↺ Remettre comme au départ »).</p>
+<div class="grid">
+ <div class="case wide">
+  <div class="head"><span class="tag">2a · barre du haut, menu et bandeau</span></div>
+  <div class="win">
+   <div class="topbar"><div class="nav"><span>Tableau de bord</span><span class="on">Personnes</span><span>Graphiques</span><span>Carte</span><span>Listes</span><span>⚖️ Successions</span></div>
+    <span class="tool">◫</span><span class="tool">↗</span><span class="tool">🔒</span><span class="tool succ on">⚖️ 2026-014 ▾</span><span class="tool">🐞</span><span class="tool">🌳</span></div>
+   <div class="banner">⚖️ <span>Seulement le dossier <b>2026-014 MAZAUD</b> : 37 fiches sur 4 812.</span><span class="btn small">Changer…</span><span class="x" title="Tout montrer">✕</span></div>
+   <div class="win-body grid" style="gap:16px">
+    <div>
+     <span class="lab">Le menu du bouton ⚖️</span>
+     <div class="menu">
+      <div>👁 Tout montrer</div>
+      <div class="sep">Un dossier</div>
+      <div class="on">◉ 2026-014 MAZAUD <small>en recherche</small></div>
+      <div>○ 2026-015 LACOMBE <small>héritiers trouvés</small></div>
+      <div>○ 2026-012 BESSE <small>remis au notaire</small></div>
+      <div class="sep">Plusieurs</div>
+      <div><span class="cb"></span>2026-014 MAZAUD</div>
+      <div><span class="cb on"></span>2026-015 LACOMBE</div>
+      <div><span class="cb on"></span>2026-013 ROUSSILHE</div>
+      <div class="sep">Dans une autre généalogie</div>
+      <div class="ext">↗ 2026-016 VIALLE <small>⚖️ 2026-016 VIALLE</small></div>
+      <div class="ext">↗ 2026-011 PEYRAT <small>🌳 Ma généalogie</small></div>
+      <div>⚖️ Tous les dossiers… <small>tableau de bord</small></div>
+     </div>
+    </div>
+    <div>
+     <span class="lab">Libellé du bouton</span>
+     <div class="row" style="background:#141414;padding:8px"><span class="tool succ">⚖️</span><span class="tool succ on">⚖️ 2026-014</span><span class="tool succ on">⚖️ 3 dossiers</span></div>
+     <p class="note">⚖️ seul = tout est montré. Jaune plein = un filtre est actif (même couleur que le bandeau).</p>
+     <span class="lab">Ce que le filtre touche</span>
+     <table><tbody>
+      <tr><td>👤 Personnes, recherche (⌘K)</td><td>seulement les fiches rattachées</td></tr>
+      <tr><td>🌳 Arbre, Graphiques</td><td>les fiches rattachées ; les autres en gris, sans nom</td></tr>
+      <tr><td>📋 Listes</td><td>événements, lieux, médias, sources liés à ces fiches</td></tr>
+      <tr><td>🗺 Carte</td><td>leurs lieux seulement</td></tr>
+      <tr><td>Fiche ouverte hors filtre</td><td>s’ouvre, avec « hors du dossier 2026-014 · ＋ Rattacher »</td></tr>
+     </tbody></table>
+     <p class="note">Le filtre est gardé par généalogie (<code>localStorage</code>, try/catch) ; ✕ du bandeau = « Tout montrer ». Le Tableau de bord et les Réglages ne sont jamais filtrés.</p>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag">2b · dossier rangé dans une autre généalogie</span></div>
+  <div class="win">
+   <div class="win-bar"><div><div class="eyebrow">⚖️ Dossier 2026-016 VIALLE</div><b>Ce dossier est dans une autre généalogie</b></div></div>
+   <div class="win-body"><p style="margin:0">Il est rangé dans <b>⚖️ 2026-016 VIALLE</b>. Pour le montrer, l’app ouvre cette généalogie (tes réglages d’ici sont gardés) et y active le filtre ⚖️ 2026-016.</p></div>
+   <div class="win-foot"><span class="btn ghost">Annuler</span><span class="btn blue">Ouvrir « ⚖️ 2026-016 VIALLE »</span></div>
+  </div>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag">2c · Boutons en haut à droite</span><span class="badge have">existe</span><span class="badge new">+ ⚖️</span></div>
+  <div class="path">Réglages → Apparence → <b>Boutons en haut à droite</b></div>
+  <table><tbody>
+   <tr><td>⠿ 1</td><td><span class="chk on"></span> ◫ Diviser l’écran en deux</td></tr>
+   <tr><td>⠿ 2</td><td><span class="chk on"></span> 🔒 Mode consultation</td></tr>
+   <tr><td>⠿ 3</td><td><span class="chk on"></span> ⚖️ Dossiers de succession <small class="k">(usage successoral seulement)</small></td></tr>
+   <tr><td>⠿ 4</td><td><span class="chk on"></span> 🌳 Mes généalogies</td></tr>
+  </tbody></table>
+  <p class="note">Sans l’usage successoral, la ligne ⚖️ n’apparaît pas. En mode consultation et en mode simple, le bouton est caché et le filtre retiré.</p>
+ </div>
+</div>
+
+<!-- ═════════════ 3. RATTACHER ═════════════ -->
+<h2>3. Rattacher les personnes à un dossier <span class="badge new">nouveau</span></h2>
+<div class="grid">
+ <div class="case">
+  <div class="head"><span class="tag">3a · tout seul</span></div>
+  <ul class="note" style="padding-left:18px;margin:0">
+   <li><b>Défunt</b> : rattaché à l’ouverture du dossier.</li>
+   <li><b>Graphe de dévolution</b> : tout ce que le calcul parcourt (héritiers, souches, intermédiaires jusqu’à l’ancêtre commun) est rattaché avec le rôle « héritier » ou « intermédiaire », et mis à jour à chaque recalcul. Une personne retirée à la main n’est jamais remise toute seule.</li>
+   <li><b>Pendant qu’un filtre ⚖️ est actif</b> : toute fiche créée (＋ Nouvelle personne, parent, enfant, import) est rattachée d’office au(x) dossier(s) du filtre, rôle « à vérifier ». Message : « Rattachée au dossier 2026-014 · ↶ Annuler ».</li>
+  </ul>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag">3b · fiche → ⋯ → « ⚖️ Dossiers… »</span></div>
+  <div class="path">Fiche d’une personne → <b>⋯</b> → <b>⚖️ Dossiers…</b> (à côté de « ⚖️ Rechercher les héritiers… »)</div>
+  <div class="win">
+   <div class="win-bar"><div><div class="eyebrow">⚖️ Dossiers de succession</div><b>Suzanne MAZAUD dans quels dossiers ?</b></div></div>
+   <div class="win-body">
+    <table><thead><tr><th></th><th>Dossier</th><th>Rôle</th></tr></thead><tbody>
+     <tr><td><span class="chk on"></span></td><td>2026-014 MAZAUD</td><td><span class="input" style="display:inline-block;width:auto">Héritière ▾</span></td></tr>
+     <tr><td><span class="chk on"></span></td><td>2026-015 LACOMBE</td><td><span class="input" style="display:inline-block;width:auto">Intermédiaire ▾</span></td></tr>
+     <tr><td><span class="chk"></span></td><td>2026-013 ROUSSILHE</td><td class="k">—</td></tr>
+    </tbody></table>
+    <p class="note">Rôles : défunt · héritier · intermédiaire · témoin · à vérifier. « Héritier » mis par le calcul s’affiche « (calculé) ».</p>
+   </div>
+   <div class="win-foot"><span class="btn ghost">Annuler</span><span class="btn blue">Enregistrer</span></div>
+  </div>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag">3c · onglet « 👥 Personnes » du dossier</span></div>
+  <div class="tabs"><span>📁 Dossier</span><span>👥 Héritiers</span><span class="on">🧑‍🤝‍🧑 Personnes</span><span>🌳 Arbre</span><span>📑 Pièces</span><span>✉️ Héritiers contactés</span><span>…</span></div>
+  <div class="row" style="margin:10px 0"><span class="btn small">＋ Ajouter une personne…</span><span class="mini">(le menu de choix unique, comme partout)</span></div>
+  <div class="scrollx"><table><thead><tr><th>Personne</th><th>Rôle</th><th>Comment</th><th></th></tr></thead><tbody>
+   <tr><td>Marcel MAZAUD (1938-2026)</td><td><span class="badge grey">défunt</span></td><td class="k">à l’ouverture</td><td></td></tr>
+   <tr><td>Suzanne MAZAUD</td><td><span class="badge blue">héritière</span></td><td class="k">calcul</td><td><span class="btn small ghost">Retirer</span></td></tr>
+   <tr><td>Louis MAZAUD (1900-1980)</td><td><span class="badge grey">intermédiaire</span></td><td class="k">calcul</td><td><span class="btn small ghost">Retirer</span></td></tr>
+   <tr><td>Émile LACOMBE</td><td><span class="badge warn">à vérifier</span></td><td class="k">créé pendant le filtre</td><td><span class="btn small ghost">Retirer</span></td></tr>
+  </tbody></table></div>
+  <p class="hint">↔ Faire glisser le tableau.</p>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag">3d · badge sur la fiche</span></div>
+  <div class="person"><span class="ph">👤</span><div><b>Suzanne MAZAUD</b> <span class="chip">⚖️ 2 dossiers</span><br><small class="k">1941 · Saint-Fréjoux</small></div></div>
+  <p class="note">Clic sur le badge : la liste des dossiers avec le rôle ; chaque ligne ouvre le dossier. Caché en mode consultation et mode simple, et jamais dans les exports.</p>
+ </div>
+</div>
+
+<!-- ═════════════ 4. TABLEAU DE BORD ═════════════ -->
+<h2>4. ⚖️ Successions → « Dossiers » devient un tableau de bord <span class="badge new">nouveau</span></h2>
+<div class="case wide">
+ <div class="path">⚖️ Successions → sélecteur <b>Dossiers</b> · Héritiers à contacter · Courriers</div>
+ <div class="row" style="margin-bottom:8px"><span class="seg"><span class="on">Dossiers</span><span>Héritiers à contacter</span><span>Courriers</span></span></div>
+ <div class="row" style="margin-bottom:8px"><span class="input" style="flex:1 1 220px;width:auto">🔍 Chercher… (n°, défunt, notaire)</span><span class="btn small">Filtrer ▾</span><span class="chip">En retard ×</span><span class="chip">Chez le notaire ×</span><span class="btn small ghost">Trier : prochaine échéance ▾</span></div>
+ <p class="mini">Filtres : en retard · en recherche · héritiers trouvés · chez le notaire · clos · rangé dans (généalogie) · notaire.</p>
+ <div class="scrollx"><table style="min-width:1040px"><thead><tr><th></th><th>Dossier</th><th>État</th><th>Notaire</th><th>Prochaine échéance</th><th>Héritiers</th><th>Pièces</th><th>Temps</th><th>Avancement</th><th>Rangé dans</th></tr></thead><tbody>
+  <tr><td><span class="chk on"></span></td><td><b>2026-014</b> Marcel MAZAUD</td><td><span class="badge blue">en recherche</span></td><td>Me ROUSSILHE</td><td class="r" style="color:#c62828;font-weight:700">2 nov. · passée</td><td>5 trouvés · <b style="color:#b08800">1 à trouver</b></td><td>9 / 14</td><td>11 h 40</td><td><div class="bar late"><i style="width:53%"></i></div><small>53 %</small></td><td>⚖️ Dossiers de succession</td></tr>
+  <tr><td><span class="chk on"></span></td><td><b>2026-015</b> Jeanne LACOMBE</td><td><span class="badge ok">héritiers trouvés</span></td><td>Me ROUSSILHE</td><td>28 nov.</td><td>3 trouvés</td><td>12 / 13</td><td>6 h 15</td><td><div class="bar"><i style="width:71%"></i></div><small>71 %</small></td><td>⚖️ Dossiers de succession</td></tr>
+  <tr><td><span class="chk"></span></td><td><b>2026-012</b> Marie BESSE</td><td><span class="badge violet">remis au notaire</span></td><td>Me PEYRAT</td><td>15 déc.</td><td>4 trouvés</td><td>11 / 11</td><td>9 h 05</td><td><div class="bar"><i style="width:95%"></i></div><small>95 %</small></td><td>⚖️ Dossiers de succession</td></tr>
+  <tr><td><span class="chk"></span></td><td><b>2026-016</b> Henri VIALLE</td><td><span class="badge violet">remis au notaire</span></td><td>Me BESSE</td><td>—</td><td>2 trouvés</td><td>6 / 6</td><td>3 h 30</td><td><div class="bar"><i style="width:90%"></i></div><small>90 %</small></td><td>↗ ⚖️ 2026-016 VIALLE</td></tr>
+  <tr><td><span class="chk"></span></td><td><b>2026-011</b> Paul PEYRAT</td><td><span class="badge grey">clos</span></td><td>Me ROUSSILHE</td><td>—</td><td>6 trouvés</td><td>17 / 17</td><td>14 h 00</td><td><div class="bar done"><i style="width:100%"></i></div><small>100 %</small></td><td>↗ 🌳 Ma généalogie</td></tr>
+ </tbody></table></div>
+ <p class="hint">↔ Faire glisser le tableau.</p>
+ <div class="row" style="margin-top:10px;background:#eef4ff;border:2px solid #055dff;padding:8px 10px"><b>2 dossiers cochés</b><span class="btn small blue">⚖️ Ne montrer que ceux-ci</span><span class="btn small">⤓ Exporter en CSV</span><span class="btn small ghost">Tout décocher</span></div>
+ <p class="note">« Ne montrer que ceux-ci » règle le bouton ⚖️ (libellé « ⚖️ 2 dossiers ») et ouvre 👤 Personnes filtré. Si les dossiers cochés sont dans plusieurs généalogies, le bouton est désactivé avec « Les dossiers cochés sont dans des généalogies différentes : choisis-en dans une seule ». Liste | Fiches comme partout (H10) ; en Fiches, une vignette par dossier avec sa barre.</p>
+</div>
+
+<!-- ═════════════ 5. GARDE-FOUS ═════════════ -->
+<h2>5. Garde-fous <span class="badge new">nouveau</span></h2>
+<div class="grid">
+ <div class="case">
+  <div class="head"><span class="tag">5a · fusion de deux fiches de dossiers différents</span></div>
+  <div class="path">Fiche → ⋯ → Fusionner… (ou Listes → Outils de modification → Doublons)</div>
+  <div class="msg red">⚠️ <b>Ces deux fiches sont dans des dossiers différents.</b> Jean MAZAUD (2026-014, héritier) et Jean MAZAUD (2026-015, intermédiaire). Fusionner relie les deux successions et change les parts des deux dossiers. Vérifie avec des actes (naissance, parents) avant.</div>
+  <div class="row"><span class="btn ghost">Annuler</span><span class="btn">⇆ Comparer d’abord</span><span class="btn red">Fusionner quand même</span></div>
+  <p class="note">Si on fusionne : noté dans le journal des deux dossiers, et les deux sont recalculés (« Dévolution recalculée : … »).</p>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag">5b · homonyme d’un autre dossier</span></div>
+  <div class="msg warn">🔎 <b>Homonyme possible</b> : « Suzanne MAZAUD, née 1941 » existe aussi dans le dossier <b>2026-015</b>. Jamais relié tout seul.</div>
+  <div class="row"><span class="btn small">⇆ Comparer</span><span class="btn small">C’est la même personne : rattacher aussi</span><span class="btn small ghost">Pas la même</span></div>
+  <p class="note">Signalé dans 👥 Héritiers et dans l’onglet 🧑‍🤝‍🧑 Personnes, jamais appliqué sans clic. « Pas la même » est retenu pour ne plus le redemander. Dans des généalogies différentes, l’homonyme n’est pas cherché (bases séparées).</p>
+ </div>
+ <div class="case wide">
+  <div class="head"><span class="tag">5c · archiver un dossier clos dans un fichier, le retirer, le réimporter</span></div>
+  <div class="path">Dossier clos → <b>⋯</b> → <b>🗄 Archiver dans un fichier et retirer…</b> ; plus tard : ⚖️ Successions → ⋯ → <b>⤒ Réimporter un dossier archivé…</b></div>
+  <div class="grid" style="gap:16px">
+   <div class="win">
+    <div class="win-bar"><div><div class="eyebrow">🗄 Archiver le dossier 2026-011</div><b>Dans un fichier, puis retirer de la base</b></div></div>
+    <div class="win-body">
+     <p style="margin:0 0 6px">Le fichier <code>dossier-2026-011-PEYRAT.lcnda-succ.zip</code> contient : le dossier, le journal, les pièces et leurs images, les courriers, l’arbre de dévolution (SVG), le tableau pour le notaire (PDF) et les 23 fiches rattachées.</p>
+     <div class="choice"><label class="on"><span class="dot"></span><span><b>Garder les adresses des vivants dans le fichier</b><small>utile si le notaire rouvre la succession</small></span></label><label><span class="dot"></span><span><b>Retirer les adresses</b><small>comme l’archivage actuel</small></span></label></div>
+     <div class="msg">Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base. Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste. Une sauvegarde est faite avant.</div>
+    </div>
+    <div class="win-foot"><span class="btn ghost">Annuler</span><span class="btn blue">⤓ Enregistrer le fichier puis retirer</span></div>
+   </div>
+   <div class="win">
+    <div class="win-bar"><div><div class="eyebrow">⤒ Réimporter</div><b>dossier-2026-011-PEYRAT.lcnda-succ.zip</b></div></div>
+    <div class="win-body">
+     <p style="margin:0 0 6px">Dossier <b>2026-011</b> (Paul PEYRAT, clos le 4 oct. 2026), 23 fiches.</p>
+     <div class="msg warn">3 fiches ressemblent à des fiches déjà dans cette base (Jean MAZAUD, Marie BESSE, Louis MAZAUD) : elles seront proposées à la comparaison, jamais fusionnées seules.</div>
+     <span class="lab">Dans</span><div class="input">⚖️ Dossiers de succession ▾</div>
+    </div>
+    <div class="win-foot"><span class="btn ghost">Annuler</span><span class="btn blue">⤒ Réimporter le dossier</span></div>
+   </div>
+  </div>
+ </div>
+</div>
+
+<!-- ═════════════ 6. WIDGET ═════════════ -->
+<h2>6. Widget « ⚖️ Mes dossiers de succession » <span class="badge re">fait évoluer « ⚖️ Dossiers de succession »</span></h2>
+<p class="sub">Le widget actuel (échéances seules, <code>succ_widget</code>) garde sa clé et devient la vue d’ensemble. Pas de doublon : ceux qui l’ont déjà le voient changer de lui-même. Clic sur une ligne → ouvre le dossier (et propose d’ouvrir l’autre généalogie si besoin, comme en 2b).</p>
+<div class="path">Tableau de bord → <b>＋ Ajouter un widget</b> → Recherche → <b>⚖️ Mes dossiers de succession</b> ; réglages : ⋯ du widget → <b>Réglages du widget…</b></div>
+<div class="dash">
+ <div class="wd s2">
+  <h4>⚖️ Mes dossiers <span class="badge grey">petit</span></h4>
+  <div class="counts" style="grid-template-columns:repeat(2,1fr)"><div><b>2</b>en recherche</div><div><b>1</b>trouvés</div><div><b>2</b>chez le notaire</div><div><b>1</b>clos</div></div>
+  <div class="due"><div><span class="r">⏰ 2026-014 · passée (2 nov.)</span></div><div><span>2026-015 · 28 nov.</span></div></div>
+ </div>
+ <div class="wd s3" style="grid-column:span 4">
+  <h4>⚖️ Mes dossiers de succession <span class="badge grey">moyen</span><span class="btn small ghost">Tout voir ↗</span></h4>
+  <div class="counts"><div><b>2</b>en recherche</div><div><b>1</b>héritiers trouvés</div><div><b>2</b>remis au notaire</div><div><b>1</b>clos</div></div>
+  <ul class="wl">
+   <li class="late"><span class="nm">2026-014 MAZAUD · ⏰ échéance passée</span><div class="bar late"><i style="width:53%"></i></div><small>53 %</small></li>
+   <li><span class="nm">2026-015 LACOMBE · 28 nov.</span><div class="bar"><i style="width:71%"></i></div><small>71 %</small></li>
+   <li><span class="nm">2026-016 VIALLE ↗</span><div class="bar"><i style="width:90%"></i></div><small>90 %</small></li>
+   <li><span class="nm">2026-012 BESSE · 15 déc.</span><div class="bar"><i style="width:95%"></i></div><small>95 %</small></li>
+  </ul>
+ </div>
+ <div class="wd s6">
+  <h4>⚖️ Mes dossiers de succession <span class="badge grey">grand : les étapes</span><span class="btn small ghost">Tout voir ↗</span></h4>
+  <div class="scrollx"><table style="min-width:720px"><thead><tr><th>Dossier</th><th>Étapes (7)</th><th>%</th><th>Échéance</th><th>État</th></tr></thead><tbody>
+   <tr><td style="color:#c62828;font-weight:700">2026-014 MAZAUD</td><td><div class="steps"><i class="f"></i><i class="f"></i><i class="h"></i><i class="h"></i><i></i><i class="h"></i><i></i></div></td><td>53 %</td><td style="color:#c62828;font-weight:700">2 nov. · passée</td><td><span class="badge blue">en recherche</span></td></tr>
+   <tr><td>2026-015 LACOMBE</td><td><div class="steps"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="h"></i><i class="f"></i><i></i></div></td><td>71 %</td><td>28 nov.</td><td><span class="badge ok">héritiers trouvés</span></td></tr>
+   <tr><td>2026-012 BESSE</td><td><div class="steps"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="h"></i><i class="f"></i><i class="f"></i></div></td><td>95 %</td><td>15 déc.</td><td><span class="badge violet">remis au notaire</span></td></tr>
+  </tbody></table></div>
+  <p class="mini">Étapes : 1 défunt et acte de décès · 2 arbre de dévolution · 3 héritiers trouvés · 4 adresses · 5 contrats signés · 6 pièces · 7 remis au notaire. Survol d’une case : « Adresses : 3 sur 5 ».</p>
+ </div>
+</div>
+<div class="grid" style="margin-top:22px">
+ <div class="case">
+  <div class="head"><span class="tag">6a · réglages du widget</span></div>
+  <div class="win"><div class="win-body">
+   <span class="lab">Quels dossiers</span><div class="seg"><span>Tous</span><span class="on">En cours</span><span>Un filtre</span></div>
+   <p class="mini">« Un filtre » : en retard · en recherche · chez le notaire · rangés dans une généalogie · un notaire.</p>
+   <span class="lab">Montrer</span><div class="seg"><span>Compteurs</span><span class="on">Barres</span><span>Étapes</span></div>
+   <span class="lab">Trier par</span><div class="input">Prochaine échéance (retards d’abord) ▾</div>
+   <p class="mini">Autres tris : avancement le plus bas · le plus récent · n° de dossier.</p>
+   <span class="lab">Nombre de lignes</span><div class="input" style="width:90px">5</div>
+   <span class="lab">Largeur</span><div class="seg"><span>1/3</span><span class="on">2/3</span><span>Pleine</span></div>
+  </div></div>
+  <p class="note">Mêmes réglages que les autres widgets (largeur, nombre de lignes). Caché en mode consultation (« Pas en mode consultation »).</p>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag">6b · comment se calcule le % d’avancement</span></div>
+  <p class="note" style="margin-top:0">Somme de 7 étapes pondérées ; chaque étape compte en partie (une fraction de 0 à 1). Un dossier <b>clos</b> vaut 100 %. Arrondi à l’entier.</p>
+  <table class="formula"><thead><tr><th>Étape</th><th>Poids</th><th>Fraction faite</th></tr></thead><tbody>
+   <tr><td>1 Défunt et acte de décès</td><td>10</td><td>défunt choisi (½) + acte de décès « en main » (½)</td></tr>
+   <tr><td>2 Arbre de dévolution</td><td>15</td><td>parts qui totalisent 1 sans branche « à chercher » = 1 ; sinon 1 − (branches à chercher ÷ branches) ; hypothèse retenue écrite = 1</td></tr>
+   <tr><td>3 Héritiers trouvés</td><td>20</td><td>héritiers au statut connu ÷ héritiers (les « inconnus » ne comptent pas)</td></tr>
+   <tr><td>4 Adresses</td><td>10</td><td>héritiers vivants avec une adresse ÷ héritiers vivants</td></tr>
+   <tr><td>5 Contrats signés</td><td>15</td><td>héritiers vivants « signé » ou « refuse » ÷ héritiers vivants</td></tr>
+   <tr><td>6 Pièces</td><td>20</td><td>pièces « en main » ÷ pièces demandées (« sans objet » retirées)</td></tr>
+   <tr><td>7 Remis au notaire</td><td>10</td><td>état « remis au notaire » ou après = 1</td></tr>
+  </tbody></table>
+  <p class="note">Exemple 2026-014 : défunt et acte en main (1) ; une branche à chercher sur deux (0,5) ; 5 héritiers connus sur 6 (0,83) ; 3 adresses sur 5 (0,6) ; aucun contrat (0) ; 9 pièces sur 14 (0,64) ; pas remis (0) → 10 + 7,5 + 16,7 + 6 + 0 + 12,9 + 0 = <b>53 %</b>. Le calcul est fait dans <code>heritage-successoral-core.js</code> (testé) ; l’index de chaque base (1d) garde le dernier % calculé pour la vue d’ensemble.</p>
+ </div>
+</div>
+
+
+<!-- ═════════════ 7. PERSONNES : VUE PAR DOSSIER ═════════════ -->
+<h2>7. 👤 Personnes : « Vue actuelle » ou « Vue par dossier » <span class="badge new">nouveau</span></h2>
+<p class="sub">Dans la colonne de gauche des Personnes, quand cette généalogie contient au moins un dossier de succession (usage successoral seulement). Même façon de faire que l’onglet 📄 Documents (« A → Z | 📁 Dossiers ») et Graphiques → Mes diagrammes (dossiers repliables) : rien de nouveau à apprendre.</p>
+<div class="path">👤 Personnes → colonne de gauche → sous les onglets (Personnes · Animaux…) → <b>Vue actuelle | ⚖️ Par dossier</b></div>
+<div class="grid">
+ <div class="case wide">
+  <div class="head"><span class="tag">7a · à 1200 px : la colonne de gauche et la fiche</span><small class="k">à 400 px : la colonne prend toute la largeur, la fiche s’ouvre en dessous</small></div>
+  <div class="app2">
+   <div class="side">
+    <div class="segx"><span>Vue actuelle</span><span class="on">⚖️ Par dossier</span></div>
+    <div class="input" style="margin-bottom:8px">🔍 Prénom, nom…</div>
+    <div class="ordrow"><span class="k">Ranger les dossiers :</span><span class="seg"><span>A → Z</span><span class="on">À la main</span></span></div>
+    <div class="tray"><div class="th"><span class="grip" title="Glisser (ou Alt + ↑ / ↓)">⠿</span>▾ ⚖️ 2026-014 MAZAUD<span class="n">5</span></div>
+     <ul class="pl">
+      <li><span class="dot"></span><b>Claire MAZAUD</b><small>1962</small></li>
+      <li><span class="dot"></span><b>Emma MAZAUD</b><small>1996</small></li>
+      <li><span class="dot d"></span><b>Louis MAZAUD</b><small>1900-1980</small></li>
+      <li class="on"><span class="dot d"></span><b>Marcel MAZAUD</b><span class="badge grey" style="font-size:9.5px">défunt</span><small>1938-2026</small></li>
+      <li><span class="dot"></span><b>Suzanne MAZAUD</b><span class="chip">⚖️ 2</span><small>1941</small></li>
+     </ul></div>
+    <div class="tray"><div class="th"><span class="grip">⠿</span>▾ ⚖️ 2026-015 LACOMBE<span class="n">4</span></div>
+     <ul class="pl">
+      <li><span class="dot d"></span><b>Jeanne LACOMBE</b><small>1940-2019</small></li>
+      <li><span class="dot d"></span><b>Robert LACOMBE</b><small>1938-2000</small></li>
+      <li><span class="dot"></span><b>Suzanne MAZAUD</b><span class="chip">⚖️ 2</span><small>1941</small></li>
+     </ul></div>
+    <div class="tray closed"><div class="th"><span class="grip">⠿</span>▸ ⚖️ 2026-012 BESSE<span class="n">11</span></div><ul class="pl"><li>…</li></ul></div>
+    <div class="tray closed"><div class="th"><span class="grip">⠿</span>▸ Sans dossier<span class="n">4 790</span></div><ul class="pl"><li>…</li></ul></div>
+    <p class="mini" style="margin:6px 0 0">＋ Nouvelle personne · 4 812 personnes dans la base</p>
+   </div>
+   <div class="wsp" style="padding:12px;min-width:0">
+    <div class="person"><span class="ph">👤</span><div><b style="font-size:18px">Marcel MAZAUD</b> <span class="chip">⚖️ 2026-014 · défunt</span><br><small class="k">12 juin 1938 Malvialle – 3 mars 2026</small></div></div>
+    <p class="note">La fiche s’ouvre comme d’habitude. Le badge rappelle le ou les dossiers.</p>
+   </div>
+  </div>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag">7b · à 400 px</span></div>
+  <div style="max-width:360px;border:2px solid #111;background:#fbfbfc;padding:10px">
+   <div class="side" style="border:0;padding:0">
+    <div class="segx"><span>Vue actuelle</span><span class="on">⚖️ Par dossier</span></div>
+    <div class="ordrow"><span class="k">Ranger :</span><span class="seg"><span class="on">A → Z</span><span>À la main</span></span></div>
+    <div class="tray"><div class="th">▾ ⚖️ 2026-012 BESSE<span class="n">11</span></div><ul class="pl"><li><span class="dot d"></span><b>Marie BESSE</b><small>1910-1995</small></li><li><span class="dot"></span><b>Bertrand ROUSSILHE</b><small>1958</small></li></ul></div>
+    <div class="tray closed"><div class="th">▸ ⚖️ 2026-014 MAZAUD<span class="n">6</span></div></div>
+    <div class="tray closed"><div class="th">▸ ⚖️ 2026-015 LACOMBE<span class="n">4</span></div></div>
+    <div class="tray closed"><div class="th">▸ Sans dossier<span class="n">4 790</span></div></div>
+   </div>
+  </div>
+  <p class="note">En « A → Z », pas de poignée ⠿ : les dossiers suivent leur n° et le nom du défunt. « Sans dossier » est toujours en dernier.</p>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag">7c · règles</span></div>
+  <ul class="note" style="padding-left:18px;margin:0">
+   <li>Un dossier repliable par dossier de succession de <b>cette</b> généalogie, plus « Sans dossier ». Une personne dans 2 dossiers apparaît dans les deux, avec le badge « ⚖️ 2 ».</li>
+   <li>Dans chaque dossier : les fiches par ordre alphabétique (nom puis prénom), comme la vue actuelle.</li>
+   <li>Ordre des dossiers : <b>A → Z</b>, ou <b>À la main</b> : glisser par la poignée ⠿, ou Alt + ↑ / ↓ sur le dossier qui a le focus (comme les listes de réglages). « ↶ Annuler » après chaque déplacement.</li>
+   <li>La recherche garde les dossiers : ceux qui ne contiennent aucun résultat sont repliés et grisés « 0 ».</li>
+   <li><b>Avec le bouton ⚖️</b> : si un filtre est actif, seuls ses dossiers apparaissent (pas de « Sans dossier ») ; ✕ du bandeau = tous les dossiers reviennent. Le filtre ne change pas l’ordre choisi.</li>
+   <li>Gardé dans les réglages de la généalogie : <code>genealogie-succ-people-view</code> = {view: 'list' | 'cases', order: 'az' | 'hand', hand: [ids des dossiers], closed: [ids]} (suit la base, comme <code>genealogie-side-folders</code>).</li>
+   <li>Mode consultation et mode simple : seulement la vue actuelle (le sélecteur est caché).</li>
+  </ul>
+ </div>
+</div>
+
+<!-- ═════════════ EMPLACEMENTS ═════════════ -->
+<h2>Tableau des emplacements</h2>
+<div class="case wide"><div class="scrollx"><table style="min-width:760px"><thead><tr><th>Quoi</th><th>Où exactement</th><th>Qui le voit</th></tr></thead><tbody>
+ <tr><td>Où ranger les dossiers (premier choix)</td><td>⚖️ Successions → ＋ Ouvrir un dossier (la première fois)</td><td>usage successoral</td></tr>
+ <tr><td>Où ranger les dossiers (ensuite) · ⇄ Déplacer</td><td>Réglages → Apparence → 🧭 Usage de l’app → carte ⚖️ → « ⚖️ Où ranger les dossiers »</td><td>usage successoral</td></tr>
+ <tr><td>Base à part / un dossier par base</td><td>🌳 Mes généalogies (en haut à droite, <code>#genealogy-switch</code>), marque ⚖️</td><td>tous</td></tr>
+ <tr><td>Bouton ⚖️ (filtre de toute l’app) et bandeau</td><td>Boutons en haut à droite ; réglage : Réglages → Apparence → Boutons en haut à droite</td><td>usage successoral, pas en consultation ni en mode simple</td></tr>
+ <tr><td>Rattacher une personne, rôle</td><td>Fiche → ⋯ → « ⚖️ Dossiers… »</td><td>usage successoral</td></tr>
+ <tr><td>Personnes d’un dossier</td><td>⚖️ Successions → un dossier → onglet « 🧑‍🤝‍🧑 Personnes »</td><td>usage successoral</td></tr>
+ <tr><td>Badge « ⚖️ N dossiers »</td><td>En-tête de la fiche ; colonne de gauche des Personnes</td><td>usage successoral</td></tr>
+ <tr><td>Vue par dossier des Personnes</td><td>👤 Personnes → colonne de gauche → « Vue actuelle | ⚖️ Par dossier »</td><td>usage successoral, si la base a des dossiers</td></tr>
+ <tr><td>Tableau de bord des dossiers · « Ne montrer que ceux-ci »</td><td>⚖️ Successions → sélecteur « Dossiers »</td><td>usage successoral</td></tr>
+ <tr><td>Avertissement de fusion</td><td>Fiche → ⋯ → Fusionner… ; Listes → Outils de modification → Doublons</td><td>tous (si les fiches sont dans des dossiers)</td></tr>
+ <tr><td>Homonyme d’un autre dossier</td><td>Dossier → 👥 Héritiers et 🧑‍🤝‍🧑 Personnes</td><td>usage successoral</td></tr>
+ <tr><td>Archiver dans un fichier · réimporter</td><td>Dossier clos → ⋯ → « 🗄 Archiver dans un fichier et retirer… » ; ⚖️ Successions → ⋯ → « ⤒ Réimporter un dossier archivé… »</td><td>usage successoral</td></tr>
+ <tr><td>Widget « ⚖️ Mes dossiers de succession »</td><td>Tableau de bord → ＋ Ajouter un widget → Recherche ; réglages : ⋯ du widget</td><td>tous (vide sans dossier)</td></tr>
+</tbody></table></div><p class="hint">↔ Faire glisser le tableau.</p></div>
+
+<!-- ═════════════ QUESTIONS ═════════════ -->
+<h2>Questions à poser à l’utilisateur</h2>
+<div class="qs"><ol>
+ <li><b>Poids du % d’avancement</b> (6b) : 10 / 15 / 20 / 10 / 15 / 20 / 10 te convient-il ? Un refus de signer doit-il compter comme « fait » pour l’étape 5 ?</li>
+ <li><b>Déplacer un dossier</b> (1b) : une fiche partagée avec ta famille est <b>copiée</b> dans la base de destination (elle existe alors deux fois). D’accord, ou faut-il refuser le déplacement tant qu’une fiche est partagée ?</li>
+ <li><b>Reprendre le défunt depuis Ma généalogie</b> (1a) : copier la fiche avec ses parents et enfants seulement, ou toute l’ascendance jusqu’aux grands-parents (nécessaire pour les oncles et cousins) ?</li>
+ <li><b>Archive en fichier</b> (5c) : garder les adresses des vivants dans le fichier par défaut, ou les retirer par défaut (plus prudent) ?</li>
+ <li><b>Vue par dossier</b> (7) : « Sans dossier » peut contenir des milliers de fiches (ta famille). Le garder replié par défaut, ou le cacher quand la généalogie est la base professionnelle ?</li>
+ <li><b>Filtre ⚖️ dans l’arbre</b> (2a) : les fiches hors dossier sont grisées sans nom. Préfères-tu qu’elles disparaissent complètement ?</li>
+</ol></div>
+
+</div></body></html>
