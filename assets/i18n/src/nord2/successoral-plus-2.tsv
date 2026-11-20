@@ -1,0 +1,610 @@
+fr ¦ sk ¦ nb
+# Zone « successoral-plus-2 » : ⚖️ outils de plus du généalogiste successoral (heritage-successoral-plus2*.js, lib/successoral_plus2.php, lib/successoral_factures.php)
+Réglages de cet outil ¦ Nastavenia tohto nástroja ¦ Innstillinger for dette verktøyet
+(conseillé) ¦ (odporúčané) ¦ (anbefalt)
+Autre : ¦ Iné: ¦ Annet:
+Outils du dossier : réglages ¦ Nástroje spisu: nastavenia ¦ Verktøy for saken: innstillinger
+Chaque choix se change ici ; l’option conseillée est celle du départ. ¦ Každú voľbu zmeníš tu; odporúčaná možnosť je tá počiatočná. ¦ Hvert valg endrer du her; det anbefalte er standard.
+Réglage enregistré : {what} ¦ Nastavenie uložené: {what} ¦ Innstilling lagret: {what}
+Adresse refusée : https:// et {numero} sont obligatoires. ¦ Adresa odmietnutá: https:// a {numero} sú povinné. ¦ Adresse avvist: https:// og {numero} er påkrevd.
+Carte des héritiers (dossiers en cours) ¦ Mapa dedičov (rozpracované spisy) ¦ Kart over arvinger (pågående saker)
+Délai de réponse par organisme ¦ Čas odpovede podľa úradu ¦ Svartid per kontor
+🙈 Écran partagé ¦ 🙈 Zdieľaná obrazovka ¦ 🙈 Delt skjerm
+Fusionner avec un autre dossier… ¦ Zlúčiť s iným spisom… ¦ Slå sammen med en annen sak…
+Annuler la dernière fusion ¦ Zrušiť posledné zlúčenie ¦ Angre siste sammenslåing
+nom de naissance ¦ rodné priezvisko ¦ fødenavn
+prénom ¦ krstné meno ¦ fornavn
+né(e) le {d} ¦ narodený(á) {d} ¦ født {d}
+même mois ¦ rovnaký mesiac ¦ samme måned
+même année ¦ rovnaký rok ¦ samme år
+± 1 an ¦ ± 1 rok ¦ ± 1 år
+date inconnue ¦ dátum neznámy ¦ dato ukjent
+date de naissance différente ¦ iný dátum narodenia ¦ annen fødselsdato
+même département ¦ rovnaký departement ¦ samme departement
+lieu inconnu sur la fiche ¦ miesto na karte neznáme ¦ sted på kortet ukjent
+lieu : {p} ¦ miesto: {p} ¦ sted: {p}
+Le fichier des décès n’est pas dans l’app. ¦ Súbor úmrtí nie je v aplikácii. ¦ Dødsfallsfilen er ikke i appen.
+⤓ Importer les décès ¦ ⤓ Importovať úmrtia ¦ ⤓ Importer dødsfall
+L’import se fait une seule fois, depuis data.gouv.fr (environ 25 millions de lignes depuis 1970), ou par années choisies. ¦ Import sa robí iba raz, z data.gouv.fr (asi 25 miliónov riadkov od roku 1970), alebo po vybraných rokoch. ¦ Importen gjøres én gang, fra data.gouv.fr (rundt 25 millioner linjer siden 1970), eller for utvalgte år.
+fichier importé : décès {a} → {b} ¦ importovaný súbor: úmrtia {a} → {b} ¦ importert fil: dødsfall {a} → {b}
+un décès plus ancien ne peut pas être trouvé ¦ staršie úmrtie sa nedá nájsť ¦ tidligere dødsfall kan ikke finnes
+plafonné à {n} ¦ obmedzené na {n} ¦ begrenset til {n}
+acte n° {n} ¦ záznam č. {n} ¦ akt nr. {n}
+avant le défunt : si c’est cette personne, ses enfants viennent à sa place (représentation). ¦ pred poručiteľom: ak je to táto osoba, dedia namiesto nej jej deti (zastúpenie). ¦ før arvelateren: hvis det er denne personen, arver barna i stedet (representasjon).
+après le défunt : sa part passe à ses propres héritiers. ¦ po poručiteľovi: jeho podiel prechádza na jeho vlastných dedičov. ¦ etter arvelateren: andelen går videre til personens egne arvinger.
+Les Français nés à l’étranger ont leur acte au Service central d’état civil (Nantes). ¦ Francúzi narodení v cudzine majú záznam na Ústrednom matričnom úrade (Nantes). ¦ Franskmenn født i utlandet har akten sin hos Det sentrale folkeregisterkontoret (Nantes).
+déjà confirmé ¦ už potvrdené ¦ allerede bekreftet
+C’est cette personne ¦ To je táto osoba ¦ Det er denne personen
+Pas la même personne ¦ Nie je to tá istá osoba ¦ Ikke samme person
+Nom de naissance inconnu : cherché sous {n}, pistes moins sûres ¦ Rodné priezvisko neznáme: hľadané ako {n}, menej isté stopy ¦ Fødenavn ukjent: søkt som {n}, mindre sikre spor
+Deux personnes se ressemblent : demande l’acte avant de choisir ¦ Dve osoby sa podobajú: vyžiadaj si záznam, než vyberieš ¦ To personer ligner: be om akten før du velger
+rien trouvé dans le fichier ¦ v súbore sa nič nenašlo ¦ ingenting funnet i filen
+« Rien trouvé » ne veut pas dire « vivant » (un décès à l’étranger manque souvent). ¦ „Nič sa nenašlo“ neznamená „žije“ (úmrtie v cudzine často chýba). ¦ «Ingenting funnet» betyr ikke «i live» (dødsfall i utlandet mangler ofte).
+Les héritiers « vivants » comparés au fichier des décès ¦ „Žijúci“ dedičia porovnaní so súborom úmrtí ¦ «Levende» arvinger sammenlignet med dødsfallsfilen
+pistes à partir de {n} ¦ stopy od {n} ¦ spor fra {n}
+Aucun héritier « vivant » à vérifier dans ce dossier. ¦ V tomto spise nie je žiadny „žijúci“ dedič na overenie. ¦ Ingen «levende» arving å kontrollere i denne saken.
+Comment c’est calculé ¦ Ako sa to počíta ¦ Slik beregnes det
+Le nom de naissance, sans accents ni tirets ; jamais le nom d’épouse (l’INSEE donne le nom de naissance). ¦ Rodné priezvisko, bez diakritiky a spojovníkov; nikdy priezvisko po sobáši (INSEE uvádza rodné priezvisko). ¦ Fødenavn, uten aksenter og bindestreker; aldri navnet fra ekteskap (INSEE fører fødenavnet).
+Le premier prénom de la fiche parmi les prénoms INSEE ; Jean-Pierre = Jean Pierre. ¦ Prvé krstné meno z karty medzi menami INSEE; Jean-Pierre = Jean Pierre. ¦ Første fornavn på kortet blant INSEE-fornavnene; Jean-Pierre = Jean Pierre.
+Jour exact 30 · même mois 20 · même année 12 · ± 1 an 6 ; sans date : plafond 70. ¦ Presný deň 30 · rovnaký mesiac 20 · rovnaký rok 12 · ± 1 rok 6; bez dátumu: najviac 70. ¦ Nøyaktig dag 30 · samme måned 20 · samme år 12 · ± 1 år 6; uten dato: maks 70.
+La commune ; même département 10 ; né à l’étranger : le pays (plafond 80). ¦ Obec; rovnaký departement 10; narodený v cudzine: krajina (najviac 80). ¦ Kommune; samme departement 10; født i utlandet: landet (maks 80).
+Différent : la piste est écartée. ¦ Iné: stopa sa vyradí. ¦ Annet: sporet forkastes.
+Pistes écartées ({n}) ¦ Vyradené stopy ({n}) ¦ Forkastede spor ({n})
+Piste remise ¦ Stopa vrátená ¦ Spor gjenopprettet
+« Pas la même personne » retenu : cette piste ne reviendra plus ¦ „Nie je to tá istá osoba“ zapamätané: táto stopa sa nevráti ¦ «Ikke samme person» lagret: dette sporet kommer ikke tilbake
+Sur la fiche de {n} : un décès le {d}, source « Fichier des personnes décédées (INSEE) », avec la date du relevé. ¦ Na karte {n}: úmrtie {d}, zdroj „Súbor zosnulých osôb (INSEE)“, s dátumom overenia. ¦ På kortet til {n}: dødsfall {d}, kilde «Filen over avdøde personer (INSEE)», med kontrolldatoen.
+Dans ce dossier : statut retenu « {s} » ; le calcul est refait. ¦ V tomto spise: prijatý stav „{s}“; výpočet sa urobí znova. ¦ I denne saken: status «{s}» beholdt; beregningen gjøres på nytt.
+Ce qui va changer ¦ Čo sa zmení ¦ Hva som endres
+{n} marqué(e) décédé(e) (INSEE). Calcul refait. ¦ {n} označený(á) ako zosnulý(á) (INSEE). Výpočet urobený znova. ¦ {n} merket som avdød (INSEE). Beregningen gjort på nytt.
+Vérifier les décès ¦ Overiť úmrtia ¦ Kontroller dødsfall
+Questionnaire… ¦ Dotazník… ¦ Spørreskjema…
+⚰️ INSEE : {n} piste(s) ¦ ⚰️ INSEE: stôp: {n} ¦ ⚰️ INSEE: {n} spor
+⚰️ vérifié le {d} ¦ ⚰️ overené {d} ¦ ⚰️ kontrollert {d}
+🕵️ Recherches ¦ 🕵️ Pátrania ¦ 🕵️ Undersøkelser
+📞 Noter un échange ¦ 📞 Zapísať kontakt ¦ 📞 Noter en kontakt
+Ouvrir un dossier lié ¦ Otvoriť prepojený spis ¦ Åpne den tilknyttede saken
+Dossiers liés ¦ Prepojené spisy ¦ Tilknyttede saker
+Succession de {n} ¦ Dedičstvo po {n} ¦ Dødsboet etter {n}
+dossier d’origine {n} ¦ pôvodný spis {n} ¦ opprinnelig sak {n}
+Deux défunts, deux calculs : les successions restent distinctes. ¦ Dvaja zosnulí, dva výpočty: dedičstvá zostávajú oddelené. ¦ To avdøde, to beregninger: dødsboene holdes adskilt.
+Aucun héritier trouvé d’après les fiches. ¦ Podľa kariet sa nenašiel žiadny dedič. ¦ Ingen arving funnet ut fra kortene.
+Échanges ¦ Kontakty ¦ Kontakter
+Noter un échange ¦ Zapísať kontakt ¦ Noter en kontakt
+Les courriers du Registre ne sont pas recopiés ici : ils sont montrés en gris, en lecture. ¦ Listy z evidencie sa sem nekopírujú: sú zobrazené sivo, len na čítanie. ¦ Brev fra registeret kopieres ikke hit: de vises i grått, bare for lesing.
+Chercher… (personne, résumé) ¦ Hľadať… (osoba, zhrnutie) ¦ Søk… (person, sammendrag)
+du dossier fusionné ¦ zo zlúčeného spisu ¦ fra sammenslått sak
+Registre de courriers, n° {n} ¦ Evidencia korešpondencie, č. {n} ¦ Brevregister, nr. {n}
+Aucun échange noté. ¦ Žiadny kontakt nezapísaný. ¦ Ingen kontakt notert.
+✎ Corriger un échange ¦ ✎ Opraviť kontakt ¦ ✎ Rett kontakten
+＋ Noter un échange ¦ ＋ Zapísať kontakt ¦ ＋ Noter en kontakt
+Avec (héritier, notaire, mairie…) ¦ S kým (dedič, notár, obecný úrad…) ¦ Med hvem (arving, notarius, rådhus…)
+Prochaine action ¦ Ďalší krok ¦ Neste steg
+Durée (minutes) ¦ Trvanie (minúty) ¦ Varighet (minutter)
+⏱ Compter la durée dans 💶 Temps ¦ ⏱ Započítať čas do 💶 Času ¦ ⏱ Regn tiden med i 💶 Tid
+C’est une recherche (va dans 🕵️ Recherches) ¦ Je to pátranie (ide do 🕵️ Pátraní) ¦ Det er en undersøkelse (går til 🕵️ Undersøkelser)
+Avec une date, une échéance va dans le dossier et dans la 🔔 cloche (jamais le résumé). ¦ S dátumom ide lehota do spisu a do 🔔 zvončeka (nikdy zhrnutie). ¦ Med dato går fristen inn i saken og i 🔔 klokken (aldri sammendraget).
+Échange corrigé (noté au 🕓 Journal) ¦ Kontakt opravený (zapísaný v 🕓 Denníku) ¦ Kontakt rettet (ført i 🕓 Loggen)
+Échange noté ¦ Kontakt zapísaný ¦ Kontakt notert
+Trois fois « ne répond pas » de suite : noter 🔇 ne répond pas ? ¦ Trikrát po sebe „neodpovedá“: zapísať 🔇 neodpovedá? ¦ Tre ganger på rad «svarer ikke»: notere 🔇 svarer ikke?
+Recommandé ¦ Doporučene ¦ Rekommandert
+Envoyé en recommandé ¦ Odoslané doporučene ¦ Sendt rekommandert
+N° du recommandé ¦ Č. doporučenej zásielky ¦ Nr. på rekommandert sending
+Numéro inhabituel, gardé tel quel. ¦ Nezvyčajné číslo, ponechané bez zmeny. ¦ Uvanlig nummer, beholdt som det er.
+AR reçu le ¦ Doručenka prišla ¦ Mottaksbevis kommet
+Relance si rien après (jours) ¦ Upomienka, keď nič po (dňoch) ¦ Påminnelse hvis ingenting etter (dager)
+Réponse reçue le ¦ Odpoveď prišla ¦ Svar kommet
+Retour du courrier ¦ Vrátenie listu ¦ Brevet kom i retur
+pli non distribué ¦ zásielka nedoručená ¦ ikke levert
+destinataire inconnu ¦ adresát neznámy ¦ adressat ukjent
+AR reçu aujourd’hui ¦ Doručenka dnes ¦ Mottaksbevis i dag
+Suivre en ligne ¦ Sledovať online ¦ Spor på nett
+Copier le numéro ¦ Kopírovať číslo ¦ Kopier nummeret
+L’app ne fait aucune requête : le lien ouvre la page de suivi dans ton navigateur ; tu notes toi-même la date de l’AR. ¦ Aplikácia neposiela žiadnu požiadavku: odkaz otvorí stránku sledovania v tvojom prehliadači; dátum doručenky si zapíšeš sám. ¦ Appen sender ingen forespørsel: lenken åpner sporingssiden i nettleseren din; datoen for mottaksbeviset fører du selv.
+Tape d’abord le numéro. ¦ Najprv napíš číslo. ¦ Skriv inn nummeret først.
+Numéro copié ¦ Číslo skopírované ¦ Nummer kopiert
+Courrier revenu : noter 🔎 introuvable pour cet héritier ? ¦ List sa vrátil: zapísať 🔎 nedá sa nájsť pre tohto dediča? ¦ Brevet kom i retur: notere 🔎 ikke funnet for denne arvingen?
+✓ AR {d} ¦ ✓ Doručenka {d} ¦ ✓ Mottaksbevis {d}
+revenu ¦ vrátené ¦ i retur
+📮 sans AR · {n} j ¦ 📮 bez doručenky · {n} d ¦ 📮 uten mottaksbevis · {n} d
+Recommandés ¦ Doporučené zásielky ¦ Rekommanderte sendinger
+Sans AR ¦ Bez doručenky ¦ Uten mottaksbevis
+{n} recommandés, {m} sans accusé ¦ Doporučených: {n}, bez doručenky: {m} ¦ {n} rekommanderte, {m} uten mottaksbevis
+Importer des réponses… ¦ Importovať odpovede… ¦ Importer svar…
+Saisir un questionnaire papier ¦ Zadať papierový dotazník ¦ Registrer et papirskjema
+📮 Recommandé ¦ 📮 Doporučene ¦ 📮 Rekommandert
+Questionnaires ¦ Dotazníky ¦ Spørreskjemaer
+préparé le {d} ¦ pripravený {d} ¦ klargjort {d}
+réponses écrites le {d} ¦ odpovede zapísané {d} ¦ svar registrert {d}
+Questionnaire ¦ Dotazník ¦ Spørreskjema
+au sujet d’une succession ¦ vo veci dedičstva ¦ angående et dødsbo
+Vous ¦ Vy ¦ Deg
+Nom de naissance ¦ Rodné priezvisko ¦ Fødenavn
+Conjoint(s) ¦ Manžel(ka) / manželia ¦ Ektefelle(r)
+Date du mariage (ou PACS) ¦ Dátum sobáša (alebo partnerstva) ¦ Dato for ekteskap (eller partnerskap)
+Adresse, téléphone, courriel ¦ Adresa, telefón, e-mail ¦ Adresse, telefon, e-post
+Code postal ¦ PSČ ¦ Postnummer
+Autres membres de la famille connus ¦ Ďalší známi členovia rodiny ¦ Andre kjente familiemedlemmer
+Frères, sœurs, cousins…, avec un moyen de les joindre ¦ Bratia, sestry, bratranci…, so spôsobom, ako ich zastihnúť ¦ Brødre, søstre, søskenbarn…, med en måte å nå dem på
+Documents que vous pouvez fournir ¦ Dokumenty, ktoré môžete dodať ¦ Dokumenter du kan levere
+livret de famille ¦ rodinná knižka ¦ familiebok
+acte de naissance ¦ rodný list ¦ fødselsattest
+acte de mariage ¦ sobášny list ¦ vigselsattest
+jugement ¦ rozsudok ¦ dom
+Vos réponses restent sur cet appareil tant que vous n’envoyez rien. ¦ Vaše odpovede zostávajú v tomto zariadení, kým nič neodošlete. ¦ Svarene dine blir på denne enheten til du sender noe.
+Enregistrer mes réponses ¦ Uložiť moje odpovede ¦ Lagre svarene mine
+Un questionnaire à envoyer ¦ Dotazník na odoslanie ¦ Spørreskjema å sende
+Fabriquer et ranger au Registre ¦ Vytvoriť a uložiť do evidencie ¦ Lag og arkiver i registeret
+Ce qu’on demande ¦ Na čo sa pýtame ¦ Hva vi spør om
+Ta question ¦ Tvoja otázka ¦ Spørsmålet ditt
+Comment l’envoyer ¦ Ako ho poslať ¦ Hvordan sende det
+Ce qui est pré-rempli ¦ Čo je predvyplnené ¦ Hva som er forhåndsutfylt
+Jamais le nom du défunt ni un montant : « au sujet d’une succession ». Le fichier s’ouvre d’un double-clic, sans internet ; l’héritier renvoie un petit fichier. ¦ Nikdy meno poručiteľa ani suma: „vo veci dedičstva“. Súbor sa otvorí dvojklikom, bez internetu; dedič pošle späť malý súbor. ¦ Aldri navnet på arvelateren eller noe beløp: «angående et dødsbo». Filen åpnes med dobbeltklikk, uten internett; arvingen sender tilbake en liten fil.
+{n} prêts, rangés au Registre de courriers ¦ Pripravené: {n}, uložené v evidencii korešpondencie ¦ {n} klargjort, arkivert i brevregisteret
+Ce fichier ne vient pas d’un questionnaire de ce dossier. ¦ Tento súbor nepochádza z dotazníka tohto spisu. ¦ Denne filen kommer ikke fra et spørreskjema i denne saken.
+Revoir avant d’écrire ¦ Skontrolovať pred zápisom ¦ Gjennomgå før registrering
+Enfants (un par ligne : prénom, année) ¦ Deti (jedno na riadok: meno, rok) ¦ Barn (ett per linje: navn, år)
+Documents promis ¦ Sľúbené dokumenty ¦ Lovede dokumenter
+Réponses de {n} ¦ Odpovede od {n} ¦ Svar fra {n}
+Écrire les changements cochés ¦ Zapísať zaškrtnuté zmeny ¦ Registrer de avkryssede endringene
+Une réponse a déjà été importée le {d} : compare avec celle-ci. ¦ Odpoveď už bola importovaná {d}: porovnaj ju s touto. ¦ Et svar ble allerede importert {d}: sammenlign det med dette.
+fichier vérifié ✓ (bon questionnaire, pas modifié) ¦ súbor overený ✓ (správny dotazník, nezmenený) ¦ fil kontrollert ✓ (riktig spørreskjema, ikke endret)
+Coche ce qui doit aller dans le dossier. Rien n’est écrit sans ta revue ; « source : déclaration de l’héritier » accompagne tout ce qui est écrit. ¦ Zaškrtni, čo má ísť do spisu. Nič sa nezapíše bez tvojej kontroly; ku všetkému zapísanému patrí „zdroj: vyhlásenie dediča“. ¦ Kryss av det som skal inn i saken. Ingenting registreres uten din kontroll; alt som føres inn får «kilde: arvingens erklæring».
+Dans la base ¦ V databáze ¦ I basen
+« Famille connue » va en note du dossier, jamais en fiches. Les enfants créent des fiches reliées à l’héritier. Les documents promis deviennent une échéance. ¦ „Známa rodina“ ide do poznámky spisu, nikdy do kariet. Deti vytvoria karty prepojené s dedičom. Sľúbené dokumenty sa stanú lehotou. ¦ «Kjent familie» går i saksnotatet, aldri i kortene. Barna lager kort knyttet til arvingen. De lovede dokumentene blir en frist.
+{n} écrits. Calcul refait. ¦ Zapísané: {n}. Výpočet urobený znova. ¦ {n} registrert. Beregningen gjort på nytt.
+passée ¦ uplynulo ¦ passert
+dans {n} j ¦ o {n} d ¦ om {n} d
+était le {d} ¦ bolo {d} ¦ var {d}
+Une date importante ¦ Dôležitý dátum ¦ Viktig dato
+Mes dates importantes ¦ Moje dôležité dátumy ¦ Mine viktige datoer
+D’où vient cette date ¦ Odkiaľ je tento dátum ¦ Hvor kommer denne datoen fra
+Les dates que le notaire t’a données, rappelées à temps. ¦ Dátumy, ktoré ti dal notár, pripomenuté včas. ¦ Datoene notarius har gitt deg, påminnet i tide.
+L’app ne calcule aucun délai légal : elle ne connaît pas ta situation. ¦ Aplikácia nepočíta žiadnu zákonnú lehotu: nepozná tvoju situáciu. ¦ Appen beregner ingen lovbestemt frist: den kjenner ikke situasjonen din.
+✎ Modifier la date ¦ ✎ Zmeniť dátum ¦ ✎ Endre datoen
+＋ Une date importante ¦ ＋ Dôležitý dátum ¦ ＋ En viktig dato
+D’où vient cette date (obligatoire) ¦ Odkiaľ je tento dátum (povinné) ¦ Hvor kommer denne datoen fra (påkrevd)
+ex. : Me VIALLE, courriel du 4 nov. ¦ napr.: Me VIALLE, e-mail zo 4. 11. ¦ f.eks.: Me VIALLE, e-post 4/11
+Date déplacée : l’ancienne reste en dessous et la modification est notée au 🕓 Journal. ¦ Dátum posunutý: starý zostane pod ním a zmena sa zapíše do 🕓 Denníka. ¦ Dato flyttet: den gamle står igjen under, og endringen føres i 🕓 Loggen.
+Date modifiée ¦ Dátum zmenený ¦ Dato endret
+Date importante ajoutée ¦ Dôležitý dátum pridaný ¦ Viktig dato lagt til
+🔗 {a} liens ne reposent que sur une pièce, {b} sur aucune. Ce n’est pas une erreur : c’est à vérifier avant la remise. ¦ 🔗 Väzieb opretých o jediný doklad: {a}, o žiadny: {b}. Nie je to chyba: treba to overiť pred odovzdaním. ¦ 🔗 {a} forbindelser hviler på ett enkelt bevis, {b} på ingen. Det er ingen feil: å kontrollere før levering.
+🔗 Chaque lien repose sur assez de pièces. ¦ 🔗 Každá väzba sa opiera o dosť dokladov. ¦ 🔗 Hver forbindelse hviler på nok bevis.
+Voir les liens ¦ Zobraziť väzby ¦ Vis forbindelsene
+Une lettre par service ({n}) ¦ Jeden list na úrad ({n}) ¦ Ett brev per kontor ({n})
+délivrée le {d} ¦ vydané {d} ¦ utstedt {d}
+valable jusqu’au {d} ¦ platné do {d} ¦ gyldig til {d}
+📅 Date de délivrance ¦ 📅 Dátum vydania ¦ 📅 Utstedelsesdato
+Chaque maillon : combien de pièces le prouvent ¦ Každý článok: koľko dokladov ho dokazuje ¦ Hvert ledd: hvor mange bevis som viser det
+Héritier concerné ¦ Dotknutý dedič ¦ Berørt arving
+dossier de preuve « prouvé » ¦ dôkazný spis „preukázané“ ¦ bevismappe «bevist»
+1 pièce, jugée suffisante le {d} ¦ 1 doklad, uznaný za dostatočný {d} ¦ 1 bevis, ansett som tilstrekkelig {d}
+Demander l’acte ¦ Vyžiadať záznam ¦ Be om akten
+✓ Une pièce me suffit ici ¦ ✓ Tu mi stačí jeden doklad ¦ ✓ Ett bevis holder for meg her
+Une « pièce » = une source citée sur l’acte (deux copies du même acte comptent pour une) ; un dossier de preuve « prouvé » compte pour une de plus. ¦ „Doklad“ = zdroj citovaný pri zázname (dve kópie toho istého záznamu sa rátajú ako jedna); dôkazný spis „preukázané“ sa ráta ako ďalší. ¦ «Bevis» = kilden oppgitt ved en hendelse (to kopier av samme akt teller som én); bevismappen «bevist» teller som ett til.
+Noté au 🕓 Journal ¦ Zapísané v 🕓 Denníku ¦ Ført i 🕓 Loggen
+Remise bloquée (réglage) ¦ Odovzdanie zablokované (nastavenie) ¦ Levering blokkert (innstilling)
+Des liens ont trop peu de pièces : la remise est bloquée tant qu’ils ne sont pas complétés (ou « Une pièce me suffit ici »). ¦ Niektoré väzby majú príliš málo dokladov: odovzdanie je zablokované, kým sa nedoplnia (alebo „Tu mi stačí jeden doklad“). ¦ Noen forbindelser har for få bevis: leveringen er blokkert til de er utfylt (eller «Ett bevis holder for meg her»).
+Pour une recherche, je vous serais reconnaissant(e) de m’adresser une copie des actes suivants : ¦ Na účely pátrania by som bol(a) vďačný(á), keby ste mi zaslali kópiu týchto záznamov: ¦ Til bruk i en undersøkelse ville jeg være takknemlig om du kunne sende meg en kopi av følgende akter:
+Les actes manquants, regroupés ¦ Chýbajúce záznamy, zoskupené ¦ Manglende akter, samlet
+Une seule lettre par service au lieu d’une par acte : moins de timbres, moins de relances. Relis et corrige chaque lettre. ¦ Jediný list na úrad namiesto jedného na záznam: menej známok, menej upomienok. Prečítaj a oprav každý list. ¦ Ett brev per kontor i stedet for ett per akt: færre frimerker, færre påminnelser. Les og rett hvert brev.
+{n} rangées dans le Registre de courriers ¦ Uložené v evidencii korešpondencie: {n} ¦ {n} arkivert i brevregisteret
+Copie délivrée le ¦ Kópia vydaná ¦ Kopi utstedt
+Durée de validité demandée par ton notaire (mois) ¦ Doba platnosti požadovaná tvojím notárom (mesiace) ¦ Gyldighetstid notarius krever (måneder)
+Aucune durée par défaut : c’est toi qui la tapes. La 🔔 cloche prévient avant qu’elle ne soit trop ancienne. ¦ Žiadna predvolená doba: zadávaš ju ty. 🔔 Zvonček upozorní, než bude príliš stará. ¦ Ingen standardtid: du oppgir den. 🔔 Klokken varsler før den blir for gammel.
+Date de délivrance notée ¦ Dátum vydania zapísaný ¦ Utstedelsesdato ført
+recherches négatives : {n} ¦ pátrania bez výsledku: {n} ¦ {n} undersøkelser uten resultat
+« Rien trouvé » est un résultat utile : il montre la diligence au notaire. ¦ „Nič sa nenašlo“ je užitočný výsledok: ukazuje notárovi tvoju dôkladnosť. ¦ «Ingenting funnet» er et nyttig resultat: det viser notarius at du har vært grundig.
+Aucune recherche notée pour cette personne. ¦ Pre túto osobu nie je zapísané žiadne pátranie. ¦ Ingen undersøkelse notert for denne personen.
+Rien n’est recopié : les lignes viennent du 🗓 Journal des recherches, des ⚰️ vérifications INSEE et des 📞 échanges marqués « recherche ». ¦ Nič sa nekopíruje: riadky pochádzajú z 🗓 Denníka výskumu, z ⚰️ overení INSEE a z 📞 kontaktov označených „pátranie“. ¦ Ingenting kopieres: linjene kommer fra 🗓 Forskningsloggen, ⚰️ INSEE-kontrollene og 📞 kontaktene merket «undersøkelse».
+Noter une recherche ¦ Zapísať pátranie ¦ Noter en undersøkelse
+Pour le notaire ¦ Pre notára ¦ For notarius
+Recherches faites — {n} ¦ Vykonané pátrania — {n} ¦ Undersøkelser utført — {n}
+＋ Noter une recherche ¦ ＋ Zapísať pátranie ¦ ＋ Noter en undersøkelse
+Où (service, site, mairie…) ¦ Kde (úrad, web, obecný úrad…) ¦ Hvor (arkiv, nettsted, rådhus…)
+Ce qui a été trouvé ¦ Čo sa našlo ¦ Hva som ble funnet
+Écrit un dépouillement dans le 🗓 Journal des recherches (comme « Où chercher »). ¦ Zapíše excerpciu do 🗓 Denníka výskumu (ako „Kde hľadať“). ¦ Fører et utdrag inn i 🗓 Forskningsloggen (som «Hvor lete»).
+Recherche notée ¦ Pátranie zapísané ¦ Undersøkelse notert
+Carte des héritiers ¦ Mapa dedičov ¦ Kart over arvinger
+au numéro (BAN) ¦ na číslo domu (BAN) ¦ til husnummer (BAN)
+Hors carte ¦ Mimo mapy ¦ Utenfor kartet
+à l’étranger ({c}) ¦ v cudzine ({c}) ¦ i utlandet ({c})
+commune pas placée ({c}) ¦ obec neumiestnená ({c}) ¦ kommune ikke plassert ({c})
+adresse inconnue ¦ adresa neznáma ¦ adresse ukjent
+Où vivent les héritiers ¦ Kde dedičia žijú ¦ Hvor arvingene bor
+Tous les dossiers en cours ¦ Všetky rozpracované spisy ¦ Alle pågående saker
+Aucune adresse d’héritier placée sur la carte. ¦ Na mape nie je umiestnená žiadna adresa dediča. ¦ Ingen arvingsadresse plassert på kartet.
+héritier (adresse connue, au niveau de la commune) ¦ dedič (adresa známa, na úrovni obce) ¦ arving (adresse kjent, på kommunenivå)
+notaire connu de l’app ¦ notár známy aplikácii ¦ notarius kjent av appen
+Rien n’est envoyé en ligne. ¦ Nič sa neposiela online. ¦ Ingenting sendes på nett.
+La BAN n’est pas encore téléchargée : position à la commune. ¦ BAN ešte nie je stiahnutá: poloha na úrovni obce. ¦ BAN ikke lastet ned ennå: posisjon på kommunenivå.
+Image de la carte (sans noms) ¦ Obrázok mapy (bez mien) ¦ Kartbilde (uten navn)
+Par organisme, d’après le Registre ¦ Podľa úradu, z evidencie ¦ Per kontor, fra registeret
+Organisme ¦ Úrad ¦ Kontor
+pas assez de courriers ¦ málo listov ¦ få brev
+De l’envoi à la réponse reçue (demandes d’actes des dossiers). Aide à prévoir la remise et à relancer au bon moment. ¦ Od odoslania po prijatú odpoveď (žiadosti o záznamy zo spisov). Pomáha naplánovať odovzdanie a pripomenúť sa včas. ¦ Fra sending til mottatt svar (forespørsler om akter fra saker). Hjelper deg å planlegge leveringen og purre i tide.
+Pas encore de réponse notée dans le Registre. ¦ V evidencii zatiaľ nie je zapísaná žiadna odpoveď. ¦ Ingen svar ført i registeret ennå.
+Sa part passe dans sa propre succession : ouvrir un dossier lié pour {n} ? ¦ Jeho podiel prechádza do jeho vlastného dedičstva: otvoriť prepojený spis pre {n}? ¦ Andelen går inn i personens eget dødsbo: åpne en tilknyttet sak for {n}?
+🔗 Dossier lié ¦ 🔗 Prepojený spis ¦ 🔗 Tilknyttet sak
+Ouvrir le dossier lié ¦ Otvoriť prepojený spis ¦ Åpne en tilknyttet sak
+Dossier lié {n} ouvert ({what}) ¦ Prepojený spis {n} otvorený ({what}) ¦ Tilknyttet sak {n} åpnet ({what})
+Aucun autre dossier en cours dans cette généalogie (d’abord ⇄ Déplacer s’il est dans une autre). ¦ V tomto rodokmeni nie je iný rozpracovaný spis (najprv ⇄ Presunúť, ak je v inom). ¦ Ingen annen pågående sak i dette treet (⇄ Flytt først hvis den er i et annet).
+Fusionner avec un autre dossier ¦ Zlúčiť s iným spisom ¦ Slå sammen med en annen sak
+Le dossier à réunir dans {n} ¦ Spis na zlúčenie do {n} ¦ Sak som skal slås sammen med {n}
+Le numéro du dossier réuni n’est pas réutilisé. ↶ Annuler sépare à nouveau, comme avant. ¦ Číslo zlúčeného spisu sa znova nepoužije. ↶ Späť ich zase oddelí ako predtým. ¦ Nummeret på den sammenslåtte saken brukes ikke igjen. ↶ Angre skiller dem igjen som før.
+Ce qui ¦ Čo ¦ Hva
+Ce qui se passe ¦ Čo sa stane ¦ Hva som skjer
+{a} déjà communes, {b} ajoutées ¦ spoločné: {a}, pridané: {b} ¦ {a} felles, {b} lagt til
+{d} en double gardée(s) une fois ¦ duplicitné ponechané raz: {d} ¦ duplikater beholdt én gang: {d}
+rattachés, chacun garde son dossier d’origine en étiquette ¦ pripojené, každý si ponechá pôvodný spis ako štítok ¦ lagt til, hver beholder sin opprinnelige sak som merke
+rattachés ; les factures émises ne changent pas ¦ pripojené; vystavené faktúry sa nemenia ¦ lagt til; utstedte fakturaer endres ikke
+mis bout à bout, chaque ligne marquée de son dossier ¦ za sebou, každý riadok označený svojím spisom ¦ etter hverandre, hver linje merket med sin sak
+Deux notaires différents : lequel garder ? ¦ Dvaja rôzni notári: ktorého ponechať? ¦ To forskjellige notarer: hvem beholdes?
+Dossiers réunis ¦ Spisy zlúčené ¦ Saker slått sammen
+Copie à envoyer au notaire ¦ Kópia pre notára ¦ Kopi til notarius
+Copie à envoyer au notaire… ¦ Kópia pre notára… ¦ Kopi til notarius…
+Un fichier que le notaire ouvre d’un double-clic, sans rien pouvoir modifier, chiffré si tu le veux. ¦ Súbor, ktorý notár otvorí dvojklikom a nemôže v ňom nič zmeniť, zašifrovaný, ak chceš. ¦ En fil notarius åpner med dobbeltklikk og ikke kan endre noe i, kryptert hvis du vil.
+Part aussi ¦ Ide aj ¦ Følger også med
+📞 échanges · 💶 fonds · ⚰️ vérifications INSEE · 🧾 copie des factures (le registre, lui, ne change pas) ¦ 📞 kontakty · 💶 prostriedky · ⚰️ overenia INSEE · 🧾 kópia faktúr (samotná evidencia sa nemení) ¦ 📞 kontakter · 💶 midler · ⚰️ INSEE-kontroller · 🧾 kopi av fakturaene (selve registeret endres ikke)
+Mot de passe (obligatoire) ¦ Heslo (povinné) ¦ Passord (påkrevd)
+🔐 Mot de passe ¦ 🔐 Heslo ¦ 🔐 Passord
+AES-256, comme les sauvegardes protégées. Oublié = archive perdue. Le réimport le demande. ¦ AES-256, ako chránené zálohy. Zabudnuté = archív stratený. Opätovný import si oň povie. ¦ AES-256, som beskyttede sikkerhetskopier. Glemt = arkiv tapt. Ny import ber om det.
+Mot de passe trop court (8 caractères au moins). ¦ Heslo je príliš krátke (aspoň 8 znakov). ¦ Passordet er for kort (minst 8 tegn).
+Les deux mots de passe ne sont pas les mêmes. ¦ Obe heslá nie sú rovnaké. ¦ De to passordene er ikke like.
+Mot de passe de l’archive ¦ Heslo archívu ¦ Arkivpassord
+🙈 Écran partagé : noms, adresses et montants masqués ¦ 🙈 Zdieľaná obrazovka: mená, adresy a sumy skryté ¦ 🙈 Delt skjerm: navn, adresser og beløp skjult
+Échange mis à la corbeille ¦ Kontakt presunutý do koša ¦ Kontakt lagt i papirkurven
+Fusion annulée : les deux dossiers sont séparés comme avant ¦ Zlúčenie zrušené: oba spisy sú oddelené ako predtým ¦ Sammenslåing angret: de to sakene er adskilt som før
+Mon cabinet (factures) ¦ Moja kancelária (faktúry) ¦ Mitt kontor (fakturaer)
+L’app ne connaît ni ton statut, ni ton régime de TVA, ni les mentions que ta facture doit porter : c’est toi qui les écris, avec ton comptable. L’app les recopie telles quelles. ¦ Aplikácia nepozná tvoje postavenie, tvoj režim DPH ani údaje, ktoré tvoja faktúra musí obsahovať: píšeš ich ty so svojím účtovníkom. Aplikácia ich prevezme bez zmeny. ¦ Appen kjenner ikke din status, din mva-ordning eller hvilke opplysninger fakturaen din må ha: du skriver dem med regnskapsføreren din. Appen gjengir dem uendret.
+Mentions à imprimer sur chaque facture (ton texte) ¦ Údaje tlačené na každej faktúre (tvoj text) ¦ Opplysninger trykt på hver faktura (din tekst)
+vide : à écrire avec ton comptable ¦ prázdne: napísať so svojím účtovníkom ¦ tomt: skriv med regnskapsføreren din
+Champs obligatoires pour émettre une facture ¦ Povinné polia na vystavenie faktúry ¦ Påkrevde felt for å utstede en faktura
+Un champ que tu as déclaré obligatoire et laissé vide : la facture n’est pas émise. ¦ Pole, ktoré si označil ako povinné a nechal prázdne: faktúra sa nevystaví. ¦ Et felt du har merket som påkrevd og latt stå tomt: fakturaen utstedes ikke.
+🏢 Mon cabinet ¦ 🏢 Moja kancelária ¦ 🏢 Mitt kontor
+EXEMPLE NON JURIDIQUE — à faire écrire ou relire par ton conseil avant tout usage. ¦ PRÁVNE NEZÁVÄZNÝ PRÍKLAD — pred akýmkoľvek použitím ho nechaj napísať alebo skontrolovať svojím poradcom. ¦ IKKE-JURIDISK EKSEMPEL — la rådgiveren din skrive eller kontrollere den før all bruk.
+ton titre ¦ tvoj nadpis ¦ din tittel
+ton texte : écrit ou relu par ton conseil ¦ tvoj text: napísaný alebo skontrolovaný tvojím poradcom ¦ din tekst: skrevet eller kontrollert av rådgiveren din
+Mes modèles de contrat ¦ Moje vzory zmlúv ¦ Mine kontraktmaler
+Ton contrat, avec des champs que l’app remplit ¦ Tvoja zmluva s poľami, ktoré aplikácia vyplní ¦ Din kontrakt, med feltene appen fyller ut
+Enregistrer la version ¦ Uložiť verziu ¦ Lagre versjonen
+L’app ne fournit aucun texte de contrat : c’est un acte qui t’engage et qui engage l’héritier, à faire écrire ou relire par ton conseil. L’app remplit des champs et garde l’historique de tes versions. ¦ Aplikácia nedodáva žiadny text zmluvy: je to listina, ktorá zaväzuje teba aj dediča; nechaj ju napísať alebo skontrolovať svojím poradcom. Aplikácia vyplní polia a uchová históriu tvojich verzií. ¦ Appen leverer ingen kontrakttekst: det er en akt som binder deg og arvingen; la rådgiveren din skrive eller kontrollere den. Appen fyller ut feltene og tar vare på historikken over versjonene dine.
+＋ Nouveau modèle ¦ ＋ Nový vzor ¦ ＋ Ny mal
+Mon contrat ¦ Moja zmluva ¦ Min kontrakt
+Versions ¦ Verzie ¦ Versjoner
+Écris ou importe ton contrat ¦ Napíš alebo importuj svoju zmluvu ¦ Skriv eller importer kontrakten din
+Importer un .docx / .txt ¦ Importovať .docx / .txt ¦ Importer .docx / .txt
+Aperçu pour un héritier ¦ Náhľad pre dediča ¦ Forhåndsvisning for arvingen
+{defunt} n’existe pas : le nom du défunt n’est jamais dans un courrier envoyé avant signature. {pourcentage} vient de 💶 « Honoraires d’un contrat ». ¦ {defunt} neexistuje: meno poručiteľa nikdy nie je v liste odoslanom pred podpisom. {pourcentage} pochádza z 💶 „Odmena zo zmluvy“. ¦ {defunt} finnes ikke: navnet på arvelateren står aldri i et brev sendt før signering. {pourcentage} kommer fra 💶 «Honorar i kontrakten».
+version {n} ¦ verzia {n} ¦ versjon {n}
+Champ inconnu : {f} (ligne {l}). Corrige-le avant d’enregistrer. ¦ Neznáme pole: {f} (riadok {l}). Oprav ho pred uložením. ¦ Ukjent felt: {f} (linje {l}). Rett det før du lagrer.
+% à noter ¦ % na zapísanie ¦ % å fylle inn
+Champ vide : {f} ¦ Prázdne pole: {f} ¦ Tomt felt: {f}
+Version {n} enregistrée (Mes modèles) ¦ Verzia {n} uložená (Moje vzory) ¦ Versjon {n} lagret (Mine maler)
+Fonds par héritier ¦ Prostriedky podľa dediča ¦ Midler per arving
+Aucun montant de succession : l’app ne connaît ni l’actif, ni le passif. On note seulement des mouvements réels que tu as vus passer. ¦ Žiadna suma dedičstva: aplikácia nepozná aktíva ani pasíva. Zapisuješ len skutočné pohyby, ktoré si videl prejsť. ¦ Ingen beløp for boet: appen kjenner verken eiendeler eller gjeld. Du fører bare de faktiske bevegelsene du har sett passere.
+Reçu du notaire ¦ Prijaté od notára ¦ Mottatt fra notarius
+Frais refacturés ¦ Prefakturované výdavky ¦ Viderefakturerte utgifter
+Reversé ¦ Vyplatené ¦ Utbetalt
+Reste dû ¦ Zostáva zaplatiť ¦ Gjenstår å betale
+pas de contrat ¦ bez zmluvy ¦ uten kontrakt
+reversé de trop : {s} ¦ vyplatené navyše: {s} ¦ utbetalt for mye: {s}
+✓ soldé ¦ ✓ vyrovnané ¦ ✓ oppgjort
+à reverser ¦ na vyplatenie ¦ å utbetale
+Mouvements ¦ Pohyby ¦ Bevegelser
+＋ Noter un mouvement ¦ ＋ Zapísať pohyb ¦ ＋ Før en bevegelse
+Commission = % du contrat × montant reçu. Reste dû = reçu − commission − frais − reversé. ¦ Provízia = % zo zmluvy × prijatá suma. Zostáva = prijaté − provízia − výdavky − vyplatené. ¦ Provisjon = kontraktens % × mottatt beløp. Gjenstår = mottatt − provisjon − utgifter − utbetalt.
+✎ Corriger un mouvement ¦ ✎ Opraviť pohyb ¦ ✎ Rett bevegelsen
+Commission proposée : {p} % de {r} = {c} (modifiable) ¦ Navrhnutá provízia: {p} % z {r} = {c} (dá sa zmeniť) ¦ Foreslått provisjon: {p} % av {r} = {c} (kan endres)
+virement, chèque… ¦ prevod, šek… ¦ overføring, sjekk…
+Versé à (représentant, si mineur ou sous tutelle) ¦ Vyplatené (zástupcovi, ak je maloletý alebo pod opatrovníctvom) ¦ Utbetalt (til representanten hvis mindreårig eller under vergemål)
+Montant incorrect. ¦ Nesprávna suma. ¦ Ugyldig beløp.
+Mouvement corrigé ¦ Pohyb opravený ¦ Bevegelse rettet
+Mouvement noté ¦ Pohyb zapísaný ¦ Bevegelse ført
+versé à {n} ¦ vyplatené: {n} ¦ {n} utbetalt
+Décompte — {n} ¦ Vyúčtovanie — {n} ¦ Oppgjør — {n}
+Aucun mouvement noté. ¦ Žiadny pohyb nezapísaný. ¦ Ingen bevegelse ført.
+Reste à reverser ¦ Zostáva vyplatiť ¦ Gjenstår å utbetale
+Noter un mouvement ¦ Zapísať pohyb ¦ Før en bevegelse
+Décompte pour l’héritier ¦ Vyúčtovanie pre dediča ¦ Oppgjør for arvingen
+Facturer la commission ¦ Fakturovať províziu ¦ Fakturer provisjonen
+Facture ¦ Faktúra ¦ Faktura
+Avoir ¦ Dobropis ¦ Kreditnota
+Devis ¦ Ponuka ¦ Tilbud
+N° de TVA ¦ IČ DPH ¦ Mva-nummer
+BROUILLON ¦ KONCEPT ¦ UTKAST
+ÉMIS ¦ VYSTAVENÉ ¦ UTSTEDT
+ÉMISE ¦ VYSTAVENÁ ¦ UTSTEDT
+Client ¦ Klient ¦ Kunde
+Total HT ¦ Spolu bez DPH ¦ Sum eks. mva
+TVA {r} % ¦ DPH {r} % ¦ Mva {r} %
+Total TTC ¦ Spolu s DPH ¦ Sum inkl. mva
+Commission du contrat de révélation ({p} % de la part reçue : {r}) ¦ Provízia zo zmluvy o odhalení ({p} % z prijatého podielu: {r}) ¦ Provisjon etter avsløringskontrakt ({p} % av mottatt andel: {r})
+Commission du contrat de révélation ({p} %) ¦ Provízia zo zmluvy o odhalení ({p} %) ¦ Provisjon etter avsløringskontrakt ({p} %)
+Temps passé ({h} h {m}) ¦ Strávený čas ({h} h {m}) ¦ Tid brukt ({h} t {m})
+Frais ¦ Výdavky ¦ Utgifter
+🧾 DEVIS ¦ 🧾 PONUKA ¦ 🧾 TILBUD
+🧾 FACTURE ¦ 🧾 FAKTÚRA ¦ 🧾 FAKTURA
+{k} {n} ¦ {k} {n} ¦ {k} {n}
+Brouillon, pas encore numéroté ¦ Koncept, ešte bez čísla ¦ Utkast, ennå uten nummer
+Garder en brouillon ¦ Ponechať ako koncept ¦ Behold som utkast
+Ce que l’app ne fait pas : elle ne connaît ni ton statut, ni ton régime de TVA, ni les mentions que ta facture doit porter. C’est toi qui choisis le taux et qui écris les mentions (avec ton comptable). L’app numérote sans trou, interdit de modifier une facture émise, fait les additions et garde tout. ¦ Čo aplikácia nerobí: nepozná tvoje postavenie, tvoj režim DPH ani údaje, ktoré musí faktúra obsahovať. Sadzbu volíš a údaje píšeš ty (so svojím účtovníkom). Aplikácia čísluje bez medzier, zakazuje meniť vystavenú faktúru, sčítava a všetko uchováva. ¦ Hva appen ikke gjør: den kjenner ikke din status, din mva-ordning eller hvilke opplysninger fakturaen må ha. Du velger satsen og skriver opplysningene (med regnskapsføreren din). Appen nummererer uten hull, forbyr endring av en utstedt faktura, summerer og tar vare på alt.
+🏢 Mon cabinet : des champs obligatoires sont vides ({f}) : la facture ne pourra pas être émise. ¦ 🏢 Moja kancelária: povinné polia sú prázdne ({f}): faktúru nebude možné vystaviť. ¦ 🏢 Mitt kontor: påkrevde felt er tomme ({f}): fakturaen kan ikke utstedes.
+Adresse du client ¦ Adresa klienta ¦ Kundens adresse
+Prix HT ¦ Cena bez DPH ¦ Pris eks. mva
+Taux de TVA (%) — choisi par toi ¦ Sadzba DPH (%) — zvolená tebou ¦ Mva-sats (%) — valgt av deg
+ton taux ¦ tvoja sadzba ¦ din sats
+Repris de ta dernière facture ; jamais deviné. ¦ Prevzaté z tvojej poslednej faktúry; nikdy nehádané. ¦ Hentet fra din forrige faktura; aldri gjettet.
+Aucun taux proposé : tape celui que t’a indiqué ton comptable. ¦ Žiadna sadzba nenavrhnutá: napíš tú, ktorú ti dal tvoj účtovník. ¦ Ingen sats foreslått: skriv den regnskapsføreren din har gitt deg.
+Émettre le devis n° {n} ¦ Vystaviť ponuku č. {n} ¦ Utsted tilbud nr. {n}
+Émettre la facture n° {n} ¦ Vystaviť faktúru č. {n} ¦ Utsted faktura nr. {n}
+Sur la facture ¦ Na faktúre ¦ På fakturaen
+à remplir ¦ vyplniť ¦ å fylle ut
+⏱ Temps passé : non coché, compris dans la commission ¦ ⏱ Strávený čas: nezaškrtnutý, zahrnutý v provízii ¦ ⏱ Tid brukt: ikke avkrysset, inkludert i provisjonen
+taux à choisir ¦ sadzbu zvoliť ¦ sats å velge
+Émettre le devis {n} ? Il reste modifiable tant qu’il n’est pas accepté. ¦ Vystaviť ponuku {n}? Dá sa meniť, kým nie je prijatá. ¦ Utstede tilbud {n}? Det kan endres så lenge det ikke er akseptert.
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. Émettre {n} ? ¦ Vystavenú faktúru už nemožno zmeniť ani zmazať. Na opravu slúži dobropis. Vystaviť {n}? ¦ En utstedt faktura kan ikke lenger endres eller slettes. En kreditnota retter den. Utstede {n}?
+Émettre ¦ Vystaviť ¦ Utsted
+{n} émise ¦ {n} vystavená ¦ {n} utstedt
+Brouillon gardé ¦ Koncept ponechaný ¦ Utkast beholdt
+brouillon ¦ koncept ¦ utkast
+émis ¦ vystavené ¦ utstedt
+avoir ¦ dobropis ¦ kreditnota
+✓ payée le {d} ¦ ✓ zaplatené {d} ¦ ✓ betalt {d}
+attendue ¦ očakávaná ¦ ventet
+Tout le cabinet ¦ Celá kancelária ¦ Hele kontoret
+avec les mouvements de fonds ¦ s pohybmi prostriedkov ¦ med midlenes bevegelser
+CSV pour le comptable ¦ CSV pre účtovníka ¦ CSV til regnskapsfører
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. ¦ Vystavenú faktúru už nemožno zmeniť ani zmazať. Na opravu slúži dobropis. ¦ En utstedt faktura kan ikke lenger endres eller slettes. En kreditnota retter den.
+Chercher… (n°, client, dossier) ¦ Hľadať… (č., klient, spis) ¦ Søk… (nr., kunde, sak)
+TTC ¦ s DPH ¦ inkl. mva
+🧾 Faire un avoir ¦ 🧾 Vystaviť dobropis ¦ 🧾 Utsted en kreditnota
+Payée… ¦ Zaplatené… ¦ Betalt…
+Accepté ¦ Prijaté ¦ Akseptert
+Transformer en facture ¦ Previesť na faktúru ¦ Gjør om til faktura
+Pas encore de facture. ¦ Zatiaľ žiadna faktúra. ¦ Ingen faktura ennå.
+Brouillon supprimé (aucun numéro consommé) ¦ Koncept zmazaný (žiadne číslo nepoužité) ¦ Utkast slettet (ingen nummer brukt)
+L’avoir reprend les lignes de la facture en négatif, avec son propre numéro. Il ne peut plus être modifié. ¦ Dobropis prevezme riadky faktúry so záporným znamienkom, s vlastným číslom. Už ho nemožno zmeniť. ¦ Kreditnotaen tar fakturaens linjer med negativt fortegn, med eget nummer. Den kan ikke lenger endres.
+Payée ¦ Zaplatené ¦ Betalt
+Date (AAAA-MM-JJ) et moyen, ex. : 2026-11-20 virement ¦ Dátum (RRRR-MM-DD) a spôsob, napr.: 2026-11-20 prevod ¦ Dato (ÅÅÅÅ-MM-DD) og måte, f.eks.: 2026-11-20 overføring
+Paiement noté ¦ Platba zapísaná ¦ Betaling ført
+Devis accepté ¦ Ponuka prijatá ¦ Tilbud akseptert
+Brouillon de facture prêt ¦ Koncept faktúry pripravený ¦ Fakturautkast klart
+Registre des factures ¦ Evidencia faktúr ¦ Fakturaregister
+Factures du dossier ¦ Faktúry spisu ¦ Fakturaer for saken
+Devis et factures ¦ Ponuky a faktúry ¦ Tilbud og fakturaer
+Faire un devis ¦ Vytvoriť ponuku ¦ Lag et tilbud
+Faire une facture ¦ Vytvoriť faktúru ¦ Lag en faktura
+Pas encore de facture pour ce dossier. ¦ Pre tento spis zatiaľ žiadna faktúra. ¦ Ingen faktura for denne saken ennå.
+HT ¦ bez DPH ¦ eks. mva
+{n} base(s) verrouillée(s) non lue(s) ¦ Neprečítané zamknuté databázy: {n} ¦ {n} låste baser ikke lest
+Dossiers ouverts ¦ Otvorené spisy ¦ Åpne saker
+dont {n} clos ¦ z toho uzavreté: {n} ¦ herav {n} avsluttet
+Délai moyen (ouvert → remis) ¦ Priemerná doba (otvorené → odovzdané) ¦ Gjennomsnittlig tid (åpnet → levert)
+sur {n} dossiers remis ¦ z {n} odovzdaných spisov ¦ over {n} leverte saker
+pas assez de dossiers pour une moyenne ¦ málo spisov na priemer ¦ for få saker til et gjennomsnitt
+Contrats signés / refusés ¦ Zmluvy podpísané / odmietnuté ¦ Kontrakter signert / avslått
+{p} % signés · {n} sans réponse ¦ {p} % podpísaných · bez odpovede: {n} ¦ {p} % signert · {n} uten svar
+Facturé / encaissé ({k}) ¦ Fakturované / inkasované ({k}) ¦ Fakturert / innkassert ({k})
+encaissé {a} · reste {b} ¦ inkasované {a} · zostáva {b} ¦ {a} innkassert · {b} gjenstår
+Pas encore de facture : seuls le temps et les contrats sont comptés ¦ Zatiaľ žiadna faktúra: počíta sa len čas a zmluvy ¦ Ingen faktura ennå: bare tid og kontrakter telles
+{n} en cours depuis {m} mois en moyenne ¦ Rozpracované: {n}, v priemere {m} mesiacov ¦ {n} pågående, i snitt {m} måneder
+Temps passé par dossier (heures) ¦ Strávený čas na spis (hodiny) ¦ Tid brukt per sak (timer)
+Aucun temps noté. ¦ Žiadny čas nezapísaný. ¦ Ingen tid ført.
+Voir en tableau ¦ Zobraziť ako tabuľku ¦ Vis som tabell
+Facturé et encaissé par trimestre ({k}) ¦ Fakturované a inkasované po štvrťrokoch ({k}) ¦ Fakturert og innkassert per kvartal ({k})
+Facturé ¦ Fakturované ¦ Fakturert
+Encaissé ¦ Inkasované ¦ Innkassert
+Aucun nom d’héritier dans cette vue : des numéros de dossier et des totaux. Rien n’est écrit. ¦ V tomto pohľade žiadne meno dediča: čísla spisov a súčty. Nič sa nezapisuje. ¦ Ingen arvingsnavn i denne visningen: saksnumre og summer. Ingenting skrives.
+Pour {n} ¦ Pre {n} ¦ For {n}
+le notaire ¦ notára ¦ notarius
+⤓ Fabriquer la copie ¦ ⤓ Vytvoriť kópiu ¦ ⤓ Lag kopien
+Ce qui part ¦ Čo ide ¦ Hva som følger med
+Tableau des héritiers et parts, arbre, chaîne de filiation (comme le PDF) ¦ Tabuľka dedičov a podielov, strom, reťazec pôvodu (ako v PDF) ¦ Tabell over arvinger og andeler, tre, slektskjede (som PDF-en)
+📑 Pièces (images des actes) ¦ 📑 Doklady (obrázky záznamov) ¦ 📑 Bevis (bilder av akter)
+Adresses des héritiers ¦ Adresy dedičov ¦ Arvingenes adresser
+🕵️ Joindre les recherches faites ¦ 🕵️ Priložiť vykonané pátrania ¦ 🕵️ Legg ved utførte undersøkelser
+Journal, échanges, temps, factures ne partent jamais. ¦ Denník, kontakty, čas a faktúry nikdy nejdú. ¦ Logg, kontakter, tid og fakturaer følger aldri med.
+Protection ¦ Ochrana ¦ Beskyttelse
+Le fichier est chiffré (AES-256) ; la page demande le mot de passe à l’ouverture. Donne-le au notaire par un autre moyen (téléphone, SMS). Oublié = fichier illisible, même pour toi (refais-en un). ¦ Súbor je zašifrovaný (AES-256); stránka si pri otvorení vypýta heslo. Daj ho notárovi inou cestou (telefón, SMS). Zabudnuté = nečitateľný súbor aj pre teba (urob nový). ¦ Filen er kryptert (AES-256); siden ber om passordet ved åpning. Gi det til notarius på annen måte (telefon, SMS). Glemt = uleselig fil, også for deg (lag en ny).
+Copie v{n} ; l’app garde la liste des copies faites, pas les fichiers. ¦ Kópia v{n}; aplikácia uchováva zoznam vytvorených kópií, nie súbory. ¦ Kopi v{n}; appen tar vare på listen over lagde kopier, ikke filene.
+Voilà ce qui part : {h} héritiers, {p} pièces, {a} adresse(s). ¦ Ide toto: dedičov {h}, dokladov {p}, adries {a}. ¦ Følger med: {h} arvinger, {p} bevis, {a} adresser.
+Fiche confidentielle : {n} retirée (calcul inchangé). ¦ Dôverná karta: {n} vynechaná (výpočet bez zmeny). ¦ Konfidensielt kort: {n} utelatt (beregning uendret).
+une branche n’est pas tranchée ¦ jedna vetva nie je rozhodnutá ¦ en gren er ikke avgjort
+Fichier trop lourd pour un courriel (plus de 20 Mo). Continuer quand même ? ¦ Súbor je na e-mail príliš veľký (nad 20 MB). Napriek tomu pokračovať? ¦ Filen er for stor for e-post (over 20 MB). Fortsette likevel?
+🤝 Copie pour le notaire ¦ 🤝 Kópia pre notára ¦ 🤝 Kopi til notarius
+Copie v{v} du {d}, calcul indicatif : à vérifier par l’étude. ¦ Kópia v{v} zo dňa {d}, orientačný výpočet: na overenie notárskym úradom. ¦ Kopi v{v} av {d}, veiledende beregning: kontrolleres av notarkontoret.
+{n} · {t} ¦ {n} · {t} ¦ {n} · {t}
+Copie protégée par un mot de passe. ¦ Kópia chránená heslom. ¦ Kopi beskyttet med passord.
+Copie v{n} fabriquée ¦ Kópia v{n} vytvorená ¦ Kopi v{n} laget
+Mouvement supprimé ¦ Pohyb zmazaný ¦ Bevegelse slettet
+⚰️ Décès d’un héritier ¦ ⚰️ Úmrtie dediča ¦ ⚰️ En arvings død
+Ce que « ✓ C’est lui » écrit : la fiche sert aussi aux autres dossiers. ¦ Čo zapíše „✓ To je on/ona“: karta slúži aj iným spisom. ¦ Hva «✓ Det er denne personen» fører inn: kortet brukes også av andre saker.
+Le décès sur la fiche et le statut du dossier ¦ Úmrtie na karte a stav spisu ¦ Dødsfall på kortet og status i saken
+Seulement le statut du dossier ¦ Len stav spisu ¦ Bare status i saken
+Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de bruit, risque d’en rater. ¦ Stopy sa ukazujú od tohto skóre (zo 100). Vyššie: menej šumu, riziko, že niektoré uniknú. ¦ Spor vises fra denne poengsummen (av 100). Høyere: mindre støy, risiko for å gå glipp av noen.
+Après chaque nouvel import du fichier INSEE : vérifier les dossiers en cours tout seul (jamais de changement sans ton clic). ¦ Po každom novom importe súboru INSEE: overiť rozpracované spisy samo (nikdy zmena bez tvojho kliknutia). ¦ Etter hver ny import av INSEE-filen: kontroller de pågående sakene selv (aldri en endring uten ditt klikk).
+Automatique, dans la cloche ¦ Automaticky, v zvončeku ¦ Automatisk, i klokken
+Seulement à la main ¦ Len ručne ¦ Bare manuelt
+📋 Questionnaire ¦ 📋 Dotazník ¦ 📋 Spørreskjema
+Ce que l’héritier te renvoie après avoir rempli le questionnaire. ¦ Čo ti dedič pošle späť po vyplnení dotazníka. ¦ Det arvingen sender deg tilbake etter utfylling.
+Un petit fichier .json ¦ Malý súbor .json ¦ En liten .json-fil
+La page .html remplie ¦ Vyplnená stránka .html ¦ Den utfylte .html-siden
+Pré-rempli : son nom et sa naissance seulement, jamais le défunt ni un montant. ¦ Predvyplnené: len jeho meno a narodenie, nikdy poručiteľ ani suma. ¦ Forhåndsutfylt: bare navnet og fødselen, aldri arvelateren eller beløp.
+Pré-rempli (ce qui le concerne) ¦ Predvyplnené (čo sa ho týka) ¦ Forhåndsutfylt (det som gjelder personen)
+Tout vide ¦ Všetko prázdne ¦ Alt tomt
+📞 Échanges ¦ 📞 Kontakty ¦ 📞 Kontakter
+Où noter et relire les appels, courriels et visites. ¦ Kde zapisovať a čítať hovory, e-maily a návštevy. ¦ Hvor samtaler, e-poster og besøk føres og leses.
+Un onglet du dossier et un raccourci dans 👥 Héritiers ¦ Karta spisu a skratka v 👥 Dedičoch ¦ Saksfane og snarvei i 👥 Arvinger
+Seulement dans 👥 Héritiers ¦ Len v 👥 Dedičoch ¦ Bare i 👥 Arvinger
+Les courriers du Registre dans la liste des échanges. ¦ Listy z evidencie v zozname kontaktov. ¦ Brev fra registeret i kontaktlisten.
+Montrés en gris, en lecture ¦ Zobrazené sivo, len na čítanie ¦ Vist i grått, bare for lesing
+Pas montrés ¦ Nezobrazené ¦ Ikke vist
+📮 Recommandés ¦ 📮 Doporučené zásielky ¦ 📮 Rekommanderte sendinger
+Relance quand l’accusé de réception n’est pas revenu (réglable aussi pour chaque courrier). ¦ Upomienka, keď sa doručenka nevrátila (dá sa nastaviť aj pre každý list). ¦ Påminnelse når mottaksbeviset ikke er kommet (kan også justeres per brev).
+15 jours ¦ 15 dní ¦ 15 dager
+8 jours ¦ 8 dní ¦ 8 dager
+21 jours ¦ 21 dní ¦ 21 dager
+L’app n’interroge jamais La Poste : le lien ouvre la page dans ton navigateur, tu notes toi-même l’AR. ¦ Aplikácia sa nikdy nepýta La Poste: odkaz otvorí stránku v tvojom prehliadači, doručenku si zapíšeš sám. ¦ Appen spør aldri La Poste: lenken åpner siden i nettleseren din, mottaksbeviset fører du selv.
+Lien vers la page de suivi ¦ Odkaz na stránku sledovania ¦ Lenke til sporingssiden
+Pas de lien (on copie le numéro) ¦ Bez odkazu (číslo sa kopíruje) ¦ Ingen lenke (nummeret kopieres)
+Adresse de la page de suivi, avec {numero} (https:// seulement). ¦ Adresa stránky sledovania, s {numero} (len https://). ¦ Adressen til sporingssiden, med {numero} (bare https://).
+🧾 Devis et factures ¦ 🧾 Ponuky a faktúry ¦ 🧾 Tilbud og fakturaer
+Un seul registre : numérotation continue même si les dossiers sont dans plusieurs généalogies. ¦ Jediná evidencia: súvislé číslovanie, aj keď sú spisy v niekoľkých rodokmeňoch. ¦ Ett register: sammenhengende nummerering, også når sakene ligger i flere trær.
+Un seul registre pour le cabinet ¦ Jediná evidencia pre kanceláriu ¦ Ett register for kontoret
+Dans la généalogie des dossiers ¦ V rodokmeni spisov ¦ I sakenes tre
+Le compteur ne recule jamais ; un brouillon effacé ne consomme pas de numéro. ¦ Počítadlo nikdy necúva; zmazaný koncept nespotrebuje číslo. ¦ Telleren går aldri bakover; et slettet utkast bruker ikke et nummer.
+F-2026-0042 (remis à 1 chaque année) ¦ F-2026-0042 (každý rok od 1) ¦ F-2026-0042 (fra 1 hvert år)
+Compteur unique (F-0042) ¦ Jediné počítadlo (F-0042) ¦ Én teller (F-0042)
+La ligne « temps passé » proposée sur la facture. ¦ Riadok „strávený čas“ navrhnutý na faktúre. ¦ Linjen «tid brukt» foreslått på fakturaen.
+Temps décoché quand il y a une commission ¦ Čas nezaškrtnutý, ak je provízia ¦ Tid ikke avkrysset hvis provisjon
+Temps toujours coché ¦ Čas vždy zaškrtnutý ¦ Tid alltid avkrysset
+Préfixe des factures. ¦ Predpona faktúr. ¦ Prefiks for fakturaer.
+Préfixe des avoirs. ¦ Predpona dobropisov. ¦ Prefiks for kreditnotaer.
+Préfixe des devis. ¦ Predpona ponúk. ¦ Prefiks for tilbud.
+📈 Activité ¦ 📈 Činnosť ¦ 📈 Aktivitet
+La période montrée en ouvrant le tableau de bord. ¦ Obdobie ukázané po otvorení prehľadu. ¦ Periode vist når oversikten åpnes.
+L’année en cours ¦ Tento rok ¦ Dette året
+Les 12 derniers mois ¦ Posledných 12 mesiacov ¦ Siste 12 måneder
+Les montants facturés et encaissés. ¦ Fakturované a inkasované sumy. ¦ Fakturerte og innkasserte beløp.
+Au choix (bouton) ¦ Podľa voľby (prepínač) ¦ Etter ønske (bryter)
+La copie contient des actes et des noms de vivants. ¦ Kópia obsahuje záznamy a mená žijúcich. ¦ Kopien inneholder akter og navn på levende personer.
+Mot de passe coché au départ ¦ Heslo na začiatku zaškrtnuté ¦ Passord avkrysset fra start
+Décoché au départ ¦ Na začiatku nezaškrtnuté ¦ Ikke avkrysset fra start
+Le notaire reçoit souvent les adresses à part. ¦ Notár často dostáva adresy zvlášť. ¦ Notarius får ofte adressene separat.
+Adresses décochées au départ ¦ Adresy na začiatku nezaškrtnuté ¦ Adresser ikke avkrysset fra start
+Cochées au départ ¦ Na začiatku zaškrtnuté ¦ Avkrysset fra start
+🗺 Carte des héritiers ¦ 🗺 Mapa dedičov ¦ 🗺 Kart over arvinger
+Rien n’est envoyé en ligne : la commune vient de la base ; le numéro, seulement si la BAN du département est déjà dans l’app (🗺️ Plan des adresses). ¦ Nič sa neposiela online: obec pochádza z databázy; číslo domu len vtedy, ak je BAN departementu už v aplikácii (🗺️ Plán adries). ¦ Ingenting sendes på nett: kommunen kommer fra basen; husnummeret bare hvis departementets BAN allerede er i appen (🗺️ Adressekart).
+Le numéro de rue (BAN déjà téléchargée) ¦ Číslo domu (BAN už stiahnutá) ¦ Husnummer (BAN allerede lastet ned)
+L’app n’a pas d’annuaire des notaires et n’en invente pas. ¦ Aplikácia nemá zoznam notárov a žiadny si nevymýšľa. ¦ Appen har ingen liste over notarer og finner ikke på noen.
+Les notaires de tes dossiers et contacts ¦ Notári tvojich spisov a kontaktov ¦ Notarene i sakene og kontaktene dine
+Pas de notaires ¦ Žiadni notári ¦ Ingen notarer
+Le brouillon de contrat écrit par l’app. Un contrat t’engage : fais-le écrire ou relire par ton conseil. ¦ Koncept zmluvy napísaný aplikáciou. Zmluva ťa zaväzuje: nechaj ju napísať alebo skontrolovať svojím poradcom. ¦ Kontraktutkast skrevet av appen. En kontrakt binder deg: la rådgiveren din skrive eller kontrollere den.
+Retiré : page vide avec les champs ¦ Odstránený: prázdna stránka s poľami ¦ Fjernet: tom side med feltene
+Gardé, marqué « exemple non juridique » ¦ Ponechaný, označený „právne nezáväzný príklad“ ¦ Beholdt, merket «ikke-juridisk eksempel»
+Chaque contrat rangé retient la version utilisée. ¦ Každá uložená zmluva si pamätá použitú verziu. ¦ Hver arkiverte kontrakt husker versjonen som ble brukt.
+Toutes les versions gardées ¦ Všetky verzie ponechané ¦ Alle versjoner beholdt
+Seulement la dernière ¦ Len posledná ¦ Bare den siste
+💶 Fonds ¦ 💶 Prostriedky ¦ 💶 Midler
+Commission = % du contrat × montant reçu. ¦ Provízia = % zo zmluvy × prijatá suma. ¦ Provisjon = kontraktens % × mottatt beløp.
+Calculée puis modifiable ¦ Vypočítaná, potom upraviteľná ¦ Beregnet, deretter redigerbar
+Toujours tapée à la main ¦ Vždy písaná ručne ¦ Alltid skrevet for hånd
+Le décompte à l’héritier. ¦ Vyúčtovanie pre dediča. ¦ Oppgjør for arvingen.
+Décompte imprimable ¦ Vyúčtovanie na tlač ¦ Oppgjør til utskrift
+Écran seulement ¦ Len obrazovka ¦ Bare skjerm
+🔗 Double preuve ¦ 🔗 Dvojitý doklad ¦ 🔗 Dobbelt bevis
+Le seuil d’un lien solide. ¦ Prah pevnej väzby. ¦ Terskel for en solid forbindelse.
+Deux pièces par lien ¦ Dva doklady na väzbu ¦ To bevis per forbindelse
+Une seule (signaler seulement « aucune ») ¦ Len jeden (hlásiť len „žiadny“) ¦ Bare ett (signaliser bare «ingen»)
+Dans la liste « avant de remettre ». ¦ V zozname „pred odovzdaním“. ¦ I listen «før levering».
+« À revoir » (n’empêche rien) ¦ „Na revíziu“ (nič nebráni) ¦ «Å gjennomgå» (blokkerer ikke noe)
+Bloquant ¦ Blokujúce ¦ Blokkerende
+🗓 Dates importantes ¦ 🗓 Dôležité dátumy ¦ 🗓 Viktige datoer
+Les rappels proposés pour une nouvelle date (réglables pour chaque date). L’app ne calcule aucun délai légal. ¦ Upomienky navrhnuté pre nový dátum (nastaviteľné pre každý dátum). Aplikácia nepočíta žiadnu zákonnú lehotu. ¦ Påminnelser foreslått for en ny dato (kan justeres per dato). Appen beregner ingen lovbestemt frist.
+J−30, J−7, J−1 ¦ D−30, D−7, D−1 ¦ D−30, D−7, D−1
+J−7 seulement ¦ Len D−7 ¦ Bare D−7
+Où les voir dans 📁 Dossier. ¦ Kde ich vidno v 📁 Spise. ¦ Hvor de vises i 📁 Sak.
+Dans les échéances, avec un drapeau 🗓 ¦ V lehotách, so značkou 🗓 ¦ I fristene, med merket 🗓
+Un bloc à part ¦ Samostatný blok ¦ Egen blokk
+👥 Fusion de dossiers ¦ 👥 Zlučovanie spisov ¦ 👥 Sammenslåing av saker
+Les successions restent distinctes : le calcul n’est jamais mélangé. ¦ Dedičstvá zostávajú oddelené: výpočet sa nikdy nemieša. ¦ Dødsboene holdes adskilt: beregningen blandes aldri.
+Deux défunts, deux calculs côte à côte ¦ Dvaja zosnulí, dva výpočty vedľa seba ¦ To avdøde, to beregninger side om side
+Dossiers liés (recherches en commun) ¦ Prepojené spisy (spoločné pátrania) ¦ Tilknyttede saker (felles undersøkelser)
+Combien de temps la fusion peut être annulée. ¦ Ako dlho sa dá zlúčenie zrušiť. ¦ Hvor lenge en sammenslåing kan angres.
+↶ pendant 30 jours ¦ ↶ počas 30 dní ¦ ↶ i 30 dager
+↶ tant que rien n’a été ajouté ¦ ↶ kým sa nič nepridalo ¦ ↶ så lenge ingenting er lagt til
+Joindre les recherches faites au dossier du notaire. ¦ Priložiť vykonané pátrania k spisu pre notára. ¦ Legg ved utførte undersøkelser i mappen til notarius.
+Coché au départ ¦ Na začiatku zaškrtnuté ¦ Avkrysset fra start
+📦 Archive ¦ 📦 Archív ¦ 📦 Arkiv
+Le mot de passe de l’archive de fin de dossier. Oublié = archive perdue. ¦ Heslo archívu na konci spisu. Zabudnuté = archív stratený. ¦ Arkivpassord ved avslutning av en sak. Glemt = arkiv tapt.
+Proposé, coché ¦ Navrhnuté, zaškrtnuté ¦ Foreslått, avkrysset
+Pas proposé ¦ Nenavrhnuté ¦ Ikke foreslått
+💡 Autres idées ¦ 💡 Ďalšie nápady ¦ 💡 Flere ideer
+🔗 Le dossier lié d’un héritier mort après le défunt. ¦ 🔗 Prepojený spis dediča, ktorý zomrel po poručiteľovi. ¦ 🔗 Tilknyttet sak for en arving som døde etter arvelateren.
+Ses descendants rattachés ¦ Jeho potomkovia pripojení ¦ Etterkommerne lagt til
+📮 Une lettre par service : quels actes. ¦ 📮 Jeden list na úrad: ktoré záznamy. ¦ 📮 Ett brev per kontor: hvilke akter.
+Manquants et déjà demandés ¦ Chýbajúce a už vyžiadané ¦ Manglende og allerede etterspurte
+⏳ Délai de réponse par organisme. ¦ ⏳ Čas odpovede podľa úradu. ¦ ⏳ Svartid per kontor.
+⏳ Nombre de courriers avant de donner un délai. ¦ ⏳ Počet listov, než sa uvedie čas. ¦ ⏳ Antall brev før en tid vises.
+📅 La cloche prévient avant qu’une copie d’acte soit trop ancienne (durée tapée par toi pour chaque pièce). ¦ 📅 Zvonček upozorní, než bude kópia záznamu príliš stará (dobu zadávaš pre každý doklad). ¦ 📅 Klokken varsler før en aktkopi blir for gammel (tiden oppgir du per bevis).
+7 jours ¦ 7 dní ¦ 7 dager
+🙈 Écran partagé : ce qui remplace les noms. ¦ 🙈 Zdieľaná obrazovka: čo nahradí mená. ¦ 🙈 Delt skjerm: hva som erstatter navnene.
+Initiales ¦ Iniciály ¦ Initialer
+Numéros (Héritier 1, 2…) ¦ Čísla (Dedič 1, 2…) ¦ Numre (Arving 1, 2…)
+🙈 Écran partagé : les montants. ¦ 🙈 Zdieľaná obrazovka: sumy. ¦ 🙈 Delt skjerm: beløpene.
+Montants masqués ¦ Sumy skryté ¦ Beløp skjult
+Montants visibles ¦ Sumy viditeľné ¦ Beløp synlige
+avec AR ¦ s doručenkou ¦ med mottaksbevis
+sans AR ¦ bez doručenky ¦ uten mottaksbevis
+lettre suivie ¦ sledovaná zásielka ¦ sporet sending
+pas en recommandé ¦ nie doporučene ¦ ikke rekommandert
+Son état civil ¦ Jeho rodinný stav ¦ Sivilstanden
+nom de naissance, prénoms, date et lieu de naissance ¦ rodné priezvisko, mená, dátum a miesto narodenia ¦ fødenavn, fornavn, fødselsdato og -sted
+mariage, PACS, divorce, dates ¦ sobáš, partnerstvo, rozvod, dátumy ¦ ekteskap, partnerskap, skilsmisse, datoer
+prénoms, dates de naissance, décédés ? ¦ mená, dátumy narodenia, zosnulí? ¦ navn, fødselsdatoer, avdød?
+avec un moyen de les joindre ¦ so spôsobom, ako ich zastihnúť ¦ med en måte å nå dem på
+Documents qu’il peut fournir ¦ Dokumenty, ktoré môže dodať ¦ Dokumenter personen kan levere
+livret de famille, actes, jugement… ¦ rodinná knižka, záznamy, rozsudok… ¦ familiebok, akter, dom…
+Une question à toi ¦ Tvoja otázka ¦ Spørsmålet ditt
+💾 Fichier à remplir ¦ 💾 Súbor na vyplnenie ¦ 💾 Fil å fylle ut
+🖨 Papier (PDF) ¦ 🖨 Papier (PDF) ¦ 🖨 Papir (PDF)
+Ce qui le concerne ¦ Čo sa ho týka ¦ Det som gjelder personen
+Famille connue ¦ Známa rodina ¦ Kjent familie
+Sa question ¦ Jeho otázka ¦ Personens spørsmål
+Reversé à l’héritier ¦ Vyplatené dedičovi ¦ Utbetalt til arvingen
+SIRET ¦ SIRET ¦ SIRET
+Mentions ¦ Údaje ¦ Opplysninger
+Trimestre ¦ Štvrťrok ¦ Kvartal
+Personnes rattachées ¦ Pripojené karty ¦ Kort lagt til
+Courriers, échanges, fonds ¦ Listy, kontakty, prostriedky ¦ Brev, kontakter, midler
+Temps et frais, échéances ¦ Čas a výdavky, lehoty ¦ Tid og utgifter, frister
+Questionnaire d’héritier fabriqué ¦ Dotazník pre dediča vytvorený ¦ Spørreskjema til arving laget
+Réponses d’un questionnaire écrites ¦ Odpovede z dotazníka zapísané ¦ Svar på spørreskjema registrert
+Copie du dossier pour le notaire ¦ Kópia spisu pre notára ¦ Kopi av saken til notarius
+Facture émise ou imprimée ¦ Faktúra vystavená alebo vytlačená ¦ Faktura utstedt eller skrevet ut
+Registre des factures (CSV) ¦ Evidencia faktúr (CSV) ¦ Fakturaregister (CSV)
+Décompte des fonds imprimé ¦ Vyúčtovanie prostriedkov vytlačené ¦ Oppgjør av midler skrevet ut
+Recherches faites (pour le notaire) ¦ Vykonané pátrania (pre notára) ¦ Utførte undersøkelser (for notarius)
+Image de la carte des héritiers ¦ Obrázok mapy dedičov ¦ Bilde av arvingskartet
+Contrat imprimé ¦ Zmluva vytlačená ¦ Kontrakt skrevet ut
+Dossiers fusionnés ¦ Spisy zlúčené ¦ Saker slått sammen
+chiffrée ¦ zašifrovaná ¦ kryptert
+sans mot de passe ¦ bez hesla ¦ uten passord
+avec les adresses ¦ s adresami ¦ med adresser
+sans adresse ¦ bez adresy ¦ uten adresse
+deux défunts ¦ dvaja zosnulí ¦ to avdøde
+dossiers liés ¦ prepojené spisy ¦ tilknyttede saker
+Aucune lettre à ranger. ¦ Žiadny list na uloženie. ¦ Ingen brev å arkivere.
+Avec qui ? ¦ S kým? ¦ Med hvem?
+Ce dossier est archivé : rouvre-le d’abord. ¦ Tento spis je archivovaný: najprv ho znova otvor. ¦ Denne saken er arkivert: åpne den igjen først.
+Ce fichier n’est pas un .docx. ¦ Tento súbor nie je .docx. ¦ Denne filen er ikke en .docx.
+Ce n’est pas un devis. ¦ To nie je ponuka. ¦ Dette er ikke et tilbud.
+Cette facture a déjà un avoir. ¦ Táto faktúra už má dobropis. ¦ Denne fakturaen har allerede en kreditnota.
+Choisis la date. ¦ Vyber dátum. ¦ Velg en dato.
+Choisis toi-même le taux de TVA (avec ton comptable) avant d’émettre. ¦ Než vystavíš, zvoľ sadzbu DPH sám (so svojím účtovníkom). ¦ Velg mva-satsen selv (med regnskapsføreren din) før du utsteder.
+Choisis un autre dossier. ¦ Vyber iný spis. ¦ Velg en annen sak.
+Dossier clos ou archivé : rouvre-le d’abord. ¦ Spis uzavretý alebo archivovaný: najprv ho znova otvor. ¦ Saken er avsluttet eller arkivert: åpne den igjen først.
+Déjà émise. ¦ Už vystavená. ¦ Allerede utstedt.
+Facture introuvable. ¦ Faktúra sa nenašla. ¦ Faktura ikke funnet.
+La facture n’a aucune ligne. ¦ Faktúra nemá žiadny riadok. ¦ Fakturaen har ingen linje.
+La fusion date de plus de 30 jours : elle ne peut plus être annulée. ¦ Zlúčenie je staršie ako 30 dní: už ho nemožno zrušiť. ¦ Sammenslåingen er eldre enn 30 dager: den kan ikke lenger angres.
+Le mot de passe est obligatoire (réglage). ¦ Heslo je povinné (nastavenie). ¦ Passordet er påkrevd (innstilling).
+Ligne INSEE introuvable. ¦ Riadok INSEE sa nenašiel. ¦ INSEE-linje ikke funnet.
+Ligne incorrecte : quantité ou prix. ¦ Nesprávny riadok: množstvo alebo cena. ¦ Ugyldig linje: antall eller pris.
+Mouvement introuvable. ¦ Pohyb sa nenašiel. ¦ Bevegelse ikke funnet.
+Numéro déjà pris : renuméroter le brouillon. ¦ Číslo je už obsadené: prečísluj koncept. ¦ Nummeret er allerede brukt: nummerer utkastet på nytt.
+Où as-tu cherché ? ¦ Kde si hľadal? ¦ Hvor har du lett?
+Quelque chose a été ajouté depuis la fusion : elle ne peut plus être annulée. ¦ Od zlúčenia sa niečo pridalo: už ho nemožno zrušiť. ¦ Noe er lagt til siden sammenslåingen: den kan ikke lenger angres.
+Seule une facture émise peut être payée. ¦ Zaplatiť možno len vystavenú faktúru. ¦ Bare en utstedt faktura kan betales.
+Taux de TVA incorrect (ex. : le taux que t’a indiqué ton comptable). ¦ Nesprávna sadzba DPH (napr.: sadzba, ktorú ti dal tvoj účtovník). ¦ Ugyldig mva-sats (f.eks.: satsen regnskapsføreren din har gitt deg).
+Type d’événement « Décès » introuvable. ¦ Typ udalosti „Úmrtie“ sa nenašiel. ¦ Hendelsestypen «Dødsfall» ble ikke funnet.
+Un avoir corrige une facture émise. ¦ Dobropis opravuje vystavenú faktúru. ¦ En kreditnota retter en utstedt faktura.
+Un devis accepté ne se modifie plus. ¦ Prijatá ponuka sa už nemení. ¦ Et akseptert tilbud endres ikke lenger.
+« D’où vient cette date » est obligatoire. ¦ „Odkiaľ je tento dátum“ je povinné. ¦ «Hvor kommer denne datoen fra» er påkrevd.
+Échange introuvable. ¦ Kontakt sa nenašiel. ¦ Kontakt ikke funnet.
+💶 Un reversement reste en attente : archiver quand même ? ¦ 💶 Výplata ešte čaká: napriek tomu archivovať? ¦ 💶 En utbetaling venter fortsatt: arkivere likevel?
+🔐 Archive protégée : tape son mot de passe. ¦ 🔐 Chránený archív: napíš jeho heslo. ¦ 🔐 Beskyttet arkiv: skriv inn passordet.
+🏢 Mon cabinet : un champ que tu as déclaré obligatoire est vide ({f}) : la facture n’est pas émise. ¦ 🏢 Moja kancelária: pole, ktoré si označil ako povinné, je prázdne ({f}): faktúra sa nevystaví. ¦ 🏢 Mitt kontor: et felt du har merket som påkrevd er tomt ({f}): fakturaen utstedes ikke.
+J−{n} ¦ D−{n} ¦ D−{n}
+=descendant rattaché ¦ pripojený potomok|pripojení potomkovia|pripojených potomkov ¦ tilknyttet etterkommer|tilknyttede etterkommere
+=échange noté ¦ zaznamenaný kontakt|zaznamenané kontakty|zaznamenaných kontaktov ¦ notert kontakt|noterte kontakter

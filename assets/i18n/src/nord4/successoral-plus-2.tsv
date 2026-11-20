@@ -1,0 +1,610 @@
+fr ¦ fi ¦ hu
+# Zone « successoral-plus-2 » : ⚖️ outils de plus du généalogiste successoral (heritage-successoral-plus2*.js, lib/successoral_plus2.php, lib/successoral_factures.php)
+Réglages de cet outil ¦ Tämän työkalun asetukset ¦ Az eszköz beállításai
+(conseillé) ¦ (suositeltu) ¦ (ajánlott)
+Autre : ¦ Muu: ¦ Egyéb:
+Outils du dossier : réglages ¦ Asian työkalut: asetukset ¦ Az ügy eszközei: beállítások
+Chaque choix se change ici ; l’option conseillée est celle du départ. ¦ Jokaisen valinnan muutat täällä; suositeltu on oletus. ¦ Minden választást itt módosíthatsz; az ajánlott az alapértelmezett.
+Réglage enregistré : {what} ¦ Asetus tallennettu: {what} ¦ Beállítás mentve: {what}
+Adresse refusée : https:// et {numero} sont obligatoires. ¦ Osoite hylätty: https:// ja {numero} ovat pakollisia. ¦ Cím elutasítva: a https:// és a {numero} kötelező.
+Carte des héritiers (dossiers en cours) ¦ Perillisten kartta (avoimet asiat) ¦ Örökösök térképe (folyamatban lévő ügyek)
+Délai de réponse par organisme ¦ Vastausaika viraston mukaan ¦ Válaszidő hivatalonként
+🙈 Écran partagé ¦ 🙈 Jaettu näyttö ¦ 🙈 Megosztott képernyő
+Fusionner avec un autre dossier… ¦ Yhdistä toiseen asiaan… ¦ Egyesítés másik üggyel…
+Annuler la dernière fusion ¦ Peru viimeisin yhdistäminen ¦ Utolsó egyesítés visszavonása
+nom de naissance ¦ syntymänimi ¦ születési név
+prénom ¦ etunimi ¦ utónév
+né(e) le {d} ¦ syntynyt {d} ¦ született {d}
+même mois ¦ sama kuukausi ¦ ugyanaz a hónap
+même année ¦ sama vuosi ¦ ugyanaz az év
+± 1 an ¦ ± 1 vuosi ¦ ± 1 év
+date inconnue ¦ päivämäärä tuntematon ¦ ismeretlen dátum
+date de naissance différente ¦ eri syntymäaika ¦ más születési dátum
+même département ¦ sama departementti ¦ ugyanaz a megye
+lieu inconnu sur la fiche ¦ paikka kortilla tuntematon ¦ hely a lapon ismeretlen
+lieu : {p} ¦ paikka: {p} ¦ hely: {p}
+Le fichier des décès n’est pas dans l’app. ¦ Kuolleiden tiedosto ei ole sovelluksessa. ¦ A halálozási fájl nincs az alkalmazásban.
+⤓ Importer les décès ¦ ⤓ Tuo kuolemat ¦ ⤓ Halálozások importálása
+L’import se fait une seule fois, depuis data.gouv.fr (environ 25 millions de lignes depuis 1970), ou par années choisies. ¦ Tuonti tehdään kerran, data.gouv.fr-sivustolta (noin 25 miljoonaa riviä vuodesta 1970), tai valituilta vuosilta. ¦ Az importálás egyszer történik, a data.gouv.fr oldalról (1970 óta kb. 25 millió sor), vagy a választott évekre.
+fichier importé : décès {a} → {b} ¦ tuotu tiedosto: kuolemat {a} → {b} ¦ importált fájl: halálozások {a} → {b}
+un décès plus ancien ne peut pas être trouvé ¦ aiempaa kuolemaa ei voi löytää ¦ korábbi halálozás nem található
+plafonné à {n} ¦ rajattu: {n} ¦ korlátozva: {n}
+acte n° {n} ¦ asiakirja nro {n} ¦ anyakönyvi kivonat sz. {n}
+avant le défunt : si c’est cette personne, ses enfants viennent à sa place (représentation). ¦ ennen perittävää: jos kyseessä on tämä henkilö, hänen lapsensa perivät hänen sijastaan (sijaantulo). ¦ az örökhagyó előtt: ha ez a személy, helyette a gyermekei örökölnek (képviselet).
+après le défunt : sa part passe à ses propres héritiers. ¦ perittävän jälkeen: hänen osuutensa siirtyy hänen omille perillisilleen. ¦ az örökhagyó után: a része a saját örököseire száll.
+Les Français nés à l’étranger ont leur acte au Service central d’état civil (Nantes). ¦ Ulkomailla syntyneiden ranskalaisten asiakirja on keskusväestörekisterissä (Nantes). ¦ A külföldön született franciák anyakönyve a Központi Anyakönyvi Hivatalban van (Nantes).
+déjà confirmé ¦ jo vahvistettu ¦ már megerősítve
+C’est cette personne ¦ Se on tämä henkilö ¦ Ez az a személy
+Pas la même personne ¦ Ei sama henkilö ¦ Nem ugyanaz a személy
+Nom de naissance inconnu : cherché sous {n}, pistes moins sûres ¦ Syntymänimi tuntematon: haettu nimellä {n}, epävarmempia vihjeitä ¦ Születési név ismeretlen: {n} néven keresve, kevésbé biztos nyomok
+Deux personnes se ressemblent : demande l’acte avant de choisir ¦ Kaksi henkilöä muistuttaa toisiaan: pyydä asiakirja ennen valintaa ¦ Két személy hasonlít: kérd ki az anyakönyvet, mielőtt választasz
+rien trouvé dans le fichier ¦ tiedostosta ei löytynyt mitään ¦ a fájlban nincs találat
+« Rien trouvé » ne veut pas dire « vivant » (un décès à l’étranger manque souvent). ¦ ”Mitään ei löytynyt” ei tarkoita ”elossa” (ulkomainen kuolema puuttuu usein). ¦ A „nincs találat” nem jelenti azt, hogy „él” (a külföldi halálozás gyakran hiányzik).
+Les héritiers « vivants » comparés au fichier des décès ¦ ”Elossa olevat” perilliset verrattuna kuolleiden tiedostoon ¦ Az „élő” örökösök összevetve a halálozási fájllal
+pistes à partir de {n} ¦ vihjeet alkaen {n} ¦ nyomok ettől: {n}
+Aucun héritier « vivant » à vérifier dans ce dossier. ¦ Tässä asiassa ei ole tarkistettavaa ”elossa olevaa” perillistä. ¦ Ebben az ügyben nincs ellenőrizendő „élő” örökös.
+Comment c’est calculé ¦ Miten se lasketaan ¦ Hogyan számoljuk
+Le nom de naissance, sans accents ni tirets ; jamais le nom d’épouse (l’INSEE donne le nom de naissance). ¦ Syntymänimi, ilman aksentteja ja yhdysmerkkejä; ei koskaan avioliiton kautta saatua nimeä (INSEE säilyttää syntymänimen). ¦ Születési név, ékezetek és kötőjelek nélkül; soha nem a házassági név (az INSEE a születési nevet tartja nyilván).
+Le premier prénom de la fiche parmi les prénoms INSEE ; Jean-Pierre = Jean Pierre. ¦ Kortin ensimmäinen etunimi INSEE:n etunimien joukossa; Jean-Pierre = Jean Pierre. ¦ A lap első utóneve az INSEE utónevei között; Jean-Pierre = Jean Pierre.
+Jour exact 30 · même mois 20 · même année 12 · ± 1 an 6 ; sans date : plafond 70. ¦ Tarkka päivä 30 · sama kuukausi 20 · sama vuosi 12 · ± 1 vuosi 6; ilman päivämäärää: enintään 70. ¦ Pontos nap 30 · ugyanaz a hónap 20 · ugyanaz az év 12 · ± 1 év 6; dátum nélkül: legfeljebb 70.
+La commune ; même département 10 ; né à l’étranger : le pays (plafond 80). ¦ Kunta; sama departementti 10; syntynyt ulkomailla: maa (enintään 80). ¦ Település; ugyanaz a megye 10; külföldön született: az ország (legfeljebb 80).
+Différent : la piste est écartée. ¦ Muuten: vihje hylätään. ¦ Egyébként: a nyom elvetve.
+Pistes écartées ({n}) ¦ Hylätyt vihjeet ({n}) ¦ Elvetett nyomok ({n})
+Piste remise ¦ Vihje palautettu ¦ Nyom visszaállítva
+« Pas la même personne » retenu : cette piste ne reviendra plus ¦ ”Ei sama henkilö” muistettu: tämä vihje ei palaa ¦ „Nem ugyanaz a személy” megjegyezve: ez a nyom nem tér vissza
+Sur la fiche de {n} : un décès le {d}, source « Fichier des personnes décédées (INSEE) », avec la date du relevé. ¦ Henkilön {n} kortilla: kuolema {d}, lähde ”Kuolleiden henkilöiden tiedosto (INSEE)”, tarkistuspäivän kanssa. ¦ {n} lapján: halálozás {d}, forrás „Elhunyt személyek fájlja (INSEE)”, az ellenőrzés dátumával.
+Dans ce dossier : statut retenu « {s} » ; le calcul est refait. ¦ Tässä asiassa: tila ”{s}” valittu; laskelma tehdään uudelleen. ¦ Ebben az ügyben: „{s}” állapot rögzítve; a számítás újra elkészül.
+Ce qui va changer ¦ Mikä muuttuu ¦ Mi változik
+{n} marqué(e) décédé(e) (INSEE). Calcul refait. ¦ {n} merkitty kuolleeksi (INSEE). Laskelma tehty uudelleen. ¦ {n} elhunytként jelölve (INSEE). Számítás újra elkészítve.
+Vérifier les décès ¦ Tarkista kuolemat ¦ Halálozások ellenőrzése
+Questionnaire… ¦ Kyselylomake… ¦ Kérdőív…
+⚰️ INSEE : {n} piste(s) ¦ ⚰️ INSEE: {n} vihjettä ¦ ⚰️ INSEE: {n} nyom
+⚰️ vérifié le {d} ¦ ⚰️ tarkistettu {d} ¦ ⚰️ ellenőrizve {d}
+🕵️ Recherches ¦ 🕵️ Selvitykset ¦ 🕵️ Kutatások
+📞 Noter un échange ¦ 📞 Kirjaa yhteydenotto ¦ 📞 Kapcsolat rögzítése
+Ouvrir un dossier lié ¦ Avaa liitetty asia ¦ A kapcsolódó ügy megnyitása
+Dossiers liés ¦ Liitetyt asiat ¦ Kapcsolódó ügyek
+Succession de {n} ¦ Henkilön {n} perintö ¦ {n} hagyatéka
+dossier d’origine {n} ¦ alkuperäinen asia {n} ¦ eredeti ügy: {n}
+Deux défunts, deux calculs : les successions restent distinctes. ¦ Kaksi vainajaa, kaksi laskelmaa: perinnöt pysyvät erillään. ¦ Két elhunyt, két számítás: a hagyatékok külön maradnak.
+Aucun héritier trouvé d’après les fiches. ¦ Kortien perusteella ei löytynyt perillistä. ¦ A lapok alapján nem található örökös.
+Échanges ¦ Yhteydenotot ¦ Kapcsolatok
+Noter un échange ¦ Kirjaa yhteydenotto ¦ Kapcsolat rögzítése
+Les courriers du Registre ne sont pas recopiés ici : ils sont montrés en gris, en lecture. ¦ Rekisterin kirjeitä ei kopioida tänne: ne näkyvät harmaina, vain luettavina. ¦ A nyilvántartás levelei nem másolódnak ide: szürkén, csak olvasásra jelennek meg.
+Chercher… (personne, résumé) ¦ Hae… (henkilö, yhteenveto) ¦ Keresés… (személy, összefoglaló)
+du dossier fusionné ¦ yhdistetystä asiasta ¦ az egyesített ügyből
+Registre de courriers, n° {n} ¦ Kirjerekisteri, nro {n} ¦ Levélnyilvántartás, sz. {n}
+Aucun échange noté. ¦ Ei kirjattuja yhteydenottoja. ¦ Nincs rögzített kapcsolat.
+✎ Corriger un échange ¦ ✎ Korjaa yhteydenotto ¦ ✎ Kapcsolat javítása
+＋ Noter un échange ¦ ＋ Kirjaa yhteydenotto ¦ ＋ Kapcsolat rögzítése
+Avec (héritier, notaire, mairie…) ¦ Kenen kanssa (perillinen, notaari, kunta…) ¦ Kivel (örökös, közjegyző, polgármesteri hivatal…)
+Prochaine action ¦ Seuraava vaihe ¦ Következő lépés
+Durée (minutes) ¦ Kesto (minuutit) ¦ Időtartam (perc)
+⏱ Compter la durée dans 💶 Temps ¦ ⏱ Laske aika kohtaan 💶 Aika ¦ ⏱ Az idő beszámítása a 💶 Időbe
+C’est une recherche (va dans 🕵️ Recherches) ¦ Se on selvitys (menee kohtaan 🕵️ Selvitykset) ¦ Ez kutatás (a 🕵️ Kutatásokba kerül)
+Avec une date, une échéance va dans le dossier et dans la 🔔 cloche (jamais le résumé). ¦ Päivämäärän kanssa määräaika menee asiaan ja 🔔 kelloon (ei koskaan yhteenvetoa). ¦ Dátummal a határidő bekerül az ügybe és a 🔔 csengőbe (az összefoglaló soha).
+Échange corrigé (noté au 🕓 Journal) ¦ Yhteydenotto korjattu (kirjattu 🕓 Lokiin) ¦ Kapcsolat javítva (bekerült a 🕓 Naplóba)
+Échange noté ¦ Yhteydenotto kirjattu ¦ Kapcsolat rögzítve
+Trois fois « ne répond pas » de suite : noter 🔇 ne répond pas ? ¦ Kolme kertaa peräkkäin ”ei vastaa”: kirjataanko 🔇 ei vastaa? ¦ Háromszor egymás után „nem válaszol”: rögzíted, hogy 🔇 nem válaszol?
+Recommandé ¦ Kirjattu kirje ¦ Ajánlott levél
+Envoyé en recommandé ¦ Lähetetty kirjattuna ¦ Ajánlottként elküldve
+N° du recommandé ¦ Kirjatun kirjeen nro ¦ Ajánlott küldemény száma
+Numéro inhabituel, gardé tel quel. ¦ Epätavallinen numero, säilytetty sellaisenaan. ¦ Szokatlan szám, változatlanul megtartva.
+AR reçu le ¦ Vastaanottotodistus saapunut ¦ Tértivevény megérkezett
+Relance si rien après (jours) ¦ Muistutus, jos ei mitään (päivän) jälkeen ¦ Emlékeztető, ha semmi (nap) után
+Réponse reçue le ¦ Vastaus saapunut ¦ Válasz megérkezett
+Retour du courrier ¦ Kirje palautunut ¦ Levél visszaérkezett
+pli non distribué ¦ vastaanottaja tavoittamatta ¦ címzett nem kereste
+destinataire inconnu ¦ vastaanottaja tuntematon ¦ címzett ismeretlen
+AR reçu aujourd’hui ¦ Vastaanottotodistus tänään ¦ Tértivevény ma
+Suivre en ligne ¦ Seuraa verkossa ¦ Követés online
+Copier le numéro ¦ Kopioi numero ¦ Szám másolása
+L’app ne fait aucune requête : le lien ouvre la page de suivi dans ton navigateur ; tu notes toi-même la date de l’AR. ¦ Sovellus ei lähetä pyyntöjä: linkki avaa seurantasivun selaimessasi; vastaanottotodistuksen päivämäärän kirjaat itse. ¦ Az alkalmazás nem küld kérést: a link a böngésződben nyitja meg a nyomkövetési oldalt; a tértivevény dátumát te rögzíted.
+Tape d’abord le numéro. ¦ Kirjoita ensin numero. ¦ Előbb írd be a számot.
+Numéro copié ¦ Numero kopioitu ¦ Szám másolva
+Courrier revenu : noter 🔎 introuvable pour cet héritier ? ¦ Kirje palautui: kirjataanko 🔎 ei löydetty tälle perilliselle? ¦ A levél visszajött: rögzíted 🔎 nem található ennél az örökösnél?
+✓ AR {d} ¦ ✓ Todistus {d} ¦ ✓ Tértivevény {d}
+revenu ¦ palautunut ¦ visszaérkezett
+📮 sans AR · {n} j ¦ 📮 ei todistusta · {n} pv ¦ 📮 tértivevény nélkül · {n} n
+Recommandés ¦ Kirjatut kirjeet ¦ Ajánlott levelek
+Sans AR ¦ Ilman todistusta ¦ Tértivevény nélkül
+{n} recommandés, {m} sans accusé ¦ {n} kirjattua, {m} ilman todistusta ¦ {n} ajánlott, {m} tértivevény nélkül
+Importer des réponses… ¦ Tuo vastaukset… ¦ Válaszok importálása…
+Saisir un questionnaire papier ¦ Syötä paperilomake ¦ Papíralapú kérdőív bevitele
+📮 Recommandé ¦ 📮 Kirjattu ¦ 📮 Ajánlott
+Questionnaires ¦ Kyselylomakkeet ¦ Kérdőívek
+préparé le {d} ¦ valmisteltu {d} ¦ előkészítve {d}
+réponses écrites le {d} ¦ vastaukset syötetty {d} ¦ válaszok bevíve {d}
+Questionnaire ¦ Kyselylomake ¦ Kérdőív
+au sujet d’une succession ¦ perintöä koskien ¦ egy hagyatékkal kapcsolatban
+Vous ¦ Te ¦ Ön
+Nom de naissance ¦ Syntymänimi ¦ Születési név
+Conjoint(s) ¦ Puoliso(t) ¦ Házastárs(ak)
+Date du mariage (ou PACS) ¦ Avioliiton (tai parisuhteen) päivämäärä ¦ A házasság (vagy élettársi kapcsolat) dátuma
+Adresse, téléphone, courriel ¦ Osoite, puhelin, sähköposti ¦ Cím, telefon, e-mail
+Code postal ¦ Postinumero ¦ Irányítószám
+Autres membres de la famille connus ¦ Muut tunnetut perheenjäsenet ¦ Más ismert családtagok
+Frères, sœurs, cousins…, avec un moyen de les joindre ¦ Veljet, sisaret, serkut…, yhteystapa mukaan lukien ¦ Testvérek, unokatestvérek…, elérhetőséggel
+Documents que vous pouvez fournir ¦ Asiakirjat, jotka voitte toimittaa ¦ Dokumentumok, amelyeket be tud nyújtani
+livret de famille ¦ perhekirja ¦ családi könyv
+acte de naissance ¦ syntymätodistus ¦ születési anyakönyvi kivonat
+acte de mariage ¦ vihkitodistus ¦ házassági anyakönyvi kivonat
+jugement ¦ tuomio ¦ bírósági ítélet
+Vos réponses restent sur cet appareil tant que vous n’envoyez rien. ¦ Vastauksenne pysyvät tällä laitteella, kunnes lähetätte jotain. ¦ Válaszai ezen az eszközön maradnak, amíg semmit nem küld el.
+Enregistrer mes réponses ¦ Tallenna vastaukseni ¦ Válaszaim mentése
+Un questionnaire à envoyer ¦ Lähetettävä kyselylomake ¦ Elküldendő kérdőív
+Fabriquer et ranger au Registre ¦ Luo ja arkistoi rekisteriin ¦ Létrehozás és iktatás a nyilvántartásba
+Ce qu’on demande ¦ Mitä kysymme ¦ Mit kérdezünk
+Ta question ¦ Sinun kysymyksesi ¦ A te kérdésed
+Comment l’envoyer ¦ Miten se lähetetään ¦ Hogyan küldöd
+Ce qui est pré-rempli ¦ Mitä on esitäytetty ¦ Mi van előre kitöltve
+Jamais le nom du défunt ni un montant : « au sujet d’une succession ». Le fichier s’ouvre d’un double-clic, sans internet ; l’héritier renvoie un petit fichier. ¦ Ei koskaan perittävän nimeä eikä summaa: ”perintöä koskien”. Tiedosto avautuu kaksoisnapsautuksella, ilman internetiä; perillinen palauttaa pienen tiedoston. ¦ Soha nem az örökhagyó neve vagy összeg: „egy hagyatékkal kapcsolatban”. A fájl dupla kattintással nyílik, internet nélkül; az örökös egy kis fájlt küld vissza.
+{n} prêts, rangés au Registre de courriers ¦ {n} valmisteltu, arkistoitu kirjerekisteriin ¦ {n} előkészítve, iktatva a levélnyilvántartásba
+Ce fichier ne vient pas d’un questionnaire de ce dossier. ¦ Tämä tiedosto ei ole tämän asian kyselylomakkeesta. ¦ Ez a fájl nem ennek az ügynek a kérdőívéből származik.
+Revoir avant d’écrire ¦ Tarkista ennen kirjaamista ¦ Ellenőrzés a bevitel előtt
+Enfants (un par ligne : prénom, année) ¦ Lapset (yksi riville: nimi, vuosi) ¦ Gyermekek (soronként egy: név, év)
+Documents promis ¦ Luvatut asiakirjat ¦ Ígért dokumentumok
+Réponses de {n} ¦ Vastaukset henkilöltä {n} ¦ {n} válaszai
+Écrire les changements cochés ¦ Kirjaa valitut muutokset ¦ A bejelölt változások bevitele
+Une réponse a déjà été importée le {d} : compare avec celle-ci. ¦ Vastaus tuotiin jo {d}: vertaa sitä tähän. ¦ Egy választ már importáltak {d}: hasonlítsd össze ezzel.
+fichier vérifié ✓ (bon questionnaire, pas modifié) ¦ tiedosto tarkistettu ✓ (oikea lomake, muuttamaton) ¦ fájl ellenőrizve ✓ (a megfelelő kérdőív, módosítatlan)
+Coche ce qui doit aller dans le dossier. Rien n’est écrit sans ta revue ; « source : déclaration de l’héritier » accompagne tout ce qui est écrit. ¦ Valitse, mitä asiaan kirjataan. Mitään ei kirjata ilman tarkistustasi; kaikki kirjattu saa merkinnän ”lähde: perillisen ilmoitus”. ¦ Jelöld be, mi kerüljön az ügybe. Semmi sem kerül be az ellenőrzésed nélkül; minden bevitt adat „forrás: az örökös nyilatkozata” jelölést kap.
+Dans la base ¦ Tietokannassa ¦ Az adatbázisban
+« Famille connue » va en note du dossier, jamais en fiches. Les enfants créent des fiches reliées à l’héritier. Les documents promis deviennent une échéance. ¦ ”Tunnettu perhe” menee asian muistiinpanoon, ei koskaan kortteihin. Lapsista luodaan perilliseen liitetyt kortit. Luvatuista asiakirjoista tulee määräaika. ¦ Az „ismert család” az ügy jegyzetébe kerül, soha nem a lapokra. A gyermekekhez az örököshöz kapcsolt lapok készülnek. Az ígért dokumentumokból határidő lesz.
+{n} écrits. Calcul refait. ¦ {n} kirjattu. Laskelma tehty uudelleen. ¦ {n} bevíve. Számítás újra elkészítve.
+passée ¦ ohitettu ¦ lejárt
+dans {n} j ¦ {n} pv päästä ¦ {n} nap múlva
+était le {d} ¦ oli {d} ¦ volt: {d}
+Une date importante ¦ Tärkeä päivämäärä ¦ Fontos dátum
+Mes dates importantes ¦ Tärkeät päivämääräni ¦ Fontos dátumaim
+D’où vient cette date ¦ Mistä tämä päivämäärä tulee ¦ Honnan származik ez a dátum
+Les dates que le notaire t’a données, rappelées à temps. ¦ Notaarin antamat päivämäärät, muistutettuina ajoissa. ¦ A közjegyző által megadott dátumok, időben emlékeztetve.
+L’app ne calcule aucun délai légal : elle ne connaît pas ta situation. ¦ Sovellus ei laske lakisääteisiä määräaikoja: se ei tunne tilannettasi. ¦ Az alkalmazás nem számol törvényes határidőt: nem ismeri a helyzetedet.
+✎ Modifier la date ¦ ✎ Muuta päivämäärää ¦ ✎ Dátum módosítása
+＋ Une date importante ¦ ＋ Tärkeä päivämäärä ¦ ＋ Fontos dátum
+D’où vient cette date (obligatoire) ¦ Mistä tämä päivämäärä tulee (pakollinen) ¦ Honnan származik ez a dátum (kötelező)
+ex. : Me VIALLE, courriel du 4 nov. ¦ esim.: Me VIALLE, sähköposti 4.11. ¦ pl.: Me VIALLE, e-mail 11. 04-én
+Date déplacée : l’ancienne reste en dessous et la modification est notée au 🕓 Journal. ¦ Päivämäärä siirretty: vanha jää alle ja muutos kirjataan 🕓 Lokiin. ¦ Dátum áthelyezve: a régi alatta marad, a változás bekerül a 🕓 Naplóba.
+Date modifiée ¦ Päivämäärä muutettu ¦ Dátum módosítva
+Date importante ajoutée ¦ Tärkeä päivämäärä lisätty ¦ Fontos dátum hozzáadva
+🔗 {a} liens ne reposent que sur une pièce, {b} sur aucune. Ce n’est pas une erreur : c’est à vérifier avant la remise. ¦ 🔗 {a} yhteyttä nojaa yhteen todisteeseen, {b} ei yhteenkään. Se ei ole virhe: tarkistettava ennen luovutusta. ¦ 🔗 {a} kapcsolat egyetlen bizonyítékon, {b} egyen sem nyugszik. Ez nem hiba: átadás előtt ellenőrizendő.
+🔗 Chaque lien repose sur assez de pièces. ¦ 🔗 Jokainen yhteys nojaa riittäviin todisteisiin. ¦ 🔗 Minden kapcsolat elég bizonyítékon nyugszik.
+Voir les liens ¦ Näytä yhteydet ¦ Kapcsolatok megtekintése
+Une lettre par service ({n}) ¦ Yksi kirje virastoa kohden ({n}) ¦ Egy levél hivatalonként ({n})
+délivrée le {d} ¦ annettu {d} ¦ kiállítva {d}
+valable jusqu’au {d} ¦ voimassa {d} asti ¦ érvényes eddig: {d}
+📅 Date de délivrance ¦ 📅 Antopäivä ¦ 📅 Kiállítás dátuma
+Chaque maillon : combien de pièces le prouvent ¦ Jokainen lenkki: kuinka moni todiste sen osoittaa ¦ Minden láncszem: hány bizonyíték igazolja
+Héritier concerné ¦ Kyseinen perillinen ¦ Érintett örökös
+dossier de preuve « prouvé » ¦ todisteasiakirja ”todistettu” ¦ „igazolt” bizonyító irat
+1 pièce, jugée suffisante le {d} ¦ 1 todiste, katsottu riittäväksi {d} ¦ 1 bizonyíték, elegendőnek tekintve {d}
+Demander l’acte ¦ Pyydä asiakirja ¦ Anyakönyv kikérése
+✓ Une pièce me suffit ici ¦ ✓ Yksi todiste riittää minulle tässä ¦ ✓ Itt egy bizonyíték elég nekem
+Une « pièce » = une source citée sur l’acte (deux copies du même acte comptent pour une) ; un dossier de preuve « prouvé » compte pour une de plus. ¦ ”Todiste” = tapahtumaan merkitty lähde (saman asiakirjan kaksi kopiota lasketaan yhdeksi); todisteasiakirja ”todistettu” lasketaan yhdeksi lisää. ¦ „Bizonyíték” = egy eseménynél megadott forrás (ugyanannak az anyakönyvnek két másolata egynek számít); az „igazolt” bizonyító irat még egynek számít.
+Noté au 🕓 Journal ¦ Kirjattu 🕓 Lokiin ¦ Bekerült a 🕓 Naplóba
+Remise bloquée (réglage) ¦ Luovutus estetty (asetus) ¦ Átadás blokkolva (beállítás)
+Des liens ont trop peu de pièces : la remise est bloquée tant qu’ils ne sont pas complétés (ou « Une pièce me suffit ici »). ¦ Joillakin yhteyksillä on liian vähän todisteita: luovutus on estetty, kunnes niitä täydennetään (tai ”Yksi todiste riittää minulle tässä”). ¦ Néhány kapcsolatnak túl kevés bizonyítéka van: az átadás blokkolva, amíg ki nem egészülnek (vagy „Itt egy bizonyíték elég nekem”).
+Pour une recherche, je vous serais reconnaissant(e) de m’adresser une copie des actes suivants : ¦ Selvitystä varten olisin kiitollinen, jos voisitte lähettää minulle kopion seuraavista asiakirjoista: ¦ Kutatás céljából hálás lennék, ha megküldené az alábbi anyakönyvek másolatát:
+Les actes manquants, regroupés ¦ Puuttuvat asiakirjat, ryhmiteltyinä ¦ Hiányzó anyakönyvek, csoportosítva
+Une seule lettre par service au lieu d’une par acte : moins de timbres, moins de relances. Relis et corrige chaque lettre. ¦ Yksi kirje virastoa kohden yhden asiakirjaa kohden sijaan: vähemmän postimerkkejä, vähemmän muistutuksia. Lue ja korjaa jokainen kirje. ¦ Egyetlen levél hivatalonként anyakönyvenkénti helyett: kevesebb bélyeg, kevesebb emlékeztető. Olvass el és javíts minden levelet.
+{n} rangées dans le Registre de courriers ¦ {n} arkistoitu kirjerekisteriin ¦ {n} iktatva a levélnyilvántartásba
+Copie délivrée le ¦ Kopio annettu ¦ Másolat kiállítva
+Durée de validité demandée par ton notaire (mois) ¦ Notaarisi vaatima voimassaoloaika (kuukautta) ¦ A közjegyződ által kért érvényességi idő (hónap)
+Aucune durée par défaut : c’est toi qui la tapes. La 🔔 cloche prévient avant qu’elle ne soit trop ancienne. ¦ Ei oletusaikaa: syötät sen itse. 🔔 Kello varoittaa ennen kuin se on liian vanha. ¦ Nincs alapértelmezett idő: te adod meg. A 🔔 csengő figyelmeztet, mielőtt túl régi lesz.
+Date de délivrance notée ¦ Antopäivä kirjattu ¦ Kiállítás dátuma rögzítve
+recherches négatives : {n} ¦ {n} selvitystä ilman tulosta ¦ {n} eredménytelen kutatás
+« Rien trouvé » est un résultat utile : il montre la diligence au notaire. ¦ ”Mitään ei löytynyt” on hyödyllinen tulos: se näyttää notaarille huolellisuutesi. ¦ A „nincs találat” hasznos eredmény: megmutatja a közjegyzőnek az alaposságodat.
+Aucune recherche notée pour cette personne. ¦ Tälle henkilölle ei ole kirjattu selvitystä. ¦ Ennél a személynél nincs rögzített kutatás.
+Rien n’est recopié : les lignes viennent du 🗓 Journal des recherches, des ⚰️ vérifications INSEE et des 📞 échanges marqués « recherche ». ¦ Mitään ei kopioida: rivit tulevat 🗓 Tutkimuslokista, ⚰️ INSEE-tarkistuksista ja ”selvitys”-merkityistä 📞 yhteydenotoista. ¦ Semmi sem másolódik: a sorok a 🗓 Kutatási naplóból, a ⚰️ INSEE-ellenőrzésekből és a „kutatás” jelölésű 📞 kapcsolatokból jönnek.
+Noter une recherche ¦ Kirjaa selvitys ¦ Kutatás rögzítése
+Pour le notaire ¦ Notaarille ¦ A közjegyzőnek
+Recherches faites — {n} ¦ Tehdyt selvitykset — {n} ¦ Elvégzett kutatások — {n}
+＋ Noter une recherche ¦ ＋ Kirjaa selvitys ¦ ＋ Kutatás rögzítése
+Où (service, site, mairie…) ¦ Missä (arkisto, sivusto, kunta…) ¦ Hol (levéltár, honlap, polgármesteri hivatal…)
+Ce qui a été trouvé ¦ Mitä löytyi ¦ Mit találtál
+Écrit un dépouillement dans le 🗓 Journal des recherches (comme « Où chercher »). ¦ Kirjaa lukumuistiinpanon 🗓 Tutkimuslokiin (kuten ”Mistä etsiä”). ¦ Olvasási jegyzetet rögzít a 🗓 Kutatási naplóba (mint a „Hol keressünk”).
+Recherche notée ¦ Selvitys kirjattu ¦ Kutatás rögzítve
+Carte des héritiers ¦ Perillisten kartta ¦ Örökösök térképe
+au numéro (BAN) ¦ osoitenumeroon (BAN) ¦ házszámig (BAN)
+Hors carte ¦ Kartan ulkopuolella ¦ Térképen kívül
+à l’étranger ({c}) ¦ ulkomailla ({c}) ¦ külföldön ({c})
+commune pas placée ({c}) ¦ kuntaa ei sijoitettu ({c}) ¦ település nincs elhelyezve ({c})
+adresse inconnue ¦ osoite tuntematon ¦ cím ismeretlen
+Où vivent les héritiers ¦ Missä perilliset asuvat ¦ Hol élnek az örökösök
+Tous les dossiers en cours ¦ Kaikki avoimet asiat ¦ Minden folyamatban lévő ügy
+Aucune adresse d’héritier placée sur la carte. ¦ Kartalle ei ole sijoitettu yhtään perillisen osoitetta. ¦ A térképen nincs elhelyezett örökösi cím.
+héritier (adresse connue, au niveau de la commune) ¦ perillinen (osoite tiedossa, kuntatasolla) ¦ örökös (ismert cím, település szinten)
+notaire connu de l’app ¦ sovelluksen tuntema notaari ¦ az alkalmazás által ismert közjegyző
+Rien n’est envoyé en ligne. ¦ Mitään ei lähetetä verkkoon. ¦ Semmi sem megy ki online.
+La BAN n’est pas encore téléchargée : position à la commune. ¦ BAN:ia ei vielä ladattu: sijainti kuntatasolla. ¦ A BAN még nincs letöltve: pozíció település szinten.
+Image de la carte (sans noms) ¦ Kartan kuva (ilman nimiä) ¦ Térkép képe (nevek nélkül)
+Par organisme, d’après le Registre ¦ Viraston mukaan, rekisteristä ¦ Hivatalonként, a nyilvántartásból
+Organisme ¦ Virasto ¦ Hivatal
+pas assez de courriers ¦ vähän kirjeitä ¦ kevés levél
+De l’envoi à la réponse reçue (demandes d’actes des dossiers). Aide à prévoir la remise et à relancer au bon moment. ¦ Lähetyksestä vastaanotettuun vastaukseen (asioiden asiakirjapyynnöt). Auttaa suunnittelemaan luovutuksen ja muistuttamaan ajoissa. ¦ Az elküldéstől a megkapott válaszig (az ügyek anyakönyv-kérései). Segít az átadás tervezésében és az időbeni emlékeztetésben.
+Pas encore de réponse notée dans le Registre. ¦ Rekisteriin ei ole vielä kirjattu vastauksia. ¦ A nyilvántartásban még nincs rögzített válasz.
+Sa part passe dans sa propre succession : ouvrir un dossier lié pour {n} ? ¦ Hänen osuutensa siirtyy hänen omaan perintöönsä: avataanko liitetty asia henkilölle {n}? ¦ A része a saját hagyatékába kerül: nyitsz kapcsolódó ügyet {n} számára?
+🔗 Dossier lié ¦ 🔗 Liitetty asia ¦ 🔗 Kapcsolódó ügy
+Ouvrir le dossier lié ¦ Avaa liitetty asia ¦ Kapcsolódó ügy megnyitása
+Dossier lié {n} ouvert ({what}) ¦ Liitetty asia {n} avattu ({what}) ¦ Kapcsolódó ügy {n} megnyitva ({what})
+Aucun autre dossier en cours dans cette généalogie (d’abord ⇄ Déplacer s’il est dans une autre). ¦ Tässä puussa ei ole muuta avointa asiaa (⇄ Siirrä se ensin, jos se on toisessa). ¦ Ebben a fában nincs más folyamatban lévő ügy (előbb ⇄ Áthelyezés, ha másikban van).
+Fusionner avec un autre dossier ¦ Yhdistä toiseen asiaan ¦ Egyesítés másik üggyel
+Le dossier à réunir dans {n} ¦ Asia, joka yhdistetään asiaan {n} ¦ {n} üggyel egyesítendő ügy
+Le numéro du dossier réuni n’est pas réutilisé. ↶ Annuler sépare à nouveau, comme avant. ¦ Yhdistetyn asian numeroa ei käytetä uudelleen. ↶ Peru erottaa ne taas kuten ennen. ¦ Az egyesített ügy száma nem lesz újra felhasználva. A ↶ Visszavonás újra szétválasztja őket, mint korábban.
+Ce qui ¦ Mitä ¦ Mit
+Ce qui se passe ¦ Mitä tapahtuu ¦ Mi történik
+{a} déjà communes, {b} ajoutées ¦ {a} yhteistä, {b} lisätty ¦ {a} közös, {b} hozzáadva
+{d} en double gardée(s) une fois ¦ kaksoiskappaleet säilytetty kerran: {d} ¦ ismétlődők egyszer megtartva: {d}
+rattachés, chacun garde son dossier d’origine en étiquette ¦ lisätty, kukin säilyttää alkuperäisen asiansa merkintänä ¦ hozzáadva, mindegyik megtartja eredeti ügyét címkeként
+rattachés ; les factures émises ne changent pas ¦ lisätty; annettuja laskuja ei muuteta ¦ hozzáadva; a kiállított számlák nem változnak
+mis bout à bout, chaque ligne marquée de son dossier ¦ peräkkäin, jokainen rivi merkitty asiallaan ¦ egymás után, minden sor az ügyével jelölve
+Deux notaires différents : lequel garder ? ¦ Kaksi eri notaaria: kumpi säilytetään? ¦ Két különböző közjegyző: melyiket tartod meg?
+Dossiers réunis ¦ Asiat yhdistetty ¦ Ügyek egyesítve
+Copie à envoyer au notaire ¦ Kopio notaarille ¦ Másolat a közjegyzőnek
+Copie à envoyer au notaire… ¦ Kopio notaarille… ¦ Másolat a közjegyzőnek…
+Un fichier que le notaire ouvre d’un double-clic, sans rien pouvoir modifier, chiffré si tu le veux. ¦ Tiedosto, jonka notaari avaa kaksoisnapsautuksella eikä voi muuttaa mitään, salattuna jos haluat. ¦ Egy fájl, amelyet a közjegyző dupla kattintással nyit meg, és nem tud benne semmit módosítani; ha akarod, titkosítva.
+Part aussi ¦ Mukaan lähtevät myös ¦ Szintén megy
+📞 échanges · 💶 fonds · ⚰️ vérifications INSEE · 🧾 copie des factures (le registre, lui, ne change pas) ¦ 📞 yhteydenotot · 💶 varat · ⚰️ INSEE-tarkistukset · 🧾 kopio laskuista (itse rekisteri ei muutu) ¦ 📞 kapcsolatok · 💶 pénzeszközök · ⚰️ INSEE-ellenőrzések · 🧾 a számlák másolata (maga a nyilvántartás nem változik)
+Mot de passe (obligatoire) ¦ Salasana (pakollinen) ¦ Jelszó (kötelező)
+🔐 Mot de passe ¦ 🔐 Salasana ¦ 🔐 Jelszó
+AES-256, comme les sauvegardes protégées. Oublié = archive perdue. Le réimport le demande. ¦ AES-256, kuten suojatut varmuuskopiot. Unohdettu = arkisto menetetty. Uudelleentuonti kysyy sitä. ¦ AES-256, mint a védett mentések. Elfelejtve = archívum elveszett. Az újraimportálás kérni fogja.
+Mot de passe trop court (8 caractères au moins). ¦ Salasana on liian lyhyt (vähintään 8 merkkiä). ¦ A jelszó túl rövid (legalább 8 karakter).
+Les deux mots de passe ne sont pas les mêmes. ¦ Salasanat eivät täsmää. ¦ A két jelszó nem egyezik.
+Mot de passe de l’archive ¦ Arkiston salasana ¦ Archívum jelszava
+🙈 Écran partagé : noms, adresses et montants masqués ¦ 🙈 Jaettu näyttö: nimet, osoitteet ja summat piilotettu ¦ 🙈 Megosztott képernyő: nevek, címek és összegek elrejtve
+Échange mis à la corbeille ¦ Yhteydenotto siirretty roskakoriin ¦ Kapcsolat a kukába helyezve
+Fusion annulée : les deux dossiers sont séparés comme avant ¦ Yhdistäminen peruttu: asiat ovat erillään kuten ennen ¦ Egyesítés visszavonva: a két ügy külön van, mint korábban
+Mon cabinet (factures) ¦ Toimistoni (laskut) ¦ Az irodám (számlák)
+L’app ne connaît ni ton statut, ni ton régime de TVA, ni les mentions que ta facture doit porter : c’est toi qui les écris, avec ton comptable. L’app les recopie telles quelles. ¦ Sovellus ei tunne asemaasi, arvonlisäverokohteluasi eikä merkintöjä, jotka laskussasi on oltava: kirjoitat ne itse kirjanpitäjäsi kanssa. Sovellus toistaa ne muuttamatta. ¦ Az alkalmazás nem ismeri a jogállásodat, az áfarendszeredet, sem a számládon kötelező feltüntetéseket: ezeket te írod meg a könyvelőddel. Az alkalmazás változtatás nélkül átveszi őket.
+Mentions à imprimer sur chaque facture (ton texte) ¦ Jokaiseen laskuun tulostettavat merkinnät (oma tekstisi) ¦ Minden számlára nyomtatott feltüntetések (a te szöveged)
+vide : à écrire avec ton comptable ¦ tyhjä: kirjoita kirjanpitäjäsi kanssa ¦ üres: írd meg a könyvelőddel
+Champs obligatoires pour émettre une facture ¦ Laskun antamiseen vaadittavat kentät ¦ Számla kiállításához kötelező mezők
+Un champ que tu as déclaré obligatoire et laissé vide : la facture n’est pas émise. ¦ Kenttä, jonka merkitsit pakolliseksi ja jätit tyhjäksi: laskua ei anneta. ¦ Egy mező, amelyet kötelezőnek jelöltél és üresen hagytál: a számla nem állítható ki.
+🏢 Mon cabinet ¦ 🏢 Toimistoni ¦ 🏢 Az irodám
+EXEMPLE NON JURIDIQUE — à faire écrire ou relire par ton conseil avant tout usage. ¦ EI-OIKEUDELLINEN ESIMERKKI — anna neuvonantajasi laatia tai tarkistaa se ennen mitään käyttöä. ¦ NEM JOGI MINTA — bármilyen használat előtt írasd meg vagy ellenőriztesd a tanácsadóddal.
+ton titre ¦ otsikkosi ¦ a te címed
+ton texte : écrit ou relu par ton conseil ¦ tekstisi: neuvonantajasi laatima tai tarkistama ¦ a te szöveged: a tanácsadód írta vagy ellenőrizte
+Mes modèles de contrat ¦ Sopimuspohjani ¦ Szerződésmintáim
+Ton contrat, avec des champs que l’app remplit ¦ Sopimuksesi, kentillä jotka sovellus täyttää ¦ A szerződésed, az alkalmazás által kitöltött mezőkkel
+Enregistrer la version ¦ Tallenna versio ¦ Verzió mentése
+L’app ne fournit aucun texte de contrat : c’est un acte qui t’engage et qui engage l’héritier, à faire écrire ou relire par ton conseil. L’app remplit des champs et garde l’historique de tes versions. ¦ Sovellus ei tarjoa sopimustekstiä: se on asiakirja, joka sitoo sinua ja perillistä; anna neuvonantajasi laatia tai tarkistaa se. Sovellus täyttää kentät ja säilyttää versiohistoriasi. ¦ Az alkalmazás nem ad szerződésszöveget: ez téged és az örököst kötelező okirat; írasd meg vagy ellenőriztesd a tanácsadóddal. Az alkalmazás kitölti a mezőket és megőrzi a verzióid történetét.
+＋ Nouveau modèle ¦ ＋ Uusi pohja ¦ ＋ Új minta
+Mon contrat ¦ Sopimukseni ¦ A szerződésem
+Versions ¦ Versiot ¦ Verziók
+Écris ou importe ton contrat ¦ Kirjoita tai tuo sopimuksesi ¦ Írd meg vagy importáld a szerződésedet
+Importer un .docx / .txt ¦ Tuo .docx / .txt ¦ .docx / .txt importálása
+Aperçu pour un héritier ¦ Esikatselu perilliselle ¦ Előnézet az örökösnek
+{defunt} n’existe pas : le nom du défunt n’est jamais dans un courrier envoyé avant signature. {pourcentage} vient de 💶 « Honoraires d’un contrat ». ¦ {defunt} ei ole olemassa: perittävän nimi ei koskaan ole kirjeessä, joka lähetetään ennen allekirjoitusta. {pourcentage} tulee kohdasta 💶 ”Sopimuksen palkkio”. ¦ {defunt} nem létezik: az örökhagyó neve soha nincs benne az aláírás előtt küldött levélben. A {pourcentage} a 💶 „Szerződés szerinti díj”-ból jön.
+version {n} ¦ versio {n} ¦ {n}. verzió
+Champ inconnu : {f} (ligne {l}). Corrige-le avant d’enregistrer. ¦ Tuntematon kenttä: {f} (rivi {l}). Korjaa se ennen tallennusta. ¦ Ismeretlen mező: {f} ({l}. sor). Javítsd mentés előtt.
+% à noter ¦ % täytettäväksi ¦ % kitöltendő
+Champ vide : {f} ¦ Tyhjä kenttä: {f} ¦ Üres mező: {f}
+Version {n} enregistrée (Mes modèles) ¦ Versio {n} tallennettu (Pohjani) ¦ {n}. verzió mentve (Mintáim)
+Fonds par héritier ¦ Varat perillistä kohden ¦ Pénzeszközök örökösönként
+Aucun montant de succession : l’app ne connaît ni l’actif, ni le passif. On note seulement des mouvements réels que tu as vus passer. ¦ Ei pesän summaa: sovellus ei tunne varoja eikä velkoja. Kirjaat vain todelliset liikkeet, jotka olet nähnyt. ¦ Nincs hagyatéki összeg: az alkalmazás nem ismeri sem az aktívákat, sem a passzívákat. Csak a valóban látott mozgásokat rögzíted.
+Reçu du notaire ¦ Saatu notaarilta ¦ Közjegyzőtől kapott
+Frais refacturés ¦ Edelleen laskutetut kulut ¦ Továbbszámlázott költségek
+Reversé ¦ Maksettu ¦ Kifizetve
+Reste dû ¦ Maksettavaa jäljellä ¦ Fizetendő maradék
+pas de contrat ¦ ilman sopimusta ¦ szerződés nélkül
+reversé de trop : {s} ¦ maksettu liikaa: {s} ¦ túlfizetve: {s}
+✓ soldé ¦ ✓ selvitetty ¦ ✓ rendezve
+à reverser ¦ maksettavana ¦ kifizetendő
+Mouvements ¦ Liikkeet ¦ Mozgások
+＋ Noter un mouvement ¦ ＋ Kirjaa liike ¦ ＋ Mozgás rögzítése
+Commission = % du contrat × montant reçu. Reste dû = reçu − commission − frais − reversé. ¦ Palkkio = sopimuksen % × saatu summa. Jäljellä = saatu − palkkio − kulut − maksettu. ¦ Jutalék = a szerződés %-a × kapott összeg. Maradék = kapott − jutalék − költségek − kifizetett.
+✎ Corriger un mouvement ¦ ✎ Korjaa liike ¦ ✎ Mozgás javítása
+Commission proposée : {p} % de {r} = {c} (modifiable) ¦ Ehdotettu palkkio: {p} % summasta {r} = {c} (muutettavissa) ¦ Javasolt jutalék: {r} {p} %-a = {c} (módosítható)
+virement, chèque… ¦ tilisiirto, šekki… ¦ átutalás, csekk…
+Versé à (représentant, si mineur ou sous tutelle) ¦ Maksettu (edustajalle, jos alaikäinen tai edunvalvonnassa) ¦ Kifizetve (a képviselőnek, ha kiskorú vagy gondnokság alatt áll)
+Montant incorrect. ¦ Virheellinen summa. ¦ Érvénytelen összeg.
+Mouvement corrigé ¦ Liike korjattu ¦ Mozgás javítva
+Mouvement noté ¦ Liike kirjattu ¦ Mozgás rögzítve
+versé à {n} ¦ {n} maksettu ¦ {n} kifizetve
+Décompte — {n} ¦ Tilitys — {n} ¦ Elszámolás — {n}
+Aucun mouvement noté. ¦ Ei kirjattuja liikkeitä. ¦ Nincs rögzített mozgás.
+Reste à reverser ¦ Maksettavaa jäljellä ¦ Kifizetendő maradék
+Noter un mouvement ¦ Kirjaa liike ¦ Mozgás rögzítése
+Décompte pour l’héritier ¦ Tilitys perilliselle ¦ Elszámolás az örökösnek
+Facturer la commission ¦ Laskuta palkkio ¦ Jutalék számlázása
+Facture ¦ Lasku ¦ Számla
+Avoir ¦ Hyvityslasku ¦ Jóváíró számla
+Devis ¦ Tarjous ¦ Árajánlat
+N° de TVA ¦ ALV-tunniste ¦ Közösségi adószám
+BROUILLON ¦ LUONNOS ¦ TERVEZET
+ÉMIS ¦ ANNETTU ¦ KIÁLLÍTVA
+ÉMISE ¦ ANNETTU ¦ KIÁLLÍTVA
+Client ¦ Asiakas ¦ Ügyfél
+Total HT ¦ Yhteensä ilman ALV:tä ¦ Nettó összesen
+TVA {r} % ¦ ALV {r} % ¦ ÁFA {r} %
+Total TTC ¦ Yhteensä ALV:n kanssa ¦ Bruttó összesen
+Commission du contrat de révélation ({p} % de la part reçue : {r}) ¦ Palkkio paljastamissopimuksen mukaan ({p} % saadusta osuudesta: {r}) ¦ Jutalék a felfedési szerződés szerint (a kapott rész {p} %-a: {r})
+Commission du contrat de révélation ({p} %) ¦ Palkkio paljastamissopimuksen mukaan ({p} %) ¦ Jutalék a felfedési szerződés szerint ({p} %)
+Temps passé ({h} h {m}) ¦ Käytetty aika ({h} h {m}) ¦ Ráfordított idő ({h} ó {m})
+Frais ¦ Kulut ¦ Költségek
+🧾 DEVIS ¦ 🧾 TARJOUS ¦ 🧾 ÁRAJÁNLAT
+🧾 FACTURE ¦ 🧾 LASKU ¦ 🧾 SZÁMLA
+{k} {n} ¦ {k} {n} ¦ {k} {n}
+Brouillon, pas encore numéroté ¦ Luonnos, vielä ilman numeroa ¦ Tervezet, még szám nélkül
+Garder en brouillon ¦ Säilytä luonnoksena ¦ Megtartás tervezetként
+Ce que l’app ne fait pas : elle ne connaît ni ton statut, ni ton régime de TVA, ni les mentions que ta facture doit porter. C’est toi qui choisis le taux et qui écris les mentions (avec ton comptable). L’app numérote sans trou, interdit de modifier une facture émise, fait les additions et garde tout. ¦ Mitä sovellus ei tee: se ei tunne asemaasi, arvonlisäverokohteluasi eikä pakollisia merkintöjä. Valitset verokannan ja kirjoitat merkinnät itse (kirjanpitäjäsi kanssa). Sovellus numeroi aukottomasti, estää annetun laskun muuttamisen, laskee summat ja säilyttää kaiken. ¦ Amit az alkalmazás nem tesz: nem ismeri a jogállásodat, az áfarendszeredet, sem a kötelező feltüntetéseket. Az áfakulcsot te választod, a feltüntetéseket te írod (a könyvelőddel). Az alkalmazás hézagmentesen számoz, megtiltja a kiállított számla módosítását, összead és mindent megőriz.
+🏢 Mon cabinet : des champs obligatoires sont vides ({f}) : la facture ne pourra pas être émise. ¦ 🏢 Toimistoni: pakollisia kenttiä tyhjänä ({f}): laskua ei voi antaa. ¦ 🏢 Az irodám: üres kötelező mezők ({f}): a számla nem lesz kiállítható.
+Adresse du client ¦ Asiakkaan osoite ¦ Ügyfél címe
+Prix HT ¦ Hinta ilman ALV:tä ¦ Nettó ár
+Taux de TVA (%) — choisi par toi ¦ ALV-kanta (%) — sinun valitsemasi ¦ ÁFA-kulcs (%) — általad választva
+ton taux ¦ sinun kantasi ¦ a te kulcsod
+Repris de ta dernière facture ; jamais deviné. ¦ Otettu edellisestä laskustasi; ei koskaan arvattu. ¦ Az utolsó számládból átvéve; soha nem kitalálva.
+Aucun taux proposé : tape celui que t’a indiqué ton comptable. ¦ Kantaa ei ehdoteta: kirjoita kirjanpitäjäsi antama kanta. ¦ Nincs javasolt kulcs: írd be, amit a könyvelőd adott.
+Émettre le devis n° {n} ¦ Anna tarjous nro {n} ¦ {n} sz. árajánlat kiállítása
+Émettre la facture n° {n} ¦ Anna lasku nro {n} ¦ {n} sz. számla kiállítása
+Sur la facture ¦ Laskussa ¦ A számlán
+à remplir ¦ täytettävä ¦ kitöltendő
+⏱ Temps passé : non coché, compris dans la commission ¦ ⏱ Käytetty aika: ei valittu, sisältyy palkkioon ¦ ⏱ Ráfordított idő: nincs bejelölve, a jutalék tartalmazza
+taux à choisir ¦ kanta valittava ¦ választandó kulcs
+Émettre le devis {n} ? Il reste modifiable tant qu’il n’est pas accepté. ¦ Annetaanko tarjous {n}? Sitä voi muuttaa, kunnes se hyväksytään. ¦ Kiállítod a(z) {n} árajánlatot? Amíg nincs elfogadva, módosítható.
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. Émettre {n} ? ¦ Annettua laskua ei voi enää muuttaa eikä poistaa. Hyvityslasku korjaa sen. Annetaanko {n}? ¦ A kiállított számla többé nem módosítható és nem törölhető. Jóváíró számla javítja. Kiállítod: {n}?
+Émettre ¦ Anna ¦ Kiállítás
+{n} émise ¦ {n} annettu ¦ {n} kiállítva
+Brouillon gardé ¦ Luonnos säilytetty ¦ Tervezet megtartva
+brouillon ¦ luonnos ¦ tervezet
+émis ¦ annettu ¦ kiállítva
+avoir ¦ hyvityslasku ¦ jóváírás
+✓ payée le {d} ¦ ✓ maksettu {d} ¦ ✓ fizetve {d}
+attendue ¦ odotettu ¦ várható
+Tout le cabinet ¦ Koko toimisto ¦ Az egész iroda
+avec les mouvements de fonds ¦ varojen liikkeineen ¦ a pénzmozgásokkal
+CSV pour le comptable ¦ CSV kirjanpitäjälle ¦ CSV a könyvelőnek
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. ¦ Annettua laskua ei voi enää muuttaa eikä poistaa. Hyvityslasku korjaa sen. ¦ A kiállított számla többé nem módosítható és nem törölhető. Jóváíró számla javítja.
+Chercher… (n°, client, dossier) ¦ Hae… (nro, asiakas, asia) ¦ Keresés… (sz., ügyfél, ügy)
+TTC ¦ ALV:n kanssa ¦ bruttó
+🧾 Faire un avoir ¦ 🧾 Anna hyvityslasku ¦ 🧾 Jóváíró számla kiállítása
+Payée… ¦ Maksettu… ¦ Fizetve…
+Accepté ¦ Hyväksytty ¦ Elfogadva
+Transformer en facture ¦ Muuta laskuksi ¦ Átalakítás számlává
+Pas encore de facture. ¦ Ei vielä laskuja. ¦ Még nincs számla.
+Brouillon supprimé (aucun numéro consommé) ¦ Luonnos poistettu (numeroa ei käytetty) ¦ Tervezet törölve (szám nem használódott el)
+L’avoir reprend les lignes de la facture en négatif, avec son propre numéro. Il ne peut plus être modifié. ¦ Hyvityslasku toistaa laskun rivit miinusmerkkisinä, omalla numerollaan. Sitä ei voi enää muuttaa. ¦ A jóváíró számla negatív előjellel veszi át a számla sorait, saját számmal. Többé nem módosítható.
+Payée ¦ Maksettu ¦ Fizetve
+Date (AAAA-MM-JJ) et moyen, ex. : 2026-11-20 virement ¦ Päivämäärä (VVVV-KK-PP) ja tapa, esim.: 2026-11-20 tilisiirto ¦ Dátum (ÉÉÉÉ-HH-NN) és mód, pl.: 2026-11-20 átutalás
+Paiement noté ¦ Maksu kirjattu ¦ Fizetés rögzítve
+Devis accepté ¦ Tarjous hyväksytty ¦ Árajánlat elfogadva
+Brouillon de facture prêt ¦ Laskuluonnos valmis ¦ Számlatervezet kész
+Registre des factures ¦ Laskurekisteri ¦ Számlanyilvántartás
+Factures du dossier ¦ Asian laskut ¦ Az ügy számlái
+Devis et factures ¦ Tarjoukset ja laskut ¦ Árajánlatok és számlák
+Faire un devis ¦ Luo tarjous ¦ Árajánlat létrehozása
+Faire une facture ¦ Luo lasku ¦ Számla létrehozása
+Pas encore de facture pour ce dossier. ¦ Tälle asialle ei vielä ole laskua. ¦ Ehhez az ügyhöz még nincs számla.
+HT ¦ ilman ALV:tä ¦ nettó
+{n} base(s) verrouillée(s) non lue(s) ¦ {n} lukittua tietokantaa lukematta ¦ {n} zárolt adatbázis olvasatlan
+Dossiers ouverts ¦ Avoimet asiat ¦ Nyitott ügyek
+dont {n} clos ¦ joista {n} suljettu ¦ ebből {n} lezárva
+Délai moyen (ouvert → remis) ¦ Keskimääräinen kesto (avattu → luovutettu) ¦ Átlagos időtartam (megnyitás → átadás)
+sur {n} dossiers remis ¦ {n} luovutetusta asiasta ¦ {n} átadott ügy alapján
+pas assez de dossiers pour une moyenne ¦ liian vähän asioita keskiarvoon ¦ túl kevés ügy az átlaghoz
+Contrats signés / refusés ¦ Sopimukset allekirjoitettu / hylätty ¦ Aláírt / elutasított szerződések
+{p} % signés · {n} sans réponse ¦ {p} % allekirjoitettu · {n} ilman vastausta ¦ {p} % aláírva · {n} válasz nélkül
+Facturé / encaissé ({k}) ¦ Laskutettu / peritty ({k}) ¦ Számlázva / beszedve ({k})
+encaissé {a} · reste {b} ¦ {a} peritty · {b} jäljellä ¦ {a} beszedve · {b} maradék
+Pas encore de facture : seuls le temps et les contrats sont comptés ¦ Ei vielä laskuja: vain aika ja sopimukset lasketaan ¦ Még nincs számla: csak az idő és a szerződések számítanak
+{n} en cours depuis {m} mois en moyenne ¦ {n} käynnissä, keskimäärin {m} kuukautta ¦ {n} folyamatban, átlagosan {m} hónap
+Temps passé par dossier (heures) ¦ Käytetty aika asiaa kohden (tuntia) ¦ Ráfordított idő ügyenként (óra)
+Aucun temps noté. ¦ Ei kirjattua aikaa. ¦ Nincs rögzített idő.
+Voir en tableau ¦ Näytä taulukkona ¦ Megtekintés táblázatként
+Facturé et encaissé par trimestre ({k}) ¦ Laskutettu ja peritty neljännesvuosittain ({k}) ¦ Számlázva és beszedve negyedévenként ({k})
+Facturé ¦ Laskutettu ¦ Számlázva
+Encaissé ¦ Peritty ¦ Beszedve
+Aucun nom d’héritier dans cette vue : des numéros de dossier et des totaux. Rien n’est écrit. ¦ Tässä näkymässä ei ole perillisten nimiä: asianumerot ja summat. Mitään ei kirjoiteta. ¦ Ebben a nézetben nincs örökösnév: ügyszámok és összegek. Semmi sem íródik.
+Pour {n} ¦ Kenelle: {n} ¦ {n} részére
+le notaire ¦ notaari ¦ közjegyző
+⤓ Fabriquer la copie ¦ ⤓ Luo kopio ¦ ⤓ Másolat létrehozása
+Ce qui part ¦ Mitä lähtee ¦ Mi megy
+Tableau des héritiers et parts, arbre, chaîne de filiation (comme le PDF) ¦ Perillisten ja osuuksien taulukko, puu, polveutumisketju (kuten PDF) ¦ Örökösök és részek táblázata, fa, leszármazási lánc (mint a PDF)
+📑 Pièces (images des actes) ¦ 📑 Todisteet (asiakirjojen kuvat) ¦ 📑 Bizonyítékok (anyakönyvek képei)
+Adresses des héritiers ¦ Perillisten osoitteet ¦ Az örökösök címei
+🕵️ Joindre les recherches faites ¦ 🕵️ Liitä tehdyt selvitykset ¦ 🕵️ Elvégzett kutatások csatolása
+Journal, échanges, temps, factures ne partent jamais. ¦ Loki, yhteydenotot, aika ja laskut eivät koskaan lähde. ¦ A napló, a kapcsolatok, az idő és a számlák soha nem mennek.
+Protection ¦ Suojaus ¦ Védelem
+Le fichier est chiffré (AES-256) ; la page demande le mot de passe à l’ouverture. Donne-le au notaire par un autre moyen (téléphone, SMS). Oublié = fichier illisible, même pour toi (refais-en un). ¦ Tiedosto on salattu (AES-256); sivu kysyy salasanaa avattaessa. Anna se notaarille toista kautta (puhelin, tekstiviesti). Unohdettu = lukukelvoton tiedosto, myös sinulle (luo uusi). ¦ A fájl titkosított (AES-256); megnyitáskor az oldal jelszót kér. Add meg a közjegyzőnek más úton (telefon, SMS). Elfelejtve = olvashatatlan fájl, neked is (készíts újat).
+Copie v{n} ; l’app garde la liste des copies faites, pas les fichiers. ¦ Kopio v{n}; sovellus säilyttää luettelon luoduista kopioista, ei tiedostoja. ¦ v{n} másolat; az alkalmazás a készített másolatok listáját őrzi, nem a fájlokat.
+Voilà ce qui part : {h} héritiers, {p} pièces, {a} adresse(s). ¦ Lähtee: {h} perillistä, {p} todistetta, {a} osoitetta. ¦ Megy: {h} örökös, {p} bizonyíték, {a} cím.
+Fiche confidentielle : {n} retirée (calcul inchangé). ¦ Luottamuksellinen kortti: {n} jätetty pois (laskelma ennallaan). ¦ Bizalmas lap: {n} kihagyva (számítás változatlan).
+une branche n’est pas tranchée ¦ yksi haara on ratkaisematta ¦ egy ág nincs eldöntve
+Fichier trop lourd pour un courriel (plus de 20 Mo). Continuer quand même ? ¦ Tiedosto on liian suuri sähköpostiin (yli 20 Mt). Jatketaanko silti? ¦ A fájl túl nagy egy e-mailhez (20 MB felett). Mégis folytatod?
+🤝 Copie pour le notaire ¦ 🤝 Kopio notaarille ¦ 🤝 Másolat a közjegyzőnek
+Copie v{v} du {d}, calcul indicatif : à vérifier par l’étude. ¦ Kopio v{v} päivältä {d}, suuntaa-antava laskelma: notaaritoimiston tarkistettava. ¦ v{v} másolat, {d}, tájékoztató számítás: a közjegyzői iroda ellenőrzi.
+{n} · {t} ¦ {n} · {t} ¦ {n} · {t}
+Copie protégée par un mot de passe. ¦ Kopio suojattu salasanalla. ¦ Jelszóval védett másolat.
+Copie v{n} fabriquée ¦ Kopio v{n} luotu ¦ v{n} másolat elkészült
+Mouvement supprimé ¦ Liike poistettu ¦ Mozgás törölve
+⚰️ Décès d’un héritier ¦ ⚰️ Perillisen kuolema ¦ ⚰️ Egy örökös halála
+Ce que « ✓ C’est lui » écrit : la fiche sert aussi aux autres dossiers. ¦ Mitä ”✓ Se on tämä henkilö” kirjaa: korttia käytetään myös muissa asioissa. ¦ Mit rögzít az „✓ Ez az a személy”: a lap más ügyeket is szolgál.
+Le décès sur la fiche et le statut du dossier ¦ Kuolema kortille ja tila asiaan ¦ Halálozás a lapon és állapot az ügyben
+Seulement le statut du dossier ¦ Vain tila asiaan ¦ Csak állapot az ügyben
+Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de bruit, risque d’en rater. ¦ Vihjeet näkyvät tästä pistemäärästä alkaen (100:sta). Korkeampi: vähemmän kohinaa, riski ohittaa jokin. ¦ A nyomok ettől a pontszámtól látszanak (100-ból). Magasabb: kevesebb zaj, de egy kimaradhat.
+Après chaque nouvel import du fichier INSEE : vérifier les dossiers en cours tout seul (jamais de changement sans ton clic). ¦ Jokaisen INSEE-tiedoston uuden tuonnin jälkeen: tarkista avoimet asiat itsestään (ei koskaan muutosta ilman napsautustasi). ¦ Az INSEE-fájl minden új importja után: a folyamatban lévő ügyek ellenőrzése magától (soha nincs változás a kattintásod nélkül).
+Automatique, dans la cloche ¦ Automaattisesti, kellossa ¦ Automatikusan, a csengőben
+Seulement à la main ¦ Vain käsin ¦ Csak kézzel
+📋 Questionnaire ¦ 📋 Kyselylomake ¦ 📋 Kérdőív
+Ce que l’héritier te renvoie après avoir rempli le questionnaire. ¦ Mitä perillinen palauttaa sinulle täytettyään. ¦ Amit az örökös visszaküld kitöltés után.
+Un petit fichier .json ¦ Pieni .json-tiedosto ¦ Egy kis .json fájl
+La page .html remplie ¦ Täytetty .html-sivu ¦ A kitöltött .html oldal
+Pré-rempli : son nom et sa naissance seulement, jamais le défunt ni un montant. ¦ Esitäytetty: vain hänen nimensä ja syntymänsä, ei koskaan perittävää eikä summaa. ¦ Előre kitöltve: csak a neve és a születése, soha nem az örökhagyó vagy összeg.
+Pré-rempli (ce qui le concerne) ¦ Esitäytetty (häntä koskeva) ¦ Előre kitöltve (ami őt érinti)
+Tout vide ¦ Kaikki tyhjänä ¦ Minden üres
+📞 Échanges ¦ 📞 Yhteydenotot ¦ 📞 Kapcsolatok
+Où noter et relire les appels, courriels et visites. ¦ Missä puhelut, sähköpostit ja käynnit kirjataan ja luetaan. ¦ Hol rögzíted és olvasod a hívásokat, e-maileket és látogatásokat.
+Un onglet du dossier et un raccourci dans 👥 Héritiers ¦ Asian välilehti ja pikalinkki kohdassa 👥 Perilliset ¦ Ügylap és parancsikon a 👥 Örökösöknél
+Seulement dans 👥 Héritiers ¦ Vain kohdassa 👥 Perilliset ¦ Csak a 👥 Örökösöknél
+Les courriers du Registre dans la liste des échanges. ¦ Rekisterin kirjeet yhteydenottojen luettelossa. ¦ A nyilvántartás levelei a kapcsolatok listájában.
+Montrés en gris, en lecture ¦ Näytetään harmaina, vain luettavina ¦ Szürkén, csak olvasásra
+Pas montrés ¦ Ei näytetä ¦ Nem jelennek meg
+📮 Recommandés ¦ 📮 Kirjatut kirjeet ¦ 📮 Ajánlott levelek
+Relance quand l’accusé de réception n’est pas revenu (réglable aussi pour chaque courrier). ¦ Muistutus, kun vastaanottotodistus ei ole palannut (säädettävissä myös kirjeittäin). ¦ Emlékeztető, ha a tértivevény nem érkezett vissza (levelenként is állítható).
+15 jours ¦ 15 päivää ¦ 15 nap
+8 jours ¦ 8 päivää ¦ 8 nap
+21 jours ¦ 21 päivää ¦ 21 nap
+L’app n’interroge jamais La Poste : le lien ouvre la page dans ton navigateur, tu notes toi-même l’AR. ¦ Sovellus ei koskaan kysy La Postelta: linkki avaa sivun selaimessasi, todistuksen kirjaat itse. ¦ Az alkalmazás soha nem kérdezi le a La Poste-ot: a link a böngésződben nyitja meg az oldalt, a tértivevényt te rögzíted.
+Lien vers la page de suivi ¦ Linkki seurantasivulle ¦ Link a nyomkövetési oldalra
+Pas de lien (on copie le numéro) ¦ Ei linkkiä (numero kopioidaan) ¦ Nincs link (a szám másolódik)
+Adresse de la page de suivi, avec {numero} (https:// seulement). ¦ Seurantasivun osoite, jossa {numero} (vain https://). ¦ A nyomkövetési oldal címe, {numero}-val (csak https://).
+🧾 Devis et factures ¦ 🧾 Tarjoukset ja laskut ¦ 🧾 Árajánlatok és számlák
+Un seul registre : numérotation continue même si les dossiers sont dans plusieurs généalogies. ¦ Yksi rekisteri: yhtenäinen numerointi, vaikka asiat olisivat useassa puussa. ¦ Egyetlen nyilvántartás: folyamatos számozás, akkor is, ha az ügyek több fában vannak.
+Un seul registre pour le cabinet ¦ Yksi rekisteri toimistolle ¦ Egyetlen nyilvántartás az irodának
+Dans la généalogie des dossiers ¦ Asioiden puussa ¦ Az ügyek fájában
+Le compteur ne recule jamais ; un brouillon effacé ne consomme pas de numéro. ¦ Laskuri ei koskaan peräänny; poistettu luonnos ei käytä numeroa. ¦ A számláló soha nem lép vissza; törölt tervezet nem használ el számot.
+F-2026-0042 (remis à 1 chaque année) ¦ F-2026-0042 (joka vuosi alkaen 1) ¦ F-2026-0042 (minden évben 1-től)
+Compteur unique (F-0042) ¦ Yksi laskuri (F-0042) ¦ Egyetlen számláló (F-0042)
+La ligne « temps passé » proposée sur la facture. ¦ Laskuun ehdotettu rivi ”käytetty aika”. ¦ A számlán javasolt „ráfordított idő” sor.
+Temps décoché quand il y a une commission ¦ Aika ei valittuna, jos palkkio ¦ Idő nincs bejelölve, ha van jutalék
+Temps toujours coché ¦ Aika aina valittuna ¦ Idő mindig bejelölve
+Préfixe des factures. ¦ Laskujen etuliite. ¦ Számlák előtagja.
+Préfixe des avoirs. ¦ Hyvityslaskujen etuliite. ¦ Jóváíró számlák előtagja.
+Préfixe des devis. ¦ Tarjousten etuliite. ¦ Árajánlatok előtagja.
+📈 Activité ¦ 📈 Toiminta ¦ 📈 Tevékenység
+La période montrée en ouvrant le tableau de bord. ¦ Jakso, joka näytetään koontinäkymää avattaessa. ¦ A műszerfal megnyitásakor mutatott időszak.
+L’année en cours ¦ Tämä vuosi ¦ Ez az év
+Les 12 derniers mois ¦ Viimeiset 12 kuukautta ¦ Az utolsó 12 hónap
+Les montants facturés et encaissés. ¦ Laskutetut ja peritut summat. ¦ Számlázott és beszedett összegek.
+Au choix (bouton) ¦ Tarvittaessa (kytkin) ¦ Igény szerint (kapcsoló)
+La copie contient des actes et des noms de vivants. ¦ Kopio sisältää asiakirjoja ja elävien henkilöiden nimiä. ¦ A másolat anyakönyveket és élő személyek nevét tartalmazza.
+Mot de passe coché au départ ¦ Salasana valittuna alussa ¦ Jelszó kezdetben bejelölve
+Décoché au départ ¦ Ei valittuna alussa ¦ Kezdetben nincs bejelölve
+Le notaire reçoit souvent les adresses à part. ¦ Notaari saa osoitteet usein erikseen. ¦ A közjegyző a címeket gyakran külön kapja.
+Adresses décochées au départ ¦ Osoitteet ei valittuina alussa ¦ Címek kezdetben nincsenek bejelölve
+Cochées au départ ¦ Valittuna alussa ¦ Kezdetben bejelölve
+🗺 Carte des héritiers ¦ 🗺 Perillisten kartta ¦ 🗺 Örökösök térképe
+Rien n’est envoyé en ligne : la commune vient de la base ; le numéro, seulement si la BAN du département est déjà dans l’app (🗺️ Plan des adresses). ¦ Mitään ei lähetetä verkkoon: kunta tulee tietokannasta; osoitenumero vain, jos departementin BAN on jo sovelluksessa (🗺️ Osoitekartta). ¦ Semmi sem megy ki online: a település az adatbázisból jön; a házszám csak akkor, ha a megye BAN-ja már az alkalmazásban van (🗺️ Címtérkép).
+Le numéro de rue (BAN déjà téléchargée) ¦ Osoitenumero (BAN jo ladattu) ¦ Házszám (BAN már letöltve)
+L’app n’a pas d’annuaire des notaires et n’en invente pas. ¦ Sovelluksella ei ole notaarien luetteloa eikä se keksi niitä. ¦ Az alkalmazásnak nincs közjegyzőlistája, és nem talál ki egyet sem.
+Les notaires de tes dossiers et contacts ¦ Asioidesi ja yhteystietojesi notaarit ¦ Az ügyeid és kapcsolataid közjegyzői
+Pas de notaires ¦ Ei notaareja ¦ Nincsenek közjegyzők
+Le brouillon de contrat écrit par l’app. Un contrat t’engage : fais-le écrire ou relire par ton conseil. ¦ Sovelluksen laatima sopimusluonnos. Sopimus sitoo sinua: anna neuvonantajasi laatia tai tarkistaa se. ¦ Az alkalmazás által írt szerződéstervezet. A szerződés kötelez: írasd meg vagy ellenőriztesd a tanácsadóddal.
+Retiré : page vide avec les champs ¦ Poistettu: tyhjä sivu kentillä ¦ Eltávolítva: üres oldal a mezőkkel
+Gardé, marqué « exemple non juridique » ¦ Säilytetty, merkitty ”ei-oikeudellinen esimerkki” ¦ Megtartva, „nem jogi minta” jelöléssel
+Chaque contrat rangé retient la version utilisée. ¦ Jokainen arkistoitu sopimus muistaa käytetyn version. ¦ Minden iktatott szerződés megjegyzi a használt verziót.
+Toutes les versions gardées ¦ Kaikki versiot säilytetään ¦ Minden verzió megtartva
+Seulement la dernière ¦ Vain viimeisin ¦ Csak az utolsó
+💶 Fonds ¦ 💶 Varat ¦ 💶 Pénzeszközök
+Commission = % du contrat × montant reçu. ¦ Palkkio = sopimuksen % × saatu summa. ¦ Jutalék = a szerződés %-a × kapott összeg.
+Calculée puis modifiable ¦ Laskettu, sitten muokattavissa ¦ Kiszámolva, aztán módosítható
+Toujours tapée à la main ¦ Aina käsin kirjoitettu ¦ Mindig kézzel írva
+Le décompte à l’héritier. ¦ Tilitys perilliselle. ¦ Elszámolás az örökösnek.
+Décompte imprimable ¦ Tulostettava tilitys ¦ Nyomtatható elszámolás
+Écran seulement ¦ Vain näytöllä ¦ Csak képernyő
+🔗 Double preuve ¦ 🔗 Kaksinkertainen todiste ¦ 🔗 Kettős bizonyíték
+Le seuil d’un lien solide. ¦ Vahvan yhteyden kynnys. ¦ Erős kapcsolat küszöbe.
+Deux pièces par lien ¦ Kaksi todistetta yhteyttä kohden ¦ Két bizonyíték kapcsolatonként
+Une seule (signaler seulement « aucune ») ¦ Vain yksi (ilmoita vain ”ei yhtään”) ¦ Csak egy (csak a „nincs” jelzése)
+Dans la liste « avant de remettre ». ¦ Luettelossa ”ennen luovutusta”. ¦ Az „átadás előtt” listában.
+« À revoir » (n’empêche rien) ¦ ”Tarkistettava” (ei estä mitään) ¦ „Átnézendő” (semmit nem blokkol)
+Bloquant ¦ Estävä ¦ Blokkoló
+🗓 Dates importantes ¦ 🗓 Tärkeät päivämäärät ¦ 🗓 Fontos dátumok
+Les rappels proposés pour une nouvelle date (réglables pour chaque date). L’app ne calcule aucun délai légal. ¦ Uudelle päivämäärälle ehdotetut muistutukset (säädettävissä päivämäärittäin). Sovellus ei laske lakisääteisiä määräaikoja. ¦ Új dátumhoz javasolt emlékeztetők (dátumonként állíthatók). Az alkalmazás nem számol törvényes határidőt.
+J−30, J−7, J−1 ¦ P−30, P−7, P−1 ¦ N−30, N−7, N−1
+J−7 seulement ¦ Vain P−7 ¦ Csak N−7
+Où les voir dans 📁 Dossier. ¦ Missä ne näkyvät kohdassa 📁 Asia. ¦ Hol látod őket a 📁 Ügyben.
+Dans les échéances, avec un drapeau 🗓 ¦ Määräajoissa, merkillä 🗓 ¦ A határidőknél, 🗓 jelvénnyel
+Un bloc à part ¦ Erillinen lohko ¦ Külön blokk
+👥 Fusion de dossiers ¦ 👥 Asioiden yhdistäminen ¦ 👥 Ügyek egyesítése
+Les successions restent distinctes : le calcul n’est jamais mélangé. ¦ Perinnöt pysyvät erillään: laskelmaa ei koskaan sekoiteta. ¦ A hagyatékok külön maradnak: a számítás soha nem keveredik.
+Deux défunts, deux calculs côte à côte ¦ Kaksi vainajaa, kaksi laskelmaa rinnakkain ¦ Két elhunyt, két számítás egymás mellett
+Dossiers liés (recherches en commun) ¦ Liitetyt asiat (yhteiset selvitykset) ¦ Kapcsolódó ügyek (közös kutatások)
+Combien de temps la fusion peut être annulée. ¦ Kuinka kauan yhdistämisen voi perua. ¦ Meddig vonható vissza egy egyesítés.
+↶ pendant 30 jours ¦ ↶ 30 päivän ajan ¦ ↶ 30 napig
+↶ tant que rien n’a été ajouté ¦ ↶ niin kauan kuin mitään ei ole lisätty ¦ ↶ amíg semmi nem lett hozzáadva
+Joindre les recherches faites au dossier du notaire. ¦ Liitä tehdyt selvitykset notaarin kansioon. ¦ Az elvégzett kutatások csatolása a közjegyzői dossziéhoz.
+Coché au départ ¦ Valittuna alussa ¦ Kezdetben bejelölve
+📦 Archive ¦ 📦 Arkisto ¦ 📦 Archívum
+Le mot de passe de l’archive de fin de dossier. Oublié = archive perdue. ¦ Arkiston salasana asian lopussa. Unohdettu = arkisto menetetty. ¦ Archívum jelszava az ügy végén. Elfelejtve = archívum elveszett.
+Proposé, coché ¦ Ehdotettu, valittuna ¦ Javasolva, bejelölve
+Pas proposé ¦ Ei ehdoteta ¦ Nincs javasolva
+💡 Autres idées ¦ 💡 Lisää ideoita ¦ 💡 További ötletek
+🔗 Le dossier lié d’un héritier mort après le défunt. ¦ 🔗 Liitetty asia perittävän jälkeen kuolleelle perilliselle. ¦ 🔗 Kapcsolódó ügy az örökhagyó után elhunyt örökösnek.
+Ses descendants rattachés ¦ Hänen jälkeläisensä liitettyinä ¦ Leszármazói hozzákapcsolva
+📮 Une lettre par service : quels actes. ¦ 📮 Yksi kirje virastoa kohden: mitkä asiakirjat. ¦ 📮 Egy levél hivatalonként: mely anyakönyvek.
+Manquants et déjà demandés ¦ Puuttuvat ja jo pyydetyt ¦ Hiányzók és már kértek
+⏳ Délai de réponse par organisme. ¦ ⏳ Vastausaika viraston mukaan. ¦ ⏳ Válaszidő hivatalonként.
+⏳ Nombre de courriers avant de donner un délai. ¦ ⏳ Kirjeiden määrä ennen kuin aika näytetään. ¦ ⏳ Levelek száma, mielőtt idő jelenik meg.
+📅 La cloche prévient avant qu’une copie d’acte soit trop ancienne (durée tapée par toi pour chaque pièce). ¦ 📅 Kello varoittaa ennen kuin asiakirjakopio on liian vanha (aika syötetään todisteittain). ¦ 📅 A csengő figyelmeztet, mielőtt egy anyakönyvi másolat túl régi lesz (az időt bizonyítékonként adod meg).
+7 jours ¦ 7 päivää ¦ 7 nap
+🙈 Écran partagé : ce qui remplace les noms. ¦ 🙈 Jaettu näyttö: mikä korvaa nimet. ¦ 🙈 Megosztott képernyő: mi helyettesíti a neveket.
+Initiales ¦ Nimikirjaimet ¦ Monogramok
+Numéros (Héritier 1, 2…) ¦ Numerot (Perillinen 1, 2…) ¦ Számok (Örökös 1, 2…)
+🙈 Écran partagé : les montants. ¦ 🙈 Jaettu näyttö: summat. ¦ 🙈 Megosztott képernyő: az összegek.
+Montants masqués ¦ Summat piilotettu ¦ Összegek elrejtve
+Montants visibles ¦ Summat näkyvissä ¦ Összegek láthatók
+avec AR ¦ vastaanottotodistuksella ¦ tértivevénnyel
+sans AR ¦ ilman vastaanottotodistusta ¦ tértivevény nélkül
+lettre suivie ¦ seurattu lähetys ¦ követett küldemény
+pas en recommandé ¦ ei kirjattu ¦ nem ajánlott
+Son état civil ¦ Hänen siviilisäätynsä ¦ Családi állapota
+nom de naissance, prénoms, date et lieu de naissance ¦ syntymänimi, etunimet, syntymäaika ja -paikka ¦ születési név, utónevek, születési dátum és hely
+mariage, PACS, divorce, dates ¦ avioliitto, parisuhde, avioero, päivämäärät ¦ házasság, élettársi kapcsolat, válás, dátumok
+prénoms, dates de naissance, décédés ? ¦ nimet, syntymäajat, kuolleet? ¦ nevek, születési dátumok, elhunytak?
+avec un moyen de les joindre ¦ yhteystapa mukaan lukien ¦ elérhetőséggel
+Documents qu’il peut fournir ¦ Asiakirjat, jotka hän voi toimittaa ¦ Dokumentumok, amelyeket be tud nyújtani
+livret de famille, actes, jugement… ¦ perhekirja, asiakirjat, tuomio… ¦ családi könyv, anyakönyvek, ítélet…
+Une question à toi ¦ Sinun kysymyksesi ¦ A te kérdésed
+💾 Fichier à remplir ¦ 💾 Täytettävä tiedosto ¦ 💾 Kitöltendő fájl
+🖨 Papier (PDF) ¦ 🖨 Paperi (PDF) ¦ 🖨 Papír (PDF)
+Ce qui le concerne ¦ Häntä koskeva ¦ Ami őt érinti
+Famille connue ¦ Tunnettu perhe ¦ Ismert család
+Sa question ¦ Hänen kysymyksensä ¦ Az ő kérdése
+Reversé à l’héritier ¦ Maksettu perilliselle ¦ Kifizetve az örökösnek
+SIRET ¦ SIRET ¦ SIRET
+Mentions ¦ Merkinnät ¦ Feltüntetések
+Trimestre ¦ Neljännes ¦ Negyedév
+Personnes rattachées ¦ Liitetyt kortit ¦ Kapcsolt lapok
+Courriers, échanges, fonds ¦ Kirjeet, yhteydenotot, varat ¦ Levelek, kapcsolatok, pénzeszközök
+Temps et frais, échéances ¦ Aika ja kulut, määräajat ¦ Idő és költségek, határidők
+Questionnaire d’héritier fabriqué ¦ Kyselylomake perilliselle luotu ¦ Örökösi kérdőív létrehozva
+Réponses d’un questionnaire écrites ¦ Kyselylomakkeen vastaukset kirjattu ¦ Kérdőív-válaszok bevíve
+Copie du dossier pour le notaire ¦ Asian kopio notaarille ¦ Az ügy másolata a közjegyzőnek
+Facture émise ou imprimée ¦ Lasku annettu tai tulostettu ¦ Számla kiállítva vagy nyomtatva
+Registre des factures (CSV) ¦ Laskurekisteri (CSV) ¦ Számlanyilvántartás (CSV)
+Décompte des fonds imprimé ¦ Varojen tilitys tulostettu ¦ Pénzeszköz-elszámolás nyomtatva
+Recherches faites (pour le notaire) ¦ Tehdyt selvitykset (notaarille) ¦ Elvégzett kutatások (a közjegyzőnek)
+Image de la carte des héritiers ¦ Perillisten kartan kuva ¦ Az örököstérkép képe
+Contrat imprimé ¦ Sopimus tulostettu ¦ Szerződés nyomtatva
+Dossiers fusionnés ¦ Asiat yhdistetty ¦ Ügyek egyesítve
+chiffrée ¦ salattu ¦ titkosítva
+sans mot de passe ¦ ilman salasanaa ¦ jelszó nélkül
+avec les adresses ¦ osoitteineen ¦ címekkel
+sans adresse ¦ ilman osoitetta ¦ cím nélkül
+deux défunts ¦ kaksi vainajaa ¦ két elhunyt
+dossiers liés ¦ liitetyt asiat ¦ kapcsolódó ügyek
+Aucune lettre à ranger. ¦ Ei arkistoitavaa kirjettä. ¦ Nincs iktatandó levél.
+Avec qui ? ¦ Kenen kanssa? ¦ Kivel?
+Ce dossier est archivé : rouvre-le d’abord. ¦ Tämä asia on arkistoitu: avaa se ensin uudelleen. ¦ Ez az ügy archiválva van: előbb nyisd meg újra.
+Ce fichier n’est pas un .docx. ¦ Tämä tiedosto ei ole .docx. ¦ Ez a fájl nem .docx.
+Ce n’est pas un devis. ¦ Tämä ei ole tarjous. ¦ Ez nem árajánlat.
+Cette facture a déjà un avoir. ¦ Tällä laskulla on jo hyvityslasku. ¦ Ehhez a számlához már van jóváíró számla.
+Choisis la date. ¦ Valitse päivämäärä. ¦ Válassz dátumot.
+Choisis toi-même le taux de TVA (avec ton comptable) avant d’émettre. ¦ Valitse ALV-kanta itse (kirjanpitäjäsi kanssa) ennen antamista. ¦ Kiállítás előtt válaszd ki magad az áfakulcsot (a könyvelőddel).
+Choisis un autre dossier. ¦ Valitse toinen asia. ¦ Válassz másik ügyet.
+Dossier clos ou archivé : rouvre-le d’abord. ¦ Asia suljettu tai arkistoitu: avaa se ensin uudelleen. ¦ Ügy lezárva vagy archiválva: előbb nyisd meg újra.
+Déjà émise. ¦ Jo annettu. ¦ Már kiállítva.
+Facture introuvable. ¦ Laskua ei löytynyt. ¦ A számla nem található.
+La facture n’a aucune ligne. ¦ Laskussa ei ole rivejä. ¦ A számlának nincs sora.
+La fusion date de plus de 30 jours : elle ne peut plus être annulée. ¦ Yhdistäminen on yli 30 päivää vanha: sitä ei voi enää perua. ¦ Az egyesítés 30 napnál régebbi: már nem vonható vissza.
+Le mot de passe est obligatoire (réglage). ¦ Salasana on pakollinen (asetus). ¦ A jelszó kötelező (beállítás).
+Ligne INSEE introuvable. ¦ INSEE-riviä ei löytynyt. ¦ INSEE-sor nem található.
+Ligne incorrecte : quantité ou prix. ¦ Virheellinen rivi: määrä tai hinta. ¦ Érvénytelen sor: mennyiség vagy ár.
+Mouvement introuvable. ¦ Liikettä ei löytynyt. ¦ Mozgás nem található.
+Numéro déjà pris : renuméroter le brouillon. ¦ Numero on jo käytössä: numeroi luonnos uudelleen. ¦ A szám már foglalt: számozd újra a tervezetet.
+Où as-tu cherché ? ¦ Mistä etsit? ¦ Hol kerestél?
+Quelque chose a été ajouté depuis la fusion : elle ne peut plus être annulée. ¦ Jotain on lisätty yhdistämisen jälkeen: sitä ei voi enää perua. ¦ Az egyesítés óta valami hozzá lett adva: már nem vonható vissza.
+Seule une facture émise peut être payée. ¦ Vain annetun laskun voi maksaa. ¦ Csak kiállított számla fizethető.
+Taux de TVA incorrect (ex. : le taux que t’a indiqué ton comptable). ¦ Virheellinen ALV-kanta (esim.: kirjanpitäjäsi antama kanta). ¦ Érvénytelen áfakulcs (pl.: amit a könyvelőd adott).
+Type d’événement « Décès » introuvable. ¦ Tapahtumatyyppiä ”Kuolema” ei löytynyt. ¦ A „Halálozás” eseménytípus nem található.
+Un avoir corrige une facture émise. ¦ Hyvityslasku korjaa annetun laskun. ¦ A jóváíró számla egy kiállított számlát javít.
+Un devis accepté ne se modifie plus. ¦ Hyväksyttyä tarjousta ei enää muuteta. ¦ Elfogadott árajánlat már nem módosítható.
+« D’où vient cette date » est obligatoire. ¦ ”Mistä tämä päivämäärä tulee” on pakollinen. ¦ A „Honnan származik ez a dátum” kötelező.
+Échange introuvable. ¦ Yhteydenottoa ei löytynyt. ¦ Kapcsolat nem található.
+💶 Un reversement reste en attente : archiver quand même ? ¦ 💶 Maksu on vielä odottamassa: arkistoidaanko silti? ¦ 💶 Egy kifizetés még függőben: mégis archiválod?
+🔐 Archive protégée : tape son mot de passe. ¦ 🔐 Suojattu arkisto: kirjoita sen salasana. ¦ 🔐 Védett archívum: írd be a jelszavát.
+🏢 Mon cabinet : un champ que tu as déclaré obligatoire est vide ({f}) : la facture n’est pas émise. ¦ 🏢 Toimistoni: pakolliseksi merkitsemäsi kenttä on tyhjä ({f}): laskua ei anneta. ¦ 🏢 Az irodám: egy kötelezőnek jelölt mező üres ({f}): a számla nem állítható ki.
+J−{n} ¦ P−{n} ¦ N−{n}
+=descendant rattaché ¦ liitetty jälkeläinen|liitettyä jälkeläistä ¦ csatolt leszármazott|csatolt leszármazott
+=échange noté ¦ kirjattu yhteydenotto|kirjattua yhteydenottoa ¦ rögzített kapcsolatfelvétel|rögzített kapcsolatfelvétel
