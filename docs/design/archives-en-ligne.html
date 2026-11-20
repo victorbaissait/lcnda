@@ -1,0 +1,535 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Archives en ligne</title>
+<style>
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff;--sheet:#fffdf8}
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff;--sheet:#fffdf8}
+@media (prefers-color-scheme:dark){:root{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--sheet:#23262b}}
+*{box-sizing:border-box}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:19px;margin:40px 0 6px}
+.part{font:800 12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:46px 0 0;border-top:3px solid var(--ink);padding-top:10px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.wrap{max-width:1240px;margin:0 auto}
+.sum{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.sum div{background:var(--paper);border:2px solid var(--ink);padding:8px 14px;box-shadow:4px 4px 0 var(--shadow)}
+.sum b{font-size:18px;display:block}.sum span{font-size:12px;color:var(--muted)}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid var(--ink);padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.badge.new{border-color:var(--blue);color:#fff;background:var(--blue)}
+.badge.re{border-color:var(--green);color:var(--green);background:var(--green-bg)}
+.badge.have{border-color:#8a8f99;color:var(--muted);background:var(--grey-bg)}
+.badge.ok{border-color:var(--green);color:var(--green)}.badge.warn{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}.badge.red{border-color:var(--red);color:var(--red);background:var(--red-bg)}.badge.blue{border-color:var(--blue);color:var(--blue)}.badge.grey{border-color:#8a8f99;color:var(--muted)}.badge.violet{border-color:var(--vio);color:var(--vio);background:var(--vio-bg)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px;border-bottom:2px solid var(--ink)}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.num,th.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+tr.tot td{border-top:2px solid var(--ink);font-weight:800}
+code{font:11.5px ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 26px}
+.wide{grid-column:1 / -1}
+.grid>*{min-width:0}
+.case{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:16px 18px 18px;min-width:0}
+.case .head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.case .tag{font:700 11px/1 system-ui;letter-spacing:.1em;color:var(--blue);text-transform:uppercase}
+.num-b{display:inline-block;background:var(--blue);color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.case h3{margin:8px 0 10px;font-size:17px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.path{font-size:12px;color:var(--blue-ink);background:var(--blue-bg);border:1px dashed #9db8f0;padding:6px 10px;margin:0 0 10px}
+.path b{color:var(--blue)}
+.reuse{font-size:12px;color:var(--green);background:var(--green-bg);border:1px dashed #9bcfa9;padding:7px 10px;margin-top:12px}
+.reuse b{font-weight:800}
+.msg{border-left:4px solid var(--blue);background:var(--blue-bg);padding:9px 12px;font-size:13px;margin:12px 0}
+.msg.warn{border-color:var(--yel);background:var(--yel-bg)}.msg.ok{border-color:var(--green);background:var(--green-bg)}.msg.red{border-color:var(--red);background:var(--red-bg)}
+.dec{border:2px dashed var(--vio);background:var(--vio-bg);padding:10px 14px;margin:14px 0 0;font-size:13px}
+.dec>b:first-child{display:block;font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--vio);margin-bottom:6px}
+.dec ol,.dec ul{margin:4px 0 0;padding-left:20px}.dec li{margin:3px 0}
+.cons{font:800 10px system-ui;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--green);padding:2px 5px;margin-left:4px;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);background:var(--paper);font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 var(--shadow);color:var(--ink);white-space:nowrap}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:var(--line2);box-shadow:none;color:var(--muted)}
+.btn.red{border-color:var(--red);color:var(--red);box-shadow:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.lab{display:block;font-weight:700;font-size:13px;margin:12px 0 6px}
+.input{border:1.5px solid var(--line2);padding:5px 8px;font-size:13.5px;background:var(--paper);width:100%;min-height:30px}
+.seg{display:inline-flex;border:2px solid var(--ink);flex-wrap:wrap;max-width:100%}.seg span{padding:5px 9px;font:700 12px system-ui;border-right:1.5px solid var(--ink);background:var(--paper)}.seg span:last-child{border-right:0}.seg span.on{background:var(--blue);color:#fff}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.scrollx>table{min-width:760px}
+.hint{font-size:11.5px;color:var(--soft);margin-top:4px;display:none}
+.mini{font-size:12px;color:var(--muted)}
+.edge{margin:10px 0 0;padding-left:18px;font-size:12.5px;color:var(--muted)}.edge li{margin:3px 0}.edge b{color:var(--ink)}
+/* fenêtre */
+.win{border:2px solid var(--ink);background:var(--paper);min-width:0}
+.win-bar{display:flex;align-items:center;gap:10px;padding:7px 10px;border-bottom:2px solid var(--ink);background:var(--grey-bg);flex-wrap:wrap;justify-content:space-between}
+.win-bar .eyebrow{font:700 10.5px system-ui;letter-spacing:.12em;color:var(--soft);text-transform:uppercase}
+.win-bar b{font-size:14px}
+.win-body{padding:12px;min-width:0}
+.win-foot{display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;border-top:2px solid var(--ink);flex-wrap:wrap}
+/* barre du haut */
+.topbar{display:flex;align-items:center;gap:6px;background:var(--bar);color:var(--bar-ink);padding:8px 10px;flex-wrap:wrap}
+.topbar .nav{display:flex;gap:12px;font-weight:700;font-size:12.5px;flex:1 1 auto;min-width:0;overflow:hidden;white-space:nowrap;align-items:center}
+.topbar .nav span i{font-style:normal;opacity:.55;margin-right:3px;font-size:11px}
+.topbar .nav span.on{background:var(--blue);padding:2px 8px}
+.topbar .nav .plus{border:1.5px dashed #9aa0aa;color:#cfd3da;padding:0 7px;font-weight:800}
+.topbar .nav .plus.hot{border-color:#ffd166;color:#ffd166;border-style:solid}
+.tool{border:1.5px solid var(--bar-ink);min-width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;padding:0 6px;gap:5px;white-space:nowrap;position:relative}
+.tool.succ{border-color:#ffd166;color:#ffd166;font-weight:700}
+.tool.hot{background:#ffd166;color:#111;border-color:#ffd166}
+.pastille{position:absolute;top:-7px;right:-7px;background:#e5383b;color:#fff;font:800 10px/16px system-ui;min-width:17px;height:17px;border-radius:9px;text-align:center;padding:0 4px;border:1.5px solid var(--bar)}
+.chrono{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--green);color:var(--green);background:var(--green-bg);font:800 13px ui-monospace,Menlo,monospace;padding:4px 8px;white-space:nowrap}
+.chrono.pause{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}
+.chrono .dotr{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block}
+.chrono.pause .dotr{background:var(--yel)}
+/* sous-onglets d'un dossier */
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--ink);flex-wrap:wrap;font-size:12.5px}
+.tabs span{padding:6px 9px;border-right:1px solid var(--line);white-space:nowrap}
+.tabs span.on{background:var(--blue);color:#fff;font-weight:700}
+.dhead{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 12px;border-bottom:2px solid var(--ink)}
+.dhead h4{margin:0;font-size:16px}.dhead small{color:var(--soft);display:block;font-size:12px}
+/* catalogue d'onglets */
+.cat-g{font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin:14px 0 6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:8px}
+.tc{border:2px solid var(--line2);background:var(--paper);padding:8px 10px;display:grid;grid-template-columns:28px minmax(0,1fr) 18px;gap:4px 8px;align-items:start;font-size:12.5px;min-width:0}
+.tc .ic{font-size:20px;line-height:1.1}
+.tc b{display:block;font-size:13px}
+.tc small{color:var(--muted);display:block;line-height:1.3}
+.tc .where{grid-column:2 / 4;font-size:11px;color:var(--soft)}
+.tc .ck{width:16px;height:16px;border:2px solid var(--ink);margin-top:2px}
+.tc.on{border-color:var(--blue);background:var(--blue-bg)}.tc.on .ck{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+.tc.rec{border-color:var(--green)}
+.tc .tg{grid-column:2 / 4;display:flex;gap:4px;flex-wrap:wrap}
+.tc .tg .badge{font-size:9.5px;padding:2px 4px}
+/* matrice usages */
+.mx td,.mx th{text-align:center;padding:6px 4px}.mx td:first-child,.mx th:first-child{text-align:left;white-space:nowrap}
+.mx th{font-size:10px;letter-spacing:.02em;text-transform:none}
+.mx .y{color:var(--blue);font-weight:800}.mx .r{color:var(--green);font-weight:800}.mx .o{color:var(--line2)}.mx .x{color:var(--soft)}
+/* rangement */
+.ord{border:2px solid var(--ink);background:var(--paper)}
+.ord .or{display:grid;grid-template-columns:18px 26px 20px minmax(0,1fr) 54px auto;gap:6px;align-items:center;padding:5px 8px;border-bottom:1px solid var(--line);font-size:12.5px}
+.ord .or:last-child{border-bottom:0}
+.ord .or .g{color:var(--soft)}.ord .or .n{font:700 11px system-ui;color:var(--soft)}
+.ord .or.new{background:var(--blue-bg)}
+.cb{width:14px;height:14px;border:2px solid var(--ink);display:inline-block;flex:none;vertical-align:-2px}
+.cb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+/* listes de contrôle */
+.ck-l{list-style:none;margin:0;padding:0;font-size:13px}
+.ck-l li{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:8px;padding:7px 4px;border-bottom:1px solid var(--line);align-items:start}
+.ck-l .s{font-size:15px;line-height:1.2}
+.ck-l small{display:block;color:var(--muted)}
+.ck-l li.bad b{color:var(--red)}.ck-l li.wa b{color:var(--yel-ink)}
+/* panneau déroulant (cloche) */
+.drop{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 rgba(0,0,0,.14);max-width:470px;margin-left:auto;font-size:13px}
+.drop .dh{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-bottom:2px solid var(--ink);gap:8px;flex-wrap:wrap}
+.drop .grp{padding:5px 10px;font:800 10.5px system-ui;letter-spacing:.1em;color:var(--soft);text-transform:uppercase;background:var(--grey-bg)}
+.drop .it{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 8px;padding:7px 10px;border-bottom:1px solid var(--line)}
+.drop .it small{color:var(--muted)}
+.drop .it .acts{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.drop .it.late b{color:var(--red)}
+/* feuille imprimée */
+.sheet{background:var(--sheet);border:1.5px solid var(--line2);box-shadow:0 2px 10px rgba(0,0,0,.12);padding:22px 26px;font:12.5px/1.5 Georgia,"Times New Roman",serif;color:var(--ink);max-width:720px;margin:0 auto}
+.sheet h5{font:700 16px Georgia,serif;text-align:center;margin:0 0 2px;letter-spacing:.04em}
+.sheet .c{text-align:center;margin:0 0 14px;font-size:12px}
+.sheet h6{font:700 13px Georgia,serif;margin:14px 0 4px;border-bottom:1px solid var(--line2);padding-bottom:2px}
+.chain{list-style:none;margin:0;padding:0 0 0 14px;border-left:2px solid var(--ink)}
+.chain li{position:relative;padding:3px 0 3px 10px}
+.chain li:before{content:"";position:absolute;left:-19px;top:10px;width:8px;height:8px;background:var(--sheet);border:2px solid var(--ink);border-radius:50%}
+.chain .cote{font:11px ui-monospace,Menlo,monospace;color:var(--muted)}
+.chain .miss{color:var(--red);font-style:italic}
+.sheet a{color:var(--blue)}
+/* chips de champs */
+.fchips{display:flex;gap:5px;flex-wrap:wrap;margin:6px 0}
+.fchips span{font:700 11.5px ui-monospace,Menlo,monospace;border:1.5px solid var(--blue);color:var(--blue);background:var(--blue-bg);padding:2px 6px}
+.fchips span.bad{border-color:var(--red);color:var(--red);background:var(--red-bg)}
+.letter{border:1.5px solid var(--line2);background:var(--sheet);padding:12px 14px;font:12.5px/1.5 Georgia,serif;white-space:pre-wrap;min-height:220px}
+.letter mark{background:var(--blue-bg);color:var(--blue-ink);padding:0 2px}
+.who{list-style:none;margin:0;padding:0;font-size:12.5px;border:1.5px solid var(--line2)}
+.who li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:6px;padding:6px 8px;border-bottom:1px solid var(--line)}
+.who li small{display:block;color:var(--muted)}
+.who li.off{background:var(--grey-bg);color:var(--soft)}
+.two{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:12px}
+/* écran de verrou */
+.lock{background:linear-gradient(160deg,#1b2a4a,#0e1626);color:#fff;padding:36px 18px;text-align:center;border:2px solid var(--ink)}
+.lock .pad{max-width:330px;margin:0 auto;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.25);padding:18px}
+.lock .input{background:#fff;color:#111}
+.lock small{color:#c9d3e6}
+/* téléphone */
+.phone{width:100%;max-width:390px;border:10px solid #222;border-radius:26px;background:var(--paper);overflow:hidden;margin:0 auto}
+.phone .ptop{display:flex;align-items:center;gap:6px;background:var(--bar);color:var(--bar-ink);padding:8px 10px;font-size:13px;font-weight:700}
+.phone .ptop .sp{flex:1}
+.phone .pbody{padding:10px;font-size:13px}
+.stack{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}.stack>*{min-width:0}
+.qs{background:var(--paper);border:2px solid var(--ink);padding:14px 18px;box-shadow:6px 6px 0 var(--shadow)}
+.qs li{margin:0 0 9px}
+.ex td:first-child{white-space:nowrap;font-weight:700}
+@media (max-width:980px){.stack{grid-template-columns:1fr}}
+@media (max-width:900px){.grid{grid-template-columns:1fr}.two{grid-template-columns:1fr}}
+.choice{display:grid;gap:8px}
+.choice label{display:grid;grid-template-columns:22px 1fr;gap:8px;border:2px solid var(--line2);padding:9px 10px;font-size:13px;background:var(--paper)}
+.choice label.on{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue);background:var(--blue-bg)}
+.choice label b{display:block;font-size:13.5px}
+.choice .dot{width:16px;height:16px;border:2px solid var(--ink);border-radius:50%;margin-top:2px}
+.choice .on .dot{background:radial-gradient(var(--blue) 45%,var(--paper) 50%)}
+.choice small{color:var(--muted);display:block}
+/* ── archives en ligne : pastilles d'actes ── */
+.ab{display:inline-flex;align-items:center;gap:5px;font:700 12px/1.2 system-ui;border:1.5px solid;padding:3px 7px;white-space:nowrap;vertical-align:middle}
+.ab.on{border-color:var(--green);color:var(--green);background:var(--green-bg)}
+.ab.may{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}
+.ab.ask{border-color:var(--blue);color:var(--blue);background:var(--blue-bg)}
+.ab.lock{border-color:var(--red);color:var(--red);background:var(--red-bg)}
+.ab.unk{border-color:#8a8f99;color:var(--muted);background:var(--grey-bg)}
+.ab.sm{font-size:11px;padding:1px 5px}
+.ev{border:1.5px solid var(--line2);background:var(--paper);padding:9px 10px;margin:0 0 8px;font-size:13px}
+.ev .t{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center}
+.ev .t b{font-size:14px}
+.ev .d{color:var(--muted);font-size:12.5px;margin:2px 0 6px}
+.ev .why{font-size:12px;color:var(--muted);margin:6px 0 0;border-top:1px dashed var(--line2);padding-top:6px}
+.ev .why a{color:var(--blue)}
+.legend{display:grid;gap:8px}
+.legend>div{display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr);gap:10px;align-items:start;border-bottom:1px solid var(--line);padding:0 0 8px;font-size:13px}
+.flow{list-style:none;margin:0;padding:0;counter-reset:f;font-size:13px}
+.flow li{counter-increment:f;display:grid;grid-template-columns:26px minmax(0,1fr);gap:8px;padding:6px 0;border-bottom:1px solid var(--line)}
+.flow li:before{content:counter(f);font:800 12px system-ui;background:var(--ink);color:var(--paper);width:22px;height:22px;display:flex;align-items:center;justify-content:center}
+.ex-tag{font:800 10px system-ui;letter-spacing:.06em;text-transform:uppercase;color:var(--red);border:1.5px dashed var(--red);padding:1px 5px;white-space:nowrap}
+tr.fict td{background:repeating-linear-gradient(135deg,transparent 0 10px,rgba(198,40,40,.05) 10px 20px)}
+.big{font:800 34px/1 system-ui;color:var(--green)}
+@media (max-width:760px){
+ body{padding:14px}
+ .hint{display:block}
+ .topbar .nav{display:none}
+ .case{padding:12px}
+ .legend>div{grid-template-columns:1fr;gap:4px}
+}
+</style></head><body><div class="wrap">
+
+<h1>🏛 Cet acte est-il en ligne aux archives ?</h1>
+<p class="sub">Maquette à valider. Demande : « avoir quelque chose qui dit : telle donnée, par exemple une naissance à telle date, est disponible dans les archives numérisées ». Chaque naissance, baptême, mariage, décès ou sépulture reçoit une <b>pastille</b> qui dit où trouver l’acte : en ligne, à demander à la mairie, réservé à la famille, ou à vérifier. Tout est <b>fictif</b> (familles MAZAUD, LACOMBE, ROUSSILHE, PEYRAT). Badges : <span class="badge new">nouveau</span> <span class="badge re">fait évoluer l’existant</span> <span class="badge have">existe</span>. Les cadres violets en pointillés sont des <b>décisions à prendre</b>.</p>
+<div class="msg warn"><b>Ce que l’app ne fera pas</b> : elle n’interroge <b>jamais</b> les sites des archives (il n’y a pas d’accès commun aux 101 sites, et chacun est fait différemment). Elle compare la date de l’acte à une <b>limite notée et sourcée</b> pour le département, puis <b>ouvre la bonne page</b> dans ton navigateur. C’est toi qui regardes l’image de l’acte. Aucune requête ne part de l’app.</div>
+<div class="sum">
+ <div><b>0</b><span>Ce qui existe déjà</span></div>
+ <div><b>1</b><span>Les 5 pastilles</span></div>
+ <div><b>2</b><span>Sur la fiche</span></div>
+ <div><b>3</b><span>La table des limites</span></div>
+ <div><b>4</b><span>✓ / ✗ : ta correction</span></div>
+ <div><b>5</b><span>Chronologie · Listes</span></div>
+ <div><b>6</b><span>Où chercher · Actes à demander</span></div>
+ <div><b>7</b><span>⚖️ Pièces d’un dossier</span></div>
+ <div><b>8</b><span>Widget « à lier »</span></div>
+ <div><b>9</b><span>Cas particuliers</span></div>
+ <div><b>10</b><span>Réglage · questions</span></div>
+</div>
+
+<!-- ═════════════ 0. EXISTANT ═════════════ -->
+<h2>0. Ce qui existe déjà <span class="badge have">relevé dans le code</span></h2>
+<p class="sub">Trois outils parlent déjà de « en ligne » ou « à demander », mais chacun <b>devine</b> avec sa propre règle. Le nouvel outil les remplace par une seule réponse, sourcée.</p>
+<div class="case wide"><div class="scrollx"><table style="min-width:900px"><thead><tr><th>Quoi</th><th>Où dans l’app</th><th>Fichier · fonction</th><th>Ce qu’il fait aujourd’hui</th><th>Ce qu’on en fait</th></tr></thead><tbody>
+ <tr><td><b>📮 Actes à demander à la mairie</b></td><td>Listes → Registre de courriers → panneau « 📮 Actes à demander à la mairie » (colonne « En ligne »)</td><td><code>lib/heritage_more.php</code> <code>recent_acts()</code>, <code>recent_acts_page()</code> · <code>assets/js/heritage-more.js</code></td><td>Naissances, mariages, décès de <b>moins de 100 ans</b> (BIRT, MARR, DEAT) ; <code>online_from = année + 100</code> affiché « vers 1932 (peut-être déjà) » : <b>deviné</b>, le même pour tous les départements. Calcule déjà <code>open_at</code> (75 ans, date exacte si connue) et <code>public</code>.</td><td>La colonne devient la pastille ; le « +100 » disparaît</td></tr>
+ <tr><td><b>Lettre « Demander l’acte »</b></td><td>📮 sur un acte · « Que manque-t-il ? » · Registre de courriers</td><td><code>lib/courriers_actes.php</code> (CL_ACTS, CL_WHATS, CL_RECIPIENTS) · <code>assets/js/heritage-courriers-actes.js</code></td><td>Règle du code du patrimoine <b>art. L213-2</b> (naissance et mariage communicables à tous 75 ans après ; décès tout de suite) et décret 2017-890 art. 30 (qui peut demander avant) ; dit « plus de 100 ans : sans doute en ligne ». Destinataires : mairie, AD, SCEC Nantes, diocèse. L’article est cité en texte, <b>sans lien Légifrance</b> (les liens Légifrance existent ailleurs : ADN, successoral).</td><td>Bouton de 📮 et 🔒 : réutilisé tel quel</td></tr>
+ <tr><td><b>🌍 Où chercher ?</b></td><td>Fiche → ⋯ → « Où chercher ? »</td><td><code>assets/js/heritage-ou-chercher.js</code> · <code>lib/ou_chercher.php</code> <code>ouc_person_context()</code></td><td>Classe les sites par pertinence ; pour le département, ouvre l’adresse de la liste des AD, sinon une recherche Google « archives départementales … état civil … en ligne ». « ✓ déjà cherché » = un dépouillement du Journal (<code>ouc:&lt;site&gt;</code>).</td><td>Ajoute en tête : « Cet acte : 🟢 en ligne » par événement</td></tr>
+ <tr><td><b>Que manque-t-il ?</b></td><td>Recherche → « Que manque-t-il ? »</td><td><code>lib/research_gaps.php</code> <code>gaps_departments()</code> (101 départements, code + nom + article), <code>gaps_archive_of()</code></td><td>Trouve le <b>département d’un lieu</b> : <code>places.admin2_code</code>, sinon <code>places.county</code> (nom ou numéro), sinon « (19) » dans le nom, sinon une partie du nom ; Paris → Archives de Paris, 67/68 → Archives d’Alsace ; étranger → « Archives de &lt;pays&gt; ». Conseille registres paroissiaux avant 1792, tables décennales ensuite, état civil reconstitué pour Paris avant 1860.</td><td><b>Réutilisé</b> pour savoir de quel département est l’acte</td></tr>
+ <tr><td>Liste des Archives départementales</td><td>Listes → Archives départementales</td><td><code>api.php</code> <code>departmental_archives_seed()</code> (code, nom, <code>search_url</code>, <code>digitized</code>, <code>note</code>)</td><td>Une adresse de page « état civil en ligne » pour beaucoup de départements, et un texte libre (« Registres paroissiaux et état civil, recensements… ») ; <b>aucune année limite</b>. Note par défaut : « Lien direct et conditions d’accès à vérifier ».</td><td>Donne l’adresse du bouton « Ouvrir les archives de … »</td></tr>
+ <tr><td>Lieux</td><td>Fiche d’un lieu</td><td>table <code>places</code> : <code>county</code>, <code>country</code>, <code>admin1_code</code> … <code>admin4_code</code> (code INSEE de la commune quand le lieu vient de GeoNames/INSEE)</td><td>Le code département est dans <code>admin2_code</code> quand le lieu a été choisi dans la liste des communes ; pour un lieu tapé à la main, souvent seulement <code>county</code> ou rien.</td><td>« ❔ À vérifier » quand rien ne donne le département</td></tr>
+ <tr><td>Services d’archives</td><td>Listes → Archives et sources → « Services d’archives »</td><td><code>lib/archive_services.php</code></td><td>Mes services (adresse, horaires, site, séries) et ce qui y a été consulté.</td><td>Lien « fiche du service » dans la fenêtre de la pastille</td></tr>
+ <tr><td>Pièces d’un dossier</td><td>⚖️ Successions → un dossier → 📑 Pièces</td><td><code>lib/successoral.php</code> table <code>succ_pieces</code> (états have / asked / missing / na)</td><td>Chaque pièce : « J’ai », « Demandée », « Manque ».</td><td>Une pièce en ligne se <b>télécharge</b> au lieu de se demander</td></tr>
+</tbody></table></div><p class="hint">↔ Faire glisser le tableau.</p>
+<p class="note">Pas trouvé : aucune table de limites par département, aucun lien entre un événement et « je l’ai vu en ligne » (seulement les sources et médias liés). Baptême (BAPM/CHR) et sépulture (BURI) ne sont lus nulle part par ces outils.</p></div>
+
+<!-- ═════════════ 1. PASTILLES ═════════════ -->
+<h2>1. Les cinq pastilles <span class="badge new">nouveau</span></h2>
+<p class="sub">Une seule règle pour toute l’app, calculée à l’affichage (rien n’est recopié dans les événements). Elle vaut pour naissance, baptême, mariage, décès et sépulture.</p>
+<div class="grid">
+ <div class="case">
+  <div class="head"><span class="tag">ce que voit l’utilisateur</span><span class="badge new">nouveau</span></div>
+  <div class="legend">
+   <div><span><span class="ab on">🟢 En ligne</span></span><span>Une limite <b>vérifiée</b> pour ce département et ce type d’acte couvre la date. Bouton <b>« Ouvrir les archives de la Corrèze »</b>.</span></div>
+   <div><span><span class="ab may">🟡 Peut-être en ligne</span></span><span>La date est à 2 ans de la limite, la date est approximative (« vers 1910 ») et chevauche la limite, ou la limite de ce département n’est <b>pas encore vérifiée</b> (acte de plus de 100 ans). Bouton « Ouvrir les archives… » quand même.</span></div>
+   <div><span><span class="ab ask">📮 À demander à la mairie</span></span><span>Trop récent pour être en ligne, mais communicable à tous (décès ; naissance ou mariage de plus de 75 ans). Bouton <b>« 📮 Préparer la lettre »</b> (la lettre qui existe).</span></div>
+   <div><span><span class="ab lock">🔒 Réservé à la famille jusqu’en 2031</span></span><span>Naissance ou mariage de moins de 75 ans : copie intégrale réservée à la personne, ses ascendants, descendants, conjoint (code du patrimoine, <a style="color:var(--blue)">art. L213-2</a>, lien Légifrance). Bouton « 📮 Lettre (je suis de la famille) ».</span></div>
+   <div><span><span class="ab unk">❔ À vérifier</span></span><span>Pas de date, département inconnu, lieu à l’étranger, ou cas particulier (voir 9). Bouton « 🌍 Où chercher ? ».</span></div>
+  </div>
+  <p class="note">Un acte qui a déjà une <b>source ou une image liée</b> garde sa pastille, plus petite, avec ✓ : <span class="ab on sm">🟢 ✓ lié</span>. On ne pousse plus à le chercher.</p>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag">comment l’app décide</span><span class="badge new">nouveau</span></div>
+  <ol class="flow">
+   <li><span><b>Pas d’année</b> (ni date, ni « vers ») → <span class="ab unk sm">❔</span></span></li>
+   <li><span><b>Département</b> du lieu par <code>gaps_archive_of()</code> (code, nom, « (19) »…). Inconnu ou à l’étranger → <span class="ab unk sm">❔</span></span></li>
+   <li><span><b>Cas particulier</b> (Paris avant 1860, outre-mer, avant 1792 sans limite de registres paroissiaux…) → la règle du cas (9)</span></li>
+   <li><span><b>Limite vérifiée</b> pour ce département et ce type (la tienne d’abord, sinon celle livrée avec l’app) : date ≤ limite → <span class="ab on sm">🟢</span> ; à 2 ans près ou date approximative → <span class="ab may sm">🟡</span></span></li>
+   <li><span><b>Plus récent que la limite</b> (ou pas de limite et moins de 100 ans) : naissance ou mariage de moins de 75 ans → <span class="ab lock sm">🔒</span> ; sinon → <span class="ab ask sm">📮</span></span></li>
+   <li><span><b>Pas de limite vérifiée</b> et plus de 100 ans → <span class="ab may sm">🟡 limite pas encore vérifiée</span> — <b>jamais 🟢 sans source</b></span></li>
+  </ol>
+  <div class="reuse"><b>Réutilise</b> : le calcul des 75 ans de <code>recent_acts()</code> (date exacte + 75 ans, sinon fin de l’année + 75) et de <code>courriers_actes.php</code> ; le département de <code>research_gaps.php</code> ; l’adresse de <code>departmental_archives_seed()</code>.</div>
+ </div>
+</div>
+
+<!-- ═════════════ 2. FICHE ═════════════ -->
+<h2>2. Sur la fiche, à côté de chaque événement <span class="badge re">fait évoluer la fiche</span></h2>
+<div class="grid">
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">2a</span>fiche de Jeanne MAZAUD</span><span class="badge re">fait évoluer</span></div>
+  <div class="path">Personnes → une fiche → section <b>Événements</b> (la pastille se met à droite de la date)</div>
+  <div class="win"><div class="win-bar"><div><div class="eyebrow">Fiche</div><b>Jeanne MAZAUD (1904-1987)</b></div></div><div class="win-body">
+   <div class="ev"><div class="t"><b>👶 Naissance</b><span class="ab on">🟢 En ligne</span></div><div class="d">12 mars 1904 · Meymac (Corrèze, 19)</div>
+    <div class="row"><span class="btn small blue">🏛 Ouvrir les archives de la Corrèze</span><span class="btn small">✓ Je l’ai trouvé en ligne</span><span class="btn small ghost">✗ Pas en ligne</span></div>
+    <div class="why">Naissances de la Corrèze en ligne jusqu’en 19xx <span class="ex-tag">exemple fictif</span> · vérifié le 14 nov. 2026 sur <a>la page « état civil en ligne » des AD</a></div></div>
+   <div class="ev"><div class="t"><b>💍 Mariage</b><span class="ab may">🟡 Peut-être en ligne</span></div><div class="d">vers 1925 · Ussel (Corrèze, 19)</div>
+    <div class="row"><span class="btn small blue">🏛 Ouvrir les archives de la Corrèze</span><span class="btn small">✓ Trouvé</span><span class="btn small ghost">✗ Pas en ligne</span></div>
+    <div class="why">Date approximative : « vers 1925 » chevauche la limite des mariages.</div></div>
+   <div class="ev"><div class="t"><b>✝ Décès</b><span class="ab ask">📮 À demander à la mairie</span></div><div class="d">3 février 1987 · Tulle (Corrèze, 19)</div>
+    <div class="row"><span class="btn small blue">📮 Préparer la lettre à la mairie de Tulle</span></div>
+    <div class="why">Trop récent pour être en ligne. Un acte de décès est communicable à tous, tout de suite.</div></div>
+   <div class="ev"><div class="t"><b>⚱ Sépulture</b><span class="ab unk">❔ À vérifier</span></div><div class="d">1987 · lieu non noté</div>
+    <div class="row"><span class="btn small">🌍 Où chercher ?</span><span class="btn small ghost">📍 Préciser le lieu</span></div></div>
+  </div></div>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">2b</span>clic sur une pastille</span><span class="badge new">nouveau</span></div>
+  <h3>« Pourquoi cette pastille ? »</h3>
+  <div class="win"><div class="win-bar"><div><div class="eyebrow">🏛 Archives en ligne</div><b>Naissance de Pierre LACOMBE, 1952</b></div></div><div class="win-body">
+   <p style="margin:0 0 8px"><span class="ab lock">🔒 Réservé à la famille jusqu’en 2027</span></p>
+   <ul class="edge" style="margin-top:0">
+    <li><b>Lieu</b> : Aurillac → Cantal (15), d’après le code du lieu.</li>
+    <li><b>Limite des naissances du Cantal</b> : <i>pas encore vérifiée</i> <span class="badge warn">à vérifier</span></li>
+    <li><b>75 ans</b> : acte du 8 juin 1952 → communicable à tous le <b>8 juin 2027</b>. Ce jour-là, la pastille devient <span class="ab ask sm">📮 À demander</span> toute seule.</li>
+    <li>Règle : code du patrimoine, art. L213-2 (<a style="color:var(--blue)">Légifrance</a>) ; qui peut demander avant : décret 2017-890, art. 30.</li>
+   </ul>
+   <div class="msg">L’app ne va pas voir sur le site des archives : elle ouvre la page, c’est toi qui regardes.</div>
+   <div class="row"><span class="btn small blue">📮 Préparer la lettre</span><span class="btn small">🏛 Ouvrir les archives du Cantal</span><span class="btn small ghost">🗂 Voir la table des limites</span></div>
+  </div></div>
+  <p class="note">Exemple d’un 🔒 qui se lève : le jour des 75 ans, la pastille change seule (le rappel « l’acte devient public » de la lettre existe déjà).</p>
+ </div>
+</div>
+
+<!-- ═════════════ 3. TABLE ═════════════ -->
+<h2>3. La table des limites, une ligne par département et par type d’acte <span class="badge new">nouveau</span></h2>
+<p class="sub">C’est elle qui fait tout. <b>Jamais devinée</b> : une ligne sans source n’existe pas, le département est alors « à vérifier ». Livrée avec l’app (lignes « LCNDA ») et complétée par tes corrections (lignes « moi »).</p>
+<div class="case wide">
+ <div class="head"><span class="tag"><span class="num-b">3</span>Listes → Archives et sources → 🗂 Archives en ligne par département</span><span class="badge new">nouveau</span></div>
+ <div class="msg red"><b>Toutes les années ci-dessous sont des EXEMPLES FICTIFS</b>, pour montrer la forme de la table. Ce ne sont pas les vraies limites de ces départements.</div>
+ <div class="row" style="margin:0 0 8px"><div class="seg"><span class="on">Tous</span><span>Vérifiés</span><span>À vérifier</span><span>Corrigés par moi</span></div><span class="input" style="width:200px">🔎 Département…</span></div>
+ <div class="scrollx"><table style="min-width:980px"><thead><tr><th>Département</th><th>Type d’acte</th><th>En ligne jusqu’à</th><th>Page officielle qui le dit</th><th>Vérifié le</th><th>Par</th><th></th></tr></thead><tbody>
+  <tr class="fict"><td><b>19 · Corrèze</b></td><td>Naissances</td><td>19xx <span class="ex-tag">exemple fictif</span></td><td><code>https://(page « état civil » des AD 19)</code></td><td>14 nov. 2026</td><td><span class="badge grey">LCNDA</span></td><td><span class="btn small ghost">✎</span></td></tr>
+  <tr class="fict"><td></td><td>Mariages</td><td>19xx <span class="ex-tag">exemple fictif</span></td><td><code>idem</code></td><td>14 nov. 2026</td><td><span class="badge grey">LCNDA</span></td><td><span class="btn small ghost">✎</span></td></tr>
+  <tr class="fict"><td></td><td>Décès</td><td>19xx <span class="ex-tag">exemple fictif</span></td><td><code>idem</code></td><td>14 nov. 2026</td><td><span class="badge grey">LCNDA</span></td><td><span class="btn small ghost">✎</span></td></tr>
+  <tr class="fict"><td></td><td>Tables décennales</td><td>19xx <span class="ex-tag">exemple fictif</span></td><td><code>idem</code></td><td>14 nov. 2026</td><td><span class="badge grey">LCNDA</span></td><td><span class="btn small ghost">✎</span></td></tr>
+  <tr class="fict"><td></td><td>Registres paroissiaux</td><td>1792 (fin des registres)</td><td><code>idem</code></td><td>14 nov. 2026</td><td><span class="badge grey">LCNDA</span></td><td><span class="btn small ghost">✎</span></td></tr>
+  <tr class="fict"><td><b>32 · Gers</b></td><td>Naissances</td><td>19xx <span class="ex-tag">exemple fictif</span></td><td><code>https://(page des AD 32)</code></td><td>2 oct. 2026</td><td><span class="badge violet">moi</span> <small class="mini">« ✓ trouvé » sur la naissance de Louis PEYRAT, 1912</small></td><td><span class="btn small ghost">✎</span> <span class="btn small ghost">↶</span></td></tr>
+  <tr><td><b>15 · Cantal</b></td><td>tous</td><td><span class="badge warn">à vérifier</span></td><td class="mini">—</td><td class="mini">—</td><td class="mini">—</td><td><span class="btn small">＋ Noter la limite</span></td></tr>
+  <tr><td><b>2A · Corse-du-Sud</b></td><td>tous</td><td><span class="badge warn">à vérifier</span></td><td class="mini">—</td><td class="mini">—</td><td class="mini">—</td><td><span class="btn small">＋ Noter la limite</span></td></tr>
+ </tbody></table></div><p class="hint">↔ Faire glisser le tableau.</p>
+ <p class="note">Une ligne = département · type (naissances, mariages, décès, tables décennales, registres paroissiaux, et éventuellement une commune) · année « en ligne jusqu’à » · adresse officielle · date de vérification · origine (LCNDA ou moi) · note. Une ligne « moi » passe <b>avant</b> la ligne LCNDA du même département ; ↶ la retire et la ligne LCNDA revient. Une mise à jour de l’app ne touche jamais aux lignes « moi ».</p>
+ <div class="win" style="margin-top:12px;max-width:520px"><div class="win-bar"><div><div class="eyebrow">＋ Noter la limite</div><b>Cantal (15)</b></div></div><div class="win-body">
+  <span class="lab">Type d’acte</span><div class="seg"><span class="on">Naissances</span><span>Mariages</span><span>Décès</span><span>Tables</span><span>Paroissiaux</span></div>
+  <span class="lab">En ligne jusqu’à l’année</span><div class="input">ex. 1925</div>
+  <span class="lab">Adresse de la page qui le dit (obligatoire)</span><div class="input">https://…</div>
+  <p class="note">Sans adresse, on ne peut pas enregistrer : c’est ce qui évite les limites inventées.</p>
+ </div><div class="win-foot"><span class="btn ghost">Annuler</span><span class="btn blue">Enregistrer</span></div></div>
+ <div class="dec"><b>Décision à prendre · 1 · comment remplir la table au départ</b>
+  <ol>
+   <li><b>Je recherche les limites sur les sites officiels des 101 départements</b>, une ligne par type d’acte, chacune avec l’adresse exacte de la page et la date de vérification ; ce que je ne trouve pas clairement écrit reste « à vérifier » <span class="cons">conseillé</span>. Vérifié une fois par an (la date de vérification le montre).</li>
+   <li>Table vide au départ : tout est 🟡 ou ❔ jusqu’à ce que tu la remplisses toi-même (✓ / ✗ ou ＋ Noter la limite).</li>
+   <li>Une règle générale « plus de 100 ans = en ligne » : <b>non</b>, c’est deviner, et c’est ce que fait déjà le « +100 » qu’on remplace.</li>
+  </ol>
+ </div>
+</div>
+
+<!-- ═════════════ 4. CORRECTION ═════════════ -->
+<h2>4. ✓ Je l’ai trouvé en ligne · ✗ Pas en ligne <span class="badge new">nouveau</span></h2>
+<div class="grid">
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">4a</span>après ✓ sur un acte</span><span class="badge new">nouveau</span></div>
+  <div class="win"><div class="win-bar"><div><div class="eyebrow">✓ Trouvé en ligne</div><b>Naissance de Louis PEYRAT · 1912 · Auch (Gers)</b></div></div><div class="win-body">
+   <span class="lab">Adresse de l’image de l’acte (facultatif, conseillé)</span><div class="input">https://…/vue 143</div>
+   <div class="choice" style="margin-top:10px">
+    <label class="on"><span class="dot"></span><span><b>Ajouter comme source de cet acte</b><small>La source « AD du Gers, état civil d’Auch, naissances 1912, vue 143 » est liée à l’événement. La pastille devient 🟢 ✓ lié.</small></span></label>
+   </div>
+   <div class="msg ok">Limite des <b>naissances du Gers</b> : au moins jusqu’en <b>1912</b>, d’après toi (2 oct. 2026). Les autres naissances du Gers jusqu’en 1912 passent en 🟢.</div>
+  </div><div class="win-foot"><span class="btn ghost">↶ Annuler</span><span class="btn blue">Enregistrer</span></div></div>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">4b</span>après ✗ sur un acte 🟢</span><span class="badge new">nouveau</span></div>
+  <div class="win"><div class="win-bar"><div><div class="eyebrow">✗ Pas en ligne</div><b>Mariage de Marie ROUSSILHE · 1931 · Brive (Corrèze)</b></div></div><div class="win-body">
+   <span class="lab">Pourquoi ?</span>
+   <div class="choice">
+    <label class="on"><span class="dot"></span><span><b>Le registre de cette année n’est pas en ligne</b><small>La limite des mariages de la Corrèze passe <b>avant 1931</b> chez toi.</small></span></label>
+    <label><span class="dot"></span><span><b>Seulement cette commune manque</b><small>Exception pour Brive, la limite du département ne bouge pas.</small></span></label>
+    <label><span class="dot"></span><span><b>Je n’ai pas trouvé l’acte dans le registre</b><small>La limite ne bouge pas ; c’est noté dans le Journal des recherches (« cherché, pas trouvé »).</small></span></label>
+   </div>
+  </div><div class="win-foot"><span class="btn ghost">Annuler</span><span class="btn blue">Enregistrer</span></div></div>
+  <p class="note">Chaque correction garde <b>qui</b> (toi), <b>quand</b> et <b>sur quel acte</b> : on voit dans la table « d’après toi, sur le mariage de Marie ROUSSILHE ». Si ta correction contredit une ligne LCNDA vérifiée, la fenêtre le dit (« la page officielle disait 19xx le 14 nov. 2026 ») et propose de rouvrir la page.</p>
+ </div>
+</div>
+<div class="dec"><b>Décision à prendre · 2 · ta correction vaut pour…</b>
+ <ol>
+  <li><b>Tout le département</b> par défaut, avec la possibilité « seulement cette commune » dans la fenêtre ✗ <span class="cons">conseillé</span> : les archives mettent en ligne par département et par tranche d’années, mais il manque parfois une commune ou un registre.</li>
+  <li>Seulement la commune : plus juste, mais il faut corriger commune par commune (des centaines de ✓ / ✗).</li>
+ </ol>
+</div>
+
+<!-- ═════════════ 5. CHRONO + LISTES ═════════════ -->
+<h2>5. Chronologie et Listes <span class="badge re">fait évoluer l’existant</span></h2>
+<div class="grid">
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">5a</span>Chronologie</span><span class="badge re">fait évoluer</span></div>
+  <div class="path">06 Chronologie → une personne ou une famille</div>
+  <div class="win"><div class="win-body">
+   <table><tbody>
+    <tr><td class="mini">1878</td><td>👶 Naissance d’Antoine MAZAUD, Meymac</td><td><span class="ab on sm">🟢 ✓ lié</span></td></tr>
+    <tr><td class="mini">1903</td><td>💍 Mariage Antoine MAZAUD × Rose LACOMBE, Meymac</td><td><span class="ab on sm">🟢</span></td></tr>
+    <tr><td class="mini">1904</td><td>👶 Naissance de Jeanne MAZAUD, Meymac</td><td><span class="ab on sm">🟢</span></td></tr>
+    <tr><td class="mini">v. 1925</td><td>💍 Mariage de Jeanne, Ussel</td><td><span class="ab may sm">🟡</span></td></tr>
+    <tr><td class="mini">1952</td><td>👶 Naissance de Pierre LACOMBE, Aurillac</td><td><span class="ab lock sm">🔒 2027</span></td></tr>
+    <tr><td class="mini">1962</td><td>👶 Naissance d’Hélène LACOMBE, Aurillac</td><td><span class="ab lock sm">🔒 2037</span></td></tr>
+    <tr><td class="mini">1987</td><td>✝ Décès de Jeanne MAZAUD, Tulle</td><td><span class="ab ask sm">📮</span></td></tr>
+   </tbody></table>
+  </div></div>
+  <p class="note">Petites pastilles sans texte (le texte au survol, ou au toucher sur téléphone). Une case « 🏛 Archives » dans la colonne de la Chronologie les cache.</p>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">5b</span>Listes : colonne et filtre</span><span class="badge re">fait évoluer</span></div>
+  <div class="path">05 Listes → Événements (et Personnes : colonnes Naissance / Décès) → colonne <b>🏛 Archives</b> · filtre</div>
+  <div class="row" style="margin:0 0 8px"><div class="seg"><span class="on">Tous</span><span>🟢 En ligne</span><span>🟡 Peut-être</span><span>📮 À demander</span><span>🔒 Réservé</span><span>❔</span></div></div>
+  <label class="mini" style="display:block;margin:0 0 8px"><span class="cb on"></span> Seulement ceux qui n’ont <b>ni source ni image</b></label>
+  <div class="scrollx"><table style="min-width:460px"><thead><tr><th>Personne</th><th>Acte</th><th>Date · lieu</th><th>🏛 Archives</th></tr></thead><tbody>
+   <tr><td>MAZAUD Jeanne</td><td>Naissance</td><td>1904 · Meymac (19)</td><td><span class="ab on sm">🟢</span></td></tr>
+   <tr><td>MAZAUD François</td><td>Décès</td><td>1918 · Meymac (19)</td><td><span class="ab on sm">🟢</span></td></tr>
+   <tr><td>PEYRAT Louis</td><td>Naissance</td><td>1912 · Auch (32)</td><td><span class="ab on sm">🟢</span></td></tr>
+   <tr><td>LACOMBE Rose</td><td>Baptême</td><td>1781 · Ussel (19)</td><td><span class="ab on sm">🟢</span></td></tr>
+  </tbody></table></div>
+  <p class="note">La colonne se trie (🟢 d’abord). Avec le filtre « 🟢 + sans source », c’est la liste des actes à aller voir. Export CSV : une colonne « Archives » en texte (« en ligne », « à demander »…).</p>
+ </div>
+</div>
+
+<!-- ═════════════ 6. OU CHERCHER + ACTES A DEMANDER ═════════════ -->
+<h2>6. 🌍 Où chercher ? et 📮 Actes à demander <span class="badge re">fait évoluer l’existant</span></h2>
+<div class="grid">
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">6a</span>🌍 Où chercher ?</span><span class="badge re">fait évoluer</span></div>
+  <div class="path">Fiche → ⋯ → <b>🌍 Où chercher ?</b> → nouveau bloc en tête « Ses actes aux archives »</div>
+  <div class="win"><div class="win-bar"><div><div class="eyebrow">🌍 Où chercher ?</div><b>Jeanne MAZAUD</b></div></div><div class="win-body">
+   <span class="lab" style="margin-top:0">Ses actes aux archives <span class="badge new">nouveau</span></span>
+   <ul class="ck-l">
+    <li><span class="s">🟢</span><span><b>Naissance 1904</b><small>AD de la Corrèze, en ligne</small></span><span class="btn small blue">🏛 Ouvrir</span></li>
+    <li><span class="s">🟡</span><span><b>Mariage vers 1925</b><small>Commence par les tables décennales 1923-1932</small></span><span class="btn small">🏛 Ouvrir</span></li>
+    <li><span class="s">📮</span><span><b>Décès 1987</b><small>Mairie de Tulle</small></span><span class="btn small">📮 Lettre</span></li>
+   </ul>
+   <span class="lab">Sites conseillés <span class="badge have">existe</span></span>
+   <p class="mini" style="margin:0">… la liste actuelle, inchangée (Geneanet, FranceArchives, AD…).</p>
+  </div></div>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">6b</span>📮 Actes à demander à la mairie</span><span class="badge re">remplace le « +100 ans »</span></div>
+  <div class="path">Listes → Registre de courriers → <b>📮 Actes à demander à la mairie</b></div>
+  <div class="scrollx"><table style="min-width:480px"><thead><tr><th>Acte</th><th>Qui</th><th>Avant</th><th>Maintenant</th></tr></thead><tbody>
+   <tr><td>Naissance 1930, Meymac</td><td>MAZAUD Paul</td><td class="mini"><s>vers 2030</s></td><td><span class="ab on sm">🟢 En ligne</span> <small class="mini">sort de la liste</small></td></tr>
+   <tr><td>Mariage 1948, Ussel</td><td>MAZAUD × VIALLE</td><td class="mini"><s>vers 2048</s></td><td><span class="ab ask sm">📮 À demander</span></td></tr>
+   <tr><td>Naissance 1962, Aurillac</td><td>LACOMBE Hélène</td><td class="mini"><s>vers 2062</s></td><td><span class="ab lock sm">🔒 jusqu’en 2037</span></td></tr>
+   <tr><td>Décès 1940, Auch</td><td>PEYRAT Louis</td><td class="mini"><s>vers 2040</s></td><td><span class="ab may sm">🟡 limite à vérifier</span></td></tr>
+  </tbody></table></div>
+  <p class="note">La colonne « En ligne » (<code>online_from</code> = année + 100) est remplacée par la pastille. Un acte 🟢 n’est plus « à demander » : il sort de la liste et va dans le compteur du widget (8). La liste lit aussi les actes de <b>plus</b> de 100 ans quand la table dit qu’ils ne sont pas en ligne.</p>
+ </div>
+</div>
+
+<!-- ═════════════ 7. SUCCESSORAL ═════════════ -->
+<h2>7. ⚖️ Pièces d’un dossier de succession <span class="badge re">fait évoluer</span></h2>
+<div class="case wide">
+ <div class="head"><span class="tag"><span class="num-b">7</span>⚖️ Successions → 2026-014 MAZAUD → 📑 Pièces</span><span class="badge re">fait évoluer</span></div>
+ <ul class="ck-l">
+  <li><span class="s">🟢</span><span><b>Acte de naissance d’Antoine MAZAUD (1878, Meymac)</b><small>En ligne aux AD de la Corrèze : à télécharger, pas à demander</small></span><span class="row"><span class="btn small blue">🏛 Ouvrir</span><span class="btn small">⤓ J’ai l’image</span></span></li>
+  <li><span class="s">🟢</span><span><b>Acte de mariage Antoine MAZAUD × Rose LACOMBE (1903)</b><small>En ligne · déjà lié (vue 61)</small></span><span class="badge ok">j’ai</span></li>
+  <li class="wa"><span class="s">📮</span><span><b>Acte de décès de Jeanne MAZAUD (1987, Tulle)</b><small>À demander à la mairie de Tulle · courrier envoyé le 6 nov.</small></span><span class="badge warn">demandée</span></li>
+  <li class="bad"><span class="s">🔒</span><span><b>Acte de naissance d’Hélène LACOMBE (1962)</b><small>Réservé jusqu’en 2037 : à demander par l’héritière elle-même, ou extrait sans filiation</small></span><span class="row"><span class="btn small">📮 Lettre</span></span></li>
+ </ul>
+ <p class="note">Les pièces restent les mêmes (états « J’ai / Demandée / Manque »). La pastille change seulement <b>le bouton proposé</b> : 🟢 → « Ouvrir les archives » + « J’ai l’image » ; 📮 / 🔒 → la lettre. Rien n’est noté au journal du dossier tant qu’on ne clique pas.</p>
+</div>
+
+<!-- ═════════════ 8. WIDGET ═════════════ -->
+<h2>8. Le travail à faire : « en ligne, pas encore lié » <span class="badge new">nouveau</span></h2>
+<div class="grid">
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">8a</span>widget du tableau de bord</span><span class="badge new">nouveau</span></div>
+  <div class="path">01 Tableau de bord → ✎ → ＋ Widget → <b>🏛 Actes en ligne à aller voir</b></div>
+  <div class="wd" style="background:var(--paper);border:2px solid var(--ink);padding:12px">
+   <div class="row" style="justify-content:space-between"><b>🏛 Actes en ligne à aller voir</b><span class="mini">Ma généalogie</span></div>
+   <p style="margin:8px 0"><span class="big">34</span> actes de ta base sont <b>en ligne</b> et pas encore liés à une source.</p>
+   <div class="counts" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;font-size:12px;text-align:center">
+    <div style="border:1.5px solid var(--line2);padding:4px"><b style="display:block;font-size:17px">21</b>naissances</div>
+    <div style="border:1.5px solid var(--line2);padding:4px"><b style="display:block;font-size:17px">8</b>mariages</div>
+    <div style="border:1.5px solid var(--line2);padding:4px"><b style="display:block;font-size:17px">5</b>décès</div>
+   </div>
+   <p class="mini" style="margin:8px 0 4px">Aussi : 12 🟡 peut-être en ligne · 7 📮 à demander · 9 ❔ à vérifier</p>
+   <div class="row"><span class="btn small blue">Voir les 34</span><span class="btn small ghost">Ancêtres directs seulement</span></div>
+  </div>
+  <p class="note">« Voir les 34 » ouvre la liste 5b déjà filtrée (🟢 + sans source). Option du widget : seulement les ancêtres directs (Sosa).</p>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">8b</span>et dans 🗓 Ma semaine de recherche</span><span class="badge re">fait évoluer</span></div>
+  <p class="mini" style="margin-top:0">« 🗓 Ma semaine de recherche » (<code>lib/semaine.php</code>) propose déjà des tâches. Elle peut piocher : « Cette semaine : 3 actes en ligne de la Corrèze (Meymac) — 20 minutes ».</p>
+  <ul class="ck-l">
+   <li><span class="s">🟢</span><span><b>Naissance de Jeanne MAZAUD, 1904</b><small>AD 19 · Meymac</small></span><span class="btn small">🏛</span></li>
+   <li><span class="s">🟢</span><span><b>Décès de François MAZAUD, 1918</b><small>AD 19 · Meymac</small></span><span class="btn small">🏛</span></li>
+   <li><span class="s">🟢</span><span><b>Baptême de Rose LACOMBE, 1781</b><small>AD 19 · Ussel, registres paroissiaux</small></span><span class="btn small">🏛</span></li>
+  </ul>
+  <p class="note">Regroupés par commune : on ouvre un registre une fois pour plusieurs actes.</p>
+ </div>
+</div>
+
+<!-- ═════════════ 9. CAS PARTICULIERS ═════════════ -->
+<h2>9. Cas particuliers <span class="badge new">nouveau</span></h2>
+<div class="case wide"><div class="scrollx"><table style="min-width:860px"><thead><tr><th>Cas</th><th>Pastille</th><th>Ce que dit la fenêtre « Pourquoi ? »</th></tr></thead><tbody>
+ <tr><td><b>Acte à l’étranger</b> (Belgique, Italie…)</td><td><span class="ab unk sm">❔</span></td><td>« Hors de France : la table ne couvre que les départements français. » Bouton 🌍 Où chercher ? (sites du pays). Pour un Français né à l’étranger : lettre au <b>Service central d’état civil (Nantes)</b>, déjà dans les destinataires.</td></tr>
+ <tr><td><b>Paris avant 1860</b></td><td><span class="ab may sm">🟡</span></td><td>« L’état civil parisien d’avant 1860 a brûlé en 1871 : chercher dans l’état civil reconstitué (Archives de Paris). » Lien déjà connu de l’app (<code>paris_ec</code>). Paris après 1860 : table normale (ligne 75, par arrondissement en note).</td></tr>
+ <tr><td><b>Alsace-Moselle</b> (67, 68, 57)</td><td>selon la table</td><td>Service « Archives d’Alsace » pour 67/68 (déjà dans <code>gaps_archive_of()</code>). Règles de communication parfois différentes : une note par ligne de la table, jamais une règle devinée.</td></tr>
+ <tr><td><b>Outre-mer</b> (971-976) et anciennes colonies</td><td>selon la table · sinon <span class="ab unk sm">❔</span></td><td>Deux lignes possibles : les archives du département et les <b>ANOM</b> (Archives nationales d’outre-mer, état civil des colonies ; adresse déjà dans <code>lib/registers.php</code>). Algérie, Indochine… : ANOM seulement.</td></tr>
+ <tr><td><b>Commune qui a changé de département</b> (Seine → 92/93/94 en 1968, Seine-et-Oise → 78/91/95, Savoie et Nice avant 1860)</td><td>selon la table</td><td>La pastille prend le département <b>où sont les registres</b>, pas celui d’aujourd’hui : une table des anciens départements (Seine, Seine-et-Oise) renvoie vers le bon service ; sinon <span class="ab may sm">🟡</span> « département de l’époque à vérifier ».</td></tr>
+ <tr><td><b>Registres paroissiaux avant 1792</b> (baptême, mariage, sépulture)</td><td>selon la ligne « Registres paroissiaux »</td><td>La règle des 75 ans ne s’applique pas (tout est communicable). Si le département n’a pas de ligne « paroissiaux » vérifiée : <span class="ab may sm">🟡</span>. Baptême et sépulture après 1792 : pas d’état civil, renvoi vers les archives diocésaines (destinataire déjà prévu).</td></tr>
+ <tr><td><b>Date approximative</b> (« vers 1910 », « entre 1905 et 1912 », « avant 1920 »)</td><td><span class="ab may sm">🟡</span> si la fourchette chevauche la limite</td><td>On prend la fourchette entière : toute la fourchette avant la limite → 🟢 ; toute après → 📮 / 🔒 ; à cheval → 🟡. « vers » = ± 5 ans. Le 🔒 se calcule sur la date la plus tardive (prudent).</td></tr>
+ <tr><td><b>Lieu sans département</b> (« Meymac » tapé à la main, sans code)</td><td><span class="ab unk sm">❔</span></td><td>Bouton « 📍 Préciser le lieu » (choisir la commune dans la liste : le code arrive tout seul dans <code>admin2_code</code>).</td></tr>
+ <tr><td><b>Personne vivante ou fiche confidentielle</b></td><td>pastille montrée à toi seulement</td><td>Jamais dans un export, une impression, un partage ou le mode consultation.</td></tr>
+</tbody></table></div><p class="hint">↔ Faire glisser le tableau.</p></div>
+
+<!-- ═════════════ 10. REGLAGE ═════════════ -->
+<h2>10. Le réglage <span class="badge new">nouveau</span></h2>
+<div class="grid">
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">10</span>Réglages</span><span class="badge new">nouveau</span></div>
+  <div class="path">Réglages → Recherche → <b>🏛 Archives en ligne</b></div>
+  <ul class="ck-l">
+   <li><span class="cb on"></span><span><b>Pastilles sur les fiches</b><small>à côté de chaque naissance, baptême, mariage, décès, sépulture</small></span><span></span></li>
+   <li><span class="cb on"></span><span><b>Pastilles dans la Chronologie</b></span><span></span></li>
+   <li><span class="cb on"></span><span><b>Colonne dans les Listes</b></span><span></span></li>
+   <li><span class="cb"></span><span><b>Cacher la pastille quand l’acte est déjà lié</b><small>sinon : petite 🟢 ✓ lié</small></span><span></span></li>
+  </ul>
+  <p class="note">Bouton « 🗂 Ouvrir la table des limites ». Mode simple : seulement la pastille de la fiche. Mode consultation : rien.</p>
+ </div>
+ <div class="case">
+  <div class="dec" style="margin-top:0"><b>Décision à prendre · 3 · visible partout dès le départ, ou à activer ?</b>
+   <ol>
+    <li><b>Visible par défaut sur la fiche</b> (petite et discrète), Chronologie et Listes à cocher dans les Réglages <span class="cons">conseillé</span> : on découvre l’outil sans le chercher, sans charger tous les écrans.</li>
+    <li>Visible partout par défaut (fiche, Chronologie, Listes).</li>
+    <li>À activer dans les Réglages : rien ne change tant qu’on ne l’a pas allumé.</li>
+   </ol>
+  </div>
+  <div class="msg">Traductions : chaque texte passe par <code>i18n()</code> (31 langues, <code>assets/i18n/*.json</code>). Les pastilles ne valent que pour la France ; dans une autre langue, le texte reste « archives départementales ».</div>
+ </div>
+</div>
+
+<h2>Questions à poser à l’utilisateur</h2>
+<div class="qs"><ol>
+ <li><b>Remplir la table au départ</b> (3) : je cherche les limites sur les sites officiels des 101 départements, chaque ligne avec son adresse et sa date de vérification, le reste « à vérifier » <i>(conseillé)</i> ; ou table vide que tu remplis toi-même ?</li>
+ <li><b>Ta correction ✓ / ✗</b> (4) : pour tout le département, avec « seulement cette commune » possible <i>(conseillé)</i> ; ou toujours seulement la commune ?</li>
+ <li><b>Visibilité</b> (10) : pastille sur la fiche dès le départ, le reste à cocher <i>(conseillé)</i> ; partout ; ou à activer ?</li>
+ <li><b>Baptême et sépulture</b> : les inclure (registres paroissiaux) <i>(conseillé)</i>, ou seulement naissance, mariage, décès ?</li>
+ <li><b>« vers 1910 »</b> : ± 5 ans <i>(conseillé)</i>, ou ± 10 ans ?</li>
+</ol></div>
+
+<h2>Ordre de construction proposé</h2>
+<div class="qs"><ol>
+ <li>La table des limites (structure + écran 3), et le calcul de la pastille, sur la base de <code>gaps_archive_of()</code> et du calcul des 75 ans existant.</li>
+ <li>La pastille sur la fiche et sa fenêtre « Pourquoi ? » (2), avec ✓ / ✗ (4).</li>
+ <li>📮 Actes à demander : remplacer le « +100 » (6b).</li>
+ <li>Listes et Chronologie (5), puis 🌍 Où chercher ? (6a).</li>
+ <li>Widget (8), pièces d’un dossier de succession (7).</li>
+ <li>En parallèle : la recherche des limites, département par département, ligne par ligne sourcée.</li>
+</ol></div>
+
+</div></body></html>
