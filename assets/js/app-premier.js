@@ -37,7 +37,7 @@
         {k: 'nom', ic: '🔤', t: 'L’étude d’un nom de famille', short: 'Un nom de famille', pp: 'Tous les porteurs d’un nom, ses variantes, d’où ils viennent.', change: '+ 🔤 Le nom étudié, Carte des porteurs. Premier écran : les noms et leurs porteurs.', row: '🔤 Le nom étudié.', show: ['personnes'], tabs: [{id: 'ct_usnom', icon: '🔤', name: 'Le nom étudié', target: 'stat:surnames'}], start: {tab: 'ct_usnom', label: '🔤 Le nom étudié'}},
         {k: 'entreprise', ic: '🏭', t: 'L’histoire d’une entreprise ou d’une association', short: 'Entreprise ou association', pp: 'Ses lieux, ses dirigeants, ses salariés ou ses membres.', change: '+ 🏭 L’entreprise, Personnes = « Membres ». Premier écran : « Créer l’entreprise ».', row: '🏭 L’entreprise, 👥 Membres.', show: ['personnes'], tabs: [{id: 'ct_usentrep', icon: '🏭', name: 'L’entreprise', target: 'list:employers'}], rename: '👥 Membres', start: {tab: 'ct_usentrep', label: '🏭 L’entreprise'}},
         {k: 'souvenirs', ic: '✨', t: 'Transmettre des souvenirs', short: 'Transmettre des souvenirs', pp: 'Des lettres à ouvrir plus tard, des recettes, des chansons, des souvenirs à laisser.', change: '+ ✨ Trésors de famille. Premier écran : « 💌 Écrire une lettre aux descendants ».', row: '✨ Trésors de famille.', show: ['personnes', 'tresors'], start: {module: 'tresors', label: '✨ Trésors de famille'}},
-        {k: 'successoral', ic: '⚖️', t: 'Généalogiste successoral', short: 'Généalogiste successoral', pp: 'Retrouver les héritiers d’une personne décédée, pour un notaire.', change: '+ ⚖️ Successions. Premier écran : « Ouvrir un dossier ».', row: '⚖️ Successions, 📇 Vivants, 📮 Courriers.', show: ['personnes', 'documents', 'successoral'], tabs: [{id: 'ct_usvivants', icon: '📇', name: 'Vivants', target: 'list:living_contacts'}, {id: 'ct_uscourriers', icon: '📮', name: 'Courriers', target: 'list:courriers'}], start: {module: 'successoral', label: '⚖️ Successions'}}, // ⚖️ heritage-successoral.js
+        {k: 'successoral', ic: '⚖️', t: 'Généalogiste successoral', short: 'Généalogiste successoral', pp: 'Retrouver les héritiers d’une personne décédée, pour un notaire.', change: '+ ⚖️ Successions (Dossiers · Héritiers à contacter · Courriers). Premier écran : « Ouvrir un dossier ».', row: '⚖️ Successions : dossiers, héritiers à contacter, courriers.', show: ['personnes', 'documents', 'successoral'], start: {module: 'successoral', label: '⚖️ Successions'}}, // ⚖️ heritage-successoral.js
     ];
     const byKey = k => USAGES.find(u => u.k === k);
     const MANAGED = ['personnes', 'animaux', 'suivi', 'documents', 'catalogue', 'tresors', 'successoral'];
@@ -46,6 +46,7 @@
     const cleanSet = set => { const s = USAGES.map(u => u.k).filter(k => (set || []).includes(k)); return s.length ? s : ['genealogie']; };
     const shows = (set, tab) => set.some(k => (byKey(k)?.show || []).includes(tab));
     const hasTab = (set, id) => set.some(k => (byKey(k)?.tabs || []).some(t => t.id === id));
+    const RETIRED_TABS = ['ct_usvivants', 'ct_uscourriers']; // anciens raccourcis de l'usage « ⚖️ Généalogiste successoral » (vers Listes) : enlevés quand on applique ou retire un usage
     const jparse = (s, d) => { try { const v = JSON.parse(s); return v ?? d; } catch (_) { return d; } };
 
     /**
@@ -69,6 +70,7 @@
         // onglets à soi des usages (Maisons et lieux, Le nom étudié, L'entreprise) : ajoutés, ou cachés (jamais effacés)
         let own = jparse(get('genealogie-custom-tabs'), []); if (!Array.isArray(own)) own = [];
         let ownChanged = false;
+        if (own.some(x => x && RETIRED_TABS.includes(x.id))) { own = own.filter(x => !(x && RETIRED_TABS.includes(x.id))); ownChanged = true; }
         USAGES.forEach(u => (u.tabs || []).forEach(t => {
             const now = hasTab(after, t.id), was = before ? hasTab(before, t.id) : false;
             if (now === was) return;

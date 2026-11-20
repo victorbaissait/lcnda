@@ -459,8 +459,8 @@ Sans objet ¦ Netaikoma ¦ Neattiecas ¦ Ei kohaldu
 02 — HÉRITIERS ¦ 02 — ĮPĖDINIAI ¦ 02 — MANTINIEKI ¦ 02 — PÄRIJAD
 Généalogiste successoral ¦ Paveldėjimo genealogas ¦ Mantojuma ģenealogs ¦ Pärimisgenealoog
 Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ Surasti mirusio asmens įpėdinius notarui. ¦ Atrast mirušas personas mantiniekus notāram. ¦ Lahkunu pärijate otsimine notarile.
-+ ⚖️ Successions. Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Paveldėjimai. Pirmasis ekranas: „Atidaryti bylą“. ¦ + ⚖️ Mantojumi. Pirmais ekrāns: “Atvērt lietu”. ¦ + ⚖️ Pärandid. Esimene kuva: „Ava toimik”.
-⚖️ Successions, 📇 Vivants, 📮 Courriers. ¦ ⚖️ Paveldėjimai, 📇 Gyvieji, 📮 Laiškai. ¦ ⚖️ Mantojumi, 📇 Dzīvie, 📮 Vēstules. ¦ ⚖️ Pärandid, 📇 Elavad, 📮 Kirjad.
++ ⚖️ Successions (Dossiers · Héritiers à contacter · Courriers). Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Palikimai (Bylos · Įpėdiniai, su kuriais susisiekti · Laiškai). Pirmas ekranas: „Atidaryti bylą“. ¦ + ⚖️ Mantojumi (Lietas · Sazināmie mantinieki · Vēstules). Pirmais ekrāns: “Atvērt lietu”. ¦ + ⚖️ Pärandid (Toimikud · Pärijad, kellega ühendust võtta · Kirjad). Esimene ekraan: „Ava toimik”.
+⚖️ Successions : dossiers, héritiers à contacter, courriers. ¦ ⚖️ Palikimai: bylos, įpėdiniai, su kuriais susisiekti, laiškai. ¦ ⚖️ Mantojumi: lietas, sazināmie mantinieki, vēstules. ¦ ⚖️ Pärandid: toimikud, pärijad, kellega ühendust võtta, kirjad.
 ⚖️ Successions ¦ ⚖️ Paveldėjimai ¦ ⚖️ Mantojumi ¦ ⚖️ Pärandid
 Vivants ¦ Gyvieji ¦ Dzīvie ¦ Elavad
 Courriers ¦ Laiškai ¦ Vēstules ¦ Kirjad
@@ -488,6 +488,35 @@ Seul un dossier clos peut être archivé. ¦ Archyvuoti galima tik uždarytą by
 Mode consultation : les dossiers de succession ne se montrent pas. ¦ Peržiūros režimas: paveldėjimo bylos nerodomos. ¦ Skatīšanas režīms: mantojuma lietas netiek rādītas. ¦ Vaatamisrežiim: pärimistoimikuid ei näidata.
 Rien à noter. ¦ Nėra ko užrašyti. ¦ Nav ko pierakstīt. ¦ Pole midagi märkida.
 Calcul manquant. ¦ Trūksta skaičiavimo. ¦ Trūkst aprēķina. ¦ Arvutus puudub.
+Dossiers ¦ Bylos ¦ Lietas ¦ Toimikud
+Héritiers à contacter ¦ Įpėdiniai, su kuriais susisiekti ¦ Sazināmie mantinieki ¦ Pärijad, kellega ühendust võtta
+Que montrer ¦ Ką rodyti ¦ Ko rādīt ¦ Mida näidata
+Lecture des héritiers… ¦ Skaitomi įpėdiniai… ¦ Lasa mantiniekus… ¦ Pärijate lugemine…
+Lecture des courriers… ¦ Skaitomi laiškai… ¦ Lasa vēstules… ¦ Kirjade lugemine…
+Voir toute la liste ↗ ¦ Žiūrėti visą sąrašą ↗ ¦ Skatīt visu sarakstu ↗ ¦ Vaata kogu loendit ↗
+Aucun courrier ¦ Laiško nėra ¦ Nav vēstules ¦ Kirja pole
+Courrier envoyé ¦ Laiškas išsiųstas ¦ Vēstule nosūtīta ¦ Kiri saadetud
+Réponse : {r} ¦ Atsakymas: {r} ¦ Atbilde: {r} ¦ Vastus: {r}
+Courrier envoyé le {d} ¦ Laiškas išsiųstas {d} ¦ Vēstule nosūtīta {d} ¦ Kiri saadetud {d}
+Aucun héritier à contacter dans les dossiers en cours. ¦ Atvirose bylose nėra įpėdinių, su kuriais reikėtų susisiekti. ¦ Atvērtajās lietās nav mantinieku, ar kuriem sazināties. ¦ Avatud toimikutes pole pärijaid, kellega ühendust võtta.
+Les héritiers vivants (ou au statut inconnu) des dossiers ouverts viennent ici, avec leur adresse et l’état du contact. ¦ Čia rodomi gyvi (arba nežinomos būsenos) atvirų bylų įpėdiniai su adresu ir kontakto būsena. ¦ Šeit parādās atvērto lietu dzīvie (vai nezināma statusa) mantinieki ar adresi un saziņas stāvokli. ¦ Siin on avatud toimikute elus (või teadmata olekuga) pärijad koos aadressi ja kontakti seisuga.
+Chercher… (nom, dossier, ville) ¦ Ieškoti… (vardas, byla, vietovė) ¦ Meklēt… (vārds, lieta, vieta) ¦ Otsi… (nimi, toimik, koht)
+Tous les dossiers ¦ Visos bylos ¦ Visas lietas ¦ Kõik toimikud
+État du contact ¦ Kontakto būsena ¦ Saziņas stāvoklis ¦ Kontakti seis
+Par dossier ¦ Pagal bylą ¦ Pēc lietas ¦ Toimikute kaupa
+À contacter d’abord ¦ Pirmiausia susisiekti ¦ Vispirms sazināmie ¦ Kõigepealt ühendust võtta
+Aucun héritier ne correspond. ¦ Nė vienas įpėdinis neatitinka. ¦ Neviens mantinieks neatbilst. ¦ Ükski pärija ei sobi.
+📇 Compléter l’adresse ¦ 📇 Papildyti adresą ¦ 📇 Papildināt adresi ¦ 📇 Täienda aadressi
+adresse à trouver ¦ adresą reikia rasti ¦ adrese jāatrod ¦ aadress tuleb leida
+Courriel ¦ El. paštas ¦ E-pasts ¦ E-post
+Héritiers à contacter exportés (CSV) ¦ Įpėdiniai, su kuriais susisiekti, eksportuoti (CSV) ¦ Sazināmie mantinieki eksportēti (CSV) ¦ Pärijad, kellega ühendust võtta, eksporditud (CSV)
+Héritier à l’étranger ¦ Įpėdinis užsienyje ¦ Mantinieks ārzemēs ¦ Pärija välismaal
+Demande d’acte ¦ Akto užklausa ¦ Akta pieprasījums ¦ Dokumendi taotlus
+Aucun courrier de succession pour l’instant. ¦ Paveldėjimo laiškų dar nėra. ¦ Vēl nav mantojuma vēstuļu. ¦ Pärimiskirju veel pole.
+Les courriers écrits depuis un dossier (✉️ Héritiers contactés, 📑 Pièces) viennent ici. ¦ Čia rodomi iš bylos parašyti laiškai (✉️ Įpėdiniai, su kuriais susisiekta, 📑 Dokumentai). ¦ Šeit parādās no lietas rakstītās vēstules (✉️ Uzrunātie mantinieki, 📑 Dokumenti). ¦ Siin on toimikust kirjutatud kirjad (✉️ Pärijad, kellega on ühendust võetud, 📑 Dokumendid).
+Chercher… (destinataire, dossier) ¦ Ieškoti… (gavėjas, byla) ¦ Meklēt… (adresāts, lieta) ¦ Otsi… (adressaat, toimik)
+Aucun courrier ne correspond. ¦ Nė vienas laiškas neatitinka. ¦ Neviena vēstule neatbilst. ¦ Ükski kiri ei sobi.
+📮 COURRIER DE SUCCESSION ¦ 📮 PAVELDĖJIMO LAIŠKAS ¦ 📮 MANTOJUMA VĒSTULE ¦ 📮 PÄRIMISKIRI
 Dévolution ¦ Paveldėjimo eilė ¦ Mantošanas kārtība ¦ Pärimisjärjekord
 =héritier ¦ įpėdinis|įpėdiniai|įpėdinių ¦ mantinieku|mantinieks|mantinieki ¦ pärija|pärijat
 =courrier ¦ laiškas|laiškai|laiškų ¦ vēstuļu|vēstule|vēstules ¦ kiri|kirja

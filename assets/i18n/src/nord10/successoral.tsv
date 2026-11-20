@@ -459,8 +459,8 @@ Sans objet ¦ Nuk zbatohet ¦ Ma japplikax
 02 — HÉRITIERS ¦ 02 — TRASHËGIMTARËT ¦ 02 — WERRIETA
 Généalogiste successoral ¦ Gjenealog trashëgimish ¦ Ġenealoġista tas-suċċessjonijiet
 Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ Gjetja e trashëgimtarëve të një personi të vdekur për një noter. ¦ Sib il-werrieta ta’ persuna mejta għal nutar.
-+ ⚖️ Successions. Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Trashëgimi. Ekrani i parë: «Hap një dosje». ¦ + ⚖️ Suċċessjonijiet. L-ewwel skrin: «Iftaħ fajl».
-⚖️ Successions, 📇 Vivants, 📮 Courriers. ¦ ⚖️ Trashëgimi, 📇 Të gjallët, 📮 Letrat. ¦ ⚖️ Suċċessjonijiet, 📇 Ħajjin, 📮 Ittri.
++ ⚖️ Successions (Dossiers · Héritiers à contacter · Courriers). Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Trashëgimi (Dosjet · Trashëgimtarë për t’u kontaktuar · Letrat). Ekrani i parë: «Hap një dosje». ¦ + ⚖️ Suċċessjonijiet (Fajls · Werrieta li jridu jiġu kkuntattjati · Ittri). L-ewwel skrin: «Iftaħ fajl».
+⚖️ Successions : dossiers, héritiers à contacter, courriers. ¦ ⚖️ Trashëgimi: dosjet, trashëgimtarë për t’u kontaktuar, letrat. ¦ ⚖️ Suċċessjonijiet: fajls, werrieta li jridu jiġu kkuntattjati, ittri.
 ⚖️ Successions ¦ ⚖️ Trashëgimi ¦ ⚖️ Suċċessjonijiet
 Vivants ¦ Të gjallët ¦ Ħajjin
 Courriers ¦ Letrat ¦ Ittri
@@ -488,6 +488,35 @@ Seul un dossier clos peut être archivé. ¦ Vetëm një dosje e mbyllur mund t�
 Mode consultation : les dossiers de succession ne se montrent pas. ¦ Mënyra e shikimit: dosjet e trashëgimisë nuk shfaqen. ¦ Modalità ta’ wiri: il-fajls tas-suċċessjoni ma jidhrux.
 Rien à noter. ¦ Asgjë për të shënuar. ¦ Xejn x’jitniżżel.
 Calcul manquant. ¦ Mungon llogaritja. ¦ Il-kalkolu nieqes.
+Dossiers ¦ Dosjet ¦ Fajls
+Héritiers à contacter ¦ Trashëgimtarë për t’u kontaktuar ¦ Werrieta li jridu jiġu kkuntattjati
+Que montrer ¦ Çfarë të shfaqet ¦ X’għandu jintwera
+Lecture des héritiers… ¦ Po lexohen trashëgimtarët… ¦ Qed jinqraw il-werrieta…
+Lecture des courriers… ¦ Po lexohen letrat… ¦ Qed jinqraw l-ittri…
+Voir toute la liste ↗ ¦ Shih gjithë listën ↗ ¦ Ara l-lista kollha ↗
+Aucun courrier ¦ Asnjë letër ¦ L-ebda ittra
+Courrier envoyé ¦ Letër e dërguar ¦ Ittra mibgħuta
+Réponse : {r} ¦ Përgjigje: {r} ¦ Tweġiba: {r}
+Courrier envoyé le {d} ¦ Letër e dërguar më {d} ¦ Ittra mibgħuta fi {d}
+Aucun héritier à contacter dans les dossiers en cours. ¦ Asnjë trashëgimtar për t’u kontaktuar në dosjet e hapura. ¦ L-ebda werriet x’jiġi kkuntattjat fil-fajls miftuħa.
+Les héritiers vivants (ou au statut inconnu) des dossiers ouverts viennent ici, avec leur adresse et l’état du contact. ¦ Këtu shfaqen trashëgimtarët e gjallë (ose me status të panjohur) të dosjeve të hapura, me adresën dhe gjendjen e kontaktit. ¦ Il-werrieta ħajjin (jew bi status mhux magħruf) tal-fajls miftuħa jidhru hawn, bl-indirizz tagħhom u l-istat tal-kuntatt.
+Chercher… (nom, dossier, ville) ¦ Kërko… (emër, dosje, vend) ¦ Fittex… (isem, fajl, post)
+Tous les dossiers ¦ Të gjitha dosjet ¦ Il-fajls kollha
+État du contact ¦ Gjendja e kontaktit ¦ Stat tal-kuntatt
+Par dossier ¦ Sipas dosjes ¦ Skont il-fajl
+À contacter d’abord ¦ Për t’u kontaktuar së pari ¦ L-ewwel dawk li jridu jiġu kkuntattjati
+Aucun héritier ne correspond. ¦ Asnjë trashëgimtar nuk përputhet. ¦ L-ebda werriet ma jaqbel.
+📇 Compléter l’adresse ¦ 📇 Plotëso adresën ¦ 📇 Imla l-indirizz
+adresse à trouver ¦ adresa për t’u gjetur ¦ indirizz x’jinstab
+Courriel ¦ Email ¦ Email
+Héritiers à contacter exportés (CSV) ¦ Trashëgimtarët për t’u kontaktuar u eksportuan (CSV) ¦ Werrieta li jridu jiġu kkuntattjati esportati (CSV)
+Héritier à l’étranger ¦ Trashëgimtar jashtë vendit ¦ Werriet barra l-pajjiż
+Demande d’acte ¦ Kërkesë për akt ¦ Talba għal att
+Aucun courrier de succession pour l’instant. ¦ Ende asnjë letër trashëgimie. ¦ Għad m’hemm l-ebda ittra tas-suċċessjoni.
+Les courriers écrits depuis un dossier (✉️ Héritiers contactés, 📑 Pièces) viennent ici. ¦ Këtu shfaqen letrat e shkruara nga një dosje (✉️ Trashëgimtarë të kontaktuar, 📑 Aktet). ¦ L-ittri miktuba minn fajl (✉️ Werrieta kkuntattjati, 📑 Dokumenti) jidhru hawn.
+Chercher… (destinataire, dossier) ¦ Kërko… (marrës, dosje) ¦ Fittex… (destinatarju, fajl)
+Aucun courrier ne correspond. ¦ Asnjë letër nuk përputhet. ¦ L-ebda ittra ma taqbel.
+📮 COURRIER DE SUCCESSION ¦ 📮 LETËR TRASHËGIMIE ¦ 📮 ITTRA TAS-SUĊĊESSJONI
 Dévolution ¦ Rendi i trashëgimisë ¦ Devoluzzjoni
 =héritier ¦ trashëgimtar|trashëgimtarë ¦ werriet|werrieta|werrieta|werriet|werriet
 =courrier ¦ letër|letra ¦ ittra|ittri|ittri|ittra|ittra

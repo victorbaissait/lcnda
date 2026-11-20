@@ -55,7 +55,8 @@
     const prevShown = ext.listShown;
     ext.listShown = k => (k === LIST ? !hidden() : prevShown ? prevShown(k) : true);
 
-    let cur = {id: 0, data: null, R: null, tab: store.get('lcnda-succ-tab', 'dossier'), where: 'list', pieceView: 'heir'};
+    const VIEWS = [['cases', 'Dossiers'], ['heirs', 'Héritiers à contacter'], ['mail', 'Courriers']]; // le sélecteur en haut de la liste (retenu : « lcnda-succ-view »)
+    let cur = {id: 0, data: null, R: null, tab: store.get('lcnda-succ-tab', 'dossier'), where: 'list', pieceView: 'heir', view: store.get('lcnda-succ-view', 'cases')};
     const ws = () => document.getElementById('workspace');
     const sameTurn = token => token === undefined || !A().state || token === A().state.workspaceToken;
     /** ouvrir un dossier (0 = la liste), dans l'onglet ⚖️ Successions s'il est montré, sinon dans Listes */
@@ -73,10 +74,15 @@
         if (hidden()) { w.innerHTML = `<section class="page">${UI().notice('info', i18n('Les dossiers de succession ne se montrent pas en mode consultation ni en mode simple.'))}</section>`; return; }
         if (cur.id) return renderCase(w, token);
         const where = cur.where === 'tab' ? i18n('Successions') : i18n('Listes · Recherche et organisation');
+        if (!VIEWS.some(v => v[0] === cur.view)) cur.view = 'cases';
         w.innerHTML = `<section class="page succ-page">${UI().pageHeader({title: i18n('Dossiers de succession'), icon: '⚖️', where,
             help: i18n('Retrouver les héritiers d’une personne décédée, pour un notaire : un dossier par défunt. À ne pas confondre avec « 🏠 Héritages et successions » (les actes anciens des ancêtres).'),
-            actions: [`<button type="button" class="button" data-succ-new>${esc(i18n('＋ Ouvrir un dossier'))}</button>`]})}<div data-succ-body>${UI().spinner(i18n('Lecture des dossiers…'))}</div></section>`;
+            actions: [`<button type="button" class="button" data-succ-new>${esc(i18n('＋ Ouvrir un dossier'))}</button>`]})}
+            <div class="segmented succ-views" role="tablist" aria-label="${esc(i18n('Que montrer'))}">${VIEWS.map(([k, l]) => `<button type="button" role="tab" data-succ-view="${k}" class="${cur.view === k ? 'is-active' : ''}" aria-selected="${cur.view === k}">${esc(i18n(l))}</button>`).join('')}</div>
+            <div data-succ-body>${UI().spinner(i18n(cur.view === 'heirs' ? 'Lecture des héritiers…' : cur.view === 'mail' ? 'Lecture des courriers…' : 'Lecture des dossiers…'))}</div></section>`;
         const body = w.querySelector('[data-succ-body]');
+        if (cur.view === 'heirs') return heirsBoard(body, token);
+        if (cur.view === 'mail') return mailBoard(body, token);
         let d; try { d = await get('list'); } catch (e) { body.innerHTML = UI().notice('error', e.message); return; }
         if (!sameTurn(token)) return;
         const rows = d.items || [];
@@ -98,6 +104,141 @@
                 menu: [`<button type="button" data-succ-edit="${r.id}">${esc(i18n('✎ Modifier'))}</button>`, `<button type="button" class="danger" data-succ-del="${r.id}">${esc(i18n('🗑 Supprimer'))}</button>`]}))) : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">${esc(i18n('Aucun dossier ne correspond.'))}</span></p>`;
         }
         draw();
+    }
+
+    /* ═════ 👥 Héritiers à contacter : les héritiers vivants (ou au statut inconnu) de tous les dossiers en cours ═════ */
+    const CSTATE = [['none', 'Aucun courrier', 'grey'], ['sent', 'Courrier envoyé', 'blue'], ['answer', 'Réponse', 'violet'], ['signed', 'Signé', 'green']];
+    const fullLink = list => `<p class="succ-full"><button type="button" class="link-button" data-succ-full="${list}">${esc(i18n('Voir toute la liste ↗'))}</button> <small class="muted">${esc(i18n(list === 'courriers' ? 'Registre de courriers' : 'Répertoire des vivants'))}</small></p>`;
+    let board = {cases: new Map()};
+    /** l'état du contact d'un héritier dans un dossier, d'après les courriers liés */
+    function contactState(D, pid) {
+        const cs = (D.courriers || []).filter(c => c.person_id === pid && c.kind !== 'acte');
+        const signed = cs.find(c => c.signe_le), answered = cs.find(c => c.reponse && c.reponse !== 'none');
+        if (signed) return {k: 'signed', text: i18n('Signé le {d}', {d: fmtDate(signed.signe_le)})};
+        if (answered) return {k: 'answer', text: i18n('Réponse : {r}', {r: i18n((ANSWER.find(a => a[0] === answered.reponse) || ANSWER[0])[1])})};
+        if (cs.length) return {k: 'sent', text: i18n('Courrier envoyé le {d}', {d: fmtDate(cs[0].date_envoi)})};
+        return {k: 'none', text: i18n('Aucun courrier')};
+    }
+    async function heirsBoard(body, token) {
+        let d; try { d = await get('list'); } catch (e) { body.innerHTML = UI().notice('error', e.message); return; }
+        const open = (d.items || []).filter(r => !['clos', 'archive'].includes(r.state));
+        const loaded = await Promise.all(open.map(r => get('get', {id: r.id}).catch(() => null)));
+        if (!sameTurn(token) || !body.isConnected) return;
+        board = {cases: new Map()};
+        const rows = [];
+        for (const D of loaded) {
+            if (!D || D.archived || !D.deceased_id) continue;
+            const R = computeCase(D); if (!R || R.error) continue;
+            board.cases.set(D.id, {D, R});
+            for (const r of heirsToContact(R)) {
+                const t = r.unknown ? 'unknown' : r.timing;
+                if (!['surv', 'unknown', 'abs'].includes(t)) continue; // vivants, ou statut inconnu (pas les morts après le défunt : leur part va à leurs propres héritiers)
+                const a = D.addresses?.[r.id] || null, st = contactState(D, r.id);
+                rows.push({key: `${D.id}:${r.id}`, caseId: D.id, number: D.number, deceased: D.deceased || '', pid: r.id, name: r.name, kin: r.kin, share: r.share, unknown: !!r.unknown,
+                    address: a ? (a.lines || []).join(', ') : '', email: a?.email || '', phone: a?.phone || '', contactId: a?.contact_id || 0, state: st.k, stateText: st.text});
+            }
+        }
+        if (!rows.length) { body.innerHTML = A().emptyState({icon: '👥', text: i18n('Aucun héritier à contacter dans les dossiers en cours.'), hint: i18n('Les héritiers vivants (ou au statut inconnu) des dossiers ouverts viennent ici, avec leur adresse et l’état du contact.')}) + fullLink('living_contacts'); return; }
+        const cases = [...new Map(rows.map(r => [r.caseId, r.number])).entries()];
+        const bar = UI().listBar({key: 'succ:heirs', search: {placeholder: i18n('Chercher… (nom, dossier, ville)')}, view: {dflt: 'list', what: 'fiches'},
+            filters: [{id: 'case', label: i18n('Dossier'), type: 'select', options: [['', i18n('Tous les dossiers')], ...cases.map(([id, n]) => [String(id), i18n('Dossier {n}', {n})])]},
+                {id: 'state', label: i18n('État du contact'), type: 'check', options: CSTATE.map(([v, l]) => [v, i18n(l)])}],
+            sort: {options: [['case', i18n('Par dossier')], ['todo', i18n('À contacter d’abord')], ['az', i18n('A → Z')]], value: 'case'}, onChange: st => draw(st)});
+        body.innerHTML = `<div data-succ-items></div><p class="succ-csv"><button type="button" class="button small secondary" data-succ-hcsv>${esc(i18n('⤓ Exporter en CSV'))}</button></p>${fullLink('living_contacts')}`; body.prepend(bar);
+        const M = UI().listMatch;
+        let shown = rows;
+        function draw(st = bar.state) {
+            let list = rows.filter(r => M.text(st.q, r.name, r.number, r.deceased, r.address, r.email, r.kin) && (!st.filters.case || String(r.caseId) === String(st.filters.case)) && (!st.filters.state?.length || st.filters.state.includes(r.state)));
+            const rank = r => CSTATE.findIndex(c => c[0] === r.state);
+            list = st.sort === 'az' ? UI().sortItems(list, 'az', {name: r => r.name}) : st.sort === 'todo' ? [...list].sort((a, b) => rank(a) - rank(b) || a.name.localeCompare(b.name, 'fr')) : [...list].sort((a, b) => String(b.number).localeCompare(String(a.number), 'fr', {numeric: true}) || a.name.localeCompare(b.name, 'fr'));
+            shown = list;
+            bar.setCount(list.length, 'héritier', 'héritiers');
+            const write = r => (r.unknown ? '' : `<button type="button" class="button small secondary" data-succ-hwrite="${r.key}">${esc(i18n('✉️ Écrire'))}</button>`);
+            const addr = r => `<button type="button" class="button small secondary" data-succ-haddr="${r.key}">${esc(i18n('📇 Compléter l’adresse'))}</button>`;
+            body.querySelector('[data-succ-items]').innerHTML = list.length ? UI().itemsHtml(st.view, list.map(r => ({
+                thumb: '<span class="ui-card-ico" aria-hidden="true">👤</span>', name: r.name, open: `data-h-person="${r.pid}"`, attrs: `data-succ-hrow="${r.key}"`,
+                lines: [{html: `<button type="button" class="table-link" data-succ-open="${r.caseId}">${esc(i18n('Dossier {n}', {n: r.number}))}</button>${r.deceased ? ` (${esc(r.deceased)})` : ''} · ${esc(r.kin)}${r.share && r.share !== '0' ? ` · ${esc(i18n('Part'))} ${esc(r.share)}` : ''}`},
+                    {html: [r.address ? esc(r.address) : `<span class="succ-noaddr">${esc(i18n('adresse à trouver'))}</span>`, r.email ? `<a class="table-link" href="mailto:${esc(r.email)}">${esc(r.email)}</a>` : '', r.phone ? esc(r.phone) : ''].filter(Boolean).join(' · ')}],
+                badges: [{text: r.stateText, kind: (CSTATE.find(c => c[0] === r.state) || CSTATE[0])[2]}, r.unknown ? {text: i18n('Inconnu'), kind: 'yellow'} : null].filter(Boolean),
+                date: st.view === 'cards' ? '' : r.stateText,
+                actions: st.view === 'cards' ? '' : write(r) + ' ' + addr(r), quick: st.view === 'cards' ? write(r) : '', menu: st.view === 'cards' ? [addr(r)] : []}))) : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">${esc(i18n('Aucun héritier ne correspond.'))}</span></p>`;
+        }
+        draw();
+        body.querySelector('[data-succ-hcsv]').addEventListener('click', () => {
+            const cell = v => (A().csvCell ? A().csvCell(v, {sep: ';'}) : `"${String(v ?? '').replace(/"/g, '""')}"`);
+            const head = ['Héritier', 'Dossier', 'Défunt', 'Lien avec le défunt', 'Part', 'Adresse', 'Courriel', 'Téléphone', 'État du contact'].map(h => cell(i18n(h)));
+            const csv = '﻿' + [head.join(';'), ...shown.map(r => [r.name, r.number, r.deceased, r.kin, r.share, r.address || i18n('adresse à trouver'), r.email, r.phone, r.stateText].map(cell).join(';'))].join('\r\n');
+            const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = 'heritiers-a-contacter.csv'; document.body.appendChild(a); a.click(); a.remove();
+            setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+            toast(i18n('Héritiers à contacter exportés (CSV)'));
+            for (const id of new Set(shown.map(r => r.caseId))) { const c = board.cases.get(id); if (c) journal(c.D, 'export', i18n('Héritiers à contacter exportés (CSV)')); }
+        });
+    }
+    /** 📇 Compléter l'adresse : la fiche du Répertoire des vivants (ou un nouveau contact relié à la fiche de l'héritier) */
+    async function openLiving(contactId, pid, name) {
+        A().state.listType = 'living_contacts'; await A().setModule('listes');
+        for (let i = 0; i < 50; i++) {
+            const b = contactId ? document.querySelector(`[data-edit-living-contact="${contactId}"]`) : document.getElementById('add-living-contact');
+            if (b) {
+                b.click();
+                const f = document.getElementById('living-contact-form');
+                if (!contactId && f) { const parts = String(name || '').trim().split(/\s+/); const last = parts.filter(x => x === x.toUpperCase() && /\p{L}/u.test(x)); const first = parts.filter(x => !last.includes(x)); f.elements.first_name.value = first.join(' '); f.elements.last_name.value = last.join(' '); if (f.elements.person_id) f.elements.person_id.value = String(pid); if (f.elements.linked_person_search) f.elements.linked_person_search.value = name || ''; const sel = f.querySelector('#living-contact-person-selected'); if (sel) sel.textContent = i18n('Fiche liée : {name}.', {name}); }
+                f?.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+                return;
+            }
+            await new Promise(r => setTimeout(r, 120));
+        }
+        toast(i18n('Répertoire des vivants : « ＋ Contact », puis relie la fiche de l’héritier.'));
+    }
+
+    /* ═════ 📮 Courriers : seulement ceux des dossiers de succession ═════ */
+    const KIND = {contact: 'Premier contact', contrat: 'Contrat de révélation', relance: 'Relance', etranger: 'Héritier à l’étranger', acte: 'Demande d’acte'};
+    const kindLabel = k => i18n(KIND[k] || 'Demande d’acte');
+    let mailRows = [];
+    async function mailBoard(body, token) {
+        let d; try { d = await get('courriers'); } catch (e) { body.innerHTML = UI().notice('error', e.message); return; }
+        if (!sameTurn(token) || !body.isConnected) return;
+        mailRows = d.items || [];
+        if (!mailRows.length) { body.innerHTML = A().emptyState({icon: '📮', text: i18n('Aucun courrier de succession pour l’instant.'), hint: i18n('Les courriers écrits depuis un dossier (✉️ Héritiers contactés, 📑 Pièces) viennent ici.')}) + fullLink('courriers'); return; }
+        const cases = [...new Map(mailRows.map(r => [r.case_id, r.number])).entries()];
+        const statuts = (A().courrierStatuts || [['envoye', 'Envoyé'], ['en_attente', 'En attente'], ['reponse_recue', 'Réponse reçue']]);
+        const bar = UI().listBar({key: 'succ:mail', search: {placeholder: i18n('Chercher… (destinataire, dossier)')},
+            filters: [{id: 'case', label: i18n('Dossier'), type: 'select', options: [['', i18n('Tous les dossiers')], ...cases.map(([id, n]) => [String(id), i18n('Dossier {n}', {n})])]},
+                {id: 'rep', label: i18n('Réponse'), type: 'check', options: ANSWER.map(([v, l]) => [v || 'nil', v ? i18n(l) : i18n('Pas encore')])},
+                {id: 'statut', label: i18n('État'), type: 'check', options: statuts.map(([v, l]) => [v, i18n(l)])}],
+            sort: {options: [['recent', i18n('Les plus récents')], ['old', i18n('Les plus anciens')], ['az', i18n('A → Z')]], value: 'recent'}, onChange: st => draw(st)});
+        body.innerHTML = `<div class="succ-scroll"><table class="succ-table succ-mail"><thead><tr><th>${esc(i18n('Dossier'))}</th><th>${esc(i18n('Destinataire'))}</th><th>${esc(i18n('Sorte'))}</th><th>${esc(i18n('Date'))}</th><th>${esc(i18n('Réponse'))}</th><th>${esc(i18n('Signé le'))}</th><th></th></tr></thead><tbody data-succ-mrows></tbody></table></div><p class="ui-hint succ-swipe">${esc(i18n('↔ Faire glisser le tableau.'))}</p>${fullLink('courriers')}`;
+        body.prepend(bar);
+        const M = UI().listMatch;
+        function draw(st = bar.state) {
+            let list = mailRows.filter(r => M.text(st.q, r.destinataire, r.number, r.objet, r.title) && (!st.filters.case || String(r.case_id) === String(st.filters.case)) && (!st.filters.rep?.length || st.filters.rep.includes(r.reponse || 'nil')) && (!st.filters.statut?.length || st.filters.statut.includes(r.statut)));
+            list = st.sort === 'az' ? UI().sortItems(list, 'az', {name: r => r.destinataire}) : UI().sortItems(list, st.sort === 'old' ? 'old' : 'recent', {date: r => `${r.date_envoi} ${String(r.id).padStart(9, '0')}`});
+            bar.setCount(list.length, 'courrier', 'courriers');
+            body.querySelector('[data-succ-mrows]').innerHTML = list.length ? list.map(r => `<tr data-succ-mrow="${r.id}"><td><button type="button" class="table-link" data-succ-open="${r.case_id}">${esc(r.number)}</button></td>
+                <td>${r.person_id ? `<button type="button" class="table-link" data-h-person="${r.person_id}">${esc(r.destinataire)}</button>` : esc(r.destinataire || '—')}</td><td>${esc(kindLabel(r.kind))}</td><td>${esc(fmtDate(r.date_envoi) || '—')}</td>
+                <td>${r.reponse ? esc(i18n((ANSWER.find(a => a[0] === r.reponse) || ANSWER[0])[1])) : '—'}</td><td>${r.signe_le ? esc(fmtDate(r.signe_le)) : '—'}</td>
+                <td class="succ-mact"><button type="button" class="button small secondary" data-succ-mopen="${r.id}">${esc(i18n('Ouvrir'))}</button> <button type="button" class="button small secondary danger" data-succ-mdel="${r.id}">${esc(i18n('🗑 Supprimer'))}</button></td></tr>`).join('')
+                : `<tr><td colspan="7">${esc(i18n('Aucun courrier ne correspond.'))}</td></tr>`;
+        }
+        draw();
+    }
+    /** ouvrir un courrier de succession : la lettre, la réponse et la signature */
+    function mailDialog(r) {
+        const ro = r.case_state === 'archive';
+        return ext.openDialog({eyebrow: i18n('📮 COURRIER DE SUCCESSION'), title: r.objet || kindLabel(r.kind), wide: true, submitLabel: ro ? 'Fermer' : i18n('Enregistrer'),
+            body: `<div class="succ-form"><p>${esc(i18n('Dossier {n}', {n: r.number}))} · ${esc(r.destinataire || '—')} · ${esc(kindLabel(r.kind))} · ${esc(fmtDate(r.date_envoi) || '—')}${r.relance_date ? ` · ${esc(i18n('Relance'))} ${esc(fmtDate(r.relance_date))}` : ''}</p>
+                <div class="succ-2"><label>${esc(i18n('Réponse'))}<select name="reponse" ${ro ? 'disabled' : ''}>${ANSWER.map(([v, l]) => `<option value="${v}"${r.reponse === v ? ' selected' : ''}>${esc(i18n(l))}</option>`).join('')}</select></label>
+                <label>${esc(i18n('Signé le'))}<input type="date" name="signe_le" value="${esc(r.signe_le || '')}" ${ro || r.kind === 'acte' ? 'disabled' : ''}></label></div>
+                ${r.letter ? `<label>${esc(i18n('La lettre'))}<textarea rows="12" readonly class="cl-letter">${esc(r.letter)}</textarea></label>` : ''}
+                <div class="cl-out">${r.letter ? `<button type="button" class="button small secondary" data-succ-mprint>${esc(i18n('🖨 Imprimer'))}</button>` : ''}<button type="button" class="button small secondary" data-succ-full="courriers">${esc(i18n('↗ Registre de courriers'))}</button></div></div>`,
+            onOpen: d => d.querySelector('[data-succ-mprint]')?.addEventListener('click', () => UI().openPrintDialog({title: r.objet || kindLabel(r.kind), key: 'courrier', paper: 'A4', orientation: 'portrait', photos: false, html: `<section data-k-page style="font:11pt/1.5 Georgia,serif;white-space:pre-wrap">${esc(r.letter)}</section>`})),
+            onSubmit: ro ? () => {} : async form => {
+                const body = {}; if (form.reponse.value !== (r.reponse || '')) body.reponse = form.reponse.value; if (!form.signe_le.disabled && form.signe_le.value !== (r.signe_le || '')) body.signe_le = form.signe_le.value;
+                if (!Object.keys(body).length) return;
+                let res; try { res = await post({op: 'courrier_set', courrier_id: r.id, ...body}); } catch (e) { toast(e.message, 'error'); return false; }
+                A().undoToast(i18n('Courrier mis à jour'), {undo: async () => { await post({op: 'courrier_set', courrier_id: r.id, undo: 1, ...res.prev}); render(); }});
+                render();
+            }});
     }
 
     /* ═════ ＋ Ouvrir un dossier / ✎ Modifier (fenêtre K6) ═════ */
@@ -606,6 +747,12 @@
         if (t.closest('[data-succ-back]')) { e.preventDefault(); return openCase(0); }
         const ed = t.closest('[data-succ-edit]'); if (ed) { e.preventDefault(); const id = Number(ed.dataset.succEdit); const D = cur.data?.id === id ? cur.data : await get('get', {id}).catch(err => (toast(err.message, 'error'), null)); if (D) caseDialog(D); return; }
         const del = t.closest('[data-succ-del]'); if (del) { e.preventDefault(); return deleteCase(del.dataset.succDel); }
+        const vw = t.closest('[data-succ-view]'); if (vw) { e.preventDefault(); cur.view = vw.dataset.succView; store.set('lcnda-succ-view', cur.view); return render(); }
+        const full = t.closest('[data-succ-full]'); if (full) { e.preventDefault(); t.closest('dialog')?.close?.(); A().state.listType = full.dataset.succFull === 'courriers' ? 'courriers' : 'living_contacts'; return A().setModule('listes'); }
+        const hw = t.closest('[data-succ-hwrite]'); if (hw) { e.preventDefault(); const [cid, pid] = hw.dataset.succHwrite.split(':').map(Number); const c = board.cases.get(cid); if (!c) return; return letterDialog(c.D, c.R, c.D.courriers.some(x => x.person_id === pid && x.kind !== 'acte') ? 'relance' : 'contact', pid); }
+        const ha = t.closest('[data-succ-haddr]'); if (ha) { e.preventDefault(); const [cid, pid] = ha.dataset.succHaddr.split(':').map(Number); const c = board.cases.get(cid); const a = c?.D.addresses?.[pid]; return openLiving(a?.contact_id || 0, pid, c ? nameOf(c.D, pid) : ''); }
+        const mo = t.closest('[data-succ-mopen]'); if (mo) { e.preventDefault(); const r = mailRows.find(x => x.id === Number(mo.dataset.succMopen)); if (r) mailDialog(r); return; }
+        const md = t.closest('[data-succ-mdel]'); if (md) { e.preventDefault(); const id = Number(md.dataset.succMdel); return A().deleteWithUndo({action: 'delete_courrier', body: {id}, type: 'courrier', id, message: 'Courrier supprimé du registre', after: () => render()}); }
         if (!cur.data || !t.closest('[data-succ-case], dialog')) return;
         const D = cur.data, R = cur.R;
         const tab = t.closest('[data-succ-tab]'); if (tab) { cur.tab = tab.dataset.succTab; store.set('lcnda-succ-tab', cur.tab); return render(); }

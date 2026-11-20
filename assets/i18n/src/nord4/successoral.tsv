@@ -459,8 +459,8 @@ Sans objet ¦ Ei koske ¦ Nem releváns
 02 — HÉRITIERS ¦ 02 — PERILLISET ¦ 02 — ÖRÖKÖSÖK
 Généalogiste successoral ¦ Perintögenealogi ¦ Örökléskutató genealógus
 Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ Vainajan perillisten etsiminen notaarille. ¦ Egy elhunyt örököseinek felkutatása közjegyző számára.
-+ ⚖️ Successions. Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Perinnöt. Ensimmäinen näkymä: ”Avaa kansio”. ¦ + ⚖️ Hagyatékok. Első képernyő: „Ügy megnyitása”.
-⚖️ Successions, 📇 Vivants, 📮 Courriers. ¦ ⚖️ Perinnöt, 📇 Elävät, 📮 Kirjeet. ¦ ⚖️ Hagyatékok, 📇 Élők, 📮 Levelek.
++ ⚖️ Successions (Dossiers · Héritiers à contacter · Courriers). Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Perinnöt (Asiakirjat · Yhteyttä otettavat perilliset · Kirjeet). Ensimmäinen näkymä: ”Avaa asiakirja”. ¦ + ⚖️ Hagyatékok (Ügyiratok · Megkeresendő örökösök · Levelek). Első képernyő: „Ügyirat megnyitása”.
+⚖️ Successions : dossiers, héritiers à contacter, courriers. ¦ ⚖️ Perinnöt: asiakirjat, yhteyttä otettavat perilliset, kirjeet. ¦ ⚖️ Hagyatékok: ügyiratok, megkeresendő örökösök, levelek.
 ⚖️ Successions ¦ ⚖️ Perinnöt ¦ ⚖️ Hagyatékok
 Vivants ¦ Elävät ¦ Élők
 Courriers ¦ Kirjeet ¦ Levelek
@@ -488,6 +488,35 @@ Seul un dossier clos peut être archivé. ¦ Vain suljetun kansion voi arkistoid
 Mode consultation : les dossiers de succession ne se montrent pas. ¦ Katselutila: perunkirjoituskansioita ei näytetä. ¦ Megtekintő mód: a hagyatéki ügyek nem jelennek meg.
 Rien à noter. ¦ Ei mitään kirjattavaa. ¦ Nincs mit rögzíteni.
 Calcul manquant. ¦ Laskelma puuttuu. ¦ Hiányzik a számítás.
+Dossiers ¦ Asiakirjat ¦ Ügyiratok
+Héritiers à contacter ¦ Yhteyttä otettavat perilliset ¦ Megkeresendő örökösök
+Que montrer ¦ Mitä näytetään ¦ Mit mutasson
+Lecture des héritiers… ¦ Luetaan perillisiä… ¦ Örökösök beolvasása…
+Lecture des courriers… ¦ Luetaan kirjeitä… ¦ Levelek beolvasása…
+Voir toute la liste ↗ ¦ Näytä koko lista ↗ ¦ A teljes lista ↗
+Aucun courrier ¦ Ei kirjettä ¦ Nincs levél
+Courrier envoyé ¦ Kirje lähetetty ¦ Levél elküldve
+Réponse : {r} ¦ Vastaus: {r} ¦ Válasz: {r}
+Courrier envoyé le {d} ¦ Kirje lähetetty {d} ¦ Levél elküldve: {d}
+Aucun héritier à contacter dans les dossiers en cours. ¦ Avoimissa asiakirjoissa ei ole perillisiä, joihin pitäisi ottaa yhteyttä. ¦ A folyamatban lévő ügyiratokban nincs megkeresendő örökös.
+Les héritiers vivants (ou au statut inconnu) des dossiers ouverts viennent ici, avec leur adresse et l’état du contact. ¦ Avoimien asiakirjojen elossa olevat perilliset (tai joiden tila on tuntematon) näkyvät tässä osoitteineen ja yhteydenoton tilanteineen. ¦ A nyitott ügyiratok élő (vagy ismeretlen állapotú) örökösei itt jelennek meg, címükkel és a kapcsolatfelvétel állásával.
+Chercher… (nom, dossier, ville) ¦ Hae… (nimi, asiakirja, paikkakunta) ¦ Keresés… (név, ügyirat, település)
+Tous les dossiers ¦ Kaikki asiakirjat ¦ Minden ügyirat
+État du contact ¦ Yhteydenoton tila ¦ Kapcsolatfelvétel állása
+Par dossier ¦ Asiakirjoittain ¦ Ügyirat szerint
+À contacter d’abord ¦ Ensin yhteyttä otettavat ¦ Előbb a megkeresendők
+Aucun héritier ne correspond. ¦ Yksikään perillinen ei vastaa hakua. ¦ Egyetlen örökös sem felel meg.
+📇 Compléter l’adresse ¦ 📇 Täydennä osoite ¦ 📇 Cím kiegészítése
+adresse à trouver ¦ osoite selvitettävä ¦ a cím még nincs meg
+Courriel ¦ Sähköposti ¦ E-mail
+Héritiers à contacter exportés (CSV) ¦ Yhteyttä otettavat perilliset viety (CSV) ¦ Megkeresendő örökösök exportálva (CSV)
+Héritier à l’étranger ¦ Perillinen ulkomailla ¦ Örökös külföldön
+Demande d’acte ¦ Asiakirjapyyntö ¦ Anyakönyvi kivonat kérése
+Aucun courrier de succession pour l’instant. ¦ Ei vielä perintökirjeitä. ¦ Még nincs hagyatéki levél.
+Les courriers écrits depuis un dossier (✉️ Héritiers contactés, 📑 Pièces) viennent ici. ¦ Asiakirjasta kirjoitetut kirjeet (✉️ Perillisiin otettu yhteyttä, 📑 Asiakirjat) näkyvät tässä. ¦ Az ügyiratból írt levelek (✉️ Megkeresett örökösök, 📑 Iratok) itt jelennek meg.
+Chercher… (destinataire, dossier) ¦ Hae… (vastaanottaja, asiakirja) ¦ Keresés… (címzett, ügyirat)
+Aucun courrier ne correspond. ¦ Yksikään kirje ei vastaa hakua. ¦ Egyetlen levél sem felel meg.
+📮 COURRIER DE SUCCESSION ¦ 📮 PERINTÖKIRJE ¦ 📮 HAGYATÉKI LEVÉL
 Dévolution ¦ Perimysjärjestys ¦ Öröklési rend
 =héritier ¦ perillinen|perillistä ¦ örökös|örökös
 =courrier ¦ kirje|kirjettä ¦ levél|levél

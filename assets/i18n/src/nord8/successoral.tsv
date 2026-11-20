@@ -459,8 +459,8 @@ Sans objet ¦ Geçerli değil
 02 — HÉRITIERS ¦ 02 — MİRASÇILAR
 Généalogiste successoral ¦ Miras soy araştırmacısı
 Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ Ölmüş bir kişinin mirasçılarını bir noter için bulmak.
-+ ⚖️ Successions. Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Miraslar. İlk ekran: “Dosya aç”.
-⚖️ Successions, 📇 Vivants, 📮 Courriers. ¦ ⚖️ Miraslar, 📇 Yaşayanlar, 📮 Mektuplar.
++ ⚖️ Successions (Dossiers · Héritiers à contacter · Courriers). Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Miraslar (Dosyalar · İletişime geçilecek mirasçılar · Mektuplar). İlk ekran: “Dosya aç”.
+⚖️ Successions : dossiers, héritiers à contacter, courriers. ¦ ⚖️ Miraslar: dosyalar, iletişime geçilecek mirasçılar, mektuplar.
 ⚖️ Successions ¦ ⚖️ Miraslar
 Vivants ¦ Yaşayanlar
 Courriers ¦ Mektuplar
@@ -488,6 +488,35 @@ Seul un dossier clos peut être archivé. ¦ Yalnızca kapalı bir dosya arşivl
 Mode consultation : les dossiers de succession ne se montrent pas. ¦ Görüntüleme modu: miras dosyaları gösterilmez.
 Rien à noter. ¦ Kaydedilecek bir şey yok.
 Calcul manquant. ¦ Hesap eksik.
+Dossiers ¦ Dosyalar
+Héritiers à contacter ¦ İletişime geçilecek mirasçılar
+Que montrer ¦ Ne gösterilsin
+Lecture des héritiers… ¦ Mirasçılar okunuyor…
+Lecture des courriers… ¦ Mektuplar okunuyor…
+Voir toute la liste ↗ ¦ Tüm listeyi gör ↗
+Aucun courrier ¦ Mektup yok
+Courrier envoyé ¦ Mektup gönderildi
+Réponse : {r} ¦ Yanıt: {r}
+Courrier envoyé le {d} ¦ Mektup {d} tarihinde gönderildi
+Aucun héritier à contacter dans les dossiers en cours. ¦ Açık dosyalarda iletişime geçilecek mirasçı yok.
+Les héritiers vivants (ou au statut inconnu) des dossiers ouverts viennent ici, avec leur adresse et l’état du contact. ¦ Açık dosyaların yaşayan (ya da durumu bilinmeyen) mirasçıları adresleri ve iletişim durumuyla burada görünür.
+Chercher… (nom, dossier, ville) ¦ Ara… (ad, dosya, yer)
+Tous les dossiers ¦ Tüm dosyalar
+État du contact ¦ İletişim durumu
+Par dossier ¦ Dosyaya göre
+À contacter d’abord ¦ Önce iletişime geçilecekler
+Aucun héritier ne correspond. ¦ Eşleşen mirasçı yok.
+📇 Compléter l’adresse ¦ 📇 Adresi tamamla
+adresse à trouver ¦ adres bulunacak
+Courriel ¦ E-posta
+Héritiers à contacter exportés (CSV) ¦ İletişime geçilecek mirasçılar dışa aktarıldı (CSV)
+Héritier à l’étranger ¦ Yurt dışındaki mirasçı
+Demande d’acte ¦ Kayıt örneği talebi
+Aucun courrier de succession pour l’instant. ¦ Henüz miras mektubu yok.
+Les courriers écrits depuis un dossier (✉️ Héritiers contactés, 📑 Pièces) viennent ici. ¦ Bir dosyadan yazılan mektuplar (✉️ İletişime geçilen mirasçılar, 📑 Belgeler) burada görünür.
+Chercher… (destinataire, dossier) ¦ Ara… (alıcı, dosya)
+Aucun courrier ne correspond. ¦ Eşleşen mektup yok.
+📮 COURRIER DE SUCCESSION ¦ 📮 MİRAS MEKTUBU
 Dévolution ¦ Miras sırası
 =héritier ¦ mirasçı|mirasçı
 =courrier ¦ mektup|mektup

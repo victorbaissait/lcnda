@@ -459,8 +459,8 @@ Sans objet ¦ Á ekki við
 02 — HÉRITIERS ¦ 02 — ERFINGJAR
 Généalogiste successoral ¦ Erfðaættfræðingur
 Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ Finna erfingja látins einstaklings fyrir lögbókanda.
-+ ⚖️ Successions. Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Dánarbú. Fyrsti skjár: „Opna mál“.
-⚖️ Successions, 📇 Vivants, 📮 Courriers. ¦ ⚖️ Dánarbú, 📇 Lifandi, 📮 Bréf.
++ ⚖️ Successions (Dossiers · Héritiers à contacter · Courriers). Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Dánarbú (Skrár · Erfingjar til að hafa samband við · Bréf). Fyrsti skjár: „Opna skrá“.
+⚖️ Successions : dossiers, héritiers à contacter, courriers. ¦ ⚖️ Dánarbú: skrár, erfingjar til að hafa samband við, bréf.
 ⚖️ Successions ¦ ⚖️ Dánarbú
 Vivants ¦ Lifandi
 Courriers ¦ Bréf
@@ -488,6 +488,35 @@ Seul un dossier clos peut être archivé. ¦ Aðeins lokað mál má setja í sk
 Mode consultation : les dossiers de succession ne se montrent pas. ¦ Skoðunarhamur: dánarbúsmál eru ekki sýnd.
 Rien à noter. ¦ Ekkert að skrá.
 Calcul manquant. ¦ Útreikning vantar.
+Dossiers ¦ Skrár
+Héritiers à contacter ¦ Erfingjar til að hafa samband við
+Que montrer ¦ Hvað á að sýna
+Lecture des héritiers… ¦ Les erfingjana…
+Lecture des courriers… ¦ Les bréfin…
+Voir toute la liste ↗ ¦ Sjá allan listann ↗
+Aucun courrier ¦ Ekkert bréf
+Courrier envoyé ¦ Bréf sent
+Réponse : {r} ¦ Svar: {r}
+Courrier envoyé le {d} ¦ Bréf sent {d}
+Aucun héritier à contacter dans les dossiers en cours. ¦ Enginn erfingi til að hafa samband við í opnum skrám.
+Les héritiers vivants (ou au statut inconnu) des dossiers ouverts viennent ici, avec leur adresse et l’état du contact. ¦ Lifandi erfingjar (eða með óþekkta stöðu) í opnum skrám birtast hér, með heimilisfangi og stöðu sambandsins.
+Chercher… (nom, dossier, ville) ¦ Leita… (nafn, skrá, staður)
+Tous les dossiers ¦ Allar skrár
+État du contact ¦ Staða sambands
+Par dossier ¦ Eftir skrá
+À contacter d’abord ¦ Fyrst þeir sem á að hafa samband við
+Aucun héritier ne correspond. ¦ Enginn erfingi passar.
+📇 Compléter l’adresse ¦ 📇 Fylla út heimilisfang
+adresse à trouver ¦ heimilisfang vantar
+Courriel ¦ Netfang
+Héritiers à contacter exportés (CSV) ¦ Erfingjar til að hafa samband við fluttir út (CSV)
+Héritier à l’étranger ¦ Erfingi erlendis
+Demande d’acte ¦ Beiðni um vottorð
+Aucun courrier de succession pour l’instant. ¦ Engin dánarbúsbréf enn.
+Les courriers écrits depuis un dossier (✉️ Héritiers contactés, 📑 Pièces) viennent ici. ¦ Bréf skrifuð úr skrá (✉️ Erfingjar sem haft var samband við, 📑 Skjöl) birtast hér.
+Chercher… (destinataire, dossier) ¦ Leita… (viðtakandi, skrá)
+Aucun courrier ne correspond. ¦ Ekkert bréf passar.
+📮 COURRIER DE SUCCESSION ¦ 📮 DÁNARBÚSBRÉF
 Dévolution ¦ Erfðaröð
 =héritier ¦ erfingi|erfingjar
 =courrier ¦ bréf|bréf

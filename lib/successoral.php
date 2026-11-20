@@ -660,8 +660,11 @@ function successoral_api_get(PDO $pdo, array $g): array
         'deadlines' => ['items' => array_map(static fn($r) => ['id' => (int) $r['id'], 'due' => (string) $r['due'], 'label' => (string) $r['label'], 'case_id' => (int) $r['case_id'], 'number' => (string) $r['number'], 'title' => (string) $r['title']],
             $pdo->query("SELECT d.id, d.due, d.label, c.id AS case_id, c.number, c.title FROM succ_deadlines d JOIN succ_cases c ON c.id=d.case_id WHERE d.deleted_at IS NULL AND d.done=0 AND c.deleted_at IS NULL AND c.state NOT IN ('clos','archive') ORDER BY d.due LIMIT 50")->fetchAll(PDO::FETCH_ASSOC)),
             'open' => (int) $pdo->query("SELECT COUNT(*) FROM succ_cases WHERE deleted_at IS NULL AND state NOT IN ('clos','archive')")->fetchColumn()],
-        'courriers' => ['items' => array_map(static fn($r) => ['id' => (int) $r['id'], 'case_id' => (int) $r['succ_case_id'], 'number' => (string) $r['number'], 'reponse' => (string) $r['reponse'], 'signe_le' => (string) $r['signe_le'], 'kind' => (string) $r['succ_kind']],
-            $pdo->query('SELECT k.id, k.succ_case_id, k.reponse, k.signe_le, k.succ_kind, c.number FROM courriers k JOIN succ_cases c ON c.id=k.succ_case_id WHERE c.deleted_at IS NULL')->fetchAll(PDO::FETCH_ASSOC))],
+        // seulement les courriers rangés par un dossier de succession (succ_case_id non nul) ; « letter » = le texte de la lettre (sans le nom du défunt)
+        'courriers' => ['items' => array_map(static fn($r) => ['id' => (int) $r['id'], 'case_id' => (int) $r['succ_case_id'], 'number' => (string) $r['number'], 'title' => (string) $r['title'], 'case_state' => (string) $r['state'],
+            'reponse' => (string) $r['reponse'], 'signe_le' => (string) $r['signe_le'], 'kind' => (string) $r['succ_kind'], 'person_id' => (int) $r['person_id'] ?: null, 'destinataire' => (string) $r['destinataire'],
+            'objet' => (string) $r['objet'], 'date_envoi' => (string) $r['date_envoi'], 'statut' => (string) $r['statut'], 'relance_date' => (string) $r['relance_date'], 'letter' => (string) $r['notes']],
+            $pdo->query('SELECT k.id, k.succ_case_id, k.reponse, k.signe_le, k.succ_kind, k.person_id, k.destinataire, k.objet, k.date_envoi, k.statut, k.relance_date, k.notes, c.number, c.title, c.state FROM courriers k JOIN succ_cases c ON c.id=k.succ_case_id WHERE k.succ_case_id IS NOT NULL AND c.deleted_at IS NULL ORDER BY k.date_envoi DESC, k.id DESC')->fetchAll(PDO::FETCH_ASSOC))],
         default => throw new LcndaBadInput('Demande inconnue.'),
     };
 }

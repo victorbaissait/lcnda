@@ -459,8 +459,8 @@ Sans objet ¦ Ne primjenjuje se ¦ Ni relevantno
 02 — HÉRITIERS ¦ 02 — NASLJEDNICI ¦ 02 — DEDIČI
 Généalogiste successoral ¦ Genealog za nasljedstva ¦ Dedni genealog
 Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ Pronaći nasljednike preminule osobe za javnog bilježnika. ¦ Najti dediče umrle osebe za notarja.
-+ ⚖️ Successions. Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Ostavine. Prvi zaslon: „Otvori spis”. ¦ + ⚖️ Zapuščine. Prvi zaslon: »Odpri spis«.
-⚖️ Successions, 📇 Vivants, 📮 Courriers. ¦ ⚖️ Ostavine, 📇 Živi, 📮 Pisma. ¦ ⚖️ Zapuščine, 📇 Živi, 📮 Pisma.
++ ⚖️ Successions (Dossiers · Héritiers à contacter · Courriers). Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Ostavine (Spisi · Nasljednici za kontaktirati · Pisma). Prvi zaslon: „Otvori spis”. ¦ + ⚖️ Dediščine (Spisi · Dediči za stik · Pisma). Prvi zaslon: »Odpri spis«.
+⚖️ Successions : dossiers, héritiers à contacter, courriers. ¦ ⚖️ Ostavine: spisi, nasljednici za kontaktirati, pisma. ¦ ⚖️ Dediščine: spisi, dediči za stik, pisma.
 ⚖️ Successions ¦ ⚖️ Ostavine ¦ ⚖️ Zapuščine
 Vivants ¦ Živi ¦ Živi
 Courriers ¦ Pisma ¦ Pisma
@@ -488,6 +488,35 @@ Seul un dossier clos peut être archivé. ¦ Arhivirati se može samo zatvoreni 
 Mode consultation : les dossiers de succession ne se montrent pas. ¦ Način pregledavanja: ostavinski spisi se ne prikazuju. ¦ Način ogledovanja: zapuščinski spisi se ne prikazujejo.
 Rien à noter. ¦ Ništa za zabilježiti. ¦ Ničesar za zabeležiti.
 Calcul manquant. ¦ Nedostaje izračun. ¦ Manjka izračun.
+Dossiers ¦ Spisi ¦ Spisi
+Héritiers à contacter ¦ Nasljednici za kontaktirati ¦ Dediči za stik
+Que montrer ¦ Što prikazati ¦ Kaj prikazati
+Lecture des héritiers… ¦ Čitanje nasljednika… ¦ Branje dedičev…
+Lecture des courriers… ¦ Čitanje pisama… ¦ Branje pisem…
+Voir toute la liste ↗ ¦ Pogledaj cijeli popis ↗ ¦ Poglej ves seznam ↗
+Aucun courrier ¦ Nema pisma ¦ Ni pisma
+Courrier envoyé ¦ Pismo poslano ¦ Pismo poslano
+Réponse : {r} ¦ Odgovor: {r} ¦ Odgovor: {r}
+Courrier envoyé le {d} ¦ Pismo poslano {d} ¦ Pismo poslano {d}
+Aucun héritier à contacter dans les dossiers en cours. ¦ Nema nasljednika za kontaktirati u otvorenim spisima. ¦ V odprtih spisih ni dediča za stik.
+Les héritiers vivants (ou au statut inconnu) des dossiers ouverts viennent ici, avec leur adresse et l’état du contact. ¦ Ovdje se pojavljuju živi nasljednici (ili nepoznatog statusa) iz otvorenih spisa, s adresom i stanjem kontakta. ¦ Tu se pokažejo živi dediči (ali z neznanim statusom) iz odprtih spisov, z naslovom in stanjem stika.
+Chercher… (nom, dossier, ville) ¦ Traži… (ime, spis, mjesto) ¦ Išči… (ime, spis, kraj)
+Tous les dossiers ¦ Svi spisi ¦ Vsi spisi
+État du contact ¦ Stanje kontakta ¦ Stanje stika
+Par dossier ¦ Po spisu ¦ Po spisu
+À contacter d’abord ¦ Prvo za kontaktirati ¦ Najprej za stik
+Aucun héritier ne correspond. ¦ Nijedan nasljednik ne odgovara. ¦ Noben dedič se ne ujema.
+📇 Compléter l’adresse ¦ 📇 Dopuni adresu ¦ 📇 Dopolni naslov
+adresse à trouver ¦ adresu treba pronaći ¦ naslov je treba najti
+Courriel ¦ E-pošta ¦ E-pošta
+Héritiers à contacter exportés (CSV) ¦ Nasljednici za kontaktirati izvezeni (CSV) ¦ Dediči za stik izvoženi (CSV)
+Héritier à l’étranger ¦ Nasljednik u inozemstvu ¦ Dedič v tujini
+Demande d’acte ¦ Zahtjev za ispravu ¦ Zahteva za listino
+Aucun courrier de succession pour l’instant. ¦ Još nema ostavinskih pisama. ¦ Še ni zapuščinskih pisem.
+Les courriers écrits depuis un dossier (✉️ Héritiers contactés, 📑 Pièces) viennent ici. ¦ Ovdje se pojavljuju pisma napisana iz spisa (✉️ Kontaktirani nasljednici, 📑 Isprave). ¦ Tu se pokažejo pisma, napisana iz spisa (✉️ Kontaktirani dediči, 📑 Listine).
+Chercher… (destinataire, dossier) ¦ Traži… (primatelj, spis) ¦ Išči… (prejemnik, spis)
+Aucun courrier ne correspond. ¦ Nijedno pismo ne odgovara. ¦ Nobeno pismo se ne ujema.
+📮 COURRIER DE SUCCESSION ¦ 📮 OSTAVINSKO PISMO ¦ 📮 ZAPUŠČINSKO PISMO
 Dévolution ¦ Nasljedni red ¦ Dedni red
 =héritier ¦ nasljednik|nasljednika|nasljednika ¦ dedič|dediča|dediči|dedičev
 =courrier ¦ pismo|pisma|pisama ¦ pismo|pismi|pisma|pisem

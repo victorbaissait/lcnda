@@ -72,7 +72,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/photo-courriers.css?v=2">
     <link rel="stylesheet" href="assets/css/sante.css?v=1">
     <link rel="stylesheet" href="assets/css/cousinade.css?v=1">
-    <link rel="stylesheet" href="assets/css/successoral.css?v=1">
+    <link rel="stylesheet" href="assets/css/successoral.css?v=2">
     <link rel="stylesheet" href="assets/css/indicateurs.css?v=2">
     <link rel="stylesheet" href="assets/css/mode-simple.css?v=7">
     <link rel="stylesheet" href="assets/css/formats.css?v=1">
@@ -1164,7 +1164,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script src="assets/js/app-journal.js?v=2"></script>
 <?= i18n_page_script() ?>
-<script src="assets/js/app-i18n.js?v=36"></script>
+<script src="assets/js/app-i18n.js?v=37"></script>
 <script>window.LCNDA_GENEALOGY = <?= json_encode(GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID) ?>;window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
 <script src="assets/js/app-fond.js?v=9" defer></script>
 <script src="assets/js/app-accord.js?v=1" defer></script>
@@ -1275,7 +1275,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-calendar-more.js?v=6" defer></script>
 <script src="assets/js/heritage-lecture-autrefois.js?v=5" defer></script>
 <script src="assets/js/heritage-links.js?v=23" defer></script>
-<script src="assets/js/heritage-more.js?v=347" defer></script>
+<script src="assets/js/heritage-more.js?v=348" defer></script>
 <script src="assets/js/heritage-controle.js?v=9" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
 <script src="assets/js/heritage-research.js?v=40" defer></script>
@@ -1445,7 +1445,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-cousinade-core.js?v=1" defer></script>
 <script src="assets/js/heritage-cousinade.js?v=4" defer></script>
 <script src="assets/js/heritage-successoral-core.js?v=1" defer></script>
-<script src="assets/js/heritage-successoral.js?v=1" defer></script>
+<script src="assets/js/heritage-successoral.js?v=2" defer></script>
 <script src="assets/js/heritage-blocs-school.js?v=3" defer></script>
 <script src="assets/js/heritage-creations.js?v=5" defer></script>
 <script src="assets/js/heritage-onglets-documents.js?v=2" defer></script>
@@ -1532,7 +1532,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-apparence.js?v=24" defer></script>
 <script src="assets/js/app-designs.js?v=24" defer></script>
 <script src="assets/js/app-sections.js?v=10" defer></script>
-<script src="assets/js/app-premier.js?v=5" defer></script>
+<script src="assets/js/app-premier.js?v=6" defer></script>
 <script src="assets/js/app-visite.js?v=2" defer></script>
 <script>
 (function () {

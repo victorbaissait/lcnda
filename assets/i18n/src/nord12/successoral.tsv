@@ -459,8 +459,8 @@ Sans objet ¦ Не применимо ¦ Не застосовується
 02 — HÉRITIERS ¦ 02 — НАСЛЕДНИКИ ¦ 02 — СПАДКОЄМЦІ
 Généalogiste successoral ¦ Генеалог по наследственным делам ¦ Генеалог у спадкових справах
 Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ Найти наследников умершего для нотариуса. ¦ Знайти спадкоємців померлого для нотаріуса.
-+ ⚖️ Successions. Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Наследства. Первый экран: «Открыть дело». ¦ + ⚖️ Спадщини. Перший екран: «Відкрити справу».
-⚖️ Successions, 📇 Vivants, 📮 Courriers. ¦ ⚖️ Наследства, 📇 Живые, 📮 Письма. ¦ ⚖️ Спадщини, 📇 Живі, 📮 Листи.
++ ⚖️ Successions (Dossiers · Héritiers à contacter · Courriers). Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Наследства (Дела · Наследники для связи · Письма). Первый экран: «Открыть дело». ¦ + ⚖️ Спадщини (Справи · Спадкоємці для зв’язку · Листи). Перший екран: «Відкрити справу».
+⚖️ Successions : dossiers, héritiers à contacter, courriers. ¦ ⚖️ Наследства: дела, наследники для связи, письма. ¦ ⚖️ Спадщини: справи, спадкоємці для зв’язку, листи.
 ⚖️ Successions ¦ ⚖️ Наследства ¦ ⚖️ Спадщини
 Vivants ¦ Живые ¦ Живі
 Courriers ¦ Письма ¦ Листи
@@ -488,6 +488,35 @@ Seul un dossier clos peut être archivé. ¦ Архивировать можно
 Mode consultation : les dossiers de succession ne se montrent pas. ¦ Режим показа: наследственные дела скрыты. ¦ Режим показу: спадкові справи приховано.
 Rien à noter. ¦ Нечего записывать. ¦ Нічого записувати.
 Calcul manquant. ¦ Нет расчёта. ¦ Немає розрахунку.
+Dossiers ¦ Дела ¦ Справи
+Héritiers à contacter ¦ Наследники для связи ¦ Спадкоємці для зв’язку
+Que montrer ¦ Что показать ¦ Що показати
+Lecture des héritiers… ¦ Чтение наследников… ¦ Читання спадкоємців…
+Lecture des courriers… ¦ Чтение писем… ¦ Читання листів…
+Voir toute la liste ↗ ¦ Смотреть весь список ↗ ¦ Переглянути весь список ↗
+Aucun courrier ¦ Писем нет ¦ Листів немає
+Courrier envoyé ¦ Письмо отправлено ¦ Лист надіслано
+Réponse : {r} ¦ Ответ: {r} ¦ Відповідь: {r}
+Courrier envoyé le {d} ¦ Письмо отправлено {d} ¦ Лист надіслано {d}
+Aucun héritier à contacter dans les dossiers en cours. ¦ В текущих делах нет наследников для связи. ¦ У поточних справах немає спадкоємців для зв’язку.
+Les héritiers vivants (ou au statut inconnu) des dossiers ouverts viennent ici, avec leur adresse et l’état du contact. ¦ Здесь собраны живые наследники (или с неизвестным статусом) из открытых дел, с адресом и состоянием связи. ¦ Тут зібрано живих спадкоємців (або з невідомим статусом) з відкритих справ, з адресою та станом зв’язку.
+Chercher… (nom, dossier, ville) ¦ Поиск… (имя, дело, город) ¦ Пошук… (ім’я, справа, місто)
+Tous les dossiers ¦ Все дела ¦ Усі справи
+État du contact ¦ Состояние связи ¦ Стан зв’язку
+Par dossier ¦ По делу ¦ За справою
+À contacter d’abord ¦ Сначала те, с кем связаться ¦ Спершу ті, з ким зв’язатися
+Aucun héritier ne correspond. ¦ Ни один наследник не подходит. ¦ Жоден спадкоємець не підходить.
+📇 Compléter l’adresse ¦ 📇 Дополнить адрес ¦ 📇 Доповнити адресу
+adresse à trouver ¦ адрес нужно найти ¦ адресу треба знайти
+Courriel ¦ Эл. почта ¦ Ел. пошта
+Héritiers à contacter exportés (CSV) ¦ Наследники для связи экспортированы (CSV) ¦ Спадкоємців для зв’язку експортовано (CSV)
+Héritier à l’étranger ¦ Наследник за границей ¦ Спадкоємець за кордоном
+Demande d’acte ¦ Запрос акта ¦ Запит акта
+Aucun courrier de succession pour l’instant. ¦ Писем по наследствам пока нет. ¦ Листів у спадкових справах поки немає.
+Les courriers écrits depuis un dossier (✉️ Héritiers contactés, 📑 Pièces) viennent ici. ¦ Здесь собраны письма, написанные из дела (✉️ Связь с наследниками, 📑 Документы). ¦ Тут зібрано листи, написані зі справи (✉️ Зв’язок зі спадкоємцями, 📑 Документи).
+Chercher… (destinataire, dossier) ¦ Поиск… (адресат, дело) ¦ Пошук… (адресат, справа)
+Aucun courrier ne correspond. ¦ Ни одно письмо не подходит. ¦ Жоден лист не підходить.
+📮 COURRIER DE SUCCESSION ¦ 📮 ПИСЬМО ПО НАСЛЕДСТВУ ¦ 📮 ЛИСТ У СПАДКОВІЙ СПРАВІ
 Dévolution ¦ Порядок наследования ¦ Порядок спадкування
 =héritier ¦ наследник|наследника|наследников ¦ спадкоємець|спадкоємці|спадкоємців
 =courrier ¦ письмо|письма|писем ¦ лист|листи|листів

@@ -459,8 +459,8 @@ Sans objet ¦ Nu este cazul
 02 — HÉRITIERS ¦ 02 — MOȘTENITORI
 Généalogiste successoral ¦ Genealogist succesoral
 Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ Găsirea moștenitorilor unei persoane decedate, pentru un notar.
-+ ⚖️ Successions. Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Succesiuni. Primul ecran: „Deschide un dosar”.
-⚖️ Successions, 📇 Vivants, 📮 Courriers. ¦ ⚖️ Succesiuni, 📇 În viață, 📮 Scrisori.
++ ⚖️ Successions (Dossiers · Héritiers à contacter · Courriers). Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Succesiuni (Dosare · Moștenitori de contactat · Scrisori). Primul ecran: „Deschide un dosar”.
+⚖️ Successions : dossiers, héritiers à contacter, courriers. ¦ ⚖️ Succesiuni: dosare, moștenitori de contactat, scrisori.
 ⚖️ Successions ¦ ⚖️ Succesiuni
 Vivants ¦ În viață
 Courriers ¦ Scrisori
@@ -488,6 +488,35 @@ Seul un dossier clos peut être archivé. ¦ Doar un dosar închis poate fi arhi
 Mode consultation : les dossiers de succession ne se montrent pas. ¦ Mod consultare: dosarele de succesiune nu sunt afișate.
 Rien à noter. ¦ Nimic de notat.
 Calcul manquant. ¦ Calcul lipsă.
+Dossiers ¦ Dosare
+Héritiers à contacter ¦ Moștenitori de contactat
+Que montrer ¦ Ce se afișează
+Lecture des héritiers… ¦ Se citesc moștenitorii…
+Lecture des courriers… ¦ Se citesc scrisorile…
+Voir toute la liste ↗ ¦ Vezi toată lista ↗
+Aucun courrier ¦ Nicio scrisoare
+Courrier envoyé ¦ Scrisoare trimisă
+Réponse : {r} ¦ Răspuns: {r}
+Courrier envoyé le {d} ¦ Scrisoare trimisă pe {d}
+Aucun héritier à contacter dans les dossiers en cours. ¦ Niciun moștenitor de contactat în dosarele în curs.
+Les héritiers vivants (ou au statut inconnu) des dossiers ouverts viennent ici, avec leur adresse et l’état du contact. ¦ Moștenitorii în viață (sau cu statut necunoscut) din dosarele deschise apar aici, cu adresa și stadiul contactului.
+Chercher… (nom, dossier, ville) ¦ Caută… (nume, dosar, localitate)
+Tous les dossiers ¦ Toate dosarele
+État du contact ¦ Stadiul contactului
+Par dossier ¦ După dosar
+À contacter d’abord ¦ De contactat întâi
+Aucun héritier ne correspond. ¦ Niciun moștenitor nu corespunde.
+📇 Compléter l’adresse ¦ 📇 Completează adresa
+adresse à trouver ¦ adresă de găsit
+Courriel ¦ E-mail
+Héritiers à contacter exportés (CSV) ¦ Moștenitori de contactat exportați (CSV)
+Héritier à l’étranger ¦ Moștenitor în străinătate
+Demande d’acte ¦ Cerere de act
+Aucun courrier de succession pour l’instant. ¦ Încă nicio scrisoare de succesiune.
+Les courriers écrits depuis un dossier (✉️ Héritiers contactés, 📑 Pièces) viennent ici. ¦ Scrisorile scrise dintr-un dosar (✉️ Moștenitori contactați, 📑 Acte) apar aici.
+Chercher… (destinataire, dossier) ¦ Caută… (destinatar, dosar)
+Aucun courrier ne correspond. ¦ Nicio scrisoare nu corespunde.
+📮 COURRIER DE SUCCESSION ¦ 📮 SCRISOARE DE SUCCESIUNE
 Dévolution ¦ Devoluțiune
 =héritier ¦ moștenitor|moștenitori|de moștenitori
 =courrier ¦ scrisoare|scrisori|de scrisori

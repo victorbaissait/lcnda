@@ -459,8 +459,8 @@ Sans objet ¦ Netýká se ¦ Ej tillämpligt ¦ Ikke relevant
 02 — HÉRITIERS ¦ 02 — DĚDICI ¦ 02 — ARVINGAR ¦ 02 — ARVINGER
 Généalogiste successoral ¦ Dědický genealog ¦ Arvsgenealog ¦ Arvegenealog
 Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ Najít dědice zemřelé osoby pro notáře. ¦ Hitta arvingarna till en avliden person åt en notarie. ¦ Find arvingerne til en afdød person for en notar.
-+ ⚖️ Successions. Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Dědictví. První obrazovka: „Otevřít spis“. ¦ + ⚖️ Dödsbon. Första skärmen: ”Öppna ett ärende”. ¦ + ⚖️ Dødsboer. Første skærm: »Åbn en sag«.
-⚖️ Successions, 📇 Vivants, 📮 Courriers. ¦ ⚖️ Dědictví, 📇 Žijící, 📮 Dopisy. ¦ ⚖️ Dödsbon, 📇 Levande, 📮 Brev. ¦ ⚖️ Dødsboer, 📇 Levende, 📮 Breve.
++ ⚖️ Successions (Dossiers · Héritiers à contacter · Courriers). Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Dědictví (Spisy · Dědicové ke kontaktování · Dopisy). První obrazovka: „Otevřít spis“. ¦ + ⚖️ Dödsbon (Akter · Arvingar att kontakta · Brev). Första skärmen: ”Öppna en akt”. ¦ + ⚖️ Dødsboer (Sager · Arvinger at kontakte · Breve). Første skærm: ”Åbn en sag”.
+⚖️ Successions : dossiers, héritiers à contacter, courriers. ¦ ⚖️ Dědictví: spisy, dědicové ke kontaktování, dopisy. ¦ ⚖️ Dödsbon: akter, arvingar att kontakta, brev. ¦ ⚖️ Dødsboer: sager, arvinger at kontakte, breve.
 ⚖️ Successions ¦ ⚖️ Dědictví ¦ ⚖️ Dödsbon ¦ ⚖️ Dødsboer
 Vivants ¦ Žijící ¦ Levande ¦ Levende
 Courriers ¦ Dopisy ¦ Brev ¦ Breve
@@ -488,6 +488,35 @@ Seul un dossier clos peut être archivé. ¦ Archivovat lze jen uzavřený spis.
 Mode consultation : les dossiers de succession ne se montrent pas. ¦ Režim prohlížení: dědické spisy se nezobrazují. ¦ Visningsläge: dödsboärenden visas inte. ¦ Visningstilstand: dødsbosager vises ikke.
 Rien à noter. ¦ Nic k zapsání. ¦ Inget att notera. ¦ Intet at notere.
 Calcul manquant. ¦ Chybí výpočet. ¦ Beräkning saknas. ¦ Beregning mangler.
+Dossiers ¦ Spisy ¦ Akter ¦ Sager
+Héritiers à contacter ¦ Dědicové ke kontaktování ¦ Arvingar att kontakta ¦ Arvinger at kontakte
+Que montrer ¦ Co zobrazit ¦ Vad visas ¦ Hvad vises
+Lecture des héritiers… ¦ Načítání dědiců… ¦ Läser arvingarna… ¦ Læser arvingerne…
+Lecture des courriers… ¦ Načítání dopisů… ¦ Läser breven… ¦ Læser brevene…
+Voir toute la liste ↗ ¦ Zobrazit celý seznam ↗ ¦ Se hela listan ↗ ¦ Se hele listen ↗
+Aucun courrier ¦ Žádný dopis ¦ Inget brev ¦ Intet brev
+Courrier envoyé ¦ Dopis odeslán ¦ Brev skickat ¦ Brev sendt
+Réponse : {r} ¦ Odpověď: {r} ¦ Svar: {r} ¦ Svar: {r}
+Courrier envoyé le {d} ¦ Dopis odeslán {d} ¦ Brev skickat {d} ¦ Brev sendt {d}
+Aucun héritier à contacter dans les dossiers en cours. ¦ V rozpracovaných spisech není žádný dědic ke kontaktování. ¦ Ingen arvinge att kontakta i de pågående akterna. ¦ Ingen arvinger at kontakte i de igangværende sager.
+Les héritiers vivants (ou au statut inconnu) des dossiers ouverts viennent ici, avec leur adresse et l’état du contact. ¦ Sem patří žijící dědicové (nebo s neznámým stavem) z otevřených spisů, s adresou a stavem kontaktu. ¦ Levande arvingar (eller med okänd status) i de öppna akterna visas här, med adress och kontaktläge. ¦ Levende arvinger (eller med ukendt status) i de åbne sager vises her, med adresse og kontaktstatus.
+Chercher… (nom, dossier, ville) ¦ Hledat… (jméno, spis, obec) ¦ Sök… (namn, akt, ort) ¦ Søg… (navn, sag, by)
+Tous les dossiers ¦ Všechny spisy ¦ Alla akter ¦ Alle sager
+État du contact ¦ Stav kontaktu ¦ Kontaktläge ¦ Kontaktstatus
+Par dossier ¦ Podle spisu ¦ Per akt ¦ Efter sag
+À contacter d’abord ¦ Nejdřív ke kontaktování ¦ Att kontakta först ¦ Skal kontaktes først
+Aucun héritier ne correspond. ¦ Žádný dědic neodpovídá. ¦ Ingen arvinge matchar. ¦ Ingen arving passer.
+📇 Compléter l’adresse ¦ 📇 Doplnit adresu ¦ 📇 Komplettera adressen ¦ 📇 Udfyld adressen
+adresse à trouver ¦ adresu je třeba najít ¦ adress saknas ¦ adresse skal findes
+Courriel ¦ E-mail ¦ E-post ¦ E-mail
+Héritiers à contacter exportés (CSV) ¦ Dědicové ke kontaktování exportováni (CSV) ¦ Arvingar att kontakta exporterade (CSV) ¦ Arvinger at kontakte eksporteret (CSV)
+Héritier à l’étranger ¦ Dědic v zahraničí ¦ Arvinge utomlands ¦ Arving i udlandet
+Demande d’acte ¦ Žádost o matriční doklad ¦ Begäran om handling ¦ Anmodning om attest
+Aucun courrier de succession pour l’instant. ¦ Zatím žádný dědický dopis. ¦ Inga dödsbobrev ännu. ¦ Endnu ingen dødsbobreve.
+Les courriers écrits depuis un dossier (✉️ Héritiers contactés, 📑 Pièces) viennent ici. ¦ Sem patří dopisy napsané ze spisu (✉️ Kontaktovaní dědicové, 📑 Doklady). ¦ Brev skrivna från en akt (✉️ Kontaktade arvingar, 📑 Handlingar) visas här. ¦ Breve skrevet fra en sag (✉️ Kontaktede arvinger, 📑 Dokumenter) vises her.
+Chercher… (destinataire, dossier) ¦ Hledat… (adresát, spis) ¦ Sök… (mottagare, akt) ¦ Søg… (modtager, sag)
+Aucun courrier ne correspond. ¦ Žádný dopis neodpovídá. ¦ Inget brev matchar. ¦ Intet brev passer.
+📮 COURRIER DE SUCCESSION ¦ 📮 DĚDICKÝ DOPIS ¦ 📮 DÖDSBOBREV ¦ 📮 DØDSBOBREV
 Dévolution ¦ Dědická posloupnost ¦ Arvsordning ¦ Arvefølge
 =héritier ¦ dědic|dědicové|dědiců ¦ arvinge|arvingar ¦ arving|arvinger
 =courrier ¦ dopis|dopisy|dopisů ¦ brev|brev ¦ brev|breve

@@ -93,3 +93,21 @@ body.is-kiosk .nav-item[data-module="successoral"], html.ms-open .nav-item[data-
     .succ-kv th { width: 42%; }
     .succ-journal li { grid-template-columns: 1fr; gap: 2px; }
 }
+
+/* Le sélecteur de la liste : Dossiers · Héritiers à contacter · Courriers */
+.succ-views { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 640px; margin: 4px 0 14px; }
+.succ-views button { padding: 4px 8px; line-height: 1.2; }
+.succ-noaddr { color: var(--succ-orange); font-weight: 600; }
+.succ-full { margin: 10px 0 0; }
+.succ-csv { margin: 12px 0 0; }
+.succ-mail td.succ-mact { white-space: nowrap; text-align: right; }
+.succ-mail { min-width: 760px; }
+/* Héritiers à contacter : la 2e ligne (adresse, courriel) se lit en entier ; sur téléphone les boutons passent dessous */
+.succ-page .ui-row[data-succ-hrow] .ui-row-main > small { white-space: normal; overflow-wrap: anywhere; }
+.succ-page .ui-row[data-succ-hrow] .ui-row-act { flex-wrap: wrap; justify-content: flex-end; }
+.succ-full .link-button { font-size: .9rem; }
+@media (max-width: 720px) {
+    .succ-page .ui-row[data-succ-hrow] { grid-template-columns: 48px minmax(0, 1fr); }
+    .succ-page .ui-row[data-succ-hrow] .ui-row-date { grid-column: 2; display: block; white-space: normal; }
+    .succ-page .ui-row[data-succ-hrow] .ui-row-act { grid-column: 1 / -1; justify-content: flex-start; }
+}

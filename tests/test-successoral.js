@@ -10,7 +10,8 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *     effacer ; « Remis au notaire » demande la liste de contrôle ; archivage (adresses retirées) ; 🗓 Ma semaine ;
  *     mode consultation fermé ; jamais dans l'export GEDCOM ;
  *  2. le navigateur (Playwright ; sinon sauté) à 1440 px, 390 px et en sombre : l'usage (10e carte, interrupteur), la liste,
- *     le dossier et ses 8 onglets, l'arbre, le tableau pour le notaire, aucune erreur JavaScript, pas de défilement de côté.
+ *     le dossier et ses 8 onglets, l'arbre, le tableau pour le notaire, le sélecteur « Dossiers · Héritiers à contacter · Courriers »
+ *     (captures ux-* dans /tmp/claude-0/sp/succ), aucune erreur JavaScript, pas de défilement de côté.
  */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -149,7 +150,10 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
             const b = await w({ op: 'file_letter', case_id: cid, person_id: 30, kind: 'contact', letter: 'Bonjour', date_envoi: '2026-10-12' });
             await w({ op: 'unfile_letter', case_id: cid, courrier_id: b.courrier_id });
             assert.match(php(`echo $pdo->query('SELECT count(*) FROM courriers WHERE id=${b.courrier_id}')->fetchColumn();`).stdout, /^0$/);
-            const reg = await get('courriers'); assert.ok(reg.items.some(x => x.id === a.courrier_id && x.number === '2026-001'));
+            const reg = await get('courriers'); assert.ok(reg.items.some(x => x.id === a.courrier_id && x.number === '2026-001' && x.destinataire === 'Suzanne MAZAUD' && x.kind === 'contrat' && x.letter === 'CONTRAT…' && x.person_id === 22));
+            // un courrier ordinaire du Registre (sans dossier) n'est jamais dans la vue « Courriers » de l'onglet ⚖️ Successions
+            php("$pdo->exec(\"INSERT INTO courriers(organisme, destinataire, objet, date_envoi) VALUES('mairie','Mairie de Malvialle','Copie intégrale (hors succession)','2026-10-01')\");");
+            const reg2 = await get('courriers'); assert.ok(reg2.items.length >= 1 && reg2.items.every(x => x.case_id > 0)); assert.ok(!reg2.items.some(x => /hors succession/.test(x.objet)));
             void r1;
         });
         await t('journal : aucune opération pour le modifier ou l’effacer ; noté par le navigateur (PDF)', async () => {
@@ -231,7 +235,14 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
                 assert.equal(u.length, 10); assert.equal(u[9], 'successoral');
                 const ch = await pg.evaluate(() => window.LCNDA_EXT.premierLancement.usageChanges(['genealogie'], ['genealogie', 'successoral'], k => localStorage.getItem(k)));
                 assert.equal(ch['genealogie-menu-successoral'], '1'); assert.ok(!JSON.parse(ch['genealogie-menu-hidden']).includes('successoral'));
-                assert.match(ch['genealogie-custom-tabs'], /list:living_contacts/); assert.match(ch['genealogie-custom-tabs'], /list:courriers/);
+                assert.doesNotMatch(String(ch['genealogie-custom-tabs'] || ''), /ct_usvivants|ct_uscourriers|list:living_contacts|list:courriers/, 'plus d’onglets raccourcis vers Listes');
+                // chez ceux qui les avaient : appliquer ou retirer l'usage les enlève ; les onglets des autres usages restent
+                const old = JSON.stringify([{id: 'ct_usvivants', name: 'Vivants', target: 'list:living_contacts'}, {id: 'ct_uscourriers', name: 'Courriers', target: 'list:courriers'}, {id: 'ct_usmaison', name: 'Maisons et lieux', target: 'list:houses'}, {id: 'ct_mine', name: 'À moi', target: 'list:persons'}]);
+                for (const [before, after] of [[['genealogie', 'successoral'], ['genealogie']], [['genealogie'], ['genealogie', 'successoral']]]) {
+                    const c2 = await pg.evaluate(([b, a, o]) => window.LCNDA_EXT.premierLancement.usageChanges(b, a, k => (k === 'genealogie-custom-tabs' ? o : localStorage.getItem(k))), [before, after, old]);
+                    assert.deepEqual(JSON.parse(c2['genealogie-custom-tabs']).map(x => x.id), ['ct_usmaison', 'ct_mine']);
+                }
+                assert.doesNotMatch(await pg.evaluate(() => window.LCNDA_EXT.premierLancement.usages().find(x => x.k === 'successoral').row), /Vivants/);
                 assert.equal(await pg.evaluate(() => getComputedStyle(document.querySelector('.main-nav [data-module="successoral"]')).display), 'none', 'caché sans l’usage');
                 await pg.evaluate(() => window.LCNDA_EXT.premierLancement.applyUsages(['genealogie', 'successoral']));
                 assert.notEqual(await pg.evaluate(() => document.querySelector('.main-nav [data-module="successoral"]').style.display), 'none');
@@ -278,6 +289,50 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
                 const tpl2 = await pg.evaluate(() => (window.LCNDA_EXT.textDocTools?.TEMPLATES || []).filter(x => !x.when || x.when()).map(x => x.key));
                 assert.ok(!tpl2.includes('succ_contrat'));
                 assert.deepEqual(errs, []); await ctx.close();
+            });
+            await t('onglet ⚖️ Successions : sélecteur « Dossiers · Héritiers à contacter · Courriers » (retenu), héritiers vivants des dossiers en cours, seuls les courriers de succession ; 1440, 390, sombre', async () => {
+                const UX = '/tmp/claude-0/sp/succ';
+                for (const [w0, h0, dark, tag] of [[1440, 900, false, '1440'], [390, 844, false, '390'], [1440, 900, true, 'sombre']]) {
+                    const { ctx, pg, errs } = await open(w0, h0, dark, '#successoral');
+                    const ux = async name => { fs.mkdirSync(UX, { recursive: true }); await pg.screenshot({ path: path.join(UX, `ux-${name}-${tag}.png`), fullPage: true }); };
+                    await pg.waitForSelector('.succ-views [data-succ-view="cases"].is-active');
+                    assert.deepEqual(await pg.$$eval('.succ-views [data-succ-view]', bs => bs.map(b => b.textContent.trim())), ['Dossiers', 'Héritiers à contacter', 'Courriers']);
+                    assert.equal(await pg.locator('.main-nav [data-board="ct_usvivants"], .main-nav [data-board="ct_uscourriers"]').count(), 0);
+                    await noSide(pg); await ux('dossiers');
+                    // 👥 Héritiers à contacter
+                    await pg.click('[data-succ-view="heirs"]'); await pg.waitForSelector('[data-succ-hrow]');
+                    assert.equal(await pg.evaluate(() => JSON.parse(localStorage.getItem('lcnda-succ-view'))), 'heirs', 'retenu');
+                    const names = await pg.$$eval('[data-succ-hrow]', rs => rs.map(r => r.querySelector('.ui-row-name, .ui-card-name').textContent.trim()));
+                    for (const n of ['Suzanne MAZAUD', 'Claire MAZAUD', 'Lucas MAZAUD', 'Emma MAZAUD', 'André MAZAUD']) assert.ok(names.includes(n), n);
+                    for (const n of ['Marcel MAZAUD', 'Paul MAZAUD', 'Jean MAZAUD', 'Henri MAZAUD']) assert.ok(!names.includes(n), 'pas un mort : ' + n);
+                    const suz = await pg.textContent('[data-succ-hrow*=":22"]'); assert.match(suz, /2026-014/); assert.match(suz, /place de l’Église/); assert.match(suz, /suzanne@exemple\.fr/); assert.match(suz, /Courrier envoyé/);
+                    assert.match(await pg.textContent('[data-succ-hrow*=":41"]'), /adresse à trouver/); assert.match(await pg.textContent('[data-succ-hrow*=":41"]'), /Aucun courrier/);
+                    if (tag === '1440') {
+                        await pg.evaluate(() => { const b = document.querySelector('.ui-listbar'); b.setFilter('state', ['none']); });
+                        await pg.waitForTimeout(150);
+                        const left = await pg.$$eval('[data-succ-hrow]', rs => rs.map(r => r.dataset.succHrow)); assert.ok(left.length >= 3 && !left.some(k => k.endsWith(':22')), 'filtre « Aucun courrier »');
+                        await pg.evaluate(() => document.querySelector('.ui-listbar').clear());
+                        const [dl] = await Promise.all([pg.waitForEvent('download'), pg.click('[data-succ-hcsv]')]);
+                        const csv = fs.readFileSync(await dl.path(), 'utf8'); assert.match(csv, /Suzanne MAZAUD/); assert.match(csv, /adresse à trouver/); assert.doesNotMatch(csv, /^\s*[=+@]/m);
+                        await pg.click('[data-succ-hrow*=":41"] [data-succ-hwrite]'); await pg.waitForSelector('dialog[open] textarea[name=letter]');
+                        assert.match(await pg.inputValue('dialog[open] textarea[name=letter]'), /Madame, Monsieur/); await ux('ecrire'); await pg.keyboard.press('Escape');
+                    }
+                    await noSide(pg); await ux('heritiers');
+                    // 📮 Courriers : rien que ceux des dossiers de succession
+                    await pg.click('[data-succ-view="mail"]'); await pg.waitForSelector('[data-succ-mrow]');
+                    const rows = await pg.$$eval('[data-succ-mrow]', rs => rs.map(r => r.textContent)); assert.equal(rows.length, 1); assert.match(rows[0], /2026-014/); assert.match(rows[0], /Contrat de révélation/);
+                    assert.doesNotMatch(await pg.textContent('[data-succ-body]'), /hors succession|Mairie de Malvialle/);
+                    await noSide(pg); await ux('courriers');
+                    if (tag === '1440') {
+                        await pg.click('[data-succ-mopen]'); await pg.waitForSelector('dialog[open] select[name=reponse]'); await ux('courrier'); await pg.keyboard.press('Escape');
+                        await pg.click('[data-succ-full="courriers"]'); await pg.waitForFunction(() => window.LCNDA_APP.state.module === 'listes' && window.LCNDA_APP.state.listType === 'courriers');
+                        // en mode consultation : rien
+                        await pg.evaluate(() => { document.body.classList.add('is-kiosk'); window.LCNDA_APP.setModule('successoral'); });
+                        await pg.waitForFunction(() => /mode consultation/.test(document.querySelector('#workspace').textContent));
+                        assert.equal(await pg.locator('[data-succ-hrow], [data-succ-mrow], .succ-views').count(), 0);
+                    }
+                    assert.deepEqual(errs, []); await ctx.close();
+                }
             });
             await t('Listes → Recherche et organisation : « ⚖️ Dossiers de succession » après les Cousinades ; caché en mode consultation', async () => {
                 const { ctx, pg, errs } = await open(1440, 900, false, '#listes');

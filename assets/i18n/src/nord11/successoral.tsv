@@ -459,8 +459,8 @@ Sans objet ¦ Không áp dụng ¦ Tidak berlaku
 02 — HÉRITIERS ¦ 02 — NGƯỜI THỪA KẾ ¦ 02 — AHLI WARIS
 Généalogiste successoral ¦ Nhà phả hệ học về thừa kế ¦ Genealog warisan
 Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ Tìm những người thừa kế của một người đã mất cho công chứng viên. ¦ Menemukan ahli waris seseorang yang telah meninggal untuk notaris.
-+ ⚖️ Successions. Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Thừa kế. Màn hình đầu tiên: «Mở hồ sơ». ¦ + ⚖️ Warisan. Layar pertama: «Buka berkas».
-⚖️ Successions, 📇 Vivants, 📮 Courriers. ¦ ⚖️ Thừa kế, 📇 Người còn sống, 📮 Thư từ. ¦ ⚖️ Warisan, 📇 Orang hidup, 📮 Surat.
++ ⚖️ Successions (Dossiers · Héritiers à contacter · Courriers). Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Thừa kế (Hồ sơ · Người thừa kế cần liên hệ · Thư từ). Màn hình đầu tiên: «Mở hồ sơ». ¦ + ⚖️ Warisan (Berkas · Ahli waris yang perlu dihubungi · Surat). Layar pertama: «Buka berkas».
+⚖️ Successions : dossiers, héritiers à contacter, courriers. ¦ ⚖️ Thừa kế: hồ sơ, người thừa kế cần liên hệ, thư từ. ¦ ⚖️ Warisan: berkas, ahli waris yang perlu dihubungi, surat.
 ⚖️ Successions ¦ ⚖️ Thừa kế ¦ ⚖️ Warisan
 Vivants ¦ Người còn sống ¦ Orang hidup
 Courriers ¦ Thư từ ¦ Surat
@@ -488,6 +488,35 @@ Seul un dossier clos peut être archivé. ¦ Chỉ có thể lưu trữ hồ sơ
 Mode consultation : les dossiers de succession ne se montrent pas. ¦ Chế độ trình chiếu: hồ sơ thừa kế bị ẩn. ¦ Mode presentasi: berkas warisan disembunyikan.
 Rien à noter. ¦ Không có gì để ghi. ¦ Tidak ada yang dicatat.
 Calcul manquant. ¦ Thiếu phép tính. ¦ Perhitungan tidak ada.
+Dossiers ¦ Hồ sơ ¦ Berkas
+Héritiers à contacter ¦ Người thừa kế cần liên hệ ¦ Ahli waris yang perlu dihubungi
+Que montrer ¦ Hiển thị gì ¦ Yang ditampilkan
+Lecture des héritiers… ¦ Đang đọc người thừa kế… ¦ Membaca ahli waris…
+Lecture des courriers… ¦ Đang đọc thư từ… ¦ Membaca surat…
+Voir toute la liste ↗ ¦ Xem toàn bộ danh sách ↗ ¦ Lihat seluruh daftar ↗
+Aucun courrier ¦ Chưa có thư ¦ Belum ada surat
+Courrier envoyé ¦ Đã gửi thư ¦ Surat terkirim
+Réponse : {r} ¦ Trả lời: {r} ¦ Jawaban: {r}
+Courrier envoyé le {d} ¦ Đã gửi thư ngày {d} ¦ Surat terkirim pada {d}
+Aucun héritier à contacter dans les dossiers en cours. ¦ Không có người thừa kế cần liên hệ trong các hồ sơ đang mở. ¦ Tidak ada ahli waris yang perlu dihubungi dalam berkas yang sedang berjalan.
+Les héritiers vivants (ou au statut inconnu) des dossiers ouverts viennent ici, avec leur adresse et l’état du contact. ¦ Những người thừa kế còn sống (hoặc chưa rõ tình trạng) của các hồ sơ đang mở hiện ở đây, kèm địa chỉ và tình trạng liên hệ. ¦ Ahli waris yang masih hidup (atau statusnya belum diketahui) dari berkas yang terbuka muncul di sini, dengan alamat dan status kontaknya.
+Chercher… (nom, dossier, ville) ¦ Tìm… (tên, hồ sơ, nơi ở) ¦ Cari… (nama, berkas, kota)
+Tous les dossiers ¦ Tất cả hồ sơ ¦ Semua berkas
+État du contact ¦ Tình trạng liên hệ ¦ Status kontak
+Par dossier ¦ Theo hồ sơ ¦ Per berkas
+À contacter d’abord ¦ Cần liên hệ trước ¦ Yang perlu dihubungi dulu
+Aucun héritier ne correspond. ¦ Không có người thừa kế nào phù hợp. ¦ Tidak ada ahli waris yang cocok.
+📇 Compléter l’adresse ¦ 📇 Bổ sung địa chỉ ¦ 📇 Lengkapi alamat
+adresse à trouver ¦ cần tìm địa chỉ ¦ alamat harus dicari
+Courriel ¦ Email ¦ Email
+Héritiers à contacter exportés (CSV) ¦ Đã xuất người thừa kế cần liên hệ (CSV) ¦ Ahli waris yang perlu dihubungi diekspor (CSV)
+Héritier à l’étranger ¦ Người thừa kế ở nước ngoài ¦ Ahli waris di luar negeri
+Demande d’acte ¦ Yêu cầu cấp giấy tờ ¦ Permintaan akta
+Aucun courrier de succession pour l’instant. ¦ Chưa có thư thừa kế nào. ¦ Belum ada surat warisan.
+Les courriers écrits depuis un dossier (✉️ Héritiers contactés, 📑 Pièces) viennent ici. ¦ Thư viết từ một hồ sơ (✉️ Người thừa kế đã liên hệ, 📑 Giấy tờ) hiện ở đây. ¦ Surat yang ditulis dari sebuah berkas (✉️ Ahli waris yang dihubungi, 📑 Dokumen) muncul di sini.
+Chercher… (destinataire, dossier) ¦ Tìm… (người nhận, hồ sơ) ¦ Cari… (penerima, berkas)
+Aucun courrier ne correspond. ¦ Không có thư nào phù hợp. ¦ Tidak ada surat yang cocok.
+📮 COURRIER DE SUCCESSION ¦ 📮 THƯ THỪA KẾ ¦ 📮 SURAT WARISAN
 Dévolution ¦ Thứ tự thừa kế ¦ Urutan pewarisan
 =héritier ¦ người thừa kế ¦ ahli waris
 =courrier ¦ thư ¦ surat
