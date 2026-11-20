@@ -300,6 +300,9 @@ try {
     if ($action === 'successoral' || $action === 'successoral_write') { // ⚖️ généalogiste successoral : dossiers de succession (lib/successoral.php)
         successoral_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if (in_array($action, ['ad_events', 'ad_person', 'ad_counts', 'ad_table', 'ad_write'], true)) { // 🏛 actes en ligne aux archives : les pastilles (lib/archives_dispo.php)
+        ad_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     if (in_array($action, ['cl_context', 'cl_letter', 'cl_ids', 'cl_templates', 'cl_write'], true)) { // 📮 courriers tout prêts : « Demander l'acte » (lib/courriers_actes.php)
         require_once __DIR__ . '/lib/courriers_actes.php';
         cl_dispatch($pdo, (string) $action, $isWrite, $payload);

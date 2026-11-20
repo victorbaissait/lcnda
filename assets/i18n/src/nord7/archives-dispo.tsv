@@ -1,0 +1,130 @@
+fr ¦ is
+# 🏛 Actes en ligne aux archives (docs/design/archives-en-ligne.html)
+Mairie de {commune} ¦ Ráðhúsið í {commune}
+Archives départementales ({dept}) ¦ Héraðsskjalasöfn ({dept})
+🔒 Réservé jusqu’en {year} ¦ 🔒 Takmarkað til {year}
+déjà lié à une source ¦ þegar tengt heimild
+Pourquoi cette pastille ? ¦ Hvers vegna þetta merki?
+✓ lié ¦ ✓ tengt
+Règle : code du patrimoine, art. L213-2 ({legi}) ; qui peut demander avant : décret 2017-890, art. 30 ({decret}). ¦ Regla: frönsk minjalög, gr. L213-2 ({legi}); hverjir mega biðja fyrr: reglugerð 2017-890, gr. 30 ({decret}).
+Une limite vérifiée pour ce département et ce type d’acte couvre la date. ¦ Staðfest mörk fyrir þetta hérað og þessa tegund skjala ná yfir dagsetninguna.
+D’après une source secondaire ({source}) : à confirmer sur la page officielle des archives. ¦ Samkvæmt afleiddri heimild ({source}): þarf að staðfesta á opinberri síðu skjalasafnsins.
+Peut-être en ligne (d’après {source}, à confirmer) : année lue dans un extrait de recherche, pas encore confirmée. ¦ Kannski á netinu (samkvæmt {source}, á eftir að staðfesta): ár lesið úr leitarútdrætti, ekki enn staðfest.
+la table ¦ taflan
+Date approximative : la fourchette {from}–{to} chevauche la limite ({until}). ¦ Áætluð dagsetning: bilið {from}–{to} skarast við mörkin ({until}).
+La date est à 2 ans de la limite ({until}) : le registre est peut-être en ligne depuis. ¦ Dagsetningin er innan 2 ára frá mörkunum ({until}): skráin gæti verið komin á netið síðan.
+Acte de plus de 100 ans, mais la limite de ce département n’est pas encore vérifiée : jamais « en ligne » sans source. ¦ Skjal eldra en 100 ára, en mörk þessa héraðs eru ekki staðfest enn: aldrei „á netinu“ án heimildar.
+Trop récent pour être en ligne : la limite de ce département est {until}. ¦ Of nýlegt til að vera á netinu: mörk þessa héraðs eru {until}.
+Trop récent pour être en ligne (et la limite de ce département n’est pas encore vérifiée). ¦ Of nýlegt til að vera á netinu (og mörk þessa héraðs eru ekki staðfest enn).
+L’état civil parisien d’avant 1860 a brûlé en 1871 : chercher dans l’état civil reconstitué (Archives de Paris). ¦ Þjóðskrá Parísar fyrir 1860 brann 1871: leitaðu í endurgerðri skrá (Archives de Paris).
+Après 1792, un baptême ou une sépulture n’est pas dans l’état civil : il faut le demander aux archives diocésaines. ¦ Eftir 1792 er skírn eða greftrun ekki í þjóðskrá: spyrðu biskupsdæmisskjalasafnið.
+Les registres paroissiaux en ligne de ce département commencent en {from}. ¦ Kirkjubækur þessa héraðs á netinu hefjast {from}.
+Ancienne colonie : l’état civil est aux Archives nationales d’outre-mer (Aix-en-Provence). ¦ Fyrrverandi nýlenda: þjóðskráin er í franska þjóðskjalasafninu fyrir handanhafssvæði (Aix-en-Provence).
+Hors de France : la table ne couvre que les départements français. Pour un Français né, marié ou mort à l’étranger : le Service central d’état civil (Nantes). ¦ Utan Frakklands: taflan nær aðeins yfir frönsk héruð. Fyrir Frakka sem fæddist, giftist eða lést erlendis: Miðlæga þjóðskráin (Nantes).
+Pas de date : impossible de la comparer avec la limite. ¦ Engin dagsetning: ekki hægt að bera saman við mörkin.
+Pas de lieu : on ne sait pas à quelles archives s’adresser. ¦ Enginn staður: ekki vitað hvaða skjalasafn á að leita til.
+Le département du lieu n’est pas connu : choisis la commune dans la liste des lieux, le code arrive tout seul. ¦ Hérað staðarins er óþekkt: veldu sveitarfélagið í staðalistanum og kóðinn kemur sjálfkrafa.
+Lieu : {place} → {dept} ({code}). ¦ Staður: {place} → {dept} ({code}).
+Limite des {acts} ({dept}) : en ligne jusqu’en {until} ¦ Mörk fyrir {acts} ({dept}): á netinu til {until}
+la page qui le dit ↗ ¦ síðan sem segir það ↗
+vérifié le {date} ¦ staðfest {date}
+source secondaire ¦ afleidd heimild
+année lue dans un extrait de recherche, pas encore confirmée ¦ ár lesið úr leitarútdrætti, ekki enn staðfest
+corrigé par toi ¦ leiðrétt af þér
+Limite des {acts} ({dept}) : pas encore vérifiée. ¦ Mörk fyrir {acts} ({dept}): ekki staðfest enn.
+75 ans : acte de {date} → communicable à tous le {open}. Ce jour-là, la pastille devient « 📮 À demander » toute seule. ¦ 75 ár: skjal frá {date} → opið öllum {open}. Þann dag verður merkið sjálfkrafa „📮 Þarf að biðja um“.
+75 ans passés : l’acte est communicable à tous depuis le {open}. ¦ Yfir 75 ár: skjalið hefur verið opið öllum síðan {open}.
+Un acte de décès est communicable à tous, tout de suite. ¦ Dánarskráning er opin öllum strax.
+À qui demander : ¦ Hvern á að spyrja:
+L’app ne va pas voir sur le site des archives : elle ouvre la page, c’est toi qui regardes. ¦ Appið skoðar ekki vefsvæði skjalasafnsins: það opnar síðuna og þú skoðar.
+🏛 Ouvrir les archives ({dept}) ¦ 🏛 Opna skjalasafnið ({dept})
+📮 Préparer la lettre ({who}) ¦ 📮 Undirbúa bréfið ({who})
+✓ Je l’ai trouvé en ligne ¦ ✓ Ég fann það á netinu
+✗ Pas en ligne ¦ ✗ Ekki á netinu
+🗂 Voir la table des limites ¦ 🗂 Sjá töflu markanna
+🏛 ARCHIVES EN LIGNE ¦ 🏛 SKJALASÖFN Á NETINU
+{act} : pourquoi cette pastille ? ¦ {act}: hvers vegna þetta merki?
+La page officielle disait {until} le {date}. ¦ Opinbera síðan sagði {until} þann {date}.
+Rouvrir la page ↗ ¦ Opna síðuna aftur ↗
+✓ Trouvé en ligne ¦ ✓ Fannst á netinu
+Adresse de l’image de l’acte (facultatif, conseillé) ¦ Vefslóð á mynd skjalsins (valfrjálst, mælt með)
+Vue, page ou cote (facultatif) ¦ Mynd, blaðsíða eða safnmark (valfrjálst)
+ex. vue 143 ¦ t.d. mynd 143
+Ajouter comme source de cet acte ¦ Bæta við sem heimild þessa skjals
+Ta correction vaut pour… ¦ Leiðréttingin þín gildir um…
+Tout le département : les {acts} ({dept}) sont en ligne au moins jusqu’en {year} ¦ Allt héraðið: {acts} ({dept}) eru á netinu að minnsta kosti til {year}
+Seulement cette commune ({commune}) ¦ Aðeins þetta sveitarfélag ({commune})
+Cette adresse ne commence pas par https:// ¦ Vefslóðin byrjar ekki á https://
+✓ Noté : {acts} ({dept}) en ligne au moins jusqu’en {year} ¦ ✓ Skráð: {acts} ({dept}) á netinu að minnsta kosti til {year}
+Pourquoi ? ¦ Hvers vegna?
+Le registre de cette année n’est pas en ligne ¦ Skrá þess árs er ekki á netinu
+La limite des {acts} ({dept}) passe avant {year} chez toi. ¦ Hjá þér færast mörk fyrir {acts} ({dept}) fyrir {year}.
+Seulement cette commune manque ¦ Aðeins þetta sveitarfélag vantar
+Exception pour {commune}, la limite du département ne bouge pas. ¦ Undantekning fyrir {commune}; mörk héraðsins breytast ekki.
+Je n’ai pas trouvé l’acte dans le registre ¦ Ég fann ekki skjalið í skránni
+La limite ne bouge pas ; c’est noté (« cherché, pas trouvé »). ¦ Mörkin breytast ekki; það er skráð („leitað, fannst ekki“).
+Noté : cherché, pas trouvé dans le registre ¦ Skráð: leitað, fannst ekki í skránni
+✗ Noté : pas en ligne ({place}) ¦ ✗ Skráð: ekki á netinu ({place})
+Où montrer les pastilles ¦ Hvar merkin birtast
+🗂 Archives en ligne par département ¦ 🗂 Skjalasöfn á netinu eftir héruðum
+Table livrée avec l’app (vérifiée le {date}), complétée par tes corrections. Une ligne sans source n’existe pas : le département est alors « à vérifier ». ¦ Tafla sem fylgir appinu (staðfest {date}), bætt með leiðréttingum þínum. Lína án heimildar er ekki til: héraðið er þá „á eftir að kanna“.
+La table des limites n’est pas encore livrée avec cette version : tout est « à vérifier », sauf ce que tu notes toi-même. ¦ Tafla markanna fylgir ekki enn þessari útgáfu: allt er „á eftir að kanna“, nema það sem þú skráir sjálf(ur).
+🔎 Département… ¦ 🔎 Hérað…
+En ligne jusqu’à ¦ Á netinu til
+Page officielle qui le dit ¦ Opinber síða sem segir það
+Vérifié le ¦ Staðfest
+tous ¦ öll
+＋ Noter la limite ¦ ＋ Skrá mörkin
+depuis {y} ¦ frá {y}
+à confirmer ¦ á eftir að staðfesta
+moi ¦ ég
+Retirer ma correction ¦ Fjarlægja leiðréttinguna mína
+Aucun département ne correspond. ¦ Ekkert hérað passar.
+Correction retirée : la ligne livrée avec l’app revient. ¦ Leiðrétting fjarlægð: lína appsins gildir aftur.
+En ligne jusqu’à l’année ¦ Á netinu til ársins
+ex. 1925 ¦ t.d. 1925
+Adresse de la page qui le dit (obligatoire) ¦ Vefslóð síðunnar sem segir það (skylda)
+Sans adresse, on ne peut pas enregistrer : c’est ce qui évite les limites inventées. ¦ Án vefslóðar er ekki hægt að vista: það kemur í veg fyrir uppdiktuð mörk.
+Une année entre 1500 et aujourd’hui. ¦ Ár á milli 1500 og dagsins í dag.
+L’adresse de la page qui le dit est obligatoire. ¦ Vefslóð síðunnar sem segir það er skylda.
+＋ Limite notée : {dept}, {year} ¦ ＋ Mörk skráð: {dept}, {year}
+En ligne aux archives : à télécharger, pas à demander ¦ Á netinu hjá skjalasafninu: sæktu það, ekki biðja um það
+🏛 Ouvrir ¦ 🏛 Opna
+Réservé jusqu’en {year} : à demander par l’héritier lui-même, ou extrait sans filiation ¦ Takmarkað til {year}: erfinginn sjálfur verður að biðja, eða útdráttur án foreldra
+À demander : {who} ¦ Þarf að biðja um: {who}
+📮 Lettre ¦ 📮 Bréf
+🏛 Archives ¦ 🏛 Skjalasafn
+Commence par les tables décennales. ¦ Byrjaðu á tíu ára skránum.
+Ses actes aux archives ¦ Skjölin í skjalasafninu
+Les actes n’ont pas pu être lus. ¦ Ekki tókst að lesa skjölin.
+{n} de ta base sont en ligne et pas encore liés à une source. ¦ {n} í gagnagrunninum þínum eru á netinu og ekki enn tengd heimild.
+Aussi : {maybe} peut-être en ligne · {ask} à demander · {verify} à vérifier ¦ Einnig: {maybe} kannski á netinu · {ask} þarf að biðja um · {verify} á eftir að kanna
+La table des limites n’est pas encore livrée : aucun acte ne peut être « en ligne » sans source. ¦ Tafla markanna fylgir ekki enn: ekkert skjal getur verið „á netinu“ án heimildar.
+Actes en ligne à aller voir ¦ Skjöl á netinu til að skoða
+La pastille 🏛 dit, pour chaque acte, s’il est en ligne aux archives (d’après une limite vérifiée du département), à demander (et à qui), ou réservé. Un acte en ligne sort de cette liste. ¦ Merkið 🏛 segir fyrir hvert skjal hvort það sé á netinu hjá skjalasafninu (samkvæmt staðfestum mörkum héraðsins), þurfi að biðja um það (og hvern) eða sé takmarkað. Skjal sem er á netinu fer af listanum.
+Actes ¦ Skjöl
+Arbres ¦ Ættartré
+Peut-être en ligne ¦ Kannski á netinu
+Réservé ¦ Takmarkað
+Archives nationales d’outre-mer (Aix-en-Provence) ¦ Franska þjóðskjalasafnið fyrir handanhafssvæði (Aix-en-Provence)
+Notaire ou Archives départementales (série E) ¦ Lögbókandi eða héraðsskjalasöfn (röð E)
+Service historique de la Défense (Vincennes, Caen) ¦ Sögudeild varnarmála (Vincennes, Caen)
+baptêmes ¦ skírnir
+sépultures ¦ greftranir
+tables décennales ¦ tíu ára skrár
+registres paroissiaux ¦ kirkjubækur
+Pastilles sur les fiches ¦ Merki á færslum
+à côté de chaque naissance, baptême, mariage, décès, sépulture ¦ við hverja fæðingu, skírn, giftingu, andlát, greftrun
+Pastilles dans la Chronologie ¦ Merki á tímalínunni
+Colonne « 🏛 Archives » dans la liste des Événements ¦ Dálkurinn „🏛 Skjalasafn“ í atburðalistanum
+Cacher la pastille quand l’acte est déjà lié ¦ Fela merkið þegar skjalið er þegar tengt
+sinon : petite « 🟢 ✓ lié » ¦ annars: lítið „🟢 ✓ tengt“
+Widget « 🏛 Actes en ligne à aller voir » : ancêtres directs seulement ¦ Græjan „🏛 Skjöl á netinu til að skoða“: aðeins beinir forfeður
+Vérifiés ¦ Staðfest
+Corrigés par moi ¦ Leiðrétt af mér
+Actes en ligne aux archives ¦ Skjöl á netinu hjá skjalasöfnum
+Une pastille sur chaque naissance, baptême, mariage, décès et sépulture : en ligne, à demander (et à qui), réservé, à vérifier. Jamais « en ligne » sans une limite sourcée. ¦ Merki við hverja fæðingu, skírn, giftingu, andlát og greftrun: á netinu, þarf að biðja um (og hvern), takmarkað, á eftir að kanna. Aldrei „á netinu“ án marka með heimild.
+Correction introuvable. ¦ Leiðrétting fannst ekki.
+Type d’acte inconnu. ¦ Óþekkt tegund skjals.
+Année incorrecte. ¦ Rangt ár.
+Cet acte n’a pas de département ou de date : précise d’abord le lieu et la date. ¦ Þetta skjal hefur ekkert hérað eða dagsetningu: tilgreindu fyrst stað og dagsetningu.

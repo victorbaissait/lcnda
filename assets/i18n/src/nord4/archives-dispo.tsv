@@ -1,0 +1,130 @@
+fr ¦ fi ¦ hu
+# 🏛 Actes en ligne aux archives (docs/design/archives-en-ligne.html)
+Mairie de {commune} ¦ {commune} – kunnantalo ¦ {commune} polgármesteri hivatala
+Archives départementales ({dept}) ¦ Departementtien arkistot ({dept}) ¦ Megyei levéltár ({dept})
+🔒 Réservé jusqu’en {year} ¦ 🔒 Rajoitettu vuoteen {year} asti ¦ 🔒 Korlátozott {year}-ig
+déjà lié à une source ¦ jo liitetty lähteeseen ¦ már forráshoz kapcsolva
+Pourquoi cette pastille ? ¦ Miksi tämä merkki? ¦ Miért ez a címke?
+✓ lié ¦ ✓ liitetty ¦ ✓ kapcsolva
+Règle : code du patrimoine, art. L213-2 ({legi}) ; qui peut demander avant : décret 2017-890, art. 30 ({decret}). ¦ Sääntö: Ranskan kulttuuriperintölaki, art. L213-2 ({legi}); kuka voi pyytää aiemmin: asetus 2017-890, art. 30 ({decret}). ¦ Szabály: francia örökségvédelmi törvénykönyv, L213-2. cikk ({legi}); ki kérheti korábban: 2017-890. sz. rendelet, 30. cikk ({decret}).
+Une limite vérifiée pour ce département et ce type d’acte couvre la date. ¦ Tarkistettu raja tälle departementille ja asiakirjatyypille kattaa päivämäärän. ¦ Egy ellenőrzött határ erre a megyére és erre az irattípusra lefedi a dátumot.
+D’après une source secondaire ({source}) : à confirmer sur la page officielle des archives. ¦ Toissijaisen lähteen ({source}) mukaan: vahvistettava arkiston virallisella sivulla. ¦ Másodlagos forrás ({source}) szerint: a levéltár hivatalos oldalán kell megerősíteni.
+Peut-être en ligne (d’après {source}, à confirmer) : année lue dans un extrait de recherche, pas encore confirmée. ¦ Ehkä verkossa ({source} mukaan, vahvistettava): vuosi luettu hakuotteesta, ei vielä vahvistettu. ¦ Talán online ({source} szerint, megerősítendő): keresési kivonatból olvasott év, még nincs megerősítve.
+la table ¦ taulukko ¦ a táblázat
+Date approximative : la fourchette {from}–{to} chevauche la limite ({until}). ¦ Likimääräinen päivämäärä: väli {from}–{to} ulottuu rajan ({until}) yli. ¦ Hozzávetőleges dátum: a(z) {from}–{to} tartomány átfedi a határt ({until}).
+La date est à 2 ans de la limite ({until}) : le registre est peut-être en ligne depuis. ¦ Päivämäärä on 2 vuoden päässä rajasta ({until}): rekisteri voi olla sittemmin verkossa. ¦ A dátum 2 évre van a határtól ({until}): a nyilvántartás azóta talán elérhető online.
+Acte de plus de 100 ans, mais la limite de ce département n’est pas encore vérifiée : jamais « en ligne » sans source. ¦ Yli 100 vuotta vanha asiakirja, mutta tämän departementin rajaa ei ole vielä tarkistettu: ei koskaan ”verkossa” ilman lähdettä. ¦ 100 évnél régebbi irat, de ennek a megyének a határa még nincs ellenőrizve: forrás nélkül soha nem „online”.
+Trop récent pour être en ligne : la limite de ce département est {until}. ¦ Liian tuore ollakseen verkossa: tämän departementin raja on {until}. ¦ Túl friss ahhoz, hogy online legyen: a megye határa {until}.
+Trop récent pour être en ligne (et la limite de ce département n’est pas encore vérifiée). ¦ Liian tuore ollakseen verkossa (eikä tämän departementin rajaa ole vielä tarkistettu). ¦ Túl friss ahhoz, hogy online legyen (és a megye határa még nincs ellenőrizve).
+L’état civil parisien d’avant 1860 a brûlé en 1871 : chercher dans l’état civil reconstitué (Archives de Paris). ¦ Pariisin ennen vuotta 1860 laaditut väestörekisterit paloivat 1871: etsi rekonstruoidusta rekisteristä (Archives de Paris). ¦ Az 1860 előtti párizsi anyakönyvek 1871-ben elégtek: keresd a helyreállított anyakönyvekben (Archives de Paris).
+Après 1792, un baptême ou une sépulture n’est pas dans l’état civil : il faut le demander aux archives diocésaines. ¦ Vuoden 1792 jälkeen kaste tai hautaus ei ole väestörekisterissä: kysy hiippakunnan arkistosta. ¦ 1792 után a keresztelő vagy temetés nincs az állami anyakönyvben: az egyházmegyei levéltártól kell kérni.
+Les registres paroissiaux en ligne de ce département commencent en {from}. ¦ Tämän departementin kirkonkirjat verkossa alkavat vuodesta {from}. ¦ A megye online egyházi anyakönyvei {from}-ban kezdődnek.
+Ancienne colonie : l’état civil est aux Archives nationales d’outre-mer (Aix-en-Provence). ¦ Entinen siirtomaa: väestörekisterit ovat Ranskan merentakaisten alueiden kansallisarkistossa (Aix-en-Provence). ¦ Egykori gyarmat: az anyakönyvek a Tengerentúli Nemzeti Levéltárban vannak (Aix-en-Provence).
+Hors de France : la table ne couvre que les départements français. Pour un Français né, marié ou mort à l’étranger : le Service central d’état civil (Nantes). ¦ Ranskan ulkopuolella: taulukko kattaa vain Ranskan departementit. Ulkomailla syntyneelle, vihitylle tai kuolleelle ranskalaiselle: keskusväestörekisteri (Nantes). ¦ Franciaországon kívül: a táblázat csak a francia megyéket fedi le. Külföldön született, házasodott vagy elhunyt francia állampolgárnál: a Központi Anyakönyvi Hivatal (Nantes).
+Pas de date : impossible de la comparer avec la limite. ¦ Ei päivämäärää: rajaan ei voi verrata. ¦ Nincs dátum: nem vethető össze a határral.
+Pas de lieu : on ne sait pas à quelles archives s’adresser. ¦ Ei paikkaa: ei tiedetä, mihin arkistoon kääntyä. ¦ Nincs hely: nem tudni, melyik levéltárhoz forduljunk.
+Le département du lieu n’est pas connu : choisis la commune dans la liste des lieux, le code arrive tout seul. ¦ Paikan departementtia ei tunneta: valitse kunta paikkaluettelosta, niin koodi tulee itsestään. ¦ A hely megyéje ismeretlen: válaszd ki a települést a helyek listájából, és a kód magától megjelenik.
+Lieu : {place} → {dept} ({code}). ¦ Paikka: {place} → {dept} ({code}). ¦ Hely: {place} → {dept} ({code}).
+Limite des {acts} ({dept}) : en ligne jusqu’en {until} ¦ Raja ({acts}, {dept}): verkossa vuoteen {until} asti ¦ Határ ({acts}, {dept}): online {until}-ig
+la page qui le dit ↗ ¦ sivu, jolla se kerrotaan ↗ ¦ az oldal, amely ezt mondja ↗
+vérifié le {date} ¦ tarkistettu {date} ¦ ellenőrizve: {date}
+source secondaire ¦ toissijainen lähde ¦ másodlagos forrás
+année lue dans un extrait de recherche, pas encore confirmée ¦ vuosi luettu hakuotteesta, ei vielä vahvistettu ¦ keresési kivonatból olvasott év, még nincs megerősítve
+corrigé par toi ¦ sinun korjaamasi ¦ általad javítva
+Limite des {acts} ({dept}) : pas encore vérifiée. ¦ Raja ({acts}, {dept}): ei vielä tarkistettu. ¦ Határ ({acts}, {dept}): még nincs ellenőrizve.
+75 ans : acte de {date} → communicable à tous le {open}. Ce jour-là, la pastille devient « 📮 À demander » toute seule. ¦ 75 vuotta: asiakirja {date} → kaikkien saatavilla {open}. Sinä päivänä merkki muuttuu itsestään muotoon ”📮 Pyydettävä”. ¦ 75 év: {date} irat → mindenki számára elérhető ekkor: {open}. Aznap a címke magától „📮 Kérni kell” lesz.
+75 ans passés : l’acte est communicable à tous depuis le {open}. ¦ Yli 75 vuotta: asiakirja on ollut kaikkien saatavilla {open} alkaen. ¦ Több mint 75 év: az irat {open} óta mindenki számára elérhető.
+Un acte de décès est communicable à tous, tout de suite. ¦ Kuolinasiakirja on heti kaikkien saatavilla. ¦ A halotti anyakönyvi bejegyzés azonnal mindenki számára elérhető.
+À qui demander : ¦ Keneltä pyytää: ¦ Kitől kérd:
+L’app ne va pas voir sur le site des archives : elle ouvre la page, c’est toi qui regardes. ¦ Sovellus ei katso arkiston sivustolta: se avaa sivun ja sinä katsot. ¦ Az app nem néz be a levéltár oldalára: megnyitja, te nézed meg.
+🏛 Ouvrir les archives ({dept}) ¦ 🏛 Avaa arkisto ({dept}) ¦ 🏛 Levéltár megnyitása ({dept})
+📮 Préparer la lettre ({who}) ¦ 📮 Valmistele kirje ({who}) ¦ 📮 Levél előkészítése ({who})
+✓ Je l’ai trouvé en ligne ¦ ✓ Löysin sen verkosta ¦ ✓ Megtaláltam online
+✗ Pas en ligne ¦ ✗ Ei verkossa ¦ ✗ Nincs online
+🗂 Voir la table des limites ¦ 🗂 Näytä rajojen taulukko ¦ 🗂 Határok táblázata
+🏛 ARCHIVES EN LIGNE ¦ 🏛 ARKISTOT VERKOSSA ¦ 🏛 ONLINE LEVÉLTÁRAK
+{act} : pourquoi cette pastille ? ¦ {act}: miksi tämä merkki? ¦ {act}: miért ez a címke?
+La page officielle disait {until} le {date}. ¦ Virallinen sivu ilmoitti {date} vuoden {until}. ¦ A hivatalos oldal {date}-n {until}-t írt.
+Rouvrir la page ↗ ¦ Avaa sivu uudelleen ↗ ¦ Oldal újbóli megnyitása ↗
+✓ Trouvé en ligne ¦ ✓ Löytyi verkosta ¦ ✓ Online megtalálva
+Adresse de l’image de l’acte (facultatif, conseillé) ¦ Asiakirjan kuvan osoite (valinnainen, suositeltava) ¦ Az irat képének címe (nem kötelező, ajánlott)
+Vue, page ou cote (facultatif) ¦ Kuva, sivu tai signum (valinnainen) ¦ Kép, oldal vagy jelzet (nem kötelező)
+ex. vue 143 ¦ esim. kuva 143 ¦ pl. 143. kép
+Ajouter comme source de cet acte ¦ Lisää tämän asiakirjan lähteeksi ¦ Hozzáadás az irat forrásaként
+Ta correction vaut pour… ¦ Korjauksesi koskee… ¦ A javításod erre vonatkozik…
+Tout le département : les {acts} ({dept}) sont en ligne au moins jusqu’en {year} ¦ Koko departementti: {acts} ({dept}) ovat verkossa ainakin vuoteen {year} ¦ Az egész megye: a(z) {acts} ({dept}) legalább {year}-ig online
+Seulement cette commune ({commune}) ¦ Vain tämä kunta ({commune}) ¦ Csak ez a település ({commune})
+Cette adresse ne commence pas par https:// ¦ Osoite ei ala https:// ¦ Ez a cím nem https://-sel kezdődik
+✓ Noté : {acts} ({dept}) en ligne au moins jusqu’en {year} ¦ ✓ Merkitty: {acts} ({dept}) verkossa ainakin vuoteen {year} ¦ ✓ Feljegyezve: {acts} ({dept}) legalább {year}-ig online
+Pourquoi ? ¦ Miksi? ¦ Miért?
+Le registre de cette année n’est pas en ligne ¦ Sen vuoden rekisteri ei ole verkossa ¦ Annak az évnek a nyilvántartása nincs online
+La limite des {acts} ({dept}) passe avant {year} chez toi. ¦ Sinulla rajan ({acts}, {dept}) kohta siirtyy ennen vuotta {year}. ¦ Nálad a határ ({acts}, {dept}) {year} elé kerül.
+Seulement cette commune manque ¦ Vain tämä kunta puuttuu ¦ Csak ez a település hiányzik
+Exception pour {commune}, la limite du département ne bouge pas. ¦ Poikkeus: {commune}; departementin raja ei muutu. ¦ Kivétel: {commune}; a megye határa nem változik.
+Je n’ai pas trouvé l’acte dans le registre ¦ En löytänyt asiakirjaa rekisteristä ¦ Nem találtam meg az iratot a nyilvántartásban
+La limite ne bouge pas ; c’est noté (« cherché, pas trouvé »). ¦ Raja ei muutu; se merkitään (”etsitty, ei löytynyt”). ¦ A határ nem változik; feljegyezzük („keresve, nem található”).
+Noté : cherché, pas trouvé dans le registre ¦ Merkitty: etsitty, ei löytynyt rekisteristä ¦ Feljegyezve: keresve, nem található a nyilvántartásban
+✗ Noté : pas en ligne ({place}) ¦ ✗ Merkitty: ei verkossa ({place}) ¦ ✗ Feljegyezve: nincs online ({place})
+Où montrer les pastilles ¦ Missä merkit näytetään ¦ Hol jelenjenek meg a címkék
+🗂 Archives en ligne par département ¦ 🗂 Arkistot verkossa departementeittain ¦ 🗂 Online levéltárak megyénként
+Table livrée avec l’app (vérifiée le {date}), complétée par tes corrections. Une ligne sans source n’existe pas : le département est alors « à vérifier ». ¦ Sovelluksen mukana tuleva taulukko (tarkistettu {date}), täydennetty korjauksillasi. Riviä ilman lähdettä ei ole: departementti on silloin ”tarkistettava”. ¦ Az appal szállított táblázat (ellenőrizve: {date}), a javításaiddal kiegészítve. Forrás nélküli sor nem létezik: a megye ilyenkor „ellenőrizendő”.
+La table des limites n’est pas encore livrée avec cette version : tout est « à vérifier », sauf ce que tu notes toi-même. ¦ Rajojen taulukko ei vielä tule tämän version mukana: kaikki on ”tarkistettava”, paitsi mitä itse merkitset. ¦ A határok táblázata még nem része ennek a verziónak: minden „ellenőrizendő”, kivéve, amit te magad jegyzel fel.
+🔎 Département… ¦ 🔎 Departementti… ¦ 🔎 Megye…
+En ligne jusqu’à ¦ Verkossa asti ¦ Online eddig
+Page officielle qui le dit ¦ Virallinen sivu, jolla se kerrotaan ¦ Hivatalos oldal, amely ezt mondja
+Vérifié le ¦ Tarkistettu ¦ Ellenőrizve
+tous ¦ kaikki ¦ mind
+＋ Noter la limite ¦ ＋ Merkitse raja ¦ ＋ Határ feljegyzése
+depuis {y} ¦ vuodesta {y} ¦ {y}-tól
+à confirmer ¦ vahvistettava ¦ megerősítendő
+moi ¦ minä ¦ én
+Retirer ma correction ¦ Poista korjaukseni ¦ Javításom eltávolítása
+Aucun département ne correspond. ¦ Mikään departementti ei vastaa. ¦ Nincs egyező megye.
+Correction retirée : la ligne livrée avec l’app revient. ¦ Korjaus poistettu: sovelluksen mukana tullut rivi palaa. ¦ Javítás eltávolítva: visszaáll az appal szállított sor.
+En ligne jusqu’à l’année ¦ Verkossa vuoteen asti ¦ Online eddig az évig
+ex. 1925 ¦ esim. 1925 ¦ pl. 1925
+Adresse de la page qui le dit (obligatoire) ¦ Sen sivun osoite, jolla se kerrotaan (pakollinen) ¦ Az ezt mondó oldal címe (kötelező)
+Sans adresse, on ne peut pas enregistrer : c’est ce qui évite les limites inventées. ¦ Ilman osoitetta ei voi tallentaa: näin vältetään keksityt rajat. ¦ Cím nélkül nem menthető: így kerüljük el a kitalált határokat.
+Une année entre 1500 et aujourd’hui. ¦ Vuosi väliltä 1500 – tänään. ¦ Egy év 1500 és ma között.
+L’adresse de la page qui le dit est obligatoire. ¦ Sen sivun osoite, jolla se kerrotaan, on pakollinen. ¦ Az ezt mondó oldal címe kötelező.
+＋ Limite notée : {dept}, {year} ¦ ＋ Raja merkitty: {dept}, {year} ¦ ＋ Határ feljegyezve: {dept}, {year}
+En ligne aux archives : à télécharger, pas à demander ¦ Verkossa arkistossa: ladattava, ei pyydettävä ¦ Online a levéltárban: letölthető, nem kell kérni
+🏛 Ouvrir ¦ 🏛 Avaa ¦ 🏛 Megnyitás
+Réservé jusqu’en {year} : à demander par l’héritier lui-même, ou extrait sans filiation ¦ Rajoitettu vuoteen {year}: perillisen on pyydettävä itse, tai ote ilman vanhempia ¦ Korlátozott {year}-ig: az örökösnek magának kell kérnie, vagy szülők nélküli kivonat
+À demander : {who} ¦ Pyydettävä: {who} ¦ Kérni kell: {who}
+📮 Lettre ¦ 📮 Kirje ¦ 📮 Levél
+🏛 Archives ¦ 🏛 Arkisto ¦ 🏛 Levéltár
+Commence par les tables décennales. ¦ Aloita kymmenvuotisluetteloista. ¦ Kezdd a tízéves mutatókkal.
+Ses actes aux archives ¦ Asiakirjat arkistossa ¦ Iratai a levéltárban
+Les actes n’ont pas pu être lus. ¦ Asiakirjoja ei voitu lukea. ¦ Az iratokat nem sikerült beolvasni.
+{n} de ta base sont en ligne et pas encore liés à une source. ¦ {n} tietokannastasi on verkossa eikä vielä liitetty lähteeseen. ¦ Az adatbázisodból {n} online van, és még nincs forráshoz kapcsolva.
+Aussi : {maybe} peut-être en ligne · {ask} à demander · {verify} à vérifier ¦ Lisäksi: {maybe} ehkä verkossa · {ask} pyydettävä · {verify} tarkistettava ¦ Továbbá: {maybe} talán online · {ask} kérni kell · {verify} ellenőrizendő
+La table des limites n’est pas encore livrée : aucun acte ne peut être « en ligne » sans source. ¦ Rajojen taulukkoa ei vielä toimiteta: mikään asiakirja ei voi olla ”verkossa” ilman lähdettä. ¦ A határok táblázata még nincs mellékelve: forrás nélkül egy irat sem lehet „online”.
+Actes en ligne à aller voir ¦ Verkossa olevat asiakirjat katsottavaksi ¦ Megnézendő online iratok
+La pastille 🏛 dit, pour chaque acte, s’il est en ligne aux archives (d’après une limite vérifiée du département), à demander (et à qui), ou réservé. Un acte en ligne sort de cette liste. ¦ Merkki 🏛 kertoo kunkin asiakirjan kohdalla, onko se verkossa arkistossa (departementin tarkistetun rajan mukaan), pyydettävä (ja keneltä) vai rajoitettu. Verkossa oleva asiakirja poistuu tästä luettelosta. ¦ A 🏛 címke minden iratnál megmondja, online van-e a levéltárban (a megye ellenőrzött határa szerint), kérni kell-e (és kitől), vagy korlátozott. Az online irat kikerül ebből a listából.
+Actes ¦ Asiakirjat ¦ Iratok
+Arbres ¦ Sukupuut ¦ Családfák
+Peut-être en ligne ¦ Ehkä verkossa ¦ Talán online
+Réservé ¦ Rajoitettu ¦ Korlátozott
+Archives nationales d’outre-mer (Aix-en-Provence) ¦ Ranskan merentakaisten alueiden kansallisarkisto (Aix-en-Provence) ¦ Tengerentúli Nemzeti Levéltár (Aix-en-Provence)
+Notaire ou Archives départementales (série E) ¦ Notaari tai departementtien arkistot (sarja E) ¦ Közjegyző vagy megyei levéltár (E sorozat)
+Service historique de la Défense (Vincennes, Caen) ¦ Puolustuksen historiallinen palvelu (Vincennes, Caen) ¦ Védelmi Történeti Szolgálat (Vincennes, Caen)
+baptêmes ¦ kasteet ¦ keresztelők
+sépultures ¦ hautaukset ¦ temetések
+tables décennales ¦ kymmenvuotisluettelot ¦ tízéves mutatók
+registres paroissiaux ¦ kirkonkirjat ¦ egyházi anyakönyvek
+Pastilles sur les fiches ¦ Merkit tiedoissa ¦ Címkék az adatlapokon
+à côté de chaque naissance, baptême, mariage, décès, sépulture ¦ jokaisen syntymän, kasteen, avioliiton, kuoleman, hautauksen vieressä ¦ minden születés, keresztelő, házasság, halál, temetés mellett
+Pastilles dans la Chronologie ¦ Merkit aikajanalla ¦ Címkék az Idővonalon
+Colonne « 🏛 Archives » dans la liste des Événements ¦ Sarake ”🏛 Arkisto” tapahtumaluettelossa ¦ „🏛 Levéltár” oszlop az Események listában
+Cacher la pastille quand l’acte est déjà lié ¦ Piilota merkki, kun asiakirja on jo liitetty ¦ Címke elrejtése, ha az irat már kapcsolva van
+sinon : petite « 🟢 ✓ lié » ¦ muuten: pieni ”🟢 ✓ liitetty” ¦ különben: kicsi „🟢 ✓ kapcsolva”
+Widget « 🏛 Actes en ligne à aller voir » : ancêtres directs seulement ¦ Pienoisohjelma ”🏛 Verkossa olevat asiakirjat katsottavaksi”: vain suorat esivanhemmat ¦ „🏛 Megnézendő online iratok” widget: csak egyenes ági ősök
+Vérifiés ¦ Tarkistetut ¦ Ellenőrzött
+Corrigés par moi ¦ Minun korjaamani ¦ Általam javított
+Actes en ligne aux archives ¦ Asiakirjat verkossa arkistoissa ¦ Online iratok a levéltárakban
+Une pastille sur chaque naissance, baptême, mariage, décès et sépulture : en ligne, à demander (et à qui), réservé, à vérifier. Jamais « en ligne » sans une limite sourcée. ¦ Merkki jokaiseen syntymään, kasteeseen, avioliittoon, kuolemaan ja hautaukseen: verkossa, pyydettävä (ja keneltä), rajoitettu, tarkistettava. Ei koskaan ”verkossa” ilman lähteellistä rajaa. ¦ Címke minden születésnél, keresztelőnél, házasságnál, halálnál és temetésnél: online, kérni kell (és kitől), korlátozott, ellenőrizendő. Forrással igazolt határ nélkül soha nem „online”.
+Correction introuvable. ¦ Korjausta ei löytynyt. ¦ A javítás nem található.
+Type d’acte inconnu. ¦ Tuntematon asiakirjatyyppi. ¦ Ismeretlen irattípus.
+Année incorrecte. ¦ Virheellinen vuosi. ¦ Hibás év.
+Cet acte n’a pas de département ou de date : précise d’abord le lieu et la date. ¦ Asiakirjalla ei ole departementtia tai päivämäärää: tarkenna ensin paikka ja päivämäärä. ¦ Az iratnak nincs megyéje vagy dátuma: előbb pontosítsd a helyet és a dátumot.

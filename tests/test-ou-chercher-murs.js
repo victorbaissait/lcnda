@@ -306,11 +306,12 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(dir), maxBuffer: 1 <
                     await p.locator('#toast-region button', { hasText: 'Annuler' }).first().click();
                     await p.waitForSelector(`.ouc-page .ouc-list [data-ouc-key="${key}"]`, { timeout: 10000 });
                     assert.equal(php(`echo (int) $pdo->query("SELECT count(*) FROM archive_digest_entries WHERE template_key='ouc:${key}'")->fetchColumn();`), '0');
-                    // « Gratuites seulement » : le même réglage que les lots
+                    // « Gratuites seulement » : le même réglage que les lots (sur la page, dans « Filtrer ▾ » → Prix, barre H10)
                     const before = await p.evaluate(() => window.LCNDA_EXT.ouChercher.freeOnly());
-                    await p.locator('.ouc-page [data-ouc-free]').evaluate(i => { i.checked = !i.checked; i.dispatchEvent(new Event('change', {bubbles: true})); });
+                    await p.locator('.ouc-page .ouc-listbar').evaluate((b, v) => b.setFilter('free', v), !before);
                     assert.equal(await p.evaluate(() => window.LCNDA_EXT.ouChercher.freeOnly()), !before);
-                    await p.locator('.ouc-page [data-ouc-free]').evaluate(i => { i.checked = !i.checked; i.dispatchEvent(new Event('change', {bubbles: true})); });
+                    await p.waitForSelector('.ouc-page .ouc-listbar');
+                    await p.locator('.ouc-page .ouc-listbar').evaluate((b, v) => b.setFilter('free', v), before);
                     // les murs de brique : H10, fenêtre, statut Résolu → 🎉
                     await p.evaluate(() => window.LCNDA_EXT.ouChercher.openPerson(0, 'murs'));
                     await p.waitForSelector('.ouc-walls .ui-listbar', { timeout: 20000 });

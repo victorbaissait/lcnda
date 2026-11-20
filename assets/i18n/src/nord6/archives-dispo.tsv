@@ -1,0 +1,130 @@
+fr ¦ lt ¦ lv ¦ et
+# 🏛 Actes en ligne aux archives (docs/design/archives-en-ligne.html)
+Mairie de {commune} ¦ {commune} savivaldybė ¦ {commune} pašvaldība ¦ {commune} vallavalitsus
+Archives départementales ({dept}) ¦ Archives départementales ({dept}) ¦ Archives départementales ({dept}) ¦ Archives départementales ({dept})
+🔒 Réservé jusqu’en {year} ¦ 🔒 Ribojama iki {year} m. ¦ 🔒 Ierobežots līdz {year}. gadam ¦ 🔒 Piiratud kuni {year}
+déjà lié à une source ¦ jau susieta su šaltiniu ¦ jau sasaistīts ar avotu ¦ juba allikaga seotud
+Pourquoi cette pastille ? ¦ Kodėl ši žymė? ¦ Kāpēc šī zīme? ¦ Miks see märk?
+✓ lié ¦ ✓ susieta ¦ ✓ sasaistīts ¦ ✓ seotud
+Règle : code du patrimoine, art. L213-2 ({legi}) ; qui peut demander avant : décret 2017-890, art. 30 ({decret}). ¦ Taisyklė: Prancūzijos paveldo kodeksas, L213-2 str. ({legi}); kas gali prašyti anksčiau: dekretas 2017-890, 30 str. ({decret}). ¦ Noteikums: Francijas mantojuma kodekss, L213-2. pants ({legi}); kas var pieprasīt agrāk: dekrēts 2017-890, 30. pants ({decret}). ¦ Reegel: Prantsuse pärandiseadustik, art. L213-2 ({legi}); kes võib varem küsida: määrus 2017-890, art. 30 ({decret}).
+Une limite vérifiée pour ce département et ce type d’acte couvre la date. ¦ Patikrinta šio departamento ir šios rūšies akto riba apima datą. ¦ Pārbaudīta robeža šim departamentam un šim akta veidam aptver datumu. ¦ Selle departemangu ja selle akti liigi kontrollitud piir katab kuupäeva.
+D’après une source secondaire ({source}) : à confirmer sur la page officielle des archives. ¦ Pagal antrinį šaltinį ({source}): reikia patvirtinti oficialiame archyvo puslapyje. ¦ Saskaņā ar sekundāru avotu ({source}): jāapstiprina arhīva oficiālajā lapā. ¦ Teisese allika ({source}) järgi: tuleb kinnitada arhiivi ametlikul lehel.
+Peut-être en ligne (d’après {source}, à confirmer) : année lue dans un extrait de recherche, pas encore confirmée. ¦ Galbūt internete (pagal {source}, reikia patvirtinti): metai perskaityti paieškos ištraukoje, dar nepatvirtinti. ¦ Varbūt tiešsaistē (saskaņā ar {source}, jāapstiprina): gads nolasīts meklēšanas fragmentā, vēl nav apstiprināts. ¦ Võib-olla veebis ({source} järgi, kinnitada): aasta loetud otsingu väljavõttest, veel kinnitamata.
+la table ¦ lentelė ¦ tabula ¦ tabel
+Date approximative : la fourchette {from}–{to} chevauche la limite ({until}). ¦ Apytikslė data: intervalas {from}–{to} persidengia su riba ({until}). ¦ Aptuvens datums: diapazons {from}–{to} pārklājas ar robežu ({until}). ¦ Ligikaudne kuupäev: vahemik {from}–{to} kattub piiriga ({until}).
+La date est à 2 ans de la limite ({until}) : le registre est peut-être en ligne depuis. ¦ Data yra 2 metai nuo ribos ({until}): knyga galbūt jau paskelbta internete. ¦ Datums ir 2 gadu attālumā no robežas ({until}): reģistrs, iespējams, jau ir tiešsaistē. ¦ Kuupäev on piirist ({until}) 2 aasta kaugusel: register võib vahepeal veebis olla.
+Acte de plus de 100 ans, mais la limite de ce département n’est pas encore vérifiée : jamais « en ligne » sans source. ¦ Aktas senesnis nei 100 metų, bet šio departamento riba dar nepatikrinta: niekada „internete“ be šaltinio. ¦ Akts ir vecāks par 100 gadiem, bet šī departamenta robeža vēl nav pārbaudīta: nekad “tiešsaistē” bez avota. ¦ Üle 100 aasta vana akt, kuid selle departemangu piir pole veel kontrollitud: ilma allikata mitte kunagi „veebis“.
+Trop récent pour être en ligne : la limite de ce département est {until}. ¦ Per naujas, kad būtų internete: šio departamento riba yra {until}. ¦ Pārāk jauns, lai būtu tiešsaistē: šī departamenta robeža ir {until}. ¦ Liiga uus, et veebis olla: selle departemangu piir on {until}.
+Trop récent pour être en ligne (et la limite de ce département n’est pas encore vérifiée). ¦ Per naujas, kad būtų internete (o šio departamento riba dar nepatikrinta). ¦ Pārāk jauns, lai būtu tiešsaistē (un šī departamenta robeža vēl nav pārbaudīta). ¦ Liiga uus, et veebis olla (ja selle departemangu piir pole veel kontrollitud).
+L’état civil parisien d’avant 1860 a brûlé en 1871 : chercher dans l’état civil reconstitué (Archives de Paris). ¦ Paryžiaus metrikai iki 1860 m. sudegė 1871 m.: ieškok atkurtuose metrikuose (Archives de Paris). ¦ Parīzes civilstāvokļa akti pirms 1860. gada sadega 1871. gadā: meklē atjaunotajos aktos (Archives de Paris). ¦ Pariisi perekonnaseisuaktid enne 1860. aastat põlesid 1871: otsi taastatud aktidest (Archives de Paris).
+Après 1792, un baptême ou une sépulture n’est pas dans l’état civil : il faut le demander aux archives diocésaines. ¦ Po 1792 m. krikšto ar laidojimo nėra civilinės metrikacijos įrašuose: reikia kreiptis į vyskupijos archyvą. ¦ Pēc 1792. gada kristības vai apbedīšana nav civilstāvokļa aktos: jāprasa diecēzes arhīvam. ¦ Pärast 1792. aastat pole ristimist ega matust perekonnaseisuaktides: küsi piiskopkonna arhiivist.
+Les registres paroissiaux en ligne de ce département commencent en {from}. ¦ Šio departamento parapijų metrikų knygos internete prasideda {from} m. ¦ Šī departamenta draudžu grāmatas tiešsaistē sākas {from}. gadā. ¦ Selle departemangu kirikuraamatud algavad veebis aastast {from}.
+Ancienne colonie : l’état civil est aux Archives nationales d’outre-mer (Aix-en-Provence). ¦ Buvusi kolonija: metrikai saugomi Nacionaliniame užjūrio archyve (Aix-en-Provence). ¦ Bijusī kolonija: civilstāvokļa akti glabājas Aizjūras nacionālajā arhīvā (Aix-en-Provence). ¦ Endine koloonia: perekonnaseisuaktid on Prantsuse ülemeremaade rahvusarhiivis (Aix-en-Provence).
+Hors de France : la table ne couvre que les départements français. Pour un Français né, marié ou mort à l’étranger : le Service central d’état civil (Nantes). ¦ Už Prancūzijos ribų: lentelė apima tik Prancūzijos departamentus. Prancūzui, gimusiam, susituokusiam ar mirusiam užsienyje: Centrinė civilinės metrikacijos tarnyba (Nantas). ¦ Ārpus Francijas: tabula aptver tikai Francijas departamentus. Francūzim, kas dzimis, precējies vai miris ārzemēs: Centrālais civilstāvokļa dienests (Nanta). ¦ Väljaspool Prantsusmaad: tabel katab ainult Prantsuse departemangud. Välismaal sündinud, abiellunud või surnud prantslase puhul: keskne perekonnaseisuamet (Nantes).
+Pas de date : impossible de la comparer avec la limite. ¦ Nėra datos: neįmanoma palyginti su riba. ¦ Nav datuma: nevar salīdzināt ar robežu. ¦ Kuupäev puudub: piiriga ei saa võrrelda.
+Pas de lieu : on ne sait pas à quelles archives s’adresser. ¦ Nėra vietos: nežinoma, į kurį archyvą kreiptis. ¦ Nav vietas: nav zināms, kuram arhīvam jāvēršas. ¦ Koht puudub: pole teada, millise arhiivi poole pöörduda.
+Le département du lieu n’est pas connu : choisis la commune dans la liste des lieux, le code arrive tout seul. ¦ Vietos departamentas nežinomas: pasirink savivaldybę vietų sąraše, kodas atsiras pats. ¦ Vietas departaments nav zināms: izvēlies pašvaldību vietu sarakstā, un kods parādīsies pats. ¦ Koha departemang pole teada: vali vald kohtade loendist, kood tuleb ise.
+Lieu : {place} → {dept} ({code}). ¦ Vieta: {place} → {dept} ({code}). ¦ Vieta: {place} → {dept} ({code}). ¦ Koht: {place} → {dept} ({code}).
+Limite des {acts} ({dept}) : en ligne jusqu’en {until} ¦ Riba ({acts}, {dept}): internete iki {until} m. ¦ Robeža ({acts}, {dept}): tiešsaistē līdz {until}. gadam ¦ Piir ({acts}, {dept}): veebis kuni {until}
+la page qui le dit ↗ ¦ puslapis, kuriame tai nurodyta ↗ ¦ lapa, kurā tas teikts ↗ ¦ leht, kus see on kirjas ↗
+vérifié le {date} ¦ patikrinta {date} ¦ pārbaudīts {date} ¦ kontrollitud {date}
+source secondaire ¦ antrinis šaltinis ¦ sekundārs avots ¦ teisene allikas
+année lue dans un extrait de recherche, pas encore confirmée ¦ metai perskaityti paieškos ištraukoje, dar nepatvirtinti ¦ gads nolasīts meklēšanas fragmentā, vēl nav apstiprināts ¦ aasta loetud otsingu väljavõttest, veel kinnitamata
+corrigé par toi ¦ tavo pataisyta ¦ tevis labots ¦ sinu parandatud
+Limite des {acts} ({dept}) : pas encore vérifiée. ¦ Riba ({acts}, {dept}): dar nepatikrinta. ¦ Robeža ({acts}, {dept}): vēl nav pārbaudīta. ¦ Piir ({acts}, {dept}): veel kontrollimata.
+75 ans : acte de {date} → communicable à tous le {open}. Ce jour-là, la pastille devient « 📮 À demander » toute seule. ¦ 75 metai: aktas {date} → prieinamas visiems {open}. Tą dieną žymė pati taps „📮 Užsakyti“. ¦ 75 gadi: akts {date} → pieejams visiem {open}. Tajā dienā zīme pati kļūs “📮 Jāpieprasa”. ¦ 75 aastat: akt {date} → kõigile avatud {open}. Sel päeval muutub märk ise „📮 Tuleb küsida“.
+75 ans passés : l’acte est communicable à tous depuis le {open}. ¦ Daugiau nei 75 metai: aktas prieinamas visiems nuo {open}. ¦ Vairāk nekā 75 gadi: akts visiem pieejams kopš {open}. ¦ Üle 75 aasta: akt on kõigile avatud alates {open}.
+Un acte de décès est communicable à tous, tout de suite. ¦ Mirties aktas iškart prieinamas visiems. ¦ Miršanas akts ir visiem pieejams uzreiz. ¦ Surmaakt on kõigile kohe avatud.
+À qui demander : ¦ Į ką kreiptis: ¦ Kam prasīt: ¦ Kelt küsida:
+L’app ne va pas voir sur le site des archives : elle ouvre la page, c’est toi qui regardes. ¦ Programėlė pati netikrina archyvo svetainės: ji atveria puslapį, o žiūri tu. ¦ Lietotne pati neskatās arhīva vietnē: tā atver lapu, un skaties tu. ¦ Rakendus ise arhiivi veebilehte ei vaata: see avab lehe ja vaatad sina.
+🏛 Ouvrir les archives ({dept}) ¦ 🏛 Atverti archyvą ({dept}) ¦ 🏛 Atvērt arhīvu ({dept}) ¦ 🏛 Ava arhiiv ({dept})
+📮 Préparer la lettre ({who}) ¦ 📮 Paruošti laišką ({who}) ¦ 📮 Sagatavot vēstuli ({who}) ¦ 📮 Valmista kiri ette ({who})
+✓ Je l’ai trouvé en ligne ¦ ✓ Radau internete ¦ ✓ Atradu tiešsaistē ¦ ✓ Leidsin selle veebist
+✗ Pas en ligne ¦ ✗ Nėra internete ¦ ✗ Nav tiešsaistē ¦ ✗ Pole veebis
+🗂 Voir la table des limites ¦ 🗂 Rodyti ribų lentelę ¦ 🗂 Skatīt robežu tabulu ¦ 🗂 Vaata piiride tabelit
+🏛 ARCHIVES EN LIGNE ¦ 🏛 ARCHYVAI INTERNETE ¦ 🏛 ARHĪVI TIEŠSAISTĒ ¦ 🏛 ARHIIVID VEEBIS
+{act} : pourquoi cette pastille ? ¦ {act}: kodėl ši žymė? ¦ {act}: kāpēc šī zīme? ¦ {act}: miks see märk?
+La page officielle disait {until} le {date}. ¦ Oficialiame puslapyje {date} buvo nurodyta {until}. ¦ Oficiālajā lapā {date} bija norādīts {until}. ¦ Ametlik leht märkis {date} aastat {until}.
+Rouvrir la page ↗ ¦ Vėl atverti puslapį ↗ ¦ Atvērt lapu vēlreiz ↗ ¦ Ava leht uuesti ↗
+✓ Trouvé en ligne ¦ ✓ Rasta internete ¦ ✓ Atrasts tiešsaistē ¦ ✓ Leitud veebist
+Adresse de l’image de l’acte (facultatif, conseillé) ¦ Akto vaizdo adresas (neprivaloma, patartina) ¦ Akta attēla adrese (neobligāti, ieteicams) ¦ Akti pildi aadress (valikuline, soovitatav)
+Vue, page ou cote (facultatif) ¦ Kadras, puslapis ar šifras (neprivaloma) ¦ Attēls, lappuse vai šifrs (neobligāti) ¦ Kaader, lehekülg või viit (valikuline)
+ex. vue 143 ¦ pvz., 143 kadras ¦ piem., 143. attēls ¦ nt kaader 143
+Ajouter comme source de cet acte ¦ Pridėti kaip šio akto šaltinį ¦ Pievienot kā šī akta avotu ¦ Lisa selle akti allikaks
+Ta correction vaut pour… ¦ Tavo pataisymas galioja… ¦ Tavs labojums attiecas uz… ¦ Sinu parandus kehtib…
+Tout le département : les {acts} ({dept}) sont en ligne au moins jusqu’en {year} ¦ Visas departamentas: {acts} ({dept}) internete bent iki {year} m. ¦ Viss departaments: {acts} ({dept}) ir tiešsaistē vismaz līdz {year}. gadam ¦ Kogu departemang: {acts} ({dept}) on veebis vähemalt kuni {year}
+Seulement cette commune ({commune}) ¦ Tik ši savivaldybė ({commune}) ¦ Tikai šī pašvaldība ({commune}) ¦ Ainult see vald ({commune})
+Cette adresse ne commence pas par https:// ¦ Šis adresas neprasideda https:// ¦ Šī adrese nesākas ar https:// ¦ See aadress ei alga https://
+✓ Noté : {acts} ({dept}) en ligne au moins jusqu’en {year} ¦ ✓ Pažymėta: {acts} ({dept}) internete bent iki {year} m. ¦ ✓ Atzīmēts: {acts} ({dept}) tiešsaistē vismaz līdz {year}. gadam ¦ ✓ Märgitud: {acts} ({dept}) veebis vähemalt kuni {year}
+Pourquoi ? ¦ Kodėl? ¦ Kāpēc? ¦ Miks?
+Le registre de cette année n’est pas en ligne ¦ Tų metų knygos nėra internete ¦ Tā gada reģistrs nav tiešsaistē ¦ Selle aasta registrit pole veebis
+La limite des {acts} ({dept}) passe avant {year} chez toi. ¦ Tavo atveju riba ({acts}, {dept}) persikelia prieš {year} m. ¦ Tev robeža ({acts}, {dept}) pārvietojas pirms {year}. gada. ¦ Sinu jaoks nihkub piir ({acts}, {dept}) aastast {year} varasemaks.
+Seulement cette commune manque ¦ Trūksta tik šios savivaldybės ¦ Trūkst tikai šīs pašvaldības ¦ Puudub ainult see vald
+Exception pour {commune}, la limite du département ne bouge pas. ¦ Išimtis: {commune}; departamento riba nesikeičia. ¦ Izņēmums: {commune}; departamenta robeža nemainās. ¦ Erand: {commune}; departemangu piir ei muutu.
+Je n’ai pas trouvé l’acte dans le registre ¦ Akto knygoje neradau ¦ Aktu reģistrā neatradu ¦ Ma ei leidnud akti registrist
+La limite ne bouge pas ; c’est noté (« cherché, pas trouvé »). ¦ Riba nesikeičia; pažymima („ieškota, nerasta“). ¦ Robeža nemainās; tiek atzīmēts (“meklēts, nav atrasts”). ¦ Piir ei muutu; märgitakse üles („otsitud, ei leitud“).
+Noté : cherché, pas trouvé dans le registre ¦ Pažymėta: ieškota, knygoje nerasta ¦ Atzīmēts: meklēts, reģistrā nav atrasts ¦ Märgitud: otsitud, registrist ei leitud
+✗ Noté : pas en ligne ({place}) ¦ ✗ Pažymėta: nėra internete ({place}) ¦ ✗ Atzīmēts: nav tiešsaistē ({place}) ¦ ✗ Märgitud: pole veebis ({place})
+Où montrer les pastilles ¦ Kur rodyti žymes ¦ Kur rādīt zīmes ¦ Kus märke näidata
+🗂 Archives en ligne par département ¦ 🗂 Archyvai internete pagal departamentus ¦ 🗂 Arhīvi tiešsaistē pa departamentiem ¦ 🗂 Arhiivid veebis departemangude kaupa
+Table livrée avec l’app (vérifiée le {date}), complétée par tes corrections. Une ligne sans source n’existe pas : le département est alors « à vérifier ». ¦ Su programėle pateikta lentelė (patikrinta {date}), papildyta tavo pataisymais. Eilutės be šaltinio nėra: departamentas tada „tikrintinas“. ¦ Ar lietotni piegādātā tabula (pārbaudīta {date}), papildināta ar taviem labojumiem. Rindas bez avota nav: departaments tad ir “jāpārbauda”. ¦ Rakendusega kaasas olev tabel (kontrollitud {date}), täiendatud sinu parandustega. Ilma allikata rida pole olemas: departemang on siis „kontrollida“.
+La table des limites n’est pas encore livrée avec cette version : tout est « à vérifier », sauf ce que tu notes toi-même. ¦ Ribų lentelė su šia versija dar nepateikiama: viskas „tikrintina“, išskyrus tai, ką pasižymi pats. ¦ Robežu tabula ar šo versiju vēl netiek piegādāta: viss ir “jāpārbauda”, izņemot to, ko atzīmē pats. ¦ Piiride tabelit selle versiooniga veel pole: kõik on „kontrollida“, välja arvatud see, mille ise märgid.
+🔎 Département… ¦ 🔎 Departamentas… ¦ 🔎 Departaments… ¦ 🔎 Departemang…
+En ligne jusqu’à ¦ Internete iki ¦ Tiešsaistē līdz ¦ Veebis kuni
+Page officielle qui le dit ¦ Oficialus puslapis, kuriame tai nurodyta ¦ Oficiālā lapa, kurā tas teikts ¦ Ametlik leht, kus see on kirjas
+Vérifié le ¦ Patikrinta ¦ Pārbaudīts ¦ Kontrollitud
+tous ¦ visi ¦ visi ¦ kõik
+＋ Noter la limite ¦ ＋ Pažymėti ribą ¦ ＋ Atzīmēt robežu ¦ ＋ Märgi piir
+depuis {y} ¦ nuo {y} m. ¦ no {y}. gada ¦ alates {y}
+à confirmer ¦ reikia patvirtinti ¦ jāapstiprina ¦ kinnitada
+moi ¦ aš ¦ es ¦ mina
+Retirer ma correction ¦ Pašalinti mano pataisymą ¦ Noņemt manu labojumu ¦ Eemalda minu parandus
+Aucun département ne correspond. ¦ Neatitinka nė vienas departamentas. ¦ Neviens departaments neatbilst. ¦ Ükski departemang ei sobi.
+Correction retirée : la ligne livrée avec l’app revient. ¦ Pataisymas pašalintas: grįžta su programėle pateikta eilutė. ¦ Labojums noņemts: atgriežas ar lietotni piegādātā rinda. ¦ Parandus eemaldatud: kehtib taas rakendusega kaasas olnud rida.
+En ligne jusqu’à l’année ¦ Internete iki metų ¦ Tiešsaistē līdz gadam ¦ Veebis kuni aastani
+ex. 1925 ¦ pvz., 1925 ¦ piem., 1925 ¦ nt 1925
+Adresse de la page qui le dit (obligatoire) ¦ Puslapio, kuriame tai nurodyta, adresas (privaloma) ¦ Lapas, kurā tas teikts, adrese (obligāti) ¦ Lehe aadress, kus see on kirjas (kohustuslik)
+Sans adresse, on ne peut pas enregistrer : c’est ce qui évite les limites inventées. ¦ Be adreso išsaugoti negalima: taip išvengiama išgalvotų ribų. ¦ Bez adreses nevar saglabāt: tā izvairās no izdomātām robežām. ¦ Ilma aadressita ei saa salvestada: nii väldime väljamõeldud piire.
+Une année entre 1500 et aujourd’hui. ¦ Metai nuo 1500 iki šiandien. ¦ Gads no 1500 līdz šodienai. ¦ Aasta vahemikus 1500 kuni täna.
+L’adresse de la page qui le dit est obligatoire. ¦ Puslapio, kuriame tai nurodyta, adresas privalomas. ¦ Lapas, kurā tas teikts, adrese ir obligāta. ¦ Lehe aadress, kus see on kirjas, on kohustuslik.
+＋ Limite notée : {dept}, {year} ¦ ＋ Riba pažymėta: {dept}, {year} ¦ ＋ Robeža atzīmēta: {dept}, {year} ¦ ＋ Piir märgitud: {dept}, {year}
+En ligne aux archives : à télécharger, pas à demander ¦ Internete archyve: atsisiųsti, ne užsakyti ¦ Tiešsaistē arhīvā: lejupielādēt, nevis pieprasīt ¦ Veebis arhiivis: laadi alla, ära küsi
+🏛 Ouvrir ¦ 🏛 Atverti ¦ 🏛 Atvērt ¦ 🏛 Ava
+Réservé jusqu’en {year} : à demander par l’héritier lui-même, ou extrait sans filiation ¦ Ribojama iki {year} m.: turi prašyti pats įpėdinis arba išrašas be tėvų ¦ Ierobežots līdz {year}. gadam: jāprasa pašam mantiniekam vai izraksts bez vecākiem ¦ Piiratud kuni {year}: peab küsima pärija ise või väljavõte ilma vanemateta
+À demander : {who} ¦ Užsakyti: {who} ¦ Jāpieprasa: {who} ¦ Tuleb küsida: {who}
+📮 Lettre ¦ 📮 Laiškas ¦ 📮 Vēstule ¦ 📮 Kiri
+🏛 Archives ¦ 🏛 Archyvas ¦ 🏛 Arhīvs ¦ 🏛 Arhiiv
+Commence par les tables décennales. ¦ Pradėk nuo dešimtmečio rodyklių. ¦ Sāc ar desmitgades rādītājiem. ¦ Alusta kümneaastastest registritest.
+Ses actes aux archives ¦ Aktai archyve ¦ Akti arhīvā ¦ Aktid arhiivis
+Les actes n’ont pas pu être lus. ¦ Aktų nepavyko nuskaityti. ¦ Aktus neizdevās nolasīt. ¦ Akte ei õnnestunud lugeda.
+{n} de ta base sont en ligne et pas encore liés à une source. ¦ {n} iš tavo duomenų bazės yra internete ir dar nesusieta su šaltiniu. ¦ {n} no tavas datubāzes ir tiešsaistē un vēl nav sasaistīti ar avotu. ¦ {n} sinu andmebaasist on veebis ja pole veel allikaga seotud.
+Aussi : {maybe} peut-être en ligne · {ask} à demander · {verify} à vérifier ¦ Taip pat: {maybe} galbūt internete · {ask} užsakyti · {verify} patikrinti ¦ Arī: {maybe} varbūt tiešsaistē · {ask} jāpieprasa · {verify} jāpārbauda ¦ Lisaks: {maybe} võib-olla veebis · {ask} tuleb küsida · {verify} kontrollida
+La table des limites n’est pas encore livrée : aucun acte ne peut être « en ligne » sans source. ¦ Ribų lentelė dar nepateikta: joks aktas negali būti „internete“ be šaltinio. ¦ Robežu tabula vēl netiek piegādāta: neviens akts nevar būt “tiešsaistē” bez avota. ¦ Piiride tabelit veel pole: ükski akt ei saa olla „veebis“ ilma allikata.
+Actes en ligne à aller voir ¦ Internete esantys aktai, kuriuos verta pažiūrėti ¦ Tiešsaistes akti, ko apskatīt ¦ Veebis olevad aktid, mida vaadata
+La pastille 🏛 dit, pour chaque acte, s’il est en ligne aux archives (d’après une limite vérifiée du département), à demander (et à qui), ou réservé. Un acte en ligne sort de cette liste. ¦ Žymė 🏛 prie kiekvieno akto rodo, ar jis internete archyve (pagal patikrintą departamento ribą), ar jį reikia užsakyti (ir iš ko), ar jis ribojamas. Internete esantis aktas iš šio sąrašo dingsta. ¦ Zīme 🏛 katram aktam pasaka, vai tas ir tiešsaistē arhīvā (pēc pārbaudītas departamenta robežas), vai tas jāpieprasa (un kam), vai ierobežots. Akts, kas ir tiešsaistē, no šī saraksta pazūd. ¦ Märk 🏛 ütleb iga akti kohta, kas see on arhiivis veebis (departemangu kontrollitud piiri järgi), tuleb küsida (ja kellelt) või on piiratud. Veebis olev akt kaob sellest loendist.
+Actes ¦ Aktai ¦ Akti ¦ Aktid
+Arbres ¦ Medžiai ¦ Ciltskoki ¦ Sugupuud
+Peut-être en ligne ¦ Galbūt internete ¦ Varbūt tiešsaistē ¦ Võib-olla veebis
+Réservé ¦ Ribojama ¦ Ierobežots ¦ Piiratud
+Archives nationales d’outre-mer (Aix-en-Provence) ¦ Nacionalinis užjūrio archyvas (Aix-en-Provence) ¦ Aizjūras nacionālais arhīvs (Aix-en-Provence) ¦ Prantsuse ülemeremaade rahvusarhiiv (Aix-en-Provence)
+Notaire ou Archives départementales (série E) ¦ Notaras arba Archives départementales (E serija) ¦ Notārs vai Archives départementales (E sērija) ¦ Notar või Archives départementales (seeria E)
+Service historique de la Défense (Vincennes, Caen) ¦ Gynybos istorijos tarnyba (Vincennes, Caen) ¦ Aizsardzības vēstures dienests (Vincennes, Caen) ¦ Kaitseväe ajalooteenistus (Vincennes, Caen)
+baptêmes ¦ krikštai ¦ kristības ¦ ristimised
+sépultures ¦ laidojimai ¦ apbedīšanas ¦ matused
+tables décennales ¦ dešimtmečio rodyklės ¦ desmitgades rādītāji ¦ kümneaastased registrid
+registres paroissiaux ¦ parapijų metrikų knygos ¦ draudžu metriku grāmatas ¦ kihelkonna meetrikaraamatud
+Pastilles sur les fiches ¦ Žymės kortelėse ¦ Zīmes kartītēs ¦ Märgid kaartidel
+à côté de chaque naissance, baptême, mariage, décès, sépulture ¦ prie kiekvieno gimimo, krikšto, santuokos, mirties, laidojimo ¦ pie katras dzimšanas, kristībām, laulībām, nāves, apbedīšanas ¦ iga sünni, ristimise, abielu, surma, matuse kõrval
+Pastilles dans la Chronologie ¦ Žymės chronologijoje ¦ Zīmes hronoloģijā ¦ Märgid ajajoonel
+Colonne « 🏛 Archives » dans la liste des Événements ¦ Stulpelis „🏛 Archyvas“ įvykių sąraše ¦ Kolonna “🏛 Arhīvs” notikumu sarakstā ¦ Veerg „🏛 Arhiiv“ sündmuste loendis
+Cacher la pastille quand l’acte est déjà lié ¦ Slėpti žymę, kai aktas jau susietas ¦ Paslēpt zīmi, kad akts jau sasaistīts ¦ Peida märk, kui akt on juba seotud
+sinon : petite « 🟢 ✓ lié » ¦ kitaip: maža „🟢 ✓ susieta“ ¦ citādi: maza “🟢 ✓ sasaistīts” ¦ muidu: väike „🟢 ✓ seotud“
+Widget « 🏛 Actes en ligne à aller voir » : ancêtres directs seulement ¦ Valdiklis „🏛 Internete esantys aktai, kuriuos verta pažiūrėti“: tik tiesioginiai protėviai ¦ Logrīks “🏛 Tiešsaistes akti, ko apskatīt”: tikai tiešie senči ¦ Vidin „🏛 Veebis olevad aktid, mida vaadata“: ainult otsesed esivanemad
+Vérifiés ¦ Patikrinti ¦ Pārbaudītie ¦ Kontrollitud
+Corrigés par moi ¦ Mano pataisyti ¦ Manis laboti ¦ Minu parandatud
+Actes en ligne aux archives ¦ Aktai internete archyvuose ¦ Akti tiešsaistē arhīvos ¦ Aktid veebis arhiivides
+Une pastille sur chaque naissance, baptême, mariage, décès et sépulture : en ligne, à demander (et à qui), réservé, à vérifier. Jamais « en ligne » sans une limite sourcée. ¦ Žymė prie kiekvieno gimimo, krikšto, santuokos, mirties ir laidojimo: internete, užsakyti (ir iš ko), ribojama, patikrinti. Niekada „internete“ be ribos su šaltiniu. ¦ Zīme pie katras dzimšanas, kristībām, laulībām, nāves un apbedīšanas: tiešsaistē, jāpieprasa (un kam), ierobežots, jāpārbauda. Nekad “tiešsaistē” bez robežas ar avotu. ¦ Märk iga sünni, ristimise, abielu, surma ja matuse juures: veebis, tuleb küsida (ja kellelt), piiratud, kontrollida. Ilma allikaga piirita mitte kunagi „veebis“.
+Correction introuvable. ¦ Pataisymas nerastas. ¦ Labojums nav atrasts. ¦ Parandust ei leitud.
+Type d’acte inconnu. ¦ Nežinoma akto rūšis. ¦ Nezināms akta veids. ¦ Tundmatu akti liik.
+Année incorrecte. ¦ Neteisingi metai. ¦ Nepareizs gads. ¦ Vale aasta.
+Cet acte n’a pas de département ou de date : précise d’abord le lieu et la date. ¦ Šis aktas neturi departamento ar datos: pirmiausia nurodyk vietą ir datą. ¦ Šim aktam nav departamenta vai datuma: vispirms norādi vietu un datumu. ¦ Sellel aktil pole departemangu ega kuupäeva: täpsusta kõigepealt koht ja kuupäev.

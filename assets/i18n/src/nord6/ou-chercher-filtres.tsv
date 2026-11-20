@@ -1,0 +1,75 @@
+fr ¦ lt ¦ lv ¦ et
+# 🌍 Où chercher ? — filtres par sorte de source (docs/design/ou-chercher-filtres.html)
+Ouvrir la page filtrée sur une sorte de source ¦ Atverti puslapį, filtruotą pagal šaltinio rūšį ¦ Atvērt lapu, filtrētu pēc avota veida ¦ Ava leht, mis on filtreeritud allika liigi järgi
+Les autres sortes ¦ Kitos rūšys ¦ Citi veidi ¦ Teised liigid
+Proposés ({n} sur {m}) ¦ Siūlomi ({n} iš {m}) ¦ Ieteiktie ({n} no {m}) ¦ Soovitatud ({n}/{m})
+✓ Déjà cherchés ({n} sur {m}) ¦ ✓ Jau ieškota ({n} iš {m}) ¦ ✓ Jau meklēts ({n} no {m}) ¦ ✓ Juba otsitud ({n}/{m})
+Écartés ({n} sur {m}) ¦ Atmesti ({n} iš {m}) ¦ Izslēgtie ({n} no {m}) ¦ Kõrvale jäetud ({n}/{m})
+Chercher un site… (ex. Gallica, matricule) ¦ Ieškoti svetainės… (pvz., Gallica, kariuomenės registras) ¦ Meklēt vietni… (piem., Gallica, karadienesta reģistrs) ¦ Otsi saiti… (nt Gallica, teenistuskiri)
+Sorte de source ¦ Šaltinio rūšis ¦ Avota veids ¦ Allika liik
+Ses pays : {list} ¦ Šalys: {list} ¦ Valstis: {list} ¦ Riigid: {list}
+Ses pays ¦ Šalys ¦ Valstis ¦ Riigid
+Un seul : {country} ¦ Tik viena: {country} ¦ Tikai viena: {country} ¦ Ainult üks: {country}
+Pays : {country} ¦ Šalis: {country} ¦ Valsts: {country} ¦ Riik: {country}
+Sites du monde entier seulement (FamilySearch, Geneanet…) ¦ Tik viso pasaulio svetainės (FamilySearch, Geneanet…) ¦ Tikai pasaules mēroga vietnes (FamilySearch, Geneanet…) ¦ Ainult ülemaailmsed saidid (FamilySearch, Geneanet…)
+🌍 Monde entier ¦ 🌍 Visas pasaulis ¦ 🌍 Visa pasaule ¦ 🌍 Kogu maailm
+Prix ¦ Kaina ¦ Cena ¦ Hind
+Gratuites seulement · {n} ¦ Tik nemokamos · {n} ¦ Tikai bezmaksas · {n} ¦ Ainult tasuta · {n}
+💶 Gratuites seulement ¦ 💶 Tik nemokamos ¦ 💶 Tikai bezmaksas ¦ 💶 Ainult tasuta
+En français seulement ¦ Tik prancūzų kalba ¦ Tikai franču valodā ¦ Ainult prantsuse keeles
+🇫🇷 En français ¦ 🇫🇷 Prancūziškai ¦ 🇫🇷 Franciski ¦ 🇫🇷 Prantsuse keeles
+Les plus utiles ¦ Naudingiausi ¦ Noderīgākie ¦ Kõige kasulikumad
+Gratuits d’abord ¦ Pirmiausia nemokamos ¦ Vispirms bezmaksas ¦ Kõigepealt tasuta
+🔗 depuis sa fiche ¦ 🔗 iš kortelės ¦ 🔗 no kartītes ¦ 🔗 kaardilt
+Ce filtre vient de sa fiche : ton choix habituel n’est pas changé. ¦ Šis filtras atėjo iš kortelės: tavo įprastas pasirinkimas nesikeičia. ¦ Šis filtrs nāk no kartītes: tava ierastā izvēle nemainās. ¦ See filter tuleb kaardilt: sinu tavaline valik ei muutu.
+Revenir à mon choix ¦ Grįžti prie mano pasirinkimo ¦ Atgriezties pie manas izvēles ¦ Tagasi minu valiku juurde
+↗ Chercher quand même ¦ ↗ Vis tiek ieškoti ¦ ↗ Tomēr meklēt ¦ ↗ Otsi siiski
+de ces filtres ¦ su šiais filtrais ¦ ar šiem filtriem ¦ nende filtritega
+Aucun site {sorts} pour ce pays ({country}) parmi les {n} sites que l’app connaît ¦ Nėra {sorts} svetainės šiai šaliai ({country}) tarp {n} programėlei žinomų svetainių ¦ Nav {sorts} vietnes šai valstij ({country}) starp {n} lietotnei zināmajām vietnēm ¦ Pole {sorts} saiti sellele riigile ({country}) rakenduse {n} tuntud saidi seas
+Pour ses autres pays : {ok} proposés ; {out} écartés. ¦ Kitoms šalims: siūloma {ok}; atmesta {out}. ¦ Citām valstīm: ieteiktas {ok}; izslēgtas {out}. ¦ Teiste riikide jaoks: soovitatud {ok}; kõrvale jäetud {out}.
+Ses autres pays ({n}) ¦ Kitos šalys ({n}) ¦ Citas valstis ({n}) ¦ Teised riigid ({n})
+Voir les {n} sites écartés ¦ Rodyti {n} atmestas svetaines ¦ Skatīt {n} izslēgtās vietnes ¦ Vaata {n} kõrvale jäetud saiti
+＋ Ajouter un site à moi ¦ ＋ Pridėti savo svetainę ¦ ＋ Pievienot savu vietni ¦ ＋ Lisa oma sait
+Aucun site {sorts} pour {name} ({life}) ¦ Nėra {sorts} svetainės: {name} ({life}) ¦ Nav {sorts} vietnes: {name} ({life}) ¦ Pole {sorts} saiti: {name} ({life})
+Les {n} sites de cette sorte sont écartés : ¦ {n} šios rūšies svetainių atmesta: ¦ {n} šī veida vietnes ir izslēgtas: ¦ Selle liigi {n} saiti on kõrvale jäetud:
+Aucun site de cette sorte parmi ceux que l’app connaît. ¦ Tarp programėlei žinomų svetainių nėra šios rūšies. ¦ Starp lietotnei zināmajām vietnēm nav neviena šī veida. ¦ Rakenduse tuntud saitide seas pole ühtegi seda liiki.
+Enlever {sort} ¦ Pašalinti {sort} ¦ Noņemt {sort} ¦ Eemalda {sort}
+Aucun site écarté avec ces filtres. ¦ Su šiais filtrais atmestų svetainių nėra. ¦ Ar šiem filtriem nav izslēgtu vietņu. ¦ Nende filtritega pole ühtegi kõrvale jäetud saiti.
+Sa vie ({life}) croise les années du site ({from}–{to}) ¦ Gyvenimas ({life}) persidengia su svetainės metais ({from}–{to}) ¦ Dzīve ({life}) pārklājas ar vietnes gadiem ({from}–{to}) ¦ Elu ({life}) kattub osaliselt saidi aastatega ({from}–{to})
+Actes (état civil, paroissiaux) ¦ Aktai (civiliniai, parapijų) ¦ Akti (civilstāvokļa, draudžu) ¦ Aktid (perekonnaseisu, kiriku)
+Journaux ¦ Laikraščiai ¦ Laikraksti ¦ Ajalehed
+Militaire et guerres ¦ Kariuomenė ir karai ¦ Armija un kari ¦ Sõjavägi ja sõjad
+Recensements et annuaires ¦ Surašymai ir adresų knygos ¦ Tautas skaitīšanas un adrešu grāmatas ¦ Rahvaloendused ja aadressiraamatud
+Marins, colonies ¦ Jūrininkai, kolonijos ¦ Jūrnieki, kolonijas ¦ Meremehed, kolooniad
+Marins et colonies ¦ Jūrininkai ir kolonijos ¦ Jūrnieki un kolonijas ¦ Meremehed ja kolooniad
+Cimetières, décès ¦ Kapinės, mirtys ¦ Kapsētas, nāves ¦ Kalmistud, surmad
+Cimetières et décès ¦ Kapinės ir mirtys ¦ Kapsētas un nāves ¦ Kalmistud ja surmad
+Notaires, terres et justice ¦ Notarai, žemė ir teismai ¦ Notāri, zeme un tiesas ¦ Notarid, maa ja kohus
+Métiers (élus, médecins, cheminots, photographes…) ¦ Profesijos (išrinktieji, gydytojai, geležinkeliečiai, fotografai…) ¦ Profesijas (vēlētie, ārsti, dzelzceļnieki, fotogrāfi…) ¦ Ametid (valitud, arstid, raudteelased, fotograafid…)
+Arbres en ligne ¦ Medžiai internete ¦ Ciltskoki tiešsaistē ¦ Sugupuud veebis
+Bibliothèques ¦ Bibliotekos ¦ Bibliotēkas ¦ Raamatukogud
+Bibliothèques et livres ¦ Bibliotekos ir knygos ¦ Bibliotēkas un grāmatas ¦ Raamatukogud ja raamatud
+Cartes et lieux ¦ Žemėlapiai ir vietos ¦ Kartes un vietas ¦ Kaardid ja kohad
+Déportation et répression ¦ Trėmimai ir represijos ¦ Deportācijas un represijas ¦ Küüditamine ja repressioonid
+Guides ¦ Vadovai ¦ Ceļveži ¦ Juhendid
+Guides et modes d’emploi ¦ Vadovai ir instrukcijos ¦ Ceļveži un instrukcijas ¦ Juhendid ja kasutusjuhised
+Moteurs ¦ Paieškos sistemos ¦ Meklētāji ¦ Otsingumootorid
+Moteurs et encyclopédies ¦ Paieškos sistemos ir enciklopedijos ¦ Meklētāji un enciklopēdijas ¦ Otsingumootorid ja entsüklopeediad
+Tout le militaire ¦ Viskas apie kariuomenę ¦ Viss militārais ¦ Kõik sõjaväeline
+Tout pour un marin ¦ Viskas jūrininkui ¦ Viss jūrniekam ¦ Kõik meremehele
+Tout sur l’émigration ¦ Viskas apie emigraciją ¦ Viss par emigrāciju ¦ Kõik väljarändest
+Tout sur son métier ¦ Viskas apie profesiją ¦ Viss par profesiju ¦ Kõik ametist
+Tout chez les notaires ¦ Viskas pas notarus ¦ Viss pie notāriem ¦ Kõik notarite juures
+⚓ Il était marin ? Le dire sur sa fiche ¦ ⚓ Buvo jūrininkas? Įrašyk tai kortelėje ¦ ⚓ Bija jūrnieks? Ieraksti to kartītē ¦ ⚓ Oli ta meremees? Märgi see kaardile
+🎖 Il était soldat ? Le dire sur sa fiche ¦ 🎖 Buvo kareivis? Įrašyk tai kortelėje ¦ 🎖 Bija karavīrs? Ieraksti to kartītē ¦ 🎖 Oli ta sõdur? Märgi see kaardile
+🚢 Il a émigré ? Le dire sur sa fiche ¦ 🚢 Ar jis emigravo? Įrašyk tai kortelėje ¦ 🚢 Vai viņš emigrēja? Ieraksti to kartītē ¦ 🚢 Kas ta rändas välja? Märgi see kaardile
+💼 Son métier ? Le dire sur sa fiche ¦ 💼 Profesija? Įrašyk ją kortelėje ¦ 💼 Profesija? Ieraksti to kartītē ¦ 💼 Amet? Märgi see kaardile
+Pas de lieu dans ce pays ¦ Nėra vietos šioje šalyje ¦ Nav vietas šajā valstī ¦ Pole kohta selles riigis
+Hors de ses années ¦ Ne jo gyvenimo metais ¦ Ārpus dzīves gadiem ¦ Väljaspool eluaastaid
+Seulement pour un autre cas (métier, profil) ¦ Tik kitam atvejui (profesija, profilis) ¦ Tikai citam gadījumam (profesija, profils) ¦ Ainult teisel juhul (amet, profiil)
+Pour l’autre sexe ¦ Kitai lyčiai ¦ Otram dzimumam ¦ Teisele soole
+Né hors de France ¦ Gimęs ne Prancūzijoje ¦ Dzimis ārpus Francijas ¦ Sündinud väljaspool Prantsusmaad
+Peu utile pour cette fiche ¦ Mažai naudinga šiai kortelei ¦ Maz noderīgi šai kartītei ¦ Selle kaardi jaoks vähe kasulik
+Autres raisons ¦ Kitos priežastys ¦ Citi iemesli ¦ Muud põhjused
+officier (armée) ¦ karininkas (kariuomenė) ¦ virsnieks (armija) ¦ ohvitser (sõjavägi)
+=payant caché ¦ mokama paslėpta|mokamos paslėptos|mokamų paslėpta ¦ maksas paslēptas|maksas paslēpta|maksas paslēptas ¦ tasuline peidetud|tasulist peidetud

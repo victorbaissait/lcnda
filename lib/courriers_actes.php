@@ -40,7 +40,11 @@ const CL_RELATIONS = [
     'moi' => 'C’est mon propre acte', 'descendant' => 'Je suis son descendant direct', 'ascendant' => 'Je suis son ascendant direct',
     'conjoint' => 'Je suis son conjoint', 'representant' => 'Je suis son représentant légal', 'autre' => 'Autre lien (cousin, collatéral…) ou aucun',
 ];
-const CL_RECIPIENTS = ['mairie' => 'Mairie de la commune', 'ad' => 'Archives départementales', 'scec' => 'Service central d’état civil (Nantes)', 'diocese' => 'Archives diocésaines', 'autre' => 'Autre destinataire'];
+const CL_RECIPIENTS = ['mairie' => 'Mairie de la commune', 'ad' => 'Archives départementales', 'scec' => 'Service central d’état civil (Nantes)', 'diocese' => 'Archives diocésaines',
+    'shd' => 'Service historique de la Défense (Vincennes ; Caen pour les dossiers récents)', 'anom' => 'Archives nationales d’outre-mer (Aix-en-Provence)', 'notaire' => 'Notaire, ou Archives départementales (série E)', 'autre' => 'Autre destinataire'];
+// 🏛 « À qui demander » (lib/archives_dispo.php) : SHD pour les actes et dossiers militaires, ANOM pour les colonies (Algérie avant 1962)
+const CL_SHD_ADDRESS = "Service historique de la Défense\nChâteau de Vincennes\nAvenue de Paris\n94306 Vincennes Cedex\n(dossiers récents et victimes des conflits : SHD, rue Neuve-du-Bourg-l’Abbé, 14037 Caen Cedex)";
+const CL_ANOM_ADDRESS = "Archives nationales d’outre-mer\n29 chemin du Moulin-Detesta\n13090 Aix-en-Provence";
 const CL_SCEC_ADDRESS = "Ministère de l’Europe et des Affaires étrangères\nService central d’état civil\n11 rue de la Maison Blanche\n44941 Nantes Cedex 9";
 const CL_MAX_LETTER = 20000;
 
@@ -265,6 +269,9 @@ function cl_recipients(PDO $pdo, array $ctx): array
         $dio = $s->fetch(PDO::FETCH_ASSOC) ?: null;
     }
     $out['diocese'] = ['kind' => 'diocese', 'label' => $dio ? (string) $dio['name'] : 'Archives diocésaines', 'address' => $dio ? trim($dio['name'] . "\n" . $dio['address'] . "\n" . $dio['city']) : "Archives diocésaines de [diocèse]\n[adresse]\n[code postal] [ville]", 'email' => $dio ? (string) $dio['email'] : ''];
+    $out['shd'] = ['kind' => 'shd', 'label' => 'Service historique de la Défense', 'address' => CL_SHD_ADDRESS, 'email' => ''];
+    $out['anom'] = ['kind' => 'anom', 'label' => 'Archives nationales d’outre-mer', 'address' => CL_ANOM_ADDRESS, 'email' => ''];
+    $out['notaire'] = ['kind' => 'notaire', 'label' => 'Notaire ou Archives départementales (série E)', 'address' => "[Étude de Maître …, notaire]\n[adresse]\n[code postal] [ville]\n(plus de 75 ans : Archives départementales, série E — minutes notariales)", 'email' => ''];
     $out['autre'] = ['kind' => 'autre', 'label' => 'Autre destinataire', 'address' => "[Nom du service]\n[adresse]\n[code postal] [ville]", 'email' => ''];
     return $out;
 }
@@ -374,7 +381,7 @@ function cl_file(PDO $pdo, array $in): array
     $b = cl_build($pdo, $in);
     $letter = cl_text($in['letter'] ?? '', CL_MAX_LETTER, true) ?: $b['letter'];
     $objet = cl_text($in['objet'] ?? '', 300) ?: $b['objet'];
-    $orga = ['mairie' => 'mairie', 'ad' => 'archives', 'diocese' => 'archives', 'scec' => 'autre', 'autre' => 'autre'][$b['recipient_kind']] ?? 'autre';
+    $orga = ['mairie' => 'mairie', 'ad' => 'archives', 'diocese' => 'archives', 'shd' => 'archives', 'anom' => 'archives', 'notaire' => 'autre', 'scec' => 'autre', 'autre' => 'autre'][$b['recipient_kind']] ?? 'autre';
     $dest = trim(explode("\n", $b['recipient']['address'])[0]) ?: $b['recipient']['label'];
     $date = cl_text($in['date_envoi'] ?? '', 10);
     if ($date !== '' && (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date) || !checkdate((int) substr($date, 5, 2), (int) substr($date, 8, 2), (int) substr($date, 0, 4)))) { throw new LcndaBadInput('Date d’envoi incorrecte.'); }

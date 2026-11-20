@@ -1,0 +1,75 @@
+fr ¦ tr
+# 🌍 Où chercher ? — filtres par sorte de source (docs/design/ou-chercher-filtres.html)
+Ouvrir la page filtrée sur une sorte de source ¦ Sayfayı bir kaynak türüne göre süzülmüş aç
+Les autres sortes ¦ Diğer türler
+Proposés ({n} sur {m}) ¦ Önerilen ({n}/{m})
+✓ Déjà cherchés ({n} sur {m}) ¦ ✓ Zaten arandı ({n}/{m})
+Écartés ({n} sur {m}) ¦ Elenen ({n}/{m})
+Chercher un site… (ex. Gallica, matricule) ¦ Site ara… (ör. Gallica, askerlik kaydı)
+Sorte de source ¦ Kaynak türü
+Ses pays : {list} ¦ Ülkeleri: {list}
+Ses pays ¦ Ülkeleri
+Un seul : {country} ¦ Yalnızca biri: {country}
+Pays : {country} ¦ Ülke: {country}
+Sites du monde entier seulement (FamilySearch, Geneanet…) ¦ Yalnızca dünya çapındaki siteler (FamilySearch, Geneanet…)
+🌍 Monde entier ¦ 🌍 Tüm dünya
+Prix ¦ Fiyat
+Gratuites seulement · {n} ¦ Yalnızca ücretsiz · {n}
+💶 Gratuites seulement ¦ 💶 Yalnızca ücretsiz
+En français seulement ¦ Yalnızca Fransızca
+🇫🇷 En français ¦ 🇫🇷 Fransızca
+Les plus utiles ¦ En faydalı
+Gratuits d’abord ¦ Önce ücretsizler
+🔗 depuis sa fiche ¦ 🔗 kaydından
+Ce filtre vient de sa fiche : ton choix habituel n’est pas changé. ¦ Bu filtre kaydından geliyor: her zamanki seçimin değişmez.
+Revenir à mon choix ¦ Seçimime dön
+↗ Chercher quand même ¦ ↗ Yine de ara
+de ces filtres ¦ bu filtrelerle
+Aucun site {sorts} pour ce pays ({country}) parmi les {n} sites que l’app connaît ¦ Uygulamanın bildiği {n} site arasında bu ülke ({country}) için {sorts} site yok
+Pour ses autres pays : {ok} proposés ; {out} écartés. ¦ Diğer ülkeleri için: {ok} önerilen; {out} elenen.
+Ses autres pays ({n}) ¦ Diğer ülkeleri ({n})
+Voir les {n} sites écartés ¦ Elenen {n} siteyi gör
+＋ Ajouter un site à moi ¦ ＋ Kendi siteni ekle
+Aucun site {sorts} pour {name} ({life}) ¦ {name} ({life}) için {sorts} site yok
+Les {n} sites de cette sorte sont écartés : ¦ Bu türdeki {n} site elendi:
+Aucun site de cette sorte parmi ceux que l’app connaît. ¦ Uygulamanın bildikleri arasında bu türde site yok.
+Enlever {sort} ¦ {sort} kaldır
+Aucun site écarté avec ces filtres. ¦ Bu filtrelerle elenen site yok.
+Sa vie ({life}) croise les années du site ({from}–{to}) ¦ Hayatı ({life}) sitenin yıllarıyla ({from}–{to}) kesişiyor
+Actes (état civil, paroissiaux) ¦ Kayıtlar (nüfus, kilise)
+Journaux ¦ Gazeteler
+Militaire et guerres ¦ Askerlik ve savaşlar
+Recensements et annuaires ¦ Nüfus sayımları ve rehberler
+Marins, colonies ¦ Denizciler, sömürgeler
+Marins et colonies ¦ Denizciler ve sömürgeler
+Cimetières, décès ¦ Mezarlıklar, ölümler
+Cimetières et décès ¦ Mezarlıklar ve ölümler
+Notaires, terres et justice ¦ Noterler, toprak ve adalet
+Métiers (élus, médecins, cheminots, photographes…) ¦ Meslekler (seçilmişler, doktorlar, demiryolcular, fotoğrafçılar…)
+Arbres en ligne ¦ Çevrimiçi ağaçlar
+Bibliothèques ¦ Kütüphaneler
+Bibliothèques et livres ¦ Kütüphaneler ve kitaplar
+Cartes et lieux ¦ Haritalar ve yerler
+Déportation et répression ¦ Sürgün ve baskı
+Guides ¦ Rehberler
+Guides et modes d’emploi ¦ Rehberler ve kullanım kılavuzları
+Moteurs ¦ Arama motorları
+Moteurs et encyclopédies ¦ Arama motorları ve ansiklopediler
+Tout le militaire ¦ Tüm askerî
+Tout pour un marin ¦ Denizci için her şey
+Tout sur l’émigration ¦ Göç hakkında her şey
+Tout sur son métier ¦ Mesleği hakkında her şey
+Tout chez les notaires ¦ Noterlerdeki her şey
+⚓ Il était marin ? Le dire sur sa fiche ¦ ⚓ Denizci miydi? Kaydına yaz
+🎖 Il était soldat ? Le dire sur sa fiche ¦ 🎖 Asker miydi? Kaydına yaz
+🚢 Il a émigré ? Le dire sur sa fiche ¦ 🚢 Göç mü etti? Kaydına yaz
+💼 Son métier ? Le dire sur sa fiche ¦ 💼 Mesleği? Kaydına yaz
+Pas de lieu dans ce pays ¦ Bu ülkede yer yok
+Hors de ses années ¦ Yaşadığı yılların dışında
+Seulement pour un autre cas (métier, profil) ¦ Yalnızca başka bir durum için (meslek, profil)
+Pour l’autre sexe ¦ Diğer cinsiyet için
+Né hors de France ¦ Fransa dışında doğmuş
+Peu utile pour cette fiche ¦ Bu kayıt için pek yararlı değil
+Autres raisons ¦ Diğer nedenler
+officier (armée) ¦ subay (ordu)
+=payant caché ¦ ücretli gizli|ücretli gizli

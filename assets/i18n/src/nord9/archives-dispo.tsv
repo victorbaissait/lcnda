@@ -1,0 +1,130 @@
+fr ¦ lb
+# 🏛 Actes en ligne aux archives (docs/design/archives-en-ligne.html)
+Mairie de {commune} ¦ Gemeng {commune}
+Archives départementales ({dept}) ¦ Archives départementales ({dept})
+🔒 Réservé jusqu’en {year} ¦ 🔒 Reservéiert bis {year}
+déjà lié à une source ¦ schonn mat enger Quell verbonnen
+Pourquoi cette pastille ? ¦ Firwat dëse Badge?
+✓ lié ¦ ✓ verbonnen
+Règle : code du patrimoine, art. L213-2 ({legi}) ; qui peut demander avant : décret 2017-890, art. 30 ({decret}). ¦ Regel: franséische Patrimoinescode, Art. L213-2 ({legi}); wien virdrun froe kann: Dekret 2017-890, Art. 30 ({decret}).
+Une limite vérifiée pour ce département et ce type d’acte couvre la date. ¦ Eng iwwerpréift Grenz fir dëst Departement an dës Aktenaart deckt den Datum of.
+D’après une source secondaire ({source}) : à confirmer sur la page officielle des archives. ¦ No enger sekundärer Quell ({source}): op der offizieller Säit vum Archiv ze confirméieren.
+Peut-être en ligne (d’après {source}, à confirmer) : année lue dans un extrait de recherche, pas encore confirmée. ¦ Vläicht online (no {source}, ze confirméieren): Joer aus engem Sichauszuch gelies, nach net confirméiert.
+la table ¦ d’Tabell
+Date approximative : la fourchette {from}–{to} chevauche la limite ({until}). ¦ Ongeféieren Datum: d’Spann {from}–{to} iwwerschneit d’Grenz ({until}).
+La date est à 2 ans de la limite ({until}) : le registre est peut-être en ligne depuis. ¦ Den Datum ass 2 Joer vun der Grenz ({until}): de Register ass vläicht zënterhier online.
+Acte de plus de 100 ans, mais la limite de ce département n’est pas encore vérifiée : jamais « en ligne » sans source. ¦ Akt méi al wéi 100 Joer, mä d’Grenz vun dësem Departement ass nach net iwwerpréift: ni „online“ ouni Quell.
+Trop récent pour être en ligne : la limite de ce département est {until}. ¦ Ze nei fir online ze sinn: d’Grenz vun dësem Departement ass {until}.
+Trop récent pour être en ligne (et la limite de ce département n’est pas encore vérifiée). ¦ Ze nei fir online ze sinn (an d’Grenz vun dësem Departement ass nach net iwwerpréift).
+L’état civil parisien d’avant 1860 a brûlé en 1871 : chercher dans l’état civil reconstitué (Archives de Paris). ¦ De Pariser Zivilstand vu virun 1860 ass 1871 verbrannt: sich am rekonstruéierten Zivilstand (Archives de Paris).
+Après 1792, un baptême ou une sépulture n’est pas dans l’état civil : il faut le demander aux archives diocésaines. ¦ No 1792 steet eng Daf oder Begriefnes net am Zivilstand: froe beim Diözesanarchiv.
+Les registres paroissiaux en ligne de ce département commencent en {from}. ¦ D’Parregëster vun dësem Departement fänken online {from} un.
+Ancienne colonie : l’état civil est aux Archives nationales d’outre-mer (Aix-en-Provence). ¦ Fréier Kolonie: den Zivilstand ass an den Nationalarchiver fir Iwwersee (Aix-en-Provence).
+Hors de France : la table ne couvre que les départements français. Pour un Français né, marié ou mort à l’étranger : le Service central d’état civil (Nantes). ¦ Baussent Frankräich: d’Tabell deckt nëmmen déi franséisch Departementer of. Fir e Fransous, deen am Ausland gebuer, bestuet oder gestuerwen ass: den Zentrale Zivilstandsdéngscht (Nantes).
+Pas de date : impossible de la comparer avec la limite. ¦ Keen Datum: kann net mat der Grenz verglach ginn.
+Pas de lieu : on ne sait pas à quelles archives s’adresser. ¦ Keng Plaz: et ass net bekannt, un wéi en Archiv ee sech wende soll.
+Le département du lieu n’est pas connu : choisis la commune dans la liste des lieux, le code arrive tout seul. ¦ D’Departement vun der Plaz ass net bekannt: wiel d’Gemeng an der Lëscht vun de Plazen, de Code kënnt da vu selwer.
+Lieu : {place} → {dept} ({code}). ¦ Plaz: {place} → {dept} ({code}).
+Limite des {acts} ({dept}) : en ligne jusqu’en {until} ¦ Grenz fir {acts} ({dept}): online bis {until}
+la page qui le dit ↗ ¦ d’Säit, déi et seet ↗
+vérifié le {date} ¦ iwwerpréift den {date}
+source secondaire ¦ sekundär Quell
+année lue dans un extrait de recherche, pas encore confirmée ¦ Joer aus engem Sichauszuch gelies, nach net confirméiert
+corrigé par toi ¦ vun dir korrigéiert
+Limite des {acts} ({dept}) : pas encore vérifiée. ¦ Grenz fir {acts} ({dept}): nach net iwwerpréift.
+75 ans : acte de {date} → communicable à tous le {open}. Ce jour-là, la pastille devient « 📮 À demander » toute seule. ¦ 75 Joer: Akt vum {date} → fir jiddereen zougänglech de(n) {open}. Deen Dag gëtt de Badge vu selwer „📮 Unzefroen“.
+75 ans passés : l’acte est communicable à tous depuis le {open}. ¦ Iwwer 75 Joer: den Akt ass zënter dem {open} fir jiddereen zougänglech.
+Un acte de décès est communicable à tous, tout de suite. ¦ En Doudesakt ass direkt fir jiddereen zougänglech.
+À qui demander : ¦ Wie froen:
+L’app ne va pas voir sur le site des archives : elle ouvre la page, c’est toi qui regardes. ¦ D’App kuckt net selwer op der Säit vum Archiv: se mécht d’Säit op, du kucks.
+🏛 Ouvrir les archives ({dept}) ¦ 🏛 Archiv opmaachen ({dept})
+📮 Préparer la lettre ({who}) ¦ 📮 De Bréif preparéieren ({who})
+✓ Je l’ai trouvé en ligne ¦ ✓ Ech hunn en online fonnt
+✗ Pas en ligne ¦ ✗ Net online
+🗂 Voir la table des limites ¦ 🗂 Tabell vun de Grenzen ukucken
+🏛 ARCHIVES EN LIGNE ¦ 🏛 ARCHIVER ONLINE
+{act} : pourquoi cette pastille ? ¦ {act}: firwat dëse Badge?
+La page officielle disait {until} le {date}. ¦ Déi offiziell Säit sot den {date} {until}.
+Rouvrir la page ↗ ¦ D’Säit nees opmaachen ↗
+✓ Trouvé en ligne ¦ ✓ Online fonnt
+Adresse de l’image de l’acte (facultatif, conseillé) ¦ Adress vum Bild vum Akt (fräiwëlleg, recommandéiert)
+Vue, page ou cote (facultatif) ¦ Bild, Säit oder Signatur (fräiwëlleg)
+ex. vue 143 ¦ z. B. Bild 143
+Ajouter comme source de cet acte ¦ Als Quell vun dësem Akt derbäisetzen
+Ta correction vaut pour… ¦ Deng Korrektur gëllt fir…
+Tout le département : les {acts} ({dept}) sont en ligne au moins jusqu’en {year} ¦ Dat ganzt Departement: {acts} ({dept}) sinn op d’mannst bis {year} online
+Seulement cette commune ({commune}) ¦ Nëmmen dës Gemeng ({commune})
+Cette adresse ne commence pas par https:// ¦ Dës Adress fänkt net mat https:// un
+✓ Noté : {acts} ({dept}) en ligne au moins jusqu’en {year} ¦ ✓ Notéiert: {acts} ({dept}) op d’mannst bis {year} online
+Pourquoi ? ¦ Firwat?
+Le registre de cette année n’est pas en ligne ¦ De Register vun deem Joer ass net online
+La limite des {acts} ({dept}) passe avant {year} chez toi. ¦ Bei dir réckelt d’Grenz fir {acts} ({dept}) virun {year}.
+Seulement cette commune manque ¦ Nëmmen dës Gemeng feelt
+Exception pour {commune}, la limite du département ne bouge pas. ¦ Ausnam fir {commune}; d’Grenz vum Departement bleift.
+Je n’ai pas trouvé l’acte dans le registre ¦ Ech hunn den Akt net am Register fonnt
+La limite ne bouge pas ; c’est noté (« cherché, pas trouvé »). ¦ D’Grenz bleift; et gëtt notéiert („gesicht, net fonnt“).
+Noté : cherché, pas trouvé dans le registre ¦ Notéiert: gesicht, net am Register fonnt
+✗ Noté : pas en ligne ({place}) ¦ ✗ Notéiert: net online ({place})
+Où montrer les pastilles ¦ Wou d’Badgen weisen
+🗂 Archives en ligne par département ¦ 🗂 Archiver online no Departement
+Table livrée avec l’app (vérifiée le {date}), complétée par tes corrections. Une ligne sans source n’existe pas : le département est alors « à vérifier ». ¦ Mat der App geliwwert Tabell (iwwerpréift den {date}), mat denge Korrekturen ergänzt. Eng Zeil ouni Quell gëtt et net: d’Departement ass dann „ze kontrolléieren“.
+La table des limites n’est pas encore livrée avec cette version : tout est « à vérifier », sauf ce que tu notes toi-même. ¦ D’Tabell vun de Grenzen ass nach net mat dëser Versioun geliwwert: alles ass „ze kontrolléieren“, ausser dat, wat s du selwer notéiers.
+🔎 Département… ¦ 🔎 Departement…
+En ligne jusqu’à ¦ Online bis
+Page officielle qui le dit ¦ Offiziell Säit, déi et seet
+Vérifié le ¦ Iwwerpréift den
+tous ¦ all
+＋ Noter la limite ¦ ＋ Grenz notéieren
+depuis {y} ¦ vun {y} un
+à confirmer ¦ ze confirméieren
+moi ¦ ech
+Retirer ma correction ¦ Meng Korrektur ewechhuelen
+Aucun département ne correspond. ¦ Keen Departement passt.
+Correction retirée : la ligne livrée avec l’app revient. ¦ Korrektur ewechgeholl: déi mat der App geliwwert Zeil gëllt nees.
+En ligne jusqu’à l’année ¦ Online bis d’Joer
+ex. 1925 ¦ z. B. 1925
+Adresse de la page qui le dit (obligatoire) ¦ Adress vun der Säit, déi et seet (obligatoresch)
+Sans adresse, on ne peut pas enregistrer : c’est ce qui évite les limites inventées. ¦ Ouni Adress kann een net späicheren: dat verhënnert erfonnt Grenzen.
+Une année entre 1500 et aujourd’hui. ¦ E Joer tëscht 1500 an haut.
+L’adresse de la page qui le dit est obligatoire. ¦ D’Adress vun der Säit, déi et seet, ass obligatoresch.
+＋ Limite notée : {dept}, {year} ¦ ＋ Grenz notéiert: {dept}, {year}
+En ligne aux archives : à télécharger, pas à demander ¦ Online am Archiv: eroflueden, net ufroen
+🏛 Ouvrir ¦ 🏛 Opmaachen
+Réservé jusqu’en {year} : à demander par l’héritier lui-même, ou extrait sans filiation ¦ Reservéiert bis {year}: den Ierwe muss selwer ufroen, oder Auszuch ouni Ofstamung
+À demander : {who} ¦ Unzefroen: {who}
+📮 Lettre ¦ 📮 Bréif
+🏛 Archives ¦ 🏛 Archiv
+Commence par les tables décennales. ¦ Fänk mat den Zéngjoresregëster un.
+Ses actes aux archives ¦ Seng Akten am Archiv
+Les actes n’ont pas pu être lus. ¦ D’Akte konnten net gelies ginn.
+{n} de ta base sont en ligne et pas encore liés à une source. ¦ {n} aus denger Datebank sinn online an nach net mat enger Quell verbonnen.
+Aussi : {maybe} peut-être en ligne · {ask} à demander · {verify} à vérifier ¦ Och: {maybe} vläicht online · {ask} unzefroen · {verify} ze kontrolléieren
+La table des limites n’est pas encore livrée : aucun acte ne peut être « en ligne » sans source. ¦ D’Tabell vun de Grenzen ass nach net geliwwert: keen Akt kann ouni Quell „online“ sinn.
+Actes en ligne à aller voir ¦ Online Akten fir ze kucken
+La pastille 🏛 dit, pour chaque acte, s’il est en ligne aux archives (d’après une limite vérifiée du département), à demander (et à qui), ou réservé. Un acte en ligne sort de cette liste. ¦ De Badge 🏛 seet fir all Akt, ob en online am Archiv ass (no enger iwwerpréifter Grenz vum Departement), ob en unzefroen ass (a bei wiem) oder reservéiert. En Akt, deen online ass, verschwënnt aus dëser Lëscht.
+Actes ¦ Akten
+Arbres ¦ Stammbeem
+Peut-être en ligne ¦ Vläicht online
+Réservé ¦ Reservéiert
+Archives nationales d’outre-mer (Aix-en-Provence) ¦ Nationalarchiver fir Iwwersee (Aix-en-Provence)
+Notaire ou Archives départementales (série E) ¦ Notär oder Archives départementales (Serie E)
+Service historique de la Défense (Vincennes, Caen) ¦ Historeschen Déngscht vun der Defense (Vincennes, Caen)
+baptêmes ¦ Daafen
+sépultures ¦ Begriefnisser
+tables décennales ¦ Zéngjoresregëster
+registres paroissiaux ¦ Parregëster
+Pastilles sur les fiches ¦ Badgen op de Fichen
+à côté de chaque naissance, baptême, mariage, décès, sépulture ¦ niewent all Gebuert, Daf, Hochzäit, Doud, Begriefnes
+Pastilles dans la Chronologie ¦ Badgen an der Chronologie
+Colonne « 🏛 Archives » dans la liste des Événements ¦ Kolonn „🏛 Archiv“ an der Lëscht vun den Evenementer
+Cacher la pastille quand l’acte est déjà lié ¦ De Badge verstoppen, wann den Akt schonn verbonnen ass
+sinon : petite « 🟢 ✓ lié » ¦ soss: kleng „🟢 ✓ verbonnen“
+Widget « 🏛 Actes en ligne à aller voir » : ancêtres directs seulement ¦ Widget „🏛 Online Akten fir ze kucken“: nëmmen direkt Virfahren
+Vérifiés ¦ Iwwerpréift
+Corrigés par moi ¦ Vu mir korrigéiert
+Actes en ligne aux archives ¦ Akten online an den Archiver
+Une pastille sur chaque naissance, baptême, mariage, décès et sépulture : en ligne, à demander (et à qui), réservé, à vérifier. Jamais « en ligne » sans une limite sourcée. ¦ E Badge bei all Gebuert, Daf, Hochzäit, Doud a Begriefnes: online, unzefroen (a bei wiem), reservéiert, ze kontrolléieren. Ni „online“ ouni Grenz mat Quell.
+Correction introuvable. ¦ Korrektur net fonnt.
+Type d’acte inconnu. ¦ Onbekannt Aktenaart.
+Année incorrecte. ¦ Falscht Joer.
+Cet acte n’a pas de département ou de date : précise d’abord le lieu et la date. ¦ Dësen Akt huet keen Departement oder Datum: gëff fir d’éischt Plaz an Datum un.

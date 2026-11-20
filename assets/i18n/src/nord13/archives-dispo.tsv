@@ -1,0 +1,130 @@
+fr ¦ el ¦ bg
+# 🏛 Actes en ligne aux archives (docs/design/archives-en-ligne.html)
+Mairie de {commune} ¦ Δημαρχείο {commune} ¦ Кметство {commune}
+Archives départementales ({dept}) ¦ Νομαρχιακά Αρχεία ({dept}) ¦ Департаментски архиви ({dept})
+🔒 Réservé jusqu’en {year} ¦ 🔒 Περιορισμένο έως το {year} ¦ 🔒 Ограничен достъп до {year} г.
+déjà lié à une source ¦ ήδη συνδεδεμένο με πηγή ¦ вече свързано с източник
+Pourquoi cette pastille ? ¦ Γιατί αυτή η ετικέτα; ¦ Защо този етикет?
+✓ lié ¦ ✓ συνδεδεμένο ¦ ✓ свързано
+Règle : code du patrimoine, art. L213-2 ({legi}) ; qui peut demander avant : décret 2017-890, art. 30 ({decret}). ¦ Κανόνας: γαλλικός κώδικας πολιτιστικής κληρονομιάς, άρθ. L213-2 ({legi}); ποιος μπορεί να ζητήσει νωρίτερα: διάταγμα 2017-890, άρθ. 30 ({decret}). ¦ Правило: Кодекс за наследството на Франция, чл. L213-2 ({legi}); кой може да поиска по-рано: декрет 2017-890, чл. 30 ({decret}).
+Une limite vérifiée pour ce département et ce type d’acte couvre la date. ¦ Ένα επαληθευμένο όριο για αυτόν τον νομό και αυτό το είδος πράξης καλύπτει την ημερομηνία. ¦ Проверена граница за този департамент и този вид акт обхваща датата.
+D’après une source secondaire ({source}) : à confirmer sur la page officielle des archives. ¦ Σύμφωνα με δευτερογενή πηγή ({source}): προς επιβεβαίωση στην επίσημη σελίδα του αρχείου. ¦ Според вторичен източник ({source}): трябва да се потвърди на официалната страница на архива.
+Peut-être en ligne (d’après {source}, à confirmer) : année lue dans un extrait de recherche, pas encore confirmée. ¦ Ίσως διαδικτυακά (σύμφωνα με {source}, προς επιβεβαίωση): έτος από απόσπασμα αναζήτησης, όχι ακόμη επιβεβαιωμένο. ¦ Може би онлайн (според {source}, за потвърждение): година, прочетена в откъс от търсене, още непотвърдена.
+la table ¦ ο πίνακας ¦ таблицата
+Date approximative : la fourchette {from}–{to} chevauche la limite ({until}). ¦ Κατά προσέγγιση ημερομηνία: το διάστημα {from}–{to} επικαλύπτει το όριο ({until}). ¦ Приблизителна дата: интервалът {from}–{to} застъпва границата ({until}).
+La date est à 2 ans de la limite ({until}) : le registre est peut-être en ligne depuis. ¦ Η ημερομηνία απέχει 2 χρόνια από το όριο ({until}): το βιβλίο ίσως έχει ανέβει στο διαδίκτυο από τότε. ¦ Датата е на 2 години от границата ({until}): регистърът може би вече е онлайн.
+Acte de plus de 100 ans, mais la limite de ce département n’est pas encore vérifiée : jamais « en ligne » sans source. ¦ Πράξη άνω των 100 ετών, αλλά το όριο αυτού του νομού δεν έχει ακόμη επαληθευτεί: ποτέ «διαδικτυακά» χωρίς πηγή. ¦ Актът е на повече от 100 години, но границата за този департамент още не е проверена: никога „онлайн“ без източник.
+Trop récent pour être en ligne : la limite de ce département est {until}. ¦ Πολύ πρόσφατη για να είναι διαδικτυακά: το όριο αυτού του νομού είναι {until}. ¦ Твърде скорошен, за да е онлайн: границата за този департамент е {until}.
+Trop récent pour être en ligne (et la limite de ce département n’est pas encore vérifiée). ¦ Πολύ πρόσφατη για να είναι διαδικτυακά (και το όριο αυτού του νομού δεν έχει επαληθευτεί ακόμη). ¦ Твърде скорошен, за да е онлайн (а границата за този департамент още не е проверена).
+L’état civil parisien d’avant 1860 a brûlé en 1871 : chercher dans l’état civil reconstitué (Archives de Paris). ¦ Τα ληξιαρχικά του Παρισιού πριν από το 1860 κάηκαν το 1871: ψάξε στα ανασυσταθέντα ληξιαρχικά (Archives de Paris). ¦ Парижките актове за гражданско състояние отпреди 1860 г. изгарят през 1871 г.: търси във възстановените актове (Archives de Paris).
+Après 1792, un baptême ou une sépulture n’est pas dans l’état civil : il faut le demander aux archives diocésaines. ¦ Μετά το 1792 μια βάπτιση ή ταφή δεν είναι στα ληξιαρχικά: ζήτησέ τη από τα αρχεία της επισκοπής. ¦ След 1792 г. кръщене или погребение не са в гражданските регистри: трябва да се поискат от епархийския архив.
+Les registres paroissiaux en ligne de ce département commencent en {from}. ¦ Τα ενοριακά μητρώα αυτού του νομού στο διαδίκτυο ξεκινούν το {from}. ¦ Енорийските регистри на този департамент онлайн започват от {from} г.
+Ancienne colonie : l’état civil est aux Archives nationales d’outre-mer (Aix-en-Provence). ¦ Πρώην αποικία: τα ληξιαρχικά βρίσκονται στα Εθνικά Αρχεία Υπερποντίων (Αιξ-αν-Προβάνς). ¦ Бивша колония: актовете за гражданско състояние са в Националния задморски архив (Екс ан Прованс).
+Hors de France : la table ne couvre que les départements français. Pour un Français né, marié ou mort à l’étranger : le Service central d’état civil (Nantes). ¦ Εκτός Γαλλίας: ο πίνακας καλύπτει μόνο τους γαλλικούς νομούς. Για Γάλλο που γεννήθηκε, παντρεύτηκε ή πέθανε στο εξωτερικό: η Κεντρική Υπηρεσία Ληξιαρχείου (Νάντη). ¦ Извън Франция: таблицата обхваща само френските департаменти. За французин, роден, сключил брак или починал в чужбина: Централната служба по гражданско състояние (Нант).
+Pas de date : impossible de la comparer avec la limite. ¦ Χωρίς ημερομηνία: δεν μπορεί να συγκριθεί με το όριο. ¦ Няма дата: не може да се сравни с границата.
+Pas de lieu : on ne sait pas à quelles archives s’adresser. ¦ Χωρίς τόπο: δεν ξέρουμε σε ποιο αρχείο να απευθυνθούμε. ¦ Няма място: не се знае към кой архив да се обърнеш.
+Le département du lieu n’est pas connu : choisis la commune dans la liste des lieux, le code arrive tout seul. ¦ Ο νομός του τόπου δεν είναι γνωστός: διάλεξε τον δήμο από τη λίστα τόπων και ο κωδικός μπαίνει μόνος του. ¦ Департаментът на мястото не е известен: избери общината от списъка с места и кодът ще се попълни сам.
+Lieu : {place} → {dept} ({code}). ¦ Τόπος: {place} → {dept} ({code}). ¦ Място: {place} → {dept} ({code}).
+Limite des {acts} ({dept}) : en ligne jusqu’en {until} ¦ Όριο για {acts} ({dept}): διαδικτυακά έως το {until} ¦ Граница за {acts} ({dept}): онлайн до {until} г.
+la page qui le dit ↗ ¦ η σελίδα που το λέει ↗ ¦ страницата, където е казано ↗
+vérifié le {date} ¦ επαληθεύτηκε στις {date} ¦ проверено на {date}
+source secondaire ¦ δευτερογενής πηγή ¦ вторичен източник
+année lue dans un extrait de recherche, pas encore confirmée ¦ έτος από απόσπασμα αναζήτησης, όχι ακόμη επιβεβαιωμένο ¦ година, прочетена в откъс от търсене, още непотвърдена
+corrigé par toi ¦ διορθωμένο από σένα ¦ поправено от теб
+Limite des {acts} ({dept}) : pas encore vérifiée. ¦ Όριο για {acts} ({dept}): δεν έχει επαληθευτεί ακόμη. ¦ Граница за {acts} ({dept}): още не е проверена.
+75 ans : acte de {date} → communicable à tous le {open}. Ce jour-là, la pastille devient « 📮 À demander » toute seule. ¦ 75 χρόνια: πράξη της {date} → προσβάσιμη σε όλους στις {open}. Εκείνη τη μέρα η ετικέτα γίνεται μόνη της «📮 Προς αίτηση». ¦ 75 години: акт от {date} → достъпен за всички на {open}. В този ден етикетът сам става „📮 За поискване“.
+75 ans passés : l’acte est communicable à tous depuis le {open}. ¦ Πάνω από 75 χρόνια: η πράξη είναι προσβάσιμη σε όλους από {open}. ¦ Над 75 години: актът е достъпен за всички от {open}.
+Un acte de décès est communicable à tous, tout de suite. ¦ Μια ληξιαρχική πράξη θανάτου είναι αμέσως προσβάσιμη σε όλους. ¦ Актът за смърт е достъпен за всички веднага.
+À qui demander : ¦ Σε ποιον να απευθυνθείς: ¦ Към кого да се обърнеш:
+L’app ne va pas voir sur le site des archives : elle ouvre la page, c’est toi qui regardes. ¦ Η εφαρμογή δεν ελέγχει τον ιστότοπο του αρχείου: ανοίγει τη σελίδα και κοιτάς εσύ. ¦ Приложението не проверява сайта на архива: отваря страницата, а ти гледаш.
+🏛 Ouvrir les archives ({dept}) ¦ 🏛 Άνοιγμα αρχείου ({dept}) ¦ 🏛 Отвори архива ({dept})
+📮 Préparer la lettre ({who}) ¦ 📮 Ετοίμασε την επιστολή ({who}) ¦ 📮 Подготви писмото ({who})
+✓ Je l’ai trouvé en ligne ¦ ✓ Το βρήκα στο διαδίκτυο ¦ ✓ Намерих го онлайн
+✗ Pas en ligne ¦ ✗ Δεν είναι στο διαδίκτυο ¦ ✗ Не е онлайн
+🗂 Voir la table des limites ¦ 🗂 Δες τον πίνακα ορίων ¦ 🗂 Виж таблицата с граници
+🏛 ARCHIVES EN LIGNE ¦ 🏛 ΑΡΧΕΙΑ ΣΤΟ ΔΙΑΔΙΚΤΥΟ ¦ 🏛 АРХИВИ ОНЛАЙН
+{act} : pourquoi cette pastille ? ¦ {act}: γιατί αυτή η ετικέτα; ¦ {act}: защо този етикет?
+La page officielle disait {until} le {date}. ¦ Η επίσημη σελίδα έλεγε {until} στις {date}. ¦ Официалната страница посочваше {until} към {date}.
+Rouvrir la page ↗ ¦ Άνοιξε ξανά τη σελίδα ↗ ¦ Отвори страницата отново ↗
+✓ Trouvé en ligne ¦ ✓ Βρέθηκε στο διαδίκτυο ¦ ✓ Намерено онлайн
+Adresse de l’image de l’acte (facultatif, conseillé) ¦ Διεύθυνση της εικόνας της πράξης (προαιρετικά, συνιστάται) ¦ Адрес на изображението на акта (по желание, препоръчително)
+Vue, page ou cote (facultatif) ¦ Εικόνα, σελίδα ή ταξιθετικός αριθμός (προαιρετικά) ¦ Кадър, страница или сигнатура (по желание)
+ex. vue 143 ¦ π.χ. εικόνα 143 ¦ напр. кадър 143
+Ajouter comme source de cet acte ¦ Προσθήκη ως πηγή αυτής της πράξης ¦ Добави като източник на този акт
+Ta correction vaut pour… ¦ Η διόρθωσή σου ισχύει για… ¦ Твоята поправка важи за…
+Tout le département : les {acts} ({dept}) sont en ligne au moins jusqu’en {year} ¦ Όλος ο νομός: {acts} ({dept}) είναι στο διαδίκτυο τουλάχιστον έως το {year} ¦ Целият департамент: {acts} ({dept}) са онлайн поне до {year} г.
+Seulement cette commune ({commune}) ¦ Μόνο αυτός ο δήμος ({commune}) ¦ Само тази община ({commune})
+Cette adresse ne commence pas par https:// ¦ Αυτή η διεύθυνση δεν ξεκινά με https:// ¦ Този адрес не започва с https://
+✓ Noté : {acts} ({dept}) en ligne au moins jusqu’en {year} ¦ ✓ Σημειώθηκε: {acts} ({dept}) στο διαδίκτυο τουλάχιστον έως το {year} ¦ ✓ Отбелязано: {acts} ({dept}) онлайн поне до {year} г.
+Pourquoi ? ¦ Γιατί; ¦ Защо?
+Le registre de cette année n’est pas en ligne ¦ Το βιβλίο εκείνης της χρονιάς δεν είναι στο διαδίκτυο ¦ Регистърът за тази година не е онлайн
+La limite des {acts} ({dept}) passe avant {year} chez toi. ¦ Για σένα, το όριο για {acts} ({dept}) μετακινείται πριν από το {year}. ¦ При теб границата за {acts} ({dept}) се измества преди {year} г.
+Seulement cette commune manque ¦ Λείπει μόνο αυτός ο δήμος ¦ Липсва само тази община
+Exception pour {commune}, la limite du département ne bouge pas. ¦ Εξαίρεση για {commune}· το όριο του νομού δεν αλλάζει. ¦ Изключение за {commune}; границата на департамента не се променя.
+Je n’ai pas trouvé l’acte dans le registre ¦ Δεν βρήκα την πράξη στο βιβλίο ¦ Не намерих акта в регистъра
+La limite ne bouge pas ; c’est noté (« cherché, pas trouvé »). ¦ Το όριο δεν αλλάζει· σημειώνεται («αναζητήθηκε, δεν βρέθηκε»). ¦ Границата не се променя; отбелязва се („търсено, не е намерено“).
+Noté : cherché, pas trouvé dans le registre ¦ Σημειώθηκε: αναζητήθηκε, δεν βρέθηκε στο βιβλίο ¦ Отбелязано: търсено, не е намерено в регистъра
+✗ Noté : pas en ligne ({place}) ¦ ✗ Σημειώθηκε: δεν είναι στο διαδίκτυο ({place}) ¦ ✗ Отбелязано: не е онлайн ({place})
+Où montrer les pastilles ¦ Πού να εμφανίζονται οι ετικέτες ¦ Къде да се показват етикетите
+🗂 Archives en ligne par département ¦ 🗂 Αρχεία στο διαδίκτυο ανά νομό ¦ 🗂 Архиви онлайн по департаменти
+Table livrée avec l’app (vérifiée le {date}), complétée par tes corrections. Une ligne sans source n’existe pas : le département est alors « à vérifier ». ¦ Πίνακας που συνοδεύει την εφαρμογή (επαληθεύτηκε στις {date}), συμπληρωμένος με τις διορθώσεις σου. Γραμμή χωρίς πηγή δεν υπάρχει: ο νομός είναι τότε «προς έλεγχο». ¦ Таблица, доставена с приложението (проверена на {date}), допълнена с твоите поправки. Ред без източник не съществува: тогава департаментът е „за проверка“.
+La table des limites n’est pas encore livrée avec cette version : tout est « à vérifier », sauf ce que tu notes toi-même. ¦ Ο πίνακας ορίων δεν συνοδεύει ακόμη αυτή την έκδοση: όλα είναι «προς έλεγχο», εκτός από όσα σημειώνεις εσύ. ¦ Таблицата с граници още не идва с тази версия: всичко е „за проверка“, освен това, което отбележиш сам.
+🔎 Département… ¦ 🔎 Νομός… ¦ 🔎 Департамент…
+En ligne jusqu’à ¦ Διαδικτυακά έως ¦ Онлайн до
+Page officielle qui le dit ¦ Επίσημη σελίδα που το λέει ¦ Официална страница, където е казано
+Vérifié le ¦ Επαληθεύτηκε ¦ Проверено на
+tous ¦ όλα ¦ всички
+＋ Noter la limite ¦ ＋ Σημείωσε το όριο ¦ ＋ Отбележи границата
+depuis {y} ¦ από το {y} ¦ от {y} г.
+à confirmer ¦ προς επιβεβαίωση ¦ за потвърждение
+moi ¦ εγώ ¦ аз
+Retirer ma correction ¦ Αφαίρεσε τη διόρθωσή μου ¦ Премахни моята поправка
+Aucun département ne correspond. ¦ Κανένας νομός δεν ταιριάζει. ¦ Няма съвпадащ департамент.
+Correction retirée : la ligne livrée avec l’app revient. ¦ Η διόρθωση αφαιρέθηκε: επανέρχεται η γραμμή της εφαρμογής. ¦ Поправката е премахната: отново важи редът от приложението.
+En ligne jusqu’à l’année ¦ Διαδικτυακά έως το έτος ¦ Онлайн до година
+ex. 1925 ¦ π.χ. 1925 ¦ напр. 1925
+Adresse de la page qui le dit (obligatoire) ¦ Διεύθυνση της σελίδας που το λέει (υποχρεωτικό) ¦ Адрес на страницата, където е казано (задължително)
+Sans adresse, on ne peut pas enregistrer : c’est ce qui évite les limites inventées. ¦ Χωρίς διεύθυνση δεν γίνεται αποθήκευση: έτσι αποφεύγονται τα επινοημένα όρια. ¦ Без адрес не може да се запише: така се избягват измислени граници.
+Une année entre 1500 et aujourd’hui. ¦ Ένα έτος από το 1500 έως σήμερα. ¦ Година между 1500 г. и днес.
+L’adresse de la page qui le dit est obligatoire. ¦ Η διεύθυνση της σελίδας που το λέει είναι υποχρεωτική. ¦ Адресът на страницата, където е казано, е задължителен.
+＋ Limite notée : {dept}, {year} ¦ ＋ Το όριο σημειώθηκε: {dept}, {year} ¦ ＋ Границата е отбелязана: {dept}, {year}
+En ligne aux archives : à télécharger, pas à demander ¦ Στο διαδίκτυο στο αρχείο: για λήψη, όχι για αίτηση ¦ Онлайн в архива: за изтегляне, не за поискване
+🏛 Ouvrir ¦ 🏛 Άνοιγμα ¦ 🏛 Отвори
+Réservé jusqu’en {year} : à demander par l’héritier lui-même, ou extrait sans filiation ¦ Περιορισμένο έως το {year}: πρέπει να το ζητήσει ο ίδιος ο κληρονόμος ή απόσπασμα χωρίς γονείς ¦ Ограничен достъп до {year} г.: трябва да поиска самият наследник или извлечение без родители
+À demander : {who} ¦ Προς αίτηση: {who} ¦ За поискване: {who}
+📮 Lettre ¦ 📮 Επιστολή ¦ 📮 Писмо
+🏛 Archives ¦ 🏛 Αρχείο ¦ 🏛 Архив
+Commence par les tables décennales. ¦ Ξεκίνα από τα δεκαετή ευρετήρια. ¦ Започни с десетгодишните указатели.
+Ses actes aux archives ¦ Οι πράξεις στο αρχείο ¦ Актовете в архива
+Les actes n’ont pas pu être lus. ¦ Δεν ήταν δυνατή η ανάγνωση των πράξεων. ¦ Актовете не можаха да бъдат прочетени.
+{n} de ta base sont en ligne et pas encore liés à une source. ¦ {n} της βάσης σου είναι στο διαδίκτυο και δεν έχουν ακόμη πηγή. ¦ {n} от твоята база са онлайн и още не са свързани с източник.
+Aussi : {maybe} peut-être en ligne · {ask} à demander · {verify} à vérifier ¦ Επίσης: {maybe} ίσως διαδικτυακά · {ask} προς αίτηση · {verify} προς έλεγχο ¦ Също: {maybe} може би онлайн · {ask} за поискване · {verify} за проверка
+La table des limites n’est pas encore livrée : aucun acte ne peut être « en ligne » sans source. ¦ Ο πίνακας ορίων δεν παρέχεται ακόμη: καμία πράξη δεν μπορεί να είναι «διαδικτυακά» χωρίς πηγή. ¦ Таблицата с граници още не се доставя: нито един акт не може да е „онлайн“ без източник.
+Actes en ligne à aller voir ¦ Πράξεις στο διαδίκτυο για να δεις ¦ Актове онлайн за преглед
+La pastille 🏛 dit, pour chaque acte, s’il est en ligne aux archives (d’après une limite vérifiée du département), à demander (et à qui), ou réservé. Un acte en ligne sort de cette liste. ¦ Η ετικέτα 🏛 λέει για κάθε πράξη αν είναι στο διαδίκτυο στο αρχείο (με βάση επαληθευμένο όριο του νομού), αν πρέπει να ζητηθεί (και από ποιον) ή αν είναι περιορισμένη. Μια πράξη που είναι στο διαδίκτυο βγαίνει από τη λίστα. ¦ Етикетът 🏛 казва за всеки акт дали е онлайн в архива (по проверена граница на департамента), дали трябва да се поиска (и от кого) или е с ограничен достъп. Акт, който е онлайн, излиза от този списък.
+Actes ¦ Πράξεις ¦ Актове
+Arbres ¦ Δέντρα ¦ Дървета
+Peut-être en ligne ¦ Ίσως στο διαδίκτυο ¦ Може би онлайн
+Réservé ¦ Περιορισμένο ¦ Ограничен достъп
+Archives nationales d’outre-mer (Aix-en-Provence) ¦ Εθνικά Αρχεία Υπερποντίων (Αιξ-αν-Προβάνς) ¦ Национален задморски архив (Екс ан Прованс)
+Notaire ou Archives départementales (série E) ¦ Συμβολαιογράφος ή Νομαρχιακά Αρχεία (σειρά E) ¦ Нотариус или департаментски архиви (серия E)
+Service historique de la Défense (Vincennes, Caen) ¦ Ιστορική Υπηρεσία Άμυνας (Βενσέν, Καν) ¦ Историческа служба на отбраната (Венсен, Кан)
+baptêmes ¦ βαπτίσεις ¦ кръщения
+sépultures ¦ ταφές ¦ погребения
+tables décennales ¦ δεκαετή ευρετήρια ¦ десетгодишни указатели
+registres paroissiaux ¦ ενοριακά μητρώα ¦ енорийски регистри
+Pastilles sur les fiches ¦ Ετικέτες στις καρτέλες ¦ Етикети в картоните
+à côté de chaque naissance, baptême, mariage, décès, sépulture ¦ δίπλα σε κάθε γέννηση, βάπτιση, γάμο, θάνατο, ταφή ¦ до всяко раждане, кръщене, брак, смърт, погребение
+Pastilles dans la Chronologie ¦ Ετικέτες στο Χρονολόγιο ¦ Етикети в Хронологията
+Colonne « 🏛 Archives » dans la liste des Événements ¦ Στήλη «🏛 Αρχείο» στη λίστα Γεγονότων ¦ Колона „🏛 Архив“ в списъка със Събития
+Cacher la pastille quand l’acte est déjà lié ¦ Απόκρυψη ετικέτας όταν η πράξη είναι ήδη συνδεδεμένη ¦ Скрий етикета, когато актът вече е свързан
+sinon : petite « 🟢 ✓ lié » ¦ αλλιώς: μικρή «🟢 ✓ συνδεδεμένο» ¦ иначе: малък „🟢 ✓ свързано“
+Widget « 🏛 Actes en ligne à aller voir » : ancêtres directs seulement ¦ Γραφικό στοιχείο «🏛 Πράξεις στο διαδίκτυο για να δεις»: μόνο άμεσοι πρόγονοι ¦ Джаджа „🏛 Актове онлайн за преглед“: само преки предци
+Vérifiés ¦ Επαληθευμένα ¦ Проверени
+Corrigés par moi ¦ Διορθωμένα από μένα ¦ Поправени от мен
+Actes en ligne aux archives ¦ Πράξεις στο διαδίκτυο στα αρχεία ¦ Актове онлайн в архивите
+Une pastille sur chaque naissance, baptême, mariage, décès et sépulture : en ligne, à demander (et à qui), réservé, à vérifier. Jamais « en ligne » sans une limite sourcée. ¦ Μια ετικέτα σε κάθε γέννηση, βάπτιση, γάμο, θάνατο και ταφή: στο διαδίκτυο, προς αίτηση (και από ποιον), περιορισμένο, προς έλεγχο. Ποτέ «στο διαδίκτυο» χωρίς όριο με πηγή. ¦ Етикет при всяко раждане, кръщене, брак, смърт и погребение: онлайн, за поискване (и от кого), ограничен достъп, за проверка. Никога „онлайн“ без граница с източник.
+Correction introuvable. ¦ Η διόρθωση δεν βρέθηκε. ¦ Поправката не е намерена.
+Type d’acte inconnu. ¦ Άγνωστο είδος πράξης. ¦ Непознат вид акт.
+Année incorrecte. ¦ Λάθος έτος. ¦ Невалидна година.
+Cet acte n’a pas de département ou de date : précise d’abord le lieu et la date. ¦ Αυτή η πράξη δεν έχει νομό ή ημερομηνία: όρισε πρώτα τόπο και ημερομηνία. ¦ Този акт няма департамент или дата: първо уточни мястото и датата.

@@ -1,0 +1,130 @@
+fr ¦ sk ¦ nb
+# 🏛 Actes en ligne aux archives (docs/design/archives-en-ligne.html)
+Mairie de {commune} ¦ Obecný úrad {commune} ¦ Rådhuset i {commune}
+Archives départementales ({dept}) ¦ Departementný archív ({dept}) ¦ Departementsarkiv ({dept})
+🔒 Réservé jusqu’en {year} ¦ 🔒 Vyhradené do roku {year} ¦ 🔒 Begrenset til {year}
+déjà lié à une source ¦ už prepojené so zdrojom ¦ allerede knyttet til en kilde
+Pourquoi cette pastille ? ¦ Prečo tento štítok? ¦ Hvorfor dette merket?
+✓ lié ¦ ✓ prepojené ¦ ✓ knyttet
+Règle : code du patrimoine, art. L213-2 ({legi}) ; qui peut demander avant : décret 2017-890, art. 30 ({decret}). ¦ Pravidlo: francúzsky zákonník o kultúrnom dedičstve, čl. L213-2 ({legi}); kto môže žiadať skôr: vyhláška 2017-890, čl. 30 ({decret}). ¦ Regel: den franske kulturarvloven, art. L213-2 ({legi}); hvem som kan be om det før: dekret 2017-890, art. 30 ({decret}).
+Une limite vérifiée pour ce département et ce type d’acte couvre la date. ¦ Overená hranica pre tento departement a tento druh záznamu pokrýva dátum. ¦ En kontrollert grense for dette departementet og denne akttypen dekker datoen.
+D’après une source secondaire ({source}) : à confirmer sur la page officielle des archives. ¦ Podľa druhotného zdroja ({source}): over na oficiálnej stránke archívu. ¦ Ifølge en sekundær kilde ({source}): må bekreftes på arkivets offisielle side.
+Peut-être en ligne (d’après {source}, à confirmer) : année lue dans un extrait de recherche, pas encore confirmée. ¦ Možno online (podľa {source}, na overenie): rok prečítaný z úryvku vyhľadávania, zatiaľ nepotvrdený. ¦ Kanskje på nett (ifølge {source}, må bekreftes): år lest i et søkeutdrag, ikke bekreftet ennå.
+la table ¦ tabuľka ¦ tabellen
+Date approximative : la fourchette {from}–{to} chevauche la limite ({until}). ¦ Približný dátum: rozpätie {from}–{to} zasahuje cez hranicu ({until}). ¦ Omtrentlig dato: intervallet {from}–{to} overlapper grensen ({until}).
+La date est à 2 ans de la limite ({until}) : le registre est peut-être en ligne depuis. ¦ Dátum je 2 roky od hranice ({until}): matrika možno medzičasom pribudla online. ¦ Datoen ligger 2 år fra grensen ({until}): registeret kan ha kommet på nett siden.
+Acte de plus de 100 ans, mais la limite de ce département n’est pas encore vérifiée : jamais « en ligne » sans source. ¦ Záznam starší ako 100 rokov, ale hranica tohto departementu ešte nie je overená: nikdy „online“ bez zdroja. ¦ Akt eldre enn 100 år, men grensen for dette departementet er ikke kontrollert ennå: aldri «på nett» uten kilde.
+Trop récent pour être en ligne : la limite de ce département est {until}. ¦ Príliš nový na to, aby bol online: hranica tohto departementu je {until}. ¦ For ny til å være på nett: grensen for dette departementet er {until}.
+Trop récent pour être en ligne (et la limite de ce département n’est pas encore vérifiée). ¦ Príliš nový na to, aby bol online (a hranica tohto departementu ešte nie je overená). ¦ For ny til å være på nett (og grensen for dette departementet er ikke kontrollert ennå).
+L’état civil parisien d’avant 1860 a brûlé en 1871 : chercher dans l’état civil reconstitué (Archives de Paris). ¦ Parížske matriky pred rokom 1860 zhoreli v roku 1871: hľadaj v rekonštruovaných záznamoch (Archives de Paris). ¦ Paris’ sivilregistre før 1860 brant i 1871: søk i de rekonstruerte registrene (Archives de Paris).
+Après 1792, un baptême ou une sépulture n’est pas dans l’état civil : il faut le demander aux archives diocésaines. ¦ Po roku 1792 krst ani pohreb nie sú v civilných matrikách: požiadaj diecézny archív. ¦ Etter 1792 står en dåp eller begravelse ikke i sivilregisteret: spør bispedømmearkivet.
+Les registres paroissiaux en ligne de ce département commencent en {from}. ¦ Farské matriky tohto departementu online začínajú rokom {from}. ¦ Kirkebøkene på nett for dette departementet begynner i {from}.
+Ancienne colonie : l’état civil est aux Archives nationales d’outre-mer (Aix-en-Provence). ¦ Bývalá kolónia: matriky sú v Národnom archíve zámoria (Aix-en-Provence). ¦ Tidligere koloni: sivilregistrene ligger i Det franske nasjonalarkivet for oversjøiske områder (Aix-en-Provence).
+Hors de France : la table ne couvre que les départements français. Pour un Français né, marié ou mort à l’étranger : le Service central d’état civil (Nantes). ¦ Mimo Francúzska: tabuľka pokrýva len francúzske departementy. Pre Francúza narodeného, sobášeného alebo zomrelého v cudzine: Centrálna matričná služba (Nantes). ¦ Utenfor Frankrike: tabellen dekker bare franske departementer. For en franskmann født, gift eller død i utlandet: Det sentrale sivilregisteret (Nantes).
+Pas de date : impossible de la comparer avec la limite. ¦ Bez dátumu: nedá sa porovnať s hranicou. ¦ Ingen dato: kan ikke sammenlignes med grensen.
+Pas de lieu : on ne sait pas à quelles archives s’adresser. ¦ Bez miesta: nevieme, na ktorý archív sa obrátiť. ¦ Intet sted: vi vet ikke hvilket arkiv man skal henvende seg til.
+Le département du lieu n’est pas connu : choisis la commune dans la liste des lieux, le code arrive tout seul. ¦ Departement miesta nie je známy: vyber obec zo zoznamu miest a kód sa doplní sám. ¦ Stedets departement er ukjent: velg kommunen i stedslisten, så kommer koden av seg selv.
+Lieu : {place} → {dept} ({code}). ¦ Miesto: {place} → {dept} ({code}). ¦ Sted: {place} → {dept} ({code}).
+Limite des {acts} ({dept}) : en ligne jusqu’en {until} ¦ Hranica pre {acts} ({dept}): online do roku {until} ¦ Grense for {acts} ({dept}): på nett til og med {until}
+la page qui le dit ↗ ¦ stránka, ktorá to uvádza ↗ ¦ siden som sier det ↗
+vérifié le {date} ¦ overené {date} ¦ kontrollert {date}
+source secondaire ¦ druhotný zdroj ¦ sekundær kilde
+année lue dans un extrait de recherche, pas encore confirmée ¦ rok prečítaný z úryvku vyhľadávania, zatiaľ nepotvrdený ¦ år lest i et søkeutdrag, ikke bekreftet ennå
+corrigé par toi ¦ opravené tebou ¦ rettet av deg
+Limite des {acts} ({dept}) : pas encore vérifiée. ¦ Hranica pre {acts} ({dept}): zatiaľ neoverená. ¦ Grense for {acts} ({dept}): ikke kontrollert ennå.
+75 ans : acte de {date} → communicable à tous le {open}. Ce jour-là, la pastille devient « 📮 À demander » toute seule. ¦ 75 rokov: záznam z {date} → prístupný všetkým {open}. V ten deň sa štítok sám zmení na „📮 Vyžiadať“. ¦ 75 år: akt fra {date} → åpen for alle {open}. Den dagen blir merket av seg selv «📮 Må bestilles».
+75 ans passés : l’acte est communicable à tous depuis le {open}. ¦ Viac ako 75 rokov: záznam je všetkým prístupný od {open}. ¦ Over 75 år: akten har vært åpen for alle siden {open}.
+Un acte de décès est communicable à tous, tout de suite. ¦ Úmrtný záznam je prístupný všetkým hneď. ¦ En dødsattest er åpen for alle med en gang.
+À qui demander : ¦ Koho požiadať: ¦ Hvem du skal spørre:
+L’app ne va pas voir sur le site des archives : elle ouvre la page, c’est toi qui regardes. ¦ Aplikácia sa na web archívu nepozerá: otvorí stránku a pozeráš sa ty. ¦ Appen ser ikke selv på arkivets nettsted: den åpner siden, og du ser.
+🏛 Ouvrir les archives ({dept}) ¦ 🏛 Otvoriť archív ({dept}) ¦ 🏛 Åpne arkivet ({dept})
+📮 Préparer la lettre ({who}) ¦ 📮 Pripraviť list ({who}) ¦ 📮 Forbered brevet ({who})
+✓ Je l’ai trouvé en ligne ¦ ✓ Našiel som to online ¦ ✓ Jeg fant den på nett
+✗ Pas en ligne ¦ ✗ Nie je online ¦ ✗ Ikke på nett
+🗂 Voir la table des limites ¦ 🗂 Zobraziť tabuľku hraníc ¦ 🗂 Se tabellen med grenser
+🏛 ARCHIVES EN LIGNE ¦ 🏛 ARCHÍVY ONLINE ¦ 🏛 ARKIVER PÅ NETT
+{act} : pourquoi cette pastille ? ¦ {act}: prečo tento štítok? ¦ {act}: hvorfor dette merket?
+La page officielle disait {until} le {date}. ¦ Oficiálna stránka uvádzala {date} rok {until}. ¦ Den offisielle siden oppga {until} den {date}.
+Rouvrir la page ↗ ¦ Znova otvoriť stránku ↗ ¦ Åpne siden igjen ↗
+✓ Trouvé en ligne ¦ ✓ Nájdené online ¦ ✓ Funnet på nett
+Adresse de l’image de l’acte (facultatif, conseillé) ¦ Adresa snímky záznamu (nepovinné, odporúčané) ¦ Adresse til bildet av akten (valgfritt, anbefales)
+Vue, page ou cote (facultatif) ¦ Snímka, strana alebo signatúra (nepovinné) ¦ Bilde, side eller signatur (valgfritt)
+ex. vue 143 ¦ napr. snímka 143 ¦ f.eks. bilde 143
+Ajouter comme source de cet acte ¦ Pridať ako zdroj tohto záznamu ¦ Legg til som kilde for akten
+Ta correction vaut pour… ¦ Tvoja oprava platí pre… ¦ Rettelsen din gjelder…
+Tout le département : les {acts} ({dept}) sont en ligne au moins jusqu’en {year} ¦ Celý departement: {acts} ({dept}) sú online aspoň do roku {year} ¦ Hele departementet: {acts} ({dept}) er på nett minst til {year}
+Seulement cette commune ({commune}) ¦ Len táto obec ({commune}) ¦ Bare denne kommunen ({commune})
+Cette adresse ne commence pas par https:// ¦ Táto adresa nezačína na https:// ¦ Adressen begynner ikke med https://
+✓ Noté : {acts} ({dept}) en ligne au moins jusqu’en {year} ¦ ✓ Zapísané: {acts} ({dept}) online aspoň do roku {year} ¦ ✓ Notert: {acts} ({dept}) på nett minst til {year}
+Pourquoi ? ¦ Prečo? ¦ Hvorfor?
+Le registre de cette année n’est pas en ligne ¦ Matrika z toho roku nie je online ¦ Registeret for det året er ikke på nett
+La limite des {acts} ({dept}) passe avant {year} chez toi. ¦ U teba sa hranica pre {acts} ({dept}) posunie pred rok {year}. ¦ Hos deg flyttes grensen for {acts} ({dept}) til før {year}.
+Seulement cette commune manque ¦ Chýba len táto obec ¦ Bare denne kommunen mangler
+Exception pour {commune}, la limite du département ne bouge pas. ¦ Výnimka pre {commune}; hranica departementu sa nemení. ¦ Unntak for {commune}; departementets grense endres ikke.
+Je n’ai pas trouvé l’acte dans le registre ¦ Záznam som v matrike nenašiel ¦ Jeg fant ikke akten i registeret
+La limite ne bouge pas ; c’est noté (« cherché, pas trouvé »). ¦ Hranica sa nemení; zapíše sa to („hľadané, nenájdené“). ¦ Grensen endres ikke; det noteres («søkt, ikke funnet»).
+Noté : cherché, pas trouvé dans le registre ¦ Zapísané: hľadané, v matrike nenájdené ¦ Notert: søkt, ikke funnet i registeret
+✗ Noté : pas en ligne ({place}) ¦ ✗ Zapísané: nie je online ({place}) ¦ ✗ Notert: ikke på nett ({place})
+Où montrer les pastilles ¦ Kde zobrazovať štítky ¦ Hvor merkene vises
+🗂 Archives en ligne par département ¦ 🗂 Archívy online podľa departementov ¦ 🗂 Arkiver på nett etter departement
+Table livrée avec l’app (vérifiée le {date}), complétée par tes corrections. Une ligne sans source n’existe pas : le département est alors « à vérifier ». ¦ Tabuľka dodaná s aplikáciou (overená {date}), doplnená tvojimi opravami. Riadok bez zdroja neexistuje: departement je potom „na overenie“. ¦ Tabell levert med appen (kontrollert {date}), supplert med rettelsene dine. En linje uten kilde finnes ikke: departementet er da «må sjekkes».
+La table des limites n’est pas encore livrée avec cette version : tout est « à vérifier », sauf ce que tu notes toi-même. ¦ Tabuľka hraníc zatiaľ s touto verziou neprichádza: všetko je „na overenie“, okrem toho, čo si zapíšeš sám. ¦ Tabellen med grenser følger ikke med denne versjonen ennå: alt er «må sjekkes», unntatt det du noterer selv.
+🔎 Département… ¦ 🔎 Departement… ¦ 🔎 Departement…
+En ligne jusqu’à ¦ Online do ¦ På nett til
+Page officielle qui le dit ¦ Oficiálna stránka, ktorá to uvádza ¦ Offisiell side som sier det
+Vérifié le ¦ Overené ¦ Kontrollert
+tous ¦ všetky ¦ alle
+＋ Noter la limite ¦ ＋ Zapísať hranicu ¦ ＋ Noter grensen
+depuis {y} ¦ od roku {y} ¦ fra {y}
+à confirmer ¦ na potvrdenie ¦ må bekreftes
+moi ¦ ja ¦ meg
+Retirer ma correction ¦ Odobrať moju opravu ¦ Fjern rettelsen min
+Aucun département ne correspond. ¦ Žiadny departement nezodpovedá. ¦ Ingen departementer passer.
+Correction retirée : la ligne livrée avec l’app revient. ¦ Oprava odobratá: platí opäť riadok dodaný s aplikáciou. ¦ Rettelsen er fjernet: linjen fra appen gjelder igjen.
+En ligne jusqu’à l’année ¦ Online do roku ¦ På nett til og med år
+ex. 1925 ¦ napr. 1925 ¦ f.eks. 1925
+Adresse de la page qui le dit (obligatoire) ¦ Adresa stránky, ktorá to uvádza (povinné) ¦ Adresse til siden som sier det (påkrevd)
+Sans adresse, on ne peut pas enregistrer : c’est ce qui évite les limites inventées. ¦ Bez adresy sa nedá uložiť: tak sa predchádza vymysleným hraniciam. ¦ Uten adresse kan du ikke lagre: det hindrer oppdiktede grenser.
+Une année entre 1500 et aujourd’hui. ¦ Rok medzi 1500 a dneškom. ¦ Et år mellom 1500 og i dag.
+L’adresse de la page qui le dit est obligatoire. ¦ Adresa stránky, ktorá to uvádza, je povinná. ¦ Adressen til siden som sier det, er påkrevd.
+＋ Limite notée : {dept}, {year} ¦ ＋ Hranica zapísaná: {dept}, {year} ¦ ＋ Grense notert: {dept}, {year}
+En ligne aux archives : à télécharger, pas à demander ¦ Online v archíve: stiahnuť, nie žiadať ¦ På nett hos arkivet: last ned, ikke bestill
+🏛 Ouvrir ¦ 🏛 Otvoriť ¦ 🏛 Åpne
+Réservé jusqu’en {year} : à demander par l’héritier lui-même, ou extrait sans filiation ¦ Vyhradené do roku {year}: musí žiadať sám dedič, alebo výpis bez údajov o rodičoch ¦ Begrenset til {year}: arvingen må be om den selv, eller utskrift uten foreldre
+À demander : {who} ¦ Vyžiadať: {who} ¦ Må bestilles: {who}
+📮 Lettre ¦ 📮 List ¦ 📮 Brev
+🏛 Archives ¦ 🏛 Archív ¦ 🏛 Arkiv
+Commence par les tables décennales. ¦ Začni desaťročnými registrami. ¦ Begynn med tiårsregistrene.
+Ses actes aux archives ¦ Záznamy v archíve ¦ Aktene i arkivet
+Les actes n’ont pas pu être lus. ¦ Záznamy sa nepodarilo načítať. ¦ Aktene kunne ikke leses.
+{n} de ta base sont en ligne et pas encore liés à une source. ¦ {n} z tvojej databázy je online a ešte bez zdroja. ¦ {n} i databasen din er på nett og ennå ikke knyttet til en kilde.
+Aussi : {maybe} peut-être en ligne · {ask} à demander · {verify} à vérifier ¦ Tiež: {maybe} možno online · {ask} vyžiadať · {verify} overiť ¦ Dessuten: {maybe} kanskje på nett · {ask} må bestilles · {verify} må sjekkes
+La table des limites n’est pas encore livrée : aucun acte ne peut être « en ligne » sans source. ¦ Tabuľka hraníc zatiaľ nie je dodaná: žiadny záznam nemôže byť „online“ bez zdroja. ¦ Tabellen med grenser følger ikke med ennå: ingen akt kan være «på nett» uten kilde.
+Actes en ligne à aller voir ¦ Záznamy online na pozretie ¦ Akter på nett å se på
+La pastille 🏛 dit, pour chaque acte, s’il est en ligne aux archives (d’après une limite vérifiée du département), à demander (et à qui), ou réservé. Un acte en ligne sort de cette liste. ¦ Štítok 🏛 pri každom zázname hovorí, či je online v archíve (podľa overenej hranice departementu), či treba oň požiadať (a koho), alebo či je vyhradený. Záznam, ktorý je online, z tohto zoznamu zmizne. ¦ Merket 🏛 sier for hver akt om den er på nett hos arkivet (etter en kontrollert grense for departementet), må bestilles (og hos hvem) eller er begrenset. En akt som er på nett, forsvinner fra listen.
+Actes ¦ Záznamy ¦ Akter
+Arbres ¦ Rodokmene ¦ Slektstrær
+Peut-être en ligne ¦ Možno online ¦ Kanskje på nett
+Réservé ¦ Vyhradené ¦ Begrenset
+Archives nationales d’outre-mer (Aix-en-Provence) ¦ Národný archív zámoria (Aix-en-Provence) ¦ Det franske nasjonalarkivet for oversjøiske områder (Aix-en-Provence)
+Notaire ou Archives départementales (série E) ¦ Notár alebo departementný archív (séria E) ¦ Notar eller departementsarkiv (serie E)
+Service historique de la Défense (Vincennes, Caen) ¦ Historická služba obrany (Vincennes, Caen) ¦ Forsvarets historiske tjeneste (Vincennes, Caen)
+baptêmes ¦ krsty ¦ dåp
+sépultures ¦ pohreby ¦ begravelser
+tables décennales ¦ desaťročné registre ¦ tiårsregistre
+registres paroissiaux ¦ farské matriky ¦ kirkebøker
+Pastilles sur les fiches ¦ Štítky na kartách ¦ Merker på profilene
+à côté de chaque naissance, baptême, mariage, décès, sépulture ¦ pri každom narodení, krste, sobáši, úmrtí, pohrebe ¦ ved hver fødsel, dåp, vielse, død, begravelse
+Pastilles dans la Chronologie ¦ Štítky v Časovej osi ¦ Merker i Tidslinjen
+Colonne « 🏛 Archives » dans la liste des Événements ¦ Stĺpec „🏛 Archív“ v zozname Udalostí ¦ Kolonnen «🏛 Arkiv» i listen Hendelser
+Cacher la pastille quand l’acte est déjà lié ¦ Skryť štítok, keď je záznam už prepojený ¦ Skjul merket når akten allerede er knyttet
+sinon : petite « 🟢 ✓ lié » ¦ inak: malý „🟢 ✓ prepojené“ ¦ ellers: lite «🟢 ✓ knyttet»
+Widget « 🏛 Actes en ligne à aller voir » : ancêtres directs seulement ¦ Widget „🏛 Záznamy online na pozretie“: len priami predkovia ¦ Widgeten «🏛 Akter på nett å se på»: bare direkte aner
+Vérifiés ¦ Overené ¦ Kontrollerte
+Corrigés par moi ¦ Opravené mnou ¦ Rettet av meg
+Actes en ligne aux archives ¦ Záznamy online v archívoch ¦ Akter på nett hos arkivene
+Une pastille sur chaque naissance, baptême, mariage, décès et sépulture : en ligne, à demander (et à qui), réservé, à vérifier. Jamais « en ligne » sans une limite sourcée. ¦ Štítok pri každom narodení, krste, sobáši, úmrtí a pohrebe: online, vyžiadať (a od koho), vyhradené, overiť. Nikdy „online“ bez hranice so zdrojom. ¦ Et merke ved hver fødsel, dåp, vielse, død og begravelse: på nett, må bestilles (og hos hvem), begrenset, må sjekkes. Aldri «på nett» uten en grense med kilde.
+Correction introuvable. ¦ Oprava sa nenašla. ¦ Fant ikke rettelsen.
+Type d’acte inconnu. ¦ Neznámy druh záznamu. ¦ Ukjent akttype.
+Année incorrecte. ¦ Neplatný rok. ¦ Ugyldig år.
+Cet acte n’a pas de département ou de date : précise d’abord le lieu et la date. ¦ Tento záznam nemá departement ani dátum: najprv upresni miesto a dátum. ¦ Akten har ikke departement eller dato: angi først sted og dato.

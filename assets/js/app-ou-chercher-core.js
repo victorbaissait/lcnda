@@ -82,7 +82,7 @@
     const OVERSEAS = ['dz', 'ma', 'tn', 'sn', 'vn', 'nc', 'gf', 're', 'gp', 'mq', 'mg'];
 
     /* ═════ profils (ce que la fiche dit de sa vie) et manques ═════ */
-    const PROFILES = {soldier: ['🎖', 'soldat'], mpf: ['🎖', 'mort pour la France'], pow: ['✚', 'prisonnier de guerre'], sailor: ['⚓', 'marin'], emigrant: ['🚢', 'émigré'], notary: ['✒', 'notaire'],
+    const PROFILES = {soldier: ['🎖', 'soldat'], officer: ['🎖', 'officier (armée)'], mpf: ['🎖', 'mort pour la France'], pow: ['✚', 'prisonnier de guerre'], sailor: ['⚓', 'marin'], emigrant: ['🚢', 'émigré'], notary: ['✒', 'notaire'],
         inheritance: ['⚖️', 'héritage, testament'], deported: ['🕯', 'déporté'], shot: ['🕯', 'fusillé'], resistant: ['🕯', 'résistant'], placed: ['👶', 'enfant placé'], noble: ['🛡', 'noblesse'],
         protestant: ['✝', 'protestant'], jewish: ['✡', 'famille juive'], railway: ['🚂', 'cheminot'], police: ['👮', 'gendarme, policier'], elected: ['🏛', 'élu'], doctor: ['⚕', 'médecin'],
         photographer: ['📷', 'photographe'], clergy: ['⛪', 'religieux'], worker: ['🏭', 'ouvrier'], inventor: ['💡', 'inventeur, savant'], artist: ['🎨', 'artiste']};
@@ -104,16 +104,22 @@
         if (!dy && by) { dy = Math.min(NOW, Math.max(by + 75, years.length ? Math.max(...years) : 0)); if (p.living !== 'living') estimated = true; }
         if (p.living === 'living') dy = NOW;
         const countries = new Map(), depts = new Map(), places = [];
-        events.forEach(e => {
-            let c = canonCountry(e.country) || canonCountry(e.place);
+        events.forEach(e0 => {
+            let e = e0;
+            // un lieu qui est lui-même un pays (« Pologne », même rangé « France » par erreur) : ce pays d'abord (P7)
+            const own = WORD_TO_CODE.get(fold(String(e.place || '').split(',')[0])) || '';
+            const ownIsCountry = own && own !== 'fr' && fold(String(e.place || '').split(',')[0]).length > 3;
+            let c = (ownIsCountry ? own : '') || canonCountry(e.country) || canonCountry(e.place);
+            if (ownIsCountry && e.dept) e = {...e, dept: null};
             if (!c && e.dept?.code) c = 'fr';
             if (c && c !== '*') { const y = Number(e.year) || 0; const cur = countries.get(c) || {from: 0, to: 0, n: 0}; if (y) { cur.from = cur.from ? Math.min(cur.from, y) : y; cur.to = Math.max(cur.to, y); } cur.n++; countries.set(c, cur); }
             if (e.dept?.code && !depts.has(e.dept.code)) depts.set(e.dept.code, {...e.dept, place: String(e.place || '').split(',')[0].trim(), year: Number(e.year) || 0, tag: e.tag});
             const town = String(e.place || '').split(',')[0].trim(); if (town && !places.includes(town)) places.push(town);
         });
-        const birthDept = birth?.dept || null, birthPlace = String(birth?.place || '').split(',')[0].trim();
+        const birthIsCountry = birth && WORD_TO_CODE.get(fold(String(birth.place || '').split(',')[0])) && fold(String(birth.place || '').split(',')[0]).length > 3;
+        const birthDept = birthIsCountry ? null : (birth?.dept || null), birthPlace = String(birth?.place || '').split(',')[0].trim();
         return {id: Number(p.id) || 0, name: p.name || [p.first, p.last].filter(Boolean).join(' '), first: p.first || '', last: p.last || '', female, male,
-            by, dy, estimated, birthKnown: !!birth, deathKnown: !!death, birthPlace, birthDept, birthCountry: canonCountry(birth?.country) || (birthDept ? 'fr' : ''),
+            by, dy, estimated, birthKnown: !!birth, deathKnown: !!death, birthPlace, birthDept, birthCountry: (birthIsCountry ? WORD_TO_CODE.get(fold(String(birth.place).split(',')[0])) : '') || canonCountry(birth?.country) || canonCountry(birth?.place) || (birthDept ? 'fr' : ''),
             countries, depts: [...depts.values()], places, tags: new Set(events.map(e => e.tag).filter(Boolean)),
             profiles: new Set(Array.isArray(raw.profiles) ? raw.profiles : []), missing: new Set(Array.isArray(raw.missing) ? raw.missing : []),
             searched: raw.searched && typeof raw.searched === 'object' ? raw.searched : {}, sosa: Number(p.sosa) || 0, living: p.living || '', private: !!p.private};
@@ -121,16 +127,25 @@
     const alive = (ctx, a, b) => ctx.by && ctx.dy ? ctx.dy >= a && ctx.by <= b : null; // null : on ne sait pas
     const ne = ctx => (ctx.female ? 'Née' : 'Né');
     const il = ctx => (ctx.female ? 'elle' : 'il');
-    const deptText = d => (d ? (I18() ? T('en {dept}', {dept: d.name}) : /^[aeiouyhé]/i.test(d.name) ? `dans l’${d.name}` : `en ${d.name}`) : '');
+    /** les articles des 101 départements (même table que lib/research_gaps.php gaps_departments) : « du Cher », « des Landes »… */
+    const DEPT_OF = Object.fromEntries('01de l’;02de l’;03de l’;04des ;05des ;06des ;07de l’;08des ;09de l’;10de l’;11de l’;12de l’;13des ;14du ;15du ;16de la ;17de la ;18du ;19de la ;2Ade la ;2Bde la ;21de la ;22des ;23de la ;24de la ;25du ;26de la ;27de l’;28d’;29du ;30du ;31de la ;32du ;33de la ;34de l’;35d’;36de l’;37d’;38de l’;39du ;40des ;41de ;42de la ;43de la ;44de la ;45du ;46du ;47de ;48de la ;49de ;50de la ;51de la ;52de la ;53de la ;54de ;55de la ;56du ;57de la ;58de la ;59du ;60de l’;61de l’;62du ;63du ;64des ;65des ;66des ;67du ;68du ;69du ;70de la ;71de ;72de la ;73de la ;74de la ;75de ;76de la ;77de ;78des ;79des ;80de la ;81du ;82de ;83du ;84de ;85de la ;86de la ;87de la ;88des ;89de l’;90du ;91de l’;92des ;93de la ;94du ;95du ;971de la ;972de la ;973de la ;974de ;976de '
+        .split(';').map(x => { const m = x.match(/^(\d{2,3}|2[AB])(.*)$/); return [m[1], m[2]]; }));
+    const deptArt = d => DEPT_OF[String(d?.code || '').toUpperCase()] ?? (/^[aeiouyhéèê]/i.test(d?.name || '') ? 'de l’' : 'de ');
+    /** « dans le Cher », « en Corrèze », « dans les Landes », « dans l’Ain », « à Paris » */
+    const deptIn = d => { const a = deptArt(d), n = d.name; if (String(d.code) === '75' || /^(La Réunion|Mayotte)$/.test(n)) return `à ${n}`; return a === 'du ' ? `dans le ${n}` : a === 'des ' ? `dans les ${n}` : a === 'de l’' ? `dans l’${n}` : `en ${n}`; };
+    /** « du Cher », « de la Corrèze », « des Landes », « de l’Ain », « d’Ille-et-Vilaine », « de Paris » */
+    const deptOf = d => `${deptArt(d)}${d.name}`;
+    const deptText = d => (d ? (I18() ? T('en {dept}', {dept: d.name}) : deptIn(d)) : '');
     /** « Né en 1890 en Corrèze » (ce qu'on sait de la naissance) */
     function bornText(ctx) {
         if (!ctx.by) return '';
-        const where = ctx.birthDept ? ` ${deptText(ctx.birthDept)}` : ctx.birthPlace ? ` ${T('à {place}', {place: ctx.birthPlace})}` : '';
+        const pc = ctx.birthPlace && WORD_TO_CODE.get(fold(ctx.birthPlace)); // « Pologne » : un pays, pas une ville → « en Pologne »
+        const where = ctx.birthDept ? ` ${deptText(ctx.birthDept)}` : pc ? ` ${countryIn(ctx, pc)}` : ctx.birthPlace ? ` ${T('à {place}', {place: ctx.birthPlace})}` : '';
         if (I18()) return T(ctx.estimated && !ctx.birthKnown ? (ctx.female ? 'Née vers {year}' : 'Né vers {year}') : (ctx.female ? 'Née en {year}' : 'Né en {year}'), {year: ctx.by}) + where;
         return `${ne(ctx)} ${ctx.estimated && !ctx.birthKnown ? 'vers' : 'en'} ${ctx.by}${where}`;
     }
     const lifeText = ctx => (ctx.by ? `${ctx.estimated && !ctx.birthKnown ? T('vers') + ' ' : ''}${ctx.by}–${ctx.deathKnown ? ctx.dy : '?'}` : '');
-    const countryIn = (ctx, c) => { const n = COUNTRY_NAME[c] || c; if (I18()) return T('en {country}', {country: T(n)}); return ['Algérie', 'Indochine', 'Italie', 'Espagne', 'Allemagne', 'Irlande', 'Australie', 'Argentine', 'Autriche', 'Ukraine', 'Écosse'].includes(n) ? `en ${n}` : /^[AEIOUÉ]/.test(n) ? `en ${n}` : n === 'États-Unis' || n === 'Pays-Bas' ? `aux ${n}` : ['Royaume-Uni', 'Luxembourg', 'Brésil', 'Danemark', 'Canada', 'Portugal', 'Maroc', 'Sénégal'].includes(n) ? `au ${n}` : `en ${n}`; };
+    const countryIn = (ctx, c) => { const n = COUNTRY_NAME[c] || c; if (I18()) return T('en {country}', {country: T(n)}); if (n === 'États-Unis' || n === 'Pays-Bas') return `aux ${n}`; return ['Algérie', 'Indochine', 'Italie', 'Espagne', 'Allemagne', 'Irlande', 'Australie', 'Argentine', 'Autriche', 'Ukraine', 'Écosse'].includes(n) ? `en ${n}` : /^[AEIOUÉ]/.test(n) ? `en ${n}` : n === 'États-Unis' || n === 'Pays-Bas' ? `aux ${n}` : ['Royaume-Uni', 'Luxembourg', 'Brésil', 'Danemark', 'Canada', 'Portugal', 'Maroc', 'Sénégal'].includes(n) ? `au ${n}` : `en ${n}`; };
 
     /* ═════ les règles des sites qu'on connaît (clés de « Chercher sur internet » et des lots) ═════ */
     const S = (o) => o;
@@ -221,11 +236,13 @@
         so6_hiski: S({countries: ['fi'], base: 1.5}), so6_scotlandspeople: S({countries: ['gb'], base: 0.8, paid: true}), so6_oldbailey: S({countries: ['gb'], from: 1674, to: 1913, base: 0.2}),
         so7_ape: S({countries: ['de', 'it', 'es', 'be', 'nl', 'pl', 'cz', 'at', 'hu', 'pt', 'ch', 'lu', 'dk', 'se', 'no', 'fi', 'ie', 'gb'], base: 0.8}),
         so7_compgen_ofb: S({countries: ['de'], base: 1}), so7_archion: S({countries: ['de'], profiles: ['protestant'], base: 0.8, paid: true}), so7_archivni_mapy: S({countries: ['cz'], base: 0.5}), so7_mapire: S({countries: ['at', 'hu', 'cz'], base: 0.4}),
-        so7_cercle_dept: S({countries: ['fr'], missing: ['birth', 'parents', 'father', 'mother', 'marriage', 'death'], base: 1.4, why: ctx => (I18() ? (ctx.depts[0] ? T('Les bénévoles du cercle généalogique {of} relèvent les actes de leurs communes', {of: T('de {place}', {place: ctx.depts[0].name})}) : T('Les bénévoles du cercle généalogique du département relèvent les actes de leurs communes')) : `Les bénévoles du cercle généalogique ${ctx.depts[0] ? deptText(ctx.depts[0]).replace(/^en |^dans l’/, 'de ') : 'du département'} relèvent les actes de leurs communes`)}),
+        so7_cercle_dept: S({countries: ['fr'], missing: ['birth', 'parents', 'father', 'mother', 'marriage', 'death'], base: 1.4, why: ctx => (I18() ? (ctx.depts[0] ? T('Les bénévoles du cercle généalogique {of} relèvent les actes de leurs communes', {of: T('de {place}', {place: ctx.depts[0].name})}) : T('Les bénévoles du cercle généalogique du département relèvent les actes de leurs communes')) : `Les bénévoles du cercle généalogique ${ctx.depts[0] ? deptOf(ctx.depts[0]) : 'du département'} relèvent les actes de leurs communes`)}),
         so7_fs_wiki: S({base: 0.5, why: () => T('Le mode d’emploi des archives du pays ou de la région (FamilySearch Wiki)')}),
         so5_geneawiki: S({countries: ['fr'], base: 0.4}), so4_geopatronyme: S({countries: ['fr'], missing: ['parents', 'father', 'mother'], base: 0.4, why: ctx => (ctx.last ? T('Où vivaient les {name} entre 1891 et 1990 : pour trouver d’où vient la famille', {name: ctx.last}) : T('Où vivaient les gens de ce nom entre 1891 et 1990 : pour trouver d’où vient la famille'))}),
         so4_cassini: S({countries: ['fr'], base: 0.1}), so4_geneanet_releves: S({countries: ['fr'], missing: ['death'], base: 0.6}), so4_cimetieres_de_france: S({countries: ['fr'], missing: ['death'], base: 0.5}),
-        so3_cths: S({profiles: ['inventor', 'artist', 'doctor', 'elected'], base: 0.2}), so3_polytechnique: S({profiles: ['inventor', 'soldier'], require: ['profile'], born: [1775, 1925], sex: 'male', base: 0.1}),
+        so3_cths: S({profiles: ['inventor', 'artist', 'doctor', 'elected'], base: 0.2}), so3_polytechnique: S({profiles: ['officer', 'inventor'], require: ['profile'], born: [1775, 1925], sex: 'male', base: 0.1}), // P4 : « officier » ou « savant », pas un simple soldat
+        // monuments aux morts : des décès à partir de 1870 (P4 : un soldat mort en 1822 n'y est pas)
+        so7_monumentsmorts: S({countries: ['fr'], from: 1870, profiles: ['soldier', 'mpf'], base: 0.4}), so4_memorialgenweb_commune: S({countries: ['fr'], from: 1870, base: 0.3}),
         // ═════ lot 8 (app-sources-ouvertes-8-core.js) : sites gratuits de France et d'ailleurs ═════
         // France et outre-mer
         so8_geneabank: S({countries: ['fr'], missing: ['birth', 'parents', 'father', 'mother', 'marriage', 'death'], base: 1.1, paid: 'partiel', why: () => T('Les relevés de nombreux cercles généalogiques réunis : gratuits si tu es adhérent d’un cercle')}),
@@ -298,7 +315,8 @@
     function score(site, ctx) {
         const r = ruleOf(site) || {};
         const reasons = [];
-        let s = Number(r.base ?? site.base ?? 0.4) || 0, out = '', strong = false;
+        let s = Number(r.base ?? site.base ?? 0.4) || 0, out = '', outKind = '', strong = false;
+        const setOut = (k, why) => { if (!out && why) { out = why; outKind = k; } };
         // pays
         // les pays de la règle passent devant ceux du lot (« Europe », « Monde » ne disent rien)
         const raw = r.countries?.length ? r.countries : [...(Array.isArray(site.countries) ? site.countries : []), site.country];
@@ -315,41 +333,46 @@
         const from = Number(r.from ?? yrs?.[0]) || 0, to = Number(r.to ?? yrs?.[1]) || 0;
         if ((from || to) && ctx.by) {
             const a = alive(ctx, from || -9999, to || 9999);
-            if (a === false) out = out || T('sa vie ({life}) n’est pas dans les années du site ({from}–{to})', {life: lifeText(ctx), from: from || '…', to: to || '…'});
-            else if (from && to && to - from < 120) { s += 1; reasons.push(T('Ses années ({life}) sont dans celles du site ({from}–{to})', {life: lifeText(ctx), from, to})); }
+            if (a === false) setOut('years', T('sa vie ({life}) n’est pas dans les années du site ({from}–{to})', {life: lifeText(ctx), from: from || '…', to: to || '…'}));
+            else if (from && to && to - from < 120) { s += 1; reasons.push(ctx.by >= from && ctx.dy <= to ? T('Ses années ({life}) sont dans celles du site ({from}–{to})', {life: lifeText(ctx), from, to}) : T('Sa vie ({life}) croise les années du site ({from}–{to})', {life: lifeText(ctx), from, to})); } // P5
         }
         // né dans la bonne tranche (soldats…)
         if (Array.isArray(r.born) && ctx.by) {
             if (ctx.by >= r.born[0] && ctx.by <= r.born[1]) { s += 3; strong = true; }
-            else out = out || T(ctx.female ? 'née en {year}, hors des années {from}–{to}' : 'né en {year}, hors des années {from}–{to}', {year: ctx.by, from: r.born[0], to: r.born[1]});
+            else setOut('years', T(ctx.female ? 'née en {year}, hors des années {from}–{to}' : 'né en {year}, hors des années {from}–{to}', {year: ctx.by, from: r.born[0], to: r.born[1]}));
         } else if (Array.isArray(r.born) && !ctx.by) s -= 1;
         // les morts d'une guerre : un décès connu hors de ses années l'écarte (sauf « mort pour la France » sur la fiche)
         if (Array.isArray(r.diedIn) && r.diedIn.length && ctx.deathKnown && ctx.dy && !ctx.profiles.has('mpf')
-            && !r.diedIn.some(([a, b]) => ctx.dy >= a && ctx.dy <= b)) out = out || T(ctx.female ? 'morte en {year}, pas pendant une guerre' : 'mort en {year}, pas pendant une guerre', {year: ctx.dy});
-        if (r.sex && ((r.sex === 'male' && ctx.female) || (r.sex === 'female' && ctx.male))) out = out || T(ctx.female ? 'pour les hommes' : 'pour les femmes');
+            && !r.diedIn.some(([a, b]) => ctx.dy >= a && ctx.dy <= b)) setOut('years', T(ctx.female ? 'morte en {year}, pas pendant une guerre' : 'mort en {year}, pas pendant une guerre', {year: ctx.dy}));
+        if (r.sex && ((r.sex === 'male' && ctx.female) || (r.sex === 'female' && ctx.male))) setOut('sex', T(ctx.female ? 'pour les hommes' : 'pour les femmes'));
         // profils (règle, ou « where / on » des lots)
         const whereList = [...(Array.isArray(site.where) ? site.where : []), ...(Array.isArray(site.on) ? site.on : [])];
-        const fromWhere = whereList.map(w => WHERE_PROFILE[w]).filter(Boolean);
+        // P4 : un « endroit » de lot ne crée un profil que si la règle du site n'en donne pas (la règle des gendarmes dit « gendarme »)
+        const ruleProfs = Array.isArray(r.profiles) && r.profiles.length;
+        const fromWhere = ruleProfs ? [] : whereList.map(w => WHERE_PROFILE[w]).filter(Boolean);
         const profs = [...new Set([...(r.profiles || []), ...fromWhere])];
-        const onlyFor = (r.require || []).includes('profile') || (whereList.length && !whereList.some(w => GENERIC_WHERE.includes(w)) && fromWhere.length);
+        const onlyFor = (r.require || []).includes('profile') || (!ruleProfs && whereList.length && !whereList.some(w => GENERIC_WHERE.includes(w)) && fromWhere.length);
         const ph = profs.find(k => ctx.profiles.has(k));
         if (ph) { s += 5; strong = true; reasons.push(T('Sa fiche dit : {what}', {what: T(PROFILES[ph]?.[1] || ph)})); }
-        else if (onlyFor && profs.length) out = out || T('seulement {list}', {list: profs.slice(0, 2).map(k => `« ${T(PROFILES[k]?.[1] || k)} »`).join(' ' + T('ou') + ' ')});
+        else if (onlyFor && profs.length) setOut('profile', T('seulement {list}', {list: profs.slice(0, 2).map(k => `« ${T(PROFILES[k]?.[1] || k)} »`).join(' ' + T('ou') + ' ')}));
         // événements
         const evh = (r.events || []).find(t => ctx.tags.has(t));
         if (evh) { s += 4; strong = true; if (!ph) reasons.push(T({EMIG: 'Sa fiche a une émigration', IMMI: 'Sa fiche a une immigration', NATU: 'Sa fiche a une naturalisation', WILL: 'Sa fiche a un testament', PROB: 'Sa fiche a une succession', DEED: 'Sa fiche a un acte notarié', MARC: 'Sa fiche a un contrat de mariage'}[evh] || 'Sa fiche a l’événement {tag}', {tag: evh})); }
         // un site fait pour un profil ou un événement que la fiche n'a pas : en bas, et sans sa phrase (« Venu d'ailleurs… » pour un Corrézien)
-        const offTopic = (profs.length || (r.events || []).length) && !ph && !evh && !(r.place instanceof RegExp && ctx.places.some(x => r.place.test(fold(x)))) && !(Array.isArray(r.born) && ctx.by >= r.born[0] && ctx.by <= r.born[1]);
+        // P6 : un site dont le pays correspond (Geneteka pour un homme né en Pologne) n'est pas « hors sujet »
+        const countryHit = want.length && want.some(c => c !== 'fr' && ctx.countries.has(c));
+        const offTopic = (profs.length || (r.events || []).length) && !ph && !evh && !countryHit && !(r.place instanceof RegExp && ctx.places.some(x => r.place.test(fold(x)))) && !(Array.isArray(r.born) && ctx.by >= r.born[0] && ctx.by <= r.born[1]);
         if (offTopic) { s -= 1.5; if (!Array.isArray(r.born)) reasons.length = 0; }
-        // un pays qui ne va pas : écarté, sauf si son profil ou un événement le rend utile (un émigré sans lieu en Amérique)
-        if (countryMiss && !ph && !evh) out = out || countryMiss;
+        // un pays qui ne va pas : écarté, sauf pour un émigré (un émigré sans lieu en Amérique) — P4 : un simple « soldat » ne lève pas l'exclusion
+        const emigrantHit = ph === 'emigrant' || ['EMIG', 'IMMI', 'NATU'].includes(evh);
+        if (countryMiss && !emigrantHit) setOut('country', countryMiss);
         // un registre français par âge (soldats, matricules) : pas pour quelqu'un né à l'étranger, sauf si sa fiche le dit
-        if (Array.isArray(r.born) && want.includes('fr') && ctx.birthCountry && ctx.birthCountry !== 'fr' && !ph) out = out || T(ctx.female ? 'née hors de France ({country})' : 'né hors de France ({country})', {country: C_NAME(ctx.birthCountry)});
+        if (Array.isArray(r.born) && want.includes('fr') && ctx.birthCountry && ctx.birthCountry !== 'fr' && !ph) setOut('birthplace', T(ctx.female ? 'née hors de France ({country})' : 'né hors de France ({country})', {country: C_NAME(ctx.birthCountry)}));
         // lieu précis (Paris…)
         const placeRe = r.place instanceof RegExp ? r.place : site.place instanceof RegExp ? site.place : null;
-        if (placeRe) { if (ctx.places.some(x => placeRe.test(fold(x)) || placeRe.test(String(x).toLowerCase()))) { s += 3; strong = true; } else if (!ph && !evh) out = out || T('pas de lieu qui convient'); }
+        if (placeRe) { if (ctx.places.some(x => placeRe.test(fold(x)) || placeRe.test(String(x).toLowerCase()))) { s += 3; strong = true; } else if (!ph && !evh) setOut('place', T('pas de lieu qui convient')); }
         // région (bibliothèques régionales du lot 6)
-        if (site.region) { if (ctx.regions?.includes(site.region)) { s += 2.5; reasons.push(T('Une bibliothèque de sa région')); } else out = out || T('pas dans sa région'); }
+        if (site.region) { if (ctx.regions?.includes(site.region)) { s += 2.5; reasons.push(T('Une bibliothèque de sa région')); } else setOut('place', T('pas dans sa région')); }
         // ce qui manque
         const miss = (r.missing || []).filter(m => ctx.missing.has(m));
         if (miss.length) { s += 1.5 + miss.length * 0.5; reasons.push(`${T(MISSING[miss[0]]).replace(/^./, c => c.toUpperCase())}${miss.length > 1 ? ' ' + T('(et {list})', {list: miss.slice(1).map(m => T(MISSING[m])).join(', ')}) : ''}`); }
@@ -361,7 +384,7 @@
         if (!reasons.length && !out) reasons.push(offTopic ? (profs.length ? T('Utile surtout pour {list}', {list: profs.slice(0, 2).map(k => `« ${T(PROFILES[k]?.[1] || k)} »`).join(' ' + T('ou') + ' ')}) : T('Utile surtout pour un autre cas')) : site.note ? String(site.note).split(/(?<=[.!?])\s/)[0] : T('Un site général, à essayer'));
         const paid = isPaid({...site, paid: site.paid ?? r.paid});
         if (paid === 'paid') s -= 2; else if (paid === 'library') s -= 1.5; else if (paid === 'partly') s -= 0.3;
-        return {score: Math.round(s * 10) / 10, reasons: [...new Set(reasons.filter(Boolean))].slice(0, 3), out, strong, paid};
+        return {score: Math.round(s * 10) / 10, reasons: [...new Set(reasons.filter(Boolean))].slice(0, 3), out, outKind, strong, paid};
     }
 
     /**
@@ -375,12 +398,12 @@
         (sites || []).forEach(site => {
             if (!site || !site.key || seen.has(site.key)) return; seen.add(site.key);
             const sc = score(site, ctx);
-            if (sc.out) { out.push({site, why: sc.out}); return; }
+            if (sc.out) { out.push({site, why: sc.out, kind: sc.outKind}); return; }
             if (freeOnly && sc.paid === 'paid') { hidden++; return; }
             const prev = ctx.searched?.[site.key] || null;
             const row = {site, score: sc.score, reasons: sc.reasons, paid: sc.paid, strong: sc.strong, searched: prev};
             if (prev && prev.status !== 'review') { done.push(row); return; }
-            if (sc.score < minScore && !sc.strong) { out.push({site, why: T('peu utile pour cette fiche')}); return; }
+            if (sc.score < minScore && !sc.strong) { out.push({site, why: T('peu utile pour cette fiche'), kind: 'low', score: sc.score, reasons: sc.reasons, paid: sc.paid}); return; }
             list.push(row);
         });
         list.sort((a, b) => b.score - a.score || String(a.site.label).localeCompare(String(b.site.label), 'fr'));
@@ -390,5 +413,5 @@
         return {list, searched: done, hidden, out};
     }
 
-    return {fold, canonCountry, COUNTRY_NAME, PROFILES, MISSING, RULES, ALIAS, WHERE_PROFILE, context, score, rank, addRules, isPaid, ruleOf, bornText, lifeText};
+    return {fold, canonCountry, COUNTRY_NAME, PROFILES, MISSING, RULES, ALIAS, WHERE_PROFILE, context, score, rank, addRules, isPaid, ruleOf, bornText, lifeText, countryIn: c => countryIn(null, c), deptIn, deptOf};
 });

@@ -1,0 +1,130 @@
+fr ¦ tr
+# 🏛 Actes en ligne aux archives (docs/design/archives-en-ligne.html)
+Mairie de {commune} ¦ {commune} belediyesi
+Archives départementales ({dept}) ¦ Archives départementales ({dept})
+🔒 Réservé jusqu’en {year} ¦ 🔒 {year} yılına kadar kısıtlı
+déjà lié à une source ¦ zaten bir kaynağa bağlı
+Pourquoi cette pastille ? ¦ Bu rozet neden?
+✓ lié ¦ ✓ bağlı
+Règle : code du patrimoine, art. L213-2 ({legi}) ; qui peut demander avant : décret 2017-890, art. 30 ({decret}). ¦ Kural: Fransız miras kanunu, md. L213-2 ({legi}); daha önce kimler isteyebilir: 2017-890 sayılı kararname, md. 30 ({decret}).
+Une limite vérifiée pour ce département et ce type d’acte couvre la date. ¦ Bu département ve bu kayıt türü için doğrulanmış bir sınır tarihi kapsıyor.
+D’après une source secondaire ({source}) : à confirmer sur la page officielle des archives. ¦ İkincil bir kaynağa göre ({source}): arşivin resmî sayfasında doğrulanmalı.
+Peut-être en ligne (d’après {source}, à confirmer) : année lue dans un extrait de recherche, pas encore confirmée. ¦ Belki çevrimiçi ({source} kaynağına göre, doğrulanmalı): yıl bir arama özetinden okundu, henüz doğrulanmadı.
+la table ¦ tablo
+Date approximative : la fourchette {from}–{to} chevauche la limite ({until}). ¦ Yaklaşık tarih: {from}–{to} aralığı sınırla ({until}) çakışıyor.
+La date est à 2 ans de la limite ({until}) : le registre est peut-être en ligne depuis. ¦ Tarih sınıra ({until}) 2 yıl uzaklıkta: kayıt defteri o zamandan beri çevrimiçi olabilir.
+Acte de plus de 100 ans, mais la limite de ce département n’est pas encore vérifiée : jamais « en ligne » sans source. ¦ 100 yıldan eski bir kayıt ama bu département’ın sınırı henüz doğrulanmadı: kaynak olmadan asla “çevrimiçi” değil.
+Trop récent pour être en ligne : la limite de ce département est {until}. ¦ Çevrimiçi olmak için çok yeni: bu département’ın sınırı {until}.
+Trop récent pour être en ligne (et la limite de ce département n’est pas encore vérifiée). ¦ Çevrimiçi olmak için çok yeni (ve bu département’ın sınırı henüz doğrulanmadı).
+L’état civil parisien d’avant 1860 a brûlé en 1871 : chercher dans l’état civil reconstitué (Archives de Paris). ¦ Paris’in 1860 öncesi nüfus kayıtları 1871’de yandı: yeniden oluşturulan kayıtlarda ara (Archives de Paris).
+Après 1792, un baptême ou une sépulture n’est pas dans l’état civil : il faut le demander aux archives diocésaines. ¦ 1792’den sonra vaftiz veya defin nüfus kayıtlarında yok: piskoposluk arşivinden istemek gerekir.
+Les registres paroissiaux en ligne de ce département commencent en {from}. ¦ Bu département’ın çevrimiçi kilise kayıtları {from} yılında başlıyor.
+Ancienne colonie : l’état civil est aux Archives nationales d’outre-mer (Aix-en-Provence). ¦ Eski sömürge: nüfus kayıtları Deniz Aşırı Ulusal Arşivlerde (Aix-en-Provence).
+Hors de France : la table ne couvre que les départements français. Pour un Français né, marié ou mort à l’étranger : le Service central d’état civil (Nantes). ¦ Fransa dışında: tablo yalnızca Fransız département’larını kapsar. Yurt dışında doğmuş, evlenmiş ya da ölmüş bir Fransız için: Merkezî Nüfus Dairesi (Nantes).
+Pas de date : impossible de la comparer avec la limite. ¦ Tarih yok: sınırla karşılaştırılamaz.
+Pas de lieu : on ne sait pas à quelles archives s’adresser. ¦ Yer yok: hangi arşive başvurulacağı bilinmiyor.
+Le département du lieu n’est pas connu : choisis la commune dans la liste des lieux, le code arrive tout seul. ¦ Yerin département’ı bilinmiyor: yerler listesinden belediyeyi seç, kod kendiliğinden gelir.
+Lieu : {place} → {dept} ({code}). ¦ Yer: {place} → {dept} ({code}).
+Limite des {acts} ({dept}) : en ligne jusqu’en {until} ¦ {acts} sınırı ({dept}): {until} yılına kadar çevrimiçi
+la page qui le dit ↗ ¦ bunu söyleyen sayfa ↗
+vérifié le {date} ¦ {date} tarihinde doğrulandı
+source secondaire ¦ ikincil kaynak
+année lue dans un extrait de recherche, pas encore confirmée ¦ yıl bir arama özetinden okundu, henüz doğrulanmadı
+corrigé par toi ¦ senin düzelttiğin
+Limite des {acts} ({dept}) : pas encore vérifiée. ¦ {acts} sınırı ({dept}): henüz doğrulanmadı.
+75 ans : acte de {date} → communicable à tous le {open}. Ce jour-là, la pastille devient « 📮 À demander » toute seule. ¦ 75 yıl: {date} tarihli kayıt → {open} tarihinde herkese açık. O gün rozet kendiliğinden “📮 İstenecek” olur.
+75 ans passés : l’acte est communicable à tous depuis le {open}. ¦ 75 yılı geçti: kayıt {open} tarihinden beri herkese açık.
+Un acte de décès est communicable à tous, tout de suite. ¦ Ölüm kaydı hemen herkese açıktır.
+À qui demander : ¦ Kime başvurmalı:
+L’app ne va pas voir sur le site des archives : elle ouvre la page, c’est toi qui regardes. ¦ Uygulama arşiv sitesine kendisi bakmaz: sayfayı açar, sen bakarsın.
+🏛 Ouvrir les archives ({dept}) ¦ 🏛 Arşivi aç ({dept})
+📮 Préparer la lettre ({who}) ¦ 📮 Mektubu hazırla ({who})
+✓ Je l’ai trouvé en ligne ¦ ✓ Çevrimiçi buldum
+✗ Pas en ligne ¦ ✗ Çevrimiçi değil
+🗂 Voir la table des limites ¦ 🗂 Sınırlar tablosunu gör
+🏛 ARCHIVES EN LIGNE ¦ 🏛 ÇEVRİMİÇİ ARŞİVLER
+{act} : pourquoi cette pastille ? ¦ {act}: bu rozet neden?
+La page officielle disait {until} le {date}. ¦ Resmî sayfa {date} tarihinde {until} diyordu.
+Rouvrir la page ↗ ¦ Sayfayı yeniden aç ↗
+✓ Trouvé en ligne ¦ ✓ Çevrimiçi bulundu
+Adresse de l’image de l’acte (facultatif, conseillé) ¦ Kayıt görüntüsünün adresi (isteğe bağlı, önerilir)
+Vue, page ou cote (facultatif) ¦ Görüntü, sayfa veya künye (isteğe bağlı)
+ex. vue 143 ¦ ör. görüntü 143
+Ajouter comme source de cet acte ¦ Bu kaydın kaynağı olarak ekle
+Ta correction vaut pour… ¦ Düzeltmen şunun için geçerli…
+Tout le département : les {acts} ({dept}) sont en ligne au moins jusqu’en {year} ¦ Tüm département: {acts} ({dept}) en az {year} yılına kadar çevrimiçi
+Seulement cette commune ({commune}) ¦ Yalnızca bu belediye ({commune})
+Cette adresse ne commence pas par https:// ¦ Bu adres https:// ile başlamıyor
+✓ Noté : {acts} ({dept}) en ligne au moins jusqu’en {year} ¦ ✓ Not edildi: {acts} ({dept}) en az {year} yılına kadar çevrimiçi
+Pourquoi ? ¦ Neden?
+Le registre de cette année n’est pas en ligne ¦ O yılın kayıt defteri çevrimiçi değil
+La limite des {acts} ({dept}) passe avant {year} chez toi. ¦ Senin için {acts} sınırı ({dept}) {year} öncesine kayar.
+Seulement cette commune manque ¦ Yalnızca bu belediye eksik
+Exception pour {commune}, la limite du département ne bouge pas. ¦ {commune} için istisna; département sınırı değişmez.
+Je n’ai pas trouvé l’acte dans le registre ¦ Kaydı defterde bulamadım
+La limite ne bouge pas ; c’est noté (« cherché, pas trouvé »). ¦ Sınır değişmez; not edilir (“arandı, bulunamadı”).
+Noté : cherché, pas trouvé dans le registre ¦ Not edildi: arandı, defterde bulunamadı
+✗ Noté : pas en ligne ({place}) ¦ ✗ Not edildi: çevrimiçi değil ({place})
+Où montrer les pastilles ¦ Rozetler nerede gösterilsin
+🗂 Archives en ligne par département ¦ 🗂 Département’a göre çevrimiçi arşivler
+Table livrée avec l’app (vérifiée le {date}), complétée par tes corrections. Une ligne sans source n’existe pas : le département est alors « à vérifier ». ¦ Uygulamayla gelen tablo ({date} tarihinde doğrulandı), senin düzeltmelerinle tamamlandı. Kaynaksız satır yoktur: département o zaman “doğrulanacak”.
+La table des limites n’est pas encore livrée avec cette version : tout est « à vérifier », sauf ce que tu notes toi-même. ¦ Sınırlar tablosu bu sürümle henüz gelmiyor: kendi not ettiklerin dışında her şey “doğrulanacak”.
+🔎 Département… ¦ 🔎 Département…
+En ligne jusqu’à ¦ Çevrimiçi şu yıla kadar
+Page officielle qui le dit ¦ Bunu söyleyen resmî sayfa
+Vérifié le ¦ Doğrulama tarihi
+tous ¦ hepsi
+＋ Noter la limite ¦ ＋ Sınırı not et
+depuis {y} ¦ {y} yılından itibaren
+à confirmer ¦ doğrulanacak
+moi ¦ ben
+Retirer ma correction ¦ Düzeltmemi kaldır
+Aucun département ne correspond. ¦ Eşleşen département yok.
+Correction retirée : la ligne livrée avec l’app revient. ¦ Düzeltme kaldırıldı: uygulamayla gelen satır geri döndü.
+En ligne jusqu’à l’année ¦ Çevrimiçi olduğu son yıl
+ex. 1925 ¦ ör. 1925
+Adresse de la page qui le dit (obligatoire) ¦ Bunu söyleyen sayfanın adresi (zorunlu)
+Sans adresse, on ne peut pas enregistrer : c’est ce qui évite les limites inventées. ¦ Adres olmadan kaydedilemez: uydurma sınırları böyle önleriz.
+Une année entre 1500 et aujourd’hui. ¦ 1500 ile bugün arasında bir yıl.
+L’adresse de la page qui le dit est obligatoire. ¦ Bunu söyleyen sayfanın adresi zorunludur.
+＋ Limite notée : {dept}, {year} ¦ ＋ Sınır not edildi: {dept}, {year}
+En ligne aux archives : à télécharger, pas à demander ¦ Arşivde çevrimiçi: indirilecek, istenmeyecek
+🏛 Ouvrir ¦ 🏛 Aç
+Réservé jusqu’en {year} : à demander par l’héritier lui-même, ou extrait sans filiation ¦ {year} yılına kadar kısıtlı: mirasçının kendisi istemeli veya anne-baba bilgisi olmayan özet
+À demander : {who} ¦ İstenecek: {who}
+📮 Lettre ¦ 📮 Mektup
+🏛 Archives ¦ 🏛 Arşiv
+Commence par les tables décennales. ¦ On yıllık dizinlerle başla.
+Ses actes aux archives ¦ Arşivdeki kayıtları
+Les actes n’ont pas pu être lus. ¦ Kayıtlar okunamadı.
+{n} de ta base sont en ligne et pas encore liés à une source. ¦ Veritabanındaki {n} çevrimiçi ve henüz bir kaynağa bağlı değil.
+Aussi : {maybe} peut-être en ligne · {ask} à demander · {verify} à vérifier ¦ Ayrıca: {maybe} belki çevrimiçi · {ask} istenecek · {verify} doğrulanacak
+La table des limites n’est pas encore livrée : aucun acte ne peut être « en ligne » sans source. ¦ Sınırlar tablosu henüz gelmedi: hiçbir kayıt kaynaksız “çevrimiçi” olamaz.
+Actes en ligne à aller voir ¦ Bakılacak çevrimiçi kayıtlar
+La pastille 🏛 dit, pour chaque acte, s’il est en ligne aux archives (d’après une limite vérifiée du département), à demander (et à qui), ou réservé. Un acte en ligne sort de cette liste. ¦ 🏛 rozeti her kayıt için arşivde çevrimiçi olup olmadığını (département’ın doğrulanmış sınırına göre), istenmesi gerekip gerekmediğini (ve kimden) ya da kısıtlı olduğunu söyler. Çevrimiçi olan kayıt bu listeden çıkar.
+Actes ¦ Kayıtlar
+Arbres ¦ Ağaçlar
+Peut-être en ligne ¦ Belki çevrimiçi
+Réservé ¦ Kısıtlı
+Archives nationales d’outre-mer (Aix-en-Provence) ¦ Deniz Aşırı Ulusal Arşivler (Aix-en-Provence)
+Notaire ou Archives départementales (série E) ¦ Noter veya Archives départementales (E serisi)
+Service historique de la Défense (Vincennes, Caen) ¦ Savunma Tarih Servisi (Vincennes, Caen)
+baptêmes ¦ vaftizler
+sépultures ¦ defin kayıtları
+tables décennales ¦ on yıllık dizinler
+registres paroissiaux ¦ kilise kayıt defterleri
+Pastilles sur les fiches ¦ Kayıtlarda rozetler
+à côté de chaque naissance, baptême, mariage, décès, sépulture ¦ her doğum, vaftiz, evlilik, ölüm ve defin kaydının yanında
+Pastilles dans la Chronologie ¦ Kronolojide rozetler
+Colonne « 🏛 Archives » dans la liste des Événements ¦ Olaylar listesinde “🏛 Arşiv” sütunu
+Cacher la pastille quand l’acte est déjà lié ¦ Kayıt zaten bağlıysa rozeti gizle
+sinon : petite « 🟢 ✓ lié » ¦ yoksa: küçük “🟢 ✓ bağlı”
+Widget « 🏛 Actes en ligne à aller voir » : ancêtres directs seulement ¦ “🏛 Bakılacak çevrimiçi kayıtlar” bileşeni: yalnızca doğrudan atalar
+Vérifiés ¦ Doğrulanmış
+Corrigés par moi ¦ Benim düzelttiklerim
+Actes en ligne aux archives ¦ Arşivlerde çevrimiçi kayıtlar
+Une pastille sur chaque naissance, baptême, mariage, décès et sépulture : en ligne, à demander (et à qui), réservé, à vérifier. Jamais « en ligne » sans une limite sourcée. ¦ Her doğum, vaftiz, evlilik, ölüm ve defin kaydında bir rozet: çevrimiçi, istenecek (ve kimden), kısıtlı, doğrulanacak. Kaynaklı bir sınır olmadan asla “çevrimiçi” değil.
+Correction introuvable. ¦ Düzeltme bulunamadı.
+Type d’acte inconnu. ¦ Bilinmeyen kayıt türü.
+Année incorrecte. ¦ Geçersiz yıl.
+Cet acte n’a pas de département ou de date : précise d’abord le lieu et la date. ¦ Bu kaydın département’ı veya tarihi yok: önce yeri ve tarihi belirt.

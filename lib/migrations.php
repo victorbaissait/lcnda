@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 94;
+const SCHEMA_VERSION = 95;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -115,6 +115,7 @@ function migration_steps(): array
         92 => 'schema_v92',
         93 => 'schema_v93',
         94 => 'schema_v94',
+        95 => 'schema_v95',
     ];
 }
 
@@ -2630,4 +2631,13 @@ function schema_v94(PDO $pdo): void
 {
     if (!function_exists('glock_schema')) { require_once __DIR__ . '/verrou.php'; }
     glock_schema($pdo);
+}
+
+/** 95 : 🏛 Actes en ligne aux archives — les corrections de la personne (archives_dispo_corr : ✓ trouvé en ligne, ✗ pas en
+ *  ligne, ＋ limite notée avec son adresse ; pour tout le département ou seulement une commune, avec l'acte et la date).
+ *  La table des limites elle-même est livrée dans config/archives-en-ligne.json (lib/archives_dispo.php). */
+function schema_v95(PDO $pdo): void
+{
+    if (!function_exists('ad_schema')) { require_once __DIR__ . '/archives_dispo.php'; }
+    ad_schema($pdo);
 }

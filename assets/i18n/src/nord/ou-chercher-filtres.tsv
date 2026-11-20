@@ -1,0 +1,75 @@
+fr ¦ cs ¦ sv ¦ da
+# 🌍 Où chercher ? — filtres par sorte de source (docs/design/ou-chercher-filtres.html)
+Ouvrir la page filtrée sur une sorte de source ¦ Otevřít stránku filtrovanou podle druhu zdroje ¦ Öppna sidan filtrerad på en sorts källa ¦ Åbn siden filtreret på én slags kilde
+Les autres sortes ¦ Ostatní druhy ¦ De andra sorterna ¦ De andre slags
+Proposés ({n} sur {m}) ¦ Navržené ({n} z {m}) ¦ Föreslagna ({n} av {m}) ¦ Foreslåede ({n} af {m})
+✓ Déjà cherchés ({n} sur {m}) ¦ ✓ Už prohledané ({n} z {m}) ¦ ✓ Redan sökta ({n} av {m}) ¦ ✓ Allerede søgt ({n} af {m})
+Écartés ({n} sur {m}) ¦ Vyřazené ({n} z {m}) ¦ Bortvalda ({n} av {m}) ¦ Fravalgte ({n} af {m})
+Chercher un site… (ex. Gallica, matricule) ¦ Hledat web… (např. Gallica, kmenový list) ¦ Sök en webbplats… (t.ex. Gallica, rulla) ¦ Søg et websted… (fx Gallica, lægdsrulle)
+Sorte de source ¦ Druh zdroje ¦ Sorts källa ¦ Slags kilde
+Ses pays : {list} ¦ Země: {list} ¦ Länderna: {list} ¦ Landene: {list}
+Ses pays ¦ Země ¦ Länderna ¦ Landene
+Un seul : {country} ¦ Jen jedna: {country} ¦ Bara ett: {country} ¦ Kun ét: {country}
+Pays : {country} ¦ Země: {country} ¦ Land: {country} ¦ Land: {country}
+Sites du monde entier seulement (FamilySearch, Geneanet…) ¦ Jen celosvětové weby (FamilySearch, Geneanet…) ¦ Bara världsomspännande webbplatser (FamilySearch, Geneanet…) ¦ Kun verdensomspændende websteder (FamilySearch, Geneanet…)
+🌍 Monde entier ¦ 🌍 Celý svět ¦ 🌍 Hela världen ¦ 🌍 Hele verden
+Prix ¦ Cena ¦ Pris ¦ Pris
+Gratuites seulement · {n} ¦ Jen zdarma · {n} ¦ Bara gratis · {n} ¦ Kun gratis · {n}
+💶 Gratuites seulement ¦ 💶 Jen zdarma ¦ 💶 Bara gratis ¦ 💶 Kun gratis
+En français seulement ¦ Jen ve francouzštině ¦ Bara på franska ¦ Kun på fransk
+🇫🇷 En français ¦ 🇫🇷 Francouzsky ¦ 🇫🇷 På franska ¦ 🇫🇷 På fransk
+Les plus utiles ¦ Nejužitečnější ¦ Mest användbara ¦ Mest nyttige
+Gratuits d’abord ¦ Nejdřív zdarma ¦ Gratis först ¦ Gratis først
+🔗 depuis sa fiche ¦ 🔗 z karty ¦ 🔗 från posten ¦ 🔗 fra profilen
+Ce filtre vient de sa fiche : ton choix habituel n’est pas changé. ¦ Tento filtr pochází z karty: tvoje obvyklá volba se nemění. ¦ Filtret kommer från posten: ditt vanliga val ändras inte. ¦ Filteret kommer fra profilen: dit sædvanlige valg ændres ikke.
+Revenir à mon choix ¦ Zpět na mou volbu ¦ Tillbaka till mitt val ¦ Tilbage til mit valg
+↗ Chercher quand même ¦ ↗ Přesto hledat ¦ ↗ Sök ändå ¦ ↗ Søg alligevel
+de ces filtres ¦ s těmito filtry ¦ med de här filtren ¦ med disse filtre
+Aucun site {sorts} pour ce pays ({country}) parmi les {n} sites que l’app connaît ¦ Žádný web {sorts} pro tuto zemi ({country}) mezi {n} weby, které aplikace zná ¦ Ingen webbplats {sorts} för det här landet ({country}) bland de {n} webbplatser appen känner till ¦ Intet websted {sorts} for dette land ({country}) blandt de {n} websteder, appen kender
+Pour ses autres pays : {ok} proposés ; {out} écartés. ¦ Pro ostatní země: navrženo {ok}; vyřazeno {out}. ¦ För de andra länderna: {ok} föreslagna; {out} bortvalda. ¦ For de andre lande: {ok} foreslået; {out} fravalgt.
+Ses autres pays ({n}) ¦ Ostatní země ({n}) ¦ De andra länderna ({n}) ¦ De andre lande ({n})
+Voir les {n} sites écartés ¦ Zobrazit {n} vyřazených webů ¦ Visa de {n} bortvalda webbplatserna ¦ Se de {n} fravalgte websteder
+＋ Ajouter un site à moi ¦ ＋ Přidat vlastní web ¦ ＋ Lägg till en egen webbplats ¦ ＋ Tilføj et eget websted
+Aucun site {sorts} pour {name} ({life}) ¦ Žádný web {sorts} pro {name} ({life}) ¦ Ingen webbplats {sorts} för {name} ({life}) ¦ Intet websted {sorts} for {name} ({life})
+Les {n} sites de cette sorte sont écartés : ¦ {n} webů tohoto druhu je vyřazeno: ¦ De {n} webbplatserna av den här sorten är bortvalda: ¦ De {n} websteder af denne slags er fravalgt:
+Aucun site de cette sorte parmi ceux que l’app connaît. ¦ Mezi weby, které aplikace zná, není žádný tohoto druhu. ¦ Ingen webbplats av den här sorten bland dem appen känner till. ¦ Intet websted af denne slags blandt dem, appen kender.
+Enlever {sort} ¦ Odebrat {sort} ¦ Ta bort {sort} ¦ Fjern {sort}
+Aucun site écarté avec ces filtres. ¦ S těmito filtry není žádný vyřazený web. ¦ Ingen bortvald webbplats med de här filtren. ¦ Intet fravalgt websted med disse filtre.
+Sa vie ({life}) croise les années du site ({from}–{to}) ¦ Život ({life}) se překrývá s roky webu ({from}–{to}) ¦ Livet ({life}) överlappar webbplatsens år ({from}–{to}) ¦ Livet ({life}) overlapper webstedets år ({from}–{to})
+Actes (état civil, paroissiaux) ¦ Záznamy (civilní, farní) ¦ Handlingar (folkbokföring, kyrkböcker) ¦ Akter (civile, kirkebøger)
+Journaux ¦ Noviny ¦ Tidningar ¦ Aviser
+Militaire et guerres ¦ Armáda a války ¦ Militärt och krig ¦ Militær og krige
+Recensements et annuaires ¦ Sčítání lidu a adresáře ¦ Folkräkningar och adresskalendrar ¦ Folketællinger og vejvisere
+Marins, colonies ¦ Námořníci, kolonie ¦ Sjömän, kolonier ¦ Sømænd, kolonier
+Marins et colonies ¦ Námořníci a kolonie ¦ Sjömän och kolonier ¦ Sømænd og kolonier
+Cimetières, décès ¦ Hřbitovy, úmrtí ¦ Kyrkogårdar, dödsfall ¦ Kirkegårde, dødsfald
+Cimetières et décès ¦ Hřbitovy a úmrtí ¦ Kyrkogårdar och dödsfall ¦ Kirkegårde og dødsfald
+Notaires, terres et justice ¦ Notáři, půda a soudy ¦ Notarier, jord och rättsväsen ¦ Notarer, jord og retsvæsen
+Métiers (élus, médecins, cheminots, photographes…) ¦ Povolání (volení zástupci, lékaři, železničáři, fotografové…) ¦ Yrken (förtroendevalda, läkare, järnvägsfolk, fotografer…) ¦ Erhverv (folkevalgte, læger, jernbanefolk, fotografer…)
+Arbres en ligne ¦ Rodokmeny online ¦ Släktträd på nätet ¦ Stamtræer online
+Bibliothèques ¦ Knihovny ¦ Bibliotek ¦ Biblioteker
+Bibliothèques et livres ¦ Knihovny a knihy ¦ Bibliotek och böcker ¦ Biblioteker og bøger
+Cartes et lieux ¦ Mapy a místa ¦ Kartor och platser ¦ Kort og steder
+Déportation et répression ¦ Deportace a represe ¦ Deportation och förtryck ¦ Deportation og forfølgelse
+Guides ¦ Průvodci ¦ Guider ¦ Vejledninger
+Guides et modes d’emploi ¦ Průvodci a návody ¦ Guider och instruktioner ¦ Vejledninger og brugsanvisninger
+Moteurs ¦ Vyhledávače ¦ Sökmotorer ¦ Søgemaskiner
+Moteurs et encyclopédies ¦ Vyhledávače a encyklopedie ¦ Sökmotorer och uppslagsverk ¦ Søgemaskiner og leksika
+Tout le militaire ¦ Vše vojenské ¦ Allt militärt ¦ Alt militært
+Tout pour un marin ¦ Vše pro námořníka ¦ Allt för en sjöman ¦ Alt for en sømand
+Tout sur l’émigration ¦ Vše o vystěhovalectví ¦ Allt om emigration ¦ Alt om udvandring
+Tout sur son métier ¦ Vše o povolání ¦ Allt om yrket ¦ Alt om erhvervet
+Tout chez les notaires ¦ Vše u notářů ¦ Allt hos notarierna ¦ Alt hos notarerne
+⚓ Il était marin ? Le dire sur sa fiche ¦ ⚓ Byl námořník? Uveď to na kartě ¦ ⚓ Var han sjöman? Ange det i posten ¦ ⚓ Var han sømand? Skriv det på profilen
+🎖 Il était soldat ? Le dire sur sa fiche ¦ 🎖 Byl voják? Uveď to na kartě ¦ 🎖 Var han soldat? Ange det i posten ¦ 🎖 Var han soldat? Skriv det på profilen
+🚢 Il a émigré ? Le dire sur sa fiche ¦ 🚢 Vystěhoval se? Uveď to na kartě ¦ 🚢 Emigrerade han? Ange det i posten ¦ 🚢 Udvandrede han? Skriv det på profilen
+💼 Son métier ? Le dire sur sa fiche ¦ 💼 Povolání? Uveď ho na kartě ¦ 💼 Yrket? Ange det i posten ¦ 💼 Erhvervet? Skriv det på profilen
+Pas de lieu dans ce pays ¦ Žádné místo v této zemi ¦ Ingen plats i landet ¦ Intet sted i landet
+Hors de ses années ¦ Mimo roky života ¦ Utanför levnadsåren ¦ Uden for levetiden
+Seulement pour un autre cas (métier, profil) ¦ Jen pro jiný případ (povolání, profil) ¦ Bara för ett annat fall (yrke, profil) ¦ Kun for et andet tilfælde (erhverv, profil)
+Pour l’autre sexe ¦ Pro druhé pohlaví ¦ För det andra könet ¦ For det andet køn
+Né hors de France ¦ Narozen mimo Francii ¦ Född utanför Frankrike ¦ Født uden for Frankrig
+Peu utile pour cette fiche ¦ Pro tuto kartu málo užitečné ¦ Inte särskilt användbar för posten ¦ Ikke særlig nyttig for profilen
+Autres raisons ¦ Jiné důvody ¦ Andra skäl ¦ Andre grunde
+officier (armée) ¦ důstojník (armáda) ¦ officer (armén) ¦ officer (hæren)
+=payant caché ¦ placený skrytý|placené skryté|placených skrytých ¦ betald dold|betalda dolda ¦ betalt skjult|betalte skjult

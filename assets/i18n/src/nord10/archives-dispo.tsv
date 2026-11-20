@@ -1,0 +1,130 @@
+fr ¦ sq ¦ mt
+# 🏛 Actes en ligne aux archives (docs/design/archives-en-ligne.html)
+Mairie de {commune} ¦ Bashkia e {commune} ¦ Il-kunsill lokali ta’ {commune}
+Archives départementales ({dept}) ¦ Arkivat departamentale ({dept}) ¦ Arkivji dipartimentali ({dept})
+🔒 Réservé jusqu’en {year} ¦ 🔒 E rezervuar deri më {year} ¦ 🔒 Riżervat sal-{year}
+déjà lié à une source ¦ tashmë e lidhur me një burim ¦ diġà marbut ma’ sors
+Pourquoi cette pastille ? ¦ Pse kjo etiketë? ¦ Għaliex din it-tikketta?
+✓ lié ¦ ✓ e lidhur ¦ ✓ marbut
+Règle : code du patrimoine, art. L213-2 ({legi}) ; qui peut demander avant : décret 2017-890, art. 30 ({decret}). ¦ Rregull: kodi francez i trashëgimisë, neni L213-2 ({legi}); kush mund të kërkojë më herët: dekreti 2017-890, neni 30 ({decret}). ¦ Regola: il-kodiċi Franċiż tal-wirt, art. L213-2 ({legi}); min jista’ jitlob qabel: id-digriet 2017-890, art. 30 ({decret}).
+Une limite vérifiée pour ce département et ce type d’acte couvre la date. ¦ Një kufi i verifikuar për këtë departament dhe këtë lloj akti e mbulon datën. ¦ Limitu vverifikat għal dan id-dipartiment u dan it-tip ta’ att ikopri d-data.
+D’après une source secondaire ({source}) : à confirmer sur la page officielle des archives. ¦ Sipas një burimi dytësor ({source}): duhet konfirmuar në faqen zyrtare të arkivit. ¦ Skont sors sekondarju ({source}): trid tiġi kkonfermata fuq il-paġna uffiċjali tal-arkivju.
+Peut-être en ligne (d’après {source}, à confirmer) : année lue dans un extrait de recherche, pas encore confirmée. ¦ Ndoshta në internet (sipas {source}, për t’u konfirmuar): viti u lexua në një fragment kërkimi, ende pa u konfirmuar. ¦ Forsi online (skont {source}, trid tiġi kkonfermata): sena moqrija f’silta ta’ tfittxija, għadha mhix ikkonfermata.
+la table ¦ tabela ¦ it-tabella
+Date approximative : la fourchette {from}–{to} chevauche la limite ({until}). ¦ Datë e përafërt: intervali {from}–{to} mbivendoset me kufirin ({until}). ¦ Data approssimattiva: il-medda {from}–{to} tirkeb fuq il-limitu ({until}).
+La date est à 2 ans de la limite ({until}) : le registre est peut-être en ligne depuis. ¦ Data është 2 vjet larg kufirit ({until}): regjistri mund të jetë vënë në internet që atëherë. ¦ Id-data hija sentejn mil-limitu ({until}): ir-reġistru forsi tqiegħed online minn dakinhar.
+Acte de plus de 100 ans, mais la limite de ce département n’est pas encore vérifiée : jamais « en ligne » sans source. ¦ Akt më i vjetër se 100 vjet, por kufiri i këtij departamenti ende nuk është verifikuar: kurrë “në internet” pa burim. ¦ Att ta’ aktar minn 100 sena, iżda l-limitu ta’ dan id-dipartiment għadu mhux ivverifikat: qatt “online” mingħajr sors.
+Trop récent pour être en ligne : la limite de ce département est {until}. ¦ Shumë i ri për të qenë në internet: kufiri i këtij departamenti është {until}. ¦ Reċenti wisq biex ikun online: il-limitu ta’ dan id-dipartiment huwa {until}.
+Trop récent pour être en ligne (et la limite de ce département n’est pas encore vérifiée). ¦ Shumë i ri për të qenë në internet (dhe kufiri i këtij departamenti ende nuk është verifikuar). ¦ Reċenti wisq biex ikun online (u l-limitu ta’ dan id-dipartiment għadu mhux ivverifikat).
+L’état civil parisien d’avant 1860 a brûlé en 1871 : chercher dans l’état civil reconstitué (Archives de Paris). ¦ Gjendja civile e Parisit para 1860 u dogj në 1871: kërko në gjendjen civile të rindërtuar (Archives de Paris). ¦ Ir-reġistri ċivili ta’ Pariġi ta’ qabel l-1860 inħarqu fl-1871: fittex fir-reġistri rikostitwiti (Archives de Paris).
+Après 1792, un baptême ou une sépulture n’est pas dans l’état civil : il faut le demander aux archives diocésaines. ¦ Pas 1792 pagëzimi ose varrimi nuk është në gjendjen civile: duhet kërkuar te arkivat dioqezane. ¦ Wara l-1792, magħmudija jew difna mhumiex fir-reġistri ċivili: trid titlobhom lill-arkivji tad-djoċesi.
+Les registres paroissiaux en ligne de ce département commencent en {from}. ¦ Regjistrat e famullisë në internet të këtij departamenti nisin më {from}. ¦ Ir-reġistri parrokkjali online ta’ dan id-dipartiment jibdew fl-{from}.
+Ancienne colonie : l’état civil est aux Archives nationales d’outre-mer (Aix-en-Provence). ¦ Ish-koloni: gjendja civile ndodhet në Arkivat Kombëtare të Përtej Detit (Aix-en-Provence). ¦ Kolonja ta’ qabel: ir-reġistri ċivili jinsabu fl-Arkivji Nazzjonali ta’ Lil Hinn mill-Baħar (Aix-en-Provence).
+Hors de France : la table ne couvre que les départements français. Pour un Français né, marié ou mort à l’étranger : le Service central d’état civil (Nantes). ¦ Jashtë Francës: tabela mbulon vetëm departamentet franceze. Për një francez të lindur, martuar ose vdekur jashtë vendit: Shërbimi qendror i gjendjes civile (Nantes). ¦ Barra minn Franza: it-tabella tkopri biss id-dipartimenti Franċiżi. Għal Franċiż imwieled, miżżewweġ jew miet barra: is-Servizz ċentrali tar-reġistru ċivili (Nantes).
+Pas de date : impossible de la comparer avec la limite. ¦ Pa datë: s’mund të krahasohet me kufirin. ¦ L-ebda data: ma tistax titqabbel mal-limitu.
+Pas de lieu : on ne sait pas à quelles archives s’adresser. ¦ Pa vend: nuk dihet se te cilat arkiva të drejtohesh. ¦ L-ebda post: ma nafux lil liema arkivju għandek tmur.
+Le département du lieu n’est pas connu : choisis la commune dans la liste des lieux, le code arrive tout seul. ¦ Departamenti i vendit nuk dihet: zgjidh komunën në listën e vendeve dhe kodi vjen vetë. ¦ Id-dipartiment tal-post mhux magħruf: agħżel il-komun mil-lista tal-postijiet u l-kodiċi jiġi waħdu.
+Lieu : {place} → {dept} ({code}). ¦ Vendi: {place} → {dept} ({code}). ¦ Post: {place} → {dept} ({code}).
+Limite des {acts} ({dept}) : en ligne jusqu’en {until} ¦ Kufiri për {acts} ({dept}): në internet deri më {until} ¦ Limitu għal {acts} ({dept}): online sal-{until}
+la page qui le dit ↗ ¦ faqja që e thotë ↗ ¦ il-paġna li tgħid hekk ↗
+vérifié le {date} ¦ verifikuar më {date} ¦ ivverifikat fil-{date}
+source secondaire ¦ burim dytësor ¦ sors sekondarju
+année lue dans un extrait de recherche, pas encore confirmée ¦ viti u lexua në një fragment kërkimi, ende pa u konfirmuar ¦ sena moqrija f’silta ta’ tfittxija, għadha mhix ikkonfermata
+corrigé par toi ¦ korrigjuar nga ti ¦ ikkoreġut minnek
+Limite des {acts} ({dept}) : pas encore vérifiée. ¦ Kufiri për {acts} ({dept}): ende i paverifikuar. ¦ Limitu għal {acts} ({dept}): għadu mhux ivverifikat.
+75 ans : acte de {date} → communicable à tous le {open}. Ce jour-là, la pastille devient « 📮 À demander » toute seule. ¦ 75 vjet: akti i {date} → i hapur për të gjithë më {open}. Atë ditë etiketa bëhet vetë “📮 Për t’u kërkuar”. ¦ 75 sena: att tal-{date} → miftuħ għal kulħadd fil-{open}. Dakinhar it-tikketta ssir waħedha “📮 Trid tintalab”.
+75 ans passés : l’acte est communicable à tous depuis le {open}. ¦ Mbi 75 vjet: akti është i hapur për të gjithë që nga {open}. ¦ Aktar minn 75 sena: l-att huwa miftuħ għal kulħadd mill-{open}.
+Un acte de décès est communicable à tous, tout de suite. ¦ Akti i vdekjes është menjëherë i hapur për të gjithë. ¦ Att tal-mewt huwa miftuħ għal kulħadd minnufih.
+À qui demander : ¦ Kujt t’i kërkosh: ¦ Lil min titlob:
+L’app ne va pas voir sur le site des archives : elle ouvre la page, c’est toi qui regardes. ¦ Aplikacioni nuk shikon në faqen e arkivit: hap faqen dhe shikon ti. ¦ L-app ma tmurx tħares fis-sit tal-arkivju: tiftaħ il-paġna u int tħares.
+🏛 Ouvrir les archives ({dept}) ¦ 🏛 Hap arkivin ({dept}) ¦ 🏛 Iftaħ l-arkivju ({dept})
+📮 Préparer la lettre ({who}) ¦ 📮 Përgatit letrën ({who}) ¦ 📮 Ipprepara l-ittra ({who})
+✓ Je l’ai trouvé en ligne ¦ ✓ E gjeta në internet ¦ ✓ Sibtu online
+✗ Pas en ligne ¦ ✗ Nuk është në internet ¦ ✗ Mhux online
+🗂 Voir la table des limites ¦ 🗂 Shiko tabelën e kufijve ¦ 🗂 Ara t-tabella tal-limiti
+🏛 ARCHIVES EN LIGNE ¦ 🏛 ARKIVAT NË INTERNET ¦ 🏛 ARKIVJI ONLINE
+{act} : pourquoi cette pastille ? ¦ {act}: pse kjo etiketë? ¦ {act}: għaliex din it-tikketta?
+La page officielle disait {until} le {date}. ¦ Faqja zyrtare thoshte {until} më {date}. ¦ Il-paġna uffiċjali kienet tgħid {until} fil-{date}.
+Rouvrir la page ↗ ¦ Rihap faqen ↗ ¦ Erġa’ iftaħ il-paġna ↗
+✓ Trouvé en ligne ¦ ✓ U gjet në internet ¦ ✓ Instab online
+Adresse de l’image de l’acte (facultatif, conseillé) ¦ Adresa e figurës së aktit (opsionale, e këshilluar) ¦ L-indirizz tal-immaġni tal-att (mhux obbligatorju, rakkomandat)
+Vue, page ou cote (facultatif) ¦ Pamja, faqja ose shenja (opsionale) ¦ Immaġni, paġna jew referenza (mhux obbligatorju)
+ex. vue 143 ¦ p.sh. pamja 143 ¦ eż. immaġni 143
+Ajouter comme source de cet acte ¦ Shto si burim të këtij akti ¦ Żid bħala sors ta’ dan l-att
+Ta correction vaut pour… ¦ Korrigjimi yt vlen për… ¦ Il-korrezzjoni tiegħek tgħodd għal…
+Tout le département : les {acts} ({dept}) sont en ligne au moins jusqu’en {year} ¦ Gjithë departamenti: {acts} ({dept}) janë në internet të paktën deri më {year} ¦ Id-dipartiment kollu: {acts} ({dept}) huma online mill-inqas sal-{year}
+Seulement cette commune ({commune}) ¦ Vetëm kjo komunë ({commune}) ¦ Dan il-komun biss ({commune})
+Cette adresse ne commence pas par https:// ¦ Kjo adresë nuk fillon me https:// ¦ Dan l-indirizz ma jibdiex b’https://
+✓ Noté : {acts} ({dept}) en ligne au moins jusqu’en {year} ¦ ✓ U shënua: {acts} ({dept}) në internet të paktën deri më {year} ¦ ✓ Imniżżel: {acts} ({dept}) online mill-inqas sal-{year}
+Pourquoi ? ¦ Pse? ¦ Għaliex?
+Le registre de cette année n’est pas en ligne ¦ Regjistri i atij viti nuk është në internet ¦ Ir-reġistru ta’ dik is-sena mhux online
+La limite des {acts} ({dept}) passe avant {year} chez toi. ¦ Për ty, kufiri për {acts} ({dept}) kalon para {year}. ¦ Għalik, il-limitu għal {acts} ({dept}) jiċċaqlaq qabel l-{year}.
+Seulement cette commune manque ¦ Mungon vetëm kjo komunë ¦ Jonqos biss dan il-komun
+Exception pour {commune}, la limite du département ne bouge pas. ¦ Përjashtim për {commune}; kufiri i departamentit nuk ndryshon. ¦ Eċċezzjoni għal {commune}; il-limitu tad-dipartiment ma jinbidilx.
+Je n’ai pas trouvé l’acte dans le registre ¦ Nuk e gjeta aktin në regjistër ¦ Ma sibtx l-att fir-reġistru
+La limite ne bouge pas ; c’est noté (« cherché, pas trouvé »). ¦ Kufiri nuk ndryshon; shënohet (“u kërkua, nuk u gjet”). ¦ Il-limitu ma jinbidilx; jitniżżel (“imfittex, ma nstabx”).
+Noté : cherché, pas trouvé dans le registre ¦ U shënua: u kërkua, nuk u gjet në regjistër ¦ Imniżżel: imfittex, ma nstabx fir-reġistru
+✗ Noté : pas en ligne ({place}) ¦ ✗ U shënua: nuk është në internet ({place}) ¦ ✗ Imniżżel: mhux online ({place})
+Où montrer les pastilles ¦ Ku të shfaqen etiketat ¦ Fejn juru t-tikketti
+🗂 Archives en ligne par département ¦ 🗂 Arkivat në internet sipas departamentit ¦ 🗂 Arkivji online skont id-dipartiment
+Table livrée avec l’app (vérifiée le {date}), complétée par tes corrections. Une ligne sans source n’existe pas : le département est alors « à vérifier ». ¦ Tabela e dhënë me aplikacionin (e verifikuar më {date}), e plotësuar me korrigjimet e tua. Një rresht pa burim nuk ekziston: departamenti atëherë është “për t’u verifikuar”. ¦ Tabella li tiġi mal-app (ivverifikata fil-{date}), ikkompletata bil-korrezzjonijiet tiegħek. Linja mingħajr sors ma teżistix: id-dipartiment ikun “irid jiġi vverifikat”.
+La table des limites n’est pas encore livrée avec cette version : tout est « à vérifier », sauf ce que tu notes toi-même. ¦ Tabela e kufijve ende nuk vjen me këtë version: gjithçka është “për t’u verifikuar”, përveç asaj që shënon vetë. ¦ It-tabella tal-limiti għadha ma tiġix ma’ din il-verżjoni: kollox “irid jiġi vverifikat”, ħlief dak li tniżżel int.
+🔎 Département… ¦ 🔎 Departamenti… ¦ 🔎 Dipartiment…
+En ligne jusqu’à ¦ Në internet deri ¦ Online sa
+Page officielle qui le dit ¦ Faqja zyrtare që e thotë ¦ Paġna uffiċjali li tgħid hekk
+Vérifié le ¦ Verifikuar më ¦ Ivverifikat fil-
+tous ¦ të gjitha ¦ kollha
+＋ Noter la limite ¦ ＋ Shëno kufirin ¦ ＋ Niżżel il-limitu
+depuis {y} ¦ që nga {y} ¦ mill-{y}
+à confirmer ¦ për t’u konfirmuar ¦ trid tiġi kkonfermata
+moi ¦ unë ¦ jien
+Retirer ma correction ¦ Hiq korrigjimin tim ¦ Neħħi l-korrezzjoni tiegħi
+Aucun département ne correspond. ¦ Asnjë departament nuk përputhet. ¦ L-ebda dipartiment ma jaqbel.
+Correction retirée : la ligne livrée avec l’app revient. ¦ Korrigjimi u hoq: rikthehet rreshti i dhënë me aplikacionin. ¦ Il-korrezzjoni tneħħiet: terġa’ tgħodd il-linja li tiġi mal-app.
+En ligne jusqu’à l’année ¦ Në internet deri në vitin ¦ Online sas-sena
+ex. 1925 ¦ p.sh. 1925 ¦ eż. 1925
+Adresse de la page qui le dit (obligatoire) ¦ Adresa e faqes që e thotë (e detyrueshme) ¦ L-indirizz tal-paġna li tgħid hekk (obbligatorju)
+Sans adresse, on ne peut pas enregistrer : c’est ce qui évite les limites inventées. ¦ Pa adresë nuk mund të ruhet: kështu shmangen kufijtë e shpikur. ¦ Mingħajr indirizz ma tistax tissejvja: hekk jiġu evitati limiti ivvintati.
+Une année entre 1500 et aujourd’hui. ¦ Një vit mes 1500 dhe sot. ¦ Sena bejn l-1500 u llum.
+L’adresse de la page qui le dit est obligatoire. ¦ Adresa e faqes që e thotë është e detyrueshme. ¦ L-indirizz tal-paġna li tgħid hekk huwa obbligatorju.
+＋ Limite notée : {dept}, {year} ¦ ＋ Kufiri u shënua: {dept}, {year} ¦ ＋ Limitu mniżżel: {dept}, {year}
+En ligne aux archives : à télécharger, pas à demander ¦ Në internet në arkiv: për ta shkarkuar, jo për ta kërkuar ¦ Online fl-arkivju: biex tniżżlu, mhux biex titolbu
+🏛 Ouvrir ¦ 🏛 Hap ¦ 🏛 Iftaħ
+Réservé jusqu’en {year} : à demander par l’héritier lui-même, ou extrait sans filiation ¦ E rezervuar deri më {year}: duhet ta kërkojë vetë trashëgimtari, ose ekstrakt pa prindërit ¦ Riżervat sal-{year}: l-eredi stess irid jitolbu, jew estratt mingħajr il-ġenituri
+À demander : {who} ¦ Për t’u kërkuar: {who} ¦ Trid tintalab: {who}
+📮 Lettre ¦ 📮 Letër ¦ 📮 Ittra
+🏛 Archives ¦ 🏛 Arkivi ¦ 🏛 Arkivju
+Commence par les tables décennales. ¦ Fillo me treguesit dhjetëvjeçarë. ¦ Ibda bl-indiċijiet ta’ għaxar snin.
+Ses actes aux archives ¦ Aktet e tij në arkiv ¦ L-atti fl-arkivju
+Les actes n’ont pas pu être lus. ¦ Aktet nuk u lexuan dot. ¦ L-atti ma setgħux jinqraw.
+{n} de ta base sont en ligne et pas encore liés à une source. ¦ {n} nga baza jote janë në internet dhe ende pa burim. ¦ {n} mid-database tiegħek huma online u għadhom mhux marbuta ma’ sors.
+Aussi : {maybe} peut-être en ligne · {ask} à demander · {verify} à vérifier ¦ Gjithashtu: {maybe} ndoshta në internet · {ask} për t’u kërkuar · {verify} për t’u verifikuar ¦ Ukoll: {maybe} forsi online · {ask} iridu jintalbu · {verify} iridu jiġu vverifikati
+La table des limites n’est pas encore livrée : aucun acte ne peut être « en ligne » sans source. ¦ Tabela e kufijve ende nuk jepet: asnjë akt nuk mund të jetë “në internet” pa burim. ¦ It-tabella tal-limiti għadha mhix fornuta: l-ebda att ma jista’ jkun “online” mingħajr sors.
+Actes en ligne à aller voir ¦ Akte në internet për t’u parë ¦ Atti online biex tmur tara
+La pastille 🏛 dit, pour chaque acte, s’il est en ligne aux archives (d’après une limite vérifiée du département), à demander (et à qui), ou réservé. Un acte en ligne sort de cette liste. ¦ Etiketa 🏛 tregon për çdo akt nëse është në internet në arkiv (sipas një kufiri të verifikuar të departamentit), për t’u kërkuar (dhe te kush) ose i rezervuar. Një akt në internet del nga kjo listë. ¦ It-tikketta 🏛 tgħid għal kull att jekk hux online fl-arkivju (skont limitu vverifikat tad-dipartiment), irid jintalab (u lil min) jew riżervat. Att li huwa online joħroġ minn din il-lista.
+Actes ¦ Akte ¦ Atti
+Arbres ¦ Pemë ¦ Siġar
+Peut-être en ligne ¦ Ndoshta në internet ¦ Forsi online
+Réservé ¦ E rezervuar ¦ Riżervat
+Archives nationales d’outre-mer (Aix-en-Provence) ¦ Arkivat Kombëtare të Përtej Detit (Aix-en-Provence) ¦ Arkivji Nazzjonali ta’ Lil Hinn mill-Baħar (Aix-en-Provence)
+Notaire ou Archives départementales (série E) ¦ Noter ose Arkivat departamentale (seria E) ¦ Nutar jew Arkivji dipartimentali (serje E)
+Service historique de la Défense (Vincennes, Caen) ¦ Shërbimi historik i Mbrojtjes (Vincennes, Caen) ¦ Is-Servizz storiku tad-Difiża (Vincennes, Caen)
+baptêmes ¦ pagëzime ¦ magħmudijiet
+sépultures ¦ varrime ¦ difniet
+tables décennales ¦ tregues dhjetëvjeçarë ¦ indiċijiet ta’ għaxar snin
+registres paroissiaux ¦ regjistrat e famullisë ¦ reġistri parrokkjali
+Pastilles sur les fiches ¦ Etiketa në skeda ¦ Tikketti fuq il-fajls
+à côté de chaque naissance, baptême, mariage, décès, sépulture ¦ pranë çdo lindjeje, pagëzimi, martese, vdekjeje, varrimi ¦ ħdejn kull twelid, magħmudija, żwieġ, mewt, difna
+Pastilles dans la Chronologie ¦ Etiketa në Kronologji ¦ Tikketti fil-Kronoloġija
+Colonne « 🏛 Archives » dans la liste des Événements ¦ Kolona “🏛 Arkivi” në listën e Ngjarjeve ¦ Kolonna “🏛 Arkivju” fil-lista tal-Ġrajjiet
+Cacher la pastille quand l’acte est déjà lié ¦ Fshih etiketën kur akti është i lidhur tashmë ¦ Aħbi t-tikketta meta l-att ikun diġà marbut
+sinon : petite « 🟢 ✓ lié » ¦ përndryshe: e vogël “🟢 ✓ e lidhur” ¦ inkella: żgħira “🟢 ✓ marbut”
+Widget « 🏛 Actes en ligne à aller voir » : ancêtres directs seulement ¦ Widget “🏛 Akte në internet për t’u parë”: vetëm paraardhës të drejtpërdrejtë ¦ Widget “🏛 Atti online biex tmur tara”: antenati diretti biss
+Vérifiés ¦ Të verifikuara ¦ Ivverifikati
+Corrigés par moi ¦ Korrigjuar nga unë ¦ Ikkoreġuti minni
+Actes en ligne aux archives ¦ Akte në internet në arkiva ¦ Atti online fl-arkivji
+Une pastille sur chaque naissance, baptême, mariage, décès et sépulture : en ligne, à demander (et à qui), réservé, à vérifier. Jamais « en ligne » sans une limite sourcée. ¦ Një etiketë në çdo lindje, pagëzim, martesë, vdekje dhe varrim: në internet, për t’u kërkuar (dhe te kush), e rezervuar, për t’u verifikuar. Kurrë “në internet” pa një kufi me burim. ¦ Tikketta fuq kull twelid, magħmudija, żwieġ, mewt u difna: online, irid jintalab (u lil min), riżervat, irid jiġi vverifikat. Qatt “online” mingħajr limitu b’sors.
+Correction introuvable. ¦ Korrigjimi nuk u gjet. ¦ Il-korrezzjoni ma nstabitx.
+Type d’acte inconnu. ¦ Lloj akti i panjohur. ¦ Tip ta’ att mhux magħruf.
+Année incorrecte. ¦ Vit i pasaktë. ¦ Sena ħażina.
+Cet acte n’a pas de département ou de date : précise d’abord le lieu et la date. ¦ Ky akt nuk ka departament ose datë: saktëso fillimisht vendin dhe datën. ¦ Dan l-att m’għandux dipartiment jew data: speċifika l-ewwel il-post u d-data.

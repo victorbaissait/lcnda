@@ -25,7 +25,10 @@
     const ACTS = [['naissance', 'Naissance'], ['mariage', 'Mariage'], ['deces', 'Décès']];
     const WHATS = [['integrale', 'Copie intégrale'], ['extrait_filiation', 'Extrait avec filiation'], ['extrait_sans', 'Extrait sans filiation'], ['recherche', 'Recherche aux archives'], ['transcription', 'Transcription (acte à l’étranger)'], ['dispense', 'Dossier de dispense de mariage']];
     const RELS = [['descendant', 'Je suis son descendant direct'], ['moi', 'C’est mon propre acte'], ['ascendant', 'Je suis son ascendant direct'], ['conjoint', 'Je suis son conjoint'], ['representant', 'Je suis son représentant légal'], ['autre', 'Autre lien (cousin…) ou aucun']];
-    const RECIPS = [['mairie', 'Mairie de la commune'], ['ad', 'Archives départementales'], ['scec', 'Service central d’état civil (Nantes)'], ['diocese', 'Archives diocésaines'], ['autre', 'Autre destinataire']];
+    const RECIPS = [['mairie', 'Mairie de la commune'], ['ad', 'Archives départementales'], ['scec', 'Service central d’état civil (Nantes)'], ['shd', 'Service historique de la Défense (Vincennes, Caen)'], ['anom', 'Archives nationales d’outre-mer (Aix-en-Provence)'], ['diocese', 'Archives diocésaines'], ['notaire', 'Notaire ou Archives départementales (série E)'], ['autre', 'Autre destinataire']];
+    /* le code du patrimoine, art. L213-2, cité en texte : un lien vers Légifrance (recherche ; l'identifiant exact de l'article n'est pas écrit en dur) */
+    const LEGI_L213 = 'https://www.legifrance.gouv.fr/search/code?tab_selection=code&searchField=ALL&query=L213-2%20code%20du%20patrimoine&page=1&init=true';
+    const legiLink = html => String(html).replace(/art\. L213-2/g, `<a href="${LEGI_L213}" target="_blank" rel="noopener noreferrer" title="Légifrance">art. L213-2 ↗</a>`);
     const ls = {get(k, d) { try { const v = JSON.parse(localStorage.getItem(k)); return v ?? d; } catch (_) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} }};
     const cfg = () => { const v = ls.get(KEY, {}) || {}; const s = v.sender && typeof v.sender === 'object' ? v.sender : {};
         return {sender: {name: String(s.name || '').slice(0, 120), address: String(s.address || '').slice(0, 400), city: String(s.city || '').slice(0, 80), email: String(s.email || '').slice(0, 160), phone: String(s.phone || '').slice(0, 40)},
@@ -75,7 +78,7 @@
                 const paint = (regen = true) => {
                     if (!b) { $('[data-cl-legal]').innerHTML = UI().notice ? UI().notice('info', 'Choisis la personne : la lettre s’écrit toute seule.') : ''; return; }
                     const L = b.legal, kind = L.status === 'warn' ? 'warn' : L.status === 'info' ? 'info' : 'ok';
-                    $('[data-cl-legal]').innerHTML = `${UI().notice(kind, L.says.join(' '))}<details class="cl-rule"><summary>La règle</summary><p>${esc(L.rule)}</p></details>${b.context.missing ? UI().notice('info', 'Cet acte n’est pas encore dans ta généalogie : la lettre le dit et laisse la mairie chercher. Ajoute tes précisions (années, lieu probable).') : ''}`;
+                    $('[data-cl-legal]').innerHTML = `${UI().notice(kind, L.says.join(' '))}<details class="cl-rule"><summary>La règle</summary><p>${legiLink(esc(L.rule))}</p></details>${b.context.missing ? UI().notice('info', 'Cet acte n’est pas encore dans ta généalogie : la lettre le dit et laisse la mairie chercher. Ajoute tes précisions (années, lieu probable).') : ''}`;
                     f.act.value = b.act; f.what.value = b.asked; f.relation.value = b.relation; f.recipient.value = b.recipient_kind;
                     if (!st.recipient_address) f.recipient_address.value = b.recipient.address;
                     if (!f.recipient_email.value && b.recipient.email) f.recipient_email.value = b.recipient.email;
