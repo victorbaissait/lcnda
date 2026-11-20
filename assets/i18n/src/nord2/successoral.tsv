@@ -705,3 +705,22 @@ Le fichier n’a pas été reçu. ¦ Súbor neprišiel. ¦ Filen ble ikke mottat
 Le défunt reste dans son dossier. ¦ Poručiteľ zostáva vo svojom spise. ¦ Avdøde blir i sin sak.
 🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Osoby ¦ 🧑‍🤝‍🧑 Personer
 Dossiers de succession (usage successoral seulement) ¦ Dedičské spisy (len pri použití dedičského genealóga) ¦ Dødsbosaker (bare ved bruk som arvegenealog)
+# Zone « successoral » : 🔎 introuvable / 🔇 ne répond pas (état de contact d’un héritier, migration 92) ; 🔒 fiches confidentielles non comptées (réglage)
+Introuvable ¦ Nevypátrateľný ¦ Kan ikke finnes
+Ne répond pas ¦ Neodpovedá ¦ Svarer ikke
+introuvable ¦ nevypátrateľný ¦ kan ikke finnes
+ne répond pas ¦ neodpovedá ¦ svarer ikke
+rien de noté ¦ nič nezaznamenané ¦ ingenting notert
+depuis le {d} ¦ od {d} ¦ siden {d}
+Introuvable ou silencieux ¦ Nevypátrateľný alebo mlčí ¦ Kan ikke finnes eller taus
+Introuvable depuis plus d’un an ¦ Nevypátrateľný viac ako rok ¦ Ikke funnet på over et år
+{name} est introuvable depuis plus d’un an : la présomption d’absence (art. 112 et suivants) peut protéger sa part. ¦ {name}: nevypátrateľný viac ako rok. Domnienka neprítomnosti (čl. 112 a nasl.) môže chrániť jeho podiel. ¦ {name} har ikke vært mulig å finne på over et år: en formodning om fravær (art. 112 flg.) kan beskytte andelen.
+{what} : les parts peuvent être fausses. ¦ {what}: podiely môžu byť chybné. ¦ {what}: andelene kan være feil.
+=fiche confidentielle non comptée ¦ dôverná karta nezapočítaná|dôverné karty nezapočítané|dôverných kariet nezapočítaných ¦ fortrolig oppføring ikke telt|fortrolige oppføringer ikke telt
+Changer ce réglage ¦ Zmeniť toto nastavenie ¦ Endre denne innstillingen
+Tous les héritiers ¦ Všetci dedičia ¦ Alle arvinger
+🔎 Introuvable ou 🔇 ne répond pas : pas compté comme contacté dans l’avancement, et le calcul ne change pas. À ne pas confondre avec le statut « Présumé absent » (art. 112). ¦ 🔎 Nevypátrateľný alebo 🔇 neodpovedá: v postupe sa nepočíta ako kontaktovaný a výpočet sa nemení. Nezamieňaj so stavom „Domnelo neprítomný“ (čl. 112). ¦ 🔎 Kan ikke finnes eller 🔇 svarer ikke: teller ikke som kontaktet i fremdriften, og beregningen endres ikke. Må ikke forveksles med statusen «Antatt fraværende» (art. 112).
+Contact de {name} : {state} ¦ Kontakt – {name}: {state} ¦ Kontakt med {name}: {state}
+Les fiches confidentielles comptent-elles comme héritiers ? ¦ Počítajú sa dôverné karty ako dedičia? ¦ Teller fortrolige oppføringer som arvinger?
+Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Nie: dôverná karta sa z výpočtu vyradí, akoby neexistovala; spis na to upozorní. ¦ Nei: en fortrolig oppføring tas ut av beregningen, som om den ikke fantes; saken viser det.
+Le défunt n’est pas un héritier à contacter. ¦ Zosnulý nie je dedič na kontaktovanie. ¦ Avdøde er ikke en arving som skal kontaktes.

@@ -705,3 +705,22 @@ Le fichier n’a pas été reçu. ¦ Failas negautas. ¦ Fails netika saņemts. 
 Le défunt reste dans son dossier. ¦ Palikėjas lieka savo byloje. ¦ Mantojuma atstājējs paliek savā lietā. ¦ Pärandaja jääb oma toimikusse.
 🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Asmenys ¦ 🧑‍🤝‍🧑 Personas ¦ 🧑‍🤝‍🧑 Isikud
 Dossiers de succession (usage successoral seulement) ¦ Paveldėjimo bylos (tik paveldėjimo naudojimui) ¦ Mantojuma lietas (tikai mantojuma lietojumam) ¦ Pärimistoimikud (ainult pärimisgenealoogi kasutuses)
+# Zone « successoral » : 🔎 introuvable / 🔇 ne répond pas (état de contact d’un héritier, migration 92) ; 🔒 fiches confidentielles non comptées (réglage)
+Introuvable ¦ Nerandamas ¦ Nav atrodams ¦ Leidmatu
+Ne répond pas ¦ Neatsako ¦ Neatbild ¦ Ei vasta
+introuvable ¦ nerandamas ¦ nav atrodams ¦ leidmatu
+ne répond pas ¦ neatsako ¦ neatbild ¦ ei vasta
+rien de noté ¦ nieko nepažymėta ¦ nekas nav atzīmēts ¦ midagi pole märgitud
+depuis le {d} ¦ nuo {d} ¦ kopš {d} ¦ alates {d}
+Introuvable ou silencieux ¦ Nerandamas arba tyli ¦ Nav atrodams vai klusē ¦ Leidmatu või vaikib
+Introuvable depuis plus d’un an ¦ Nerandamas ilgiau nei metus ¦ Nav atrodams ilgāk par gadu ¦ Leidmatu üle aasta
+{name} est introuvable depuis plus d’un an : la présomption d’absence (art. 112 et suivants) peut protéger sa part. ¦ {name}: nerandamas ilgiau nei metus. Nebuvimo prezumpcija (112 str. ir toliau) gali apsaugoti jo dalį. ¦ {name}: nav atrodams ilgāk par gadu. Prombūtnes prezumpcija (112. pants un turpmākie) var aizsargāt viņa daļu. ¦ {name}: leidmatu üle aasta. Eemalviibimise eeldus (§ 112 jj) võib tema osa kaitsta.
+{what} : les parts peuvent être fausses. ¦ {what}: dalys gali būti klaidingos. ¦ {what}: daļas var būt nepareizas. ¦ {what}: osad võivad olla valed.
+=fiche confidentielle non comptée ¦ konfidenciali kortelė neįskaičiuota|konfidencialios kortelės neįskaičiuotos|konfidencialių kortelių neįskaičiuota ¦ konfidenciālas kartītes neieskaitītas|konfidenciāla kartīte neieskaitīta|konfidenciālas kartītes neieskaitītas ¦ konfidentsiaalne kaart arvestamata|konfidentsiaalset kaarti arvestamata
+Changer ce réglage ¦ Keisti šį nustatymą ¦ Mainīt šo iestatījumu ¦ Muuda seda seadet
+Tous les héritiers ¦ Visi įpėdiniai ¦ Visi mantinieki ¦ Kõik pärijad
+🔎 Introuvable ou 🔇 ne répond pas : pas compté comme contacté dans l’avancement, et le calcul ne change pas. À ne pas confondre avec le statut « Présumé absent » (art. 112). ¦ 🔎 Nerandamas arba 🔇 neatsako: pažangoje neskaičiuojamas kaip susisiektas, o skaičiavimas nesikeičia. Nepainiok su būsena „Tariamai nesantis“ (112 str.). ¦ 🔎 Nav atrodams vai 🔇 neatbild: progresā netiek skaitīts kā sazināts, un aprēķins nemainās. Nejauc ar statusu „Iespējami prombūtnē“ (112. pants). ¦ 🔎 Leidmatu või 🔇 ei vasta: edenemises ei loeta kontakteerituks ja arvutus ei muutu. Ära aja segi olekuga „Eeldatavalt eemalviibiv“ (§ 112).
+Contact de {name} : {state} ¦ Kontaktas – {name}: {state} ¦ Kontakts – {name}: {state} ¦ Kontakt – {name}: {state}
+Les fiches confidentielles comptent-elles comme héritiers ? ¦ Ar konfidencialios kortelės skaičiuojamos kaip įpėdiniai? ¦ Vai konfidenciālas kartītes skaitās kā mantinieki? ¦ Kas konfidentsiaalsed kaardid loetakse pärijateks?
+Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Ne: konfidenciali kortelė pašalinama iš skaičiavimo, lyg jos nebūtų; byla tai parodo. ¦ Nē: konfidenciāla kartīte tiek izņemta no aprēķina, it kā tās nebūtu; lieta to parāda. ¦ Ei: konfidentsiaalne kaart jäetakse arvutusest välja, nagu seda poleks; toimik annab sellest teada.
+Le défunt n’est pas un héritier à contacter. ¦ Mirusysis nėra įpėdinis, su kuriuo reikia susisiekti. ¦ Mirušais nav mantinieks, ar kuru sazināties. ¦ Lahkunu ei ole pärija, kellega ühendust võtta.

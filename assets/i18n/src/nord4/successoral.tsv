@@ -705,3 +705,22 @@ Le fichier n’a pas été reçu. ¦ Tiedostoa ei vastaanotettu. ¦ A fájl nem 
 Le défunt reste dans son dossier. ¦ Vainaja pysyy kansiossaan. ¦ Az elhunyt az ügyében marad.
 🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Henkilöt ¦ 🧑‍🤝‍🧑 Személyek
 Dossiers de succession (usage successoral seulement) ¦ Perunkirjoituskansiot (vain perintögenealogin käytössä) ¦ Hagyatéki ügyek (csak örökléskutató használatban)
+# Zone « successoral » : 🔎 introuvable / 🔇 ne répond pas (état de contact d’un héritier, migration 92) ; 🔒 fiches confidentielles non comptées (réglage)
+Introuvable ¦ Ei löydy ¦ Nem található
+Ne répond pas ¦ Ei vastaa ¦ Nem válaszol
+introuvable ¦ ei löydy ¦ nem található
+ne répond pas ¦ ei vastaa ¦ nem válaszol
+rien de noté ¦ ei merkintää ¦ nincs feljegyzés
+depuis le {d} ¦ {d} alkaen ¦ {d} óta
+Introuvable ou silencieux ¦ Ei löydy tai vaikenee ¦ Nem található vagy hallgat
+Introuvable depuis plus d’un an ¦ Ei löytynyt yli vuoteen ¦ Több mint egy éve nem található
+{name} est introuvable depuis plus d’un an : la présomption d’absence (art. 112 et suivants) peut protéger sa part. ¦ {name} ei ole löytynyt yli vuoteen: poissaolon olettama (art. 112 ja seur.) voi suojata hänen osuutensa. ¦ {name} több mint egy éve nem található: a távollét vélelme (112. cikk és köv.) védheti a részét.
+{what} : les parts peuvent être fausses. ¦ {what}: osuudet voivat olla väärin. ¦ {what}: a részek hibásak lehetnek.
+=fiche confidentielle non comptée ¦ luottamuksellinen kortti jätetty pois|luottamuksellista korttia jätetty pois ¦ bizalmas adatlap nincs beszámítva|bizalmas adatlap nincs beszámítva
+Changer ce réglage ¦ Muuta tätä asetusta ¦ A beállítás módosítása
+Tous les héritiers ¦ Kaikki perilliset ¦ Minden örökös
+🔎 Introuvable ou 🔇 ne répond pas : pas compté comme contacté dans l’avancement, et le calcul ne change pas. À ne pas confondre avec le statut « Présumé absent » (art. 112). ¦ 🔎 Ei löydy tai 🔇 ei vastaa: ei lasketa edistymisessä tavoitetuksi, eikä laskelma muutu. Älä sekoita tilaan ”Oletetusti poissaoleva” (art. 112). ¦ 🔎 Nem található vagy 🔇 nem válaszol: az előrehaladásban nem számít megkeresettnek, és a számítás nem változik. Ne keverd össze a „Vélelmezetten távollévő” állapottal (112. cikk).
+Contact de {name} : {state} ¦ Yhteys – {name}: {state} ¦ Kapcsolat – {name}: {state}
+Les fiches confidentielles comptent-elles comme héritiers ? ¦ Lasketaanko luottamukselliset kortit perillisiksi? ¦ Örökösnek számítanak a bizalmas adatlapok?
+Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Ei: luottamuksellinen kortti jätetään laskelmasta pois, kuin sitä ei olisi; kansio kertoo sen. ¦ Nem: a bizalmas adatlap kikerül a számításból, mintha nem létezne; az ügy jelzi ezt.
+Le défunt n’est pas un héritier à contacter. ¦ Vainaja ei ole perillinen, johon otetaan yhteyttä. ¦ Az elhunyt nem megkeresendő örökös.

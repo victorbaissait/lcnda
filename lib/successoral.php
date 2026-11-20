@@ -334,6 +334,8 @@ function succ_case_out(PDO $pdo, array $r): array
         'pieces' => $pieces ?: new stdClass(), 'journal' => array_map(static fn($j) => ['id' => (int) $j['id'], 'at' => (string) $j['at'], 'kind' => (string) $j['kind'], 'text' => (string) $j['text']], $jr->fetchAll(PDO::FETCH_ASSOC)),
         'fees' => array_map(static fn($f) => ['id' => (int) $f['id'], 'kind' => (string) $f['kind'], 'day' => (string) $f['day'], 'label' => (string) $f['label'], 'minutes' => (int) $f['minutes'], 'amount_cents' => (int) $f['amount_cents'], 'percent' => $f['percent'] === null ? null : (float) $f['percent'], 'person_id' => (int) $f['person_id'] ?: null], $fe->fetchAll(PDO::FETCH_ASSOC)),
         'courriers' => $courriers, 'graph' => $graph, 'acts' => $acts ?: new stdClass(), 'asked' => $asked ?: new stdClass(), 'addresses' => $addresses ?: new stdClass(),
+        // 🔎 introuvable / 🔇 ne répond pas (succ_case_persons, migration 92) ; le réglage « fiches confidentielles comptées » (successoral.json)
+        'contact' => (function_exists('succ_contacts_of') ? succ_contacts_of($pdo, $id) : []) ?: new stdClass(), 'count_private' => function_exists('succ_settings') ? (bool) succ_settings()['private_heirs'] : true,
         'updated_at' => (string) $r['updated_at'], 'created_at' => (string) $r['created_at']];
 }
 

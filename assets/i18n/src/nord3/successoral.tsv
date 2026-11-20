@@ -705,3 +705,22 @@ Le fichier n’a pas été reçu. ¦ Fișierul nu a fost primit.
 Le défunt reste dans son dossier. ¦ Defunctul rămâne în dosarul său.
 🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Persoane
 Dossiers de succession (usage successoral seulement) ¦ Dosare de succesiune (doar la utilizarea succesorală)
+# Zone « successoral » : 🔎 introuvable / 🔇 ne répond pas (état de contact d’un héritier, migration 92) ; 🔒 fiches confidentielles non comptées (réglage)
+Introuvable ¦ De negăsit
+Ne répond pas ¦ Nu răspunde
+introuvable ¦ de negăsit
+ne répond pas ¦ nu răspunde
+rien de noté ¦ nimic notat
+depuis le {d} ¦ din {d}
+Introuvable ou silencieux ¦ De negăsit sau tăcut
+Introuvable depuis plus d’un an ¦ De negăsit de peste un an
+{name} est introuvable depuis plus d’un an : la présomption d’absence (art. 112 et suivants) peut protéger sa part. ¦ {name} este de negăsit de peste un an: prezumția de absență (art. 112 și urm.) îi poate proteja cota.
+{what} : les parts peuvent être fausses. ¦ {what}: cotele pot fi greșite.
+=fiche confidentielle non comptée ¦ fișă confidențială neluată în calcul|fișe confidențiale neluate în calcul|de fișe confidențiale neluate în calcul
+Changer ce réglage ¦ Schimbă această setare
+Tous les héritiers ¦ Toți moștenitorii
+🔎 Introuvable ou 🔇 ne répond pas : pas compté comme contacté dans l’avancement, et le calcul ne change pas. À ne pas confondre avec le statut « Présumé absent » (art. 112). ¦ 🔎 De negăsit sau 🔇 nu răspunde: nu contează ca contactat în progres, iar calculul nu se schimbă. A nu se confunda cu statutul „Prezumat absent” (art. 112).
+Contact de {name} : {state} ¦ Contact cu {name}: {state}
+Les fiches confidentielles comptent-elles comme héritiers ? ¦ Fișele confidențiale contează ca moștenitori?
+Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Nu: o fișă confidențială este scoasă din calcul, ca și cum n-ar exista; dosarul o semnalează.
+Le défunt n’est pas un héritier à contacter. ¦ Defunctul nu este un moștenitor de contactat.

@@ -705,3 +705,22 @@ Le fichier n’a pas été reçu. ¦ Skedari nuk u mor. ¦ Il-fajl ma waslx.
 Le défunt reste dans son dossier. ¦ I ndjeri mbetet në dosjen e tij. ¦ Il-mejjet jibqa’ fil-fajl tiegħu.
 🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Personat ¦ 🧑‍🤝‍🧑 Persuni
 Dossiers de succession (usage successoral seulement) ¦ Dosje trashëgimie (vetëm në përdorimin për trashëgimi) ¦ Fajls tas-suċċessjoni (għall-użu tas-suċċessjoni biss)
+# Zone « successoral » : 🔎 introuvable / 🔇 ne répond pas (état de contact d’un héritier, migration 92) ; 🔒 fiches confidentielles non comptées (réglage)
+Introuvable ¦ I pagjetshëm ¦ Ma jinstabx
+Ne répond pas ¦ Nuk përgjigjet ¦ Ma jwieġibx
+introuvable ¦ i pagjetshëm ¦ ma jinstabx
+ne répond pas ¦ nuk përgjigjet ¦ ma jwieġibx
+rien de noté ¦ asgjë e shënuar ¦ xejn innotat
+depuis le {d} ¦ që nga {d} ¦ mill-{d}
+Introuvable ou silencieux ¦ I pagjetshëm ose hesht ¦ Ma jinstabx jew sieket
+Introuvable depuis plus d’un an ¦ I pagjetshëm prej më shumë se një viti ¦ Ma jinstabx għal aktar minn sena
+{name} est introuvable depuis plus d’un an : la présomption d’absence (art. 112 et suivants) peut protéger sa part. ¦ {name} është i pagjetshëm prej më shumë se një viti: prezumimi i mungesës (nenet 112 e në vijim) mund ta mbrojë pjesën e tij. ¦ {name} ilu ma jinstab għal aktar minn sena: il-preżunzjoni ta’ assenza (art. 112 u li jsegwu) tista’ tipproteġi s-sehem tiegħu.
+{what} : les parts peuvent être fausses. ¦ {what}: pjesët mund të jenë të gabuara. ¦ {what}: l-ishma jistgħu jkunu ħżiena.
+=fiche confidentielle non comptée ¦ kartelë konfidenciale e pallogaritur|kartela konfidenciale të pallogaritura ¦ skeda kunfidenzjali mhux magħduda|skedi kunfidenzjali mhux magħduda|skedi kunfidenzjali mhux magħduda|skeda kunfidenzjali mhux magħduda|skeda kunfidenzjali mhux magħduda
+Changer ce réglage ¦ Ndrysho këtë cilësim ¦ Biddel dan is-setting
+Tous les héritiers ¦ Të gjithë trashëgimtarët ¦ Il-werrieta kollha
+🔎 Introuvable ou 🔇 ne répond pas : pas compté comme contacté dans l’avancement, et le calcul ne change pas. À ne pas confondre avec le statut « Présumé absent » (art. 112). ¦ 🔎 I pagjetshëm ose 🔇 nuk përgjigjet: nuk llogaritet si i kontaktuar në ecuri dhe llogaritja nuk ndryshon. Mos e ngatërro me gjendjen «I supozuar i munguar» (neni 112). ¦ 🔎 Ma jinstabx jew 🔇 ma jwieġibx: ma jingħaddx bħala kkuntattjat fil-progress, u l-kalkolu ma jinbidilx. M’għandux jitħawwad mal-istatus “Preżunt assenti” (art. 112).
+Contact de {name} : {state} ¦ Kontakti me {name}: {state} ¦ Kuntatt ma’ {name}: {state}
+Les fiches confidentielles comptent-elles comme héritiers ? ¦ A llogariten kartelat konfidenciale si trashëgimtarë? ¦ L-iskedi kunfidenzjali jgħoddu bħala werrieta?
+Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Jo: kartela konfidenciale hiqet nga llogaritja, sikur të mos ekzistonte; dosja e tregon. ¦ Le: skeda kunfidenzjali titneħħa mill-kalkolu, qisha ma teżistix; il-fajl jindika dan.
+Le défunt n’est pas un héritier à contacter. ¦ I ndjeri nuk është trashëgimtar për t’u kontaktuar. ¦ Il-mejjet mhuwiex werriet li jrid jiġi kkuntattjat.

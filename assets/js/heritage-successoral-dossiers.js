@@ -11,6 +11,9 @@
  *  5. Garde-fous : fusion de fiches de dossiers différents, homonymes, 🗄 archiver dans un fichier et retirer, ⤒ réimporter.
  *  6. Widget « ⚖️ Mes dossiers de succession » (clé succ_widget), 3 tailles, réglages, % d'avancement pondéré.
  *  7. 👤 Personnes → colonne de gauche → « Vue actuelle | ⚖️ Par dossier ».
+ *  8. 🔎 Introuvable / 🔇 Ne répond pas (succ_case_persons.contact_state, migration 92) : sur le badge de la fiche
+ *     (« ⚖️ 2026-014 · 🔇 ne répond pas ») et dans fiche ⋯ → « ⚖️ Dossiers… » ; réglage « Les fiches confidentielles comptent-elles
+ *     comme héritiers ? » (successoral.json, private_heirs).
  * Rien en mode consultation ni en mode simple ; aucune donnée de dossier dans les exports.
  */
 (() => {
@@ -52,10 +55,13 @@
     let SET = null, IDX = {at: 0, data: null, busy: null}, MEM = {at: 0, data: null, busy: null};
     async function settings(force = false) {
         if (SET && !force) return SET;
-        try { SET = await get('settings'); } catch (_) { SET = SET || {settings: {store: '', apart_id: '', outside: 'grey', archive_addresses: 'remove', refuse_done: true, weights: [10, 15, 20, 10, 15, 20, 10], move_shared: 'copy', nodossier: 'fold'}, genealogies: [], current: gidOf()}; }
+        try { SET = await get('settings'); } catch (_) { SET = SET || {settings: {store: '', apart_id: '', outside: 'grey', archive_addresses: 'remove', refuse_done: true, weights: [10, 15, 20, 10, 15, 20, 10], move_shared: 'copy', nodossier: 'fold', private_heirs: true}, genealogies: [], current: gidOf()}; }
         return SET;
     }
-    const cfg = () => SET?.settings || {outside: 'grey', weights: S()?.WEIGHTS || [10, 15, 20, 10, 15, 20, 10], refuse_done: true, nodossier: 'fold', archive_addresses: 'remove', move_shared: 'copy', store: ''};
+    const cfg = () => SET?.settings || {outside: 'grey', weights: S()?.WEIGHTS || [10, 15, 20, 10, 15, 20, 10], refuse_done: true, nodossier: 'fold', archive_addresses: 'remove', move_shared: 'copy', store: '', private_heirs: true};
+    /** 🔎 / 🔇 : l'état de contact (badge de la fiche, fenêtre « ⚖️ Dossiers… ») */
+    const CONTACT = {introuvable: ['🔎', 'Introuvable', 'introuvable'], silence: ['🔇', 'Ne répond pas', 'ne répond pas']};
+    const contactShort = st => (CONTACT[st] ? `${CONTACT[st][0]} ${i18n(CONTACT[st][2])}` : '');
     async function index(force = false) {
         if (!force && IDX.data && Date.now() - IDX.at < 60000) return IDX.data;
         if (IDX.busy) return IDX.busy;
@@ -304,6 +310,8 @@
             <div><b>${esc(i18n('Archive d’un dossier clos : adresses des héritiers vivants'))}</b>${opt('archive_addresses', 'remove', 'retirées du fichier')}${opt('archive_addresses', 'keep', 'gardées dans le fichier')}</div>
             <div><b>${esc(i18n('Déplacer un dossier dont une fiche est aussi dans ta famille'))}</b>${opt('move_shared', 'copy', 'copier la fiche')}${opt('move_shared', 'refuse', 'refuser le déplacement')}</div>
             <div><b>${esc(i18n('« Sans dossier » dans la vue par dossier'))}</b>${opt('nodossier', 'fold', 'replié')}${opt('nodossier', 'hide', 'caché')}</div>
+            <div id="succ-set-private"><b>${esc(i18n('Les fiches confidentielles comptent-elles comme héritiers ?'))}</b>${[['1', 'Oui'], ['0', 'Non']].map(([v, l]) => `<label class="succ-radio"><input type="radio" name="succ-set-private_heirs" value="${v}" data-succ-set="private_heirs"${(st.private_heirs !== false) === (v === '1') ? ' checked' : ''}> ${esc(i18n(l))}</label>`).join('')}
+                <p class="ui-hint">${esc(i18n('Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale.'))}</p></div>
             <div><b>${esc(i18n('Avancement : un héritier qui refuse de signer'))}</b><label class="succ-radio"><input type="checkbox" data-succ-set="refuse_done"${st.refuse_done ? ' checked' : ''}> ${esc(i18n('compte comme « fait » (étape 5)'))}</label></div>
             <div><b>${esc(i18n('Avancement : poids des 7 étapes'))}</b><div class="succ-weights">${S().STEP_LABELS.map((l, i) => `<label>${i + 1}. ${esc(i18n(l))}<input type="number" min="0" max="100" value="${Number(w[i]) || 0}" data-succ-weight="${i}"></label>`).join('')}</div>
             <button type="button" class="button small secondary" data-succ-wreset>${esc(i18n('↺ Remettre comme au départ'))}</button></div>
@@ -313,8 +321,9 @@
         const prev = {...cfg()};
         let r; try { r = await post({op: 'settings_save', settings: patch}); } catch (e) { return toast(e.message, 'error'); }
         SET.settings = r.settings; IDX.at = 0;
+        if ('private_heirs' in patch) ext.successoral?.forget?.(); // le dossier ouvert est recalculé à la prochaine lecture
         const back = Object.fromEntries(Object.keys(patch).map(k => [k, prev[k]]));
-        A().undoToast(i18n('Réglage des dossiers enregistré : {what}', {what: label}), {undo: async () => { const r2 = await post({op: 'settings_save', settings: back}); SET.settings = r2.settings; refreshSettingsPanel(); }});
+        A().undoToast(i18n('Réglage des dossiers enregistré : {what}', {what: label}), {undo: async () => { const r2 = await post({op: 'settings_save', settings: back}); SET.settings = r2.settings; if ('private_heirs' in patch) ext.successoral?.forget?.(); refreshSettingsPanel(); }});
         if ('outside' in patch) maskTree();
         refreshSettingsPanel();
     }
@@ -339,6 +348,15 @@
             if (b.matches('[data-succ-wreset]')) return saveSetting({weights: S().WEIGHTS}, i18n('poids des 7 étapes'));
             if (b.matches('[data-succ-move]')) { const [g, id] = b.dataset.succMove.split(':'); const base = (IDX.data?.bases || []).find(x => x.id === g); const c = base?.cases.find(x => x.id === Number(id)); if (!base?.active) return openElsewhere(g, c, 'move'); return moveDialog(c); }
         });
+    }
+    /** « Changer ce réglage » (avertissement des fiches confidentielles) : Réglages → Apparence, la ligne du réglage montrée */
+    async function openSetting(which = 'private') {
+        const st = A().state; st.maintenanceTab = 'design'; await A().setModule('maintenance');
+        for (let i = 0; i < 60; i++) {
+            const el = document.getElementById(which === 'private' ? 'succ-set-private' : 'succ-reglages');
+            if (el) { el.scrollIntoView({behavior: 'smooth', block: 'center'}); el.classList.add('succ-flash'); setTimeout(() => el.classList.remove('succ-flash'), 2400); el.querySelector('input')?.focus({preventScroll: true}); return; }
+            await new Promise(r => setTimeout(r, 120));
+        }
     }
     ext.afterDesign.push(() => { const usage = document.getElementById('lc-usage'); if (!usage) return; refreshSettingsPanel(); if (!usage.dataset.succWatch) { usage.dataset.succWatch = '1'; usage.addEventListener('change', e => { if (e.target.matches('[data-pl-use]')) setTimeout(() => { refreshSettingsPanel(); paintButton(); }, 60); }); } });
 
@@ -411,6 +429,8 @@
     /** après chaque calcul d'un dossier : héritiers et intermédiaires rattachés, avancement gardé pour la vue d'ensemble */
     const synced = new Map();
     ext.succDossiers = ext.succDossiers || {};
+    ext.succDossiers.openSetting = openSetting;
+    ext.succDossiers.memDirty = () => { MEM.at = 0; };
     ext.succDossiers.afterCompute = async (D, R, P_) => {
         if (!D?.id || !R || R.error || D.archived || hidden()) return;
         const m = S().members(R);
@@ -431,8 +451,9 @@
         const items = (r.items || []).filter(c => c.state !== 'archive');
         if (!items.length) return toast(i18n('Aucun dossier dans cette généalogie.'));
         ext.openDialog({eyebrow: i18n('⚖️ DOSSIER DE SUCCESSION'), title: i18n('{name} dans quels dossiers ?', {name}), wide: true, submitLabel: i18n('Enregistrer'),
-            body: `<div class="succ-scroll"><table class="succ-table succ-pcases"><thead><tr><th></th><th>${esc(i18n('Dossier'))}</th><th>${esc(i18n('Rôle'))}</th></tr></thead><tbody>${items.map(c => `<tr><td><input type="checkbox" data-succ-pc-on="${c.case_id}" aria-label="${esc(c.number)}"${c.role ? ' checked' : ''}${c.role === 'deceased' ? ' disabled' : ''}></td><td>${esc(c.number)} <small class="muted">${esc(c.title)}</small></td>
-                <td><select data-succ-pc-role="${c.case_id}" aria-label="${esc(i18n('Rôle'))}"${c.role === 'deceased' ? ' disabled' : ''}><option value="">—</option>${ROLES.filter(x => x[0] !== 'deceased' || c.role === 'deceased').map(([k, l]) => `<option value="${k}"${c.role === k ? ' selected' : ''}>${esc(i18n(l))}${c.role === k && c.how === 'calc' ? ' ' + esc(i18n('(calculé)')) : ''}</option>`).join('')}</select></td></tr>`).join('')}</tbody></table></div>
+            body: `<div class="succ-scroll"><table class="succ-table succ-pcases"><thead><tr><th></th><th>${esc(i18n('Dossier'))}</th><th>${esc(i18n('Rôle'))}</th><th>${esc(i18n('Contact'))}</th></tr></thead><tbody>${items.map(c => `<tr><td><input type="checkbox" data-succ-pc-on="${c.case_id}" aria-label="${esc(c.number)}"${c.role ? ' checked' : ''}${c.role === 'deceased' ? ' disabled' : ''}></td><td>${esc(c.number)} <small class="muted">${esc(c.title)}</small></td>
+                <td><select data-succ-pc-role="${c.case_id}" aria-label="${esc(i18n('Rôle'))}"${c.role === 'deceased' ? ' disabled' : ''}><option value="">—</option>${ROLES.filter(x => x[0] !== 'deceased' || c.role === 'deceased').map(([k, l]) => `<option value="${k}"${c.role === k ? ' selected' : ''}>${esc(i18n(l))}${c.role === k && c.how === 'calc' ? ' ' + esc(i18n('(calculé)')) : ''}</option>`).join('')}</select></td>
+                <td>${c.deceased ? '' : `<select data-succ-pc-cst="${c.case_id}" aria-label="${esc(i18n('Contact'))}"><option value="">—</option>${Object.entries(CONTACT).map(([k, x]) => `<option value="${k}"${c.contact === k ? ' selected' : ''}>${x[0]} ${esc(i18n(x[1]))}</option>`).join('')}</select>`}</td></tr>`).join('')}</tbody></table></div>
                 <p class="ui-hint">${esc(i18n('Rôles : défunt · héritier · intermédiaire · témoin · à vérifier. « Héritier » mis par le calcul s’affiche « (calculé) ».'))}</p>`,
             onOpen: d => d.addEventListener('change', e => {
                 const t = e.target;
@@ -440,12 +461,22 @@
                 if (t.matches('[data-succ-pc-role]')) d.querySelector(`[data-succ-pc-on="${t.dataset.succPcRole}"]`).checked = !!t.value;
             }),
             onSubmit: async f => {
-                const roles = {};
+                const roles = {}, contacts = [];
                 items.forEach(c => { if (c.role === 'deceased') return; const v = f.querySelector(`[data-succ-pc-role="${c.case_id}"]`).value; if (v !== c.role) roles[c.case_id] = v; });
-                if (!Object.keys(roles).length) return;
-                let res; try { res = await post({op: 'person_roles', person_id: pid, roles}); } catch (e) { toast(e.message, 'error'); return false; }
-                MEM.at = 0; afterPersonRefresh(pid);
-                A().undoToast(i18n('Dossiers de {name} enregistrés', {name}), {undo: async () => { await post({op: 'person_roles_undo', person_id: pid, prev: res.prev}); MEM.at = 0; afterPersonRefresh(pid); }});
+                items.forEach(c => { const sel = f.querySelector(`[data-succ-pc-cst="${c.case_id}"]`); if (sel && sel.value !== (c.contact || '')) contacts.push([c.case_id, sel.value]); });
+                if (!Object.keys(roles).length && !contacts.length) return;
+                let res = {prev: {}}; const undoC = [];
+                try {
+                    if (Object.keys(roles).length) res = await post({op: 'person_roles', person_id: pid, roles});
+                    for (const [cid, state] of contacts) { const r = await post({op: 'contact_state', case_id: cid, person_id: pid, state}); undoC.push([cid, r.prev]); } // une ligne au journal de chaque dossier
+                } catch (e) { toast(e.message, 'error'); return false; }
+                MEM.at = 0; afterPersonRefresh(pid); ext.successoral?.forget?.();
+                const msg = contacts.length === 1 && !Object.keys(roles).length ? i18n('Contact de {name} : {state}', {name, state: contacts[0][1] ? i18n(CONTACT[contacts[0][1]][2]) : i18n('rien de noté')}) : i18n('Dossiers de {name} enregistrés', {name});
+                A().undoToast(msg, {undo: async () => {
+                    for (const [cid, prev] of undoC.reverse()) await post({op: 'contact_state', case_id: cid, person_id: pid, state: prev.state, at: prev.at, undo: 1});
+                    if (Object.keys(roles).length) await post({op: 'person_roles_undo', person_id: pid, prev: res.prev});
+                    MEM.at = 0; afterPersonRefresh(pid); ext.successoral?.forget?.();
+                }});
             }});
     }
     const afterPersonRefresh = pid => { if (Number(A()?.state?.currentPersonId) === pid && A()?.state?.module === 'personnes') { const d = A().state.currentPerson; if (d) personBadge(d); } };
@@ -460,7 +491,8 @@
         if (mine.length) {
             await index().catch(() => null);
             const one = mine.length === 1 ? localCases().find(c => c.id === mine[0][0]) : null;
-            const text = one ? `⚖️ ${one.number} · ${roleLabel(mine[0][1])}` : `⚖️ ${nDossiers(mine.length)}`;
+            const cst = (mine.find(m => CONTACT[m[2]]) || [])[2] || ''; // 🔎 introuvable / 🔇 ne répond pas (le premier dossier qui en a un)
+            const text = one ? `⚖️ ${one.number} · ${cst ? contactShort(cst) : roleLabel(mine[0][1])}` : `⚖️ ${nDossiers(mine.length)}${cst ? ' · ' + contactShort(cst) : ''}`;
             host.insertAdjacentHTML('beforeend', `<button type="button" class="ui-badge is-violet succ-pbadge" data-succ-pbadge="${p.id}" title="${esc(i18n('Les dossiers de cette fiche'))}">${esc(text)}</button>`);
         }
         const ids = filterIds();
@@ -479,9 +511,9 @@
         if (pb) {
             e.preventDefault();
             const pid = Number(pb.dataset.succPbadge); const mem = await membership(); await index().catch(() => null);
-            const rows = (mem[String(pid)] || []).map(([cid, role]) => ({c: localCases().find(x => x.id === cid), role})).filter(x => x.c);
+            const rows = (mem[String(pid)] || []).map(([cid, role, cst]) => ({c: localCases().find(x => x.id === cid), role, cst})).filter(x => x.c);
             return ext.openDialog({eyebrow: i18n('⚖️ DOSSIER DE SUCCESSION'), title: i18n('Les dossiers de cette fiche'), submitLabel: i18n('Fermer'), onSubmit: () => true,
-                body: `<ul class="succ-pb-list">${rows.map(x => `<li><button type="button" class="table-link" data-succ-open="${x.c.id}">${esc(caseShort(x.c))}</button> · ${esc(roleLabel(x.role))}</li>`).join('')}</ul>`,
+                body: `<ul class="succ-pb-list">${rows.map(x => `<li><button type="button" class="table-link" data-succ-open="${x.c.id}">${esc(caseShort(x.c))}</button> · ${esc(roleLabel(x.role))}${x.cst && CONTACT[x.cst] ? ` · ${esc(contactShort(x.cst))}` : ''}</li>`).join('')}</ul>`,
                 onOpen: d => d.addEventListener('click', ev => { if (ev.target.closest('[data-succ-open]')) d.close(); })});
         }
         const ah = t.closest('[data-succ-attach-here]');

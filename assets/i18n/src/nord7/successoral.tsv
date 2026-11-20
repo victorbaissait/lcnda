@@ -705,3 +705,22 @@ Le fichier n’a pas été reçu. ¦ Skráin barst ekki.
 Le défunt reste dans son dossier. ¦ Hinn látni verður áfram í sínu máli.
 🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Fólk
 Dossiers de succession (usage successoral seulement) ¦ Dánarbúsmál (aðeins við notkun sem erfðaættfræðingur)
+# Zone « successoral » : 🔎 introuvable / 🔇 ne répond pas (état de contact d’un héritier, migration 92) ; 🔒 fiches confidentielles non comptées (réglage)
+Introuvable ¦ Finnst ekki
+Ne répond pas ¦ Svarar ekki
+introuvable ¦ finnst ekki
+ne répond pas ¦ svarar ekki
+rien de noté ¦ ekkert skráð
+depuis le {d} ¦ frá {d}
+Introuvable ou silencieux ¦ Finnst ekki eða þegir
+Introuvable depuis plus d’un an ¦ Hefur ekki fundist í meira en ár
+{name} est introuvable depuis plus d’un an : la présomption d’absence (art. 112 et suivants) peut protéger sa part. ¦ {name} hefur ekki fundist í meira en ár: fjarvistarlíkur (gr. 112 o.áfr.) geta verndað hlut hans.
+{what} : les parts peuvent être fausses. ¦ {what}: hlutirnir gætu verið rangir.
+=fiche confidentielle non comptée ¦ trúnaðarspjald ekki talið|trúnaðarspjöld ekki talin
+Changer ce réglage ¦ Breyta þessari stillingu
+Tous les héritiers ¦ Allir erfingjar
+🔎 Introuvable ou 🔇 ne répond pas : pas compté comme contacté dans l’avancement, et le calcul ne change pas. À ne pas confondre avec le statut « Présumé absent » (art. 112). ¦ 🔎 Finnst ekki eða 🔇 svarar ekki: telst ekki hafa náðst samband í framvindunni og útreikningurinn breytist ekki. Ekki rugla saman við stöðuna „Talinn fjarverandi“ (gr. 112).
+Contact de {name} : {state} ¦ Samband við {name}: {state}
+Les fiches confidentielles comptent-elles comme héritiers ? ¦ Teljast trúnaðarspjöld sem erfingjar?
+Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Nei: trúnaðarspjald er tekið úr útreikningnum, eins og það væri ekki til; málið sýnir það.
+Le défunt n’est pas un héritier à contacter. ¦ Hinn látni er ekki erfingi til að hafa samband við.

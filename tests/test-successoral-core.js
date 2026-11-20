@@ -266,4 +266,40 @@ t('⚖️ chaque article cité a son lien Légifrance (https://www.legifrance.go
     assert.equal(S.lawUrl('734'), 'https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006430952');
 });
 
+t('🔒 fiches confidentielles : « Oui » (par défaut) un enfant confidentiel partage ; « Non » il est retiré du calcul (comme s’il n’existait pas) ; le défunt jamais', () => {
+    const f = fam().P(1, 'Défunt', 'm', 1930, '2024-01-01').P(2, 'Anne', 'f', 1960).P(3, 'Bruno', 'm', 1962).P(4, 'Chloé', 'f', 1990).kid(2, 1).kid(3, 1).kid(4, 3);
+    f.g.persons[3].private = true;
+    const oui = run(f, 1);
+    assert.deepEqual(shares(oui), {Anne: '1/2', Bruno: '1/2'}); assert.deepEqual(oui.privateExcluded, []);
+    const non = run(f, 1, {excludePrivate: true});
+    assert.deepEqual(shares(non), {Anne: '1'}, 'Bruno confidentiel : retiré, et sa fille ne le représente pas (le lien passe par lui)');
+    assert.deepEqual(non.privateExcluded, [3]); assert.equal(total(non), '1');
+    assert.ok(f.g.persons[3], 'le graphe donné n’est pas touché');
+    // le défunt confidentiel reste le défunt
+    f.g.persons[1].private = true;
+    const d = run(f, 1, {excludePrivate: true});
+    assert.ok(!d.error); assert.deepEqual(d.privateExcluded, [3]); assert.deepEqual(shares(d), {Anne: '1'});
+    // un conjoint confidentiel : retiré aussi
+    const g = fam().P(1, 'Défunt', 'm', 1930, '2024-01-01').P(2, 'Épouse', 'f', 1935).P(3, 'Anne', 'f', 1960).union(9, 1, 2).kid(3, 1, 2);
+    g.g.persons[2].private = true;
+    assert.equal(run(g, 1).spouse.id, 2); assert.equal(run(g, 1, {excludePrivate: true}).spouse, null);
+});
+t('🔎 introuvable / 🔇 ne répond pas : l’adresse ne compte plus, une signature reçue compte toujours ; suggestion après 1 an', () => {
+    const R = {rows: [{id: 2, role: 'heir', share: '1/2', timing: 'surv'}, {id: 3, role: 'heir', share: '1/2', timing: 'surv'}], search: [], totalOk: true};
+    const P = {list: [], groups: [], counts: {have: 0, total: 0}};
+    const D = {state: 'recherche', deceased_id: 1, addresses: {2: {}, 3: {}}, courriers: [{person_id: 2, kind: 'contrat', signe_le: '2026-05-01'}, {person_id: 3, kind: 'contact', reponse: 'no'}]};
+    const a = S.progress(D, R, P);
+    assert.equal(a.steps[3].frac, 1); assert.equal(a.steps[4].frac, 1);
+    const b = S.progress({...D, contact: {3: {state: 'silence', at: '2026-01-01 10:00:00'}}}, R, P);
+    assert.equal(b.steps[3].frac, 1, 'silencieux : l’adresse reste'); assert.equal(b.steps[4].frac, 1, 'une réponse déjà reçue compte toujours');
+    const c = S.progress({...D, contact: {'2': {state: 'introuvable', at: '2026-01-01'}}}, R, P);
+    assert.equal(c.steps[3].frac, 0.5, 'introuvable : pas d’adresse valable'); assert.equal(c.steps[4].frac, 1, 'un contrat signé compte toujours');
+    assert.ok(c.pct < a.pct);
+    assert.deepEqual(S.contactOf({contact: {5: {state: 'bof'}}}, 5), {state: '', at: ''});
+    assert.equal(S.contactStale({state: 'introuvable', at: '2025-11-01 09:00:00'}, '2026-11-20'), true);
+    assert.equal(S.contactStale({state: 'introuvable', at: '2026-01-01'}, '2026-11-20'), false);
+    assert.equal(S.contactStale({state: 'silence', at: '2020-01-01'}, '2026-11-20'), false, 'seulement « introuvable »');
+    assert.match(S.lawLinks('art. 112 et suivants'), /href="https:\/\/www\.legifrance\.gouv\.fr\/[^"]+"[^>]*>112</);
+});
+
 if (failed) { console.error(`✗ ${failed} échec(s)`); process.exitCode = 1; } else console.log('✓ tout est bon');

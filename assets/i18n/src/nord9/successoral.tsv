@@ -705,3 +705,22 @@ Le fichier n’a pas été reçu. ¦ D’Datei ass net ukomm.
 Le défunt reste dans son dossier. ¦ De Verstuerwene bleift a sengem Dossier.
 🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Persounen
 Dossiers de succession (usage successoral seulement) ¦ Ierfschaftsdossieren (nëmme bei der Notzung als Ierwesicher)
+# Zone « successoral » : 🔎 introuvable / 🔇 ne répond pas (état de contact d’un héritier, migration 92) ; 🔒 fiches confidentielles non comptées (réglage)
+Introuvable ¦ Net ze fannen
+Ne répond pas ¦ Äntwert net
+introuvable ¦ net ze fannen
+ne répond pas ¦ äntwert net
+rien de noté ¦ näischt notéiert
+depuis le {d} ¦ zënter dem {d}
+Introuvable ou silencieux ¦ Net ze fannen oder schweigt
+Introuvable depuis plus d’un an ¦ Zënter méi wéi engem Joer net ze fannen
+{name} est introuvable depuis plus d’un an : la présomption d’absence (art. 112 et suivants) peut protéger sa part. ¦ {name} ass zënter méi wéi engem Joer net ze fannen: d’Vermutung vun Ofwiesenheet (Art. 112 ff.) kann den Undeel schützen.
+{what} : les parts peuvent être fausses. ¦ {what}: d’Undeeler kënne falsch sinn.
+=fiche confidentielle non comptée ¦ vertraulech Fiche net gezielt|vertraulech Fichen net gezielt
+Changer ce réglage ¦ Dës Astellung änneren
+Tous les héritiers ¦ All d’Ierwen
+🔎 Introuvable ou 🔇 ne répond pas : pas compté comme contacté dans l’avancement, et le calcul ne change pas. À ne pas confondre avec le statut « Présumé absent » (art. 112). ¦ 🔎 Net ze fannen oder 🔇 äntwert net: zielt am Fortschrëtt net als kontaktéiert, an d’Berechnung ännert sech net. Net ze verwiessele mam Status „Vermutlech ofwiesend“ (Art. 112).
+Contact de {name} : {state} ¦ Kontakt mat {name}: {state}
+Les fiches confidentielles comptent-elles comme héritiers ? ¦ Zielen vertraulech Fichen als Ierwen?
+Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Nee: eng vertraulech Fiche gëtt aus der Berechnung geholl, wéi wann et se net géif ginn; den Dossier weist dat.
+Le défunt n’est pas un héritier à contacter. ¦ De Verstuerwenen ass keen Ierw fir ze kontaktéieren.

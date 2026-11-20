@@ -705,3 +705,22 @@ Le fichier n’a pas été reçu. ¦ Файл не получен. ¦ Файл �
 Le défunt reste dans son dossier. ¦ Наследодатель остаётся в своём деле. ¦ Спадкодавець залишається у своїй справі.
 🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Люди ¦ 🧑‍🤝‍🧑 Люди
 Dossiers de succession (usage successoral seulement) ¦ Наследственные дела (только при использовании генеалога по наследствам) ¦ Спадкові справи (лише для використання генеалогом у спадкових справах)
+# Zone « successoral » : 🔎 introuvable / 🔇 ne répond pas (état de contact d’un héritier, migration 92) ; 🔒 fiches confidentielles non comptées (réglage)
+Introuvable ¦ Не удаётся найти ¦ Не вдається знайти
+Ne répond pas ¦ Не отвечает ¦ Не відповідає
+introuvable ¦ не удаётся найти ¦ не вдається знайти
+ne répond pas ¦ не отвечает ¦ не відповідає
+rien de noté ¦ ничего не отмечено ¦ нічого не позначено
+depuis le {d} ¦ с {d} ¦ з {d}
+Introuvable ou silencieux ¦ Не удаётся найти или молчит ¦ Не вдається знайти або мовчить
+Introuvable depuis plus d’un an ¦ Не удаётся найти больше года ¦ Не вдається знайти понад рік
+{name} est introuvable depuis plus d’un an : la présomption d’absence (art. 112 et suivants) peut protéger sa part. ¦ {name}: не удаётся найти больше года. Презумпция безвестного отсутствия (ст. 112 и след.) может защитить его долю. ¦ {name}: не вдається знайти понад рік. Презумпція безвісної відсутності (ст. 112 і далі) може захистити його частку.
+{what} : les parts peuvent être fausses. ¦ {what}: доли могут быть неверными. ¦ {what}: частки можуть бути неправильними.
+=fiche confidentielle non comptée ¦ конфиденциальная карточка не учтена|конфиденциальные карточки не учтены|конфиденциальных карточек не учтено ¦ конфіденційна картка не врахована|конфіденційні картки не враховані|конфіденційних карток не враховано
+Changer ce réglage ¦ Изменить эту настройку ¦ Змінити це налаштування
+Tous les héritiers ¦ Все наследники ¦ Усі спадкоємці
+🔎 Introuvable ou 🔇 ne répond pas : pas compté comme contacté dans l’avancement, et le calcul ne change pas. À ne pas confondre avec le statut « Présumé absent » (art. 112). ¦ 🔎 Не удаётся найти или 🔇 не отвечает: в ходе работы не считается, что связь установлена, и расчёт не меняется. Не путай со статусом «Предполагаемо отсутствующий» (ст. 112). ¦ 🔎 Не вдається знайти або 🔇 не відповідає: у ході роботи не вважається, що зв’язок встановлено, і розрахунок не змінюється. Не плутай зі статусом «Імовірно відсутній» (ст. 112).
+Contact de {name} : {state} ¦ Связь — {name}: {state} ¦ Зв’язок — {name}: {state}
+Les fiches confidentielles comptent-elles comme héritiers ? ¦ Считаются ли конфиденциальные карточки наследниками? ¦ Чи вважаються конфіденційні картки спадкоємцями?
+Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Нет: конфиденциальная карточка убирается из расчёта, как будто её нет; дело об этом сообщает. ¦ Ні: конфіденційну картку прибирають із розрахунку, ніби її немає; справа про це повідомляє.
+Le défunt n’est pas un héritier à contacter. ¦ Умерший не является наследником, с которым нужно связаться. ¦ Померлий не є спадкоємцем, з яким треба зв’язатися.

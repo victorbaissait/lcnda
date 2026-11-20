@@ -9,6 +9,10 @@
  * Calcul : heritage-successoral-core.js (window.LCNDA_SUCC_CORE), indicatif, à faire vérifier par le notaire ; chaque article
  * cité ouvre le texte sur Légifrance. Serveur : lib/successoral.php (GET successoral, POST successoral_write).
  * Confidentialité : rien en mode consultation ni en mode simple ; aucun export ne lit les dossiers.
+ * 🔎 Introuvable / 🔇 Ne répond pas (l'« absent » au sens pratique, pas la présomption d'absence) : un petit menu par héritier
+ *      dans 👥 Héritiers et « Héritiers à contacter » (succ_case_persons.contact_state, migration 92), message avec ↶ Annuler,
+ *      ligne au journal ; introuvable depuis plus d'un an → suggestion « ❔ Absent ou disparu ». Fiches confidentielles non
+ *      comptées (réglage) : avertissement dans 👥 Héritiers.
  */
 (() => {
     'use strict';
@@ -43,6 +47,15 @@
     const noticeHtml = (k, html) => `<div class="ui-notice ui-notice-${k}" role="${k === 'error' ? 'alert' : 'status'}"><span class="ui-notice-ico" aria-hidden="true">${NOTICE[k]}</span><span>${html}</span></div>`;
     const badge = (t, k = 'grey') => (UI()?.badge ? UI().badge(t, k) : `<span class="ui-badge is-${k}">${esc(t)}</span>`);
     const nameOf = (D, id) => S().name(D.graph.persons[id]);
+    /* ── 🔎 Introuvable / 🔇 Ne répond pas : l'état de contact d'un héritier dans un dossier ── */
+    const CONTACT = {introuvable: ['🔎', 'Introuvable', 'introuvable', 'yellow'], silence: ['🔇', 'Ne répond pas', 'ne répond pas', 'grey']};
+    const contactWord = st => (CONTACT[st] ? i18n(CONTACT[st][2]) : i18n('rien de noté'));
+    /** le badge (« 🔎 introuvable », depuis le …) ; '' sans état */
+    const contactBadge = c => { const x = CONTACT[c?.state]; if (!x) return ''; const title = c.at ? i18n('depuis le {d}', {d: fmtDate(c.at)}) : ''; return UI()?.badge ? UI().badge(`${x[0]} ${i18n(x[2])}`, x[3], {title}) : `<span class="ui-badge is-${x[3]}" title="${esc(title)}">${esc(`${x[0]} ${i18n(x[2])}`)}</span>`; };
+    /** le petit menu : — / 🔎 Introuvable / 🔇 Ne répond pas */
+    const contactSelect = (caseId, pid, st) => `<select class="succ-cst" data-succ-cst="${Number(caseId)}:${Number(pid)}" aria-label="${esc(i18n('Contact'))}"><option value="">—</option>${Object.entries(CONTACT).map(([k, x]) => `<option value="${k}"${st === k ? ' selected' : ''}>${x[0]} ${esc(i18n(x[1]))}</option>`).join('')}</select>`;
+    /** un héritier qu'on cherche à joindre : il a une part et il vit (ou on ne sait pas) */
+    const reachable = r => ['heir', 'parent', 'spouse'].includes(r.role) && r.share !== '0' && (r.unknown || ['surv', 'abs'].includes(r.timing));
 
     /* ═════ La liste (Listes → Recherche et organisation) et l'onglet ═════ */
     const reg = () => {
@@ -70,6 +83,7 @@
     ext.successoral = {render: token => { cur.where = 'tab'; return render(token); }, openCase, openFor, compute: computeCase, S: () => S(),
         // pour heritage-successoral-dossiers.js : le dossier ouvert, ＋ Ouvrir un dossier, l'arbre et le tableau du notaire (archive en fichier)
         newCase: (pid = 0) => caseDialog(null, pid), current: () => cur.data, currentR: () => cur.R, reload: () => reload(),
+        forget: () => { cur.data = null; cur.R = null; }, // un réglage a changé (fiches confidentielles) : relire le dossier à la prochaine ouverture
         treeSvg: (D, R) => treeSvg(D, R, {print: true}), notaryHtml: (D, R, addresses = false) => notaryHtml(D, R, piecesOf(D, R), {addresses})};
 
     async function render(token) {
@@ -139,39 +153,41 @@
                 if (!['surv', 'unknown', 'abs'].includes(t)) continue; // vivants, ou statut inconnu (pas les morts après le défunt : leur part va à leurs propres héritiers)
                 const a = D.addresses?.[r.id] || null, st = contactState(D, r.id);
                 rows.push({key: `${D.id}:${r.id}`, caseId: D.id, number: D.number, deceased: D.deceased || '', pid: r.id, name: r.name, kin: r.kin, share: r.share, unknown: !!r.unknown,
-                    address: a ? (a.lines || []).join(', ') : '', email: a?.email || '', phone: a?.phone || '', contactId: a?.contact_id || 0, state: st.k, stateText: st.text});
+                    address: a ? (a.lines || []).join(', ') : '', email: a?.email || '', phone: a?.phone || '', contactId: a?.contact_id || 0, state: st.k, stateText: st.text, contact: S().contactOf(D, r.id)});
             }
         }
         if (!rows.length) { body.innerHTML = A().emptyState({icon: '👥', text: i18n('Aucun héritier à contacter dans les dossiers en cours.'), hint: i18n('Les héritiers vivants (ou au statut inconnu) des dossiers ouverts viennent ici, avec leur adresse et l’état du contact.')}) + fullLink('living_contacts'); return; }
         const cases = [...new Map(rows.map(r => [r.caseId, r.number])).entries()];
         const bar = UI().listBar({key: 'succ:heirs', search: {placeholder: i18n('Chercher… (nom, dossier, ville)')}, view: {dflt: 'list', what: 'fiches'},
             filters: [{id: 'case', label: i18n('Dossier'), type: 'select', options: [['', i18n('Tous les dossiers')], ...cases.map(([id, n]) => [String(id), i18n('Dossier {n}', {n})])]},
-                {id: 'state', label: i18n('État du contact'), type: 'check', options: CSTATE.map(([v, l]) => [v, i18n(l)])}],
+                {id: 'state', label: i18n('État du contact'), type: 'check', options: CSTATE.map(([v, l]) => [v, i18n(l)])},
+                {id: 'reach', label: i18n('Introuvable ou silencieux'), type: 'check', options: Object.entries(CONTACT).map(([k, x]) => [k, `${x[0]} ${i18n(x[1])}`])}],
             sort: {options: [['case', i18n('Par dossier')], ['todo', i18n('À contacter d’abord')], ['az', i18n('A → Z')]], value: 'case'}, onChange: st => draw(st)});
         body.innerHTML = `<div data-succ-items></div><p class="succ-csv"><button type="button" class="button small secondary" data-succ-hcsv>${esc(i18n('⤓ Exporter en CSV'))}</button></p>${fullLink('living_contacts')}`; body.prepend(bar);
         const M = UI().listMatch;
         let shown = rows;
         function draw(st = bar.state) {
-            let list = rows.filter(r => M.text(st.q, r.name, r.number, r.deceased, r.address, r.email, r.kin) && (!st.filters.case || String(r.caseId) === String(st.filters.case)) && (!st.filters.state?.length || st.filters.state.includes(r.state)));
+            let list = rows.filter(r => M.text(st.q, r.name, r.number, r.deceased, r.address, r.email, r.kin) && (!st.filters.case || String(r.caseId) === String(st.filters.case)) && (!st.filters.state?.length || st.filters.state.includes(r.state)) && (!st.filters.reach?.length || st.filters.reach.includes(r.contact.state)));
             const rank = r => CSTATE.findIndex(c => c[0] === r.state);
             list = st.sort === 'az' ? UI().sortItems(list, 'az', {name: r => r.name}) : st.sort === 'todo' ? [...list].sort((a, b) => rank(a) - rank(b) || a.name.localeCompare(b.name, 'fr')) : [...list].sort((a, b) => String(b.number).localeCompare(String(a.number), 'fr', {numeric: true}) || a.name.localeCompare(b.name, 'fr'));
             shown = list;
             bar.setCount(list.length, 'héritier', 'héritiers');
             const write = r => (r.unknown ? '' : `<button type="button" class="button small secondary" data-succ-hwrite="${r.key}">${esc(i18n('✉️ Écrire'))}</button>`);
             const addr = r => `<button type="button" class="button small secondary" data-succ-haddr="${r.key}">${esc(i18n('📇 Compléter l’adresse'))}</button>`;
+            const stale = r => (S().contactStale(r.contact) ? ` <button type="button" class="link-button succ-cstale-b" data-succ-habsent="${r.key}" title="${esc(i18n('Introuvable depuis plus d’un an'))}">${esc(i18n('❔ Absent ou disparu'))}</button>` : '');
             body.querySelector('[data-succ-items]').innerHTML = list.length ? UI().itemsHtml(st.view, list.map(r => ({
-                thumb: '<span class="ui-card-ico" aria-hidden="true">👤</span>', name: r.name, open: `data-h-person="${r.pid}"`, attrs: `data-succ-hrow="${r.key}"`,
-                lines: [{html: `<button type="button" class="table-link" data-succ-open="${r.caseId}">${esc(i18n('Dossier {n}', {n: r.number}))}</button>${r.deceased ? ` (${esc(r.deceased)})` : ''} · ${esc(r.kin)}${r.share && r.share !== '0' ? ` · ${esc(i18n('Part'))} ${esc(r.share)}` : ''}`},
+                thumb: '<span class="ui-card-ico" aria-hidden="true">👤</span>', name: r.name, open: `data-h-person="${r.pid}"`, attrs: `data-succ-hrow="${r.key}" data-succ-cstate="${r.contact.state}"`,
+                lines: [{html: `${st.view === 'cards' ? '' : contactBadge(r.contact) + (r.contact.state ? ' ' : '')}<button type="button" class="table-link" data-succ-open="${r.caseId}">${esc(i18n('Dossier {n}', {n: r.number}))}</button>${r.deceased ? ` (${esc(r.deceased)})` : ''} · ${esc(r.kin)}${r.share && r.share !== '0' ? ` · ${esc(i18n('Part'))} ${esc(r.share)}` : ''}`},
                     {html: [r.address ? esc(r.address) : `<span class="succ-noaddr">${esc(i18n('adresse à trouver'))}</span>`, r.email ? `<a class="table-link" href="mailto:${esc(r.email)}">${esc(r.email)}</a>` : '', r.phone ? esc(r.phone) : ''].filter(Boolean).join(' · ')}],
-                badges: [{text: r.stateText, kind: (CSTATE.find(c => c[0] === r.state) || CSTATE[0])[2]}, r.unknown ? {text: i18n('Inconnu'), kind: 'yellow'} : null].filter(Boolean),
+                badges: [{text: r.stateText, kind: (CSTATE.find(c => c[0] === r.state) || CSTATE[0])[2]}, r.unknown ? {text: i18n('Inconnu'), kind: 'yellow'} : null, contactBadge(r.contact) || null].filter(Boolean),
                 date: st.view === 'cards' ? '' : r.stateText,
-                actions: st.view === 'cards' ? '' : write(r) + ' ' + addr(r), quick: st.view === 'cards' ? write(r) : '', menu: st.view === 'cards' ? [addr(r)] : []}))) : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">${esc(i18n('Aucun héritier ne correspond.'))}</span></p>`;
+                actions: st.view === 'cards' ? '' : contactSelect(r.caseId, r.pid, r.contact.state) + stale(r) + ' ' + write(r) + ' ' + addr(r), quick: st.view === 'cards' ? contactSelect(r.caseId, r.pid, r.contact.state) + stale(r) + write(r) : '', menu: st.view === 'cards' ? [addr(r)] : []}))) : `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">${esc(i18n('Aucun héritier ne correspond.'))}</span></p>`;
         }
         draw();
         body.querySelector('[data-succ-hcsv]').addEventListener('click', () => {
             const cell = v => (A().csvCell ? A().csvCell(v, {sep: ';'}) : `"${String(v ?? '').replace(/"/g, '""')}"`);
             const head = ['Héritier', 'Dossier', 'Défunt', 'Lien avec le défunt', 'Part', 'Adresse', 'Courriel', 'Téléphone', 'État du contact'].map(h => cell(i18n(h)));
-            const csv = '﻿' + [head.join(';'), ...shown.map(r => [r.name, r.number, r.deceased, r.kin, r.share, r.address || i18n('adresse à trouver'), r.email, r.phone, r.stateText].map(cell).join(';'))].join('\r\n');
+            const csv = '﻿' + [head.join(';'), ...shown.map(r => [r.name, r.number, r.deceased, r.kin, r.share, r.address || i18n('adresse à trouver'), r.email, r.phone, r.stateText + (r.contact.state ? ' · ' + contactWord(r.contact.state) : '')].map(cell).join(';'))].join('\r\n');
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = 'heritiers-a-contacter.csv'; document.body.appendChild(a); a.click(); a.remove();
             setTimeout(() => URL.revokeObjectURL(a.href), 4000);
             toast(i18n('Héritiers à contacter exportés (CSV)'));
@@ -294,7 +310,8 @@
         const statuses = {}, spouse = {};
         for (const [pid, o] of Object.entries(D.overrides || {})) { if (o.status || o.adoption) statuses[pid] = {status: o.status, adoption: o.adoption}; if (o.spouse) spouse[pid] = o.spouse; }
         const addresses = {}; for (const k of Object.keys(D.addresses || {})) addresses[k] = true;
-        return S().compute(D.graph, {deceasedId: D.deceased_id, deathDate: D.death_iso || '', deathText: D.death_date_text, overrides: statuses, spouse, addresses, t: i18n});
+        // réglage « Les fiches confidentielles comptent-elles comme héritiers ? » = Non : retirées du calcul (avertissement dans 👥 Héritiers)
+        return S().compute(D.graph, {deceasedId: D.deceased_id, deathDate: D.death_iso || '', deathText: D.death_date_text, overrides: statuses, spouse, addresses, t: i18n, excludePrivate: D.count_private === false});
     }
     const piecesOf = (D, R) => { const states = {}; for (const [k, p] of Object.entries(D.pieces || {})) if (p.state) states[k] = p.state; return S().pieces(R, D.graph, {acts: D.acts || {}, states, asked: D.asked || {}}); };
     /** le journal note tout seul quand la dévolution change (une fiche de la famille a changé) */
@@ -377,11 +394,18 @@
         const spouseHtml = spouseRow ? `<p>${tx('{name} : {share} (art. {art}).', {name: spouseRow.name, share: spouseRow.share, art: spouseRow.art})}${R.spouseOption === 'usufruit' ? ' ' + tx('Ou, à son choix, l’usufruit de la totalité (art. 757) : les descendants ont alors la nue-propriété, dans les mêmes proportions.') : ''}</p>`
             : `<p>${spouseUnions.length ? spouseUnions.map(u => { const x = u.a === D.deceased_id ? u.b : u.a; const p = D.graph.persons[x]; return esc(i18n(u.divorced ? '{n} : divorcé(e), pas héritier (art. 732).' : u.free || u.married === false ? '{n} : pas marié(e) (PACS ou union libre), pas héritier sans testament.' : '{n} : décédé(e) avant, pas de conjoint survivant.', {n: S().name(p)})); }).join(' ') : esc(i18n('Aucun conjoint dans la base.'))} ${tx('S’il y avait un conjoint, l’app afficherait ici ses droits (art. 757 à 757-2) avant les ordres.')}</p>`;
         const heirRows = R.rows.filter(r => r.role !== 'spouse');
-        const tr = r => `<tr class="succ-r is-${r.role}${r.unknown ? ' is-unknown' : ''}" data-succ-pid="${r.id}">
-            <td style="--succ-depth:${r.depth || 0}">${r.depth ? '<span class="succ-indent" aria-hidden="true">↳</span>' : ''}<button type="button" class="table-link" data-h-person="${r.id}">${esc(r.name)}</button>${r.years ? ` <small class="muted">(${esc(r.years)})</small>` : ''}${r.line ? ` ${badge(r.line === 'p' ? i18n('paternelle') : i18n('maternelle'), 'grey')}` : ''}</td>
+        const cOf = r => S().contactOf(D, r.id);
+        const tr = r => `<tr class="succ-r is-${r.role}${r.unknown ? ' is-unknown' : ''}" data-succ-pid="${r.id}" data-succ-cstate="${reachable(r) ? cOf(r).state : '-'}">
+            <td style="--succ-depth:${r.depth || 0}">${r.depth ? '<span class="succ-indent" aria-hidden="true">↳</span>' : ''}<button type="button" class="table-link" data-h-person="${r.id}">${esc(r.name)}</button>${r.years ? ` <small class="muted">(${esc(r.years)})</small>` : ''}${r.line ? ` ${badge(r.line === 'p' ? i18n('paternelle') : i18n('maternelle'), 'grey')}` : ''}${reachable(r) && cOf(r).state ? ' ' + contactBadge(cOf(r)) : ''}</td>
             <td>${esc(r.kin)}</td><td>${r.deg ? esc(i18n('{n}e', {n: r.deg})) : '—'}</td><td>${timingBadge(r)}${D.addresses?.[r.id] || r.role === 'out' || r.role === 'souche' || r.timing === 'pre' ? '' : ` <small class="muted">${esc(i18n('adresse ?'))}</small>`}</td>
             <td>${esc(viaText(r))}</td><td class="succ-share"><b>${esc(r.share)}</b></td><td class="succ-pct">${r.role === 'souche' ? esc(i18n('souche')) : r.role === 'out' ? '—' : esc(pctTxt(r.pct))}</td>
-            <td>${ro ? '' : `<select class="succ-ov" data-succ-ov="${r.id}" aria-label="${esc(i18n('Statut retenu dans ce dossier'))}">${OV.map(([v, l]) => `<option value="${v}"${(ov[r.id]?.status || '') === v ? ' selected' : ''}>${esc(i18n(l))}</option>`).join('')}</select>`}</td></tr>`;
+            <td>${ro ? '' : `<select class="succ-ov" data-succ-ov="${r.id}" aria-label="${esc(i18n('Statut retenu dans ce dossier'))}">${OV.map(([v, l]) => `<option value="${v}"${(ov[r.id]?.status || '') === v ? ' selected' : ''}>${esc(i18n(l))}</option>`).join('')}</select>`}</td>
+            <td>${!reachable(r) ? '' : ro ? contactBadge(cOf(r)) : contactSelect(D.id, r.id, cOf(r).state)}</td></tr>`;
+        // ❔ introuvable depuis plus d'un an : la présomption d'absence (art. 112 et suivants) peut protéger sa part
+        const staleHtml = R.rows.filter(r => reachable(r) && S().contactStale(cOf(r))).map(r => `<p class="succ-cstale">🔎 ${tx('{name} est introuvable depuis plus d’un an : la présomption d’absence (art. 112 et suivants) peut protéger sa part.', {name: r.name})}${ro ? '' : ` <button type="button" class="link-button" data-succ-absent="${r.id}">${esc(i18n('❔ Absent ou disparu'))}</button>`}</p>`).join('');
+        const nPriv = (R.privateExcluded || []).length;
+        const privHtml = nPriv ? `<div class="succ-privwarn" data-succ-privwarn>${noticeHtml('warn', `🔒 ${esc(i18n('{what} : les parts peuvent être fausses.', {what: plural(nPriv, 'fiche confidentielle non comptée', 'fiches confidentielles non comptées')}))} <button type="button" class="link-button" data-succ-privset>${esc(i18n('Changer ce réglage'))}</button>`)}</div>` : '';
+        const cfilt = ['introuvable', 'silence'].includes(cur.cfilt) ? cur.cfilt : '';
         const hyp = R.hypotheses.map(h => `<div class="succ-hyp">🔀 <b>${esc(i18n('Autre hypothèse'))}</b>, ${esc(h.label)} : ${h.shares.map(s => `${esc(s.name)} <b>${esc(s.share)}</b>`).join(', ')}${h.total !== '1' && h.shares.length ? ` <small>(${esc(i18n('total {t}', {t: h.total}))})</small>` : ''}${!h.shares.length ? esc(i18n('personne : il reste des branches à chercher.')) : ''}</div>`).join('');
         const SEARCH_ICON = {unknown: '🔎', nodesc: '❓', address: '📇', adoption: '🧩', marriage: '💍', lit: '🧩', parents: '🌳', kids: '👶', branch: '🌳', post: '⏳', absent: '❔'};
         const searchHtml = R.search.length ? `<ul class="succ-search">${R.search.map(s => `<li><span class="succ-s-ic" aria-hidden="true">${SEARCH_ICON[s.kind] || '🔎'}</span><div><b>${esc(s.name)}</b> ${tx(s.text)}${s.share ? ` <small>${esc(i18n('Part en jeu : {s}', {s: s.share}))}</small>` : ''}</div><div class="succ-s-act">
@@ -392,13 +416,14 @@
             ${s.kind === 'marriage' && !ro ? `<select data-succ-spouse="${s.id}" aria-label="${esc(i18n('Marié ?'))}"><option value="">${esc(i18n('Marié ?'))}</option><option value="married">${esc(i18n('Marié'))}</option><option value="not">${esc(i18n('Pas marié (PACS, union libre)'))}</option><option value="divorced">${esc(i18n('Divorcé'))}</option></select>` : ''}
             ${['nodesc', 'lit', 'kids'].includes(s.kind) ? `<button type="button" class="button small secondary" data-h-person="${s.id}">${esc(i18n('↗ Fiche'))}</button>` : ''}</div></li>`).join('')}</ul>` : A().empty(i18n('Aucune branche à chercher d’après les fiches.'), {icon: '✓'});
         const branchHtml = R.branches && (R.order === 3 || R.order === 4 || R.escheat) ? `<p class="succ-fente">${R.branches.map(b => esc(i18n(b.line === 'p' ? 'Branche paternelle : {who}' : 'Branche maternelle : {who}', {who: b.ids.length ? b.ids.map(id => nameOf(D, id)).join(', ') + ` (${i18n('{n}e degré', {n: b.deg})})` : i18n('personne')}))).join(' · ')}</p>` : '';
-        body.innerHTML = `${noticeHtml('warn', `⚖️ ${tx('Calcul indicatif, à faire vérifier par le notaire. Il suit le Code civil en vigueur (art. 731 et suivants), sans testament, sans donation, sans renonciation connue. Il ne tient pas compte du droit de retour légal (art. 738-2, 757-3), des biens à l’étranger ni d’un régime matrimonial.')}`)}
+        body.innerHTML = `${privHtml}${noticeHtml('warn', `⚖️ ${tx('Calcul indicatif, à faire vérifier par le notaire. Il suit le Code civil en vigueur (art. 731 et suivants), sans testament, sans donation, sans renonciation connue. Il ne tient pas compte du droit de retour légal (art. 738-2, 757-3), des biens à l’étranger ni d’un régime matrimonial.')}`)}
             ${R.warnings.map(w => `<div class="succ-oldlaw" role="note">🕰 ${tx(w.text)}</div>`).join('')}
             <section class="succ-box"><h3>${esc(i18n('Le conjoint survivant'))}</h3>${spouseHtml}</section>
             <section class="succ-box"><h3>${tx('Les ordres d’héritiers (art. 734) : le premier qui a quelqu’un prend tout')}</h3>${ordersHtml}<ul class="succ-notes">${R.notes.map(n => `<li>${tx(n)}</li>`).join('')}</ul>${branchHtml}</section>
-            <section class="succ-box"><div class="succ-box-head"><h3>${esc(i18n('Les héritiers trouvés'))}</h3>${ro ? '' : `<button type="button" class="button small secondary" data-succ-tables>${esc(i18n('🗂 Tables des successions (AD)…'))}</button>`}</div>
-            <div class="succ-scroll"><table class="succ-table"><thead><tr><th>${esc(i18n('Personne'))}</th><th>${esc(i18n('Lien avec le défunt'))}</th><th>${esc(i18n('Degré'))}</th><th>${esc(i18n('État'))}</th><th>${esc(i18n('Vient'))}</th><th>${esc(i18n('Part'))}</th><th>≈</th><th>${esc(i18n('Statut retenu'))}</th></tr></thead>
-            <tbody>${(spouseRow ? [spouseRow] : []).concat(heirRows).map(tr).join('')}</tbody><tfoot><tr><th colspan="5">${esc(i18n('Total'))}</th><td class="succ-share"><b>${esc(R.total)}</b></td><td>${R.totalOk ? '100 %' : '⚠️'}</td><td></td></tr></tfoot></table></div>
+            <section class="succ-box"><div class="succ-box-head"><h3>${esc(i18n('Les héritiers trouvés'))}</h3><div class="succ-acts"><label class="succ-cfilt">${esc(i18n('Montrer'))} <select data-succ-cfilt><option value="">${esc(i18n('Tous les héritiers'))}</option>${Object.entries(CONTACT).map(([k, x]) => `<option value="${k}"${cfilt === k ? ' selected' : ''}>${x[0]} ${esc(i18n(x[1]))}</option>`).join('')}</select></label>${ro ? '' : `<button type="button" class="button small secondary" data-succ-tables>${esc(i18n('🗂 Tables des successions (AD)…'))}</button>`}</div></div>
+            <div class="succ-scroll"><table class="succ-table succ-heirs${cfilt ? ' is-cfilt' : ''}" data-cfilt="${cfilt}"><thead><tr><th>${esc(i18n('Personne'))}</th><th>${esc(i18n('Lien avec le défunt'))}</th><th>${esc(i18n('Degré'))}</th><th>${esc(i18n('État'))}</th><th>${esc(i18n('Vient'))}</th><th>${esc(i18n('Part'))}</th><th>≈</th><th>${esc(i18n('Statut retenu'))}</th><th>${esc(i18n('Contact'))}</th></tr></thead>
+            <tbody>${(spouseRow ? [spouseRow] : []).concat(heirRows).map(tr).join('')}</tbody><tfoot><tr><th colspan="5">${esc(i18n('Total'))}</th><td class="succ-share"><b>${esc(R.total)}</b></td><td>${R.totalOk ? '100 %' : '⚠️'}</td><td></td><td></td></tr></tfoot></table></div>
+            ${staleHtml}<p class="ui-hint">${tx('🔎 Introuvable ou 🔇 ne répond pas : pas compté comme contacté dans l’avancement, et le calcul ne change pas. À ne pas confondre avec le statut « Présumé absent » (art. 112).')}</p>
             <p class="ui-hint succ-swipe">${esc(i18n('↔ Faire glisser le tableau pour voir les parts.'))}</p>${R.escheat ? noticeHtml('warn', tx('Aucun héritier trouvé jusqu’au 6e degré : sans testament, la succession reviendrait à l’État (art. 539 et 768). Il reste sans doute des branches à chercher.')) : ''}
             ${hyp}${R.hypotheses.length ? `<p class="ui-hint">${esc(i18n('Les calculs restent tant que la branche n’est pas tranchée.'))}</p>` : ''}</section>
             <section class="succ-box"><h3>${esc(i18n('Les branches à chercher'))}</h3>${searchHtml}</section>
@@ -690,6 +715,13 @@
                 <div class="succ-acts"><button type="button" class="button secondary" data-abs="absent">${esc(i18n('Présumé absent'))}</button><button type="button" class="button secondary" data-abs="absent_declare">${esc(i18n('Déclaré absent ou jugement de décès'))}</button></div>`,
             onOpen: d => d.addEventListener('click', e => { const b = e.target.closest('[data-abs]'); if (!b) return; d.close(); setOverride(D, pid, 'status', b.dataset.abs); })});
     }
+    /** 🔎 Introuvable / 🔇 Ne répond pas : enregistré dans le dossier (journal), message avec ↶ Annuler */
+    async function setContact(D, pid, state) {
+        const again = () => { ext.succDossiers?.memDirty?.(); return cur.id ? reload() : render(); };
+        let r; try { r = await post({op: 'contact_state', case_id: D.id, person_id: pid, state}); } catch (e) { toast(e.message, 'error'); return again(); }
+        A().undoToast(i18n('Contact de {name} : {state}', {name: nameOf(D, pid), state: contactWord(state)}), {undo: async () => { await post({op: 'contact_state', case_id: D.id, person_id: pid, state: r.prev.state, at: r.prev.at, undo: 1}); again(); }});
+        return again();
+    }
     async function setOverride(D, pid, field, value) {
         let r; try { r = await post({op: 'override', case_id: D.id, person_id: pid, field, value}); } catch (e) { return toast(e.message, 'error'); }
         A().undoToast(i18n('{name} : statut retenu changé, dévolution recalculée', {name: nameOf(D, pid)}), {undo: async () => { await post({op: 'override', case_id: D.id, person_id: pid, field, value: r.prev}); reload(); }});
@@ -756,6 +788,8 @@
         const full = t.closest('[data-succ-full]'); if (full) { e.preventDefault(); t.closest('dialog')?.close?.(); A().state.listType = full.dataset.succFull === 'courriers' ? 'courriers' : 'living_contacts'; return A().setModule('listes'); }
         const hw = t.closest('[data-succ-hwrite]'); if (hw) { e.preventDefault(); const [cid, pid] = hw.dataset.succHwrite.split(':').map(Number); const c = board.cases.get(cid); if (!c) return; return letterDialog(c.D, c.R, c.D.courriers.some(x => x.person_id === pid && x.kind !== 'acte') ? 'relance' : 'contact', pid); }
         const ha = t.closest('[data-succ-haddr]'); if (ha) { e.preventDefault(); const [cid, pid] = ha.dataset.succHaddr.split(':').map(Number); const c = board.cases.get(cid); const a = c?.D.addresses?.[pid]; return openLiving(a?.contact_id || 0, pid, c ? nameOf(c.D, pid) : ''); }
+        if (t.closest('[data-succ-privset]')) { e.preventDefault(); return ext.succDossiers?.openSetting?.('private'); }
+        const hab = t.closest('[data-succ-habsent]'); if (hab) { e.preventDefault(); const [cid, pid] = hab.dataset.succHabsent.split(':').map(Number); const c = board.cases.get(cid); if (c) absentDialog(c.D, pid); return; }
         const mo = t.closest('[data-succ-mopen]'); if (mo) { e.preventDefault(); const r = mailRows.find(x => x.id === Number(mo.dataset.succMopen)); if (r) mailDialog(r); return; }
         const md = t.closest('[data-succ-mdel]'); if (md) { e.preventDefault(); const id = Number(md.dataset.succMdel); return A().deleteWithUndo({action: 'delete_courrier', body: {id}, type: 'courrier', id, message: 'Courrier supprimé du registre', after: () => render()}); }
         if (!cur.data || !t.closest('[data-succ-case], dialog')) return;
@@ -789,6 +823,15 @@
         e.preventDefault(); ext.preuve.openLink(id, ps[0]);
     });
     document.addEventListener('keydown', e => { const node = e.target.closest?.('[data-succ-node]'); if (node && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); A().openPersonById(Number(node.dataset.succNode)); } });
+    document.addEventListener('change', async e => {
+        const t = e.target; if (!t.closest) return;
+        if (t.matches('[data-succ-cst]')) { // 🔎 / 🔇 : dans le dossier ouvert ou dans « Héritiers à contacter »
+            const [cid, pid] = t.dataset.succCst.split(':').map(Number);
+            const D = cur.data?.id === cid ? cur.data : board.cases.get(cid)?.D; if (!D || hidden()) return;
+            return setContact(D, pid, t.value);
+        }
+        if (t.matches('[data-succ-cfilt]')) { cur.cfilt = t.value; const tb = t.closest('.succ-box')?.querySelector('.succ-heirs'); if (tb) { tb.dataset.cfilt = t.value; tb.classList.toggle('is-cfilt', !!t.value); } return; }
+    });
     document.addEventListener('change', async e => {
         const t = e.target; if (!t.closest || !cur.data || !t.closest('[data-succ-case]')) return;
         const D = cur.data;

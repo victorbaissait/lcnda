@@ -20,13 +20,19 @@ declare(strict_types=1);
  *     seuls, « Pas la même » retenu), archive d'un dossier clos dans un fichier .lcnda-succ.zip, retrait, réimport.
  * Confidentialité : rien en mode consultation ; aucun export (GEDCOM, site, partage famille) ne lit ces tables.
  * Tables (migration 91) : succ_case_persons, succ_homonym_no ; colonnes succ_cases.progress, progress_json.
+ * Migration 92 : succ_case_persons.contact_state ('' | 'introuvable' | 'silence') et contact_state_at : l'héritier qu'on ne
+ * trouve pas ou qui ne répond pas (onglet 👥 Héritiers, « Héritiers à contacter », fiche ⋯ → « ⚖️ Dossiers… », badge).
+ * Réglage « private_heirs » : les fiches confidentielles comptent-elles comme héritiers (oui par défaut ; non = retirées du
+ * calcul, avec un avertissement dans 👥 Héritiers).
  */
 
 const SUCC_ROLES = ['deceased', 'heir', 'inter', 'witness', 'verify'];
 const SUCC_HOWS = ['open', 'calc', 'hand', 'filter', 'import', 'homonym', 'move'];
 const SUCC_ROLE_LABELS = ['deceased' => 'défunt', 'heir' => 'héritier', 'inter' => 'intermédiaire', 'witness' => 'témoin', 'verify' => 'à vérifier'];
 const SUCC_SETTINGS_DEFAULT = ['store' => '', 'apart_id' => '', 'outside' => 'grey', 'archive_addresses' => 'remove', 'refuse_done' => true,
-    'weights' => [10, 15, 20, 10, 15, 20, 10], 'move_shared' => 'copy', 'nodossier' => 'fold'];
+    'weights' => [10, 15, 20, 10, 15, 20, 10], 'move_shared' => 'copy', 'nodossier' => 'fold', 'private_heirs' => true];
+const SUCC_CONTACT_STATES = ['', 'introuvable', 'silence'];
+const SUCC_CONTACT_LABELS = ['' => 'rien de noté', 'introuvable' => 'introuvable', 'silence' => 'ne répond pas'];
 const SUCC_ARCHIVE_EXT = '.lcnda-succ.zip';
 
 function succ_dossiers_schema(PDO $pdo): void
@@ -53,10 +59,20 @@ function succ_dossiers_ready(PDO $pdo): bool
     try {
         $n = (int) $pdo->query("SELECT count(*) FROM sqlite_master WHERE type='table' AND name IN ('succ_case_persons','succ_homonym_no')")->fetchColumn();
         $c = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('succ_cases') WHERE name='progress_json'")->fetchColumn();
+        $cs = $n === 2 && (bool) $pdo->query("SELECT 1 FROM pragma_table_info('succ_case_persons') WHERE name='contact_state_at'")->fetchColumn();
     } catch (Throwable $_) { return false; }
-    return $ok[$k] = $n === 2 && $c;
+    return $ok[$k] = $n === 2 && $c && $cs;
 }
-function succ_dossiers_ensure(PDO $pdo): void { if (!succ_dossiers_ready($pdo)) { succ_dossiers_schema($pdo); } }
+function succ_dossiers_ensure(PDO $pdo): void { if (!succ_dossiers_ready($pdo)) { succ_dossiers_schema($pdo); succ_contact_schema($pdo); } }
+/** migration 92 : l'état de contact d'un héritier dans un dossier (introuvable, ne répond pas) et sa date */
+function succ_contact_schema(PDO $pdo): void
+{
+    $t = (bool) $pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='succ_case_persons'")->fetchColumn();
+    if (!$t) { succ_dossiers_schema($pdo); }
+    $has = static fn(string $c): bool => (bool) $pdo->query("SELECT 1 FROM pragma_table_info('succ_case_persons') WHERE name=" . $pdo->quote($c))->fetchColumn();
+    if (!$has('contact_state')) { $pdo->exec("ALTER TABLE succ_case_persons ADD COLUMN contact_state TEXT NOT NULL DEFAULT ''"); }
+    if (!$has('contact_state_at')) { $pdo->exec('ALTER TABLE succ_case_persons ADD COLUMN contact_state_at TEXT'); }
+}
 
 /* ═════════ Réglages du mode successoral (communs à toutes les généalogies) ═════════ */
 function succ_settings_path(): string { return SHARED_DATA_DIR . '/successoral.json'; }
@@ -73,6 +89,7 @@ function succ_settings_clean(array $d, ?array $base = null): array
     if (array_key_exists('outside', $d) && in_array($d['outside'], ['grey', 'hide'], true)) { $s['outside'] = (string) $d['outside']; }
     if (array_key_exists('archive_addresses', $d) && in_array($d['archive_addresses'], ['keep', 'remove'], true)) { $s['archive_addresses'] = (string) $d['archive_addresses']; }
     if (array_key_exists('refuse_done', $d)) { $s['refuse_done'] = (bool) $d['refuse_done']; }
+    if (array_key_exists('private_heirs', $d)) { $s['private_heirs'] = (bool) $d['private_heirs']; }
     if (array_key_exists('move_shared', $d) && in_array($d['move_shared'], ['copy', 'refuse'], true)) { $s['move_shared'] = (string) $d['move_shared']; }
     if (array_key_exists('nodossier', $d) && in_array($d['nodossier'], ['fold', 'hide'], true)) { $s['nodossier'] = (string) $d['nodossier']; }
     if (array_key_exists('weights', $d) && is_array($d['weights']) && count($d['weights']) === 7) {
@@ -223,6 +240,36 @@ function succ_cp_restore(PDO $pdo, int $caseId, int $pid, $prev): void
     $pdo->prepare('INSERT INTO succ_case_persons(case_id, person_id, role, how, deleted_at, removed_by) VALUES(?,?,?,?,?,?) ON CONFLICT(case_id, person_id) DO UPDATE SET role=excluded.role, how=excluded.how, deleted_at=excluded.deleted_at, removed_by=excluded.removed_by, updated_at=CURRENT_TIMESTAMP')
         ->execute([$caseId, $pid, $role, $how, $del, $by]);
 }
+/**
+ * 🔎 Introuvable / 🔇 ne répond pas : l'état de contact d'un héritier dans un dossier, avec sa date ; une ligne au journal.
+ * ↶ Annuler renvoie l'état d'avant avec sa date (« at »). Une fiche pas encore rattachée l'est (héritier, par le calcul).
+ */
+function succ_contact_set(PDO $pdo, array $d): array
+{
+    $c = succ_row($pdo, safe_int($d['case_id'] ?? 0)); $caseId = (int) $c['id'];
+    $pid = safe_int($d['person_id'] ?? 0); if (!succ_person_ok($pdo, $pid)) { throw new LcndaBadInput('Fiche introuvable.'); }
+    if ($pid === (int) $c['deceased_id']) { throw new LcndaBadInput('Le défunt n’est pas un héritier à contacter.'); }
+    $st = is_scalar($d['state'] ?? null) ? (string) $d['state'] : '';
+    if (!in_array($st, SUCC_CONTACT_STATES, true)) { throw new LcndaBadInput('Valeur inconnue.'); }
+    $at = is_scalar($d['at'] ?? null) ? (string) $d['at'] : '';
+    $at = $st === '' ? null : (preg_match('/^\d{4}-\d{2}-\d{2}( \d{2}:\d{2}(:\d{2})?)?$/', $at) ? $at : date('Y-m-d H:i:s'));
+    $old = succ_cp_row($pdo, $caseId, $pid);
+    $prev = ['state' => $old ? (string) ($old['contact_state'] ?? '') : '', 'at' => $old ? (string) ($old['contact_state_at'] ?? '') : ''];
+    if ($old) { $pdo->prepare('UPDATE succ_case_persons SET contact_state=?, contact_state_at=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$st, $at, (int) $old['id']]); }
+    else { $pdo->prepare("INSERT INTO succ_case_persons(case_id, person_id, role, how, contact_state, contact_state_at) VALUES(?,?,'heir','calc',?,?)")->execute([$caseId, $pid, $st, $at]); }
+    if ($prev['state'] !== $st) { succ_journal($pdo, $caseId, 'edit', 'Contact : ' . succ_person_name($pdo, $pid) . ' — ' . SUCC_CONTACT_LABELS[$st] . (!empty($d['undo']) ? ' (annulé)' : '')); }
+    return ['case_id' => $caseId, 'person_id' => $pid, 'state' => $st, 'at' => (string) $at, 'prev' => $prev];
+}
+/** les états de contact d'un dossier : {person_id: {state, at}} (seulement ceux qui ont un état) */
+function succ_contacts_of(PDO $pdo, int $caseId): array
+{
+    $out = [];
+    try {
+        $s = $pdo->prepare("SELECT person_id, contact_state, contact_state_at FROM succ_case_persons WHERE case_id=? AND contact_state<>''"); $s->execute([$caseId]);
+        foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $r) { $out[(string) $r['person_id']] = ['state' => (string) $r['contact_state'], 'at' => (string) $r['contact_state_at']]; }
+    } catch (Throwable $_) {}
+    return $out;
+}
 /** le calcul de la dévolution : héritiers et intermédiaires ; une fiche retirée à la main n'est jamais remise toute seule */
 function succ_sync_calc(PDO $pdo, int $caseId, array $heirs, array $inter): array
 {
@@ -270,20 +317,21 @@ function succ_case_people(PDO $pdo, int $caseId): array
 function succ_person_cases(PDO $pdo, int $pid): array
 {
     $out = [];
-    $s = $pdo->prepare("SELECT c.id, c.number, c.title, c.state, cp.role, cp.how, cp.deleted_at FROM succ_cases c LEFT JOIN succ_case_persons cp ON cp.case_id=c.id AND cp.person_id=? WHERE c.deleted_at IS NULL ORDER BY c.number");
+    $s = $pdo->prepare("SELECT c.id, c.number, c.title, c.state, c.deceased_id, cp.role, cp.how, cp.deleted_at, cp.contact_state, cp.contact_state_at FROM succ_cases c LEFT JOIN succ_case_persons cp ON cp.case_id=c.id AND cp.person_id=? WHERE c.deleted_at IS NULL ORDER BY c.number");
     $s->execute([$pid]);
     foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $r) {
         $on = $r['role'] !== null && $r['deleted_at'] === null;
-        $out[] = ['case_id' => (int) $r['id'], 'number' => (string) $r['number'], 'title' => (string) $r['title'], 'state' => (string) $r['state'], 'role' => $on ? (string) $r['role'] : '', 'how' => $on ? (string) $r['how'] : ''];
+        $out[] = ['case_id' => (int) $r['id'], 'number' => (string) $r['number'], 'title' => (string) $r['title'], 'state' => (string) $r['state'], 'role' => $on ? (string) $r['role'] : '', 'how' => $on ? (string) $r['how'] : '',
+            'contact' => (string) ($r['contact_state'] ?? ''), 'contact_at' => (string) ($r['contact_state_at'] ?? ''), 'deceased' => (int) $r['deceased_id'] === $pid];
     }
     return $out;
 }
-/** toutes les fiches rattachées : {person_id: [[case_id, role], …]} (badges, vue par dossier) */
+/** toutes les fiches rattachées : {person_id: [[case_id, role, état de contact], …]} (badges, vue par dossier) */
 function succ_membership(PDO $pdo): array
 {
     $out = [];
-    foreach ($pdo->query('SELECT cp.person_id, cp.case_id, cp.role FROM succ_case_persons cp JOIN succ_cases c ON c.id=cp.case_id WHERE cp.deleted_at IS NULL AND c.deleted_at IS NULL') as $r) {
-        $out[(string) $r['person_id']][] = [(int) $r['case_id'], (string) $r['role']];
+    foreach ($pdo->query('SELECT cp.person_id, cp.case_id, cp.role, cp.contact_state FROM succ_case_persons cp JOIN succ_cases c ON c.id=cp.case_id WHERE cp.deleted_at IS NULL AND c.deleted_at IS NULL') as $r) {
+        $out[(string) $r['person_id']][] = [(int) $r['case_id'], (string) $r['role'], (string) $r['contact_state']];
     }
     return $out;
 }
@@ -1125,6 +1173,7 @@ function succ_dossiers_post(PDO $pdo, string $op, array $d): ?array
             succ_journal($pdo, (int) $c['id'], 'edit', 'Fiche retirée du dossier : ' . succ_person_name($pdo, $pid));
             return ['case_id' => (int) $c['id'], 'person_id' => $pid, 'prev' => $r['prev']];
         })(),
+        'contact_state' => succ_contact_set($pdo, $d),
         'cp_restore' => (static function () use ($pdo, $d, $cid) { $c = succ_row($pdo, $cid()); succ_cp_restore($pdo, (int) $c['id'], safe_int($d['person_id'] ?? 0), $d['prev'] ?? null); return ['ok' => true]; })(),
         'person_roles' => (static function () use ($pdo, $d) {
             $pid = safe_int($d['person_id'] ?? 0); if (!succ_person_ok($pdo, $pid)) { throw new LcndaBadInput('Fiche introuvable.'); }

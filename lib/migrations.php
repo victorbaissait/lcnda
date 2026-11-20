@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 91;
+const SCHEMA_VERSION = 92;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -112,6 +112,7 @@ function migration_steps(): array
         89 => 'schema_v89',
         90 => 'schema_v90',
         91 => 'schema_v91',
+        92 => 'schema_v92',
     ];
 }
 
@@ -2601,4 +2602,13 @@ function schema_v91(PDO $pdo): void
 {
     if (!function_exists('succ_dossiers_schema')) { require_once __DIR__ . '/successoral_dossiers.php'; }
     succ_dossiers_schema($pdo);
+}
+
+/** 92 : ⚖️ Dossiers de succession — l'état de contact d'un héritier dans un dossier (« absent » au sens pratique, à ne pas
+ *  confondre avec la présomption d'absence) : succ_case_persons.contact_state ('' | 'introuvable' | 'silence') et
+ *  contact_state_at (date du dernier changement). */
+function schema_v92(PDO $pdo): void
+{
+    if (!function_exists('succ_contact_schema')) { require_once __DIR__ . '/successoral_dossiers.php'; }
+    succ_contact_schema($pdo);
 }

@@ -705,3 +705,22 @@ Le fichier n’a pas été reçu. ¦ Soubor nedorazil. ¦ Filen togs inte emot. 
 Le défunt reste dans son dossier. ¦ Zůstavitel zůstává ve svém spisu. ¦ Den avlidne stannar i sitt ärende. ¦ Afdøde bliver i sin sag.
 🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Osoby ¦ 🧑‍🤝‍🧑 Personer ¦ 🧑‍🤝‍🧑 Personer
 Dossiers de succession (usage successoral seulement) ¦ Dědické spisy (jen při použití dědického genealoga) ¦ Dödsboärenden (bara vid användning som arvsgenealog) ¦ Dødsbosager (kun ved brug som arvegenealog)
+# Zone « successoral » : 🔎 introuvable / 🔇 ne répond pas (état de contact d’un héritier, migration 92) ; 🔒 fiches confidentielles non comptées (réglage)
+Introuvable ¦ Nedohledatelný ¦ Går inte att hitta ¦ Kan ikke findes
+Ne répond pas ¦ Neodpovídá ¦ Svarar inte ¦ Svarer ikke
+introuvable ¦ nedohledatelný ¦ går inte att hitta ¦ kan ikke findes
+ne répond pas ¦ neodpovídá ¦ svarar inte ¦ svarer ikke
+rien de noté ¦ nic nezaznamenáno ¦ inget noterat ¦ intet noteret
+depuis le {d} ¦ od {d} ¦ sedan {d} ¦ siden {d}
+Introuvable ou silencieux ¦ Nedohledatelný nebo mlčí ¦ Går inte att hitta eller tyst ¦ Kan ikke findes eller tavs
+Introuvable depuis plus d’un an ¦ Nedohledatelný déle než rok ¦ Inte hittad på över ett år ¦ Ikke fundet i over et år
+{name} est introuvable depuis plus d’un an : la présomption d’absence (art. 112 et suivants) peut protéger sa part. ¦ {name}: nedohledatelný déle než rok. Domněnka nepřítomnosti (čl. 112 a násl.) může ochránit jeho podíl. ¦ {name} har inte gått att hitta på över ett år: en presumtion om frånvaro (art. 112 ff.) kan skydda andelen. ¦ {name} har ikke kunnet findes i over et år: en formodning om fravær (art. 112 ff.) kan beskytte andelen.
+{what} : les parts peuvent être fausses. ¦ {what}: podíly mohou být chybné. ¦ {what}: andelarna kan vara fel. ¦ {what}: andelene kan være forkerte.
+=fiche confidentielle non comptée ¦ důvěrná karta nezapočítána|důvěrné karty nezapočítány|důvěrných karet nezapočítáno ¦ konfidentiell post inte räknad|konfidentiella poster inte räknade ¦ fortrolig post ikke talt med|fortrolige poster ikke talt med
+Changer ce réglage ¦ Změnit toto nastavení ¦ Ändra den här inställningen ¦ Skift denne indstilling
+Tous les héritiers ¦ Všichni dědicové ¦ Alla arvingar ¦ Alle arvinger
+🔎 Introuvable ou 🔇 ne répond pas : pas compté comme contacté dans l’avancement, et le calcul ne change pas. À ne pas confondre avec le statut « Présumé absent » (art. 112). ¦ 🔎 Nedohledatelný nebo 🔇 neodpovídá: v postupu se nepočítá jako kontaktovaný a výpočet se nemění. Nezaměňuj se stavem „Domněle nepřítomný“ (čl. 112). ¦ 🔎 Går inte att hitta eller 🔇 svarar inte: räknas inte som kontaktad i framstegen, och beräkningen ändras inte. Inte att förväxla med statusen ”Förmodat frånvarande” (art. 112). ¦ 🔎 Kan ikke findes eller 🔇 svarer ikke: tæller ikke som kontaktet i fremskridtet, og beregningen ændres ikke. Må ikke forveksles med status »Formodet fraværende« (art. 112).
+Contact de {name} : {state} ¦ Kontakt – {name}: {state} ¦ Kontakt med {name}: {state} ¦ Kontakt med {name}: {state}
+Les fiches confidentielles comptent-elles comme héritiers ? ¦ Počítají se důvěrné karty jako dědicové? ¦ Räknas konfidentiella poster som arvingar? ¦ Tæller fortrolige poster som arvinger?
+Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Ne: důvěrná karta se z výpočtu vyřadí, jako by neexistovala; spis na to upozorní. ¦ Nej: en konfidentiell post tas bort ur beräkningen, som om den inte fanns; ärendet visar det. ¦ Nej: en fortrolig post tages ud af beregningen, som om den ikke fandtes; sagen viser det.
+Le défunt n’est pas un héritier à contacter. ¦ Zesnulý není dědic ke kontaktování. ¦ Den avlidne är ingen arvinge att kontakta. ¦ Afdøde er ikke en arving, der skal kontaktes.

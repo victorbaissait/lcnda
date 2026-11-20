@@ -1768,6 +1768,7 @@
  "{name} est inhumé": "{name} được an táng",
  "{name} est inhumé(e)": "{name} được an táng",
  "{name} est inhumée": "{name} được an táng",
+ "{name} est introuvable depuis plus d’un an : la présomption d’absence (art. 112 et suivants) peut protéger sa part.": "{name} không tìm thấy đã hơn một năm: suy đoán vắng mặt (điều 112 và tiếp theo) có thể bảo vệ phần của họ.",
  "{name} est invité.": "{name} được mời.",
  "{name} est invitée.": "{name} được mời.",
  "{name} est la fille de {parent}.": "{name} là con gái của {parent}.",
@@ -2055,6 +2056,7 @@
  "{what} : la liste est vide.": "{what}: danh sách trống.",
  "{what} : le texte continue de bloc en bloc.": "{what}: văn bản tiếp tục từ khối này sang khối khác.",
  "{what} : les fiches existent, mais sans le fichier. Avec une base .db seule, utilise plutôt la « Sauvegarde complète (.zip) » (Réglages → Export), qui contient les médias.": "{what}: các hồ sơ có tồn tại nhưng không có tệp. Với chỉ một tệp .db, hãy dùng “Sao lưu đầy đủ (.zip)” (Cài đặt → Xuất), có chứa tư liệu.",
+ "{what} : les parts peuvent être fausses.": "{what}: các phần có thể sai.",
  "{what} : manquante": "{what}: còn thiếu",
  "{what} : rangé de A à Z, avec les pages. S’il est long : Objet → Faire couler le texte.": "{what}: xếp từ A đến Z, kèm số trang. Nếu dài: Đối tượng → Cho văn bản chảy tiếp.",
  "{what} : retour au départ.": "{what}: quay về xuất phát.",
@@ -5282,6 +5284,7 @@
  "🔎 À regarder aussi": "🔎 Cũng nên xem",
  "🔎 Corrigé dans {n} passage (↶ pour revenir).": "🔎 Đã sửa ở {n} chỗ (↶ để quay lại).",
  "🔎 Corrigé dans {n} passages (↶ pour revenir).": "🔎 Đã sửa ở {n} chỗ (↶ để quay lại).",
+ "🔎 Introuvable ou 🔇 ne répond pas : pas compté comme contacté dans l’avancement, et le calcul ne change pas. À ne pas confondre avec le statut « Présumé absent » (art. 112).": "🔎 Không tìm thấy hoặc 🔇 không trả lời: không được tính là đã liên hệ trong tiến độ, và phép tính không đổi. Đừng nhầm với trạng thái “Bị suy đoán vắng mặt” (điều 112).",
  "🔎 Lire les variantes de l’ordinateur…": "🔎 Đọc các kiểu chữ của máy tính…",
  "🔎 Netteté douce": "🔎 Làm nét nhẹ",
  "🔎 Relecture (typographie, répétitions)…": "🔎 Đọc soát (quy tắc in ấn, từ lặp lại)…",
@@ -12464,6 +12467,7 @@
  "changer": "đổi",
  "Changer": "Đổi",
  "Changer aussi le titre dans les médias": "Đổi cả tiêu đề trong tư liệu",
+ "Changer ce réglage": "Đổi cài đặt này",
  "Changer d’application": "Chuyển ứng dụng",
  "Changer d’usage change <b>seulement les onglets et le premier écran</b>. Aucune fiche n’est supprimée : les personnes restent là, même quand l’onglet est caché. On peut en allumer plusieurs : leurs onglets s’additionnent.": "Đổi cách dùng chỉ thay đổi <b>các thẻ và màn hình đầu tiên</b>. Không hồ sơ nào bị xoá: mọi người vẫn ở đó, kể cả khi thẻ bị ẩn. Có thể bật nhiều cách dùng: các thẻ của chúng cộng lại.",
  "Changer dans l’onglet Personnes": "Đổi trong thẻ Người",
@@ -14510,6 +14514,7 @@
  "Contact": "Liên hệ",
  "Contact ajouté.": "Đã thêm liên hệ.",
  "Contact au journal": "Người liên hệ ở tòa báo",
+ "Contact de {name} : {state}": "Liên hệ với {name}: {state}",
  "Contact introuvable.": "Không tìm thấy liên hệ.",
  "Contact manquant.": "Thiếu liên hệ.",
  "Contact modifié.": "Đã sửa liên hệ.",
@@ -16611,6 +16616,7 @@
  "depuis la gauche": "từ bên trái",
  "Depuis la personne de départ (Sosa 1).": "Tính từ người xuất phát (Sosa 1).",
  "Depuis le": "Từ ngày",
+ "depuis le {d}": "từ {d}",
  "depuis le bas": "từ phía dưới",
  "Depuis le berceau des plus anciens (10 générations)": "Từ cái nôi của những người xưa nhất (10 thế hệ)",
  "depuis le couple {a} et {b}": "từ cặp vợ chồng {a} và {b}",
@@ -20051,6 +20057,9 @@
  },
  "fiche confidentielle": {
   "other": "hồ sơ bảo mật"
+ },
+ "fiche confidentielle non comptée": {
+  "other": "hồ sơ bảo mật không được tính"
  },
  "fiche créée": {
   "other": "hồ sơ được tạo"
@@ -25396,10 +25405,11 @@
  "Intitulé obligatoire.": "Bắt buộc phải có tiêu đề.",
  "Introduction": "Mở đầu",
  "Introduction ou aides à la navigation d’une page ou d’une section": "Phần giới thiệu hoặc trợ giúp điều hướng của một trang hoặc một phần",
- "introuvable": {
-  "other": "không tìm thấy"
- },
+ "introuvable": "không tìm thấy",
+ "Introuvable": "Không tìm thấy",
  "Introuvable : la liste a changé, elle se recharge.": "Không tìm thấy: danh sách đã thay đổi, đang tải lại.",
+ "Introuvable depuis plus d’un an": "Không tìm thấy hơn một năm",
+ "Introuvable ou silencieux": "Không tìm thấy hoặc im lặng",
  "Inventaire après décès": "Kiểm kê tài sản sau khi mất",
  "Inventaire après décès relié": "Kiểm kê tài sản sau khi mất được liên kết",
  "Inventaire des papiers de famille": "Bản kiểm kê giấy tờ gia đình",
@@ -27439,6 +27449,7 @@
  "Le défunt au centre, chaque héritier avec sa part": "Người đã mất ở giữa, mỗi người thừa kế với phần của mình",
  "Le défunt et ses héritiers sont des fiches de ta famille. Simple, mais tout se mélange.": "Người mất và người thừa kế là những người trong gia đình bạn. Đơn giản nhưng mọi thứ lẫn vào nhau.",
  "Le défunt n’est pas dans la base.": "Người đã mất không có trong cơ sở dữ liệu.",
+ "Le défunt n’est pas un héritier à contacter.": "Người đã mất không phải là người thừa kế cần liên hệ.",
  "Le défunt n’est plus dans la base.": "Người đã mất không còn trong cơ sở dữ liệu.",
  "Le défunt reste dans son dossier.": "Người mất vẫn ở trong hồ sơ của mình.",
  "Le dégradé": "Chuyển màu",
@@ -28779,6 +28790,7 @@
  "Les fiches « cths.fr/an/savant.php?id=… » existent ; la recherche passe par Google limité à l’annuaire.": "Các hồ sơ “cths.fr/an/savant.php?id=…” có tồn tại; tìm kiếm qua Google giới hạn trong danh bạ đó.",
  "Les fiches complètes": "Hồ sơ đầy đủ",
  "Les fiches complètes (dates, lieux, métier)": "Hồ sơ đầy đủ (ngày, địa điểm, nghề)",
+ "Les fiches confidentielles comptent-elles comme héritiers ?": "Hồ sơ bảo mật có được tính là người thừa kế không?",
  "les fiches d’une étiquette": "các hồ sơ có một nhãn",
  "Les fiches de l’app restent sur cet ordinateur : le QR code mène aux fiches en ligne de la personne (Geneanet, Filae…, notées dans sa fiche) ou à FamilySearch ; sinon, il contient son identité en texte (lisible par n’importe quel téléphone).": "Hồ sơ của ứng dụng nằm trên máy tính này: mã QR dẫn đến các hồ sơ trực tuyến của người đó (Geneanet, Filae…, đã ghi trong hồ sơ) hoặc FamilySearch; nếu không, nó chứa thông tin nhận dạng dạng văn bản (điện thoại nào cũng đọc được).",
  "Les fiches des types que tu as créés toi-même (« ＋ Créer mon propre type… »).": "Hồ sơ thuộc các loại do chính bạn tạo (“＋ Tạo loại của riêng tôi…”).",
@@ -32522,6 +32534,8 @@
  "Ne plus tenir à jour (garder les valeurs)": "Ngừng cập nhật (giữ các giá trị)",
  "ne ramasse pas les cœurs": "đừng ăn các lá cơ",
  "Ne range jamais le fichier de la base lui-même dans iCloud ou Dropbox pour l’ouvrir des deux côtés : l’app le refuse (verrou), car il pourrait s’abîmer.": "Đừng bao giờ đặt chính tệp cơ sở dữ liệu vào iCloud hay Dropbox để mở ở cả hai bên: ứng dụng sẽ từ chối (khoá), vì nó có thể bị hỏng.",
+ "ne répond pas": "không trả lời",
+ "Ne répond pas": "Không trả lời",
  "ne répond plus": {
   "other": "không còn phản hồi"
  },
@@ -33055,6 +33069,7 @@
  "Noms sous les ronds": "Tên dưới vòng tròn",
  "non": "không",
  "Non": "Không",
+ "Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale.": "Không: hồ sơ bảo mật bị loại khỏi phép tính, như thể không tồn tại; hồ sơ vụ việc sẽ báo điều đó.",
  "Non (avec 💾 ou ⌘S)": "Không (bằng 💾 hoặc ⌘S)",
  "Non (ne sait pas signer)": "Không (không biết ký tên)",
  "Non ajoutés : {list} (téléchargement impossible ?).": "Chưa thêm: {list} (không tải về được?).",
@@ -39729,6 +39744,7 @@
  "Rien de la fiche n’est remplacé : une naissance, un baptême, un décès ou une inhumation déjà sur la fiche est gardé tel quel, et « ↶ Annuler » retire tout ce que l’import a ajouté.": "Không có gì trên hồ sơ bị thay thế: lần sinh, rửa tội, mất hoặc an táng đã có trên hồ sơ được giữ nguyên, và “↶ Hoàn tác” gỡ mọi thứ mà lần nhập đã thêm.",
  "Rien de notable à signaler cette année dans la famille, ce qui est aussi une bonne nouvelle.": "Năm nay gia đình không có gì đáng kể, đó cũng là một tin vui.",
  "Rien de notable pour l’instant.": "Hiện chưa có gì đáng kể.",
+ "rien de noté": "chưa ghi gì",
  "Rien de noté": "Chưa ghi gì",
  "Rien de noté : « … » pour l’écrire.": "Chưa ghi gì: “…” để viết.",
  "Rien de noté : ajoute l’adresse, les horaires et le site.": "Chưa ghi gì: hãy thêm địa chỉ, giờ mở cửa và trang web.",
@@ -42958,6 +42974,7 @@
  "Tous les foyers recensés ici": "Tất cả các hộ được điều tra ở đây",
  "Tous les groupes": "Tất cả các nhóm",
  "tous les héritiers": "tất cả người thừa kế",
+ "Tous les héritiers": "Tất cả người thừa kế",
  "Tous les indices s’accordent (vers {y}).": "Mọi manh mối đều khớp nhau (khoảng năm {y}).",
  "Tous les liens": "Mọi liên kết",
  "Tous les liens de ma base": "Mọi liên kết trong cơ sở dữ liệu của tôi",

@@ -382,7 +382,23 @@
     }
 
     /* ═════ Le calcul complet : principal, hypothèses, branches à chercher, avertissements ═════ */
+    /**
+     * Les fiches confidentielles (is_private) qu'on ne compte pas (réglage « Les fiches confidentielles comptent-elles comme
+     * héritiers ? » = Non) : retirées du graphe comme si elles n'existaient pas (fiche, liens de filiation, unions). Le défunt
+     * n'est jamais retiré. → {graph, excluded: [id]}
+     */
+    function withoutPrivate(graph, keepId) {
+        const keep = Number(keepId), out = new Set();
+        for (const [k, p] of Object.entries(graph?.persons || {})) if (p && p.private && Number(k) !== keep) out.add(Number(k));
+        if (!out.size) return {graph, excluded: []};
+        const persons = {};
+        for (const [k, p] of Object.entries(graph.persons)) if (!out.has(Number(k))) persons[k] = p;
+        return {graph: {...graph, persons, parents: (graph.parents || []).filter(l => !out.has(Number(l.child)) && !out.has(Number(l.parent))),
+            unions: (graph.unions || []).filter(u => !out.has(Number(u.a)) && !out.has(Number(u.b)))}, excluded: [...out].sort((a, b) => a - b)};
+    }
     function compute(graph, opts = {}) {
+        let privateExcluded = [];
+        if (opts.excludePrivate) ({graph, excluded: privateExcluded} = withoutPrivate(graph, opts.deceasedId));
         const C = context(graph, opts);
         const {G, t, dead, D} = C;
         if (!D) return {error: t('Le défunt n’est pas dans la base.')};
@@ -426,7 +442,7 @@
             rows, total: str(main.total), totalOk: str(main.total) === '1' || main.escheat, escheat: main.escheat, branches: main.branches,
             hypotheses: hyps.map(h => ({label: h.label, flips: h.flips, spouseNot: h.spouseNot, shares: h.res.shares.map(s => ({id: s.id, name: nm(s.id), share: str(s.share), pct: pct(s.share)})), total: str(h.res.total), order: h.res.order})),
             search: toSearch(C, main, base, opts), warnings: warningsOf(C, opts), orders: ordersOf(C, main, base), flags: [...C.flags], timings: Object.fromEntries(rows.map(r => [r.id, base(r.id)])),
-            _main: main, _ctx: C};
+            privateExcluded, _main: main, _ctx: C};
     }
     const name = p => (p ? `${String(p.first || '').trim()} ${String(p.last || '').trim().toLocaleUpperCase('fr')}`.trim() || '?' : '?');
     function rowsOf(C, res, base) {
@@ -690,6 +706,8 @@
      * L'avancement d'un dossier : 7 étapes pondérées, chacune faite en partie (0 à 1). Un dossier clos vaut 100 %.
      * D : le dossier (state, deceased_id, hypothesis_note, addresses, courriers) ; R : compute() ; P : pieces().
      * opts.weights : les 7 poids (10, 15, 20, 10, 15, 20, 10) ; opts.refuseDone : un héritier qui refuse de signer compte comme fait.
+     * D.contact : {id: {state, at}} ; un héritier « 🔎 introuvable » ou « 🔇 ne répond pas » ne compte pas comme contacté : ni
+     * fait à l'étape 5 (même s'il a refusé ou signé un courrier), ni « adresse trouvée » à l'étape 4 s'il est introuvable.
      */
     function progress(D, R, P, opts = {}) {
         const weights = Array.isArray(opts.weights) && opts.weights.length === 7 ? opts.weights : WEIGHTS;
@@ -700,7 +718,8 @@
         const known = heirs.filter(r => !r.unknown);
         const living = known.filter(r => ['surv', 'abs'].includes(r.timing));
         const addr = D?.addresses || {};
-        const withAddr = living.filter(r => addr[r.id] || addr[String(r.id)]);
+        const cst = id => contactOf(D, id).state;
+        const withAddr = living.filter(r => (addr[r.id] || addr[String(r.id)]) && cst(r.id) !== 'introuvable');
         const cs = D?.courriers || [];
         const signed = living.filter(r => cs.some(c => Number(c.person_id) === r.id && c.kind !== 'acte' && (c.signe_le || (refuseDone && c.reponse === 'no'))));
         const deathHave = P ? (P.list || []).some(i => i.key === 'D:' + D.deceased_id && i.state === 'have') : false;
@@ -720,6 +739,17 @@
             {frac: ['remis', 'clos', 'archive'].includes(D?.state) ? 1 : 0, done: ['remis', 'clos', 'archive'].includes(D?.state) ? 1 : 0, total: 1},
         ].map((s, i) => ({key: STEP_KEYS[i], w: Number(weights[i]) || 0, ...s, frac: closed ? 1 : Math.round(Math.max(0, Math.min(1, s.frac)) * 1000) / 1000}));
         return {pct: closed ? 100 : progressPct(steps.map(s => s.frac), weights), steps, pieces: {have: pc.have || 0, total: pc.total || 0}, heirs: {found: known.length, unknown: heirs.length - known.length}};
+    }
+    /* ═════ 🔎 Héritier introuvable, 🔇 ne répond pas : l'« absent » au sens pratique (pas la présomption d'absence, art. 112) ═════ */
+    const CONTACT_STATES = ['', 'introuvable', 'silence'];
+    const CONTACT_LOST = new Set(['introuvable', 'silence']);
+    /** l'état de contact d'un héritier dans un dossier : {state, at} (D.contact, lu dans succ_case_persons) */
+    const contactOf = (D, id) => { const c = D?.contact?.[id] || D?.contact?.[String(id)] || null; return {state: CONTACT_STATES.includes(c?.state) ? c.state : '', at: String(c?.at || '')}; };
+    /** introuvable depuis plus d'un an (365 jours) : suggérer la présomption d'absence (❔ Absent ou disparu) */
+    function contactStale(c, today = new Date().toISOString().slice(0, 10)) {
+        if (c?.state !== 'introuvable') return false;
+        const a = dayNum(String(c.at || '').slice(0, 10)), b = dayNum(String(today).slice(0, 10));
+        return a != null && b != null && b - a > 365;
     }
     /** ce que le calcul parcourt : les héritiers (avec une part) et les intermédiaires (souches, écartés, ancêtres jusqu'à l'ancêtre commun) */
     function members(R) {
@@ -752,5 +782,5 @@
         list.splice(j, 0, list.splice(i, 1)[0]); return list;
     }
 
-    return {STEP_KEYS, STEP_LABELS, WEIGHTS, progress, progressPct, members, orderCases, moveCase, LAW, LAW_ARTICLES, lawUrl, lawVerified, lawCited, lawLinks, F, add, sub, mul, div, str, parse, pct, sumAll, cmpDate, kinLabel, DEGREES, compute, relation, pieces, checklist, snapshot, diffLines, csvCell, journalCsv, fees, ABSENCE, ABROAD, abroadLetter, ABROAD_LETTERS, name, KIN};
+    return {CONTACT_STATES, contactOf, contactStale, withoutPrivate, STEP_KEYS, STEP_LABELS, WEIGHTS, progress, progressPct, members, orderCases, moveCase, LAW, LAW_ARTICLES, lawUrl, lawVerified, lawCited, lawLinks, F, add, sub, mul, div, str, parse, pct, sumAll, cmpDate, kinLabel, DEGREES, compute, relation, pieces, checklist, snapshot, diffLines, csvCell, journalCsv, fees, ABSENCE, ABROAD, abroadLetter, ABROAD_LETTERS, name, KIN};
 });

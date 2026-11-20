@@ -705,3 +705,22 @@ Le fichier n’a pas été reçu. ¦ Dosya alınamadı.
 Le défunt reste dans son dossier. ¦ Ölen kişi kendi dosyasında kalır.
 🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Kişiler
 Dossiers de succession (usage successoral seulement) ¦ Miras dosyaları (yalnızca miras kullanımında)
+# Zone « successoral » : 🔎 introuvable / 🔇 ne répond pas (état de contact d’un héritier, migration 92) ; 🔒 fiches confidentielles non comptées (réglage)
+Introuvable ¦ Bulunamıyor
+Ne répond pas ¦ Yanıt vermiyor
+introuvable ¦ bulunamıyor
+ne répond pas ¦ yanıt vermiyor
+rien de noté ¦ not yok
+depuis le {d} ¦ {d} tarihinden beri
+Introuvable ou silencieux ¦ Bulunamıyor veya sessiz
+Introuvable depuis plus d’un an ¦ Bir yıldan uzun süredir bulunamıyor
+{name} est introuvable depuis plus d’un an : la présomption d’absence (art. 112 et suivants) peut protéger sa part. ¦ {name} bir yıldan uzun süredir bulunamıyor: gaiplik karinesi (md. 112 vd.) payını koruyabilir.
+{what} : les parts peuvent être fausses. ¦ {what}: paylar yanlış olabilir.
+=fiche confidentielle non comptée ¦ sayılmayan gizli kart|sayılmayan gizli kart
+Changer ce réglage ¦ Bu ayarı değiştir
+Tous les héritiers ¦ Tüm mirasçılar
+🔎 Introuvable ou 🔇 ne répond pas : pas compté comme contacté dans l’avancement, et le calcul ne change pas. À ne pas confondre avec le statut « Présumé absent » (art. 112). ¦ 🔎 Bulunamıyor veya 🔇 yanıt vermiyor: ilerlemede iletişime geçilmiş sayılmaz ve hesap değişmez. “Gaip sayılan” durumuyla karıştırma (md. 112).
+Contact de {name} : {state} ¦ {name} ile iletişim: {state}
+Les fiches confidentielles comptent-elles comme héritiers ? ¦ Gizli kartlar mirasçı sayılır mı?
+Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Hayır: gizli kart, hiç yokmuş gibi hesaptan çıkarılır; dosya bunu belirtir.
+Le défunt n’est pas un héritier à contacter. ¦ Ölen kişi iletişime geçilecek bir mirasçı değildir.

@@ -13,6 +13,8 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *     dossiers (journal des deux), vue d'ensemble lue dans chaque généalogie, déplacement (copie, refus, ↶ Annuler), archive en
  *     fichier avec et sans adresses, retrait, réimport, reprise d'une fiche depuis Ma généalogie, généalogie à part,
  *     mode consultation fermé, rien dans l'export GEDCOM ;
+ *  2b. migration 92 : 🔎 introuvable / 🔇 ne répond pas par héritier et par dossier (date, journal, ↶ Annuler, badge, fenêtre
+ *     « ⚖️ Dossiers… », jamais exporté, fermé en consultation) ; réglage « fiches confidentielles comptées comme héritiers » ;
  *  3. le navigateur (Playwright) à 1440 px, 390 px et en sombre : bouton ⚖️, menu, bandeau ✕, Personnes filtré, arbre grisé,
  *     onglet 🧑‍🤝‍🧑 Personnes, ⋯ → « ⚖️ Dossiers… », badge, tableau de bord et « Ne montrer que ceux-ci », premier « ＋ Ouvrir un
  *     dossier », Réglages, widget (3 tailles), vue par dossier et ordre à la main avec ↶ Annuler, noms piégés jamais exécutés.
@@ -117,7 +119,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
             assert.match(php("echo $pdo->query(\"SELECT count(*) FROM sqlite_master WHERE type='table' AND name IN ('succ_case_persons','succ_homonym_no')\")->fetchColumn();").stdout, /^2$/);
             assert.match(php("echo $pdo->query(\"SELECT count(*) FROM pragma_table_info('succ_cases') WHERE name IN ('progress','progress_json')\")->fetchColumn();").stdout, /^2$/);
             const s = await get('settings');
-            assert.deepEqual(s.settings, { store: '', apart_id: '', outside: 'grey', archive_addresses: 'remove', refuse_done: true, weights: [10, 15, 20, 10, 15, 20, 10], move_shared: 'copy', nodossier: 'fold' });
+            assert.deepEqual(s.settings, { store: '', apart_id: '', outside: 'grey', archive_addresses: 'remove', refuse_done: true, weights: [10, 15, 20, 10, 15, 20, 10], move_shared: 'copy', nodossier: 'fold', private_heirs: true });
             const r = await w({ op: 'settings_save', settings: { outside: 'hide', weights: [10, 10, 10, 10, 10, 10, 40], nodossier: 'bof' } });
             assert.equal(r.settings.outside, 'hide'); assert.equal(r.settings.nodossier, 'fold', 'valeur inconnue ignorée'); assert.equal(r.prev.outside, 'grey');
             await w({ op: 'settings_save', settings: { outside: r.prev.outside, weights: r.prev.weights } });
@@ -235,6 +237,48 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
             assert.equal(a.progress, pr.pct); assert.equal(a.steps.length, 7); assert.equal(a.notary, 'Bertrand ROUSSILHE'); assert.equal(a.deceased, 'Marcel MAZAUD');
             assert.doesNotMatch(JSON.stringify(idx), /place de l’Église|suzanne@exemple|Suzanne|Claire/);
         });
+        await t('migration 92 : 🔎 introuvable / 🔇 ne répond pas par héritier et par dossier — date, journal, ↶ Annuler, badge, « ⚖️ Dossiers… », valeurs refusées', async () => {
+            const st = await api('schema_status'); assert.ok(st.version >= 92, String(st.version));
+            assert.match(php("echo $pdo->query(\"SELECT count(*) FROM pragma_table_info('succ_case_persons') WHERE name IN ('contact_state','contact_state_at')\")->fetchColumn();").stdout, /^2$/);
+            const r = await w({ op: 'contact_state', case_id: A, person_id: 22, state: 'silence' });
+            assert.deepEqual(r.prev, { state: '', at: '' }); assert.match(r.at, /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/);
+            let D = await get('get', { id: A });
+            assert.equal(D.contact[22].state, 'silence'); assert.equal(D.contact[22].at, r.at);
+            assert.match(D.journal[0].text, /^Contact : Suzanne MAZAUD — ne répond pas$/);
+            assert.deepEqual((await get('membership')).members[22].find(m => m[0] === A), [A, 'heir', 'silence']);
+            assert.equal((await get('person_cases', { person_id: 22 })).items.find(x => x.case_id === A).contact, 'silence');
+            assert.equal((await get('person_cases', { person_id: 22 })).items.find(x => x.case_id !== A).contact, '', 'par dossier : pas dans l’autre');
+            // l'avancement : un héritier silencieux ne compte pas comme contacté
+            const R = compute(D), P = piecesOf(D, R);
+            assert.ok(S.progress({ ...D, courriers: [{ person_id: 22, kind: 'contrat', signe_le: '2026-05-01' }] }, R, P).steps[4].done === S.progress({ ...D, contact: {}, courriers: [{ person_id: 22, kind: 'contrat', signe_le: '2026-05-01' }] }, R, P).steps[4].done);
+            // ↶ Annuler : l'état d'avant, avec sa date
+            const u = await w({ op: 'contact_state', case_id: A, person_id: 22, state: 'introuvable', at: '2025-06-01 09:00:00' });
+            assert.equal((await get('get', { id: A })).contact[22].at, '2025-06-01 09:00:00');
+            await w({ op: 'contact_state', case_id: A, person_id: 22, state: u.prev.state, at: u.prev.at, undo: 1 });
+            D = await get('get', { id: A }); assert.equal(D.contact[22].state, 'silence'); assert.equal(D.contact[22].at, r.at);
+            assert.match(D.journal[0].text, /ne répond pas \(annulé\)$/);
+            await w({ op: 'contact_state', case_id: A, person_id: 22, state: '' });
+            assert.equal((await get('get', { id: A })).contact[22], undefined);
+            assert.equal((await post({ op: 'contact_state', case_id: A, person_id: 22, state: 'absent' })).status, 422, 'pas un statut juridique');
+            assert.equal((await post({ op: 'contact_state', case_id: A, person_id: 10, state: 'silence' })).status, 422, 'le défunt');
+            // une fiche pas encore rattachée : rattachée (héritier, par le calcul)
+            const x = await w({ op: 'contact_state', case_id: B, person_id: 80, state: 'introuvable' });
+            assert.equal((await get('case_people', { case_id: B })).items.find(i => i.person_id === 80).role, 'heir');
+            await w({ op: 'cp_restore', case_id: B, person_id: 80, prev: null }); assert.equal(x.prev.state, '');
+        });
+        await t('réglage « Les fiches confidentielles comptent-elles comme héritiers ? » : oui par défaut ; non → retirées du calcul (Emma), le défunt jamais', async () => {
+            php('$pdo->exec("UPDATE persons SET is_private=1 WHERE id IN (41,10)");');
+            try {
+                let D = await get('get', { id: A }); assert.equal(D.count_private, true); assert.equal(D.graph.persons[41].private, true);
+                const yes = S.compute(D.graph, { deceasedId: 10, deathDate: D.death_iso, excludePrivate: D.count_private === false });
+                assert.ok(yes.rows.some(r => r.id === 41 && r.share !== '0')); assert.deepEqual(yes.privateExcluded, []);
+                const s1 = await w({ op: 'settings_save', settings: { private_heirs: '0' } }); assert.equal(s1.settings.private_heirs, false); assert.equal(s1.prev.private_heirs, true);
+                D = await get('get', { id: A }); assert.equal(D.count_private, false);
+                const no = S.compute(D.graph, { deceasedId: 10, deathDate: D.death_iso, excludePrivate: D.count_private === false });
+                assert.ok(!no.error, 'le défunt confidentiel reste le défunt'); assert.deepEqual(no.privateExcluded, [41]);
+                assert.equal(no.rows.find(r => r.id === 40).share, '1/6', 'Lucas seul pour la souche d’Henri'); assert.equal(no.total, '1');
+            } finally { await w({ op: 'settings_save', settings: { private_heirs: true } }); php('$pdo->exec("UPDATE persons SET is_private=0 WHERE id IN (41,10)");'); }
+        });
         let other = '';
         await t('déplacer un dossier dans une autre généalogie : copie (fiche partagée), sauvegarde des deux, journal ; refus réglable ; ↶ Annuler', async () => {
             const g = await post({ name: '⚖️ Dossiers de succession' }, 'genealogy_create'); assert.equal(g.status, 200, JSON.stringify(g.body)); other = g.body.id;
@@ -341,10 +385,11 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         });
         await t('confidentialité : rien en mode consultation ; rien dans l’export GEDCOM ; filtre ignoré en consultation', async () => {
             const g = await (await fetch(`${base}api.php?action=export_gedcom`, { headers: { Cookie: cookie } })).text();
-            assert.match(g, /MAZAUD/); assert.doesNotMatch(g, /2026-014|à vérifier|succ_|héritier|intermédiaire/);
+            assert.match(g, /MAZAUD/); assert.doesNotMatch(g, /2026-014|à vérifier|succ_|héritier|intermédiaire|introuvable|ne répond pas|contact_state/);
             const act = async (action, body) => (await fetch(`${base}api.php?action=${action}`, { method: 'POST', headers: { Cookie: cookie, 'Content-Type': 'application/json', 'X-CSRF-Token': csrf }, body: JSON.stringify({ ...body, csrf }) })).status;
             assert.equal(await act('kiosk_enter', { password: 'secret1' }), 200);
             try {
+                { const k = await post({ op: 'contact_state', case_id: A, person_id: 22, state: 'silence' }); assert.ok([403, 423].includes(k.status), 'consultation : rien ne s’écrit (' + k.status + ')'); }
                 for (const op of ['index', 'membership', 'by_case', 'case_people']) { const r = await fetch(`${base}api.php?action=successoral&op=${op}&case_id=${A}`, { headers: { Cookie: cookie } }); assert.notEqual(r.status, 200, op); assert.doesNotMatch(await r.text(), /Suzanne|2026-014/); }
                 const p = await api('people', { limit: 250, succ_cases: String(A) }); assert.ok(p.people.some(x => Number(x.id) === 80), 'filtre ignoré en consultation');
             } finally { assert.equal(await act('kiosk_exit', { password: 'secret1' }), 200); }
@@ -553,6 +598,105 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
                 assert.equal(await pg.evaluate(() => window.LCNDA_EXT.peopleList.active()), false, 'mode consultation : la vue actuelle seulement');
                 assert.deepEqual(errs, []); await ctx.close();
             });
+            /* ═════ 🔎 introuvable / 🔇 ne répond pas ; 🔒 fiches confidentielles non comptées (captures abs-*, conf-*) ═════ */
+            const shotAs = async (pg, name, full = false) => pg.screenshot({ path: path.join(UX, `${name}.png`), fullPage: full });
+            const shotEl = async (pg, sel, name) => { const l = pg.locator(sel).first(); await l.scrollIntoViewIfNeeded(); await pg.waitForTimeout(200); return l.screenshot({ path: path.join(UX, `${name}.png`) }); };
+            const shotView = async (pg, sel, name) => { await pg.evaluate(q => { const el = document.querySelector(q); el?.scrollIntoView({block: 'center'}); }, sel); await pg.waitForTimeout(300); return pg.screenshot({ path: path.join(UX, `${name}.png`) }); };
+            const toastHas = (pg, re) => pg.waitForFunction(src => new RegExp(src).test(document.querySelector('.toast-region')?.textContent || ''), re.source, { timeout: 10000 });
+            const openHeirs = async (pg, id = A) => { await pg.evaluate(cid => window.LCNDA_EXT.successoral.openCase(cid, 'heirs'), id); await pg.waitForSelector('[data-succ-tab="heirs"].is-active'); await pg.waitForSelector('.succ-heirs tbody tr'); };
+            const NAME40 = php("echo $pdo->query('SELECT first_name FROM persons WHERE id=40')->fetchColumn();").stdout;
+            php(`$pdo->exec("UPDATE persons SET first_name='<img src=x onerror=window.__xss=1>' WHERE id=40");`); // un nom piégé parmi les héritiers
+            await w({ op: 'contact_state', case_id: A, person_id: 40, state: 'introuvable', at: '2025-06-01 09:00:00' }); // introuvable depuis plus d'un an
+            await w({ op: 'contact_state', case_id: A, person_id: 22, state: 'silence' });
+            try {
+                await t('🔎 / 🔇 navigateur 1440 : onglet 👥 Héritiers (menu, badge, filtre, ↶ Annuler, suggestion ❔ après 1 an avec lien Légifrance), Héritiers à contacter, badge de la fiche, « ⚖️ Dossiers… »', async () => {
+                    const { ctx, pg, errs } = await open(1440, 900, false);
+                    await openHeirs(pg);
+                    const row = id => pg.locator(`.succ-heirs tr[data-succ-pid="${id}"]`);
+                    assert.match(await row(40).textContent(), /🔎 introuvable/); assert.match(await row(22).textContent(), /🔇 ne répond pas/);
+                    assert.equal(await row(40).locator('[data-succ-cst]').inputValue(), 'introuvable');
+                    const stale = pg.locator('.succ-cstale'); assert.equal(await stale.count(), 1);
+                    assert.match(await stale.textContent(), /introuvable depuis plus d’un an.*présomption d’absence/);
+                    assert.match(await stale.locator('a.succ-law').first().getAttribute('href'), /^https:\/\/www\.legifrance\.gouv\.fr\//);
+                    assert.match(await pg.textContent('[data-succ-tabbody]'), /pas compté comme contacté/);
+                    await shotEl(pg, '.succ-box:has(.succ-heirs)', 'abs-heritiers-1440');
+                    // le filtre
+                    await pg.selectOption('[data-succ-cfilt]', 'silence');
+                    assert.equal(await pg.locator('.succ-heirs tbody tr:visible').count(), 1);
+                    await pg.selectOption('[data-succ-cfilt]', '');
+                    // changer l'état de Claire, puis ↶ Annuler
+                    await row(30).locator('[data-succ-cst]').selectOption('silence');
+                    await toastHas(pg, /Contact de Claire MAZAUD : ne répond pas/);
+                    assert.equal((await get('get', { id: A })).contact[30].state, 'silence');
+                    assert.match((await get('get', { id: A })).journal[0].text, /Contact : Claire MAZAUD — ne répond pas/);
+                    await pg.click('.toast-region button:has-text("Annuler")'); await pg.waitForTimeout(600);
+                    assert.equal((await get('get', { id: A })).contact[30], undefined);
+                    // ❔ Absent ou disparu : la fenêtre qui explique la présomption d'absence (sans rien changer)
+                    await stale.locator('[data-succ-absent]').click(); await pg.waitForSelector('dialog[open] .succ-absence');
+                    assert.match(await pg.textContent('dialog[open]'), /Présomption d’absence/); await pg.keyboard.press('Escape');
+                    // ⚖️ Successions → Héritiers à contacter : badge, menu, filtre
+                    await pg.evaluate(() => window.LCNDA_EXT.successoral.openCase(0)); await pg.waitForSelector('[data-succ-view="heirs"]');
+                    await pg.click('[data-succ-view="heirs"]'); await pg.waitForSelector(`[data-succ-hrow="${A}:40"]`);
+                    assert.match(await pg.textContent(`[data-succ-hrow="${A}:40"]`), /🔎 introuvable/);
+                    assert.equal(await pg.locator(`[data-succ-hrow="${A}:40"] [data-succ-habsent]`).count(), 1, 'suggestion ❔ aussi ici');
+                    await shotEl(pg, '[data-succ-body]', 'abs-a-contacter-1440');
+                    // la fiche : badge et ⋯ → « ⚖️ Dossiers… »
+                    await pg.evaluate(() => window.LCNDA_APP.openPersonById(40)); await pg.waitForSelector('[data-succ-pbadge]');
+                    assert.match(await pg.textContent('[data-succ-pbadge]'), /⚖️ 2026-014 · 🔎 introuvable/);
+                    await shotAs(pg, 'abs-fiche-badge-1440');
+                    await pg.evaluate(() => window.LCNDA_EXT.personMoreItems.map(f => f({person: {id: 40, first_name: '<img src=x onerror=window.__xss=1>', last_name: 'MAZAUD'}, events: []})).find(x => x?.label === 'Dossiers…').run());
+                    await pg.waitForSelector(`dialog[open] [data-succ-pc-cst="${A}"]`);
+                    assert.equal(await pg.inputValue(`dialog[open] [data-succ-pc-cst="${A}"]`), 'introuvable');
+                    await shotAs(pg, 'abs-fiche-dossiers-1440');
+                    await pg.selectOption(`dialog[open] [data-succ-pc-cst="${A}"]`, ''); await pg.click('dialog[open] [type=submit]');
+                    await toastHas(pg, /: rien de noté/);
+                    assert.equal((await get('get', { id: A })).contact[40], undefined);
+                    await pg.click('.toast-region button:has-text("Annuler")'); await pg.waitForTimeout(600);
+                    assert.deepEqual((await get('get', { id: A })).contact[40], { state: 'introuvable', at: '2025-06-01 09:00:00' }, '↶ Annuler remet aussi la date');
+                    assert.equal(await xss(pg), undefined, 'nom piégé jamais exécuté');
+                    // mode consultation : plus de menu
+                    await pg.evaluate(() => document.body.classList.add('is-kiosk'));
+                    assert.equal(await pg.evaluate(() => window.LCNDA_EXT.personMoreItems.map(f => f({person: {id: 40}, events: []})).some(x => x?.label === 'Dossiers…')), false);
+                    assert.deepEqual(errs, []); await ctx.close();
+                });
+                for (const [w0, h0, dark, tag] of [[390, 844, false, '390'], [1440, 900, true, 'sombre']]) {
+                    await t(`🔎 / 🔇 navigateur ${tag} : onglet 👥 Héritiers et Héritiers à contacter, sans défilement de côté`, async () => {
+                        const { ctx, pg, errs } = await open(w0, h0, dark);
+                        await openHeirs(pg); await noSide(pg); await (tag === '390' ? shotView(pg, '.succ-heirs tr[data-succ-pid="40"]', `abs-heritiers-${tag}`) : shotEl(pg, '.succ-box:has(.succ-heirs)', `abs-heritiers-${tag}`));
+                        await pg.evaluate(() => window.LCNDA_EXT.successoral.openCase(0)); await pg.waitForSelector('[data-succ-view="heirs"]');
+                        await pg.click('[data-succ-view="heirs"]'); await pg.waitForSelector(`[data-succ-hrow="${A}:40"]`);
+                        await noSide(pg); await shotEl(pg, '[data-succ-body]', `abs-a-contacter-${tag}`);
+                        assert.equal(await xss(pg), undefined); assert.deepEqual(errs, []); await ctx.close();
+                    });
+                }
+                await t('🔒 fiches confidentielles non comptées : avertissement dans 👥 Héritiers (pluriel), « Changer ce réglage » ouvre le réglage, ↶ Annuler ; 1440, 390, sombre', async () => {
+                    php('$pdo->exec("UPDATE persons SET is_private=1 WHERE id IN (41,31)");');
+                    await w({ op: 'settings_save', settings: { private_heirs: false } });
+                    try {
+                        for (const [w0, h0, dark, tag] of [[1440, 900, false, '1440'], [390, 844, false, '390'], [1440, 900, true, 'sombre']]) {
+                            const { ctx, pg, errs } = await open(w0, h0, dark);
+                            await openHeirs(pg);
+                            const warn = await pg.textContent('[data-succ-privwarn]');
+                            assert.match(warn, /2 fiches confidentielles non comptées : les parts peuvent être fausses\./);
+                            assert.equal(await pg.locator('.succ-heirs tr[data-succ-pid="41"]').count(), 0, 'Emma retirée du calcul');
+                            await noSide(pg); await shotView(pg, '[data-succ-privwarn]', `conf-heritiers-${tag}`);
+                            if (tag === '1440') {
+                                await pg.click('[data-succ-privset]'); await pg.waitForSelector('#succ-set-private', { timeout: 15000 });
+                                assert.equal(await pg.isChecked('#succ-set-private [value="0"]'), true);
+                                await pg.waitForTimeout(900); await shotView(pg, '#succ-set-private', 'conf-reglage-1440');
+                                await pg.check('#succ-set-private [value="1"]'); await toastHas(pg, /Réglage des dossiers enregistré/);
+                                assert.equal((await get('settings')).settings.private_heirs, true);
+                                await pg.click('.toast-region button:has-text("Annuler")'); await pg.waitForTimeout(600);
+                                assert.equal((await get('settings')).settings.private_heirs, false);
+                            }
+                            assert.equal(await xss(pg), undefined); assert.deepEqual(errs, []); await ctx.close();
+                        }
+                    } finally { await w({ op: 'settings_save', settings: { private_heirs: true } }); php('$pdo->exec("UPDATE persons SET is_private=0 WHERE id IN (41,31)");'); }
+                });
+            } finally {
+                php(`$pdo->prepare("UPDATE persons SET first_name=? WHERE id=40")->execute([${JSON.stringify(NAME40)}]);`);
+                for (const id of [40, 22, 30]) await w({ op: 'contact_state', case_id: A, person_id: id, state: '' });
+            }
         } finally { await browser.close(); }
     } finally {
         proc.kill();

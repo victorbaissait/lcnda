@@ -201,3 +201,13 @@ body.is-kiosk #succ-filter-open, html.ms-open #succ-filter-open, body.is-kiosk .
     .succ-wcount { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .succ-fbanner { font-size: .86rem; padding: 8px 10px; }
 }
+/* 🔎 Introuvable / 🔇 Ne répond pas (migration 92) ; 🔒 fiches confidentielles non comptées */
+.succ-cst { font: inherit; font-size: .84rem; max-width: 100%; }
+.succ-cfilt { display: inline-flex; gap: 6px; align-items: center; font-size: .86rem; color: var(--succ-text2); }
+.succ-cfilt select { font: inherit; font-size: .86rem; }
+.succ-heirs[data-cfilt="introuvable"] tbody tr:not([data-succ-cstate="introuvable"]), .succ-heirs[data-cfilt="silence"] tbody tr:not([data-succ-cstate="silence"]) { display: none; }
+.succ-cstale { margin: 10px 0 0; padding: 8px 10px; border-radius: 8px; background: var(--succ-soft); font-size: .9rem; overflow-wrap: anywhere; }
+.succ-cstale-b { font-size: .84rem; }
+.succ-privwarn { margin: 0 0 10px; }
+#succ-set-private.succ-flash { outline: 2px solid var(--blue, #0066cc); outline-offset: 4px; border-radius: 8px; transition: outline-color .3s; }
+body.is-kiosk .succ-cst, html.ms-open .succ-cst { display: none !important; }

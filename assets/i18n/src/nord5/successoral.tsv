@@ -705,3 +705,22 @@ Le fichier n’a pas été reçu. ¦ Datoteka nije primljena. ¦ Datoteka ni bil
 Le défunt reste dans son dossier. ¦ Ostavitelj ostaje u svom spisu. ¦ Zapustnik ostane v svojem spisu.
 🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Osobe ¦ 🧑‍🤝‍🧑 Osebe
 Dossiers de succession (usage successoral seulement) ¦ Ostavinski spisi (samo pri upotrebi za nasljedstva) ¦ Zapuščinski spisi (samo pri dedni uporabi)
+# Zone « successoral » : 🔎 introuvable / 🔇 ne répond pas (état de contact d’un héritier, migration 92) ; 🔒 fiches confidentielles non comptées (réglage)
+Introuvable ¦ Nepronađen ¦ Neizsledljiv
+Ne répond pas ¦ Ne odgovara ¦ Ne odgovarja
+introuvable ¦ nepronađen ¦ neizsledljiv
+ne répond pas ¦ ne odgovara ¦ ne odgovarja
+rien de noté ¦ ništa zabilježeno ¦ nič zabeleženo
+depuis le {d} ¦ od {d} ¦ od {d}
+Introuvable ou silencieux ¦ Nepronađen ili šuti ¦ Neizsledljiv ali molči
+Introuvable depuis plus d’un an ¦ Nepronađen više od godinu dana ¦ Neizsledljiv več kot leto dni
+{name} est introuvable depuis plus d’un an : la présomption d’absence (art. 112 et suivants) peut protéger sa part. ¦ {name}: nepronađen više od godinu dana. Pretpostavka odsutnosti (čl. 112 i dalje) može zaštititi njegov udio. ¦ {name}: neizsledljiv več kot leto dni. Domneva odsotnosti (čl. 112 in nasl.) lahko zaščiti njegov delež.
+{what} : les parts peuvent être fausses. ¦ {what}: udjeli mogu biti pogrešni. ¦ {what}: deleži so lahko napačni.
+=fiche confidentielle non comptée ¦ povjerljivi zapis nije uračunat|povjerljiva zapisa nisu uračunata|povjerljivih zapisa nije uračunato ¦ zaupni zapis ni upoštevan|zaupna zapisa nista upoštevana|zaupni zapisi niso upoštevani|zaupnih zapisov ni upoštevanih
+Changer ce réglage ¦ Promijeni ovu postavku ¦ Spremeni to nastavitev
+Tous les héritiers ¦ Svi nasljednici ¦ Vsi dediči
+🔎 Introuvable ou 🔇 ne répond pas : pas compté comme contacté dans l’avancement, et le calcul ne change pas. À ne pas confondre avec le statut « Présumé absent » (art. 112). ¦ 🔎 Nepronađen ili 🔇 ne odgovara: u napretku se ne računa kao kontaktiran, a izračun se ne mijenja. Ne miješaj sa statusom „Pretpostavljeno odsutan” (čl. 112). ¦ 🔎 Neizsledljiv ali 🔇 ne odgovarja: pri napredku se ne šteje kot vzpostavljen stik, izračun pa se ne spremeni. Ne zamenjuj s stanjem »Domnevno odsoten« (čl. 112).
+Contact de {name} : {state} ¦ Kontakt – {name}: {state} ¦ Stik – {name}: {state}
+Les fiches confidentielles comptent-elles comme héritiers ? ¦ Računaju li se povjerljivi zapisi kao nasljednici? ¦ Ali zaupni zapisi štejejo kot dediči?
+Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Ne: povjerljivi zapis uklanja se iz izračuna, kao da ne postoji; spis to označava. ¦ Ne: zaupni zapis se odstrani iz izračuna, kot da ne obstaja; spis to označi.
+Le défunt n’est pas un héritier à contacter. ¦ Pokojnik nije nasljednik za kontaktiranje. ¦ Pokojnik ni dedič za stik.

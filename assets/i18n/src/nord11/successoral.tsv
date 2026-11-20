@@ -705,3 +705,22 @@ Le fichier n’a pas été reçu. ¦ Chưa nhận được tệp. ¦ File tidak 
 Le défunt reste dans son dossier. ¦ Người mất vẫn ở trong hồ sơ của mình. ¦ Pewaris tetap di berkasnya.
 🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Mọi người ¦ 🧑‍🤝‍🧑 Orang
 Dossiers de succession (usage successoral seulement) ¦ Hồ sơ thừa kế (chỉ khi dùng cho thừa kế) ¦ Berkas warisan (hanya untuk penggunaan warisan)
+# Zone « successoral » : 🔎 introuvable / 🔇 ne répond pas (état de contact d’un héritier, migration 92) ; 🔒 fiches confidentielles non comptées (réglage)
+Introuvable ¦ Không tìm thấy ¦ Tidak ditemukan
+Ne répond pas ¦ Không trả lời ¦ Tidak menjawab
+introuvable ¦ không tìm thấy ¦ tidak ditemukan
+ne répond pas ¦ không trả lời ¦ tidak menjawab
+rien de noté ¦ chưa ghi gì ¦ belum ada catatan
+depuis le {d} ¦ từ {d} ¦ sejak {d}
+Introuvable ou silencieux ¦ Không tìm thấy hoặc im lặng ¦ Tidak ditemukan atau diam
+Introuvable depuis plus d’un an ¦ Không tìm thấy hơn một năm ¦ Tidak ditemukan lebih dari setahun
+{name} est introuvable depuis plus d’un an : la présomption d’absence (art. 112 et suivants) peut protéger sa part. ¦ {name} không tìm thấy đã hơn một năm: suy đoán vắng mặt (điều 112 và tiếp theo) có thể bảo vệ phần của họ. ¦ {name} tidak ditemukan lebih dari setahun: praduga ketidakhadiran (pasal 112 dst.) dapat melindungi bagiannya.
+{what} : les parts peuvent être fausses. ¦ {what}: các phần có thể sai. ¦ {what}: bagian bisa salah.
+=fiche confidentielle non comptée ¦ hồ sơ bảo mật không được tính ¦ profil rahasia tidak dihitung
+Changer ce réglage ¦ Đổi cài đặt này ¦ Ubah pengaturan ini
+Tous les héritiers ¦ Tất cả người thừa kế ¦ Semua ahli waris
+🔎 Introuvable ou 🔇 ne répond pas : pas compté comme contacté dans l’avancement, et le calcul ne change pas. À ne pas confondre avec le statut « Présumé absent » (art. 112). ¦ 🔎 Không tìm thấy hoặc 🔇 không trả lời: không được tính là đã liên hệ trong tiến độ, và phép tính không đổi. Đừng nhầm với trạng thái “Bị suy đoán vắng mặt” (điều 112). ¦ 🔎 Tidak ditemukan atau 🔇 tidak menjawab: tidak dihitung sebagai sudah dihubungi dalam kemajuan, dan perhitungan tidak berubah. Jangan kamu kacaukan dengan status “Diduga tidak hadir” (pasal 112).
+Contact de {name} : {state} ¦ Liên hệ với {name}: {state} ¦ Kontak dengan {name}: {state}
+Les fiches confidentielles comptent-elles comme héritiers ? ¦ Hồ sơ bảo mật có được tính là người thừa kế không? ¦ Apakah profil rahasia dihitung sebagai ahli waris?
+Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Không: hồ sơ bảo mật bị loại khỏi phép tính, như thể không tồn tại; hồ sơ vụ việc sẽ báo điều đó. ¦ Tidak: profil rahasia dikeluarkan dari perhitungan, seolah tidak ada; berkas menandainya.
+Le défunt n’est pas un héritier à contacter. ¦ Người đã mất không phải là người thừa kế cần liên hệ. ¦ Almarhum bukan ahli waris yang perlu dihubungi.
