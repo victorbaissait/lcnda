@@ -165,11 +165,15 @@ function succ_inv_delete(PDO $pdo, array $d): array
     });
 }
 /** les champs que tu as déclarés obligatoires : vides → la facture n'est pas émise */
-function succ_inv_missing(array $cab): array { return array_values(array_filter($cab['required'] ?? [], static fn($k) => trim((string) ($cab[$k] ?? '')) === '')); }
+function succ_inv_missing(array $cab, bool $labels = true): array
+{
+    $miss = array_values(array_filter($cab['required'] ?? [], static fn($k) => trim((string) ($cab[$k] ?? '')) === ''));
+    return $labels ? array_map(static fn($k) => ['name' => 'nom', 'address' => 'adresse', 'siret' => 'SIRET', 'vat' => 'n° de TVA', 'mentions' => 'mentions'][$k] ?? $k, $miss) : $miss;
+}
 function succ_inv_emit(PDO $pdo, array $d): array
 {
     $cab = succ_p2_cabinet();
-    if ($miss = succ_inv_missing($cab)) { throw new LcndaBadInput('🏢 Mon cabinet : un champ que tu as déclaré obligatoire est vide (' . implode(', ', $miss) . ') : la facture n’est pas émise.'); }
+    if ($miss = succ_inv_missing($cab)) { throw new LcndaBadInput(function_exists('i18n_t') ? i18n_t('🏢 Mon cabinet : un champ que tu as déclaré obligatoire est vide ({f}) : la facture n’est pas émise.', ['f' => implode(', ', $miss)]) : '🏢 Mon cabinet : un champ que tu as déclaré obligatoire est vide (' . implode(', ', $miss) . ') : la facture n’est pas émise.'); }
     return succ_inv_write($pdo, static function (PDO $b) use ($d, $cab): array {
         $r = succ_inv_row($b, safe_int($d['id'] ?? 0));
         if ($r['number'] !== '') { throw new LcndaBadInput('Déjà émise.'); }
@@ -185,7 +189,7 @@ function succ_inv_emit(PDO $pdo, array $d): array
 function succ_inv_avoir(PDO $pdo, array $d): array
 {
     $cab = succ_p2_cabinet();
-    if ($miss = succ_inv_missing($cab)) { throw new LcndaBadInput('🏢 Mon cabinet : un champ que tu as déclaré obligatoire est vide (' . implode(', ', $miss) . ') : la facture n’est pas émise.'); }
+    if ($miss = succ_inv_missing($cab)) { throw new LcndaBadInput(function_exists('i18n_t') ? i18n_t('🏢 Mon cabinet : un champ que tu as déclaré obligatoire est vide ({f}) : la facture n’est pas émise.', ['f' => implode(', ', $miss)]) : '🏢 Mon cabinet : un champ que tu as déclaré obligatoire est vide (' . implode(', ', $miss) . ') : la facture n’est pas émise.'); }
     return succ_inv_write($pdo, static function (PDO $b) use ($d, $cab): array {
         $f = succ_inv_row($b, safe_int($d['id'] ?? 0));
         if ($f['kind'] !== 'facture' || $f['number'] === '') { throw new LcndaBadInput('Un avoir corrige une facture émise.'); }
@@ -357,7 +361,7 @@ function succ_fact_get(PDO $pdo, string $op, array $g): array
 {
     return match ($op) {
         'p2_invoices' => ['items' => succ_inv_list(succ_inv_pdo($pdo), $g), 'register' => succ_p2_set()['inv_register'], 'next' => ['facture' => succ_inv_peek(succ_inv_pdo($pdo), 'facture', date('Y-m-d')), 'devis' => succ_inv_peek(succ_inv_pdo($pdo), 'devis', date('Y-m-d'))],
-            'last_rate' => (string) (succ_inv_pdo($pdo)->query("SELECT rate_text FROM succ_invoices WHERE number<>'' AND kind='facture' AND rate_text<>'' ORDER BY emitted_at DESC, id DESC LIMIT 1")->fetchColumn() ?: ''), 'cabinet_missing' => succ_inv_missing(succ_p2_cabinet())],
+            'last_rate' => (string) (succ_inv_pdo($pdo)->query("SELECT rate_text FROM succ_invoices WHERE number<>'' AND kind='facture' AND rate_text<>'' ORDER BY emitted_at DESC, id DESC LIMIT 1")->fetchColumn() ?: ''), 'cabinet_missing' => succ_inv_missing(succ_p2_cabinet(), false)],
         'p2_invoice_csv' => succ_inv_csv($pdo, $g),
         'p2_activity' => succ_activity($pdo, $g),
         default => throw new LcndaBadInput('Demande inconnue.'),

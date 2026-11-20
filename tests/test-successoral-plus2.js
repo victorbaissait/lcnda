@@ -465,7 +465,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
             for (const [W, Hh, dark, tag] of [[1440, 900, false, '1440'], [390, 844, false, '390'], [1440, 900, true, 'sombre']]) {
                 await t(`navigateur ${tag} : 👥 Héritiers (⚰️, 🗺, 🕵️, 📞), ⚰️ la fenêtre des pistes, 📞 Échanges, 📑 Pièces (🔗), 💶 fonds et 🧾, 🗓 dates, 📈 Activité, réglages — rien d’exécuté`, async () => {
                     const { ctx, pg, errs } = await open(W, Hh, dark);
-                    await tab(pg, 'heirs'); await pg.waitForSelector('[data-sp2-insee]'); await noSide(pg); await shot(pg, `heritiers-${tag}`);
+                    await tab(pg, 'heirs'); await pg.waitForSelector('[data-sp2-insee]'); await noSide(pg); await pg.locator('.succ-heirs').scrollIntoViewIfNeeded(); await shot(pg, `heritiers-${tag}`); assert.ok(await pg.isVisible('.succ-page [data-succ-loi="case"]'), '« ⚖️ Un doute ? » reste visible');
                     await pg.click('[data-sp2-insee]'); await pg.waitForSelector('dialog[open] .sp2-insee-heir');
                     assert.match(await pg.textContent('dialog[open]'), /fichier importé : décès 2004 → 2026/); assert.ok(await pg.$('dialog[open] [data-sp2-insee-yes]'));
                     await shot(pg, `insee-${tag}`); await pg.keyboard.press('Escape');
@@ -488,10 +488,10 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
             await t('navigateur 1440 : 🙈 écran partagé (initiales, montants masqués), 🗺 carte, ⚙️ réglages des outils (↶), contrat retiré par défaut', async () => {
                 const { ctx, pg, errs } = await open(1440, 900, false);
                 await tab(pg, 'fees'); await pg.waitForSelector('.sp2-funds');
-                await pg.click('[data-sp2-share]'); await pg.waitForTimeout(500);
+                await pg.evaluate(() => document.querySelector('[data-sp2-share]').click()); await pg.waitForTimeout(900);
                 const txt = await pg.textContent('.sp2-funds'); assert.doesNotMatch(txt, /18\s?400,00/); assert.match(txt, /••• €/);
                 await tab(pg, 'heirs'); await pg.waitForTimeout(500); assert.doesNotMatch(await pg.textContent('.succ-heirs tbody'), /Hélène MAZAUD/); await shot(pg, 'ecran-partage-1440');
-                await pg.click('[data-sp2-share]'); await pg.waitForTimeout(500);
+                await pg.evaluate(() => document.querySelector('[data-sp2-share]').click()); await pg.waitForTimeout(900);
                 await pg.click('[data-sp2-map]'); await pg.waitForSelector('dialog[open] svg.sp2-map'); await shot(pg, 'carte-1440'); await pg.keyboard.press('Escape');
                 const c = await pg.evaluate(() => window.LCNDA_EXT.succPlus2.contractText(() => 'TEXTE DE L’APP'));
                 assert.doesNotMatch(c, /TEXTE DE L’APP/, 'retiré par défaut'); assert.match(c, /\{siret\}/);

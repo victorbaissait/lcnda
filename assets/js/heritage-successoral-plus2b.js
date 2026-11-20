@@ -48,7 +48,7 @@
         let cur = mine[0] || null, versions = [];
         const heirs = R && !R.error ? OC().recipients(D, R) : [];
         const fields = OC().FIELDS.map(f => `<button type="button" class="succ-chip" data-sp2-field="${esc(f)}">{${esc(f)}}</button>`).join('');
-        ext.openDialog({eyebrow: i18n('📝 MES MODÈLES · CONTRAT DE RÉVÉLATION'), title: i18n('Ton contrat, avec des champs que l’app remplit'), wide: true, submitLabel: i18n('Enregistrer la version'),
+        ext.openDialog({eyebrow: '📝', title: i18n('Ton contrat, avec des champs que l’app remplit'), wide: true, submitLabel: i18n('Enregistrer la version'),
             body: `${UI().notice('warn', i18n('L’app ne fournit aucun texte de contrat : c’est un acte qui t’engage et qui engage l’héritier, à faire écrire ou relire par ton conseil. L’app remplit des champs et garde l’historique de tes versions.'))}
                 <div class="succ-form"><div class="succ-2"><label>${esc(i18n('Modèle'))}<select name="tpl"><option value="">${esc(i18n('＋ Nouveau modèle'))}</option>${mine.map(m => `<option value="${m.id}"${cur?.id === m.id ? ' selected' : ''}>${esc(m.name)}</option>`).join('')}</select></label><label>${esc(i18n('Nom'))}<input name="name" maxlength="120" value="${esc(cur?.name || i18n('Mon contrat'))}"></label></div>
                 <label>${esc(i18n('Versions'))}<select name="ver" data-sp2-vers><option value="">—</option></select></label>
@@ -115,7 +115,7 @@
     function fundDialog(D, pid, row = null) {
         const x = row || {}, p = pctOf(D, pid), F = C().funds(D.p2?.funds || [])[pid] || {recu: 0};
         const sug = cfg().funds_commission === 'calc' && p != null ? C().commission(F.recu, p) : null;
-        ext.openDialog({eyebrow: i18n('💶 FONDS · {n}', {n: H().nameOf(D, pid)}), title: row ? i18n('✎ Corriger un mouvement') : i18n('＋ Noter un mouvement'), submitLabel: i18n('Noter'),
+        ext.openDialog({eyebrow: `💶 ${H().nameOf(D, pid)}`, title: row ? i18n('✎ Corriger un mouvement') : i18n('＋ Noter un mouvement'), submitLabel: i18n('Noter'),
             body: `<div class="succ-form"><span class="pk-lab">${esc(i18n('Sens'))}</span>${H().seg('sens', SENS.map(([k, ic, l]) => [k, `${ic} ${l}`]), x.sens || 'recu')}
                 <div class="succ-2"><label>${esc(i18n('Date'))}<input type="date" name="day" value="${esc(x.day || H().today())}"></label><label>${esc(i18n('Montant (€)'))}<input name="amount" inputmode="decimal" value="${esc(eurIn(x.cents))}" data-sp2-amount></label></div>
                 <p class="ui-hint" data-sp2-sug hidden>${sug != null ? esc(i18n('Commission proposée : {p} % de {r} = {c} (modifiable)', {p: String(p).replace('.', ','), r: money(F.recu), c: money(sug)})) : ''}</p>
@@ -134,7 +134,7 @@
         const ic = s => (SENS.find(x => x[0] === s) || SENS[0])[1];
         const list = `<ul class="sp2-calls">${F.lines.map(l => `<li><div class="sp2-call-when"><b>${esc(H().fmtDate(l.day))}</b></div><div class="sp2-call-ico">${ic(l.sens)}</div><div class="sp2-call-body"><b>${esc(i18n((SENS.find(x => x[0] === l.sens) || SENS[0])[2]))}</b> <span class="sp2-num">${l.sens === 'recu' ? '' : '−'}${money(l.cents)}</span>${l.moyen ? ` · ${esc(l.moyen)}` : ''}${l.paid_to ? ` · ${esc(i18n('versé à {n}', {n: l.paid_to}))}` : ''}${l.note ? `<p>${esc(l.note)}</p>` : ''}</div>${D.archived ? '' : `<div class="sp2-call-act"><button type="button" class="icon-button small" data-sp2-fund-edit="${l.id}" aria-label="${esc(i18n('✎ Modifier'))}">✎</button><button type="button" class="icon-button small" data-sp2-fund-del="${l.id}" aria-label="${esc(i18n('Supprimer'))}">🗑</button></div>`}</li>`).join('')}</ul>`;
         const decompte = () => `<section data-k-page style="font:11pt Georgia,serif"><h1 style="font-size:15pt">${esc(i18n('Décompte — {n}', {n: H().nameOf(D, pid)}))}</h1><p>${esc(SP.cabinet()?.name || '')}<br>${esc(i18n('Dossier {n}', {n: D.number}))}</p><table style="width:100%;border-collapse:collapse">${F.lines.map(l => `<tr><td style="padding:1.5mm;border-bottom:.5px solid #999">${esc(H().fmtDate(l.day))}</td><td style="padding:1.5mm;border-bottom:.5px solid #999">${esc(i18n((SENS.find(x => x[0] === l.sens) || SENS[0])[2]))}</td><td style="padding:1.5mm;border-bottom:.5px solid #999;text-align:right">${l.sens === 'recu' ? '' : '−'}${money(l.cents)}</td></tr>`).join('')}</table><p style="text-align:right"><b>${esc(i18n('Reste dû'))} : ${money(F.rest)}</b></p></section>`;
-        ext.openDialog({eyebrow: i18n('💶 FONDS'), title: H().nameOf(D, pid), wide: true, submitLabel: i18n('Fermer'),
+        ext.openDialog({eyebrow: '💶', title: H().nameOf(D, pid), wide: true, submitLabel: i18n('Fermer'),
             body: `${F.lines.length ? list : A().empty(i18n('Aucun mouvement noté.'), {icon: '💶'})}<p><b>${esc(i18n('Reste à reverser'))} : ${money(F.rest)}</b></p>
                 <div class="cl-out">${D.archived ? '' : `<button type="button" class="button small" data-sp2-fund-add="${pid}">＋ ${esc(i18n('Noter un mouvement'))}</button>`}${cfg().funds_print === 'print' ? `<button type="button" class="button small secondary" data-sp2-decompte>🖨 ${esc(i18n('Décompte pour l’héritier'))}</button>` : ''}${D.archived ? '' : `<button type="button" class="button small secondary" data-sp2-inv-commission="${pid}">🧾 ${esc(i18n('Facturer la commission'))}</button>`}</div>`,
             onOpen: d => d.querySelector('[data-sp2-decompte]')?.addEventListener('click', () => { UI().openPrintDialog({title: i18n('Décompte — {n}', {n: H().nameOf(D, pid)}), key: 'succ-decompte', paper: 'A4', photos: false, html: decompte()}); T.post({op: 'p2_print', what: 'decompte', case_id: D.id}).catch(() => {}); })});
@@ -174,7 +174,7 @@
         const cab = SP.cabinet();
         ext.openDialog({eyebrow: x.kind === 'devis' ? i18n('🧾 DEVIS') : i18n('🧾 FACTURE'), title: inv?.number ? i18n('{k} {n}', {k: x.kind === 'devis' ? i18n('Devis') : i18n('Facture'), n: inv.number}) : i18n('Brouillon, pas encore numéroté'), wide: true, submitLabel: i18n('Garder en brouillon'),
             body: `${UI().notice('info', i18n('Ce que l’app ne fait pas : elle ne connaît ni ton statut, ni ton régime de TVA, ni les mentions que ta facture doit porter. C’est toi qui choisis le taux et qui écris les mentions (avec ton comptable). L’app numérote sans trou, interdit de modifier une facture émise, fait les additions et garde tout.'))}
-                ${INV.cabinet_missing?.length ? UI().notice('warn', i18n('🏢 Mon cabinet : des champs obligatoires sont vides ({f}) : la facture ne pourra pas être émise.', {f: INV.cabinet_missing.join(', ')})) : ''}
+                ${INV.cabinet_missing?.length ? UI().notice('warn', i18n('🏢 Mon cabinet : des champs obligatoires sont vides ({f}) : la facture ne pourra pas être émise.', {f: INV.cabinet_missing.map(k => i18n((REQ.find(x => x[0] === k) || [k, k])[1])).join(', ')})) : ''}
                 <div class="succ-form"><div class="succ-2"><label>${esc(i18n('Client'))}<input name="client_name" maxlength="200" value="${esc(inv?.client_name || who?.name || '')}"></label><label>${esc(i18n('Date'))}<input type="date" name="day" value="${esc(inv?.day || H().today())}"></label></div>
                 <label>${esc(i18n('Adresse du client'))}<textarea name="client_address" rows="2" maxlength="600">${esc(inv?.client_address || (who ? (D.addresses?.[who.id]?.lines || []).join('\n') : ''))}</textarea></label>
                 <div class="succ-scroll"><table class="succ-table sp2-lines"><thead><tr><th></th><th>${esc(i18n('Ligne'))}</th><th>${esc(i18n('Qté'))}</th><th>${esc(i18n('Prix HT'))}</th><th>${esc(i18n('Total HT'))}</th></tr></thead><tbody data-sp2-lines></tbody></table></div>
@@ -213,7 +213,7 @@
         const years = [...new Set(INV.items.map(x => String(x.day).slice(0, 4)).filter(Boolean))].sort().reverse(); if (!years.includes(String(new Date().getFullYear()))) years.unshift(String(new Date().getFullYear()));
         const kindTxt = x => ({facture: i18n('Facture'), avoir: i18n('Avoir'), devis: i18n('Devis')}[x.kind]);
         const st = x => !x.number ? H().badge(i18n('brouillon'), 'grey') : x.kind === 'devis' ? H().badge(x.status === 'accepted' ? i18n('accepté') : i18n('émis'), x.status === 'accepted' ? 'green' : 'blue') : x.kind === 'avoir' ? H().badge(i18n('avoir'), 'violet') : x.paid_on ? H().badge(i18n('✓ payée le {d}', {d: H().fmtDate(x.paid_on)}), 'green') : H().badge(i18n('attendue'), 'yellow');
-        ext.openDialog({eyebrow: i18n('🧾 REGISTRE DES FACTURES'), title: caseNumber ? i18n('Dossier {n}', {n: caseNumber}) : INV.register === 'cabinet' ? i18n('Tout le cabinet') : i18n('Cette généalogie'), wide: true, submitLabel: i18n('Fermer'),
+        ext.openDialog({eyebrow: '🧾', title: caseNumber ? i18n('Dossier {n}', {n: caseNumber}) : INV.register === 'cabinet' ? i18n('Tout le cabinet') : i18n('Cette généalogie'), wide: true, submitLabel: i18n('Fermer'),
             body: `<div data-sp2-reg></div><div class="cl-out"><label>${esc(i18n('Période'))} <select name="year">${years.map(y => `<option>${esc(y)}</option>`).join('')}</select></label><label class="checkbox-line"><input type="checkbox" name="funds"> ${esc(i18n('avec les mouvements de fonds'))}</label><button type="button" class="button small secondary" data-sp2-csv>⤓ ${esc(i18n('CSV pour le comptable'))}</button></div>
                 <p class="ui-hint">${esc(i18n('Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir.'))} ${H().setLink('inv_register')}</p>`,
             onOpen: d => {
@@ -223,7 +223,7 @@
                 const draw = (s = bar.state) => {
                     let list = INV.items.filter(x => UI().listMatch.text(s.q, x.number, x.client_name, x.case_number) && (!s.filters.kind?.length || s.filters.kind.includes(x.kind)));
                     if (s.sort === 'old') list = [...list].reverse();
-                    bar.setCount(list.length, 'pièce', 'pièces');
+                    bar.setCount(list.length, 'document', 'documents');
                     box.innerHTML = list.length ? `<div class="succ-scroll"><table class="succ-table"><thead><tr><th>${esc(i18n('N°'))}</th><th>${esc(i18n('Date'))}</th><th>${esc(i18n('Dossier'))}</th><th>${esc(i18n('Client'))}</th><th>${esc(i18n('TTC'))}</th><th></th><th></th></tr></thead><tbody data-i18n-off>${list.map(x => `<tr><td><b>${esc(x.number || '—')}</b> <small class="muted">${esc(kindTxt(x))}</small></td><td>${esc(H().fmtDate(x.day))}</td><td>${esc(x.case_number)}</td><td>${esc(x.client_name)}</td><td class="sp2-num">${money(x.ttc)}</td><td>${st(x)}</td>
                         <td class="sp2-inv-act"><button type="button" class="icon-button small" data-sp2-inv-print="${x.id}" aria-label="🖨" title="🖨">🖨</button>${!x.number || (x.kind === 'devis' && x.status !== 'accepted') ? `<button type="button" class="icon-button small" data-sp2-inv-edit="${x.id}" aria-label="${esc(i18n('✎ Modifier'))}">✎</button>` : ''}${!x.number ? `<button type="button" class="icon-button small" data-sp2-inv-del="${x.id}" aria-label="${esc(i18n('Supprimer'))}">🗑</button>` : ''}
                         ${x.kind === 'facture' && x.number && !INV.items.some(y => y.kind === 'avoir' && y.ref_id === x.id) ? `<button type="button" class="button small secondary" data-sp2-inv-avoir="${x.id}">${esc(i18n('🧾 Faire un avoir'))}</button>` : ''}${x.kind === 'facture' && x.number ? `<button type="button" class="button small secondary" data-sp2-inv-paid="${x.id}">${esc(i18n('Payée…'))}</button>` : ''}
@@ -312,7 +312,7 @@
         const nAddr = heirs.filter(h => D.addresses?.[h.id]).length;
         const priv = (R.privateExcluded || []).length;
         const v = (D.p2?.notary_copies || []).length + 1;
-        ext.openDialog({eyebrow: i18n('🤝 COPIE POUR LE NOTAIRE · {n}', {n: D.number}), title: i18n('Pour {n}', {n: D.notary || i18n('le notaire')}), wide: true, submitLabel: i18n('⤓ Fabriquer la copie'),
+        ext.openDialog({eyebrow: `🤝 ${D.number}`, title: i18n('Pour {n}', {n: D.notary || i18n('le notaire')}), wide: true, submitLabel: i18n('⤓ Fabriquer la copie'),
             body: `<div class="succ-form"><span class="pk-lab">${esc(i18n('Ce qui part'))}</span>
                 ${H().ck(i18n('Tableau des héritiers et parts, arbre, chaîne de filiation (comme le PDF)'), 'checked disabled')}
                 ${H().ck(i18n('📑 Pièces (images des actes)'), 'name="pieces"', true, `${media.length} · ${mb(tot)}`)}

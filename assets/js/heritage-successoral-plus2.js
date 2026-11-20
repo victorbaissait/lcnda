@@ -105,8 +105,7 @@
     SP.views = V0 => [...V0, ['activite', '📈 Activité']];
     SP.view = (k, body, token) => (k === 'activite' && SP.activity ? SP.activity(body, token) : null);
     SP.boardMore = () => [`<button type="button" data-sp2-map="0">🗺 ${esc(i18n('Carte des héritiers (dossiers en cours)'))}</button>`, `<button type="button" data-sp2-delays>⏳ ${esc(i18n('Délai de réponse par organisme'))}</button>`, ...(SP.boardMoreB?.() || [])];
-    SP.caseActions = D => [`<button type="button" class="button secondary sp2-share-btn" data-sp2-share aria-pressed="${shareOn()}" title="${esc(i18n('🙈 Écran partagé'))}">🙈</button>`];
-    SP.caseMore = D => [
+    SP.caseMore = D => [`<button type="button" class="sp2-share-btn" data-sp2-share aria-pressed="${shareOn()}">${esc(i18n('🙈 Écran partagé'))}${shareOn() ? ' ✓' : ''}</button>`, // dans ⋯ : l'en-tête garde « ⚖️ Un doute ? » visible
         ...(!['clos', 'archive'].includes(D.state) ? [`<button type="button" data-sp2-merge>👥 ${esc(i18n('Fusionner avec un autre dossier…'))}</button>`] : []),
         ...(D.p2?.merges?.length ? [`<button type="button" data-sp2-merge-undo>↶ ${esc(i18n('Annuler la dernière fusion'))}</button>`] : []),
         ...(SP.caseMoreB?.(D) || [])];
@@ -144,7 +143,7 @@
         let r; try { r = await post({op: 'p2_insee_check', case_id: D.id}); } catch (e) { return toast(e.message, 'error'); }
         const death = D.death_iso || '';
         if (!r.stats?.rows) {
-            return ext.openDialog({eyebrow: i18n('⚰️ VÉRIFIER LES DÉCÈS'), title: i18n('Le fichier des décès n’est pas dans l’app.'), submitLabel: i18n('⤓ Importer les décès'),
+            return ext.openDialog({eyebrow: '⚰️', title: i18n('Le fichier des décès n’est pas dans l’app.'), submitLabel: i18n('⤓ Importer les décès'),
                 body: `<p>${esc(i18n('L’import se fait une seule fois, depuis data.gouv.fr (environ 25 millions de lignes depuis 1970), ou par années choisies.'))}</p>`,
                 onSubmit: () => { A().state.researchKind = 'insee'; A().setModule('recherche'); }});
         }
@@ -163,7 +162,7 @@
             ${h.twins ? UI().notice('warn', i18n('Deux personnes se ressemblent : demande l’acte avant de choisir')) : ''}
             ${h.pistes.length ? h.pistes.map(p => one(h, p)).join('') : `<p>${badge(i18n('rien trouvé dans le fichier'), 'grey')} <small class="muted">${esc(i18n('« Rien trouvé » ne veut pas dire « vivant » (un décès à l’étranger manque souvent).'))}</small></p>`}</section>`;
         const dismissed = (D.p2?.insee_dismissed || []);
-        ext.openDialog({eyebrow: i18n('⚰️ VÉRIFIER LES DÉCÈS · {n}', {n: D.number}), title: i18n('Les héritiers « vivants » comparés au fichier des décès'), wide: true, submitLabel: i18n('Fermer'),
+        ext.openDialog({eyebrow: `⚰️ ${D.number}`, title: i18n('Les héritiers « vivants » comparés au fichier des décès'), wide: true, submitLabel: i18n('Fermer'),
             body: `<p class="muted">${cover} · ${esc(i18n('pistes à partir de {n}', {n: set.insee_threshold}))} ${setLink('insee_threshold')}</p>
                 ${r.heirs.length ? r.heirs.map(heirHtml).join('') : `<p>${esc(i18n('Aucun héritier « vivant » à vérifier dans ce dossier.'))}</p>`}
                 <details class="sp2-how"><summary>ⓘ ${esc(i18n('Comment c’est calculé'))}</summary><table class="succ-table"><tbody>
@@ -257,7 +256,7 @@
         function draw(st = bar.state) {
             let list = all.filter(x => M.text(st.q, x.who, x.summary, x.next, nameOf(D, x.person_id)) && (!st.filters.who || String(x.person_id) === String(st.filters.who)) && (!st.filters.means?.length || st.filters.means.includes(x.means)));
             if (st.sort === 'old') list = [...list].reverse();
-            bar.setCount(list.length, 'échange', 'échanges');
+            bar.setCount(list.length, 'échange noté', 'échanges notés');
             box.innerHTML = list.length ? `<ul class="sp2-calls">${list.map(x => `<li class="${x.mail ? 'is-mail' : ''}"><div class="sp2-call-when"><b>${esc(fmtDate(String(x.at).slice(0, 10)))}</b>${String(x.at).length > 10 ? `<small>${esc(String(x.at).slice(11, 16))}</small>` : ''}</div><div class="sp2-call-ico" aria-hidden="true">${meanIco(x.means)}</div>
                 <div class="sp2-call-body"><b>${x.person_id ? `<button type="button" class="table-link" data-h-person="${x.person_id}">${esc(nameOf(D, x.person_id) || x.who)}</button>` : esc(x.who)}</b>${x.minutes ? ` <small class="muted">· ${esc(i18n('{n} min', {n: x.minutes}))}</small>` : ''}${x.research ? ' ' + badge(i18n('recherche'), 'violet') : ''}${x.origin ? ' ' + badge(i18n('du dossier fusionné'), 'grey') : ''}
                 <p>${esc(x.summary)}</p>${x.next ? `<p class="sp2-next">→ ${esc(x.next)}</p>` : ''}${x.mail ? `<small class="muted">${esc(i18n('Registre de courriers, n° {n}', {n: x.id}))}</small>` : ''}</div>
@@ -269,7 +268,7 @@
     function callDialog(D, call = null, pid = 0) {
         const c = call || {};
         const val = c.person_id || pid || (c.who ? `txt:${c.who}` : null);
-        ext.openDialog({eyebrow: i18n('📞 ÉCHANGES · {n}', {n: D.number}), title: call ? i18n('✎ Corriger un échange') : i18n('＋ Noter un échange'), wide: true, submitLabel: i18n('Noter'),
+        ext.openDialog({eyebrow: `📞 ${D.number}`, title: call ? i18n('✎ Corriger un échange') : i18n('＋ Noter un échange'), wide: true, submitLabel: i18n('Noter'),
             body: `<div class="succ-form"><div class="succ-2"><label>${esc(i18n('Quand'))}<input type="datetime-local" name="at" value="${esc(c.at ? c.at.replace(' ', 'T').slice(0, 16) : nowLocal())}"></label>
                 <div><span class="pk-lab">${esc(i18n('Avec (héritier, notaire, mairie…)'))}</span>${P().pickerField({name: 'who', kind: 'person', animals: false, allowFree: true, value: val})}</div></div>
                 <span class="pk-lab">${esc(i18n('Moyen'))}</span>${seg('means', MEANS.map(([k, ic, l]) => [k, `${ic} ${l}`]), c.means || 'phone')}
@@ -295,7 +294,7 @@
         const r = rec0 || D?.p2?.rec?.[kid] || {}, set = cfg();
         const k = (D?.courriers || []).find(x => x.id === kid) || {};
         const days = r.days ?? set.rec_relance;
-        ext.openDialog({eyebrow: i18n('📮 COURRIER N° {n}', {n: kid}), title: k.objet || i18n('Recommandé'), wide: true, submitLabel: i18n('Enregistrer'),
+        ext.openDialog({eyebrow: `📮 ${kid}`, title: k.objet || i18n('Recommandé'), wide: true, submitLabel: i18n('Enregistrer'),
             body: `<div class="succ-form"><span class="pk-lab">${esc(i18n('Envoyé en recommandé'))}</span>${seg('kind', REC, r.kind ?? 'ar')}
                 <div class="succ-2"><label>${esc(i18n('N° du recommandé'))}<input name="num" maxlength="40" value="${esc(r.num || '')}" autocomplete="off" data-sp2-recnum></label><label>${esc(i18n('Date d’envoi'))}<input type="date" name="date_envoi" value="${esc(r.sent || k.date_envoi || today())}"></label></div>
                 <p class="ui-hint" data-sp2-recwarn hidden>${esc(i18n('Numéro inhabituel, gardé tel quel.'))}</p>
@@ -357,7 +356,7 @@
         docList: [i18n('livret de famille'), i18n('acte de naissance'), i18n('acte de mariage'), i18n('jugement')], other: i18n('autre'), question: i18n('Une question'), privacy: i18n('Vos réponses restent sur cet appareil tant que vous n’envoyez rien.'), save: i18n('Enregistrer mes réponses')});
     function qDialog(D, R) {
         const heirs = OC().recipients(D, R), set = cfg();
-        ext.openDialog({eyebrow: i18n('📋 QUESTIONNAIRE · {n}', {n: D.number}), title: i18n('Un questionnaire à envoyer'), wide: true, submitLabel: i18n('Fabriquer et ranger au Registre'),
+        ext.openDialog({eyebrow: `📋 ${D.number}`, title: i18n('Un questionnaire à envoyer'), wide: true, submitLabel: i18n('Fabriquer et ranger au Registre'),
             body: `<div class="succ-form"><span class="pk-lab">${esc(i18n('Pour'))}</span><ul class="succ-letter-who">${heirs.map(h => `<li>${ck(h.name, `data-sp2-qto="${h.id}"`, h.checked, h.address)}</li>`).join('')}</ul>
                 <span class="pk-lab">${esc(i18n('Ce qu’on demande'))}</span>${QF.map(([k, l, sub]) => ck(i18n(l), `data-sp2-qf="${k}"`, k !== 'question', sub ? i18n(sub) : '')).join('')}
                 <label>${esc(i18n('Ta question'))}<input name="question" maxlength="600"></label>
@@ -394,7 +393,7 @@
     }
     function qPaper(D, R) {
         const heirs = OC().recipients(D, R);
-        ext.openDialog({eyebrow: i18n('✍ QUESTIONNAIRE PAPIER'), title: i18n('Saisir un questionnaire papier'), wide: true, submitLabel: i18n('Revoir avant d’écrire'),
+        ext.openDialog({eyebrow: '✍', title: i18n('Saisir un questionnaire papier'), wide: true, submitLabel: i18n('Revoir avant d’écrire'),
             body: `<div class="succ-form"><label>${esc(i18n('Héritier'))}<select name="pid">${heirs.map(h => `<option value="${h.id}">${esc(h.name)}</option>`).join('')}</select></label>
                 <div class="succ-2"><label>${esc(i18n('Date de naissance'))}<input name="birth"></label><label>${esc(i18n('Lieu de naissance'))}<input name="birth_place"></label></div>
                 <div class="succ-2"><label>${esc(i18n('Conjoint'))}<input name="sp_name"></label><label>${esc(i18n('Date du mariage (ou PACS)'))}<input name="sp_date"></label></div>
@@ -410,7 +409,7 @@
     }
     const QROW = {birth: 'Naissance', children: 'Enfants', address: 'Adresse', family: 'Famille connue', documents: 'Documents', question: 'Sa question'};
     function qReview(D, r, src) {
-        ext.openDialog({eyebrow: i18n('📋 RÉPONSES'), title: i18n('Réponses de {n}', {n: r.name}), wide: true, submitLabel: i18n('Écrire les changements cochés'),
+        ext.openDialog({eyebrow: '📋', title: i18n('Réponses de {n}', {n: r.name}), wide: true, submitLabel: i18n('Écrire les changements cochés'),
             body: `${r.earlier ? UI().notice('warn', i18n('Une réponse a déjà été importée le {d} : compare avec celle-ci.', {d: fmtDate(String(r.earlier).slice(0, 10))})) : ''}${src.file ? `<p>${badge(i18n('fichier vérifié ✓ (bon questionnaire, pas modifié)'), 'green')}</p>` : ''}
                 <p class="muted">${esc(i18n('Coche ce qui doit aller dans le dossier. Rien n’est écrit sans ta revue ; « source : déclaration de l’héritier » accompagne tout ce qui est écrit.'))}</p>
                 <div class="succ-scroll"><table class="succ-table sp2-qrev"><thead><tr><th></th><th>${esc(i18n('Champ'))}</th><th>${esc(i18n('Dans la base'))}</th><th>${esc(i18n('Réponse'))}</th></tr></thead><tbody data-i18n-off>
@@ -432,7 +431,7 @@
         const remTxt = x => C().reminders(x.due, imp[x.id].reminders, imp[x.id].seen, today());
         const line = x => { const n = daysTo(x.due), i = imp[x.id], rr = remTxt(x);
             return `<tr class="${x.done ? 'is-done' : ''}"><td><b>${esc(fmtDate(x.due))}</b><br><small class="muted">${x.done ? esc(i18n('Fait')) : n < 0 ? esc(i18n('passée')) : esc(i18n('dans {n} j', {n}))}</small>${i.prev_due ? `<br><small class="muted">${esc(i18n('était le {d}', {d: fmtDate(i.prev_due)}))}</small>` : ''}</td><td>${esc(x.label)}</td><td>${esc(i.origin)}</td>
-                <td>${(rr?.list || []).map(r => badge(`J−${r.j}`, String(i.seen).split(',').includes(String(r.j)) ? 'grey' : 'blue')).join(' ')}</td><td>${ro ? '' : `<button type="button" class="icon-button small" data-sp2-imp-edit="${x.id}" aria-label="${esc(i18n('✎ Modifier'))}" title="${esc(i18n('✎ Modifier'))}">✎</button>`}</td></tr>`; };
+                <td>${(rr?.list || []).map(r => badge(i18n('J−{n}', {n: String(r.j)}), String(i.seen).split(',').includes(String(r.j)) ? 'grey' : 'blue')).join(' ')}</td><td>${ro ? '' : `<button type="button" class="icon-button small" data-sp2-imp-edit="${x.id}" aria-label="${esc(i18n('✎ Modifier'))}" title="${esc(i18n('✎ Modifier'))}">✎</button>`}</td></tr>`; };
         const add = ro ? '' : `<button type="button" class="button small secondary" data-sp2-imp-add>＋ ${esc(i18n('Une date importante'))}</button>`;
         const dlBox = [...body.querySelectorAll('.succ-box')].find(b => b.querySelector('[data-succ-dl-add], .succ-deadlines'));
         if (set.dates_place === 'same' && dlBox) {
@@ -448,10 +447,10 @@
     }
     function impDialog(D, x = null) {
         const i = x ? D.p2.imp[x.id] : null, rem = String(i ? i.reminders : cfg().dates_reminders).split(',').filter(Boolean);
-        ext.openDialog({eyebrow: i18n('🗓 DATE IMPORTANTE'), title: x ? i18n('✎ Modifier la date') : i18n('＋ Une date importante'), submitLabel: i18n('Enregistrer'),
+        ext.openDialog({eyebrow: '🗓', title: x ? i18n('✎ Modifier la date') : i18n('＋ Une date importante'), submitLabel: i18n('Enregistrer'),
             body: `<div class="succ-form"><div class="succ-2"><label>${esc(i18n('Date'))}<input type="date" name="due" value="${esc(x?.due || '')}" required></label><label>${esc(i18n('Quoi'))}<input name="label" maxlength="300" value="${esc(x?.label || '')}" required></label></div>
                 <label>${esc(i18n('D’où vient cette date (obligatoire)'))}<input name="origin" maxlength="300" value="${esc(i?.origin || '')}" placeholder="${esc(i18n('ex. : Me VIALLE, courriel du 4 nov.'))}" required></label>
-                <span class="pk-lab">${esc(i18n('Rappels'))}</span><div class="sp2-rem">${['30', '7', '1'].map(j => ck(`J−${j}`, `data-sp2-rem="${j}"`, rem.includes(j))).join('')}<label>${esc(i18n('Autre :'))} <input type="number" min="0" max="365" name="rem_other" value="${esc(rem.filter(j => !['30', '7', '1'].includes(j)).join(','))}"></label></div>
+                <span class="pk-lab">${esc(i18n('Rappels'))}</span><div class="sp2-rem">${['30', '7', '1'].map(j => ck(i18n('J−{n}', {n: j}), `data-sp2-rem="${j}"`, rem.includes(j))).join('')}<label>${esc(i18n('Autre :'))} <input type="number" min="0" max="365" name="rem_other" value="${esc(rem.filter(j => !['30', '7', '1'].includes(j)).join(','))}"></label></div>
                 ${x ? `<p class="ui-hint">${esc(i18n('Date déplacée : l’ancienne reste en dessous et la modification est notée au 🕓 Journal.'))}</p>` : ''}</div>`,
             onSubmit: async f => {
                 const rems = [...f.querySelectorAll('[data-sp2-rem]:checked')].map(c => c.dataset.sp2Rem).concat(f.rem_other.value ? [f.rem_other.value] : []).join(',');
@@ -478,7 +477,7 @@
     function proofDialog(D, R, P_) {
         const set = cfg(), pl = C().proofLinks(D, R, P_, {min: Number(set.proof_min)});
         const lv = x => x.level === 'none' ? '⓪' : x.n === 1 ? '①' : x.n === 2 ? '②' : `${x.n}`;
-        ext.openDialog({eyebrow: i18n('🔗 DOUBLE PREUVE · {n}', {n: D.number}), title: i18n('Chaque maillon : combien de pièces le prouvent'), wide: true, submitLabel: i18n('Fermer'),
+        ext.openDialog({eyebrow: `🔗 ${D.number}`, title: i18n('Chaque maillon : combien de pièces le prouvent'), wide: true, submitLabel: i18n('Fermer'),
             body: `<div class="succ-scroll"><table class="succ-table"><thead><tr><th>${esc(i18n('Lien'))}</th><th>${esc(i18n('Héritier concerné'))}</th><th>${esc(i18n('Pièces'))}</th><th></th></tr></thead><tbody>
                 ${pl.links.map(x => `<tr class="sp2-proof-${x.level}"><td>${esc(x.what)}</td><td>${esc(x.heirs.join(', ') || '—')}</td><td><b>${lv(x)}</b> ${x.sources.length ? `<small>${esc(x.sources.join(' ; '))}</small>` : x.state === 'have' ? `<small class="muted">${esc(i18n('en main, cote non notée'))}</small>` : `<small class="muted">${esc(i18n('aucune'))}</small>`}${x.proof ? ' ' + badge(i18n('dossier de preuve « prouvé »'), 'green') : ''}${x.one ? ' ' + badge(i18n('1 pièce, jugée suffisante le {d}', {d: fmtDate(x.one.at)}), 'green') : ''}</td>
                 <td>${D.archived ? '' : x.level === 'none' ? (x.state === 'missing' ? `<button type="button" class="button small secondary" data-succ-ask="${esc(x.key)}">📮 ${esc(i18n('Demander l’acte'))}</button>` : '') : `<label class="checkbox-line"><input type="checkbox" data-sp2-oneok="${esc(x.key)}" data-what="${esc(x.what)}"${x.one ? ' checked' : ''}> ${esc(i18n('✓ Une pièce me suffit ici'))}</label>`}</td></tr>`).join('')}</tbody></table></div>
@@ -516,7 +515,7 @@
     function groupDialog(D, R, P_) {
         const groups = C().groupMissing(D, P_, {scope: cfg().group_scope, t: i18n});
         const letter = g => [i18n('Madame, Monsieur,'), i18n('Pour une recherche, je vous serais reconnaissant(e) de m’adresser une copie des actes suivants :'), g.items.map(it => `– ${it.what}${it.act ? ' (' + it.act + ')' : ''}`).join('\n'), i18n('Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées.')].join('\n\n');
-        ext.openDialog({eyebrow: i18n('📮 UNE LETTRE PAR SERVICE'), title: i18n('Les actes manquants, regroupés'), wide: true, submitLabel: i18n('📋 Ranger dans le Registre de courriers'),
+        ext.openDialog({eyebrow: '📮', title: i18n('Les actes manquants, regroupés'), wide: true, submitLabel: i18n('📋 Ranger dans le Registre de courriers'),
             body: `<p class="muted">${esc(i18n('Une seule lettre par service au lieu d’une par acte : moins de timbres, moins de relances. Relis et corrige chaque lettre.'))} ${setLink('group_scope')}</p>
                 ${groups.map((g, gi) => `<fieldset class="sp2-group"><legend>${ck(`${g.service} · ${plural(g.keys.length, 'acte')}`, `data-sp2-g="${gi}"`, true)}</legend><label>${esc(i18n('Destinataire'))}<input data-sp2-gs="${gi}" value="${esc(g.service)}" maxlength="200"></label><textarea data-sp2-gl="${gi}" rows="7" class="cl-letter">${esc(letter(g))}</textarea></fieldset>`).join('')}
                 <div class="succ-2"><label>${esc(i18n('Envoyé le'))}<input type="date" name="date_envoi" value="${today()}"></label><label>${esc(i18n('Relance dans (jours)'))}<input type="number" name="relance_jours" min="0" max="365" value="30"></label></div>`,
@@ -529,7 +528,7 @@
     }
     function issuedDialog(D, key, what) {
         const i = D.p2?.issued?.[key] || {};
-        ext.openDialog({eyebrow: i18n('📅 DATE DE DÉLIVRANCE'), title: what, submitLabel: i18n('Enregistrer'),
+        ext.openDialog({eyebrow: '📅', title: what, submitLabel: i18n('Enregistrer'),
             body: `<div class="succ-form"><label>${esc(i18n('Copie délivrée le'))}<input type="date" name="on" value="${esc(i.on || '')}"></label><label>${esc(i18n('Durée de validité demandée par ton notaire (mois)'))}<input type="number" name="months" min="1" max="120" value="${esc(i.months ?? '')}" placeholder="${esc(i18n('aucune'))}"></label>
                 <p class="ui-hint">${esc(i18n('Aucune durée par défaut : c’est toi qui la tapes. La 🔔 cloche prévient avant qu’elle ne soit trop ancienne.'))} ${setLink('validity_warn')}</p></div>`,
             onSubmit: async f => {
@@ -544,7 +543,7 @@
         let r; try { r = await get('p2_research', {case_id: D.id, person_id: pid}); } catch (e) { return toast(e.message, 'error'); }
         const name = nameOf(D, pid);
         const table = rows => `<table class="succ-table"><thead><tr><th>${esc(i18n('Date'))}</th><th>${esc(i18n('Où'))}</th><th>${esc(i18n('Quoi'))}</th><th>${esc(i18n('Résultat'))}</th></tr></thead><tbody>${rows.map(x => `<tr><td>${esc(fmtDate(x.date))}</td><td>${esc(x.where)}</td><td>${esc(x.what)}</td><td>${x.negative ? '∅ ' : ''}${esc(x.result)}</td></tr>`).join('')}</tbody></table>`;
-        ext.openDialog({eyebrow: i18n('🕵️ RECHERCHES · {n}', {n: D.number}), title: name, wide: true, submitLabel: i18n('Fermer'),
+        ext.openDialog({eyebrow: `🕵️ ${D.number}`, title: name, wide: true, submitLabel: i18n('Fermer'),
             body: `${r.rows.length ? `<div class="succ-scroll" data-i18n-off>${table(r.rows)}</div><p>${badge(i18n('recherches négatives : {n}', {n: r.negative}), 'grey')} <small class="muted">${esc(i18n('« Rien trouvé » est un résultat utile : il montre la diligence au notaire.'))}</small></p>` : A().empty(i18n('Aucune recherche notée pour cette personne.'), {icon: '🕵️'})}
                 <p class="ui-hint">${esc(i18n('Rien n’est recopié : les lignes viennent du 🗓 Journal des recherches, des ⚰️ vérifications INSEE et des 📞 échanges marqués « recherche ».'))}</p>
                 <div class="cl-out">${D.archived ? '' : `<button type="button" class="button small" data-sp2-research-add="${pid}">＋ ${esc(i18n('Noter une recherche'))}</button>`}<button type="button" class="button small secondary" data-sp2-research-csv>⤓ CSV</button><button type="button" class="button small secondary" data-sp2-research-print>🖨 ${esc(i18n('Pour le notaire'))}</button></div>`,
@@ -555,7 +554,7 @@
             })});
     }
     function researchAdd(D, pid) {
-        ext.openDialog({eyebrow: i18n('🕵️ RECHERCHES'), title: i18n('＋ Noter une recherche'), submitLabel: i18n('Noter'),
+        ext.openDialog({eyebrow: '🕵️', title: i18n('＋ Noter une recherche'), submitLabel: i18n('Noter'),
             body: `<div class="succ-form"><label>${esc(i18n('Où (service, site, mairie…)'))}<input name="where" maxlength="200" required></label><div class="succ-2"><label>${esc(i18n('Commune'))}<input name="commune" maxlength="120"></label><label>${esc(i18n('Années'))}<input name="years" maxlength="60"></label></div>
                 <label>${esc(i18n('Quoi'))}<input name="what" maxlength="300"></label><label>${esc(i18n('Résultat'))}<select name="result"><option value="found">${esc(i18n('Trouvé'))}</option><option value="none">${esc(i18n('Rien trouvé'))}</option><option value="partial">${esc(i18n('En partie'))}</option></select></label><label>${esc(i18n('Ce qui a été trouvé'))}<textarea name="found" rows="2"></textarea></label>
                 <p class="ui-hint">${esc(i18n('Écrit un dépouillement dans le 🗓 Journal des recherches (comme « Où chercher »).'))}</p></div>`,
@@ -583,7 +582,7 @@
         }
         const listHtml = `<ul class="sp2-map-list">${r.points.map(p => `<li><b data-sp2-name>${esc(p.name)}</b> · ${esc(p.city)} · ${esc(p.share)}${p.dead ? ' †' : ''} ${p.how === 'ban' ? badge(i18n('au numéro (BAN)'), 'blue') : ''} ${caseId ? '' : `<small class="muted">${esc(p.number)}</small>`}</li>`).join('')}</ul>`;
         const offHtml = r.off.length ? `<h4>${esc(i18n('Hors carte'))}</h4><ul>${r.off.map(p => `<li><span data-sp2-name>${esc(p.name)}</span> · ${esc(p.why === 'abroad' ? i18n('à l’étranger ({c})', {c: p.country || ''}) : p.why === 'noplace' ? i18n('commune pas placée ({c})', {c: p.city}) : i18n('adresse inconnue'))}</li>`).join('')}</ul>` : '';
-        ext.openDialog({eyebrow: i18n('🗺 CARTE DES HÉRITIERS'), title: caseId ? i18n('Où vivent les héritiers') : i18n('Tous les dossiers en cours'), wide: true, submitLabel: i18n('Fermer'),
+        ext.openDialog({eyebrow: '🗺', title: caseId ? i18n('Où vivent les héritiers') : i18n('Tous les dossiers en cours'), wide: true, submitLabel: i18n('Fermer'),
             body: `${svg || A().empty(i18n('Aucune adresse d’héritier placée sur la carte.'), {icon: '🗺'})}
                 <p class="ui-hint">● ${esc(i18n('héritier (adresse connue, au niveau de la commune)'))} · ▪ ${esc(i18n('notaire connu de l’app'))} · ${esc(i18n('Rien n’est envoyé en ligne.'))} ${r.precision === 'ban' && !r.ban_ready ? esc(i18n('La BAN n’est pas encore téléchargée : position à la commune.')) : ''} ${setLink('map_precision')}</p>
                 <div data-i18n-off>${listHtml}${offHtml}</div><div class="cl-out"><button type="button" class="button small secondary" data-sp2-map-img>🖼 ${esc(i18n('Image de la carte (sans noms)'))}</button></div>`,
@@ -600,7 +599,7 @@
     async function delaysDialog() {
         let r; try { r = await get('p2_delays'); } catch (e) { return toast(e.message, 'error'); }
         const set = cfg();
-        ext.openDialog({eyebrow: i18n('⏳ DÉLAI DE RÉPONSE'), title: i18n('Par organisme, d’après le Registre'), wide: true, submitLabel: i18n('Fermer'),
+        ext.openDialog({eyebrow: '⏳', title: i18n('Par organisme, d’après le Registre'), wide: true, submitLabel: i18n('Fermer'),
             body: r.items.length ? `<div class="succ-scroll"><table class="succ-table"><thead><tr><th>${esc(i18n('Organisme'))}</th><th>${esc(i18n('Courriers'))}</th><th>${esc(set.delay_stat === 'median' ? i18n('Médiane') : i18n('Moyenne'))}</th></tr></thead><tbody data-i18n-off>${r.items.map(x => `<tr><td>${esc(x.who)}</td><td>${x.n}</td><td>${x.enough ? esc(i18n('{n} jours', {n: x.days})) : `<small class="muted">${esc(i18n('pas assez de courriers'))}</small>`}</td></tr>`).join('')}</tbody></table></div><p class="ui-hint">${esc(i18n('De l’envoi à la réponse reçue (demandes d’actes des dossiers). Aide à prévoir la remise et à relancer au bon moment.'))} ${setLink('delay_stat')}</p>`
                 : A().empty(i18n('Pas encore de réponse notée dans le Registre.'), {icon: '⏳'})});
     }
@@ -618,7 +617,7 @@
         let list; try { list = (await get('p2_cases')).items.filter(c => c.id !== D.id && !['clos', 'archive'].includes(c.state)); } catch (e) { return toast(e.message, 'error'); }
         if (!list.length) return toast(i18n('Aucun autre dossier en cours dans cette généalogie (d’abord ⇄ Déplacer s’il est dans une autre).'));
         const set = cfg();
-        ext.openDialog({eyebrow: i18n('👥 FUSION'), title: i18n('Fusionner avec un autre dossier'), wide: true, submitLabel: i18n('Fusionner'),
+        ext.openDialog({eyebrow: '👥', title: i18n('Fusionner avec un autre dossier'), wide: true, submitLabel: i18n('Fusionner'),
             body: `<div class="succ-form"><label>${esc(i18n('Le dossier à réunir dans {n}', {n: D.number}))}<select name="from">${list.map(c => `<option value="${c.id}">${esc(c.number)} · ${esc(c.title)}</option>`).join('')}</select></label>
                 <span class="pk-lab">${esc(i18n('Comment'))}</span>${seg('mode', C().SPEC.find(g => g.items.some(i => i.key === 'merge_mode')).items.find(i => i.key === 'merge_mode').options, set.merge_mode)}
                 <div data-sp2-mprev>${UI().spinner(i18n('Lecture…'))}</div>
@@ -672,7 +671,7 @@
     };
     SP.askArchivePassword = () => new Promise(res => {
         let done = false;
-        ext.openDialog({eyebrow: i18n('🔐 ARCHIVE PROTÉGÉE'), title: i18n('Mot de passe de l’archive'), submitLabel: i18n('Ouvrir'),
+        ext.openDialog({eyebrow: '🔐', title: i18n('Mot de passe de l’archive'), submitLabel: i18n('Ouvrir'),
             body: `<label>${esc(i18n('Mot de passe'))}<input type="password" name="pw" autocomplete="off"></label>`,
             onOpen: d => d.addEventListener('close', () => { if (!done) res(''); }),
             onSubmit: f => { done = true; res(f.pw.value); }});
@@ -713,7 +712,7 @@
         const mp = t.closest('[data-sp2-map]'); if (mp) { e.preventDefault(); t.closest('details')?.removeAttribute('open'); return mapDialog(Number(mp.dataset.sp2Map) || 0); }
         const D = cur(); if (!D || !t.closest('.succ-page, dialog')) return;
         const R = ext.successoral?.currentR?.();
-        if (t.closest('[data-sp2-share]')) { const on = !shareOn(); t.closest('[data-sp2-share]').setAttribute('aria-pressed', String(on)); return setShare(on); }
+        if (t.closest('[data-sp2-share]')) { const on = !shareOn(); t.closest('details')?.removeAttribute('open'); setShare(on); return reload(); }
         if (t.closest('[data-sp2-insee]')) return inseeDialog(D);
         if (t.closest('[data-sp2-q]')) return qDialog(D, R);
         if (t.closest('[data-sp2-q-import]')) return qImport(D);

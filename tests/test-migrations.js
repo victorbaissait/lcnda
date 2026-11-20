@@ -89,6 +89,17 @@ const backups = (dir) => (fs.existsSync(path.join(dir, 'backups')) ? fs.readdirS
     assert.ok(expected >= 95);
   });
 
+  await step('structure n°97 : ⚖️ outils de plus du successoral (⚰️ INSEE, 📞 échanges, 💶 fonds, 📋 questionnaires, 🧾 factures, 📮 recommandés, 🗓 dates, 👥 fusion, 📅 délivrance)', async () => {
+    const dir = path.join(tmp, 'ancienne');
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM sqlite_master WHERE type='table' AND name IN ('succ_insee_checks','succ_calls','succ_funds','succ_questionnaires','succ_template_versions','succ_invoices','succ_invoice_lines','succ_invoice_counters')")), 8);
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM pragma_table_info('courriers') WHERE name IN ('recommande','recommande_num','ar_date','ar_relance_jours','ar_etat','template_version','reponse_le','origin_case_id')")), 8);
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM pragma_table_info('succ_deadlines') WHERE name IN ('origin','reminders','important','reminders_seen','prev_due')")), 5);
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM pragma_table_info('succ_cases') WHERE name='merged_into'")), 1);
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM pragma_table_info('succ_pieces') WHERE name IN ('issued_on','valid_months')")), 2);
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM succ_invoices")), 0, 'aucune facture posée par la mise à jour');
+    assert.ok(expected >= 97);
+  });
+
   await step('la copie de sécurité est une base complète, dans l’état d’avant la mise à jour', async () => {
     const dir = path.join(tmp, 'ancienne');
     const copy = path.join(dir, 'backups', backups(dir)[0]);
