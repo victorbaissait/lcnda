@@ -146,6 +146,12 @@ function checkPhp(phpPath) {
  * sessions (relâchées tout de suite) supportent plusieurs processus. Sous Windows, c'est le seul moyen d'avoir
  * du parallélisme (pas de PHP_CLI_SERVER_WORKERS).
  */
+/** L'app installée (Electron empaqueté) : pas en essai. Hors d'Electron (tests sous Node) : false. */
+function isPackagedApp() {
+  if (!process.versions.electron) return false;
+  try { return !!require('electron').app?.isPackaged; } catch { return false; }
+}
+
 class PhpServer extends EventEmitter {
   /**
    * @param {object} o
@@ -166,6 +172,9 @@ class PhpServer extends EventEmitter {
     // Second secret, connu seulement du processus principal : autorise l'import d'un fichier lu directement sur le
     // disque (choisi dans la fenêtre système). La page web ne le connaît pas et ne peut donc pas désigner un chemin.
     this.localSecret = crypto.randomBytes(24).toString('hex');
+    // 🔐 un lancement de l'app : une généalogie protégée par un mot de passe et ouverte au lancement précédent est
+    // reverrouillée (lib/verrou.php compare ce numéro à celui de la séance). Gardé si PHP redémarre après un plantage.
+    this.bootId = crypto.randomBytes(16).toString('hex');
     this.port = 0;
     this.poolSize = Math.max(1, Math.min(16, Math.floor(o.pool || 1)));
     this.backends = []; // { id, port, child, active, ready }
@@ -254,7 +263,10 @@ class PhpServer extends EventEmitter {
       GENEALOGY_SESSION_DIR: o.sessionDir,
       GENEALOGY_APP_SECRET: this.secret,
       GENEALOGY_LOCAL_SECRET: this.localSecret,
+      GENEALOGY_BOOT_ID: this.bootId,
     };
+    // 🔐 portes de test (horloge avancée, nom d'ordinateur imposé) : jamais transmises au PHP de l'app installée
+    if (o.packaged || isPackagedApp()) { for (const k of ['LCNDA_TEST_CLOCK_FILE', 'GENEALOGY_TEST', 'GENEALOGY_MACHINE_NAME']) delete env[k]; }
     if (o.workers && process.platform !== 'win32') env.PHP_CLI_SERVER_WORKERS = String(o.workers);
 
     const tag = this.poolSize > 1 ? ` n°${b.id}` : '';
@@ -475,4 +487,4 @@ class PhpServer extends EventEmitter {
   }
 }
 
-module.exports = { PhpServer, findPhp, checkPhp, phpRuntimeArgs, runtimeKey, phpRuntimeKey, devBundledPhp, SECRET_HEADER, isLiveSiteRequest };
+module.exports = { isPackagedApp, PhpServer, findPhp, checkPhp, phpRuntimeArgs, runtimeKey, phpRuntimeKey, devBundledPhp, SECRET_HEADER, isLiveSiteRequest };

@@ -132,6 +132,7 @@
             actions: ['<button type="button" class="button secondary" data-ui-reset data-sa-reset>↺ Remettre comme au départ</button>']}) : '<h2>Sauvegarde automatique</h2>';
         ws.innerHTML = `<section class="page sa-page" data-sa-page>${head}
             <section class="maintenance-panel sa-status" data-sa-status>${statusHtml(st)}</section>
+            ${st.glock ? msg('info', '🔐 ' + esc(i18n('Cette généalogie est protégée par un mot de passe : dans le dossier choisi, elle n’est jamais copiée en clair. Une copie chiffrée (AES-256, même mot de passe) y est faite quand tu l’ouvres avec son mot de passe ; dans le dossier de l’app, les copies restent comme la base.'))) : ''}
             <div class="sa-grid">${formHtml(st)}</div>
             <section class="maintenance-panel"><h3>🗂 Les copies <small class="muted">${esc(st.folder || '')}</small></h3>${copiesHtml(st)}
             ${hint('« ↺ Revenir à cette copie » remplace ta généalogie par la copie choisie ; ta base actuelle est gardée d’abord (« avant restauration »).')}</section>

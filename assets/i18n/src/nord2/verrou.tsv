@@ -1,0 +1,131 @@
+fr ¦ sk ¦ nb
+# Zone « verrou » : 🔐 mot de passe d’une généalogie et 📜 « Qui a vu quoi » (assets/js/app-verrou*.js, lib/verrou.php, lib/verrou_page.php)
+1 h ¦ 1 h ¦ 1 t
+12 mois ¦ 12 mesiacov ¦ 12 måneder
+15 min ¦ 15 min ¦ 15 min
+3 ans ¦ 3 roky ¦ 3 år
+3 mois ¦ 3 mesiace ¦ 3 måneder
+5 min ¦ 5 min ¦ 5 min
+6 mois ¦ 6 mesiacov ¦ 6 måneder
+Archive du dossier (.zip) ¦ Archív spisu (.zip) ¦ Arkiv for saken (.zip)
+Attention : le verrou n’empêche pas de lire le fichier si quelqu’un le copie (il n’est pas chiffré). Pour ça, chiffre le disque de ton ordinateur (FileVault sur Mac, BitLocker sous Windows). ¦ Pozor: zámok nezabráni prečítať súbor, ak ho niekto skopíruje (nie je zašifrovaný). Na to zašifruj disk svojho počítača (FileVault na Macu, BitLocker vo Windows). ¦ Merk: låsen hindrer ikke noen i å lese filen hvis de kopierer den (den er ikke kryptert). Krypter i stedet datamaskinens disk (FileVault på Mac, BitLocker i Windows).
+Autre format ¦ Iný formát ¦ Annet format
+Base .db ¦ Databáza .db ¦ Database .db
+Bloc ¦ Blok ¦ Blokk
+Ce mot de passe contient des caractères illisibles. ¦ Toto heslo obsahuje nečitateľné znaky. ¦ Passordet inneholder uleselige tegn.
+Ce mot de passe empêche d’ouvrir cette généalogie dans l’app, ici et après chaque délai sans rien toucher. ¦ Toto heslo bráni otvoriť tento rodokmeň v aplikácii, tu aj po každom čase nečinnosti. ¦ Passordet hindrer at slektstreet åpnes i appen, her og etter hver periode uten aktivitet.
+Ce que ce mot de passe protège vraiment ¦ Čo toto heslo naozaj chráni ¦ Hva passordet egentlig beskytter
+Cette généalogie a déjà un mot de passe : change-le plutôt. ¦ Tento rodokmeň už heslo má: radšej ho zmeň. ¦ Slektstreet har allerede et passord: bytt det heller.
+Cette généalogie est maintenant protégée par un mot de passe. ¦ Tento rodokmeň je teraz chránený heslom. ¦ Slektstreet er nå beskyttet med et passord.
+Cette généalogie est protégée : sa sauvegarde l’est aussi, avec le même mot de passe. ¦ Tento rodokmeň je chránený: jeho záloha tiež, tým istým heslom. ¦ Slektstreet er beskyttet: sikkerhetskopien også, med samme passord.
+Cette généalogie est protégée par un mot de passe : dans le dossier choisi, elle n’est jamais copiée en clair. Une copie chiffrée (AES-256, même mot de passe) y est faite quand tu l’ouvres avec son mot de passe ; dans le dossier de l’app, les copies restent comme la base. ¦ Tento rodokmeň je chránený heslom: do zvoleného priečinka sa nikdy nekopíruje nešifrovane. Šifrovaná kópia (AES-256, to isté heslo) sa tam vytvorí, keď ho otvoríš jeho heslom; v priečinku aplikácie zostávajú kópie ako databáza. ¦ Slektstreet er beskyttet med et passord: i den valgte mappen kopieres det aldri ukryptert. En kryptert kopi (AES-256, samme passord) lages der når du åpner det med passordet; i appens mappe forblir kopiene som databasen.
+Cette généalogie est protégée par un mot de passe : ses sauvegardes le sont aussi. Utilise « Sauvegarde complète protégée » avec le même mot de passe. ¦ Tento rodokmeň je chránený heslom: jeho zálohy tiež. Použi „Chránenú úplnú zálohu“ s tým istým heslom. ¦ Slektstreet er beskyttet med et passord: sikkerhetskopiene også. Bruk «Beskyttet full sikkerhetskopi» med samme passord.
+Cette généalogie est verrouillée : donne son mot de passe pour l’ouvrir. ¦ Tento rodokmeň je zamknutý: zadaj jeho heslo, aby si ho otvoril. ¦ Slektstreet er låst: skriv inn passordet for å åpne det.
+Cette généalogie est verrouillée par un mot de passe : ouvre-la d’abord. ¦ Tento rodokmeň je zamknutý heslom: najprv ho otvor. ¦ Slektstreet er låst med et passord: åpne det først.
+Cette généalogie n’a pas de mot de passe. ¦ Tento rodokmeň nemá heslo. ¦ Slektstreet har ikke passord.
+Changer le délai ¦ Zmeniť čas ¦ Endre tiden
+Changer le mot de passe ¦ Zmeniť heslo ¦ Bytt passord
+Changer, ou retirer ¦ Zmeniť alebo odstrániť ¦ Endre eller fjern
+Coche la case : sans ce mot de passe, tu ne pourras plus ouvrir cette généalogie dans l’app. ¦ Začiarkni políčko: bez tohto hesla už tento rodokmeň v aplikácii neotvoríš. ¦ Kryss av i boksen: uten passordet kan du ikke lenger åpne slektstreet i appen.
+Courriers en série ¦ Hromadné listy ¦ Seriebrev
+Dossier déplacé vers une autre généalogie ¦ Spis presunutý do iného rodokmeňa ¦ Saken flyttet til et annet slektstre
+Dossier ou objet ¦ Spis alebo položka ¦ Sak eller objekt
+Dossier, poste, action… ¦ Spis, počítač, akcia… ¦ Sak, datamaskin, handling…
+Durée changée. Lignes plus anciennes effacées : {n} ¦ Čas zmenený. Vymazané staršie riadky: {n} ¦ Tiden endret. Eldre linjer slettet: {n}
+Durée de conservation changée ¦ Čas uchovania zmenený ¦ Lagringstiden endret
+Durée inconnue. ¦ Neznámy čas. ¦ Ukjent tid.
+Délai de reverrouillage changé ¦ Čas do opätovného zamknutia zmenený ¦ Tiden til ny låsing endret
+Délai de reverrouillage inconnu. ¦ Neznámy čas do opätovného zamknutia. ¦ Ukjent tid til ny låsing.
+Elle est protégée par un mot de passe. ¦ Je chránený heslom. ¦ Det er beskyttet med et passord.
+Export ¦ Export ¦ Eksport
+Exports ¦ Exporty ¦ Eksporter
+Force : {s} ¦ Sila: {s} ¦ Styrke: {s}
+Généalogie ouverte avec le mot de passe ¦ Rodokmeň otvorený heslom ¦ Slektstreet åpnet med passordet
+Il n’y a pas d’autre généalogie. ¦ Iný rodokmeň nie je. ¦ Det finnes ikke noe annet slektstre.
+Impossible de retirer le verrou (dossier des données en lecture seule ?). ¦ Zámok sa nedá odstrániť (priečinok údajov len na čítanie?). ¦ Kan ikke fjerne låsen (datamappen skrivebeskyttet?).
+Impossible de vérifier le mot de passe (dossier des données en lecture seule ?). ¦ Heslo sa nedá overiť (priečinok údajov len na čítanie?). ¦ Kan ikke kontrollere passordet (datamappen skrivebeskyttet?).
+Impossible d’enregistrer le verrou (dossier des données en lecture seule ?). ¦ Zámok sa nedá uložiť (priečinok údajov len na čítanie?). ¦ Kan ikke lagre låsen (datamappen skrivebeskyttet?).
+Impossible d’ouvrir cette généalogie. ¦ Tento rodokmeň sa nedá otvoriť. ¦ Kan ikke åpne slektstreet.
+Impression ou PDF ¦ Tlač alebo PDF ¦ Utskrift eller PDF
+Impressions ¦ Tlače ¦ Utskrifter
+Journal du dossier (CSV) ¦ Denník spisu (CSV) ¦ Sakens logg (CSV)
+J’ai compris : sans ce mot de passe, je ne pourrai plus ouvrir cette généalogie dans l’app. ¦ Rozumiem: bez tohto hesla už tento rodokmeň v aplikácii neotvorím. ¦ Jeg forstår: uten passordet kan jeg ikke lenger åpne slektstreet i appen.
+Le mot de passe est trop long (1024 caractères au plus). ¦ Heslo je príliš dlhé (najviac 1024 znakov). ¦ Passordet er for langt (høyst 1024 tegn).
+Le serveur de l’app ne répond pas. Réessaie. ¦ Server aplikácie neodpovedá. Skús to znova. ¦ Appens server svarer ikke. Prøv igjen.
+Le verrou n’empêche pas de lire le fichier si quelqu’un le copie : il n’est pas chiffré. Pour ça, chiffre le disque de ton ordinateur : FileVault sur Mac (Réglages Système → Confidentialité et sécurité), BitLocker sous Windows (Paramètres → Confidentialité et sécurité → Chiffrement de l’appareil). ¦ Zámok nezabráni prečítať súbor, ak ho niekto skopíruje: nie je zašifrovaný. Na to zašifruj disk svojho počítača: FileVault na Macu (Systémové nastavenia → Súkromie a bezpečnosť), BitLocker vo Windows (Nastavenia → Ochrana osobných údajov a zabezpečenie → Šifrovanie zariadenia). ¦ Låsen hindrer ikke noen i å lese filen hvis de kopierer den: den er ikke kryptert. Krypter i stedet datamaskinens disk: FileVault på Mac (Systeminnstillinger → Personvern og sikkerhet), BitLocker i Windows (Innstillinger → Personvern og sikkerhet → Enhetskryptering).
+Lecture seule : rien ne se modifie ; seule cette durée fait disparaître les lignes plus vieilles (et c’est noté). ¦ Len na čítanie: nič sa nemení; iba tento čas nechá zmiznúť staršie riadky (a zapíše sa to). ¦ Skrivebeskyttet: ingenting endres; bare denne tiden får eldre linjer til å forsvinne (og det noteres).
+Lecture seule. Tous les dossiers : Réglages → 📜 Qui a vu quoi. ¦ Len na čítanie. Všetky spisy: Nastavenia → 📜 Kto čo videl. ¦ Skrivebeskyttet. Alle saker: Innstillinger → 📜 Hvem så hva.
+Les deux mots de passe ne sont pas pareils. ¦ Obe heslá nie sú rovnaké. ¦ De to passordene er ikke like.
+Les ouvertures de dossier, les impressions, les exports, les courriers en série et chaque essai du mot de passe, notés par l’app sur ce poste ({machine}). ¦ Otvorenia spisov, tlače, exporty, hromadné listy a každý pokus o heslo, zapísané aplikáciou na tomto počítači ({machine}). ¦ Åpnede saker, utskrifter, eksporter, seriebrev og hvert passordforsøk, notert av appen på denne datamaskinen ({machine}).
+Les sauvegardes de cette généalogie sont toujours protégées par ce mot de passe (AES-256) : aucune copie ne sort en clair de son dossier. ¦ Zálohy tohto rodokmeňa sú vždy chránené týmto heslom (AES-256): žiadna kópia neopustí jeho priečinok nešifrovane. ¦ Slektstreets sikkerhetskopier er alltid beskyttet med passordet (AES-256): ingen kopi forlater mappen ukryptert.
+Lettres rangées : {n} ¦ Založené listy: {n} ¦ Arkiverte brev: {n}
+Lettres retirées (↶ Annuler) : {n} ¦ Odobraté listy (↶ Späť): {n} ¦ Fjernede brev (↶ Angre): {n}
+Lignes : {n} sur {t} ¦ Riadky: {n} z {t} ¦ Linjer: {n} av {t}
+Lignes anciennes effacées ¦ Vymazané staré riadky ¦ Gamle linjer slettet
+Lignes effacées : {n} (gardées : {m}) ¦ Vymazané riadky: {n} (uchované: {m}) ¦ Slettede linjer: {n} (lagres: {m})
+Mode consultation : le registre ne se lit pas. ¦ Režim prehliadania: záznam sa nedá čítať. ¦ Visningsmodus: loggen kan ikke leses.
+Mot de passe changé ¦ Heslo zmenené ¦ Passord byttet
+Mot de passe changé. Les autres fenêtres ouvertes devront le redemander. ¦ Heslo zmenené. Ostatné otvorené okná si ho budú musieť vyžiadať znova. ¦ Passord byttet. Andre åpne vinduer må be om det igjen.
+Mot de passe de cette généalogie ¦ Heslo tohto rodokmeňa ¦ Passord for slektstreet
+Mot de passe oublié : il n’y a pas de porte dérobée. Sans lui, cette généalogie ne peut plus être ouverte dans l’app. ¦ Zabudnuté heslo: neexistujú žiadne zadné dvierka. Bez neho sa tento rodokmeň v aplikácii už nedá otvoriť. ¦ Glemt passord: det finnes ingen bakdør. Uten det kan slektstreet ikke lenger åpnes i appen.
+Mot de passe oublié ? ¦ Zabudol si heslo? ¦ Glemt passordet?
+Mot de passe posé ¦ Heslo nastavené ¦ Passord satt
+Mot de passe refusé ¦ Heslo odmietnuté ¦ Passord avvist
+Mot de passe retiré ¦ Heslo odstránené ¦ Passord fjernet
+Musée de famille ¦ Rodinné múzeum ¦ Familiemuseum
+Ouvertures ¦ Otvorenia ¦ Åpninger
+Ouverture… ¦ Otvára sa… ¦ Åpner…
+Ouvrir une autre généalogie ¦ Otvoriť iný rodokmeň ¦ Åpne et annet slektstre
+Paquet du travail à deux ¦ Balík práce vo dvojici ¦ Pakke fra arbeid i par
+Partage avec la famille ¦ Zdieľanie s rodinou ¦ Deling med familien
+Patiente {n} s ¦ Počkaj {n} s ¦ Vent {n} s
+Patiente {n} s avant de réessayer. ¦ Počkaj {n} s, kým to skúsiš znova. ¦ Vent {n} s før du prøver igjen.
+Poste ¦ Počítač ¦ Datamaskin
+Pour une généalogie protégée, tape son mot de passe : la sauvegarde est chiffrée avec lui (AES-256). ¦ Pri chránenom rodokmeni zadaj jeho heslo: záloha sa ním zašifruje (AES-256). ¦ For et beskyttet slektstre, skriv passordet: sikkerhetskopien krypteres med det (AES-256).
+Protéger ¦ Chrániť ¦ Beskytt
+Protéger cette généalogie ¦ Chrániť tento rodokmeň ¦ Beskytt slektstreet
+Protégée ¦ Chránený ¦ Beskyttet
+Qui a vu ce dossier ¦ Kto videl tento spis ¦ Hvem så saken
+Qui a vu le dossier {n} ¦ Kto videl spis {n} ¦ Hvem så sak {n}
+Qui a vu quoi ¦ Kto čo videl ¦ Hvem så hva
+Registre « Qui a vu quoi » (CSV) ¦ Záznam „Kto čo videl“ (CSV) ¦ Loggen «Hvem så hva» (CSV)
+Retirer le mot de passe ¦ Odstrániť heslo ¦ Fjern passordet
+Retirer le mot de passe de « {name} » ? Elle s’ouvrira sans rien demander, et ses sauvegardes ne seront plus forcément protégées. ¦ Odstrániť heslo rodokmeňa „{name}“? Bude sa otvárať bez pýtania a jeho zálohy už nemusia byť chránené. ¦ Fjerne passordet for «{name}»? Det åpnes da uten å spørre, og sikkerhetskopiene er ikke lenger nødvendigvis beskyttet.
+Reverrouillée (délai passé ou app relancée) ¦ Znova zamknuté (čas uplynul alebo sa aplikácia reštartovala) ¦ Låst igjen (tiden gikk ut eller appen ble startet på nytt)
+Sans ce mot de passe, cette généalogie ne peut plus être ouverte dans l’app : il n’existe pas de porte dérobée, et personne ne peut le retrouver pour toi. ¦ Bez tohto hesla sa tento rodokmeň v aplikácii už nedá otvoriť: neexistujú zadné dvierka a nikto ho za teba nenájde. ¦ Uten passordet kan slektstreet ikke lenger åpnes i appen: det finnes ingen bakdør, og ingen kan finne det fram for deg.
+Sauvegarde complète ¦ Úplná záloha ¦ Full sikkerhetskopi
+Se verrouille après {m} sans rien toucher, à la fermeture de l’app et quand on change de généalogie. ¦ Zamkne sa po {m} nečinnosti, pri zatvorení aplikácie a pri zmene rodokmeňa. ¦ Låses etter {m} uten aktivitet, når appen lukkes og når du bytter slektstre.
+Site web ¦ Web ¦ Nettsted
+Site web publié ¦ Web zverejnený ¦ Nettsted publisert
+Tableau de bord des dossiers (CSV) · dossiers : {n} ¦ Prehľad spisov (CSV) · spisy: {n} ¦ Oversikt over saker (CSV) · saker: {n}
+Tableau, arbre ou parts imprimés ¦ Vytlačená tabuľka, strom alebo podiely ¦ Tabell, tre eller andeler skrevet ut
+Tape d’abord le mot de passe actuel. ¦ Najprv zadaj súčasné heslo. ¦ Skriv først det nåværende passordet.
+Tape le mot de passe. ¦ Zadaj heslo. ¦ Skriv passordet.
+Tout le registre ¦ Celý záznam ¦ Hele loggen
+Un verrou à l’ouverture de « {name} », sur cet ordinateur et sur les autres. ¦ Zámok pri otvorení „{name}“, na tomto počítači aj na ostatných. ¦ En lås ved åpning av «{name}», på denne datamaskinen og på de andre.
+Verrouiller après ¦ Zamknúť po ¦ Lås etter
+Verrouiller maintenant ¦ Zamknúť hneď ¦ Lås nå
+Verrouiller maintenant (généalogie protégée par un mot de passe) ¦ Zamknúť hneď (rodokmeň chránený heslom) ¦ Lås nå (slektstre beskyttet med passord)
+Verrouillée : {names} (ouvre-la avec son mot de passe pour voir ses dossiers) ¦ Zamknuté: {names} (otvor ho heslom, aby si videl jeho spisy) ¦ Låst: {names} (åpne det med passordet for å se sakene)
+Verrouillée à la main ¦ Zamknuté ručne ¦ Låst manuelt
+après {m} ¦ po {m} ¦ etter {m}
+pour changer le délai ¦ na zmenu času ¦ for å endre tiden
+pour changer le mot de passe ¦ na zmenu hesla ¦ for å bytte passordet
+pour retirer le mot de passe ¦ na odstránenie hesla ¦ for å fjerne passordet
+pour une sauvegarde protégée ¦ pre chránenú zálohu ¦ for en beskyttet sikkerhetskopi
+protégée par un mot de passe ¦ chránený heslom ¦ beskyttet med et passord
+sans rien toucher ¦ nečinnosti ¦ uten aktivitet
+très bon ¦ veľmi dobrá ¦ svært god
+« {name} » est verrouillée ¦ „{name}“ je zamknutý ¦ «{name}» er låst
+📜 Qui a vu quoi ¦ 📜 Kto čo videl ¦ 📜 Hvem så hva
+🔐 Généalogie verrouillée ¦ 🔐 Rodokmeň zamknutý ¦ 🔐 Slektstre låst
+🔐 Mot de passe de cette généalogie ¦ 🔐 Heslo tohto rodokmeňa ¦ 🔐 Passord for slektstreet
+faible ¦ slabá ¦ svak
+moyen ¦ stredná ¦ middels
+bon ¦ dobrá ¦ god
+pour ouvrir la généalogie ¦ na otvorenie rodokmeňa ¦ for å åpne slektstreet
+Ce dossier appartient à l’app (données, médias ou sauvegardes d’une généalogie) : choisis un autre dossier. ¦ Tento priečinok patrí aplikácii (údaje, médiá alebo zálohy rodokmeňa): vyber iný priečinok. ¦ Mappen tilhører appen (data, medier eller sikkerhetskopier av et slektstre): velg en annen mappe.
+Ce fichier est rangé dans les dossiers de l’app : choisis un fichier ailleurs. ¦ Tento súbor je v priečinkoch aplikácie: vyber súbor inde. ¦ Filen ligger i appens mapper: velg en fil et annet sted.
+Cette copie est rangée dans les dossiers d’une autre généalogie : elle ne peut pas être remise ici. ¦ Táto kópia je v priečinkoch iného rodokmeňa: nedá sa obnoviť sem. ¦ Kopien ligger i et annet slektstres mapper: den kan ikke gjenopprettes her.
+Cette copie vient d’une généalogie protégée par un mot de passe : ouvre-la pour la restaurer. ¦ Táto kópia pochádza z rodokmeňa chráneného heslom: otvor ho, aby si ju obnovil. ¦ Kopien kommer fra et slektstre beskyttet med passord: åpne det for å gjenopprette den.
+Cette base est protégée par un mot de passe : donne-le pour l’ouvrir. ¦ Táto databáza je chránená heslom: zadaj ho, aby si ju otvoril. ¦ Databasen er beskyttet med et passord: skriv det inn for å åpne den.

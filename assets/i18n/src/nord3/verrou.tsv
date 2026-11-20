@@ -1,0 +1,131 @@
+fr ¦ ro
+# Zone « verrou » : 🔐 mot de passe d’une généalogie et 📜 « Qui a vu quoi » (assets/js/app-verrou*.js, lib/verrou.php, lib/verrou_page.php)
+1 h ¦ 1 h
+12 mois ¦ 12 luni
+15 min ¦ 15 min
+3 ans ¦ 3 ani
+3 mois ¦ 3 luni
+5 min ¦ 5 min
+6 mois ¦ 6 luni
+Archive du dossier (.zip) ¦ Arhiva dosarului (.zip)
+Attention : le verrou n’empêche pas de lire le fichier si quelqu’un le copie (il n’est pas chiffré). Pour ça, chiffre le disque de ton ordinateur (FileVault sur Mac, BitLocker sous Windows). ¦ Atenție: lacătul nu împiedică citirea fișierului dacă cineva îl copiază (nu este criptat). Pentru asta, criptează discul calculatorului tău (FileVault pe Mac, BitLocker pe Windows).
+Autre format ¦ Alt format
+Base .db ¦ Bază .db
+Bloc ¦ Bloc
+Ce mot de passe contient des caractères illisibles. ¦ Această parolă conține caractere ilizibile.
+Ce mot de passe empêche d’ouvrir cette généalogie dans l’app, ici et après chaque délai sans rien toucher. ¦ Această parolă împiedică deschiderea acestei genealogii în aplicație, aici și după fiecare interval fără nicio atingere.
+Ce que ce mot de passe protège vraiment ¦ Ce protejează cu adevărat această parolă
+Cette généalogie a déjà un mot de passe : change-le plutôt. ¦ Această genealogie are deja o parolă: mai bine schimb-o.
+Cette généalogie est maintenant protégée par un mot de passe. ¦ Această genealogie este acum protejată de o parolă.
+Cette généalogie est protégée : sa sauvegarde l’est aussi, avec le même mot de passe. ¦ Această genealogie este protejată: copia ei de siguranță la fel, cu aceeași parolă.
+Cette généalogie est protégée par un mot de passe : dans le dossier choisi, elle n’est jamais copiée en clair. Une copie chiffrée (AES-256, même mot de passe) y est faite quand tu l’ouvres avec son mot de passe ; dans le dossier de l’app, les copies restent comme la base. ¦ Această genealogie este protejată de o parolă: în dosarul ales nu este copiată niciodată necriptat. O copie criptată (AES-256, aceeași parolă) se face acolo când o deschizi cu parola ei; în dosarul aplicației, copiile rămân ca baza.
+Cette généalogie est protégée par un mot de passe : ses sauvegardes le sont aussi. Utilise « Sauvegarde complète protégée » avec le même mot de passe. ¦ Această genealogie este protejată de o parolă: copiile ei de siguranță la fel. Folosește „Copie completă protejată” cu aceeași parolă.
+Cette généalogie est verrouillée : donne son mot de passe pour l’ouvrir. ¦ Această genealogie este blocată: introdu parola ei ca s-o deschizi.
+Cette généalogie est verrouillée par un mot de passe : ouvre-la d’abord. ¦ Această genealogie este blocată de o parolă: deschide-o mai întâi.
+Cette généalogie n’a pas de mot de passe. ¦ Această genealogie nu are parolă.
+Changer le délai ¦ Schimbă intervalul
+Changer le mot de passe ¦ Schimbă parola
+Changer, ou retirer ¦ Schimbă sau elimină
+Coche la case : sans ce mot de passe, tu ne pourras plus ouvrir cette généalogie dans l’app. ¦ Bifează căsuța: fără această parolă nu vei mai putea deschide această genealogie în aplicație.
+Courriers en série ¦ Scrisori în serie
+Dossier déplacé vers une autre généalogie ¦ Dosar mutat în altă genealogie
+Dossier ou objet ¦ Dosar sau obiect
+Dossier, poste, action… ¦ Dosar, calculator, acțiune…
+Durée changée. Lignes plus anciennes effacées : {n} ¦ Durată schimbată. Rânduri mai vechi șterse: {n}
+Durée de conservation changée ¦ Durata de păstrare a fost schimbată
+Durée inconnue. ¦ Durată necunoscută.
+Délai de reverrouillage changé ¦ Intervalul de reblocare a fost schimbat
+Délai de reverrouillage inconnu. ¦ Interval de reblocare necunoscut.
+Elle est protégée par un mot de passe. ¦ Este protejată de o parolă.
+Export ¦ Export
+Exports ¦ Exporturi
+Force : {s} ¦ Putere: {s}
+Généalogie ouverte avec le mot de passe ¦ Genealogie deschisă cu parola
+Il n’y a pas d’autre généalogie. ¦ Nu există altă genealogie.
+Impossible de retirer le verrou (dossier des données en lecture seule ?). ¦ Nu se poate elimina lacătul (dosarul de date doar pentru citire?).
+Impossible de vérifier le mot de passe (dossier des données en lecture seule ?). ¦ Nu se poate verifica parola (dosarul de date doar pentru citire?).
+Impossible d’enregistrer le verrou (dossier des données en lecture seule ?). ¦ Nu se poate salva lacătul (dosarul de date doar pentru citire?).
+Impossible d’ouvrir cette généalogie. ¦ Nu se poate deschide această genealogie.
+Impression ou PDF ¦ Tipărire sau PDF
+Impressions ¦ Tipăriri
+Journal du dossier (CSV) ¦ Jurnalul dosarului (CSV)
+J’ai compris : sans ce mot de passe, je ne pourrai plus ouvrir cette généalogie dans l’app. ¦ Am înțeles: fără această parolă nu voi mai putea deschide această genealogie în aplicație.
+Le mot de passe est trop long (1024 caractères au plus). ¦ Parola este prea lungă (cel mult 1024 de caractere).
+Le serveur de l’app ne répond pas. Réessaie. ¦ Serverul aplicației nu răspunde. Încearcă din nou.
+Le verrou n’empêche pas de lire le fichier si quelqu’un le copie : il n’est pas chiffré. Pour ça, chiffre le disque de ton ordinateur : FileVault sur Mac (Réglages Système → Confidentialité et sécurité), BitLocker sous Windows (Paramètres → Confidentialité et sécurité → Chiffrement de l’appareil). ¦ Lacătul nu împiedică citirea fișierului dacă cineva îl copiază: nu este criptat. Pentru asta, criptează discul calculatorului tău: FileVault pe Mac (Configurări sistem → Confidențialitate și securitate), BitLocker pe Windows (Setări → Confidențialitate și securitate → Criptarea dispozitivului).
+Lecture seule : rien ne se modifie ; seule cette durée fait disparaître les lignes plus vieilles (et c’est noté). ¦ Doar citire: nimic nu se modifică; doar această durată face să dispară rândurile mai vechi (și se notează).
+Lecture seule. Tous les dossiers : Réglages → 📜 Qui a vu quoi. ¦ Doar citire. Toate dosarele: Setări → 📜 Cine a văzut ce.
+Les deux mots de passe ne sont pas pareils. ¦ Cele două parole nu sunt la fel.
+Les ouvertures de dossier, les impressions, les exports, les courriers en série et chaque essai du mot de passe, notés par l’app sur ce poste ({machine}). ¦ Deschiderile de dosare, tipăririle, exporturile, scrisorile în serie și fiecare încercare de parolă, notate de aplicație pe acest calculator ({machine}).
+Les sauvegardes de cette généalogie sont toujours protégées par ce mot de passe (AES-256) : aucune copie ne sort en clair de son dossier. ¦ Copiile de siguranță ale acestei genealogii sunt mereu protejate de această parolă (AES-256): nicio copie nu iese necriptată din dosarul ei.
+Lettres rangées : {n} ¦ Scrisori arhivate: {n}
+Lettres retirées (↶ Annuler) : {n} ¦ Scrisori retrase (↶ Anulează): {n}
+Lignes : {n} sur {t} ¦ Rânduri: {n} din {t}
+Lignes anciennes effacées ¦ Rânduri vechi șterse
+Lignes effacées : {n} (gardées : {m}) ¦ Rânduri șterse: {n} (păstrate: {m})
+Mode consultation : le registre ne se lit pas. ¦ Mod consultare: registrul nu se citește.
+Mot de passe changé ¦ Parolă schimbată
+Mot de passe changé. Les autres fenêtres ouvertes devront le redemander. ¦ Parolă schimbată. Celelalte ferestre deschise vor trebui s-o ceară din nou.
+Mot de passe de cette généalogie ¦ Parola acestei genealogii
+Mot de passe oublié : il n’y a pas de porte dérobée. Sans lui, cette généalogie ne peut plus être ouverte dans l’app. ¦ Parolă uitată: nu există ușă din spate. Fără ea, această genealogie nu mai poate fi deschisă în aplicație.
+Mot de passe oublié ? ¦ Ai uitat parola?
+Mot de passe posé ¦ Parolă pusă
+Mot de passe refusé ¦ Parolă refuzată
+Mot de passe retiré ¦ Parolă eliminată
+Musée de famille ¦ Muzeul familiei
+Ouvertures ¦ Deschideri
+Ouverture… ¦ Se deschide…
+Ouvrir une autre généalogie ¦ Deschide altă genealogie
+Paquet du travail à deux ¦ Pachet al lucrului în doi
+Partage avec la famille ¦ Partajare cu familia
+Patiente {n} s ¦ Așteaptă {n} s
+Patiente {n} s avant de réessayer. ¦ Așteaptă {n} s înainte să încerci din nou.
+Poste ¦ Calculator
+Pour une généalogie protégée, tape son mot de passe : la sauvegarde est chiffrée avec lui (AES-256). ¦ Pentru o genealogie protejată, scrie parola ei: copia este criptată cu ea (AES-256).
+Protéger ¦ Protejează
+Protéger cette généalogie ¦ Protejează această genealogie
+Protégée ¦ Protejată
+Qui a vu ce dossier ¦ Cine a văzut acest dosar
+Qui a vu le dossier {n} ¦ Cine a văzut dosarul {n}
+Qui a vu quoi ¦ Cine a văzut ce
+Registre « Qui a vu quoi » (CSV) ¦ Registrul „Cine a văzut ce” (CSV)
+Retirer le mot de passe ¦ Elimină parola
+Retirer le mot de passe de « {name} » ? Elle s’ouvrira sans rien demander, et ses sauvegardes ne seront plus forcément protégées. ¦ Elimini parola genealogiei „{name}”? Se va deschide fără să ceară nimic, iar copiile ei de siguranță nu vor mai fi neapărat protejate.
+Reverrouillée (délai passé ou app relancée) ¦ Reblocată (interval depășit sau aplicație repornită)
+Sans ce mot de passe, cette généalogie ne peut plus être ouverte dans l’app : il n’existe pas de porte dérobée, et personne ne peut le retrouver pour toi. ¦ Fără această parolă, această genealogie nu mai poate fi deschisă în aplicație: nu există ușă din spate și nimeni nu o poate regăsi pentru tine.
+Sauvegarde complète ¦ Copie completă
+Se verrouille après {m} sans rien toucher, à la fermeture de l’app et quand on change de généalogie. ¦ Se blochează după {m} fără nicio atingere, la închiderea aplicației și când schimbi genealogia.
+Site web ¦ Site web
+Site web publié ¦ Site web publicat
+Tableau de bord des dossiers (CSV) · dossiers : {n} ¦ Panoul dosarelor (CSV) · dosare: {n}
+Tableau, arbre ou parts imprimés ¦ Tabel, arbore sau cote tipărite
+Tape d’abord le mot de passe actuel. ¦ Scrie mai întâi parola actuală.
+Tape le mot de passe. ¦ Scrie parola.
+Tout le registre ¦ Tot registrul
+Un verrou à l’ouverture de « {name} », sur cet ordinateur et sur les autres. ¦ Un lacăt la deschiderea „{name}”, pe acest calculator și pe celelalte.
+Verrouiller après ¦ Blochează după
+Verrouiller maintenant ¦ Blochează acum
+Verrouiller maintenant (généalogie protégée par un mot de passe) ¦ Blochează acum (genealogie protejată de o parolă)
+Verrouillée : {names} (ouvre-la avec son mot de passe pour voir ses dossiers) ¦ Blocată: {names} (deschide-o cu parola ei ca să-i vezi dosarele)
+Verrouillée à la main ¦ Blocată manual
+après {m} ¦ după {m}
+pour changer le délai ¦ pentru a schimba intervalul
+pour changer le mot de passe ¦ pentru a schimba parola
+pour retirer le mot de passe ¦ pentru a elimina parola
+pour une sauvegarde protégée ¦ pentru o copie protejată
+protégée par un mot de passe ¦ protejată de o parolă
+sans rien toucher ¦ fără nicio atingere
+très bon ¦ foarte bună
+« {name} » est verrouillée ¦ „{name}” este blocată
+📜 Qui a vu quoi ¦ 📜 Cine a văzut ce
+🔐 Généalogie verrouillée ¦ 🔐 Genealogie blocată
+🔐 Mot de passe de cette généalogie ¦ 🔐 Parola acestei genealogii
+faible ¦ slabă
+moyen ¦ medie
+bon ¦ bună
+pour ouvrir la généalogie ¦ pentru a deschide genealogia
+Ce dossier appartient à l’app (données, médias ou sauvegardes d’une généalogie) : choisis un autre dossier. ¦ Acest dosar aparține aplicației (date, media sau copii ale unei genealogii): alege alt dosar.
+Ce fichier est rangé dans les dossiers de l’app : choisis un fichier ailleurs. ¦ Acest fișier este în dosarele aplicației: alege un fișier din altă parte.
+Cette copie est rangée dans les dossiers d’une autre généalogie : elle ne peut pas être remise ici. ¦ Această copie este în dosarele altei genealogii: nu poate fi restaurată aici.
+Cette copie vient d’une généalogie protégée par un mot de passe : ouvre-la pour la restaurer. ¦ Această copie vine dintr-o genealogie protejată de o parolă: deschide-o ca s-o restaurezi.
+Cette base est protégée par un mot de passe : donne-le pour l’ouvrir. ¦ Această bază este protejată de o parolă: scrie-o ca s-o deschizi.

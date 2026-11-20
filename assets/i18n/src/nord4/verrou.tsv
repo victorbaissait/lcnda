@@ -1,0 +1,131 @@
+fr ¦ fi ¦ hu
+# Zone « verrou » : 🔐 mot de passe d’une généalogie et 📜 « Qui a vu quoi » (assets/js/app-verrou*.js, lib/verrou.php, lib/verrou_page.php)
+1 h ¦ 1 t ¦ 1 óra
+12 mois ¦ 12 kk ¦ 12 hónap
+15 min ¦ 15 min ¦ 15 perc
+3 ans ¦ 3 v ¦ 3 év
+3 mois ¦ 3 kk ¦ 3 hónap
+5 min ¦ 5 min ¦ 5 perc
+6 mois ¦ 6 kk ¦ 6 hónap
+Archive du dossier (.zip) ¦ Kansion arkisto (.zip) ¦ Az ügy archívuma (.zip)
+Attention : le verrou n’empêche pas de lire le fichier si quelqu’un le copie (il n’est pas chiffré). Pour ça, chiffre le disque de ton ordinateur (FileVault sur Mac, BitLocker sous Windows). ¦ Huomio: lukko ei estä lukemasta tiedostoa, jos joku kopioi sen (sitä ei ole salattu). Salaa sitä varten tietokoneesi levy (FileVault Macissa, BitLocker Windowsissa). ¦ Figyelem: a zár nem akadályozza meg a fájl elolvasását, ha valaki lemásolja (nincs titkosítva). Ehhez titkosítsd a számítógéped lemezét (FileVault Macen, BitLocker Windowson).
+Autre format ¦ Muu muoto ¦ Más formátum
+Base .db ¦ Tietokanta .db ¦ .db adatbázis
+Bloc ¦ Lohko ¦ Blokk
+Ce mot de passe contient des caractères illisibles. ¦ Salasanassa on lukukelvottomia merkkejä. ¦ Ez a jelszó olvashatatlan karaktereket tartalmaz.
+Ce mot de passe empêche d’ouvrir cette généalogie dans l’app, ici et après chaque délai sans rien toucher. ¦ Salasana estää avaamasta tätä sukututkimusta sovelluksessa, täällä ja jokaisen toimettoman jakson jälkeen. ¦ Ez a jelszó megakadályozza, hogy ezt a családfát megnyissák az appban, itt és minden tétlen időszak után.
+Ce que ce mot de passe protège vraiment ¦ Mitä tämä salasana oikeasti suojaa ¦ Mit véd valójában ez a jelszó
+Cette généalogie a déjà un mot de passe : change-le plutôt. ¦ Tällä sukututkimuksella on jo salasana: vaihda se mieluummin. ¦ Ennek a családfának már van jelszava: inkább változtasd meg.
+Cette généalogie est maintenant protégée par un mot de passe. ¦ Tämä sukututkimus on nyt suojattu salasanalla. ¦ Ez a családfa most jelszóval védett.
+Cette généalogie est protégée : sa sauvegarde l’est aussi, avec le même mot de passe. ¦ Tämä sukututkimus on suojattu: myös sen varmuuskopio, samalla salasanalla. ¦ Ez a családfa védett: a biztonsági mentése is, ugyanazzal a jelszóval.
+Cette généalogie est protégée par un mot de passe : dans le dossier choisi, elle n’est jamais copiée en clair. Une copie chiffrée (AES-256, même mot de passe) y est faite quand tu l’ouvres avec son mot de passe ; dans le dossier de l’app, les copies restent comme la base. ¦ Tämä sukututkimus on suojattu salasanalla: valittuun kansioon sitä ei koskaan kopioida salaamattomana. Salattu kopio (AES-256, sama salasana) tehdään sinne, kun avaat sen salasanallaan; sovelluksen kansiossa kopiot pysyvät kuten tietokanta. ¦ Ez a családfa jelszóval védett: a választott mappába soha nem kerül titkosítatlan másolat. Titkosított másolat (AES-256, ugyanaz a jelszó) készül oda, amikor a jelszavával megnyitod; az app mappájában a másolatok olyanok maradnak, mint az adatbázis.
+Cette généalogie est protégée par un mot de passe : ses sauvegardes le sont aussi. Utilise « Sauvegarde complète protégée » avec le même mot de passe. ¦ Tämä sukututkimus on suojattu salasanalla: myös sen varmuuskopiot. Käytä ”Suojattua täyttä varmuuskopiota” samalla salasanalla. ¦ Ez a családfa jelszóval védett: a biztonsági mentései is. Használd a „Védett teljes biztonsági mentést” ugyanazzal a jelszóval.
+Cette généalogie est verrouillée : donne son mot de passe pour l’ouvrir. ¦ Tämä sukututkimus on lukittu: anna sen salasana avataksesi sen. ¦ Ez a családfa zárolva van: add meg a jelszavát a megnyitásához.
+Cette généalogie est verrouillée par un mot de passe : ouvre-la d’abord. ¦ Tämä sukututkimus on lukittu salasanalla: avaa se ensin. ¦ Ez a családfa jelszóval zárolva van: előbb nyisd meg.
+Cette généalogie n’a pas de mot de passe. ¦ Tällä sukututkimuksella ei ole salasanaa. ¦ Ennek a családfának nincs jelszava.
+Changer le délai ¦ Vaihda aika ¦ Idő módosítása
+Changer le mot de passe ¦ Vaihda salasana ¦ Jelszó módosítása
+Changer, ou retirer ¦ Vaihda tai poista ¦ Módosítás vagy eltávolítás
+Coche la case : sans ce mot de passe, tu ne pourras plus ouvrir cette généalogie dans l’app. ¦ Rastita ruutu: ilman tätä salasanaa et voi enää avata tätä sukututkimusta sovelluksessa. ¦ Jelöld be a négyzetet: e jelszó nélkül többé nem tudod megnyitni ezt a családfát az appban.
+Courriers en série ¦ Joukkokirjeet ¦ Körlevelek
+Dossier déplacé vers une autre généalogie ¦ Kansio siirretty toiseen sukututkimukseen ¦ Az ügy áthelyezve egy másik családfába
+Dossier ou objet ¦ Kansio tai kohde ¦ Ügy vagy elem
+Dossier, poste, action… ¦ Kansio, tietokone, toiminto… ¦ Ügy, számítógép, művelet…
+Durée changée. Lignes plus anciennes effacées : {n} ¦ Aika vaihdettu. Vanhempia rivejä poistettu: {n} ¦ Időtartam módosítva. Törölt régebbi sorok: {n}
+Durée de conservation changée ¦ Säilytysaika vaihdettu ¦ A megőrzési idő módosítva
+Durée inconnue. ¦ Tuntematon aika. ¦ Ismeretlen időtartam.
+Délai de reverrouillage changé ¦ Uudelleenlukituksen aika vaihdettu ¦ Az újrazárolás ideje módosítva
+Délai de reverrouillage inconnu. ¦ Tuntematon uudelleenlukituksen aika. ¦ Ismeretlen újrazárolási idő.
+Elle est protégée par un mot de passe. ¦ Se on suojattu salasanalla. ¦ Jelszóval védett.
+Export ¦ Vienti ¦ Exportálás
+Exports ¦ Viennit ¦ Exportálások
+Force : {s} ¦ Vahvuus: {s} ¦ Erősség: {s}
+Généalogie ouverte avec le mot de passe ¦ Sukututkimus avattu salasanalla ¦ Családfa megnyitva a jelszóval
+Il n’y a pas d’autre généalogie. ¦ Muuta sukututkimusta ei ole. ¦ Nincs másik családfa.
+Impossible de retirer le verrou (dossier des données en lecture seule ?). ¦ Lukkoa ei voi poistaa (tietokansio vain luku -tilassa?). ¦ A zár nem távolítható el (az adatmappa csak olvasható?).
+Impossible de vérifier le mot de passe (dossier des données en lecture seule ?). ¦ Salasanaa ei voi tarkistaa (tietokansio vain luku -tilassa?). ¦ A jelszó nem ellenőrizhető (az adatmappa csak olvasható?).
+Impossible d’enregistrer le verrou (dossier des données en lecture seule ?). ¦ Lukkoa ei voi tallentaa (tietokansio vain luku -tilassa?). ¦ A zár nem menthető (az adatmappa csak olvasható?).
+Impossible d’ouvrir cette généalogie. ¦ Tätä sukututkimusta ei voi avata. ¦ Ez a családfa nem nyitható meg.
+Impression ou PDF ¦ Tuloste tai PDF ¦ Nyomtatás vagy PDF
+Impressions ¦ Tulosteet ¦ Nyomtatások
+Journal du dossier (CSV) ¦ Kansion loki (CSV) ¦ Az ügy naplója (CSV)
+J’ai compris : sans ce mot de passe, je ne pourrai plus ouvrir cette généalogie dans l’app. ¦ Ymmärrän: ilman tätä salasanaa en voi enää avata tätä sukututkimusta sovelluksessa. ¦ Megértettem: e jelszó nélkül többé nem tudom megnyitni ezt a családfát az appban.
+Le mot de passe est trop long (1024 caractères au plus). ¦ Salasana on liian pitkä (enintään 1024 merkkiä). ¦ A jelszó túl hosszú (legfeljebb 1024 karakter).
+Le serveur de l’app ne répond pas. Réessaie. ¦ Sovelluksen palvelin ei vastaa. Yritä uudelleen. ¦ Az app szervere nem válaszol. Próbáld újra.
+Le verrou n’empêche pas de lire le fichier si quelqu’un le copie : il n’est pas chiffré. Pour ça, chiffre le disque de ton ordinateur : FileVault sur Mac (Réglages Système → Confidentialité et sécurité), BitLocker sous Windows (Paramètres → Confidentialité et sécurité → Chiffrement de l’appareil). ¦ Lukko ei estä lukemasta tiedostoa, jos joku kopioi sen: sitä ei ole salattu. Salaa sitä varten tietokoneesi levy: FileVault Macissa (Järjestelmäasetukset → Tietosuoja ja suojaus), BitLocker Windowsissa (Asetukset → Tietosuoja ja suojaus → Laitteen salaus). ¦ A zár nem akadályozza meg a fájl elolvasását, ha valaki lemásolja: nincs titkosítva. Ehhez titkosítsd a számítógéped lemezét: FileVault Macen (Rendszerbeállítások → Adatvédelem és biztonság), BitLocker Windowson (Beállítások → Adatvédelem és biztonság → Eszköztitkosítás).
+Lecture seule : rien ne se modifie ; seule cette durée fait disparaître les lignes plus vieilles (et c’est noté). ¦ Vain luku: mitään ei muuteta; vain tämä aika poistaa vanhemmat rivit (ja se kirjataan). ¦ Csak olvasható: semmi sem módosul; csak ez az időtartam tünteti el a régebbi sorokat (és ez fel is jegyződik).
+Lecture seule. Tous les dossiers : Réglages → 📜 Qui a vu quoi. ¦ Vain luku. Kaikki kansiot: Asetukset → 📜 Kuka näki mitä. ¦ Csak olvasható. Minden ügy: Beállítások → 📜 Ki mit látott.
+Les deux mots de passe ne sont pas pareils. ¦ Salasanat eivät ole samat. ¦ A két jelszó nem egyezik.
+Les ouvertures de dossier, les impressions, les exports, les courriers en série et chaque essai du mot de passe, notés par l’app sur ce poste ({machine}). ¦ Kansioiden avaukset, tulosteet, viennit, joukkokirjeet ja jokainen salasanayritys, sovelluksen kirjaamina tällä tietokoneella ({machine}). ¦ Ügyek megnyitásai, nyomtatások, exportálások, körlevelek és minden jelszópróbálkozás, az app által feljegyezve ezen a számítógépen ({machine}).
+Les sauvegardes de cette généalogie sont toujours protégées par ce mot de passe (AES-256) : aucune copie ne sort en clair de son dossier. ¦ Tämän sukututkimuksen varmuuskopiot on aina suojattu tällä salasanalla (AES-256): yksikään kopio ei lähde sen kansiosta salaamattomana. ¦ E családfa biztonsági mentéseit mindig ez a jelszó védi (AES-256): egyetlen másolat sem hagyja el titkosítatlanul a mappáját.
+Lettres rangées : {n} ¦ Arkistoidut kirjeet: {n} ¦ Iktatott levelek: {n}
+Lettres retirées (↶ Annuler) : {n} ¦ Poistetut kirjeet (↶ Kumoa): {n} ¦ Visszavont levelek (↶ Visszavonás): {n}
+Lignes : {n} sur {t} ¦ Rivit: {n} / {t} ¦ Sorok: {n} / {t}
+Lignes anciennes effacées ¦ Vanhat rivit poistettu ¦ Régi sorok törölve
+Lignes effacées : {n} (gardées : {m}) ¦ Poistetut rivit: {n} (säilytys: {m}) ¦ Törölt sorok: {n} (megőrzés: {m})
+Mode consultation : le registre ne se lit pas. ¦ Selaustila: lokia ei voi lukea. ¦ Megtekintő mód: a napló nem olvasható.
+Mot de passe changé ¦ Salasana vaihdettu ¦ Jelszó módosítva
+Mot de passe changé. Les autres fenêtres ouvertes devront le redemander. ¦ Salasana vaihdettu. Muiden avoimien ikkunoiden täytyy kysyä se uudelleen. ¦ Jelszó módosítva. A többi nyitott ablaknak újra el kell kérnie.
+Mot de passe de cette généalogie ¦ Tämän sukututkimuksen salasana ¦ A családfa jelszava
+Mot de passe oublié : il n’y a pas de porte dérobée. Sans lui, cette généalogie ne peut plus être ouverte dans l’app. ¦ Unohtunut salasana: takaovea ei ole. Ilman sitä tätä sukututkimusta ei voi enää avata sovelluksessa. ¦ Elfelejtett jelszó: nincs hátsó ajtó. Nélküle ez a családfa többé nem nyitható meg az appban.
+Mot de passe oublié ? ¦ Unohtuiko salasana? ¦ Elfelejtetted a jelszót?
+Mot de passe posé ¦ Salasana asetettu ¦ Jelszó beállítva
+Mot de passe refusé ¦ Salasana hylätty ¦ Jelszó elutasítva
+Mot de passe retiré ¦ Salasana poistettu ¦ Jelszó eltávolítva
+Musée de famille ¦ Sukumuseo ¦ Családi múzeum
+Ouvertures ¦ Avaukset ¦ Megnyitások
+Ouverture… ¦ Avataan… ¦ Megnyitás…
+Ouvrir une autre généalogie ¦ Avaa toinen sukututkimus ¦ Másik családfa megnyitása
+Paquet du travail à deux ¦ Kahdestaan työskentelyn paketti ¦ A kettesben végzett munka csomagja
+Partage avec la famille ¦ Jakaminen suvun kanssa ¦ Megosztás a családdal
+Patiente {n} s ¦ Odota {n} s ¦ Várj {n} mp-et
+Patiente {n} s avant de réessayer. ¦ Odota {n} s ennen kuin yrität uudelleen. ¦ Várj {n} mp-et, mielőtt újra próbálod.
+Poste ¦ Tietokone ¦ Számítógép
+Pour une généalogie protégée, tape son mot de passe : la sauvegarde est chiffrée avec lui (AES-256). ¦ Kirjoita suojatun sukututkimuksen salasana: varmuuskopio salataan sillä (AES-256). ¦ Védett családfánál írd be a jelszavát: a mentés ezzel titkosítódik (AES-256).
+Protéger ¦ Suojaa ¦ Védelem
+Protéger cette généalogie ¦ Suojaa tämä sukututkimus ¦ A családfa védelme
+Protégée ¦ Suojattu ¦ Védett
+Qui a vu ce dossier ¦ Kuka näki tämän kansion ¦ Ki látta ezt az ügyet
+Qui a vu le dossier {n} ¦ Kuka näki kansion {n} ¦ Ki látta a(z) {n} ügyet
+Qui a vu quoi ¦ Kuka näki mitä ¦ Ki mit látott
+Registre « Qui a vu quoi » (CSV) ¦ Loki ”Kuka näki mitä” (CSV) ¦ „Ki mit látott” napló (CSV)
+Retirer le mot de passe ¦ Poista salasana ¦ Jelszó eltávolítása
+Retirer le mot de passe de « {name} » ? Elle s’ouvrira sans rien demander, et ses sauvegardes ne seront plus forcément protégées. ¦ Poistetaanko sukututkimuksen ”{name}” salasana? Se avautuu kysymättä mitään, eivätkä sen varmuuskopiot ole enää välttämättä suojattuja. ¦ Eltávolítod a(z) „{name}” jelszavát? Kérdés nélkül fog megnyílni, és a biztonsági mentései már nem feltétlenül lesznek védettek.
+Reverrouillée (délai passé ou app relancée) ¦ Lukittu uudelleen (aika kului tai sovellus käynnistettiin uudelleen) ¦ Újra zárolva (lejárt az idő vagy újraindult az app)
+Sans ce mot de passe, cette généalogie ne peut plus être ouverte dans l’app : il n’existe pas de porte dérobée, et personne ne peut le retrouver pour toi. ¦ Ilman tätä salasanaa tätä sukututkimusta ei voi enää avata sovelluksessa: takaovea ei ole, eikä kukaan voi löytää sitä puolestasi. ¦ E jelszó nélkül ez a családfa többé nem nyitható meg az appban: nincs hátsó ajtó, és senki sem tudja visszaszerezni helyetted.
+Sauvegarde complète ¦ Täysi varmuuskopio ¦ Teljes biztonsági mentés
+Se verrouille après {m} sans rien toucher, à la fermeture de l’app et quand on change de généalogie. ¦ Lukittuu {m} toimettomuuden jälkeen, kun sovellus suljetaan ja kun vaihdat sukututkimusta. ¦ {m} tétlenség után zárolódik, az app bezárásakor és családfaváltáskor.
+Site web ¦ Verkkosivusto ¦ Weboldal
+Site web publié ¦ Verkkosivusto julkaistu ¦ Weboldal közzétéve
+Tableau de bord des dossiers (CSV) · dossiers : {n} ¦ Kansioiden yleisnäkymä (CSV) · kansioita: {n} ¦ Ügyek áttekintése (CSV) · ügyek: {n}
+Tableau, arbre ou parts imprimés ¦ Taulukko, puu tai osuudet tulostettu ¦ Táblázat, fa vagy részek kinyomtatva
+Tape d’abord le mot de passe actuel. ¦ Kirjoita ensin nykyinen salasana. ¦ Előbb írd be a jelenlegi jelszót.
+Tape le mot de passe. ¦ Kirjoita salasana. ¦ Írd be a jelszót.
+Tout le registre ¦ Koko loki ¦ A teljes napló
+Un verrou à l’ouverture de « {name} », sur cet ordinateur et sur les autres. ¦ Lukko avattaessa ”{name}”, tällä tietokoneella ja muilla. ¦ Zár „{name}” megnyitásakor, ezen a számítógépen és a többin.
+Verrouiller après ¦ Lukitse viiveellä ¦ Zárolás ennyi után
+Verrouiller maintenant ¦ Lukitse nyt ¦ Zárolás most
+Verrouiller maintenant (généalogie protégée par un mot de passe) ¦ Lukitse nyt (salasanalla suojattu sukututkimus) ¦ Zárolás most (jelszóval védett családfa)
+Verrouillée : {names} (ouvre-la avec son mot de passe pour voir ses dossiers) ¦ Lukittu: {names} (avaa se salasanallaan nähdäksesi sen kansiot) ¦ Zárolva: {names} (nyisd meg a jelszavával, hogy lásd az ügyeit)
+Verrouillée à la main ¦ Lukittu käsin ¦ Kézzel zárolva
+après {m} ¦ {m} jälkeen ¦ {m} után
+pour changer le délai ¦ ajan vaihtamiseksi ¦ az idő módosításához
+pour changer le mot de passe ¦ salasanan vaihtamiseksi ¦ a jelszó módosításához
+pour retirer le mot de passe ¦ salasanan poistamiseksi ¦ a jelszó eltávolításához
+pour une sauvegarde protégée ¦ suojattua varmuuskopiota varten ¦ védett mentéshez
+protégée par un mot de passe ¦ suojattu salasanalla ¦ jelszóval védett
+sans rien toucher ¦ toimettomana ¦ tétlenség esetén
+très bon ¦ erittäin hyvä ¦ nagyon jó
+« {name} » est verrouillée ¦ ”{name}” on lukittu ¦ „{name}” zárolva van
+📜 Qui a vu quoi ¦ 📜 Kuka näki mitä ¦ 📜 Ki mit látott
+🔐 Généalogie verrouillée ¦ 🔐 Sukututkimus lukittu ¦ 🔐 Családfa zárolva
+🔐 Mot de passe de cette généalogie ¦ 🔐 Tämän sukututkimuksen salasana ¦ 🔐 A családfa jelszava
+faible ¦ heikko ¦ gyenge
+moyen ¦ keskitaso ¦ közepes
+bon ¦ hyvä ¦ jó
+pour ouvrir la généalogie ¦ sukututkimuksen avaamiseksi ¦ a családfa megnyitásához
+Ce dossier appartient à l’app (données, médias ou sauvegardes d’une généalogie) : choisis un autre dossier. ¦ Kansio kuuluu sovellukselle (sukututkimuksen tiedot, mediat tai varmuuskopiot): valitse toinen kansio. ¦ Ez a mappa az appé (egy családfa adatai, médiái vagy mentései): válassz másik mappát.
+Ce fichier est rangé dans les dossiers de l’app : choisis un fichier ailleurs. ¦ Tiedosto on sovelluksen kansioissa: valitse tiedosto muualta. ¦ Ez a fájl az app mappáiban van: válassz máshonnan fájlt.
+Cette copie est rangée dans les dossiers d’une autre généalogie : elle ne peut pas être remise ici. ¦ Kopio on toisen sukututkimuksen kansioissa: sitä ei voi palauttaa tänne. ¦ Ez a másolat egy másik családfa mappáiban van: itt nem állítható vissza.
+Cette copie vient d’une généalogie protégée par un mot de passe : ouvre-la pour la restaurer. ¦ Kopio on peräisin salasanalla suojatusta sukututkimuksesta: avaa se palauttaaksesi kopion. ¦ Ez a másolat egy jelszóval védett családfából származik: nyisd meg azt a visszaállításhoz.
+Cette base est protégée par un mot de passe : donne-le pour l’ouvrir. ¦ Tietokanta on suojattu salasanalla: anna se avataksesi sen. ¦ Ez az adatbázis jelszóval védett: add meg a megnyitáshoz.

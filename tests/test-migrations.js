@@ -74,6 +74,14 @@ const backups = (dir) => (fs.existsSync(path.join(dir, 'backups')) ? fs.readdirS
     assert.ok(expected >= 93);
   });
 
+  await step('structure n°94 : 🔐 mot de passe d’une généalogie (app_lock, une ligne au plus) et 📜 « Qui a vu quoi » (access_log)', async () => {
+    const dir = path.join(tmp, 'ancienne');
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM sqlite_master WHERE type='table' AND name IN ('app_lock','access_log')")), 2);
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM app_lock")), 0, 'aucun mot de passe posé par la mise à jour');
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM pragma_table_info('access_log') WHERE name IN ('at','kind','obj_type','obj_id','obj_label','what','machine')")), 7);
+    assert.ok(expected >= 94);
+  });
+
   await step('la copie de sécurité est une base complète, dans l’état d’avant la mise à jour', async () => {
     const dir = path.join(tmp, 'ancienne');
     const copy = path.join(dir, 'backups', backups(dir)[0]);

@@ -21,6 +21,7 @@ declare(strict_types=1);
 function premier_db_ready(string $path): bool
 {
     if (!is_file($path)) { return false; }
+    if (function_exists('glock_path_locked') && glock_path_locked($path)) { return true; } // 🔐 protégée : on ne la lit pas (elle a forcément été commencée)
     try {
         $pdo = new PDO('sqlite:' . $path, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
         if ((int) $pdo->query('SELECT count(*) FROM persons')->fetchColumn() > 0) { return true; }

@@ -71,6 +71,9 @@ try {
     if (is_string($pageGenealogy) && $pageGenealogy !== (GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID)) {
         json_response(['error' => 'Une autre généalogie a été ouverte dans une autre fenêtre : recharge la page.', 'genealogy_changed' => true], 409);
     }
+    // 🔐 Généalogie protégée par un mot de passe (lib/verrou.php) : tant que la séance ne l'a pas ouverte, rien ne se lit ni ne
+    // s'écrit (sauf l'écran de verrou, la liste des noms des généalogies et en changer). Avant le mode consultation : le verrou passe avant.
+    glock_guard(is_string($action) ? $action : '', $isWrite, is_array($payload) ? $payload : []);
     if ($isWrite) {
         verify_csrf($payload);
     }
@@ -180,6 +183,26 @@ try {
         if ($emptyRead !== null) json_response($emptyRead + ['ready' => false]);
     }
     $pdo = db();
+    // 🔐 poser, changer, retirer le mot de passe, son délai (lib/verrou.php) ; jamais en mode consultation (écriture refusée plus haut)
+    if ($isWrite && in_array($action, ['glock_set', 'glock_change', 'glock_remove', 'glock_minutes'], true)) {
+        try { json_response(glock_api_post((string) $action, is_array($payload) ? $payload : [])); }
+        catch (LcndaBadInput $e) { json_response(['error' => $e->getMessage()], 422); }
+    }
+    // 🔐 une généalogie protégée ne sort pas en clair : ni le .db, ni une copie dans un dossier choisi, ni le dossier partagé à deux ordinateurs
+    if (glock_info()['locked']) {
+        if ($action === 'export_sqlite' || $action === 'offsite_copy_now' || ($isWrite && in_array($action, ['sd_setup', 'sd_sync'], true))) { glock_refuse_plain_copy((string) $action); }
+        if ($isWrite && $action === 'backup_sqlite' && normalize_backup_dir(safe_text($payload['dir'] ?? '')) !== normalize_backup_dir('')) { glock_refuse_plain_copy('backup_sqlite'); }
+        if (!$isWrite && $action === 'export_full_backup') { glock_backup_password(''); }
+    }
+    // 📜 Qui a vu quoi : chaque téléchargement ou copie de la généalogie est noté (lib/verrou.php), puis le registre lui-même
+    if (is_string($action) && isset(ACCESS_LOG_EXPORTS[$action]) && !kiosk_state()['on']) {
+        $fmt = is_string($_GET['format'] ?? null) && preg_match('/^[a-z0-9_-]{1,20}$/i', $_GET['format']) ? '|' . $_GET['format'] : '';
+        access_log_add($pdo, 'export', 'genealogy', null, '', ACCESS_LOG_EXPORTS[$action] . $fmt);
+    }
+    if (in_array($action, ['access_log', 'access_log_csv', 'access_log_settings', 'access_note'], true)) {
+        access_log_dispatch($pdo, (string) $action, $isWrite, is_array($payload) ? $payload : []);
+    }
+    if ($action === 'bootstrap') { access_log_purge($pdo); } // 📜 les lignes plus vieilles que la durée réglée (une fois par jour)
     if (str_starts_with((string) $action, 'sd_')) { json_response(sd_dispatch($pdo, (string) $action, is_array($payload) ? $payload : [], $isWrite)); } // 🔄 deux ordinateurs
 
     // La structure de la base (tables, colonnes, types d’événements de base) est mise à jour une seule fois
@@ -421,6 +444,7 @@ try {
 
     // Sauvegarde complète protégée : le mot de passe arrive en POST (jamais dans l'adresse)
     if ($isWrite && $action === 'export_full_backup') {
+        glock_backup_password(is_string($payload['password'] ?? null) ? $payload['password'] : ''); // 🔐 généalogie protégée : le même mot de passe, obligatoire
         export_full_backup($pdo, (string) ($payload['password'] ?? ''));
     }
     // 🏛 Frontières anciennes : télécharger une fois l'historique des communes de l'INSEE, le retirer, le remettre (lib/cartes_plus.php)
@@ -6082,8 +6106,9 @@ function genealogies_list_data(): array
 {
     $reg = genealogies_registry();
     $size = static fn(string $dir) => is_file($dir . '/genealogy.sqlite') ? (int) filesize($dir . '/genealogy.sqlite') : 0;
-    $list = [['id' => '', 'name' => $reg['main_name'], 'main' => true, 'active' => GENEALOGY_ID === '', 'size' => $size(SHARED_DATA_DIR)]];
-    foreach ($reg['list'] as $g) { $list[] = ['id' => $g['id'], 'name' => $g['name'], 'main' => false, 'active' => GENEALOGY_ID === $g['id'], 'size' => $size(genealogy_dir($g['id'])), 'created_at' => $g['created_at']]
+    // 🔐 locked : la généalogie a un mot de passe (lib/verrou.php ; seul son fichier verrou ou sa ligne app_lock est regardé)
+    $list = [['id' => '', 'name' => $reg['main_name'], 'main' => true, 'active' => GENEALOGY_ID === '', 'size' => $size(SHARED_DATA_DIR), 'locked' => glock_genealogy_locked('')]];
+    foreach ($reg['list'] as $g) { $list[] = ['id' => $g['id'], 'name' => $g['name'], 'main' => false, 'active' => GENEALOGY_ID === $g['id'], 'size' => $size(genealogy_dir($g['id'])), 'created_at' => $g['created_at'], 'locked' => glock_genealogy_locked($g['id'])]
         // 🧪 base d'exemple : d'où l'on vient, et si cette généalogie-là a déjà des données (« Revenir à ma généalogie ») ou est encore vide (« Repartir d'une base vide »)
         + (!empty($g['example']) ? ['example' => true, 'from' => $g['from'] ?? '', 'from_ready' => premier_db_ready(premier_genealogy_db_path((string) ($g['from'] ?? '')))] : []); }
     return ['active' => GENEALOGY_ID, 'genealogies' => $list];
@@ -6120,6 +6145,8 @@ function genealogy_action(string $action, array $data): array
         return ['ok' => true, 'id' => $new, 'active' => $reg['active']];
     }
     if (!$known || ($id !== '' && !genealogy_id_ok($id))) { throw new RuntimeException('Généalogie introuvable.'); }
+    // 🔐 renommer ou mettre de côté une AUTRE généalogie protégée par un mot de passe : refusé (ouvre-la d'abord)
+    if (in_array($action, ['genealogy_rename', 'genealogy_remove'], true) && $id !== GENEALOGY_ID && glock_genealogy_locked($id)) { throw new LcndaBadInput('Cette généalogie est verrouillée par un mot de passe : ouvre-la d’abord.'); }
     if ($action === 'genealogy_switch') {
         $reg['active'] = $id; genealogies_registry_save($reg);
         return ['ok' => true, 'active' => $id];
@@ -7100,6 +7127,7 @@ function backup_files(string $dir): array
 function backup_sqlite_status(PDO $pdo, string $dir, int $maxFiles = 10): never
 {
     $path = normalize_backup_dir($dir);
+    glock_refuse_dir($path, true); // 🔐 ne liste jamais les copies d'une autre généalogie
     $exists = is_dir($path);
     $writable = $exists && is_writable($path);
     $files = $exists ? backup_files($path) : [];
@@ -7119,6 +7147,7 @@ function backup_sqlite_status(PDO $pdo, string $dir, int $maxFiles = 10): never
 function backup_sqlite(PDO $pdo, array $data): never
 {
     $dir = normalize_backup_dir(safe_text($data['dir'] ?? ''));
+    glock_refuse_dir($dir, true); // 🔐 jamais le dossier interne d'une autre généalogie (lib/verrou.php)
     $maxFiles = max(2, min(50, safe_int($data['max_files'] ?? 10, 10)));
     $mode = safe_text($data['mode'] ?? 'manual');
     if (!in_array($mode, ['manual', 'auto'], true)) {

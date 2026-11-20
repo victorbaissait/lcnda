@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 93;
+const SCHEMA_VERSION = 94;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -114,6 +114,7 @@ function migration_steps(): array
         91 => 'schema_v91',
         92 => 'schema_v92',
         93 => 'schema_v93',
+        94 => 'schema_v94',
     ];
 }
 
@@ -2621,4 +2622,12 @@ function schema_v93(PDO $pdo): void
     if (!function_exists('succ_outils_schema')) { require_once __DIR__ . '/successoral.php'; }
     if (!(bool) $pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='succ_fees'")->fetchColumn() && function_exists('successoral_schema')) { successoral_schema($pdo); }
     succ_outils_schema($pdo);
+}
+
+/** 94 : 🔐 mot de passe d'une généalogie (app_lock : une ligne, l'empreinte seulement, jamais le mot de passe) et 📜 registre
+ * « Qui a vu quoi » (access_log : jamais modifié ; seules les lignes plus vieilles que la durée réglée partent). lib/verrou.php */
+function schema_v94(PDO $pdo): void
+{
+    if (!function_exists('glock_schema')) { require_once __DIR__ . '/verrou.php'; }
+    glock_schema($pdo);
 }

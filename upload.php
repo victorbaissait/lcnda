@@ -8,6 +8,7 @@ try {
     // Plusieurs généalogies : une fenêtre restée sur une autre généalogie n'envoie pas ses fichiers dans celle-ci (même règle qu'api.php)
     $pageGenealogy = $_SERVER['HTTP_X_GENEALOGY'] ?? null;
     if (is_string($pageGenealogy) && $pageGenealogy !== (GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID)) json_response(['error'=>'Une autre généalogie a été ouverte dans une autre fenêtre : recharge la page.','genealogy_changed'=>true],409);
+    glock_guard('upload', true, $_POST); // 🔐 généalogie verrouillée : rien n'entre (lib/verrou.php)
     verify_csrf($_POST);
     kiosk_guard('upload', true);
     $personId=safe_int($_POST['person_id']??0);$eventId=safe_int($_POST['event_id']??0);$censusId=safe_int($_POST['census_id']??0);$investigationId=safe_int($_POST['investigation_id']??0);$battueItemId=safe_int($_POST['battue_item_id']??0);$archiveDigestId=safe_int($_POST['archive_digest_id']??0);$archiveDigestPageNumber=safe_text($_POST['archive_digest_page_number']??'');$title=safe_text($_POST['title']??'');

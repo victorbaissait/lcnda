@@ -142,6 +142,7 @@ function scan_inbox_status(PDO $pdo): array
 {
     $s = scan_inbox_settings($pdo);
     $dir = offsite_expand((string) $s['dir']);
+    if ($dir !== '' && function_exists('glock_forbidden_dir') && glock_forbidden_dir($dir)) { $dir = ''; } // 🔐 réglage d'avant : ignoré
     $recent = $pdo->query('SELECT s.filename, s.imported_at, m.id AS media_id, m.title, m.filename AS media_file, m.media_type FROM scan_inbox_files s LEFT JOIN media m ON m.id=s.media_id ORDER BY s.imported_at DESC LIMIT 12')->fetchAll();
     return $s + ['dir' => $dir, 'reachable' => $dir !== '' && is_dir($dir), 'pending' => count(scan_inbox_pending($pdo, $dir)), 'recent' => $recent,
         'can_convert' => scan_inbox_converter() !== null, 'total' => (int) $pdo->query('SELECT count(*) FROM scan_inbox_files')->fetchColumn()];
@@ -151,6 +152,7 @@ function save_scan_inbox_settings(PDO $pdo, array $data): array
 {
     $dir = offsite_expand(safe_text($data['dir'] ?? ''));
     if ($dir !== '' && !is_dir($dir)) { throw new RuntimeException("Dossier introuvable : {$dir}"); }
+    if ($dir !== '' && function_exists('glock_refuse_dir')) { glock_refuse_dir($dir); } // 🔐 jamais les médias ou données d'une généalogie
     ht_save_setting($pdo, 'lcnda-scan-inbox', ['dir' => $dir, 'enabled' => !empty($data['enabled']) && $dir !== '', 'move_imported' => !empty($data['move_imported'])]);
     return scan_inbox_status($pdo);
 }
@@ -170,6 +172,7 @@ function scan_inbox_run(PDO $pdo): never
     $s = scan_inbox_settings($pdo);
     $dir = offsite_expand((string) $s['dir']);
     if ($dir === '' || !is_dir($dir)) { json_response(['ok' => false, 'imported' => [], 'error' => $dir === '' ? 'Aucun dossier choisi.' : "Dossier introuvable : {$dir}"]); }
+    if (function_exists('glock_forbidden_dir') && glock_forbidden_dir($dir)) { json_response(['ok' => false, 'imported' => [], 'error' => 'Ce dossier appartient à l’app (données, médias ou sauvegardes d’une généalogie) : choisis un autre dossier.'], 422); }
     if (!is_dir(MEDIA_DIR)) { @mkdir(MEDIA_DIR, 0775, true); }
     $imported = []; $skipped = [];
     foreach (array_slice(scan_inbox_pending($pdo, $dir), 0, 50) as $f) {

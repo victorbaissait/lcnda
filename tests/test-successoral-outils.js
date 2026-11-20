@@ -180,7 +180,7 @@ function maz() {
         const idx = fs.readFileSync(path.join(appRoot, 'index.php'), 'utf8');
         for (const f of ['heritage-successoral-outils-core.js', 'heritage-successoral-outils.js', 'app-onglets-plus.js', 'onglets-plus.css']) assert.match(idx, new RegExp(f.replace('.', '\\.') + '\\?v=\\d+'), f);
         assert.match(idx, /id="succ-bell-open" hidden/);
-        assert.match(fs.readFileSync(path.join(appRoot, 'lib/migrations.php'), 'utf8'), /const SCHEMA_VERSION = 93;[\s\S]*93 => 'schema_v93'/);
+        { const mg = fs.readFileSync(path.join(appRoot, 'lib/migrations.php'), 'utf8'); assert.ok(Number((mg.match(/const SCHEMA_VERSION = (\d+);/) || [])[1]) >= 93); assert.match(mg, /93 => 'schema_v93'/); } // 94 : 🔐 📜 (lib/verrou.php)
         for (const f of ['lib/gedcom.php', 'lib/family_share.php', 'lib/export_gramps.php']) if (fs.existsSync(path.join(appRoot, f))) assert.doesNotMatch(fs.readFileSync(path.join(appRoot, f), 'utf8'), /succ_templates|succ_fees/, f);
         const pr = fs.readFileSync(path.join(appRoot, 'assets/js/app-premier.js'), 'utf8'); assert.match(pr, /genealogie-menu-added/, 'un onglet ajouté à la main n’est pas caché par un usage');
     });

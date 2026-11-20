@@ -99,7 +99,7 @@
         if (!VIEWS.some(v => v[0] === cur.view)) cur.view = 'cases';
         w.innerHTML = `<section class="page succ-page">${UI().pageHeader({title: i18n('Dossiers de succession'), icon: '⚖️', where,
             help: i18n('Retrouver les héritiers d’une personne décédée, pour un notaire : un dossier par défunt. À ne pas confondre avec « 🏠 Héritages et successions » (les actes anciens des ancêtres).'),
-            actions: [LAW_BTN(), `<button type="button" class="button" data-succ-new>${esc(i18n('＋ Ouvrir un dossier'))}</button>`], more: ext.succDossiers?.boardMore?.() || []})}
+            actions: [LAW_BTN(), `<button type="button" class="button" data-succ-new>${esc(i18n('＋ Ouvrir un dossier'))}</button>`], more: [...(ext.succDossiers?.boardMore?.() || []), `<button type="button" data-succ-b8all>📜 ${esc(i18n('Qui a vu quoi'))}</button>`]})}
             <div class="segmented succ-views" role="tablist" aria-label="${esc(i18n('Que montrer'))}">${VIEWS.map(([k, l]) => `<button type="button" role="tab" data-succ-view="${k}" class="${cur.view === k ? 'is-active' : ''}" aria-selected="${cur.view === k}">${esc(i18n(l))}</button>`).join('')}</div>
             <div data-succ-body>${UI().spinner(i18n(cur.view === 'heirs' ? 'Lecture des héritiers…' : cur.view === 'mail' ? 'Lecture des courriers…' : 'Lecture des dossiers…'))}</div></section>`;
         const body = w.querySelector('[data-succ-body]');
@@ -757,9 +757,10 @@
     /* ── 🕓 Journal du dossier ── */
     const atTxt = at => { const m = String(at).match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/); return m ? `${m[3]}/${m[2]}/${m[1]} ${m[4]}:${m[5]}` : at; };
     function tabJournal(body, D) {
-        body.innerHTML = `<section class="succ-box"><div class="succ-box-head"><h3>${esc(i18n('🕓 Journal du dossier {n}', {n: D.number}))} <small class="muted">${esc(i18n('(on ne peut ni le modifier ni l’effacer)'))}</small></h3><button type="button" class="button small secondary" data-succ-jcsv>${esc(i18n('⤓ Exporter le journal (CSV)'))}</button></div>
+        body.innerHTML = `<section class="succ-box"><div class="succ-box-head"><h3>${esc(i18n('🕓 Journal du dossier {n}', {n: D.number}))} <small class="muted">${esc(i18n('(on ne peut ni le modifier ni l’effacer)'))}</small></h3><span class="succ-jbtns"><button type="button" class="button small secondary" data-succ-b8>📜 ${esc(i18n('Qui a vu ce dossier'))}</button><button type="button" class="button small secondary" data-succ-jcsv>${esc(i18n('⤓ Exporter le journal (CSV)'))}</button></span></div>
             ${D.journal.length ? `<ol class="succ-journal">${D.journal.map(j => `<li><time>${esc(atTxt(j.at))}</time><span data-i18n-off>${j.kind === 'law' ? S().lawJournalHtml(j.text) : esc(j.text)}</span></li>`).join('')}</ol>` : A().empty(i18n('Rien encore.'), {icon: '🕓'})}
             <p class="ui-hint">${esc(i18n('Les changements des fiches restent dans Réglages → Journal des modifications.'))}</p></section>`;
+        body.querySelector('[data-succ-b8]')?.addEventListener('click', () => ext.accessLogDialog?.({caseId: D.id, number: D.number})); // 📜 app-verrou.js
         body.querySelector('[data-succ-jcsv]').addEventListener('click', () => {
             const csv = '﻿' + S().journalCsv([...D.journal].reverse().map(j => ({at: atTxt(j.at), text: j.text})), [i18n('Date'), i18n('Action')]);
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = `journal-dossier-${D.number}.csv`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
@@ -939,6 +940,7 @@
         if (t.closest('[data-succ-back]')) { e.preventDefault(); return openCase(0); }
         const ed = t.closest('[data-succ-edit]'); if (ed) { e.preventDefault(); const id = Number(ed.dataset.succEdit); const D = cur.data?.id === id ? cur.data : await get('get', {id}).catch(err => (toast(err.message, 'error'), null)); if (D) caseDialog(D); return; }
         const del = t.closest('[data-succ-del]'); if (del) { e.preventDefault(); return deleteCase(del.dataset.succDel); }
+        if (t.closest('[data-succ-b8all]')) { e.preventDefault(); return ext.openAccessLog?.(); } // 📜 tous les dossiers (app-verrou.js)
         const lo = t.closest('[data-succ-loi]'); if (lo) { e.preventDefault(); return lawDialog(lo.dataset.succLoi === 'case' && cur.data?.id === cur.id ? cur.data : null); }
         const vw = t.closest('[data-succ-view]'); if (vw) { e.preventDefault(); cur.view = vw.dataset.succView; store.set('lcnda-succ-view', cur.view); return render(); }
         const full = t.closest('[data-succ-full]'); if (full) { e.preventDefault(); t.closest('dialog')?.close?.(); A().state.listType = full.dataset.succFull === 'courriers' ? 'courriers' : 'living_contacts'; return A().setModule('listes'); }

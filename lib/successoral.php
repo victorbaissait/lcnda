@@ -756,10 +756,37 @@ function successoral_api_post(PDO $pdo, array $d): array
     };
 }
 
+/** 📜 Qui a vu quoi (lib/verrou.php) : impressions et PDF, exports, courriers en série, déplacement ou archive d'un dossier.
+ *  Jamais le texte envoyé par la page : une sorte et un code connus, le n° et le titre du dossier. */
+function succ_access_note(PDO $pdo, array $d, mixed $out): void
+{
+    if (!function_exists('access_log_add')) { return; }
+    $op = (string) ($d['op'] ?? '');
+    $case = safe_int($d['case_id'] ?? ($d['id'] ?? 0));
+    $label = static fn() => access_case_label($pdo, $case);
+    $n = static fn($k) => is_array($out) && is_array($out[$k] ?? null) ? count($out[$k]) : 0;
+    match (true) {
+        $op === 'journal' && ($d['kind'] ?? '') === 'pdf' => access_log_add($pdo, 'print', 'case', $case, $label(), 'succ_pdf'),
+        $op === 'journal' && ($d['kind'] ?? '') === 'export' => access_log_add($pdo, 'export', 'case', $case, $label(), 'succ_journal_csv'),
+        $op === 'file_letters' => access_log_add($pdo, 'letters', 'case', $case, $label(), 'file|' . $n('ids')),
+        $op === 'unfile_letters' => access_log_add($pdo, 'letters', 'case', $case, $label(), 'unfile|' . (is_array($out) ? (int) ($out['removed'] ?? 0) : 0)),
+        $op === 'file_letter' => access_log_add($pdo, 'letters', 'case', $case, $label(), 'file|1'),
+        $op === 'move' => access_log_add($pdo, 'export', 'case', $case, $label(), 'succ_move'),
+        $op === 'archive_file' => access_log_add($pdo, 'export', 'case', $case, $label(), 'succ_archive'),
+        default => null,
+    };
+}
+
 function successoral_dispatch(PDO $pdo, string $action, bool $isWrite, array $payload): never
 {
     try {
-        if (!$isWrite && $action === 'successoral') { json_response(successoral_api_get($pdo, $_GET)); }
+        if (!$isWrite && $action === 'successoral') {
+            $op = (string) ($_GET['op'] ?? '');
+            if ($op === 'archive_download' && !succ_kiosk()) { access_log_add($pdo, 'export', '', null, '', 'succ_archive'); } // 📜 lib/verrou.php
+            $res = successoral_api_get($pdo, $_GET);
+            if ($op === 'get' && !succ_kiosk() && !empty($res['id'])) { access_case_open($pdo, (int) $res['id']); } // 📂 une fois par séance
+            json_response($res);
+        }
         if ($isWrite && $action === 'successoral_write') {
             // déplacer ou archiver dans un fichier : une copie de sauvegarde d'abord (des deux généalogies), hors transaction
             $op = (string) ($payload['op'] ?? '');
@@ -772,7 +799,7 @@ function successoral_dispatch(PDO $pdo, string $action, bool $isWrite, array $pa
                 if ($op === 'move' && $to !== succ_gid() && isset($gs[$to]) && ($ro = succ_open_ro($gs[$to]['path']))) { succ_backup($ro, succ_dir_of($to) . '/backups', 'arrivee-dossier'); $ro = null; }
             }
             $pdo->beginTransaction();
-            try { $out = successoral_api_post($pdo, $payload); $pdo->commit(); }
+            try { $out = successoral_api_post($pdo, $payload); succ_access_note($pdo, $payload, $out); $pdo->commit(); }
             catch (Throwable $e) { if ($pdo->inTransaction()) { $pdo->rollBack(); } throw $e; }
             json_response(['ok' => true, 'result' => $out]);
         }

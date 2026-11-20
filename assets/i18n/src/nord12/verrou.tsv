@@ -1,0 +1,131 @@
+fr ¦ ru ¦ uk
+# Zone « verrou » : 🔐 mot de passe d’une généalogie et 📜 « Qui a vu quoi » (assets/js/app-verrou*.js, lib/verrou.php, lib/verrou_page.php)
+1 h ¦ 1 ч ¦ 1 год
+12 mois ¦ 12 месяцев ¦ 12 місяців
+15 min ¦ 15 мин ¦ 15 хв
+3 ans ¦ 3 года ¦ 3 роки
+3 mois ¦ 3 месяца ¦ 3 місяці
+5 min ¦ 5 мин ¦ 5 хв
+6 mois ¦ 6 месяцев ¦ 6 місяців
+Archive du dossier (.zip) ¦ Архив дела (.zip) ¦ Архів справи (.zip)
+Attention : le verrou n’empêche pas de lire le fichier si quelqu’un le copie (il n’est pas chiffré). Pour ça, chiffre le disque de ton ordinateur (FileVault sur Mac, BitLocker sous Windows). ¦ Внимание: замок не мешает прочитать файл, если кто-то его скопирует (он не зашифрован). Для этого зашифруй диск своего компьютера (FileVault на Mac, BitLocker в Windows). ¦ Увага: замок не заважає прочитати файл, якщо хтось його скопіює (він не зашифрований). Для цього зашифруй диск свого комп’ютера (FileVault на Mac, BitLocker у Windows).
+Autre format ¦ Другой формат ¦ Інший формат
+Base .db ¦ База .db ¦ База .db
+Bloc ¦ Блок ¦ Блок
+Ce mot de passe contient des caractères illisibles. ¦ В этом пароле есть нечитаемые символы. ¦ У цьому паролі є нечитабельні символи.
+Ce mot de passe empêche d’ouvrir cette généalogie dans l’app, ici et après chaque délai sans rien toucher. ¦ Этот пароль не даёт открыть эту генеалогию в приложении — здесь и после каждого периода бездействия. ¦ Цей пароль не дає відкрити цю генеалогію в застосунку — тут і після кожного періоду бездіяльності.
+Ce que ce mot de passe protège vraiment ¦ Что на самом деле защищает этот пароль ¦ Що насправді захищає цей пароль
+Cette généalogie a déjà un mot de passe : change-le plutôt. ¦ У этой генеалогии уже есть пароль: лучше смени его. ¦ Ця генеалогія вже має пароль: краще зміни його.
+Cette généalogie est maintenant protégée par un mot de passe. ¦ Эта генеалогия теперь защищена паролем. ¦ Ця генеалогія тепер захищена паролем.
+Cette généalogie est protégée : sa sauvegarde l’est aussi, avec le même mot de passe. ¦ Эта генеалогия защищена: её резервная копия тоже, тем же паролем. ¦ Ця генеалогія захищена: її резервна копія також, тим самим паролем.
+Cette généalogie est protégée par un mot de passe : dans le dossier choisi, elle n’est jamais copiée en clair. Une copie chiffrée (AES-256, même mot de passe) y est faite quand tu l’ouvres avec son mot de passe ; dans le dossier de l’app, les copies restent comme la base. ¦ Эта генеалогия защищена паролем: в выбранную папку она никогда не копируется без шифрования. Зашифрованная копия (AES-256, тот же пароль) делается там, когда ты открываешь её паролем; в папке приложения копии остаются как база. ¦ Ця генеалогія захищена паролем: до вибраної теки вона ніколи не копіюється без шифрування. Зашифрована копія (AES-256, той самий пароль) робиться там, коли ти відкриваєш її паролем; у теці застосунку копії лишаються як база.
+Cette généalogie est protégée par un mot de passe : ses sauvegardes le sont aussi. Utilise « Sauvegarde complète protégée » avec le même mot de passe. ¦ Эта генеалогия защищена паролем: её резервные копии тоже. Используй «Защищённую полную копию» с тем же паролем. ¦ Ця генеалогія захищена паролем: її резервні копії також. Використай «Захищену повну копію» з тим самим паролем.
+Cette généalogie est verrouillée : donne son mot de passe pour l’ouvrir. ¦ Эта генеалогия заблокирована: введи её пароль, чтобы открыть. ¦ Ця генеалогія заблокована: введи її пароль, щоб відкрити.
+Cette généalogie est verrouillée par un mot de passe : ouvre-la d’abord. ¦ Эта генеалогия заблокирована паролем: сначала открой её. ¦ Ця генеалогія заблокована паролем: спершу відкрий її.
+Cette généalogie n’a pas de mot de passe. ¦ У этой генеалогии нет пароля. ¦ Ця генеалогія не має пароля.
+Changer le délai ¦ Изменить время ¦ Змінити час
+Changer le mot de passe ¦ Сменить пароль ¦ Змінити пароль
+Changer, ou retirer ¦ Сменить или снять ¦ Змінити або зняти
+Coche la case : sans ce mot de passe, tu ne pourras plus ouvrir cette généalogie dans l’app. ¦ Отметь флажок: без этого пароля ты больше не сможешь открыть эту генеалогию в приложении. ¦ Познач прапорець: без цього пароля ти більше не зможеш відкрити цю генеалогію в застосунку.
+Courriers en série ¦ Письма серией ¦ Листи серією
+Dossier déplacé vers une autre généalogie ¦ Дело перенесено в другую генеалогию ¦ Справу перенесено до іншої генеалогії
+Dossier ou objet ¦ Дело или объект ¦ Справа або об’єкт
+Dossier, poste, action… ¦ Дело, компьютер, действие… ¦ Справа, комп’ютер, дія…
+Durée changée. Lignes plus anciennes effacées : {n} ¦ Срок изменён. Удалено старых строк: {n} ¦ Строк змінено. Видалено старих рядків: {n}
+Durée de conservation changée ¦ Срок хранения изменён ¦ Строк зберігання змінено
+Durée inconnue. ¦ Неизвестный срок. ¦ Невідомий строк.
+Délai de reverrouillage changé ¦ Время до повторной блокировки изменено ¦ Час до повторного блокування змінено
+Délai de reverrouillage inconnu. ¦ Неизвестное время до повторной блокировки. ¦ Невідомий час до повторного блокування.
+Elle est protégée par un mot de passe. ¦ Она защищена паролем. ¦ Вона захищена паролем.
+Export ¦ Экспорт ¦ Експорт
+Exports ¦ Экспорт ¦ Експорт
+Force : {s} ¦ Надёжность: {s} ¦ Надійність: {s}
+Généalogie ouverte avec le mot de passe ¦ Генеалогия открыта паролем ¦ Генеалогію відкрито паролем
+Il n’y a pas d’autre généalogie. ¦ Другой генеалогии нет. ¦ Іншої генеалогії немає.
+Impossible de retirer le verrou (dossier des données en lecture seule ?). ¦ Не удаётся снять замок (папка данных только для чтения?). ¦ Не вдається зняти замок (тека даних лише для читання?).
+Impossible de vérifier le mot de passe (dossier des données en lecture seule ?). ¦ Не удаётся проверить пароль (папка данных только для чтения?). ¦ Не вдається перевірити пароль (тека даних лише для читання?).
+Impossible d’enregistrer le verrou (dossier des données en lecture seule ?). ¦ Не удаётся сохранить замок (папка данных только для чтения?). ¦ Не вдається зберегти замок (тека даних лише для читання?).
+Impossible d’ouvrir cette généalogie. ¦ Не удаётся открыть эту генеалогию. ¦ Не вдається відкрити цю генеалогію.
+Impression ou PDF ¦ Печать или PDF ¦ Друк або PDF
+Impressions ¦ Печать ¦ Друк
+Journal du dossier (CSV) ¦ Журнал дела (CSV) ¦ Журнал справи (CSV)
+J’ai compris : sans ce mot de passe, je ne pourrai plus ouvrir cette généalogie dans l’app. ¦ Я понимаю: без этого пароля я больше не смогу открыть эту генеалогию в приложении. ¦ Я розумію: без цього пароля я більше не зможу відкрити цю генеалогію в застосунку.
+Le mot de passe est trop long (1024 caractères au plus). ¦ Пароль слишком длинный (не больше 1024 символов). ¦ Пароль задовгий (не більше 1024 символів).
+Le serveur de l’app ne répond pas. Réessaie. ¦ Сервер приложения не отвечает. Попробуй ещё раз. ¦ Сервер застосунку не відповідає. Спробуй ще раз.
+Le verrou n’empêche pas de lire le fichier si quelqu’un le copie : il n’est pas chiffré. Pour ça, chiffre le disque de ton ordinateur : FileVault sur Mac (Réglages Système → Confidentialité et sécurité), BitLocker sous Windows (Paramètres → Confidentialité et sécurité → Chiffrement de l’appareil). ¦ Замок не мешает прочитать файл, если кто-то его скопирует: он не зашифрован. Для этого зашифруй диск своего компьютера: FileVault на Mac (Системные настройки → Конфиденциальность и безопасность), BitLocker в Windows (Параметры → Конфиденциальность и защита → Шифрование устройства). ¦ Замок не заважає прочитати файл, якщо хтось його скопіює: він не зашифрований. Для цього зашифруй диск свого комп’ютера: FileVault на Mac (Системні параметри → Приватність і безпека), BitLocker у Windows (Параметри → Конфіденційність і захист → Шифрування пристрою).
+Lecture seule : rien ne se modifie ; seule cette durée fait disparaître les lignes plus vieilles (et c’est noté). ¦ Только чтение: ничего не меняется; только этот срок убирает старые строки (и это записывается). ¦ Лише читання: нічого не змінюється; лише цей строк прибирає старі рядки (і це записується).
+Lecture seule. Tous les dossiers : Réglages → 📜 Qui a vu quoi. ¦ Только чтение. Все дела: Настройки → 📜 Кто что видел. ¦ Лише читання. Усі справи: Налаштування → 📜 Хто що бачив.
+Les deux mots de passe ne sont pas pareils. ¦ Два пароля не совпадают. ¦ Два паролі не збігаються.
+Les ouvertures de dossier, les impressions, les exports, les courriers en série et chaque essai du mot de passe, notés par l’app sur ce poste ({machine}). ¦ Открытия дел, печать, экспорт, письма серией и каждая попытка ввести пароль — записаны приложением на этом компьютере ({machine}). ¦ Відкриття справ, друк, експорт, листи серією і кожна спроба пароля — записані застосунком на цьому комп’ютері ({machine}).
+Les sauvegardes de cette généalogie sont toujours protégées par ce mot de passe (AES-256) : aucune copie ne sort en clair de son dossier. ¦ Резервные копии этой генеалогии всегда защищены этим паролем (AES-256): ни одна копия не покидает её папку без шифрования. ¦ Резервні копії цієї генеалогії завжди захищені цим паролем (AES-256): жодна копія не залишає її теку без шифрування.
+Lettres rangées : {n} ¦ Писем подшито: {n} ¦ Листів підшито: {n}
+Lettres retirées (↶ Annuler) : {n} ¦ Писем отозвано (↶ Отменить): {n} ¦ Листів відкликано (↶ Скасувати): {n}
+Lignes : {n} sur {t} ¦ Строки: {n} из {t} ¦ Рядки: {n} з {t}
+Lignes anciennes effacées ¦ Старые строки удалены ¦ Старі рядки видалено
+Lignes effacées : {n} (gardées : {m}) ¦ Удалено строк: {n} (хранится: {m}) ¦ Видалено рядків: {n} (зберігається: {m})
+Mode consultation : le registre ne se lit pas. ¦ Режим просмотра: журнал не читается. ¦ Режим перегляду: журнал не читається.
+Mot de passe changé ¦ Пароль изменён ¦ Пароль змінено
+Mot de passe changé. Les autres fenêtres ouvertes devront le redemander. ¦ Пароль изменён. Другим открытым окнам придётся запросить его снова. ¦ Пароль змінено. Іншим відкритим вікнам доведеться запитати його знову.
+Mot de passe de cette généalogie ¦ Пароль этой генеалогии ¦ Пароль цієї генеалогії
+Mot de passe oublié : il n’y a pas de porte dérobée. Sans lui, cette généalogie ne peut plus être ouverte dans l’app. ¦ Забытый пароль: чёрного хода нет. Без него эту генеалогию больше нельзя открыть в приложении. ¦ Забутий пароль: чорного ходу немає. Без нього цю генеалогію більше не можна відкрити в застосунку.
+Mot de passe oublié ? ¦ Забыл пароль? ¦ Забув пароль?
+Mot de passe posé ¦ Пароль задан ¦ Пароль задано
+Mot de passe refusé ¦ Пароль отклонён ¦ Пароль відхилено
+Mot de passe retiré ¦ Пароль снят ¦ Пароль знято
+Musée de famille ¦ Семейный музей ¦ Сімейний музей
+Ouvertures ¦ Открытия ¦ Відкриття
+Ouverture… ¦ Открытие… ¦ Відкриття…
+Ouvrir une autre généalogie ¦ Открыть другую генеалогию ¦ Відкрити іншу генеалогію
+Paquet du travail à deux ¦ Пакет работы вдвоём ¦ Пакет роботи удвох
+Partage avec la famille ¦ Отправка семье ¦ Надсилання родині
+Patiente {n} s ¦ Подожди {n} с ¦ Зачекай {n} с
+Patiente {n} s avant de réessayer. ¦ Подожди {n} с перед новой попыткой. ¦ Зачекай {n} с перед новою спробою.
+Poste ¦ Компьютер ¦ Комп’ютер
+Pour une généalogie protégée, tape son mot de passe : la sauvegarde est chiffrée avec lui (AES-256). ¦ Для защищённой генеалогии введи её пароль: копия шифруется им (AES-256). ¦ Для захищеної генеалогії введи її пароль: копія шифрується ним (AES-256).
+Protéger ¦ Защитить ¦ Захистити
+Protéger cette généalogie ¦ Защитить эту генеалогию ¦ Захистити цю генеалогію
+Protégée ¦ Защищена ¦ Захищена
+Qui a vu ce dossier ¦ Кто видел это дело ¦ Хто бачив цю справу
+Qui a vu le dossier {n} ¦ Кто видел дело {n} ¦ Хто бачив справу {n}
+Qui a vu quoi ¦ Кто что видел ¦ Хто що бачив
+Registre « Qui a vu quoi » (CSV) ¦ Журнал «Кто что видел» (CSV) ¦ Журнал «Хто що бачив» (CSV)
+Retirer le mot de passe ¦ Снять пароль ¦ Зняти пароль
+Retirer le mot de passe de « {name} » ? Elle s’ouvrira sans rien demander, et ses sauvegardes ne seront plus forcément protégées. ¦ Снять пароль с «{name}»? Она будет открываться без запроса, а её резервные копии уже не обязательно будут защищены. ¦ Зняти пароль з «{name}»? Вона відкриватиметься без запиту, а її резервні копії вже не обов’язково будуть захищені.
+Reverrouillée (délai passé ou app relancée) ¦ Снова заблокирована (время истекло или приложение перезапущено) ¦ Знову заблоковано (час минув або застосунок перезапущено)
+Sans ce mot de passe, cette généalogie ne peut plus être ouverte dans l’app : il n’existe pas de porte dérobée, et personne ne peut le retrouver pour toi. ¦ Без этого пароля эту генеалогию больше нельзя открыть в приложении: чёрного хода нет, и никто не сможет восстановить его за тебя. ¦ Без цього пароля цю генеалогію більше не можна відкрити в застосунку: чорного ходу немає, і ніхто не зможе відновити його за тебе.
+Sauvegarde complète ¦ Полная резервная копия ¦ Повна резервна копія
+Se verrouille après {m} sans rien toucher, à la fermeture de l’app et quand on change de généalogie. ¦ Блокируется через {m} бездействия, при закрытии приложения и при смене генеалогии. ¦ Блокується після {m} бездіяльності, під час закриття застосунку і зміни генеалогії.
+Site web ¦ Веб-сайт ¦ Вебсайт
+Site web publié ¦ Веб-сайт опубликован ¦ Вебсайт опубліковано
+Tableau de bord des dossiers (CSV) · dossiers : {n} ¦ Сводка дел (CSV) · дел: {n} ¦ Зведення справ (CSV) · справ: {n}
+Tableau, arbre ou parts imprimés ¦ Таблица, древо или доли напечатаны ¦ Таблицю, дерево чи частки надруковано
+Tape d’abord le mot de passe actuel. ¦ Сначала введи текущий пароль. ¦ Спершу введи поточний пароль.
+Tape le mot de passe. ¦ Введи пароль. ¦ Введи пароль.
+Tout le registre ¦ Весь журнал ¦ Увесь журнал
+Un verrou à l’ouverture de « {name} », sur cet ordinateur et sur les autres. ¦ Замок при открытии «{name}» — на этом компьютере и на других. ¦ Замок під час відкриття «{name}» — на цьому комп’ютері й на інших.
+Verrouiller après ¦ Блокировать через ¦ Блокувати після
+Verrouiller maintenant ¦ Заблокировать сейчас ¦ Заблокувати зараз
+Verrouiller maintenant (généalogie protégée par un mot de passe) ¦ Заблокировать сейчас (генеалогия защищена паролем) ¦ Заблокувати зараз (генеалогія захищена паролем)
+Verrouillée : {names} (ouvre-la avec son mot de passe pour voir ses dossiers) ¦ Заблокирована: {names} (открой её паролем, чтобы увидеть её дела) ¦ Заблоковано: {names} (відкрий її паролем, щоб побачити її справи)
+Verrouillée à la main ¦ Заблокирована вручную ¦ Заблоковано вручну
+après {m} ¦ через {m} ¦ після {m}
+pour changer le délai ¦ чтобы изменить время ¦ щоб змінити час
+pour changer le mot de passe ¦ чтобы сменить пароль ¦ щоб змінити пароль
+pour retirer le mot de passe ¦ чтобы снять пароль ¦ щоб зняти пароль
+pour une sauvegarde protégée ¦ для защищённой копии ¦ для захищеної копії
+protégée par un mot de passe ¦ защищена паролем ¦ захищена паролем
+sans rien toucher ¦ бездействия ¦ бездіяльності
+très bon ¦ очень хорошая ¦ дуже хороша
+« {name} » est verrouillée ¦ «{name}» заблокирована ¦ «{name}» заблоковано
+📜 Qui a vu quoi ¦ 📜 Кто что видел ¦ 📜 Хто що бачив
+🔐 Généalogie verrouillée ¦ 🔐 Генеалогия заблокирована ¦ 🔐 Генеалогію заблоковано
+🔐 Mot de passe de cette généalogie ¦ 🔐 Пароль этой генеалогии ¦ 🔐 Пароль цієї генеалогії
+faible ¦ слабая ¦ слабка
+moyen ¦ средняя ¦ середня
+bon ¦ хорошая ¦ хороша
+pour ouvrir la généalogie ¦ чтобы открыть генеалогию ¦ щоб відкрити генеалогію
+Ce dossier appartient à l’app (données, médias ou sauvegardes d’une généalogie) : choisis un autre dossier. ¦ Эта папка принадлежит приложению (данные, медиафайлы или копии генеалогии): выбери другую папку. ¦ Ця тека належить застосунку (дані, медіа або копії генеалогії): вибери іншу теку.
+Ce fichier est rangé dans les dossiers de l’app : choisis un fichier ailleurs. ¦ Этот файл лежит в папках приложения: выбери файл в другом месте. ¦ Цей файл лежить у теках застосунку: вибери файл деінде.
+Cette copie est rangée dans les dossiers d’une autre généalogie : elle ne peut pas être remise ici. ¦ Эта копия лежит в папках другой генеалогии: её нельзя восстановить здесь. ¦ Ця копія лежить у теках іншої генеалогії: її не можна відновити тут.
+Cette copie vient d’une généalogie protégée par un mot de passe : ouvre-la pour la restaurer. ¦ Эта копия из генеалогии, защищённой паролем: открой её, чтобы восстановить. ¦ Ця копія з генеалогії, захищеної паролем: відкрий її, щоб відновити.
+Cette base est protégée par un mot de passe : donne-le pour l’ouvrir. ¦ Эта база защищена паролем: введи его, чтобы открыть её. ¦ Ця база захищена паролем: введи його, щоб відкрити її.

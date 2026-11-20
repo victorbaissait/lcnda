@@ -19,7 +19,7 @@ function router_deny(int $status = 404): bool
     return true;
 }
 
-function router_serve_media(string $relative): bool
+function router_serve_media(string $relative, bool $noStore = false): bool
 {
     $root = realpath(MEDIA_DIR);
     $file = $root !== false ? realpath($root . '/' . $relative) : false;
@@ -48,12 +48,12 @@ function router_serve_media(string $relative): bool
     header('X-Content-Type-Options: nosniff');
     header('Accept-Ranges: bytes');
     // Les images peuvent être pivotées « sur place » : on fait revalider à chaque fois (304 si inchangé).
-    header('Cache-Control: private, no-cache');
+    header($noStore ? 'Cache-Control: no-store, private' : 'Cache-Control: private, no-cache'); // 🔐 généalogie protégée : rien dans le cache du navigateur
     header('ETag: ' . $etag);
     header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $mtime) . ' GMT');
 
     $ifNoneMatch = trim((string) ($_SERVER['HTTP_IF_NONE_MATCH'] ?? ''));
-    if ($ifNoneMatch !== '' && $ifNoneMatch === $etag) {
+    if (!$noStore && $ifNoneMatch !== '' && $ifNoneMatch === $etag) {
         http_response_code(304);
         return true;
     }
@@ -141,7 +141,14 @@ if ($path === '/__health') {
 }
 
 if (str_starts_with($path, '/media/')) {
-    return router_serve_media(substr($path, 7));
+    // 🔐 généalogie protégée par un mot de passe : aucun média tant que la séance ne l'a pas ouverte (lib/verrou.php)
+    require_once __DIR__ . '/lib/verrou.php';
+    if (glock_request_blocked()) {
+        header('X-LCNDA-Glock: 1');
+        header('Cache-Control: no-store');
+        return router_deny(423);
+    }
+    return router_serve_media(substr($path, 7), glock_info()['locked']);
 }
 
 $segments = array_values(array_filter(explode('/', $path), static fn($s) => $s !== ''));

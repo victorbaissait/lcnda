@@ -668,11 +668,13 @@
         ['report', '#report-problem-open', '🐞', 'Signaler un bug'],
         ['bell', '#succ-bell-open', '🔔', 'Échéances du jour (usage successoral seulement)'], // 🔔 retards et aujourd'hui, tous les dossiers (heritage-successoral-outils.js)
         ['succ', '#succ-filter-open', '⚖️', 'Dossiers de succession (usage successoral seulement)'], // ⚖️ filtre de toute l'app (heritage-successoral-dossiers.js)
+        ['glock', '#glock-now', '🔐', 'Verrouiller maintenant (généalogie protégée par un mot de passe)'], // 🔐 app-verrou.js, caché au départ
         ['genealogies', '#genealogy-switch', '🌳', 'Mes généalogies (changer, en créer une autre)'],
     ];
     /** ⚖️ seulement en usage « Généalogiste successoral » : sinon la ligne n'apparaît pas dans la liste */
     const succUsage = () => { const c = lsGet('genealogie-usage', null); return Array.isArray(c?.usages) && c.usages.includes('successoral'); };
-    const TB_OWN = ['simple', 'calc']; // ces deux-là : leur réglage à eux
+    const TB_OWN = ['simple', 'calc', 'glock']; // ceux-là : leur réglage à eux (🔐 : genealogie-verrou-bouton, caché au départ)
+    const glockShown = () => lsGet('genealogie-verrou-bouton', false) === true;
     /* Les raccourcis vers les outils, cachés au départ (cochés un par un) : chaque outil de 🛠️ Outils de modification
      * (Listes → Outils de modification, sur son onglet) et chaque partie d'Enquêtes (🔍 Enquêtes, 🧭 Battue, 📚 Atelier, 🧩 Tableaux).
      * Montrés : localStorage['genealogie-topbar-buttons'].on = [clés] ; ce que fait le clic : .mode = {clé: 'new'} (un nouveau projet ;
@@ -694,7 +696,7 @@
     const tbRun = key => { const t = tbTools().find(x => x.key === key); if (!t) return; if (topbarCfg().mode[key] === 'new' && t.create) return t.create(); return t.go(); };
     function topbarSetMode(k, m) { if (!isTool(k)) return; const c = topbarCfg(); if (m === 'new') c.mode[k] = 'new'; else delete c.mode[k]; lsSet(TB_KEY, c); applyTopbar(); }
     const isTool = k => /^(et|enq|act)_/.test(k);
-    const tbItems = () => [...TB_ITEMS.filter(b => !['succ', 'bell'].includes(b[0]) || succUsage()), ...tbTools().map(t => [t.key, '#tb-go-' + t.key, t.icon, t.label, t.group])];
+    const tbItems = () => [...TB_ITEMS.filter(b => (!['succ', 'bell'].includes(b[0]) || succUsage()) && (b[0] !== 'glock' || !!window.LCNDA_GLOCK?.on)), ...tbTools().map(t => [t.key, '#tb-go-' + t.key, t.icon, t.label, t.group])];
     const tbKeys = () => tbItems().map(b => b[0]);
     function topbarCfg() {
         const v = lsGet(TB_KEY, {}) || {}, keys = tbKeys();
@@ -706,11 +708,12 @@
     }
     const calcShown = () => (lsGet('genealogie-calculette', {}) || {}).topButton !== false;
     const simpleShown = () => { const ms = ext.modeSimple; if (ms?.settings) return !!ms.settings().forAll; const loc = lsGet('lcnda-mode-simple-local', null); const s = loc && loc.baseAll === false ? loc : (lsGet('genealogie-mode-simple', {}) || {}); return s.forAll === true; };
-    function topbarShown(k, cfg = topbarCfg()) { return k === 'calc' ? calcShown() : k === 'simple' ? simpleShown() : isTool(k) ? cfg.on.includes(k) : !cfg.hidden.includes(k); }
+    function topbarShown(k, cfg = topbarCfg()) { return k === 'glock' ? glockShown() : k === 'calc' ? calcShown() : k === 'simple' ? simpleShown() : isTool(k) ? cfg.on.includes(k) : !cfg.hidden.includes(k); }
     /** montrer / cacher un bouton (🧮 et 🧓 : dans leur propre réglage, le même que leur interrupteur) */
     function topbarSetShown(k, on) {
         if (!tbKeys().includes(k)) return;
         if (k === 'calc') { const s = lsGet('genealogie-calculette', {}) || {}; lsSet('genealogie-calculette', {...(typeof s === 'object' && !Array.isArray(s) ? s : {}), topButton: !!on}); ext.calculator?.refreshButton?.(); }
+        else if (k === 'glock') { lsSet('genealogie-verrou-bouton', !!on); ext.glockButton?.(); }
         else if (k === 'simple') { const ms = ext.modeSimple; if (ms?.write && ms.settings) { ms.write({...ms.settings(), forAll: !!on}); ms.refreshEntry?.(); } }
         else if (isTool(k)) { const c = topbarCfg(); c.on = on ? [...new Set([...c.on, k])] : c.on.filter(x => x !== k); lsSet(TB_KEY, c); }
         else { const c = topbarCfg(); c.hidden = on ? c.hidden.filter(x => x !== k) : [...new Set([...c.hidden, k])]; lsSet(TB_KEY, c); }
@@ -727,6 +730,7 @@
         try { localStorage.removeItem(TB_KEY); } catch (_) {}
         if (!calcShown()) topbarSetShown('calc', true);
         if (simpleShown()) topbarSetShown('simple', false); // 🧓 caché au départ
+        if (glockShown()) topbarSetShown('glock', false); // 🔐 caché au départ
         applyTopbar();
     }
     /** range les boutons de la barre du haut (avant le compteur) et cache ceux qu'on a décochés */

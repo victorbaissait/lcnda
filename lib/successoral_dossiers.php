@@ -124,6 +124,7 @@ function succ_genealogies(): array
 function succ_open_ro(string $path): ?PDO
 {
     if (!is_file($path)) { return null; }
+    if (function_exists('glock_path_locked') && glock_path_locked($path)) { throw new LcndaBadInput('Cette généalogie est verrouillée par un mot de passe : ouvre-la d’abord.'); } // 🔐 rien n'est lu
     $pdo = new PDO('sqlite:' . $path, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::SQLITE_ATTR_OPEN_FLAGS => PDO::SQLITE_OPEN_READONLY]);
     $pdo->exec('PRAGMA busy_timeout = 5000');
     return $pdo;
@@ -134,6 +135,7 @@ function succ_open_rw(string $id, bool $create = false): PDO
     $gs = succ_genealogies();
     if (!isset($gs[$id])) { throw new RuntimeException('Généalogie introuvable.'); }
     $path = $gs[$id]['path'];
+    if ($id !== succ_gid() && function_exists('glock_genealogy_locked') && glock_genealogy_locked($id)) { throw new LcndaBadInput('Cette généalogie est verrouillée par un mot de passe : ouvre-la d’abord.'); } // 🔐
     if (!is_file($path)) {
         if (!$create) { throw new RuntimeException('Cette généalogie est encore vide.'); }
         $dir = dirname($path);
@@ -198,6 +200,8 @@ function succ_index(PDO $pdo): array
     $bases = [];
     foreach (succ_genealogies() as $id => $g) {
         $b = ['id' => $id, 'name' => $g['name'], 'main' => $g['main'], 'active' => $g['active'], 'cases' => [], 'error' => false];
+        // 🔐 une autre généalogie protégée par un mot de passe : rien n'est lu, seulement « verrouillée »
+        if (!$g['active'] && function_exists('glock_genealogy_locked') && glock_genealogy_locked((string) $id)) { $b['locked'] = true; $bases[] = $b; continue; }
         try {
             if ($g['active']) { $b['cases'] = succ_index_rows($pdo); }
             elseif ($ro = succ_open_ro($g['path'])) { $b['cases'] = succ_index_rows($ro); $ro = null; }

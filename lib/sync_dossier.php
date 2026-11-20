@@ -86,7 +86,7 @@ function sd_schema(PDO $pdo): void
 /** Nom et clé de cet ordinateur (GENEALOGY_MACHINE_NAME pour les essais : deux « ordinateurs » sur la même machine). */
 function sd_machine(): array
 {
-    $forced = trim((string) getenv('GENEALOGY_MACHINE_NAME'));
+    $forced = (!function_exists('lcnda_test_env_ok') || lcnda_test_env_ok()) ? trim((string) getenv('GENEALOGY_MACHINE_NAME')) : ''; // 🔐 pas dans l'app de bureau (lib/verrou.php)
     $label = $forced !== '' ? $forced : (string) php_uname('n');
     $home = (string) (getenv('HOME') ?: (getenv('USERPROFILE') ?: ''));
     $label = mb_substr(preg_replace('/\.(local|lan|home)$/i', '', $label) ?: 'Cet ordinateur', 0, 60);
@@ -169,6 +169,7 @@ function sd_folder(PDO $pdo): string
 function sd_root(PDO $pdo): string
 {
     $folder = sd_folder($pdo);
+    if ($folder !== '' && function_exists('glock_forbidden_dir') && glock_forbidden_dir($folder)) { return ''; } // 🔐 réglage d'avant : ignoré
     $base = (string) sync_settings($pdo)['base_uid'];
     return ($folder === '' || $base === '' || !preg_match('/^[a-f0-9]{8,40}$/', $base)) ? '' : $folder . '/' . SD_ROOT . '/' . $base;
 }
@@ -268,6 +269,7 @@ function sd_setup(PDO $pdo, array $data): array
 {
     $folder = sd_expand(safe_text($data['folder'] ?? ''));
     if (!sd_path_ok($folder)) { throw new RuntimeException('Écris le chemin complet du dossier partagé (par exemple /Volumes/MaCle ou ~/Dropbox).'); }
+    if (function_exists('glock_refuse_dir')) { glock_refuse_dir($folder); } // 🔐 jamais un dossier interne de l'app
     if (!is_dir($folder)) {
         if (!is_dir(dirname($folder)) || !@mkdir($folder, 0775) ) { throw new RuntimeException(i18n_t('Dossier introuvable : {dir} (clé débranchée ?).', ['dir' => $folder])); }
     }

@@ -638,7 +638,9 @@
         await settings();
         const rows = (d.bases || []).flatMap(b => (b.cases || []).map(c => ({...c, base: b, key: `${b.id}:${c.id}`, here: !!b.active})));
         const bad = (d.bases || []).filter(b => b.error);
-        if (!rows.length) { body.innerHTML = A().emptyState({icon: '⚖️', text: i18n('Aucun dossier de succession pour l’instant'), hint: i18n('Choisis la personne décédée : l’app part des fiches de la base pour trouver ses héritiers, selon le Code civil d’aujourd’hui.'), action: {label: i18n('＋ Ouvrir un dossier'), attrs: 'data-succ-new'}}) + (bad.length ? UI().notice('warn', i18n('⚠️ illisible : {names}', {names: bad.map(b => b.name).join(', ')})) : ''); return; }
+        const locked = (d.bases || []).filter(b => b.locked); // 🔐 une autre généalogie protégée par un mot de passe : rien n'en est lu (lib/verrou.php)
+        const lockNote = locked.length ? UI().notice('info', '🔐 ' + i18n('Verrouillée : {names} (ouvre-la avec son mot de passe pour voir ses dossiers)', {names: locked.map(b => b.name).join(', ')})) : '';
+        if (!rows.length) { body.innerHTML = lockNote + A().emptyState({icon: '⚖️', text: i18n('Aucun dossier de succession pour l’instant'), hint: i18n('Choisis la personne décédée : l’app part des fiches de la base pour trouver ses héritiers, selon le Code civil d’aujourd’hui.'), action: {label: i18n('＋ Ouvrir un dossier'), attrs: 'data-succ-new'}}) + (bad.length ? UI().notice('warn', i18n('⚠️ illisible : {names}', {names: bad.map(b => b.name).join(', ')})) : ''); return; }
         const notaries = [...new Set(rows.map(r => r.notary).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'fr'));
         const bases = (d.bases || []).filter(b => b.cases.length);
         const bar = UI().listBar({key: 'succ:board', search: {placeholder: i18n('Chercher… (n°, défunt, notaire)')}, view: {dflt: 'list', what: 'dossiers'},
@@ -646,7 +648,7 @@
                 {id: 'base', label: i18n('Rangé dans'), type: 'select', options: [['', i18n('Toutes les généalogies')], ...bases.map(b => [b.id || '_main', b.name])]},
                 {id: 'notary', label: i18n('Notaire'), type: 'select', options: [['', i18n('Tous les notaires')], ...notaries.map(n => [n, n])]}],
             sort: {options: [['due', i18n('Prochaine échéance (retards d’abord)')], ['low', i18n('Avancement le plus bas')], ['recent', i18n('Les plus récents')], ['num', i18n('N° de dossier')]], value: 'due'}, onChange: st => draw(st)});
-        body.innerHTML = `${bad.length ? UI().notice('warn', i18n('⚠️ illisible : {names}', {names: bad.map(b => b.name).join(', ')})) : ''}<div data-succ-bitems></div><div class="succ-bsel" data-succ-bsel hidden></div>`;
+        body.innerHTML = `${lockNote}${bad.length ? UI().notice('warn', i18n('⚠️ illisible : {names}', {names: bad.map(b => b.name).join(', ')})) : ''}<div data-succ-bitems></div><div class="succ-bsel" data-succ-bsel hidden></div>`;
         body.prepend(bar);
         const M = UI().listMatch;
         let shown = rows;
@@ -706,6 +708,7 @@
                 const head = ['Dossier', 'Défunt', 'État', 'Notaire', 'Prochaine échéance', 'Héritiers', 'Pièces', 'Temps', 'Avancement', 'Rangé dans'].map(h => cell(i18n(h)));
                 const csv = '﻿' + [head.join(';'), ...sel.map(r => [r.number, r.deceased, stateLabel(r.state), r.notary, r.next_due, heirsTxt(r), r.pieces ? `${r.pieces.have}/${r.pieces.total}` : '', timeTxt(r.minutes), r.progress == null ? '' : r.progress + ' %', r.base.name].map(cell).join(';'))].join('\r\n');
                 const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = 'dossiers-de-succession.csv'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+                { const tk = A().state?.csrf || ''; fetch('api.php?action=access_note', {method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRF-Token': tk}, body: JSON.stringify({what: 'dashboard_csv', n: sel.length, csrf: tk})}).catch(() => {}); } // 📜 Qui a vu quoi (lib/verrou.php)
                 return toast(i18n('Dossiers exportés (CSV)'));
             }
             const aw = t.closest('[data-succ-away]');

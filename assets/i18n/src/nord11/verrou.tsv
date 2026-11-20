@@ -1,0 +1,131 @@
+fr ¦ vi ¦ id
+# Zone « verrou » : 🔐 mot de passe d’une généalogie et 📜 « Qui a vu quoi » (assets/js/app-verrou*.js, lib/verrou.php, lib/verrou_page.php)
+1 h ¦ 1 giờ ¦ 1 jam
+12 mois ¦ 12 tháng ¦ 12 bulan
+15 min ¦ 15 phút ¦ 15 mnt
+3 ans ¦ 3 năm ¦ 3 tahun
+3 mois ¦ 3 tháng ¦ 3 bulan
+5 min ¦ 5 phút ¦ 5 mnt
+6 mois ¦ 6 tháng ¦ 6 bulan
+Archive du dossier (.zip) ¦ Tệp lưu trữ hồ sơ (.zip) ¦ Arsip berkas (.zip)
+Attention : le verrou n’empêche pas de lire le fichier si quelqu’un le copie (il n’est pas chiffré). Pour ça, chiffre le disque de ton ordinateur (FileVault sur Mac, BitLocker sous Windows). ¦ Lưu ý: khóa không ngăn người khác đọc tệp nếu họ sao chép nó (tệp không được mã hóa). Để làm việc đó, hãy mã hóa ổ đĩa máy tính của bạn (FileVault trên Mac, BitLocker trên Windows). ¦ Perhatian: kunci ini tidak mencegah orang membaca file jika mereka menyalinnya (file tidak dienkripsi). Untuk itu, enkripsi disk komputermu (FileVault di Mac, BitLocker di Windows).
+Autre format ¦ Định dạng khác ¦ Format lain
+Base .db ¦ Cơ sở dữ liệu .db ¦ Basis data .db
+Bloc ¦ Khối ¦ Blok
+Ce mot de passe contient des caractères illisibles. ¦ Mật khẩu này chứa ký tự không đọc được. ¦ Kata sandi ini berisi karakter yang tidak terbaca.
+Ce mot de passe empêche d’ouvrir cette généalogie dans l’app, ici et après chaque délai sans rien toucher. ¦ Mật khẩu này ngăn việc mở gia phả này trong ứng dụng, ở đây và sau mỗi khoảng thời gian không thao tác. ¦ Kata sandi ini mencegah silsilah ini dibuka di aplikasi, di sini dan setelah setiap jeda tanpa aktivitas.
+Ce que ce mot de passe protège vraiment ¦ Điều mật khẩu này thật sự bảo vệ ¦ Apa yang benar-benar dilindungi kata sandi ini
+Cette généalogie a déjà un mot de passe : change-le plutôt. ¦ Gia phả này đã có mật khẩu: hãy đổi nó thay vì đặt mới. ¦ Silsilah ini sudah punya kata sandi: lebih baik ubah saja.
+Cette généalogie est maintenant protégée par un mot de passe. ¦ Gia phả này giờ đã được bảo vệ bằng mật khẩu. ¦ Silsilah ini sekarang dilindungi kata sandi.
+Cette généalogie est protégée : sa sauvegarde l’est aussi, avec le même mot de passe. ¦ Gia phả này được bảo vệ: bản sao lưu của nó cũng vậy, với cùng mật khẩu. ¦ Silsilah ini dilindungi: cadangannya juga, dengan kata sandi yang sama.
+Cette généalogie est protégée par un mot de passe : dans le dossier choisi, elle n’est jamais copiée en clair. Une copie chiffrée (AES-256, même mot de passe) y est faite quand tu l’ouvres avec son mot de passe ; dans le dossier de l’app, les copies restent comme la base. ¦ Gia phả này được bảo vệ bằng mật khẩu: nó không bao giờ được sao chép không mã hóa vào thư mục đã chọn. Một bản sao mã hóa (AES-256, cùng mật khẩu) được tạo ở đó khi bạn mở nó bằng mật khẩu; trong thư mục của ứng dụng, các bản sao giữ nguyên như cơ sở dữ liệu. ¦ Silsilah ini dilindungi kata sandi: silsilah ini tidak pernah disalin tanpa enkripsi ke folder yang dipilih. Salinan terenkripsi (AES-256, kata sandi yang sama) dibuat di sana saat kamu membukanya dengan kata sandinya; di folder aplikasi, salinan tetap seperti basis data.
+Cette généalogie est protégée par un mot de passe : ses sauvegardes le sont aussi. Utilise « Sauvegarde complète protégée » avec le même mot de passe. ¦ Gia phả này được bảo vệ bằng mật khẩu: các bản sao lưu của nó cũng vậy. Hãy dùng “Bản sao lưu đầy đủ được bảo vệ” với cùng mật khẩu. ¦ Silsilah ini dilindungi kata sandi: cadangannya juga. Gunakan “Cadangan lengkap terlindungi” dengan kata sandi yang sama.
+Cette généalogie est verrouillée : donne son mot de passe pour l’ouvrir. ¦ Gia phả này đã bị khóa: nhập mật khẩu để mở. ¦ Silsilah ini terkunci: masukkan kata sandinya untuk membukanya.
+Cette généalogie est verrouillée par un mot de passe : ouvre-la d’abord. ¦ Gia phả này bị khóa bằng mật khẩu: hãy mở nó trước. ¦ Silsilah ini terkunci dengan kata sandi: buka dulu.
+Cette généalogie n’a pas de mot de passe. ¦ Gia phả này không có mật khẩu. ¦ Silsilah ini tidak punya kata sandi.
+Changer le délai ¦ Đổi thời gian ¦ Ubah jeda
+Changer le mot de passe ¦ Đổi mật khẩu ¦ Ubah kata sandi
+Changer, ou retirer ¦ Đổi hoặc gỡ bỏ ¦ Ubah atau hapus
+Coche la case : sans ce mot de passe, tu ne pourras plus ouvrir cette généalogie dans l’app. ¦ Đánh dấu ô: không có mật khẩu này, bạn sẽ không thể mở gia phả này trong ứng dụng nữa. ¦ Centang kotak ini: tanpa kata sandi ini kamu tidak akan bisa lagi membuka silsilah ini di aplikasi.
+Courriers en série ¦ Thư hàng loạt ¦ Surat massal
+Dossier déplacé vers une autre généalogie ¦ Hồ sơ đã chuyển sang gia phả khác ¦ Berkas dipindahkan ke silsilah lain
+Dossier ou objet ¦ Hồ sơ hoặc mục ¦ Berkas atau objek
+Dossier, poste, action… ¦ Hồ sơ, máy tính, thao tác… ¦ Berkas, komputer, tindakan…
+Durée changée. Lignes plus anciennes effacées : {n} ¦ Đã đổi thời hạn. Số dòng cũ hơn đã xóa: {n} ¦ Durasi diubah. Baris lama yang dihapus: {n}
+Durée de conservation changée ¦ Đã đổi thời hạn lưu giữ ¦ Durasi penyimpanan diubah
+Durée inconnue. ¦ Thời hạn không rõ. ¦ Durasi tidak dikenal.
+Délai de reverrouillage changé ¦ Đã đổi thời gian khóa lại ¦ Jeda penguncian ulang diubah
+Délai de reverrouillage inconnu. ¦ Thời gian khóa lại không rõ. ¦ Jeda penguncian ulang tidak dikenal.
+Elle est protégée par un mot de passe. ¦ Nó được bảo vệ bằng mật khẩu. ¦ Silsilah ini dilindungi kata sandi.
+Export ¦ Xuất ¦ Ekspor
+Exports ¦ Các lần xuất ¦ Ekspor-ekspor
+Force : {s} ¦ Độ mạnh: {s} ¦ Kekuatan: {s}
+Généalogie ouverte avec le mot de passe ¦ Gia phả đã mở bằng mật khẩu ¦ Silsilah dibuka dengan kata sandi
+Il n’y a pas d’autre généalogie. ¦ Không có gia phả nào khác. ¦ Tidak ada silsilah lain.
+Impossible de retirer le verrou (dossier des données en lecture seule ?). ¦ Không thể gỡ khóa (thư mục dữ liệu chỉ đọc?). ¦ Tidak dapat menghapus kunci (folder data hanya-baca?).
+Impossible de vérifier le mot de passe (dossier des données en lecture seule ?). ¦ Không thể kiểm tra mật khẩu (thư mục dữ liệu chỉ đọc?). ¦ Tidak dapat memeriksa kata sandi (folder data hanya-baca?).
+Impossible d’enregistrer le verrou (dossier des données en lecture seule ?). ¦ Không thể lưu khóa (thư mục dữ liệu chỉ đọc?). ¦ Tidak dapat menyimpan kunci (folder data hanya-baca?).
+Impossible d’ouvrir cette généalogie. ¦ Không thể mở gia phả này. ¦ Tidak dapat membuka silsilah ini.
+Impression ou PDF ¦ In hoặc PDF ¦ Cetak atau PDF
+Impressions ¦ Các lần in ¦ Cetakan
+Journal du dossier (CSV) ¦ Nhật ký hồ sơ (CSV) ¦ Jurnal berkas (CSV)
+J’ai compris : sans ce mot de passe, je ne pourrai plus ouvrir cette généalogie dans l’app. ¦ Tôi đã hiểu: không có mật khẩu này, tôi sẽ không thể mở gia phả này trong ứng dụng nữa. ¦ Aku mengerti: tanpa kata sandi ini aku tidak akan bisa lagi membuka silsilah ini di aplikasi.
+Le mot de passe est trop long (1024 caractères au plus). ¦ Mật khẩu quá dài (tối đa 1024 ký tự). ¦ Kata sandi terlalu panjang (maksimal 1024 karakter).
+Le serveur de l’app ne répond pas. Réessaie. ¦ Máy chủ của ứng dụng không phản hồi. Hãy thử lại. ¦ Server aplikasi tidak menjawab. Coba lagi.
+Le verrou n’empêche pas de lire le fichier si quelqu’un le copie : il n’est pas chiffré. Pour ça, chiffre le disque de ton ordinateur : FileVault sur Mac (Réglages Système → Confidentialité et sécurité), BitLocker sous Windows (Paramètres → Confidentialité et sécurité → Chiffrement de l’appareil). ¦ Khóa không ngăn người khác đọc tệp nếu họ sao chép nó: tệp không được mã hóa. Để làm việc đó, hãy mã hóa ổ đĩa máy tính của bạn: FileVault trên Mac (Cài đặt hệ thống → Quyền riêng tư & Bảo mật), BitLocker trên Windows (Cài đặt → Quyền riêng tư & bảo mật → Mã hóa thiết bị). ¦ Kunci ini tidak mencegah orang membaca file jika mereka menyalinnya: file tidak dienkripsi. Untuk itu, enkripsi disk komputermu: FileVault di Mac (Pengaturan Sistem → Privasi & Keamanan), BitLocker di Windows (Pengaturan → Privasi & keamanan → Enkripsi perangkat).
+Lecture seule : rien ne se modifie ; seule cette durée fait disparaître les lignes plus vieilles (et c’est noté). ¦ Chỉ đọc: không gì bị sửa; chỉ thời hạn này làm mất các dòng cũ hơn (và việc đó được ghi lại). ¦ Hanya-baca: tidak ada yang diubah; hanya durasi ini yang menghapus baris yang lebih lama (dan itu dicatat).
+Lecture seule. Tous les dossiers : Réglages → 📜 Qui a vu quoi. ¦ Chỉ đọc. Tất cả hồ sơ: Cài đặt → 📜 Ai đã xem gì. ¦ Hanya-baca. Semua berkas: Pengaturan → 📜 Siapa melihat apa.
+Les deux mots de passe ne sont pas pareils. ¦ Hai mật khẩu không giống nhau. ¦ Kedua kata sandi tidak sama.
+Les ouvertures de dossier, les impressions, les exports, les courriers en série et chaque essai du mot de passe, notés par l’app sur ce poste ({machine}). ¦ Các lần mở hồ sơ, in, xuất, thư hàng loạt và mỗi lần thử mật khẩu, được ứng dụng ghi lại trên máy tính này ({machine}). ¦ Pembukaan berkas, cetakan, ekspor, surat massal, dan setiap percobaan kata sandi, dicatat oleh aplikasi di komputer ini ({machine}).
+Les sauvegardes de cette généalogie sont toujours protégées par ce mot de passe (AES-256) : aucune copie ne sort en clair de son dossier. ¦ Các bản sao lưu của gia phả này luôn được bảo vệ bằng mật khẩu này (AES-256): không bản sao nào rời thư mục của nó mà không mã hóa. ¦ Cadangan silsilah ini selalu dilindungi kata sandi ini (AES-256): tidak ada salinan yang keluar dari foldernya tanpa enkripsi.
+Lettres rangées : {n} ¦ Thư đã xếp: {n} ¦ Surat diarsipkan: {n}
+Lettres retirées (↶ Annuler) : {n} ¦ Thư đã rút lại (↶ Hoàn tác): {n} ¦ Surat ditarik (↶ Batalkan): {n}
+Lignes : {n} sur {t} ¦ Dòng: {n} / {t} ¦ Baris: {n} dari {t}
+Lignes anciennes effacées ¦ Đã xóa các dòng cũ ¦ Baris lama dihapus
+Lignes effacées : {n} (gardées : {m}) ¦ Dòng đã xóa: {n} (lưu giữ: {m}) ¦ Baris dihapus: {n} (disimpan: {m})
+Mode consultation : le registre ne se lit pas. ¦ Chế độ chỉ xem: không thể đọc sổ ghi. ¦ Mode lihat saja: catatan tidak dapat dibaca.
+Mot de passe changé ¦ Đã đổi mật khẩu ¦ Kata sandi diubah
+Mot de passe changé. Les autres fenêtres ouvertes devront le redemander. ¦ Đã đổi mật khẩu. Các cửa sổ đang mở khác sẽ phải hỏi lại. ¦ Kata sandi diubah. Jendela lain yang terbuka harus memintanya lagi.
+Mot de passe de cette généalogie ¦ Mật khẩu của gia phả này ¦ Kata sandi silsilah ini
+Mot de passe oublié : il n’y a pas de porte dérobée. Sans lui, cette généalogie ne peut plus être ouverte dans l’app. ¦ Quên mật khẩu: không có cửa sau. Không có nó, gia phả này không thể mở trong ứng dụng nữa. ¦ Lupa kata sandi: tidak ada pintu belakang. Tanpanya, silsilah ini tidak dapat dibuka lagi di aplikasi.
+Mot de passe oublié ? ¦ Quên mật khẩu? ¦ Lupa kata sandi?
+Mot de passe posé ¦ Đã đặt mật khẩu ¦ Kata sandi dipasang
+Mot de passe refusé ¦ Mật khẩu bị từ chối ¦ Kata sandi ditolak
+Mot de passe retiré ¦ Đã gỡ mật khẩu ¦ Kata sandi dihapus
+Musée de famille ¦ Bảo tàng gia đình ¦ Museum keluarga
+Ouvertures ¦ Các lần mở ¦ Pembukaan
+Ouverture… ¦ Đang mở… ¦ Membuka…
+Ouvrir une autre généalogie ¦ Mở một gia phả khác ¦ Buka silsilah lain
+Paquet du travail à deux ¦ Gói làm việc hai người ¦ Paket kerja berdua
+Partage avec la famille ¦ Chia sẻ với gia đình ¦ Berbagi dengan keluarga
+Patiente {n} s ¦ Chờ {n} giây ¦ Tunggu {n} dtk
+Patiente {n} s avant de réessayer. ¦ Chờ {n} giây rồi thử lại. ¦ Tunggu {n} dtk sebelum mencoba lagi.
+Poste ¦ Máy tính ¦ Komputer
+Pour une généalogie protégée, tape son mot de passe : la sauvegarde est chiffrée avec lui (AES-256). ¦ Với gia phả được bảo vệ, hãy nhập mật khẩu của nó: bản sao lưu được mã hóa bằng mật khẩu đó (AES-256). ¦ Untuk silsilah yang dilindungi, ketik kata sandinya: cadangan dienkripsi dengannya (AES-256).
+Protéger ¦ Bảo vệ ¦ Lindungi
+Protéger cette généalogie ¦ Bảo vệ gia phả này ¦ Lindungi silsilah ini
+Protégée ¦ Được bảo vệ ¦ Terlindungi
+Qui a vu ce dossier ¦ Ai đã xem hồ sơ này ¦ Siapa melihat berkas ini
+Qui a vu le dossier {n} ¦ Ai đã xem hồ sơ {n} ¦ Siapa melihat berkas {n}
+Qui a vu quoi ¦ Ai đã xem gì ¦ Siapa melihat apa
+Registre « Qui a vu quoi » (CSV) ¦ Sổ ghi “Ai đã xem gì” (CSV) ¦ Catatan “Siapa melihat apa” (CSV)
+Retirer le mot de passe ¦ Gỡ mật khẩu ¦ Hapus kata sandi
+Retirer le mot de passe de « {name} » ? Elle s’ouvrira sans rien demander, et ses sauvegardes ne seront plus forcément protégées. ¦ Gỡ mật khẩu của “{name}”? Nó sẽ mở mà không hỏi gì, và các bản sao lưu của nó sẽ không còn chắc chắn được bảo vệ. ¦ Hapus kata sandi “{name}”? Silsilah itu akan terbuka tanpa menanyakan apa pun, dan cadangannya tidak lagi pasti terlindungi.
+Reverrouillée (délai passé ou app relancée) ¦ Đã khóa lại (hết thời gian hoặc ứng dụng khởi động lại) ¦ Terkunci lagi (jeda berlalu atau aplikasi dimulai ulang)
+Sans ce mot de passe, cette généalogie ne peut plus être ouverte dans l’app : il n’existe pas de porte dérobée, et personne ne peut le retrouver pour toi. ¦ Không có mật khẩu này, gia phả này không thể mở trong ứng dụng nữa: không có cửa sau, và không ai có thể tìm lại nó giúp bạn. ¦ Tanpa kata sandi ini, silsilah ini tidak dapat dibuka lagi di aplikasi: tidak ada pintu belakang, dan tidak ada yang bisa menemukannya untukmu.
+Sauvegarde complète ¦ Bản sao lưu đầy đủ ¦ Cadangan lengkap
+Se verrouille après {m} sans rien toucher, à la fermeture de l’app et quand on change de généalogie. ¦ Tự khóa sau {m} không thao tác, khi đóng ứng dụng và khi đổi gia phả. ¦ Terkunci setelah {m} tanpa aktivitas, saat aplikasi ditutup, dan saat kamu berganti silsilah.
+Site web ¦ Trang web ¦ Situs web
+Site web publié ¦ Đã đăng trang web ¦ Situs web diterbitkan
+Tableau de bord des dossiers (CSV) · dossiers : {n} ¦ Bảng tổng quan hồ sơ (CSV) · hồ sơ: {n} ¦ Dasbor berkas (CSV) · berkas: {n}
+Tableau, arbre ou parts imprimés ¦ Đã in bảng, cây hoặc phần chia ¦ Tabel, pohon, atau bagian dicetak
+Tape d’abord le mot de passe actuel. ¦ Hãy nhập mật khẩu hiện tại trước. ¦ Ketik dulu kata sandi saat ini.
+Tape le mot de passe. ¦ Hãy nhập mật khẩu. ¦ Ketik kata sandi.
+Tout le registre ¦ Toàn bộ sổ ghi ¦ Seluruh catatan
+Un verrou à l’ouverture de « {name} », sur cet ordinateur et sur les autres. ¦ Một khóa khi mở “{name}”, trên máy tính này và các máy khác. ¦ Kunci saat membuka “{name}”, di komputer ini dan di komputer lain.
+Verrouiller après ¦ Khóa sau ¦ Kunci setelah
+Verrouiller maintenant ¦ Khóa ngay ¦ Kunci sekarang
+Verrouiller maintenant (généalogie protégée par un mot de passe) ¦ Khóa ngay (gia phả được bảo vệ bằng mật khẩu) ¦ Kunci sekarang (silsilah dilindungi kata sandi)
+Verrouillée : {names} (ouvre-la avec son mot de passe pour voir ses dossiers) ¦ Đã khóa: {names} (mở bằng mật khẩu của nó để xem hồ sơ) ¦ Terkunci: {names} (buka dengan kata sandinya untuk melihat berkasnya)
+Verrouillée à la main ¦ Đã khóa thủ công ¦ Dikunci manual
+après {m} ¦ sau {m} ¦ setelah {m}
+pour changer le délai ¦ để đổi thời gian ¦ untuk mengubah jeda
+pour changer le mot de passe ¦ để đổi mật khẩu ¦ untuk mengubah kata sandi
+pour retirer le mot de passe ¦ để gỡ mật khẩu ¦ untuk menghapus kata sandi
+pour une sauvegarde protégée ¦ cho bản sao lưu được bảo vệ ¦ untuk cadangan terlindungi
+protégée par un mot de passe ¦ được bảo vệ bằng mật khẩu ¦ dilindungi kata sandi
+sans rien toucher ¦ không thao tác ¦ tanpa aktivitas
+très bon ¦ rất tốt ¦ sangat baik
+« {name} » est verrouillée ¦ “{name}” đã bị khóa ¦ “{name}” terkunci
+📜 Qui a vu quoi ¦ 📜 Ai đã xem gì ¦ 📜 Siapa melihat apa
+🔐 Généalogie verrouillée ¦ 🔐 Gia phả đã bị khóa ¦ 🔐 Silsilah terkunci
+🔐 Mot de passe de cette généalogie ¦ 🔐 Mật khẩu của gia phả này ¦ 🔐 Kata sandi silsilah ini
+faible ¦ yếu ¦ lemah
+moyen ¦ trung bình ¦ sedang
+bon ¦ tốt ¦ baik
+pour ouvrir la généalogie ¦ để mở gia phả ¦ untuk membuka silsilah
+Ce dossier appartient à l’app (données, médias ou sauvegardes d’une généalogie) : choisis un autre dossier. ¦ Thư mục này thuộc về ứng dụng (dữ liệu, tệp phương tiện hoặc bản sao lưu của một gia phả): hãy chọn thư mục khác. ¦ Folder ini milik aplikasi (data, media, atau cadangan sebuah silsilah): pilih folder lain.
+Ce fichier est rangé dans les dossiers de l’app : choisis un fichier ailleurs. ¦ Tệp này nằm trong các thư mục của ứng dụng: hãy chọn tệp ở nơi khác. ¦ File ini ada di folder aplikasi: pilih file dari tempat lain.
+Cette copie est rangée dans les dossiers d’une autre généalogie : elle ne peut pas être remise ici. ¦ Bản sao này nằm trong thư mục của một gia phả khác: không thể khôi phục ở đây. ¦ Salinan ini ada di folder silsilah lain: tidak bisa dipulihkan di sini.
+Cette copie vient d’une généalogie protégée par un mot de passe : ouvre-la pour la restaurer. ¦ Bản sao này đến từ một gia phả được bảo vệ bằng mật khẩu: hãy mở gia phả đó để khôi phục. ¦ Salinan ini berasal dari silsilah yang dilindungi kata sandi: buka silsilah itu untuk memulihkannya.
+Cette base est protégée par un mot de passe : donne-le pour l’ouvrir. ¦ Cơ sở dữ liệu này được bảo vệ bằng mật khẩu: hãy nhập mật khẩu để mở. ¦ Basis data ini dilindungi kata sandi: masukkan kata sandinya untuk membukanya.

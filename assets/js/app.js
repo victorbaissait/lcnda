@@ -6084,6 +6084,7 @@ ${backupSectionHtml()}
         // Sauvegarde protégée : envoi dans un cadre caché (le fichier se télécharge ; une erreur s'y affiche en JSON)
         // Livre de famille : une branche, les parties choisies ; ouvert dans une fenêtre (photos visibles, ⌘P → PDF) ou téléchargé
         window.LCNDA_EXT?.bindFamilyBook?.(exportUrl);
+        window.LCNDA_EXT?.glockExport?.($('#workspace')); // 🔐 généalogie protégée : sa sauvegarde l'est aussi (app-verrou.js)
         $('#protected-backup-form')?.addEventListener('submit',event=>{const form=event.currentTarget;
             if(form.elements.password.value!==form.elements.password_confirm.value){event.preventDefault();toast('Les deux mots de passe ne sont pas identiques.','error');return;}
             form.elements.csrf.value=state.csrf;toast('Préparation de la sauvegarde protégée… (le téléchargement va commencer)');

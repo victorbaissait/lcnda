@@ -1700,6 +1700,7 @@ function save_offsite_settings(PDO $pdo, array $data): array
     foreach (is_array($data['dirs'] ?? null) ? $data['dirs'] : [] as $d) {
         $path = offsite_expand(safe_text(is_array($d) ? ($d['path'] ?? '') : $d));
         if ($path === '' || preg_match('/[\x00-\x1f]/', $path)) { continue; }
+        if (function_exists('glock_refuse_dir')) { glock_refuse_dir($path); } // 🔐 jamais un dossier interne de l'app
         $dirs[$path] = ['path' => $path, 'label' => is_array($d) ? safe_text($d['label'] ?? '') : ''];
     }
     $s['dirs'] = array_values($dirs);
@@ -1721,6 +1722,7 @@ function offsite_copy_now(PDO $pdo, array $data): never
         $dir = offsite_expand((string) $d['path']);
         if ($only !== '' && $dir !== $only) { continue; }
         try {
+            if (function_exists('glock_forbidden_dir') && glock_forbidden_dir($dir)) { throw new RuntimeException('dossier interne de l’app, refusé'); }
             if (!is_dir($dir) && !@mkdir($dir, 0775, true) && !is_dir($dir)) { throw new RuntimeException('dossier introuvable (disque ou clé débranché ?)'); }
             if (!is_writable($dir)) { throw new RuntimeException('dossier non accessible en écriture'); }
             // une généalogie autre que la principale range ses copies (et ses médias) dans son propre sous-dossier :

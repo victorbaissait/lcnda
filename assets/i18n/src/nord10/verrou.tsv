@@ -1,0 +1,131 @@
+fr ¦ sq ¦ mt
+# Zone « verrou » : 🔐 mot de passe d’une généalogie et 📜 « Qui a vu quoi » (assets/js/app-verrou*.js, lib/verrou.php, lib/verrou_page.php)
+1 h ¦ 1 orë ¦ 1 siegħa
+12 mois ¦ 12 muaj ¦ 12-il xahar
+15 min ¦ 15 min ¦ 15 min
+3 ans ¦ 3 vjet ¦ 3 snin
+3 mois ¦ 3 muaj ¦ 3 xhur
+5 min ¦ 5 min ¦ 5 min
+6 mois ¦ 6 muaj ¦ 6 xhur
+Archive du dossier (.zip) ¦ Arkivi i dosjes (.zip) ¦ Arkivju tal-fajl (.zip)
+Attention : le verrou n’empêche pas de lire le fichier si quelqu’un le copie (il n’est pas chiffré). Pour ça, chiffre le disque de ton ordinateur (FileVault sur Mac, BitLocker sous Windows). ¦ Kujdes: kyçi nuk pengon leximin e skedarit nëse dikush e kopjon (nuk është i enkriptuar). Për këtë, enkripto diskun e kompjuterit tënd (FileVault në Mac, BitLocker në Windows). ¦ Attenzjoni: is-serratura ma żżommx lil ħadd milli jaqra l-fajl jekk jikkupjah (mhuwiex kriptat). Għal dan, ikkripta d-diska tal-kompjuter tiegħek (FileVault fuq Mac, BitLocker fuq Windows).
+Autre format ¦ Format tjetër ¦ Format ieħor
+Base .db ¦ Bazë .db ¦ Database .db
+Bloc ¦ Bllok ¦ Blokk
+Ce mot de passe contient des caractères illisibles. ¦ Ky fjalëkalim përmban shenja të palexueshme. ¦ Din il-password fiha karattri li ma jinqrawx.
+Ce mot de passe empêche d’ouvrir cette généalogie dans l’app, ici et après chaque délai sans rien toucher. ¦ Ky fjalëkalim pengon hapjen e kësaj gjenealogjie në aplikacion, këtu dhe pas çdo periudhe pa veprim. ¦ Din il-password ma tħallix li din il-ġenealoġija tinfetaħ fl-app, hawn u wara kull perjodu mingħajr attività.
+Ce que ce mot de passe protège vraiment ¦ Çfarë mbron vërtet ky fjalëkalim ¦ X’tipproteġi verament din il-password
+Cette généalogie a déjà un mot de passe : change-le plutôt. ¦ Kjo gjenealogji ka tashmë një fjalëkalim: më mirë ndryshoje. ¦ Din il-ġenealoġija diġà għandha password: aħjar ibdilha.
+Cette généalogie est maintenant protégée par un mot de passe. ¦ Kjo gjenealogji tani mbrohet me fjalëkalim. ¦ Din il-ġenealoġija issa hija protetta b’password.
+Cette généalogie est protégée : sa sauvegarde l’est aussi, avec le même mot de passe. ¦ Kjo gjenealogji është e mbrojtur: edhe kopja e saj rezervë, me të njëjtin fjalëkalim. ¦ Din il-ġenealoġija hija protetta: il-backup tagħha wkoll, bl-istess password.
+Cette généalogie est protégée par un mot de passe : dans le dossier choisi, elle n’est jamais copiée en clair. Une copie chiffrée (AES-256, même mot de passe) y est faite quand tu l’ouvres avec son mot de passe ; dans le dossier de l’app, les copies restent comme la base. ¦ Kjo gjenealogji mbrohet me fjalëkalim: në dosjen e zgjedhur nuk kopjohet kurrë e paenkriptuar. Aty bëhet një kopje e enkriptuar (AES-256, i njëjti fjalëkalim) kur e hap me fjalëkalimin e saj; në dosjen e aplikacionit, kopjet mbeten si baza. ¦ Din il-ġenealoġija hija protetta b’password: fil-folder magħżul qatt ma tiġi kkupjata mhux kriptata. Kopja kriptata (AES-256, l-istess password) issir hemm meta tiftaħha bil-password tagħha; fil-folder tal-app, il-kopji jibqgħu bħad-database.
+Cette généalogie est protégée par un mot de passe : ses sauvegardes le sont aussi. Utilise « Sauvegarde complète protégée » avec le même mot de passe. ¦ Kjo gjenealogji mbrohet me fjalëkalim: edhe kopjet e saj rezervë. Përdor «Kopje e plotë e mbrojtur» me të njëjtin fjalëkalim. ¦ Din il-ġenealoġija hija protetta b’password: il-backups tagħha wkoll. Uża “Backup sħiħ protett” bl-istess password.
+Cette généalogie est verrouillée : donne son mot de passe pour l’ouvrir. ¦ Kjo gjenealogji është e kyçur: shkruaj fjalëkalimin e saj për ta hapur. ¦ Din il-ġenealoġija hija msakkra: daħħal il-password tagħha biex tiftaħha.
+Cette généalogie est verrouillée par un mot de passe : ouvre-la d’abord. ¦ Kjo gjenealogji është e kyçur me fjalëkalim: hape së pari. ¦ Din il-ġenealoġija hija msakkra b’password: iftaħha l-ewwel.
+Cette généalogie n’a pas de mot de passe. ¦ Kjo gjenealogji nuk ka fjalëkalim. ¦ Din il-ġenealoġija m’għandhiex password.
+Changer le délai ¦ Ndrysho kohën ¦ Ibdel il-ħin
+Changer le mot de passe ¦ Ndrysho fjalëkalimin ¦ Ibdel il-password
+Changer, ou retirer ¦ Ndrysho ose hiq ¦ Ibdel jew neħħi
+Coche la case : sans ce mot de passe, tu ne pourras plus ouvrir cette généalogie dans l’app. ¦ Shëno kutinë: pa këtë fjalëkalim nuk do ta hapësh më këtë gjenealogji në aplikacion. ¦ Immarka l-kaxxa: mingħajr din il-password ma tkunx tista’ tiftaħ aktar din il-ġenealoġija fl-app.
+Courriers en série ¦ Letra në seri ¦ Ittri f’serje
+Dossier déplacé vers une autre généalogie ¦ Dosja u zhvendos në një gjenealogji tjetër ¦ Fajl imċaqlaq għal ġenealoġija oħra
+Dossier ou objet ¦ Dosje ose objekt ¦ Fajl jew oġġett
+Dossier, poste, action… ¦ Dosje, kompjuter, veprim… ¦ Fajl, kompjuter, azzjoni…
+Durée changée. Lignes plus anciennes effacées : {n} ¦ Kohëzgjatja u ndryshua. Rreshta më të vjetër të fshirë: {n} ¦ Il-perjodu nbidel. Linji eqdem imħassra: {n}
+Durée de conservation changée ¦ Koha e ruajtjes u ndryshua ¦ Il-perjodu taż-żamma nbidel
+Durée inconnue. ¦ Kohëzgjatje e panjohur. ¦ Perjodu mhux magħruf.
+Délai de reverrouillage changé ¦ Koha deri në rikyçje u ndryshua ¦ Il-ħin sas-sakkar mill-ġdid inbidel
+Délai de reverrouillage inconnu. ¦ Kohë e panjohur deri në rikyçje. ¦ Ħin sas-sakkar mill-ġdid mhux magħruf.
+Elle est protégée par un mot de passe. ¦ Ajo mbrohet me fjalëkalim. ¦ Hija protetta b’password.
+Export ¦ Eksport ¦ Esportazzjoni
+Exports ¦ Eksporte ¦ Esportazzjonijiet
+Force : {s} ¦ Forca: {s} ¦ Saħħa: {s}
+Généalogie ouverte avec le mot de passe ¦ Gjenealogjia u hap me fjalëkalimin ¦ Ġenealoġija miftuħa bil-password
+Il n’y a pas d’autre généalogie. ¦ Nuk ka gjenealogji tjetër. ¦ M’hemmx ġenealoġija oħra.
+Impossible de retirer le verrou (dossier des données en lecture seule ?). ¦ Kyçi nuk mund të hiqet (dosja e të dhënave vetëm për lexim?). ¦ Ma tistax titneħħa s-serratura (folder tad-data għall-qari biss?).
+Impossible de vérifier le mot de passe (dossier des données en lecture seule ?). ¦ Fjalëkalimi nuk mund të verifikohet (dosja e të dhënave vetëm për lexim?). ¦ Ma tistax tiġi vverifikata l-password (folder tad-data għall-qari biss?).
+Impossible d’enregistrer le verrou (dossier des données en lecture seule ?). ¦ Kyçi nuk mund të ruhet (dosja e të dhënave vetëm për lexim?). ¦ Ma tistax tiġi ssejvjata s-serratura (folder tad-data għall-qari biss?).
+Impossible d’ouvrir cette généalogie. ¦ Kjo gjenealogji nuk mund të hapet. ¦ Ma tistax tinfetaħ din il-ġenealoġija.
+Impression ou PDF ¦ Shtypje ose PDF ¦ Stampar jew PDF
+Impressions ¦ Shtypje ¦ Stampar
+Journal du dossier (CSV) ¦ Ditari i dosjes (CSV) ¦ Ġurnal tal-fajl (CSV)
+J’ai compris : sans ce mot de passe, je ne pourrai plus ouvrir cette généalogie dans l’app. ¦ E kuptova: pa këtë fjalëkalim nuk do ta hap më këtë gjenealogji në aplikacion. ¦ Fhimt: mingħajr din il-password ma nkunx nista’ niftaħ aktar din il-ġenealoġija fl-app.
+Le mot de passe est trop long (1024 caractères au plus). ¦ Fjalëkalimi është shumë i gjatë (më së shumti 1024 shenja). ¦ Il-password hija twila wisq (l-aktar 1024 karattru).
+Le serveur de l’app ne répond pas. Réessaie. ¦ Serveri i aplikacionit nuk përgjigjet. Provo përsëri. ¦ Is-server tal-app mhux qed iwieġeb. Erġa’ pprova.
+Le verrou n’empêche pas de lire le fichier si quelqu’un le copie : il n’est pas chiffré. Pour ça, chiffre le disque de ton ordinateur : FileVault sur Mac (Réglages Système → Confidentialité et sécurité), BitLocker sous Windows (Paramètres → Confidentialité et sécurité → Chiffrement de l’appareil). ¦ Kyçi nuk pengon leximin e skedarit nëse dikush e kopjon: nuk është i enkriptuar. Për këtë, enkripto diskun e kompjuterit tënd: FileVault në Mac (Cilësimet e sistemit → Privatësia dhe siguria), BitLocker në Windows (Cilësimet → Privatësia dhe siguria → Enkriptimi i pajisjes). ¦ Is-serratura ma żżommx lil ħadd milli jaqra l-fajl jekk jikkupjah: mhuwiex kriptat. Għal dan, ikkripta d-diska tal-kompjuter tiegħek: FileVault fuq Mac (System Settings → Privacy & Security), BitLocker fuq Windows (Settings → Privacy & security → Device encryption).
+Lecture seule : rien ne se modifie ; seule cette durée fait disparaître les lignes plus vieilles (et c’est noté). ¦ Vetëm për lexim: asgjë nuk ndryshon; vetëm kjo kohëzgjatje zhduk rreshtat më të vjetër (dhe kjo shënohet). ¦ Qari biss: xejn ma jinbidel; dan il-perjodu biss iġiegħel il-linji eqdem jgħibu (u dan jitniżżel).
+Lecture seule. Tous les dossiers : Réglages → 📜 Qui a vu quoi. ¦ Vetëm për lexim. Të gjitha dosjet: Cilësimet → 📜 Kush pa çfarë. ¦ Qari biss. Il-fajls kollha: Issettjar → 📜 Min ra x’hiex.
+Les deux mots de passe ne sont pas pareils. ¦ Dy fjalëkalimet nuk janë njësoj. ¦ Iż-żewġ passwords mhumiex l-istess.
+Les ouvertures de dossier, les impressions, les exports, les courriers en série et chaque essai du mot de passe, notés par l’app sur ce poste ({machine}). ¦ Hapjet e dosjeve, shtypjet, eksportet, letrat në seri dhe çdo provë e fjalëkalimit, të shënuara nga aplikacioni në këtë kompjuter ({machine}). ¦ Il-ftuħ tal-fajls, l-istampar, l-esportazzjonijiet, l-ittri f’serje u kull tentattiv tal-password, imniżżla mill-app fuq dan il-kompjuter ({machine}).
+Les sauvegardes de cette généalogie sont toujours protégées par ce mot de passe (AES-256) : aucune copie ne sort en clair de son dossier. ¦ Kopjet rezervë të kësaj gjenealogjie mbrohen gjithmonë me këtë fjalëkalim (AES-256): asnjë kopje nuk del e paenkriptuar nga dosja e saj. ¦ Il-backups ta’ din il-ġenealoġija huma dejjem protetti b’din il-password (AES-256): l-ebda kopja ma toħroġ mhux kriptata mill-folder tagħha.
+Lettres rangées : {n} ¦ Letra të arkivuara: {n} ¦ Ittri ffajljati: {n}
+Lettres retirées (↶ Annuler) : {n} ¦ Letra të tërhequra (↶ Anulo): {n} ¦ Ittri rtirati (↶ Ħassar): {n}
+Lignes : {n} sur {t} ¦ Rreshta: {n} nga {t} ¦ Linji: {n} minn {t}
+Lignes anciennes effacées ¦ Rreshtat e vjetër u fshinë ¦ Linji qodma mħassra
+Lignes effacées : {n} (gardées : {m}) ¦ Rreshta të fshirë: {n} (ruhen: {m}) ¦ Linji mħassra: {n} (miżmuma: {m})
+Mode consultation : le registre ne se lit pas. ¦ Mënyra e leximit: regjistri nuk lexohet. ¦ Modalità ta’ qari: ir-reġistru ma jinqarax.
+Mot de passe changé ¦ Fjalëkalimi u ndryshua ¦ Password mibdula
+Mot de passe changé. Les autres fenêtres ouvertes devront le redemander. ¦ Fjalëkalimi u ndryshua. Dritaret e tjera të hapura do të duhet ta kërkojnë përsëri. ¦ Password mibdula. It-twieqi l-oħra miftuħa jkollhom jitolbuha mill-ġdid.
+Mot de passe de cette généalogie ¦ Fjalëkalimi i kësaj gjenealogjie ¦ Password ta’ din il-ġenealoġija
+Mot de passe oublié : il n’y a pas de porte dérobée. Sans lui, cette généalogie ne peut plus être ouverte dans l’app. ¦ Fjalëkalim i harruar: nuk ka derë të pasme. Pa të, kjo gjenealogji nuk mund të hapet më në aplikacion. ¦ Password minsija: m’hemmx bieb ta’ wara. Mingħajrha, din il-ġenealoġija ma tistax tinfetaħ aktar fl-app.
+Mot de passe oublié ? ¦ E harrove fjalëkalimin? ¦ Insejt il-password?
+Mot de passe posé ¦ Fjalëkalimi u vendos ¦ Password issettjata
+Mot de passe refusé ¦ Fjalëkalimi u refuzua ¦ Password miċħuda
+Mot de passe retiré ¦ Fjalëkalimi u hoq ¦ Password imneħħija
+Musée de famille ¦ Muzeu i familjes ¦ Mużew tal-familja
+Ouvertures ¦ Hapje ¦ Ftuħ
+Ouverture… ¦ Po hapet… ¦ Qed jinfetaħ…
+Ouvrir une autre généalogie ¦ Hap një gjenealogji tjetër ¦ Iftaħ ġenealoġija oħra
+Paquet du travail à deux ¦ Paketa e punës në dy ¦ Pakkett tax-xogħol bi tnejn
+Partage avec la famille ¦ Ndarje me familjen ¦ Qsim mal-familja
+Patiente {n} s ¦ Prit {n} s ¦ Stenna {n} s
+Patiente {n} s avant de réessayer. ¦ Prit {n} s para se të provosh përsëri. ¦ Stenna {n} s qabel ma terġa’ tipprova.
+Poste ¦ Kompjuter ¦ Kompjuter
+Pour une généalogie protégée, tape son mot de passe : la sauvegarde est chiffrée avec lui (AES-256). ¦ Për një gjenealogji të mbrojtur, shkruaj fjalëkalimin e saj: kopja enkriptohet me të (AES-256). ¦ Għal ġenealoġija protetta, ikteb il-password tagħha: il-kopja tiġi kriptata biha (AES-256).
+Protéger ¦ Mbro ¦ Ipproteġi
+Protéger cette généalogie ¦ Mbro këtë gjenealogji ¦ Ipproteġi din il-ġenealoġija
+Protégée ¦ E mbrojtur ¦ Protetta
+Qui a vu ce dossier ¦ Kush e pa këtë dosje ¦ Min ra dan il-fajl
+Qui a vu le dossier {n} ¦ Kush e pa dosjen {n} ¦ Min ra l-fajl {n}
+Qui a vu quoi ¦ Kush pa çfarë ¦ Min ra x’hiex
+Registre « Qui a vu quoi » (CSV) ¦ Regjistri «Kush pa çfarë» (CSV) ¦ Reġistru “Min ra x’hiex” (CSV)
+Retirer le mot de passe ¦ Hiq fjalëkalimin ¦ Neħħi l-password
+Retirer le mot de passe de « {name} » ? Elle s’ouvrira sans rien demander, et ses sauvegardes ne seront plus forcément protégées. ¦ Të hiqet fjalëkalimi i «{name}»? Do të hapet pa kërkuar asgjë dhe kopjet e saj rezervë nuk do të jenë më domosdoshmërisht të mbrojtura. ¦ Tneħħi l-password ta’ “{name}”? Tinfetaħ mingħajr ma titlob xejn, u l-backups tagħha mhux bilfors jibqgħu protetti.
+Reverrouillée (délai passé ou app relancée) ¦ E rikyçur (koha kaloi ose aplikacioni u rinis) ¦ Imsakkra mill-ġdid (għadda l-ħin jew l-app reġgħet bdiet)
+Sans ce mot de passe, cette généalogie ne peut plus être ouverte dans l’app : il n’existe pas de porte dérobée, et personne ne peut le retrouver pour toi. ¦ Pa këtë fjalëkalim, kjo gjenealogji nuk mund të hapet më në aplikacion: nuk ka derë të pasme dhe askush nuk mund ta gjejë për ty. ¦ Mingħajr din il-password, din il-ġenealoġija ma tistax tinfetaħ aktar fl-app: m’hemmx bieb ta’ wara u ħadd ma jista’ jsibha għalik.
+Sauvegarde complète ¦ Kopje e plotë ¦ Backup sħiħ
+Se verrouille après {m} sans rien toucher, à la fermeture de l’app et quand on change de généalogie. ¦ Kyçet pas {m} pa veprim, kur mbyllet aplikacioni dhe kur ndërron gjenealogji. ¦ Tissakkar wara {m} mingħajr attività, meta l-app tingħalaq u meta tibdel il-ġenealoġija.
+Site web ¦ Sajt ¦ Sit web
+Site web publié ¦ Sajti u publikua ¦ Sit web ippubblikat
+Tableau de bord des dossiers (CSV) · dossiers : {n} ¦ Paneli i dosjeve (CSV) · dosje: {n} ¦ Pannell tal-fajls (CSV) · fajls: {n}
+Tableau, arbre ou parts imprimés ¦ Tabelë, pemë ose pjesë të shtypura ¦ Tabella, siġra jew ishma stampati
+Tape d’abord le mot de passe actuel. ¦ Shkruaj së pari fjalëkalimin aktual. ¦ Ikteb l-ewwel il-password attwali.
+Tape le mot de passe. ¦ Shkruaj fjalëkalimin. ¦ Ikteb il-password.
+Tout le registre ¦ I gjithë regjistri ¦ Ir-reġistru kollu
+Un verrou à l’ouverture de « {name} », sur cet ordinateur et sur les autres. ¦ Një kyç kur hapet «{name}», në këtë kompjuter dhe në të tjerët. ¦ Serratura meta tinfetaħ “{name}”, fuq dan il-kompjuter u fuq l-oħrajn.
+Verrouiller après ¦ Kyç pas ¦ Issakkar wara
+Verrouiller maintenant ¦ Kyç tani ¦ Issakkar issa
+Verrouiller maintenant (généalogie protégée par un mot de passe) ¦ Kyç tani (gjenealogji e mbrojtur me fjalëkalim) ¦ Issakkar issa (ġenealoġija protetta b’password)
+Verrouillée : {names} (ouvre-la avec son mot de passe pour voir ses dossiers) ¦ E kyçur: {names} (hape me fjalëkalimin e saj për të parë dosjet) ¦ Imsakkra: {names} (iftaħha bil-password tagħha biex tara l-fajls tagħha)
+Verrouillée à la main ¦ E kyçur me dorë ¦ Imsakkra bl-idejn
+après {m} ¦ pas {m} ¦ wara {m}
+pour changer le délai ¦ për të ndryshuar kohën ¦ biex tibdel il-ħin
+pour changer le mot de passe ¦ për të ndryshuar fjalëkalimin ¦ biex tibdel il-password
+pour retirer le mot de passe ¦ për të hequr fjalëkalimin ¦ biex tneħħi l-password
+pour une sauvegarde protégée ¦ për një kopje të mbrojtur ¦ għal backup protett
+protégée par un mot de passe ¦ e mbrojtur me fjalëkalim ¦ protetta b’password
+sans rien toucher ¦ pa veprim ¦ mingħajr attività
+très bon ¦ shumë e mirë ¦ tajba ħafna
+« {name} » est verrouillée ¦ «{name}» është e kyçur ¦ “{name}” hija msakkra
+📜 Qui a vu quoi ¦ 📜 Kush pa çfarë ¦ 📜 Min ra x’hiex
+🔐 Généalogie verrouillée ¦ 🔐 Gjenealogji e kyçur ¦ 🔐 Ġenealoġija msakkra
+🔐 Mot de passe de cette généalogie ¦ 🔐 Fjalëkalimi i kësaj gjenealogjie ¦ 🔐 Password ta’ din il-ġenealoġija
+faible ¦ e dobët ¦ dgħajfa
+moyen ¦ mesatare ¦ medja
+bon ¦ e mirë ¦ tajba
+pour ouvrir la généalogie ¦ për të hapur gjenealogjinë ¦ biex tinfetaħ il-ġenealoġija
+Ce dossier appartient à l’app (données, médias ou sauvegardes d’une généalogie) : choisis un autre dossier. ¦ Kjo dosje i përket aplikacionit (të dhëna, media ose kopje të një gjenealogjie): zgjidh një dosje tjetër. ¦ Dan il-folder huwa tal-app (data, midja jew backups ta’ ġenealoġija): agħżel folder ieħor.
+Ce fichier est rangé dans les dossiers de l’app : choisis un fichier ailleurs. ¦ Ky skedar ndodhet në dosjet e aplikacionit: zgjidh një skedar diku tjetër. ¦ Dan il-fajl jinsab fil-folders tal-app: agħżel fajl x’imkien ieħor.
+Cette copie est rangée dans les dossiers d’une autre généalogie : elle ne peut pas être remise ici. ¦ Kjo kopje ndodhet në dosjet e një gjenealogjie tjetër: nuk mund të rikthehet këtu. ¦ Din il-kopja tinsab fil-folders ta’ ġenealoġija oħra: ma tistax tiġi rrestawrata hawn.
+Cette copie vient d’une généalogie protégée par un mot de passe : ouvre-la pour la restaurer. ¦ Kjo kopje vjen nga një gjenealogji e mbrojtur me fjalëkalim: hape për ta rikthyer. ¦ Din il-kopja ġejja minn ġenealoġija protetta b’password: iftaħha biex tirrestawraha.
+Cette base est protégée par un mot de passe : donne-le pour l’ouvrir. ¦ Kjo bazë mbrohet me fjalëkalim: shkruaje për ta hapur. ¦ Din id-database hija protetta b’password: daħħalha biex tiftaħha.

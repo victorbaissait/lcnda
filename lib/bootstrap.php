@@ -104,6 +104,7 @@ require_once __DIR__ . '/atelier.php';         // Atelier de recherche : projets
 require_once __DIR__ . '/offline_map.php';
 require_once __DIR__ . '/merge.php';
 require_once __DIR__ . '/shortcuts.php';       // fusion de l'arbre d'un cousin // fond de carte sans Internet // objets, mémoire familiale, lieux précis, liens web   // dates estimées, implexe  // « Registres en ligne » des battues
+require_once __DIR__ . '/verrou.php';     // 🔐 mot de passe d'une généalogie (verrou d'ouverture) et 📜 registre « Qui a vu quoi »
 require_once __DIR__ . '/settings.php';   // réglages de l'interface rangés dans la base  // ensure_reference_data() : communes françaises livrées avec l'app
 
 // Aucun avertissement PHP ne doit s'afficher dans une réponse : il s'ajouterait au JSON et l'interface
@@ -190,7 +191,8 @@ if (PHP_SAPI !== 'cli' && session_status() !== PHP_SESSION_ACTIVE) {
             session_save_path($sessionDir);
         }
     }
-    session_set_cookie_params(['httponly' => true, 'samesite' => 'Lax']);
+    // 🔐 cookie HttpOnly + SameSite=Strict, identifiants de session inconnus refusés (lib/verrou.php)
+    lcnda_session_config();
     session_start();
     // Le jeton CSRF est créé tout de suite, puis la session est refermée : PHP verrouille le fichier
     // de session tant qu'elle est ouverte, ce qui bloquerait toutes les autres requêtes pendant

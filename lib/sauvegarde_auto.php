@@ -111,6 +111,8 @@ function sa_check_dir(array $s, bool $create): array
     $dir = sa_expand($s['dir']);
     if ($dir === '') { return ['ok' => true, 'custom' => false, 'dir' => DATA_DIR . '/backups']; }
     if (!sa_dir_ok($dir)) { return ['ok' => false, 'custom' => true, 'dir' => $dir, 'error' => 'Écris le chemin complet du dossier (par exemple /Volumes/MaCle/LCNDA ou ~/Dropbox/LCNDA).']; }
+    // 🔐 jamais un dossier interne de l'app (données, médias, sauvegardes d'une généalogie : lib/verrou.php)
+    if (function_exists('glock_forbidden_dir') && glock_forbidden_dir($dir)) { return ['ok' => false, 'custom' => true, 'dir' => $dir, 'forbidden' => true, 'error' => 'Ce dossier appartient à l’app (données, médias ou sauvegardes d’une généalogie) : choisis un autre dossier.']; }
     if (!is_dir($dir)) {
         if ($create && is_dir(dirname($dir)) && is_writable(dirname($dir)) && @mkdir($dir, 0775)) { return ['ok' => true, 'custom' => true, 'dir' => $dir]; }
         return ['ok' => false, 'custom' => true, 'missing' => true, 'dir' => $dir, 'error' => i18n_t('Dossier introuvable : {dir} (clé ou disque débranché ?). La sauvegarde se fera dès qu’il sera de retour.', ['dir' => $dir])];
@@ -234,7 +236,11 @@ function sa_run(string $kind, bool $force = false): array
         }
         $state['missing'] = null;
         $done = []; $errors = []; $skipped = [];
+        $locked = [];
         foreach (sa_targets($s['all']) as $t) {
+            // 🔐 généalogie protégée par un mot de passe (lib/verrou.php) : jamais copiée en clair hors de son dossier ; la copie
+            // protégée (chiffrée) est faite à son ouverture avec le mot de passe (sa_protected_copy)
+            if ($dir['custom'] && function_exists('glock_locked_at') && glock_locked_at($t['data'], $t['db'])) { $locked[] = $t['name']; continue; }
             $sig = sa_sig($t['db']);
             $key = $t['id'] === '' ? 'main' : $t['id'];
             if (!$force && $kind !== 'manual' && ($state['sig'][$key] ?? '') === $sig) { $skipped[] = $t['name']; continue; }
@@ -251,9 +257,37 @@ function sa_run(string $kind, bool $force = false): array
         }
         $state['last_error'] = $errors ? ['time' => time(), 'error' => implode(' ; ', $errors), 'kind' => $kind] : null;
         sa_write_json(sa_state_path(), $state);
-        return ['ok' => !$errors, 'files' => $done, 'skipped' => $skipped, 'errors' => $errors, 'error' => $errors ? implode(' ; ', $errors) : null, 'dir' => $dir['dir']];
+        return ['ok' => !$errors, 'files' => $done, 'skipped' => $skipped, 'locked' => $locked, 'errors' => $errors, 'error' => $errors ? implode(' ; ', $errors) : null, 'dir' => $dir['dir']];
     } finally {
         flock($lock, LOCK_UN); fclose($lock);
+    }
+}
+
+/**
+ * 🔐 À l'ouverture d'une généalogie verrouillée (le mot de passe est là, le temps de cette requête) : si la sauvegarde
+ * automatique va dans un dossier choisi (clé, nuage…), une copie protégée AES-256 y est faite (au plus une par heure ;
+ * les N dernières gardées). Le mot de passe n'est gardé nulle part. Jamais d'erreur visible : l'ouverture passe avant.
+ */
+function sa_protected_copy(string $password): ?array
+{
+    try {
+        $s = sa_settings();
+        if ($s['dir'] === '' || ($s['freq'] === 'off' && !$s['on_close']) || $password === '' || !function_exists('backup_protected_db_zip') || !is_file(DB_PATH)) { return null; }
+        $dir = sa_check_dir($s, true);
+        if (!$dir['ok']) { return ['ok' => false, 'error' => (string) ($dir['error'] ?? '')]; }
+        $folder = sa_folder($s, GENEALOGY_ID, DATA_DIR);
+        if (!is_dir($folder) && !@mkdir($folder, 0775, true) && !is_dir($folder)) { return ['ok' => false]; }
+        $mine = glob($folder . '/genealogie-protegee-*.zip') ?: [];
+        usort($mine, static fn($a, $b) => filemtime($b) <=> filemtime($a));
+        if ($mine && time() - (int) filemtime($mine[0]) < 3600) { return ['ok' => true, 'recent' => true]; }
+        $name = 'genealogie-protegee-' . date('Ymd-His') . '-' . bin2hex(random_bytes(2)) . '.zip';
+        backup_protected_db_zip(DB_PATH, $folder . '/' . $name, $password);
+        array_unshift($mine, $folder . '/' . $name);
+        foreach (array_slice($mine, $s['keep']) as $old) { @unlink($old); }
+        return ['ok' => true, 'file' => $name];
+    } catch (Throwable $e) {
+        error_log('LCNDA : copie protégée à l’ouverture impossible : ' . get_class($e));
+        return ['ok' => false];
     }
 }
 
@@ -303,7 +337,9 @@ function sa_status(): array
         'folder' => $folder ?: $dir['dir'], 'custom' => $dir['custom'], 'cloud' => $exp !== '' && function_exists('offsite_is_cloud') && offsite_is_cloud($exp),
         'same_disk' => $dir['ok'] && $dir['custom'] && function_exists('offsite_same_disk') && offsite_same_disk($dir['dir']) && !(function_exists('offsite_is_cloud') && offsite_is_cloud($exp)),
         'copies' => $folder !== '' ? array_slice(sa_copies($folder), 0, 60) : [], 'genealogies' => count(sa_targets(true)),
-        'next' => sa_next($s, $state), 'suggestions' => function_exists('offsite_suggestions') ? offsite_suggestions() : []];
+        'next' => sa_next($s, $state), 'suggestions' => function_exists('offsite_suggestions') ? offsite_suggestions() : [],
+        // 🔐 protégée par un mot de passe : dans un dossier choisi, seulement la copie chiffrée faite à l'ouverture
+        'glock' => function_exists('glock_info') && glock_info()['locked'], 'protected_copies' => $folder !== '' && $dir['custom'] ? count(glob($folder . '/genealogie-protegee-*.zip') ?: []) : 0];
 }
 
 /** Prochaine sauvegarde prévue (pour la phrase « Prochaine : … »). */
@@ -331,6 +367,9 @@ function sa_restore(array $data): never
     $file = '';
     foreach ($folders as $f) { if (is_file($f . '/' . $name)) { $file = $f . '/' . $name; break; } }
     if ($file === '') { json_response(['error' => $dir['ok'] ? 'Copie introuvable.' : $dir['error']], 422); }
+    // 🔐 une copie qui vient d'une autre généalogie protégée (son sous-dossier « genealogie-<id> », ou son verrou dans la copie) : refusée
+    $before = function_exists('glock_info') ? glock_info() : ['locked' => false];
+    if (function_exists('glock_copy_refused') && ($why = glock_copy_refused($file, $before)) !== '') { json_response(['error' => $why], 423); }
     $incoming = dirname(DB_PATH) . '/.restauration-' . bin2hex(random_bytes(6)) . '.sqlite';
     try {
         if (!@copy($file, $incoming)) { throw new RuntimeException('Impossible de lire la copie.'); }
@@ -356,6 +395,7 @@ function sa_restore(array $data): never
         json_response(['error' => $e->getMessage()], 422);
     }
     $pdo = db(); // mode WAL remis, structure mise à jour si la copie est plus ancienne
+    if (!empty($before['locked']) && function_exists('glock_keep_after_restore')) { glock_keep_after_restore($pdo, $before); } // 🔐 jamais « ouverte » par une restauration
     log_change($pdo, 'meta', 0, 'update', '🗓 Base remise comme dans la copie « ' . $name . ' » (la base d’avant est gardée : ' . $safety . ')');
     json_response(['ok' => true, 'restored' => $name, 'safety' => $safety, 'persons' => $check['persons']]);
 }
@@ -389,6 +429,7 @@ function sa_early(string $action, bool $isWrite, array $payload): void
     }
     if ($action === 'autobackup_settings') {
         $s = sa_clean(array_merge(sa_settings(), array_intersect_key($payload, SA_DEFAULTS)));
+        if ($s['dir'] !== '' && function_exists('glock_forbidden_dir') && glock_forbidden_dir(sa_expand($s['dir']))) { json_response(['error' => 'Ce dossier appartient à l’app (données, médias ou sauvegardes d’une généalogie) : choisis un autre dossier.'], 422); }
         sa_write_json(sa_settings_path(), $s);
         json_response(['ok' => true] + sa_status());
     }
