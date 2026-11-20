@@ -724,3 +724,22 @@ Contact de {name} : {state} ¦ Samband við {name}: {state}
 Les fiches confidentielles comptent-elles comme héritiers ? ¦ Teljast trúnaðarspjöld sem erfingjar?
 Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Nei: trúnaðarspjald er tekið úr útreikningnum, eins og það væri ekki til; málið sýnir það.
 Le défunt n’est pas un héritier à contacter. ¦ Hinn látni er ekki erfingi til að hafa samband við.
+⚖️ Un doute sur la loi ? ¦ ⚖️ Í vafa um lögin?
+⚖️ Un doute ? ¦ ⚖️ Í vafa?
+⚖️ UN DOUTE SUR LA LOI ? ¦ ⚖️ Í VAFA UM LÖGIN?
+Chercher sur un site officiel ¦ Leita á opinberum vef
+✍️ Noter dans le dossier ¦ ✍️ Skrá í málið
+Ton problème, avec tes mots ¦ Vandinn þinn, með þínum orðum
+ex. un héritier refuse de répondre · délai pour renoncer à une succession ¦ t.d. erfingi neitar að svara · frestur til að afsala sér arfi
+N’écris pas de nom : la question part sur internet. ¦ Ekki skrifa nöfn: spurningin fer út á netið.
+🏛 Chercher sur Service-public ¦ 🏛 Leita á vefnum Service-public
+explique en français simple et donne le lien vers le bon article ¦ útskýrir á einfaldri frönsku og vísar á rétta greinina
+📜 Chercher sur Légifrance ¦ 📜 Leita á vefnum Légifrance
+les articles des codes en vigueur ¦ greinar gildandi lagabálka
+L’app ne choisit aucun article : ta question est envoyée telle quelle au site officiel, qui s’ouvre dans ton navigateur. ¦ Forritið velur enga grein: spurningin þín er send óbreytt á opinbera vefinn, sem opnast í vafranum þínum.
+✍️ Noter dans le dossier {n} ¦ ✍️ Skrá í mál {n}
+Lien de l’article ou de la fiche (facultatif) ¦ Tengill á greinina eða síðuna (valfrjálst)
+Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Aðeins https://-slóð frá Légifrance, Service-public eða EUR-Lex.
+Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Tengli hafnað: aðeins https://-slóð frá Légifrance, Service-public eða EUR-Lex.
+Noté au journal du dossier {n}. ¦ Skráð í dagbók máls {n}.
+Écris d’abord ta question. ¦ Skrifaðu spurninguna fyrst.

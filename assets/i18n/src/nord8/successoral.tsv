@@ -724,3 +724,22 @@ Contact de {name} : {state} ¦ {name} ile iletişim: {state}
 Les fiches confidentielles comptent-elles comme héritiers ? ¦ Gizli kartlar mirasçı sayılır mı?
 Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Hayır: gizli kart, hiç yokmuş gibi hesaptan çıkarılır; dosya bunu belirtir.
 Le défunt n’est pas un héritier à contacter. ¦ Ölen kişi iletişime geçilecek bir mirasçı değildir.
+⚖️ Un doute sur la loi ? ¦ ⚖️ Yasa hakkında bir şüphe mi?
+⚖️ Un doute ? ¦ ⚖️ Bir şüphe mi?
+⚖️ UN DOUTE SUR LA LOI ? ¦ ⚖️ YASA HAKKINDA BİR ŞÜPHE Mİ?
+Chercher sur un site officiel ¦ Resmî bir sitede ara
+✍️ Noter dans le dossier ¦ ✍️ Dosyaya not et
+Ton problème, avec tes mots ¦ Sorunun, kendi sözlerinle
+ex. un héritier refuse de répondre · délai pour renoncer à une succession ¦ örn. bir mirasçı yanıt vermeyi reddediyor · mirası reddetme süresi
+N’écris pas de nom : la question part sur internet. ¦ İsim yazma: soru internete gidiyor.
+🏛 Chercher sur Service-public ¦ 🏛 Service-public sitesinde ara
+explique en français simple et donne le lien vers le bon article ¦ sade Fransızcayla açıklar ve doğru maddenin bağlantısını verir
+📜 Chercher sur Légifrance ¦ 📜 Légifrance sitesinde ara
+les articles des codes en vigueur ¦ yürürlükteki kanunların maddeleri
+L’app ne choisit aucun article : ta question est envoyée telle quelle au site officiel, qui s’ouvre dans ton navigateur. ¦ Uygulama hiçbir madde seçmez: sorun olduğu gibi resmî siteye gönderilir, site tarayıcında açılır.
+✍️ Noter dans le dossier {n} ¦ ✍️ {n} dosyasına not et
+Lien de l’article ou de la fiche (facultatif) ¦ Maddenin veya sayfanın bağlantısı (isteğe bağlı)
+Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Yalnızca Légifrance, Service-public veya EUR-Lex sitelerinden bir https:// adresi.
+Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Bağlantı reddedildi: yalnızca Légifrance, Service-public veya EUR-Lex sitelerinden bir https:// adresi.
+Noté au journal du dossier {n}. ¦ {n} dosyasının günlüğüne not edildi.
+Écris d’abord ta question. ¦ Önce sorunu yaz.

@@ -724,3 +724,22 @@ Contact de {name} : {state} ¦ Kontakt – {name}: {state} ¦ Stik – {name}: {
 Les fiches confidentielles comptent-elles comme héritiers ? ¦ Računaju li se povjerljivi zapisi kao nasljednici? ¦ Ali zaupni zapisi štejejo kot dediči?
 Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Ne: povjerljivi zapis uklanja se iz izračuna, kao da ne postoji; spis to označava. ¦ Ne: zaupni zapis se odstrani iz izračuna, kot da ne obstaja; spis to označi.
 Le défunt n’est pas un héritier à contacter. ¦ Pokojnik nije nasljednik za kontaktiranje. ¦ Pokojnik ni dedič za stik.
+⚖️ Un doute sur la loi ? ¦ ⚖️ Dvojba oko zakona? ¦ ⚖️ Dvom o zakonu?
+⚖️ Un doute ? ¦ ⚖️ Dvojba? ¦ ⚖️ Dvom?
+⚖️ UN DOUTE SUR LA LOI ? ¦ ⚖️ DVOJBA OKO ZAKONA? ¦ ⚖️ DVOM O ZAKONU?
+Chercher sur un site officiel ¦ Traži na službenoj stranici ¦ Išči na uradni strani
+✍️ Noter dans le dossier ¦ ✍️ Zabilježi u spis ¦ ✍️ Zabeleži v spis
+Ton problème, avec tes mots ¦ Tvoj problem, tvojim riječima ¦ Tvoja težava, s tvojimi besedami
+ex. un héritier refuse de répondre · délai pour renoncer à une succession ¦ npr. nasljednik odbija odgovoriti · rok za odricanje od nasljedstva ¦ npr. dedič noče odgovoriti · rok za odpoved dediščini
+N’écris pas de nom : la question part sur internet. ¦ Ne piši imena: pitanje odlazi na internet. ¦ Ne piši imen: vprašanje gre na internet.
+🏛 Chercher sur Service-public ¦ 🏛 Traži na stranici Service-public ¦ 🏛 Išči na strani Service-public
+explique en français simple et donne le lien vers le bon article ¦ objašnjava jednostavnim francuskim i daje poveznicu na pravi članak ¦ razloži v preprosti francoščini in da povezavo do pravega člena
+📜 Chercher sur Légifrance ¦ 📜 Traži na stranici Légifrance ¦ 📜 Išči na strani Légifrance
+les articles des codes en vigueur ¦ članci važećih zakonika ¦ členi veljavnih zakonikov
+L’app ne choisit aucun article : ta question est envoyée telle quelle au site officiel, qui s’ouvre dans ton navigateur. ¦ Aplikacija ne bira nijedan članak: tvoje pitanje šalje se nepromijenjeno službenoj stranici, koja se otvara u tvom pregledniku. ¦ Aplikacija ne izbere nobenega člena: tvoje vprašanje se pošlje nespremenjeno uradni strani, ki se odpre v tvojem brskalniku.
+✍️ Noter dans le dossier {n} ¦ ✍️ Zabilježi u spis {n} ¦ ✍️ Zabeleži v spis {n}
+Lien de l’article ou de la fiche (facultatif) ¦ Poveznica na članak ili stranicu (neobavezno) ¦ Povezava do člena ali strani (neobvezno)
+Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Samo adresa https:// sa stranica Légifrance, Service-public ili EUR-Lex. ¦ Samo naslov https:// s strani Légifrance, Service-public ali EUR-Lex.
+Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Poveznica odbijena: samo adresa https:// sa stranica Légifrance, Service-public ili EUR-Lex. ¦ Povezava zavrnjena: samo naslov https:// s strani Légifrance, Service-public ali EUR-Lex.
+Noté au journal du dossier {n}. ¦ Zabilježeno u dnevnik spisa {n}. ¦ Zabeleženo v dnevnik spisa {n}.
+Écris d’abord ta question. ¦ Najprije napiši svoje pitanje. ¦ Najprej napiši svoje vprašanje.

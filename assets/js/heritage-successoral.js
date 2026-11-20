@@ -13,6 +13,9 @@
  *      dans 👥 Héritiers et « Héritiers à contacter » (succ_case_persons.contact_state, migration 92), message avec ↶ Annuler,
  *      ligne au journal ; introuvable depuis plus d'un an → suggestion « ❔ Absent ou disparu ». Fiches confidentielles non
  *      comptées (réglage) : avertissement dans 👥 Héritiers.
+ * ⚖️ « Un doute sur la loi ? » (en-tête de la page, « ⚖️ Un doute ? » dans un dossier, et en mode consultation) : la question
+ *      tapée part telle quelle sur Service-public ou Légifrance, dans le navigateur ; l'app ne choisit aucun article.
+ *      « ✍️ Noter dans le dossier » (op « law_note ») : question + lien officiel facultatif au journal (tests/test-successoral-loi.js).
  */
 (() => {
     'use strict';
@@ -80,7 +83,7 @@
         st.listType = LIST; if (st.module === 'listes') { A().renderSidebar?.(); ext.lists[LIST](); } else A().setModule('listes');
     }
     ext.lists[LIST] = (token = A().state?.workspaceToken) => { cur.where = 'list'; return render(token); };
-    ext.successoral = {render: token => { cur.where = 'tab'; return render(token); }, openCase, openFor, compute: computeCase, S: () => S(),
+    ext.successoral = {render: token => { cur.where = 'tab'; return render(token); }, openCase, openFor, lawDialog: D => lawDialog(D), compute: computeCase, S: () => S(),
         // pour heritage-successoral-dossiers.js : le dossier ouvert, ＋ Ouvrir un dossier, l'arbre et le tableau du notaire (archive en fichier)
         newCase: (pid = 0) => caseDialog(null, pid), current: () => cur.data, currentR: () => cur.R, reload: () => reload(),
         forget: () => { cur.data = null; cur.R = null; }, // un réglage a changé (fiches confidentielles) : relire le dossier à la prochaine ouverture
@@ -88,13 +91,13 @@
 
     async function render(token) {
         const w = ws(); if (!w) return;
-        if (hidden()) { w.innerHTML = `<section class="page">${UI().notice('info', i18n('Les dossiers de succession ne se montrent pas en mode consultation ni en mode simple.'))}</section>`; return; }
+        if (hidden()) { w.innerHTML = `<section class="page">${UI().notice('info', i18n('Les dossiers de succession ne se montrent pas en mode consultation ni en mode simple.'))}<p>${LAW_BTN()}</p></section>`; return; } // ⚖️ la recherche reste : ce n'est qu'un lien
         if (cur.id) return renderCase(w, token);
         const where = cur.where === 'tab' ? i18n('Successions') : i18n('Listes · Recherche et organisation');
         if (!VIEWS.some(v => v[0] === cur.view)) cur.view = 'cases';
         w.innerHTML = `<section class="page succ-page">${UI().pageHeader({title: i18n('Dossiers de succession'), icon: '⚖️', where,
             help: i18n('Retrouver les héritiers d’une personne décédée, pour un notaire : un dossier par défunt. À ne pas confondre avec « 🏠 Héritages et successions » (les actes anciens des ancêtres).'),
-            actions: [`<button type="button" class="button" data-succ-new>${esc(i18n('＋ Ouvrir un dossier'))}</button>`], more: ext.succDossiers?.boardMore?.() || []})}
+            actions: [LAW_BTN(), `<button type="button" class="button" data-succ-new>${esc(i18n('＋ Ouvrir un dossier'))}</button>`], more: ext.succDossiers?.boardMore?.() || []})}
             <div class="segmented succ-views" role="tablist" aria-label="${esc(i18n('Que montrer'))}">${VIEWS.map(([k, l]) => `<button type="button" role="tab" data-succ-view="${k}" class="${cur.view === k ? 'is-active' : ''}" aria-selected="${cur.view === k}">${esc(i18n(l))}</button>`).join('')}</div>
             <div data-succ-body>${UI().spinner(i18n(cur.view === 'heirs' ? 'Lecture des héritiers…' : cur.view === 'mail' ? 'Lecture des courriers…' : 'Lecture des dossiers…'))}</div></section>`;
         const body = w.querySelector('[data-succ-body]');
@@ -345,7 +348,7 @@
         w.innerHTML = `<section class="page succ-page" data-succ-case="${D.id}">${UI().pageHeader({title: i18n('Dossier n° {n} · {t}', {n: D.number, t: D.title}), icon: '⚖️', where: cur.where === 'tab' ? i18n('Successions') : i18n('Listes · Dossiers de succession'),
             help: [D.deceased ? `${esc(D.deceased)}${years ? ` (${esc(years)})` : ''}` : '', badge(stateLabel(D.state), stateKind(D.state))].filter(Boolean).join(' '),
             back: `<button type="button" class="button small secondary" data-succ-back>${esc(i18n('← Tous les dossiers'))}</button>`,
-            actions: D.archived ? [] : [`<button type="button" class="button secondary" data-succ-edit="${D.id}">${esc(i18n('✎ Modifier'))}</button>`],
+            actions: [`<button type="button" class="button secondary" data-succ-loi="case" title="${esc(i18n('⚖️ Un doute sur la loi ?'))}">${esc(i18n('⚖️ Un doute ?'))}</button>`, ...(D.archived ? [] : [`<button type="button" class="button secondary" data-succ-edit="${D.id}">${esc(i18n('✎ Modifier'))}</button>`])],
             more: [D.deceased_id ? `<button type="button" data-h-person="${D.deceased_id}">${esc(i18n('↗ Fiche du défunt'))}</button>` : '', D.state === 'clos' ? `<button type="button" data-succ-archive>${esc(i18n('🗄 Archiver le dossier clos'))}</button>` : '', ...(ext.succDossiers?.caseMore?.(D) || []), `<button type="button" class="danger" data-succ-del="${D.id}">${esc(i18n('🗑 Supprimer'))}</button>`]})}
             ${D.archived ? UI().notice('info', i18n('Dossier archivé : les adresses des vivants ont été retirées, le journal reste.')) : `<div class="succ-steps" role="group" aria-label="${esc(i18n('État du dossier'))}">${STATES.map(([k, l], i) => `<button type="button" class="succ-step${i < stIdx ? ' is-done' : ''}${i === stIdx ? ' is-on' : ''}" data-succ-state="${k}" aria-pressed="${i === stIdx}">${i < stIdx ? '✓ ' : ''}${esc(i18n(l))}</button>`).join('')}</div>`}
             <div class="segmented succ-tabs" role="tablist">${TABS.map(([k, l]) => `<button type="button" role="tab" data-succ-tab="${k}" class="${cur.tab === k ? 'is-active' : ''}" aria-selected="${cur.tab === k}">${esc(tabLabel(k, l))}</button>`).join('')}</div>
@@ -650,13 +653,53 @@
     const atTxt = at => { const m = String(at).match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/); return m ? `${m[3]}/${m[2]}/${m[1]} ${m[4]}:${m[5]}` : at; };
     function tabJournal(body, D) {
         body.innerHTML = `<section class="succ-box"><div class="succ-box-head"><h3>${esc(i18n('🕓 Journal du dossier {n}', {n: D.number}))} <small class="muted">${esc(i18n('(on ne peut ni le modifier ni l’effacer)'))}</small></h3><button type="button" class="button small secondary" data-succ-jcsv>${esc(i18n('⤓ Exporter le journal (CSV)'))}</button></div>
-            ${D.journal.length ? `<ol class="succ-journal">${D.journal.map(j => `<li><time>${esc(atTxt(j.at))}</time><span data-i18n-off>${esc(j.text)}</span></li>`).join('')}</ol>` : A().empty(i18n('Rien encore.'), {icon: '🕓'})}
+            ${D.journal.length ? `<ol class="succ-journal">${D.journal.map(j => `<li><time>${esc(atTxt(j.at))}</time><span data-i18n-off>${j.kind === 'law' ? S().lawJournalHtml(j.text) : esc(j.text)}</span></li>`).join('')}</ol>` : A().empty(i18n('Rien encore.'), {icon: '🕓'})}
             <p class="ui-hint">${esc(i18n('Les changements des fiches restent dans Réglages → Journal des modifications.'))}</p></section>`;
         body.querySelector('[data-succ-jcsv]').addEventListener('click', () => {
             const csv = '﻿' + S().journalCsv([...D.journal].reverse().map(j => ({at: atTxt(j.at), text: j.text})), [i18n('Date'), i18n('Action')]);
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = `journal-dossier-${D.number}.csv`; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
             journal(D, 'export', i18n('Journal exporté (CSV)'));
         });
+    }
+
+    /* ═════ ⚖️ Un doute sur la loi ? ═════
+     * La question, telle que tapée (rien d'autre : ni nom, ni dossier), part au moteur de recherche d'un site officiel qui
+     * s'ouvre dans le navigateur (comme les liens Légifrance des articles) : Service-public (explique et renvoie au bon
+     * article) ou Légifrance (les codes en vigueur). L'app ne choisit aucun article. Dans un dossier ouvert, hors mode
+     * consultation : « ✍️ Noter dans le dossier » écrit la question au journal, avec un lien officiel collé (facultatif). */
+    const LAW_BTN = () => `<button type="button" class="button secondary" data-succ-loi>${esc(i18n('⚖️ Un doute sur la loi ?'))}</button>`;
+    /** ouvrir une adresse dans le navigateur, par le même chemin que les liens « succ-law » (target _blank, sans référent) */
+    function openOut(url) { if (!url) return; const a = document.createElement('a'); a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; document.body.appendChild(a); a.click(); a.remove(); }
+    function lawDialog(D = null) {
+        const canNote = !!D?.id && !kiosk() && !simple();
+        const go = (k, label, hint, main) => `<div class="succ-loi-site"><button type="button" class="button${main ? '' : ' secondary'}" data-succ-loi-go="${k}" disabled>${esc(i18n(label))}</button><small class="muted">${esc(i18n(hint))}</small></div>`;
+        return ext.openDialog({eyebrow: i18n('⚖️ UN DOUTE SUR LA LOI ?'), title: i18n('Chercher sur un site officiel'), closeLabel: canNote ? i18n('Fermer') : '',
+            submitLabel: canNote ? i18n('✍️ Noter dans le dossier') : 'Fermer',
+            body: `<div class="succ-form succ-loi">
+                <label>${esc(i18n('Ton problème, avec tes mots'))}<input name="q" maxlength="300" autocomplete="off" spellcheck="true" data-succ-loi-q placeholder="${esc(i18n('ex. un héritier refuse de répondre · délai pour renoncer à une succession'))}"></label>
+                <p class="ui-hint succ-loi-priv">${esc(i18n('N’écris pas de nom : la question part sur internet.'))}</p>
+                <div class="succ-loi-go">${go('sp', '🏛 Chercher sur Service-public', 'explique en français simple et donne le lien vers le bon article', true)}${go('lf', '📜 Chercher sur Légifrance', 'les articles des codes en vigueur', false)}</div>
+                <p class="succ-loi-note">${esc(i18n('L’app ne choisit aucun article : ta question est envoyée telle quelle au site officiel, qui s’ouvre dans ton navigateur.'))}</p>
+                ${canNote ? `<fieldset class="succ-loi-jr"><legend>${esc(i18n('✍️ Noter dans le dossier {n}', {n: D.number}))}</legend>
+                    <label>${esc(i18n('Lien de l’article ou de la fiche (facultatif)'))}<input name="link" maxlength="500" inputmode="url" autocomplete="off" spellcheck="false" data-succ-loi-link placeholder="https://www.legifrance.gouv.fr/…"></label>
+                    <p class="ui-hint">${esc(i18n('Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex.'))}</p></fieldset>` : ''}</div>`,
+            onOpen: d => {
+                const q = d.querySelector('[data-succ-loi-q]'), sub = d.querySelector('[type=submit]');
+                const sync = () => { const empty = !q.value.trim(); d.querySelectorAll('[data-succ-loi-go]').forEach(b => { b.disabled = empty; }); if (canNote && sub) sub.disabled = empty; };
+                q.addEventListener('input', sync); sync();
+                q.addEventListener('keydown', e => { if (e.key !== 'Enter' || e.isComposing) return; e.preventDefault(); openOut(S().lawSearchUrl('sp', q.value)); }); // Entrée = Service-public
+                d.querySelectorAll('[data-succ-loi-go]').forEach(b => b.addEventListener('click', () => openOut(S().lawSearchUrl(b.dataset.succLoiGo, q.value))));
+                setTimeout(() => q.focus(), 0);
+            },
+            onSubmit: canNote ? async form => {
+                const question = form.q.value.trim(), link = form.link.value.trim();
+                if (!question) return false;
+                if (link && !S().officialLink(link)) { toast(i18n('Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex.'), 'error'); form.link.focus(); return false; }
+                let r; try { r = await post({op: 'law_note', case_id: D.id, question, link}); } catch (e) { toast(e.message, 'error'); return false; }
+                if (r?.entry && cur.data?.id === D.id) cur.data.journal.unshift(r.entry);
+                toast(i18n('Noté au journal du dossier {n}.', {n: D.number}), 'success'); // le journal ne s'efface pas : pas de ↶ Annuler
+                if (cur.data?.id === D.id && cur.tab === 'journal') render();
+            } : () => true});
     }
 
     /* ── 💶 Temps et frais ── */
@@ -784,6 +827,7 @@
         if (t.closest('[data-succ-back]')) { e.preventDefault(); return openCase(0); }
         const ed = t.closest('[data-succ-edit]'); if (ed) { e.preventDefault(); const id = Number(ed.dataset.succEdit); const D = cur.data?.id === id ? cur.data : await get('get', {id}).catch(err => (toast(err.message, 'error'), null)); if (D) caseDialog(D); return; }
         const del = t.closest('[data-succ-del]'); if (del) { e.preventDefault(); return deleteCase(del.dataset.succDel); }
+        const lo = t.closest('[data-succ-loi]'); if (lo) { e.preventDefault(); return lawDialog(lo.dataset.succLoi === 'case' && cur.data?.id === cur.id ? cur.data : null); }
         const vw = t.closest('[data-succ-view]'); if (vw) { e.preventDefault(); cur.view = vw.dataset.succView; store.set('lcnda-succ-view', cur.view); return render(); }
         const full = t.closest('[data-succ-full]'); if (full) { e.preventDefault(); t.closest('dialog')?.close?.(); A().state.listType = full.dataset.succFull === 'courriers' ? 'courriers' : 'living_contacts'; return A().setModule('listes'); }
         const hw = t.closest('[data-succ-hwrite]'); if (hw) { e.preventDefault(); const [cid, pid] = hw.dataset.succHwrite.split(':').map(Number); const c = board.cases.get(cid); if (!c) return; return letterDialog(c.D, c.R, c.D.courriers.some(x => x.person_id === pid && x.kind !== 'acte') ? 'relance' : 'contact', pid); }

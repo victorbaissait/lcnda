@@ -35,7 +35,7 @@ const SUCC_OV_ADOPT = ['', 'pleniere', 'simple'];
 const SUCC_OV_SPOUSE = ['', 'married', 'not', 'divorced'];
 const SUCC_DEADLINE_KINDS = ['declaration', 'relance', 'remise', 'rdv', 'autre'];
 const SUCC_FEE_KINDS = ['time', 'cost', 'percent'];
-const SUCC_JOURNAL_KINDS = ['open', 'edit', 'state', 'calc', 'piece', 'courrier', 'pdf', 'deadline', 'fee', 'note', 'archive', 'search', 'export', 'other'];
+const SUCC_JOURNAL_KINDS = ['open', 'edit', 'state', 'calc', 'piece', 'courrier', 'pdf', 'deadline', 'fee', 'note', 'archive', 'search', 'export', 'law', 'other'];
 const SUCC_ANSWERS = ['', 'none', 'yes', 'no', 'later'];
 
 function successoral_schema(PDO $pdo): void
@@ -344,6 +344,28 @@ function succ_journal(PDO $pdo, int $caseId, string $kind, string $text): void
 {
     if (!in_array($kind, SUCC_JOURNAL_KINDS, true)) { $kind = 'other'; }
     $pdo->prepare('INSERT INTO succ_journal(case_id, at, kind, text) VALUES(?,?,?,?)')->execute([$caseId, date('Y-m-d H:i:s'), $kind, mb_substr($text, 0, 1000)]);
+}
+/* ⚖️ « Un doute sur la loi ? » → « ✍️ Noter dans le dossier » : la question telle que tapée et, facultatif, un lien collé.
+ * Le lien n'est gardé que s'il commence par https:// et que l'hôte est exactement un site officiel (même règle que
+ * officialLink() dans heritage-successoral-core.js) ; l'app ne choisit jamais l'article. */
+const SUCC_LAW_HOSTS = ['www.legifrance.gouv.fr', 'www.service-public.gouv.fr', 'www.service-public.fr', 'eur-lex.europa.eu'];
+function succ_law_link(mixed $v): string
+{
+    $u = trim(is_scalar($v) ? (string) $v : '');
+    if ($u === '') { return ''; }
+    if (strlen($u) > 500 || !preg_match('{^https://([a-z0-9.-]+)(?:[/?#][\w\-.~%!$&*+,;=:@/?#()\[\]]*)?$}D', $u, $m) || !in_array($m[1], SUCC_LAW_HOSTS, true)) {
+        throw new LcndaBadInput('Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex.');
+    }
+    return $u;
+}
+function succ_law_note(PDO $pdo, array $d): array
+{
+    $id = safe_int($d['case_id'] ?? 0); succ_row($pdo, $id);
+    $q = succ_txt($d['question'] ?? '', 300); if ($q === '') { throw new LcndaBadInput('Écris d’abord ta question.'); }
+    $link = succ_law_link($d['link'] ?? '');
+    $text = 'Doute sur la loi : « ' . $q . ' »' . ($link !== '' ? ' — ' . $link : '');
+    succ_journal($pdo, $id, 'law', $text);
+    return ['ok' => true, 'entry' => ['at' => date('Y-m-d H:i:s'), 'kind' => 'law', 'text' => $text]];
 }
 function succ_touch(PDO $pdo, int $id): void { $pdo->prepare('UPDATE succ_cases SET updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$id]); }
 function succ_person_ok(PDO $pdo, int $id): bool
@@ -705,6 +727,7 @@ function successoral_api_post(PDO $pdo, array $d): array
         'unfile_letter' => succ_unfile_letter($pdo, $d),
         'courrier_set' => succ_courrier_set($pdo, $d),
         'archive' => succ_archive($pdo, $d),
+        'law_note' => succ_law_note($pdo, $d),
         'journal' => (static function () use ($pdo, $d) {
             $id = safe_int($d['case_id'] ?? 0); succ_row($pdo, $id);
             $kind = in_array($d['kind'] ?? '', ['pdf', 'export', 'search', 'other', 'courrier'], true) ? (string) $d['kind'] : 'other';

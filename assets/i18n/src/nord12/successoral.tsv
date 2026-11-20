@@ -724,3 +724,22 @@ Contact de {name} : {state} ¦ Связь — {name}: {state} ¦ Зв’язок
 Les fiches confidentielles comptent-elles comme héritiers ? ¦ Считаются ли конфиденциальные карточки наследниками? ¦ Чи вважаються конфіденційні картки спадкоємцями?
 Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Нет: конфиденциальная карточка убирается из расчёта, как будто её нет; дело об этом сообщает. ¦ Ні: конфіденційну картку прибирають із розрахунку, ніби її немає; справа про це повідомляє.
 Le défunt n’est pas un héritier à contacter. ¦ Умерший не является наследником, с которым нужно связаться. ¦ Померлий не є спадкоємцем, з яким треба зв’язатися.
+⚖️ Un doute sur la loi ? ¦ ⚖️ Сомнение по закону? ¦ ⚖️ Сумнів щодо закону?
+⚖️ Un doute ? ¦ ⚖️ Сомнение? ¦ ⚖️ Сумнів?
+⚖️ UN DOUTE SUR LA LOI ? ¦ ⚖️ СОМНЕНИЕ ПО ЗАКОНУ? ¦ ⚖️ СУМНІВ ЩОДО ЗАКОНУ?
+Chercher sur un site officiel ¦ Искать на официальном сайте ¦ Шукати на офіційному сайті
+✍️ Noter dans le dossier ¦ ✍️ Записать в дело ¦ ✍️ Записати до справи
+Ton problème, avec tes mots ¦ Твоя проблема, своими словами ¦ Твоя проблема, твоїми словами
+ex. un héritier refuse de répondre · délai pour renoncer à une succession ¦ напр. наследник отказывается отвечать · срок для отказа от наследства ¦ напр. спадкоємець відмовляється відповідати · строк для відмови від спадщини
+N’écris pas de nom : la question part sur internet. ¦ Не пиши имён: вопрос уходит в интернет. ¦ Не пиши імен: питання йде в інтернет.
+🏛 Chercher sur Service-public ¦ 🏛 Искать на Service-public ¦ 🏛 Шукати на Service-public
+explique en français simple et donne le lien vers le bon article ¦ объясняет простым французским языком и даёт ссылку на нужную статью ¦ пояснює простою французькою і дає посилання на потрібну статтю
+📜 Chercher sur Légifrance ¦ 📜 Искать на Légifrance ¦ 📜 Шукати на Légifrance
+les articles des codes en vigueur ¦ статьи действующих кодексов ¦ статті чинних кодексів
+L’app ne choisit aucun article : ta question est envoyée telle quelle au site officiel, qui s’ouvre dans ton navigateur. ¦ Приложение не выбирает никакой статьи: твой вопрос отправляется как есть на официальный сайт, который открывается в твоём браузере. ¦ Застосунок не обирає жодної статті: твоє питання надсилається як є на офіційний сайт, який відкривається у твоєму браузері.
+✍️ Noter dans le dossier {n} ¦ ✍️ Записать в дело {n} ¦ ✍️ Записати до справи {n}
+Lien de l’article ou de la fiche (facultatif) ¦ Ссылка на статью или страницу (необязательно) ¦ Посилання на статтю або сторінку (необов’язково)
+Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Только адрес https:// с Légifrance, Service-public или EUR-Lex. ¦ Лише адреса https:// з Légifrance, Service-public або EUR-Lex.
+Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Ссылка отклонена: только адрес https:// с Légifrance, Service-public или EUR-Lex. ¦ Посилання відхилено: лише адреса https:// з Légifrance, Service-public або EUR-Lex.
+Noté au journal du dossier {n}. ¦ Записано в журнал дела {n}. ¦ Записано до журналу справи {n}.
+Écris d’abord ta question. ¦ Сначала напиши свой вопрос. ¦ Спочатку напиши своє питання.

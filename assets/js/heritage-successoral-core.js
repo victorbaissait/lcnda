@@ -665,6 +665,26 @@
         return String(html || '').replace(ART_RE, (m, pre, list) => pre + list.replace(/\d{2,3}(?:-\d(?!\d))?/g, n => (LAW[n] ? a(n) : n)));
     }
 
+    /* ═════ ⚖️ Un doute sur la loi ? : la question de l'utilisateur, telle quelle, au moteur de recherche d'un site officiel ═════
+     * L'app ne choisit AUCUN article et n'écrit aucun texte de loi : elle n'ajoute rien (ni nom, ni dossier) à ce qui est tapé.
+     * Adresses vérifiées (novembre 2026) : Service-public « recherche générale » ; Légifrance, recherche dans les codes. */
+    const LAW_SEARCH = {
+        sp: q => `https://www.service-public.gouv.fr/particuliers/recherche-generale?keyword=${encodeURIComponent(q)}`,
+        lf: q => `https://www.legifrance.gouv.fr/search/code?tab_selection=code&searchField=ALL&query=${encodeURIComponent(q)}&page=1&init=true`,
+    };
+    /** l'adresse de recherche ('sp' Service-public, 'lf' Légifrance) ; '' si rien n'est tapé */
+    const lawSearchUrl = (site, q) => { const s = String(q ?? '').trim(); return s && LAW_SEARCH[site] ? LAW_SEARCH[site](s) : ''; };
+    /** un lien noté au journal : seulement https:// et un de ces hôtes, exactement (même règle que succ_law_link() côté serveur) */
+    const LAW_HOSTS = ['www.legifrance.gouv.fr', 'www.service-public.gouv.fr', 'www.service-public.fr', 'eur-lex.europa.eu'];
+    const LAW_LINK_RE = /^https:\/\/([a-z0-9.-]+)(?:[/?#][\w\-.~%!$&*+,;=:@/?#()[\]]*)?$/;
+    const officialLink = u => { const s = String(u ?? '').trim(); const m = s.length <= 500 ? s.match(LAW_LINK_RE) : null; return m && LAW_HOSTS.includes(m[1]) ? s : ''; };
+    /** une ligne « ⚖️ Doute sur la loi : « … » — https://… » du journal (kind 'law') : tout échappé, le lien cliquable seulement s'il est officiel */
+    const escH = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+    function lawJournalHtml(text) {
+        const s = String(text ?? ''), m = s.match(/^([\s\S]*») — (\S+)$/), u = m ? officialLink(m[2]) : '';
+        return u ? `${escH(m[1])} — <a class="succ-law" href="${escH(u)}" target="_blank" rel="noopener noreferrer">${escH(u)}</a>` : escH(s);
+    }
+
     /* ═════ ❔ Absents et disparus : le bon chemin ═════ */
     const ABSENCE = [
         {key: 'presume', art: '112', text: 'Présomption d’absence : le juge des tutelles la constate quand une personne a cessé de paraître sans donner de nouvelles. Elle est réputée vivante ; sa part est réservée et gérée.'},
@@ -782,5 +802,5 @@
         list.splice(j, 0, list.splice(i, 1)[0]); return list;
     }
 
-    return {CONTACT_STATES, contactOf, contactStale, withoutPrivate, STEP_KEYS, STEP_LABELS, WEIGHTS, progress, progressPct, members, orderCases, moveCase, LAW, LAW_ARTICLES, lawUrl, lawVerified, lawCited, lawLinks, F, add, sub, mul, div, str, parse, pct, sumAll, cmpDate, kinLabel, DEGREES, compute, relation, pieces, checklist, snapshot, diffLines, csvCell, journalCsv, fees, ABSENCE, ABROAD, abroadLetter, ABROAD_LETTERS, name, KIN};
+    return {LAW_HOSTS, lawSearchUrl, officialLink, lawJournalHtml, CONTACT_STATES, contactOf, contactStale, withoutPrivate, STEP_KEYS, STEP_LABELS, WEIGHTS, progress, progressPct, members, orderCases, moveCase, LAW, LAW_ARTICLES, lawUrl, lawVerified, lawCited, lawLinks, F, add, sub, mul, div, str, parse, pct, sumAll, cmpDate, kinLabel, DEGREES, compute, relation, pieces, checklist, snapshot, diffLines, csvCell, journalCsv, fees, ABSENCE, ABROAD, abroadLetter, ABROAD_LETTERS, name, KIN};
 });

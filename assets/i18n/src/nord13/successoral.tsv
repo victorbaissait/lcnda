@@ -724,3 +724,22 @@ Contact de {name} : {state} ¦ Επαφή με {name}: {state} ¦ Контакт
 Les fiches confidentielles comptent-elles comme héritiers ? ¦ Μετρούν οι εμπιστευτικές καρτέλες ως κληρονόμοι; ¦ Броят ли се поверителните картони за наследници?
 Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Όχι: μια εμπιστευτική καρτέλα αφαιρείται από τον υπολογισμό, σαν να μην υπάρχει· ο φάκελος το επισημαίνει. ¦ Не: поверителният картон се изважда от изчислението, все едно го няма; преписката го показва.
 Le défunt n’est pas un héritier à contacter. ¦ Ο θανών δεν είναι κληρονόμος προς επαφή. ¦ Починалият не е наследник за контакт.
+⚖️ Un doute sur la loi ? ¦ ⚖️ Μια αμφιβολία για τον νόμο; ¦ ⚖️ Съмнение за закона?
+⚖️ Un doute ? ¦ ⚖️ Μια αμφιβολία; ¦ ⚖️ Съмнение?
+⚖️ UN DOUTE SUR LA LOI ? ¦ ⚖️ ΜΙΑ ΑΜΦΙΒΟΛΙΑ ΓΙΑ ΤΟΝ ΝΟΜΟ; ¦ ⚖️ СЪМНЕНИЕ ЗА ЗАКОНА?
+Chercher sur un site officiel ¦ Αναζήτηση σε επίσημο ιστότοπο ¦ Търсене в официален сайт
+✍️ Noter dans le dossier ¦ ✍️ Καταγραφή στον φάκελο ¦ ✍️ Запиши в преписката
+Ton problème, avec tes mots ¦ Το πρόβλημά σου, με δικά σου λόγια ¦ Твоят проблем, с твои думи
+ex. un héritier refuse de répondre · délai pour renoncer à une succession ¦ π.χ. ένας κληρονόμος αρνείται να απαντήσει · προθεσμία αποποίησης κληρονομιάς ¦ напр. наследник отказва да отговори · срок за отказ от наследство
+N’écris pas de nom : la question part sur internet. ¦ Μη γράφεις ονόματα: η ερώτηση πηγαίνει στο διαδίκτυο. ¦ Не пиши имена: въпросът отива в интернет.
+🏛 Chercher sur Service-public ¦ 🏛 Αναζήτηση στο Service-public ¦ 🏛 Търсене в Service-public
+explique en français simple et donne le lien vers le bon article ¦ εξηγεί σε απλά γαλλικά και δίνει τον σύνδεσμο προς το σωστό άρθρο ¦ обяснява на прост френски и дава връзка към правилния член
+📜 Chercher sur Légifrance ¦ 📜 Αναζήτηση στο Légifrance ¦ 📜 Търсене в Légifrance
+les articles des codes en vigueur ¦ τα άρθρα των ισχυόντων κωδίκων ¦ членовете на действащите кодекси
+L’app ne choisit aucun article : ta question est envoyée telle quelle au site officiel, qui s’ouvre dans ton navigateur. ¦ Η εφαρμογή δεν επιλέγει κανένα άρθρο: η ερώτησή σου στέλνεται όπως είναι στον επίσημο ιστότοπο, που ανοίγει στο πρόγραμμα περιήγησής σου. ¦ Приложението не избира никакъв член: въпросът ти се изпраща както е до официалния сайт, който се отваря в браузъра ти.
+✍️ Noter dans le dossier {n} ¦ ✍️ Καταγραφή στον φάκελο {n} ¦ ✍️ Запиши в преписка {n}
+Lien de l’article ou de la fiche (facultatif) ¦ Σύνδεσμος προς το άρθρο ή τη σελίδα (προαιρετικό) ¦ Връзка към члена или страницата (по избор)
+Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Μόνο διεύθυνση https:// από Légifrance, Service-public ή EUR-Lex. ¦ Само адрес https:// от Légifrance, Service-public или EUR-Lex.
+Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Ο σύνδεσμος απορρίφθηκε: μόνο διεύθυνση https:// από Légifrance, Service-public ή EUR-Lex. ¦ Връзката е отказана: само адрес https:// от Légifrance, Service-public или EUR-Lex.
+Noté au journal du dossier {n}. ¦ Καταγράφηκε στο ημερολόγιο του φακέλου {n}. ¦ Записано в дневника на преписка {n}.
+Écris d’abord ta question. ¦ Γράψε πρώτα την ερώτησή σου. ¦ Първо напиши въпроса си.

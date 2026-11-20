@@ -724,3 +724,22 @@ Contact de {name} : {state} ¦ Yhteys – {name}: {state} ¦ Kapcsolat – {name
 Les fiches confidentielles comptent-elles comme héritiers ? ¦ Lasketaanko luottamukselliset kortit perillisiksi? ¦ Örökösnek számítanak a bizalmas adatlapok?
 Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Ei: luottamuksellinen kortti jätetään laskelmasta pois, kuin sitä ei olisi; kansio kertoo sen. ¦ Nem: a bizalmas adatlap kikerül a számításból, mintha nem létezne; az ügy jelzi ezt.
 Le défunt n’est pas un héritier à contacter. ¦ Vainaja ei ole perillinen, johon otetaan yhteyttä. ¦ Az elhunyt nem megkeresendő örökös.
+⚖️ Un doute sur la loi ? ¦ ⚖️ Epäselvyyttä laista? ¦ ⚖️ Jogi kétség?
+⚖️ Un doute ? ¦ ⚖️ Epäselvää? ¦ ⚖️ Kétség?
+⚖️ UN DOUTE SUR LA LOI ? ¦ ⚖️ EPÄSELVYYTTÄ LAISTA? ¦ ⚖️ JOGI KÉTSÉG?
+Chercher sur un site officiel ¦ Hae virallisesta sivustosta ¦ Keresés hivatalos oldalon
+✍️ Noter dans le dossier ¦ ✍️ Kirjaa kansioon ¦ ✍️ Feljegyzés az ügybe
+Ton problème, avec tes mots ¦ Ongelmasi omin sanoin ¦ A problémád, a saját szavaiddal
+ex. un héritier refuse de répondre · délai pour renoncer à une succession ¦ esim. perillinen kieltäytyy vastaamasta · määräaika perinnöstä luopumiseen ¦ pl. egy örökös nem hajlandó válaszolni · határidő az örökség visszautasítására
+N’écris pas de nom : la question part sur internet. ¦ Älä kirjoita nimiä: kysymys lähtee internetiin. ¦ Ne írj neveket: a kérdés kimegy az internetre.
+🏛 Chercher sur Service-public ¦ 🏛 Hae sivustolta Service-public ¦ 🏛 Keresés a Service-public oldalon
+explique en français simple et donne le lien vers le bon article ¦ selittää selkeällä ranskalla ja antaa linkin oikeaan pykälään ¦ egyszerű franciasággal elmagyarázza, és megadja a helyes cikk linkjét
+📜 Chercher sur Légifrance ¦ 📜 Hae sivustolta Légifrance ¦ 📜 Keresés a Légifrance oldalon
+les articles des codes en vigueur ¦ voimassa olevien lakikirjojen pykälät ¦ a hatályos törvénykönyvek cikkei
+L’app ne choisit aucun article : ta question est envoyée telle quelle au site officiel, qui s’ouvre dans ton navigateur. ¦ Sovellus ei valitse yhtään pykälää: kysymyksesi lähetetään sellaisenaan viralliselle sivustolle, joka avautuu selaimessasi. ¦ Az app nem választ cikket: a kérdésed változatlanul megy a hivatalos oldalra, amely a böngésződben nyílik meg.
+✍️ Noter dans le dossier {n} ¦ ✍️ Kirjaa kansioon {n} ¦ ✍️ Feljegyzés a(z) {n}. ügybe
+Lien de l’article ou de la fiche (facultatif) ¦ Linkki pykälään tai sivuun (valinnainen) ¦ A cikk vagy az oldal linkje (nem kötelező)
+Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Vain https://-osoite sivustoilta Légifrance, Service-public tai EUR-Lex. ¦ Csak https:// cím a Légifrance, a Service-public vagy az EUR-Lex oldaláról.
+Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Linkki hylätty: vain https://-osoite sivustoilta Légifrance, Service-public tai EUR-Lex. ¦ Link elutasítva: csak https:// cím a Légifrance, a Service-public vagy az EUR-Lex oldaláról.
+Noté au journal du dossier {n}. ¦ Kirjattu kansion {n} lokiin. ¦ Feljegyezve a(z) {n}. ügy naplójába.
+Écris d’abord ta question. ¦ Kirjoita ensin kysymyksesi. ¦ Előbb írd be a kérdésed.

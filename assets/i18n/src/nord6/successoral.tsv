@@ -724,3 +724,22 @@ Contact de {name} : {state} ¦ Kontaktas – {name}: {state} ¦ Kontakts – {na
 Les fiches confidentielles comptent-elles comme héritiers ? ¦ Ar konfidencialios kortelės skaičiuojamos kaip įpėdiniai? ¦ Vai konfidenciālas kartītes skaitās kā mantinieki? ¦ Kas konfidentsiaalsed kaardid loetakse pärijateks?
 Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Ne: konfidenciali kortelė pašalinama iš skaičiavimo, lyg jos nebūtų; byla tai parodo. ¦ Nē: konfidenciāla kartīte tiek izņemta no aprēķina, it kā tās nebūtu; lieta to parāda. ¦ Ei: konfidentsiaalne kaart jäetakse arvutusest välja, nagu seda poleks; toimik annab sellest teada.
 Le défunt n’est pas un héritier à contacter. ¦ Mirusysis nėra įpėdinis, su kuriuo reikia susisiekti. ¦ Mirušais nav mantinieks, ar kuru sazināties. ¦ Lahkunu ei ole pärija, kellega ühendust võtta.
+⚖️ Un doute sur la loi ? ¦ ⚖️ Abejoji dėl įstatymo? ¦ ⚖️ Šaubas par likumu? ¦ ⚖️ Kahtled seaduses?
+⚖️ Un doute ? ¦ ⚖️ Abejoji? ¦ ⚖️ Šaubas? ¦ ⚖️ Kahtled?
+⚖️ UN DOUTE SUR LA LOI ? ¦ ⚖️ ABEJOJI DĖL ĮSTATYMO? ¦ ⚖️ ŠAUBAS PAR LIKUMU? ¦ ⚖️ KAHTLED SEADUSES?
+Chercher sur un site officiel ¦ Ieškoti oficialioje svetainėje ¦ Meklēt oficiālā vietnē ¦ Otsi ametlikult saidilt
+✍️ Noter dans le dossier ¦ ✍️ Užrašyti byloje ¦ ✍️ Pierakstīt lietā ¦ ✍️ Märgi toimikusse
+Ton problème, avec tes mots ¦ Tavo problema, tavo žodžiais ¦ Tava problēma, tavos vārdos ¦ Sinu probleem, sinu enda sõnadega
+ex. un héritier refuse de répondre · délai pour renoncer à une succession ¦ pvz. įpėdinis atsisako atsakyti · terminas atsisakyti palikimo ¦ piem. mantinieks atsakās atbildēt · termiņš, lai atteiktos no mantojuma ¦ nt pärija keeldub vastamast · tähtaeg pärandist loobumiseks
+N’écris pas de nom : la question part sur internet. ¦ Nerašyk vardų: klausimas keliauja į internetą. ¦ Neraksti vārdus: jautājums aiziet internetā. ¦ Ära kirjuta nimesid: küsimus läheb internetti.
+🏛 Chercher sur Service-public ¦ 🏛 Ieškoti svetainėje Service-public ¦ 🏛 Meklēt vietnē Service-public ¦ 🏛 Otsi saidilt Service-public
+explique en français simple et donne le lien vers le bon article ¦ paaiškina paprasta prancūzų kalba ir pateikia nuorodą į tinkamą straipsnį ¦ izskaidro vienkāršā franču valodā un dod saiti uz pareizo pantu ¦ selgitab lihtsas prantsuse keeles ja annab lingi õigele artiklile
+📜 Chercher sur Légifrance ¦ 📜 Ieškoti svetainėje Légifrance ¦ 📜 Meklēt vietnē Légifrance ¦ 📜 Otsi saidilt Légifrance
+les articles des codes en vigueur ¦ galiojančių kodeksų straipsniai ¦ spēkā esošo kodeksu panti ¦ kehtivate seadustike artiklid
+L’app ne choisit aucun article : ta question est envoyée telle quelle au site officiel, qui s’ouvre dans ton navigateur. ¦ Programa nepasirenka jokio straipsnio: tavo klausimas siunčiamas nepakeistas į oficialią svetainę, kuri atsidaro tavo naršyklėje. ¦ Lietotne neizvēlas nevienu pantu: tavs jautājums tiek nosūtīts nemainīts uz oficiālo vietni, kas atveras tavā pārlūkā. ¦ Rakendus ei vali ühtegi artiklit: sinu küsimus saadetakse muutmata ametlikule saidile, mis avaneb sinu brauseris.
+✍️ Noter dans le dossier {n} ¦ ✍️ Užrašyti byloje {n} ¦ ✍️ Pierakstīt lietā {n} ¦ ✍️ Märgi toimikusse {n}
+Lien de l’article ou de la fiche (facultatif) ¦ Nuoroda į straipsnį ar puslapį (nebūtina) ¦ Saite uz pantu vai lapu (nav obligāti) ¦ Link artiklile või lehele (valikuline)
+Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Tik https:// adresas iš Légifrance, Service-public ar EUR-Lex. ¦ Tikai https:// adrese no Légifrance, Service-public vai EUR-Lex. ¦ Ainult https://-aadress saitidelt Légifrance, Service-public või EUR-Lex.
+Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Nuoroda atmesta: tik https:// adresas iš Légifrance, Service-public ar EUR-Lex. ¦ Saite noraidīta: tikai https:// adrese no Légifrance, Service-public vai EUR-Lex. ¦ Link lükati tagasi: ainult https://-aadress saitidelt Légifrance, Service-public või EUR-Lex.
+Noté au journal du dossier {n}. ¦ Užrašyta bylos {n} žurnale. ¦ Pierakstīts lietas {n} žurnālā. ¦ Märgitud toimiku {n} logisse.
+Écris d’abord ta question. ¦ Pirmiausia parašyk klausimą. ¦ Vispirms uzraksti jautājumu. ¦ Kirjuta kõigepealt oma küsimus.

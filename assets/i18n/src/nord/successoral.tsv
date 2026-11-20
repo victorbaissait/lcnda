@@ -724,3 +724,22 @@ Contact de {name} : {state} ¦ Kontakt – {name}: {state} ¦ Kontakt med {name}
 Les fiches confidentielles comptent-elles comme héritiers ? ¦ Počítají se důvěrné karty jako dědicové? ¦ Räknas konfidentiella poster som arvingar? ¦ Tæller fortrolige poster som arvinger?
 Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Ne: důvěrná karta se z výpočtu vyřadí, jako by neexistovala; spis na to upozorní. ¦ Nej: en konfidentiell post tas bort ur beräkningen, som om den inte fanns; ärendet visar det. ¦ Nej: en fortrolig post tages ud af beregningen, som om den ikke fandtes; sagen viser det.
 Le défunt n’est pas un héritier à contacter. ¦ Zesnulý není dědic ke kontaktování. ¦ Den avlidne är ingen arvinge att kontakta. ¦ Afdøde er ikke en arving, der skal kontaktes.
+⚖️ Un doute sur la loi ? ¦ ⚖️ Pochybnost o zákonu? ¦ ⚖️ Osäker på lagen? ¦ ⚖️ I tvivl om loven?
+⚖️ Un doute ? ¦ ⚖️ Pochybnost? ¦ ⚖️ Osäker? ¦ ⚖️ I tvivl?
+⚖️ UN DOUTE SUR LA LOI ? ¦ ⚖️ POCHYBNOST O ZÁKONU? ¦ ⚖️ OSÄKER PÅ LAGEN? ¦ ⚖️ I TVIVL OM LOVEN?
+Chercher sur un site officiel ¦ Hledat na oficiálním webu ¦ Sök på en officiell webbplats ¦ Søg på et officielt websted
+✍️ Noter dans le dossier ¦ ✍️ Zapsat do spisu ¦ ✍️ Anteckna i ärendet ¦ ✍️ Notér i sagen
+Ton problème, avec tes mots ¦ Tvůj problém, tvými slovy ¦ Ditt problem, med dina egna ord ¦ Dit problem, med dine egne ord
+ex. un héritier refuse de répondre · délai pour renoncer à une succession ¦ např. dědic odmítá odpovědět · lhůta k odmítnutí dědictví ¦ t.ex. en arvinge vägrar svara · frist för att avstå från ett arv ¦ f.eks. en arving nægter at svare · frist for at give afkald på en arv
+N’écris pas de nom : la question part sur internet. ¦ Nepiš žádná jména: otázka odchází na internet. ¦ Skriv inga namn: frågan skickas ut på internet. ¦ Skriv ingen navne: spørgsmålet sendes ud på internettet.
+🏛 Chercher sur Service-public ¦ 🏛 Hledat na Service-public ¦ 🏛 Sök på Service-public ¦ 🏛 Søg på Service-public
+explique en français simple et donne le lien vers le bon article ¦ vysvětlí to jednoduchou francouzštinou a dá odkaz na správný článek ¦ förklarar på enkel franska och länkar till rätt artikel ¦ forklarer på enkelt fransk og linker til den rigtige artikel
+📜 Chercher sur Légifrance ¦ 📜 Hledat na Légifrance ¦ 📜 Sök på Légifrance ¦ 📜 Søg på Légifrance
+les articles des codes en vigueur ¦ články platných zákoníků ¦ artiklarna i gällande lagböcker ¦ artiklerne i de gældende lovbøger
+L’app ne choisit aucun article : ta question est envoyée telle quelle au site officiel, qui s’ouvre dans ton navigateur. ¦ Aplikace nevybírá žádný článek: tvoje otázka se pošle beze změny na oficiální web, který se otevře v tvém prohlížeči. ¦ Appen väljer ingen artikel: din fråga skickas oförändrad till den officiella webbplatsen, som öppnas i din webbläsare. ¦ Appen vælger ingen artikel: dit spørgsmål sendes uændret til det officielle websted, som åbner i din browser.
+✍️ Noter dans le dossier {n} ¦ ✍️ Zapsat do spisu {n} ¦ ✍️ Anteckna i ärende {n} ¦ ✍️ Notér i sag {n}
+Lien de l’article ou de la fiche (facultatif) ¦ Odkaz na článek nebo stránku (nepovinné) ¦ Länk till artikeln eller sidan (valfritt) ¦ Link til artiklen eller siden (valgfrit)
+Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Jen adresa https:// z Légifrance, Service-public nebo EUR-Lex. ¦ Bara en https://-adress från Légifrance, Service-public eller EUR-Lex. ¦ Kun en https://-adresse fra Légifrance, Service-public eller EUR-Lex.
+Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Odkaz odmítnut: jen adresa https:// z Légifrance, Service-public nebo EUR-Lex. ¦ Länken nekades: bara en https://-adress från Légifrance, Service-public eller EUR-Lex. ¦ Link afvist: kun en https://-adresse fra Légifrance, Service-public eller EUR-Lex.
+Noté au journal du dossier {n}. ¦ Zapsáno do deníku spisu {n}. ¦ Antecknat i loggen för ärende {n}. ¦ Noteret i loggen for sag {n}.
+Écris d’abord ta question. ¦ Nejdřív napiš svou otázku. ¦ Skriv din fråga först. ¦ Skriv dit spørgsmål først.
