@@ -13,3 +13,7 @@
 :root[data-theme="dark"] .rfr-why { color: #a8b0bd; }
 :root[data-theme="dark"] .rfr-fallback { background: #3a3218; color: #f6e7b0; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .rfr-why { color: #a8b0bd; } :root:not([data-theme="light"]) .rfr-fallback { background: #3a3218; color: #f6e7b0; } }
+/* ⌘K : la ligne d'une question en phrase (heritage-questions-plus.js) : la réponse, puis « J'ai compris » en dessous */
+.quick-search-results li.is-question{flex-direction:column;align-items:flex-start;gap:.15rem}
+.quick-search-results li.is-question small{white-space:normal}
+.h-question-open{display:flex;flex-wrap:wrap;gap:.4rem;margin:.4rem 0}

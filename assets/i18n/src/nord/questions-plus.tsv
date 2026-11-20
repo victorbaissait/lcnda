@@ -1,0 +1,68 @@
+fr ¦ cs ¦ sv ¦ da
+# 🔎 Poser une question, suite (lib/question_plus.php, assets/js/heritage-questions-plus.js) : fautes, dates, « moi », négations, OU, renvois, ⌘K
+« {a} » lu « {b} » ¦ „{a}“ přečteno jako „{b}“ ¦ ”{a}” läst som ”{b}” ¦ »{a}« læst som »{b}«
+vers {y} ({a}-{b}) ¦ kolem roku {y} ({a}-{b}) ¦ omkring {y} ({a}-{b}) ¦ omkring {y} ({a}-{b})
+dans les années {y} ({a}-{b}) ¦ v letech {y} ({a}-{b}) ¦ på {y}-talet ({a}-{b}) ¦ i {y}'erne ({a}-{b})
+« moi » = la personne de départ : {name} ¦ „já“ = výchozí osoba: {name} ¦ ”jag” = startpersonen: {name} ¦ »mig« = startpersonen: {name}
+qui est : {name} ¦ kdo je: {name} ¦ vem är: {name} ¦ hvem er: {name}
+« {a} » compris comme {b} ¦ „{a}“ pochopeno jako {b} ¦ ”{a}” tolkat som {b} ¦ »{a}« forstået som {b}
+dossiers de succession ¦ dědické spisy ¦ arvsärenden ¦ dødsbosager
+Aucun dossier de succession dans cette généalogie. ¦ V této genealogii není žádný dědický spis. ¦ Inget arvsärende i den här släktforskningen. ¦ Ingen dødsbosag i denne slægtsforskning.
+courriers sans réponse ¦ dopisy bez odpovědi ¦ brev utan svar ¦ breve uden svar
+Courriers aux héritiers sans réponse : {n}. ¦ Dopisy dědicům bez odpovědi: {n}. ¦ Brev till arvingar utan svar: {n}. ¦ Breve til arvinger uden svar: {n}.
+Aucun courrier de dossier n’attend de réponse. ¦ Žádný dopis ze spisu nečeká na odpověď. ¦ Inget brev i ärendena väntar på svar. ¦ Intet brev i sagerne venter på svar.
+échéances en retard ¦ zmeškané lhůty ¦ försenade tidsfrister ¦ overskredne frister
+Dossiers avec des échéances en retard : {n}. ¦ Spisy se zmeškanými lhůtami: {n}. ¦ Ärenden med försenade tidsfrister: {n}. ¦ Sager med overskredne frister: {n}.
+Aucun dossier n’a d’échéance en retard. ¦ Žádný spis nemá zmeškanou lhůtu. ¦ Inget ärende har en försenad tidsfrist. ¦ Ingen sag har en overskredet frist.
+défunt : {name} ¦ zesnulý: {name} ¦ avliden: {name} ¦ afdøde: {name}
+Aucun dossier de succession pour {name}. ¦ Pro {name} není žádný dědický spis. ¦ Inget arvsärende för {name}. ¦ Ingen dødsbosag for {name}.
+⚖️ Rechercher les héritiers… ¦ ⚖️ Hledat dědice… ¦ ⚖️ Sök arvingarna… ¦ ⚖️ Søg arvingerne…
+Pièces notées « manquante » : {n}. La liste complète (en main, demandées, à demander) est dans l’onglet Pièces du dossier. ¦ Doklady označené „chybí“: {n}. Úplný seznam (v ruce, vyžádané, k vyžádání) je na kartě Doklady ve spisu. ¦ Handlingar markerade ”saknas”: {n}. Hela listan (i hand, begärda, att begära) finns under fliken Handlingar i ärendet. ¦ Dokumenter markeret »mangler«: {n}. Hele listen (i hånden, bestilt, skal bestilles) står under fanen Dokumenter i sagen.
+Aucune pièce notée « manquante ». La liste des pièces de chaque dossier est dans son onglet Pièces. ¦ Žádný doklad není označen „chybí“. Seznam každého spisu je na jeho kartě Doklady. ¦ Ingen handling är markerad ”saknas”. Varje ärendes lista finns under dess flik Handlingar. ¦ Intet dokument er markeret »mangler«. Hver sags liste står under dens fane Dokumenter.
+pièces manquantes ¦ chybějící doklady ¦ saknade handlingar ¦ manglende dokumenter
+Héritiers introuvables ou qui ne répondent pas : {n}. ¦ Nedohledatelní nebo neodpovídající dědicové: {n}. ¦ Arvingar som inte hittas eller inte svarar: {n}. ¦ Arvinger der ikke kan findes eller ikke svarer: {n}.
+Aucun héritier noté introuvable ou sans réponse. ¦ Žádný dědic není označen jako nedohledatelný nebo bez odpovědi. ¦ Ingen arvinge är markerad som inte hittad eller utan svar. ¦ Ingen arving er markeret som ikke fundet eller uden svar.
+héritiers introuvables ¦ nedohledatelní dědicové ¦ arvingar som inte hittas ¦ arvinger der ikke kan findes
+De qui ? Écris par exemple « les héritiers de Jean Dupont ». ¦ Čí? Napiš například „les héritiers de Jean Dupont“. ¦ Vems? Skriv till exempel ”les héritiers de Jean Dupont”. ¦ Hvis? Skriv for eksempel »les héritiers de Jean Dupont«.
+héritiers de {name} ¦ dědicové: {name} ¦ arvingar till {name} ¦ arvinger efter {name}
+Aucun dossier de succession pour {name}. Le dossier calcule les héritiers d’après l’arbre. ¦ Pro {name} není žádný dědický spis. Spis vypočítá dědice podle stromu. ¦ Inget arvsärende för {name}. Ärendet räknar fram arvingarna utifrån trädet. ¦ Ingen dødsbosag for {name}. Sagen beregner arvingerne ud fra træet.
+Dossier {d} : les héritiers n’ont pas encore été calculés. Ouvre le dossier pour faire le calcul. ¦ Spis {d}: dědicové ještě nebyli vypočteni. Otevři spis a proveď výpočet. ¦ Ärende {d}: arvingarna är inte uträknade än. Öppna ärendet för att räkna. ¦ Sag {d}: arvingerne er ikke beregnet endnu. Åbn sagen for at beregne.
+Dossier {d} — héritiers d’après le dernier calcul enregistré : {n}. ¦ Spis {d} — dědicové podle posledního uloženého výpočtu: {n}. ¦ Ärende {d} — arvingar enligt den senast sparade beräkningen: {n}. ¦ Sag {d} — arvinger ifølge den sidst gemte beregning: {n}.
+Branches encore à rechercher : {n}. ¦ Větve, které je ještě třeba dohledat: {n}. ¦ Grenar kvar att forska i: {n}. ¦ Grene der stadig skal undersøges: {n}.
+Actes ou documents à chercher pour {name} : {n}. Les 3 premiers ci-dessous ; la liste complète, avec où chercher et dans quelle série, est dans « Que manque-t-il ? ». ¦ Záznamy nebo dokumenty k dohledání pro {name}: {n}. První 3 níže; úplný seznam s tím, kde a v jaké řadě hledat, je v „Co chybí?“. ¦ Handlingar eller dokument att leta efter för {name}: {n}. De 3 första nedan; hela listan, med var och i vilken serie man letar, finns i ”Vad saknas?”. ¦ Akter eller dokumenter at lede efter for {name}: {n}. De første 3 nedenfor; hele listen, med hvor og i hvilken serie der skal ledes, står i »Hvad mangler?«.
+Rien de connu à chercher pour {name}. ¦ Pro {name} není nic známého k dohledání. ¦ Inget känt att leta efter för {name}. ¦ Intet kendt at lede efter for {name}.
+actes à chercher ¦ záznamy k dohledání ¦ handlingar att leta efter ¦ akter at lede efter
+où chercher ¦ kde hledat ¦ var man letar ¦ hvor man leder
+« Où chercher ? » donne pour {name} les sites et les séries d’archives les plus utiles, et pourquoi. ¦ „Kde hledat?“ ukáže pro {name} nejužitečnější weby a archivní řady a proč. ¦ ”Var ska jag leta?” visar för {name} de mest användbara webbplatserna och arkivserierna, och varför. ¦ »Hvor skal jeg lede?« viser for {name} de mest nyttige websteder og arkivserier, og hvorfor.
+« Où chercher ? » donne pour chaque personne les sites et les séries d’archives les plus utiles, et pourquoi. ¦ „Kde hledat?“ ukáže pro každou osobu nejužitečnější weby a archivní řady a proč. ¦ ”Var ska jag leta?” visar för varje person de mest användbara webbplatserna och arkivserierna, och varför. ¦ »Hvor skal jeg lede?« viser for hver person de mest nyttige websteder og arkivserier, og hvorfor.
+doublons ¦ duplicity ¦ dubbletter ¦ dubletter
+Le Contrôle de la base cherche les doublons probables (mêmes noms, mêmes dates, mêmes parents) et aide à les fusionner. ¦ Kontrola databáze hledá pravděpodobné duplicity (stejná jména, data, rodiče) a pomáhá je sloučit. ¦ Databaskontrollen letar efter troliga dubbletter (samma namn, datum, föräldrar) och hjälper dig att slå ihop dem. ¦ Databasekontrollen leder efter sandsynlige dubletter (samme navne, datoer, forældre) og hjælper dig med at flette dem.
+mort pendant la guerre, en âge de combattre ¦ zemřel za války, v branném věku ¦ dog under kriget, i stridsför ålder ¦ døde under krigen, i våbenfør alder
+mort pendant la guerre ¦ zemřel za války ¦ dog under kriget ¦ døde under krigen
+morts pendant {era} ¦ zemřelí během: {era} ¦ döda under {era} ¦ døde under {era}
+morts à la guerre ¦ padlí ve válce ¦ stupade i krig ¦ faldne i krig
+Morts pendant {era} : {n}. ¦ Zemřelí během: {era}: {n}. ¦ Döda under {era}: {n}. ¦ Døde under {era}: {n}.
+Notés « Mort pour la France » : {n}. Morts pendant une guerre, en âge de combattre ou soldats (à vérifier) : {m}. ¦ Označení „Mort pour la France“: {n}. Zemřelí za války, v branném věku nebo vojáci (ověřit): {m}. ¦ Markerade ”Mort pour la France”: {n}. Döda under ett krig, i stridsför ålder eller soldater (att kontrollera): {m}. ¦ Markeret »Mort pour la France«: {n}. Døde under en krig, i våbenfør alder eller soldater (skal tjekkes): {m}.
+Dont « Mort pour la France » : {n}. ¦ Z toho „Mort pour la France“: {n}. ¦ Varav ”Mort pour la France”: {n}. ¦ Heraf »Mort pour la France«: {n}.
+Pour les soldats : Mémoire des hommes et les registres matricules. ¦ Pro vojáky: Mémoire des hommes a kmenové listy. ¦ För soldater: Mémoire des hommes och rullorna. ¦ For soldater: Mémoire des hommes og lægdsrullerne.
+sans date de décès ¦ bez data úmrtí ¦ utan dödsdatum ¦ uden dødsdato
+sans date de naissance ¦ bez data narození ¦ utan födelsedatum ¦ uden fødselsdato
+sans date de mariage ¦ bez data sňatku ¦ utan vigseldatum ¦ uden vielsesdato
+sans parents connus ¦ bez známých rodičů ¦ utan kända föräldrar ¦ uden kendte forældre
+sans profession notée ¦ bez zapsaného povolání ¦ utan antecknat yrke ¦ uden noteret erhverv
+qui ne sont pas des ancêtres ¦ kteří nejsou předky ¦ som inte är förfäder ¦ som ikke er aner
+pas {ev} à {place} ¦ ne „{ev}“ v {place} ¦ inte ”{ev}” i {place} ¦ ikke »{ev}« i {place}
+vivants ou probablement vivants ¦ žijící nebo pravděpodobně žijící ¦ levande eller troligen levande ¦ levende eller sandsynligvis levende
+pas à {place} ¦ ne v {place} ¦ inte i {place} ¦ ikke i {place}
+recherche de nom : « {x} » ¦ hledání jména: „{x}“ ¦ namnsökning: ”{x}” ¦ navnesøgning: »{x}«
+orthographe proche ¦ podobný pravopis ¦ liknande stavning ¦ lignende stavemåde
+femmes ¦ ženy ¦ kvinnor ¦ kvinder
+Réponse réunie : {a} {c} {b}. ¦ Spojená odpověď: {a} {c} {b}. ¦ Sammanslaget svar: {a} {c} {b}. ¦ Samlet svar: {a} {c} {b}.
+Je n’ai pas tenu compte de : « {x} ». ¦ Nezohlednil jsem: „{x}“. ¦ Jag tog inte hänsyn till: ”{x}”. ¦ Jeg tog ikke højde for: »{x}«.
+Plusieurs “{w}” : choisir… ¦ Více „{w}“: vybrat… ¦ Flera ”{w}”: välj… ¦ Flere »{w}«: vælg…
+J’ai compris : {x} ¦ Pochopil jsem: {x} ¦ Jag förstod: {x} ¦ Jeg forstod: {x}
+Question en français ¦ Otázka ve francouzštině ¦ Fråga på franska ¦ Spørgsmål på fransk
+Poser la question : « {q} » ¦ Položit otázku: „{q}“ ¦ Ställ frågan: ”{q}” ¦ Stil spørgsmålet: »{q}«
+Questions dans la recherche rapide (⌘K) ¦ Otázky v rychlém hledání (⌘K) ¦ Frågor i snabbsökningen (⌘K) ¦ Spørgsmål i hurtigsøgningen (⌘K)
+Répondre aux questions dans la recherche rapide ¦ Odpovídat na otázky v rychlém hledání ¦ Svara på frågor i snabbsökningen ¦ Besvar spørgsmål i hurtigsøgningen
+« les enfants de Pierre Mazaud » : la réponse courte s’affiche dans la liste ; sinon seulement « Poser la question » ¦ „les enfants de Pierre Mazaud“: krátká odpověď se ukáže v seznamu; jinak jen „Položit otázku“ ¦ ”les enfants de Pierre Mazaud”: det korta svaret visas i listan; annars bara ”Ställ frågan” ¦ »les enfants de Pierre Mazaud«: det korte svar vises i listen; ellers kun »Stil spørgsmålet«

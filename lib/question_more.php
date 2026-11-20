@@ -138,7 +138,7 @@ function qm_couples(PDO $pdo): array
             (SELECT e.date_text FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.family_id=f.id AND t.gedcom_tag='MARR' LIMIT 1) AS md,
             (SELECT e.place_id FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.family_id=f.id AND t.gedcom_tag='MARR' LIMIT 1) AS mp,
             (SELECT count(*) FROM family_children fc WHERE fc.family_id=f.id) AS kids FROM families f") as $r) {
-        $c[(int) $r['id']] = ['a' => (int) $r['partner1_id'], 'b' => (int) $r['partner2_id'], 'my' => $r['my'] !== null ? (int) $r['my'] : null, 'md' => exact_date((string) ($r['md'] ?? '')), 'mp' => (int) ($r['mp'] ?? 0), 'kids' => (int) $r['kids']];
+        $c[(int) $r['id']] = ['a' => (int) $r['partner1_id'], 'b' => (int) $r['partner2_id'], 'my' => $r['my'] !== null ? (int) $r['my'] : null, 'md' => exact_date((string) ($r['md'] ?? '')) ?: qm_rep_text_iso((string) ($r['md'] ?? '')), 'mp' => (int) ($r['mp'] ?? 0), 'kids' => (int) $r['kids']];
     }
     return $cache = $c;
 }

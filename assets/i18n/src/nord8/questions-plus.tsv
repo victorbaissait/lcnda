@@ -1,0 +1,68 @@
+fr ¦ tr
+# 🔎 Poser une question, suite (lib/question_plus.php, assets/js/heritage-questions-plus.js) : fautes, dates, « moi », négations, OU, renvois, ⌘K
+« {a} » lu « {b} » ¦ “{a}”, “{b}” olarak okundu
+vers {y} ({a}-{b}) ¦ {y} civarı ({a}-{b})
+dans les années {y} ({a}-{b}) ¦ {y} yıllarında ({a}-{b})
+« moi » = la personne de départ : {name} ¦ “ben” = başlangıç kişisi: {name}
+qui est : {name} ¦ kim: {name}
+« {a} » compris comme {b} ¦ “{a}”, {b} olarak anlaşıldı
+dossiers de succession ¦ miras dosyaları
+Aucun dossier de succession dans cette généalogie. ¦ Bu soy ağacında miras dosyası yok.
+courriers sans réponse ¦ yanıtsız mektuplar
+Courriers aux héritiers sans réponse : {n}. ¦ Mirasçılara giden yanıtsız mektuplar: {n}.
+Aucun courrier de dossier n’attend de réponse. ¦ Yanıt bekleyen dosya mektubu yok.
+échéances en retard ¦ geciken süreler
+Dossiers avec des échéances en retard : {n}. ¦ Süresi geçmiş dosyalar: {n}.
+Aucun dossier n’a d’échéance en retard. ¦ Süresi geçmiş dosya yok.
+défunt : {name} ¦ ölen kişi: {name}
+Aucun dossier de succession pour {name}. ¦ {name} için miras dosyası yok.
+⚖️ Rechercher les héritiers… ¦ ⚖️ Mirasçıları ara…
+Pièces notées « manquante » : {n}. La liste complète (en main, demandées, à demander) est dans l’onglet Pièces du dossier. ¦ “Eksik” işaretli belgeler: {n}. Tam liste (elde, istenen, istenecek) dosyanın Belgeler sekmesinde.
+Aucune pièce notée « manquante ». La liste des pièces de chaque dossier est dans son onglet Pièces. ¦ “Eksik” işaretli belge yok. Her dosyanın belge listesi Belgeler sekmesinde.
+pièces manquantes ¦ eksik belgeler
+Héritiers introuvables ou qui ne répondent pas : {n}. ¦ Bulunamayan ya da yanıt vermeyen mirasçılar: {n}.
+Aucun héritier noté introuvable ou sans réponse. ¦ Bulunamadı ya da yanıtsız olarak işaretli mirasçı yok.
+héritiers introuvables ¦ bulunamayan mirasçılar
+De qui ? Écris par exemple « les héritiers de Jean Dupont ». ¦ Kimin? Örneğin “les héritiers de Jean Dupont” yaz.
+héritiers de {name} ¦ mirasçılar: {name}
+Aucun dossier de succession pour {name}. Le dossier calcule les héritiers d’après l’arbre. ¦ {name} için miras dosyası yok. Dosya mirasçıları ağaca göre hesaplar.
+Dossier {d} : les héritiers n’ont pas encore été calculés. Ouvre le dossier pour faire le calcul. ¦ Dosya {d}: mirasçılar henüz hesaplanmadı. Hesaplamak için dosyayı aç.
+Dossier {d} — héritiers d’après le dernier calcul enregistré : {n}. ¦ Dosya {d} — son kaydedilen hesaplamaya göre mirasçılar: {n}.
+Branches encore à rechercher : {n}. ¦ Henüz araştırılacak kollar: {n}.
+Actes ou documents à chercher pour {name} : {n}. Les 3 premiers ci-dessous ; la liste complète, avec où chercher et dans quelle série, est dans « Que manque-t-il ? ». ¦ {name} için aranacak kayıt veya belgeler: {n}. İlk 3’ü aşağıda; nerede ve hangi seride aranacağıyla birlikte tam liste “Ne eksik?” bölümünde.
+Rien de connu à chercher pour {name}. ¦ {name} için aranacak bilinen bir şey yok.
+actes à chercher ¦ aranacak kayıtlar
+où chercher ¦ nerede aranmalı
+« Où chercher ? » donne pour {name} les sites et les séries d’archives les plus utiles, et pourquoi. ¦ “Nerede aranmalı?” {name} için en yararlı siteleri ve arşiv serilerini, nedenleriyle gösterir.
+« Où chercher ? » donne pour chaque personne les sites et les séries d’archives les plus utiles, et pourquoi. ¦ “Nerede aranmalı?” her kişi için en yararlı siteleri ve arşiv serilerini, nedenleriyle gösterir.
+doublons ¦ mükerrerler
+Le Contrôle de la base cherche les doublons probables (mêmes noms, mêmes dates, mêmes parents) et aide à les fusionner. ¦ Veritabanı denetimi olası mükerrerleri (aynı adlar, tarihler, ebeveynler) arar ve birleştirmene yardım eder.
+mort pendant la guerre, en âge de combattre ¦ savaş sırasında öldü, savaşma yaşında
+mort pendant la guerre ¦ savaş sırasında öldü
+morts pendant {era} ¦ ölenler: {era}
+morts à la guerre ¦ savaşta ölenler
+Morts pendant {era} : {n}. ¦ Ölenler ({era}): {n}.
+Notés « Mort pour la France » : {n}. Morts pendant une guerre, en âge de combattre ou soldats (à vérifier) : {m}. ¦ “Mort pour la France” işaretli: {n}. Savaş sırasında ölen, savaşma yaşında ya da asker olanlar (doğrulanacak): {m}.
+Dont « Mort pour la France » : {n}. ¦ Bunlardan “Mort pour la France”: {n}.
+Pour les soldats : Mémoire des hommes et les registres matricules. ¦ Askerler için: Mémoire des hommes ve askerlik kayıtları.
+sans date de décès ¦ ölüm tarihi olmayan
+sans date de naissance ¦ doğum tarihi olmayan
+sans date de mariage ¦ evlilik tarihi olmayan
+sans parents connus ¦ bilinen ebeveyni olmayan
+sans profession notée ¦ mesleği kayıtlı olmayan
+qui ne sont pas des ancêtres ¦ ata olmayanlar
+pas {ev} à {place} ¦ {place} yerinde “{ev}” değil
+vivants ou probablement vivants ¦ yaşayan ya da muhtemelen yaşayan
+pas à {place} ¦ {place} dışında
+recherche de nom : « {x} » ¦ ad araması: “{x}”
+orthographe proche ¦ benzer yazım
+femmes ¦ kadınlar
+Réponse réunie : {a} {c} {b}. ¦ Birleştirilmiş yanıt: {a} {c} {b}.
+Je n’ai pas tenu compte de : « {x} ». ¦ Dikkate almadım: “{x}”.
+Plusieurs “{w}” : choisir… ¦ Birden çok “{w}”: seç…
+J’ai compris : {x} ¦ Anladım: {x}
+Question en français ¦ Fransızca soru
+Poser la question : « {q} » ¦ Soruyu sor: “{q}”
+Questions dans la recherche rapide (⌘K) ¦ Hızlı aramada sorular (⌘K)
+Répondre aux questions dans la recherche rapide ¦ Hızlı aramada soruları yanıtla
+« les enfants de Pierre Mazaud » : la réponse courte s’affiche dans la liste ; sinon seulement « Poser la question » ¦ “les enfants de Pierre Mazaud”: kısa yanıt listede görünür; yoksa yalnızca “Soruyu sor”

@@ -4303,7 +4303,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         document.body.append(dialog);
         const input=$('input',dialog),list=$('ul',dialog);let items=[],active=0,seq=0,note='';
         const close=()=>dialog.remove();
-        const paint=()=>{list.innerHTML=(items.length&&note?`<li class="quick-search-note" aria-hidden="true">${note}</li>`:'')+(items.length?items.map((item,index)=>`<li role="option" class="${index===active?'is-active':''}" data-qs-index="${index}"><span>${escapeHtml(item.label)}</span><small>${escapeHtml(item.hint)}</small></li>`).join(''):`<li class="quick-search-empty">${input.value.trim()?'Aucun résultat':'Tape quelques lettres'}</li>`);list.querySelector('.is-active')?.scrollIntoView({block:'nearest'});};
+        const paint=()=>{list.innerHTML=(items.length&&note?`<li class="quick-search-note" aria-hidden="true">${note}</li>`:'')+(items.length?items.map((item,index)=>`<li role="option" class="${index===active?'is-active':''}${item.question?' is-question':''}" data-qs-index="${index}"><span>${escapeHtml(item.label)}</span><small>${escapeHtml(item.hint)}</small></li>`).join(''):`<li class="quick-search-empty">${input.value.trim()?'Aucun résultat':'Tape quelques lettres'}</li>`);list.querySelector('.is-active')?.scrollIntoView({block:'nearest'});};
         // Maj+Entrée (ou Maj+clic) : ouvrir à côté. On rejoue l'action dans un état copié pour savoir quel écran ouvrir.
         const choose=(index,aside=false)=>{const item=items[index];if(!item)return;close();
             if(!aside){item.go();return;}
@@ -4322,11 +4322,18 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             if(q.length<2)return;
             // 🔌 fournisseurs de résultats en tête de liste (window.LCNDA_EXT.quickSearchProviders : fn(q) → [{label, hint, go}] ou promesse) :
             // le point d'accroche de la question en phrase (« les enfants de Pierre MAZAUD ») ; une erreur d'un fournisseur ne bloque rien
+            // un tableau rendu tout de suite s'affiche tout de suite ; un élément peut porter « live » (promesse → {label, hint, go} ou null) : la ligne
+            // se met à jour quand elle arrive ; « question: true » : la ligne passe en 2e si la recherche de noms trouve aussi des personnes (heritage-questions-plus.js)
             const providers=(window.LCNDA_EXT?.quickSearchProviders||[]).filter(f=>typeof f==='function');
-            const [fromAll,dataRes]=await Promise.all([Promise.all(providers.map(f=>Promise.resolve().then(()=>f(q)).catch(()=>[]))),api('quick_search',{q}).then(d=>({d}),()=>null)]);
+            const norm=list=>list.flat().filter(it=>it&&typeof it.go==='function').map(it=>({label:String(it.label||''),hint:String(it.hint||''),go:it.go,question:!!it.question,live:it.live}));
+            const sync=[];
+            const pending=providers.map(f=>{try{const r=f(q);if(Array.isArray(r)){sync.push(...r);return r;}return Promise.resolve(r).catch(()=>[]);}catch(_){return [];}});
+            const liveWatch=list=>list.forEach(it=>{if(!it.live||typeof it.live.then!=='function')return;it.live.then(upd=>{if(id!==seq||!document.body.contains(dialog)||!items.includes(it)||!upd)return;it.label=String(upd.label||it.label);if(upd.hint!=null)it.hint=String(upd.hint);if(typeof upd.go==='function')it.go=upd.go;paint();},()=>{});});
+            if(sync.length){const now=norm(sync);items=[...now,...screens,...oldWords];paint();liveWatch(now);}
+            const [fromAll,dataRes]=await Promise.all([Promise.all(pending),api('quick_search',{q}).then(d=>({d}),()=>null)]);
             if(!dataRes)return;
             const data=dataRes.d||{};
-            const fromProviders=fromAll.flat().filter(it=>it&&typeof it.go==='function').map(it=>({label:String(it.label||''),hint:String(it.hint||''),go:it.go}));
+            const fromProviders=norm(fromAll);
             if(id!==seq||!document.body.contains(dialog))return;
             const rfrHint=(base,why)=>{const w=window.LCNDA_RFR?.whyText?.(why)||'';return w?`${base} · ${i18n('Trouvé par : {x}',{x:w})}`:base;}; // 🔎 app-recherche-fr.js (le texte est échappé par paint)
             const people=(data.persons||[]).map(person=>({label:`${personName(person)}${/\d/.test(years(person)||'')?` (${years(person)})`:''}`,hint:rfrHint(i18n('Personne'),person.why),go:()=>{state.currentPersonId=Number(person.id);setModule('personnes');}}));
@@ -4335,7 +4342,8 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             const places=(data.places||[]).map(row=>({label:[row.name,row.county,row.country].filter(Boolean).join(', '),hint:rfrHint(`${i18n('Lieu')} · ${plural(Number(row.uses),'événement')}`,row.why),go:()=>{state.graphPlaceMonograph={...state.graphPlaceMonograph,id:Number(row.id),name:row.name||'',county:row.county||'',country:row.country||''};state.graphMode='place_monograph';setModule('graphiques');}}));
             const graphs=(data.graphs||[]).map(row=>({label:`${row.icon||'📈'} ${row.name||'Mon graphique'}`,hint:['Graphique',row.draw_label,row.data_label].filter(Boolean).join(' · '),go:()=>window.LCNDA_EXT?.openMyGraph?.(String(row.uid||''))}));
             note=data.fallback?(window.LCNDA_RFR?.fallbackHtml?.(data.fallback)||''):'';
-            items=[...fromProviders,...people,...battues,...investigations,...places,...graphs,...screens,...oldWords];active=0;paint();
+            const asks=fromProviders.filter(it=>it.question),others=fromProviders.filter(it=>!it.question);
+            items=people.length?[...others,people[0],...asks,...people.slice(1),...battues,...investigations,...places,...graphs,...screens,...oldWords]:[...fromProviders,...people,...battues,...investigations,...places,...graphs,...screens,...oldWords];active=0;paint();liveWatch(fromProviders);
         };
         let timer=0;
         input.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(search,150);});

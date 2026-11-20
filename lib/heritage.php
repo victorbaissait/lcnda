@@ -1214,13 +1214,20 @@ function saved_search_criteria(array $c): array
         'same_birthday' => safe_int($c['same_birthday'] ?? 0) ?: null,
         'relation' => array_key_exists((string) ($c['relation'] ?? ''), SEARCH_RELATIONS) ? (string) $c['relation'] : '',
         'relation_of' => array_key_exists((string) ($c['relation'] ?? ''), SEARCH_RELATIONS) ? (safe_int($c['relation_of'] ?? 0) ?: null) : null,
-    ] + (function_exists('qf_criteria') ? qf_criteria($c) : []); // mariage et enfants (lib/question_famille.php)
+    ] + (function_exists('qf_criteria') ? qf_criteria($c) : []) // mariage et enfants (lib/question_famille.php)
+      + (function_exists('qp_criteria') ? qp_criteria($c) : []); // négations, absences, probablement vivants (lib/question_plus.php)
 }
 
 /** Liens de parenté qu'une recherche peut viser (« les enfants de… ») : [singulier, pluriel]. */
 const SEARCH_RELATIONS = ['children' => ['enfant', 'enfants'], 'grandchildren' => ['petit-enfant', 'petits-enfants'], 'great_grandchildren' => ['arrière-petit-enfant', 'arrière-petits-enfants'],
     'descendants' => ['descendant', 'descendants'], 'parents' => ['parent', 'parents'], 'grandparents' => ['grand-parent', 'grands-parents'], 'ancestors_of' => ['ancêtre', 'ancêtres'],
-    'siblings' => ['frère ou sœur', 'frères et sœurs'], 'spouses' => ['conjoint', 'conjoints']];
+    'siblings' => ['frère ou sœur', 'frères et sœurs'], 'spouses' => ['conjoint', 'conjoints'],
+    // parenté élargie (« Poser une question », lib/question_plus.php)
+    'great_grandparents' => ['arrière-grand-parent', 'arrière-grands-parents'], 'grandparents_p' => ['grand-parent paternel', 'grands-parents paternels'], 'grandparents_m' => ['grand-parent maternel', 'grands-parents maternels'],
+    'uncles' => ['oncle ou tante', 'oncles et tantes'], 'uncles_p' => ['oncle ou tante paternels', 'oncles et tantes paternels'], 'uncles_m' => ['oncle ou tante maternels', 'oncles et tantes maternels'],
+    'nephews' => ['neveu ou nièce', 'neveux et nièces'], 'parents_in_law' => ['beau-parent', 'beaux-parents'], 'siblings_in_law' => ['beau-frère ou belle-sœur', 'beaux-frères et belles-sœurs'],
+    'children_in_law' => ['gendre ou belle-fille', 'gendres et belles-filles'], 'godparents' => ['parrain ou marraine', 'parrains et marraines'], 'godfathers' => ['parrain', 'parrains'], 'godmothers' => ['marraine', 'marraines'],
+    'godchildren' => ['filleul', 'filleuls']];
 
 /** Les proches d'une personne pour un lien de parenté (sans elle-même). */
 function search_relatives(PDO $pdo, string $relation, int $id): array
@@ -1239,9 +1246,49 @@ function search_relatives(PDO $pdo, string $relation, int $id): array
             $s->execute([$id, $id, $id]);
             return array_map('intval', $s->fetchAll(PDO::FETCH_COLUMN));
         })(),
-        default => [],
+        default => search_relatives_more($pdo, $relation, $id),
     };
     return array_values(array_unique(array_filter(array_map('intval', $ids), static fn($x) => $x > 0 && $x !== $id)));
+}
+
+/** La parenté élargie : arrière-grands-parents, côté paternel / maternel, oncles et tantes, neveux et nièces, alliés, parrains et marraines. */
+function search_relatives_more(PDO $pdo, string $relation, int $id): array
+{
+    $par = static fn(int $x): array => h_parents($pdo, $x);
+    $sp = static fn(int $x): array => search_relatives($pdo, 'spouses', $x);
+    $sib = static fn(int $x): array => array_values(array_diff(h_children($pdo, h_parents($pdo, $x)), [$x]));
+    $many = static fn(callable $f, array $ids): array => $ids ? array_merge(...array_map($f, $ids)) : [];
+    $side = static function (string $g) use ($pdo, $id): array {
+        $ids = h_parents($pdo, $id); if (!$ids) { return []; }
+        $s = $pdo->prepare('SELECT id FROM persons WHERE gender=? AND id IN (' . implode(',', array_map('intval', $ids)) . ')'); $s->execute([$g]);
+        return array_map('intval', $s->fetchAll(PDO::FETCH_COLUMN));
+    };
+    $god = static function (string $sql, string $role = '') use ($pdo, $id): array {
+        try {
+            $s = $pdo->prepare($sql); $s->execute([$id]); $o = [];
+            foreach ($s->fetchAll(PDO::FETCH_NUM) as [$x, $note]) { $low = mb_strtolower((string) $note); $r = str_contains($low, 'marraine') ? 'f' : (str_contains($low, 'parrain') ? 'm' : ''); if ($r !== '' && ($role === '' || $r === $role)) { $o[] = (int) $x; } }
+            return $o;
+        } catch (Throwable $_) { return []; }
+    };
+    $godUp = "SELECT ew.person_id, ew.note FROM event_witnesses ew JOIN events e ON e.id=ew.event_id JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=? AND t.gedcom_tag IN ('BIRT','CHR','BAPM')";
+    $godDown = "SELECT e.person_id, ew.note FROM event_witnesses ew JOIN events e ON e.id=ew.event_id JOIN event_types t ON t.id=e.event_type_id WHERE ew.person_id=? AND e.person_id IS NOT NULL AND t.gedcom_tag IN ('BIRT','CHR','BAPM')";
+    return match ($relation) {
+        'great_grandparents' => $many($par, $many($par, $par($id))),
+        'grandparents_p' => $many($par, $side('male')),
+        'grandparents_m' => $many($par, $side('female')),
+        'uncles' => $many($sib, $par($id)),
+        'uncles_p' => $many($sib, $side('male')),
+        'uncles_m' => $many($sib, $side('female')),
+        'nephews' => h_children($pdo, $sib($id)),
+        // beaux-parents : les parents du conjoint, et le conjoint d'un parent (qui n'est pas lui-même un parent)
+        'parents_in_law' => array_merge($many($par, $sp($id)), array_diff($many($sp, $par($id)), $par($id))),
+        'siblings_in_law' => array_merge($many($sp, $sib($id)), $many($sib, $sp($id))),
+        // gendres et belles-filles : le conjoint d'un enfant, et l'enfant du conjoint (qui n'est pas son propre enfant)
+        'children_in_law' => array_merge($many($sp, h_children($pdo, [$id])), array_diff(h_children($pdo, $sp($id)), h_children($pdo, [$id]))),
+        'godparents' => $god($godUp), 'godfathers' => $god($godUp, 'm'), 'godmothers' => $god($godUp, 'f'),
+        'godchildren' => $god($godDown),
+        default => [],
+    };
 }
 
 /** Identifiants des personnes qui répondent aux critères. */
@@ -1278,6 +1325,7 @@ function run_saved_search(PDO $pdo, array $criteria): array
         array_push($params, ...$sub);
     }
     if (function_exists('qf_where')) { [$fw, $fp] = qf_where($c); array_push($where, ...$fw); array_push($params, ...$fp); } // mariage, âge au mariage, enfants
+    if (function_exists('qp_where')) { [$pw, $pp] = qp_where($pdo, $c); array_push($where, ...$pw); array_push($params, ...$pp); } // sans date, sans parents, sans source, pas à…, vivants
     $relatives = null;
     if ($c['relation'] !== '' && $c['relation_of']) {
         $relatives = search_relatives($pdo, $c['relation'], (int) $c['relation_of']);
@@ -1318,6 +1366,7 @@ function saved_search_label(array $c): string
     if ($c['occupation'] !== '') { $parts[] = 'métier ' . $c['occupation']; }
     if ($c['ancestors']) { $parts[] = 'ancêtres seulement'; }
     if (function_exists('qf_labels')) { array_push($parts, ...qf_labels($c, $c['gender'])); }
+    if (function_exists('qp_labels')) { array_push($parts, ...qp_labels($c)); }
     if ($c['same_birthday']) { $parts[] = 'né le même jour que la fiche #' . $c['same_birthday']; }
     if ($c['relation'] !== '' && $c['relation_of']) {
         $n = '';

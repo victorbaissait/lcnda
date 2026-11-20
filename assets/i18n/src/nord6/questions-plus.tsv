@@ -1,0 +1,68 @@
+fr ¦ lt ¦ lv ¦ et
+# 🔎 Poser une question, suite (lib/question_plus.php, assets/js/heritage-questions-plus.js) : fautes, dates, « moi », négations, OU, renvois, ⌘K
+« {a} » lu « {b} » ¦ „{a}“ perskaityta kaip „{b}“ ¦ „{a}“ nolasīts kā „{b}“ ¦ „{a}“ loetud kui „{b}“
+vers {y} ({a}-{b}) ¦ apie {y} m. ({a}-{b}) ¦ ap. {y}. g. ({a}-{b}) ¦ umbes {y} ({a}-{b})
+dans les années {y} ({a}-{b}) ¦ {y}-aisiais ({a}-{b}) ¦ {y}. gados ({a}-{b}) ¦ {y}. aastatel ({a}-{b})
+« moi » = la personne de départ : {name} ¦ „aš“ = pradinis asmuo: {name} ¦ „es“ = sākuma persona: {name} ¦ „mina“ = lähteisik: {name}
+qui est : {name} ¦ kas yra: {name} ¦ kas ir: {name} ¦ kes on: {name}
+« {a} » compris comme {b} ¦ „{a}“ suprasta kaip {b} ¦ „{a}“ saprasts kā {b} ¦ „{a}“ mõistetud kui {b}
+dossiers de succession ¦ paveldėjimo bylos ¦ mantojuma lietas ¦ pärimistoimikud
+Aucun dossier de succession dans cette généalogie. ¦ Šioje genealogijoje nėra paveldėjimo bylų. ¦ Šajā ģenealoģijā nav mantojuma lietu. ¦ Selles sugupuus pole pärimistoimikuid.
+courriers sans réponse ¦ neatsakyti laiškai ¦ vēstules bez atbildes ¦ vastuseta kirjad
+Courriers aux héritiers sans réponse : {n}. ¦ Neatsakyti laiškai įpėdiniams: {n}. ¦ Vēstules mantiniekiem bez atbildes: {n}. ¦ Vastuseta kirjad pärijatele: {n}.
+Aucun courrier de dossier n’attend de réponse. ¦ Joks bylos laiškas nelaukia atsakymo. ¦ Neviena lietas vēstule negaida atbildi. ¦ Ükski toimiku kiri ei oota vastust.
+échéances en retard ¦ praleisti terminai ¦ nokavēti termiņi ¦ tähtaja ületanud
+Dossiers avec des échéances en retard : {n}. ¦ Bylos su praleistais terminais: {n}. ¦ Lietas ar nokavētiem termiņiem: {n}. ¦ Tähtaja ületanud toimikud: {n}.
+Aucun dossier n’a d’échéance en retard. ¦ Jokia byla neturi praleisto termino. ¦ Nevienai lietai nav nokavēta termiņa. ¦ Ühelgi toimikul pole ületatud tähtaega.
+défunt : {name} ¦ mirusysis: {name} ¦ mirušais: {name} ¦ lahkunu: {name}
+Aucun dossier de succession pour {name}. ¦ Nėra paveldėjimo bylos: {name}. ¦ Nav mantojuma lietas: {name}. ¦ Pärimistoimikut pole: {name}.
+⚖️ Rechercher les héritiers… ¦ ⚖️ Ieškoti įpėdinių… ¦ ⚖️ Meklēt mantiniekus… ¦ ⚖️ Otsi pärijaid…
+Pièces notées « manquante » : {n}. La liste complète (en main, demandées, à demander) est dans l’onglet Pièces du dossier. ¦ Dokumentai, pažymėti „trūksta“: {n}. Visas sąrašas (turimi, užsakyti, reikia užsakyti) yra bylos skirtuke Dokumentai. ¦ Dokumenti, atzīmēti „trūkst“: {n}. Pilns saraksts (rokā, pieprasīti, jāpieprasa) ir lietas cilnē Dokumenti. ¦ „Puudub“ märgitud dokumendid: {n}. Täielik loend (olemas, tellitud, tellida) on toimiku vahekaardil Dokumendid.
+Aucune pièce notée « manquante ». La liste des pièces de chaque dossier est dans son onglet Pièces. ¦ Nė vienas dokumentas nepažymėtas „trūksta“. Kiekvienos bylos sąrašas yra jos skirtuke Dokumentai. ¦ Neviens dokuments nav atzīmēts „trūkst“. Katras lietas saraksts ir tās cilnē Dokumenti. ¦ Ühtegi dokumenti pole märgitud „puudub“. Iga toimiku loend on selle vahekaardil Dokumendid.
+pièces manquantes ¦ trūkstami dokumentai ¦ trūkstošie dokumenti ¦ puuduvad dokumendid
+Héritiers introuvables ou qui ne répondent pas : {n}. ¦ Nerandami arba neatsakantys įpėdiniai: {n}. ¦ Neatrodami vai neatbildoši mantinieki: {n}. ¦ Leidmata või mittevastavad pärijad: {n}.
+Aucun héritier noté introuvable ou sans réponse. ¦ Nė vienas įpėdinis nepažymėtas kaip nerastas ar neatsakantis. ¦ Neviens mantinieks nav atzīmēts kā neatrasts vai bez atbildes. ¦ Ühtegi pärijat pole märgitud leidmata või vastuseta.
+héritiers introuvables ¦ nerasti įpėdiniai ¦ neatrasti mantinieki ¦ leidmata pärijad
+De qui ? Écris par exemple « les héritiers de Jean Dupont ». ¦ Kieno? Parašyk, pavyzdžiui, „les héritiers de Jean Dupont“. ¦ Kura? Raksti, piemēram, „les héritiers de Jean Dupont“. ¦ Kelle omad? Kirjuta näiteks „les héritiers de Jean Dupont“.
+héritiers de {name} ¦ įpėdiniai: {name} ¦ mantinieki: {name} ¦ pärijad: {name}
+Aucun dossier de succession pour {name}. Le dossier calcule les héritiers d’après l’arbre. ¦ Nėra paveldėjimo bylos: {name}. Byla apskaičiuoja įpėdinius pagal medį. ¦ Nav mantojuma lietas: {name}. Lieta aprēķina mantiniekus pēc koka. ¦ Pärimistoimikut pole: {name}. Toimik arvutab pärijad sugupuu põhjal.
+Dossier {d} : les héritiers n’ont pas encore été calculés. Ouvre le dossier pour faire le calcul. ¦ Byla {d}: įpėdiniai dar neapskaičiuoti. Atidaryk bylą ir apskaičiuok. ¦ Lieta {d}: mantinieki vēl nav aprēķināti. Atver lietu, lai aprēķinātu. ¦ Toimik {d}: pärijaid pole veel arvutatud. Ava toimik arvutamiseks.
+Dossier {d} — héritiers d’après le dernier calcul enregistré : {n}. ¦ Byla {d} — įpėdiniai pagal paskutinį išsaugotą skaičiavimą: {n}. ¦ Lieta {d} — mantinieki pēc pēdējā saglabātā aprēķina: {n}. ¦ Toimik {d} — pärijad viimase salvestatud arvutuse järgi: {n}.
+Branches encore à rechercher : {n}. ¦ Dar tirtinos šakos: {n}. ¦ Vēl pētāmie zari: {n}. ¦ Veel uurimist vajavad harud: {n}.
+Actes ou documents à chercher pour {name} : {n}. Les 3 premiers ci-dessous ; la liste complète, avec où chercher et dans quelle série, est dans « Que manque-t-il ? ». ¦ Ieškotini įrašai ar dokumentai ({name}): {n}. Pirmieji 3 žemiau; visas sąrašas, kur ir kurioje serijoje ieškoti, yra „Ko trūksta?“. ¦ Meklējamie akti vai dokumenti ({name}): {n}. Pirmie 3 zemāk; pilns saraksts ar to, kur un kurā sērijā meklēt, ir sadaļā „Kas trūkst?“. ¦ Otsitavad aktid või dokumendid ({name}): {n}. Esimesed 3 allpool; täielik loend, kus ja millises sarjas otsida, on jaotises „Mis puudub?“.
+Rien de connu à chercher pour {name}. ¦ Nėra ko ieškoti ({name}). ¦ Nav nekā zināma, ko meklēt ({name}). ¦ Pole midagi teadaolevat otsida ({name}).
+actes à chercher ¦ ieškotini įrašai ¦ meklējamie akti ¦ otsitavad aktid
+où chercher ¦ kur ieškoti ¦ kur meklēt ¦ kust otsida
+« Où chercher ? » donne pour {name} les sites et les séries d’archives les plus utiles, et pourquoi. ¦ „Kur ieškoti?“ parodo ({name}) naudingiausias svetaines ir archyvų serijas bei kodėl. ¦ „Kur meklēt?“ parāda ({name}) noderīgākās vietnes un arhīva sērijas un kāpēc. ¦ „Kust otsida?“ näitab ({name}) kõige kasulikumaid veebilehti ja arhiivisarju ning põhjust.
+« Où chercher ? » donne pour chaque personne les sites et les séries d’archives les plus utiles, et pourquoi. ¦ „Kur ieškoti?“ kiekvienam asmeniui parodo naudingiausias svetaines ir archyvų serijas bei kodėl. ¦ „Kur meklēt?“ katrai personai parāda noderīgākās vietnes un arhīva sērijas un kāpēc. ¦ „Kust otsida?“ näitab iga isiku jaoks kõige kasulikumaid veebilehti ja arhiivisarju ning põhjust.
+doublons ¦ dublikatai ¦ dublikāti ¦ duplikaadid
+Le Contrôle de la base cherche les doublons probables (mêmes noms, mêmes dates, mêmes parents) et aide à les fusionner. ¦ Duomenų bazės tikrinimas ieško tikėtinų dublikatų (tie patys vardai, datos, tėvai) ir padeda juos sujungti. ¦ Datubāzes pārbaude meklē iespējamos dublikātus (tie paši vārdi, datumi, vecāki) un palīdz tos apvienot. ¦ Andmebaasi kontroll otsib tõenäolisi duplikaate (samad nimed, kuupäevad, vanemad) ja aitab neid ühendada.
+mort pendant la guerre, en âge de combattre ¦ mirė per karą, karinio amžiaus ¦ miris kara laikā, kaujas vecumā ¦ suri sõja ajal, sõjaväeealisena
+mort pendant la guerre ¦ mirė per karą ¦ miris kara laikā ¦ suri sõja ajal
+morts pendant {era} ¦ mirę per: {era} ¦ miruši: {era} ¦ surnud: {era}
+morts à la guerre ¦ žuvę kare ¦ kritušie karā ¦ sõjas langenud
+Morts pendant {era} : {n}. ¦ Mirę ({era}): {n}. ¦ Miruši ({era}): {n}. ¦ Surnud ({era}): {n}.
+Notés « Mort pour la France » : {n}. Morts pendant une guerre, en âge de combattre ou soldats (à vérifier) : {m}. ¦ Pažymėti „Mort pour la France“: {n}. Mirę per karą, karinio amžiaus ar kariai (patikrinti): {m}. ¦ Atzīmēti „Mort pour la France“: {n}. Miruši kara laikā, kaujas vecumā vai karavīri (jāpārbauda): {m}. ¦ Märgitud „Mort pour la France“: {n}. Surnud sõja ajal, sõjaväeealised või sõdurid (kontrollida): {m}.
+Dont « Mort pour la France » : {n}. ¦ Iš jų „Mort pour la France“: {n}. ¦ No tiem „Mort pour la France“: {n}. ¦ Neist „Mort pour la France“: {n}.
+Pour les soldats : Mémoire des hommes et les registres matricules. ¦ Kariams: Mémoire des hommes ir karo prievolės registrai. ¦ Karavīriem: Mémoire des hommes un dienesta reģistri. ¦ Sõduritele: Mémoire des hommes ja teenistusregistrid.
+sans date de décès ¦ be mirties datos ¦ bez miršanas datuma ¦ surmakuupäevata
+sans date de naissance ¦ be gimimo datos ¦ bez dzimšanas datuma ¦ sünnikuupäevata
+sans date de mariage ¦ be santuokos datos ¦ bez laulības datuma ¦ abiellumiskuupäevata
+sans parents connus ¦ be žinomų tėvų ¦ bez zināmiem vecākiem ¦ teadaolevate vanemateta
+sans profession notée ¦ be nurodytos profesijos ¦ bez norādītas profesijas ¦ märgitud ametita
+qui ne sont pas des ancêtres ¦ kurie nėra protėviai ¦ kuri nav senči ¦ kes ei ole esivanemad
+pas {ev} à {place} ¦ ne „{ev}“ vietoje {place} ¦ ne „{ev}“ vietā {place} ¦ mitte „{ev}“ kohas {place}
+vivants ou probablement vivants ¦ gyvi arba tikriausiai gyvi ¦ dzīvi vai, iespējams, dzīvi ¦ elus või tõenäoliselt elus
+pas à {place} ¦ ne vietoje {place} ¦ ne vietā {place} ¦ mitte kohas {place}
+recherche de nom : « {x} » ¦ vardo paieška: „{x}“ ¦ vārda meklēšana: „{x}“ ¦ nime otsing: „{x}“
+orthographe proche ¦ panaši rašyba ¦ līdzīga rakstība ¦ sarnane kirjapilt
+femmes ¦ moterys ¦ sievietes ¦ naised
+Réponse réunie : {a} {c} {b}. ¦ Sujungtas atsakymas: {a} {c} {b}. ¦ Apvienota atbilde: {a} {c} {b}. ¦ Ühendatud vastus: {a} {c} {b}.
+Je n’ai pas tenu compte de : « {x} ». ¦ Neatsižvelgiau į: „{x}“. ¦ Neņēmu vērā: „{x}“. ¦ Ma ei arvestanud: „{x}“.
+Plusieurs “{w}” : choisir… ¦ Keli „{w}“: pasirink… ¦ Vairāki „{w}“: izvēlies… ¦ Mitu „{w}“: vali…
+J’ai compris : {x} ¦ Supratau: {x} ¦ Sapratu: {x} ¦ Sain aru: {x}
+Question en français ¦ Klausimas prancūziškai ¦ Jautājums franciski ¦ Küsimus prantsuse keeles
+Poser la question : « {q} » ¦ Užduoti klausimą: „{q}“ ¦ Uzdot jautājumu: „{q}“ ¦ Esita küsimus: „{q}“
+Questions dans la recherche rapide (⌘K) ¦ Klausimai greitojoje paieškoje (⌘K) ¦ Jautājumi ātrajā meklēšanā (⌘K) ¦ Küsimused kiirotsingus (⌘K)
+Répondre aux questions dans la recherche rapide ¦ Atsakyti į klausimus greitojoje paieškoje ¦ Atbildēt uz jautājumiem ātrajā meklēšanā ¦ Vasta küsimustele kiirotsingus
+« les enfants de Pierre Mazaud » : la réponse courte s’affiche dans la liste ; sinon seulement « Poser la question » ¦ „les enfants de Pierre Mazaud“: trumpas atsakymas rodomas sąraše; kitaip tik „Užduoti klausimą“ ¦ „les enfants de Pierre Mazaud“: īsā atbilde parādās sarakstā; citādi tikai „Uzdot jautājumu“ ¦ „les enfants de Pierre Mazaud“: lühike vastus näidatakse loendis; muidu ainult „Esita küsimus“

@@ -1,0 +1,68 @@
+fr ¦ lb
+# 🔎 Poser une question, suite (lib/question_plus.php, assets/js/heritage-questions-plus.js) : fautes, dates, « moi », négations, OU, renvois, ⌘K
+« {a} » lu « {b} » ¦ „{a}“ gelies als „{b}“
+vers {y} ({a}-{b}) ¦ ëm {y} ({a}-{b})
+dans les années {y} ({a}-{b}) ¦ an den {y}er Joren ({a}-{b})
+« moi » = la personne de départ : {name} ¦ „ech“ = d’Startpersoun: {name}
+qui est : {name} ¦ wien ass: {name}
+« {a} » compris comme {b} ¦ „{a}“ verstane als {b}
+dossiers de succession ¦ Ierfschaftsdossieren
+Aucun dossier de succession dans cette généalogie. ¦ Keen Ierfschaftsdossier an dëser Genealogie.
+courriers sans réponse ¦ Bréiwer ouni Äntwert
+Courriers aux héritiers sans réponse : {n}. ¦ Bréiwer un d’Ierwen ouni Äntwert: {n}.
+Aucun courrier de dossier n’attend de réponse. ¦ Keen Dossiersbréif waart op eng Äntwert.
+échéances en retard ¦ iwwerschratten Delaien
+Dossiers avec des échéances en retard : {n}. ¦ Dossieren mat iwwerschrattenen Delaien: {n}.
+Aucun dossier n’a d’échéance en retard. ¦ Keen Dossier huet eng iwwerschratte Delai.
+défunt : {name} ¦ Verstuerwenen: {name}
+Aucun dossier de succession pour {name}. ¦ Keen Ierfschaftsdossier fir {name}.
+⚖️ Rechercher les héritiers… ¦ ⚖️ Ierwe sichen…
+Pièces notées « manquante » : {n}. La liste complète (en main, demandées, à demander) est dans l’onglet Pièces du dossier. ¦ Dokumenter markéiert als „feelt“: {n}. Déi ganz Lëscht (an der Hand, gefrot, ze froen) ass am Tab Dokumenter vum Dossier.
+Aucune pièce notée « manquante ». La liste des pièces de chaque dossier est dans son onglet Pièces. ¦ Keen Dokument ass als „feelt“ markéiert. D’Lëscht vun all Dossier ass a sengem Tab Dokumenter.
+pièces manquantes ¦ feelend Dokumenter
+Héritiers introuvables ou qui ne répondent pas : {n}. ¦ Ierwen, déi net ze fannen sinn oder net äntweren: {n}.
+Aucun héritier noté introuvable ou sans réponse. ¦ Keen Ierwe ass als net fonnt oder ouni Äntwert markéiert.
+héritiers introuvables ¦ net fonnt Ierwen
+De qui ? Écris par exemple « les héritiers de Jean Dupont ». ¦ Vu wiem? Schreif zum Beispill „les héritiers de Jean Dupont“.
+héritiers de {name} ¦ Ierwe vu(n) {name}
+Aucun dossier de succession pour {name}. Le dossier calcule les héritiers d’après l’arbre. ¦ Keen Ierfschaftsdossier fir {name}. Den Dossier rechent d’Ierwen aus dem Bam.
+Dossier {d} : les héritiers n’ont pas encore été calculés. Ouvre le dossier pour faire le calcul. ¦ Dossier {d}: d’Ierwe sinn nach net gerechent. Maach den Dossier op fir ze rechnen.
+Dossier {d} — héritiers d’après le dernier calcul enregistré : {n}. ¦ Dossier {d} — Ierwen no der leschter gespäicherter Berechnung: {n}.
+Branches encore à rechercher : {n}. ¦ Äscht, déi nach ze sichen sinn: {n}.
+Actes ou documents à chercher pour {name} : {n}. Les 3 premiers ci-dessous ; la liste complète, avec où chercher et dans quelle série, est dans « Que manque-t-il ? ». ¦ Akten oder Dokumenter ze sichen fir {name}: {n}. Déi éischt 3 hei drënner; déi ganz Lëscht, mat wou an a wéi enger Serie ze sichen, ass an „Wat feelt?“.
+Rien de connu à chercher pour {name}. ¦ Näischt Bekanntes ze sichen fir {name}.
+actes à chercher ¦ Akten ze sichen
+où chercher ¦ wou sichen
+« Où chercher ? » donne pour {name} les sites et les séries d’archives les plus utiles, et pourquoi. ¦ „Wou sichen?“ weist fir {name} déi nëtzlechst Websäiten an Archivserien, a firwat.
+« Où chercher ? » donne pour chaque personne les sites et les séries d’archives les plus utiles, et pourquoi. ¦ „Wou sichen?“ weist fir all Persoun déi nëtzlechst Websäiten an Archivserien, a firwat.
+doublons ¦ Duplikater
+Le Contrôle de la base cherche les doublons probables (mêmes noms, mêmes dates, mêmes parents) et aide à les fusionner. ¦ D’Kontroll vun der Datebank sicht wahrscheinlech Duplikater (selwecht Nimm, Datumen, Elteren) an hëlleft se ze fusionéieren.
+mort pendant la guerre, en âge de combattre ¦ am Krich gestuerwen, am Alter fir ze kämpfen
+mort pendant la guerre ¦ am Krich gestuerwen
+morts pendant {era} ¦ gestuerwe während {era}
+morts à la guerre ¦ am Krich gefall
+Morts pendant {era} : {n}. ¦ Gestuerwe während {era}: {n}.
+Notés « Mort pour la France » : {n}. Morts pendant une guerre, en âge de combattre ou soldats (à vérifier) : {m}. ¦ Markéiert als „Mort pour la France“: {n}. Am Krich gestuerwen, am Alter fir ze kämpfen oder Zaldoten (ze kontrolléieren): {m}.
+Dont « Mort pour la France » : {n}. ¦ Dovun „Mort pour la France“: {n}.
+Pour les soldats : Mémoire des hommes et les registres matricules. ¦ Fir Zaldoten: Mémoire des hommes an d’Matrikelregisteren.
+sans date de décès ¦ ouni Stierfdatum
+sans date de naissance ¦ ouni Gebuertsdatum
+sans date de mariage ¦ ouni Hochzäitsdatum
+sans parents connus ¦ ouni bekannt Elteren
+sans profession notée ¦ ouni notéierte Beruff
+qui ne sont pas des ancêtres ¦ déi keng Virfahre sinn
+pas {ev} à {place} ¦ net „{ev}“ zu {place}
+vivants ou probablement vivants ¦ lieweg oder wahrscheinlech lieweg
+pas à {place} ¦ net zu {place}
+recherche de nom : « {x} » ¦ Nummsich: „{x}“
+orthographe proche ¦ ähnlech Schreifweis
+femmes ¦ Fraen
+Réponse réunie : {a} {c} {b}. ¦ Zesummegeluecht Äntwert: {a} {c} {b}.
+Je n’ai pas tenu compte de : « {x} ». ¦ Ech hunn net berécksiichtegt: „{x}“.
+Plusieurs “{w}” : choisir… ¦ Méi „{w}“: wielen…
+J’ai compris : {x} ¦ Verstanen: {x}
+Question en français ¦ Fro op Franséisch
+Poser la question : « {q} » ¦ D’Fro stellen: „{q}“
+Questions dans la recherche rapide (⌘K) ¦ Froen an der séierer Sich (⌘K)
+Répondre aux questions dans la recherche rapide ¦ Froen an der séierer Sich beäntweren
+« les enfants de Pierre Mazaud » : la réponse courte s’affiche dans la liste ; sinon seulement « Poser la question » ¦ „les enfants de Pierre Mazaud“: déi kuerz Äntwert steet an der Lëscht; soss nëmmen „D’Fro stellen“

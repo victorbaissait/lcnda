@@ -1,0 +1,68 @@
+fr ¦ vi ¦ id
+# 🔎 Poser une question, suite (lib/question_plus.php, assets/js/heritage-questions-plus.js) : fautes, dates, « moi », négations, OU, renvois, ⌘K
+« {a} » lu « {b} » ¦ “{a}” được đọc là “{b}” ¦ “{a}” dibaca sebagai “{b}”
+vers {y} ({a}-{b}) ¦ khoảng năm {y} ({a}-{b}) ¦ sekitar {y} ({a}-{b})
+dans les années {y} ({a}-{b}) ¦ trong thập niên {y} ({a}-{b}) ¦ pada tahun {y}-an ({a}-{b})
+« moi » = la personne de départ : {name} ¦ “tôi” = người gốc: {name} ¦ “saya” = orang awal: {name}
+qui est : {name} ¦ là ai: {name} ¦ siapa: {name}
+« {a} » compris comme {b} ¦ “{a}” được hiểu là {b} ¦ “{a}” dipahami sebagai {b}
+dossiers de succession ¦ hồ sơ thừa kế ¦ berkas warisan
+Aucun dossier de succession dans cette généalogie. ¦ Không có hồ sơ thừa kế nào trong cây gia phả này. ¦ Tidak ada berkas warisan di silsilah ini.
+courriers sans réponse ¦ thư chưa được trả lời ¦ surat tanpa balasan
+Courriers aux héritiers sans réponse : {n}. ¦ Thư gửi người thừa kế chưa có trả lời: {n}. ¦ Surat ke ahli waris tanpa balasan: {n}.
+Aucun courrier de dossier n’attend de réponse. ¦ Không có thư hồ sơ nào đang chờ trả lời. ¦ Tidak ada surat berkas yang menunggu balasan.
+échéances en retard ¦ hạn đã trễ ¦ tenggat terlambat
+Dossiers avec des échéances en retard : {n}. ¦ Hồ sơ có hạn đã trễ: {n}. ¦ Berkas dengan tenggat terlambat: {n}.
+Aucun dossier n’a d’échéance en retard. ¦ Không hồ sơ nào trễ hạn. ¦ Tidak ada berkas yang terlambat.
+défunt : {name} ¦ người mất: {name} ¦ almarhum: {name}
+Aucun dossier de succession pour {name}. ¦ Không có hồ sơ thừa kế cho {name}. ¦ Tidak ada berkas warisan untuk {name}.
+⚖️ Rechercher les héritiers… ¦ ⚖️ Tìm người thừa kế… ¦ ⚖️ Cari ahli waris…
+Pièces notées « manquante » : {n}. La liste complète (en main, demandées, à demander) est dans l’onglet Pièces du dossier. ¦ Giấy tờ đánh dấu “thiếu”: {n}. Danh sách đầy đủ (đã có, đã yêu cầu, cần yêu cầu) nằm ở thẻ Giấy tờ của hồ sơ. ¦ Dokumen bertanda “kurang”: {n}. Daftar lengkap (sudah ada, sudah diminta, perlu diminta) ada di tab Dokumen pada berkas.
+Aucune pièce notée « manquante ». La liste des pièces de chaque dossier est dans son onglet Pièces. ¦ Không có giấy tờ nào đánh dấu “thiếu”. Danh sách của từng hồ sơ nằm ở thẻ Giấy tờ. ¦ Tidak ada dokumen bertanda “kurang”. Daftar tiap berkas ada di tab Dokumen-nya.
+pièces manquantes ¦ giấy tờ còn thiếu ¦ dokumen yang kurang
+Héritiers introuvables ou qui ne répondent pas : {n}. ¦ Người thừa kế không tìm thấy hoặc không trả lời: {n}. ¦ Ahli waris yang tidak ditemukan atau tidak membalas: {n}.
+Aucun héritier noté introuvable ou sans réponse. ¦ Không có người thừa kế nào được ghi là không tìm thấy hay chưa trả lời. ¦ Tidak ada ahli waris yang ditandai tidak ditemukan atau tanpa balasan.
+héritiers introuvables ¦ người thừa kế không tìm thấy ¦ ahli waris tak ditemukan
+De qui ? Écris par exemple « les héritiers de Jean Dupont ». ¦ Của ai? Ví dụ hãy viết “les héritiers de Jean Dupont”. ¦ Milik siapa? Tulis misalnya “les héritiers de Jean Dupont”.
+héritiers de {name} ¦ người thừa kế của {name} ¦ ahli waris {name}
+Aucun dossier de succession pour {name}. Le dossier calcule les héritiers d’après l’arbre. ¦ Không có hồ sơ thừa kế cho {name}. Hồ sơ tính người thừa kế theo cây gia phả. ¦ Tidak ada berkas warisan untuk {name}. Berkas menghitung ahli waris dari pohon.
+Dossier {d} : les héritiers n’ont pas encore été calculés. Ouvre le dossier pour faire le calcul. ¦ Hồ sơ {d}: chưa tính người thừa kế. Hãy mở hồ sơ để tính. ¦ Berkas {d}: ahli waris belum dihitung. Buka berkas untuk menghitung.
+Dossier {d} — héritiers d’après le dernier calcul enregistré : {n}. ¦ Hồ sơ {d} — người thừa kế theo lần tính đã lưu gần nhất: {n}. ¦ Berkas {d} — ahli waris menurut perhitungan terakhir yang disimpan: {n}.
+Branches encore à rechercher : {n}. ¦ Nhánh còn phải tìm: {n}. ¦ Cabang yang masih perlu ditelusuri: {n}.
+Actes ou documents à chercher pour {name} : {n}. Les 3 premiers ci-dessous ; la liste complète, avec où chercher et dans quelle série, est dans « Que manque-t-il ? ». ¦ Giấy tờ cần tìm cho {name}: {n}. 3 mục đầu ở dưới; danh sách đầy đủ, kèm nơi tìm và loạt hồ sơ, nằm trong “Còn thiếu gì?”. ¦ Akta atau dokumen yang perlu dicari untuk {name}: {n}. 3 pertama di bawah; daftar lengkap, dengan tempat dan seri pencarian, ada di “Apa yang kurang?”.
+Rien de connu à chercher pour {name}. ¦ Không có gì đã biết để tìm cho {name}. ¦ Tidak ada yang diketahui untuk dicari bagi {name}.
+actes à chercher ¦ giấy tờ cần tìm ¦ akta yang perlu dicari
+où chercher ¦ tìm ở đâu ¦ di mana mencari
+« Où chercher ? » donne pour {name} les sites et les séries d’archives les plus utiles, et pourquoi. ¦ “Tìm ở đâu?” cho {name} các trang web và loạt lưu trữ hữu ích nhất, kèm lý do. ¦ “Di mana mencari?” memberi untuk {name} situs dan seri arsip yang paling berguna, beserta alasannya.
+« Où chercher ? » donne pour chaque personne les sites et les séries d’archives les plus utiles, et pourquoi. ¦ “Tìm ở đâu?” cho mỗi người các trang web và loạt lưu trữ hữu ích nhất, kèm lý do. ¦ “Di mana mencari?” memberi untuk tiap orang situs dan seri arsip yang paling berguna, beserta alasannya.
+doublons ¦ bản trùng ¦ duplikat
+Le Contrôle de la base cherche les doublons probables (mêmes noms, mêmes dates, mêmes parents) et aide à les fusionner. ¦ Kiểm tra cơ sở dữ liệu tìm các bản có thể trùng (cùng tên, ngày, cha mẹ) và giúp bạn gộp chúng. ¦ Pemeriksaan basis data mencari kemungkinan duplikat (nama, tanggal, orang tua yang sama) dan membantu kamu menggabungkannya.
+mort pendant la guerre, en âge de combattre ¦ mất trong chiến tranh, ở tuổi chiến đấu ¦ meninggal saat perang, usia tempur
+mort pendant la guerre ¦ mất trong chiến tranh ¦ meninggal saat perang
+morts pendant {era} ¦ mất trong: {era} ¦ meninggal selama {era}
+morts à la guerre ¦ tử trận ¦ gugur dalam perang
+Morts pendant {era} : {n}. ¦ Mất trong {era}: {n}. ¦ Meninggal selama {era}: {n}.
+Notés « Mort pour la France » : {n}. Morts pendant une guerre, en âge de combattre ou soldats (à vérifier) : {m}. ¦ Được ghi “Mort pour la France”: {n}. Mất trong chiến tranh, ở tuổi chiến đấu hoặc là lính (cần kiểm tra): {m}. ¦ Bertanda “Mort pour la France”: {n}. Meninggal saat perang, usia tempur atau tentara (perlu dicek): {m}.
+Dont « Mort pour la France » : {n}. ¦ Trong đó “Mort pour la France”: {n}. ¦ Di antaranya “Mort pour la France”: {n}.
+Pour les soldats : Mémoire des hommes et les registres matricules. ¦ Với binh lính: Mémoire des hommes và sổ quân bạ. ¦ Untuk tentara: Mémoire des hommes dan register wajib militer.
+sans date de décès ¦ không có ngày mất ¦ tanpa tanggal wafat
+sans date de naissance ¦ không có ngày sinh ¦ tanpa tanggal lahir
+sans date de mariage ¦ không có ngày cưới ¦ tanpa tanggal nikah
+sans parents connus ¦ không rõ cha mẹ ¦ tanpa orang tua yang diketahui
+sans profession notée ¦ không ghi nghề nghiệp ¦ tanpa pekerjaan tercatat
+qui ne sont pas des ancêtres ¦ không phải tổ tiên ¦ yang bukan leluhur
+pas {ev} à {place} ¦ không “{ev}” tại {place} ¦ tidak “{ev}” di {place}
+vivants ou probablement vivants ¦ còn sống hoặc có lẽ còn sống ¦ masih hidup atau mungkin masih hidup
+pas à {place} ¦ không tại {place} ¦ tidak di {place}
+recherche de nom : « {x} » ¦ tìm tên: “{x}” ¦ pencarian nama: “{x}”
+orthographe proche ¦ cách viết gần giống ¦ ejaan mirip
+femmes ¦ phụ nữ ¦ perempuan
+Réponse réunie : {a} {c} {b}. ¦ Câu trả lời gộp: {a} {c} {b}. ¦ Jawaban gabungan: {a} {c} {b}.
+Je n’ai pas tenu compte de : « {x} ». ¦ Tôi chưa tính đến: “{x}”. ¦ Saya tidak memperhitungkan: “{x}”.
+Plusieurs “{w}” : choisir… ¦ Nhiều “{w}”: chọn… ¦ Beberapa “{w}”: pilih…
+J’ai compris : {x} ¦ Tôi hiểu là: {x} ¦ Saya mengerti: {x}
+Question en français ¦ Câu hỏi bằng tiếng Pháp ¦ Pertanyaan dalam bahasa Prancis
+Poser la question : « {q} » ¦ Đặt câu hỏi: “{q}” ¦ Ajukan pertanyaan: “{q}”
+Questions dans la recherche rapide (⌘K) ¦ Câu hỏi trong tìm nhanh (⌘K) ¦ Pertanyaan di pencarian cepat (⌘K)
+Répondre aux questions dans la recherche rapide ¦ Trả lời câu hỏi trong tìm nhanh ¦ Jawab pertanyaan di pencarian cepat
+« les enfants de Pierre Mazaud » : la réponse courte s’affiche dans la liste ; sinon seulement « Poser la question » ¦ “les enfants de Pierre Mazaud”: câu trả lời ngắn hiện trong danh sách; nếu không thì chỉ có “Đặt câu hỏi” ¦ “les enfants de Pierre Mazaud”: jawaban singkat muncul di daftar; jika tidak, hanya “Ajukan pertanyaan”
