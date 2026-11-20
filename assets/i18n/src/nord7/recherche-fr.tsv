@@ -1,0 +1,53 @@
+fr ¦ is
+# 🔎 Recherche « à la française » (lib/recherche_fr.php, assets/js/app-recherche-fr.js, Réglages → 🔎 Recherche)
+nom exact ¦ nákvæmt nafn
+nom de mariage ({x}) ¦ nafn eftir giftingu ({x})
+autre nom noté ({x}) ¦ annað skráð nafn ({x})
+particule ignorée ({x}) ¦ forskeyti hunsað ({x})
+forme latine d’{p} ({x}) ¦ latnesk mynd af {p} ({x})
+forme latine de {p} ({x}) ¦ latnesk mynd af {p} ({x})
+abréviation d’{p} ({x}) ¦ skammstöfun á {p} ({x})
+abréviation de {p} ({x}) ¦ skammstöfun á {p} ({x})
+diminutif d’{p} ({x}) ¦ gælunafn fyrir {p} ({x})
+diminutif de {p} ({x}) ¦ gælunafn fyrir {p} ({x})
+prénom composé ({p}) ¦ samsett eiginnafn ({p})
+phonétique (proche de {x}) ¦ hljóðrænt (líkt {x})
+lieu ({x}) ¦ staður ({x})
+Saint, Sainte ou article écrits autrement ({x}) ¦ Saint, Sainte eða greinir skrifuð öðruvísi ({x})
+ancien nom ({x}) ¦ fyrra heiti ({x})
+commune fusionnée ({x} → {y}) ¦ sameinað sveitarfélag ({x} → {y})
+date « {d} » ({ev} {y}) ¦ dagsetning „{d}“ ({ev} {y})
+date « {d} » ¦ dagsetning „{d}“
+sépulture ¦ greftrun
+un événement ¦ atburður
+Trouvé par : {x} ¦ Fundið með: {x}
+Aucun « {q} » ; {n} proches : {names} ¦ Ekkert „{q}“; {n} lík: {names}
+Montre aussi les noms qui se prononcent pareil, même quand le nom exact existe. ¦ Sýnir líka nöfn sem hljóma eins, jafnvel þegar nákvæma nafnið er til.
+Toujours phonétique ¦ Alltaf hljóðrænt
+forme française ¦ frönsk mynd
+forme latine ¦ latnesk mynd
+abréviation ¦ skammstöfun
+diminutif ¦ gælunafn
+prénom composé ¦ samsett eiginnafn
+prénom de référence : {p} ({k}) ¦ grunnnafn: {p} ({k})
+nom avec particule : {a} = {b} ¦ nafn með forskeyti: {a} = {b}
+son : {s} ¦ hljóð: {s}
+à partir de {y} ¦ frá {y}
+jusqu’à {y} ¦ til {y}
+Rien de reconnu. ¦ Ekkert þekktist.
+Réglages · Recherche ¦ Stillingar · Leit
+La même recherche partout. Sous chaque résultat : pourquoi il a été trouvé. ¦ Sama leit alls staðar. Undir hverri niðurstöðu: hvers vegna hún fannst.
+Ce que la recherche essaie ¦ Það sem leitin reynir
+Phonétique automatique ¦ Sjálfvirk hljóðleit
+quand rien n’est trouvé, les noms qui se prononcent pareil ¦ þegar ekkert finnst, nöfn sem hljóma eins
+Formes latines des prénoms ¦ Latneskar myndir eiginnafna
+Petrus = Pierre, Joannes = Jean, avec leurs fins (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, með endingum sínum (-i, -o, -um, -ae)
+Abréviations et diminutifs des prénoms ¦ Skammstafanir og gælunöfn eiginnafna
+Marge de « vers » (en années) ¦ Svigrúm fyrir „um“ (í árum)
+Toujours : accents, majuscules, particules (d’Albert = Dalbert), St = Saint, communes fusionnées, dates en français et calendrier républicain. ¦ Alltaf: kommur, hástafir, forskeyti (d’Albert = Dalbert), St = Saint, sameinuð sveitarfélög, dagsetningar á frönsku og byltingardagatalið.
+Écris une recherche : l’app montre ce qu’elle comprend, sans rien chercher. ¦ Skrifaðu leit: forritið sýnir hvað það skilur, án þess að leita.
+ex. {x} ¦ t.d. {x}
+Essayer une recherche ¦ Prófaðu leit
+🔎 Recherche ¦ 🔎 Leit
+nom proche à l’oreille ({a} / {b}) ¦ nafn sem hljómar líkt ({a} / {b})
+même prénom, écrit autrement ({a} / {b}) ¦ sama eiginnafn, skrifað öðruvísi ({a} / {b})

@@ -169,7 +169,7 @@ function picker_search(PDO $pdo, array $get): array
         $items = [];
         $total = 0;
         foreach ($r['groups'] as $g) { $items = [...$items, ...$g['items']]; $total += (int) ($g['total'] ?? 0); }
-        $groups[] = ['kind' => $kind, 'key' => $kind, 'label' => PICKER_LABELS[$kind], 'total' => $total, 'items' => $items];
+        $groups[] = ['kind' => $kind, 'key' => $kind, 'label' => PICKER_LABELS[$kind], 'total' => $total, 'items' => $items] + (!empty($r['groups'][0]['fallback']) ? ['fallback' => $r['groups'][0]['fallback']] : []);
     }
     return ['groups' => $groups, 'more' => $more, 'next_offset' => $offset + $limit];
 }
@@ -221,7 +221,7 @@ function picker_kind(PDO $pdo, string $kind, string $q, int $offset, int $limit,
             'custommap', 'branch', 'maplayer' => (static function () use ($pdo, $q, $offset, $limit, $kind) { require_once __DIR__ . '/cartes_perso.php'; return match ($kind) { 'custommap' => picker_custom_maps($pdo, $q, $offset, $limit), 'branch' => picker_branches($pdo, $q, $offset, $limit), default => picker_map_layers($pdo, $q, $offset, $limit) }; })(), // 🗺 lib/cartes_perso.php
             'sheet', 'atelier', 'board', 'layout', 'diagram', 'oldmap', 'act' => function_exists($fn = defined('WIDGET_LINK_PICKER_KINDS') ? (WIDGET_LINK_PICKER_KINDS[$kind][0] ?? '') : '') ? $fn($pdo, $q, $offset, $limit) : ['total' => 0, 'items' => []],
         };
-        return ['groups' => [['kind' => $kind, 'key' => $kind, 'label' => PICKER_LABELS[$kind], 'total' => $r['total'], 'items' => $r['items']]],
+        return ['groups' => [['kind' => $kind, 'key' => $kind, 'label' => PICKER_LABELS[$kind], 'total' => $r['total'], 'items' => $r['items']] + (!empty($r['fallback']) ? ['fallback' => $r['fallback']] : [])],
             'more' => $offset + $limit < $r['total']];
     } catch (Throwable $e) {
         error_log('[picker] ' . $kind . ' : ' . $e->getMessage());
@@ -310,34 +310,29 @@ function picker_persons(PDO $pdo, string $q, int $offset, int $limit, array $opt
     } elseif ($q === '') {
         return ['total' => 0, 'items' => []];
     }
-    $tokens = array_slice(preg_split('/\s+/u', $q, -1, PREG_SPLIT_NO_EMPTY) ?: [], 0, 6);
-    $hasVariants = picker_table_exists($pdo, 'name_variants');
-    foreach ($tokens as $i => $token) {
-        $k = ":t{$i}";
-        $f = ":f{$i}";
-        $params[$k] = picker_like($token);
-        $params[$f] = '%' . picker_fold($token) . '%';
-        // les lieux dont le nom contient le mot : cherchés une fois (avant : le nom du lieu replié pour chaque naissance et chaque décès)
-        $pl = $pdo->prepare("SELECT pl.id FROM places pl WHERE pl.id IN (SELECT DISTINCT place_id FROM events WHERE place_id IS NOT NULL) AND picker_fold(pl.name) LIKE ?");
-        $pl->execute([$params[$f]]);
-        $params[$f . 'p'] = json_encode(array_map('intval', $pl->fetchAll(PDO::FETCH_COLUMN)));
-        $variant = $hasVariants ? " OR EXISTS(SELECT 1 FROM name_variants nv WHERE nv.person_id=p.id AND (nv.first_name LIKE {$k} ESCAPE '\\' COLLATE NOCASE OR nv.middle_name LIKE {$k} ESCAPE '\\' COLLATE NOCASE OR nv.last_name LIKE {$k} ESCAPE '\\' COLLATE NOCASE OR picker_fold(COALESCE(nv.first_name,'')||' '||COALESCE(nv.last_name,'')) LIKE {$f}))" : '';
-        $where[] = "(p.first_name LIKE {$k} ESCAPE '\\' COLLATE NOCASE OR p.middle_name LIKE {$k} ESCAPE '\\' COLLATE NOCASE OR p.last_name LIKE {$k} ESCAPE '\\' COLLATE NOCASE"
-            . " OR picker_fold(COALESCE(p.first_name,'')||' '||COALESCE(p.middle_name,'')||' '||COALESCE(p.last_name,'')) LIKE {$f}"
-            . " OR EXISTS(SELECT 1 FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND e.place_id IS NOT NULL AND t.gedcom_tag IN ('BIRT','DEAT') AND e.place_id IN (SELECT value FROM json_each({$f}p)))"
-            . $variant . ')';
-    }
-    $start = '';
-    if ($q !== '') {
-        $params[':st'] = picker_like($q, true);
-        $start = "CASE WHEN p.last_name LIKE :st ESCAPE '\\' COLLATE NOCASE THEN 0 WHEN p.first_name LIKE :st ESCAPE '\\' COLLATE NOCASE OR trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) LIKE :st ESCAPE '\\' COLLATE NOCASE THEN 1 ELSE 2 END, ";
-    }
-    $from = 'FROM persons p' . ($where ? ' WHERE ' . implode(' AND ', $where) : '');
     $select = "SELECT p.id, p.first_name, p.middle_name, p.last_name, p.gender, COALESCE(p.kind,'human') AS kind,
         (SELECT COALESCE(NULLIF(m.thumbnail,''), m.filename) FROM media m WHERE m.id=p.portrait_media_id AND m.media_type='image') AS portrait,
         {$birth} AS birth_id, {$death} AS death_id";
-    [$total, $rows] = picker_page($pdo, $select, $from, $start . 'p.last_name COLLATE NOCASE, p.first_name COLLATE NOCASE, p.id', $params, $offset, $limit);
-    return ['total' => $total, 'items' => picker_person_items($pdo, $rows)];
+    if ($q === '') { // « #45 » ou des fiches déjà connues
+        $from = 'FROM persons p' . ($where ? ' WHERE ' . implode(' AND ', $where) : '');
+        [$total, $rows] = picker_page($pdo, $select, $from, 'p.last_name COLLATE NOCASE, p.first_name COLLATE NOCASE, p.id', $params, $offset, $limit);
+        return ['total' => $total, 'items' => picker_person_items($pdo, $rows)];
+    }
+    // 🔎 recherche « à la française » (lib/recherche_fr.php) : nom, autres noms, particules, prénoms latins et abrégés, dates tapées,
+    // un mot peut être le lieu de naissance ou de décès ; phonétique en repli ; chaque ligne dit pourquoi elle répond (why)
+    $params[':st'] = picker_like($q, true);
+    $start = "CASE WHEN p.last_name LIKE :st ESCAPE '\\' COLLATE NOCASE THEN 0 WHEN p.first_name LIKE :st ESCAPE '\\' COLLATE NOCASE OR trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) LIKE :st ESCAPE '\\' COLLATE NOCASE THEN 1 ELSE 2 END, ";
+    $res = rfr_person_ids($pdo, $q, ['offset' => $offset, 'limit' => $limit, 'places' => true, 'where' => implode(' AND ', $where), 'params' => $params,
+        'order' => $start . 'p.last_name COLLATE NOCASE, p.first_name COLLATE NOCASE, p.id']);
+    if (!$res['ids']) { return ['total' => $res['total'], 'items' => [], 'fallback' => $res['fallback']]; }
+    $why = rfr_why_of($pdo, $res);
+    $byId = [];
+    foreach ($pdo->query($select . ' FROM persons p WHERE p.id IN (' . implode(',', $res['ids']) . ')')->fetchAll(PDO::FETCH_ASSOC) as $r) { $byId[(int) $r['id']] = $r; }
+    $rows = array_values(array_filter(array_map(static fn($id) => $byId[$id] ?? null, $res['ids'])));
+    $items = picker_person_items($pdo, $rows);
+    foreach ($items as &$it) { $it['why'] = $why[(int) $it['id']] ?? []; }
+    unset($it);
+    return ['total' => $res['total'], 'items' => $items, 'fallback' => $res['fallback']];
 }
 
 /** Lignes de persons → items (naissance, décès, indice pour les homonymes). Sert aussi pour relire une valeur. */
@@ -549,7 +544,21 @@ function picker_place_split(PDO $pdo, string $name, array $rest, bool $mixed): a
     }
     $params = [':nf' => '%' . $name . '%', ':pre' => picker_loose_like($name)];
     // tri grossier et rapide (LIKE natif) avant la comparaison exacte sans accents
-    $where = "((pl.name LIKE :pre AND picker_fold(pl.name) LIKE :nf) OR (pl.alternate_names LIKE :pre AND picker_fold(pl.alternate_names) LIKE :nf))";
+    $where = "((pl.name LIKE :pre AND picker_fold(pl.name) LIKE :nf) OR (pl.alternate_names LIKE :pre AND picker_fold(pl.alternate_names) LIKE :nf)";
+    // 🔎 St / Ste / S. = Saint / Sainte (tapé ou écrit dans la base), « Le Mans » trouvé par « Mans » et l'inverse (lib/recherche_fr.php)
+    if (function_exists('rfr_place_variants')) {
+        rfr_register($pdo);
+        foreach (rfr_place_variants($name) as $j => $v) {
+            if ($v === $name) { continue; }
+            $params[":nv{$j}"] = '%' . $v . '%'; $params[":lv{$j}"] = picker_loose_like($v);
+            $where .= " OR (pl.name LIKE :lv{$j} AND picker_fold(pl.name) LIKE :nv{$j}) OR (pl.alternate_names LIKE :lv{$j} AND picker_fold(pl.alternate_names) LIKE :nv{$j})";
+        }
+        if (str_contains(rfr_place_fold($name), 'saint')) {
+            $params[':nsf'] = '%' . rfr_place_fold($name) . '%';
+            $where .= " OR ((pl.name LIKE '%st%' OR pl.name LIKE 'S.%' OR pl.name LIKE '% S.%') AND rfr_place_fold(pl.name) LIKE :nsf)";
+        }
+    }
+    $where .= ')';
     $where .= picker_place_filters($rest, $params, $codes);
     $used = picker_place_used_sql($pdo);
     $count = function (string $cond) use ($pdo, $where, $params): int {
@@ -586,7 +595,12 @@ function picker_place_rows(PDO $pdo, array $split, string $seg, int $offset, int
         ORDER BY rank, " . ($seg === 'base' ? 'n_events DESC, ' : '') . "population DESC, pl.name COLLATE NOCASE, pl.id LIMIT " . (int) $limit . ' OFFSET ' . (int) $offset;
     $s = $pdo->prepare($sql);
     $s->execute(picker_params($sql, $params));
-    return array_map(static fn(array $r): array => picker_place_item($r, $seg, $split['name']), $s->fetchAll(PDO::FETCH_ASSOC));
+    return array_map(static function (array $r) use ($pdo, $seg, $split): array {
+        $it = picker_place_item($r, $seg, $split['name']);
+        if (function_exists('rfr_place_why') && $seg === 'base' && ($w = rfr_place_why($pdo, (int) $r['id'], (string) $r['name'], (string) ($r['alternate_names'] ?? ''), $split['name']))) { $it['why'] = [$w]; }
+        elseif (function_exists('rfr_place_why') && ($w = rfr_place_why($pdo, (int) $r['id'], (string) $r['name'], (string) ($r['alternate_names'] ?? ''), $split['name'])) && $w['k'] === 'fusion') { $it['why'] = [$w]; }
+        return $it;
+    }, $s->fetchAll(PDO::FETCH_ASSOC));
 }
 
 /** Ligne de places → item. */

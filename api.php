@@ -183,6 +183,7 @@ try {
         if ($emptyRead !== null) json_response($emptyRead + ['ready' => false]);
     }
     $pdo = db();
+    if ($isWrite) { register_shutdown_function(static function () use ($pdo): void { rfr_mark_dirty($pdo); }); } // 🔎 la recherche revérifie ses noms (lib/recherche_fr.php)
     // 🔐 poser, changer, retirer le mot de passe, son délai (lib/verrou.php) ; jamais en mode consultation (écriture refusée plus haut)
     if ($isWrite && in_array($action, ['glock_set', 'glock_change', 'glock_remove', 'glock_minutes'], true)) {
         try { json_response(glock_api_post((string) $action, is_array($payload) ? $payload : [])); }
@@ -722,6 +723,7 @@ try {
         'frontieres_communes' => (static function () { require_once __DIR__ . '/lib/cartes_plus.php'; json_response(cp_front_communes($_GET)); })(), // 🏛 communes disparues d'un cadre de la carte
         'cartes_plus' => (static function () use ($pdo) { require_once __DIR__ . '/lib/cartes_plus.php'; try { json_response(cp_data($pdo, $_GET)); } catch (RuntimeException $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🗺️ cartes des patronymes, ADN, recherches, chaleur (lib/cartes_plus.php)
         'quick_search' => json_response(quick_search_data($pdo, safe_text($_GET['q'] ?? ''))),
+        'rfr_parse' => json_response(rfr_api_parse($pdo, mb_substr(safe_text($_GET['q'] ?? ''), 0, 200))), // 🔎 ce que la recherche comprend d'un texte (lib/recherche_fr.php)
         'implexe' => json_response(implexe_data($pdo, safe_int($_GET['id'] ?? 0) ?: (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 LIMIT 1')->fetchColumn())),
         'online_registers' => json_response(online_registers($pdo, (string) ($_GET['code'] ?? ''), trim((string) ($_GET['name'] ?? '')))),
         'person_labels' => json_response(['people' => person_labels($pdo, (string) ($_GET['ids'] ?? ''))]),
@@ -2051,27 +2053,27 @@ function people_list(PDO $pdo): never
     $group = safe_int($_GET['group'] ?? 0);
     $offset = max(0, safe_int($_GET['offset'] ?? 0));
     $limit = min(250, max(20, safe_int($_GET['limit'] ?? 120)));
-    if ($phonetic && $search !== '') {
-        json_response(['people' => phonetic_people($pdo, $search, $group, $offset, $limit, (string) ($_GET['kind'] ?? '')), 'offset' => $offset, 'limit' => $limit, 'phonetic' => true]);
+    $kind = (string) ($_GET['kind'] ?? '');
+    if ($search !== '') {
+        // 🔎 recherche « à la française » (lib/recherche_fr.php) : nom de la fiche, autres noms, particules, prénoms latins et
+        // abrégés, phonétique en repli (ou toujours, interrupteur « Toujours phonétique »), dates tapées en français
+        $res = rfr_person_ids($pdo, $search, ['offset' => $offset, 'limit' => $limit, 'phonetic' => $phonetic, 'kind' => in_array($kind, ['animal', 'human'], true) ? $kind : '',
+            'where' => $group ? 'p.surname_group_id=:rgroup' : '', 'params' => $group ? [':rgroup' => $group] : []]);
+        $rows = [];
+        if ($res['ids']) {
+            $why = rfr_why_of($pdo, $res);
+            $byId = [];
+            foreach ($pdo->query(person_select() . ' WHERE p.id IN (' . implode(',', $res['ids']) . ')')->fetchAll() as $r) { $byId[(int) $r['id']] = $r; }
+            foreach ($res['ids'] as $id) { if (isset($byId[$id])) { $rows[] = $byId[$id] + ['why' => $why[$id] ?? [], 'tier' => $res['tiers'][$id] ?? 0]; } }
+        }
+        json_response(['people' => $rows, 'offset' => $offset, 'limit' => $limit, 'phonetic' => $res['phonetic'], 'fallback' => $res['fallback'], 'total' => $res['total']]);
     }
     $where = [];
     $params = [];
-    if ($search !== '') {
-        $tokens = preg_split('/\s+/u', $search, -1, PREG_SPLIT_NO_EMPTY) ?: [];
-        foreach (array_slice($tokens,0,6) as $index=>$token) {
-            $key=':q'.$index;
-            $foldKey=':f'.$index; // même mot sans accents ni tirets (« helene » trouve Hélène, « jean-baptiste » Jean Baptiste)
-            $looseKey=':l'.$index;
-            $where[] = "(p.first_name LIKE {$key} COLLATE NOCASE OR p.middle_name LIKE {$key} COLLATE NOCASE OR p.last_name LIKE {$key} COLLATE NOCASE OR trim(p.first_name||' '||p.middle_name||' '||p.last_name) LIKE {$key} COLLATE NOCASE OR trim(p.first_name||' '||p.last_name) LIKE {$key} COLLATE NOCASE OR g.name LIKE {$key} COLLATE NOCASE OR EXISTS(SELECT 1 FROM name_variants nv WHERE nv.person_id=p.id AND (nv.first_name LIKE {$key} COLLATE NOCASE OR nv.middle_name LIKE {$key} COLLATE NOCASE OR nv.last_name LIKE {$key} COLLATE NOCASE)) OR ({$foldKey}!='%%' AND (".fold_like_sql("(COALESCE(p.first_name,'')||' '||COALESCE(p.middle_name,'')||' '||COALESCE(p.last_name,'')||' '||COALESCE(g.name,''))",$key,$foldKey,$looseKey)." OR EXISTS(SELECT 1 FROM name_variants nv2 WHERE nv2.person_id=p.id AND ".fold_like_sql("(COALESCE(nv2.first_name,'')||' '||COALESCE(nv2.middle_name,'')||' '||COALESCE(nv2.last_name,''))",$key,$foldKey,$looseKey)."))))";
-            $params[$key] = '%' . $token . '%';
-            [, $params[$foldKey], $params[$looseKey]] = fold_like_params($token);
-        }
-    }
     if ($group) {
         $where[] = 'p.surname_group_id=:group';
         $params[':group'] = $group;
     }
-    $kind = (string) ($_GET['kind'] ?? '');
     if ($kind === 'animal') { $where[] = "p.kind='animal'"; } elseif ($kind === 'human') { $where[] = "p.kind<>'animal'"; }
     $sql = person_select() . ($where ? ' WHERE ' . implode(' AND ', $where) : '') . " ORDER BY CASE WHEN trim(COALESCE(p.last_name,''))='' THEN 1 WHEN p.last_name GLOB '[?X]*' OR lower(p.last_name)='inconnu' THEN 2 ELSE 0 END,".fold_sort_sql('p.last_name').",".fold_sort_sql('p.first_name').",p.id LIMIT :limit OFFSET :offset";
     $stmt = $pdo->prepare($sql);
@@ -2082,111 +2084,10 @@ function people_list(PDO $pdo): never
     json_response(['people' => $stmt->fetchAll(), 'offset' => $offset, 'limit' => $limit]);
 }
 
+/** Clé phonétique française d'un nom : le moteur commun (rfr_phon, lib/recherche_fr.php). Gardée pour les anciens appels. */
 function phonetic_key(string $value): string
 {
-    $value = mb_strtolower(ascii_fold($value));
-    $value = preg_replace('/[^a-z]/', '', $value) ?? '';
-    $value = str_replace('ph', 'f', $value);
-    $value = strtr($value, ['c'=>'k','q'=>'k','y'=>'i']);
-    $value = preg_replace('/(eau|au)/', 'o', $value) ?? $value;
-    $value = preg_replace('/(ai|ay|ei|ey)/', 'e', $value) ?? $value;
-    $value = preg_replace('/h/', '', $value) ?? $value;
-    $value = preg_replace('/(.)\1+/', '$1', $value) ?? $value;
-    return trim($value);
-}
-
-// Soundex adapté au français : regroupe les consonnes de sonorité proche (b/f/p/v, c/g/j/k/q/s/x/z, d/t, l, m/n, r)
-// après être passé par phonetic_key (qui a déjà neutralisé ph/eau/ai/h/lettres doublées…), afin de
-// rattraper les erreurs de transcription d'actes anciens (lettre mal lue, voyelle différente, etc.)
-// que la comparaison par distance de Levenshtein de phonetic_people() peut manquer.
-function soundex_fr(string $value): string
-{
-    $key = phonetic_key($value);
-    if ($key === '') return '';
-    static $codes = [
-        'b'=>'1','f'=>'1','p'=>'1','v'=>'1',
-        'k'=>'2','g'=>'2','j'=>'2','s'=>'2','x'=>'2','z'=>'2',
-        'd'=>'3','t'=>'3',
-        'l'=>'4',
-        'm'=>'5','n'=>'5',
-        'r'=>'6',
-    ];
-    $chars = str_split($key);
-    $first = $chars[0];
-    $result = strtoupper($first);
-    $prevCode = $codes[$first] ?? '';
-    $len = count($chars);
-    for ($i = 1; $i < $len && strlen($result) < 4; $i++) {
-        $ch = $chars[$i];
-        $code = $codes[$ch] ?? '';
-        if ($code !== '' && $code !== $prevCode) {
-            $result .= $code;
-        }
-        $prevCode = $code;
-    }
-    return str_pad(substr($result, 0, 4), 4, '0');
-}
-
-function phonetic_people(PDO $pdo, string $search, int $group, int $offset, int $limit, string $kind = ''): array
-{
-    $tokens = array_values(array_filter(array_map('phonetic_key', preg_split('/\s+/u', $search, -1, PREG_SPLIT_NO_EMPTY) ?: [])));
-    if (!$tokens) return [];
-    $tokenSoundex = array_map('soundex_fr', $tokens);
-    $kc = $kind === 'animal' ? "p.kind='animal'" : ($kind === 'human' ? "p.kind<>'animal'" : '');
-    // 1er passage léger (noms seulement, chaque nom calculé une fois) ; la fiche complète seulement pour la page montrée.
-    // Avant : toutes les fiches avec leurs dates (person_select) — plusieurs secondes sur une très grosse base.
-    $sql = "SELECT p.id, p.first_name, p.middle_name, p.last_name, g.name AS surname_group FROM persons p LEFT JOIN surname_groups g ON g.id=p.surname_group_id" . ($group || $kc ? ' WHERE ' . implode(' AND ', array_filter([$group ? 'p.surname_group_id=:group' : '', $kc])) : '') . " ORDER BY CASE WHEN trim(COALESCE(p.last_name,''))='' THEN 1 WHEN p.last_name GLOB '[?X]*' OR lower(p.last_name)='inconnu' THEN 2 ELSE 0 END,p.last_name COLLATE NOCASE,p.first_name COLLATE NOCASE";
-    $stmt = $pdo->prepare($sql);
-    if ($group) $stmt->bindValue(':group', $group, PDO::PARAM_INT);
-    $stmt->execute();
-    $matches = [];
-    $keyMemo = []; $sxMemo = [];
-    $pk = static function (string $v) use (&$keyMemo): string { return $keyMemo[$v] ??= phonetic_key($v); };
-    $sx = static function (string $v) use (&$sxMemo): string { return $sxMemo[$v] ??= soundex_fr($v); };
-    foreach ($stmt as $person) {
-        $haystack = [
-            $pk((string)($person['first_name'] ?? '')),
-            $pk((string)($person['middle_name'] ?? '')),
-            $pk((string)($person['last_name'] ?? '')),
-            $pk((string)($person['surname_group'] ?? '')),
-            $pk(trim(($person['first_name'] ?? '').' '.($person['middle_name'] ?? '').' '.($person['last_name'] ?? ''))),
-            $pk(trim(($person['first_name'] ?? '').' '.($person['last_name'] ?? ''))),
-        ];
-        // Codes Soundex français pré-calculés une fois par nom, en parallèle du haystack phonétique ci-dessus.
-        $haystackSoundex = array_map($sx, $haystack);
-        $ok = true;
-        foreach ($tokens as $tokenIndex => $token) {
-            $found = false;
-            $tokenCode = $tokenSoundex[$tokenIndex] ?? '';
-            foreach ($haystack as $hIndex => $value) {
-                $sameStart = mb_substr($value, 0, 2) === mb_substr($token, 0, 2);
-                $maxDistance = mb_strlen($token) <= 6 ? 1 : 2;
-                $valueLen = mb_strlen($value);
-                if ($value !== '' && (str_contains($value, $token) || ($valueLen >= 3 && str_contains($token, $value)) || ($sameStart && $valueLen >= 3 && levenshtein($value, $token) <= $maxDistance))) {
-                    $found = true;
-                    break;
-                }
-                // Rattrapage Soundex français : mêmes consonnes structurantes malgré des voyelles ou une
-                // orthographe très différentes (utile pour les transcriptions approximatives d'actes anciens).
-                if ($value !== '' && $tokenCode !== '' && $tokenCode === ($haystackSoundex[$hIndex] ?? '')) {
-                    $found = true;
-                    break;
-                }
-            }
-            if (!$found) {
-                $ok = false;
-                break;
-            }
-        }
-        if ($ok) $matches[] = (int) $person['id'];
-        if (count($matches) >= $offset + $limit) break;
-    }
-    $stmt->closeCursor();
-    $ids = array_slice($matches, $offset, $limit);
-    if (!$ids) return [];
-    $rows = [];
-    foreach ($pdo->query(person_select() . ' WHERE p.id IN (' . implode(',', $ids) . ')')->fetchAll() as $r) { $rows[(int) $r['id']] = $r; }
-    return array_values(array_filter(array_map(static fn(int $id) => $rows[$id] ?? null, $ids)));
+    return rfr_phon($value);
 }
 
 function sosa_parent_ids(PDO $pdo, int $childId): array
@@ -3192,7 +3093,9 @@ function list_data(PDO $pdo): never
     $mediaDateTo = safe_text($_GET['date_to'] ?? '');
     $courrierFilter = safe_text($_GET['courrier_filter'] ?? '');
     if (!in_array($courrierFilter, ['', 'fait_utilise', 'fait_non_utilise', 'fait_tous', 'tous'], true)) $courrierFilter = '';
-    $data = match ($type) {
+    // 🔎 Personnes, Événements, Lieux : recherche « à la française » (lib/recherche_fr.php), avec « Trouvé par » (why) sur chaque ligne
+    $rfrList = ($q !== '' && in_array($type === '' ? 'persons' : $type, ['persons', 'events', 'places'], true)) ? rfr_list_rows($pdo, $type === '' ? 'persons' : $type, $q, $fetchLimit, $offset, $genderCond, $genderParams) : null;
+    $data = $rfrList !== null ? $rfrList['rows'] : match ($type) {
         'events' => (function () use ($pdo, $like, $fetchLimit, $offset) { $s=$pdo->prepare("SELECT e.id,e.date_text,e.year,t.label AS type,COALESCE(p.id,f1.id,f2.id) AS person_id,CASE WHEN p.id IS NOT NULL THEN trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) ELSE trim(trim(COALESCE(f1.first_name,'')||' '||COALESCE(f1.last_name,''))||CASE WHEN f1.id IS NOT NULL AND f2.id IS NOT NULL THEN ' et ' ELSE '' END||trim(COALESCE(f2.first_name,'')||' '||COALESCE(f2.last_name,''))) END AS person,f1.id AS partner1_id,f2.id AS partner2_id,trim(pl.name || CASE WHEN COALESCE(pl.subdivision,'')<>'' THEN ', '||pl.subdivision ELSE '' END) AS place FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN families fa ON fa.id=e.family_id LEFT JOIN persons f1 ON f1.id=fa.partner1_id LEFT JOIN persons f2 ON f2.id=fa.partner2_id LEFT JOIN places pl ON pl.id=e.place_id WHERE " . list_event_search_sql() . " ORDER BY COALESCE(e.year,9999),e.sort_date,e.id LIMIT {$fetchLimit} OFFSET {$offset}"); $s->execute(list_event_search_params($like)); return $s->fetchAll(); })(),
         'places' => (function () use ($pdo, $like, $fetchLimit, $offset) { $s=$pdo->prepare("SELECT pl.*,(SELECT count(*) FROM events e WHERE e.place_id=pl.id) AS event_count FROM places pl WHERE " . list_place_where_sql($pdo) . " ORDER BY event_count DESC," . fold_sort_sql('pl.name') . "," . fold_sort_sql("COALESCE(pl.subdivision,'')") . ",pl.id LIMIT {$fetchLimit} OFFSET {$offset}"); $s->execute(list_place_search_params($like)); return $s->fetchAll(); })(),
         'media' => media_list_rows($pdo, $like, $fetchLimit, $offset, safe_text($_GET['scope'] ?? ''), safe_int($_GET['person_id'] ?? 0), $mediaCity, $mediaDateFrom, $mediaDateTo),
@@ -3220,8 +3123,9 @@ function list_data(PDO $pdo): never
     }
     if ($type === 'occupations') $data = occupation_attach_people($pdo, $data, 'occupation');
     if ($type === 'employers') { $mentions = employer_block_mentions($pdo); foreach ($data as &$er) { $er['people'] = employer_people($pdo, (string) $er['id'], $mentions); $er['person_count'] = count($er['people']); } unset($er); }
-    $remainingCount = $hasMore ? max(1, count_list_remaining($pdo,$type,$like,$offset + count($data),$genderCond,$genderParams,safe_text($_GET['scope'] ?? ''),safe_int($_GET['person_id'] ?? 0),$reminderMode,$mediaCity,$mediaDateFrom,$mediaDateTo,$sosaRootId,$sosaSort,$sosaMissing,$sosaImpossible,$reminderCategory,$dabovilleSort,$courrierFilter)) : 0;
+    $remainingCount = $hasMore && $rfrList !== null ? max(1, $rfrList['total'] - $offset - count($data)) : ($hasMore ? max(1, count_list_remaining($pdo,$type,$like,$offset + count($data),$genderCond,$genderParams,safe_text($_GET['scope'] ?? ''),safe_int($_GET['person_id'] ?? 0),$reminderMode,$mediaCity,$mediaDateFrom,$mediaDateTo,$sosaRootId,$sosaSort,$sosaMissing,$sosaImpossible,$reminderCategory,$dabovilleSort,$courrierFilter)) : 0);
     $extra = $type === 'reminders' ? ['reminder_summary' => reminder_summary($pdo, $like, $reminderMode, $reminderCategory), 'reminder_categories' => standalone_reminder_categories()] : ($type === 'research_budget' ? ['research_budget_summary' => research_budget_summary($pdo, $like)] : ($type === 'courriers' ? ['courrier_summary' => courrier_summary($pdo, $like), 'courrier_organismes' => courrier_organismes(), 'courrier_statuts' => courrier_statuts()] : []));
+    if ($rfrList !== null && $rfrList['fallback']) { $extra['fallback'] = $rfrList['fallback']; }
     json_response(array_merge(['type' => $type, 'rows' => $data, 'offset'=>$offset, 'limit'=>$limit, 'hasMore'=>$hasMore, 'remainingCount'=>$remainingCount, 'gender'=>implode(',', $genders), 'kind'=>$listKind, 'reminder_mode'=>$reminderMode, 'reminder_category'=>$reminderCategory, 'city'=>$mediaCity, 'date_from'=>$mediaDateFrom, 'date_to'=>$mediaDateTo, 'sosa_root_id'=>$sosaRootId, 'sosa_sort'=>$sosaSort, 'sosa_missing'=>$sosaMissing ? 1 : 0, 'sosa_impossible'=>$sosaImpossible ? 1 : 0, 'daboville_sort'=>$dabovilleSort, 'courrier_filter'=>$courrierFilter], $extra));
 }
 
@@ -8910,7 +8814,12 @@ function duplicate_candidates(PDO $pdo): never
         foreach($st['alerts'] as $a){
             if(($a['check']??'')!=='duplicate'||count($a['people']??[])<2)continue;
             [$x,$y]=$a['people'];$px=$st['people'][$x]??null;$py=$st['people'][$y]??null;if(!$px||!$py)continue;
-            if($needle!==''&&!str_contains($fold($px['first_name'].' '.$px['last_name'].' '.$py['first_name'].' '.$py['last_name']),$needle))continue;
+            // 🔎 « Chercher » des Doublons : la recherche « à la française » sur l'une ou l'autre fiche (lib/recherche_fr.php)
+            if($needle!==''&&!str_contains($fold($px['first_name'].' '.$px['last_name'].' '.$py['first_name'].' '.$py['last_name']),$needle)){
+                $rp??=rfr_parse_query($q,rfr_settings($pdo));$rs??=rfr_settings($pdo);
+                $hit=false;foreach([$px,$py] as $pp){if(rfr_explain($rp,[['src'=>0,'first'=>$pp['first_name'],'last'=>$pp['last_name']]],$rs,true)['ok']){$hit=true;break;}}
+                if(!$hit)continue;
+            }
             $out[]=['id1'=>$x,'id2'=>$y,'first1'=>$px['first_name'],'last1'=>$px['last_name'],'first2'=>$py['first_name'],'last2'=>$py['last_name'],'birth1'=>$px['birth_year'],'birth2'=>$py['birth_year'],'death1'=>$px['death_year'],'death2'=>$py['death_year'],'score'=>(int)($a['score']??0),'score_max'=>100];
         }
         usort($out,static fn($m,$n)=>[$n['score'],mb_strtolower((string)$m['last1']),mb_strtolower((string)$m['first1'])]<=>[$m['score'],mb_strtolower((string)$n['last1']),mb_strtolower((string)$n['first1'])]);

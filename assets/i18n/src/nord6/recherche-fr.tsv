@@ -1,0 +1,53 @@
+fr ¦ lt ¦ lv ¦ et
+# 🔎 Recherche « à la française » (lib/recherche_fr.php, assets/js/app-recherche-fr.js, Réglages → 🔎 Recherche)
+nom exact ¦ tikslus vardas ¦ precīzs vārds ¦ täpne nimi
+nom de mariage ({x}) ¦ pavardė po santuokos ({x}) ¦ uzvārds laulībā ({x}) ¦ abielunimi ({x})
+autre nom noté ({x}) ¦ kitas užrašytas vardas ({x}) ¦ cits pierakstīts vārds ({x}) ¦ muu märgitud nimi ({x})
+particule ignorée ({x}) ¦ dalelytė praleista ({x}) ¦ partikula ignorēta ({x}) ¦ eesliide eiratud ({x})
+forme latine d’{p} ({x}) ¦ lotyniška vardo {p} forma ({x}) ¦ vārda {p} latīniskā forma ({x}) ¦ nime {p} ladinakeelne kuju ({x})
+forme latine de {p} ({x}) ¦ lotyniška vardo {p} forma ({x}) ¦ vārda {p} latīniskā forma ({x}) ¦ nime {p} ladinakeelne kuju ({x})
+abréviation d’{p} ({x}) ¦ vardo {p} santrumpa ({x}) ¦ vārda {p} saīsinājums ({x}) ¦ nime {p} lühend ({x})
+abréviation de {p} ({x}) ¦ vardo {p} santrumpa ({x}) ¦ vārda {p} saīsinājums ({x}) ¦ nime {p} lühend ({x})
+diminutif d’{p} ({x}) ¦ vardo {p} mažybinė forma ({x}) ¦ vārda {p} mīlināmā forma ({x}) ¦ nime {p} hellitusvorm ({x})
+diminutif de {p} ({x}) ¦ vardo {p} mažybinė forma ({x}) ¦ vārda {p} mīlināmā forma ({x}) ¦ nime {p} hellitusvorm ({x})
+prénom composé ({p}) ¦ sudėtinis vardas ({p}) ¦ salikts vārds ({p}) ¦ liiteesnimi ({p})
+phonétique (proche de {x}) ¦ fonetiškai (panašu į {x}) ¦ fonētiski (līdzīgs {x}) ¦ foneetiliselt (sarnane nimega {x})
+lieu ({x}) ¦ vieta ({x}) ¦ vieta ({x}) ¦ koht ({x})
+Saint, Sainte ou article écrits autrement ({x}) ¦ Saint, Sainte ar artikelis parašyti kitaip ({x}) ¦ Saint, Sainte vai artikuls rakstīti citādi ({x}) ¦ Saint, Sainte või artikkel teisiti kirjutatud ({x})
+ancien nom ({x}) ¦ buvęs pavadinimas ({x}) ¦ agrākais nosaukums ({x}) ¦ endine nimi ({x})
+commune fusionnée ({x} → {y}) ¦ sujungta savivaldybė ({x} → {y}) ¦ apvienota pašvaldība ({x} → {y}) ¦ ühendatud vald ({x} → {y})
+date « {d} » ({ev} {y}) ¦ data „{d}“ ({ev} {y}) ¦ datums „{d}“ ({ev} {y}) ¦ kuupäev „{d}“ ({ev} {y})
+date « {d} » ¦ data „{d}“ ¦ datums „{d}“ ¦ kuupäev „{d}“
+sépulture ¦ laidojimas ¦ apbedīšana ¦ matus
+un événement ¦ įvykis ¦ notikums ¦ sündmus
+Trouvé par : {x} ¦ Rasta pagal: {x} ¦ Atrasts pēc: {x} ¦ Leitud nii: {x}
+Aucun « {q} » ; {n} proches : {names} ¦ Nėra „{q}“; {n} panašūs: {names} ¦ Nav „{q}“; {n} līdzīgas: {names} ¦ Pole „{q}“; {n} sarnast: {names}
+Montre aussi les noms qui se prononcent pareil, même quand le nom exact existe. ¦ Rodo ir vienodai skambančius vardus, net kai tikslus vardas yra. ¦ Rāda arī vārdus, kas skan vienādi, pat ja precīzais vārds pastāv. ¦ Näitab ka samamoodi kõlavaid nimesid, isegi kui täpne nimi on olemas.
+Toujours phonétique ¦ Visada fonetiškai ¦ Vienmēr fonētiski ¦ Alati foneetiliselt
+forme française ¦ prancūziška forma ¦ franciskā forma ¦ prantsuskeelne kuju
+forme latine ¦ lotyniška forma ¦ latīniskā forma ¦ ladinakeelne kuju
+abréviation ¦ santrumpa ¦ saīsinājums ¦ lühend
+diminutif ¦ mažybinė forma ¦ mīlināmā forma ¦ hellitusvorm
+prénom composé ¦ sudėtinis vardas ¦ salikts vārds ¦ liiteesnimi
+prénom de référence : {p} ({k}) ¦ pagrindinis vardas: {p} ({k}) ¦ pamata vārds: {p} ({k}) ¦ põhieesnimi: {p} ({k})
+nom avec particule : {a} = {b} ¦ pavardė su dalelyte: {a} = {b} ¦ uzvārds ar partikulu: {a} = {b} ¦ eesliitega nimi: {a} = {b}
+son : {s} ¦ skambesys: {s} ¦ skanējums: {s} ¦ kõla: {s}
+à partir de {y} ¦ nuo {y} ¦ no {y} ¦ alates {y}
+jusqu’à {y} ¦ iki {y} ¦ līdz {y} ¦ kuni {y}
+Rien de reconnu. ¦ Nieko neatpažinta. ¦ Nekas nav atpazīts. ¦ Midagi ei tuvastatud.
+Réglages · Recherche ¦ Nustatymai · Paieška ¦ Iestatījumi · Meklēšana ¦ Seaded · Otsing
+La même recherche partout. Sous chaque résultat : pourquoi il a été trouvé. ¦ Visur ta pati paieška. Po kiekvienu rezultatu: kodėl jis rastas. ¦ Visur tā pati meklēšana. Zem katra rezultāta: kāpēc tas atrasts. ¦ Kõikjal sama otsing. Iga tulemuse all: miks see leiti.
+Ce que la recherche essaie ¦ Ką bando paieška ¦ Ko meklēšana mēģina ¦ Mida otsing proovib
+Phonétique automatique ¦ Automatinė fonetika ¦ Automātiska fonētika ¦ Automaatne foneetika
+quand rien n’est trouvé, les noms qui se prononcent pareil ¦ kai nieko nerasta, vienodai skambantys vardai ¦ ja nekas nav atrasts, vārdi, kas skan vienādi ¦ kui midagi ei leita, samamoodi kõlavad nimed
+Formes latines des prénoms ¦ Lotyniškos vardų formos ¦ Vārdu latīniskās formas ¦ Eesnimede ladinakeelsed kujud
+Petrus = Pierre, Joannes = Jean, avec leurs fins (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, su galūnėmis (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, ar galotnēm (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, koos lõppudega (-i, -o, -um, -ae)
+Abréviations et diminutifs des prénoms ¦ Vardų santrumpos ir mažybinės formos ¦ Vārdu saīsinājumi un mīlināmās formas ¦ Eesnimede lühendid ja hellitusvormid
+Marge de « vers » (en années) ¦ „Apie“ paklaida (metais) ¦ „Ap“ pielaide (gados) ¦ „Umbes“ varu (aastates)
+Toujours : accents, majuscules, particules (d’Albert = Dalbert), St = Saint, communes fusionnées, dates en français et calendrier républicain. ¦ Visada: kirčiai, didžiosios raidės, dalelytės (d’Albert = Dalbert), St = Saint, sujungtos savivaldybės, datos prancūziškai ir respublikos kalendorius. ¦ Vienmēr: akcenti, lielie burti, partikulas (d’Albert = Dalbert), St = Saint, apvienotas pašvaldības, datumi franču valodā un republikas kalendārs. ¦ Alati: rõhumärgid, suurtähed, eesliited (d’Albert = Dalbert), St = Saint, ühendatud vallad, prantsuskeelsed kuupäevad ja revolutsioonikalender.
+Écris une recherche : l’app montre ce qu’elle comprend, sans rien chercher. ¦ Įvesk paiešką: programa parodo, ką supranta, nieko neieškodama. ¦ Ieraksti meklējamo: lietotne parāda, ko saprot, neko nemeklējot. ¦ Kirjuta otsing: rakendus näitab, mida ta mõistab, midagi otsimata.
+ex. {x} ¦ pvz. {x} ¦ piem. {x} ¦ nt {x}
+Essayer une recherche ¦ Išbandyk paiešką ¦ Izmēģini meklēšanu ¦ Proovi otsingut
+🔎 Recherche ¦ 🔎 Paieška ¦ 🔎 Meklēšana ¦ 🔎 Otsing
+nom proche à l’oreille ({a} / {b}) ¦ panašiai skambanti pavardė ({a} / {b}) ¦ līdzīgi skanošs uzvārds ({a} / {b}) ¦ sarnase kõlaga nimi ({a} / {b})
+même prénom, écrit autrement ({a} / {b}) ¦ tas pats vardas, parašytas kitaip ({a} / {b}) ¦ tas pats vārds, rakstīts citādi ({a} / {b}) ¦ sama eesnimi, teisiti kirjutatud ({a} / {b})

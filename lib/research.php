@@ -322,10 +322,16 @@ function quick_search_data(PDO $pdo, string $q): array
     };
     if ($only === null || $only === 'persons') {
         if ($words) {
-            // nom complet (et nom de famille regroupé), puis les variantes de nom, comme le panneau Personnes
-            $variant = "EXISTS(SELECT 1 FROM name_variants nv WHERE nv.person_id=p.id AND " . fold_like_sql("(COALESCE(nv.first_name,'')||' '||COALESCE(nv.middle_name,'')||' '||COALESCE(nv.last_name,''))", '{raw}', '{fold}', '{loose}') . ")";
-            [$w, $p] = $like(["(COALESCE(p.first_name,'')||' '||COALESCE(p.middle_name,'')||' '||COALESCE(p.last_name,'')||' '||COALESCE(g.name,''))"], $variant);
-            $out['persons'] = $run(person_select() . " WHERE {$w} ORDER BY " . fold_sort_sql('p.last_name') . ', ' . fold_sort_sql('p.first_name') . ' LIMIT 8', $p);
+            // 🔎 recherche « à la française », comme le panneau Personnes (lib/recherche_fr.php) : nom, autres noms, particules,
+            // prénoms latins et abrégés, dates tapées, phonétique en repli ; chaque fiche dit pourquoi elle répond (why)
+            $res = rfr_person_ids($pdo, implode(' ', $words), ['limit' => 8]);
+            if ($res['ids']) {
+                $why = rfr_why_of($pdo, $res);
+                $byId = [];
+                foreach ($run(person_select() . ' WHERE p.id IN (' . implode(',', $res['ids']) . ')', []) as $r) { $byId[(int) $r['id']] = $r; }
+                foreach ($res['ids'] as $id) { if (isset($byId[$id])) { $out['persons'][] = $byId[$id] + ['why' => $why[$id] ?? []]; } }
+            }
+            $out['fallback'] = $res['fallback'];
         }
     }
     if ($only === null || $only === 'battues') {
@@ -338,10 +344,19 @@ function quick_search_data(PDO $pdo, string $q): array
         $out['investigations'] = $run("SELECT i.id, i.title, i.status FROM investigations i WHERE {$w} ORDER BY i.updated_at DESC LIMIT 6", $p);
     }
     if (($only === null && $words) || $only === 'places') {
-        [$w, $p] = $like(['pl.name']);
+        // 🔎 Saint / St / Ste, article du début, anciens noms et communes fusionnées (lib/recherche_fr.php)
+        rfr_register($pdo);
+        $pw = []; $pp = [];
+        foreach ([implode(' ', $words)] as $i => $wd) { // le nom entier (« St Martin » = « Saint-Martin »)
+            $alts = [];
+            foreach (rfr_place_variants($wd) as $j => $v) { $alts[] = "(lc_fold(pl.name) LIKE :pv{$i}_{$j} OR rfr_place_fold(pl.name) LIKE :pv{$i}_{$j} OR (pl.alternate_names<>'' AND lc_fold(pl.alternate_names) LIKE :pv{$i}_{$j}))"; $pp[":pv{$i}_{$j}"] = '%' . $v . '%'; }
+            $pw[] = $alts ? '(' . implode(' OR ', $alts) . ')' : '1';
+        }
         // Seulement les lieux cités (pas les ~80 000 lieux du répertoire)
-        $out['places'] = $run("SELECT pl.id, pl.name, pl.county, pl.country, (SELECT count(*) FROM events e WHERE e.place_id=pl.id) AS uses FROM places pl
-            WHERE {$w} AND EXISTS (SELECT 1 FROM events e WHERE e.place_id=pl.id) ORDER BY uses DESC LIMIT 6", $p);
+        $out['places'] = $run("SELECT pl.id, pl.name, pl.county, pl.country, pl.alternate_names, (SELECT count(*) FROM events e WHERE e.place_id=pl.id) AS uses FROM places pl
+            WHERE pl.id IN (SELECT DISTINCT place_id FROM events WHERE place_id IS NOT NULL) AND " . ($pw ? implode(' AND ', $pw) : '1') . ' ORDER BY uses DESC LIMIT 6', $pp);
+        foreach ($out['places'] as &$pl) { $pl['why'] = ($w1 = rfr_place_why($pdo, (int) $pl['id'], (string) $pl['name'], (string) $pl['alternate_names'], implode(' ', $words))) ? [$w1] : []; unset($pl['alternate_names']); }
+        unset($pl);
     }
     // 📈 mes graphiques (lib/graphs.php, table créée au premier enregistrement)
     if (($only === null && $words) || $only === 'graphs') {

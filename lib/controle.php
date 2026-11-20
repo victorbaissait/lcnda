@@ -543,7 +543,16 @@ function controle_compute(PDO $pdo, array $th): array
         if ($ln === '' || $fn === '') { continue; }
         $P[$id]['lk'] = $ln; $P[$id]['fk'] = $fn;
         $groups[$ln . '|' . substr($fn, 0, 3)][] = $id;
+        // 🔎 rapprochement « à la française » (lib/recherche_fr.php) : en plus, même nom à l'oreille (Dupont / Dupond, Mazaud / Mazeau)
+        // et même prénom de référence (Petrus / Pierre, J.-Bte / Jean-Baptiste, Toinette / Antoinette) — des paires en plus, jamais en moins
+        if (function_exists('rfr_name_keys')) {
+            $ph = rfr_name_keys($p['ln'])['phon']; $ff = rfr_first_forms($p['fn'])[0] ?? null;
+            $P[$id]['ph'] = $ph; $P[$id]['fc'] = $ff ? $ff['canon'] : $fn;
+            $alt = '~' . $ph . '|' . $P[$id]['fc'];
+            if ($ph !== '' && $alt !== '~' . $ln . '|' . substr($fn, 0, 3)) { $groups[$alt][] = $id; }
+        }
     }
+    $pairSeen = [];
     $parentsMemo = []; // gardés : les doublons et les mariages entre ancêtre et descendant les redemandent des milliers de fois
     $parentsOf = static function (int $id) use ($parentFams, $families, &$parentsMemo): array { if (isset($parentsMemo[$id])) { return $parentsMemo[$id]; } $out = []; foreach ($parentFams[$id] ?? [] as $f) { foreach ($families[$f] ?? [] as $x) { if ($x) { $out[$x] = true; } } } return $parentsMemo[$id] = $out; };
     $dupCount = 0;
@@ -552,6 +561,8 @@ function controle_compute(PDO $pdo, array $th): array
         for ($i = 0; $i < $n; $i++) {
             for ($j = $i + 1; $j < $n; $j++) {
                 $a = min($ids[$i], $ids[$j]); $b = max($ids[$i], $ids[$j]); $pa = $P[$a]; $pb = $P[$b];
+                if (isset($pairSeen[$a . ':' . $b])) { continue; }
+                $pairSeen[$a . ':' . $b] = true;
                 $ba = $birth($a); $bb = $birth($b); $da = $death($a); $db = $death($b);
                 if ($ba && $bb && abs($ba['y'] - $bb['y']) > 5) { continue; }
                 // sexes connus et différents : deux personnes (fini « Marie ↔ Martin »)
@@ -564,8 +575,12 @@ function controle_compute(PDO $pdo, array $th): array
                 if ($sameParents && $ba && $bb && $ba['j'] !== null && $bb['j'] !== null && abs($ba['j'] - $bb['j']) > 270) { continue; }
                 if (isset($par1[$b]) || isset($par2[$a])) { continue; }
                 $checks = []; $score = 0; $max = 0;
-                $checks[] = ['ok', $T('même nom')]; $score += 25; $max += 25;
-                $max += 20; if ($pa['fk'] === $pb['fk']) { $checks[] = ['ok', $T('même prénom')]; $score += 20; } else { $checks[] = ['?', $T('prénom proche')]; $score += 8; }
+                if ($pa['lk'] === $pb['lk']) { $checks[] = ['ok', $T('même nom')]; $score += 25; } else { $checks[] = ['?', $T('nom proche à l’oreille ({a} / {b})', ['a' => $pa['ln'], 'b' => $pb['ln']])]; $score += 18; }
+                $max += 25;
+                $max += 20;
+                if ($pa['fk'] === $pb['fk']) { $checks[] = ['ok', $T('même prénom')]; $score += 20; }
+                elseif (($pa['fc'] ?? 1) === ($pb['fc'] ?? 2)) { $checks[] = ['ok', $T('même prénom, écrit autrement ({a} / {b})', ['a' => $pa['fn'], 'b' => $pb['fn']])]; $score += 17; }
+                else { $checks[] = ['?', $T('prénom proche')]; $score += 8; }
                 $max += 5; if ($pa['g'] === $pb['g'] && $pa['g'] !== 'unknown') { $checks[] = ['ok', $T('même sexe')]; $score += 5; } else { $checks[] = ['?', $T('sexe')]; $score += 2; }
                 $max += 20;
                 if ($ba && $bb) { if ($ba['j'] !== null && $ba['j'] === $bb['j']) { $checks[] = ['ok', $T('même naissance')]; $score += 20; } elseif (abs($ba['y'] - $bb['y']) <= 2) { $checks[] = ['ok', abs($ba['y'] - $bb['y']) ? $T('nés à {n} an près', ['n' => abs($ba['y'] - $bb['y'])]) : $T('nés la même année')]; $score += 14; } else { $checks[] = ['no', $T('nés {a} / {b}', ['a' => $ba['y'], 'b' => $bb['y']])]; } }

@@ -1,0 +1,53 @@
+fr ¦ ro
+# 🔎 Recherche « à la française » (lib/recherche_fr.php, assets/js/app-recherche-fr.js, Réglages → 🔎 Recherche)
+nom exact ¦ nume exact
+nom de mariage ({x}) ¦ nume de căsătorie ({x})
+autre nom noté ({x}) ¦ alt nume notat ({x})
+particule ignorée ({x}) ¦ particulă ignorată ({x})
+forme latine d’{p} ({x}) ¦ formă latină a lui {p} ({x})
+forme latine de {p} ({x}) ¦ formă latină a lui {p} ({x})
+abréviation d’{p} ({x}) ¦ prescurtare pentru {p} ({x})
+abréviation de {p} ({x}) ¦ prescurtare pentru {p} ({x})
+diminutif d’{p} ({x}) ¦ diminutiv pentru {p} ({x})
+diminutif de {p} ({x}) ¦ diminutiv pentru {p} ({x})
+prénom composé ({p}) ¦ prenume compus ({p})
+phonétique (proche de {x}) ¦ fonetic (apropiat de {x})
+lieu ({x}) ¦ loc ({x})
+Saint, Sainte ou article écrits autrement ({x}) ¦ Saint, Sainte sau articol scrise altfel ({x})
+ancien nom ({x}) ¦ nume vechi ({x})
+commune fusionnée ({x} → {y}) ¦ comună comasată ({x} → {y})
+date « {d} » ({ev} {y}) ¦ data „{d}” ({ev} {y})
+date « {d} » ¦ data „{d}”
+sépulture ¦ înmormântare
+un événement ¦ un eveniment
+Trouvé par : {x} ¦ Găsit prin: {x}
+Aucun « {q} » ; {n} proches : {names} ¦ Niciun „{q}”; {n} apropiate: {names}
+Montre aussi les noms qui se prononcent pareil, même quand le nom exact existe. ¦ Arată și numele care sună la fel, chiar dacă numele exact există.
+Toujours phonétique ¦ Mereu fonetic
+forme française ¦ formă franceză
+forme latine ¦ formă latină
+abréviation ¦ prescurtare
+diminutif ¦ diminutiv
+prénom composé ¦ prenume compus
+prénom de référence : {p} ({k}) ¦ prenume de referință: {p} ({k})
+nom avec particule : {a} = {b} ¦ nume cu particulă: {a} = {b}
+son : {s} ¦ sunet: {s}
+à partir de {y} ¦ de la {y}
+jusqu’à {y} ¦ până în {y}
+Rien de reconnu. ¦ Nimic recunoscut.
+Réglages · Recherche ¦ Setări · Căutare
+La même recherche partout. Sous chaque résultat : pourquoi il a été trouvé. ¦ Aceeași căutare peste tot. Sub fiecare rezultat: de ce a fost găsit.
+Ce que la recherche essaie ¦ Ce încearcă căutarea
+Phonétique automatique ¦ Fonetică automată
+quand rien n’est trouvé, les noms qui se prononcent pareil ¦ când nu se găsește nimic, numele care sună la fel
+Formes latines des prénoms ¦ Forme latine ale prenumelor
+Petrus = Pierre, Joannes = Jean, avec leurs fins (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, cu terminațiile lor (-i, -o, -um, -ae)
+Abréviations et diminutifs des prénoms ¦ Prescurtări și diminutive ale prenumelor
+Marge de « vers » (en années) ¦ Marjă pentru „în jur de” (în ani)
+Toujours : accents, majuscules, particules (d’Albert = Dalbert), St = Saint, communes fusionnées, dates en français et calendrier républicain. ¦ Mereu: accente, majuscule, particule (d’Albert = Dalbert), St = Saint, comune comasate, date în franceză și calendarul republican.
+Écris une recherche : l’app montre ce qu’elle comprend, sans rien chercher. ¦ Scrie o căutare: aplicația arată ce înțelege, fără să caute nimic.
+ex. {x} ¦ de ex. {x}
+Essayer une recherche ¦ Încearcă o căutare
+🔎 Recherche ¦ 🔎 Căutare
+nom proche à l’oreille ({a} / {b}) ¦ nume care sună apropiat ({a} / {b})
+même prénom, écrit autrement ({a} / {b}) ¦ același prenume, scris altfel ({a} / {b})

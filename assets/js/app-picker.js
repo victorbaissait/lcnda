@@ -120,7 +120,7 @@
     function rowHtml(it, q, idx, on) {
         const s = sosaOf(it), title = mark(it.title, q), titleHit = title.includes('<mark>'); // la ligne grise n'est surlignée que si le nom ne l'est pas
         const badge = s ? `<span class="pk-badge sosa">Sosa ${s}</span>` : it.badge ? `<span class="pk-badge2${it.badge_style === 'blue' ? ' blue' : ''}">${esc(it.badge)}</span>` : '';
-        return `<div class="pk-item pk-row${on ? ' on' : ''}" role="option" data-row="${idx}" aria-selected="${on ? 'true' : 'false'}">${sym(it)}<div class="pk-txt"><div class="pk-name">${title}</div>${it.meta ? `<div class="pk-meta">${titleHit ? esc(it.meta) : mark(it.meta, q, 3)}</div>` : ''}</div>${badge}</div>`;
+        return `<div class="pk-item pk-row${on ? ' on' : ''}" role="option" data-row="${idx}" aria-selected="${on ? 'true' : 'false'}">${sym(it)}<div class="pk-txt"><div class="pk-name">${title}</div>${it.meta ? `<div class="pk-meta">${titleHit ? esc(it.meta) : mark(it.meta, q, 3)}</div>` : ''}${window.LCNDA_RFR?.whyHtml?.(it.why, 'rfr-why pk-why') || ''}</div>${badge}</div>`;
     }
     /** Pastille d'une chose choisie (seule : avec « ↗ Fiche » ; dans une liste : petite). */
     function chipHtml(it, i, small) {
@@ -376,6 +376,8 @@
         if (st.active >= st.flat.length) st.active = Math.max(0, st.flat.length - 1);
         let idx = 0, body = '';
         const showGroups = st.kind === 'place' || st.kind.includes(',');
+        const fb = flat.length ? st.groups.find(g => g.fallback)?.fallback : null; // 🔎 « Aucun « Dupond » ; 3 personnes proches : … » (app-recherche-fr.js)
+        if (fb) body += window.LCNDA_RFR?.fallbackHtml?.(fb) || '';
         st.groups.forEach(g => {
             if (!g.items.length) return;
             if (showGroups) body += `<div class="pk-grp${g.key === 'fr' || g.key === 'world' ? ' gray' : ''}">${esc(g.label)}</div>`;

@@ -1,0 +1,53 @@
+fr ¦ sk ¦ nb
+# 🔎 Recherche « à la française » (lib/recherche_fr.php, assets/js/app-recherche-fr.js, Réglages → 🔎 Recherche)
+nom exact ¦ presné meno ¦ nøyaktig navn
+nom de mariage ({x}) ¦ priezvisko po sobáši ({x}) ¦ gift navn ({x})
+autre nom noté ({x}) ¦ iné zapísané meno ({x}) ¦ annet notert navn ({x})
+particule ignorée ({x}) ¦ predložka vynechaná ({x}) ¦ partikkel ignorert ({x})
+forme latine d’{p} ({x}) ¦ latinská podoba mena {p} ({x}) ¦ latinsk form av {p} ({x})
+forme latine de {p} ({x}) ¦ latinská podoba mena {p} ({x}) ¦ latinsk form av {p} ({x})
+abréviation d’{p} ({x}) ¦ skratka mena {p} ({x}) ¦ forkortelse av {p} ({x})
+abréviation de {p} ({x}) ¦ skratka mena {p} ({x}) ¦ forkortelse av {p} ({x})
+diminutif d’{p} ({x}) ¦ zdrobnenina mena {p} ({x}) ¦ kjælenavn for {p} ({x})
+diminutif de {p} ({x}) ¦ zdrobnenina mena {p} ({x}) ¦ kjælenavn for {p} ({x})
+prénom composé ({p}) ¦ zložené krstné meno ({p}) ¦ sammensatt fornavn ({p})
+phonétique (proche de {x}) ¦ foneticky (podobné {x}) ¦ fonetisk (likner {x})
+lieu ({x}) ¦ miesto ({x}) ¦ sted ({x})
+Saint, Sainte ou article écrits autrement ({x}) ¦ Saint, Sainte alebo člen zapísané inak ({x}) ¦ Saint, Sainte eller artikkel skrevet annerledes ({x})
+ancien nom ({x}) ¦ bývalý názov ({x}) ¦ tidligere navn ({x})
+commune fusionnée ({x} → {y}) ¦ zlúčená obec ({x} → {y}) ¦ sammenslått kommune ({x} → {y})
+date « {d} » ({ev} {y}) ¦ dátum „{d}“ ({ev} {y}) ¦ dato «{d}» ({ev} {y})
+date « {d} » ¦ dátum „{d}“ ¦ dato «{d}»
+sépulture ¦ pohreb ¦ gravferd
+un événement ¦ udalosť ¦ en hendelse
+Trouvé par : {x} ¦ Nájdené podľa: {x} ¦ Funnet via: {x}
+Aucun « {q} » ; {n} proches : {names} ¦ Žiadne „{q}“; {n} podobné: {names} ¦ Ingen «{q}»; {n} liknende: {names}
+Montre aussi les noms qui se prononcent pareil, même quand le nom exact existe. ¦ Ukáže aj mená, ktoré znejú rovnako, aj keď presné meno existuje. ¦ Viser også navn som høres like ut, selv når det nøyaktige navnet finnes.
+Toujours phonétique ¦ Vždy foneticky ¦ Alltid fonetisk
+forme française ¦ francúzska podoba ¦ fransk form
+forme latine ¦ latinská podoba ¦ latinsk form
+abréviation ¦ skratka ¦ forkortelse
+diminutif ¦ zdrobnenina ¦ kjælenavn
+prénom composé ¦ zložené krstné meno ¦ sammensatt fornavn
+prénom de référence : {p} ({k}) ¦ východiskové krstné meno: {p} ({k}) ¦ referansefornavn: {p} ({k})
+nom avec particule : {a} = {b} ¦ meno s predložkou: {a} = {b} ¦ navn med partikkel: {a} = {b}
+son : {s} ¦ zvuk: {s} ¦ lyd: {s}
+à partir de {y} ¦ od {y} ¦ fra {y}
+jusqu’à {y} ¦ do {y} ¦ til {y}
+Rien de reconnu. ¦ Nič nerozpoznané. ¦ Ingenting gjenkjent.
+Réglages · Recherche ¦ Nastavenia · Hľadanie ¦ Innstillinger · Søk
+La même recherche partout. Sous chaque résultat : pourquoi il a été trouvé. ¦ Všade rovnaké hľadanie. Pod každým výsledkom: prečo bol nájdený. ¦ Det samme søket overalt. Under hvert resultat: hvorfor det ble funnet.
+Ce que la recherche essaie ¦ Čo hľadanie skúša ¦ Hva søket prøver
+Phonétique automatique ¦ Automatická fonetika ¦ Automatisk fonetikk
+quand rien n’est trouvé, les noms qui se prononcent pareil ¦ keď sa nič nenájde, mená, ktoré znejú rovnako ¦ når ingenting finnes, navn som høres like ut
+Formes latines des prénoms ¦ Latinské podoby krstných mien ¦ Latinske former av fornavn
+Petrus = Pierre, Joannes = Jean, avec leurs fins (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, s ich koncovkami (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, med endelsene sine (-i, -o, -um, -ae)
+Abréviations et diminutifs des prénoms ¦ Skratky a zdrobneniny krstných mien ¦ Forkortelser og kjælenavn for fornavn
+Marge de « vers » (en années) ¦ Rozpätie pre „okolo“ (v rokoch) ¦ Margin for «omkring» (i år)
+Toujours : accents, majuscules, particules (d’Albert = Dalbert), St = Saint, communes fusionnées, dates en français et calendrier républicain. ¦ Vždy: diakritika, veľké písmená, predložky (d’Albert = Dalbert), St = Saint, zlúčené obce, dátumy vo francúzštine a revolučný kalendár. ¦ Alltid: aksenter, store bokstaver, partikler (d’Albert = Dalbert), St = Saint, sammenslåtte kommuner, datoer på fransk og revolusjonskalenderen.
+Écris une recherche : l’app montre ce qu’elle comprend, sans rien chercher. ¦ Napíš hľadanie: aplikácia ukáže, čomu rozumie, bez hľadania. ¦ Skriv et søk: appen viser hva den forstår, uten å søke etter noe.
+ex. {x} ¦ napr. {x} ¦ f.eks. {x}
+Essayer une recherche ¦ Vyskúšať hľadanie ¦ Prøv et søk
+🔎 Recherche ¦ 🔎 Hľadanie ¦ 🔎 Søk
+nom proche à l’oreille ({a} / {b}) ¦ podobne znejúce priezvisko ({a} / {b}) ¦ navn som høres likt ut ({a} / {b})
+même prénom, écrit autrement ({a} / {b}) ¦ rovnaké krstné meno, zapísané inak ({a} / {b}) ¦ samme fornavn, skrevet annerledes ({a} / {b})

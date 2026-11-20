@@ -89,7 +89,16 @@ const backups = (dir) => (fs.existsSync(path.join(dir, 'backups')) ? fs.readdirS
     assert.ok(expected >= 95);
   });
 
-  await step('la copie de sécurité est une base complète, dans l’état d’avant la mise à jour', async () => {
+  await step('structure n°96 : 🔎 recherche « à la française » (rfr_names : clés des noms précalculées, remplie pour toute la base)', async () => {
+    const dir = path.join(tmp, 'ancienne');
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM pragma_table_info('rfr_names') WHERE name IN ('person_id','src','vtype','sig','words','last_keys','last_phon','first_canons','first_phons')")), 9);
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM rfr_names WHERE src=0")), 1, 'la personne de la base ancienne a ses clés');
+    assert.equal(JSON.parse(sql(dir, "SELECT words||'|'||last_keys||'|'||last_phon FROM rfr_names WHERE src=0")), 'jeanne essai| essai |es');
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM sqlite_master WHERE type='trigger'")), 0, 'aucun déclencheur (bootstrap.php les retire)');
+    assert.ok(expected >= 96);
+  });
+
+    await step('la copie de sécurité est une base complète, dans l’état d’avant la mise à jour', async () => {
     const dir = path.join(tmp, 'ancienne');
     const copy = path.join(dir, 'backups', backups(dir)[0]);
     const out = php(`$db=new SQLite3(${JSON.stringify(copy)});echo $db->querySingle('PRAGMA integrity_check'),'|',$db->querySingle('PRAGMA user_version'),'|',$db->querySingle('SELECT count(*) FROM persons');`, dir);

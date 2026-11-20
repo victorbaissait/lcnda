@@ -1,0 +1,53 @@
+fr ¦ lb
+# 🔎 Recherche « à la française » (lib/recherche_fr.php, assets/js/app-recherche-fr.js, Réglages → 🔎 Recherche)
+nom exact ¦ genauen Numm
+nom de mariage ({x}) ¦ Bestietnumm ({x})
+autre nom noté ({x}) ¦ aneren notéierten Numm ({x})
+particule ignorée ({x}) ¦ Partikel ignoréiert ({x})
+forme latine d’{p} ({x}) ¦ laténgesch Form vu {p} ({x})
+forme latine de {p} ({x}) ¦ laténgesch Form vu {p} ({x})
+abréviation d’{p} ({x}) ¦ Ofkierzung vu {p} ({x})
+abréviation de {p} ({x}) ¦ Ofkierzung vu {p} ({x})
+diminutif d’{p} ({x}) ¦ Kosennumm vu {p} ({x})
+diminutif de {p} ({x}) ¦ Kosennumm vu {p} ({x})
+prénom composé ({p}) ¦ zesummegesate Virnumm ({p})
+phonétique (proche de {x}) ¦ phonetesch (ähnlech wéi {x})
+lieu ({x}) ¦ Plaz ({x})
+Saint, Sainte ou article écrits autrement ({x}) ¦ Saint, Sainte oder Artikel anescht geschriwwen ({x})
+ancien nom ({x}) ¦ fréieren Numm ({x})
+commune fusionnée ({x} → {y}) ¦ fusionéiert Gemeng ({x} → {y})
+date « {d} » ({ev} {y}) ¦ Datum „{d}“ ({ev} {y})
+date « {d} » ¦ Datum „{d}“
+sépulture ¦ Begriefnes
+un événement ¦ en Evenement
+Trouvé par : {x} ¦ Fonnt iwwer: {x}
+Aucun « {q} » ; {n} proches : {names} ¦ Keen „{q}“; {n} ähnlech: {names}
+Montre aussi les noms qui se prononcent pareil, même quand le nom exact existe. ¦ Weist och Nimm, déi d’selwecht klingen, och wann et de genauen Numm gëtt.
+Toujours phonétique ¦ Ëmmer phonetesch
+forme française ¦ franséisch Form
+forme latine ¦ laténgesch Form
+abréviation ¦ Ofkierzung
+diminutif ¦ Kosennumm
+prénom composé ¦ zesummegesate Virnumm
+prénom de référence : {p} ({k}) ¦ Referenzvirnumm: {p} ({k})
+nom avec particule : {a} = {b} ¦ Numm mat Partikel: {a} = {b}
+son : {s} ¦ Klang: {s}
+à partir de {y} ¦ vun {y} un
+jusqu’à {y} ¦ bis {y}
+Rien de reconnu. ¦ Näischt erkannt.
+Réglages · Recherche ¦ Astellungen · Sich
+La même recherche partout. Sous chaque résultat : pourquoi il a été trouvé. ¦ Iwwerall déiselwecht Sich. Ënner all Resultat: firwat et fonnt gouf.
+Ce que la recherche essaie ¦ Wat d’Sich probéiert
+Phonétique automatique ¦ Automatesch Phonetik
+quand rien n’est trouvé, les noms qui se prononcent pareil ¦ wann näischt fonnt gëtt, Nimm, déi d’selwecht klingen
+Formes latines des prénoms ¦ Laténgesch Forme vun de Virnimm
+Petrus = Pierre, Joannes = Jean, avec leurs fins (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, mat hiren Endungen (-i, -o, -um, -ae)
+Abréviations et diminutifs des prénoms ¦ Ofkierzungen a Kosennimm vun de Virnimm
+Marge de « vers » (en années) ¦ Spillraum fir „ronn“ (a Joer)
+Toujours : accents, majuscules, particules (d’Albert = Dalbert), St = Saint, communes fusionnées, dates en français et calendrier républicain. ¦ Ëmmer: Akzenter, Groussbuschtawen, Partikelen (d’Albert = Dalbert), St = Saint, fusionéiert Gemengen, Datumen op Franséisch an de Revolutiounskalenner.
+Écris une recherche : l’app montre ce qu’elle comprend, sans rien chercher. ¦ Gëff eng Sich an: d’App weist, wat se versteet, ouni eppes ze sichen.
+ex. {x} ¦ z. B. {x}
+Essayer une recherche ¦ Eng Sich ausprobéieren
+🔎 Recherche ¦ 🔎 Sich
+nom proche à l’oreille ({a} / {b}) ¦ ähnlech klingende Numm ({a} / {b})
+même prénom, écrit autrement ({a} / {b}) ¦ selwechte Virnumm, anescht geschriwwen ({a} / {b})

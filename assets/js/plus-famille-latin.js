@@ -43,17 +43,13 @@
     const MONTHS = [['ianuar', 'janvier'], ['februar', 'février'], ['marti', 'mars'], ['april', 'avril'], ['mai', 'mai'], ['iuni', 'juin'], ['iuli', 'juillet'], ['august', 'août'], ['septembr', 'septembre'], ['octobr', 'octobre'], ['novembr', 'novembre'], ['decembr', 'décembre'], ['7bris', 'septembre'], ['8bris', 'octobre'], ['9bris', 'novembre'], ['xbris', 'décembre'], ['10bris', 'décembre']];
     const monthOf = w => { const f = fold(w).replace(/[^a-z0-9]/g, ''); if (/^(martius|martii|martio|martium)$/.test(f)) return 'mars'; for (const [s, m] of MONTHS) { if (s !== 'marti' && f.startsWith(s) && f.length - s.length <= 3) return m; } return ''; };
 
-    /* ═════════ les prénoms latins des registres (formes courantes) → le prénom français ═════════ */
-    const NAMES = {ioannes: 'Jean', ioannis: 'Jean', ioanni: 'Jean', ioannem: 'Jean', ioanne: 'Jean', ioanna: 'Jeanne', ioannae: 'Jeanne', ioannam: 'Jeanne', petrus: 'Pierre', petri: 'Pierre', petro: 'Pierre', petrum: 'Pierre',
-        maria: 'Marie', mariae: 'Marie', mariam: 'Marie', antonius: 'Antoine', antonii: 'Antoine', antonio: 'Antoine', antonium: 'Antoine', antonia: 'Antoinette', antoniae: 'Antoinette', antoniam: 'Antoinette',
-        iacobus: 'Jacques', iacobi: 'Jacques', iacobo: 'Jacques', iacobum: 'Jacques', franciscus: 'François', francisci: 'François', francisco: 'François', franciscum: 'François', francisca: 'Françoise', franciscae: 'Françoise',
-        anna: 'Anne', annae: 'Anne', annam: 'Anne', margarita: 'Marguerite', margaritae: 'Marguerite', catharina: 'Catherine', catharinae: 'Catherine', claudius: 'Claude', claudii: 'Claude', claudio: 'Claude',
-        ludovicus: 'Louis', ludovici: 'Louis', stephanus: 'Étienne', stephani: 'Étienne', guillelmus: 'Guillaume', guillelmi: 'Guillaume', michael: 'Michel', michaelis: 'Michel', nicolaus: 'Nicolas', nicolai: 'Nicolas',
-        andreas: 'André', andreae: 'André', iosephus: 'Joseph', iosephi: 'Joseph', elisabetha: 'Élisabeth', elisabethae: 'Élisabeth', martinus: 'Martin', martini: 'Martin', paulus: 'Paul', pauli: 'Paul',
-        bartholomaeus: 'Barthélemy', bartholomaei: 'Barthélemy', ioannes_baptista: 'Jean-Baptiste', baptista: 'Baptiste', magdalena: 'Madeleine', magdalenae: 'Madeleine', ludovica: 'Louise', ludovicae: 'Louise', iudith: 'Judith'};
+    /* ═════════ les prénoms latins des registres → le prénom français : la table commune de la recherche ═════════
+     * (assets/data/recherche-fr.json, lue par LCNDA_RFR, assets/js/app-recherche-fr.js) : formes latines et leurs fins (-i, -o, -um, -ae…). */
+    const RFR = () => (root && root.LCNDA_RFR) || (typeof require === 'function' ? (() => { try { return require('./app-recherche-fr.js'); } catch (_) { return null; } })() : null);
+    const latinOf = w => { const R = RFR(); const e = R ? R.firstQuery(w) : null; return e && (e.kind === 'latin' || e.kind === 'decl') ? e.fr : ''; };
     /** les petits mots de liaison (absents du dictionnaire des registres) */
     const SMALL = {et: 'et', ac: 'et', atque: 'et', de: 'de', in: 'dans', ex: 'de', cum: 'avec', qui: 'qui', quae: 'qui', cuius: 'dont', cujus: 'dont', eius: 'son, sa', ejus: 'son, sa', sub: 'sous', pro: 'pour', a: 'par', ab: 'par'};
-    const nameOf = w => NAMES[fold(w).replace(/[^a-z]/g, '')] || '';
+    const nameOf = w => latinOf(w) || latinOf(fold(w).replace(/[^a-z]/g, ''));
 
     /* ═════════ les formules des registres (mot à mot sûr, en vert) ═════════ */
     // [mots latins (formes repliées, « | » = l'un ou l'autre), traduction, sûr ?, rôle donné au nom qui suit]

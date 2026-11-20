@@ -196,6 +196,16 @@ groupes `base` puis `fr`, distance dans la ligne grise).
 - Toutes les requêtes sont préparées ; `q` n'est jamais collé dans le SQL. Une table absente (ancienne base) donne une
   liste vide, sans erreur.
 
+### 🔎 Personnes et lieux : la recherche « à la française »
+
+Les personnes passent par le moteur commun `rfr_person_ids()` (lib/recherche_fr.php, jumeau JS : assets/js/app-recherche-fr.js,
+données : assets/data/recherche-fr.json) : nom de la fiche, autres noms (mariage, variantes), particules, prénoms latins,
+abrégés et diminutifs, dates tapées en français (« vers 1850 », « 15 brumaire an III »), un mot = lieu de naissance ou de décès,
+phonétique en repli. Les lieux : St/Ste = Saint/Sainte, article du début, anciens noms et communes fusionnées.
+Chaque item peut porter `why` (raisons structurées, ex. `[{k: 'latin', v: 'Petrus', fr: 'Pierre'}]`) : la ligne grise
+« Trouvé par : … » est écrite par `LCNDA_RFR.whyHtml(it.why)` (traduite, échappée). Un groupe peut porter `fallback`
+(`{q, n, names}`) : « Aucun « Dupond » ; 3 personnes proches : … ». Même moteur dans Personnes, ⌘K, Listes et Doublons.
+
 ## 🖼 Choisir une image, un son, une vidéo : `openMediaPicker` / `mediaField`
 
 > **Règle obligatoire** (docs/REGLES-INTERFACE.md, « Choisir une image… », maquette `docs/design/choix-image.html`) :

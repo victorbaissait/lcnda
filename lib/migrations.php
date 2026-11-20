@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 95;
+const SCHEMA_VERSION = 96;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -116,6 +116,7 @@ function migration_steps(): array
         93 => 'schema_v93',
         94 => 'schema_v94',
         95 => 'schema_v95',
+        96 => 'schema_v96',
     ];
 }
 
@@ -2641,3 +2642,16 @@ function schema_v95(PDO $pdo): void
     if (!function_exists('ad_schema')) { require_once __DIR__ . '/archives_dispo.php'; }
     ad_schema($pdo);
 }
+
+/**
+ * Structure n°96 : 🔎 recherche « à la française » (lib/recherche_fr.php) : rfr_names, une ligne par nom (fiche, variantes)
+ * avec ses clés précalculées (mots repliés, nom collé et sans particules, phonétique, prénoms de référence) ; remplie ici
+ * pour toute la base, puis tenue à jour par signature à chaque recherche (pas de déclencheur : bootstrap.php les retire).
+ */
+function schema_v96(PDO $pdo): void
+{
+    if (!function_exists('rfr_schema')) { require_once __DIR__ . '/recherche_fr.php'; }
+    rfr_schema($pdo);
+    rfr_refresh($pdo, true);
+}
+
