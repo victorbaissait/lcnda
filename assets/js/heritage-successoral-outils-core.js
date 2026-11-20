@@ -259,7 +259,7 @@
     }
 
     /* ═════ B6. Les courriers en série ═════ */
-    const FIELDS = ['civilité', 'prénom', 'nom', 'adresse', 'qualité', 'dossier', 'notaire', 'date', 'envoyé_le', 'expéditeur'];
+    const FIELDS = ['civilité', 'prénom', 'nom', 'adresse', 'qualité', 'dossier', 'notaire', 'date', 'envoyé_le', 'expéditeur', 'pourcentage', 'siret']; // 📝 {pourcentage} (💶 honoraires du contrat), {siret} (🏢 Mon cabinet)
     const ALIASES = {heir: null, sender: 'expéditeur', sent: 'envoyé_le'}; // les champs d'avant : {heir} = prénom et nom
     const FIELD_RE = /\{([\p{L}_]+)\}/gu;
     /** les champs inconnus d'un modèle : [{name, line}] */
@@ -274,7 +274,9 @@
         const t = o.t || T0;
         const civ = p.gender === 'female' ? t('Madame') : p.gender === 'male' ? t('Monsieur') : '';
         return {'civilité': civ, 'prénom': String(p.first || '').trim(), 'nom': String(p.last || '').trim().toLocaleUpperCase('fr'), 'adresse': (D.addresses?.[row.id]?.lines || []).join('\n'),
-            'qualité': row.kin || '', 'dossier': D.number || '', 'notaire': D.notary || '', 'date': o.date || '', 'envoyé_le': o.sent || '', 'expéditeur': o.sender || ''};
+            'qualité': row.kin || '', 'dossier': D.number || '', 'notaire': D.notary || '', 'date': o.date || '', 'envoyé_le': o.sent || '', 'expéditeur': o.sender || '',
+            'pourcentage': (() => { const f = (D.fees || []).find(x => x.kind === 'percent' && Number(x.person_id) === Number(row.id)); return f && f.percent != null ? `${String(f.percent).replace('.', ',')} %` : ''; })(),
+            'siret': o.siret ?? ((typeof window !== 'undefined' && window.LCNDA_EXT?.succPlus2?.siret?.()) || '')};
     }
     /**
      * Remplir un modèle : {text, empty: [champs vides], parts: [{text, field, empty}]} (parts : pour l'aperçu, qui surligne les

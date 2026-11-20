@@ -27,6 +27,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/successoral_dossiers.php'; // rangement, filtre ⚖️, rattachement, tableau de bord, archive en fichier (migration 91)
 require_once __DIR__ . '/successoral_outils.php'; // ⏱ chronomètre, 🔔 échéances, ✉️ courriers en série, modèles à soi (migration 93)
+require_once __DIR__ . '/successoral_plus2.php'; // ⚰️ 📋 📞 📮 🧾 📈 🤝 🗺 📝 💶 🔗 🗓 👥 🕵️ 📦 : quinze outils de plus et cinq idées (migration 97)
 
 const SUCC_STATES = ['ouvert', 'recherche', 'trouves', 'remis', 'clos', 'archive'];
 const SUCC_STATE_LABELS = ['ouvert' => 'Ouvert', 'recherche' => 'En recherche', 'trouves' => 'Héritiers trouvés', 'remis' => 'Remis au notaire', 'clos' => 'Clos', 'archive' => 'Archivé'];
@@ -338,6 +339,7 @@ function succ_case_out(PDO $pdo, array $r): array
         'courriers' => $courriers, 'graph' => $graph, 'acts' => $acts ?: new stdClass(), 'asked' => $asked ?: new stdClass(), 'addresses' => $addresses ?: new stdClass(),
         // 🔎 introuvable / 🔇 ne répond pas (succ_case_persons, migration 92) ; le réglage « fiches confidentielles comptées » (successoral.json)
         'contact' => (function_exists('succ_contacts_of') ? succ_contacts_of($pdo, $id) : []) ?: new stdClass(), 'count_private' => function_exists('succ_settings') ? (bool) succ_settings()['private_heirs'] : true,
+        'p2' => function_exists('succ_p2_case_extra') ? (succ_p2_case_extra($pdo, $id, $r, $graph) ?: new stdClass()) : new stdClass(), // ⚖️ outils de plus (successoral_plus2.php)
         'updated_at' => (string) $r['updated_at'], 'created_at' => (string) $r['created_at']];
 }
 
@@ -687,6 +689,7 @@ function successoral_api_get(PDO $pdo, array $g): array
     if (!succ_ready($pdo)) { successoral_schema($pdo); }
     succ_outils_ensure($pdo);
     $op = scalar_text($g['op'] ?? 'list', 'op');
+    $p2 = succ_p2_get($pdo, $op, $g); if ($p2 !== null) { return $p2; } // ⚖️ outils de plus (successoral_plus2.php)
     $tools = succ_outils_get($pdo, $op, $g); if ($tools !== null) { return $tools; } // ✉️ modèles à soi (successoral_outils.php)
     if ($op === 'archive_download') { succ_archive_download((string) ($g['token'] ?? '')); }
     $more = succ_dossiers_get($pdo, $op, $g); if ($more !== null) { return $more; } // ⚖️ dossiers : rangement, filtre, rattachement (successoral_dossiers.php)
@@ -714,6 +717,7 @@ function successoral_api_post(PDO $pdo, array $d): array
     if (!succ_ready($pdo)) { successoral_schema($pdo); }
     succ_outils_ensure($pdo);
     $op = scalar_text($d['op'] ?? '', 'op');
+    $p2 = succ_p2_post($pdo, $op, $d); if ($p2 !== null) { return $p2; } // ⚖️ outils de plus (successoral_plus2.php)
     $tools = succ_outils_post($pdo, $op, $d); if ($tools !== null) { return $tools; } // ⏱ 🔔 ✉️ (successoral_outils.php)
     $more = succ_dossiers_post($pdo, $op, $d); if ($more !== null) { return $more; } // ⚖️ dossiers (successoral_dossiers.php)
     return match ($op) {
@@ -762,6 +766,7 @@ function succ_access_note(PDO $pdo, array $d, mixed $out): void
 {
     if (!function_exists('access_log_add')) { return; }
     $op = (string) ($d['op'] ?? '');
+    if (str_starts_with($op, 'p2_')) { succ_p2_access_note($pdo, $d, $out); return; } // ⚖️ outils de plus
     $case = safe_int($d['case_id'] ?? ($d['id'] ?? 0));
     $label = static fn() => access_case_label($pdo, $case);
     $n = static fn($k) => is_array($out) && is_array($out[$k] ?? null) ? count($out[$k]) : 0;
@@ -772,7 +777,7 @@ function succ_access_note(PDO $pdo, array $d, mixed $out): void
         $op === 'unfile_letters' => access_log_add($pdo, 'letters', 'case', $case, $label(), 'unfile|' . (is_array($out) ? (int) ($out['removed'] ?? 0) : 0)),
         $op === 'file_letter' => access_log_add($pdo, 'letters', 'case', $case, $label(), 'file|1'),
         $op === 'move' => access_log_add($pdo, 'export', 'case', $case, $label(), 'succ_move'),
-        $op === 'archive_file' => access_log_add($pdo, 'export', 'case', $case, $label(), 'succ_archive'),
+        $op === 'archive_file' && !function_exists('succ_p2_archive_file') => access_log_add($pdo, 'export', 'case', $case, $label(), 'succ_archive'), // sinon « chiffrée ou non » (successoral_plus2.php)
         default => null,
     };
 }
@@ -790,6 +795,7 @@ function successoral_dispatch(PDO $pdo, string $action, bool $isWrite, array $pa
         if ($isWrite && $action === 'successoral_write') {
             // déplacer ou archiver dans un fichier : une copie de sauvegarde d'abord (des deux généalogies), hors transaction
             $op = (string) ($payload['op'] ?? '');
+            $GLOBALS['succ_p2_archive_pw'] = is_string($payload['password'] ?? null) ? (string) $payload['password'] : ''; // 📦 archive chiffrée (jamais gardé ni noté)
             if (in_array($op, ['move', 'archive_file'], true) && !succ_kiosk()) {
                 succ_dossiers_ensure($pdo);
                 succ_row($pdo, safe_int($payload['case_id'] ?? $payload['id'] ?? 0));
