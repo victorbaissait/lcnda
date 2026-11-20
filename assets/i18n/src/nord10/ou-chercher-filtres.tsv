@@ -1,0 +1,75 @@
+fr ¦ sq ¦ mt
+# 🌍 Où chercher ? — filtres par sorte de source (docs/design/ou-chercher-filtres.html)
+Ouvrir la page filtrée sur une sorte de source ¦ Hap faqen të filtruar sipas një lloji burimi ¦ Iftaħ il-paġna ffiltrata fuq tip wieħed ta’ sors
+Les autres sortes ¦ Llojet e tjera ¦ It-tipi l-oħra
+Proposés ({n} sur {m}) ¦ Të propozuara ({n} nga {m}) ¦ Proposti ({n} minn {m})
+✓ Déjà cherchés ({n} sur {m}) ¦ ✓ Të kërkuara tashmë ({n} nga {m}) ¦ ✓ Diġà mfittxija ({n} minn {m})
+Écartés ({n} sur {m}) ¦ Të përjashtuara ({n} nga {m}) ¦ Imwarrba ({n} minn {m})
+Chercher un site… (ex. Gallica, matricule) ¦ Kërko një sajt… (p.sh. Gallica, regjistër ushtarak) ¦ Fittex sit… (eż. Gallica, reġistru militari)
+Sorte de source ¦ Lloji i burimit ¦ Tip ta’ sors
+Ses pays : {list} ¦ Vendet e tij: {list} ¦ Il-pajjiżi: {list}
+Ses pays ¦ Vendet e tij ¦ Il-pajjiżi
+Un seul : {country} ¦ Vetëm një: {country} ¦ Wieħed biss: {country}
+Pays : {country} ¦ Vendi: {country} ¦ Pajjiż: {country}
+Sites du monde entier seulement (FamilySearch, Geneanet…) ¦ Vetëm sajte mbarëbotërore (FamilySearch, Geneanet…) ¦ Siti dinjija biss (FamilySearch, Geneanet…)
+🌍 Monde entier ¦ 🌍 Gjithë bota ¦ 🌍 Id-dinja kollha
+Prix ¦ Çmimi ¦ Prezz
+Gratuites seulement · {n} ¦ Vetëm falas · {n} ¦ B’xejn biss · {n}
+💶 Gratuites seulement ¦ 💶 Vetëm falas ¦ 💶 B’xejn biss
+En français seulement ¦ Vetëm në frëngjisht ¦ Bil-Franċiż biss
+🇫🇷 En français ¦ 🇫🇷 Në frëngjisht ¦ 🇫🇷 Bil-Franċiż
+Les plus utiles ¦ Më të dobishmet ¦ L-aktar utli
+Gratuits d’abord ¦ Fillimisht falas ¦ L-ewwel dawk b’xejn
+🔗 depuis sa fiche ¦ 🔗 nga skeda ¦ 🔗 mill-fajl tiegħu
+Ce filtre vient de sa fiche : ton choix habituel n’est pas changé. ¦ Ky filtër vjen nga skeda: zgjedhja jote e zakonshme nuk ndryshon. ¦ Dan il-filtru ġej mill-fajl tiegħu: l-għażla tas-soltu tiegħek ma tinbidilx.
+Revenir à mon choix ¦ Kthehu te zgjedhja ime ¦ Lura għall-għażla tiegħi
+↗ Chercher quand même ¦ ↗ Kërko gjithsesi ¦ ↗ Fittex xorta waħda
+de ces filtres ¦ me këto filtra ¦ b’dawn il-filtri
+Aucun site {sorts} pour ce pays ({country}) parmi les {n} sites que l’app connaît ¦ Asnjë sajt {sorts} për këtë vend ({country}) mes {n} sajteve që njeh aplikacioni ¦ L-ebda sit {sorts} għal dan il-pajjiż ({country}) fost il-{n} sit li l-app taf
+Pour ses autres pays : {ok} proposés ; {out} écartés. ¦ Për vendet e tjera: {ok} të propozuara; {out} të përjashtuara. ¦ Għall-pajjiżi l-oħra: {ok} proposti; {out} imwarrba.
+Ses autres pays ({n}) ¦ Vendet e tjera ({n}) ¦ Il-pajjiżi l-oħra ({n})
+Voir les {n} sites écartés ¦ Shiko {n} sajtet e përjashtuara ¦ Ara l-{n} sit imwarrba
+＋ Ajouter un site à moi ¦ ＋ Shto një sajt timin ¦ ＋ Żid sit tiegħi
+Aucun site {sorts} pour {name} ({life}) ¦ Asnjë sajt {sorts} për {name} ({life}) ¦ L-ebda sit {sorts} għal {name} ({life})
+Les {n} sites de cette sorte sont écartés : ¦ {n} sajtet e këtij lloji janë të përjashtuara: ¦ Il-{n} sit ta’ dan it-tip huma mwarrba:
+Aucun site de cette sorte parmi ceux que l’app connaît. ¦ Asnjë sajt i këtij lloji mes atyre që njeh aplikacioni. ¦ L-ebda sit ta’ dan it-tip fost dawk li taf l-app.
+Enlever {sort} ¦ Hiq {sort} ¦ Neħħi {sort}
+Aucun site écarté avec ces filtres. ¦ Asnjë sajt i përjashtuar me këto filtra. ¦ L-ebda sit imwarrab b’dawn il-filtri.
+Sa vie ({life}) croise les années du site ({from}–{to}) ¦ Jeta ({life}) kryqëzohet me vitet e sajtit ({from}–{to}) ¦ Ħajtu ({life}) taqsam is-snin tas-sit ({from}–{to})
+Actes (état civil, paroissiaux) ¦ Akte (gjendje civile, famulli) ¦ Atti (ċivili, parrokkjali)
+Journaux ¦ Gazeta ¦ Gazzetti
+Militaire et guerres ¦ Ushtria dhe luftërat ¦ Militari u gwerer
+Recensements et annuaires ¦ Regjistrime të popullsisë dhe vjetarë ¦ Ċensimenti u direttorji
+Marins, colonies ¦ Detarë, koloni ¦ Baħħara, kolonji
+Marins et colonies ¦ Detarë dhe koloni ¦ Baħħara u kolonji
+Cimetières, décès ¦ Varreza, vdekje ¦ Ċimiterji, mwiet
+Cimetières et décès ¦ Varreza dhe vdekje ¦ Ċimiterji u mwiet
+Notaires, terres et justice ¦ Noterë, toka dhe drejtësi ¦ Nutara, art u ġustizzja
+Métiers (élus, médecins, cheminots, photographes…) ¦ Profesione (të zgjedhur, mjekë, hekurudhorë, fotografë…) ¦ Xogħlijiet (eletti, tobba, ħaddiema tal-ferrovija, fotografi…)
+Arbres en ligne ¦ Pemë në internet ¦ Siġar online
+Bibliothèques ¦ Biblioteka ¦ Libreriji
+Bibliothèques et livres ¦ Biblioteka dhe libra ¦ Libreriji u kotba
+Cartes et lieux ¦ Harta dhe vende ¦ Mapep u postijiet
+Déportation et répression ¦ Dëbimi dhe represioni ¦ Deportazzjoni u ripressjoni
+Guides ¦ Udhëzues ¦ Gwidi
+Guides et modes d’emploi ¦ Udhëzues dhe mënyra përdorimi ¦ Gwidi u struzzjonijiet
+Moteurs ¦ Motorë kërkimi ¦ Magni tat-tfittxija
+Moteurs et encyclopédies ¦ Motorë kërkimi dhe enciklopedi ¦ Magni tat-tfittxija u enċiklopediji
+Tout le militaire ¦ Gjithçka ushtarake ¦ Kollox militari
+Tout pour un marin ¦ Gjithçka për një detar ¦ Kollox għal baħri
+Tout sur l’émigration ¦ Gjithçka për emigracionin ¦ Kollox dwar l-emigrazzjoni
+Tout sur son métier ¦ Gjithçka për profesionin ¦ Kollox dwar ix-xogħol tiegħu
+Tout chez les notaires ¦ Gjithçka te noterët ¦ Kollox għand in-nutara
+⚓ Il était marin ? Le dire sur sa fiche ¦ ⚓ Ishte detar? Shkruaje në skedë ¦ ⚓ Kien baħri? Iktbu fil-fajl tiegħu
+🎖 Il était soldat ? Le dire sur sa fiche ¦ 🎖 Ishte ushtar? Shkruaje në skedë ¦ 🎖 Kien suldat? Iktbu fil-fajl tiegħu
+🚢 Il a émigré ? Le dire sur sa fiche ¦ 🚢 Emigroi? Shkruaje në skedë ¦ 🚢 Emigra? Iktbu fil-fajl tiegħu
+💼 Son métier ? Le dire sur sa fiche ¦ 💼 Profesioni? Shkruaje në skedë ¦ 💼 Ix-xogħol tiegħu? Iktbu fil-fajl
+Pas de lieu dans ce pays ¦ Asnjë vend në këtë shtet ¦ L-ebda post f’dan il-pajjiż
+Hors de ses années ¦ Jashtë viteve të tij ¦ Barra s-snin ta’ ħajtu
+Seulement pour un autre cas (métier, profil) ¦ Vetëm për një rast tjetër (profesion, profil) ¦ Biss għal każ ieħor (xogħol, profil)
+Pour l’autre sexe ¦ Për gjininë tjetër ¦ Għas-sess l-ieħor
+Né hors de France ¦ Lindur jashtë Francës ¦ Imwieled barra Franza
+Peu utile pour cette fiche ¦ Pak i dobishëm për këtë skedë ¦ Ftit utli għal dan il-fajl
+Autres raisons ¦ Arsye të tjera ¦ Raġunijiet oħra
+officier (armée) ¦ oficer (ushtri) ¦ uffiċjal (armata)
+=payant caché ¦ me pagesë i fshehur|me pagesë të fshehur ¦ bi ħlas moħbi|bi ħlas moħbija|bi ħlas moħbija|bi ħlas moħbi|bi ħlas moħbi

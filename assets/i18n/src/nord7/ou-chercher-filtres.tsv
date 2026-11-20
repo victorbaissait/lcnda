@@ -1,0 +1,75 @@
+fr ¦ is
+# 🌍 Où chercher ? — filtres par sorte de source (docs/design/ou-chercher-filtres.html)
+Ouvrir la page filtrée sur une sorte de source ¦ Opna síðuna síaða á eina tegund heimilda
+Les autres sortes ¦ Hinar tegundirnar
+Proposés ({n} sur {m}) ¦ Tillögur ({n} af {m})
+✓ Déjà cherchés ({n} sur {m}) ¦ ✓ Þegar leitað ({n} af {m})
+Écartés ({n} sur {m}) ¦ Útilokað ({n} af {m})
+Chercher un site… (ex. Gallica, matricule) ¦ Leita að vefsvæði… (t.d. Gallica, herskrá)
+Sorte de source ¦ Tegund heimildar
+Ses pays : {list} ¦ Löndin: {list}
+Ses pays ¦ Löndin
+Un seul : {country} ¦ Aðeins eitt: {country}
+Pays : {country} ¦ Land: {country}
+Sites du monde entier seulement (FamilySearch, Geneanet…) ¦ Aðeins alþjóðleg vefsvæði (FamilySearch, Geneanet…)
+🌍 Monde entier ¦ 🌍 Allur heimurinn
+Prix ¦ Verð
+Gratuites seulement · {n} ¦ Aðeins ókeypis · {n}
+💶 Gratuites seulement ¦ 💶 Aðeins ókeypis
+En français seulement ¦ Aðeins á frönsku
+🇫🇷 En français ¦ 🇫🇷 Á frönsku
+Les plus utiles ¦ Gagnlegast
+Gratuits d’abord ¦ Ókeypis fyrst
+🔗 depuis sa fiche ¦ 🔗 úr færslunni
+Ce filtre vient de sa fiche : ton choix habituel n’est pas changé. ¦ Þessi sía kemur úr færslunni: venjulegt val þitt breytist ekki.
+Revenir à mon choix ¦ Aftur í mitt val
+↗ Chercher quand même ¦ ↗ Leita samt
+de ces filtres ¦ með þessum síum
+Aucun site {sorts} pour ce pays ({country}) parmi les {n} sites que l’app connaît ¦ Ekkert {sorts} vefsvæði fyrir þetta land ({country}) af þeim {n} sem appið þekkir
+Pour ses autres pays : {ok} proposés ; {out} écartés. ¦ Fyrir hin löndin: {ok} tillögur; {out} útilokuð.
+Ses autres pays ({n}) ¦ Hin löndin ({n})
+Voir les {n} sites écartés ¦ Sjá {n} útilokuð vefsvæði
+＋ Ajouter un site à moi ¦ ＋ Bæta við eigin vefsvæði
+Aucun site {sorts} pour {name} ({life}) ¦ Ekkert {sorts} vefsvæði fyrir {name} ({life})
+Les {n} sites de cette sorte sont écartés : ¦ {n} vefsvæði af þessari tegund eru útilokuð:
+Aucun site de cette sorte parmi ceux que l’app connaît. ¦ Ekkert vefsvæði af þessari tegund meðal þeirra sem appið þekkir.
+Enlever {sort} ¦ Fjarlægja {sort}
+Aucun site écarté avec ces filtres. ¦ Ekkert útilokað vefsvæði með þessum síum.
+Sa vie ({life}) croise les années du site ({from}–{to}) ¦ Ævin ({life}) skarast við ár vefsvæðisins ({from}–{to})
+Actes (état civil, paroissiaux) ¦ Skjöl (þjóðskrá, kirkjubækur)
+Journaux ¦ Dagblöð
+Militaire et guerres ¦ Her og stríð
+Recensements et annuaires ¦ Manntöl og heimilisfangaskrár
+Marins, colonies ¦ Sjómenn, nýlendur
+Marins et colonies ¦ Sjómenn og nýlendur
+Cimetières, décès ¦ Kirkjugarðar, andlát
+Cimetières et décès ¦ Kirkjugarðar og andlát
+Notaires, terres et justice ¦ Lögbókendur, land og dómar
+Métiers (élus, médecins, cheminots, photographes…) ¦ Störf (kjörnir fulltrúar, læknar, járnbrautarmenn, ljósmyndarar…)
+Arbres en ligne ¦ Ættartré á netinu
+Bibliothèques ¦ Bókasöfn
+Bibliothèques et livres ¦ Bókasöfn og bækur
+Cartes et lieux ¦ Kort og staðir
+Déportation et répression ¦ Brottflutningar og ofsóknir
+Guides ¦ Leiðarvísar
+Guides et modes d’emploi ¦ Leiðarvísar og leiðbeiningar
+Moteurs ¦ Leitarvélar
+Moteurs et encyclopédies ¦ Leitarvélar og alfræðirit
+Tout le militaire ¦ Allt hernaðarlegt
+Tout pour un marin ¦ Allt fyrir sjómann
+Tout sur l’émigration ¦ Allt um brottflutning
+Tout sur son métier ¦ Allt um starfið
+Tout chez les notaires ¦ Allt hjá lögbókendum
+⚓ Il était marin ? Le dire sur sa fiche ¦ ⚓ Var hann sjómaður? Skráðu það í færsluna
+🎖 Il était soldat ? Le dire sur sa fiche ¦ 🎖 Var hann hermaður? Skráðu það í færsluna
+🚢 Il a émigré ? Le dire sur sa fiche ¦ 🚢 Flutti hann úr landi? Skráðu það í færsluna
+💼 Son métier ? Le dire sur sa fiche ¦ 💼 Starfið? Skráðu það í færsluna
+Pas de lieu dans ce pays ¦ Enginn staður í þessu landi
+Hors de ses années ¦ Utan æviáranna
+Seulement pour un autre cas (métier, profil) ¦ Aðeins fyrir annað tilvik (starf, prófíll)
+Pour l’autre sexe ¦ Fyrir hitt kynið
+Né hors de France ¦ Fæddur utan Frakklands
+Peu utile pour cette fiche ¦ Lítið gagnlegt fyrir þessa færslu
+Autres raisons ¦ Aðrar ástæður
+officier (armée) ¦ liðsforingi (her)
+=payant caché ¦ greitt falið|greidd falin

@@ -507,7 +507,7 @@
     function tabPieces(body, D, R, P_) {
         const ro = D.archived;
         const c = P_.counts;
-        const itemRow = it => `<tr data-succ-piece="${esc(it.key)}"><td>${esc(it.what)}</td><td>${esc(it.act || '—')}</td>
+        const itemRow = it => `<tr data-succ-piece="${esc(it.key)}"${it.event_id ? ` data-succ-ev="${Number(it.event_id)}" data-succ-state="${esc(it.state)}"` : ''}><td>${esc(it.what)}</td><td>${esc(it.act || '—')}</td>
             <td>${badge(i18n(STATE_P[it.state][0]), STATE_P[it.state][1])}${it.state === 'asked' && (it.asked?.date || D.pieces?.[it.key]?.updated_at) ? ` <small class="muted">${esc(i18n('le {d}', {d: fmtDate(it.asked?.date || String(D.pieces[it.key].updated_at).slice(0, 10))}))}</small>` : ''}</td>
             <td><div class="succ-p-act">${ro ? '' : `<select data-succ-pstate="${esc(it.key)}" aria-label="${esc(i18n('État de la pièce'))}"><option value="">${esc(i18n('D’après la fiche'))}</option>${Object.entries(STATE_P).map(([k, [l]]) => `<option value="${k}"${D.pieces?.[it.key]?.state === k ? ' selected' : ''}>${esc(i18n(l))}</option>`).join('')}</select>
                 ${it.state === 'missing' && ext.openActLetter && it.kind !== 'R' && it.kind !== 'V' ? `<button type="button" class="button small secondary" data-succ-ask="${esc(it.key)}">${esc(i18n('📮 Demander l’acte'))}</button>` : ''}

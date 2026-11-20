@@ -1,0 +1,75 @@
+fr ¦ hr ¦ sl
+# 🌍 Où chercher ? — filtres par sorte de source (docs/design/ou-chercher-filtres.html)
+Ouvrir la page filtrée sur une sorte de source ¦ Otvori stranicu filtriranu po vrsti izvora ¦ Odpri stran, filtrirano po vrsti vira
+Les autres sortes ¦ Ostale vrste ¦ Druge vrste
+Proposés ({n} sur {m}) ¦ Predloženo ({n} od {m}) ¦ Predlagano ({n} od {m})
+✓ Déjà cherchés ({n} sur {m}) ¦ ✓ Već pretraženo ({n} od {m}) ¦ ✓ Že preiskano ({n} od {m})
+Écartés ({n} sur {m}) ¦ Isključeno ({n} od {m}) ¦ Izločeno ({n} od {m})
+Chercher un site… (ex. Gallica, matricule) ¦ Traži stranicu… (npr. Gallica, matični list) ¦ Išči stran… (npr. Gallica, matični list)
+Sorte de source ¦ Vrsta izvora ¦ Vrsta vira
+Ses pays : {list} ¦ Zemlje: {list} ¦ Države: {list}
+Ses pays ¦ Zemlje ¦ Države
+Un seul : {country} ¦ Samo jedna: {country} ¦ Samo ena: {country}
+Pays : {country} ¦ Zemlja: {country} ¦ Država: {country}
+Sites du monde entier seulement (FamilySearch, Geneanet…) ¦ Samo svjetske stranice (FamilySearch, Geneanet…) ¦ Samo svetovne strani (FamilySearch, Geneanet…)
+🌍 Monde entier ¦ 🌍 Cijeli svijet ¦ 🌍 Ves svet
+Prix ¦ Cijena ¦ Cena
+Gratuites seulement · {n} ¦ Samo besplatne · {n} ¦ Samo brezplačne · {n}
+💶 Gratuites seulement ¦ 💶 Samo besplatne ¦ 💶 Samo brezplačne
+En français seulement ¦ Samo na francuskom ¦ Samo v francoščini
+🇫🇷 En français ¦ 🇫🇷 Na francuskom ¦ 🇫🇷 V francoščini
+Les plus utiles ¦ Najkorisnije ¦ Najkoristnejše
+Gratuits d’abord ¦ Prvo besplatne ¦ Najprej brezplačne
+🔗 depuis sa fiche ¦ 🔗 s kartice ¦ 🔗 s kartice
+Ce filtre vient de sa fiche : ton choix habituel n’est pas changé. ¦ Ovaj filtar dolazi s kartice: tvoj uobičajeni izbor se ne mijenja. ¦ Ta filter prihaja s kartice: tvoja običajna izbira se ne spremeni.
+Revenir à mon choix ¦ Natrag na moj izbor ¦ Nazaj na mojo izbiro
+↗ Chercher quand même ¦ ↗ Ipak traži ¦ ↗ Vseeno išči
+de ces filtres ¦ s ovim filtrima ¦ s temi filtri
+Aucun site {sorts} pour ce pays ({country}) parmi les {n} sites que l’app connaît ¦ Nema stranice {sorts} za ovu zemlju ({country}) među {n} stranica koje aplikacija zna ¦ Ni strani {sorts} za to državo ({country}) med {n} stranmi, ki jih aplikacija pozna
+Pour ses autres pays : {ok} proposés ; {out} écartés. ¦ Za ostale zemlje: predloženo {ok}; isključeno {out}. ¦ Za druge države: predlaganih {ok}; izločenih {out}.
+Ses autres pays ({n}) ¦ Ostale zemlje ({n}) ¦ Druge države ({n})
+Voir les {n} sites écartés ¦ Prikaži {n} isključenih stranica ¦ Pokaži {n} izločenih strani
+＋ Ajouter un site à moi ¦ ＋ Dodaj vlastitu stranicu ¦ ＋ Dodaj svojo stran
+Aucun site {sorts} pour {name} ({life}) ¦ Nema stranice {sorts} za {name} ({life}) ¦ Ni strani {sorts} za {name} ({life})
+Les {n} sites de cette sorte sont écartés : ¦ {n} stranica ove vrste je isključeno: ¦ {n} strani te vrste je izločenih:
+Aucun site de cette sorte parmi ceux que l’app connaît. ¦ Među stranicama koje aplikacija zna nema nijedne ove vrste. ¦ Med stranmi, ki jih aplikacija pozna, ni nobene te vrste.
+Enlever {sort} ¦ Ukloni {sort} ¦ Odstrani {sort}
+Aucun site écarté avec ces filtres. ¦ Nema isključenih stranica s ovim filtrima. ¦ S temi filtri ni izločenih strani.
+Sa vie ({life}) croise les années du site ({from}–{to}) ¦ Život ({life}) se preklapa s godinama stranice ({from}–{to}) ¦ Življenje ({life}) se prekriva z leti strani ({from}–{to})
+Actes (état civil, paroissiaux) ¦ Akti (civilni, župni) ¦ Listine (civilne, župnijske)
+Journaux ¦ Novine ¦ Časopisi
+Militaire et guerres ¦ Vojska i ratovi ¦ Vojska in vojne
+Recensements et annuaires ¦ Popisi stanovništva i adresari ¦ Popisi prebivalstva in adresarji
+Marins, colonies ¦ Mornari, kolonije ¦ Mornarji, kolonije
+Marins et colonies ¦ Mornari i kolonije ¦ Mornarji in kolonije
+Cimetières, décès ¦ Groblja, smrti ¦ Pokopališča, smrti
+Cimetières et décès ¦ Groblja i smrti ¦ Pokopališča in smrti
+Notaires, terres et justice ¦ Bilježnici, zemlja i pravosuđe ¦ Notarji, zemlja in sodstvo
+Métiers (élus, médecins, cheminots, photographes…) ¦ Zanimanja (izabrani, liječnici, željezničari, fotografi…) ¦ Poklici (izvoljeni, zdravniki, železničarji, fotografi…)
+Arbres en ligne ¦ Stabla na mreži ¦ Drevesa na spletu
+Bibliothèques ¦ Knjižnice ¦ Knjižnice
+Bibliothèques et livres ¦ Knjižnice i knjige ¦ Knjižnice in knjige
+Cartes et lieux ¦ Karte i mjesta ¦ Zemljevidi in kraji
+Déportation et répression ¦ Deportacije i represija ¦ Deportacije in represija
+Guides ¦ Vodiči ¦ Vodniki
+Guides et modes d’emploi ¦ Vodiči i upute ¦ Vodniki in navodila
+Moteurs ¦ Tražilice ¦ Iskalniki
+Moteurs et encyclopédies ¦ Tražilice i enciklopedije ¦ Iskalniki in enciklopedije
+Tout le militaire ¦ Sve vojno ¦ Vse vojaško
+Tout pour un marin ¦ Sve za mornara ¦ Vse za mornarja
+Tout sur l’émigration ¦ Sve o iseljavanju ¦ Vse o izseljevanju
+Tout sur son métier ¦ Sve o zanimanju ¦ Vse o poklicu
+Tout chez les notaires ¦ Sve kod bilježnika ¦ Vse pri notarjih
+⚓ Il était marin ? Le dire sur sa fiche ¦ ⚓ Bio je mornar? Upiši to na karticu ¦ ⚓ Je bil mornar? Vpiši to na kartico
+🎖 Il était soldat ? Le dire sur sa fiche ¦ 🎖 Bio je vojnik? Upiši to na karticu ¦ 🎖 Je bil vojak? Vpiši to na kartico
+🚢 Il a émigré ? Le dire sur sa fiche ¦ 🚢 Je li se iselio? Upiši to na karticu ¦ 🚢 Se je izselil? Vpiši to na kartico
+💼 Son métier ? Le dire sur sa fiche ¦ 💼 Zanimanje? Upiši ga na karticu ¦ 💼 Poklic? Vpiši ga na kartico
+Pas de lieu dans ce pays ¦ Nema mjesta u ovoj zemlji ¦ Ni kraja v tej državi
+Hors de ses années ¦ Izvan godina života ¦ Zunaj let življenja
+Seulement pour un autre cas (métier, profil) ¦ Samo za drugi slučaj (zanimanje, profil) ¦ Samo za drug primer (poklic, profil)
+Pour l’autre sexe ¦ Za drugi spol ¦ Za drug spol
+Né hors de France ¦ Rođen izvan Francuske ¦ Rojen zunaj Francije
+Peu utile pour cette fiche ¦ Malo korisno za ovu karticu ¦ Malo koristno za to kartico
+Autres raisons ¦ Drugi razlozi ¦ Drugi razlogi
+officier (armée) ¦ časnik (vojska) ¦ častnik (vojska)
+=payant caché ¦ plaćena skrivena|plaćene skrivene|plaćenih skrivenih ¦ plačljiva skrita|plačljivi skriti|plačljive skrite|plačljivih skritih

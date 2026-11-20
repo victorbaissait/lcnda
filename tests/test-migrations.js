@@ -74,6 +74,13 @@ const backups = (dir) => (fs.existsSync(path.join(dir, 'backups')) ? fs.readdirS
     assert.ok(expected >= 93);
   });
 
+  await step('structure n°95 : 🏛 corrections des actes en ligne aux archives (archives_dispo_corr)', async () => {
+    const dir = path.join(tmp, 'ancienne');
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='archives_dispo_corr'")), 1);
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM pragma_table_info('archives_dispo_corr') WHERE name IN ('dept_code','act_key','commune','verdict','year','url','event_id','source_id')")), 8);
+    assert.ok(expected >= 95);
+  });
+
   await step('la copie de sécurité est une base complète, dans l’état d’avant la mise à jour', async () => {
     const dir = path.join(tmp, 'ancienne');
     const copy = path.join(dir, 'backups', backups(dir)[0]);

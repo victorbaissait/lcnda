@@ -1,0 +1,130 @@
+fr ¦ hr ¦ sl
+# 🏛 Actes en ligne aux archives (docs/design/archives-en-ligne.html)
+Mairie de {commune} ¦ Općina {commune} ¦ Občina {commune}
+Archives départementales ({dept}) ¦ Departmanski arhivi ({dept}) ¦ Departmajski arhivi ({dept})
+🔒 Réservé jusqu’en {year} ¦ 🔒 Ograničeno do {year}. ¦ 🔒 Omejeno do leta {year}
+déjà lié à une source ¦ već povezano s izvorom ¦ že povezano z virom
+Pourquoi cette pastille ? ¦ Zašto ova oznaka? ¦ Zakaj ta oznaka?
+✓ lié ¦ ✓ povezano ¦ ✓ povezano
+Règle : code du patrimoine, art. L213-2 ({legi}) ; qui peut demander avant : décret 2017-890, art. 30 ({decret}). ¦ Pravilo: francuski zakonik o baštini, čl. L213-2 ({legi}); tko može tražiti ranije: uredba 2017-890, čl. 30 ({decret}). ¦ Pravilo: francoski zakonik o dediščini, čl. L213-2 ({legi}); kdo lahko zaprosi prej: odlok 2017-890, čl. 30 ({decret}).
+Une limite vérifiée pour ce département et ce type d’acte couvre la date. ¦ Provjerena granica za ovaj departman i ovu vrstu akta pokriva datum. ¦ Preverjena meja za ta departma in to vrsto listine pokriva datum.
+D’après une source secondaire ({source}) : à confirmer sur la page officielle des archives. ¦ Prema sekundarnom izvoru ({source}): treba potvrditi na službenoj stranici arhiva. ¦ Po sekundarnem viru ({source}): potrdi na uradni strani arhiva.
+Peut-être en ligne (d’après {source}, à confirmer) : année lue dans un extrait de recherche, pas encore confirmée. ¦ Možda na mreži (prema {source}, za potvrdu): godina pročitana u isječku pretrage, još nije potvrđena. ¦ Morda na spletu (po {source}, za potrditev): leto, prebrano v izseku iskanja, še ni potrjeno.
+la table ¦ tablica ¦ tabela
+Date approximative : la fourchette {from}–{to} chevauche la limite ({until}). ¦ Približan datum: raspon {from}–{to} preklapa se s granicom ({until}). ¦ Približen datum: razpon {from}–{to} se prekriva z mejo ({until}).
+La date est à 2 ans de la limite ({until}) : le registre est peut-être en ligne depuis. ¦ Datum je 2 godine od granice ({until}): matica je možda u međuvremenu na mreži. ¦ Datum je 2 leti od meje ({until}): matična knjiga je morda medtem na spletu.
+Acte de plus de 100 ans, mais la limite de ce département n’est pas encore vérifiée : jamais « en ligne » sans source. ¦ Akt stariji od 100 godina, ali granica za ovaj departman još nije provjerena: nikad „na mreži“ bez izvora. ¦ Listina, starejša od 100 let, a meja tega departmaja še ni preverjena: nikoli „na spletu“ brez vira.
+Trop récent pour être en ligne : la limite de ce département est {until}. ¦ Prenov da bi bio na mreži: granica za ovaj departman je {until}. ¦ Prenov, da bi bil na spletu: meja tega departmaja je {until}.
+Trop récent pour être en ligne (et la limite de ce département n’est pas encore vérifiée). ¦ Prenov da bi bio na mreži (a granica za ovaj departman još nije provjerena). ¦ Prenov, da bi bil na spletu (meja tega departmaja pa še ni preverjena).
+L’état civil parisien d’avant 1860 a brûlé en 1871 : chercher dans l’état civil reconstitué (Archives de Paris). ¦ Pariške matice prije 1860. izgorjele su 1871.: traži u rekonstruiranim maticama (Archives de Paris). ¦ Pariške matične knjige pred letom 1860 so zgorele leta 1871: išči v rekonstruiranih knjigah (Archives de Paris).
+Après 1792, un baptême ou une sépulture n’est pas dans l’état civil : il faut le demander aux archives diocésaines. ¦ Nakon 1792. krštenje ili ukop nisu u civilnim maticama: traži ih od biskupijskog arhiva. ¦ Po letu 1792 krst ali pokop ni v civilnih maticah: zaprosi škofijski arhiv.
+Les registres paroissiaux en ligne de ce département commencent en {from}. ¦ Župne matice ovog departmana na mreži počinju {from}. ¦ Župnijske matične knjige tega departmaja na spletu se začnejo leta {from}.
+Ancienne colonie : l’état civil est aux Archives nationales d’outre-mer (Aix-en-Provence). ¦ Bivša kolonija: matice su u Nacionalnom prekomorskom arhivu (Aix-en-Provence). ¦ Nekdanja kolonija: matične knjige so v Nacionalnem čezmorskem arhivu (Aix-en-Provence).
+Hors de France : la table ne couvre que les départements français. Pour un Français né, marié ou mort à l’étranger : le Service central d’état civil (Nantes). ¦ Izvan Francuske: tablica pokriva samo francuske departmane. Za Francuza rođenog, vjenčanog ili umrlog u inozemstvu: Središnja matična služba (Nantes). ¦ Zunaj Francije: tabela pokriva le francoske departmaje. Za Francoza, rojenega, poročenega ali umrlega v tujini: Osrednja matična služba (Nantes).
+Pas de date : impossible de la comparer avec la limite. ¦ Nema datuma: ne može se usporediti s granicom. ¦ Ni datuma: primerjava z mejo ni mogoča.
+Pas de lieu : on ne sait pas à quelles archives s’adresser. ¦ Nema mjesta: ne zna se kojem se arhivu obratiti. ¦ Ni kraja: ne vemo, na kateri arhiv se obrniti.
+Le département du lieu n’est pas connu : choisis la commune dans la liste des lieux, le code arrive tout seul. ¦ Departman mjesta nije poznat: odaberi općinu s popisa mjesta i kod će se sam upisati. ¦ Departma kraja ne poznamo: izberi občino s seznama krajev in koda se vpiše sama.
+Lieu : {place} → {dept} ({code}). ¦ Mjesto: {place} → {dept} ({code}). ¦ Kraj: {place} → {dept} ({code}).
+Limite des {acts} ({dept}) : en ligne jusqu’en {until} ¦ Granica za {acts} ({dept}): na mreži do {until}. ¦ Meja za {acts} ({dept}): na spletu do leta {until}
+la page qui le dit ↗ ¦ stranica koja to navodi ↗ ¦ stran, ki to navaja ↗
+vérifié le {date} ¦ provjereno {date} ¦ preverjeno {date}
+source secondaire ¦ sekundarni izvor ¦ sekundarni vir
+année lue dans un extrait de recherche, pas encore confirmée ¦ godina pročitana u isječku pretrage, još nije potvrđena ¦ leto, prebrano v izseku iskanja, še ni potrjeno
+corrigé par toi ¦ ispravio si ti ¦ popravil(a) si ti
+Limite des {acts} ({dept}) : pas encore vérifiée. ¦ Granica za {acts} ({dept}): još nije provjerena. ¦ Meja za {acts} ({dept}): še ni preverjena.
+75 ans : acte de {date} → communicable à tous le {open}. Ce jour-là, la pastille devient « 📮 À demander » toute seule. ¦ 75 godina: akt od {date} → dostupan svima {open}. Tog dana oznaka sama postaje „📮 Zatražiti“. ¦ 75 let: listina z dne {date} → dostopna vsem {open}. Tisti dan se oznaka sama spremeni v „📮 Zaprositi“.
+75 ans passés : l’acte est communicable à tous depuis le {open}. ¦ Više od 75 godina: akt je svima dostupan od {open}. ¦ Več kot 75 let: listina je dostopna vsem od {open}.
+Un acte de décès est communicable à tous, tout de suite. ¦ Smrtovnica je svima odmah dostupna. ¦ Mrliški list je takoj dostopen vsem.
+À qui demander : ¦ Koga pitati: ¦ Koga prositi:
+L’app ne va pas voir sur le site des archives : elle ouvre la page, c’est toi qui regardes. ¦ Aplikacija ne gleda na stranici arhiva: otvara stranicu, a ti gledaš. ¦ Aplikacija ne gleda na spletno stran arhiva: odpre stran, ti pa pogledaš.
+🏛 Ouvrir les archives ({dept}) ¦ 🏛 Otvori arhiv ({dept}) ¦ 🏛 Odpri arhiv ({dept})
+📮 Préparer la lettre ({who}) ¦ 📮 Pripremi pismo ({who}) ¦ 📮 Pripravi pismo ({who})
+✓ Je l’ai trouvé en ligne ¦ ✓ Pronašao sam ga na mreži ¦ ✓ Našel sem ga na spletu
+✗ Pas en ligne ¦ ✗ Nije na mreži ¦ ✗ Ni na spletu
+🗂 Voir la table des limites ¦ 🗂 Prikaži tablicu granica ¦ 🗂 Pokaži tabelo mej
+🏛 ARCHIVES EN LIGNE ¦ 🏛 ARHIVI NA MREŽI ¦ 🏛 ARHIVI NA SPLETU
+{act} : pourquoi cette pastille ? ¦ {act}: zašto ova oznaka? ¦ {act}: zakaj ta oznaka?
+La page officielle disait {until} le {date}. ¦ Službena stranica navodila je {until} dana {date}. ¦ Uradna stran je {date} navajala {until}.
+Rouvrir la page ↗ ¦ Ponovno otvori stranicu ↗ ¦ Znova odpri stran ↗
+✓ Trouvé en ligne ¦ ✓ Pronađeno na mreži ¦ ✓ Najdeno na spletu
+Adresse de l’image de l’acte (facultatif, conseillé) ¦ Adresa slike akta (neobavezno, preporučeno) ¦ Naslov slike listine (neobvezno, priporočljivo)
+Vue, page ou cote (facultatif) ¦ Snimka, stranica ili signatura (neobavezno) ¦ Posnetek, stran ali signatura (neobvezno)
+ex. vue 143 ¦ npr. snimka 143 ¦ npr. posnetek 143
+Ajouter comme source de cet acte ¦ Dodaj kao izvor ovog akta ¦ Dodaj kot vir te listine
+Ta correction vaut pour… ¦ Tvoja ispravka vrijedi za… ¦ Tvoj popravek velja za…
+Tout le département : les {acts} ({dept}) sont en ligne au moins jusqu’en {year} ¦ Cijeli departman: {acts} ({dept}) na mreži su barem do {year}. ¦ Cel departma: {acts} ({dept}) so na spletu vsaj do leta {year}
+Seulement cette commune ({commune}) ¦ Samo ova općina ({commune}) ¦ Samo ta občina ({commune})
+Cette adresse ne commence pas par https:// ¦ Ova adresa ne počinje s https:// ¦ Ta naslov se ne začne s https://
+✓ Noté : {acts} ({dept}) en ligne au moins jusqu’en {year} ¦ ✓ Zabilježeno: {acts} ({dept}) na mreži barem do {year}. ¦ ✓ Zapisano: {acts} ({dept}) na spletu vsaj do leta {year}
+Pourquoi ? ¦ Zašto? ¦ Zakaj?
+Le registre de cette année n’est pas en ligne ¦ Matica te godine nije na mreži ¦ Matična knjiga tistega leta ni na spletu
+La limite des {acts} ({dept}) passe avant {year} chez toi. ¦ Kod tebe granica za {acts} ({dept}) pomiče se prije {year}. ¦ Pri tebi se meja za {acts} ({dept}) pomakne pred leto {year}.
+Seulement cette commune manque ¦ Nedostaje samo ova općina ¦ Manjka samo ta občina
+Exception pour {commune}, la limite du département ne bouge pas. ¦ Iznimka za {commune}; granica departmana se ne mijenja. ¦ Izjema za {commune}; meja departmaja ostane.
+Je n’ai pas trouvé l’acte dans le registre ¦ Nisam pronašao akt u matici ¦ Listine nisem našel v matični knjigi
+La limite ne bouge pas ; c’est noté (« cherché, pas trouvé »). ¦ Granica se ne mijenja; bilježi se („traženo, nije pronađeno“). ¦ Meja ostane; zapiše se („iskano, ni najdeno“).
+Noté : cherché, pas trouvé dans le registre ¦ Zabilježeno: traženo, nije pronađeno u matici ¦ Zapisano: iskano, ni najdeno v matični knjigi
+✗ Noté : pas en ligne ({place}) ¦ ✗ Zabilježeno: nije na mreži ({place}) ¦ ✗ Zapisano: ni na spletu ({place})
+Où montrer les pastilles ¦ Gdje prikazati oznake ¦ Kje prikazati oznake
+🗂 Archives en ligne par département ¦ 🗂 Arhivi na mreži po departmanima ¦ 🗂 Arhivi na spletu po departmajih
+Table livrée avec l’app (vérifiée le {date}), complétée par tes corrections. Une ligne sans source n’existe pas : le département est alors « à vérifier ». ¦ Tablica isporučena s aplikacijom (provjerena {date}), dopunjena tvojim ispravcima. Redak bez izvora ne postoji: departman je tada „za provjeru“. ¦ Tabela, priložena aplikaciji (preverjena {date}), dopolnjena s tvojimi popravki. Vrstice brez vira ni: departma je takrat „za preveriti“.
+La table des limites n’est pas encore livrée avec cette version : tout est « à vérifier », sauf ce que tu notes toi-même. ¦ Tablica granica još ne dolazi s ovom verzijom: sve je „za provjeru“, osim onoga što sam zabilježiš. ¦ Tabela mej še ni priložena tej različici: vse je „za preveriti“, razen tistega, kar zapišeš sam.
+🔎 Département… ¦ 🔎 Departman… ¦ 🔎 Departma…
+En ligne jusqu’à ¦ Na mreži do ¦ Na spletu do
+Page officielle qui le dit ¦ Službena stranica koja to navodi ¦ Uradna stran, ki to navaja
+Vérifié le ¦ Provjereno ¦ Preverjeno
+tous ¦ svi ¦ vsi
+＋ Noter la limite ¦ ＋ Zabilježi granicu ¦ ＋ Zapiši mejo
+depuis {y} ¦ od {y}. ¦ od leta {y}
+à confirmer ¦ za potvrdu ¦ za potrditev
+moi ¦ ja ¦ jaz
+Retirer ma correction ¦ Ukloni moju ispravku ¦ Odstrani moj popravek
+Aucun département ne correspond. ¦ Nijedan departman ne odgovara. ¦ Noben departma se ne ujema.
+Correction retirée : la ligne livrée avec l’app revient. ¦ Ispravka uklonjena: vraća se redak isporučen s aplikacijom. ¦ Popravek odstranjen: vrne se vrstica, priložena aplikaciji.
+En ligne jusqu’à l’année ¦ Na mreži do godine ¦ Na spletu do leta
+ex. 1925 ¦ npr. 1925 ¦ npr. 1925
+Adresse de la page qui le dit (obligatoire) ¦ Adresa stranice koja to navodi (obavezno) ¦ Naslov strani, ki to navaja (obvezno)
+Sans adresse, on ne peut pas enregistrer : c’est ce qui évite les limites inventées. ¦ Bez adrese ne može se spremiti: tako se izbjegavaju izmišljene granice. ¦ Brez naslova ni mogoče shraniti: tako se izognemo izmišljenim mejam.
+Une année entre 1500 et aujourd’hui. ¦ Godina između 1500. i danas. ¦ Leto med 1500 in danes.
+L’adresse de la page qui le dit est obligatoire. ¦ Adresa stranice koja to navodi je obavezna. ¦ Naslov strani, ki to navaja, je obvezen.
+＋ Limite notée : {dept}, {year} ¦ ＋ Granica zabilježena: {dept}, {year} ¦ ＋ Meja zapisana: {dept}, {year}
+En ligne aux archives : à télécharger, pas à demander ¦ Na mreži u arhivu: preuzeti, ne tražiti ¦ Na spletu v arhivu: prenesi, ne naročaj
+🏛 Ouvrir ¦ 🏛 Otvori ¦ 🏛 Odpri
+Réservé jusqu’en {year} : à demander par l’héritier lui-même, ou extrait sans filiation ¦ Ograničeno do {year}.: mora tražiti sam nasljednik, ili izvadak bez podataka o roditeljima ¦ Omejeno do leta {year}: zaprositi mora dedič sam, ali izpisek brez staršev
+À demander : {who} ¦ Zatražiti: {who} ¦ Zaprositi: {who}
+📮 Lettre ¦ 📮 Pismo ¦ 📮 Pismo
+🏛 Archives ¦ 🏛 Arhiv ¦ 🏛 Arhiv
+Commence par les tables décennales. ¦ Počni s desetogodišnjim kazalima. ¦ Začni z desetletnimi kazali.
+Ses actes aux archives ¦ Akti u arhivu ¦ Listine v arhivu
+Les actes n’ont pas pu être lus. ¦ Akte nije bilo moguće pročitati. ¦ Listin ni bilo mogoče prebrati.
+{n} de ta base sont en ligne et pas encore liés à une source. ¦ {n} iz tvoje baze na mreži je i još nije povezano s izvorom. ¦ {n} iz tvoje baze je na spletu in še ni povezanih z virom.
+Aussi : {maybe} peut-être en ligne · {ask} à demander · {verify} à vérifier ¦ Također: {maybe} možda na mreži · {ask} zatražiti · {verify} provjeriti ¦ Tudi: {maybe} morda na spletu · {ask} zaprositi · {verify} preveriti
+La table des limites n’est pas encore livrée : aucun acte ne peut être « en ligne » sans source. ¦ Tablica granica još nije isporučena: nijedan akt ne može biti „na mreži“ bez izvora. ¦ Tabela mej še ni priložena: nobena listina ne more biti „na spletu“ brez vira.
+Actes en ligne à aller voir ¦ Akti na mreži za pogledati ¦ Listine na spletu za ogled
+La pastille 🏛 dit, pour chaque acte, s’il est en ligne aux archives (d’après une limite vérifiée du département), à demander (et à qui), ou réservé. Un acte en ligne sort de cette liste. ¦ Oznaka 🏛 za svaki akt kaže je li na mreži u arhivu (prema provjerenoj granici departmana), treba li ga zatražiti (i od koga) ili je ograničen. Akt koji je na mreži izlazi s ovog popisa. ¦ Oznaka 🏛 za vsako listino pove, ali je na spletu v arhivu (po preverjeni meji departmaja), jo je treba zaprositi (in koga) ali je omejena. Listina, ki je na spletu, izgine s tega seznama.
+Actes ¦ Akti ¦ Listine
+Arbres ¦ Stabla ¦ Drevesa
+Peut-être en ligne ¦ Možda na mreži ¦ Morda na spletu
+Réservé ¦ Ograničeno ¦ Omejeno
+Archives nationales d’outre-mer (Aix-en-Provence) ¦ Nacionalni prekomorski arhiv (Aix-en-Provence) ¦ Nacionalni čezmorski arhiv (Aix-en-Provence)
+Notaire ou Archives départementales (série E) ¦ Bilježnik ili departmanski arhivi (serija E) ¦ Notar ali departmajski arhivi (serija E)
+Service historique de la Défense (Vincennes, Caen) ¦ Povijesna služba obrane (Vincennes, Caen) ¦ Zgodovinska služba obrambe (Vincennes, Caen)
+baptêmes ¦ krštenja ¦ krsti
+sépultures ¦ ukopi ¦ pokopi
+tables décennales ¦ desetogodišnja kazala ¦ desetletna kazala
+registres paroissiaux ¦ župne matice ¦ župnijske matične knjige
+Pastilles sur les fiches ¦ Oznake na karticama ¦ Oznake na karticah
+à côté de chaque naissance, baptême, mariage, décès, sépulture ¦ uz svako rođenje, krštenje, vjenčanje, smrt, ukop ¦ ob vsakem rojstvu, krstu, poroki, smrti, pokopu
+Pastilles dans la Chronologie ¦ Oznake u Kronologiji ¦ Oznake v Kronologiji
+Colonne « 🏛 Archives » dans la liste des Événements ¦ Stupac „🏛 Arhiv“ na popisu Događaja ¦ Stolpec „🏛 Arhiv“ na seznamu Dogodkov
+Cacher la pastille quand l’acte est déjà lié ¦ Sakrij oznaku kad je akt već povezan ¦ Skrij oznako, ko je listina že povezana
+sinon : petite « 🟢 ✓ lié » ¦ inače: mala „🟢 ✓ povezano“ ¦ sicer: majhna „🟢 ✓ povezano“
+Widget « 🏛 Actes en ligne à aller voir » : ancêtres directs seulement ¦ Widget „🏛 Akti na mreži za pogledati“: samo izravni preci ¦ Pripomoček „🏛 Listine na spletu za ogled“: samo neposredni predniki
+Vérifiés ¦ Provjereni ¦ Preverjeni
+Corrigés par moi ¦ Ispravio sam ja ¦ Popravil(a) sem jaz
+Actes en ligne aux archives ¦ Akti na mreži u arhivima ¦ Listine na spletu v arhivih
+Une pastille sur chaque naissance, baptême, mariage, décès et sépulture : en ligne, à demander (et à qui), réservé, à vérifier. Jamais « en ligne » sans une limite sourcée. ¦ Oznaka na svakom rođenju, krštenju, vjenčanju, smrti i ukopu: na mreži, zatražiti (i od koga), ograničeno, provjeriti. Nikad „na mreži“ bez granice s izvorom. ¦ Oznaka pri vsakem rojstvu, krstu, poroki, smrti in pokopu: na spletu, zaprositi (in koga), omejeno, preveriti. Nikoli „na spletu“ brez meje z virom.
+Correction introuvable. ¦ Ispravka nije pronađena. ¦ Popravka ni mogoče najti.
+Type d’acte inconnu. ¦ Nepoznata vrsta akta. ¦ Neznana vrsta listine.
+Année incorrecte. ¦ Neispravna godina. ¦ Napačno leto.
+Cet acte n’a pas de département ou de date : précise d’abord le lieu et la date. ¦ Ovaj akt nema departman ili datum: najprije navedi mjesto i datum. ¦ Listina nima departmaja ali datuma: najprej določi kraj in datum.

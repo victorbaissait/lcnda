@@ -1,0 +1,130 @@
+fr ¦ ru ¦ uk
+# 🏛 Actes en ligne aux archives (docs/design/archives-en-ligne.html)
+Mairie de {commune} ¦ Мэрия {commune} ¦ Мерія {commune}
+Archives départementales ({dept}) ¦ Департаментские архивы ({dept}) ¦ Департаментські архіви ({dept})
+🔒 Réservé jusqu’en {year} ¦ 🔒 Закрыто до {year} года ¦ 🔒 Обмежено до {year} року
+déjà lié à une source ¦ уже связано с источником ¦ уже пов’язано з джерелом
+Pourquoi cette pastille ? ¦ Почему эта метка? ¦ Чому ця позначка?
+✓ lié ¦ ✓ связано ¦ ✓ пов’язано
+Règle : code du patrimoine, art. L213-2 ({legi}) ; qui peut demander avant : décret 2017-890, art. 30 ({decret}). ¦ Правило: Кодекс наследия Франции, ст. L213-2 ({legi}); кто может запросить раньше: декрет 2017-890, ст. 30 ({decret}). ¦ Правило: Кодекс спадщини Франції, ст. L213-2 ({legi}); хто може запитати раніше: декрет 2017-890, ст. 30 ({decret}).
+Une limite vérifiée pour ce département et ce type d’acte couvre la date. ¦ Проверенная граница для этого департамента и этого вида акта охватывает дату. ¦ Перевірена межа для цього департаменту й цього виду акта охоплює дату.
+D’après une source secondaire ({source}) : à confirmer sur la page officielle des archives. ¦ По вторичному источнику ({source}): надо подтвердить на официальной странице архива. ¦ За вторинним джерелом ({source}): треба підтвердити на офіційній сторінці архіву.
+Peut-être en ligne (d’après {source}, à confirmer) : année lue dans un extrait de recherche, pas encore confirmée. ¦ Возможно, онлайн (по {source}, надо подтвердить): год прочитан во фрагменте поиска, ещё не подтверждён. ¦ Можливо, онлайн (за {source}, треба підтвердити): рік прочитано у фрагменті пошуку, ще не підтверджено.
+la table ¦ таблица ¦ таблиця
+Date approximative : la fourchette {from}–{to} chevauche la limite ({until}). ¦ Приблизительная дата: промежуток {from}–{to} пересекает границу ({until}). ¦ Приблизна дата: проміжок {from}–{to} перетинає межу ({until}).
+La date est à 2 ans de la limite ({until}) : le registre est peut-être en ligne depuis. ¦ Дата в 2 годах от границы ({until}): книга, возможно, уже выложена онлайн. ¦ Дата за 2 роки від межі ({until}): книга, можливо, вже онлайн.
+Acte de plus de 100 ans, mais la limite de ce département n’est pas encore vérifiée : jamais « en ligne » sans source. ¦ Акту больше 100 лет, но граница этого департамента ещё не проверена: никогда не «онлайн» без источника. ¦ Акту понад 100 років, але межу цього департаменту ще не перевірено: ніколи не «онлайн» без джерела.
+Trop récent pour être en ligne : la limite de ce département est {until}. ¦ Слишком недавний, чтобы быть онлайн: граница этого департамента — {until}. ¦ Занадто недавній, щоб бути онлайн: межа цього департаменту — {until}.
+Trop récent pour être en ligne (et la limite de ce département n’est pas encore vérifiée). ¦ Слишком недавний, чтобы быть онлайн (а граница этого департамента ещё не проверена). ¦ Занадто недавній, щоб бути онлайн (а межу цього департаменту ще не перевірено).
+L’état civil parisien d’avant 1860 a brûlé en 1871 : chercher dans l’état civil reconstitué (Archives de Paris). ¦ Парижские акты гражданского состояния до 1860 года сгорели в 1871: ищи в восстановленных актах (Archives de Paris). ¦ Паризькі акти цивільного стану до 1860 року згоріли 1871-го: шукай у відновлених актах (Archives de Paris).
+Après 1792, un baptême ou une sépulture n’est pas dans l’état civil : il faut le demander aux archives diocésaines. ¦ После 1792 года крещения и погребения нет в актах гражданского состояния: надо обратиться в епархиальный архив. ¦ Після 1792 року хрещення чи поховання немає в актах цивільного стану: треба звернутися до єпархіального архіву.
+Les registres paroissiaux en ligne de ce département commencent en {from}. ¦ Приходские книги этого департамента онлайн начинаются с {from} года. ¦ Парафіяльні книги цього департаменту онлайн починаються з {from} року.
+Ancienne colonie : l’état civil est aux Archives nationales d’outre-mer (Aix-en-Provence). ¦ Бывшая колония: акты гражданского состояния хранятся в Национальном заморском архиве (Экс-ан-Прованс). ¦ Колишня колонія: акти цивільного стану зберігаються в Національному заморському архіві (Екс-ан-Прованс).
+Hors de France : la table ne couvre que les départements français. Pour un Français né, marié ou mort à l’étranger : le Service central d’état civil (Nantes). ¦ Вне Франции: таблица охватывает только французские департаменты. Для француза, родившегося, вступившего в брак или умершего за границей: Центральная служба ЗАГС (Нант). ¦ Поза Францією: таблиця охоплює лише французькі департаменти. Для француза, який народився, одружився чи помер за кордоном: Центральна служба РАЦС (Нант).
+Pas de date : impossible de la comparer avec la limite. ¦ Нет даты: сравнить с границей нельзя. ¦ Немає дати: порівняти з межею неможливо.
+Pas de lieu : on ne sait pas à quelles archives s’adresser. ¦ Нет места: неизвестно, в какой архив обращаться. ¦ Немає місця: невідомо, до якого архіву звертатися.
+Le département du lieu n’est pas connu : choisis la commune dans la liste des lieux, le code arrive tout seul. ¦ Департамент места неизвестен: выбери коммуну в списке мест, код подставится сам. ¦ Департамент місця невідомий: вибери комуну в списку місць, код підставиться сам.
+Lieu : {place} → {dept} ({code}). ¦ Место: {place} → {dept} ({code}). ¦ Місце: {place} → {dept} ({code}).
+Limite des {acts} ({dept}) : en ligne jusqu’en {until} ¦ Граница ({acts}, {dept}): онлайн до {until} года ¦ Межа ({acts}, {dept}): онлайн до {until} року
+la page qui le dit ↗ ¦ страница, где это сказано ↗ ¦ сторінка, де це сказано ↗
+vérifié le {date} ¦ проверено {date} ¦ перевірено {date}
+source secondaire ¦ вторичный источник ¦ вторинне джерело
+année lue dans un extrait de recherche, pas encore confirmée ¦ год прочитан во фрагменте поиска, ещё не подтверждён ¦ рік прочитано у фрагменті пошуку, ще не підтверджено
+corrigé par toi ¦ исправлено тобой ¦ виправлено тобою
+Limite des {acts} ({dept}) : pas encore vérifiée. ¦ Граница ({acts}, {dept}): ещё не проверена. ¦ Межа ({acts}, {dept}): ще не перевірена.
+75 ans : acte de {date} → communicable à tous le {open}. Ce jour-là, la pastille devient « 📮 À demander » toute seule. ¦ 75 лет: акт от {date} → доступен всем с {open}. В этот день метка сама станет «📮 Запросить». ¦ 75 років: акт від {date} → доступний усім з {open}. Цього дня позначка сама стане «📮 Запитати».
+75 ans passés : l’acte est communicable à tous depuis le {open}. ¦ Больше 75 лет: акт доступен всем с {open}. ¦ Понад 75 років: акт доступний усім з {open}.
+Un acte de décès est communicable à tous, tout de suite. ¦ Акт о смерти доступен всем сразу. ¦ Акт про смерть доступний усім одразу.
+À qui demander : ¦ К кому обращаться: ¦ До кого звертатися:
+L’app ne va pas voir sur le site des archives : elle ouvre la page, c’est toi qui regardes. ¦ Приложение не заходит на сайт архива: оно открывает страницу, смотришь ты. ¦ Застосунок не заходить на сайт архіву: він відкриває сторінку, дивишся ти.
+🏛 Ouvrir les archives ({dept}) ¦ 🏛 Открыть архив ({dept}) ¦ 🏛 Відкрити архів ({dept})
+📮 Préparer la lettre ({who}) ¦ 📮 Подготовить письмо ({who}) ¦ 📮 Підготувати лист ({who})
+✓ Je l’ai trouvé en ligne ¦ ✓ Я нашёл его онлайн ¦ ✓ Я знайшов його онлайн
+✗ Pas en ligne ¦ ✗ Нет онлайн ¦ ✗ Немає онлайн
+🗂 Voir la table des limites ¦ 🗂 Таблица границ ¦ 🗂 Таблиця меж
+🏛 ARCHIVES EN LIGNE ¦ 🏛 АРХИВЫ ОНЛАЙН ¦ 🏛 АРХІВИ ОНЛАЙН
+{act} : pourquoi cette pastille ? ¦ {act}: почему эта метка? ¦ {act}: чому ця позначка?
+La page officielle disait {until} le {date}. ¦ Официальная страница указывала {until} на {date}. ¦ Офіційна сторінка вказувала {until} станом на {date}.
+Rouvrir la page ↗ ¦ Открыть страницу снова ↗ ¦ Відкрити сторінку знову ↗
+✓ Trouvé en ligne ¦ ✓ Найдено онлайн ¦ ✓ Знайдено онлайн
+Adresse de l’image de l’acte (facultatif, conseillé) ¦ Адрес изображения акта (необязательно, желательно) ¦ Адреса зображення акта (необов’язково, бажано)
+Vue, page ou cote (facultatif) ¦ Кадр, страница или шифр (необязательно) ¦ Кадр, сторінка або шифр (необов’язково)
+ex. vue 143 ¦ напр. кадр 143 ¦ напр. кадр 143
+Ajouter comme source de cet acte ¦ Добавить как источник этого акта ¦ Додати як джерело цього акта
+Ta correction vaut pour… ¦ Твоя поправка действует для… ¦ Твоє виправлення діє для…
+Tout le département : les {acts} ({dept}) sont en ligne au moins jusqu’en {year} ¦ Весь департамент: {acts} ({dept}) онлайн как минимум до {year} года ¦ Увесь департамент: {acts} ({dept}) онлайн щонайменше до {year} року
+Seulement cette commune ({commune}) ¦ Только эта коммуна ({commune}) ¦ Лише ця комуна ({commune})
+Cette adresse ne commence pas par https:// ¦ Этот адрес не начинается с https:// ¦ Ця адреса не починається з https://
+✓ Noté : {acts} ({dept}) en ligne au moins jusqu’en {year} ¦ ✓ Отмечено: {acts} ({dept}) онлайн как минимум до {year} года ¦ ✓ Позначено: {acts} ({dept}) онлайн щонайменше до {year} року
+Pourquoi ? ¦ Почему? ¦ Чому?
+Le registre de cette année n’est pas en ligne ¦ Книги за этот год нет онлайн ¦ Книги за цей рік немає онлайн
+La limite des {acts} ({dept}) passe avant {year} chez toi. ¦ У тебя граница ({acts}, {dept}) сдвигается до {year} года. ¦ У тебе межа ({acts}, {dept}) зсувається до {year} року.
+Seulement cette commune manque ¦ Не хватает только этой коммуны ¦ Бракує лише цієї комуни
+Exception pour {commune}, la limite du département ne bouge pas. ¦ Исключение для {commune}; граница департамента не меняется. ¦ Виняток для {commune}; межа департаменту не змінюється.
+Je n’ai pas trouvé l’acte dans le registre ¦ Я не нашёл акт в книге ¦ Я не знайшов акт у книзі
+La limite ne bouge pas ; c’est noté (« cherché, pas trouvé »). ¦ Граница не меняется; это отмечается («искал, не нашёл»). ¦ Межа не змінюється; це позначається («шукав, не знайшов»).
+Noté : cherché, pas trouvé dans le registre ¦ Отмечено: искал, в книге не нашёл ¦ Позначено: шукав, у книзі не знайшов
+✗ Noté : pas en ligne ({place}) ¦ ✗ Отмечено: нет онлайн ({place}) ¦ ✗ Позначено: немає онлайн ({place})
+Où montrer les pastilles ¦ Где показывать метки ¦ Де показувати позначки
+🗂 Archives en ligne par département ¦ 🗂 Архивы онлайн по департаментам ¦ 🗂 Архіви онлайн за департаментами
+Table livrée avec l’app (vérifiée le {date}), complétée par tes corrections. Une ligne sans source n’existe pas : le département est alors « à vérifier ». ¦ Таблица из приложения (проверена {date}), дополненная твоими поправками. Строки без источника не бывает: тогда департамент «надо проверить». ¦ Таблиця із застосунку (перевірена {date}), доповнена твоїми виправленнями. Рядка без джерела не буває: тоді департамент «треба перевірити».
+La table des limites n’est pas encore livrée avec cette version : tout est « à vérifier », sauf ce que tu notes toi-même. ¦ Таблица границ ещё не поставляется с этой версией: всё «надо проверить», кроме того, что ты отметишь сам. ¦ Таблиця меж ще не постачається з цією версією: усе «треба перевірити», крім того, що ти позначиш сам.
+🔎 Département… ¦ 🔎 Департамент… ¦ 🔎 Департамент…
+En ligne jusqu’à ¦ Онлайн до ¦ Онлайн до
+Page officielle qui le dit ¦ Официальная страница, где это сказано ¦ Офіційна сторінка, де це сказано
+Vérifié le ¦ Проверено ¦ Перевірено
+tous ¦ все ¦ усі
+＋ Noter la limite ¦ ＋ Отметить границу ¦ ＋ Позначити межу
+depuis {y} ¦ с {y} года ¦ з {y} року
+à confirmer ¦ надо подтвердить ¦ треба підтвердити
+moi ¦ я ¦ я
+Retirer ma correction ¦ Убрать мою поправку ¦ Прибрати моє виправлення
+Aucun département ne correspond. ¦ Ни один департамент не подходит. ¦ Жоден департамент не підходить.
+Correction retirée : la ligne livrée avec l’app revient. ¦ Поправка убрана: снова действует строка из приложения. ¦ Виправлення прибрано: знову діє рядок із застосунку.
+En ligne jusqu’à l’année ¦ Онлайн до года ¦ Онлайн до року
+ex. 1925 ¦ напр. 1925 ¦ напр. 1925
+Adresse de la page qui le dit (obligatoire) ¦ Адрес страницы, где это сказано (обязательно) ¦ Адреса сторінки, де це сказано (обов’язково)
+Sans adresse, on ne peut pas enregistrer : c’est ce qui évite les limites inventées. ¦ Без адреса сохранить нельзя: так мы избегаем выдуманных границ. ¦ Без адреси зберегти не можна: так ми уникаємо вигаданих меж.
+Une année entre 1500 et aujourd’hui. ¦ Год между 1500 и сегодняшним днём. ¦ Рік між 1500 і сьогоднішнім днем.
+L’adresse de la page qui le dit est obligatoire. ¦ Адрес страницы, где это сказано, обязателен. ¦ Адреса сторінки, де це сказано, обов’язкова.
+＋ Limite notée : {dept}, {year} ¦ ＋ Граница отмечена: {dept}, {year} ¦ ＋ Межу позначено: {dept}, {year}
+En ligne aux archives : à télécharger, pas à demander ¦ Онлайн в архиве: скачать, а не запрашивать ¦ Онлайн в архіві: завантажити, а не запитувати
+🏛 Ouvrir ¦ 🏛 Открыть ¦ 🏛 Відкрити
+Réservé jusqu’en {year} : à demander par l’héritier lui-même, ou extrait sans filiation ¦ Закрыто до {year} года: запрашивать должен сам наследник, или выписка без родителей ¦ Обмежено до {year} року: запитувати має сам спадкоємець, або витяг без батьків
+À demander : {who} ¦ Запросить: {who} ¦ Запитати: {who}
+📮 Lettre ¦ 📮 Письмо ¦ 📮 Лист
+🏛 Archives ¦ 🏛 Архив ¦ 🏛 Архів
+Commence par les tables décennales. ¦ Начни с десятилетних указателей. ¦ Почни з десятирічних покажчиків.
+Ses actes aux archives ¦ Акты в архиве ¦ Акти в архіві
+Les actes n’ont pas pu être lus. ¦ Не удалось прочитать акты. ¦ Не вдалося прочитати акти.
+{n} de ta base sont en ligne et pas encore liés à une source. ¦ {n} из твоей базы есть онлайн и ещё не связаны с источником. ¦ {n} з твоєї бази є онлайн і ще не пов’язані з джерелом.
+Aussi : {maybe} peut-être en ligne · {ask} à demander · {verify} à vérifier ¦ Также: {maybe} возможно онлайн · {ask} запросить · {verify} проверить ¦ Також: {maybe} можливо онлайн · {ask} запитати · {verify} перевірити
+La table des limites n’est pas encore livrée : aucun acte ne peut être « en ligne » sans source. ¦ Таблица границ ещё не поставляется: ни один акт не может быть «онлайн» без источника. ¦ Таблиця меж ще не постачається: жоден акт не може бути «онлайн» без джерела.
+Actes en ligne à aller voir ¦ Акты онлайн, которые стоит посмотреть ¦ Акти онлайн, які варто переглянути
+La pastille 🏛 dit, pour chaque acte, s’il est en ligne aux archives (d’après une limite vérifiée du département), à demander (et à qui), ou réservé. Un acte en ligne sort de cette liste. ¦ Метка 🏛 говорит про каждый акт, есть ли он онлайн в архиве (по проверенной границе департамента), надо ли его запрашивать (и у кого) или он закрыт. Акт, который есть онлайн, уходит из этого списка. ¦ Позначка 🏛 каже про кожен акт, чи є він онлайн в архіві (за перевіреною межею департаменту), чи треба його запитувати (і в кого) або він обмежений. Акт, що є онлайн, зникає з цього списку.
+Actes ¦ Акты ¦ Акти
+Arbres ¦ Деревья ¦ Дерева
+Peut-être en ligne ¦ Возможно, онлайн ¦ Можливо, онлайн
+Réservé ¦ Закрыто ¦ Обмежено
+Archives nationales d’outre-mer (Aix-en-Provence) ¦ Национальный заморский архив (Экс-ан-Прованс) ¦ Національний заморський архів (Екс-ан-Прованс)
+Notaire ou Archives départementales (série E) ¦ Нотариус или департаментские архивы (серия E) ¦ Нотаріус або департаментські архіви (серія E)
+Service historique de la Défense (Vincennes, Caen) ¦ Историческая служба Минобороны (Венсен, Кан) ¦ Історична служба Міноборони (Венсен, Кан)
+baptêmes ¦ крещения ¦ хрещення
+sépultures ¦ погребения ¦ поховання
+tables décennales ¦ десятилетние указатели ¦ десятирічні покажчики
+registres paroissiaux ¦ приходские книги ¦ парафіяльні книги
+Pastilles sur les fiches ¦ Метки в карточках ¦ Позначки в картках
+à côté de chaque naissance, baptême, mariage, décès, sépulture ¦ рядом с каждым рождением, крещением, браком, смертью, погребением ¦ поруч із кожним народженням, хрещенням, шлюбом, смертю, похованням
+Pastilles dans la Chronologie ¦ Метки в Хронологии ¦ Позначки в Хронології
+Colonne « 🏛 Archives » dans la liste des Événements ¦ Столбец «🏛 Архив» в списке Событий ¦ Стовпець «🏛 Архів» у списку Подій
+Cacher la pastille quand l’acte est déjà lié ¦ Скрывать метку, если акт уже связан ¦ Ховати позначку, якщо акт уже пов’язано
+sinon : petite « 🟢 ✓ lié » ¦ иначе: маленькая «🟢 ✓ связано» ¦ інакше: маленька «🟢 ✓ пов’язано»
+Widget « 🏛 Actes en ligne à aller voir » : ancêtres directs seulement ¦ Виджет «🏛 Акты онлайн, которые стоит посмотреть»: только прямые предки ¦ Віджет «🏛 Акти онлайн, які варто переглянути»: лише прямі предки
+Vérifiés ¦ Проверенные ¦ Перевірені
+Corrigés par moi ¦ Исправленные мной ¦ Виправлені мною
+Actes en ligne aux archives ¦ Акты онлайн в архивах ¦ Акти онлайн в архівах
+Une pastille sur chaque naissance, baptême, mariage, décès et sépulture : en ligne, à demander (et à qui), réservé, à vérifier. Jamais « en ligne » sans une limite sourcée. ¦ Метка у каждого рождения, крещения, брака, смерти и погребения: онлайн, запросить (и у кого), закрыто, проверить. Никогда не «онлайн» без границы с источником. ¦ Позначка біля кожного народження, хрещення, шлюбу, смерті й поховання: онлайн, запитати (і в кого), обмежено, перевірити. Ніколи не «онлайн» без межі з джерелом.
+Correction introuvable. ¦ Поправка не найдена. ¦ Виправлення не знайдено.
+Type d’acte inconnu. ¦ Неизвестный вид акта. ¦ Невідомий вид акта.
+Année incorrecte. ¦ Неверный год. ¦ Неправильний рік.
+Cet acte n’a pas de département ou de date : précise d’abord le lieu et la date. ¦ У этого акта нет департамента или даты: сначала уточни место и дату. ¦ Цей акт не має департаменту чи дати: спершу уточни місце й дату.

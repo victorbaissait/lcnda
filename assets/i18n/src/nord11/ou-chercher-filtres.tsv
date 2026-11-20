@@ -1,0 +1,75 @@
+fr ¦ vi ¦ id
+# 🌍 Où chercher ? — filtres par sorte de source (docs/design/ou-chercher-filtres.html)
+Ouvrir la page filtrée sur une sorte de source ¦ Mở trang đã lọc theo một loại nguồn ¦ Buka halaman yang disaring per jenis sumber
+Les autres sortes ¦ Các loại khác ¦ Jenis lainnya
+Proposés ({n} sur {m}) ¦ Đề xuất ({n} trên {m}) ¦ Disarankan ({n} dari {m})
+✓ Déjà cherchés ({n} sur {m}) ¦ ✓ Đã tìm ({n} trên {m}) ¦ ✓ Sudah dicari ({n} dari {m})
+Écartés ({n} sur {m}) ¦ Đã loại ({n} trên {m}) ¦ Disisihkan ({n} dari {m})
+Chercher un site… (ex. Gallica, matricule) ¦ Tìm một trang… (vd. Gallica, sổ quân bạ) ¦ Cari situs… (mis. Gallica, catatan militer)
+Sorte de source ¦ Loại nguồn ¦ Jenis sumber
+Ses pays : {list} ¦ Các nước: {list} ¦ Negara-negaranya: {list}
+Ses pays ¦ Các nước ¦ Negara-negaranya
+Un seul : {country} ¦ Chỉ một: {country} ¦ Hanya satu: {country}
+Pays : {country} ¦ Quốc gia: {country} ¦ Negara: {country}
+Sites du monde entier seulement (FamilySearch, Geneanet…) ¦ Chỉ các trang toàn cầu (FamilySearch, Geneanet…) ¦ Hanya situs seluruh dunia (FamilySearch, Geneanet…)
+🌍 Monde entier ¦ 🌍 Toàn thế giới ¦ 🌍 Seluruh dunia
+Prix ¦ Giá ¦ Harga
+Gratuites seulement · {n} ¦ Chỉ miễn phí · {n} ¦ Hanya gratis · {n}
+💶 Gratuites seulement ¦ 💶 Chỉ miễn phí ¦ 💶 Hanya gratis
+En français seulement ¦ Chỉ tiếng Pháp ¦ Hanya bahasa Prancis
+🇫🇷 En français ¦ 🇫🇷 Tiếng Pháp ¦ 🇫🇷 Bahasa Prancis
+Les plus utiles ¦ Hữu ích nhất ¦ Paling berguna
+Gratuits d’abord ¦ Miễn phí trước ¦ Gratis dulu
+🔗 depuis sa fiche ¦ 🔗 từ hồ sơ ¦ 🔗 dari profilnya
+Ce filtre vient de sa fiche : ton choix habituel n’est pas changé. ¦ Bộ lọc này đến từ hồ sơ: lựa chọn thường ngày của bạn không đổi. ¦ Filter ini dari profilnya: pilihan biasamu tidak berubah.
+Revenir à mon choix ¦ Quay lại lựa chọn của tôi ¦ Kembali ke pilihanku
+↗ Chercher quand même ¦ ↗ Vẫn tìm ¦ ↗ Tetap cari
+de ces filtres ¦ với các bộ lọc này ¦ dengan filter ini
+Aucun site {sorts} pour ce pays ({country}) parmi les {n} sites que l’app connaît ¦ Không có trang {sorts} cho nước này ({country}) trong {n} trang mà ứng dụng biết ¦ Tidak ada situs {sorts} untuk negara ini ({country}) di antara {n} situs yang dikenal aplikasi
+Pour ses autres pays : {ok} proposés ; {out} écartés. ¦ Với các nước khác: {ok} đề xuất; {out} đã loại. ¦ Untuk negara lainnya: {ok} disarankan; {out} disisihkan.
+Ses autres pays ({n}) ¦ Các nước khác ({n}) ¦ Negara lainnya ({n})
+Voir les {n} sites écartés ¦ Xem {n} trang đã loại ¦ Lihat {n} situs yang disisihkan
+＋ Ajouter un site à moi ¦ ＋ Thêm trang của tôi ¦ ＋ Tambahkan situsku sendiri
+Aucun site {sorts} pour {name} ({life}) ¦ Không có trang {sorts} cho {name} ({life}) ¦ Tidak ada situs {sorts} untuk {name} ({life})
+Les {n} sites de cette sorte sont écartés : ¦ {n} trang thuộc loại này đã bị loại: ¦ {n} situs jenis ini disisihkan:
+Aucun site de cette sorte parmi ceux que l’app connaît. ¦ Không có trang loại này trong số các trang ứng dụng biết. ¦ Tidak ada situs jenis ini di antara yang dikenal aplikasi.
+Enlever {sort} ¦ Bỏ {sort} ¦ Hapus {sort}
+Aucun site écarté avec ces filtres. ¦ Không có trang bị loại với các bộ lọc này. ¦ Tidak ada situs yang disisihkan dengan filter ini.
+Sa vie ({life}) croise les années du site ({from}–{to}) ¦ Cuộc đời ({life}) giao với các năm của trang ({from}–{to}) ¦ Hidupnya ({life}) beririsan dengan tahun situs ({from}–{to})
+Actes (état civil, paroissiaux) ¦ Giấy tờ (hộ tịch, giáo xứ) ¦ Akta (catatan sipil, paroki)
+Journaux ¦ Báo chí ¦ Surat kabar
+Militaire et guerres ¦ Quân đội và chiến tranh ¦ Militer dan perang
+Recensements et annuaires ¦ Điều tra dân số và niên giám ¦ Sensus dan direktori
+Marins, colonies ¦ Thủy thủ, thuộc địa ¦ Pelaut, koloni
+Marins et colonies ¦ Thủy thủ và thuộc địa ¦ Pelaut dan koloni
+Cimetières, décès ¦ Nghĩa trang, khai tử ¦ Makam, kematian
+Cimetières et décès ¦ Nghĩa trang và khai tử ¦ Makam dan kematian
+Notaires, terres et justice ¦ Công chứng, đất đai và tư pháp ¦ Notaris, tanah, dan peradilan
+Métiers (élus, médecins, cheminots, photographes…) ¦ Nghề nghiệp (dân cử, bác sĩ, công nhân đường sắt, thợ ảnh…) ¦ Pekerjaan (pejabat terpilih, dokter, pekerja kereta api, fotografer…)
+Arbres en ligne ¦ Cây gia phả trực tuyến ¦ Pohon keluarga daring
+Bibliothèques ¦ Thư viện ¦ Perpustakaan
+Bibliothèques et livres ¦ Thư viện và sách ¦ Perpustakaan dan buku
+Cartes et lieux ¦ Bản đồ và địa điểm ¦ Peta dan tempat
+Déportation et répression ¦ Trục xuất và đàn áp ¦ Deportasi dan represi
+Guides ¦ Hướng dẫn ¦ Panduan
+Guides et modes d’emploi ¦ Hướng dẫn và cách dùng ¦ Panduan dan cara pakai
+Moteurs ¦ Công cụ tìm kiếm ¦ Mesin pencari
+Moteurs et encyclopédies ¦ Công cụ tìm kiếm và bách khoa ¦ Mesin pencari dan ensiklopedia
+Tout le militaire ¦ Mọi thứ quân sự ¦ Semua militer
+Tout pour un marin ¦ Mọi thứ cho thủy thủ ¦ Semua untuk pelaut
+Tout sur l’émigration ¦ Mọi thứ về di cư ¦ Semua tentang emigrasi
+Tout sur son métier ¦ Mọi thứ về nghề nghiệp ¦ Semua tentang pekerjaannya
+Tout chez les notaires ¦ Mọi thứ ở công chứng ¦ Semua di notaris
+⚓ Il était marin ? Le dire sur sa fiche ¦ ⚓ Ông là thủy thủ? Ghi vào hồ sơ ¦ ⚓ Dia pelaut? Tulis di profilnya
+🎖 Il était soldat ? Le dire sur sa fiche ¦ 🎖 Ông là lính? Ghi vào hồ sơ ¦ 🎖 Dia tentara? Tulis di profilnya
+🚢 Il a émigré ? Le dire sur sa fiche ¦ 🚢 Ông đã di cư? Ghi vào hồ sơ ¦ 🚢 Dia beremigrasi? Tulis di profilnya
+💼 Son métier ? Le dire sur sa fiche ¦ 💼 Nghề nghiệp? Ghi vào hồ sơ ¦ 💼 Pekerjaannya? Tulis di profilnya
+Pas de lieu dans ce pays ¦ Không có nơi nào ở nước này ¦ Tidak ada tempat di negara ini
+Hors de ses années ¦ Ngoài các năm sống ¦ Di luar tahun-tahun hidupnya
+Seulement pour un autre cas (métier, profil) ¦ Chỉ dành cho trường hợp khác (nghề, hồ sơ) ¦ Hanya untuk kasus lain (pekerjaan, profil)
+Pour l’autre sexe ¦ Cho giới tính kia ¦ Untuk jenis kelamin lain
+Né hors de France ¦ Sinh ngoài nước Pháp ¦ Lahir di luar Prancis
+Peu utile pour cette fiche ¦ Ít hữu ích cho hồ sơ này ¦ Kurang berguna untuk profil ini
+Autres raisons ¦ Lý do khác ¦ Alasan lain
+officier (armée) ¦ sĩ quan (quân đội) ¦ perwira (militer)
+=payant caché ¦ trả phí bị ẩn ¦ berbayar disembunyikan

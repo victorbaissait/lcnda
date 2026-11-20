@@ -1,0 +1,35 @@
+{
+  "format": "lcnda-archives-en-ligne",
+  "version": 1,
+  "generated": "2026-11-14",
+  "note": "DONNÉES FICTIVES POUR LES TESTS (tests/test-archives-dispo.js) : ces années ne sont PAS les vraies limites de ces départements. Le vrai fichier est config/archives-en-ligne.json.",
+  "departements": {
+    "19": {
+      "name": "Corrèze (FICTIF)",
+      "site": "https://exemple.invalid/ad19/etat-civil",
+      "acts": {
+        "N": {"until": 1912, "source": "https://exemple.invalid/ad19/etat-civil", "checked": "2026-11-14", "confidence": "officielle", "verified": true},
+        "M": {"until": 1932, "source": "https://exemple.invalid/ad19/etat-civil", "checked": "2026-11-14", "confidence": "officielle", "verified": true},
+        "D": {"until": 1940, "source": "https://exemple.invalid/ad19/etat-civil", "checked": "2026-11-14", "confidence": "officielle", "verified": true},
+        "TD": {"until": 1932, "source": "https://exemple.invalid/ad19/etat-civil", "checked": "2026-11-14", "confidence": "officielle", "verified": true},
+        "BMS": {"from": 1600, "until": 1792, "source": "https://exemple.invalid/ad19/etat-civil", "checked": "2026-11-14", "confidence": "officielle", "verified": true}
+      },
+      "note": "Exemple fictif."
+    },
+    "32": {
+      "name": "Gers (FICTIF)",
+      "site": "https://exemple.invalid/ad32",
+      "acts": {
+        "N": {"until": 1910, "source": "https://exemple.invalid/ad32/page", "checked": "2026-11-15", "confidence": "officielle", "verified": false},
+        "D": {"until": 1930, "source": "https://exemple.invalid/blog-secondaire", "checked": "2026-11-15", "confidence": "secondaire", "verified": true}
+      }
+    },
+    "46": {
+      "name": "Lot (FICTIF)",
+      "acts": {
+        "N": {"until": 1920, "checked": "2026-11-15", "confidence": "officielle", "verified": true}
+      },
+      "note": "Ligne sans source : elle ne doit jamais compter."
+    }
+  }
+}
