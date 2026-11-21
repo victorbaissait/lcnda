@@ -7,7 +7,7 @@ declare(strict_types=1);
  * relié aux fiches. Table créée à la première utilisation (sans changer le numéro de structure).
  */
 
-const TRANSCRIPTION_KINDS = ['naissance', 'bapteme', 'mariage', 'deces', 'sepulture', 'notarial', 'recensement', 'militaire', 'lettre', 'autre'];
+const TRANSCRIPTION_KINDS = ['apreciser', 'naissance', 'bapteme', 'mariage', 'deces', 'sepulture', 'notarial', 'recensement', 'militaire', 'lettre', 'autre'];
 
 function act_transcriptions_ensure(PDO $pdo): void
 {

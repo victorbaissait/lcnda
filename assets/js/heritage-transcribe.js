@@ -17,7 +17,7 @@
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
     let seq = 0; const zid = () => 'z' + Date.now().toString(36) + (++seq);
 
-    const KINDS = [['bapteme', i18n('Baptême')], ['naissance', 'Naissance'], ['mariage', 'Mariage'], ['deces', i18n('Décès')], ['sepulture', i18n('Sépulture')], ['notarial', i18n('Acte notarié')], ['recensement', 'Recensement'], ['militaire', 'Registre militaire'], ['lettre', 'Lettre'], ['autre', 'Autre']];
+    const KINDS = [['apreciser', i18n('À préciser')], ['bapteme', i18n('Baptême')], ['naissance', 'Naissance'], ['mariage', 'Mariage'], ['deces', i18n('Décès')], ['sepulture', i18n('Sépulture')], ['notarial', i18n('Acte notarié')], ['recensement', 'Recensement'], ['militaire', 'Registre militaire'], ['lettre', 'Lettre'], ['autre', 'Autre']];
     const COLORS = ['#f6c343', '#7cc4f0', '#9be08f', '#f59ab0', '#c3a6f2', '#f7a35c', '#6fd6c8', '#e6e15a'];
     // des modèles d'acte, pour ne pas partir d'une page blanche
     const TEMPLATES = {
@@ -145,7 +145,7 @@
     /* ═════════ L'atelier ═════════ */
     async function open(ctx = {}) {
         const TV = ext.txView; // « 🎚️ Mieux voir » et la barre réglable (heritage-transcribe-view.js)
-        let t = {id: 0, title: '', kind: 'bapteme', media_id: 0, filename: '', date_text: '', place: '', source: '', body: '', data: {zones: [], people: [], status: 'todo', view: TV.viewOf()}};
+        let t = {id: 0, title: '', kind: 'apreciser', media_id: 0, filename: '', date_text: '', place: '', source: '', body: '', data: {zones: [], people: [], status: 'todo', view: TV.viewOf()}};
         if (ctx.id) { try { const r = await api('act_transcription', {id: ctx.id}); t = {...t, ...r, data: {...t.data, ...(r.data || {})}}; t.data.view = TV.viewOf(r.data?.view); if (!['todo', 'doing', 'done'].includes(t.data.status)) t.data.status = String(t.body || '').trim() ? 'doing' : 'todo'; } catch (e) { return toast(e.message, 'error'); } }
         else if (ctx.mediaId) { t.media_id = Number(ctx.mediaId); t.filename = ctx.filename || ''; t.title = ctx.title || ''; t.body = ctx.text || ''; if (KINDS.some(k => k[0] === ctx.kind)) t.kind = ctx.kind; } // kind : ex. « lettre » pour le dos d'une carte postale
         let dirty = false, tool = 'pan', fitMode = 'page', fitOn = true, zoom = 1, panX = 0, panY = 0, selZone = null, found = [], imgW = 0, imgH = 0, matchCache = new Map();
@@ -714,7 +714,7 @@
         }
         async function saveNow(toMedia = false) {
             ['title', 'kind', 'date_text', 'place', 'source'].forEach(k => { t[k] = $(`[data-tx="${k}"]`).value; }); t.body = area.value; t.data.status = $('[data-tx-state]').value;
-            if (!t.title.trim()) { const subj = t.data.people.find(p => p.role === 'sujet' || p.role === 'défunt'); t.title = `${KINDS.find(k => k[0] === t.kind)?.[1] || 'Acte'}${subj ? ` de ${subj.name}` : ''}${t.date_text ? `, ${t.date_text}` : ''}`; $('[data-tx="title"]').value = t.title; }
+            if (!t.title.trim()) { const subj = t.data.people.find(p => p.role === 'sujet' || p.role === 'défunt'); t.title = `${t.kind === 'apreciser' ? i18n('Acte') : (KINDS.find(k => k[0] === t.kind)?.[1] || i18n('Acte'))}${subj ? ` — ${subj.name}` : ''}${t.date_text ? ` — ${t.date_text}` : ''}`; $('[data-tx="title"]').value = t.title; }
             status('Enregistrement…');
             try { const r = await post('save_act_transcription', {id: t.id, title: t.title, kind: t.kind, media_id: t.media_id, date_text: t.date_text, place: t.place, source: t.source, body: t.body, data: t.data, to_media: toMedia ? 1 : 0}); t.id = r.result.id; dirty = false; status(`✓ ${i18n('Enregistré')}`); if (toMedia) toast(i18n('Enregistré, et le texte est dans la transcription du média.')); ctx.onSaved?.(t.id); }
             catch (e) { status(''); toast(e.message, 'error'); }
@@ -880,10 +880,16 @@
         box.innerHTML = `<div class="lb-acts-head"><span class="section-label">📜 ${i18n('Transcription d’actes')}</span><span class="lb-acts-btns"><button type="button" class="button small secondary" data-lbact-read title="${esc(i18n('Toute la transcription, en grand (et les actes transcrits dans l’outil)'))}">📖 ${i18n('Lire en entier')}</button><button type="button" class="button small secondary" data-lbact-new title="${esc(i18n('Ouvrir l’outil Transcription d’actes sur cette image (zones, noms, dates)'))}">${lbActs.length ? `＋ ${i18n('Nouvelle')}` : `📜 ${i18n('Transcrire dans l’outil')}`}</button></span></div>
             ${lbActs.length ? `<ul class="lb-acts-list">${lbActs.map(a => `<li><button type="button" class="link-button" data-lbact-open="${a.id}" title="${esc(i18n('Ouvrir dans Transcription d’actes'))}">📜 ${esc(a.title || kindLabel(a.kind))}</button> <small class="muted">${esc([kindLabel(a.kind), a.date_text, a.place].filter(Boolean).join(' · '))}${a.people?.length ? ` · ${A().plural(a.people.length, 'personne')}` : ''}</small></li>`).join('')}</ul>` : `<p class="empty-line small"><span class="empty-line-ico" aria-hidden="true">🖼️</span><span class="empty-line-text">${i18n('Aucun acte transcrit dans l’outil pour cette image.')}</span></p>`}`;
     }
+    /** un titre qui n'est qu'un nom de fichier (« 84e6ae97-2284-… », « IMG_1234 », « scan.jpg ») : l'atelier en fabrique un lisible à l'enregistrement */
+    function fileLikeTitle(title, filename = '') {
+        const x = String(title || '').trim(); if (!x) return true;
+        const base = String(filename || '').replace(/^.*[\\/]/, '').replace(/\.[a-z0-9]{2,5}$/i, '');
+        return x === base || x === String(filename || '') || /^[0-9a-f]{8}-[0-9a-f]{4}-/i.test(x) || /^[0-9a-f_-]{16,}$/i.test(x) || /^(img|dsc|dscn|dcim|pxl|scan|photo|image)[-_ ]?\d+/i.test(x) || /\.(jpe?g|png|gif|tiff?|webp|heic|pdf)$/i.test(x);
+    }
     function lbOpenTool(id) {
         const it = lbItem(); if (!it) return;
         const again = () => { lbFor = 0; lbRefresh(true); };
-        if (id) open({id, onClose: again}); else open({mediaId: it.id, filename: it.filename, title: it.title || '', text: document.getElementById('lightbox-transcription')?.value || it.transcription || '', onClose: again});
+        if (id) open({id, onClose: again}); else open({mediaId: it.id, filename: it.filename, title: fileLikeTitle(it.title, it.filename) ? '' : (it.title || ''), text: document.getElementById('lightbox-transcription')?.value || it.transcription || '', onClose: again});
     }
     function lbRead() {
         const it = lbItem(); if (!it) return; const txt = document.getElementById('lightbox-transcription')?.value || it.transcription || '';

@@ -13,7 +13,7 @@
     const UI = () => window.LCNDA_UI || {};
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const KEY = 'act_transcriptions_list', STEP = 50;
-    const KINDS = [['bapteme', 'Baptême'], ['naissance', 'Naissance'], ['mariage', 'Mariage'], ['deces', 'Décès'], ['sepulture', 'Sépulture'], ['notarial', 'Acte notarié'], ['recensement', 'Recensement'], ['militaire', 'Registre militaire'], ['lettre', 'Lettre'], ['autre', 'Autre']];
+    const KINDS = [['apreciser', 'À préciser'], ['bapteme', 'Baptême'], ['naissance', 'Naissance'], ['mariage', 'Mariage'], ['deces', 'Décès'], ['sepulture', 'Sépulture'], ['notarial', 'Acte notarié'], ['recensement', 'Recensement'], ['militaire', 'Registre militaire'], ['lettre', 'Lettre'], ['autre', 'Autre']];
     const kindLabel = k => (KINDS.find(x => x[0] === k) || [, k || 'Acte'])[1];
     const STATUS = {todo: ['À faire', '⚪'], doing: ['En cours', '🟡'], done: ['Finie', '🟢']};
     const plural = (n, w, many) => (A().plural ? A().plural(n, w, many) : `${n} ${n > 1 ? many || w + 's' : w}`);
