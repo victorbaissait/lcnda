@@ -363,3 +363,12 @@ Seulement ce qui reste à faire ¦ Chỉ những gì còn phải làm ¦ Hanya y
 Seulement ce qui a été vu ¦ Chỉ những gì đã xem ¦ Hanya yang sudah dilihat
 Sans le nom des correspondances ¦ Không có tên người trùng khớp ¦ Tanpa nama kecocokan
 Avec le nom des correspondances (pas pour un export partagé) ¦ Có tên người trùng khớp (không dùng cho bản xuất chia sẻ) ¦ Dengan nama kecocokan (bukan untuk ekspor yang dibagikan)
+Naissances par an, une bougie par décennie ¦ Số ca sinh mỗi năm, một nến cho mỗi thập kỷ ¦ Kelahiran per tahun, satu lilin per dekade
+Décès par an, une bougie par décennie (les années de crise en haut des mèches) ¦ Số ca tử vong mỗi năm, một nến cho mỗi thập kỷ (những năm khủng hoảng ở đỉnh bấc) ¦ Kematian per tahun, satu lilin per dekade (tahun krisis di ujung sumbu)
+Mariages par an, une bougie par décennie ¦ Số cuộc hôn nhân mỗi năm, một nến cho mỗi thập kỷ ¦ Pernikahan per tahun, satu lilin per dekade
+Pas assez d’années datées pour ce choix. ¦ Không đủ năm có ngày tháng cho lựa chọn này. ¦ Tidak cukup tahun bertanggal untuk pilihan ini.
+Naissances par an, décennie par décennie ¦ Số ca sinh mỗi năm, theo từng thập kỷ ¦ Kelahiran per tahun, dekade demi dekade
+Décès par an, décennie par décennie ¦ Số ca tử vong mỗi năm, theo từng thập kỷ ¦ Kematian per tahun, dekade demi dekade
+Mariages par an, décennie par décennie ¦ Số cuộc hôn nhân mỗi năm, theo từng thập kỷ ¦ Pernikahan per tahun, dekade demi dekade
+par an ¦ mỗi năm ¦ per tahun
+Chaque bougie : la 1re et la dernière année de la décennie, l’année la plus basse et la plus haute ¦ Mỗi nến: năm đầu và năm cuối của thập kỷ, năm thấp nhất và năm cao nhất ¦ Setiap lilin: tahun pertama dan terakhir dekade, tahun terendah dan tertinggi

@@ -363,3 +363,12 @@ Seulement ce qui reste à faire ¦ Только то, что осталось с
 Seulement ce qui a été vu ¦ Только то, что просмотрено ¦ Лише те, що переглянуто
 Sans le nom des correspondances ¦ Без имён совпадений ¦ Без імен збігів
 Avec le nom des correspondances (pas pour un export partagé) ¦ С именами совпадений (не для общего экспорта) ¦ З іменами збігів (не для спільного експорту)
+Naissances par an, une bougie par décennie ¦ Рождения за год, одна свеча на десятилетие ¦ Народження за рік, одна свічка на десятиліття
+Décès par an, une bougie par décennie (les années de crise en haut des mèches) ¦ Смерти за год, одна свеча на десятилетие (годы кризисов — на верхушках фитилей) ¦ Смерті за рік, одна свічка на десятиліття (роки криз — на верхівках ґнотів)
+Mariages par an, une bougie par décennie ¦ Браки за год, одна свеча на десятилетие ¦ Шлюби за рік, одна свічка на десятиліття
+Pas assez d’années datées pour ce choix. ¦ Недостаточно датированных лет для этого выбора. ¦ Недостатньо датованих років для цього вибору.
+Naissances par an, décennie par décennie ¦ Рождения за год, десятилетие за десятилетием ¦ Народження за рік, десятиліття за десятиліттям
+Décès par an, décennie par décennie ¦ Смерти за год, десятилетие за десятилетием ¦ Смерті за рік, десятиліття за десятиліттям
+Mariages par an, décennie par décennie ¦ Браки за год, десятилетие за десятилетием ¦ Шлюби за рік, десятиліття за десятиліттям
+par an ¦ в год ¦ на рік
+Chaque bougie : la 1re et la dernière année de la décennie, l’année la plus basse et la plus haute ¦ Каждая свеча: первый и последний год десятилетия, самый низкий и самый высокий год ¦ Кожна свічка: перший і останній рік десятиліття, найнижчий і найвищий рік

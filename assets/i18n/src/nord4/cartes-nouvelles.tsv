@@ -363,3 +363,12 @@ Seulement ce qui reste à faire ¦ Vain se, mikä on vielä tekemättä ¦ Csak 
 Seulement ce qui a été vu ¦ Vain se, mikä on nähty ¦ Csak ami már megvolt
 Sans le nom des correspondances ¦ Ilman osumien nimiä ¦ Az egyezések neve nélkül
 Avec le nom des correspondances (pas pour un export partagé) ¦ Osumien nimien kanssa (ei jaettavaan vientiin) ¦ Az egyezések nevével (nem megosztott exporthoz)
+Naissances par an, une bougie par décennie ¦ Syntymät vuodessa, yksi kynttilä vuosikymmentä kohden ¦ Születések évente, évtizedenként egy gyertya
+Décès par an, une bougie par décennie (les années de crise en haut des mèches) ¦ Kuolemat vuodessa, yksi kynttilä vuosikymmentä kohden (kriisivuodet sydänten huipulla) ¦ Halálozások évente, évtizedenként egy gyertya (a válságévek a kanócok tetején)
+Mariages par an, une bougie par décennie ¦ Avioliitot vuodessa, yksi kynttilä vuosikymmentä kohden ¦ Házasságkötések évente, évtizedenként egy gyertya
+Pas assez d’années datées pour ce choix. ¦ Tähän valintaan ei ole tarpeeksi päivättyjä vuosia. ¦ Ehhez a választáshoz nincs elég keltezett év.
+Naissances par an, décennie par décennie ¦ Syntymät vuodessa, vuosikymmen kerrallaan ¦ Születések évente, évtizedről évtizedre
+Décès par an, décennie par décennie ¦ Kuolemat vuodessa, vuosikymmen kerrallaan ¦ Halálozások évente, évtizedről évtizedre
+Mariages par an, décennie par décennie ¦ Avioliitot vuodessa, vuosikymmen kerrallaan ¦ Házasságkötések évente, évtizedről évtizedre
+par an ¦ vuodessa ¦ évente
+Chaque bougie : la 1re et la dernière année de la décennie, l’année la plus basse et la plus haute ¦ Jokainen kynttilä: vuosikymmenen ensimmäinen ja viimeinen vuosi, alin ja korkein vuosi ¦ Minden gyertya: az évtized első és utolsó éve, a legalacsonyabb és a legmagasabb év

@@ -363,3 +363,12 @@ Seulement ce qui reste à faire ¦ Jen to, co zbývá udělat ¦ Bara det som å
 Seulement ce qui a été vu ¦ Jen to, co bylo viděno ¦ Bara det som har setts ¦ Kun det, der er set
 Sans le nom des correspondances ¦ Bez jmen shod ¦ Utan matchningarnas namn ¦ Uden matchenes navne
 Avec le nom des correspondances (pas pour un export partagé) ¦ Se jmény shod (ne pro sdílený export) ¦ Med matchningarnas namn (inte för en delad export) ¦ Med matchenes navne (ikke til en delt eksport)
+Naissances par an, une bougie par décennie ¦ Narození za rok, jedna svíčka na desetiletí ¦ Födslar per år, ett ljus per decennium ¦ Fødsler pr. år, ét lys pr. årti
+Décès par an, une bougie par décennie (les années de crise en haut des mèches) ¦ Úmrtí za rok, jedna svíčka na desetiletí (krizové roky na vrcholu knotů) ¦ Dödsfall per år, ett ljus per decennium (krisår högst upp på vekarna) ¦ Dødsfald pr. år, ét lys pr. årti (kriseår øverst på vægene)
+Mariages par an, une bougie par décennie ¦ Sňatky za rok, jedna svíčka na desetiletí ¦ Vigslar per år, ett ljus per decennium ¦ Vielser pr. år, ét lys pr. årti
+Pas assez d’années datées pour ce choix. ¦ Pro tuto volbu není dost datovaných let. ¦ Inte tillräckligt många daterade år för det här valet. ¦ Ikke nok daterede år til dette valg.
+Naissances par an, décennie par décennie ¦ Narození za rok, desetiletí po desetiletí ¦ Födslar per år, decennium för decennium ¦ Fødsler pr. år, årti for årti
+Décès par an, décennie par décennie ¦ Úmrtí za rok, desetiletí po desetiletí ¦ Dödsfall per år, decennium för decennium ¦ Dødsfald pr. år, årti for årti
+Mariages par an, décennie par décennie ¦ Sňatky za rok, desetiletí po desetiletí ¦ Vigslar per år, decennium för decennium ¦ Vielser pr. år, årti for årti
+par an ¦ za rok ¦ per år ¦ pr. år
+Chaque bougie : la 1re et la dernière année de la décennie, l’année la plus basse et la plus haute ¦ Každá svíčka: první a poslední rok desetiletí, nejnižší a nejvyšší rok ¦ Varje ljus: decenniets första och sista år, det lägsta och det högsta året ¦ Hvert lys: årtiets første og sidste år, det laveste og det højeste år

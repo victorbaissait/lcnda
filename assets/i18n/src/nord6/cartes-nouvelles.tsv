@@ -363,3 +363,12 @@ Seulement ce qui reste à faire ¦ Tik tai, kas liko padaryti ¦ Tikai tas, kas 
 Seulement ce qui a été vu ¦ Tik tai, kas matyta ¦ Tikai tas, kas redzēts ¦ Ainult see, mida on nähtud
 Sans le nom des correspondances ¦ Be atitikmenų vardų ¦ Bez sakritību vārdiem ¦ Vastete nimedeta
 Avec le nom des correspondances (pas pour un export partagé) ¦ Su atitikmenų vardais (ne bendrinamam eksportui) ¦ Ar sakritību vārdiem (ne koplietojamam eksportam) ¦ Vastete nimedega (mitte jagatava ekspordi jaoks)
+Naissances par an, une bougie par décennie ¦ Gimimai per metus, viena žvakė dešimtmečiui ¦ Dzimšanas gadā, viena svece desmitgadē ¦ Sünnid aastas, üks küünal kümnendi kohta
+Décès par an, une bougie par décennie (les années de crise en haut des mèches) ¦ Mirtys per metus, viena žvakė dešimtmečiui (krizių metai dagčių viršuje) ¦ Nāves gadā, viena svece desmitgadē (krīžu gadi dakts augšā) ¦ Surmad aastas, üks küünal kümnendi kohta (kriisiaastad tahtide tipus)
+Mariages par an, une bougie par décennie ¦ Santuokos per metus, viena žvakė dešimtmečiui ¦ Laulības gadā, viena svece desmitgadē ¦ Abielud aastas, üks küünal kümnendi kohta
+Pas assez d’années datées pour ce choix. ¦ Šiam pasirinkimui nepakanka datuotų metų. ¦ Šai izvēlei nav pietiekami daudz datētu gadu. ¦ Selle valiku jaoks pole piisavalt dateeritud aastaid.
+Naissances par an, décennie par décennie ¦ Gimimai per metus, dešimtmetis po dešimtmečio ¦ Dzimšanas gadā, desmitgadi pa desmitgadei ¦ Sünnid aastas, kümnend kümnendi haaval
+Décès par an, décennie par décennie ¦ Mirtys per metus, dešimtmetis po dešimtmečio ¦ Nāves gadā, desmitgadi pa desmitgadei ¦ Surmad aastas, kümnend kümnendi haaval
+Mariages par an, décennie par décennie ¦ Santuokos per metus, dešimtmetis po dešimtmečio ¦ Laulības gadā, desmitgadi pa desmitgadei ¦ Abielud aastas, kümnend kümnendi haaval
+par an ¦ per metus ¦ gadā ¦ aastas
+Chaque bougie : la 1re et la dernière année de la décennie, l’année la plus basse et la plus haute ¦ Kiekviena žvakė: pirmieji ir paskutiniai dešimtmečio metai, žemiausi ir aukščiausi metai ¦ Katra svece: desmitgades pirmais un pēdējais gads, zemākais un augstākais gads ¦ Iga küünal: kümnendi esimene ja viimane aasta, madalaim ja kõrgeim aasta

@@ -294,19 +294,36 @@
                 spec.rows = Object.keys(byG).map(Number).sort((a, b) => a - b).map(g => ({label: i18n('Génér. {g}', {g: String(g)}), value: val(byG[g]), target: key === 'dated' ? 90 : 75, max: 100, zones: '50;75'}));
                 need(spec.rows.length, i18n('Pas d’ancêtre trouvé.'));
                 spec.o = {...(spec.o || {}), unit: ' %', title: {sourced: i18n('Ancêtres avec une source'), score: i18n('Taux de recherche, génération par génération'), dated: i18n('Date de naissance connue')}[key], subtitle: r.root_name ? i18n('à partir de {name} (parmi les ancêtres trouvés)', {name: r.root_name}) : '', source: i18n('Objectif à changer dans le tableau')}; return spec; }},
+        // 🕯 chandeliers : une bougie par décennie, avec le nombre par an (1re année = ouverture, dernière = clôture, année la plus basse, la plus haute)
+        candles: {sources: [['births', 'Naissances par an, une bougie par décennie'], ['deaths', 'Décès par an, une bougie par décennie (les années de crise en haut des mèches)'], ['marriages', 'Mariages par an, une bougie par décennie']],
+            fill: async (spec, key) => { const O = ext.diagramAppOpts; need(O?.count, i18n('Les chiffres ne sont pas encore prêts.'));
+                const res = await O.count({what: key, by: 'year', limit: 0}), per = new Map();
+                (res?.rows || []).forEach(r => { const y = Number(r.label); if (Number.isInteger(y) && y > 0 && y <= NOW) per.set(y, (per.get(y) || 0) + Number(r.value || 0)); });
+                need(per.size >= 2, i18n('Pas assez d’années datées pour ce choix.'));
+                const ys = [...per.keys()], y0 = Math.min(...ys), y1 = Math.max(...ys), rows = [];
+                for (let d = Math.floor(y0 / 10) * 10; d <= y1; d += 10) { const a = Math.max(d, y0), b = Math.min(d + 9, y1), vals = [];
+                    for (let y = a; y <= b; y++) vals.push(per.get(y) || 0); // une année sans acte compte pour 0
+                    if (!vals.some(Boolean)) continue;
+                    rows.push({label: String(d), open: String(vals[0]), close: String(vals[vals.length - 1]), low: String(Math.min(...vals)), high: String(Math.max(...vals))}); }
+                need(rows.length, i18n('Pas assez d’années datées pour ce choix.'));
+                let bands = [];
+                try { const h = await api('diagram_lot_b', {what: 'history', dg_from: y0, dg_to: y1}); bands = (h.rows || []).map(b => ({label: b.label, from: String(b.from), to: String(b.to), color: /guerre|war|conflit/i.test(b.category + b.label) ? '#e15759' : '#9c755f'})); } catch (_) { bands = spec.bands || []; }
+                const T0 = {births: 'Naissances par an, décennie par décennie', deaths: 'Décès par an, décennie par décennie', marriages: 'Mariages par an, décennie par décennie'};
+                spec.rows = rows; spec.bands = bands;
+                spec.o = {...(spec.o || {}), title: i18n(T0[key]), unit: 'none', unitFree: i18n('par an'), subtitle: i18n('Chaque bougie : la 1re et la dernière année de la décennie, l’année la plus basse et la plus haute')}; return spec; }},
     };
     const SANKEY_L = Object.fromEntries(APP.sankey.sources);
     // brancher : un type sans sources en reçoit ; un type qui en a déjà (cartes de chiffres, barre d'objectif) garde les siennes en premier
     function wire() {
         const K = R()?.KINDS; if (!K) return false;
         Object.entries(APP).forEach(([k, add]) => { const kind = K[k]; if (!kind || kind.fromApp) return;
-            if (!kind.app) { kind.app = {sources: add.sources, fill: add.fill}; return; }
+            if (!kind.app) { kind.app = {_plus: true, sources: add.sources, fill: add.fill}; return; }
             if (kind.app._plus) return;
             const old = kind.app, mine = new Set(add.sources.map(s => s[0]));
             kind.app = {_plus: true, sources: [...old.sources, ...add.sources.filter(s => !old.sources.some(o => o[0] === s[0]))], fill: (spec, key) => (mine.has(key) ? add.fill(spec, key) : old.fill(spec, key))};
         });
         return true;
     }
-    if (!wire()) document.addEventListener('DOMContentLoaded', wire);
+    wire(); document.addEventListener('DOMContentLoaded', wire); // encore une fois quand tout est chargé : les types des fichiers venus après (🕯 chandeliers…)
     ext.diagramGraphique = {PANELS, APP, mount, applySet, wire};
 })();

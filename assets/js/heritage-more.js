@@ -1925,6 +1925,7 @@
             ['La parcelle de mon acte n’existe plus dans le cadastre d’aujourd’hui ?', 'Les parcelles ont souvent été divisées, réunies ou renumérotées (remembrement). Note l’ancien numéro (« B 245 (1834) ») et le lieu-dit, sans contour, ou cherche sur la carte la parcelle d’aujourd’hui au même endroit. « ↻ Relire en ligne » met à jour le contour et la surface d’une parcelle déjà notée.'],
             ['Un lieu étranger n’est pas proposé ?', 'Les villes du monde sont préparées une fois au premier lancement (quelques minutes). Un lieu introuvable peut toujours être tapé à la main.'],
             ['Comment placer d’un coup les lieux qui n’ont pas de position sur la carte ?', 'Carte → « 📍 Lieux à placer » (ou le tableau de bord → « Communes à compléter » → 📍 Placer…, ou Listes → Lieux) : les lieux sans position, regroupés par commune probable grâce au référentiel des communes livré avec l’app. « ✓ Placer ici » pour un lieu, « ☑ Revoir et placer en lot… » pour plusieurs (seuls les « sûrs » sont cochés) ; « ↶ Annuler » remet tout. Rien n’est placé sans ton clic, et rien n’est cherché en ligne sauf si tu l’autorises dans ⚙️ Réglages, lieu par lieu.'],
+            ['Comment faire des chandeliers avec les naissances, les décès ou les mariages de ma base ?', 'Nouveau diagramme → « 🕯 Chandeliers » → onglet « Depuis l’app » → « Graphique » : « Naissances par an », « Décès par an » ou « Mariages par an ». Chaque bougie est une décennie : le nombre de la première année (ouverture), celui de la dernière (clôture), l’année la plus basse et la plus haute. Une mèche très haute dans les décès montre une année de crise. Les guerres et les épidémies connues s’ajoutent en bandes. Tout reste modifiable dans l’onglet Données.'],
         ]],
         ['Documents', [
             ['Comment faire un labyrinthe, et y chercher des ancêtres ?', 'Ouvre le Jeu, choisis « 🌀 Labyrinthe » dans « Jeu ». Règle la forme (carré, hexagones, rond, cœur, arbre, France, étoile), la taille, les couloirs (longs couloirs, beaucoup d’impasses, équilibré, tout au hasard), les boucles, le départ et l’arrivée, puis l’aspect (trait, haies, pierres, parchemin, couleurs des murs, du sol et du chemin). L’aperçu suit chaque réglage ; « 🎲 Un autre » change la graine (la même graine redonne le même labyrinthe). En 3, « Des choses à aller chercher » : jusqu’à 12 ancêtres, lieux, événements, maisons ou photos de ta généalogie, dans l’ordre que tu veux, de la plus ancienne à la plus récente, ou « Remonte ta lignée » (Sosa 16 → 8 → 4 → 2) ; la sortie peut rester fermée tant qu’on n’a pas tout ramassé. Les personnes vivantes et les fiches confidentielles n’y sont jamais.'],
@@ -2244,7 +2245,7 @@
      * on ouvre la FAQ ou une bulle « En savoir plus (FAQ) → ». Chaque question y a un repère tiré de sa question française
      * (faqId) : les liens data-help-faq et UI.openFaq('…') qui citent la question française la retrouvent dans toutes les langues.
      * Une question ou une réponse pas encore traduite reste en français. */
-    const FAQ_I18N_V = 39; // monter avec VERSION de scripts/build-faq-i18n.js
+    const FAQ_I18N_V = 40; // monter avec VERSION de scripts/build-faq-i18n.js
     const faqI18n = () => window.LCNDA_I18N;
     const tt = (s, v) => (faqI18n() ? faqI18n().t(s, v) : s);
     const faqLang = () => faqI18n()?.lang || 'fr';

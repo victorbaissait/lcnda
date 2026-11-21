@@ -363,3 +363,12 @@ Seulement ce qui reste à faire ¦ Yalnızca yapılacak olanlar
 Seulement ce qui a été vu ¦ Yalnızca görülenler
 Sans le nom des correspondances ¦ Eşleşmelerin adı olmadan
 Avec le nom des correspondances (pas pour un export partagé) ¦ Eşleşmelerin adıyla (paylaşılan bir dışa aktarım için değil)
+Naissances par an, une bougie par décennie ¦ Yılda doğumlar, her on yıl için bir mum
+Décès par an, une bougie par décennie (les années de crise en haut des mèches) ¦ Yılda ölümler, her on yıl için bir mum (kriz yılları fitillerin tepesinde)
+Mariages par an, une bougie par décennie ¦ Yılda evlilikler, her on yıl için bir mum
+Pas assez d’années datées pour ce choix. ¦ Bu seçim için yeterli tarihli yıl yok.
+Naissances par an, décennie par décennie ¦ Yılda doğumlar, on yıl on yıl
+Décès par an, décennie par décennie ¦ Yılda ölümler, on yıl on yıl
+Mariages par an, décennie par décennie ¦ Yılda evlilikler, on yıl on yıl
+par an ¦ yılda
+Chaque bougie : la 1re et la dernière année de la décennie, l’année la plus basse et la plus haute ¦ Her mum: on yılın ilk ve son yılı, en düşük ve en yüksek yıl
