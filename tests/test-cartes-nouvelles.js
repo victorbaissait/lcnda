@@ -36,10 +36,12 @@ const SECRET = /Claire MAZAUD|Paul DURAND|informaticien/;
 // chaque carte dessinée depuis l'app dans le navigateur : [sorte, préparation du panneau, texte attendu dans l'aperçu]
 // et des réglages essayés sur l'exemple de chaque carte (chacun doit donner une image)
 const VARIANTS = {
-    trademap: [{time: 'small'}, {draw: 'deps'}, {draw: 'dots'}, {draw: 'top'}, {classify: 'domain'}, {classify: 'mine', colors: 'tanneur=#aa0000'}, {multi: 'main', foyer: 'hide', size: 'same', where: 'act'}, {time: 'half', at: '1850'}],
+    mirrormap: [{draw: 'side'}, {draw: 'swipe', swipe: 30}, {meet: 'era', eraYears: 10}, {meet: 'near', nearKm: 20}, {implex: 'short'}, {step: 'gen', at: '3'}, {window: 'period', at: '1860'}, {colors: 'pink'}, {colors: 'mine', colorA: '#000000'}, {size: 'same', meetList: false, wedding: 'hide'}],
+    trademap: [{tmode: 'small'}, {draw: 'deps'}, {draw: 'dots'}, {draw: 'top'}, {classify: 'domain'}, {classify: 'mine', colors: 'tanneur=#aa0000'}, {multi: 'main', foyer: 'hide', size: 'same', where: 'act'}, {tmode: 'half', at: '1850'}],
 };
 const KIND_TESTS = [
     ['trademap', null, 'Tulle'],
+    ['mirrormap', null, 'Tulle'],
 ];
 
 (async () => {
@@ -192,6 +194,20 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(dir) });
             assert.ok((await get('cartes_plus2', { what: 'trades', pop: 'pat', root: 1 })).rows.every(x => [2, 4, 5, 8, 9].includes(x[0])), 'côté père');
             const tl = await get('cartes_plus2', { what: 'trade_list' }); assert.ok(tl.trades.some(x => x.key === 'tanneur'));
             assert.equal((await get('cartes_plus2', { what: 'nope' })).error, 'Demande inconnue.');
+        });
+
+        await t('👫 lignées en miroir : côté père, côté mère, mariage des parents, implexe ; personne de départ vivante jamais un point', async () => {
+            const r = await get('cartes_plus2', { what: 'mirror', side: 'pat', root: 1 });
+            assert.ok(r.events?.length > 4, JSON.stringify(r).slice(0, 300));
+            const side = pid => r.member[pid]; assert.deepEqual(side(2), [0]); assert.deepEqual(side(8), [0]); assert.deepEqual(side(3), [1]); assert.deepEqual(side(6), [1]);
+            assert.ok(!r.events.some(e => [20, 21, 1].includes(e[0])), 'ni la personne de départ, ni vivante, ni confidentielle');
+            assert.equal(r.wedding.place, 2); assert.equal(r.wedding.year, 1919); assert.equal(r.root.shown, true);
+            const v = await get('cartes_plus2', { what: 'mirror', side: 'pat', root: 20 });
+            assert.equal(v.root.shown, false, 'vivante'); assert.equal(v.root.name, ''); assert.equal(v.root.family, 'MAZAUD'); assert.ok(!JSON.stringify(v).match(SECRET));
+            const g = await get('cartes_plus2', { what: 'mirror', side: 'grand', root: 1 }); assert.equal(g.groups.length, 4); assert.deepEqual(g.member[4], [0]); assert.deepEqual(g.member[6], [2]);
+            const two = await get('cartes_plus2', { what: 'mirror', side: 'two', a: 2, b: 3 }); assert.deepEqual(two.member[4], [0]); assert.deepEqual(two.member[7], [1]);
+            const nm = await get('cartes_plus2', { what: 'mirror', side: 'names', na: 'mazaud', nb: 'Lacombe' }); assert.ok(nm.member[2] && nm.member[3] && !nm.member[20]);
+            assert.match((await get('cartes_plus2', { what: 'mirror', side: 'two', a: 2 })).error, /deux personnes/);
         });
 
         /* ═════ 3. Navigateur ═════ */

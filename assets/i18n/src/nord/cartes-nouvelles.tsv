@@ -137,3 +137,56 @@ Par grand secteur (12) ¦ Podle hlavního odvětví (12) ¦ Per huvudsektor (12)
 employé ¦ úředník ¦ tjänsteman ¦ funktionær
 ménagère ¦ v domácnosti ¦ hemmafru ¦ husmor
 Où on l’exerçait ¦ Kde se vykonávalo ¦ Var det utövades ¦ Hvor det blev udøvet
+# 👫 Les deux lignées en miroir (partie 1)
+Les deux lignées en miroir (côté père, côté mère) ¦ Dvě linie zrcadlově (otcova strana, matčina strana) ¦ De två släktlinjerna i spegel (faderns sida, moderns sida) ¦ De to slægtslinjer i spejl (faderens side, moderens side)
+Les événements des deux côtés (un par ligne) ¦ Události obou stran (jedna na řádek) ¦ Händelserna på båda sidor (en per rad) ¦ Begivenhederne på begge sider (én pr. linje)
+Ancêtre des deux côtés ¦ Předek z obou stran ¦ Ana på båda sidor ¦ Ane på begge sider
+Aucun ancêtre connu : {who} ¦ Žádný známý předek: {who} ¦ Ingen känd ana: {who} ¦ Ingen kendt ane: {who}
+Bleu / orange (lisibles aussi par les daltoniens) ¦ Modrá / oranžová (čitelné i pro barvoslepé) ¦ Blått / orange (läsbart även för färgblinda) ¦ Blå / orange (også læsbart for farveblinde)
+Compté des deux côtés, couleur mélangée ¦ Počítán na obou stranách, smíšená barva ¦ Räknas på båda sidor, blandad färg ¦ Tælles på begge sider, blandet farve
+Seulement du côté du chemin le plus court ¦ Jen na straně nejkratší cesty ¦ Bara på sidan med den kortaste vägen ¦ Kun på siden med den korteste vej
+Couleur du premier côté ¦ Barva první strany ¦ Färg för första sidan ¦ Farve for første side
+Couleur du deuxième côté ¦ Barva druhé strany ¦ Färg för andra sidan ¦ Farve for anden side
+Côté père / côté mère ¦ Otcova strana / matčina strana ¦ Faderns sida / moderns sida ¦ Faderens side / moderens side
+Côté père / côté mère, avant la Révolution ¦ Otcova / matčina strana, před revolucí ¦ Faderns / moderns sida, före revolutionen ¦ Faderens / moderens side, før revolutionen
+Mes quatre grands-parents (4 couleurs) ¦ Mí čtyři prarodiče (4 barvy) ¦ Mina fyra far- och morföräldrar (4 färger) ¦ Mine fire bedsteforældre (4 farver)
+Deux personnes au choix ¦ Dvě osoby podle výběru ¦ Två valfria personer ¦ To valgfrie personer
+Deux noms de famille ¦ Dvě příjmení ¦ Två efternamn ¦ To efternavne
+Deux groupes de Mes listes ¦ Dvě skupiny z Mých seznamů ¦ Två grupper från Mina listor ¦ To grupper fra Mine lister
+Premier nom ¦ První příjmení ¦ Första namnet ¦ Første navn
+Deuxième nom ¦ Druhé příjmení ¦ Andra namnet ¦ Andet navn
+Première liste ¦ První seznam ¦ Första listan ¦ Første liste
+Deuxième liste ¦ Druhý seznam ¦ Andra listan ¦ Anden liste
+Deux lignées de ta généalogie ¦ Dvě linie tvé genealogie ¦ Två linjer i din släktforskning ¦ To linjer i din slægtsforskning
+Côté père et côté mère de la personne de départ (ou quatre grands-parents, deux personnes, deux noms, deux listes). Jamais un vivant ni une fiche confidentielle : une personne de départ vivante n’est jamais un point. ¦ Otcova a matčina strana výchozí osoby (nebo čtyři prarodiče, dvě osoby, dvě jména, dva seznamy). Nikdy žijící osoba ani důvěrná karta: žijící výchozí osoba nikdy není bodem. ¦ Faderns och moderns sida för startpersonen (eller fyra far- och morföräldrar, två personer, två namn, två listor). Aldrig en levande person eller ett konfidentiellt kort: en levande startperson är aldrig en punkt. ¦ Faderens og moderens side for startpersonen (eller fire bedsteforældre, to personer, to navne, to lister). Aldrig en levende eller et fortroligt kort: en levende startperson er aldrig et punkt.
+Glisser (un trait à déplacer) ¦ Posunout (čára k přetažení) ¦ Dra (ett streck att flytta) ¦ Træk (en streg at flytte)
+LES DEUX LIGNÉES ¦ DVĚ LINIE ¦ DE TVÅ LINJERNA ¦ DE TO LINJER
+Le mariage des parents (💍) ¦ Sňatek rodičů (💍) ¦ Föräldrarnas bröllop (💍) ¦ Forældrenes bryllup (💍)
+Les deux lignées ¦ Obě linie ¦ Båda linjerna ¦ Begge linjer
+Les deux lignées : {a}, {b} où elles se rencontrent. ¦ Obě linie: {a}; setkávají se: {b}. ¦ Båda linjerna: {a}, {b} där de möts. ¦ Begge linjer: {a}, {b} hvor de mødes.
+Les deux lignées : {n}. ¦ Obě linie: {n}. ¦ Båda linjerna: {n}. ¦ Begge linjer: {n}.
+Les deux lignées de la famille {name} ¦ Dvě linie rodiny {name} ¦ De två linjerna i familjen {name} ¦ De to linjer i familien {name}
+Les deux lignées de {name} ¦ Dvě linie: {name} ¦ De två linjerna för {name} ¦ De to linjer for {name}
+Les quatre grands-parents de la famille {name} ¦ Čtyři prarodiče rodiny {name} ¦ De fyra far- och morföräldrarna i familjen {name} ¦ De fire bedsteforældre i familien {name}
+Les quatre grands-parents de {name} ¦ Čtyři prarodiče: {name} ¦ De fyra far- och morföräldrarna till {name} ¦ De fire bedsteforældre til {name}
+Lister sous la carte où elles se rencontrent ¦ Vypsat pod mapou, kde se setkávají ¦ Lista under kartan var de möts ¦ Vis under kortet, hvor de mødes
+Combien de lignes ¦ Kolik řádků ¦ Hur många rader ¦ Hvor mange linjer
+Montré ¦ Zobrazený ¦ Visas ¦ Vist
+Même commune ¦ Stejná obec ¦ Samma kommun ¦ Samme kommune
+Même commune à la même époque ¦ Stejná obec ve stejné době ¦ Samma kommun vid samma tid ¦ Samme kommune på samme tid
+À moins de quelques km ¦ Do několika km ¦ Inom några km ¦ Inden for få km
+À la même époque : à plus ou moins ¦ Ve stejné době: plus minus ¦ Vid samma tid: plus minus ¦ På samme tid: plus/minus
+Où elles se rencontrent ¦ Kde se setkávají ¦ Var de möts ¦ Hvor de mødes
+Par 25 ans ¦ Po 25 letech ¦ Per 25 år ¦ Pr. 25 år
+Position du trait ¦ Poloha čáry ¦ Streckets läge ¦ Stregens position
+Prends les deux lignées de ta personne de départ (« Depuis l’app »). ¦ Vezmi obě linie své výchozí osoby („Z aplikace“). ¦ Ta båda linjerna för din startperson (”Från appen”). ¦ Tag begge linjer for din startperson (»Fra appen«).
+Selon le nombre d’événements ¦ Podle počtu událostí ¦ Efter antal händelser ¦ Efter antal begivenheder
+Ses deux lignées sur la carte ¦ Její dvě linie na mapě ¦ Personens två linjer på kartan ¦ Personens to linjer på kortet
+Seulement la période ¦ Jen období ¦ Bara perioden ¦ Kun perioden
+Superposées ¦ Přes sebe ¦ Överlagrade ¦ Lagt oven på hinanden
+Tout jusqu’à cette date ¦ Vše do tohoto data ¦ Allt fram till detta datum ¦ Alt frem til denne dato
+jamais à la même époque ¦ nikdy ve stejné době ¦ aldrig vid samma tid ¦ aldrig på samme tid
+mariage de {a} et {b} ¦ sňatek: {a} a {b} ¦ bröllop mellan {a} och {b} ¦ bryllup mellem {a} og {b}
+{a} et {b}, à {km} km ¦ {a} a {b}, {km} km od sebe ¦ {a} och {b}, {km} km ifrån varandra ¦ {a} og {b}, {km} km fra hinanden
+3e groupe ¦ 3. skupina ¦ 3:e gruppen ¦ 3. gruppe
+4e groupe ¦ 4. skupina ¦ 4:e gruppen ¦ 4. gruppe

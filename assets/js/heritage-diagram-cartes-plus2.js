@@ -123,8 +123,9 @@
     const val = (box, k) => box.querySelector(`[data-cq="${k}"]`)?.value ?? '';
     const checks = (box, k) => [...box.querySelectorAll(`[data-cq="${k}"]:checked`)].map(x => x.value);
     const startId = () => Number(A()?.state?.bootstrap?.startPersonId) || 0;
-    const personField = (name, label) => `<div class="cq-pick"><span class="pk-lab">${i18n(label)}</span>${(window.LCNDA_PICKER || A())?.pickerField?.({name, hiddenName: false, kind: 'person'}) || ''}</div>`;
-    const pickedId = (box, name) => Number(box.querySelector(`input[name="${name}"]`)?.closest('.pk')?.querySelector('input[type=hidden]')?.value || box.querySelector(`input[name="${name}"]`)?.value || 0) || 0;
+    const personField = (name, label) => `<div class="cq-pick" data-cq-pk="${name}"><span class="pk-lab">${i18n(label)}</span>${(window.LCNDA_PICKER || A())?.pickerField?.({name, hiddenName: false, kind: 'person'}) || ''}</div>`;
+    const pickedId = (box, name) => { const pk = box.querySelector(`[data-cq-pk="${name}"] .pk`); let v = null; try { v = pk ? window.LCNDA_PICKER?.pickerValue?.(pk) : null; } catch (_) {} return Number(v) > 0 ? Number(v) : 0; };
+    const pickerPut = (box, name, id) => { const pk = box.querySelector(`[data-cq-pk="${name}"] .pk`); if (pk && id) try { window.LCNDA_PICKER?.pickerSet?.(pk, Number(id)); } catch (_) {} };
 
     /* ═════════ Les sortes ═════════ */
     async function resolve(spec) {
@@ -159,7 +160,7 @@
     const DETAIL = new Map();
     const keepDetail = (id, data) => { DETAIL.set(id, data); if (DETAIL.size > 40) DETAIL.delete(DETAIL.keys().next().value); };
     const H = {T, esc, multiples, DETAIL, keepDetail, num, clamp, r1, r2, fmt, fold, rows, str, C, pl, yearOf, tip, pidsAttr, opt, optN, siecle, KM, median, bases, frame, locate, missing, emptyMsg, title, atOf, timeOf, periodWord, curve, slice, hull, geoRing, poly,
-        get, placesOf, keepUnplaced, pane, bindGo, sel, val, checks, startId, personField, pickedId, resolve, afterDraw, mapOpts, COMMON, REC, i18n, A, ext, DR, GC, color};
+        get, placesOf, keepUnplaced, pane, bindGo, sel, val, checks, startId, personField, pickedId, pickerPut, resolve, afterDraw, mapOpts, COMMON, REC, i18n, A, ext, DR, GC, color};
     const NEW = {};
     /** une carte de plus : rangée dans le catalogue (groupe « Cartes ») si elle n'y est pas déjà */
     const add = (k, kind) => { NEW[k] = kind; if (!K[k]) K[k] = {group: 'Cartes', resolve, afterDraw, logExport: true, ...kind}; };
@@ -193,7 +194,7 @@
         ['serv', '🏠', 'Services, domestiques', '#9b5fc0'], ['armee', '🎖', 'Armée et police', '#b42318'], ['clerge', '⛪', 'Clergé', '#6941c6'], ['lib', '⚖️', 'Professions libérales, école, administration', '#2563c9'],
         ['rang', '🏰', 'Rentiers, rangs et statuts', '#8a6a2f'], ['foyer', '🧺', 'Au foyer, sans profession', '#8c8c8c'], ['autre', '❔', 'Autre métier', '#a3a3a3']];
     const DPAL = ['#4d8a2f', '#2f6b3a', '#5b6573', '#7b3fa0', '#8a5a2b', '#b5651d', '#c99a06', '#c2611a', '#0e7f99', '#1f4e79', '#9b5fc0', '#2563c9', '#6941c6', '#d14a7a', '#b42318', '#6b4f3a', '#3a8a8a', '#8a6a2f'];
-    const stepOf = spec => { const t = spec.o?.time; return t === 'all' || t === 'small' ? 0 : t === 'half' ? 50 : 100; };
+    const stepOf = spec => { const t = spec.o?.tmode; return t === 'all' || t === 'small' ? 0 : t === 'half' ? 50 : 100; };
     /** les catégories de la carte : [clé, icône, nom, couleur] selon « Classer par » */
     function cats(spec) {
         const o = spec.o || {}, by = opt(o, 'classify', '');
@@ -225,7 +226,7 @@
     function trademap(spec, W, fs) {
         const o = spec.o || {}, B0 = bases(spec, W); if (B0.wait) return B0.wait;
         const all = locate(spec, B0.list), step = stepOf(spec);
-        if (o.time === 'small' && !o.__inFacet) { // ▦ un petit dessin par siècle, au même cadrage
+        if (o.tmode === 'small' && !o.__inFacet) { // ▦ un petit dessin par siècle, au même cadrage
             const ys = all.pts.map(p => p.y).filter(y => y !== null), lo = ys.length ? Math.floor(Math.min(...ys) / 100) * 100 : null, hi = ys.length ? Math.floor(Math.max(...ys) / 100) * 100 : null;
             const list = []; if (lo !== null) for (let a = lo; a <= hi && list.length < 8; a += 100) { const k = kept(spec, all.pts, a, 100); if (k.length) list.push({label: `${siecle(a)} · ${pl(new Set(k.map(who)).size, 'personne')}`, o: {__inFacet: true, at: a, __step: 100, title: ''}}); }
             const M = multiples(spec, W, fs, list, (sp, w) => trademap(sp, w, fs * .8)); let svg = M.svg, h = Math.max(M.h, list.length ? 0 : 300);
@@ -310,7 +311,7 @@
                 if (r.error) throw new Error(r.error);
                 const sex = val(box, 'sex'), from = val(box, 'from');
                 r.rows = (r.rows || []).filter(e => (!sex || r.gender?.[e[0]] === sex) && (!from || (e[2] !== null && (from.startsWith('-') ? e[2] <= Number(from.slice(1)) : e[2] >= Number(from) && e[2] <= Number(from) + 99))));
-                fill(s, r, {classify, trade: classify === 'one' ? ts.value : '', tradeName: classify === 'one' ? tradeName(ts) : '', draw: val(box, 'draw'), time: val(box, 'time'),
+                fill(s, r, {classify, trade: classify === 'one' ? ts.value : '', tradeName: classify === 'one' ? tradeName(ts) : '', draw: val(box, 'draw'), tmode: val(box, 'time'), time: {...(s.o?.time || {}), show: !['all', 'small'].includes(val(box, 'time')), step: val(box, 'time') === 'half' ? 50 : 100},
                     title: classify === 'one' ? i18n('Où on était {trade}', {trade: tradeName(ts)}) : i18n('Les métiers de la famille')});
                 if (!s.rows.length) throw new Error(i18n('Aucun métier avec un lieu pour ce choix.'));
                 io.apply(s);
@@ -328,22 +329,231 @@
         options: [REC, C('classify', 'Classer par', 'select', {choices: [['', 'Grand secteur (12)'], ['domain', 'Famille de métiers du dictionnaire (18)'], ['one', 'Un seul métier et ses variantes'], ['mine', 'Mes couleurs à moi par métier']]}),
             C('colors', 'Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa »)', 'text', {when: s => s.o?.classify === 'mine'}),
             C('draw', 'Dessin', 'select', {choices: [['', 'Camembert par commune'], ['top', 'Un rond de la couleur du plus fréquent'], ['dots', 'Un point par personne'], ['deps', 'Départements colorés']]}),
-            C('time', 'Temps', 'select', {choices: [['', '▶ Siècle par siècle'], ['small', '▦ Un petit dessin par siècle'], ['half', 'Par demi-siècle'], ['all', 'Tout ensemble']]}),
-            C('at', 'Siècle montré (une année ; vide = tous)', 'text', {ph: '1800', when: s => !['all', 'small'].includes(s.o?.time)}),
+            C('tmode', 'Temps', 'select', {choices: [['', '▶ Siècle par siècle'], ['small', '▦ Un petit dessin par siècle'], ['half', 'Par demi-siècle'], ['all', 'Tout ensemble']]}),
+            C('at', 'Siècle montré (une année ; vide = tous)', 'text', {ph: '1800', when: s => !['all', 'small'].includes(s.o?.tmode)}),
             C('where', 'Où placer le métier', 'select', {choices: [['', 'Lieu de l’acte, sinon résidence, sinon naissance'], ['act', 'Lieu de l’acte seulement']]}),
             C('multi', 'Plusieurs métiers', 'select', {choices: [['', 'Chacun à sa date'], ['main', 'Le principal seulement']]}),
             C('foyer', '🧺 Au foyer, sans profession', 'select', {choices: [['', 'Montrés'], ['hide', 'Cachés']]}),
             C('size', 'Taille', 'select', {choices: [['', 'Nombre de personnes'], ['mentions', 'Nombre de mentions'], ['same', 'Tous pareils']]}),
             C('dotSize', 'Taille des ronds', 'range', {min: .3, max: 3, step: .1, def: 1}), C('placeLabels', 'Noms des lieux', 'select', {choices: [['', 'Les plus grands'], ['all', 'Tous'], ['none', 'Aucun']]}), ...mapOpts, ...COMMON],
-        sample: () => ({o: {title: i18n('Les métiers de la famille'), map: 'fr', time: ''}, rows: sample()}),
+        sample: () => ({o: {title: i18n('Les métiers de la famille'), map: 'fr', time: {show: true, step: 100}}, rows: sample()}),
         fromApp: tradeApp, describe: spec => i18n('Carte des métiers : {n}.', {n: pl(rows(spec).length, 'mention')})});
     ext.diagramCartesPlus2.trademap = trademap;
     /** 🛠️ fiche d'un métier ancien → « 🗺 Où on l'exerçait » : la carte réglée sur ce métier et ses variantes */
     ext.diagramCartesPlus2.openTrade = async (key, name) => {
         try { const r = await get({what: 'trades'}); r.rows = (r.rows || []).filter(e => e[3] === key);
             if (!r.rows.length) return window.LCNDA_APP?.toast?.(i18n('Aucun métier avec un lieu pour ce choix.'));
-            const s = fill({kind: 'trademap', o: {map: 'fr'}}, r, {classify: 'one', trade: key, tradeName: name, title: i18n('Où on était {trade}', {trade: name}), time: 'all'});
+            const s = fill({kind: 'trademap', o: {map: 'fr'}}, r, {classify: 'one', trade: key, tradeName: name, title: i18n('Où on était {trade}', {trade: name}), tmode: 'all'});
             ext.openDiagramEditor?.(null, {spec: s, name: s.o.title});
         } catch (e) { window.LCNDA_APP?.toast?.(e.message || String(e), 'error'); }
     };
+})();
+
+/* ═════════ 👫 Les deux lignées en miroir (maquette, partie 1) ═════════
+ * Les ancêtres du côté du père en bleu, ceux du côté de la mère en orange (ou quatre grands-parents, deux personnes, deux noms,
+ * deux listes), sur la même carte : les communes où les deux lignées sont passées sont entourées. Superposées, côte à côte ou
+ * ⇆ glisser (un trait qui découvre l'autre côté). Données : op mirror de lib/cartes_plus2.php (dgn_sosa, cp_hidden). */
+(() => {
+    'use strict';
+    const P2 = window.LCNDA_EXT?.diagramCartesPlus2; if (!P2) return;
+    const {T, esc, num, clamp, r1, r2, rows, str, C, pl, tip, opt, optN, KM, bases, frame, locate, missing, emptyMsg, title, periodWord, keepDetail,
+        get, placesOf, keepUnplaced, pane, bindGo, sel, val, checks, startId, personField, pickedId, pickerPut, mapOpts, COMMON, REC, i18n, A, ext, GC, color} = P2.H;
+    const PAL = {'': ['#1f6fd1', '#e8890c', '#6fa8ef', '#f2b766'], pink: ['#1f6fd1', '#d6408f', '#6fa8ef', '#ee8fc0']};
+    const MIX = '#7b4fb0';
+    const colorsOf = (spec, n) => { const o = spec.o || {}; if (o.colors === 'mine') return [color(o.colorA, '#1f6fd1'), color(o.colorB, '#e8890c'), color(o.colorC, '#6fa8ef'), color(o.colorD, '#f2b766')].slice(0, n); return (PAL[o.colors] || PAL['']).slice(0, n).length === n ? (PAL[o.colors] || PAL['']).slice(0, n) : PAL[''].slice(0, n); };
+    const groupsOf = spec => { const g = Array.isArray(spec.groups) && spec.groups.length ? spec.groups : [{label: 'Côté père'}, {label: 'Côté mère'}]; return g.slice(0, 4); };
+    const stepOf = spec => { const s = spec.o?.step; return s === 'gen' ? 1 : s === '25' ? 25 : 10; };
+    /** le curseur ▶ : par décennie, par 25 ans, ou par génération (1 = la personne de départ) */
+    const time = {
+        range: spec => { if (spec.o?.step === 'gen') { const gs = rows(spec).map(r => Number(r.gen)).filter(g => g > 0); return gs.length ? [Math.max(2, Math.min(...gs)), Math.max(...gs)] : [NaN, NaN]; }
+            const s = stepOf(spec), ys = rows(spec).map(r => H2.yearOf(r.date)).filter(y => y !== null); return ys.length ? [Math.floor(Math.min(...ys) / s) * s, Math.floor(Math.max(...ys) / s) * s] : [NaN, NaN]; },
+        at: (spec, y) => { spec.o = {...(spec.o || {}), __year: y, time: {...(spec.o?.time || {}), step: stepOf(spec)}}; return spec; },
+    };
+    const H2 = P2.H;
+    /** les lignes gardées pour l'image en cours (curseur ▶ : tout jusqu'à cette date, ou seulement la période) */
+    function kept(spec, all) {
+        const o = spec.o || {}, gen = o.step === 'gen', st = stepOf(spec), y = Number.isFinite(o.__year) ? o.__year : String(o.at ?? '').trim() !== '' ? num(o.at) : null;
+        const at = y === null ? null : gen ? Math.round(y) : Math.floor(y / st) * st, cumul = opt(o, 'window', '') !== 'period';
+        return {at, pts: all.filter(p => {
+            if (opt(o, 'implex', '') === 'short' && p.r.both && String(p.r.short ?? '') !== '' && Number(p.r.short) !== Number(p.r.side)) return false; // seulement du côté du chemin le plus court
+            if (at === null) return true;
+            if (gen) { const g = Number(p.r.gen) || 0; return cumul ? g >= at : g === at; } // par génération : des plus anciens vers les plus récents
+            return p.y !== null && (cumul ? p.y < at + st : p.y >= at && p.y < at + st);
+        })};
+    }
+    /** les lieux et, par lieu, ce que chaque côté y a laissé */
+    function byPlace(pts, n) {
+        const g = new Map();
+        pts.forEach(p => { const k = `${r2(p.lon)}|${r2(p.lat)}`; let x = g.get(k); if (!x) g.set(k, x = {p, sides: Array.from({length: n}, () => ({n: 0, y0: null, y1: null, pids: new Set(), ys: []})), mix: 0});
+            const s = x.sides[clamp(Number(p.r.side) || 0, 0, n - 1)]; s.n++; s.pids.add(p.pid || p.r.name); if (p.y !== null) { s.ys.push(p.y); s.y0 = s.y0 === null ? p.y : Math.min(s.y0, p.y); s.y1 = s.y1 === null ? p.y : Math.max(s.y1, p.y); } if (p.r.both) x.mix++; });
+        return [...g.values()];
+    }
+    /** à la même époque : deux côtés avec des événements à moins de N ans l'un de l'autre */
+    const sameEra = (a, b, n) => a.ys.some(x => b.ys.some(y => Math.abs(x - y) <= n));
+    function meetings(spec, list) {
+        const o = spec.o || {}, how = opt(o, 'meet', ''), era = optN(o, 'eraYears', 25, 1, 200), near = optN(o, 'nearKm', 10, 1, 50), out = [];
+        if (how === 'near') { // à moins de N km : la même commune ou deux communes voisines
+            list.forEach((x, i) => { const here = x.sides.map((s, k) => s.n ? k : -1).filter(k => k >= 0); if (here.length > 1) out.push({x, y: null, km: 0, era: here.length > 1 && sameEra(x.sides[here[0]], x.sides[here[1]], era)});
+                list.slice(i + 1).forEach(y => { const km = KM([x.p.lon, x.p.lat], [y.p.lon, y.p.lat]); if (km > near) return; const a = x.sides.findIndex(s => s.n), b = y.sides.findIndex((s, k) => s.n && k !== a); if (a >= 0 && b >= 0 && !(here.length > 1)) out.push({x, y, km: Math.round(km), era: sameEra(x.sides[a], y.sides[b], era)}); }); });
+            return out;
+        }
+        list.forEach(x => { const here = x.sides.map((s, k) => (s.n ? k : -1)).filter(k => k >= 0); if (here.length < 2) return; const e = sameEra(x.sides[here[0]], x.sides[here[1]], era); if (how === 'era' && !e) return; out.push({x, y: null, km: 0, era: e}); });
+        return out;
+    }
+    function layer(spec, F, list, n, cols, R0, maxN, only = null) {
+        const {pr} = F, o = spec.o || {}; let svg = '';
+        const offs = n === 2 ? [[-.42, 0], [.42, 0]] : [[-.42, -.42], [.42, -.42], [-.42, .42], [.42, .42]];
+        list.forEach(x => {
+            const [cx, cy] = pr.p(x.p.lon, x.p.lat); if (!Number.isFinite(cx)) return;
+            x.sides.forEach((s, k) => { if (!s.n || (only !== null && k !== only)) return;
+                const rr = opt(o, 'size', '') === 'same' ? R0 : Math.max(2.5, R0 * Math.sqrt(s.n / maxN) * 1.6), solo = x.sides.filter(z => z.n).length === 1 || only !== null;
+                const dx = solo ? 0 : offs[k][0] * rr, dy = solo ? 0 : offs[k][1] * rr;
+                svg += `<circle cx="${r1(cx + dx)}" cy="${r1(cy + dy)}" r="${r2(rr)}" fill="${cols[k]}" fill-opacity=".72" stroke="#fff" stroke-width="1">${tip(`${x.p.place} — ${i18n(groupsOf(spec)[k]?.label || '')} : ${pl(s.n, 'événement')}${s.y0 !== null ? ` (${s.y0}${s.y1 !== s.y0 ? '–' + s.y1 : ''})` : ''}`)}</circle>`; });
+            if (x.mix && opt(o, 'implex', '') !== 'short' && only === null) svg += `<circle cx="${r1(cx)}" cy="${r1(cy)}" r="${r2(clamp(R0 * .45, 2, 6))}" fill="${MIX}" stroke="#fff" stroke-width="1">${tip(i18n('Ancêtre des deux côtés'))}</circle>`;
+        });
+        return svg;
+    }
+    function mirrormap(spec, W, fs) {
+        const o = spec.o || {}, B0 = bases(spec, W); if (B0.wait) return B0.wait;
+        const all = locate(spec, B0.list), G = groupsOf(spec), n = G.length, cols = colorsOf(spec, n);
+        const {at, pts} = kept(spec, all.pts), list = byPlace(pts, n), M = meetings(spec, list), draw = opt(o, 'draw', '');
+        const maxN = Math.max(1, ...list.flatMap(x => x.sides.map(s => s.n))), id = 'cqm' + Math.random().toString(36).slice(2, 8);
+        const allPts = all.pts.map(p => [p.lon, p.lat]);
+        let svg = `<g data-c2-total="${pts.length}"></g>`, H = 0, geo = null;
+        // un côté vide : on le dit au-dessus de la carte, l'autre reste dessiné
+        const empty = G.map((g, k) => (all.pts.some(p => Number(p.r.side) === k) ? null : g)).filter(Boolean);
+        if (empty.length && all.pts.length) { empty.forEach(g => { svg += T(0, H + fs * .8, i18n('Aucun ancêtre connu : {who}', {who: i18n(g.label)}), {size: fs * .9, fill: '#a5552a', weight: 700}); H += fs * 1.4; }); }
+        const word = at === null ? '' : o.step === 'gen' ? i18n('Génération {g}', {g: String(at)}) : periodWord(at, stepOf(spec));
+        if (draw === 'side') { // côte à côte : un dessin par côté, au même cadrage
+            const gap = fs, cw = W < 520 ? W : (W - gap * (n === 4 ? 1 : n - 1)) / (n === 4 ? 2 : n), percol = W < 520 ? 1 : (n === 4 ? 2 : n);
+            let rowH = 0, y0 = H;
+            G.forEach((g, k) => { const F = frame({...spec, o: {...o, height: Math.round(cw * .95)}}, cw, fs, allPts, null, Math.round(cw * .95)); if (F.wait) return;
+                const c = k % percol; if (c === 0 && k) { y0 += rowH + gap; rowH = 0; } const x = c * (cw + gap);
+                const R0 = clamp(cw / 70, 3, 9) * clamp(num(o.dotSize) || 1, .3, 3);
+                svg += `<g transform="translate(${r1(x)} ${r1(y0 + fs * 1.6)})">${F.open}${layer(spec, F, list, n, cols, R0, maxN, k)}${F.close}</g>` + T(x + 4, y0 + fs * .8, `● ${i18n(g.label)} · ${pl(list.filter(z => z.sides[k].n).length, 'lieu', 'lieux')}`, {size: fs * .95, weight: 800, fill: cols[k]});
+                rowH = Math.max(rowH, F.h + fs * 1.6); });
+            H = y0 + rowH;
+        } else {
+            const F = frame(spec, W, fs, allPts); if (F.wait) return F.wait; geo = F.geo;
+            const R0 = clamp(F.w / 90, 3, 10) * clamp(num(o.dotSize) || 1, .3, 3), {pr} = F;
+            let body = '';
+            if (draw === 'swipe') { // ⇆ glisser : le premier côté à gauche du trait, l'autre à droite
+                const xs = F.w * clamp(optN(o, 'swipe', 50, 0, 100) / 100, 0, 1), cid = id + 's';
+                body += `<defs><clipPath id="${cid}a"><rect x="0" y="0" width="${r1(xs)}" height="${r1(F.h)}"/></clipPath><clipPath id="${cid}b"><rect x="${r1(xs)}" y="0" width="${r1(F.w - xs)}" height="${r1(F.h)}"/></clipPath></defs>`
+                    + `<g clip-path="url(#${cid}a)">${layer(spec, F, list, n, cols, R0, maxN, 0)}</g><g clip-path="url(#${cid}b)">${G.slice(1).map((_, k) => layer(spec, F, list, n, cols, R0, maxN, k + 1)).join('')}</g>`
+                    + `<line x1="${r1(xs)}" y1="0" x2="${r1(xs)}" y2="${r1(F.h)}" stroke="#111" stroke-width="2" stroke-dasharray="6 4"/>`;
+            } else body += layer(spec, F, list, n, cols, R0, maxN);
+            // ⭕ là où elles se rencontrent (trait plein : à la même époque ; pointillé : jamais à la même époque)
+            body += `<g data-cq-d="${id}">`;
+            M.forEach((m, i) => { const [cx, cy] = pr.p(m.x.p.lon, m.x.p.lat); if (!Number.isFinite(cx)) return;
+                const rr = R0 * 2.4 + 4, ring = `<circle cx="${r1(cx)}" cy="${r1(cy)}" r="${r2(rr)}" fill="none" stroke="#111" stroke-width="1.8"${m.era ? '' : ' stroke-dasharray="4 3"'}/>`;
+                const link = m.y ? (() => { const [x2, y2] = pr.p(m.y.p.lon, m.y.p.lat); return `<line x1="${r1(cx)}" y1="${r1(cy)}" x2="${r1(x2)}" y2="${r1(y2)}" stroke="#111" stroke-width="1.4" stroke-dasharray="2 3"/>`; })() : '';
+                body += `<g class="cq-pt" data-cq-i="${i}" tabindex="0" role="button" aria-label="${esc(m.x.p.place)}">${tip(meetText(spec, m))}${ring}${link}</g>`; });
+            body += '</g>';
+            const wd = spec.wedding; if (wd?.label && opt(o, 'wedding', '') !== 'hide') { const p = GC.placeOf(spec, wd.label, B0.list); if (p) { const [cx, cy] = pr.p(p[0], p[1]); if (Number.isFinite(cx)) body += T(cx, cy - R0 * 2.4 - fs * .6, '💍', {size: fs * 1.1, anchor: 'middle'}); } }
+            svg += `<g transform="translate(0 ${r1(H)})">${F.open}${body}${word && !Number.isFinite(o.__year) ? title(word, fs) : ''}${F.close}</g>`;
+            H += F.h;
+            // sous la carte : les communes où elles se rencontrent (des lieux et des années, jamais un vivant)
+            if (M.length && o.meetList !== false) {
+                H += fs * .6; svg += T(0, H + fs * .6, `⭕ ${i18n('Où elles se rencontrent')} · ${M.length}`, {size: fs, weight: 800}); H += fs * 1.5;
+                M.slice(0, clamp(Math.round(num(o.meetMax) || 5), 1, 20)).forEach(m => { svg += T(0, H + fs * .55, meetText(spec, m), {size: fs * .8, fill: '#333'}); H += fs * 1.25; });
+            }
+            keepDetail(id, i => detail(spec, M[i], list));
+        }
+        if (all.unknown.length && o.showMissing !== false) { svg += missing(all.unknown, H, fs, spec); H += fs * 1.5; }
+        if (!all.pts.length) svg += emptyMsg(W, Math.max(H, 300), fs, 'Prends les deux lignées de ta personne de départ (« Depuis l’app »).');
+        const legend = G.map((g, k) => ({label: `${i18n(g.label)}${g.who ? ` (${g.who})` : ''} · ${pl(list.filter(x => x.sides[k].n).length, 'lieu', 'lieux')}`, color: cols[k]}));
+        if (M.length) legend.push({label: `⭕ ${i18n('Les deux lignées')} · ${M.length}`, color: '#111111'});
+        return {h: Math.max(H, all.pts.length ? 0 : 300), svg, legend, geo, desc: i18n('Les deux lignées : {a}, {b} où elles se rencontrent.', {a: pl(list.length, 'lieu', 'lieux'), b: pl(M.length, 'commune')})};
+    }
+    function meetText(spec, m) {
+        const G = groupsOf(spec), span = s => (s.y0 !== null ? ` (${s.y0}${s.y1 !== s.y0 ? '–' + s.y1 : ''})` : '');
+        const parts = (m.y ? [m.x, m.y] : [m.x]).flatMap(x => x.sides.map((s, k) => (s.n ? `${i18n(G[k]?.label || '')} ${s.n}${span(s)}` : null)).filter(Boolean));
+        const head = m.y ? i18n('{a} et {b}, à {km} km', {a: m.x.p.place, b: m.y.p.place, km: String(m.km)}) : m.x.p.place;
+        const wd = spec.wedding && str(spec.wedding.label) === str(m.x.p.place) ? ` · 💍 ${i18n('mariage de {a} et {b}', {a: spec.wedding.a || '?', b: spec.wedding.b || '?'})}${spec.wedding.date ? ' (' + spec.wedding.date + ')' : ''}` : '';
+        return `${head} — ${parts.join(' · ')}${m.era ? '' : ' · ' + i18n('jamais à la même époque')}${wd}`;
+    }
+    function detail(spec, m, list) {
+        if (!m || !ext.openDialog) return;
+        const names = new Map(rows(spec).map(r => [Number(r.pid) || 0, r.name]));
+        const G = groupsOf(spec), places = m.y ? [m.x, m.y] : [m.x];
+        const body = `<div class="cq-detail"><p>${esc(meetText(spec, m))}</p>${places.map(x => x.sides.map((s, k) => s.n ? `<p><b>${esc(i18n(G[k]?.label || ''))} · ${esc(x.p.place)}</b><br>${[...s.pids].slice(0, 30).map(pid => names.get(Number(pid)) ? `<button type="button" class="link-button" data-cq-person="${Number(pid)}">${esc(names.get(Number(pid)))}</button>` : '').filter(Boolean).join(', ')}</p>` : '').join('')).join('')}</div>`;
+        ext.openDialog({eyebrow: i18n('LES DEUX LIGNÉES'), title: m.x.p.place, body, submitLabel: i18n('Fermer'), onSubmit: () => true});
+    }
+
+    /* ─── Depuis l'app ─── */
+    const EVS = [['births', 'Naissances'], ['marriages', 'Mariages'], ['deaths', 'Décès'], ['residences', 'Résidences et recensements']];
+    function fill(s, r, extra = {}) {
+        const names = placesOf(s, r.places || {});
+        s.rows = [];
+        (r.events || []).forEach(([pid, plc, y, tag]) => { if (!names.has(plc)) return; (r.member?.[pid] || []).forEach(side => s.rows.push({label: names.get(plc), date: y === null ? '' : String(y), side, name: r.people?.[pid] || '', pid, both: r.both?.[pid] ? 1 : 0, short: r.short?.[pid] ?? '', gen: r.gen?.[pid] || '', tag})); });
+        s.groups = (r.groups || []).map(g => ({label: g.label, who: g.who || ''}));
+        s.wedding = r.wedding ? {label: names.get(r.wedding.place) || '', year: r.wedding.year, date: r.wedding.date, a: r.wedding.a, b: r.wedding.b} : null;
+        keepUnplaced(s, r.unplaced);
+        const fam = r.root?.family || '';
+        const t = r.side === 'pat' ? (r.root?.shown ? i18n('Les deux lignées de {name}', {name: r.root.name}) : i18n('Les deux lignées de la famille {name}', {name: fam})) : r.side === 'grand' ? (r.root?.shown ? i18n('Les quatre grands-parents de {name}', {name: r.root.name}) : i18n('Les quatre grands-parents de la famille {name}', {name: fam})) : s.groups.map(g => g.who || i18n(g.label)).join(' · ');
+        s.o = {...(s.o || {}), title: t, ...extra};
+        return s;
+    }
+    const mirrorApp = {
+        html: () => pane('👫 Deux lignées de ta généalogie', 'Côté père et côté mère de la personne de départ (ou quatre grands-parents, deux personnes, deux noms, deux listes). Jamais un vivant ni une fiche confidentielle : une personne de départ vivante n’est jamais un point.',
+            sel('side', 'Les deux côtés', [['pat', 'Côté père / côté mère'], ['grand', 'Mes quatre grands-parents (4 couleurs)'], ['two', 'Deux personnes au choix'], ['names', 'Deux noms de famille'], ['lists', 'Deux groupes de Mes listes']])
+            + `<div data-cq-for="pat grand">${personField('cq_root', 'Personne de départ')}</div>`
+            + `<div data-cq-for="two">${personField('cq_a', 'Première personne')}${personField('cq_b', 'Deuxième personne')}</div>`
+            + `<div data-cq-for="names"><label>${esc(i18n('Premier nom'))}<input data-cq="na" maxlength="80"></label><label>${esc(i18n('Deuxième nom'))}<input data-cq="nb" maxlength="80"></label></div>`
+            + `<div data-cq-for="lists"><label>${esc(i18n('Première liste'))}<select data-cq="la"></select></label><label>${esc(i18n('Deuxième liste'))}<select data-cq="lb"></select></label></div>`
+            + sel('gens', 'Générations', [['8', '8'], ['4', '4'], ['6', '6'], ['10', '10'], ['0', 'tout']])
+            + `<fieldset><legend>${esc(i18n('Événements'))}</legend><div class="cq-checks">${EVS.map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" data-cq="ev" value="${k}" checked> ${esc(i18n(l))}</label>`).join('')}</div></fieldset>`
+            + sel('period', 'Période', [['', 'Toutes les époques'], ['-1789', 'Avant la Révolution (jusqu’en 1789)']])),
+        bind: (box, io) => {
+            const sync = () => { const v = val(box, 'side'); box.querySelectorAll('[data-cq-for]').forEach(d => { d.hidden = !d.dataset.cqFor.split(' ').includes(v); }); };
+            sync(); box.addEventListener('change', sync);
+            pickerPut(box, 'cq_root', startId());
+            A().api('my_lists').then(r => { const opts = (r.lists || []).filter(l => ['persons', 'events', 'records'].includes(l.source)).map(l => `<option value="${Number(l.id)}">${esc(l.name)}</option>`).join('') || `<option value="">${esc(i18n('Aucune liste'))}</option>`; ['la', 'lb'].forEach(k => { const s = box.querySelector(`[data-cq="${k}"]`); if (s) s.innerHTML = opts; }); }).catch(() => {});
+            bindGo(box, async () => {
+                const side = val(box, 'side'), q = {what: 'mirror', side, gens: val(box, 'gens'), ev: checks(box, 'ev').join(',') || 'births', root: pickedId(box, 'cq_root') || startId(), a: pickedId(box, 'cq_a'), b: pickedId(box, 'cq_b'), na: val(box, 'na'), nb: val(box, 'nb'), la: val(box, 'la'), lb: val(box, 'lb')};
+                const r = await get(q); if (r.error) throw new Error(r.error);
+                const per = val(box, 'period'); if (per.startsWith('-')) r.events = (r.events || []).filter(e => e[2] !== null && e[2] <= Number(per.slice(1)));
+                const s = fill(io.spec(), r, {time: {...(io.spec().o?.time || {}), show: true, step: 10}});
+                if (!s.rows.length) throw new Error(i18n('Aucun événement avec un lieu pour ce choix.'));
+                io.apply(s); return s.groups.map((g, k) => `${i18n(g.label)} : ${pl(new Set(s.rows.filter(x => x.side === k).map(x => x.label)).size, 'lieu', 'lieux')}`).join(' · ');
+            });
+        },
+    };
+    /** fiche → ⋯ → « 👫 Ses deux lignées sur la carte » : le diagramme réglé sur elle */
+    async function openFor(pid) {
+        try { const r = await get({what: 'mirror', side: 'pat', root: pid, gens: 8}); if (r.error) throw new Error(r.error);
+            const s = fill({kind: 'mirrormap', o: {map: 'fr', time: {show: true, step: 10}}}, r); if (!s.rows.length) throw new Error(i18n('Aucun événement avec un lieu pour ce choix.'));
+            ext.openDiagramEditor?.(null, {spec: s, name: s.o.title});
+        } catch (e) { A()?.toast?.(e.message || String(e), 'error'); }
+    }
+    ext.personMoreItems = ext.personMoreItems || [];
+    ext.personMoreItems.push(detail => { const p = detail?.person; if (!p?.id || p.kind === 'animal' || !ext.openDiagramEditor) return null; return {icon: '👫', label: 'Ses deux lignées sur la carte', run: () => openFor(Number(p.id))}; });
+
+    const SP = {Tulle: [45.2694, 1.768], Naves: [45.3118, 1.7521], Seilhac: [45.3667, 1.7167], Chameyrat: [45.2471, 1.7043], Laguenne: [45.242, 1.781], Meymac: [45.5361, 2.1464], Favars: [45.263, 1.670], Gimel: [45.297, 1.844]};
+    const sp = n => `${n} ${SP[n][0]}, ${SP[n][1]}`;
+    const sample = () => { const out = [];
+        [['Naves', 0, 1772], ['Naves', 0, 1810], ['Naves', 0, 1838], ['Tulle', 0, 1861], ['Tulle', 0, 1890], ['Chameyrat', 0, 1840], ['Favars', 0, 1795], ['Tulle', 0, 1919],
+            ['Laguenne', 1, 1830], ['Laguenne', 1, 1861], ['Seilhac', 1, 1868], ['Tulle', 1, 1895], ['Tulle', 1, 1919], ['Naves', 1, 1898], ['Gimel', 1, 1802], ['Meymac', 1, 1760]]
+            .forEach(([p, side, y], i) => out.push({label: sp(p), date: String(y), side, name: side ? `LACOMBE ${i}` : `MAZAUD ${i}`, gen: 2 + (1919 - y) / 30 | 0}));
+        return out; };
+    P2.add('mirrormap', {icon: '👫', label: 'Les deux lignées en miroir (côté père, côté mère)', render: GC.remember(mirrormap), legend: 'bottom', time,
+        grids: [{key: 'rows', label: 'Les événements des deux côtés (un par ligne)', cols: [C('label', 'Lieu (« Tulle », « Tulle 45.27, 1.77 »)'), C('date', 'Date ou année', 'text', {ph: '1850'}), C('side', 'Côté', 'select', {choices: [['0', 'Côté père'], ['1', 'Côté mère'], ['2', '3e groupe'], ['3', '4e groupe']]}), C('name', 'Personne')]}],
+        options: [REC,
+            C('meet', 'Elles se rencontrent', 'select', {choices: [['', 'Même commune'], ['era', 'Même commune à la même époque'], ['near', 'À moins de quelques km']]}),
+            C('eraYears', 'À la même époque : à plus ou moins', 'number', {min: 1, max: 200, def: 25, unit: i18n('ans', {ctx: 'unite'})}),
+            C('nearKm', 'Distance', 'range', {min: 1, max: 50, def: 10, unit: 'km', when: s => s.o?.meet === 'near'}),
+            C('draw', 'Dessin', 'select', {choices: [['', 'Superposées'], ['side', 'Côte à côte'], ['swipe', '⇆ Glisser (un trait à déplacer)']]}),
+            C('swipe', 'Position du trait', 'range', {min: 0, max: 100, def: 50, unit: '%', when: s => s.o?.draw === 'swipe'}),
+            C('implex', 'Ancêtre des deux côtés', 'select', {choices: [['', 'Compté des deux côtés, couleur mélangée'], ['short', 'Seulement du côté du chemin le plus court']]}),
+            C('step', 'Curseur ▶', 'select', {choices: [['', 'Par décennie'], ['25', 'Par 25 ans'], ['gen', 'Par génération']]}),
+            C('window', 'Chaque image montre', 'select', {choices: [['', 'Tout jusqu’à cette date'], ['period', 'Seulement la période']]}),
+            C('colors', 'Couleurs', 'select', {choices: [['', 'Bleu / orange (lisibles aussi par les daltoniens)'], ['pink', 'Bleu / rose'], ['mine', 'Mes deux couleurs…']]}),
+            C('colorA', 'Couleur du premier côté', 'color', {def: '#1f6fd1', when: s => s.o?.colors === 'mine'}), C('colorB', 'Couleur du deuxième côté', 'color', {def: '#e8890c', when: s => s.o?.colors === 'mine'}),
+            C('size', 'Taille des points', 'select', {choices: [['', 'Selon le nombre d’événements'], ['same', 'Tous pareils']]}), C('dotSize', 'Taille des ronds', 'range', {min: .3, max: 3, step: .1, def: 1}),
+            C('meetList', 'Lister sous la carte où elles se rencontrent', 'check', {def: true}), C('meetMax', 'Combien de lignes', 'number', {min: 1, max: 20, def: 5, when: s => s.o?.meetList !== false}),
+            C('wedding', 'Le mariage des parents (💍)', 'select', {choices: [['', 'Montré'], ['hide', 'Caché']]}), ...mapOpts, ...COMMON],
+        sample: () => ({o: {title: i18n('Les deux lignées de la famille {name}', {name: 'MAZAUD'}), map: 'fr', time: {show: true, step: 10}}, groups: [{label: 'Côté père', who: 'MAZAUD'}, {label: 'Côté mère', who: 'LACOMBE'}], wedding: {label: sp('Tulle'), year: 1919, date: '12 avril 1919', a: 'Pierre MAZAUD', b: 'Marie LACOMBE'}, rows: sample()}),
+        fromApp: mirrorApp, describe: spec => i18n('Les deux lignées : {n}.', {n: pl(rows(spec).length, 'événement')})});
+    ext.diagramCartesPlus2.mirrormap = mirrormap; ext.diagramCartesPlus2.openMirror = openFor;
 })();

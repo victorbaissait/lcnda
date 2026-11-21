@@ -137,3 +137,56 @@ Par grand secteur (12) ¦ Pagal pagrindinį sektorių (12) ¦ Pēc galvenās noz
 employé ¦ tarnautojas ¦ kalpotājs ¦ ametnik
 ménagère ¦ namų šeimininkė ¦ mājsaimniece ¦ koduperenaine
 Où on l’exerçait ¦ Kur ja vertėsi ¦ Kur to strādāja ¦ Kus seda tehti
+# 👫 Les deux lignées en miroir (partie 1)
+Les deux lignées en miroir (côté père, côté mère) ¦ Dvi giminės linijos veidrodiškai (tėvo pusė, motinos pusė) ¦ Abas dzimtas līnijas spoguļattēlā (tēva puse, mātes puse) ¦ Kaks liini peegelpildis (isa pool, ema pool)
+Les événements des deux côtés (un par ligne) ¦ Abiejų pusių įvykiai (vienas eilutėje) ¦ Abu pušu notikumi (viens katrā rindā) ¦ Mõlema poole sündmused (üks rea kohta)
+Ancêtre des deux côtés ¦ Abiejų pusių protėvis ¦ Sencis abās pusēs ¦ Esivanem mõlemal poolel
+Aucun ancêtre connu : {who} ¦ Nėra žinomų protėvių: {who} ¦ Nav zināmu senču: {who} ¦ Teadaolevaid esivanemaid pole: {who}
+Bleu / orange (lisibles aussi par les daltoniens) ¦ Mėlyna / oranžinė (įskaitoma ir daltonikams) ¦ Zils / oranžs (salasāms arī daltoniķiem) ¦ Sinine / oranž (loetav ka värvipimedatele)
+Compté des deux côtés, couleur mélangée ¦ Skaičiuojamas abiejose pusėse, maišyta spalva ¦ Skaitīts abās pusēs, jaukta krāsa ¦ Loetakse mõlemal poolel, segavärv
+Seulement du côté du chemin le plus court ¦ Tik trumpiausio kelio pusėje ¦ Tikai īsākā ceļa pusē ¦ Ainult lühima tee poolel
+Couleur du premier côté ¦ Pirmos pusės spalva ¦ Pirmās puses krāsa ¦ Esimese poole värv
+Couleur du deuxième côté ¦ Antrosios pusės spalva ¦ Otrās puses krāsa ¦ Teise poole värv
+Côté père / côté mère ¦ Tėvo pusė / motinos pusė ¦ Tēva puse / mātes puse ¦ Isa pool / ema pool
+Côté père / côté mère, avant la Révolution ¦ Tėvo / motinos pusė, iki revoliucijos ¦ Tēva / mātes puse, pirms revolūcijas ¦ Isa / ema pool, enne revolutsiooni
+Mes quatre grands-parents (4 couleurs) ¦ Mano keturi seneliai (4 spalvos) ¦ Mani četri vecvecāki (4 krāsas) ¦ Minu neli vanavanemat (4 värvi)
+Deux personnes au choix ¦ Du pasirinkti asmenys ¦ Divas izvēlētas personas ¦ Kaks valitud isikut
+Deux noms de famille ¦ Dvi pavardės ¦ Divi uzvārdi ¦ Kaks perekonnanime
+Deux groupes de Mes listes ¦ Dvi grupės iš Mano sąrašų ¦ Divas grupas no Maniem sarakstiem ¦ Kaks rühma Minu loenditest
+Premier nom ¦ Pirmoji pavardė ¦ Pirmais uzvārds ¦ Esimene nimi
+Deuxième nom ¦ Antroji pavardė ¦ Otrais uzvārds ¦ Teine nimi
+Première liste ¦ Pirmasis sąrašas ¦ Pirmais saraksts ¦ Esimene loend
+Deuxième liste ¦ Antrasis sąrašas ¦ Otrais saraksts ¦ Teine loend
+Deux lignées de ta généalogie ¦ Dvi tavo genealogijos linijos ¦ Divas tavas ģenealoģijas līnijas ¦ Kaks liini sinu sugupuust
+Côté père et côté mère de la personne de départ (ou quatre grands-parents, deux personnes, deux noms, deux listes). Jamais un vivant ni une fiche confidentielle : une personne de départ vivante n’est jamais un point. ¦ Pradinio asmens tėvo ir motinos pusė (arba keturi seneliai, du asmenys, dvi pavardės, du sąrašai). Niekada gyvas asmuo ar konfidenciali kortelė: gyvas pradinis asmuo niekada nėra taškas. ¦ Sākuma personas tēva un mātes puse (vai četri vecvecāki, divas personas, divi vārdi, divi saraksti). Nekad dzīva persona vai konfidenciāla kartīte: dzīva sākuma persona nekad nav punkts. ¦ Lähteisiku isa ja ema pool (või neli vanavanemat, kaks isikut, kaks nime, kaks loendit). Mitte kunagi elav inimene ega konfidentsiaalne kaart: elav lähteisik ei ole kunagi punkt.
+Glisser (un trait à déplacer) ¦ Slinkti (perkeliama linija) ¦ Bīdīt (pārvietojama līnija) ¦ Lohista (liigutatav joon)
+LES DEUX LIGNÉES ¦ DVI LINIJOS ¦ DIVAS LĪNIJAS ¦ KAKS LIINI
+Le mariage des parents (💍) ¦ Tėvų santuoka (💍) ¦ Vecāku laulības (💍) ¦ Vanemate pulm (💍)
+Les deux lignées ¦ Abi linijos ¦ Abas līnijas ¦ Mõlemad liinid
+Les deux lignées : {a}, {b} où elles se rencontrent. ¦ Abi linijos: {a}; susitinka: {b}. ¦ Abas līnijas: {a}; satiekas: {b}. ¦ Mõlemad liinid: {a}; kohtuvad: {b}.
+Les deux lignées : {n}. ¦ Abi linijos: {n}. ¦ Abas līnijas: {n}. ¦ Mõlemad liinid: {n}.
+Les deux lignées de la famille {name} ¦ Dvi {name} šeimos linijos ¦ Dzimtas {name} divas līnijas ¦ Perekonna {name} kaks liini
+Les deux lignées de {name} ¦ Dvi linijos: {name} ¦ Divas līnijas: {name} ¦ Kaks liini: {name}
+Les quatre grands-parents de la famille {name} ¦ Keturi {name} šeimos seneliai ¦ Dzimtas {name} četri vecvecāki ¦ Perekonna {name} neli vanavanemat
+Les quatre grands-parents de {name} ¦ Keturi seneliai: {name} ¦ Četri vecvecāki: {name} ¦ Neli vanavanemat: {name}
+Lister sous la carte où elles se rencontrent ¦ Po žemėlapiu išvardyti, kur jos susitinka ¦ Zem kartes uzskaitīt, kur tās satiekas ¦ Loetle kaardi all, kus need kohtuvad
+Combien de lignes ¦ Kiek eilučių ¦ Cik rindu ¦ Mitu rida
+Montré ¦ Rodomas ¦ Rādīts ¦ Näidatud
+Même commune ¦ Ta pati savivaldybė ¦ Tā pati pašvaldība ¦ Sama vald
+Même commune à la même époque ¦ Ta pati savivaldybė tuo pačiu metu ¦ Tā pati pašvaldība tajā pašā laikā ¦ Sama vald samal ajal
+À moins de quelques km ¦ Mažiau nei keli km ¦ Dažu km attālumā ¦ Mõne km kaugusel
+À la même époque : à plus ou moins ¦ Tuo pačiu metu: plius minus ¦ Tajā pašā laikā: plus mīnus ¦ Samal ajal: pluss-miinus
+Où elles se rencontrent ¦ Kur jos susitinka ¦ Kur tās satiekas ¦ Kus need kohtuvad
+Par 25 ans ¦ Kas 25 metus ¦ Pa 25 gadiem ¦ 25 aasta kaupa
+Position du trait ¦ Linijos padėtis ¦ Līnijas novietojums ¦ Joone asend
+Prends les deux lignées de ta personne de départ (« Depuis l’app »). ¦ Paimk abi savo pradinio asmens linijas („Iš programos“). ¦ Ņem abas savas sākuma personas līnijas (“No lietotnes”). ¦ Võta oma lähteisiku mõlemad liinid („Rakendusest“).
+Selon le nombre d’événements ¦ Pagal įvykių skaičių ¦ Pēc notikumu skaita ¦ Sündmuste arvu järgi
+Ses deux lignées sur la carte ¦ Abi jo linijos žemėlapyje ¦ Abas personas līnijas kartē ¦ Tema kaks liini kaardil
+Seulement la période ¦ Tik laikotarpis ¦ Tikai periods ¦ Ainult periood
+Superposées ¦ Viena ant kitos ¦ Pārklātas ¦ Kattuvad
+Tout jusqu’à cette date ¦ Viskas iki šios datos ¦ Viss līdz šim datumam ¦ Kõik selle kuupäevani
+jamais à la même époque ¦ niekada tuo pačiu metu ¦ nekad tajā pašā laikā ¦ mitte kunagi samal ajal
+mariage de {a} et {b} ¦ santuoka: {a} ir {b} ¦ laulības: {a} un {b} ¦ pulm: {a} ja {b}
+{a} et {b}, à {km} km ¦ {a} ir {b}, {km} km atstumu ¦ {a} un {b}, {km} km attālumā ¦ {a} ja {b}, {km} km kaugusel
+3e groupe ¦ 3-ioji grupė ¦ 3. grupa ¦ 3. rühm
+4e groupe ¦ 4-oji grupė ¦ 4. grupa ¦ 4. rühm

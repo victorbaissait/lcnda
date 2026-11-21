@@ -137,3 +137,56 @@ Par grand secteur (12) ¦ Pääaloittain (12) ¦ Fő ágazatonként (12)
 employé ¦ toimihenkilö ¦ alkalmazott
 ménagère ¦ kotiäiti ¦ háztartásbeli
 Où on l’exerçait ¦ Missä sitä harjoitettiin ¦ Hol űzték
+# 👫 Les deux lignées en miroir (partie 1)
+Les deux lignées en miroir (côté père, côté mère) ¦ Kaksi sukulinjaa rinnakkain (isän puoli, äidin puoli) ¦ A két ág tükrösen (apai oldal, anyai oldal)
+Les événements des deux côtés (un par ligne) ¦ Molempien puolten tapahtumat (yksi riviä kohti) ¦ A két oldal eseményei (soronként egy)
+Ancêtre des deux côtés ¦ Esivanhempi molemmilla puolilla ¦ Ős mindkét oldalon
+Aucun ancêtre connu : {who} ¦ Ei tunnettuja esivanhempia: {who} ¦ Nincs ismert ős: {who}
+Bleu / orange (lisibles aussi par les daltoniens) ¦ Sininen / oranssi (luettavissa myös värisokeille) ¦ Kék / narancs (színtévesztők számára is olvasható)
+Compté des deux côtés, couleur mélangée ¦ Lasketaan molemmille puolille, sekoitettu väri ¦ Mindkét oldalon számolva, kevert színnel
+Seulement du côté du chemin le plus court ¦ Vain lyhimmän polun puolella ¦ Csak a legrövidebb út oldalán
+Couleur du premier côté ¦ Ensimmäisen puolen väri ¦ Az első oldal színe
+Couleur du deuxième côté ¦ Toisen puolen väri ¦ A második oldal színe
+Côté père / côté mère ¦ Isän puoli / äidin puoli ¦ Apai oldal / anyai oldal
+Côté père / côté mère, avant la Révolution ¦ Isän / äidin puoli, ennen vallankumousta ¦ Apai / anyai oldal, a forradalom előtt
+Mes quatre grands-parents (4 couleurs) ¦ Neljä isovanhempaani (4 väriä) ¦ A négy nagyszülőm (4 szín)
+Deux personnes au choix ¦ Kaksi valittua henkilöä ¦ Két választott személy
+Deux noms de famille ¦ Kaksi sukunimeä ¦ Két családnév
+Deux groupes de Mes listes ¦ Kaksi ryhmää Omista luetteloista ¦ Két csoport a Saját listákból
+Premier nom ¦ Ensimmäinen nimi ¦ Első név
+Deuxième nom ¦ Toinen nimi ¦ Második név
+Première liste ¦ Ensimmäinen luettelo ¦ Első lista
+Deuxième liste ¦ Toinen luettelo ¦ Második lista
+Deux lignées de ta généalogie ¦ Kaksi sukulinjaa sukututkimuksestasi ¦ A családfád két ága
+Côté père et côté mère de la personne de départ (ou quatre grands-parents, deux personnes, deux noms, deux listes). Jamais un vivant ni une fiche confidentielle : une personne de départ vivante n’est jamais un point. ¦ Lähtöhenkilön isän ja äidin puoli (tai neljä isovanhempaa, kaksi henkilöä, kaksi nimeä, kaksi luetteloa). Ei koskaan elävää henkilöä eikä luottamuksellista korttia: elävä lähtöhenkilö ei ole koskaan piste. ¦ A kiinduló személy apai és anyai oldala (vagy négy nagyszülő, két személy, két név, két lista). Soha élő személy vagy bizalmas adatlap: élő kiinduló személy sosem lesz pont.
+Glisser (un trait à déplacer) ¦ Liu’uta (siirrettävä viiva) ¦ Húzás (mozgatható vonal)
+LES DEUX LIGNÉES ¦ KAKSI SUKULINJAA ¦ A KÉT ÁG
+Le mariage des parents (💍) ¦ Vanhempien häät (💍) ¦ A szülők esküvője (💍)
+Les deux lignées ¦ Molemmat sukulinjat ¦ Mindkét ág
+Les deux lignées : {a}, {b} où elles se rencontrent. ¦ Molemmat sukulinjat: {a}, {b}, joissa ne kohtaavat. ¦ Mindkét ág: {a}, {b}, ahol találkoznak.
+Les deux lignées : {n}. ¦ Molemmat sukulinjat: {n}. ¦ Mindkét ág: {n}.
+Les deux lignées de la famille {name} ¦ Suvun {name} kaksi sukulinjaa ¦ A {name} család két ága
+Les deux lignées de {name} ¦ Kaksi sukulinjaa: {name} ¦ {name} két ága
+Les quatre grands-parents de la famille {name} ¦ Suvun {name} neljä isovanhempaa ¦ A {name} család négy nagyszülője
+Les quatre grands-parents de {name} ¦ Neljä isovanhempaa: {name} ¦ {name} négy nagyszülője
+Lister sous la carte où elles se rencontrent ¦ Luettele kartan alle, missä ne kohtaavat ¦ A térkép alatt felsorolja, hol találkoznak
+Combien de lignes ¦ Montako riviä ¦ Hány sor
+Montré ¦ Näytetään ¦ Látható
+Même commune ¦ Sama kunta ¦ Ugyanaz a település
+Même commune à la même époque ¦ Sama kunta samaan aikaan ¦ Ugyanaz a település ugyanabban az időben
+À moins de quelques km ¦ Muutaman km:n päässä ¦ Néhány km-en belül
+À la même époque : à plus ou moins ¦ Samaan aikaan: plus miinus ¦ Ugyanabban az időben: plusz-mínusz
+Où elles se rencontrent ¦ Missä ne kohtaavat ¦ Hol találkoznak
+Par 25 ans ¦ 25 vuoden välein ¦ 25 évenként
+Position du trait ¦ Viivan sijainti ¦ A vonal helyzete
+Prends les deux lignées de ta personne de départ (« Depuis l’app »). ¦ Ota lähtöhenkilösi molemmat sukulinjat (”Sovelluksesta”). ¦ Vedd át a kiinduló személyed mindkét ágát („Az alkalmazásból”).
+Selon le nombre d’événements ¦ Tapahtumien määrän mukaan ¦ Az események száma szerint
+Ses deux lignées sur la carte ¦ Henkilön kaksi sukulinjaa kartalla ¦ A két ága a térképen
+Seulement la période ¦ Vain ajanjakso ¦ Csak az időszak
+Superposées ¦ Päällekkäin ¦ Egymásra rakva
+Tout jusqu’à cette date ¦ Kaikki tähän päivään asti ¦ Minden eddig a dátumig
+jamais à la même époque ¦ ei koskaan samaan aikaan ¦ soha nem ugyanabban az időben
+mariage de {a} et {b} ¦ {a} ja {b} vihittiin ¦ {a} és {b} esküvője
+{a} et {b}, à {km} km ¦ {a} ja {b}, {km} km:n päässä ¦ {a} és {b}, {km} km-re
+3e groupe ¦ 3. ryhmä ¦ 3. csoport
+4e groupe ¦ 4. ryhmä ¦ 4. csoport

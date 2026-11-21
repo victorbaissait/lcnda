@@ -143,6 +143,8 @@
         // 🗺️ cartes en plus, vague 2 (heritage-diagram-cartes-plus2.js) : « ✏️ Sur mesure » reste en tête du menu
         trademap: [['Par grand secteur (12)', {'[data-cq="classify"]': ''}], ['Par famille de métiers du dictionnaire (18)', {'[data-cq="classify"]': 'domain'}], ['Un métier et ses variantes…', {'[data-cq="classify"]': 'one'}],
             ['Mes ancêtres seulement', {'[data-cq="pop"]': 'anc'}], ['Au XIXe siècle', {'[data-cq="from"]': '1801'}], ['Les hommes', {'[data-cq="sex"]': 'm'}], ['Les femmes', {'[data-cq="sex"]': 'f'}]],
+        mirrormap: [['Côté père / côté mère', {'[data-cq="side"]': 'pat'}], ['Mes quatre grands-parents (4 couleurs)', {'[data-cq="side"]': 'grand'}], ['Deux personnes au choix', {'[data-cq="side"]': 'two'}],
+            ['Deux noms de famille', {'[data-cq="side"]': 'names'}], ['Côté père / côté mère, avant la Révolution', {'[data-cq="side"]': 'pat', '[data-cq="period"]': '-1789'}]],
         quarters: [['8 quartiers (arrière-grands-parents)', {'[data-dla="gens"]': '3'}], ['16 quartiers', {'[data-dla="gens"]': '4'}], ['32 quartiers', {'[data-dla="gens"]': '5'}]],
     };
     const GO = '[data-gn-go], [data-n6-go], [data-dm-go], [data-dfa-go], [data-dgm-go], [data-c2-go], [data-dac-go], [data-cp-go], [data-lotc-go], [data-dpl-go], [data-dla-go], [data-cq-go]';

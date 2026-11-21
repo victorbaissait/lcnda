@@ -168,6 +168,67 @@ function cp2_trade_list(PDO $pdo): array
     return ['trades' => array_map(static fn($k, $c) => ['key' => $k, 'name' => $r['names'][$k] ?? $k, 'n' => $c], array_keys($n), $n)];
 }
 
+/** 👫 deux (ou quatre) groupes de personnes → leurs événements situés : côté père / côté mère, quatre grands-parents, deux personnes, deux noms, deux listes */
+function cp2_mirror(PDO $pdo, array $q): array
+{
+    $side = cp2_pick($q, 'side', ['pat', 'grand', 'two', 'names', 'lists'], 'pat');
+    $gens = cp2_int($q, 'gens', 8, 0, 40);
+    $tags = cp2_tags((string) ($q['ev'] ?? 'births,marriages,deaths,residences'));
+    $hidden = cp_hidden($pdo);
+    $root = cp2_root($pdo, cp2_int($q, 'root', 0, 0, PHP_INT_MAX));
+    $groups = []; $member = []; $sosas = []; $labels = []; $wedding = null;
+    $add = static function (int $g, int $pid, ?int $sosa = null) use (&$member, &$sosas, $hidden): void {
+        if ($pid <= 0 || isset($hidden[$pid])) { return; }
+        $member[$pid][$g] = true; if ($sosa !== null) { $sosas[$pid][] = $sosa; }
+    };
+    $who = static function (int $id) use ($pdo, $hidden): string { if (!$id || isset($hidden[$id])) { return ''; } $s = $pdo->prepare('SELECT first_name, last_name FROM persons WHERE id=?'); $s->execute([$id]); $r = $s->fetch(); return $r ? dgn_name($r) : ''; };
+    if ($side === 'pat' || $side === 'grand') {
+        if (!$root['id']) { throw new RuntimeException('Choisis d’abord une personne de départ.'); }
+        $S = dgn_sosa($pdo, $root['id'], $gens > 0 ? $gens + 1 : 40, 120000);
+        $n = $side === 'pat' ? 2 : 4;
+        foreach ($S as $s => $id) {
+            if ($s < $n) { continue; }
+            $g = strlen(decbin((int) $s)) - 1; $top = $side === 'pat' ? ($s >> ($g - 1)) - 2 : ($s >> ($g - 2)) - 4;
+            $add($top, (int) $id, (int) $s);
+        }
+        $labels = $side === 'pat' ? ['Côté père', 'Côté mère'] : ['Grand-père paternel', 'Grand-mère paternelle', 'Grand-père maternel', 'Grand-mère maternelle'];
+        $groups = array_map(static fn($l, $i) => ['label' => $l, 'who' => $who((int) ($S[$side === 'pat' ? $i + 2 : $i + 4] ?? 0)), 'surname' => ''], $labels, array_keys($labels));
+        // le mariage des parents (sosa 2 et 3) : souvent là que les deux lignées se rencontrent
+        if (isset($S[2], $S[3]) && !isset($hidden[(int) $S[2]]) && !isset($hidden[(int) $S[3]])) {
+            $st = $pdo->prepare("SELECT e.place_id, e.year, e.date_text FROM families f JOIN events e ON e.family_id=f.id JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='MARR' AND ((f.partner1_id=? AND f.partner2_id=?) OR (f.partner1_id=? AND f.partner2_id=?)) AND e.place_id IS NOT NULL LIMIT 1");
+            $st->execute([(int) $S[2], (int) $S[3], (int) $S[3], (int) $S[2]]); $m = $st->fetch();
+            if ($m) { $wedding = ['place' => (int) $m['place_id'], 'year' => $m['year'] !== null ? (int) $m['year'] : null, 'date' => mb_substr((string) $m['date_text'], 0, 40), 'a' => $who((int) $S[2]), 'b' => $who((int) $S[3])]; }
+        }
+    } elseif ($side === 'two') {
+        $a = cp2_int($q, 'a', 0, 0, PHP_INT_MAX); $b = cp2_int($q, 'b', 0, 0, PHP_INT_MAX);
+        if (!$a || !$b) { throw new RuntimeException('Choisis les deux personnes.'); }
+        foreach ([$a, $b] as $g => $p) { foreach (dgn_sosa($pdo, $p, $gens > 0 ? $gens + 1 : 40, 60000) as $s => $id) { $add($g, (int) $id, (int) $s); } }
+        $groups = [['label' => 'Première personne', 'who' => $who($a), 'surname' => ''], ['label' => 'Deuxième personne', 'who' => $who($b), 'surname' => '']];
+    } elseif ($side === 'names') {
+        $na = cp_fold(mb_substr(trim((string) ($q['na'] ?? '')), 0, 80)); $nb = cp_fold(mb_substr(trim((string) ($q['nb'] ?? '')), 0, 80));
+        if ($na === '' || $nb === '') { throw new RuntimeException('Choisis les deux noms de famille.'); }
+        foreach ($pdo->query("SELECT id, last_name FROM persons WHERE COALESCE(last_name,'')<>''") as $p) { $f = cp_fold((string) $p['last_name']); if ($f === $na) { $add(0, (int) $p['id']); } if ($f === $nb) { $add(1, (int) $p['id']); } }
+        $groups = [['label' => mb_strtoupper(trim((string) $q['na'])), 'who' => '', 'surname' => mb_strtoupper(trim((string) $q['na']))], ['label' => mb_strtoupper(trim((string) $q['nb'])), 'who' => '', 'surname' => mb_strtoupper(trim((string) $q['nb']))]];
+    } else {
+        $la = cp2_int($q, 'la', 0, 0, PHP_INT_MAX); $lb = cp2_int($q, 'lb', 0, 0, PHP_INT_MAX);
+        if (!$la || !$lb) { throw new RuntimeException('Choisis les deux listes.'); }
+        foreach ([$la, $lb] as $g => $l) { foreach (array_keys(dgo_list_people($pdo, $l)) as $id) { $add($g, (int) $id); } }
+        $names = []; $st = $pdo->prepare('SELECT name FROM custom_lists WHERE id=?'); foreach ([$la, $lb] as $l) { $st->execute([$l]); $names[] = mb_substr((string) $st->fetchColumn(), 0, 80); }
+        $groups = [['label' => $names[0] ?: 'Première liste', 'who' => '', 'surname' => ''], ['label' => $names[1] ?: 'Deuxième liste', 'who' => '', 'surname' => '']];
+    }
+    $events = cp2_events($pdo, $tags, array_keys($member));
+    $places = cp_places($pdo, array_merge(array_column($events, 1), $wedding ? [$wedding['place']] : []));
+    // les ancêtres des deux côtés (implexe, ancêtres communs) : la plus petite génération par côté pour « le chemin le plus court »
+    $both = [];
+    foreach ($member as $pid => $gs) { if (count($gs) > 1) { $both[$pid] = array_values(array_unique($sosas[$pid] ?? [])); } }
+    $gen = []; foreach ($sosas as $pid => $list) { foreach ($list as $s) { $g = strlen(decbin((int) $s)); $gen[$pid] = min($gen[$pid] ?? 99, $g); } }
+    $short = [];
+    if ($side === 'pat' || $side === 'grand') { foreach ($both as $pid => $list) { sort($list); $s = $list[0]; $g = strlen(decbin($s)) - 1; $short[$pid] = $side === 'pat' ? ($s >> ($g - 1)) - 2 : ($s >> ($g - 2)) - 4; } }
+    return ['side' => $side, 'groups' => $groups, 'events' => $events, 'member' => array_map(static fn($g) => array_keys($g), $member), 'both' => $both, 'short' => $short, 'gen' => $gen,
+        'places' => $places, 'people' => cp_people($pdo, array_merge(array_keys($both), array_column($events, 0))), 'root' => $root, 'wedding' => $wedding && isset($places[$wedding['place']]) ? $wedding : null,
+        'unplaced' => cp2_unplaced($pdo, array_column($events, 1), $places)];
+}
+
 /** le point d'entrée : api.php?action=cartes_plus2 */
 function cp2_data(PDO $pdo, array $q): array
 {
@@ -175,6 +236,7 @@ function cp2_data(PDO $pdo, array $q): array
     return match ($what) {
         'trades' => cp2_trades($pdo, $q),
         'trade_list' => cp2_trade_list($pdo),
+        'mirror' => cp2_mirror($pdo, $q),
         default => throw new RuntimeException('Demande inconnue.'),
     };
 }

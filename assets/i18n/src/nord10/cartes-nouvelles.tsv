@@ -137,3 +137,56 @@ Par grand secteur (12) ¦ Sipas sektorit kryesor (12) ¦ Skont is-settur ewlieni
 employé ¦ nëpunës ¦ impjegat
 ménagère ¦ shtëpiake ¦ mara tad-dar
 Où on l’exerçait ¦ Ku ushtrohej ¦ Fejn kienet issir
+# 👫 Les deux lignées en miroir (partie 1)
+Les deux lignées en miroir (côté père, côté mère) ¦ Dy linjat në pasqyrë (ana e babait, ana e nënës) ¦ Iż-żewġ nisel f’mera (in-naħa tal-missier, in-naħa tal-omm)
+Les événements des deux côtés (un par ligne) ¦ Ngjarjet e të dyja anëve (një për rresht) ¦ L-avvenimenti taż-żewġ naħat (wieħed għal kull linja)
+Ancêtre des deux côtés ¦ Paraardhës nga të dyja anët ¦ Antenat miż-żewġ naħat
+Aucun ancêtre connu : {who} ¦ Asnjë paraardhës i njohur: {who} ¦ L-ebda antenat magħruf: {who}
+Bleu / orange (lisibles aussi par les daltoniens) ¦ Blu / portokalli (të lexueshme edhe për daltonikët) ¦ Blu / oranġjo (jinqraw anke minn min hu għama għall-kuluri)
+Compté des deux côtés, couleur mélangée ¦ Numërohet nga të dyja anët, ngjyrë e përzier ¦ Jingħadd fiż-żewġ naħat, kulur imħallat
+Seulement du côté du chemin le plus court ¦ Vetëm nga ana e rrugës më të shkurtër ¦ Biss min-naħa tal-iqsar triq
+Couleur du premier côté ¦ Ngjyra e anës së parë ¦ Kulur tal-ewwel naħa
+Couleur du deuxième côté ¦ Ngjyra e anës së dytë ¦ Kulur tat-tieni naħa
+Côté père / côté mère ¦ Ana e babait / ana e nënës ¦ In-naħa tal-missier / in-naħa tal-omm
+Côté père / côté mère, avant la Révolution ¦ Ana e babait / e nënës, para Revolucionit ¦ In-naħa tal-missier / tal-omm, qabel ir-Rivoluzzjoni
+Mes quatre grands-parents (4 couleurs) ¦ Katër gjyshërit e mi (4 ngjyra) ¦ L-erba’ nanniet tiegħi (4 kuluri)
+Deux personnes au choix ¦ Dy persona sipas zgjedhjes ¦ Żewġ persuni tal-għażla tiegħek
+Deux noms de famille ¦ Dy mbiemra ¦ Żewġ kunjomijiet
+Deux groupes de Mes listes ¦ Dy grupe nga Listat e mia ¦ Żewġ gruppi mil-Listi tiegħi
+Premier nom ¦ Mbiemri i parë ¦ L-ewwel kunjom
+Deuxième nom ¦ Mbiemri i dytë ¦ It-tieni kunjom
+Première liste ¦ Lista e parë ¦ L-ewwel lista
+Deuxième liste ¦ Lista e dytë ¦ It-tieni lista
+Deux lignées de ta généalogie ¦ Dy linja të gjenealogjisë sate ¦ Żewġ nisel mill-ġenealoġija tiegħek
+Côté père et côté mère de la personne de départ (ou quatre grands-parents, deux personnes, deux noms, deux listes). Jamais un vivant ni une fiche confidentielle : une personne de départ vivante n’est jamais un point. ¦ Ana e babait dhe ana e nënës së personit fillestar (ose katër gjyshër, dy persona, dy emra, dy lista). Kurrë një i gjallë ose një skedë konfidenciale: një person fillestar i gjallë nuk është kurrë pikë. ¦ In-naħa tal-missier u tal-omm tal-persuna tal-bidu (jew erba’ nanniet, żewġ persuni, żewġ ismijiet, żewġ listi). Qatt persuna ħajja jew skeda kunfidenzjali: persuna tal-bidu ħajja qatt ma tkun tikka.
+Glisser (un trait à déplacer) ¦ Rrëshqit (një vijë për ta lëvizur) ¦ Iżżerżaq (linja li tiċċaqlaq)
+LES DEUX LIGNÉES ¦ DY LINJAT ¦ IŻ-ŻEWĠ NISEL
+Le mariage des parents (💍) ¦ Martesa e prindërve (💍) ¦ Iż-żwieġ tal-ġenituri (💍)
+Les deux lignées ¦ Të dyja linjat ¦ Iż-żewġ nisel
+Les deux lignées : {a}, {b} où elles se rencontrent. ¦ Të dyja linjat: {a}, {b} ku takohen. ¦ Iż-żewġ nisel: {a}, {b} fejn jiltaqgħu.
+Les deux lignées : {n}. ¦ Të dyja linjat: {n}. ¦ Iż-żewġ nisel: {n}.
+Les deux lignées de la famille {name} ¦ Dy linjat e familjes {name} ¦ Iż-żewġ nisel tal-familja {name}
+Les deux lignées de {name} ¦ Dy linjat e {name} ¦ Iż-żewġ nisel ta’ {name}
+Les quatre grands-parents de la famille {name} ¦ Katër gjyshërit e familjes {name} ¦ L-erba’ nanniet tal-familja {name}
+Les quatre grands-parents de {name} ¦ Katër gjyshërit e {name} ¦ L-erba’ nanniet ta’ {name}
+Lister sous la carte où elles se rencontrent ¦ Listo nën hartë ku takohen ¦ Elenka taħt il-mappa fejn jiltaqgħu
+Combien de lignes ¦ Sa rreshta ¦ Kemm linji
+Montré ¦ I shfaqur ¦ Muri
+Même commune ¦ E njëjta komunë ¦ L-istess komun
+Même commune à la même époque ¦ E njëjta komunë në të njëjtën kohë ¦ L-istess komun fl-istess żmien
+À moins de quelques km ¦ Brenda pak km ¦ Inqas minn ftit km
+À la même époque : à plus ou moins ¦ Në të njëjtën kohë: plus minus ¦ Fl-istess żmien: plus jew minus
+Où elles se rencontrent ¦ Ku takohen ¦ Fejn jiltaqgħu
+Par 25 ans ¦ Çdo 25 vjet ¦ Kull 25 sena
+Position du trait ¦ Pozicioni i vijës ¦ Pożizzjoni tal-linja
+Prends les deux lignées de ta personne de départ (« Depuis l’app »). ¦ Merr të dyja linjat e personit tënd fillestar («Nga aplikacioni»). ¦ Ħu ż-żewġ nisel tal-persuna tal-bidu tiegħek (“Mill-app”).
+Selon le nombre d’événements ¦ Sipas numrit të ngjarjeve ¦ Skont l-għadd ta’ avvenimenti
+Ses deux lignées sur la carte ¦ Dy linjat e tij në hartë ¦ Iż-żewġ nisel tagħha fuq il-mappa
+Seulement la période ¦ Vetëm periudha ¦ Il-perjodu biss
+Superposées ¦ Të mbivendosura ¦ Waħda fuq l-oħra
+Tout jusqu’à cette date ¦ Gjithçka deri në këtë datë ¦ Kollox sa din id-data
+jamais à la même époque ¦ kurrë në të njëjtën kohë ¦ qatt fl-istess żmien
+mariage de {a} et {b} ¦ martesa e {a} me {b} ¦ iż-żwieġ ta’ {a} u {b}
+{a} et {b}, à {km} km ¦ {a} dhe {b}, {km} km larg ¦ {a} u {b}, {km} km ’il bogħod
+3e groupe ¦ Grupi i 3-të ¦ It-3 grupp
+4e groupe ¦ Grupi i 4-t ¦ Ir-4 grupp
