@@ -211,14 +211,15 @@ function tx_deep_run(string $dir): void
         $img = trim((string) @file_get_contents($dir . '/image.b64'));
         // Qwen3-VL « réfléchit » d'abord (message.thinking) : sans « think: false », toute la place peut y passer et la réponse
         // reste vide. On le demande ; un Ollama trop ancien qui ne connaît pas « think » est relancé sans.
-        $text = ''; $thinking = ''; $last = 0; $err = ''; $r = ['ok' => false];
+        $text = ''; $thinking = ''; $last = 0; $err = ''; $r = ['ok' => false]; $info = '';
         foreach ([true, false] as $noThink) {
             $text = ''; $thinking = ''; $err = '';
             $body = ['model' => $tag, 'stream' => true, 'keep_alive' => '5m', 'options' => ['temperature' => 0, 'num_ctx' => 16384, 'num_predict' => 4096],
                 'messages' => [['role' => 'user', 'content' => (string) ($job['prompt'] ?? '')] + ($img !== '' ? ['images' => [$img]] : [])]];
             if ($noThink) { $body['think'] = false; }
-            $r = tx_deep_http('POST', '/api/chat', $body, 1800, static function (array $j) use (&$text, &$thinking, &$last, &$err, $put, $cancelled) {
+            $r = tx_deep_http('POST', '/api/chat', $body, 1800, static function (array $j) use (&$text, &$thinking, &$last, &$err, &$info, $put, $cancelled) {
                 if (!empty($j['error'])) { $err = mb_substr((string) $j['error'], 0, 300); return false; }
+                if (!empty($j['done'])) { $info = trim(implode(' · ', array_filter([isset($j['done_reason']) ? 'fin : ' . mb_substr((string) $j['done_reason'], 0, 20) : '', isset($j['prompt_eval_count']) ? 'image et consigne : ' . (int) $j['prompt_eval_count'] : '', isset($j['eval_count']) ? 'écrit : ' . (int) $j['eval_count'] : '']))); }
                 $text .= (string) ($j['message']['content'] ?? '');
                 $thinking .= (string) ($j['message']['thinking'] ?? '');
                 if (mb_strlen($text) > 60000 || mb_strlen($thinking) > 60000) { return false; }
@@ -230,11 +231,11 @@ function tx_deep_run(string $dir): void
         }
         @unlink($dir . '/image.b64');
         if ($cancelled()) { $put(['state' => 'cancelled']); return; }
-        if ($err !== '' || (!$r['ok'] && trim($text) === '')) { $put(['state' => 'error', 'error' => $err !== '' ? $err : 'La lecture approfondie n’a pas abouti.']); return; }
+        if ($err !== '' || (!$r['ok'] && trim($text) === '')) { $put(['state' => 'error', 'error' => $err !== '' ? $err : 'La lecture approfondie n’a pas abouti.', 'detail' => trim($info . ($r['ok'] ? '' : ' · HTTP ' . (int) ($r['code'] ?? 0)), ' ·')]); return; }
         if (trim($text) === '') { // jamais un texte vide présenté comme une lecture
             $put(['state' => 'error', 'error' => trim($thinking) !== ''
                 ? 'Le modèle a réfléchi sans écrire de transcription. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance.'
-                : 'Le modèle n’a rien lu sur cette image. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance.']); return; }
+                : 'Le modèle n’a rien lu sur cette image. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance.', 'detail' => $info]); return; }
         $put(['state' => 'done', 'text' => trim(preg_replace('/^```[a-z]*\s*|\s*```$/', '', trim($text)) ?? $text)]);
     } catch (Throwable $e) {
         @unlink($dir . '/image.b64');
@@ -250,7 +251,7 @@ function tx_deep_job(string $id): array
     $state = (string) ($r['state'] ?? 'running');
     if ($state === 'running' && time() - (int) ($r['updated'] ?? $job['created'] ?? time()) > 1800) { $state = 'error'; $r['error'] = 'La lecture approfondie a pris trop de temps.'; }
     return ['id' => $id, 'kind' => (string) ($job['kind'] ?? ''), 'model' => (string) ($job['model'] ?? ''), 'state' => $state, 'elapsed' => max(0, time() - (int) ($job['created'] ?? time())),
-        'completed' => (int) ($r['completed'] ?? 0), 'total' => (int) ($r['total'] ?? 0), 'status' => (string) ($r['status'] ?? ''), 'text' => (string) ($r['text'] ?? ''), 'error' => (string) ($r['error'] ?? '')];
+        'completed' => (int) ($r['completed'] ?? 0), 'total' => (int) ($r['total'] ?? 0), 'status' => (string) ($r['status'] ?? ''), 'text' => (string) ($r['text'] ?? ''), 'error' => (string) ($r['error'] ?? ''), 'detail' => (string) ($r['detail'] ?? '')];
 }
 
 function tx_deep_cancel(string $id): array

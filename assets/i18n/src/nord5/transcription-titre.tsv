@@ -10,3 +10,5 @@ Transcrire ¦ Prepiši ¦ Prepiši
 Ouvrir l’outil de transcription complet sur cette image ¦ Otvori cijeli alat za prijepis za ovu sliku ¦ Odpri celotno orodje za prepis za to sliko
 Le modèle a réfléchi sans écrire de transcription. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Model je razmišljao, ali nije napisao prijepis. Izreži manje područje (nekoliko redaka) ili isprobaj model 8B pa pokreni ponovno. ¦ Model je razmišljal, a ni napisal prepisa. Obreži manjše območje (nekaj vrstic) ali preizkusi model 8B in znova zaženi.
 Le modèle n’a rien lu sur cette image. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Model nije ništa pročitao na ovoj slici. Izreži manje područje (nekoliko redaka) ili isprobaj model 8B pa pokreni ponovno. ¦ Model na tej sliki ni prebral ničesar. Obreži manjše območje (nekaj vrstic) ali preizkusi model 8B in znova zaženi.
+La lecture a été arrêtée. ¦ Čitanje je zaustavljeno. ¦ Branje je bilo ustavljeno.
+Modèle : {m} · {n} s ¦ Model: {m} · {n} s ¦ Model: {m} · {n} s

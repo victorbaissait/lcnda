@@ -105,7 +105,12 @@
                 timer = setTimeout(() => poll(onDone), 900); return;
             }
             prog(false);
-            if (j.state === 'error') return toast(j.error ? i18n(j.error) : i18n('La lecture approfondie n’a pas abouti.'), 'error');
+            box.querySelectorAll('[data-txa-read], [data-txa-pull]').forEach(x => { x.disabled = false; }); // jamais un bouton grisé pour rien
+            if (j.state === 'error' || j.state === 'cancelled') { // le message reste dans la fenêtre (une bulle passe trop vite)
+                const msg = j.state === 'cancelled' ? i18n('La lecture a été arrêtée.') : (j.error ? i18n(j.error) : i18n('La lecture approfondie n’a pas abouti.'));
+                const out = box.querySelector('[data-txa-out]'); if (out) out.innerHTML = notice('error', `${esc(msg)}<br><small>${esc(i18n('Modèle : {m} · {n} s', {m: j.model || '?', n: String(j.elapsed ?? '?')}))}${j.detail ? ` · ${esc(j.detail)}` : ''}</small>`);
+                return toast(msg, 'error');
+            }
             if (j.state === 'done') onDone(j);
         }
         function compare(deepText) {

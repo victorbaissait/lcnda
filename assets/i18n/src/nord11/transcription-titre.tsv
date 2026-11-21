@@ -10,3 +10,5 @@ Transcrire ¦ Chép lại ¦ Transkripsikan
 Ouvrir l’outil de transcription complet sur cette image ¦ Mở công cụ chép lại đầy đủ cho hình ảnh này ¦ Buka alat transkripsi lengkap untuk gambar ini
 Le modèle a réfléchi sans écrire de transcription. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Mô hình đã suy nghĩ nhưng không viết bản chép lại. Cắt một vùng nhỏ hơn (vài dòng) hoặc thử mô hình 8B, rồi chạy lại. ¦ Model berpikir tanpa menulis transkripsi. Potong area yang lebih kecil (beberapa baris) atau coba model 8B, lalu jalankan lagi.
 Le modèle n’a rien lu sur cette image. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Mô hình không đọc được gì trên hình này. Cắt một vùng nhỏ hơn (vài dòng) hoặc thử mô hình 8B, rồi chạy lại. ¦ Model tidak membaca apa pun di gambar ini. Potong area yang lebih kecil (beberapa baris) atau coba model 8B, lalu jalankan lagi.
+La lecture a été arrêtée. ¦ Việc đọc đã bị dừng. ¦ Pembacaan dihentikan.
+Modèle : {m} · {n} s ¦ Mô hình: {m} · {n} giây ¦ Model: {m} · {n} dtk
