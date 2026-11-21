@@ -68,7 +68,7 @@ const PW = 'Mazaud-Bureau-2026-secret';
         const g = read('electron/lan-gate.js');
         assert.match(g, /path\.join\(o\.dataDir, 'reseau-local'\)/);
         assert.match(read('lib/migrations.php'), /const SCHEMA_VERSION = 99;/);
-        assert.match(read('lib/migrations.php'), /98 : compléments \(autre chantier, raccordé à la fusion\)/);
+        assert.match(read('lib/migrations.php'), /98 => 'schema_v98'/);
     });
     await t('textes : FAQ et traductions dans les 31 langues', () => {
         const faq = read('assets/js/heritage-more.js');

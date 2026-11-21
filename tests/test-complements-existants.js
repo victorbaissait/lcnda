@@ -145,8 +145,8 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
     const succ = body => w(body, 'successoral_write');
     let A = 0, B = 0, Cc = 0, D = 0, VIALLE = 0, DURAND = 0, BREST = 0, PIERRE = 0, VISIT = 0;
     try {
-        await t('serveur : migration 98 — table des notaires et clercs, colonnes des dossiers, courriers et visites ; relancée sans rien changer ; 99 laissé à l’autre chantier', async () => {
-            const [v] = q('PRAGMA user_version'); assert.equal(Object.values(v)[0], 98);
+        await t('serveur : migration 98 — table des notaires et clercs, colonnes des dossiers, courriers et visites ; relancée sans rien changer', async () => {
+            const [v] = q('PRAGMA user_version'); assert.ok(Object.values(v)[0] >= 98);
             const cols = (t2, c) => q(`SELECT count(*) AS n FROM pragma_table_info('${t2}') WHERE name IN (${c.map(x => `'${x}'`).join(',')})`)[0].n;
             assert.equal(cols('archive_service_people', ['service_id', 'name', 'role', 'person_id', 'phone', 'since', 'until', 'deleted_at']), 8);
             assert.equal(cols('succ_cases', ['notary_service_id', 'notary_people_id']), 2); assert.equal(cols('courriers', ['archive_service_id', 'recu_le']), 2);
@@ -154,7 +154,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
             const before = q("SELECT group_concat(name||sql) AS s FROM (SELECT name, sql FROM sqlite_master ORDER BY name)")[0].s;
             php('compl_schema($pdo); compl_schema($pdo);');
             assert.equal(q("SELECT group_concat(name||sql) AS s FROM (SELECT name, sql FROM sqlite_master ORDER BY name)")[0].s, before, 'idempotente');
-            const mg = fs.readFileSync(path.join(appRoot, 'lib/migrations.php'), 'utf8'); assert.match(mg, /const SCHEMA_VERSION = 98;/); assert.match(mg, /98 => 'schema_v98'/); assert.ok(!/99 => 'schema_v99'/.test(mg));
+            const mg = fs.readFileSync(path.join(appRoot, 'lib/migrations.php'), 'utf8'); assert.ok(Number((mg.match(/const SCHEMA_VERSION = (\d+);/) || [])[1]) >= 98); assert.match(mg, /98 => 'schema_v98'/);
         });
         await t('serveur : réglages — conseillés au départ, chaque option permise, une valeur inconnue ignorée', async () => {
             const s = await get('settings'); assert.deepEqual(s.settings, C.DEFAULTS);
