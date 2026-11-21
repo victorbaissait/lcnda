@@ -62,6 +62,9 @@ const PW = 'Mazaud-Bureau-2026-secret';
         assert.match(g, /key\.startsWith\('x-carnet'\)[^\n]*continue/, 'les en-têtes x-carnet-* venus du réseau sont retirés');
         const m = read('electron/main.js');
         assert.match(m, /powerMonitor\.on\('suspend'/); assert.match(m, /gate\.close\('quit'/);
+        // gate.on est la méthode des événements (toujours « vraie ») : jamais lue comme l'état de la porte (bug de la veille)
+        assert.doesNotMatch(m.replace(/\/\/.*$/gm, '').replace(/gate\.on\(/g, ''), /gate\.on\b/, 'main.js lit gate.on comme un état : c’est gate.isOn');
+        assert.match(m, /gate\.sleep\(\)/); assert.match(m, /gate\.shouldReopenAfterWake\(/);
         assert.match(m, /if \(!fromApp\(event\) \|\| !gate\)/, 'seule la grande fenêtre de l’ordinateur principal pilote la porte');
     });
     await t('rien de la porte dans la généalogie : appareils et jetons hachés dans le dossier de données de l’ordinateur', () => {
@@ -142,6 +145,13 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
             assert.deepEqual(r, { ok: false, error: 'noprivate' }); assert.equal(real.isOn, false);
             const s = real.settings;
             assert.deepEqual(s, { relaunch: 'coupe', wake: 'rouvre', password: 'obligatoire', preventSleep: 'non', invite: 'demande', duration: 'toujours', stale: 'proposer', network: 'couper' }, 'les options conseillées au départ');
+        });
+        await t('veille puis réveil avec la porte COUPÉE : elle reste coupée (bug : gate.on, toujours « vrai », la rouvrait au réveil)', async () => {
+            assert.equal(gate.isOn, false);
+            const wasOpen = await gate.sleep();
+            assert.equal(wasOpen, false, 'coupée avant la veille');
+            assert.equal(gate.shouldReopenAfterWake(wasOpen), false, 'jamais rouverte au réveil');
+            assert.equal(gate.isOn, false); assert.equal(gate.port, 0);
         });
         await t('mot de passe de la généalogie obligatoire (réglage conseillé) : refus d’ouvrir sans lui', async () => {
             assert.deepEqual(await gate.open({ passwordOk: false }), { ok: false, error: 'nopw' });
@@ -326,6 +336,20 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
             gate.requests.get(d.id).at -= 121000;
             assert.equal((await ask('GET', `/__lan/etat?id=${d.id}&k=${d.poll}`)).json().state, 'expire');
             assert.equal(gate.accept(d.id).ok, false, 'trop tard pour l’accepter');
+        });
+        await t('veille avec la porte OUVERTE : coupée (plus rien n’écoute), rouverte au réveil sur le même port ; réglage « reste coupé » : non', async () => {
+            assert.equal(gate.isOn, true);
+            const port = gate.port;
+            assert.equal(await gate.sleep(), true);
+            assert.equal(gate.isOn, false); assert.equal(await connectTo(port), 'ECONNREFUSED');
+            assert.equal(gate.state.wasOpen, true, 'la veille n’est pas un choix : « était ouverte » est gardé');
+            gate.setSettings({ wake: 'coupe' });
+            assert.equal(gate.shouldReopenAfterWake(true), false);
+            gate.setSettings({ wake: 'rouvre' });
+            assert.equal(gate.shouldReopenAfterWake(true), true);
+            assert.equal((await gate.open({ passwordOk: true })).ok, true);
+            assert.equal(gate.port, port, 'même port qu’avant la veille');
+            assert.equal(gate.shouldReopenAfterWake(true), false, 'déjà ouverte : rien à faire');
         });
         await t('⏻ Tout couper : le port est fermé (connexion refusée) ; un accès « pour cette fois seulement » ne survit pas', async () => {
             gate.fails.pauseUntil = 0; gate.fails.refused = 0;

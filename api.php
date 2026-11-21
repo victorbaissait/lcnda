@@ -178,6 +178,7 @@ try {
             'diagrams' => ['diagrams' => []],
             'scan_inbox_status' => ['dir' => '', 'enabled' => false, 'move_imported' => true, 'reachable' => false, 'pending' => 0, 'recent' => [], 'can_convert' => false, 'total' => 0],
             'parish_map' => ['by_place' => [], 'by_insee' => []],
+            'compl' => ($_GET['op'] ?? '') === 'settings' ? ['settings' => []] : null, // 🧩 réglages des compléments : ceux de départ
             default => null,
         };
         if ($emptyRead !== null) json_response($emptyRead + ['ready' => false]);
@@ -209,7 +210,6 @@ try {
     // La structure de la base (tables, colonnes, types d’événements de base) est mise à jour une seule fois
     // par numéro de version dans lib/migrations.php, à l’ouverture de la base (db()).
     if (!$isWrite && $action === 'schema_status') {
-        prepare_world_reference(); // décompression + index des villes du monde, une fois (~20 s au premier lancement)
         json_response(['version' => (int) $pdo->query('PRAGMA user_version')->fetchColumn(), 'expected' => SCHEMA_VERSION]);
     }
     if ($isWrite && $action === 'backup_sqlite') {
@@ -820,7 +820,11 @@ try {
             }
         }
     }
-    json_response(['error' => readable_error_message($e)], $e instanceof LcndaBadInput ? 422 : 500);
+    $out = ['error' => readable_error_message($e)];
+    // app de bureau, au lancement (electron/php-server.js, prepareDatabase) : la vraie raison (base abîmée, occupée, en lecture
+    // seule…), que electron/main.js dit simplement ; le message ci-dessus parle d'un enregistrement, ce n'en est pas un
+    if (isset($action) && $action === 'schema_status') { $out['detail'] = $e->getMessage(); }
+    json_response($out, $e instanceof LcndaBadInput ? 422 : 500);
 }
 
 function bootstrap_data(PDO $pdo): never
