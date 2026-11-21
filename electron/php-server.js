@@ -115,6 +115,14 @@ function explainPhpFailure(r) {
     return 'PHP ne démarre pas : un composant Microsoft manque (Visual C++ Redistributable 2015-2022, x64). '
       + 'Installe-le depuis https://aka.ms/vs/17/release/vc_redist.x64.exe puis relance.';
   }
+  // Délai dépassé (ETIMEDOUT, signal SIGTERM) : PHP n'a pas répondu à temps, le plus souvent au premier lancement, pendant que
+  // l'antivirus (Windows Defender…) ou macOS (Gatekeeper) examine le PHP livré avec l'app. Ce n'est pas un PHP « qui ne convient pas ».
+  if ((r.error && r.error.code === 'ETIMEDOUT') || r.signal === 'SIGTERM') {
+    return 'PHP a mis trop de temps à répondre (plus de ' + Math.round((r.timeoutMs || 10000) / 1000) + ' s). '
+      + 'Au premier lancement, l’antivirus (Windows Defender…) ou macOS vérifie souvent le PHP livré avec l’application : '
+      + 'attends une minute et relance l’application. Si ça recommence, ajoute le dossier de l’application aux exclusions de '
+      + 'l’antivirus, ou redémarre l’ordinateur.';
+  }
   const details = [
     r.error ? r.error.message : '',
     r.status !== null && r.status !== undefined ? 'code de sortie ' + r.status : '',
@@ -137,6 +145,46 @@ function checkPhp(phpPath) {
   try { info = JSON.parse(r.stdout); } catch { /* ignore */ }
   if (!info) return { ok: false, error: explainPhpFailure(r), missing: [] };
   return { ok: info.missing.length === 0, version: info.version, missing: info.missing };
+}
+
+/** Comme checkPhp, sans bloquer l'application (la fenêtre reste vivante) ; délai long et un second essai : le premier
+ * lancement peut être lent pendant que l'antivirus ou macOS examine le PHP livré (ETIMEDOUT / SIGTERM après 10 s sinon). */
+function checkPhpAsync(phpPath, { timeouts = [60000, 120000] } = {}) {
+  const code = [
+    "$need=['pdo_sqlite','sqlite3','mbstring','fileinfo','zip','gd','session','curl'];",
+    '$miss=array_values(array_filter($need,fn($e)=>!extension_loaded($e)));',
+    "try{$p=new PDO('sqlite::memory:');$p->exec('CREATE VIRTUAL TABLE t USING fts5(a)');}catch(Throwable $e){$miss[]='fts5';}",
+    "echo json_encode(['version'=>PHP_VERSION,'missing'=>$miss]);",
+  ].join('');
+  const once = (timeoutMs) => new Promise((resolve) => {
+    let out = '', err = '', done = false, timedOut = false, child;
+    const finish = (r) => { if (!done) { done = true; clearTimeout(timer); resolve(r); } };
+    try {
+      child = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { windowsHide: true });
+    } catch (e) { return finish({ error: e, status: null, signal: null, stdout: '', stderr: '', timeoutMs }); }
+    const timer = setTimeout(() => {
+      timedOut = true;
+      try { child.kill('SIGTERM'); } catch { /* ignore */ }
+      // ne pas attendre la fermeture des tuyaux (un processus petit-enfant peut les garder ouverts) : on répond tout de suite
+      setTimeout(() => finish({ error: Object.assign(new Error('ETIMEDOUT'), { code: 'ETIMEDOUT' }), status: null, signal: 'SIGTERM', stdout: out, stderr: err, timeoutMs }), 200);
+    }, timeoutMs);
+    child.stdout.on('data', (c) => { out += c; });
+    child.stderr.on('data', (c) => { err += c; });
+    child.on('error', (e) => finish({ error: e, status: null, signal: null, stdout: out, stderr: err, timeoutMs }));
+    child.on('close', (status, signal) => finish({ error: timedOut ? Object.assign(new Error('spawnSync ETIMEDOUT'), { code: 'ETIMEDOUT' }) : null, status, signal, stdout: out, stderr: err, timeoutMs }));
+  });
+  return (async () => {
+    let r = null;
+    for (const t of timeouts) {
+      r = await once(t);
+      const timedOut = (r.error && r.error.code === 'ETIMEDOUT') || r.signal === 'SIGTERM';
+      if (!timedOut) break; // un vrai échec (DLL manquante, extensions) ne se règle pas en réessayant
+    }
+    let info = null;
+    try { info = JSON.parse(r.stdout); } catch { /* ignore */ }
+    if (!info) return { ok: false, error: explainPhpFailure(r), missing: [], slow: (r.error && r.error.code === 'ETIMEDOUT') || r.signal === 'SIGTERM' };
+    return { ok: info.missing.length === 0, version: info.version, missing: info.missing };
+  })();
 }
 
 /**
@@ -217,7 +265,7 @@ class PhpServer extends EventEmitter {
       await Promise.all(this.backends.map(async (b) => {
         for (let attempt = 1; ; attempt++) {
           this._spawn(b);
-          try { await this._waitReady(b, 20000); return; } catch (err) {
+          try { await this._waitReady(b, 60000); return; } catch (err) { // 60 s : au premier lancement, l'antivirus ou macOS peut examiner chaque PHP
             const exited = b.child && (b.child.exitCode !== null || b.child.signalCode);
             if (!exited || attempt >= 3) throw err;
             const single = this.poolSize === 1;
@@ -332,7 +380,7 @@ class PhpServer extends EventEmitter {
       if (await this._probe(b.port)) { if (b.child === child) b.ready = true; return; }
       await new Promise((r) => setTimeout(r, 150));
     }
-    throw new Error('PHP n’a pas répondu à temps (voir le journal).');
+    throw new Error('PHP n’a pas répondu à temps (' + Math.round(timeoutMs / 1000) + ' s). Au premier lancement, l’antivirus (Windows Defender…) ou macOS examine souvent le PHP livré avec l’application : attends une minute et relance l’application. Si ça recommence, ajoute le dossier de l’application aux exclusions de l’antivirus.');
   }
 
   // ---- Relais (seulement si pool > 1) ----
@@ -491,4 +539,4 @@ class PhpServer extends EventEmitter {
   }
 }
 
-module.exports = { isPackagedApp, PhpServer, findPhp, checkPhp, phpRuntimeArgs, runtimeKey, phpRuntimeKey, devBundledPhp, SECRET_HEADER, isLiveSiteRequest };
+module.exports = { isPackagedApp, PhpServer, findPhp, checkPhp, checkPhpAsync, explainPhpFailure, phpRuntimeArgs, runtimeKey, phpRuntimeKey, devBundledPhp, SECRET_HEADER, isLiveSiteRequest };

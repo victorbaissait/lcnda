@@ -11,7 +11,7 @@ const fs = require('node:fs');
 const http = require('node:http');
 const os = require('node:os');
 const path = require('node:path');
-const { PhpServer, findPhp, checkPhp, devBundledPhp } = require('./php-server');
+const { PhpServer, findPhp, checkPhp, checkPhpAsync, devBundledPhp } = require('./php-server');
 
 const appRoot = path.resolve(__dirname, '..');
 let passed = 0;
@@ -134,6 +134,21 @@ async function suite(phpPath, pool) {
   await step('PHP a toutes les extensions nécessaires (SQLite, FTS5, zip, gd…)', async () => {
     const c = checkPhp(phpPath);
     assert.ok(c.ok, 'extensions manquantes : ' + (c.missing || []).join(', ') + (c.error ? ' ' + c.error : ''));
+  });
+  await step('vérification sans bloquer (checkPhpAsync) : même réponse que checkPhp', async () => {
+    const c = await checkPhpAsync(phpPath);
+    assert.ok(c.ok, c.error || ''); assert.equal(c.version, checkPhp(phpPath).version);
+  });
+  if (process.platform !== 'win32') await step('PHP trop lent au premier lancement (antivirus, macOS) : « Démarrage trop lent », pas « ne convient pas », et sans attendre la fin du processus', async () => {
+    const slow = path.join(os.tmpdir(), 'lcnda-slow-php-' + process.pid + '.sh');
+    fs.writeFileSync(slow, '#!/bin/sh\nsleep 6\n', { mode: 0o755 });
+    try {
+      const t0 = Date.now();
+      const c = await checkPhpAsync(slow, { timeouts: [300, 500] });
+      assert.ok(Date.now() - t0 < 3000, 'a attendu la fin du processus : ' + (Date.now() - t0) + ' ms');
+      assert.equal(c.ok, false); assert.equal(c.slow, true);
+      assert.match(c.error, /trop de temps/); assert.doesNotMatch(c.error, /ne convient pas/);
+    } finally { fs.rmSync(slow, { force: true }); }
   });
   await suite(phpPath, 1);
   await suite(phpPath, 3);

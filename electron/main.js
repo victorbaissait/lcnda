@@ -11,7 +11,7 @@ const { app, BrowserWindow, Menu, Notification, dialog, ipcMain, net, powerMonit
 const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
-const { PhpServer, findPhp, checkPhp, devBundledPhp, SECRET_HEADER } = require('./php-server');
+const { PhpServer, findPhp, checkPhpAsync, devBundledPhp, SECRET_HEADER } = require('./php-server');
 const desk = require('./desk-widgets'); // 🪟 widgets sur le bureau
 const browsers = require('./browsers'); // 🌐 ouvrir l'aperçu d'un site dans un navigateur précis
 const updates = require('./updates'); // 🔄 mises à jour (dernière version publiée sur GitHub)
@@ -689,7 +689,11 @@ async function boot() {
       'L’application a besoin de PHP.\n\nEn développement : npm run fetch:php\n' +
       'Ou indique son chemin avec la variable GENEALOGY_PHP.');
   }
-  const check = checkPhp(phpPath);
+  const check = await checkPhpAsync(phpPath); // sans bloquer la fenêtre ; délai long au premier lancement (antivirus, macOS)
+  if (!check.ok && check.slow) {
+    // PHP n'a pas répondu à temps : ce n'est pas un PHP « qui ne convient pas » (antivirus ou macOS qui l'examine)
+    return fatal('Démarrage trop lent', check.error);
+  }
   if (!check.ok) {
     return fatal('PHP incomplet',
       `Le PHP trouvé (${phpPath}) ne convient pas.\n\n` +
