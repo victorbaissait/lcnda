@@ -1,0 +1,88 @@
+fr ¦ sq ¦ mt
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Vende për t’u vendosur ¦ Postijiet li jridu jitqiegħdu
+Lieux à placer… ¦ Vende për t’u vendosur… ¦ Postijiet li jridu jitqiegħdu…
+Placer… ¦ Vendos… ¦ Poġġi…
+Les placer ¦ Vendosi ¦ Poġġihom
+Rien n’est pris tant que tu ne cliques pas. ¦ Nuk merret asgjë derisa të klikosh. ¦ Xejn ma jittieħed sakemm ma tikklikkjax.
+Revoir et placer en lot… ¦ Rishiko dhe vendos në grup… ¦ Irrevedi u poġġi f’daqqa…
+Seulement les lieux de cette carte ({n}). ¦ Vetëm vendet e kësaj harte ({n}). ¦ Biss il-postijiet ta’ din il-mappa ({n}).
+Voir tous les lieux à placer ¦ Shih të gjitha vendet për t’u vendosur ¦ Ara l-postijiet kollha li jridu jitqiegħdu
+Lecture des lieux… ¦ Po lexohen vendet… ¦ Qed jinqraw il-postijiet…
+Chercher un lieu… ¦ Kërko një vend… ¦ Fittex post…
+De A à Z ¦ Nga A te Zh ¦ Minn A sa Ż
+Le plus loin du reste ¦ Më larg nga të tjerët ¦ L-iktar ’il bogħod mill-bqija
+{a} · {b} concernés ¦ {a} · {b} të prekura ¦ {a} · {b} affettwati
+Aucun lieu pour ce choix. ¦ Asnjë vend për këtë zgjedhje. ¦ L-ebda post għal din l-għażla.
+Tous les lieux de ta base ont une position. ¦ Të gjitha vendet në bazën tënde kanë një pozicion. ¦ Il-postijiet kollha fid-database tiegħek għandhom pożizzjoni.
+à {km} km du reste ¦ {km} km nga të tjerët ¦ {km} km mill-bqija
+Placer ici ¦ Vendose këtu ¦ Poġġi hawn
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ {km} km nga vendet e tjera të këtyre ngjarjeve: kontrollo para se ta vendosësh. ¦ {km} km mill-postijiet l-oħra ta’ dawn l-avvenimenti: iċċekkja qabel ma tpoġġi.
+Placer les {n} ensemble ¦ Vendosi të {n} bashkë ¦ Poġġi l-{n} flimkien
+Pas un lieu ¦ Nuk është vend ¦ Mhux post
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ 300 të parat; kërko një emër për të parë të tjerat. ¦ L-ewwel 300; fittex isem biex tara l-oħrajn.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ {a} u vendosën ({b}) · shfaqen në të gjitha hartat ¦ {a} tqiegħdu ({b}) · jidhru fuq il-mapep kollha
+{name} placé ({n}) · {where} ¦ {name} u vendos ({n}) · {where} ¦ {name} tqiegħed ({n}) · {where}
+{name} placé ({a}, {b}) ¦ {name} u vendos ({a}, {b}) ¦ {name} tqiegħed ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ «{name}» u la mënjanë (nuk është vend) ¦ “{name}” imwarrab (mhux post)
+« {name} » remis dans la liste ¦ «{name}» u kthye në listë ¦ “{name}” reġa’ fil-lista
+LOIN DU RESTE ¦ LARG NGA TË TJERËT ¦ ’IL BOGĦOD MILL-BQIJA
+Placer « {name} » si loin ? ¦ Ta vendosësh «{name}» kaq larg? ¦ Tpoġġi “{name}” daqshekk ’il bogħod?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ «{where}» është {km} km nga vendet e tjera të këtyre ngjarjeve. Shpesh është një emërnjëjtë. ¦ “{where}” jinsab {km} km mill-postijiet l-oħra ta’ dawn l-avvenimenti. Spiss ikun post bl-istess isem.
+Placer quand même ¦ Vendose gjithsesi ¦ Poġġi xorta
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Kliko në hartë te vendi i «{name}» (Esc për ta lënë). ¦ Ikklikkja fuq il-mappa fejn hemm “{name}” (Esc biex tħalli).
+{name} placé à la main (position approchée) ¦ {name} u vendos me dorë (pozicion i përafërt) ¦ {name} tqiegħed bl-idejn (pożizzjoni approssimattiva)
+Pas de réseau : rien n’a été envoyé. ¦ Pa rrjet: nuk u dërgua asgjë. ¦ M’hemmx netwerk: xejn ma ntbagħat.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Shërbimi në internet nuk gjeti asgjë për «{name}». ¦ Is-servizz online ma sab xejn għal “{name}”.
+{n} de plus pour « {name} » : à toi de choisir. ¦ Edhe {n} për «{name}»: zgjidh ti. ¦ {n} oħra għal “{name}”: int tagħżel.
+EN LIGNE ¦ NË INTERNET ¦ ONLINE
+En ligne… ¦ Në internet… ¦ Online…
+Chercher « {name} » en ligne ? ¦ Ta kërkosh «{name}» në internet? ¦ Tfittex “{name}” online?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ Te shërbimi i kërkimit të adresave të IGN (Géoplateforme) dërgohet vetëm emri i vendit «{name}». Asnjë emër personi, asnjë datë. ¦ Lis-servizz tat-tfittxija tal-indirizzi tal-IGN (Géoplateforme) jintbagħat biss l-isem tal-post “{name}”. L-ebda isem ta’ persuna, l-ebda data.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Përgjigjja është edhe një propozim në listë; e zgjedh ose jo. Pa internet: «Pa rrjet: nuk u dërgua asgjë». ¦ It-tweġiba hija proposta oħra fil-lista; tagħżilha jew le. Mingħajr internet: “M’hemmx netwerk: xejn ma ntbagħat”.
+Ne plus me demander pour cette séance ¦ Mos më pyet më gjatë këtij sesioni ¦ Terġax tistaqsini f’din is-sessjoni
+Lieu tapé ¦ Vendi i shkruar ¦ Post miktub
+Pourquoi ¦ Pse ¦ Għaliex
+Distance au reste ¦ Largësia nga të tjerët ¦ Distanza mill-bqija
+Év. ¦ Ngj. ¦ Avv.
+{n} km ¦ {n} km ¦ {n} km
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ «Asgjë nuk u gjet» nuk janë në rishikim. Një vend më larg se {km} km nga të tjerët nuk shënohet kurrë vetë. ¦ Il-“xejn ma nstab” mhumiex fir-reviżjoni. Post aktar minn {km} km mill-bqija qatt ma jiġi mmarkat waħdu.
+Seulement les sûrs ¦ Vetëm të sigurtat ¦ Biss dawk żguri
+Seulement les « sûrs » ¦ Vetëm «të sigurtat» ¦ Biss dawk “żguri”
+Revoir avant de placer ¦ Rishiko para vendosjes ¦ Irrevedi qabel tpoġġi
+Placer les cochés ¦ Vendos të shënuarat ¦ Poġġi dawk immarkati
+Coche au moins un lieu. ¦ Shëno të paktën një vend. ¦ Immarka mill-inqas post wieħed.
+Placer les {n} cochés ¦ Vendos të {n} të shënuarat ¦ Poġġi l-{n} immarkati
+Réglages des lieux à placer enregistrés ¦ Cilësimet e vendeve për t’u vendosur u ruajtën ¦ L-issettjar tal-postijiet li jridu jitqiegħdu ġie ssejvjat
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Vendet pa pozicion, të grupuara sipas komunës së mundshme: vendosi me një klikim ¦ Il-postijiet mingħajr pożizzjoni, miġbura skont il-komun probabbli: poġġihom bi klikk waħda
+Cochés au départ dans la revue ¦ Të shënuara që në fillim në rishikim ¦ Immarkati mill-bidu fir-reviżjoni
+Les sûrs et les probables ¦ Të sigurtat dhe të mundshmet ¦ Dawk żguri u dawk probabbli
+Un lieu-dit ¦ Një lokalitet ¦ Lokalità
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ Te lokaliteti nëse dihet, përndryshe në qendër të komunës, i shënuar «i përafërt» ¦ Fil-lokalità jekk magħrufa, inkella fiċ-ċentru tal-komun immarkat “approssimattiv”
+Toujours au centre de la commune ¦ Gjithmonë në qendër të komunës ¦ Dejjem fiċ-ċentru tal-komun
+Ne pas le placer ¦ Mos e vendos ¦ Tpoġġihx
+Plusieurs communes du même nom ¦ Disa komuna me të njëjtin emër ¦ Diversi komuni bl-istess isem
+Proposer la plus proche des autres lieux, jamais cochée ¦ Propozo më të afërtin me vendet e tjera, kurrë të shënuar ¦ Ipproponi l-eqreb wieħed lejn il-postijiet l-oħra, qatt immarkat
+Aussi les fautes proches, proposées seulement ¦ Edhe gabimet e afërta, vetëm si propozim ¦ Anke żbalji qrib, proposti biss
+Le nom exact seulement ¦ Vetëm emri i saktë ¦ L-isem eżatt biss
+Ce qui est repris ¦ Çfarë merret ¦ X’jittieħed
+Position, code INSEE et département ¦ Pozicioni, kodi INSEE dhe departamenti ¦ Pożizzjoni, kodiċi INSEE u dipartiment
+La position seulement ¦ Vetëm pozicioni ¦ Il-pożizzjoni biss
+Jamais : le bouton est caché ¦ Kurrë: butoni është i fshehur ¦ Qatt: il-buttuna hija moħbija
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Një buton «🌐 Në internet…» për çdo vend, me mesazhin çdo herë (kurrë në grup, kurrë vetë) ¦ Buttuna waħda “🌐 Online…” għal kull post, bil-messaġġ kull darba (qatt f’daqqa, qatt waħedha)
+Alerte « loin du reste » ¦ Sinjalizim «larg nga të tjerët» ¦ Twissija “’il bogħod mill-bqija”
+À partir de 200 km ¦ Nga 200 km ¦ Minn 200 km
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ I njëjti emër dhe i njëjti departament si në regjistrin e komunave: vetëm një komunë «{name}». Merren qendra, kodi INSEE dhe departamenti. ¦ L-istess isem u l-istess dipartiment bħal fir-reġistru tal-komuni: komun wieħed biss “{name}”. Jittieħdu ċ-ċentru, il-kodiċi INSEE u d-dipartiment.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ Vetëm një komunë «{name}» në Francë, por pa departament të shkruar. ¦ Komun wieħed biss “{name}” fi Franza, iżda l-ebda dipartiment miktub.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ {n} komuna me këtë emër në Francë. Propozohen më të afërtat me vendet e tjera të këtyre ngjarjeve, kurrë të shënuara vetë. ¦ {n} komuni b’dan l-isem fi Franza. Jiġu proposti l-eqreb lejn il-postijiet l-oħra ta’ dawn l-avvenimenti, qatt immarkati waħedhom.
+{n} communes de ce nom en France : choisis la bonne. ¦ {n} komuna me këtë emër në Francë: zgjidh të duhurën. ¦ {n} komuni b’dan l-isem fi Franza: agħżel it-tajjeb.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Lokalitet i njohur në regjistër (GeoNames) në komunën {name}. ¦ Lokalità magħrufa fir-reġistru (GeoNames) fil-komun ta’ {name}.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Lokaliteti nuk njihet në regjistër: në qendër të {name}, i shënuar «pozicion i përafërt». ¦ Lokalità mhux magħrufa fir-reġistru: fiċ-ċentru ta’ {name}, immarkata “pożizzjoni approssimattiva”.
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Nuk është komunë e sotme; historiku INSEE (🏛 Kufij të vjetër) thotë: u bashkua me {to} në {year}. ¦ Mhux komun tal-lum; l-istorja tal-INSEE (🏛 Fruntieri antiki) tgħid: ingħaqad ma’ {to} fl-{year}.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Qytet i botës që vjen me aplikacionin, i zgjedhur sipas shtetit të shkruar ({country}). ¦ Belt tad-dinja li tiġi mal-app, magħżula skont il-pajjiż miktub ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Nuk u gjet mes qyteteve të botës që vijnë për këtë shtet ({country}). ¦ Ma nstabx fost il-bliet tad-dinja li jiġu għal dan il-pajjiż ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Asnjë komunë me këtë emër. Propozohet një shkrim i afërt. Nuk kërkohet asgjë në internet. ¦ L-ebda komun b’dan l-isem. Tiġi proposta ortografija qrib. Xejn ma jiġi mfittex online.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Asnjë komunë me këtë emër. Nuk kërkohet asgjë në internet. ¦ L-ebda komun b’dan l-isem. Xejn ma jiġi mfittex online.
+le plus proche ¦ më i afërti ¦ l-eqreb
+sûr ¦ i sigurt ¦ żgur
+=proposition ¦ propozim|propozime ¦ proposta|proposti|proposti|proposti|proposti

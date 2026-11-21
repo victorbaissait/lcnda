@@ -1,0 +1,88 @@
+fr ¦ hr ¦ sl
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Mjesta za smjestiti ¦ Kraji za umestitev
+Lieux à placer… ¦ Mjesta za smjestiti… ¦ Kraji za umestitev…
+Placer… ¦ Smjesti… ¦ Umesti…
+Les placer ¦ Smjesti ih ¦ Umesti jih
+Rien n’est pris tant que tu ne cliques pas. ¦ Ništa se ne uzima dok ne klikneš. ¦ Nič se ne prevzame, dokler ne klikneš.
+Revoir et placer en lot… ¦ Pregledaj i smjesti skupno… ¦ Preglej in umesti skupaj…
+Seulement les lieux de cette carte ({n}). ¦ Samo mjesta s ove karte ({n}). ¦ Samo kraji s tega zemljevida ({n}).
+Voir tous les lieux à placer ¦ Prikaži sva mjesta za smjestiti ¦ Prikaži vse kraje za umestitev
+Lecture des lieux… ¦ Čitanje mjesta… ¦ Branje krajev…
+Chercher un lieu… ¦ Traži mjesto… ¦ Išči kraj…
+De A à Z ¦ Od A do Ž ¦ Od A do Ž
+Le plus loin du reste ¦ Najdalje od ostalih ¦ Najdlje od ostalih
+{a} · {b} concernés ¦ {a} · obuhvaćeno: {b} ¦ {a} · zajeto: {b}
+Aucun lieu pour ce choix. ¦ Nema mjesta za ovaj odabir. ¦ Za to izbiro ni krajev.
+Tous les lieux de ta base ont une position. ¦ Sva mjesta u tvojoj bazi imaju položaj. ¦ Vsi kraji v tvoji bazi imajo položaj.
+à {km} km du reste ¦ {km} km od ostalih ¦ {km} km od ostalih
+Placer ici ¦ Smjesti ovdje ¦ Umesti sem
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ {km} km od ostalih mjesta ovih događaja: provjeri prije smještanja. ¦ {km} km od drugih krajev teh dogodkov: preveri pred umestitvijo.
+Placer les {n} ensemble ¦ Smjesti njih {n} zajedno ¦ Umesti teh {n} skupaj
+Pas un lieu ¦ Nije mjesto ¦ Ni kraj
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ Prvih 300; potraži ime da vidiš ostala. ¦ Prvih 300; poišči ime, da vidiš ostale.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ Smješteno: {a} ({b}) · pojavljuju se na svim kartama ¦ Umeščeno: {a} ({b}) · prikažejo se na vseh zemljevidih
+{name} placé ({n}) · {where} ¦ {name} smješteno ({n}) · {where} ¦ {name} umeščeno ({n}) · {where}
+{name} placé ({a}, {b}) ¦ {name} smješteno ({a}, {b}) ¦ {name} umeščeno ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ „{name}“ odloženo (nije mjesto) ¦ »{name}« odloženo (ni kraj)
+« {name} » remis dans la liste ¦ „{name}“ vraćeno na popis ¦ »{name}« vrnjeno na seznam
+LOIN DU RESTE ¦ DALEKO OD OSTALIH ¦ DALEČ OD OSTALIH
+Placer « {name} » si loin ? ¦ Smjestiti „{name}“ tako daleko? ¦ Umestiti »{name}« tako daleč?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ „{where}“ je {km} km od ostalih mjesta ovih događaja. Često je to istoimeno mjesto. ¦ »{where}« je {km} km od drugih krajev teh dogodkov. Pogosto gre za istoimenski kraj.
+Placer quand même ¦ Ipak smjesti ¦ Vseeno umesti
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Klikni na karti na mjesto „{name}“ (Esc za odustajanje). ¦ Klikni na zemljevid na mesto »{name}« (Esc za preklic).
+{name} placé à la main (position approchée) ¦ {name} ručno smješteno (približan položaj) ¦ {name} ročno umeščeno (približen položaj)
+Pas de réseau : rien n’a été envoyé. ¦ Nema mreže: ništa nije poslano. ¦ Ni omrežja: nič ni bilo poslano.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Mrežna usluga nije ništa pronašla za „{name}“. ¦ Spletna storitev za »{name}« ni našla ničesar.
+{n} de plus pour « {name} » : à toi de choisir. ¦ Još {n} za „{name}“: ti biraš. ¦ Še {n} za »{name}«: izberi sam.
+EN LIGNE ¦ NA MREŽI ¦ NA SPLETU
+En ligne… ¦ Na mreži… ¦ Na spletu…
+Chercher « {name} » en ligne ? ¦ Tražiti „{name}“ na mreži? ¦ Iskati »{name}« na spletu?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ Usluzi za traženje adresa IGN-a (Géoplateforme) šalje se samo naziv mjesta „{name}“. Nikakvo ime osobe, nikakav datum. ¦ Storitvi za iskanje naslovov IGN (Géoplateforme) se pošlje samo ime kraja »{name}«. Nobeno ime osebe, noben datum.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Odgovor je još jedan prijedlog na popisu; izabereš ga ili ne. Bez interneta: „Nema mreže: ništa nije poslano“. ¦ Odgovor je še en predlog na seznamu; izbereš ga ali ne. Brez interneta: »Ni omrežja: nič ni bilo poslano«.
+Ne plus me demander pour cette séance ¦ Ne pitaj više u ovoj sesiji ¦ V tej seji ne sprašuj več
+Lieu tapé ¦ Upisano mjesto ¦ Vpisan kraj
+Pourquoi ¦ Zašto ¦ Zakaj
+Distance au reste ¦ Udaljenost od ostalih ¦ Razdalja do ostalih
+Év. ¦ Dog. ¦ Dog.
+{n} km ¦ {n} km ¦ {n} km
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ „Ništa pronađeno“ nisu u pregledu. Mjesto udaljenije od {km} km od ostalih nikad se ne označava samo. ¦ »Nič najdeno« ni v pregledu. Kraj, ki je od ostalih oddaljen več kot {km} km, se nikoli ne označi sam.
+Seulement les sûrs ¦ Samo sigurna ¦ Samo zanesljive
+Seulement les « sûrs » ¦ Samo „sigurna“ ¦ Samo »zanesljive«
+Revoir avant de placer ¦ Pregledaj prije smještanja ¦ Preglej pred umestitvijo
+Placer les cochés ¦ Smjesti označena ¦ Umesti označene
+Coche au moins un lieu. ¦ Označi barem jedno mjesto. ¦ Označi vsaj en kraj.
+Placer les {n} cochés ¦ Smjesti označena ({n}) ¦ Umesti označene ({n})
+Réglages des lieux à placer enregistrés ¦ Postavke mjesta za smjestiti spremljene ¦ Nastavitve krajev za umestitev shranjene
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Mjesta bez položaja, grupirana po vjerojatnoj općini: smjesti ih jednim klikom ¦ Kraji brez položaja, združeni po verjetni občini: umesti jih z enim klikom
+Cochés au départ dans la revue ¦ Unaprijed označena u pregledu ¦ Vnaprej označeni v pregledu
+Les sûrs et les probables ¦ Sigurna i vjerojatna ¦ Zanesljive in verjetne
+Un lieu-dit ¦ Zaselak ¦ Zaselek
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ U zaselak ako je poznat, inače u središte općine označeno „približno“ ¦ V zaselek, če je znan, sicer v središče občine z oznako »približno«
+Toujours au centre de la commune ¦ Uvijek u središte općine ¦ Vedno v središče občine
+Ne pas le placer ¦ Ne smještaj ga ¦ Ne umesti ga
+Plusieurs communes du même nom ¦ Više općina istog imena ¦ Več občin z istim imenom
+Proposer la plus proche des autres lieux, jamais cochée ¦ Predloži najbližu ostalim mjestima, nikad označenu ¦ Predlagaj najbližjo drugim krajem, nikoli označeno
+Aussi les fautes proches, proposées seulement ¦ I bliske pogreške, samo kao prijedlog ¦ Tudi bližnje napake, samo kot predlog
+Le nom exact seulement ¦ Samo točan naziv ¦ Samo točno ime
+Ce qui est repris ¦ Što se preuzima ¦ Kaj se prevzame
+Position, code INSEE et département ¦ Položaj, INSEE kod i departman ¦ Položaj, koda INSEE in departma
+La position seulement ¦ Samo položaj ¦ Samo položaj
+Jamais : le bouton est caché ¦ Nikad: gumb je skriven ¦ Nikoli: gumb je skrit
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Jedan gumb „🌐 Na mreži…“ po mjestu, svaki put s porukom (nikad skupno, nikad samo) ¦ En gumb »🌐 Na spletu…« na kraj, vsakič s sporočilom (nikoli skupaj, nikoli samo)
+Alerte « loin du reste » ¦ Upozorenje „daleko od ostalih“ ¦ Opozorilo »daleč od ostalih«
+À partir de 200 km ¦ Od 200 km ¦ Od 200 km
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ Isti naziv i isti departman kao u popisu općina: samo jedna općina „{name}“. Preuzimaju se središte, INSEE kod i departman. ¦ Isto ime in isti departma kot v seznamu občin: ena sama občina »{name}«. Prevzamejo se središče, koda INSEE in departma.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ Samo jedna općina „{name}“ u Francuskoj, ali bez upisanog departmana. ¦ Ena sama občina »{name}« v Franciji, a brez vpisanega departmaja.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ Općina tog imena u Francuskoj: {n}. Predlažu se one najbliže ostalim mjestima ovih događaja, nikad same označene. ¦ Občin s tem imenom v Franciji: {n}. Predlagajo se tiste, ki so najbližje drugim krajem teh dogodkov, nikoli same označene.
+{n} communes de ce nom en France : choisis la bonne. ¦ Općina tog imena u Francuskoj: {n}. Izaberi pravu. ¦ Občin s tem imenom v Franciji: {n}. Izberi pravo.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Zaselak poznat u popisu (GeoNames) u općini {name}. ¦ Zaselek je znan v seznamu (GeoNames) v občini {name}.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Zaselak nepoznat u popisu: u središte općine {name}, označeno „približan položaj“. ¦ Zaselek ni znan v seznamu: v središče občine {name}, z oznako »približen položaj«.
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Nije današnja općina; povijest INSEE-a (🏛 Stare granice) kaže: pripojena općini {to} {year}. ¦ Ni današnja občina; zgodovina INSEE (🏛 Stare meje) pravi: leta {year} združena z {to}.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Grad svijeta isporučen s aplikacijom, odabran prema upisanoj zemlji ({country}). ¦ Mesto sveta, ki je priloženo aplikaciji, izbrano po vpisani državi ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Nije pronađeno među isporučenim gradovima svijeta za tu zemlju ({country}). ¦ Ni najdeno med priloženimi mesti sveta za to državo ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Nema općine tog imena. Predložen je sličan pravopis. Ništa se ne traži na mreži. ¦ Ni občine s tem imenom. Predlagan je podoben zapis. Nič se ne išče na spletu.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Nema općine tog imena. Ništa se ne traži na mreži. ¦ Ni občine s tem imenom. Nič se ne išče na spletu.
+le plus proche ¦ najbliža ¦ najbližja
+sûr ¦ sigurno ¦ zanesljivo
+=proposition ¦ prijedlog|prijedloga|prijedloga ¦ predlog|predloga|predlogi|predlogov

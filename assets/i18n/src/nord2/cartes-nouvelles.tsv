@@ -1,0 +1,88 @@
+fr ¦ sk ¦ nb
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Miesta na umiestnenie ¦ Steder å plassere
+Lieux à placer… ¦ Miesta na umiestnenie… ¦ Steder å plassere…
+Placer… ¦ Umiestniť… ¦ Plasser…
+Les placer ¦ Umiestniť ich ¦ Plasser dem
+Rien n’est pris tant que tu ne cliques pas. ¦ Nič sa nevezme, kým neklikneš. ¦ Ingenting hentes før du klikker.
+Revoir et placer en lot… ¦ Skontrolovať a umiestniť hromadne… ¦ Gå gjennom og plasser samlet…
+Seulement les lieux de cette carte ({n}). ¦ Iba miesta tejto mapy ({n}). ¦ Bare stedene på dette kartet ({n}).
+Voir tous les lieux à placer ¦ Zobraziť všetky miesta na umiestnenie ¦ Vis alle steder å plassere
+Lecture des lieux… ¦ Načítavanie miest… ¦ Leser stedene…
+Chercher un lieu… ¦ Hľadať miesto… ¦ Søk etter et sted…
+De A à Z ¦ Od A po Z ¦ A til Å
+Le plus loin du reste ¦ Najďalej od ostatných ¦ Lengst fra resten
+{a} · {b} concernés ¦ {a} · dotknuté: {b} ¦ {a} · {b} berørt
+Aucun lieu pour ce choix. ¦ Pre tento výber žiadne miesto. ¦ Ingen steder for dette valget.
+Tous les lieux de ta base ont une position. ¦ Všetky miesta v tvojej databáze majú polohu. ¦ Alle stedene i databasen din har en posisjon.
+à {km} km du reste ¦ {km} km od ostatných ¦ {km} km fra resten
+Placer ici ¦ Umiestniť sem ¦ Plasser her
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ {km} km od ostatných miest týchto udalostí: over si to pred umiestnením. ¦ {km} km fra de andre stedene for disse hendelsene: sjekk før du plasserer.
+Placer les {n} ensemble ¦ Umiestniť týchto {n} spolu ¦ Plasser de {n} sammen
+Pas un lieu ¦ Nie je miesto ¦ Ikke et sted
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ Prvých 300; vyhľadaj názov a uvidíš ostatné. ¦ De første 300; søk etter et navn for å se de andre.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ Umiestnené: {a} ({b}) · objavia sa na všetkých mapách ¦ {a} plassert ({b}) · de vises på alle kart
+{name} placé ({n}) · {where} ¦ {name} umiestnené ({n}) · {where} ¦ {name} plassert ({n}) · {where}
+{name} placé ({a}, {b}) ¦ {name} umiestnené ({a}, {b}) ¦ {name} plassert ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ „{name}“ odložené (nie je miesto) ¦ «{name}» lagt til side (ikke et sted)
+« {name} » remis dans la liste ¦ „{name}“ vrátené do zoznamu ¦ «{name}» tilbake i listen
+LOIN DU RESTE ¦ ĎALEKO OD OSTATNÝCH ¦ LANGT FRA RESTEN
+Placer « {name} » si loin ? ¦ Umiestniť „{name}“ tak ďaleko? ¦ Plassere «{name}» så langt unna?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ „{where}“ je {km} km od ostatných miest týchto udalostí. Často ide o rovnomenné miesto. ¦ «{where}» ligger {km} km fra de andre stedene for disse hendelsene. Det er ofte en navnebror.
+Placer quand même ¦ Aj tak umiestniť ¦ Plasser likevel
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Klikni na mape na miesto „{name}“ (Esc na zrušenie). ¦ Klikk på kartet der «{name}» ligger (Esc for å avbryte).
+{name} placé à la main (position approchée) ¦ {name} umiestnené ručne (približná poloha) ¦ {name} plassert for hånd (omtrentlig posisjon)
+Pas de réseau : rien n’a été envoyé. ¦ Žiadna sieť: nič nebolo odoslané. ¦ Ingen nettverk: ingenting ble sendt.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Online služba pre „{name}“ nič nenašla. ¦ Nettjenesten fant ingenting for «{name}».
+{n} de plus pour « {name} » : à toi de choisir. ¦ {n} navyše pre „{name}“: vyber si. ¦ {n} til for «{name}»: du velger.
+EN LIGNE ¦ ONLINE ¦ PÅ NETT
+En ligne… ¦ Online… ¦ På nett…
+Chercher « {name} » en ligne ? ¦ Hľadať „{name}“ online? ¦ Søke etter «{name}» på nett?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ Službe vyhľadávania adries IGN (Géoplateforme) sa pošle iba názov miesta „{name}“. Žiadne meno osoby, žiadny dátum. ¦ Bare stedsnavnet «{name}» sendes til IGNs adressesøk (Géoplateforme). Ingen personnavn, ingen dato.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Odpoveď je ďalší návrh v zozname; vyberieš si ho, alebo nie. Bez internetu: „Žiadna sieť: nič nebolo odoslané“. ¦ Svaret er ett forslag til i listen; du velger det eller ikke. Uten internett: «Ingen nettverk: ingenting ble sendt».
+Ne plus me demander pour cette séance ¦ V tejto relácii sa už nepýtať ¦ Ikke spør igjen i denne økten
+Lieu tapé ¦ Zapísané miesto ¦ Innskrevet sted
+Pourquoi ¦ Prečo ¦ Hvorfor
+Distance au reste ¦ Vzdialenosť od ostatných ¦ Avstand til resten
+Év. ¦ Udal. ¦ Hend.
+{n} km ¦ {n} km ¦ {n} km
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ Položky „nič sa nenašlo“ v kontrole nie sú. Miesto ďalej než {km} km od ostatných sa nikdy samo nezaškrtne. ¦ «Ingenting funnet» er ikke med i gjennomgangen. Et sted mer enn {km} km fra resten blir aldri krysset av av seg selv.
+Seulement les sûrs ¦ Iba isté ¦ Bare de sikre
+Seulement les « sûrs » ¦ Iba „isté“ ¦ Bare de «sikre»
+Revoir avant de placer ¦ Skontrolovať pred umiestnením ¦ Gå gjennom før plassering
+Placer les cochés ¦ Umiestniť zaškrtnuté ¦ Plasser de avkryssede
+Coche au moins un lieu. ¦ Zaškrtni aspoň jedno miesto. ¦ Kryss av minst ett sted.
+Placer les {n} cochés ¦ Umiestniť zaškrtnuté ({n}) ¦ Plasser de {n} avkryssede
+Réglages des lieux à placer enregistrés ¦ Nastavenia miest na umiestnenie uložené ¦ Innstillinger for steder å plassere lagret
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Miesta bez polohy zoskupené podľa pravdepodobnej obce: umiestni ich jedným kliknutím ¦ Steder uten posisjon, gruppert etter sannsynlig kommune: plasser dem med ett klikk
+Cochés au départ dans la revue ¦ Vopred zaškrtnuté v kontrole ¦ Forhåndsavkrysset i gjennomgangen
+Les sûrs et les probables ¦ Isté a pravdepodobné ¦ De sikre og de sannsynlige
+Un lieu-dit ¦ Miestna časť ¦ En grend
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ Na miestnej časti, ak je známa, inak v strede obce s označením „približne“ ¦ Ved grenda hvis den er kjent, ellers midt i kommunen merket «omtrentlig»
+Toujours au centre de la commune ¦ Vždy v strede obce ¦ Alltid midt i kommunen
+Ne pas le placer ¦ Neumiestňovať ¦ Ikke plasser det
+Plusieurs communes du même nom ¦ Niekoľko obcí rovnakého mena ¦ Flere kommuner med samme navn
+Proposer la plus proche des autres lieux, jamais cochée ¦ Navrhnúť tú najbližšiu ostatným miestam, nikdy nezaškrtnutú ¦ Foreslå den nærmeste de andre stedene, aldri avkrysset
+Aussi les fautes proches, proposées seulement ¦ Aj blízke preklepy, iba ako návrh ¦ Også nære skrivefeil, bare som forslag
+Le nom exact seulement ¦ Iba presný názov ¦ Bare det nøyaktige navnet
+Ce qui est repris ¦ Čo sa prevezme ¦ Hva som overtas
+Position, code INSEE et département ¦ Poloha, kód INSEE a departement ¦ Posisjon, INSEE-kode og departement
+La position seulement ¦ Iba poloha ¦ Bare posisjonen
+Jamais : le bouton est caché ¦ Nikdy: tlačidlo je skryté ¦ Aldri: knappen er skjult
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Jedno tlačidlo „🌐 Online…“ na miesto, zakaždým so správou (nikdy hromadne, nikdy samo) ¦ Én knapp «🌐 På nett…» per sted, med meldingen hver gang (aldri samlet, aldri av seg selv)
+Alerte « loin du reste » ¦ Upozornenie „ďaleko od ostatných“ ¦ Varsel «langt fra resten»
+À partir de 200 km ¦ Od 200 km ¦ Fra 200 km
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ Rovnaký názov a rovnaký departement ako v zozname obcí: jediná obec „{name}“. Prevezme sa stred, kód INSEE a departement. ¦ Samme navn og samme departement som i kommuneregisteret: én eneste kommune «{name}». Midten, INSEE-koden og departementet overtas.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ Jediná obec „{name}“ vo Francúzsku, ale bez zapísaného departementu. ¦ Én eneste kommune «{name}» i Frankrike, men uten departement.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ Obcí tohto mena vo Francúzsku: {n}. Navrhujú sa tie najbližšie ostatným miestam týchto udalostí, nikdy sa samy nezaškrtnú. ¦ {n} kommuner med dette navnet i Frankrike. De nærmeste de andre stedene for disse hendelsene foreslås, aldri avkrysset av seg selv.
+{n} communes de ce nom en France : choisis la bonne. ¦ Obcí tohto mena vo Francúzsku: {n}. Vyber tú správnu. ¦ {n} kommuner med dette navnet i Frankrike: velg den riktige.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Miestna časť známa v zozname (GeoNames) v obci {name}. ¦ Grenda finnes i registeret (GeoNames) i kommunen {name}.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Miestna časť v zozname neznáma: v strede obce {name}, s označením „približná poloha“. ¦ Grenda er ukjent i registeret: midt i {name}, merket «omtrentlig posisjon».
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Nie je to dnešná obec; história INSEE (🏛 Staré hranice) hovorí: v roku {year} zlúčená s {to}. ¦ Ikke en kommune i dag; INSEE-historikken (🏛 Gamle grenser) sier: slått sammen med {to} i {year}.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Mesto sveta dodané s aplikáciou, rozhodnuté podľa zapísanej krajiny ({country}). ¦ Verdensby som følger med appen, avgjort etter landet som er skrevet ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Nenájdené medzi dodanými mestami sveta pre túto krajinu ({country}). ¦ Ikke funnet blant de medfølgende verdensbyene for dette landet ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Obec tohto mena neexistuje. Navrhuje sa podobný zápis. Nič sa nehľadá online. ¦ Ingen kommune med dette navnet. En lignende skrivemåte foreslås. Ingenting søkes på nett.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Obec tohto mena neexistuje. Nič sa nehľadá online. ¦ Ingen kommune med dette navnet. Ingenting søkes på nett.
+le plus proche ¦ najbližšia ¦ den nærmeste
+sûr ¦ isté ¦ sikker
+=proposition ¦ návrh|návrhy|návrhov ¦ forslag|forslag

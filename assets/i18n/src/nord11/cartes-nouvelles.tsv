@@ -1,0 +1,88 @@
+fr ¦ vi ¦ id
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Địa điểm cần đặt ¦ Tempat yang perlu ditempatkan
+Lieux à placer… ¦ Địa điểm cần đặt… ¦ Tempat yang perlu ditempatkan…
+Placer… ¦ Đặt… ¦ Tempatkan…
+Les placer ¦ Đặt chúng ¦ Tempatkan
+Rien n’est pris tant que tu ne cliques pas. ¦ Không lấy gì cho đến khi bạn bấm. ¦ Tidak ada yang diambil sampai kamu mengeklik.
+Revoir et placer en lot… ¦ Xem lại và đặt hàng loạt… ¦ Tinjau dan tempatkan sekaligus…
+Seulement les lieux de cette carte ({n}). ¦ Chỉ các địa điểm của bản đồ này ({n}). ¦ Hanya tempat dari peta ini ({n}).
+Voir tous les lieux à placer ¦ Xem tất cả địa điểm cần đặt ¦ Lihat semua tempat yang perlu ditempatkan
+Lecture des lieux… ¦ Đang đọc các địa điểm… ¦ Membaca tempat…
+Chercher un lieu… ¦ Tìm một địa điểm… ¦ Cari tempat…
+De A à Z ¦ Từ A đến Z ¦ A sampai Z
+Le plus loin du reste ¦ Xa phần còn lại nhất ¦ Paling jauh dari yang lain
+{a} · {b} concernés ¦ {a} · {b} liên quan ¦ {a} · {b} terkait
+Aucun lieu pour ce choix. ¦ Không có địa điểm nào cho lựa chọn này. ¦ Tidak ada tempat untuk pilihan ini.
+Tous les lieux de ta base ont une position. ¦ Mọi địa điểm trong cơ sở dữ liệu của bạn đều có vị trí. ¦ Semua tempat di basis data kamu sudah punya posisi.
+à {km} km du reste ¦ cách phần còn lại {km} km ¦ {km} km dari yang lain
+Placer ici ¦ Đặt tại đây ¦ Tempatkan di sini
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ Cách {km} km so với các địa điểm khác của những sự kiện này: hãy kiểm tra trước khi đặt. ¦ {km} km dari tempat lain peristiwa ini: periksa sebelum menempatkan.
+Placer les {n} ensemble ¦ Đặt {n} địa điểm cùng nhau ¦ Tempatkan {n} sekaligus
+Pas un lieu ¦ Không phải địa điểm ¦ Bukan tempat
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ 300 mục đầu; hãy tìm một tên để xem phần còn lại. ¦ 300 pertama; cari nama untuk melihat yang lain.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ Đã đặt {a} ({b}) · chúng hiện trên mọi bản đồ ¦ {a} ditempatkan ({b}) · muncul di semua peta
+{name} placé ({n}) · {where} ¦ Đã đặt {name} ({n}) · {where} ¦ {name} ditempatkan ({n}) · {where}
+{name} placé ({a}, {b}) ¦ Đã đặt {name} ({a}, {b}) ¦ {name} ditempatkan ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ Đã gác lại “{name}” (không phải địa điểm) ¦ “{name}” disisihkan (bukan tempat)
+« {name} » remis dans la liste ¦ Đã đưa “{name}” trở lại danh sách ¦ “{name}” dikembalikan ke daftar
+LOIN DU RESTE ¦ XA PHẦN CÒN LẠI ¦ JAUH DARI YANG LAIN
+Placer « {name} » si loin ? ¦ Đặt “{name}” xa như vậy sao? ¦ Tempatkan “{name}” sejauh itu?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ “{where}” cách các địa điểm khác của những sự kiện này {km} km. Thường đó là nơi trùng tên. ¦ “{where}” berjarak {km} km dari tempat lain peristiwa ini. Sering kali itu tempat yang namanya sama.
+Placer quand même ¦ Vẫn đặt ¦ Tetap tempatkan
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Bấm lên bản đồ tại vị trí của “{name}” (Esc để bỏ qua). ¦ Klik di peta pada letak “{name}” (Esc untuk membatalkan).
+{name} placé à la main (position approchée) ¦ Đã đặt {name} bằng tay (vị trí gần đúng) ¦ {name} ditempatkan manual (posisi perkiraan)
+Pas de réseau : rien n’a été envoyé. ¦ Không có mạng: chưa gửi gì cả. ¦ Tidak ada jaringan: tidak ada yang dikirim.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Dịch vụ trực tuyến không tìm thấy gì cho “{name}”. ¦ Layanan daring tidak menemukan apa pun untuk “{name}”.
+{n} de plus pour « {name} » : à toi de choisir. ¦ Thêm {n} cho “{name}”: bạn tự chọn. ¦ {n} lagi untuk “{name}”: kamu yang memilih.
+EN LIGNE ¦ TRỰC TUYẾN ¦ DARING
+En ligne… ¦ Trực tuyến… ¦ Daring…
+Chercher « {name} » en ligne ? ¦ Tìm “{name}” trực tuyến? ¦ Cari “{name}” secara daring?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ Chỉ tên địa điểm “{name}” được gửi đến dịch vụ tìm địa chỉ của IGN (Géoplateforme). Không có tên người, không có ngày tháng. ¦ Hanya nama tempat “{name}” yang dikirim ke layanan pencarian alamat IGN (Géoplateforme). Tanpa nama orang, tanpa tanggal.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Câu trả lời là thêm một đề xuất trong danh sách; bạn chọn hay không tùy ý. Không có mạng: “Không có mạng: chưa gửi gì cả”. ¦ Jawabannya menjadi satu usulan lagi di daftar; kamu memilihnya atau tidak. Tanpa internet: “Tidak ada jaringan: tidak ada yang dikirim”.
+Ne plus me demander pour cette séance ¦ Đừng hỏi lại trong phiên này ¦ Jangan tanya lagi selama sesi ini
+Lieu tapé ¦ Địa điểm đã gõ ¦ Tempat yang diketik
+Pourquoi ¦ Vì sao ¦ Mengapa
+Distance au reste ¦ Khoảng cách đến phần còn lại ¦ Jarak ke yang lain
+Év. ¦ Sự kiện ¦ Peristiwa
+{n} km ¦ {n} km ¦ {n} km
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ Các mục “không tìm thấy” không có trong phần xem lại. Địa điểm cách phần còn lại hơn {km} km không bao giờ tự được đánh dấu. ¦ Yang “tidak ditemukan” tidak ada dalam tinjauan. Tempat yang lebih dari {km} km dari yang lain tidak pernah dicentang otomatis.
+Seulement les sûrs ¦ Chỉ những mục chắc chắn ¦ Hanya yang pasti
+Seulement les « sûrs » ¦ Chỉ những mục “chắc chắn” ¦ Hanya yang “pasti”
+Revoir avant de placer ¦ Xem lại trước khi đặt ¦ Tinjau sebelum menempatkan
+Placer les cochés ¦ Đặt các mục đã chọn ¦ Tempatkan yang dicentang
+Coche au moins un lieu. ¦ Hãy chọn ít nhất một địa điểm. ¦ Centang setidaknya satu tempat.
+Placer les {n} cochés ¦ Đặt {n} mục đã chọn ¦ Tempatkan {n} yang dicentang
+Réglages des lieux à placer enregistrés ¦ Đã lưu cài đặt địa điểm cần đặt ¦ Pengaturan tempat yang perlu ditempatkan tersimpan
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Các địa điểm chưa có vị trí, nhóm theo xã có khả năng: đặt chúng chỉ với một lần bấm ¦ Tempat tanpa posisi, dikelompokkan menurut kota yang mungkin: tempatkan dengan satu klik
+Cochés au départ dans la revue ¦ Được chọn sẵn khi xem lại ¦ Dicentang sejak awal dalam tinjauan
+Les sûrs et les probables ¦ Mục chắc chắn và mục có khả năng ¦ Yang pasti dan yang mungkin
+Un lieu-dit ¦ Một địa danh nhỏ ¦ Sebuah dusun
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ Tại địa danh nếu đã biết, nếu không thì ở trung tâm xã, đánh dấu “gần đúng” ¦ Di dusun jika diketahui, jika tidak di pusat kotanya dengan tanda “perkiraan”
+Toujours au centre de la commune ¦ Luôn ở trung tâm xã ¦ Selalu di pusat kota
+Ne pas le placer ¦ Không đặt ¦ Jangan ditempatkan
+Plusieurs communes du même nom ¦ Nhiều xã cùng tên ¦ Beberapa kota dengan nama sama
+Proposer la plus proche des autres lieux, jamais cochée ¦ Đề xuất xã gần các địa điểm khác nhất, không bao giờ chọn sẵn ¦ Usulkan yang terdekat dengan tempat lain, tidak pernah dicentang
+Aussi les fautes proches, proposées seulement ¦ Cả lỗi chính tả gần giống, chỉ đề xuất ¦ Juga salah eja yang mirip, hanya diusulkan
+Le nom exact seulement ¦ Chỉ đúng tên chính xác ¦ Hanya nama yang persis
+Ce qui est repris ¦ Những gì được lấy ¦ Yang diambil
+Position, code INSEE et département ¦ Vị trí, mã INSEE và tỉnh ¦ Posisi, kode INSEE, dan departemen
+La position seulement ¦ Chỉ vị trí ¦ Hanya posisi
+Jamais : le bouton est caché ¦ Không bao giờ: nút bị ẩn ¦ Tidak pernah: tombol disembunyikan
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Mỗi địa điểm một nút “🌐 Trực tuyến…”, lần nào cũng có thông báo (không bao giờ hàng loạt, không bao giờ tự động) ¦ Satu tombol “🌐 Daring…” per tempat, dengan pesan setiap kali (tidak pernah sekaligus, tidak pernah otomatis)
+Alerte « loin du reste » ¦ Cảnh báo “xa phần còn lại” ¦ Peringatan “jauh dari yang lain”
+À partir de 200 km ¦ Từ 200 km ¦ Mulai 200 km
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ Cùng tên và cùng tỉnh như trong danh mục các xã: chỉ có một xã “{name}”. Lấy trung tâm, mã INSEE và tỉnh. ¦ Nama dan departemen sama seperti di daftar kota: hanya satu kota “{name}”. Pusat, kode INSEE, dan departemen diambil.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ Chỉ có một xã “{name}” ở Pháp, nhưng không ghi tỉnh. ¦ Hanya satu kota “{name}” di Prancis, tetapi tanpa departemen yang ditulis.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ Có {n} xã mang tên này ở Pháp. Đề xuất các xã gần những địa điểm khác của sự kiện này nhất, không bao giờ tự chọn sẵn. ¦ Ada {n} kota dengan nama ini di Prancis. Yang terdekat dengan tempat lain peristiwa ini diusulkan, tidak pernah dicentang otomatis.
+{n} communes de ce nom en France : choisis la bonne. ¦ Có {n} xã mang tên này ở Pháp: hãy chọn đúng xã. ¦ Ada {n} kota dengan nama ini di Prancis: pilih yang benar.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Địa danh có trong danh mục (GeoNames) thuộc xã {name}. ¦ Dusun dikenal di daftar (GeoNames) di kota {name}.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Địa danh không có trong danh mục: đặt ở trung tâm {name}, đánh dấu “vị trí gần đúng”. ¦ Dusun tidak dikenal di daftar: di pusat {name}, ditandai “posisi perkiraan”.
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Không phải xã ngày nay; lịch sử INSEE (🏛 Biên giới xưa) ghi: sáp nhập vào {to} năm {year}. ¦ Bukan kota saat ini; riwayat INSEE (🏛 Batas lama) menyebut: digabung ke {to} pada {year}.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Thành phố thế giới đi kèm ứng dụng, chọn theo quốc gia đã ghi ({country}). ¦ Kota dunia bawaan aplikasi, dipilih berdasarkan negara yang ditulis ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Không tìm thấy trong các thành phố thế giới đi kèm cho quốc gia này ({country}). ¦ Tidak ditemukan di antara kota dunia bawaan untuk negara ini ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Không có xã nào tên này. Đề xuất một cách viết gần giống. Không tìm gì trực tuyến. ¦ Tidak ada kota dengan nama ini. Diusulkan ejaan yang mirip. Tidak ada yang dicari secara daring.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Không có xã nào tên này. Không tìm gì trực tuyến. ¦ Tidak ada kota dengan nama ini. Tidak ada yang dicari secara daring.
+le plus proche ¦ gần nhất ¦ yang terdekat
+sûr ¦ chắc chắn ¦ pasti
+=proposition ¦ đề xuất ¦ usulan

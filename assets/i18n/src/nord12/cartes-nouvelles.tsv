@@ -1,0 +1,88 @@
+fr ¦ ru ¦ uk
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Места без позиции ¦ Місця без позиції
+Lieux à placer… ¦ Места без позиции… ¦ Місця без позиції…
+Placer… ¦ Разместить… ¦ Розмістити…
+Les placer ¦ Разместить их ¦ Розмістити їх
+Rien n’est pris tant que tu ne cliques pas. ¦ Ничего не берётся, пока ты не нажмёшь. ¦ Нічого не береться, доки ти не натиснеш.
+Revoir et placer en lot… ¦ Проверить и разместить пакетом… ¦ Переглянути й розмістити пакетом…
+Seulement les lieux de cette carte ({n}). ¦ Только места этой карты ({n}). ¦ Лише місця цієї мапи ({n}).
+Voir tous les lieux à placer ¦ Показать все места без позиции ¦ Показати всі місця без позиції
+Lecture des lieux… ¦ Чтение мест… ¦ Читання місць…
+Chercher un lieu… ¦ Искать место… ¦ Шукати місце…
+De A à Z ¦ От А до Я ¦ Від А до Я
+Le plus loin du reste ¦ Дальше всего от остальных ¦ Найдалі від решти
+{a} · {b} concernés ¦ {a} · затронуто: {b} ¦ {a} · стосується: {b}
+Aucun lieu pour ce choix. ¦ Для этого выбора мест нет. ¦ Для цього вибору місць немає.
+Tous les lieux de ta base ont une position. ¦ У всех мест твоей базы есть позиция. ¦ Усі місця твоєї бази мають позицію.
+à {km} km du reste ¦ в {km} км от остальных ¦ за {km} км від решти
+Placer ici ¦ Разместить здесь ¦ Розмістити тут
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ В {km} км от других мест этих событий: проверь, прежде чем размещать. ¦ За {km} км від інших місць цих подій: перевір, перш ніж розміщувати.
+Placer les {n} ensemble ¦ Разместить эти {n} вместе ¦ Розмістити ці {n} разом
+Pas un lieu ¦ Не место ¦ Не місце
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ Первые 300; найди название, чтобы увидеть остальные. ¦ Перші 300; знайди назву, щоб побачити решту.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ Размещено: {a} ({b}) · они видны на всех картах ¦ Розміщено: {a} ({b}) · вони з’являються на всіх мапах
+{name} placé ({n}) · {where} ¦ {name} размещено ({n}) · {where} ¦ {name} розміщено ({n}) · {where}
+{name} placé ({a}, {b}) ¦ {name} размещено ({a}, {b}) ¦ {name} розміщено ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ «{name}» отложено (не место) ¦ «{name}» відкладено (не місце)
+« {name} » remis dans la liste ¦ «{name}» снова в списке ¦ «{name}» знову в списку
+LOIN DU RESTE ¦ ДАЛЕКО ОТ ОСТАЛЬНЫХ ¦ ДАЛЕКО ВІД РЕШТИ
+Placer « {name} » si loin ? ¦ Разместить «{name}» так далеко? ¦ Розмістити «{name}» так далеко?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ «{where}» в {km} км от других мест этих событий. Часто это просто тёзка. ¦ «{where}» за {km} км від інших місць цих подій. Часто це просто тезка.
+Placer quand même ¦ Всё равно разместить ¦ Однаково розмістити
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Нажми на карте там, где «{name}» (Esc — отменить). ¦ Натисни на мапі там, де «{name}» (Esc — скасувати).
+{name} placé à la main (position approchée) ¦ {name} размещено вручную (приблизительная позиция) ¦ {name} розміщено вручну (приблизна позиція)
+Pas de réseau : rien n’a été envoyé. ¦ Нет сети: ничего не отправлено. ¦ Немає мережі: нічого не надіслано.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Онлайн-сервис ничего не нашёл для «{name}». ¦ Онлайн-сервіс нічого не знайшов для «{name}».
+{n} de plus pour « {name} » : à toi de choisir. ¦ Ещё {n} для «{name}»: выбирай сам. ¦ Ще {n} для «{name}»: обирай сам.
+EN LIGNE ¦ ОНЛАЙН ¦ ОНЛАЙН
+En ligne… ¦ Онлайн… ¦ Онлайн…
+Chercher « {name} » en ligne ? ¦ Искать «{name}» онлайн? ¦ Шукати «{name}» онлайн?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ В сервис поиска адресов IGN (Géoplateforme) отправляется только название места «{name}». Ни имён людей, ни дат. ¦ До сервісу пошуку адрес IGN (Géoplateforme) надсилається лише назва місця «{name}». Жодних імен людей, жодних дат.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Ответ — ещё одно предложение в списке; выбирать его или нет — решать тебе. Без интернета: «Нет сети: ничего не отправлено». ¦ Відповідь — ще одна пропозиція в списку; обирати її чи ні — вирішуєш ти. Без інтернету: «Немає мережі: нічого не надіслано».
+Ne plus me demander pour cette séance ¦ Больше не спрашивать в этом сеансе ¦ Більше не питати в цьому сеансі
+Lieu tapé ¦ Введённое место ¦ Введене місце
+Pourquoi ¦ Почему ¦ Чому
+Distance au reste ¦ Расстояние до остальных ¦ Відстань до решти
+Év. ¦ Соб. ¦ Под.
+{n} km ¦ {n} км ¦ {n} км
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ «Ничего не найдено» в проверку не попадают. Место дальше {km} км от остальных никогда не отмечается само. ¦ «Нічого не знайдено» до перевірки не потрапляють. Місце далі ніж {km} км від решти ніколи не позначається саме.
+Seulement les sûrs ¦ Только надёжные ¦ Лише надійні
+Seulement les « sûrs » ¦ Только «надёжные» ¦ Лише «надійні»
+Revoir avant de placer ¦ Проверить перед размещением ¦ Переглянути перед розміщенням
+Placer les cochés ¦ Разместить отмеченные ¦ Розмістити позначені
+Coche au moins un lieu. ¦ Отметь хотя бы одно место. ¦ Познач хоча б одне місце.
+Placer les {n} cochés ¦ Разместить отмеченные ({n}) ¦ Розмістити позначені ({n})
+Réglages des lieux à placer enregistrés ¦ Настройки мест без позиции сохранены ¦ Налаштування місць без позиції збережено
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Места без позиции, сгруппированные по вероятной коммуне: размести их одним нажатием ¦ Місця без позиції, згруповані за ймовірною громадою: розмісти їх одним натисканням
+Cochés au départ dans la revue ¦ Отмечены сразу в проверке ¦ Позначені одразу в перевірці
+Les sûrs et les probables ¦ Надёжные и вероятные ¦ Надійні та ймовірні
+Un lieu-dit ¦ Урочище ¦ Урочище
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ В урочище, если оно известно, иначе в центре коммуны с пометкой «приблизительно» ¦ В урочищі, якщо воно відоме, інакше в центрі громади з позначкою «приблизно»
+Toujours au centre de la commune ¦ Всегда в центре коммуны ¦ Завжди в центрі громади
+Ne pas le placer ¦ Не размещать ¦ Не розміщувати
+Plusieurs communes du même nom ¦ Несколько коммун с одним названием ¦ Кілька громад з однаковою назвою
+Proposer la plus proche des autres lieux, jamais cochée ¦ Предлагать ближайшую к другим местам, никогда не отмечать ¦ Пропонувати найближчу до інших місць, ніколи не позначати
+Aussi les fautes proches, proposées seulement ¦ Также близкие опечатки, только как предложение ¦ Також близькі помилки, лише як пропозиція
+Le nom exact seulement ¦ Только точное название ¦ Лише точна назва
+Ce qui est repris ¦ Что переносится ¦ Що переноситься
+Position, code INSEE et département ¦ Позиция, код INSEE и департамент ¦ Позиція, код INSEE і департамент
+La position seulement ¦ Только позиция ¦ Лише позиція
+Jamais : le bouton est caché ¦ Никогда: кнопка скрыта ¦ Ніколи: кнопку приховано
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Одна кнопка «🌐 Онлайн…» на место, каждый раз с сообщением (никогда пакетом, никогда сама) ¦ Одна кнопка «🌐 Онлайн…» на місце, щоразу з повідомленням (ніколи пакетом, ніколи сама)
+Alerte « loin du reste » ¦ Предупреждение «далеко от остальных» ¦ Попередження «далеко від решти»
+À partir de 200 km ¦ От 200 км ¦ Від 200 км
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ То же название и тот же департамент, что в справочнике коммун: только одна коммуна «{name}». Переносятся центр, код INSEE и департамент. ¦ Та сама назва й той самий департамент, що в довіднику громад: лише одна громада «{name}». Переносяться центр, код INSEE і департамент.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ Во Франции только одна коммуна «{name}», но департамент не указан. ¦ У Франції лише одна громада «{name}», але департамент не вказано.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ Коммун с таким названием во Франции: {n}. Предлагаются ближайшие к другим местам этих событий, сами они никогда не отмечаются. ¦ Громад із такою назвою у Франції: {n}. Пропонуються найближчі до інших місць цих подій, самі вони ніколи не позначаються.
+{n} communes de ce nom en France : choisis la bonne. ¦ Коммун с таким названием во Франции: {n}. Выбери нужную. ¦ Громад із такою назвою у Франції: {n}. Обери потрібну.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Урочище известно в справочнике (GeoNames) в коммуне {name}. ¦ Урочище відоме в довіднику (GeoNames) у громаді {name}.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Урочища нет в справочнике: в центре коммуны {name}, с пометкой «приблизительная позиция». ¦ Урочища немає в довіднику: у центрі громади {name}, з позначкою «приблизна позиція».
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Не современная коммуна; история INSEE (🏛 Старые границы) говорит: присоединена к {to} в {year}. ¦ Не сучасна громада; історія INSEE (🏛 Старі кордони) каже: приєднана до {to} у {year}.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Город мира из комплекта приложения, выбран по указанной стране ({country}). ¦ Місто світу з комплекту застосунку, обране за вказаною країною ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Не найдено среди городов мира из комплекта для этой страны ({country}). ¦ Не знайдено серед міст світу з комплекту для цієї країни ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Коммуны с таким названием нет. Предложено похожее написание. В интернете ничего не ищется. ¦ Громади з такою назвою немає. Запропоновано схоже написання. В інтернеті нічого не шукається.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Коммуны с таким названием нет. В интернете ничего не ищется. ¦ Громади з такою назвою немає. В інтернеті нічого не шукається.
+le plus proche ¦ ближайшая ¦ найближча
+sûr ¦ надёжно ¦ надійно
+=proposition ¦ предложение|предложения|предложений ¦ пропозиція|пропозиції|пропозицій

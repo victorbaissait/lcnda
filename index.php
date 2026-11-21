@@ -100,6 +100,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/plus-famille.css?v=1">
     <link rel="stylesheet" href="assets/css/cartes-outils.css?v=1">
     <link rel="stylesheet" href="assets/css/cartes-perso.css?v=1">
+    <link rel="stylesheet" href="assets/css/cartes-nouvelles.css?v=1">
     <link rel="stylesheet" href="assets/css/traitement-texte.css?v=5">
     <link rel="stylesheet" href="assets/css/site-web.css?v=17">
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
@@ -1175,14 +1176,14 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script src="assets/js/app-journal.js?v=2"></script>
 <?= i18n_page_script() ?>
-<script src="assets/js/app-i18n.js?v=49"></script>
+<script src="assets/js/app-i18n.js?v=50"></script>
 <script>window.LCNDA_GENEALOGY = <?= json_encode(GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID) ?>;window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_GLOCK = <?= json_encode(['on' => glock_info()['locked'], 'minutes' => glock_info()['minutes']]) ?>;window.LCNDA_GUEST = <?= json_encode(lan_device() ? ['name' => lan_device()['name']] : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
 <script src="assets/js/app-fond.js?v=9" defer></script>
 <script src="assets/js/app-accord.js?v=1" defer></script>
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script src="assets/js/app.js?v=566" defer></script>
-<script src="assets/js/app-verrou.js?v=4" defer></script>
+<script src="assets/js/app-verrou.js?v=5" defer></script>
 <script src="assets/js/app-reseau-local.js?v=1" defer></script>
 <script src="assets/js/app-indicateurs.js?v=2" defer></script>
 <script src="assets/js/app-picker.js?v=29" defer></script>
@@ -1217,7 +1218,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-comparaison.js?v=8" defer></script>
 <script src="assets/js/app-carte.js?v=14" defer></script>
 <script src="assets/js/app-enquetes.js?v=12" defer></script>
-<script src="assets/js/app-tableau-de-bord.js?v=21" defer></script>
+<script src="assets/js/app-tableau-de-bord.js?v=22" defer></script>
 <script src="assets/js/app-harmony.js?v=10" defer></script>
 <script src="assets/js/app-ui.js?v=31" defer></script>
 <script src="assets/js/app-tableur-engine.js?v=11" defer></script>
@@ -1276,7 +1277,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-mode-simple.js?v=16" defer></script>
 <script src="assets/js/app-sidegroups.js?v=13" defer></script>
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
-<script src="assets/js/app-listes.js?v=57" defer></script>
+<script src="assets/js/app-listes.js?v=58" defer></script>
 <script src="assets/js/app-maintenance.js?v=61" defer></script>
 <script src="assets/js/app-recherche.js?v=31" defer></script>
 <script src="assets/js/app-graphiques.js?v=25" defer></script>
@@ -1290,7 +1291,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-calendar-more.js?v=6" defer></script>
 <script src="assets/js/heritage-lecture-autrefois.js?v=5" defer></script>
 <script src="assets/js/heritage-links.js?v=24" defer></script>
-<script src="assets/js/heritage-more.js?v=360" defer></script>
+<script src="assets/js/heritage-more.js?v=361" defer></script>
 <script src="assets/js/heritage-controle.js?v=9" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
 <script src="assets/js/heritage-research.js?v=40" defer></script>
@@ -1361,7 +1362,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-genealogies.js?v=7" defer></script>
 <script src="assets/js/heritage-periodicals.js?v=17" defer></script>
 <script src="assets/js/heritage-diagrams-render.js?v=11" defer></script>
-<script src="assets/js/heritage-diagrams.js?v=34" defer></script>
+<script src="assets/js/heritage-diagrams.js?v=35" defer></script>
 <script src="assets/js/heritage-diagram-options.js?v=6" defer></script>
 <script src="assets/js/heritage-diagram-genea.js?v=9" defer></script>
 <script src="assets/js/heritage-vector.js?v=39" defer></script>
@@ -1420,7 +1421,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-diagram-cartes2.js?v=7" defer></script>
 <script src="assets/js/heritage-prenoms-france.js?v=5" defer></script>
 <script src="assets/js/heritage-diagram-cartes-plus.js?v=3" defer></script>
-<script src="assets/js/heritage-diagram-graphique.js?v=4" defer></script>
+<script src="assets/js/heritage-diagram-cartes-plus2.js?v=1" defer></script><!-- 🗺️ vague 2 : métiers, lignées, aire de vie, parrains, crises -->
+<script src="assets/js/heritage-diagram-graphique.js?v=5" defer></script>
 <script src="assets/js/heritage-diagram-nouveaux.js?v=6" defer></script>
 <script src="assets/js/heritage-diagram-lot-c.js?v=1" defer></script>
 <script src="assets/js/app-diagram-plus-core.js?v=2" defer></script>
@@ -1517,6 +1519,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-cartes-outils.js?v=4" defer></script>
 <script src="assets/js/app-cartes-perso-core.js?v=1" defer></script><!-- 🗺 Mes cartes : calculs (aussi pour Node) -->
 <script src="assets/js/heritage-cartes-perso.js?v=3" defer></script><!-- 🗺 Mes cartes (Carte) -->
+<script src="assets/js/heritage-lieux-a-placer.js?v=1" defer></script><!-- 📍 Lieux à placer (Carte, tableau de bord, Listes → Lieux) -->
 <script src="assets/js/app-metiers-carte-core.js?v=1" defer></script><!-- 🧬 🗺 noyau commun (aussi pour Node) -->
 <script src="assets/js/heritage-metiers-arbre.js?v=2" defer></script><!-- 🧬 Arbre des métiers (Graphiques) -->
 <script src="assets/js/heritage-carte-vie.js?v=2" defer></script><!-- 🗺 Carte de la vie d’une personne -->

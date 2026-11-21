@@ -217,6 +217,7 @@
     const EXP = {csv: 'CSV', gedcom: 'GEDCOM', plus: 'Autre format', json: 'JSON', sqlite: 'Base .db', backup: 'Sauvegarde complète', report: 'Rapport de recherche', book: 'Livre de famille',
         sync: 'Paquet du travail à deux', vault: 'Copie chez un cousin', museum: 'Musée de famille', list: 'Liste', block: 'Bloc', share: 'Partage avec la famille', website: 'Site web',
         website_publish: 'Site web publié', offsite: 'Copie hors de l’ordinateur', access_csv: 'Registre « Qui a vu quoi » (CSV)', succ_archive: 'Archive du dossier (.zip)',
+        map_trademap: 'Carte des métiers', map_mirrormap: 'Carte des deux lignées', map_lifearea: 'Carte de l’aire de vie', map_linkmap: 'Carte des parrains et témoins', map_crisismap: 'Carte des années de crise', // 🗺️ vague 2
         succ_move: 'Dossier déplacé vers une autre généalogie', succ_journal_csv: 'Journal du dossier (CSV)', succ_pdf: 'Tableau, arbre ou parts imprimés',
         // ⚖️ outils de plus (lib/successoral_plus2.php)
         succ_questionnaire: 'Questionnaire d’héritier fabriqué', succ_answers: 'Réponses d’un questionnaire écrites', succ_notary_copy: 'Copie du dossier pour le notaire', succ_invoice: 'Facture émise ou imprimée', succ_invoice_csv: 'Registre des factures (CSV)',

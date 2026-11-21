@@ -823,6 +823,12 @@ function access_log_dispatch(PDO $pdo, string $action, bool $isWrite, array $d):
         if ($isWrite && $action === 'access_note') {
             // seulement des choses connues, avec un nombre : jamais un texte venu de la page
             $what = (string) ($d['what'] ?? '');
+            if ($what === 'map_export') { // 🗺️ une carte de Graphiques exportée ou imprimée (vague 2 : heritage-diagram-cartes-plus2.js) : la sorte et le format, connus d'avance
+                $kind = (string) ($d['kind'] ?? ''); $fmt = (string) ($d['format'] ?? '');
+                if (!in_array($kind, ['trademap', 'mirrormap', 'lifearea', 'linkmap', 'crisismap'], true) || !in_array($fmt, ['png', 'jpg', 'svg', 'print', 'csv', 'json', 'copy'], true)) { throw new LcndaBadInput('Demande inconnue.'); }
+                access_log_add($pdo, 'export', '', null, '', 'map_' . $kind . '|' . $fmt);
+                json_response(['ok' => true]);
+            }
             if ($what !== 'dashboard_csv') { throw new LcndaBadInput('Demande inconnue.'); }
             access_log_add($pdo, 'export', '', null, '', 'dashboard_csv|' . max(0, min(100000, (int) ($d['n'] ?? 0))));
             json_response(['ok' => true]);

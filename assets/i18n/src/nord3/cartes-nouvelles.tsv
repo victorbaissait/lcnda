@@ -1,0 +1,88 @@
+fr ¦ ro
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Locuri de plasat
+Lieux à placer… ¦ Locuri de plasat…
+Placer… ¦ Plasează…
+Les placer ¦ Plasează-le
+Rien n’est pris tant que tu ne cliques pas. ¦ Nu se preia nimic până nu dai clic.
+Revoir et placer en lot… ¦ Verifică și plasează în lot…
+Seulement les lieux de cette carte ({n}). ¦ Doar locurile de pe această hartă ({n}).
+Voir tous les lieux à placer ¦ Vezi toate locurile de plasat
+Lecture des lieux… ¦ Se citesc locurile…
+Chercher un lieu… ¦ Caută un loc…
+De A à Z ¦ De la A la Z
+Le plus loin du reste ¦ Cel mai departe de rest
+{a} · {b} concernés ¦ {a} · {b} vizate
+Aucun lieu pour ce choix. ¦ Niciun loc pentru această alegere.
+Tous les lieux de ta base ont une position. ¦ Toate locurile din baza ta au o poziție.
+à {km} km du reste ¦ la {km} km de rest
+Placer ici ¦ Plasează aici
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ La {km} km de celelalte locuri ale acestor evenimente: verifică înainte de a plasa.
+Placer les {n} ensemble ¦ Plasează cele {n} împreună
+Pas un lieu ¦ Nu e un loc
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ Primele 300; caută un nume ca să le vezi pe celelalte.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ {a} plasate ({b}) · apar pe toate hărțile
+{name} placé ({n}) · {where} ¦ {name} plasat ({n}) · {where}
+{name} placé ({a}, {b}) ¦ {name} plasat ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ „{name}” pus deoparte (nu e un loc)
+« {name} » remis dans la liste ¦ „{name}” pus înapoi în listă
+LOIN DU RESTE ¦ DEPARTE DE REST
+Placer « {name} » si loin ? ¦ Plasezi „{name}” atât de departe?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ „{where}” e la {km} km de celelalte locuri ale acestor evenimente. Adesea e un omonim.
+Placer quand même ¦ Plasează oricum
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Dă clic pe hartă în locul „{name}” (Esc ca să renunți).
+{name} placé à la main (position approchée) ¦ {name} plasat de mână (poziție aproximativă)
+Pas de réseau : rien n’a été envoyé. ¦ Nicio rețea: nu s-a trimis nimic.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Serviciul online n-a găsit nimic pentru „{name}”.
+{n} de plus pour « {name} » : à toi de choisir. ¦ Încă {n} pentru „{name}”: alegi tu.
+EN LIGNE ¦ ONLINE
+En ligne… ¦ Online…
+Chercher « {name} » en ligne ? ¦ Cauți „{name}” online?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ Doar numele locului „{name}” este trimis serviciului de căutare a adreselor al IGN (Géoplateforme). Niciun nume de persoană, nicio dată.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Răspunsul e încă o propunere în listă; o alegi sau nu. Fără internet: „Nicio rețea: nu s-a trimis nimic”.
+Ne plus me demander pour cette séance ¦ Nu mă mai întreba în această sesiune
+Lieu tapé ¦ Loc scris
+Pourquoi ¦ De ce
+Distance au reste ¦ Distanța față de rest
+Év. ¦ Ev.
+{n} km ¦ {n} km
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ „Nimic găsit” nu sunt în verificare. Un loc la peste {km} km de rest nu este niciodată bifat singur.
+Seulement les sûrs ¦ Doar cele sigure
+Seulement les « sûrs » ¦ Doar cele „sigure”
+Revoir avant de placer ¦ Verifică înainte de a plasa
+Placer les cochés ¦ Plasează-le pe cele bifate
+Coche au moins un lieu. ¦ Bifează cel puțin un loc.
+Placer les {n} cochés ¦ Plasează cele {n} bifate
+Réglages des lieux à placer enregistrés ¦ Setările locurilor de plasat au fost salvate
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Locurile fără poziție, grupate după comuna probabilă: plasează-le cu un clic
+Cochés au départ dans la revue ¦ Bifate de la început în verificare
+Les sûrs et les probables ¦ Cele sigure și cele probabile
+Un lieu-dit ¦ Un loc numit
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ La locul numit dacă e cunoscut, altfel în centrul comunei, marcat „aproximativ”
+Toujours au centre de la commune ¦ Mereu în centrul comunei
+Ne pas le placer ¦ Nu-l plasa
+Plusieurs communes du même nom ¦ Mai multe comune cu același nume
+Proposer la plus proche des autres lieux, jamais cochée ¦ Propune-o pe cea mai apropiată de celelalte locuri, niciodată bifată
+Aussi les fautes proches, proposées seulement ¦ Și greșelile apropiate, doar propuse
+Le nom exact seulement ¦ Doar numele exact
+Ce qui est repris ¦ Ce se preia
+Position, code INSEE et département ¦ Poziția, codul INSEE și departamentul
+La position seulement ¦ Doar poziția
+Jamais : le bouton est caché ¦ Niciodată: butonul e ascuns
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Un buton „🌐 Online…” pentru fiecare loc, cu mesajul de fiecare dată (niciodată în lot, niciodată singur)
+Alerte « loin du reste » ¦ Alertă „departe de rest”
+À partir de 200 km ¦ De la 200 km
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ Același nume și același departament ca în nomenclatorul comunelor: o singură comună „{name}”. Se preiau centrul, codul INSEE și departamentul.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ O singură comună „{name}” în Franța, dar fără departament scris.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ {n} comune cu acest nume în Franța. Sunt propuse cele mai apropiate de celelalte locuri ale acestor evenimente, niciodată bifate singure.
+{n} communes de ce nom en France : choisis la bonne. ¦ {n} comune cu acest nume în Franța: alege-o pe cea bună.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Loc numit cunoscut în nomenclator (GeoNames) în comuna {name}.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Loc numit necunoscut în nomenclator: în centrul localității {name}, marcat „poziție aproximativă”.
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Nu e o comună de azi; istoricul INSEE (🏛 Frontiere vechi) spune: unită cu {to} în {year}.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Oraș din lume livrat cu aplicația, ales după țara scrisă ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Negăsit printre orașele din lume livrate pentru această țară ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Nicio comună cu acest nume. Se propune o ortografie apropiată. Nu se caută nimic online.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Nicio comună cu acest nume. Nu se caută nimic online.
+le plus proche ¦ cea mai apropiată
+sûr ¦ sigur
+=proposition ¦ propunere|propuneri|de propuneri

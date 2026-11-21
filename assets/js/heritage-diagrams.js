@@ -131,6 +131,7 @@
             html: c => `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(name)}</title><style>body{margin:0;font:11px/1.4 system-ui,sans-serif;color:#111}.dg svg{display:block;margin:0 auto;${c.size === 'fit' ? `width:100%;height:auto;max-height:${Math.round((c.pageMm[1] - 24) * (c.data ? 0.62 : 0.97))}mm` : ''}}table{border-collapse:collapse;margin:6mm auto 0;break-inside:auto}caption{font-weight:700;text-align:left;padding:2px 0}th,td{border:1px solid #bbb;padding:2px 6px;text-align:left}th{background:#f2f3f5}</style></head><body><div class="dg">${c.legend ? full : bare}</div>${c.data ? table() : ''}</body></html>`});
     }
     async function exportAs(fmt, name, spec, o = {}) {
+        if (R().KINDS[spec.kind]?.logExport) post('access_note', {what: 'map_export', kind: spec.kind, format: fmt}).catch(() => {}); // 📜 Qui a vu quoi : une carte exportée (lib/verrou.php)
         const svg = drawSpec(await resolveLive(spec));
         if (fmt === 'svg') return download(new Blob([svg], {type: 'image/svg+xml'}), o.filename || fileName(name) + '.svg');
         if (fmt === 'csv') return download(new Blob(['﻿' + specCsv(spec.live?.follow ? await resolveLive(spec) : spec)], {type: 'text/csv;charset=utf-8'}), o.filename || fileName(name) + '.csv');

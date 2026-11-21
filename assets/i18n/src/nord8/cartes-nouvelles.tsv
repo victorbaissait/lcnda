@@ -1,0 +1,88 @@
+fr ¦ tr
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Yerleştirilecek yerler
+Lieux à placer… ¦ Yerleştirilecek yerler…
+Placer… ¦ Yerleştir…
+Les placer ¦ Onları yerleştir
+Rien n’est pris tant que tu ne cliques pas. ¦ Sen tıklamadıkça hiçbir şey alınmaz.
+Revoir et placer en lot… ¦ Gözden geçir ve toplu yerleştir…
+Seulement les lieux de cette carte ({n}). ¦ Yalnızca bu haritanın yerleri ({n}).
+Voir tous les lieux à placer ¦ Yerleştirilecek tüm yerleri gör
+Lecture des lieux… ¦ Yerler okunuyor…
+Chercher un lieu… ¦ Bir yer ara…
+De A à Z ¦ A’dan Z’ye
+Le plus loin du reste ¦ Diğerlerinden en uzak
+{a} · {b} concernés ¦ {a} · {b} etkilenen
+Aucun lieu pour ce choix. ¦ Bu seçim için yer yok.
+Tous les lieux de ta base ont une position. ¦ Veritabanındaki tüm yerlerin bir konumu var.
+à {km} km du reste ¦ diğerlerinden {km} km
+Placer ici ¦ Buraya yerleştir
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ Bu olayların diğer yerlerinden {km} km uzakta: yerleştirmeden önce kontrol et.
+Placer les {n} ensemble ¦ {n} tanesini birlikte yerleştir
+Pas un lieu ¦ Yer değil
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ İlk 300; diğerlerini görmek için bir ad ara.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ {a} yerleştirildi ({b}) · tüm haritalarda görünürler
+{name} placé ({n}) · {where} ¦ {name} yerleştirildi ({n}) · {where}
+{name} placé ({a}, {b}) ¦ {name} yerleştirildi ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ “{name}” bir kenara kondu (yer değil)
+« {name} » remis dans la liste ¦ “{name}” listeye geri kondu
+LOIN DU RESTE ¦ DİĞERLERİNDEN UZAK
+Placer « {name} » si loin ? ¦ “{name}” bu kadar uzağa mı yerleştirilsin?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ “{where}”, bu olayların diğer yerlerinden {km} km uzakta. Çoğu zaman adaştır.
+Placer quand même ¦ Yine de yerleştir
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Haritada “{name}” yerine tıkla (bırakmak için Esc).
+{name} placé à la main (position approchée) ¦ {name} elle yerleştirildi (yaklaşık konum)
+Pas de réseau : rien n’a été envoyé. ¦ Ağ yok: hiçbir şey gönderilmedi.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Çevrim içi hizmet “{name}” için bir şey bulamadı.
+{n} de plus pour « {name} » : à toi de choisir. ¦ “{name}” için {n} daha: seçim senin.
+EN LIGNE ¦ ÇEVRİM İÇİ
+En ligne… ¦ Çevrim içi…
+Chercher « {name} » en ligne ? ¦ “{name}” çevrim içi aransın mı?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ IGN adres arama hizmetine (Géoplateforme) yalnızca “{name}” yer adı gönderilir. Kişi adı yok, tarih yok.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Yanıt listedeki bir öneri daha olur; seçersin ya da seçmezsin. İnternet yoksa: “Ağ yok: hiçbir şey gönderilmedi”.
+Ne plus me demander pour cette séance ¦ Bu oturumda bir daha sorma
+Lieu tapé ¦ Yazılan yer
+Pourquoi ¦ Neden
+Distance au reste ¦ Diğerlerine uzaklık
+Év. ¦ Olay
+{n} km ¦ {n} km
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ “Hiçbir şey bulunamadı” olanlar gözden geçirmede yok. Diğerlerinden {km} km’den uzak bir yer asla kendiliğinden işaretlenmez.
+Seulement les sûrs ¦ Yalnızca kesin olanlar
+Seulement les « sûrs » ¦ Yalnızca “kesin” olanlar
+Revoir avant de placer ¦ Yerleştirmeden önce gözden geçir
+Placer les cochés ¦ İşaretlileri yerleştir
+Coche au moins un lieu. ¦ En az bir yer işaretle.
+Placer les {n} cochés ¦ İşaretli {n} yeri yerleştir
+Réglages des lieux à placer enregistrés ¦ Yerleştirilecek yer ayarları kaydedildi
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Konumu olmayan yerler, olası belediyeye göre gruplu: tek tıkla yerleştir
+Cochés au départ dans la revue ¦ Gözden geçirmede baştan işaretli
+Les sûrs et les probables ¦ Kesin ve olası olanlar
+Un lieu-dit ¦ Mevki
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ Biliniyorsa mevkiye, yoksa belediyenin ortasına “yaklaşık” olarak
+Toujours au centre de la commune ¦ Her zaman belediyenin ortasına
+Ne pas le placer ¦ Yerleştirme
+Plusieurs communes du même nom ¦ Aynı adı taşıyan birden çok belediye
+Proposer la plus proche des autres lieux, jamais cochée ¦ Diğer yerlere en yakın olanı öner, asla işaretleme
+Aussi les fautes proches, proposées seulement ¦ Yakın yazım hataları da, yalnızca öneri olarak
+Le nom exact seulement ¦ Yalnızca tam ad
+Ce qui est repris ¦ Neyin alındığı
+Position, code INSEE et département ¦ Konum, INSEE kodu ve departman
+La position seulement ¦ Yalnızca konum
+Jamais : le bouton est caché ¦ Asla: düğme gizli
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Yer başına bir “🌐 Çevrim içi…” düğmesi, her seferinde mesajla (asla toplu, asla kendiliğinden)
+Alerte « loin du reste » ¦ “Diğerlerinden uzak” uyarısı
+À partir de 200 km ¦ 200 km’den itibaren
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ Belediye listesindekiyle aynı ad ve aynı departman: tek bir “{name}” belediyesi. Merkezi, INSEE kodu ve departmanı alınır.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ Fransa’da tek bir “{name}” belediyesi var ama departman yazılmamış.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ Fransa’da bu adda {n} belediye var. Bu olayların diğer yerlerine en yakın olanlar önerilir, asla kendiliğinden işaretlenmez.
+{n} communes de ce nom en France : choisis la bonne. ¦ Fransa’da bu adda {n} belediye var: doğru olanı seç.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Mevki listede (GeoNames) biliniyor, {name} belediyesinde.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Mevki listede bilinmiyor: {name} merkezine, “yaklaşık konum” olarak.
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Bugünkü bir belediye değil; INSEE geçmişi (🏛 Eski sınırlar) diyor ki: {year} yılında {to} ile birleşti.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Uygulamayla gelen dünya şehri, yazılan ülkeye göre seçildi ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Bu ülke için gelen dünya şehirleri arasında bulunamadı ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Bu adda belediye yok. Benzer bir yazım önerildi. Çevrim içi hiçbir şey aranmaz.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Bu adda belediye yok. Çevrim içi hiçbir şey aranmaz.
+le plus proche ¦ en yakını
+sûr ¦ kesin
+=proposition ¦ öneri|öneri

@@ -1,0 +1,88 @@
+fr ¦ lt ¦ lv ¦ et
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Vietos, kurias reikia padėti ¦ Vietas, ko novietot ¦ Paigutamata kohad
+Lieux à placer… ¦ Vietos, kurias reikia padėti… ¦ Vietas, ko novietot… ¦ Paigutamata kohad…
+Placer… ¦ Padėti… ¦ Novietot… ¦ Paiguta…
+Les placer ¦ Padėti jas ¦ Novietot tās ¦ Paiguta need
+Rien n’est pris tant que tu ne cliques pas. ¦ Niekas nepaimama, kol nepaspaudi. ¦ Nekas netiek ņemts, kamēr tu neuzklikšķini. ¦ Midagi ei võeta enne, kui klõpsad.
+Revoir et placer en lot… ¦ Peržiūrėti ir padėti kartu… ¦ Pārskatīt un novietot kopā… ¦ Vaata üle ja paiguta korraga…
+Seulement les lieux de cette carte ({n}). ¦ Tik šio žemėlapio vietos ({n}). ¦ Tikai šīs kartes vietas ({n}). ¦ Ainult selle kaardi kohad ({n}).
+Voir tous les lieux à placer ¦ Rodyti visas vietas, kurias reikia padėti ¦ Rādīt visas vietas, ko novietot ¦ Näita kõiki paigutamata kohti
+Lecture des lieux… ¦ Skaitomos vietos… ¦ Nolasa vietas… ¦ Kohtade lugemine…
+Chercher un lieu… ¦ Ieškoti vietos… ¦ Meklēt vietu… ¦ Otsi kohta…
+De A à Z ¦ Nuo A iki Ž ¦ No A līdz Z ¦ A-st Ü-ni
+Le plus loin du reste ¦ Toliausiai nuo kitų ¦ Vistālāk no pārējām ¦ Ülejäänust kõige kaugemal
+{a} · {b} concernés ¦ {a} · susiję: {b} ¦ {a} · skarti: {b} ¦ {a} · puudutab: {b}
+Aucun lieu pour ce choix. ¦ Šiam pasirinkimui vietų nėra. ¦ Šai izvēlei nav vietu. ¦ Selle valiku jaoks kohti pole.
+Tous les lieux de ta base ont une position. ¦ Visos tavo bazės vietos turi padėtį. ¦ Visām tavas datubāzes vietām ir atrašanās vieta. ¦ Kõigil sinu andmebaasi kohtadel on asukoht.
+à {km} km du reste ¦ {km} km nuo kitų ¦ {km} km no pārējām ¦ ülejäänust {km} km
+Placer ici ¦ Padėti čia ¦ Novietot šeit ¦ Paiguta siia
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ {km} km nuo kitų šių įvykių vietų: patikrink prieš padėdamas. ¦ {km} km no citām šo notikumu vietām: pārbaudi pirms novietošanas. ¦ Nende sündmuste teistest kohtadest {km} km: kontrolli enne paigutamist.
+Placer les {n} ensemble ¦ Padėti visas {n} kartu ¦ Novietot visas {n} kopā ¦ Paiguta need {n} koos
+Pas un lieu ¦ Ne vieta ¦ Nav vieta ¦ Pole koht
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ Pirmos 300; ieškok pavadinimo, kad pamatytum kitas. ¦ Pirmās 300; meklē nosaukumu, lai redzētu pārējās. ¦ Esimesed 300; otsi nime, et näha teisi.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ Padėta: {a} ({b}) · jos matomos visuose žemėlapiuose ¦ Novietotas: {a} ({b}) · tās redzamas visās kartēs ¦ Paigutatud: {a} ({b}) · need on näha kõigil kaartidel
+{name} placé ({n}) · {where} ¦ {name} padėta ({n}) · {where} ¦ {name} novietota ({n}) · {where} ¦ {name} paigutatud ({n}) · {where}
+{name} placé ({a}, {b}) ¦ {name} padėta ({a}, {b}) ¦ {name} novietota ({a}, {b}) ¦ {name} paigutatud ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ „{name}“ atidėta (ne vieta) ¦ “{name}” atlikta malā (nav vieta) ¦ „{name}“ kõrvale pandud (pole koht)
+« {name} » remis dans la liste ¦ „{name}“ grąžinta į sąrašą ¦ “{name}” atgriezta sarakstā ¦ „{name}“ tagasi loendis
+LOIN DU RESTE ¦ TOLI NUO KITŲ ¦ TĀLU NO PĀRĒJĀM ¦ ÜLEJÄÄNUST KAUGEL
+Placer « {name} » si loin ? ¦ Padėti „{name}“ taip toli? ¦ Novietot “{name}” tik tālu? ¦ Paigutada „{name}“ nii kaugele?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ „{where}“ yra {km} km nuo kitų šių įvykių vietų. Dažnai tai bendravardė vieta. ¦ “{where}” ir {km} km no citām šo notikumu vietām. Bieži tā ir vārdabiedre. ¦ „{where}“ asub nende sündmuste teistest kohtadest {km} km kaugusel. Tihti on see samanimeline koht.
+Placer quand même ¦ Vis tiek padėti ¦ Tomēr novietot ¦ Paiguta siiski
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Spustelėk žemėlapyje ten, kur yra „{name}“ (Esc – atsisakyti). ¦ Uzklikšķini kartē vietā, kur ir “{name}” (Esc – atteikties). ¦ Klõpsa kaardil kohta, kus on „{name}“ (Esc – loobu).
+{name} placé à la main (position approchée) ¦ {name} padėta ranka (apytikslė padėtis) ¦ {name} novietota ar roku (aptuvena atrašanās vieta) ¦ {name} käsitsi paigutatud (ligikaudne asukoht)
+Pas de réseau : rien n’a été envoyé. ¦ Nėra tinklo: nieko neišsiųsta. ¦ Nav tīkla: nekas netika nosūtīts. ¦ Võrku pole: midagi ei saadetud.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Internetinė paslauga nieko nerado pagal „{name}“. ¦ Tiešsaistes pakalpojums neatrada neko par “{name}”. ¦ Veebiteenus ei leidnud „{name}“ kohta midagi.
+{n} de plus pour « {name} » : à toi de choisir. ¦ Dar {n} vietai „{name}“: rinkis pats. ¦ Vēl {n} vietai “{name}”: izvēlies pats. ¦ Veel {n} kohale „{name}“: vali ise.
+EN LIGNE ¦ INTERNETE ¦ TIEŠSAISTĒ ¦ VEEBIS
+En ligne… ¦ Internete… ¦ Tiešsaistē… ¦ Veebis…
+Chercher « {name} » en ligne ? ¦ Ieškoti „{name}“ internete? ¦ Meklēt “{name}” tiešsaistē? ¦ Otsida „{name}“ veebist?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ IGN adresų paieškos paslaugai (Géoplateforme) siunčiamas tik vietos pavadinimas „{name}“. Jokio asmens vardo, jokios datos. ¦ IGN adrešu meklēšanas pakalpojumam (Géoplateforme) tiek nosūtīts tikai vietas nosaukums “{name}”. Ne personu vārdi, ne datumi. ¦ IGN-i aadressiotsingule (Géoplateforme) saadetakse ainult koha nimi „{name}“. Mitte ühtki isiku nime ega kuupäeva.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Atsakymas – dar vienas pasiūlymas sąraše; rinkis jį arba ne. Be interneto: „Nėra tinklo: nieko neišsiųsta“. ¦ Atbilde ir vēl viens ieteikums sarakstā; izvēlies to vai ne. Bez interneta: “Nav tīkla: nekas netika nosūtīts”. ¦ Vastus on loendis veel üks ettepanek; vali see või mitte. Ilma internetita: „Võrku pole: midagi ei saadetud“.
+Ne plus me demander pour cette séance ¦ Šios sesijos metu daugiau neklausti ¦ Šajā sesijā vairs nejautāt ¦ Ära selle seansi ajal enam küsi
+Lieu tapé ¦ Įrašyta vieta ¦ Ierakstītā vieta ¦ Sisestatud koht
+Pourquoi ¦ Kodėl ¦ Kāpēc ¦ Miks
+Distance au reste ¦ Atstumas iki kitų ¦ Attālums līdz pārējām ¦ Kaugus ülejäänust
+Év. ¦ Įv. ¦ Not. ¦ Sünd.
+{n} km ¦ {n} km ¦ {n} km ¦ {n} km
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ „Nieko nerasta“ peržiūroje nėra. Vieta, esanti toliau nei {km} km nuo kitų, niekada nepažymima savaime. ¦ “Nekas nav atrasts” nav pārskatā. Vieta, kas atrodas vairāk nekā {km} km no pārējām, nekad netiek atzīmēta pati. ¦ „Midagi ei leitud“ ei ole ülevaatuses. Kohta, mis on ülejäänust kaugemal kui {km} km, ei märgita kunagi ise.
+Seulement les sûrs ¦ Tik tikros ¦ Tikai drošās ¦ Ainult kindlad
+Seulement les « sûrs » ¦ Tik „tikros“ ¦ Tikai “drošās” ¦ Ainult „kindlad“
+Revoir avant de placer ¦ Peržiūrėti prieš padedant ¦ Pārskatīt pirms novietošanas ¦ Vaata üle enne paigutamist
+Placer les cochés ¦ Padėti pažymėtas ¦ Novietot atzīmētās ¦ Paiguta märgitud
+Coche au moins un lieu. ¦ Pažymėk bent vieną vietą. ¦ Atzīmē vismaz vienu vietu. ¦ Märgi vähemalt üks koht.
+Placer les {n} cochés ¦ Padėti pažymėtas ({n}) ¦ Novietot atzīmētās ({n}) ¦ Paiguta märgitud ({n})
+Réglages des lieux à placer enregistrés ¦ Vietų padėjimo nustatymai įrašyti ¦ Vietu novietošanas iestatījumi saglabāti ¦ Paigutamata kohtade seaded salvestatud
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Vietos be padėties, sugrupuotos pagal tikėtiną savivaldybę: padėk jas vienu spustelėjimu ¦ Vietas bez atrašanās vietas, sagrupētas pēc iespējamās pašvaldības: novieto tās ar vienu klikšķi ¦ Asukohata kohad, rühmitatud tõenäolise valla järgi: paiguta need ühe klõpsuga
+Cochés au départ dans la revue ¦ Peržiūroje iš anksto pažymėtos ¦ Pārskatā jau sākumā atzīmētās ¦ Ülevaatuses algselt märgitud
+Les sûrs et les probables ¦ Tikros ir tikėtinos ¦ Drošās un iespējamās ¦ Kindlad ja tõenäolised
+Un lieu-dit ¦ Vietovė ¦ Vietvārds ¦ Paik
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ Vietovėje, jei ji žinoma, kitaip savivaldybės centre pažymint „apytiksliai“ ¦ Vietvārdā, ja tas zināms, citādi pašvaldības centrā ar atzīmi “aptuveni” ¦ Paika, kui see on teada, muidu valla keskele märkega „ligikaudne“
+Toujours au centre de la commune ¦ Visada savivaldybės centre ¦ Vienmēr pašvaldības centrā ¦ Alati valla keskele
+Ne pas le placer ¦ Nepadėti ¦ Nenovietot ¦ Ära paiguta
+Plusieurs communes du même nom ¦ Kelios to paties pavadinimo savivaldybės ¦ Vairākas pašvaldības ar vienādu nosaukumu ¦ Mitu samanimelist valda
+Proposer la plus proche des autres lieux, jamais cochée ¦ Siūlyti artimiausią kitoms vietoms, niekada nepažymėtą ¦ Ieteikt tuvāko citām vietām, nekad neatzīmētu ¦ Paku teistele kohtadele lähim, mitte kunagi märgituna
+Aussi les fautes proches, proposées seulement ¦ Ir artimos klaidos, tik kaip pasiūlymai ¦ Arī tuvas kļūdas, tikai kā ieteikumi ¦ Ka lähedased kirjavead, ainult ettepanekuna
+Le nom exact seulement ¦ Tik tikslus pavadinimas ¦ Tikai precīzs nosaukums ¦ Ainult täpne nimi
+Ce qui est repris ¦ Kas perkeliama ¦ Kas tiek pārņemts ¦ Mis üle võetakse
+Position, code INSEE et département ¦ Padėtis, INSEE kodas ir departamentas ¦ Atrašanās vieta, INSEE kods un departaments ¦ Asukoht, INSEE kood ja departemang
+La position seulement ¦ Tik padėtis ¦ Tikai atrašanās vieta ¦ Ainult asukoht
+Jamais : le bouton est caché ¦ Niekada: mygtukas paslėptas ¦ Nekad: poga ir paslēpta ¦ Mitte kunagi: nupp on peidus
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Vienas mygtukas „🌐 Internete…“ kiekvienai vietai, kaskart su pranešimu (niekada kartu, niekada savaime) ¦ Viena poga “🌐 Tiešsaistē…” katrai vietai, katru reizi ar ziņu (nekad kopā, nekad pati) ¦ Üks nupp „🌐 Veebis…“ koha kohta, iga kord teatega (mitte kunagi korraga, mitte kunagi ise)
+Alerte « loin du reste » ¦ Įspėjimas „toli nuo kitų“ ¦ Brīdinājums “tālu no pārējām” ¦ Hoiatus „ülejäänust kaugel“
+À partir de 200 km ¦ Nuo 200 km ¦ No 200 km ¦ Alates 200 km
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ Tas pats pavadinimas ir tas pats departamentas kaip savivaldybių sąraše: tik viena savivaldybė „{name}“. Perkeliamas centras, INSEE kodas ir departamentas. ¦ Tāds pats nosaukums un tas pats departaments kā pašvaldību sarakstā: tikai viena pašvaldība “{name}”. Tiek pārņemts centrs, INSEE kods un departaments. ¦ Sama nimi ja sama departemang nagu valdade loendis: ainult üks vald „{name}“. Üle võetakse keskpunkt, INSEE kood ja departemang.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ Tik viena savivaldybė „{name}“ Prancūzijoje, bet departamentas neparašytas. ¦ Tikai viena pašvaldība “{name}” Francijā, bet departaments nav uzrakstīts. ¦ Ainult üks vald „{name}“ Prantsusmaal, kuid departemangu pole kirjas.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ Prancūzijoje šio pavadinimo savivaldybių: {n}. Siūlomos artimiausios kitoms šių įvykių vietoms, niekada nepažymimos savaime. ¦ Francijā ir {n} pašvaldības ar šo nosaukumu. Tiek ieteiktas tuvākās citām šo notikumu vietām, nekad neatzīmētas pašas. ¦ Prantsusmaal on {n} selle nimega valda. Pakutakse nende sündmuste teistele kohtadele lähimaid, mitte kunagi ise märgituna.
+{n} communes de ce nom en France : choisis la bonne. ¦ Prancūzijoje šio pavadinimo savivaldybių: {n}. Pasirink tinkamą. ¦ Francijā ir {n} pašvaldības ar šo nosaukumu: izvēlies pareizo. ¦ Prantsusmaal on {n} selle nimega valda: vali õige.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Vietovė žinoma sąraše (GeoNames) {name} savivaldybėje. ¦ Vietvārds zināms sarakstā (GeoNames) pašvaldībā {name}. ¦ Paik on loendis (GeoNames) teada, vallas {name}.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Vietovė sąraše nežinoma: {name} centre, pažymint „apytikslė padėtis“. ¦ Vietvārds sarakstā nav zināms: {name} centrā ar atzīmi “aptuvena atrašanās vieta”. ¦ Paik on loendis tundmatu: valla {name} keskele märkega „ligikaudne asukoht“.
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Tai ne šiandieninė savivaldybė; INSEE istorija (🏛 Senosios ribos) sako: {year} m. prijungta prie {to}. ¦ Nav mūsdienu pašvaldība; INSEE vēsture (🏛 Senās robežas) saka: {year}. gadā pievienota {to}. ¦ Pole tänapäeva vald; INSEE ajalugu (🏛 Vanad piirid) ütleb: liidetud {year} vallaga {to}.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Pasaulio miestas, pateikiamas su programa, atrinktas pagal parašytą šalį ({country}). ¦ Pasaules pilsēta, kas iekļauta lietotnē, izvēlēta pēc uzrakstītās valsts ({country}). ¦ Rakendusega kaasas olev maailma linn, valitud kirjutatud riigi järgi ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Nerasta tarp šiai šaliai pateiktų pasaulio miestų ({country}). ¦ Nav atrasts starp šai valstij iekļautajām pasaules pilsētām ({country}). ¦ Selle riigi kaasas olevate maailma linnade seast ei leitud ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Tokio pavadinimo savivaldybės nėra. Siūloma panaši rašyba. Internete nieko neieškoma. ¦ Pašvaldības ar šo nosaukumu nav. Ieteikta līdzīga rakstība. Tiešsaistē nekas netiek meklēts. ¦ Selle nimega valda pole. Pakutakse sarnast kirjapilti. Veebist ei otsita midagi.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Tokio pavadinimo savivaldybės nėra. Internete nieko neieškoma. ¦ Pašvaldības ar šo nosaukumu nav. Tiešsaistē nekas netiek meklēts. ¦ Selle nimega valda pole. Veebist ei otsita midagi.
+le plus proche ¦ artimiausia ¦ tuvākā ¦ lähim
+sûr ¦ tikra ¦ droša ¦ kindel
+=proposition ¦ pasiūlymas|pasiūlymai|pasiūlymų ¦ ieteikumu|ieteikums|ieteikumi ¦ ettepanek|ettepanekut

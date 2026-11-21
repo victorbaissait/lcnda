@@ -1,0 +1,88 @@
+fr ¦ el ¦ bg
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Τόποι προς τοποθέτηση ¦ Места за поставяне
+Lieux à placer… ¦ Τόποι προς τοποθέτηση… ¦ Места за поставяне…
+Placer… ¦ Τοποθέτηση… ¦ Постави…
+Les placer ¦ Τοποθέτησέ τους ¦ Постави ги
+Rien n’est pris tant que tu ne cliques pas. ¦ Τίποτα δεν λαμβάνεται μέχρι να κάνεις κλικ. ¦ Нищо не се взема, докато не щракнеш.
+Revoir et placer en lot… ¦ Έλεγχος και ομαδική τοποθέτηση… ¦ Прегледай и постави наведнъж…
+Seulement les lieux de cette carte ({n}). ¦ Μόνο οι τόποι αυτού του χάρτη ({n}). ¦ Само местата от тази карта ({n}).
+Voir tous les lieux à placer ¦ Δες όλους τους τόπους προς τοποθέτηση ¦ Виж всички места за поставяне
+Lecture des lieux… ¦ Ανάγνωση τόπων… ¦ Четене на местата…
+Chercher un lieu… ¦ Αναζήτηση τόπου… ¦ Търси място…
+De A à Z ¦ Από Α έως Ω ¦ От А до Я
+Le plus loin du reste ¦ Πιο μακριά από τα υπόλοιπα ¦ Най-далеч от останалите
+{a} · {b} concernés ¦ {a} · αφορά: {b} ¦ {a} · засегнати: {b}
+Aucun lieu pour ce choix. ¦ Κανένας τόπος για αυτή την επιλογή. ¦ Няма места за този избор.
+Tous les lieux de ta base ont une position. ¦ Όλοι οι τόποι της βάσης σου έχουν θέση. ¦ Всички места в базата ти имат позиция.
+à {km} km du reste ¦ {km} χλμ. από τα υπόλοιπα ¦ на {km} км от останалите
+Placer ici ¦ Τοποθέτηση εδώ ¦ Постави тук
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ {km} χλμ. από τους άλλους τόπους αυτών των γεγονότων: έλεγξε πριν την τοποθέτηση. ¦ На {km} км от другите места на тези събития: провери, преди да поставиш.
+Placer les {n} ensemble ¦ Τοποθέτηση και των {n} μαζί ¦ Постави всичките {n} заедно
+Pas un lieu ¦ Δεν είναι τόπος ¦ Не е място
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ Οι πρώτοι 300· αναζήτησε ένα όνομα για να δεις τους υπόλοιπους. ¦ Първите 300; потърси име, за да видиш останалите.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ Τοποθετήθηκαν: {a} ({b}) · εμφανίζονται σε όλους τους χάρτες ¦ Поставени: {a} ({b}) · виждат се на всички карти
+{name} placé ({n}) · {where} ¦ Τοποθετήθηκε: {name} ({n}) · {where} ¦ {name} е поставено ({n}) · {where}
+{name} placé ({a}, {b}) ¦ Τοποθετήθηκε: {name} ({a}, {b}) ¦ {name} е поставено ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ «{name}» παραμερίστηκε (δεν είναι τόπος) ¦ „{name}“ е оставено настрана (не е място)
+« {name} » remis dans la liste ¦ «{name}» επέστρεψε στη λίστα ¦ „{name}“ е върнато в списъка
+LOIN DU RESTE ¦ ΜΑΚΡΙΑ ΑΠΟ ΤΑ ΥΠΟΛΟΙΠΑ ¦ ДАЛЕЧ ОТ ОСТАНАЛИТЕ
+Placer « {name} » si loin ? ¦ Να τοποθετηθεί ο τόπος «{name}» τόσο μακριά; ¦ Да поставиш „{name}“ толкова далеч?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ Ο τόπος «{where}» απέχει {km} χλμ. από τους άλλους τόπους αυτών των γεγονότων. Συχνά είναι συνώνυμος τόπος. ¦ „{where}“ е на {km} км от другите места на тези събития. Често е само съименник.
+Placer quand même ¦ Τοποθέτηση παρ’ όλα αυτά ¦ Постави въпреки това
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Κάνε κλικ στον χάρτη στο σημείο του «{name}» (Esc για ακύρωση). ¦ Щракни върху картата на мястото на „{name}“ (Esc за отказ).
+{name} placé à la main (position approchée) ¦ {name}: τοποθέτηση με το χέρι (κατά προσέγγιση θέση) ¦ {name} е поставено ръчно (приблизителна позиция)
+Pas de réseau : rien n’a été envoyé. ¦ Χωρίς δίκτυο: δεν στάλθηκε τίποτα. ¦ Няма мрежа: нищо не е изпратено.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Η διαδικτυακή υπηρεσία δεν βρήκε τίποτα για «{name}». ¦ Онлайн услугата не намери нищо за „{name}“.
+{n} de plus pour « {name} » : à toi de choisir. ¦ Ακόμα {n} για «{name}»: εσύ διαλέγεις. ¦ Още {n} за „{name}“: ти избираш.
+EN LIGNE ¦ ΔΙΑΔΙΚΤΥΑΚΑ ¦ ОНЛАЙН
+En ligne… ¦ Διαδικτυακά… ¦ Онлайн…
+Chercher « {name} » en ligne ? ¦ Αναζήτηση του «{name}» διαδικτυακά; ¦ Да търсиш „{name}“ онлайн?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ Στην υπηρεσία αναζήτησης διευθύνσεων του IGN (Géoplateforme) στέλνεται μόνο το όνομα του τόπου «{name}». Κανένα όνομα προσώπου, καμία ημερομηνία. ¦ До услугата за търсене на адреси на IGN (Géoplateforme) се изпраща само името на мястото „{name}“. Никакви имена на хора, никакви дати.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Η απάντηση είναι μία ακόμα πρόταση στη λίστα· την επιλέγεις ή όχι. Χωρίς ίντερνετ: «Χωρίς δίκτυο: δεν στάλθηκε τίποτα». ¦ Отговорът е още едно предложение в списъка; избираш го или не. Без интернет: „Няма мрежа: нищо не е изпратено“.
+Ne plus me demander pour cette séance ¦ Μη με ξαναρωτήσεις σε αυτή τη συνεδρία ¦ Не питай отново в тази сесия
+Lieu tapé ¦ Τόπος όπως γράφτηκε ¦ Въведено място
+Pourquoi ¦ Γιατί ¦ Защо
+Distance au reste ¦ Απόσταση από τα υπόλοιπα ¦ Разстояние до останалите
+Év. ¦ Γεγ. ¦ Съб.
+{n} km ¦ {n} χλμ. ¦ {n} км
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ Τα «δεν βρέθηκε τίποτα» δεν είναι στον έλεγχο. Ένας τόπος πάνω από {km} χλμ. από τα υπόλοιπα δεν σημειώνεται ποτέ μόνος του. ¦ „Нищо не е намерено“ не са в прегледа. Място на повече от {km} км от останалите никога не се отмята само.
+Seulement les sûrs ¦ Μόνο τα σίγουρα ¦ Само сигурните
+Seulement les « sûrs » ¦ Μόνο τα «σίγουρα» ¦ Само „сигурните“
+Revoir avant de placer ¦ Έλεγχος πριν την τοποθέτηση ¦ Прегледай, преди да поставиш
+Placer les cochés ¦ Τοποθέτηση των επιλεγμένων ¦ Постави отметнатите
+Coche au moins un lieu. ¦ Σημείωσε τουλάχιστον έναν τόπο. ¦ Отметни поне едно място.
+Placer les {n} cochés ¦ Τοποθέτηση των {n} επιλεγμένων ¦ Постави отметнатите ({n})
+Réglages des lieux à placer enregistrés ¦ Οι ρυθμίσεις των τόπων προς τοποθέτηση αποθηκεύτηκαν ¦ Настройките на местата за поставяне са запазени
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Τόποι χωρίς θέση, ομαδοποιημένοι κατά πιθανό δήμο: τοποθέτησέ τους με ένα κλικ ¦ Места без позиция, групирани по вероятна община: постави ги с едно щракване
+Cochés au départ dans la revue ¦ Σημειωμένα από την αρχή στον έλεγχο ¦ Отметнати от самото начало в прегледа
+Les sûrs et les probables ¦ Τα σίγουρα και τα πιθανά ¦ Сигурните и вероятните
+Un lieu-dit ¦ Μια τοποθεσία ¦ Местност
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ Στην τοποθεσία αν είναι γνωστή, αλλιώς στο κέντρο του δήμου με την ένδειξη «κατά προσέγγιση» ¦ В местността, ако е известна, иначе в центъра на общината с отметка „приблизително“
+Toujours au centre de la commune ¦ Πάντα στο κέντρο του δήμου ¦ Винаги в центъра на общината
+Ne pas le placer ¦ Να μην τοποθετηθεί ¦ Не го поставяй
+Plusieurs communes du même nom ¦ Πολλοί δήμοι με το ίδιο όνομα ¦ Няколко общини с едно и също име
+Proposer la plus proche des autres lieux, jamais cochée ¦ Πρότεινε τον πλησιέστερο στους άλλους τόπους, ποτέ σημειωμένο ¦ Предлагай най-близката до другите места, никога отметната
+Aussi les fautes proches, proposées seulement ¦ Και κοντινά ορθογραφικά λάθη, μόνο ως πρόταση ¦ И близки грешки, само като предложение
+Le nom exact seulement ¦ Μόνο το ακριβές όνομα ¦ Само точното име
+Ce qui est repris ¦ Τι μεταφέρεται ¦ Какво се взема
+Position, code INSEE et département ¦ Θέση, κωδικός INSEE και νομός ¦ Позиция, код INSEE и департамент
+La position seulement ¦ Μόνο η θέση ¦ Само позицията
+Jamais : le bouton est caché ¦ Ποτέ: το κουμπί είναι κρυφό ¦ Никога: бутонът е скрит
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Ένα κουμπί «🌐 Διαδικτυακά…» ανά τόπο, με το μήνυμα κάθε φορά (ποτέ ομαδικά, ποτέ από μόνο του) ¦ Един бутон „🌐 Онлайн…“ за всяко място, всеки път със съобщението (никога наведнъж, никога сам)
+Alerte « loin du reste » ¦ Ειδοποίηση «μακριά από τα υπόλοιπα» ¦ Предупреждение „далеч от останалите“
+À partir de 200 km ¦ Από 200 χλμ. ¦ От 200 км
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ Ίδιο όνομα και ίδιος νομός όπως στο μητρώο των δήμων: ένας μόνο δήμος «{name}». Μεταφέρονται το κέντρο, ο κωδικός INSEE και ο νομός. ¦ Същото име и същият департамент като в регистъра на общините: само една община „{name}“. Вземат се центърът, кодът INSEE и департаментът.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ Ένας μόνο δήμος «{name}» στη Γαλλία, αλλά δεν γράφεται νομός. ¦ Само една община „{name}“ във Франция, но без написан департамент.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ {n} δήμοι με αυτό το όνομα στη Γαλλία. Προτείνονται οι πλησιέστεροι στους άλλους τόπους αυτών των γεγονότων, ποτέ σημειωμένοι από μόνοι τους. ¦ Общини с това име във Франция: {n}. Предлагат се най-близките до другите места на тези събития, никога не се отмятат сами.
+{n} communes de ce nom en France : choisis la bonne. ¦ {n} δήμοι με αυτό το όνομα στη Γαλλία: διάλεξε τον σωστό. ¦ Общини с това име във Франция: {n}. Избери правилната.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Τοποθεσία γνωστή στο μητρώο (GeoNames) στον δήμο {name}. ¦ Местността е известна в регистъра (GeoNames) в община {name}.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Τοποθεσία άγνωστη στο μητρώο: στο κέντρο του δήμου {name}, με την ένδειξη «κατά προσέγγιση θέση». ¦ Местността не е в регистъра: в центъра на {name}, с отметка „приблизителна позиция“.
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Δεν είναι σημερινός δήμος· το ιστορικό του INSEE (🏛 Παλιά σύνορα) λέει: ενώθηκε με τον δήμο {to} το {year}. ¦ Не е днешна община; историята на INSEE (🏛 Стари граници) казва: присъединена към {to} през {year}.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Πόλη του κόσμου που συνοδεύει την εφαρμογή, επιλεγμένη με βάση τη χώρα που γράφτηκε ({country}). ¦ Град от света, доставен с приложението, избран по написаната държава ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Δεν βρέθηκε ανάμεσα στις πόλεις του κόσμου που συνοδεύουν αυτή τη χώρα ({country}). ¦ Не е намерено сред доставените градове от света за тази държава ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Δεν υπάρχει δήμος με αυτό το όνομα. Προτείνεται κοντινή ορθογραφία. Τίποτα δεν αναζητείται διαδικτυακά. ¦ Няма община с това име. Предложен е близък правопис. Нищо не се търси онлайн.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Δεν υπάρχει δήμος με αυτό το όνομα. Τίποτα δεν αναζητείται διαδικτυακά. ¦ Няма община с това име. Нищо не се търси онлайн.
+le plus proche ¦ ο πλησιέστερος ¦ най-близката
+sûr ¦ σίγουρο ¦ сигурно
+=proposition ¦ πρόταση|προτάσεις ¦ предложение|предложения

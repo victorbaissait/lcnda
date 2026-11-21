@@ -1,0 +1,88 @@
+fr ¦ cs ¦ sv ¦ da
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Místa k umístění ¦ Platser att placera ¦ Steder at placere
+Lieux à placer… ¦ Místa k umístění… ¦ Platser att placera… ¦ Steder at placere…
+Placer… ¦ Umístit… ¦ Placera… ¦ Placér…
+Les placer ¦ Umístit je ¦ Placera dem ¦ Placér dem
+Rien n’est pris tant que tu ne cliques pas. ¦ Nic se nevezme, dokud neklikneš. ¦ Inget hämtas förrän du klickar. ¦ Intet hentes, før du klikker.
+Revoir et placer en lot… ¦ Zkontrolovat a umístit hromadně… ¦ Granska och placera i omgång… ¦ Gennemse og placér samlet…
+Seulement les lieux de cette carte ({n}). ¦ Jen místa této mapy ({n}). ¦ Bara platserna på den här kartan ({n}). ¦ Kun stederne på dette kort ({n}).
+Voir tous les lieux à placer ¦ Zobrazit všechna místa k umístění ¦ Visa alla platser att placera ¦ Vis alle steder at placere
+Lecture des lieux… ¦ Načítání míst… ¦ Läser platserna… ¦ Læser stederne…
+Chercher un lieu… ¦ Hledat místo… ¦ Sök en plats… ¦ Søg efter et sted…
+De A à Z ¦ Od A do Z ¦ A till Ö ¦ A til Å
+Le plus loin du reste ¦ Nejdál od ostatních ¦ Längst från resten ¦ Længst fra resten
+{a} · {b} concernés ¦ {a} · dotčeno: {b} ¦ {a} · {b} berörda ¦ {a} · {b} berørt
+Aucun lieu pour ce choix. ¦ Pro tento výběr žádné místo. ¦ Ingen plats för det här valet. ¦ Intet sted til dette valg.
+Tous les lieux de ta base ont une position. ¦ Všechna místa v tvé databázi mají polohu. ¦ Alla platser i din databas har en position. ¦ Alle steder i din database har en position.
+à {km} km du reste ¦ {km} km od ostatních ¦ {km} km från resten ¦ {km} km fra resten
+Placer ici ¦ Umístit sem ¦ Placera här ¦ Placér her
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ {km} km od ostatních míst těchto událostí: ověř si to před umístěním. ¦ {km} km från de andra platserna för dessa händelser: kontrollera innan du placerar. ¦ {km} km fra de andre steder for disse begivenheder: kontrollér før du placerer.
+Placer les {n} ensemble ¦ Umístit těchto {n} společně ¦ Placera de {n} tillsammans ¦ Placér de {n} sammen
+Pas un lieu ¦ Není místo ¦ Inte en plats ¦ Ikke et sted
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ Prvních 300; vyhledej název a uvidíš ostatní. ¦ De första 300; sök ett namn för att se de andra. ¦ De første 300; søg efter et navn for at se de andre.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ Umístěno: {a} ({b}) · objeví se na všech mapách ¦ {a} placerade ({b}) · de syns på alla kartor ¦ {a} placeret ({b}) · de vises på alle kort
+{name} placé ({n}) · {where} ¦ {name} umístěno ({n}) · {where} ¦ {name} placerad ({n}) · {where} ¦ {name} placeret ({n}) · {where}
+{name} placé ({a}, {b}) ¦ {name} umístěno ({a}, {b}) ¦ {name} placerad ({a}, {b}) ¦ {name} placeret ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ „{name}“ odloženo (není místo) ¦ ”{name}” lagd åt sidan (inte en plats) ¦ »{name}« lagt til side (ikke et sted)
+« {name} » remis dans la liste ¦ „{name}“ vráceno do seznamu ¦ ”{name}” tillbaka i listan ¦ »{name}« tilbage på listen
+LOIN DU RESTE ¦ DALEKO OD OSTATNÍCH ¦ LÅNGT FRÅN RESTEN ¦ LANGT FRA RESTEN
+Placer « {name} » si loin ? ¦ Umístit „{name}“ tak daleko? ¦ Placera ”{name}” så långt bort? ¦ Placere »{name}« så langt væk?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ „{where}“ je {km} km od ostatních míst těchto událostí. Často jde o stejnojmenné místo. ¦ ”{where}” ligger {km} km från de andra platserna för dessa händelser. Ofta är det en namne. ¦ »{where}« ligger {km} km fra de andre steder for disse begivenheder. Det er ofte en navnebror.
+Placer quand même ¦ Přesto umístit ¦ Placera ändå ¦ Placér alligevel
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Klikni na mapě na místo „{name}“ (Esc pro zrušení). ¦ Klicka på kartan där ”{name}” ligger (Esc för att avbryta). ¦ Klik på kortet, hvor »{name}« ligger (Esc for at lade være).
+{name} placé à la main (position approchée) ¦ {name} umístěno ručně (přibližná poloha) ¦ {name} placerad för hand (ungefärlig position) ¦ {name} placeret i hånden (omtrentlig position)
+Pas de réseau : rien n’a été envoyé. ¦ Žádná síť: nic nebylo odesláno. ¦ Inget nätverk: inget skickades. ¦ Intet netværk: intet blev sendt.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Online služba pro „{name}“ nic nenašla. ¦ Onlinetjänsten hittade inget för ”{name}”. ¦ Onlinetjenesten fandt intet for »{name}«.
+{n} de plus pour « {name} » : à toi de choisir. ¦ {n} navíc pro „{name}“: vyber si. ¦ {n} till för ”{name}”: du väljer. ¦ {n} mere for »{name}«: du vælger.
+EN LIGNE ¦ ONLINE ¦ ONLINE ¦ ONLINE
+En ligne… ¦ Online… ¦ Online… ¦ Online…
+Chercher « {name} » en ligne ? ¦ Hledat „{name}“ online? ¦ Söka ”{name}” online? ¦ Søge efter »{name}« online?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ Službě vyhledávání adres IGN (Géoplateforme) se pošle jen název místa „{name}“. Žádné jméno osoby, žádné datum. ¦ Bara platsnamnet ”{name}” skickas till IGN:s adresstjänst (Géoplateforme). Inget personnamn, inget datum. ¦ Kun stednavnet »{name}« sendes til IGN’s adressesøgning (Géoplateforme). Intet personnavn, ingen dato.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Odpověď je další návrh v seznamu; vybereš si ho, nebo ne. Bez internetu: „Žádná síť: nic nebylo odesláno“. ¦ Svaret är ett förslag till i listan; du väljer det eller inte. Utan internet: ”Inget nätverk: inget skickades”. ¦ Svaret er et forslag mere på listen; du vælger det eller ej. Uden internet: »Intet netværk: intet blev sendt«.
+Ne plus me demander pour cette séance ¦ V této relaci se už neptat ¦ Fråga inte igen under den här sessionen ¦ Spørg ikke igen i denne session
+Lieu tapé ¦ Zapsané místo ¦ Inskriven plats ¦ Indtastet sted
+Pourquoi ¦ Proč ¦ Varför ¦ Hvorfor
+Distance au reste ¦ Vzdálenost od ostatních ¦ Avstånd till resten ¦ Afstand til resten
+Év. ¦ Udál. ¦ Händ. ¦ Beg.
+{n} km ¦ {n} km ¦ {n} km ¦ {n} km
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ Položky „nic nenalezeno“ v kontrole nejsou. Místo dál než {km} km od ostatních se nikdy samo nezaškrtne. ¦ ”Inget hittat” finns inte i granskningen. En plats mer än {km} km från resten kryssas aldrig i av sig själv. ¦ »Intet fundet« er ikke med i gennemgangen. Et sted mere end {km} km fra resten bliver aldrig sat flueben ved af sig selv.
+Seulement les sûrs ¦ Jen jisté ¦ Bara de säkra ¦ Kun de sikre
+Seulement les « sûrs » ¦ Jen „jisté“ ¦ Bara de ”säkra” ¦ Kun de »sikre«
+Revoir avant de placer ¦ Zkontrolovat před umístěním ¦ Granska innan du placerar ¦ Gennemse før placering
+Placer les cochés ¦ Umístit zaškrtnuté ¦ Placera de markerade ¦ Placér de markerede
+Coche au moins un lieu. ¦ Zaškrtni aspoň jedno místo. ¦ Markera minst en plats. ¦ Markér mindst ét sted.
+Placer les {n} cochés ¦ Umístit zaškrtnuté ({n}) ¦ Placera de {n} markerade ¦ Placér de {n} markerede
+Réglages des lieux à placer enregistrés ¦ Nastavení míst k umístění uloženo ¦ Inställningar för platser att placera sparade ¦ Indstillinger for steder at placere gemt
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Místa bez polohy seskupená podle pravděpodobné obce: umísti je jedním kliknutím ¦ Platser utan position, grupperade efter trolig kommun: placera dem med ett klick ¦ Steder uden position, grupperet efter sandsynlig kommune: placér dem med ét klik
+Cochés au départ dans la revue ¦ Předem zaškrtnuté v kontrole ¦ Förmarkerade i granskningen ¦ Markeret fra start i gennemgangen
+Les sûrs et les probables ¦ Jisté a pravděpodobné ¦ De säkra och de troliga ¦ De sikre og de sandsynlige
+Un lieu-dit ¦ Místní část ¦ En by eller gård ¦ En lokalitet
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ Na místní části, pokud je známá, jinak ve středu obce s označením „přibližně“ ¦ Vid orten om den är känd, annars i kommunens mitt markerad ”ungefärlig” ¦ Ved lokaliteten, hvis den kendes, ellers midt i kommunen markeret »omtrentlig«
+Toujours au centre de la commune ¦ Vždy ve středu obce ¦ Alltid i kommunens mitt ¦ Altid midt i kommunen
+Ne pas le placer ¦ Neumisťovat ¦ Placera inte ¦ Placér det ikke
+Plusieurs communes du même nom ¦ Několik obcí stejného jména ¦ Flera kommuner med samma namn ¦ Flere kommuner med samme navn
+Proposer la plus proche des autres lieux, jamais cochée ¦ Navrhnout tu nejbližší ostatním místům, nikdy nezaškrtnutou ¦ Föreslå den som ligger närmast de andra platserna, aldrig markerad ¦ Foreslå den nærmeste ved de andre steder, aldrig markeret
+Aussi les fautes proches, proposées seulement ¦ I blízké překlepy, jen jako návrh ¦ Även närliggande felstavningar, bara som förslag ¦ Også tætte stavefejl, kun som forslag
+Le nom exact seulement ¦ Jen přesný název ¦ Bara det exakta namnet ¦ Kun det præcise navn
+Ce qui est repris ¦ Co se převezme ¦ Vad som tas över ¦ Hvad der overtages
+Position, code INSEE et département ¦ Poloha, kód INSEE a departement ¦ Position, INSEE-kod och departement ¦ Position, INSEE-kode og departement
+La position seulement ¦ Jen poloha ¦ Bara positionen ¦ Kun positionen
+Jamais : le bouton est caché ¦ Nikdy: tlačítko je skryté ¦ Aldrig: knappen är dold ¦ Aldrig: knappen er skjult
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Jedno tlačítko „🌐 Online…“ na místo, pokaždé se zprávou (nikdy hromadně, nikdy samo) ¦ En knapp ”🌐 Online…” per plats, med meddelandet varje gång (aldrig i omgång, aldrig av sig själv) ¦ Én knap »🌐 Online…« pr. sted, med beskeden hver gang (aldrig samlet, aldrig af sig selv)
+Alerte « loin du reste » ¦ Upozornění „daleko od ostatních“ ¦ Varning ”långt från resten” ¦ Advarsel »langt fra resten«
+À partir de 200 km ¦ Od 200 km ¦ Från 200 km ¦ Fra 200 km
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ Stejný název a stejný departement jako v seznamu obcí: jediná obec „{name}“. Převezme se střed, kód INSEE a departement. ¦ Samma namn och samma departement som i kommunregistret: en enda kommun ”{name}”. Mitten, INSEE-koden och departementet tas över. ¦ Samme navn og samme departement som i kommunefortegnelsen: én eneste kommune »{name}«. Midten, INSEE-koden og departementet overtages.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ Jediná obec „{name}“ ve Francii, ale bez zapsaného departementu. ¦ En enda kommun ”{name}” i Frankrike, men inget departement angivet. ¦ Én eneste kommune »{name}« i Frankrig, men intet departement skrevet.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ Obcí tohoto jména ve Francii: {n}. Navrhují se ty nejbližší ostatním místům těchto událostí, nikdy se samy nezaškrtnou. ¦ {n} kommuner med detta namn i Frankrike. De som ligger närmast de andra platserna för dessa händelser föreslås, aldrig markerade av sig själva. ¦ {n} kommuner med dette navn i Frankrig. De nærmeste ved de andre steder for disse begivenheder foreslås, aldrig markeret af sig selv.
+{n} communes de ce nom en France : choisis la bonne. ¦ Obcí tohoto jména ve Francii: {n}. Vyber tu správnou. ¦ {n} kommuner med detta namn i Frankrike: välj rätt. ¦ {n} kommuner med dette navn i Frankrig: vælg den rigtige.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Místní část známá v seznamu (GeoNames) v obci {name}. ¦ Orten finns i registret (GeoNames) i kommunen {name}. ¦ Lokaliteten findes i fortegnelsen (GeoNames) i kommunen {name}.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Místní část v seznamu neznámá: ve středu obce {name}, s označením „přibližná poloha“. ¦ Orten saknas i registret: i mitten av {name}, markerad ”ungefärlig position”. ¦ Lokaliteten er ukendt i fortegnelsen: midt i {name}, markeret »omtrentlig position«.
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Není to dnešní obec; historie INSEE (🏛 Staré hranice) říká: v roce {year} sloučena s {to}. ¦ Inte en kommun i dag; INSEE-historiken (🏛 Gamla gränser) säger: sammanslagen med {to} {year}. ¦ Ikke en nutidig kommune; INSEE-historikken (🏛 Gamle grænser) siger: lagt sammen med {to} i {year}.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Město světa dodané s aplikací, rozhodnuto podle zapsané země ({country}). ¦ Världsstad som följer med appen, avgjord efter angivet land ({country}). ¦ Verdensby, der følger med appen, afgjort efter det skrevne land ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Nenalezeno mezi dodanými městy světa pro tuto zemi ({country}). ¦ Hittades inte bland de medföljande världsstäderna för detta land ({country}). ¦ Ikke fundet blandt de medfølgende verdensbyer for dette land ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Obec tohoto jména neexistuje. Navrhuje se podobný zápis. Nic se nehledá online. ¦ Ingen kommun med detta namn. En liknande stavning föreslås. Inget söks online. ¦ Ingen kommune med dette navn. En lignende stavemåde foreslås. Intet søges online.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Obec tohoto jména neexistuje. Nic se nehledá online. ¦ Ingen kommun med detta namn. Inget söks online. ¦ Ingen kommune med dette navn. Intet søges online.
+le plus proche ¦ nejbližší ¦ den närmaste ¦ den nærmeste
+sûr ¦ jisté ¦ säker ¦ sikker
+=proposition ¦ návrh|návrhy|návrhů ¦ förslag|förslag ¦ forslag|forslag

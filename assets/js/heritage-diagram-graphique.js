@@ -142,7 +142,7 @@
         dplpar: DPL_SCOPE, dplstep: DPL_SCOPE,
         quarters: [['8 quartiers (arrière-grands-parents)', {'[data-dla="gens"]': '3'}], ['16 quartiers', {'[data-dla="gens"]': '4'}], ['32 quartiers', {'[data-dla="gens"]': '5'}]],
     };
-    const GO = '[data-gn-go], [data-n6-go], [data-dm-go], [data-dfa-go], [data-dgm-go], [data-c2-go], [data-dac-go], [data-cp-go], [data-lotc-go], [data-dpl-go], [data-dla-go]';
+    const GO = '[data-gn-go], [data-n6-go], [data-dm-go], [data-dfa-go], [data-dgm-go], [data-c2-go], [data-dac-go], [data-cp-go], [data-lotc-go], [data-dpl-go], [data-dla-go], [data-cq-go]';
 
     /** les valeurs à poser : une fonction est appelée (personnes calculées) */
     const fire = el => { el.dispatchEvent(new Event('input', {bubbles: true})); el.dispatchEvent(new Event('change', {bubbles: true})); };

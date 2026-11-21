@@ -1,0 +1,88 @@
+fr ¦ is
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Staðir til að staðsetja
+Lieux à placer… ¦ Staðir til að staðsetja…
+Placer… ¦ Staðsetja…
+Les placer ¦ Staðsetja þá
+Rien n’est pris tant que tu ne cliques pas. ¦ Ekkert er sótt fyrr en þú smellir.
+Revoir et placer en lot… ¦ Fara yfir og staðsetja í einu…
+Seulement les lieux de cette carte ({n}). ¦ Aðeins staðir þessa korts ({n}).
+Voir tous les lieux à placer ¦ Sjá alla staði til að staðsetja
+Lecture des lieux… ¦ Les staði…
+Chercher un lieu… ¦ Leita að stað…
+De A à Z ¦ A til Ö
+Le plus loin du reste ¦ Lengst frá hinum
+{a} · {b} concernés ¦ {a} · {b} snerta
+Aucun lieu pour ce choix. ¦ Enginn staður fyrir þetta val.
+Tous les lieux de ta base ont une position. ¦ Allir staðir í grunninum þínum hafa staðsetningu.
+à {km} km du reste ¦ {km} km frá hinum
+Placer ici ¦ Staðsetja hér
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ {km} km frá öðrum stöðum þessara atburða: athugaðu áður en þú staðsetur.
+Placer les {n} ensemble ¦ Staðsetja þessa {n} saman
+Pas un lieu ¦ Ekki staður
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ Fyrstu 300; leitaðu að nafni til að sjá hina.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ {a} staðsettir ({b}) · þeir birtast á öllum kortum
+{name} placé ({n}) · {where} ¦ {name} staðsettur ({n}) · {where}
+{name} placé ({a}, {b}) ¦ {name} staðsettur ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ „{name}“ lagt til hliðar (ekki staður)
+« {name} » remis dans la liste ¦ „{name}“ aftur á listanum
+LOIN DU RESTE ¦ LANGT FRÁ HINUM
+Placer « {name} » si loin ? ¦ Staðsetja „{name}“ svona langt í burtu?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ „{where}“ er {km} km frá öðrum stöðum þessara atburða. Oft er það nafni.
+Placer quand même ¦ Staðsetja samt
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Smelltu á kortið þar sem „{name}“ er (Esc til að hætta við).
+{name} placé à la main (position approchée) ¦ {name} staðsettur handvirkt (áætluð staðsetning)
+Pas de réseau : rien n’a été envoyé. ¦ Ekkert net: ekkert var sent.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Netþjónustan fann ekkert fyrir „{name}“.
+{n} de plus pour « {name} » : à toi de choisir. ¦ {n} til viðbótar fyrir „{name}“: þú velur.
+EN LIGNE ¦ Á NETINU
+En ligne… ¦ Á netinu…
+Chercher « {name} » en ligne ? ¦ Leita að „{name}“ á netinu?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ Aðeins staðarheitið „{name}“ er sent til heimilisfangaleitar IGN (Géoplateforme). Ekkert mannsnafn, engin dagsetning.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Svarið er ein tillaga í viðbót á listanum; þú velur hana eða ekki. Án nets: „Ekkert net: ekkert var sent“.
+Ne plus me demander pour cette séance ¦ Ekki spyrja aftur á þessari lotu
+Lieu tapé ¦ Skráður staður
+Pourquoi ¦ Hvers vegna
+Distance au reste ¦ Fjarlægð frá hinum
+Év. ¦ Atb.
+{n} km ¦ {n} km
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ „Ekkert fannst“ er ekki í yfirferðinni. Staður meira en {km} km frá hinum er aldrei hakaður við sjálfkrafa.
+Seulement les sûrs ¦ Aðeins þeir öruggu
+Seulement les « sûrs » ¦ Aðeins „öruggir“
+Revoir avant de placer ¦ Fara yfir áður en staðsett er
+Placer les cochés ¦ Staðsetja hakaða
+Coche au moins un lieu. ¦ Hakaðu við að minnsta kosti einn stað.
+Placer les {n} cochés ¦ Staðsetja {n} hakaða
+Réglages des lieux à placer enregistrés ¦ Stillingar staða til að staðsetja vistaðar
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Staðir án staðsetningar, flokkaðir eftir líklegu sveitarfélagi: staðsettu þá með einum smelli
+Cochés au départ dans la revue ¦ Hakaðir í upphafi yfirferðar
+Les sûrs et les probables ¦ Þeir öruggu og þeir líklegu
+Un lieu-dit ¦ Örnefni
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ Á örnefnið ef það er þekkt, annars í miðju sveitarfélagsins merkt „áætlað“
+Toujours au centre de la commune ¦ Alltaf í miðju sveitarfélagsins
+Ne pas le placer ¦ Ekki staðsetja
+Plusieurs communes du même nom ¦ Nokkur sveitarfélög með sama nafni
+Proposer la plus proche des autres lieux, jamais cochée ¦ Stinga upp á þeim næsta hinum stöðunum, aldrei hakað
+Aussi les fautes proches, proposées seulement ¦ Líka nálægar villur, aðeins sem tillögur
+Le nom exact seulement ¦ Aðeins nákvæmt nafn
+Ce qui est repris ¦ Hvað er tekið
+Position, code INSEE et département ¦ Staðsetning, INSEE-númer og sýsla
+La position seulement ¦ Aðeins staðsetningin
+Jamais : le bouton est caché ¦ Aldrei: hnappurinn er falinn
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Einn hnappur „🌐 Á netinu…“ á hvern stað, með skilaboðunum í hvert sinn (aldrei í einu, aldrei sjálfkrafa)
+Alerte « loin du reste » ¦ Viðvörun „langt frá hinum“
+À partir de 200 km ¦ Frá 200 km
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ Sama nafn og sama sýsla og í sveitarfélagaskránni: aðeins eitt sveitarfélag „{name}“. Miðja, INSEE-númer og sýsla eru tekin.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ Aðeins eitt sveitarfélag „{name}“ í Frakklandi, en engin sýsla skrifuð.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ {n} sveitarfélög með þessu nafni í Frakklandi. Þau sem eru næst öðrum stöðum þessara atburða eru stungin upp á, aldrei hökuð við sjálfkrafa.
+{n} communes de ce nom en France : choisis la bonne. ¦ {n} sveitarfélög með þessu nafni í Frakklandi: veldu það rétta.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Örnefnið er þekkt í skránni (GeoNames) í sveitarfélaginu {name}.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Örnefnið er óþekkt í skránni: í miðju {name}, merkt „áætluð staðsetning“.
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Ekki núverandi sveitarfélag; saga INSEE (🏛 Gömul landamæri) segir: sameinað {to} árið {year}.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Borg í heiminum sem fylgir forritinu, valin eftir skrifuðu landi ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Fannst ekki meðal meðfylgjandi borga heimsins fyrir þetta land ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Ekkert sveitarfélag með þessu nafni. Lík stafsetning er stungin upp á. Ekkert er leitað á netinu.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Ekkert sveitarfélag með þessu nafni. Ekkert er leitað á netinu.
+le plus proche ¦ sá næsti
+sûr ¦ öruggur
+=proposition ¦ tillaga|tillögur
