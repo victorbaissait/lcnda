@@ -133,20 +133,20 @@ const fake = http.createServer((req, res) => {
 
         /* ─── 2a. lecture approfondie ─── */
         out.st0 = (await get('tx_deep_status')).body;
-        out.readBefore = await post('tx_deep_read', { model: 'qwen3-vl:8b', image_b64: pngRGB(40, 30, new Uint8ClampedArray(40 * 30 * 4).fill(220)).toString('base64') });
+        out.readBefore = await post('tx_deep_read', { model: 'qwen3-vl:8b-instruct', image_b64: pngRGB(40, 30, new Uint8ClampedArray(40 * 30 * 4).fill(220)).toString('base64') });
         out.pullBad = await post('tx_deep_pull', { model: 'llama3:70b; rm -rf /' });
-        const pull = await post('tx_deep_pull', { model: 'qwen3-vl:8b' }); out.pull = pull;
+        const pull = await post('tx_deep_pull', { model: 'qwen3-vl:8b-instruct' }); out.pull = pull;
         const seen = []; let j = {};
         for (let i = 0; i < 80; i++) { j = (await get('tx_deep_job', `id=${pull.body.result?.id}`)).body; if (j.state === 'running' && j.total) seen.push(Math.round(j.completed / j.total * 100)); if (j.state !== 'running') break; await sleep(150); }
         out.pullEnd = j; out.pullSeen = seen;
         out.st1 = (await get('tx_deep_status')).body;
-        out.readGarbage = await post('tx_deep_read', { model: 'qwen3-vl:8b', image_b64: Buffer.from('<?php echo 1; ?>').toString('base64') });
-        const rd = await post('tx_deep_read', { model: 'qwen3-vl:8b', language: 'fra', image_b64: pngRGB(60, 40, new Uint8ClampedArray(60 * 40 * 4).fill(225)).toString('base64') });
+        out.readGarbage = await post('tx_deep_read', { model: 'qwen3-vl:8b-instruct', image_b64: Buffer.from('<?php echo 1; ?>').toString('base64') });
+        const rd = await post('tx_deep_read', { model: 'qwen3-vl:8b-instruct', language: 'fra', image_b64: pngRGB(60, 40, new Uint8ClampedArray(60 * 40 * 4).fill(225)).toString('base64') });
         for (let i = 0; i < 80; i++) { j = (await get('tx_deep_job', `id=${rd.body.result?.id}`)).body; if (j.state !== 'running') break; await sleep(150); }
         out.readEnd = j; out.chat = ollama.chats[0];
         out.jobForged = await get('tx_deep_job', 'id=../../etc');
         out.stBad = (await get('tx_deep_status', '', SB, `http://127.0.0.1:${bport}/`)).body;
-        out.pullHostBad = await post('tx_deep_pull', { model: 'qwen3-vl:8b' }, SB, `http://127.0.0.1:${bport}/`);
+        out.pullHostBad = await post('tx_deep_pull', { model: 'qwen3-vl:8b-instruct' }, SB, `http://127.0.0.1:${bport}/`);
         out.left = fs.existsSync(path.join(dir, 'cache/tx-deep-jobs')) ? fs.readdirSync(path.join(dir, 'cache/tx-deep-jobs')).filter(d => fs.existsSync(path.join(dir, 'cache/tx-deep-jobs', d, 'image.b64'))) : [];
 
         /* ─── 2b. de l'acte à la généalogie ─── */
@@ -317,7 +317,7 @@ echo json_encode($o, JSON_UNESCAPED_UNICODE);`));
             assert.match(urls.base, /cet ordinateur/); assert.match(urls.local, /^http:\/\/127\.0\.0\.1:11434$/);
         }],
         ['lecture approfondie : Ollama trouvé, modèles ouverts (Apache 2.0) proposés, lecture refusée avant le téléchargement', () => {
-            assert.equal(out.st0.running, true); assert.deepEqual(out.st0.models.map(m => [m.tag, m.license, m.present]), [['qwen3-vl:8b', 'Apache 2.0', false], ['qwen3-vl:4b', 'Apache 2.0', false]]);
+            assert.equal(out.st0.running, true); assert.deepEqual(out.st0.models.map(m => [m.tag, m.license, m.present]), [['qwen3-vl:8b-instruct', 'Apache 2.0', false], ['qwen3-vl:4b-instruct', 'Apache 2.0', false]]);
             assert.equal(out.readBefore.status, 422); assert.match(err(out.readBefore), /pas encore téléchargé/); assert.equal(out.pullBad.status, 422);
         }],
         ['lecture approfondie : téléchargement en arrière-plan avec sa progression, puis modèle présent', () => {
@@ -326,7 +326,7 @@ echo json_encode($o, JSON_UNESCAPED_UNICODE);`));
         }],
         ['lecture approfondie : image vérifiée, texte lu en flux, consigne diplomatique, image effacée ; identifiant forgé refusé', () => {
             assert.equal(out.readGarbage.status, 422); assert.equal(out.readEnd.state, 'done'); assert.match(out.readEnd.text, /^conformément à la loi\. Aucune opposition\naudit mariage/);
-            assert.equal(out.chat.model, 'qwen3-vl:8b'); assert.equal(out.chat.think, false, 'think: false demandé (sinon Qwen3-VL ne fait que réfléchir et la réponse est vide)'); assert.match(out.chat.prompt, /ligne par ligne/); assert.match(out.chat.prompt, /\[illisible\]/); assert.match(out.chat.prompt, /N'invente rien/); assert.ok(out.chat.images[0] > 100);
+            assert.equal(out.chat.model, 'qwen3-vl:8b-instruct'); assert.equal(out.chat.think, false, 'think: false demandé (sinon Qwen3-VL ne fait que réfléchir et la réponse est vide)'); assert.match(out.chat.prompt, /ligne par ligne/); assert.match(out.chat.prompt, /\[illisible\]/); assert.match(out.chat.prompt, /N'invente rien/); assert.ok(out.chat.images[0] > 100);
             assert.deepEqual(out.left, []); assert.equal(out.jobForged.status, 422);
         }],
         ['lecture approfondie : une adresse d’Ollama hors de l’ordinateur est refusée (rien n’est appelé)', () => {
