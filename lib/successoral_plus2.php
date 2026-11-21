@@ -26,6 +26,7 @@ require_once __DIR__ . '/successoral_factures.php';
 
 /** les réglages : [valeur par défaut, valeurs permises (ou 'int:min:max' / 'text:max' / 'url')] */
 const SUCC_P2_SPEC = [
+    'tabs_layout' => ['line', ['line', 'families', 'side']], // 🗂 onglets d'un dossier : une ligne + « Plus ▾ », familles, colonne à gauche
     'insee_write' => ['both', ['both', 'case']], 'insee_threshold' => [40, 'int:1:100'], 'insee_auto' => ['auto', ['auto', 'manual']],
     'q_format' => ['json', ['json', 'html']], 'q_prefill' => ['yes', ['yes', 'no']],
     'calls_place' => ['tab', ['tab', 'heirs']], 'calls_mail' => ['grey', ['grey', 'hidden']],

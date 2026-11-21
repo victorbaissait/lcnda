@@ -57,6 +57,7 @@
             let ctl;
             if (it.text) ctl = `<input type="url" maxlength="300" value="${esc(v)}" data-sp2-set="${it.key}" data-sp2-text aria-label="${esc(i18n(it.help))}">`;
             else if (it.prefix) ctl = `<input maxlength="6" value="${esc(v)}" data-sp2-set="${it.key}" data-sp2-text class="sp2-prefix" aria-label="${esc(i18n(it.help))}">`;
+            else if (it.select) ctl = `<select data-sp2-set="${it.key}" data-sp2-select aria-label="${esc(i18n(it.help))}">${it.options.map(([ov, ol]) => `<option value="${esc(ov)}"${String(ov) === String(v) ? ' selected' : ''}>${esc(i18n(ol))}${String(ov) === String(it.def) ? ` ${esc(i18n('(conseillé)'))}` : ''}</option>`).join('')}</select>`; // menu de choix unique, la conseillée d'abord
             else {
                 const known = it.options.some(o => String(o[0]) === String(v));
                 ctl = it.options.map(([ov, ol]) => `<label class="succ-radio"><input type="radio" name="sp2-set-${it.key}" value="${esc(ov)}" data-sp2-set="${it.key}"${String(ov) === String(v) ? ' checked' : ''}> ${esc(i18n(ol))}${String(ov) === String(it.def) ? ` <small class="muted">${esc(i18n('(conseillé)'))}</small>` : ''}</label>`).join('')
@@ -73,9 +74,10 @@
         let r; try { r = await post({op: 'settings_save', settings: {[key]: patch}}); } catch (e) { toast(e.message, 'error'); return false; }
         SET = {...(SET || {}), p2: r.settings.p2, cabinet: r.settings.cabinet};
         const back = Object.fromEntries(Object.keys(patch).map(k => [k, prev[k]]));
-        A().undoToast(i18n('Réglage enregistré : {what}', {what: label}), {undo: async () => { const r2 = await post({op: 'settings_save', settings: {[key]: back}}); SET = {...SET, p2: r2.settings.p2, cabinet: r2.settings.cabinet}; ext.succDossiers?.refreshSettings?.(); ext.successoral?.forget?.(); }});
+        A().undoToast(i18n('Réglage enregistré : {what}', {what: label}), {undo: async () => { const r2 = await post({op: 'settings_save', settings: {[key]: back}}); SET = {...SET, p2: r2.settings.p2, cabinet: r2.settings.cabinet}; ext.succDossiers?.refreshSettings?.(); ext.successoral?.forget?.(); window.dispatchEvent(new CustomEvent('lcnda:succ-settings')); }});
         ext.successoral?.forget?.();
         ext.succDossiers?.refreshSettings?.();
+        window.dispatchEvent(new CustomEvent('lcnda:succ-settings')); // 🗂 la disposition des onglets suit tout de suite
     }
     SP.saveSetting = saveSetting;
     document.addEventListener('change', e => {
@@ -88,7 +90,7 @@
         else if (typeof it.def === 'number') v = Number(v);
         if (t.dataset.sp2Text !== undefined && it.text && v && !C().trackUrl(v, '1')) return toast(i18n('Adresse refusée : https:// et {numero} sont obligatoires.'), 'error');
         const was = cfg()[key];
-        const restore = () => { if (it.prefix || it.text) t.value = String(was ?? ''); else { const o = document.querySelector(`#sp2-reglages [name="sp2-set-${key}"][value="${CSS.escape(String(was))}"]`) || document.querySelector(`#sp2-reglages [name="sp2-set-${key}"][value="__custom"]`); if (o) o.checked = true; } };
+        const restore = () => { if (it.prefix || it.text || it.select) t.value = String(was ?? ''); else { const o = document.querySelector(`#sp2-reglages [name="sp2-set-${key}"][value="${CSS.escape(String(was))}"]`) || document.querySelector(`#sp2-reglages [name="sp2-set-${key}"][value="__custom"]`); if (o) o.checked = true; } };
         if (it.prefix) {
             v = String(v).trim().toUpperCase();
             // 🧾 factures, avoirs et devis : trois préfixes différents (sinon l'avoir prendrait un numéro de facture et ne serait pas émis)

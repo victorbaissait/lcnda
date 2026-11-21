@@ -21,6 +21,9 @@
 
     /* ═════ Les réglages : un groupe par outil, l'option conseillée d'abord (= par défaut) ═════ */
     const SPEC = [
+        // 🗂 la disposition des onglets d'un dossier (maquette docs/design/dossier-et-transcriptions.html, A) : un menu de choix unique
+        {tool: '🗂 Onglets d’un dossier', items: [
+            {key: 'tabs_layout', def: 'line', select: true, options: [['line', 'Une ligne, le reste dans « Plus ▾ »'], ['families', 'Par familles (deux lignes)'], ['side', 'Une colonne à gauche']], help: 'Comment ranger les onglets d’un dossier. Les compteurs restent visibles (Pièces 1 / 2, Contactés 2 / 6…).'}]},
         {tool: '⚰️ Décès d’un héritier', items: [
             {key: 'insee_write', def: 'both', options: [['both', 'Le décès sur la fiche et le statut du dossier'], ['case', 'Seulement le statut du dossier']], help: 'Ce que « ✓ C’est lui » écrit : la fiche sert aussi aux autres dossiers.'},
             {key: 'insee_threshold', def: 40, options: [[40, '40'], [60, '60']], custom: [1, 100], help: 'Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de bruit, risque d’en rater.'},
