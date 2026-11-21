@@ -19,7 +19,7 @@ declare(strict_types=1);
  */
 
 const CALC_GEN_TABLES = ['persons', 'events', 'families', 'family_children', 'places', 'sources', 'source_links', 'media', 'media_links',
-    'notes', 'name_variants', 'labels', 'label_links', 'event_types', 'surname_groups', 'archives_dispo_corr', 'app_settings', 'tresor_items', 'proof_cases', 'link_strength', 'living_contacts', 'so_imports', 'items', 'census_members', 'census_records'];
+    'notes', 'name_variants', 'labels', 'label_links', 'event_types', 'surname_groups', 'archives_dispo_corr', 'app_settings', 'tresor_items', 'proof_cases', 'link_strength', 'living_contacts', 'so_imports', 'items', 'census_members', 'census_records', 'courriers'];
 /** à augmenter si un calcul gardé change de forme (tous les fichiers gardés sont alors refaits) */
 const CALC_CACHE_VERSION = 2;
 

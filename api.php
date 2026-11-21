@@ -550,9 +550,11 @@ try {
         'museum_pick' => json_response(['items' => museum_pick($pdo, (string) ($_GET['what'] ?? 'media'), mb_substr(safe_text($_GET['q'] ?? ''), 0, 100))]),
         'museum_export' => museum_export($pdo, safe_int($_GET['id'] ?? 0), (string) ($_GET['format'] ?? 'lcnda')),
         'media_versions' => json_response(['versions' => retouch_versions($pdo, safe_int($_GET['id'] ?? 0))]),
-        'recent_acts' => json_response(recent_acts_page($pdo, $_GET)),
+        // 🐘 les actes récents à demander (liste des courriers : 4 s à 200 000 fiches) : gardés pour la journée tant que la base ne change pas
+        'recent_acts' => json_response(isset($_GET['succ_cases']) || !function_exists('ad_config_path') ? recent_acts_page($pdo, $_GET) : calc_cached($pdo, 'recent_acts_' . substr(md5(json_encode([$_GET['all'] ?? null, $_GET['kind'] ?? null, $_GET['limit'] ?? null])), 0, 12), ['courriers', 'events', 'event_types', 'places', 'families', 'persons', 'media', 'media_links', 'source_links', 'archives_dispo_corr', 'surname_groups'], [date('Y-m-d'), $_GET['all'] ?? null, $_GET['kind'] ?? null, $_GET['limit'] ?? null, is_file(ad_config_path()) ? filemtime(ad_config_path()) . ':' . filesize(ad_config_path()) : '-'], static fn() => recent_acts_page($pdo, $_GET))),
         'act_request_letter' => json_response(act_request_letter($pdo, safe_int($_GET['event_id'] ?? 0), safe_text($_GET['requester'] ?? ''), safe_text($_GET['relation'] ?? ''))),
-        'historical_context' => json_response(historical_context($pdo)),
+        // 🐘 épidémies, guerres, hivers : toute la base (3,5 s et 29 Mo à 200 000 fiches), gardé déjà encodé tant que la base ne change pas
+        'historical_context' => json_response_encoded(calc_cached($pdo, 'historical_context', ['persons', 'events', 'event_types', 'places', 'surname_groups', 'families', 'media'], [], static fn() => json_encode(historical_context($pdo), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR))),
         'vault_status' => json_response(vault_status($pdo)),
         'vault_download' => vault_download($pdo, safe_int($_GET['id'] ?? 0)),
         'age_checks' => json_response(age_checks($pdo)),
