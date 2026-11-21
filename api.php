@@ -7518,6 +7518,9 @@ function import_package(PDO $pdo, ?array $file): never
         throw $e;
     }
     $pdo->exec('ANALYZE');
+    // 🐘 les clés des noms de la recherche « à la française » (lib/recherche_fr.php) calculées pendant l'import, et non à la
+    // première recherche qui suit (200 000 fiches importées : 10 s d'attente dans la liste des personnes)
+    if (function_exists('rfr_refresh')) { try { rfr_refresh($pdo, true); } catch (Throwable) {} }
     $undo = '';
     try { $undo = import_receipt_save($pdo, 'tree', $receipt, ['label' => (string) $file['name']]); } catch (Throwable) {}
     if (!empty($file['pending'])) { @unlink($file['tmp_name']); @unlink($file['tmp_name'] . '.json'); }

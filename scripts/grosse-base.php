@@ -243,6 +243,7 @@ for ($i = 1; $i <= $nMed; $i++) {
 }
 $pdo->commit();
 calc_gen_resume($pdo);
+rfr_refresh($pdo, true); // les clés de la recherche « à la française », comme après un import (api.php, import_package)
 $pdo->exec('PRAGMA synchronous = NORMAL');
 
 $c = static fn(string $t) => (int) $pdo->query("SELECT count(*) FROM $t")->fetchColumn();
