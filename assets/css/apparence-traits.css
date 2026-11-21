@@ -2933,8 +2933,10 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root[data-theme="dark"].lc-frame .ar-icons span, :root[data-theme="dark"] .ar-icons span:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .ar-choice, :root[data-theme="dark"] .ar-choice:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #454554}
 /* onglets.css */
-:root.lc-frame .ong-letters button, :root .ong-letters button:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .ong-letters button, :root .ong-letters button:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid transparent}
+:root.lc-frame .ong-letters button:hover:not(:disabled), :root .ong-letters button:hover:not(:disabled):is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ong-letters button:focus-visible, :root .ong-letters button:focus-visible:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root.lc-frame .ong-row.is-active .ui-badge, :root .ong-row.is-active .ui-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ong-gtitle.is-active .ui-badge, :root .ong-gtitle.is-active .ui-badge:is([data-lc-lines], [data-lc-lines] *) {border-color:currentColor}
+:root.lc-frame .ong-docrow .ong-thumb, :root .ong-docrow .ong-thumb:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root.lc-frame .ong-car, :root .ong-car:is([data-lc-lines], [data-lc-lines] *) {border:0}
 :root.lc-frame .ong-gtitle, :root .ong-gtitle:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
 :root.lc-frame .ong-gtitle:hover, :root .ong-gtitle:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue)}

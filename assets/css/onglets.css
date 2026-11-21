@@ -2,16 +2,27 @@
  * Couleurs par les variables de l'app (clair, sombre) ; la colonne réutilise .side-menu / .side-menu-item (K15). */
 
 /* ─── la colonne ─── */
-.ong-side { display: grid; gap: 10px; min-width: 0; }
+.ong-side { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; min-width: 0; } /* une seule colonne qui ne déborde jamais (sinon la case Chercher élargit tout) */
 .ong-side .ui-listbar { margin: 0; }
 .ong-side .ui-listbar-row { flex-wrap: wrap; gap: 6px; }
 .ong-side .ui-listbar-search { flex: 1 1 100%; min-width: 0; }
 .ong-mode { display: flex; }
 .ong-mode button { flex: 1; }
-.ong-letters { display: flex; flex-wrap: wrap; gap: 2px; }
-.ong-letters button { min-width: 19px; padding: 2px 3px; border: 0; background: transparent; color: var(--blue); font: 700 11px var(--font-family); cursor: pointer; border-radius: 3px; }
-.ong-letters button:hover:not(:disabled) { background: var(--blue-soft); }
-.ong-letters button:disabled { opacity: .45; cursor: not-allowed; color: var(--muted); }
+/* Documents : la bascule en haut comme dans Personnes (.segmented, C5), « ⋯ » à côté (Sous le titre) */
+.ong-modebar { display: flex; gap: 6px; align-items: stretch; min-width: 0; }
+.ong-modebar .segmented { flex: 1 1 auto; min-width: 0; margin: 0; }
+.ong-modebar .segmented button { min-width: 0; padding: 4px 6px; line-height: 1.15; overflow-wrap: anywhere; }
+.ong-modebar .ong-opts { flex: none; align-self: stretch; height: auto; min-height: 32px; }
+/* la barre H10 tient dans la colonne : Chercher sur toute la ligne, Filtrer et Trier côte à côte */
+.ong-side .ui-listbar-sort { flex: 1 1 0; min-width: 0; }
+.ong-side .ui-listbar-sort .ui-sortbar-sort { width: 100%; min-width: 0; }
+.ong-side .ui-listbar-sort select { flex: 1 1 auto; min-width: 0; width: 100%; }
+/* les lettres repères : une grille régulière (13 par ligne), noires comme le texte de la colonne */
+.ong-letters { display: grid; grid-template-columns: repeat(13, minmax(0, 1fr)); gap: 2px; }
+.ong-letters[hidden] { display: none; }
+.ong-letters button { min-width: 0; padding: 3px 0; border: 1.5px solid transparent; background: transparent; color: var(--ink); font: 800 11px/1.2 var(--font-family); cursor: pointer; border-radius: 0; text-align: center; }
+.ong-letters button:hover:not(:disabled), .ong-letters button:focus-visible { border-color: var(--ink); background: var(--blue); color: #fff; }
+.ong-letters button:disabled { opacity: .35; cursor: default; color: var(--muted); }
 .ong-list { display: grid; gap: 8px; min-width: 0; }
 .ong-menu, .ong-gbody { display: grid; gap: 6px; }
 .ong-lh { margin: 6px 0 0; scroll-margin-top: 8px; }
@@ -25,7 +36,27 @@
 span.ong-cov.is-empty, .ong-ico { font-size: 20px; }
 .ong-kind { white-space: nowrap; }
 .ong-row.is-active .ui-badge, .ong-gtitle.is-active .ui-badge { color: inherit; border-color: currentColor; background: transparent; }
+.ong-row.is-active .ong-sub { color: inherit; opacity: .85; }
 .ong-loose-label { margin-top: 10px; }
+/* une ligne de Documents : comme une ligne de la colonne Personnes (.person-list-item.has-thumb) — bord, ombre et
+ * survol de .side-menu-item, vignette 42 px bordée, titre 14 px, lignes grises 11 px coupées proprement (…) */
+.ong-docrow { grid-template-columns: 42px minmax(0, 1fr); gap: 10px; padding: 9px 10px; align-items: center; }
+.ong-docrow .ong-thumb { width: 42px; height: 42px; border: 1.5px solid var(--ink); border-radius: 0; background: var(--blue-soft); }
+.ong-docrow strong { font-size: 14px; line-height: 1.15; }
+.ong-docrow .ong-txt { gap: 3px; }
+.ong-docrow small.ong-sub { display: flex; align-items: center; gap: 5px; min-width: 0; overflow: hidden; white-space: nowrap; line-height: 1.3; }
+.ong-sub > .ong-wtxt, .ong-who .ong-names { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ong-who { display: flex; align-items: baseline; gap: 4px; min-width: 0; max-width: 100%; }
+.ong-sub > .ong-who { flex: 1 1 auto; }
+.ong-who .ong-names { flex: 0 1 auto; }
+.ong-who .ong-plus { flex: none; font-weight: 800; color: var(--ink); }
+.ong-row.is-active .ong-who .ong-plus { color: inherit; }
+/* la sorte : la pastille K8 grise, en petit (comme dans la colonne Personnes), jamais un bouton */
+.ong-sub .ui-badge.ong-type { flex: none; font-size: 9px; padding: 2px 4px; letter-spacing: .03em; }
+/* 👤 Par personne : le nom au-dessus de ses documents */
+.ong-ph { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; min-width: 0; margin: 6px 0 -2px; font-weight: 800; font-size: 13px; color: var(--ink); }
+.ong-ph > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ong-ph > small { flex: none; color: var(--muted); font-size: 11px; font-weight: 700; }
 .ong-artist { display: grid; gap: 4px; }
 .ong-classer { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .ong-by { display: flex; gap: 6px; align-items: center; font-weight: 700; font-size: 12px; flex: 1 1 auto; min-width: 0; }

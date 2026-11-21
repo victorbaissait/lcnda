@@ -4525,14 +4525,22 @@
 /* onglets.css */
 :root[data-lc-density] .ong-side{gap:calc(10px * var(--lc-sp))}
 :root[data-lc-density] .ong-side .ui-listbar-row{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ong-modebar{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ong-modebar .segmented button{padding:calc(4px * var(--lc-sp)) calc(6px * var(--lc-sp))}
 :root[data-lc-density] .ong-letters{gap:calc(2px * var(--lc-sp))}
-:root[data-lc-density] .ong-letters button{padding:calc(2px * var(--lc-sp)) calc(3px * var(--lc-sp))}
+:root[data-lc-density] .ong-letters button{padding:calc(3px * var(--lc-sp)) 0}
 :root[data-lc-density] .ong-list{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .ong-menu,:root[data-lc-density] .ong-gbody{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .ong-row{gap:calc(9px * var(--lc-sp))}
 :root[data-lc-density] .ong-row{padding:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
 :root[data-lc-density] .ong-row .ong-txt,:root[data-lc-density] .ong-gtitle .ong-txt{gap:calc(2px * var(--lc-sp))}
 :root[data-lc-density] .ong-loose-label{margin-top:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .ong-docrow{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .ong-docrow{padding:calc(9px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .ong-docrow .ong-txt{gap:calc(3px * var(--lc-sp))}
+:root[data-lc-density] .ong-docrow small.ong-sub{gap:calc(5px * var(--lc-sp))}
+:root[data-lc-density] .ong-who{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .ong-ph{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .ong-artist{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .ong-classer{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .ong-by{gap:calc(6px * var(--lc-sp))}
