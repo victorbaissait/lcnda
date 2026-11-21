@@ -835,7 +835,7 @@
             options: [C('colorBy', 'Couleur des barres', 'select', {choices: [['branch', 'Branche paternelle ou maternelle'], ['sex', 'Homme ou femme'], ['group', 'Colonne « Groupe »']], def: 'branch'}),
                 C('layout', 'Disposition', 'select', {choices: [['', 'Serrée (noms dans les barres)'], ['rows', 'Une ligne par personne (noms à gauche)']]}), C('order', 'Générations', 'select', {choices: [['', 'Les plus anciennes en haut'], ['young', 'Les plus récentes en haut']]}),
                 C('labels', 'Noms dans les barres', 'check', {def: true, when: s => s.o?.layout !== 'rows'}), C('events', 'Montrer les événements', 'check', {def: true}), C('barHeight', 'Épaisseur des barres', 'range', {min: 4, max: 40, def: 16}), C('from', 'Début (année, vide = auto)'), C('to', 'Fin (année, vide = auto)'),
-                C('uncertain', 'Montrer l’incertitude des dates', 'check'), C('uncAbout', '« vers » : plus ou moins (ans)', 'range', {min: 1, max: 25, def: 5, when: s => !!s.o?.uncertain}),
+                C('uncertain', 'Montrer l’incertitude des dates', 'check'), C('uncAbout', '« vers » : plus ou moins', 'range', {unit: 'ans', min: 1, max: 25, def: 5, when: s => !!s.o?.uncertain}),
                 C('uncStyle', 'Dessin de la fourchette', 'select', {choices: [['', 'Dégradé'], ['dash', 'Pointillés']], when: s => !!s.o?.uncertain}), C('uncDiamond', 'Losange pour les dates exactes', 'check', {def: true, when: s => !!s.o?.uncertain})],
             sample: () => ({o: {title: 'Les vies de mes ancêtres', colorBy: 'branch'}, rows: sampleGen(), events: EVENTS_FR.map(([start, end, label]) => ({start, end, label}))})},
         crises: {icon: '📉', label: 'Naissances, décès et crises', group: 'Frises', render: crises, legend: 'bottom', fromApp: crisesApp,

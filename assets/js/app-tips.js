@@ -176,7 +176,8 @@
     document.addEventListener('focusin', e => { const el = e.target; if (!el?.matches?.(':focus-visible') || el.matches('input, textarea, select')) return; const o = owner(el); if (o === el && !off(el)) enter(el, 500); }, true);
     document.addEventListener('focusout', e => { if (cur && cur === e.target) leave(); }, true);
     ['pointerdown', 'wheel', 'keydown'].forEach(t => document.addEventListener(t, e => { if (t === 'keydown' && ['Shift', 'Meta', 'Control', 'Alt', 'Tab'].includes(e.key)) return; hide(); }, {capture: true, passive: true}));
-    addEventListener('scroll', hide, {capture: true, passive: true}); addEventListener('blur', leave);
+    // un défilement cache la bulle (elle ne suivrait pas) ; la souris toujours sur l'élément, elle revient quand ça s'arrête (avant : perdue jusqu'à la sortie, et sans title)
+    addEventListener('scroll', () => { hide(); const el = cur; if (el) timer = setTimeout(() => { if (cur === el && el.isConnected && el.matches(':hover')) show(el); }, 400); }, {capture: true, passive: true}); addEventListener('blur', leave);
 
     /* ═════ 3. Les touches écrites dans les textes et les menus ═════ */
     const SKIP = 'script, style, textarea, input, select, option, code, pre, svg, [contenteditable], [data-k-off], .k-keys, .k-tip';

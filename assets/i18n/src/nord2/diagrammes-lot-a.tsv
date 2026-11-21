@@ -52,7 +52,7 @@ Combinaisons montrées (les plus grandes) ¦ Zobrazené kombinácie (najväčši
 Combinaisons pas montrées : {n} ¦ Nezobrazené kombinácie: {n} ¦ Kombinasjoner som ikke vises: {n}
 Commune (titre) ¦ Obec (názov) ¦ Kommune (tittel)
 Comparer avec le recensement de ¦ Porovnať so sčítaním z roku ¦ Sammenlign med folketellingen fra
-Consanguinité de l’ancêtre (%) ¦ Príbuzenská plemenitba predka (%) ¦ Anens innavl (%)
+Consanguinité de l’ancêtre ¦ Príbuzenská plemenitba predka ¦ Anens innavl
 Couleur de l’écu (sans image) ¦ Farba štítu (bez obrázka) ¦ Skjoldets farge (uten bilde)
 Couleur des parts ¦ Farba dielov ¦ Delenes farge
 Couleur du côté maternel ¦ Farba materskej strany ¦ Farge for morsiden
@@ -169,7 +169,7 @@ vient de {name} ¦ pochádza z {name} ¦ kommer fra {name}
 {name} : armoiries pas encore trouvées ¦ {name}: erb zatiaľ nenájdený ¦ {name}: våpen ennå ikke funnet
 {name} : {n} en tout ¦ {name}: spolu {n} ¦ {name}: {n} totalt
 {place}, {year} ¦ {place}, {year} ¦ {place}, {year}
-« vers » : plus ou moins (ans) ¦ „okolo“: plus mínus (roky) ¦ «omkring»: pluss/minus (år)
+« vers » : plus ou moins ¦ „okolo“: plus mínus ¦ «omkring»: pluss/minus
 Âge (recensement) ¦ Vek (sčítanie) ¦ Alder (folketelling)
 Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Písať druh väzby na čiaru (meno dieťaťa…) ¦ Skriv forbindelsens type på streken (barnets navn…)
 Écrits s’il y a la place ¦ Písané, ak je miesto ¦ Skrevet hvis det er plass

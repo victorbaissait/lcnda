@@ -43,7 +43,7 @@ const finish = () => { console.log(`\n${count} réussi(s), ${failed} échec(s)`)
         assert.match(js('heritage-tresors-memoire.js'), /bk\.disabled = !all\.length/);
     });
     await t('statique : Tableur K1, introuvables en 422, consultation sans rappel de copie', () => {
-        assert.match(js('heritage-tableur.js'), /UI\(\)\.fieldError\(fsIn, `Une taille entre 6 et 72 px/);
+        assert.match(js('heritage-tableur.js'), /UI\(\)\.fieldError\(fsIn, i18n\('Une taille entre 6 et 72 px/);
         assert.match(php('lib/art_engine.php'), /throw new LcndaBadInput\('Artiste introuvable/);
         assert.match(php('lib/onglets.php'), /throw new LcndaBadInput\('Document introuvable/);
         assert.match(js('heritage-onglets-catalogue.js'), /text: 'Artiste introuvable'/);

@@ -52,7 +52,7 @@ Combinaisons montrées (les plus grandes) ¦ Gösterilen birleşimler (en büyü
 Combinaisons pas montrées : {n} ¦ Gösterilmeyen birleşimler: {n}
 Commune (titre) ¦ Belde (başlık)
 Comparer avec le recensement de ¦ Şu sayımla karşılaştır
-Consanguinité de l’ancêtre (%) ¦ Atanın akrabalığı (%)
+Consanguinité de l’ancêtre ¦ Atanın akrabalığı
 Couleur de l’écu (sans image) ¦ Kalkan rengi (resimsiz)
 Couleur des parts ¦ Parçaların rengi
 Couleur du côté maternel ¦ Anne tarafının rengi
@@ -169,7 +169,7 @@ vient de {name} ¦ {name} biçiminden gelir
 {name} : armoiries pas encore trouvées ¦ {name}: arma henüz bulunmadı
 {name} : {n} en tout ¦ {name}: toplam {n}
 {place}, {year} ¦ {place}, {year}
-« vers » : plus ou moins (ans) ¦ “yaklaşık”: artı eksi (yıl)
+« vers » : plus ou moins ¦ “yaklaşık”: artı eksi
 Âge (recensement) ¦ Yaş (sayım)
 Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Bağın türünü çizginin üstüne yaz (çocuğun adı…)
 Écrits s’il y a la place ¦ Yer varsa yazılı

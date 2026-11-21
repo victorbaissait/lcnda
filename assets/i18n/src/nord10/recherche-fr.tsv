@@ -16,12 +16,12 @@ lieu ({x}) ¦ vend ({x}) ¦ post ({x})
 Saint, Sainte ou article écrits autrement ({x}) ¦ Saint, Sainte ose nyje të shkruara ndryshe ({x}) ¦ Saint, Sainte jew artiklu miktuba b’mod ieħor ({x})
 ancien nom ({x}) ¦ emër i vjetër ({x}) ¦ isem antik ({x})
 commune fusionnée ({x} → {y}) ¦ komunë e bashkuar ({x} → {y}) ¦ komun magħqud ({x} → {y})
-date « {d} » ({ev} {y}) ¦ data “{d}” ({ev} {y}) ¦ data “{d}” ({ev} {y})
-date « {d} » ¦ data “{d}” ¦ data “{d}”
+date « {d} » ({ev} {y}) ¦ data «{d}» ({ev} {y}) ¦ data “{d}” ({ev} {y})
+date « {d} » ¦ data «{d}» ¦ data “{d}”
 sépulture ¦ varrim ¦ difna
 un événement ¦ një ngjarje ¦ avveniment
 Trouvé par : {x} ¦ Gjetur nga: {x} ¦ Instab permezz ta’: {x}
-Aucun « {q} » ; {n} proches : {names} ¦ Asnjë “{q}”; {n} të ngjashëm: {names} ¦ L-ebda “{q}”; {n} qrib: {names}
+Aucun « {q} » ; {n} proches : {names} ¦ Asnjë «{q}»; {n} të ngjashëm: {names} ¦ L-ebda “{q}”; {n} qrib: {names}
 Montre aussi les noms qui se prononcent pareil, même quand le nom exact existe. ¦ Shfaq edhe emrat që tingëllojnë njësoj, edhe kur emri i saktë ekziston. ¦ Juri wkoll l-ismijiet li jinstemgħu l-istess, anke meta l-isem eżatt jeżisti.
 Toujours phonétique ¦ Gjithmonë fonetikisht ¦ Dejjem fonetiku
 forme française ¦ trajtë frënge ¦ forma Franċiża
@@ -43,7 +43,7 @@ quand rien n’est trouvé, les noms qui se prononcent pareil ¦ kur nuk gjendet
 Formes latines des prénoms ¦ Trajtat latine të emrave ¦ Forom Latini tal-ismijiet
 Petrus = Pierre, Joannes = Jean, avec leurs fins (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, me mbaresat e tyre (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, bit-tmiem tagħhom (-i, -o, -um, -ae)
 Abréviations et diminutifs des prénoms ¦ Shkurtimet dhe zvogëlimet e emrave ¦ Qosor u żgħar tal-ismijiet
-Marge de « vers » (en années) ¦ Hapësira për “rreth” (në vite) ¦ Marġni għal “madwar” (fi snin)
+Marge de « vers » (en années) ¦ Hapësira për «rreth» (në vite) ¦ Marġni għal “madwar” (fi snin)
 Toujours : accents, majuscules, particules (d’Albert = Dalbert), St = Saint, communes fusionnées, dates en français et calendrier républicain. ¦ Gjithmonë: theksat, shkronjat e mëdha, pjesëzat (d’Albert = Dalbert), St = Saint, komunat e bashkuara, datat në frëngjisht dhe kalendari republikan. ¦ Dejjem: aċċenti, ittri kbar, partiċelli (d’Albert = Dalbert), St = Saint, komuni magħquda, dati bil-Franċiż u l-kalendarju repubblikan.
 Écris une recherche : l’app montre ce qu’elle comprend, sans rien chercher. ¦ Shkruaj një kërkim: aplikacioni tregon çfarë kupton, pa kërkuar asgjë. ¦ Ikteb tfittxija: l-app turi x’tifhem, mingħajr ma tfittex xejn.
 ex. {x} ¦ p.sh. {x} ¦ eż. {x}

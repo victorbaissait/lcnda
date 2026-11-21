@@ -52,7 +52,7 @@ Combinaisons montrées (les plus grandes) ¦ Показанные сочетан
 Combinaisons pas montrées : {n} ¦ Не показано сочетаний: {n} ¦ Не показано поєднань: {n}
 Commune (titre) ¦ Населённый пункт (заголовок) ¦ Населений пункт (заголовок)
 Comparer avec le recensement de ¦ Сравнить с переписью ¦ Порівняти з переписом
-Consanguinité de l’ancêtre (%) ¦ Инбридинг предка (%) ¦ Інбридинг предка (%)
+Consanguinité de l’ancêtre ¦ Инбридинг предка ¦ Інбридинг предка
 Couleur de l’écu (sans image) ¦ Цвет щита (без изображения) ¦ Колір щита (без зображення)
 Couleur des parts ¦ Цвет частей ¦ Колір частин
 Couleur du côté maternel ¦ Цвет материнской стороны ¦ Колір материнської сторони
@@ -169,7 +169,7 @@ vient de {name} ¦ происходит от {name} ¦ походить від {
 {name} : armoiries pas encore trouvées ¦ {name}: герб ещё не найден ¦ {name}: герб ще не знайдено
 {name} : {n} en tout ¦ {name}: всего {n} ¦ {name}: усього {n}
 {place}, {year} ¦ {place}, {year} г. ¦ {place}, {year} р.
-« vers » : plus ou moins (ans) ¦ «около»: плюс-минус (лет) ¦ «близько»: плюс-мінус (років)
+« vers » : plus ou moins ¦ «около»: плюс-минус ¦ «близько»: плюс-мінус
 Âge (recensement) ¦ Возраст (перепись) ¦ Вік (перепис)
 Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Писать вид связи на линии (имя ребёнка…) ¦ Писати вид зв’язку на лінії (ім’я дитини…)
 Écrits s’il y a la place ¦ Подписаны, если есть место ¦ Підписані, якщо є місце

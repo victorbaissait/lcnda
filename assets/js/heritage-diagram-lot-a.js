@@ -312,7 +312,7 @@
             C('person', 'La personne étudiée', 'text', {when: isLoops}), C('father', 'Son père', 'text', {when: isLoops}), C('mother', 'Sa mère', 'text', {when: isLoops}),
             C('closest', 'Seulement l’ancêtre commun le plus proche', 'check', {when: isLoops}), C('calc', 'Montrer le calcul (½ puissance n)', 'check', {def: true, when: isLoops}), C('fraction', 'Coefficient aussi en fraction', 'check', {def: true, when: isLoops}),
             C('fatherColor', 'Côté du père', 'color', {def: '#4e79a7', when: isLoops}), C('motherColor', 'Côté de la mère', 'color', {def: '#e15759', when: isLoops}), C('ancColor', 'Ancêtre commun', 'color', {def: '#c9a227', when: isLoops})];
-        k.grids = [...(k.grids || []), {key: 'loops', label: 'Les boucles d’implexe (une ligne par chemin ; les noms séparés par « > »)', cols: [C('anc', 'Ancêtre commun'), C('fside', 'Du père vers l’ancêtre'), C('mside', 'De la mère vers l’ancêtre'), C('fa', 'Consanguinité de l’ancêtre (%)', 'number')]}];
+        k.grids = [...(k.grids || []), {key: 'loops', label: 'Les boucles d’implexe (une ligne par chemin ; les noms séparés par « > »)', cols: [C('anc', 'Ancêtre commun'), C('fside', 'Du père vers l’ancêtre'), C('mside', 'De la mère vers l’ancêtre'), C('fa', 'Consanguinité de l’ancêtre', 'number', {unit: '%'})]}];
         const fa = k.fromApp || {html: () => '', bind: () => {}};
         k.fromApp = {
             html: spec => fa.html(spec) + panel('🔁 Entre les deux parents de…', 'Tous les chemins du père et de la mère vers un même ancêtre (filiations biologiques) et le coefficient de consanguinité (méthode de Wright).',
@@ -324,7 +324,7 @@
     /* ═════════ ⏳ Frises : montrer l'incertitude des dates (« vers 1745 », « avant 1760 », « entre … et … ») ═════════ */
     const range = (t, about) => ext.diagramGenea?.dateRange?.(t, about) || null;
     const iso = y => { const yy = Math.floor(y), m = clamp(Math.floor((y - yy) * 12) + 1, 1, 12); return `${yy}-${String(m).padStart(2, '0')}`; };
-    const UNC_OPTS = [C('uncertain', 'Montrer l’incertitude des dates', 'check'), C('uncAbout', '« vers » : plus ou moins (ans)', 'range', {min: 1, max: 25, def: 5, when: s => !!s.o?.uncertain}),
+    const UNC_OPTS = [C('uncertain', 'Montrer l’incertitude des dates', 'check'), C('uncAbout', '« vers » : plus ou moins', 'range', {unit: 'ans', min: 1, max: 25, def: 5, when: s => !!s.o?.uncertain}),
         C('uncStyle', 'Dessin de la fourchette', 'select', {choices: [['', 'Dégradé'], ['dash', 'Pointillés']], when: s => !!s.o?.uncertain}), C('uncDiamond', 'Losange pour les dates exactes', 'check', {def: true, when: s => !!s.o?.uncertain})];
     const fuzz = (o, x1, x2, y, h, c, dir, gid) => o.uncStyle === 'dash'
         ? `<rect x="${r2(Math.min(x1, x2))}" y="${r2(y)}" width="${r2(Math.abs(x2 - x1))}" height="${r2(h)}" fill="${c}" fill-opacity=".14" stroke="${c}" stroke-width="1.2" stroke-dasharray="3 2"/>`

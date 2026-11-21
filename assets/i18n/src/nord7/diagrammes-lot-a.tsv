@@ -52,7 +52,7 @@ Combinaisons montrées (les plus grandes) ¦ Samsetningar sýndar (þær stærst
 Combinaisons pas montrées : {n} ¦ Samsetningar ekki sýndar: {n}
 Commune (titre) ¦ Sveitarfélag (fyrirsögn)
 Comparer avec le recensement de ¦ Bera saman við manntal ársins
-Consanguinité de l’ancêtre (%) ¦ Skyldleiki forföðurins (%)
+Consanguinité de l’ancêtre ¦ Skyldleiki forföðurins
 Couleur de l’écu (sans image) ¦ Litur skjaldar (án myndar)
 Couleur des parts ¦ Litur hluta
 Couleur du côté maternel ¦ Litur móðurættar
@@ -169,7 +169,7 @@ vient de {name} ¦ kemur frá {name}
 {name} : armoiries pas encore trouvées ¦ {name}: skjaldarmerki ekki fundið enn
 {name} : {n} en tout ¦ {name}: {n} alls
 {place}, {year} ¦ {place}, {year}
-« vers » : plus ou moins (ans) ¦ „um“: plús/mínus (ár)
+« vers » : plus ou moins ¦ „um“: plús/mínus
 Âge (recensement) ¦ Aldur (manntal)
 Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Skrifa tegund tengsla á línuna (nafn barns…)
 Écrits s’il y a la place ¦ Skrifuð ef pláss er

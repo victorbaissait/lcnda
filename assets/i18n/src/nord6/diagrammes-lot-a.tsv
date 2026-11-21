@@ -52,7 +52,7 @@ Combinaisons montrées (les plus grandes) ¦ Rodomi deriniai (didžiausi) ¦ Rā
 Combinaisons pas montrées : {n} ¦ Nerodomi deriniai: {n} ¦ Nerādītās kombinācijas: {n} ¦ Näitamata kombinatsioonid: {n}
 Commune (titre) ¦ Savivaldybė (pavadinimas) ¦ Pagasts (virsraksts) ¦ Vald (pealkiri)
 Comparer avec le recensement de ¦ Palyginti su surašymu ¦ Salīdzināt ar skaitīšanu ¦ Võrdle loendusega aastast
-Consanguinité de l’ancêtre (%) ¦ Protėvio giminingumas (%) ¦ Senča radniecība (%) ¦ Esivanema sugulusaretus (%)
+Consanguinité de l’ancêtre ¦ Protėvio giminingumas ¦ Senča radniecība ¦ Esivanema sugulusaretus
 Couleur de l’écu (sans image) ¦ Skydo spalva (be paveikslo) ¦ Vairoga krāsa (bez attēla) ¦ Kilbi värv (ilma pildita)
 Couleur des parts ¦ Dalių spalva ¦ Daļu krāsa ¦ Osade värv
 Couleur du côté maternel ¦ Motinos pusės spalva ¦ Mātes puses krāsa ¦ Ema poole värv
@@ -169,7 +169,7 @@ vient de {name} ¦ kilo iš {name} ¦ cēlies no {name} ¦ pärineb vormist {nam
 {name} : armoiries pas encore trouvées ¦ {name}: herbas dar nerastas ¦ {name}: ģerbonis vēl nav atrasts ¦ {name}: vappi pole veel leitud
 {name} : {n} en tout ¦ {name}: iš viso {n} ¦ {name}: kopā {n} ¦ {name}: kokku {n}
 {place}, {year} ¦ {place}, {year} m. ¦ {place}, {year}. g. ¦ {place}, {year}
-« vers » : plus ou moins (ans) ¦ „apie“: plius minus (metai) ¦ “ap”: plus mīnus (gadi) ¦ „umbes“: pluss-miinus (aastat)
+« vers » : plus ou moins ¦ „apie“: plius minus ¦ “ap”: plus mīnus ¦ „umbes“: pluss-miinus
 Âge (recensement) ¦ Amžius (surašymas) ¦ Vecums (skaitīšana) ¦ Vanus (loendus)
 Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Rašyti ryšio rūšį ant linijos (vaiko vardas…) ¦ Rakstīt saites veidu uz līnijas (bērna vārds…) ¦ Kirjuta seose liik joonele (lapse nimi…)
 Écrits s’il y a la place ¦ Užrašyti, jei yra vietos ¦ Rakstīti, ja ir vieta ¦ Kirjutatud, kui ruumi on
