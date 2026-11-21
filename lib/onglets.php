@@ -19,6 +19,7 @@ declare(strict_types=1);
  */
 
 const ONGLETS_MAX_DOCS = 20000;
+const ONGLETS_MAX_DOC_PEOPLE = 60; // noms par document dans la liste (la fiche les a tous)
 
 function onglets_kiosk(): bool { return function_exists('kiosk_state') && !empty(kiosk_state()['on']); }
 
@@ -71,7 +72,8 @@ function onglets_media_people(PDO $pdo, ?array $ids = null): array
     $s->execute($params);
     $out = [];
     foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $r) {
-        $out[(int) $r['media_id']][] = ['id' => (int) $r['pid'], 'name' => trim(((string) $r['first_name']) . ' ' . ((string) $r['last_name'])) ?: 'Personne sans nom', 'gender' => (string) $r['gender']];
+        $out[(int) $r['media_id']][] = ['id' => (int) $r['pid'], 'name' => trim(((string) $r['first_name']) . ' ' . ((string) $r['last_name'])) ?: 'Personne sans nom', 'gender' => (string) $r['gender'],
+            'last' => trim((string) $r['last_name']), 'first' => trim((string) $r['first_name'])];
     }
     return $out;
 }
@@ -112,7 +114,8 @@ function onglets_documents(PDO $pdo): array
             'date_text' => mb_substr((string) $r['date_text'], 0, 80), 'year' => onglets_year((string) $r['date_text']), 'cote' => mb_substr((string) $r['cote'], 0, 80),
             'subject' => (string) $r['subject'], 'corr' => (string) $r['corr'], 'has_tr' => (int) $r['has_tr'], 'created_at' => (string) $r['created_at'],
             'series' => mb_substr((string) $r['series'], 0, 120), 'links' => (int) $r['links'], 'place' => mb_substr($places[$id] ?? '', 0, 120),
-            'people' => array_slice(array_map(static fn($p) => ['id' => $p['id'], 'name' => $p['name']], $pp), 0, 4), 'people_count' => count($pp)];
+            // les noms montrés sous le titre et cherchés par « Chercher… » (bornés ; en consultation, sans vivants ni fiches confidentielles)
+            'people' => array_slice(array_map(static fn($p) => ['id' => $p['id'], 'name' => mb_substr($p['name'], 0, 80), 'last' => mb_substr($p['last'], 0, 60), 'first' => mb_substr($p['first'], 0, 60)], $pp), 0, ONGLETS_MAX_DOC_PEOPLE), 'people_count' => count($pp)];
     }, $rows);
     return ['documents' => $docs, 'total' => count($docs), 'more' => $more, 'readonly' => onglets_kiosk()];
 }
