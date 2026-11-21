@@ -10117,6 +10117,8 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'act_import_check' => act_import_check($pdo,$data), // 📜 Ce que l'app a trouvé : fiches ressemblantes (lib/transcription_actes.php)
             'act_import_apply' => act_import_apply($pdo,$data), // 📜 ✓ Ajouter à la généalogie, d'un coup
             'act_import_undo' => act_import_undo($pdo,$data), // 📜 ↶ Annuler cet ajout
+            'act_trouve_match' => act_trouve_match($pdo,$data), // 🧭 Ce que l'app a trouvé : fiches, lieux et « Monde autour » qui ressemblent (rien n'est écrit)
+            'act_item_add' => act_item_add($pdo,$data), // 🧭 ＋ Ajouter à une fiche : un élément de l'acte, avec sa source (↶ Annuler : act_import_undo)
             'delete_vector_doc' => delete_vector_doc($pdo,$data),
             'delete_diagram' => delete_diagram($pdo,$data),
             'link_diagram' => link_diagram($pdo,$data),
