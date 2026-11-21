@@ -36,6 +36,7 @@ const SECRET = /Claire MAZAUD|Paul DURAND|informaticien/;
 // chaque carte dessinée depuis l'app dans le navigateur : [sorte, préparation du panneau, texte attendu dans l'aperçu]
 // et des réglages essayés sur l'exemple de chaque carte (chacun doit donner une image)
 const VARIANTS = {
+    linkmap: [{from: 'note'}, {from: 'birth'}, {weight: 'people'}, {same: 'hide'}, {same: 'number'}, {roles: 'all'}, {minLinks: '2'}, {minLinks: 'top30'}, {color: 'role'}, {color: 'side'}, {arrow: 'arrow'}, {step: '25', at: 1775}, {yfrom: 1780, yto: 1820, summary: false}],
     lifearea: [{share: '50'}, {share: 'custom', shareN: 95}, {shape: 'hull'}, {shape: 'both'}, {center: 'oldest'}, {draw: 'small'}, {draw: 'play', at: 1}, {min: '10'}, {colors: 'reverse'}, {colors: 'side'}, {frameAll: 'all', table: false}, {groupBy: 'century'}],
     mirrormap: [{draw: 'side'}, {draw: 'swipe', swipe: 30}, {meet: 'era', eraYears: 10}, {meet: 'near', nearKm: 20}, {implex: 'short'}, {step: 'gen', at: '3'}, {window: 'period', at: '1860'}, {colors: 'pink'}, {colors: 'mine', colorA: '#000000'}, {size: 'same', meetList: false, wedding: 'hide'}],
     trademap: [{tmode: 'small'}, {draw: 'deps'}, {draw: 'dots'}, {draw: 'top'}, {classify: 'domain'}, {classify: 'mine', colors: 'tanneur=#aa0000'}, {multi: 'main', foyer: 'hide', size: 'same', where: 'act'}, {tmode: 'half', at: '1850'}],
@@ -44,6 +45,7 @@ const KIND_TESTS = [
     ['trademap', null, 'Tulle'],
     ['mirrormap', null, 'Tulle'],
     ['lifearea', null, 'Gén. 2'],
+    ['linkmap', async p => { await p.check('[data-cq="roles"][value="témoin"]'); await p.check('[data-cq="roles"][value="curé"]'); }, 'Naves'],
 ];
 
 (async () => {
@@ -224,6 +226,18 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(dir) });
             const one = await get('cartes_plus2', { what: 'areas', group: 'person', root: 2 }); assert.ok(one.rows.every(x => x[0] === 2) && one.rows.length >= 3);
         });
 
+        await t('🕸 parrains et témoins : village de l’acte ↔ village écrit dans l’acte, sinon résidence, sinon naissance — vivants jamais comptés', async () => {
+            const r = await get('cartes_plus2', { what: 'links', root: 1 });
+            assert.ok(r.rows.length >= 2, JSON.stringify(r).slice(0, 300));
+            const jean = r.rows.find(x => x[6] === 30 && x[4] === 'parrain'); assert.ok(jean, 'Jean DURAND parrain'); assert.equal(jean[0], 1, 'baptême à Naves'); assert.equal(jean[1], 2, '« de Tulle » écrit dans l’acte');
+            const marie = r.rows.find(x => x[6] === 31); assert.equal(marie[4], 'marraine'); assert.equal(marie[1], null); assert.equal(marie[3], 2, 'sa naissance à Tulle');
+            assert.ok(!r.rows.some(x => x[6] === 20 || x[6] === 21), 'témoin vivant ou confidentiel : jamais'); assert.ok(r.rows.some(x => x[4] === 'curé'));
+            assert.ok(!JSON.stringify(r).match(SECRET));
+            const pat = await get('cartes_plus2', { what: 'links', pop: 'pat', root: 1 }); assert.ok(pat.rows.every(x => [2, 4, 5, 8, 9].includes(x[7]) || [2, 4, 5, 8, 9].includes(x[8])));
+            const nm = await get('cartes_plus2', { what: 'links', pop: 'name', name: 'Vialle' }); assert.equal(nm.rows.length, 0, 'aucun filleul VIALLE');
+            const net = await get('diagram_genea', { what: 'network', all: 1 }).catch(() => null); assert.ok(net !== undefined, 'le Réseau garde sa lecture des rôles');
+        });
+
         /* ═════ 3. Navigateur ═════ */
         let chromium = null; try { ({ chromium } = require('/opt/node22/lib/node_modules/playwright')); } catch (_) { try { ({ chromium } = require('playwright')); } catch (_) {} }
         if (!chromium) console.log('— Playwright absent : navigateur sauté');
@@ -286,7 +300,7 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(dir) });
                         await noSide(); await shot(p, `${kind}-${tag}`);
                         await p.click('[data-dg-tab="opts"]'); await p.waitForSelector('[data-opt]');
                         const sels = await p.$$eval('select[data-opt]', x => { const mk = new Set((window.LCNDA_EXT.diagramCartes.mapOpts?.() || []).map(o => o.k)); return x.filter(s => !mk.has(s.dataset.opt)).map(s => [s.dataset.opt, s.options[0]?.value, s.value]); });
-                        assert.ok(sels.length >= 4, 'des réglages'); for (const [k, first, v] of sels) if (!['legend', 'ramp', 'placeLabels'].includes(k)) assert.equal(v, first, `${k} : l’option conseillée (la première) réglée au départ`);
+                        assert.ok(sels.length >= 4, 'des réglages'); for (const [k, first, v] of sels) if (!['legend', 'ramp', 'placeLabels', 'roles'].includes(k)) assert.equal(v, first, `${k} : l’option conseillée (la première) réglée au départ`);
                         const exported = await p.evaluate(async () => { const R = window.LCNDA_EXT.diagramRender, d = document.querySelector('dialog.h-dg-dlg[open]'); return d ? d.querySelector('[data-dg-preview]').innerHTML : ''; });
                         assert.doesNotMatch(exported, SECRET);
                         await closeAll(p);

@@ -238,3 +238,53 @@ Côté père et côté mère (deux couleurs) ¦ Πλευρά πατέρα και
 Mes ancêtres, 8 générations ¦ Οι πρόγονοί μου, 8 γενιές ¦ Моите предци, 8 поколения
 Toute ma base, siècle par siècle ¦ Όλη η βάση μου, αιώνα με αιώνα ¦ Цялата ми база, век след век
 =aire ¦ χώρος|χώροι ¦ пространство|пространства
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Νονοί, νονές και μάρτυρες στον χάρτη ¦ Кръстници и свидетели на картата
+Les liens (un par ligne) ¦ Οι δεσμοί (ένας ανά γραμμή) ¦ Връзките (по една на ред)
+D’où vient le témoin ¦ Από πού έρχεται ο μάρτυρας ¦ Откъде е свидетелят
+D’où vient le parrain ¦ Από πού έρχεται ο νονός ¦ Откъде е кръстникът
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ Ό,τι γράφει η πράξη, αλλιώς η κατοικία κατά την ημερομηνία, αλλιώς η γέννηση ¦ Написаното в акта, иначе местоживеенето към датата, иначе раждането
+Seulement ce qui est écrit dans l’acte ¦ Μόνο ό,τι γράφει η πράξη ¦ Само написаното в акта
+Seulement sa naissance ¦ Μόνο η γέννηση ¦ Само раждането
+Nombre de liens ¦ Αριθμός δεσμών ¦ Брой връзки
+Nombre de personnes différentes ¦ Αριθμός διαφορετικών προσώπων ¦ Брой различни хора
+Liens dans le même village ¦ Δεσμοί στο ίδιο χωριό ¦ Връзки в същото село
+Anneau autour du point ¦ Δακτύλιος γύρω από το σημείο ¦ Пръстен около точката
+Un chiffre seulement ¦ Μόνο ένας αριθμός ¦ Само число
+Rôles montrés ¦ Ρόλοι που εμφανίζονται ¦ Показани роли
+Parrain, marraine, témoin ¦ Νονός, νονά, μάρτυρας ¦ Кръстник, кръстница, свидетел
+Tous sauf curé et officier ¦ Όλοι εκτός από ιερέα και ληξίαρχο ¦ Всички освен свещеника и длъжностното лице
+Traits montrés ¦ Γραμμές που εμφανίζονται ¦ Показани линии
+À partir de 1 lien ¦ Από 1 δεσμό ¦ От 1 връзка
+À partir de 2 ¦ Από 2 ¦ От 2
+À partir de 3 ¦ Από 3 ¦ От 3
+Les 30 plus forts seulement ¦ Μόνο οι 30 ισχυρότεροι ¦ Само 30-те най-силни
+Par rôle ¦ Ανά ρόλο ¦ По роля
+Par branche (bleu père, orange mère) ¦ Ανά κλάδο (μπλε πατέρας, πορτοκαλί μητέρα) ¦ По клон (синьо – баща, оранжево – майка)
+Flèche du village du parrain vers celui de l’acte ¦ Βέλος από το χωριό του νονού στο χωριό της πράξης ¦ Стрелка от селото на кръстника към това на акта
+La phrase sous la carte ¦ Η φράση κάτω από τον χάρτη ¦ Изречението под картата
+Clic : les liens derrière ce trait ¦ Κλικ: οι δεσμοί πίσω από αυτή τη γραμμή ¦ Щракни: връзките зад тази линия
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: το {p} % των δεσμών είναι από το ίδιο το χωριό· οι υπόλοιποι έρχονται κυρίως από {others}. ¦ {place}: {p} % от връзките са от самото село; останалите идват главно от {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Υπολογίστηκε σε {a} με γνωστό χωριό· {b} χωρίς τόπο δεν σχεδιάζονται. ¦ Изчислено върху {a} с известно село; {b} без място не се рисуват.
+Parrains et témoins : {a} entre {b}. ¦ Νονοί και μάρτυρες: {a} ανάμεσα σε {b}. ¦ Кръстници и свидетели: {a} между {b}.
+Parrains et témoins : {n}. ¦ Νονοί και μάρτυρες: {n}. ¦ Кръстници и свидетели: {n}.
+Filleul ou époux ¦ Βαφτιστήρι ή σύζυγος ¦ Кръщелник или съпруг
+{n} autres · triés par date ¦ Άλλοι {n} · κατά ημερομηνία ¦ Още {n} · по дата
+Ouvrir dans le Réseau ¦ Άνοιγμα στο Δίκτυο ¦ Отвори в Мрежата
+PARRAINS ET TÉMOINS ¦ ΝΟΝΟΙ ΚΑΙ ΜΑΡΤΥΡΕΣ ¦ КРЪСТНИЦИ И СВИДЕТЕЛИ
+Parrains et marraines ¦ Νονοί και νονές ¦ Кръстници и кръстници
+Parrains, marraines et témoins ¦ Νονοί, νονές και μάρτυρες ¦ Кръстници и свидетели
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Πάρε τους νονούς, τις νονές και τους μάρτυρες από τη γενεαλογία σου («Από την εφαρμογή»). ¦ Вземи кръстниците и свидетелите от своята генеалогия („От приложението“).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ Οι δεσμοί του 🕸 Δικτύου σχέσεων στον χάρτη: το χωριό της πράξης και εκείνο από όπου έρχεται ο μάρτυρας. Οι ζωντανοί μάρτυρες δεν μετρώνται ποτέ. ¦ Връзките от 🕸 Мрежата на отношенията на картата: селото на акта и това, откъдето е свидетелят. Живите свидетели никога не се броят.
+Aucun lien avec un lieu pour ce choix. ¦ Κανένας δεσμός με τόπο για αυτή την επιλογή. ¦ Няма връзки с място за този избор.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Κανένας δεσμός για αυτή την επιλογή (ρόλοι, περίοδος, τόποι). ¦ Няма връзки за този избор (роли, период, места).
+Curé, officier ¦ Ιερέας, ληξίαρχος ¦ Свещеник, длъжностно лице
+curé ¦ ιερέας ¦ свещеник
+Curé ¦ Ιερέας ¦ Свещеник
+tuteur ¦ κηδεμόνας ¦ настойник
+Voisin ¦ Γείτονας ¦ Съсед
+Officier ¦ Ληξίαρχος ¦ Длъжностно лице
+bapt. ¦ βάπτ. ¦ кръщ.
+naiss. ¦ γένν. ¦ раж.
+mar. ¦ γάμος ¦ брак
+inh. ¦ ταφή ¦ погреб.

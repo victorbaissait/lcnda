@@ -238,3 +238,53 @@ Côté père et côté mère (deux couleurs) ¦ Isän ja äidin puoli (kaksi vä
 Mes ancêtres, 8 générations ¦ Esivanhempani, 8 sukupolvea ¦ Őseim, 8 nemzedék
 Toute ma base, siècle par siècle ¦ Koko tietokantani vuosisata kerrallaan ¦ Az egész adatbázisom évszázadonként
 =aire ¦ alue|aluetta ¦ terület|terület
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Kummit ja todistajat kartalla ¦ Keresztszülők és tanúk a térképen
+Les liens (un par ligne) ¦ Siteet (yksi riviä kohti) ¦ A kapcsolatok (soronként egy)
+D’où vient le témoin ¦ Mistä todistaja tulee ¦ Honnan jön a tanú
+D’où vient le parrain ¦ Mistä kummi tulee ¦ Honnan jön a keresztszülő
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ Asiakirjaan kirjoitettu, muuten asuinpaikka sinä päivänä, muuten syntymä ¦ Ami az iratban áll, különben a lakóhely az adott időben, különben a születés
+Seulement ce qui est écrit dans l’acte ¦ Vain asiakirjaan kirjoitettu ¦ Csak ami az iratban áll
+Seulement sa naissance ¦ Vain syntymä ¦ Csak a születés
+Nombre de liens ¦ Siteiden määrä ¦ A kapcsolatok száma
+Nombre de personnes différentes ¦ Eri henkilöiden määrä ¦ A különböző személyek száma
+Liens dans le même village ¦ Siteet samassa kylässä ¦ Kapcsolatok ugyanabban a faluban
+Anneau autour du point ¦ Rengas pisteen ympärillä ¦ Gyűrű a pont körül
+Un chiffre seulement ¦ Vain luku ¦ Csak egy szám
+Rôles montrés ¦ Näytetyt roolit ¦ Látható szerepek
+Parrain, marraine, témoin ¦ Kummisetä, kummitäti, todistaja ¦ Keresztapa, keresztanya, tanú
+Tous sauf curé et officier ¦ Kaikki paitsi pappi ja virkailija ¦ Mindenki, kivéve a pap és az anyakönyvvezető
+Traits montrés ¦ Näytetyt viivat ¦ Látható vonalak
+À partir de 1 lien ¦ 1 siteestä alkaen ¦ 1 kapcsolattól
+À partir de 2 ¦ 2:sta alkaen ¦ 2-től
+À partir de 3 ¦ 3:sta alkaen ¦ 3-tól
+Les 30 plus forts seulement ¦ Vain 30 vahvinta ¦ Csak a 30 legerősebb
+Par rôle ¦ Rooleittain ¦ Szerepenként
+Par branche (bleu père, orange mère) ¦ Haaroittain (sininen isä, oranssi äiti) ¦ Ágak szerint (kék apa, narancs anya)
+Flèche du village du parrain vers celui de l’acte ¦ Nuoli kummin kylästä asiakirjan kylään ¦ Nyíl a keresztszülő falujától az irat falujáig
+La phrase sous la carte ¦ Lause kartan alla ¦ A mondat a térkép alatt
+Clic : les liens derrière ce trait ¦ Napsauta: tämän viivan takana olevat siteet ¦ Kattintás: a vonal mögötti kapcsolatok
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: {p} % siteistä on kylästä itsestään; muut tulevat enimmäkseen täältä: {others}. ¦ {place}: a kapcsolatok {p}%-a magából a faluból való; a többi főleg innen: {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Laskettu: {a}, joiden kylä tunnetaan; ilman paikkaa, ei piirretty: {b}. ¦ Számítás alapja: {a} ismert faluval; hely nélküli, nem rajzolt: {b}.
+Parrains et témoins : {a} entre {b}. ¦ Kummit ja todistajat: {a}, paikkoja {b}. ¦ Keresztszülők és tanúk: {a}, {b} között.
+Parrains et témoins : {n}. ¦ Kummit ja todistajat: {n}. ¦ Keresztszülők és tanúk: {n}.
+Filleul ou époux ¦ Kummilapsi tai puoliso ¦ Keresztgyermek vagy házastárs
+{n} autres · triés par date ¦ {n} muuta · päivämäärän mukaan ¦ Még {n} · dátum szerint
+Ouvrir dans le Réseau ¦ Avaa Verkostossa ¦ Megnyitás a Hálózatban
+PARRAINS ET TÉMOINS ¦ KUMMIT JA TODISTAJAT ¦ KERESZTSZÜLŐK ÉS TANÚK
+Parrains et marraines ¦ Kummisedät ja -tädit ¦ Keresztapák és keresztanyák
+Parrains, marraines et témoins ¦ Kummit ja todistajat ¦ Keresztszülők és tanúk
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Ota kummit ja todistajat sukututkimuksestasi (”Sovelluksesta”). ¦ Vedd át a keresztszülőket és tanúkat a családfádból („Az alkalmazásból”).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ 🕸 Suhdeverkoston siteet kartalla: asiakirjan kylä ja todistajan kotikylä. Eläviä todistajia ei koskaan lasketa. ¦ A 🕸 Kapcsolati háló kapcsolatai a térképen: az irat faluja és az, ahonnan a tanú jön. Élő tanúkat soha nem számol.
+Aucun lien avec un lieu pour ce choix. ¦ Ei paikallisia siteitä tälle valinnalle. ¦ Nincs hellyel rendelkező kapcsolat ehhez a választáshoz.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Ei siteitä tälle valinnalle (roolit, ajanjakso, paikat). ¦ Nincs kapcsolat ehhez a választáshoz (szerepek, időszak, helyek).
+Curé, officier ¦ Pappi, virkailija ¦ Pap, anyakönyvvezető
+curé ¦ pappi ¦ pap
+Curé ¦ Pappi ¦ Pap
+tuteur ¦ holhooja ¦ gyám
+Voisin ¦ Naapuri ¦ Szomszéd
+Officier ¦ Virkailija ¦ Anyakönyvvezető
+bapt. ¦ kaste ¦ kereszt.
+naiss. ¦ synt. ¦ szül.
+mar. ¦ vihk. ¦ házas.
+inh. ¦ haud. ¦ temet.

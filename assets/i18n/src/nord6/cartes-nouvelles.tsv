@@ -238,3 +238,53 @@ Côté père et côté mère (deux couleurs) ¦ Tėvo ir motinos pusė (dvi spal
 Mes ancêtres, 8 générations ¦ Mano protėviai, 8 kartos ¦ Mani senči, 8 paaudzes ¦ Minu esivanemad, 8 põlvkonda
 Toute ma base, siècle par siècle ¦ Visa mano bazė, šimtmetis po šimtmečio ¦ Visa mana datubāze, gadsimtu pēc gadsimta ¦ Kogu minu andmebaas sajand sajandi järel
 =aire ¦ erdvė|erdvės|erdvių ¦ telpu|telpa|telpas ¦ ala|ala
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Krikštatėviai ir liudytojai žemėlapyje ¦ Krustvecāki un liecinieki kartē ¦ Ristivanemad ja tunnistajad kaardil
+Les liens (un par ligne) ¦ Ryšiai (vienas eilutėje) ¦ Saites (viena katrā rindā) ¦ Seosed (üks rea kohta)
+D’où vient le témoin ¦ Iš kur kilęs liudytojas ¦ No kurienes nāk liecinieks ¦ Kust tunnistaja pärit on
+D’où vient le parrain ¦ Iš kur kilęs krikštatėvis ¦ No kurienes nāk krustvecāks ¦ Kust ristiisa pärit on
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ Kas parašyta akte, kitaip gyvenamoji vieta tą dieną, kitaip gimimas ¦ Kas rakstīts aktā, citādi dzīvesvieta tajā datumā, citādi dzimšana ¦ Mis on aktis kirjas, muidu elukoht sel kuupäeval, muidu sünd
+Seulement ce qui est écrit dans l’acte ¦ Tik tai, kas parašyta akte ¦ Tikai tas, kas rakstīts aktā ¦ Ainult see, mis on aktis kirjas
+Seulement sa naissance ¦ Tik gimimas ¦ Tikai dzimšana ¦ Ainult sünd
+Nombre de liens ¦ Ryšių skaičius ¦ Saišu skaits ¦ Seoste arv
+Nombre de personnes différentes ¦ Skirtingų asmenų skaičius ¦ Dažādu personu skaits ¦ Erinevate isikute arv
+Liens dans le même village ¦ Ryšiai tame pačiame kaime ¦ Saites tajā pašā ciemā ¦ Seosed samas külas
+Anneau autour du point ¦ Žiedas aplink tašką ¦ Gredzens ap punktu ¦ Rõngas punkti ümber
+Un chiffre seulement ¦ Tik skaičius ¦ Tikai skaitlis ¦ Ainult arv
+Rôles montrés ¦ Rodomi vaidmenys ¦ Rādītās lomas ¦ Näidatud rollid
+Parrain, marraine, témoin ¦ Krikštatėvis, krikštamotė, liudytojas ¦ Krusttēvs, krustmāte, liecinieks ¦ Ristiisa, ristiema, tunnistaja
+Tous sauf curé et officier ¦ Visi, išskyrus kunigą ir pareigūną ¦ Visi, izņemot priesteri un ierēdni ¦ Kõik peale preestri ja ametniku
+Traits montrés ¦ Rodomos linijos ¦ Rādītās līnijas ¦ Näidatud jooned
+À partir de 1 lien ¦ Nuo 1 ryšio ¦ No 1 saites ¦ Alates 1 seosest
+À partir de 2 ¦ Nuo 2 ¦ No 2 ¦ Alates 2
+À partir de 3 ¦ Nuo 3 ¦ No 3 ¦ Alates 3
+Les 30 plus forts seulement ¦ Tik 30 stipriausių ¦ Tikai 30 spēcīgākās ¦ Ainult 30 tugevaimat
+Par rôle ¦ Pagal vaidmenį ¦ Pēc lomas ¦ Rolli järgi
+Par branche (bleu père, orange mère) ¦ Pagal šaką (mėlyna tėvas, oranžinė motina) ¦ Pēc atzara (zils tēvs, oranžs māte) ¦ Haru järgi (sinine isa, oranž ema)
+Flèche du village du parrain vers celui de l’acte ¦ Rodyklė nuo krikštatėvio kaimo iki akto kaimo ¦ Bultiņa no krustvecāka ciema uz akta ciemu ¦ Nool ristivanema külast akti külla
+La phrase sous la carte ¦ Sakinys po žemėlapiu ¦ Teikums zem kartes ¦ Lause kaardi all
+Clic : les liens derrière ce trait ¦ Spustelėk: ryšiai už šios linijos ¦ Klikšķis: saites aiz šīs līnijas ¦ Klõpsa: selle joone taga olevad seosed
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: {p} % ryšių yra iš paties kaimo; kiti daugiausia iš: {others}. ¦ {place}: {p} % saišu ir no paša ciema; pārējās nāk galvenokārt no: {others}. ¦ {place}: {p}% seostest on samast külast; ülejäänud tulevad peamiselt: {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Skaičiuota pagal: {a} su žinomu kaimu; be vietos, nenubraižyta: {b}. ¦ Aprēķināts pēc: {a} ar zināmu ciemu; bez vietas, nav uzzīmētas: {b}. ¦ Arvutatud: {a} teadaoleva külaga; kohata, joonistamata: {b}.
+Parrains et témoins : {a} entre {b}. ¦ Krikštatėviai ir liudytojai: {a} tarp {b}. ¦ Krustvecāki un liecinieki: {a} starp {b}. ¦ Ristivanemad ja tunnistajad: {a}, kohti {b}.
+Parrains et témoins : {n}. ¦ Krikštatėviai ir liudytojai: {n}. ¦ Krustvecāki un liecinieki: {n}. ¦ Ristivanemad ja tunnistajad: {n}.
+Filleul ou époux ¦ Krikštasūnis ar sutuoktinis ¦ Krustbērns vai laulātais ¦ Ristilaps või abikaasa
+{n} autres · triés par date ¦ Dar {n} · pagal datą ¦ Vēl {n} · pēc datuma ¦ Veel {n} · kuupäeva järgi
+Ouvrir dans le Réseau ¦ Atverti Tinkle ¦ Atvērt Tīklā ¦ Ava Võrgustikus
+PARRAINS ET TÉMOINS ¦ KRIKŠTATĖVIAI IR LIUDYTOJAI ¦ KRUSTVECĀKI UN LIECINIEKI ¦ RISTIVANEMAD JA TUNNISTAJAD
+Parrains et marraines ¦ Krikštatėviai ir krikštamotės ¦ Krusttēvi un krustmātes ¦ Ristiisad ja ristiemad
+Parrains, marraines et témoins ¦ Krikštatėviai ir liudytojai ¦ Krustvecāki un liecinieki ¦ Ristivanemad ja tunnistajad
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Paimk krikštatėvius ir liudytojus iš savo genealogijos („Iš programos“). ¦ Ņem krustvecākus un lieciniekus no savas ģenealoģijas (“No lietotnes”). ¦ Võta ristivanemad ja tunnistajad oma sugupuust („Rakendusest“).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ 🕸 Ryšių tinklo ryšiai žemėlapyje: akto kaimas ir tas, iš kurio kilęs liudytojas. Gyvi liudytojai niekada neskaičiuojami. ¦ 🕸 Attiecību tīkla saites kartē: akta ciems un tas, no kura nāk liecinieks. Dzīvi liecinieki nekad netiek skaitīti. ¦ 🕸 Suhete võrgustiku seosed kaardil: akti küla ja see, kust tunnistaja pärit on. Elavaid tunnistajaid ei loeta kunagi.
+Aucun lien avec un lieu pour ce choix. ¦ Šiam pasirinkimui ryšių su vieta nėra. ¦ Šai izvēlei nav saišu ar vietu. ¦ Selle valiku jaoks kohaga seoseid pole.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Šiam pasirinkimui ryšių nėra (vaidmenys, laikotarpis, vietos). ¦ Šai izvēlei nav saišu (lomas, periods, vietas). ¦ Selle valiku jaoks seoseid pole (rollid, periood, kohad).
+Curé, officier ¦ Kunigas, pareigūnas ¦ Priesteris, ierēdnis ¦ Preester, ametnik
+curé ¦ kunigas ¦ priesteris ¦ preester
+Curé ¦ Kunigas ¦ Priesteris ¦ Preester
+tuteur ¦ globėjas ¦ aizbildnis ¦ eestkostja
+Voisin ¦ Kaimynas ¦ Kaimiņš ¦ Naaber
+Officier ¦ Pareigūnas ¦ Ierēdnis ¦ Ametnik
+bapt. ¦ krikšt. ¦ krist. ¦ rist.
+naiss. ¦ gim. ¦ dzim. ¦ sünd
+mar. ¦ sant. ¦ lauln. ¦ abiel.
+inh. ¦ laid. ¦ apbed. ¦ matus

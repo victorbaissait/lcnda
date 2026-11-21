@@ -238,3 +238,53 @@ Côté père et côté mère (deux couleurs) ¦ Otcova a matkina strana (dve far
 Mes ancêtres, 8 générations ¦ Moji predkovia, 8 generácií ¦ Mine aner, 8 generasjoner
 Toute ma base, siècle par siècle ¦ Celá moja databáza, storočie po storočí ¦ Hele databasen min, århundre for århundre
 =aire ¦ priestor|priestory|priestorov ¦ område|områder
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Krstní rodičia a svedkovia na mape ¦ Faddere og vitner på kartet
+Les liens (un par ligne) ¦ Väzby (jedna na riadok) ¦ Båndene (ett per linje)
+D’où vient le témoin ¦ Odkiaľ svedok pochádza ¦ Hvor vitnet kommer fra
+D’où vient le parrain ¦ Odkiaľ krstný otec pochádza ¦ Hvor fadderen kommer fra
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ Čo je zapísané v zápise, inak bydlisko k dátumu, inak narodenie ¦ Det som står i akten, ellers bostedet på datoen, ellers fødselen
+Seulement ce qui est écrit dans l’acte ¦ Iba to, čo je zapísané v zápise ¦ Bare det som står i akten
+Seulement sa naissance ¦ Iba narodenie ¦ Bare fødselen
+Nombre de liens ¦ Počet väzieb ¦ Antall bånd
+Nombre de personnes différentes ¦ Počet rôznych osôb ¦ Antall ulike personer
+Liens dans le même village ¦ Väzby v tej istej obci ¦ Bånd i samme bygd
+Anneau autour du point ¦ Prstenec okolo bodu ¦ Ring rundt punktet
+Un chiffre seulement ¦ Iba číslo ¦ Bare et tall
+Rôles montrés ¦ Zobrazené úlohy ¦ Viste roller
+Parrain, marraine, témoin ¦ Krstný otec, krstná matka, svedok ¦ Gudfar, gudmor, vitne
+Tous sauf curé et officier ¦ Všetci okrem farára a úradníka ¦ Alle unntatt prest og embetsmann
+Traits montrés ¦ Zobrazené čiary ¦ Viste streker
+À partir de 1 lien ¦ Od 1 väzby ¦ Fra 1 bånd
+À partir de 2 ¦ Od 2 ¦ Fra 2
+À partir de 3 ¦ Od 3 ¦ Fra 3
+Les 30 plus forts seulement ¦ Iba 30 najsilnejších ¦ Bare de 30 sterkeste
+Par rôle ¦ Podľa úlohy ¦ Etter rolle
+Par branche (bleu père, orange mère) ¦ Podľa vetvy (modrá otec, oranžová matka) ¦ Etter gren (blå far, oransje mor)
+Flèche du village du parrain vers celui de l’acte ¦ Šípka z obce krstného rodiča do obce zápisu ¦ Pil fra fadderens bygd til aktens bygd
+La phrase sous la carte ¦ Veta pod mapou ¦ Setningen under kartet
+Clic : les liens derrière ce trait ¦ Klikni: väzby za touto čiarou ¦ Klikk: båndene bak streken
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: {p} % väzieb je priamo z obce; ostatné pochádzajú hlavne z: {others}. ¦ {place}: {p} % av båndene er fra selve bygda; de andre kommer mest fra {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Vypočítané z: {a} so známou obcou; bez miesta, nenakreslené: {b}. ¦ Beregnet på {a} der bygda er kjent; {b} uten sted tegnes ikke.
+Parrains et témoins : {a} entre {b}. ¦ Krstní rodičia a svedkovia: {a} medzi {b}. ¦ Faddere og vitner: {a} mellom {b}.
+Parrains et témoins : {n}. ¦ Krstní rodičia a svedkovia: {n}. ¦ Faddere og vitner: {n}.
+Filleul ou époux ¦ Krstniatko alebo manžel ¦ Gudbarn eller ektefelle
+{n} autres · triés par date ¦ Ďalších: {n} · podľa dátumu ¦ {n} til · sortert etter dato
+Ouvrir dans le Réseau ¦ Otvoriť v Sieti ¦ Åpne i Nettverket
+PARRAINS ET TÉMOINS ¦ KRSTNÍ RODIČIA A SVEDKOVIA ¦ FADDERE OG VITNER
+Parrains et marraines ¦ Krstní otcovia a krstné matky ¦ Gudfedre og gudmødre
+Parrains, marraines et témoins ¦ Krstní rodičia a svedkovia ¦ Faddere og vitner
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Vezmi krstných rodičov a svedkov zo svojej genealógie („Z aplikácie“). ¦ Ta fadderne og vitnene fra slektsforskningen din («Fra appen»).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ Väzby zo 🕸 Siete vzťahov na mape: obec zápisu a tá, odkiaľ pochádza svedok. Žijúci svedkovia sa nikdy nepočítajú. ¦ Båndene fra 🕸 Relasjonsnettverket, på kartet: aktens bygd og den vitnet kommer fra. Levende vitner telles aldri.
+Aucun lien avec un lieu pour ce choix. ¦ Pre tento výber žiadna väzba s miestom. ¦ Ingen bånd med sted for dette valget.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Pre tento výber žiadna väzba (úlohy, obdobie, miesta). ¦ Ingen bånd for dette valget (roller, periode, steder).
+Curé, officier ¦ Farár, úradník ¦ Prest, embetsmann
+curé ¦ farár ¦ prest
+Curé ¦ Farár ¦ Prest
+tuteur ¦ poručník ¦ verge
+Voisin ¦ Sused ¦ Nabo
+Officier ¦ Úradník ¦ Embetsmann
+bapt. ¦ krst ¦ dåp
+naiss. ¦ nar. ¦ fødsel
+mar. ¦ sobáš ¦ vielse
+inh. ¦ pohr. ¦ begr.

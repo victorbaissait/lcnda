@@ -238,3 +238,53 @@ Côté père et côté mère (deux couleurs) ¦ Ana e babait dhe e nënës (dy n
 Mes ancêtres, 8 générations ¦ Paraardhësit e mi, 8 breza ¦ L-antenati tiegħi, 8 ġenerazzjonijiet
 Toute ma base, siècle par siècle ¦ Gjithë baza ime, shekull pas shekulli ¦ Id-database kollha tiegħi, seklu wara seklu
 =aire ¦ hapësirë|hapësira ¦ żona|żoni|żoni|żoni|żoni
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Kumbarët dhe dëshmitarët në hartë ¦ Parrini, madrini u xhieda fuq il-mappa
+Les liens (un par ligne) ¦ Lidhjet (një për rresht) ¦ Ir-rabtiet (waħda għal kull linja)
+D’où vient le témoin ¦ Nga vjen dëshmitari ¦ Minn fejn ġej ix-xhud
+D’où vient le parrain ¦ Nga vjen kumbari ¦ Minn fejn ġej il-parrinu
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ Ajo që shkruhet në akt, përndryshe banimi në atë datë, përndryshe lindja ¦ Dak li hemm miktub fl-att, inkella r-residenza f’dik id-data, inkella t-twelid
+Seulement ce qui est écrit dans l’acte ¦ Vetëm ajo që shkruhet në akt ¦ Biss dak li hemm miktub fl-att
+Seulement sa naissance ¦ Vetëm lindja ¦ It-twelid biss
+Nombre de liens ¦ Numri i lidhjeve ¦ Għadd ta’ rabtiet
+Nombre de personnes différentes ¦ Numri i personave të ndryshëm ¦ Għadd ta’ persuni differenti
+Liens dans le même village ¦ Lidhje në të njëjtin fshat ¦ Rabtiet fl-istess raħal
+Anneau autour du point ¦ Unazë rreth pikës ¦ Ċirku madwar it-tikka
+Un chiffre seulement ¦ Vetëm një numër ¦ Numru biss
+Rôles montrés ¦ Rolet e shfaqura ¦ Rwoli murija
+Parrain, marraine, témoin ¦ Kumbar, kumbarë, dëshmitar ¦ Parrinu, madrina, xhud
+Tous sauf curé et officier ¦ Të gjithë përveç priftit dhe nëpunësit ¦ Kollha ħlief il-kappillan u l-uffiċjal
+Traits montrés ¦ Vijat e shfaqura ¦ Linji murija
+À partir de 1 lien ¦ Nga 1 lidhje ¦ Minn rabta waħda
+À partir de 2 ¦ Nga 2 ¦ Minn 2
+À partir de 3 ¦ Nga 3 ¦ Minn 3
+Les 30 plus forts seulement ¦ Vetëm 30 më të fortat ¦ It-30 l-iktar b’saħħithom biss
+Par rôle ¦ Sipas rolit ¦ Skont ir-rwol
+Par branche (bleu père, orange mère) ¦ Sipas degës (blu babai, portokalli nëna) ¦ Skont il-fergħa (blu missier, oranġjo omm)
+Flèche du village du parrain vers celui de l’acte ¦ Shigjetë nga fshati i kumbarit te ai i aktit ¦ Vleġġa mir-raħal tal-parrinu għal dak tal-att
+La phrase sous la carte ¦ Fjalia nën hartë ¦ Is-sentenza taħt il-mappa
+Clic : les liens derrière ce trait ¦ Kliko: lidhjet pas kësaj vije ¦ Ikklikkja: ir-rabtiet wara din il-linja
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: {p} % e lidhjeve janë nga vetë fshati; të tjerat vijnë kryesisht nga {others}. ¦ {place}: {p} % tar-rabtiet huma mir-raħal stess; l-oħrajn ġejjin l-aktar minn {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Llogaritur mbi {a} me fshat të njohur; {b} pa vend nuk vizatohen. ¦ Ikkalkulat fuq {a} b’raħal magħruf; {b} mingħajr post ma jitpinġewx.
+Parrains et témoins : {a} entre {b}. ¦ Kumbarë dhe dëshmitarë: {a} midis {b}. ¦ Parrini u xhieda: {a} bejn {b}.
+Parrains et témoins : {n}. ¦ Kumbarë dhe dëshmitarë: {n}. ¦ Parrini u xhieda: {n}.
+Filleul ou époux ¦ Famullë ose bashkëshort ¦ Filjozz jew konjuġi
+{n} autres · triés par date ¦ Edhe {n} · sipas datës ¦ {n} oħra · skont id-data
+Ouvrir dans le Réseau ¦ Hap në Rrjet ¦ Iftaħ fin-Netwerk
+PARRAINS ET TÉMOINS ¦ KUMBARË DHE DËSHMITARË ¦ PARRINI U XHIEDA
+Parrains et marraines ¦ Kumbarë dhe kumbara ¦ Parrini u madrini
+Parrains, marraines et témoins ¦ Kumbarë, kumbara dhe dëshmitarë ¦ Parrini, madrini u xhieda
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Merr kumbarët dhe dëshmitarët nga gjenealogjia jote («Nga aplikacioni»). ¦ Ħu l-parrini, il-madrini u x-xhieda mill-ġenealoġija tiegħek (“Mill-app”).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ Lidhjet e 🕸 Rrjetit të marrëdhënieve, në hartë: fshati i aktit dhe ai nga vjen dëshmitari. Dëshmitarët e gjallë nuk numërohen kurrë. ¦ Ir-rabtiet tan-🕸 Netwerk tar-relazzjonijiet, fuq il-mappa: ir-raħal tal-att u dak minn fejn ġej ix-xhud. Xhieda ħajjin qatt ma jingħaddu.
+Aucun lien avec un lieu pour ce choix. ¦ Asnjë lidhje me vend për këtë zgjedhje. ¦ L-ebda rabta b’post għal din l-għażla.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Asnjë lidhje për këtë zgjedhje (role, periudhë, vende). ¦ L-ebda rabta għal din l-għażla (rwoli, perjodu, postijiet).
+Curé, officier ¦ Prift, nëpunës ¦ Kappillan, uffiċjal
+curé ¦ prift ¦ kappillan
+Curé ¦ Prift ¦ Kappillan
+tuteur ¦ kujdestar ¦ tutur
+Voisin ¦ Fqinj ¦ Ġar
+Officier ¦ Nëpunës ¦ Uffiċjal
+bapt. ¦ pagëz. ¦ magħm.
+naiss. ¦ lindje ¦ twel.
+mar. ¦ mart. ¦ żwieġ
+inh. ¦ varrim ¦ difna

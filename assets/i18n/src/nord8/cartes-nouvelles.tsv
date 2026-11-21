@@ -238,3 +238,53 @@ Côté père et côté mère (deux couleurs) ¦ Baba ve anne tarafı (iki renk)
 Mes ancêtres, 8 générations ¦ Atalarım, 8 kuşak
 Toute ma base, siècle par siècle ¦ Tüm veritabanım, yüzyıl yüzyıl
 =aire ¦ alan|alan
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Haritada vaftiz ebeveynleri ve tanıklar
+Les liens (un par ligne) ¦ Bağlar (satır başına bir)
+D’où vient le témoin ¦ Tanığın nereden geldiği
+D’où vient le parrain ¦ Vaftiz babasının nereden geldiği
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ Kayıtta yazan, yoksa o tarihteki ikameti, yoksa doğumu
+Seulement ce qui est écrit dans l’acte ¦ Yalnızca kayıtta yazan
+Seulement sa naissance ¦ Yalnızca doğumu
+Nombre de liens ¦ Bağ sayısı
+Nombre de personnes différentes ¦ Farklı kişi sayısı
+Liens dans le même village ¦ Aynı köydeki bağlar
+Anneau autour du point ¦ Noktanın çevresinde halka
+Un chiffre seulement ¦ Yalnızca bir sayı
+Rôles montrés ¦ Gösterilen roller
+Parrain, marraine, témoin ¦ Vaftiz babası, vaftiz annesi, tanık
+Tous sauf curé et officier ¦ Rahip ve memur dışında hepsi
+Traits montrés ¦ Gösterilen çizgiler
+À partir de 1 lien ¦ 1 bağdan itibaren
+À partir de 2 ¦ 2’den itibaren
+À partir de 3 ¦ 3’ten itibaren
+Les 30 plus forts seulement ¦ Yalnızca en güçlü 30
+Par rôle ¦ Role göre
+Par branche (bleu père, orange mère) ¦ Dala göre (mavi baba, turuncu anne)
+Flèche du village du parrain vers celui de l’acte ¦ Vaftiz ebeveyninin köyünden kaydın köyüne ok
+La phrase sous la carte ¦ Haritanın altındaki cümle
+Clic : les liens derrière ce trait ¦ Tıkla: bu çizginin ardındaki bağlar
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: bağların %{p}’i köyün kendisinden; diğerleri çoğunlukla şuradan geliyor: {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Köyü bilinen {a} üzerinden hesaplandı; yeri olmayan {b} çizilmez.
+Parrains et témoins : {a} entre {b}. ¦ Vaftiz ebeveynleri ve tanıklar: {b} arasında {a}.
+Parrains et témoins : {n}. ¦ Vaftiz ebeveynleri ve tanıklar: {n}.
+Filleul ou époux ¦ Vaftiz çocuğu ya da eş
+{n} autres · triés par date ¦ {n} tane daha · tarihe göre
+Ouvrir dans le Réseau ¦ Ağda aç
+PARRAINS ET TÉMOINS ¦ VAFTİZ EBEVEYNLERİ VE TANIKLAR
+Parrains et marraines ¦ Vaftiz babaları ve anneleri
+Parrains, marraines et témoins ¦ Vaftiz ebeveynleri ve tanıklar
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Vaftiz ebeveynlerini ve tanıkları soy ağacından al (“Uygulamadan”).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ 🕸 İlişki ağındaki bağlar haritada: kaydın köyü ve tanığın geldiği köy. Yaşayan tanıklar asla sayılmaz.
+Aucun lien avec un lieu pour ce choix. ¦ Bu seçim için yeri olan bağ yok.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Bu seçim için bağ yok (roller, dönem, yerler).
+Curé, officier ¦ Rahip, memur
+curé ¦ rahip
+Curé ¦ Rahip
+tuteur ¦ vasi
+Voisin ¦ Komşu
+Officier ¦ Memur
+bapt. ¦ vaftiz
+naiss. ¦ doğum
+mar. ¦ evlilik
+inh. ¦ defin

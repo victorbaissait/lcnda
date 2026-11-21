@@ -238,3 +238,53 @@ Côté père et côté mère (deux couleurs) ¦ Otcova a matčina strana (dvě b
 Mes ancêtres, 8 générations ¦ Moji předkové, 8 generací ¦ Mina anor, 8 generationer ¦ Mine aner, 8 generationer
 Toute ma base, siècle par siècle ¦ Celá moje databáze, století po století ¦ Hela min databas, sekel för sekel ¦ Hele min database, århundrede for århundrede
 =aire ¦ prostor|prostory|prostorů ¦ område|områden ¦ område|områder
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Kmotři a svědci na mapě ¦ Faddrar och vittnen på kartan ¦ Faddere og vidner på kortet
+Les liens (un par ligne) ¦ Vazby (jedna na řádek) ¦ Banden (ett per rad) ¦ Forbindelserne (én pr. linje)
+D’où vient le témoin ¦ Odkud svědek pochází ¦ Varifrån vittnet kommer ¦ Hvor vidnet kommer fra
+D’où vient le parrain ¦ Odkud kmotr pochází ¦ Varifrån faddern kommer ¦ Hvor fadderen kommer fra
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ Co je zapsáno v zápisu, jinak bydliště k datu, jinak narození ¦ Det som står i akten, annars bostaden vid datumet, annars födelsen ¦ Det, der står i akten, ellers bopælen på datoen, ellers fødslen
+Seulement ce qui est écrit dans l’acte ¦ Jen to, co je zapsáno v zápisu ¦ Bara det som står i akten ¦ Kun det, der står i akten
+Seulement sa naissance ¦ Jen narození ¦ Bara födelsen ¦ Kun fødslen
+Nombre de liens ¦ Počet vazeb ¦ Antal band ¦ Antal forbindelser
+Nombre de personnes différentes ¦ Počet různých osob ¦ Antal olika personer ¦ Antal forskellige personer
+Liens dans le même village ¦ Vazby ve stejné vsi ¦ Band i samma by ¦ Forbindelser i samme landsby
+Anneau autour du point ¦ Prstenec kolem bodu ¦ Ring runt punkten ¦ Ring om punktet
+Un chiffre seulement ¦ Jen číslo ¦ Bara en siffra ¦ Kun et tal
+Rôles montrés ¦ Zobrazené role ¦ Roller som visas ¦ Viste roller
+Parrain, marraine, témoin ¦ Kmotr, kmotra, svědek ¦ Gudfar, gudmor, vittne ¦ Gudfar, gudmor, vidne
+Tous sauf curé et officier ¦ Všichni kromě faráře a úředníka ¦ Alla utom präst och tjänsteman ¦ Alle undtagen præst og embedsmand
+Traits montrés ¦ Zobrazené čáry ¦ Streck som visas ¦ Viste streger
+À partir de 1 lien ¦ Od 1 vazby ¦ Från 1 band ¦ Fra 1 forbindelse
+À partir de 2 ¦ Od 2 ¦ Från 2 ¦ Fra 2
+À partir de 3 ¦ Od 3 ¦ Från 3 ¦ Fra 3
+Les 30 plus forts seulement ¦ Jen 30 nejsilnějších ¦ Bara de 30 starkaste ¦ Kun de 30 stærkeste
+Par rôle ¦ Podle role ¦ Per roll ¦ Efter rolle
+Par branche (bleu père, orange mère) ¦ Podle větve (modrá otec, oranžová matka) ¦ Per gren (blått far, orange mor) ¦ Efter gren (blå far, orange mor)
+Flèche du village du parrain vers celui de l’acte ¦ Šipka z vesnice kmotra do vesnice zápisu ¦ Pil från gudföräldrens by till aktens by ¦ Pil fra fadderens landsby til aktens landsby
+La phrase sous la carte ¦ Věta pod mapou ¦ Meningen under kartan ¦ Sætningen under kortet
+Clic : les liens derrière ce trait ¦ Klikni: vazby za touto čarou ¦ Klicka: banden bakom strecket ¦ Klik: forbindelserne bag stregen
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: {p} % vazeb je přímo z obce; ostatní pocházejí hlavně z: {others}. ¦ {place}: {p} % av banden är från byn själv; de andra kommer mest från {others}. ¦ {place}: {p} % af forbindelserne er fra selve landsbyen; de andre kommer mest fra {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Spočteno z: {a} se známou vesnicí; bez místa, nenakresleno: {b}. ¦ Beräknat på {a} där byn är känd; {b} utan plats ritas inte. ¦ Beregnet på {a}, hvor landsbyen kendes; {b} uden sted tegnes ikke.
+Parrains et témoins : {a} entre {b}. ¦ Kmotři a svědci: {a} mezi {b}. ¦ Faddrar och vittnen: {a} mellan {b}. ¦ Faddere og vidner: {a} mellem {b}.
+Parrains et témoins : {n}. ¦ Kmotři a svědci: {n}. ¦ Faddrar och vittnen: {n}. ¦ Faddere og vidner: {n}.
+Filleul ou époux ¦ Kmotřenec nebo manžel ¦ Gudbarn eller make ¦ Gudbarn eller ægtefælle
+{n} autres · triés par date ¦ Dalších: {n} · podle data ¦ {n} till · sorterade efter datum ¦ {n} flere · sorteret efter dato
+Ouvrir dans le Réseau ¦ Otevřít v Síti ¦ Öppna i Nätverket ¦ Åbn i Netværket
+PARRAINS ET TÉMOINS ¦ KMOTŘI A SVĚDCI ¦ FADDRAR OCH VITTNEN ¦ FADDERE OG VIDNER
+Parrains et marraines ¦ Kmotři a kmotry ¦ Gudfäder och gudmödrar ¦ Gudfædre og gudmødre
+Parrains, marraines et témoins ¦ Kmotři, kmotry a svědci ¦ Faddrar och vittnen ¦ Faddere og vidner
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Vezmi kmotry a svědky ze své genealogie („Z aplikace“). ¦ Ta faddrarna och vittnena från din släktforskning (”Från appen”). ¦ Tag fadderne og vidnerne fra din slægtsforskning (»Fra appen«).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ Vazby ze 🕸 Sítě vztahů na mapě: vesnice zápisu a ta, odkud pochází svědek. Žijící svědci se nikdy nepočítají. ¦ Banden från 🕸 Relationsnätverket, på kartan: aktens by och den by vittnet kommer från. Levande vittnen räknas aldrig. ¦ Forbindelserne fra 🕸 Relationsnetværket, på kortet: aktens landsby og den, vidnet kommer fra. Levende vidner tælles aldrig.
+Aucun lien avec un lieu pour ce choix. ¦ Pro tento výběr žádná vazba s místem. ¦ Inget band med plats för det här valet. ¦ Ingen forbindelse med sted til dette valg.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Pro tento výběr žádná vazba (role, období, místa). ¦ Inget band för det här valet (roller, period, platser). ¦ Ingen forbindelse til dette valg (roller, periode, steder).
+Curé, officier ¦ Farář, úředník ¦ Präst, tjänsteman ¦ Præst, embedsmand
+curé ¦ farář ¦ präst ¦ præst
+Curé ¦ Farář ¦ Präst ¦ Præst
+tuteur ¦ poručník ¦ förmyndare ¦ værge
+Voisin ¦ Soused ¦ Granne ¦ Nabo
+Officier ¦ Úředník ¦ Tjänsteman ¦ Embedsmand
+bapt. ¦ křest ¦ dop ¦ dåb
+naiss. ¦ nar. ¦ föd. ¦ fødsel
+mar. ¦ sňatek ¦ vigsel ¦ vielse
+inh. ¦ pohř. ¦ begr. ¦ begr.

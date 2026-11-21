@@ -238,3 +238,53 @@ Côté père et côté mère (deux couleurs) ¦ Bên nội và bên ngoại (hai
 Mes ancêtres, 8 générations ¦ Tổ tiên của tôi, 8 thế hệ ¦ Leluhur saya, 8 generasi
 Toute ma base, siècle par siècle ¦ Toàn bộ cơ sở dữ liệu của tôi, từng thế kỷ ¦ Seluruh basis data saya, abad demi abad
 =aire ¦ vùng ¦ wilayah
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Người đỡ đầu và nhân chứng trên bản đồ ¦ Wali baptis dan saksi di peta
+Les liens (un par ligne) ¦ Các liên kết (mỗi dòng một liên kết) ¦ Hubungan (satu per baris)
+D’où vient le témoin ¦ Nhân chứng đến từ đâu ¦ Asal saksi
+D’où vient le parrain ¦ Người đỡ đầu đến từ đâu ¦ Asal wali baptis
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ Điều ghi trong văn bản, nếu không thì nơi ở vào ngày đó, nếu không thì nơi sinh ¦ Yang tertulis di akta, jika tidak tempat tinggal pada tanggal itu, jika tidak kelahiran
+Seulement ce qui est écrit dans l’acte ¦ Chỉ điều ghi trong văn bản ¦ Hanya yang tertulis di akta
+Seulement sa naissance ¦ Chỉ nơi sinh ¦ Hanya kelahiran
+Nombre de liens ¦ Số liên kết ¦ Jumlah hubungan
+Nombre de personnes différentes ¦ Số người khác nhau ¦ Jumlah orang berbeda
+Liens dans le même village ¦ Liên kết trong cùng làng ¦ Hubungan di desa yang sama
+Anneau autour du point ¦ Vòng quanh điểm ¦ Cincin di sekitar titik
+Un chiffre seulement ¦ Chỉ một con số ¦ Hanya angka
+Rôles montrés ¦ Vai trò hiển thị ¦ Peran yang ditampilkan
+Parrain, marraine, témoin ¦ Cha đỡ đầu, mẹ đỡ đầu, nhân chứng ¦ Ayah baptis, ibu baptis, saksi
+Tous sauf curé et officier ¦ Tất cả trừ linh mục và viên chức ¦ Semua kecuali pastor dan petugas
+Traits montrés ¦ Các đường hiển thị ¦ Garis yang ditampilkan
+À partir de 1 lien ¦ Từ 1 liên kết ¦ Mulai 1 hubungan
+À partir de 2 ¦ Từ 2 ¦ Mulai 2
+À partir de 3 ¦ Từ 3 ¦ Mulai 3
+Les 30 plus forts seulement ¦ Chỉ 30 liên kết mạnh nhất ¦ Hanya 30 yang terkuat
+Par rôle ¦ Theo vai trò ¦ Menurut peran
+Par branche (bleu père, orange mère) ¦ Theo nhánh (xanh dương bên nội, cam bên ngoại) ¦ Menurut cabang (biru ayah, oranye ibu)
+Flèche du village du parrain vers celui de l’acte ¦ Mũi tên từ làng người đỡ đầu đến làng của văn bản ¦ Panah dari desa wali baptis ke desa akta
+La phrase sous la carte ¦ Câu dưới bản đồ ¦ Kalimat di bawah peta
+Clic : les liens derrière ce trait ¦ Bấm: các liên kết sau đường này ¦ Klik: hubungan di balik garis ini
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: {p} % liên kết là từ chính làng này; số còn lại chủ yếu đến từ {others}. ¦ {place}: {p} % hubungan berasal dari desa itu sendiri; sisanya terutama dari {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Tính trên {a} có làng đã biết; {b} không có địa điểm thì không vẽ. ¦ Dihitung dari {a} yang desanya diketahui; {b} tanpa tempat tidak digambar.
+Parrains et témoins : {a} entre {b}. ¦ Người đỡ đầu và nhân chứng: {a} giữa {b}. ¦ Wali baptis dan saksi: {a} antara {b}.
+Parrains et témoins : {n}. ¦ Người đỡ đầu và nhân chứng: {n}. ¦ Wali baptis dan saksi: {n}.
+Filleul ou époux ¦ Con đỡ đầu hoặc vợ chồng ¦ Anak baptis atau pasangan
+{n} autres · triés par date ¦ Thêm {n} · theo ngày ¦ {n} lainnya · menurut tanggal
+Ouvrir dans le Réseau ¦ Mở trong Mạng lưới ¦ Buka di Jaringan
+PARRAINS ET TÉMOINS ¦ NGƯỜI ĐỠ ĐẦU VÀ NHÂN CHỨNG ¦ WALI BAPTIS DAN SAKSI
+Parrains et marraines ¦ Cha mẹ đỡ đầu ¦ Ayah dan ibu baptis
+Parrains, marraines et témoins ¦ Người đỡ đầu và nhân chứng ¦ Wali baptis dan saksi
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Lấy người đỡ đầu và nhân chứng từ gia phả của bạn (“Từ ứng dụng”). ¦ Ambil wali baptis dan saksi dari silsilah kamu (“Dari aplikasi”).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ Các liên kết của 🕸 Mạng lưới quan hệ, trên bản đồ: làng của văn bản và làng nhân chứng đến từ đó. Nhân chứng còn sống không bao giờ được tính. ¦ Hubungan dari 🕸 Jaringan relasi, di peta: desa akta dan desa asal saksi. Saksi yang masih hidup tidak pernah dihitung.
+Aucun lien avec un lieu pour ce choix. ¦ Không có liên kết nào có địa điểm cho lựa chọn này. ¦ Tidak ada hubungan dengan tempat untuk pilihan ini.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Không có liên kết nào cho lựa chọn này (vai trò, thời kỳ, địa điểm). ¦ Tidak ada hubungan untuk pilihan ini (peran, periode, tempat).
+Curé, officier ¦ Linh mục, viên chức ¦ Pastor, petugas
+curé ¦ linh mục ¦ pastor
+Curé ¦ Linh mục ¦ Pastor
+tuteur ¦ người giám hộ ¦ wali
+Voisin ¦ Hàng xóm ¦ Tetangga
+Officier ¦ Viên chức ¦ Petugas
+bapt. ¦ rửa tội ¦ baptis
+naiss. ¦ sinh ¦ lahir
+mar. ¦ cưới ¦ nikah
+inh. ¦ chôn ¦ makam

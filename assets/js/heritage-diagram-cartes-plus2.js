@@ -737,3 +737,154 @@
         fromApp: areaApp, describe: spec => i18n('Aire de vie : {n}.', {n: pl(rows(spec).length, 'événement')})});
     ext.diagramCartesPlus2.lifearea = lifearea; ext.diagramCartesPlus2.openArea = openFor;
 })();
+
+/* ═════════ 🕸 Parrains, marraines et témoins sur la carte (maquette, partie 2) ═════════
+ * Chaque lien du 🕸 Réseau de relations devient un trait entre deux villages : celui de l'acte (le baptême, le mariage) et celui
+ * d'où vient le parrain ou le témoin (écrit dans l'acte, sinon sa résidence la plus proche de la date, sinon sa naissance).
+ * Plus il y a de liens, plus le trait est épais ; les liens dans le même village font un anneau autour du point.
+ * Données : op links de lib/cartes_plus2.php (rôle lu par dgn_witness_role, comme le Réseau ; vivants jamais comptés). */
+(() => {
+    'use strict';
+    const P2 = window.LCNDA_EXT?.diagramCartesPlus2; if (!P2) return;
+    const {T, esc, num, clamp, r1, r2, rows, str, C, pl, tip, opt, optN, curve, bases, frame, emptyMsg, missing, title, periodWord, keepDetail, placeNames, PLACE_LABELS,
+        get, placesOf, keepUnplaced, pane, bindGo, sel, val, checks, startId, mapOpts, COMMON, REC, i18n, A, ext, GC, DR, color} = P2.H;
+    const ROLE_COL = {parrain: '#1f6fd1', marraine: '#d6408f', 'témoin': '#2e8b57', 'déclarant': '#8a6a2f', voisin: '#6929c4', officier: '#5b6573', 'curé': '#5b6573'};
+    const SIDE = ['#1f6fd1', '#e8890c'];
+    const ROLESETS = {'': ['parrain', 'marraine'], witness: ['parrain', 'marraine', 'témoin'], nocler: null, all: null};
+    const roleOk = (o, role) => { const set = opt(o, 'roles', ''); if (set === 'all') return true; if (set === 'nocler') return !['curé', 'officier'].includes(role); return (ROLESETS[set] || ROLESETS['']).includes(role); };
+    /** d'où vient le témoin : ce qui est écrit dans l'acte, sa résidence de l'époque, sa naissance (selon le réglage) */
+    const fromOf = (o, r) => { const how = opt(o, 'from', ''); if (how === 'note') return str(r.from_note); if (how === 'birth') return str(r.from_birth); return str(r.from_note) || str(r.from_resi) || str(r.from_birth); };
+    const stepOf = spec => { const s = spec.o?.step; return s === '25' ? 25 : s === 'gen' ? 1 : 0; };
+    const time = {
+        range: spec => { const s = stepOf(spec); if (!s) return [NaN, NaN]; if (s === 1) { const gs = rows(spec).map(r => Number(r.gen)).filter(g => g > 0); return gs.length ? [Math.min(...gs), Math.max(...gs)] : [NaN, NaN]; }
+            const ys = rows(spec).map(r => P2.H.yearOf(r.date)).filter(y => y !== null); return ys.length ? [Math.floor(Math.min(...ys) / s) * s, Math.floor(Math.max(...ys) / s) * s] : [NaN, NaN]; },
+        at: (spec, y) => { spec.o = {...(spec.o || {}), __year: y, time: {...(spec.o?.time || {}), step: stepOf(spec) || 25}}; return spec; },
+    };
+    function kept(spec) {
+        const o = spec.o || {}, s = stepOf(spec), y = Number.isFinite(o.__year) ? o.__year : null;
+        const from = String(o.yfrom ?? '').trim() ? num(o.yfrom) : null, to = String(o.yto ?? '').trim() ? num(o.yto) : null;
+        return rows(spec).filter(r => { if (!roleOk(o, r.role)) return false; const yy = P2.H.yearOf(r.date);
+            if ((from !== null && (yy === null || yy < from)) || (to !== null && (yy === null || yy > to))) return false;
+            if (y !== null && s === 1) return Number(r.gen) === Math.round(y); if (y !== null && s) return yy !== null && yy >= Math.floor(y / s) * s && yy < Math.floor(y / s) * s + s; return true; });
+    }
+    function linkmap(spec, W, fs) {
+        const o = spec.o || {}, B0 = bases(spec, W); if (B0.wait) return B0.wait;
+        const loc = new Map(), unknown = new Set(), at = label => { if (!label) return null; if (!loc.has(label)) loc.set(label, GC.placeOf(spec, label, B0.list)); const p = loc.get(label); if (!p && unknown.size < 30) unknown.add(label.slice(0, 40)); return p; };
+        const list = kept(spec), pairs = new Map(); let noPlace = 0;
+        list.forEach(r => { const a = at(str(r.label)), f = fromOf(o, r), b = at(f); if (!a || !b) { noPlace++; return; }
+            const k = `${f}→${r.label}`; let x = pairs.get(k); if (!x) pairs.set(k, x = {a: b, b: a, from: f, to: str(r.label), rows: [], people: new Set()}); x.rows.push(r); x.people.add(r.wname || r.wid); });
+        const weight = x => opt(o, 'weight', '') === 'people' ? x.people.size : x.rows.length;
+        let P = [...pairs.values()].sort((a, b) => weight(b) - weight(a));
+        const min = opt(o, 'minLinks', ''); if (min === 'top30') P = P.filter(x => x.from === x.to).concat(P.filter(x => x.from !== x.to).slice(0, 30)); else if (min) P = P.filter(x => weight(x) >= Number(min));
+        const pts = P.flatMap(x => [[x.a[0], x.a[1]], [x.b[0], x.b[1]]]);
+        const F = frame(spec, W, fs, pts.length ? pts : [...loc.values()].filter(Boolean).map(p => [p[0], p[1]])); if (F.wait) return F.wait;
+        const {pr, w, h} = F, id = 'cql' + Math.random().toString(36).slice(2, 8), maxW = Math.max(1, ...P.map(weight)), wmax = clamp(w / 90, 3, 12) * clamp(num(o.lineW) || 1, .3, 3);
+        const colOf = x => { const c = opt(o, 'color', ''); if (c === 'role') { const r = x.rows[0].role; return ROLE_COL[r] || '#555'; } if (c === 'side') { const s = Number(x.rows[0].side); return SIDE[s] || '#8a8f99'; } return color(o.lineColor, '#1f4e79'); };
+        let defs = ''; if (opt(o, 'arrow', '') === 'arrow') defs = `<defs><marker id="${id}m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="context-stroke"/></marker></defs>`;
+        let svg = `<g data-c2-total="${list.length}"></g>` + F.open + defs + `<g data-cq-d="${id}">`;
+        const same = opt(o, 'same', '');
+        P.forEach((x, i) => {
+            const [x1, y1] = pr.p(x.a[0], x.a[1]), [x2, y2] = pr.p(x.b[0], x.b[1]); if (!Number.isFinite(x1) || !Number.isFinite(x2)) return;
+            const wd = Math.max(1, wmax * Math.sqrt(weight(x) / maxW)), col = colOf(x), lab = `${x.from} → ${x.to} : ${pl(x.rows.length, 'lien')}${x.people.size !== x.rows.length ? ` (${pl(x.people.size, 'personne')})` : ''}`;
+            if (x.from === x.to) { if (same === 'hide') return; // les liens dans le même village
+                svg += `<g class="cq-link" data-cq-i="${i}" tabindex="0" role="button" aria-label="${esc(lab)}">${tip(lab + '\n' + i18n('Clic : les liens derrière ce trait'))}${same === 'number' ? T(x1, y1 - wd - 6, String(weight(x)), {size: fs * .85, anchor: 'middle', weight: 800, fill: col, halo: '#ffffffcc'}) : `<circle cx="${r1(x1)}" cy="${r1(y1)}" r="${r2(6 + wd * 1.2)}" fill="none" stroke="${col}" stroke-width="${r2(wd)}" stroke-opacity=".75"/>`}</g>`; return; }
+            svg += `<g class="cq-link" data-cq-i="${i}" tabindex="0" role="button" aria-label="${esc(lab)}">${tip(lab + '\n' + i18n('Clic : les liens derrière ce trait'))}<path d="${curve(x1, y1, x2, y2)}" fill="none" stroke="${col}" stroke-width="${r2(wd)}" stroke-opacity=".78" stroke-linecap="round"${x.rows.length === 1 ? ' stroke-dasharray="5 4"' : ''}${defs ? ` marker-end="url(#${id}m)"` : ''}/><path d="${curve(x1, y1, x2, y2)}" fill="none" stroke="transparent" stroke-width="${r2(wd + 8)}"/></g>`;
+        });
+        svg += '</g>';
+        const villages = new Map(); P.forEach(x => { [[x.from, x.a], [x.to, x.b]].forEach(([n, p]) => villages.set(n, p)); });
+        villages.forEach((p, n) => { const [x, y] = pr.p(p[0], p[1]); if (Number.isFinite(x)) svg += `<circle cx="${r1(x)}" cy="${r1(y)}" r="3.4" fill="#111" stroke="#fff" stroke-width="1">${tip(n)}</circle>`; });
+        svg += placeNames(spec, F, [...villages].map(([n, p]) => ({lon: p[0], lat: p[1], place: n})), fs);
+        const st = stepOf(spec), word = Number.isFinite(o.__year) && st ? (st === 1 ? i18n('Génération {g}', {g: String(Math.round(o.__year))}) : periodWord(Math.floor(o.__year / st) * st, st)) : '';
+        if (word) svg += title(word, fs);
+        svg += F.close;
+        let H = h;
+        // la phrase sous la carte : la part du village même, et d'où viennent les autres (calculé sur les liens dont le village est connu)
+        if (o.summary !== false && P.length) {
+            const byTo = new Map(); P.forEach(x => { const t = byTo.get(x.to) || {same: 0, total: 0, others: new Map()}; t.total += x.rows.length; if (x.from === x.to) t.same += x.rows.length; else t.others.set(x.from, (t.others.get(x.from) || 0) + x.rows.length); byTo.set(x.to, t); });
+            const [top, t] = [...byTo].sort((a, b) => b[1].total - a[1].total)[0];
+            const others = [...t.others].sort((a, b) => b[1] - a[1]).slice(0, 2).map(([n, k]) => `${n} (${k})`).join(', ');
+            const line1 = i18n('{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}.', {place: top, p: String(Math.round(t.same / t.total * 100)), others: others || '—'});
+            const line2 = i18n('Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés.', {a: pl(list.length - noPlace, 'lien'), b: pl(noPlace, 'lien')});
+            svg += T(0, H + fs * .9, line1, {size: fs * .82}) + T(0, H + fs * 2.1, line2, {size: fs * .75, fill: '#666'}); H += fs * 2.8;
+        }
+        if (unknown.size && o.showMissing !== false) { svg += missing([...unknown], H, fs, spec); H += fs * 1.5; }
+        if (!rows(spec).length) svg += emptyMsg(w, h, fs, 'Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »).');
+        else if (!P.length) svg += emptyMsg(w, h, fs, 'Aucun lien pour ce choix (rôles, période, lieux).');
+        keepDetail(id, i => detail(spec, P[i]));
+        const legend = opt(o, 'color', '') === 'role' ? [...new Set(list.map(r => r.role))].filter(r => ROLE_COL[r]).map(r => ({label: i18n(r[0].toUpperCase() + r.slice(1)), color: ROLE_COL[r]})) : opt(o, 'color', '') === 'side' ? [{label: i18n('Côté père'), color: SIDE[0]}, {label: i18n('Côté mère'), color: SIDE[1]}] : [];
+        return {h: H, svg, legend, geo: F.geo, desc: i18n('Parrains et témoins : {a} entre {b}.', {a: pl(list.length - noPlace, 'lien'), b: pl(villages.size, 'lieu', 'lieux')})};
+    }
+    const EV = {CHR: 'bapt.', BAPM: 'bapt.', BIRT: 'naiss.', MARR: 'mar.', DEAT: 'déc.', BURI: 'inh.'};
+    function detail(spec, x) {
+        if (!x || !ext.openDialog) return;
+        const line = r => `<tr><td>${esc(i18n(EV[r.tag] || 'acte'))} ${esc(r.date || '')}, ${esc(r.label)}</td><td>${Number(r.pid) ? `<button type="button" class="link-button" data-cq-person="${Number(r.pid)}">${esc(r.pname || '')}</button>` : esc(r.pname || '')}${r.pname2 ? ' · ' + esc(r.pname2) : ''}</td><td>${Number(r.wid) ? `<button type="button" class="link-button" data-cq-person="${Number(r.wid)}">${esc(r.wname || '')}</button>` : esc(r.wname || '')}${x.from !== x.to ? `, ${esc(i18n('de {place}', {place: x.from}))}` : ''}</td><td>${esc(i18n(r.role))}</td></tr>`;
+        const sorted = [...x.rows].sort((a, b) => (P2.H.yearOf(a.date) ?? 0) - (P2.H.yearOf(b.date) ?? 0));
+        const body = `<div class="cq-detail"><div class="cq-scroll"><table><thead><tr><th>${esc(i18n('Acte'))}</th><th>${esc(i18n('Filleul ou époux'))}</th><th>${esc(i18n('Parrain, marraine, témoin'))}</th><th>${esc(i18n('Rôle'))}</th></tr></thead><tbody>${sorted.slice(0, 80).map(line).join('')}</tbody></table></div>
+            ${sorted.length > 80 ? `<p class="muted">+ ${esc(i18n('{n} autres · triés par date', {n: String(sorted.length - 80)}))}</p>` : ''}
+            ${ext.openDiagramEditor && DR.KINDS.network ? `<p><button type="button" class="button small secondary" data-cq-net>🕸 ${esc(i18n('Ouvrir dans le Réseau'))}</button></p>` : ''}</div>`;
+        const dlg = ext.openDialog({eyebrow: i18n('PARRAINS ET TÉMOINS'), title: x.from === x.to ? x.to : `${x.from} ↔ ${x.to}`, body, submitLabel: i18n('Fermer'), onSubmit: () => true});
+        dlg?.querySelector?.('[data-cq-net]')?.addEventListener('click', () => { dlg.close(); openNetwork(x.rows); });
+    }
+    /** « 🕸 Ouvrir dans le Réseau » : les mêmes liens, sans géographie */
+    function openNetwork(list) {
+        const agg = new Map(); list.forEach(r => { const k = `${r.wname}|${r.pname}|${r.role}`; agg.set(k, (agg.get(k) || 0) + 1); });
+        const links = [...agg].map(([k, n]) => { const [a, b, kind] = k.split('|'); return {a, b, kind, weight: n}; });
+        ext.openDiagramEditor(null, {spec: {kind: 'network', o: {title: i18n('Parrains, marraines et témoins')}, rows: links, nodes: [...new Set(links.flatMap(l => [l.a, l.b]))].map(name => ({name}))}});
+    }
+
+    /* ─── Depuis l'app ─── */
+    const ROLES = [['parrain', 'Parrain'], ['marraine', 'Marraine'], ['témoin', 'Témoin'], ['déclarant', 'Déclarant'], ['voisin', 'Voisin'], ['curé', 'Curé, officier']];
+    function fill(s, r, extra = {}) {
+        const names = placesOf(s, r.places || {}), nm = id => (id ? names.get(id) || '' : '');
+        s.rows = (r.rows || []).filter(e => names.has(e[0])).map(([act, fn, fr, fb, role, y, wid, pid, pid2, tag, side, gen]) => ({label: nm(act), from_note: nm(fn), from_resi: nm(fr), from_birth: nm(fb), role: role === 'officier' ? 'officier' : role, date: y === null ? '' : String(y), wid, wname: r.people?.[wid] || '', pid, pname: r.people?.[pid] || '', pname2: pid2 ? r.people?.[pid2] || '' : '', tag, side, gen: gen || ''}));
+        keepUnplaced(s, r.unplaced); s.o = {...(s.o || {}), ...extra}; return s;
+    }
+    const linkApp = {
+        html: () => pane('🕸 Parrains, marraines et témoins', 'Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés.',
+            `<fieldset><legend>${esc(i18n('Rôles'))}</legend><div class="cq-checks">${ROLES.map(([k, l], i) => `<label class="checkbox-line"><input type="checkbox" data-cq="roles" value="${esc(k)}"${i < 2 ? ' checked' : ''}> ${esc(i18n(l))}</label>`).join('')}</div></fieldset>`
+            + `<label>${esc(i18n('De l’année'))}<input data-cq="yfrom" inputmode="numeric" maxlength="4"></label><label>${esc(i18n('À l’année'))}<input data-cq="yto" inputmode="numeric" maxlength="4"></label>`
+            + sel('pop', 'Branche', [['all', 'Toute ma base'], ['anc', 'Mes ancêtres'], ['pat', 'Ma branche paternelle (côté père)'], ['mat', 'Ma branche maternelle (côté mère)'], ['name', 'Un nom de famille']])
+            + `<label data-cq-onlyname>${esc(i18n('Nom de famille'))}<input data-cq="name" maxlength="80"></label>`),
+        bind: (box, io) => {
+            const sync = () => { box.querySelector('[data-cq-onlyname]').hidden = val(box, 'pop') !== 'name'; }; sync(); box.addEventListener('change', sync);
+            bindGo(box, async () => {
+                const r = await get({what: 'links', pop: val(box, 'pop'), name: val(box, 'name'), root: startId()}); if (r.error) throw new Error(r.error);
+                const set = checks(box, 'roles'), want = new Set(set.flatMap(k => (k === 'curé' ? ['curé', 'officier'] : [k])));
+                const roles = want.size === 2 && want.has('parrain') && want.has('marraine') ? '' : [...want].every(k => ['parrain', 'marraine', 'témoin'].includes(k)) && want.size === 3 ? 'witness' : want.has('curé') ? 'all' : 'nocler';
+                const s = fill(io.spec(), r, {roles, yfrom: val(box, 'yfrom'), yto: val(box, 'yto'), title: roles === '' ? i18n('Parrains et marraines') : i18n('Parrains, marraines et témoins')});
+                s.rows = s.rows.filter(x => roles !== 'nocler' || want.has(x.role) || (want.has('curé') && x.role === 'officier'));
+                if (!s.rows.length) throw new Error(i18n('Aucun lien avec un lieu pour ce choix.'));
+                io.apply(s); return pl(s.rows.length, 'lien');
+            });
+        },
+    };
+    // 🕸 Réseau de relations → onglet Relier → « 🗺 Voir sur la carte »
+    async function openAll() {
+        try { const r = await get({what: 'links', root: startId()}); const s = fill({kind: 'linkmap', o: {map: 'fr', roles: 'all'}}, r, {title: i18n('Parrains, marraines et témoins')});
+            if (!s.rows.length) throw new Error(i18n('Aucun lien avec un lieu pour ce choix.')); ext.openDiagramEditor?.(null, {spec: s, name: s.o.title}); } catch (e) { A()?.toast?.(e.message || String(e), 'error'); }
+    }
+    if (DR.KINDS.network && !DR.KINDS.network.relate) DR.KINDS.network.relate = () => [{label: '🗺 ' + i18n('Voir sur la carte'), run: openAll}];
+
+    const SP = {Tulle: [45.2694, 1.768], Naves: [45.3118, 1.7521], Seilhac: [45.3667, 1.7167], Chameyrat: [45.2471, 1.7043], Laguenne: [45.242, 1.781], Favars: [45.263, 1.670], Gimel: [45.297, 1.844]};
+    const sp = n => `${n} ${SP[n][0]}, ${SP[n][1]}`;
+    const sample = () => { const out = []; const plan = [['Naves', 'Naves', 'parrain', 9], ['Naves', 'Tulle', 'parrain', 5], ['Naves', 'Tulle', 'marraine', 4], ['Naves', 'Seilhac', 'marraine', 3], ['Tulle', 'Naves', 'parrain', 2], ['Tulle', 'Tulle', 'marraine', 4],
+        ['Seilhac', 'Gimel', 'parrain', 1], ['Chameyrat', 'Favars', 'témoin', 2], ['Laguenne', 'Tulle', 'parrain', 1]];
+        plan.forEach(([to, from, role, n], i) => { for (let k = 0; k < n; k++) out.push({label: sp(to), from_note: sp(from), role, date: String(1760 + (i * 13 + k * 7) % 90), wname: `DURAND ${i}-${k}`, pname: `MAZAUD ${i}-${k}`, tag: 'CHR'}); }); return out; };
+    P2.add('linkmap', {icon: '🕸', label: 'Parrains, marraines et témoins sur la carte', render: GC.remember(linkmap), legend: 'bottom', time,
+        grids: [{key: 'rows', label: 'Les liens (un par ligne)', cols: [C('label', 'Lieu de l’acte'), C('from_note', 'D’où vient le témoin'), C('role', 'Rôle'), C('date', 'Date ou année', 'text', {ph: '1790'}), C('wname', 'Parrain, marraine, témoin'), C('pname', 'Filleul ou époux')]}],
+        options: [REC,
+            C('from', 'D’où vient le parrain', 'select', {choices: [['', 'Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance'], ['note', 'Seulement ce qui est écrit dans l’acte'], ['birth', 'Seulement sa naissance']]}),
+            C('weight', 'Épaisseur', 'select', {choices: [['', 'Nombre de liens'], ['people', 'Nombre de personnes différentes']]}),
+            C('same', 'Liens dans le même village', 'select', {choices: [['', 'Anneau autour du point'], ['hide', 'Cachés'], ['number', 'Un chiffre seulement']]}),
+            C('roles', 'Rôles montrés', 'select', {choices: [['', 'Parrain, marraine'], ['witness', 'Parrain, marraine, témoin'], ['nocler', 'Tous sauf curé et officier'], ['all', 'Tous']]}),
+            C('minLinks', 'Traits montrés', 'select', {choices: [['', 'À partir de 1 lien'], ['2', 'À partir de 2'], ['3', 'À partir de 3'], ['top30', 'Les 30 plus forts seulement']]}),
+            C('color', 'Couleur des traits', 'select', {choices: [['', 'Une seule'], ['role', 'Par rôle'], ['side', 'Par branche (bleu père, orange mère)']]}),
+            C('lineColor', 'Couleur', 'color', {def: '#1f4e79', when: s => !s.o?.color}),
+            C('arrow', 'Sens', 'select', {choices: [['', 'Sans flèche'], ['arrow', 'Flèche du village du parrain vers celui de l’acte']]}),
+            C('step', 'Curseur ▶', 'select', {choices: [['', 'Sans'], ['25', 'Par 25 ans'], ['gen', 'Par génération']]}),
+            C('yfrom', 'De l’année', 'number', {min: 1000, max: 2100}), C('yto', 'À l’année', 'number', {min: 1000, max: 2100}),
+            C('lineW', 'Épaisseur des traits', 'range', {min: .3, max: 3, step: .1, def: 1}), C('summary', 'La phrase sous la carte', 'check', {def: true}), PLACE_LABELS, ...mapOpts, ...COMMON],
+        sample: () => ({o: {title: i18n('Parrains et marraines'), map: 'fr'}, rows: sample()}),
+        fromApp: linkApp, describe: spec => i18n('Parrains et témoins : {n}.', {n: pl(rows(spec).length, 'lien')})});
+    ext.diagramCartesPlus2.linkmap = linkmap; ext.diagramCartesPlus2.openLinks = openAll;
+})();

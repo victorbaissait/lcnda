@@ -238,3 +238,53 @@ Côté père et côté mère (deux couleurs) ¦ Föðurætt og móðurætt (tvei
 Mes ancêtres, 8 générations ¦ Forfeður mínir, 8 kynslóðir
 Toute ma base, siècle par siècle ¦ Allur grunnurinn minn, öld fyrir öld
 =aire ¦ svæði|svæði
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Guðforeldrar og vottar á kortinu
+Les liens (un par ligne) ¦ Tengslin (ein í línu)
+D’où vient le témoin ¦ Hvaðan votturinn kemur
+D’où vient le parrain ¦ Hvaðan guðforeldrið kemur
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ Það sem stendur í skjalinu, annars búseta á þeim degi, annars fæðing
+Seulement ce qui est écrit dans l’acte ¦ Aðeins það sem stendur í skjalinu
+Seulement sa naissance ¦ Aðeins fæðingin
+Nombre de liens ¦ Fjöldi tengsla
+Nombre de personnes différentes ¦ Fjöldi ólíkra manneskja
+Liens dans le même village ¦ Tengsl í sama þorpi
+Anneau autour du point ¦ Hringur um punktinn
+Un chiffre seulement ¦ Aðeins tala
+Rôles montrés ¦ Hlutverk sem sýnd eru
+Parrain, marraine, témoin ¦ Guðfaðir, guðmóðir, vottur
+Tous sauf curé et officier ¦ Allir nema prestur og embættismaður
+Traits montrés ¦ Línur sem sýndar eru
+À partir de 1 lien ¦ Frá 1 tengslum
+À partir de 2 ¦ Frá 2
+À partir de 3 ¦ Frá 3
+Les 30 plus forts seulement ¦ Aðeins 30 sterkustu
+Par rôle ¦ Eftir hlutverki
+Par branche (bleu père, orange mère) ¦ Eftir grein (blátt faðir, appelsínugult móðir)
+Flèche du village du parrain vers celui de l’acte ¦ Ör frá þorpi guðforeldris að þorpi skjalsins
+La phrase sous la carte ¦ Setningin undir kortinu
+Clic : les liens derrière ce trait ¦ Smelltu: tengslin á bak við línuna
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: {p} % tengslanna eru úr þorpinu sjálfu; hin koma helst frá {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Reiknað á {a} þar sem þorpið er þekkt; {b} án staðar eru ekki teiknuð.
+Parrains et témoins : {a} entre {b}. ¦ Guðforeldrar og vottar: {a} milli {b}.
+Parrains et témoins : {n}. ¦ Guðforeldrar og vottar: {n}.
+Filleul ou époux ¦ Guðbarn eða maki
+{n} autres · triés par date ¦ {n} til viðbótar · eftir dagsetningu
+Ouvrir dans le Réseau ¦ Opna í Netinu
+PARRAINS ET TÉMOINS ¦ GUÐFORELDRAR OG VOTTAR
+Parrains et marraines ¦ Guðfeður og guðmæður
+Parrains, marraines et témoins ¦ Guðforeldrar og vottar
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Sæktu guðforeldra og votta úr ættfræðinni þinni („Úr forritinu“).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ Tengsl úr 🕸 Venslaneti, á kortinu: þorp skjalsins og það sem votturinn kemur frá. Lifandi vottar eru aldrei taldir.
+Aucun lien avec un lieu pour ce choix. ¦ Engin tengsl með stað fyrir þetta val.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Engin tengsl fyrir þetta val (hlutverk, tímabil, staðir).
+Curé, officier ¦ Prestur, embættismaður
+curé ¦ prestur
+Curé ¦ Prestur
+tuteur ¦ lögráðamaður
+Voisin ¦ Nágranni
+Officier ¦ Embættismaður
+bapt. ¦ skírn
+naiss. ¦ fæð.
+mar. ¦ gift.
+inh. ¦ greftr.

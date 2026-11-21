@@ -152,6 +152,15 @@ function dgn_desc(PDO $pdo, int $root, int $gens): array
 }
 
 /** témoins, parrains… : autour d'une personne (1 ou 2 pas) ou dans toute la base */
+/** le rôle d'un témoin, lu dans la note du lien (« parrain, de Tulle » → parrain) ; sans mot connu : la note elle-même, sinon « témoin » */
+function dgn_witness_role(string $note): string
+{
+    $role = trim($note);
+    $low = mb_strtolower($role);
+    foreach (['parrain', 'marraine', 'témoin', 'déclarant', 'voisin', 'officier', 'employeur', 'tuteur', 'curé'] as $w) { if (str_contains($low, $w)) { return $w; } }
+    return $role === '' ? 'témoin' : mb_substr($role, 0, 40);
+}
+
 function dgn_witness(PDO $pdo, int $root, int $depth, bool $all): array
 {
     $max = 2500;
@@ -159,11 +168,7 @@ function dgn_witness(PDO $pdo, int $root, int $depth, bool $all): array
         FROM event_witnesses ew JOIN events e ON e.id=ew.event_id JOIN event_types t ON t.id=e.event_type_id LEFT JOIN families f ON f.id=e.family_id";
     $pairs = [];
     $add = static function (array $r) use (&$pairs): void {
-        $role = trim((string) $r['note']);
-        $low = mb_strtolower($role);
-        foreach (['parrain', 'marraine', 'témoin', 'déclarant', 'voisin', 'officier', 'employeur', 'tuteur', 'curé'] as $w) { if (str_contains($low, $w)) { $role = $w; break; } }
-        if ($role === '') { $role = 'témoin'; }
-        $role = mb_substr($role, 0, 40);
+        $role = dgn_witness_role((string) $r['note']);
         foreach ([(int) $r['p'], (int) $r['f1'], (int) $r['f2']] as $o) {
             if ($o && $o !== (int) $r['w']) { $k = $r['w'] . '|' . $o . '|' . $role; $pairs[$k] = ($pairs[$k] ?? 0) + 1; }
         }

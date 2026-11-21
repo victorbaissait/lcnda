@@ -147,6 +147,9 @@
             ['Deux noms de famille', {'[data-cq="side"]': 'names'}], ['Côté père / côté mère, avant la Révolution', {'[data-cq="side"]': 'pat', '[data-cq="period"]': '-1789'}]],
         lifearea: [['Mes ancêtres, 8 générations', {'[data-cq="group"]': 'gen', '[data-cq="gens"]': '8'}], ['Le plus loin possible (14 générations)', {'[data-cq="group"]': 'gen', '[data-cq="gens"]': '14'}],
             ['Toute ma base, siècle par siècle', {'[data-cq="group"]': 'century'}], ['Côté père et côté mère (deux couleurs)', {'[data-cq="group"]': 'gen', '[data-cq="colors"]': 'side'}], ['Une vie (les étapes d’une personne)', {'[data-cq="group"]': 'person'}]],
+        linkmap: [['Parrains et marraines des baptêmes', {'[data-cq="roles"]': ['parrain', 'marraine']}], ['Témoins des mariages', {'[data-cq="roles"]': ['témoin']}],
+            ['Tous les liens (parrains, témoins, déclarants…)', {'[data-cq="roles"]': ['parrain', 'marraine', 'témoin', 'déclarant', 'voisin', 'curé']}], ['Autour de mes ancêtres', {'[data-cq="roles"]': ['parrain', 'marraine', 'témoin'], '[data-cq="pop"]': 'anc'}],
+            ['Avant la Révolution', {'[data-cq="roles"]': ['parrain', 'marraine'], '[data-cq="yto"]': '1789'}], ['Au XIXe siècle', {'[data-cq="roles"]': ['parrain', 'marraine'], '[data-cq="yfrom"]': '1801', '[data-cq="yto"]': '1900'}]],
         quarters: [['8 quartiers (arrière-grands-parents)', {'[data-dla="gens"]': '3'}], ['16 quartiers', {'[data-dla="gens"]': '4'}], ['32 quartiers', {'[data-dla="gens"]': '5'}]],
     };
     const GO = '[data-gn-go], [data-n6-go], [data-dm-go], [data-dfa-go], [data-dgm-go], [data-c2-go], [data-dac-go], [data-cp-go], [data-lotc-go], [data-dpl-go], [data-dla-go], [data-cq-go]';

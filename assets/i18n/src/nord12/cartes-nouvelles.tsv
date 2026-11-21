@@ -238,3 +238,53 @@ Côté père et côté mère (deux couleurs) ¦ По отцу и по матер
 Mes ancêtres, 8 générations ¦ Мои предки, 8 поколений ¦ Мої предки, 8 поколінь
 Toute ma base, siècle par siècle ¦ Вся моя база, век за веком ¦ Уся моя база, століття за століттям
 =aire ¦ ареал|ареала|ареалов ¦ ареал|ареали|ареалів
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Крёстные и свидетели на карте ¦ Хрещені батьки та свідки на мапі
+Les liens (un par ligne) ¦ Связи (по одной в строке) ¦ Зв’язки (по одному в рядку)
+D’où vient le témoin ¦ Откуда свидетель ¦ Звідки свідок
+D’où vient le parrain ¦ Откуда крёстный ¦ Звідки хрещений батько
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ То, что записано в акте, иначе место жительства на дату, иначе рождение ¦ Те, що записано в акті, інакше місце проживання на дату, інакше народження
+Seulement ce qui est écrit dans l’acte ¦ Только записанное в акте ¦ Лише записане в акті
+Seulement sa naissance ¦ Только рождение ¦ Лише народження
+Nombre de liens ¦ Число связей ¦ Кількість зв’язків
+Nombre de personnes différentes ¦ Число разных людей ¦ Кількість різних людей
+Liens dans le même village ¦ Связи в одной деревне ¦ Зв’язки в одному селі
+Anneau autour du point ¦ Кольцо вокруг точки ¦ Кільце довкола точки
+Un chiffre seulement ¦ Только число ¦ Лише число
+Rôles montrés ¦ Показанные роли ¦ Показані ролі
+Parrain, marraine, témoin ¦ Крёстный, крёстная, свидетель ¦ Хрещений, хрещена, свідок
+Tous sauf curé et officier ¦ Все, кроме кюре и чиновника ¦ Усі, крім кюре й службовця
+Traits montrés ¦ Показанные линии ¦ Показані лінії
+À partir de 1 lien ¦ От 1 связи ¦ Від 1 зв’язку
+À partir de 2 ¦ От 2 ¦ Від 2
+À partir de 3 ¦ От 3 ¦ Від 3
+Les 30 plus forts seulement ¦ Только 30 самых сильных ¦ Лише 30 найсильніших
+Par rôle ¦ По роли ¦ За роллю
+Par branche (bleu père, orange mère) ¦ По ветви (синий — отец, оранжевый — мать) ¦ За гілкою (синій — батько, помаранчевий — мати)
+Flèche du village du parrain vers celui de l’acte ¦ Стрелка от деревни крёстного к деревне акта ¦ Стрілка від села хрещеного до села акта
+La phrase sous la carte ¦ Фраза под картой ¦ Речення під мапою
+Clic : les liens derrière ce trait ¦ Нажми: связи за этой линией ¦ Натисни: зв’язки за цією лінією
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: {p} % связей — из самой деревни; остальные в основном из: {others}. ¦ {place}: {p} % зв’язків — із самого села; решта здебільшого з: {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Подсчитано по: {a} с известной деревней; без места, не нарисованы: {b}. ¦ Підраховано за: {a} з відомим селом; без місця, не намальовано: {b}.
+Parrains et témoins : {a} entre {b}. ¦ Крёстные и свидетели: {a} между {b}. ¦ Хрещені й свідки: {a} між {b}.
+Parrains et témoins : {n}. ¦ Крёстные и свидетели: {n}. ¦ Хрещені й свідки: {n}.
+Filleul ou époux ¦ Крестник или супруг ¦ Хрещеник або подружжя
+{n} autres · triés par date ¦ Ещё {n} · по дате ¦ Ще {n} · за датою
+Ouvrir dans le Réseau ¦ Открыть в Сети ¦ Відкрити в Мережі
+PARRAINS ET TÉMOINS ¦ КРЁСТНЫЕ И СВИДЕТЕЛИ ¦ ХРЕЩЕНІ Й СВІДКИ
+Parrains et marraines ¦ Крёстные отцы и матери ¦ Хрещені батьки й матері
+Parrains, marraines et témoins ¦ Крёстные и свидетели ¦ Хрещені батьки та свідки
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Возьми крёстных и свидетелей из своей генеалогии («Из приложения»). ¦ Візьми хрещених батьків і свідків зі своєї генеалогії («Із застосунку»).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ Связи из 🕸 Сети отношений на карте: деревня акта и та, откуда свидетель. Живые свидетели никогда не учитываются. ¦ Зв’язки з 🕸 Мережі стосунків на мапі: село акта і те, звідки свідок. Живі свідки ніколи не враховуються.
+Aucun lien avec un lieu pour ce choix. ¦ Для этого выбора нет связей с местом. ¦ Для цього вибору немає зв’язків із місцем.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Для этого выбора связей нет (роли, период, места). ¦ Для цього вибору зв’язків немає (ролі, період, місця).
+Curé, officier ¦ Кюре, чиновник ¦ Кюре, службовець
+curé ¦ кюре ¦ кюре
+Curé ¦ Кюре ¦ Кюре
+tuteur ¦ опекун ¦ опікун
+Voisin ¦ Сосед ¦ Сусід
+Officier ¦ Чиновник ¦ Службовець
+bapt. ¦ крещ. ¦ хрещ.
+naiss. ¦ рожд. ¦ нар.
+mar. ¦ брак ¦ шлюб
+inh. ¦ погреб. ¦ поховання

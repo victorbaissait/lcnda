@@ -238,3 +238,53 @@ Côté père et côté mère (deux couleurs) ¦ Očeva i majčina strana (dvije 
 Mes ancêtres, 8 générations ¦ Moji preci, 8 generacija ¦ Moji predniki, 8 rodov
 Toute ma base, siècle par siècle ¦ Cijela moja baza, stoljeće po stoljeće ¦ Vsa moja baza, stoletje za stoletjem
 =aire ¦ prostor|prostora|prostora ¦ prostor|prostora|prostori|prostorov
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Kumovi i svjedoci na karti ¦ Botri in priče na zemljevidu
+Les liens (un par ligne) ¦ Veze (jedna po retku) ¦ Vezi (ena v vrstici)
+D’où vient le témoin ¦ Odakle dolazi svjedok ¦ Od kod prihaja priča
+D’où vient le parrain ¦ Odakle dolazi kum ¦ Od kod prihaja boter
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ Ono što piše u ispravi, inače prebivalište na taj datum, inače rođenje ¦ Kar piše v listini, sicer prebivališče na ta datum, sicer rojstvo
+Seulement ce qui est écrit dans l’acte ¦ Samo ono što piše u ispravi ¦ Samo to, kar piše v listini
+Seulement sa naissance ¦ Samo rođenje ¦ Samo rojstvo
+Nombre de liens ¦ Broj veza ¦ Število vezi
+Nombre de personnes différentes ¦ Broj različitih osoba ¦ Število različnih oseb
+Liens dans le même village ¦ Veze u istom selu ¦ Vezi v isti vasi
+Anneau autour du point ¦ Prsten oko točke ¦ Obroč okoli točke
+Un chiffre seulement ¦ Samo broj ¦ Samo število
+Rôles montrés ¦ Prikazane uloge ¦ Prikazane vloge
+Parrain, marraine, témoin ¦ Kum, kuma, svjedok ¦ Boter, botra, priča
+Tous sauf curé et officier ¦ Svi osim župnika i matičara ¦ Vsi razen župnika in matičarja
+Traits montrés ¦ Prikazane crte ¦ Prikazane črte
+À partir de 1 lien ¦ Od 1 veze ¦ Od 1 vezi
+À partir de 2 ¦ Od 2 ¦ Od 2
+À partir de 3 ¦ Od 3 ¦ Od 3
+Les 30 plus forts seulement ¦ Samo 30 najjačih ¦ Samo 30 najmočnejših
+Par rôle ¦ Po ulozi ¦ Po vlogi
+Par branche (bleu père, orange mère) ¦ Po grani (plava otac, narančasta majka) ¦ Po veji (modra oče, oranžna mati)
+Flèche du village du parrain vers celui de l’acte ¦ Strelica od kumova sela do sela isprave ¦ Puščica od botrove vasi do vasi listine
+La phrase sous la carte ¦ Rečenica ispod karte ¦ Stavek pod zemljevidom
+Clic : les liens derrière ce trait ¦ Klikni: veze iza ove crte ¦ Klikni: vezi za to črto
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: {p} % veza je iz samog sela; ostale dolaze uglavnom iz: {others}. ¦ {place}: {p} % vezi je iz same vasi; druge prihajajo predvsem iz: {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Izračunato na: {a} s poznatim selom; bez mjesta, nisu nacrtane: {b}. ¦ Izračunano na: {a} z znano vasjo; brez kraja, niso narisane: {b}.
+Parrains et témoins : {a} entre {b}. ¦ Kumovi i svjedoci: {a} između {b}. ¦ Botri in priče: {a} med {b}.
+Parrains et témoins : {n}. ¦ Kumovi i svjedoci: {n}. ¦ Botri in priče: {n}.
+Filleul ou époux ¦ Kumče ili supružnik ¦ Krščenec ali zakonec
+{n} autres · triés par date ¦ Još {n} · po datumu ¦ Še {n} · po datumu
+Ouvrir dans le Réseau ¦ Otvori u Mreži ¦ Odpri v Omrežju
+PARRAINS ET TÉMOINS ¦ KUMOVI I SVJEDOCI ¦ BOTRI IN PRIČE
+Parrains et marraines ¦ Kumovi i kume ¦ Botri in botre
+Parrains, marraines et témoins ¦ Kumovi, kume i svjedoci ¦ Botri, botre in priče
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Uzmi kumove i svjedoke iz svoje genealogije („Iz aplikacije“). ¦ Vzemi botre in priče iz svojega rodoslovja (»Iz aplikacije«).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ Veze iz 🕸 Mreže odnosa, na karti: selo isprave i ono iz kojeg dolazi svjedok. Živi svjedoci se nikad ne broje. ¦ Vezi iz 🕸 Omrežja odnosov na zemljevidu: vas listine in tista, od koder prihaja priča. Živih prič nikoli ne šteje.
+Aucun lien avec un lieu pour ce choix. ¦ Nema veze s mjestom za ovaj odabir. ¦ Za to izbiro ni vezi s krajem.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Nema veza za ovaj odabir (uloge, razdoblje, mjesta). ¦ Za to izbiro ni vezi (vloge, obdobje, kraji).
+Curé, officier ¦ Župnik, matičar ¦ Župnik, matičar
+curé ¦ župnik ¦ župnik
+Curé ¦ Župnik ¦ Župnik
+tuteur ¦ skrbnik ¦ skrbnik
+Voisin ¦ Susjed ¦ Sosed
+Officier ¦ Matičar ¦ Matičar
+bapt. ¦ krst. ¦ krst
+naiss. ¦ rođ. ¦ roj.
+mar. ¦ vjenč. ¦ por.
+inh. ¦ pokop ¦ pokop

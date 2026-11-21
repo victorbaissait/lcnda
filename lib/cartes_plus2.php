@@ -258,6 +258,61 @@ function cp2_areas(PDO $pdo, array $q): array
     return ['group' => $group, 'rows' => $rows, 'places' => $places, 'people' => cp_people($pdo, array_column($rows, 0)), 'root' => $root, 'birth' => $birth, 'unplaced' => cp2_unplaced($pdo, array_column($rows, 1), $places)];
 }
 
+/** le village écrit dans la note du témoin (« de Tulle », « demeurant à Seilhac », « habitant Naves ») : le nom tel qu'écrit, ou '' */
+function cp2_note_place(string $note): string
+{
+    if (preg_match('/\b(?:demeurant|domicilié|domiciliée|habitant|habitante|résidant|résidante|natif|native)\s+(?:à|a|au|en|de)?\s*(\p{Lu}[\p{L}\'’ -]{1,60})/u', $note, $m)
+        || preg_match('/(?:^|[\s,;(])(?:de|du|d’|d\')\s*(\p{Lu}[\p{L}\'’ -]{1,60})/u', $note, $m)) {
+        return trim((string) preg_replace('/\s+(?:et|qui|le|la)\b.*$/u', '', $m[1]), " -'’");
+    }
+    return '';
+}
+
+/** 🕸 parrains, marraines et témoins : village de l'acte ↔ village d'où vient le témoin (écrit dans l'acte, résidence de l'époque, naissance) */
+function cp2_links(PDO $pdo, array $q): array
+{
+    $hidden = cp_hidden($pdo);
+    $pop = cp2_pick($q, 'pop', ['all', 'anc', 'pat', 'mat', 'name'], 'all');
+    $rootId = cp2_int($q, 'root', 0, 0, PHP_INT_MAX);
+    $only = $pop === 'name' ? null : cp2_pop($pdo, $pop, $rootId, 0);
+    $nameKey = $pop === 'name' ? cp_fold(mb_substr(trim((string) ($q['name'] ?? '')), 0, 80)) : '';
+    $lastName = [];
+    if ($nameKey !== '') { foreach ($pdo->query("SELECT id, last_name FROM persons WHERE COALESCE(last_name,'')<>''") as $p) { if (cp_fold((string) $p['last_name']) === $nameKey) { $lastName[(int) $p['id']] = true; } } }
+    $in = static fn(int $pid) => $pid > 0 && !isset($hidden[$pid]) && ($only === null || isset($only[$pid])) && ($nameKey === '' || isset($lastName[$pid]));
+    // le côté (père / mère) et la génération de chaque ancêtre de la personne de départ : pour « couleur par branche » et le curseur ▶
+    $side = []; $gen = [];
+    $root = dgn_root($pdo, $rootId);
+    if ($root) { foreach (dgn_sosa($pdo, $root, 40, 120000) as $s => $id) { $g = strlen(decbin((int) $s)); $gen[(int) $id] ??= $g; if ($s >= 2) { $side[(int) $id] ??= ((int) $s >> ($g - 2)) - 2; } } }
+    // les lieux de la base, par nom (pour le village écrit dans la note)
+    $byName = [];
+    foreach ($pdo->query("SELECT id, name, latitude FROM places WHERE trim(COALESCE(name,''))<>''") as $p) { $k = cp_fold((string) $p['name']); if (!isset($byName[$k]) || ($p['latitude'] !== null && $byName[$k][1] === null)) { $byName[$k] = [(int) $p['id'], $p['latitude']]; } }
+    $sql = "SELECT ew.person_id AS w, ew.note, e.person_id AS p, f.partner1_id AS f1, f.partner2_id AS f2, e.place_id AS pl, e.year, t.gedcom_tag AS tag
+        FROM event_witnesses ew JOIN events e ON e.id=ew.event_id JOIN event_types t ON t.id=e.event_type_id LEFT JOIN families f ON f.id=e.family_id ORDER BY e.year, ew.id LIMIT 20000";
+    $raw = [];
+    foreach ($pdo->query($sql) as $r) {
+        $w = (int) $r['w']; if ($w <= 0 || isset($hidden[$w])) { continue; } // un témoin vivant ou confidentiel n'est jamais compté
+        $ps = array_values(array_filter([(int) $r['p'], (int) $r['f1'], (int) $r['f2']], static fn($x) => $x > 0 && $x !== $w));
+        if (!$ps || array_filter($ps, static fn($x) => isset($hidden[$x]))) { continue; } // ni filleul ni époux vivant ou confidentiel
+        if (!array_filter($ps, $in)) { continue; }
+        $raw[] = ['w' => $w, 'ps' => $ps, 'pl' => $r['pl'] !== null ? (int) $r['pl'] : null, 'y' => $r['year'] !== null ? (int) $r['year'] : null, 'tag' => (string) $r['tag'], 'role' => dgn_witness_role((string) $r['note']), 'note' => (string) $r['note']];
+    }
+    [$resi, $birth] = cp2_fallback_places($pdo, array_column($raw, 'w'));
+    $rows = []; $noAct = 0;
+    foreach ($raw as $r) {
+        if (!$r['pl']) { $noAct++; continue; }
+        $written = cp2_note_place($r['note']); $fn = $written !== '' && isset($byName[cp_fold($written)]) ? $byName[cp_fold($written)][0] : null;
+        $best = null; foreach ($resi[$r['w']] ?? [] as [$rp, $ry]) { $d = $r['y'] !== null && $ry !== null ? abs($ry - $r['y']) : 500; if ($best === null || $d < $best[1]) { $best = [$rp, $d]; } }
+        $p0 = $r['ps'][0];
+        // [acte, écrit dans l'acte, résidence de l'époque, naissance, rôle, année, témoin, filleul ou époux, épouse, balise, côté, génération]
+        $rows[] = [$r['pl'], $fn, $best[0] ?? null, $birth[$r['w']][0] ?? null, $r['role'], $r['y'], $r['w'], $p0, $r['ps'][1] ?? 0, $r['tag'], $side[$p0] ?? -1, $gen[$p0] ?? 0];
+    }
+    $ids = array_values(array_filter(array_merge(array_column($rows, 0), array_column($rows, 1), array_column($rows, 2), array_column($rows, 3))));
+    $places = cp_places($pdo, $ids);
+    $roles = []; foreach ($rows as $r) { $roles[$r[4]] = ($roles[$r[4]] ?? 0) + 1; } arsort($roles);
+    return ['rows' => $rows, 'places' => $places, 'people' => cp_people($pdo, array_merge(array_column($rows, 6), array_column($rows, 7), array_filter(array_column($rows, 8)))), 'roles' => $roles, 'no_act' => $noAct,
+        'unplaced' => cp2_unplaced($pdo, $ids, $places)];
+}
+
 /** le point d'entrée : api.php?action=cartes_plus2 */
 function cp2_data(PDO $pdo, array $q): array
 {
@@ -267,6 +322,7 @@ function cp2_data(PDO $pdo, array $q): array
         'trade_list' => cp2_trade_list($pdo),
         'mirror' => cp2_mirror($pdo, $q),
         'areas' => cp2_areas($pdo, $q),
+        'links' => cp2_links($pdo, $q),
         default => throw new RuntimeException('Demande inconnue.'),
     };
 }
