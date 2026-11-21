@@ -316,9 +316,28 @@ function htr_read_job(string $id): array
     $state = (string) ($r['state'] ?? 'running');
     if ($state === 'running' && time() - (int) ($r['updated'] ?? $job['created'] ?? time()) > 1800) { $state = 'error'; $r['error'] = 'La lecture a pris trop de temps (plus de 30 minutes) : essaie sur une zone plus petite.'; }
     $out = ['id' => $id, 'state' => $state, 'elapsed' => max(0, time() - (int) ($job['created'] ?? time())), 'model_file' => (string) ($job['model_file'] ?? '')];
-    if ($state === 'done') { $out += ['lines' => (array) ($r['lines'] ?? []), 'text' => (string) ($r['text'] ?? ''), 'engine' => (string) ($r['engine'] ?? ''), 'mode' => (string) ($r['mode'] ?? '')]; }
+    if ($state === 'done') { $out += htr_with_margin((array) ($r['lines'] ?? []), (array) ($r['margin_lines'] ?? [])) + ['engine' => (string) ($r['engine'] ?? ''), 'mode' => (string) ($r['mode'] ?? '')]; }
     if ($state === 'error') { $out['error'] = (string) ($r['error'] ?? 'La lecture n’a pas abouti.'); }
     return $out;
+}
+
+/**
+ * 📐 Le texte lu, puis les mentions écrites à 90° dans la marge (lues à part par scripts/htr_recognize.py, après rotation) :
+ * après le texte principal, une ligne de séparation et le titre « Mention en marge : », jamais mêlées aux lignes du texte.
+ * Les lignes ajoutées ont « kind » (sep, margin-title, margin) ; 'margin' = le nombre de lignes de la mention.
+ */
+function htr_with_margin(array $lines, array $margin): array
+{
+    $margin = array_values(array_filter($margin, static fn($l) => is_array($l) && trim((string) ($l['text'] ?? '')) !== ''));
+    $text = implode("\n", array_map(static fn($l) => (string) ($l['text'] ?? ''), $lines));
+    if (!$margin) { return ['lines' => $lines, 'text' => $text, 'margin' => 0]; }
+    $title = i18n_t('Mention en marge :');
+    $all = $lines;
+    if ($lines) { $all[] = ['text' => '———', 'bbox' => null, 'conf' => null, 'words' => [], 'kind' => 'sep']; }
+    $all[] = ['text' => $title, 'bbox' => null, 'conf' => null, 'words' => [], 'kind' => 'margin-title'];
+    foreach ($margin as $l) { $all[] = ['kind' => 'margin'] + $l; }
+    $mtext = implode("\n", array_map(static fn($l) => (string) $l['text'], $margin));
+    return ['lines' => $all, 'text' => ($text !== '' ? $text . "\n———\n" : '') . $title . "\n" . $mtext, 'margin' => count($margin)];
 }
 
 function htr_read_cancel(string $id): array

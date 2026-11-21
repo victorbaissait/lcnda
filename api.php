@@ -13459,6 +13459,7 @@ function htr_recognize_media(PDO $pdo,array $data): array
         if ($written !== $len) throw new RuntimeException('Image améliorée : écriture impossible.');
         $imagePath = $tempImage;
     }
+    media_image_guard($imagePath, $pdo); // 📎 une image immense n'est pas décodée par le lecteur (lib/media_limits.php)
     try {
         $modelId = safe_text($data['model'] ?? 'fr-actes') ?: 'fr-actes';
         $language = safe_text($data['language'] ?? '');
