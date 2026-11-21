@@ -190,3 +190,51 @@ mariage de {a} et {b} ¦ {a} ile {b} düğünü
 {a} et {b}, à {km} km ¦ {a} ve {b}, {km} km arayla
 3e groupe ¦ 3. grup
 4e groupe ¦ 4. grup
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Kuşaktan kuşağa yaşam alanı
+L’aire de vie de tes ancêtres ¦ Atalarının yaşam alanı
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Her kuşak için doğumlarının, evliliklerinin ve ölümlerinin çoğunu içeren alan. 🧭 Beşikten uzak ile aynı mesafeler. Asla yaşayan biri ya da gizli bir kart yok.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Başlangıç kişinin atalarını al (“Uygulamadan”).
+Génération d’ancêtres ¦ Ata kuşağı
+Siècle (toute la base) ¦ Yüzyıl (tüm veritabanı)
+Une vie (les étapes d’une personne) ¦ Bir hayat (bir kişinin aşamaları)
+Avec les résidences et recensements ¦ İkametler ve nüfus sayımlarıyla
+Du clair (anciens) au foncé (récents) ¦ Açıktan (eskiler) koyuya (yeniler)
+Bleu / orange pour père / mère ¦ Baba / anne için mavi / turuncu
+L’inverse ¦ Tersi
+50 % (le cœur) ¦ %50 (çekirdek)
+Part des événements ¦ Olayların payı
+Part gardée ¦ Tutulan pay
+Cercle (facile à comparer) ¦ Daire (karşılaştırması kolay)
+Enveloppe (le contour au plus juste) ¦ Zarf (en sıkı kontur)
+Personne (l’aire d’une vie) ¦ Kişi (bir hayatın alanı)
+Le milieu des événements ¦ Olayların ortası
+Le lieu de naissance de la personne de départ ¦ Başlangıç kişisinin doğum yeri
+Le berceau des plus anciens ¦ En eskilerin beşiği
+Toutes les aires superposées ¦ Tüm alanlar üst üste
+Une par case ¦ Kutu başına bir
+Une à la fois avec ▶ ¦ ▶ ile teker teker
+Minimum pour tracer une aire ¦ Bir alan çizmek için en az
+5 événements ¦ 5 olay
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Alanlara (uzağa gitmiş bir ata alanın dışında kalır)
+Cadrer sur tout ¦ Hepsini çerçevele
+Le tableau sous la carte ¦ Haritanın altındaki tablo
+Gén. {g} · ses parents ¦ {g}. kuşak · ebeveynler
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Tıkla: yerleri ve alanın dışındakiler
+Hors de l’aire ¦ Alanın dışında
+Rayon ({p} %) ¦ Yarıçap (%{p})
+trop peu ¦ çok az
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Yaşam alanı: {n}, yarıçap {a} km ile {b} km arası.
+Aire de vie : pas assez d’événements. ¦ Yaşam alanı: yeterli olay yok.
+Aire de vie : {n}. ¦ Yaşam alanı: {n}.
+L’AIRE DE VIE ¦ YAŞAM ALANI
+L’aire de vie de la famille, siècle par siècle ¦ Yüzyıl yüzyıl ailenin yaşam alanı
+L’aire de vie des ancêtres de {name} ¦ {name} – ataların yaşam alanı
+L’aire d’une vie : {name} ¦ Bir hayatın alanı: {name}
+la famille {name} ¦ {name} ailesi
+Voir l’aire de vie sur la carte ¦ Yaşam alanını haritada gör
+Centre ¦ Merkez
+Côté père et côté mère (deux couleurs) ¦ Baba ve anne tarafı (iki renk)
+Mes ancêtres, 8 générations ¦ Atalarım, 8 kuşak
+Toute ma base, siècle par siècle ¦ Tüm veritabanım, yüzyıl yüzyıl
+=aire ¦ alan|alan

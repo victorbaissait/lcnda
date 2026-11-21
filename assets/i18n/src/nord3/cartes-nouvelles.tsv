@@ -190,3 +190,51 @@ mariage de {a} et {b} ¦ căsătoria lui {a} cu {b}
 {a} et {b}, à {km} km ¦ {a} și {b}, la {km} km
 3e groupe ¦ Grupul 3
 4e groupe ¦ Grupul 4
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Aria de viață, generație cu generație
+L’aire de vie de tes ancêtres ¦ Aria de viață a strămoșilor tăi
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Pentru fiecare generație, zona care cuprinde cea mai mare parte a nașterilor, căsătoriilor și deceselor. Aceleași distanțe ca la 🧭 Departe de leagăn. Niciodată o persoană în viață sau o fișă confidențială.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Ia strămoșii persoanei tale de pornire („Din aplicație”).
+Génération d’ancêtres ¦ Generație de strămoși
+Siècle (toute la base) ¦ Secol (toată baza)
+Une vie (les étapes d’une personne) ¦ O viață (etapele unei persoane)
+Avec les résidences et recensements ¦ Cu reședințele și recensămintele
+Du clair (anciens) au foncé (récents) ¦ De la deschis (vechi) la închis (recenți)
+Bleu / orange pour père / mère ¦ Albastru / portocaliu pentru tată / mamă
+L’inverse ¦ Invers
+50 % (le cœur) ¦ 50 % (miezul)
+Part des événements ¦ Partea evenimentelor
+Part gardée ¦ Partea păstrată
+Cercle (facile à comparer) ¦ Cerc (ușor de comparat)
+Enveloppe (le contour au plus juste) ¦ Înfășurătoare (conturul cel mai strâns)
+Personne (l’aire d’une vie) ¦ Persoană (aria unei vieți)
+Le milieu des événements ¦ Mijlocul evenimentelor
+Le lieu de naissance de la personne de départ ¦ Locul nașterii persoanei de pornire
+Le berceau des plus anciens ¦ Leagănul celor mai vechi
+Toutes les aires superposées ¦ Toate ariile suprapuse
+Une par case ¦ Câte una pe căsuță
+Une à la fois avec ▶ ¦ Câte una cu ▶
+Minimum pour tracer une aire ¦ Minimul pentru a trasa o arie
+5 événements ¦ 5 evenimente
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Pe arii (un strămoș plecat departe rămâne în afara ariei)
+Cadrer sur tout ¦ Încadrează tot
+Le tableau sous la carte ¦ Tabelul de sub hartă
+Gén. {g} · ses parents ¦ Gen. {g} · părinții
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Clic: locurile și cele din afara ariei
+Hors de l’aire ¦ În afara ariei
+Rayon ({p} %) ¦ Rază ({p} %)
+trop peu ¦ prea puține
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Aria de viață: {n}, rază de la {a} km la {b} km.
+Aire de vie : pas assez d’événements. ¦ Aria de viață: nu sunt destule evenimente.
+Aire de vie : {n}. ¦ Aria de viață: {n}.
+L’AIRE DE VIE ¦ ARIA DE VIAȚĂ
+L’aire de vie de la famille, siècle par siècle ¦ Aria de viață a familiei, secol cu secol
+L’aire de vie des ancêtres de {name} ¦ Aria de viață a strămoșilor lui {name}
+L’aire d’une vie : {name} ¦ Aria unei vieți: {name}
+la famille {name} ¦ familia {name}
+Voir l’aire de vie sur la carte ¦ Vezi aria de viață pe hartă
+Centre ¦ Centru
+Côté père et côté mère (deux couleurs) ¦ Partea tatălui și a mamei (două culori)
+Mes ancêtres, 8 générations ¦ Strămoșii mei, 8 generații
+Toute ma base, siècle par siècle ¦ Toată baza mea, secol cu secol
+=aire ¦ arie|arii|de arii

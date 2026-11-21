@@ -190,3 +190,51 @@ mariage de {a} et {b} ¦ vjenčanje: {a} i {b} ¦ poroka: {a} in {b}
 {a} et {b}, à {km} km ¦ {a} i {b}, {km} km udaljeno ¦ {a} in {b}, {km} km narazen
 3e groupe ¦ 3. skupina ¦ 3. skupina
 4e groupe ¦ 4. skupina ¦ 4. skupina
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Životni prostor, generacija po generacija ¦ Življenjski prostor, rod za rodom
+L’aire de vie de tes ancêtres ¦ Životni prostor tvojih predaka ¦ Življenjski prostor tvojih prednikov
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Za svaku generaciju zona u kojoj je većina njihovih rođenja, vjenčanja i smrti. Iste udaljenosti kao 🧭 Daleko od kolijevke. Nikad živa osoba ni povjerljiva kartica. ¦ Za vsak rod območje, kjer je večina njihovih rojstev, porok in smrti. Enake razdalje kot 🧭 Daleč od zibelke. Nikoli živa oseba ali zaupna kartica.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Uzmi pretke svoje polazne osobe („Iz aplikacije“). ¦ Vzemi prednike svoje izhodiščne osebe (»Iz aplikacije«).
+Génération d’ancêtres ¦ Generacija predaka ¦ Rod prednikov
+Siècle (toute la base) ¦ Stoljeće (cijela baza) ¦ Stoletje (vsa baza)
+Une vie (les étapes d’une personne) ¦ Jedan život (etape jedne osobe) ¦ Eno življenje (postaje ene osebe)
+Avec les résidences et recensements ¦ S prebivalištima i popisima ¦ S prebivališči in popisi
+Du clair (anciens) au foncé (récents) ¦ Od svijetlog (najstariji) do tamnog (najnoviji) ¦ Od svetle (najstarejši) do temne (najnovejši)
+Bleu / orange pour père / mère ¦ Plava / narančasta za oca / majku ¦ Modra / oranžna za očeta / mater
+L’inverse ¦ Obrnuto ¦ Obratno
+50 % (le cœur) ¦ 50 % (srž) ¦ 50 % (jedro)
+Part des événements ¦ Udio događaja ¦ Delež dogodkov
+Part gardée ¦ Zadržani udio ¦ Ohranjeni delež
+Cercle (facile à comparer) ¦ Krug (lako za usporedbu) ¦ Krog (lahko primerljiv)
+Enveloppe (le contour au plus juste) ¦ Ovojnica (najtješnji obris) ¦ Ovojnica (najtesnejši obris)
+Personne (l’aire d’une vie) ¦ Osoba (prostor jednog života) ¦ Oseba (prostor enega življenja)
+Le milieu des événements ¦ Sredina događaja ¦ Sredina dogodkov
+Le lieu de naissance de la personne de départ ¦ Mjesto rođenja polazne osobe ¦ Kraj rojstva izhodiščne osebe
+Le berceau des plus anciens ¦ Kolijevka najstarijih ¦ Zibelka najstarejših
+Toutes les aires superposées ¦ Svi prostori preklopljeni ¦ Vsi prostori prekriti
+Une par case ¦ Jedan po polju ¦ Eden na polje
+Une à la fois avec ▶ ¦ Jedan po jedan s ▶ ¦ Eden za drugim z ▶
+Minimum pour tracer une aire ¦ Minimum za crtanje prostora ¦ Najmanj za risanje prostora
+5 événements ¦ 5 događaja ¦ 5 dogodkov
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Na prostore (predak koji je otišao daleko ostaje izvan) ¦ Na prostore (prednik, ki je odšel daleč, ostane zunaj)
+Cadrer sur tout ¦ Uokviri sve ¦ Zajemi vse
+Le tableau sous la carte ¦ Tablica ispod karte ¦ Tabela pod zemljevidom
+Gén. {g} · ses parents ¦ Gen. {g} · roditelji ¦ Rod {g} · starši
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Klikni: mjesta i ona izvan prostora ¦ Klikni: kraji in tisti zunaj prostora
+Hors de l’aire ¦ Izvan prostora ¦ Zunaj prostora
+Rayon ({p} %) ¦ Polumjer ({p} %) ¦ Polmer ({p} %)
+trop peu ¦ premalo ¦ premalo
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Životni prostor: {n}, polumjer od {a} km do {b} km. ¦ Življenjski prostor: {n}, polmer od {a} km do {b} km.
+Aire de vie : pas assez d’événements. ¦ Životni prostor: nema dovoljno događaja. ¦ Življenjski prostor: premalo dogodkov.
+Aire de vie : {n}. ¦ Životni prostor: {n}. ¦ Življenjski prostor: {n}.
+L’AIRE DE VIE ¦ ŽIVOTNI PROSTOR ¦ ŽIVLJENJSKI PROSTOR
+L’aire de vie de la famille, siècle par siècle ¦ Životni prostor obitelji, stoljeće po stoljeće ¦ Življenjski prostor družine, stoletje za stoletjem
+L’aire de vie des ancêtres de {name} ¦ Životni prostor predaka: {name} ¦ Življenjski prostor prednikov: {name}
+L’aire d’une vie : {name} ¦ Prostor jednog života: {name} ¦ Prostor enega življenja: {name}
+la famille {name} ¦ obitelj {name} ¦ družina {name}
+Voir l’aire de vie sur la carte ¦ Prikaži životni prostor na karti ¦ Prikaži življenjski prostor na zemljevidu
+Centre ¦ Središte ¦ Središče
+Côté père et côté mère (deux couleurs) ¦ Očeva i majčina strana (dvije boje) ¦ Očetova in materina stran (dve barvi)
+Mes ancêtres, 8 générations ¦ Moji preci, 8 generacija ¦ Moji predniki, 8 rodov
+Toute ma base, siècle par siècle ¦ Cijela moja baza, stoljeće po stoljeće ¦ Vsa moja baza, stoletje za stoletjem
+=aire ¦ prostor|prostora|prostora ¦ prostor|prostora|prostori|prostorov

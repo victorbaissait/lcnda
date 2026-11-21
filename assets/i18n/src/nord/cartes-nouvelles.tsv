@@ -190,3 +190,51 @@ mariage de {a} et {b} ¦ sňatek: {a} a {b} ¦ bröllop mellan {a} och {b} ¦ br
 {a} et {b}, à {km} km ¦ {a} a {b}, {km} km od sebe ¦ {a} och {b}, {km} km ifrån varandra ¦ {a} og {b}, {km} km fra hinanden
 3e groupe ¦ 3. skupina ¦ 3:e gruppen ¦ 3. gruppe
 4e groupe ¦ 4. skupina ¦ 4:e gruppen ¦ 4. gruppe
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Životní prostor, generace po generaci ¦ Livsområdet, generation för generation ¦ Livsområdet, generation for generation
+L’aire de vie de tes ancêtres ¦ Životní prostor tvých předků ¦ Dina anors livsområde ¦ Dine aners livsområde
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Pro každou generaci oblast, kde leží většina jejich narození, sňatků a úmrtí. Stejné vzdálenosti jako 🧭 Daleko od kolébky. Nikdy žijící osoba ani důvěrná karta. ¦ För varje generation den zon som rymmer det mesta av deras födslar, vigslar och dödsfall. Samma avstånd som 🧭 Långt från vaggan. Aldrig en levande person eller ett konfidentiellt kort. ¦ For hver generation den zone, der rummer det meste af deres fødsler, vielser og dødsfald. Samme afstande som 🧭 Langt fra vuggen. Aldrig en levende eller et fortroligt kort.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Vezmi předky své výchozí osoby („Z aplikace“). ¦ Ta anorna till din startperson (”Från appen”). ¦ Tag anerne til din startperson (»Fra appen«).
+Génération d’ancêtres ¦ Generace předků ¦ Generation av anor ¦ Generation af aner
+Siècle (toute la base) ¦ Století (celá databáze) ¦ Sekel (hela databasen) ¦ Århundrede (hele databasen)
+Une vie (les étapes d’une personne) ¦ Jeden život (etapy jedné osoby) ¦ Ett liv (en persons etapper) ¦ Et liv (en persons etaper)
+Avec les résidences et recensements ¦ S bydlišti a sčítáními ¦ Med bostäder och folkräkningar ¦ Med bopæle og folketællinger
+Du clair (anciens) au foncé (récents) ¦ Od světlé (nejstarší) po tmavou (nejnovější) ¦ Från ljust (äldst) till mörkt (senast) ¦ Fra lys (ældst) til mørk (nyest)
+Bleu / orange pour père / mère ¦ Modrá / oranžová pro otce / matku ¦ Blått / orange för far / mor ¦ Blå / orange for far / mor
+L’inverse ¦ Obráceně ¦ Tvärtom ¦ Omvendt
+50 % (le cœur) ¦ 50 % (jádro) ¦ 50 % (kärnan) ¦ 50 % (kernen)
+Part des événements ¦ Podíl událostí ¦ Andel av händelserna ¦ Andel af begivenhederne
+Part gardée ¦ Ponechaný podíl ¦ Behållen andel ¦ Bevaret andel
+Cercle (facile à comparer) ¦ Kruh (snadno porovnatelný) ¦ Cirkel (lätt att jämföra) ¦ Cirkel (let at sammenligne)
+Enveloppe (le contour au plus juste) ¦ Obálka (nejtěsnější obrys) ¦ Hölje (den snävaste konturen) ¦ Omhylning (den tætteste kontur)
+Personne (l’aire d’une vie) ¦ Osoba (prostor jednoho života) ¦ Person (ett livs område) ¦ Person (et livs område)
+Le milieu des événements ¦ Střed událostí ¦ Händelsernas mitt ¦ Midten af begivenhederne
+Le lieu de naissance de la personne de départ ¦ Místo narození výchozí osoby ¦ Startpersonens födelseort ¦ Startpersonens fødested
+Le berceau des plus anciens ¦ Kolébka nejstarších ¦ De äldstas vagga ¦ De ældstes vugge
+Toutes les aires superposées ¦ Všechny prostory přes sebe ¦ Alla områden överlagrade ¦ Alle områder oven på hinanden
+Une par case ¦ Jeden v každém poli ¦ En per ruta ¦ Én pr. felt
+Une à la fois avec ▶ ¦ Jeden po druhém s ▶ ¦ En i taget med ▶ ¦ Én ad gangen med ▶
+Minimum pour tracer une aire ¦ Minimum pro nakreslení prostoru ¦ Minimum för att rita ett område ¦ Minimum for at tegne et område
+5 événements ¦ 5 událostí ¦ 5 händelser ¦ 5 begivenheder
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Na prostory (předek, který odešel daleko, zůstane mimo) ¦ På områdena (en ana som flyttade långt bort hamnar utanför) ¦ På områderne (en ane, der rejste langt væk, bliver uden for)
+Cadrer sur tout ¦ Zarámovat vše ¦ Rama in allt ¦ Indram alt
+Le tableau sous la carte ¦ Tabulka pod mapou ¦ Tabellen under kartan ¦ Tabellen under kortet
+Gén. {g} · ses parents ¦ Gen. {g} · rodiče ¦ Gen. {g} · föräldrarna ¦ Gen. {g} · forældrene
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Klikni: místa a ta mimo prostor ¦ Klicka: platserna och de utanför området ¦ Klik: stederne og dem uden for området
+Hors de l’aire ¦ Mimo prostor ¦ Utanför området ¦ Uden for området
+Rayon ({p} %) ¦ Poloměr ({p} %) ¦ Radie ({p} %) ¦ Radius ({p} %)
+trop peu ¦ příliš málo ¦ för få ¦ for få
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Životní prostor: {n}, poloměr od {a} km do {b} km. ¦ Livsområde: {n}, radie från {a} km till {b} km. ¦ Livsområde: {n}, radius fra {a} km til {b} km.
+Aire de vie : pas assez d’événements. ¦ Životní prostor: málo událostí. ¦ Livsområde: för få händelser. ¦ Livsområde: ikke nok begivenheder.
+Aire de vie : {n}. ¦ Životní prostor: {n}. ¦ Livsområde: {n}. ¦ Livsområde: {n}.
+L’AIRE DE VIE ¦ ŽIVOTNÍ PROSTOR ¦ LIVSOMRÅDET ¦ LIVSOMRÅDET
+L’aire de vie de la famille, siècle par siècle ¦ Životní prostor rodiny, století po století ¦ Familjens livsområde, sekel för sekel ¦ Familiens livsområde, århundrede for århundrede
+L’aire de vie des ancêtres de {name} ¦ Životní prostor předků: {name} ¦ Livsområdet för anorna till {name} ¦ Livsområdet for anerne til {name}
+L’aire d’une vie : {name} ¦ Prostor jednoho života: {name} ¦ Ett livs område: {name} ¦ Et livs område: {name}
+la famille {name} ¦ rodina {name} ¦ familjen {name} ¦ familien {name}
+Voir l’aire de vie sur la carte ¦ Zobrazit životní prostor na mapě ¦ Visa livsområdet på kartan ¦ Vis livsområdet på kortet
+Centre ¦ Střed ¦ Mittpunkt ¦ Midtpunkt
+Côté père et côté mère (deux couleurs) ¦ Otcova a matčina strana (dvě barvy) ¦ Faderns och moderns sida (två färger) ¦ Faderens og moderens side (to farver)
+Mes ancêtres, 8 générations ¦ Moji předkové, 8 generací ¦ Mina anor, 8 generationer ¦ Mine aner, 8 generationer
+Toute ma base, siècle par siècle ¦ Celá moje databáze, století po století ¦ Hela min databas, sekel för sekel ¦ Hele min database, århundrede for århundrede
+=aire ¦ prostor|prostory|prostorů ¦ område|områden ¦ område|områder

@@ -190,3 +190,51 @@ mariage de {a} et {b} ¦ brúðkaup {a} og {b}
 {a} et {b}, à {km} km ¦ {a} og {b}, {km} km á milli
 3e groupe ¦ 3. hópur
 4e groupe ¦ 4. hópur
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Lífssvæðið, kynslóð eftir kynslóð
+L’aire de vie de tes ancêtres ¦ Lífssvæði forfeðra þinna
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Fyrir hverja kynslóð svæðið sem geymir flestar fæðingar, giftingar og dauðsföll hennar. Sömu fjarlægðir og 🧭 Langt frá vöggunni. Aldrei lifandi manneskja né trúnaðarspjald.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Sæktu forfeður upphafsmanneskjunnar („Úr forritinu“).
+Génération d’ancêtres ¦ Kynslóð forfeðra
+Siècle (toute la base) ¦ Öld (allur grunnurinn)
+Une vie (les étapes d’une personne) ¦ Eitt líf (áfangar einnar manneskju)
+Avec les résidences et recensements ¦ Með búsetu og manntölum
+Du clair (anciens) au foncé (récents) ¦ Frá ljósu (elstu) til dökks (nýjustu)
+Bleu / orange pour père / mère ¦ Blátt / appelsínugult fyrir föður / móður
+L’inverse ¦ Öfugt
+50 % (le cœur) ¦ 50 % (kjarninn)
+Part des événements ¦ Hlutfall atburða
+Part gardée ¦ Hlutfall sem haldið er
+Cercle (facile à comparer) ¦ Hringur (auðvelt að bera saman)
+Enveloppe (le contour au plus juste) ¦ Hjúpur (þéttasta útlínan)
+Personne (l’aire d’une vie) ¦ Manneskja (svæði eins lífs)
+Le milieu des événements ¦ Miðja atburðanna
+Le lieu de naissance de la personne de départ ¦ Fæðingarstaður upphafsmanneskjunnar
+Le berceau des plus anciens ¦ Vagga hinna elstu
+Toutes les aires superposées ¦ Öll svæðin lögð saman
+Une par case ¦ Eitt í hverjum reit
+Une à la fois avec ▶ ¦ Eitt í einu með ▶
+Minimum pour tracer une aire ¦ Lágmark til að teikna svæði
+5 événements ¦ 5 atburðir
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Á svæðin (forfaðir sem fór langt er utan svæðis)
+Cadrer sur tout ¦ Ramma allt inn
+Le tableau sous la carte ¦ Taflan undir kortinu
+Gén. {g} · ses parents ¦ Kyn. {g} · foreldrarnir
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Smelltu: staðirnir og þeir utan svæðis
+Hors de l’aire ¦ Utan svæðis
+Rayon ({p} %) ¦ Radíus ({p} %)
+trop peu ¦ of fáir
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Lífssvæði: {n}, radíus frá {a} km til {b} km.
+Aire de vie : pas assez d’événements. ¦ Lífssvæði: ekki nógu margir atburðir.
+Aire de vie : {n}. ¦ Lífssvæði: {n}.
+L’AIRE DE VIE ¦ LÍFSSVÆÐIÐ
+L’aire de vie de la famille, siècle par siècle ¦ Lífssvæði fjölskyldunnar, öld fyrir öld
+L’aire de vie des ancêtres de {name} ¦ Lífssvæði forfeðra: {name}
+L’aire d’une vie : {name} ¦ Svæði eins lífs: {name}
+la famille {name} ¦ {name}-fjölskyldan
+Voir l’aire de vie sur la carte ¦ Sjá lífssvæðið á kortinu
+Centre ¦ Miðja
+Côté père et côté mère (deux couleurs) ¦ Föðurætt og móðurætt (tveir litir)
+Mes ancêtres, 8 générations ¦ Forfeður mínir, 8 kynslóðir
+Toute ma base, siècle par siècle ¦ Allur grunnurinn minn, öld fyrir öld
+=aire ¦ svæði|svæði

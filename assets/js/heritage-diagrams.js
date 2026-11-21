@@ -483,6 +483,10 @@
         let invCache = null, projCache = null;
         function bindLinks() {
             const input = pane.querySelector('[data-dg-lq]'), sugg = input.nextElementSibling; let t = 0;
+            // une sorte peut proposer d'ouvrir un dessin voisin (🧭 Loin du berceau → ⭕ Aire de vie, 🕸 Réseau → 🗺 Sur la carte) : kind.relate(spec) → [{label, run}]
+            const rel = (() => { try { return kindOf().relate?.(clone(spec)) || []; } catch (_) { return []; } })();
+            if (rel.length && !pane.querySelector('[data-dg-relate]')) { const box = document.createElement('div'); box.className = 'h-dg-relate'; box.innerHTML = rel.map((r, i) => `<button type="button" class="button small secondary" data-dg-relate="${i}">${esc(r.label)}</button>`).join(' ');
+                pane.querySelector('.h-pr-links')?.prepend(box); box.addEventListener('click', e => { const b = e.target.closest('[data-dg-relate]'); if (b) rel[Number(b.dataset.dgRelate)]?.run?.(); }); }
             pane.querySelector('.h-pr-linkchips').addEventListener('click', e => { const c = e.target.closest('[data-dg-unlink]')?.closest('.h-pr-lchip'); if (!c) return; rec.links = rec.links.filter(l => !(l.type === c.dataset.type && Number(l.id) === Number(c.dataset.id))); dirty = true; paint(); });
             // personnes et enquêtes : le menu de choix unique (recherche mélangée)
             pane.querySelector('[data-dg-lpk]')?.addEventListener('picker-change', e => { const it = e.detail.item; if (!it?.id) return; const type = it.kind === 'investigation' ? 'investigation' : 'person';

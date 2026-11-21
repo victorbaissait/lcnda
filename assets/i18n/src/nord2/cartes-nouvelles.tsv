@@ -190,3 +190,51 @@ mariage de {a} et {b} ¦ sobáš: {a} a {b} ¦ bryllup mellom {a} og {b}
 {a} et {b}, à {km} km ¦ {a} a {b}, {km} km od seba ¦ {a} og {b}, {km} km fra hverandre
 3e groupe ¦ 3. skupina ¦ 3. gruppe
 4e groupe ¦ 4. skupina ¦ 4. gruppe
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Životný priestor, generácia po generácii ¦ Livsområdet, generasjon for generasjon
+L’aire de vie de tes ancêtres ¦ Životný priestor tvojich predkov ¦ Livsområdet til anene dine
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Pre každú generáciu oblasť, kde leží väčšina ich narodení, sobášov a úmrtí. Rovnaké vzdialenosti ako 🧭 Ďaleko od kolísky. Nikdy žijúca osoba ani dôverná karta. ¦ For hver generasjon sonen som rommer det meste av fødslene, ekteskapene og dødsfallene deres. Samme avstander som 🧭 Langt fra vuggen. Aldri en levende eller et konfidensielt kort.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Vezmi predkov svojej východiskovej osoby („Z aplikácie“). ¦ Ta anene til startpersonen din («Fra appen»).
+Génération d’ancêtres ¦ Generácia predkov ¦ Generasjon av aner
+Siècle (toute la base) ¦ Storočie (celá databáza) ¦ Århundre (hele databasen)
+Une vie (les étapes d’une personne) ¦ Jeden život (etapy jednej osoby) ¦ Et liv (en persons etapper)
+Avec les résidences et recensements ¦ S bydliskami a sčítaniami ¦ Med bosteder og folketellinger
+Du clair (anciens) au foncé (récents) ¦ Od svetlej (najstarší) po tmavú (najnovší) ¦ Fra lys (eldst) til mørk (nyest)
+Bleu / orange pour père / mère ¦ Modrá / oranžová pre otca / matku ¦ Blått / oransje for far / mor
+L’inverse ¦ Opačne ¦ Omvendt
+50 % (le cœur) ¦ 50 % (jadro) ¦ 50 % (kjernen)
+Part des événements ¦ Podiel udalostí ¦ Andel av hendelsene
+Part gardée ¦ Ponechaný podiel ¦ Beholdt andel
+Cercle (facile à comparer) ¦ Kruh (ľahko porovnateľný) ¦ Sirkel (lett å sammenligne)
+Enveloppe (le contour au plus juste) ¦ Obálka (najtesnejší obrys) ¦ Omhylling (den tetteste konturen)
+Personne (l’aire d’une vie) ¦ Osoba (priestor jedného života) ¦ Person (et livs område)
+Le milieu des événements ¦ Stred udalostí ¦ Midten av hendelsene
+Le lieu de naissance de la personne de départ ¦ Miesto narodenia východiskovej osoby ¦ Startpersonens fødested
+Le berceau des plus anciens ¦ Kolíska najstarších ¦ De eldstes vugge
+Toutes les aires superposées ¦ Všetky priestory cez seba ¦ Alle områder over hverandre
+Une par case ¦ Jeden v každom poli ¦ Én per rute
+Une à la fois avec ▶ ¦ Jeden po druhom s ▶ ¦ Én om gangen med ▶
+Minimum pour tracer une aire ¦ Minimum na nakreslenie priestoru ¦ Minimum for å tegne et område
+5 événements ¦ 5 udalostí ¦ 5 hendelser
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Na priestory (predok, ktorý odišiel ďaleko, zostane mimo) ¦ På områdene (en ane som dro langt unna, blir utenfor)
+Cadrer sur tout ¦ Zarámovať všetko ¦ Ramme inn alt
+Le tableau sous la carte ¦ Tabuľka pod mapou ¦ Tabellen under kartet
+Gén. {g} · ses parents ¦ Gen. {g} · rodičia ¦ Gen. {g} · foreldrene
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Klikni: miesta a tie mimo priestoru ¦ Klikk: stedene og de utenfor området
+Hors de l’aire ¦ Mimo priestoru ¦ Utenfor området
+Rayon ({p} %) ¦ Polomer ({p} %) ¦ Radius ({p} %)
+trop peu ¦ príliš málo ¦ for få
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Životný priestor: {n}, polomer od {a} km do {b} km. ¦ Livsområde: {n}, radius fra {a} km til {b} km.
+Aire de vie : pas assez d’événements. ¦ Životný priestor: málo udalostí. ¦ Livsområde: ikke nok hendelser.
+Aire de vie : {n}. ¦ Životný priestor: {n}. ¦ Livsområde: {n}.
+L’AIRE DE VIE ¦ ŽIVOTNÝ PRIESTOR ¦ LIVSOMRÅDET
+L’aire de vie de la famille, siècle par siècle ¦ Životný priestor rodiny, storočie po storočí ¦ Familiens livsområde, århundre for århundre
+L’aire de vie des ancêtres de {name} ¦ Životný priestor predkov: {name} ¦ Livsområdet til anene til {name}
+L’aire d’une vie : {name} ¦ Priestor jedného života: {name} ¦ Et livs område: {name}
+la famille {name} ¦ rodina {name} ¦ familien {name}
+Voir l’aire de vie sur la carte ¦ Zobraziť životný priestor na mape ¦ Vis livsområdet på kartet
+Centre ¦ Stred ¦ Midtpunkt
+Côté père et côté mère (deux couleurs) ¦ Otcova a matkina strana (dve farby) ¦ Farssiden og morssiden (to farger)
+Mes ancêtres, 8 générations ¦ Moji predkovia, 8 generácií ¦ Mine aner, 8 generasjoner
+Toute ma base, siècle par siècle ¦ Celá moja databáza, storočie po storočí ¦ Hele databasen min, århundre for århundre
+=aire ¦ priestor|priestory|priestorov ¦ område|områder

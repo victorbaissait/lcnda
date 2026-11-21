@@ -190,3 +190,51 @@ mariage de {a} et {b} ¦ santuoka: {a} ir {b} ¦ laulības: {a} un {b} ¦ pulm: 
 {a} et {b}, à {km} km ¦ {a} ir {b}, {km} km atstumu ¦ {a} un {b}, {km} km attālumā ¦ {a} ja {b}, {km} km kaugusel
 3e groupe ¦ 3-ioji grupė ¦ 3. grupa ¦ 3. rühm
 4e groupe ¦ 4-oji grupė ¦ 4. grupa ¦ 4. rühm
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Gyvenimo erdvė, karta po kartos ¦ Dzīves telpa, paaudzi pēc paaudzes ¦ Eluala põlvkond põlvkonna järel
+L’aire de vie de tes ancêtres ¦ Tavo protėvių gyvenimo erdvė ¦ Tavu senču dzīves telpa ¦ Sinu esivanemate eluala
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Kiekvienai kartai – zona, kurioje yra dauguma jų gimimų, santuokų ir mirčių. Tie patys atstumai kaip 🧭 Toli nuo lopšio. Niekada gyvas asmuo ar konfidenciali kortelė. ¦ Katrai paaudzei – zona, kurā ir lielākā daļa viņu dzimšanu, laulību un nāves. Tie paši attālumi kā 🧭 Tālu no šūpuļa. Nekad dzīva persona vai konfidenciāla kartīte. ¦ Iga põlvkonna kohta ala, kus on enamik nende sünde, abielusid ja surmasid. Samad kaugused nagu 🧭 Hällist kaugel. Mitte kunagi elav inimene ega konfidentsiaalne kaart.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Paimk savo pradinio asmens protėvius („Iš programos“). ¦ Ņem savas sākuma personas senčus (“No lietotnes”). ¦ Võta oma lähteisiku esivanemad („Rakendusest“).
+Génération d’ancêtres ¦ Protėvių karta ¦ Senču paaudze ¦ Esivanemate põlvkond
+Siècle (toute la base) ¦ Šimtmetis (visa bazė) ¦ Gadsimts (visa datubāze) ¦ Sajand (kogu andmebaas)
+Une vie (les étapes d’une personne) ¦ Vienas gyvenimas (vieno asmens etapai) ¦ Viena dzīve (vienas personas posmi) ¦ Üks elu (ühe inimese etapid)
+Avec les résidences et recensements ¦ Su gyvenamosiomis vietomis ir surašymais ¦ Ar dzīvesvietām un tautas skaitīšanām ¦ Koos elukohtade ja rahvaloendustega
+Du clair (anciens) au foncé (récents) ¦ Nuo šviesios (seniausi) iki tamsios (naujausi) ¦ No gaišas (senākie) līdz tumšai (jaunākie) ¦ Heledast (vanimad) tumedani (uusimad)
+Bleu / orange pour père / mère ¦ Mėlyna / oranžinė tėvui / motinai ¦ Zils / oranžs tēvam / mātei ¦ Sinine / oranž isale / emale
+L’inverse ¦ Atvirkščiai ¦ Otrādi ¦ Vastupidi
+50 % (le cœur) ¦ 50 % (branduolys) ¦ 50 % (kodols) ¦ 50% (tuum)
+Part des événements ¦ Įvykių dalis ¦ Notikumu daļa ¦ Sündmuste osa
+Part gardée ¦ Išlaikyta dalis ¦ Saglabātā daļa ¦ Hoitud osa
+Cercle (facile à comparer) ¦ Apskritimas (lengva palyginti) ¦ Aplis (viegli salīdzināt) ¦ Ring (lihtne võrrelda)
+Enveloppe (le contour au plus juste) ¦ Apvalkalas (glausčiausias kontūras) ¦ Apvalks (ciešākā kontūra) ¦ Kest (kõige tihedam piirjoon)
+Personne (l’aire d’une vie) ¦ Asmuo (vieno gyvenimo erdvė) ¦ Persona (vienas dzīves telpa) ¦ Isik (ühe elu ala)
+Le milieu des événements ¦ Įvykių vidurys ¦ Notikumu vidus ¦ Sündmuste keskkoht
+Le lieu de naissance de la personne de départ ¦ Pradinio asmens gimimo vieta ¦ Sākuma personas dzimšanas vieta ¦ Lähteisiku sünnikoht
+Le berceau des plus anciens ¦ Seniausiųjų lopšys ¦ Senāko šūpulis ¦ Vanimate häll
+Toutes les aires superposées ¦ Visos erdvės viena ant kitos ¦ Visas telpas pārklātas ¦ Kõik alad kattuvad
+Une par case ¦ Po vieną langelyje ¦ Pa vienai katrā lauciņā ¦ Üks kasti kohta
+Une à la fois avec ▶ ¦ Po vieną su ▶ ¦ Pa vienai ar ▶ ¦ Ükshaaval ▶ abil
+Minimum pour tracer une aire ¦ Mažiausiai erdvei nubrėžti ¦ Minimums telpas zīmēšanai ¦ Miinimum ala joonistamiseks
+5 événements ¦ 5 įvykiai ¦ 5 notikumi ¦ 5 sündmust
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Į erdves (toli išvykęs protėvis lieka už erdvės ribų) ¦ Uz telpām (tālu aizceļojis sencis paliek ārpus telpas) ¦ Aladele (kaugele läinud esivanem jääb alast välja)
+Cadrer sur tout ¦ Įrėminti viską ¦ Ietvert visu ¦ Raamista kõik
+Le tableau sous la carte ¦ Lentelė po žemėlapiu ¦ Tabula zem kartes ¦ Tabel kaardi all
+Gén. {g} · ses parents ¦ {g} k. · tėvai ¦ {g}. paaudze · vecāki ¦ Põlv. {g} · vanemad
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Spustelėk: vietos ir esančios už erdvės ¦ Klikšķis: vietas un tās ārpus telpas ¦ Klõpsa: kohad ja need, mis on alast väljas
+Hors de l’aire ¦ Už erdvės ribų ¦ Ārpus telpas ¦ Alast väljas
+Rayon ({p} %) ¦ Spindulys ({p} %) ¦ Rādiuss ({p} %) ¦ Raadius ({p}%)
+trop peu ¦ per mažai ¦ par maz ¦ liiga vähe
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Gyvenimo erdvė: {n}, spindulys nuo {a} km iki {b} km. ¦ Dzīves telpa: {n}, rādiuss no {a} km līdz {b} km. ¦ Eluala: {n}, raadius {a}–{b} km.
+Aire de vie : pas assez d’événements. ¦ Gyvenimo erdvė: per mažai įvykių. ¦ Dzīves telpa: nepietiek notikumu. ¦ Eluala: sündmusi pole piisavalt.
+Aire de vie : {n}. ¦ Gyvenimo erdvė: {n}. ¦ Dzīves telpa: {n}. ¦ Eluala: {n}.
+L’AIRE DE VIE ¦ GYVENIMO ERDVĖ ¦ DZĪVES TELPA ¦ ELUALA
+L’aire de vie de la famille, siècle par siècle ¦ Šeimos gyvenimo erdvė, šimtmetis po šimtmečio ¦ Dzimtas dzīves telpa, gadsimtu pēc gadsimta ¦ Perekonna eluala sajand sajandi järel
+L’aire de vie des ancêtres de {name} ¦ Protėvių gyvenimo erdvė: {name} ¦ Senču dzīves telpa: {name} ¦ Esivanemate eluala: {name}
+L’aire d’une vie : {name} ¦ Vieno gyvenimo erdvė: {name} ¦ Vienas dzīves telpa: {name} ¦ Ühe elu ala: {name}
+la famille {name} ¦ {name} šeima ¦ dzimta {name} ¦ perekond {name}
+Voir l’aire de vie sur la carte ¦ Rodyti gyvenimo erdvę žemėlapyje ¦ Rādīt dzīves telpu kartē ¦ Näita eluala kaardil
+Centre ¦ Centras ¦ Centrs ¦ Keskpunkt
+Côté père et côté mère (deux couleurs) ¦ Tėvo ir motinos pusė (dvi spalvos) ¦ Tēva un mātes puse (divas krāsas) ¦ Isa ja ema pool (kaks värvi)
+Mes ancêtres, 8 générations ¦ Mano protėviai, 8 kartos ¦ Mani senči, 8 paaudzes ¦ Minu esivanemad, 8 põlvkonda
+Toute ma base, siècle par siècle ¦ Visa mano bazė, šimtmetis po šimtmečio ¦ Visa mana datubāze, gadsimtu pēc gadsimta ¦ Kogu minu andmebaas sajand sajandi järel
+=aire ¦ erdvė|erdvės|erdvių ¦ telpu|telpa|telpas ¦ ala|ala

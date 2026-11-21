@@ -190,3 +190,51 @@ mariage de {a} et {b} ¦ martesa e {a} me {b} ¦ iż-żwieġ ta’ {a} u {b}
 {a} et {b}, à {km} km ¦ {a} dhe {b}, {km} km larg ¦ {a} u {b}, {km} km ’il bogħod
 3e groupe ¦ Grupi i 3-të ¦ It-3 grupp
 4e groupe ¦ Grupi i 4-t ¦ Ir-4 grupp
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Hapësira e jetës, brez pas brezi ¦ Iż-żona tal-ħajja, ġenerazzjoni wara ġenerazzjoni
+L’aire de vie de tes ancêtres ¦ Hapësira e jetës së paraardhësve të tu ¦ Iż-żona tal-ħajja tal-antenati tiegħek
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Për çdo brez, zona që mban pjesën më të madhe të lindjeve, martesave dhe vdekjeve të tyre. Të njëjtat largësi si 🧭 Larg djepit. Kurrë një i gjallë ose një skedë konfidenciale. ¦ Għal kull ġenerazzjoni, iż-żona li fiha l-biċċa l-kbira tat-twelid, iż-żwiġijiet u l-imwiet tagħhom. L-istess distanzi bħal 🧭 ’Il bogħod mill-benniena. Qatt persuna ħajja jew skeda kunfidenzjali.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Merr paraardhësit e personit tënd fillestar («Nga aplikacioni»). ¦ Ħu l-antenati tal-persuna tal-bidu tiegħek (“Mill-app”).
+Génération d’ancêtres ¦ Brez paraardhësish ¦ Ġenerazzjoni ta’ antenati
+Siècle (toute la base) ¦ Shekull (gjithë baza) ¦ Seklu (id-database kollha)
+Une vie (les étapes d’une personne) ¦ Një jetë (etapat e një personi) ¦ Ħajja waħda (l-istadji ta’ persuna)
+Avec les résidences et recensements ¦ Me vendbanimet dhe regjistrimet ¦ Bir-residenzi u ċ-ċensimenti
+Du clair (anciens) au foncé (récents) ¦ Nga e çelura (të vjetrit) te e errëta (të rinjtë) ¦ Mill-ċar (l-eqdem) għall-skur (l-aktar riċenti)
+Bleu / orange pour père / mère ¦ Blu / portokalli për babain / nënën ¦ Blu / oranġjo għall-missier / l-omm
+L’inverse ¦ E kundërta ¦ Bil-maqlub
+50 % (le cœur) ¦ 50 % (thelbi) ¦ 50 % (il-qalba)
+Part des événements ¦ Pjesa e ngjarjeve ¦ Sehem tal-avvenimenti
+Part gardée ¦ Pjesa e mbajtur ¦ Sehem miżmum
+Cercle (facile à comparer) ¦ Rreth (i lehtë për t’u krahasuar) ¦ Ċirku (faċli biex tqabbel)
+Enveloppe (le contour au plus juste) ¦ Mbështjellësja (konturi më i ngushtë) ¦ Envelopp (l-iktar kontorn issikkat)
+Personne (l’aire d’une vie) ¦ Person (hapësira e një jete) ¦ Persuna (iż-żona ta’ ħajja waħda)
+Le milieu des événements ¦ Mesi i ngjarjeve ¦ Nofs l-avvenimenti
+Le lieu de naissance de la personne de départ ¦ Vendlindja e personit fillestar ¦ Il-post tat-twelid tal-persuna tal-bidu
+Le berceau des plus anciens ¦ Djepi i më të vjetërve ¦ Il-benniena tal-eqdem
+Toutes les aires superposées ¦ Të gjitha hapësirat të mbivendosura ¦ Iż-żoni kollha waħda fuq l-oħra
+Une par case ¦ Një për kuti ¦ Waħda għal kull kaxxa
+Une à la fois avec ▶ ¦ Një nga një me ▶ ¦ Waħda waħda b’▶
+Minimum pour tracer une aire ¦ Minimumi për të vizatuar një hapësirë ¦ Minimu biex titpinġa żona
+5 événements ¦ 5 ngjarje ¦ 5 avvenimenti
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Te hapësirat (një paraardhës i shkuar larg mbetet jashtë) ¦ Fuq iż-żoni (antenat li mar ’il bogħod jibqa’ barra)
+Cadrer sur tout ¦ Kuadro gjithçka ¦ Inkwadra kollox
+Le tableau sous la carte ¦ Tabela nën hartë ¦ It-tabella taħt il-mappa
+Gén. {g} · ses parents ¦ Brezi {g} · prindërit ¦ Ġen. {g} · il-ġenituri
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Kliko: vendet dhe ato jashtë hapësirës ¦ Ikklikkja: il-postijiet u dawk barra ż-żona
+Hors de l’aire ¦ Jashtë hapësirës ¦ Barra ż-żona
+Rayon ({p} %) ¦ Rrezja ({p} %) ¦ Raġġ ({p} %)
+trop peu ¦ shumë pak ¦ ftit wisq
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Hapësira e jetës: {n}, rreze nga {a} km deri në {b} km. ¦ Żona tal-ħajja: {n}, raġġ minn {a} km sa {b} km.
+Aire de vie : pas assez d’événements. ¦ Hapësira e jetës: nuk ka mjaft ngjarje. ¦ Żona tal-ħajja: m’hemmx biżżejjed avvenimenti.
+Aire de vie : {n}. ¦ Hapësira e jetës: {n}. ¦ Żona tal-ħajja: {n}.
+L’AIRE DE VIE ¦ HAPËSIRA E JETËS ¦ IŻ-ŻONA TAL-ĦAJJA
+L’aire de vie de la famille, siècle par siècle ¦ Hapësira e jetës së familjes, shekull pas shekulli ¦ Iż-żona tal-ħajja tal-familja, seklu wara seklu
+L’aire de vie des ancêtres de {name} ¦ Hapësira e jetës së paraardhësve të {name} ¦ Iż-żona tal-ħajja tal-antenati ta’ {name}
+L’aire d’une vie : {name} ¦ Hapësira e një jete: {name} ¦ Iż-żona ta’ ħajja: {name}
+la famille {name} ¦ familja {name} ¦ il-familja {name}
+Voir l’aire de vie sur la carte ¦ Shih hapësirën e jetës në hartë ¦ Ara ż-żona tal-ħajja fuq il-mappa
+Centre ¦ Qendra ¦ Ċentru
+Côté père et côté mère (deux couleurs) ¦ Ana e babait dhe e nënës (dy ngjyra) ¦ In-naħa tal-missier u tal-omm (żewġ kuluri)
+Mes ancêtres, 8 générations ¦ Paraardhësit e mi, 8 breza ¦ L-antenati tiegħi, 8 ġenerazzjonijiet
+Toute ma base, siècle par siècle ¦ Gjithë baza ime, shekull pas shekulli ¦ Id-database kollha tiegħi, seklu wara seklu
+=aire ¦ hapësirë|hapësira ¦ żona|żoni|żoni|żoni|żoni

@@ -190,3 +190,51 @@ mariage de {a} et {b} ¦ Hochzäit vu(n) {a} an {b}
 {a} et {b}, à {km} km ¦ {a} an {b}, {km} km auserneen
 3e groupe ¦ 3. Grupp
 4e groupe ¦ 4. Grupp
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ De Liewensraum, Generatioun fir Generatioun
+L’aire de vie de tes ancêtres ¦ De Liewensraum vun denge Virfahren
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Fir all Generatioun d’Zon, an där déi meescht vun hire Gebuerten, Hochzäiten an Doudesfäll leien. Déi selwecht Distanzen wéi 🧭 Wäit vun der Wéi. Ni eng lieweg Persoun an ni eng vertraulech Fiche.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Huel d’Virfahre vun denger Startpersoun („Aus der App“).
+Génération d’ancêtres ¦ Generatioun vu Virfahren
+Siècle (toute la base) ¦ Joerhonnert (ganz Datebank)
+Une vie (les étapes d’une personne) ¦ E Liewen (d’Etappe vun enger Persoun)
+Avec les résidences et recensements ¦ Mat de Wunnplazen a Vollékszielungen
+Du clair (anciens) au foncé (récents) ¦ Vu hell (déi eelst) bis donkel (déi rezentst)
+Bleu / orange pour père / mère ¦ Blo / orange fir Papp / Mamm
+L’inverse ¦ Ëmgedréint
+50 % (le cœur) ¦ 50 % (de Kär)
+Part des événements ¦ Undeel vun den Evenementer
+Part gardée ¦ Behalenen Undeel
+Cercle (facile à comparer) ¦ Krees (einfach ze vergläichen)
+Enveloppe (le contour au plus juste) ¦ Hüll (de knappste Contour)
+Personne (l’aire d’une vie) ¦ Persoun (de Raum vun engem Liewen)
+Le milieu des événements ¦ D’Mëtt vun den Evenementer
+Le lieu de naissance de la personne de départ ¦ D’Gebuertsplaz vun der Startpersoun
+Le berceau des plus anciens ¦ D’Wéi vun den Eelsten
+Toutes les aires superposées ¦ All d’Raim openeen
+Une par case ¦ Eng pro Feld
+Une à la fois avec ▶ ¦ Eng no där anerer mat ▶
+Minimum pour tracer une aire ¦ Minimum fir e Raum ze zeechnen
+5 événements ¦ 5 Evenementer
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Op d’Raim (e Virfar, deen wäit fortgaangen ass, bleift dobaussen)
+Cadrer sur tout ¦ Alles cadréieren
+Le tableau sous la carte ¦ D’Tabell ënner der Kaart
+Gén. {g} · ses parents ¦ Gen. {g} · d’Elteren
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Klick: d’Plazen an déi baussent dem Raum
+Hors de l’aire ¦ Baussent dem Raum
+Rayon ({p} %) ¦ Radius ({p} %)
+trop peu ¦ ze wéineg
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Liewensraum: {n}, Radius vun {a} km bis {b} km.
+Aire de vie : pas assez d’événements. ¦ Liewensraum: net genuch Evenementer.
+Aire de vie : {n}. ¦ Liewensraum: {n}.
+L’AIRE DE VIE ¦ DE LIEWENSRAUM
+L’aire de vie de la famille, siècle par siècle ¦ De Liewensraum vun der Famill, Joerhonnert fir Joerhonnert
+L’aire de vie des ancêtres de {name} ¦ De Liewensraum vun de Virfahre vu(n) {name}
+L’aire d’une vie : {name} ¦ De Raum vun engem Liewen: {name}
+la famille {name} ¦ d’Famill {name}
+Voir l’aire de vie sur la carte ¦ De Liewensraum op der Kaart weisen
+Centre ¦ Mëttelpunkt
+Côté père et côté mère (deux couleurs) ¦ Säit vum Papp a vun der Mamm (zwou Faarwen)
+Mes ancêtres, 8 générations ¦ Meng Virfahren, 8 Generatiounen
+Toute ma base, siècle par siècle ¦ Meng ganz Datebank, Joerhonnert fir Joerhonnert
+=aire ¦ Raum|Raim

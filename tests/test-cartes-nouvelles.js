@@ -36,12 +36,14 @@ const SECRET = /Claire MAZAUD|Paul DURAND|informaticien/;
 // chaque carte dessinée depuis l'app dans le navigateur : [sorte, préparation du panneau, texte attendu dans l'aperçu]
 // et des réglages essayés sur l'exemple de chaque carte (chacun doit donner une image)
 const VARIANTS = {
+    lifearea: [{share: '50'}, {share: 'custom', shareN: 95}, {shape: 'hull'}, {shape: 'both'}, {center: 'oldest'}, {draw: 'small'}, {draw: 'play', at: 1}, {min: '10'}, {colors: 'reverse'}, {colors: 'side'}, {frameAll: 'all', table: false}, {groupBy: 'century'}],
     mirrormap: [{draw: 'side'}, {draw: 'swipe', swipe: 30}, {meet: 'era', eraYears: 10}, {meet: 'near', nearKm: 20}, {implex: 'short'}, {step: 'gen', at: '3'}, {window: 'period', at: '1860'}, {colors: 'pink'}, {colors: 'mine', colorA: '#000000'}, {size: 'same', meetList: false, wedding: 'hide'}],
     trademap: [{tmode: 'small'}, {draw: 'deps'}, {draw: 'dots'}, {draw: 'top'}, {classify: 'domain'}, {classify: 'mine', colors: 'tanneur=#aa0000'}, {multi: 'main', foyer: 'hide', size: 'same', where: 'act'}, {tmode: 'half', at: '1850'}],
 };
 const KIND_TESTS = [
     ['trademap', null, 'Tulle'],
     ['mirrormap', null, 'Tulle'],
+    ['lifearea', null, 'Gén. 2'],
 ];
 
 (async () => {
@@ -208,6 +210,18 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(dir) });
             const two = await get('cartes_plus2', { what: 'mirror', side: 'two', a: 2, b: 3 }); assert.deepEqual(two.member[4], [0]); assert.deepEqual(two.member[7], [1]);
             const nm = await get('cartes_plus2', { what: 'mirror', side: 'names', na: 'mazaud', nb: 'Lacombe' }); assert.ok(nm.member[2] && nm.member[3] && !nm.member[20]);
             assert.match((await get('cartes_plus2', { what: 'mirror', side: 'two', a: 2 })).error, /deux personnes/);
+        });
+
+        await t('⭕ aire de vie : générations, côtés, implexe une fois par génération ; siècle ; une vie — jamais un vivant', async () => {
+            const r = await get('cartes_plus2', { what: 'areas', root: 1, gens: 8 });
+            assert.ok(r.rows.length >= 6, JSON.stringify(r).slice(0, 300));
+            const g = pid => [...new Set(r.rows.filter(x => x[0] === pid).map(x => x[4]))];
+            assert.deepEqual(g(2), [2]); assert.deepEqual(g(8), [4]); assert.deepEqual(g(1), [1]);
+            assert.ok(r.rows.filter(x => x[0] === 8).every(x => x[5] === 0), 'côté père'); assert.ok(r.rows.filter(x => x[0] === 6).every(x => x[5] === 1), 'côté mère');
+            assert.equal(r.birth, 2, 'né à Tulle'); assert.ok(!r.rows.some(x => [20, 21].includes(x[0])));
+            const v = await get('cartes_plus2', { what: 'areas', root: 20 }); assert.equal(v.birth, null, 'vivante : pas son lieu de naissance'); assert.ok(!v.rows.some(x => x[0] === 20));
+            const c = await get('cartes_plus2', { what: 'areas', group: 'century' }); assert.ok(c.rows.length > 20 && !c.rows.some(x => [20, 21].includes(x[0])));
+            const one = await get('cartes_plus2', { what: 'areas', group: 'person', root: 2 }); assert.ok(one.rows.every(x => x[0] === 2) && one.rows.length >= 3);
         });
 
         /* ═════ 3. Navigateur ═════ */

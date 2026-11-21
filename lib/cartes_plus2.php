@@ -229,6 +229,35 @@ function cp2_mirror(PDO $pdo, array $q): array
         'unplaced' => cp2_unplaced($pdo, array_column($events, 1), $places)];
 }
 
+/** ⭕ les événements pour l'aire de vie : ancêtres génération par génération (avec leur côté), toute la base (par siècle), ou une vie */
+function cp2_areas(PDO $pdo, array $q): array
+{
+    $group = cp2_pick($q, 'group', ['gen', 'century', 'person'], 'gen');
+    $gens = cp2_int($q, 'gens', 8, 1, 40);
+    $tags = cp2_tags((string) ($q['ev'] ?? 'births,marriages,deaths'));
+    $root = cp2_root($pdo, cp2_int($q, 'root', 0, 0, PHP_INT_MAX));
+    $rows = []; $who = [];
+    if ($group === 'century') {
+        foreach (cp_events($pdo, 'all', null, 40000) as [$pid, $pl, $y, $tag]) { if ($y !== null && in_array($tag, $tags, true)) { $rows[] = [$pid, $pl, $y, $tag, 0, -1]; } }
+    } else {
+        if (!$root['id']) { throw new RuntimeException('Choisis d’abord une personne de départ.'); }
+        $S = $group === 'person' ? [1 => $root['id']] : dgn_sosa($pdo, $root['id'], $gens, 120000);
+        foreach ($S as $s => $id) { $g = strlen(decbin((int) $s)); $side = $s < 2 ? -1 : ((int) $s >> ($g - 2)) - 2; $who[(int) $id][$g] = $side; } // génération (1 = la personne) et côté (0 père, 1 mère)
+        $seen = [];
+        foreach (cp2_events($pdo, $group === 'person' ? array_merge(CP_EV_GROUPS['births'], CP_EV_GROUPS['marriages'], CP_EV_GROUPS['deaths'], CP_EV_GROUPS['residences'], ['OCCU', 'EVEN']) : $tags, array_keys($who)) as [$pid, $pl, $y, $tag]) {
+            foreach ($who[$pid] ?? [] as $g => $side) { // implexe : une fois par génération où l'ancêtre apparaît
+                $k = "$pid|$pl|$y|$tag|$g"; if (isset($seen[$k])) { continue; } $seen[$k] = true;
+                $rows[] = [$pid, $pl, $y, $tag, $g, $side];
+            }
+        }
+    }
+    $places = cp_places($pdo, array_column($rows, 1));
+    // le lieu de naissance de la personne de départ (centre « depuis son lieu de naissance ») : seulement si elle se montre
+    $birth = null;
+    if ($root['id'] && $root['shown']) { foreach ($rows as $r) { if ($r[0] === $root['id'] && in_array($r[3], ['BIRT', 'CHR', 'BAPM'], true) && isset($places[$r[1]])) { $birth = $r[1]; break; } } }
+    return ['group' => $group, 'rows' => $rows, 'places' => $places, 'people' => cp_people($pdo, array_column($rows, 0)), 'root' => $root, 'birth' => $birth, 'unplaced' => cp2_unplaced($pdo, array_column($rows, 1), $places)];
+}
+
 /** le point d'entrée : api.php?action=cartes_plus2 */
 function cp2_data(PDO $pdo, array $q): array
 {
@@ -237,6 +266,7 @@ function cp2_data(PDO $pdo, array $q): array
         'trades' => cp2_trades($pdo, $q),
         'trade_list' => cp2_trade_list($pdo),
         'mirror' => cp2_mirror($pdo, $q),
+        'areas' => cp2_areas($pdo, $q),
         default => throw new RuntimeException('Demande inconnue.'),
     };
 }

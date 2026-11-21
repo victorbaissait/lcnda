@@ -190,3 +190,51 @@ mariage de {a} et {b} ¦ đám cưới của {a} và {b} ¦ pernikahan {a} dan {
 {a} et {b}, à {km} km ¦ {a} và {b}, cách nhau {km} km ¦ {a} dan {b}, berjarak {km} km
 3e groupe ¦ Nhóm 3 ¦ Kelompok ke-3
 4e groupe ¦ Nhóm 4 ¦ Kelompok ke-4
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Vùng sống, từng thế hệ ¦ Wilayah hidup, generasi demi generasi
+L’aire de vie de tes ancêtres ¦ Vùng sống của tổ tiên bạn ¦ Wilayah hidup leluhur kamu
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Với mỗi thế hệ, vùng chứa phần lớn các lần sinh, kết hôn và qua đời của họ. Cùng khoảng cách như 🧭 Xa nơi chôn nhau. Không bao giờ có người còn sống hay phiếu bảo mật. ¦ Untuk setiap generasi, zona yang memuat sebagian besar kelahiran, pernikahan, dan kematian mereka. Jarak yang sama dengan 🧭 Jauh dari buaian. Tidak pernah orang yang masih hidup atau lembar rahasia.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Lấy tổ tiên của người khởi đầu (“Từ ứng dụng”). ¦ Ambil leluhur dari orang awal kamu (“Dari aplikasi”).
+Génération d’ancêtres ¦ Thế hệ tổ tiên ¦ Generasi leluhur
+Siècle (toute la base) ¦ Thế kỷ (toàn bộ cơ sở dữ liệu) ¦ Abad (seluruh basis data)
+Une vie (les étapes d’une personne) ¦ Một cuộc đời (các chặng của một người) ¦ Satu kehidupan (tahap-tahap satu orang)
+Avec les résidences et recensements ¦ Kèm nơi ở và điều tra dân số ¦ Dengan tempat tinggal dan sensus
+Du clair (anciens) au foncé (récents) ¦ Từ nhạt (xưa nhất) đến đậm (gần nhất) ¦ Dari terang (terlama) ke gelap (terbaru)
+Bleu / orange pour père / mère ¦ Xanh dương / cam cho bên nội / bên ngoại ¦ Biru / oranye untuk ayah / ibu
+L’inverse ¦ Ngược lại ¦ Kebalikannya
+50 % (le cœur) ¦ 50 % (phần lõi) ¦ 50 % (inti)
+Part des événements ¦ Tỷ lệ sự kiện ¦ Bagian peristiwa
+Part gardée ¦ Tỷ lệ giữ lại ¦ Bagian yang disimpan
+Cercle (facile à comparer) ¦ Hình tròn (dễ so sánh) ¦ Lingkaran (mudah dibandingkan)
+Enveloppe (le contour au plus juste) ¦ Bao lồi (đường bao sát nhất) ¦ Selubung (garis luar paling rapat)
+Personne (l’aire d’une vie) ¦ Người (vùng của một đời) ¦ Orang (wilayah satu kehidupan)
+Le milieu des événements ¦ Điểm giữa các sự kiện ¦ Titik tengah peristiwa
+Le lieu de naissance de la personne de départ ¦ Nơi sinh của người khởi đầu ¦ Tempat lahir orang awal
+Le berceau des plus anciens ¦ Nơi chôn nhau của những người xưa nhất ¦ Buaian yang tertua
+Toutes les aires superposées ¦ Mọi vùng chồng lên nhau ¦ Semua wilayah ditumpuk
+Une par case ¦ Mỗi ô một vùng ¦ Satu per kotak
+Une à la fois avec ▶ ¦ Lần lượt từng vùng với ▶ ¦ Satu per satu dengan ▶
+Minimum pour tracer une aire ¦ Tối thiểu để vẽ một vùng ¦ Minimum untuk menggambar wilayah
+5 événements ¦ 5 sự kiện ¦ 5 peristiwa
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Theo các vùng (tổ tiên đi xa vẫn ở ngoài vùng) ¦ Pada wilayah (leluhur yang pergi jauh tetap di luar)
+Cadrer sur tout ¦ Khung toàn bộ ¦ Bingkai semuanya
+Le tableau sous la carte ¦ Bảng dưới bản đồ ¦ Tabel di bawah peta
+Gén. {g} · ses parents ¦ Thế hệ {g} · cha mẹ ¦ Gen. {g} · orang tua
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Bấm: các địa điểm và những nơi ngoài vùng ¦ Klik: tempat-tempatnya dan yang di luar wilayah
+Hors de l’aire ¦ Ngoài vùng ¦ Di luar wilayah
+Rayon ({p} %) ¦ Bán kính ({p} %) ¦ Jari-jari ({p} %)
+trop peu ¦ quá ít ¦ terlalu sedikit
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Vùng sống: {n}, bán kính từ {a} km đến {b} km. ¦ Wilayah hidup: {n}, jari-jari dari {a} km sampai {b} km.
+Aire de vie : pas assez d’événements. ¦ Vùng sống: không đủ sự kiện. ¦ Wilayah hidup: peristiwa tidak cukup.
+Aire de vie : {n}. ¦ Vùng sống: {n}. ¦ Wilayah hidup: {n}.
+L’AIRE DE VIE ¦ VÙNG SỐNG ¦ WILAYAH HIDUP
+L’aire de vie de la famille, siècle par siècle ¦ Vùng sống của gia đình, từng thế kỷ ¦ Wilayah hidup keluarga, abad demi abad
+L’aire de vie des ancêtres de {name} ¦ Vùng sống của tổ tiên {name} ¦ Wilayah hidup leluhur {name}
+L’aire d’une vie : {name} ¦ Vùng của một đời người: {name} ¦ Wilayah satu kehidupan: {name}
+la famille {name} ¦ gia đình {name} ¦ keluarga {name}
+Voir l’aire de vie sur la carte ¦ Xem vùng sống trên bản đồ ¦ Lihat wilayah hidup di peta
+Centre ¦ Tâm ¦ Pusat
+Côté père et côté mère (deux couleurs) ¦ Bên nội và bên ngoại (hai màu) ¦ Pihak ayah dan ibu (dua warna)
+Mes ancêtres, 8 générations ¦ Tổ tiên của tôi, 8 thế hệ ¦ Leluhur saya, 8 generasi
+Toute ma base, siècle par siècle ¦ Toàn bộ cơ sở dữ liệu của tôi, từng thế kỷ ¦ Seluruh basis data saya, abad demi abad
+=aire ¦ vùng ¦ wilayah

@@ -190,3 +190,51 @@ mariage de {a} et {b} ¦ {a} ja {b} vihittiin ¦ {a} és {b} esküvője
 {a} et {b}, à {km} km ¦ {a} ja {b}, {km} km:n päässä ¦ {a} és {b}, {km} km-re
 3e groupe ¦ 3. ryhmä ¦ 3. csoport
 4e groupe ¦ 4. ryhmä ¦ 4. csoport
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Elinalue sukupolvi kerrallaan ¦ Az élettér nemzedékről nemzedékre
+L’aire de vie de tes ancêtres ¦ Esivanhempiesi elinalue ¦ Őseid élettere
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Jokaiselle sukupolvelle alue, jolla on suurin osa sen syntymistä, avioliitoista ja kuolemista. Samat etäisyydet kuin 🧭 Kaukana kehdosta. Ei koskaan elävää henkilöä eikä luottamuksellista korttia. ¦ Minden nemzedékre az a terület, ahol születéseik, házasságaik és haláluk zöme történt. Ugyanazok a távolságok, mint a 🧭 Messze a bölcsőtől lapon. Soha élő személy vagy bizalmas adatlap.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Ota lähtöhenkilösi esivanhemmat (”Sovelluksesta”). ¦ Vedd át a kiinduló személyed őseit („Az alkalmazásból”).
+Génération d’ancêtres ¦ Esivanhempien sukupolvi ¦ Ősök nemzedéke
+Siècle (toute la base) ¦ Vuosisata (koko tietokanta) ¦ Évszázad (az egész adatbázis)
+Une vie (les étapes d’une personne) ¦ Yksi elämä (henkilön vaiheet) ¦ Egy élet (egy személy állomásai)
+Avec les résidences et recensements ¦ Asuinpaikkojen ja väenlaskentojen kanssa ¦ A lakóhelyekkel és népszámlálásokkal
+Du clair (anciens) au foncé (récents) ¦ Vaaleasta (vanhimmat) tummaan (uusimmat) ¦ A világostól (legrégebbiek) a sötétig (legújabbak)
+Bleu / orange pour père / mère ¦ Sininen / oranssi isälle / äidille ¦ Kék / narancs az apai / anyai oldalnak
+L’inverse ¦ Päinvastoin ¦ Fordítva
+50 % (le cœur) ¦ 50 % (ydin) ¦ 50% (a mag)
+Part des événements ¦ Tapahtumien osuus ¦ Az események aránya
+Part gardée ¦ Säilytetty osuus ¦ Megtartott arány
+Cercle (facile à comparer) ¦ Ympyrä (helppo verrata) ¦ Kör (könnyen összehasonlítható)
+Enveloppe (le contour au plus juste) ¦ Verho (tiukin ääriviiva) ¦ Burok (a legszorosabb körvonal)
+Personne (l’aire d’une vie) ¦ Henkilö (yhden elämän alue) ¦ Személy (egy élet tere)
+Le milieu des événements ¦ Tapahtumien keskikohta ¦ Az események közepe
+Le lieu de naissance de la personne de départ ¦ Lähtöhenkilön syntymäpaikka ¦ A kiinduló személy születési helye
+Le berceau des plus anciens ¦ Vanhimpien kehto ¦ A legrégebbiek bölcsője
+Toutes les aires superposées ¦ Kaikki alueet päällekkäin ¦ Minden tér egymásra rakva
+Une par case ¦ Yksi ruutua kohti ¦ Mezőnként egy
+Une à la fois avec ▶ ¦ Yksi kerrallaan ▶:llä ¦ Egyenként a ▶ gombbal
+Minimum pour tracer une aire ¦ Vähimmäismäärä alueen piirtämiseen ¦ Minimum egy tér megrajzolásához
+5 événements ¦ 5 tapahtumaa ¦ 5 esemény
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Alueisiin (kauas lähtenyt esivanhempi jää alueen ulkopuolelle) ¦ A terekre (a messzire költözött ős a téren kívül marad)
+Cadrer sur tout ¦ Rajaa kaikki ¦ Mindent a képre
+Le tableau sous la carte ¦ Taulukko kartan alla ¦ A táblázat a térkép alatt
+Gén. {g} · ses parents ¦ Sp. {g} · vanhemmat ¦ {g}. nemz. · a szülők
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Napsauta: paikat ja alueen ulkopuoliset ¦ Kattintás: a helyek és a téren kívüliek
+Hors de l’aire ¦ Alueen ulkopuolella ¦ A téren kívül
+Rayon ({p} %) ¦ Säde ({p} %) ¦ Sugár ({p}%)
+trop peu ¦ liian vähän ¦ túl kevés
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Elinalue: {n}, säde {a}–{b} km. ¦ Élettér: {n}, sugár {a} km-től {b} km-ig.
+Aire de vie : pas assez d’événements. ¦ Elinalue: liian vähän tapahtumia. ¦ Élettér: nincs elég esemény.
+Aire de vie : {n}. ¦ Elinalue: {n}. ¦ Élettér: {n}.
+L’AIRE DE VIE ¦ ELINALUE ¦ AZ ÉLETTÉR
+L’aire de vie de la famille, siècle par siècle ¦ Suvun elinalue vuosisata kerrallaan ¦ A család élettere évszázadonként
+L’aire de vie des ancêtres de {name} ¦ Esivanhempien elinalue: {name} ¦ {name} őseinek élettere
+L’aire d’une vie : {name} ¦ Yhden elämän alue: {name} ¦ Egy élet tere: {name}
+la famille {name} ¦ suku {name} ¦ a {name} család
+Voir l’aire de vie sur la carte ¦ Näytä elinalue kartalla ¦ Az élettér a térképen
+Centre ¦ Keskipiste ¦ Középpont
+Côté père et côté mère (deux couleurs) ¦ Isän ja äidin puoli (kaksi väriä) ¦ Apai és anyai oldal (két szín)
+Mes ancêtres, 8 générations ¦ Esivanhempani, 8 sukupolvea ¦ Őseim, 8 nemzedék
+Toute ma base, siècle par siècle ¦ Koko tietokantani vuosisata kerrallaan ¦ Az egész adatbázisom évszázadonként
+=aire ¦ alue|aluetta ¦ terület|terület

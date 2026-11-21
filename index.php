@@ -1291,7 +1291,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-calendar-more.js?v=6" defer></script>
 <script src="assets/js/heritage-lecture-autrefois.js?v=5" defer></script>
 <script src="assets/js/heritage-links.js?v=24" defer></script>
-<script src="assets/js/heritage-more.js?v=363" defer></script>
+<script src="assets/js/heritage-more.js?v=364" defer></script>
 <script src="assets/js/heritage-controle.js?v=9" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
 <script src="assets/js/heritage-research.js?v=40" defer></script>
@@ -1362,7 +1362,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-genealogies.js?v=7" defer></script>
 <script src="assets/js/heritage-periodicals.js?v=17" defer></script>
 <script src="assets/js/heritage-diagrams-render.js?v=11" defer></script>
-<script src="assets/js/heritage-diagrams.js?v=35" defer></script>
+<script src="assets/js/heritage-diagrams.js?v=36" defer></script>
 <script src="assets/js/heritage-diagram-options.js?v=6" defer></script>
 <script src="assets/js/heritage-diagram-genea.js?v=9" defer></script>
 <script src="assets/js/heritage-vector.js?v=39" defer></script>
@@ -1421,8 +1421,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-diagram-cartes2.js?v=7" defer></script>
 <script src="assets/js/heritage-prenoms-france.js?v=5" defer></script>
 <script src="assets/js/heritage-diagram-cartes-plus.js?v=3" defer></script>
-<script src="assets/js/heritage-diagram-cartes-plus2.js?v=3" defer></script><!-- 🗺️ vague 2 : métiers, lignées, aire de vie, parrains, crises -->
-<script src="assets/js/heritage-diagram-graphique.js?v=7" defer></script>
+<script src="assets/js/heritage-diagram-cartes-plus2.js?v=4" defer></script><!-- 🗺️ vague 2 : métiers, lignées, aire de vie, parrains, crises -->
+<script src="assets/js/heritage-diagram-graphique.js?v=8" defer></script>
 <script src="assets/js/heritage-diagram-nouveaux.js?v=6" defer></script>
 <script src="assets/js/heritage-diagram-lot-c.js?v=1" defer></script>
 <script src="assets/js/app-diagram-plus-core.js?v=2" defer></script>

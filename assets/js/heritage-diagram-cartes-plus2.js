@@ -46,10 +46,17 @@
         const w = GC.needBases(spec, W, [b0, c0, 'monde-110m', 'fr-departements']); if (w) return {wait: w};
         return {list: [GC.loaded(b0), c0 ? GC.loaded(c0) : null, GC.loaded('monde-110m')].filter(Boolean), deps: GC.loaded('fr-departements')};
     }
+    /** le cadrage au plus près des points (une famille tient souvent dans quelques villages : pas de marge d'un degré) */
+    function tight(pts) {
+        let w = Infinity, s = Infinity, e = -Infinity, n = -Infinity; pts.forEach(p => { w = Math.min(w, p[0]); e = Math.max(e, p[0]); s = Math.min(s, p[1]); n = Math.max(n, p[1]); });
+        if (!Number.isFinite(w)) return null;
+        const dx = Math.max(.12, (e - w) * .2), dy = Math.max(.08, (n - s) * .2);
+        return [clamp(w - dx, -180, 180), clamp(s - dy, -85, 85), clamp(e + dx, -180, 180), clamp(n + dy, -85, 85)];
+    }
     /** un fond cadré sur ces points ; fillOf colore les zones (départements…) */
     function frame(spec, W, fs, pts, fillOf = null, H = 0) {
         const o = spec.o || {}, M = GC.MAPS[GC.mapOf(o)];
-        const auto = (!o.frame || o.frame === '') && o.fit !== false && pts.length ? GC.fitView(pts.map(p => ({p})), o) : null;
+        const auto = (!o.frame || o.frame === '') && o.fit !== false && pts.length ? tight(pts) : null;
         const view = GC.viewOf(o, auto || M.view), baseId = GC.baseIdOf(o, view), ctxId = GC.ctxIdOf(o, baseId, view);
         const wait = GC.needBases(spec, W, [baseId, ctxId]); if (wait) return {wait};
         const base = GC.loaded(baseId), ctx = ctxId ? GC.loaded(ctxId) : null, uid = 'cq' + (++seq);
@@ -134,7 +141,7 @@
         const list = [GC.loaded(b0), GC.loaded('monde-110m')].filter(Boolean);
         const labels = [...rows(s).map(r => r.label), ...rows(s, 'links').flatMap(r => [r.from, r.to])];
         const pts = labels.map(l => GC.placeOf(s, str(l, 120), list)).filter(Boolean);
-        if (pts.length && !o.frame && o.fit !== false) { const v = GC.fitView(pts.map(p => ({p: [p[0], p[1]]})), o), b = GC.baseIdOf(o, v); await Promise.all([b, GC.ctxIdOf(o, b, v)].filter(Boolean).map(id => GC.load(id).catch(() => {}))); }
+        if (pts.length && !o.frame && o.fit !== false) { const v = tight(pts.map(p => [p[0], p[1]])), b = GC.baseIdOf(o, v); await Promise.all([b, GC.ctxIdOf(o, b, v)].filter(Boolean).map(id => GC.load(id).catch(() => {}))); }
         return s;
     }
     const afterDraw = (prev, api) => { GC.afterDraw(prev, api); prev._c2Api = api; };
@@ -156,10 +163,17 @@
         });
         return {h: y + rowH, svg};
     }
+    /** les noms des lieux les plus présents (réglage « Noms des lieux » : les principaux, tous, aucun) */
+    function placeNames(spec, F, pts, fs) {
+        const how = spec.o?.placeLabels || ''; if (how === 'none') return '';
+        const g = new Map(); pts.forEach(p => { const k = `${r2(p.lon)}|${r2(p.lat)}`, x = g.get(k); if (x) x.n++; else g.set(k, {p, n: 1}); });
+        return [...g.values()].sort((a, b) => b.n - a.n).slice(0, how === 'all' ? 80 : 8).map(({p}) => { const [x, y] = F.pr.p(p.lon, p.lat); return Number.isFinite(x) ? T(x + 6, y - 6, p.place, {size: clamp(fs * .72, 7, 14), weight: 600, fill: '#1d1d1f', halo: 'rgba(255,255,255,.85)'}) : ''; }).join('');
+    }
+    const PLACE_LABELS = C('placeLabels', 'Noms des lieux', 'select', {choices: [['', 'Les plus grands'], ['all', 'Tous'], ['none', 'Aucun']]});
     /** les fiches derrière un clic sur la carte (le détail reste à l'écran ; jamais à l'export) */
     const DETAIL = new Map();
     const keepDetail = (id, data) => { DETAIL.set(id, data); if (DETAIL.size > 40) DETAIL.delete(DETAIL.keys().next().value); };
-    const H = {T, esc, multiples, DETAIL, keepDetail, num, clamp, r1, r2, fmt, fold, rows, str, C, pl, yearOf, tip, pidsAttr, opt, optN, siecle, KM, median, bases, frame, locate, missing, emptyMsg, title, atOf, timeOf, periodWord, curve, slice, hull, geoRing, poly,
+    const H = {T, esc, multiples, DETAIL, keepDetail, placeNames, PLACE_LABELS, num, clamp, r1, r2, fmt, fold, rows, str, C, pl, yearOf, tip, pidsAttr, opt, optN, siecle, KM, median, bases, frame, locate, missing, emptyMsg, title, atOf, timeOf, periodWord, curve, slice, hull, geoRing, poly,
         get, placesOf, keepUnplaced, pane, bindGo, sel, val, checks, startId, personField, pickedId, pickerPut, resolve, afterDraw, mapOpts, COMMON, REC, i18n, A, ext, DR, GC, color};
     const NEW = {};
     /** une carte de plus : rangée dans le catalogue (groupe « Cartes ») si elle n'y est pas déjà */
@@ -356,7 +370,7 @@
 (() => {
     'use strict';
     const P2 = window.LCNDA_EXT?.diagramCartesPlus2; if (!P2) return;
-    const {T, esc, num, clamp, r1, r2, rows, str, C, pl, tip, opt, optN, KM, bases, frame, locate, missing, emptyMsg, title, periodWord, keepDetail,
+    const {T, esc, num, clamp, r1, r2, rows, str, C, pl, tip, opt, optN, KM, bases, frame, locate, missing, emptyMsg, title, periodWord, keepDetail, placeNames, PLACE_LABELS,
         get, placesOf, keepUnplaced, pane, bindGo, sel, val, checks, startId, personField, pickedId, pickerPut, mapOpts, COMMON, REC, i18n, A, ext, GC, color} = P2.H;
     const PAL = {'': ['#1f6fd1', '#e8890c', '#6fa8ef', '#f2b766'], pink: ['#1f6fd1', '#d6408f', '#6fa8ef', '#ee8fc0']};
     const MIX = '#7b4fb0';
@@ -430,7 +444,7 @@
             G.forEach((g, k) => { const F = frame({...spec, o: {...o, height: Math.round(cw * .95)}}, cw, fs, allPts, null, Math.round(cw * .95)); if (F.wait) return;
                 const c = k % percol; if (c === 0 && k) { y0 += rowH + gap; rowH = 0; } const x = c * (cw + gap);
                 const R0 = clamp(cw / 70, 3, 9) * clamp(num(o.dotSize) || 1, .3, 3);
-                svg += `<g transform="translate(${r1(x)} ${r1(y0 + fs * 1.6)})">${F.open}${layer(spec, F, list, n, cols, R0, maxN, k)}${F.close}</g>` + T(x + 4, y0 + fs * .8, `● ${i18n(g.label)} · ${pl(list.filter(z => z.sides[k].n).length, 'lieu', 'lieux')}`, {size: fs * .95, weight: 800, fill: cols[k]});
+                svg += `<g transform="translate(${r1(x)} ${r1(y0 + fs * 1.6)})">${F.open}${layer(spec, F, list, n, cols, R0, maxN, k)}${placeNames(spec, F, pts.filter(p => Number(p.r.side) === k), fs * .85)}${F.close}</g>` + T(x + 4, y0 + fs * .8, `● ${i18n(g.label)} · ${pl(list.filter(z => z.sides[k].n).length, 'lieu', 'lieux')}`, {size: fs * .95, weight: 800, fill: cols[k]});
                 rowH = Math.max(rowH, F.h + fs * 1.6); });
             H = y0 + rowH;
         } else {
@@ -443,6 +457,7 @@
                     + `<g clip-path="url(#${cid}a)">${layer(spec, F, list, n, cols, R0, maxN, 0)}</g><g clip-path="url(#${cid}b)">${G.slice(1).map((_, k) => layer(spec, F, list, n, cols, R0, maxN, k + 1)).join('')}</g>`
                     + `<line x1="${r1(xs)}" y1="0" x2="${r1(xs)}" y2="${r1(F.h)}" stroke="#111" stroke-width="2" stroke-dasharray="6 4"/>`;
             } else body += layer(spec, F, list, n, cols, R0, maxN);
+            body += placeNames(spec, F, pts, fs);
             // ⭕ là où elles se rencontrent (trait plein : à la même époque ; pointillé : jamais à la même époque)
             body += `<g data-cq-d="${id}">`;
             M.forEach((m, i) => { const [cx, cy] = pr.p(m.x.p.lon, m.x.p.lat); if (!Number.isFinite(cx)) return;
@@ -552,8 +567,173 @@
             C('colorA', 'Couleur du premier côté', 'color', {def: '#1f6fd1', when: s => s.o?.colors === 'mine'}), C('colorB', 'Couleur du deuxième côté', 'color', {def: '#e8890c', when: s => s.o?.colors === 'mine'}),
             C('size', 'Taille des points', 'select', {choices: [['', 'Selon le nombre d’événements'], ['same', 'Tous pareils']]}), C('dotSize', 'Taille des ronds', 'range', {min: .3, max: 3, step: .1, def: 1}),
             C('meetList', 'Lister sous la carte où elles se rencontrent', 'check', {def: true}), C('meetMax', 'Combien de lignes', 'number', {min: 1, max: 20, def: 5, when: s => s.o?.meetList !== false}),
-            C('wedding', 'Le mariage des parents (💍)', 'select', {choices: [['', 'Montré'], ['hide', 'Caché']]}), ...mapOpts, ...COMMON],
+            C('wedding', 'Le mariage des parents (💍)', 'select', {choices: [['', 'Montré'], ['hide', 'Caché']]}), PLACE_LABELS, ...mapOpts, ...COMMON],
         sample: () => ({o: {title: i18n('Les deux lignées de la famille {name}', {name: 'MAZAUD'}), map: 'fr', time: {show: true, step: 10}}, groups: [{label: 'Côté père', who: 'MAZAUD'}, {label: 'Côté mère', who: 'LACOMBE'}], wedding: {label: sp('Tulle'), year: 1919, date: '12 avril 1919', a: 'Pierre MAZAUD', b: 'Marie LACOMBE'}, rows: sample()}),
         fromApp: mirrorApp, describe: spec => i18n('Les deux lignées : {n}.', {n: pl(rows(spec).length, 'événement')})});
     ext.diagramCartesPlus2.mirrormap = mirrormap; ext.diagramCartesPlus2.openMirror = openFor;
+})();
+
+/* ═════════ ⭕ L'aire de vie, génération par génération (maquette, partie 5) ═════════
+ * Pour chaque génération d'ancêtres (ou chaque siècle, ou une vie), la zone qui tient l'essentiel de leurs naissances, mariages
+ * et décès : le centre est le milieu des événements (médiane : un ancêtre parti au loin ne le tire pas), on garde les 80 % les plus
+ * proches, puis un cercle qui passe par le plus loin des gardés, ou l'enveloppe (le contour au plus juste). Mêmes distances que
+ * 🧭 Loin du berceau et 💍 Rayon des mariages. Données : op areas de lib/cartes_plus2.php. */
+(() => {
+    'use strict';
+    const P2 = window.LCNDA_EXT?.diagramCartesPlus2; if (!P2) return;
+    const {T, esc, num, clamp, r1, r2, rows, C, pl, tip, opt, optN, KM, median, hull, geoRing, poly, siecle, bases, frame, locate, missing, emptyMsg, multiples, keepDetail, placeNames, PLACE_LABELS,
+        get, placesOf, keepUnplaced, pane, bindGo, sel, val, checks, startId, personField, pickedId, pickerPut, mapOpts, COMMON, REC, i18n, A, ext, GC, DR} = P2.H;
+    const RAMP = ['#f6c48b', '#eea25a', '#e0782f', '#c85a1d', '#a8420f', '#86300b', '#5f2208', '#3d1605'];
+    const SIDE = ['#1f6fd1', '#e8890c'];
+    /** la clé de groupe d'une ligne : génération, siècle, ou personne (et le côté si « bleu / orange ») */
+    const by = spec => opt(spec.o || {}, 'groupBy', spec.group || 'gen');
+    const keyOf = (spec, p) => { const g = by(spec), side = opt(spec.o || {}, 'colors', '') === 'side' && Number(p.r.side) >= 0 ? `|${p.r.side}` : '';
+        if (g === 'century') return p.y === null ? null : String(Math.floor(p.y / 100) * 100);
+        if (g === 'person') return String(p.pid || p.r.name || '');
+        return Number(p.r.gen) > 0 ? String(Number(p.r.gen)) + side : null; };
+    const labelOf = (spec, k, x) => { const g = by(spec); if (g === 'century') return siecle(Number(k)); if (g === 'person') return x.pts[0]?.r.name || ''; const [gen, side] = k.split('|');
+        return (Number(gen) === 2 ? i18n('Gén. {g} · ses parents', {g: gen}) : i18n('Gén. {g}', {g: gen})) + (side !== undefined ? ` · ${i18n(side === '0' ? 'Côté père' : 'Côté mère')}` : ''); };
+    const share = o => { const s = opt(o, 'share', ''); return s === '50' ? .5 : s === '90' ? .9 : s === 'custom' ? clamp(optN(o, 'shareN', 80, 40, 100) / 100, .4, 1) : .8; };
+    /** les aires : centre (médiane), distances, part gardée, rayon, surface, hors de l'aire */
+    function areas(spec, all) {
+        const o = spec.o || {}, part = share(o), min = optN(o, 'min', 5, 2, 50), groups = new Map();
+        all.forEach(p => { const k = keyOf(spec, p); if (k === null || k === '') return; let x = groups.get(k); if (!x) groups.set(k, x = {k, pts: []}); x.pts.push(p); });
+        // le centre « berceau des plus anciens » : le milieu des naissances de la génération la plus lointaine
+        const gens = all.filter(p => Number(p.r.gen) > 0), maxG = gens.length ? Math.max(...gens.map(p => Number(p.r.gen))) : 0;
+        const oldest = gens.filter(p => Number(p.r.gen) === maxG); const cradle = oldest.length ? [median(oldest.map(p => p.lon)), median(oldest.map(p => p.lat))] : null;
+        const rootB = spec.rootBirth ? GC.placeOf(spec, spec.rootBirth, []) || null : null;
+        const out = [...groups.values()].map(x => {
+            const c = opt(o, 'center', '') === 'root' && rootB ? [rootB[0], rootB[1]] : opt(o, 'center', '') === 'oldest' && cradle ? cradle : [median(x.pts.map(p => p.lon)), median(x.pts.map(p => p.lat))];
+            const d = x.pts.map(p => ({p, km: KM(c, [p.lon, p.lat])})).sort((a, b) => a.km - b.km);
+            const keep = d.slice(0, Math.max(1, Math.ceil(d.length * part))), out = d.slice(keep.length);
+            const radius = keep.length ? keep[keep.length - 1].km : 0, ys = x.pts.map(p => p.y).filter(y => y !== null);
+            return {...x, c, keep, out, radius, n: x.pts.length, y0: ys.length ? Math.min(...ys) : null, y1: ys.length ? Math.max(...ys) : null, few: x.pts.length < 10, none: x.pts.length < min};
+        });
+        const g = by(spec); out.sort((a, b) => g === 'gen' ? Number(b.k.split('|')[0]) - Number(a.k.split('|')[0]) || a.k.localeCompare(b.k) : g === 'century' ? Number(a.k) - Number(b.k) : (a.y0 ?? 0) - (b.y0 ?? 0));
+        return out;
+    }
+    /** la surface d'une enveloppe, en km² (projection locale autour de son centre) */
+    function hullKm2(a) {
+        const P = a.keep.map(({p}) => [(p.lon - a.c[0]) * 111.32 * Math.cos(a.c[1] * Math.PI / 180), (p.lat - a.c[1]) * 110.57]), H = hull(P); if (H.length < 3) return 0;
+        let s = 0; for (let i = 0; i < H.length; i++) { const [x1, y1] = H[i], [x2, y2] = H[(i + 1) % H.length]; s += x1 * y2 - x2 * y1; } return Math.abs(s) / 2;
+    }
+    const roundKm2 = v => { const n = v < 100 ? Math.round(v / 5) * 5 : v < 1000 ? Math.round(v / 10) * 10 : Math.round(v / 100) * 100; return `≈ ${new Intl.NumberFormat('fr-FR').format(n)}`; };
+    const colorsFor = (spec, list) => { const o = spec.o || {}, n = list.length;
+        if (opt(o, 'colors', '') === 'side') return list.map(a => SIDE[Number(a.k.split('|')[1])] || '#7b4fb0');
+        const ramp = opt(o, 'colors', '') === 'reverse' ? [...RAMP].reverse() : RAMP; return list.map((_, i) => ramp[Math.round(i / Math.max(1, n - 1) * (ramp.length - 1))]); };
+    function drawAreas(spec, F, list, cols, fs) {
+        const {pr} = F, o = spec.o || {}, shape = opt(o, 'shape', ''); let svg = '';
+        list.forEach((a, i) => { if (a.none) return; const col = cols[i], dash = a.few ? ' stroke-dasharray="6 4"' : '', lab = `${labelOf(spec, a.k, a)} · ${i18n('rayon {km} km', {km: String(Math.round(a.radius))})}`;
+            if (shape !== 'hull') { const ring = geoRing(pr, a.c[0], a.c[1], Math.max(.3, a.radius)); svg += `<path d="${poly(ring)}" fill="${col}" fill-opacity=".14" stroke="${col}" stroke-width="2.2"${dash}>${tip(lab)}</path>`; }
+            if (shape !== '') { const P = a.keep.map(({p}) => pr.p(p.lon, p.lat)).filter(q => Number.isFinite(q[0])), H = hull(P); if (H.length >= 3) svg += `<path d="${poly(H)}" fill="${col}" fill-opacity="${shape === 'hull' ? .16 : .05}" stroke="${col}" stroke-width="${shape === 'hull' ? 2.2 : 1.4}"${shape === 'hull' ? dash : ' stroke-dasharray="2 3"'}>${tip(lab)}</path>`; }
+            a.pts.forEach(p => { const [x, y] = pr.p(p.lon, p.lat); if (Number.isFinite(x)) svg += `<circle cx="${r1(x)}" cy="${r1(y)}" r="2.2" fill="${col}" stroke="#fff" stroke-width=".6"/>`; });
+            const [cx, cy] = pr.p(a.c[0], a.c[1]); if (Number.isFinite(cx)) svg += `<g class="cq-pt" data-cq-i="${i}" tabindex="0" role="button" aria-label="${esc(lab)}">${tip(lab + '\n' + i18n('Clic : ses lieux, et ceux qui sont hors de l’aire'))}<circle cx="${r1(cx)}" cy="${r1(cy)}" r="4" fill="${col}" stroke="#111" stroke-width="1"/></g>`; });
+        return svg;
+    }
+    function lifearea(spec, W, fs) {
+        const o = spec.o || {}, B0 = bases(spec, W); if (B0.wait) return B0.wait;
+        const all = locate(spec, B0.list), A0 = areas(spec, all.pts), cols = colorsFor(spec, A0), id = 'cqa' + Math.random().toString(36).slice(2, 8);
+        // le cadrage tient les cercles en entier (le centre ± le rayon)
+        const kept = A0.flatMap(a => { if (a.none) return []; const dl = a.radius / 111.2, dg = a.radius / (111.2 * Math.max(.05, Math.cos(a.c[1] * Math.PI / 180))); return [...a.keep.map(k => [k.p.lon, k.p.lat]), [a.c[0] - dg, a.c[1] - dl], [a.c[0] + dg, a.c[1] + dl]]; });
+        const framePts = opt(o, 'frameAll', '') === 'all' ? all.pts.map(p => [p.lon, p.lat]) : kept.length ? kept : all.pts.map(p => [p.lon, p.lat]);
+        let svg = `<g data-c2-total="${all.pts.length}"></g>`, H = 0, geo = null;
+        const draw = opt(o, 'draw', '');
+        if (draw === 'small' && !o.__inFacet) { // ▦ une aire par case, au même cadrage
+            const list = A0.filter(a => !a.none).slice(0, 12).map(a => ({label: `${labelOf(spec, a.k, a)} · ${Math.round(a.radius)} km`, o: {__inFacet: true, __only: a.k}}));
+            const M = multiples(spec, W, fs, list, (sp, w) => { const F = frame(sp, w, fs * .8, framePts, null, Math.round(w * .9)); if (F.wait) return F; const i = A0.findIndex(a => a.k === sp.o.__only); return {h: F.h, svg: F.open + drawAreas(sp, F, [A0[i]], [cols[i]], fs * .8) + F.close}; });
+            svg += M.svg; H = M.h;
+        } else {
+            const F = frame(spec, W, fs, framePts); if (F.wait) return F.wait; geo = F.geo;
+            let only = A0; const gi = Number.isFinite(o.__year) && draw === 'play' ? clamp(Math.round(o.__year), 0, A0.length - 1) : null;
+            if (gi !== null) only = A0.map((a, i) => (i === gi ? a : {...a, none: true}));
+            svg += `<g data-cq-d="${id}">` + F.open + drawAreas(spec, F, only, cols, fs) + placeNames(spec, F, all.pts, fs) + (gi !== null && A0[gi] ? T(10, 18, labelOf(spec, A0[gi].k, A0[gi]), {size: fs * 1.3, weight: 800, fill: '#1d1d1f', halo: '#ffffffd9'}) : '') + F.close + '</g>';
+            H = F.h;
+        }
+        keepDetail(id, i => detail(spec, A0[i]));
+        // le tableau sous la carte : génération, années, événements, rayon, surface, hors de l'aire (des lieux et des années, jamais un vivant)
+        if (A0.length && o.table !== false && !o.__inFacet) {
+            const cw = [.22, .2, .13, .13, .14, .18].map(x => x * W), head = [by(spec) === 'gen' ? i18n('Génération') : by(spec) === 'century' ? i18n('Siècle') : i18n('Personne'), i18n('Années'), i18n('Événements'), i18n('Rayon ({p} %)', {p: String(Math.round(share(o) * 100))}), i18n('Surface'), i18n('Hors de l’aire')];
+            const line = (cells, y, bold) => { let x = 0; return cells.map((c, i) => { const t = T(x, y, c, {size: fs * .78, weight: bold ? 800 : 400, fill: bold ? '#555' : '#222'}); x += cw[i]; return t; }).join(''); };
+            H += fs * .8; svg += line(head, H + fs * .5, true); H += fs * 1.3;
+            A0.forEach((a, i) => { const surf = a.none ? '—' : `${roundKm2(opt(o, 'shape', '') === 'hull' ? hullKm2(a) : Math.PI * a.radius ** 2)} km²`;
+                const outs = a.out.slice(0, 2).map(({p}) => `${p.place}${p.y !== null ? ` (${p.y})` : ''}`).join(', ') + (a.out.length > 2 ? ` +${a.out.length - 2}` : '');
+                svg += `<rect x="0" y="${r1(H + fs * .1)}" width="${r1(fs * .5)}" height="${r1(fs * .7)}" fill="${cols[i]}"/>` + line([` ${labelOf(spec, a.k, a)}`, a.y0 === null ? '—' : `${a.y0}–${a.y1}`, `${a.n}${a.none ? ' · ' + i18n('trop peu') : a.few ? ' · ' + i18n('peu') : ''}`, a.none ? '—' : `${Math.round(a.radius)} km`, surf, a.out.length ? outs : '—'], H + fs * .5, false);
+                H += fs * 1.15; });
+        }
+        if (all.unknown.length && o.showMissing !== false && !o.__inFacet) { svg += missing(all.unknown, H, fs, spec); H += fs * 1.5; }
+        if (!all.pts.length) svg += emptyMsg(W, Math.max(H, 300), fs, 'Prends les ancêtres de ta personne de départ (« Depuis l’app »).');
+        const sh = A0.filter(a => !a.none);
+        return {h: Math.max(H, all.pts.length ? 0 : 300), svg, legend: [], geo, desc: sh.length ? i18n('Aire de vie : {n}, de {a} km à {b} km de rayon.', {n: pl(sh.length, 'aire', 'aires'), a: String(Math.round(Math.min(...sh.map(a => a.radius)))), b: String(Math.round(Math.max(...sh.map(a => a.radius))))}) : i18n('Aire de vie : pas assez d’événements.')};
+    }
+    function detail(spec, a) {
+        if (!a || !ext.openDialog) return;
+        const places = new Map(); a.pts.forEach(p => places.set(p.place, (places.get(p.place) || 0) + 1));
+        const body = `<div class="cq-detail"><p><b>${esc(labelOf(spec, a.k, a))}</b> · ${esc(pl(a.n, 'événement'))}${a.y0 !== null ? ` · ${a.y0}–${a.y1}` : ''} · ${esc(i18n('rayon {km} km', {km: String(Math.round(a.radius))}))}</p>
+            <p>${[...places].sort((x, y) => y[1] - x[1]).slice(0, 30).map(([pl0, n]) => `${esc(pl0)} (${n})`).join(', ')}</p>
+            ${a.out.length ? `<p><b>${esc(i18n('Hors de l’aire'))}</b> : ${a.out.slice(0, 20).map(({p, km}) => `${esc(p.place)}${p.y !== null ? ` (${p.y})` : ''} · ${Math.round(km)} km`).join(', ')}</p>` : ''}</div>`;
+        ext.openDialog({eyebrow: i18n('L’AIRE DE VIE'), title: labelOf(spec, a.k, a), body, submitLabel: i18n('Fermer'), onSubmit: () => true});
+    }
+    // « une à la fois avec ▶ » : le curseur passe les aires une à une (des plus anciens aux plus récents)
+    const time = {
+        range: spec => { if (opt(spec.o || {}, 'draw', '') !== 'play') return [NaN, NaN]; const n = new Set(rows(spec).map(r => (by(spec) === 'gen' ? r.gen : by(spec) === 'century' ? Math.floor((P2.H.yearOf(r.date) ?? 0) / 100) : r.pid))).size; return n > 1 ? [0, n - 1] : [NaN, NaN]; },
+        at: (spec, y) => { spec.o = {...(spec.o || {}), __year: y, time: {...(spec.o?.time || {}), step: 1}}; return spec; },
+    };
+
+    /* ─── Depuis l'app ─── */
+    function fill(s, r, extra = {}) {
+        const names = placesOf(s, r.places || {});
+        s.rows = (r.rows || []).filter(e => names.has(e[1])).map(([pid, plc, y, tag, gen, side]) => ({label: names.get(plc), date: y === null ? '' : String(y), name: r.people?.[pid] || '', pid, tag, gen: gen || '', side}));
+        s.group = r.group; s.rootBirth = r.birth && names.has(r.birth) ? names.get(r.birth) : ''; keepUnplaced(s, r.unplaced);
+        const who = r.root?.shown ? r.root.name : r.root?.family ? i18n('la famille {name}', {name: r.root.family}) : '';
+        s.o = {...(s.o || {}), groupBy: r.group, title: r.group === 'century' ? i18n('L’aire de vie de la famille, siècle par siècle') : r.group === 'person' ? i18n('L’aire d’une vie : {name}', {name: who}) : i18n('L’aire de vie des ancêtres de {name}', {name: who}), ...extra};
+        return s;
+    }
+    const areaApp = {
+        html: () => pane('⭕ L’aire de vie de tes ancêtres', 'Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle.',
+            sel('group', 'Regrouper par', [['gen', 'Génération d’ancêtres'], ['century', 'Siècle (toute la base)'], ['person', 'Une vie (les étapes d’une personne)']])
+            + personField('cq_root', 'Personne de départ')
+            + sel('gens', 'Générations', [['8', '8'], ['6', '6'], ['10', '10'], ['14', '14'], ['4', '4']])
+            + sel('ev', 'Événements', [['births,marriages,deaths', 'Naissances, mariages et décès'], ['births,marriages,deaths,residences', 'Avec les résidences et recensements'], ['births', 'Naissances (ou baptêmes)']])
+            + sel('colors', 'Couleurs', [['', 'Du clair (anciens) au foncé (récents)'], ['side', 'Bleu / orange pour père / mère']])),
+        bind: (box, io) => {
+            pickerPut(box, 'cq_root', startId());
+            bindGo(box, async () => {
+                const r = await get({what: 'areas', group: val(box, 'group'), gens: val(box, 'gens'), ev: val(box, 'ev'), root: pickedId(box, 'cq_root') || startId()}); if (r.error) throw new Error(r.error);
+                const s = fill(io.spec(), r, {colors: val(box, 'colors')}); if (!s.rows.length) throw new Error(i18n('Aucun événement avec un lieu pour ce choix.'));
+                io.apply(s); const k = new Set(s.rows.map(x => (s.group === 'gen' ? x.gen : x.pid))).size; return `${pl(s.rows.length, 'événement')}, ${pl(k, s.group === 'gen' ? 'génération' : 'personne')}.`;
+            });
+        },
+    };
+    async function openFor(root, gens = 8) {
+        try { const r = await get({what: 'areas', group: 'gen', gens, root}); if (r.error) throw new Error(r.error);
+            const s = fill({kind: 'lifearea', o: {map: 'fr'}}, r); if (!s.rows.length) throw new Error(i18n('Aucun événement avec un lieu pour ce choix.'));
+            ext.openDiagramEditor?.(null, {spec: s, name: s.o.title});
+        } catch (e) { A()?.toast?.(e.message || String(e), 'error'); }
+    }
+    // 🧭 Loin du berceau et 💍 Rayon des mariages → onglet Relier → « ⭕ Voir sur la carte »
+    const K = DR.KINDS, relate = () => [{label: '⭕ ' + i18n('Voir l’aire de vie sur la carte'), run: () => openFor(startId())}];
+    ['vieberceau', 'famariages'].forEach(k => { if (K[k] && !K[k].relate) K[k].relate = relate; });
+
+    const SP = {Tulle: [45.2694, 1.768], Naves: [45.3118, 1.7521], Seilhac: [45.3667, 1.7167], Chameyrat: [45.2471, 1.7043], Laguenne: [45.242, 1.781], Favars: [45.263, 1.670], Gimel: [45.297, 1.844], Brive: [45.159, 1.533], Paris: [48.857, 2.352], Lyon: [45.764, 4.836], Ussel: [45.548, 2.31], Uzerche: [45.424, 1.563]};
+    const sp = n => `${n} ${SP[n][0]}, ${SP[n][1]}`;
+    const sample = () => { const out = []; const plan = {6: [['Naves', 1765], ['Naves', 1770], ['Chameyrat', 1772], ['Favars', 1780], ['Naves', 1790], ['Gimel', 1795], ['Naves', 1800], ['Laguenne', 1805], ['Tulle', 1812], ['Naves', 1818]],
+        4: [['Naves', 1825], ['Tulle', 1830], ['Seilhac', 1834], ['Tulle', 1840], ['Chameyrat', 1845], ['Laguenne', 1850], ['Uzerche', 1852], ['Gimel', 1858], ['Tulle', 1862], ['Brive', 1870], ['Naves', 1874]],
+        2: [['Tulle', 1890], ['Brive', 1895], ['Tulle', 1900], ['Ussel', 1905], ['Uzerche', 1910], ['Tulle', 1919], ['Brive', 1925], ['Lyon', 1902], ['Paris', 1938], ['Tulle', 1950]]};
+        Object.entries(plan).forEach(([g, l]) => l.forEach(([p, y], i) => out.push({label: sp(p), date: String(y), gen: g, side: i % 2, name: `MAZAUD ${g}-${i}`}))); return out; };
+    P2.add('lifearea', {icon: '⭕', label: 'L’aire de vie, génération par génération', render: GC.remember(lifearea), noLegend: true, time,
+        grids: [{key: 'rows', label: 'Les événements (un par ligne)', cols: [C('label', 'Lieu (« Tulle », « Tulle 45.27, 1.77 »)'), C('date', 'Date ou année', 'text', {ph: '1850'}), C('gen', 'Génération', 'number'), C('name', 'Personne')]}],
+        options: [REC,
+            C('share', 'Part des événements', 'select', {choices: [['', '80 %'], ['50', '50 % (le cœur)'], ['90', '90 %'], ['custom', 'À la main']]}),
+            C('shareN', 'Part gardée', 'range', {min: 40, max: 100, def: 80, unit: '%', when: s => s.o?.share === 'custom'}),
+            C('shape', 'Forme', 'select', {choices: [['', 'Cercle (facile à comparer)'], ['hull', 'Enveloppe (le contour au plus juste)'], ['both', 'Les deux']]}),
+            C('groupBy', 'Regrouper par', 'select', {choices: [['gen', 'Génération d’ancêtres'], ['century', 'Siècle'], ['person', 'Personne (l’aire d’une vie)']]}),
+            C('center', 'Centre', 'select', {choices: [['', 'Le milieu des événements'], ['root', 'Le lieu de naissance de la personne de départ'], ['oldest', 'Le berceau des plus anciens']]}),
+            C('draw', 'Dessin', 'select', {choices: [['', 'Toutes les aires superposées'], ['small', '▦ Une par case'], ['play', 'Une à la fois avec ▶']]}),
+            C('min', 'Minimum pour tracer une aire', 'select', {choices: [['', '5 événements'], ['3', '3'], ['10', '10']]}),
+            C('colors', 'Couleurs', 'select', {choices: [['', 'Du clair (anciens) au foncé (récents)'], ['reverse', 'L’inverse'], ['side', 'Bleu / orange pour père / mère']]}),
+            C('frameAll', 'Cadrage', 'select', {choices: [['', 'Sur les aires (un ancêtre parti au loin reste hors de l’aire)'], ['all', 'Cadrer sur tout']]}),
+            C('table', 'Le tableau sous la carte', 'check', {def: true}), PLACE_LABELS, ...mapOpts, ...COMMON],
+        sample: () => ({o: {title: i18n('L’aire de vie des ancêtres de {name}', {name: 'Jean MAZAUD'}), map: 'fr', groupBy: 'gen'}, group: 'gen', rows: sample()}),
+        fromApp: areaApp, describe: spec => i18n('Aire de vie : {n}.', {n: pl(rows(spec).length, 'événement')})});
+    ext.diagramCartesPlus2.lifearea = lifearea; ext.diagramCartesPlus2.openArea = openFor;
 })();

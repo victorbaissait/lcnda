@@ -190,3 +190,51 @@ mariage de {a} et {b} ¦ свадьба: {a} и {b} ¦ весілля: {a} і {b
 {a} et {b}, à {km} km ¦ {a} и {b}, в {km} км ¦ {a} і {b}, за {km} км
 3e groupe ¦ 3-я группа ¦ 3-тя група
 4e groupe ¦ 4-я группа ¦ 4-та група
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Ареал жизни, поколение за поколением ¦ Ареал життя, покоління за поколінням
+L’aire de vie de tes ancêtres ¦ Ареал жизни твоих предков ¦ Ареал життя твоїх предків
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Для каждого поколения — зона, где большая часть их рождений, браков и смертей. Те же расстояния, что в 🧭 «Далеко от колыбели». Никогда живые и никогда конфиденциальные карточки. ¦ Для кожного покоління — зона, де більшість їхніх народжень, шлюбів і смертей. Ті самі відстані, що в 🧭 «Далеко від колиски». Ніколи живі й ніколи конфіденційні картки.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Возьми предков своей исходной персоны («Из приложения»). ¦ Візьми предків своєї вихідної особи («Із застосунку»).
+Génération d’ancêtres ¦ Поколение предков ¦ Покоління предків
+Siècle (toute la base) ¦ Век (вся база) ¦ Століття (уся база)
+Une vie (les étapes d’une personne) ¦ Одна жизнь (этапы одного человека) ¦ Одне життя (етапи однієї людини)
+Avec les résidences et recensements ¦ С местами жительства и переписями ¦ З місцями проживання та переписами
+Du clair (anciens) au foncé (récents) ¦ От светлого (старшие) к тёмному (младшие) ¦ Від світлого (старші) до темного (молодші)
+Bleu / orange pour père / mère ¦ Синий / оранжевый для отца / матери ¦ Синій / помаранчевий для батька / матері
+L’inverse ¦ Наоборот ¦ Навпаки
+50 % (le cœur) ¦ 50 % (ядро) ¦ 50 % (ядро)
+Part des événements ¦ Доля событий ¦ Частка подій
+Part gardée ¦ Сохраняемая доля ¦ Збережена частка
+Cercle (facile à comparer) ¦ Круг (легко сравнивать) ¦ Коло (легко порівнювати)
+Enveloppe (le contour au plus juste) ¦ Оболочка (самый плотный контур) ¦ Оболонка (найщільніший контур)
+Personne (l’aire d’une vie) ¦ Человек (ареал одной жизни) ¦ Людина (ареал одного життя)
+Le milieu des événements ¦ Середина событий ¦ Середина подій
+Le lieu de naissance de la personne de départ ¦ Место рождения исходной персоны ¦ Місце народження вихідної особи
+Le berceau des plus anciens ¦ Колыбель самых давних ¦ Колиска найдавніших
+Toutes les aires superposées ¦ Все ареалы наложены ¦ Усі ареали накладено
+Une par case ¦ По одному в клетке ¦ По одному в клітинці
+Une à la fois avec ▶ ¦ По одному с ▶ ¦ По одному з ▶
+Minimum pour tracer une aire ¦ Минимум, чтобы нарисовать ареал ¦ Мінімум, щоб накреслити ареал
+5 événements ¦ 5 событий ¦ 5 подій
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ По ареалам (предок, уехавший далеко, остаётся вне ареала) ¦ За ареалами (предок, що виїхав далеко, лишається поза ареалом)
+Cadrer sur tout ¦ Охватить всё ¦ Охопити все
+Le tableau sous la carte ¦ Таблица под картой ¦ Таблиця під мапою
+Gén. {g} · ses parents ¦ Пок. {g} · родители ¦ Пок. {g} · батьки
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Нажми: места и те, что вне ареала ¦ Натисни: місця і ті, що поза ареалом
+Hors de l’aire ¦ Вне ареала ¦ Поза ареалом
+Rayon ({p} %) ¦ Радиус ({p} %) ¦ Радіус ({p} %)
+trop peu ¦ слишком мало ¦ замало
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Ареал жизни: {n}, радиус от {a} км до {b} км. ¦ Ареал життя: {n}, радіус від {a} км до {b} км.
+Aire de vie : pas assez d’événements. ¦ Ареал жизни: недостаточно событий. ¦ Ареал життя: недостатньо подій.
+Aire de vie : {n}. ¦ Ареал жизни: {n}. ¦ Ареал життя: {n}.
+L’AIRE DE VIE ¦ АРЕАЛ ЖИЗНИ ¦ АРЕАЛ ЖИТТЯ
+L’aire de vie de la famille, siècle par siècle ¦ Ареал жизни семьи, век за веком ¦ Ареал життя родини, століття за століттям
+L’aire de vie des ancêtres de {name} ¦ Ареал жизни предков: {name} ¦ Ареал життя предків: {name}
+L’aire d’une vie : {name} ¦ Ареал одной жизни: {name} ¦ Ареал одного життя: {name}
+la famille {name} ¦ семья {name} ¦ родина {name}
+Voir l’aire de vie sur la carte ¦ Показать ареал жизни на карте ¦ Показати ареал життя на мапі
+Centre ¦ Центр ¦ Центр
+Côté père et côté mère (deux couleurs) ¦ По отцу и по матери (два цвета) ¦ По батькові й по матері (два кольори)
+Mes ancêtres, 8 générations ¦ Мои предки, 8 поколений ¦ Мої предки, 8 поколінь
+Toute ma base, siècle par siècle ¦ Вся моя база, век за веком ¦ Уся моя база, століття за століттям
+=aire ¦ ареал|ареала|ареалов ¦ ареал|ареали|ареалів
