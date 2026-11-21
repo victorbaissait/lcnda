@@ -1336,6 +1336,17 @@ function json_response(mixed $data, int $status = 200): never
     exit;
 }
 
+/** Une réponse JSON déjà encodée (comme json_response, pour un calcul gardé tel quel : lib/calc_cache.php) */
+function json_response_encoded(string $json, int $status = 200): never
+{
+    http_response_code($status);
+    header('Content-Type: application/json; charset=utf-8');
+    header('Cache-Control: no-store, private');
+    header('X-Content-Type-Options: nosniff');
+    echo $json;
+    exit;
+}
+
 function request_json(): array
 {
     $raw = file_get_contents('php://input');

@@ -321,7 +321,14 @@ function tresors_dispatch(PDO $pdo, string $action, bool $isWrite, array $payloa
             $hid = tresor_hidden_people($pdo);
             json_response(['items' => array_values(array_filter(tresors_list($pdo, $kind, safe_int($_GET['person_id'] ?? 0)), static fn($it) => !isset($hid[(int) ($it['person_id'] ?? 0)])))]);
         }
-        if (!$isWrite && $action === 'tresor_tree') { json_response(tresor_tree($pdo)); }
+        if (!$isWrite && $action === 'tresor_tree') {
+            // 🐘 l'arbre entier (200 000 fiches : 7 s, 130 Mo) : gardé déjà encodé tant que les tables lues ne changent pas ;
+            // le mode consultation, l'année (« vivant probable » : moins de 100 ans) et les modules chargés comptent
+            $kioskOn = function_exists('kiosk_state') && !empty(kiosk_state()['on']);
+            json_response_encoded(calc_cached($pdo, 'tresor_tree' . ($kioskOn ? '_kiosk' : ''), ['persons', 'media', 'places', 'families', 'family_children', 'events', 'event_types', 'so_imports', 'items'],
+                [$kioskOn, date('Y'), $_GET['death_cutoff_year'] ?? '', function_exists('so2_respect_ids'), function_exists('so3_respect_ids'), function_exists('so7_respect_ids'), function_exists('person_select')],
+                static fn() => json_encode(tresor_tree($pdo), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)));
+        }
         if (!$isWrite && $action === 'tresor_media') { // les médias joints (lettres, souvenirs) : nom de fichier et sorte, pour les lire sur place
             $ids = array_slice(array_values(array_filter(array_map('intval', explode(',', (string) ($_GET['ids'] ?? ''))))), 0, 200); if (!$ids) { json_response(['media' => []]); }
             $st = $pdo->prepare('SELECT m.id, m.title, m.media_type, m.filename, m.thumbnail FROM media m WHERE m.id IN (' . implode(',', array_fill(0, count($ids), '?')) . ')' . sealed_media_sql($pdo)); $st->execute($ids);
