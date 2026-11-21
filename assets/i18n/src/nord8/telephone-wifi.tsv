@@ -1,0 +1,199 @@
+fr ¦ tr
+# 📱 la page du téléphone de terrain (assets/js/app-terrain.js)
+📶 relié ¦ 📶 bağlı
+⏸ hors wifi ¦ ⏸ wifi yok
+Le mot de passe de la généalogie : vérifié par l’ordinateur, jamais gardé sur ce téléphone. ¦ Soy ağacının parolası: bilgisayar denetler, bu telefonda asla saklanmaz.
+Le navigateur écrit « Non sécurisé » : c’est vrai, la porte du wifi n’a pas de HTTPS. N’envoie que sur le wifi de la maison, protégé par sa clé. ¦ Tarayıcı “Güvenli değil” yazar: doğru, wifi kapısının HTTPS’si yok. Yalnızca anahtarıyla korunan ev wifi’sinden gönder.
+Tes photos attendent dans cette page. ¦ Fotoğrafların bu sayfada bekliyor.
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). ¦ Bilgisayar yanıt vermiyor (uykuda, kapalı ya da kapı kapalı).
+Choisir une personne ou une visite… ¦ Bir kişi ya da ziyaret seç…
+Une ligne (facultatif) ¦ Bir satır (isteğe bağlı)
+Pas de wifi de la maison : les photos se prennent avec l’appareil photo du téléphone, puis « 🖼 Choisir » au retour. ¦ Ev wifi’si yok: fotoğrafları telefonun kamerasıyla çek, dönüşte “🖼 Seç”.
+Prendre une photo ¦ Fotoğraf çek
+Choisir dans la galerie ¦ Galeriden seç
+📍 = la photo contient une position GPS (retirée à l’arrivée, réglage) ¦ 📍 = fotoğrafta GPS konumu var (varışta kaldırılır, ayar)
+Tombe famille LACOMBE, allée 4 ¦ LACOMBE ailesinin mezarı, 4. sıra
+Envoyer : {n} ¦ Gönder: {n}
+Sans wifi, garde cette page ouverte : les photos attendent ici et partent toutes seules au retour. Pour une journée entière aux archives, prends plutôt la visite par fichier. ¦ Wifi yokken bu sayfayı açık tut: fotoğraflar burada bekler ve dönüşte kendiliğinden gider. Arşivde koca bir gün için dosyayla ziyareti kullan.
+Le téléphone ne sait pas si une photo a été rangée ni où : il ne lit rien de l’arbre. ¦ Telefon bir fotoğrafın yerleştirilip yerleştirilmediğini ya da nereye konduğunu bilmez: ağaçtan hiçbir şey okumaz.
+Nom de la personne ou de la visite ¦ Kişinin ya da ziyaretin adı
+Seulement les personnes décédées, sans les fiches confidentielles. ¦ Yalnızca ölmüş kişiler, gizli kayıtlar olmadan.
+Choisis pour qui est cette photo. ¦ Bu fotoğrafın kimin için olduğunu seç.
+Verrouillée après 15 minutes sans geste : redonne le mot de passe. Tes photos attendent. ¦ 15 dakika işlem yapılmadığı için kilitlendi: parolayı yeniden gir. Fotoğrafların bekliyor.
+Ce téléphone n’est plus autorisé sur l’ordinateur. ¦ Bu telefona bilgisayarda artık izin verilmiyor.
+Envoyées dans 📥 À trier : {n} ¦ 📥 Ayıklanacaklar’a gönderildi: {n}
+Refusé par l’ordinateur ¦ Bilgisayar reddetti
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). En attente : {n} ; nouvel essai toutes les 30 secondes tant que la page est ouverte. ¦ Bilgisayar yanıt vermiyor (uykuda, kapalı ya da kapı kapalı). Bekleyen: {n}; sayfa açık kaldıkça 30 saniyede bir yeniden denenir.
+↻ Réessayer ¦ ↻ Yeniden dene
+Envoi en cours : {i} sur {n} ¦ Gönderiliyor: {i} / {n}
+Garde la page ouverte. ¦ Sayfayı açık tut.
+En attente depuis {when} : {n} ¦ {when} tarihinden beri bekliyor: {n}
+Elles étaient gardées dans ce téléphone. ¦ Bu telefonda saklanıyorlardı.
+Les envoyer ¦ Gönder
+Les oublier ¦ Unut
+Retirées de la boîte : {n} ¦ Kutudan çıkarıldı: {n}
+« {name} » n’est plus ouverte sur l’ordinateur : tes photos restent en attente ici. ¦ “{name}” bilgisayarda artık açık değil: fotoğrafların burada beklemeye devam ediyor.
+Des photos étaient en attente, mais le téléphone a libéré la place. Retrouve-les dans ta galerie et « 🖼 Choisir ». ¦ Bekleyen fotoğraflar vardı ama telefon yeri boşalttı. Onları galerinde bul ve “🖼 Seç”.
+📱 Envoyer des photos à l’ordinateur principal ¦ 📱 Fotoğrafları ana bilgisayara gönder
+# 📥 À trier, sur l'ordinateur (assets/js/app-a-trier.js)
+📥 À trier ¦ 📥 Ayıklanacaklar
+À trier ¦ Ayıklanacaklar
+Listes · Médias et documents ¦ Listeler · Medya ve belgeler
+Les photos envoyées par un téléphone de terrain arrivent ici, hors de l’arbre. Relie chacune à ce qu’elle montre, ou supprime-la. ¦ Saha telefonunun gönderdiği fotoğraflar buraya, ağacın dışına gelir. Her birini gösterdiği şeye bağla ya da sil.
+Chercher… (texte, téléphone, personne) ¦ Ara… (metin, telefon, kişi)
+🗑 Supprimées ¦ 🗑 Silinenler
+Reliées ¦ Bağlananlar
+visite {name} ¦ ziyaret {name}
+pour {name} ¦ kimin için: {name}
+personne pas choisie ¦ kişi seçilmedi
+📍 GPS gardé ¦ 📍 GPS korundu
+📍 GPS retiré ¦ 📍 GPS kaldırıldı
+🔗 reliée à {name} ¦ 🔗 bağlandı: {name}
+effacée pour de bon le {date} ¦ kalıcı silinme: {date}
+🗄 Relier à la visite ¦ 🗄 Ziyarete bağla
+🔗 Relier à {name} ¦ 🔗 Bağla: {name}
+Relier à… ¦ Bağla…
+(sans texte) ¦ (metin yok)
+Rien à trier : les photos du téléphone arriveront ici. ¦ Ayıklanacak bir şey yok: telefondan gelen fotoğraflar buraya gelecek.
+Mode consultation : la boîte se lit, mais rien ne se relie ni ne se supprime. ¦ Görüntüleme kipi: kutu okunur ama hiçbir şey bağlanmaz ya da silinmez.
+Cochées : {n} ¦ İşaretli: {n}
+Décocher ¦ İşareti kaldır
+📍 Garder la position GPS ? ¦ 📍 GPS konumu korunsun mu?
+La photo contient une position GPS (utile pour situer une tombe). La garder pour la carte ? ¦ Fotoğrafta bir GPS konumu var (bir mezarı bulmak için yararlı). Harita için korunsun mu?
+La retirer ¦ Kaldır
+✓ Reliées à {name} : {n} ¦ ✓ Bağlandı: {name}: {n}
+🪦 Une photo de tombe : ajouter aussi l’inhumation à {name} ? ¦ 🪦 Bir mezar fotoğrafı: {name} için defin de eklensin mi?
+✓ Inhumation ajoutée à {name}. ¦ ✓ Defin eklendi: {name}.
+Relier à un événement ¦ Bir olaya bağla
+Relier à une source ¦ Bir kaynağa bağla
+✓ Supprimées : {n} ¦ ✓ Silindi: {n}
+✓ Supprimées : {n}. Gardées 30 jours dans « 🗑 Supprimées » (Filtrer ▾). ¦ ✓ Silindi: {n}. 30 gün boyunca “🗑 Silinenler” içinde saklanır (Süz ▾).
+✎ Modifier le texte ¦ ✎ Metni düzenle
+Texte enregistré ¦ Metin kaydedildi
+👤 Une personne… ¦ 👤 Bir kişi…
+📅 Un événement… (inhumation, mariage…) ¦ 📅 Bir olay… (defin, evlilik…)
+📚 Une source… (l’acte, la cote) ¦ 📚 Bir kaynak… (belge, künye)
+🗄 La visite d’archives proposée ¦ 🗄 Önerilen arşiv ziyareti
+🔍 Ouvrir en grand ¦ 🔍 Büyük aç
+⟲ Tourner ¦ ⟲ Döndür
+⤓ Exporter l’original ¦ ⤓ Orijinali dışa aktar
+Remise dans 📥 À trier. ¦ 📥 Ayıklanacaklar’a geri kondu.
+📥 Arrivées du téléphone : {n} ¦ 📥 Telefondan gelen: {n}
+📥 À trier : {n} ¦ 📥 Ayıklanacaklar: {n}
+# 🖧 Plusieurs ordinateurs → 📱 Téléphones de terrain (assets/js/app-reseau-local.js)
+téléphone de terrain ¦ saha telefonu
+Téléphone de terrain ¦ Saha telefonu
+📱 Téléphone de terrain ¦ 📱 Saha telefonu
+📱 Téléphones de terrain ¦ 📱 Saha telefonları
+👁 Lecture seule ¦ 👁 Salt okunur
+déposer · liste réduite ¦ bırakma · kısa liste
+＋ Ajouter un téléphone de terrain ¦ ＋ Saha telefonu ekle
+Scanne ce QR code avec l’appareil photo du téléphone ¦ Bu QR kodunu telefonun kamerasıyla tara
+Le code d’invitation est déjà dans le QR code. Sur le téléphone : « Demander l’accès », puis compare le code à 6 chiffres ici. ¦ Davet kodu zaten QR kodunda. Telefonda: “Erişim iste”, sonra 6 haneli kodu burada karşılaştır.
+Un 📱 téléphone de terrain ne voit pas l’arbre : il dépose seulement des photos dans 📥 À trier. ¦ 📱 Saha telefonu ağacı görmez: yalnızca 📥 Ayıklanacaklar’a fotoğraf bırakır.
+⏻ Retirer tous les téléphones ¦ ⏻ Tüm telefonları kaldır
+Les photos arrivent dans Listes → Médias et documents → 📥 À trier. ¦ Fotoğraflar Listeler → Medya ve belgeler → 📥 Ayıklanacaklar’a gelir.
+📥 Ouvrir À trier ¦ 📥 Ayıklanacaklar’ı aç
+Plus aucun téléphone ne pourra rien envoyer. Leurs photos déjà déposées restent dans 📥 À trier (réglage). ¦ Hiçbir telefon artık bir şey gönderemez. Zaten bırakılmış fotoğrafları 📥 Ayıklanacaklar’da kalır (ayar).
+Téléphones retirés : {n} ¦ Kaldırılan telefonlar: {n}
+Valeur refusée : réglage inchangé. ¦ Değer reddedildi: ayar değişmedi.
+✓ « {name} » autorisé, 📱 téléphone de terrain. ¦ ✓ “{name}” izinli, 📱 saha telefonu.
+Sorte d’appareil ¦ Cihaz türü
+📱 Téléphone de terrain : déposer des photos et une ligne de texte dans 📥 À trier. Il ne voit pas l’arbre, ne modifie rien. Il devra aussi donner le mot de passe de la généalogie. ¦ 📱 Saha telefonu: 📥 Ayıklanacaklar’a fotoğraf ve bir satır metin bırakır. Ağacı görmez, hiçbir şeyi değiştirmez. Soy ağacının parolasını da girmesi gerekir.
+Ce que le téléphone voit ¦ Telefonun gördükleri
+Pour choisir « Pour qui ? » ¦ “Kimin için?” seçimi için
+visites d’archives et personnes décédées ¦ arşiv ziyaretleri ve ölmüş kişiler
+visites d’archives seulement ¦ yalnızca arşiv ziyaretleri
+rien : tout se range sur l’ordinateur ¦ hiçbir şey: her şey bilgisayarda ayıklanır
+Montrer aussi les vivants (nom seulement) ¦ Yaşayanları da göster (yalnızca ad)
+Montrer aussi les fiches confidentielles (nom seulement) ¦ Gizli kayıtları da göster (yalnızca ad)
+« Pour qui ? » sur le téléphone ¦ Telefonda “Kimin için?”
+obligatoire (plus lent sur place) ¦ zorunlu (yerinde daha yavaş)
+Une ligne de texte ¦ Bir satır metin
+une pour tout l’envoi ¦ tüm gönderim için bir tane
+une par photo ¦ fotoğraf başına bir tane
+Les photos qui arrivent ¦ Gelen fotoğraflar
+Où arrivent les photos ¦ Fotoğrafların geldiği yer
+dans 📥 À trier : rien n’entre dans l’arbre sans toi ¦ 📥 Ayıklanacaklar’a: sen olmadan ağaca hiçbir şey girmez
+reliées tout de suite à la personne choisie (visibles dans À trier, avec ↶ Annuler) ¦ hemen seçilen kişiye bağlanır (Ayıklanacaklar’da görünür, ↶ Geri al ile)
+Position GPS de la photo ¦ Fotoğrafın GPS konumu
+retirée à l’arrivée ¦ varışta kaldırılır
+gardée à part, à décider en reliant ¦ ayrı saklanır, bağlarken karar verilir
+gardée (la carte peut la montrer) ¦ korunur (harita gösterebilir)
+Taille maximale d’une photo ¦ Bir fotoğrafın en büyük boyutu
+Photos par envoi ¦ Gönderim başına fotoğraf
+Photos dans la boîte À trier, au plus ¦ Ayıklanacaklar kutusunda en fazla fotoğraf
+Garder l’original (décoché : réduite à 2000 points) ¦ Orijinali koru (işaretsiz: 2000 noktaya küçültülür)
+coché conseillé ¦ işaretli önerilir
+décoché conseillé ¦ işaretsiz önerilir
+# 🖧 réglages des téléphones de terrain (suite), 📜 Qui a vu quoi, messages du serveur (lib/telephone_wifi.php, lib/reseau_local.php)
+gardée 30 jours dans « 🗑 Supprimées », puis effacée ¦ 30 gün “🗑 Silinenler” içinde saklanır, sonra silinir
+effacée tout de suite (après les 10 secondes de ↶ Annuler) ¦ hemen silinir (↶ Geri al için 10 saniyeden sonra)
+Photo de tombe reliée ¦ Bağlanan mezar fotoğrafı
+proposer d’ajouter l’inhumation ¦ defin eklemeyi öner
+ne rien proposer ¦ hiçbir şey önerme
+Pastille 📥 dans la barre du haut ¦ Üst çubukta 📥 rozeti
+oui, avec le nombre ¦ evet, sayıyla
+non (seulement dans Listes) ¦ hayır (yalnızca Listeler’de)
+À l’arrivée de photos ¦ Fotoğraf geldiğinde
+seulement la pastille ¦ yalnızca rozet
+un petit message en bas de l’écran ¦ ekranın altında küçük bir ileti
+Sans wifi ¦ Wifi yokken
+Hors du wifi de la maison ¦ Ev wifi’si dışında
+garder en attente dans la page, envoi tout seul au retour ¦ sayfada bekletilir, dönüşte kendiliğinden gönderilir
+garder, mais demander avant d’envoyer ¦ sakla ama göndermeden önce sor
+refuser de prendre des photos hors wifi ¦ wifi dışında fotoğraf çekmeye izin verme
+Après l’envoi ¦ Gönderimden sonra
+effacer les photos de la page ¦ fotoğrafları sayfadan sil
+garder les vignettes de la journée ¦ günün küçük resimlerini sakla
+« ↶ Annuler » sur le téléphone ¦ Telefonda “↶ Geri al”
+tant que les photos ne sont pas rangées ¦ fotoğraflar ayıklanmadığı sürece
+pendant 10 secondes ¦ 10 saniye boyunca
+Mot de passe de la généalogie sur le téléphone ¦ Telefonda soy ağacının parolası
+demandé à l’ouverture, redemandé après 15 min sans geste ¦ açılışta istenir, 15 dk işlem yapılmazsa yeniden istenir
+demandé seulement pour voir la liste ; déposer avec le jeton seul ¦ yalnızca listeyi görmek için istenir; yalnızca jetonla bırakılır
+Cet ordinateur en mode consultation ¦ Bu bilgisayar görüntüleme kipinde
+le téléphone ne dépose plus ¦ telefon artık bırakmaz
+le téléphone dépose encore ¦ telefon yine de bırakır
+Sorte proposée quand la demande vient d’un téléphone ¦ İstek bir telefondan geldiğinde önerilen tür
+Retirer un téléphone ¦ Bir telefonu kaldırma
+ses photos déjà déposées restent à trier ¦ zaten bıraktığı fotoğraflar ayıklanmayı bekler
+elles sont supprimées aussi (30 jours dans « 🗑 Supprimées ») ¦ onlar da silinir (30 gün “🗑 Silinenler” içinde)
+📜 Registre ¦ 📜 Kayıt
+noter chaque dépôt, chaque fichier refusé et chaque liste vue ¦ her bırakmayı, her reddedilen dosyayı ve her görülen listeyi kaydet
+seulement les dépôts ¦ yalnızca bırakmalar
+Photo déposée ¦ Fotoğraf bırakıldı
+Fichier refusé ¦ Dosya reddedildi
+Liste réduite vue ¦ Kısa liste görüldü
+Photo reliée ¦ Fotoğraf bağlandı
+pas une photo ¦ fotoğraf değil
+trop grosse ¦ çok büyük
+trop grande ¦ boyutları çok büyük
+abîmée ¦ bozuk
+trop de fichiers ¦ çok fazla dosya
+trop de photos ¦ çok fazla fotoğraf
+trop gros en tout ¦ toplamda çok büyük
+boîte pleine ¦ kutu dolu
+personne refusée ¦ kişi reddedildi
+réponses : {n} ¦ yanıtlar: {n}
+Photo trop grosse (plus de {n} Mo, la taille maximale réglée sur l’ordinateur). ¦ Fotoğraf çok büyük ({n} MB üstü, bilgisayarda ayarlanan en büyük boyut).
+Trop d’essais depuis ce téléphone : réessaie dans {n} min. ¦ Bu telefondan çok fazla deneme: {n} dk sonra yeniden dene.
+Trop de photos dans cet envoi ({n} au plus). ¦ Bu gönderimde çok fazla fotoğraf var (en fazla {n}).
+Photo du téléphone ¦ Telefondan fotoğraf
+Ce format de photo ne se lit pas sur cet ordinateur : choisis-la en JPEG. ¦ Bu fotoğraf biçimi bu bilgisayarda okunamıyor: JPEG olarak seç.
+Ce n’est pas une photo : seules les photos JPEG, PNG, WEBP et AVIF sont acceptées. ¦ Bu bir fotoğraf değil: yalnızca JPEG, PNG, WEBP ve AVIF fotoğraflar kabul edilir.
+Image abîmée ou illisible. ¦ Görüntü bozuk ya da okunamıyor.
+Image trop grande (plus de 50 millions de points) : refusée. ¦ Görüntü çok büyük (50 milyon noktadan fazla): reddedildi.
+Une seule photo à la fois. ¦ Bir seferde yalnızca bir fotoğraf.
+La photo n’est pas arrivée en entier : elle sera renvoyée. ¦ Fotoğraf eksiksiz gelmedi: yeniden gönderilecek.
+Personne ou visite inconnue. ¦ Bilinmeyen kişi ya da ziyaret.
+📥 La boîte est pleine sur l’ordinateur : trie-la d’abord. ¦ 📥 Bilgisayardaki kutu dolu: önce onu ayıkla.
+Cet envoi est trop gros en tout (200 Mo au plus) : envoie le reste ensuite. ¦ Bu gönderim toplamda çok büyük (en fazla 200 MB): kalanını sonra gönder.
+La généalogie n’est pas prête sur l’ordinateur. ¦ Soy ağacı bilgisayarda hazır değil.
+L’ordinateur est en mode consultation : il ne reçoit pas de photo pour l’instant. Elles restent en attente ici. ¦ Bilgisayar görüntüleme kipinde: şimdilik fotoğraf almıyor. Burada bekliyorlar.
+Impossible de ranger la photo sur l’ordinateur (disque plein ?). ¦ Fotoğraf bilgisayara kaydedilemiyor (disk dolu mu?).
+Choisis à quoi relier. ¦ Neye bağlanacağını seç.
+Introuvable. ¦ Bulunamadı.
+Cette fiche est verrouillée : rien n’y est relié. ¦ Bu kayıt kilitli: ona hiçbir şey bağlanmaz.
+Trop tard : cette photo a été effacée pour de bon. ¦ Çok geç: bu fotoğraf kalıcı olarak silindi.
+Téléphone de terrain : il peut seulement déposer des photos dans 📥 À trier. ¦ Saha telefonu: yalnızca 📥 Ayıklanacaklar’a fotoğraf bırakabilir.

@@ -71,7 +71,7 @@
             const st = bar.state, q = String(st.q || '').trim();
             let rows = DATA.rows.filter(r => !q || (UI().listMatch?.text ? UI().listMatch.text(q, `${r.note} ${r.device} ${r.for} ${r.link}`) : `${r.note} ${r.device} ${r.for}`.toLowerCase().includes(q.toLowerCase())));
             rows = st.sort === 'old' ? rows.slice().reverse() : rows;
-            bar.setCount?.(i18n('{n} · {d}', {n: pl(rows.length, 'photo'), d: view() === 'box' ? i18n('À trier') : view() === 'deleted' ? i18n('🗑 Supprimées') : i18n('Reliées')}));
+            bar.setCount?.(`${pl(rows.length, 'photo')} · ${view() === 'box' ? i18n('À trier') : view() === 'deleted' ? i18n('🗑 Supprimées') : i18n('Reliées')}`);
             const items = rows.map(r => {
                 const acts = view() === 'box' && !ro() ? `${r.for_kind ? `<button type="button" class="button small" data-tw-quick="${r.id}">${esc(r.for_kind === 'visit' ? i18n('🗄 Relier à la visite') : i18n('🔗 Relier à {name}', {name: r.for}))}</button>` : ''}
                     <button type="button" class="button small secondary" data-tw-to="${r.id}">${esc(i18n('Relier à…'))}</button>` : view() === 'deleted' && !ro() ? `<button type="button" class="button small secondary" data-tw-restore="${r.id}">${esc(i18n('Remettre'))}</button>` : '';

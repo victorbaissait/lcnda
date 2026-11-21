@@ -1,0 +1,199 @@
+fr ¦ vi ¦ id
+# 📱 la page du téléphone de terrain (assets/js/app-terrain.js)
+📶 relié ¦ 📶 đã kết nối ¦ 📶 terhubung
+⏸ hors wifi ¦ ⏸ không có wifi ¦ ⏸ tanpa wifi
+Le mot de passe de la généalogie : vérifié par l’ordinateur, jamais gardé sur ce téléphone. ¦ Mật khẩu của gia phả: máy tính kiểm tra, không bao giờ được giữ trên điện thoại này. ¦ Kata sandi silsilah: diperiksa oleh komputer, tidak pernah disimpan di ponsel ini.
+Le navigateur écrit « Non sécurisé » : c’est vrai, la porte du wifi n’a pas de HTTPS. N’envoie que sur le wifi de la maison, protégé par sa clé. ¦ Trình duyệt ghi “Không an toàn”: đúng vậy, cửa wifi không có HTTPS. Chỉ gửi qua wifi ở nhà, được bảo vệ bằng mật khẩu. ¦ Peramban menulis “Tidak aman”: memang benar, pintu wifi tidak punya HTTPS. Kirim hanya lewat wifi rumah yang dilindungi kuncinya.
+Tes photos attendent dans cette page. ¦ Ảnh của bạn đang chờ trong trang này. ¦ Foto kamu menunggu di halaman ini.
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). ¦ Máy tính không trả lời (đang ngủ, đã tắt hoặc cửa đóng). ¦ Komputer tidak menjawab (tidur, mati, atau pintu tertutup).
+Choisir une personne ou une visite… ¦ Chọn một người hoặc một chuyến đi… ¦ Pilih orang atau kunjungan…
+Une ligne (facultatif) ¦ Một dòng (không bắt buộc) ¦ Satu baris (opsional)
+Pas de wifi de la maison : les photos se prennent avec l’appareil photo du téléphone, puis « 🖼 Choisir » au retour. ¦ Không có wifi ở nhà: chụp ảnh bằng máy ảnh của điện thoại, rồi “🖼 Chọn” khi về. ¦ Tidak ada wifi rumah: ambil foto dengan kamera ponsel, lalu “🖼 Pilih” saat kamu kembali.
+Prendre une photo ¦ Chụp ảnh ¦ Ambil foto
+Choisir dans la galerie ¦ Chọn từ thư viện ảnh ¦ Pilih dari galeri
+📍 = la photo contient une position GPS (retirée à l’arrivée, réglage) ¦ 📍 = ảnh có vị trí GPS (bị xoá khi đến, tùy chọn) ¦ 📍 = foto berisi posisi GPS (dihapus saat tiba, pengaturan)
+Tombe famille LACOMBE, allée 4 ¦ Mộ gia đình LACOMBE, lối 4 ¦ Makam keluarga LACOMBE, lorong 4
+Envoyer : {n} ¦ Gửi: {n} ¦ Kirim: {n}
+Sans wifi, garde cette page ouverte : les photos attendent ici et partent toutes seules au retour. Pour une journée entière aux archives, prends plutôt la visite par fichier. ¦ Không có wifi, hãy giữ trang này mở: ảnh chờ ở đây và tự gửi khi bạn về. Cho cả một ngày ở kho lưu trữ, nên dùng chuyến đi bằng tệp. ¦ Tanpa wifi, biarkan halaman ini terbuka: foto menunggu di sini dan terkirim sendiri saat kamu kembali. Untuk seharian di arsip, lebih baik gunakan kunjungan lewat berkas.
+Le téléphone ne sait pas si une photo a été rangée ni où : il ne lit rien de l’arbre. ¦ Điện thoại không biết ảnh đã được xếp chưa hay ở đâu: nó không đọc gì từ cây. ¦ Ponsel tidak tahu apakah dan di mana foto sudah dirapikan: ia tidak membaca apa pun dari pohon.
+Nom de la personne ou de la visite ¦ Tên người hoặc chuyến đi ¦ Nama orang atau kunjungan
+Seulement les personnes décédées, sans les fiches confidentielles. ¦ Chỉ những người đã mất, không có hồ sơ bảo mật. ¦ Hanya orang yang sudah meninggal, tanpa catatan rahasia.
+Choisis pour qui est cette photo. ¦ Hãy chọn ảnh này dành cho ai. ¦ Pilih untuk siapa foto ini.
+Verrouillée après 15 minutes sans geste : redonne le mot de passe. Tes photos attendent. ¦ Đã khoá sau 15 phút không thao tác: hãy nhập lại mật khẩu. Ảnh của bạn đang chờ. ¦ Terkunci setelah 15 menit tanpa aktivitas: masukkan kata sandi lagi. Foto kamu menunggu.
+Ce téléphone n’est plus autorisé sur l’ordinateur. ¦ Điện thoại này không còn được phép trên máy tính. ¦ Ponsel ini tidak lagi diizinkan di komputer.
+Envoyées dans 📥 À trier : {n} ¦ Đã gửi vào 📥 Cần sắp xếp: {n} ¦ Terkirim ke 📥 Perlu dipilah: {n}
+Refusé par l’ordinateur ¦ Máy tính từ chối ¦ Ditolak oleh komputer
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). En attente : {n} ; nouvel essai toutes les 30 secondes tant que la page est ouverte. ¦ Máy tính không trả lời (đang ngủ, đã tắt hoặc cửa đóng). Đang chờ: {n}; thử lại mỗi 30 giây khi trang còn mở. ¦ Komputer tidak menjawab (tidur, mati, atau pintu tertutup). Menunggu: {n}; dicoba lagi setiap 30 detik selama halaman terbuka.
+↻ Réessayer ¦ ↻ Thử lại ¦ ↻ Coba lagi
+Envoi en cours : {i} sur {n} ¦ Đang gửi: {i} trên {n} ¦ Mengirim: {i} dari {n}
+Garde la page ouverte. ¦ Hãy giữ trang mở. ¦ Biarkan halaman terbuka.
+En attente depuis {when} : {n} ¦ Đang chờ từ {when}: {n} ¦ Menunggu sejak {when}: {n}
+Elles étaient gardées dans ce téléphone. ¦ Chúng được giữ trong điện thoại này. ¦ Foto disimpan di ponsel ini.
+Les envoyer ¦ Gửi chúng ¦ Kirim foto
+Les oublier ¦ Bỏ chúng ¦ Lupakan foto
+Retirées de la boîte : {n} ¦ Đã gỡ khỏi hộp: {n} ¦ Dikeluarkan dari kotak: {n}
+« {name} » n’est plus ouverte sur l’ordinateur : tes photos restent en attente ici. ¦ “{name}” không còn mở trên máy tính: ảnh của bạn vẫn chờ ở đây. ¦ “{name}” tidak lagi terbuka di komputer: foto kamu tetap menunggu di sini.
+Des photos étaient en attente, mais le téléphone a libéré la place. Retrouve-les dans ta galerie et « 🖼 Choisir ». ¦ Có ảnh đang chờ, nhưng điện thoại đã giải phóng chỗ. Hãy tìm lại trong thư viện ảnh và “🖼 Chọn”. ¦ Ada foto yang menunggu, tetapi ponsel mengosongkan ruangnya. Temukan di galeri kamu lalu “🖼 Pilih”.
+📱 Envoyer des photos à l’ordinateur principal ¦ 📱 Gửi ảnh đến máy tính chính ¦ 📱 Kirim foto ke komputer utama
+# 📥 À trier, sur l'ordinateur (assets/js/app-a-trier.js)
+📥 À trier ¦ 📥 Cần sắp xếp ¦ 📥 Perlu dipilah
+À trier ¦ Cần sắp xếp ¦ Perlu dipilah
+Listes · Médias et documents ¦ Danh sách · Tư liệu và tài liệu ¦ Daftar · Media dan dokumen
+Les photos envoyées par un téléphone de terrain arrivent ici, hors de l’arbre. Relie chacune à ce qu’elle montre, ou supprime-la. ¦ Ảnh do điện thoại thực địa gửi đến đây, nằm ngoài cây. Hãy liên kết mỗi ảnh với điều nó cho thấy, hoặc xoá nó. ¦ Foto yang dikirim ponsel lapangan tiba di sini, di luar pohon. Tautkan masing-masing dengan yang ditampilkannya, atau hapus.
+Chercher… (texte, téléphone, personne) ¦ Tìm… (chữ, điện thoại, người) ¦ Cari… (teks, ponsel, orang)
+🗑 Supprimées ¦ 🗑 Đã xoá ¦ 🗑 Terhapus
+Reliées ¦ Đã liên kết ¦ Tertaut
+visite {name} ¦ chuyến đi {name} ¦ kunjungan {name}
+pour {name} ¦ cho {name} ¦ untuk {name}
+personne pas choisie ¦ chưa chọn người ¦ belum ada orang dipilih
+📍 GPS gardé ¦ 📍 GPS được giữ ¦ 📍 GPS disimpan
+📍 GPS retiré ¦ 📍 GPS đã gỡ ¦ 📍 GPS dihapus
+🔗 reliée à {name} ¦ 🔗 đã liên kết với {name} ¦ 🔗 tertaut ke {name}
+effacée pour de bon le {date} ¦ xoá hẳn vào {date} ¦ dihapus permanen pada {date}
+🗄 Relier à la visite ¦ 🗄 Liên kết với chuyến đi ¦ 🗄 Tautkan ke kunjungan
+🔗 Relier à {name} ¦ 🔗 Liên kết với {name} ¦ 🔗 Tautkan ke {name}
+Relier à… ¦ Liên kết với… ¦ Tautkan ke…
+(sans texte) ¦ (không có chữ) ¦ (tanpa teks)
+Rien à trier : les photos du téléphone arriveront ici. ¦ Không có gì để sắp xếp: ảnh từ điện thoại sẽ đến đây. ¦ Tidak ada yang perlu dipilah: foto dari ponsel akan tiba di sini.
+Mode consultation : la boîte se lit, mais rien ne se relie ni ne se supprime. ¦ Chế độ xem: hộp có thể đọc, nhưng không thể liên kết hay xoá gì. ¦ Mode lihat: kotak bisa dibaca, tetapi tidak ada yang bisa ditautkan atau dihapus.
+Cochées : {n} ¦ Đã đánh dấu: {n} ¦ Dicentang: {n}
+Décocher ¦ Bỏ đánh dấu ¦ Hapus centang
+📍 Garder la position GPS ? ¦ 📍 Giữ vị trí GPS? ¦ 📍 Simpan posisi GPS?
+La photo contient une position GPS (utile pour situer une tombe). La garder pour la carte ? ¦ Ảnh có vị trí GPS (hữu ích để tìm một ngôi mộ). Giữ lại cho bản đồ? ¦ Foto berisi posisi GPS (berguna untuk menemukan makam). Simpan untuk peta?
+La retirer ¦ Gỡ bỏ ¦ Hapus
+✓ Reliées à {name} : {n} ¦ ✓ Đã liên kết với {name}: {n} ¦ ✓ Tertaut ke {name}: {n}
+🪦 Une photo de tombe : ajouter aussi l’inhumation à {name} ? ¦ 🪦 Ảnh một ngôi mộ: thêm cả việc an táng cho {name}? ¦ 🪦 Foto makam: tambahkan juga pemakaman untuk {name}?
+✓ Inhumation ajoutée à {name}. ¦ ✓ Đã thêm việc an táng cho {name}. ¦ ✓ Pemakaman ditambahkan untuk {name}.
+Relier à un événement ¦ Liên kết với một sự kiện ¦ Tautkan ke peristiwa
+Relier à une source ¦ Liên kết với một nguồn ¦ Tautkan ke sumber
+✓ Supprimées : {n} ¦ ✓ Đã xoá: {n} ¦ ✓ Dihapus: {n}
+✓ Supprimées : {n}. Gardées 30 jours dans « 🗑 Supprimées » (Filtrer ▾). ¦ ✓ Đã xoá: {n}. Được giữ 30 ngày trong “🗑 Đã xoá” (Lọc ▾). ¦ ✓ Dihapus: {n}. Disimpan 30 hari di “🗑 Terhapus” (Saring ▾).
+✎ Modifier le texte ¦ ✎ Sửa chữ ¦ ✎ Ubah teks
+Texte enregistré ¦ Đã lưu chữ ¦ Teks disimpan
+👤 Une personne… ¦ 👤 Một người… ¦ 👤 Seseorang…
+📅 Un événement… (inhumation, mariage…) ¦ 📅 Một sự kiện… (an táng, kết hôn…) ¦ 📅 Peristiwa… (pemakaman, pernikahan…)
+📚 Une source… (l’acte, la cote) ¦ 📚 Một nguồn… (giấy tờ, ký hiệu) ¦ 📚 Sumber… (akta, nomor arsip)
+🗄 La visite d’archives proposée ¦ 🗄 Chuyến đi lưu trữ được gợi ý ¦ 🗄 Kunjungan arsip yang diusulkan
+🔍 Ouvrir en grand ¦ 🔍 Mở cỡ lớn ¦ 🔍 Buka ukuran besar
+⟲ Tourner ¦ ⟲ Xoay ¦ ⟲ Putar
+⤓ Exporter l’original ¦ ⤓ Xuất bản gốc ¦ ⤓ Ekspor aslinya
+Remise dans 📥 À trier. ¦ Đã đưa lại vào 📥 Cần sắp xếp. ¦ Dikembalikan ke 📥 Perlu dipilah.
+📥 Arrivées du téléphone : {n} ¦ 📥 Đến từ điện thoại: {n} ¦ 📥 Tiba dari ponsel: {n}
+📥 À trier : {n} ¦ 📥 Cần sắp xếp: {n} ¦ 📥 Perlu dipilah: {n}
+# 🖧 Plusieurs ordinateurs → 📱 Téléphones de terrain (assets/js/app-reseau-local.js)
+téléphone de terrain ¦ điện thoại thực địa ¦ ponsel lapangan
+Téléphone de terrain ¦ Điện thoại thực địa ¦ Ponsel lapangan
+📱 Téléphone de terrain ¦ 📱 Điện thoại thực địa ¦ 📱 Ponsel lapangan
+📱 Téléphones de terrain ¦ 📱 Điện thoại thực địa ¦ 📱 Ponsel lapangan
+👁 Lecture seule ¦ 👁 Chỉ đọc ¦ 👁 Hanya baca
+déposer · liste réduite ¦ gửi vào · danh sách rút gọn ¦ menitipkan · daftar ringkas
+＋ Ajouter un téléphone de terrain ¦ ＋ Thêm điện thoại thực địa ¦ ＋ Tambah ponsel lapangan
+Scanne ce QR code avec l’appareil photo du téléphone ¦ Quét mã QR này bằng máy ảnh của điện thoại ¦ Pindai kode QR ini dengan kamera ponsel
+Le code d’invitation est déjà dans le QR code. Sur le téléphone : « Demander l’accès », puis compare le code à 6 chiffres ici. ¦ Mã mời đã có sẵn trong mã QR. Trên điện thoại: “Xin quyền truy cập”, rồi so sánh mã 6 chữ số ở đây. ¦ Kode undangan sudah ada di kode QR. Di ponsel: “Minta akses”, lalu bandingkan kode 6 angka di sini.
+Un 📱 téléphone de terrain ne voit pas l’arbre : il dépose seulement des photos dans 📥 À trier. ¦ 📱 Điện thoại thực địa không thấy cây: nó chỉ gửi ảnh vào 📥 Cần sắp xếp. ¦ 📱 Ponsel lapangan tidak melihat pohon: ia hanya menitipkan foto ke 📥 Perlu dipilah.
+⏻ Retirer tous les téléphones ¦ ⏻ Gỡ mọi điện thoại ¦ ⏻ Hapus semua ponsel
+Les photos arrivent dans Listes → Médias et documents → 📥 À trier. ¦ Ảnh đến Danh sách → Tư liệu và tài liệu → 📥 Cần sắp xếp. ¦ Foto tiba di Daftar → Media dan dokumen → 📥 Perlu dipilah.
+📥 Ouvrir À trier ¦ 📥 Mở Cần sắp xếp ¦ 📥 Buka Perlu dipilah
+Plus aucun téléphone ne pourra rien envoyer. Leurs photos déjà déposées restent dans 📥 À trier (réglage). ¦ Không điện thoại nào gửi được gì nữa. Ảnh đã gửi vào vẫn ở 📥 Cần sắp xếp (tùy chọn). ¦ Tidak ada ponsel yang bisa mengirim apa pun lagi. Foto yang sudah dititipkan tetap di 📥 Perlu dipilah (pengaturan).
+Téléphones retirés : {n} ¦ Điện thoại đã gỡ: {n} ¦ Ponsel yang dihapus: {n}
+Valeur refusée : réglage inchangé. ¦ Giá trị bị từ chối: tùy chọn không đổi. ¦ Nilai ditolak: pengaturan tidak berubah.
+✓ « {name} » autorisé, 📱 téléphone de terrain. ¦ ✓ Đã cho phép “{name}”, 📱 điện thoại thực địa. ¦ ✓ “{name}” diizinkan, 📱 ponsel lapangan.
+Sorte d’appareil ¦ Loại thiết bị ¦ Jenis perangkat
+📱 Téléphone de terrain : déposer des photos et une ligne de texte dans 📥 À trier. Il ne voit pas l’arbre, ne modifie rien. Il devra aussi donner le mot de passe de la généalogie. ¦ 📱 Điện thoại thực địa: gửi ảnh và một dòng chữ vào 📥 Cần sắp xếp. Nó không thấy cây, không sửa gì. Nó cũng phải nhập mật khẩu của gia phả. ¦ 📱 Ponsel lapangan: menitipkan foto dan satu baris teks ke 📥 Perlu dipilah. Ia tidak melihat pohon, tidak mengubah apa pun. Ia juga harus memasukkan kata sandi silsilah.
+Ce que le téléphone voit ¦ Những gì điện thoại thấy ¦ Yang dilihat ponsel
+Pour choisir « Pour qui ? » ¦ Để chọn “Cho ai?” ¦ Untuk memilih “Untuk siapa?”
+visites d’archives et personnes décédées ¦ chuyến đi lưu trữ và người đã mất ¦ kunjungan arsip dan orang yang sudah meninggal
+visites d’archives seulement ¦ chỉ chuyến đi lưu trữ ¦ hanya kunjungan arsip
+rien : tout se range sur l’ordinateur ¦ không gì cả: mọi thứ được sắp xếp trên máy tính ¦ tidak ada: semuanya dipilah di komputer
+Montrer aussi les vivants (nom seulement) ¦ Cũng hiện người còn sống (chỉ tên) ¦ Tampilkan juga yang masih hidup (nama saja)
+Montrer aussi les fiches confidentielles (nom seulement) ¦ Cũng hiện hồ sơ bảo mật (chỉ tên) ¦ Tampilkan juga catatan rahasia (nama saja)
+« Pour qui ? » sur le téléphone ¦ “Cho ai?” trên điện thoại ¦ “Untuk siapa?” di ponsel
+obligatoire (plus lent sur place) ¦ bắt buộc (chậm hơn tại chỗ) ¦ wajib (lebih lambat di lokasi)
+Une ligne de texte ¦ Một dòng chữ ¦ Satu baris teks
+une pour tout l’envoi ¦ một dòng cho cả lần gửi ¦ satu untuk seluruh kiriman
+une par photo ¦ một dòng cho mỗi ảnh ¦ satu per foto
+Les photos qui arrivent ¦ Ảnh đến ¦ Foto yang masuk
+Où arrivent les photos ¦ Ảnh đến đâu ¦ Ke mana foto tiba
+dans 📥 À trier : rien n’entre dans l’arbre sans toi ¦ vào 📥 Cần sắp xếp: không gì vào cây nếu không có bạn ¦ ke 📥 Perlu dipilah: tidak ada yang masuk ke pohon tanpa kamu
+reliées tout de suite à la personne choisie (visibles dans À trier, avec ↶ Annuler) ¦ liên kết ngay với người đã chọn (hiện trong Cần sắp xếp, có ↶ Hoàn tác) ¦ langsung ditautkan ke orang yang dipilih (terlihat di Perlu dipilah, dengan ↶ Urungkan)
+Position GPS de la photo ¦ Vị trí GPS của ảnh ¦ Posisi GPS foto
+retirée à l’arrivée ¦ bị gỡ khi đến ¦ dihapus saat tiba
+gardée à part, à décider en reliant ¦ giữ riêng, quyết định khi liên kết ¦ disimpan terpisah, diputuskan saat menautkan
+gardée (la carte peut la montrer) ¦ giữ lại (bản đồ có thể hiện) ¦ disimpan (peta bisa menampilkannya)
+Taille maximale d’une photo ¦ Kích thước tối đa của một ảnh ¦ Ukuran maksimal satu foto
+Photos par envoi ¦ Số ảnh mỗi lần gửi ¦ Foto per kiriman
+Photos dans la boîte À trier, au plus ¦ Số ảnh tối đa trong hộp Cần sắp xếp ¦ Foto di kotak Perlu dipilah, paling banyak
+Garder l’original (décoché : réduite à 2000 points) ¦ Giữ bản gốc (không đánh dấu: thu nhỏ còn 2000 điểm) ¦ Simpan aslinya (tidak dicentang: dikecilkan ke 2000 titik)
+coché conseillé ¦ đánh dấu được khuyên ¦ dicentang disarankan
+décoché conseillé ¦ không đánh dấu được khuyên ¦ tidak dicentang disarankan
+# 🖧 réglages des téléphones de terrain (suite), 📜 Qui a vu quoi, messages du serveur (lib/telephone_wifi.php, lib/reseau_local.php)
+gardée 30 jours dans « 🗑 Supprimées », puis effacée ¦ giữ 30 ngày trong “🗑 Đã xoá”, rồi xoá hẳn ¦ disimpan 30 hari di “🗑 Terhapus”, lalu dihapus
+effacée tout de suite (après les 10 secondes de ↶ Annuler) ¦ xoá ngay (sau 10 giây để ↶ Hoàn tác) ¦ langsung dihapus (setelah 10 detik ↶ Urungkan)
+Photo de tombe reliée ¦ Ảnh mộ đã liên kết ¦ Foto makam yang ditautkan
+proposer d’ajouter l’inhumation ¦ đề nghị thêm việc an táng ¦ tawarkan menambah pemakaman
+ne rien proposer ¦ không đề nghị gì ¦ jangan tawarkan apa pun
+Pastille 📥 dans la barre du haut ¦ Huy hiệu 📥 trên thanh trên cùng ¦ Lencana 📥 di bilah atas
+oui, avec le nombre ¦ có, kèm con số ¦ ya, dengan jumlahnya
+non (seulement dans Listes) ¦ không (chỉ trong Danh sách) ¦ tidak (hanya di Daftar)
+À l’arrivée de photos ¦ Khi có ảnh đến ¦ Saat foto tiba
+seulement la pastille ¦ chỉ huy hiệu ¦ hanya lencana
+un petit message en bas de l’écran ¦ một thông báo nhỏ ở cuối màn hình ¦ pesan kecil di bagian bawah layar
+Sans wifi ¦ Không có wifi ¦ Tanpa wifi
+Hors du wifi de la maison ¦ Ngoài wifi ở nhà ¦ Di luar wifi rumah
+garder en attente dans la page, envoi tout seul au retour ¦ giữ chờ trong trang, tự gửi khi về ¦ ditahan di halaman, terkirim sendiri saat kembali
+garder, mais demander avant d’envoyer ¦ giữ, nhưng hỏi trước khi gửi ¦ simpan, tapi tanya sebelum mengirim
+refuser de prendre des photos hors wifi ¦ không cho chụp ảnh ngoài wifi ¦ jangan izinkan foto di luar wifi
+Après l’envoi ¦ Sau khi gửi ¦ Setelah mengirim
+effacer les photos de la page ¦ xoá ảnh khỏi trang ¦ hapus foto dari halaman
+garder les vignettes de la journée ¦ giữ ảnh thu nhỏ trong ngày ¦ simpan gambar mini hari ini
+« ↶ Annuler » sur le téléphone ¦ “↶ Hoàn tác” trên điện thoại ¦ “↶ Urungkan” di ponsel
+tant que les photos ne sont pas rangées ¦ khi ảnh chưa được sắp xếp ¦ selama foto belum dipilah
+pendant 10 secondes ¦ trong 10 giây ¦ selama 10 detik
+Mot de passe de la généalogie sur le téléphone ¦ Mật khẩu của gia phả trên điện thoại ¦ Kata sandi silsilah di ponsel
+demandé à l’ouverture, redemandé après 15 min sans geste ¦ hỏi khi mở, hỏi lại sau 15 phút không thao tác ¦ diminta saat membuka, diminta lagi setelah 15 menit tanpa aktivitas
+demandé seulement pour voir la liste ; déposer avec le jeton seul ¦ chỉ hỏi khi xem danh sách; gửi vào chỉ cần mã thiết bị ¦ hanya diminta untuk melihat daftar; menitipkan cukup dengan token
+Cet ordinateur en mode consultation ¦ Máy tính này ở chế độ xem ¦ Komputer ini dalam mode lihat
+le téléphone ne dépose plus ¦ điện thoại không gửi vào nữa ¦ ponsel tidak menitipkan lagi
+le téléphone dépose encore ¦ điện thoại vẫn gửi vào ¦ ponsel tetap menitipkan
+Sorte proposée quand la demande vient d’un téléphone ¦ Loại được gợi ý khi yêu cầu đến từ điện thoại ¦ Jenis yang diusulkan bila permintaan datang dari ponsel
+Retirer un téléphone ¦ Gỡ một điện thoại ¦ Menghapus ponsel
+ses photos déjà déposées restent à trier ¦ ảnh nó đã gửi vẫn chờ sắp xếp ¦ foto yang sudah dititipkan tetap menunggu dipilah
+elles sont supprimées aussi (30 jours dans « 🗑 Supprimées ») ¦ chúng cũng bị xoá (30 ngày trong “🗑 Đã xoá”) ¦ ikut dihapus (30 hari di “🗑 Terhapus”)
+📜 Registre ¦ 📜 Nhật ký ¦ 📜 Catatan
+noter chaque dépôt, chaque fichier refusé et chaque liste vue ¦ ghi lại mỗi lần gửi, mỗi tệp bị từ chối và mỗi danh sách đã xem ¦ catat setiap titipan, setiap berkas yang ditolak, dan setiap daftar yang dilihat
+seulement les dépôts ¦ chỉ các lần gửi ¦ hanya titipan
+Photo déposée ¦ Ảnh đã gửi vào ¦ Foto dititipkan
+Fichier refusé ¦ Tệp bị từ chối ¦ Berkas ditolak
+Liste réduite vue ¦ Đã xem danh sách rút gọn ¦ Daftar ringkas dilihat
+Photo reliée ¦ Ảnh đã liên kết ¦ Foto ditautkan
+pas une photo ¦ không phải ảnh ¦ bukan foto
+trop grosse ¦ quá nặng ¦ terlalu besar
+trop grande ¦ quá lớn ¦ dimensi terlalu besar
+abîmée ¦ bị hỏng ¦ rusak
+trop de fichiers ¦ quá nhiều tệp ¦ terlalu banyak berkas
+trop de photos ¦ quá nhiều ảnh ¦ terlalu banyak foto
+trop gros en tout ¦ tổng cộng quá lớn ¦ terlalu besar secara total
+boîte pleine ¦ hộp đã đầy ¦ kotak penuh
+personne refusée ¦ người bị từ chối ¦ orang ditolak
+réponses : {n} ¦ câu trả lời: {n} ¦ jawaban: {n}
+Photo trop grosse (plus de {n} Mo, la taille maximale réglée sur l’ordinateur). ¦ Ảnh quá nặng (hơn {n} MB, kích thước tối đa đặt trên máy tính). ¦ Foto terlalu besar (lebih dari {n} MB, ukuran maksimal yang diatur di komputer).
+Trop d’essais depuis ce téléphone : réessaie dans {n} min. ¦ Quá nhiều lần thử từ điện thoại này: hãy thử lại sau {n} phút. ¦ Terlalu banyak percobaan dari ponsel ini: coba lagi dalam {n} menit.
+Trop de photos dans cet envoi ({n} au plus). ¦ Quá nhiều ảnh trong lần gửi này (tối đa {n}). ¦ Terlalu banyak foto dalam kiriman ini (paling banyak {n}).
+Photo du téléphone ¦ Ảnh từ điện thoại ¦ Foto dari ponsel
+Ce format de photo ne se lit pas sur cet ordinateur : choisis-la en JPEG. ¦ Định dạng ảnh này không đọc được trên máy tính này: hãy chọn ảnh ở dạng JPEG. ¦ Format foto ini tidak bisa dibaca di komputer ini: pilih dalam JPEG.
+Ce n’est pas une photo : seules les photos JPEG, PNG, WEBP et AVIF sont acceptées. ¦ Đây không phải ảnh: chỉ nhận ảnh JPEG, PNG, WEBP và AVIF. ¦ Ini bukan foto: hanya foto JPEG, PNG, WEBP, dan AVIF yang diterima.
+Image abîmée ou illisible. ¦ Ảnh bị hỏng hoặc không đọc được. ¦ Gambar rusak atau tidak terbaca.
+Image trop grande (plus de 50 millions de points) : refusée. ¦ Ảnh quá lớn (hơn 50 triệu điểm ảnh): bị từ chối. ¦ Gambar terlalu besar (lebih dari 50 juta titik): ditolak.
+Une seule photo à la fois. ¦ Mỗi lần chỉ một ảnh. ¦ Hanya satu foto sekaligus.
+La photo n’est pas arrivée en entier : elle sera renvoyée. ¦ Ảnh chưa đến trọn vẹn: sẽ được gửi lại. ¦ Foto tidak tiba utuh: akan dikirim ulang.
+Personne ou visite inconnue. ¦ Người hoặc chuyến đi không rõ. ¦ Orang atau kunjungan tidak dikenal.
+📥 La boîte est pleine sur l’ordinateur : trie-la d’abord. ¦ 📥 Hộp trên máy tính đã đầy: hãy sắp xếp trước. ¦ 📥 Kotak di komputer penuh: pilah dulu.
+Cet envoi est trop gros en tout (200 Mo au plus) : envoie le reste ensuite. ¦ Lần gửi này tổng cộng quá lớn (tối đa 200 MB): hãy gửi phần còn lại sau. ¦ Kiriman ini terlalu besar secara total (paling banyak 200 MB): kirim sisanya kemudian.
+La généalogie n’est pas prête sur l’ordinateur. ¦ Gia phả chưa sẵn sàng trên máy tính. ¦ Silsilah belum siap di komputer.
+L’ordinateur est en mode consultation : il ne reçoit pas de photo pour l’instant. Elles restent en attente ici. ¦ Máy tính đang ở chế độ xem: tạm thời không nhận ảnh. Ảnh vẫn chờ ở đây. ¦ Komputer dalam mode lihat: untuk sementara tidak menerima foto. Foto tetap menunggu di sini.
+Impossible de ranger la photo sur l’ordinateur (disque plein ?). ¦ Không lưu được ảnh trên máy tính (ổ đĩa đầy?). ¦ Foto tidak dapat disimpan di komputer (disk penuh?).
+Choisis à quoi relier. ¦ Hãy chọn liên kết với gì. ¦ Pilih tautkan ke mana.
+Introuvable. ¦ Không tìm thấy. ¦ Tidak ditemukan.
+Cette fiche est verrouillée : rien n’y est relié. ¦ Hồ sơ này đã khoá: không liên kết gì vào. ¦ Catatan ini terkunci: tidak ada yang ditautkan ke sana.
+Trop tard : cette photo a été effacée pour de bon. ¦ Quá muộn: ảnh này đã bị xoá hẳn. ¦ Terlambat: foto ini sudah dihapus permanen.
+Téléphone de terrain : il peut seulement déposer des photos dans 📥 À trier. ¦ Điện thoại thực địa: chỉ có thể gửi ảnh vào 📥 Cần sắp xếp. ¦ Ponsel lapangan: hanya bisa menitipkan foto ke 📥 Perlu dipilah.

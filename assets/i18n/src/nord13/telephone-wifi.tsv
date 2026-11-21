@@ -1,0 +1,199 @@
+fr ¦ el ¦ bg
+# 📱 la page du téléphone de terrain (assets/js/app-terrain.js)
+📶 relié ¦ 📶 συνδεδεμένο ¦ 📶 свързан
+⏸ hors wifi ¦ ⏸ χωρίς wifi ¦ ⏸ без wifi
+Le mot de passe de la généalogie : vérifié par l’ordinateur, jamais gardé sur ce téléphone. ¦ Ο κωδικός της γενεαλογίας: τον ελέγχει ο υπολογιστής, δεν φυλάσσεται ποτέ σε αυτό το τηλέφωνο. ¦ Паролата на родословието: проверява я компютърът, никога не се пази на този телефон.
+Le navigateur écrit « Non sécurisé » : c’est vrai, la porte du wifi n’a pas de HTTPS. N’envoie que sur le wifi de la maison, protégé par sa clé. ¦ Ο φυλλομετρητής γράφει «Μη ασφαλές»: είναι αλήθεια, η πόρτα του wifi δεν έχει HTTPS. Στείλε μόνο από το wifi του σπιτιού, προστατευμένο με το κλειδί του. ¦ Браузърът пише „Не е защитено“: така е, вратата на wifi няма HTTPS. Изпращай само през домашния wifi, защитен с ключ.
+Tes photos attendent dans cette page. ¦ Οι φωτογραφίες σου περιμένουν σε αυτή τη σελίδα. ¦ Снимките ти чакат на тази страница.
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). ¦ Ο υπολογιστής δεν απαντά (σε αναστολή, κλειστός ή πόρτα κλειστή). ¦ Компютърът не отговаря (в режим на сън, изключен или вратата е затворена).
+Choisir une personne ou une visite… ¦ Διάλεξε πρόσωπο ή επίσκεψη… ¦ Избери човек или посещение…
+Une ligne (facultatif) ¦ Μία γραμμή (προαιρετικό) ¦ Един ред (по желание)
+Pas de wifi de la maison : les photos se prennent avec l’appareil photo du téléphone, puis « 🖼 Choisir » au retour. ¦ Χωρίς το wifi του σπιτιού: τράβα τις φωτογραφίες με την κάμερα του τηλεφώνου και μετά «🖼 Επιλογή» όταν γυρίσεις. ¦ Няма домашен wifi: снимай с камерата на телефона, а после „🖼 Избери“ при връщане.
+Prendre une photo ¦ Τράβα φωτογραφία ¦ Направи снимка
+Choisir dans la galerie ¦ Επιλογή από τη συλλογή ¦ Избери от галерията
+📍 = la photo contient une position GPS (retirée à l’arrivée, réglage) ¦ 📍 = η φωτογραφία περιέχει θέση GPS (αφαιρείται κατά την άφιξη, ρύθμιση) ¦ 📍 = снимката съдържа GPS позиция (премахва се при пристигане, настройка)
+Tombe famille LACOMBE, allée 4 ¦ Τάφος οικογένειας LACOMBE, διάδρομος 4 ¦ Гроб на семейство LACOMBE, алея 4
+Envoyer : {n} ¦ Αποστολή: {n} ¦ Изпрати: {n}
+Sans wifi, garde cette page ouverte : les photos attendent ici et partent toutes seules au retour. Pour une journée entière aux archives, prends plutôt la visite par fichier. ¦ Χωρίς wifi, κράτα αυτή τη σελίδα ανοιχτή: οι φωτογραφίες περιμένουν εδώ και φεύγουν μόνες τους όταν γυρίσεις. Για μια ολόκληρη μέρα στο αρχείο, προτίμησε την επίσκεψη με αρχείο. ¦ Без wifi дръж тази страница отворена: снимките чакат тук и тръгват сами при връщане. За цял ден в архива по-добре използвай посещението чрез файл.
+Le téléphone ne sait pas si une photo a été rangée ni où : il ne lit rien de l’arbre. ¦ Το τηλέφωνο δεν ξέρει αν ή πού τακτοποιήθηκε μια φωτογραφία: δεν διαβάζει τίποτα από το δέντρο. ¦ Телефонът не знае дали и къде е подредена снимка: не чете нищо от дървото.
+Nom de la personne ou de la visite ¦ Όνομα προσώπου ή επίσκεψης ¦ Име на човека или посещението
+Seulement les personnes décédées, sans les fiches confidentielles. ¦ Μόνο πρόσωπα που έχουν πεθάνει, χωρίς τις εμπιστευτικές καρτέλες. ¦ Само починали, без поверителните картони.
+Choisis pour qui est cette photo. ¦ Διάλεξε για ποιον είναι αυτή η φωτογραφία. ¦ Избери за кого е тази снимка.
+Verrouillée après 15 minutes sans geste : redonne le mot de passe. Tes photos attendent. ¦ Κλειδώθηκε μετά από 15 λεπτά χωρίς κίνηση: δώσε ξανά τον κωδικό. Οι φωτογραφίες σου περιμένουν. ¦ Заключено след 15 минути без действие: въведи паролата отново. Снимките ти чакат.
+Ce téléphone n’est plus autorisé sur l’ordinateur. ¦ Αυτό το τηλέφωνο δεν επιτρέπεται πια στον υπολογιστή. ¦ Този телефон вече не е разрешен на компютъра.
+Envoyées dans 📥 À trier : {n} ¦ Στάλθηκαν στο 📥 Για ταξινόμηση: {n} ¦ Изпратени в 📥 За подреждане: {n}
+Refusé par l’ordinateur ¦ Απορρίφθηκε από τον υπολογιστή ¦ Отказано от компютъра
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). En attente : {n} ; nouvel essai toutes les 30 secondes tant que la page est ouverte. ¦ Ο υπολογιστής δεν απαντά (σε αναστολή, κλειστός ή πόρτα κλειστή). Σε αναμονή: {n}· νέα προσπάθεια κάθε 30 δευτερόλεπτα όσο η σελίδα είναι ανοιχτή. ¦ Компютърът не отговаря (в режим на сън, изключен или вратата е затворена). Чакат: {n}; нов опит на всеки 30 секунди, докато страницата е отворена.
+↻ Réessayer ¦ ↻ Δοκίμασε ξανά ¦ ↻ Опитай пак
+Envoi en cours : {i} sur {n} ¦ Αποστολή: {i} από {n} ¦ Изпращане: {i} от {n}
+Garde la page ouverte. ¦ Κράτα τη σελίδα ανοιχτή. ¦ Дръж страницата отворена.
+En attente depuis {when} : {n} ¦ Σε αναμονή από {when}: {n} ¦ Чакат от {when}: {n}
+Elles étaient gardées dans ce téléphone. ¦ Φυλάσσονταν σε αυτό το τηλέφωνο. ¦ Те бяха пазени в този телефон.
+Les envoyer ¦ Αποστολή τους ¦ Изпрати ги
+Les oublier ¦ Ξέχασέ τες ¦ Забрави ги
+Retirées de la boîte : {n} ¦ Αφαιρέθηκαν από το κουτί: {n} ¦ Махнати от кутията: {n}
+« {name} » n’est plus ouverte sur l’ordinateur : tes photos restent en attente ici. ¦ Το «{name}» δεν είναι πια ανοιχτό στον υπολογιστή: οι φωτογραφίες σου περιμένουν εδώ. ¦ „{name}“ вече не е отворена на компютъра: снимките ти продължават да чакат тук.
+Des photos étaient en attente, mais le téléphone a libéré la place. Retrouve-les dans ta galerie et « 🖼 Choisir ». ¦ Περίμεναν φωτογραφίες, αλλά το τηλέφωνο ελευθέρωσε τον χώρο. Βρες τες στη συλλογή σου και «🖼 Επιλογή». ¦ Имаше чакащи снимки, но телефонът освободи мястото. Намери ги в галерията и „🖼 Избери“.
+📱 Envoyer des photos à l’ordinateur principal ¦ 📱 Στείλε φωτογραφίες στον κύριο υπολογιστή ¦ 📱 Изпрати снимки на главния компютър
+# 📥 À trier, sur l'ordinateur (assets/js/app-a-trier.js)
+📥 À trier ¦ 📥 Για ταξινόμηση ¦ 📥 За подреждане
+À trier ¦ Για ταξινόμηση ¦ За подреждане
+Listes · Médias et documents ¦ Λίστες · Πολυμέσα και έγγραφα ¦ Списъци · Медии и документи
+Les photos envoyées par un téléphone de terrain arrivent ici, hors de l’arbre. Relie chacune à ce qu’elle montre, ou supprime-la. ¦ Οι φωτογραφίες που στέλνει ένα τηλέφωνο πεδίου φτάνουν εδώ, έξω από το δέντρο. Σύνδεσε καθεμία με αυτό που δείχνει ή διάγραψέ την. ¦ Снимките от теренния телефон пристигат тук, извън дървото. Свържи всяка с това, което показва, или я изтрий.
+Chercher… (texte, téléphone, personne) ¦ Αναζήτηση… (κείμενο, τηλέφωνο, πρόσωπο) ¦ Търси… (текст, телефон, човек)
+🗑 Supprimées ¦ 🗑 Διαγραμμένες ¦ 🗑 Изтрити
+Reliées ¦ Συνδεδεμένες ¦ Свързани
+visite {name} ¦ επίσκεψη {name} ¦ посещение {name}
+pour {name} ¦ για {name} ¦ за {name}
+personne pas choisie ¦ δεν επιλέχθηκε πρόσωπο ¦ няма избран човек
+📍 GPS gardé ¦ 📍 GPS διατηρήθηκε ¦ 📍 GPS запазен
+📍 GPS retiré ¦ 📍 GPS αφαιρέθηκε ¦ 📍 GPS премахнат
+🔗 reliée à {name} ¦ 🔗 συνδέθηκε με: {name} ¦ 🔗 свързана с: {name}
+effacée pour de bon le {date} ¦ διαγράφεται οριστικά στις {date} ¦ изтрива се окончателно на {date}
+🗄 Relier à la visite ¦ 🗄 Σύνδεση με την επίσκεψη ¦ 🗄 Свържи с посещението
+🔗 Relier à {name} ¦ 🔗 Σύνδεση με: {name} ¦ 🔗 Свържи с: {name}
+Relier à… ¦ Σύνδεση με… ¦ Свържи с…
+(sans texte) ¦ (χωρίς κείμενο) ¦ (без текст)
+Rien à trier : les photos du téléphone arriveront ici. ¦ Τίποτα για ταξινόμηση: οι φωτογραφίες του τηλεφώνου θα έρθουν εδώ. ¦ Няма какво да се подрежда: снимките от телефона ще пристигнат тук.
+Mode consultation : la boîte se lit, mais rien ne se relie ni ne se supprime. ¦ Λειτουργία προβολής: το κουτί διαβάζεται, αλλά τίποτα δεν συνδέεται ούτε διαγράφεται. ¦ Режим на разглеждане: кутията се чете, но нищо не се свързва и не се изтрива.
+Cochées : {n} ¦ Επιλεγμένες: {n} ¦ Отметнати: {n}
+Décocher ¦ Αποεπιλογή ¦ Махни отметката
+📍 Garder la position GPS ? ¦ 📍 Να κρατηθεί η θέση GPS; ¦ 📍 Да се запази ли GPS позицията?
+La photo contient une position GPS (utile pour situer une tombe). La garder pour la carte ? ¦ Η φωτογραφία περιέχει θέση GPS (χρήσιμη για να βρεθεί ένας τάφος). Να κρατηθεί για τον χάρτη; ¦ Снимката съдържа GPS позиция (полезна, за да се намери гроб). Да се запази ли за картата?
+La retirer ¦ Αφαίρεσέ την ¦ Премахни я
+✓ Reliées à {name} : {n} ¦ ✓ Συνδέθηκαν με: {name}: {n} ¦ ✓ Свързани с: {name}: {n}
+🪦 Une photo de tombe : ajouter aussi l’inhumation à {name} ? ¦ 🪦 Φωτογραφία τάφου: να προστεθεί και η ταφή στο {name}; ¦ 🪦 Снимка на гроб: да се добави ли и погребение за: {name}?
+✓ Inhumation ajoutée à {name}. ¦ ✓ Η ταφή προστέθηκε: {name}. ¦ ✓ Погребението е добавено: {name}.
+Relier à un événement ¦ Σύνδεση με γεγονός ¦ Свържи със събитие
+Relier à une source ¦ Σύνδεση με πηγή ¦ Свържи с източник
+✓ Supprimées : {n} ¦ ✓ Διαγράφηκαν: {n} ¦ ✓ Изтрити: {n}
+✓ Supprimées : {n}. Gardées 30 jours dans « 🗑 Supprimées » (Filtrer ▾). ¦ ✓ Διαγράφηκαν: {n}. Φυλάσσονται 30 ημέρες στις «🗑 Διαγραμμένες» (Φίλτρο ▾). ¦ ✓ Изтрити: {n}. Пазят се 30 дни в „🗑 Изтрити“ (Филтър ▾).
+✎ Modifier le texte ¦ ✎ Επεξεργασία κειμένου ¦ ✎ Промени текста
+Texte enregistré ¦ Το κείμενο αποθηκεύτηκε ¦ Текстът е запазен
+👤 Une personne… ¦ 👤 Ένα πρόσωπο… ¦ 👤 Човек…
+📅 Un événement… (inhumation, mariage…) ¦ 📅 Ένα γεγονός… (ταφή, γάμος…) ¦ 📅 Събитие… (погребение, брак…)
+📚 Une source… (l’acte, la cote) ¦ 📚 Μια πηγή… (η πράξη, η ταξιθέτηση) ¦ 📚 Източник… (актът, сигнатурата)
+🗄 La visite d’archives proposée ¦ 🗄 Η προτεινόμενη επίσκεψη στο αρχείο ¦ 🗄 Предложеното посещение в архива
+🔍 Ouvrir en grand ¦ 🔍 Άνοιγμα σε μεγάλο μέγεθος ¦ 🔍 Отвори в голям размер
+⟲ Tourner ¦ ⟲ Περιστροφή ¦ ⟲ Завърти
+⤓ Exporter l’original ¦ ⤓ Εξαγωγή του πρωτοτύπου ¦ ⤓ Експортирай оригинала
+Remise dans 📥 À trier. ¦ Επέστρεψε στο 📥 Για ταξινόμηση. ¦ Върната в 📥 За подреждане.
+📥 Arrivées du téléphone : {n} ¦ 📥 Ήρθαν από το τηλέφωνο: {n} ¦ 📥 Пристигнали от телефона: {n}
+📥 À trier : {n} ¦ 📥 Για ταξινόμηση: {n} ¦ 📥 За подреждане: {n}
+# 🖧 Plusieurs ordinateurs → 📱 Téléphones de terrain (assets/js/app-reseau-local.js)
+téléphone de terrain ¦ τηλέφωνο πεδίου ¦ теренен телефон
+Téléphone de terrain ¦ Τηλέφωνο πεδίου ¦ Теренен телефон
+📱 Téléphone de terrain ¦ 📱 Τηλέφωνο πεδίου ¦ 📱 Теренен телефон
+📱 Téléphones de terrain ¦ 📱 Τηλέφωνα πεδίου ¦ 📱 Теренни телефони
+👁 Lecture seule ¦ 👁 Μόνο ανάγνωση ¦ 👁 Само четене
+déposer · liste réduite ¦ κατάθεση · σύντομη λίστα ¦ оставяне · съкратен списък
+＋ Ajouter un téléphone de terrain ¦ ＋ Προσθήκη τηλεφώνου πεδίου ¦ ＋ Добави теренен телефон
+Scanne ce QR code avec l’appareil photo du téléphone ¦ Σάρωσε αυτόν τον κωδικό QR με την κάμερα του τηλεφώνου ¦ Сканирай този QR код с камерата на телефона
+Le code d’invitation est déjà dans le QR code. Sur le téléphone : « Demander l’accès », puis compare le code à 6 chiffres ici. ¦ Ο κωδικός πρόσκλησης είναι ήδη στον κωδικό QR. Στο τηλέφωνο: «Αίτηση πρόσβασης» και μετά σύγκρινε εδώ τον 6ψήφιο κωδικό. ¦ Кодът за покана вече е в QR кода. На телефона: „Поискай достъп“, после сравни тук 6-цифрения код.
+Un 📱 téléphone de terrain ne voit pas l’arbre : il dépose seulement des photos dans 📥 À trier. ¦ Ένα 📱 τηλέφωνο πεδίου δεν βλέπει το δέντρο: μόνο αφήνει φωτογραφίες στο 📥 Για ταξινόμηση. ¦ 📱 Теренният телефон не вижда дървото: само оставя снимки в 📥 За подреждане.
+⏻ Retirer tous les téléphones ¦ ⏻ Αφαίρεση όλων των τηλεφώνων ¦ ⏻ Премахни всички телефони
+Les photos arrivent dans Listes → Médias et documents → 📥 À trier. ¦ Οι φωτογραφίες φτάνουν στο Λίστες → Πολυμέσα και έγγραφα → 📥 Για ταξινόμηση. ¦ Снимките пристигат в Списъци → Медии и документи → 📥 За подреждане.
+📥 Ouvrir À trier ¦ 📥 Άνοιγμα «Για ταξινόμηση» ¦ 📥 Отвори „За подреждане“
+Plus aucun téléphone ne pourra rien envoyer. Leurs photos déjà déposées restent dans 📥 À trier (réglage). ¦ Κανένα τηλέφωνο δεν θα μπορεί πια να στείλει τίποτα. Οι φωτογραφίες που έχουν ήδη αφήσει μένουν στο 📥 Για ταξινόμηση (ρύθμιση). ¦ Никой телефон вече няма да може да изпраща. Вече оставените им снимки остават в 📥 За подреждане (настройка).
+Téléphones retirés : {n} ¦ Τηλέφωνα που αφαιρέθηκαν: {n} ¦ Премахнати телефони: {n}
+Valeur refusée : réglage inchangé. ¦ Η τιμή απορρίφθηκε: η ρύθμιση δεν άλλαξε. ¦ Стойността е отказана: настройката е без промяна.
+✓ « {name} » autorisé, 📱 téléphone de terrain. ¦ ✓ Το «{name}» επιτράπηκε, 📱 τηλέφωνο πεδίου. ¦ ✓ „{name}“ е разрешен, 📱 теренен телефон.
+Sorte d’appareil ¦ Είδος συσκευής ¦ Вид устройство
+📱 Téléphone de terrain : déposer des photos et une ligne de texte dans 📥 À trier. Il ne voit pas l’arbre, ne modifie rien. Il devra aussi donner le mot de passe de la généalogie. ¦ 📱 Τηλέφωνο πεδίου: αφήνει φωτογραφίες και μια γραμμή κειμένου στο 📥 Για ταξινόμηση. Δεν βλέπει το δέντρο, δεν αλλάζει τίποτα. Θα πρέπει επίσης να δώσει τον κωδικό της γενεαλογίας. ¦ 📱 Теренен телефон: оставя снимки и ред текст в 📥 За подреждане. Не вижда дървото, нищо не променя. Ще трябва да въведе и паролата на родословието.
+Ce que le téléphone voit ¦ Τι βλέπει το τηλέφωνο ¦ Какво вижда телефонът
+Pour choisir « Pour qui ? » ¦ Για την επιλογή «Για ποιον;» ¦ За избора „За кого?“
+visites d’archives et personnes décédées ¦ επισκέψεις σε αρχεία και πρόσωπα που έχουν πεθάνει ¦ посещения в архива и починали
+visites d’archives seulement ¦ μόνο επισκέψεις σε αρχεία ¦ само посещения в архива
+rien : tout se range sur l’ordinateur ¦ τίποτα: όλα ταξινομούνται στον υπολογιστή ¦ нищо: всичко се подрежда на компютъра
+Montrer aussi les vivants (nom seulement) ¦ Εμφάνιση και των ζωντανών (μόνο όνομα) ¦ Показвай и живите (само името)
+Montrer aussi les fiches confidentielles (nom seulement) ¦ Εμφάνιση και των εμπιστευτικών καρτελών (μόνο όνομα) ¦ Показвай и поверителните картони (само името)
+« Pour qui ? » sur le téléphone ¦ «Για ποιον;» στο τηλέφωνο ¦ „За кого?“ на телефона
+obligatoire (plus lent sur place) ¦ υποχρεωτικό (πιο αργό επί τόπου) ¦ задължително (по-бавно на място)
+Une ligne de texte ¦ Μία γραμμή κειμένου ¦ Ред текст
+une pour tout l’envoi ¦ μία για όλη την αποστολή ¦ един за цялото изпращане
+une par photo ¦ μία ανά φωτογραφία ¦ един за снимка
+Les photos qui arrivent ¦ Οι εισερχόμενες φωτογραφίες ¦ Пристигащите снимки
+Où arrivent les photos ¦ Πού φτάνουν οι φωτογραφίες ¦ Къде пристигат снимките
+dans 📥 À trier : rien n’entre dans l’arbre sans toi ¦ στο 📥 Για ταξινόμηση: τίποτα δεν μπαίνει στο δέντρο χωρίς εσένα ¦ в 📥 За подреждане: без теб нищо не влиза в дървото
+reliées tout de suite à la personne choisie (visibles dans À trier, avec ↶ Annuler) ¦ συνδέονται αμέσως με το επιλεγμένο πρόσωπο (φαίνονται στο «Για ταξινόμηση», με ↶ Αναίρεση) ¦ веднага се свързват с избрания човек (видими в „За подреждане“, с ↶ Отмени)
+Position GPS de la photo ¦ Θέση GPS της φωτογραφίας ¦ GPS позиция на снимката
+retirée à l’arrivée ¦ αφαιρείται κατά την άφιξη ¦ премахва се при пристигане
+gardée à part, à décider en reliant ¦ φυλάσσεται χωριστά, αποφασίζεις κατά τη σύνδεση ¦ пази се отделно, решаваш при свързване
+gardée (la carte peut la montrer) ¦ διατηρείται (ο χάρτης μπορεί να τη δείξει) ¦ запазва се (картата може да я покаже)
+Taille maximale d’une photo ¦ Μέγιστο μέγεθος φωτογραφίας ¦ Най-голям размер на снимка
+Photos par envoi ¦ Φωτογραφίες ανά αποστολή ¦ Снимки на изпращане
+Photos dans la boîte À trier, au plus ¦ Φωτογραφίες στο κουτί «Για ταξινόμηση», το πολύ ¦ Снимки в кутията „За подреждане“, най-много
+Garder l’original (décoché : réduite à 2000 points) ¦ Διατήρηση του πρωτοτύπου (χωρίς επιλογή: σμίκρυνση σε 2000 σημεία) ¦ Запазване на оригинала (без отметка: намалена до 2000 точки)
+coché conseillé ¦ επιλεγμένο συνιστάται ¦ с отметка препоръчано
+décoché conseillé ¦ χωρίς επιλογή συνιστάται ¦ без отметка препоръчано
+# 🖧 réglages des téléphones de terrain (suite), 📜 Qui a vu quoi, messages du serveur (lib/telephone_wifi.php, lib/reseau_local.php)
+gardée 30 jours dans « 🗑 Supprimées », puis effacée ¦ φυλάσσεται 30 ημέρες στις «🗑 Διαγραμμένες», μετά σβήνεται ¦ пази се 30 дни в „🗑 Изтрити“, после се изтрива
+effacée tout de suite (après les 10 secondes de ↶ Annuler) ¦ σβήνεται αμέσως (μετά τα 10 δευτερόλεπτα του ↶ Αναίρεση) ¦ изтрива се веднага (след 10-те секунди за ↶ Отмени)
+Photo de tombe reliée ¦ Συνδεδεμένη φωτογραφία τάφου ¦ Свързана снимка на гроб
+proposer d’ajouter l’inhumation ¦ πρόταση προσθήκης της ταφής ¦ предлагай добавяне на погребение
+ne rien proposer ¦ καμία πρόταση ¦ не предлагай нищо
+Pastille 📥 dans la barre du haut ¦ Σήμα 📥 στην πάνω γραμμή ¦ Значка 📥 в горната лента
+oui, avec le nombre ¦ ναι, με τον αριθμό ¦ да, с броя
+non (seulement dans Listes) ¦ όχι (μόνο στις Λίστες) ¦ не (само в Списъци)
+À l’arrivée de photos ¦ Όταν φτάνουν φωτογραφίες ¦ При пристигане на снимки
+seulement la pastille ¦ μόνο το σήμα ¦ само значката
+un petit message en bas de l’écran ¦ ένα μικρό μήνυμα στο κάτω μέρος της οθόνης ¦ кратко съобщение в долната част на екрана
+Sans wifi ¦ Χωρίς wifi ¦ Без wifi
+Hors du wifi de la maison ¦ Εκτός wifi του σπιτιού ¦ Извън домашния wifi
+garder en attente dans la page, envoi tout seul au retour ¦ αναμονή στη σελίδα, αποστολή αυτόματα στην επιστροφή ¦ чакат на страницата, изпращат се сами при връщане
+garder, mais demander avant d’envoyer ¦ διατήρηση, αλλά ερώτηση πριν την αποστολή ¦ пази, но питай преди изпращане
+refuser de prendre des photos hors wifi ¦ να μην επιτρέπονται φωτογραφίες εκτός wifi ¦ не позволявай снимки извън wifi
+Après l’envoi ¦ Μετά την αποστολή ¦ След изпращане
+effacer les photos de la page ¦ διαγραφή των φωτογραφιών από τη σελίδα ¦ изтрий снимките от страницата
+garder les vignettes de la journée ¦ διατήρηση των μικρογραφιών της ημέρας ¦ пази миниатюрите за деня
+« ↶ Annuler » sur le téléphone ¦ «↶ Αναίρεση» στο τηλέφωνο ¦ „↶ Отмени“ на телефона
+tant que les photos ne sont pas rangées ¦ όσο οι φωτογραφίες δεν έχουν ταξινομηθεί ¦ докато снимките не са подредени
+pendant 10 secondes ¦ για 10 δευτερόλεπτα ¦ в продължение на 10 секунди
+Mot de passe de la généalogie sur le téléphone ¦ Κωδικός της γενεαλογίας στο τηλέφωνο ¦ Парола на родословието на телефона
+demandé à l’ouverture, redemandé après 15 min sans geste ¦ ζητείται στο άνοιγμα και ξανά μετά από 15 λεπτά χωρίς κίνηση ¦ иска се при отваряне и отново след 15 мин без действие
+demandé seulement pour voir la liste ; déposer avec le jeton seul ¦ ζητείται μόνο για τη λίστα· κατάθεση μόνο με το διακριτικό ¦ иска се само за списъка; оставяне само с токена
+Cet ordinateur en mode consultation ¦ Αυτός ο υπολογιστής σε λειτουργία προβολής ¦ Този компютър в режим на разглеждане
+le téléphone ne dépose plus ¦ το τηλέφωνο δεν αφήνει πια τίποτα ¦ телефонът вече не оставя нищо
+le téléphone dépose encore ¦ το τηλέφωνο αφήνει ακόμα ¦ телефонът продължава да оставя
+Sorte proposée quand la demande vient d’un téléphone ¦ Είδος που προτείνεται όταν το αίτημα έρχεται από τηλέφωνο ¦ Вид, предлаган при заявка от телефон
+Retirer un téléphone ¦ Αφαίρεση τηλεφώνου ¦ Премахване на телефон
+ses photos déjà déposées restent à trier ¦ οι φωτογραφίες που έχει ήδη αφήσει μένουν για ταξινόμηση ¦ вече оставените му снимки остават за подреждане
+elles sont supprimées aussi (30 jours dans « 🗑 Supprimées ») ¦ διαγράφονται κι αυτές (30 ημέρες στις «🗑 Διαγραμμένες») ¦ и те се изтриват (30 дни в „🗑 Изтрити“)
+📜 Registre ¦ 📜 Μητρώο ¦ 📜 Дневник
+noter chaque dépôt, chaque fichier refusé et chaque liste vue ¦ καταγραφή κάθε κατάθεσης, κάθε αρχείου που απορρίφθηκε και κάθε λίστας που προβλήθηκε ¦ записвай всяко оставяне, всеки отказан файл и всеки прегледан списък
+seulement les dépôts ¦ μόνο οι καταθέσεις ¦ само оставянията
+Photo déposée ¦ Φωτογραφία κατατέθηκε ¦ Снимка оставена
+Fichier refusé ¦ Αρχείο απορρίφθηκε ¦ Файлът е отказан
+Liste réduite vue ¦ Προβλήθηκε η σύντομη λίστα ¦ Прегледан съкратен списък
+Photo reliée ¦ Φωτογραφία συνδέθηκε ¦ Снимката е свързана
+pas une photo ¦ δεν είναι φωτογραφία ¦ не е снимка
+trop grosse ¦ πολύ μεγάλη ¦ твърде голяма
+trop grande ¦ υπερβολικές διαστάσεις ¦ прекалено големи размери
+abîmée ¦ κατεστραμμένη ¦ повредена
+trop de fichiers ¦ πάρα πολλά αρχεία ¦ твърде много файлове
+trop de photos ¦ πάρα πολλές φωτογραφίες ¦ твърде много снимки
+trop gros en tout ¦ πολύ μεγάλο συνολικά ¦ твърде голямо общо
+boîte pleine ¦ κουτί γεμάτο ¦ кутията е пълна
+personne refusée ¦ πρόσωπο απορρίφθηκε ¦ отказан човек
+réponses : {n} ¦ απαντήσεις: {n} ¦ отговори: {n}
+Photo trop grosse (plus de {n} Mo, la taille maximale réglée sur l’ordinateur). ¦ Η φωτογραφία είναι πολύ μεγάλη (πάνω από {n} MB, το μέγιστο μέγεθος που ορίστηκε στον υπολογιστή). ¦ Снимката е твърде голяма (над {n} MB, най-големият размер, зададен на компютъра).
+Trop d’essais depuis ce téléphone : réessaie dans {n} min. ¦ Πάρα πολλές προσπάθειες από αυτό το τηλέφωνο: δοκίμασε ξανά σε {n} λεπτά. ¦ Твърде много опити от този телефон: опитай пак след {n} мин.
+Trop de photos dans cet envoi ({n} au plus). ¦ Πάρα πολλές φωτογραφίες σε αυτή την αποστολή (το πολύ {n}). ¦ Твърде много снимки в това изпращане (най-много {n}).
+Photo du téléphone ¦ Φωτογραφία από το τηλέφωνο ¦ Снимка от телефона
+Ce format de photo ne se lit pas sur cet ordinateur : choisis-la en JPEG. ¦ Αυτή η μορφή φωτογραφίας δεν διαβάζεται σε αυτόν τον υπολογιστή: διάλεξέ τη σε JPEG. ¦ Този формат на снимка не се чете на този компютър: избери я в JPEG.
+Ce n’est pas une photo : seules les photos JPEG, PNG, WEBP et AVIF sont acceptées. ¦ Δεν είναι φωτογραφία: γίνονται δεκτές μόνο φωτογραφίες JPEG, PNG, WEBP και AVIF. ¦ Това не е снимка: приемат се само снимки JPEG, PNG, WEBP и AVIF.
+Image abîmée ou illisible. ¦ Η εικόνα είναι κατεστραμμένη ή δυσανάγνωστη. ¦ Изображението е повредено или нечетимо.
+Image trop grande (plus de 50 millions de points) : refusée. ¦ Η εικόνα είναι πολύ μεγάλη (πάνω από 50 εκατομμύρια σημεία): απορρίφθηκε. ¦ Изображението е твърде голямо (над 50 милиона точки): отказано.
+Une seule photo à la fois. ¦ Μόνο μία φωτογραφία τη φορά. ¦ Само една снимка наведнъж.
+La photo n’est pas arrivée en entier : elle sera renvoyée. ¦ Η φωτογραφία δεν έφτασε ολόκληρη: θα σταλεί ξανά. ¦ Снимката не пристигна цялата: ще бъде изпратена отново.
+Personne ou visite inconnue. ¦ Άγνωστο πρόσωπο ή επίσκεψη. ¦ Непознат човек или посещение.
+📥 La boîte est pleine sur l’ordinateur : trie-la d’abord. ¦ 📥 Το κουτί στον υπολογιστή είναι γεμάτο: ταξινόμησέ το πρώτα. ¦ 📥 Кутията на компютъра е пълна: първо я подреди.
+Cet envoi est trop gros en tout (200 Mo au plus) : envoie le reste ensuite. ¦ Αυτή η αποστολή είναι πολύ μεγάλη συνολικά (το πολύ 200 MB): στείλε τα υπόλοιπα μετά. ¦ Това изпращане е твърде голямо общо (най-много 200 MB): изпрати останалото после.
+La généalogie n’est pas prête sur l’ordinateur. ¦ Η γενεαλογία δεν είναι έτοιμη στον υπολογιστή. ¦ Родословието не е готово на компютъра.
+L’ordinateur est en mode consultation : il ne reçoit pas de photo pour l’instant. Elles restent en attente ici. ¦ Ο υπολογιστής είναι σε λειτουργία προβολής: προς το παρόν δεν δέχεται φωτογραφίες. Περιμένουν εδώ. ¦ Компютърът е в режим на разглеждане: засега не приема снимки. Те чакат тук.
+Impossible de ranger la photo sur l’ordinateur (disque plein ?). ¦ Η φωτογραφία δεν μπορεί να αποθηκευτεί στον υπολογιστή (γεμάτος δίσκος;) ¦ Снимката не може да се запази на компютъра (пълен диск?).
+Choisis à quoi relier. ¦ Διάλεξε με τι θα συνδεθεί. ¦ Избери с какво да се свърже.
+Introuvable. ¦ Δεν βρέθηκε. ¦ Не е намерено.
+Cette fiche est verrouillée : rien n’y est relié. ¦ Αυτή η καρτέλα είναι κλειδωμένη: δεν συνδέεται τίποτα μαζί της. ¦ Този картон е заключен: нищо не се свързва с него.
+Trop tard : cette photo a été effacée pour de bon. ¦ Πολύ αργά: αυτή η φωτογραφία σβήστηκε οριστικά. ¦ Твърде късно: тази снимка е изтрита окончателно.
+Téléphone de terrain : il peut seulement déposer des photos dans 📥 À trier. ¦ Τηλέφωνο πεδίου: μπορεί μόνο να αφήνει φωτογραφίες στο 📥 Για ταξινόμηση. ¦ Теренен телефон: може само да оставя снимки в 📥 За подреждане.

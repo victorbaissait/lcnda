@@ -1,0 +1,199 @@
+fr ¦ sq ¦ mt
+# 📱 la page du téléphone de terrain (assets/js/app-terrain.js)
+📶 relié ¦ 📶 i lidhur ¦ 📶 imqabbad
+⏸ hors wifi ¦ ⏸ pa wifi ¦ ⏸ bla wifi
+Le mot de passe de la généalogie : vérifié par l’ordinateur, jamais gardé sur ce téléphone. ¦ Fjalëkalimi i gjenealogjisë: e kontrollon kompjuteri, nuk ruhet kurrë në këtë telefon. ¦ Il-password tal-ġenealoġija: jiċċekkjaha l-kompjuter, qatt ma tinżamm f’dan it-telefon.
+Le navigateur écrit « Non sécurisé » : c’est vrai, la porte du wifi n’a pas de HTTPS. N’envoie que sur le wifi de la maison, protégé par sa clé. ¦ Shfletuesi shkruan «Jo i sigurt»: është e vërtetë, dera e wifi-t nuk ka HTTPS. Dërgo vetëm në wifi-n e shtëpisë, të mbrojtur me çelësin e tij. ¦ Il-browser jikteb “Mhux sigur”: hekk hu, il-bieb tal-wifi m’għandux HTTPS. Ibgħat biss fuq il-wifi tad-dar, protett biċ-ċavetta tiegħu.
+Tes photos attendent dans cette page. ¦ Fotot e tua presin në këtë faqe. ¦ Ir-ritratti tiegħek qed jistennew f’din il-paġna.
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). ¦ Kompjuteri nuk përgjigjet (në gjumë, i fikur ose dera e mbyllur). ¦ Il-kompjuter mhux iwieġeb (rieqed, mitfi jew il-bieb magħluq).
+Choisir une personne ou une visite… ¦ Zgjidh një person ose një vizitë… ¦ Agħżel persuna jew żjara…
+Une ligne (facultatif) ¦ Një rresht (sipas dëshirës) ¦ Linja waħda (mhux obbligatorja)
+Pas de wifi de la maison : les photos se prennent avec l’appareil photo du téléphone, puis « 🖼 Choisir » au retour. ¦ Pa wifi të shtëpisë: bëj fotot me kamerën e telefonit, pastaj «🖼 Zgjidh» kur të kthehesh. ¦ L-ebda wifi tad-dar: ħu r-ritratti bil-kamera tat-telefon, imbagħad “🖼 Agħżel” meta terġa’ lura.
+Prendre une photo ¦ Bëj një foto ¦ Ħu ritratt
+Choisir dans la galerie ¦ Zgjidh nga galeria ¦ Agħżel mill-gallerija
+📍 = la photo contient une position GPS (retirée à l’arrivée, réglage) ¦ 📍 = fotoja ka një pozicion GPS (hiqet në mbërritje, rregullim) ¦ 📍 = ir-ritratt fih pożizzjoni GPS (titneħħa mal-wasla, issettjar)
+Tombe famille LACOMBE, allée 4 ¦ Varri i familjes LACOMBE, rreshti 4 ¦ Qabar tal-familja LACOMBE, mogħdija 4
+Envoyer : {n} ¦ Dërgo: {n} ¦ Ibgħat: {n}
+Sans wifi, garde cette page ouverte : les photos attendent ici et partent toutes seules au retour. Pour une journée entière aux archives, prends plutôt la visite par fichier. ¦ Pa wifi, mbaje të hapur këtë faqe: fotot presin këtu dhe nisen vetë kur të kthehesh. Për një ditë të tërë në arkiv, përdor më mirë vizitën me skedar. ¦ Bla wifi, żomm din il-paġna miftuħa: ir-ritratti jistennew hawn u jitilqu waħedhom meta terġa’ lura. Għal ġurnata sħiħa fl-arkivji, uża aħjar iż-żjara b’fajl.
+Le téléphone ne sait pas si une photo a été rangée ni où : il ne lit rien de l’arbre. ¦ Telefoni nuk e di nëse dhe ku u rendit një foto: nuk lexon asgjë nga pema. ¦ It-telefon ma jafx jekk ritratt tqiegħedx f’postu u fejn: ma jaqra xejn mis-siġra.
+Nom de la personne ou de la visite ¦ Emri i personit ose i vizitës ¦ Isem il-persuna jew taż-żjara
+Seulement les personnes décédées, sans les fiches confidentielles. ¦ Vetëm personat e vdekur, pa skedat konfidenciale. ¦ Il-persuni mejtin biss, mingħajr ir-rekords kunfidenzjali.
+Choisis pour qui est cette photo. ¦ Zgjidh për kë është kjo foto. ¦ Agħżel għal min hu dan ir-ritratt.
+Verrouillée après 15 minutes sans geste : redonne le mot de passe. Tes photos attendent. ¦ U kyç pas 15 minutash pa veprim: jep sërish fjalëkalimin. Fotot e tua presin. ¦ Imsakkra wara 15-il minuta mingħajr attività: erġa’ daħħal il-password. Ir-ritratti tiegħek qed jistennew.
+Ce téléphone n’est plus autorisé sur l’ordinateur. ¦ Ky telefon nuk lejohet më në kompjuter. ¦ Dan it-telefon m’għadux awtorizzat fuq il-kompjuter.
+Envoyées dans 📥 À trier : {n} ¦ Dërguar te 📥 Për t’u renditur: {n} ¦ Mibgħuta f’📥 Biex jiġu ssortjati: {n}
+Refusé par l’ordinateur ¦ Refuzuar nga kompjuteri ¦ Miċħud mill-kompjuter
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). En attente : {n} ; nouvel essai toutes les 30 secondes tant que la page est ouverte. ¦ Kompjuteri nuk përgjigjet (në gjumë, i fikur ose dera e mbyllur). Në pritje: {n}; provë e re çdo 30 sekonda sa kohë që faqja është e hapur. ¦ Il-kompjuter mhux iwieġeb (rieqed, mitfi jew il-bieb magħluq). Qed jistennew: {n}; prova ġdida kull 30 sekonda sakemm il-paġna tkun miftuħa.
+↻ Réessayer ¦ ↻ Provo përsëri ¦ ↻ Erġa’ pprova
+Envoi en cours : {i} sur {n} ¦ Po dërgohet: {i} nga {n} ¦ Qed jintbagħat: {i} minn {n}
+Garde la page ouverte. ¦ Mbaje faqen të hapur. ¦ Żomm il-paġna miftuħa.
+En attente depuis {when} : {n} ¦ Në pritje që nga {when}: {n} ¦ Qed jistennew minn {when}: {n}
+Elles étaient gardées dans ce téléphone. ¦ Ishin ruajtur në këtë telefon. ¦ Kienu miżmuma f’dan it-telefon.
+Les envoyer ¦ Dërgoji ¦ Ibgħathom
+Les oublier ¦ Harroji ¦ Insihom
+Retirées de la boîte : {n} ¦ Hequr nga kutia: {n} ¦ Imneħħija mill-kaxxa: {n}
+« {name} » n’est plus ouverte sur l’ordinateur : tes photos restent en attente ici. ¦ «{name}» nuk është më e hapur në kompjuter: fotot e tua mbeten në pritje këtu. ¦ “{name}” m’għadhiex miftuħa fuq il-kompjuter: ir-ritratti tiegħek jibqgħu jistennew hawn.
+Des photos étaient en attente, mais le téléphone a libéré la place. Retrouve-les dans ta galerie et « 🖼 Choisir ». ¦ Kishte foto në pritje, por telefoni e liroi hapësirën. Gjeji në galeri dhe «🖼 Zgjidh». ¦ Kien hemm ritratti jistennew, iżda t-telefon ħeles l-ispazju. Sibhom fil-gallerija u “🖼 Agħżel”.
+📱 Envoyer des photos à l’ordinateur principal ¦ 📱 Dërgo foto te kompjuteri kryesor ¦ 📱 Ibgħat ritratti lill-kompjuter ewlieni
+# 📥 À trier, sur l'ordinateur (assets/js/app-a-trier.js)
+📥 À trier ¦ 📥 Për t’u renditur ¦ 📥 Biex jiġu ssortjati
+À trier ¦ Për t’u renditur ¦ Biex jiġu ssortjati
+Listes · Médias et documents ¦ Listat · Media dhe dokumente ¦ Listi · Midja u dokumenti
+Les photos envoyées par un téléphone de terrain arrivent ici, hors de l’arbre. Relie chacune à ce qu’elle montre, ou supprime-la. ¦ Fotot e dërguara nga një telefon terreni mbërrijnë këtu, jashtë pemës. Lidhe secilën me atë që tregon, ose fshije. ¦ Ir-ritratti mibgħuta minn telefon tal-post jaslu hawn, barra s-siġra. Orbot kull wieħed ma’ dak li juri, jew ħassru.
+Chercher… (texte, téléphone, personne) ¦ Kërko… (tekst, telefon, person) ¦ Fittex… (test, telefon, persuna)
+🗑 Supprimées ¦ 🗑 Të fshira ¦ 🗑 Imħassra
+Reliées ¦ Të lidhura ¦ Marbuta
+visite {name} ¦ vizita {name} ¦ żjara {name}
+pour {name} ¦ për {name} ¦ għal {name}
+personne pas choisie ¦ asnjë person i zgjedhur ¦ l-ebda persuna magħżula
+📍 GPS gardé ¦ 📍 GPS e ruajtur ¦ 📍 GPS miżmum
+📍 GPS retiré ¦ 📍 GPS i hequr ¦ 📍 GPS imneħħi
+🔗 reliée à {name} ¦ 🔗 e lidhur me {name} ¦ 🔗 marbut ma’ {name}
+effacée pour de bon le {date} ¦ fshihet përgjithmonë më {date} ¦ titħassar għal kollox fl-{date}
+🗄 Relier à la visite ¦ 🗄 Lidhe me vizitën ¦ 🗄 Orbot maż-żjara
+🔗 Relier à {name} ¦ 🔗 Lidhe me {name} ¦ 🔗 Orbot ma’ {name}
+Relier à… ¦ Lidhe me… ¦ Orbot ma’…
+(sans texte) ¦ (pa tekst) ¦ (bla test)
+Rien à trier : les photos du téléphone arriveront ici. ¦ Asgjë për t’u renditur: fotot nga telefoni do të mbërrijnë këtu. ¦ Xejn x’tissortja: ir-ritratti mit-telefon se jaslu hawn.
+Mode consultation : la boîte se lit, mais rien ne se relie ni ne se supprime. ¦ Mënyra e shikimit: kutia lexohet, por asgjë nuk lidhet e as fshihet. ¦ Modalità ta’ konsultazzjoni: il-kaxxa tinqara, iżda xejn ma jintrabat jew jitħassar.
+Cochées : {n} ¦ Të shënuara: {n} ¦ Immarkati: {n}
+Décocher ¦ Hiq shënimin ¦ Neħħi l-marka
+📍 Garder la position GPS ? ¦ 📍 Ta ruaj pozicionin GPS? ¦ 📍 Iżżomm il-pożizzjoni GPS?
+La photo contient une position GPS (utile pour situer une tombe). La garder pour la carte ? ¦ Fotoja ka një pozicion GPS (i dobishëm për të gjetur një varr). Ta ruaj për hartën? ¦ Ir-ritratt fih pożizzjoni GPS (utli biex issib qabar). Iżżommha għall-mappa?
+La retirer ¦ Hiqe ¦ Neħħiha
+✓ Reliées à {name} : {n} ¦ ✓ Të lidhura me {name}: {n} ¦ ✓ Marbuta ma’ {name}: {n}
+🪦 Une photo de tombe : ajouter aussi l’inhumation à {name} ? ¦ 🪦 Një foto varri: të shtohet edhe varrimi te {name}? ¦ 🪦 Ritratt ta’ qabar: iżżid ukoll id-difna lil {name}?
+✓ Inhumation ajoutée à {name}. ¦ ✓ Varrimi u shtua te {name}. ¦ ✓ Id-difna ġiet miżjuda lil {name}.
+Relier à un événement ¦ Lidhe me një ngjarje ¦ Orbot ma’ avveniment
+Relier à une source ¦ Lidhe me një burim ¦ Orbot ma’ sors
+✓ Supprimées : {n} ¦ ✓ U fshinë: {n} ¦ ✓ Imħassra: {n}
+✓ Supprimées : {n}. Gardées 30 jours dans « 🗑 Supprimées » (Filtrer ▾). ¦ ✓ U fshinë: {n}. Ruhen 30 ditë te «🗑 Të fshira» (Filtro ▾). ¦ ✓ Imħassra: {n}. Jinżammu 30 jum f’“🗑 Imħassra” (Iffiltra ▾).
+✎ Modifier le texte ¦ ✎ Ndrysho tekstin ¦ ✎ Ibdel it-test
+Texte enregistré ¦ Teksti u ruajt ¦ It-test ġie ssejvjat
+👤 Une personne… ¦ 👤 Një person… ¦ 👤 Persuna…
+📅 Un événement… (inhumation, mariage…) ¦ 📅 Një ngjarje… (varrim, martesë…) ¦ 📅 Avveniment… (difna, żwieġ…)
+📚 Une source… (l’acte, la cote) ¦ 📚 Një burim… (akti, kodi i arkivit) ¦ 📚 Sors… (l-att, ir-referenza)
+🗄 La visite d’archives proposée ¦ 🗄 Vizita e propozuar në arkiv ¦ 🗄 Iż-żjara proposta fl-arkivji
+🔍 Ouvrir en grand ¦ 🔍 Hape të madhe ¦ 🔍 Iftaħ kbir
+⟲ Tourner ¦ ⟲ Rrotullo ¦ ⟲ Dawwar
+⤓ Exporter l’original ¦ ⤓ Eksporto origjinalin ¦ ⤓ Esporta l-oriġinal
+Remise dans 📥 À trier. ¦ U kthye te 📥 Për t’u renditur. ¦ Imreġġa’ lura f’📥 Biex jiġu ssortjati.
+📥 Arrivées du téléphone : {n} ¦ 📥 Mbërritur nga telefoni: {n} ¦ 📥 Waslu mit-telefon: {n}
+📥 À trier : {n} ¦ 📥 Për t’u renditur: {n} ¦ 📥 Biex jiġu ssortjati: {n}
+# 🖧 Plusieurs ordinateurs → 📱 Téléphones de terrain (assets/js/app-reseau-local.js)
+téléphone de terrain ¦ telefon terreni ¦ telefon tal-post
+Téléphone de terrain ¦ Telefon terreni ¦ Telefon tal-post
+📱 Téléphone de terrain ¦ 📱 Telefon terreni ¦ 📱 Telefon tal-post
+📱 Téléphones de terrain ¦ 📱 Telefona terreni ¦ 📱 Telefowns tal-post
+👁 Lecture seule ¦ 👁 Vetëm lexim ¦ 👁 Qari biss
+déposer · liste réduite ¦ dorëzim · listë e shkurtër ¦ tħalli · lista mqassra
+＋ Ajouter un téléphone de terrain ¦ ＋ Shto një telefon terreni ¦ ＋ Żid telefon tal-post
+Scanne ce QR code avec l’appareil photo du téléphone ¦ Skano këtë kod QR me kamerën e telefonit ¦ Skennja dan il-kodiċi QR bil-kamera tat-telefon
+Le code d’invitation est déjà dans le QR code. Sur le téléphone : « Demander l’accès », puis compare le code à 6 chiffres ici. ¦ Kodi i ftesës është tashmë te kodi QR. Në telefon: «Kërko qasje», pastaj krahaso këtu kodin me 6 shifra. ¦ Il-kodiċi tal-istedina diġà jinsab fil-kodiċi QR. Fuq it-telefon: “Itlob aċċess”, imbagħad qabbel hawn il-kodiċi ta’ 6 ċifri.
+Un 📱 téléphone de terrain ne voit pas l’arbre : il dépose seulement des photos dans 📥 À trier. ¦ Një 📱 telefon terreni nuk e sheh pemën: vetëm lë foto te 📥 Për t’u renditur. ¦ 📱 Telefon tal-post ma jarax is-siġra: iħalli biss ritratti f’📥 Biex jiġu ssortjati.
+⏻ Retirer tous les téléphones ¦ ⏻ Hiq të gjithë telefonat ¦ ⏻ Neħħi t-telefowns kollha
+Les photos arrivent dans Listes → Médias et documents → 📥 À trier. ¦ Fotot mbërrijnë te Listat → Media dhe dokumente → 📥 Për t’u renditur. ¦ Ir-ritratti jaslu f’Listi → Midja u dokumenti → 📥 Biex jiġu ssortjati.
+📥 Ouvrir À trier ¦ 📥 Hap Për t’u renditur ¦ 📥 Iftaħ Biex jiġu ssortjati
+Plus aucun téléphone ne pourra rien envoyer. Leurs photos déjà déposées restent dans 📥 À trier (réglage). ¦ Asnjë telefon nuk do të mund të dërgojë më asgjë. Fotot e tyre të lëna tashmë mbeten te 📥 Për t’u renditur (rregullim). ¦ L-ebda telefon ma jkun jista’ jibgħat xejn aktar. Ir-ritratti li diġà ħallew jibqgħu f’📥 Biex jiġu ssortjati (issettjar).
+Téléphones retirés : {n} ¦ Telefona të hequr: {n} ¦ Telefowns imneħħija: {n}
+Valeur refusée : réglage inchangé. ¦ Vlera u refuzua: rregullimi i pandryshuar. ¦ Valur miċħud: l-issettjar ma nbidilx.
+✓ « {name} » autorisé, 📱 téléphone de terrain. ¦ ✓ «{name}» i lejuar, 📱 telefon terreni. ¦ ✓ “{name}” awtorizzat, 📱 telefon tal-post.
+Sorte d’appareil ¦ Lloji i pajisjes ¦ Tip ta’ apparat
+📱 Téléphone de terrain : déposer des photos et une ligne de texte dans 📥 À trier. Il ne voit pas l’arbre, ne modifie rien. Il devra aussi donner le mot de passe de la généalogie. ¦ 📱 Telefon terreni: lë foto dhe një rresht teksti te 📥 Për t’u renditur. Nuk e sheh pemën, nuk ndryshon asgjë. Do të duhet të japë edhe fjalëkalimin e gjenealogjisë. ¦ 📱 Telefon tal-post: iħalli ritratti u linja test f’📥 Biex jiġu ssortjati. Ma jarax is-siġra, ma jibdel xejn. Ikollu jagħti wkoll il-password tal-ġenealoġija.
+Ce que le téléphone voit ¦ Çfarë sheh telefoni ¦ X’jara t-telefon
+Pour choisir « Pour qui ? » ¦ Për të zgjedhur «Për kë?» ¦ Biex tagħżel “Għal min?”
+visites d’archives et personnes décédées ¦ vizita në arkiv dhe persona të vdekur ¦ żjarat fl-arkivji u persuni mejtin
+visites d’archives seulement ¦ vetëm vizita në arkiv ¦ żjarat fl-arkivji biss
+rien : tout se range sur l’ordinateur ¦ asgjë: gjithçka renditet në kompjuter ¦ xejn: kollox jiġi ssortjat fuq il-kompjuter
+Montrer aussi les vivants (nom seulement) ¦ Shfaq edhe të gjallët (vetëm emrin) ¦ Uri wkoll lill-ħajjin (l-isem biss)
+Montrer aussi les fiches confidentielles (nom seulement) ¦ Shfaq edhe skedat konfidenciale (vetëm emrin) ¦ Uri wkoll ir-rekords kunfidenzjali (l-isem biss)
+« Pour qui ? » sur le téléphone ¦ «Për kë?» në telefon ¦ “Għal min?” fuq it-telefon
+obligatoire (plus lent sur place) ¦ i detyrueshëm (më ngadalë në vend) ¦ obbligatorju (aktar bil-mod fuq il-post)
+Une ligne de texte ¦ Një rresht teksti ¦ Linja test
+une pour tout l’envoi ¦ një për gjithë dërgesën ¦ waħda għall-bgħit kollu
+une par photo ¦ një për foto ¦ waħda għal kull ritratt
+Les photos qui arrivent ¦ Fotot që mbërrijnë ¦ Ir-ritratti li jaslu
+Où arrivent les photos ¦ Ku mbërrijnë fotot ¦ Fejn jaslu r-ritratti
+dans 📥 À trier : rien n’entre dans l’arbre sans toi ¦ te 📥 Për t’u renditur: asgjë nuk hyn në pemë pa ty ¦ f’📥 Biex jiġu ssortjati: xejn ma jidħol fis-siġra mingħajrek
+reliées tout de suite à la personne choisie (visibles dans À trier, avec ↶ Annuler) ¦ lidhen menjëherë me personin e zgjedhur (të dukshme te Për t’u renditur, me ↶ Anulo) ¦ marbuta minnufih mal-persuna magħżula (jidhru f’Biex jiġu ssortjati, b’↶ Ħassar)
+Position GPS de la photo ¦ Pozicioni GPS i fotos ¦ Pożizzjoni GPS tar-ritratt
+retirée à l’arrivée ¦ hiqet në mbërritje ¦ titneħħa mal-wasla
+gardée à part, à décider en reliant ¦ ruhet veçmas, vendoset kur lidhet ¦ miżmuma għaliha, tiddeċiedi meta torbot
+gardée (la carte peut la montrer) ¦ ruhet (harta mund ta tregojë) ¦ miżmuma (il-mappa tista’ turiha)
+Taille maximale d’une photo ¦ Madhësia maksimale e një fotoje ¦ Daqs massimu ta’ ritratt
+Photos par envoi ¦ Foto për dërgesë ¦ Ritratti għal kull bgħit
+Photos dans la boîte À trier, au plus ¦ Foto në kutinë Për t’u renditur, më së shumti ¦ Ritratti fil-kaxxa Biex jiġu ssortjati, l-aktar
+Garder l’original (décoché : réduite à 2000 points) ¦ Ruaj origjinalin (pa shënuar: zvogëlohet në 2000 pika) ¦ Żomm l-oriġinal (mhux immarkat: imċekken għal 2000 punt)
+coché conseillé ¦ shënuar rekomandohet ¦ immarkat irrakkomandat
+décoché conseillé ¦ pa shënuar rekomandohet ¦ mhux immarkat irrakkomandat
+# 🖧 réglages des téléphones de terrain (suite), 📜 Qui a vu quoi, messages du serveur (lib/telephone_wifi.php, lib/reseau_local.php)
+gardée 30 jours dans « 🗑 Supprimées », puis effacée ¦ ruhet 30 ditë te «🗑 Të fshira», pastaj fshihet ¦ miżmuma 30 jum f’“🗑 Imħassra”, imbagħad titħassar
+effacée tout de suite (après les 10 secondes de ↶ Annuler) ¦ fshihet menjëherë (pas 10 sekondave të ↶ Anulo) ¦ titħassar minnufih (wara l-10 sekondi ta’ ↶ Ħassar)
+Photo de tombe reliée ¦ Foto varri e lidhur ¦ Ritratt ta’ qabar marbut
+proposer d’ajouter l’inhumation ¦ propozo shtimin e varrimit ¦ ipproponi li żżid id-difna
+ne rien proposer ¦ mos propozo asgjë ¦ tipproponi xejn
+Pastille 📥 dans la barre du haut ¦ Shenja 📥 në shiritin e sipërm ¦ Badge 📥 fil-bar ta’ fuq
+oui, avec le nombre ¦ po, me numrin ¦ iva, bin-numru
+non (seulement dans Listes) ¦ jo (vetëm te Listat) ¦ le (fil-Listi biss)
+À l’arrivée de photos ¦ Kur mbërrijnë foto ¦ Meta jaslu ritratti
+seulement la pastille ¦ vetëm shenja ¦ il-badge biss
+un petit message en bas de l’écran ¦ një mesazh i vogël në fund të ekranit ¦ messaġġ żgħir f’qiegħ l-iskrin
+Sans wifi ¦ Pa wifi ¦ Bla wifi
+Hors du wifi de la maison ¦ Jashtë wifi-t të shtëpisë ¦ Barra mill-wifi tad-dar
+garder en attente dans la page, envoi tout seul au retour ¦ mbaj në pritje në faqe, dërgim vetë në kthim ¦ iżżomm jistennew fil-paġna, jintbagħtu waħedhom meta terġa’ lura
+garder, mais demander avant d’envoyer ¦ ruaj, por pyet para dërgimit ¦ żomm, iżda staqsi qabel tibgħat
+refuser de prendre des photos hors wifi ¦ mos lejo foto jashtë wifi-t ¦ tħallix ritratti barra mill-wifi
+Après l’envoi ¦ Pas dërgimit ¦ Wara l-bgħit
+effacer les photos de la page ¦ fshiji fotot nga faqja ¦ ħassar ir-ritratti mill-paġna
+garder les vignettes de la journée ¦ ruaji miniaturat e ditës ¦ żomm il-miniaturi tal-ġurnata
+« ↶ Annuler » sur le téléphone ¦ «↶ Anulo» në telefon ¦ “↶ Ħassar” fuq it-telefon
+tant que les photos ne sont pas rangées ¦ sa kohë që fotot nuk janë renditur ¦ sakemm ir-ritratti ma jkunux issortjati
+pendant 10 secondes ¦ për 10 sekonda ¦ għal 10 sekondi
+Mot de passe de la généalogie sur le téléphone ¦ Fjalëkalimi i gjenealogjisë në telefon ¦ Il-password tal-ġenealoġija fuq it-telefon
+demandé à l’ouverture, redemandé après 15 min sans geste ¦ kërkohet në hapje, sërish pas 15 min pa veprim ¦ mitluba meta tiftaħ, u mill-ġdid wara 15-il min mingħajr attività
+demandé seulement pour voir la liste ; déposer avec le jeton seul ¦ kërkohet vetëm për listën; dorëzim vetëm me çelësin ¦ mitluba biss biex tara l-lista; tħalli bit-token biss
+Cet ordinateur en mode consultation ¦ Ky kompjuter në mënyrën e shikimit ¦ Dan il-kompjuter fil-modalità ta’ konsultazzjoni
+le téléphone ne dépose plus ¦ telefoni nuk dorëzon më ¦ it-telefon ma jħalli xejn aktar
+le téléphone dépose encore ¦ telefoni dorëzon ende ¦ it-telefon għadu jħalli
+Sorte proposée quand la demande vient d’un téléphone ¦ Lloji i propozuar kur kërkesa vjen nga një telefon ¦ Tip propost meta t-talba tiġi minn telefon
+Retirer un téléphone ¦ Heqja e një telefoni ¦ Tneħħija ta’ telefon
+ses photos déjà déposées restent à trier ¦ fotot e tij të lëna tashmë mbeten për t’u renditur ¦ ir-ritratti li diġà ħalla jibqgħu biex jiġu ssortjati
+elles sont supprimées aussi (30 jours dans « 🗑 Supprimées ») ¦ fshihen edhe ato (30 ditë te «🗑 Të fshira») ¦ jitħassru wkoll (30 jum f’“🗑 Imħassra”)
+📜 Registre ¦ 📜 Regjistri ¦ 📜 Reġistru
+noter chaque dépôt, chaque fichier refusé et chaque liste vue ¦ shëno çdo dorëzim, çdo skedar të refuzuar dhe çdo listë të parë ¦ niżżel kull darba li jħalli, kull fajl miċħud u kull lista li tidher
+seulement les dépôts ¦ vetëm dorëzimet ¦ id-darbiet li jħalli biss
+Photo déposée ¦ Foto e dorëzuar ¦ Ritratt imħolli
+Fichier refusé ¦ Skedar i refuzuar ¦ Fajl miċħud
+Liste réduite vue ¦ Lista e shkurtër u pa ¦ Lista mqassra rat
+Photo reliée ¦ Foto e lidhur ¦ Ritratt marbut
+pas une photo ¦ nuk është foto ¦ mhux ritratt
+trop grosse ¦ shumë e madhe ¦ kbir wisq
+trop grande ¦ përmasa shumë të mëdha ¦ dimensjonijiet kbar wisq
+abîmée ¦ e dëmtuar ¦ imħassra
+trop de fichiers ¦ shumë skedarë ¦ wisq fajls
+trop de photos ¦ shumë foto ¦ wisq ritratti
+trop gros en tout ¦ shumë i madh në total ¦ kbir wisq b’kollox
+boîte pleine ¦ kutia plot ¦ kaxxa mimlija
+personne refusée ¦ person i refuzuar ¦ persuna miċħuda
+réponses : {n} ¦ përgjigje: {n} ¦ tweġibiet: {n}
+Photo trop grosse (plus de {n} Mo, la taille maximale réglée sur l’ordinateur). ¦ Foto shumë e madhe (mbi {n} MB, madhësia maksimale e caktuar në kompjuter). ¦ Ritratt kbir wisq (aktar minn {n} MB, id-daqs massimu ssettjat fuq il-kompjuter).
+Trop d’essais depuis ce téléphone : réessaie dans {n} min. ¦ Shumë përpjekje nga ky telefon: provo sërish pas {n} min. ¦ Wisq tentattivi minn dan it-telefon: erġa’ pprova fi żmien {n} min.
+Trop de photos dans cet envoi ({n} au plus). ¦ Shumë foto në këtë dërgesë (më së shumti {n}). ¦ Wisq ritratti f’dan il-bgħit (l-aktar {n}).
+Photo du téléphone ¦ Foto nga telefoni ¦ Ritratt mit-telefon
+Ce format de photo ne se lit pas sur cet ordinateur : choisis-la en JPEG. ¦ Ky format fotoje nuk lexohet në këtë kompjuter: zgjidhe në JPEG. ¦ Dan il-format tar-ritratt ma jinqarax fuq dan il-kompjuter: agħżlu bħala JPEG.
+Ce n’est pas une photo : seules les photos JPEG, PNG, WEBP et AVIF sont acceptées. ¦ Kjo nuk është foto: pranohen vetëm foto JPEG, PNG, WEBP dhe AVIF. ¦ Dan mhux ritratt: jiġu aċċettati biss ritratti JPEG, PNG, WEBP u AVIF.
+Image abîmée ou illisible. ¦ Figurë e dëmtuar ose e palexueshme. ¦ Immaġni bil-ħsara jew li ma tinqarax.
+Image trop grande (plus de 50 millions de points) : refusée. ¦ Figurë shumë e madhe (mbi 50 milionë pika): u refuzua. ¦ Immaġni kbira wisq (aktar minn 50 miljun punt): miċħuda.
+Une seule photo à la fois. ¦ Vetëm një foto njëherësh. ¦ Ritratt wieħed biss kull darba.
+La photo n’est pas arrivée en entier : elle sera renvoyée. ¦ Fotoja nuk mbërriti e plotë: do të ridërgohet. ¦ Ir-ritratt ma wasalx kollu: se jerġa’ jintbagħat.
+Personne ou visite inconnue. ¦ Person ose vizitë e panjohur. ¦ Persuna jew żjara mhux magħrufa.
+📥 La boîte est pleine sur l’ordinateur : trie-la d’abord. ¦ 📥 Kutia në kompjuter është plot: rendite më parë. ¦ 📥 Il-kaxxa fuq il-kompjuter mimlija: issortjaha l-ewwel.
+Cet envoi est trop gros en tout (200 Mo au plus) : envoie le reste ensuite. ¦ Kjo dërgesë është shumë e madhe në total (më së shumti 200 MB): dërgo pjesën tjetër më pas. ¦ Dan il-bgħit kbir wisq b’kollox (l-aktar 200 MB): ibgħat il-bqija wara.
+La généalogie n’est pas prête sur l’ordinateur. ¦ Gjenealogjia nuk është gati në kompjuter. ¦ Il-ġenealoġija mhix lesta fuq il-kompjuter.
+L’ordinateur est en mode consultation : il ne reçoit pas de photo pour l’instant. Elles restent en attente ici. ¦ Kompjuteri është në mënyrën e shikimit: tani për tani nuk merr foto. Ato presin këtu. ¦ Il-kompjuter qiegħed fil-modalità ta’ konsultazzjoni: għalissa ma jirċevix ritratti. Jibqgħu jistennew hawn.
+Impossible de ranger la photo sur l’ordinateur (disque plein ?). ¦ Fotoja nuk mund të ruhet në kompjuter (disk plot?). ¦ Ma jistax jiġi ssejvjat ir-ritratt fuq il-kompjuter (disk mimli?).
+Choisis à quoi relier. ¦ Zgjidh me çfarë të lidhet. ¦ Agħżel ma’ xiex torbot.
+Introuvable. ¦ Nuk u gjet. ¦ Ma nstabx.
+Cette fiche est verrouillée : rien n’y est relié. ¦ Kjo skedë është e kyçur: asgjë nuk lidhet me të. ¦ Dan ir-rekord huwa msakkar: xejn ma jintrabat miegħu.
+Trop tard : cette photo a été effacée pour de bon. ¦ Tepër vonë: kjo foto u fshi përgjithmonë. ¦ Tard wisq: dan ir-ritratt tħassar għal kollox.
+Téléphone de terrain : il peut seulement déposer des photos dans 📥 À trier. ¦ Telefon terreni: mund vetëm të lërë foto te 📥 Për t’u renditur. ¦ Telefon tal-post: jista’ biss iħalli ritratti f’📥 Biex jiġu ssortjati.
