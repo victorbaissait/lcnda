@@ -485,8 +485,10 @@
             const count=Number(row.person_count||people.length||0);
             // une très grosse base : des milliers de personnes par métier — les OCC_STEP premières, puis « Voir les N suivantes ↓ » (C6)
             const key=`occ${occMoreSeq++}`;
-            if(people.length>OCC_STEP)occMore.set(key,{people,shown:OCC_STEP,personCard});
-            const cards=people.length?`<div class="occ-people-grid" data-occ-grid="${key}">`+people.slice(0,OCC_STEP).map(personCard).join('')+'</div>'+(people.length>OCC_STEP?`<div class="occ-more-wrap" data-occ-more="${key}"></div>`:'')
+            // Métiers : le serveur n'envoie que les premières (people_total : toutes) ; les suivantes sont demandées au clic (api.php, occ_name)
+            const total=Math.max(people.length,Number(row.people_total)||0);
+            if(total>OCC_STEP)occMore.set(key,{people:[...people],total,shown:OCC_STEP,personCard,name:typeLabel==='Métier'&&total>people.length?row.name:null});
+            const cards=people.length?`<div class="occ-people-grid" data-occ-grid="${key}">`+people.slice(0,OCC_STEP).map(personCard).join('')+'</div>'+(total>OCC_STEP?`<div class="occ-more-wrap" data-occ-more="${key}"></div>`:'')
                 :'<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">👤</span><span class="empty-line-text">Aucune personne rattach\u00e9e.</span></p>';
             return `<article class="label-list-row">
                 <div class="label-list-head">
@@ -505,10 +507,16 @@
     function bindOccMore(){
         $$('[data-occ-more]').forEach(wrap=>{
             const it=occMore.get(wrap.dataset.occMore);if(!it||wrap.firstChild||!window.LCNDA_UI?.moreButton)return;
-            const more=window.LCNDA_UI.moreButton({remaining:it.people.length-it.shown,step:OCC_STEP,feminine:true,onClick:b=>{
-                const grid=$(`[data-occ-grid="${wrap.dataset.occMore}"]`);if(!grid)return;
+            const more=window.LCNDA_UI.moreButton({remaining:it.total-it.shown,step:OCC_STEP,feminine:true,onClick:async b=>{
+                const grid=$(`[data-occ-grid="${wrap.dataset.occMore}"]`);if(!grid||it.busy)return;
+                if(it.name&&it.people.length<Math.min(it.total,it.shown+OCC_STEP)){
+                    it.busy=true;
+                    try{const r=await api('list',{type:'occupations',occ_name:it.name,offset:it.people.length});(r.people||[]).forEach(p=>it.people.push(p));if(!(r.people||[]).length)it.total=it.people.length;}
+                    catch(error){toast(error.message,'error');return;}
+                    finally{it.busy=false;}
+                }
                 grid.insertAdjacentHTML('beforeend',it.people.slice(it.shown,it.shown+OCC_STEP).map(it.personCard).join(''));
-                it.shown+=OCC_STEP;b.update(it.people.length-it.shown);bindTableLinks();bindEntityLabelsFields();
+                it.shown=Math.min(it.shown+OCC_STEP,it.people.length);b.update(it.total-it.shown);bindTableLinks();bindEntityLabelsFields();
             }});
             wrap.appendChild(more);
         });

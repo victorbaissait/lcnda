@@ -539,7 +539,7 @@ try {
         'media_av_list' => json_response(media_av_list($pdo, safe_text($_GET['kind'] ?? 'audio'))),
         'recueils' => json_response(recueils_list($pdo, safe_text($_GET['q'] ?? ''))),
         // 🐘 les anniversaires des prochains jours (widget, 2 s et 4 Mo à 200 000 fiches) : gardés pour la journée tant que la base ne change pas
-        'genea_calendar' => safe_int($_GET['anniv_days'] ?? 0) > 0 && !safe_int($_GET['person_id'] ?? 0) && !isset($_GET['succ_cases']) ? json_response(calc_cached($pdo, 'genea_anniv_' . safe_int($_GET['anniv_days'] ?? 0), ['persons', 'events', 'event_types', 'places', 'families'], [date('Y-m-d'), safe_int($_GET['anniv_days'] ?? 0), safe_int($_GET['person_id'] ?? 0)], static fn() => genea_calendar_events($pdo, $_GET))) : genea_calendar_stream($pdo, $_GET), // écrit au fur et à mesure (lib/calendars.php)
+        'genea_calendar' => safe_int($_GET['anniv_days'] ?? 0) > 0 && !safe_int($_GET['person_id'] ?? 0) && !isset($_GET['succ_cases']) ? json_response(calc_cached($pdo, 'genea_anniv_' . safe_int($_GET['anniv_days'] ?? 0), ['persons', 'events', 'event_types', 'places', 'families'], [date('Y-m-d'), safe_int($_GET['anniv_days'] ?? 0), safe_int($_GET['person_id'] ?? 0)], static fn() => genea_calendar_events($pdo, $_GET))) : (safe_int($_GET['anniv_days'] ?? 0) > 0 ? genea_calendar_stream($pdo, $_GET) : calc_cached_response($pdo, 'genea_calendar_' . safe_int($_GET['person_id'] ?? 0), ['persons', 'events', 'event_types', 'places', 'families'], [safe_int($_GET['person_id'] ?? 0)], static fn() => genea_calendar_stream($pdo, $_GET))), // écrit au fur et à mesure (lib/calendars.php) ; 🐘 tout le calendrier gardé tant que la base ne change pas
         'my_agenda' => json_response(my_agenda($pdo)),
         'recueil' => json_response(recueil_detail($pdo, safe_int($_GET['id'] ?? 0))),
         'recueils_for' => json_response(['recueils' => recueils_for_entity($pdo, safe_text($_GET['type'] ?? ''), safe_text($_GET['key'] ?? ''))]),
@@ -3080,6 +3080,14 @@ function departmental_archives_count(string $like): int
 function list_data(PDO $pdo): never
 {
     $type = $_GET['type'] ?? 'persons';
+    // 🐘 Métiers : « Voir les N suivantes ↓ » d'un métier (les premières viennent avec la liste) : les personnes suivantes, dans le même ordre
+    if ($type === 'occupations' && isset($_GET['occ_name'])) {
+        $name = mb_substr(scalar_text($_GET['occ_name']), 0, 500);
+        $from = max(0, safe_int($_GET['offset'] ?? 0));
+        // l'ordre de tout le métier, gardé tant que fiches, événements et recensements ne changent pas : les clics suivants sont immédiats
+        $ids = calc_cached($pdo, 'occ_people_' . md5($name), ['persons', 'events', 'event_types', 'census_members'], [$name], static fn() => occupation_people_ids($pdo, [$name])[strtolower(trim($name))] ?? []);
+        json_response(['name' => $name, 'offset' => $from, 'total' => count($ids), 'people' => occupation_people_details($pdo, array_slice($ids, $from, occupation_list_step()))]);
+    }
     $q = safe_text($_GET['q'] ?? '');
     $like = '%' . $q . '%';
     $offset = max(0, safe_int($_GET['offset'] ?? 0));
@@ -3790,37 +3798,88 @@ function employer_list_rows(PDO $pdo,string $like,int $limit=500,int $offset=0):
     return $stmt->fetchAll();
 }
 
+/** 🐘 Métiers : combien de personnes chaque métier montre d'abord (assets/js/app-listes.js : OCC_STEP) ; les suivantes à la demande */
+function occupation_list_step(): int { return 24; }
+
+/** Les personnes de chaque métier (clé : LOWER(TRIM(nom))), dédupliquées, dans l'ordre de la liste (nom, prénom) : les identifiants seuls */
+function occupation_people_ids(PDO $pdo, array $names): array
+{
+    if (!$names) { return []; }
+    $marks = implode(',', array_fill(0, count($names), '?'));
+    // la même requête que la liste complète d'avant, sans les dates (même parcours, donc même ordre, homonymes compris)
+    $stmt = $pdo->prepare("
+        SELECT LOWER(TRIM(val)) AS group_key, p.id
+        FROM (
+            SELECT p2.id AS pid, p2.occupation AS val FROM persons p2
+            WHERE p2.occupation IS NOT NULL AND TRIM(p2.occupation)!='' AND TRIM(p2.occupation) IN ($marks)
+            UNION
+            SELECT e.person_id AS pid, COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),''),t.label) AS val
+            FROM events e JOIN event_types t ON t.id=e.event_type_id
+            WHERE e.person_id IS NOT NULL
+              AND (t.gedcom_tag='OCCU' OR LOWER(t.label) LIKE '%profes%' OR LOWER(t.label) LIKE '%m%tier%' OR LOWER(t.label) LIKE '%activit%')
+              AND COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),''),NULLIF(t.label,'')) IN ($marks)
+            UNION
+            SELECT cm.person_id AS pid, cm.occupation AS val
+            FROM census_members cm
+            WHERE cm.person_id IS NOT NULL AND cm.occupation IS NOT NULL AND TRIM(cm.occupation)!='' AND TRIM(cm.occupation) IN ($marks)
+        ) src
+        JOIN persons p ON p.id=src.pid
+        ORDER BY p.last_name COLLATE NOCASE, p.first_name COLLATE NOCASE");
+    $stmt->execute(array_merge($names, $names, $names));
+    $out = [];
+    foreach ($stmt->fetchAll(PDO::FETCH_NUM) as [$key, $id]) { $out[$key][(int) $id] = true; }
+    return array_map('array_keys', $out);
+}
+
+/** Ces personnes (dans cet ordre) comme la liste les montre : nom, sexe, naissance, décès, étiquettes */
+function occupation_people_details(PDO $pdo, array $ids): array
+{
+    if (!$ids) { return []; }
+    $rows = [];
+    foreach (array_chunk($ids, 5000) as $chunk) {
+        $s = $pdo->prepare("SELECT p.id, p.first_name, p.last_name, p.gender, p.living_status,
+            (SELECT e.date_text FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BIRT' ORDER BY e.id LIMIT 1) AS birth_date,
+            (SELECT e.year    FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BIRT' ORDER BY e.id LIMIT 1) AS birth_year,
+            (SELECT e.date_text FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='DEAT' ORDER BY e.id LIMIT 1) AS death_date,
+            (SELECT e.year    FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='DEAT' ORDER BY e.id LIMIT 1) AS death_year
+            FROM persons p WHERE p.id IN (" . implode(',', array_fill(0, count($chunk), '?')) . ')');
+        $s->execute($chunk);
+        foreach ($s->fetchAll() as $r) { $rows[(int) $r['id']] = $r; }
+    }
+    $labels = [];
+    foreach (array_chunk(array_keys($rows), 5000) as $chunk) {
+        $l = $pdo->prepare("SELECT ll.entity_id AS person_id,l.id,l.name,l.color FROM label_links ll JOIN labels l ON l.id=ll.label_id
+            WHERE ll.entity_type='person' AND ll.entity_id IN (" . implode(',', array_fill(0, count($chunk), '?')) . ') ORDER BY l.name COLLATE NOCASE');
+        $l->execute($chunk);
+        foreach ($l->fetchAll() as $lr) { $labels[(int) $lr['person_id']][] = ['id' => (int) $lr['id'], 'name' => $lr['name'], 'color' => $lr['color']]; }
+    }
+    $out = [];
+    foreach ($ids as $id) { if (isset($rows[$id])) { $out[] = $rows[$id] + ['labels' => $labels[$id] ?? []]; } }
+    return $out;
+}
+
 function occupation_attach_people(PDO $pdo,array $rows,string $field): array
 {
     if(!$rows) return $rows;
     $names=array_map(fn($r)=>$r['name'],$rows);
     $marks=implode(',',array_fill(0,count($names),'?'));
     if($field==='occupation'){
-        // Chercher les personnes via les 3 sources, dédupliquées par person_id
-        $stmt=$pdo->prepare("
-            SELECT LOWER(TRIM(val)) AS group_key, p.id, p.first_name, p.last_name, p.gender, p.living_status,
-                (SELECT e.date_text FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BIRT' ORDER BY e.id LIMIT 1) AS birth_date,
-                (SELECT e.year    FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BIRT' ORDER BY e.id LIMIT 1) AS birth_year,
-                (SELECT e.date_text FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='DEAT' ORDER BY e.id LIMIT 1) AS death_date,
-                (SELECT e.year    FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='DEAT' ORDER BY e.id LIMIT 1) AS death_year
-            FROM (
-                SELECT p2.id AS pid, p2.occupation AS val FROM persons p2
-                WHERE p2.occupation IS NOT NULL AND TRIM(p2.occupation)!='' AND TRIM(p2.occupation) IN ($marks)
-                UNION
-                SELECT e.person_id AS pid, COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),''),t.label) AS val
-                FROM events e JOIN event_types t ON t.id=e.event_type_id
-                WHERE e.person_id IS NOT NULL
-                  AND (t.gedcom_tag='OCCU' OR LOWER(t.label) LIKE '%profes%' OR LOWER(t.label) LIKE '%m%tier%' OR LOWER(t.label) LIKE '%activit%')
-                  AND COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),''),NULLIF(t.label,'')) IN ($marks)
-                UNION
-                SELECT cm.person_id AS pid, cm.occupation AS val
-                FROM census_members cm
-                WHERE cm.person_id IS NOT NULL AND cm.occupation IS NOT NULL AND TRIM(cm.occupation)!='' AND TRIM(cm.occupation) IN ($marks)
-            ) src
-            JOIN persons p ON p.id=src.pid
-            ORDER BY p.last_name COLLATE NOCASE, p.first_name COLLATE NOCASE");
-        $stmt->execute(array_merge($names,$names,$names));
-    } else {
+        // 🐘 chaque métier n'emporte plus toutes ses personnes (200 000 fiches : 30 Mo) : les occupation_list_step() premières et leur nombre
+        // (people_total) ; les suivantes viennent à la demande (list_data, occ_name). Mêmes personnes, même ordre, mêmes valeurs.
+        $ids = occupation_people_ids($pdo, $names);
+        $first = [];
+        foreach ($rows as $row) { $first[strtolower(trim($row['name']))] = array_slice($ids[strtolower(trim($row['name']))] ?? [], 0, occupation_list_step()); }
+        $details = []; foreach (occupation_people_details($pdo, array_values(array_unique(array_merge(...array_values($first ?: [[]]))))) as $d) { $details[(int) $d['id']] = $d; }
+        foreach ($rows as &$row) {
+            $key = strtolower(trim($row['name']));
+            $row['people'] = array_values(array_filter(array_map(static fn($id) => $details[$id] ?? null, $first[$key] ?? [])));
+            $row['people_total'] = count($ids[$key] ?? []);
+        }
+        unset($row);
+        return $rows;
+    }
+    // employeurs (recensements) : toutes leurs personnes
+    {
         $stmt=$pdo->prepare("SELECT LOWER(TRIM(cm.employer)) AS group_key,
             COALESCE(p.id,0) AS id,
             COALESCE(p.first_name,cm.display_name) AS first_name,

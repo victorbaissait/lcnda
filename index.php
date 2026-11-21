@@ -1278,7 +1278,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-mode-simple.js?v=16" defer></script>
 <script src="assets/js/app-sidegroups.js?v=13" defer></script>
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
-<script src="assets/js/app-listes.js?v=59" defer></script>
+<script src="assets/js/app-listes.js?v=60" defer></script>
 <script src="assets/js/app-maintenance.js?v=61" defer></script>
 <script src="assets/js/app-recherche.js?v=31" defer></script>
 <script src="assets/js/app-graphiques.js?v=25" defer></script>
@@ -1308,7 +1308,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-audio-quick.js?v=6" defer></script>
 <script src="assets/js/heritage-audio-studio.js?v=6" defer></script>
 <script src="assets/js/heritage-audio-multi.js?v=3" defer></script>
-<script src="assets/js/heritage-calendars.js?v=21" defer></script>
+<script src="assets/js/heritage-calendars.js?v=22" defer></script>
 <script src="assets/js/heritage-assemble.js?v=11" defer></script>
 <script src="assets/js/heritage-columns.js?v=9" defer></script>
 <script src="assets/js/heritage-atelier-widgets.js?v=8" defer></script>

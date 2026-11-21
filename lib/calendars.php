@@ -132,7 +132,12 @@ function genea_calendar_events(PDO $pdo, array $q = [], ?array $onlyDays = null,
     return ['events' => $out, 'undated' => $undated];
 }
 
-/** GET genea_calendar : la réponse écrite au fur et à mesure (300 000 événements = plus de 100 Mo de JSON : jamais tout en mémoire). */
+/**
+ * GET genea_calendar : la réponse écrite au fur et à mesure (300 000 événements : jamais tout en mémoire).
+ * 🐘 Format serré ("compact": 1) : les sortes, les lieux et les personnes une seule fois ; chaque événement en tableau
+ * [id, année, mois, jour, approximatif, texte, calendrier, n° de sorte, titre, lieu, [personnes]]. L'écran
+ * (assets/js/heritage-calendars.js, geneaExpand) refait exactement les mêmes objets qu'avant (200 000 fiches : 205 Mo → 42 Mo).
+ */
 function genea_calendar_stream(PDO $pdo, array $q): never
 {
     if (safe_int($q['anniv_days'] ?? 0) > 0) { json_response(genea_calendar_events($pdo, $q)); }
@@ -140,18 +145,21 @@ function genea_calendar_stream(PDO $pdo, array $q): never
     header('Content-Type: application/json; charset=utf-8');
     header('Cache-Control: no-store, private');
     header('X-Content-Type-Options: nosniff');
-    $first = true; $buf = '{"events":[';
-    $res = genea_calendar_events($pdo, $q, null, [], static function (array $e) use (&$first, &$buf): void {
-        // une valeur par défaut n'est pas écrite (grosse base : environ 15 % de moins à envoyer et à lire) ; l'écran lit « absent » comme vide
-        if (!$e['approx']) { unset($e['approx']); }
-        if ($e['calendar'] === 'gregorian' || $e['calendar'] === '') { unset($e['calendar']); }
-        foreach (['title', 'place', 'county', 'region', 'country'] as $k) { if ($e[$k] === '') { unset($e[$k]); } }
-        if (!$e['place_id']) { unset($e['place_id']); }
-        $buf .= ($first ? '' : ',') . json_encode($e, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE);
+    $J = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE;
+    $types = []; $places = []; $people = [];
+    $first = true; $buf = '{"compact":1,"events":[';
+    $res = genea_calendar_events($pdo, $q, null, [], static function (array $e) use (&$first, &$buf, &$types, &$places, &$people, $J): void {
+        $tk = json_encode([$e['type'], $e['tag'], $e['color'], $e['group']], $J);
+        $ti = $types[$tk] ??= count($types);
+        $pid = (int) $e['place_id'];
+        if ($pid && !isset($places[$pid])) { $places[$pid] = [$e['place'], $e['county'], $e['region'], $e['country']]; }
+        $who = [];
+        foreach ($e['who'] as $w) { $who[] = (int) $w['id']; $people[(int) $w['id']] ??= [$w['name'], $w['gender']]; }
+        $buf .= ($first ? '' : ',') . json_encode([$e['id'], $e['y'], $e['m'], $e['d'], $e['approx'] ? 1 : 0, $e['text'], $e['calendar'], $ti, $e['title'], $pid, $who], $J);
         $first = false;
         if (strlen($buf) > 262144) { echo $buf; $buf = ''; }
     });
-    echo $buf, '],"undated":', (int) $res['undated'], '}';
+    echo $buf, '],"types":[', implode(',', array_keys($types)), '],"places":', json_encode($places ?: new stdClass(), $J), ',"people":', json_encode($people ?: new stdClass(), $J), ',"undated":', (int) $res['undated'], '}';
     exit;
 }
 
