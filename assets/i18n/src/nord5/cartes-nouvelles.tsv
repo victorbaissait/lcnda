@@ -86,3 +86,54 @@ Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Nema općine tog im
 le plus proche ¦ najbliža ¦ najbližja
 sûr ¦ sigurno ¦ zanesljivo
 =proposition ¦ prijedlog|prijedloga|prijedloga ¦ predlog|predloga|predlogi|predlogov
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ U svakom izborniku prvi je izbor preporučeni: postavljen je od početka. ¦ V vsakem meniju je prva izbira priporočena: nastavljena je od začetka.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ Zanimanja na karti (po sektoru, stoljeće po stoljeće) ¦ Poklici na zemljevidu (po sektorjih, stoletje za stoletjem)
+Les métiers notés (un par ligne) ¦ Zabilježena zanimanja (jedno po retku) ¦ Zapisani poklici (eden v vrstici)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Mjesto („Tulle“, „Tulle 45.27, 1.77“) ¦ Kraj (»Tulle«, »Tulle 45.27, 1.77«)
+Classer par ¦ Razvrstaj po ¦ Razvrsti po
+Famille de métiers du dictionnaire (18) ¦ Obitelj zanimanja iz rječnika (18) ¦ Družina poklicev iz slovarja (18)
+Un seul métier et ses variantes ¦ Jedno zanimanje i njegove inačice ¦ En sam poklic in njegove različice
+Un métier et ses variantes ¦ Zanimanje i njegove inačice ¦ Poklic in njegove različice
+Mes couleurs à moi par métier ¦ Moje boje po zanimanju ¦ Moje barve po poklicih
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Moje boje („tisserand=#aa3300; meunier=#3355aa“) ¦ Moje barve (»tisserand=#aa3300; meunier=#3355aa«)
+Camembert par commune ¦ Tortni grafikon po općini ¦ Tortni grafikon po občini
+Un rond de la couleur du plus fréquent ¦ Krug u boji najčešćeg ¦ Krog v barvi najpogostejšega
+Siècle par siècle ¦ Stoljeće po stoljeće ¦ Stoletje za stoletjem
+Un petit dessin par siècle ¦ Mala karta po stoljeću ¦ Majhen zemljevid za vsako stoletje
+Tout ensemble ¦ Sve zajedno ¦ Vse skupaj
+Où placer le métier ¦ Gdje smjestiti zanimanje ¦ Kam umestiti poklic
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Mjesto isprave, inače prebivalište, inače rođenje ¦ Kraj listine, sicer prebivališče, sicer rojstvo
+Lieu de l’acte seulement ¦ Samo mjesto isprave ¦ Samo kraj listine
+Plusieurs métiers ¦ Više zanimanja ¦ Več poklicev
+Chacun à sa date ¦ Svako na svoj datum ¦ Vsak ob svojem datumu
+Le principal seulement ¦ Samo glavno ¦ Samo glavni
+Montrés ¦ Prikazani ¦ Prikazani
+Cachés ¦ Skriveni ¦ Skriti
+Les plus grands ¦ Najveća ¦ Največji
++ {n} secteurs vides ¦ + praznih sektora: {n} ¦ + praznih sektorjev: {n}
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Karta zanimanja: {n}, mala karta po stoljeću. ¦ Zemljevid poklicev: {n}, majhen zemljevid za vsako stoletje.
+Carte des métiers : {a}, {b} ({when}). ¦ Karta zanimanja: {a}, {b} ({when}). ¦ Zemljevid poklicev: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Karta zanimanja: {a}, {b}. ¦ Zemljevid poklicev: {a}, {b}.
+Carte des métiers : {n}. ¦ Karta zanimanja: {n}. ¦ Zemljevid poklicev: {n}.
+Clic : les métiers de ce lieu ¦ Klikni: zanimanja ovog mjesta ¦ Klikni: poklici tega kraja
+Aucun métier noté au {when}. ¦ Nema zabilježenih zanimanja u razdoblju: {when}. ¦ V obdobju {when} ni zapisanih poklicev.
+Aucun métier pour ce choix. ¦ Nema zanimanja za ovaj odabir. ¦ Za to izbiro ni poklicev.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Uzmi zanimanja iz svoje genealogije („Iz aplikacije“). ¦ Vzemi poklice iz svojega rodoslovja (»Iz aplikacije«).
+LES MÉTIERS SUR LA CARTE ¦ ZANIMANJA NA KARTI ¦ POKLICI NA ZEMLJEVIDU
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ Klik na zanimanje otvara njegovu karticu (🛠️ Stara zanimanja). ¦ Klik na poklic odpre njegovo kartico (🛠️ Stari poklici).
+Les métiers de ta généalogie ¦ Zanimanja u tvojoj genealogiji ¦ Poklici v tvojem rodoslovju
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Zabilježena zanimanja (zanimanje, popis, kartica), razvrstana kao u Stablu zanimanja. Nikad živa osoba ni povjerljiva kartica. ¦ Zapisani poklici (poklic, popis, kartica), razvrščeni kot v Drevesu poklicev. Nikoli živa oseba ali zaupna kartica.
+Hommes et femmes ¦ Muškarci i žene ¦ Moški in ženske
+Les femmes ¦ Žene ¦ Ženske
+Toutes les époques ¦ Sva razdoblja ¦ Vsa obdobja
+Aucun métier ¦ Nema zanimanja ¦ Ni poklicev
+Aucun métier avec un lieu pour ce choix. ¦ Nema zanimanja s mjestom za ovaj odabir. ¦ Za to izbiro ni poklicev s krajem.
+Où on était {trade} ¦ Gdje su bili {trade} ¦ Kje so bili {trade}
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ Zabilježeno: {a} · razvrstano: {b} · „❔ ostalo“ za razvrstati: {c} ¦ Zapisanih: {a} · razvrščenih: {b} · »❔ drugo« za razvrstiti: {c}
+Mes ancêtres seulement ¦ Samo moji preci ¦ Samo moji predniki
+Par famille de métiers du dictionnaire (18) ¦ Po obitelji zanimanja iz rječnika (18) ¦ Po družini poklicev iz slovarja (18)
+Par grand secteur (12) ¦ Po glavnom sektoru (12) ¦ Po glavnih sektorjih (12)
+employé ¦ službenik ¦ uslužbenec
+ménagère ¦ kućanica ¦ gospodinja
+Où on l’exerçait ¦ Gdje se obavljalo ¦ Kje so ga opravljali

@@ -86,3 +86,54 @@ Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Obec tohto mena nee
 le plus proche ¦ najbližšia ¦ den nærmeste
 sûr ¦ isté ¦ sikker
 =proposition ¦ návrh|návrhy|návrhov ¦ forslag|forslag
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ V každej ponuke je prvá voľba odporúčaná: je nastavená od začiatku. ¦ I hver meny er det første valget det anbefalte: det er stilt inn fra start.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ Povolania na mape (podľa odvetvia, storočie po storočí) ¦ Yrker på kartet (etter sektor, århundre for århundre)
+Les métiers notés (un par ligne) ¦ Zapísané povolania (jedno na riadok) ¦ Noterte yrker (ett per linje)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Miesto („Tulle“, „Tulle 45.27, 1.77“) ¦ Sted («Tulle», «Tulle 45.27, 1.77»)
+Classer par ¦ Triediť podľa ¦ Klassifiser etter
+Famille de métiers du dictionnaire (18) ¦ Skupina povolaní zo slovníka (18) ¦ Yrkesfamilie fra ordboken (18)
+Un seul métier et ses variantes ¦ Jediné povolanie a jeho varianty ¦ Ett enkelt yrke og variantene
+Un métier et ses variantes ¦ Povolanie a jeho varianty ¦ Et yrke og variantene
+Mes couleurs à moi par métier ¦ Moje vlastné farby pre povolania ¦ Mine egne farger per yrke
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Moje farby („tisserand=#aa3300; meunier=#3355aa“) ¦ Mine farger («tisserand=#aa3300; meunier=#3355aa»)
+Camembert par commune ¦ Výsečový graf pre obec ¦ Kakediagram per kommune
+Un rond de la couleur du plus fréquent ¦ Krúžok vo farbe najčastejšieho ¦ En sirkel i fargen til den vanligste
+Siècle par siècle ¦ Storočie po storočí ¦ Århundre for århundre
+Un petit dessin par siècle ¦ Malá mapa pre každé storočie ¦ Et lite kart per århundre
+Tout ensemble ¦ Všetko spolu ¦ Alt samlet
+Où placer le métier ¦ Kam umiestniť povolanie ¦ Hvor yrket plasseres
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Miesto zápisu, inak bydlisko, inak narodenie ¦ Sted for akten, ellers bosted, ellers fødsel
+Lieu de l’acte seulement ¦ Iba miesto zápisu ¦ Bare aktens sted
+Plusieurs métiers ¦ Viacero povolaní ¦ Flere yrker
+Chacun à sa date ¦ Každé k svojmu dátumu ¦ Hvert på sin dato
+Le principal seulement ¦ Iba hlavné ¦ Bare hovedyrket
+Montrés ¦ Zobrazené ¦ Vist
+Cachés ¦ Skryté ¦ Skjult
+Les plus grands ¦ Tie najväčšie ¦ De største
++ {n} secteurs vides ¦ + prázdne odvetvia: {n} ¦ + {n} tomme sektorer
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Mapa povolaní: {n}, malá mapa pre každé storočie. ¦ Yrkeskart: {n}, et lite kart per århundre.
+Carte des métiers : {a}, {b} ({when}). ¦ Mapa povolaní: {a}, {b} ({when}). ¦ Yrkeskart: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Mapa povolaní: {a}, {b}. ¦ Yrkeskart: {a}, {b}.
+Carte des métiers : {n}. ¦ Mapa povolaní: {n}. ¦ Yrkeskart: {n}.
+Clic : les métiers de ce lieu ¦ Klikni: povolania tohto miesta ¦ Klikk: yrkene på dette stedet
+Aucun métier noté au {when}. ¦ Žiadne povolanie zapísané v období: {when}. ¦ Ingen yrker notert i {when}.
+Aucun métier pour ce choix. ¦ Pre tento výber žiadne povolanie. ¦ Ingen yrker for dette valget.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Vezmi povolania zo svojej genealógie („Z aplikácie“). ¦ Ta yrkene fra slektsforskningen din («Fra appen»).
+LES MÉTIERS SUR LA CARTE ¦ POVOLANIA NA MAPE ¦ YRKER PÅ KARTET
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ Kliknutie na povolanie otvorí jeho kartu (🛠️ Staré povolania). ¦ Et klikk på et yrke åpner kortet (🛠️ Gamle yrker).
+Les métiers de ta généalogie ¦ Povolania v tvojej genealógii ¦ Yrkene i slektsforskningen din
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Zapísané povolania (profesia, sčítanie, karta) triedené ako v Strome povolaní. Nikdy žijúca osoba ani dôverná karta. ¦ De noterte yrkene (yrke, folketelling, kort), klassifisert som i Yrkestreet. Aldri en levende eller et konfidensielt kort.
+Hommes et femmes ¦ Muži a ženy ¦ Menn og kvinner
+Les femmes ¦ Ženy ¦ Kvinnene
+Toutes les époques ¦ Všetky obdobia ¦ Alle tider
+Aucun métier ¦ Žiadne povolanie ¦ Ingen yrker
+Aucun métier avec un lieu pour ce choix. ¦ Pre tento výber žiadne povolanie s miestom. ¦ Ingen yrker med sted for dette valget.
+Où on était {trade} ¦ Kde boli {trade} ¦ Hvor man var {trade}
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ Zapísané: {a} · zatriedené: {b} · „❔ iné“ na zatriedenie: {c} ¦ {a} notert · {b} klassifisert · {c} «❔ annet» å klassifisere
+Mes ancêtres seulement ¦ Iba moji predkovia ¦ Bare mine aner
+Par famille de métiers du dictionnaire (18) ¦ Podľa skupiny povolaní zo slovníka (18) ¦ Etter yrkesfamilie fra ordboken (18)
+Par grand secteur (12) ¦ Podľa hlavného odvetvia (12) ¦ Etter hovedsektor (12)
+employé ¦ úradník ¦ funksjonær
+ménagère ¦ v domácnosti ¦ husmor
+Où on l’exerçait ¦ Kde sa vykonávalo ¦ Hvor det ble utøvd

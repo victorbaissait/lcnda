@@ -86,3 +86,54 @@ Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Ekkert sveitarféla
 le plus proche ¦ sá næsti
 sûr ¦ öruggur
 =proposition ¦ tillaga|tillögur
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ Í hverri valmynd er fyrsti kosturinn sá sem mælt er með: hann er stilltur í byrjun.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ Starfsgreinar á kortinu (eftir geira, öld fyrir öld)
+Les métiers notés (un par ligne) ¦ Skráðar starfsgreinar (ein í línu)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Staður („Tulle“, „Tulle 45.27, 1.77“)
+Classer par ¦ Flokka eftir
+Famille de métiers du dictionnaire (18) ¦ Starfsfjölskylda úr orðabókinni (18)
+Un seul métier et ses variantes ¦ Ein starfsgrein og afbrigði hennar
+Un métier et ses variantes ¦ Starfsgrein og afbrigði hennar
+Mes couleurs à moi par métier ¦ Mínir litir eftir starfsgrein
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Mínir litir („tisserand=#aa3300; meunier=#3355aa“)
+Camembert par commune ¦ Kökurit eftir sveitarfélagi
+Un rond de la couleur du plus fréquent ¦ Hringur í lit þess algengasta
+Siècle par siècle ¦ Öld fyrir öld
+Un petit dessin par siècle ¦ Lítið kort fyrir hverja öld
+Tout ensemble ¦ Allt saman
+Où placer le métier ¦ Hvar starfið er staðsett
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Staður skjalsins, annars búseta, annars fæðing
+Lieu de l’acte seulement ¦ Aðeins staður skjalsins
+Plusieurs métiers ¦ Nokkur störf
+Chacun à sa date ¦ Hvert á sinni dagsetningu
+Le principal seulement ¦ Aðeins aðalstarfið
+Montrés ¦ Sýndir
+Cachés ¦ Faldir
+Les plus grands ¦ Þeir stærstu
++ {n} secteurs vides ¦ + {n} tómir geirar
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Starfakort: {n}, lítið kort fyrir hverja öld.
+Carte des métiers : {a}, {b} ({when}). ¦ Starfakort: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Starfakort: {a}, {b}.
+Carte des métiers : {n}. ¦ Starfakort: {n}.
+Clic : les métiers de ce lieu ¦ Smelltu: störf á þessum stað
+Aucun métier noté au {when}. ¦ Engin störf skráð á {when}.
+Aucun métier pour ce choix. ¦ Engin störf fyrir þetta val.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Sæktu störfin úr ættfræðinni þinni („Úr forritinu“).
+LES MÉTIERS SUR LA CARTE ¦ STÖRF Á KORTINU
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ Smellur á starf opnar spjald þess (🛠️ Gömul störf).
+Les métiers de ta généalogie ¦ Störfin í ættfræðinni þinni
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Skráð störf (starf, manntal, spjald), flokkuð eins og í Starfatrénu. Aldrei lifandi manneskja né trúnaðarspjald.
+Hommes et femmes ¦ Karlar og konur
+Les femmes ¦ Konurnar
+Toutes les époques ¦ Öll tímabil
+Aucun métier ¦ Engin störf
+Aucun métier avec un lieu pour ce choix. ¦ Engin störf með stað fyrir þetta val.
+Où on était {trade} ¦ Hvar menn voru {trade}
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ {a} skráð · {b} flokkuð · {c} „❔ annað“ til að flokka
+Mes ancêtres seulement ¦ Aðeins forfeður mínir
+Par famille de métiers du dictionnaire (18) ¦ Eftir starfsfjölskyldu úr orðabókinni (18)
+Par grand secteur (12) ¦ Eftir aðalgeira (12)
+employé ¦ starfsmaður
+ménagère ¦ húsmóðir
+Où on l’exerçait ¦ Hvar það var stundað

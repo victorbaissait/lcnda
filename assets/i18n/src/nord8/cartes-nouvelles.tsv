@@ -86,3 +86,54 @@ Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Bu adda belediye yo
 le plus proche ¦ en yakını
 sûr ¦ kesin
 =proposition ¦ öneri|öneri
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ Her menüde ilk seçenek önerilendir: başta o ayarlıdır.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ Haritada meslekler (sektöre göre, yüzyıl yüzyıl)
+Les métiers notés (un par ligne) ¦ Not edilen meslekler (satır başına bir)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Yer (“Tulle”, “Tulle 45.27, 1.77”)
+Classer par ¦ Sınıflandırma
+Famille de métiers du dictionnaire (18) ¦ Sözlükteki meslek ailesi (18)
+Un seul métier et ses variantes ¦ Tek bir meslek ve çeşitleri
+Un métier et ses variantes ¦ Bir meslek ve çeşitleri
+Mes couleurs à moi par métier ¦ Mesleğe göre kendi renklerim
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Renklerim (“tisserand=#aa3300; meunier=#3355aa”)
+Camembert par commune ¦ Belediye başına pasta grafik
+Un rond de la couleur du plus fréquent ¦ En sık olanın renginde bir daire
+Siècle par siècle ¦ Yüzyıl yüzyıl
+Un petit dessin par siècle ¦ Her yüzyıl için küçük bir harita
+Tout ensemble ¦ Hepsi bir arada
+Où placer le métier ¦ Mesleğin yerleştirileceği yer
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Kaydın yeri, yoksa ikamet, yoksa doğum
+Lieu de l’acte seulement ¦ Yalnızca kaydın yeri
+Plusieurs métiers ¦ Birden çok meslek
+Chacun à sa date ¦ Her biri kendi tarihinde
+Le principal seulement ¦ Yalnızca ana meslek
+Montrés ¦ Gösterilir
+Cachés ¦ Gizli
+Les plus grands ¦ En büyükler
++ {n} secteurs vides ¦ + {n} boş sektör
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Meslek haritası: {n}, her yüzyıl için küçük bir harita.
+Carte des métiers : {a}, {b} ({when}). ¦ Meslek haritası: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Meslek haritası: {a}, {b}.
+Carte des métiers : {n}. ¦ Meslek haritası: {n}.
+Clic : les métiers de ce lieu ¦ Tıkla: bu yerin meslekleri
+Aucun métier noté au {when}. ¦ {when} için not edilmiş meslek yok.
+Aucun métier pour ce choix. ¦ Bu seçim için meslek yok.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Meslekleri soy ağacından al (“Uygulamadan”).
+LES MÉTIERS SUR LA CARTE ¦ HARİTADA MESLEKLER
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ Bir mesleğe tıklamak kartını açar (🛠️ Eski meslekler).
+Les métiers de ta généalogie ¦ Soy ağacındaki meslekler
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Not edilen meslekler (meslek, nüfus sayımı, kart), Meslek ağacındaki gibi sınıflandırılır. Asla yaşayan biri ya da gizli bir kart yok.
+Hommes et femmes ¦ Erkekler ve kadınlar
+Les femmes ¦ Kadınlar
+Toutes les époques ¦ Tüm dönemler
+Aucun métier ¦ Meslek yok
+Aucun métier avec un lieu pour ce choix. ¦ Bu seçim için yeri olan meslek yok.
+Où on était {trade} ¦ {trade} olunan yerler
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ {a} not edildi · {b} sınıflandı · {c} “❔ diğer” sınıflandırılacak
+Mes ancêtres seulement ¦ Yalnızca atalarım
+Par famille de métiers du dictionnaire (18) ¦ Sözlükteki meslek ailesine göre (18)
+Par grand secteur (12) ¦ Ana sektöre göre (12)
+employé ¦ memur
+ménagère ¦ ev hanımı
+Où on l’exerçait ¦ Nerede yapılıyordu

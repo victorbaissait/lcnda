@@ -86,3 +86,54 @@ Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Obec tohoto jména 
 le plus proche ¦ nejbližší ¦ den närmaste ¦ den nærmeste
 sûr ¦ jisté ¦ säker ¦ sikker
 =proposition ¦ návrh|návrhy|návrhů ¦ förslag|förslag ¦ forslag|forslag
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ V každé nabídce je první volba doporučená: je nastavená od začátku. ¦ I varje meny är det första valet det rekommenderade: det är inställt från början. ¦ I hver menu er det første valg det anbefalede: det er indstillet fra start.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ Povolání na mapě (podle odvětví, století po století) ¦ Yrken på kartan (per sektor, sekel för sekel) ¦ Erhverv på kortet (efter sektor, århundrede for århundrede)
+Les métiers notés (un par ligne) ¦ Zapsaná povolání (jedno na řádek) ¦ Noterade yrken (ett per rad) ¦ Noterede erhverv (ét pr. linje)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Místo („Tulle“, „Tulle 45.27, 1.77“) ¦ Plats (”Tulle”, ”Tulle 45.27, 1.77”) ¦ Sted (»Tulle«, »Tulle 45.27, 1.77«)
+Classer par ¦ Třídit podle ¦ Klassa efter ¦ Klassificér efter
+Famille de métiers du dictionnaire (18) ¦ Skupina povolání ze slovníku (18) ¦ Yrkesfamilj ur ordboken (18) ¦ Erhvervsfamilie fra ordbogen (18)
+Un seul métier et ses variantes ¦ Jediné povolání a jeho varianty ¦ Ett enda yrke och dess varianter ¦ Ét enkelt erhverv og dets varianter
+Un métier et ses variantes ¦ Povolání a jeho varianty ¦ Ett yrke och dess varianter ¦ Et erhverv og dets varianter
+Mes couleurs à moi par métier ¦ Moje vlastní barvy pro povolání ¦ Mina egna färger per yrke ¦ Mine egne farver pr. erhverv
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Moje barvy („tisserand=#aa3300; meunier=#3355aa“) ¦ Mina färger (”tisserand=#aa3300; meunier=#3355aa”) ¦ Mine farver (»tisserand=#aa3300; meunier=#3355aa«)
+Camembert par commune ¦ Výsečový graf pro obec ¦ Cirkeldiagram per kommun ¦ Lagkagediagram pr. kommune
+Un rond de la couleur du plus fréquent ¦ Kroužek v barvě nejčastějšího ¦ En cirkel i färgen för den vanligaste ¦ En cirkel i farven for det hyppigste
+Siècle par siècle ¦ Století po století ¦ Sekel för sekel ¦ Århundrede for århundrede
+Un petit dessin par siècle ¦ Malá mapa pro každé století ¦ En liten karta per sekel ¦ Et lille kort pr. århundrede
+Tout ensemble ¦ Vše dohromady ¦ Allt tillsammans ¦ Alt samlet
+Où placer le métier ¦ Kam umístit povolání ¦ Var yrket placeras ¦ Hvor erhvervet placeres
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Místo zápisu, jinak bydliště, jinak narození ¦ Plats för akten, annars bostad, annars födelse ¦ Sted for akten, ellers bopæl, ellers fødsel
+Lieu de l’acte seulement ¦ Jen místo zápisu ¦ Bara aktens plats ¦ Kun aktens sted
+Plusieurs métiers ¦ Několik povolání ¦ Flera yrken ¦ Flere erhverv
+Chacun à sa date ¦ Každé ke svému datu ¦ Var och ett vid sitt datum ¦ Hver på sin dato
+Le principal seulement ¦ Jen hlavní ¦ Bara huvudyrket ¦ Kun hovederhvervet
+Montrés ¦ Zobrazené ¦ Visas ¦ Vist
+Cachés ¦ Skryté ¦ Dolda ¦ Skjult
+Les plus grands ¦ Ty největší ¦ De största ¦ De største
++ {n} secteurs vides ¦ + prázdná odvětví: {n} ¦ + {n} tomma sektorer ¦ + {n} tomme sektorer
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Mapa povolání: {n}, malá mapa pro každé století. ¦ Yrkeskarta: {n}, en liten karta per sekel. ¦ Erhvervskort: {n}, et lille kort pr. århundrede.
+Carte des métiers : {a}, {b} ({when}). ¦ Mapa povolání: {a}, {b} ({when}). ¦ Yrkeskarta: {a}, {b} ({when}). ¦ Erhvervskort: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Mapa povolání: {a}, {b}. ¦ Yrkeskarta: {a}, {b}. ¦ Erhvervskort: {a}, {b}.
+Carte des métiers : {n}. ¦ Mapa povolání: {n}. ¦ Yrkeskarta: {n}. ¦ Erhvervskort: {n}.
+Clic : les métiers de ce lieu ¦ Klikni: povolání tohoto místa ¦ Klicka: yrkena på den här platsen ¦ Klik: erhvervene på dette sted
+Aucun métier noté au {when}. ¦ Žádné povolání zapsané v období: {when}. ¦ Inget yrke noterat under {when}. ¦ Intet erhverv noteret i {when}.
+Aucun métier pour ce choix. ¦ Pro tento výběr žádné povolání. ¦ Inget yrke för det här valet. ¦ Intet erhverv til dette valg.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Vezmi povolání ze své genealogie („Z aplikace“). ¦ Ta yrkena från din släktforskning (”Från appen”). ¦ Tag erhvervene fra din slægtsforskning (»Fra appen«).
+LES MÉTIERS SUR LA CARTE ¦ POVOLÁNÍ NA MAPĚ ¦ YRKEN PÅ KARTAN ¦ ERHVERV PÅ KORTET
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ Kliknutí na povolání otevře jeho kartu (🛠️ Stará povolání). ¦ Ett klick på ett yrke öppnar dess kort (🛠️ Gamla yrken). ¦ Et klik på et erhverv åbner dets kort (🛠️ Gamle erhverv).
+Les métiers de ta généalogie ¦ Povolání ve tvé genealogii ¦ Yrkena i din släktforskning ¦ Erhvervene i din slægtsforskning
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Zapsaná povolání (profese, sčítání, karta) tříděná jako ve Stromu povolání. Nikdy žijící osoba ani důvěrná karta. ¦ De noterade yrkena (yrke, folkräkning, kort), klassade som i Yrkesträdet. Aldrig en levande person eller ett konfidentiellt kort. ¦ De noterede erhverv (erhverv, folketælling, kort), klassificeret som i Erhvervstræet. Aldrig en levende eller et fortroligt kort.
+Hommes et femmes ¦ Muži a ženy ¦ Män och kvinnor ¦ Mænd og kvinder
+Les femmes ¦ Ženy ¦ Kvinnorna ¦ Kvinderne
+Toutes les époques ¦ Všechna období ¦ Alla epoker ¦ Alle tider
+Aucun métier ¦ Žádné povolání ¦ Inget yrke ¦ Intet erhverv
+Aucun métier avec un lieu pour ce choix. ¦ Pro tento výběr žádné povolání s místem. ¦ Inget yrke med en plats för det här valet. ¦ Intet erhverv med et sted til dette valg.
+Où on était {trade} ¦ Kde byli {trade} ¦ Var man var {trade} ¦ Hvor man var {trade}
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ Zapsáno: {a} · zatříděno: {b} · „❔ jiné“ k zatřídění: {c} ¦ {a} noterade · {b} klassade · {c} ”❔ annat” att klassa ¦ {a} noteret · {b} klassificeret · {c} »❔ andet« at klassificere
+Mes ancêtres seulement ¦ Jen moji předkové ¦ Bara mina anor ¦ Kun mine aner
+Par famille de métiers du dictionnaire (18) ¦ Podle skupiny povolání ze slovníku (18) ¦ Per yrkesfamilj ur ordboken (18) ¦ Efter erhvervsfamilie fra ordbogen (18)
+Par grand secteur (12) ¦ Podle hlavního odvětví (12) ¦ Per huvudsektor (12) ¦ Efter hovedsektor (12)
+employé ¦ úředník ¦ tjänsteman ¦ funktionær
+ménagère ¦ v domácnosti ¦ hemmafru ¦ husmor
+Où on l’exerçait ¦ Kde se vykonávalo ¦ Var det utövades ¦ Hvor det blev udøvet

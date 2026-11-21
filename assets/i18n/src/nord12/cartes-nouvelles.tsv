@@ -86,3 +86,54 @@ Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Коммуны с �
 le plus proche ¦ ближайшая ¦ найближча
 sûr ¦ надёжно ¦ надійно
 =proposition ¦ предложение|предложения|предложений ¦ пропозиція|пропозиції|пропозицій
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ В каждом меню первый вариант — рекомендуемый: он выбран с самого начала. ¦ У кожному меню перший варіант — рекомендований: його обрано від початку.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ Профессии на карте (по отраслям, век за веком) ¦ Професії на мапі (за галузями, століття за століттям)
+Les métiers notés (un par ligne) ¦ Записанные профессии (по одной в строке) ¦ Записані професії (по одній у рядку)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Место («Tulle», «Tulle 45.27, 1.77») ¦ Місце («Tulle», «Tulle 45.27, 1.77»)
+Classer par ¦ Классифицировать по ¦ Класифікувати за
+Famille de métiers du dictionnaire (18) ¦ Семейство профессий из словаря (18) ¦ Родина професій зі словника (18)
+Un seul métier et ses variantes ¦ Одна профессия и её варианты ¦ Одна професія та її варіанти
+Un métier et ses variantes ¦ Профессия и её варианты ¦ Професія та її варіанти
+Mes couleurs à moi par métier ¦ Мои цвета для каждой профессии ¦ Мої кольори для кожної професії
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Мои цвета («tisserand=#aa3300; meunier=#3355aa») ¦ Мої кольори («tisserand=#aa3300; meunier=#3355aa»)
+Camembert par commune ¦ Круговая диаграмма по коммуне ¦ Кругова діаграма за громадою
+Un rond de la couleur du plus fréquent ¦ Кружок цвета самого частого ¦ Кружечок кольору найчастішого
+Siècle par siècle ¦ Век за веком ¦ Століття за століттям
+Un petit dessin par siècle ¦ Маленькая карта на каждый век ¦ Маленька мапа на кожне століття
+Tout ensemble ¦ Всё вместе ¦ Усе разом
+Où placer le métier ¦ Где разместить профессию ¦ Де розмістити професію
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Место акта, иначе место жительства, иначе рождение ¦ Місце акта, інакше місце проживання, інакше народження
+Lieu de l’acte seulement ¦ Только место акта ¦ Лише місце акта
+Plusieurs métiers ¦ Несколько профессий ¦ Кілька професій
+Chacun à sa date ¦ Каждая на свою дату ¦ Кожна на свою дату
+Le principal seulement ¦ Только основная ¦ Лише основна
+Montrés ¦ Показаны ¦ Показані
+Cachés ¦ Скрыты ¦ Приховані
+Les plus grands ¦ Самые крупные ¦ Найбільші
++ {n} secteurs vides ¦ + пустых отраслей: {n} ¦ + порожніх галузей: {n}
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Карта профессий: {n}, по маленькой карте на век. ¦ Мапа професій: {n}, по маленькій мапі на століття.
+Carte des métiers : {a}, {b} ({when}). ¦ Карта профессий: {a}, {b} ({when}). ¦ Мапа професій: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Карта профессий: {a}, {b}. ¦ Мапа професій: {a}, {b}.
+Carte des métiers : {n}. ¦ Карта профессий: {n}. ¦ Мапа професій: {n}.
+Clic : les métiers de ce lieu ¦ Нажми: профессии этого места ¦ Натисни: професії цього місця
+Aucun métier noté au {when}. ¦ Нет записанных профессий за период: {when}. ¦ Немає записаних професій за період: {when}.
+Aucun métier pour ce choix. ¦ Для этого выбора профессий нет. ¦ Для цього вибору професій немає.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Возьми профессии из своей генеалогии («Из приложения»). ¦ Візьми професії зі своєї генеалогії («Із застосунку»).
+LES MÉTIERS SUR LA CARTE ¦ ПРОФЕССИИ НА КАРТЕ ¦ ПРОФЕСІЇ НА МАПІ
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ Нажатие на профессию открывает её карточку (🛠️ Старинные профессии). ¦ Натискання на професію відкриває її картку (🛠️ Давні професії).
+Les métiers de ta généalogie ¦ Профессии в твоей генеалогии ¦ Професії у твоїй генеалогії
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Записанные профессии (профессия, перепись, карточка), классифицированы как в Древе профессий. Никогда живые и никогда конфиденциальные карточки. ¦ Записані професії (професія, перепис, картка), класифіковані як у Дереві професій. Ніколи живі й ніколи конфіденційні картки.
+Hommes et femmes ¦ Мужчины и женщины ¦ Чоловіки й жінки
+Les femmes ¦ Женщины ¦ Жінки
+Toutes les époques ¦ Все эпохи ¦ Усі епохи
+Aucun métier ¦ Профессий нет ¦ Професій немає
+Aucun métier avec un lieu pour ce choix. ¦ Для этого выбора нет профессий с местом. ¦ Для цього вибору немає професій із місцем.
+Où on était {trade} ¦ Где были {trade} ¦ Де були {trade}
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ Записано: {a} · классифицировано: {b} · «❔ другое», ждут классификации: {c} ¦ Записано: {a} · класифіковано: {b} · «❔ інше», чекають класифікації: {c}
+Mes ancêtres seulement ¦ Только мои предки ¦ Лише мої предки
+Par famille de métiers du dictionnaire (18) ¦ По семействам профессий из словаря (18) ¦ За родинами професій зі словника (18)
+Par grand secteur (12) ¦ По крупным отраслям (12) ¦ За великими галузями (12)
+employé ¦ служащий ¦ службовець
+ménagère ¦ домохозяйка ¦ домогосподарка
+Où on l’exerçait ¦ Где ею занимались ¦ Де нею займалися

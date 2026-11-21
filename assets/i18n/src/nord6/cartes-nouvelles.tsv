@@ -86,3 +86,54 @@ Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Tokio pavadinimo sa
 le plus proche ¦ artimiausia ¦ tuvākā ¦ lähim
 sûr ¦ tikra ¦ droša ¦ kindel
 =proposition ¦ pasiūlymas|pasiūlymai|pasiūlymų ¦ ieteikumu|ieteikums|ieteikumi ¦ ettepanek|ettepanekut
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ Kiekviename meniu pirmas pasirinkimas yra rekomenduojamas: jis nustatytas iš pradžių. ¦ Katrā izvēlnē pirmā izvēle ir ieteicamā: tā ir iestatīta no sākuma. ¦ Igas menüüs on esimene valik soovitatud: see on algusest peale määratud.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ Profesijos žemėlapyje (pagal sektorių, šimtmetis po šimtmečio) ¦ Arodi kartē (pa nozarēm, gadsimtu pēc gadsimta) ¦ Ametid kaardil (valdkonniti, sajand sajandi järel)
+Les métiers notés (un par ligne) ¦ Užrašytos profesijos (viena eilutėje) ¦ Pierakstītie arodi (viens katrā rindā) ¦ Märgitud ametid (üks rea kohta)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Vieta („Tulle“, „Tulle 45.27, 1.77“) ¦ Vieta (“Tulle”, “Tulle 45.27, 1.77”) ¦ Koht („Tulle“, „Tulle 45.27, 1.77“)
+Classer par ¦ Klasifikuoti pagal ¦ Klasificēt pēc ¦ Liigita
+Famille de métiers du dictionnaire (18) ¦ Žodyno profesijų šeima (18) ¦ Vārdnīcas arodu saime (18) ¦ Sõnaraamatu ametipere (18)
+Un seul métier et ses variantes ¦ Viena profesija ir jos variantai ¦ Viens arods un tā varianti ¦ Üks amet ja selle variandid
+Un métier et ses variantes ¦ Profesija ir jos variantai ¦ Arods un tā varianti ¦ Amet ja selle variandid
+Mes couleurs à moi par métier ¦ Mano spalvos kiekvienai profesijai ¦ Manas krāsas katram arodam ¦ Minu värvid ameti kaupa
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Mano spalvos („tisserand=#aa3300; meunier=#3355aa“) ¦ Manas krāsas (“tisserand=#aa3300; meunier=#3355aa”) ¦ Minu värvid („tisserand=#aa3300; meunier=#3355aa“)
+Camembert par commune ¦ Skritulinė diagrama savivaldybei ¦ Sektoru diagramma katrai pašvaldībai ¦ Sektordiagramm valla kohta
+Un rond de la couleur du plus fréquent ¦ Skritulys dažniausio spalva ¦ Aplis biežākā krāsā ¦ Ring kõige sagedama värvi
+Siècle par siècle ¦ Šimtmetis po šimtmečio ¦ Gadsimtu pēc gadsimta ¦ Sajand sajandi järel
+Un petit dessin par siècle ¦ Mažas žemėlapis kiekvienam šimtmečiui ¦ Neliela karte katram gadsimtam ¦ Väike kaart sajandi kohta
+Tout ensemble ¦ Viskas kartu ¦ Viss kopā ¦ Kõik koos
+Où placer le métier ¦ Kur padėti profesiją ¦ Kur novietot arodu ¦ Kuhu amet paigutada
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Akto vieta, kitaip gyvenamoji vieta, kitaip gimimas ¦ Akta vieta, citādi dzīvesvieta, citādi dzimšana ¦ Akti koht, muidu elukoht, muidu sünd
+Lieu de l’acte seulement ¦ Tik akto vieta ¦ Tikai akta vieta ¦ Ainult akti koht
+Plusieurs métiers ¦ Kelios profesijos ¦ Vairāki arodi ¦ Mitu ametit
+Chacun à sa date ¦ Kiekviena savo data ¦ Katrs savā datumā ¦ Igaüks oma kuupäeval
+Le principal seulement ¦ Tik pagrindinė ¦ Tikai galvenais ¦ Ainult peamine
+Montrés ¦ Rodomi ¦ Rādīti ¦ Näidatud
+Cachés ¦ Paslėpti ¦ Paslēpti ¦ Peidetud
+Les plus grands ¦ Didžiausios ¦ Lielākās ¦ Suurimad
++ {n} secteurs vides ¦ + tuščių sektorių: {n} ¦ + tukšas nozares: {n} ¦ + {n} tühja valdkonda
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Profesijų žemėlapis: {n}, mažas žemėlapis kiekvienam šimtmečiui. ¦ Arodu karte: {n}, neliela karte katram gadsimtam. ¦ Ametite kaart: {n}, väike kaart sajandi kohta.
+Carte des métiers : {a}, {b} ({when}). ¦ Profesijų žemėlapis: {a}, {b} ({when}). ¦ Arodu karte: {a}, {b} ({when}). ¦ Ametite kaart: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Profesijų žemėlapis: {a}, {b}. ¦ Arodu karte: {a}, {b}. ¦ Ametite kaart: {a}, {b}.
+Carte des métiers : {n}. ¦ Profesijų žemėlapis: {n}. ¦ Arodu karte: {n}. ¦ Ametite kaart: {n}.
+Clic : les métiers de ce lieu ¦ Spustelėk: šios vietos profesijos ¦ Klikšķis: šīs vietas arodi ¦ Klõpsa: selle koha ametid
+Aucun métier noté au {when}. ¦ Laikotarpiu {when} profesijų neužrašyta. ¦ Periodā {when} nav pierakstītu arodu. ¦ Ajal {when} pole ühtki ametit märgitud.
+Aucun métier pour ce choix. ¦ Šiam pasirinkimui profesijų nėra. ¦ Šai izvēlei nav arodu. ¦ Selle valiku jaoks ameteid pole.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Paimk profesijas iš savo genealogijos („Iš programos“). ¦ Ņem arodus no savas ģenealoģijas (“No lietotnes”). ¦ Võta ametid oma sugupuust („Rakendusest“).
+LES MÉTIERS SUR LA CARTE ¦ PROFESIJOS ŽEMĖLAPYJE ¦ ARODI KARTĒ ¦ AMETID KAARDIL
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ Spustelėjus profesiją atsiveria jos kortelė (🛠️ Senosios profesijos). ¦ Klikšķis uz aroda atver tā karti (🛠️ Senie arodi). ¦ Klõps ametil avab selle kaardi (🛠️ Vanad ametid).
+Les métiers de ta généalogie ¦ Profesijos tavo genealogijoje ¦ Arodi tavā ģenealoģijā ¦ Ametid sinu sugupuus
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Užrašytos profesijos (profesija, surašymas, kortelė), suskirstytos kaip Profesijų medyje. Niekada gyvas asmuo ar konfidenciali kortelė. ¦ Pierakstītie arodi (profesija, tautas skaitīšana, kartīte), klasificēti kā Arodu kokā. Nekad dzīva persona vai konfidenciāla kartīte. ¦ Märgitud ametid (amet, rahvaloendus, kaart), liigitatud nagu Ametipuus. Mitte kunagi elav inimene ega konfidentsiaalne kaart.
+Hommes et femmes ¦ Vyrai ir moterys ¦ Vīrieši un sievietes ¦ Mehed ja naised
+Les femmes ¦ Moterys ¦ Sievietes ¦ Naised
+Toutes les époques ¦ Visi laikotarpiai ¦ Visi laikmeti ¦ Kõik ajastud
+Aucun métier ¦ Profesijų nėra ¦ Nav arodu ¦ Ameteid pole
+Aucun métier avec un lieu pour ce choix. ¦ Šiam pasirinkimui profesijų su vieta nėra. ¦ Šai izvēlei nav arodu ar vietu. ¦ Selle valiku jaoks kohaga ameteid pole.
+Où on était {trade} ¦ Kur buvo {trade} ¦ Kur bija {trade} ¦ Kus oldi {trade}
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ Užrašyta: {a} · suskirstyta: {b} · „❔ kita“ suskirstyti: {c} ¦ Pierakstīti: {a} · klasificēti: {b} · “❔ cits” klasificējami: {c} ¦ Märgitud: {a} · liigitatud: {b} · „❔ muu“ liigitada: {c}
+Mes ancêtres seulement ¦ Tik mano protėviai ¦ Tikai mani senči ¦ Ainult minu esivanemad
+Par famille de métiers du dictionnaire (18) ¦ Pagal žodyno profesijų šeimą (18) ¦ Pēc vārdnīcas arodu saimes (18) ¦ Sõnaraamatu ametipere järgi (18)
+Par grand secteur (12) ¦ Pagal pagrindinį sektorių (12) ¦ Pēc galvenās nozares (12) ¦ Põhivaldkonna järgi (12)
+employé ¦ tarnautojas ¦ kalpotājs ¦ ametnik
+ménagère ¦ namų šeimininkė ¦ mājsaimniece ¦ koduperenaine
+Où on l’exerçait ¦ Kur ja vertėsi ¦ Kur to strādāja ¦ Kus seda tehti

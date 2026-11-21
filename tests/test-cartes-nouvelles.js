@@ -33,6 +33,14 @@ const KINDS = ['trademap', 'mirrormap', 'lifearea', 'linkmap', 'crisismap'];
 const FILES = ['assets/js/heritage-diagram-cartes-plus2.js', 'assets/js/heritage-lieux-a-placer.js'];
 // les noms qui ne doivent JAMAIS sortir : une vivante, une fiche confidentielle
 const SECRET = /Claire MAZAUD|Paul DURAND|informaticien/;
+// chaque carte dessinée depuis l'app dans le navigateur : [sorte, préparation du panneau, texte attendu dans l'aperçu]
+// et des réglages essayés sur l'exemple de chaque carte (chacun doit donner une image)
+const VARIANTS = {
+    trademap: [{time: 'small'}, {draw: 'deps'}, {draw: 'dots'}, {draw: 'top'}, {classify: 'domain'}, {classify: 'mine', colors: 'tanneur=#aa0000'}, {multi: 'main', foyer: 'hide', size: 'same', where: 'act'}, {time: 'half', at: '1850'}],
+};
+const KIND_TESTS = [
+    ['trademap', null, 'Tulle'],
+];
 
 (async () => {
     /* ═════ 1. Node ═════ */
@@ -172,6 +180,20 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(dir) });
             assert.doesNotMatch(src('assets/js/heritage-lieux-a-placer.js'), /lieux_online[^\n]*forEach|forEach[^\n]*lieux_online/, 'jamais en lot');
         });
 
+        await t('🔨 métiers : placés (acte, sinon résidence, sinon naissance), classés par secteur — ni vivant ni fiche confidentielle', async () => {
+            const r = await get('cartes_plus2', { what: 'trades' });
+            assert.ok(Array.isArray(r.rows) && r.rows.length >= 4, JSON.stringify(r).slice(0, 300));
+            const by = (pid, key) => r.rows.find(x => x[0] === pid && x[3] === key);
+            const tan = by(2, 'tanneur'); assert.ok(tan, 'tanneur'); assert.equal(tan[1], 2, 'à Tulle (lieu de l’acte)'); assert.equal(tan[2], 1919); assert.equal(tan[4], 'arti'); assert.equal(tan[6], 'act');
+            const sab = by(4, 'sabotier'); assert.ok(sab, 'sabotier (fiche)'); assert.equal(sab[1], 1, 'sans acte : sa naissance à Naves'); assert.equal(sab[6], 'birth');
+            assert.ok(!r.rows.some(x => x[0] === 20 || x[0] === 21), 'ni vivante ni fiche confidentielle');
+            assert.ok(!JSON.stringify(r).match(SECRET));
+            assert.ok(r.sectors.length === 12 && r.domains.length === 18);
+            assert.ok((await get('cartes_plus2', { what: 'trades', pop: 'pat', root: 1 })).rows.every(x => [2, 4, 5, 8, 9].includes(x[0])), 'côté père');
+            const tl = await get('cartes_plus2', { what: 'trade_list' }); assert.ok(tl.trades.some(x => x.key === 'tanneur'));
+            assert.equal((await get('cartes_plus2', { what: 'nope' })).error, 'Demande inconnue.');
+        });
+
         /* ═════ 3. Navigateur ═════ */
         let chromium = null; try { ({ chromium } = require('/opt/node22/lib/node_modules/playwright')); } catch (_) { try { ({ chromium } = require('playwright')); } catch (_) {} }
         if (!chromium) console.log('— Playwright absent : navigateur sauté');
@@ -217,6 +239,38 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(dir) });
                     await p.waitForSelector('.lap-dlg [data-lap-online]');
                     await shot(p, `lieux-reglages-${tag}`); await noSide();
                     await closeAll(p);
+                });
+                for (const [kind, prep, expect] of KIND_TESTS) {
+                    await t(`Graphiques → Cartes : ${kind} — exemple, « Depuis l’app », réglages, export sans vivant (${label})`, async () => {
+                        await closeAll(p); await p.evaluate(k => { window.LCNDA_EXT.openDiagramEditor(null, { kind: k }); }, kind);
+                        await p.waitForSelector('dialog.h-dg-dlg[open] [data-dg-preview] svg [data-geo-map]', { timeout: 20000 });
+                        await p.click('[data-dg-tab="app"]'); await p.waitForSelector('[data-cq-go]');
+                        assert.ok(await p.$$eval('[data-dgg] option', x => x.length) >= 3, '« Graphique » : au moins deux départs');
+                        if (prep) await prep(p);
+                        await p.click('[data-cq-go]');
+                        await p.waitForFunction(() => !document.querySelector('[data-cq-msg]') || /✓|⚠️/.test(document.querySelector('[data-cq-msg]').textContent), null, { timeout: 15000 });
+                        const msg = await p.evaluate(() => document.querySelector('[data-cq-msg]')?.textContent || '✓ onglet Données'); assert.match(msg, /^✓/, msg);
+                        await p.waitForFunction(w => (document.querySelector('[data-dg-preview]')?.innerHTML || '').includes(w) && document.querySelector('[data-dg-preview] svg [data-geo-map]'), expect, { timeout: 15000 });
+                        await p.waitForTimeout(400);
+                        const svg = await p.$eval('[data-dg-preview]', e => e.innerHTML); assert.doesNotMatch(svg, SECRET, 'ni vivant ni fiche confidentielle');
+                        await noSide(); await shot(p, `${kind}-${tag}`);
+                        await p.click('[data-dg-tab="opts"]'); await p.waitForSelector('[data-opt]');
+                        const sels = await p.$$eval('select[data-opt]', x => { const mk = new Set((window.LCNDA_EXT.diagramCartes.mapOpts?.() || []).map(o => o.k)); return x.filter(s => !mk.has(s.dataset.opt)).map(s => [s.dataset.opt, s.options[0]?.value, s.value]); });
+                        assert.ok(sels.length >= 4, 'des réglages'); for (const [k, first, v] of sels) if (!['legend', 'ramp', 'placeLabels'].includes(k)) assert.equal(v, first, `${k} : l’option conseillée (la première) réglée au départ`);
+                        const exported = await p.evaluate(async () => { const R = window.LCNDA_EXT.diagramRender, d = document.querySelector('dialog.h-dg-dlg[open]'); return d ? d.querySelector('[data-dg-preview]').innerHTML : ''; });
+                        assert.doesNotMatch(exported, SECRET);
+                        await closeAll(p);
+                    });
+                }
+                await t(`les cinq cartes : SVG valides qui s’ouvrent comme une image (export PNG / SVG / PDF) (${label})`, async () => {
+                    const bad = await p.evaluate(async kinds => { const R = window.LCNDA_EXT.diagramRender, out = [];
+                        for (const [k, v] of kinds) { if (!R.KINDS[k]) { out.push(k + ' : absent'); continue; } const s0 = R.KINDS[k].sample(), sp = {kind: k, ...s0, o: {...s0.o, ...v}}; const svg = R.svg(await R.KINDS[k].resolve(sp), 900);
+                            if (!/data-geo-map/.test(svg)) out.push(k + ' ' + JSON.stringify(v) + ' : pas de carte');
+                            if (/data-geo-wait/.test(svg)) out.push(k + ' : fond pas chargé');
+                            if (new DOMParser().parseFromString(svg, 'image/svg+xml').querySelector('parsererror')) out.push(k + ' : XML');
+                            if (!await new Promise(ok => { const i = new Image(); i.onload = () => ok(true); i.onerror = () => ok(false); i.src = URL.createObjectURL(new Blob([svg], {type: 'image/svg+xml'})); })) out.push(k + ' : image'); }
+                        return out; }, KIND_TESTS.flatMap(k => [[k[0], {}], ...(VARIANTS[k[0]] || []).map(v => [k[0], v])]));
+                    assert.deepEqual(bad, []);
                 });
                 await t(`aucune erreur JavaScript (${label})`, async () => { assert.deepEqual(errors, []); });
                 await ctx.close();

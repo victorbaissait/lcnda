@@ -86,3 +86,54 @@ Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Tämännimistä kun
 le plus proche ¦ lähin ¦ a legközelebbi
 sûr ¦ varma ¦ biztos
 =proposition ¦ ehdotus|ehdotusta ¦ javaslat|javaslat
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ Jokaisessa valikossa ensimmäinen vaihtoehto on suositeltu: se on valittuna alusta asti. ¦ Minden menüben az első lehetőség az ajánlott: ez van beállítva kezdetben.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ Ammatit kartalla (aloittain, vuosisata kerrallaan) ¦ Foglalkozások a térképen (ágazatonként, évszázadonként)
+Les métiers notés (un par ligne) ¦ Merkityt ammatit (yksi riviä kohti) ¦ Feljegyzett foglalkozások (soronként egy)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Paikka (”Tulle”, ”Tulle 45.27, 1.77”) ¦ Hely („Tulle”, „Tulle 45.27, 1.77”)
+Classer par ¦ Luokittele ¦ Csoportosítás
+Famille de métiers du dictionnaire (18) ¦ Sanakirjan ammattiryhmä (18) ¦ Foglalkozáscsalád a szótárból (18)
+Un seul métier et ses variantes ¦ Yksi ammatti ja sen muunnelmat ¦ Egyetlen foglalkozás és változatai
+Un métier et ses variantes ¦ Ammatti ja sen muunnelmat ¦ Egy foglalkozás és változatai
+Mes couleurs à moi par métier ¦ Omat värini ammateittain ¦ Saját színeim foglalkozásonként
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Värini (”tisserand=#aa3300; meunier=#3355aa”) ¦ Színeim („tisserand=#aa3300; meunier=#3355aa”)
+Camembert par commune ¦ Piirakka kunnittain ¦ Kördiagram településenként
+Un rond de la couleur du plus fréquent ¦ Ympyrä yleisimmän värillä ¦ Kör a leggyakoribb színével
+Siècle par siècle ¦ Vuosisata kerrallaan ¦ Évszázadonként
+Un petit dessin par siècle ¦ Pieni kartta vuosisataa kohti ¦ Évszázadonként egy kis térkép
+Tout ensemble ¦ Kaikki yhdessä ¦ Mind együtt
+Où placer le métier ¦ Mihin ammatti sijoitetaan ¦ Hová kerüljön a foglalkozás
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Asiakirjan paikka, muuten asuinpaikka, muuten syntymä ¦ Az irat helye, különben a lakóhely, különben a születés
+Lieu de l’acte seulement ¦ Vain asiakirjan paikka ¦ Csak az irat helye
+Plusieurs métiers ¦ Useita ammatteja ¦ Több foglalkozás
+Chacun à sa date ¦ Kukin omana ajankohtanaan ¦ Mindegyik a maga dátumánál
+Le principal seulement ¦ Vain pääammatti ¦ Csak a fő foglalkozás
+Montrés ¦ Näytetään ¦ Látható
+Cachés ¦ Piilotettu ¦ Rejtve
+Les plus grands ¦ Suurimmat ¦ A legnagyobbak
++ {n} secteurs vides ¦ + {n} tyhjää alaa ¦ + {n} üres ágazat
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Ammattikartta: {n}, pieni kartta vuosisataa kohti. ¦ Foglalkozástérkép: {n}, évszázadonként egy kis térkép.
+Carte des métiers : {a}, {b} ({when}). ¦ Ammattikartta: {a}, {b} ({when}). ¦ Foglalkozástérkép: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Ammattikartta: {a}, {b}. ¦ Foglalkozástérkép: {a}, {b}.
+Carte des métiers : {n}. ¦ Ammattikartta: {n}. ¦ Foglalkozástérkép: {n}.
+Clic : les métiers de ce lieu ¦ Napsauta: tämän paikan ammatit ¦ Kattintás: e hely foglalkozásai
+Aucun métier noté au {when}. ¦ Ei ammatteja merkitty ajalle {when}. ¦ Nincs feljegyzett foglalkozás: {when}.
+Aucun métier pour ce choix. ¦ Ei ammatteja tälle valinnalle. ¦ Nincs foglalkozás ehhez a választáshoz.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Ota ammatit sukututkimuksestasi (”Sovelluksesta”). ¦ Vedd át a foglalkozásokat a családfádból („Az alkalmazásból”).
+LES MÉTIERS SUR LA CARTE ¦ AMMATIT KARTALLA ¦ FOGLALKOZÁSOK A TÉRKÉPEN
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ Ammatin napsautus avaa sen kortin (🛠️ Vanhat ammatit). ¦ Egy foglalkozásra kattintva megnyílik a lapja (🛠️ Régi foglalkozások).
+Les métiers de ta généalogie ¦ Sukututkimuksesi ammatit ¦ A családfád foglalkozásai
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Merkityt ammatit (ammatti, väenlaskenta, kortti) luokiteltuina kuten Ammattipuussa. Ei koskaan elävää henkilöä eikä luottamuksellista korttia. ¦ A feljegyzett foglalkozások (foglalkozás, népszámlálás, adatlap), a Foglalkozásfa szerint csoportosítva. Soha élő személy vagy bizalmas adatlap.
+Hommes et femmes ¦ Miehet ja naiset ¦ Férfiak és nők
+Les femmes ¦ Naiset ¦ A nők
+Toutes les époques ¦ Kaikki aikakaudet ¦ Minden korszak
+Aucun métier ¦ Ei ammatteja ¦ Nincs foglalkozás
+Aucun métier avec un lieu pour ce choix. ¦ Ei paikallisia ammatteja tälle valinnalle. ¦ Nincs hellyel rendelkező foglalkozás ehhez a választáshoz.
+Où on était {trade} ¦ Missä oltiin {trade} ¦ Hol voltak {trade}
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ {a} merkitty · {b} luokiteltu · {c} ”❔ muu” luokiteltavana ¦ {a} feljegyezve · {b} besorolva · {c} „❔ egyéb” besorolandó
+Mes ancêtres seulement ¦ Vain esivanhempani ¦ Csak az őseim
+Par famille de métiers du dictionnaire (18) ¦ Sanakirjan ammattiryhmittäin (18) ¦ Szótári foglalkozáscsaládonként (18)
+Par grand secteur (12) ¦ Pääaloittain (12) ¦ Fő ágazatonként (12)
+employé ¦ toimihenkilö ¦ alkalmazott
+ménagère ¦ kotiäiti ¦ háztartásbeli
+Où on l’exerçait ¦ Missä sitä harjoitettiin ¦ Hol űzték

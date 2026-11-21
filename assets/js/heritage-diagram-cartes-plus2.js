@@ -138,9 +138,28 @@
     }
     const afterDraw = (prev, api) => { GC.afterDraw(prev, api); prev._c2Api = api; };
     const mapOpts = (GC.mapOpts?.() || []).filter(x => !['level'].includes(x.k));
+    /** une ligne en tête des réglages : le premier choix de chaque menu est celui conseillé, réglé au départ */
+    const REC = C('rec', '', 'link', {href: () => '', hint: 'Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ.'});
     const COMMON = [C('fit', 'Cadrer tout seul sur les points', 'check', {def: true, when: s => !s.o?.frame}), C('zoneColor', 'Couleur des terres', 'color', {def: GC.LAND}), C('borderColor', 'Couleur des limites', 'color', {def: '#cfcabe'}), C('showMissing', 'Signaler les lieux sans position', 'check', {def: true})];
-    const H = {T, esc, num, clamp, r1, r2, fmt, fold, rows, str, C, pl, yearOf, tip, pidsAttr, opt, optN, siecle, KM, median, bases, frame, locate, missing, emptyMsg, title, atOf, timeOf, periodWord, curve, slice, hull, geoRing, poly,
-        get, placesOf, keepUnplaced, pane, bindGo, sel, val, checks, startId, personField, pickedId, resolve, afterDraw, mapOpts, COMMON, i18n, A, ext, DR, GC, color};
+    /** ▦ un petit dessin par période (ou par groupe), côte à côte, au même cadrage : draw(sous-réglages, largeur) → {h, svg} */
+    function multiples(spec, W, fs, list, draw) {
+        const n = list.length; if (!n) return {h: 0, svg: ''};
+        const cols = W < 520 ? 1 : clamp(Math.min(n, Math.floor(W / 240)), 1, 4), gap = fs, pw = (W - gap * (cols - 1)) / cols;
+        let svg = '', y = 0, rowH = 0;
+        list.forEach((it, j) => {
+            const c = j % cols; if (c === 0 && j) { y += rowH + gap; rowH = 0; }
+            const r = draw({...spec, o: {...(spec.o || {}), ...it.o, height: Math.round(pw * .9)}}, pw); if (r.wait) return;
+            const x = c * (pw + gap);
+            svg += `<g class="cq-facet" transform="translate(${r1(x)} ${r1(y + fs * 1.5)})">${r.svg}</g>${T(x + pw / 2, y + fs * .7, it.label, {size: fs * 1.05, weight: 800, anchor: 'middle'})}`;
+            rowH = Math.max(rowH, r.h + fs * 1.5);
+        });
+        return {h: y + rowH, svg};
+    }
+    /** les fiches derrière un clic sur la carte (le détail reste à l'écran ; jamais à l'export) */
+    const DETAIL = new Map();
+    const keepDetail = (id, data) => { DETAIL.set(id, data); if (DETAIL.size > 40) DETAIL.delete(DETAIL.keys().next().value); };
+    const H = {T, esc, multiples, DETAIL, keepDetail, num, clamp, r1, r2, fmt, fold, rows, str, C, pl, yearOf, tip, pidsAttr, opt, optN, siecle, KM, median, bases, frame, locate, missing, emptyMsg, title, atOf, timeOf, periodWord, curve, slice, hull, geoRing, poly,
+        get, placesOf, keepUnplaced, pane, bindGo, sel, val, checks, startId, personField, pickedId, resolve, afterDraw, mapOpts, COMMON, REC, i18n, A, ext, DR, GC, color};
     const NEW = {};
     /** une carte de plus : rangée dans le catalogue (groupe « Cartes ») si elle n'y est pas déjà */
     const add = (k, kind) => { NEW[k] = kind; if (!K[k]) K[k] = {group: 'Cartes', resolve, afterDraw, logExport: true, ...kind}; };
@@ -148,9 +167,183 @@
     /* ═════════ Les clics dans l'aperçu ═════════ */
     if (typeof document !== 'undefined') {
         document.addEventListener('click', e => {
-            const m = e.target.closest?.('.cq-miss'); if (m && !m.closest('.h-dg-mini')) { e.preventDefault(); const ids = String(m.dataset.cqPlace || '').split(',').map(Number).filter(Boolean); ext.lieuxAPlacer?.open?.({ids}); }
+            const m = e.target.closest?.('.cq-miss'); if (m && !m.closest('.h-dg-mini')) { e.preventDefault(); const ids = String(m.dataset.cqPlace || '').split(',').map(Number).filter(Boolean); ext.lieuxAPlacer?.open?.({ids}); return; }
+            const pb = e.target.closest?.('[data-cq-person]'); if (pb) { document.querySelectorAll('dialog[open]').forEach(d => { if (d.contains(pb)) d.close(); }); A()?.openPersonById?.(Number(pb.dataset.cqPerson)); return; }
+            const tb = e.target.closest?.('[data-cq-trade]'); if (tb) { ext.oldTrade?.open?.('', {key: tb.dataset.cqTrade}); return; }
+            const g = e.target.closest?.('[data-cq-i]'); if (!g || g.closest('.h-dg-mini')) return;
+            const d = DETAIL.get(g.closest('[data-cq-d]')?.getAttribute('data-cq-d')); if (!d) return; e.preventDefault(); d(Number(g.getAttribute('data-cq-i')), g);
         });
+        document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.closest?.('[data-cq-i]')) { const g = e.target.closest('[data-cq-i]'), d = DETAIL.get(g.closest('[data-cq-d]')?.getAttribute('data-cq-d')); if (d) { e.preventDefault(); d(Number(g.getAttribute('data-cq-i')), g); } } });
     }
 
     ext.diagramCartesPlus2 = {H, NEW, add};
+})();
+
+/* ═════════ 🔨 Les métiers sur la carte (maquette, partie 4) ═════════
+ * Une couleur par grand secteur (classement de lib/metiers_carte.php, celui de l'Arbre des métiers : rien n'est reclassé à part)
+ * ou par famille de métiers du dictionnaire, commune par commune, siècle par siècle (curseur ▶ commun) ou ▦ un petit dessin par
+ * siècle. Où placer un métier : le lieu de l'acte, sinon la résidence de l'époque, sinon le lieu de naissance (réglable). */
+(() => {
+    'use strict';
+    const P2 = window.LCNDA_EXT?.diagramCartesPlus2; if (!P2) return;
+    const {T, esc, num, clamp, r1, r2, fold, rows, str, C, pl, tip, opt, siecle, bases, frame, locate, missing, emptyMsg, title, atOf, timeOf, periodWord, slice, multiples, keepDetail,
+        get, placesOf, keepUnplaced, pane, bindGo, sel, val, startId, mapOpts, COMMON, REC, i18n, ext, GC, color} = P2.H;
+    // les grands secteurs (lib/metiers_carte.php, METIERS_SECTORS) et les familles du dictionnaire : gardés avec le diagramme (spec.sectors / spec.domains)
+    const SECT = [['agri', '🌾', 'Agriculture et forêt', '#4d8a2f'], ['arti', '🔨', 'Artisanat', '#c2611a'], ['indu', '🏭', 'Industrie, mines', '#5b6573'], ['comm', '🛒', 'Commerce', '#c99a06'], ['tran', '🚂', 'Transports et mer', '#0e7f99'],
+        ['serv', '🏠', 'Services, domestiques', '#9b5fc0'], ['armee', '🎖', 'Armée et police', '#b42318'], ['clerge', '⛪', 'Clergé', '#6941c6'], ['lib', '⚖️', 'Professions libérales, école, administration', '#2563c9'],
+        ['rang', '🏰', 'Rentiers, rangs et statuts', '#8a6a2f'], ['foyer', '🧺', 'Au foyer, sans profession', '#8c8c8c'], ['autre', '❔', 'Autre métier', '#a3a3a3']];
+    const DPAL = ['#4d8a2f', '#2f6b3a', '#5b6573', '#7b3fa0', '#8a5a2b', '#b5651d', '#c99a06', '#c2611a', '#0e7f99', '#1f4e79', '#9b5fc0', '#2563c9', '#6941c6', '#d14a7a', '#b42318', '#6b4f3a', '#3a8a8a', '#8a6a2f'];
+    const stepOf = spec => { const t = spec.o?.time; return t === 'all' || t === 'small' ? 0 : t === 'half' ? 50 : 100; };
+    /** les catégories de la carte : [clé, icône, nom, couleur] selon « Classer par » */
+    function cats(spec) {
+        const o = spec.o || {}, by = opt(o, 'classify', '');
+        if (by === 'domain') { const D = Array.isArray(spec.domains) && spec.domains.length ? spec.domains : []; return D.map((d, i) => [d.k, d.icon || '', d.label || d.k, DPAL[i % DPAL.length]]).concat([['', '❔', 'Autre métier', '#a3a3a3']]); }
+        if (by === 'one') return [[String(o.trade || ''), '🔨', String(o.tradeName || o.trade || ''), '#c2611a']];
+        if (by === 'mine') { const out = []; String(o.colors || '').split(/[;\n]+/).forEach(x => { const m = x.match(/^\s*([^=]+?)\s*=\s*(#[0-9a-f]{6})\s*$/i); if (m) out.push([fold(m[1]), '', m[1].trim(), m[2]]); }); return out.concat([['', '❔', 'Autre métier', '#a3a3a3']]); }
+        return (Array.isArray(spec.sectors) && spec.sectors.length ? spec.sectors.map(x => [x.k, x.icon, x.label, x.color]) : SECT);
+    }
+    const catOf = (spec, r) => { const by = opt(spec.o || {}, 'classify', '');
+        if (by === 'domain') return str(r.domain, 4);
+        if (by === 'one') return str(r.key, 80) === String(spec.o?.trade || '') ? String(spec.o.trade) : null;
+        if (by === 'mine') { const f = fold(r.trade); return cats(spec).some(c => c[0] === f) ? f : ''; }
+        return str(r.sector, 10) || 'autre'; };
+    const who = p => p.pid || p.r.name;
+    /** les lignes gardées : où placer, plusieurs métiers, au foyer, la période */
+    function kept(spec, all, at, step) {
+        const o = spec.o || {};
+        let pts = all.filter(p => (opt(o, 'where', '') !== 'act' || ['act', 'census'].includes(p.r.how || 'act')) && !(opt(o, 'foyer', '') === 'hide' && p.r.sector === 'foyer'));
+        if (opt(o, 'multi', '') === 'main') { const best = new Map(); pts.forEach(p => { const m = best.get(who(p)) || new Map(); m.set(p.r.key, (m.get(p.r.key) || 0) + 1); best.set(who(p), m); });
+            pts = pts.filter(p => [...best.get(who(p))].sort((a, b) => b[1] - a[1])[0][0] === p.r.key); }
+        if (at !== null && step) pts = pts.filter(p => p.y !== null && p.y >= at && p.y < at + step);
+        return pts;
+    }
+    function legendOf(spec, pts) {
+        const C0 = cats(spec), n = new Map(); pts.forEach(p => { const c = catOf(spec, p.r); if (c === null) return; if (!n.has(c)) n.set(c, new Set()); n.get(c).add(who(p)); });
+        const shown = C0.filter(c => n.has(c[0])), empty = C0.length - shown.length;
+        return [...shown.map(c => ({label: `${c[1] ? c[1] + ' ' : ''}${i18n(c[2])} · ${n.get(c[0]).size}`, color: c[3]})), ...(empty > 0 && opt(spec.o || {}, 'classify', '') === '' ? [{label: i18n('+ {n} secteurs vides', {n: String(empty)}), color: '#e5e5e5'}] : [])];
+    }
+    function trademap(spec, W, fs) {
+        const o = spec.o || {}, B0 = bases(spec, W); if (B0.wait) return B0.wait;
+        const all = locate(spec, B0.list), step = stepOf(spec);
+        if (o.time === 'small' && !o.__inFacet) { // ▦ un petit dessin par siècle, au même cadrage
+            const ys = all.pts.map(p => p.y).filter(y => y !== null), lo = ys.length ? Math.floor(Math.min(...ys) / 100) * 100 : null, hi = ys.length ? Math.floor(Math.max(...ys) / 100) * 100 : null;
+            const list = []; if (lo !== null) for (let a = lo; a <= hi && list.length < 8; a += 100) { const k = kept(spec, all.pts, a, 100); if (k.length) list.push({label: `${siecle(a)} · ${pl(new Set(k.map(who)).size, 'personne')}`, o: {__inFacet: true, at: a, __step: 100, title: ''}}); }
+            const M = multiples(spec, W, fs, list, (sp, w) => trademap(sp, w, fs * .8)); let svg = M.svg, h = Math.max(M.h, list.length ? 0 : 300);
+            if (all.unknown.length && o.showMissing !== false) { svg += missing(all.unknown, h, fs, spec); h += fs * 1.5; }
+            if (!list.length) svg += emptyMsg(W, 150, fs, 'Prends les métiers de ta généalogie (« Depuis l’app »).');
+            return {h, svg, legend: legendOf(spec, kept(spec, all.pts, null, 0)), desc: i18n('Carte des métiers : {n}, un petit dessin par siècle.', {n: pl(all.pts.length, 'mention')})};
+        }
+        const st = o.__step || step, at = st ? atOf(o, st) : null, pts = kept(spec, all.pts, at, st), C0 = cats(spec), colOf = new Map(C0.map(c => [c[0], c[3]]));
+        const draw = opt(o, 'draw', ''), size = opt(o, 'size', '');
+        // par lieu : les catégories et qui les porte
+        const g = new Map();
+        pts.forEach(p => { const c = catOf(spec, p.r); if (c === null) return; const k = `${r2(p.lon)}|${r2(p.lat)}`; let x = g.get(k); if (!x) g.set(k, x = {p, by: new Map()});
+            const e = x.by.get(c) || {people: new Set(), n: 0, trades: new Map()}; e.people.add(who(p)); e.n++; e.trades.set(p.r.key, (e.trades.get(p.r.key) || 0) + 1); x.by.set(c, e); });
+        const val = e => size === 'mentions' ? e.n : e.people.size;
+        const tot = x => [...x.by.values()].reduce((a, e) => a + val(e), 0);
+        let F;
+        if (draw === 'deps') { // départements colorés : le secteur le plus fréquent du département
+            const dep = new Map(); pts.forEach(p => { const z = str(p.r.zone, 3), c = catOf(spec, p.r); if (!z || c === null) return; const m = dep.get(z) || new Map(); m.set(c, (m.get(c) || 0) + 1); dep.set(z, m); });
+            F = frame({...spec, o: {...o, map: 'fr', level: 'dep'}}, W, fs, all.pts.map(p => [p.lon, p.lat]), z => { const m = dep.get(z.id); if (!m) return {fill: color(o.zoneColor, GC.LAND), title: ''}; const [c, n] = [...m].sort((a, b) => b[1] - a[1])[0]; const cc = C0.find(x => x[0] === c); return {fill: colOf.get(c) || '#a3a3a3', title: `${z.name} (${z.id}) : ${i18n(cc?.[2] || 'Autre métier')} (${n})`}; });
+        } else F = frame(spec, W, fs, all.pts.map(p => [p.lon, p.lat]));
+        if (F.wait) return F.wait;
+        const {pr, w, h} = F, id = 'cqt' + Math.random().toString(36).slice(2, 8), list = [...g.values()].sort((a, b) => tot(b) - tot(a)), maxN = Math.max(1, ...list.map(tot));
+        const rMax = clamp(w / 32, 6, 30) * clamp(num(o.dotSize) || 1, .3, 3);
+        let svg = `<g data-c2-total="${pts.length}"></g>` + F.open + `<g data-cq-d="${id}">`;
+        if (draw !== 'deps') list.forEach((x, i) => {
+            const [cx, cy] = pr.p(x.p.lon, x.p.lat); if (!Number.isFinite(cx)) return;
+            const n = tot(x), rr = size === 'same' ? rMax * .45 : Math.max(3, rMax * Math.sqrt(n / maxN)), parts = [...x.by].sort((a, b) => val(b[1]) - val(a[1]));
+            const label = `${x.p.place} : ${parts.map(([c, e]) => `${i18n(C0.find(k => k[0] === c)?.[2] || 'Autre métier')} ${val(e)}`).join(', ')}`;
+            let shape = '';
+            if (draw === 'dots') { let k = 0; parts.forEach(([c, e]) => { for (let j = 0; j < Math.min(val(e), 60); j++, k++) { const a = k * 2.39996, d = rMax * .16 * Math.sqrt(k); shape += `<circle cx="${r1(cx + Math.cos(a) * d)}" cy="${r1(cy + Math.sin(a) * d)}" r="${r2(clamp(rMax * .12, 2, 5))}" fill="${colOf.get(c) || '#a3a3a3'}" stroke="#fff" stroke-width=".6"/>`; } }); }
+            else if (draw === 'top' || rr < 7 || parts.length === 1) shape = `<circle cx="${r1(cx)}" cy="${r1(cy)}" r="${r2(rr)}" fill="${colOf.get(parts[0][0]) || '#a3a3a3'}" fill-opacity=".9" stroke="#fff" stroke-width="1"/>`; // trop petit pour être lu : la couleur du plus fréquent
+            else { let a0 = -Math.PI / 2; parts.forEach(([c, e]) => { const a1 = a0 + Math.PI * 2 * val(e) / n; shape += `<path d="${slice(cx, cy, rr, a0, a1)}" fill="${colOf.get(c) || '#a3a3a3'}" stroke="#fff" stroke-width=".8"/>`; a0 = a1; }); }
+            svg += `<g class="cq-pt" data-cq-i="${i}" tabindex="0" role="button" aria-label="${esc(label)}">${tip(label + '\n' + i18n('Clic : les métiers de ce lieu'))}${shape}</g>`;
+            if (o.placeLabels !== 'none' && (o.placeLabels === 'all' || i < 8)) svg += T(cx + rr + 3, cy, x.p.place, {size: clamp(fs * .72, 7, 15), weight: 600, fill: '#1d1d1f', halo: 'rgba(255,255,255,.85)'});
+        });
+        svg += '</g>';
+        const word = st && at !== null ? periodWord(at, st) : '';
+        if (word && !o.__inFacet && !Number.isFinite(o.__year)) svg += title(word, fs);
+        svg += F.close;
+        let H = h;
+        if (all.unknown.length && o.showMissing !== false && !o.__inFacet) { svg += missing(all.unknown, H, fs, spec); H += fs * 1.5; }
+        if (!all.pts.length && !o.__inFacet) svg += emptyMsg(w, h, fs, 'Prends les métiers de ta généalogie (« Depuis l’app »).');
+        else if (!pts.length && !o.__inFacet) svg += emptyMsg(w, h, fs, word ? i18n('Aucun métier noté au {when}.', {when: word}) : 'Aucun métier pour ce choix.');
+        keepDetail(id, i => detail(spec, list[i], C0, val));
+        const people = new Set(pts.map(who)).size;
+        return {h: H, svg, legend: o.__inFacet ? [] : legendOf(spec, pts), geo: F.geo, desc: word ? i18n('Carte des métiers : {a}, {b} ({when}).', {a: pl(people, 'personne'), b: pl(pts.length, 'mention'), when: word}) : i18n('Carte des métiers : {a}, {b}.', {a: pl(people, 'personne'), b: pl(pts.length, 'mention')})};
+    }
+    function detail(spec, x, C0, val) {
+        if (!x || !ext.openDialog) return;
+        const parts = [...x.by].sort((a, b) => val(b[1]) - val(a[1]));
+        const body = `<div class="cq-detail">${parts.map(([c, e]) => { const k = C0.find(y => y[0] === c) || ['', '❔', 'Autre métier'];
+            const tr = [...e.trades].sort((a, b) => b[1] - a[1]).slice(0, 8).map(([key, n]) => `<button type="button" class="link-button" data-cq-trade="${esc(key)}">🛠️ ${esc(rows(spec).find(r => r.key === key)?.trade || key)}</button> (${n})`).join(', ');
+            return `<p><b>${esc(k[1])} ${esc(i18n(k[2]))} · ${val(e)}</b><br>${tr}</p>`; }).join('')}
+            <p class="muted">${esc(i18n('Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens).'))}</p></div>`;
+        ext.openDialog({eyebrow: i18n('LES MÉTIERS SUR LA CARTE'), title: x.p.place, body, submitLabel: i18n('Fermer'), onSubmit: () => true});
+    }
+
+    /* ─── Depuis l'app ─── */
+    function fill(s, r, extra = {}) {
+        const names = placesOf(s, r.places || {});
+        s.rows = (r.rows || []).filter(e => names.has(e[1])).map(([pid, plc, y, key, sector, dom, how]) => ({label: names.get(plc), date: y === null ? '' : String(y), trade: r.names?.[key] || key, key, sector, domain: dom || '', how, name: r.people?.[pid] || '', pid, zone: (r.places[plc] || [])[1] || ''}));
+        s.sectors = r.sectors || []; s.domains = r.domains || []; s.unclassed = (r.unclassed || []).slice(0, 60); keepUnplaced(s, r.unplaced);
+        s.o = {...(s.o || {}), ...extra};
+        return s;
+    }
+    const tradeName = el => (el?.selectedOptions?.[0]?.textContent || '').replace(/\s*\(\d+\)$/, '');
+    const tradeApp = {
+        html: () => pane('🔨 Les métiers de ta généalogie', 'Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle.',
+            sel('classify', 'Classer par', [['', 'Grand secteur (12)'], ['domain', 'Famille de métiers du dictionnaire (18)'], ['one', 'Un métier et ses variantes']])
+            + `<label data-cq-onlyone>${esc(i18n('Le métier'))}<select data-cq="trade"><option value="">${esc(i18n('Chargement…'))}</option></select></label>`
+            + sel('pop', 'Qui', [['all', 'Toute ma base'], ['anc', 'Mes ancêtres'], ['pat', 'Ma branche paternelle (côté père)'], ['mat', 'Ma branche maternelle (côté mère)']])
+            + sel('sex', 'Hommes et femmes', [['', 'Tous'], ['m', 'Les hommes'], ['f', 'Les femmes']])
+            + sel('from', 'Période', [['', 'Toutes les époques'], ['1801', 'Au XIXe siècle'], ['-1789', 'Avant la Révolution (jusqu’en 1789)']])
+            + sel('draw', 'Dessin', [['', 'Camembert par commune'], ['top', 'Un rond de la couleur du plus fréquent'], ['dots', 'Un point par personne'], ['deps', 'Départements colorés']])
+            + sel('time', 'Temps', [['', '▶ Siècle par siècle'], ['small', '▦ Un petit dessin par siècle'], ['half', 'Par demi-siècle'], ['all', 'Tout ensemble']])),
+        bind: (box, io) => {
+            const ts = box.querySelector('[data-cq="trade"]'), one = box.querySelector('[data-cq-onlyone]');
+            const sync = () => { one.hidden = val(box, 'classify') !== 'one'; }; sync(); box.addEventListener('change', sync);
+            get({what: 'trade_list'}).then(r => { const cur = io.spec().o?.trade || ''; ts.innerHTML = (r.trades || []).slice(0, 400).map(t => `<option value="${esc(t.key)}"${t.key === cur ? ' selected' : ''}>${esc(t.name)} (${t.n})</option>`).join('') || `<option value="">${esc(i18n('Aucun métier'))}</option>`; }).catch(() => { ts.innerHTML = '<option value="">—</option>'; });
+            bindGo(box, async () => {
+                const r = await get({what: 'trades', pop: val(box, 'pop'), root: startId()}), s = io.spec(), classify = val(box, 'classify');
+                if (r.error) throw new Error(r.error);
+                const sex = val(box, 'sex'), from = val(box, 'from');
+                r.rows = (r.rows || []).filter(e => (!sex || r.gender?.[e[0]] === sex) && (!from || (e[2] !== null && (from.startsWith('-') ? e[2] <= Number(from.slice(1)) : e[2] >= Number(from) && e[2] <= Number(from) + 99))));
+                fill(s, r, {classify, trade: classify === 'one' ? ts.value : '', tradeName: classify === 'one' ? tradeName(ts) : '', draw: val(box, 'draw'), time: val(box, 'time'),
+                    title: classify === 'one' ? i18n('Où on était {trade}', {trade: tradeName(ts)}) : i18n('Les métiers de la famille')});
+                if (!s.rows.length) throw new Error(i18n('Aucun métier avec un lieu pour ce choix.'));
+                io.apply(s);
+                return i18n('{a} notés · {b} classés · {c} « ❔ autre » à classer', {a: pl(s.rows.length, 'métier'), b: s.rows.filter(x => x.sector !== 'autre').length, c: s.rows.filter(x => x.sector === 'autre').length});
+            });
+        },
+    };
+    const SP = {Tulle: [45.2694, 1.768], Naves: [45.3118, 1.7521], Seilhac: [45.3667, 1.7167], Meymac: [45.5361, 2.1464], Ussel: [45.548, 2.31], Brive: [45.159, 1.533]};
+    const sp = n => `${n} ${SP[n][0]}, ${SP[n][1]}`;
+    const sample = () => { const out = []; const plan = [['Naves', 1690, 'laboureur', 'agri'], ['Naves', 1745, 'tisserand', 'arti'], ['Tulle', 1760, 'tanneur', 'arti'], ['Tulle', 1772, 'marchand', 'comm'], ['Seilhac', 1790, 'cultivateur', 'agri'], ['Meymac', 1720, 'laboureur', 'agri'],
+        ['Tulle', 1830, 'sabotier', 'arti'], ['Tulle', 1846, 'instituteur', 'lib'], ['Naves', 1850, 'cultivateur', 'agri'], ['Brive', 1880, 'cheminot', 'tran'], ['Ussel', 1870, 'aubergiste', 'comm'], ['Tulle', 1890, 'ouvrier', 'indu'], ['Seilhac', 1860, 'cultivateur', 'agri'], ['Naves', 1870, 'ménagère', 'foyer'], ['Brive', 1910, 'employé', 'lib']];
+        plan.forEach(([p, y, t, s], i) => { for (let k = 0; k < 1 + (i % 3); k++) out.push({label: sp(p), date: String(y + k * 7), trade: t, key: t, sector: s, how: 'act', name: `MAZAUD ${i}-${k}`}); }); return out; };
+    P2.add('trademap', {icon: '🔨', label: 'Les métiers sur la carte (par secteur, siècle par siècle)', render: GC.remember(trademap), legend: 'bottom', time: timeOf(100, {stepOf}),
+        grids: [{key: 'rows', label: 'Les métiers notés (un par ligne)', cols: [C('label', 'Lieu (« Tulle », « Tulle 45.27, 1.77 »)'), C('date', 'Date ou année', 'text', {ph: '1850'}), C('trade', 'Métier'), C('sector', 'Secteur', 'select', {choices: SECT.map(x => [x[0], x[2]])}), C('name', 'Personne')]}],
+        options: [REC, C('classify', 'Classer par', 'select', {choices: [['', 'Grand secteur (12)'], ['domain', 'Famille de métiers du dictionnaire (18)'], ['one', 'Un seul métier et ses variantes'], ['mine', 'Mes couleurs à moi par métier']]}),
+            C('colors', 'Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa »)', 'text', {when: s => s.o?.classify === 'mine'}),
+            C('draw', 'Dessin', 'select', {choices: [['', 'Camembert par commune'], ['top', 'Un rond de la couleur du plus fréquent'], ['dots', 'Un point par personne'], ['deps', 'Départements colorés']]}),
+            C('time', 'Temps', 'select', {choices: [['', '▶ Siècle par siècle'], ['small', '▦ Un petit dessin par siècle'], ['half', 'Par demi-siècle'], ['all', 'Tout ensemble']]}),
+            C('at', 'Siècle montré (une année ; vide = tous)', 'text', {ph: '1800', when: s => !['all', 'small'].includes(s.o?.time)}),
+            C('where', 'Où placer le métier', 'select', {choices: [['', 'Lieu de l’acte, sinon résidence, sinon naissance'], ['act', 'Lieu de l’acte seulement']]}),
+            C('multi', 'Plusieurs métiers', 'select', {choices: [['', 'Chacun à sa date'], ['main', 'Le principal seulement']]}),
+            C('foyer', '🧺 Au foyer, sans profession', 'select', {choices: [['', 'Montrés'], ['hide', 'Cachés']]}),
+            C('size', 'Taille', 'select', {choices: [['', 'Nombre de personnes'], ['mentions', 'Nombre de mentions'], ['same', 'Tous pareils']]}),
+            C('dotSize', 'Taille des ronds', 'range', {min: .3, max: 3, step: .1, def: 1}), C('placeLabels', 'Noms des lieux', 'select', {choices: [['', 'Les plus grands'], ['all', 'Tous'], ['none', 'Aucun']]}), ...mapOpts, ...COMMON],
+        sample: () => ({o: {title: i18n('Les métiers de la famille'), map: 'fr', time: ''}, rows: sample()}),
+        fromApp: tradeApp, describe: spec => i18n('Carte des métiers : {n}.', {n: pl(rows(spec).length, 'mention')})});
+    ext.diagramCartesPlus2.trademap = trademap;
+    /** 🛠️ fiche d'un métier ancien → « 🗺 Où on l'exerçait » : la carte réglée sur ce métier et ses variantes */
+    ext.diagramCartesPlus2.openTrade = async (key, name) => {
+        try { const r = await get({what: 'trades'}); r.rows = (r.rows || []).filter(e => e[3] === key);
+            if (!r.rows.length) return window.LCNDA_APP?.toast?.(i18n('Aucun métier avec un lieu pour ce choix.'));
+            const s = fill({kind: 'trademap', o: {map: 'fr'}}, r, {classify: 'one', trade: key, tradeName: name, title: i18n('Où on était {trade}', {trade: name}), time: 'all'});
+            ext.openDiagramEditor?.(null, {spec: s, name: s.o.title});
+        } catch (e) { window.LCNDA_APP?.toast?.(e.message || String(e), 'error'); }
+    };
 })();

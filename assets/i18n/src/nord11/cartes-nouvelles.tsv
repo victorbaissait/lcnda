@@ -86,3 +86,54 @@ Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Không có xã nào
 le plus proche ¦ gần nhất ¦ yang terdekat
 sûr ¦ chắc chắn ¦ pasti
 =proposition ¦ đề xuất ¦ usulan
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ Trong mỗi menu, lựa chọn đầu tiên là lựa chọn được khuyên dùng: nó được đặt sẵn từ đầu. ¦ Di setiap menu, pilihan pertama adalah yang disarankan: sudah diatur sejak awal.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ Nghề nghiệp trên bản đồ (theo ngành, từng thế kỷ) ¦ Pekerjaan di peta (per sektor, abad demi abad)
+Les métiers notés (un par ligne) ¦ Các nghề đã ghi (mỗi dòng một nghề) ¦ Pekerjaan yang dicatat (satu per baris)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Địa điểm (“Tulle”, “Tulle 45.27, 1.77”) ¦ Tempat (“Tulle”, “Tulle 45.27, 1.77”)
+Classer par ¦ Phân loại theo ¦ Klasifikasi menurut
+Famille de métiers du dictionnaire (18) ¦ Nhóm nghề trong từ điển (18) ¦ Keluarga pekerjaan dari kamus (18)
+Un seul métier et ses variantes ¦ Một nghề duy nhất và các biến thể ¦ Satu pekerjaan dan variannya
+Un métier et ses variantes ¦ Một nghề và các biến thể ¦ Satu pekerjaan dan variannya
+Mes couleurs à moi par métier ¦ Màu riêng của tôi cho từng nghề ¦ Warna saya sendiri per pekerjaan
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Màu của tôi (“tisserand=#aa3300; meunier=#3355aa”) ¦ Warna saya (“tisserand=#aa3300; meunier=#3355aa”)
+Camembert par commune ¦ Biểu đồ tròn theo xã ¦ Diagram lingkaran per kota
+Un rond de la couleur du plus fréquent ¦ Một chấm tròn theo màu của nghề phổ biến nhất ¦ Satu lingkaran berwarna yang paling sering
+Siècle par siècle ¦ Từng thế kỷ ¦ Abad demi abad
+Un petit dessin par siècle ¦ Một bản đồ nhỏ cho mỗi thế kỷ ¦ Satu peta kecil per abad
+Tout ensemble ¦ Tất cả cùng lúc ¦ Semua sekaligus
+Où placer le métier ¦ Đặt nghề ở đâu ¦ Di mana pekerjaan ditempatkan
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Nơi của văn bản, nếu không thì nơi ở, nếu không thì nơi sinh ¦ Tempat akta, jika tidak tempat tinggal, jika tidak kelahiran
+Lieu de l’acte seulement ¦ Chỉ nơi của văn bản ¦ Hanya tempat akta
+Plusieurs métiers ¦ Nhiều nghề ¦ Beberapa pekerjaan
+Chacun à sa date ¦ Mỗi nghề theo ngày của nó ¦ Masing-masing pada tanggalnya
+Le principal seulement ¦ Chỉ nghề chính ¦ Hanya yang utama
+Montrés ¦ Hiển thị ¦ Ditampilkan
+Cachés ¦ Ẩn ¦ Disembunyikan
+Les plus grands ¦ Những nơi lớn nhất ¦ Yang terbesar
++ {n} secteurs vides ¦ + {n} ngành trống ¦ + {n} sektor kosong
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Bản đồ nghề nghiệp: {n}, mỗi thế kỷ một bản đồ nhỏ. ¦ Peta pekerjaan: {n}, satu peta kecil per abad.
+Carte des métiers : {a}, {b} ({when}). ¦ Bản đồ nghề nghiệp: {a}, {b} ({when}). ¦ Peta pekerjaan: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Bản đồ nghề nghiệp: {a}, {b}. ¦ Peta pekerjaan: {a}, {b}.
+Carte des métiers : {n}. ¦ Bản đồ nghề nghiệp: {n}. ¦ Peta pekerjaan: {n}.
+Clic : les métiers de ce lieu ¦ Bấm: các nghề tại nơi này ¦ Klik: pekerjaan di tempat ini
+Aucun métier noté au {when}. ¦ Không có nghề nào được ghi trong {when}. ¦ Tidak ada pekerjaan tercatat pada {when}.
+Aucun métier pour ce choix. ¦ Không có nghề nào cho lựa chọn này. ¦ Tidak ada pekerjaan untuk pilihan ini.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Lấy các nghề từ gia phả của bạn (“Từ ứng dụng”). ¦ Ambil pekerjaan dari silsilah kamu (“Dari aplikasi”).
+LES MÉTIERS SUR LA CARTE ¦ NGHỀ NGHIỆP TRÊN BẢN ĐỒ ¦ PEKERJAAN DI PETA
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ Bấm vào một nghề để mở phiếu của nghề đó (🛠️ Nghề xưa). ¦ Klik pada pekerjaan membuka lembarnya (🛠️ Pekerjaan lama).
+Les métiers de ta généalogie ¦ Các nghề trong gia phả của bạn ¦ Pekerjaan dalam silsilah kamu
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Các nghề đã ghi (nghề, điều tra dân số, phiếu), phân loại như trong Cây nghề nghiệp. Không bao giờ có người còn sống hay phiếu bảo mật. ¦ Pekerjaan yang dicatat (profesi, sensus, lembar), diklasifikasi seperti di Pohon pekerjaan. Tidak pernah orang yang masih hidup atau lembar rahasia.
+Hommes et femmes ¦ Nam và nữ ¦ Laki-laki dan perempuan
+Les femmes ¦ Phụ nữ ¦ Perempuan
+Toutes les époques ¦ Mọi thời kỳ ¦ Semua masa
+Aucun métier ¦ Không có nghề nào ¦ Tidak ada pekerjaan
+Aucun métier avec un lieu pour ce choix. ¦ Không có nghề nào có địa điểm cho lựa chọn này. ¦ Tidak ada pekerjaan dengan tempat untuk pilihan ini.
+Où on était {trade} ¦ Nơi có người làm {trade} ¦ Tempat orang menjadi {trade}
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ Đã ghi {a} · đã phân loại {b} · {c} “❔ khác” cần phân loại ¦ {a} dicatat · {b} diklasifikasi · {c} “❔ lainnya” perlu diklasifikasi
+Mes ancêtres seulement ¦ Chỉ tổ tiên của tôi ¦ Hanya leluhur saya
+Par famille de métiers du dictionnaire (18) ¦ Theo nhóm nghề trong từ điển (18) ¦ Menurut keluarga pekerjaan dari kamus (18)
+Par grand secteur (12) ¦ Theo ngành lớn (12) ¦ Menurut sektor utama (12)
+employé ¦ nhân viên ¦ pegawai
+ménagère ¦ nội trợ ¦ ibu rumah tangga
+Où on l’exerçait ¦ Nơi người ta làm nghề này ¦ Tempat pekerjaan ini dijalankan

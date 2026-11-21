@@ -86,3 +86,54 @@ Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Asnjë komunë me k
 le plus proche ¦ më i afërti ¦ l-eqreb
 sûr ¦ i sigurt ¦ żgur
 =proposition ¦ propozim|propozime ¦ proposta|proposti|proposti|proposti|proposti
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ Në çdo menu, zgjedhja e parë është ajo e këshilluar: është e caktuar që në fillim. ¦ F’kull menu, l-ewwel għażla hija dik rakkomandata: hija ssettjata mill-bidu.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ Zanatet në hartë (sipas sektorit, shekull pas shekulli) ¦ Is-snajja’ fuq il-mappa (skont is-settur, seklu wara seklu)
+Les métiers notés (un par ligne) ¦ Zanatet e shënuara (një për rresht) ¦ Is-snajja’ mniżżla (waħda għal kull linja)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Vendi («Tulle», «Tulle 45.27, 1.77») ¦ Post (“Tulle”, “Tulle 45.27, 1.77”)
+Classer par ¦ Klasifiko sipas ¦ Ikklassifika skont
+Famille de métiers du dictionnaire (18) ¦ Familja e zanateve nga fjalori (18) ¦ Familja ta’ snajja’ mid-dizzjunarju (18)
+Un seul métier et ses variantes ¦ Vetëm një zanat dhe variantet e tij ¦ Sengħa waħda u l-varjanti tagħha
+Un métier et ses variantes ¦ Një zanat dhe variantet e tij ¦ Sengħa u l-varjanti tagħha
+Mes couleurs à moi par métier ¦ Ngjyrat e mia për çdo zanat ¦ Il-kuluri tiegħi għal kull sengħa
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Ngjyrat e mia («tisserand=#aa3300; meunier=#3355aa») ¦ Il-kuluri tiegħi (“tisserand=#aa3300; meunier=#3355aa”)
+Camembert par commune ¦ Grafik me pite për komunë ¦ Grafika tat-torta għal kull komun
+Un rond de la couleur du plus fréquent ¦ Një rreth me ngjyrën e më të shpeshtit ¦ Ċirku bil-kulur tal-iktar frekwenti
+Siècle par siècle ¦ Shekull pas shekulli ¦ Seklu wara seklu
+Un petit dessin par siècle ¦ Një hartë e vogël për çdo shekull ¦ Mappa żgħira għal kull seklu
+Tout ensemble ¦ Të gjitha bashkë ¦ Kollox flimkien
+Où placer le métier ¦ Ku vendoset zanati ¦ Fejn titqiegħed is-sengħa
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Vendi i aktit, përndryshe banimi, përndryshe lindja ¦ Il-post tal-att, inkella r-residenza, inkella t-twelid
+Lieu de l’acte seulement ¦ Vetëm vendi i aktit ¦ Il-post tal-att biss
+Plusieurs métiers ¦ Disa zanate ¦ Diversi snajja’
+Chacun à sa date ¦ Secili në datën e vet ¦ Kull waħda fid-data tagħha
+Le principal seulement ¦ Vetëm kryesori ¦ Il-prinċipali biss
+Montrés ¦ Të shfaqur ¦ Murija
+Cachés ¦ Të fshehur ¦ Moħbija
+Les plus grands ¦ Më të mëdhatë ¦ L-akbar
++ {n} secteurs vides ¦ + {n} sektorë bosh ¦ + {n} setturi vojta
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Harta e zanateve: {n}, një hartë e vogël për çdo shekull. ¦ Mappa tas-snajja’: {n}, mappa żgħira għal kull seklu.
+Carte des métiers : {a}, {b} ({when}). ¦ Harta e zanateve: {a}, {b} ({when}). ¦ Mappa tas-snajja’: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Harta e zanateve: {a}, {b}. ¦ Mappa tas-snajja’: {a}, {b}.
+Carte des métiers : {n}. ¦ Harta e zanateve: {n}. ¦ Mappa tas-snajja’: {n}.
+Clic : les métiers de ce lieu ¦ Kliko: zanatet e këtij vendi ¦ Ikklikkja: is-snajja’ ta’ dan il-post
+Aucun métier noté au {when}. ¦ Asnjë zanat i shënuar në {when}. ¦ L-ebda sengħa mniżżla fil-{when}.
+Aucun métier pour ce choix. ¦ Asnjë zanat për këtë zgjedhje. ¦ L-ebda sengħa għal din l-għażla.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Merr zanatet nga gjenealogjia jote («Nga aplikacioni»). ¦ Ħu s-snajja’ mill-ġenealoġija tiegħek (“Mill-app”).
+LES MÉTIERS SUR LA CARTE ¦ ZANATET NË HARTË ¦ IS-SNAJJA’ FUQ IL-MAPPA
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ Një klikim mbi një zanat hap skedën e tij (🛠️ Zanate të vjetra). ¦ Klikk fuq sengħa jiftaħ l-iskeda tagħha (🛠️ Snajja’ antiki).
+Les métiers de ta généalogie ¦ Zanatet në gjenealogjinë tënde ¦ Is-snajja’ fil-ġenealoġija tiegħek
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Zanatet e shënuara (profesion, regjistrim, skedë), të klasifikuara si te Pema e zanateve. Kurrë një i gjallë ose një skedë konfidenciale. ¦ Is-snajja’ mniżżla (professjoni, ċensiment, skeda), ikklassifikati bħal fis-Siġra tas-snajja’. Qatt persuna ħajja jew skeda kunfidenzjali.
+Hommes et femmes ¦ Burra dhe gra ¦ Irġiel u nisa
+Les femmes ¦ Gratë ¦ In-nisa
+Toutes les époques ¦ Të gjitha epokat ¦ L-epoki kollha
+Aucun métier ¦ Asnjë zanat ¦ L-ebda sengħa
+Aucun métier avec un lieu pour ce choix. ¦ Asnjë zanat me vend për këtë zgjedhje. ¦ L-ebda sengħa b’post għal din l-għażla.
+Où on était {trade} ¦ Ku ishin {trade} ¦ Fejn kienu {trade}
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ {a} të shënuara · {b} të klasifikuara · {c} «❔ tjetër» për t’u klasifikuar ¦ {a} mniżżla · {b} ikklassifikati · {c} “❔ oħra” biex jiġu kklassifikati
+Mes ancêtres seulement ¦ Vetëm paraardhësit e mi ¦ L-antenati tiegħi biss
+Par famille de métiers du dictionnaire (18) ¦ Sipas familjes së zanateve nga fjalori (18) ¦ Skont il-familja ta’ snajja’ mid-dizzjunarju (18)
+Par grand secteur (12) ¦ Sipas sektorit kryesor (12) ¦ Skont is-settur ewlieni (12)
+employé ¦ nëpunës ¦ impjegat
+ménagère ¦ shtëpiake ¦ mara tad-dar
+Où on l’exerçait ¦ Ku ushtrohej ¦ Fejn kienet issir

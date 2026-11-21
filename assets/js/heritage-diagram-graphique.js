@@ -140,6 +140,9 @@
         dpldiv: [['Décès ↔ naissances', {'[data-dpl="pair"]': 'bd'}], ['Naissances : filles ↔ garçons', {'[data-dpl="pair"]': 'sex'}], ['Mes ancêtres, par siècle', {'[data-dpl="step"]': '100', ...DPL_ANC}]],
         dplhills: STEP('[data-dpl="step"]').filter(([, s]) => s['[data-dpl="step"]'] !== '100'), // (pas de « par siècle » pour les collines des noms)
         dplpar: DPL_SCOPE, dplstep: DPL_SCOPE,
+        // 🗺️ cartes en plus, vague 2 (heritage-diagram-cartes-plus2.js) : « ✏️ Sur mesure » reste en tête du menu
+        trademap: [['Par grand secteur (12)', {'[data-cq="classify"]': ''}], ['Par famille de métiers du dictionnaire (18)', {'[data-cq="classify"]': 'domain'}], ['Un métier et ses variantes…', {'[data-cq="classify"]': 'one'}],
+            ['Mes ancêtres seulement', {'[data-cq="pop"]': 'anc'}], ['Au XIXe siècle', {'[data-cq="from"]': '1801'}], ['Les hommes', {'[data-cq="sex"]': 'm'}], ['Les femmes', {'[data-cq="sex"]': 'f'}]],
         quarters: [['8 quartiers (arrière-grands-parents)', {'[data-dla="gens"]': '3'}], ['16 quartiers', {'[data-dla="gens"]': '4'}], ['32 quartiers', {'[data-dla="gens"]': '5'}]],
     };
     const GO = '[data-gn-go], [data-n6-go], [data-dm-go], [data-dfa-go], [data-dgm-go], [data-c2-go], [data-dac-go], [data-cp-go], [data-lotc-go], [data-dpl-go], [data-dla-go], [data-cq-go]';
