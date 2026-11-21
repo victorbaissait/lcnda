@@ -96,11 +96,11 @@
         const draw = () => {
             const cur = get(), d = {...DEFAULTS, ...(DATA.defaults || {})}, ch = {...CHOICES, ...(DATA.choices || {})};
             const changed = ROWS.some(([k]) => cur[k] !== d[k]);
-            ws.innerHTML = `<section class="page mf-page" data-mf-page>${UI().pageHeader ? UI().pageHeader({title: i18n('Fichiers des médias'), icon: '📎', attrs: 'data-ph-title', where: i18n('Réglages · Apparence et affichage'), saved: true,
+            ws.innerHTML = `<section class="page mf-page" data-mf-page>${UI().pageHeader ? UI().pageHeader({title: i18n('Fichiers des médias'), icon: '📎', attrs: 'data-ph-title', where: i18n('Réglages'), saved: true,
                     help: i18n('La taille des photos, documents, sons et vidéos que tu ajoutes, et ce que les outils d’image acceptent de traiter.'),
                     actions: [`<button type="button" class="button secondary" data-mf-reset data-ui-reset${changed && !ro ? '' : ' disabled'}>${esc(i18n('↺ Remettre comme au départ'))}</button>`]}) : `<h2>📎 ${esc(i18n('Fichiers des médias'))}</h2>`}
-                <section class="card mf-card maintenance-panel">${ROWS.map(([k, label, fmt, help]) => `<div class="mf-row">
-                    <label class="field mf-field"><span>${esc(i18n(label))}</span><select data-mf-key="${k}"${ro ? ' disabled' : ''}>${ch[k].map(n => `<option value="${n}"${n === cur[k] ? ' selected' : ''}>${esc(fmt(n))}${n === d[k] ? ` ${esc(i18n('(conseillé)'))}` : ''}</option>`).join('')}</select></label>
+                <section class="card mf-card maintenance-panel">${ROWS.map(([k, label, fmt, help]) => `<div class="mf-row" style="margin-bottom:16px">
+                    <label class="field mf-field" style="display:grid;gap:6px;max-width:560px"><span>${esc(i18n(label))}</span><select data-mf-key="${k}"${ro ? ' disabled' : ''}>${ch[k].map(n => `<option value="${n}"${n === cur[k] ? ' selected' : ''}>${esc(fmt(n))}${n === d[k] ? ` ${esc(i18n('(conseillé)'))}` : ''}</option>`).join('')}</select></label>
                     <p class="ui-hint">${esc(i18n(help))}</p></div>`).join('')}
                     ${UI().notice ? UI().notice('info', esc(i18n('Des fichiers plus gros prennent plus de place sur le disque, rendent les sauvegardes plus lourdes et plus longues, et demandent plus de mémoire pour les ouvrir. Le téléphone par le wifi garde ses propres limites.'))) : ''}
                 </section></section>`;
