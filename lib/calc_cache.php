@@ -138,7 +138,7 @@ function calc_cached(PDO $pdo, string $name, array $tables, array $extra, callab
 {
     $sig = calc_gen_sig($pdo, $tables);
     if ($sig === null || !defined('DATA_DIR')) { return $fn(); }
-    $extra = [$extra, calc_code_sig()];
+    $extra = [$extra, calc_code_sig(), function_exists('i18n_lang') ? i18n_lang() : '']; // la langue de la page : les textes du résultat
     $sig = md5(json_encode([$sig, $extra, CALC_CACHE_VERSION]));
     $file = DATA_DIR . '/cache/calc-' . preg_replace('/[^a-z0-9_-]+/i', '_', $name) . '.ser';
     // le fichier : la signature (32 caractères), un saut de ligne, puis « S » + serialize, ou « Z » + un long texte compressé

@@ -325,7 +325,11 @@ try {
     }
     if (!$isWrite && $action === 'dates_feter') { // 🎂 dates à fêter du tableau de bord (lib/dates_feter.php)
         require_once __DIR__ . '/lib/dates_feter.php';
-        json_response(dates_feter_data($pdo, $_GET));
+        // 🐘 gardé pour la journée tant que fiches, événements, lieux et familles ne changent pas (3 s à 200 000 fiches)
+        $dfQ = array_intersect_key($_GET, array_flip(['period', 'who', 'sosa', 'round', 'branch', 'kinds', 'today']));
+        ksort($dfQ);
+        json_response(calc_cached($pdo, 'dates_feter_' . substr(md5(json_encode(array_diff_key($dfQ, ['today' => 1]))), 0, 12), ['persons', 'events', 'event_types', 'families', 'family_children', 'places'],
+            [$dfQ, date('Y-m-d'), function_exists('kiosk_state') && !empty(kiosk_state()['on'])], static fn() => dates_feter_data($pdo, $_GET)));
     }
     if (!$isWrite && in_array($action, ['family_share_preview', 'family_share_export'], true)) { // 📤 partager avec la famille (lib/family_share.php)
         require_once __DIR__ . '/lib/family_share.php';
