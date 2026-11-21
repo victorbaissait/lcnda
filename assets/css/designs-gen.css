@@ -3952,6 +3952,25 @@
 :root[data-lc-density] .h-txa-cmp th{padding:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-txa-cmp td{padding:calc(7px * var(--lc-sp)) calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-txa-add{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-tf-top{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-tf-h{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-tf-card{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-tf-card-h{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-tf-fields{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .h-tf-fields li{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-tf-fields .icon-button,:root[data-lc-density] .h-tf-item .icon-button{padding:0 calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-tf-match{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-tf-acts{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-tf-list{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-tf-item{gap:calc(4px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-tf-item{padding:calc(3px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-tf-rej ul{padding-left:calc(18px * var(--lc-sp))}
+:root[data-lc-density] .h-tf-ai{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-tf-as{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-tf-as{gap:calc(6px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .h-tf-as legend{padding:0 calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-tf-sugg{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-tf-prev{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 /* heritage-diagram-genea.css */
 :root[data-lc-density] .gn-net-tools{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .gn-app fieldset{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}

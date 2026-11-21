@@ -2524,6 +2524,15 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root[data-theme="dark"].lc-frame .h-txa-box, :root[data-theme="dark"] .h-txa-box:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-txa-in, :root[data-theme="dark"] .h-txa-in:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-txa-chip, :root[data-theme="dark"] .h-txa-chip:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-txa-seg button, :root[data-theme="dark"] .h-txa-seg button:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-txa-cmp2 textarea, :root[data-theme="dark"] .h-txa-cmp2 textarea:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-txa-head, :root[data-theme="dark"] .h-txa-head:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-txa-cta, :root[data-theme="dark"] .h-txa-cta:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-txa-live, :root[data-theme="dark"] .h-txa-live:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root.lc-frame .h-tf-card, :root .h-tf-card:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #dfe2e8}
+:root.lc-frame .h-tf-item, :root .h-tf-item:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #e6e8ee}
+:root.lc-frame .h-tf-main, :root .h-tf-main:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .h-txa-badge.is-ai, :root .h-txa-badge.is-ai:is([data-lc-lines], [data-lc-lines] *) {border-color:#d8c9fb}
+:root.lc-frame .h-tf-as, :root .h-tf-as:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #e1e3e8}
+:root.lc-frame .h-tf-prev, :root .h-tf-prev:is([data-lc-lines], [data-lc-lines] *) {border:1px dashed #c9ced8}
+:root[data-theme="dark"].lc-frame .h-tf-card, :root[data-theme="dark"] .h-tf-card:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-tf-item, :root[data-theme="dark"] .h-tf-item:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root.lc-frame .h-tf .h-tf-fields .icon-button, :root .h-tf .h-tf-fields .icon-button:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .h-tf .h-tf-item .icon-button, :root .h-tf .h-tf-item .icon-button:is([data-lc-lines], [data-lc-lines] *) {border:1px solid transparent}
+:root.lc-frame .h-tf .h-tf-fields .icon-button:hover, :root .h-tf .h-tf-fields .icon-button:hover:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .h-tf .h-tf-item .icon-button:hover, :root .h-tf .h-tf-item .icon-button:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:#c9ced8}
 /* heritage-diagram-genea.css */
 :root.lc-frame .gn-app fieldset, :root .gn-app fieldset:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #d9dde3)}
 :root[data-theme="dark"].lc-frame .gn-app fieldset, :root[data-theme="dark"] .gn-app fieldset:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
