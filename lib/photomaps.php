@@ -1012,7 +1012,7 @@ function pm_upload(PDO $pdo, array $post, ?array $files): never
             if (!isset(PHOTOMAP_UPLOAD_TYPES[$mime]) && in_array($ext, ['heic', 'heif'], true) && in_array($mime, ['application/octet-stream', 'image/heif', 'image/heic'], true)) { $mime = 'image/heic'; }
             if (!isset(PHOTOMAP_UPLOAD_TYPES[$mime])) { $refused[] = ['name' => $label, 'reason' => 'format non accepté (photos JPEG, PNG, WebP, GIF, HEIC ; vidéos MP4, MOV, WebM)']; continue; }
             [$outExt, $kind] = PHOTOMAP_UPLOAD_TYPES[$mime];
-            $limit = $kind === 'video' ? 250 : 25;
+            $limit = media_limits()[$kind === 'video' ? 'av_mb' : 'image_mb']; // 📎 la même taille que les autres médias (Réglages → Fichiers des médias)
             if ($size > $limit * 1024 * 1024) { $refused[] = ['name' => $label, 'reason' => "plus de {$limit} Mo"]; continue; }
             if ($kind === 'image' && !@getimagesize($tmp)) { $refused[] = ['name' => $label, 'reason' => 'image illisible (fichier abîmé ?)']; continue; }
             $meta = pm_meta_read($tmp); // GPS et date lus avant tout (une photo HEIC convertie les perdrait)
@@ -1096,7 +1096,7 @@ function pm_thumb(PDO $pdo, int $mediaId): never
         $ok = false;
         if ($kind === 'image' && function_exists('imagecreatefromstring') && filesize($path) < 60 * 1024 * 1024) {
             $info = @getimagesize($path);
-            if (is_array($info) && $info[0] * $info[1] < 120_000_000 && pm_gd_fits((int) $info[0], (int) $info[1], (int) filesize($path))) {
+            if (is_array($info) && !media_pixels_too_big((int) $info[0], (int) $info[1]) && pm_gd_fits((int) $info[0], (int) $info[1], (int) filesize($path))) {
                 $im = @imagecreatefromstring((string) file_get_contents($path));
                 if ($im) {
                     $orient = (int) (pm_meta_read($path)['orientation'] ?? 1);

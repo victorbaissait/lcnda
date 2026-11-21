@@ -1881,6 +1881,7 @@
         const img0 = new Image(); img0.decoding = 'async';
         img0.src = `media/${encodeURIComponent(from)}?v=${item._cacheBust || ''}`;
         try { await img0.decode(); } catch (_) { return toast('Impossible d’ouvrir cette image.', 'error'); }
+        if (window.LCNDA_APP?.mediaLimits?.tooBig(img0.naturalWidth, img0.naturalHeight)) return; // 📎 image immense : gardée, mais pas retouchée (app-media-limits.js)
         // 🔄 Image → Rotation de l'image : img est l'image de départ avec ses étapes (st.docXf), img0 l'original (jamais touché)
         let img = img0;
         const st = rtDefault(); let channel = 'rgb';

@@ -76,10 +76,11 @@
         const m = location.hash.match(/^#documents\/(\d{1,12})\b/);
         cur = m ? Number(m[1]) : Number(readPref().cur) || 0;
     }
+    let stale = false; // un média ajouté ou changé ailleurs (lcnda:media-changed) : la liste et le cache sont à relire
     async function load(force = false) {
-        if (docs && !force) return docs;
-        if (!loading) loading = A().api('onglets', {op: 'documents'}).then(r => { docs = (r.documents || []).map(d => ({...d, sort: sortOf(d)})); failed = ''; return docs; })
-            .catch(e => { failed = e.message || 'Les documents n’ont pas pu se charger.'; docs = null; return []; }).finally(() => { loading = null; });
+        if (docs && !force && !stale) return docs;
+        if (!loading) { stale = false; loading = A().api('onglets', {op: 'documents'}).then(r => { docs = (r.documents || []).map(d => ({...d, sort: sortOf(d)})); failed = ''; return docs; })
+            .catch(e => { failed = e.message || 'Les documents n’ont pas pu se charger.'; docs = null; return []; }).finally(() => { loading = null; }); }
         return loading;
     }
     ext.documentItems = () => (docs || []).map(d => [String(d.id), `${sortMeta(d.sort)[1]} ${d.title}`]); // pour le glisser des dossiers
@@ -403,6 +404,31 @@
             const data = ext.textDocTools?.dataOf ? ext.textDocTools.dataOf(`<h1>${esc(d.title)}</h1>${html}`) : null;
             ext.openTextDoc?.(data ? {data, name: `Transcription — ${d.title}`} : {name: `Transcription — ${d.title}`});
         }
+    });
+    /* 🔄 un média ajouté ou changé, d'où qu'il vienne (fiche, visionneuse, menu de choix des médias, import, « 📥 À trier »,
+       dossier Scans…) : l'événement commun lcnda:media-changed (assets/js/app-media-limits.js). Onglet ouvert : la liste se
+       redessine tout de suite (sans recharger la page) ; sinon elle sera relue à la prochaine ouverture. */
+    let refreshTimer = 0, refreshing = null;
+    async function refreshNow() {
+        if (refreshing) { stale = true; return; } // un envoi de plus pendant la relecture : une relecture de plus après
+        refreshing = (async () => {
+            if (loading) await loading; // une lecture partie avant le changement : on la laisse finir, puis on relit
+            await load(true);
+            if (A()?.state?.module !== 'documents') return;
+            paintList(); paintWorkspaceList();
+            const id = cur;
+            if (id && document.querySelector(`#workspace [data-ong-page="document"][data-ong-id="${id}"]`)) {
+                try { const d = (await A().api('onglets', {op: 'document', id})).document; if (d) cache.set(id, d); } catch (_) {}
+                if (cur === id && A()?.state?.module === 'documents') showDoc(id);
+            }
+        })();
+        try { await refreshing; } finally { refreshing = null; }
+        if (stale && A()?.state?.module === 'documents') refreshNow();
+    }
+    document.addEventListener('lcnda:media-changed', () => {
+        stale = true; cache.clear();
+        if (A()?.state?.module !== 'documents') return;
+        clearTimeout(refreshTimer); refreshTimer = setTimeout(refreshNow, 250);
     });
     // un document rangé ou sorti d'un dossier (📁 Ranger) : la colonne est redessinée par app-side-folders.js ; le chemin en haut de la fiche suit
     window.addEventListener('storage', e => { if (e.key === 'genealogie-side-folders' && A()?.state?.module === 'documents' && cur) showDoc(cur); });

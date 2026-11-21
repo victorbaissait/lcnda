@@ -83,9 +83,12 @@ try {
             $mediaType=$mime==='application/pdf'?'pdf':(str_starts_with($mime,'audio/')?'audio':(str_starts_with($mime,'video/')?'video':'image'));
             if($mediaType==='video'&&($_POST['audio_only']??'')==='1')$mediaType='audio'; // un mémo vocal enregistré (WebM sans image)
             if($isPostcard&&$mediaType!=='image')throw new RuntimeException('Une carte postale recto/verso doit contenir uniquement deux images.');
+            // 📎 la taille la plus grande se règle (Réglages → Fichiers des médias, lib/media_limits.php) : 100 Mo conseillés pour une image ou un document, 250 Mo pour un son ou une vidéo
             $isAudioVideo=str_starts_with($mime,'audio/')||str_starts_with($mime,'video/');
-            $limitMb=$isAudioVideo?250:25;
-            if($size>$limitMb*1024*1024)throw new RuntimeException("{$name} dépasse {$limitMb} Mo");
+            $limitMb=media_limits($pdo)[$isAudioVideo?'av_mb':'image_mb'];
+            if($size>$limitMb*1024*1024)throw new RuntimeException($isAudioVideo?i18n_t('{name} dépasse {n} Mo, la taille la plus grande réglée pour un son ou une vidéo (Réglages → Fichiers des médias).',['name'=>$name,'n'=>$limitMb]):i18n_t('{name} dépasse {n} Mo, la taille la plus grande réglée pour une image ou un document (Réglages → Fichiers des médias).',['name'=>$name,'n'=>$limitMb]));
+            // une image immense est gardée ; seuls les outils qui la décodent (vignettes, Mieux voir, lecture, retouche) ne la traiteront pas
+            if($mediaType==='image'&&($big=media_image_too_big($tmp,$pdo)))$bigNotices[$name]=media_too_big_message($big);
             $stored=bin2hex(random_bytes(16)).'.'.$allowed[$mime];$destination=MEDIA_DIR.'/'.$stored;if(!move_uploaded_file($tmp,$destination))throw new RuntimeException("Impossible de copier {$name}");$movedFiles[]=$destination;
             $postcardSide=$isPostcard?($i===0?'recto':'verso'):(($isGroupedUpload&&$count>1)?'image '.($i+1):'');
             $mediaTitle=$title!==''?($count>1?"{$title} — ".($postcardSide?:pathinfo($name,PATHINFO_FILENAME)):$title):pathinfo($name,PATHINFO_FILENAME);if($postcardSide&&stripos($mediaTitle,$postcardSide)===false)$mediaTitle.=' — '.$postcardSide;
@@ -105,6 +108,6 @@ try {
         else if($battueItemId)log_change($pdo,'battue_item',$battueItemId,'upload',count($created).' média(s) ajouté(s)');
         else if($archiveDigestId)log_change($pdo,'archive_digest',$archiveDigestId,'upload',count($created).' média(s) ajouté(s)');
         else log_change($pdo,'person',$personId,'upload',count($created).' média(s) ajouté(s)');
-        $pdo->commit();json_response(['ok'=>true,'media'=>$created]);
+        $pdo->commit();json_response(['ok'=>true,'media'=>$created]+(!empty($bigNotices)?['notice'=>implode("\n",array_map(fn($n,$m)=>"{$n} : {$m}",array_keys($bigNotices),$bigNotices))]:[]));
     }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();foreach($movedFiles??[] as $f)@unlink($f);throw $e;} // envoi refusé : les fichiers déjà copiés repartent
 }catch(Throwable $e){json_response(['error'=>$e->getMessage()],422);}
