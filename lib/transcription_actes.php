@@ -310,11 +310,11 @@ function tx_find_validate(string $raw): array
 {
     if (strlen($raw) > 60000) { throw new LcndaBadInput('réponse trop longue'); }
     $raw = trim(preg_replace('/^```(?:json)?\s*|\s*```$/i', '', trim($raw)) ?? '');
-    if ($raw === '') { throw new LcndaBadInput('réponse vide ou trop longue'); }
+    if ($raw === '') { throw new LcndaBadInput('réponse vide'); }
     $j = json_decode($raw, true, 8);
     if (!is_array($j) || ($j !== [] && array_is_list($j))) { throw new LcndaBadInput('pas un objet JSON'); }
     $extra = array_diff(array_keys($j), ['personnes', 'lieux', 'dates', 'sorte']);
-    if ($extra) { throw new LcndaBadInput('clé inattendue : ' . mb_substr((string) reset($extra), 0, 30)); }
+    if ($extra) { throw new LcndaBadInput('clé inattendue'); }
     $str = static function ($v, int $max = 120): string {
         if ($v === null) { return ''; }
         if (is_int($v) || is_float($v)) { $v = (string) $v; }
