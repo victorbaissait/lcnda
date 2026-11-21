@@ -1,0 +1,365 @@
+fr ¦ hr ¦ sl
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Mjesta za smjestiti ¦ Kraji za umestitev
+Lieux à placer… ¦ Mjesta za smjestiti… ¦ Kraji za umestitev…
+Placer… ¦ Smjesti… ¦ Umesti…
+Les placer ¦ Smjesti ih ¦ Umesti jih
+Rien n’est pris tant que tu ne cliques pas. ¦ Ništa se ne uzima dok ne klikneš. ¦ Nič se ne prevzame, dokler ne klikneš.
+Revoir et placer en lot… ¦ Pregledaj i smjesti skupno… ¦ Preglej in umesti skupaj…
+Seulement les lieux de cette carte ({n}). ¦ Samo mjesta s ove karte ({n}). ¦ Samo kraji s tega zemljevida ({n}).
+Voir tous les lieux à placer ¦ Prikaži sva mjesta za smjestiti ¦ Prikaži vse kraje za umestitev
+Lecture des lieux… ¦ Čitanje mjesta… ¦ Branje krajev…
+Chercher un lieu… ¦ Traži mjesto… ¦ Išči kraj…
+De A à Z ¦ Od A do Ž ¦ Od A do Ž
+Le plus loin du reste ¦ Najdalje od ostalih ¦ Najdlje od ostalih
+{a} · {b} concernés ¦ {a} · obuhvaćeno: {b} ¦ {a} · zajeto: {b}
+Aucun lieu pour ce choix. ¦ Nema mjesta za ovaj odabir. ¦ Za to izbiro ni krajev.
+Tous les lieux de ta base ont une position. ¦ Sva mjesta u tvojoj bazi imaju položaj. ¦ Vsi kraji v tvoji bazi imajo položaj.
+à {km} km du reste ¦ {km} km od ostalih ¦ {km} km od ostalih
+Placer ici ¦ Smjesti ovdje ¦ Umesti sem
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ {km} km od ostalih mjesta ovih događaja: provjeri prije smještanja. ¦ {km} km od drugih krajev teh dogodkov: preveri pred umestitvijo.
+Placer les {n} ensemble ¦ Smjesti njih {n} zajedno ¦ Umesti teh {n} skupaj
+Pas un lieu ¦ Nije mjesto ¦ Ni kraj
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ Prvih 300; potraži ime da vidiš ostala. ¦ Prvih 300; poišči ime, da vidiš ostale.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ Smješteno: {a} ({b}) · pojavljuju se na svim kartama ¦ Umeščeno: {a} ({b}) · prikažejo se na vseh zemljevidih
+{name} placé ({n}) · {where} ¦ {name} smješteno ({n}) · {where} ¦ {name} umeščeno ({n}) · {where}
+{name} placé ({a}, {b}) ¦ {name} smješteno ({a}, {b}) ¦ {name} umeščeno ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ „{name}“ odloženo (nije mjesto) ¦ »{name}« odloženo (ni kraj)
+« {name} » remis dans la liste ¦ „{name}“ vraćeno na popis ¦ »{name}« vrnjeno na seznam
+LOIN DU RESTE ¦ DALEKO OD OSTALIH ¦ DALEČ OD OSTALIH
+Placer « {name} » si loin ? ¦ Smjestiti „{name}“ tako daleko? ¦ Umestiti »{name}« tako daleč?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ „{where}“ je {km} km od ostalih mjesta ovih događaja. Često je to istoimeno mjesto. ¦ »{where}« je {km} km od drugih krajev teh dogodkov. Pogosto gre za istoimenski kraj.
+Placer quand même ¦ Ipak smjesti ¦ Vseeno umesti
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Klikni na karti na mjesto „{name}“ (Esc za odustajanje). ¦ Klikni na zemljevid na mesto »{name}« (Esc za preklic).
+{name} placé à la main (position approchée) ¦ {name} ručno smješteno (približan položaj) ¦ {name} ročno umeščeno (približen položaj)
+Pas de réseau : rien n’a été envoyé. ¦ Nema mreže: ništa nije poslano. ¦ Ni omrežja: nič ni bilo poslano.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Mrežna usluga nije ništa pronašla za „{name}“. ¦ Spletna storitev za »{name}« ni našla ničesar.
+{n} de plus pour « {name} » : à toi de choisir. ¦ Još {n} za „{name}“: ti biraš. ¦ Še {n} za »{name}«: izberi sam.
+EN LIGNE ¦ NA MREŽI ¦ NA SPLETU
+En ligne… ¦ Na mreži… ¦ Na spletu…
+Chercher « {name} » en ligne ? ¦ Tražiti „{name}“ na mreži? ¦ Iskati »{name}« na spletu?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ Usluzi za traženje adresa IGN-a (Géoplateforme) šalje se samo naziv mjesta „{name}“. Nikakvo ime osobe, nikakav datum. ¦ Storitvi za iskanje naslovov IGN (Géoplateforme) se pošlje samo ime kraja »{name}«. Nobeno ime osebe, noben datum.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Odgovor je još jedan prijedlog na popisu; izabereš ga ili ne. Bez interneta: „Nema mreže: ništa nije poslano“. ¦ Odgovor je še en predlog na seznamu; izbereš ga ali ne. Brez interneta: »Ni omrežja: nič ni bilo poslano«.
+Ne plus me demander pour cette séance ¦ Ne pitaj više u ovoj sesiji ¦ V tej seji ne sprašuj več
+Lieu tapé ¦ Upisano mjesto ¦ Vpisan kraj
+Pourquoi ¦ Zašto ¦ Zakaj
+Distance au reste ¦ Udaljenost od ostalih ¦ Razdalja do ostalih
+Év. ¦ Dog. ¦ Dog.
+{n} km ¦ {n} km ¦ {n} km
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ „Ništa pronađeno“ nisu u pregledu. Mjesto udaljenije od {km} km od ostalih nikad se ne označava samo. ¦ »Nič najdeno« ni v pregledu. Kraj, ki je od ostalih oddaljen več kot {km} km, se nikoli ne označi sam.
+Seulement les sûrs ¦ Samo sigurna ¦ Samo zanesljive
+Seulement les « sûrs » ¦ Samo „sigurna“ ¦ Samo »zanesljive«
+Revoir avant de placer ¦ Pregledaj prije smještanja ¦ Preglej pred umestitvijo
+Placer les cochés ¦ Smjesti označena ¦ Umesti označene
+Coche au moins un lieu. ¦ Označi barem jedno mjesto. ¦ Označi vsaj en kraj.
+Placer les {n} cochés ¦ Smjesti označena ({n}) ¦ Umesti označene ({n})
+Réglages des lieux à placer enregistrés ¦ Postavke mjesta za smjestiti spremljene ¦ Nastavitve krajev za umestitev shranjene
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Mjesta bez položaja, grupirana po vjerojatnoj općini: smjesti ih jednim klikom ¦ Kraji brez položaja, združeni po verjetni občini: umesti jih z enim klikom
+Cochés au départ dans la revue ¦ Unaprijed označena u pregledu ¦ Vnaprej označeni v pregledu
+Les sûrs et les probables ¦ Sigurna i vjerojatna ¦ Zanesljive in verjetne
+Un lieu-dit ¦ Zaselak ¦ Zaselek
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ U zaselak ako je poznat, inače u središte općine označeno „približno“ ¦ V zaselek, če je znan, sicer v središče občine z oznako »približno«
+Toujours au centre de la commune ¦ Uvijek u središte općine ¦ Vedno v središče občine
+Ne pas le placer ¦ Ne smještaj ga ¦ Ne umesti ga
+Plusieurs communes du même nom ¦ Više općina istog imena ¦ Več občin z istim imenom
+Proposer la plus proche des autres lieux, jamais cochée ¦ Predloži najbližu ostalim mjestima, nikad označenu ¦ Predlagaj najbližjo drugim krajem, nikoli označeno
+Aussi les fautes proches, proposées seulement ¦ I bliske pogreške, samo kao prijedlog ¦ Tudi bližnje napake, samo kot predlog
+Le nom exact seulement ¦ Samo točan naziv ¦ Samo točno ime
+Ce qui est repris ¦ Što se preuzima ¦ Kaj se prevzame
+Position, code INSEE et département ¦ Položaj, INSEE kod i departman ¦ Položaj, koda INSEE in departma
+La position seulement ¦ Samo položaj ¦ Samo položaj
+Jamais : le bouton est caché ¦ Nikad: gumb je skriven ¦ Nikoli: gumb je skrit
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Jedan gumb „🌐 Na mreži…“ po mjestu, svaki put s porukom (nikad skupno, nikad samo) ¦ En gumb »🌐 Na spletu…« na kraj, vsakič s sporočilom (nikoli skupaj, nikoli samo)
+Alerte « loin du reste » ¦ Upozorenje „daleko od ostalih“ ¦ Opozorilo »daleč od ostalih«
+À partir de 200 km ¦ Od 200 km ¦ Od 200 km
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ Isti naziv i isti departman kao u popisu općina: samo jedna općina „{name}“. Preuzimaju se središte, INSEE kod i departman. ¦ Isto ime in isti departma kot v seznamu občin: ena sama občina »{name}«. Prevzamejo se središče, koda INSEE in departma.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ Samo jedna općina „{name}“ u Francuskoj, ali bez upisanog departmana. ¦ Ena sama občina »{name}« v Franciji, a brez vpisanega departmaja.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ Općina tog imena u Francuskoj: {n}. Predlažu se one najbliže ostalim mjestima ovih događaja, nikad same označene. ¦ Občin s tem imenom v Franciji: {n}. Predlagajo se tiste, ki so najbližje drugim krajem teh dogodkov, nikoli same označene.
+{n} communes de ce nom en France : choisis la bonne. ¦ Općina tog imena u Francuskoj: {n}. Izaberi pravu. ¦ Občin s tem imenom v Franciji: {n}. Izberi pravo.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Zaselak poznat u popisu (GeoNames) u općini {name}. ¦ Zaselek je znan v seznamu (GeoNames) v občini {name}.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Zaselak nepoznat u popisu: u središte općine {name}, označeno „približan položaj“. ¦ Zaselek ni znan v seznamu: v središče občine {name}, z oznako »približen položaj«.
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Nije današnja općina; povijest INSEE-a (🏛 Stare granice) kaže: pripojena općini {to} {year}. ¦ Ni današnja občina; zgodovina INSEE (🏛 Stare meje) pravi: leta {year} združena z {to}.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Grad svijeta isporučen s aplikacijom, odabran prema upisanoj zemlji ({country}). ¦ Mesto sveta, ki je priloženo aplikaciji, izbrano po vpisani državi ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Nije pronađeno među isporučenim gradovima svijeta za tu zemlju ({country}). ¦ Ni najdeno med priloženimi mesti sveta za to državo ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Nema općine tog imena. Predložen je sličan pravopis. Ništa se ne traži na mreži. ¦ Ni občine s tem imenom. Predlagan je podoben zapis. Nič se ne išče na spletu.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Nema općine tog imena. Ništa se ne traži na mreži. ¦ Ni občine s tem imenom. Nič se ne išče na spletu.
+le plus proche ¦ najbliža ¦ najbližja
+sûr ¦ sigurno ¦ zanesljivo
+=proposition ¦ prijedlog|prijedloga|prijedloga ¦ predlog|predloga|predlogi|predlogov
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ U svakom izborniku prvi je izbor preporučeni: postavljen je od početka. ¦ V vsakem meniju je prva izbira priporočena: nastavljena je od začetka.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ Zanimanja na karti (po sektoru, stoljeće po stoljeće) ¦ Poklici na zemljevidu (po sektorjih, stoletje za stoletjem)
+Les métiers notés (un par ligne) ¦ Zabilježena zanimanja (jedno po retku) ¦ Zapisani poklici (eden v vrstici)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Mjesto („Tulle“, „Tulle 45.27, 1.77“) ¦ Kraj (»Tulle«, »Tulle 45.27, 1.77«)
+Classer par ¦ Razvrstaj po ¦ Razvrsti po
+Famille de métiers du dictionnaire (18) ¦ Obitelj zanimanja iz rječnika (18) ¦ Družina poklicev iz slovarja (18)
+Un seul métier et ses variantes ¦ Jedno zanimanje i njegove inačice ¦ En sam poklic in njegove različice
+Un métier et ses variantes ¦ Zanimanje i njegove inačice ¦ Poklic in njegove različice
+Mes couleurs à moi par métier ¦ Moje boje po zanimanju ¦ Moje barve po poklicih
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Moje boje („tisserand=#aa3300; meunier=#3355aa“) ¦ Moje barve (»tisserand=#aa3300; meunier=#3355aa«)
+Camembert par commune ¦ Tortni grafikon po općini ¦ Tortni grafikon po občini
+Un rond de la couleur du plus fréquent ¦ Krug u boji najčešćeg ¦ Krog v barvi najpogostejšega
+Siècle par siècle ¦ Stoljeće po stoljeće ¦ Stoletje za stoletjem
+Un petit dessin par siècle ¦ Mala karta po stoljeću ¦ Majhen zemljevid za vsako stoletje
+Tout ensemble ¦ Sve zajedno ¦ Vse skupaj
+Où placer le métier ¦ Gdje smjestiti zanimanje ¦ Kam umestiti poklic
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Mjesto isprave, inače prebivalište, inače rođenje ¦ Kraj listine, sicer prebivališče, sicer rojstvo
+Lieu de l’acte seulement ¦ Samo mjesto isprave ¦ Samo kraj listine
+Plusieurs métiers ¦ Više zanimanja ¦ Več poklicev
+Chacun à sa date ¦ Svako na svoj datum ¦ Vsak ob svojem datumu
+Le principal seulement ¦ Samo glavno ¦ Samo glavni
+Montrés ¦ Prikazani ¦ Prikazani
+Cachés ¦ Skriveni ¦ Skriti
+Les plus grands ¦ Najveća ¦ Največji
++ {n} secteurs vides ¦ + praznih sektora: {n} ¦ + praznih sektorjev: {n}
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Karta zanimanja: {n}, mala karta po stoljeću. ¦ Zemljevid poklicev: {n}, majhen zemljevid za vsako stoletje.
+Carte des métiers : {a}, {b} ({when}). ¦ Karta zanimanja: {a}, {b} ({when}). ¦ Zemljevid poklicev: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Karta zanimanja: {a}, {b}. ¦ Zemljevid poklicev: {a}, {b}.
+Carte des métiers : {n}. ¦ Karta zanimanja: {n}. ¦ Zemljevid poklicev: {n}.
+Clic : les métiers de ce lieu ¦ Klikni: zanimanja ovog mjesta ¦ Klikni: poklici tega kraja
+Aucun métier noté au {when}. ¦ Nema zabilježenih zanimanja u razdoblju: {when}. ¦ V obdobju {when} ni zapisanih poklicev.
+Aucun métier pour ce choix. ¦ Nema zanimanja za ovaj odabir. ¦ Za to izbiro ni poklicev.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Uzmi zanimanja iz svoje genealogije („Iz aplikacije“). ¦ Vzemi poklice iz svojega rodoslovja (»Iz aplikacije«).
+LES MÉTIERS SUR LA CARTE ¦ ZANIMANJA NA KARTI ¦ POKLICI NA ZEMLJEVIDU
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ Klik na zanimanje otvara njegovu karticu (🛠️ Stara zanimanja). ¦ Klik na poklic odpre njegovo kartico (🛠️ Stari poklici).
+Les métiers de ta généalogie ¦ Zanimanja u tvojoj genealogiji ¦ Poklici v tvojem rodoslovju
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Zabilježena zanimanja (zanimanje, popis, kartica), razvrstana kao u Stablu zanimanja. Nikad živa osoba ni povjerljiva kartica. ¦ Zapisani poklici (poklic, popis, kartica), razvrščeni kot v Drevesu poklicev. Nikoli živa oseba ali zaupna kartica.
+Hommes et femmes ¦ Muškarci i žene ¦ Moški in ženske
+Les femmes ¦ Žene ¦ Ženske
+Toutes les époques ¦ Sva razdoblja ¦ Vsa obdobja
+Aucun métier ¦ Nema zanimanja ¦ Ni poklicev
+Aucun métier avec un lieu pour ce choix. ¦ Nema zanimanja s mjestom za ovaj odabir. ¦ Za to izbiro ni poklicev s krajem.
+Où on était {trade} ¦ Gdje su bili {trade} ¦ Kje so bili {trade}
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ Zabilježeno: {a} · razvrstano: {b} · „❔ ostalo“ za razvrstati: {c} ¦ Zapisanih: {a} · razvrščenih: {b} · »❔ drugo« za razvrstiti: {c}
+Mes ancêtres seulement ¦ Samo moji preci ¦ Samo moji predniki
+Par famille de métiers du dictionnaire (18) ¦ Po obitelji zanimanja iz rječnika (18) ¦ Po družini poklicev iz slovarja (18)
+Par grand secteur (12) ¦ Po glavnom sektoru (12) ¦ Po glavnih sektorjih (12)
+employé ¦ službenik ¦ uslužbenec
+ménagère ¦ kućanica ¦ gospodinja
+Où on l’exerçait ¦ Gdje se obavljalo ¦ Kje so ga opravljali
+# 👫 Les deux lignées en miroir (partie 1)
+Les deux lignées en miroir (côté père, côté mère) ¦ Dvije loze zrcalno (očeva strana, majčina strana) ¦ Dve rodbinski veji zrcalno (očetova stran, materina stran)
+Les événements des deux côtés (un par ligne) ¦ Događaji obiju strana (jedan po retku) ¦ Dogodki obeh strani (eden v vrstici)
+Ancêtre des deux côtés ¦ Predak s obje strane ¦ Prednik na obeh straneh
+Aucun ancêtre connu : {who} ¦ Nema poznatih predaka: {who} ¦ Ni znanih prednikov: {who}
+Bleu / orange (lisibles aussi par les daltoniens) ¦ Plava / narančasta (čitljivo i daltonistima) ¦ Modra / oranžna (berljivo tudi za barvno slepe)
+Compté des deux côtés, couleur mélangée ¦ Broji se s obje strane, miješana boja ¦ Šteje se na obeh straneh, mešana barva
+Seulement du côté du chemin le plus court ¦ Samo sa strane najkraćeg puta ¦ Samo na strani najkrajše poti
+Couleur du premier côté ¦ Boja prve strane ¦ Barva prve strani
+Couleur du deuxième côté ¦ Boja druge strane ¦ Barva druge strani
+Côté père / côté mère ¦ Očeva strana / majčina strana ¦ Očetova stran / materina stran
+Côté père / côté mère, avant la Révolution ¦ Očeva / majčina strana, prije revolucije ¦ Očetova / materina stran, pred revolucijo
+Mes quatre grands-parents (4 couleurs) ¦ Moja četiri djeda i bake (4 boje) ¦ Moji štirje stari starši (4 barve)
+Deux personnes au choix ¦ Dvije osobe po izboru ¦ Dve osebi po izbiri
+Deux noms de famille ¦ Dva prezimena ¦ Dva priimka
+Deux groupes de Mes listes ¦ Dvije skupine iz Mojih popisa ¦ Dve skupini iz Mojih seznamov
+Premier nom ¦ Prvo prezime ¦ Prvi priimek
+Deuxième nom ¦ Drugo prezime ¦ Drugi priimek
+Première liste ¦ Prvi popis ¦ Prvi seznam
+Deuxième liste ¦ Drugi popis ¦ Drugi seznam
+Deux lignées de ta généalogie ¦ Dvije loze tvoje genealogije ¦ Dve veji tvojega rodoslovja
+Côté père et côté mère de la personne de départ (ou quatre grands-parents, deux personnes, deux noms, deux listes). Jamais un vivant ni une fiche confidentielle : une personne de départ vivante n’est jamais un point. ¦ Očeva i majčina strana polazne osobe (ili četvero djedova i baka, dvije osobe, dva imena, dva popisa). Nikad živa osoba ni povjerljiva kartica: živa polazna osoba nikad nije točka. ¦ Očetova in materina stran izhodiščne osebe (ali štirje stari starši, dve osebi, dve imeni, dva seznama). Nikoli živa oseba ali zaupna kartica: živa izhodiščna oseba nikoli ni točka.
+Glisser (un trait à déplacer) ¦ Povuci (crta za pomicanje) ¦ Povleci (črta za premikanje)
+LES DEUX LIGNÉES ¦ DVIJE LOZE ¦ DVE VEJI
+Le mariage des parents (💍) ¦ Vjenčanje roditelja (💍) ¦ Poroka staršev (💍)
+Les deux lignées ¦ Obje loze ¦ Obe veji
+Les deux lignées : {a}, {b} où elles se rencontrent. ¦ Obje loze: {a}; susreću se u: {b}. ¦ Obe veji: {a}; srečata se v: {b}.
+Les deux lignées : {n}. ¦ Obje loze: {n}. ¦ Obe veji: {n}.
+Les deux lignées de la famille {name} ¦ Dvije loze obitelji {name} ¦ Dve veji družine {name}
+Les deux lignées de {name} ¦ Dvije loze: {name} ¦ Dve veji: {name}
+Les quatre grands-parents de la famille {name} ¦ Četvero djedova i baka obitelji {name} ¦ Štirje stari starši družine {name}
+Les quatre grands-parents de {name} ¦ Četvero djedova i baka: {name} ¦ Štirje stari starši: {name}
+Lister sous la carte où elles se rencontrent ¦ Navedi ispod karte gdje se susreću ¦ Pod zemljevidom naštej, kje se srečata
+Combien de lignes ¦ Koliko redaka ¦ Koliko vrstic
+Montré ¦ Prikazan ¦ Prikazan
+Même commune ¦ Ista općina ¦ Ista občina
+Même commune à la même époque ¦ Ista općina u isto vrijeme ¦ Ista občina v istem času
+À moins de quelques km ¦ Unutar nekoliko km ¦ Manj kot nekaj km
+À la même époque : à plus ou moins ¦ U isto vrijeme: plus-minus ¦ V istem času: plus minus
+Où elles se rencontrent ¦ Gdje se susreću ¦ Kje se srečata
+Par 25 ans ¦ Po 25 godina ¦ Po 25 let
+Position du trait ¦ Položaj crte ¦ Položaj črte
+Prends les deux lignées de ta personne de départ (« Depuis l’app »). ¦ Uzmi obje loze svoje polazne osobe („Iz aplikacije“). ¦ Vzemi obe veji svoje izhodiščne osebe (»Iz aplikacije«).
+Selon le nombre d’événements ¦ Prema broju događaja ¦ Glede na število dogodkov
+Ses deux lignées sur la carte ¦ Njezine dvije loze na karti ¦ Njeni dve veji na zemljevidu
+Seulement la période ¦ Samo razdoblje ¦ Samo obdobje
+Superposées ¦ Preklopljene ¦ Prekrite
+Tout jusqu’à cette date ¦ Sve do tog datuma ¦ Vse do tega datuma
+jamais à la même époque ¦ nikad u isto vrijeme ¦ nikoli v istem času
+mariage de {a} et {b} ¦ vjenčanje: {a} i {b} ¦ poroka: {a} in {b}
+{a} et {b}, à {km} km ¦ {a} i {b}, {km} km udaljeno ¦ {a} in {b}, {km} km narazen
+3e groupe ¦ 3. skupina ¦ 3. skupina
+4e groupe ¦ 4. skupina ¦ 4. skupina
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Životni prostor, generacija po generacija ¦ Življenjski prostor, rod za rodom
+L’aire de vie de tes ancêtres ¦ Životni prostor tvojih predaka ¦ Življenjski prostor tvojih prednikov
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Za svaku generaciju zona u kojoj je većina njihovih rođenja, vjenčanja i smrti. Iste udaljenosti kao 🧭 Daleko od kolijevke. Nikad živa osoba ni povjerljiva kartica. ¦ Za vsak rod območje, kjer je večina njihovih rojstev, porok in smrti. Enake razdalje kot 🧭 Daleč od zibelke. Nikoli živa oseba ali zaupna kartica.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Uzmi pretke svoje polazne osobe („Iz aplikacije“). ¦ Vzemi prednike svoje izhodiščne osebe (»Iz aplikacije«).
+Génération d’ancêtres ¦ Generacija predaka ¦ Rod prednikov
+Siècle (toute la base) ¦ Stoljeće (cijela baza) ¦ Stoletje (vsa baza)
+Une vie (les étapes d’une personne) ¦ Jedan život (etape jedne osobe) ¦ Eno življenje (postaje ene osebe)
+Avec les résidences et recensements ¦ S prebivalištima i popisima ¦ S prebivališči in popisi
+Du clair (anciens) au foncé (récents) ¦ Od svijetlog (najstariji) do tamnog (najnoviji) ¦ Od svetle (najstarejši) do temne (najnovejši)
+Bleu / orange pour père / mère ¦ Plava / narančasta za oca / majku ¦ Modra / oranžna za očeta / mater
+L’inverse ¦ Obrnuto ¦ Obratno
+50 % (le cœur) ¦ 50 % (srž) ¦ 50 % (jedro)
+Part des événements ¦ Udio događaja ¦ Delež dogodkov
+Part gardée ¦ Zadržani udio ¦ Ohranjeni delež
+Cercle (facile à comparer) ¦ Krug (lako za usporedbu) ¦ Krog (lahko primerljiv)
+Enveloppe (le contour au plus juste) ¦ Ovojnica (najtješnji obris) ¦ Ovojnica (najtesnejši obris)
+Personne (l’aire d’une vie) ¦ Osoba (prostor jednog života) ¦ Oseba (prostor enega življenja)
+Le milieu des événements ¦ Sredina događaja ¦ Sredina dogodkov
+Le lieu de naissance de la personne de départ ¦ Mjesto rođenja polazne osobe ¦ Kraj rojstva izhodiščne osebe
+Le berceau des plus anciens ¦ Kolijevka najstarijih ¦ Zibelka najstarejših
+Toutes les aires superposées ¦ Svi prostori preklopljeni ¦ Vsi prostori prekriti
+Une par case ¦ Jedan po polju ¦ Eden na polje
+Une à la fois avec ▶ ¦ Jedan po jedan s ▶ ¦ Eden za drugim z ▶
+Minimum pour tracer une aire ¦ Minimum za crtanje prostora ¦ Najmanj za risanje prostora
+5 événements ¦ 5 događaja ¦ 5 dogodkov
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Na prostore (predak koji je otišao daleko ostaje izvan) ¦ Na prostore (prednik, ki je odšel daleč, ostane zunaj)
+Cadrer sur tout ¦ Uokviri sve ¦ Zajemi vse
+Le tableau sous la carte ¦ Tablica ispod karte ¦ Tabela pod zemljevidom
+Gén. {g} · ses parents ¦ Gen. {g} · roditelji ¦ Rod {g} · starši
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Klikni: mjesta i ona izvan prostora ¦ Klikni: kraji in tisti zunaj prostora
+Hors de l’aire ¦ Izvan prostora ¦ Zunaj prostora
+Rayon ({p} %) ¦ Polumjer ({p} %) ¦ Polmer ({p} %)
+trop peu ¦ premalo ¦ premalo
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Životni prostor: {n}, polumjer od {a} km do {b} km. ¦ Življenjski prostor: {n}, polmer od {a} km do {b} km.
+Aire de vie : pas assez d’événements. ¦ Životni prostor: nema dovoljno događaja. ¦ Življenjski prostor: premalo dogodkov.
+Aire de vie : {n}. ¦ Životni prostor: {n}. ¦ Življenjski prostor: {n}.
+L’AIRE DE VIE ¦ ŽIVOTNI PROSTOR ¦ ŽIVLJENJSKI PROSTOR
+L’aire de vie de la famille, siècle par siècle ¦ Životni prostor obitelji, stoljeće po stoljeće ¦ Življenjski prostor družine, stoletje za stoletjem
+L’aire de vie des ancêtres de {name} ¦ Životni prostor predaka: {name} ¦ Življenjski prostor prednikov: {name}
+L’aire d’une vie : {name} ¦ Prostor jednog života: {name} ¦ Prostor enega življenja: {name}
+la famille {name} ¦ obitelj {name} ¦ družina {name}
+Voir l’aire de vie sur la carte ¦ Prikaži životni prostor na karti ¦ Prikaži življenjski prostor na zemljevidu
+Centre ¦ Središte ¦ Središče
+Côté père et côté mère (deux couleurs) ¦ Očeva i majčina strana (dvije boje) ¦ Očetova in materina stran (dve barvi)
+Mes ancêtres, 8 générations ¦ Moji preci, 8 generacija ¦ Moji predniki, 8 rodov
+Toute ma base, siècle par siècle ¦ Cijela moja baza, stoljeće po stoljeće ¦ Vsa moja baza, stoletje za stoletjem
+=aire ¦ prostor|prostora|prostora ¦ prostor|prostora|prostori|prostorov
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Kumovi i svjedoci na karti ¦ Botri in priče na zemljevidu
+Les liens (un par ligne) ¦ Veze (jedna po retku) ¦ Vezi (ena v vrstici)
+D’où vient le témoin ¦ Odakle dolazi svjedok ¦ Od kod prihaja priča
+D’où vient le parrain ¦ Odakle dolazi kum ¦ Od kod prihaja boter
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ Ono što piše u ispravi, inače prebivalište na taj datum, inače rođenje ¦ Kar piše v listini, sicer prebivališče na ta datum, sicer rojstvo
+Seulement ce qui est écrit dans l’acte ¦ Samo ono što piše u ispravi ¦ Samo to, kar piše v listini
+Seulement sa naissance ¦ Samo rođenje ¦ Samo rojstvo
+Nombre de liens ¦ Broj veza ¦ Število vezi
+Nombre de personnes différentes ¦ Broj različitih osoba ¦ Število različnih oseb
+Liens dans le même village ¦ Veze u istom selu ¦ Vezi v isti vasi
+Anneau autour du point ¦ Prsten oko točke ¦ Obroč okoli točke
+Un chiffre seulement ¦ Samo broj ¦ Samo število
+Rôles montrés ¦ Prikazane uloge ¦ Prikazane vloge
+Parrain, marraine, témoin ¦ Kum, kuma, svjedok ¦ Boter, botra, priča
+Tous sauf curé et officier ¦ Svi osim župnika i matičara ¦ Vsi razen župnika in matičarja
+Traits montrés ¦ Prikazane crte ¦ Prikazane črte
+À partir de 1 lien ¦ Od 1 veze ¦ Od 1 vezi
+À partir de 2 ¦ Od 2 ¦ Od 2
+À partir de 3 ¦ Od 3 ¦ Od 3
+Les 30 plus forts seulement ¦ Samo 30 najjačih ¦ Samo 30 najmočnejših
+Par rôle ¦ Po ulozi ¦ Po vlogi
+Par branche (bleu père, orange mère) ¦ Po grani (plava otac, narančasta majka) ¦ Po veji (modra oče, oranžna mati)
+Flèche du village du parrain vers celui de l’acte ¦ Strelica od kumova sela do sela isprave ¦ Puščica od botrove vasi do vasi listine
+La phrase sous la carte ¦ Rečenica ispod karte ¦ Stavek pod zemljevidom
+Clic : les liens derrière ce trait ¦ Klikni: veze iza ove crte ¦ Klikni: vezi za to črto
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: {p} % veza je iz samog sela; ostale dolaze uglavnom iz: {others}. ¦ {place}: {p} % vezi je iz same vasi; druge prihajajo predvsem iz: {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Izračunato na: {a} s poznatim selom; bez mjesta, nisu nacrtane: {b}. ¦ Izračunano na: {a} z znano vasjo; brez kraja, niso narisane: {b}.
+Parrains et témoins : {a} entre {b}. ¦ Kumovi i svjedoci: {a} između {b}. ¦ Botri in priče: {a} med {b}.
+Parrains et témoins : {n}. ¦ Kumovi i svjedoci: {n}. ¦ Botri in priče: {n}.
+Filleul ou époux ¦ Kumče ili supružnik ¦ Krščenec ali zakonec
+{n} autres · triés par date ¦ Još {n} · po datumu ¦ Še {n} · po datumu
+Ouvrir dans le Réseau ¦ Otvori u Mreži ¦ Odpri v Omrežju
+PARRAINS ET TÉMOINS ¦ KUMOVI I SVJEDOCI ¦ BOTRI IN PRIČE
+Parrains et marraines ¦ Kumovi i kume ¦ Botri in botre
+Parrains, marraines et témoins ¦ Kumovi, kume i svjedoci ¦ Botri, botre in priče
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Uzmi kumove i svjedoke iz svoje genealogije („Iz aplikacije“). ¦ Vzemi botre in priče iz svojega rodoslovja (»Iz aplikacije«).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ Veze iz 🕸 Mreže odnosa, na karti: selo isprave i ono iz kojeg dolazi svjedok. Živi svjedoci se nikad ne broje. ¦ Vezi iz 🕸 Omrežja odnosov na zemljevidu: vas listine in tista, od koder prihaja priča. Živih prič nikoli ne šteje.
+Aucun lien avec un lieu pour ce choix. ¦ Nema veze s mjestom za ovaj odabir. ¦ Za to izbiro ni vezi s krajem.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Nema veza za ovaj odabir (uloge, razdoblje, mjesta). ¦ Za to izbiro ni vezi (vloge, obdobje, kraji).
+Curé, officier ¦ Župnik, matičar ¦ Župnik, matičar
+curé ¦ župnik ¦ župnik
+Curé ¦ Župnik ¦ Župnik
+tuteur ¦ skrbnik ¦ skrbnik
+Voisin ¦ Susjed ¦ Sosed
+Officier ¦ Matičar ¦ Matičar
+bapt. ¦ krst. ¦ krst
+naiss. ¦ rođ. ¦ roj.
+mar. ¦ vjenč. ¦ por.
+inh. ¦ pokop ¦ pokop
+# ⚰️ Crises et épidémies (partie 3) — et les départs « Graphique » de 🕸
+Crises et épidémies (les années où les décès montent) ¦ Krize i epidemije (godine kad raste broj smrti) ¦ Krize in epidemije (leta, ko se smrti povečajo)
+Les décès (un par ligne) ¦ Smrti (jedna po retku) ¦ Smrti (ena v vrstici)
+Cause notée ¦ Zabilježeni uzrok ¦ Zapisani vzrok
+Choléra de 1832 ¦ Kolera 1832. ¦ Kolera leta 1832
+Clic : les personnes, et ce qui se passait à la même époque ¦ Klikni: osobe i ono što se događalo u isto vrijeme ¦ Klikni: osebe in kaj se je dogajalo v istem času
+Comptés avec tout le monde ¦ Broje se sa svima ¦ Šteti z vsemi
+À part ¦ Zasebno ¦ Ločeno
+À part (moins de 10 ans) ¦ Zasebno (mlađi od 10 godina) ¦ Ločeno (mlajši od 10 let)
+Pas comptés ¦ Ne broje se ¦ Niso šteti
+Mes ancêtres et leurs familles ¦ Moji preci i njihove obitelji ¦ Moji predniki in njihove družine
+Les enfants à part (moins de 10 ans) ¦ Djeca zasebno (mlađa od 10 godina) ¦ Otroci ločeno (mlajši od 10 let)
+Les décès de ta généalogie ¦ Smrti u tvojoj genealogiji ¦ Smrti v tvojem rodoslovju
+Les décès placés et datés (le décès, sinon l’inhumation ; chaque personne une seule fois), et les crises du 🌍 Monde autour avec tes événements locaux. Jamais un vivant ni une fiche confidentielle. ¦ Smještene i datirane smrti (smrt, inače pokop; svaka osoba samo jednom) i krize iz 🌍 Svijeta oko nas s tvojim lokalnim događajima. Nikad živa osoba ni povjerljiva kartica. ¦ Umeščene in datirane smrti (smrt, sicer pokop; vsaka oseba le enkrat) in krize iz 🌍 Sveta okoli s tvojimi krajevnimi dogodki. Nikoli živa oseba ali zaupna kartica.
+Aucun décès daté avec un lieu pour ce choix. ¦ Nema datiranih smrti s mjestom za ovaj odabir. ¦ Za to izbiro ni datiranih smrti s krajem.
+Décès sans année ou sans lieu, comptés à part : {n} ¦ Smrti bez godine ili mjesta, brojene zasebno: {n} ¦ Smrti brez leta ali kraja, štete ločeno: {n}
+Minimum de décès dans l’année ¦ Najmanje smrti u godini ¦ Najmanj smrti v letu
+Décès au moins ¦ Smrti najmanje ¦ Smrti najmanj
+2,5 fois l’habitude ¦ 2,5 puta više nego obično ¦ 2,5-krat več kot običajno
+2 fois ¦ 2 puta ¦ 2-krat
+3 fois ¦ 3 puta ¦ 3-krat
+4 fois ¦ 4 puta ¦ 4-krat
+Fois l’habitude ¦ Puta više nego obično ¦ Krat več kot običajno
+Fenêtre de l’habitude ¦ Prozor uobičajene razine ¦ Okno običajne ravni
+5 ans avant et 5 ans après ¦ 5 godina prije i 5 godina poslije ¦ 5 let prej in 5 let pozneje
+10 et 10 ¦ 10 i 10 ¦ 10 in 10
+Seulement les 10 ans avant ¦ Samo 10 godina prije ¦ Samo 10 let prej
+L’habitude se calcule par ¦ Uobičajena razina računa se kao ¦ Običajna raven se izračuna kot
+La moyenne ¦ Prosjek ¦ Povprečje
+La médiane (moins dérangée par une autre crise toute proche) ¦ Medijan (manje ga remeti druga obližnja kriza) ¦ Mediana (manj jo zmoti druga bližnja kriza)
+La commune, les petites regroupées avec leurs voisines ¦ Općina, male grupirane sa susjednima ¦ Občina, majhne združene s sosednjimi
+Toujours la commune ¦ Uvijek općina ¦ Vedno občina
+Le département ¦ Departman ¦ Departma
+Petit village : nombre de décès sur toute la période, moins de ¦ Malo selo: broj smrti kroz cijelo razdoblje manji od ¦ Majhna vas: število smrti v vsem obdobju manj kot
+Enfant : moins de ¦ Dijete: manje od ¦ Otrok: manj kot
+Repères proposés ¦ Predložene orijentacijske točke ¦ Predlagane orientacijske točke
+Les crises du 🌍 Monde autour qui couvrent la commune, et mes événements ¦ Krize iz 🌍 Svijeta oko nas koje obuhvaćaju općinu, i moji događaji ¦ Krize iz 🌍 Sveta okoli, ki zajemajo občino, in moji dogodki
+Toutes les crises de l’année ¦ Sve krize te godine ¦ Vse krize tega leta
+Pas du temps ¦ Vremenski korak ¦ Časovni korak
+Pas assez de décès placés : moins de ¦ Premalo smještenih smrti: manje od ¦ Premalo umeščenih smrti: manj kot
+Pas assez de décès placés pour repérer des crises. ¦ Premalo smještenih smrti za otkrivanje kriza. ¦ Premalo umeščenih smrti za odkrivanje kriz.
+Prends les décès de ta généalogie (« Depuis l’app »). ¦ Uzmi smrti iz svoje genealogije („Iz aplikacije“). ¦ Vzemi smrti iz svojega rodoslovja (»Iz aplikacije«).
+LES ANNÉES DE CRISE ¦ KRIZNE GODINE ¦ KRIZNA LETA
+Les années de crise de la famille ¦ Krizne godine obitelji ¦ Krizna leta družine
+Les années de crise sur la carte ¦ Krizne godine na karti ¦ Krizna leta na zemljevidu
+Les années de crise : {n}, sur {d}. ¦ Krizne godine: {n}, od {d}. ¦ Krizna leta: {n}, od {d}.
+Les années de crise : {n}. ¦ Krizne godine: {n}. ¦ Krizna leta: {n}.
+Les années à voir · {n} ¦ Godine za pogledati · {n} ¦ Leta za ogled · {n}
+=année à voir ¦ godina za pogledati|godine za pogledati|godina za pogledati ¦ leto za ogled|leti za ogled|leta za ogled|let za ogled
+Habitude ¦ Uobičajeno ¦ Običajno
+À la même époque (repère) ¦ U isto vrijeme (orijentir) ¦ V istem času (orientacijska točka)
+À la même époque : {what} — un repère, pas une explication. ¦ U isto vrijeme: {what} – orijentir, a ne objašnjenje. ¦ V istem času: {what} – orientacijska točka, ne razlaga.
+Rien de connu dans cette région à cette date. ¦ Ništa poznato u ovom kraju u to vrijeme. ¦ V tej pokrajini ob tem času ni nič znanega.
+rien de connu dans cette région à cette date ¦ ništa poznato u ovom kraju u to vrijeme ¦ v tej pokrajini ob tem času nič znanega
+cause notée : « {c} » ¦ zabilježeni uzrok: „{c}“ ¦ zapisani vzrok: »{c}«
+d’habitude {u} par an ¦ obično {u} godišnje ¦ običajno {u} na leto
+plus de ×5 ¦ više od ×5 ¦ več kot ×5
+×2,5 à 3 ¦ ×2,5 do 3 ¦ ×2,5 do 3
+×3 à 5 ¦ ×3 do 5 ¦ ×3 do 5
+{name} + {n} voisines ¦ {name} + susjedne: {n} ¦ {name} + sosednje: {n}
++ {n} autres ¦ + još {n} ¦ + še {n}
+Écrire la commune et l’année près des ronds ¦ Upiši općinu i godinu pokraj krugova ¦ Zapiši občino in leto ob kroge
+À lire avec prudence : l’app compare des nombres de décès, elle ne sait pas pourquoi ils montent. Le repère est ce qui se passait à la même époque : une piste à vérifier dans les actes (cause notée, âge, mois). Sur de petits nombres, le hasard suffit parfois. ¦ Čitaj oprezno: aplikacija uspoređuje brojeve smrti, ne zna zašto rastu. Orijentir je ono što se događalo u isto vrijeme: trag koji treba provjeriti u ispravama (zabilježeni uzrok, dob, mjesec). Kod malih brojeva ponekad je dovoljan slučaj. ¦ Beri previdno: aplikacija primerja števila smrti, ne ve, zakaj se povečajo. Orientacijska točka je to, kar se je dogajalo v istem času: sled, ki jo je treba preveriti v listinah (zapisani vzrok, starost, mesec). Pri majhnih številih je včasih dovolj naključje.
+Autour de mes ancêtres ¦ Oko mojih predaka ¦ Okrog mojih prednikov
+Parrains et marraines des baptêmes ¦ Kumovi i kume na krštenjima ¦ Botri in botre pri krstih
+Témoins des mariages ¦ Svjedoci vjenčanja ¦ Priče porok
+Tous les liens (parrains, témoins, déclarants…) ¦ Sve veze (kumovi, svjedoci, prijavitelji…) ¦ Vse vezi (botri, priče, prijavitelji…)
+années à voir ¦ godine za pogledati ¦ leta za ogled
+année à voir ¦ godina za pogledati ¦ leto za ogled
+Ce qu’on prend ¦ Što se uzima ¦ Kaj vzamemo
+Tout : vu, en partie, à chercher ¦ Sve: viđeno, djelomično, za tražiti ¦ Vse: videno, delno, za iskanje
+Seulement ce qui reste à faire ¦ Samo ono što preostaje ¦ Samo to, kar je še treba narediti
+Seulement ce qui a été vu ¦ Samo ono što je viđeno ¦ Samo to, kar je bilo videno
+Sans le nom des correspondances ¦ Bez imena podudaranja ¦ Brez imen ujemanj
+Avec le nom des correspondances (pas pour un export partagé) ¦ S imenima podudaranja (ne za dijeljeni izvoz) ¦ Z imeni ujemanj (ne za deljeni izvoz)

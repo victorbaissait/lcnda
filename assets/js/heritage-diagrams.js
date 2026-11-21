@@ -131,6 +131,7 @@
             html: c => `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(name)}</title><style>body{margin:0;font:11px/1.4 system-ui,sans-serif;color:#111}.dg svg{display:block;margin:0 auto;${c.size === 'fit' ? `width:100%;height:auto;max-height:${Math.round((c.pageMm[1] - 24) * (c.data ? 0.62 : 0.97))}mm` : ''}}table{border-collapse:collapse;margin:6mm auto 0;break-inside:auto}caption{font-weight:700;text-align:left;padding:2px 0}th,td{border:1px solid #bbb;padding:2px 6px;text-align:left}th{background:#f2f3f5}</style></head><body><div class="dg">${c.legend ? full : bare}</div>${c.data ? table() : ''}</body></html>`});
     }
     async function exportAs(fmt, name, spec, o = {}) {
+        if (R().KINDS[spec.kind]?.logExport) post('access_note', {what: 'map_export', kind: spec.kind, format: fmt}).catch(() => {}); // 📜 Qui a vu quoi : une carte exportée (lib/verrou.php)
         const svg = drawSpec(await resolveLive(spec));
         if (fmt === 'svg') return download(new Blob([svg], {type: 'image/svg+xml'}), o.filename || fileName(name) + '.svg');
         if (fmt === 'csv') return download(new Blob(['﻿' + specCsv(spec.live?.follow ? await resolveLive(spec) : spec)], {type: 'text/csv;charset=utf-8'}), o.filename || fileName(name) + '.csv');
@@ -482,6 +483,10 @@
         let invCache = null, projCache = null;
         function bindLinks() {
             const input = pane.querySelector('[data-dg-lq]'), sugg = input.nextElementSibling; let t = 0;
+            // une sorte peut proposer d'ouvrir un dessin voisin (🧭 Loin du berceau → ⭕ Aire de vie, 🕸 Réseau → 🗺 Sur la carte) : kind.relate(spec) → [{label, run}]
+            const rel = (() => { try { return kindOf().relate?.(clone(spec)) || []; } catch (_) { return []; } })();
+            if (rel.length && !pane.querySelector('[data-dg-relate]')) { const box = document.createElement('div'); box.className = 'h-dg-relate'; box.innerHTML = rel.map((r, i) => `<button type="button" class="button small secondary" data-dg-relate="${i}">${esc(r.label)}</button>`).join(' ');
+                pane.querySelector('.h-pr-links')?.prepend(box); box.addEventListener('click', e => { const b = e.target.closest('[data-dg-relate]'); if (b) rel[Number(b.dataset.dgRelate)]?.run?.(); }); }
             pane.querySelector('.h-pr-linkchips').addEventListener('click', e => { const c = e.target.closest('[data-dg-unlink]')?.closest('.h-pr-lchip'); if (!c) return; rec.links = rec.links.filter(l => !(l.type === c.dataset.type && Number(l.id) === Number(c.dataset.id))); dirty = true; paint(); });
             // personnes et enquêtes : le menu de choix unique (recherche mélangée)
             pane.querySelector('[data-dg-lpk]')?.addEventListener('picker-change', e => { const it = e.detail.item; if (!it?.id) return; const type = it.kind === 'investigation' ? 'investigation' : 'person';

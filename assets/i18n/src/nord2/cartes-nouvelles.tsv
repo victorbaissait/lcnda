@@ -1,0 +1,365 @@
+fr ¦ sk ¦ nb
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Miesta na umiestnenie ¦ Steder å plassere
+Lieux à placer… ¦ Miesta na umiestnenie… ¦ Steder å plassere…
+Placer… ¦ Umiestniť… ¦ Plasser…
+Les placer ¦ Umiestniť ich ¦ Plasser dem
+Rien n’est pris tant que tu ne cliques pas. ¦ Nič sa nevezme, kým neklikneš. ¦ Ingenting hentes før du klikker.
+Revoir et placer en lot… ¦ Skontrolovať a umiestniť hromadne… ¦ Gå gjennom og plasser samlet…
+Seulement les lieux de cette carte ({n}). ¦ Iba miesta tejto mapy ({n}). ¦ Bare stedene på dette kartet ({n}).
+Voir tous les lieux à placer ¦ Zobraziť všetky miesta na umiestnenie ¦ Vis alle steder å plassere
+Lecture des lieux… ¦ Načítavanie miest… ¦ Leser stedene…
+Chercher un lieu… ¦ Hľadať miesto… ¦ Søk etter et sted…
+De A à Z ¦ Od A po Z ¦ A til Å
+Le plus loin du reste ¦ Najďalej od ostatných ¦ Lengst fra resten
+{a} · {b} concernés ¦ {a} · dotknuté: {b} ¦ {a} · {b} berørt
+Aucun lieu pour ce choix. ¦ Pre tento výber žiadne miesto. ¦ Ingen steder for dette valget.
+Tous les lieux de ta base ont une position. ¦ Všetky miesta v tvojej databáze majú polohu. ¦ Alle stedene i databasen din har en posisjon.
+à {km} km du reste ¦ {km} km od ostatných ¦ {km} km fra resten
+Placer ici ¦ Umiestniť sem ¦ Plasser her
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ {km} km od ostatných miest týchto udalostí: over si to pred umiestnením. ¦ {km} km fra de andre stedene for disse hendelsene: sjekk før du plasserer.
+Placer les {n} ensemble ¦ Umiestniť týchto {n} spolu ¦ Plasser de {n} sammen
+Pas un lieu ¦ Nie je miesto ¦ Ikke et sted
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ Prvých 300; vyhľadaj názov a uvidíš ostatné. ¦ De første 300; søk etter et navn for å se de andre.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ Umiestnené: {a} ({b}) · objavia sa na všetkých mapách ¦ {a} plassert ({b}) · de vises på alle kart
+{name} placé ({n}) · {where} ¦ {name} umiestnené ({n}) · {where} ¦ {name} plassert ({n}) · {where}
+{name} placé ({a}, {b}) ¦ {name} umiestnené ({a}, {b}) ¦ {name} plassert ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ „{name}“ odložené (nie je miesto) ¦ «{name}» lagt til side (ikke et sted)
+« {name} » remis dans la liste ¦ „{name}“ vrátené do zoznamu ¦ «{name}» tilbake i listen
+LOIN DU RESTE ¦ ĎALEKO OD OSTATNÝCH ¦ LANGT FRA RESTEN
+Placer « {name} » si loin ? ¦ Umiestniť „{name}“ tak ďaleko? ¦ Plassere «{name}» så langt unna?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ „{where}“ je {km} km od ostatných miest týchto udalostí. Často ide o rovnomenné miesto. ¦ «{where}» ligger {km} km fra de andre stedene for disse hendelsene. Det er ofte en navnebror.
+Placer quand même ¦ Aj tak umiestniť ¦ Plasser likevel
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Klikni na mape na miesto „{name}“ (Esc na zrušenie). ¦ Klikk på kartet der «{name}» ligger (Esc for å avbryte).
+{name} placé à la main (position approchée) ¦ {name} umiestnené ručne (približná poloha) ¦ {name} plassert for hånd (omtrentlig posisjon)
+Pas de réseau : rien n’a été envoyé. ¦ Žiadna sieť: nič nebolo odoslané. ¦ Ingen nettverk: ingenting ble sendt.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Online služba pre „{name}“ nič nenašla. ¦ Nettjenesten fant ingenting for «{name}».
+{n} de plus pour « {name} » : à toi de choisir. ¦ {n} navyše pre „{name}“: vyber si. ¦ {n} til for «{name}»: du velger.
+EN LIGNE ¦ ONLINE ¦ PÅ NETT
+En ligne… ¦ Online… ¦ På nett…
+Chercher « {name} » en ligne ? ¦ Hľadať „{name}“ online? ¦ Søke etter «{name}» på nett?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ Službe vyhľadávania adries IGN (Géoplateforme) sa pošle iba názov miesta „{name}“. Žiadne meno osoby, žiadny dátum. ¦ Bare stedsnavnet «{name}» sendes til IGNs adressesøk (Géoplateforme). Ingen personnavn, ingen dato.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Odpoveď je ďalší návrh v zozname; vyberieš si ho, alebo nie. Bez internetu: „Žiadna sieť: nič nebolo odoslané“. ¦ Svaret er ett forslag til i listen; du velger det eller ikke. Uten internett: «Ingen nettverk: ingenting ble sendt».
+Ne plus me demander pour cette séance ¦ V tejto relácii sa už nepýtať ¦ Ikke spør igjen i denne økten
+Lieu tapé ¦ Zapísané miesto ¦ Innskrevet sted
+Pourquoi ¦ Prečo ¦ Hvorfor
+Distance au reste ¦ Vzdialenosť od ostatných ¦ Avstand til resten
+Év. ¦ Udal. ¦ Hend.
+{n} km ¦ {n} km ¦ {n} km
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ Položky „nič sa nenašlo“ v kontrole nie sú. Miesto ďalej než {km} km od ostatných sa nikdy samo nezaškrtne. ¦ «Ingenting funnet» er ikke med i gjennomgangen. Et sted mer enn {km} km fra resten blir aldri krysset av av seg selv.
+Seulement les sûrs ¦ Iba isté ¦ Bare de sikre
+Seulement les « sûrs » ¦ Iba „isté“ ¦ Bare de «sikre»
+Revoir avant de placer ¦ Skontrolovať pred umiestnením ¦ Gå gjennom før plassering
+Placer les cochés ¦ Umiestniť zaškrtnuté ¦ Plasser de avkryssede
+Coche au moins un lieu. ¦ Zaškrtni aspoň jedno miesto. ¦ Kryss av minst ett sted.
+Placer les {n} cochés ¦ Umiestniť zaškrtnuté ({n}) ¦ Plasser de {n} avkryssede
+Réglages des lieux à placer enregistrés ¦ Nastavenia miest na umiestnenie uložené ¦ Innstillinger for steder å plassere lagret
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Miesta bez polohy zoskupené podľa pravdepodobnej obce: umiestni ich jedným kliknutím ¦ Steder uten posisjon, gruppert etter sannsynlig kommune: plasser dem med ett klikk
+Cochés au départ dans la revue ¦ Vopred zaškrtnuté v kontrole ¦ Forhåndsavkrysset i gjennomgangen
+Les sûrs et les probables ¦ Isté a pravdepodobné ¦ De sikre og de sannsynlige
+Un lieu-dit ¦ Miestna časť ¦ En grend
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ Na miestnej časti, ak je známa, inak v strede obce s označením „približne“ ¦ Ved grenda hvis den er kjent, ellers midt i kommunen merket «omtrentlig»
+Toujours au centre de la commune ¦ Vždy v strede obce ¦ Alltid midt i kommunen
+Ne pas le placer ¦ Neumiestňovať ¦ Ikke plasser det
+Plusieurs communes du même nom ¦ Niekoľko obcí rovnakého mena ¦ Flere kommuner med samme navn
+Proposer la plus proche des autres lieux, jamais cochée ¦ Navrhnúť tú najbližšiu ostatným miestam, nikdy nezaškrtnutú ¦ Foreslå den nærmeste de andre stedene, aldri avkrysset
+Aussi les fautes proches, proposées seulement ¦ Aj blízke preklepy, iba ako návrh ¦ Også nære skrivefeil, bare som forslag
+Le nom exact seulement ¦ Iba presný názov ¦ Bare det nøyaktige navnet
+Ce qui est repris ¦ Čo sa prevezme ¦ Hva som overtas
+Position, code INSEE et département ¦ Poloha, kód INSEE a departement ¦ Posisjon, INSEE-kode og departement
+La position seulement ¦ Iba poloha ¦ Bare posisjonen
+Jamais : le bouton est caché ¦ Nikdy: tlačidlo je skryté ¦ Aldri: knappen er skjult
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Jedno tlačidlo „🌐 Online…“ na miesto, zakaždým so správou (nikdy hromadne, nikdy samo) ¦ Én knapp «🌐 På nett…» per sted, med meldingen hver gang (aldri samlet, aldri av seg selv)
+Alerte « loin du reste » ¦ Upozornenie „ďaleko od ostatných“ ¦ Varsel «langt fra resten»
+À partir de 200 km ¦ Od 200 km ¦ Fra 200 km
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ Rovnaký názov a rovnaký departement ako v zozname obcí: jediná obec „{name}“. Prevezme sa stred, kód INSEE a departement. ¦ Samme navn og samme departement som i kommuneregisteret: én eneste kommune «{name}». Midten, INSEE-koden og departementet overtas.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ Jediná obec „{name}“ vo Francúzsku, ale bez zapísaného departementu. ¦ Én eneste kommune «{name}» i Frankrike, men uten departement.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ Obcí tohto mena vo Francúzsku: {n}. Navrhujú sa tie najbližšie ostatným miestam týchto udalostí, nikdy sa samy nezaškrtnú. ¦ {n} kommuner med dette navnet i Frankrike. De nærmeste de andre stedene for disse hendelsene foreslås, aldri avkrysset av seg selv.
+{n} communes de ce nom en France : choisis la bonne. ¦ Obcí tohto mena vo Francúzsku: {n}. Vyber tú správnu. ¦ {n} kommuner med dette navnet i Frankrike: velg den riktige.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Miestna časť známa v zozname (GeoNames) v obci {name}. ¦ Grenda finnes i registeret (GeoNames) i kommunen {name}.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Miestna časť v zozname neznáma: v strede obce {name}, s označením „približná poloha“. ¦ Grenda er ukjent i registeret: midt i {name}, merket «omtrentlig posisjon».
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Nie je to dnešná obec; história INSEE (🏛 Staré hranice) hovorí: v roku {year} zlúčená s {to}. ¦ Ikke en kommune i dag; INSEE-historikken (🏛 Gamle grenser) sier: slått sammen med {to} i {year}.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Mesto sveta dodané s aplikáciou, rozhodnuté podľa zapísanej krajiny ({country}). ¦ Verdensby som følger med appen, avgjort etter landet som er skrevet ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Nenájdené medzi dodanými mestami sveta pre túto krajinu ({country}). ¦ Ikke funnet blant de medfølgende verdensbyene for dette landet ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Obec tohto mena neexistuje. Navrhuje sa podobný zápis. Nič sa nehľadá online. ¦ Ingen kommune med dette navnet. En lignende skrivemåte foreslås. Ingenting søkes på nett.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Obec tohto mena neexistuje. Nič sa nehľadá online. ¦ Ingen kommune med dette navnet. Ingenting søkes på nett.
+le plus proche ¦ najbližšia ¦ den nærmeste
+sûr ¦ isté ¦ sikker
+=proposition ¦ návrh|návrhy|návrhov ¦ forslag|forslag
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ V každej ponuke je prvá voľba odporúčaná: je nastavená od začiatku. ¦ I hver meny er det første valget det anbefalte: det er stilt inn fra start.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ Povolania na mape (podľa odvetvia, storočie po storočí) ¦ Yrker på kartet (etter sektor, århundre for århundre)
+Les métiers notés (un par ligne) ¦ Zapísané povolania (jedno na riadok) ¦ Noterte yrker (ett per linje)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Miesto („Tulle“, „Tulle 45.27, 1.77“) ¦ Sted («Tulle», «Tulle 45.27, 1.77»)
+Classer par ¦ Triediť podľa ¦ Klassifiser etter
+Famille de métiers du dictionnaire (18) ¦ Skupina povolaní zo slovníka (18) ¦ Yrkesfamilie fra ordboken (18)
+Un seul métier et ses variantes ¦ Jediné povolanie a jeho varianty ¦ Ett enkelt yrke og variantene
+Un métier et ses variantes ¦ Povolanie a jeho varianty ¦ Et yrke og variantene
+Mes couleurs à moi par métier ¦ Moje vlastné farby pre povolania ¦ Mine egne farger per yrke
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Moje farby („tisserand=#aa3300; meunier=#3355aa“) ¦ Mine farger («tisserand=#aa3300; meunier=#3355aa»)
+Camembert par commune ¦ Výsečový graf pre obec ¦ Kakediagram per kommune
+Un rond de la couleur du plus fréquent ¦ Krúžok vo farbe najčastejšieho ¦ En sirkel i fargen til den vanligste
+Siècle par siècle ¦ Storočie po storočí ¦ Århundre for århundre
+Un petit dessin par siècle ¦ Malá mapa pre každé storočie ¦ Et lite kart per århundre
+Tout ensemble ¦ Všetko spolu ¦ Alt samlet
+Où placer le métier ¦ Kam umiestniť povolanie ¦ Hvor yrket plasseres
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Miesto zápisu, inak bydlisko, inak narodenie ¦ Sted for akten, ellers bosted, ellers fødsel
+Lieu de l’acte seulement ¦ Iba miesto zápisu ¦ Bare aktens sted
+Plusieurs métiers ¦ Viacero povolaní ¦ Flere yrker
+Chacun à sa date ¦ Každé k svojmu dátumu ¦ Hvert på sin dato
+Le principal seulement ¦ Iba hlavné ¦ Bare hovedyrket
+Montrés ¦ Zobrazené ¦ Vist
+Cachés ¦ Skryté ¦ Skjult
+Les plus grands ¦ Tie najväčšie ¦ De største
++ {n} secteurs vides ¦ + prázdne odvetvia: {n} ¦ + {n} tomme sektorer
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Mapa povolaní: {n}, malá mapa pre každé storočie. ¦ Yrkeskart: {n}, et lite kart per århundre.
+Carte des métiers : {a}, {b} ({when}). ¦ Mapa povolaní: {a}, {b} ({when}). ¦ Yrkeskart: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Mapa povolaní: {a}, {b}. ¦ Yrkeskart: {a}, {b}.
+Carte des métiers : {n}. ¦ Mapa povolaní: {n}. ¦ Yrkeskart: {n}.
+Clic : les métiers de ce lieu ¦ Klikni: povolania tohto miesta ¦ Klikk: yrkene på dette stedet
+Aucun métier noté au {when}. ¦ Žiadne povolanie zapísané v období: {when}. ¦ Ingen yrker notert i {when}.
+Aucun métier pour ce choix. ¦ Pre tento výber žiadne povolanie. ¦ Ingen yrker for dette valget.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Vezmi povolania zo svojej genealógie („Z aplikácie“). ¦ Ta yrkene fra slektsforskningen din («Fra appen»).
+LES MÉTIERS SUR LA CARTE ¦ POVOLANIA NA MAPE ¦ YRKER PÅ KARTET
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ Kliknutie na povolanie otvorí jeho kartu (🛠️ Staré povolania). ¦ Et klikk på et yrke åpner kortet (🛠️ Gamle yrker).
+Les métiers de ta généalogie ¦ Povolania v tvojej genealógii ¦ Yrkene i slektsforskningen din
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Zapísané povolania (profesia, sčítanie, karta) triedené ako v Strome povolaní. Nikdy žijúca osoba ani dôverná karta. ¦ De noterte yrkene (yrke, folketelling, kort), klassifisert som i Yrkestreet. Aldri en levende eller et konfidensielt kort.
+Hommes et femmes ¦ Muži a ženy ¦ Menn og kvinner
+Les femmes ¦ Ženy ¦ Kvinnene
+Toutes les époques ¦ Všetky obdobia ¦ Alle tider
+Aucun métier ¦ Žiadne povolanie ¦ Ingen yrker
+Aucun métier avec un lieu pour ce choix. ¦ Pre tento výber žiadne povolanie s miestom. ¦ Ingen yrker med sted for dette valget.
+Où on était {trade} ¦ Kde boli {trade} ¦ Hvor man var {trade}
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ Zapísané: {a} · zatriedené: {b} · „❔ iné“ na zatriedenie: {c} ¦ {a} notert · {b} klassifisert · {c} «❔ annet» å klassifisere
+Mes ancêtres seulement ¦ Iba moji predkovia ¦ Bare mine aner
+Par famille de métiers du dictionnaire (18) ¦ Podľa skupiny povolaní zo slovníka (18) ¦ Etter yrkesfamilie fra ordboken (18)
+Par grand secteur (12) ¦ Podľa hlavného odvetvia (12) ¦ Etter hovedsektor (12)
+employé ¦ úradník ¦ funksjonær
+ménagère ¦ v domácnosti ¦ husmor
+Où on l’exerçait ¦ Kde sa vykonávalo ¦ Hvor det ble utøvd
+# 👫 Les deux lignées en miroir (partie 1)
+Les deux lignées en miroir (côté père, côté mère) ¦ Dve línie zrkadlovo (otcova strana, matkina strana) ¦ De to slektslinjene i speil (farssiden, morssiden)
+Les événements des deux côtés (un par ligne) ¦ Udalosti oboch strán (jedna na riadok) ¦ Hendelsene på begge sider (én per linje)
+Ancêtre des deux côtés ¦ Predok z oboch strán ¦ Ane på begge sider
+Aucun ancêtre connu : {who} ¦ Žiadny známy predok: {who} ¦ Ingen kjent ane: {who}
+Bleu / orange (lisibles aussi par les daltoniens) ¦ Modrá / oranžová (čitateľné aj pre farboslepých) ¦ Blått / oransje (lesbart også for fargeblinde)
+Compté des deux côtés, couleur mélangée ¦ Počítaný na oboch stranách, zmiešaná farba ¦ Telles på begge sider, blandet farge
+Seulement du côté du chemin le plus court ¦ Iba na strane najkratšej cesty ¦ Bare på siden med den korteste veien
+Couleur du premier côté ¦ Farba prvej strany ¦ Farge for første side
+Couleur du deuxième côté ¦ Farba druhej strany ¦ Farge for andre side
+Côté père / côté mère ¦ Otcova strana / matkina strana ¦ Farssiden / morssiden
+Côté père / côté mère, avant la Révolution ¦ Otcova / matkina strana, pred revolúciou ¦ Farssiden / morssiden, før revolusjonen
+Mes quatre grands-parents (4 couleurs) ¦ Moji štyria starí rodičia (4 farby) ¦ Mine fire besteforeldre (4 farger)
+Deux personnes au choix ¦ Dve osoby podľa výberu ¦ To valgfrie personer
+Deux noms de famille ¦ Dve priezviská ¦ To etternavn
+Deux groupes de Mes listes ¦ Dve skupiny z Mojich zoznamov ¦ To grupper fra Mine lister
+Premier nom ¦ Prvé priezvisko ¦ Første navn
+Deuxième nom ¦ Druhé priezvisko ¦ Andre navn
+Première liste ¦ Prvý zoznam ¦ Første liste
+Deuxième liste ¦ Druhý zoznam ¦ Andre liste
+Deux lignées de ta généalogie ¦ Dve línie tvojej genealógie ¦ To linjer i slektsforskningen din
+Côté père et côté mère de la personne de départ (ou quatre grands-parents, deux personnes, deux noms, deux listes). Jamais un vivant ni une fiche confidentielle : une personne de départ vivante n’est jamais un point. ¦ Otcova a matkina strana východiskovej osoby (alebo štyria starí rodičia, dve osoby, dve mená, dva zoznamy). Nikdy žijúca osoba ani dôverná karta: žijúca východisková osoba nikdy nie je bodom. ¦ Farssiden og morssiden til startpersonen (eller fire besteforeldre, to personer, to navn, to lister). Aldri en levende eller et konfidensielt kort: en levende startperson er aldri et punkt.
+Glisser (un trait à déplacer) ¦ Posunúť (čiara na presúvanie) ¦ Dra (en strek å flytte)
+LES DEUX LIGNÉES ¦ DVE LÍNIE ¦ DE TO LINJENE
+Le mariage des parents (💍) ¦ Sobáš rodičov (💍) ¦ Foreldrenes bryllup (💍)
+Les deux lignées ¦ Obe línie ¦ Begge linjene
+Les deux lignées : {a}, {b} où elles se rencontrent. ¦ Obe línie: {a}; stretávajú sa: {b}. ¦ Begge linjene: {a}, {b} der de møtes.
+Les deux lignées : {n}. ¦ Obe línie: {n}. ¦ Begge linjene: {n}.
+Les deux lignées de la famille {name} ¦ Dve línie rodiny {name} ¦ De to linjene i familien {name}
+Les deux lignées de {name} ¦ Dve línie: {name} ¦ De to linjene til {name}
+Les quatre grands-parents de la famille {name} ¦ Štyria starí rodičia rodiny {name} ¦ De fire besteforeldrene i familien {name}
+Les quatre grands-parents de {name} ¦ Štyria starí rodičia: {name} ¦ De fire besteforeldrene til {name}
+Lister sous la carte où elles se rencontrent ¦ Vypísať pod mapou, kde sa stretávajú ¦ List under kartet hvor de møtes
+Combien de lignes ¦ Koľko riadkov ¦ Hvor mange linjer
+Montré ¦ Zobrazený ¦ Vist
+Même commune ¦ Rovnaká obec ¦ Samme kommune
+Même commune à la même époque ¦ Rovnaká obec v rovnakom čase ¦ Samme kommune på samme tid
+À moins de quelques km ¦ Do niekoľkých km ¦ Innenfor noen km
+À la même époque : à plus ou moins ¦ V rovnakom čase: plus mínus ¦ På samme tid: pluss/minus
+Où elles se rencontrent ¦ Kde sa stretávajú ¦ Hvor de møtes
+Par 25 ans ¦ Po 25 rokoch ¦ Per 25 år
+Position du trait ¦ Poloha čiary ¦ Strekens posisjon
+Prends les deux lignées de ta personne de départ (« Depuis l’app »). ¦ Vezmi obe línie svojej východiskovej osoby („Z aplikácie“). ¦ Ta begge linjene til startpersonen din («Fra appen»).
+Selon le nombre d’événements ¦ Podľa počtu udalostí ¦ Etter antall hendelser
+Ses deux lignées sur la carte ¦ Jej dve línie na mape ¦ Personens to linjer på kartet
+Seulement la période ¦ Iba obdobie ¦ Bare perioden
+Superposées ¦ Cez seba ¦ Lagt over hverandre
+Tout jusqu’à cette date ¦ Všetko do tohto dátumu ¦ Alt fram til denne datoen
+jamais à la même époque ¦ nikdy v rovnakom čase ¦ aldri på samme tid
+mariage de {a} et {b} ¦ sobáš: {a} a {b} ¦ bryllup mellom {a} og {b}
+{a} et {b}, à {km} km ¦ {a} a {b}, {km} km od seba ¦ {a} og {b}, {km} km fra hverandre
+3e groupe ¦ 3. skupina ¦ 3. gruppe
+4e groupe ¦ 4. skupina ¦ 4. gruppe
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Životný priestor, generácia po generácii ¦ Livsområdet, generasjon for generasjon
+L’aire de vie de tes ancêtres ¦ Životný priestor tvojich predkov ¦ Livsområdet til anene dine
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Pre každú generáciu oblasť, kde leží väčšina ich narodení, sobášov a úmrtí. Rovnaké vzdialenosti ako 🧭 Ďaleko od kolísky. Nikdy žijúca osoba ani dôverná karta. ¦ For hver generasjon sonen som rommer det meste av fødslene, ekteskapene og dødsfallene deres. Samme avstander som 🧭 Langt fra vuggen. Aldri en levende eller et konfidensielt kort.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Vezmi predkov svojej východiskovej osoby („Z aplikácie“). ¦ Ta anene til startpersonen din («Fra appen»).
+Génération d’ancêtres ¦ Generácia predkov ¦ Generasjon av aner
+Siècle (toute la base) ¦ Storočie (celá databáza) ¦ Århundre (hele databasen)
+Une vie (les étapes d’une personne) ¦ Jeden život (etapy jednej osoby) ¦ Et liv (en persons etapper)
+Avec les résidences et recensements ¦ S bydliskami a sčítaniami ¦ Med bosteder og folketellinger
+Du clair (anciens) au foncé (récents) ¦ Od svetlej (najstarší) po tmavú (najnovší) ¦ Fra lys (eldst) til mørk (nyest)
+Bleu / orange pour père / mère ¦ Modrá / oranžová pre otca / matku ¦ Blått / oransje for far / mor
+L’inverse ¦ Opačne ¦ Omvendt
+50 % (le cœur) ¦ 50 % (jadro) ¦ 50 % (kjernen)
+Part des événements ¦ Podiel udalostí ¦ Andel av hendelsene
+Part gardée ¦ Ponechaný podiel ¦ Beholdt andel
+Cercle (facile à comparer) ¦ Kruh (ľahko porovnateľný) ¦ Sirkel (lett å sammenligne)
+Enveloppe (le contour au plus juste) ¦ Obálka (najtesnejší obrys) ¦ Omhylling (den tetteste konturen)
+Personne (l’aire d’une vie) ¦ Osoba (priestor jedného života) ¦ Person (et livs område)
+Le milieu des événements ¦ Stred udalostí ¦ Midten av hendelsene
+Le lieu de naissance de la personne de départ ¦ Miesto narodenia východiskovej osoby ¦ Startpersonens fødested
+Le berceau des plus anciens ¦ Kolíska najstarších ¦ De eldstes vugge
+Toutes les aires superposées ¦ Všetky priestory cez seba ¦ Alle områder over hverandre
+Une par case ¦ Jeden v každom poli ¦ Én per rute
+Une à la fois avec ▶ ¦ Jeden po druhom s ▶ ¦ Én om gangen med ▶
+Minimum pour tracer une aire ¦ Minimum na nakreslenie priestoru ¦ Minimum for å tegne et område
+5 événements ¦ 5 udalostí ¦ 5 hendelser
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Na priestory (predok, ktorý odišiel ďaleko, zostane mimo) ¦ På områdene (en ane som dro langt unna, blir utenfor)
+Cadrer sur tout ¦ Zarámovať všetko ¦ Ramme inn alt
+Le tableau sous la carte ¦ Tabuľka pod mapou ¦ Tabellen under kartet
+Gén. {g} · ses parents ¦ Gen. {g} · rodičia ¦ Gen. {g} · foreldrene
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Klikni: miesta a tie mimo priestoru ¦ Klikk: stedene og de utenfor området
+Hors de l’aire ¦ Mimo priestoru ¦ Utenfor området
+Rayon ({p} %) ¦ Polomer ({p} %) ¦ Radius ({p} %)
+trop peu ¦ príliš málo ¦ for få
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Životný priestor: {n}, polomer od {a} km do {b} km. ¦ Livsområde: {n}, radius fra {a} km til {b} km.
+Aire de vie : pas assez d’événements. ¦ Životný priestor: málo udalostí. ¦ Livsområde: ikke nok hendelser.
+Aire de vie : {n}. ¦ Životný priestor: {n}. ¦ Livsområde: {n}.
+L’AIRE DE VIE ¦ ŽIVOTNÝ PRIESTOR ¦ LIVSOMRÅDET
+L’aire de vie de la famille, siècle par siècle ¦ Životný priestor rodiny, storočie po storočí ¦ Familiens livsområde, århundre for århundre
+L’aire de vie des ancêtres de {name} ¦ Životný priestor predkov: {name} ¦ Livsområdet til anene til {name}
+L’aire d’une vie : {name} ¦ Priestor jedného života: {name} ¦ Et livs område: {name}
+la famille {name} ¦ rodina {name} ¦ familien {name}
+Voir l’aire de vie sur la carte ¦ Zobraziť životný priestor na mape ¦ Vis livsområdet på kartet
+Centre ¦ Stred ¦ Midtpunkt
+Côté père et côté mère (deux couleurs) ¦ Otcova a matkina strana (dve farby) ¦ Farssiden og morssiden (to farger)
+Mes ancêtres, 8 générations ¦ Moji predkovia, 8 generácií ¦ Mine aner, 8 generasjoner
+Toute ma base, siècle par siècle ¦ Celá moja databáza, storočie po storočí ¦ Hele databasen min, århundre for århundre
+=aire ¦ priestor|priestory|priestorov ¦ område|områder
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Krstní rodičia a svedkovia na mape ¦ Faddere og vitner på kartet
+Les liens (un par ligne) ¦ Väzby (jedna na riadok) ¦ Båndene (ett per linje)
+D’où vient le témoin ¦ Odkiaľ svedok pochádza ¦ Hvor vitnet kommer fra
+D’où vient le parrain ¦ Odkiaľ krstný otec pochádza ¦ Hvor fadderen kommer fra
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ Čo je zapísané v zápise, inak bydlisko k dátumu, inak narodenie ¦ Det som står i akten, ellers bostedet på datoen, ellers fødselen
+Seulement ce qui est écrit dans l’acte ¦ Iba to, čo je zapísané v zápise ¦ Bare det som står i akten
+Seulement sa naissance ¦ Iba narodenie ¦ Bare fødselen
+Nombre de liens ¦ Počet väzieb ¦ Antall bånd
+Nombre de personnes différentes ¦ Počet rôznych osôb ¦ Antall ulike personer
+Liens dans le même village ¦ Väzby v tej istej obci ¦ Bånd i samme bygd
+Anneau autour du point ¦ Prstenec okolo bodu ¦ Ring rundt punktet
+Un chiffre seulement ¦ Iba číslo ¦ Bare et tall
+Rôles montrés ¦ Zobrazené úlohy ¦ Viste roller
+Parrain, marraine, témoin ¦ Krstný otec, krstná matka, svedok ¦ Gudfar, gudmor, vitne
+Tous sauf curé et officier ¦ Všetci okrem farára a úradníka ¦ Alle unntatt prest og embetsmann
+Traits montrés ¦ Zobrazené čiary ¦ Viste streker
+À partir de 1 lien ¦ Od 1 väzby ¦ Fra 1 bånd
+À partir de 2 ¦ Od 2 ¦ Fra 2
+À partir de 3 ¦ Od 3 ¦ Fra 3
+Les 30 plus forts seulement ¦ Iba 30 najsilnejších ¦ Bare de 30 sterkeste
+Par rôle ¦ Podľa úlohy ¦ Etter rolle
+Par branche (bleu père, orange mère) ¦ Podľa vetvy (modrá otec, oranžová matka) ¦ Etter gren (blå far, oransje mor)
+Flèche du village du parrain vers celui de l’acte ¦ Šípka z obce krstného rodiča do obce zápisu ¦ Pil fra fadderens bygd til aktens bygd
+La phrase sous la carte ¦ Veta pod mapou ¦ Setningen under kartet
+Clic : les liens derrière ce trait ¦ Klikni: väzby za touto čiarou ¦ Klikk: båndene bak streken
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: {p} % väzieb je priamo z obce; ostatné pochádzajú hlavne z: {others}. ¦ {place}: {p} % av båndene er fra selve bygda; de andre kommer mest fra {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Vypočítané z: {a} so známou obcou; bez miesta, nenakreslené: {b}. ¦ Beregnet på {a} der bygda er kjent; {b} uten sted tegnes ikke.
+Parrains et témoins : {a} entre {b}. ¦ Krstní rodičia a svedkovia: {a} medzi {b}. ¦ Faddere og vitner: {a} mellom {b}.
+Parrains et témoins : {n}. ¦ Krstní rodičia a svedkovia: {n}. ¦ Faddere og vitner: {n}.
+Filleul ou époux ¦ Krstniatko alebo manžel ¦ Gudbarn eller ektefelle
+{n} autres · triés par date ¦ Ďalších: {n} · podľa dátumu ¦ {n} til · sortert etter dato
+Ouvrir dans le Réseau ¦ Otvoriť v Sieti ¦ Åpne i Nettverket
+PARRAINS ET TÉMOINS ¦ KRSTNÍ RODIČIA A SVEDKOVIA ¦ FADDERE OG VITNER
+Parrains et marraines ¦ Krstní otcovia a krstné matky ¦ Gudfedre og gudmødre
+Parrains, marraines et témoins ¦ Krstní rodičia a svedkovia ¦ Faddere og vitner
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Vezmi krstných rodičov a svedkov zo svojej genealógie („Z aplikácie“). ¦ Ta fadderne og vitnene fra slektsforskningen din («Fra appen»).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ Väzby zo 🕸 Siete vzťahov na mape: obec zápisu a tá, odkiaľ pochádza svedok. Žijúci svedkovia sa nikdy nepočítajú. ¦ Båndene fra 🕸 Relasjonsnettverket, på kartet: aktens bygd og den vitnet kommer fra. Levende vitner telles aldri.
+Aucun lien avec un lieu pour ce choix. ¦ Pre tento výber žiadna väzba s miestom. ¦ Ingen bånd med sted for dette valget.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Pre tento výber žiadna väzba (úlohy, obdobie, miesta). ¦ Ingen bånd for dette valget (roller, periode, steder).
+Curé, officier ¦ Farár, úradník ¦ Prest, embetsmann
+curé ¦ farár ¦ prest
+Curé ¦ Farár ¦ Prest
+tuteur ¦ poručník ¦ verge
+Voisin ¦ Sused ¦ Nabo
+Officier ¦ Úradník ¦ Embetsmann
+bapt. ¦ krst ¦ dåp
+naiss. ¦ nar. ¦ fødsel
+mar. ¦ sobáš ¦ vielse
+inh. ¦ pohr. ¦ begr.
+# ⚰️ Crises et épidémies (partie 3) — et les départs « Graphique » de 🕸
+Crises et épidémies (les années où les décès montent) ¦ Krízy a epidémie (roky, keď pribúda úmrtí) ¦ Kriser og epidemier (årene da dødsfallene øker)
+Les décès (un par ligne) ¦ Úmrtia (jedno na riadok) ¦ Dødsfallene (ett per linje)
+Cause notée ¦ Zapísaná príčina ¦ Notert årsak
+Choléra de 1832 ¦ Cholera z roku 1832 ¦ Koleraen i 1832
+Clic : les personnes, et ce qui se passait à la même époque ¦ Klikni: osoby a čo sa dialo v rovnakom čase ¦ Klikk: personene og hva som skjedde på samme tid
+Comptés avec tout le monde ¦ Počítané so všetkými ¦ Telt med alle
+À part ¦ Zvlášť ¦ Separat
+À part (moins de 10 ans) ¦ Zvlášť (do 10 rokov) ¦ Separat (under 10 år)
+Pas comptés ¦ Nepočítané ¦ Ikke telt
+Mes ancêtres et leurs familles ¦ Moji predkovia a ich rodiny ¦ Mine aner og familiene deres
+Les enfants à part (moins de 10 ans) ¦ Deti zvlášť (do 10 rokov) ¦ Barna separat (under 10 år)
+Les décès de ta généalogie ¦ Úmrtia v tvojej genealógii ¦ Dødsfallene i slektsforskningen din
+Les décès placés et datés (le décès, sinon l’inhumation ; chaque personne une seule fois), et les crises du 🌍 Monde autour avec tes événements locaux. Jamais un vivant ni une fiche confidentielle. ¦ Umiestnené a datované úmrtia (úmrtie, inak pohreb; každá osoba iba raz) a krízy zo 🌍 Sveta okolo s tvojimi miestnymi udalosťami. Nikdy žijúca osoba ani dôverná karta. ¦ De plasserte og daterte dødsfallene (dødsfallet, ellers begravelsen; hver person bare én gang) og krisene i 🌍 Verden rundt med dine lokale hendelser. Aldri en levende eller et konfidensielt kort.
+Aucun décès daté avec un lieu pour ce choix. ¦ Pre tento výber žiadne datované úmrtie s miestom. ¦ Ingen daterte dødsfall med sted for dette valget.
+Décès sans année ou sans lieu, comptés à part : {n} ¦ Úmrtia bez roku alebo miesta, počítané zvlášť: {n} ¦ Dødsfall uten år eller sted, telt separat: {n}
+Minimum de décès dans l’année ¦ Minimum úmrtí v roku ¦ Minste antall dødsfall i året
+Décès au moins ¦ Úmrtí najmenej ¦ Dødsfall minst
+2,5 fois l’habitude ¦ 2,5-krát viac než obvykle ¦ 2,5 ganger det vanlige
+2 fois ¦ 2-krát ¦ 2 ganger
+3 fois ¦ 3-krát ¦ 3 ganger
+4 fois ¦ 4-krát ¦ 4 ganger
+Fois l’habitude ¦ Krát viac než obvykle ¦ Ganger det vanlige
+Fenêtre de l’habitude ¦ Okno obvyklej úrovne ¦ Vindu for det vanlige
+5 ans avant et 5 ans après ¦ 5 rokov pred a 5 rokov po ¦ 5 år før og 5 år etter
+10 et 10 ¦ 10 a 10 ¦ 10 og 10
+Seulement les 10 ans avant ¦ Iba 10 rokov pred ¦ Bare de 10 årene før
+L’habitude se calcule par ¦ Obvyklá úroveň sa počíta ako ¦ Det vanlige beregnes med
+La moyenne ¦ Priemer ¦ Gjennomsnittet
+La médiane (moins dérangée par une autre crise toute proche) ¦ Medián (menej narušený inou blízkou krízou) ¦ Medianen (mindre forstyrret av en annen nær krise)
+La commune, les petites regroupées avec leurs voisines ¦ Obec, malé zoskupené so susednými ¦ Kommunen, små gruppert med naboene
+Toujours la commune ¦ Vždy obec ¦ Alltid kommunen
+Le département ¦ Departement ¦ Departementet
+Petit village : nombre de décès sur toute la période, moins de ¦ Malá obec: počet úmrtí za celé obdobie menší než ¦ Lite bygd: antall dødsfall i hele perioden, færre enn
+Enfant : moins de ¦ Dieťa: menej než ¦ Barn: under
+Repères proposés ¦ Navrhnuté orientačné body ¦ Foreslåtte holdepunkter
+Les crises du 🌍 Monde autour qui couvrent la commune, et mes événements ¦ Krízy zo 🌍 Sveta okolo, ktoré sa týkajú obce, a moje udalosti ¦ Krisene i 🌍 Verden rundt som gjelder kommunen, og mine hendelser
+Toutes les crises de l’année ¦ Všetky krízy roka ¦ Alle årets kriser
+Pas du temps ¦ Časový krok ¦ Tidssteg
+Pas assez de décès placés : moins de ¦ Málo umiestnených úmrtí: menej než ¦ For få plasserte dødsfall: færre enn
+Pas assez de décès placés pour repérer des crises. ¦ Málo umiestnených úmrtí na odhalenie kríz. ¦ For få plasserte dødsfall til å finne kriser.
+Prends les décès de ta généalogie (« Depuis l’app »). ¦ Vezmi úmrtia zo svojej genealógie („Z aplikácie“). ¦ Ta dødsfallene fra slektsforskningen din («Fra appen»).
+LES ANNÉES DE CRISE ¦ KRÍZOVÉ ROKY ¦ KRISEÅRENE
+Les années de crise de la famille ¦ Krízové roky rodiny ¦ Familiens kriseår
+Les années de crise sur la carte ¦ Krízové roky na mape ¦ Kriseårene på kartet
+Les années de crise : {n}, sur {d}. ¦ Krízové roky: {n}, z {d}. ¦ Kriseår: {n}, av {d}.
+Les années de crise : {n}. ¦ Krízové roky: {n}. ¦ Kriseår: {n}.
+Les années à voir · {n} ¦ Roky na pozretie · {n} ¦ Årene å se på · {n}
+=année à voir ¦ rok na pozretie|roky na pozretie|rokov na pozretie ¦ år å se på|år å se på
+Habitude ¦ Obvykle ¦ Vanlig
+À la même époque (repère) ¦ V rovnakom čase (orientačný bod) ¦ På samme tid (holdepunkt)
+À la même époque : {what} — un repère, pas une explication. ¦ V rovnakom čase: {what} – orientačný bod, nie vysvetlenie. ¦ På samme tid: {what} – et holdepunkt, ikke en forklaring.
+Rien de connu dans cette région à cette date. ¦ V tomto kraji k tomuto dátumu nie je nič známe. ¦ Ingenting kjent i denne regionen på denne datoen.
+rien de connu dans cette région à cette date ¦ v tomto kraji k tomuto dátumu nič známe ¦ ingenting kjent i denne regionen på denne datoen
+cause notée : « {c} » ¦ zapísaná príčina: „{c}“ ¦ notert årsak: «{c}»
+d’habitude {u} par an ¦ obvykle {u} ročne ¦ vanligvis {u} i året
+plus de ×5 ¦ viac než ×5 ¦ mer enn ×5
+×2,5 à 3 ¦ ×2,5 až 3 ¦ ×2,5 til 3
+×3 à 5 ¦ ×3 až 5 ¦ ×3 til 5
+{name} + {n} voisines ¦ {name} + susedné: {n} ¦ {name} + {n} naboer
++ {n} autres ¦ + ďalších: {n} ¦ + {n} til
+Écrire la commune et l’année près des ronds ¦ Písať obec a rok vedľa krúžkov ¦ Skriv kommunen og året ved sirklene
+À lire avec prudence : l’app compare des nombres de décès, elle ne sait pas pourquoi ils montent. Le repère est ce qui se passait à la même époque : une piste à vérifier dans les actes (cause notée, âge, mois). Sur de petits nombres, le hasard suffit parfois. ¦ Čítaj opatrne: aplikácia porovnáva počty úmrtí, nevie, prečo rastú. Orientačný bod je to, čo sa dialo v rovnakom čase: stopa na overenie v zápisoch (zapísaná príčina, vek, mesiac). Pri malých číslach niekedy stačí náhoda. ¦ Les med forsiktighet: appen sammenligner antall dødsfall, den vet ikke hvorfor de øker. Holdepunktet er det som skjedde på samme tid: et spor å sjekke i aktene (notert årsak, alder, måned). Med små tall er tilfeldighetene noen ganger nok.
+Autour de mes ancêtres ¦ Okolo mojich predkov ¦ Rundt anene mine
+Parrains et marraines des baptêmes ¦ Krstní rodičia pri krstoch ¦ Faddere ved dåp
+Témoins des mariages ¦ Svedkovia sobášov ¦ Bryllupsvitner
+Tous les liens (parrains, témoins, déclarants…) ¦ Všetky väzby (krstní rodičia, svedkovia, oznamovatelia…) ¦ Alle bånd (faddere, vitner, melderne…)
+années à voir ¦ roky na pozretie ¦ år å se på
+année à voir ¦ rok na pozretie ¦ år å se på
+Ce qu’on prend ¦ Čo sa vezme ¦ Hva som tas med
+Tout : vu, en partie, à chercher ¦ Všetko: videné, sčasti, na hľadanie ¦ Alt: sett, delvis, å lete etter
+Seulement ce qui reste à faire ¦ Iba to, čo zostáva urobiť ¦ Bare det som gjenstår
+Seulement ce qui a été vu ¦ Iba to, čo bolo videné ¦ Bare det som er sett
+Sans le nom des correspondances ¦ Bez mien zhôd ¦ Uten navnene på treffene
+Avec le nom des correspondances (pas pour un export partagé) ¦ S menami zhôd (nie pre zdieľaný export) ¦ Med navnene på treffene (ikke for en delt eksport)

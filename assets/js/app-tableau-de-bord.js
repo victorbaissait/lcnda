@@ -504,7 +504,7 @@
     }
     function dashboardPlacesToCompleteCard(index,items,spanClass){
         const body=dashboardListRows(items,'Aucun lieu prioritaire à compléter.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml([item.name,item.subdivision].filter(Boolean).join(' · ')||'Lieu')}</strong><small>${escapeHtml([item.county,item.state,item.country].filter(Boolean).join(', ')||'Coordonnées ou pays à compléter')} · ${plural(Number(item.event_count||0),'évènement')}</small></div><button class="button small secondary" data-dashboard-list="places">Lieux</button></article>`);
-        return card(index,'Communes à compléter',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-list="places">Lieux</button>`);
+        return card(index,'Communes à compléter',items.length,body,spanClass,`<button class="button small" data-lap-open>📍 ${i18n('Placer…')}</button><button class="button small secondary" data-dashboard-list="places">Lieux</button>`); // 📍 Lieux à placer (heritage-lieux-a-placer.js)
     }
     function dashboardBranchesCard(index,items,spanClass){
         const body=dashboardListRows(items,'Aucune branche à prioriser.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml(item.branch||'Branche')}</strong><small>${plural(Number(item.person_count||0),'personne')} · ${plural(Number(item.source_count||0),'source')} · ${plural(Number(item.media_count||0),'média')}</small></div></article>`);

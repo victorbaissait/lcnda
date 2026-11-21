@@ -1,0 +1,365 @@
+fr ¦ is
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Staðir til að staðsetja
+Lieux à placer… ¦ Staðir til að staðsetja…
+Placer… ¦ Staðsetja…
+Les placer ¦ Staðsetja þá
+Rien n’est pris tant que tu ne cliques pas. ¦ Ekkert er sótt fyrr en þú smellir.
+Revoir et placer en lot… ¦ Fara yfir og staðsetja í einu…
+Seulement les lieux de cette carte ({n}). ¦ Aðeins staðir þessa korts ({n}).
+Voir tous les lieux à placer ¦ Sjá alla staði til að staðsetja
+Lecture des lieux… ¦ Les staði…
+Chercher un lieu… ¦ Leita að stað…
+De A à Z ¦ A til Ö
+Le plus loin du reste ¦ Lengst frá hinum
+{a} · {b} concernés ¦ {a} · {b} snerta
+Aucun lieu pour ce choix. ¦ Enginn staður fyrir þetta val.
+Tous les lieux de ta base ont une position. ¦ Allir staðir í grunninum þínum hafa staðsetningu.
+à {km} km du reste ¦ {km} km frá hinum
+Placer ici ¦ Staðsetja hér
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ {km} km frá öðrum stöðum þessara atburða: athugaðu áður en þú staðsetur.
+Placer les {n} ensemble ¦ Staðsetja þessa {n} saman
+Pas un lieu ¦ Ekki staður
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ Fyrstu 300; leitaðu að nafni til að sjá hina.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ {a} staðsettir ({b}) · þeir birtast á öllum kortum
+{name} placé ({n}) · {where} ¦ {name} staðsettur ({n}) · {where}
+{name} placé ({a}, {b}) ¦ {name} staðsettur ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ „{name}“ lagt til hliðar (ekki staður)
+« {name} » remis dans la liste ¦ „{name}“ aftur á listanum
+LOIN DU RESTE ¦ LANGT FRÁ HINUM
+Placer « {name} » si loin ? ¦ Staðsetja „{name}“ svona langt í burtu?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ „{where}“ er {km} km frá öðrum stöðum þessara atburða. Oft er það nafni.
+Placer quand même ¦ Staðsetja samt
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Smelltu á kortið þar sem „{name}“ er (Esc til að hætta við).
+{name} placé à la main (position approchée) ¦ {name} staðsettur handvirkt (áætluð staðsetning)
+Pas de réseau : rien n’a été envoyé. ¦ Ekkert net: ekkert var sent.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Netþjónustan fann ekkert fyrir „{name}“.
+{n} de plus pour « {name} » : à toi de choisir. ¦ {n} til viðbótar fyrir „{name}“: þú velur.
+EN LIGNE ¦ Á NETINU
+En ligne… ¦ Á netinu…
+Chercher « {name} » en ligne ? ¦ Leita að „{name}“ á netinu?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ Aðeins staðarheitið „{name}“ er sent til heimilisfangaleitar IGN (Géoplateforme). Ekkert mannsnafn, engin dagsetning.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Svarið er ein tillaga í viðbót á listanum; þú velur hana eða ekki. Án nets: „Ekkert net: ekkert var sent“.
+Ne plus me demander pour cette séance ¦ Ekki spyrja aftur á þessari lotu
+Lieu tapé ¦ Skráður staður
+Pourquoi ¦ Hvers vegna
+Distance au reste ¦ Fjarlægð frá hinum
+Év. ¦ Atb.
+{n} km ¦ {n} km
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ „Ekkert fannst“ er ekki í yfirferðinni. Staður meira en {km} km frá hinum er aldrei hakaður við sjálfkrafa.
+Seulement les sûrs ¦ Aðeins þeir öruggu
+Seulement les « sûrs » ¦ Aðeins „öruggir“
+Revoir avant de placer ¦ Fara yfir áður en staðsett er
+Placer les cochés ¦ Staðsetja hakaða
+Coche au moins un lieu. ¦ Hakaðu við að minnsta kosti einn stað.
+Placer les {n} cochés ¦ Staðsetja {n} hakaða
+Réglages des lieux à placer enregistrés ¦ Stillingar staða til að staðsetja vistaðar
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Staðir án staðsetningar, flokkaðir eftir líklegu sveitarfélagi: staðsettu þá með einum smelli
+Cochés au départ dans la revue ¦ Hakaðir í upphafi yfirferðar
+Les sûrs et les probables ¦ Þeir öruggu og þeir líklegu
+Un lieu-dit ¦ Örnefni
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ Á örnefnið ef það er þekkt, annars í miðju sveitarfélagsins merkt „áætlað“
+Toujours au centre de la commune ¦ Alltaf í miðju sveitarfélagsins
+Ne pas le placer ¦ Ekki staðsetja
+Plusieurs communes du même nom ¦ Nokkur sveitarfélög með sama nafni
+Proposer la plus proche des autres lieux, jamais cochée ¦ Stinga upp á þeim næsta hinum stöðunum, aldrei hakað
+Aussi les fautes proches, proposées seulement ¦ Líka nálægar villur, aðeins sem tillögur
+Le nom exact seulement ¦ Aðeins nákvæmt nafn
+Ce qui est repris ¦ Hvað er tekið
+Position, code INSEE et département ¦ Staðsetning, INSEE-númer og sýsla
+La position seulement ¦ Aðeins staðsetningin
+Jamais : le bouton est caché ¦ Aldrei: hnappurinn er falinn
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Einn hnappur „🌐 Á netinu…“ á hvern stað, með skilaboðunum í hvert sinn (aldrei í einu, aldrei sjálfkrafa)
+Alerte « loin du reste » ¦ Viðvörun „langt frá hinum“
+À partir de 200 km ¦ Frá 200 km
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ Sama nafn og sama sýsla og í sveitarfélagaskránni: aðeins eitt sveitarfélag „{name}“. Miðja, INSEE-númer og sýsla eru tekin.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ Aðeins eitt sveitarfélag „{name}“ í Frakklandi, en engin sýsla skrifuð.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ {n} sveitarfélög með þessu nafni í Frakklandi. Þau sem eru næst öðrum stöðum þessara atburða eru stungin upp á, aldrei hökuð við sjálfkrafa.
+{n} communes de ce nom en France : choisis la bonne. ¦ {n} sveitarfélög með þessu nafni í Frakklandi: veldu það rétta.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Örnefnið er þekkt í skránni (GeoNames) í sveitarfélaginu {name}.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Örnefnið er óþekkt í skránni: í miðju {name}, merkt „áætluð staðsetning“.
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Ekki núverandi sveitarfélag; saga INSEE (🏛 Gömul landamæri) segir: sameinað {to} árið {year}.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Borg í heiminum sem fylgir forritinu, valin eftir skrifuðu landi ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Fannst ekki meðal meðfylgjandi borga heimsins fyrir þetta land ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Ekkert sveitarfélag með þessu nafni. Lík stafsetning er stungin upp á. Ekkert er leitað á netinu.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Ekkert sveitarfélag með þessu nafni. Ekkert er leitað á netinu.
+le plus proche ¦ sá næsti
+sûr ¦ öruggur
+=proposition ¦ tillaga|tillögur
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ Í hverri valmynd er fyrsti kosturinn sá sem mælt er með: hann er stilltur í byrjun.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ Starfsgreinar á kortinu (eftir geira, öld fyrir öld)
+Les métiers notés (un par ligne) ¦ Skráðar starfsgreinar (ein í línu)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Staður („Tulle“, „Tulle 45.27, 1.77“)
+Classer par ¦ Flokka eftir
+Famille de métiers du dictionnaire (18) ¦ Starfsfjölskylda úr orðabókinni (18)
+Un seul métier et ses variantes ¦ Ein starfsgrein og afbrigði hennar
+Un métier et ses variantes ¦ Starfsgrein og afbrigði hennar
+Mes couleurs à moi par métier ¦ Mínir litir eftir starfsgrein
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Mínir litir („tisserand=#aa3300; meunier=#3355aa“)
+Camembert par commune ¦ Kökurit eftir sveitarfélagi
+Un rond de la couleur du plus fréquent ¦ Hringur í lit þess algengasta
+Siècle par siècle ¦ Öld fyrir öld
+Un petit dessin par siècle ¦ Lítið kort fyrir hverja öld
+Tout ensemble ¦ Allt saman
+Où placer le métier ¦ Hvar starfið er staðsett
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Staður skjalsins, annars búseta, annars fæðing
+Lieu de l’acte seulement ¦ Aðeins staður skjalsins
+Plusieurs métiers ¦ Nokkur störf
+Chacun à sa date ¦ Hvert á sinni dagsetningu
+Le principal seulement ¦ Aðeins aðalstarfið
+Montrés ¦ Sýndir
+Cachés ¦ Faldir
+Les plus grands ¦ Þeir stærstu
++ {n} secteurs vides ¦ + {n} tómir geirar
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Starfakort: {n}, lítið kort fyrir hverja öld.
+Carte des métiers : {a}, {b} ({when}). ¦ Starfakort: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Starfakort: {a}, {b}.
+Carte des métiers : {n}. ¦ Starfakort: {n}.
+Clic : les métiers de ce lieu ¦ Smelltu: störf á þessum stað
+Aucun métier noté au {when}. ¦ Engin störf skráð á {when}.
+Aucun métier pour ce choix. ¦ Engin störf fyrir þetta val.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Sæktu störfin úr ættfræðinni þinni („Úr forritinu“).
+LES MÉTIERS SUR LA CARTE ¦ STÖRF Á KORTINU
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ Smellur á starf opnar spjald þess (🛠️ Gömul störf).
+Les métiers de ta généalogie ¦ Störfin í ættfræðinni þinni
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Skráð störf (starf, manntal, spjald), flokkuð eins og í Starfatrénu. Aldrei lifandi manneskja né trúnaðarspjald.
+Hommes et femmes ¦ Karlar og konur
+Les femmes ¦ Konurnar
+Toutes les époques ¦ Öll tímabil
+Aucun métier ¦ Engin störf
+Aucun métier avec un lieu pour ce choix. ¦ Engin störf með stað fyrir þetta val.
+Où on était {trade} ¦ Hvar menn voru {trade}
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ {a} skráð · {b} flokkuð · {c} „❔ annað“ til að flokka
+Mes ancêtres seulement ¦ Aðeins forfeður mínir
+Par famille de métiers du dictionnaire (18) ¦ Eftir starfsfjölskyldu úr orðabókinni (18)
+Par grand secteur (12) ¦ Eftir aðalgeira (12)
+employé ¦ starfsmaður
+ménagère ¦ húsmóðir
+Où on l’exerçait ¦ Hvar það var stundað
+# 👫 Les deux lignées en miroir (partie 1)
+Les deux lignées en miroir (côté père, côté mère) ¦ Báðar ættirnar speglaðar (föðurætt, móðurætt)
+Les événements des deux côtés (un par ligne) ¦ Atburðir beggja hliða (einn í línu)
+Ancêtre des deux côtés ¦ Forfaðir beggja vegna
+Aucun ancêtre connu : {who} ¦ Enginn þekktur forfaðir: {who}
+Bleu / orange (lisibles aussi par les daltoniens) ¦ Blátt / appelsínugult (læsilegt líka fyrir litblinda)
+Compté des deux côtés, couleur mélangée ¦ Talinn beggja vegna, blandaður litur
+Seulement du côté du chemin le plus court ¦ Aðeins þeim megin sem leiðin er styst
+Couleur du premier côté ¦ Litur fyrri hliðar
+Couleur du deuxième côté ¦ Litur seinni hliðar
+Côté père / côté mère ¦ Föðurætt / móðurætt
+Côté père / côté mère, avant la Révolution ¦ Föðurætt / móðurætt, fyrir byltinguna
+Mes quatre grands-parents (4 couleurs) ¦ Afar mínir og ömmur (4 litir)
+Deux personnes au choix ¦ Tvær manneskjur að eigin vali
+Deux noms de famille ¦ Tvö ættarnöfn
+Deux groupes de Mes listes ¦ Tveir hópar úr Mínum listum
+Premier nom ¦ Fyrra nafnið
+Deuxième nom ¦ Seinna nafnið
+Première liste ¦ Fyrri listinn
+Deuxième liste ¦ Seinni listinn
+Deux lignées de ta généalogie ¦ Tvær línur úr ættfræðinni þinni
+Côté père et côté mère de la personne de départ (ou quatre grands-parents, deux personnes, deux noms, deux listes). Jamais un vivant ni une fiche confidentielle : une personne de départ vivante n’est jamais un point. ¦ Föðurætt og móðurætt upphafsmanneskjunnar (eða fjórir afar og ömmur, tvær manneskjur, tvö nöfn, tveir listar). Aldrei lifandi manneskja né trúnaðarspjald: lifandi upphafsmanneskja er aldrei punktur.
+Glisser (un trait à déplacer) ¦ Draga (lína sem færist)
+LES DEUX LIGNÉES ¦ BÁÐAR ÆTTIRNAR
+Le mariage des parents (💍) ¦ Brúðkaup foreldranna (💍)
+Les deux lignées ¦ Báðar ættir
+Les deux lignées : {a}, {b} où elles se rencontrent. ¦ Báðar ættir: {a}, {b} þar sem þær mætast.
+Les deux lignées : {n}. ¦ Báðar ættir: {n}.
+Les deux lignées de la famille {name} ¦ Báðar ættir {name}-fjölskyldunnar
+Les deux lignées de {name} ¦ Báðar ættir: {name}
+Les quatre grands-parents de la famille {name} ¦ Fjórir afar og ömmur {name}-fjölskyldunnar
+Les quatre grands-parents de {name} ¦ Fjórir afar og ömmur: {name}
+Lister sous la carte où elles se rencontrent ¦ Telja upp undir kortinu hvar þær mætast
+Combien de lignes ¦ Hve margar línur
+Montré ¦ Sýnt
+Même commune ¦ Sama sveitarfélag
+Même commune à la même époque ¦ Sama sveitarfélag á sama tíma
+À moins de quelques km ¦ Innan nokkurra km
+À la même époque : à plus ou moins ¦ Á sama tíma: plús eða mínus
+Où elles se rencontrent ¦ Hvar þær mætast
+Par 25 ans ¦ Á 25 ára fresti
+Position du trait ¦ Staða línunnar
+Prends les deux lignées de ta personne de départ (« Depuis l’app »). ¦ Sæktu báðar ættir upphafsmanneskjunnar („Úr forritinu“).
+Selon le nombre d’événements ¦ Eftir fjölda atburða
+Ses deux lignées sur la carte ¦ Báðar ættir hennar á kortinu
+Seulement la période ¦ Aðeins tímabilið
+Superposées ¦ Lagðar saman
+Tout jusqu’à cette date ¦ Allt fram að þessari dagsetningu
+jamais à la même époque ¦ aldrei á sama tíma
+mariage de {a} et {b} ¦ brúðkaup {a} og {b}
+{a} et {b}, à {km} km ¦ {a} og {b}, {km} km á milli
+3e groupe ¦ 3. hópur
+4e groupe ¦ 4. hópur
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Lífssvæðið, kynslóð eftir kynslóð
+L’aire de vie de tes ancêtres ¦ Lífssvæði forfeðra þinna
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Fyrir hverja kynslóð svæðið sem geymir flestar fæðingar, giftingar og dauðsföll hennar. Sömu fjarlægðir og 🧭 Langt frá vöggunni. Aldrei lifandi manneskja né trúnaðarspjald.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Sæktu forfeður upphafsmanneskjunnar („Úr forritinu“).
+Génération d’ancêtres ¦ Kynslóð forfeðra
+Siècle (toute la base) ¦ Öld (allur grunnurinn)
+Une vie (les étapes d’une personne) ¦ Eitt líf (áfangar einnar manneskju)
+Avec les résidences et recensements ¦ Með búsetu og manntölum
+Du clair (anciens) au foncé (récents) ¦ Frá ljósu (elstu) til dökks (nýjustu)
+Bleu / orange pour père / mère ¦ Blátt / appelsínugult fyrir föður / móður
+L’inverse ¦ Öfugt
+50 % (le cœur) ¦ 50 % (kjarninn)
+Part des événements ¦ Hlutfall atburða
+Part gardée ¦ Hlutfall sem haldið er
+Cercle (facile à comparer) ¦ Hringur (auðvelt að bera saman)
+Enveloppe (le contour au plus juste) ¦ Hjúpur (þéttasta útlínan)
+Personne (l’aire d’une vie) ¦ Manneskja (svæði eins lífs)
+Le milieu des événements ¦ Miðja atburðanna
+Le lieu de naissance de la personne de départ ¦ Fæðingarstaður upphafsmanneskjunnar
+Le berceau des plus anciens ¦ Vagga hinna elstu
+Toutes les aires superposées ¦ Öll svæðin lögð saman
+Une par case ¦ Eitt í hverjum reit
+Une à la fois avec ▶ ¦ Eitt í einu með ▶
+Minimum pour tracer une aire ¦ Lágmark til að teikna svæði
+5 événements ¦ 5 atburðir
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Á svæðin (forfaðir sem fór langt er utan svæðis)
+Cadrer sur tout ¦ Ramma allt inn
+Le tableau sous la carte ¦ Taflan undir kortinu
+Gén. {g} · ses parents ¦ Kyn. {g} · foreldrarnir
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Smelltu: staðirnir og þeir utan svæðis
+Hors de l’aire ¦ Utan svæðis
+Rayon ({p} %) ¦ Radíus ({p} %)
+trop peu ¦ of fáir
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Lífssvæði: {n}, radíus frá {a} km til {b} km.
+Aire de vie : pas assez d’événements. ¦ Lífssvæði: ekki nógu margir atburðir.
+Aire de vie : {n}. ¦ Lífssvæði: {n}.
+L’AIRE DE VIE ¦ LÍFSSVÆÐIÐ
+L’aire de vie de la famille, siècle par siècle ¦ Lífssvæði fjölskyldunnar, öld fyrir öld
+L’aire de vie des ancêtres de {name} ¦ Lífssvæði forfeðra: {name}
+L’aire d’une vie : {name} ¦ Svæði eins lífs: {name}
+la famille {name} ¦ {name}-fjölskyldan
+Voir l’aire de vie sur la carte ¦ Sjá lífssvæðið á kortinu
+Centre ¦ Miðja
+Côté père et côté mère (deux couleurs) ¦ Föðurætt og móðurætt (tveir litir)
+Mes ancêtres, 8 générations ¦ Forfeður mínir, 8 kynslóðir
+Toute ma base, siècle par siècle ¦ Allur grunnurinn minn, öld fyrir öld
+=aire ¦ svæði|svæði
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Guðforeldrar og vottar á kortinu
+Les liens (un par ligne) ¦ Tengslin (ein í línu)
+D’où vient le témoin ¦ Hvaðan votturinn kemur
+D’où vient le parrain ¦ Hvaðan guðforeldrið kemur
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ Það sem stendur í skjalinu, annars búseta á þeim degi, annars fæðing
+Seulement ce qui est écrit dans l’acte ¦ Aðeins það sem stendur í skjalinu
+Seulement sa naissance ¦ Aðeins fæðingin
+Nombre de liens ¦ Fjöldi tengsla
+Nombre de personnes différentes ¦ Fjöldi ólíkra manneskja
+Liens dans le même village ¦ Tengsl í sama þorpi
+Anneau autour du point ¦ Hringur um punktinn
+Un chiffre seulement ¦ Aðeins tala
+Rôles montrés ¦ Hlutverk sem sýnd eru
+Parrain, marraine, témoin ¦ Guðfaðir, guðmóðir, vottur
+Tous sauf curé et officier ¦ Allir nema prestur og embættismaður
+Traits montrés ¦ Línur sem sýndar eru
+À partir de 1 lien ¦ Frá 1 tengslum
+À partir de 2 ¦ Frá 2
+À partir de 3 ¦ Frá 3
+Les 30 plus forts seulement ¦ Aðeins 30 sterkustu
+Par rôle ¦ Eftir hlutverki
+Par branche (bleu père, orange mère) ¦ Eftir grein (blátt faðir, appelsínugult móðir)
+Flèche du village du parrain vers celui de l’acte ¦ Ör frá þorpi guðforeldris að þorpi skjalsins
+La phrase sous la carte ¦ Setningin undir kortinu
+Clic : les liens derrière ce trait ¦ Smelltu: tengslin á bak við línuna
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: {p} % tengslanna eru úr þorpinu sjálfu; hin koma helst frá {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Reiknað á {a} þar sem þorpið er þekkt; {b} án staðar eru ekki teiknuð.
+Parrains et témoins : {a} entre {b}. ¦ Guðforeldrar og vottar: {a} milli {b}.
+Parrains et témoins : {n}. ¦ Guðforeldrar og vottar: {n}.
+Filleul ou époux ¦ Guðbarn eða maki
+{n} autres · triés par date ¦ {n} til viðbótar · eftir dagsetningu
+Ouvrir dans le Réseau ¦ Opna í Netinu
+PARRAINS ET TÉMOINS ¦ GUÐFORELDRAR OG VOTTAR
+Parrains et marraines ¦ Guðfeður og guðmæður
+Parrains, marraines et témoins ¦ Guðforeldrar og vottar
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Sæktu guðforeldra og votta úr ættfræðinni þinni („Úr forritinu“).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ Tengsl úr 🕸 Venslaneti, á kortinu: þorp skjalsins og það sem votturinn kemur frá. Lifandi vottar eru aldrei taldir.
+Aucun lien avec un lieu pour ce choix. ¦ Engin tengsl með stað fyrir þetta val.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Engin tengsl fyrir þetta val (hlutverk, tímabil, staðir).
+Curé, officier ¦ Prestur, embættismaður
+curé ¦ prestur
+Curé ¦ Prestur
+tuteur ¦ lögráðamaður
+Voisin ¦ Nágranni
+Officier ¦ Embættismaður
+bapt. ¦ skírn
+naiss. ¦ fæð.
+mar. ¦ gift.
+inh. ¦ greftr.
+# ⚰️ Crises et épidémies (partie 3) — et les départs « Graphique » de 🕸
+Crises et épidémies (les années où les décès montent) ¦ Kreppur og farsóttir (árin þegar dauðsföllum fjölgar)
+Les décès (un par ligne) ¦ Dauðsföllin (eitt í línu)
+Cause notée ¦ Skráð orsök
+Choléra de 1832 ¦ Kólerufaraldurinn 1832
+Clic : les personnes, et ce qui se passait à la même époque ¦ Smelltu: fólkið og hvað var að gerast á sama tíma
+Comptés avec tout le monde ¦ Taldir með öllum
+À part ¦ Sér
+À part (moins de 10 ans) ¦ Sér (yngri en 10 ára)
+Pas comptés ¦ Ekki taldir
+Mes ancêtres et leurs familles ¦ Forfeður mínir og fjölskyldur þeirra
+Les enfants à part (moins de 10 ans) ¦ Börnin sér (yngri en 10 ára)
+Les décès de ta généalogie ¦ Dauðsföllin í ættfræðinni þinni
+Les décès placés et datés (le décès, sinon l’inhumation ; chaque personne une seule fois), et les crises du 🌍 Monde autour avec tes événements locaux. Jamais un vivant ni une fiche confidentielle. ¦ Staðsett og dagsett dauðsföll (dauðinn, annars greftrunin; hver manneskja aðeins einu sinni) og kreppur úr 🌍 Heiminum í kring með þínum staðbundnu atburðum. Aldrei lifandi manneskja né trúnaðarspjald.
+Aucun décès daté avec un lieu pour ce choix. ¦ Engin dagsett dauðsföll með stað fyrir þetta val.
+Décès sans année ou sans lieu, comptés à part : {n} ¦ Dauðsföll án árs eða staðar, talin sér: {n}
+Minimum de décès dans l’année ¦ Lágmarksfjöldi dauðsfalla á árinu
+Décès au moins ¦ Dauðsföll að minnsta kosti
+2,5 fois l’habitude ¦ 2,5 sinnum það venjulega
+2 fois ¦ 2 sinnum
+3 fois ¦ 3 sinnum
+4 fois ¦ 4 sinnum
+Fois l’habitude ¦ Sinnum það venjulega
+Fenêtre de l’habitude ¦ Gluggi venjulegs stigs
+5 ans avant et 5 ans après ¦ 5 ár á undan og 5 ár á eftir
+10 et 10 ¦ 10 og 10
+Seulement les 10 ans avant ¦ Aðeins 10 árin á undan
+L’habitude se calcule par ¦ Venjulegt stig er reiknað með
+La moyenne ¦ Meðaltalið
+La médiane (moins dérangée par une autre crise toute proche) ¦ Miðgildið (truflast síður af annarri nálægri kreppu)
+La commune, les petites regroupées avec leurs voisines ¦ Sveitarfélagið, lítil flokkuð með nágrönnum sínum
+Toujours la commune ¦ Alltaf sveitarfélagið
+Le département ¦ Sýslan
+Petit village : nombre de décès sur toute la période, moins de ¦ Lítið þorp: fjöldi dauðsfalla á öllu tímabilinu, færri en
+Enfant : moins de ¦ Barn: yngra en
+Repères proposés ¦ Tillögur um viðmið
+Les crises du 🌍 Monde autour qui couvrent la commune, et mes événements ¦ Kreppur úr 🌍 Heiminum í kring sem ná til sveitarfélagsins, og mínir atburðir
+Toutes les crises de l’année ¦ Allar kreppur ársins
+Pas du temps ¦ Tímaskref
+Pas assez de décès placés : moins de ¦ Of fá staðsett dauðsföll: færri en
+Pas assez de décès placés pour repérer des crises. ¦ Of fá staðsett dauðsföll til að finna kreppur.
+Prends les décès de ta généalogie (« Depuis l’app »). ¦ Sæktu dauðsföllin úr ættfræðinni þinni („Úr forritinu“).
+LES ANNÉES DE CRISE ¦ KREPPUÁRIN
+Les années de crise de la famille ¦ Kreppuár fjölskyldunnar
+Les années de crise sur la carte ¦ Kreppuárin á kortinu
+Les années de crise : {n}, sur {d}. ¦ Kreppuár: {n}, af {d}.
+Les années de crise : {n}. ¦ Kreppuár: {n}.
+Les années à voir · {n} ¦ Árin til að skoða · {n}
+=année à voir ¦ ár til að skoða|ár til að skoða
+Habitude ¦ Venjulega
+À la même époque (repère) ¦ Á sama tíma (viðmið)
+À la même époque : {what} — un repère, pas une explication. ¦ Á sama tíma: {what} – viðmið, ekki skýring.
+Rien de connu dans cette région à cette date. ¦ Ekkert þekkt á þessu svæði á þessum tíma.
+rien de connu dans cette région à cette date ¦ ekkert þekkt á þessu svæði á þessum tíma
+cause notée : « {c} » ¦ skráð orsök: „{c}“
+d’habitude {u} par an ¦ venjulega {u} á ári
+plus de ×5 ¦ meira en ×5
+×2,5 à 3 ¦ ×2,5 til 3
+×3 à 5 ¦ ×3 til 5
+{name} + {n} voisines ¦ {name} + {n} nágrannar
++ {n} autres ¦ + {n} til viðbótar
+Écrire la commune et l’année près des ronds ¦ Skrifa sveitarfélagið og árið við hringina
+À lire avec prudence : l’app compare des nombres de décès, elle ne sait pas pourquoi ils montent. Le repère est ce qui se passait à la même époque : une piste à vérifier dans les actes (cause notée, âge, mois). Sur de petits nombres, le hasard suffit parfois. ¦ Lestu með varúð: forritið ber saman fjölda dauðsfalla, það veit ekki hvers vegna þeim fjölgar. Viðmiðið er það sem var að gerast á sama tíma: vísbending til að athuga í skjölunum (skráð orsök, aldur, mánuður). Með litlum tölum nægir tilviljun stundum.
+Autour de mes ancêtres ¦ Í kringum forfeður mína
+Parrains et marraines des baptêmes ¦ Guðforeldrar við skírnir
+Témoins des mariages ¦ Vottar í brúðkaupum
+Tous les liens (parrains, témoins, déclarants…) ¦ Öll tengsl (guðforeldrar, vottar, tilkynnendur…)
+années à voir ¦ ár til að skoða
+année à voir ¦ ár til að skoða
+Ce qu’on prend ¦ Hvað er tekið
+Tout : vu, en partie, à chercher ¦ Allt: séð, að hluta, til að leita
+Seulement ce qui reste à faire ¦ Aðeins það sem er eftir
+Seulement ce qui a été vu ¦ Aðeins það sem hefur verið skoðað
+Sans le nom des correspondances ¦ Án nafna samsvarana
+Avec le nom des correspondances (pas pour un export partagé) ¦ Með nöfnum samsvarana (ekki fyrir samnýttan útflutning)

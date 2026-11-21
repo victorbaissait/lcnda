@@ -128,6 +128,8 @@
             ['Cousins proches (90 cM et plus)', {'[data-dac="min"]': '90', '[data-dac="max"]': '3000'}], ['Au moins 50 cM, toutes', {'[data-dac="min"]': '50', '[data-dac="max"]': '3000'}]],
         // les types venus ensuite (cartes du temps, lots A et B, D23–D38…) : leurs panneaux propres ont aussi leur « Graphique »
         surnamemap: CPEV, heatdecades: CPEV,
+        dnamap: [['Sans le nom des correspondances', {'[data-cp="names"]': false}], ['Avec le nom des correspondances (pas pour un export partagé)', {'[data-cp="names"]': true}]],
+        researchmap: [['Tout : vu, en partie, à chercher', {'[data-cp="rstate"]': ''}], ['Seulement ce qui reste à faire', {'[data-cp="rstate"]': 'todo'}], ['Seulement ce qui a été vu', {'[data-cp="rstate"]': 'seen'}]],
         censusgrid: popList(), proofmap: popList(),
         lexis: [...popList(), ...periods()], ternary: [...popList(), ...periods()], namevariants: [...popList(), ...periods()],
         wordtree: [['Ce qui suit', {'[data-lotc="dir"]': 'after'}], ['Ce qui précède', {'[data-lotc="dir"]': 'before'}]],
@@ -140,9 +142,21 @@
         dpldiv: [['Décès ↔ naissances', {'[data-dpl="pair"]': 'bd'}], ['Naissances : filles ↔ garçons', {'[data-dpl="pair"]': 'sex'}], ['Mes ancêtres, par siècle', {'[data-dpl="step"]': '100', ...DPL_ANC}]],
         dplhills: STEP('[data-dpl="step"]').filter(([, s]) => s['[data-dpl="step"]'] !== '100'), // (pas de « par siècle » pour les collines des noms)
         dplpar: DPL_SCOPE, dplstep: DPL_SCOPE,
+        // 🗺️ cartes en plus, vague 2 (heritage-diagram-cartes-plus2.js) : « ✏️ Sur mesure » reste en tête du menu
+        trademap: [['Par grand secteur (12)', {'[data-cq="classify"]': ''}], ['Par famille de métiers du dictionnaire (18)', {'[data-cq="classify"]': 'domain'}], ['Un métier et ses variantes…', {'[data-cq="classify"]': 'one'}],
+            ['Mes ancêtres seulement', {'[data-cq="pop"]': 'anc'}], ['Au XIXe siècle', {'[data-cq="from"]': '1801'}], ['Les hommes', {'[data-cq="sex"]': 'm'}], ['Les femmes', {'[data-cq="sex"]': 'f'}]],
+        mirrormap: [['Côté père / côté mère', {'[data-cq="side"]': 'pat'}], ['Mes quatre grands-parents (4 couleurs)', {'[data-cq="side"]': 'grand'}], ['Deux personnes au choix', {'[data-cq="side"]': 'two'}],
+            ['Deux noms de famille', {'[data-cq="side"]': 'names'}], ['Côté père / côté mère, avant la Révolution', {'[data-cq="side"]': 'pat', '[data-cq="period"]': '-1789'}]],
+        lifearea: [['Mes ancêtres, 8 générations', {'[data-cq="group"]': 'gen', '[data-cq="gens"]': '8'}], ['Le plus loin possible (14 générations)', {'[data-cq="group"]': 'gen', '[data-cq="gens"]': '14'}],
+            ['Toute ma base, siècle par siècle', {'[data-cq="group"]': 'century'}], ['Côté père et côté mère (deux couleurs)', {'[data-cq="group"]': 'gen', '[data-cq="colors"]': 'side'}], ['Une vie (les étapes d’une personne)', {'[data-cq="group"]': 'person'}]],
+        linkmap: [['Parrains et marraines des baptêmes', {'[data-cq="roles"]': ['parrain', 'marraine']}], ['Témoins des mariages', {'[data-cq="roles"]': ['témoin']}],
+            ['Tous les liens (parrains, témoins, déclarants…)', {'[data-cq="roles"]': ['parrain', 'marraine', 'témoin', 'déclarant', 'voisin', 'curé']}], ['Autour de mes ancêtres', {'[data-cq="roles"]': ['parrain', 'marraine', 'témoin'], '[data-cq="pop"]': 'anc'}],
+            ['Avant la Révolution', {'[data-cq="roles"]': ['parrain', 'marraine'], '[data-cq="yto"]': '1789'}], ['Au XIXe siècle', {'[data-cq="roles"]': ['parrain', 'marraine'], '[data-cq="yfrom"]': '1801', '[data-cq="yto"]': '1900'}]],
+        crisismap: [['Toute ma base', {'[data-cq="pop"]': 'all', '[data-cq="kids"]': ''}], ['Mes ancêtres et leurs familles', {'[data-cq="pop"]': 'anc'}], ['Les enfants à part (moins de 10 ans)', {'[data-cq="kids"]': 'apart'}],
+            ['Le XVIIIe siècle', {'[data-cq="period"]': '1700'}], ['Le XIXe siècle', {'[data-cq="period"]': '1800'}]],
         quarters: [['8 quartiers (arrière-grands-parents)', {'[data-dla="gens"]': '3'}], ['16 quartiers', {'[data-dla="gens"]': '4'}], ['32 quartiers', {'[data-dla="gens"]': '5'}]],
     };
-    const GO = '[data-gn-go], [data-n6-go], [data-dm-go], [data-dfa-go], [data-dgm-go], [data-c2-go], [data-dac-go], [data-cp-go], [data-lotc-go], [data-dpl-go], [data-dla-go]';
+    const GO = '[data-gn-go], [data-n6-go], [data-dm-go], [data-dfa-go], [data-dgm-go], [data-c2-go], [data-dac-go], [data-cp-go], [data-lotc-go], [data-dpl-go], [data-dla-go], [data-cq-go]';
 
     /** les valeurs à poser : une fonction est appelée (personnes calculées) */
     const fire = el => { el.dispatchEvent(new Event('input', {bubbles: true})); el.dispatchEvent(new Event('change', {bubbles: true})); };

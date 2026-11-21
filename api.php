@@ -466,6 +466,7 @@ try {
         try { json_response(meteo_api_post((string) $action, $payload, $_GET)); }
         catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); }
     }
+    if ($isWrite && str_starts_with((string) $action, 'lieux_')) { require_once __DIR__ . '/lib/lieux_a_placer.php'; } // 📍 Lieux à placer (écritures dans handle_write)
     if ($isWrite && !in_array($action, $uploadActions, true)) {
         handle_write($pdo, $action, $payload);
     }
@@ -725,6 +726,8 @@ try {
         'frontieres_remote' => (static function () { require_once __DIR__ . '/lib/cartes_plus.php'; try { json_response(cp_front_remote()); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🏛 adresses et tailles annoncées
         'frontieres_communes' => (static function () { require_once __DIR__ . '/lib/cartes_plus.php'; json_response(cp_front_communes($_GET)); })(), // 🏛 communes disparues d'un cadre de la carte
         'cartes_plus' => (static function () use ($pdo) { require_once __DIR__ . '/lib/cartes_plus.php'; try { json_response(cp_data($pdo, $_GET)); } catch (RuntimeException $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🗺️ cartes des patronymes, ADN, recherches, chaleur (lib/cartes_plus.php)
+        'lieux_a_placer' => (static function () use ($pdo) { require_once __DIR__ . '/lib/lieux_a_placer.php'; json_response(lap_list($pdo, $_GET)); })(), // 📍 Lieux à placer : ce que l'app propose (rien n'est placé)
+        'cartes_plus2' => (static function () use ($pdo) { require_once __DIR__ . '/lib/cartes_plus2.php'; try { json_response(cp2_data($pdo, $_GET)); } catch (RuntimeException $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🗺️ vague 2 : métiers, lignées en miroir, aire de vie, parrains et témoins, crises (lib/cartes_plus2.php)
         'quick_search' => json_response(quick_search_data($pdo, safe_text($_GET['q'] ?? ''))),
         'rfr_parse' => json_response(rfr_api_parse($pdo, mb_substr(safe_text($_GET['q'] ?? ''), 0, 200))), // 🔎 ce que la recherche comprend d'un texte (lib/recherche_fr.php)
         'implexe' => json_response(implexe_data($pdo, safe_int($_GET['id'] ?? 0) ?: (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 LIMIT 1')->fetchColumn())),
@@ -10068,6 +10071,9 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'apply_variants' => apply_variants($pdo,$data),
             'undo_harmonize' => undo_harmonize($pdo,$data),
             'fix_place' => fix_place($pdo,$data),
+            'lieux_place' => lap_place($pdo,$data), // 📍 Lieux à placer : un lieu ou un lot (lib/lieux_a_placer.php)
+            'lieux_undo' => lap_undo($pdo,$data), // 📍 ↶ Annuler : les anciennes valeurs
+            'lieux_online' => lap_online($pdo,$data), // 📍 🌐 seulement sur demande, lieu par lieu : le nom du lieu seul
             'save_resistance' => save_resistance($pdo,$data),
             'clear_resistance' => clear_resistance($pdo,$data),
             'save_voter_cards' => save_voter_cards($pdo,$data),

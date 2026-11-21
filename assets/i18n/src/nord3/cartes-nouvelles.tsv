@@ -1,0 +1,365 @@
+fr ¦ ro
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Locuri de plasat
+Lieux à placer… ¦ Locuri de plasat…
+Placer… ¦ Plasează…
+Les placer ¦ Plasează-le
+Rien n’est pris tant que tu ne cliques pas. ¦ Nu se preia nimic până nu dai clic.
+Revoir et placer en lot… ¦ Verifică și plasează în lot…
+Seulement les lieux de cette carte ({n}). ¦ Doar locurile de pe această hartă ({n}).
+Voir tous les lieux à placer ¦ Vezi toate locurile de plasat
+Lecture des lieux… ¦ Se citesc locurile…
+Chercher un lieu… ¦ Caută un loc…
+De A à Z ¦ De la A la Z
+Le plus loin du reste ¦ Cel mai departe de rest
+{a} · {b} concernés ¦ {a} · {b} vizate
+Aucun lieu pour ce choix. ¦ Niciun loc pentru această alegere.
+Tous les lieux de ta base ont une position. ¦ Toate locurile din baza ta au o poziție.
+à {km} km du reste ¦ la {km} km de rest
+Placer ici ¦ Plasează aici
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ La {km} km de celelalte locuri ale acestor evenimente: verifică înainte de a plasa.
+Placer les {n} ensemble ¦ Plasează cele {n} împreună
+Pas un lieu ¦ Nu e un loc
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ Primele 300; caută un nume ca să le vezi pe celelalte.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ {a} plasate ({b}) · apar pe toate hărțile
+{name} placé ({n}) · {where} ¦ {name} plasat ({n}) · {where}
+{name} placé ({a}, {b}) ¦ {name} plasat ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ „{name}” pus deoparte (nu e un loc)
+« {name} » remis dans la liste ¦ „{name}” pus înapoi în listă
+LOIN DU RESTE ¦ DEPARTE DE REST
+Placer « {name} » si loin ? ¦ Plasezi „{name}” atât de departe?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ „{where}” e la {km} km de celelalte locuri ale acestor evenimente. Adesea e un omonim.
+Placer quand même ¦ Plasează oricum
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Dă clic pe hartă în locul „{name}” (Esc ca să renunți).
+{name} placé à la main (position approchée) ¦ {name} plasat de mână (poziție aproximativă)
+Pas de réseau : rien n’a été envoyé. ¦ Nicio rețea: nu s-a trimis nimic.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Serviciul online n-a găsit nimic pentru „{name}”.
+{n} de plus pour « {name} » : à toi de choisir. ¦ Încă {n} pentru „{name}”: alegi tu.
+EN LIGNE ¦ ONLINE
+En ligne… ¦ Online…
+Chercher « {name} » en ligne ? ¦ Cauți „{name}” online?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ Doar numele locului „{name}” este trimis serviciului de căutare a adreselor al IGN (Géoplateforme). Niciun nume de persoană, nicio dată.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Răspunsul e încă o propunere în listă; o alegi sau nu. Fără internet: „Nicio rețea: nu s-a trimis nimic”.
+Ne plus me demander pour cette séance ¦ Nu mă mai întreba în această sesiune
+Lieu tapé ¦ Loc scris
+Pourquoi ¦ De ce
+Distance au reste ¦ Distanța față de rest
+Év. ¦ Ev.
+{n} km ¦ {n} km
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ „Nimic găsit” nu sunt în verificare. Un loc la peste {km} km de rest nu este niciodată bifat singur.
+Seulement les sûrs ¦ Doar cele sigure
+Seulement les « sûrs » ¦ Doar cele „sigure”
+Revoir avant de placer ¦ Verifică înainte de a plasa
+Placer les cochés ¦ Plasează-le pe cele bifate
+Coche au moins un lieu. ¦ Bifează cel puțin un loc.
+Placer les {n} cochés ¦ Plasează cele {n} bifate
+Réglages des lieux à placer enregistrés ¦ Setările locurilor de plasat au fost salvate
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Locurile fără poziție, grupate după comuna probabilă: plasează-le cu un clic
+Cochés au départ dans la revue ¦ Bifate de la început în verificare
+Les sûrs et les probables ¦ Cele sigure și cele probabile
+Un lieu-dit ¦ Un loc numit
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ La locul numit dacă e cunoscut, altfel în centrul comunei, marcat „aproximativ”
+Toujours au centre de la commune ¦ Mereu în centrul comunei
+Ne pas le placer ¦ Nu-l plasa
+Plusieurs communes du même nom ¦ Mai multe comune cu același nume
+Proposer la plus proche des autres lieux, jamais cochée ¦ Propune-o pe cea mai apropiată de celelalte locuri, niciodată bifată
+Aussi les fautes proches, proposées seulement ¦ Și greșelile apropiate, doar propuse
+Le nom exact seulement ¦ Doar numele exact
+Ce qui est repris ¦ Ce se preia
+Position, code INSEE et département ¦ Poziția, codul INSEE și departamentul
+La position seulement ¦ Doar poziția
+Jamais : le bouton est caché ¦ Niciodată: butonul e ascuns
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Un buton „🌐 Online…” pentru fiecare loc, cu mesajul de fiecare dată (niciodată în lot, niciodată singur)
+Alerte « loin du reste » ¦ Alertă „departe de rest”
+À partir de 200 km ¦ De la 200 km
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ Același nume și același departament ca în nomenclatorul comunelor: o singură comună „{name}”. Se preiau centrul, codul INSEE și departamentul.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ O singură comună „{name}” în Franța, dar fără departament scris.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ {n} comune cu acest nume în Franța. Sunt propuse cele mai apropiate de celelalte locuri ale acestor evenimente, niciodată bifate singure.
+{n} communes de ce nom en France : choisis la bonne. ¦ {n} comune cu acest nume în Franța: alege-o pe cea bună.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Loc numit cunoscut în nomenclator (GeoNames) în comuna {name}.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Loc numit necunoscut în nomenclator: în centrul localității {name}, marcat „poziție aproximativă”.
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Nu e o comună de azi; istoricul INSEE (🏛 Frontiere vechi) spune: unită cu {to} în {year}.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Oraș din lume livrat cu aplicația, ales după țara scrisă ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Negăsit printre orașele din lume livrate pentru această țară ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Nicio comună cu acest nume. Se propune o ortografie apropiată. Nu se caută nimic online.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Nicio comună cu acest nume. Nu se caută nimic online.
+le plus proche ¦ cea mai apropiată
+sûr ¦ sigur
+=proposition ¦ propunere|propuneri|de propuneri
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ În fiecare meniu, prima alegere este cea recomandată: e setată de la început.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ Meseriile pe hartă (pe sectoare, secol cu secol)
+Les métiers notés (un par ligne) ¦ Meseriile notate (una pe rând)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Loc („Tulle”, „Tulle 45.27, 1.77”)
+Classer par ¦ Clasifică după
+Famille de métiers du dictionnaire (18) ¦ Familie de meserii din dicționar (18)
+Un seul métier et ses variantes ¦ O singură meserie și variantele ei
+Un métier et ses variantes ¦ O meserie și variantele ei
+Mes couleurs à moi par métier ¦ Culorile mele pentru fiecare meserie
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Culorile mele („tisserand=#aa3300; meunier=#3355aa”)
+Camembert par commune ¦ Diagramă circulară pe comună
+Un rond de la couleur du plus fréquent ¦ Un cerc în culoarea celei mai frecvente
+Siècle par siècle ¦ Secol cu secol
+Un petit dessin par siècle ¦ O hartă mică pentru fiecare secol
+Tout ensemble ¦ Totul împreună
+Où placer le métier ¦ Unde se plasează meseria
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Locul actului, altfel reședința, altfel nașterea
+Lieu de l’acte seulement ¦ Doar locul actului
+Plusieurs métiers ¦ Mai multe meserii
+Chacun à sa date ¦ Fiecare la data ei
+Le principal seulement ¦ Doar cea principală
+Montrés ¦ Afișate
+Cachés ¦ Ascunse
+Les plus grands ¦ Cele mai mari
++ {n} secteurs vides ¦ + {n} sectoare goale
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Harta meseriilor: {n}, câte o hartă mică pe secol.
+Carte des métiers : {a}, {b} ({when}). ¦ Harta meseriilor: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Harta meseriilor: {a}, {b}.
+Carte des métiers : {n}. ¦ Harta meseriilor: {n}.
+Clic : les métiers de ce lieu ¦ Clic: meseriile din acest loc
+Aucun métier noté au {when}. ¦ Nicio meserie notată în {when}.
+Aucun métier pour ce choix. ¦ Nicio meserie pentru această alegere.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Ia meseriile din genealogia ta („Din aplicație”).
+LES MÉTIERS SUR LA CARTE ¦ MESERIILE PE HARTĂ
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ Un clic pe o meserie îi deschide fișa (🛠️ Meserii vechi).
+Les métiers de ta généalogie ¦ Meseriile din genealogia ta
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Meseriile notate (profesie, recensământ, fișă), clasificate ca în Arborele meseriilor. Niciodată o persoană în viață sau o fișă confidențială.
+Hommes et femmes ¦ Bărbați și femei
+Les femmes ¦ Femeile
+Toutes les époques ¦ Toate epocile
+Aucun métier ¦ Nicio meserie
+Aucun métier avec un lieu pour ce choix. ¦ Nicio meserie cu loc pentru această alegere.
+Où on était {trade} ¦ Unde se era {trade}
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ {a} notate · {b} clasificate · {c} „❔ altele” de clasificat
+Mes ancêtres seulement ¦ Doar strămoșii mei
+Par famille de métiers du dictionnaire (18) ¦ După familia de meserii din dicționar (18)
+Par grand secteur (12) ¦ Pe sectoare mari (12)
+employé ¦ funcționar
+ménagère ¦ casnică
+Où on l’exerçait ¦ Unde era practicată
+# 👫 Les deux lignées en miroir (partie 1)
+Les deux lignées en miroir (côté père, côté mère) ¦ Cele două linii în oglindă (partea tatălui, partea mamei)
+Les événements des deux côtés (un par ligne) ¦ Evenimentele celor două părți (unul pe rând)
+Ancêtre des deux côtés ¦ Strămoș din ambele părți
+Aucun ancêtre connu : {who} ¦ Niciun strămoș cunoscut: {who}
+Bleu / orange (lisibles aussi par les daltoniens) ¦ Albastru / portocaliu (lizibile și pentru daltoniști)
+Compté des deux côtés, couleur mélangée ¦ Numărat de ambele părți, culoare amestecată
+Seulement du côté du chemin le plus court ¦ Doar de partea drumului celui mai scurt
+Couleur du premier côté ¦ Culoarea primei părți
+Couleur du deuxième côté ¦ Culoarea celei de-a doua părți
+Côté père / côté mère ¦ Partea tatălui / partea mamei
+Côté père / côté mère, avant la Révolution ¦ Partea tatălui / a mamei, înainte de Revoluție
+Mes quatre grands-parents (4 couleurs) ¦ Cei patru bunici ai mei (4 culori)
+Deux personnes au choix ¦ Două persoane la alegere
+Deux noms de famille ¦ Două nume de familie
+Deux groupes de Mes listes ¦ Două grupuri din Listele mele
+Premier nom ¦ Primul nume
+Deuxième nom ¦ Al doilea nume
+Première liste ¦ Prima listă
+Deuxième liste ¦ A doua listă
+Deux lignées de ta généalogie ¦ Două linii din genealogia ta
+Côté père et côté mère de la personne de départ (ou quatre grands-parents, deux personnes, deux noms, deux listes). Jamais un vivant ni une fiche confidentielle : une personne de départ vivante n’est jamais un point. ¦ Partea tatălui și partea mamei persoanei de pornire (sau patru bunici, două persoane, două nume, două liste). Niciodată o persoană în viață sau o fișă confidențială: o persoană de pornire în viață nu e niciodată un punct.
+Glisser (un trait à déplacer) ¦ Glisează (o linie de mutat)
+LES DEUX LIGNÉES ¦ CELE DOUĂ LINII
+Le mariage des parents (💍) ¦ Căsătoria părinților (💍)
+Les deux lignées ¦ Ambele linii
+Les deux lignées : {a}, {b} où elles se rencontrent. ¦ Ambele linii: {a}, {b} unde se întâlnesc.
+Les deux lignées : {n}. ¦ Ambele linii: {n}.
+Les deux lignées de la famille {name} ¦ Cele două linii ale familiei {name}
+Les deux lignées de {name} ¦ Cele două linii ale lui {name}
+Les quatre grands-parents de la famille {name} ¦ Cei patru bunici ai familiei {name}
+Les quatre grands-parents de {name} ¦ Cei patru bunici ai lui {name}
+Lister sous la carte où elles se rencontrent ¦ Listează sub hartă unde se întâlnesc
+Combien de lignes ¦ Câte rânduri
+Montré ¦ Afișat
+Même commune ¦ Aceeași comună
+Même commune à la même époque ¦ Aceeași comună în aceeași epocă
+À moins de quelques km ¦ La mai puțin de câțiva km
+À la même époque : à plus ou moins ¦ În aceeași epocă: plus sau minus
+Où elles se rencontrent ¦ Unde se întâlnesc
+Par 25 ans ¦ Câte 25 de ani
+Position du trait ¦ Poziția liniei
+Prends les deux lignées de ta personne de départ (« Depuis l’app »). ¦ Ia ambele linii ale persoanei tale de pornire („Din aplicație”).
+Selon le nombre d’événements ¦ După numărul de evenimente
+Ses deux lignées sur la carte ¦ Cele două linii ale sale pe hartă
+Seulement la période ¦ Doar perioada
+Superposées ¦ Suprapuse
+Tout jusqu’à cette date ¦ Totul până la această dată
+jamais à la même époque ¦ niciodată în aceeași epocă
+mariage de {a} et {b} ¦ căsătoria lui {a} cu {b}
+{a} et {b}, à {km} km ¦ {a} și {b}, la {km} km
+3e groupe ¦ Grupul 3
+4e groupe ¦ Grupul 4
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Aria de viață, generație cu generație
+L’aire de vie de tes ancêtres ¦ Aria de viață a strămoșilor tăi
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Pentru fiecare generație, zona care cuprinde cea mai mare parte a nașterilor, căsătoriilor și deceselor. Aceleași distanțe ca la 🧭 Departe de leagăn. Niciodată o persoană în viață sau o fișă confidențială.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Ia strămoșii persoanei tale de pornire („Din aplicație”).
+Génération d’ancêtres ¦ Generație de strămoși
+Siècle (toute la base) ¦ Secol (toată baza)
+Une vie (les étapes d’une personne) ¦ O viață (etapele unei persoane)
+Avec les résidences et recensements ¦ Cu reședințele și recensămintele
+Du clair (anciens) au foncé (récents) ¦ De la deschis (vechi) la închis (recenți)
+Bleu / orange pour père / mère ¦ Albastru / portocaliu pentru tată / mamă
+L’inverse ¦ Invers
+50 % (le cœur) ¦ 50 % (miezul)
+Part des événements ¦ Partea evenimentelor
+Part gardée ¦ Partea păstrată
+Cercle (facile à comparer) ¦ Cerc (ușor de comparat)
+Enveloppe (le contour au plus juste) ¦ Înfășurătoare (conturul cel mai strâns)
+Personne (l’aire d’une vie) ¦ Persoană (aria unei vieți)
+Le milieu des événements ¦ Mijlocul evenimentelor
+Le lieu de naissance de la personne de départ ¦ Locul nașterii persoanei de pornire
+Le berceau des plus anciens ¦ Leagănul celor mai vechi
+Toutes les aires superposées ¦ Toate ariile suprapuse
+Une par case ¦ Câte una pe căsuță
+Une à la fois avec ▶ ¦ Câte una cu ▶
+Minimum pour tracer une aire ¦ Minimul pentru a trasa o arie
+5 événements ¦ 5 evenimente
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Pe arii (un strămoș plecat departe rămâne în afara ariei)
+Cadrer sur tout ¦ Încadrează tot
+Le tableau sous la carte ¦ Tabelul de sub hartă
+Gén. {g} · ses parents ¦ Gen. {g} · părinții
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Clic: locurile și cele din afara ariei
+Hors de l’aire ¦ În afara ariei
+Rayon ({p} %) ¦ Rază ({p} %)
+trop peu ¦ prea puține
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Aria de viață: {n}, rază de la {a} km la {b} km.
+Aire de vie : pas assez d’événements. ¦ Aria de viață: nu sunt destule evenimente.
+Aire de vie : {n}. ¦ Aria de viață: {n}.
+L’AIRE DE VIE ¦ ARIA DE VIAȚĂ
+L’aire de vie de la famille, siècle par siècle ¦ Aria de viață a familiei, secol cu secol
+L’aire de vie des ancêtres de {name} ¦ Aria de viață a strămoșilor lui {name}
+L’aire d’une vie : {name} ¦ Aria unei vieți: {name}
+la famille {name} ¦ familia {name}
+Voir l’aire de vie sur la carte ¦ Vezi aria de viață pe hartă
+Centre ¦ Centru
+Côté père et côté mère (deux couleurs) ¦ Partea tatălui și a mamei (două culori)
+Mes ancêtres, 8 générations ¦ Strămoșii mei, 8 generații
+Toute ma base, siècle par siècle ¦ Toată baza mea, secol cu secol
+=aire ¦ arie|arii|de arii
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Nași, nașe și martori pe hartă
+Les liens (un par ligne) ¦ Legăturile (una pe rând)
+D’où vient le témoin ¦ De unde vine martorul
+D’où vient le parrain ¦ De unde vine nașul
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ Ce scrie în act, altfel reședința la acea dată, altfel nașterea
+Seulement ce qui est écrit dans l’acte ¦ Doar ce scrie în act
+Seulement sa naissance ¦ Doar nașterea
+Nombre de liens ¦ Numărul de legături
+Nombre de personnes différentes ¦ Numărul de persoane diferite
+Liens dans le même village ¦ Legături în același sat
+Anneau autour du point ¦ Inel în jurul punctului
+Un chiffre seulement ¦ Doar o cifră
+Rôles montrés ¦ Roluri afișate
+Parrain, marraine, témoin ¦ Naș, nașă, martor
+Tous sauf curé et officier ¦ Toți în afară de preot și ofițer
+Traits montrés ¦ Linii afișate
+À partir de 1 lien ¦ De la 1 legătură
+À partir de 2 ¦ De la 2
+À partir de 3 ¦ De la 3
+Les 30 plus forts seulement ¦ Doar cele mai puternice 30
+Par rôle ¦ După rol
+Par branche (bleu père, orange mère) ¦ După ramură (albastru tată, portocaliu mamă)
+Flèche du village du parrain vers celui de l’acte ¦ Săgeată de la satul nașului spre cel al actului
+La phrase sous la carte ¦ Fraza de sub hartă
+Clic : les liens derrière ce trait ¦ Clic: legăturile din spatele acestei linii
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: {p} % din legături sunt din satul însuși; celelalte vin mai ales din {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Calculat pe {a} cu satul cunoscut; {b} fără loc nu sunt desenate.
+Parrains et témoins : {a} entre {b}. ¦ Nași și martori: {a} între {b}.
+Parrains et témoins : {n}. ¦ Nași și martori: {n}.
+Filleul ou époux ¦ Fin sau soț
+{n} autres · triés par date ¦ Încă {n} · după dată
+Ouvrir dans le Réseau ¦ Deschide în Rețea
+PARRAINS ET TÉMOINS ¦ NAȘI ȘI MARTORI
+Parrains et marraines ¦ Nași și nașe
+Parrains, marraines et témoins ¦ Nași, nașe și martori
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Ia nașii și martorii din genealogia ta („Din aplicație”).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ Legăturile din 🕸 Rețeaua de relații, pe hartă: satul actului și cel de unde vine martorul. Martorii în viață nu sunt niciodată numărați.
+Aucun lien avec un lieu pour ce choix. ¦ Nicio legătură cu loc pentru această alegere.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Nicio legătură pentru această alegere (roluri, perioadă, locuri).
+Curé, officier ¦ Preot, ofițer
+curé ¦ preot
+Curé ¦ Preot
+tuteur ¦ tutore
+Voisin ¦ Vecin
+Officier ¦ Ofițer
+bapt. ¦ botez
+naiss. ¦ naștere
+mar. ¦ căs.
+inh. ¦ înm.
+# ⚰️ Crises et épidémies (partie 3) — et les départs « Graphique » de 🕸
+Crises et épidémies (les années où les décès montent) ¦ Crize și epidemii (anii în care cresc decesele)
+Les décès (un par ligne) ¦ Decesele (unul pe rând)
+Cause notée ¦ Cauza notată
+Choléra de 1832 ¦ Holera din 1832
+Clic : les personnes, et ce qui se passait à la même époque ¦ Clic: persoanele și ce se petrecea în aceeași epocă
+Comptés avec tout le monde ¦ Numărați cu toată lumea
+À part ¦ Separat
+À part (moins de 10 ans) ¦ Separat (sub 10 ani)
+Pas comptés ¦ Nenumărați
+Mes ancêtres et leurs familles ¦ Strămoșii mei și familiile lor
+Les enfants à part (moins de 10 ans) ¦ Copiii separat (sub 10 ani)
+Les décès de ta généalogie ¦ Decesele din genealogia ta
+Les décès placés et datés (le décès, sinon l’inhumation ; chaque personne une seule fois), et les crises du 🌍 Monde autour avec tes événements locaux. Jamais un vivant ni une fiche confidentielle. ¦ Decesele plasate și datate (decesul, altfel înmormântarea; fiecare persoană o singură dată) și crizele din 🌍 Lumea din jur cu evenimentele tale locale. Niciodată o persoană în viață sau o fișă confidențială.
+Aucun décès daté avec un lieu pour ce choix. ¦ Niciun deces datat cu loc pentru această alegere.
+Décès sans année ou sans lieu, comptés à part : {n} ¦ Decese fără an sau fără loc, numărate separat: {n}
+Minimum de décès dans l’année ¦ Minimum de decese în an
+Décès au moins ¦ Decese cel puțin
+2,5 fois l’habitude ¦ De 2,5 ori obișnuitul
+2 fois ¦ De 2 ori
+3 fois ¦ De 3 ori
+4 fois ¦ De 4 ori
+Fois l’habitude ¦ Ori obișnuitul
+Fenêtre de l’habitude ¦ Fereastra obișnuitului
+5 ans avant et 5 ans après ¦ 5 ani înainte și 5 ani după
+10 et 10 ¦ 10 și 10
+Seulement les 10 ans avant ¦ Doar cei 10 ani dinainte
+L’habitude se calcule par ¦ Obișnuitul se calculează prin
+La moyenne ¦ Media
+La médiane (moins dérangée par une autre crise toute proche) ¦ Mediana (mai puțin tulburată de o altă criză apropiată)
+La commune, les petites regroupées avec leurs voisines ¦ Comuna, cele mici grupate cu vecinele lor
+Toujours la commune ¦ Mereu comuna
+Le département ¦ Departamentul
+Petit village : nombre de décès sur toute la période, moins de ¦ Sat mic: numărul de decese pe toată perioada, mai puțin de
+Enfant : moins de ¦ Copil: sub
+Repères proposés ¦ Repere propuse
+Les crises du 🌍 Monde autour qui couvrent la commune, et mes événements ¦ Crizele din 🌍 Lumea din jur care acoperă comuna, și evenimentele mele
+Toutes les crises de l’année ¦ Toate crizele anului
+Pas du temps ¦ Pasul timpului
+Pas assez de décès placés : moins de ¦ Prea puține decese plasate: mai puțin de
+Pas assez de décès placés pour repérer des crises. ¦ Prea puține decese plasate pentru a depista crize.
+Prends les décès de ta généalogie (« Depuis l’app »). ¦ Ia decesele din genealogia ta („Din aplicație”).
+LES ANNÉES DE CRISE ¦ ANII DE CRIZĂ
+Les années de crise de la famille ¦ Anii de criză ai familiei
+Les années de crise sur la carte ¦ Anii de criză pe hartă
+Les années de crise : {n}, sur {d}. ¦ Anii de criză: {n}, din {d}.
+Les années de crise : {n}. ¦ Anii de criză: {n}.
+Les années à voir · {n} ¦ Anii de văzut · {n}
+=année à voir ¦ an de văzut|ani de văzut|de ani de văzut
+Habitude ¦ Obișnuit
+À la même époque (repère) ¦ În aceeași epocă (reper)
+À la même époque : {what} — un repère, pas une explication. ¦ În aceeași epocă: {what} — un reper, nu o explicație.
+Rien de connu dans cette région à cette date. ¦ Nimic cunoscut în această regiune la această dată.
+rien de connu dans cette région à cette date ¦ nimic cunoscut în această regiune la această dată
+cause notée : « {c} » ¦ cauza notată: „{c}”
+d’habitude {u} par an ¦ de obicei {u} pe an
+plus de ×5 ¦ peste ×5
+×2,5 à 3 ¦ ×2,5 până la 3
+×3 à 5 ¦ ×3 până la 5
+{name} + {n} voisines ¦ {name} + {n} vecine
++ {n} autres ¦ + încă {n}
+Écrire la commune et l’année près des ronds ¦ Scrie comuna și anul lângă cercuri
+À lire avec prudence : l’app compare des nombres de décès, elle ne sait pas pourquoi ils montent. Le repère est ce qui se passait à la même époque : une piste à vérifier dans les actes (cause notée, âge, mois). Sur de petits nombres, le hasard suffit parfois. ¦ De citit cu prudență: aplicația compară numere de decese, nu știe de ce cresc. Reperul este ce se petrecea în aceeași epocă: o pistă de verificat în acte (cauza notată, vârsta, luna). La numere mici, uneori ajunge întâmplarea.
+Autour de mes ancêtres ¦ În jurul strămoșilor mei
+Parrains et marraines des baptêmes ¦ Nași și nașe la botezuri
+Témoins des mariages ¦ Martori la căsătorii
+Tous les liens (parrains, témoins, déclarants…) ¦ Toate legăturile (nași, martori, declaranți…)
+années à voir ¦ ani de văzut
+année à voir ¦ an de văzut
+Ce qu’on prend ¦ Ce se ia
+Tout : vu, en partie, à chercher ¦ Tot: văzut, parțial, de căutat
+Seulement ce qui reste à faire ¦ Doar ce rămâne de făcut
+Seulement ce qui a été vu ¦ Doar ce a fost văzut
+Sans le nom des correspondances ¦ Fără numele potrivirilor
+Avec le nom des correspondances (pas pour un export partagé) ¦ Cu numele potrivirilor (nu pentru un export partajat)

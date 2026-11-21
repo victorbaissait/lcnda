@@ -59,7 +59,7 @@
                 <div data-tr-pane="frise" ${tab === 'frise' ? '' : 'hidden'}>${frise(ppl)}</div>`
                 : A().empty('Personne dans ta base n’a ce métier pour l’instant.', {icon: '👥'})}</section>
             <section class="h-tr-sec"><h4>🖼 Images de la base</h4>${d.media.length ? `<div class="h-tr-media">${d.media.map((m, i) => `<button type="button" class="h-tr-thumb" data-tr-media="${i}" title="${esc(m.title || 'Média')}">${m.thumb && /\.(jpe?g|png|gif|webp)$/i.test(m.thumb) ? `<img src="${esc(m.thumb)}" alt="" loading="lazy">` : '<span aria-hidden="true">📄</span>'}<small>${esc(m.title || 'Sans titre')}</small></button>`).join('')}</div>` : A().empty('Aucune image ne cite ce métier. Ajoute une photo d’atelier, d’outil ou une carte postale.', {icon: '🖼'})}</section>
-            <div class="h-tr-actions"><button type="button" class="button small secondary" data-tr-edit>✎ Compléter la fiche</button><button type="button" class="button small secondary" data-tr-pics>＋ Ajouter des images</button>
+            <div class="h-tr-actions">${ext.diagramCartesPlus2?.openTrade ? `<button type="button" class="button small secondary" data-tr-where>🗺 Où on l’exerçait</button>` : ''}<button type="button" class="button small secondary" data-tr-edit>✎ Compléter la fiche</button><button type="button" class="button small secondary" data-tr-pics>＋ Ajouter des images</button>
                 ${n.sheet_id ? `<button type="button" class="button small secondary" data-tr-sheet="${n.sheet_id}">↗ Fiche « ${esc(n.sheet_title || 'Un métier')} »</button>` : '<button type="button" class="button small secondary" data-tr-mksheet>📒 En faire une Fiche</button>'}
                 <a class="button small secondary" href="https://commons.wikimedia.org/w/index.php?search=${encodeURIComponent(d.name)}" target="_blank" rel="noopener noreferrer" title="Photos et gravures libres de droits sur Wikimedia Commons">🔍 Images libres ↗</a></div>
             ${d.related?.length ? `<p class="h-tr-rel"><small>Du même domaine : ${d.related.map(r => `<button type="button" class="table-link" data-tr-key="${esc(r.key)}">${esc(r.name)}</button>`).join(' · ')}</small></p>` : ''}
@@ -73,6 +73,7 @@
             else if (b.dataset.trPerson) { dlg.close(); A().openPersonById?.(Number(b.dataset.trPerson)); }
             else if (b.dataset.trMedia) { const list = d.media.filter(m => m.filename); const m = d.media[Number(b.dataset.trMedia)]; const i = list.indexOf(m); if (i >= 0) A().openLightbox?.(list, i, true); }
             else if (b.dataset.trKey) { dlg.close(); open('', {key: b.dataset.trKey}); }
+            else if (b.matches('[data-tr-where]')) { dlg.close(); ext.diagramCartesPlus2.openTrade(d.key, d.name); } // 🔨 la carte des métiers réglée sur ce métier et ses variantes (heritage-diagram-cartes-plus2.js)
             else if (b.dataset.trSheet) { dlg.close(); S().ficheId = Number(b.dataset.trSheet); A().setModule('fiches'); }
             else if (b.matches('[data-tr-edit]')) {
                 ext.openDialog({eyebrow: 'MÉTIER ANCIEN', title: `Compléter « ${d.name} »`, body: `<label>Ce que tu sais de ce métier dans ta famille, ta région…<textarea name="notes" rows="9" maxlength="20000">${esc(n.notes || '')}</textarea></label><p class="muted">Le texte du dictionnaire reste au-dessus ; le tien s’affiche juste après.</p>`,

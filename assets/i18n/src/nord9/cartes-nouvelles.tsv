@@ -1,0 +1,365 @@
+fr ¦ lb
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Plazen ze placéieren
+Lieux à placer… ¦ Plazen ze placéieren…
+Placer… ¦ Placéieren…
+Les placer ¦ Se placéieren
+Rien n’est pris tant que tu ne cliques pas. ¦ Näischt gëtt geholl, ier s du klicks.
+Revoir et placer en lot… ¦ Iwwerkucken an zesumme placéieren…
+Seulement les lieux de cette carte ({n}). ¦ Nëmmen d’Plaze vun dëser Kaart ({n}).
+Voir tous les lieux à placer ¦ All Plazen ze placéieren weisen
+Lecture des lieux… ¦ D’Plaze ginn gelies…
+Chercher un lieu… ¦ Eng Plaz sichen…
+De A à Z ¦ Vun A bis Z
+Le plus loin du reste ¦ Am wäitste vum Rescht
+{a} · {b} concernés ¦ {a} · {b} betraff
+Aucun lieu pour ce choix. ¦ Keng Plaz fir dës Auswiel.
+Tous les lieux de ta base ont une position. ¦ All d’Plazen an denger Datebank hunn eng Positioun.
+à {km} km du reste ¦ {km} km vum Rescht
+Placer ici ¦ Hei placéieren
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ {km} km vun den anere Plaze vun dësen Evenementer: kuck no, ier s du placéiers.
+Placer les {n} ensemble ¦ Déi {n} zesumme placéieren
+Pas un lieu ¦ Keng Plaz
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ Déi éischt 300; sich en Numm, fir déi aner ze gesinn.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ {a} placéiert ({b}) · si erschéngen op all de Kaarten
+{name} placé ({n}) · {where} ¦ {name} placéiert ({n}) · {where}
+{name} placé ({a}, {b}) ¦ {name} placéiert ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ „{name}“ op d’Säit geluecht (keng Plaz)
+« {name} » remis dans la liste ¦ „{name}“ zréck an der Lëscht
+LOIN DU RESTE ¦ WÄIT VUM RESCHT
+Placer « {name} » si loin ? ¦ „{name}“ esou wäit ewech placéieren?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ „{where}“ ass {km} km vun den anere Plaze vun dësen Evenementer ewech. Dat ass dacks eng Plaz mam selwechten Numm.
+Placer quand même ¦ Trotzdem placéieren
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Klick op der Kaart do, wou „{name}“ ass (Esc fir ofzebriechen).
+{name} placé à la main (position approchée) ¦ {name} mat der Hand placéiert (ongeféier Positioun)
+Pas de réseau : rien n’a été envoyé. ¦ Keen Netz: näischt gouf geschéckt.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Den Online-Service huet näischt fir „{name}“ fonnt.
+{n} de plus pour « {name} » : à toi de choisir. ¦ Nach {n} fir „{name}“: du entscheeds.
+EN LIGNE ¦ ONLINE
+En ligne… ¦ Online…
+Chercher « {name} » en ligne ? ¦ „{name}“ online sichen?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ Nëmmen den Numm vun der Plaz „{name}“ gëtt un den Adresssichdéngscht vum IGN (Géoplateforme) geschéckt. Keen Numm vun enger Persoun, keen Datum.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ D’Äntwert ass eng Propose méi an der Lëscht; du wiels se oder net. Ouni Internet: „Keen Netz: näischt gouf geschéckt“.
+Ne plus me demander pour cette séance ¦ Dës Sitzung net méi froen
+Lieu tapé ¦ Getippte Plaz
+Pourquoi ¦ Firwat
+Distance au reste ¦ Distanz zum Rescht
+Év. ¦ Ev.
+{n} km ¦ {n} km
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ D’„näischt fonnt“ sinn net an der Iwwerpréiwung. Eng Plaz méi wéi {km} km vum Rescht gëtt ni vu sech aus ugekräizt.
+Seulement les sûrs ¦ Nëmmen déi sécher
+Seulement les « sûrs » ¦ Nëmmen déi „sécher“
+Revoir avant de placer ¦ Iwwerkucken, ier s de placéiers
+Placer les cochés ¦ Déi ugekräizt placéieren
+Coche au moins un lieu. ¦ Kräiz op d’mannst eng Plaz un.
+Placer les {n} cochés ¦ Déi {n} ugekräizt placéieren
+Réglages des lieux à placer enregistrés ¦ Astellunge vun de Plazen ze placéieren gespäichert
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Plazen ouni Positioun, no wahrscheinlecher Gemeng gruppéiert: mat engem Klick placéieren
+Cochés au départ dans la revue ¦ An der Iwwerpréiwung am Ufank ugekräizt
+Les sûrs et les probables ¦ Déi sécher an déi wahrscheinlech
+Un lieu-dit ¦ E Lieu-dit
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ Um Lieu-dit, wann e bekannt ass, soss an der Mëtt vun der Gemeng, als „ongeféier“ markéiert
+Toujours au centre de la commune ¦ Ëmmer an der Mëtt vun der Gemeng
+Ne pas le placer ¦ Net placéieren
+Plusieurs communes du même nom ¦ Méi Gemengen mam selwechten Numm
+Proposer la plus proche des autres lieux, jamais cochée ¦ Déi, déi den anere Plaze am nooste läit, proposéieren, ni ugekräizt
+Aussi les fautes proches, proposées seulement ¦ Och no Schreiffeeler, nëmme proposéiert
+Le nom exact seulement ¦ Nëmmen de genauen Numm
+Ce qui est repris ¦ Wat iwwerholl gëtt
+Position, code INSEE et département ¦ Positioun, INSEE-Code an Departement
+La position seulement ¦ Nëmmen d’Positioun
+Jamais : le bouton est caché ¦ Ni: de Knäppchen ass verstoppt
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ E Knäppchen „🌐 Online…“ pro Plaz, all Kéier mam Message (ni zesummen, ni vu sech aus)
+Alerte « loin du reste » ¦ Warnung „wäit vum Rescht“
+À partir de 200 km ¦ Vun 200 km un
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ Selwechten Numm a selwecht Departement wéi am Gemengeverzeechnes: eng eenzeg Gemeng „{name}“. D’Mëtt, den INSEE-Code an d’Departement ginn iwwerholl.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ Eng eenzeg Gemeng „{name}“ a Frankräich, mä keen Departement geschriwwen.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ {n} Gemenge mat dësem Numm a Frankräich. Déi, déi den anere Plaze vun dësen Evenementer am nooste leien, ginn proposéiert, ni vu sech aus ugekräizt.
+{n} communes de ce nom en France : choisis la bonne. ¦ {n} Gemenge mat dësem Numm a Frankräich: wiel déi richteg.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Lieu-dit am Verzeechnes (GeoNames) bekannt, an der Gemeng {name}.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Lieu-dit am Verzeechnes onbekannt: an der Mëtt vu(n) {name}, als „ongeféier Positioun“ markéiert.
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Keng Gemeng vun haut; d’INSEE-Geschicht (🏛 Al Grenzen) seet: {year} mat {to} fusionéiert.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Weltstad, déi mat der App kënnt, no dem geschriwwene Land entscheet ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Net fonnt ënnert de matgeliwwerte Weltstied fir dëst Land ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Keng Gemeng mat dësem Numm. Eng ähnlech Schreifweis gëtt proposéiert. Online gëtt näischt gesicht.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Keng Gemeng mat dësem Numm. Online gëtt näischt gesicht.
+le plus proche ¦ déi nooste
+sûr ¦ sécher
+=proposition ¦ Propose|Proposen
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ An all Menü ass déi éischt Wiel déi recommandéiert: si ass am Ufank agestallt.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ D’Beruffer op der Kaart (no Secteur, Joerhonnert fir Joerhonnert)
+Les métiers notés (un par ligne) ¦ Notéiert Beruffer (ee pro Zeil)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Plaz („Tulle“, „Tulle 45.27, 1.77“)
+Classer par ¦ Aordnen no
+Famille de métiers du dictionnaire (18) ¦ Beruffsfamill aus dem Dictionnaire (18)
+Un seul métier et ses variantes ¦ Een eenzege Beruff a seng Varianten
+Un métier et ses variantes ¦ E Beruff a seng Varianten
+Mes couleurs à moi par métier ¦ Meng eege Faarwe pro Beruff
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Meng Faarwen („tisserand=#aa3300; meunier=#3355aa“)
+Camembert par commune ¦ Kuchendiagramm pro Gemeng
+Un rond de la couleur du plus fréquent ¦ E Krees an der Faarf vum heefegsten
+Siècle par siècle ¦ Joerhonnert fir Joerhonnert
+Un petit dessin par siècle ¦ Eng kleng Kaart pro Joerhonnert
+Tout ensemble ¦ Alles zesummen
+Où placer le métier ¦ Wou de Beruff placéiert gëtt
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Plaz vum Akt, soss Wunnplaz, soss Gebuert
+Lieu de l’acte seulement ¦ Nëmmen d’Plaz vum Akt
+Plusieurs métiers ¦ Méi Beruffer
+Chacun à sa date ¦ All Beruff op sengem Datum
+Le principal seulement ¦ Nëmmen den Haaptberuff
+Montrés ¦ Gewisen
+Cachés ¦ Verstoppt
+Les plus grands ¦ Déi gréisst
++ {n} secteurs vides ¦ + {n} eidel Secteuren
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Beruffskaart: {n}, eng kleng Kaart pro Joerhonnert.
+Carte des métiers : {a}, {b} ({when}). ¦ Beruffskaart: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Beruffskaart: {a}, {b}.
+Carte des métiers : {n}. ¦ Beruffskaart: {n}.
+Clic : les métiers de ce lieu ¦ Klick: d’Beruffer vun dëser Plaz
+Aucun métier noté au {when}. ¦ Keen Beruff notéiert am {when}.
+Aucun métier pour ce choix. ¦ Keen Beruff fir dës Auswiel.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Huel d’Beruffer aus denger Genealogie („Aus der App“).
+LES MÉTIERS SUR LA CARTE ¦ D’BERUFFER OP DER KAART
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ E Klick op e Beruff mécht seng Fiche op (🛠️ Al Beruffer).
+Les métiers de ta généalogie ¦ D’Beruffer an denger Genealogie
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Déi notéiert Beruffer (Beruff, Vollékszielung, Fiche), aordnet wéi am Beruffsbam. Ni eng lieweg Persoun an ni eng vertraulech Fiche.
+Hommes et femmes ¦ Männer a Fraen
+Les femmes ¦ D’Fraen
+Toutes les époques ¦ All Epochen
+Aucun métier ¦ Keen Beruff
+Aucun métier avec un lieu pour ce choix. ¦ Keen Beruff mat enger Plaz fir dës Auswiel.
+Où on était {trade} ¦ Wou ee {trade} war
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ {a} notéiert · {b} aordnet · {c} „❔ aner“ nach anzeuerdnen
+Mes ancêtres seulement ¦ Nëmmen meng Virfahren
+Par famille de métiers du dictionnaire (18) ¦ No Beruffsfamill aus dem Dictionnaire (18)
+Par grand secteur (12) ¦ No grousse Secteuren (12)
+employé ¦ Employé
+ménagère ¦ Hausfra
+Où on l’exerçait ¦ Wou e geschafft gouf
+# 👫 Les deux lignées en miroir (partie 1)
+Les deux lignées en miroir (côté père, côté mère) ¦ Déi zwou Linnen am Spigel (Säit vum Papp, Säit vun der Mamm)
+Les événements des deux côtés (un par ligne) ¦ D’Evenementer vu béide Säiten (een pro Zeil)
+Ancêtre des deux côtés ¦ Virfar op béide Säiten
+Aucun ancêtre connu : {who} ¦ Kee bekannte Virfar: {who}
+Bleu / orange (lisibles aussi par les daltoniens) ¦ Blo / orange (och fir Faarweblann liesbar)
+Compté des deux côtés, couleur mélangée ¦ Op béide Säite gezielt, gemëschte Faarf
+Seulement du côté du chemin le plus court ¦ Nëmmen op der Säit vum kierzste Wee
+Couleur du premier côté ¦ Faarf vun der éischter Säit
+Couleur du deuxième côté ¦ Faarf vun der zweeter Säit
+Côté père / côté mère ¦ Säit vum Papp / Säit vun der Mamm
+Côté père / côté mère, avant la Révolution ¦ Säit vum Papp / vun der Mamm, virun der Revolutioun
+Mes quatre grands-parents (4 couleurs) ¦ Meng véier Grousselteren (4 Faarwen)
+Deux personnes au choix ¦ Zwou Persounen no Wiel
+Deux noms de famille ¦ Zwee Familljennimm
+Deux groupes de Mes listes ¦ Zwou Gruppen aus Meng Lëschten
+Premier nom ¦ Éischten Numm
+Deuxième nom ¦ Zweeten Numm
+Première liste ¦ Éischt Lëscht
+Deuxième liste ¦ Zweet Lëscht
+Deux lignées de ta généalogie ¦ Zwou Linnen aus denger Genealogie
+Côté père et côté mère de la personne de départ (ou quatre grands-parents, deux personnes, deux noms, deux listes). Jamais un vivant ni une fiche confidentielle : une personne de départ vivante n’est jamais un point. ¦ Säit vum Papp a Säit vun der Mamm vun der Startpersoun (oder véier Grousselteren, zwou Persounen, zwee Nimm, zwou Lëschten). Ni eng lieweg Persoun an ni eng vertraulech Fiche: eng lieweg Startpersoun ass ni e Punkt.
+Glisser (un trait à déplacer) ¦ Zéien (e Strich fir ze réckelen)
+LES DEUX LIGNÉES ¦ DÉI ZWOU LINNEN
+Le mariage des parents (💍) ¦ D’Hochzäit vun den Elteren (💍)
+Les deux lignées ¦ Béid Linnen
+Les deux lignées : {a}, {b} où elles se rencontrent. ¦ Béid Linnen: {a}, {b}, wou se sech treffen.
+Les deux lignées : {n}. ¦ Béid Linnen: {n}.
+Les deux lignées de la famille {name} ¦ Déi zwou Linnen vun der Famill {name}
+Les deux lignées de {name} ¦ Déi zwou Linnen vu(n) {name}
+Les quatre grands-parents de la famille {name} ¦ Déi véier Grousselteren vun der Famill {name}
+Les quatre grands-parents de {name} ¦ Déi véier Grousselteren vu(n) {name}
+Lister sous la carte où elles se rencontrent ¦ Ënner der Kaart opzielen, wou se sech treffen
+Combien de lignes ¦ Wéi vill Zeilen
+Montré ¦ Gewisen
+Même commune ¦ Selwecht Gemeng
+Même commune à la même époque ¦ Selwecht Gemeng zur selwechter Zäit
+À moins de quelques km ¦ Manner wéi e puer km
+À la même époque : à plus ou moins ¦ Zur selwechter Zäit: plus oder minus
+Où elles se rencontrent ¦ Wou se sech treffen
+Par 25 ans ¦ All 25 Joer
+Position du trait ¦ Positioun vum Strich
+Prends les deux lignées de ta personne de départ (« Depuis l’app »). ¦ Huel béid Linnen vun denger Startpersoun („Aus der App“).
+Selon le nombre d’événements ¦ No der Zuel vun Evenementer
+Ses deux lignées sur la carte ¦ Seng zwou Linnen op der Kaart
+Seulement la période ¦ Nëmmen d’Period
+Superposées ¦ Openeen
+Tout jusqu’à cette date ¦ Alles bis zu dësem Datum
+jamais à la même époque ¦ ni zur selwechter Zäit
+mariage de {a} et {b} ¦ Hochzäit vu(n) {a} an {b}
+{a} et {b}, à {km} km ¦ {a} an {b}, {km} km auserneen
+3e groupe ¦ 3. Grupp
+4e groupe ¦ 4. Grupp
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ De Liewensraum, Generatioun fir Generatioun
+L’aire de vie de tes ancêtres ¦ De Liewensraum vun denge Virfahren
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Fir all Generatioun d’Zon, an där déi meescht vun hire Gebuerten, Hochzäiten an Doudesfäll leien. Déi selwecht Distanzen wéi 🧭 Wäit vun der Wéi. Ni eng lieweg Persoun an ni eng vertraulech Fiche.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Huel d’Virfahre vun denger Startpersoun („Aus der App“).
+Génération d’ancêtres ¦ Generatioun vu Virfahren
+Siècle (toute la base) ¦ Joerhonnert (ganz Datebank)
+Une vie (les étapes d’une personne) ¦ E Liewen (d’Etappe vun enger Persoun)
+Avec les résidences et recensements ¦ Mat de Wunnplazen a Vollékszielungen
+Du clair (anciens) au foncé (récents) ¦ Vu hell (déi eelst) bis donkel (déi rezentst)
+Bleu / orange pour père / mère ¦ Blo / orange fir Papp / Mamm
+L’inverse ¦ Ëmgedréint
+50 % (le cœur) ¦ 50 % (de Kär)
+Part des événements ¦ Undeel vun den Evenementer
+Part gardée ¦ Behalenen Undeel
+Cercle (facile à comparer) ¦ Krees (einfach ze vergläichen)
+Enveloppe (le contour au plus juste) ¦ Hüll (de knappste Contour)
+Personne (l’aire d’une vie) ¦ Persoun (de Raum vun engem Liewen)
+Le milieu des événements ¦ D’Mëtt vun den Evenementer
+Le lieu de naissance de la personne de départ ¦ D’Gebuertsplaz vun der Startpersoun
+Le berceau des plus anciens ¦ D’Wéi vun den Eelsten
+Toutes les aires superposées ¦ All d’Raim openeen
+Une par case ¦ Eng pro Feld
+Une à la fois avec ▶ ¦ Eng no där anerer mat ▶
+Minimum pour tracer une aire ¦ Minimum fir e Raum ze zeechnen
+5 événements ¦ 5 Evenementer
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Op d’Raim (e Virfar, deen wäit fortgaangen ass, bleift dobaussen)
+Cadrer sur tout ¦ Alles cadréieren
+Le tableau sous la carte ¦ D’Tabell ënner der Kaart
+Gén. {g} · ses parents ¦ Gen. {g} · d’Elteren
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Klick: d’Plazen an déi baussent dem Raum
+Hors de l’aire ¦ Baussent dem Raum
+Rayon ({p} %) ¦ Radius ({p} %)
+trop peu ¦ ze wéineg
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Liewensraum: {n}, Radius vun {a} km bis {b} km.
+Aire de vie : pas assez d’événements. ¦ Liewensraum: net genuch Evenementer.
+Aire de vie : {n}. ¦ Liewensraum: {n}.
+L’AIRE DE VIE ¦ DE LIEWENSRAUM
+L’aire de vie de la famille, siècle par siècle ¦ De Liewensraum vun der Famill, Joerhonnert fir Joerhonnert
+L’aire de vie des ancêtres de {name} ¦ De Liewensraum vun de Virfahre vu(n) {name}
+L’aire d’une vie : {name} ¦ De Raum vun engem Liewen: {name}
+la famille {name} ¦ d’Famill {name}
+Voir l’aire de vie sur la carte ¦ De Liewensraum op der Kaart weisen
+Centre ¦ Mëttelpunkt
+Côté père et côté mère (deux couleurs) ¦ Säit vum Papp a vun der Mamm (zwou Faarwen)
+Mes ancêtres, 8 générations ¦ Meng Virfahren, 8 Generatiounen
+Toute ma base, siècle par siècle ¦ Meng ganz Datebank, Joerhonnert fir Joerhonnert
+=aire ¦ Raum|Raim
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Gotten, Patten an Zeien op der Kaart
+Les liens (un par ligne) ¦ D’Bezéiungen (eng pro Zeil)
+D’où vient le témoin ¦ Wou den Zeien hierkënnt
+D’où vient le parrain ¦ Wou de Pätter hierkënnt
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ Wat am Akt steet, soss d’Wunnplaz zu deem Datum, soss d’Gebuert
+Seulement ce qui est écrit dans l’acte ¦ Nëmmen dat, wat am Akt steet
+Seulement sa naissance ¦ Nëmmen d’Gebuert
+Nombre de liens ¦ Zuel vu Bezéiungen
+Nombre de personnes différentes ¦ Zuel vu verschiddene Persounen
+Liens dans le même village ¦ Bezéiungen am selwechten Duerf
+Anneau autour du point ¦ Rank ëm de Punkt
+Un chiffre seulement ¦ Nëmmen eng Zuel
+Rôles montrés ¦ Gewise Rollen
+Parrain, marraine, témoin ¦ Pätter, Gotten, Zeien
+Tous sauf curé et officier ¦ All ausser Paschtouer a Beamten
+Traits montrés ¦ Gewise Sträich
+À partir de 1 lien ¦ Vun 1 Bezéiung un
+À partir de 2 ¦ Vun 2 un
+À partir de 3 ¦ Vun 3 un
+Les 30 plus forts seulement ¦ Nëmmen déi 30 stäerkst
+Par rôle ¦ No Roll
+Par branche (bleu père, orange mère) ¦ No Branche (blo Papp, orange Mamm)
+Flèche du village du parrain vers celui de l’acte ¦ Feil vum Duerf vum Pätter bis bei dat vum Akt
+La phrase sous la carte ¦ De Saz ënner der Kaart
+Clic : les liens derrière ce trait ¦ Klick: d’Bezéiungen hannert dësem Strich
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: {p} % vun de Bezéiungen sinn aus dem Duerf selwer; déi aner kommen haaptsächlech aus {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Gerechent op {a} mat bekanntem Duerf; {b} ouni Plaz ginn net gezeechent.
+Parrains et témoins : {a} entre {b}. ¦ Gotten, Patten an Zeien: {a} tëscht {b}.
+Parrains et témoins : {n}. ¦ Gotten, Patten an Zeien: {n}.
+Filleul ou époux ¦ Fëllche oder Partner
+{n} autres · triés par date ¦ Nach {n} · no Datum
+Ouvrir dans le Réseau ¦ Am Netz opmaachen
+PARRAINS ET TÉMOINS ¦ GOTTEN, PATTEN AN ZEIEN
+Parrains et marraines ¦ Pätter a Gotten
+Parrains, marraines et témoins ¦ Gotten, Patten an Zeien
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Huel d’Gotten, Patten an Zeien aus denger Genealogie („Aus der App“).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ D’Bezéiunge vum 🕸 Bezéiungsnetz op der Kaart: d’Duerf vum Akt an dat, aus deem den Zeien hierkënnt. Lieweg Zeie ginn ni gezielt.
+Aucun lien avec un lieu pour ce choix. ¦ Keng Bezéiung mat enger Plaz fir dës Auswiel.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Keng Bezéiung fir dës Auswiel (Rollen, Period, Plazen).
+Curé, officier ¦ Paschtouer, Beamten
+curé ¦ Paschtouer
+Curé ¦ Paschtouer
+tuteur ¦ Tuteur
+Voisin ¦ Noper
+Officier ¦ Beamten
+bapt. ¦ Daf
+naiss. ¦ Gebuert
+mar. ¦ Hochz.
+inh. ¦ Begr.
+# ⚰️ Crises et épidémies (partie 3) — et les départs « Graphique » de 🕸
+Crises et épidémies (les années où les décès montent) ¦ Krisen an Epidemien (d’Joren, wou d’Doudesfäll klammen)
+Les décès (un par ligne) ¦ D’Doudesfäll (een pro Zeil)
+Cause notée ¦ Notéiert Ursaach
+Choléra de 1832 ¦ D’Cholera vun 1832
+Clic : les personnes, et ce qui se passait à la même époque ¦ Klick: d’Persounen, a wat zur selwechter Zäit geschitt ass
+Comptés avec tout le monde ¦ Mat jidderengem gezielt
+À part ¦ Separat
+À part (moins de 10 ans) ¦ Separat (ënner 10 Joer)
+Pas comptés ¦ Net gezielt
+Mes ancêtres et leurs familles ¦ Meng Virfahren an hir Familljen
+Les enfants à part (moins de 10 ans) ¦ D’Kanner separat (ënner 10 Joer)
+Les décès de ta généalogie ¦ D’Doudesfäll an denger Genealogie
+Les décès placés et datés (le décès, sinon l’inhumation ; chaque personne une seule fois), et les crises du 🌍 Monde autour avec tes événements locaux. Jamais un vivant ni une fiche confidentielle. ¦ Déi placéiert an datéiert Doudesfäll (den Doud, soss d’Begriefnes; all Persoun nëmmen eemol), an d’Krise vun 🌍 D’Welt ronderëm mat denge lokalen Evenementer. Ni eng lieweg Persoun an ni eng vertraulech Fiche.
+Aucun décès daté avec un lieu pour ce choix. ¦ Keen datéierten Doudesfall mat enger Plaz fir dës Auswiel.
+Décès sans année ou sans lieu, comptés à part : {n} ¦ Doudesfäll ouni Joer oder Plaz, separat gezielt: {n}
+Minimum de décès dans l’année ¦ Minimum Doudesfäll am Joer
+Décès au moins ¦ Doudesfäll op d’mannst
+2,5 fois l’habitude ¦ 2,5 Mol esou vill wéi soss
+2 fois ¦ 2 Mol
+3 fois ¦ 3 Mol
+4 fois ¦ 4 Mol
+Fois l’habitude ¦ Mol esou vill wéi soss
+Fenêtre de l’habitude ¦ Fënster vum Gewéinleche
+5 ans avant et 5 ans après ¦ 5 Joer virdrun a 5 Joer duerno
+10 et 10 ¦ 10 an 10
+Seulement les 10 ans avant ¦ Nëmmen déi 10 Joer virdrun
+L’habitude se calcule par ¦ D’Gewéinlecht gëtt berechent mat
+La moyenne ¦ De Moyenne
+La médiane (moins dérangée par une autre crise toute proche) ¦ De Median (manner gestéiert vun enger anerer Kris dobäi)
+La commune, les petites regroupées avec leurs voisines ¦ D’Gemeng, déi kleng mat hiren Noperen zesummegeholl
+Toujours la commune ¦ Ëmmer d’Gemeng
+Le département ¦ D’Departement
+Petit village : nombre de décès sur toute la période, moins de ¦ Klengt Duerf: Zuel vun Doudesfäll iwwer d’ganz Period, manner wéi
+Enfant : moins de ¦ Kand: ënner
+Repères proposés ¦ Proposéiert Uhaltspunkten
+Les crises du 🌍 Monde autour qui couvrent la commune, et mes événements ¦ D’Krise vun 🌍 D’Welt ronderëm, déi d’Gemeng betreffen, a meng Evenementer
+Toutes les crises de l’année ¦ All d’Krise vum Joer
+Pas du temps ¦ Zäitschrëtt
+Pas assez de décès placés : moins de ¦ Net genuch placéiert Doudesfäll: manner wéi
+Pas assez de décès placés pour repérer des crises. ¦ Net genuch placéiert Doudesfäll, fir Krisen ze fannen.
+Prends les décès de ta généalogie (« Depuis l’app »). ¦ Huel d’Doudesfäll aus denger Genealogie („Aus der App“).
+LES ANNÉES DE CRISE ¦ D’KRISEJOREN
+Les années de crise de la famille ¦ D’Krisejore vun der Famill
+Les années de crise sur la carte ¦ D’Krisejoren op der Kaart
+Les années de crise : {n}, sur {d}. ¦ Krisejoren: {n}, vu {d}.
+Les années de crise : {n}. ¦ Krisejoren: {n}.
+Les années à voir · {n} ¦ D’Joren ze kucken · {n}
+=année à voir ¦ Joer ze kucken|Joer ze kucken
+Habitude ¦ Gewéinlech
+À la même époque (repère) ¦ Zur selwechter Zäit (Uhaltspunkt)
+À la même époque : {what} — un repère, pas une explication. ¦ Zur selwechter Zäit: {what} – en Uhaltspunkt, keng Erklärung.
+Rien de connu dans cette région à cette date. ¦ Näischt bekannt an dëser Géigend zu deem Datum.
+rien de connu dans cette région à cette date ¦ näischt bekannt an dëser Géigend zu deem Datum
+cause notée : « {c} » ¦ notéiert Ursaach: „{c}“
+d’habitude {u} par an ¦ gewéinlech {u} am Joer
+plus de ×5 ¦ méi wéi ×5
+×2,5 à 3 ¦ ×2,5 bis 3
+×3 à 5 ¦ ×3 bis 5
+{name} + {n} voisines ¦ {name} + {n} Noperen
++ {n} autres ¦ + nach {n}
+Écrire la commune et l’année près des ronds ¦ D’Gemeng an d’Joer nieft d’Kreesser schreiwen
+À lire avec prudence : l’app compare des nombres de décès, elle ne sait pas pourquoi ils montent. Le repère est ce qui se passait à la même époque : une piste à vérifier dans les actes (cause notée, âge, mois). Sur de petits nombres, le hasard suffit parfois. ¦ Mat Virsiicht liesen: d’App vergläicht Zuele vun Doudesfäll, si weess net, firwat se klammen. Den Uhaltspunkt ass dat, wat zur selwechter Zäit geschitt ass: eng Spuer, fir an den Akten nozekucken (notéiert Ursaach, Alter, Mount). Bei klengen Zuelen duer de Zoufall heiansdo.
+Autour de mes ancêtres ¦ Ronderëm meng Virfahren
+Parrains et marraines des baptêmes ¦ Gotten a Patten bei den Daf
+Témoins des mariages ¦ Hochzäitszeien
+Tous les liens (parrains, témoins, déclarants…) ¦ All Bezéiungen (Gotten, Patten, Zeien, Deklarante…)
+années à voir ¦ Joer ze kucken
+année à voir ¦ Joer ze kucken
+Ce qu’on prend ¦ Wat geholl gëtt
+Tout : vu, en partie, à chercher ¦ Alles: gesinn, deelweis, ze sichen
+Seulement ce qui reste à faire ¦ Nëmmen dat, wat nach ze maachen ass
+Seulement ce qui a été vu ¦ Nëmmen dat, wat gesi gouf
+Sans le nom des correspondances ¦ Ouni d’Nimm vun de Matcher
+Avec le nom des correspondances (pas pour un export partagé) ¦ Mat den Nimm vun de Matcher (net fir en gedeelten Export)

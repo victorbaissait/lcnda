@@ -1,0 +1,365 @@
+fr ¦ ru ¦ uk
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Места без позиции ¦ Місця без позиції
+Lieux à placer… ¦ Места без позиции… ¦ Місця без позиції…
+Placer… ¦ Разместить… ¦ Розмістити…
+Les placer ¦ Разместить их ¦ Розмістити їх
+Rien n’est pris tant que tu ne cliques pas. ¦ Ничего не берётся, пока ты не нажмёшь. ¦ Нічого не береться, доки ти не натиснеш.
+Revoir et placer en lot… ¦ Проверить и разместить пакетом… ¦ Переглянути й розмістити пакетом…
+Seulement les lieux de cette carte ({n}). ¦ Только места этой карты ({n}). ¦ Лише місця цієї мапи ({n}).
+Voir tous les lieux à placer ¦ Показать все места без позиции ¦ Показати всі місця без позиції
+Lecture des lieux… ¦ Чтение мест… ¦ Читання місць…
+Chercher un lieu… ¦ Искать место… ¦ Шукати місце…
+De A à Z ¦ От А до Я ¦ Від А до Я
+Le plus loin du reste ¦ Дальше всего от остальных ¦ Найдалі від решти
+{a} · {b} concernés ¦ {a} · затронуто: {b} ¦ {a} · стосується: {b}
+Aucun lieu pour ce choix. ¦ Для этого выбора мест нет. ¦ Для цього вибору місць немає.
+Tous les lieux de ta base ont une position. ¦ У всех мест твоей базы есть позиция. ¦ Усі місця твоєї бази мають позицію.
+à {km} km du reste ¦ в {km} км от остальных ¦ за {km} км від решти
+Placer ici ¦ Разместить здесь ¦ Розмістити тут
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ В {km} км от других мест этих событий: проверь, прежде чем размещать. ¦ За {km} км від інших місць цих подій: перевір, перш ніж розміщувати.
+Placer les {n} ensemble ¦ Разместить эти {n} вместе ¦ Розмістити ці {n} разом
+Pas un lieu ¦ Не место ¦ Не місце
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ Первые 300; найди название, чтобы увидеть остальные. ¦ Перші 300; знайди назву, щоб побачити решту.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ Размещено: {a} ({b}) · они видны на всех картах ¦ Розміщено: {a} ({b}) · вони з’являються на всіх мапах
+{name} placé ({n}) · {where} ¦ {name} размещено ({n}) · {where} ¦ {name} розміщено ({n}) · {where}
+{name} placé ({a}, {b}) ¦ {name} размещено ({a}, {b}) ¦ {name} розміщено ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ «{name}» отложено (не место) ¦ «{name}» відкладено (не місце)
+« {name} » remis dans la liste ¦ «{name}» снова в списке ¦ «{name}» знову в списку
+LOIN DU RESTE ¦ ДАЛЕКО ОТ ОСТАЛЬНЫХ ¦ ДАЛЕКО ВІД РЕШТИ
+Placer « {name} » si loin ? ¦ Разместить «{name}» так далеко? ¦ Розмістити «{name}» так далеко?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ «{where}» в {km} км от других мест этих событий. Часто это просто тёзка. ¦ «{where}» за {km} км від інших місць цих подій. Часто це просто тезка.
+Placer quand même ¦ Всё равно разместить ¦ Однаково розмістити
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Нажми на карте там, где «{name}» (Esc — отменить). ¦ Натисни на мапі там, де «{name}» (Esc — скасувати).
+{name} placé à la main (position approchée) ¦ {name} размещено вручную (приблизительная позиция) ¦ {name} розміщено вручну (приблизна позиція)
+Pas de réseau : rien n’a été envoyé. ¦ Нет сети: ничего не отправлено. ¦ Немає мережі: нічого не надіслано.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Онлайн-сервис ничего не нашёл для «{name}». ¦ Онлайн-сервіс нічого не знайшов для «{name}».
+{n} de plus pour « {name} » : à toi de choisir. ¦ Ещё {n} для «{name}»: выбирай сам. ¦ Ще {n} для «{name}»: обирай сам.
+EN LIGNE ¦ ОНЛАЙН ¦ ОНЛАЙН
+En ligne… ¦ Онлайн… ¦ Онлайн…
+Chercher « {name} » en ligne ? ¦ Искать «{name}» онлайн? ¦ Шукати «{name}» онлайн?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ В сервис поиска адресов IGN (Géoplateforme) отправляется только название места «{name}». Ни имён людей, ни дат. ¦ До сервісу пошуку адрес IGN (Géoplateforme) надсилається лише назва місця «{name}». Жодних імен людей, жодних дат.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Ответ — ещё одно предложение в списке; выбирать его или нет — решать тебе. Без интернета: «Нет сети: ничего не отправлено». ¦ Відповідь — ще одна пропозиція в списку; обирати її чи ні — вирішуєш ти. Без інтернету: «Немає мережі: нічого не надіслано».
+Ne plus me demander pour cette séance ¦ Больше не спрашивать в этом сеансе ¦ Більше не питати в цьому сеансі
+Lieu tapé ¦ Введённое место ¦ Введене місце
+Pourquoi ¦ Почему ¦ Чому
+Distance au reste ¦ Расстояние до остальных ¦ Відстань до решти
+Év. ¦ Соб. ¦ Под.
+{n} km ¦ {n} км ¦ {n} км
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ «Ничего не найдено» в проверку не попадают. Место дальше {km} км от остальных никогда не отмечается само. ¦ «Нічого не знайдено» до перевірки не потрапляють. Місце далі ніж {km} км від решти ніколи не позначається саме.
+Seulement les sûrs ¦ Только надёжные ¦ Лише надійні
+Seulement les « sûrs » ¦ Только «надёжные» ¦ Лише «надійні»
+Revoir avant de placer ¦ Проверить перед размещением ¦ Переглянути перед розміщенням
+Placer les cochés ¦ Разместить отмеченные ¦ Розмістити позначені
+Coche au moins un lieu. ¦ Отметь хотя бы одно место. ¦ Познач хоча б одне місце.
+Placer les {n} cochés ¦ Разместить отмеченные ({n}) ¦ Розмістити позначені ({n})
+Réglages des lieux à placer enregistrés ¦ Настройки мест без позиции сохранены ¦ Налаштування місць без позиції збережено
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Места без позиции, сгруппированные по вероятной коммуне: размести их одним нажатием ¦ Місця без позиції, згруповані за ймовірною громадою: розмісти їх одним натисканням
+Cochés au départ dans la revue ¦ Отмечены сразу в проверке ¦ Позначені одразу в перевірці
+Les sûrs et les probables ¦ Надёжные и вероятные ¦ Надійні та ймовірні
+Un lieu-dit ¦ Урочище ¦ Урочище
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ В урочище, если оно известно, иначе в центре коммуны с пометкой «приблизительно» ¦ В урочищі, якщо воно відоме, інакше в центрі громади з позначкою «приблизно»
+Toujours au centre de la commune ¦ Всегда в центре коммуны ¦ Завжди в центрі громади
+Ne pas le placer ¦ Не размещать ¦ Не розміщувати
+Plusieurs communes du même nom ¦ Несколько коммун с одним названием ¦ Кілька громад з однаковою назвою
+Proposer la plus proche des autres lieux, jamais cochée ¦ Предлагать ближайшую к другим местам, никогда не отмечать ¦ Пропонувати найближчу до інших місць, ніколи не позначати
+Aussi les fautes proches, proposées seulement ¦ Также близкие опечатки, только как предложение ¦ Також близькі помилки, лише як пропозиція
+Le nom exact seulement ¦ Только точное название ¦ Лише точна назва
+Ce qui est repris ¦ Что переносится ¦ Що переноситься
+Position, code INSEE et département ¦ Позиция, код INSEE и департамент ¦ Позиція, код INSEE і департамент
+La position seulement ¦ Только позиция ¦ Лише позиція
+Jamais : le bouton est caché ¦ Никогда: кнопка скрыта ¦ Ніколи: кнопку приховано
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Одна кнопка «🌐 Онлайн…» на место, каждый раз с сообщением (никогда пакетом, никогда сама) ¦ Одна кнопка «🌐 Онлайн…» на місце, щоразу з повідомленням (ніколи пакетом, ніколи сама)
+Alerte « loin du reste » ¦ Предупреждение «далеко от остальных» ¦ Попередження «далеко від решти»
+À partir de 200 km ¦ От 200 км ¦ Від 200 км
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ То же название и тот же департамент, что в справочнике коммун: только одна коммуна «{name}». Переносятся центр, код INSEE и департамент. ¦ Та сама назва й той самий департамент, що в довіднику громад: лише одна громада «{name}». Переносяться центр, код INSEE і департамент.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ Во Франции только одна коммуна «{name}», но департамент не указан. ¦ У Франції лише одна громада «{name}», але департамент не вказано.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ Коммун с таким названием во Франции: {n}. Предлагаются ближайшие к другим местам этих событий, сами они никогда не отмечаются. ¦ Громад із такою назвою у Франції: {n}. Пропонуються найближчі до інших місць цих подій, самі вони ніколи не позначаються.
+{n} communes de ce nom en France : choisis la bonne. ¦ Коммун с таким названием во Франции: {n}. Выбери нужную. ¦ Громад із такою назвою у Франції: {n}. Обери потрібну.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Урочище известно в справочнике (GeoNames) в коммуне {name}. ¦ Урочище відоме в довіднику (GeoNames) у громаді {name}.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Урочища нет в справочнике: в центре коммуны {name}, с пометкой «приблизительная позиция». ¦ Урочища немає в довіднику: у центрі громади {name}, з позначкою «приблизна позиція».
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Не современная коммуна; история INSEE (🏛 Старые границы) говорит: присоединена к {to} в {year}. ¦ Не сучасна громада; історія INSEE (🏛 Старі кордони) каже: приєднана до {to} у {year}.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Город мира из комплекта приложения, выбран по указанной стране ({country}). ¦ Місто світу з комплекту застосунку, обране за вказаною країною ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Не найдено среди городов мира из комплекта для этой страны ({country}). ¦ Не знайдено серед міст світу з комплекту для цієї країни ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Коммуны с таким названием нет. Предложено похожее написание. В интернете ничего не ищется. ¦ Громади з такою назвою немає. Запропоновано схоже написання. В інтернеті нічого не шукається.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Коммуны с таким названием нет. В интернете ничего не ищется. ¦ Громади з такою назвою немає. В інтернеті нічого не шукається.
+le plus proche ¦ ближайшая ¦ найближча
+sûr ¦ надёжно ¦ надійно
+=proposition ¦ предложение|предложения|предложений ¦ пропозиція|пропозиції|пропозицій
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ В каждом меню первый вариант — рекомендуемый: он выбран с самого начала. ¦ У кожному меню перший варіант — рекомендований: його обрано від початку.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ Профессии на карте (по отраслям, век за веком) ¦ Професії на мапі (за галузями, століття за століттям)
+Les métiers notés (un par ligne) ¦ Записанные профессии (по одной в строке) ¦ Записані професії (по одній у рядку)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Место («Tulle», «Tulle 45.27, 1.77») ¦ Місце («Tulle», «Tulle 45.27, 1.77»)
+Classer par ¦ Классифицировать по ¦ Класифікувати за
+Famille de métiers du dictionnaire (18) ¦ Семейство профессий из словаря (18) ¦ Родина професій зі словника (18)
+Un seul métier et ses variantes ¦ Одна профессия и её варианты ¦ Одна професія та її варіанти
+Un métier et ses variantes ¦ Профессия и её варианты ¦ Професія та її варіанти
+Mes couleurs à moi par métier ¦ Мои цвета для каждой профессии ¦ Мої кольори для кожної професії
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Мои цвета («tisserand=#aa3300; meunier=#3355aa») ¦ Мої кольори («tisserand=#aa3300; meunier=#3355aa»)
+Camembert par commune ¦ Круговая диаграмма по коммуне ¦ Кругова діаграма за громадою
+Un rond de la couleur du plus fréquent ¦ Кружок цвета самого частого ¦ Кружечок кольору найчастішого
+Siècle par siècle ¦ Век за веком ¦ Століття за століттям
+Un petit dessin par siècle ¦ Маленькая карта на каждый век ¦ Маленька мапа на кожне століття
+Tout ensemble ¦ Всё вместе ¦ Усе разом
+Où placer le métier ¦ Где разместить профессию ¦ Де розмістити професію
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Место акта, иначе место жительства, иначе рождение ¦ Місце акта, інакше місце проживання, інакше народження
+Lieu de l’acte seulement ¦ Только место акта ¦ Лише місце акта
+Plusieurs métiers ¦ Несколько профессий ¦ Кілька професій
+Chacun à sa date ¦ Каждая на свою дату ¦ Кожна на свою дату
+Le principal seulement ¦ Только основная ¦ Лише основна
+Montrés ¦ Показаны ¦ Показані
+Cachés ¦ Скрыты ¦ Приховані
+Les plus grands ¦ Самые крупные ¦ Найбільші
++ {n} secteurs vides ¦ + пустых отраслей: {n} ¦ + порожніх галузей: {n}
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Карта профессий: {n}, по маленькой карте на век. ¦ Мапа професій: {n}, по маленькій мапі на століття.
+Carte des métiers : {a}, {b} ({when}). ¦ Карта профессий: {a}, {b} ({when}). ¦ Мапа професій: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Карта профессий: {a}, {b}. ¦ Мапа професій: {a}, {b}.
+Carte des métiers : {n}. ¦ Карта профессий: {n}. ¦ Мапа професій: {n}.
+Clic : les métiers de ce lieu ¦ Нажми: профессии этого места ¦ Натисни: професії цього місця
+Aucun métier noté au {when}. ¦ Нет записанных профессий за период: {when}. ¦ Немає записаних професій за період: {when}.
+Aucun métier pour ce choix. ¦ Для этого выбора профессий нет. ¦ Для цього вибору професій немає.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Возьми профессии из своей генеалогии («Из приложения»). ¦ Візьми професії зі своєї генеалогії («Із застосунку»).
+LES MÉTIERS SUR LA CARTE ¦ ПРОФЕССИИ НА КАРТЕ ¦ ПРОФЕСІЇ НА МАПІ
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ Нажатие на профессию открывает её карточку (🛠️ Старинные профессии). ¦ Натискання на професію відкриває її картку (🛠️ Давні професії).
+Les métiers de ta généalogie ¦ Профессии в твоей генеалогии ¦ Професії у твоїй генеалогії
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Записанные профессии (профессия, перепись, карточка), классифицированы как в Древе профессий. Никогда живые и никогда конфиденциальные карточки. ¦ Записані професії (професія, перепис, картка), класифіковані як у Дереві професій. Ніколи живі й ніколи конфіденційні картки.
+Hommes et femmes ¦ Мужчины и женщины ¦ Чоловіки й жінки
+Les femmes ¦ Женщины ¦ Жінки
+Toutes les époques ¦ Все эпохи ¦ Усі епохи
+Aucun métier ¦ Профессий нет ¦ Професій немає
+Aucun métier avec un lieu pour ce choix. ¦ Для этого выбора нет профессий с местом. ¦ Для цього вибору немає професій із місцем.
+Où on était {trade} ¦ Где были {trade} ¦ Де були {trade}
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ Записано: {a} · классифицировано: {b} · «❔ другое», ждут классификации: {c} ¦ Записано: {a} · класифіковано: {b} · «❔ інше», чекають класифікації: {c}
+Mes ancêtres seulement ¦ Только мои предки ¦ Лише мої предки
+Par famille de métiers du dictionnaire (18) ¦ По семействам профессий из словаря (18) ¦ За родинами професій зі словника (18)
+Par grand secteur (12) ¦ По крупным отраслям (12) ¦ За великими галузями (12)
+employé ¦ служащий ¦ службовець
+ménagère ¦ домохозяйка ¦ домогосподарка
+Où on l’exerçait ¦ Где ею занимались ¦ Де нею займалися
+# 👫 Les deux lignées en miroir (partie 1)
+Les deux lignées en miroir (côté père, côté mère) ¦ Две линии зеркально (по отцу, по матери) ¦ Дві лінії дзеркально (по батькові, по матері)
+Les événements des deux côtés (un par ligne) ¦ События обеих сторон (по одному в строке) ¦ Події обох сторін (по одній у рядку)
+Ancêtre des deux côtés ¦ Предок с обеих сторон ¦ Предок з обох боків
+Aucun ancêtre connu : {who} ¦ Нет известных предков: {who} ¦ Немає відомих предків: {who}
+Bleu / orange (lisibles aussi par les daltoniens) ¦ Синий / оранжевый (различимы и при дальтонизме) ¦ Синій / помаранчевий (розрізняються і при дальтонізмі)
+Compté des deux côtés, couleur mélangée ¦ Учитывается с обеих сторон, смешанный цвет ¦ Враховується з обох боків, змішаний колір
+Seulement du côté du chemin le plus court ¦ Только со стороны кратчайшего пути ¦ Лише з боку найкоротшого шляху
+Couleur du premier côté ¦ Цвет первой стороны ¦ Колір першої сторони
+Couleur du deuxième côté ¦ Цвет второй стороны ¦ Колір другої сторони
+Côté père / côté mère ¦ По отцу / по матери ¦ По батькові / по матері
+Côté père / côté mère, avant la Révolution ¦ По отцу / по матери, до Революции ¦ По батькові / по матері, до Революції
+Mes quatre grands-parents (4 couleurs) ¦ Мои четыре бабушки и дедушки (4 цвета) ¦ Мої четверо бабусь і дідусів (4 кольори)
+Deux personnes au choix ¦ Два человека на выбор ¦ Дві особи на вибір
+Deux noms de famille ¦ Две фамилии ¦ Два прізвища
+Deux groupes de Mes listes ¦ Две группы из «Моих списков» ¦ Дві групи з «Моїх списків»
+Premier nom ¦ Первая фамилия ¦ Перше прізвище
+Deuxième nom ¦ Вторая фамилия ¦ Друге прізвище
+Première liste ¦ Первый список ¦ Перший список
+Deuxième liste ¦ Второй список ¦ Другий список
+Deux lignées de ta généalogie ¦ Две линии твоей генеалогии ¦ Дві лінії твоєї генеалогії
+Côté père et côté mère de la personne de départ (ou quatre grands-parents, deux personnes, deux noms, deux listes). Jamais un vivant ni une fiche confidentielle : une personne de départ vivante n’est jamais un point. ¦ Сторона отца и сторона матери исходной персоны (или четыре бабушки и дедушки, два человека, две фамилии, два списка). Никогда живые и никогда конфиденциальные карточки: живая исходная персона никогда не становится точкой. ¦ Сторона батька й сторона матері вихідної особи (або четверо бабусь і дідусів, дві особи, два прізвища, два списки). Ніколи живі й ніколи конфіденційні картки: жива вихідна особа ніколи не стає точкою.
+Glisser (un trait à déplacer) ¦ Сдвиг (линия, которую можно двигать) ¦ Зсув (лінія, яку можна рухати)
+LES DEUX LIGNÉES ¦ ДВЕ ЛИНИИ ¦ ДВІ ЛІНІЇ
+Le mariage des parents (💍) ¦ Свадьба родителей (💍) ¦ Весілля батьків (💍)
+Les deux lignées ¦ Обе линии ¦ Обидві лінії
+Les deux lignées : {a}, {b} où elles se rencontrent. ¦ Обе линии: {a}; встречаются в: {b}. ¦ Обидві лінії: {a}; зустрічаються в: {b}.
+Les deux lignées : {n}. ¦ Обе линии: {n}. ¦ Обидві лінії: {n}.
+Les deux lignées de la famille {name} ¦ Две линии семьи {name} ¦ Дві лінії родини {name}
+Les deux lignées de {name} ¦ Две линии: {name} ¦ Дві лінії: {name}
+Les quatre grands-parents de la famille {name} ¦ Четыре бабушки и дедушки семьи {name} ¦ Четверо бабусь і дідусів родини {name}
+Les quatre grands-parents de {name} ¦ Четыре бабушки и дедушки: {name} ¦ Четверо бабусь і дідусів: {name}
+Lister sous la carte où elles se rencontrent ¦ Перечислить под картой, где они встречаются ¦ Перелічити під мапою, де вони зустрічаються
+Combien de lignes ¦ Сколько строк ¦ Скільки рядків
+Montré ¦ Показан ¦ Показано
+Même commune ¦ Та же коммуна ¦ Та сама громада
+Même commune à la même époque ¦ Та же коммуна в то же время ¦ Та сама громада в той самий час
+À moins de quelques km ¦ Не дальше нескольких км ¦ Не далі кількох км
+À la même époque : à plus ou moins ¦ В то же время: плюс-минус ¦ У той самий час: плюс-мінус
+Où elles se rencontrent ¦ Где они встречаются ¦ Де вони зустрічаються
+Par 25 ans ¦ По 25 лет ¦ По 25 років
+Position du trait ¦ Положение линии ¦ Положення лінії
+Prends les deux lignées de ta personne de départ (« Depuis l’app »). ¦ Возьми обе линии своей исходной персоны («Из приложения»). ¦ Візьми обидві лінії своєї вихідної особи («Із застосунку»).
+Selon le nombre d’événements ¦ По числу событий ¦ За кількістю подій
+Ses deux lignées sur la carte ¦ Её две линии на карте ¦ Її дві лінії на мапі
+Seulement la période ¦ Только этот период ¦ Лише цей період
+Superposées ¦ Наложенные ¦ Накладені
+Tout jusqu’à cette date ¦ Всё до этой даты ¦ Усе до цієї дати
+jamais à la même époque ¦ никогда в одно время ¦ ніколи в один час
+mariage de {a} et {b} ¦ свадьба: {a} и {b} ¦ весілля: {a} і {b}
+{a} et {b}, à {km} km ¦ {a} и {b}, в {km} км ¦ {a} і {b}, за {km} км
+3e groupe ¦ 3-я группа ¦ 3-тя група
+4e groupe ¦ 4-я группа ¦ 4-та група
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Ареал жизни, поколение за поколением ¦ Ареал життя, покоління за поколінням
+L’aire de vie de tes ancêtres ¦ Ареал жизни твоих предков ¦ Ареал життя твоїх предків
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Для каждого поколения — зона, где большая часть их рождений, браков и смертей. Те же расстояния, что в 🧭 «Далеко от колыбели». Никогда живые и никогда конфиденциальные карточки. ¦ Для кожного покоління — зона, де більшість їхніх народжень, шлюбів і смертей. Ті самі відстані, що в 🧭 «Далеко від колиски». Ніколи живі й ніколи конфіденційні картки.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Возьми предков своей исходной персоны («Из приложения»). ¦ Візьми предків своєї вихідної особи («Із застосунку»).
+Génération d’ancêtres ¦ Поколение предков ¦ Покоління предків
+Siècle (toute la base) ¦ Век (вся база) ¦ Століття (уся база)
+Une vie (les étapes d’une personne) ¦ Одна жизнь (этапы одного человека) ¦ Одне життя (етапи однієї людини)
+Avec les résidences et recensements ¦ С местами жительства и переписями ¦ З місцями проживання та переписами
+Du clair (anciens) au foncé (récents) ¦ От светлого (старшие) к тёмному (младшие) ¦ Від світлого (старші) до темного (молодші)
+Bleu / orange pour père / mère ¦ Синий / оранжевый для отца / матери ¦ Синій / помаранчевий для батька / матері
+L’inverse ¦ Наоборот ¦ Навпаки
+50 % (le cœur) ¦ 50 % (ядро) ¦ 50 % (ядро)
+Part des événements ¦ Доля событий ¦ Частка подій
+Part gardée ¦ Сохраняемая доля ¦ Збережена частка
+Cercle (facile à comparer) ¦ Круг (легко сравнивать) ¦ Коло (легко порівнювати)
+Enveloppe (le contour au plus juste) ¦ Оболочка (самый плотный контур) ¦ Оболонка (найщільніший контур)
+Personne (l’aire d’une vie) ¦ Человек (ареал одной жизни) ¦ Людина (ареал одного життя)
+Le milieu des événements ¦ Середина событий ¦ Середина подій
+Le lieu de naissance de la personne de départ ¦ Место рождения исходной персоны ¦ Місце народження вихідної особи
+Le berceau des plus anciens ¦ Колыбель самых давних ¦ Колиска найдавніших
+Toutes les aires superposées ¦ Все ареалы наложены ¦ Усі ареали накладено
+Une par case ¦ По одному в клетке ¦ По одному в клітинці
+Une à la fois avec ▶ ¦ По одному с ▶ ¦ По одному з ▶
+Minimum pour tracer une aire ¦ Минимум, чтобы нарисовать ареал ¦ Мінімум, щоб накреслити ареал
+5 événements ¦ 5 событий ¦ 5 подій
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ По ареалам (предок, уехавший далеко, остаётся вне ареала) ¦ За ареалами (предок, що виїхав далеко, лишається поза ареалом)
+Cadrer sur tout ¦ Охватить всё ¦ Охопити все
+Le tableau sous la carte ¦ Таблица под картой ¦ Таблиця під мапою
+Gén. {g} · ses parents ¦ Пок. {g} · родители ¦ Пок. {g} · батьки
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Нажми: места и те, что вне ареала ¦ Натисни: місця і ті, що поза ареалом
+Hors de l’aire ¦ Вне ареала ¦ Поза ареалом
+Rayon ({p} %) ¦ Радиус ({p} %) ¦ Радіус ({p} %)
+trop peu ¦ слишком мало ¦ замало
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Ареал жизни: {n}, радиус от {a} км до {b} км. ¦ Ареал життя: {n}, радіус від {a} км до {b} км.
+Aire de vie : pas assez d’événements. ¦ Ареал жизни: недостаточно событий. ¦ Ареал життя: недостатньо подій.
+Aire de vie : {n}. ¦ Ареал жизни: {n}. ¦ Ареал життя: {n}.
+L’AIRE DE VIE ¦ АРЕАЛ ЖИЗНИ ¦ АРЕАЛ ЖИТТЯ
+L’aire de vie de la famille, siècle par siècle ¦ Ареал жизни семьи, век за веком ¦ Ареал життя родини, століття за століттям
+L’aire de vie des ancêtres de {name} ¦ Ареал жизни предков: {name} ¦ Ареал життя предків: {name}
+L’aire d’une vie : {name} ¦ Ареал одной жизни: {name} ¦ Ареал одного життя: {name}
+la famille {name} ¦ семья {name} ¦ родина {name}
+Voir l’aire de vie sur la carte ¦ Показать ареал жизни на карте ¦ Показати ареал життя на мапі
+Centre ¦ Центр ¦ Центр
+Côté père et côté mère (deux couleurs) ¦ По отцу и по матери (два цвета) ¦ По батькові й по матері (два кольори)
+Mes ancêtres, 8 générations ¦ Мои предки, 8 поколений ¦ Мої предки, 8 поколінь
+Toute ma base, siècle par siècle ¦ Вся моя база, век за веком ¦ Уся моя база, століття за століттям
+=aire ¦ ареал|ареала|ареалов ¦ ареал|ареали|ареалів
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Крёстные и свидетели на карте ¦ Хрещені батьки та свідки на мапі
+Les liens (un par ligne) ¦ Связи (по одной в строке) ¦ Зв’язки (по одному в рядку)
+D’où vient le témoin ¦ Откуда свидетель ¦ Звідки свідок
+D’où vient le parrain ¦ Откуда крёстный ¦ Звідки хрещений батько
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ То, что записано в акте, иначе место жительства на дату, иначе рождение ¦ Те, що записано в акті, інакше місце проживання на дату, інакше народження
+Seulement ce qui est écrit dans l’acte ¦ Только записанное в акте ¦ Лише записане в акті
+Seulement sa naissance ¦ Только рождение ¦ Лише народження
+Nombre de liens ¦ Число связей ¦ Кількість зв’язків
+Nombre de personnes différentes ¦ Число разных людей ¦ Кількість різних людей
+Liens dans le même village ¦ Связи в одной деревне ¦ Зв’язки в одному селі
+Anneau autour du point ¦ Кольцо вокруг точки ¦ Кільце довкола точки
+Un chiffre seulement ¦ Только число ¦ Лише число
+Rôles montrés ¦ Показанные роли ¦ Показані ролі
+Parrain, marraine, témoin ¦ Крёстный, крёстная, свидетель ¦ Хрещений, хрещена, свідок
+Tous sauf curé et officier ¦ Все, кроме кюре и чиновника ¦ Усі, крім кюре й службовця
+Traits montrés ¦ Показанные линии ¦ Показані лінії
+À partir de 1 lien ¦ От 1 связи ¦ Від 1 зв’язку
+À partir de 2 ¦ От 2 ¦ Від 2
+À partir de 3 ¦ От 3 ¦ Від 3
+Les 30 plus forts seulement ¦ Только 30 самых сильных ¦ Лише 30 найсильніших
+Par rôle ¦ По роли ¦ За роллю
+Par branche (bleu père, orange mère) ¦ По ветви (синий — отец, оранжевый — мать) ¦ За гілкою (синій — батько, помаранчевий — мати)
+Flèche du village du parrain vers celui de l’acte ¦ Стрелка от деревни крёстного к деревне акта ¦ Стрілка від села хрещеного до села акта
+La phrase sous la carte ¦ Фраза под картой ¦ Речення під мапою
+Clic : les liens derrière ce trait ¦ Нажми: связи за этой линией ¦ Натисни: зв’язки за цією лінією
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: {p} % связей — из самой деревни; остальные в основном из: {others}. ¦ {place}: {p} % зв’язків — із самого села; решта здебільшого з: {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Подсчитано по: {a} с известной деревней; без места, не нарисованы: {b}. ¦ Підраховано за: {a} з відомим селом; без місця, не намальовано: {b}.
+Parrains et témoins : {a} entre {b}. ¦ Крёстные и свидетели: {a} между {b}. ¦ Хрещені й свідки: {a} між {b}.
+Parrains et témoins : {n}. ¦ Крёстные и свидетели: {n}. ¦ Хрещені й свідки: {n}.
+Filleul ou époux ¦ Крестник или супруг ¦ Хрещеник або подружжя
+{n} autres · triés par date ¦ Ещё {n} · по дате ¦ Ще {n} · за датою
+Ouvrir dans le Réseau ¦ Открыть в Сети ¦ Відкрити в Мережі
+PARRAINS ET TÉMOINS ¦ КРЁСТНЫЕ И СВИДЕТЕЛИ ¦ ХРЕЩЕНІ Й СВІДКИ
+Parrains et marraines ¦ Крёстные отцы и матери ¦ Хрещені батьки й матері
+Parrains, marraines et témoins ¦ Крёстные и свидетели ¦ Хрещені батьки та свідки
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Возьми крёстных и свидетелей из своей генеалогии («Из приложения»). ¦ Візьми хрещених батьків і свідків зі своєї генеалогії («Із застосунку»).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ Связи из 🕸 Сети отношений на карте: деревня акта и та, откуда свидетель. Живые свидетели никогда не учитываются. ¦ Зв’язки з 🕸 Мережі стосунків на мапі: село акта і те, звідки свідок. Живі свідки ніколи не враховуються.
+Aucun lien avec un lieu pour ce choix. ¦ Для этого выбора нет связей с местом. ¦ Для цього вибору немає зв’язків із місцем.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Для этого выбора связей нет (роли, период, места). ¦ Для цього вибору зв’язків немає (ролі, період, місця).
+Curé, officier ¦ Кюре, чиновник ¦ Кюре, службовець
+curé ¦ кюре ¦ кюре
+Curé ¦ Кюре ¦ Кюре
+tuteur ¦ опекун ¦ опікун
+Voisin ¦ Сосед ¦ Сусід
+Officier ¦ Чиновник ¦ Службовець
+bapt. ¦ крещ. ¦ хрещ.
+naiss. ¦ рожд. ¦ нар.
+mar. ¦ брак ¦ шлюб
+inh. ¦ погреб. ¦ поховання
+# ⚰️ Crises et épidémies (partie 3) — et les départs « Graphique » de 🕸
+Crises et épidémies (les années où les décès montent) ¦ Кризисы и эпидемии (годы, когда растёт число смертей) ¦ Кризи та епідемії (роки, коли зростає кількість смертей)
+Les décès (un par ligne) ¦ Смерти (по одной в строке) ¦ Смерті (по одній у рядку)
+Cause notée ¦ Записанная причина ¦ Записана причина
+Choléra de 1832 ¦ Холера 1832 года ¦ Холера 1832 року
+Clic : les personnes, et ce qui se passait à la même époque ¦ Нажми: люди и то, что происходило в то же время ¦ Натисни: люди й те, що відбувалося в той самий час
+Comptés avec tout le monde ¦ Учитываются вместе со всеми ¦ Враховуються разом з усіма
+À part ¦ Отдельно ¦ Окремо
+À part (moins de 10 ans) ¦ Отдельно (младше 10 лет) ¦ Окремо (молодші за 10 років)
+Pas comptés ¦ Не учитываются ¦ Не враховуються
+Mes ancêtres et leurs familles ¦ Мои предки и их семьи ¦ Мої предки та їхні родини
+Les enfants à part (moins de 10 ans) ¦ Дети отдельно (младше 10 лет) ¦ Діти окремо (молодші за 10 років)
+Les décès de ta généalogie ¦ Смерти в твоей генеалогии ¦ Смерті у твоїй генеалогії
+Les décès placés et datés (le décès, sinon l’inhumation ; chaque personne une seule fois), et les crises du 🌍 Monde autour avec tes événements locaux. Jamais un vivant ni une fiche confidentielle. ¦ Размещённые и датированные смерти (смерть, иначе погребение; каждый человек один раз) и кризисы из 🌍 «Мира вокруг» с твоими местными событиями. Никогда живые и никогда конфиденциальные карточки. ¦ Розміщені й датовані смерті (смерть, інакше поховання; кожна людина один раз) і кризи зі 🌍 «Світу довкола» з твоїми місцевими подіями. Ніколи живі й ніколи конфіденційні картки.
+Aucun décès daté avec un lieu pour ce choix. ¦ Для этого выбора нет датированных смертей с местом. ¦ Для цього вибору немає датованих смертей із місцем.
+Décès sans année ou sans lieu, comptés à part : {n} ¦ Смерти без года или места, учтены отдельно: {n} ¦ Смерті без року чи місця, враховані окремо: {n}
+Minimum de décès dans l’année ¦ Минимум смертей за год ¦ Мінімум смертей за рік
+Décès au moins ¦ Смертей не меньше ¦ Смертей не менше
+2,5 fois l’habitude ¦ В 2,5 раза больше обычного ¦ У 2,5 раза більше звичного
+2 fois ¦ В 2 раза ¦ У 2 рази
+3 fois ¦ В 3 раза ¦ У 3 рази
+4 fois ¦ В 4 раза ¦ У 4 рази
+Fois l’habitude ¦ Во сколько раз больше обычного ¦ У скільки разів більше звичного
+Fenêtre de l’habitude ¦ Окно обычного уровня ¦ Вікно звичного рівня
+5 ans avant et 5 ans après ¦ 5 лет до и 5 лет после ¦ 5 років до і 5 років після
+10 et 10 ¦ 10 и 10 ¦ 10 і 10
+Seulement les 10 ans avant ¦ Только 10 лет до ¦ Лише 10 років до
+L’habitude se calcule par ¦ Обычный уровень считается по ¦ Звичний рівень рахується за
+La moyenne ¦ Среднее ¦ Середнє
+La médiane (moins dérangée par une autre crise toute proche) ¦ Медиана (меньше искажается другим близким кризисом) ¦ Медіана (менше спотворюється іншою близькою кризою)
+La commune, les petites regroupées avec leurs voisines ¦ Коммуна, маленькие объединены с соседними ¦ Громада, малі об’єднано з сусідніми
+Toujours la commune ¦ Всегда коммуна ¦ Завжди громада
+Le département ¦ Департамент ¦ Департамент
+Petit village : nombre de décès sur toute la période, moins de ¦ Маленькая деревня: смертей за весь период меньше ¦ Маленьке село: смертей за весь період менше
+Enfant : moins de ¦ Ребёнок: младше ¦ Дитина: молодше
+Repères proposés ¦ Предлагаемые ориентиры ¦ Запропоновані орієнтири
+Les crises du 🌍 Monde autour qui couvrent la commune, et mes événements ¦ Кризисы из 🌍 «Мира вокруг», которые касаются коммуны, и мои события ¦ Кризи зі 🌍 «Світу довкола», що стосуються громади, і мої події
+Toutes les crises de l’année ¦ Все кризисы года ¦ Усі кризи року
+Pas du temps ¦ Шаг времени ¦ Крок часу
+Pas assez de décès placés : moins de ¦ Мало размещённых смертей: меньше ¦ Мало розміщених смертей: менше
+Pas assez de décès placés pour repérer des crises. ¦ Слишком мало размещённых смертей, чтобы заметить кризисы. ¦ Замало розміщених смертей, щоб помітити кризи.
+Prends les décès de ta généalogie (« Depuis l’app »). ¦ Возьми смерти из своей генеалогии («Из приложения»). ¦ Візьми смерті зі своєї генеалогії («Із застосунку»).
+LES ANNÉES DE CRISE ¦ ГОДЫ КРИЗИСОВ ¦ РОКИ КРИЗ
+Les années de crise de la famille ¦ Годы кризисов в семье ¦ Роки криз у родині
+Les années de crise sur la carte ¦ Годы кризисов на карте ¦ Роки криз на мапі
+Les années de crise : {n}, sur {d}. ¦ Годы кризисов: {n}, из {d}. ¦ Роки криз: {n}, з {d}.
+Les années de crise : {n}. ¦ Годы кризисов: {n}. ¦ Роки криз: {n}.
+Les années à voir · {n} ¦ Годы, на которые стоит взглянуть · {n} ¦ Роки, які варто переглянути · {n}
+=année à voir ¦ год, на который стоит взглянуть|года, на которые стоит взглянуть|лет, на которые стоит взглянуть ¦ рік, який варто переглянути|роки, які варто переглянути|років, які варто переглянути
+Habitude ¦ Обычно ¦ Зазвичай
+À la même époque (repère) ¦ В то же время (ориентир) ¦ У той самий час (орієнтир)
+À la même époque : {what} — un repère, pas une explication. ¦ В то же время: {what} — ориентир, а не объяснение. ¦ У той самий час: {what} — орієнтир, а не пояснення.
+Rien de connu dans cette région à cette date. ¦ В этом краю на эту дату ничего не известно. ¦ У цьому краї на цю дату нічого не відомо.
+rien de connu dans cette région à cette date ¦ в этом краю на эту дату ничего не известно ¦ у цьому краї на цю дату нічого не відомо
+cause notée : « {c} » ¦ записанная причина: «{c}» ¦ записана причина: «{c}»
+d’habitude {u} par an ¦ обычно {u} в год ¦ зазвичай {u} на рік
+plus de ×5 ¦ больше ×5 ¦ понад ×5
+×2,5 à 3 ¦ ×2,5–3 ¦ ×2,5–3
+×3 à 5 ¦ ×3–5 ¦ ×3–5
+{name} + {n} voisines ¦ {name} + соседних: {n} ¦ {name} + сусідніх: {n}
++ {n} autres ¦ + ещё {n} ¦ + ще {n}
+Écrire la commune et l’année près des ronds ¦ Писать коммуну и год рядом с кружками ¦ Писати громаду й рік біля кружечків
+À lire avec prudence : l’app compare des nombres de décès, elle ne sait pas pourquoi ils montent. Le repère est ce qui se passait à la même époque : une piste à vérifier dans les actes (cause notée, âge, mois). Sur de petits nombres, le hasard suffit parfois. ¦ Читать осторожно: приложение сравнивает числа смертей, оно не знает, почему они растут. Ориентир — то, что происходило в то же время: след, который нужно проверить в актах (записанная причина, возраст, месяц). При малых числах иногда достаточно случайности. ¦ Читати обережно: застосунок порівнює кількість смертей, він не знає, чому вона зростає. Орієнтир — те, що відбувалося в той самий час: слід, який треба перевірити в актах (записана причина, вік, місяць). При малих числах іноді досить випадковості.
+Autour de mes ancêtres ¦ Вокруг моих предков ¦ Довкола моїх предків
+Parrains et marraines des baptêmes ¦ Крёстные на крестинах ¦ Хрещені батьки на хрестинах
+Témoins des mariages ¦ Свидетели на свадьбах ¦ Свідки на весіллях
+Tous les liens (parrains, témoins, déclarants…) ¦ Все связи (крёстные, свидетели, заявители…) ¦ Усі зв’язки (хрещені, свідки, заявники…)
+années à voir ¦ годы, на которые стоит взглянуть ¦ роки, які варто переглянути
+année à voir ¦ год, на который стоит взглянуть ¦ рік, який варто переглянути
+Ce qu’on prend ¦ Что берём ¦ Що беремо
+Tout : vu, en partie, à chercher ¦ Всё: просмотрено, частично, искать ¦ Усе: переглянуто, частково, шукати
+Seulement ce qui reste à faire ¦ Только то, что осталось сделать ¦ Лише те, що лишилося зробити
+Seulement ce qui a été vu ¦ Только то, что просмотрено ¦ Лише те, що переглянуто
+Sans le nom des correspondances ¦ Без имён совпадений ¦ Без імен збігів
+Avec le nom des correspondances (pas pour un export partagé) ¦ С именами совпадений (не для общего экспорта) ¦ З іменами збігів (не для спільного експорту)

@@ -296,10 +296,11 @@
         },
     };
     const researchApp = {
-        html: () => pane('🔎 Tes recherches', 'Les dépouillements (registres consultés), les communes des battues et les actes qui manquent à tes ancêtres (« Que manque-t-il ? »).', ''),
+        html: () => pane('🔎 Tes recherches', 'Les dépouillements (registres consultés), les communes des battues et les actes qui manquent à tes ancêtres (« Que manque-t-il ? »).', `<label>${i18n('Ce qu’on prend')}<select data-cp="rstate"><option value="">${i18n('Tout : vu, en partie, à chercher')}</option><option value="todo">${i18n('Seulement ce qui reste à faire')}</option><option value="seen">${i18n('Seulement ce qui a été vu')}</option></select></label>`),
         bind: (box, io) => bindGo(box, async () => {
             const r = await get({what: 'research'}); const s = io.spec(); s.places = {}; s.rows = [];
             (r.communes || []).forEach(c => { s.places[fold(c.name)] = {lat: c.lat, lon: c.lon, n: c.name}; c.items.forEach(it => s.rows.push({label: c.name, type: it.type, act: it.label || '', from: it.from ?? '', to: it.to ?? '', state: it.state, src: it.src || '', what: it.what || '', open: it.open ? JSON.stringify(it.open) : '', pid: it.pid || ''})); });
+            const only = box.querySelector('[data-cp="rstate"]')?.value || ''; if (only) s.rows = s.rows.filter(x => only === 'seen' ? x.state === 'seen' : x.state !== 'seen');
             if (!s.rows.length) throw new Error(i18n('Aucune recherche ni aucun trou avec une commune placée.'));
             io.apply(s); return `${pl((r.communes || []).length, 'commune')}, ${pl(s.rows.length, 'ligne')}.`;
         }),
