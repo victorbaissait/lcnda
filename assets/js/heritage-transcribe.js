@@ -144,6 +144,47 @@
     const aideLang = v => window.LCNDA_AIDE_LECTURE?.langForOcr?.(v) || '';
     const langName = code => window.LCNDA_AIDE_LECTURE?.langOf?.(code)?.name || '';
 
+    /* ═════════ 🪄 Corrections proposées (moteur : app-htr-correction.js ; lexique de la base : GET htr_lexicon) ═════════
+     * Jamais imposées : un mot souligné en violet, un clic → 1 à 3 propositions, « Garder tel quel », « Ajouter au lexique » ;
+     * « ✓ Accepter les N propositions sûres » ; « ↶ Annuler » après chaque geste. Réglages : genealogie-htr-fix ('0' = non),
+     * genealogie-htr-fix-level ('plus' = plus de propositions) ; le lexique personnel : genealogie-htr-lexique (gardé aussi dans la base). */
+    const FIX_KEY = 'genealogie-htr-fix', FIX_LEVEL_KEY = 'genealogie-htr-fix-level', FIX_LEX_KEY = 'genealogie-htr-lexique';
+    const lsGet = (k, d = '') => { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch (_) { return d; } };
+    const lsSet = (k, v) => { try { localStorage.setItem(k, v); } catch (_) {} };
+    const fixOn = () => lsGet(FIX_KEY) !== '0';
+    const fixLevel = () => (lsGet(FIX_LEVEL_KEY) === 'plus' ? 'plus' : 'prudent');
+    const personalLex = () => { try { const a = JSON.parse(lsGet(FIX_LEX_KEY, '[]')); return Array.isArray(a) ? a.filter(x => typeof x === 'string' && x.trim()).slice(0, 5000) : []; } catch (_) { return []; } };
+    let fixNames = null, fixCache = null;
+    /** le lexique pour cette langue et ce lieu (les noms de la base lus une fois) */
+    async function fixLexicon(lang, place = '') {
+        const F = window.LCNDA_HTRFIX; if (!F) return null;
+        if (!fixNames) fixNames = A().api('htr_lexicon').catch(() => ({}));
+        const names = await fixNames, pers = personalLex(), key = `${lang}|${place}|${pers.join('\u0001')}`;
+        if (fixCache?.key !== key) fixCache = {key, lex: F.buildLexicon({lang, names, personal: pers, place})};
+        return fixCache.lex;
+    }
+    /** « Ajouter au lexique » (↶ Annuler le retire) */
+    function addToLexicon(word, after) {
+        const w = String(word || '').trim(); if (!w) return;
+        const list = personalLex(); if (list.some(x => x.toLowerCase() === w.toLowerCase())) return;
+        lsSet(FIX_LEX_KEY, JSON.stringify([...list, w])); fixCache = null; after?.();
+        A().undoToast?.(i18n('« {w} » ajouté au lexique', {w}), {undo: () => { lsSet(FIX_LEX_KEY, JSON.stringify(personalLex().filter(x => x !== w))); fixCache = null; after?.(true); }, redo: () => { lsSet(FIX_LEX_KEY, JSON.stringify([...personalLex(), w])); fixCache = null; after?.(); }});
+    }
+    /** le petit menu d'un mot souligné (K14) */
+    function fixMenu(at, fix, {apply, keep, addLex}) {
+        const items = fix.props.map(p => ({icon: '✓', label: p.value, help: p.why, run: () => apply(p.value)}));
+        items.push('-', {icon: '✋', label: i18n('Garder tel quel'), run: keep}, {icon: '＋', label: i18n('Ajouter au lexique'), help: i18n('Ce mot ne sera plus souligné'), run: addLex});
+        return window.LCNDA_UI?.menuAt?.(at, items, {title: `« ${fix.word} »`});
+    }
+    /** réglages : l'interrupteur et le choix du seuil (K16 ; menu de choix unique) */
+    const fixSettingsHtml = () => `<label class="ui-toggle h-fix-on"><input type="checkbox" data-fix-on ${fixOn() ? 'checked' : ''}><i></i>${esc(i18n('Proposer des corrections (conseillé)'))}</label>
+        <label class="h-fix-level">${esc(i18n('Seuil'))} <select data-fix-level><option value="prudent" ${fixLevel() === 'prudent' ? 'selected' : ''}>${esc(i18n('Prudent (conseillé)'))}</option><option value="plus" ${fixLevel() === 'plus' ? 'selected' : ''}>${esc(i18n('Plus de propositions'))}</option></select></label>`;
+    const bindFixSettings = (root, onChange) => {
+        root.querySelector('[data-fix-on]')?.addEventListener('change', e => { lsSet(FIX_KEY, e.target.checked ? '1' : '0'); onChange?.(); });
+        root.querySelector('[data-fix-level]')?.addEventListener('change', e => { lsSet(FIX_LEVEL_KEY, e.target.value); onChange?.(); });
+    };
+    ext.htrFix = {fixOn, fixLevel, personalLex, fixSettingsHtml, bindFixSettings, lexicon: fixLexicon, KEYS: {FIX_KEY, FIX_LEVEL_KEY, FIX_LEX_KEY}};
+
     /* ═════════ L'atelier ═════════ */
     async function open(ctx = {}) {
         const TV = ext.txView; // « 🎚️ Mieux voir » et la barre réglable (heritage-transcribe-view.js)
@@ -169,10 +210,11 @@
                 <section class="h-tx-right">
                     <div class="h-tx-tools"><button type="button" data-tx-cmd="ocr" title="${esc(i18n('Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne)'))}">🔎 ${i18n('Lire (imprimé)')}</button><button type="button" data-tx-cmd="htr" title="${esc(i18n('Lire l’écriture à la main : toute la page, ou seulement la zone choisie (▭). Le texte est proposé ligne par ligne, à relire.'))}" data-help="${esc(i18n('La lecture d’une écriture à la main (HTR), sur cet ordinateur : le texte est proposé ligne par ligne à côté de l’image, les mots peu sûrs surlignés. Elle s’installe une fois dans les Réglages. Relis toujours : elle se trompe sur les noms.'))}" data-help-faq="Lire l’acte">✨ ${i18n('Lire l’acte')}</button><button type="button" data-tx-cmd="deep" class="h-tx-deepbtn" title="${esc(i18n('Un modèle « vision » ouvert qui tourne sur ton ordinateur (Ollama) : lit mieux les écritures difficiles, plus lent'))}">🔍 ${i18n('Lecture approfondie (IA)')}</button><span class="h-tx-htrrun" data-tx-htrrun hidden>${window.LCNDA_UI.spinner('', {inline: true})}<button type="button" class="button small secondary" data-tx-cmd="htrstop" title="${esc(i18n('Arrêter la lecture'))}">■ ${i18n('Arrêter')}</button></span>
                         <select data-tx-lang title="${esc(i18n('Langue du texte : sert à la lecture automatique, et « 📜 Aide à la lecture » s’ouvre sur cette langue'))}">${txLangs().map(([v, l]) => `<option value="${esc(v)}" ${txLang() === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>
-                        <button type="button" data-tx-cmd="template" title="${esc(i18n('Un modèle d’acte à compléter'))}">📋 ${i18n('Modèle')}</button><button type="button" data-tx-cmd="aide" title="${esc(i18n('Le latin des registres, les abréviations, les anciennes lettres (ſ, ꝑ…) et des exercices : choisis d’abord un mot dans le texte pour le chercher'))}">📜 ${i18n('Aide à la lecture')}</button><button type="button" data-tx-cmd="detect" title="${esc(i18n('Repérer les noms, dates, lieux et métiers'))}" data-help="${esc(i18n('Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.'))}">🧭 ${i18n('Repérer')}</button><span class="spacer"></span>
+                        <button type="button" data-tx-cmd="template" title="${esc(i18n('Un modèle d’acte à compléter'))}">📋 ${i18n('Modèle')}</button><button type="button" data-tx-cmd="aide" title="${esc(i18n('Le latin des registres, les abréviations, les anciennes lettres (ſ, ꝑ…) et des exercices : choisis d’abord un mot dans le texte pour le chercher'))}">📜 ${i18n('Aide à la lecture')}</button><button type="button" data-tx-cmd="fix" title="${esc(i18n('Proposer des corrections pour les mots mal lus (un mot souligné : clique-le pour choisir)'))}">🪄 ${i18n('Corrections')}</button><button type="button" data-tx-cmd="detect" title="${esc(i18n('Repérer les noms, dates, lieux et métiers'))}" data-help="${esc(i18n('Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.'))}">🧭 ${i18n('Repérer')}</button><span class="spacer"></span>
                         <span class="h-tx-extra"><button type="button" data-tx-cmd="found" title="${esc(i18n('L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches'))}">🧭 ${i18n('Ce que l’app a trouvé…')}</button><button type="button" data-tx-cmd="copy">📋 ${i18n('Copier le texte')}</button><label class="ui-toggle h-tx-useenh" title="${esc(i18n('La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine'))}"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}><i></i>${i18n('Lire et exporter l’image améliorée')}</label></span></div>
                     <div class="h-tx-chars">${SPECIAL.map(c => `<button type="button" data-tx-char="${esc(c)}" title="${esc(i18n('Insérer {c}', {c: esc(c)}))}">${esc(c)}</button>`).join('')}</div>
                     <div class="h-tx-editor"><div class="h-tx-mirror" data-tx-mirror aria-hidden="true"></div><textarea data-tx-body spellcheck="false" placeholder="${esc(i18n('La transcription, ligne à ligne comme sur l’acte. Choisis un passage, puis dessine sa zone sur l’image (▭ Zone) : les deux restent liés.'))}">${esc(t.body)}</textarea></div>
+                    <div class="h-tx-fixbar" data-tx-fixbar hidden></div>
                     <p class="h-tx-docnote" data-tx-docnote hidden>📄 ${esc(i18n('Ce texte est celui du document : il se voit dans la visionneuse, la page du document et la fiche des personnes reliées.'))}</p>
                     <div class="h-tx-found" data-tx-found></div>
                 </section>
@@ -315,13 +357,51 @@
         }
         // au zoom, seules les épaisseurs et les poignées changent : pas besoin de tout redessiner
         function paintOverlay() { const sw = 2 / zoom; $('[data-tx-zones]')?.querySelectorAll('rect').forEach(r => r.setAttribute('stroke-width', r.classList.contains('is-sel') ? sw * 2 : sw)); paintHandles(); }
+        /* 🪄 les corrections proposées sur le texte de l'Atelier : soulignées dans le miroir, un clic dans le texte → le menu */
+        let txFix = [], txFixOn = false, txFixT = 0; const txFixUndo = [];
+        const fixSeg = (text, a, b) => { let h = '', q = a; txFix.filter(f => f.s >= a && f.e <= b).forEach(f => { h += esc(text.slice(q, f.s)) + `<u class="h-tx-fix${f.sure ? ' is-sure' : ''}">${esc(text.slice(f.s, f.e))}</u>`; q = f.e; }); return h + esc(text.slice(q, b)); };
+        async function runFix({quiet = false} = {}) {
+            if (!window.LCNDA_HTRFIX) { if (!quiet) toast(i18n('Les corrections proposées ne sont pas chargées.'), 'error'); return; }
+            const lex = await fixLexicon($('[data-tx-lang]').value, $('[data-tx="place"]').value); if (!lex || !dlg.isConnected) return;
+            txFix = window.LCNDA_HTRFIX.propose(area.value, lex, {level: fixLevel()}); txFixOn = true; paintMirror(); paintTxFix();
+            if (!quiet) status(txFix.length ? (A().plural ? A().plural(txFix.length, 'correction proposée', 'corrections proposées') : String(txFix.length)) : i18n('Aucune correction à proposer'));
+        }
+        function paintTxFix() {
+            const bar = $('[data-tx-fixbar]'); if (!bar) return; bar.hidden = !txFixOn; if (!txFixOn) return;
+            const sure = txFix.filter(f => f.sure).length;
+            bar.innerHTML = `<span>🪄 ${txFix.length ? esc(A().plural ? A().plural(txFix.length, 'correction proposée', 'corrections proposées') : txFix.length) + ` <small class="muted">${esc(i18n('(soulignées en violet : clique un mot)'))}</small>` : esc(i18n('Aucune correction à proposer'))}</span>
+                ${sure ? `<button type="button" class="button small" data-txfix="accept">✓ ${esc(sure > 1 ? i18n('Accepter les {n} propositions sûres', {n: sure}) : i18n('Accepter la proposition sûre'))}</button>` : ''}
+                <button type="button" class="button small secondary" data-txfix="undo" ${txFixUndo.length ? '' : 'disabled'}>↶ ${esc(i18n('Annuler'))}</button><span class="spacer"></span>${fixSettingsHtml()}
+                <button type="button" class="icon-button small" data-txfix="close" title="${esc(i18n('Fermer'))}">×</button>`;
+            bindFixSettings(bar, () => runFix({quiet: true}));
+        }
+        /** remplacer le texte (une ou plusieurs corrections), avec ↶ Annuler */
+        function setTxText(next, label) {
+            const old = area.value; if (next === old) return;
+            area.value = next; area.dispatchEvent(new Event('input')); txFixUndo.push(old);
+            const back = () => { const k = txFixUndo.lastIndexOf(old); if (k >= 0) txFixUndo.splice(k, 1); area.value = old; area.dispatchEvent(new Event('input')); runFix({quiet: true}); };
+            runFix({quiet: true}); A().undoToast?.(label, {undo: back});
+        }
+        $('[data-tx-fixbar]')?.addEventListener('click', e => {
+            const b = e.target.closest('[data-txfix]'); if (!b) return; const k = b.dataset.txfix;
+            if (k === 'close') { txFixOn = false; txFix = []; paintMirror(); paintTxFix(); return; }
+            if (k === 'undo') { const old = txFixUndo.pop(); if (old != null) { area.value = old; area.dispatchEvent(new Event('input')); runFix({quiet: true}); } return; }
+            if (k === 'accept') { const sure = txFix.filter(f => f.sure); if (sure.length) setTxText(window.LCNDA_HTRFIX.applySure(area.value, sure), A().plural ? A().plural(sure.length, 'proposition sûre acceptée', 'propositions sûres acceptées') : String(sure.length)); }
+        });
+        area.addEventListener('click', e => {
+            if (!txFix.length || area.selectionStart !== area.selectionEnd) return;
+            const c = area.selectionStart, fx = txFix.find(f => c >= f.s && c <= f.e); if (!fx) return;
+            fixMenu({x: e.clientX, y: e.clientY}, fx, {apply: v => setTxText(window.LCNDA_HTRFIX.applyFix(area.value, fx, v), `« ${fx.word} » → « ${v} »`),
+                keep: () => { txFix = txFix.filter(f => f !== fx); paintMirror(); paintTxFix(); A().undoToast?.(i18n('« {w} » gardé tel quel', {w: fx.word}), {undo: () => { txFix.push(fx); txFix.sort((x, y) => x.s - y.s); paintMirror(); paintTxFix(); }}); },
+                addLex: () => addToLexicon(fx.word, () => runFix({quiet: true}))});
+        });
         function paintMirror() {
             const text = area.value, marks = [];
             t.data.zones.forEach((z, i) => { if (z.e > z.s) marks.push({s: z.s, e: z.e, c: colorOf(z, i), on: selZone === z.id}); });
             found.forEach(f => marks.push({s: f.s, e: f.e, cls: `is-${f.type}`}));
             marks.sort((a, b) => a.s - b.s); let h = '', pos = 0;
-            marks.forEach(m => { if (m.s < pos) return; h += esc(text.slice(pos, m.s)); h += `<mark class="${m.cls || ''}${m.on ? ' is-on' : ''}" ${m.c ? `style="background:${m.c}${m.on ? '' : '66'}"` : ''}>${esc(text.slice(m.s, m.e))}</mark>`; pos = m.e; });
-            mirror.innerHTML = h + esc(text.slice(pos)) + '\n';
+            marks.forEach(m => { if (m.s < pos) return; h += fixSeg(text, pos, m.s); h += `<mark class="${m.cls || ''}${m.on ? ' is-on' : ''}" ${m.c ? `style="background:${m.c}${m.on ? '' : '66'}"` : ''}>${fixSeg(text, m.s, m.e)}</mark>`; pos = m.e; });
+            mirror.innerHTML = h + fixSeg(text, pos, text.length) + '\n';
             mirror.scrollTop = area.scrollTop;
         }
         function paintZoneBar() {
@@ -355,6 +435,7 @@
             const oldEnd = before.length - q, delta = now.length - before.length;
             const shift = r => { const f = v => v >= oldEnd ? v + delta : v > p ? Math.max(p, Math.min(v, p + (now.length - q - p))) : v; r.s = f(r.s); r.e = Math.max(r.s, f(r.e)); };
             t.data.zones.forEach(shift); t.data.people.forEach(shift); found.forEach(shift); [...hist.undo, ...hist.redo].forEach(list => list.forEach(shift));
+            txFix.forEach(shift); txFix = txFix.filter(f => now.slice(f.s, f.e) === f.word); if (txFixOn) { clearTimeout(txFixT); txFixT = setTimeout(() => runFix({quiet: true}), 900); }
             before = now; t.body = now; touch(); paintMirror(); paintPeople();
         });
         area.addEventListener('scroll', () => { mirror.scrollTop = area.scrollTop; });
@@ -593,14 +674,32 @@
             let im = null; try { im = await new Promise((ok, ko) => { const i = new Image(); i.onload = () => ok(i); i.onerror = ko; i.src = origSrc(); }); } catch (_) {}
             const crop = b => { if (!im || !b) return ''; const [x0, y0, x1, y1] = b, w = Math.max(1, x1 - x0), h = Math.max(1, y1 - y0), k = Math.min(1, 52 / h, 900 / w); const c = document.createElement('canvas'); c.width = Math.max(1, Math.round(w * k)); c.height = Math.max(1, Math.round(h * k)); c.getContext('2d').drawImage(im, x0 + ox, y0 + oy, w, h, 0, 0, c.width, c.height); try { return c.toDataURL('image/jpeg', .85); } catch (_) { return ''; } };
             const pct = c => Math.round(c * 100);
-            const lineHtml = l => (l.words?.length ? l.words : String(l.text || '').split(/\s+/).map(w => ({t: w, c: null}))).filter(w => w.t).map(w => w.c != null && w.c < UNSURE ? `<mark class="h-htr-unsure" title="${esc(i18n('Sûr à {x} % — clique pour le corriger', {x: pct(w.c)}))}">${esc(w.t)}</mark>` : esc(w.t)).join(' ');
+            // 🪄 les corrections proposées : un mot souligné en violet (une autre couleur que « peu sûr »), jamais changé tout seul
+            const FX = window.LCNDA_HTRFIX, fxLang = $('[data-tx-lang]').value, fxPlace = $('[data-tx="place"]').value;
+            let lex = null; if (FX) { try { lex = await fixLexicon(fxLang, fxPlace); } catch (_) { lex = null; } }
+            const wordsOf = l => (l.words?.length ? l.words : String(l.text || '').split(/\s+/).map(w => ({t: w, c: null}))).filter(w => w.t);
+            const lineText = l => wordsOf(l).map(w => w.t).join(' ');
+            let fixSeq = 0; const fixMap = new Map();
+            const fixesFor = (text, ws) => { if (!lex || !fixOn()) return []; const spans = []; let o = 0; ws.forEach(w => { spans.push({s: o, e: o + w.t.length, c: w.c}); o += w.t.length + 1; });
+                const at = (a, b) => spans.find(x => a >= x.s && b <= x.e);
+                return FX.propose(text, lex, {level: fixLevel(), unsure: (a, b) => { const x = at(a, b); return !!(x && x.c != null && x.c < UNSURE); }, sure: (a, b) => { const x = at(a, b); return !!(x && x.c != null && x.c >= .95); }}); };
+            const fixSpan = (fx, inner) => { const id = 'f' + (++fixSeq); fixMap.set(id, fx); return `<span class="h-htr-fix${fx.sure ? ' is-sure' : ''}" data-fx="${id}" title="${esc(i18n('Correction proposée : « {x} » — clique pour choisir', {x: fx.props[0].value}))}">${inner}</span>`; };
+            /** une ligne : les mots peu sûrs surlignés, les corrections soulignées ; textNow : le texte déjà corrigé à la main (sans les mots peu sûrs) */
+            const lineHtml = (l, textNow = null) => {
+                const ws = textNow == null || textNow === lineText(l) ? wordsOf(l) : textNow.split(/\s+/).filter(Boolean).map(t2 => ({t: t2, c: null}));
+                const fixes = fixesFor(ws.map(w => w.t).join(' '), ws); let o = 0;
+                return ws.map(w => { const s0 = o; o += w.t.length + 1; let inner = '', q = 0;
+                    fixes.filter(f => f.s >= s0 && f.e <= s0 + w.t.length).forEach(f => { inner += esc(w.t.slice(q, f.s - s0)) + fixSpan(f, esc(w.t.slice(f.s - s0, f.e - s0))); q = f.e - s0; });
+                    inner += esc(w.t.slice(q));
+                    return w.c != null && w.c < UNSURE ? `<mark class="h-htr-unsure" title="${esc(i18n('Sûr à {x} % — clique pour le corriger', {x: pct(w.c)}))}">${inner}</mark>` : inner; }).join(' ');
+            };
             const unsure = lines.reduce((n, l) => n + (l.words || []).filter(w => w.c != null && w.c < UNSURE).length, 0);
             const stats = window.LCNDA_TXACTE?.unsureStats(lines, UNSURE) || {low: false}; lastUnsure = unsure; // B : un texte peu sûr → recadrer, ou la lecture approfondie
             const name = f => installed.find(m => m.file === f)?.title || f;
             const dlgR = ext.openDialog({eyebrow: i18n('LECTURE AUTOMATIQUE · À RELIRE'), title: `✨ ${i18n('Le texte lu, ligne par ligne')}`, wide: true, submitLabel: `✓ ${i18n('Mettre {x} dans le texte', {x: lines.length > 1 ? i18n('les {n} lignes', {n: lines.length}) : i18n('la ligne')})}`,
                 body: `<div class="h-htr-rev-head"><span>${A().plural ? A().plural(lines.length, 'ligne') : lines.length + ' lignes'} · ${unsure ? `<mark class="h-htr-unsure">${A().plural ? A().plural(unsure, 'mot peu sûr', 'mots peu sûrs') : unsure + ` ${i18n('mots peu sûrs')}`}</mark> ${i18n('(sûrs à moins de {x} %)', {x: pct(UNSURE)})}` : i18n('aucun mot peu sûr')}</span>
                     <label class="h-htr-rev-model">${i18n('Modèle')} <select data-htr-rmodel>${installed.map(m => `<option value="${esc(m.file)}" ${m.file === modelFile ? 'selected' : ''}>${esc(m.title)}</option>`).join('')}</select></label><button type="button" class="button small secondary" data-htr-reread>↻ ${i18n('Relire avec ce modèle')}</button></div>
-                    ${stats.low && ext.txActe ? ext.txActe.lowNoticeHtml(stats) : ''}<ol class="h-htr-rev">${lines.map((l, i) => { const src = crop(l.bbox); return `<li data-i="${i}"><label class="checkbox-line h-htr-keep" title="${esc(i18n('Garder cette ligne'))}"><input type="checkbox" data-htr-keep checked></label>
+                    ${lex ? `<div class="h-htr-fixbar" data-htr-fixbar></div>` : ''}${stats.low && ext.txActe ? ext.txActe.lowNoticeHtml(stats) : ''}<ol class="h-htr-rev">${lines.map((l, i) => { const src = crop(l.bbox); return `<li data-i="${i}"><label class="checkbox-line h-htr-keep" title="${esc(i18n('Garder cette ligne'))}"><input type="checkbox" data-htr-keep checked></label>
                         <div class="h-htr-rev-body">${src ? `<img class="h-htr-crop" src="${src}" alt="${esc(i18n('Ligne {x} sur l’image', {x: i + 1}))}">` : `<span class="h-htr-crop is-none">${i18n('pas d’image pour cette ligne')}</span>`}
                         <div class="h-htr-line" contenteditable="plaintext-only" spellcheck="false" role="textbox" aria-label="Ligne ${i + 1}" data-htr-line>${lineHtml(l)}</div></div>
                         <small class="h-htr-conf ${l.conf != null && l.conf < UNSURE ? 'is-low' : ''}">${l.conf != null ? `${pct(l.conf)} %` : ''}</small></li>`; }).join('')}</ol>
@@ -608,6 +707,36 @@
                     <p class="ui-hint">${i18n('Corrige directement dans les lignes (clique un mot surligné pour le remplacer) · Entrée : ligne suivante · décoche une ligne pour la laisser de côté. Lu par « {x} », sur cet ordinateur. Ensuite, « 🧭 Repérer » cherche tout seul les noms, dates et lieux.', {x: esc(name(modelFile))})}</p>`,
                 onOpen: d => {
                     d.querySelector('.h-htr-line')?.focus();
+                    // 🪄 corrections proposées : menu d'un mot, ✓ Accepter les sûres, ↶ Annuler, réglages
+                    const fixBar = d.querySelector('[data-htr-fixbar]'), undo = [];
+                    const lineEls = () => [...d.querySelectorAll('[data-htr-line]')];
+                    const snap = () => lineEls().map(x => x.innerHTML), restore = sn => { lineEls().forEach((x, i) => { x.innerHTML = sn[i]; }); paintFixBar(); };
+                    const unwrap = sp => { sp.replaceWith(document.createTextNode(sp.textContent)); };
+                    const done = (sn, label) => { undo.push(sn); paintFixBar(); A().undoToast?.(label, {undo: () => { const k = undo.lastIndexOf(sn); if (k >= 0) undo.splice(k, 1); restore(sn); }}); };
+                    const applyFix = (spans, values, label) => { const sn = snap(); spans.forEach((sp, i) => { sp.closest('.h-htr-unsure')?.classList.add('is-fixed'); sp.replaceWith(document.createTextNode(values[i])); }); done(sn, label); };
+                    function paintFixBar() {
+                        if (!fixBar) return;
+                        const all = d.querySelectorAll('.h-htr-fix'), sure = d.querySelectorAll('.h-htr-fix.is-sure');
+                        fixBar.innerHTML = `<span class="h-htr-fixn">🪄 ${fixOn() ? (all.length ? esc(A().plural ? A().plural(all.length, 'correction proposée', 'corrections proposées') : all.length) + ` <small class="muted">${esc(i18n('(soulignées en violet : clique un mot)'))}</small>` : esc(i18n('Aucune correction à proposer'))) : esc(i18n('Corrections proposées : non'))}</span>
+                            ${sure.length ? `<button type="button" class="button small" data-fix-accept>✓ ${esc(sure.length > 1 ? i18n('Accepter les {n} propositions sûres', {n: sure.length}) : i18n('Accepter la proposition sûre'))}</button>` : ''}
+                            <button type="button" class="button small secondary" data-fix-undo ${undo.length ? '' : 'disabled'} title="${esc(i18n('Annuler'))}">↶ ${esc(i18n('Annuler'))}</button><span class="spacer"></span>${fixSettingsHtml()}`;
+                        bindFixSettings(fixBar, rerender);
+                    }
+                    async function rerender() { try { lex = FX ? await fixLexicon(fxLang, fxPlace) : null; } catch (_) {} d.querySelectorAll('.h-htr-rev > li').forEach(li => { const el = li.querySelector('[data-htr-line]'); el.innerHTML = lineHtml(lines[Number(li.dataset.i)], el.textContent.replace(/\s+/g, ' ').trim()); }); paintFixBar(); }
+                    paintFixBar();
+                    fixBar?.addEventListener('click', e => {
+                        if (e.target.closest('[data-fix-accept]')) { const sp = [...d.querySelectorAll('.h-htr-fix.is-sure')]; if (!sp.length) return; applyFix(sp, sp.map(x => fixMap.get(x.dataset.fx)?.props[0].value || x.textContent), A().plural ? A().plural(sp.length, 'proposition sûre acceptée', 'propositions sûres acceptées') : String(sp.length)); return; }
+                        if (e.target.closest('[data-fix-undo]')) { const sn = undo.pop(); if (sn) restore(sn); }
+                    });
+                    d.addEventListener('click', e => {
+                        const sp = e.target.closest('.h-htr-fix'); if (!sp || !sp.closest('[data-htr-line]')) return;
+                        const fx = fixMap.get(sp.dataset.fx); if (!fx) return;
+                        e.preventDefault(); e.stopPropagation();
+                        fixMenu(sp, fx, {apply: v => applyFix([sp], [v], `« ${fx.word} » → « ${v} »`),
+                            keep: () => { const sn = snap(); unwrap(sp); done(sn, i18n('« {w} » gardé tel quel', {w: fx.word})); },
+                            addLex: () => { const sn = snap(); addToLexicon(fx.word, undone => { if (undone) { restore(sn); return; } d.querySelectorAll('.h-htr-fix').forEach(x => { if (FX.norm(fixMap.get(x.dataset.fx)?.word) === FX.norm(fx.word)) unwrap(x); }); paintFixBar(); }); }});
+                    }, true);
+                    d.addEventListener('input', e => { const s2 = getSelection(), sp = s2.anchorNode?.parentElement?.closest?.('.h-htr-fix'); if (sp && e.target.closest('[data-htr-line]')) { unwrap(sp); paintFixBar(); } });
                     d.addEventListener('click', e => { const mk = e.target.closest('.h-htr-unsure'); if (mk && mk.closest('[data-htr-line]')) { const r = document.createRange(); r.selectNodeContents(mk); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } });
                     d.addEventListener('input', e => { const ln = e.target.closest('[data-htr-line]'); if (!ln) return; const s = getSelection(), mk = s.anchorNode?.parentElement?.closest?.('.h-htr-unsure'); if (mk) mk.classList.add('is-fixed'); });
                     d.addEventListener('paste', e => { const ln = e.target.closest('[data-htr-line]'); if (!ln) return; e.preventDefault(); document.execCommand('insertText', false, (e.clipboardData?.getData('text/plain') || '').replace(/\s+/g, ' ')); });
@@ -651,6 +780,7 @@
                     area.value = text; before = text; t.body = text; snap(); t.data.zones.push(...made); touch(); drawZones();
                     status(i18n('{x} (à relire)', {x: A().plural ? A().plural(kept.length, 'ligne lue', 'lignes lues') : kept.length + ' lignes lues'}));
                     runDetect().then(() => toast(i18n('Texte mis dans la transcription, zones posées ligne par ligne ; noms, dates et lieux repérés à droite.')));
+                    if (fixOn()) runFix({quiet: true});
                 }});
             return dlgR;
         }
@@ -767,6 +897,7 @@
             if (k === 'htrstop') return htrStop();
             if (k === 'htrzone') return runHtr({zone: htrArea()});
             if (k === 'detect') return runDetect();
+            if (k === 'fix') return runFix();
             if (k === 'deep') return openDeep({});
             if (k === 'found') return openFound();
             if (k === 'aide') { const sel = area.value.slice(area.selectionStart, area.selectionEnd).trim().slice(0, 40); return ext.readingAid ? ext.readingAid.open({q: /\n/.test(sel) ? '' : sel, lang: aideLang($('[data-tx-lang]').value)}) : toast(i18n('L’aide à la lecture n’est pas chargée.'), 'error'); } // heritage-lecture-autrefois.js : ouverte sur la langue du texte

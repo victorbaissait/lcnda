@@ -8,6 +8,7 @@ require_once __DIR__ . '/lib/echanges.php'; // ⤓ exports en plus : Pour Genean
 require_once __DIR__ . '/lib/import_autres.php'; // ⤒ RootsMagic (.rmtree, .rmgc) lu directement ; Family Tree Maker (.ftm) refusé avec une phrase claire
 require_once __DIR__ . '/lib/imports.php'; // ⤒ Gramps (.gramps, .gpkg), aperçu avant import, « ↶ Annuler » d'un import, fichiers ADN bruts refusés
 require_once __DIR__ . '/lib/wikidata.php'; // 🌐 identifiant Wikidata d'une fiche, « Compléter depuis Wikidata » à la demande (+ ↶ Annuler)
+require_once __DIR__ . '/lib/htr_correction.php'; // 🪄 corrections proposées après la lecture HTR : le lexique tiré de la base (sans vivants ni fiches confidentielles)
 require_once __DIR__ . '/lib/transcription_actes.php'; // 📜 Transcription d'actes : 🔍 lecture approfondie (Ollama, sur cet ordinateur), « Ce que l'app a trouvé » → la généalogie (+ ↶ Annuler)
 require_once __DIR__ . '/lib/imports_plus.php'; // ⤒ relevés Nimègue / cercles, tableau de personnes, références RIS / BibTeX ↔ sources, lieux KML / GeoJSON
 require __DIR__ . '/lib/backup.php';   // sauvegarde complète (base + médias), ouverture d'une base .db
@@ -533,6 +534,7 @@ try {
         'village' => json_response(village_detail($pdo, safe_text($_GET['key'] ?? ''))),
         'village_wiki_population' => json_response(village_wiki_population($pdo, safe_text($_GET['key'] ?? ''), safe_text($_GET['title'] ?? ''))),
         'htr_setup_status' => json_response(htr_setup_status()),
+        'htr_lexicon' => json_response(htr_lexicon_data($pdo)), // 🪄 lib/htr_correction.php
         'my_lists' => json_response(['lists' => my_lists($pdo), 'event_types' => $pdo->query('SELECT id, label, gedcom_tag FROM event_types ORDER BY label COLLATE NOCASE')->fetchAll(), 'labels' => $pdo->query('SELECT id, name, color FROM labels ORDER BY name COLLATE NOCASE')->fetchAll(), 'columns' => my_list_columns(), 'sources' => my_list_source_labels()]),
         'my_list_rows' => json_response(my_list_rows($pdo, safe_int($_GET['id'] ?? 0))),
         'atelier_projects' => json_response(atelier_projects($pdo)),

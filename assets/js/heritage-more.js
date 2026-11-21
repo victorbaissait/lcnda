@@ -2566,6 +2566,11 @@
                 <p class="ui-hint">${i18n('Ensuite, dans l’atelier de transcription : « 🔍 Essayer aussi la lecture approfondie » montre les deux lectures côte à côte, et tu gardes la meilleure.')}</p>
                 <div class="page-actions"><button type="button" class="button secondary" data-htr-deep>🔍 ${i18n('Installer ou vérifier la lecture approfondie…')}</button></div>
             </section>
+            <section class="maintenance-panel h-htr-step h-htr-fixset" id="htr-fix"><h3>🪄 ${i18n('Corrections proposées après la lecture')}</h3>
+                <p class="ui-hint">${i18n('Après « ✨ Lire l’acte », les mots qui ressemblent à un mot connu (« décembe » → « décembre ») sont soulignés en violet : un clic, et tu choisis. Rien n’est changé sans toi. Le lexique : les mots des actes, ceux de « 📜 Aide à la lecture », et les noms, prénoms, lieux et métiers de ta base (sans les vivants ni les fiches confidentielles).')}</p>
+                <div class="h-htr-fixset-row" data-htr-fixset>${ext.htrFix ? ext.htrFix.fixSettingsHtml() : ''}</div>
+                <p data-htr-fixlex></p>
+            </section>
             <section class="maintenance-panel h-htr-step"><h3>Place et désinstallation</h3>
                 <p>${s.size_bytes ? i18n('Le moteur et les modèles prennent <b>{size}</b>, rangés dans le dossier des données de LCNDA ({dir}), pas dans l’application : rien n’est perdu à la mise à jour de LCNDA.', {size: sizeText(s.size_bytes), dir: `<code>${esc(s.dir)}</code>`}) : i18n('Rien d’installé pour l’instant. Tout sera rangé dans le dossier des données de LCNDA ({dir}), pas dans l’application : rien n’est perdu à la mise à jour de LCNDA.', {dir: `<code>${esc(s.dir)}</code>`})}</p>
                 <div class="page-actions"><button type="button" class="button secondary danger" data-htr-uninstall ${running || !s.size_bytes ? 'disabled' : ''}>🗑 Désinstaller…</button></div>
@@ -2579,6 +2584,16 @@
             catch (error) { toast(error.message, 'error'); }
         };
         ws.querySelectorAll('[data-htr-install]').forEach(b => b.addEventListener('click', () => start(b.dataset.htrInstall)));
+        { // 🪄 les réglages des corrections proposées et le lexique personnel (heritage-transcribe.js : ext.htrFix)
+            const F = ext.htrFix, box = ws.querySelector('[data-htr-fixset]'), lx = ws.querySelector('[data-htr-fixlex]');
+            const paintLex = () => { if (!lx || !F) return; const n = F.personalLex().length;
+                lx.innerHTML = n ? `${esc(i18n('Ton lexique personnel : {x}.', {x: A().plural ? A().plural(n, 'mot') : String(n)}))} <button type="button" class="link-button" data-htr-fixlex-clear>${esc(i18n('Vider le lexique personnel'))}</button>` : `<small class="muted">${esc(i18n('Ton lexique personnel est vide : « Ajouter au lexique » dans le menu d’un mot souligné.'))}</small>`; };
+            if (F && box) F.bindFixSettings(box);
+            paintLex();
+            lx?.addEventListener('click', e => { if (!e.target.closest('[data-htr-fixlex-clear]')) return; const before = localStorage.getItem(F.KEYS.FIX_LEX_KEY) || '[]';
+                try { localStorage.setItem(F.KEYS.FIX_LEX_KEY, '[]'); } catch (_) {} paintLex();
+                A().undoToast?.(i18n('Lexique personnel vidé'), {undo: () => { try { localStorage.setItem(F.KEYS.FIX_LEX_KEY, before); } catch (_) {} paintLex(); }}); });
+        }
         ws.querySelector('[data-htr-deep]')?.addEventListener('click', () => { if (ext.txActe?.openDeep) ext.txActe.openDeep({setupOnly: true}); else toast(i18n('La lecture approfondie n’est pas encore chargée : réessaie dans un instant.'), 'error'); });
         ws.querySelector('[data-htr-retry]')?.addEventListener('click', () => start(ins.phase === 'check' ? 'check' : ins.phase === 'model' && s.kraken ? 'models' : ''));
         ws.querySelectorAll('[name=htr-py]').forEach(r => r.addEventListener('change', () => { try { localStorage.setItem('genealogie-htr-python', r.value); } catch (_) {} }));
