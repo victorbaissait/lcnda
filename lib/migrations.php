@@ -23,7 +23,7 @@ declare(strict_types=1);
  * autre fichier appelée ici doit faire « $own = !$pdo->inTransaction() » avant d'ouvrir la sienne.
  */
 
-const SCHEMA_VERSION = 102;
+const SCHEMA_VERSION = 103;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -131,6 +131,7 @@ function migration_steps(): array
         100 => 'schema_v100',
         101 => 'schema_v101',
         102 => 'schema_v102',
+        103 => 'schema_v103',
     ];
 }
 
@@ -343,6 +344,7 @@ function event_type_catalog(): array
         ['person', 'incineration', 'Incinération', 'CREM', 'diamond', '#0066cc'],
         ['person', 'obseques', 'Obsèques', 'FUNE', 'diamond', '#0066cc'],
         ['person', 'profession', 'Profession', 'OCCU', 'tool', '#0066cc'],
+        ['person', 'acte-notoriete', 'Acte de notoriété', 'EVEN', 'diamond', '#0066cc'],
         ['person', 'lieu-de-residence', 'Lieu de résidence', 'RESI', 'house', '#cc4700'],
         ['person', 'domicile', 'Domicile', '', 'house', '#cc8100'],
         ['person', 'recensement', 'Recensement', 'CENS', 'diamond', '#0066cc'],
@@ -2795,4 +2797,17 @@ function schema_v102(PDO $pdo): void
 {
     if (!function_exists('act_doc_text_merge_all')) { require_once __DIR__ . '/transcriptions.php'; }
     act_doc_text_merge_all($pdo);
+}
+
+/**
+ * Structure n°103 : le type d'événement « Acte de notoriété » (personne) — l'acte dressé devant un notaire ou un juge, par témoins,
+ * qui remplace un acte de naissance introuvable ou établit la liste des héritiers. Ajouté seulement s'il n'existe pas (même libellé
+ * ou même slug) : rien n'est modifié ; rejouable.
+ */
+function schema_v103(PDO $pdo): void
+{
+    $has = $pdo->prepare("SELECT id FROM event_types WHERE scope='person' AND (slug='acte-notoriete' OR label='Acte de notoriété' COLLATE NOCASE) LIMIT 1");
+    $has->execute();
+    if ($has->fetchColumn()) { return; }
+    $pdo->prepare("INSERT INTO event_types(scope,slug,label,gedcom_tag,icon,color,is_custom,is_active,is_artistic,custom_fields) VALUES('person','acte-notoriete','Acte de notoriété','EVEN','diamond','#0066cc',0,1,0,'')")->execute();
 }
