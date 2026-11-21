@@ -561,6 +561,8 @@ Filet de sécurité : à l’ouverture d’une fenêtre (`showModal`) dont le ti
 
 ## K16 — Interrupteur ou case à cocher (app-saisies.js, saisies.css)
 
+Réglage d’affichage (Réglages → Notifications et boutons → « Interrupteurs ») : `localStorage['genealogie-toggles'] = 'check'` pose `:root[data-toggles="check"]` et ui.css dessine chaque `.ui-toggle` en case à cocher. Le code et la règle ne changent pas : on écrit toujours un interrupteur pour un réglage immédiat.
+
 Une règle simple :
 
 | Quoi | Composant |

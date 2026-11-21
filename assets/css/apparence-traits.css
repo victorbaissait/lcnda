@@ -2770,6 +2770,8 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .ui-bubble-faq, :root .ui-bubble-faq:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid #e6dca8}
 :root.lc-frame .icon-button, :root .icon-button:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .modal-close, :root .modal-close:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--ink, #111)}
 :root.lc-frame .icon-button.tool, :root .icon-button.tool:is([data-lc-lines], [data-lc-lines] *) {border-width:calc(1.5px * var(--lc-frame-k))}
+:root[data-toggles="check"].lc-frame .ui-toggle > i, :root[data-toggles="check"] .ui-toggle > i:is([data-lc-lines], [data-lc-lines] *) {border:2px solid currentColor}
+:root[data-toggles="check"].lc-frame .ui-toggle > input:checked + i, :root[data-toggles="check"] .ui-toggle > input:checked + i:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--ui-blue, #0066cc)}
 :root.lc-frame .ui-topbar, :root .ui-topbar:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--ui-ink)}
 :root.lc-frame .ui-topbar-name.ui-topbar-name, :root .ui-topbar-name.ui-topbar-name:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid transparent}
 :root.lc-frame .ui-topbar-name:hover, :root .ui-topbar-name:hover:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ui-topbar-name:focus, :root .ui-topbar-name:focus:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--ui-ink)}
