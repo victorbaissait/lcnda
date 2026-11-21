@@ -65,3 +65,36 @@
 :root[data-theme="dark"] .h-txa-seg button.is-on{background:#1473e6;color:#fff}
 :root[data-theme="dark"] .h-txa-live{background:#26262b;border-color:#45454d}
 :root[data-theme="dark"] .h-txa-cmp td.is-new{background:#183a24}:root[data-theme="dark"] .h-txa-cmp td.is-diff{background:#3d3410}
+/* 🧭 « Ce que l'app a trouvé », plus riche (assets/js/heritage-transcribe-trouve.js) : cartes par personne et rubriques */
+.h-tf{margin:4px 0 10px}
+.h-tf-top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.h-tf-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;margin:12px 0 6px}
+.h-tf-card{border:1px solid #dfe2e8;border-radius:10px;padding:8px 10px;margin:6px 0;background:#fff}
+.h-tf-card.is-off,.h-tf-item.is-off{opacity:.5}
+.h-tf-card-h{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:8px;align-items:center}
+.h-tf-card-h .h-txa-av{width:28px;height:28px;font-size:11px}
+.h-tf-name{min-width:0;overflow-wrap:anywhere}
+.h-tf-fields{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:2px}
+.h-tf-fields li{display:flex;align-items:center;gap:4px;flex-wrap:wrap;font-size:13px}
+.h-tf-fields .checkbox-line{flex:1 1 auto;min-width:0;margin:0}
+.h-tf-fields .k{color:#666;min-width:7.5em;display:inline-block}
+.h-tf-fields .icon-button,.h-tf-item .icon-button{min-width:26px;min-height:26px;padding:0 4px}
+.h-tf-match{margin-top:6px;font-size:13px;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.h-tf-acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.h-tf-list{display:grid;gap:4px}
+.h-tf-item{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;font-size:13px;border:1px solid #e6e8ee;border-radius:8px;padding:3px 6px;background:#fff}
+.h-tf-main{border:0;background:none;padding:0;font:inherit;color:inherit;cursor:pointer;text-align:left}
+.h-tf-base{font-size:12.5px;color:#2f5f9e}
+.h-tf-rej{margin:6px 0;font-size:13px}
+.h-tf-rej ul{margin:4px 0 0;padding-left:18px}
+.h-tf-ai{margin:6px 0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.h-txa-badge.is-ai{background:#efe8ff;color:#5b2fb8;border-color:#d8c9fb}
+.h-tf-as{border:1px solid #e1e3e8;border-radius:8px;padding:6px 10px;margin:8px 0;display:flex;flex-wrap:wrap;gap:6px 14px}
+.h-tf-as legend{font-weight:600;padding:0 4px}
+.h-tf-sugg{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin:6px 0}
+.h-tf-prev{border:1px dashed #c9ced8;border-radius:8px;padding:6px 10px;font-size:13.5px}
+.h-tf-prev p{margin:2px 0}
+[data-tf-r][hidden]{display:none}
+:root[data-theme="dark"] .h-tf-card,:root[data-theme="dark"] .h-tf-item{background:#1f1f23;border-color:#45454d;color:#eee}
+:root[data-theme="dark"] .h-tf-fields .k{color:#aaa}
+:root[data-theme="dark"] .h-tf-base{color:#8fb8f0}
