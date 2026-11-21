@@ -341,7 +341,7 @@ function tresors_dispatch(PDO $pdo, string $action, bool $isWrite, array $payloa
             $kioskOn = function_exists('kiosk_state') && !empty(kiosk_state()['on']);
             json_response_encoded(calc_cached($pdo, 'tresor_tree' . ($kioskOn ? '_kiosk' : ''), ['persons', 'media', 'places', 'families', 'family_children', 'events', 'event_types', 'so_imports', 'items'],
                 [$kioskOn, date('Y'), $_GET['death_cutoff_year'] ?? '', function_exists('so2_respect_ids'), function_exists('so3_respect_ids'), function_exists('so7_respect_ids'), function_exists('person_select')],
-                static fn() => json_encode(tresor_tree($pdo), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR)));
+                static function () use ($pdo): string { if (function_exists('memory_for_persons')) { memory_for_persons($pdo, 5.5, 1024); } return json_encode(tresor_tree($pdo), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR); }));
         }
         if (!$isWrite && $action === 'tresor_media') { // les médias joints (lettres, souvenirs) : nom de fichier et sorte, pour les lire sur place
             $ids = array_slice(array_values(array_filter(array_map('intval', explode(',', (string) ($_GET['ids'] ?? ''))))), 0, 200); if (!$ids) { json_response(['media' => []]); }
