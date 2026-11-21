@@ -1,0 +1,3 @@
+fr ¦ is
+# 🛡 Sûreté : base tenue par un autre programme au lancement (lib/bootstrap.php DB_BUSY_MESSAGE, electron/main.js)
+La base est occupée par un autre programme : une autre copie de l’application, un logiciel qui a ouvert le fichier, ou une synchronisation (OneDrive, Dropbox, iCloud…) en train de le recopier. Ferme cet autre programme ou attends la fin de la synchronisation, puis relance l’application. Rien n’a été modifié. ¦ Annað forrit er að nota gagnagrunninn: annað eintak af appinu, forrit sem hefur opnað skrána eða samstilling (OneDrive, Dropbox, iCloud…) sem er að afrita hana núna. Lokaðu hinu forritinu eða bíddu þar til samstillingunni lýkur og ræstu svo appið aftur. Engu var breytt.

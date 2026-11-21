@@ -473,13 +473,18 @@ for (const sig of ['SIGINT', 'SIGTERM', 'SIGHUP']) process.on(sig, () => process
         const holder = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-r', "$p=new PDO('sqlite:'.getenv('DB'));$p->exec('PRAGMA locking_mode=EXCLUSIVE');$p->exec('BEGIN EXCLUSIVE');$p->exec('CREATE TABLE IF NOT EXISTS essai_verrou(x)');echo 'tenue';sleep(120);"], { env: { ...process.env, DB: db }, stdio: ['ignore', 'pipe', 'ignore'] });
         await new Promise((res) => holder.stdout.once('data', res));
         try {
-            // chaque lecture attend la base jusqu'à 30 s (busy_timeout, lib/bootstrap.php) : le message arrive après 1 à 2 minutes
+            // une seule lecture d'essai, 5 s au plus (lib/bootstrap.php, db_open_wait_ms) : avant, chaque lecture de l'ouverture
+            // attendait 30 s (busy_timeout) et le message arrivait après 96 s
             const r = finish(await launch({ name: 'base tenue (verrou)', userData: u, expectFatal: true, timeout: 200000 }));
             const status = await (async () => { try { return await r.ws?.eval("document.querySelector('p')?.textContent"); } catch (_) { return ''; } })();
             if (status) console.log('   écran de démarrage : ' + status);
             assert.ok(r.fatal, 'aucun message : ' + r.logs.slice(-1500));
             assert.equal(r.fatal.title, 'La base de données n’a pas pu être ouverte');
             assert.match(r.fatal.message, /occupée par un autre programme/);
+            assert.match(r.fatal.message, /Ferme cet autre programme ou attends la fin de la synchronisation/, 'le message dit quoi faire');
+            // PHP démarré, puis 5 s d'attente de la base : bien moins que les 96 s d'avant (marge pour une machine lente)
+            assert.ok(r.ms.fatal < 40000, `message après ${Math.round(r.ms.fatal / 1000)} s (attendu : quelques secondes)`);
+            console.log(`   message « base occupée » après ${(r.ms.fatal / 1000).toFixed(1)} s depuis le lancement`);
             r.kill();
         } finally { holder.kill('SIGKILL'); }
     });

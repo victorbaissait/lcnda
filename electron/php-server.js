@@ -663,17 +663,20 @@ class PhpServer extends EventEmitter {
   /**
    * Ouvre la base une première fois, avant d'afficher l'interface : si sa structure doit être mise à jour
    * (lib/migrations.php : copie de sécurité puis migrations), cela se fait ici, une seule fois.
-   * @returns {Promise<{ok: boolean, noDatabase?: boolean, version?: number, error?: string}>}
+   * Base tenue par un autre programme : réponse en 5 s environ (lib/bootstrap.php, db_open_wait_ms), busy: true, et le
+   * message « que faire » dans la langue choisie (lang : le code de l'app, cookie lcnda_lang).
+   * @returns {Promise<{ok: boolean, noDatabase?: boolean, version?: number, error?: string, busy?: boolean}>}
    */
-  async prepareDatabase() {
-    const r = await this.request('/api.php?action=schema_status', { timeout: 0 });
+  async prepareDatabase({ lang = '' } = {}) {
+    const headers = /^[a-z]{2}$/.test(String(lang)) ? { 'x-lcnda-lang': String(lang) } : {};
+    const r = await this.request('/api.php?action=schema_status', { timeout: 0, headers });
     let body = {};
     try { body = JSON.parse(r.body.toString()); } catch { /* ignore */ }
     if (r.status === 200) return { ok: true, version: body.version };
     const error = String(body.error || ('réponse ' + r.status));
     // Première utilisation : pas encore de base, l'interface affiche l'écran d'installation.
     if (/pas encore été importée/.test(error)) return { ok: true, noDatabase: true };
-    return { ok: false, error, detail: typeof body.detail === 'string' ? body.detail.slice(0, 500) : '' };
+    return { ok: false, error, detail: typeof body.detail === 'string' ? body.detail.slice(0, 500) : '', ...(body.busy === true ? { busy: true } : {}) };
   }
 
   async stop() {

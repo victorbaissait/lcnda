@@ -1,0 +1,3 @@
+fr ¦ ro
+# 🛡 Sûreté : base tenue par un autre programme au lancement (lib/bootstrap.php DB_BUSY_MESSAGE, electron/main.js)
+La base est occupée par un autre programme : une autre copie de l’application, un logiciel qui a ouvert le fichier, ou une synchronisation (OneDrive, Dropbox, iCloud…) en train de le recopier. Ferme cet autre programme ou attends la fin de la synchronisation, puis relance l’application. Rien n’a été modifié. ¦ Baza de date este ocupată de alt program: altă copie a aplicației, un program care a deschis fișierul sau o sincronizare (OneDrive, Dropbox, iCloud…) care îl copiază chiar acum. Închide acel program sau așteaptă să se termine sincronizarea, apoi repornește aplicația. Nu s-a modificat nimic.

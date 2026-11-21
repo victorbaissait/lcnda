@@ -867,13 +867,21 @@ async function boot() {
   const verySlow = setTimeout(() => setLoadingStatus('La base de données met du temps à s’ouvrir : une mise à jour est en cours, ou elle est occupée par un autre programme (synchronisation OneDrive, Dropbox, iCloud…). Ne ferme pas l’application.'), 25000);
   let prepared;
   try {
-    preparing = server.prepareDatabase();
+    // la langue choisie dans l'app (cookie lcnda_lang, assets/js/app-i18n.js) : le message « base occupée » arrive traduit
+    let lang = '';
+    try { lang = ((await session.defaultSession.cookies.get({ name: 'lcnda_lang' }))[0] || {}).value || ''; } catch { /* pas de cookie : français */ }
+    preparing = server.prepareDatabase({ lang });
     prepared = await preparing;
   } catch (err) {
     prepared = { ok: false, error: err.message };
   } finally {
     clearTimeout(slow); clearTimeout(verySlow);
     preparing = null;
+  }
+  if (!prepared.ok && prepared.busy) {
+    // base tenue par un autre programme (lib/bootstrap.php, db()) : message traduit par PHP, en 5 s environ
+    return fatal('La base de données n’a pas pu être ouverte', prepared.error + (prepared.detail ? `\n\n(${prepared.detail})` : ''),
+      { action: { label: 'Ouvrir le dossier des données', run: () => shell.openPath(p.dataDir) } });
   }
   if (!prepared.ok) {
     return fatal('La base de données n’a pas pu être ouverte', explainDbError(prepared.error, prepared.detail)

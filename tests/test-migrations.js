@@ -9,7 +9,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
-const { spawnSync } = require('node:child_process');
+const { spawn, spawnSync } = require('node:child_process');
 const { PhpServer, findPhp, checkPhp, devBundledPhp, phpRuntimeArgs } = require('../electron/php-server');
 
 const appRoot = path.resolve(__dirname, '..');
@@ -218,6 +218,81 @@ const backups = (dir) => (fs.existsSync(path.join(dir, 'backups')) ? fs.readdirS
       const prep = await s.prepareDatabase();
       assert.deepEqual(prep, { ok: true, noDatabase: true });
     });
+  });
+
+  // ── 🛡 Une marche = une transaction (lib/migrations.php) : plantage ou coupure au milieu → base à la structure d'avant ──
+  /** PHP qui ouvre la base comme db() et lance les vraies marches jusqu'au n°50, puis la marche n°51 écrite ici (`body`). */
+  const halfMigration = (body) => "require 'lib/bootstrap.php';"
+    + "$p=new PDO('sqlite:'.DB_PATH,null,null,[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]);$p->exec('PRAGMA foreign_keys = ON');$p->exec('PRAGMA busy_timeout = 30000');$p->query('PRAGMA journal_mode = WAL')->closeCursor();"
+    + '$steps=array_filter(migration_steps(),fn($k)=>$k<=50,ARRAY_FILTER_USE_KEY);'
+    + '$steps[51]=function(PDO $p){' + body + '};';
+  const tables = (dir) => JSON.parse(sql(dir, "SELECT group_concat(name) FROM (SELECT name FROM sqlite_master WHERE type='table' ORDER BY name)")).split(',');
+  const columns = (dir, t) => JSON.parse(sql(dir, `SELECT group_concat(name) FROM pragma_table_info('${t}')`)).split(',');
+
+  await step('une marche qui plante au milieu : base restée à la structure d’avant, sans table à moitié faite, et l’app repart', async () => {
+    const dir = path.join(tmp, 'plantage');
+    freshDatabase(dir, true);
+    const out = php(halfMigration(
+      "$p->exec('CREATE TABLE essai_moitie (id INTEGER PRIMARY KEY, nom TEXT)');"
+      + "$p->exec(\"INSERT INTO essai_moitie(nom) VALUES('Paul Essai'),('Rose Essai')\");"
+      + "$p->exec('ALTER TABLE persons ADD COLUMN essai_col TEXT');"
+      + "$p->exec(\"UPDATE persons SET first_name='Changé'\");"
+      + "throw new RuntimeException('panne simulée au milieu');"
+    ) + 'try{migrate_database($p,DB_PATH,$steps);echo "PAS D’ERREUR";}catch(Throwable $e){echo $e->getMessage();}', dir);
+    assert.match(out, /structure n°51\) a échoué : panne simulée au milieu/);
+    assert.match(out, /restée à la structure n°50/);
+    assert.equal(JSON.parse(sql(dir, 'PRAGMA user_version')), 50, 'le numéro de structure doit rester celui d’avant');
+    assert.ok(!tables(dir).includes('essai_moitie'), 'table à moitié faite restée dans la base');
+    assert.ok(!columns(dir, 'persons').includes('essai_col'), 'colonne à moitié ajoutée restée dans la base');
+    assert.equal(JSON.parse(sql(dir, 'SELECT first_name FROM persons')), 'Jeanne', 'une modification de la marche ratée est restée');
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM app_migrations WHERE name='schema_v51'")), 0);
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM app_migrations WHERE name='schema_v50'")), 1, 'les marches réussies avant doivent être gardées');
+    assert.equal(JSON.parse(sql(dir, 'PRAGMA integrity_check')), 'ok');
+    assert.equal(backups(dir).length, 1, 'la copie de sécurité d’avant la mise à jour doit être faite');
+    // l'app repart : les vraies marches 51 → dernière passent au lancement suivant
+    await withServer(dir, 1, async (s) => { const r = await status(s); assert.equal(r.code, 200, JSON.stringify(r.body)); assert.equal(r.body.version, expected); });
+    assert.equal(JSON.parse(sql(dir, 'SELECT first_name FROM persons')), 'Jeanne');
+  });
+
+  await step('ordinateur éteint en pleine marche (PHP tué net) : base restée à la structure d’avant, et l’app repart', async () => {
+    const dir = path.join(tmp, 'coupure');
+    freshDatabase(dir, true);
+    const marker = path.join(dir, 'au-milieu');
+    const child = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-r', halfMigration(
+      "$p->exec('CREATE TABLE essai_coupure (id INTEGER PRIMARY KEY, nom TEXT)');"
+      + "$ins=$p->prepare('INSERT INTO essai_coupure(nom) VALUES(?)');for($i=0;$i<20000;$i++){$ins->execute(['Fiche fictive '.$i]);}"
+      + "$p->exec('ALTER TABLE persons ADD COLUMN essai_coupure_col TEXT');"
+      + `file_put_contents(${JSON.stringify(marker)},'1');sleep(60);`
+    ) + 'migrate_database($p,DB_PATH,$steps);'], {
+      cwd: appRoot, stdio: 'ignore', env: { ...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media') },
+    });
+    const exited = new Promise((res) => child.once('exit', res));
+    for (let i = 0; i < 1200 && !fs.existsSync(marker); i++) await new Promise((r) => setTimeout(r, 100));
+    assert.ok(fs.existsSync(marker), 'la marche n’a pas atteint son milieu');
+    child.kill('SIGKILL');
+    await exited;
+    assert.equal(JSON.parse(sql(dir, 'PRAGMA user_version')), 50);
+    assert.ok(!tables(dir).includes('essai_coupure'), 'table à moitié faite restée dans la base');
+    assert.ok(!columns(dir, 'persons').includes('essai_coupure_col'));
+    assert.equal(JSON.parse(sql(dir, 'PRAGMA integrity_check')), 'ok');
+    await withServer(dir, 1, async (s) => { const r = await status(s); assert.equal(r.code, 200, JSON.stringify(r.body)); assert.equal(r.body.version, expected); });
+    assert.equal(JSON.parse(sql(dir, 'SELECT count(*) FROM persons')), 1, 'la personne a disparu');
+  });
+
+  await step('dans une marche, un morceau annulé seul (point de reprise) ne casse ni la marche ni sa transaction', async () => {
+    const dir = path.join(tmp, 'morceau');
+    freshDatabase(dir, true);
+    const out = php(halfMigration(
+      "$tx=migration_tx_begin($p);try{$p->exec('CREATE TABLE essai_annule (x)');throw new RuntimeException('morceau raté');}catch(Throwable $_){migration_tx_rollback($p,$tx);}"
+      + 'migration_tx_rollback($p,$tx);' // déjà annulé : sans effet
+      + "$tx=migration_tx_begin($p);$p->exec('CREATE TABLE essai_garde (x)');migration_tx_commit($p,$tx);"
+      + "if(!$p->inTransaction()){throw new RuntimeException('la marche n’est plus dans sa transaction');}"
+      + "try{$p->beginTransaction();}catch(PDOException $e){echo 'imbriquée refusée|';}"
+    ) + 'migrate_database($p,DB_PATH,$steps);echo $p->inTransaction()?"encore ouverte":"fermée";', dir);
+    assert.equal(out, 'imbriquée refusée|fermée');
+    assert.equal(JSON.parse(sql(dir, 'PRAGMA user_version')), 51);
+    assert.ok(!tables(dir).includes('essai_annule'), 'le morceau annulé est resté');
+    assert.ok(tables(dir).includes('essai_garde'), 'le morceau validé a disparu');
   });
 
   fs.rmSync(tmp, { recursive: true, force: true });

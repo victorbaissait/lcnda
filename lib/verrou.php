@@ -138,6 +138,8 @@ function glock_db_row(string $dbPath): ?array
         if (!$r || (string) $r['hash'] === '') { return null; }
         return ['hash' => (string) $r['hash'], 'lock_id' => (string) $r['lock_id'], 'minutes' => glock_minutes_ok((int) $r['minutes'])];
     } catch (Throwable $e) {
+        // base tenue par un autre programme : db() le dira aussitôt, sans attendre une deuxième fois (lib/bootstrap.php)
+        if (function_exists('db_error_is_busy') && db_error_is_busy($e)) { db_busy_seen($dbPath, true); }
         // base illisible (abîmée, pas une base) : on ne sait pas si elle est verrouillée — on le dit au journal PHP
         error_log('LCNDA : verrou illisible dans la base (' . basename($dbPath) . ') : ' . get_class($e));
         return null;

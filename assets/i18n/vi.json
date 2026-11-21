@@ -27479,6 +27479,7 @@
  "La base d’exemple est une famille imaginaire (5 générations, des photos d’époque dessinées) rangée à part dans « Mes généalogies » : ta généalogie n’est jamais touchée.": "Dữ liệu mẫu là một gia đình tưởng tượng (5 thế hệ, ảnh xưa được vẽ lại) được cất riêng trong “Các gia phả của tôi”: gia phả của bạn không bao giờ bị động đến.",
  "La base d’un logarithme ne peut pas valoir 1.": "Cơ số của logarit không thể bằng 1.",
  "La base doit d’abord être mise à jour (structure n° 64).": "Cơ sở dữ liệu cần được cập nhật trước (cấu trúc số 64).",
+ "La base est occupée par un autre programme : une autre copie de l’application, un logiciel qui a ouvert le fichier, ou une synchronisation (OneDrive, Dropbox, iCloud…) en train de le recopier. Ferme cet autre programme ou attends la fin de la synchronisation, puis relance l’application. Rien n’a été modifié.": "Dữ liệu đang bị một chương trình khác chiếm dụng: một bản khác của ứng dụng, một phần mềm đã mở tệp, hoặc một lần đồng bộ (OneDrive, Dropbox, iCloud…) đang sao chép nó. Hãy đóng chương trình đó hoặc chờ đồng bộ xong, rồi mở lại ứng dụng. Chưa có gì bị thay đổi.",
  "La base généalogique doit être importée.": "Cần nhập cơ sở dữ liệu gia phả.",
  "La base locale n'a pas encore été importée.": "Cơ sở dữ liệu cục bộ chưa được nhập.",
  "La base n’a pas pu enregistrer ces réglages : réessaie.": "Cơ sở dữ liệu không thể lưu các cài đặt này: hãy thử lại.",
