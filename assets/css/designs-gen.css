@@ -4578,6 +4578,8 @@
 :root[data-lc-density] .tp-tags{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .tp-tag{padding:1px calc(7px * var(--lc-sp))}
 :root[data-lc-density] .tp-settings{gap:calc(8px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+:root[data-lc-density] .tp-order{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .tp-order .order-row{gap:calc(8px * var(--lc-sp))}
 /* scene.css */
 :root[data-lc-density] .sc-setlist tr.sc-set td{padding-top:calc(8px * var(--lc-sp))}
 :root .sc-tone:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}

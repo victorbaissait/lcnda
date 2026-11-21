@@ -10,7 +10,13 @@
  * Entrées : le ＋ au bout du menu (petit et gris, toujours là ; case « Montrer le ＋ au bout du menu ») et Réglages → Menus,
  * colonne et listes → « Menu » → « ＋ Ajouter un onglet… » au-dessus de « Ordre et noms du menu principal » ; pas de ＋ en
  * mode consultation ni en mode simple. A3 : un raccourci se « Retire » dans la liste de l'ordre du menu (↶ Annuler).
- * Aussi require() dans Node (le tableau et le calcul « conseillé ») : tests/test-onglets-plus.js.
+ * « ⠿ Ordre du menu » (4e bouton du haut) : les onglets du menu, à glisser (⠿, ou Alt + ↑ / ↓ au clavier) ; le même ordre et le même
+ * stockage que Réglages → Menus (genealogie-menu-order, LCNDA_APP.orderedMenuKeys / applyMenuOrder).
+ * « ＋ Une autre liste… » / « ＋ Un autre outil… » : n'importe quelle liste ou outil, choisi dans le menu de choix des raccourcis
+ * (LCNDA_EXT.shortcuts.chooseTargets, recherche mêlée), devient un raccourci au bout du menu (identifiant fixe ct_p…, tiré de la cible).
+ * « Mettre mes onglets à la fin du menu » (genealogie-menu-own-last, coché au départ) : les onglets à soi arrivent au bout, regroupés
+ * dans les listes de la fenêtre ; un ordre réglé à la main ne bouge pas (« ⤓ Regrouper mes onglets à la fin » le fait sur demande).
+ * Essais : tests/test-onglets-plus-ordre.js, tests/test-successoral-outils.js.
  */
 (function (root, factory) {
     const m = factory();
@@ -79,6 +85,10 @@
         const ownTabs = () => (A()?.customTabs ? A().customTabs() : ls.get('genealogie-custom-tabs', []) || []);
         const nav = () => doc.querySelector('.main-nav');
         const hiddenKeys = () => (A()?.menuHiddenKeys ? A().menuHiddenKeys() : ls.get('genealogie-menu-hidden', []) || []);
+        const ownLast = () => (A()?.menuOwnLast ? A().menuOwnLast() : ls.raw('genealogie-menu-own-last') !== '0');
+        /** mes raccourcis qui ne sont pas dans le catalogue (ajoutés par « Une autre liste… », l'Éditeur d'onglets…) : g = 2 (listes) ou 3 (outils) */
+        const isListTarget = t => /^(list|mylist|village):/.test(String(t || ''));
+        const extraOwn = g => ownTabs().filter(t => t.kind === 'screen' && t.target && !CATALOG.some(c => c.target === t.target) && (g === 2) === isListTarget(t.target));
         /** l'onglet est-il dans le menu ? (une partie de l'app montrée, ou un onglet à soi visible vers le même écran) */
         const inMenu = item => item.module ? !!nav()?.querySelector(`.nav-item[data-module="${item.module}"]:not([data-board])`) && !hiddenKeys().includes(item.module)
             : ownTabs().some(t => t.kind === 'screen' && t.target === item.target && !t.hidden);
@@ -87,8 +97,16 @@
         const restore = snap => { Object.entries(snap).forEach(([k, v]) => ls.put(k, v)); A()?.applyMenuOrder?.(); paintPlus(); };
         /** l'ordre actuel du menu (tous les onglets, cachés compris), tel que dessiné */
         const domOrder = () => [...(nav()?.querySelectorAll('.nav-item[data-module]:not([data-board]), .nav-custom-tab[data-board]') || [])].map(b => b.dataset.board || b.dataset.module).filter((k, i, l) => k && l.indexOf(k) === i);
-        /** un onglet ajouté arrive à la fin, avant Réglages */
-        const toEnd = key => { const o = domOrder().filter(k => k !== key); const at = o.indexOf('maintenance'); o.splice(at < 0 ? o.length : at, 0, key); ls.put('genealogie-menu-order', JSON.stringify(o)); A()?.applyMenuOrder?.(); };
+        const menuKeys = () => (A()?.orderedMenuKeys ? A().orderedMenuKeys() : domOrder());
+        /** un onglet ajouté arrive à la fin, avant Réglages ; une partie de l'app, avant mes onglets du bout (« Mettre mes onglets à la fin du menu ») */
+        const toEnd = key => {
+            const own = new Set(ownTabs().map(t => t.id)), o = menuKeys().filter(k => k !== key), m = o.indexOf('maintenance');
+            let at = m < 0 ? o.length : m;
+            if (!own.has(key) && ownLast()) while (at > 0 && own.has(o[at - 1])) at--;
+            o.splice(at, 0, key); ls.put('genealogie-menu-order', JSON.stringify(o)); A()?.applyMenuOrder?.();
+        };
+        /** ⤓ mes onglets regroupés à la fin (avant Réglages s'il est dernier), dans l'ordre où ils sont */
+        const ownGrouped = order => { const own = new Set(ownTabs().map(t => t.id)), mine = order.filter(k => own.has(k)), rest = order.filter(k => !own.has(k)), m = rest.indexOf('maintenance'); rest.splice(m >= 0 && m === rest.length - 1 ? m : rest.length, 0, ...mine); return rest; };
         const label = item => `${item.icon} ${i18n(item.name)}`;
         function setShown(item, on) {
             const snap = snapshot();
@@ -118,6 +136,52 @@
             const msg = on ? i18n('✓ Onglet « {name} » ajouté', {name: label(item)}) : i18n('Onglet « {name} » caché', {name: label(item)});
             if (A()?.undoToast) A().undoToast(msg, {undo: () => { restore(snap); refreshDialog(); }});
         }
+        /** un de mes raccourcis hors catalogue : caché / remontré (rien n'est effacé) */
+        function setOwnShown(id, on) {
+            const snap = snapshot(), list = ownTabs().map(t => ({...t})), t = list.find(x => x.id === id); if (!t) return;
+            t.hidden = !on;
+            if (A()?.saveCustomTabs) A().saveCustomTabs(list); else ls.put('genealogie-custom-tabs', JSON.stringify(list));
+            if (on) toEnd(id);
+            paintPlus();
+            const name = `${t.icon || ''} ${t.name || ''}`.trim();
+            A()?.undoToast?.(on ? i18n('✓ Onglet « {name} » ajouté', {name}) : i18n('Onglet « {name} » caché', {name}), {undo: () => { restore(snap); refreshDialog(); }});
+        }
+        /** ＋ Une autre liste… / ＋ Un autre outil… : le menu de choix des raccourcis (recherche mêlée), réduit aux listes ou aux outils */
+        const tabIdFor = target => { let h = 5381; for (const ch of String(target)) h = ((h * 33) ^ ch.codePointAt(0)) >>> 0; return 'ct_p' + h.toString(36) + String(target).length.toString(36); };
+        const splitIcon = s => { const m = String(s || '').match(/^(\p{Extended_Pictographic}[\uFE0F\u200D\p{Extended_Pictographic}]*)\s+(.+)$/u); return m ? [m[1], m[2]] : ['', String(s || '')]; };
+        async function addMore(kind) {
+            const sc = ext.shortcuts; if (!sc?.chooseTargets) { A()?.toast?.(i18n('La fenêtre n’est pas encore prête. Réessaie dans un instant.'), 'error'); return; }
+            const lists = kind === 'list';
+            const got = await sc.chooseTargets({eyebrow: i18n('MENU'), title: lists ? i18n('＋ Une liste dans le menu') : i18n('＋ Un outil dans le menu'), submitLabel: i18n('Ajouter au menu'),
+                intro: lists ? i18n('Choisis une ou plusieurs listes : chacune devient un onglet au bout du menu.') : i18n('Choisis un ou plusieurs outils (un graphique, une page des Réglages, la retouche des photos…) : chacun devient un onglet au bout du menu.'),
+                only: r => lists ? /^list:/.test(r.target) : /^(graph|stat|maint|tool):/.test(r.target)});
+            if (!got?.length) return;
+            const snap = snapshot(), list = ownTabs().map(t => ({...t})), names = [], ids = [];
+            got.forEach(l => {
+                const same = list.find(t => t.kind === 'screen' && t.target === l.target);
+                if (same) { same.hidden = false; ids.push(same.id); names.push(`${same.icon || ''} ${same.name || ''}`.trim()); return; }
+                const d = sc.describe ? sc.describe(l.target) : {}, [ic, base] = splitIcon(l.name || d.label || l.target);
+                const id = tabIdFor(l.target), icon = ic || d.icon || (lists ? '📋' : '🛠️');
+                list.push({id, name: base.slice(0, 60), icon, kind: 'screen', target: l.target, intro: i18n('Ajouté depuis « ＋ Ajouter un onglet ».'), hidden: false});
+                ids.push(id); names.push(`${icon} ${base}`.trim());
+            });
+            if (A()?.saveCustomTabs) A().saveCustomTabs(list); else ls.put('genealogie-custom-tabs', JSON.stringify(list));
+            ids.forEach(toEnd);
+            paintPlus(); refreshDialog();
+            const msg = names.length === 1 ? i18n('✓ Onglet « {name} » ajouté', {name: names[0]}) : i18n('✓ Onglets ajoutés au menu : {names}', {names: names.join(', ')});
+            A()?.undoToast?.(msg, {undo: () => { restore(snap); refreshDialog(); }});
+        }
+        /** ⠿ l'ordre du menu changé dans la fenêtre : les onglets cachés gardent leur place */
+        let orderChanged = false;
+        function saveOrder(list) {
+            const vis = [...list.querySelectorAll('.order-row[data-order-key]')].map(r => r.dataset.orderKey), set = new Set(vis), full = menuKeys();
+            let i = 0; const next = full.map(k => (set.has(k) ? vis[i++] : k));
+            if (next.join('|') === full.join('|')) return;
+            const snap = snapshot();
+            ls.put('genealogie-menu-order', JSON.stringify(next)); A()?.applyMenuOrder?.(); paintPlus(); orderChanged = true;
+            list.querySelectorAll('.order-row .order-number').forEach((n, j) => { n.textContent = String(j + 1).padStart(2, '0'); });
+            A()?.undoToast?.(i18n('Ordre du menu changé'), {undo: () => { restore(snap); refreshDialog(); }});
+        }
 
         /* ── la fenêtre « ＋ Ajouter un onglet » ── */
         let dlgState = {filter: 'all', q: ''};
@@ -128,23 +192,46 @@
             const tags = [st === 'rec' ? `<span class="tp-tag is-rec">${esc(i18n('conseillé pour toi'))}</span>` : '', st === 'shown' ? `<span class="tp-tag is-shown">${esc(i18n('montré par ton usage'))}</span>` : '', item.pro ? `<span class="tp-tag is-pro">${esc(i18n('métier'))}</span>` : ''].join('');
             return `<label class="tp-card${on ? ' is-on' : ''}" data-tp-card="${esc(item.k)}"><input type="checkbox" data-tp-item="${esc(item.k)}" ${on ? 'checked' : ''}><span class="tp-ico" aria-hidden="true">${item.icon}</span><span class="tp-txt"><b>${esc(i18n(item.name))}</b><small>${esc(i18n(item.desc))}</small>${item.where ? `<small class="tp-where">${esc(i18n(item.where))}</small>` : ''}${tags ? `<span class="tp-tags">${tags}</span>` : ''}</span></label>`;
         }
+        function ownCardHtml(t) {
+            const on = !t.hidden, d = ext.shortcuts?.describe ? ext.shortcuts.describe(t.target) : null;
+            return `<label class="tp-card is-own${on ? ' is-on' : ''}" data-tp-own-card="${esc(t.id)}"><input type="checkbox" data-tp-own="${esc(t.id)}" ${on ? 'checked' : ''}><span class="tp-ico" aria-hidden="true">${esc(t.icon || '🗂️')}</span><span class="tp-txt"><b>${esc(t.name || i18n('Mon onglet'))}</b>${d?.what ? `<small class="tp-where">${esc(i18n(d.what))}</small>` : ''}<span class="tp-tags"><span class="tp-tag is-own">${esc(i18n('mon onglet'))}</span></span></span></label>`;
+        }
+        /** ⠿ Ordre du menu : les onglets montrés, dans l'ordre du menu */
+        function navButton(key) { const n = nav(); if (!n) return null; return /^ct_/.test(key) ? n.querySelector(`.nav-custom-tab[data-board="${key}"]`) : n.querySelector(`.nav-item[data-module="${key}"]:not([data-board])`); }
+        function orderHtml() {
+            const own = new Set(ownTabs().map(t => t.id));
+            const rows = menuKeys().map(k => [k, navButton(k)]).filter(([, b]) => b && b.style.display !== 'none');
+            const keys = rows.map(([k]) => k), grouped = ownGrouped(menuKeys()).filter(k => keys.includes(k)).join('|') === keys.join('|');
+            return `<p class="ui-hint">${esc(i18n('Glisse ⠿ pour changer l’ordre des onglets du menu, ou prends ⠿ au clavier (Tab) puis Alt + ↑ / ↓. C’est le même ordre que dans Réglages → Menus.'))}</p>
+                <div class="order-list tp-order" data-tp-order>${rows.map(([k, b], i) => { const txt = [...b.childNodes].filter(n => !(n.nodeType === 1 && n.tagName === 'SPAN')).map(n => n.textContent).join('').trim();
+                    return `<div class="order-row${own.has(k) ? ' is-own' : ''}" data-order-key="${esc(k)}"><span class="order-grip" draggable="true" aria-hidden="true">⠿</span><span class="order-number">${String(i + 1).padStart(2, '0')}</span><b>${esc(txt || k)}</b>${own.has(k) ? `<span class="tp-tag is-own">${esc(i18n('mon onglet'))}</span>` : ''}</div>`; }).join('')}</div>
+                <label class="checkbox-line tp-own-last"><input type="checkbox" data-tp-own-last ${ownLast() ? 'checked' : ''}> ${esc(i18n('Mettre mes onglets à la fin du menu'))}</label>
+                <p class="ui-hint">${esc(i18n('Un onglet que tu crées arrive au bout du menu ; l’ordre que tu as déjà réglé ne bouge pas.'))}</p>
+                ${own.size && !grouped ? `<p><button type="button" class="button small secondary" data-tp-own-group>${esc(i18n('⤓ Regrouper mes onglets à la fin'))}</button></p>` : ''}`;
+        }
         function bodyHtml() {
             const u = usages(), all = CATALOG.map(item => ({item, st: status(item, u)})).filter(x => x.st !== 'off');
-            const rec = all.filter(x => x.st === 'rec'), shown = all.filter(x => inMenu(x.item));
             const f = dlgState.filter, q = dlgState.q;
+            // mes raccourcis hors catalogue : regroupés à la fin de leur groupe (2 · listes, 3 · outils)
+            const ownMatch = t => { const w = slug(q).trim(); return !w || w.split(/\s+/).every(x => slug(`${t.name} ${t.target}`).includes(x)); };
+            const own = {2: extraOwn(2), 3: extraOwn(3)};
+            const ownPick = g => (f === 'rec' ? [] : own[g].filter(t => ownMatch(t) && (f !== 'menu' || !t.hidden)));
+            const rec = all.filter(x => x.st === 'rec'), shown = all.filter(x => inMenu(x.item)), ownOn = [...own[2], ...own[3]].filter(t => !t.hidden).length;
             const pick = all.filter(x => matches(x.item, q, i18n) && (f === 'rec' ? x.st === 'rec' : f === 'menu' ? inMenu(x.item) : true));
             const phone = win.matchMedia?.('(max-width: 640px)').matches;
+            const more = g => (f === 'all' && g > 1 ? `<p class="tp-more"><button type="button" class="button small secondary" data-tp-more="${g === 2 ? 'list' : 'tool'}">${esc(g === 2 ? i18n('＋ Une autre liste…') : i18n('＋ Un autre outil…'))}</button></p>` : '');
             let groups;
-            if (phone && f === 'all' && !q) {
+            if (f === 'order') groups = orderHtml();
+            else if (phone && f === 'all' && !q) {
                 const r = pick.filter(x => x.st === 'rec'), rest = pick.filter(x => x.st !== 'rec');
-                groups = `${r.length ? `<section class="tp-group"><h4>${esc(i18n('Conseillés pour toi'))}</h4><div class="tp-cards">${r.map(x => cardHtml(x.item, x.st)).join('')}</div></section>` : ''}<details class="tp-group tp-rest"><summary>${esc(i18n('Tout le reste ▾'))}</summary><div class="tp-cards">${rest.map(x => cardHtml(x.item, x.st)).join('')}</div></details>`;
-            } else groups = [1, 2, 3].map(g => { const xs = pick.filter(x => x.item.g === g); return xs.length ? `<section class="tp-group"><h4>${esc(`${g} · ${i18n(GROUPS[g][0])}`)}</h4>${GROUPS[g][1] ? `<p class="ui-hint">${esc(i18n(GROUPS[g][1]))}</p>` : ''}<div class="tp-cards">${xs.map(x => cardHtml(x.item, x.st)).join('')}</div></section>` : ''; }).join('');
+                groups = `${r.length ? `<section class="tp-group"><h4>${esc(i18n('Conseillés pour toi'))}</h4><div class="tp-cards">${r.map(x => cardHtml(x.item, x.st)).join('')}</div></section>` : ''}<details class="tp-group tp-rest"><summary>${esc(i18n('Tout le reste ▾'))}</summary><div class="tp-cards">${rest.map(x => cardHtml(x.item, x.st)).join('')}${[...ownPick(2), ...ownPick(3)].map(ownCardHtml).join('')}</div>${more(2)}${more(3)}</details>`;
+            } else groups = [1, 2, 3].map(g => { const xs = pick.filter(x => x.item.g === g), mine = g > 1 ? ownPick(g) : []; return xs.length || mine.length || (f === 'all' && g > 1) ? `<section class="tp-group" data-tp-group="${g}"><h4>${esc(`${g} · ${i18n(GROUPS[g][0])}`)}</h4>${GROUPS[g][1] ? `<p class="ui-hint">${esc(i18n(GROUPS[g][1]))}</p>` : ''}<div class="tp-cards">${xs.map(x => cardHtml(x.item, x.st)).join('')}${mine.map(ownCardHtml).join('')}</div>${more(g)}</section>` : ''; }).join('');
             return `<p class="tp-q">${esc(i18n('Qu’est-ce que tu veux avoir sous la main ?'))}</p>
                 <p class="tp-usage">${esc(i18n('Ton usage : {u}', {u: usageName()}))} <button type="button" class="link-button" data-tp-usage>${esc(i18n('changer'))}</button></p>
-                <label class="tp-search"><span class="sr-only">${esc(i18n('Chercher un onglet'))}</span><input type="search" data-tp-q value="${esc(q)}" placeholder="${esc(i18n('🔍 Chercher un onglet… (courrier, acte, agenda)').replace(/^🔍\s*/u, ''))}" autocomplete="off"></label>
-                <div class="segmented tp-filter" role="tablist">${[['all', i18n('Tous')], ['rec', i18n('Conseillés ({n})', {n: rec.length})], ['menu', i18n('Déjà dans le menu ({n})', {n: shown.length})]].map(([k, l]) => `<button type="button" role="tab" data-tp-filter="${k}" class="${f === k ? 'is-active' : ''}" aria-selected="${f === k}">${esc(l)}</button>`).join('')}</div>
+                <label class="tp-search"${f === 'order' ? ' hidden' : ''}><span class="sr-only">${esc(i18n('Chercher un onglet'))}</span><input type="search" data-tp-q value="${esc(q)}" placeholder="${esc(i18n('🔍 Chercher un onglet… (courrier, acte, agenda)').replace(/^🔍\s*/u, ''))}" autocomplete="off"></label>
+                <div class="segmented tp-filter" role="tablist">${[['all', i18n('Tous')], ['rec', i18n('Conseillés ({n})', {n: rec.length})], ['menu', i18n('Déjà dans le menu ({n})', {n: shown.length + ownOn})], ['order', i18n('⠿ Ordre du menu')]].map(([k, l]) => `<button type="button" role="tab" data-tp-filter="${k}" class="${f === k ? 'is-active' : ''}" aria-selected="${f === k}">${esc(l)}</button>`).join('')}</div>
                 <div class="tp-list">${groups || `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🔍</span><span class="empty-line-text">${esc(i18n('Aucun onglet ne correspond.'))}</span></p>`}</div>
-                <p class="ui-hint">${esc(i18n('Une carte cochée = l’onglet est dans le menu. Cocher l’ajoute à la fin du menu ; décocher le cache (un raccourci est caché, pas effacé).'))}</p>
+                ${f === 'order' ? '' : `<p class="ui-hint">${esc(i18n('Une carte cochée = l’onglet est dans le menu. Cocher l’ajoute à la fin du menu ; décocher le cache (un raccourci est caché, pas effacé).'))}</p>`}
                 <p><button type="button" class="link-button" data-tp-editor>${esc(i18n('↗ Faire un onglet à moi (Éditeur d’onglets)'))}</button></p>`;
         }
         function openCatalog() {
@@ -154,16 +241,32 @@
             const d = open({eyebrow: i18n('MENU'), title: i18n('＋ Ajouter un onglet'), wide: true, submitLabel: 'Fermer', onSubmit: () => true, body: `<div class="tp-cat" data-tp-cat>${bodyHtml()}</div>`,
                 onOpen: dlg => {
                     const box = dlg.querySelector('[data-tp-cat]');
-                    refreshDialog = () => { if (!dlg.isConnected) return; const q = box.querySelector('[data-tp-q]'), had = doc.activeElement === q, pos = q?.selectionStart; box.innerHTML = bodyHtml(); if (had) { const n = box.querySelector('[data-tp-q]'); n.focus(); try { n.setSelectionRange(pos, pos); } catch (_) {} } };
+                    orderChanged = false;
+                    const bindOrder = () => { const list = box.querySelector('[data-tp-order]'); if (!list || list.dataset.bound) return; list.dataset.bound = '1'; A()?.setupDragOrder?.(list); list.addEventListener('dragend', () => setTimeout(() => saveOrder(list), 0)); };
+                    refreshDialog = () => { if (!dlg.isConnected) return; const q = box.querySelector('[data-tp-q]'), had = doc.activeElement === q, pos = q?.selectionStart; box.innerHTML = bodyHtml(); bindOrder(); if (had) { const n = box.querySelector('[data-tp-q]'); n.focus(); try { n.setSelectionRange(pos, pos); } catch (_) {} } };
+                    // Réglages → Menus ouvert derrière : redessiné à la fermeture, pour montrer le même ordre
+                    dlg.addEventListener('close', () => { if (orderChanged && doc.getElementById('menu-order') && A()?.state?.module === 'maintenance') A().setModule('maintenance'); });
                     box.addEventListener('input', e => { if (e.target.matches('[data-tp-q]')) { dlgState.q = e.target.value; refreshDialog(); } dlg.dataset.dirty = ''; }); // tout s'applique tout de suite : rien à « enregistrer » en fermant
-                    box.addEventListener('change', e => { dlg.dataset.dirty = ''; const c = e.target.closest('[data-tp-item]'); if (!c) return; const item = CATALOG.find(x => x.k === c.dataset.tpItem); if (item) { setShown(item, c.checked); refreshDialog(); } });
+                    box.addEventListener('change', e => { dlg.dataset.dirty = '';
+                        const o = e.target.closest('[data-tp-own]'); if (o) { setOwnShown(o.dataset.tpOwn, o.checked); refreshDialog(); return; }
+                        if (e.target.closest('[data-tp-own-last]')) { setOwnLast(e.target.checked); refreshDialog(); return; }
+                        const c = e.target.closest('[data-tp-item]'); if (!c) return; const item = CATALOG.find(x => x.k === c.dataset.tpItem); if (item) { setShown(item, c.checked); refreshDialog(); } });
                     box.addEventListener('click', e => {
                         const f = e.target.closest('[data-tp-filter]'); if (f) { dlgState.filter = f.dataset.tpFilter; return refreshDialog(); }
+                        const mo = e.target.closest('[data-tp-more]'); if (mo) { addMore(mo.dataset.tpMore); return; }
+                        if (e.target.closest('[data-tp-own-group]')) { const snap = snapshot(); ls.put('genealogie-menu-order', JSON.stringify(ownGrouped(menuKeys()))); A()?.applyMenuOrder?.(); paintPlus(); orderChanged = true; refreshDialog(); A()?.undoToast?.(i18n('Tes onglets sont regroupés à la fin du menu'), {undo: () => { restore(snap); refreshDialog(); }}); return; }
                         if (e.target.closest('[data-tp-editor]')) { dlg.close(); return A()?.openCustomScreen ? A().openCustomScreen('maint:tabs_editor') : (A().state.maintenanceTab = 'tabs_editor', A().setModule('maintenance')); }
                         if (e.target.closest('[data-tp-usage]')) { dlg.close(); A().state.maintenanceTab = 'nav_menus'; A().setModule('maintenance'); setTimeout(() => doc.getElementById('lc-usage')?.scrollIntoView({block: 'start'}), 900); }
                     });
                 }});
             return d;
+        }
+        /** la case « Mettre mes onglets à la fin du menu » (fenêtre et Réglages → Menus), avec ↶ Annuler */
+        function setOwnLast(on) {
+            const prev = ls.raw('genealogie-menu-own-last');
+            ls.put('genealogie-menu-own-last', on ? null : '0'); A()?.applyMenuOrder?.(); paintPlus();
+            doc.querySelectorAll('[data-tp-own-last]').forEach(x => { x.checked = on; });
+            A()?.undoToast?.(on ? i18n('Tes nouveaux onglets arrivent à la fin du menu') : i18n('Tes nouveaux onglets ne vont plus forcément à la fin du menu'), {undo: () => { ls.put('genealogie-menu-own-last', prev); A()?.applyMenuOrder?.(); paintPlus(); doc.querySelectorAll('[data-tp-own-last]').forEach(x => { x.checked = ownLast(); }); }});
         }
 
         /* ── le ＋ au bout du menu ── */
@@ -182,7 +285,7 @@
             const panel = list.closest('section') || list.parentElement;
             if (!panel.querySelector('[data-tp-settings]')) {
                 const bar = doc.createElement('div'); bar.className = 'tp-settings'; bar.dataset.tpSettings = '';
-                bar.innerHTML = `<button type="button" class="button small" data-tab-plus>${esc(i18n('＋ Ajouter un onglet…'))}</button><label class="checkbox-line"><input type="checkbox" data-tp-plus-show ${plusOn() ? 'checked' : ''}> ${esc(i18n('Montrer le ＋ au bout du menu'))}</label>`;
+                bar.innerHTML = `<button type="button" class="button small" data-tab-plus>${esc(i18n('＋ Ajouter un onglet…'))}</button><label class="checkbox-line"><input type="checkbox" data-tp-plus-show ${plusOn() ? 'checked' : ''}> ${esc(i18n('Montrer le ＋ au bout du menu'))}</label><label class="checkbox-line"><input type="checkbox" data-tp-own-last ${ownLast() ? 'checked' : ''}> ${esc(i18n('Mettre mes onglets à la fin du menu'))}</label>`;
                 const h = panel.querySelector('h3'); if (h) h.before(bar); else panel.prepend(bar);
             }
             const tabs = Object.fromEntries(ownTabs().map(t => [t.id, t]));
@@ -206,6 +309,7 @@
             }
         });
         doc.addEventListener('change', e => {
+            const ol = e.target.closest?.('[data-tp-settings] [data-tp-own-last]'); if (ol) { setOwnLast(ol.checked); return; }
             const c = e.target.closest?.('[data-tp-plus-show]'); if (!c) return;
             const prev = ls.raw('genealogie-menu-plus');
             ls.put('genealogie-menu-plus', c.checked ? null : '0'); paintPlus();
@@ -223,7 +327,7 @@
             win.addEventListener('storage', e => { if (/^genealogie-(menu|custom-tabs|usage)/.test(e.key || '')) paintPlus(); });
         };
         if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', () => setTimeout(start, 0)); else setTimeout(start, 0);
-        ext.tabsPlus = {open: openCatalog, catalog: () => CATALOG.map(x => ({...x})), status, inMenu, setShown: (k, on) => { const it = CATALOG.find(x => x.k === k); if (it) setShown(it, on); }};
+        ext.tabsPlus = {open: openCatalog, catalog: () => CATALOG.map(x => ({...x})), status, inMenu, setShown: (k, on) => { const it = CATALOG.find(x => x.k === k); if (it) setShown(it, on); }, addMore, ownGrouped, tabIdFor};
     }
     return {CATALOG, USAGE_ORDER, GROUPS, status, idOf, matches, mount};
 });

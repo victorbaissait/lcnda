@@ -12,6 +12,8 @@ body.is-kiosk .nav-add-tab, html.ms-open .nav-add-tab { display: none !important
 .tp-usage { margin: 0 0 10px; color: var(--tp-text2); }
 .tp-search input { width: 100%; }
 .tp-filter { margin: 10px 0; flex-wrap: wrap; }
+.tp-cat .segmented.tp-filter { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 640px) { .tp-cat .segmented.tp-filter { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .tp-group { margin: 0 0 14px; }
 .tp-group h4 { margin: 4px 0 6px; font-size: .9rem; }
 .tp-group > summary { cursor: pointer; font-weight: 600; margin: 4px 0 8px; }
@@ -33,3 +35,11 @@ body.is-kiosk .nav-add-tab, html.ms-open .nav-add-tab { display: none !important
 .tp-settings { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin: 0 0 10px; }
 .tp-remove { margin-left: 6px; }
 @media (max-width: 640px) { .tp-cards { grid-template-columns: 1fr; } }
+/* mes onglets (« mon onglet ») · ＋ Une autre liste… / ＋ Un autre outil… · ⠿ Ordre du menu */
+.tp-tag.is-own { border-color: var(--tp-blue); color: var(--tp-blue); }
+.tp-more { margin: 8px 0 0; }
+.tp-order { display: grid; gap: 4px; margin: 6px 0 10px; }
+.tp-order .order-row { display: flex; align-items: center; gap: 8px; }
+.tp-order .order-row b { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+.tp-order .order-row.is-own { border-style: dashed; }
+.tp-own-last { margin: 4px 0; }

@@ -2956,6 +2956,8 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root[data-theme="dark"].lc-frame .tp-tag.is-rec, :root[data-theme="dark"] .tp-tag.is-rec:is([data-lc-lines], [data-lc-lines] *) {border-color:#8fd694}
 :root.lc-frame .tp-tag.is-pro, :root .tp-tag.is-pro:is([data-lc-lines], [data-lc-lines] *) {border-color:#7b1fa2}
 :root[data-theme="dark"].lc-frame .tp-tag.is-pro, :root[data-theme="dark"] .tp-tag.is-pro:is([data-lc-lines], [data-lc-lines] *) {border-color:#d59ae6}
+:root.lc-frame .tp-tag.is-own, :root .tp-tag.is-own:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--tp-blue)}
+:root.lc-frame .tp-order .order-row.is-own, :root .tp-order .order-row.is-own:is([data-lc-lines], [data-lc-lines] *) {border-style:dashed}
 /* scene.css */
 :root.lc-frame .sc-tone, :root .sc-tone:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid currentColor}
 :root.lc-frame .sc-quote, :root .sc-quote:is([data-lc-lines], [data-lc-lines] *) {border-left:3px solid #d7dbe2}
