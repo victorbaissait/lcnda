@@ -282,6 +282,7 @@ function htr_read_start(PDO $pdo, array $data): array
             $info = $bin !== false ? @getimagesizefromstring($bin) : false;
             if (!$info || !in_array($info[2] ?? 0, [IMAGETYPE_JPEG, IMAGETYPE_PNG], true)) { throw new RuntimeException('Image améliorée illisible.'); }
             if ((int) $info[0] < 1 || (int) $info[1] < 1 || (int) $info[0] > 20000 || (int) $info[1] > 20000 || (int) $info[0] * (int) $info[1] > 120000000) { throw new RuntimeException('Image améliorée trop grande.'); }
+            if ($big = media_pixels_too_big((int) $info[0], (int) $info[1], $pdo)) { throw new RuntimeException(media_too_big_message($big)); } // 📎 la limite réglée, si elle est plus basse
             $img = 'page.' . ($info[2] === IMAGETYPE_PNG ? 'png' : 'jpg');
             file_put_contents($dir . '/' . $img, $bin); unset($bin);
         } else {
@@ -291,6 +292,7 @@ function htr_read_start(PDO $pdo, array $data): array
             if (!$root || !$src || !str_starts_with($src, $root . DIRECTORY_SEPARATOR) || !is_file($src)) { throw new RuntimeException('Fichier média introuvable.'); }
             $info = @getimagesize($src);
             if (!$info || !in_array($info[2] ?? 0, [IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_TIFF_II, IMAGETYPE_TIFF_MM, IMAGETYPE_WEBP, IMAGETYPE_BMP], true)) { throw new RuntimeException('Cette image ne peut pas être lue (format).'); }
+            if ($big = media_pixels_too_big((int) $info[0], (int) $info[1], $pdo)) { throw new RuntimeException(media_too_big_message($big)); } // 📎 lib/media_limits.php
             $img = 'page' . image_type_to_extension((int) $info[2]);
             if (!copy($src, $dir . '/' . $img)) { throw new RuntimeException('Copie de l’image impossible.'); }
         }

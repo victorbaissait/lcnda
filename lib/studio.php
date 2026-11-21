@@ -20,7 +20,8 @@ function retouch_store_upload(?array $file, string $kind = 'image'): string
 {
     $av = $kind === 'audio' || $kind === 'video';
     if (!$file || (int) ($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) { throw new RuntimeException($av ? 'Fichier monté non reçu.' : 'Image retouchée non reçue.'); }
-    if ((int) $file['size'] > ($av ? 4096 : 60) * 1024 * 1024) { throw new RuntimeException($av ? 'Fichier trop grand (plus de 4 Go).' : 'Image trop grande (plus de 60 Mo).'); }
+    $imgMb = max(60, media_limits()['image_mb']); // 📎 au moins la taille réglée pour une image (Réglages → Fichiers des médias)
+    if ((int) $file['size'] > ($av ? 4096 * 1024 * 1024 : $imgMb * 1024 * 1024)) { throw new RuntimeException($av ? 'Fichier trop grand (plus de 4 Go).' : i18n_t('Image trop grande (plus de {n} Mo).', ['n' => $imgMb])); }
     $mime = (new finfo(FILEINFO_MIME_TYPE))->file((string) $file['tmp_name']);
     $types = $av ? RETOUCH_AV_TYPES : RETOUCH_TYPES;
     if (!isset($types[$mime])) { throw new RuntimeException($av ? 'Format de son ou de vidéo non pris en charge (' . $mime . ').' : 'Format d’image non pris en charge.'); }

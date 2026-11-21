@@ -411,6 +411,9 @@ try {
     if (in_array($action, SO7_ACTIONS, true)) { // 🌍 Archives en ligne, 7e lot (lib/sources_ouvertes_7.php) : Europe, Justes, enfants assistés, monuments, cadastres — aucune requête vers les sites
         so7_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if ($action === 'media_limits' || ($isWrite && $action === 'save_media_limits')) { // 📎 taille des fichiers ajoutés (lib/media_limits.php)
+        json_response($isWrite ? ['ok' => true, 'result' => media_limits_save($pdo ?? db(), $payload)] : media_limits_for_page($pdo ?? db()));
+    }
     if ($isWrite && $action === 'htr_upload_model') {
         htr_upload_model($_FILES['file'] ?? null, safe_text($_POST['target'] ?? ''));
     }

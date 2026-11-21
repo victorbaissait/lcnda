@@ -99,6 +99,7 @@ require_once __DIR__ . '/metiers_anciens.php'; // 🛠️ fiche d'un métier anc
 require_once __DIR__ . '/village.php';
 require_once __DIR__ . '/voters.php';         // cartes d'électeur, dates de vote, droit de vote dans le monde
 require_once __DIR__ . '/insee_remote.php';   // décès INSEE : fichiers de data.gouv.fr téléchargés et importés
+require_once __DIR__ . '/media_limits.php';   // 📎 taille des fichiers ajoutés, points d'une image décodée (Réglages → Fichiers des médias)
 require_once __DIR__ . '/htr_setup.php';
 require_once __DIR__ . '/studio.php';         // retouche des photos (l'original est gardé)
 require_once __DIR__ . '/museum.php';         // musée de famille en 3D (pièce d'archives), visite guidée, partage

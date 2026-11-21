@@ -283,6 +283,7 @@
             imgW = imgH = 0; srcEl = null; enhFor = ''; // une autre image : rien de l'ancienne ne reste (taille, préparation « Mieux voir »)
             await new Promise(res => { const i = new Image(); i.onload = () => { imgW = i.naturalWidth; imgH = i.naturalHeight; srcEl = i; res(); }; i.onerror = () => { toast(i18n('Image de l’acte illisible.'), 'error'); res(); }; i.src = src; });
             if (!dlg.isConnected) return;
+            if (A().mediaLimits?.tooBig(imgW, imgH)) srcFailed = t.filename; // 📎 image immense : affichée, mais « Mieux voir » ne la décode pas (app-media-limits.js)
             img.setAttribute('width', imgW); img.setAttribute('height', imgH); geom({keepCenter: false}); setHref(src); applyFit('page'); await applyImage(); drawZones();
         }
         /* ─── les zones et le texte surligné ─── */
@@ -552,6 +553,7 @@
         async function runHtr({model = '', zone} = {}) {
             if (!t.media_id) return toast(i18n('Choisis d’abord l’image de l’acte.'), 'error');
             if (htrJob) return toast(i18n('Une lecture est déjà en cours.'), 'error');
+            if (A().mediaLimits?.tooBig(imgW, imgH)) return; // 📎 trop de points pour être lue sans saturer la mémoire (le message le dit)
             let st; try { st = await api('htr_setup_status'); } catch (e) { return toast(e.message, 'error'); }
             const installed = (st.models || []).filter(m => m.present);
             if (!st.ready || !installed.length) return toast(i18n('La lecture d’écriture manuscrite n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) (une seule fois, l’assistant explique tout).'), 'error');

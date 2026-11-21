@@ -149,6 +149,7 @@
         const img0 = new Image(); img0.decoding = 'async';
         img0.src = `media/${encodeURIComponent(from)}?v=${item._cacheBust || ''}`;
         try { await img0.decode(); } catch (_) { return toast('Impossible d’ouvrir cette image.', 'error'); }
+        if (A().mediaLimits?.tooBig(img0.naturalWidth, img0.naturalHeight)) return; // 📎 image immense : gardée, mais pas retouchée (app-media-limits.js)
         let img = img0; // ↺ ↻ : l'image de départ tournée (st.docXf, même moteur que la retouche complète : heritage-retouch-rotation.js)
         const st = rtDefault(); let channel = 'rgb';
         const scale = Math.min(1, 1100 / Math.max(img.naturalWidth, img.naturalHeight));
