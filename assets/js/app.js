@@ -56,7 +56,8 @@
         const closeButtons=dlg=>[...dlg.querySelectorAll('button')].filter(b=>b.closest('dialog')===dlg&&b.type!=='submit'&&!b.hasAttribute('data-allow-cancel')&&(b.matches(CLOSE_SEL)||/^\s*(Annuler|Fermer|×)\s*$/.test(b.textContent||'')));
         const lockClose=(dlg,on)=>{if(on){dlg.dataset.lcSaving='1';closeButtons(dlg).forEach(b=>{if(b.getAttribute('aria-disabled')==='true')return;b.dataset.lcSaveLock='1';b.setAttribute('aria-disabled','true');b.classList.add('is-save-locked');if(!b.title)b.dataset.lcSaveTitle='1',b.title='Enregistrement en cours : un instant…';});}
             else{delete dlg.dataset.lcSaving;dlg.querySelectorAll('[data-lc-save-lock]').forEach(b=>{delete b.dataset.lcSaveLock;b.removeAttribute('aria-disabled');b.classList.remove('is-save-locked');if(b.dataset.lcSaveTitle){delete b.dataset.lcSaveTitle;b.removeAttribute('title');}});}};
-        origAdd.call(document,'cancel',ev=>{const d=ev.target;if(d instanceof HTMLDialogElement&&d.dataset.lcSaving==='1'){ev.preventDefault();ev.stopImmediatePropagation();}},true);
+        let savingSaid=0; // Échap pendant l'enregistrement : la fenêtre reste ouverte, et on dit pourquoi (une fois par seconde au plus)
+        origAdd.call(document,'cancel',ev=>{const d=ev.target;if(d instanceof HTMLDialogElement&&d.dataset.lcSaving==='1'){ev.preventDefault();ev.stopImmediatePropagation();if(Date.now()-savingSaid>1000){savingSaid=Date.now();try{toast('Enregistrement en cours : un instant…');}catch(_){}}}},true);
         origAdd.call(document,'click',ev=>{const b=ev.target.closest?.('button');const d=b?.closest('dialog');if(d&&d.dataset.lcSaving==='1'&&b.dataset.lcSaveLock==='1'){ev.preventDefault();ev.stopImmediatePropagation();}},true);
         origAdd.call(document,'submit',ev=>{
             const form=ev.target;if(!(form instanceof HTMLFormElement))return;

@@ -326,7 +326,14 @@ function checkVcf(text) {
                 await page.click(`#h-export-plus [data-export-plus="${key}"]`);
                 await page.waitForSelector('dialog.h-modal[open]');
                 if (SHOTS && key === 'geneanet') await page.screenshot({ path: path.join(SHOTS, 'echanges-geneanet.png') });
-                const [dl] = await Promise.all([page.waitForEvent('download', { timeout: 15000 }).catch(async e => { throw new Error(key + ' : pas de téléchargement — ' + errors.join(' / ') + ' — ' + (await page.locator('.toast, .h7, [class*=toast]').allTextContents()).join(' / ')); }), page.click('dialog.h-modal[open] [type=submit]')]);
+                const dlP = page.waitForEvent('download', { timeout: 15000 }).catch(async e => { throw new Error(key + ' : pas de téléchargement — ' + errors.join(' / ') + ' — ' + (await page.locator('.toast, .h7, [class*=toast]').allTextContents()).join(' / ')); });
+                await page.click('dialog.h-modal[open] [type=submit]');
+                // 🛡 Geneanet : des fiches « à revoir avant publication » → la question est posée dans la fenêtre (plus-famille.js) ; on exporte quand même
+                if (key === 'geneanet') {
+                    const gate = await page.waitForSelector('dialog.h-modal[open] .pf-gate', { timeout: 5000 }).catch(() => null);
+                    if (gate) { ok(/à revoir avant publication/.test(await gate.innerText()), 'écran : Geneanet demande d’abord pour les fiches à revoir'); await page.click('dialog.h-modal[open] [data-pf-g="go"]'); }
+                }
+                const dl = await dlP;
                 ok(expectName.test(dl.suggestedFilename()), `écran : ${key} → ${dl.suggestedFilename()}`);
                 await page.waitForSelector('dialog.h-modal[open]', { state: 'detached' });
                 return fs.readFileSync(await dl.path());

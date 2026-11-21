@@ -1690,3 +1690,6 @@ Notaires ¦ Нотариусы ¦ Нотаріуси
 {name} : {a} sur {n} enfants morts avant 1 an ({p} %) ¦ {name}: {a} из {n} детей умерли до 1 года ({p} %) ¦ {name}: {a} з {n} дітей померли до 1 року ({p} %)
 {name} : {a} sur {n} morts avant 5 ans ({p} %) ¦ {name}: {a} из {n} умерли до 5 лет ({p} %) ¦ {name}: {a} з {n} померли до 5 років ({p} %)
 parrains : {a} sur {b} · marraines : {c} sur {d} ¦ крёстные: {a} из {b} · крёстные матери: {c} из {d} ¦ хрещені батьки: {a} з {b} · хрещені матері: {c} з {d}
+Toute ma base ¦ Вся моя база ¦ Уся моя база
+Mes descendants ¦ Мои потомки ¦ Мої нащадки
+Depuis 1900 ¦ С 1900 года ¦ З 1900 року

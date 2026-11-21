@@ -42,6 +42,10 @@
         ['Naissances, mariages et décès', {[TYPES]: EVT}], ['Les anniversaires de mes ancêtres', {[TYPES]: ['birth', 'bapt'], ...ANC}], ['Mariages de mes ancêtres', {[TYPES]: ['marriage'], ...ANC}],
         ['Naissances au XIXe siècle', {[TYPES]: ['birth', 'bapt'], ...XIX}]];
     const VIE_POP = (extra = {}) => [...popList(extra), ['Au XIXe siècle', {...extra, ...XIX}], ['Au XVIIIe siècle', {...extra, ...XVIII}]];
+    // 🔤 🔥 cartes du temps (heritage-diagram-cartes-plus.js) : « Quels événements »
+    const CPEV = [['Naissances, mariages et décès', {'[data-cp="ev"]': 'all'}], ['Naissances', {'[data-cp="ev"]': 'births'}], ['Mariages', {'[data-cp="ev"]': 'marriages'}], ['Décès', {'[data-cp="ev"]': 'deaths'}], ['Résidences et recensements', {'[data-cp="ev"]': 'residences'}]];
+    // D23–D38 (heritage-diagram-lot-a.js…) : « Personnes comptées »
+    const DPL_ANC = {'[data-dpl="scope"]': 'anc'}, DPL_SCOPE = [['Toute ma base', {'[data-dpl="scope"]': ''}], ['Les ancêtres de la personne de départ', DPL_ANC]];
     const STEP = (sel, extra = {}) => [['Par siècle', {...extra, [sel]: '100'}], ['Par demi-siècle', {...extra, [sel]: '50'}], ['Par quart de siècle', {...extra, [sel]: '25'}], ['Par décennie', {...extra, [sel]: '10'}]];
     // les personnes pour les menus de choix à plusieurs (matrice de parenté, cousinages, frise des lieux)
     const idsAnc = n => async () => { const r = await api('diagram_genea', {what: 'fan', root: startId(), gens: Math.max(3, n)}); return (r.rows || []).filter(x => x.sosa < 2 ** n).map(x => x.id).slice(0, 20); };
@@ -122,8 +126,23 @@
         chromo: [['Tous les segments', {'[data-dac="min"]': '0'}], ['Segments d’au moins 7 cM (les plus sûrs)', {'[data-dac="min"]': '7'}], ['Segments d’au moins 10 cM', {'[data-dac="min"]': '10'}], ['Gros segments (20 cM et plus)', {'[data-dac="min"]': '20'}]],
         cmruler: [['Toutes les correspondances (150 au plus)', {'[data-dac="min"]': '0', '[data-dac="max"]': '150'}], ['Au moins 20 cM (150 au plus)', {'[data-dac="min"]': '20', '[data-dac="max"]': '150'}],
             ['Cousins proches (90 cM et plus)', {'[data-dac="min"]': '90', '[data-dac="max"]': '3000'}], ['Au moins 50 cM, toutes', {'[data-dac="min"]': '50', '[data-dac="max"]': '3000'}]],
+        // les types venus ensuite (cartes du temps, lots A et B, D23–D38…) : leurs panneaux propres ont aussi leur « Graphique »
+        surnamemap: CPEV, heatdecades: CPEV,
+        censusgrid: popList(), proofmap: popList(),
+        lexis: [...popList(), ...periods()], ternary: [...popList(), ...periods()], namevariants: [...popList(), ...periods()],
+        wordtree: [['Ce qui suit', {'[data-lotc="dir"]': 'after'}], ['Ce qui précède', {'[data-lotc="dir"]': 'before'}]],
+        dplkin: [['Tous les ancêtres répétés', {'[data-dla="closest"]': ''}], ['Le plus proche seulement', {'[data-dla="closest"]': '1'}]],
+        dplgrav: gensList('[data-dpl="gens"]', [[3], [4], [5], [6], [8]]), dplgenmap: gensList('[data-dpl="gens"]', [[3], [4], [5], [6], [8]]),
+        dplcomp: gensList('[data-dpl="gens"]', [[4], [5], [6], [8], [10]]), dplahn: gensList('[data-dpl="gens"]', [[2], [3], [4], [5], [6], [8]]),
+        dplleeds: [['Cousins proches (90 cM et plus)', {'[data-dpl="lo"]': '90', '[data-dpl="hi"]': '3000'}], ['Au moins 50 cM, toutes', {'[data-dpl="lo"]': '50', '[data-dpl="hi"]': '3000'}]],
+        dplwheel: [['Les personnes en vie (et leurs mariages)', {'[data-dpl="who"]': 'living'}], ['Mes ancêtres', {'[data-dpl="who"]': 'anc'}], ['Toute ma base', {'[data-dpl="who"]': 'all'}]],
+        dplbarline: [...STEP('[data-dpl="step"]'), ['Mes ancêtres, par siècle', {'[data-dpl="step"]': '100', ...DPL_ANC}]],
+        dpldiv: [['Décès ↔ naissances', {'[data-dpl="pair"]': 'bd'}], ['Naissances : filles ↔ garçons', {'[data-dpl="pair"]': 'sex'}], ['Mes ancêtres, par siècle', {'[data-dpl="step"]': '100', ...DPL_ANC}]],
+        dplhills: STEP('[data-dpl="step"]').filter(([, s]) => s['[data-dpl="step"]'] !== '100'), // (pas de « par siècle » pour les collines des noms)
+        dplpar: DPL_SCOPE, dplstep: DPL_SCOPE,
+        quarters: [['8 quartiers (arrière-grands-parents)', {'[data-dla="gens"]': '3'}], ['16 quartiers', {'[data-dla="gens"]': '4'}], ['32 quartiers', {'[data-dla="gens"]': '5'}]],
     };
-    const GO = '[data-gn-go], [data-n6-go], [data-dm-go], [data-dfa-go], [data-dgm-go], [data-c2-go], [data-dac-go]';
+    const GO = '[data-gn-go], [data-n6-go], [data-dm-go], [data-dfa-go], [data-dgm-go], [data-c2-go], [data-dac-go], [data-cp-go], [data-lotc-go], [data-dpl-go], [data-dla-go]';
 
     /** les valeurs à poser : une fonction est appelée (personnes calculées) */
     const fire = el => { el.dispatchEvent(new Event('input', {bubbles: true})); el.dispatchEvent(new Event('change', {bubbles: true})); };

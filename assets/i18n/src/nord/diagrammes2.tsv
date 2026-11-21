@@ -1691,3 +1691,6 @@ Notaires ¦ Notáři ¦ Notarier ¦ Notarer
 {name} : {a} sur {n} enfants morts avant 1 an ({p} %) ¦ {name}: {a} z {n} dětí zemřelo před 1. rokem ({p} %) ¦ {name}: {a} av {n} barn dog före 1 år ({p} %) ¦ {name}: {a} af {n} børn døde før 1 år ({p} %)
 {name} : {a} sur {n} morts avant 5 ans ({p} %) ¦ {name}: {a} z {n} zemřelo před 5. rokem ({p} %) ¦ {name}: {a} av {n} dog före 5 år ({p} %) ¦ {name}: {a} af {n} døde før 5 år ({p} %)
 parrains : {a} sur {b} · marraines : {c} sur {d} ¦ kmotři: {a} z {b} · kmotry: {c} z {d} ¦ gudfäder: {a} av {b} · gudmödrar: {c} av {d} ¦ gudfædre: {a} af {b} · gudmødre: {c} af {d}
+Toute ma base ¦ Celá moje databáze ¦ Hela min databas ¦ Hele min database
+Mes descendants ¦ Moji potomci ¦ Mina ättlingar ¦ Mine efterkommere
+Depuis 1900 ¦ Od roku 1900 ¦ Sedan 1900 ¦ Siden 1900

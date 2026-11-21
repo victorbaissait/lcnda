@@ -30,6 +30,8 @@ const SHOTS = process.env.SHOTS || '';
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-journee-'));
 const fx = path.join(tmp, 'fx');
 let failed = 0;
+/** attendre, d'ici, qu'une condition (async) devienne vraie */
+const until = async (fn, what, ms = 15000) => { const end = Date.now() + ms; for (;;) { if (await fn()) return; if (Date.now() > end) throw new Error('trop long : ' + what); await new Promise(r => setTimeout(r, 150)); } };
 const t = async (name, fn) => { try { await fn(); console.log('✓', name); } catch (e) { failed++; console.error('✗', name, '\n ', e && e.stack || e); } };
 
 // la météo d'autrefois : le jeu de données fabriqué du test météo (Gers, 1836–2025) ; sans python, les phrases météo ne sont pas vérifiées
@@ -250,18 +252,19 @@ const texts = d => d.sentences.map(s => s.text).join('\n');
                         const before = (await get('biography', { id: 1 })).body.text;
                         await p.click('dialog.jr-dialog [data-jr-put]');
                         await p.getByText('Ajouter à la fin de sa biographie').click();
-                        await p.waitForFunction(async () => /Une journée dans la vie/.test((await window.LCNDA_APP.api('biography', { id: 1 })).text));
+                        // (waitForFunction ne sait pas attendre une promesse : sa réponse, une Promise, compte tout de suite pour « vrai » ; on demande donc d'ici)
+                        await until(async () => /Une journée dans la vie/.test((await get('biography', { id: 1 })).body.text), 'le récit arrive dans la biographie');
                         const after = (await get('biography', { id: 1 })).body;
                         assert.ok(after.own.includes(before.trim().slice(0, 30)), `la biographie d’avant est gardée en tête : ${JSON.stringify(before.slice(0, 80))} / ${JSON.stringify(after.own.slice(0, 80))}`);
                         assert.match(after.own, /12 thermidor an II/);
                         await p.getByRole('button', { name: /Annuler/ }).last().click();
-                        await p.waitForFunction(async () => !(await window.LCNDA_APP.api('biography', { id: 1 })).own);
+                        await until(async () => !(await get('biography', { id: 1 })).body.own, '↶ Annuler remet la biographie de l’app');
                     });
                     await t('« Poser dans ▾ » → 📁 une copie DOCX dans les médias', async () => {
                         const n0 = await p.evaluate(async () => (await window.LCNDA_APP.api('picker_search', { kind: 'media', q: 'journée' })).groups[0].total);
                         await p.click('dialog.jr-dialog [data-jr-put]');
                         await p.getByText('Ranger une copie dans les médias').click();
-                        await p.waitForFunction(async n => (await window.LCNDA_APP.api('picker_search', { kind: 'media', q: 'journée' })).groups[0].total > n, n0, { timeout: 8000 });
+                        await until(async () => (await p.evaluate(async () => (await window.LCNDA_APP.api('picker_search', { kind: 'media', q: 'journée' })).groups[0].total)) > n0, 'la copie DOCX est dans les médias', 8000);
                     });
                     await t('📝 Dans le traitement de texte : le document s’ouvre avec le récit', async () => {
                         await p.click('dialog.jr-dialog [data-jr-wp]');

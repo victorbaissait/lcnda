@@ -310,7 +310,7 @@ echo 'ok';`], {cwd: appRoot, encoding: 'utf8', env: envFor(dir)});
                         return {n: all.filter(x => x[0].startsWith('so3_')).length, hidden: all.filter(x => x[0].startsWith('so3_')).every(x => s.hidden.includes(x[0])), groups: A.webSearchGroups.slice(), href: all.find(x => x[0] === 'so3_antenati_nom')[3]({first: 'Jean', last: 'Rossi', place: 'Napoli'})}; });
                     assert.ok(r2.n >= 25 && r2.hidden); assert.ok(r2.groups.includes('Italie · Espagne · Portugal')); assert.ok(r2.groups.indexOf('Royaume-Uni') < r2.groups.indexOf('Autres'));
                     assert.match(r2.href, /cognome=Rossi&nome=Jean&localita=Napoli/);
-                    await p.evaluate(() => { const box = document.createElement('div'); box.id = 'so3-test-ed'; box.innerHTML = window.LCNDA_APP.webSearchSitesEditor('so3-ed-list', 'Toutes les fiches', window.LCNDA_APP.webSearchSettings()); document.querySelector('#workspace').prepend(box); window.LCNDA_EXT.sourcesOuvertes3.enhanceEditors(box); });
+                    await p.evaluate(() => { const box = document.createElement('div'); box.id = 'so3-test-ed'; box.innerHTML = window.LCNDA_APP.webSearchSitesEditor('so3-ed-list', 'Toutes les fiches', window.LCNDA_APP.webSearchSettings()); document.body.prepend(box); window.LCNDA_EXT.sourcesOuvertes3.enhanceEditors(box); }); // hors de #workspace : l'écran redessiné après le ↶ Annuler d'avant (machine chargée) ne l'emporte pas
                     await p.waitForSelector('#so3-test-ed .so3-wsbar [data-so3-wsq]');
                     await p.fill('#so3-test-ed [data-so3-wsq]', 'geneteka');
                     assert.equal(await p.$$eval('#so3-test-ed .order-row:not([hidden])', r => r.length), 1);

@@ -53,12 +53,13 @@ $pdo->exec("INSERT INTO custom_lists(id,name,icon,source,definition_json) VALUES
 echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
     if (r.status !== 0 || !/ok$/.test(r.stdout)) { console.error(r.stderr || r.stdout); process.exit(1); }
 }
-/** toute la base, table par table, ligne par ligne (sans le journal des envois ni les compteurs d'AUTOINCREMENT ; l'index FTS par son contenu) */
+/** toute la base, table par table, ligne par ligne (sans le journal des envois ni les compteurs d'AUTOINCREMENT ; l'index FTS par son contenu ;
+ *  sans la marque « rfr_dirty » de meta : chaque requête POST la pose pour que la recherche revérifie ses noms, api.php — ce n'est pas une donnée) */
 function snapshot() {
     const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
 $p = new PDO('sqlite:'.$argv[1].'/genealogy.sqlite'); $p->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); $o = [];
 foreach ($p->query("SELECT name FROM sqlite_master WHERE type='table' AND name NOT IN ('sqlite_sequence','sheet_pushes') AND name NOT LIKE 'person_search_%' AND name NOT LIKE '%_fts_%' ORDER BY name")->fetchAll(PDO::FETCH_COLUMN) as $t) {
-    $rows = $p->query('SELECT * FROM "' . $t . '"')->fetchAll(); $lines = array_map('json_encode', $rows); sort($lines); $o[$t] = md5(implode("\n", $lines)) . ':' . count($rows);
+    $rows = $p->query('SELECT * FROM "' . $t . '"' . ($t === 'meta' ? " WHERE key <> 'rfr_dirty'" : ''))->fetchAll(); $lines = array_map('json_encode', $rows); sort($lines); $o[$t] = md5(implode("\n", $lines)) . ':' . count($rows);
 }
 echo json_encode($o);`, dir], { encoding: 'utf8' });
     if (r.status !== 0) throw new Error(r.stderr || r.stdout);

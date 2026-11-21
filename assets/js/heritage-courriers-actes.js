@@ -171,7 +171,9 @@
             onOpen: async d => {
                 d.classList.add('cl-dialog');
                 const f = d.querySelector('form');
-                try { defaults = (await api('cl_templates')).templates || null; } catch (_) {}
+                // la fenêtre s'enregistre toute seule dès qu'elle s'ouvre : ce qu'on tape pendant que les modèles de départ arrivent n'est pas perdu ;
+                // le modèle, lui, n'est gardé qu'une fois montré (sinon la case encore vide effacerait un modèle retouché)
+                let tplReady = false;
                 const showTpl = () => { const cur = cfg().templates[tplKey]; f.tpl_text.value = cur || defaults?.[tplKey] || ''; d.querySelector('[data-cl-tpl-state]').textContent = cur ? '✎ Modèle retouché (gardé tout seul).' : 'Modèle de départ.'; };
                 const ph = {'{expediteur}': 'ton nom et ton adresse', '{destinataire}': 'l’adresse du destinataire', '{lieu_date}': '« À Tulle, le 9 novembre 2026 »', '{objet}': 'l’objet', '{demande}': '« une copie intégrale de l’acte de naissance »', '{acte}': 'naissance, mariage ou décès', '{personne}': 'le nom de la personne', '{filiation}': '« , fils de … et de … »', '{evenement}': '« né le 7 mai 1925 à Tulle (Corrèze) »', '{conjoint}': 'le conjoint', '{lien_phrase}': 'ton lien', '{pieces_phrase}': 'les pièces jointes', '{precision}': 'tes précisions', '{retour_phrase}': 'l’enveloppe timbrée', '{signature}': 'ta signature'};
                 d.querySelector('[data-cl-ph]').innerHTML = Object.entries(ph).map(([k, v]) => `<li><code>${esc(k)}</code> : ${esc(v)}</li>`).join('');
@@ -179,12 +181,17 @@
                 const save = () => { const v = ls.get(KEY, {}) || {};
                     v.sender = {name: f.s_name.value.trim(), address: f.s_address.value.trim(), city: f.s_city.value.trim(), email: f.s_email.value.trim(), phone: f.s_phone.value.trim()};
                     v.delay = Math.max(0, Math.min(365, Number(f.delay.value) || 45)); v.byEmail = f.byEmail.checked;
-                    v.templates = v.templates || {}; const t = f.tpl_text.value.trim(); if (t && t !== (defaults?.[tplKey] || '').trim()) v.templates[tplKey] = t; else delete v.templates[tplKey];
+                    v.templates = v.templates || {}; if (tplReady) { const t = f.tpl_text.value.trim(); if (t && t !== (defaults?.[tplKey] || '').trim()) v.templates[tplKey] = t; else delete v.templates[tplKey]; }
                     ls.set(KEY, v); onChange?.(); };
                 const reload = () => { const n = cfg(); f.s_name.value = n.sender.name; f.s_address.value = n.sender.address; f.s_city.value = n.sender.city; f.s_email.value = n.sender.email; f.s_phone.value = n.sender.phone; f.delay.value = n.delay; f.byEmail.checked = n.byEmail; showTpl(); onChange?.(); };
                 f.tpl.addEventListener('change', () => { tplKey = f.tpl.value; showTpl(); });
                 d.querySelector('[data-cl-tpl-reset]').addEventListener('click', () => { const v = ls.get(KEY, {}) || {}; const before = JSON.stringify(v); if (v.templates) delete v.templates[tplKey]; ls.set(KEY, v); showTpl(); onChange?.(); A().undoToast?.('Modèle remis comme au départ', {undo: () => { try { localStorage.setItem(KEY, before); } catch (_) {} showTpl(); onChange?.(); }}); });
                 UI().autoSaveDialog?.(d, {keys: [KEY], save, reload, reset: () => { try { localStorage.removeItem(KEY); } catch (_) {} }});
+                let tplTyped = false; f.tpl_text.addEventListener('input', () => { tplTyped = true; });
+                try { defaults = (await api('cl_templates')).templates || null; } catch (_) {}
+                if (!d.isConnected) return;
+                if (!tplTyped) showTpl(); // le modèle de départ, s'il n'a pas été retouché entre-temps
+                tplReady = true;
                 // 💾 Réglages enregistrés : l'adresse, le délai et les modèles, sous un nom
                 const slot = d.querySelector('[data-cl-presets]');
                 if (slot && UI().presetsFrame) {

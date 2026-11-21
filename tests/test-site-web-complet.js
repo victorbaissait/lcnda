@@ -112,13 +112,16 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         const wait = ms => page.waitForTimeout(ms);
         const api = (action, body, get = false) => page.evaluate(async ({ action, body, get }) => { try { const r = get ? await window.LCNDA_APP.api(action, body || {}) : await window.LCNDA_APP.api(action, {}, { method: 'POST', body }); return { ok: true, r }; } catch (e) { return { ok: false, e: e.message }; } }, { action, body, get });
         const dgId = (await api('save_diagram', { name: 'Âges au décès', kind: 'columns', spec: { kind: 'columns', o: { title: 'Âges' } } })).r.result.id;
+        // 🗺 « Une de mes cartes » : une vraie carte sur mesure (Carte → Mes cartes), pour que le bloc ait quelque chose à mettre en image
+        const cm = await api('cartes_perso_write', { op: 'save', name: 'Les naissances', def: { time: { mode: 'cumul' }, layers: [{ id: 'nais', kind: 'births', name: 'Naissances' }] } });
+        const cmId = cm.ok && (cm.r.result ?? cm.r).map?.id; assert.ok(cmId, 'carte sur mesure créée : ' + JSON.stringify(cm));
         // le menu de choix, la fenêtre des images et des polices répondent tout seuls (on essaie l'éditeur, pas eux)
-        await page.evaluate(dg => {
+        await page.evaluate(([dg, cmId]) => {
             const P = window.LCNDA_PICKER || window.LCNDA_APP;
-            P.openPicker = async o => (o.kind === 'diagram' ? { id: dg, title: 'Âges au décès' } : o.kind === 'place' ? { id: 1, title: 'Tulle' } : { id: 1, title: 'Jean MARTIN' });
+            P.openPicker = async o => (o.kind === 'diagram' ? { id: dg, title: 'Âges au décès' } : o.kind === 'place' ? { id: 1, title: 'Tulle' } : o.kind === 'custommap' ? { id: cmId, title: 'Les naissances' } : { id: 1, title: 'Jean MARTIN' });
             P.openMediaPicker = async o => { const m = { id: 1, title: 'Jean au marché', filename: 'jean.jpg' }; return o?.multiple ? [m] : m; };
             window.LCNDA_UI.openFontPicker = async () => 'Verdana';
-        }, dgId);
+        }, [dgId, cmId]);
         if (process.env.SITE_LOG) { await page.evaluate(() => { const P = window.LCNDA_EXT.siteWeb.Editor.prototype, r = P.reload; window.__reloads = 0; P.reload = function () { window.__reloads++; return r.call(this); }; }); setInterval(() => page.evaluate(() => window.__reloads).then(n => console.log('   (recharges de l’aperçu :', n, ')')).catch(() => {}), 20000).unref(); }
         const C = () => page.evaluate(() => { const c = window.LCNDA_EXT.siteWeb.current; return c && { html: c.page().html, css: c.site.css, js: c.site.js, theme: c.site.theme, settings: c.site.settings, pages: c.site.pages.map(p => ({ name: p.name, slug: p.slug, title: p.title, desc: p.desc })), pageIdx: c.pageIdx, id: c.id, dirty: c.dirty, view: c.view, device: c.device, zoom: c.zoom, mode: c.mode, sel: c.sel && { tag: c.sel.tag, cls: c.sel.cls, id: c.sel.id, name: c.sel.name, path: c.sel.path, block: c.sel.block }, name: c.name, frozen: Object.keys(c.site.frozen || {}) }; });
         const fr = page.frameLocator('[data-sw-frame]');
@@ -282,7 +285,8 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         const blockOpt = async (sel, fn) => { await page.click('[data-sw-view="visual"]'); await pick(sel); await fn(); await wait(600); };
         await cmd('Arbre : générations', async () => { await blockOpt('[data-lc-block="tree"]', () => page.selectOption('[data-sw-ba="gens"]', '2')); must(/data-lc-block="tree"[^>]*data-gens="2"/.test((await C()).html)); must(await until(() => fr.locator('[data-lc-block="tree"] .lc-tree-col').count(), n => n === 2) === 2, 'pas redessiné'); });
         await cmd('Carte : lieux de la personne / et ses ancêtres', async () => { await blockOpt('[data-lc-block="map"]', () => page.selectOption('[data-sw-ba="scope"]', 'person')); must(/data-lc-block="map"[^>]*data-scope="person"/.test((await C()).html)); });
-        await cmd('Carte : fond de carte (liste des Réglages)', async () => { await pick('[data-lc-block="map"]'); must(await page.locator('[data-sw-ba="fond"] optgroup').count() >= 2); await page.selectOption('[data-sw-ba="fond"]', 'osmfr'); await wait(500); must(/data-fond="osmfr"/.test((await C()).html)); must(await until(() => fr.locator('[data-lc-block="map"] .lc-map-img').count(), n => n === 1, 20000) === 1, 'pas d’image'); });
+        await cmd('Carte : fond de carte (liste des Réglages)', async () => { await pick('[data-lc-block="map"]'); must(await page.locator('[data-sw-ba="fond"] optgroup').count() >= 2); // L4 : le menu des fonds est caché sous sa pastille (vignettes) : on choisit « OSM France » dans la grille
+            await page.click('[data-sw-ba="fond"] + .ui-icf-host [data-icf=change]'); await page.waitForSelector('.ui-ig.is-bg'); await page.keyboard.type('OSM France'); await wait(300); await page.click('.ui-ig.is-bg .ui-ig-tile[title="OSM France"]'); await wait(500); must(/data-fond="osmfr"/.test((await C()).html)); must(await until(() => fr.locator('[data-lc-block="map"] .lc-map-img').count(), n => n === 1, 20000) === 1, 'pas d’image'); });
         await cmd('Carte : interactive (bouge aussi dans l’éditeur)', async () => {
             await pick('[data-lc-block="map"]'); await page.check('[data-sw-panel] input[data-sw-ba="vive"]', { force: true }); await wait(800);
             must(await until(() => fr.locator('.lc-carte-vive[data-lcv-on] button').count(), n => n === 2, 8000) === 2, 'pas de ＋ −');
@@ -418,7 +422,8 @@ print(json.dumps(out))`, zipPath], { encoding: 'utf8' });
                         sp.on('response', r => { if (r.status() >= 400) bad.push(`${r.status()} ${r.url()}`); }); sp.on('pageerror', e => errs.push(e.message)); sp.on('console', m => { if (m.type() === 'error' && !/ERR_|Failed to load resource/.test(m.text())) errs.push(m.text()); });
                         for (const n of Object.keys(Z.pages).filter(n => !/^LISEZ-MOI/.test(n)).concat('LISEZ-MOI.html')) {
                             await sp.goto(sbase + n); await sp.waitForTimeout(500);
-                            const broken = await sp.evaluate(() => [...document.images].filter(i => /^images\//.test(i.getAttribute('src') || '') && !(i.complete && i.naturalWidth)).map(i => i.getAttribute('src')));
+                            // une image « loading=lazy » loin en bas n'est chargée qu'en y allant : on la fait charger avant de juger (une vraie image cassée reste sans largeur)
+                            const broken = await sp.evaluate(async () => { const L = [...document.images].filter(i => /^images\//.test(i.getAttribute('src') || '')); await Promise.all(L.map(i => { if (i.loading === 'lazy') i.loading = 'eager'; return i.decode().catch(() => {}); })); return L.filter(i => !(i.complete && i.naturalWidth)).map(i => i.getAttribute('src')); });
                             must(!broken.length, `${n} : images cassées ${broken.join(', ')}`);
                             if (n === 'index.html') { must(!!await sp.evaluate(() => document.body.dataset.t), `js/script.js n’a pas tourné (${errs.join(' ; ')} ${bad.join(' ')} ${JSON.stringify(Z.js || '').slice(0, 160)})`); }
                             if (await sp.locator('.lc-carte-vive').count()) must(await sp.locator('.lc-carte-vive[data-lcv-on] button').count() === 2, `${n} : carte`);
