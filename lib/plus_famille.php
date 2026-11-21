@@ -111,7 +111,7 @@ function pfam_hidden(PDO $pdo): array
     if ($memo !== null) { return $memo; }
     if (!function_exists('tresor_share_rows')) { require_once __DIR__ . '/tresors.php'; }
     if (!function_exists('gedcom_share_hidden')) { require_once __DIR__ . '/gedcom.php'; }
-    try { $memo = gedcom_share_hidden($pdo, tresor_share_rows($pdo), $pdo->query('SELECT id, partner1_id, partner2_id FROM families')->fetchAll()); }
+    try { $memo = tresor_share_hidden_all($pdo); }
     catch (Throwable $e) { $memo = []; foreach ($pdo->query('SELECT id FROM persons') as $r) { $memo[(int) $r['id']] = 'living'; } } // dans le doute, personne ne part
     return $memo;
 }

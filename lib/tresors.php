@@ -152,7 +152,7 @@ function tresor_tree(PDO $pdo): array
     // pour que le navigateur n'ait pas à deviner (un enfant sans date d'une personne née en 1950 est aussi retiré)
     if (function_exists('person_select')) {
         require_once __DIR__ . '/gedcom.php';
-        try { foreach (gedcom_share_hidden($pdo, tresor_share_rows($pdo), $pdo->query('SELECT id, partner1_id, partner2_id FROM families')->fetchAll()) as $hid => $_) { if (isset($people[(int) $hid])) { $people[(int) $hid]['sh'] = true; } } }
+        try { foreach (tresor_share_hidden_all($pdo) as $hid => $_) { if (isset($people[(int) $hid])) { $people[(int) $hid]['sh'] = true; } } }
         catch (Throwable $e) { foreach ($people as $id => $_) { $people[$id]['sh'] = true; } } // dans le doute, rien ne part
     }
     if ($kiosk) { // consultation : aussi les vivants probables (même règle que le partage), et leurs événements
@@ -170,6 +170,20 @@ function tresor_tree(PDO $pdo): array
         $events = array_values(array_filter($events, static fn($e) => !isset($hiddenFam[(int) ($e['f'] ?? 0)])));
     }
     return ['people' => array_values($people), 'families' => array_values($families), 'places' => (object) $places, 'events' => $events];
+}
+
+/**
+ * La règle de l'export « Pour partager » sur toute la base (vivants déclarés ou probables, fiches confidentielles) :
+ * gedcom_share_hidden(tresor_share_rows(), familles) [id => 'living'|'private']. 🐘 1,5 s à 200 000 fiches, demandé par
+ * plusieurs écrans (fiche, Trésors, fiabilité) : gardé tant que fiches, événements et familles ne changent pas (l'année
+ * compte : « moins de 100 ans ») ; une erreur n'est jamais gardée.
+ */
+function tresor_share_hidden_all(PDO $pdo): array
+{
+    if (!function_exists('gedcom_share_hidden')) { require_once __DIR__ . '/gedcom.php'; }
+    $run = static fn() => gedcom_share_hidden($pdo, tresor_share_rows($pdo), $pdo->query('SELECT id, partner1_id, partner2_id FROM families')->fetchAll());
+    if (!function_exists('calc_cached')) { return $run(); }
+    return calc_cached($pdo, 'share_hidden', ['persons', 'events', 'event_types', 'families', 'family_children'], [date('Y'), $_GET['death_cutoff_year'] ?? ''], $run);
 }
 
 /** En consultation : les personnes à ne jamais montrer (vivants déclarés ou probables, fiches confidentielles) [id => true] ; [] sinon */
@@ -209,7 +223,7 @@ function tresor_hidden_people(PDO $pdo): array
     foreach ($pdo->query("SELECT id FROM persons WHERE COALESCE(living_status,'')='living'" . ($hasPriv ? ' OR COALESCE(is_private,0)=1' : '')) as $r) { $memo[(int) $r['id']] = true; }
     try {
         if (!function_exists('gedcom_share_hidden')) { require_once __DIR__ . '/gedcom.php'; }
-        foreach (gedcom_share_hidden($pdo, tresor_share_rows($pdo), $pdo->query('SELECT id, partner1_id, partner2_id FROM families')->fetchAll()) as $h => $_) { $memo[(int) $h] = true; }
+        foreach (tresor_share_hidden_all($pdo) as $h => $_) { $memo[(int) $h] = true; }
     } catch (Throwable $e) { foreach ($pdo->query('SELECT id FROM persons') as $r) { $memo[(int) $r['id']] = true; } } // dans le doute, personne
     return $memo;
 }
