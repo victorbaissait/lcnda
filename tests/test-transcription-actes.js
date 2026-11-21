@@ -106,7 +106,9 @@ const fake = http.createServer((req, res) => {
         if (req.url === '/api/pull') { const j = JSON.parse(body || '{}'); ollama.pulls++; res.setHeader('Content-Type', 'application/x-ndjson');
             for (let i = 0; i <= 5; i++) { res.write(JSON.stringify({ status: 'pulling 0123', digest: 'sha256:0123', total: 6e9, completed: i * 1.2e9 }) + '\n'); await new Promise(r => setTimeout(r, 250)); }
             ollama.pulled.add(j.model); res.end(JSON.stringify({ status: 'success' }) + '\n'); return; }
-        if (req.url === '/api/chat') { const j = JSON.parse(body || '{}'); ollama.chats.push({ model: j.model, prompt: j.messages?.[0]?.content || '', images: (j.messages?.[0]?.images || []).map(s => s.length) }); res.setHeader('Content-Type', 'application/x-ndjson');
+        if (req.url === '/api/chat') { const j = JSON.parse(body || '{}'); ollama.chats.push({ model: j.model, think: j.think, prompt: j.messages?.[0]?.content || '', images: (j.messages?.[0]?.images || []).map(s => s.length) }); res.setHeader('Content-Type', 'application/x-ndjson');
+            // comme Qwen3-VL : sans « think: false », il ne fait que réfléchir (message.thinking) et la réponse reste vide
+            if (j.think !== false) { for (let i = 0; i < 3; i++) { res.write(JSON.stringify({ message: { role: 'assistant', content: '', thinking: 'Je regarde l’image… ' }, done: false }) + '\n'); await new Promise(r => setTimeout(r, 50)); } res.end(JSON.stringify({ message: { role: 'assistant', content: '' }, done: true, done_reason: 'length' }) + '\n'); return; }
             for (const w of ['conformément à la loi. Aucune opposition\n', 'audit mariage ne nous ayant été signifiée,\n', 'avons déclaré au nom de la loi que Pierre Mazaud\n']) { res.write(JSON.stringify({ message: { role: 'assistant', content: w }, done: false }) + '\n'); await new Promise(r => setTimeout(r, 150)); }
             res.end(JSON.stringify({ message: { role: 'assistant', content: '' }, done: true }) + '\n'); return; }
         res.statusCode = 404; res.end('{}');
@@ -324,7 +326,7 @@ echo json_encode($o, JSON_UNESCAPED_UNICODE);`));
         }],
         ['lecture approfondie : image vérifiée, texte lu en flux, consigne diplomatique, image effacée ; identifiant forgé refusé', () => {
             assert.equal(out.readGarbage.status, 422); assert.equal(out.readEnd.state, 'done'); assert.match(out.readEnd.text, /^conformément à la loi\. Aucune opposition\naudit mariage/);
-            assert.equal(out.chat.model, 'qwen3-vl:8b'); assert.match(out.chat.prompt, /ligne par ligne/); assert.match(out.chat.prompt, /\[illisible\]/); assert.match(out.chat.prompt, /N'invente rien/); assert.ok(out.chat.images[0] > 100);
+            assert.equal(out.chat.model, 'qwen3-vl:8b'); assert.equal(out.chat.think, false, 'think: false demandé (sinon Qwen3-VL ne fait que réfléchir et la réponse est vide)'); assert.match(out.chat.prompt, /ligne par ligne/); assert.match(out.chat.prompt, /\[illisible\]/); assert.match(out.chat.prompt, /N'invente rien/); assert.ok(out.chat.images[0] > 100);
             assert.deepEqual(out.left, []); assert.equal(out.jobForged.status, 422);
         }],
         ['lecture approfondie : une adresse d’Ollama hors de l’ordinateur est refusée (rien n’est appelé)', () => {

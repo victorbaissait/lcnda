@@ -8,3 +8,5 @@ La lecture approfondie n’est pas encore chargée : réessaie dans un instant. 
 Pour lire un acte : ouvre son image dans l’atelier de transcription (« 📜 Atelier »), puis « ✨ Lire l’acte ». ¦ Bir belgeyi okumak için: görüntüsünü transkripsiyon atölyesinde aç (“📜 Atölye”), sonra “✨ Belgeyi oku”.
 Transcrire ¦ Transkribe et
 Ouvrir l’outil de transcription complet sur cette image ¦ Bu görüntü için tam transkripsiyon aracını aç
+Le modèle a réfléchi sans écrire de transcription. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Model düşündü ama bir transkripsiyon yazmadı. Daha küçük bir alan kırp (birkaç satır) ya da 8B modelini dene, sonra yeniden başlat.
+Le modèle n’a rien lu sur cette image. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Model bu görüntüde hiçbir şey okumadı. Daha küçük bir alan kırp (birkaç satır) ya da 8B modelini dene, sonra yeniden başlat.

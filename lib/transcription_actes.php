@@ -209,18 +209,32 @@ function tx_deep_run(string $dir): void
             $state['state'] = 'done'; $put($state); return;
         }
         $img = trim((string) @file_get_contents($dir . '/image.b64'));
-        $text = ''; $last = 0; $err = '';
-        $r = tx_deep_http('POST', '/api/chat', ['model' => $tag, 'stream' => true, 'keep_alive' => '5m', 'options' => ['temperature' => 0, 'num_ctx' => 8192],
-            'messages' => [['role' => 'user', 'content' => (string) ($job['prompt'] ?? '')] + ($img !== '' ? ['images' => [$img]] : [])]], 1800, static function (array $j) use (&$text, &$last, &$err, $put, $cancelled) {
-            if (!empty($j['error'])) { $err = mb_substr((string) $j['error'], 0, 300); return false; }
-            $text .= (string) ($j['message']['content'] ?? '');
-            if (mb_strlen($text) > 60000) { return false; }
-            if (microtime(true) - $last > .7) { $last = microtime(true); $put(['state' => 'running', 'text' => $text]); }
-            return !$cancelled();
-        }, $base);
+        // Qwen3-VL « réfléchit » d'abord (message.thinking) : sans « think: false », toute la place peut y passer et la réponse
+        // reste vide. On le demande ; un Ollama trop ancien qui ne connaît pas « think » est relancé sans.
+        $text = ''; $thinking = ''; $last = 0; $err = ''; $r = ['ok' => false];
+        foreach ([true, false] as $noThink) {
+            $text = ''; $thinking = ''; $err = '';
+            $body = ['model' => $tag, 'stream' => true, 'keep_alive' => '5m', 'options' => ['temperature' => 0, 'num_ctx' => 16384, 'num_predict' => 4096],
+                'messages' => [['role' => 'user', 'content' => (string) ($job['prompt'] ?? '')] + ($img !== '' ? ['images' => [$img]] : [])]];
+            if ($noThink) { $body['think'] = false; }
+            $r = tx_deep_http('POST', '/api/chat', $body, 1800, static function (array $j) use (&$text, &$thinking, &$last, &$err, $put, $cancelled) {
+                if (!empty($j['error'])) { $err = mb_substr((string) $j['error'], 0, 300); return false; }
+                $text .= (string) ($j['message']['content'] ?? '');
+                $thinking .= (string) ($j['message']['thinking'] ?? '');
+                if (mb_strlen($text) > 60000 || mb_strlen($thinking) > 60000) { return false; }
+                if (microtime(true) - $last > .7) { $last = microtime(true); $put(['state' => 'running', 'text' => $text]); }
+                return !$cancelled();
+            }, $base);
+            if ($noThink && $err !== '' && stripos($err, 'think') !== false && !$cancelled()) { continue; } // « think » inconnu de cet Ollama
+            break;
+        }
         @unlink($dir . '/image.b64');
         if ($cancelled()) { $put(['state' => 'cancelled']); return; }
         if ($err !== '' || (!$r['ok'] && trim($text) === '')) { $put(['state' => 'error', 'error' => $err !== '' ? $err : 'La lecture approfondie n’a pas abouti.']); return; }
+        if (trim($text) === '') { // jamais un texte vide présenté comme une lecture
+            $put(['state' => 'error', 'error' => trim($thinking) !== ''
+                ? 'Le modèle a réfléchi sans écrire de transcription. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance.'
+                : 'Le modèle n’a rien lu sur cette image. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance.']); return; }
         $put(['state' => 'done', 'text' => trim(preg_replace('/^```[a-z]*\s*|\s*```$/', '', trim($text)) ?? $text)]);
     } catch (Throwable $e) {
         @unlink($dir . '/image.b64');
