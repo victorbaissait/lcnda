@@ -383,12 +383,17 @@
             return;
         }
         if (b.matches('[data-ong-tx], [data-ong-txopen]')) { // 📜 l'outil de transcription complet : la transcription déjà commencée sur cette image, sinon une nouvelle
-            if (!d.filename || !ext.openActTranscriber) return;
-            let acts = []; try { acts = (await A().api('act_transcriptions_media', {media_id: d.id})).items || []; } catch (_) { acts = []; }
-            const again = async () => { cache.delete(d.id); await load(true); if (A().state?.module === 'documents') { paintList(); if (cur === d.id) showDoc(d.id); } };
-            if (b.dataset.ongTxopen && Number(b.dataset.ongTxopen)) ext.openActTranscriber({id: Number(b.dataset.ongTxopen), onClose: again});
-            else if (acts.length) ext.openActTranscriber({id: acts[0].id, onClose: again});
-            else ext.openActTranscriber({mediaId: d.id, filename: d.filename, title: d.title || '', text: d.transcription || '', onClose: again});
+            if (!d.filename) return A().toast(T('Ce document n’a pas d’image : l’Atelier de transcription a besoin d’une image.'), 'error');
+            if (!ext.openActTranscriber) return A().toast(T('L’Atelier de transcription n’est pas encore chargé : réessaie dans un instant.'), 'error');
+            if (b.disabled) return; b.disabled = true; // un seul clic à la fois (le serveur peut mettre un instant à répondre)
+            try {
+                let acts = []; try { acts = (await A().api('act_transcriptions_media', {media_id: d.id})).items || []; } catch (_) { acts = []; }
+                const again = async () => { cache.delete(d.id); await load(true); if (A().state?.module === 'documents') { paintList(); if (cur === d.id) showDoc(d.id); } };
+                if (b.dataset.ongTxopen && Number(b.dataset.ongTxopen)) await ext.openActTranscriber({id: Number(b.dataset.ongTxopen), onClose: again});
+                else if (acts.length) await ext.openActTranscriber({id: acts[0].id, onClose: again});
+                else await ext.openActTranscriber({mediaId: d.id, filename: d.filename, title: d.title || '', text: d.transcription || '', onClose: again});
+            } catch (err) { console.error(err); A().toast(T('L’Atelier de transcription n’a pas pu s’ouvrir : {x}', {x: String(err?.message || err).slice(0, 200)}), 'error'); }
+            finally { b.disabled = false; }
             return;
         }
         if (b.matches('[data-ong-dl]')) { if (!d.filename) return; const a = Object.assign(document.createElement('a'), {href: `media/${encodeURIComponent(d.filename)}`, download: d.filename}); document.body.appendChild(a); a.click(); a.remove(); return; }

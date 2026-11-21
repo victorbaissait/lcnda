@@ -12,3 +12,6 @@ Le modèle a réfléchi sans écrire de transcription. Recadre une zone plus pet
 Le modèle n’a rien lu sur cette image. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Модель ничего не прочитала на этом изображении. Обрежь область поменьше (несколько строк) или попробуй модель 8B, затем запусти снова. ¦ Модель нічого не прочитала на цьому зображенні. Обріж меншу ділянку (кілька рядків) або спробуй модель 8B, потім запусти знову.
 La lecture a été arrêtée. ¦ Чтение было остановлено. ¦ Читання зупинено.
 Modèle : {m} · {n} s ¦ Модель: {m} · {n} с ¦ Модель: {m} · {n} с
+Ce document n’a pas d’image : l’Atelier de transcription a besoin d’une image. ¦ У этого документа нет изображения: Мастерская расшифровки нужно изображение. ¦ Цей документ не має зображення: Майстерня розшифрування потрібне зображення.
+L’Atelier de transcription n’est pas encore chargé : réessaie dans un instant. ¦ Мастерская расшифровки ещё не загружена: попробуй снова через мгновение. ¦ Майстерня розшифрування ще не завантажена: спробуй знову за мить.
+L’Atelier de transcription n’a pas pu s’ouvrir : {x} ¦ Мастерская расшифровки не удалось открыть: {x} ¦ Майстерня розшифрування не вдалося відкрити: {x}

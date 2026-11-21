@@ -12,3 +12,6 @@ Le modèle a réfléchi sans écrire de transcription. Recadre une zone plus pet
 Le modèle n’a rien lu sur cette image. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Το μοντέλο δεν διάβασε τίποτα σε αυτήν την εικόνα. Περίκοψε μια μικρότερη περιοχή (λίγες γραμμές) ή δοκίμασε το μοντέλο 8B και ξεκίνα ξανά. ¦ Моделът не прочете нищо на това изображение. Изрежи по-малка област (няколко реда) или опитай модела 8B, после пусни отново.
 La lecture a été arrêtée. ¦ Η ανάγνωση σταμάτησε. ¦ Четенето беше спряно.
 Modèle : {m} · {n} s ¦ Μοντέλο: {m} · {n} δ ¦ Модел: {m} · {n} с
+Ce document n’a pas d’image : l’Atelier de transcription a besoin d’une image. ¦ Αυτό το έγγραφο δεν έχει εικόνα: το Εργαστήριο μεταγραφής χρειάζεται εικόνα. ¦ Този документ няма изображение: Работилница за преписи се нуждае от изображение.
+L’Atelier de transcription n’est pas encore chargé : réessaie dans un instant. ¦ Το Εργαστήριο μεταγραφής δεν έχει φορτωθεί ακόμα: δοκίμασε ξανά σε λίγο. ¦ Работилница за преписи още не е заредена: опитай отново след малко.
+L’Atelier de transcription n’a pas pu s’ouvrir : {x} ¦ Το Εργαστήριο μεταγραφής δεν άνοιξε: {x} ¦ Работилница за преписи не можа да се отвори: {x}

@@ -12,3 +12,6 @@ Le modèle a réfléchi sans écrire de transcription. Recadre une zone plus pet
 Le modèle n’a rien lu sur cette image. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Mô hình không đọc được gì trên hình này. Cắt một vùng nhỏ hơn (vài dòng) hoặc thử mô hình 8B, rồi chạy lại. ¦ Model tidak membaca apa pun di gambar ini. Potong area yang lebih kecil (beberapa baris) atau coba model 8B, lalu jalankan lagi.
 La lecture a été arrêtée. ¦ Việc đọc đã bị dừng. ¦ Pembacaan dihentikan.
 Modèle : {m} · {n} s ¦ Mô hình: {m} · {n} giây ¦ Model: {m} · {n} dtk
+Ce document n’a pas d’image : l’Atelier de transcription a besoin d’une image. ¦ Giấy tờ này không có hình: Xưởng chép lại cần một hình ảnh. ¦ Dokumen ini tidak punya gambar: Bengkel transkripsi memerlukan gambar.
+L’Atelier de transcription n’est pas encore chargé : réessaie dans un instant. ¦ Xưởng chép lại chưa được tải: hãy thử lại sau giây lát. ¦ Bengkel transkripsi belum dimuat: coba lagi sebentar lagi.
+L’Atelier de transcription n’a pas pu s’ouvrir : {x} ¦ Không mở được Xưởng chép lại: {x} ¦ Bengkel transkripsi tidak bisa dibuka: {x}

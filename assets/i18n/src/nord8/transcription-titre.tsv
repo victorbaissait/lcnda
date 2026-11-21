@@ -12,3 +12,6 @@ Le modèle a réfléchi sans écrire de transcription. Recadre une zone plus pet
 Le modèle n’a rien lu sur cette image. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Model bu görüntüde hiçbir şey okumadı. Daha küçük bir alan kırp (birkaç satır) ya da 8B modelini dene, sonra yeniden başlat.
 La lecture a été arrêtée. ¦ Okuma durduruldu.
 Modèle : {m} · {n} s ¦ Model: {m} · {n} sn
+Ce document n’a pas d’image : l’Atelier de transcription a besoin d’une image. ¦ Bu belgenin görüntüsü yok: Transkripsiyon atölyesi bir görüntüye ihtiyaç duyar.
+L’Atelier de transcription n’est pas encore chargé : réessaie dans un instant. ¦ Transkripsiyon atölyesi henüz yüklenmedi: birazdan yeniden dene.
+L’Atelier de transcription n’a pas pu s’ouvrir : {x} ¦ Transkripsiyon atölyesi açılamadı: {x}

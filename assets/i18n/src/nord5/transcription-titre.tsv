@@ -12,3 +12,6 @@ Le modèle a réfléchi sans écrire de transcription. Recadre une zone plus pet
 Le modèle n’a rien lu sur cette image. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Model nije ništa pročitao na ovoj slici. Izreži manje područje (nekoliko redaka) ili isprobaj model 8B pa pokreni ponovno. ¦ Model na tej sliki ni prebral ničesar. Obreži manjše območje (nekaj vrstic) ali preizkusi model 8B in znova zaženi.
 La lecture a été arrêtée. ¦ Čitanje je zaustavljeno. ¦ Branje je bilo ustavljeno.
 Modèle : {m} · {n} s ¦ Model: {m} · {n} s ¦ Model: {m} · {n} s
+Ce document n’a pas d’image : l’Atelier de transcription a besoin d’une image. ¦ Ovaj dokument nema sliku: Radionica za prijepis treba sliku. ¦ Ta dokument nima slike: Delavnica za prepis potrebuje sliko.
+L’Atelier de transcription n’est pas encore chargé : réessaie dans un instant. ¦ Radionica za prijepis još nije učitana: pokušaj ponovno za trenutak. ¦ Delavnica za prepis še ni naložena: poskusi znova čez trenutek.
+L’Atelier de transcription n’a pas pu s’ouvrir : {x} ¦ Radionica za prijepis se nije mogla otvoriti: {x} ¦ Delavnica za prepis se ni mogla odpreti: {x}

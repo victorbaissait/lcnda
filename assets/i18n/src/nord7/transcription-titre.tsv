@@ -12,3 +12,6 @@ Le modèle a réfléchi sans écrire de transcription. Recadre une zone plus pet
 Le modèle n’a rien lu sur cette image. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Líkanið las ekkert á þessari mynd. Skerðu minna svæði (nokkrar línur) eða prófaðu líkanið 8B og keyrðu aftur.
 La lecture a été arrêtée. ¦ Lesturinn var stöðvaður.
 Modèle : {m} · {n} s ¦ Líkan: {m} · {n} s
+Ce document n’a pas d’image : l’Atelier de transcription a besoin d’une image. ¦ Þetta skjal hefur enga mynd: Umritunarsmiðja þarf mynd.
+L’Atelier de transcription n’est pas encore chargé : réessaie dans un instant. ¦ Umritunarsmiðja er ekki enn hlaðin: reyndu aftur eftir augnablik.
+L’Atelier de transcription n’a pas pu s’ouvrir : {x} ¦ Ekki tókst að opna Umritunarsmiðja: {x}

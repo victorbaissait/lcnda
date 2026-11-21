@@ -239,6 +239,15 @@ echo json_encode($o, JSON_UNESCAPED_UNICODE);`);
             await pg.waitForSelector('.h-pacts [data-pacts-link]', {timeout: 15000, state: 'attached'});
             assert.deepEqual(errs, []); await ctx.close();
         });
+        await t('page d’un document sans acte ni texte : « 📜 Atelier de transcription » en haut ouvre l’Atelier', async () => {
+            php(`$pdo->exec("INSERT INTO media(id,title,filename,thumbnail,media_type,transcription) VALUES(99,'annibal05','m.jpg','m.jpg','image','')"); echo json_encode(1);`);
+            const {ctx, pg, errs} = await open({width: 1440, height: 900}, '#documents/99');
+            await pg.waitForSelector('[data-ong-tx]', {timeout: 30000});
+            await pg.click('[data-ong-tx]');
+            await pg.waitForSelector('dialog.h-tx-dlg[open]', {timeout: 15000});
+            assert.equal(await pg.inputValue('dialog.h-tx-dlg [data-tx="title"]'), 'annibal05');
+            assert.deepEqual(errs, []); await ctx.close();
+        });
     } finally { await browser.close(); proc.kill(); }
     console.log(fails ? `✗ ${fails} échec(s)` : '✓ tout est bon');
     process.exit(fails ? 1 : 0);
