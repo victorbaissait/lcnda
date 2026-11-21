@@ -266,6 +266,47 @@ async function suite(phpPath, pool) {
       assert.deepEqual(fs.readdirSync(path.join(tmp, 'cache')).filter((f) => /world|\.part$/.test(f) && f !== 'world-prepare.lock'), [], 'rien décompressé une seconde fois');
     } finally { holder.kill('SIGKILL'); fs.rmSync(tmp, { recursive: true, force: true }); }
   });
+  await step('base tenue par un autre programme au lancement : message clair et traduit en quelques secondes (avant : 96 s), puis l’app repart', async () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-tenue-'));
+    const dirs = { dataDir: path.join(tmp, 'd'), mediaDir: path.join(tmp, 'm'), sessionDir: path.join(tmp, 's'), logFile: path.join(tmp, 'l', 'php.log') };
+    fs.mkdirSync(dirs.dataDir, { recursive: true });
+    const db = path.join(dirs.dataDir, 'genealogy.sqlite');
+    require('node:child_process').spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', "$p=new PDO('sqlite:'.getenv('DB'));$p->exec(file_get_contents('data/schema.sql'));$p->exec(\"INSERT INTO persons(first_name,last_name) VALUES('Rose','Essai')\");"], { cwd: appRoot, env: { ...process.env, DB: db } });
+    const server = new PhpServer({ phpPath, appRoot, pool: 1, ...dirs });
+    server.on('error', () => {});
+    let holder = null;
+    try {
+      await server.start();
+      assert.equal((await server.prepareDatabase()).ok, true, 'la base doit d’abord s’ouvrir (mise à jour de structure)');
+      // un autre programme la tient (verrou exclusif, comme un logiciel qui l'a ouverte ou une synchronisation)
+      holder = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-r', "$p=new PDO('sqlite:'.getenv('DB'));$p->exec('PRAGMA locking_mode=EXCLUSIVE');$p->exec('BEGIN EXCLUSIVE');$p->exec('CREATE TABLE IF NOT EXISTS essai_verrou(x)');echo 'tenue';sleep(120);"], { env: { ...process.env, DB: db }, stdio: ['ignore', 'pipe', 'ignore'] });
+      await new Promise((r) => holder.stdout.once('data', r));
+      let t0 = Date.now();
+      const fr = await server.prepareDatabase();
+      const ms = Date.now() - t0;
+      assert.equal(fr.ok, false); assert.equal(fr.busy, true, JSON.stringify(fr));
+      assert.match(fr.error, /occupée par un autre programme.*Ferme cet autre programme ou attends la fin de la synchronisation, puis relance/s);
+      assert.match(fr.detail, /database is locked/);
+      assert.ok(ms >= 4000 && ms < 9000, `message après ${ms} ms (attendu : environ 5 s)`);
+      t0 = Date.now();
+      const en = await server.prepareDatabase({ lang: 'en' });
+      assert.equal(en.busy, true);
+      assert.match(en.error, /being used by another program.*wait for the sync to finish/s, 'message traduit (cookie lcnda_lang de l’app)');
+      assert.ok(Date.now() - t0 < 9000);
+      // une page déjà ouverte : une seule attente (au lieu de trois de 30 s), même message, réponse 503
+      t0 = Date.now();
+      const page = await server.request('/api.php?action=bootstrap', { timeout: 0 });
+      assert.equal(page.status, 503);
+      assert.equal(JSON.parse(page.body.toString()).busy, true);
+      assert.ok(Date.now() - t0 < 40000, 'la page a attendu ' + (Date.now() - t0) + ' ms');
+      // l'autre programme fermé : tout repart, sans relancer PHP
+      holder.kill('SIGKILL'); holder = null;
+      await new Promise((r) => setTimeout(r, 300));
+      const ok = await server.prepareDatabase();
+      assert.equal(ok.ok, true, JSON.stringify(ok));
+      assert.equal((await server.request('/api.php?action=bootstrap', { timeout: 0 })).status, 200);
+    } finally { if (holder) holder.kill('SIGKILL'); await server.stop(); fs.rmSync(tmp, { recursive: true, force: true }); }
+  });
   await suite(phpPath, 1);
   await suite(phpPath, 3);
   console.log(`\n${passed} vérifications réussies.`);

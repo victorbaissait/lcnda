@@ -27864,6 +27864,7 @@
  "La base d’exemple est une famille imaginaire (5 générations, des photos d’époque dessinées) rangée à part dans « Mes généalogies » : ta généalogie n’est jamais touchée.": "Eksempeldatabasen er en oppdiktet familie (5 generasjoner, tegnede tidsriktige bilder) som lagres for seg i «Mine slektstrær»: slektsforskningen din blir aldri rørt.",
  "La base d’un logarithme ne peut pas valoir 1.": "Grunntallet til en logaritme kan ikke være 1.",
  "La base doit d’abord être mise à jour (structure n° 64).": "Databasen må først oppdateres (struktur nr. 64).",
+ "La base est occupée par un autre programme : une autre copie de l’application, un logiciel qui a ouvert le fichier, ou une synchronisation (OneDrive, Dropbox, iCloud…) en train de le recopier. Ferme cet autre programme ou attends la fin de la synchronisation, puis relance l’application. Rien n’a été modifié.": "Databasen brukes av et annet program: en annen kopi av appen, et program som har åpnet filen, eller en synkronisering (OneDrive, Dropbox, iCloud…) som kopierer den akkurat nå. Lukk det andre programmet eller vent til synkroniseringen er ferdig, og start deretter appen på nytt. Ingenting er endret.",
  "La base généalogique doit être importée.": "Slektsdatabasen må importeres.",
  "La base locale n'a pas encore été importée.": "Den lokale databasen er ikke importert ennå.",
  "La base n’a pas pu enregistrer ces réglages : réessaie.": "Databasen kunne ikke lagre disse innstillingene: prøv igjen.",

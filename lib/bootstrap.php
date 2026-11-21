@@ -3,6 +3,9 @@ declare(strict_types=1);
 /** Enregistrement refusé parce que la même chose a changé ailleurs (autre onglet, autre fenêtre) depuis son ouverture : réponse 409. */
 if (!class_exists('LcndaConflict')) { class LcndaConflict extends RuntimeException {} }
 if (!class_exists('LcndaBadInput')) { class LcndaBadInput extends RuntimeException {} } // donnée de mauvaise forme envoyée par la page → 422
+/** La base est tenue par un autre programme (verrou SQLite) dès son ouverture : réponse 503, message « que faire » (db()). */
+if (!class_exists('LcndaDbBusy')) { class LcndaDbBusy extends RuntimeException {} }
+const DB_BUSY_MESSAGE = 'La base est occupée par un autre programme : une autre copie de l’application, un logiciel qui a ouvert le fichier, ou une synchronisation (OneDrive, Dropbox, iCloud…) en train de le recopier. Ferme cet autre programme ou attends la fin de la synchronisation, puis relance l’application. Rien n’a été modifié.';
 /** Version d'un contenu enregistré (tableau, mise en page) : change dès que le contenu change, même dans la même seconde. */
 function content_rev(?string $json): string { return substr(sha1((string) $json), 0, 16); }
 /** Le JSON reçu est lu en tableaux PHP : un objet vide {} y devient [] et repartait ainsi au navigateur (où ce qu'on y range
@@ -251,10 +254,23 @@ function db(): PDO
         throw new RuntimeException('La base locale n\'a pas encore été importée.');
     }
 
-    $pdo = new PDO('sqlite:' . DB_PATH, null, null, [
+    $c = new PDO('sqlite:' . DB_PATH, null, null, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     ]);
+    // Base tenue par un autre programme (logiciel qui l'a ouverte en exclusif, synchronisation qui la recopie…) : une seule
+    // lecture d'essai, qui attend au plus db_open_wait_ms(), puis un message clair. Avant, chaque lecture de l'ouverture
+    // (mode du journal, objets inattendus, numéro de structure) attendait 30 s chacune : 96 s avant le message au lancement.
+    // En mode WAL, les écritures de l'application elle-même ne bloquent jamais cette lecture.
+    // déjà attendue dans cette requête (🔐 lecture du mot de passe, lib/verrou.php glock_db_row) : un dernier essai court
+    $c->exec('PRAGMA busy_timeout = ' . (db_busy_seen(DB_PATH) ? 300 : db_open_wait_ms()));
+    try {
+        $c->query('SELECT count(*) FROM sqlite_master')->fetchColumn();
+    } catch (PDOException $e) {
+        if (db_error_is_busy($e)) { throw new LcndaDbBusy(DB_BUSY_MESSAGE, 0, $e); }
+        throw $e;
+    }
+    $pdo = $c;
     $pdo->exec('PRAGMA foreign_keys = ON');
     register_search_fold($pdo); // lc_fold(x) : recherche sans accents ni tirets (lib/text.php)
     // Une écriture qui trouve la base occupée attend jusqu'à 30 s (au lieu d'échouer) : utile quand plusieurs
@@ -274,6 +290,32 @@ function db(): PDO
     // Communes françaises (contours, voisinages, GeoNames) : chargées une fois si la base ne les a pas.
     ensure_reference_data($pdo, DB_PATH);
     return $pdo;
+}
+
+/**
+ * Attente maximale de la lecture d'essai de db(). Au lancement de l'app de bureau (schema_status, electron/php-server.js
+ * prepareDatabase) : 5 s, pour dire vite que la base est tenue ailleurs. Ailleurs : 30 s, comme les écritures (une page
+ * ouverte n'échoue pas pour une attente courte).
+ */
+function db_open_wait_ms(): int
+{
+    return PHP_SAPI !== 'cli' && ($_GET['action'] ?? null) === 'schema_status' ? 5000 : 30000;
+}
+
+/** La base $path a-t-elle déjà été trouvée tenue par un autre programme pendant cette requête ? ($mark : le noter) */
+function db_busy_seen(string $path, bool $mark = false): bool
+{
+    static $seen = [];
+    $k = (string) (realpath($path) ?: $path);
+    if ($mark) { $seen[$k] = true; }
+    return isset($seen[$k]);
+}
+
+/** SQLITE_BUSY (5) ou SQLITE_LOCKED (6) : la base est tenue par une autre connexion. */
+function db_error_is_busy(Throwable $e): bool
+{
+    $code = $e instanceof PDOException ? (int) ($e->errorInfo[1] ?? 0) : 0;
+    return $code === 5 || $code === 6 || (bool) preg_match('/database (table )?is locked|SQLITE_BUSY/i', $e->getMessage());
 }
 
 /**

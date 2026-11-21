@@ -27864,6 +27864,7 @@
  "La base d’exemple est une famille imaginaire (5 générations, des photos d’époque dessinées) rangée à part dans « Mes généalogies » : ta généalogie n’est jamais touchée.": "The sample database is an imaginary family (5 generations, drawn period photos) kept separately in “My family trees”: your family tree is never touched.",
  "La base d’un logarithme ne peut pas valoir 1.": "The base of a logarithm can’t be 1.",
  "La base doit d’abord être mise à jour (structure n° 64).": "The database must first be updated (structure no. 64).",
+ "La base est occupée par un autre programme : une autre copie de l’application, un logiciel qui a ouvert le fichier, ou une synchronisation (OneDrive, Dropbox, iCloud…) en train de le recopier. Ferme cet autre programme ou attends la fin de la synchronisation, puis relance l’application. Rien n’a été modifié.": "The database is being used by another program: another copy of the app, software that has opened the file, or a sync (OneDrive, Dropbox, iCloud…) copying it right now. Close that other program or wait for the sync to finish, then restart the app. Nothing has been changed.",
  "La base généalogique doit être importée.": "The family tree database must be imported.",
  "La base locale n'a pas encore été importée.": "The local database hasn’t been imported yet.",
  "La base n’a pas pu enregistrer ces réglages : réessaie.": "The database could not save these settings: try again.",

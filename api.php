@@ -836,7 +836,12 @@ try {
     // app de bureau, au lancement (electron/php-server.js, prepareDatabase) : la vraie raison (base abîmée, occupée, en lecture
     // seule…), que electron/main.js dit simplement ; le message ci-dessus parle d'un enregistrement, ce n'en est pas un
     if (isset($action) && $action === 'schema_status') { $out['detail'] = $e->getMessage(); }
-    json_response($out, $e instanceof LcndaBadInput ? 422 : 500);
+    // base tenue par un autre programme dès l'ouverture (db()) : l'app de bureau le dit tout de suite (electron/main.js)
+    if ($e instanceof LcndaDbBusy) {
+        $out['busy'] = true;
+        if (isset($action) && $action === 'schema_status' && $e->getPrevious()) { $out['detail'] = $e->getPrevious()->getMessage(); }
+    }
+    json_response($out, $e instanceof LcndaBadInput ? 422 : ($e instanceof LcndaDbBusy ? 503 : 500));
 }
 
 function bootstrap_data(PDO $pdo): never

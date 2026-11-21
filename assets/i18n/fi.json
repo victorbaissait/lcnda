@@ -27864,6 +27864,7 @@
  "La base d’exemple est une famille imaginaire (5 générations, des photos d’époque dessinées) rangée à part dans « Mes généalogies » : ta généalogie n’est jamais touchée.": "Esimerkkitietokanta on kuvitteellinen perhe (5 sukupolvea, piirrettyjä aikakauden valokuvia), joka säilytetään erikseen kohdassa ”Omat sukututkimukset”: sukututkimukseesi ei koskaan kosketa.",
  "La base d’un logarithme ne peut pas valoir 1.": "Logaritmin kantaluku ei voi olla 1.",
  "La base doit d’abord être mise à jour (structure n° 64).": "Tietokanta on ensin päivitettävä (rakenne nro 64).",
+ "La base est occupée par un autre programme : une autre copie de l’application, un logiciel qui a ouvert le fichier, ou une synchronisation (OneDrive, Dropbox, iCloud…) en train de le recopier. Ferme cet autre programme ou attends la fin de la synchronisation, puis relance l’application. Rien n’a été modifié.": "Tietokanta on toisen ohjelman käytössä: sovelluksen toinen kopio, ohjelma, joka on avannut tiedoston, tai synkronointi (OneDrive, Dropbox, iCloud…), joka kopioi sitä juuri nyt. Sulje se toinen ohjelma tai odota, että synkronointi päättyy, ja käynnistä sovellus sitten uudelleen. Mitään ei muutettu.",
  "La base généalogique doit être importée.": "Sukututkimustietokanta on tuotava.",
  "La base locale n'a pas encore été importée.": "Paikallista tietokantaa ei ole vielä tuotu.",
  "La base n’a pas pu enregistrer ces réglages : réessaie.": "Tietokanta ei voinut tallentaa näitä asetuksia: yritä uudelleen.",
