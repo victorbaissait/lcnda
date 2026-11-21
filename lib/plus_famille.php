@@ -220,7 +220,7 @@ function pfam_rel_run(PDO $pdo, bool $fresh = false): array
         $c = json_decode((string) @file_get_contents($file), true);
         if (is_array($c) && ($c['sig'] ?? '') === $sig) { return $memo = $c; }
     }
-    if (function_exists('memory_at_least')) { memory_at_least(1024); }
+    if (function_exists('memory_for_persons')) { memory_for_persons($pdo, 8, 1024); } elseif (function_exists('memory_at_least')) { memory_at_least(1024); } // 200 000 fiches : 1,5 Go avec la solidité des liens
     @set_time_limit(300);
     $t0 = microtime(true);
     $d = pfam_rel_collect($pdo);

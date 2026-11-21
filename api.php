@@ -1082,18 +1082,30 @@ function person_select(): string
  * le premier acte de chaque sorte dans l'ordre des événements), mais en trois lectures au lieu de douze sous-requêtes par fiche —
  * l'export GEDCOM d'une base de 100 000 personnes y passait plusieurs secondes.
  */
-function person_select_rows(PDO $pdo): array
+function person_select_rows(PDO $pdo, ?array $ids = null, bool $light = false): array
 {
+    // $ids : seulement ces fiches (par paquets : l'export d'une très grosse base ne garde plus toutes les fiches entières en
+    // mémoire) ; $light : seulement ce que les règles de partage lisent (id, sexe, statut, confidentielle, années de
+    // naissance, de décès, de mariage), les mêmes valeurs
+    $in = $ids === null ? '' : implode(',', array_map('intval', $ids) ?: [0]);
     $first = []; // [person_id][clé] => [date_text, year] (le premier acte, par numéro d'événement)
     $kinds = ['BIRT' => 'birth', 'DEAT' => 'death', 'BURI' => 'buri', 'CHR' => 'bapt', 'BAPM' => 'bapt'];
-    foreach ($pdo->query("SELECT e.person_id, t.gedcom_tag, e.date_text, e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id IS NOT NULL AND t.gedcom_tag IN ('BIRT','DEAT','BURI','CHR','BAPM') ORDER BY e.id") as $e) {
-        $first[(int) $e['person_id']][$kinds[$e['gedcom_tag']]] ??= [$e['date_text'], $e['year']];
+    foreach ($pdo->query("SELECT e.person_id, t.gedcom_tag, e.date_text, e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id IS NOT NULL AND t.gedcom_tag IN ('BIRT','DEAT','BURI','CHR','BAPM')" . ($in !== '' ? " AND e.person_id IN ($in)" : '') . " ORDER BY e.id") as $e) {
+        if ($light && $e['gedcom_tag'] !== 'BIRT' && $e['gedcom_tag'] !== 'DEAT') { continue; }
+        $first[(int) $e['person_id']][$kinds[$e['gedcom_tag']]] ??= $light ? [null, $e['year']] : [$e['date_text'], $e['year']];
     }
-    foreach ($pdo->query("SELECT f.partner1_id, f.partner2_id, e.date_text, e.year FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN families f ON f.id=e.family_id WHERE t.gedcom_tag IN ('MARR','MRCI','MRRE') ORDER BY e.id") as $e) {
-        foreach (array_unique([(int) $e['partner1_id'], (int) $e['partner2_id']]) as $pid) { if ($pid) { $first[$pid]['marr'] ??= [$e['date_text'], $e['year']]; } }
+    foreach ($pdo->query("SELECT f.partner1_id, f.partner2_id, e.date_text, e.year FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN families f ON f.id=e.family_id WHERE t.gedcom_tag IN ('MARR','MRCI','MRRE')" . ($in !== '' ? " AND (f.partner1_id IN ($in) OR f.partner2_id IN ($in))" : '') . " ORDER BY e.id") as $e) {
+        foreach (array_unique([(int) $e['partner1_id'], (int) $e['partner2_id']]) as $pid) { if ($pid) { $first[$pid]['marr'] ??= $light ? [null, $e['year']] : [$e['date_text'], $e['year']]; } }
     }
     $rows = [];
-    foreach ($pdo->query("SELECT p.*, g.name AS surname_group, (SELECT COALESCE(NULLIF(m.thumbnail,''),m.filename) FROM media m WHERE m.id=p.portrait_media_id) AS portrait FROM persons p LEFT JOIN surname_groups g ON g.id=p.surname_group_id ORDER BY p.id") as $r) {
+    if ($light) {
+        foreach ($pdo->query('SELECT id, gender, living_status, is_private FROM persons' . ($in !== '' ? " WHERE id IN ($in)" : '') . ' ORDER BY id') as $r) {
+            $f = $first[(int) $r['id']] ?? [];
+            $rows[] = $r + ['birth_year' => $f['birth'][1] ?? null, 'death_year' => $f['death'][1] ?? null, 'marr_year' => $f['marr'][1] ?? null];
+        }
+        return $rows;
+    }
+    foreach ($pdo->query("SELECT p.*, g.name AS surname_group, (SELECT COALESCE(NULLIF(m.thumbnail,''),m.filename) FROM media m WHERE m.id=p.portrait_media_id) AS portrait FROM persons p LEFT JOIN surname_groups g ON g.id=p.surname_group_id" . ($in !== '' ? " WHERE p.id IN ($in)" : '') . " ORDER BY p.id") as $r) {
         $portrait = $r['portrait']; unset($r['portrait']);
         $f = $first[(int) $r['id']] ?? [];
         foreach (['birth', 'death', 'marr', 'buri', 'bapt'] as $k) { $r[$k . '_date'] = $f[$k][0] ?? null; $r[$k . '_year'] = $f[$k][1] ?? null; }
@@ -3820,14 +3832,18 @@ function occupation_attach_people(PDO $pdo,array $rows,string $field): array
     $labelsByPerson=[];
     if($allPersonIds){
         $allPersonIds=array_values(array_unique($allPersonIds));
-        $lmarks=implode(',',array_fill(0,count($allPersonIds),'?'));
-        $lstmt=$pdo->prepare("SELECT ll.entity_id AS person_id,l.id,l.name,l.color
-            FROM label_links ll JOIN labels l ON l.id=ll.label_id
-            WHERE ll.entity_type='person' AND ll.entity_id IN ($lmarks)
-            ORDER BY l.name COLLATE NOCASE");
-        $lstmt->execute($allPersonIds);
-        foreach($lstmt->fetchAll() as $lr){
-            $labelsByPerson[(int)$lr['person_id']][]=['id'=>(int)$lr['id'],'name'=>$lr['name'],'color'=>$lr['color']];
+        // 🐘 par paquets : un métier porté par des dizaines de milliers de fiches dépassait la limite de SQLite (32 766 « ? ») ;
+        // chaque fiche est dans un seul paquet, ses étiquettes restent dans l'ordre de leur nom
+        foreach(array_chunk($allPersonIds,5000) as $idChunk){
+            $lmarks=implode(',',array_fill(0,count($idChunk),'?'));
+            $lstmt=$pdo->prepare("SELECT ll.entity_id AS person_id,l.id,l.name,l.color
+                FROM label_links ll JOIN labels l ON l.id=ll.label_id
+                WHERE ll.entity_type='person' AND ll.entity_id IN ($lmarks)
+                ORDER BY l.name COLLATE NOCASE");
+            $lstmt->execute($idChunk);
+            foreach($lstmt->fetchAll() as $lr){
+                $labelsByPerson[(int)$lr['person_id']][]=['id'=>(int)$lr['id'],'name'=>$lr['name'],'color'=>$lr['color']];
+            }
         }
     }
     foreach($rows as &$row){

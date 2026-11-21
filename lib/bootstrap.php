@@ -1324,6 +1324,17 @@ function memory_at_least(int $mb): void
     if ($bytes < $mb * 1048576) { @ini_set('memory_limit', $mb . 'M'); }
 }
 
+/**
+ * 🐘 Un calcul qui lit toute la base en mémoire (contrôle, fiabilité, export…) : au moins $minMb Mo, et plus sur une très
+ * grosse base, à raison de $kbPerPerson Ko par fiche (mesuré à 200 000 fiches) + 512 Mo de marge, jusqu'à 8 Go au plus.
+ * Sans cela, 500 000 fiches finissaient en « Allowed memory size exhausted » (erreur 500).
+ */
+function memory_for_persons(PDO $pdo, float $kbPerPerson, int $minMb = 2048): void
+{
+    try { $n = (int) $pdo->query('SELECT COALESCE(max(rowid),0) FROM persons')->fetchColumn(); } catch (Throwable $_) { $n = 0; }
+    memory_at_least((int) min(8192, max($minMb, ceil($n * $kbPerPerson / 1024) + 512)));
+}
+
 function json_response(mixed $data, int $status = 200): never
 {
     http_response_code($status);

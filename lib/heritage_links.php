@@ -491,7 +491,7 @@ function ask_question(PDO $pdo, string $question, int $personId = 0, string $pla
 {
     // 🐘 une très grosse base (500 000 fiches) : toutes les fiches et leurs repères sont lus en mémoire (≈ 1 Go) ; de la marge
     // au-delà du réglage habituel de 1 Go, comme pour l'export et le contrôle
-    if (function_exists('memory_at_least')) { memory_at_least(2048); }
+    if (function_exists('memory_for_persons')) { memory_for_persons($pdo, 4); } elseif (function_exists('memory_at_least')) { memory_at_least(2048); }
     if (mb_strlen($question) > 300) { $question = mb_substr($question, 0, 300); }
     $question = question_normalize_case($pdo, $question); // une question en capitales : lieux et noms remis comme dans la base
     if (!function_exists('qp_rewrite')) { return ask_question_base($pdo, $question, $personId, $placeKey); }

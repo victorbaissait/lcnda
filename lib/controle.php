@@ -151,7 +151,7 @@ function controle_run(PDO $pdo, bool $fresh = false): array
     }
     $t0 = microtime(true);
     // une très grosse base (100 000 fiches) demande ≈ 750 Mo : on laisse de la marge au-delà du réglage habituel (1 Go)
-    if (function_exists('memory_at_least')) { memory_at_least(2048); }
+    if (function_exists('memory_for_persons')) { memory_for_persons($pdo, 8); } elseif (function_exists('memory_at_least')) { memory_at_least(2048); } // 200 000 fiches : 1,45 Go
     @set_time_limit(300);
     $res = controle_compute($pdo, $th);
     $res['sig'] = $sig;

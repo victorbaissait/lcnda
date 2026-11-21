@@ -481,10 +481,13 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
     $includeSources = export_option_enabled('include_sources', true);
     $includeMedia = export_option_enabled('include_media', true);
 
-    $allPersons = function_exists('person_select_rows') ? person_select_rows($pdo) : $pdo->query(person_select() . ' ORDER BY p.id')->fetchAll();
-    $families = $pdo->query('SELECT * FROM families ORDER BY id')->fetchAll();
     // une très grosse base (100 000 fiches, 300 000 événements) dépasse le réglage habituel de 1 Go : un peu de marge pour l'export
-    if (function_exists('memory_at_least')) { memory_at_least(2048); }
+    if (function_exists('memory_for_persons')) { memory_for_persons($pdo, 3); } elseif (function_exists('memory_at_least')) { memory_at_least(2048); }
+    // 🐘 seulement ce que les règles de partage et de tri lisent, pour toutes les fiches ; les fiches entières sont lues par
+    // paquets de 2 000 au moment de les écrire (500 000 fiches entières : plus de 2 Go de mémoire, export en erreur)
+    $chunked = function_exists('person_select_rows');
+    $allPersons = $chunked ? person_select_rows($pdo, null, true) : $pdo->query(person_select() . ' ORDER BY p.id')->fetchAll();
+    $families = $pdo->query('SELECT * FROM families ORDER BY id')->fetchAll();
     @set_time_limit(600);
     // Une seule branche (ascendants d'une personne, ou descendants d'un couple) au lieu de toute la base
     $branch = gedcom_branch_ids($pdo);
@@ -694,11 +697,14 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
     $eventsByPerson = []; $chunkEnd = -1;
     foreach ($persons as $pi => $p) {
         $pid = (int) $p['id'];
-        if ($pi > $chunkEnd) { // les événements des 2 000 fiches suivantes
+        if ($pi > $chunkEnd) { // les événements (et les fiches entières) des 2 000 fiches suivantes
             $chunkIds = array_map(static fn($x) => (int) $x['id'], array_slice($persons, $pi, 2000));
             $chunkEnd = $pi + count($chunkIds) - 1;
             $eventsByPerson = $eventsOf('person', array_values(array_filter($chunkIds, static fn($x) => !isset($hidden[$x]))));
+            $fullRows = [];
+            if ($chunked) { foreach (person_select_rows($pdo, $chunkIds) as $fr) { $fullRows[(int) $fr['id']] = $fr; } }
         }
+        if ($chunked) { $p = $fullRows[$pid] ?? $p; }
         $line(0, '@I' . $pid . '@', 'INDI');
         if (isset($hidden[$pid])) {
             $line(1, 'NAME', $hidden[$pid] === 'private' ? 'Fiche /confidentielle/' : 'Personne /vivante/');
