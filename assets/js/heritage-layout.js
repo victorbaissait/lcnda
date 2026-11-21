@@ -1186,7 +1186,18 @@
         function fitFrame() { const it = one(); if (!it) return; if (it.type === 'text') { const el = board.querySelector(`.ly-item[data-id="${CSS.escape(it.id)}"] .ly-txt`); if (el) { it.h = r1(el.scrollHeight / MM + (it.inset || 0) * 2 + 0.5); commit(); render(); } return; } if (it.src) { const im = new Image(); im.onload = () => { it.h = r1(it.w * im.naturalHeight / im.naturalWidth); it.imgS = 100; it.imgX = 0; it.imgY = 0; commit(); render(); }; im.src = it.src; } }
         async function placeImage(target = null) {
             const res = await pickImage(); if (!res) return;
-            await placeSrc(res, target && (target.type === 'frame') ? target : one()?.type === 'frame' ? one() : null); commit(); render();
+            const fr = await placeSrc(res, target && (target.type === 'frame') ? target : one()?.type === 'frame' ? one() : null);
+            if (res.withTr && res.mediaId) await placeTranscription(res.mediaId, fr);
+            commit(); render();
+        }
+        /** 📜 « Avec la transcription » : le texte du document (un seul : celui de l'Atelier de transcription) dans un bloc à côté de l'image */
+        async function placeTranscription(mediaId, fr) {
+            let txt = ''; try { txt = String((await api('onglets', {op: 'document', id: mediaId})).document?.transcription || '').trim(); } catch (_) { txt = ''; }
+            if (!txt) { msg(i18n('Ce document n’a pas encore de transcription.')); return; }
+            const b = box(D, cur), right = fr.x + fr.w + 6, roomR = b.x + b.w - right;
+            const pos = roomR >= 50 ? {x: r1(right), y: fr.y, w: r1(roomR), h: r1(Math.max(fr.h, 40))} : {x: fr.x, y: r1(fr.y + fr.h + 4), w: r1(Math.min(b.w, Math.max(fr.w, 100))), h: 60};
+            const html = txt.split(/\n{2,}/).map(p => `<p data-ps="ps-body">${esc(p).replace(/\n/g, '<br>')}</p>`).join('');
+            const it = textItem({...pos, layer: fr.layer || activeLayer(), html}); curList().push(it); sel = [fr.id, it.id];
         }
         /** Une image dans un cadre (celui donné, sinon un nouveau dans les marges, décalé de k fois 8 mm) */
         async function placeSrc(res, target = null, k = 0) {
@@ -2262,9 +2273,13 @@
     async function pickImage() {
         // la fenêtre unique des médias : la photo reste liée (objet dynamique) ; une image de l'ordinateur entre dans les Médias
         const P = window.LCNDA_PICKER; if (!P?.openMediaPicker) { toast('La fenêtre des images n’est pas encore prête. Réessaie dans un instant.', 'error'); return null; }
+        const TR_KEY = 'genealogie-layout-with-tr'; let withTr = false; try { withTr = localStorage.getItem(TR_KEY) === '1'; } catch (_) {}
         const r = await P.openMediaPicker({types: ['image'], eyebrow: 'PLACER UNE IMAGE', title: 'Choisir une image', okLabel: 'Placer cette image',
-            intro: 'Elle reste liée (objet dynamique) : retouchée dans l’app, elle se met à jour ici.'});
-        return r ? {src: `media/${r.filename}`, name: r.title || r.filename, mediaId: r.id} : null;
+            intro: 'Elle reste liée (objet dynamique) : retouchée dans l’app, elle se met à jour ici.',
+            // 📜 « Avec la transcription » : le texte du document posé à côté de l'image (décochée au départ, retenue)
+            extra: `<label class="checkbox-line" title="${esc(i18n('Le texte du document (celui de l’Atelier de transcription) dans un bloc à côté de l’image'))}"><input type="checkbox" data-ly-withtr${withTr ? ' checked' : ''}> ${esc(i18n('Avec la transcription'))}</label>`,
+            onOpen: d => d.querySelector('[data-ly-withtr]')?.addEventListener('change', e => { withTr = e.target.checked; try { localStorage.setItem(TR_KEY, withTr ? '1' : '0'); } catch (_) {} })});
+        return r ? {src: `media/${r.filename}`, name: r.title || r.filename, mediaId: r.id, withTr} : null;
     }
 
     /* ═════════════ Texte chaîné, sommaire, index : ce qu'affiche chaque bloc (calculé, jamais enregistré) ═════════════ */

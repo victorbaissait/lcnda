@@ -284,7 +284,26 @@
     function personChip(p) {
         const g = {male: 'm', female: 'f'}[p.gender] || 'u', ini = String(p.name || '').split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join('').toUpperCase() || '?';
         const av = UI().avatarOr ? UI().avatarOr({id: p.id, name: p.name, gender: p.gender}, 34, `<span class="ong-av is-${g}">${esc(ini)}</span>`) : `<span class="ong-av is-${g}">${esc(ini)}</span>`;
-        return `<button type="button" class="ong-person" data-ong-person="${p.id}" title="Ouvrir la fiche">${av}<span><b>${esc(p.name)}</b>${lifeOf(p) ? `<small>${esc(lifeOf(p))}</small>` : ''}</span><span class="ong-go" aria-hidden="true">↗</span></button>`;
+        return `<button type="button" class="ong-person" data-ong-person="${p.id}" title="Ouvrir la fiche">${av}<span><b>${esc(p.name)}</b>${lifeOf(p) || p.role ? `<small>${esc([p.role, lifeOf(p)].filter(Boolean).join(' · '))}</small>` : ''}</span><span class="ong-go" aria-hidden="true">↗</span></button>`;
+    }
+    /* 📄 un seul texte par document (maquette docs/design/dossier-et-transcriptions.html, B3) : le texte de l'Atelier de transcription,
+       un bloc par acte (sorte, état, lieu, date, cote, zones) avec « 📜 Ouvrir dans l'Atelier » ; sans acte, le texte du document */
+    const TXST = {todo: ['À faire', 'grey'], doing: ['En cours', 'yellow'], done: ['Finie', 'green']};
+    const bdg = (t, k) => (UI().badge ? UI().badge(t, k) : `<span class="ui-badge is-${k}">${esc(t)}</span>`);
+    function trHtml(d, isImg, ro) {
+        const acts = d.acts || [], wp = ext.openTextDoc ? `<button type="button" class="button small secondary" data-ong-wp>${esc(T('📝 Dans le traitement de texte'))}</button>` : '';
+        const open = id => (!ro && isImg && ext.openActTranscriber ? `<button type="button" class="button small" data-ong-txopen="${id}">${esc(T('📜 Ouvrir dans l’Atelier'))}</button>` : '');
+        if (!acts.length) return d.transcription ? `<section class="card ong-sec ong-trsec"><div class="ong-sh"><h3>📜 ${esc(T('Transcription'))}</h3><span class="spacer"></span>${open(0)}${wp}</div><div class="ong-tr">${esc(d.transcription)}</div></section>` : '';
+        return acts.map((a, i) => { const st = TXST[a.status] || TXST.doing;
+            const meta = [a.place, a.date_text, a.source, a.zones ? A().plural(a.zones, 'zone') : ''].filter(Boolean).join(' · ');
+            return `<section class="card ong-sec ong-trsec" data-ong-act="${a.id}"><div class="ong-sh"><h3>📜 ${esc(acts.length > 1 ? a.title || T('Transcription') : T('Transcription'))}</h3>${bdg(ext.actKindLabel ? ext.actKindLabel(a.kind) : a.kind, 'grey')}${bdg(T(st[0]), st[1])}<span class="spacer"></span>${open(a.id)}${i === 0 ? wp : ''}</div>
+                ${acts.length === 1 && a.title ? `<p class="ong-trtitle">${esc(a.title)}</p>` : ''}${String(a.body || '').trim() ? `<div class="ong-tr">${esc(a.body)}</div>` : `<p class="muted">${esc(T('Rien d’écrit pour l’instant.'))}</p>`}
+                ${meta ? `<p class="ong-trmeta">${esc(meta)}</p>` : ''}</section>`; }).join('');
+    }
+    /** les noms relevés dans l'Atelier pas encore reliés à une fiche (ils se relient dans l'Atelier, ou sur la fiche qui leur ressemble) */
+    function unlinked(d) {
+        const names = (d.acts || []).flatMap(a => (a.people || []).filter(p => !p.person_id && p.name).map(p => [p.name, p.role]));
+        return names.length ? `<p class="ong-unlinked"><span class="muted">${esc(T('Relevés dans le texte, pas encore reliés :'))}</span> ${names.slice(0, 30).map(([n, r]) => `<span class="ong-uname">${esc(n)}${r ? ` <small>${esc(r)}</small>` : ''}</span>`).join(' ')}</p>` : '';
     }
     async function showDoc(id, token) {
         const ws = document.getElementById('workspace'); if (!ws) return;
@@ -309,7 +328,7 @@
         ws.innerHTML = `<section class="page ong-page ong-docpage" data-ong-page="document" data-ong-id="${id}">
             ${UI().pageHeader({where: ['Documents', ...path].join(' › '), icon, title: d.title, help: esc(help || 'Document de ta base.'), detail: true,
                 primary: ro ? '' : '<button type="button" class="button" data-ong-edit>✎ Modifier</button>',
-                actions: ro ? [] : [isImg && ext.openActTranscriber ? `<button type="button" class="button secondary" data-ong-tx title="${esc(T('Ouvrir l’outil de transcription complet sur cette image'))}">📜 ${esc(T('Transcrire'))}</button>` : '', SF()?.rangeButtonHtml ? SF().rangeButtonHtml('document', id, d.title) : ''].filter(Boolean), more})}
+                actions: ro ? [] : [isImg && ext.openActTranscriber && !(d.acts || []).length && !d.transcription ? `<button type="button" class="button secondary" data-ong-tx title="${esc(T('Ouvrir l’outil de transcription complet sur cette image'))}">${esc(T('📜 Atelier de transcription'))}</button>` : '', SF()?.rangeButtonHtml ? SF().rangeButtonHtml('document', id, d.title) : ''].filter(Boolean), more})}
             <button type="button" class="button small secondary ong-back" data-ong-back>← Liste</button>
             <div class="ong-doc">
                 <figure class="ong-view">${isImg ? `<button type="button" class="ong-big" data-ong-view title="Voir en grand"><img src="${src}" alt="" data-ong-img></button>` : `<button type="button" class="ong-big is-file" data-ong-view><span aria-hidden="true">${icon}</span><small>${esc(d.filename || 'Pas de fichier')}</small></button>`}
@@ -328,9 +347,9 @@
                 </dl>${!d.cote && !d.date_text && !ro ? `<p class="ong-hint">${A().empty ? A().empty('Pas encore de date ni de cote : « ✎ Modifier » pour les écrire.', {icon: '✎'}) : ''}</p>` : ''}</div>
             </div>
             ${d.description ? `<section class="card ong-sec"><h3>Notes</h3><p class="ong-pre">${esc(d.description)}</p></section>` : ''}
-            ${d.transcription ? `<section class="card ong-sec"><div class="ong-sh"><h3>Transcription</h3><span class="spacer"></span>${ext.openTextDoc ? '<button type="button" class="button small secondary" data-ong-wp>📝 Dans le traitement de texte</button>' : ''}</div><div class="ong-tr">${esc(d.transcription)}</div></section>` : ''}
-            <section class="card ong-sec"><h3>Personnes liées · ${ppl.length}</h3>${ppl.length ? `<div class="ong-people">${ppl.map(personChip).join('')}</div>` : (A().empty ? A().empty('Aucune personne reliée à ce document.', {icon: '👤'}) : '')}</section>
-            ${(d.links || []).length ? `<section class="card ong-sec"><h3>Rattaché à</h3><ul class="ong-links">${d.links.map(l => `<li>${esc(l.label)}</li>`).join('')}</ul></section>` : ''}
+            ${trHtml(d, isImg, ro)}
+            <section class="card ong-sec"><h3>${esc(T('Personnes reliées'))} · ${ppl.length}</h3>${ppl.length ? `<div class="ong-people">${ppl.map(personChip).join('')}</div>` : (A().empty ? A().empty('Aucune personne reliée à ce document.', {icon: '👤'}) : '')}${unlinked(d)}</section>
+            ${(d.links || []).length ? `<section class="card ong-sec"><h3>${esc(T('Relié à'))}</h3><ul class="ong-links">${d.links.map(l => `<li>${esc(l.label)}</li>`).join('')}</ul></section>` : ''}
             <p class="ong-when">${d.created_at ? when(d.created_at, {label: 'Ajouté'}) : ''}</p>
         </section>`;
         const img = ws.querySelector('[data-ong-img]');
@@ -363,18 +382,19 @@
             lb?.addEventListener('close', async () => { cache.delete(d.id); await load(true); if (A().state?.module === 'documents') { paintList(); if (cur === d.id) showDoc(d.id); } }, {once: true});
             return;
         }
-        if (b.matches('[data-ong-tx]')) { // 📜 l'outil de transcription complet : la transcription déjà commencée sur cette image, sinon une nouvelle
+        if (b.matches('[data-ong-tx], [data-ong-txopen]')) { // 📜 l'outil de transcription complet : la transcription déjà commencée sur cette image, sinon une nouvelle
             if (!d.filename || !ext.openActTranscriber) return;
             let acts = []; try { acts = (await A().api('act_transcriptions_media', {media_id: d.id})).items || []; } catch (_) { acts = []; }
             const again = async () => { cache.delete(d.id); await load(true); if (A().state?.module === 'documents') { paintList(); if (cur === d.id) showDoc(d.id); } };
-            if (acts.length) ext.openActTranscriber({id: acts[0].id, onClose: again});
+            if (b.dataset.ongTxopen && Number(b.dataset.ongTxopen)) ext.openActTranscriber({id: Number(b.dataset.ongTxopen), onClose: again});
+            else if (acts.length) ext.openActTranscriber({id: acts[0].id, onClose: again});
             else ext.openActTranscriber({mediaId: d.id, filename: d.filename, title: d.title || '', text: d.transcription || '', onClose: again});
             return;
         }
         if (b.matches('[data-ong-dl]')) { if (!d.filename) return; const a = Object.assign(document.createElement('a'), {href: `media/${encodeURIComponent(d.filename)}`, download: d.filename}); document.body.appendChild(a); a.click(); a.remove(); return; }
         if (b.matches('[data-ong-print]')) { UI().printPage ? UI().printPage(d.title) : A().toast('L’impression n’est pas disponible.', 'error'); return; }
         if (b.matches('[data-ong-wp]')) {
-            const html = String(d.transcription).split(/\n{2,}/).map(p => `<p>${esc(p).replace(/\n/g, '<br>')}</p>`).join('');
+            const html = String(d.transcription || '').split(/\n{2,}/).map(p => `<p>${esc(p).replace(/\n/g, '<br>')}</p>`).join('');
             const data = ext.textDocTools?.dataOf ? ext.textDocTools.dataOf(`<h1>${esc(d.title)}</h1>${html}`) : null;
             ext.openTextDoc?.(data ? {data, name: `Transcription — ${d.title}`} : {name: `Transcription — ${d.title}`});
         }

@@ -142,6 +142,19 @@ function onglets_document(PDO $pdo, int $id): array
         foreach ($people as &$p) { $p['birth'] = $life[$p['id']]['birth'] ?? null; $p['death'] = $life[$p['id']]['death'] ?? null; }
         unset($p);
     }
+    // 📄 un seul texte par document : les actes de l'Atelier de transcription sur cette image (titre, sorte, état, zones, personnes relevées)
+    $acts = function_exists('act_transcriptions_for_media') ? act_transcriptions_for_media($pdo, $id) : [];
+    $roles = []; $found = [];
+    foreach ($acts as $a) { foreach ($a['people'] as $q) { if ($q['person_id'] > 0) { $found[$q['person_id']] = true; if ($q['role'] !== '') { $roles[$q['person_id']] ??= $q['role']; } } } }
+    $known = array_flip(array_column($people, 'id'));
+    $more = array_values(array_diff(array_keys($found), array_keys($known))); // relevées dans l'Atelier, pas (encore) reliées au média
+    if ($more) {
+        $pp = $pdo->prepare('SELECT p.id, p.first_name, p.last_name, p.gender FROM persons p WHERE p.id IN (' . implode(',', array_fill(0, count($more), '?')) . ')' . onglets_hidden_people_sql($pdo, 'p'));
+        $pp->execute($more);
+        foreach ($pp->fetchAll(PDO::FETCH_ASSOC) as $r) { $people[] = ['id' => (int) $r['id'], 'name' => trim($r['first_name'] . ' ' . $r['last_name']) ?: 'Personne sans nom', 'gender' => (string) $r['gender'], 'last' => (string) $r['last_name'], 'first' => (string) $r['first_name'], 'found' => 1]; }
+    }
+    foreach ($people as &$p) { if (isset($roles[$p['id']])) { $p['role'] = mb_substr($roles[$p['id']], 0, 60); } }
+    unset($p);
     // à quoi il est rattaché (fiche, événement, recensement…)
     $links = [];
     $l = $pdo->prepare("SELECT ml.entity_type, ml.entity_id, COALESCE(et.label,'') AS ev_label, COALESCE(ev.date_text,'') AS ev_date, COALESCE(cr.year,'') AS cr_year,
@@ -174,7 +187,7 @@ function onglets_document(PDO $pdo, int $id): array
         'corr' => $str('correspondence_type', 60), 'correspondent' => $str('correspondent_name', 200), 'transcription' => mb_substr((string) ($m['transcription'] ?? ''), 0, 60000),
         'series' => $str('archive_series', 200), 'service' => mb_substr($service, 0, 200), 'created_at' => $str('created_at', 40), 'is_person_photo' => (int) ($m['is_person_photo'] ?? 0),
         'duration' => isset($m['duration_seconds']) && $m['duration_seconds'] !== null ? (float) $m['duration_seconds'] : null,
-        'people' => $people, 'links' => $links, 'places' => $places];
+        'people' => $people, 'links' => $links, 'places' => $places, 'acts' => $acts];
     return ['document' => $doc, 'readonly' => onglets_kiosk()];
 }
 

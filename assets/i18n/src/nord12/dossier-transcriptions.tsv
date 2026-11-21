@@ -1,0 +1,49 @@
+fr ¦ ru ¦ uk
+Disposition des onglets… ¦ Расположение вкладок… ¦ Розташування вкладок…
+Onglets du dossier ¦ Вкладки дела ¦ Вкладки справи
+Où en est le dossier ¦ Как продвигается дело ¦ Як просувається справа
+Voir → ¦ Смотреть → ¦ Переглянути →
+{n} à demander → ¦ {n} запросить → ¦ {n} запросити →
+🗓 Prochaine échéance ¦ 🗓 Ближайший срок ¦ 🗓 Найближчий строк
+succ|🔎 Recherche ¦ 🔎 Поиск ¦ 🔎 Пошук
+✉️ Contacts ¦ ✉️ Контакты ¦ ✉️ Контакти
+🕓 Suivi ¦ 🕓 Ход дела ¦ 🕓 Хід справи
+🗂 Onglets d’un dossier ¦ 🗂 Вкладки дела ¦ 🗂 Вкладки справи
+Une ligne, le reste dans « Plus ▾ » ¦ Одна строка, остальное в «Ещё ▾» ¦ Один рядок, решта в «Більше ▾»
+Par familles (deux lignes) ¦ По группам (две строки) ¦ За групами (два рядки)
+Une colonne à gauche ¦ Колонка слева ¦ Колонка ліворуч
+Comment ranger les onglets d’un dossier. Les compteurs restent visibles (Pièces 1 / 2, Contactés 2 / 6…). ¦ Как расположить вкладки дела. Счётчики остаются видны (Документы 1 / 2, Связались 2 / 6…). ¦ Як розташувати вкладки справи. Лічильники лишаються видимими (Документи 1 / 2, Зв’язалися 2 / 6…).
+📜 Atelier de transcription ¦ 📜 Мастерская расшифровки ¦ 📜 Майстерня транскрипції
+Atelier de transcription ¦ Мастерская расшифровки ¦ Майстерня транскрипції
+📝 Transcription du document ¦ 📝 Расшифровка документа ¦ 📝 Транскрипція документа
+Relié à ¦ Связано с ¦ Пов’язано з
+📜 Ouvrir dans l’Atelier ¦ 📜 Открыть в Мастерской ¦ 📜 Відкрити в Майстерні
+Rien d’écrit pour l’instant. ¦ Пока ничего не написано. ¦ Поки нічого не написано.
+Relevés dans le texte, pas encore reliés : ¦ Найдены в тексте, ещё не связаны: ¦ Знайдені в тексті, ще не пов’язані:
+Finie ¦ Готова ¦ Готова
+Ce texte est celui du document : il se voit dans la visionneuse, la page du document et la fiche des personnes reliées. ¦ Этот текст — текст документа: он виден в просмотрщике, на странице документа и в карточке связанных людей. ¦ Цей текст — текст документа: його видно в переглядачі, на сторінці документа й у картці пов’язаних людей.
+Le texte déjà écrit pour ce document est gardé sous le tien. ¦ Текст, уже написанный для этого документа, сохраняется под твоим. ¦ Текст, уже написаний для цього документа, зберігається під твоїм.
+Ce document n’a pas de fichier. ¦ У этого документа нет файла. ¦ Цей документ не має файлу.
+Plusieurs actes sur cette image : chacun se modifie dans l’Atelier de transcription. ¦ На этом изображении несколько актов: каждый меняется в Мастерской расшифровки. ¦ На цьому зображенні кілька актів: кожен змінюється в Майстерні транскрипції.
+Relevés dans le texte : ¦ Найдены в тексте: ¦ Знайдені в тексті:
+Ce texte est aussi celui de l’Atelier de transcription. ¦ Этот текст — также текст из Мастерской расшифровки. ¦ Цей текст — також текст із Майстерні транскрипції.
+Toute la transcription, en grand ¦ Вся расшифровка, крупно ¦ Уся транскрипція, великим планом
+Un autre acte sur cette image (un registre : plusieurs actes sur une vue) ¦ Ещё один акт на этом изображении (книга: несколько актов на одной странице) ¦ Ще один акт на цьому зображенні (книга: кілька актів на одній сторінці)
+Un autre acte ¦ Ещё один акт ¦ Ще один акт
+relevé, à relier ¦ найден, связать ¦ знайдено, пов’язати
+Aucun document transcrit pour l’instant. ¦ Пока нет расшифрованных документов. ¦ Поки немає транскрибованих документів.
+Avec les noms relevés pas encore reliés ¦ Вместе с найденными, ещё не связанными именами ¦ Разом зі знайденими, ще не пов’язаними іменами
+📜 Actes et transcriptions ¦ 📜 Акты и расшифровки ¦ 📜 Акти й транскрипції
+Nom relié à la fiche : {name} ¦ Имя связано с карточкой: {name} ¦ Ім’я пов’язано з карткою: {name}
+Page du document ¦ Страница документа ¦ Сторінка документа
+Transcriptions des documents ¦ Расшифровки документов ¦ Транскрипції документів
+Ce document n’a pas encore de transcription. ¦ У этого документа пока нет расшифровки. ¦ Цей документ поки не має транскрипції.
+Le texte du document (celui de l’Atelier de transcription) dans un bloc à côté de l’image ¦ Текст документа (из Мастерской расшифровки) в блоке рядом с изображением ¦ Текст документа (із Майстерні транскрипції) у блоці поруч із зображенням
+Avec la transcription ¦ С расшифровкой ¦ З транскрипцією
+📜 Atelier de transcription : barre d’outils ¦ 📜 Мастерская расшифровки: панель инструментов ¦ 📜 Майстерня транскрипції: панель інструментів
+un PDF ne se transforme pas en texte modifiable ici : ouvre l’Atelier de transcription pour le recopier ¦ PDF здесь не превращается в редактируемый текст: открой Мастерскую расшифровки, чтобы переписать его ¦ PDF тут не стає текстом для редагування: відкрий Майстерню транскрипції, щоб переписати його
+Pour lire un acte : ouvre son image dans l’Atelier de transcription (« 📜 Ouvrir dans l’Atelier »), puis « ✨ Lire l’acte ». ¦ Чтобы прочитать акт: открой его изображение в Мастерской расшифровки («📜 Открыть в Мастерской»), затем «✨ Прочитать акт». ¦ Щоб прочитати акт: відкрий його зображення в Майстерні транскрипції («📜 Відкрити в Майстерні»), потім «✨ Прочитати акт».
+Dans l’Atelier de transcription (Listes → Outils de modification → 📜 Atelier de transcription, ou « 📜 Ouvrir dans l’Atelier » sur une image) : « ✨ Lire l’acte ». Tout se passe sur cet ordinateur, sans Internet. ¦ В Мастерской расшифровки (Списки → Инструменты правки → 📜 Мастерская расшифровки или «📜 Открыть в Мастерской» на изображении): «✨ Прочитать акт». Всё происходит на этом компьютере, без интернета. ¦ У Майстерні транскрипції (Списки → Інструменти редагування → 📜 Майстерня транскрипції або «📜 Відкрити в Майстерні» на зображенні): «✨ Прочитати акт». Усе відбувається на цьому комп’ютері, без інтернету.
+Ce document a plusieurs actes : chacun se modifie dans l’📜 Atelier de transcription. ¦ В этом документе несколько актов: каждый меняется в 📜 Мастерской расшифровки. ¦ У цьому документі кілька актів: кожен змінюється в 📜 Майстерні транскрипції.
+Ce nom n’est plus dans la transcription. ¦ Этого имени больше нет в расшифровке. ¦ Цього імені більше немає в транскрипції.
+Ce nom a été relié entre-temps : rien n’a été changé. ¦ Это имя тем временем уже связали: ничего не изменено. ¦ Це ім’я тим часом уже пов’язали: нічого не змінено.

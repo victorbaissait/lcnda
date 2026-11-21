@@ -173,7 +173,7 @@ function maz() {
         assert.equal(TP.status(by('adn'), ['lignee', 'recensement']), 'off');
         assert.equal(TP.idOf(by('courriers')), 'ct_addcourriers'); assert.match(TP.idOf(by('ou_chercher')), /^ct_[a-z0-9]{4,24}$/);
         assert.ok(TP.matches(by('courriers'), 'relance')); assert.ok(TP.matches(by('transcriptions'), 'acte')); assert.ok(TP.matches(by('agenda'), 'AGENDA')); assert.ok(!TP.matches(by('adn'), 'courrier'));
-        assert.equal(TP.CATALOG.filter(x => x.target).every(x => /^(list|maint|stat|search):[a-z_]+$/.test(x.target)), true);
+        assert.equal(TP.CATALOG.filter(x => x.target).every(x => /^(list|maint|stat|search|tool):[a-z_]+$/.test(x.target)), true);
     });
     await t('code : bouton 🔔 réglable (usage successoral), fichiers chargés, migration 93, exports publics sans succ_*', () => {
         const ap = fs.readFileSync(path.join(appRoot, 'assets/js/app-apparence.js'), 'utf8'); assert.match(ap, /\['bell', '#succ-bell-open', '🔔'/); assert.match(ap, /\['succ', 'bell'\]\.includes/);

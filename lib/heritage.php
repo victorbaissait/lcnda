@@ -540,6 +540,7 @@ function heritage_person_data(PDO $pdo, int $personId): array
         'heard' => function_exists('audio_regions_for_person') ? audio_regions_for_person($pdo, $personId) : [], // 🎧 « On l'entend » : passages de sons reliés (lib/audio_studio.php)
         'parcels' => function_exists('cadastre_for_person') ? cadastre_for_person($pdo, $personId) : [], // 🗺 « Propriétaire de… » : les parcelles du cadastre reliées (lib/cadastre.php)
         'successions' => function_exists('successions_for_person') ? successions_for_person($pdo, $personId) : [], // 🏠 « Ce qu'il a reçu / transmis » (lib/successions.php)
+        'acts' => function_exists('act_transcriptions_for_person') ? act_transcriptions_for_person($pdo, $personId) : [], // 📜 « Actes et transcriptions » (lib/transcriptions.php)
     ];
 }
 

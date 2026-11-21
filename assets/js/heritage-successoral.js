@@ -354,16 +354,15 @@
         const dead = D.graph.persons[D.deceased_id];
         const years = dead ? [dead.birth?.year, dead.death?.year].filter(Boolean).join('-') : '';
         const P_ = R && !R.error ? piecesOf(D, R) : null;
-        const tabLabel = (k, l) => k === 'pieces' && P_ ? `${i18n(l)} (${P_.counts.have} / ${P_.counts.total})` : i18n(l);
         const stIdx = STATES.findIndex(s => s[0] === D.state);
         w.innerHTML = `<section class="page succ-page" data-succ-case="${D.id}">${UI().pageHeader({title: i18n('Dossier n° {n} · {t}', {n: D.number, t: D.title}), icon: '⚖️', where: cur.where === 'tab' ? i18n('Successions') : i18n('Listes · Dossiers de succession'),
             help: [D.deceased ? `${esc(D.deceased)}${years ? ` (${esc(years)})` : ''}` : '', badge(stateLabel(D.state), stateKind(D.state))].filter(Boolean).join(' '),
             back: `<button type="button" class="button small secondary" data-succ-back>${esc(i18n('← Tous les dossiers'))}</button>`,
             actions: [`<span class="succ-chrono-slot" data-succ-chrono-slot>${OUT().chronoButton?.(D) || ''}</span>`, ...(P2().caseActions?.(D) || []), `<button type="button" class="button secondary" data-succ-loi="case" title="${esc(i18n('⚖️ Un doute sur la loi ?'))}">${esc(i18n('⚖️ Un doute ?'))}</button>`, ...(D.archived ? [] : [`<button type="button" class="button secondary" data-succ-edit="${D.id}">${esc(i18n('✎ Modifier'))}</button>`])],
-            more: [D.deceased_id ? `<button type="button" data-h-person="${D.deceased_id}">${esc(i18n('↗ Fiche du défunt'))}</button>` : '', D.state === 'clos' ? `<button type="button" data-succ-archive>${esc(i18n('🗄 Archiver le dossier clos'))}</button>` : '', ...(ext.succDossiers?.caseMore?.(D) || []), ...(P2().caseMore?.(D) || []), `<button type="button" class="danger" data-succ-del="${D.id}">${esc(i18n('🗑 Supprimer'))}</button>`]})}
+            more: [D.deceased_id ? `<button type="button" data-h-person="${D.deceased_id}">${esc(i18n('↗ Fiche du défunt'))}</button>` : '', `<button type="button" data-sp2-setlink="tabs_layout">🗂 ${esc(i18n('Disposition des onglets…'))}</button>`, D.state === 'clos' ? `<button type="button" data-succ-archive>${esc(i18n('🗄 Archiver le dossier clos'))}</button>` : '', ...(ext.succDossiers?.caseMore?.(D) || []), ...(P2().caseMore?.(D) || []), `<button type="button" class="danger" data-succ-del="${D.id}">${esc(i18n('🗑 Supprimer'))}</button>`]})}
             ${D.archived ? UI().notice('info', i18n('Dossier archivé : les adresses des vivants ont été retirées, le journal reste.')) : `<div class="succ-steps" role="group" aria-label="${esc(i18n('État du dossier'))}">${STATES.map(([k, l], i) => `<button type="button" class="succ-step${i < stIdx ? ' is-done' : ''}${i === stIdx ? ' is-on' : ''}" data-succ-state="${k}" aria-pressed="${i === stIdx}">${i < stIdx ? '✓ ' : ''}${esc(i18n(l))}</button>`).join('')}</div>`}
-            <div class="segmented succ-tabs" role="tablist">${TABS.map(([k, l]) => `<button type="button" role="tab" data-succ-tab="${k}" class="${cur.tab === k ? 'is-active' : ''}" aria-selected="${cur.tab === k}">${esc(tabLabel(k, l))}</button>`).join('')}</div>
-            <div data-succ-tabbody></div></section>`;
+            ${tabNavHtml(TABS, tabCounts(D, R, P_))}</section>`;
+        fitTabs(w);
         const body = w.querySelector('[data-succ-tabbody]');
         try { OUT().onCase?.(D, cur.tab, (TABS.find(x => x[0] === cur.tab) || [])[1]); } catch (_) {} // ⏱ les onglets ouverts pendant le comptage
         if (!D.deceased_id || !R || R.error) { body.innerHTML = UI().notice('error', R?.error || i18n('Le défunt n’est plus dans la base.')); return; }
@@ -371,6 +370,79 @@
         if (own[cur.tab]) own[cur.tab](body, D, R, P_); else P2().tab?.(cur.tab, body, D, R, P_); // 📞 Échanges
         try { P2().after?.(cur.tab, body, D, R, P_); } catch (e) { console.error(e); } // ⚖️ ajouts des outils de plus à chaque onglet
         try { ext.complEtudes?.after?.(cur.tab, body, D); } catch (e) { console.error(e); } // 🏛 📁 Dossier → « Étude de notaire » (heritage-complements.js)
+    }
+
+    /* ── 🗂 Les onglets d'un dossier (maquette docs/design/dossier-et-transcriptions.html, A ; essai tests/test-dossier-onglets.js) :
+     *  réglage « tabs_layout » (⚙️ Outils du dossier : réglages, et ⋯ → « 🗂 Disposition des onglets… ») :
+     *  line (conseillé) : une ligne d'onglets C5 ; ce qui ne tient pas dans la largeur passe dans « Plus ▾ » (la ligne défile aussi) ;
+     *  families : cinq familles (📁 🔎 📑 ✉️ 🕓), puis les onglets de la famille ; side : une colonne à gauche (un menu de choix
+     *  unique quand la place manque). Les compteurs restent visibles (Héritiers, Pièces 1 / 2, Contactés 2 / 6, Échanges).
+     *  Les pastilles d'état ne changent pas. Pas de .segmented ici : sa règle générale (grille de 3) reste pour les vrais choix. ── */
+    const FAMS = [['dossier', '📁 Dossier', ['dossier']], ['search', '🔎 Recherche', ['heirs', 'people', 'tree']], ['pieces', '📑 Pièces', ['pieces', 'notary']], ['contacts', '✉️ Contacts', ['contacts', 'calls']], ['suivi', '🕓 Suivi', ['journal', 'fees']]];
+    const famName = l => (l === '🔎 Recherche' ? i18n(l, {ctx: 'succ'}) : i18n(l));
+    /** les familles, avec les onglets montrés (un onglet ajouté par un outil va dans la dernière) */
+    const famsOf = TABS => { const known = new Set(FAMS.flatMap(f => f[2])), has = k => TABS.some(t => t[0] === k); const extra = TABS.map(t => t[0]).filter(k => !known.has(k));
+        return FAMS.map(([k, l, ks], i) => [k, l, [...ks, ...(i === FAMS.length - 1 ? extra : [])].filter(has)]).filter(f => f[2].length); };
+    const tabLayout = () => { const v = P2().cfg?.().tabs_layout; return ['line', 'families', 'side'].includes(v) ? v : 'line'; };
+    /** « 📁 Dossier » → ['📁', 'Dossier'] (après la traduction) */
+    const splitIco = s => { const m = String(s).match(/^(\S+)\s+(.+)$/u); return m && !/[\p{L}\p{N}]/u.test(m[1]) ? [m[1], m[2]] : ['', String(s)]; };
+    function tabCounts(D, R, P_) {
+        const o = {}; if (!R || R.error) return o;
+        const heirs = heirsToContact(R);
+        o.heirs = {t: String(heirs.length)};
+        if (P_) o.pieces = {t: `${P_.counts.have} / ${P_.counts.total}`, k: P_.counts.have < P_.counts.total ? 'yel' : ''};
+        if (heirs.length) o.contacts = {t: `${heirs.filter(r => (D.courriers || []).some(c => c.person_id === r.id && c.kind !== 'acte')).length} / ${heirs.length}`};
+        const calls = (D.p2?.calls || []).length; if (calls) o.calls = {t: String(calls)};
+        return o;
+    }
+    const kHtml = c => (c ? `<b class="succ-k${c.k ? ` is-${c.k}` : ''}">${esc(c.t)}</b>` : '');
+    const tabName = (TABS, k) => splitIco(i18n((TABS.find(t => t[0] === k) || [0, k])[1]));
+    const tabBtn = (TABS, counts) => k => { const [ic, nm] = tabName(TABS, k), on = cur.tab === k;
+        return `<button type="button" role="tab" data-succ-tab="${k}" class="succ-tab${on ? ' is-active' : ''}" aria-selected="${on}" title="${esc(nm)}">${ic ? `<span class="succ-ti" aria-hidden="true">${ic}</span>` : ''}<span class="succ-tn">${esc(nm)}</span>${kHtml(counts[k])}</button>`; };
+    function tabNavHtml(TABS, counts) {
+        const lay = tabLayout(), btn = tabBtn(TABS, counts), body = '<div data-succ-tabbody></div>', aria = esc(i18n('Onglets du dossier'));
+        if (lay === 'families') {
+            const fams = famsOf(TABS), fc = fams.find(f => f[2].includes(cur.tab)) || fams[0];
+            return `<div class="succ-tabbar" data-succ-layout="families"><div class="succ-fams" role="tablist" aria-label="${aria}" style="--succ-n:${fams.length}">${fams.map(([k, l, ks]) => { const [ic, nm] = splitIco(famName(l)), c = ks.map(x => counts[x]).find(Boolean), on = fc[0] === k;
+                return `<button type="button" role="tab" data-succ-fam="${k}" class="${on ? 'is-active' : ''}" aria-selected="${on}" title="${esc(nm)}"><span class="succ-ti" aria-hidden="true">${ic}</span><span class="succ-tn">${esc(nm)}</span>${kHtml(c)}</button>`; }).join('')}</div>
+                <div class="ui-tabs succ-tabs succ-subtabs" role="tablist" aria-label="${esc(splitIco(famName(fc[1]))[1])}">${fc[2].map(btn).join('')}</div></div>${body}`;
+        }
+        if (lay === 'side') {
+            const fams = famsOf(TABS);
+            return `<div class="succ-side" data-succ-layout="side"><div class="succ-sidecol"><nav class="succ-sidenav" aria-label="${aria}">${fams.map(([k, l, ks]) => `${k === 'dossier' ? '' : `<div class="succ-sg">${esc(splitIco(famName(l))[1])}</div>`}<div class="succ-tabs succ-sidetabs" role="tablist">${ks.map(btn).join('')}</div>`).join('')}</nav>
+                <select class="succ-sidesel" data-succ-tabsel aria-label="${aria}">${fams.map(([, l, ks]) => `<optgroup label="${esc(splitIco(famName(l))[1])}">${ks.map(x => { const [ic, nm] = tabName(TABS, x); return `<option value="${x}"${cur.tab === x ? ' selected' : ''}>${esc([ic, nm].filter(Boolean).join(' '))}${counts[x] ? ` · ${esc(counts[x].t)}` : ''}</option>`; }).join('')}</optgroup>`).join('')}</select></div>${body}</div>`;
+        }
+        return `<div class="succ-tabbar" data-succ-layout="line"><div class="ui-tabs succ-tabs succ-tabrow" role="tablist" aria-label="${aria}">${TABS.map(t => btn(t[0])).join('')}</div><button type="button" class="succ-tabmore" data-succ-more aria-haspopup="menu" hidden>${esc(i18n('Plus ▾'))} <b class="succ-k" data-succ-moren></b></button></div>${body}`;
+    }
+    /** A1 : ce qui sort de la ligne va dans « Plus ▾ » ; l'onglet ouvert reste visible (la ligne défile jusqu'à lui) */
+    function fitTabs(w) {
+        const page = w.querySelector('[data-succ-case]');
+        if (page) { const narrow = () => { if (page.isConnected) page.classList.toggle('succ-narrow', page.getBoundingClientRect().width < 700); }; narrow(); try { new ResizeObserver(narrow).observe(page); } catch (_) {} }
+        const bar = w.querySelector('.succ-tabbar[data-succ-layout="line"]'); if (!bar) return;
+        const row = bar.querySelector('.succ-tabrow'), more = bar.querySelector('[data-succ-more]');
+        const upd = () => { if (!row.isConnected) return; const rr = row.getBoundingClientRect(); const out = [...row.children].filter(b => { const r = b.getBoundingClientRect(); return r.right > rr.right + 1 || r.left < rr.left - 1; });
+            bar._out = out.map(b => b.dataset.succTab); if (more.hidden !== !out.length) more.hidden = !out.length; more.querySelector('[data-succ-moren]').textContent = out.length ? String(out.length) : ''; };
+        const act = row.querySelector('.is-active');
+        const show = () => { if (!act) return; const r = act.getBoundingClientRect(), rr = row.getBoundingClientRect(); if (r.right > rr.right) row.scrollLeft += r.right - rr.right + 2; else if (r.left < rr.left) row.scrollLeft -= rr.left - r.left + 2; };
+        upd(); show(); upd(); requestAnimationFrame(() => { show(); upd(); });
+        row.addEventListener('scroll', upd, {passive: true});
+        try { new ResizeObserver(upd).observe(row); } catch (_) {}
+        row.addEventListener('wheel', e => { if (row.scrollWidth > row.clientWidth + 1 && Math.abs(e.deltaY) > Math.abs(e.deltaX)) { row.scrollLeft += e.deltaY; e.preventDefault(); } }, {passive: false});
+        more.addEventListener('click', () => {
+            const TABS = tabsOf(), counts = cur.data ? tabCounts(cur.data, cur.R, cur.R && !cur.R.error ? piecesOf(cur.data, cur.R) : null) : {};
+            const items = (bar._out || []).map(k => { const [ic, nm] = tabName(TABS, k); return {icon: ic, label: counts[k] ? `${nm} · ${counts[k].t}` : nm, run: () => goTab(k)}; });
+            UI().menuAt(more, [...items, '-', {icon: '🗂', label: i18n('Disposition des onglets…'), run: () => openTabsSetting()}], {title: i18n('Plus')});
+        });
+    }
+    /** ouvrir un onglet (retenu ; en familles, la famille retient son dernier onglet) */
+    const goTab = k => { cur.tab = k; store.set('lcnda-succ-tab', k); const f = FAMS.find(x => x[2].includes(k)) || FAMS.at(-1); store.set('lcnda-succ-famtab', {...store.get('lcnda-succ-famtab', {}), [f[0]]: k}); render(); };
+    const openTabsSetting = () => { const b = document.createElement('button'); b.type = 'button'; b.hidden = true; b.dataset.sp2Setlink = 'tabs_layout'; document.body.appendChild(b); b.click(); b.remove(); };
+    /** 📁 Dossier, en bas : où en est le dossier, cliquable (au lieu des boutons des onglets une deuxième fois) */
+    function recapHtml(D, R, P_) {
+        const c = tabCounts(D, R, P_), next = (D.deadlines || []).filter(x => !x.done && x.due).sort((a, b) => String(a.due).localeCompare(String(b.due)))[0];
+        const miss = P_ ? Math.max(0, P_.counts.total - P_.counts.have) : 0, n = next ? daysTo(next.due) : null;
+        const card = (attrs, label, val, go) => `<button type="button" class="succ-recap-i" ${attrs}><span class="succ-recap-l">${esc(label)}</span><b>${esc(val)}</b><span class="succ-recap-go">${esc(go)}</span></button>`;
+        return `<div class="succ-recap" role="group" aria-label="${esc(i18n('Où en est le dossier'))}">${card('data-succ-tab="heirs"', i18n('👥 Héritiers'), c.heirs?.t || '0', i18n('Voir →'))}${P_ ? card('data-succ-tab="pieces"', i18n('📑 Pièces'), c.pieces.t, miss ? i18n('{n} à demander →', {n: miss}) : i18n('Voir →')) : ''}${card('data-succ-tab="contacts"', i18n('✉️ Contactés'), c.contacts?.t || '0', i18n('Voir →'))}${card('data-succ-dlgo', i18n('🗓 Prochaine échéance'), next ? fmtDate(next.due) : '—', next ? (n < 0 ? i18n('Passée') : n === 0 ? i18n('Aujourd’hui') : i18n('Dans {n} j', {n})) : i18n('Aucune'))}</div>`;
     }
 
     /* ── 📁 Dossier ── */
@@ -395,7 +467,7 @@
             ${dl.length ? `<ul class="succ-deadlines">${dl.map(x => { const n = daysTo(x.due); const k = x.done ? 'grey' : n < 0 ? 'red' : n <= 14 ? 'yellow' : 'blue';
                 return `<li class="${x.done ? 'is-done' : ''}">${UI().checkHtml ? UI().checkHtml('', {checked: x.done, attrs: `data-succ-dl-done="${x.id}" aria-label="${esc(i18n('Fait'))}"`}) : ''}<b>${esc(fmtDate(x.due))}</b><span>${esc(x.label)}</span>${badge(x.done ? i18n('Fait') : n < 0 ? i18n('Passée') : n === 0 ? i18n('Aujourd’hui') : i18n('Dans {n} j', {n}), k)}<button type="button" class="icon-button small" data-succ-dl-del="${x.id}" title="${esc(i18n('Supprimer'))}" aria-label="${esc(i18n('Supprimer'))}">🗑</button></li>`; }).join('')}</ul>` : A().empty(i18n('Aucune échéance.'), {icon: '🗓'})}
             <p class="ui-hint">${esc(i18n('Aussi dans 🗓 Ma semaine de recherche.'))}</p></section>
-            <div class="succ-quick">${tabsOf().slice(1).map(([k, l]) => `<button type="button" class="button secondary" data-succ-tab="${k}">${esc(k === 'pieces' ? `${i18n('📑 Pièces')} (${P_.counts.have} / ${P_.counts.total})` : k === 'notary' ? i18n('🖨 Tableau pour le notaire') : i18n(l))}</button>`).join('')}</div>`;
+            ${recapHtml(D, R, P_)}`;
     }
 
     /* ── 👥 Héritiers et dévolution ── */
@@ -972,7 +1044,9 @@
         const md = t.closest('[data-succ-mdel]'); if (md) { e.preventDefault(); const id = Number(md.dataset.succMdel); return A().deleteWithUndo({action: 'delete_courrier', body: {id}, type: 'courrier', id, message: 'Courrier supprimé du registre', after: () => render()}); }
         if (!cur.data || !t.closest('[data-succ-case], dialog')) return;
         const D = cur.data, R = cur.R;
-        const tab = t.closest('[data-succ-tab]'); if (tab) { t.closest('dialog')?.close?.(); cur.tab = tab.dataset.succTab; store.set('lcnda-succ-tab', cur.tab); return render(); }
+        const tab = t.closest('[data-succ-tab]'); if (tab) { t.closest('dialog')?.close?.(); return goTab(tab.dataset.succTab); }
+        const fam = t.closest('[data-succ-fam]'); if (fam) { const f = famsOf(tabsOf()).find(x => x[0] === fam.dataset.succFam); if (!f) return; const last = store.get('lcnda-succ-famtab', {})[f[0]]; return goTab(f[2].includes(last) ? last : f[2][0]); }
+        if (t.closest('[data-succ-dlgo]')) { t.closest('[data-succ-case]')?.querySelector('.succ-deadlines')?.scrollIntoView({behavior: 'smooth', block: 'center'}); return; }
         const em = t.closest('[data-succ-eur-mode]'); if (em) { OUT().setEuroMode?.(em.dataset.succEurMode); return render(); }
         const fed = t.closest('[data-succ-fee-edit]'); if (fed) { const f = D.fees.find(x => x.id === Number(fed.dataset.succFeeEdit)); if (f) feeDialog(D, f.kind, f); return; }
         const sl = t.closest('[data-succ-serial]'); if (sl) return letterDialog(D, R, 'contact', 0, true);
@@ -1019,6 +1093,7 @@
     document.addEventListener('change', async e => {
         const t = e.target; if (!t.closest || !cur.data || !t.closest('[data-succ-case]')) return;
         const D = cur.data;
+        if (t.matches('[data-succ-tabsel]')) return goTab(t.value);
         if (t.matches('[data-succ-ov]')) return setOverride(D, Number(t.dataset.succOv), 'status', t.value);
         if (t.matches('[data-succ-adopt]')) return setOverride(D, Number(t.dataset.succAdopt), 'adoption', t.value);
         if (t.matches('[data-succ-spouse]')) return setOverride(D, Number(t.dataset.succSpouse), 'spouse', t.value);

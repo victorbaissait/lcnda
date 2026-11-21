@@ -314,3 +314,50 @@ body.is-kiosk .succ-chrono-float, html.ms-open .succ-chrono-float, body.is-kiosk
     .succ-eur td:first-child { grid-column: 1 / -1; }
     .succ-ck-go { margin-left: 2em; }
 }
+/* 🗂 Les onglets d'un dossier (maquette docs/design/dossier-et-transcriptions.html, A ; réglage « tabs_layout ») :
+   une ligne C5 + « Plus ▾ » (conseillé), des familles, ou une colonne à gauche. Pas la grille des boutons segmentés. */
+.succ-tabbar { display: flex; align-items: stretch; gap: 0; margin: 4px 0 14px; min-width: 0; max-width: 100%; }
+.succ-tabbar .succ-tabs { margin: 0; }
+.succ-tabbar .succ-tabrow { display: flex; flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; flex: 0 1 auto; min-width: 0; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+.succ-tabrow::-webkit-scrollbar { display: none; }
+.succ-tabs > .succ-tab, .succ-fams > button { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; flex: none; }
+.succ-ti { font-style: normal; }
+.succ-k { display: inline-block; min-width: 16px; padding: 0 5px; font: 800 10.5px/15px system-ui, sans-serif; text-align: center; border: 1.5px solid var(--succ-line); background: var(--succ-soft); color: inherit; }
+.succ-k.is-yel { background: var(--succ-warn); border-color: var(--succ-warn-line); color: #7a5d00; }
+.is-active > .succ-k { background: #fff; border-color: #fff; color: var(--ui-blue, #055dff); }
+.succ-tabmore { flex: none; margin-left: -2px; border: 2px solid var(--ui-ink, #111); border-radius: 0; background: var(--ui-bg, #fff); color: var(--ui-ink, #111); font: 700 13px/1.25 system-ui, sans-serif; padding: 7px 11px; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; box-shadow: none; min-height: 0; }
+.succ-tabmore:hover, .succ-tabmore.is-open { background: var(--ui-soft, #eaf1ff); }
+.succ-tabmore[hidden] { display: none; }
+.succ-tabmore .succ-k:empty { display: none; }
+/* A2 : les familles, puis les onglets de la famille */
+.succ-tabbar[data-succ-layout="families"] { flex-direction: column; gap: 0; }
+.succ-fams { display: grid; grid-template-columns: repeat(var(--succ-n, 5), minmax(0, 1fr)); border: 2px solid var(--ui-ink, #111); background: var(--ui-bg, #fff); }
+.succ-fams > button { justify-content: center; border: 0; border-right: 1.5px solid var(--succ-line); border-radius: 0; background: transparent; color: inherit; font: 700 13px/1.25 system-ui, sans-serif; padding: 8px 6px; cursor: pointer; min-width: 0; overflow: hidden; text-overflow: ellipsis; box-shadow: none; min-height: 0; }
+.succ-fams > button:last-child { border-right: 0; }
+.succ-fams > button.is-active { background: var(--ui-blue, #055dff); color: #fff; }
+.succ-fams .succ-tn { overflow: hidden; text-overflow: ellipsis; }
+.succ-tabbar .succ-subtabs { display: flex; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; border-top: 0; max-width: 100%; }
+.succ-subtabs::-webkit-scrollbar { display: none; }
+/* A3 : une colonne à gauche (un menu de choix unique quand la place manque) */
+.succ-side { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: 16px; align-items: start; margin-top: 4px; }
+.succ-sidenav { border: 2px solid var(--ui-ink, #111); background: var(--ui-bg, #fff); }
+.succ-sg { font: 800 10.5px system-ui, sans-serif; letter-spacing: .1em; text-transform: uppercase; color: var(--succ-text2); padding: 8px 10px 3px; }
+.succ-sidetabs { display: grid; }
+.succ-sidetabs > .succ-tab { display: flex; justify-content: flex-start; width: 100%; border: 0; border-bottom: 1px solid var(--succ-line); border-radius: 0; background: transparent; color: inherit; padding: 6px 10px; font: 600 13px/1.3 system-ui, sans-serif; cursor: pointer; text-align: left; white-space: normal; box-shadow: none; min-height: 0; }
+.succ-sidetabs > .succ-tab .succ-k { margin-left: auto; }
+.succ-sidetabs > .succ-tab.is-active { background: var(--ui-blue, #055dff); color: #fff; font-weight: 700; }
+.succ-sidesel { display: none; width: 100%; font-weight: 700; }
+.succ-side > [data-succ-tabbody] { min-width: 0; }
+/* un dossier étroit (moins de 700 px : téléphone, ou colonnes ouvertes) : classe .succ-narrow posée par fitTabs */
+.succ-narrow .succ-side { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+.succ-narrow .succ-sidenav { display: none; }
+.succ-narrow .succ-sidesel { display: block; }
+.succ-narrow .succ-fams > button .succ-tn { display: none; }
+.succ-narrow .succ-fams > button { padding: 8px 2px; }
+.succ-narrow .succ-tabrow > .succ-tab { padding-left: 8px; padding-right: 8px; }
+/* 📁 Dossier, en bas : le résumé cliquable (au lieu des boutons des onglets une deuxième fois) */
+.succ-recap { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+.succ-recap-i { display: grid; gap: 2px; text-align: left; border: 2px solid var(--ui-ink, #111); border-radius: 0; background: var(--ui-bg, #fff); color: inherit; padding: 7px 10px; font: 400 12.5px/1.35 system-ui, sans-serif; cursor: pointer; box-shadow: none; min-height: 0; }
+.succ-recap-i b { font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+.succ-recap-go { color: var(--ui-blue, #055dff); font-size: 12px; }
+.succ-recap-i:hover { background: var(--ui-soft, #eaf1ff); }

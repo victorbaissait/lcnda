@@ -478,6 +478,7 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
     $line(2, 'FORM', $geneanet ? 'Town, Area code, County, Region, Country' : GEDCOM_PLACE_FORM);
 
     $includeNotes = export_option_enabled('include_notes', true);
+    $includeTr = $sink !== null ? !empty($sink['transcriptions'] ?? true) : export_option_enabled('include_transcriptions', true); // 📄 « Transcriptions des documents » (cochée)
     $includeSources = export_option_enabled('include_sources', true);
     $includeMedia = export_option_enabled('include_media', true);
 
@@ -832,6 +833,8 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
         $line(1, 'TITL', (string) ($m['title'] ?: ($m['document_title'] ?: 'Média')));
         if (trim((string) ($m['date_text'] ?? '')) !== '') { $line(1, 'DATE', gedcom_date_from_text((string) $m['date_text'])); }
         if ($includeNotes && trim((string) ($m['description'] ?? '')) !== '') { $text(1, 'NOTE', (string) $m['description']); }
+        // 📄 un seul texte par document (celui de l'Atelier de transcription) : il part dans le média, lu par les autres logiciels
+        if ($includeTr && trim((string) ($m['transcription'] ?? '')) !== '') { $text(1, 'NOTE', (string) $m['transcription']); }
         $writeNotes(1, 'media:' . $id);
     }
     $line(0, 'TRLR');

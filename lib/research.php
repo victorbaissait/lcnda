@@ -299,7 +299,7 @@ function quick_search_data(PDO $pdo, string $q): array
         return true;
     }));
     $words = array_slice($words, 0, 5);
-    $out = ['persons' => [], 'battues' => [], 'investigations' => [], 'places' => [], 'graphs' => []];
+    $out = ['persons' => [], 'battues' => [], 'investigations' => [], 'places' => [], 'graphs' => [], 'transcriptions' => []];
     if (!$words && $only === null) { return $out; }
     // chaque mot, sans tenir compte des accents ni des tirets (« helene » trouve Hélène) ; $extra : condition en plus
     // (ex. les variantes de nom), écrite avec {raw} et {fold} à la place des paramètres
@@ -357,6 +357,16 @@ function quick_search_data(PDO $pdo, string $q): array
             WHERE pl.id IN (SELECT DISTINCT place_id FROM events WHERE place_id IS NOT NULL) AND " . ($pw ? implode(' AND ', $pw) : '1') . ' ORDER BY uses DESC LIMIT 6', $pp);
         foreach ($out['places'] as &$pl) { $pl['why'] = ($w1 = rfr_place_why($pdo, (int) $pl['id'], (string) $pl['name'], (string) $pl['alternate_names'], implode(' ', $words))) ? [$w1] : []; unset($pl['alternate_names']); }
         unset($pl);
+    }
+    // 📜 les transcriptions (un seul texte par document : celui de l'Atelier est dans m.transcription ; aussi le titre et le lieu de l'acte)
+    if ($only === null && $words && function_exists('act_transcriptions_ensure')) {
+        act_transcriptions_ensure($pdo);
+        $sealed = function_exists('sealed_media_sql') ? sealed_media_sql($pdo) : '';
+        [$w, $p] = $like(['m.transcription', "(SELECT group_concat(ta.title || ' ' || ta.place || ' ' || ta.source, ' ') FROM act_transcriptions ta WHERE ta.media_id=m.id)"]);
+        $rows = $run("SELECT m.id, m.title, m.document_title, m.filename, m.transcription, (SELECT count(*) FROM act_transcriptions ta WHERE ta.media_id=m.id) AS acts FROM media m
+            WHERE trim(COALESCE(m.transcription,''))<>'' AND {$w}{$sealed} ORDER BY m.id DESC LIMIT 6", $p);
+        $out['transcriptions'] = array_map(static fn($r) => ['id' => (int) $r['id'], 'title' => trim((string) $r['title']) ?: trim((string) $r['document_title']) ?: (string) $r['filename'], 'acts' => (int) $r['acts'],
+            'excerpt' => function_exists('transcription_excerpt') ? transcription_excerpt((string) $r['transcription'], (string) $words[0]) : mb_substr((string) $r['transcription'], 0, 120)], $rows);
     }
     // 📈 mes graphiques (lib/graphs.php, table créée au premier enregistrement)
     if (($only === null && $words) || $only === 'graphs') {
