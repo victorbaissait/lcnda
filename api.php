@@ -1846,6 +1846,12 @@ function dashboard_data(PDO $pdo): never
     $total = max(1, $stats['persons']);
     $coverageCount = function(string $sql) use ($pdo): int { return (int)$pdo->query($sql)->fetchColumn(); };
     $coverageRow = fn(int $value): array => ['count'=>$value, 'percent'=>round($value * 100 / $total, 1)];
+    $coverage = calc_cached($pdo, 'dash_coverage', ['persons', 'events', 'event_types', 'families', 'media_links', 'source_links'], [], static fn() => array_map($coverageCount, [
+        "SELECT count(DISTINCT p.id) FROM persons p JOIN events e ON e.person_id=p.id JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='BIRT'",
+        "SELECT count(DISTINCT p.id) FROM persons p JOIN events e ON e.person_id=p.id JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='DEAT'",
+        "SELECT count(DISTINCT p.id) FROM persons p WHERE EXISTS(SELECT 1 FROM media_links ml WHERE ml.entity_type='person' AND ml.entity_id=p.id) OR EXISTS(SELECT 1 FROM media_links ml WHERE ml.entity_type='event' AND ml.entity_id IN (SELECT id FROM events WHERE person_id=p.id UNION ALL SELECT fe.id FROM families ff JOIN events fe ON fe.family_id=ff.id WHERE ff.partner1_id=p.id OR ff.partner2_id=p.id))",
+        "SELECT count(DISTINCT p.id) FROM persons p WHERE EXISTS(SELECT 1 FROM source_links sl WHERE sl.entity_type='person' AND sl.entity_id=p.id) OR EXISTS(SELECT 1 FROM source_links sl WHERE sl.entity_type='event' AND sl.entity_id IN (SELECT id FROM events WHERE person_id=p.id UNION ALL SELECT fe.id FROM families ff JOIN events fe ON fe.family_id=ff.id WHERE ff.partner1_id=p.id OR ff.partner2_id=p.id))",
+    ]));
     $workReminders = (int)$pdo->query("SELECT count(*) FROM investigation_items WHERE reminder_mode<>'none' AND reminder_due_at<>'' AND reminder_done=0 AND reminder_due_at<=date('now','+30 days')")->fetchColumn()
         + (int)$pdo->query("SELECT count(*) FROM standalone_reminders WHERE reminder_due_at<>'' AND reminder_done=0 AND reminder_due_at<=date('now','+30 days')")->fetchColumn();
     // ✅ Contrôle de la base (lib/controle.php) : le même nombre que la page et le widget (toutes sortes, sans les exceptions ; gardé en cache)
@@ -1857,7 +1863,8 @@ function dashboard_data(PDO $pdo): never
         'open_battues' => (int)$pdo->query("SELECT count(*) FROM battues WHERE status<>'closed'")->fetchColumn(),
         'restorable_deletions' => count(recent_restore_candidate_ids($pdo, 15)),
     ];
-    $topPlaces = $pdo->query("SELECT pl.name,COALESCE(pl.subdivision,'') AS subdivision,COALESCE(pl.county,'') AS county,COALESCE(pl.state,'') AS state,pl.country,count(e.id) AS event_count FROM places pl JOIN events e ON e.place_id=pl.id GROUP BY pl.id ORDER BY event_count DESC,pl.name LIMIT 30")->fetchAll();
+    // 🐘 les blocs les plus lourds sur une très grosse base (lib/calc_cache.php) : gardés tant que les tables lues ne changent pas
+    $topPlaces = calc_cached($pdo, 'dash_top_places', ['places', 'events'], [], static fn() => $pdo->query("SELECT pl.name,COALESCE(pl.subdivision,'') AS subdivision,COALESCE(pl.county,'') AS county,COALESCE(pl.state,'') AS state,pl.country,count(e.id) AS event_count FROM places pl JOIN events e ON e.place_id=pl.id GROUP BY pl.id ORDER BY event_count DESC,pl.name LIMIT 30")->fetchAll());
     foreach($topPlaces as &$place){
         $place['name'] = trim(implode(', ', array_filter([$place['name'] ?? '', $place['subdivision'] ?? '', $place['county'] ?? '', $place['state'] ?? '', $place['country'] ?? ''])));
     }
@@ -1896,7 +1903,7 @@ function dashboard_data(PDO $pdo): never
         'media_to_identify' => dashboard_media_to_identify($pdo),
         'signatures_to_compare' => dashboard_signatures_to_compare($pdo),
         'places_to_complete' => dashboard_places_to_complete($pdo),
-        'branches_less_documented' => dashboard_branches_less_documented($pdo),
+        'branches_less_documented' => calc_cached($pdo, 'dash_branches_less_documented', ['persons', 'surname_groups', 'events', 'families', 'source_links', 'media_links'], [], static fn() => dashboard_branches_less_documented($pdo)),
         'couples_without_marriage' => dashboard_couples_without_marriage($pdo),
         'children_missing_parents' => dashboard_children_missing_parents($pdo),
         'consistency_issues' => [], // ✅ le widget lit controle_summary (heritage-controle.js)
@@ -1909,17 +1916,17 @@ function dashboard_data(PDO $pdo): never
         'daily_research' => dashboard_daily_research($pdo),
         'reread_items' => dashboard_reread_items($pdo),
         'sosa_progress' => dashboard_sosa_progress($pdo, $sosaRootId),
-        'duplicates' => dashboard_duplicate_groups($pdo),
+        'duplicates' => calc_cached($pdo, 'dash_duplicates', ['persons', 'events', 'event_types'], [], static fn() => dashboard_duplicate_groups($pdo)),
         'labels_overview' => dashboard_labels_overview($pdo),
-        'map_overview' => dashboard_map_overview($pdo),
+        'map_overview' => calc_cached($pdo, 'dash_map_overview', ['events', 'places'], [], static fn() => dashboard_map_overview($pdo)),
         'branch_map' => dashboard_branch_map($pdo, $dashboardBranch),
         'random_person_map' => dashboard_random_person_map($pdo),
         'coverage' => [
             'total' => $stats['persons'],
-            'birth' => $coverageRow($coverageCount("SELECT count(DISTINCT p.id) FROM persons p JOIN events e ON e.person_id=p.id JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='BIRT'")),
-            'death' => $coverageRow($coverageCount("SELECT count(DISTINCT p.id) FROM persons p JOIN events e ON e.person_id=p.id JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='DEAT'")),
-            'media' => $coverageRow($coverageCount("SELECT count(DISTINCT p.id) FROM persons p WHERE EXISTS(SELECT 1 FROM media_links ml WHERE ml.entity_type='person' AND ml.entity_id=p.id) OR EXISTS(SELECT 1 FROM media_links ml WHERE ml.entity_type='event' AND ml.entity_id IN (SELECT id FROM events WHERE person_id=p.id UNION ALL SELECT fe.id FROM families ff JOIN events fe ON fe.family_id=ff.id WHERE ff.partner1_id=p.id OR ff.partner2_id=p.id))")),
-            'sources' => $coverageRow($coverageCount("SELECT count(DISTINCT p.id) FROM persons p WHERE EXISTS(SELECT 1 FROM source_links sl WHERE sl.entity_type='person' AND sl.entity_id=p.id) OR EXISTS(SELECT 1 FROM source_links sl WHERE sl.entity_type='event' AND sl.entity_id IN (SELECT id FROM events WHERE person_id=p.id UNION ALL SELECT fe.id FROM families ff JOIN events fe ON fe.family_id=ff.id WHERE ff.partner1_id=p.id OR ff.partner2_id=p.id))")),
+            'birth' => $coverageRow($coverage[0]),
+            'death' => $coverageRow($coverage[1]),
+            'media' => $coverageRow($coverage[2]),
+            'sources' => $coverageRow($coverage[3]),
         ],
         'top_places' => $topPlaces,
     ]);
