@@ -833,68 +833,73 @@ try {
 
 function bootstrap_data(PDO $pdo): never
 {
-    $stats = [];
-    foreach (['persons' => 'personnes', 'families' => 'familles', 'events' => 'événements', 'media' => 'médias'] as $table => $label) {
-        $stats[$label] = (int) $pdo->query("SELECT count(*) FROM {$table}" . ($table === 'persons' ? " WHERE kind<>'animal'" : ''))->fetchColumn();
-    }
-    $stats['animaux'] = (int) $pdo->query("SELECT count(*) FROM persons WHERE kind='animal'")->fetchColumn();
-    $start = $pdo->query("SELECT id FROM persons ORDER BY is_start DESC, id LIMIT 1")->fetchColumn();
-    $types = $pdo->query('SELECT t.id,t.scope,t.slug,t.label,t.gedcom_tag,t.icon,t.color,t.is_custom,t.is_artistic,t.custom_fields,count(e.id) AS usage_count FROM event_types t LEFT JOIN events e ON e.event_type_id=t.id WHERE t.is_active=1 GROUP BY t.id ORDER BY t.label COLLATE NOCASE,t.scope')->fetchAll();
     $views = $pdo->query('SELECT * FROM saved_views ORDER BY module,sort_order,id')->fetchAll();
     $viewLabels = labels_for_entities($pdo, 'view', array_map(static fn($view)=>(int)$view['id'], $views));
     foreach ($views as &$view) $view['config'] = json_decode($view['config_json'], true) ?: [];
     foreach ($views as &$view) $view['labels'] = $viewLabels[(int)$view['id']] ?? [];
     unset($view);
-    $occupations = $pdo->query("
-        SELECT TRIM(val) AS name, COUNT(DISTINCT person_id) AS person_count
-        FROM (
-            SELECT p.id AS person_id, p.occupation AS val
-            FROM persons p WHERE p.occupation IS NOT NULL AND TRIM(p.occupation)!=''
-            UNION ALL
-            SELECT e.person_id, COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),'')) AS val
-            FROM events e JOIN event_types t ON t.id=e.event_type_id
-            WHERE e.person_id IS NOT NULL AND t.gedcom_tag='OCCU'
-              AND COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),'')) IS NOT NULL
-            UNION ALL
-            SELECT cm.person_id, cm.occupation AS val
-            FROM census_members cm WHERE cm.person_id IS NOT NULL AND cm.occupation IS NOT NULL AND TRIM(cm.occupation)!=''
-        ) src
-        WHERE TRIM(val)!=''
-        GROUP BY LOWER(TRIM(val))
-        ORDER BY person_count DESC, LOWER(TRIM(val)) COLLATE NOCASE
-    ")->fetchAll();
-    $mapTags = $pdo->query("
-        SELECT t.gedcom_tag, t.label, count(e.id) AS cnt
-        FROM events e
-        JOIN event_types t ON t.id=e.event_type_id
-        JOIN places pl ON pl.id=e.place_id
-        WHERE pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL
-          AND pl.name IS NOT NULL AND trim(pl.name)<>''
-          AND lower(trim(pl.name)) NOT IN ('lieu sans nom','sans lieu','lieu inconnu','inconnu','unknown','pays inconnu')
-          AND NOT (pl.county IS NULL AND pl.state IS NULL AND lower(trim(pl.name))=lower(trim(pl.country)))
-          AND t.gedcom_tag IS NOT NULL AND t.gedcom_tag<>''
-        GROUP BY t.gedcom_tag, t.label
-        ORDER BY cnt DESC, t.label COLLATE NOCASE
-    ")->fetchAll();
-    // Ajouter CENS si des recensements géocodés existent (census_records n'est pas dans events)
-    $censusCnt = (int)$pdo->query("
-        SELECT count(*) FROM census_records cr
-        JOIN places pl ON pl.id=cr.place_id
-        WHERE pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL
-          AND pl.name IS NOT NULL AND trim(pl.name)<>''
-    ")->fetchColumn();
-    if($censusCnt>0 && !in_array('CENS',array_column($mapTags,'gedcom_tag'),true)){
-        $mapTags[] = ['gedcom_tag'=>'CENS','label'=>'Recensement','cnt'=>$censusCnt];
-    }
-    $surnames = $pdo->query("
-        SELECT last_name AS name, count(*) AS person_count
-        FROM persons
-        WHERE last_name IS NOT NULL AND trim(last_name)<>''
-          AND lower(trim(last_name)) NOT IN ('inconnu','unknown')
-          AND last_name NOT GLOB '[?X]*'
-        GROUP BY last_name COLLATE NOCASE
-        ORDER BY person_count DESC, last_name COLLATE NOCASE
-    ")->fetchAll();
+    // 🐘 les comptes et les listes tirés de toute la base (sortes d'événements, métiers, noms, lieux de la carte) : 1,5 s à
+    // 200 000 fiches à chaque ouverture ; gardés tant que les tables lues ne changent pas (lib/calc_cache.php)
+    [$stats, $start, $types, $occupations, $mapTags, $surnames] = calc_cached($pdo, 'bootstrap_lists', ['persons', 'families', 'events', 'media', 'event_types', 'places', 'census_members', 'census_records'], [], static function () use ($pdo): array {
+        $stats = [];
+        foreach (['persons' => 'personnes', 'families' => 'familles', 'events' => 'événements', 'media' => 'médias'] as $table => $label) {
+            $stats[$label] = (int) $pdo->query("SELECT count(*) FROM {$table}" . ($table === 'persons' ? " WHERE kind<>'animal'" : ''))->fetchColumn();
+        }
+        $stats['animaux'] = (int) $pdo->query("SELECT count(*) FROM persons WHERE kind='animal'")->fetchColumn();
+        $start = $pdo->query("SELECT id FROM persons ORDER BY is_start DESC, id LIMIT 1")->fetchColumn();
+        $types = $pdo->query('SELECT t.id,t.scope,t.slug,t.label,t.gedcom_tag,t.icon,t.color,t.is_custom,t.is_artistic,t.custom_fields,count(e.id) AS usage_count FROM event_types t LEFT JOIN events e ON e.event_type_id=t.id WHERE t.is_active=1 GROUP BY t.id ORDER BY t.label COLLATE NOCASE,t.scope')->fetchAll();
+        $occupations = $pdo->query("
+            SELECT TRIM(val) AS name, COUNT(DISTINCT person_id) AS person_count
+            FROM (
+                SELECT p.id AS person_id, p.occupation AS val
+                FROM persons p WHERE p.occupation IS NOT NULL AND TRIM(p.occupation)!=''
+                UNION ALL
+                SELECT e.person_id, COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),'')) AS val
+                FROM events e JOIN event_types t ON t.id=e.event_type_id
+                WHERE e.person_id IS NOT NULL AND t.gedcom_tag='OCCU'
+                  AND COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),'')) IS NOT NULL
+                UNION ALL
+                SELECT cm.person_id, cm.occupation AS val
+                FROM census_members cm WHERE cm.person_id IS NOT NULL AND cm.occupation IS NOT NULL AND TRIM(cm.occupation)!=''
+            ) src
+            WHERE TRIM(val)!=''
+            GROUP BY LOWER(TRIM(val))
+            ORDER BY person_count DESC, LOWER(TRIM(val)) COLLATE NOCASE
+        ")->fetchAll();
+        $mapTags = $pdo->query("
+            SELECT t.gedcom_tag, t.label, count(e.id) AS cnt
+            FROM events e
+            JOIN event_types t ON t.id=e.event_type_id
+            JOIN places pl ON pl.id=e.place_id
+            WHERE pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL
+              AND pl.name IS NOT NULL AND trim(pl.name)<>''
+              AND lower(trim(pl.name)) NOT IN ('lieu sans nom','sans lieu','lieu inconnu','inconnu','unknown','pays inconnu')
+              AND NOT (pl.county IS NULL AND pl.state IS NULL AND lower(trim(pl.name))=lower(trim(pl.country)))
+              AND t.gedcom_tag IS NOT NULL AND t.gedcom_tag<>''
+            GROUP BY t.gedcom_tag, t.label
+            ORDER BY cnt DESC, t.label COLLATE NOCASE
+        ")->fetchAll();
+        // Ajouter CENS si des recensements géocodés existent (census_records n'est pas dans events)
+        $censusCnt = (int)$pdo->query("
+            SELECT count(*) FROM census_records cr
+            JOIN places pl ON pl.id=cr.place_id
+            WHERE pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL
+              AND pl.name IS NOT NULL AND trim(pl.name)<>''
+        ")->fetchColumn();
+        if($censusCnt>0 && !in_array('CENS',array_column($mapTags,'gedcom_tag'),true)){
+            $mapTags[] = ['gedcom_tag'=>'CENS','label'=>'Recensement','cnt'=>$censusCnt];
+        }
+        $surnames = $pdo->query("
+            SELECT last_name AS name, count(*) AS person_count
+            FROM persons
+            WHERE last_name IS NOT NULL AND trim(last_name)<>''
+              AND lower(trim(last_name)) NOT IN ('inconnu','unknown')
+              AND last_name NOT GLOB '[?X]*'
+            GROUP BY last_name COLLATE NOCASE
+            ORDER BY person_count DESC, last_name COLLATE NOCASE
+        ")->fetchAll();
+        return [$stats, $start, $types, $occupations, $mapTags, $surnames];
+    });
     json_response([
         'csrf' => csrf_token(),
         'stats' => $stats,
