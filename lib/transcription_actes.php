@@ -14,9 +14,10 @@ declare(strict_types=1);
 
 const TX_DEEP_DEFAULT_URL = 'http://127.0.0.1:11434';
 /** Les modèles proposés : licence vraiment ouverte (Apache 2.0), tag Ollama exact, poids approximatif du téléchargement. */
+// les versions « instruct » : elles écrivent la transcription tout de suite (les autres « réfléchissent » d'abord et la réponse restait vide)
 const TX_DEEP_MODELS = [
-    ['tag' => 'qwen3-vl:8b', 'label' => 'Qwen3-VL 8B', 'size_gb' => 6.1, 'ram_gb' => 16, 'license' => 'Apache 2.0', 'recommended' => true],
-    ['tag' => 'qwen3-vl:4b', 'label' => 'Qwen3-VL 4B', 'size_gb' => 3.3, 'ram_gb' => 8, 'license' => 'Apache 2.0', 'recommended' => false],
+    ['tag' => 'qwen3-vl:8b-instruct', 'label' => 'Qwen3-VL 8B', 'size_gb' => 6.1, 'ram_gb' => 16, 'license' => 'Apache 2.0', 'recommended' => true],
+    ['tag' => 'qwen3-vl:4b-instruct', 'label' => 'Qwen3-VL 4B', 'size_gb' => 3.3, 'ram_gb' => 8, 'license' => 'Apache 2.0', 'recommended' => false],
 ];
 const TX_DEEP_LANGS = ['fra' => 'français', 'lat' => 'latin', 'fra+lat' => 'français et latin', 'eng' => 'anglais', 'deu' => 'allemand', 'ita' => 'italien', 'spa' => 'espagnol', 'pol' => 'polonais', 'nld' => 'néerlandais', 'grc' => 'grec ancien', 'ell' => 'grec moderne'];
 

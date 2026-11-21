@@ -394,6 +394,12 @@ function solidite_rules(): array
 /** Signature de ce qui sert au calcul : si elle ne bouge pas, le résultat gardé est encore bon. */
 function solidite_signature(PDO $pdo): string
 {
+    // 🐘 les comptes de toute la base (0,15 s à 200 000 fiches) relus tant que ces tables ne changent pas (lib/calc_cache.php)
+    $tables = ['persons', 'events', 'families', 'family_children', 'source_links', 'sources', 'media_links', 'proof_cases', 'link_strength'];
+    return function_exists('calc_cached') ? calc_cached($pdo, 'solidite_sig', $tables, [], static fn() => solidite_signature_raw($pdo)) : solidite_signature_raw($pdo);
+}
+function solidite_signature_raw(PDO $pdo): string
+{
     $row = $pdo->query("SELECT
         (SELECT count(*)||'.'||COALESCE(max(id),0)||'.'||COALESCE(max(updated_at),'') FROM persons),
         (SELECT count(*)||'.'||COALESCE(max(id),0)||'.'||COALESCE(max(updated_at),'') FROM events),

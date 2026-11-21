@@ -122,7 +122,14 @@ function controle_span_text(float $days): string
 /** Signature de ce qui sert au contrôle : si elle ne bouge pas, le résultat gardé est encore bon. */
 function controle_signature(PDO $pdo, array $th): string
 {
-    $row = $pdo->query("SELECT
+    // 🐘 les comptes de toute la base (0,2 s à 200 000 fiches) relus tant que ces tables ne changent pas (lib/calc_cache.php)
+    $row = function_exists('calc_cached') ? calc_cached($pdo, 'controle_sig', ['persons', 'events', 'families', 'family_children', 'places'], [], static fn() => controle_signature_row($pdo)) : controle_signature_row($pdo);
+    unset($th['banner']);
+    return md5(json_encode([$row, $th, CONTROLE_VERSION]));
+}
+function controle_signature_row(PDO $pdo): array
+{
+    return $pdo->query("SELECT
         (SELECT count(*)||'.'||COALESCE(max(id),0)||'.'||COALESCE(max(updated_at),'') FROM persons),
         (SELECT count(*)||'.'||COALESCE(max(id),0)||'.'||COALESCE(max(updated_at),'')||'.'||COALESCE(total(year),0) FROM events),
         (SELECT count(*)||'.'||COALESCE(max(id),0)||'.'||COALESCE(total(COALESCE(partner1_id,0)*3+COALESCE(partner2_id,0)),0) FROM families),
@@ -130,8 +137,6 @@ function controle_signature(PDO $pdo, array $th): string
         (SELECT COALESCE(max(id),0) FROM change_log),
         (SELECT COALESCE(max(id),0) FROM persons WHERE is_start=1),
         (SELECT total(COALESCE(latitude,0))+total(COALESCE(longitude,0)) FROM places WHERE id IN (SELECT place_id FROM events WHERE place_id IS NOT NULL))")->fetch(PDO::FETCH_NUM);
-    unset($th['banner']);
-    return md5(json_encode([$row, $th, CONTROLE_VERSION]));
 }
 
 // 🌐 les phrases des alertes sont écrites dans la langue de la page : un fichier gardé par langue (le français garde l'ancien nom)

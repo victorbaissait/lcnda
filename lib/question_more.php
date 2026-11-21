@@ -95,6 +95,12 @@ function qm_people(PDO $pdo): array
 {
     static $cache = null;
     if ($cache !== null) { return $cache; }
+    // 🐘 gardé tant que fiches, événements, sortes d'événements et lieux ne changent pas (lib/calc_cache.php) : 200 000 fiches
+    // relues en 0,3 s au lieu de 2 s ; le même tableau, types compris
+    return $cache = function_exists('calc_cached') ? calc_cached($pdo, 'qm_people', ['persons', 'events', 'event_types', 'places'], [], static fn() => qm_people_raw($pdo)) : qm_people_raw($pdo);
+}
+function qm_people_raw(PDO $pdo): array
+{
     // 🐘 une très grosse base (200 000 fiches, 470 000 naissances et décès) : les événements lus un à un (plus de fetchAll),
     // et les textes qui reviennent (sexe, statut, métier, lieu, mois…) partagés au lieu d'être recopiés pour chaque fiche ;
     // la date exacte calculée une fois par texte de date. Même résultat qu'avant, deux à trois fois moins de mémoire.
@@ -130,7 +136,7 @@ function qm_people(PDO $pdo): array
         if ($p[$id][$kp] === '' && $e['place'] !== '') { $pl = (string) $e['place']; $p[$id][$kp] = $str[$pl] ??= $pl; $p[$id][$kpi] = (int) $e['place_id']; }
     }
     unset($rows, $iso, $str);
-    return $cache = $p;
+    return $p;
 }
 /** les fiches qui comptent pour une question : les personnes (sans les animaux), ou seulement les animaux si la question parle d'animaux */
 function qm_humans(PDO $pdo, bool $animals = false): array
@@ -232,6 +238,21 @@ function qm_keep(array $f, array $p, ?int $year = null): bool
 }
 /** les mots d'un nom ou d'une question, sans accents ni majuscules, coupés aux espaces, traits d'union et apostrophes */
 function qm_words(string $s): array { return preg_split('/[^a-z0-9]+/', strtolower(ascii_fold($s)), -1, PREG_SPLIT_NO_EMPTY); }
+/** les mots des noms de chaque fiche (prénoms ; noms sans les particules $part), et pour chaque mot les fiches qui le portent */
+function qm_name_words(PDO $pdo, array $part): array
+{
+    $people = []; $idx = []; $wf = []; $wl = [];
+    // les mêmes fiches, dans le même ordre et avec les mêmes textes que qm_people()
+    foreach ($pdo->query("SELECT id, COALESCE(first_name,'') AS first, COALESCE(last_name,'') AS last FROM persons", PDO::FETCH_ASSOC) as $r) {
+        $id = (int) $r['id']; $f = (string) $r['first']; $l = (string) $r['last'];
+        $fi = $wf[$f] ??= qm_words($f); $la = $wl[$l] ??= qm_words($l);
+        if ($fi && $la) {
+            $k = count($people); $people[] = [$id, $fi, array_values(array_diff($la, $part))];
+            foreach (array_unique(array_merge($people[$k][1], $people[$k][2])) as $w) { $idx[$w][] = $k; }
+        }
+    }
+    return [$people, $idx];
+}
 /** les personnes citées dans la question (suites de mots qui forment un prénom + un nom de la base), de gauche à droite */
 function qm_find_people(PDO $pdo, string $q): array
 {
@@ -242,15 +263,8 @@ function qm_find_people(PDO $pdo, string $q): array
     // essayées (une fiche qui répond contient forcément chaque mot), au lieu de toutes les fiches à chaque essai
     static $memo = null;
     if ($memo === null || $memo[0] !== spl_object_id($pdo)) {
-        $people = []; $idx = []; $wf = []; $wl = [];
-        foreach (qm_people($pdo) as $id => $p) {
-            $fi = $wf[$p['first']] ??= qm_words($p['first']); $la = $wl[$p['last']] ??= qm_words($p['last']);
-            if ($fi && $la) {
-                $k = count($people); $people[] = [$id, $fi, array_values(array_diff($la, $part))];
-                foreach (array_unique(array_merge($people[$k][1], $people[$k][2])) as $w) { $idx[$w][] = $k; }
-            }
-        }
-        $memo = [spl_object_id($pdo), $people, $idx];
+        // 🐘 seulement les noms (pas toutes les fiches et leurs repères), gardés tant que les fiches ne changent pas
+        $memo = [spl_object_id($pdo), ...(function_exists('calc_cached') ? calc_cached($pdo, 'qm_name_words', ['persons'], [], static fn() => qm_name_words($pdo, $part)) : qm_name_words($pdo, $part))];
     }
     [, $people, $idx] = $memo;
     $found = []; $n = count($tok); $i = 0;
