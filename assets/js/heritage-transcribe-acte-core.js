@@ -238,7 +238,7 @@
         + 'monsieur madame sieur dame demoiselle maitre messire nomme nommee lui eux comparant comparants declarant declarants temoin temoins mention acte actes registre folio page fin item '
         + 'premier premiere second seconde troisieme dernier derniere ici voici voila oui non bien tres plus moins meme memes autre autres pere mere frere soeur fils epoux epouse veuf veuve enfant enfants '
         + 'seigneur seigneurs signeur signeurs citoyen citoyenne citoyens prisonnier prisonniers bataille guerre armee regiment soldat soldats empereur roi republique nation pays').split(' '));
-    const ONSETS = new Set('bl br ch chl chr cl cr cz dr dz dw fl fr gl gn gr gw hr kh kl kn kr kw mn ph phl phr pf pfl pl pr ps pt qu rh sc sch schl schm schn schr schw sh sk sl sm sn sp spr st str sv sw sz szcz th thr tr ts tsch tz vl vr wh wl wr zb zd zh zl zm zr zw'.split(' '));
+    const ONSETS = new Set('brz prz krz grz trz drz wrz chrz szk szp szt bl br ch chl chr cl cr cz dr dz dw fl fr gl gn gr gw hr kh kl kn kr kw mn ph phl phr pf pfl pl pr ps pt qu rh sc sch schl schm schn schr schw sh sk sl sm sn sp spr st str sv sw sz szcz th thr tr ts tsch tz vl vr wh wl wr zb zd zh zl zm zr zw'.split(' '));
     const VOW = /[aeiouy]/;
     /** un mot qui ne peut pas être un nom bien lu : pas de voyelle, un début de mot impossible (« BTIS »), trop de consonnes d'affilée */
     const badLetters = w => { const x = norm(w).replace(/[^a-z]/g, ''); if (x.length < 2) return false; if (!VOW.test(x)) return true; const on = x.match(/^[^aeiouy]+/)?.[0] || ''; if (on.length >= 2 && !ONSETS.has(on)) return true; return /[^aeiouy]{5,}/.test(x); };

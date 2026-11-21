@@ -70,7 +70,7 @@
         if (!el || !ctx || !ctx.rf) return;
         const st = stateFor(ctx.text);
         if (!st.rf || st.base !== ctx.rf) { st.base = ctx.rf; st.rf = st.aiFound ? C().mergeAi(JSON.parse(JSON.stringify(ctx.rf)), st.aiFound) : ctx.rf; st.match = null; }
-        const rf = st.rf, P = prefs();
+        const rf = st.rf; let P = prefs();
         const byKey = k => rf.people.find(p => p.key === k) || rf.places.find(p => p.key === k) || rf.dates.find(p => p.key === k) || rf.ages.find(p => p.key === k) || rf.events.find(p => p.key === k) || rf.numbers.find(p => p.key === k);
         const linkedId = p => (ctx.people || []).find(q => q.person_id && p.name && C().norm(q.name) === C().norm(p.name))?.person_id || 0;
         const cands = p => (st.match?.people?.[p.key] || []);
@@ -124,6 +124,7 @@
         }
         const counts = () => [rf.people.length && `👤 ${rf.people.length}`, rf.places.length && `📍 ${rf.places.length}`, rf.dates.length && `📅 ${rf.dates.length}`, rf.events.length && `⚔️ ${rf.events.length}`].filter(Boolean).join(' · ');
         function paint() {
+            P = prefs();
             el.innerHTML = `<div class="h-tf" data-tf><div class="h-tf-top"><span><b>🧭 ${esc(i18n('Ce que l’app a trouvé dans l’acte'))}</b> <small class="muted">${esc(counts())}</small></span>
                 <button type="button" class="icon-button" data-tf-prefs title="${esc(i18n('Réglages du repérage'))}" aria-label="${esc(i18n('Réglages du repérage'))}">⚙️</button></div>${aiLine()}${sections()}
                 <p class="ui-hint">${esc(i18n('Tout est proposé : garde, écarte ou ajoute à une fiche. Rien n’est écrit sans ton clic.'))}</p></div>`;
@@ -222,7 +223,7 @@
             const owner = person || (/^a\d+$/.test(key) ? rf.people.find(p => p.key === x.owner) : null);
             const first = owner ? (linkedId(owner) || (cands(owner)[0]?.same ? cands(owner)[0].id : 0)) : 0;
             const actPeople = [...new Map((ctx.people || []).filter(q => q.person_id).map(q => [q.person_id, q])).values()].slice(0, 8);
-            const sugg = [...(owner ? cands(owner).map(c => ({id: c.id, name: c.title})) : []), ...actPeople.map(q => ({id: q.person_id, name: q.name}))].filter((v, i, a) => a.findIndex(w => w.id === v.id) === i).slice(0, 8);
+            const sugg = [...(owner ? cands(owner).map(c => ({id: c.id, name: c.title})) : []), ...actPeople.map(q => ({id: q.person_id, name: q.name})), ...rf.people.filter(q => q !== owner).flatMap(q => cands(q).slice(0, 1).map(c => ({id: c.id, name: c.title})))].filter((v, i, a) => a.findIndex(w => w.id === v.id) === i).slice(0, 8);
             const src = C().sourceGuess({source: ctx.source, filename: ctx.filename, title: ctx.title, place: ctx.place || rf.act?.place || '', kind: ctx.kind, date: rf.actDate?.label || ctx.date || '', year: rf.year});
             const AS = [['event', '📅', 'Événement'], ['note', '📝', 'Note'], ['job', '🔨', 'Profession'], ['residence', '🏠', 'Résidence'], ['info', 'ℹ️', 'Info']];
             const P0 = window.LCNDA_PICKER || A();

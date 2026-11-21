@@ -308,8 +308,9 @@ function tx_find_prompt(string $text): string
 /** Le JSON de l'IA, vérifié : seulement les clés attendues, des textes courts, des listes bornées ; sinon une exception. */
 function tx_find_validate(string $raw): array
 {
+    if (strlen($raw) > 60000) { throw new LcndaBadInput('réponse trop longue'); }
     $raw = trim(preg_replace('/^```(?:json)?\s*|\s*```$/i', '', trim($raw)) ?? '');
-    if ($raw === '' || strlen($raw) > 60000) { throw new LcndaBadInput('réponse vide ou trop longue'); }
+    if ($raw === '') { throw new LcndaBadInput('réponse vide ou trop longue'); }
     $j = json_decode($raw, true, 8);
     if (!is_array($j) || ($j !== [] && array_is_list($j))) { throw new LcndaBadInput('pas un objet JSON'); }
     $extra = array_diff(array_keys($j), ['personnes', 'lieux', 'dates', 'sorte']);
@@ -578,7 +579,9 @@ function act_import_undo(PDO $pdo, array $d): array
 function act_trouve_match(PDO $pdo, array $d): array
 {
     $out = ['people' => [], 'places' => [], 'events' => []];
-    $close = static function (string $a, string $b): int { if ($a === $b) { return 0; } $l = max(mb_strlen($a), mb_strlen($b)); if ($l < 4 || $a[0] !== $b[0]) { return 99; } $d = levenshtein($a, $b); return $d <= ($l >= 7 ? 2 : 1) ? $d : 99; };
+    // les fins qui se prononcent pareil (« Baisser », « Baissait », « Baissé ») comptent pour une seule lettre de différence
+    $sound = static fn(string $x): string => preg_replace(['/(?:aient|ait|ais|ai|er|ez|et|ee|e)$/', '/(.)\\1/', '/ph/', '/y/'], ['e', '$1', 'f', 'i'], $x) ?? $x;
+    $close = static function (string $a, string $b) use ($sound): int { if ($a === $b) { return 0; } $l = max(mb_strlen($a), mb_strlen($b)); if ($l < 4 || $a[0] !== $b[0]) { return 99; } $d = levenshtein($a, $b); if ($d > 1 && $sound($a) === $sound($b)) { $d = 1; } return $d <= ($l >= 7 ? 2 : 1) ? $d : 99; };
     // les personnes : le nom de famille écrit à une ou deux lettres près (« Baisser » ↔ « BAISSAIT »), le prénom pareil ou presque
     $s = $pdo->prepare("SELECT id, first_name, last_name, gender FROM persons WHERE COALESCE(kind,'person')<>'animal' AND last_name LIKE ? LIMIT 600");
     foreach (array_slice(is_array($d['people'] ?? null) ? $d['people'] : [], 0, 40) as $p) {
