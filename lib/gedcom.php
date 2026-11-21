@@ -524,20 +524,34 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
         $childrenByFamily[(int) $c['family_id']][(int) $c['child_id']] = $c;
         $famcByChild[(int) $c['child_id']][(int) $c['family_id']] = $c;
     }
-    // seulement les colonnes que le fichier écrit (avant : e.* — une quarantaine de colonnes × 300 000 événements en mémoire)
-    $events = $pdo->query("SELECT e.id,e.scope,e.person_id,e.family_id,e.title,e.date_text,e.date_calendar,e.year,e.address,e.agency,e.cause,e.description,t.gedcom_tag,t.label AS type_label,pl.name AS place_name,pl.subdivision,pl.county,pl.state,pl.country,pl.latitude,pl.longitude,pl.admin4_code
-        FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id
-        ORDER BY COALESCE(e.sort_date,''),COALESCE(e.year,9999),e.id");
     $hiddenFamily = [];
     foreach ($families as $f) { if (isset($hidden[(int) ($f['partner1_id'] ?? 0)]) || isset($hidden[(int) ($f['partner2_id'] ?? 0)])) { $hiddenFamily[(int) $f['id']] = true; } }
-    $eventsByPerson = []; $eventsByFamily = []; $hiddenEvent = []; $eventOwner = [];
-    foreach ($events as $e) {
-        $pidE = (int) ($e['person_id'] ?? 0); $fidE = (int) ($e['family_id'] ?? 0);
-        $eventOwner[(int) $e['id']] = [$pidE, $fidE];
-        if (($pidE && isset($hidden[$pidE])) || ($fidE && isset($hiddenFamily[$fidE]))) { $hiddenEvent[(int) $e['id']] = true; continue; }
-        if (($e['scope'] ?? '') === 'person' && $pidE > 0 && isset($visible[$pidE])) { $eventsByPerson[$pidE][] = $e; }
-        if (($e['scope'] ?? '') === 'family' && $fidE > 0) { $eventsByFamily[$fidE][] = $e; }
+    // 🐘 Les événements ne sont plus tous gardés en mémoire (200 000 fiches = 700 000 événements : plus de 2 Go, export en
+    // erreur) : seulement à qui appartient chaque événement (deux nombres), puis leurs colonnes lues par paquets de fiches /
+    // de familles au moment de les écrire (même ordre qu'avant pour chaque fiche : date, année, numéro).
+    $hiddenEvent = []; $eventPerson = []; $eventFamily = [];
+    foreach ($pdo->query('SELECT id, person_id, family_id FROM events', PDO::FETCH_NUM) as [$eidE, $pidE, $fidE]) {
+        $eidE = (int) $eidE; $pidE = (int) $pidE; $fidE = (int) $fidE;
+        if ($pidE) { $eventPerson[$eidE] = $pidE; }
+        if ($fidE) { $eventFamily[$eidE] = $fidE; }
+        if (($pidE && isset($hidden[$pidE])) || ($fidE && isset($hiddenFamily[$fidE]))) { $hiddenEvent[$eidE] = true; }
     }
+    // seulement les colonnes que le fichier écrit (avant : e.* — une quarantaine de colonnes × 300 000 événements en mémoire)
+    $eventSql = "SELECT e.id,e.scope,e.person_id,e.family_id,e.title,e.date_text,e.date_calendar,e.year,e.address,e.agency,e.cause,e.description,t.gedcom_tag,t.label AS type_label,pl.name AS place_name,pl.subdivision,pl.county,pl.state,pl.country,pl.latitude,pl.longitude,pl.admin4_code
+        FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id";
+    /** les événements « person » (ou « family ») des fiches $ids, groupés, comme l'ancienne lecture de toute la table */
+    $eventsOf = static function (string $scope, array $ids) use ($pdo, $eventSql, $hidden, $hiddenFamily, $visible): array {
+        $by = [];
+        if (!$ids) { return $by; }
+        $col = $scope === 'person' ? 'e.person_id' : 'e.family_id';
+        foreach ($pdo->query($eventSql . " WHERE {$col} IN (" . implode(',', array_map('intval', $ids)) . ") ORDER BY COALESCE(e.sort_date,''),COALESCE(e.year,9999),e.id") as $e) {
+            $pidE = (int) ($e['person_id'] ?? 0); $fidE = (int) ($e['family_id'] ?? 0);
+            if (($pidE && isset($hidden[$pidE])) || ($fidE && isset($hiddenFamily[$fidE]))) { continue; }
+            if ($scope === 'person' && ($e['scope'] ?? '') === 'person' && $pidE > 0 && isset($visible[$pidE])) { $by[$pidE][] = $e; }
+            if ($scope === 'family' && ($e['scope'] ?? '') === 'family' && $fidE > 0) { $by[$fidE][] = $e; }
+        }
+        return $by;
+    };
     // Cible d'une note, d'une citation ou d'un média appartenant à une personne masquée : jamais exportée
     $secret = static fn(string $type, int $id): bool => ($type === 'person' && isset($hidden[$id])) || ($type === 'event' && isset($hiddenEvent[$id])) || ($type === 'family' && isset($hiddenFamily[$id]));
     $notesByTarget = [];
@@ -572,10 +586,10 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
         // Seulement les médias d'une fiche, d'une famille, d'un événement ou d'une source qui part dans le fichier
         // (pas ceux des vivants exclus, ni ceux d'une autre branche)
         $keptFam = []; foreach ($families as $f) { if (!isset($hiddenFamily[(int) $f['id']])) { $keptFam[(int) $f['id']] = true; } }
-        $exported = static function (string $type, int $id) use ($visible, $keptFam, $eventOwner, $sources, $hidden): bool {
+        $exported = static function (string $type, int $id) use ($visible, $keptFam, $eventPerson, $eventFamily, $sources, $hidden): bool {
             if ($type === 'person') { return isset($visible[$id]) && !isset($hidden[$id]); }
             if ($type === 'family') { return isset($keptFam[$id]); }
-            if ($type === 'event') { [$p, $f] = $eventOwner[$id] ?? [0, 0]; return ($p && isset($visible[$p]) && !isset($hidden[$p])) || ($f && isset($keptFam[$f])); }
+            if ($type === 'event') { $p = $eventPerson[$id] ?? 0; $f = $eventFamily[$id] ?? 0; return ($p && isset($visible[$p]) && !isset($hidden[$p])) || ($f && isset($keptFam[$f])); }
             if ($type === 'source') { return isset($sources[$id]); }
             return false;
         };
@@ -676,8 +690,15 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
     };
 
     $healthRows = $sink === null && !$geneanet && export_option_enabled('health', false) && function_exists('sante_gedcom_rows') ? sante_gedcom_rows($pdo) : []; // 🩺 jamais sans la case
-    foreach ($persons as $p) {
+    unset($eventPerson, $eventFamily, $exported);
+    $eventsByPerson = []; $chunkEnd = -1;
+    foreach ($persons as $pi => $p) {
         $pid = (int) $p['id'];
+        if ($pi > $chunkEnd) { // les événements des 2 000 fiches suivantes
+            $chunkIds = array_map(static fn($x) => (int) $x['id'], array_slice($persons, $pi, 2000));
+            $chunkEnd = $pi + count($chunkIds) - 1;
+            $eventsByPerson = $eventsOf('person', array_values(array_filter($chunkIds, static fn($x) => !isset($hidden[$x]))));
+        }
         $line(0, '@I' . $pid . '@', 'INDI');
         if (isset($hidden[$pid])) {
             $line(1, 'NAME', $hidden[$pid] === 'private' ? 'Fiche /confidentielle/' : 'Personne /vivante/');
@@ -744,8 +765,14 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
         $writeLabels(1, 'person:' . $pid);
     }
 
-    foreach ($families as $f) {
+    $eventsByPerson = []; $eventsByFamily = []; $chunkEnd = -1;
+    foreach ($families as $fi => $f) {
         $fid = (int) $f['id'];
+        if ($fi > $chunkEnd) { // les événements des 2 000 familles suivantes
+            $chunkIds = array_map(static fn($x) => (int) $x['id'], array_slice($families, $fi, 2000));
+            $chunkEnd = $fi + count($chunkIds) - 1;
+            $eventsByFamily = $eventsOf('family', $chunkIds);
+        }
         $people = array_filter([(int) ($f['partner1_id'] ?? 0), (int) ($f['partner2_id'] ?? 0), ...array_keys($childrenByFamily[$fid] ?? [])], static fn($id) => isset($visible[$id]));
         if (!$people) { continue; }
         $line(0, '@F' . $fid . '@', 'FAM');
