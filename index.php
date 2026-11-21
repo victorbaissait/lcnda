@@ -1477,7 +1477,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-complements-2.js?v=2" defer></script>
 <script src="assets/js/heritage-blocs-school.js?v=3" defer></script>
 <script src="assets/js/heritage-creations.js?v=5" defer></script>
-<script src="assets/js/heritage-onglets-documents.js?v=6" defer></script>
+<script src="assets/js/heritage-onglets-documents.js?v=7" defer></script>
 <script src="assets/js/heritage-onglets-catalogue.js?v=2" defer></script>
 <script src="assets/js/heritage-transcribe-view.js?v=8" defer></script>
 <script src="assets/js/heritage-transcribe-acte-core.js?v=1" defer></script>
