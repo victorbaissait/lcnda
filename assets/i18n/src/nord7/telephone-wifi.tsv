@@ -1,0 +1,199 @@
+fr ¦ is
+# 📱 la page du téléphone de terrain (assets/js/app-terrain.js)
+📶 relié ¦ 📶 tengt
+⏸ hors wifi ¦ ⏸ ekkert wifi
+Le mot de passe de la généalogie : vérifié par l’ordinateur, jamais gardé sur ce téléphone. ¦ Lykilorð ættartrésins: tölvan athugar það, það er aldrei geymt í þessum síma.
+Le navigateur écrit « Non sécurisé » : c’est vrai, la porte du wifi n’a pas de HTTPS. N’envoie que sur le wifi de la maison, protégé par sa clé. ¦ Vafrinn segir „Ekki öruggt“: það er rétt, wifi-dyrnar eru ekki með HTTPS. Sendu aðeins á heimilis-wifi sem er varið með lykli.
+Tes photos attendent dans cette page. ¦ Myndirnar þínar bíða á þessari síðu.
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). ¦ Tölvan svarar ekki (í dvala, slökkt eða dyrnar lokaðar).
+Choisir une personne ou une visite… ¦ Veldu manneskju eða heimsókn…
+Une ligne (facultatif) ¦ Ein lína (valfrjálst)
+Pas de wifi de la maison : les photos se prennent avec l’appareil photo du téléphone, puis « 🖼 Choisir » au retour. ¦ Ekkert heimilis-wifi: taktu myndirnar með myndavél símans og svo „🖼 Velja“ þegar þú kemur aftur.
+Prendre une photo ¦ Taka mynd
+Choisir dans la galerie ¦ Velja úr myndasafni
+📍 = la photo contient une position GPS (retirée à l’arrivée, réglage) ¦ 📍 = myndin inniheldur GPS-staðsetningu (fjarlægð við komu, stilling)
+Tombe famille LACOMBE, allée 4 ¦ Gröf LACOMBE-fjölskyldunnar, röð 4
+Envoyer : {n} ¦ Senda: {n}
+Sans wifi, garde cette page ouverte : les photos attendent ici et partent toutes seules au retour. Pour une journée entière aux archives, prends plutôt la visite par fichier. ¦ Án wifi skaltu hafa þessa síðu opna: myndirnar bíða hér og fara sjálfkrafa þegar þú kemur aftur. Fyrir heilan dag á skjalasafni skaltu frekar nota heimsókn með skrá.
+Le téléphone ne sait pas si une photo a été rangée ni où : il ne lit rien de l’arbre. ¦ Síminn veit ekki hvort eða hvar mynd var flokkuð: hann les ekkert úr trénu.
+Nom de la personne ou de la visite ¦ Nafn manneskju eða heimsóknar
+Seulement les personnes décédées, sans les fiches confidentielles. ¦ Aðeins látið fólk, án trúnaðarfærslna.
+Choisis pour qui est cette photo. ¦ Veldu fyrir hvern myndin er.
+Verrouillée après 15 minutes sans geste : redonne le mot de passe. Tes photos attendent. ¦ Læst eftir 15 mínútur án aðgerða: sláðu lykilorðið inn aftur. Myndirnar þínar bíða.
+Ce téléphone n’est plus autorisé sur l’ordinateur. ¦ Þessi sími er ekki lengur leyfður á tölvunni.
+Envoyées dans 📥 À trier : {n} ¦ Sent í 📥 Til flokkunar: {n}
+Refusé par l’ordinateur ¦ Tölvan hafnaði
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). En attente : {n} ; nouvel essai toutes les 30 secondes tant que la page est ouverte. ¦ Tölvan svarar ekki (í dvala, slökkt eða dyrnar lokaðar). Bíða: {n}; reynt aftur á 30 sekúndna fresti á meðan síðan er opin.
+↻ Réessayer ¦ ↻ Reyna aftur
+Envoi en cours : {i} sur {n} ¦ Sendir: {i} af {n}
+Garde la page ouverte. ¦ Hafðu síðuna opna.
+En attente depuis {when} : {n} ¦ Bíða síðan {when}: {n}
+Elles étaient gardées dans ce téléphone. ¦ Þær voru geymdar í þessum síma.
+Les envoyer ¦ Senda þær
+Les oublier ¦ Gleyma þeim
+Retirées de la boîte : {n} ¦ Fjarlægðar úr kassanum: {n}
+« {name} » n’est plus ouverte sur l’ordinateur : tes photos restent en attente ici. ¦ „{name}“ er ekki lengur opin á tölvunni: myndirnar þínar bíða áfram hér.
+Des photos étaient en attente, mais le téléphone a libéré la place. Retrouve-les dans ta galerie et « 🖼 Choisir ». ¦ Myndir biðu en síminn losaði plássið. Finndu þær í myndasafninu og „🖼 Velja“.
+📱 Envoyer des photos à l’ordinateur principal ¦ 📱 Senda myndir í aðaltölvuna
+# 📥 À trier, sur l'ordinateur (assets/js/app-a-trier.js)
+📥 À trier ¦ 📥 Til flokkunar
+À trier ¦ Til flokkunar
+Listes · Médias et documents ¦ Listar · Miðlar og skjöl
+Les photos envoyées par un téléphone de terrain arrivent ici, hors de l’arbre. Relie chacune à ce qu’elle montre, ou supprime-la. ¦ Myndir sem vettvangssími sendir koma hingað, utan trésins. Tengdu hverja við það sem hún sýnir, eða eyddu henni.
+Chercher… (texte, téléphone, personne) ¦ Leita… (texti, sími, manneskja)
+🗑 Supprimées ¦ 🗑 Eyddar
+Reliées ¦ Tengdar
+visite {name} ¦ heimsókn {name}
+pour {name} ¦ fyrir {name}
+personne pas choisie ¦ engin manneskja valin
+📍 GPS gardé ¦ 📍 GPS haldið
+📍 GPS retiré ¦ 📍 GPS fjarlægt
+🔗 reliée à {name} ¦ 🔗 tengd við {name}
+effacée pour de bon le {date} ¦ eytt endanlega {date}
+🗄 Relier à la visite ¦ 🗄 Tengja við heimsóknina
+🔗 Relier à {name} ¦ 🔗 Tengja við {name}
+Relier à… ¦ Tengja við…
+(sans texte) ¦ (án texta)
+Rien à trier : les photos du téléphone arriveront ici. ¦ Ekkert að flokka: myndirnar úr símanum koma hingað.
+Mode consultation : la boîte se lit, mais rien ne se relie ni ne se supprime. ¦ Skoðunarhamur: kassann má lesa, en ekkert er tengt eða eytt.
+Cochées : {n} ¦ Hakað við: {n}
+Décocher ¦ Afhaka
+📍 Garder la position GPS ? ¦ 📍 Halda GPS-staðsetningunni?
+La photo contient une position GPS (utile pour situer une tombe). La garder pour la carte ? ¦ Myndin inniheldur GPS-staðsetningu (gagnlegt til að finna gröf). Halda henni fyrir kortið?
+La retirer ¦ Fjarlægja hana
+✓ Reliées à {name} : {n} ¦ ✓ Tengt við {name}: {n}
+🪦 Une photo de tombe : ajouter aussi l’inhumation à {name} ? ¦ 🪦 Mynd af gröf: bæta greftruninni líka við {name}?
+✓ Inhumation ajoutée à {name}. ¦ ✓ Greftrun bætt við {name}.
+Relier à un événement ¦ Tengja við atburð
+Relier à une source ¦ Tengja við heimild
+✓ Supprimées : {n} ¦ ✓ Eytt: {n}
+✓ Supprimées : {n}. Gardées 30 jours dans « 🗑 Supprimées » (Filtrer ▾). ¦ ✓ Eytt: {n}. Geymdar í 30 daga í „🗑 Eyddar“ (Sía ▾).
+✎ Modifier le texte ¦ ✎ Breyta textanum
+Texte enregistré ¦ Texti vistaður
+👤 Une personne… ¦ 👤 Manneskja…
+📅 Un événement… (inhumation, mariage…) ¦ 📅 Atburður… (greftrun, hjónaband…)
+📚 Une source… (l’acte, la cote) ¦ 📚 Heimild… (skjalið, tilvísunin)
+🗄 La visite d’archives proposée ¦ 🗄 Tillagða skjalasafnsheimsóknin
+🔍 Ouvrir en grand ¦ 🔍 Opna í fullri stærð
+⟲ Tourner ¦ ⟲ Snúa
+⤓ Exporter l’original ¦ ⤓ Flytja út frumritið
+Remise dans 📥 À trier. ¦ Sett aftur í 📥 Til flokkunar.
+📥 Arrivées du téléphone : {n} ¦ 📥 Komið úr símanum: {n}
+📥 À trier : {n} ¦ 📥 Til flokkunar: {n}
+# 🖧 Plusieurs ordinateurs → 📱 Téléphones de terrain (assets/js/app-reseau-local.js)
+téléphone de terrain ¦ vettvangssími
+Téléphone de terrain ¦ Vettvangssími
+📱 Téléphone de terrain ¦ 📱 Vettvangssími
+📱 Téléphones de terrain ¦ 📱 Vettvangssímar
+👁 Lecture seule ¦ 👁 Aðeins lestur
+déposer · liste réduite ¦ skila · stuttur listi
+＋ Ajouter un téléphone de terrain ¦ ＋ Bæta við vettvangssíma
+Scanne ce QR code avec l’appareil photo du téléphone ¦ Skannaðu þennan QR-kóða með myndavél símans
+Le code d’invitation est déjà dans le QR code. Sur le téléphone : « Demander l’accès », puis compare le code à 6 chiffres ici. ¦ Boðskóðinn er þegar í QR-kóðanum. Í símanum: „Biðja um aðgang“, berðu svo 6 stafa kóðann saman hér.
+Un 📱 téléphone de terrain ne voit pas l’arbre : il dépose seulement des photos dans 📥 À trier. ¦ 📱 Vettvangssími sér ekki tréð: hann skilar aðeins myndum í 📥 Til flokkunar.
+⏻ Retirer tous les téléphones ¦ ⏻ Fjarlægja alla síma
+Les photos arrivent dans Listes → Médias et documents → 📥 À trier. ¦ Myndirnar koma í Listar → Miðlar og skjöl → 📥 Til flokkunar.
+📥 Ouvrir À trier ¦ 📥 Opna Til flokkunar
+Plus aucun téléphone ne pourra rien envoyer. Leurs photos déjà déposées restent dans 📥 À trier (réglage). ¦ Enginn sími getur sent neitt lengur. Myndir sem þegar hefur verið skilað verða áfram í 📥 Til flokkunar (stilling).
+Téléphones retirés : {n} ¦ Fjarlægðir símar: {n}
+Valeur refusée : réglage inchangé. ¦ Gildi hafnað: stilling óbreytt.
+✓ « {name} » autorisé, 📱 téléphone de terrain. ¦ ✓ „{name}“ leyfður, 📱 vettvangssími.
+Sorte d’appareil ¦ Tegund tækis
+📱 Téléphone de terrain : déposer des photos et une ligne de texte dans 📥 À trier. Il ne voit pas l’arbre, ne modifie rien. Il devra aussi donner le mot de passe de la généalogie. ¦ 📱 Vettvangssími: skilar myndum og einni línu af texta í 📥 Til flokkunar. Hann sér ekki tréð og breytir engu. Hann þarf líka að gefa upp lykilorð ættartrésins.
+Ce que le téléphone voit ¦ Það sem síminn sér
+Pour choisir « Pour qui ? » ¦ Til að velja „Fyrir hvern?“
+visites d’archives et personnes décédées ¦ skjalasafnsheimsóknir og látið fólk
+visites d’archives seulement ¦ aðeins skjalasafnsheimsóknir
+rien : tout se range sur l’ordinateur ¦ ekkert: allt er flokkað á tölvunni
+Montrer aussi les vivants (nom seulement) ¦ Sýna líka lifandi (aðeins nafn)
+Montrer aussi les fiches confidentielles (nom seulement) ¦ Sýna líka trúnaðarfærslur (aðeins nafn)
+« Pour qui ? » sur le téléphone ¦ „Fyrir hvern?“ í símanum
+obligatoire (plus lent sur place) ¦ skylda (hægara á staðnum)
+Une ligne de texte ¦ Ein lína af texta
+une pour tout l’envoi ¦ ein fyrir alla sendinguna
+une par photo ¦ ein á hverja mynd
+Les photos qui arrivent ¦ Myndir sem berast
+Où arrivent les photos ¦ Hvert myndirnar berast
+dans 📥 À trier : rien n’entre dans l’arbre sans toi ¦ í 📥 Til flokkunar: ekkert fer í tréð án þín
+reliées tout de suite à la personne choisie (visibles dans À trier, avec ↶ Annuler) ¦ tengdar strax við valda manneskju (sýnilegar í Til flokkunar, með ↶ Afturkalla)
+Position GPS de la photo ¦ GPS-staðsetning myndarinnar
+retirée à l’arrivée ¦ fjarlægð við komu
+gardée à part, à décider en reliant ¦ geymd sér, ákveðið við tengingu
+gardée (la carte peut la montrer) ¦ haldið (kortið getur sýnt hana)
+Taille maximale d’une photo ¦ Hámarksstærð myndar
+Photos par envoi ¦ Myndir í hverri sendingu
+Photos dans la boîte À trier, au plus ¦ Myndir í kassanum Til flokkunar, í mesta lagi
+Garder l’original (décoché : réduite à 2000 points) ¦ Halda frumritinu (óhakað: minnkuð í 2000 punkta)
+coché conseillé ¦ hakað við ráðlagt
+décoché conseillé ¦ óhakað ráðlagt
+# 🖧 réglages des téléphones de terrain (suite), 📜 Qui a vu quoi, messages du serveur (lib/telephone_wifi.php, lib/reseau_local.php)
+gardée 30 jours dans « 🗑 Supprimées », puis effacée ¦ geymd í 30 daga í „🗑 Eyddar“, síðan eytt
+effacée tout de suite (après les 10 secondes de ↶ Annuler) ¦ eytt strax (eftir 10 sekúndur ↶ Afturkalla)
+Photo de tombe reliée ¦ Tengd mynd af gröf
+proposer d’ajouter l’inhumation ¦ bjóða að bæta við greftrun
+ne rien proposer ¦ bjóða ekkert
+Pastille 📥 dans la barre du haut ¦ 📥 merki í efri stikunni
+oui, avec le nombre ¦ já, með fjöldanum
+non (seulement dans Listes) ¦ nei (aðeins í Listum)
+À l’arrivée de photos ¦ Þegar myndir berast
+seulement la pastille ¦ aðeins merkið
+un petit message en bas de l’écran ¦ lítil skilaboð neðst á skjánum
+Sans wifi ¦ Án wifi
+Hors du wifi de la maison ¦ Utan heimilis-wifi
+garder en attente dans la page, envoi tout seul au retour ¦ bíða á síðunni, send sjálfkrafa við heimkomu
+garder, mais demander avant d’envoyer ¦ halda, en spyrja áður en sent er
+refuser de prendre des photos hors wifi ¦ leyfa ekki myndatöku utan wifi
+Après l’envoi ¦ Eftir sendingu
+effacer les photos de la page ¦ hreinsa myndirnar af síðunni
+garder les vignettes de la journée ¦ halda smámyndum dagsins
+« ↶ Annuler » sur le téléphone ¦ „↶ Afturkalla“ í símanum
+tant que les photos ne sont pas rangées ¦ á meðan myndirnar eru ekki flokkaðar
+pendant 10 secondes ¦ í 10 sekúndur
+Mot de passe de la généalogie sur le téléphone ¦ Lykilorð ættartrésins í símanum
+demandé à l’ouverture, redemandé après 15 min sans geste ¦ beðið um við opnun, aftur eftir 15 mín án aðgerða
+demandé seulement pour voir la liste ; déposer avec le jeton seul ¦ aðeins beðið um fyrir listann; skila með tókanum einum
+Cet ordinateur en mode consultation ¦ Þessi tölva í skoðunarham
+le téléphone ne dépose plus ¦ síminn skilar ekki lengur
+le téléphone dépose encore ¦ síminn skilar enn
+Sorte proposée quand la demande vient d’un téléphone ¦ Tegund sem lögð er til þegar beiðnin kemur úr síma
+Retirer un téléphone ¦ Að fjarlægja síma
+ses photos déjà déposées restent à trier ¦ myndir sem hann hefur þegar skilað bíða flokkunar
+elles sont supprimées aussi (30 jours dans « 🗑 Supprimées ») ¦ þeim er líka eytt (30 dagar í „🗑 Eyddar“)
+📜 Registre ¦ 📜 Skrá
+noter chaque dépôt, chaque fichier refusé et chaque liste vue ¦ skrá hverja skilun, hverja hafnaða skrá og hvern skoðaðan lista
+seulement les dépôts ¦ aðeins skilanir
+Photo déposée ¦ Mynd skilað
+Fichier refusé ¦ Skrá hafnað
+Liste réduite vue ¦ Stuttur listi skoðaður
+Photo reliée ¦ Mynd tengd
+pas une photo ¦ ekki mynd
+trop grosse ¦ of stór
+trop grande ¦ of stór í punktum
+abîmée ¦ skemmd
+trop de fichiers ¦ of margar skrár
+trop de photos ¦ of margar myndir
+trop gros en tout ¦ of stórt samtals
+boîte pleine ¦ kassinn fullur
+personne refusée ¦ manneskju hafnað
+réponses : {n} ¦ svör: {n}
+Photo trop grosse (plus de {n} Mo, la taille maximale réglée sur l’ordinateur). ¦ Myndin er of stór (yfir {n} MB, hámarksstærðin sem stillt er á tölvunni).
+Trop d’essais depuis ce téléphone : réessaie dans {n} min. ¦ Of margar tilraunir úr þessum síma: reyndu aftur eftir {n} mín.
+Trop de photos dans cet envoi ({n} au plus). ¦ Of margar myndir í þessari sendingu ({n} í mesta lagi).
+Photo du téléphone ¦ Mynd úr símanum
+Ce format de photo ne se lit pas sur cet ordinateur : choisis-la en JPEG. ¦ Ekki er hægt að lesa þetta myndsnið á þessari tölvu: veldu hana sem JPEG.
+Ce n’est pas une photo : seules les photos JPEG, PNG, WEBP et AVIF sont acceptées. ¦ Þetta er ekki mynd: aðeins JPEG-, PNG-, WEBP- og AVIF-myndir eru teknar gildar.
+Image abîmée ou illisible. ¦ Myndin er skemmd eða ólæsileg.
+Image trop grande (plus de 50 millions de points) : refusée. ¦ Myndin er of stór (yfir 50 milljónir punkta): hafnað.
+Une seule photo à la fois. ¦ Aðeins ein mynd í einu.
+La photo n’est pas arrivée en entier : elle sera renvoyée. ¦ Myndin barst ekki í heild: hún verður send aftur.
+Personne ou visite inconnue. ¦ Óþekkt manneskja eða heimsókn.
+📥 La boîte est pleine sur l’ordinateur : trie-la d’abord. ¦ 📥 Kassinn á tölvunni er fullur: flokkaðu hann fyrst.
+Cet envoi est trop gros en tout (200 Mo au plus) : envoie le reste ensuite. ¦ Þessi sending er of stór samtals (200 MB í mesta lagi): sendu restina á eftir.
+La généalogie n’est pas prête sur l’ordinateur. ¦ Ættartréð er ekki tilbúið á tölvunni.
+L’ordinateur est en mode consultation : il ne reçoit pas de photo pour l’instant. Elles restent en attente ici. ¦ Tölvan er í skoðunarham: hún tekur ekki við myndum í bili. Þær bíða hér.
+Impossible de ranger la photo sur l’ordinateur (disque plein ?). ¦ Ekki er hægt að vista myndina á tölvunni (diskur fullur?).
+Choisis à quoi relier. ¦ Veldu við hvað á að tengja.
+Introuvable. ¦ Fannst ekki.
+Cette fiche est verrouillée : rien n’y est relié. ¦ Þessi færsla er læst: ekkert er tengt við hana.
+Trop tard : cette photo a été effacée pour de bon. ¦ Of seint: þessari mynd hefur verið eytt endanlega.
+Téléphone de terrain : il peut seulement déposer des photos dans 📥 À trier. ¦ Vettvangssími: hann getur aðeins skilað myndum í 📥 Til flokkunar.

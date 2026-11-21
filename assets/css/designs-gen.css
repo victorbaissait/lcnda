@@ -6092,6 +6092,9 @@
 :root[data-lc-density] .lan-form label{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .lan-form input{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
 :root[data-lc-density] .lan-button{padding:calc(12px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+:root[data-lc-density] .rl-phone{margin-top:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .rl-phone{padding:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .rl-tw .rl-num{gap:calc(4px * var(--lc-sp))}
 /* indicateurs.css */
 :root[data-lc-density] .sosa-star,:root[data-lc-density] .daboville-tag,:root[data-lc-density] .investigation-status{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .sosa-star,:root[data-lc-density] .daboville-tag,:root[data-lc-density] .investigation-status{padding:calc(4px * var(--lc-sp)) calc(7px * var(--lc-sp))}
@@ -7247,3 +7250,8 @@
 :root[data-lc-density] .pl-startsel{margin-top:calc(14px * var(--lc-sp))}
 :root[data-lc-density] .pl-dlg-more{gap:calc(10px * var(--lc-sp))}
 :root[data-lc-density] .pl-dlg-more{margin-top:calc(14px * var(--lc-sp))}
+/* a-trier.css */
+:root[data-lc-density] .tw-box .tw-pick{padding:0 calc(6px * var(--lc-sp))}
+:root[data-lc-density] .tw-bulk{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .tw-bulk{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .tw-box .tw-acts{gap:calc(6px * var(--lc-sp))}

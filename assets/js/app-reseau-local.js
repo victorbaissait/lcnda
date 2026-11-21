@@ -7,7 +7,10 @@
  *  - Une demande d'accès ouvre d'elle-même une fenêtre sur cet ordinateur (seulement quand c'est ouvert).
  *  - Barre du haut : pastille « 🖧 N » tant que c'est ouvert (N : appareils connectés) → cette page.
  *  - Sur un appareil invité (window.LCNDA_GUEST) ou hors de l'app de bureau : la page dit seulement où ça se règle.
- * Tous les appareils invités sont en lecture seule pour l'instant (pas de modification à plusieurs). */
+ * Tous les appareils invités sont en lecture seule pour l'instant (pas de modification à plusieurs).
+ * 📱 Téléphone de terrain (maquette docs/design/telephone-wifi.html, parties 2, 6 et 8) : « ＋ Ajouter un téléphone de terrain »
+ * (QR code vers /terrain, le code d'invitation dedans), la sorte choisie en acceptant (📱 déposer seulement | 👁 lecture seule),
+ * la sorte dans la liste des appareils, « ⏻ Retirer tous les téléphones », et ses réglages (lib/telephone_wifi.php, TW_SPEC). */
 (() => {
     'use strict';
     const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s).replace(/\{(\w+)\}/g, (_, k) => (v && k in v ? v[k] : `{${k}}`)));
@@ -45,11 +48,49 @@
     const choiceHtml = (st) => CHOICES.map(([key, label, opts]) => `<div class="rl-choice"><b>${esc(i18n(label))}</b><div class="glk-mins" role="radiogroup" aria-label="${esc(i18n(label))}">${opts.map(([v, l], i) =>
         `<label class="glk-chip"><input type="radio" name="rl-${key}" value="${esc(v)}" data-rl-set="${esc(key)}"${st.settings[key] === v ? ' checked' : ''}> ${esc(i18n(l))}${i === 0 ? ` <small class="rl-rec">${esc(i18n('conseillé'))}</small>` : ''}</label>`).join('')}</div></div>`).join('');
 
+    /* ═══════════ 📱 Les réglages des téléphones de terrain (rangés dans la généalogie : lib/telephone_wifi.php, TW_SPEC) ═══════════ */
+    const TW_GROUPS = [
+        ['Ce que le téléphone voit', [
+            ['liste', 'Pour choisir « Pour qui ? »', [['visites_decedes', 'visites d’archives et personnes décédées'], ['visites', 'visites d’archives seulement'], ['rien', 'rien : tout se range sur l’ordinateur']]],
+            ['vivants', 'Montrer aussi les vivants (nom seulement)', 'check'], ['confid', 'Montrer aussi les fiches confidentielles (nom seulement)', 'check'],
+            ['pourqui', '« Pour qui ? » sur le téléphone', [['facultatif', 'facultatif'], ['obligatoire', 'obligatoire (plus lent sur place)'], ['cache', 'caché']]],
+            ['texte', 'Une ligne de texte', [['envoi', 'une pour tout l’envoi'], ['photo', 'une par photo']]]]],
+        ['Les photos qui arrivent', [
+            ['arrivee_ou', 'Où arrivent les photos', [['trier', 'dans 📥 À trier : rien n’entre dans l’arbre sans toi'], ['relier', 'reliées tout de suite à la personne choisie (visibles dans À trier, avec ↶ Annuler)']]],
+            ['gps', 'Position GPS de la photo', [['retire', 'retirée à l’arrivée'], ['relier', 'gardée à part, à décider en reliant'], ['garde', 'gardée (la carte peut la montrer)']]],
+            ['max_mb', 'Taille maximale d’une photo', 'num', 'Mo'], ['par_envoi', 'Photos par envoi', 'num'], ['boite_max', 'Photos dans la boîte À trier, au plus', 'num'],
+            ['original', 'Garder l’original (décoché : réduite à 2000 points)', 'check', ['oui', 'non']],
+            ['suppr', 'Supprimer', [['30j', 'gardée 30 jours dans « 🗑 Supprimées », puis effacée'], ['direct', 'effacée tout de suite (après les 10 secondes de ↶ Annuler)']]],
+            ['tombe', 'Photo de tombe reliée', [['proposer', 'proposer d’ajouter l’inhumation'], ['rien', 'ne rien proposer']]],
+            ['pastille', 'Pastille 📥 dans la barre du haut', [['oui', 'oui, avec le nombre'], ['non', 'non (seulement dans Listes)']]],
+            ['arrivee', 'À l’arrivée de photos', [['pastille', 'seulement la pastille'], ['message', 'un petit message en bas de l’écran']]]]],
+        ['Sans wifi', [
+            ['horswifi', 'Hors du wifi de la maison', [['attente', 'garder en attente dans la page, envoi tout seul au retour'], ['demander', 'garder, mais demander avant d’envoyer'], ['refuser', 'refuser de prendre des photos hors wifi']]],
+            ['apres', 'Après l’envoi', [['effacer', 'effacer les photos de la page'], ['vignettes', 'garder les vignettes de la journée']]],
+            ['annuler_tel', '« ↶ Annuler » sur le téléphone', [['range', 'tant que les photos ne sont pas rangées'], ['10s', 'pendant 10 secondes'], ['jamais', 'jamais']]]]],
+        ['Sécurité', [
+            ['mdp', 'Mot de passe de la généalogie sur le téléphone', [['ouverture', 'demandé à l’ouverture, redemandé après 15 min sans geste'], ['liste', 'demandé seulement pour voir la liste ; déposer avec le jeton seul']]],
+            ['consultation', 'Cet ordinateur en mode consultation', [['refuser', 'le téléphone ne dépose plus'], ['deposer', 'le téléphone dépose encore']]],
+            ['sorte', 'Sorte proposée quand la demande vient d’un téléphone', [['terrain', '📱 Téléphone de terrain'], ['lecture', '👁 Lecture seule']]],
+            ['retrait', 'Retirer un téléphone', [['garder', 'ses photos déjà déposées restent à trier'], ['supprimer', 'elles sont supprimées aussi (30 jours dans « 🗑 Supprimées »)']]],
+            ['registre', '📜 Registre', [['tout', 'noter chaque dépôt, chaque fichier refusé et chaque liste vue'], ['depots', 'seulement les dépôts']]]]]];
+    let twSet = null, phoneOpen = false;
+    async function twLoad() { try { twSet = (await A().api('inbox_settings')).settings; } catch (_) { twSet = null; } return twSet; }
+    const twHtml = set => !set ? '' : TW_GROUPS.map(([title, rows]) => `<div class="rl-twg"><h4>${esc(i18n(title))}</h4>${rows.map(([key, label, opts, unit]) => {
+        if (opts === 'check' || (Array.isArray(unit) && opts === 'check')) { const on = Array.isArray(unit) ? unit[0] : 'oui', off = Array.isArray(unit) ? unit[1] : 'non';
+            return `<label class="checkbox-line rl-choice"><input type="checkbox" data-tw-set="${esc(key)}" data-on="${esc(on)}" data-off="${esc(off)}"${set[key] === on ? ' checked' : ''}> ${esc(i18n(label))} <small class="rl-rec">${esc(i18n(on === 'oui' && key !== 'original' ? 'décoché conseillé' : 'coché conseillé'))}</small></label>`; }
+        if (opts === 'num') return `<label class="rl-choice rl-num"><b>${esc(i18n(label))}</b><input type="number" inputmode="numeric" data-tw-set="${esc(key)}" value="${esc(set[key])}" min="1"${unit ? ` data-unit="${esc(unit)}"` : ''}></label>`;
+        return `<div class="rl-choice"><b>${esc(i18n(label))}</b><div class="glk-mins" role="radiogroup" aria-label="${esc(i18n(label))}">${opts.map(([v, l], i) =>
+            `<label class="glk-chip"><input type="radio" name="tw-${esc(key)}" value="${esc(v)}" data-tw-set="${esc(key)}"${set[key] === v ? ' checked' : ''}> ${esc(i18n(l))}${i === 0 ? ` <small class="rl-rec">${esc(i18n('conseillé'))}</small>` : ''}</label>`).join('')}</div></div>`;
+    }).join('')}</div>`).join('');
+
     /* ═══════════ Petits morceaux ═══════════ */
     const code6 = c => `${String(c).slice(0, 3)} ${String(c).slice(3)}`;
     const invite = c => `${String(c).slice(0, 3)}-${String(c).slice(3)}`;
     const dateTxt = ms => { try { return new Date(Number(ms)).toLocaleDateString(window.LCNDA_I18N?.locale?.() || undefined, {day: 'numeric', month: 'short', year: 'numeric'}); } catch (_) { return ''; } };
     const timeTxt = ms => { try { return new Date(Number(ms)).toLocaleTimeString(window.LCNDA_I18N?.locale?.() || undefined, {hour: '2-digit', minute: '2-digit'}); } catch (_) { return ''; } };
+    const phoneUrl = st => `${st.url}/terrain${st.invite ? `#i=${st.invite.code}` : ''}`;
+    const kindTxt = d => (d.kind === 'terrain' ? `📱 ${i18n('téléphone de terrain')} · ${i18n('déposer · liste réduite')}` : `👁 ${i18n('lecture seule')}`);
     const seenTxt = d => (d.connected ? i18n('connecté maintenant') : d.lastSeen ? (UI().whenText ? UI().whenText(new Date(d.lastSeen).toISOString()) : dateTxt(d.lastSeen)) : i18n('jamais venu'));
     const qrHtml = url => { try { return ext.qr?.svg ? ext.qr.svg(url, {quiet: 2}).svg.replace(/width="\d+" height="\d+"/, 'width="132" height="132"') : ''; } catch (_) { return ''; } };
     let genealogyName = '';
@@ -67,7 +108,7 @@
             ws.innerHTML = `<section class="page rl-page" data-rl-page>${head()}${UI().notice ? UI().notice('info', why) : esc(why)}</section>`;
             return;
         }
-        const [st, lock] = await Promise.all([NET().status(), readName()]);
+        const [st, lock] = await Promise.all([NET().status(), readName(), twLoad()]);
         if (token !== S().workspaceToken || S().module !== 'maintenance' || S().maintenanceTab !== TAB) return;
         const noPw = st.settings.password === 'obligatoire' && !lock.locked;
         const primary = st.on ? `<button type="button" class="button danger" data-rl-close>${esc(i18n('⏻ Tout couper maintenant'))}</button>` : '';
@@ -87,18 +128,25 @@
                 ${st.invite ? `<div class="rl-inv"><span class="muted">${esc(i18n('Code d’invitation (valable 10 min, une seule fois)'))}</span><code class="rl-code" data-i18n-off>${esc(invite(st.invite.code))}</code>
                     <button type="button" class="button secondary small" data-rl-invite>${esc(i18n('↻ Nouveau code'))}</button></div>` : ''}
                 <div class="rl-qr" aria-hidden="true">${qrHtml(st.url)}</div>
+                <div class="page-actions"><button type="button" class="button secondary" data-rl-phone>${esc(i18n('＋ Ajouter un téléphone de terrain'))}</button></div>
+                <div class="rl-phone" data-rl-phonebox${phoneOpen ? '' : ' hidden'}><p><b>📱 ${esc(i18n('Scanne ce QR code avec l’appareil photo du téléphone'))}</b></p><code class="rl-url" data-i18n-off>${esc(phoneUrl(st))}</code><div class="rl-qr" aria-hidden="true">${qrHtml(phoneUrl(st))}</div>
+                    <p class="ui-hint">${esc(i18n('Le code d’invitation est déjà dans le QR code. Sur le téléphone : « Demander l’accès », puis compare le code à 6 chiffres ici.'))}</p></div>
                 <p class="ui-hint">${esc(i18n('Sur l’autre ordinateur : ouvre un navigateur (Chrome, Firefox, Safari, Edge), tape cette adresse, puis le code. Ensuite, c’est toi qui acceptes ici, en comparant le code à 6 chiffres affiché des deux côtés.'))}</p></div>` : '';
         const reqs = st.requests.length ? `<div class="maintenance-panel rl-reqs"><h3>${esc(i18n('Demandes d’accès'))}</h3>${st.requests.map(r => `<div class="rl-req" data-rl-req="${esc(r.id)}">
                 <div><b data-i18n-off>${esc(r.name)}</b> <small class="muted" data-i18n-off>${esc(r.ip)}</small><br><span class="rl-six" data-i18n-off>${esc(code6(r.code))}</span></div>
-                <div class="page-actions"><button type="button" class="button secondary" data-rl-refuse="${esc(r.id)}">${esc(i18n('✕ Refuser'))}</button><button type="button" class="button" data-rl-accept="${esc(r.id)}">${esc(i18n('✓ Autoriser'))}</button></div></div>`).join('')}</div>` : '';
-        const devs = `<div class="maintenance-panel rl-devs"><h3>${esc(i18n('Appareils autorisés'))}</h3><p class="ui-hint">${esc(i18n('Tous les appareils invités sont en lecture seule : ils regardent la généalogie, rien ne peut être modifié depuis eux.'))}</p><div data-rl-list></div></div>`;
+                <div class="page-actions"><button type="button" class="button secondary" data-rl-refuse="${esc(r.id)}">${esc(i18n('✕ Refuser'))}</button><button type="button" class="button" data-rl-accept="${esc(r.id)}">${esc(r.wants === 'terrain' ? i18n('✓ Autoriser') + ' · 📱' : i18n('✓ Autoriser'))}</button></div></div>`).join('')}</div>` : '';
+        const nPhones = st.devices.filter(d => d.kind === 'terrain').length;
+        const devs = `<div class="maintenance-panel rl-devs"><h3>${esc(i18n('Appareils autorisés'))}</h3><p class="ui-hint">${esc(i18n('Tous les appareils invités sont en lecture seule : ils regardent la généalogie, rien ne peut être modifié depuis eux.'))} ${esc(i18n('Un 📱 téléphone de terrain ne voit pas l’arbre : il dépose seulement des photos dans 📥 À trier.'))}</p><div data-rl-list></div>
+            ${nPhones ? `<div class="page-actions"><button type="button" class="button secondary danger" data-rl-phones-off>${esc(i18n('⏻ Retirer tous les téléphones'))}</button></div>` : ''}</div>`;
+        const phones = twSet ? `<details class="maintenance-panel rl-settings rl-tw" data-rl-tw><summary><b>${esc(i18n('📱 Téléphones de terrain'))}</b></summary>${twHtml(twSet)}
+            <p class="ui-hint">${esc(i18n('Les photos arrivent dans Listes → Médias et documents → 📥 À trier.'))} <button type="button" class="button small secondary" data-rl-box>${esc(i18n('📥 Ouvrir À trier'))}</button></p></details>` : '';
         const honest = `<div class="rl-honest"><p><b>${esc(i18n('Ce qu’il faut savoir'))}</b></p>
             <p>${esc(i18n('🧱 La première fois, Windows (« Autoriser LCNDA sur les réseaux privés ? ») ou macOS (« Accepter les connexions entrantes ? ») pose la question : réponds oui, et sous Windows seulement pour les réseaux privés.'))}</p>
             <p>${esc(i18n('📶 Dans cette version, ce qui passe dans le wifi n’est pas chiffré : n’ouvre que sur le wifi de la maison, protégé par sa clé, jamais sur un wifi d’hôtel, de gare ou de médiathèque.'))}</p>
             <p>${esc(i18n('🖥 Cet ordinateur doit rester allumé, avec LCNDA ouvert : s’il dort ou que tu fermes l’app, les autres ne voient plus rien.'))}</p></div>`;
         ws.innerHTML = `<section class="page rl-page" data-rl-page>${head({primary, more})}
             ${warn.join('')}<div class="rl-grid"><div><div class="maintenance-panel">${sw}${openBox}</div>${reqs}${devs}
-            <details class="maintenance-panel rl-settings"><summary><b>${esc(i18n('⚙️ Réglages'))}</b></summary>${choiceHtml(st)}</details></div><div>${honest}</div></div></section>`;
+            <details class="maintenance-panel rl-settings"><summary><b>${esc(i18n('⚙️ Réglages'))}</b></summary>${choiceHtml(st)}</details>${phones}</div><div>${honest}</div></div></section>`;
         const root = ws.querySelector('[data-rl-page]');
         drawDevices(root.querySelector('[data-rl-list]'), st);
         bindPage(root, st);
@@ -110,8 +158,8 @@
         const draw = q => {
             const list = rows.filter(d => !q || (UI().listMatch?.text ? UI().listMatch.text(q, `${d.name} ${d.lastIp}`) : `${d.name} ${d.lastIp}`.toLowerCase().includes(String(q).toLowerCase())))
                 .sort((a, b) => (Number(b.connected) - Number(a.connected)) || (b.lastSeen - a.lastSeen));
-            const items = list.map(d => ({name: d.name, cls: d.connected ? 'is-on' : '', thumb: `<span class="ui-card-ico">${d.connected ? '🟢' : '🖥'}</span>`,
-                lines: [[d.lastIp, i18n('autorisé le {date}', {date: dateTxt(d.created)})].filter(Boolean).join(' · '), `👁 ${i18n('lecture seule')} · ${seenTxt(d)}${d.duration === '30j' && d.expires ? ' · ' + i18n('jusqu’au {date}', {date: dateTxt(d.expires)}) : d.duration === 'fermeture' ? ' · ' + i18n('pour cette fois seulement') : ''}`,
+            const items = list.map(d => ({name: d.name, cls: d.connected ? 'is-on' : '', thumb: `<span class="ui-card-ico">${d.connected ? '🟢' : d.kind === 'terrain' ? '📱' : '🖥'}</span>`,
+                lines: [[d.lastIp, i18n('autorisé le {date}', {date: dateTxt(d.created)})].filter(Boolean).join(' · '), `${kindTxt(d)} · ${seenTxt(d)}${d.duration === '30j' && d.expires ? ' · ' + i18n('jusqu’au {date}', {date: dateTxt(d.expires)}) : d.duration === 'fermeture' ? ' · ' + i18n('pour cette fois seulement') : ''}`,
                     d.stale ? `⚠️ ${i18n('Pas vu depuis plus de 30 jours : le retirer ?')}` : ''].filter(Boolean),
                 actions: `<button type="button" class="button secondary small danger" data-rl-remove="${esc(d.id)}">${esc(i18n('Retirer'))}</button>`}));
             const html = !rows.length ? (A().empty ? A().empty(i18n('Aucun appareil autorisé pour l’instant.'), {icon: '🖧'}) : esc(i18n('Aucun appareil autorisé pour l’instant.')))
@@ -144,6 +192,21 @@
         root.querySelectorAll('[data-rl-close]').forEach(b => b.addEventListener('click', async () => { await run(() => NET().close(), i18n('🖧 Coupé : l’app ne répond plus qu’à cet ordinateur.')); refresh(); }));
         root.querySelectorAll('[data-rl-invite]').forEach(b => b.addEventListener('click', async () => { await run(() => NET().newInvite()); refresh(); }));
         root.querySelector('[data-rl-log]')?.addEventListener('click', () => ext.openAccessLog?.());
+        root.querySelector('[data-rl-phone]')?.addEventListener('click', () => { const b = root.querySelector('[data-rl-phonebox]'); phoneOpen = !phoneOpen; if (b) b.hidden = !phoneOpen; });
+        root.querySelector('[data-rl-box]')?.addEventListener('click', () => ext.aTrier?.open?.());
+        root.querySelector('[data-rl-phones-off]')?.addEventListener('click', async () => {
+            if (A().confirmBox && !(await A().confirmBox({title: i18n('⏻ Retirer tous les téléphones'), message: i18n('Plus aucun téléphone ne pourra rien envoyer. Leurs photos déjà déposées restent dans 📥 À trier (réglage).'), okLabel: i18n('Retirer')}))) return;
+            const r = await run(() => NET().removePhones()); if (r && r.ok) toast(i18n('Téléphones retirés : {n}', {n: r.n}), 'success'); refresh();
+        });
+        root.querySelectorAll('[data-tw-set]').forEach(x => x.addEventListener('change', async () => {
+            const key = x.dataset.twSet, prev = twSet[key];
+            const v = x.type === 'checkbox' ? (x.checked ? x.dataset.on : x.dataset.off) : x.type === 'number' ? Number(x.value) : x.value;
+            try { const r = await A().api('inbox_write', {}, {method: 'POST', body: {op: 'settings', settings: {[key]: v}}}); twSet = r.settings;
+                if (String(r.settings[key]) !== String(v)) toast(i18n('Valeur refusée : réglage inchangé.'), 'error');
+                else toast(i18n('Réglage enregistré'), 'success', {action: {label: i18n('↶ Annuler'), run: async () => { await A().api('inbox_write', {}, {method: 'POST', body: {op: 'settings', settings: {[key]: prev}}}).catch(() => {}); refresh(); }}});
+            } catch (e) { toast(e.message, 'error'); }
+            const open = root.querySelector('[data-rl-tw]')?.open; refresh(); if (open) setTimeout(() => { const d = document.querySelector('[data-rl-tw]'); if (d) d.open = true; }, 300);
+        }));
         root.querySelector('[data-rl-pw]')?.addEventListener('click', () => ext.openGlockSettings?.());
         root.querySelector('[data-rl-copy]')?.addEventListener('click', async () => { try { await navigator.clipboard.writeText(st.url); toast(i18n('Adresse copiée'), 'success'); } catch (_) { toast(st.url); } });
         root.querySelectorAll('[data-rl-accept]').forEach(b => b.addEventListener('click', () => answer(b.dataset.rlAccept, true, st.requests.find(r => r.id === b.dataset.rlAccept))));
@@ -167,13 +230,14 @@
 
     /* ═══════════ Une demande d'accès : la fenêtre qui s'ouvre d'elle-même ═══════════ */
     const dialogs = new Map();
-    async function answer(id, yes, req) {
+    const proposedKind = r => (r && r.wants === 'terrain' ? ((twSet && twSet.sorte) || 'terrain') : 'lecture');
+    async function answer(id, yes, req, kind) {
         dialogs.get(id)?.close();
         if (!yes) { await run(() => NET().refuse(id), i18n('Demande refusée.')); refresh(); return; }
-        const r = await run(() => NET().accept(id));
+        const r = await run(() => NET().accept(id, kind || proposedKind(req)));
         if (r && r.ok) {
             const dev = r.device;
-            toast(i18n('✓ « {name} » autorisé, en lecture seule.', {name: dev.name}), 'success', {duration: 10000, action: {label: i18n('↶ Annuler'), run: async () => { await NET().remove(dev.id); refresh(); }}});
+            toast(dev.kind === 'terrain' ? i18n('✓ « {name} » autorisé, 📱 téléphone de terrain.', {name: dev.name}) : i18n('✓ « {name} » autorisé, en lecture seule.', {name: dev.name}), 'success', {duration: 10000, action: {label: i18n('↶ Annuler'), run: async () => { await NET().remove(dev.id); refresh(); }}});
         }
         refresh();
     }
@@ -184,7 +248,10 @@
             <div class="h-dialog-body"><dl class="rl-dl"><dt>${esc(i18n('Nom donné'))}</dt><dd><b data-i18n-off>${esc(r.name)}</b> <small class="muted">${esc(i18n('(il peut être faux : compare le code)'))}</small></dd>
                 <dt>${esc(i18n('Adresse'))}</dt><dd data-i18n-off>${esc(r.ip)}</dd><dt>${esc(i18n('Code affiché'))}</dt><dd><span class="rl-six rl-six-big" data-i18n-off>${esc(code6(r.code))}</span></dd></dl>
                 <p><b>${esc(i18n('Regarde l’écran de l’appareil : il doit montrer le même code. Sinon, refuse.'))}</b></p>
-                <p class="ui-hint">${esc(i18n('Ce qu’il pourra faire : 👁 lecture seule (rien ne peut être modifié depuis cet appareil). Il devra aussi donner le mot de passe de la généalogie.'))}</p>
+                <div class="rl-choice"><b>${esc(i18n('Sorte d’appareil'))}</b><div class="glk-mins" role="radiogroup" aria-label="${esc(i18n('Sorte d’appareil'))}">
+                    <label class="glk-chip"><input type="radio" name="rl-kind-${esc(r.id)}" value="terrain" data-kind${proposedKind(r) === 'terrain' ? ' checked' : ''}> ${esc(i18n('📱 Téléphone de terrain'))}</label>
+                    <label class="glk-chip"><input type="radio" name="rl-kind-${esc(r.id)}" value="lecture" data-kind${proposedKind(r) === 'lecture' ? ' checked' : ''}> ${esc(i18n('👁 Lecture seule'))}</label></div></div>
+                <p class="ui-hint" data-kind-help></p>
                 <p class="ui-hint">${esc(i18n('Sans réponse en 2 minutes, la demande disparaît toute seule (refusée).'))}</p></div>
             <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-no>${esc(i18n('✕ Refuser'))}</button><button type="button" class="button" data-yes>${esc(i18n('✓ Autoriser « {name} »', {name: r.name}))}</button></div>`;
         document.body.appendChild(dl);
@@ -192,7 +259,12 @@
         dl.addEventListener('close', () => { dialogs.delete(r.id); dl.remove(); });
         dl.querySelector('[data-x]').addEventListener('click', () => dl.close()); // fermer sans répondre : la demande reste dans la page des réglages
         dl.querySelector('[data-no]').addEventListener('click', () => answer(r.id, false));
-        dl.querySelector('[data-yes]').addEventListener('click', () => answer(r.id, true, r));
+        const kindNow = () => dl.querySelector('[data-kind]:checked')?.value || 'lecture';
+        const help = () => { dl.querySelector('[data-kind-help]').textContent = kindNow() === 'terrain'
+            ? i18n('📱 Téléphone de terrain : déposer des photos et une ligne de texte dans 📥 À trier. Il ne voit pas l’arbre, ne modifie rien. Il devra aussi donner le mot de passe de la généalogie.')
+            : i18n('Ce qu’il pourra faire : 👁 lecture seule (rien ne peut être modifié depuis cet appareil). Il devra aussi donner le mot de passe de la généalogie.'); };
+        dl.querySelectorAll('[data-kind]').forEach(x => x.addEventListener('change', help)); help();
+        dl.querySelector('[data-yes]').addEventListener('click', () => answer(r.id, true, r, kindNow()));
         dl.showModal();
         dl.querySelector('[data-no]').focus(); // le bouton sûr d'abord
     }
@@ -224,7 +296,7 @@
     function start() {
         if (!NET() || GUEST() || SECONDARY) return;
         NET().onEvent(e => {
-            if (e.type === 'request') { readName().finally(() => requestDialog(e)); }
+            if (e.type === 'request') { Promise.all([readName(), twSet ? null : twLoad()]).finally(() => requestDialog(e)); }
             if (e.type === 'request-gone') dialogs.get(e.id)?.close();
             if (e.type === 'network-changed') {
                 toast(i18n('Le réseau a changé : tout a été coupé.'), '', e.policy === 'demander' ? {duration: 15000, action: {label: i18n('🖧 Rouvrir sur ce réseau'), run: async () => { await run(() => NET().open()); onChange(); }}} : {});

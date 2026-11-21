@@ -211,9 +211,11 @@
         lock_remove: ['🔓', 'Mot de passe retiré'], lock_minutes: ['🔐', 'Délai de reverrouillage changé'], purge: ['🧹', 'Lignes anciennes effacées'], retention: ['🧹', 'Durée de conservation changée'],
         // 🖧 plusieurs ordinateurs (electron/lan-gate.js, lib/reseau_local.php)
         lan_open: ['🖧', 'Ouvert au réseau de la maison'], lan_close: ['🖧', 'Fermé au réseau de la maison'], lan_ok: ['🖧', 'Appareil autorisé'], lan_refuse: ['🖧', 'Demande d’accès refusée'],
-        lan_remove: ['🖧', 'Appareil retiré'], lan_connect: ['🖧', 'Connexion en lecture seule']};
+        lan_remove: ['🖧', 'Appareil retiré'], lan_connect: ['🖧', 'Connexion en lecture seule'],
+        // 📱 le téléphone par le wifi (lib/telephone_wifi.php) : le texte venu du téléphone est posé avec esc() comme tout le reste
+        tw_depot: ['📥', 'Photo déposée'], tw_refus: ['✕', 'Fichier refusé'], tw_liste: ['👁', 'Liste réduite vue'], tw_relie: ['🔗', 'Photo reliée']};
     const FILTERS = [['open', 'Ouvertures', ['case_open']], ['print', 'Impressions', ['print']], ['export', 'Exports', ['export']], ['letters', 'Courriers', ['letters']],
-        ['lock', 'Mot de passe', ['unlock_ok', 'unlock_fail', 'lock_now', 'lock_idle', 'lock_set', 'lock_change', 'lock_remove', 'lock_minutes']], ['lan', 'Plusieurs ordinateurs', ['lan_open', 'lan_close', 'lan_ok', 'lan_refuse', 'lan_remove', 'lan_connect']], ['other', 'Lignes anciennes effacées', ['purge', 'retention']]];
+        ['lock', 'Mot de passe', ['unlock_ok', 'unlock_fail', 'lock_now', 'lock_idle', 'lock_set', 'lock_change', 'lock_remove', 'lock_minutes']], ['lan', 'Plusieurs ordinateurs', ['lan_open', 'lan_close', 'lan_ok', 'lan_refuse', 'lan_remove', 'lan_connect']], ['tw', 'Téléphone de terrain', ['tw_depot', 'tw_refus', 'tw_liste', 'tw_relie']], ['other', 'Lignes anciennes effacées', ['purge', 'retention']]];
     const EXP = {csv: 'CSV', gedcom: 'GEDCOM', plus: 'Autre format', json: 'JSON', sqlite: 'Base .db', backup: 'Sauvegarde complète', report: 'Rapport de recherche', book: 'Livre de famille',
         sync: 'Paquet du travail à deux', vault: 'Copie chez un cousin', museum: 'Musée de famille', list: 'Liste', block: 'Bloc', share: 'Partage avec la famille', website: 'Site web',
         website_publish: 'Site web publié', offsite: 'Copie hors de l’ordinateur', access_csv: 'Registre « Qui a vu quoi » (CSV)', succ_archive: 'Archive du dossier (.zip)',
@@ -233,6 +235,9 @@
         if (r.kind === 'unlock_ok' || r.kind === 'unlock_fail') return i18n(WHY[code] || 'pour ouvrir la généalogie');
         if (r.kind === 'purge') { const [k, m] = [code, n]; return i18n('Lignes effacées : {n} (gardées : {m})', {n: Number(k) || 0, m: i18n((MONTHS.find(x => x[0] === Number(m)) || [0, '?'])[1])}); }
         if (r.kind === 'retention') return `${i18n((MONTHS.find(x => x[0] === Number(code)) || [0, '?'])[1])} → ${i18n((MONTHS.find(x => x[0] === Number(n)) || [0, '?'])[1])}`;
+        if (r.kind === 'tw_refus') { const W = {type: 'pas une photo', heic: 'pas une photo', gros: 'trop grosse', enorme: 'trop grande', abime: 'abîmée', nombre: 'trop de fichiers', trop: 'trop de photos', total: 'trop gros en tout', pleine: 'boîte pleine', pourqui: 'personne refusée'}; return W[code] ? i18n(W[code]) : ''; }
+        if (r.kind === 'tw_depot' && code === 'gps') return i18n('📍 GPS retiré');
+        if (r.kind === 'tw_liste') return i18n('réponses : {n}', {n: Number(code) || 0});
         if (r.kind === 'lan_close') { const W = {main: 'à la main', quit: 'en quittant l’app', veille: 'mise en veille', reseau: 'le réseau a changé'}; return W[code] ? i18n(W[code]) : ''; }
         if (['lock_set', 'lock_change', 'lock_minutes'].includes(r.kind)) { const m = MINS.find(x => x[0] === Number(code)); return m ? i18n('après {m}', {m: i18n(m[1])}) : ''; }
         return '';

@@ -665,7 +665,8 @@ function glock_backup_password(string $pw): void
 /* ═════════ 📜 B8 : Qui a vu quoi ═════════ */
 
 const ACCESS_LOG_KINDS = ['case_open', 'print', 'export', 'letters', 'unlock_ok', 'unlock_fail', 'lock_now', 'lock_idle', 'lock_set', 'lock_change', 'lock_remove', 'lock_minutes', 'purge', 'retention',
-    'lan_open', 'lan_close', 'lan_ok', 'lan_refuse', 'lan_remove', 'lan_connect']; // 🖧 plusieurs ordinateurs (lib/reseau_local.php)
+    'lan_open', 'lan_close', 'lan_ok', 'lan_refuse', 'lan_remove', 'lan_connect', // 🖧 plusieurs ordinateurs (lib/reseau_local.php)
+    'tw_depot', 'tw_refus', 'tw_liste', 'tw_relie']; // 📱 le téléphone par le wifi (lib/telephone_wifi.php)
 
 /** Ce qui est noté quand on télécharge ou copie : l'action de l'API → un code court (le libellé est écrit par la page). */
 const ACCESS_LOG_EXPORTS = ['export_csv' => 'csv', 'export_csv_global' => 'csv', 'export_gedcom' => 'gedcom', 'export_plus' => 'plus', 'export_json' => 'json',

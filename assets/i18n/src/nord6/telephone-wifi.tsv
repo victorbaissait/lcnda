@@ -1,0 +1,199 @@
+fr ¦ lt ¦ lv ¦ et
+# 📱 la page du téléphone de terrain (assets/js/app-terrain.js)
+📶 relié ¦ 📶 prisijungta ¦ 📶 savienots ¦ 📶 ühendatud
+⏸ hors wifi ¦ ⏸ be wifi ¦ ⏸ bez wifi ¦ ⏸ wifita pole
+Le mot de passe de la généalogie : vérifié par l’ordinateur, jamais gardé sur ce téléphone. ¦ Genealogijos slaptažodis: tikrina kompiuteris, šiame telefone niekada nesaugomas. ¦ Ciltskoka parole: to pārbauda dators, šajā tālrunī tā nekad netiek glabāta. ¦ Sugupuu parool: arvuti kontrollib seda, seda ei hoita kunagi selles telefonis.
+Le navigateur écrit « Non sécurisé » : c’est vrai, la porte du wifi n’a pas de HTTPS. N’envoie que sur le wifi de la maison, protégé par sa clé. ¦ Naršyklė rašo „Nesaugu“: tai tiesa, wifi vartai neturi HTTPS. Siųsk tik per namų wifi, apsaugotą raktu. ¦ Pārlūks raksta „Nav droši“: tā ir taisnība, wifi vārtiem nav HTTPS. Sūti tikai pa mājas wifi, kas aizsargāts ar atslēgu. ¦ Brauser kirjutab „Pole turvaline“: see on tõsi, wifi-uksel pole HTTPS-i. Saada ainult kodu wifi kaudu, mis on võtmega kaitstud.
+Tes photos attendent dans cette page. ¦ Tavo nuotraukos laukia šiame puslapyje. ¦ Tavas fotogrāfijas gaida šajā lapā. ¦ Sinu fotod ootavad sellel lehel.
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). ¦ Kompiuteris neatsako (užmigęs, išjungtas ar vartai uždaryti). ¦ Dators neatbild (miega režīmā, izslēgts vai vārti aizvērti). ¦ Arvuti ei vasta (unerežiimis, välja lülitatud või uks kinni).
+Choisir une personne ou une visite… ¦ Pasirink asmenį ar apsilankymą… ¦ Izvēlies personu vai apmeklējumu… ¦ Vali isik või külastus…
+Une ligne (facultatif) ¦ Viena eilutė (nebūtina) ¦ Viena rinda (nav obligāti) ¦ Üks rida (valikuline)
+Pas de wifi de la maison : les photos se prennent avec l’appareil photo du téléphone, puis « 🖼 Choisir » au retour. ¦ Nėra namų wifi: fotografuok telefono kamera, o grįžęs „🖼 Pasirinkti“. ¦ Nav mājas wifi: fotografē ar tālruņa kameru, bet pēc atgriešanās „🖼 Izvēlēties“. ¦ Kodu wifit pole: pildista telefoni kaameraga ja tagasi jõudes „🖼 Vali“.
+Prendre une photo ¦ Fotografuoti ¦ Uzņemt fotogrāfiju ¦ Tee foto
+Choisir dans la galerie ¦ Pasirinkti iš galerijos ¦ Izvēlēties no galerijas ¦ Vali galeriist
+📍 = la photo contient une position GPS (retirée à l’arrivée, réglage) ¦ 📍 = nuotraukoje yra GPS padėtis (pašalinama gavus, nustatymas) ¦ 📍 = fotogrāfijā ir GPS pozīcija (noņemta saņemot, iestatījums) ¦ 📍 = fotol on GPS-asukoht (eemaldatakse saabumisel, seadistus)
+Tombe famille LACOMBE, allée 4 ¦ LACOMBE šeimos kapas, 4 takas ¦ LACOMBE dzimtas kaps, 4. eja ¦ LACOMBE’de perekonnahaud, 4. rida
+Envoyer : {n} ¦ Siųsti: {n} ¦ Sūtīt: {n} ¦ Saada: {n}
+Sans wifi, garde cette page ouverte : les photos attendent ici et partent toutes seules au retour. Pour une journée entière aux archives, prends plutôt la visite par fichier. ¦ Be wifi laikyk šį puslapį atidarytą: nuotraukos laukia čia ir grįžus išsiunčiamos pačios. Visai dienai archyve geriau naudok apsilankymą per failą. ¦ Bez wifi turi šo lapu atvērtu: fotogrāfijas gaida šeit un pēc atgriešanās aiziet pašas. Visai dienai arhīvā labāk izmanto apmeklējumu ar failu. ¦ Ilma wifita hoia see leht lahti: fotod ootavad siin ja lähevad tagasi jõudes ise teele. Terveks päevaks arhiivis kasuta pigem külastust failiga.
+Le téléphone ne sait pas si une photo a été rangée ni où : il ne lit rien de l’arbre. ¦ Telefonas nežino, ar ir kur nuotrauka sutvarkyta: jis nieko neskaito iš medžio. ¦ Tālrunis nezina, vai un kur fotogrāfija sakārtota: tas neko nelasa no koka. ¦ Telefon ei tea, kas ja kuhu foto paigutati: ta ei loe puust midagi.
+Nom de la personne ou de la visite ¦ Asmens ar apsilankymo vardas ¦ Personas vai apmeklējuma nosaukums ¦ Isiku või külastuse nimi
+Seulement les personnes décédées, sans les fiches confidentielles. ¦ Tik mirę asmenys, be konfidencialių kortelių. ¦ Tikai mirušas personas, bez konfidenciālām kartītēm. ¦ Ainult surnud isikud, ilma konfidentsiaalsete kirjeteta.
+Choisis pour qui est cette photo. ¦ Pasirink, kam skirta ši nuotrauka. ¦ Izvēlies, kam ir šī fotogrāfija. ¦ Vali, kelle see foto on.
+Verrouillée après 15 minutes sans geste : redonne le mot de passe. Tes photos attendent. ¦ Užrakinta po 15 minučių be veiksmų: vėl įvesk slaptažodį. Tavo nuotraukos laukia. ¦ Bloķēts pēc 15 minūtēm bez darbības: ievadi paroli vēlreiz. Tavas fotogrāfijas gaida. ¦ Lukustatud pärast 15 minutit tegevuseta: sisesta parool uuesti. Sinu fotod ootavad.
+Ce téléphone n’est plus autorisé sur l’ordinateur. ¦ Šis telefonas kompiuteryje nebeleidžiamas. ¦ Šis tālrunis datorā vairs nav atļauts. ¦ Sellel telefonil pole arvutis enam luba.
+Envoyées dans 📥 À trier : {n} ¦ Išsiųsta į 📥 Rūšiuoti: {n} ¦ Nosūtīts uz 📥 Kārtojamie: {n} ¦ Saadetud kausta 📥 Sorteerimiseks: {n}
+Refusé par l’ordinateur ¦ Kompiuteris atmetė ¦ Dators noraidīja ¦ Arvuti keeldus
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). En attente : {n} ; nouvel essai toutes les 30 secondes tant que la page est ouverte. ¦ Kompiuteris neatsako (užmigęs, išjungtas ar vartai uždaryti). Laukia: {n}; naujas bandymas kas 30 sekundžių, kol puslapis atidarytas. ¦ Dators neatbild (miega režīmā, izslēgts vai vārti aizvērti). Gaida: {n}; jauns mēģinājums ik pēc 30 sekundēm, kamēr lapa ir atvērta. ¦ Arvuti ei vasta (unerežiimis, välja lülitatud või uks kinni). Ootel: {n}; uus katse iga 30 sekundi järel, kuni leht on lahti.
+↻ Réessayer ¦ ↻ Bandyti dar kartą ¦ ↻ Mēģināt vēlreiz ¦ ↻ Proovi uuesti
+Envoi en cours : {i} sur {n} ¦ Siunčiama: {i} iš {n} ¦ Sūta: {i} no {n} ¦ Saatmine: {i}/{n}
+Garde la page ouverte. ¦ Laikyk puslapį atidarytą. ¦ Turi lapu atvērtu. ¦ Hoia leht lahti.
+En attente depuis {when} : {n} ¦ Laukia nuo {when}: {n} ¦ Gaida kopš {when}: {n} ¦ Ootel alates {when}: {n}
+Elles étaient gardées dans ce téléphone. ¦ Jos buvo laikomos šiame telefone. ¦ Tās glabājās šajā tālrunī. ¦ Neid hoiti selles telefonis.
+Les envoyer ¦ Išsiųsti jas ¦ Nosūtīt tās ¦ Saada need
+Les oublier ¦ Pamiršti jas ¦ Aizmirst tās ¦ Unusta need
+Retirées de la boîte : {n} ¦ Pašalinta iš dėžutės: {n} ¦ Izņemtas no kastes: {n} ¦ Kastist eemaldatud: {n}
+« {name} » n’est plus ouverte sur l’ordinateur : tes photos restent en attente ici. ¦ „{name}“ kompiuteryje nebeatidaryta: tavo nuotraukos ir toliau laukia čia. ¦ „{name}“ datorā vairs nav atvērta: tavas fotogrāfijas joprojām gaida šeit. ¦ „{name}“ pole arvutis enam avatud: sinu fotod ootavad edasi siin.
+Des photos étaient en attente, mais le téléphone a libéré la place. Retrouve-les dans ta galerie et « 🖼 Choisir ». ¦ Nuotraukos laukė, bet telefonas atlaisvino vietą. Rask jas galerijoje ir „🖼 Pasirinkti“. ¦ Fotogrāfijas gaidīja, bet tālrunis atbrīvoja vietu. Atrodi tās galerijā un „🖼 Izvēlēties“. ¦ Fotod ootasid, kuid telefon vabastas ruumi. Leia need galeriist ja „🖼 Vali“.
+📱 Envoyer des photos à l’ordinateur principal ¦ 📱 Siųsti nuotraukas į pagrindinį kompiuterį ¦ 📱 Sūtīt fotogrāfijas uz galveno datoru ¦ 📱 Saada fotod põhiarvutisse
+# 📥 À trier, sur l'ordinateur (assets/js/app-a-trier.js)
+📥 À trier ¦ 📥 Rūšiuoti ¦ 📥 Kārtojamie ¦ 📥 Sorteerimiseks
+À trier ¦ Rūšiuoti ¦ Kārtojamie ¦ Sorteerimiseks
+Listes · Médias et documents ¦ Sąrašai · Medija ir dokumentai ¦ Saraksti · Mediji un dokumenti ¦ Loendid · Meedia ja dokumendid
+Les photos envoyées par un téléphone de terrain arrivent ici, hors de l’arbre. Relie chacune à ce qu’elle montre, ou supprime-la. ¦ Lauko telefono atsiųstos nuotraukos patenka čia, už medžio ribų. Susiek kiekvieną su tuo, ką ji rodo, arba ją ištrink. ¦ Lauka tālruņa sūtītās fotogrāfijas nonāk šeit, ārpus koka. Sasaisti katru ar to, ko tā rāda, vai izdzēs to. ¦ Välitelefoni saadetud fotod jõuavad siia, puust väljapoole. Seo iga foto sellega, mida see näitab, või kustuta see.
+Chercher… (texte, téléphone, personne) ¦ Ieškoti… (tekstas, telefonas, asmuo) ¦ Meklēt… (teksts, tālrunis, persona) ¦ Otsi… (tekst, telefon, isik)
+🗑 Supprimées ¦ 🗑 Ištrintos ¦ 🗑 Dzēstās ¦ 🗑 Kustutatud
+Reliées ¦ Susietos ¦ Sasaistītās ¦ Seotud
+visite {name} ¦ apsilankymas {name} ¦ apmeklējums {name} ¦ külastus {name}
+pour {name} ¦ kam: {name} ¦ kam: {name} ¦ kellele: {name}
+personne pas choisie ¦ asmuo nepasirinktas ¦ persona nav izvēlēta ¦ isikut pole valitud
+📍 GPS gardé ¦ 📍 GPS išlaikyta ¦ 📍 GPS saglabāts ¦ 📍 GPS säilitatud
+📍 GPS retiré ¦ 📍 GPS pašalinta ¦ 📍 GPS noņemts ¦ 📍 GPS eemaldatud
+🔗 reliée à {name} ¦ 🔗 susieta su: {name} ¦ 🔗 sasaistīta ar: {name} ¦ 🔗 seotud: {name}
+effacée pour de bon le {date} ¦ visam laikui ištrinama {date} ¦ neatgriezeniski dzēsta {date} ¦ kustutatakse lõplikult {date}
+🗄 Relier à la visite ¦ 🗄 Susieti su apsilankymu ¦ 🗄 Sasaistīt ar apmeklējumu ¦ 🗄 Seo külastusega
+🔗 Relier à {name} ¦ 🔗 Susieti su: {name} ¦ 🔗 Sasaistīt ar: {name} ¦ 🔗 Seo: {name}
+Relier à… ¦ Susieti su… ¦ Sasaistīt ar… ¦ Seo…
+(sans texte) ¦ (be teksto) ¦ (bez teksta) ¦ (tekstita)
+Rien à trier : les photos du téléphone arriveront ici. ¦ Nėra ką rūšiuoti: telefono nuotraukos atkeliaus čia. ¦ Nav ko kārtot: tālruņa fotogrāfijas nonāks šeit. ¦ Pole midagi sorteerida: telefoni fotod jõuavad siia.
+Mode consultation : la boîte se lit, mais rien ne se relie ni ne se supprime. ¦ Peržiūros režimas: dėžutę galima skaityti, bet nieko negalima susieti ar ištrinti. ¦ Skatīšanās režīms: kasti var lasīt, bet neko nevar sasaistīt vai dzēst. ¦ Vaatamisrežiim: kasti saab lugeda, kuid midagi ei saa siduda ega kustutada.
+Cochées : {n} ¦ Pažymėta: {n} ¦ Atzīmētas: {n} ¦ Märgitud: {n}
+Décocher ¦ Nuimti žymėjimą ¦ Noņemt atzīmi ¦ Eemalda märge
+📍 Garder la position GPS ? ¦ 📍 Išlaikyti GPS padėtį? ¦ 📍 Saglabāt GPS pozīciju? ¦ 📍 Kas jätta GPS-asukoht alles?
+La photo contient une position GPS (utile pour situer une tombe). La garder pour la carte ? ¦ Nuotraukoje yra GPS padėtis (naudinga kapui rasti). Išlaikyti ją žemėlapiui? ¦ Fotogrāfijā ir GPS pozīcija (noderīga kapa atrašanai). Saglabāt to kartei? ¦ Fotol on GPS-asukoht (kasulik haua leidmiseks). Kas jätta see kaardi jaoks alles?
+La retirer ¦ Pašalinti ¦ Noņemt to ¦ Eemalda see
+✓ Reliées à {name} : {n} ¦ ✓ Susieta su: {name}: {n} ¦ ✓ Sasaistīts ar: {name}: {n} ¦ ✓ Seotud: {name}: {n}
+🪦 Une photo de tombe : ajouter aussi l’inhumation à {name} ? ¦ 🪦 Kapo nuotrauka: pridėti ir laidojimą: {name}? ¦ 🪦 Kapa fotogrāfija: pievienot arī apbedīšanu: {name}? ¦ 🪦 Hauafoto: kas lisada ka matmine: {name}?
+✓ Inhumation ajoutée à {name}. ¦ ✓ Laidojimas pridėtas: {name}. ¦ ✓ Apbedīšana pievienota: {name}. ¦ ✓ Matmine lisatud: {name}.
+Relier à un événement ¦ Susieti su įvykiu ¦ Sasaistīt ar notikumu ¦ Seo sündmusega
+Relier à une source ¦ Susieti su šaltiniu ¦ Sasaistīt ar avotu ¦ Seo allikaga
+✓ Supprimées : {n} ¦ ✓ Ištrinta: {n} ¦ ✓ Dzēstas: {n} ¦ ✓ Kustutatud: {n}
+✓ Supprimées : {n}. Gardées 30 jours dans « 🗑 Supprimées » (Filtrer ▾). ¦ ✓ Ištrinta: {n}. Laikoma 30 dienų „🗑 Ištrintos“ (Filtruoti ▾). ¦ ✓ Dzēstas: {n}. Glabājas 30 dienas sadaļā „🗑 Dzēstās“ (Filtrēt ▾). ¦ ✓ Kustutatud: {n}. Hoitakse 30 päeva kaustas „🗑 Kustutatud“ (Filtreeri ▾).
+✎ Modifier le texte ¦ ✎ Keisti tekstą ¦ ✎ Labot tekstu ¦ ✎ Muuda teksti
+Texte enregistré ¦ Tekstas išsaugotas ¦ Teksts saglabāts ¦ Tekst salvestatud
+👤 Une personne… ¦ 👤 Asmuo… ¦ 👤 Persona… ¦ 👤 Isik…
+📅 Un événement… (inhumation, mariage…) ¦ 📅 Įvykis… (laidojimas, santuoka…) ¦ 📅 Notikums… (apbedīšana, laulība…) ¦ 📅 Sündmus… (matmine, abielu…)
+📚 Une source… (l’acte, la cote) ¦ 📚 Šaltinis… (aktas, šifras) ¦ 📚 Avots… (akts, šifrs) ¦ 📚 Allikas… (akt, viit)
+🗄 La visite d’archives proposée ¦ 🗄 Siūlomas apsilankymas archyve ¦ 🗄 Ieteiktais arhīva apmeklējums ¦ 🗄 Pakutud arhiivikülastus
+🔍 Ouvrir en grand ¦ 🔍 Atidaryti dideliu formatu ¦ 🔍 Atvērt lielā izmērā ¦ 🔍 Ava suurelt
+⟲ Tourner ¦ ⟲ Pasukti ¦ ⟲ Pagriezt ¦ ⟲ Pööra
+⤓ Exporter l’original ¦ ⤓ Eksportuoti originalą ¦ ⤓ Eksportēt oriģinālu ¦ ⤓ Ekspordi originaal
+Remise dans 📥 À trier. ¦ Grąžinta į 📥 Rūšiuoti. ¦ Atlikts atpakaļ uz 📥 Kārtojamie. ¦ Pandud tagasi kausta 📥 Sorteerimiseks.
+📥 Arrivées du téléphone : {n} ¦ 📥 Atkeliavo iš telefono: {n} ¦ 📥 Saņemts no tālruņa: {n} ¦ 📥 Telefonist saabunud: {n}
+📥 À trier : {n} ¦ 📥 Rūšiuoti: {n} ¦ 📥 Kārtojamie: {n} ¦ 📥 Sorteerimiseks: {n}
+# 🖧 Plusieurs ordinateurs → 📱 Téléphones de terrain (assets/js/app-reseau-local.js)
+téléphone de terrain ¦ lauko telefonas ¦ lauka tālrunis ¦ välitelefon
+Téléphone de terrain ¦ Lauko telefonas ¦ Lauka tālrunis ¦ Välitelefon
+📱 Téléphone de terrain ¦ 📱 Lauko telefonas ¦ 📱 Lauka tālrunis ¦ 📱 Välitelefon
+📱 Téléphones de terrain ¦ 📱 Lauko telefonai ¦ 📱 Lauka tālruņi ¦ 📱 Välitelefonid
+👁 Lecture seule ¦ 👁 Tik skaityti ¦ 👁 Tikai lasīšana ¦ 👁 Ainult lugemine
+déposer · liste réduite ¦ palikti · sutrumpintas sąrašas ¦ nodot · saīsināts saraksts ¦ jätta · lühendatud loend
+＋ Ajouter un téléphone de terrain ¦ ＋ Pridėti lauko telefoną ¦ ＋ Pievienot lauka tālruni ¦ ＋ Lisa välitelefon
+Scanne ce QR code avec l’appareil photo du téléphone ¦ Nuskenuok šį QR kodą telefono kamera ¦ Noskenē šo QR kodu ar tālruņa kameru ¦ Skanni see QR-kood telefoni kaameraga
+Le code d’invitation est déjà dans le QR code. Sur le téléphone : « Demander l’accès », puis compare le code à 6 chiffres ici. ¦ Kvietimo kodas jau yra QR kode. Telefone: „Prašyti prieigos“, tada čia palygink 6 skaitmenų kodą. ¦ Ielūguma kods jau ir QR kodā. Tālrunī: „Pieprasīt piekļuvi“, tad šeit salīdzini 6 ciparu kodu. ¦ Kutsekood on juba QR-koodis. Telefonis: „Küsi juurdepääsu“, siis võrdle siin 6-kohalist koodi.
+Un 📱 téléphone de terrain ne voit pas l’arbre : il dépose seulement des photos dans 📥 À trier. ¦ 📱 Lauko telefonas nemato medžio: jis tik palieka nuotraukas 📥 Rūšiuoti. ¦ 📱 Lauka tālrunis neredz koku: tas tikai nodod fotogrāfijas uz 📥 Kārtojamie. ¦ 📱 Välitelefon ei näe puud: see ainult jätab fotod kausta 📥 Sorteerimiseks.
+⏻ Retirer tous les téléphones ¦ ⏻ Pašalinti visus telefonus ¦ ⏻ Noņemt visus tālruņus ¦ ⏻ Eemalda kõik telefonid
+Les photos arrivent dans Listes → Médias et documents → 📥 À trier. ¦ Nuotraukos patenka į Sąrašai → Medija ir dokumentai → 📥 Rūšiuoti. ¦ Fotogrāfijas nonāk Saraksti → Mediji un dokumenti → 📥 Kārtojamie. ¦ Fotod jõuavad kausta Loendid → Meedia ja dokumendid → 📥 Sorteerimiseks.
+📥 Ouvrir À trier ¦ 📥 Atidaryti Rūšiuoti ¦ 📥 Atvērt Kārtojamie ¦ 📥 Ava Sorteerimiseks
+Plus aucun téléphone ne pourra rien envoyer. Leurs photos déjà déposées restent dans 📥 À trier (réglage). ¦ Joks telefonas nebegalės nieko siųsti. Jau paliktos nuotraukos lieka 📥 Rūšiuoti (nustatymas). ¦ Neviens tālrunis vairs neko nevarēs nosūtīt. Jau nodotās fotogrāfijas paliek 📥 Kārtojamie (iestatījums). ¦ Ükski telefon ei saa enam midagi saata. Juba jäetud fotod jäävad kausta 📥 Sorteerimiseks (seadistus).
+Téléphones retirés : {n} ¦ Pašalinti telefonai: {n} ¦ Noņemtie tālruņi: {n} ¦ Eemaldatud telefonid: {n}
+Valeur refusée : réglage inchangé. ¦ Reikšmė atmesta: nustatymas nepakeistas. ¦ Vērtība noraidīta: iestatījums nemainīts. ¦ Väärtus lükati tagasi: seadistus muutmata.
+✓ « {name} » autorisé, 📱 téléphone de terrain. ¦ ✓ „{name}“ leidžiamas, 📱 lauko telefonas. ¦ ✓ „{name}“ atļauts, 📱 lauka tālrunis. ¦ ✓ „{name}“ lubatud, 📱 välitelefon.
+Sorte d’appareil ¦ Įrenginio rūšis ¦ Ierīces veids ¦ Seadme liik
+📱 Téléphone de terrain : déposer des photos et une ligne de texte dans 📥 À trier. Il ne voit pas l’arbre, ne modifie rien. Il devra aussi donner le mot de passe de la généalogie. ¦ 📱 Lauko telefonas: palikti nuotraukas ir teksto eilutę 📥 Rūšiuoti. Jis nemato medžio, nieko nekeičia. Jis taip pat turės įvesti genealogijos slaptažodį. ¦ 📱 Lauka tālrunis: nodot fotogrāfijas un teksta rindu uz 📥 Kārtojamie. Tas neredz koku, neko nemaina. Tam būs jāievada arī ciltskoka parole. ¦ 📱 Välitelefon: jätab fotod ja tekstirea kausta 📥 Sorteerimiseks. See ei näe puud ega muuda midagi. Ta peab andma ka sugupuu parooli.
+Ce que le téléphone voit ¦ Ką mato telefonas ¦ Ko redz tālrunis ¦ Mida telefon näeb
+Pour choisir « Pour qui ? » ¦ Pasirinkti „Kam?“ ¦ Lai izvēlētos „Kam?“ ¦ Valikuks „Kellele?“
+visites d’archives et personnes décédées ¦ apsilankymai archyve ir mirę asmenys ¦ arhīva apmeklējumi un mirušas personas ¦ arhiivikülastused ja surnud isikud
+visites d’archives seulement ¦ tik apsilankymai archyve ¦ tikai arhīva apmeklējumi ¦ ainult arhiivikülastused
+rien : tout se range sur l’ordinateur ¦ nieko: viskas tvarkoma kompiuteryje ¦ neko: viss tiek kārtots datorā ¦ mitte midagi: kõik sorteeritakse arvutis
+Montrer aussi les vivants (nom seulement) ¦ Rodyti ir gyvus (tik vardą) ¦ Rādīt arī dzīvos (tikai vārdu) ¦ Näita ka elavaid (ainult nimi)
+Montrer aussi les fiches confidentielles (nom seulement) ¦ Rodyti ir konfidencialias korteles (tik vardą) ¦ Rādīt arī konfidenciālās kartītes (tikai vārdu) ¦ Näita ka konfidentsiaalseid kirjeid (ainult nimi)
+« Pour qui ? » sur le téléphone ¦ „Kam?“ telefone ¦ „Kam?“ tālrunī ¦ „Kellele?“ telefonis
+obligatoire (plus lent sur place) ¦ privaloma (vietoje lėčiau) ¦ obligāti (uz vietas lēnāk) ¦ kohustuslik (kohapeal aeglasem)
+Une ligne de texte ¦ Teksto eilutė ¦ Teksta rinda ¦ Tekstirida
+une pour tout l’envoi ¦ viena visam siuntimui ¦ viena visam sūtījumam ¦ üks kogu saadetisele
+une par photo ¦ viena nuotraukai ¦ viena katrai fotogrāfijai ¦ üks foto kohta
+Les photos qui arrivent ¦ Gaunamos nuotraukos ¦ Ienākošās fotogrāfijas ¦ Saabuvad fotod
+Où arrivent les photos ¦ Kur patenka nuotraukos ¦ Kur nonāk fotogrāfijas ¦ Kuhu fotod jõuavad
+dans 📥 À trier : rien n’entre dans l’arbre sans toi ¦ į 📥 Rūšiuoti: niekas nepatenka į medį be tavęs ¦ uz 📥 Kārtojamie: bez tevis nekas nenonāk kokā ¦ kausta 📥 Sorteerimiseks: ilma sinuta ei lähe puusse midagi
+reliées tout de suite à la personne choisie (visibles dans À trier, avec ↶ Annuler) ¦ iškart susietos su pasirinktu asmeniu (matomos Rūšiuoti, su ↶ Atšaukti) ¦ uzreiz sasaistītas ar izvēlēto personu (redzamas Kārtojamie, ar ↶ Atsaukt) ¦ seotakse kohe valitud isikuga (näha kaustas Sorteerimiseks, ↶ Võta tagasi)
+Position GPS de la photo ¦ Nuotraukos GPS padėtis ¦ Fotogrāfijas GPS pozīcija ¦ Foto GPS-asukoht
+retirée à l’arrivée ¦ pašalinama gavus ¦ noņemta saņemot ¦ eemaldatakse saabumisel
+gardée à part, à décider en reliant ¦ laikoma atskirai, sprendžiama susiejant ¦ glabāta atsevišķi, lemj sasaistot ¦ hoitakse eraldi, otsustad sidumisel
+gardée (la carte peut la montrer) ¦ išlaikoma (žemėlapis gali ją rodyti) ¦ saglabāta (karte var to rādīt) ¦ jäetakse alles (kaart võib seda näidata)
+Taille maximale d’une photo ¦ Didžiausias nuotraukos dydis ¦ Fotogrāfijas maksimālais izmērs ¦ Foto suurim suurus
+Photos par envoi ¦ Nuotraukų per siuntimą ¦ Fotogrāfijas vienā sūtījumā ¦ Fotosid saadetise kohta
+Photos dans la boîte À trier, au plus ¦ Nuotraukų dėžutėje Rūšiuoti, daugiausia ¦ Fotogrāfijas kastē Kārtojamie, ne vairāk ¦ Fotosid kastis Sorteerimiseks, kõige rohkem
+Garder l’original (décoché : réduite à 2000 points) ¦ Išlaikyti originalą (nepažymėta: sumažinama iki 2000 taškų) ¦ Saglabāt oriģinālu (neatzīmēts: samazināta līdz 2000 punktiem) ¦ Jäta originaal alles (märkimata: vähendatakse 2000 punktini)
+coché conseillé ¦ pažymėta rekomenduojama ¦ atzīmēts ieteicams ¦ märgitud soovitatav
+décoché conseillé ¦ nepažymėta rekomenduojama ¦ neatzīmēts ieteicams ¦ märkimata soovitatav
+# 🖧 réglages des téléphones de terrain (suite), 📜 Qui a vu quoi, messages du serveur (lib/telephone_wifi.php, lib/reseau_local.php)
+gardée 30 jours dans « 🗑 Supprimées », puis effacée ¦ laikoma 30 dienų „🗑 Ištrintos“, paskui ištrinama ¦ glabāta 30 dienas sadaļā „🗑 Dzēstās“, tad izdzēsta ¦ hoitakse 30 päeva kaustas „🗑 Kustutatud“, siis kustutatakse
+effacée tout de suite (après les 10 secondes de ↶ Annuler) ¦ ištrinama iškart (po 10 sekundžių ↶ Atšaukti) ¦ izdzēsta uzreiz (pēc 10 sekundēm ↶ Atsaukt) ¦ kustutatakse kohe (pärast 10 sekundit ↶ Võta tagasi)
+Photo de tombe reliée ¦ Susieta kapo nuotrauka ¦ Sasaistīta kapa fotogrāfija ¦ Seotud hauafoto
+proposer d’ajouter l’inhumation ¦ siūlyti pridėti laidojimą ¦ piedāvāt pievienot apbedīšanu ¦ paku matmise lisamist
+ne rien proposer ¦ nieko nesiūlyti ¦ neko nepiedāvāt ¦ ära paku midagi
+Pastille 📥 dans la barre du haut ¦ Ženklelis 📥 viršutinėje juostoje ¦ Žetons 📥 augšējā joslā ¦ Märk 📥 ülemisel ribal
+oui, avec le nombre ¦ taip, su skaičiumi ¦ jā, ar skaitu ¦ jah, arvuga
+non (seulement dans Listes) ¦ ne (tik Sąrašuose) ¦ nē (tikai Sarakstos) ¦ ei (ainult Loendites)
+À l’arrivée de photos ¦ Gavus nuotraukų ¦ Kad pienāk fotogrāfijas ¦ Kui fotod saabuvad
+seulement la pastille ¦ tik ženklelis ¦ tikai žetons ¦ ainult märk
+un petit message en bas de l’écran ¦ trumpas pranešimas ekrano apačioje ¦ neliels ziņojums ekrāna apakšā ¦ väike teade ekraani allservas
+Sans wifi ¦ Be wifi ¦ Bez wifi ¦ Ilma wifita
+Hors du wifi de la maison ¦ Ne namų wifi ¦ Ārpus mājas wifi ¦ Väljaspool kodu wifit
+garder en attente dans la page, envoi tout seul au retour ¦ laukia puslapyje, išsiunčiama savaime grįžus ¦ gaida lapā, nosūta pati pēc atgriešanās ¦ ootavad lehel, saadetakse ise tagasi jõudes
+garder, mais demander avant d’envoyer ¦ išlaikyti, bet klausti prieš siunčiant ¦ saglabāt, bet pirms sūtīšanas jautāt ¦ hoia alles, aga küsi enne saatmist
+refuser de prendre des photos hors wifi ¦ neleisti fotografuoti be wifi ¦ neļaut fotografēt ārpus wifi ¦ mitte lubada pildistada väljaspool wifit
+Après l’envoi ¦ Išsiuntus ¦ Pēc nosūtīšanas ¦ Pärast saatmist
+effacer les photos de la page ¦ išvalyti nuotraukas iš puslapio ¦ notīrīt fotogrāfijas no lapas ¦ kustuta fotod lehelt
+garder les vignettes de la journée ¦ išlaikyti dienos miniatiūras ¦ saglabāt dienas sīktēlus ¦ hoia päeva pisipildid alles
+« ↶ Annuler » sur le téléphone ¦ „↶ Atšaukti“ telefone ¦ „↶ Atsaukt“ tālrunī ¦ „↶ Võta tagasi“ telefonis
+tant que les photos ne sont pas rangées ¦ kol nuotraukos nesutvarkytos ¦ kamēr fotogrāfijas nav sakārtotas ¦ kuni fotod pole sorteeritud
+pendant 10 secondes ¦ 10 sekundžių ¦ 10 sekundes ¦ 10 sekundi jooksul
+Mot de passe de la généalogie sur le téléphone ¦ Genealogijos slaptažodis telefone ¦ Ciltskoka parole tālrunī ¦ Sugupuu parool telefonis
+demandé à l’ouverture, redemandé après 15 min sans geste ¦ prašoma atidarant, vėl po 15 min be veiksmų ¦ prasa atverot, atkal pēc 15 min bez darbības ¦ küsitakse avamisel, uuesti pärast 15 min tegevuseta
+demandé seulement pour voir la liste ; déposer avec le jeton seul ¦ prašoma tik sąrašui; palikti galima vien su žetonu ¦ prasa tikai sarakstam; nodot var tikai ar žetonu ¦ küsitakse ainult loendi jaoks; jätta võib ainult märgiga
+Cet ordinateur en mode consultation ¦ Šis kompiuteris peržiūros režimu ¦ Šis dators skatīšanās režīmā ¦ See arvuti vaatamisrežiimis
+le téléphone ne dépose plus ¦ telefonas nebepalieka ¦ tālrunis vairs nenodod ¦ telefon ei jäta enam midagi
+le téléphone dépose encore ¦ telefonas vis dar palieka ¦ tālrunis joprojām nodod ¦ telefon jätab endiselt
+Sorte proposée quand la demande vient d’un téléphone ¦ Siūloma rūšis, kai prašymas ateina iš telefono ¦ Ieteiktais veids, ja pieprasījums nāk no tālruņa ¦ Pakutav liik, kui taotlus tuleb telefonist
+Retirer un téléphone ¦ Telefono pašalinimas ¦ Tālruņa noņemšana ¦ Telefoni eemaldamine
+ses photos déjà déposées restent à trier ¦ jo jau paliktos nuotraukos lieka rūšiuoti ¦ tā jau nodotās fotogrāfijas paliek kārtošanai ¦ tema juba jäetud fotod jäävad sorteerimiseks
+elles sont supprimées aussi (30 jours dans « 🗑 Supprimées ») ¦ jos taip pat ištrinamos (30 dienų „🗑 Ištrintos“) ¦ arī tās tiek dzēstas (30 dienas „🗑 Dzēstās“) ¦ ka need kustutatakse (30 päeva kaustas „🗑 Kustutatud“)
+📜 Registre ¦ 📜 Žurnalas ¦ 📜 Žurnāls ¦ 📜 Logi
+noter chaque dépôt, chaque fichier refusé et chaque liste vue ¦ registruoti kiekvieną palikimą, kiekvieną atmestą failą ir kiekvieną peržiūrėtą sąrašą ¦ pierakstīt katru nodošanu, katru noraidīto failu un katru skatīto sarakstu ¦ logi iga jätmine, iga tagasi lükatud fail ja iga vaadatud loend
+seulement les dépôts ¦ tik palikimai ¦ tikai nodošanas ¦ ainult jätmised
+Photo déposée ¦ Nuotrauka palikta ¦ Fotogrāfija nodota ¦ Foto jäetud
+Fichier refusé ¦ Failas atmestas ¦ Fails noraidīts ¦ Fail tagasi lükatud
+Liste réduite vue ¦ Sutrumpintas sąrašas peržiūrėtas ¦ Saīsinātais saraksts skatīts ¦ Lühendatud loendit vaadati
+Photo reliée ¦ Nuotrauka susieta ¦ Fotogrāfija sasaistīta ¦ Foto seotud
+pas une photo ¦ ne nuotrauka ¦ nav fotogrāfija ¦ pole foto
+trop grosse ¦ per didelė ¦ pārāk liela ¦ liiga suur
+trop grande ¦ per dideli matmenys ¦ pārāk lieli izmēri ¦ liiga suured mõõtmed
+abîmée ¦ sugadinta ¦ bojāta ¦ rikutud
+trop de fichiers ¦ per daug failų ¦ pārāk daudz failu ¦ liiga palju faile
+trop de photos ¦ per daug nuotraukų ¦ pārāk daudz fotogrāfiju ¦ liiga palju fotosid
+trop gros en tout ¦ iš viso per didelis ¦ kopumā pārāk liels ¦ kokku liiga suur
+boîte pleine ¦ dėžutė pilna ¦ kaste pilna ¦ kast täis
+personne refusée ¦ asmuo atmestas ¦ persona noraidīta ¦ isik tagasi lükatud
+réponses : {n} ¦ atsakymai: {n} ¦ atbildes: {n} ¦ vastuseid: {n}
+Photo trop grosse (plus de {n} Mo, la taille maximale réglée sur l’ordinateur). ¦ Nuotrauka per didelė (daugiau nei {n} MB, kompiuteryje nustatytas didžiausias dydis). ¦ Fotogrāfija ir pārāk liela (vairāk nekā {n} MB, datorā iestatītais maksimālais izmērs). ¦ Foto on liiga suur (üle {n} MB, arvutis seatud suurim suurus).
+Trop d’essais depuis ce téléphone : réessaie dans {n} min. ¦ Per daug bandymų iš šio telefono: bandyk dar kartą po {n} min. ¦ Pārāk daudz mēģinājumu no šī tālruņa: mēģini vēlreiz pēc {n} min. ¦ Sellest telefonist liiga palju katseid: proovi uuesti {n} min pärast.
+Trop de photos dans cet envoi ({n} au plus). ¦ Per daug nuotraukų šiame siuntime (daugiausia {n}). ¦ Pārāk daudz fotogrāfiju šajā sūtījumā (ne vairāk kā {n}). ¦ Selles saadetises on liiga palju fotosid (kõige rohkem {n}).
+Photo du téléphone ¦ Nuotrauka iš telefono ¦ Fotogrāfija no tālruņa ¦ Foto telefonist
+Ce format de photo ne se lit pas sur cet ordinateur : choisis-la en JPEG. ¦ Šio nuotraukos formato šiame kompiuteryje perskaityti negalima: pasirink ją JPEG formatu. ¦ Šo fotogrāfijas formātu šajā datorā nevar nolasīt: izvēlies to JPEG formātā. ¦ Seda fotovormingut ei saa selles arvutis lugeda: vali see JPEG-vormingus.
+Ce n’est pas une photo : seules les photos JPEG, PNG, WEBP et AVIF sont acceptées. ¦ Tai ne nuotrauka: priimamos tik JPEG, PNG, WEBP ir AVIF nuotraukos. ¦ Tā nav fotogrāfija: pieņem tikai JPEG, PNG, WEBP un AVIF fotogrāfijas. ¦ See pole foto: vastu võetakse ainult JPEG-, PNG-, WEBP- ja AVIF-fotosid.
+Image abîmée ou illisible. ¦ Vaizdas sugadintas arba neįskaitomas. ¦ Attēls ir bojāts vai nenolasāms. ¦ Pilt on rikutud või loetamatu.
+Image trop grande (plus de 50 millions de points) : refusée. ¦ Vaizdas per didelis (daugiau nei 50 milijonų taškų): atmestas. ¦ Attēls ir pārāk liels (vairāk nekā 50 miljoni punktu): noraidīts. ¦ Pilt on liiga suur (üle 50 miljoni punkti): tagasi lükatud.
+Une seule photo à la fois. ¦ Tik viena nuotrauka vienu metu. ¦ Tikai viena fotogrāfija vienlaikus. ¦ Ainult üks foto korraga.
+La photo n’est pas arrivée en entier : elle sera renvoyée. ¦ Nuotrauka atkeliavo ne visa: ji bus išsiųsta dar kartą. ¦ Fotogrāfija nepienāca pilnībā: tā tiks nosūtīta vēlreiz. ¦ Foto ei jõudnud kohale tervena: see saadetakse uuesti.
+Personne ou visite inconnue. ¦ Nežinomas asmuo ar apsilankymas. ¦ Nezināma persona vai apmeklējums. ¦ Tundmatu isik või külastus.
+📥 La boîte est pleine sur l’ordinateur : trie-la d’abord. ¦ 📥 Kompiuterio dėžutė pilna: pirmiausia ją sutvarkyk. ¦ 📥 Kaste datorā ir pilna: vispirms to sakārto. ¦ 📥 Arvuti kast on täis: sorteeri see enne.
+Cet envoi est trop gros en tout (200 Mo au plus) : envoie le reste ensuite. ¦ Šis siuntimas iš viso per didelis (daugiausia 200 MB): likusias siųsk vėliau. ¦ Šis sūtījums kopumā ir pārāk liels (ne vairāk kā 200 MB): pārējo sūti pēc tam. ¦ See saadetis on kokku liiga suur (kõige rohkem 200 MB): saada ülejäänu hiljem.
+La généalogie n’est pas prête sur l’ordinateur. ¦ Genealogija kompiuteryje neparuošta. ¦ Ciltskoks datorā nav gatavs. ¦ Sugupuu pole arvutis valmis.
+L’ordinateur est en mode consultation : il ne reçoit pas de photo pour l’instant. Elles restent en attente ici. ¦ Kompiuteris veikia peržiūros režimu: kol kas jis nepriima nuotraukų. Jos laukia čia. ¦ Dators ir skatīšanās režīmā: pagaidām tas nepieņem fotogrāfijas. Tās gaida šeit. ¦ Arvuti on vaatamisrežiimis: praegu see fotosid vastu ei võta. Need ootavad siin.
+Impossible de ranger la photo sur l’ordinateur (disque plein ?). ¦ Nepavyksta išsaugoti nuotraukos kompiuteryje (pilnas diskas?). ¦ Fotogrāfiju nevar saglabāt datorā (pilns disks?). ¦ Fotot ei saa arvutisse salvestada (ketas täis?).
+Choisis à quoi relier. ¦ Pasirink, su kuo susieti. ¦ Izvēlies, ar ko sasaistīt. ¦ Vali, millega siduda.
+Introuvable. ¦ Nerasta. ¦ Nav atrasts. ¦ Ei leitud.
+Cette fiche est verrouillée : rien n’y est relié. ¦ Ši kortelė užrakinta: niekas su ja nesiejama. ¦ Šī kartīte ir bloķēta: ar to nekas netiek sasaistīts. ¦ See kirje on lukus: sellega ei seota midagi.
+Trop tard : cette photo a été effacée pour de bon. ¦ Per vėlu: ši nuotrauka ištrinta visam laikui. ¦ Par vēlu: šī fotogrāfija ir neatgriezeniski dzēsta. ¦ Liiga hilja: see foto on lõplikult kustutatud.
+Téléphone de terrain : il peut seulement déposer des photos dans 📥 À trier. ¦ Lauko telefonas: gali tik palikti nuotraukas 📥 Rūšiuoti. ¦ Lauka tālrunis: var tikai nodot fotogrāfijas uz 📥 Kārtojamie. ¦ Välitelefon: saab ainult jätta fotosid kausta 📥 Sorteerimiseks.

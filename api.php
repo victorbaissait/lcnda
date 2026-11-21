@@ -286,6 +286,10 @@ try {
         require_once __DIR__ . '/lib/photomaps.php';
         photomaps_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if (in_array($action, ['inbox_list', 'inbox_count', 'inbox_file', 'inbox_settings', 'inbox_write'], true)) { // 📥 À trier : les photos du téléphone par le wifi (lib/telephone_wifi.php)
+        require_once __DIR__ . '/lib/telephone_wifi.php';
+        tw_inbox_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     if (in_array($action, ['qp_list', 'qp_get', 'qp_templates', 'qp_write'], true)) { // 💬 questions aux proches (lib/questions_proches.php)
         require_once __DIR__ . '/lib/questions_proches.php';
         qp_dispatch($pdo, (string) $action, $isWrite, $payload);

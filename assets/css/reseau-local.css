@@ -45,3 +45,11 @@
 .lan-msg { min-height: 1.4em; margin: 0; }
 .lan-msg.is-error { color: #b3261e; }
 @media (prefers-color-scheme: dark) { .lan-msg.is-error { color: #ff8a80; } }
+
+/* 📱 téléphones de terrain (app-reseau-local.js) */
+.rl-phone { margin-top: 12px; padding: 12px; border: 1px dashed var(--line, #d0d7de); border-radius: 10px; }
+.rl-phone .rl-url { display: block; overflow-wrap: anywhere; margin: 4px 0 8px; }
+.rl-tw .rl-twg { margin: 10px 0 4px; }
+.rl-tw .rl-twg h4 { margin: 12px 0 6px; font-size: 14px; text-transform: uppercase; letter-spacing: .03em; color: var(--muted, #5f6b76); }
+.rl-tw .rl-num { display: grid; gap: 4px; max-width: 340px; margin: 8px 0; }
+.rl-tw .rl-num input { max-width: 140px; }

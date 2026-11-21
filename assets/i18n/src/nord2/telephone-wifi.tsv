@@ -1,0 +1,199 @@
+fr ¦ sk ¦ nb
+# 📱 la page du téléphone de terrain (assets/js/app-terrain.js)
+📶 relié ¦ 📶 pripojené ¦ 📶 tilkoblet
+⏸ hors wifi ¦ ⏸ bez wifi ¦ ⏸ uten wifi
+Le mot de passe de la généalogie : vérifié par l’ordinateur, jamais gardé sur ce téléphone. ¦ Heslo genealógie: overí ho počítač, v tomto telefóne sa nikdy neukladá. ¦ Slektens passord: kontrolleres av datamaskinen, lagres aldri på denne telefonen.
+Le navigateur écrit « Non sécurisé » : c’est vrai, la porte du wifi n’a pas de HTTPS. N’envoie que sur le wifi de la maison, protégé par sa clé. ¦ Prehliadač píše „Nezabezpečené“: je to pravda, brána wifi nemá HTTPS. Posielaj len cez domácu wifi chránenú kľúčom. ¦ Nettleseren skriver «Ikke sikker»: det stemmer, wifi-døren har ikke HTTPS. Send bare på hjemmets wifi, beskyttet med nøkkelen.
+Tes photos attendent dans cette page. ¦ Tvoje fotky čakajú na tejto stránke. ¦ Bildene dine venter på denne siden.
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). ¦ Počítač neodpovedá (spí, je vypnutý alebo je brána zatvorená). ¦ Datamaskinen svarer ikke (hvilemodus, slått av eller døren stengt).
+Choisir une personne ou une visite… ¦ Vybrať osobu alebo návštevu… ¦ Velg en person eller et besøk…
+Une ligne (facultatif) ¦ Jeden riadok (nepovinné) ¦ Én linje (valgfritt)
+Pas de wifi de la maison : les photos se prennent avec l’appareil photo du téléphone, puis « 🖼 Choisir » au retour. ¦ Domáca wifi nie je: foť fotoaparátom telefónu a po návrate „🖼 Vybrať“. ¦ Ikke hjemmets wifi: ta bildene med telefonens kamera, og så «🖼 Velg» når du er tilbake.
+Prendre une photo ¦ Odfotiť ¦ Ta et bilde
+Choisir dans la galerie ¦ Vybrať z galérie ¦ Velg fra galleriet
+📍 = la photo contient une position GPS (retirée à l’arrivée, réglage) ¦ 📍 = fotka obsahuje polohu GPS (pri príchode odstránená, nastavenie) ¦ 📍 = bildet inneholder en GPS-posisjon (fjernes ved ankomst, innstilling)
+Tombe famille LACOMBE, allée 4 ¦ Hrob rodiny LACOMBE, ulička 4 ¦ Familien LACOMBEs grav, rad 4
+Envoyer : {n} ¦ Odoslať: {n} ¦ Send: {n}
+Sans wifi, garde cette page ouverte : les photos attendent ici et partent toutes seules au retour. Pour une journée entière aux archives, prends plutôt la visite par fichier. ¦ Bez wifi nechaj túto stránku otvorenú: fotky tu čakajú a po návrate odídu samy. Na celý deň v archíve radšej použi návštevu cez súbor. ¦ Uten wifi, la denne siden være åpen: bildene venter her og sendes av seg selv når du er tilbake. For en hel dag i arkivet, bruk heller besøket via fil.
+Le téléphone ne sait pas si une photo a été rangée ni où : il ne lit rien de l’arbre. ¦ Telefón nevie, či a kam bola fotka zaradená: nič zo stromu nečíta. ¦ Telefonen vet ikke om eller hvor et bilde er sortert: den leser ingenting av treet.
+Nom de la personne ou de la visite ¦ Meno osoby alebo návštevy ¦ Navn på personen eller besøket
+Seulement les personnes décédées, sans les fiches confidentielles. ¦ Len zosnulé osoby, bez dôverných záznamov. ¦ Bare avdøde personer, uten fortrolige oppføringer.
+Choisis pour qui est cette photo. ¦ Vyber, pre koho je táto fotka. ¦ Velg hvem bildet er til.
+Verrouillée après 15 minutes sans geste : redonne le mot de passe. Tes photos attendent. ¦ Zamknuté po 15 minútach bez činnosti: zadaj heslo znova. Tvoje fotky čakajú. ¦ Låst etter 15 minutter uten aktivitet: skriv inn passordet igjen. Bildene dine venter.
+Ce téléphone n’est plus autorisé sur l’ordinateur. ¦ Tento telefón už na počítači nie je povolený. ¦ Denne telefonen er ikke lenger tillatt på datamaskinen.
+Envoyées dans 📥 À trier : {n} ¦ Odoslané do 📥 Na roztriedenie: {n} ¦ Sendt til 📥 Til sortering: {n}
+Refusé par l’ordinateur ¦ Odmietnuté počítačom ¦ Avvist av datamaskinen
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). En attente : {n} ; nouvel essai toutes les 30 secondes tant que la page est ouverte. ¦ Počítač neodpovedá (spí, je vypnutý alebo je brána zatvorená). Čaká: {n}; nový pokus každých 30 sekúnd, kým je stránka otvorená. ¦ Datamaskinen svarer ikke (hvilemodus, slått av eller døren stengt). Venter: {n}; nytt forsøk hvert 30. sekund så lenge siden er åpen.
+↻ Réessayer ¦ ↻ Skúsiť znova ¦ ↻ Prøv igjen
+Envoi en cours : {i} sur {n} ¦ Odosiela sa: {i} z {n} ¦ Sender: {i} av {n}
+Garde la page ouverte. ¦ Nechaj stránku otvorenú. ¦ La siden være åpen.
+En attente depuis {when} : {n} ¦ Čaká od {when}: {n} ¦ Venter siden {when}: {n}
+Elles étaient gardées dans ce téléphone. ¦ Boli uložené v tomto telefóne. ¦ De ble lagret på denne telefonen.
+Les envoyer ¦ Odoslať ich ¦ Send dem
+Les oublier ¦ Zabudnúť ich ¦ Glem dem
+Retirées de la boîte : {n} ¦ Odobrané zo schránky: {n} ¦ Fjernet fra boksen: {n}
+« {name} » n’est plus ouverte sur l’ordinateur : tes photos restent en attente ici. ¦ „{name}“ už na počítači nie je otvorená: tvoje fotky tu ďalej čakajú. ¦ «{name}» er ikke lenger åpen på datamaskinen: bildene dine venter fortsatt her.
+Des photos étaient en attente, mais le téléphone a libéré la place. Retrouve-les dans ta galerie et « 🖼 Choisir ». ¦ Čakali tu fotky, ale telefón uvoľnil miesto. Nájdi ich v galérii a „🖼 Vybrať“. ¦ Noen bilder ventet, men telefonen frigjorde plassen. Finn dem i galleriet og «🖼 Velg».
+📱 Envoyer des photos à l’ordinateur principal ¦ 📱 Poslať fotky do hlavného počítača ¦ 📱 Send bilder til hoveddatamaskinen
+# 📥 À trier, sur l'ordinateur (assets/js/app-a-trier.js)
+📥 À trier ¦ 📥 Na roztriedenie ¦ 📥 Til sortering
+À trier ¦ Na roztriedenie ¦ Til sortering
+Listes · Médias et documents ¦ Zoznamy · Médiá a dokumenty ¦ Lister · Medier og dokumenter
+Les photos envoyées par un téléphone de terrain arrivent ici, hors de l’arbre. Relie chacune à ce qu’elle montre, ou supprime-la. ¦ Fotky odoslané terénnym telefónom prichádzajú sem, mimo strom. Prepoj každú s tým, čo ukazuje, alebo ju vymaž. ¦ Bilder sendt fra en felttelefon kommer hit, utenfor treet. Knytt hvert bilde til det det viser, eller slett det.
+Chercher… (texte, téléphone, personne) ¦ Hľadať… (text, telefón, osoba) ¦ Søk… (tekst, telefon, person)
+🗑 Supprimées ¦ 🗑 Vymazané ¦ 🗑 Slettede
+Reliées ¦ Prepojené ¦ Knyttet
+visite {name} ¦ návšteva {name} ¦ besøk {name}
+pour {name} ¦ pre {name} ¦ til {name}
+personne pas choisie ¦ osoba nevybraná ¦ ingen person valgt
+📍 GPS gardé ¦ 📍 GPS ponechané ¦ 📍 GPS beholdt
+📍 GPS retiré ¦ 📍 GPS odstránené ¦ 📍 GPS fjernet
+🔗 reliée à {name} ¦ 🔗 prepojené s: {name} ¦ 🔗 knyttet til {name}
+effacée pour de bon le {date} ¦ definitívne zmazané {date} ¦ slettes for godt {date}
+🗄 Relier à la visite ¦ 🗄 Prepojiť s návštevou ¦ 🗄 Knytt til besøket
+🔗 Relier à {name} ¦ 🔗 Prepojiť s: {name} ¦ 🔗 Knytt til {name}
+Relier à… ¦ Prepojiť s… ¦ Knytt til…
+(sans texte) ¦ (bez textu) ¦ (uten tekst)
+Rien à trier : les photos du téléphone arriveront ici. ¦ Nič na roztriedenie: fotky z telefónu prídu sem. ¦ Ingenting å sortere: bildene fra telefonen kommer hit.
+Mode consultation : la boîte se lit, mais rien ne se relie ni ne se supprime. ¦ Režim prezerania: schránku možno čítať, ale nič nemožno prepojiť ani vymazať. ¦ Visningsmodus: boksen kan leses, men ingenting kan knyttes eller slettes.
+Cochées : {n} ¦ Označené: {n} ¦ Avkrysset: {n}
+Décocher ¦ Odznačiť ¦ Fjern avkrysning
+📍 Garder la position GPS ? ¦ 📍 Ponechať polohu GPS? ¦ 📍 Beholde GPS-posisjonen?
+La photo contient une position GPS (utile pour situer une tombe). La garder pour la carte ? ¦ Fotka obsahuje polohu GPS (užitočnú na nájdenie hrobu). Ponechať ju pre mapu? ¦ Bildet inneholder en GPS-posisjon (nyttig for å finne en grav). Beholde den for kartet?
+La retirer ¦ Odstrániť ju ¦ Fjern den
+✓ Reliées à {name} : {n} ¦ ✓ Prepojené s: {name}: {n} ¦ ✓ Knyttet til {name}: {n}
+🪦 Une photo de tombe : ajouter aussi l’inhumation à {name} ? ¦ 🪦 Fotka hrobu: pridať aj pohreb k: {name}? ¦ 🪦 Et gravbilde: legge til begravelsen hos {name} også?
+✓ Inhumation ajoutée à {name}. ¦ ✓ Pohreb pridaný: {name}. ¦ ✓ Begravelse lagt til hos {name}.
+Relier à un événement ¦ Prepojiť s udalosťou ¦ Knytt til en hendelse
+Relier à une source ¦ Prepojiť so zdrojom ¦ Knytt til en kilde
+✓ Supprimées : {n} ¦ ✓ Vymazané: {n} ¦ ✓ Slettet: {n}
+✓ Supprimées : {n}. Gardées 30 jours dans « 🗑 Supprimées » (Filtrer ▾). ¦ ✓ Vymazané: {n}. Uchované 30 dní v „🗑 Vymazané“ (Filtrovať ▾). ¦ ✓ Slettet: {n}. Beholdt i 30 dager i «🗑 Slettede» (Filtrer ▾).
+✎ Modifier le texte ¦ ✎ Upraviť text ¦ ✎ Rediger teksten
+Texte enregistré ¦ Text uložený ¦ Tekst lagret
+👤 Une personne… ¦ 👤 Osoba… ¦ 👤 En person…
+📅 Un événement… (inhumation, mariage…) ¦ 📅 Udalosť… (pohreb, sobáš…) ¦ 📅 En hendelse… (begravelse, vielse…)
+📚 Une source… (l’acte, la cote) ¦ 📚 Zdroj… (záznam, signatúra) ¦ 📚 En kilde… (dokumentet, signaturen)
+🗄 La visite d’archives proposée ¦ 🗄 Navrhnutá návšteva archívu ¦ 🗄 Det foreslåtte arkivbesøket
+🔍 Ouvrir en grand ¦ 🔍 Otvoriť vo veľkom ¦ 🔍 Åpne i stort format
+⟲ Tourner ¦ ⟲ Otočiť ¦ ⟲ Roter
+⤓ Exporter l’original ¦ ⤓ Exportovať originál ¦ ⤓ Eksporter originalen
+Remise dans 📥 À trier. ¦ Vrátené do 📥 Na roztriedenie. ¦ Lagt tilbake i 📥 Til sortering.
+📥 Arrivées du téléphone : {n} ¦ 📥 Prišlo z telefónu: {n} ¦ 📥 Kommet fra telefonen: {n}
+📥 À trier : {n} ¦ 📥 Na roztriedenie: {n} ¦ 📥 Til sortering: {n}
+# 🖧 Plusieurs ordinateurs → 📱 Téléphones de terrain (assets/js/app-reseau-local.js)
+téléphone de terrain ¦ terénny telefón ¦ felttelefon
+Téléphone de terrain ¦ Terénny telefón ¦ Felttelefon
+📱 Téléphone de terrain ¦ 📱 Terénny telefón ¦ 📱 Felttelefon
+📱 Téléphones de terrain ¦ 📱 Terénne telefóny ¦ 📱 Felttelefoner
+👁 Lecture seule ¦ 👁 Len na čítanie ¦ 👁 Bare lesing
+déposer · liste réduite ¦ odkladať · skrátený zoznam ¦ levere · kort liste
+＋ Ajouter un téléphone de terrain ¦ ＋ Pridať terénny telefón ¦ ＋ Legg til en felttelefon
+Scanne ce QR code avec l’appareil photo du téléphone ¦ Naskenuj tento QR kód fotoaparátom telefónu ¦ Skann QR-koden med telefonens kamera
+Le code d’invitation est déjà dans le QR code. Sur le téléphone : « Demander l’accès », puis compare le code à 6 chiffres ici. ¦ Kód pozvánky už je v QR kóde. Na telefóne: „Požiadať o prístup“, potom tu porovnaj 6-miestny kód. ¦ Invitasjonskoden ligger allerede i QR-koden. På telefonen: «Be om tilgang», og sammenlign så den 6-sifrede koden her.
+Un 📱 téléphone de terrain ne voit pas l’arbre : il dépose seulement des photos dans 📥 À trier. ¦ 📱 Terénny telefón strom nevidí: len odkladá fotky do 📥 Na roztriedenie. ¦ En 📱 felttelefon ser ikke treet: den leverer bare bilder i 📥 Til sortering.
+⏻ Retirer tous les téléphones ¦ ⏻ Odobrať všetky telefóny ¦ ⏻ Fjern alle telefoner
+Les photos arrivent dans Listes → Médias et documents → 📥 À trier. ¦ Fotky prichádzajú do Zoznamy → Médiá a dokumenty → 📥 Na roztriedenie. ¦ Bildene kommer i Lister → Medier og dokumenter → 📥 Til sortering.
+📥 Ouvrir À trier ¦ 📥 Otvoriť Na roztriedenie ¦ 📥 Åpne Til sortering
+Plus aucun téléphone ne pourra rien envoyer. Leurs photos déjà déposées restent dans 📥 À trier (réglage). ¦ Žiadny telefón už nebude môcť nič poslať. Ich už odložené fotky zostanú v 📥 Na roztriedenie (nastavenie). ¦ Ingen telefon kan sende noe lenger. Bildene de allerede har levert, blir i 📥 Til sortering (innstilling).
+Téléphones retirés : {n} ¦ Odobrané telefóny: {n} ¦ Fjernede telefoner: {n}
+Valeur refusée : réglage inchangé. ¦ Hodnota odmietnutá: nastavenie bez zmeny. ¦ Verdien ble avvist: innstillingen er uendret.
+✓ « {name} » autorisé, 📱 téléphone de terrain. ¦ ✓ „{name}“ povolený, 📱 terénny telefón. ¦ ✓ «{name}» tillatt, 📱 felttelefon.
+Sorte d’appareil ¦ Druh zariadenia ¦ Type enhet
+📱 Téléphone de terrain : déposer des photos et une ligne de texte dans 📥 À trier. Il ne voit pas l’arbre, ne modifie rien. Il devra aussi donner le mot de passe de la généalogie. ¦ 📱 Terénny telefón: odkladať fotky a riadok textu do 📥 Na roztriedenie. Strom nevidí, nič nemení. Bude musieť zadať aj heslo genealógie. ¦ 📱 Felttelefon: levere bilder og en linje tekst i 📥 Til sortering. Den ser ikke treet og endrer ingenting. Den må også oppgi slektens passord.
+Ce que le téléphone voit ¦ Čo telefón vidí ¦ Hva telefonen ser
+Pour choisir « Pour qui ? » ¦ Na výber „Pre koho?“ ¦ For å velge «Til hvem?»
+visites d’archives et personnes décédées ¦ návštevy archívu a zosnulé osoby ¦ arkivbesøk og avdøde personer
+visites d’archives seulement ¦ len návštevy archívu ¦ bare arkivbesøk
+rien : tout se range sur l’ordinateur ¦ nič: všetko sa triedi na počítači ¦ ingenting: alt sorteres på datamaskinen
+Montrer aussi les vivants (nom seulement) ¦ Zobraziť aj žijúcich (len meno) ¦ Vis også levende (bare navnet)
+Montrer aussi les fiches confidentielles (nom seulement) ¦ Zobraziť aj dôverné záznamy (len meno) ¦ Vis også fortrolige oppføringer (bare navnet)
+« Pour qui ? » sur le téléphone ¦ „Pre koho?“ na telefóne ¦ «Til hvem?» på telefonen
+obligatoire (plus lent sur place) ¦ povinné (na mieste pomalšie) ¦ obligatorisk (tregere på stedet)
+Une ligne de texte ¦ Riadok textu ¦ En linje tekst
+une pour tout l’envoi ¦ jeden pre celé odoslanie ¦ én for hele sendingen
+une par photo ¦ jeden na fotku ¦ én per bilde
+Les photos qui arrivent ¦ Prichádzajúce fotky ¦ Innkommende bilder
+Où arrivent les photos ¦ Kam prichádzajú fotky ¦ Hvor bildene kommer
+dans 📥 À trier : rien n’entre dans l’arbre sans toi ¦ do 📥 Na roztriedenie: bez teba nič nevstúpi do stromu ¦ i 📥 Til sortering: ingenting kommer inn i treet uten deg
+reliées tout de suite à la personne choisie (visibles dans À trier, avec ↶ Annuler) ¦ hneď prepojené s vybranou osobou (viditeľné v Na roztriedenie, s ↶ Späť) ¦ knyttet straks til den valgte personen (synlige i Til sortering, med ↶ Angre)
+Position GPS de la photo ¦ Poloha GPS fotky ¦ Bildets GPS-posisjon
+retirée à l’arrivée ¦ odstránená pri príchode ¦ fjernes ved ankomst
+gardée à part, à décider en reliant ¦ uchovaná zvlášť, rozhodne sa pri prepojení ¦ lagret for seg, avgjøres ved tilknytning
+gardée (la carte peut la montrer) ¦ ponechaná (mapa ju môže ukázať) ¦ beholdt (kartet kan vise den)
+Taille maximale d’une photo ¦ Najväčšia veľkosť fotky ¦ Største størrelse for et bilde
+Photos par envoi ¦ Fotiek na odoslanie ¦ Bilder per sending
+Photos dans la boîte À trier, au plus ¦ Fotiek v schránke Na roztriedenie, najviac ¦ Bilder i boksen Til sortering, høyst
+Garder l’original (décoché : réduite à 2000 points) ¦ Ponechať originál (neoznačené: zmenšené na 2000 bodov) ¦ Behold originalen (ikke avkrysset: forminsket til 2000 piksler)
+coché conseillé ¦ označené odporúčané ¦ avkrysset anbefales
+décoché conseillé ¦ neoznačené odporúčané ¦ ikke avkrysset anbefales
+# 🖧 réglages des téléphones de terrain (suite), 📜 Qui a vu quoi, messages du serveur (lib/telephone_wifi.php, lib/reseau_local.php)
+gardée 30 jours dans « 🗑 Supprimées », puis effacée ¦ uchovaná 30 dní v „🗑 Vymazané“, potom zmazaná ¦ beholdt 30 dager i «🗑 Slettede», deretter slettet
+effacée tout de suite (après les 10 secondes de ↶ Annuler) ¦ zmazaná hneď (po 10 sekundách na ↶ Späť) ¦ slettet med en gang (etter de 10 sekundene for ↶ Angre)
+Photo de tombe reliée ¦ Prepojená fotka hrobu ¦ Knyttet gravbilde
+proposer d’ajouter l’inhumation ¦ ponúknuť pridanie pohrebu ¦ foreslå å legge til begravelsen
+ne rien proposer ¦ nič neponúkať ¦ ikke foreslå noe
+Pastille 📥 dans la barre du haut ¦ Odznak 📥 v hornej lište ¦ Merke 📥 i den øverste linjen
+oui, avec le nombre ¦ áno, s počtom ¦ ja, med antallet
+non (seulement dans Listes) ¦ nie (len v Zoznamoch) ¦ nei (bare i Lister)
+À l’arrivée de photos ¦ Pri príchode fotiek ¦ Når bilder kommer
+seulement la pastille ¦ len odznak ¦ bare merket
+un petit message en bas de l’écran ¦ krátka správa dole na obrazovke ¦ en liten melding nederst på skjermen
+Sans wifi ¦ Bez wifi ¦ Uten wifi
+Hors du wifi de la maison ¦ Mimo domácej wifi ¦ Utenfor hjemmets wifi
+garder en attente dans la page, envoi tout seul au retour ¦ nechať čakať na stránke, odoslať samo po návrate ¦ la vente på siden, sendes av seg selv ved retur
+garder, mais demander avant d’envoyer ¦ ponechať, ale pred odoslaním sa opýtať ¦ behold, men spør før sending
+refuser de prendre des photos hors wifi ¦ nedovoliť fotiť mimo wifi ¦ ikke tillate bilder utenfor wifi
+Après l’envoi ¦ Po odoslaní ¦ Etter sending
+effacer les photos de la page ¦ zmazať fotky zo stránky ¦ slette bildene fra siden
+garder les vignettes de la journée ¦ ponechať náhľady dňa ¦ behold dagens miniatyrer
+« ↶ Annuler » sur le téléphone ¦ „↶ Späť“ na telefóne ¦ «↶ Angre» på telefonen
+tant que les photos ne sont pas rangées ¦ kým fotky nie sú roztriedené ¦ så lenge bildene ikke er sortert
+pendant 10 secondes ¦ počas 10 sekúnd ¦ i 10 sekunder
+Mot de passe de la généalogie sur le téléphone ¦ Heslo genealógie na telefóne ¦ Slektens passord på telefonen
+demandé à l’ouverture, redemandé après 15 min sans geste ¦ vyžiadané pri otvorení a znova po 15 min bez činnosti ¦ spørres ved åpning, igjen etter 15 min uten aktivitet
+demandé seulement pour voir la liste ; déposer avec le jeton seul ¦ len na zobrazenie zoznamu; odkladať len s tokenom ¦ spørres bare for listen; lever med bare token
+Cet ordinateur en mode consultation ¦ Tento počítač v režime prezerania ¦ Denne datamaskinen i visningsmodus
+le téléphone ne dépose plus ¦ telefón už nič neodkladá ¦ telefonen leverer ikke lenger
+le téléphone dépose encore ¦ telefón ďalej odkladá ¦ telefonen leverer fortsatt
+Sorte proposée quand la demande vient d’un téléphone ¦ Druh ponúkaný, keď žiadosť príde z telefónu ¦ Type som foreslås når forespørselen kommer fra en telefon
+Retirer un téléphone ¦ Odobratie telefónu ¦ Fjerne en telefon
+ses photos déjà déposées restent à trier ¦ jeho už odložené fotky zostanú na roztriedenie ¦ bildene den allerede har levert, blir til sortering
+elles sont supprimées aussi (30 jours dans « 🗑 Supprimées ») ¦ vymažú sa tiež (30 dní v „🗑 Vymazané“) ¦ de slettes også (30 dager i «🗑 Slettede»)
+📜 Registre ¦ 📜 Záznam ¦ 📜 Logg
+noter chaque dépôt, chaque fichier refusé et chaque liste vue ¦ zapisovať každé odloženie, každý odmietnutý súbor a každý zobrazený zoznam ¦ logge hver levering, hver avvist fil og hver viste liste
+seulement les dépôts ¦ len odloženia ¦ bare leveringer
+Photo déposée ¦ Fotka odložená ¦ Bilde levert
+Fichier refusé ¦ Súbor odmietnutý ¦ Fil avvist
+Liste réduite vue ¦ Skrátený zoznam zobrazený ¦ Kort liste vist
+Photo reliée ¦ Fotka prepojená ¦ Bilde knyttet
+pas une photo ¦ nie je fotka ¦ ikke et bilde
+trop grosse ¦ príliš veľká ¦ for stort
+trop grande ¦ príliš veľké rozmery ¦ for store mål
+abîmée ¦ poškodená ¦ skadet
+trop de fichiers ¦ príliš veľa súborov ¦ for mange filer
+trop de photos ¦ príliš veľa fotiek ¦ for mange bilder
+trop gros en tout ¦ celkovo príliš veľké ¦ for stort totalt
+boîte pleine ¦ schránka plná ¦ boksen full
+personne refusée ¦ osoba odmietnutá ¦ person avvist
+réponses : {n} ¦ odpovede: {n} ¦ svar: {n}
+Photo trop grosse (plus de {n} Mo, la taille maximale réglée sur l’ordinateur). ¦ Fotka je príliš veľká (nad {n} MB, najväčšia veľkosť nastavená na počítači). ¦ Bildet er for stort (over {n} MB, største størrelse innstilt på datamaskinen).
+Trop d’essais depuis ce téléphone : réessaie dans {n} min. ¦ Príliš veľa pokusov z tohto telefónu: skús to znova o {n} min. ¦ For mange forsøk fra denne telefonen: prøv igjen om {n} min.
+Trop de photos dans cet envoi ({n} au plus). ¦ Príliš veľa fotiek v tomto odoslaní (najviac {n}). ¦ For mange bilder i denne sendingen (høyst {n}).
+Photo du téléphone ¦ Fotka z telefónu ¦ Bilde fra telefonen
+Ce format de photo ne se lit pas sur cet ordinateur : choisis-la en JPEG. ¦ Tento formát fotky sa na tomto počítači nedá prečítať: vyber ju ako JPEG. ¦ Dette bildeformatet kan ikke leses på denne datamaskinen: velg det som JPEG.
+Ce n’est pas une photo : seules les photos JPEG, PNG, WEBP et AVIF sont acceptées. ¦ Toto nie je fotka: prijímajú sa len fotky JPEG, PNG, WEBP a AVIF. ¦ Dette er ikke et bilde: bare JPEG-, PNG-, WEBP- og AVIF-bilder tas imot.
+Image abîmée ou illisible. ¦ Obrázok je poškodený alebo nečitateľný. ¦ Bildet er skadet eller uleselig.
+Image trop grande (plus de 50 millions de points) : refusée. ¦ Obrázok je príliš veľký (nad 50 miliónov bodov): odmietnutý. ¦ Bildet er for stort (over 50 millioner piksler): avvist.
+Une seule photo à la fois. ¦ Len jedna fotka naraz. ¦ Bare ett bilde om gangen.
+La photo n’est pas arrivée en entier : elle sera renvoyée. ¦ Fotka neprišla celá: pošle sa znova. ¦ Bildet kom ikke helt fram: det sendes på nytt.
+Personne ou visite inconnue. ¦ Neznáma osoba alebo návšteva. ¦ Ukjent person eller ukjent besøk.
+📥 La boîte est pleine sur l’ordinateur : trie-la d’abord. ¦ 📥 Schránka na počítači je plná: najprv ju roztrieď. ¦ 📥 Boksen på datamaskinen er full: sorter den først.
+Cet envoi est trop gros en tout (200 Mo au plus) : envoie le reste ensuite. ¦ Toto odoslanie je celkovo príliš veľké (najviac 200 MB): zvyšok pošli potom. ¦ Denne sendingen er for stor totalt (høyst 200 MB): send resten etterpå.
+La généalogie n’est pas prête sur l’ordinateur. ¦ Genealógia na počítači nie je pripravená. ¦ Slekten er ikke klar på datamaskinen.
+L’ordinateur est en mode consultation : il ne reçoit pas de photo pour l’instant. Elles restent en attente ici. ¦ Počítač je v režime prezerania: zatiaľ neprijíma fotky. Čakajú tu. ¦ Datamaskinen er i visningsmodus: den tar ikke imot bilder nå. De venter her.
+Impossible de ranger la photo sur l’ordinateur (disque plein ?). ¦ Fotku nemožno uložiť na počítač (plný disk?). ¦ Kan ikke lagre bildet på datamaskinen (full disk?).
+Choisis à quoi relier. ¦ Vyber, s čím prepojiť. ¦ Velg hva det skal knyttes til.
+Introuvable. ¦ Nenájdené. ¦ Ikke funnet.
+Cette fiche est verrouillée : rien n’y est relié. ¦ Tento záznam je zamknutý: nič sa s ním neprepojí. ¦ Denne oppføringen er låst: ingenting knyttes til den.
+Trop tard : cette photo a été effacée pour de bon. ¦ Príliš neskoro: táto fotka bola definitívne zmazaná. ¦ For sent: dette bildet er slettet for godt.
+Téléphone de terrain : il peut seulement déposer des photos dans 📥 À trier. ¦ Terénny telefón: môže len odkladať fotky do 📥 Na roztriedenie. ¦ Felttelefon: den kan bare levere bilder i 📥 Til sortering.

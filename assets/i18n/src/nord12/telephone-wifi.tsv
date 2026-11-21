@@ -1,0 +1,199 @@
+fr ¦ ru ¦ uk
+# 📱 la page du téléphone de terrain (assets/js/app-terrain.js)
+📶 relié ¦ 📶 на связи ¦ 📶 на зв’язку
+⏸ hors wifi ¦ ⏸ нет wifi ¦ ⏸ немає wifi
+Le mot de passe de la généalogie : vérifié par l’ordinateur, jamais gardé sur ce téléphone. ¦ Пароль генеалогии: его проверяет компьютер, на этом телефоне он никогда не хранится. ¦ Пароль генеалогії: його перевіряє комп’ютер, на цьому телефоні він ніколи не зберігається.
+Le navigateur écrit « Non sécurisé » : c’est vrai, la porte du wifi n’a pas de HTTPS. N’envoie que sur le wifi de la maison, protégé par sa clé. ¦ Браузер пишет «Не защищено»: это правда, у двери wifi нет HTTPS. Отправляй только по домашнему wifi, защищённому ключом. ¦ Браузер пише «Не захищено»: це правда, двері wifi не мають HTTPS. Надсилай лише через домашній wifi, захищений ключем.
+Tes photos attendent dans cette page. ¦ Твои фото ждут на этой странице. ¦ Твої фото чекають на цій сторінці.
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). ¦ Компьютер не отвечает (спит, выключен или дверь закрыта). ¦ Комп’ютер не відповідає (спить, вимкнений або двері зачинені).
+Choisir une personne ou une visite… ¦ Выбрать человека или визит… ¦ Вибрати людину або візит…
+Une ligne (facultatif) ¦ Одна строка (необязательно) ¦ Один рядок (необов’язково)
+Pas de wifi de la maison : les photos se prennent avec l’appareil photo du téléphone, puis « 🖼 Choisir » au retour. ¦ Нет домашнего wifi: снимай камерой телефона, а по возвращении «🖼 Выбрать». ¦ Немає домашнього wifi: знімай камерою телефона, а після повернення «🖼 Вибрати».
+Prendre une photo ¦ Сделать фото ¦ Зробити фото
+Choisir dans la galerie ¦ Выбрать из галереи ¦ Вибрати з галереї
+📍 = la photo contient une position GPS (retirée à l’arrivée, réglage) ¦ 📍 = в фото есть координаты GPS (удаляются при получении, настройка) ¦ 📍 = у фото є координати GPS (видаляються під час отримання, налаштування)
+Tombe famille LACOMBE, allée 4 ¦ Могила семьи LACOMBE, аллея 4 ¦ Могила родини LACOMBE, алея 4
+Envoyer : {n} ¦ Отправить: {n} ¦ Надіслати: {n}
+Sans wifi, garde cette page ouverte : les photos attendent ici et partent toutes seules au retour. Pour une journée entière aux archives, prends plutôt la visite par fichier. ¦ Без wifi держи эту страницу открытой: фото ждут здесь и уйдут сами по возвращении. Для целого дня в архиве лучше используй визит через файл. ¦ Без wifi тримай цю сторінку відкритою: фото чекають тут і підуть самі після повернення. Для цілого дня в архіві краще використовуй візит через файл.
+Le téléphone ne sait pas si une photo a été rangée ni où : il ne lit rien de l’arbre. ¦ Телефон не знает, разобрано ли фото и куда: он ничего не читает из древа. ¦ Телефон не знає, чи розібрано фото й куди: він нічого не читає з дерева.
+Nom de la personne ou de la visite ¦ Имя человека или название визита ¦ Ім’я людини або назва візиту
+Seulement les personnes décédées, sans les fiches confidentielles. ¦ Только умершие, без конфиденциальных карточек. ¦ Лише померлі, без конфіденційних карток.
+Choisis pour qui est cette photo. ¦ Выбери, для кого это фото. ¦ Вибери, для кого це фото.
+Verrouillée après 15 minutes sans geste : redonne le mot de passe. Tes photos attendent. ¦ Заблокировано после 15 минут без действий: введи пароль снова. Твои фото ждут. ¦ Заблоковано після 15 хвилин без дій: введи пароль знову. Твої фото чекають.
+Ce téléphone n’est plus autorisé sur l’ordinateur. ¦ Этому телефону больше нет доступа к компьютеру. ¦ Цьому телефону більше немає доступу до комп’ютера.
+Envoyées dans 📥 À trier : {n} ¦ Отправлено в 📥 Разобрать: {n} ¦ Надіслано до 📥 Розібрати: {n}
+Refusé par l’ordinateur ¦ Отклонено компьютером ¦ Відхилено комп’ютером
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). En attente : {n} ; nouvel essai toutes les 30 secondes tant que la page est ouverte. ¦ Компьютер не отвечает (спит, выключен или дверь закрыта). Ждут: {n}; новая попытка каждые 30 секунд, пока страница открыта. ¦ Комп’ютер не відповідає (спить, вимкнений або двері зачинені). Чекають: {n}; нова спроба кожні 30 секунд, поки сторінку відкрито.
+↻ Réessayer ¦ ↻ Повторить ¦ ↻ Повторити
+Envoi en cours : {i} sur {n} ¦ Отправка: {i} из {n} ¦ Надсилання: {i} з {n}
+Garde la page ouverte. ¦ Не закрывай страницу. ¦ Не закривай сторінку.
+En attente depuis {when} : {n} ¦ Ждут с {when}: {n} ¦ Чекають з {when}: {n}
+Elles étaient gardées dans ce téléphone. ¦ Они хранились в этом телефоне. ¦ Вони зберігалися в цьому телефоні.
+Les envoyer ¦ Отправить их ¦ Надіслати їх
+Les oublier ¦ Забыть их ¦ Забути їх
+Retirées de la boîte : {n} ¦ Убрано из ящика: {n} ¦ Прибрано зі скриньки: {n}
+« {name} » n’est plus ouverte sur l’ordinateur : tes photos restent en attente ici. ¦ «{name}» больше не открыта на компьютере: твои фото по-прежнему ждут здесь. ¦ «{name}» більше не відкрита на комп’ютері: твої фото й далі чекають тут.
+Des photos étaient en attente, mais le téléphone a libéré la place. Retrouve-les dans ta galerie et « 🖼 Choisir ». ¦ Фото ждали, но телефон освободил место. Найди их в галерее и «🖼 Выбрать». ¦ Фото чекали, але телефон звільнив місце. Знайди їх у галереї й «🖼 Вибрати».
+📱 Envoyer des photos à l’ordinateur principal ¦ 📱 Отправить фото на главный компьютер ¦ 📱 Надіслати фото на головний комп’ютер
+# 📥 À trier, sur l'ordinateur (assets/js/app-a-trier.js)
+📥 À trier ¦ 📥 Разобрать ¦ 📥 Розібрати
+À trier ¦ Разобрать ¦ Розібрати
+Listes · Médias et documents ¦ Списки · Медиа и документы ¦ Списки · Медіа й документи
+Les photos envoyées par un téléphone de terrain arrivent ici, hors de l’arbre. Relie chacune à ce qu’elle montre, ou supprime-la. ¦ Фото, отправленные полевым телефоном, приходят сюда, вне древа. Свяжи каждое с тем, что на нём, или удали. ¦ Фото, надіслані польовим телефоном, приходять сюди, поза деревом. Пов’яжи кожне з тим, що на ньому, або видали.
+Chercher… (texte, téléphone, personne) ¦ Искать… (текст, телефон, человек) ¦ Шукати… (текст, телефон, людина)
+🗑 Supprimées ¦ 🗑 Удалённые ¦ 🗑 Видалені
+Reliées ¦ Связанные ¦ Пов’язані
+visite {name} ¦ визит {name} ¦ візит {name}
+pour {name} ¦ для: {name} ¦ для: {name}
+personne pas choisie ¦ человек не выбран ¦ людину не вибрано
+📍 GPS gardé ¦ 📍 GPS сохранён ¦ 📍 GPS збережено
+📍 GPS retiré ¦ 📍 GPS удалён ¦ 📍 GPS видалено
+🔗 reliée à {name} ¦ 🔗 связано с: {name} ¦ 🔗 пов’язано з: {name}
+effacée pour de bon le {date} ¦ удалится навсегда {date} ¦ видалиться назавжди {date}
+🗄 Relier à la visite ¦ 🗄 Связать с визитом ¦ 🗄 Пов’язати з візитом
+🔗 Relier à {name} ¦ 🔗 Связать с: {name} ¦ 🔗 Пов’язати з: {name}
+Relier à… ¦ Связать с… ¦ Пов’язати з…
+(sans texte) ¦ (без текста) ¦ (без тексту)
+Rien à trier : les photos du téléphone arriveront ici. ¦ Нечего разбирать: фото с телефона придут сюда. ¦ Нічого розбирати: фото з телефона прийдуть сюди.
+Mode consultation : la boîte se lit, mais rien ne se relie ni ne se supprime. ¦ Режим просмотра: ящик можно читать, но ничего нельзя связать или удалить. ¦ Режим перегляду: скриньку можна читати, але нічого не можна пов’язати чи видалити.
+Cochées : {n} ¦ Отмечено: {n} ¦ Позначено: {n}
+Décocher ¦ Снять отметку ¦ Зняти позначку
+📍 Garder la position GPS ? ¦ 📍 Сохранить координаты GPS? ¦ 📍 Зберегти координати GPS?
+La photo contient une position GPS (utile pour situer une tombe). La garder pour la carte ? ¦ В фото есть координаты GPS (полезно, чтобы найти могилу). Сохранить их для карты? ¦ У фото є координати GPS (корисно, щоб знайти могилу). Зберегти їх для мапи?
+La retirer ¦ Удалить их ¦ Видалити їх
+✓ Reliées à {name} : {n} ¦ ✓ Связано с: {name}: {n} ¦ ✓ Пов’язано з: {name}: {n}
+🪦 Une photo de tombe : ajouter aussi l’inhumation à {name} ? ¦ 🪦 Фото могилы: добавить и погребение для: {name}? ¦ 🪦 Фото могили: додати й поховання для: {name}?
+✓ Inhumation ajoutée à {name}. ¦ ✓ Погребение добавлено: {name}. ¦ ✓ Поховання додано: {name}.
+Relier à un événement ¦ Связать с событием ¦ Пов’язати з подією
+Relier à une source ¦ Связать с источником ¦ Пов’язати з джерелом
+✓ Supprimées : {n} ¦ ✓ Удалено: {n} ¦ ✓ Видалено: {n}
+✓ Supprimées : {n}. Gardées 30 jours dans « 🗑 Supprimées » (Filtrer ▾). ¦ ✓ Удалено: {n}. Хранятся 30 дней в «🗑 Удалённые» (Фильтр ▾). ¦ ✓ Видалено: {n}. Зберігаються 30 днів у «🗑 Видалені» (Фільтр ▾).
+✎ Modifier le texte ¦ ✎ Изменить текст ¦ ✎ Змінити текст
+Texte enregistré ¦ Текст сохранён ¦ Текст збережено
+👤 Une personne… ¦ 👤 Человек… ¦ 👤 Людина…
+📅 Un événement… (inhumation, mariage…) ¦ 📅 Событие… (погребение, брак…) ¦ 📅 Подія… (поховання, шлюб…)
+📚 Une source… (l’acte, la cote) ¦ 📚 Источник… (акт, шифр) ¦ 📚 Джерело… (акт, шифр)
+🗄 La visite d’archives proposée ¦ 🗄 Предложенный визит в архив ¦ 🗄 Запропонований візит до архіву
+🔍 Ouvrir en grand ¦ 🔍 Открыть крупно ¦ 🔍 Відкрити великим
+⟲ Tourner ¦ ⟲ Повернуть ¦ ⟲ Повернути
+⤓ Exporter l’original ¦ ⤓ Экспортировать оригинал ¦ ⤓ Експортувати оригінал
+Remise dans 📥 À trier. ¦ Возвращено в 📥 Разобрать. ¦ Повернено до 📥 Розібрати.
+📥 Arrivées du téléphone : {n} ¦ 📥 Пришло с телефона: {n} ¦ 📥 Надійшло з телефона: {n}
+📥 À trier : {n} ¦ 📥 Разобрать: {n} ¦ 📥 Розібрати: {n}
+# 🖧 Plusieurs ordinateurs → 📱 Téléphones de terrain (assets/js/app-reseau-local.js)
+téléphone de terrain ¦ полевой телефон ¦ польовий телефон
+Téléphone de terrain ¦ Полевой телефон ¦ Польовий телефон
+📱 Téléphone de terrain ¦ 📱 Полевой телефон ¦ 📱 Польовий телефон
+📱 Téléphones de terrain ¦ 📱 Полевые телефоны ¦ 📱 Польові телефони
+👁 Lecture seule ¦ 👁 Только чтение ¦ 👁 Лише читання
+déposer · liste réduite ¦ сдавать · сокращённый список ¦ здавати · скорочений список
+＋ Ajouter un téléphone de terrain ¦ ＋ Добавить полевой телефон ¦ ＋ Додати польовий телефон
+Scanne ce QR code avec l’appareil photo du téléphone ¦ Отсканируй этот QR-код камерой телефона ¦ Відскануй цей QR-код камерою телефона
+Le code d’invitation est déjà dans le QR code. Sur le téléphone : « Demander l’accès », puis compare le code à 6 chiffres ici. ¦ Код приглашения уже в QR-коде. На телефоне: «Запросить доступ», затем сравни здесь 6-значный код. ¦ Код запрошення вже в QR-коді. На телефоні: «Попросити доступ», потім порівняй тут 6-значний код.
+Un 📱 téléphone de terrain ne voit pas l’arbre : il dépose seulement des photos dans 📥 À trier. ¦ 📱 Полевой телефон не видит древо: он только сдаёт фото в 📥 Разобрать. ¦ 📱 Польовий телефон не бачить дерева: він лише здає фото до 📥 Розібрати.
+⏻ Retirer tous les téléphones ¦ ⏻ Убрать все телефоны ¦ ⏻ Прибрати всі телефони
+Les photos arrivent dans Listes → Médias et documents → 📥 À trier. ¦ Фото приходят в Списки → Медиа и документы → 📥 Разобрать. ¦ Фото надходять до Списки → Медіа й документи → 📥 Розібрати.
+📥 Ouvrir À trier ¦ 📥 Открыть «Разобрать» ¦ 📥 Відкрити «Розібрати»
+Plus aucun téléphone ne pourra rien envoyer. Leurs photos déjà déposées restent dans 📥 À trier (réglage). ¦ Ни один телефон больше ничего не сможет отправить. Уже сданные фото остаются в 📥 Разобрать (настройка). ¦ Жоден телефон більше нічого не зможе надіслати. Уже здані фото залишаються в 📥 Розібрати (налаштування).
+Téléphones retirés : {n} ¦ Убрано телефонов: {n} ¦ Прибрано телефонів: {n}
+Valeur refusée : réglage inchangé. ¦ Значение отклонено: настройка не изменилась. ¦ Значення відхилено: налаштування не змінилося.
+✓ « {name} » autorisé, 📱 téléphone de terrain. ¦ ✓ «{name}» разрешён, 📱 полевой телефон. ¦ ✓ «{name}» дозволено, 📱 польовий телефон.
+Sorte d’appareil ¦ Тип устройства ¦ Тип пристрою
+📱 Téléphone de terrain : déposer des photos et une ligne de texte dans 📥 À trier. Il ne voit pas l’arbre, ne modifie rien. Il devra aussi donner le mot de passe de la généalogie. ¦ 📱 Полевой телефон: сдаёт фото и строку текста в 📥 Разобрать. Он не видит древо и ничего не меняет. Ему тоже придётся ввести пароль генеалогии. ¦ 📱 Польовий телефон: здає фото й рядок тексту до 📥 Розібрати. Він не бачить дерева й нічого не змінює. Йому теж доведеться ввести пароль генеалогії.
+Ce que le téléphone voit ¦ Что видит телефон ¦ Що бачить телефон
+Pour choisir « Pour qui ? » ¦ Для выбора «Для кого?» ¦ Для вибору «Для кого?»
+visites d’archives et personnes décédées ¦ визиты в архив и умершие ¦ візити до архіву й померлі
+visites d’archives seulement ¦ только визиты в архив ¦ лише візити до архіву
+rien : tout se range sur l’ordinateur ¦ ничего: всё разбирается на компьютере ¦ нічого: усе розбирається на комп’ютері
+Montrer aussi les vivants (nom seulement) ¦ Показывать и живых (только имя) ¦ Показувати й живих (лише ім’я)
+Montrer aussi les fiches confidentielles (nom seulement) ¦ Показывать и конфиденциальные карточки (только имя) ¦ Показувати й конфіденційні картки (лише ім’я)
+« Pour qui ? » sur le téléphone ¦ «Для кого?» на телефоне ¦ «Для кого?» на телефоні
+obligatoire (plus lent sur place) ¦ обязательно (медленнее на месте) ¦ обов’язково (повільніше на місці)
+Une ligne de texte ¦ Строка текста ¦ Рядок тексту
+une pour tout l’envoi ¦ одна на всю отправку ¦ один на все надсилання
+une par photo ¦ одна на фото ¦ один на фото
+Les photos qui arrivent ¦ Приходящие фото ¦ Вхідні фото
+Où arrivent les photos ¦ Куда приходят фото ¦ Куди надходять фото
+dans 📥 À trier : rien n’entre dans l’arbre sans toi ¦ в 📥 Разобрать: без тебя ничего не попадёт в древо ¦ до 📥 Розібрати: без тебе нічого не потрапить у дерево
+reliées tout de suite à la personne choisie (visibles dans À trier, avec ↶ Annuler) ¦ сразу связываются с выбранным человеком (видны в «Разобрать», с ↶ Отменить) ¦ одразу пов’язуються з вибраною людиною (видно в «Розібрати», з ↶ Скасувати)
+Position GPS de la photo ¦ Координаты GPS фото ¦ Координати GPS фото
+retirée à l’arrivée ¦ удаляются при получении ¦ видаляються під час отримання
+gardée à part, à décider en reliant ¦ хранятся отдельно, решаешь при связывании ¦ зберігаються окремо, вирішуєш під час пов’язування
+gardée (la carte peut la montrer) ¦ сохраняются (карта может их показать) ¦ зберігаються (мапа може їх показати)
+Taille maximale d’une photo ¦ Наибольший размер фото ¦ Найбільший розмір фото
+Photos par envoi ¦ Фото за одну отправку ¦ Фото за одне надсилання
+Photos dans la boîte À trier, au plus ¦ Фото в ящике «Разобрать», не больше ¦ Фото у скриньці «Розібрати», не більше
+Garder l’original (décoché : réduite à 2000 points) ¦ Сохранять оригинал (без отметки: уменьшается до 2000 точек) ¦ Зберігати оригінал (без позначки: зменшується до 2000 точок)
+coché conseillé ¦ с отметкой рекомендуется ¦ з позначкою рекомендовано
+décoché conseillé ¦ без отметки рекомендуется ¦ без позначки рекомендовано
+# 🖧 réglages des téléphones de terrain (suite), 📜 Qui a vu quoi, messages du serveur (lib/telephone_wifi.php, lib/reseau_local.php)
+gardée 30 jours dans « 🗑 Supprimées », puis effacée ¦ хранится 30 дней в «🗑 Удалённые», затем стирается ¦ зберігається 30 днів у «🗑 Видалені», потім стирається
+effacée tout de suite (après les 10 secondes de ↶ Annuler) ¦ стирается сразу (после 10 секунд ↶ Отменить) ¦ стирається одразу (після 10 секунд ↶ Скасувати)
+Photo de tombe reliée ¦ Связанное фото могилы ¦ Пов’язане фото могили
+proposer d’ajouter l’inhumation ¦ предлагать добавить погребение ¦ пропонувати додати поховання
+ne rien proposer ¦ ничего не предлагать ¦ нічого не пропонувати
+Pastille 📥 dans la barre du haut ¦ Значок 📥 в верхней панели ¦ Значок 📥 у верхній панелі
+oui, avec le nombre ¦ да, с числом ¦ так, із числом
+non (seulement dans Listes) ¦ нет (только в Списках) ¦ ні (лише в Списках)
+À l’arrivée de photos ¦ Когда приходят фото ¦ Коли надходять фото
+seulement la pastille ¦ только значок ¦ лише значок
+un petit message en bas de l’écran ¦ маленькое сообщение внизу экрана ¦ маленьке повідомлення внизу екрана
+Sans wifi ¦ Без wifi ¦ Без wifi
+Hors du wifi de la maison ¦ Вне домашнего wifi ¦ Поза домашнім wifi
+garder en attente dans la page, envoi tout seul au retour ¦ ждут на странице, отправка сама по возвращении ¦ чекають на сторінці, надсилання саме після повернення
+garder, mais demander avant d’envoyer ¦ хранить, но спрашивать перед отправкой ¦ зберігати, але питати перед надсиланням
+refuser de prendre des photos hors wifi ¦ не разрешать фото вне wifi ¦ не дозволяти фото поза wifi
+Après l’envoi ¦ После отправки ¦ Після надсилання
+effacer les photos de la page ¦ стереть фото со страницы ¦ стерти фото зі сторінки
+garder les vignettes de la journée ¦ сохранять миниатюры за день ¦ зберігати мініатюри за день
+« ↶ Annuler » sur le téléphone ¦ «↶ Отменить» на телефоне ¦ «↶ Скасувати» на телефоні
+tant que les photos ne sont pas rangées ¦ пока фото не разобраны ¦ поки фото не розібрано
+pendant 10 secondes ¦ в течение 10 секунд ¦ протягом 10 секунд
+Mot de passe de la généalogie sur le téléphone ¦ Пароль генеалогии на телефоне ¦ Пароль генеалогії на телефоні
+demandé à l’ouverture, redemandé après 15 min sans geste ¦ запрашивается при открытии и снова через 15 мин без действий ¦ запитується під час відкриття й знову після 15 хв без дій
+demandé seulement pour voir la liste ; déposer avec le jeton seul ¦ только для списка; сдавать можно с одним токеном ¦ лише для списку; здавати можна з самим токеном
+Cet ordinateur en mode consultation ¦ Этот компьютер в режиме просмотра ¦ Цей комп’ютер у режимі перегляду
+le téléphone ne dépose plus ¦ телефон больше не сдаёт ¦ телефон більше не здає
+le téléphone dépose encore ¦ телефон по-прежнему сдаёт ¦ телефон і далі здає
+Sorte proposée quand la demande vient d’un téléphone ¦ Тип, предлагаемый для запроса с телефона ¦ Тип, що пропонується для запиту з телефона
+Retirer un téléphone ¦ Если убрать телефон ¦ Якщо прибрати телефон
+ses photos déjà déposées restent à trier ¦ уже сданные им фото остаются разобрать ¦ уже здані ним фото лишаються розібрати
+elles sont supprimées aussi (30 jours dans « 🗑 Supprimées ») ¦ они тоже удаляются (30 дней в «🗑 Удалённые») ¦ вони теж видаляються (30 днів у «🗑 Видалені»)
+📜 Registre ¦ 📜 Журнал ¦ 📜 Журнал
+noter chaque dépôt, chaque fichier refusé et chaque liste vue ¦ записывать каждую сдачу, каждый отклонённый файл и каждый просмотр списка ¦ записувати кожне здавання, кожен відхилений файл і кожен перегляд списку
+seulement les dépôts ¦ только сдачи ¦ лише здавання
+Photo déposée ¦ Фото сдано ¦ Фото здано
+Fichier refusé ¦ Файл отклонён ¦ Файл відхилено
+Liste réduite vue ¦ Просмотрен сокращённый список ¦ Переглянуто скорочений список
+Photo reliée ¦ Фото связано ¦ Фото пов’язано
+pas une photo ¦ не фото ¦ не фото
+trop grosse ¦ слишком большое ¦ завелике
+trop grande ¦ слишком большие размеры ¦ завеликі розміри
+abîmée ¦ повреждено ¦ пошкоджене
+trop de fichiers ¦ слишком много файлов ¦ забагато файлів
+trop de photos ¦ слишком много фото ¦ забагато фото
+trop gros en tout ¦ слишком большой объём ¦ завеликий обсяг
+boîte pleine ¦ ящик полон ¦ скринька повна
+personne refusée ¦ человек отклонён ¦ людину відхилено
+réponses : {n} ¦ ответов: {n} ¦ відповідей: {n}
+Photo trop grosse (plus de {n} Mo, la taille maximale réglée sur l’ordinateur). ¦ Фото слишком большое (больше {n} МБ, наибольший размер, заданный на компьютере). ¦ Фото завелике (понад {n} МБ, найбільший розмір, заданий на комп’ютері).
+Trop d’essais depuis ce téléphone : réessaie dans {n} min. ¦ Слишком много попыток с этого телефона: попробуй снова через {n} мин. ¦ Забагато спроб із цього телефона: спробуй знову через {n} хв.
+Trop de photos dans cet envoi ({n} au plus). ¦ Слишком много фото в этой отправке (не больше {n}). ¦ Забагато фото в цьому надсиланні (не більше {n}).
+Photo du téléphone ¦ Фото с телефона ¦ Фото з телефона
+Ce format de photo ne se lit pas sur cet ordinateur : choisis-la en JPEG. ¦ Этот формат фото не читается на этом компьютере: выбери его в JPEG. ¦ Цей формат фото не читається на цьому комп’ютері: вибери його в JPEG.
+Ce n’est pas une photo : seules les photos JPEG, PNG, WEBP et AVIF sont acceptées. ¦ Это не фото: принимаются только фото JPEG, PNG, WEBP и AVIF. ¦ Це не фото: приймаються лише фото JPEG, PNG, WEBP і AVIF.
+Image abîmée ou illisible. ¦ Изображение повреждено или нечитаемо. ¦ Зображення пошкоджене або нечитабельне.
+Image trop grande (plus de 50 millions de points) : refusée. ¦ Изображение слишком большое (больше 50 миллионов точек): отклонено. ¦ Зображення завелике (понад 50 мільйонів точок): відхилено.
+Une seule photo à la fois. ¦ Только одно фото за раз. ¦ Лише одне фото за раз.
+La photo n’est pas arrivée en entier : elle sera renvoyée. ¦ Фото пришло не целиком: оно будет отправлено снова. ¦ Фото надійшло не повністю: його буде надіслано знову.
+Personne ou visite inconnue. ¦ Неизвестный человек или визит. ¦ Невідома людина або візит.
+📥 La boîte est pleine sur l’ordinateur : trie-la d’abord. ¦ 📥 Ящик на компьютере полон: сначала разбери его. ¦ 📥 Скринька на комп’ютері повна: спершу розбери її.
+Cet envoi est trop gros en tout (200 Mo au plus) : envoie le reste ensuite. ¦ Эта отправка слишком большая в сумме (не больше 200 МБ): остальное отправь потом. ¦ Це надсилання завелике загалом (не більше 200 МБ): решту надішли потім.
+La généalogie n’est pas prête sur l’ordinateur. ¦ Генеалогия на компьютере не готова. ¦ Генеалогія на комп’ютері не готова.
+L’ordinateur est en mode consultation : il ne reçoit pas de photo pour l’instant. Elles restent en attente ici. ¦ Компьютер в режиме просмотра: пока он не принимает фото. Они ждут здесь. ¦ Комп’ютер у режимі перегляду: поки що не приймає фото. Вони чекають тут.
+Impossible de ranger la photo sur l’ordinateur (disque plein ?). ¦ Не удаётся сохранить фото на компьютере (диск заполнен?). ¦ Не вдається зберегти фото на комп’ютері (диск заповнений?).
+Choisis à quoi relier. ¦ Выбери, с чем связать. ¦ Вибери, з чим пов’язати.
+Introuvable. ¦ Не найдено. ¦ Не знайдено.
+Cette fiche est verrouillée : rien n’y est relié. ¦ Эта карточка заблокирована: к ней ничего не привязывается. ¦ Ця картка заблокована: до неї нічого не прив’язується.
+Trop tard : cette photo a été effacée pour de bon. ¦ Слишком поздно: это фото удалено навсегда. ¦ Надто пізно: це фото видалено назавжди.
+Téléphone de terrain : il peut seulement déposer des photos dans 📥 À trier. ¦ Полевой телефон: он может только сдавать фото в 📥 Разобрать. ¦ Польовий телефон: він може лише здавати фото до 📥 Розібрати.
