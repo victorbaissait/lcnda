@@ -110,6 +110,11 @@ function calc_gen_sig(PDO $pdo, array $tables): ?string
 {
     if (!calc_gen_ok($pdo)) { return null; }
     try {
+        // ⚖️ une lecture filtrée (succ_shadow_filter : tables temporaires du même nom qui cachent les vraies) : jamais gardée
+        if ((int) $pdo->query("SELECT count(*) FROM temp.sqlite_master WHERE type IN ('table','view')")->fetchColumn() > 0) {
+            $shadow = array_intersect($tables, $pdo->query("SELECT name FROM temp.sqlite_master WHERE type IN ('table','view')")->fetchAll(PDO::FETCH_COLUMN));
+            if ($shadow) { return null; }
+        }
         $tok = $pdo->query('SELECT tbl, tok FROM data_gen')->fetchAll(PDO::FETCH_KEY_PAIR);
     } catch (Throwable $_) { return null; }
     $out = [];
@@ -134,7 +139,7 @@ function calc_code_sig(): string
  * Le résultat de $fn, gardé tant que les tables $tables ne changent pas et que $extra (langue, date du jour, mode
  * consultation, paramètres…) est le même. $name : un nom de fichier court. Sans cache possible : $fn() simplement.
  */
-function calc_cached(PDO $pdo, string $name, array $tables, array $extra, callable $fn): mixed
+function calc_cached(PDO $pdo, string $name, array $tables, array $extra, callable $fn, bool $store = true): mixed
 {
     $sig = calc_gen_sig($pdo, $tables);
     if ($sig === null || !defined('DATA_DIR')) { return $fn(); }
@@ -155,7 +160,7 @@ function calc_cached(PDO $pdo, string $name, array $tables, array $extra, callab
     $v = $fn();
     // relu après le calcul : si la base a changé pendant ce temps, le résultat n'est pas gardé
     $after = calc_gen_sig($pdo, $tables);
-    if ($after !== null && md5(json_encode([$after, $extra, CALC_CACHE_VERSION])) === $sig) {
+    if ($store && $after !== null && md5(json_encode([$after, $extra, CALC_CACHE_VERSION])) === $sig) {
         $dir = dirname($file);
         if (is_dir($dir) || @mkdir($dir, 0775, true)) {
             $tmp = $file . '.' . bin2hex(random_bytes(4)) . '.tmp';
@@ -165,4 +170,27 @@ function calc_cached(PDO $pdo, string $name, array $tables, array $extra, callab
         }
     }
     return $v;
+}
+
+/**
+ * Pour une action qui répond elle-même (json_response… puis exit) : la réponse gardée telle quelle tant que les tables
+ * $tables ne changent pas. Gardée : renvoyée tout de suite. Sinon $run() répond comme avant, et sa réponse est notée à la
+ * sortie (seulement une réponse JSON réussie, et si la base n'a pas changé pendant le calcul).
+ */
+function calc_cached_response(PDO $pdo, string $name, array $tables, array $extra, callable $run): never
+{
+    $sig0 = calc_gen_sig($pdo, $tables);
+    if ($sig0 === null || !defined('DATA_DIR')) { $run(); exit; }
+    // calc_cached() avec un calcul qui ne doit pas tourner ici : on lit seulement (le « calcul » renvoie une marque)
+    $mark = "\0calc-miss";
+    $v = calc_cached($pdo, $name, $tables, $extra, static fn() => $mark, false);
+    if (is_string($v) && $v !== $mark) { json_response_encoded($v); }
+    ob_start(static function (string $buf, int $phase) use ($pdo, $name, $tables, $extra, $sig0) {
+        if (($phase & PHP_OUTPUT_HANDLER_FINAL) && http_response_code() === 200 && $buf !== '' && ($buf[0] === '{' || $buf[0] === '[') && calc_gen_sig($pdo, $tables) === $sig0) {
+            try { calc_cached($pdo, $name, $tables, $extra, static fn() => $buf); } catch (Throwable $_) {}
+        }
+        return $buf;
+    }, 0);
+    $run();
+    exit;
 }

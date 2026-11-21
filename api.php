@@ -737,7 +737,9 @@ try {
         'census_member_memberships' => census_member_memberships_data($pdo, safe_int($_GET['person_id'] ?? 0)),
         'tree' => tree_data($pdo, safe_int($_GET['id'] ?? 0)),
         'kinship' => kinship_data($pdo, safe_int($_GET['from'] ?? 0), safe_int($_GET['to'] ?? 0)),
-        'map' => map_data($pdo),
+        // 🐘 la carte de toute la base (2 s à 200 000 fiches) : gardée tant que la base ne change pas, pour les réglages
+        // sans filtre de personne (sorte, limite, lieu précis) ; jamais avec le filtre des dossiers de succession
+        'map' => !isset($_GET['succ_cases']) && !array_diff(array_keys($_GET), ['action', 'tag', 'limit', 'location_mode', 'surname_mode']) ? calc_cached_response($pdo, 'map_' . substr(md5(json_encode([$_GET['tag'] ?? '', $_GET['limit'] ?? '', $_GET['location_mode'] ?? '', $_GET['surname_mode'] ?? ''])), 0, 12), ['persons', 'events', 'event_types', 'families', 'places', 'surname_groups', 'census_records', 'census_members'], [$_GET['tag'] ?? '', $_GET['limit'] ?? '', $_GET['location_mode'] ?? '', $_GET['surname_mode'] ?? ''], static fn() => map_data($pdo)) : map_data($pdo),
         'list' => list_data($pdo),
         'graph_stats' => graph_stats_data($pdo),
         'graph_distribution' => graph_distribution_data($pdo),
@@ -7558,20 +7560,38 @@ function import_package(PDO $pdo, ?array $file): never
 
 // ── Parseur GEDCOM générique (arbre level/tag/value) ──
 
+/**
+ * 🐘 Un nœud du GEDCOM lu : un stdClass (les fonctions qui le lisent l'attendent), mais avec ses cinq propriétés déclarées,
+ * rangées dans l'objet même au lieu d'une table de propriétés : trois fois moins de mémoire par ligne (un GEDCOM de
+ * 500 000 fiches, 9 millions de lignes, dépassait 4 Go). Mêmes propriétés, même ordre, mêmes valeurs ; d'autres peuvent
+ * toujours être ajoutées comme sur un stdClass.
+ */
+class GedNode extends stdClass
+{
+    public $level;
+    public $xref;
+    public $tag;
+    public $value;
+    public $children;
+}
+
 function gedimport_parse(string $text): array
 {
-    $lines = preg_split('/\r\n|\r|\n/', $text) ?: [];
     $root = [];
     $stack = [];
-    foreach ($lines as $raw) {
-        $raw = rtrim($raw, "\r\n"); // jamais les espaces de fin : une ligne CONC coupée juste avant une espace la garderait collée
+    $tags = []; // une seule copie de chaque balise (NAME, DATE, PLAC…)
+    // les lignes une à une (plus de tableau de toutes les lignes) : strtok rend les suites de caractères entre deux fins de
+    // ligne (\r, \n), c'est-à-dire exactement les lignes non vides du découpage d'avant (les lignes vides étaient sautées)
+    for ($raw = strtok($text, "\r\n"); $raw !== false; $raw = strtok("\r\n")) {
+        // jamais les espaces de fin : une ligne CONC coupée juste avant une espace la garderait collée
         if (trim($raw) === '') { continue; }
         if (!preg_match('/^(\d+)\s(@[^@]+@\s)?([A-Za-z0-9_]+)\s?(.*)$/', $raw, $m)) { continue; }
         $level = (int) $m[1];
-        $node = new stdClass();
+        $node = new GedNode();
         $node->level = $level;
         $node->xref = $m[2] !== '' ? trim($m[2], "@ ") : null;
-        $node->tag = strtoupper($m[3]);
+        $tg = strtoupper($m[3]);
+        $node->tag = $tags[$tg] ??= $tg;
         $node->value = $m[4];
         $node->children = [];
         if ($level === 0) {
