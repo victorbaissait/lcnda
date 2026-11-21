@@ -1219,7 +1219,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-enquetes.js?v=12" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=21" defer></script>
 <script src="assets/js/app-harmony.js?v=10" defer></script>
-<script src="assets/js/app-ui.js?v=31" defer></script>
+<script src="assets/js/app-ui.js?v=32" defer></script>
 <script src="assets/js/app-tableur-engine.js?v=11" defer></script>
 <script src="assets/js/app-aide-lecture.js?v=3" defer></script>
 <!-- aide-langues : une langue = un fichier (assets/js/aide-langues/README-format.md) -->
@@ -1471,7 +1471,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-successoral-plus2b.js?v=3" defer></script>
 <script src="assets/js/heritage-complements-core.js?v=1" defer></script>
 <script src="assets/js/heritage-complements.js?v=1" defer></script>
-<script src="assets/js/heritage-complements-2.js?v=1" defer></script>
+<script src="assets/js/heritage-complements-2.js?v=2" defer></script>
 <script src="assets/js/heritage-blocs-school.js?v=3" defer></script>
 <script src="assets/js/heritage-creations.js?v=5" defer></script>
 <script src="assets/js/heritage-onglets-documents.js?v=2" defer></script>

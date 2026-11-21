@@ -478,10 +478,10 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
                 const txt = await pg.textContent('.compl-dt'); assert.match(txt, /Tous les doutes/); assert.match(txt, /Hypothèse ouverte/);
                 await noSide(pg); await shot(pg, `C1-liste-${tag}`);
                 const key = await pg.getAttribute('.compl-dt [data-dt-key] >> nth=0', 'data-dt-key');
-                await pg.click('.compl-dt [data-dt-key] >> nth=0 >> .ui-row-name', { button: 'right' }); // clic droit : le menu ⋯ de la ligne
-                await pg.waitForSelector('.compl-dt [data-dt-key] >> nth=0 >> details.compl-dt-more[open]');
+                await pg.click('.compl-dt [data-dt-key] >> nth=0 >> .ui-row-name', { button: 'right' }); // clic droit : le menu de l'app (K14), mêmes actions que ⋯
+                await pg.waitForSelector('.ui-actmenu .ui-actmenu-i');
                 await shot(pg, `C1-menu-${tag}`);
-                await pg.click('.compl-dt [data-dt-key] >> nth=0 >> [data-dt-seen]');
+                await pg.click('.ui-actmenu .ui-actmenu-i:has-text("Marquer vu")');
                 await pg.waitForFunction(k => !document.querySelector(`.compl-dt [data-dt-key="${CSS.escape(k)}"]`), key, { timeout: 8000 });
                 await shot(pg, `C1-vu-${tag}`);
                 await pg.click('.toast button:has-text("Annuler"), .undo-toast button:has-text("Annuler")').catch(() => {});

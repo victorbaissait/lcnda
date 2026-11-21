@@ -142,7 +142,7 @@
             const on = t.closest('[data-dt-only]'); if (on) { t.closest('details')?.removeAttribute('open'); bar.setFilter('person', {id: Number(on.dataset.dtOnly), title: names[on.dataset.dtOnly] || ''}); }
         }, {signal: A().listControllerSignal?.()});
         // clic droit : le menu ⋯ de la ligne
-        ws.addEventListener('contextmenu', e => { const row = e.target.closest('[data-dt-key]'); if (!row) return; const m = row.querySelector('details.compl-dt-more'); if (!m) return; e.preventDefault(); document.querySelectorAll('details.compl-dt-more[open]').forEach(x => x.removeAttribute('open')); m.setAttribute('open', ''); m.querySelector('.ui-ph-menu button')?.focus(); }, {signal: A().listControllerSignal?.()});
+        ws.addEventListener('contextmenu', e => { const row = e.target.closest('[data-dt-key]'); if (!row) return; const m = row.querySelector('details.compl-dt-more'); if (!m) return; document.querySelectorAll('details.compl-dt-more[open]').forEach(x => x.removeAttribute('open')); const items = [...m.querySelectorAll('.ui-ph-menu button')].map(b => ({label: b.textContent.trim(), danger: b.classList.contains('danger'), run: () => b.click()})); if (UI()?.contextMenu && items.length) UI().contextMenu(e, items); else { e.preventDefault(); m.setAttribute('open', ''); m.querySelector('.ui-ph-menu button')?.focus(); } }, {signal: A().listControllerSignal?.()});
         // téléphone : glisser une ligne vers la gauche = 👁 Marquer vu
         let x0 = null, y0 = null, rk = null;
         box.addEventListener('touchstart', e => { const row = e.target.closest('[data-dt-key]'); if (!row) return; x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; rk = row; }, {passive: true});
