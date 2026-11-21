@@ -58,6 +58,14 @@ function so_year(string $s): int { return preg_match('/\b(1[5-9]\d\d|20\d\d)\b/'
 function so_department(string $county, string $placeName = ''): ?array
 {
     if (!function_exists('departmental_archives_seed')) { return null; }
+    static $memo = []; // fonction pure (la liste des archives livrée) : gardée par lieu
+    $mk = $county . "\x1f" . $placeName;
+    if (array_key_exists($mk, $memo)) { return $memo[$mk]; }
+    if (count($memo) > 50000) { $memo = []; }
+    return $memo[$mk] = so_department_raw($county, $placeName);
+}
+function so_department_raw(string $county, string $placeName = ''): ?array
+{
     $c = so_fold($county);
     if ($c === '' && preg_match('/\((\d{2}|2a|2b|9[78]\d)\)/i', $placeName, $m)) { $c = strtolower($m[1]); }
     if ($c === '') { return null; }
