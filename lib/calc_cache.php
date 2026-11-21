@@ -21,7 +21,7 @@ declare(strict_types=1);
 const CALC_GEN_TABLES = ['persons', 'events', 'families', 'family_children', 'places', 'sources', 'source_links', 'media', 'media_links',
     'notes', 'name_variants', 'labels', 'label_links', 'event_types', 'surname_groups', 'archives_dispo_corr', 'app_settings', 'tresor_items', 'proof_cases', 'link_strength', 'living_contacts', 'so_imports', 'items'];
 /** à augmenter si un calcul gardé change de forme (tous les fichiers gardés sont alors refaits) */
-const CALC_CACHE_VERSION = 1;
+const CALC_CACHE_VERSION = 2;
 
 /** Le texte exact de chaque déclencheur (nom => CREATE TRIGGER …) : seuls ceux-là sont gardés à l'ouverture d'une base. */
 function calc_gen_triggers(array $tables): array
@@ -141,11 +141,14 @@ function calc_cached(PDO $pdo, string $name, array $tables, array $extra, callab
     $extra = [$extra, calc_code_sig()];
     $sig = md5(json_encode([$sig, $extra, CALC_CACHE_VERSION]));
     $file = DATA_DIR . '/cache/calc-' . preg_replace('/[^a-z0-9_-]+/i', '_', $name) . '.ser';
-    if (is_file($file)) {
-        $raw = (string) @file_get_contents($file);
-        // la signature en tête (32 caractères) : un fichier d'un autre état n'est pas désérialisé
-        if (strlen($raw) > 33 && substr($raw, 0, 32) === $sig) {
-            $c = @unserialize(substr($raw, 33), ['allowed_classes' => false]);
+    // le fichier : la signature (32 caractères), un saut de ligne, puis « S » + serialize, ou « Z » + un long texte compressé
+    if (is_file($file) && ($fh = @fopen($file, 'rb'))) {
+        $head = (string) fread($fh, 34); // la signature d'abord : un fichier d'un autre état n'est ni lu en entier ni désérialisé
+        $body = strlen($head) === 34 && substr($head, 0, 32) === $sig ? (string) stream_get_contents($fh) : null;
+        fclose($fh);
+        if ($body !== null && $head[33] === 'Z') { $txt = @gzinflate($body); if (is_string($txt)) { return $txt; } }
+        if ($body !== null && $head[33] === 'S') {
+            $c = @unserialize($body, ['allowed_classes' => false]);
             if (is_array($c) && array_key_exists('v', $c)) { return $c['v']; }
         }
     }
@@ -156,7 +159,9 @@ function calc_cached(PDO $pdo, string $name, array $tables, array $extra, callab
         $dir = dirname($file);
         if (is_dir($dir) || @mkdir($dir, 0775, true)) {
             $tmp = $file . '.' . bin2hex(random_bytes(4)) . '.tmp';
-            if (@file_put_contents($tmp, $sig . "\n" . serialize(['v' => $v])) !== false) { @rename($tmp, $file); } else { @unlink($tmp); }
+            // un long texte (une réponse déjà encodée de plusieurs Mo) : compressé, 5 à 8 fois moins de place sur le disque
+            $data = is_string($v) && strlen($v) > 1 << 20 && function_exists('gzdeflate') ? 'Z' . gzdeflate($v, 1) : 'S' . serialize(['v' => $v]);
+            if (@file_put_contents($tmp, $sig . "\n" . $data) !== false) { @rename($tmp, $file); } else { @unlink($tmp); }
         }
     }
     return $v;
