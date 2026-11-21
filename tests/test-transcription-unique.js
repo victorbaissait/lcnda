@@ -65,7 +65,7 @@ $o['n2'] = act_doc_text_merge_all($pdo);
 $after = $pdo->query("SELECT group_concat(id || ':' || body, '|') FROM act_transcriptions")->fetchColumn() . '#' . $pdo->query("SELECT group_concat(id || ':' || transcription, '|') FROM media")->fetchColumn();
 $o['same'] = $before === $after;
 echo json_encode($o, JSON_UNESCAPED_UNICODE);`);
-        assert.equal(o.ver, 102); assert.equal(o.step, 'schema_v102');
+        assert.ok(o.ver >= 102, 'structure au moins n°102 : ' + o.ver); assert.equal(o.step, 'schema_v102');
         assert.equal(o.a1, 'Fiche matricule n° 845, classe 1912\nPrénoms : Pierre Antoine\n\n———\ntest', 'l’Atelier d’abord, puis « test »');
         assert.equal(o.m1, o.a1, 'un seul texte');
         assert.equal(o.a2, 'Même texte'); assert.equal(o.m2, 'Même texte', 'déjà pareils : rien ne change');

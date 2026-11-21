@@ -328,7 +328,7 @@
         ws.innerHTML = `<section class="page ong-page ong-docpage" data-ong-page="document" data-ong-id="${id}">
             ${UI().pageHeader({where: ['Documents', ...path].join(' › '), icon, title: d.title, help: esc(help || 'Document de ta base.'), detail: true,
                 primary: ro ? '' : '<button type="button" class="button" data-ong-edit>✎ Modifier</button>',
-                actions: ro ? [] : [isImg && ext.openActTranscriber && !(d.acts || []).length && !d.transcription ? `<button type="button" class="button secondary" data-ong-tx title="${esc(T('Ouvrir l’outil de transcription complet sur cette image'))}">${esc(T('📜 Atelier de transcription'))}</button>` : '', SF()?.rangeButtonHtml ? SF().rangeButtonHtml('document', id, d.title) : ''].filter(Boolean), more})}
+                actions: ro ? [] : [isImg && ext.openActTranscriber ? `<button type="button" class="button secondary" data-ong-tx title="${esc(T('Ouvrir l’outil de transcription complet sur cette image'))}">${esc(T('📜 Atelier de transcription'))}</button>` : '', SF()?.rangeButtonHtml ? SF().rangeButtonHtml('document', id, d.title) : ''].filter(Boolean), more})}
             <button type="button" class="button small secondary ong-back" data-ong-back>← Liste</button>
             <div class="ong-doc">
                 <figure class="ong-view">${isImg ? `<button type="button" class="ong-big" data-ong-view title="Voir en grand"><img src="${src}" alt="" data-ong-img></button>` : `<button type="button" class="ong-big is-file" data-ong-view><span aria-hidden="true">${icon}</span><small>${esc(d.filename || 'Pas de fichier')}</small></button>`}
