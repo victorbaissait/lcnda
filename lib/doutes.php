@@ -118,7 +118,7 @@ function doutes_rows(PDO $pdo): array
             $found = [];
             if ($ids === null) { $found = $pdo->query($base . ' ORDER BY e.id LIMIT 3000')->fetchAll(PDO::FETCH_ASSOC); }
             elseif ($ids) {
-                foreach (array_chunk($ids, 400) as $chunk) { $in = implode(',', array_map('intval', $chunk)); $found = array_merge($found, $pdo->query($base . " AND (e.person_id IN ($in) OR f.partner1_id IN ($in) OR f.partner2_id IN ($in)) ORDER BY e.id")->fetchAll(PDO::FETCH_ASSOC)); if (count($found) > 3000) { break; } }
+                foreach (array_chunk($ids, 400) as $chunk) { $in = implode(',', array_map('intval', $chunk)); $found = array_merge($found, $pdo->query($base . " AND (e.person_id IN ($in) OR e.family_id IN (SELECT id FROM families WHERE partner1_id IN ($in) OR partner2_id IN ($in))) ORDER BY e.id")->fetchAll(PDO::FETCH_ASSOC)); /* 🐘 le couple par l'index des familles (les mêmes lignes) : plus un parcours de tous les événements par paquet */ if (count($found) > 3000) { break; } }
             }
             $names = hom_people($pdo, array_merge(array_column($found, 'person_id'), array_column($found, 'partner1_id'), array_column($found, 'partner2_id')));
             $seen = [];
