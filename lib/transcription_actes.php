@@ -190,6 +190,7 @@ function tx_deep_run(string $dir): void
     $job = json_decode((string) @file_get_contents($dir . '/job.json'), true) ?: [];
     $put = static function (array $r) use ($dir): void { $r['updated'] = time(); @file_put_contents($dir . '/result.json.tmp', json_encode($r, JSON_UNESCAPED_UNICODE)); @rename($dir . '/result.json.tmp', $dir . '/result.json'); };
     $cancelled = static fn(): bool => is_file($dir . '/cancel');
+    $put(['state' => 'running', 'text' => '']); // le programme a démarré (tx_deep_job s'en sert pour voir un départ raté)
     try {
         $base = (string) ($job['base'] ?? '');
         if (!tx_deep_url_ok($base)) { throw new RuntimeException('Adresse refusée.'); }
@@ -250,6 +251,11 @@ function tx_deep_job(string $id): array
     $job = json_decode((string) @file_get_contents($dir . '/job.json'), true) ?: [];
     $state = (string) ($r['state'] ?? 'running');
     if ($state === 'running' && time() - (int) ($r['updated'] ?? $job['created'] ?? time()) > 1800) { $state = 'error'; $r['error'] = 'La lecture approfondie a pris trop de temps.'; }
+    // le programme de lecture s'est arrêté net (erreur PHP, mémoire…) : on le dit avec la fin de son journal, au lieu d'attendre 30 min
+    if ($state === 'running' && !is_file($dir . '/result.json') && time() - (int) ($job['created'] ?? time()) > 30) {
+        $log = trim((string) @file_get_contents($dir . '/run.log'));
+        $state = 'error'; $r['error'] = 'Le programme de lecture n’a pas démarré.'; $r['detail'] = mb_substr(preg_replace('/\s+/', ' ', $log) ?? '', -300);
+    }
     return ['id' => $id, 'kind' => (string) ($job['kind'] ?? ''), 'model' => (string) ($job['model'] ?? ''), 'state' => $state, 'elapsed' => max(0, time() - (int) ($job['created'] ?? time())),
         'completed' => (int) ($r['completed'] ?? 0), 'total' => (int) ($r['total'] ?? 0), 'status' => (string) ($r['status'] ?? ''), 'text' => (string) ($r['text'] ?? ''), 'error' => (string) ($r['error'] ?? ''), 'detail' => (string) ($r['detail'] ?? '')];
 }
