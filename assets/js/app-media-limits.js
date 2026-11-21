@@ -81,7 +81,7 @@
     const ROWS = [
         ['image_mb', 'Taille la plus grande d’une image ou d’un document', n => i18n('{n} Mo', {n}), 'Une photo, un scan ou un PDF plus gros est refusé à l’ajout, avec un message qui le dit. Les scans d’archives en très haute définition dépassent souvent 25 Mo.'],
         ['av_mb', 'Taille la plus grande d’un son ou d’une vidéo', n => (n >= 1000 ? i18n('{n} Go', {n: n / 1000}) : i18n('{n} Mo', {n})), 'Un enregistrement ou un film plus gros est refusé à l’ajout.'],
-        ['mpx', 'Taille d’image la plus grande pour les outils qui la décodent', n => i18n('{n} millions de points', {n}), 'Au-delà, l’image est bien gardée et s’affiche, mais « 🎚️ Mieux voir », ✨ Lire l’acte, l’Atelier, la retouche et les vignettes du serveur ne la traitent pas : décoder une image immense peut saturer la mémoire de l’ordinateur. 120 millions de points, c’est par exemple 12 000 × 10 000.']];
+        ['mpx', 'Taille d’image la plus grande pour les outils qui la décodent', n => i18n('{n} millions de points', {n}), 'Au-delà, l’image est bien gardée et s’affiche, mais « Mieux voir », la lecture de l’écriture, l’Atelier de transcription, la retouche et les vignettes du serveur ne la traitent pas : décoder une image immense peut saturer la mémoire de l’ordinateur. 120 millions de points, c’est par exemple 12 000 × 10 000.']];
     async function save(patch) {
         const r = await A().api('save_media_limits', {}, {method: 'POST', body: patch});
         if (r?.result?.limits) DATA = {...DATA, ...r.result}; else DATA = {...DATA, limits: {...get(), ...patch}};

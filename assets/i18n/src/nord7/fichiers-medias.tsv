@@ -1,0 +1,20 @@
+fr ¦ is
+# ═════ 📎 Réglages → Fichiers des médias (app-media-limits.js, lib/media_limits.php, upload.php) ; ✨ Lire l’acte : mention en marge (lib/htr_setup.php) ═════
+Fichiers des médias ¦ Miðlaskrár
+La taille des photos, documents, sons et vidéos que tu ajoutes, et ce que les outils d’image acceptent de traiter. ¦ Stærð myndanna, skjalanna, hljóðanna og myndskeiðanna sem þú bætir við og hvað myndverkfærin samþykkja að vinna með.
+Taille la plus grande d’une image ou d’un document ¦ Mesta stærð myndar eða skjals
+Taille la plus grande d’un son ou d’une vidéo ¦ Mesta stærð hljóðs eða myndskeiðs
+Taille d’image la plus grande pour les outils qui la décodent ¦ Mesta myndastærð fyrir verkfærin sem afkóða hana
+{n} Go ¦ {n} GB
+{n} millions de points ¦ {n} milljónir díla
+Une photo, un scan ou un PDF plus gros est refusé à l’ajout, avec un message qui le dit. Les scans d’archives en très haute définition dépassent souvent 25 Mo. ¦ Stærri mynd, skönnun eða PDF er hafnað þegar henni er bætt við, með skilaboðum sem segja það. Skjalasafnsskannanir í mjög hárri upplausn eru oft yfir 25 MB.
+Un enregistrement ou un film plus gros est refusé à l’ajout. ¦ Stærri upptöku eða kvikmynd er hafnað þegar henni er bætt við.
+Au-delà, l’image est bien gardée et s’affiche, mais « Mieux voir », la lecture de l’écriture, l’Atelier de transcription, la retouche et les vignettes du serveur ne la traitent pas : décoder une image immense peut saturer la mémoire de l’ordinateur. 120 millions de points, c’est par exemple 12 000 × 10 000. ¦ Yfir mörkunum er myndin geymd og sýnd, en „Sjá betur“, lestur handskriftar, Uppskriftarsmiðjan, lagfæringin og smámyndir þjónsins vinna ekki með hana: að afkóða risastóra mynd getur fyllt minni tölvunnar. 120 milljónir díla eru til dæmis 12.000 × 10.000.
+Des fichiers plus gros prennent plus de place sur le disque, rendent les sauvegardes plus lourdes et plus longues, et demandent plus de mémoire pour les ouvrir. Le téléphone par le wifi garde ses propres limites. ¦ Stærri skrár taka meira pláss á diskinum, gera afritin þyngri og lengri og þurfa meira minni til að opnast. Síminn um wifi heldur sínum eigin mörkum.
+Fichiers des médias remis comme au départ. ¦ Miðlaskrár settar aftur eins og í byrjun.
+{name} dépasse {n} Mo, la taille la plus grande réglée pour une image ou un document (Réglages → Fichiers des médias). ¦ {name} er stærri en {n} MB, mesta stærð sem er stillt fyrir mynd eða skjal (Stillingar → Miðlaskrár).
+{name} dépasse {n} Mo, la taille la plus grande réglée pour un son ou une vidéo (Réglages → Fichiers des médias). ¦ {name} er stærri en {n} MB, mesta stærð sem er stillt fyrir hljóð eða myndskeið (Stillingar → Miðlaskrár).
+Cette image est très grande ({w} × {h} points, {n} millions) : elle est bien gardée, mais les outils qui la décodent (vignettes, « Mieux voir », lecture de l’écriture, retouche) ne la traitent pas au-delà de {max} millions de points, pour ne pas saturer la mémoire. Tu peux changer cette limite : Réglages → Fichiers des médias. ¦ Þessi mynd er mjög stór ({w} × {h} dílar, {n} milljónir): hún er geymd, en verkfærin sem afkóða hana (smámyndir, „Sjá betur“, lestur handskriftar, lagfæring) vinna ekki með hana yfir {max} milljónum díla, til að fylla ekki minnið. Þú getur breytt þessum mörkum: Stillingar → Miðlaskrár.
+Image trop grande (plus de {n} Mo). ¦ Myndin er of stór (meira en {n} MB).
+Mention en marge : ¦ Spássíuathugasemd:
+Valeur de réglage inconnue. ¦ Óþekkt gildi stillingar.
