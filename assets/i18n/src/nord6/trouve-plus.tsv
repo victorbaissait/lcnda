@@ -1,0 +1,81 @@
+fr ¦ lt ¦ lv ¦ et
+# Zone « trouve-plus » : « Ce que l’app a trouvé dans l’acte », plus riche (heritage-transcribe-trouve.js, lib/transcription_actes.php : 🔍 Repérer avec l’IA, ＋ Ajouter à une fiche)
+Événements et contexte ¦ Įvykiai ir kontekstas ¦ Notikumi un konteksts ¦ Sündmused ja kontekst
+Naissance estimée ¦ Numatomas gimimas ¦ Aplēstā dzimšana ¦ Hinnanguline sünd
+finit par une particule seule ¦ baigiasi vien dalelyte ¦ beidzas ar vienu partikulu ¦ lõpeb üksiku eesliitega
+c’est un métier ¦ tai profesija ¦ tā ir nodarbošanās ¦ see on amet
+c’est un lieu ¦ tai vieta ¦ tā ir vieta ¦ see on koht
+pas un nom ¦ ne vardas ¦ nav vārds ¦ pole nimi
+proposer (conseillé) ¦ siūlyti (rekomenduojama) ¦ ieteikt (ieteicams) ¦ paku (soovitatav)
+vers {year} ¦ apie {year} ¦ ap {year} ¦ umbes {year}
+de {name} ¦ {name} ¦ {name} ¦ {name}
+(de la personne d’avant) ¦ (ankstesnio asmens) ¦ (iepriekšējās personas) ¦ (eelmise isiku)
+Nom non lu ¦ Vardas neperskaitytas ¦ Vārds nav nolasīts ¦ Nimi lugemata
+Proposé par l’IA locale : vérifie dans le texte ¦ Pasiūlė vietinis DI: patikrink tekste ¦ Ieteica vietējais MI: pārbaudi tekstā ¦ Kohaliku tehisaru ettepanek: kontrolli tekstist
+IA ¦ DI ¦ MI ¦ TI
+Actions ¦ Veiksmai ¦ Darbības ¦ Toimingud
+Ajouter à une fiche… ¦ Pridėti prie įrašo… ¦ Pievienot ierakstam… ¦ Lisa kirjesse…
+aussi écrit : ¦ dar rašoma: ¦ rakstīts arī: ¦ kirjutatud ka:
+Le texte ne dit rien d’autre sur cette personne. ¦ Tekstas apie šį asmenį daugiau nieko nesako. ¦ Teksts par šo personu neko vairāk nesaka. ¦ Tekst ei ütle selle isiku kohta midagi muud.
+Garder dans l’acte ¦ Palikti akte ¦ Paturēt aktā ¦ Jäta akti
+Aucune personne repérée. ¦ Asmenų nerasta. ¦ Neviena persona nav atrasta. ¦ Ühtegi isikut ei leitud.
+Écartés : pas des noms ({n}) ¦ Atidėta: ne vardai ({n}) ¦ Atlikti: nav vārdi ({n}) ¦ Kõrvale jäetud: pole nimed ({n})
+Lieu de ta base ¦ Vieta iš tavo duomenų bazės ¦ Vieta no tavas datubāzes ¦ Koht sinu andmebaasist
+date de l’acte ¦ akto data ¦ akta datums ¦ akti kuupäev
+calendrier républicain ¦ respublikinis kalendorius ¦ republikāņu kalendārs ¦ vabariiklik kalender
+d’après le champ Date ¦ pagal lauką Data ¦ pēc lauka Datums ¦ välja Kuupäev järgi
+Créer dans « Le monde autour »… ¦ Sukurti „Pasaulyje aplink“… ¦ Izveidot “Pasaulē apkārt”… ¦ Loo „Ümbritsevasse maailma“…
+mots : {x} ¦ žodžiai: {x} ¦ vārdi: {x} ¦ sõnad: {x}
+Choisir cette sorte ¦ Pasirinkti šią rūšį ¦ Izvēlēties šo veidu ¦ Vali see liik
+choisie ¦ pasirinkta ¦ izvēlēts ¦ valitud
+Proposée seulement : la sorte d’acte ne change que si tu la choisis. ¦ Tik pasiūlymas: akto rūšis pasikeičia tik tada, kai ją pasirenki. ¦ Tikai ieteikums: akta veids mainās tikai tad, ja to izvēlies. ¦ Ainult ettepanek: akti liik muutub vaid siis, kui selle valid.
+Pas d’indice dans le texte. ¦ Tekste nėra užuominos. ¦ Tekstā nav norādes. ¦ Tekstis pole vihjet.
+L’IA lit le texte… {n} s ¦ DI skaito tekstą… {n} s ¦ MI lasa tekstu… {n} s ¦ Tehisaru loeb teksti… {n} s
+Propositions de l’IA ajoutées ({n}), marquées 🔍 IA : vérifie-les dans le texte. ¦ DI pasiūlymai pridėti ({n}), pažymėti 🔍 DI: patikrink juos tekste. ¦ MI ieteikumi pievienoti ({n}), atzīmēti 🔍 MI: pārbaudi tos tekstā. ¦ Tehisaru ettepanekud lisatud ({n}), märgitud 🔍 TI: kontrolli neid tekstist.
+Repérer avec l’IA ¦ Rasti su DI ¦ Atrast ar MI ¦ Leia tehisaruga
+Seul le texte part au modèle, sur cet ordinateur. ¦ Modeliui siunčiamas tik tekstas, šiame kompiuteryje. ¦ Modelim tiek sūtīts tikai teksts, šajā datorā. ¦ Mudelile läheb ainult tekst, selles arvutis.
+Repéré dans le texte ¦ Rasta tekste ¦ Atrasts tekstā ¦ Leitud tekstist
+Réglages du repérage ¦ Paieškos nustatymai ¦ Meklēšanas iestatījumi ¦ Otsingu seaded
+Tout est proposé : garde, écarte ou ajoute à une fiche. Rien n’est écrit sans ton clic. ¦ Viskas tik siūloma: palik, atidėk arba pridėk prie įrašo. Niekas neįrašoma be tavo paspaudimo. ¦ Viss ir tikai ieteikums: paturi, atliec vai pievieno ierakstam. Nekas netiek ierakstīts bez tava klikšķa. ¦ Kõik on ettepanek: jäta alles, jäta kõrvale või lisa kirjesse. Midagi ei kirjutata ilma sinu klõpsuta.
+Écarter ¦ Atidėti ¦ Atlikt ¦ Jäta kõrvale
+Élément écarté. ¦ Elementas atidėtas. ¦ Elements atlikts. ¦ Element kõrvale jäetud.
+Naissance estimée vers {year} (âge dans l’acte) ¦ Numatomas gimimas apie {year} (amžius akte) ¦ Aplēstā dzimšana ap {year} (vecums aktā) ¦ Hinnanguline sünd umbes {year} (vanus aktis)
+{n} ans dans l’acte ¦ {n} m. akte ¦ {n} gadi aktā ¦ {n} aastat aktis
+Nommé dans l’acte : {name} ¦ Paminėtas akte: {name} ¦ Minēts aktā: {name} ¦ Aktis nimetatud: {name}
+Nommé dans l’acte ¦ Paminėtas akte ¦ Minēts aktā ¦ Aktis nimetatud
+Ajouter à une fiche ¦ Pridėti prie įrašo ¦ Pievienot ierakstam ¦ Lisa kirjesse
+Dans l’acte : ¦ Akte: ¦ Aktā: ¦ Aktis:
+Comme quoi ? ¦ Kaip ką? ¦ Kā ko? ¦ Millena?
+vide si le texte ne la donne pas ¦ tuščia, jei tekstas jos nenurodo ¦ tukšs, ja teksts to nenorāda ¦ tühi, kui tekst seda ei anna
+Relier à « {title} » du monde autour (sa date et son lieu) ¦ Susieti su „{title}“ iš pasaulio aplink (data ir vieta) ¦ Saistīt ar “{title}” no pasaules apkārt (datums un vieta) ¦ Seo „{title}“-ga ümbritsevast maailmast (kuupäev ja koht)
+Voilà ce qui sera écrit ¦ Štai kas bus įrašyta ¦ Lūk, kas tiks ierakstīts ¦ See kirjutatakse
+Toujours avec sa source (ce document, la ligne) et la phrase en citation. « ↶ Annuler » défait l’ajout. ¦ Visada su šaltiniu (šis dokumentas, eilutė) ir sakiniu kaip citata. „↶ Atšaukti“ atšaukia pridėjimą. ¦ Vienmēr ar avotu (šis dokuments, rinda) un teikumu kā citātu. “↶ Atsaukt” atceļ pievienošanu. ¦ Alati koos allikaga (see dokument, rida) ja lausega tsitaadina. „↶ Võta tagasi“ tühistab lisamise.
+Info ¦ Informacija ¦ Informācija ¦ Teave
+✓ Ajouté à la fiche. ¦ ✓ Pridėta prie įrašo. ¦ ✓ Pievienots ierakstam. ¦ ✓ Lisatud kirjesse.
+LE MONDE AUTOUR ¦ PASAULIS APLINK ¦ PASAULE APKĀRT ¦ ÜMBRITSEV MAAILM
+Créer dans « Le monde autour » ¦ Sukurti „Pasaulyje aplink“ ¦ Izveidot “Pasaulē apkārt” ¦ Loo „Ümbritsevasse maailma“
+Créer l’événement ¦ Sukurti įvykį ¦ Izveidot notikumu ¦ Loo sündmus
+Le texte ne donne pas l’année : écris-la toi-même si tu la connais (l’app ne l’invente pas). ¦ Tekste nenurodyti metai: įrašyk juos pats, jei žinai (programa jų neišgalvoja). ¦ Teksts nenorāda gadu: ieraksti to pats, ja zini (lietotne to neizdomā). ¦ Tekst ei anna aastat: kirjuta see ise, kui tead (rakendus ei mõtle seda välja).
+✓ Ajouté au monde autour. ¦ ✓ Pridėta į pasaulį aplink. ¦ ✓ Pievienots pasaulei apkārt. ¦ ✓ Lisatud ümbritsevasse maailma.
+Prête : la lecture approfondie est installée sur cet ordinateur. ¦ Paruošta: išsamus skaitymas įdiegtas šiame kompiuteryje. ¦ Gatavs: padziļinātā lasīšana ir instalēta šajā datorā. ¦ Valmis: põhjalik lugemine on selles arvutis paigaldatud.
+Pas prête : installe la lecture approfondie (Ollama) pour t’en servir. ¦ Neparuošta: įdiek išsamų skaitymą (Ollama), kad galėtum juo naudotis. ¦ Nav gatavs: instalē padziļināto lasīšanu (Ollama), lai to izmantotu. ¦ Pole valmis: paigalda põhjalik lugemine (Ollama), et seda kasutada.
+Rubriques montrées ¦ Rodomi skyriai ¦ Rādītās sadaļas ¦ Näidatud jaotised
+Repérer avec l’IA quand elle est prête ¦ Rasti su DI, kai jis paruoštas ¦ Atrast ar MI, kad tas ir gatavs ¦ Leia tehisaruga, kui see on valmis
+Nombres ¦ Skaičiai ¦ Skaitļi ¦ Arvud
+Registre militaire ¦ Karinis registras ¦ Militārais reģistrs ¦ Sõjaväeregister
+mot courant ¦ įprastas žodis ¦ parasts vārds ¦ tavaline sõna
+lettres mal lues ¦ neteisingai perskaitytos raidės ¦ nepareizi nolasīti burti ¦ valesti loetud tähed
+L’IA a répondu autre chose que le JSON demandé : rien n’est repris. ¦ DI atsakė ne prašomu JSON: niekas neperimama. ¦ MI atbildēja ar ko citu, nevis prasīto JSON: nekas netiek pārņemts. ¦ Tehisaru vastas muud kui küsitud JSON: midagi ei võeta üle.
+Texte trop long pour l’IA (20 000 signes au plus) : choisis un passage. ¦ Tekstas per ilgas DI (daugiausia 20 000 ženklų): pasirink ištrauką. ¦ Teksts ir par garu MI (ne vairāk kā 20 000 rakstzīmju): izvēlies fragmentu. ¦ Tekst on tehisaru jaoks liiga pikk (kuni 20 000 märki): vali lõik.
+Choisis la fiche où ajouter cet élément. ¦ Pasirink įrašą, prie kurio pridėti šį elementą. ¦ Izvēlies ierakstu, kam pievienot šo elementu. ¦ Vali kirje, kuhu see element lisada.
+Choisis comment ajouter cet élément. ¦ Pasirink, kaip pridėti šį elementą. ¦ Izvēlies, kā pievienot šo elementu. ¦ Vali, kuidas see element lisada.
+Rien à ajouter : l’élément est vide. ¦ Nėra ką pridėti: elementas tuščias. ¦ Nav ko pievienot: elements ir tukšs. ¦ Pole midagi lisada: element on tühi.
+réponse trop longue ¦ per ilgas atsakymas ¦ pārāk gara atbilde ¦ liiga pikk vastus
+réponse vide ¦ tuščias atsakymas ¦ tukša atbilde ¦ tühi vastus
+pas un objet JSON ¦ ne JSON objektas ¦ nav JSON objekts ¦ pole JSON-objekt
+clé inattendue ¦ netikėtas raktas ¦ negaidīta atslēga ¦ ootamatu võti
+valeur qui n’est pas un texte ¦ reikšmė, kuri nėra tekstas ¦ vērtība, kas nav teksts ¦ väärtus, mis pole tekst
+liste attendue ¦ tikėtasi sąrašo ¦ gaidīts saraksts ¦ oodati loendit
+liste trop longue ¦ per ilgas sąrašas ¦ pārāk garš saraksts ¦ liiga pikk loend
+personne qui n’est pas un objet ¦ asmuo, kuris nėra objektas ¦ persona, kas nav objekts ¦ isik, mis pole objekt
+champ de personne inattendu ¦ netikėtas asmens laukas ¦ negaidīts personas lauks ¦ ootamatu isikuväli

@@ -156,7 +156,7 @@
                     C().mergeAi(rf, j.found); const after = rf.people.length + rf.places.length + rf.dates.length + rf.people.reduce((n, p) => n + Object.keys(p.fields).length, 0);
                     st.ai = {state: 'done', count: Math.max(0, after - before)}; st.match = null; if (el.isConnected) { paint(); match(); } return;
                 }
-                st.ai = {state: 'error', error: j.state === 'cancelled' ? i18n('La lecture a été arrêtée.') : (j.error ? i18n(j.error) : i18n('La lecture approfondie n’a pas abouti.')), detail: j.detail || ''};
+                st.ai = {state: 'error', error: j.state === 'cancelled' ? i18n('La lecture a été arrêtée.') : (j.error ? i18n(j.error) : i18n('La lecture approfondie n’a pas abouti.')), detail: j.detail ? i18n(j.detail) : ''};
                 if (el.isConnected) paint();
             };
             poll();

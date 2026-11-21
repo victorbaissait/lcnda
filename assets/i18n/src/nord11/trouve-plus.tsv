@@ -1,0 +1,81 @@
+fr ¦ vi ¦ id
+# Zone « trouve-plus » : « Ce que l’app a trouvé dans l’acte », plus riche (heritage-transcribe-trouve.js, lib/transcription_actes.php : 🔍 Repérer avec l’IA, ＋ Ajouter à une fiche)
+Événements et contexte ¦ Sự kiện và bối cảnh ¦ Peristiwa dan konteks
+Naissance estimée ¦ Năm sinh ước tính ¦ Perkiraan kelahiran
+finit par une particule seule ¦ kết thúc bằng một tiểu từ đứng riêng ¦ berakhir dengan partikel tunggal
+c’est un métier ¦ đây là một nghề ¦ ini pekerjaan
+c’est un lieu ¦ đây là một nơi ¦ ini tempat
+pas un nom ¦ không phải tên ¦ bukan nama
+proposer (conseillé) ¦ đề xuất (nên dùng) ¦ usulkan (disarankan)
+vers {year} ¦ khoảng {year} ¦ sekitar {year}
+de {name} ¦ của {name} ¦ dari {name}
+(de la personne d’avant) ¦ (của người trước đó) ¦ (dari orang sebelumnya)
+Nom non lu ¦ Không đọc được tên ¦ Nama tidak terbaca
+Proposé par l’IA locale : vérifie dans le texte ¦ Do AI cục bộ đề xuất: hãy kiểm tra trong văn bản ¦ Diusulkan oleh AI lokal: periksa di teks
+IA ¦ AI ¦ AI
+Actions ¦ Thao tác ¦ Tindakan
+Ajouter à une fiche… ¦ Thêm vào hồ sơ… ¦ Tambahkan ke data…
+aussi écrit : ¦ cũng viết là: ¦ juga ditulis:
+Le texte ne dit rien d’autre sur cette personne. ¦ Văn bản không nói gì thêm về người này. ¦ Teks tidak mengatakan apa pun lagi tentang orang ini.
+Garder dans l’acte ¦ Giữ trong giấy tờ ¦ Simpan di akta
+Aucune personne repérée. ¦ Không tìm thấy người nào. ¦ Tidak ada orang ditemukan.
+Écartés : pas des noms ({n}) ¦ Đã gạt ra: không phải tên ({n}) ¦ Disisihkan: bukan nama ({n})
+Lieu de ta base ¦ Nơi trong cơ sở dữ liệu của bạn ¦ Tempat di basis datamu
+date de l’acte ¦ ngày của giấy tờ ¦ tanggal akta
+calendrier républicain ¦ lịch cộng hòa ¦ kalender republik
+d’après le champ Date ¦ theo ô Ngày ¦ menurut kolom Tanggal
+Créer dans « Le monde autour »… ¦ Tạo trong “Thế giới xung quanh”… ¦ Buat di “Dunia di sekitarnya”…
+mots : {x} ¦ từ: {x} ¦ kata: {x}
+Choisir cette sorte ¦ Chọn loại này ¦ Pilih jenis ini
+choisie ¦ đã chọn ¦ dipilih
+Proposée seulement : la sorte d’acte ne change que si tu la choisis. ¦ Chỉ là đề xuất: loại giấy tờ chỉ đổi khi bạn chọn. ¦ Hanya usulan: jenis akta hanya berubah jika kamu memilihnya.
+Pas d’indice dans le texte. ¦ Không có manh mối trong văn bản. ¦ Tidak ada petunjuk di teks.
+L’IA lit le texte… {n} s ¦ AI đang đọc văn bản… {n} giây ¦ AI sedang membaca teks… {n} dtk
+Propositions de l’IA ajoutées ({n}), marquées 🔍 IA : vérifie-les dans le texte. ¦ Đã thêm đề xuất của AI ({n}), đánh dấu 🔍 AI: hãy kiểm tra trong văn bản. ¦ Usulan AI ditambahkan ({n}), ditandai 🔍 AI: periksa di teks.
+Repérer avec l’IA ¦ Tìm bằng AI ¦ Cari dengan AI
+Seul le texte part au modèle, sur cet ordinateur. ¦ Chỉ văn bản được gửi cho mô hình, trên máy tính này. ¦ Hanya teks yang dikirim ke model, di komputer ini.
+Repéré dans le texte ¦ Tìm thấy trong văn bản ¦ Ditemukan di teks
+Réglages du repérage ¦ Cài đặt tìm kiếm ¦ Pengaturan pencarian
+Tout est proposé : garde, écarte ou ajoute à une fiche. Rien n’est écrit sans ton clic. ¦ Mọi thứ chỉ là đề xuất: giữ, gạt ra hoặc thêm vào hồ sơ. Không gì được ghi nếu bạn không bấm. ¦ Semuanya hanya usulan: simpan, sisihkan, atau tambahkan ke data. Tidak ada yang ditulis tanpa klikmu.
+Écarter ¦ Gạt ra ¦ Sisihkan
+Élément écarté. ¦ Đã gạt mục này ra. ¦ Item disisihkan.
+Naissance estimée vers {year} (âge dans l’acte) ¦ Năm sinh ước tính khoảng {year} (tuổi trong giấy tờ) ¦ Perkiraan kelahiran sekitar {year} (umur di akta)
+{n} ans dans l’acte ¦ {n} tuổi trong giấy tờ ¦ {n} tahun di akta
+Nommé dans l’acte : {name} ¦ Được nêu tên trong giấy tờ: {name} ¦ Disebut di akta: {name}
+Nommé dans l’acte ¦ Được nêu tên trong giấy tờ ¦ Disebut di akta
+Ajouter à une fiche ¦ Thêm vào hồ sơ ¦ Tambahkan ke data
+Dans l’acte : ¦ Trong giấy tờ: ¦ Di akta:
+Comme quoi ? ¦ Dưới dạng gì? ¦ Sebagai apa?
+vide si le texte ne la donne pas ¦ để trống nếu văn bản không ghi ¦ kosong jika teks tidak menyebutnya
+Relier à « {title} » du monde autour (sa date et son lieu) ¦ Liên kết với “{title}” trong thế giới xung quanh (ngày và nơi) ¦ Tautkan ke “{title}” dari dunia di sekitarnya (tanggal dan tempat)
+Voilà ce qui sera écrit ¦ Đây là những gì sẽ được ghi ¦ Inilah yang akan ditulis
+Toujours avec sa source (ce document, la ligne) et la phrase en citation. « ↶ Annuler » défait l’ajout. ¦ Luôn kèm nguồn (tài liệu này, dòng) và câu văn làm trích dẫn. “↶ Hoàn tác” bỏ phần đã thêm. ¦ Selalu dengan sumbernya (dokumen ini, barisnya) dan kalimatnya sebagai kutipan. “↶ Urungkan” membatalkan penambahan.
+Info ¦ Thông tin ¦ Info
+✓ Ajouté à la fiche. ¦ ✓ Đã thêm vào hồ sơ. ¦ ✓ Ditambahkan ke data.
+LE MONDE AUTOUR ¦ THẾ GIỚI XUNG QUANH ¦ DUNIA DI SEKITARNYA
+Créer dans « Le monde autour » ¦ Tạo trong “Thế giới xung quanh” ¦ Buat di “Dunia di sekitarnya”
+Créer l’événement ¦ Tạo sự kiện ¦ Buat peristiwa
+Le texte ne donne pas l’année : écris-la toi-même si tu la connais (l’app ne l’invente pas). ¦ Văn bản không ghi năm: hãy tự gõ nếu bạn biết (ứng dụng không bịa ra). ¦ Teks tidak menyebut tahunnya: tulis sendiri jika kamu tahu (aplikasi tidak mengarangnya).
+✓ Ajouté au monde autour. ¦ ✓ Đã thêm vào thế giới xung quanh. ¦ ✓ Ditambahkan ke dunia di sekitarnya.
+Prête : la lecture approfondie est installée sur cet ordinateur. ¦ Sẵn sàng: đọc chuyên sâu đã được cài trên máy tính này. ¦ Siap: pembacaan mendalam sudah terpasang di komputer ini.
+Pas prête : installe la lecture approfondie (Ollama) pour t’en servir. ¦ Chưa sẵn sàng: hãy cài đọc chuyên sâu (Ollama) để dùng. ¦ Belum siap: pasang pembacaan mendalam (Ollama) untuk memakainya.
+Rubriques montrées ¦ Các mục hiển thị ¦ Bagian yang ditampilkan
+Repérer avec l’IA quand elle est prête ¦ Tìm bằng AI khi đã sẵn sàng ¦ Cari dengan AI saat sudah siap
+Nombres ¦ Số ¦ Angka
+Registre militaire ¦ Sổ quân bạ ¦ Register militer
+mot courant ¦ từ thông thường ¦ kata umum
+lettres mal lues ¦ chữ đọc sai ¦ huruf salah baca
+L’IA a répondu autre chose que le JSON demandé : rien n’est repris. ¦ AI trả lời khác với JSON được yêu cầu: không lấy gì cả. ¦ AI menjawab sesuatu selain JSON yang diminta: tidak ada yang dipakai.
+Texte trop long pour l’IA (20 000 signes au plus) : choisis un passage. ¦ Văn bản quá dài cho AI (tối đa 20.000 ký tự): hãy chọn một đoạn. ¦ Teks terlalu panjang untuk AI (paling banyak 20.000 karakter): pilih satu bagian.
+Choisis la fiche où ajouter cet élément. ¦ Chọn hồ sơ để thêm mục này. ¦ Pilih data tempat item ini ditambahkan.
+Choisis comment ajouter cet élément. ¦ Chọn cách thêm mục này. ¦ Pilih cara menambahkan item ini.
+Rien à ajouter : l’élément est vide. ¦ Không có gì để thêm: mục này trống. ¦ Tidak ada yang ditambahkan: item kosong.
+réponse trop longue ¦ câu trả lời quá dài ¦ jawaban terlalu panjang
+réponse vide ¦ câu trả lời trống ¦ jawaban kosong
+pas un objet JSON ¦ không phải đối tượng JSON ¦ bukan objek JSON
+clé inattendue ¦ khóa không mong đợi ¦ kunci tak terduga
+valeur qui n’est pas un texte ¦ giá trị không phải văn bản ¦ nilai yang bukan teks
+liste attendue ¦ cần một danh sách ¦ daftar diharapkan
+liste trop longue ¦ danh sách quá dài ¦ daftar terlalu panjang
+personne qui n’est pas un objet ¦ người không phải đối tượng ¦ orang yang bukan objek
+champ de personne inattendu ¦ trường người không mong đợi ¦ kolom orang tak terduga
