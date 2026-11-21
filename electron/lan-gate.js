@@ -318,6 +318,21 @@ class LanGate extends EventEmitter {
         this.emit('change');
     }
 
+    /**
+     * Mise en veille de l'ordinateur (main.js, powerMonitor « suspend ») : la porte se coupe si elle est ouverte.
+     * @returns {Promise<boolean>} vrai si elle était ouverte (à rouvrir peut-être au réveil), faux si elle était déjà coupée
+     */
+    async sleep() {
+        if (!this.isOn) return false;
+        await this.close('veille', { keepWasOpen: true });
+        return true;
+    }
+    /** Réveil (powerMonitor « resume ») : la rouvrir ? Seulement si ELLE ÉTAIT OUVERTE avant la veille, si le réglage le dit et si le
+     *  réseau n'a pas changé. Une porte coupée avant la veille reste coupée, quoi qu'il arrive. */
+    shouldReopenAfterWake(wasOpenBeforeSleep) {
+        return wasOpenBeforeSleep === true && !this.isOn && this.state.settings.wake === 'rouvre' && !this.networkChanged();
+    }
+
     _netKey(a) { return a ? `${a.ip}/${a.prefix}` : ''; }
     /** Le réseau a-t-il changé depuis la dernière ouverture ? (une autre adresse, un autre masque) */
     networkChanged() {

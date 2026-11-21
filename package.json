@@ -9,6 +9,7 @@
     "start": "electron .",
     "start:local": "electron . --use-project-data",
     "test:php": "node electron/test-php-server.js",
+    "test:lancement": "node tests/test-lancement-electron.js",
     "fetch:php": "node electron/fetch-php.js",
     "fetch:geo": "node electron/fetch-geo.js",
     "test:migrations": "node tests/test-migrations.js",
@@ -72,6 +73,7 @@
       "electron/desk-widgets.js",
       "electron/browsers.js",
       "electron/updates.js",
+      "electron/lan-gate.js",
       "electron/loading.html"
     ],
     "extraResources": [
@@ -92,7 +94,7 @@
           "config/**/*",
           "data/schema.sql",
           "data/reference/geo-*.sqlite.gz", "data/reference/frontieres/**",
-          "data/reference/catalogue.json", "scripts/htr_recognize.py", "scripts/htr_install.php",
+          "data/reference/catalogue.json", "scripts/htr_recognize.py", "scripts/htr_install.php", "scripts/htr_job.php", "scripts/tx_deep_job.php",
           "data-meteo/meteo-*.sqlite",
           "!assets/i18n/src/**",
           "!assets/i18n/faq/src/**",

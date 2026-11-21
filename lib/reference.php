@@ -87,6 +87,8 @@ function reference_database_path(string $name = 'geo-fr'): ?string
     if (!is_dir($dir) && !@mkdir($dir, 0775, true) && !is_dir($dir)) { return null; }
     $target = $dir . '/reference-' . $name . '-' . substr(sha1((string) filesize($archive) . ':' . filemtime($archive)), 0, 12) . '.sqlite';
     if (is_file($target)) { return $target; }
+    // décompression interrompue (l'app fermée pendant ce temps) : le morceau laissé est effacé, il peut peser des centaines de Mo
+    foreach (glob($dir . '/reference-' . $name . '-*.part') ?: [] as $old) { if ((int) @filemtime($old) < time() - 3600) { @unlink($old); } }
     $partial = $target . '.' . bin2hex(random_bytes(4)) . '.part';
     if (!reference_gunzip($archive, $partial)) { @unlink($partial); return null; } // disque plein, archive abîmée : rien de gardé
     if (!@rename($partial, $target)) { @unlink($partial); }
@@ -202,6 +204,10 @@ function world_reference(): ?PDO
     static $pdo = false;
     if ($pdo !== false) { return $pdo; }
     $pdo = null;
+    // Préparation en cours (prepare_world_reference, lancée par l'app de bureau dans un PHP à part une fois la fenêtre affichée :
+    // décompression, index, ~20 s ; electron/php-server.js, prepareWorldInBackground) : on répond
+    // tout de suite sans les villes du monde, au lieu de faire attendre la recherche ou de tout décompresser une seconde fois.
+    if (empty($GLOBALS['lcnda_world_preparing']) && world_prepare_busy()) { return null; }
     // Répertoire mondial complet (npm run fetch:geo) ; sinon, secours fabriqué depuis les fichiers des pays livrés
     $path = reference_database_path('geo-world');
     if ($path) { foreach (glob(SHARED_DATA_DIR . '/cache/reference-world-pays-*.sqlite') ?: [] as $old) { @unlink($old); } } // le secours ne sert plus
@@ -307,7 +313,26 @@ function world_reference_from_countries(): ?string
 function prepare_world_reference(): void
 {
     if (getenv('GENEALOGY_SKIP_REFERENCE') === '1') { return; }
-    world_reference();
+    $dir = SHARED_DATA_DIR . '/cache';
+    if (!is_dir($dir) && !@mkdir($dir, 0775, true) && !is_dir($dir)) { return; }
+    $lock = @fopen($dir . '/world-prepare.lock', 'c');
+    if ($lock && !flock($lock, LOCK_EX | LOCK_NB)) { fclose($lock); return; } // déjà en préparation (autre PHP)
+    $GLOBALS['lcnda_world_preparing'] = true;
+    try { world_reference(); }
+    finally { $GLOBALS['lcnda_world_preparing'] = false; if ($lock) { flock($lock, LOCK_UN); fclose($lock); } }
+}
+
+/** Une requête prépare-t-elle en ce moment les villes du monde (verrou de prepare_world_reference) ? */
+function world_prepare_busy(): bool
+{
+    $file = SHARED_DATA_DIR . '/cache/world-prepare.lock';
+    if (!is_file($file)) { return false; }
+    $lock = @fopen($file, 'r');
+    if (!$lock) { return false; }
+    $busy = !flock($lock, LOCK_SH | LOCK_NB);
+    if (!$busy) { flock($lock, LOCK_UN); }
+    fclose($lock);
+    return $busy;
 }
 
 function world_search_key(string $value): string

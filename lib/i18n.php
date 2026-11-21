@@ -167,6 +167,10 @@ function i18n_page_script(): string
     // langue devinée au premier lancement : l'app la garde (localStorage) comme si on l'avait choisie
     $guess = !isset($_COOKIE['lcnda_lang']) && $lang !== 'fr' ? '<script>window.LCNDA_I18N_FIRST=' . json_encode($lang) . ';</script>' : '';
     if ($lang === 'fr') { return ''; }
+    // App de bureau (electron/php-server.js, cacheAssets) : le dictionnaire (3 à 5 Mo) n'est plus recopié dans chaque page ;
+    // assets/js/app-i18n.js le lit lui-même (assets/i18n/<code>.json?v=…, avant le premier dessin), et la fenêtre le garde d'un
+    // lancement à l'autre. Mesuré : 40 à 80 ms de PHP et 3,6 à 4,8 Mo de page en moins à chaque ouverture.
+    if (getenv('GENEALOGY_ASSET_CACHE') === '1') { return $guess; }
     $file = dirname(__DIR__) . '/assets/i18n/' . $lang . '.json';
     if (!is_file($file)) { return ''; }
     $data = json_decode((string) file_get_contents($file), true);
