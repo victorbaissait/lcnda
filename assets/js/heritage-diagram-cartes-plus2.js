@@ -888,3 +888,172 @@
         fromApp: linkApp, describe: spec => i18n('Parrains et témoins : {n}.', {n: pl(rows(spec).length, 'lien')})});
     ext.diagramCartesPlus2.linkmap = linkmap; ext.diagramCartesPlus2.openLinks = openAll;
 })();
+
+/* ═════════ ⚰️ Crises et épidémies (maquette, partie 3) ═════════
+ * Les communes et les années où les décès de la famille montent d'un coup par rapport à l'habitude de cette commune : même règle
+ * par défaut que la liste 🌡️ « Années de forte mortalité de la famille » (au moins 3 décès, 2,5 fois la moyenne des 5 ans avant et
+ * après), mais commune par commune, les petits villages regroupés avec leurs voisines. À côté de chaque année repérée, ce qui se
+ * passait à la même époque dans la région (🌍 Le monde autour) : un repère à vérifier, jamais une cause affirmée.
+ * À l'export : des nombres et des lieux, jamais les noms des morts (le détail reste à l'écran). Données : op crises. */
+(() => {
+    'use strict';
+    const P2 = window.LCNDA_EXT?.diagramCartesPlus2; if (!P2) return;
+    const {T, esc, num, clamp, r1, r2, fold, rows, str, C, pl, tip, opt, optN, median, bases, frame, locate, missing, emptyMsg, title, periodWord, keepDetail, placeNames, PLACE_LABELS,
+        get, placesOf, keepUnplaced, pane, bindGo, sel, val, startId, mapOpts, COMMON, REC, i18n, A, ext, GC} = P2.H;
+    const INT = [[2.5, 3, '#f2b766', '×2,5 à 3'], [3, 5, '#e0782f', '×3 à 5'], [5, Infinity, '#a8420f', 'plus de ×5']];
+    const intCol = x => (INT.find(([a, b]) => x >= a && x < b) || INT[0])[2];
+    const minN = o => { const v = opt(o, 'minDeaths', ''); return v === 'custom' ? optN(o, 'minN', 3, 1, 50) : Number(v || 3); };
+    const ratio = o => { const v = opt(o, 'ratio', ''); return v === 'custom' ? optN(o, 'ratioN', 2.5, 1.2, 20) : Number(v || 2.5); };
+    const kidsAge = o => optN(o, 'kidsAge', 10, 1, 18);
+    /** la crise couvre-t-elle la commune ? (même lecture que crisis_in_scope : France, n° de département, région ou département écrits) */
+    function covers(c, r) {
+        const sc = String(c.scope || '').trim(), f = fold(sc), country = fold(r.country || '');
+        if (f === 'monde' || f === 'europe') return true;
+        if (f === 'france' || f === '') return !c.own ? ['france', ''].includes(country) : fold(c.place || '') === fold(r.label.replace(/\s*\(.*$/, ''));
+        return sc.split(',').some(part => { const p = part.trim(); if (!p) return false; if (/^(\d{2}|2[AB]|97\d)$/i.test(p)) return String(r.zone || '').toUpperCase() === p.toUpperCase();
+            const k = fold(p); return k && [r.county, r.state, r.label].some(t => fold(t || '').includes(k)); });
+    }
+    const refsFor = (spec, r, y) => { const how = opt(spec.o || {}, 'refs', ''); if (how === 'none') return []; return (spec.crises || []).filter(c => y >= c.from && y <= c.to && (how === 'all' || covers(c, r))).slice(0, 3); };
+    /** les unités : la commune, les petites regroupées avec leurs voisines, ou le département */
+    function units(spec, pts) {
+        const o = spec.o || {}, scale = opt(o, 'scale', ''), byPlace = new Map();
+        pts.forEach(p => { const k = scale === 'dept' ? str(p.r.zone) || p.place : p.place; let u = byPlace.get(k); if (!u) byPlace.set(k, u = {key: k, label: scale === 'dept' ? (p.r.county || k) : p.place, pts: [], insee: str(p.r.insee)}); u.pts.push(p); });
+        if (scale !== '') return [...byPlace.values()];
+        // les petits villages (moins de N décès sur toute la période) : regroupés avec leurs voisines (union-find par les communes voisines)
+        const small = optN(o, 'smallN', 10, 2, 100), list = [...byPlace.values()], byInsee = new Map(list.filter(u => u.insee).map(u => [u.insee, u]));
+        const parent = new Map(list.map(u => [u.key, u.key])), find = k => { while (parent.get(k) !== k) k = parent.get(k); return k; };
+        const nb = spec.neighbors || {};
+        list.forEach(u => { if (u.pts.length >= small || !u.insee) return; (nb[u.insee] || []).forEach(v => { const w = byInsee.get(v); if (w && w.pts.length < small) parent.set(find(u.key), find(w.key)); }); });
+        const groups = new Map(); list.forEach(u => { const g = find(u.key); groups.set(g, [...(groups.get(g) || []), u]); });
+        return [...groups.values()].map(us => { us.sort((a, b) => b.pts.length - a.pts.length); const head = us[0];
+            return {key: us.map(u => u.key).join('+'), label: us.length > 1 ? i18n('{name} + {n} voisines', {name: head.label, n: String(us.length - 1)}) : head.label, pts: us.flatMap(u => u.pts), insee: head.insee, members: us.length}; });
+    }
+    /** les années « à voir » d'une unité : au moins N décès et R fois l'habitude (moyenne ou médiane de la fenêtre, sans l'année elle-même) */
+    function spikes(spec, u, filter) {
+        const o = spec.o || {}, w = opt(o, 'window', ''), med = opt(o, 'stat', '') === 'median', by = new Map();
+        u.pts.filter(filter).forEach(p => { if (p.y !== null) by.set(p.y, [...(by.get(p.y) || []), p]); });
+        const out = [];
+        by.forEach((list, y) => { const n = list.length; if (n < minN(o)) return;
+            const ys = w === 'before' ? Array.from({length: 10}, (_, i) => y - 10 + i) : Array.from({length: w === '10' ? 20 : 10}, (_, i) => { const k = w === '10' ? 10 : 5; return i < k ? y - k + i : y + i - k + 1; });
+            const counts = ys.map(k => (by.get(k) || []).length), usual = med ? median(counts) : counts.reduce((a, b) => a + b, 0) / counts.length, x = n / Math.max(.5, usual);
+            if (x >= ratio(o)) out.push({u, y, n, usual, x, list}); });
+        return out;
+    }
+    function all(spec, pts) {
+        const o = spec.o || {}, kids = opt(o, 'kids', ''), ka = kidsAge(o), isKid = p => Number.isFinite(Number(p.r.age)) && String(p.r.age) !== '' && Number(p.r.age) < ka;
+        const U = units(spec, pts);
+        return U.flatMap(u => kids === 'apart' ? [...spikes(spec, u, p => !isKid(p)), ...spikes(spec, u, isKid).map(s => ({...s, kids: true}))] : spikes(spec, u, p => kids !== 'out' || !isKid(p))).sort((a, b) => a.y - b.y || b.x - a.x);
+    }
+    const stepOf = spec => { const s = opt(spec.o || {}, 'step', ''); return s === '5' ? 5 : s === '10' ? 10 : 1; };
+    const time = {
+        range: spec => { const ys = rows(spec).map(r => P2.H.yearOf(r.date)).filter(y => y !== null), s = stepOf(spec); return ys.length ? [Math.floor(Math.min(...ys) / s) * s, Math.floor(Math.max(...ys) / s) * s] : [NaN, NaN]; },
+        at: (spec, y) => { spec.o = {...(spec.o || {}), __year: y, time: {...(spec.o?.time || {}), step: stepOf(spec)}}; return spec; },
+    };
+    function crisismap(spec, W, fs) {
+        const o = spec.o || {}, B0 = bases(spec, W); if (B0.wait) return B0.wait;
+        const loc = locate(spec, B0.list), S0 = all(spec, loc.pts), st = stepOf(spec), y = Number.isFinite(o.__year) ? Math.floor(o.__year / st) * st : null;
+        const S = y === null ? S0 : S0.filter(s => s.y >= y && s.y < y + st);
+        const F = frame(spec, W, fs, loc.pts.map(p => [p.lon, p.lat])); if (F.wait) return F.wait;
+        const {pr, w, h} = F, id = 'cqc' + Math.random().toString(36).slice(2, 8), maxN = Math.max(1, ...S.map(s => s.n)), R0 = clamp(w / 40, 5, 22);
+        let svg = `<g data-c2-total="${S.length}"></g>` + F.open + `<g data-cq-d="${id}">`;
+        // sans curseur : le plus fort de chaque unité ; avec le curseur : les années de cette image
+        const shown = y === null ? [...new Map([...S].sort((a, b) => a.x - b.x).map(s => [s.u.key + (s.kids ? '|k' : ''), s])).values()] : S;
+        shown.sort((a, b) => b.n - a.n).forEach(s => {
+            const lon = median(s.u.pts.map(p => p.lon)), lat = median(s.u.pts.map(p => p.lat)), [cx, cy] = pr.p(lon, lat); if (!Number.isFinite(cx)) return;
+            const rr = Math.max(4, R0 * Math.sqrt(s.n / maxN)), i = S0.indexOf(s), lab = `${s.u.label} · ${s.y} · ${pl(s.n, 'décès')} (${i18n('d’habitude {u} par an', {u: new Intl.NumberFormat('fr-FR', {maximumFractionDigits: 1}).format(s.usual)})}, ×${new Intl.NumberFormat('fr-FR', {maximumFractionDigits: 1}).format(s.x)})${s.kids ? ' · ' + i18n('enfants') : ''}`;
+            svg += `<g class="cq-pt" data-cq-i="${i}" tabindex="0" role="button" aria-label="${esc(lab)}">${tip(lab + '\n' + i18n('Clic : les personnes, et ce qui se passait à la même époque'))}<circle cx="${r1(cx)}" cy="${r1(cy)}" r="${r2(rr)}" fill="${intCol(s.x)}" fill-opacity=".85" stroke="#111" stroke-width="1"${s.kids ? ' stroke-dasharray="3 2"' : ''}/>${o.yearLabels !== false ? T(cx + rr + 3, cy, `${s.u.label} ${s.y}`, {size: clamp(fs * .7, 7, 13), weight: 700, fill: '#1d1d1f', halo: 'rgba(255,255,255,.85)'}) : ''}</g>`;
+        });
+        svg += '</g>';
+        if (y !== null) svg += title(periodWord(y, st), fs);
+        svg += F.close;
+        let H = h;
+        const total = loc.pts.length;
+        if (total && total < optN(o, 'minTotal', 20, 1, 1000)) svg += emptyMsg(w, h, fs, 'Pas assez de décès placés pour repérer des crises.');
+        // le tableau des années à voir, puis la mise en garde (toujours) : des nombres, jamais les noms des morts
+        if (S.length && o.table !== false) {
+            const cw = [.22, .08, .08, .17, .45].map(x => x * W), fmt1 = v => new Intl.NumberFormat('fr-FR', {maximumFractionDigits: 1}).format(v);
+            const line = (cells, yy, bold) => { let x = 0; return cells.map((c, k) => { const t = T(x, yy, c, {size: fs * .76, weight: bold ? 800 : 400, fill: bold ? '#555' : '#222'}); x += cw[k]; return t; }).join(''); };
+            H += fs * .8; svg += T(0, H + fs * .5, i18n('Les années à voir · {n}', {n: String(S.length)}), {size: fs, weight: 800}); H += fs * 1.4;
+            svg += line([i18n('Commune'), i18n('Année'), i18n('Décès'), i18n('Habitude'), '🌍 ' + i18n('À la même époque (repère)')], H + fs * .5, true); H += fs * 1.3;
+            S.slice(0, clamp(Math.round(num(o.tableMax) || 8), 1, 40)).forEach(s => { const r0 = s.list[0]?.r || {}, refs = refsFor(spec, {...r0, label: s.u.label}, s.y);
+                svg += line([s.u.label + (s.kids ? ` (${i18n('enfants')})` : ''), String(s.y), String(s.n), `${fmt1(s.usual)} · ×${fmt1(s.x)}`, refs.length ? refs.map(c => c.title).join(' ; ') : i18n('rien de connu dans cette région à cette date')], H + fs * .5, false); H += fs * 1.15; });
+            if (S.length > (num(o.tableMax) || 8)) { svg += T(0, H + fs * .5, i18n('+ {n} autres', {n: String(S.length - (num(o.tableMax) || 8))}), {size: fs * .75, fill: '#666'}); H += fs * 1.15; }
+        }
+        if (total) { const care = i18n('À lire avec prudence : l’app compare des nombres de décès, elle ne sait pas pourquoi ils montent. Le repère est ce qui se passait à la même époque : une piste à vérifier dans les actes (cause notée, âge, mois). Sur de petits nombres, le hasard suffit parfois.');
+            const words = care.split(' '), lines = []; let cur = ''; const maxC = Math.max(30, Math.floor(W / (fs * .42))); words.forEach(wd => { if ((cur + ' ' + wd).length > maxC) { lines.push(cur); cur = wd; } else cur = cur ? cur + ' ' + wd : wd; }); if (cur) lines.push(cur);
+            H += fs * .6; lines.forEach(l => { svg += T(0, H + fs * .5, l, {size: fs * .74, fill: '#7a5d00'}); H += fs * 1.05; }); }
+        const out = Number(spec.o?.__noPlace || 0) + Number(spec.o?.__noYear || 0);
+        if (out && o.showMissing !== false) { svg += T(0, H + fs * .7, i18n('Décès sans année ou sans lieu, comptés à part : {n}', {n: String(out)}), {size: fs * .74, fill: '#a5552a'}); H += fs * 1.3; }
+        if (loc.unknown.length && o.showMissing !== false) { svg += missing(loc.unknown, H, fs, spec); H += fs * 1.5; }
+        if (!total) svg += emptyMsg(w, h, fs, 'Prends les décès de ta généalogie (« Depuis l’app »).');
+        keepDetail(id, i => detail(spec, S0[i]));
+        return {h: H, svg, legend: INT.map(([, , c, l]) => ({label: l, color: c})), geo: F.geo, desc: i18n('Les années de crise : {n}, sur {d}.', {n: pl(S.length, 'année à voir', 'années à voir'), d: pl(total, 'décès')})};
+    }
+    function detail(spec, s) {
+        if (!s || !ext.openDialog) return;
+        const refs = refsFor(spec, {...(s.list[0]?.r || {}), label: s.u.label}, s.y), fmt1 = v => new Intl.NumberFormat('fr-FR', {maximumFractionDigits: 1}).format(v);
+        const body = `<div class="cq-detail"><p><b>${esc(s.u.label)} · ${s.y} · ${esc(pl(s.n, 'décès'))}</b> (${esc(i18n('d’habitude {u} par an', {u: fmt1(s.usual)}))})</p>
+            <ul>${s.list.slice(0, 40).map(p => `<li>✝ ${Number(p.pid) ? `<button type="button" class="link-button" data-cq-person="${Number(p.pid)}">${esc(p.r.name || '')}</button>` : esc(p.r.name || '')} — ${esc(p.r.dtext || p.r.date || '')}${p.r.age !== '' && p.r.age != null ? ` · ${esc(pl(Number(p.r.age), 'an', 'ans'))}` : ''}${p.r.cause ? ` · ${esc(i18n('cause notée : « {c} »', {c: p.r.cause}))}` : ''}</li>`).join('')}</ul>
+            <p class="cq-careful">🌍 ${refs.length ? esc(i18n('À la même époque : {what} — un repère, pas une explication.', {what: refs.map(c => `${c.title} (${c.from === c.to ? c.from : c.from + '–' + c.to})`).join(' ; ')})) : esc(i18n('Rien de connu dans cette région à cette date.'))}</p></div>`;
+        ext.openDialog({eyebrow: i18n('LES ANNÉES DE CRISE'), title: `${s.u.label} · ${s.y}`, body, submitLabel: i18n('Fermer'), onSubmit: () => true});
+    }
+
+    /* ─── Depuis l'app ─── */
+    function fill(s, r, extra = {}) {
+        const names = placesOf(s, r.places || {});
+        s.rows = (r.deaths || []).filter(d => names.has(d[1])).map(([pid, plc, y, dtext, age, cause]) => { const inf = r.info?.[plc] || {};
+            return {label: names.get(plc), date: String(y), dtext, age: age === null ? '' : age, cause, name: r.people?.[pid] || '', pid, zone: (r.places[plc] || [])[1] || '', insee: inf.insee || '', county: inf.county || '', state: inf.state || '', country: inf.country || ''}; });
+        s.neighbors = r.neighbors || {}; s.crises = (r.crises || []).slice(0, 2000); keepUnplaced(s, r.unplaced);
+        s.o = {...(s.o || {}), __noPlace: r.no_place || 0, __noYear: r.no_year || 0, title: i18n('Les années de crise de la famille'), ...extra};
+        return s;
+    }
+    const crisisApp = {
+        html: () => pane('⚰️ Les décès de ta généalogie', 'Les décès placés et datés (le décès, sinon l’inhumation ; chaque personne une seule fois), et les crises du 🌍 Monde autour avec tes événements locaux. Jamais un vivant ni une fiche confidentielle.',
+            sel('pop', 'Qui', [['all', 'Toute ma base'], ['anc', 'Mes ancêtres et leurs familles'], ['pat', 'Ma branche paternelle (côté père)'], ['mat', 'Ma branche maternelle (côté mère)'], ['name', 'Un nom de famille']])
+            + `<label data-cq-onlyname>${esc(i18n('Nom de famille'))}<input data-cq="name" maxlength="80"></label>`
+            + sel('kids', 'Enfants', [['', 'Comptés avec tout le monde'], ['apart', 'À part (moins de 10 ans)'], ['out', 'Pas comptés']])
+            + sel('period', 'Période', [['', 'Toutes les époques'], ['1700', 'Le XVIIIe siècle'], ['1800', 'Le XIXe siècle']])),
+        bind: (box, io) => {
+            const sync = () => { box.querySelector('[data-cq-onlyname]').hidden = val(box, 'pop') !== 'name'; }; sync(); box.addEventListener('change', sync);
+            bindGo(box, async () => {
+                const r = await get({what: 'crises', pop: val(box, 'pop'), name: val(box, 'name'), root: startId()}); if (r.error) throw new Error(r.error);
+                const per = val(box, 'period'); if (per) r.deaths = (r.deaths || []).filter(d => d[2] >= Number(per) - 10 && d[2] <= Number(per) + 109); // la fenêtre de l'habitude déborde un peu
+                const s = fill(io.spec(), r, {kids: val(box, 'kids'), time: {...(io.spec().o?.time || {}), show: true, step: 1}});
+                if (!s.rows.length) throw new Error(i18n('Aucun décès daté avec un lieu pour ce choix.'));
+                io.apply(s); return pl(s.rows.length, 'décès');
+            });
+        },
+    };
+    async function openCrises() {
+        try { const r = await get({what: 'crises', root: startId()}); const s = fill({kind: 'crisismap', o: {map: 'fr', time: {show: true, step: 1}}}, r);
+            if (!s.rows.length) throw new Error(i18n('Aucun décès daté avec un lieu pour ce choix.')); ext.openDiagramEditor?.(null, {spec: s, name: s.o.title}); } catch (e) { A()?.toast?.(e.message || String(e), 'error'); }
+    }
+    // Listes → Histoire → 🌡️ Épidémies, guerres, hivers terribles → « 🗺 Sur la carte » ; 📉 Naissances, décès et crises → Relier
+    if (typeof document !== 'undefined') document.addEventListener('click', e => { if (e.target.closest?.('[data-cq-crisis-open]')) { e.preventDefault(); openCrises(); } });
+    if (P2.H.DR.KINDS.crises && !P2.H.DR.KINDS.crises.relate) P2.H.DR.KINDS.crises.relate = () => [{label: '⚰️ ' + i18n('Les années de crise sur la carte'), run: openCrises}];
+
+    const SP = {Tulle: [45.2694, 1.768], Naves: [45.3118, 1.7521], Seilhac: [45.3667, 1.7167], Meymac: [45.5361, 2.1464], Ussel: [45.548, 2.31], Gimel: [45.297, 1.844]};
+    const sp = n => `${n} ${SP[n][0]}, ${SP[n][1]}`;
+    const sample = () => { const out = []; let k = 0; const add = (p, y, n, age = 40) => { for (let i = 0; i < n; i++) out.push({label: sp(p), date: String(y), age: age + i * 3, name: `VIALLE ${k++}`, country: 'France', zone: '19'}); };
+        for (let y = 1820; y <= 1845; y++) { add('Naves', y, y % 3 === 0 ? 1 : 0); add('Tulle', y, 1); add('Seilhac', y, y % 4 === 0 ? 1 : 0); }
+        add('Naves', 1832, 6); add('Tulle', 1832, 3); for (let y = 1700; y <= 1718; y++) add('Meymac', y, y % 2); add('Meymac', 1709, 5); add('Ussel', 1854, 3, 2); add('Gimel', 1870, 1);
+        return out; };
+    const SAMPLE_CRISES = [{from: 1832, to: 1832, cat: 'épidémie', title: 'Choléra de 1832', scope: 'France'}, {from: 1709, to: 1709, cat: 'hiver', title: 'Grand hiver de 1709', scope: 'France'}];
+    P2.add('crisismap', {icon: '⚰️', label: 'Crises et épidémies (les années où les décès montent)', render: GC.remember(crisismap), legend: 'bottom', time,
+        grids: [{key: 'rows', label: 'Les décès (un par ligne)', cols: [C('label', 'Lieu (« Tulle », « Tulle 45.27, 1.77 »)'), C('date', 'Année', 'text', {ph: '1832'}), C('age', 'Âge', 'number'), C('cause', 'Cause notée'), C('name', 'Personne')]}],
+        options: [REC,
+            C('minDeaths', 'Minimum de décès dans l’année', 'select', {choices: [['', '3'], ['2', '2'], ['5', '5'], ['custom', 'À la main']]}), C('minN', 'Décès au moins', 'number', {min: 1, max: 50, def: 3, when: s => s.o?.minDeaths === 'custom'}),
+            C('ratio', 'Seuil', 'select', {choices: [['', '2,5 fois l’habitude'], ['2', '2 fois'], ['3', '3 fois'], ['4', '4 fois'], ['custom', 'À la main']]}), C('ratioN', 'Fois l’habitude', 'number', {min: 1.2, max: 20, def: 2.5, when: s => s.o?.ratio === 'custom'}),
+            C('window', 'Fenêtre de l’habitude', 'select', {choices: [['', '5 ans avant et 5 ans après'], ['10', '10 et 10'], ['before', 'Seulement les 10 ans avant']]}),
+            C('stat', 'L’habitude se calcule par', 'select', {choices: [['', 'La moyenne'], ['median', 'La médiane (moins dérangée par une autre crise toute proche)']]}),
+            C('scale', 'Échelle', 'select', {choices: [['', 'La commune, les petites regroupées avec leurs voisines'], ['commune', 'Toujours la commune'], ['dept', 'Le département']]}),
+            C('smallN', 'Petit village : nombre de décès sur toute la période, moins de', 'number', {min: 2, max: 100, def: 10, when: s => !s.o?.scale}),
+            C('kids', 'Enfants', 'select', {choices: [['', 'Comptés avec tout le monde'], ['apart', 'À part'], ['out', 'Pas comptés']]}), C('kidsAge', 'Enfant : moins de', 'number', {min: 1, max: 18, def: 10, unit: i18n('ans', {ctx: 'unite'}), when: s => !!s.o?.kids}),
+            C('refs', 'Repères proposés', 'select', {choices: [['', 'Les crises du 🌍 Monde autour qui couvrent la commune, et mes événements'], ['all', 'Toutes les crises de l’année'], ['none', 'Aucun']]}),
+            C('step', 'Pas du temps', 'select', {choices: [['', 'Année par année'], ['5', 'Par 5 ans'], ['10', 'Par 10 ans']]}),
+            C('table', 'Le tableau sous la carte', 'check', {def: true}), C('tableMax', 'Combien de lignes', 'number', {min: 1, max: 40, def: 8, when: s => s.o?.table !== false}),
+            C('yearLabels', 'Écrire la commune et l’année près des ronds', 'check', {def: true}), C('minTotal', 'Pas assez de décès placés : moins de', 'number', {min: 1, max: 1000, def: 20}), ...mapOpts, ...COMMON],
+        sample: () => ({o: {title: i18n('Les années de crise de la famille'), map: 'fr', time: {show: true, step: 1}}, crises: SAMPLE_CRISES, rows: sample()}),
+        fromApp: crisisApp, describe: spec => i18n('Les années de crise : {n}.', {n: pl(rows(spec).length, 'décès')})});
+    ext.diagramCartesPlus2.crisismap = crisismap; ext.diagramCartesPlus2.openCrises = openCrises;
+})();

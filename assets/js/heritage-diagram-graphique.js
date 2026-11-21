@@ -150,6 +150,8 @@
         linkmap: [['Parrains et marraines des baptêmes', {'[data-cq="roles"]': ['parrain', 'marraine']}], ['Témoins des mariages', {'[data-cq="roles"]': ['témoin']}],
             ['Tous les liens (parrains, témoins, déclarants…)', {'[data-cq="roles"]': ['parrain', 'marraine', 'témoin', 'déclarant', 'voisin', 'curé']}], ['Autour de mes ancêtres', {'[data-cq="roles"]': ['parrain', 'marraine', 'témoin'], '[data-cq="pop"]': 'anc'}],
             ['Avant la Révolution', {'[data-cq="roles"]': ['parrain', 'marraine'], '[data-cq="yto"]': '1789'}], ['Au XIXe siècle', {'[data-cq="roles"]': ['parrain', 'marraine'], '[data-cq="yfrom"]': '1801', '[data-cq="yto"]': '1900'}]],
+        crisismap: [['Toute ma base', {'[data-cq="pop"]': 'all', '[data-cq="kids"]': ''}], ['Mes ancêtres et leurs familles', {'[data-cq="pop"]': 'anc'}], ['Les enfants à part (moins de 10 ans)', {'[data-cq="kids"]': 'apart'}],
+            ['Le XVIIIe siècle', {'[data-cq="period"]': '1700'}], ['Le XIXe siècle', {'[data-cq="period"]': '1800'}]],
         quarters: [['8 quartiers (arrière-grands-parents)', {'[data-dla="gens"]': '3'}], ['16 quartiers', {'[data-dla="gens"]': '4'}], ['32 quartiers', {'[data-dla="gens"]': '5'}]],
     };
     const GO = '[data-gn-go], [data-n6-go], [data-dm-go], [data-dfa-go], [data-dgm-go], [data-c2-go], [data-dac-go], [data-cp-go], [data-lotc-go], [data-dpl-go], [data-dla-go], [data-cq-go]';

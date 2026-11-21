@@ -288,3 +288,72 @@ bapt. ¦ vaftiz
 naiss. ¦ doğum
 mar. ¦ evlilik
 inh. ¦ defin
+# ⚰️ Crises et épidémies (partie 3) — et les départs « Graphique » de 🕸
+Crises et épidémies (les années où les décès montent) ¦ Krizler ve salgınlar (ölümlerin arttığı yıllar)
+Les décès (un par ligne) ¦ Ölümler (satır başına bir)
+Cause notée ¦ Not edilen neden
+Choléra de 1832 ¦ 1832 kolerası
+Clic : les personnes, et ce qui se passait à la même époque ¦ Tıkla: kişiler ve aynı dönemde olanlar
+Comptés avec tout le monde ¦ Herkesle birlikte sayılır
+À part ¦ Ayrı
+À part (moins de 10 ans) ¦ Ayrı (10 yaşından küçük)
+Pas comptés ¦ Sayılmaz
+Mes ancêtres et leurs familles ¦ Atalarım ve aileleri
+Les enfants à part (moins de 10 ans) ¦ Çocuklar ayrı (10 yaşından küçük)
+Les décès de ta généalogie ¦ Soy ağacındaki ölümler
+Les décès placés et datés (le décès, sinon l’inhumation ; chaque personne une seule fois), et les crises du 🌍 Monde autour avec tes événements locaux. Jamais un vivant ni une fiche confidentielle. ¦ Yerleştirilmiş ve tarihli ölümler (ölüm, yoksa defin; her kişi yalnızca bir kez) ve 🌍 Çevredeki dünya krizleri yerel olaylarınla birlikte. Asla yaşayan biri ya da gizli bir kart yok.
+Aucun décès daté avec un lieu pour ce choix. ¦ Bu seçim için yeri olan tarihli ölüm yok.
+Décès sans année ou sans lieu, comptés à part : {n} ¦ Yılı ya da yeri olmayan ölümler, ayrı sayıldı: {n}
+Minimum de décès dans l’année ¦ Yıl içinde en az ölüm
+Décès au moins ¦ En az ölüm
+2,5 fois l’habitude ¦ Olağanın 2,5 katı
+2 fois ¦ 2 kat
+3 fois ¦ 3 kat
+4 fois ¦ 4 kat
+Fois l’habitude ¦ Olağanın katı
+Fenêtre de l’habitude ¦ Olağan düzeyin penceresi
+5 ans avant et 5 ans après ¦ 5 yıl önce ve 5 yıl sonra
+10 et 10 ¦ 10 ve 10
+Seulement les 10 ans avant ¦ Yalnızca önceki 10 yıl
+L’habitude se calcule par ¦ Olağan düzey şununla hesaplanır
+La moyenne ¦ Ortalama
+La médiane (moins dérangée par une autre crise toute proche) ¦ Medyan (yakındaki başka bir krizden daha az etkilenir)
+La commune, les petites regroupées avec leurs voisines ¦ Belediye, küçükler komşularıyla gruplanır
+Toujours la commune ¦ Her zaman belediye
+Le département ¦ Departman
+Petit village : nombre de décès sur toute la période, moins de ¦ Küçük köy: tüm dönemdeki ölüm sayısı şundan az
+Enfant : moins de ¦ Çocuk: şundan küçük
+Repères proposés ¦ Önerilen dayanak noktaları
+Les crises du 🌍 Monde autour qui couvrent la commune, et mes événements ¦ 🌍 Çevredeki dünya krizlerinden belediyeyi kapsayanlar ve olaylarım
+Toutes les crises de l’année ¦ Yılın tüm krizleri
+Pas du temps ¦ Zaman adımı
+Pas assez de décès placés : moins de ¦ Yeterince yerleştirilmiş ölüm yok: şundan az
+Pas assez de décès placés pour repérer des crises. ¦ Krizleri saptamak için yeterince yerleştirilmiş ölüm yok.
+Prends les décès de ta généalogie (« Depuis l’app »). ¦ Ölümleri soy ağacından al (“Uygulamadan”).
+LES ANNÉES DE CRISE ¦ KRİZ YILLARI
+Les années de crise de la famille ¦ Ailenin kriz yılları
+Les années de crise sur la carte ¦ Haritada kriz yılları
+Les années de crise : {n}, sur {d}. ¦ Kriz yılları: {n}, toplam {d}.
+Les années de crise : {n}. ¦ Kriz yılları: {n}.
+Les années à voir · {n} ¦ Bakılacak yıllar · {n}
+=année à voir ¦ bakılacak yıl|bakılacak yıl
+Habitude ¦ Olağan
+À la même époque (repère) ¦ Aynı dönemde (dayanak)
+À la même époque : {what} — un repère, pas une explication. ¦ Aynı dönemde: {what} — bir dayanak, bir açıklama değil.
+Rien de connu dans cette région à cette date. ¦ Bu bölgede bu tarihte bilinen bir şey yok.
+rien de connu dans cette région à cette date ¦ bu bölgede bu tarihte bilinen bir şey yok
+cause notée : « {c} » ¦ not edilen neden: “{c}”
+d’habitude {u} par an ¦ olağanda yılda {u}
+plus de ×5 ¦ ×5’ten fazla
+×2,5 à 3 ¦ ×2,5 ile 3
+×3 à 5 ¦ ×3 ile 5
+{name} + {n} voisines ¦ {name} + {n} komşu
++ {n} autres ¦ + {n} tane daha
+Écrire la commune et l’année près des ronds ¦ Belediyeyi ve yılı dairelerin yanına yaz
+À lire avec prudence : l’app compare des nombres de décès, elle ne sait pas pourquoi ils montent. Le repère est ce qui se passait à la même époque : une piste à vérifier dans les actes (cause notée, âge, mois). Sur de petits nombres, le hasard suffit parfois. ¦ Dikkatle oku: uygulama ölüm sayılarını karşılaştırır, neden arttıklarını bilmez. Dayanak, aynı dönemde olanlardır: kayıtlarda doğrulanacak bir iz (not edilen neden, yaş, ay). Küçük sayılarda bazen tesadüf yeter.
+Autour de mes ancêtres ¦ Atalarımın çevresinde
+Parrains et marraines des baptêmes ¦ Vaftizlerdeki vaftiz ebeveynleri
+Témoins des mariages ¦ Nikâh tanıkları
+Tous les liens (parrains, témoins, déclarants…) ¦ Tüm bağlar (vaftiz ebeveynleri, tanıklar, bildirenler…)
+années à voir ¦ bakılacak yıl
+année à voir ¦ bakılacak yıl

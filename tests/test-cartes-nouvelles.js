@@ -36,6 +36,7 @@ const SECRET = /Claire MAZAUD|Paul DURAND|informaticien/;
 // chaque carte dessinée depuis l'app dans le navigateur : [sorte, préparation du panneau, texte attendu dans l'aperçu]
 // et des réglages essayés sur l'exemple de chaque carte (chacun doit donner une image)
 const VARIANTS = {
+    crisismap: [{minDeaths: '2'}, {minDeaths: 'custom', minN: 4}, {ratio: '4'}, {ratio: 'custom', ratioN: 1.5}, {window: '10'}, {window: 'before'}, {stat: 'median'}, {scale: 'commune'}, {scale: 'dept'}, {kids: 'apart'}, {kids: 'out', kidsAge: 5}, {refs: 'all'}, {refs: 'none'}, {step: '5', at: 1830}, {table: false, yearLabels: false}],
     linkmap: [{from: 'note'}, {from: 'birth'}, {weight: 'people'}, {same: 'hide'}, {same: 'number'}, {roles: 'all'}, {minLinks: '2'}, {minLinks: 'top30'}, {color: 'role'}, {color: 'side'}, {arrow: 'arrow'}, {step: '25', at: 1775}, {yfrom: 1780, yto: 1820, summary: false}],
     lifearea: [{share: '50'}, {share: 'custom', shareN: 95}, {shape: 'hull'}, {shape: 'both'}, {center: 'oldest'}, {draw: 'small'}, {draw: 'play', at: 1}, {min: '10'}, {colors: 'reverse'}, {colors: 'side'}, {frameAll: 'all', table: false}, {groupBy: 'century'}],
     mirrormap: [{draw: 'side'}, {draw: 'swipe', swipe: 30}, {meet: 'era', eraYears: 10}, {meet: 'near', nearKm: 20}, {implex: 'short'}, {step: 'gen', at: '3'}, {window: 'period', at: '1860'}, {colors: 'pink'}, {colors: 'mine', colorA: '#000000'}, {size: 'same', meetList: false, wedding: 'hide'}],
@@ -45,6 +46,7 @@ const KIND_TESTS = [
     ['trademap', null, 'Tulle'],
     ['mirrormap', null, 'Tulle'],
     ['lifearea', null, 'Gén. 2'],
+    ['crisismap', null, '1832'],
     ['linkmap', async p => { await p.check('[data-cq="roles"][value="témoin"]'); await p.check('[data-cq="roles"][value="curé"]'); }, 'Naves'],
 ];
 
@@ -236,6 +238,24 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(dir) });
             const pat = await get('cartes_plus2', { what: 'links', pop: 'pat', root: 1 }); assert.ok(pat.rows.every(x => [2, 4, 5, 8, 9].includes(x[7]) || [2, 4, 5, 8, 9].includes(x[8])));
             const nm = await get('cartes_plus2', { what: 'links', pop: 'name', name: 'Vialle' }); assert.equal(nm.rows.length, 0, 'aucun filleul VIALLE');
             const net = await get('diagram_genea', { what: 'network', all: 1 }).catch(() => null); assert.ok(net !== undefined, 'le Réseau garde sa lecture des rôles');
+        });
+
+        await t('⚰️ crises : un décès par personne, âge, cause notée, voisines, crises du 🌍 Monde autour — jamais un vivant ni une fiche confidentielle', async () => {
+            const r = await get('cartes_plus2', { what: 'crises' });
+            assert.ok(r.deaths.length >= 25, JSON.stringify(r).slice(0, 300));
+            const naves1832 = r.deaths.filter(d => d[1] === 1 && d[2] === 1832); assert.equal(naves1832.length, 6, 'six décès à Naves en 1832');
+            assert.ok(naves1832.some(d => d[5] === 'fièvre'), 'la cause notée'); assert.ok(naves1832.some(d => d[4] === 3), 'l’âge (né en 1829)');
+            assert.ok(!r.deaths.some(d => [20, 21].includes(d[0])), 'ni vivante ni confidentielle (Paul DURAND † 1920)');
+            assert.equal(new Set(r.deaths.map(d => d[0])).size, r.deaths.length, 'chaque personne une seule fois');
+            assert.deepEqual(r.neighbors['19146'].sort(), ['19258', '19272']);
+            assert.ok(r.crises.some(c => /chol/i.test(c.title) && c.from <= 1832 && c.to >= 1832), 'le choléra de 1832 parmi les repères');
+            assert.equal(r.no_place, 0); assert.ok(!JSON.stringify(r).match(SECRET));
+            const anc = await get('cartes_plus2', { what: 'crises', pop: 'anc', root: 1 }); assert.ok(anc.deaths.every(d => [1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13].includes(d[0])), 'ancêtres et leurs enfants');
+        });
+        await t('⚰️ les textes restent prudents : « à la même époque », « repère », jamais une cause affirmée', () => {
+            const js = src('assets/js/heritage-diagram-cartes-plus2.js'), part = js.slice(js.indexOf('⚰️ Crises et épidémies (maquette'));
+            assert.match(part, /À la même époque/); assert.match(part, /repère, pas une explication/); assert.match(part, /À lire avec prudence/);
+            assert.doesNotMatch(part, /mort du |morts? de la |causé par|à cause d/i, 'aucune cause affirmée');
         });
 
         /* ═════ 3. Navigateur ═════ */

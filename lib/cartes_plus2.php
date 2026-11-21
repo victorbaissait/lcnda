@@ -313,6 +313,51 @@ function cp2_links(PDO $pdo, array $q): array
         'unplaced' => cp2_unplaced($pdo, $ids, $places)];
 }
 
+/** ⚰️ les décès placés et datés (un par personne : le décès, sinon l'inhumation), les crises du 🌍 Monde autour et mes événements locaux */
+function cp2_crises(PDO $pdo, array $q): array
+{
+    require_once __DIR__ . '/monde_autour.php';
+    $hidden = cp_hidden($pdo);
+    $pop = cp2_pick($q, 'pop', ['all', 'anc', 'pat', 'mat', 'name'], 'all');
+    $only = null;
+    if ($pop === 'anc') { // mes ancêtres et leurs familles : les ancêtres et leurs enfants (frères et sœurs de la lignée)
+        $only = cp2_pop($pdo, 'anc', cp2_int($q, 'root', 0, 0, PHP_INT_MAX), 0) ?? [];
+        $L = dgn_links($pdo); foreach (array_keys($only) as $a) { foreach ($L['children'][$a] ?? [] as $c) { $only[(int) $c] = true; } }
+    } elseif ($pop === 'pat' || $pop === 'mat') { $only = cp2_pop($pdo, $pop, cp2_int($q, 'root', 0, 0, PHP_INT_MAX), 0) ?? []; }
+    elseif ($pop === 'name') { $k = cp_fold(mb_substr(trim((string) ($q['name'] ?? '')), 0, 80)); $only = []; foreach ($pdo->query("SELECT id, last_name FROM persons WHERE COALESCE(last_name,'')<>''") as $p) { if (cp_fold((string) $p['last_name']) === $k) { $only[(int) $p['id']] = true; } } }
+    $birth = [];
+    foreach ($pdo->query("SELECT e.person_id AS pid, e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag IN ('BIRT','CHR','BAPM') AND e.person_id IS NOT NULL AND e.year IS NOT NULL ORDER BY t.gedcom_tag='BIRT' DESC") as $b) { $birth[(int) $b['pid']] ??= (int) $b['year']; }
+    $deaths = []; $noPlace = 0; $noYear = 0; $seen = [];
+    foreach ($pdo->query("SELECT e.person_id AS pid, e.place_id, e.year, e.date_text, e.cause, t.gedcom_tag AS tag FROM events e JOIN event_types t ON t.id=e.event_type_id
+        WHERE t.gedcom_tag IN ('DEAT','BURI') AND e.person_id IS NOT NULL ORDER BY t.gedcom_tag='DEAT' DESC, e.id") as $d) {
+        $pid = (int) $d['pid']; if (isset($seen[$pid]) || isset($hidden[$pid]) || ($only !== null && !isset($only[$pid]))) { continue; }
+        $seen[$pid] = true;
+        if ($d['year'] === null || (int) $d['year'] <= 0) { $noYear++; continue; }
+        if ($d['place_id'] === null) { $noPlace++; continue; }
+        $y = (int) $d['year']; $age = isset($birth[$pid]) && $birth[$pid] <= $y ? $y - $birth[$pid] : null;
+        $deaths[] = [$pid, (int) $d['place_id'], $y, mb_substr(trim((string) $d['date_text']), 0, 40), $age, mb_substr(trim((string) $d['cause']), 0, 120)];
+        if (count($deaths) >= 60000) { break; }
+    }
+    $places = cp_places($pdo, array_column($deaths, 1));
+    // le code INSEE de chaque lieu (pour regrouper les petits villages avec leurs voisines) et ce qui sert à dire si une crise couvre la commune
+    $info = []; $insee = [];
+    foreach (array_chunk(array_keys($places), 500) as $chunk) {
+        foreach ($pdo->query('SELECT id, admin4_code, county, state, country FROM places WHERE id IN (' . implode(',', $chunk) . ')') as $p) {
+            $info[(int) $p['id']] = ['insee' => (string) $p['admin4_code'], 'county' => mb_substr((string) $p['county'], 0, 60), 'state' => mb_substr((string) $p['state'], 0, 60), 'country' => mb_substr((string) $p['country'], 0, 60)];
+            if ((string) $p['admin4_code'] !== '') { $insee[(string) $p['admin4_code']] = true; }
+        }
+    }
+    $neighbors = [];
+    if ($insee) {
+        $in = implode(',', array_map(static fn($c) => $pdo->quote((string) $c), array_keys($insee)));
+        try { foreach ($pdo->query("SELECT insee_code, neighbor_insee_code FROM commune_neighbors WHERE insee_code IN ($in) AND neighbor_insee_code IN ($in)") as $n) { $neighbors[(string) $n['insee_code']][] = (string) $n['neighbor_insee_code']; } } catch (Throwable $_) {}
+    }
+    $crises = array_map(static fn($c) => ['from' => $c[0], 'to' => $c[1], 'cat' => $c[2], 'title' => $c[3], 'scope' => $c[4]], historical_crises());
+    foreach (world_own_as_events($pdo) as $e) { $crises[] = ['from' => (int) $e['from'], 'to' => (int) ($e['to'] ?: $e['from']), 'cat' => (string) $e['cat'], 'title' => (string) $e['title'], 'scope' => (string) ($e['scope'] ?: ($e['place'] ?? '')), 'own' => 1, 'place' => (string) ($e['place'] ?? '')]; }
+    return ['deaths' => $deaths, 'places' => $places, 'info' => $info, 'neighbors' => $neighbors, 'crises' => $crises, 'people' => cp_people($pdo, array_column($deaths, 0)),
+        'no_place' => $noPlace, 'no_year' => $noYear, 'unplaced' => cp2_unplaced($pdo, array_column($deaths, 1), $places)];
+}
+
 /** le point d'entrée : api.php?action=cartes_plus2 */
 function cp2_data(PDO $pdo, array $q): array
 {
@@ -323,6 +368,7 @@ function cp2_data(PDO $pdo, array $q): array
         'mirror' => cp2_mirror($pdo, $q),
         'areas' => cp2_areas($pdo, $q),
         'links' => cp2_links($pdo, $q),
+        'crises' => cp2_crises($pdo, $q),
         default => throw new RuntimeException('Demande inconnue.'),
     };
 }
