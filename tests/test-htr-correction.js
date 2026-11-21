@@ -321,6 +321,19 @@ echo 'ok';`);
                 await shot('htrfix-4-petit.png');
                 await p.setViewportSize({ width: 1440, height: 900 });
             });
+            await t('Réglages → Reconnaissance d’écriture (HTR) : l’interrupteur, le seuil, le lexique personnel (vider, ↶ Annuler)', async () => {
+                await p.evaluate(() => { document.querySelectorAll('dialog[open]').forEach(d => d.close()); location.hash = '#maintenance/htr'; });
+                await p.waitForFunction(() => document.querySelector('[data-htr-fixset] [data-fix-on]'), null, { timeout: 15000 });
+                assert.match(await p.evaluate(() => document.querySelector('[data-htr-fixlex]').textContent), /lexique personnel : 1 mot/);
+                await p.evaluate(() => { const c = document.querySelector('[data-htr-fixset] [data-fix-on]'); c.checked = false; c.dispatchEvent(new Event('change', { bubbles: true })); });
+                assert.equal(await p.evaluate(() => localStorage.getItem('genealogie-htr-fix')), '0');
+                await p.evaluate(() => { const c = document.querySelector('[data-htr-fixset] [data-fix-on]'); c.checked = true; c.dispatchEvent(new Event('change', { bubbles: true })); });
+                await p.evaluate(() => document.querySelector('[data-htr-fixlex-clear]').click()); await sleep(150);
+                assert.equal(await p.evaluate(() => localStorage.getItem('genealogie-htr-lexique')), '[]');
+                await p.evaluate(() => [...document.querySelectorAll('button')].filter(b => b.textContent.trim() === '↶ Annuler' && b.offsetParent).at(-1)?.click()); await sleep(200);
+                assert.equal(await p.evaluate(() => localStorage.getItem('genealogie-htr-lexique')), '["precurcir"]', '↶ Annuler remet le lexique');
+                await shot('htrfix-5-reglages.png');
+            });
             await t('aucune erreur dans la page', () => assert.deepEqual(errs, []));
         } finally { await browser.close(); }
     } finally { proc.kill(); fs.rmSync(tmp, { recursive: true, force: true }); }
