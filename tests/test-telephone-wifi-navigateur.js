@@ -93,7 +93,10 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         await page.goto(base + '/', { waitUntil: 'domcontentloaded' });
         // un mot de passe sur la généalogie (réglage conseillé « obligatoire » pour l'ouvrir au réseau)
         await page.evaluate(async pw => { const r = await fetch('api.php?action=glock_set', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': window.INSTALL_CSRF }, body: JSON.stringify({ password: pw, password2: pw, minutes: 15, ack: 1, csrf: window.INSTALL_CSRF }) }); if (!r.ok) throw new Error(await r.text()); }, PW);
+        // attendre la fin des requêtes de la page : le mot de passe posé change l'identifiant de séance, une requête encore en route avec l'ancien en ouvrirait une neuve
+        await page.waitForLoadState('networkidle').catch(() => {});
         await page.reload({ waitUntil: 'domcontentloaded' });
+        await page.waitForLoadState('networkidle').catch(() => {});
         if (await page.locator('[data-glock-screen]').count()) { await page.fill('#glock-pw', PW); await page.click('[data-glock-open]'); await page.waitForLoadState('domcontentloaded'); }
         await page.waitForFunction(() => window.LCNDA_APP && window.LCNDA_EXT && window.LCNDA_EXT.openReseauLocal && window.LCNDA_EXT.aTrier, null, { timeout: 60000 })
             .catch(async e => { console.error(await page.evaluate(() => ({ url: location.href, glock: !!document.querySelector('[data-glock-screen]'), app: !!window.LCNDA_APP, ext: Object.keys(window.LCNDA_EXT || {}).length, rl: !!window.LCNDA_EXT?.openReseauLocal, at: !!window.LCNDA_EXT?.aTrier, body: document.body.innerText.slice(0, 300) }))); console.error(errors); throw e; });
