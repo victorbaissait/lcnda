@@ -95,24 +95,41 @@ function qm_people(PDO $pdo): array
 {
     static $cache = null;
     if ($cache !== null) { return $cache; }
+    // 🐘 une très grosse base (200 000 fiches, 470 000 naissances et décès) : les événements lus un à un (plus de fetchAll),
+    // et les textes qui reviennent (sexe, statut, métier, lieu, mois…) partagés au lieu d'être recopiés pour chaque fiche ;
+    // la date exacte calculée une fois par texte de date. Même résultat qu'avant, deux à trois fois moins de mémoire.
+    $str = []; // les textes déjà vus : $str[$v] ??= $v rend le même texte en mémoire
     $p = [];
     $hasKind = false;
     try { $hasKind = (bool) array_filter($pdo->query('PRAGMA table_info(persons)')->fetchAll(), static fn($c) => $c['name'] === 'kind'); } catch (Throwable $_) {}
-    foreach ($pdo->query("SELECT id, COALESCE(first_name,'') AS first, COALESCE(last_name,'') AS last, COALESCE(gender,'') AS gender, COALESCE(occupation,'') AS occupation, COALESCE(living_status,'') AS living, " . ($hasKind ? "COALESCE(kind,'human')" : "'human'") . " AS kind FROM persons") as $r) {
-        $p[(int) $r['id']] = ['id' => (int) $r['id']] + $r + ['by' => null, 'bd' => null, 'bplace' => '', 'bplace_id' => 0, 'btext' => '', 'dy' => null, 'dd' => null, 'dplace' => '', 'dplace_id' => 0, 'dtext' => ''];
+    foreach ($pdo->query("SELECT id, COALESCE(first_name,'') AS first, COALESCE(last_name,'') AS last, COALESCE(gender,'') AS gender, COALESCE(occupation,'') AS occupation, COALESCE(living_status,'') AS living, " . ($hasKind ? "COALESCE(kind,'human')" : "'human'") . " AS kind FROM persons", PDO::FETCH_ASSOC) as $r) {
+        $id = (int) $r['id'];
+        [$f, $l, $g, $o, $lv, $kd] = [(string) $r['first'], (string) $r['last'], (string) $r['gender'], (string) $r['occupation'], (string) $r['living'], (string) $r['kind']];
+        $p[$id] = ['id' => $id, 'first' => $str[$f] ??= $f, 'last' => $str[$l] ??= $l, 'gender' => $str[$g] ??= $g, 'occupation' => $str[$o] ??= $o, 'living' => $str[$lv] ??= $lv, 'kind' => $str[$kd] ??= $kd,
+            'by' => null, 'bd' => null, 'bplace' => '', 'bplace_id' => 0, 'btext' => '', 'dy' => null, 'dd' => null, 'dplace' => '', 'dplace_id' => 0, 'dtext' => ''];
     }
+    $iso = []; // texte de date => [date exacte (ou républicaine convertie), année déduite]
     $rows = $pdo->query("SELECT e.person_id, e.year, e.date_text, t.gedcom_tag, COALESCE(pl.name,'') AS place, COALESCE(e.place_id,0) AS place_id FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id
-        WHERE e.person_id IS NOT NULL AND t.gedcom_tag IN ('BIRT','CHR','BAPM','DEAT','BURI') ORDER BY t.gedcom_tag IN ('BIRT','DEAT') DESC")->fetchAll();
+        WHERE e.person_id IS NOT NULL AND t.gedcom_tag IN ('BIRT','CHR','BAPM','DEAT','BURI') ORDER BY t.gedcom_tag IN ('BIRT','DEAT') DESC", PDO::FETCH_ASSOC);
+    $K = ['b' => ['by', 'bd', 'btext', 'bplace', 'bplace_id'], 'd' => ['dy', 'dd', 'dtext', 'dplace', 'dplace_id']];
+    $isBirth = ['BIRT' => true, 'CHR' => true, 'BAPM' => true];
     foreach ($rows as $e) {
         $id = (int) $e['person_id']; if (!isset($p[$id])) { continue; }
-        $birth = in_array($e['gedcom_tag'], ['BIRT', 'CHR', 'BAPM'], true); $k = $birth ? 'b' : 'd';
-        $year = $e['year'] !== null ? (int) $e['year'] : null; $iso = exact_date((string) $e['date_text']);
-        // une date du calendrier républicain (« 15 brumaire an II ») : convertie ici si la base ne l'a pas fait
-        if (!$iso && ($rep = qm_rep_text_iso((string) $e['date_text']))) { $iso = $rep; $year ??= (int) substr($rep, 0, 4); }
-        if ($p[$id][$k . 'y'] === null && $year !== null) { $p[$id][$k . 'y'] = $year; $p[$id][$k . 'd'] = $iso; $p[$id][$k . 'text'] = (string) $e['date_text']; }
-        if ($p[$id][$k . 'text'] === '' && trim((string) $e['date_text']) !== '') { $p[$id][$k . 'text'] = (string) $e['date_text']; }
-        if ($p[$id][$k . 'place'] === '' && $e['place'] !== '') { $p[$id][$k . 'place'] = (string) $e['place']; $p[$id][$k . 'place_id'] = (int) $e['place_id']; }
+        [$ky, $kd, $kt, $kp, $kpi] = $K[isset($isBirth[$e['gedcom_tag']]) ? 'b' : 'd'];
+        $dt = (string) $e['date_text'];
+        $year = $e['year'] !== null ? (int) $e['year'] : null;
+        if (!isset($iso[$dt])) {
+            if (count($iso) > 200000) { $iso = []; }
+            // une date du calendrier républicain (« 15 brumaire an II ») : convertie ici si la base ne l'a pas fait
+            $x = exact_date($dt); $iso[$dt] = $x ? [$x, null] : (($rep = qm_rep_text_iso($dt)) ? [$rep, (int) substr($rep, 0, 4)] : [null, null]);
+        }
+        [$isoD, $repY] = $iso[$dt];
+        if ($repY !== null) { $year ??= $repY; }
+        if ($p[$id][$ky] === null && $year !== null) { $p[$id][$ky] = $year; $p[$id][$kd] = $isoD; $p[$id][$kt] = $str[$dt] ??= $dt; }
+        if ($p[$id][$kt] === '' && trim($dt) !== '') { $p[$id][$kt] = $str[$dt] ??= $dt; }
+        if ($p[$id][$kp] === '' && $e['place'] !== '') { $pl = (string) $e['place']; $p[$id][$kp] = $str[$pl] ??= $pl; $p[$id][$kpi] = (int) $e['place_id']; }
     }
+    unset($rows, $iso, $str);
     return $cache = $p;
 }
 /** les fiches qui comptent pour une question : les personnes (sans les animaux), ou seulement les animaux si la question parle d'animaux */
@@ -133,6 +150,10 @@ function qm_couples(PDO $pdo): array
 {
     static $cache = null;
     if ($cache !== null) { return $cache; }
+    return $cache = function_exists('calc_cached') ? calc_cached($pdo, 'qm_couples', ['families', 'events', 'event_types', 'family_children'], [], static fn() => qm_couples_raw($pdo)) : qm_couples_raw($pdo);
+}
+function qm_couples_raw(PDO $pdo): array
+{
     $c = [];
     foreach ($pdo->query("SELECT f.id, f.partner1_id, f.partner2_id, (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.family_id=f.id AND t.gedcom_tag='MARR' LIMIT 1) AS my,
             (SELECT e.date_text FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.family_id=f.id AND t.gedcom_tag='MARR' LIMIT 1) AS md,
@@ -140,7 +161,7 @@ function qm_couples(PDO $pdo): array
             (SELECT count(*) FROM family_children fc WHERE fc.family_id=f.id) AS kids FROM families f") as $r) {
         $c[(int) $r['id']] = ['a' => (int) $r['partner1_id'], 'b' => (int) $r['partner2_id'], 'my' => $r['my'] !== null ? (int) $r['my'] : null, 'md' => exact_date((string) ($r['md'] ?? '')) ?: qm_rep_text_iso((string) ($r['md'] ?? '')), 'mp' => (int) ($r['mp'] ?? 0), 'kids' => (int) $r['kids']];
     }
-    return $cache = $c;
+    return $c;
 }
 /** les filtres simples d'une question : sexe, ancêtres, années */
 function qm_filters(PDO $pdo, string $t): array
@@ -217,18 +238,31 @@ function qm_find_people(PDO $pdo, string $q): array
     // mêmes coupures des deux côtés : espaces, traits d'union et apostrophes (« Marie-Thérèse », « D'ARTOIS »)
     $tok = qm_words($q);
     $part = ['de', 'du', 'des', 'd', 'la', 'le', 'les', 'l', 'van', 'von', 'der'];
-    $people = [];
-    foreach (qm_people($pdo) as $id => $p) {
-        $fi = qm_words($p['first']); $la = qm_words($p['last']);
-        if ($fi && $la) { $people[] = [$id, $fi, array_values(array_diff($la, $part))]; }
+    // 🐘 les mots des noms, et pour chaque mot les fiches qui le portent (une fois par requête) : seules ces fiches sont
+    // essayées (une fiche qui répond contient forcément chaque mot), au lieu de toutes les fiches à chaque essai
+    static $memo = null;
+    if ($memo === null || $memo[0] !== spl_object_id($pdo)) {
+        $people = []; $idx = []; $wf = []; $wl = [];
+        foreach (qm_people($pdo) as $id => $p) {
+            $fi = $wf[$p['first']] ??= qm_words($p['first']); $la = $wl[$p['last']] ??= qm_words($p['last']);
+            if ($fi && $la) {
+                $k = count($people); $people[] = [$id, $fi, array_values(array_diff($la, $part))];
+                foreach (array_unique(array_merge($people[$k][1], $people[$k][2])) as $w) { $idx[$w][] = $k; }
+            }
+        }
+        $memo = [spl_object_id($pdo), $people, $idx];
     }
+    [, $people, $idx] = $memo;
     $found = []; $n = count($tok); $i = 0;
     while ($i < $n) {
         $best = null;
         for ($j = min($n - 1, $i + 6); $j > $i; $j--) {
             $words = array_values(array_diff(array_slice($tok, $i, $j - $i + 1), $part));
             if (count($words) < 2) { continue; }
-            $hits = array_values(array_filter($people, static fn($p) => !array_diff($words, array_merge($p[1], $p[2])) && array_intersect($words, $p[1]) && array_intersect($words, $p[2])));
+            $cand = null;
+            foreach (array_unique($words) as $w) { $l = $idx[$w] ?? []; if ($cand === null || count($l) < count($cand)) { $cand = $l; } }
+            $hits = [];
+            foreach ($cand ?? [] as $k) { $p = $people[$k]; if (!array_diff($words, array_merge($p[1], $p[2])) && array_intersect($words, $p[1]) && array_intersect($words, $p[2])) { $hits[] = $p; } }
             if ($hits) { usort($hits, static fn($a, $b) => count($a[1]) + count($a[2]) <=> count($b[1]) + count($b[2]) ?: $a[0] <=> $b[0]); $best = [$hits[0][0], $j]; break; }
         }
         if ($best) { $found[] = $best[0]; $i = $best[1] + 1; } else { $i++; }
