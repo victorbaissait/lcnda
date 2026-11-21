@@ -65,7 +65,7 @@
                 if (v.group === 'commune') return `<h3>📍 ${esc(it.place || 'Lieu inconnu')} <small class="muted">${esc(it.archive?.label || '')} · ${list.length}</small></h3>`;
                 const a = (d.archives || []).find(x => x.key === it.archive?.key) || {};
                 const communes = [...new Set(list.map(x => x.place).filter(Boolean))];
-                return `<h3>🏛️ ${esc(it.archive?.label || '')} <small class="muted">${list.length} recherche${list.length > 1 ? 's' : ''}</small></h3>
+                return `<h3>🏛️ ${esc(it.archive?.label || '')} <small class="muted">${list.length} recherche${list.length > 1 ? 's' : ''}</small>${ext.visitPrepare ? ` <button type="button" class="button small secondary" data-gap-visit="${esc(it.archive?.key || '')}">🗄 ${esc(i18n('Préparer une visite'))}</button>` : ''}</h3>
                     <p class="h-gaps-sub">${communes.length ? `Communes : ${communes.map(c => `<span>${esc(c)}</span>`).join('')}` : ''}
                     <span class="h-gap-links">${it.archive?.france && a.department ? `<a href="${esc(webSearch(`${it.archive.label} état civil en ligne`))}" target="_blank" rel="noopener">🌐 Trouver le site des archives</a> · <a href="${esc(faSearch(a.department))}" target="_blank" rel="noopener">FranceArchives</a>` : ''}</span></p>`;
             };
@@ -91,6 +91,9 @@
         ws.querySelectorAll('[data-gaps-kind]').forEach(c => c.addEventListener('change', () => { v.off = [...ws.querySelectorAll('[data-gaps-kind]')].filter(x => !x.checked).map(x => x.dataset.gapsKind); draw(); }));
         ws.querySelector('[data-gaps-print]').addEventListener('click', () => { if (window.LCNDA_UI?.printPage) { window.LCNDA_UI.printPage('Les trous à combler, pour aller aux archives', {bodyClass: 'h-gaps-printing'}); return; } document.body.classList.add('h-gaps-printing'); window.print(); setTimeout(() => document.body.classList.remove('h-gaps-printing'), 500); }); // K13
         ws.querySelector('[data-gaps-list]').addEventListener('click', async e => {
+            // 🗄 Préparer une visite chez ce service, avec ses cotes (heritage-complements-2.js)
+            const gv = e.target.closest('[data-gap-visit]');
+            if (gv && ext.visitPrepare) { const k = gv.dataset.gapVisit; const list = items.filter(x => String(x.archive?.key || '') === k && !v.off.includes(x.kind)); return ext.visitPrepare({archive: list[0]?.archive || {}, items: list, kinds: KINDS, years}); }
             // 🧾 SocFace : « ✓ Trouvé / Pas trouvé » passe dans le Journal des recherches (un dépouillement fait), la ligne s'en va
             const sfb = e.target.closest('[data-gap-sf]');
             if (sfb) {

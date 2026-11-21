@@ -1,0 +1,166 @@
+fr ¦ ro
+# 🏛⚠️📋📱 Compléments aux outils existants (docs/design/complements-existants.html) : A études de notaire, B homonymes
+Le serveur ne répond pas. ¦ Serverul nu răspunde.
+⚙️ Réglages de cet outil ¦ ⚙️ Setările acestui instrument
+Enlève un filtre, ou cherche autrement. ¦ Scoate un filtru sau caută altfel.
+Listes · Archives et sources ¦ Liste · Arhive și surse
+=étude ¦ birou|birouri|de birouri
+{n} j ¦ {n} z
+sur {n} réponses ¦ din {n} răspunsuri
+pas assez de réponses ¦ prea puține răspunsuri
+{n} sur {m} nécessaires ¦ {n} din {m} necesare
+clerc : {name} ¦ secretar: {name}
+Études de notaire ¦ Birouri notariale
+🏛 Études de notaire ¦ 🏛 Birouri notariale
+Étude de notaire ¦ Birou notarial
+Une étude est un service d’archives de la sorte « Étude de notaire » : ses notaires et clercs, ses dossiers, ses courriers. ¦ Un birou este un serviciu de arhivă de tipul „Birou notarial”: notarii și secretarii lui, dosarele lui, scrisorile lui.
+＋ Nouvelle étude ¦ ＋ Birou nou
+🧩 Regrouper et créer leurs fiches… ¦ 🧩 Grupează și creează-le fișele…
+Chercher une étude, un notaire, une ville… ¦ Caută un birou, un notar, un oraș…
+Département : {d} ¦ Departament: {d}
+Répond le plus vite ¦ Răspunde cel mai repede
+Le plus de dossiers ¦ Cele mai multe dosare
+Aucune étude de notaire pour l’instant ¦ Niciun birou notarial deocamdată
+Une étude est un service d’archives de la sorte « Étude de notaire » : crée-la ici, ou regroupe les notaires tapés à la main dans tes dossiers. ¦ Un birou este un serviciu de arhivă de tipul „Birou notarial”: creează-l aici sau grupează notarii scriși de mână în dosarele tale.
+Aucun notaire noté ¦ Niciun notar notat
+{a} en cours · {b} clos ¦ {a} în lucru · {b} închise
+{n} en attente ¦ {n} în așteptare
+Appeler ¦ Sună
+fiche de personne n° {n} ¦ fișa persoanei nr. {n}
+nom seulement ¦ doar numele
+ligne directe {tel} ¦ linie directă {tel}
+ancien depuis le {d} ¦ fost din {d}
+Aucun notaire ni clerc noté. ¦ Niciun notar sau secretar notat.
+Notaires et clercs ¦ Notari și secretari
+lus dans les dossiers, rien n’est recopié ¦ citite în dosare, nimic nu se copiază
+réf. du notaire {ref} ¦ ref. notarului {ref}
+Aucun dossier relié à cette étude. ¦ Niciun dosar legat de acest birou.
+reçue le {d} ¦ primită pe {d}
+{n} j · d’habitude {m} j ¦ {n} z · de obicei {m} z
+en attente · {n} j ¦ în așteptare · {n} z
+✓ Réponse reçue ¦ ✓ Răspuns primit
+⏳ Délai de réponse constaté : {days} j en moyenne (de {min} à {max} j). Réponses comptées : {n}, celles de ce registre dont la date est notée. C’est ce que tu as observé, rien d’autre : ce n’est ni un délai légal, ni une promesse de l’étude. ¦ ⏳ Timp de răspuns constatat: în medie {days} z (de la {min} la {max} z). Răspunsuri numărate: {n}, cele din acest registru cu data notată. Este ce ai observat, nimic altceva: nu e nici un termen legal, nici o promisiune a biroului.
+⏳ Délai de réponse constaté : {days} j en médiane (de {min} à {max} j). Réponses comptées : {n}, celles de ce registre dont la date est notée. C’est ce que tu as observé, rien d’autre : ce n’est ni un délai légal, ni une promesse de l’étude. ¦ ⏳ Timp de răspuns constatat: mediana {days} z (de la {min} la {max} z). Răspunsuri numărate: {n}, cele din acest registru cu data notată. Este ce ai observat, nimic altceva: nu e nici un termen legal, nici o promisiune a biroului.
+⏳ Pas assez de réponses datées pour un délai constaté ({n} sur {m} nécessaires). ¦ ⏳ Prea puține răspunsuri datate pentru un timp constatat ({n} din {m} necesare).
+Ses courriers ¦ Scrisorile lui
+＋ Courrier à l’étude ¦ ＋ Scrisoare către birou
+＋ {n} courriers plus anciens · tout voir dans le Registre ¦ ＋ {n} scrisori mai vechi · vezi tot în Registru
+Aucun courrier relié à cette étude. ¦ Nicio scrisoare legată de acest birou.
+« {name} » retiré de l’étude ¦ „{name}” scos din birou
+Réponse reçue le {d} ¦ Răspuns primit pe {d}
+Courrier remis en attente ¦ Scrisoarea e din nou în așteptare
+Vide : le courrier repasse « en attente ». ¦ Gol: scrisoarea redevine „în așteptare”.
+Ajouter un notaire ou un clerc ¦ Adaugă un notar sau un secretar
+Fiche de personne (facultatif) ¦ Fișa persoanei (opțional)
+Jusqu’à (ancien) ¦ Până la (fost)
+Un notaire qui change d’étude reste nommé dans ses anciens dossiers : mets une date de fin, il passe « ancien ». ¦ Un notar care schimbă biroul rămâne numit în dosarele vechi: pune o dată de sfârșit și devine „fost”.
+Donne le nom du notaire ou du clerc. ¦ Dă numele notarului sau al secretarului.
+Courrier à l’étude ¦ Scrisoare către birou
+état des recherches ¦ stadiul cercetării
+Courrier rangé au Registre ¦ Scrisoarea pusă în Registru
+Une étude, ou un nom gardé en texte… ¦ Un birou sau un nume păstrat ca text…
+Choisis l’étude ; le nom tapé dans le champ du notaire reste dans le dossier. ¦ Alege biroul; numele scris în câmpul notarului rămâne în dosar.
+nom gardé en texte, sans fiche d’étude ¦ nume păstrat ca text, fără fișă de birou
+texte ¦ text
+Notaire chargé du dossier ¦ Notarul care se ocupă de dosar
+ancien ¦ fost
+Choisi parmi les notaires de l’étude, ou laissé vide. ¦ Ales dintre notarii biroului, sau lăsat gol.
+✓ Notaire du dossier : {who}. Ligne au 🕓 Journal du dossier. ¦ ✓ Notarul dosarului: {who}. Rând în 🕓 Jurnalul dosarului.
+même nom « {n} » ¦ același nume „{n}”
+même ville ¦ același oraș
+même ville que le défunt ¦ același oraș ca defunctul
+initiale {i} ¦ inițiala {i}
+une seule étude de ce nom ¦ un singur birou cu acest nume
+Autre étude ¦ Alt birou
+Laisser en texte ¦ Lasă ca text
+{n} noms tapés à la main · rien n’est changé avant « Appliquer ». ¦ {n} nume scrise de mână · nimic nu se schimbă înainte de „Aplică”.
+existe ¦ există
+plusieurs études possibles ¦ mai multe birouri posibile
+Sans proposition ¦ Fără propunere
+＋ Créer une étude ¦ ＋ Creează un birou
+Courriers qui ressemblent à une étude ¦ Scrisori care seamănă cu un birou
+pour le délai constaté ¦ pentru timpul constatat
+Les rapprochements ne regardent que le nom de famille (sans « Me », « Maître », « SCP », « Étude », accents) et la ville quand elle est écrite. Deux études du même nom dans deux villes ne sont jamais réunies. Le nom tapé reste dans chaque dossier. ¦ Potrivirile se uită doar la numele de familie (fără „Me”, „Maître”, „SCP”, „Étude”, accente) și la oraș când e scris. Două birouri cu același nume în două orașe nu sunt unite niciodată. Numele scris rămâne în fiecare dosar.
+Notaires tapés à la main ¦ Notari scriși de mână
+Aucun notaire tapé à la main sans fiche. ¦ Niciun notar scris de mână fără fișă.
+Appliquer à {n} noms ({m} dossiers) ¦ Aplică la {n} nume ({m} dosare)
+✓ {n} dossiers reliés à leur étude. Le nom tapé est gardé dans chaque dossier. ¦ ✓ {n} dosare legate de biroul lor. Numele scris rămâne în fiecare dosar.
+{n} notaires tapés à la main dans tes dossiers n’ont pas encore de fiche. ¦ {n} notari scriși de mână în dosarele tale nu au încă fișă.
+{n} notaire tapé à la main dans tes dossiers n’a pas encore de fiche. ¦ {n} notar scris de mână în dosarele tale nu are încă fișă.
+{cases} · pas encore de fiche ¦ {cases} · încă fără fișă
+Déjà tapé dans d’autres dossiers ¦ Deja scris în alte dosare
+{n} dossiers en cours ¦ {n} dosare în lucru
+{n} dossier en cours ¦ {n} dosar în lucru
+Étude de notaire introuvable. ¦ Biroul notarial nu a fost găsit.
+Ce notaire n’est pas de cette étude. ¦ Acest notar nu este de la acest birou.
+Ce dossier n’est pas relié à cette étude. ¦ Acest dosar nu este legat de acest birou.
+Date de réponse incorrecte. ¦ Dată de răspuns greșită.
+Où ranger les études ¦ Unde se țin birourile
+Dans 🏛 Services d’archives, sorte « Étude de notaire » ¦ În 🏛 Servicii de arhivă, tipul „Birou notarial”
+Une liste « Études de notaire » à part ¦ O listă separată „Birouri notariale”
+Délai constaté ¦ Timp constatat
+Moyenne, avec le plus court et le plus long ¦ Media, cu cel mai scurt și cel mai lung
+Médiane (moins sensible à une réponse très lente) ¦ Mediana (mai puțin sensibilă la un răspuns foarte lent)
+Ne pas l’afficher ¦ Nu-l afișa
+Nombre de réponses avant d’afficher un délai ¦ Numărul de răspunsuri înainte de a afișa un timp
+Les courriers comptés ¦ Scrisorile numărate
+Ceux des 3 dernières années ¦ Cele din ultimii 3 ani
+Ce que propose le menu de choix ¦ Ce propune meniul de alegere
+Les études, puis les noms déjà tapés ¦ Birourile, apoi numele deja scrise
+Les études seulement ¦ Doar birourile
+Le notaire chargé du dossier ¦ Notarul care se ocupă de dosar
+Un notaire de l’étude, facultatif ¦ Un notar al biroului, opțional
+Seulement l’étude ¦ Doar biroul
+Les propositions de regroupement ¦ Propunerile de grupare
+Cochées quand le nom et la ville concordent ¦ Bifate când numele și orașul se potrivesc
+Toutes décochées ¦ Toate nebifate
+Le bandeau « notaires sans fiche » ¦ Banda „notari fără fișă”
+Montré dans la liste des études ¦ Afișată în lista birourilor
+Jamais (on passe par ⋯) ¦ Niciodată (prin ⋯)
+⚠️ Homonymes ¦ ⚠️ Omonimi
+fiche n° {n} (confidentielle) ¦ fișa nr. {n} (confidențială)
+naissance : date inconnue ¦ naștere: dată necunoscută
+même année de naissance ¦ același an de naștere
+naissance à {n} an(s) près ¦ naștere la {n} an(i) diferență
+même commune ¦ aceeași comună
+Nom, prénom ¦ Nume, prenume
+inconnus ¦ necunoscuți
+arbre seulement · ajouté le {d} ¦ doar arborele · adăugat pe {d}
+arbre seulement ¦ doar arborele
+Critère ¦ Criteriu
+Celui du dossier ¦ Cel din dosar
+L’autre fiche ¦ Cealaltă fișă
+↗ Ouvrir la fiche n° {n} ¦ ↗ Deschide fișa nr. {n}
+👥 Peut-être les mêmes : ouvrir la fusion ¦ 👥 Poate aceiași: deschide fuziunea
+Une autre fiche porte le même nom ¦ O altă fișă poartă același nume
+pas dans ce dossier. ¦ nu este în acest dosar.
+Celui à qui tu écris : {who}. ¦ Cel căruia îi scrii: {who}.
+enfant de {p} ¦ copil al lui {p}
+{n} héritiers sur {m} ont un homonyme dans la base ¦ {n} moștenitori din {m} au un omonim în bază
+Voir les détails ¦ Vezi detaliile
+Envoyer quand même aux {n} ¦ Trimite totuși tuturor celor {n}
+✓ Retenu : {a} ({y1}) et {b} ({y2}) sont deux personnes. L’alerte ne reviendra plus pour eux deux. ¦ ✓ Reținut: {a} ({y1}) și {b} ({y2}) sunt două persoane. Alerta nu va mai reveni pentru ei doi.
+née à {place} en {y} ¦ născută la {place} în {y}
+né à {place} en {y} ¦ născut la {place} în {y}
+née à {place}, date inconnue ¦ născută la {place}, dată necunoscută
+né à {place}, date inconnue ¦ născut la {place}, dată necunoscută
+✓ C’est lui ¦ ✓ Este persoana
+✓ C’est bien lui que je contacte ¦ ✓ Chiar pe ea o contactez
+👁 Voir ¦ 👁 Vezi
+👁 Voir l’autre ¦ 👁 Vezi-o pe cealaltă
+Ce n’est pas la même personne ¦ Nu este aceeași persoană
+Noté au 🕓 Journal : homonyme vu, destinataire confirmé. L’alerte reviendra au prochain contact. ¦ Notat în 🕓 Jurnal: omonim văzut, destinatar confirmat. Alerta va reveni la următorul contact.
+Noté au 🕓 Journal : homonyme vu, destinataire confirmé. L’alerte ne reviendra plus dans ce dossier. ¦ Notat în 🕓 Jurnal: omonim văzut, destinatar confirmat. Alerta nu va mai reveni în acest dosar.
+Écart d’années de naissance ¦ Diferența dintre anii de naștere
+2 ans ¦ 2 ani
+Même département, ou lieu inconnu ¦ Același departament, sau loc necunoscut
+Même commune seulement ¦ Doar aceeași comună
+Peu importe le lieu ¦ Locul nu contează
+Quand l’afficher ¦ Când să fie afișată
+À chaque courrier, appel et questionnaire ¦ La fiecare scrisoare, apel și chestionar
+Au premier contact d’un héritier seulement ¦ Doar la primul contact cu un moștenitor
+Après « ✓ C’est bien lui » ¦ După „✓ Chiar pe ea o contactez”
+L’alerte revient au prochain contact ¦ Alerta revine la următorul contact
+Elle ne revient plus dans ce dossier ¦ Nu mai revine în acest dosar
+Où chercher l’homonyme ¦ Unde se caută omonimul
+Seulement les autres dossiers ¦ Doar celelalte dosare

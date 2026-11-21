@@ -1,0 +1,166 @@
+fr ¦ lt ¦ lv ¦ et
+# 🏛⚠️📋📱 Compléments aux outils existants (docs/design/complements-existants.html) : A études de notaire, B homonymes
+Le serveur ne répond pas. ¦ Serveris neatsako. ¦ Serveris neatbild. ¦ Server ei vasta.
+⚙️ Réglages de cet outil ¦ ⚙️ Šio įrankio nustatymai ¦ ⚙️ Šī rīka iestatījumi ¦ ⚙️ Selle tööriista seaded
+Enlève un filtre, ou cherche autrement. ¦ Pašalink filtrą arba ieškok kitaip. ¦ Noņem filtru vai meklē citādi. ¦ Eemalda filter või otsi teisiti.
+Listes · Archives et sources ¦ Sąrašai · Archyvai ir šaltiniai ¦ Saraksti · Arhīvi un avoti ¦ Loendid · Arhiivid ja allikad
+=étude ¦ biuras|biurai|biurų ¦ biroju|birojs|biroji ¦ büroo|bürood
+{n} j ¦ {n} d. ¦ {n} d. ¦ {n} p
+sur {n} réponses ¦ iš {n} atsakymų ¦ no {n} atbildēm ¦ {n} vastusest
+pas assez de réponses ¦ per mažai atsakymų ¦ pārāk maz atbilžu ¦ liiga vähe vastuseid
+{n} sur {m} nécessaires ¦ {n} iš {m} reikalingų ¦ {n} no {m} vajadzīgajām ¦ {n} vajalikust {m}-st
+clerc : {name} ¦ padėjėjas: {name} ¦ palīgs: {name} ¦ notari abi: {name}
+Études de notaire ¦ Notarų biurai ¦ Notāru biroji ¦ Notaribürood
+🏛 Études de notaire ¦ 🏛 Notarų biurai ¦ 🏛 Notāru biroji ¦ 🏛 Notaribürood
+Étude de notaire ¦ Notarų biuras ¦ Notāru birojs ¦ Notaribüroo
+Une étude est un service d’archives de la sorte « Étude de notaire » : ses notaires et clercs, ses dossiers, ses courriers. ¦ Biuras yra „Notarų biuro“ rūšies archyvo tarnyba: jo notarai ir padėjėjai, jo bylos, jo laiškai. ¦ Birojs ir arhīva dienests ar veidu “Notāru birojs”: tā notāri un palīgi, tā lietas, tā vēstules. ¦ Büroo on arhiiviteenus liigiga „Notaribüroo”: selle notarid ja abid, selle toimikud, selle kirjad.
+＋ Nouvelle étude ¦ ＋ Naujas biuras ¦ ＋ Jauns birojs ¦ ＋ Uus büroo
+🧩 Regrouper et créer leurs fiches… ¦ 🧩 Sugrupuoti ir sukurti jų korteles… ¦ 🧩 Grupēt un izveidot to kartītes… ¦ 🧩 Rühmita ja loo nende kaardid…
+Chercher une étude, un notaire, une ville… ¦ Ieškok biuro, notaro, miesto… ¦ Meklē biroju, notāru, pilsētu… ¦ Otsi bürood, notarit, linna…
+Département : {d} ¦ Departamentas: {d} ¦ Departaments: {d} ¦ Departemang: {d}
+Répond le plus vite ¦ Greičiausiai atsako ¦ Atbild visātrāk ¦ Vastab kõige kiiremini
+Le plus de dossiers ¦ Daugiausia bylų ¦ Visvairāk lietu ¦ Kõige rohkem toimikuid
+Aucune étude de notaire pour l’instant ¦ Kol kas nėra notarų biuro ¦ Pagaidām nav notāru biroja ¦ Notaribürood veel pole
+Une étude est un service d’archives de la sorte « Étude de notaire » : crée-la ici, ou regroupe les notaires tapés à la main dans tes dossiers. ¦ Biuras yra „Notarų biuro“ rūšies archyvo tarnyba: sukurk jį čia arba sugrupuok tavo bylose ranka įrašytus notarus. ¦ Birojs ir arhīva dienests ar veidu “Notāru birojs”: izveido to šeit vai grupē tavās lietās ar roku ierakstītos notārus. ¦ Büroo on arhiiviteenus liigiga „Notaribüroo”: loo see siin või rühmita oma toimikutes käsitsi kirjutatud notarid.
+Aucun notaire noté ¦ Nėra įrašyto notaro ¦ Nav pierakstīta notāra ¦ Notarit pole märgitud
+{a} en cours · {b} clos ¦ {a} vykdoma · {b} baigta ¦ {a} procesā · {b} slēgtas ¦ {a} pooleli · {b} suletud
+{n} en attente ¦ {n} laukia ¦ {n} gaida ¦ {n} ootel
+Appeler ¦ Skambinti ¦ Zvanīt ¦ Helista
+fiche de personne n° {n} ¦ asmens kortelė Nr. {n} ¦ personas kartīte Nr. {n} ¦ isikukaart nr {n}
+nom seulement ¦ tik vardas ¦ tikai vārds ¦ ainult nimi
+ligne directe {tel} ¦ tiesioginis numeris {tel} ¦ tiešais numurs {tel} ¦ otsenumber {tel}
+ancien depuis le {d} ¦ buvęs nuo {d} ¦ bijušais kopš {d} ¦ endine alates {d}
+Aucun notaire ni clerc noté. ¦ Nėra įrašyto notaro ar padėjėjo. ¦ Nav pierakstīta ne notāra, ne palīga. ¦ Notarit ega abi pole märgitud.
+Notaires et clercs ¦ Notarai ir padėjėjai ¦ Notāri un palīgi ¦ Notarid ja abid
+lus dans les dossiers, rien n’est recopié ¦ perskaityta iš bylų, niekas nenukopijuojama ¦ nolasīts no lietām, nekas netiek pārrakstīts ¦ loetud toimikutest, midagi ei kopeerita
+réf. du notaire {ref} ¦ notaro nuoroda {ref} ¦ notāra atsauce {ref} ¦ notari viide {ref}
+Aucun dossier relié à cette étude. ¦ Su šiuo biuru nesusieta jokia byla. ¦ Ar šo biroju nav saistīta neviena lieta. ¦ Selle bürooga pole seotud ühtegi toimikut.
+reçue le {d} ¦ gauta {d} ¦ saņemta {d} ¦ saadud {d}
+{n} j · d’habitude {m} j ¦ {n} d. · paprastai {m} d. ¦ {n} d. · parasti {m} d. ¦ {n} p · tavaliselt {m} p
+en attente · {n} j ¦ laukia · {n} d. ¦ gaida · {n} d. ¦ ootel · {n} p
+✓ Réponse reçue ¦ ✓ Atsakymas gautas ¦ ✓ Atbilde saņemta ¦ ✓ Vastus saadud
+⏳ Délai de réponse constaté : {days} j en moyenne (de {min} à {max} j). Réponses comptées : {n}, celles de ce registre dont la date est notée. C’est ce que tu as observé, rien d’autre : ce n’est ni un délai légal, ni une promesse de l’étude. ¦ ⏳ Pastebėtas atsakymo laikas: vidutiniškai {days} d. (nuo {min} iki {max} d.). Įskaityti atsakymai: {n}, šio registro atsakymai su įrašyta data. Tai tik tai, ką pastebėjai: tai nėra nei įstatyminis terminas, nei biuro pažadas. ¦ ⏳ Novērotais atbildes laiks: vidēji {days} d. (no {min} līdz {max} d.). Ieskaitītās atbildes: {n}, šī reģistra atbildes ar pierakstītu datumu. Tas ir tikai tas, ko tu novēroji: tas nav ne likumā noteikts termiņš, ne biroja solījums. ¦ ⏳ Täheldatud vastamisaeg: keskmiselt {days} p ({min}–{max} p). Arvestatud vastused: {n}, selle registri vastused, mille kuupäev on märgitud. See on ainult see, mida sa täheldasid: see pole seadusjärgne tähtaeg ega büroo lubadus.
+⏳ Délai de réponse constaté : {days} j en médiane (de {min} à {max} j). Réponses comptées : {n}, celles de ce registre dont la date est notée. C’est ce que tu as observé, rien d’autre : ce n’est ni un délai légal, ni une promesse de l’étude. ¦ ⏳ Pastebėtas atsakymo laikas: mediana {days} d. (nuo {min} iki {max} d.). Įskaityti atsakymai: {n}, šio registro atsakymai su įrašyta data. Tai tik tai, ką pastebėjai: tai nėra nei įstatyminis terminas, nei biuro pažadas. ¦ ⏳ Novērotais atbildes laiks: mediāna {days} d. (no {min} līdz {max} d.). Ieskaitītās atbildes: {n}, šī reģistra atbildes ar pierakstītu datumu. Tas ir tikai tas, ko tu novēroji: tas nav ne likumā noteikts termiņš, ne biroja solījums. ¦ ⏳ Täheldatud vastamisaeg: mediaan {days} p ({min}–{max} p). Arvestatud vastused: {n}, selle registri vastused, mille kuupäev on märgitud. See on ainult see, mida sa täheldasid: see pole seadusjärgne tähtaeg ega büroo lubadus.
+⏳ Pas assez de réponses datées pour un délai constaté ({n} sur {m} nécessaires). ¦ ⏳ Per mažai datuotų atsakymų pastebėtam laikui ({n} iš {m} reikalingų). ¦ ⏳ Pārāk maz datētu atbilžu novērotajam laikam ({n} no {m} vajadzīgajām). ¦ ⏳ Täheldatud ajaks liiga vähe dateeritud vastuseid ({n} vajalikust {m}-st).
+Ses courriers ¦ Jo laiškai ¦ Tā vēstules ¦ Selle kirjad
+＋ Courrier à l’étude ¦ ＋ Laiškas biurui ¦ ＋ Vēstule birojam ¦ ＋ Kiri büroole
+＋ {n} courriers plus anciens · tout voir dans le Registre ¦ ＋ {n} senesni laiškai · viską žiūrėk Registre ¦ ＋ {n} vecākas vēstules · visu skaties Reģistrā ¦ ＋ {n} vanemat kirja · vaata kõiki Registrist
+Aucun courrier relié à cette étude. ¦ Su šiuo biuru nesusietas joks laiškas. ¦ Ar šo biroju nav saistīta neviena vēstule. ¦ Selle bürooga pole seotud ühtegi kirja.
+« {name} » retiré de l’étude ¦ „{name}“ pašalintas iš biuro ¦ “{name}” izņemts no biroja ¦ „{name}” eemaldatud büroost
+Réponse reçue le {d} ¦ Atsakymas gautas {d} ¦ Atbilde saņemta {d} ¦ Vastus saadud {d}
+Courrier remis en attente ¦ Laiškas vėl laukia ¦ Vēstule atkal gaida ¦ Kiri jälle ootel
+Vide : le courrier repasse « en attente ». ¦ Tuščia: laiškas vėl „laukia“. ¦ Tukšs: vēstule atkal “gaida”. ¦ Tühi: kiri on jälle „ootel”.
+Ajouter un notaire ou un clerc ¦ Pridėti notarą ar padėjėją ¦ Pievienot notāru vai palīgu ¦ Lisa notar või abi
+Fiche de personne (facultatif) ¦ Asmens kortelė (neprivaloma) ¦ Personas kartīte (nav obligāta) ¦ Isikukaart (valikuline)
+Jusqu’à (ancien) ¦ Iki (buvęs) ¦ Līdz (bijušais) ¦ Kuni (endine)
+Un notaire qui change d’étude reste nommé dans ses anciens dossiers : mets une date de fin, il passe « ancien ». ¦ Biurą pakeitęs notaras lieka nurodytas savo senose bylose: įrašyk pabaigos datą, ir jis taps „buvęs“. ¦ Notārs, kurš maina biroju, paliek nosaukts savās vecajās lietās: ieraksti beigu datumu, un viņš kļūst “bijušais”. ¦ Bürood vahetav notar jääb oma vanades toimikutes nimetatuks: pane lõppkuupäev ja temast saab „endine”.
+Donne le nom du notaire ou du clerc. ¦ Įrašyk notaro ar padėjėjo vardą. ¦ Ieraksti notāra vai palīga vārdu. ¦ Anna notari või abi nimi.
+Courrier à l’étude ¦ Laiškas biurui ¦ Vēstule birojam ¦ Kiri büroole
+état des recherches ¦ tyrimo būklė ¦ pētījuma stāvoklis ¦ uurimise seis
+Courrier rangé au Registre ¦ Laiškas įrašytas į Registrą ¦ Vēstule saglabāta Reģistrā ¦ Kiri pandud Registrisse
+Une étude, ou un nom gardé en texte… ¦ Biuras arba tekstu išsaugotas vardas… ¦ Birojs vai kā teksts saglabāts vārds… ¦ Büroo või tekstina hoitud nimi…
+Choisis l’étude ; le nom tapé dans le champ du notaire reste dans le dossier. ¦ Pasirink biurą; notaro lauke įrašytas vardas lieka byloje. ¦ Izvēlies biroju; notāra laukā ierakstītais vārds paliek lietā. ¦ Vali büroo; notari väljale kirjutatud nimi jääb toimikusse.
+nom gardé en texte, sans fiche d’étude ¦ tekstu išsaugotas vardas, be biuro kortelės ¦ kā teksts saglabāts vārds, bez biroja kartītes ¦ tekstina hoitud nimi, ilma büroo kaardita
+texte ¦ tekstas ¦ teksts ¦ tekst
+Notaire chargé du dossier ¦ Už bylą atsakingas notaras ¦ Par lietu atbildīgais notārs ¦ Toimiku eest vastutav notar
+ancien ¦ buvęs ¦ bijušais ¦ endine
+Choisi parmi les notaires de l’étude, ou laissé vide. ¦ Pasirinktas iš biuro notarų arba paliktas tuščias. ¦ Izvēlēts no biroja notāriem vai atstāts tukšs. ¦ Valitud büroo notarite seast või jäetud tühjaks.
+✓ Notaire du dossier : {who}. Ligne au 🕓 Journal du dossier. ¦ ✓ Bylos notaras: {who}. Eilutė bylos 🕓 Žurnale. ¦ ✓ Lietas notārs: {who}. Rinda lietas 🕓 Žurnālā. ¦ ✓ Toimiku notar: {who}. Rida toimiku 🕓 Logis.
+même nom « {n} » ¦ tas pats vardas „{n}“ ¦ tas pats vārds “{n}” ¦ sama nimi „{n}”
+même ville ¦ tas pats miestas ¦ tā pati pilsēta ¦ sama linn
+même ville que le défunt ¦ tas pats miestas kaip mirusiojo ¦ tā pati pilsēta kā mirušajam ¦ sama linn mis lahkunul
+initiale {i} ¦ inicialas {i} ¦ iniciālis {i} ¦ initsiaal {i}
+une seule étude de ce nom ¦ tik vienas tokio vardo biuras ¦ tikai viens šāda nosaukuma birojs ¦ ainult üks selle nimega büroo
+Autre étude ¦ Kitas biuras ¦ Cits birojs ¦ Muu büroo
+Laisser en texte ¦ Palikti tekstu ¦ Atstāt kā tekstu ¦ Jäta tekstiks
+{n} noms tapés à la main · rien n’est changé avant « Appliquer ». ¦ {n} ranka įrašyti vardai · niekas nesikeičia iki „Taikyti“. ¦ {n} ar roku ierakstīti vārdi · nekas nemainās pirms “Lietot”. ¦ {n} käsitsi kirjutatud nime · enne „Rakenda” ei muutu midagi.
+existe ¦ yra ¦ pastāv ¦ on olemas
+plusieurs études possibles ¦ keli galimi biurai ¦ vairāki iespējami biroji ¦ mitu võimalikku bürood
+Sans proposition ¦ Be pasiūlymo ¦ Bez ieteikuma ¦ Ettepanekuta
+＋ Créer une étude ¦ ＋ Sukurti biurą ¦ ＋ Izveidot biroju ¦ ＋ Loo büroo
+Courriers qui ressemblent à une étude ¦ Laiškai, panašūs į biurą ¦ Vēstules, kas atgādina biroju ¦ Kirjad, mis meenutavad bürood
+pour le délai constaté ¦ pastebėtam laikui ¦ novērotajam laikam ¦ täheldatud aja jaoks
+Les rapprochements ne regardent que le nom de famille (sans « Me », « Maître », « SCP », « Étude », accents) et la ville quand elle est écrite. Deux études du même nom dans deux villes ne sont jamais réunies. Le nom tapé reste dans chaque dossier. ¦ Palyginimas žiūri tik į pavardę (be „Me“, „Maître“, „SCP“, „Étude“, kirčių) ir miestą, kai jis įrašytas. Du to paties vardo biurai dviejuose miestuose niekada nesujungiami. Įrašytas vardas lieka kiekvienoje byloje. ¦ Salīdzināšana skatās tikai uzvārdu (bez “Me”, “Maître”, “SCP”, “Étude”, diakritiskajām zīmēm) un pilsētu, ja tā ierakstīta. Divi viena nosaukuma biroji divās pilsētās nekad netiek apvienoti. Ierakstītais vārds paliek katrā lietā. ¦ Võrdlus vaatab ainult perekonnanime (ilma „Me”, „Maître”, „SCP”, „Étude” ja täppideta) ja linna, kui see on kirjutatud. Kahte sama nimega bürood kahes linnas ei ühendata kunagi. Kirjutatud nimi jääb igasse toimikusse.
+Notaires tapés à la main ¦ Ranka įrašyti notarai ¦ Ar roku ierakstīti notāri ¦ Käsitsi kirjutatud notarid
+Aucun notaire tapé à la main sans fiche. ¦ Nėra ranka įrašyto notaro be kortelės. ¦ Nav ar roku ierakstīta notāra bez kartītes. ¦ Kaardita käsitsi kirjutatud notarit pole.
+Appliquer à {n} noms ({m} dossiers) ¦ Taikyti {n} vardams ({m} bylos) ¦ Lietot {n} vārdiem ({m} lietas) ¦ Rakenda {n} nimele ({m} toimikut)
+✓ {n} dossiers reliés à leur étude. Le nom tapé est gardé dans chaque dossier. ¦ ✓ {n} bylos susietos su savo biuru. Įrašytas vardas išsaugomas kiekvienoje byloje. ¦ ✓ {n} lietas saistītas ar savu biroju. Ierakstītais vārds saglabāts katrā lietā. ¦ ✓ {n} toimikut seotud oma bürooga. Kirjutatud nimi jääb igasse toimikusse.
+{n} notaires tapés à la main dans tes dossiers n’ont pas encore de fiche. ¦ {n} ranka tavo bylose įrašyti notarai dar neturi kortelės. ¦ {n} tavās lietās ar roku ierakstītiem notāriem vēl nav kartītes. ¦ {n} sinu toimikutes käsitsi kirjutatud notaril pole veel kaarti.
+{n} notaire tapé à la main dans tes dossiers n’a pas encore de fiche. ¦ {n} ranka tavo bylose įrašytas notaras dar neturi kortelės. ¦ {n} tavās lietās ar roku ierakstītam notāram vēl nav kartītes. ¦ {n} sinu toimikutes käsitsi kirjutatud notaril pole veel kaarti.
+{cases} · pas encore de fiche ¦ {cases} · dar be kortelės ¦ {cases} · vēl bez kartītes ¦ {cases} · veel kaardita
+Déjà tapé dans d’autres dossiers ¦ Jau įrašyta kitose bylose ¦ Jau ierakstīts citās lietās ¦ Juba kirjutatud teistes toimikutes
+{n} dossiers en cours ¦ {n} vykdomos bylos ¦ {n} lietas procesā ¦ {n} pooleliolevat toimikut
+{n} dossier en cours ¦ {n} vykdoma byla ¦ {n} lieta procesā ¦ {n} pooleliolev toimik
+Étude de notaire introuvable. ¦ Notarų biuras nerastas. ¦ Notāru birojs nav atrasts. ¦ Notaribürood ei leitud.
+Ce notaire n’est pas de cette étude. ¦ Šis notaras ne iš šio biuro. ¦ Šis notārs nav no šī biroja. ¦ See notar pole sellest büroost.
+Ce dossier n’est pas relié à cette étude. ¦ Ši byla nesusieta su šiuo biuru. ¦ Šī lieta nav saistīta ar šo biroju. ¦ See toimik pole selle bürooga seotud.
+Date de réponse incorrecte. ¦ Neteisinga atsakymo data. ¦ Nepareizs atbildes datums. ¦ Vale vastuse kuupäev.
+Où ranger les études ¦ Kur laikyti biurus ¦ Kur glabāt birojus ¦ Kuhu bürood panna
+Dans 🏛 Services d’archives, sorte « Étude de notaire » ¦ Į 🏛 Archyvo tarnybas, rūšis „Notarų biuras“ ¦ Sadaļā 🏛 Arhīvu dienesti, veids “Notāru birojs” ¦ Jaotisse 🏛 Arhiiviteenused, liik „Notaribüroo”
+Une liste « Études de notaire » à part ¦ Atskiras sąrašas „Notarų biurai“ ¦ Atsevišķs saraksts “Notāru biroji” ¦ Eraldi loend „Notaribürood”
+Délai constaté ¦ Pastebėtas laikas ¦ Novērotais laiks ¦ Täheldatud aeg
+Moyenne, avec le plus court et le plus long ¦ Vidurkis, su trumpiausiu ir ilgiausiu ¦ Vidējais, ar īsāko un garāko ¦ Keskmine, koos lühima ja pikimaga
+Médiane (moins sensible à une réponse très lente) ¦ Mediana (mažiau jautri labai lėtam atsakymui) ¦ Mediāna (mazāk jutīga pret ļoti lēnu atbildi) ¦ Mediaan (vähem tundlik väga aeglase vastuse suhtes)
+Ne pas l’afficher ¦ Nerodyti ¦ Nerādīt ¦ Ära näita
+Nombre de réponses avant d’afficher un délai ¦ Atsakymų skaičius prieš rodant laiką ¦ Atbilžu skaits pirms laika parādīšanas ¦ Vastuste arv enne aja näitamist
+Les courriers comptés ¦ Įskaičiuojami laiškai ¦ Ieskaitītās vēstules ¦ Arvestatud kirjad
+Ceux des 3 dernières années ¦ Paskutinių 3 metų ¦ Pēdējo 3 gadu vēstules ¦ Viimase 3 aasta omad
+Ce que propose le menu de choix ¦ Ką siūlo pasirinkimo meniu ¦ Ko piedāvā izvēles izvēlne ¦ Mida valikumenüü pakub
+Les études, puis les noms déjà tapés ¦ Biurai, tada jau įrašyti vardai ¦ Biroji, tad jau ierakstītie vārdi ¦ Bürood, siis juba kirjutatud nimed
+Les études seulement ¦ Tik biurai ¦ Tikai biroji ¦ Ainult bürood
+Le notaire chargé du dossier ¦ Už bylą atsakingas notaras ¦ Par lietu atbildīgais notārs ¦ Toimiku eest vastutav notar
+Un notaire de l’étude, facultatif ¦ Biuro notaras, neprivaloma ¦ Biroja notārs, nav obligāts ¦ Büroo notar, valikuline
+Seulement l’étude ¦ Tik biuras ¦ Tikai birojs ¦ Ainult büroo
+Les propositions de regroupement ¦ Grupavimo pasiūlymai ¦ Grupēšanas ieteikumi ¦ Rühmitamise ettepanekud
+Cochées quand le nom et la ville concordent ¦ Pažymėti, kai vardas ir miestas sutampa ¦ Atzīmēti, kad vārds un pilsēta sakrīt ¦ Märgitud, kui nimi ja linn klapivad
+Toutes décochées ¦ Visi nepažymėti ¦ Visi neatzīmēti ¦ Kõik märkimata
+Le bandeau « notaires sans fiche » ¦ Juosta „notarai be kortelės“ ¦ Josla “notāri bez kartītes” ¦ Riba „kaardita notarid”
+Montré dans la liste des études ¦ Rodoma biurų sąraše ¦ Rādīta biroju sarakstā ¦ Näidatud bürood loendis
+Jamais (on passe par ⋯) ¦ Niekada (per ⋯) ¦ Nekad (caur ⋯) ¦ Mitte kunagi (⋯ kaudu)
+⚠️ Homonymes ¦ ⚠️ Bendrapavardžiai ¦ ⚠️ Vārdabrāļi ¦ ⚠️ Nimekaimud
+fiche n° {n} (confidentielle) ¦ kortelė Nr. {n} (konfidenciali) ¦ kartīte Nr. {n} (konfidenciāla) ¦ kaart nr {n} (konfidentsiaalne)
+naissance : date inconnue ¦ gimimas: data nežinoma ¦ dzimšana: datums nezināms ¦ sünd: kuupäev teadmata
+même année de naissance ¦ tie patys gimimo metai ¦ tas pats dzimšanas gads ¦ sama sünniaasta
+naissance à {n} an(s) près ¦ gimimas ±{n} m. ¦ dzimšana ±{n} g. ¦ sünd ±{n} a
+même commune ¦ ta pati savivaldybė ¦ tā pati pašvaldība ¦ sama vald
+Nom, prénom ¦ Pavardė, vardas ¦ Uzvārds, vārds ¦ Perekonnanimi, eesnimi
+inconnus ¦ nežinomi ¦ nezināmi ¦ teadmata
+arbre seulement · ajouté le {d} ¦ tik medis · pridėta {d} ¦ tikai koks · pievienots {d} ¦ ainult puu · lisatud {d}
+arbre seulement ¦ tik medis ¦ tikai koks ¦ ainult puu
+Critère ¦ Kriterijus ¦ Kritērijs ¦ Kriteerium
+Celui du dossier ¦ Esantis byloje ¦ Lietā esošais ¦ Toimikus olev
+L’autre fiche ¦ Kita kortelė ¦ Otra kartīte ¦ Teine kaart
+↗ Ouvrir la fiche n° {n} ¦ ↗ Atidaryti kortelę Nr. {n} ¦ ↗ Atvērt kartīti Nr. {n} ¦ ↗ Ava kaart nr {n}
+👥 Peut-être les mêmes : ouvrir la fusion ¦ 👥 Gal tas pats: atidaryti sujungimą ¦ 👥 Varbūt tas pats: atvērt apvienošanu ¦ 👥 Võib-olla sama: ava ühendamine
+Une autre fiche porte le même nom ¦ Kita kortelė turi tą patį vardą ¦ Citai kartītei ir tas pats vārds ¦ Teisel kaardil on sama nimi
+pas dans ce dossier. ¦ ne šioje byloje. ¦ nav šajā lietā. ¦ pole selles toimikus.
+Celui à qui tu écris : {who}. ¦ Asmuo, kuriam rašai: {who}. ¦ Persona, kurai raksti: {who}. ¦ See, kellele sa kirjutad: {who}.
+enfant de {p} ¦ vaikas: {p} ¦ bērns: {p} ¦ laps: {p}
+{n} héritiers sur {m} ont un homonyme dans la base ¦ {n} iš {m} įpėdinių turi bendrapavardį bazėje ¦ {n} no {m} mantiniekiem ir vārdabrālis datubāzē ¦ {n} pärijal {m}-st on andmebaasis nimekaim
+Voir les détails ¦ Žiūrėti išsamiau ¦ Skatīt sīkāk ¦ Vaata üksikasju
+Envoyer quand même aux {n} ¦ Vis tiek siųsti visiems ({n}) ¦ Tomēr sūtīt visiem ({n}) ¦ Saada ikkagi kõigile ({n})
+✓ Retenu : {a} ({y1}) et {b} ({y2}) sont deux personnes. L’alerte ne reviendra plus pour eux deux. ¦ ✓ Įsiminta: {a} ({y1}) ir {b} ({y2}) yra du asmenys. Įspėjimas jiems nebegrįš. ¦ ✓ Iegaumēts: {a} ({y1}) un {b} ({y2}) ir divas personas. Brīdinājums par viņiem vairs neatgriezīsies. ¦ ✓ Meeles: {a} ({y1}) ja {b} ({y2}) on kaks inimest. Hoiatus nende kohta enam ei naase.
+née à {place} en {y} ¦ gimusi {place}, {y} m. ¦ dzimusi {place}, {y}. g. ¦ sündinud {place}, {y}
+né à {place} en {y} ¦ gimęs {place}, {y} m. ¦ dzimis {place}, {y}. g. ¦ sündinud {place}, {y}
+née à {place}, date inconnue ¦ gimusi {place}, data nežinoma ¦ dzimusi {place}, datums nezināms ¦ sündinud {place}, kuupäev teadmata
+né à {place}, date inconnue ¦ gimęs {place}, data nežinoma ¦ dzimis {place}, datums nezināms ¦ sündinud {place}, kuupäev teadmata
+✓ C’est lui ¦ ✓ Tai jis ¦ ✓ Tas ir viņš ¦ ✓ See on tema
+✓ C’est bien lui que je contacte ¦ ✓ Būtent su juo susisiekiu ¦ ✓ Tieši ar viņu sazinos ¦ ✓ Võtan ühendust just temaga
+👁 Voir ¦ 👁 Žiūrėti ¦ 👁 Skatīt ¦ 👁 Vaata
+👁 Voir l’autre ¦ 👁 Žiūrėti kitą ¦ 👁 Skatīt otru ¦ 👁 Vaata teist
+Ce n’est pas la même personne ¦ Tai ne tas pats asmuo ¦ Tā nav tā pati persona ¦ See pole sama inimene
+Noté au 🕓 Journal : homonyme vu, destinataire confirmé. L’alerte reviendra au prochain contact. ¦ Įrašyta 🕓 Žurnale: bendrapavardis matytas, gavėjas patvirtintas. Įspėjimas grįš kito kontakto metu. ¦ Pierakstīts 🕓 Žurnālā: vārdabrālis redzēts, adresāts apstiprināts. Brīdinājums atgriezīsies nākamajā saziņā. ¦ Märgitud 🕓 Logisse: nimekaim nähtud, saaja kinnitatud. Hoiatus naaseb järgmisel kontaktil.
+Noté au 🕓 Journal : homonyme vu, destinataire confirmé. L’alerte ne reviendra plus dans ce dossier. ¦ Įrašyta 🕓 Žurnale: bendrapavardis matytas, gavėjas patvirtintas. Įspėjimas šioje byloje nebegrįš. ¦ Pierakstīts 🕓 Žurnālā: vārdabrālis redzēts, adresāts apstiprināts. Brīdinājums šajā lietā vairs neatgriezīsies. ¦ Märgitud 🕓 Logisse: nimekaim nähtud, saaja kinnitatud. Hoiatus selles toimikus enam ei naase.
+Écart d’années de naissance ¦ Gimimo metų skirtumas ¦ Dzimšanas gadu atšķirība ¦ Sünniaastate vahe
+2 ans ¦ 2 metai ¦ 2 gadi ¦ 2 aastat
+Même département, ou lieu inconnu ¦ Tas pats departamentas arba nežinoma vieta ¦ Tas pats departaments vai nezināma vieta ¦ Sama departemang või teadmata koht
+Même commune seulement ¦ Tik ta pati savivaldybė ¦ Tikai tā pati pašvaldība ¦ Ainult sama vald
+Peu importe le lieu ¦ Vieta nesvarbi ¦ Vieta nav svarīga ¦ Koht pole oluline
+Quand l’afficher ¦ Kada rodyti ¦ Kad rādīt ¦ Millal näidata
+À chaque courrier, appel et questionnaire ¦ Prie kiekvieno laiško, skambučio ir klausimyno ¦ Pie katras vēstules, zvana un anketas ¦ Iga kirja, kõne ja küsimustiku juures
+Au premier contact d’un héritier seulement ¦ Tik pirmą kartą susisiekiant su įpėdiniu ¦ Tikai pirmajā saziņā ar mantinieku ¦ Ainult esimesel kontaktil pärijaga
+Après « ✓ C’est bien lui » ¦ Po „✓ Būtent su juo susisiekiu“ ¦ Pēc “✓ Tieši ar viņu sazinos” ¦ Pärast „✓ Võtan ühendust just temaga”
+L’alerte revient au prochain contact ¦ Įspėjimas grįžta kito kontakto metu ¦ Brīdinājums atgriežas nākamajā saziņā ¦ Hoiatus naaseb järgmisel kontaktil
+Elle ne revient plus dans ce dossier ¦ Šioje byloje nebegrįžta ¦ Šajā lietā vairs neatgriežas ¦ Selles toimikus enam ei naase
+Où chercher l’homonyme ¦ Kur ieškoti bendrapavardžio ¦ Kur meklēt vārdabrāli ¦ Kust nimekaimu otsida
+Seulement les autres dossiers ¦ Tik kitose bylose ¦ Tikai citās lietās ¦ Ainult teistest toimikutest

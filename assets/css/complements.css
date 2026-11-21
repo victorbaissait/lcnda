@@ -1,0 +1,62 @@
+/* 🧩 Compléter quatre outils existants (heritage-complements.js, heritage-complements-2.js) : 🏛 études de notaire,
+ * ⚠️ homonyme avant de contacter, 📋 tous les doutes, 📱 visite aux archives. Mode sombre : les couleurs de l'app (variables). */
+.compl-set { display: grid; gap: .8rem; }
+.compl-set-f { border: 1px solid var(--line, #d8d4cc); border-radius: 10px; padding: .5rem .8rem .7rem; margin: 0; min-width: 0; }
+.compl-set-f legend { font-weight: 700; padding: 0 .3rem; }
+.compl-set-f .checkbox-line { display: flex; gap: .45rem; align-items: baseline; margin: .25rem 0; }
+
+/* 🏛 études */
+.compl-ce-banner .compl-ce-typed { display: block; margin: .25rem 0; color: var(--muted, #5f5b55); }
+.compl-ce-banner .compl-ce-acts { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .3rem; }
+.compl-ce-sheet { display: grid; gap: 1rem; margin: 1rem 0; }
+.compl-ce-sheet .card-head { display: flex; align-items: center; justify-content: space-between; gap: .6rem; flex-wrap: wrap; }
+.compl-ce-sheet .is-former { opacity: .62; }
+.compl-ce-ctable td, .compl-ce-ctable th { vertical-align: middle; }
+.compl-ce-case .succ-2 { align-items: end; }
+.compl-ce-case select { max-width: 100%; }
+.compl-ce-g { margin: 0 0 1rem; }
+.compl-ce-g h4 { margin: .4rem 0; }
+.compl-ce-gr { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; padding: .45rem .5rem; border-bottom: 1px solid var(--line, #e2ded6); }
+.compl-ce-gr select { max-width: 100%; }
+
+/* ⚠️ homonymes */
+.compl-hom { display: grid; gap: .5rem; margin: 0 0 .8rem; }
+.compl-hom .compl-hom-btns { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .45rem; }
+.compl-hom-cmp { margin-top: .6rem; overflow-x: auto; }
+.compl-hom-cmp table { min-width: 420px; }
+.compl-hom-mk { font-weight: 800; text-align: center; width: 2rem; }
+.compl-hom-acts { display: flex; flex-wrap: wrap; gap: .4rem; }
+
+/* 📋 doutes */
+.compl-dt-pills { display: flex; flex-wrap: wrap; gap: .35rem; margin: 0 0 .6rem; }
+.compl-dt-pills button small { opacity: .7; margin-left: .2rem; }
+.compl-dt .compl-dt-seen { opacity: .55; }
+.compl-dt .ui-row-act { display: flex; align-items: center; gap: .35rem; flex-wrap: wrap; justify-content: flex-end; }
+.compl-dt-more { position: relative; }
+details.ui-card-more.compl-dt-more .ui-ph-menu { top: calc(100% + 6px); bottom: auto; right: 0; left: auto; min-width: 16rem; }
+.compl-dtw { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; }
+.compl-dtw-n { display: grid; gap: .1rem; padding: .55rem .4rem; border-radius: 10px; border: 1px solid var(--line, #d8d4cc); background: var(--surface, #fff); color: inherit; font: inherit; cursor: pointer; text-align: center; }
+.compl-dtw-n b { font-size: 1.5rem; line-height: 1.1; }
+.compl-dtw-n.is-red b { color: var(--danger, #c92a2a); }
+.compl-dtw-n.is-orange b { color: #c76a00; }
+.compl-dtw-n.is-yellow b { color: #9a7b00; }
+.compl-dtw-worst { margin: .6rem 0 0; font-size: .92rem; }
+.compl-dtw-top { margin: 0; padding-left: 0; list-style: none; display: grid; gap: .3rem; }
+
+/* 📱 visite */
+.compl-vp-items, .compl-vm-what, .compl-vm-ph { list-style: none; margin: .4rem 0; padding: 0; display: grid; gap: .35rem; }
+.compl-vm-ph li { display: flex; gap: .6rem; align-items: center; }
+.compl-vm-ph img { width: 64px; height: 64px; object-fit: cover; border-radius: 8px; border: 1px solid var(--line, #d8d4cc); flex: 0 0 auto; }
+.compl-vm-ph span { display: grid; gap: .2rem; min-width: 0; }
+.compl-vm-ph select { max-width: 100%; }
+.compl-vm-rev td { vertical-align: top; }
+.compl-vm-help summary { cursor: pointer; font-weight: 600; }
+
+:root[data-theme="dark"] .compl-dtw-n { background: var(--surface, #242427); }
+:root[data-theme="dark"] .compl-dtw-n.is-orange b { color: #f0a34a; }
+:root[data-theme="dark"] .compl-dtw-n.is-yellow b { color: #e8c547; }
+@media (max-width: 600px) {
+    .compl-ce-gr { flex-direction: column; align-items: stretch; }
+    .compl-dtw-n b { font-size: 1.25rem; }
+    .compl-hom .button.small { flex: 1 1 auto; }
+}

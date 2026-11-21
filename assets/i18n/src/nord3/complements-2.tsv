@@ -1,0 +1,186 @@
+fr ¦ ro
+# 🏛⚠️📋📱 Compléments aux outils existants (docs/design/complements-existants.html) : C tous les doutes, D visite aux archives, erreurs du serveur
+📋 Tous les doutes ¦ 📋 Toate îndoielile
+Points à revoir ¦ Puncte de revăzut
+Chaque ligne est lue dans l’outil d’origine au moment où tu ouvres la liste, et « ↗ » t’y emmène pour décider. Rien n’est copié : corriger dans l’outil fait disparaître la ligne. ¦ Fiecare rând este citit în instrumentul de origine când deschizi lista, iar „↗” te duce acolo ca să decizi. Nimic nu se copiază: corectarea în instrument face rândul să dispară.
+Je lis les outils… ¦ Citesc instrumentele…
+Chercher une personne, un lieu… ¦ Caută o persoană, un loc…
+et ses ancêtres ¦ și strămoșii ei
+Branche ¦ Ramură
+paternelle (Sosa 2) ¦ paternă (Sosa 2)
+maternelle (Sosa 3) ¦ maternă (Sosa 3)
+Vus ¦ Văzute
+Pas encore vus ¦ Încă nevăzute
+Vus aussi ¦ Și cele văzute
+Seulement les vus ¦ Doar cele văzute
+↗ Ouvrir dans l’outil ¦ ↗ Deschide în instrument
+👁 Ne plus marquer vu ¦ 👁 Nu mai marca drept văzut
+👁 Marquer vu ¦ 👁 Marchează drept văzut
+👤 Ouvrir la fiche de {name} ¦ 👤 Deschide fișa lui {name}
+🔍 Seulement les doutes de cette personne ¦ 🔍 Doar îndoielile acestei persoane
+Aucun doute pour l’instant ¦ Nicio îndoială deocamdată
+Les outils d’origine n’ont rien à vérifier : bravo ! ¦ Instrumentele de origine nu au nimic de verificat: bravo!
+vu le {d} ¦ văzut pe {d}
+revenu : la chose a changé ¦ revenit: ceva s-a schimbat
+👁 « {t} » n’est plus marqué vu. ¦ 👁 „{t}” nu mai e marcat drept văzut.
+👁 « {t} » marqué vu. ¦ 👁 „{t}” marcat drept văzut.
+impossible ¦ imposibil
+impossibles ¦ imposibile
+curieux ¦ ciudate
+Le plus grave : {t} ¦ Cel mai grav: {t}
+Doutes ¦ Îndoieli
+Hypothèse ouverte ¦ Ipoteză deschisă
+↗ Contrôle ¦ ↗ Verificare
+↗ Comparer ¦ ↗ Compară
+Liens fragiles ¦ Legături fragile
+↗ Solidité ¦ ↗ Soliditate
+Désaccord de preuve ¦ Dezacord între dovezi
+↗ Dossier de preuve ¦ ↗ Dosar de dovezi
+Lecture SocFace ¦ Citire SocFace
+↗ Image ¦ ↗ Imagine
+Successoral ¦ Succesiuni
+Naissance sans source ¦ Naștere fără sursă
+Baptême sans source ¦ Botez fără sursă
+Mariage sans source ¦ Căsătorie fără sursă
+Décès sans source ¦ Deces fără sursă
+Inhumation sans source ¦ Înmormântare fără sursă
+Événement sans source ¦ Eveniment fără sursă
+Lien parent-enfant supposé ¦ Legătură părinte-copil presupusă
+Lien parent-enfant sans source ¦ Legătură părinte-copil fără sursă
+{a} réponses, {p} preuves ¦ {a} răspunsuri, {p} dovezi
+Désaccord sans résolution ¦ Dezacord nerezolvat
+Homonyme dans un dossier de succession ¦ Omonim într-un dosar de succesiune
+Personne vivante ¦ Persoană în viață
+« Sans source » ¦ „Fără sursă”
+Seulement les ancêtres Sosa ¦ Doar strămoșii Sosa
+Pas du tout ¦ Deloc
+Une ligne marquée vue ¦ Un rând marcat drept văzut
+Revient si la chose change ¦ Revine dacă ceva se schimbă
+Ne revient jamais ¦ Nu revine niciodată
+Les lignes vues ¦ Rândurile văzute
+Cachées par le filtre de départ « Pas encore vus » ¦ Ascunse de filtrul inițial „Încă nevăzute”
+Montrées en pâle ¦ Afișate estompat
+Pistes du successoral ¦ Pistele succesiunilor
+À part, dans les dossiers ¦ Separat, în dosare
+Aussi dans cette liste ¦ Și în această listă
+Le widget ¦ Widgetul
+Les trois nombres et le plus grave ¦ Cele trei numere și cel mai grav
+Les 5 premières lignes ¦ Primele 5 rânduri
+📱 Visite aux archives ¦ 📱 Vizită la arhive
+🗄 Préparer une visite ¦ 🗄 Pregătește o vizită
+Préparer une visite ¦ Pregătește o vizită
+🗄 Créer la visite ¦ 🗄 Creează vizita
+Service ¦ Serviciu
+Pour quel dossier ? (facultatif) ¦ Pentru ce dosar? (opțional)
+Ouvert : {h} ¦ Deschis: {h}
+Les horaires et l’adresse sont lus dans la fiche du service. ¦ Programul și adresa sunt citite în fișa serviciului.
+Les cotes à voir ¦ Cotele de văzut
+déjà en ligne : Où chercher ? ¦ deja online: Unde să caut?
+({n} cochées sur {m}) ¦ ({n} bifate din {m})
+Coche au moins une cote. ¦ Bifează cel puțin o cotă.
+🗄 Visite créée : {n}. Elle est dans Listes → Visites d’archives. ¦ 🗄 Vizită creată: {n}. Este în Liste → Vizite la arhive.
+⚖️ reliée à un dossier ¦ ⚖️ legată de un dosar
+📱 Emporter sur le téléphone ¦ 📱 Ia pe telefon
+⤒ Rapporter les résultats ¦ ⤒ Adu înapoi rezultatele
+⤒ Importer les photos du jour ¦ ⤒ Importă pozele zilei
+Importer les photos du jour ¦ Importă pozele zilei
+Visite aux archives · {what} ¦ Vizită la arhive · {what}
+Marche sans réseau. Tout est gardé dans ce téléphone au fur et à mesure. ¦ Funcționează fără rețea. Totul se păstrează pe acest telefon pe măsură ce lucrezi.
+Photo interdite ici : pas de bouton 📷. ¦ Fotografiatul interzis aici: fără butonul 📷.
+＋ Une cote trouvée sur place, pas prévue au départ ¦ ＋ O cotă găsită la fața locului, neprevăzută
+⤓ Enregistrer mes résultats ¦ ⤓ Salvează rezultatele mele
+📷 Photo ¦ 📷 Poză
+Retirer cette photo ¦ Scoate această poză
+Cote ajoutée sur place ¦ Cotă adăugată la fața locului
+✓ Gardé dans ce téléphone à {time} ¦ ✓ Păstrat pe acest telefon la {time}
+⚠️ Ce navigateur ne garde rien dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Acest browser nu păstrează nimic în pagină: salvează-ți rezultatele după fiecare cotă.
+⚠️ Ce téléphone ne garde pas les photos dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Acest telefon nu păstrează pozele în pagină: salvează-ți rezultatele după fiecare cotă.
+⚠️ Ce fichier n’est pas une image. ¦ ⚠️ Acest fișier nu este o imagine.
+⚠️ Note au moins un résultat avant d’enregistrer. ¦ ⚠️ Notează cel puțin un rezultat înainte de a salva.
+✓ Fichier « {name} » enregistré : rapporte-le dans l’app (⤒ Rapporter les résultats). ¦ ✓ Fișierul „{name}” salvat: adu-l în aplicație (⤒ Adu înapoi rezultatele).
+Des photos manquaient : elles ne sont pas dans le fichier. ¦ Lipseau poze: nu sunt în fișier.
+⤓ Enregistrer la page ¦ ⤓ Salvează pagina
+Ce qui part dans la page ¦ Ce intră în pagină
+Les cotes, l’acte cherché, la personne et ses années ¦ Cotele, actul căutat, persoana și anii ei
+Ce qu’on sait déjà (parents, conjoint, dates connues) pour reconnaître l’acte sur place ¦ Ce se știe deja (părinți, soț, date cunoscute) ca să recunoști actul la fața locului
+Les personnes vivantes ¦ Persoanele în viață
+décoché : un vivant devient « Personne vivante » ¦ nebifat: o persoană în viață devine „Persoană în viață”
+Les fiches confidentielles : jamais ¦ Fișele confidențiale: niciodată
+Photo interdite ici ¦ Fotografiatul interzis aici
+cache le bouton 📷 dans la page ¦ ascunde butonul 📷 în pagină
+Un seul fichier .html : aucune requête, rien à installer. Mets-le sur le téléphone (câble, AirDrop, partage Android, courriel à toi-même) ; il marche en mode avion. ¦ Un singur fișier .html: nicio cerere, nimic de instalat. Pune-l pe telefon (cablu, AirDrop, partajare Android, e-mail către tine); merge în modul avion.
+📲 Montrer comment le mettre sur le téléphone ¦ 📲 Arată cum îl pui pe telefon
+iPhone : l’aperçu de l’app Fichiers montre la page mais ne la fait pas marcher (pas de cases à cocher). Ouvre-la avec une app qui lit les pages .html, ou passe par la feuille imprimée et les photos (réglage). Android : Chrome ou Firefox l’ouvrent et la font marcher. ¦ iPhone: previzualizarea din aplicația Fișiere arată pagina, dar nu o face să meargă (fără căsuțe). Deschide-o cu o aplicație care citește pagini .html sau folosește foaia tipărită și pozele (setare). Android: Chrome sau Firefox o deschid și o fac să meargă.
+📄 1 fichier, {n} Ko : mets-le sur ton téléphone. ¦ 📄 1 fișier, {n} KB: pune-l pe telefonul tău.
+Résultats de la visite ¦ Rezultatele vizitei
+Ce fichier vient d’une autre visite : « {t} ». ¦ Acest fișier vine de la altă vizită: „{t}”.
+cote retirée de la visite depuis ¦ cotă scoasă între timp din vizită
+ajoutée sur place : d’abord ajoutée à la visite ¦ adăugată la fața locului: întâi adăugată la vizită
+dépouillement déjà relié ¦ indexare deja legată
+＋ dépouillement du Journal ({r}) ¦ ＋ indexare în Jurnal ({r})
+{n} → médias « à trier » ¦ {n} → media „de sortat”
+{n} → médias reliés à {who} ¦ {n} → media legate de {who}
+{n} → médias ¦ {n} → media
+📑 pièce du dossier : reçue ¦ 📑 actul dosarului: primit
+✓ fichier vérifié ¦ ✓ fișier verificat
+Rapporté du téléphone ¦ Adus de pe telefon
+Ce que l’app fera ¦ Ce va face aplicația
+Ranger cette cote ¦ Pune deoparte această cotă
+→ Reporter sur la fiche ¦ → Trece pe fișă
+Aucune date ni aucun lieu n’est écrit sur une fiche : ce qui est trouvé reste un dépouillement avec sa photo ; c’est toi qui le reportes sur la fiche, comme aujourd’hui. ¦ Nicio dată și niciun loc nu se scriu pe o fișă: ce s-a găsit rămâne o indexare cu poza ei; tu o treci pe fișă, ca azi.
+{n} rapportées, {m} ¦ {n} aduse, {m}
+Ranger {n} et {m} ¦ Pune deoparte {n} și {m}
+→ Reporter sur la fiche : le dépouillement et ses photos y sont reliés. ¦ → Trece pe fișă: indexarea și pozele ei sunt legate de ea.
+✓ Visite rangée : {d}, {m}, {p}. ¦ ✓ Vizită pusă deoparte: {d}, {m}, {p}.
+{n} pièce(s) reçue(s) ¦ {n} act(e) primit(e)
+Visite marquée « faite ». ¦ Vizită marcată „făcută”.
+Cette visite n’a pas encore de cote. ¦ Această vizită nu are încă nicio cotă.
+Rangées dans l’ordre des cotes d’après l’heure de prise de vue : corrige la cote d’une photo si besoin. ¦ Ordonate după cote, după ora fotografierii: corectează cota unei poze dacă e nevoie.
+— ne pas ranger — ¦ — nu pune deoparte —
+{n} rangées dans les médias (« à trier »). ¦ {n} puse în media („de sortat”).
+Parents : {names} ¦ Părinți: {names}
+Conjoint : {names} ¦ Soț/soție: {names}
+Fiche confidentielle ¦ Fișă confidențială
+Ce fichier a déjà été rangé le {date} : rien n’est fait en double. ¦ Acest fișier a fost deja pus deoparte pe {date}: nimic nu se face de două ori.
+à trier ¦ de sortat
+Trouvé à la visite : {where} ¦ Găsit la vizită: {where}
+Comment emporter la visite ¦ Cum se ia vizita
+Une page .html à ouvrir sur le téléphone ¦ O pagină .html de deschis pe telefon
+La feuille imprimée et les photos du téléphone ¦ Foaia tipărită și pozele telefonului
+Sans les vivants ¦ Fără cei în viață
+Avec les vivants ¦ Cu cei în viață
+Réduites à 2000 px ¦ Reduse la 2000 px
+Une naissance trouvée ¦ O naștere găsită
+Reste un dépouillement, tu la reportes ¦ Rămâne o indexare, tu o treci
+Proposer « → Reporter sur la fiche » dans la revue ¦ Propune „→ Trece pe fișă” la revizuire
+Après le rangement ¦ După punerea deoparte
+Visite marquée « faite » ¦ Vizită marcată „făcută”
+Aucune photo reçue. ¦ Nicio poză primită.
+Ce fichier est trop gros pour les résultats d’une visite. ¦ Acest fișier e prea mare pentru rezultatele unei vizite.
+Ce fichier n’est pas les résultats d’une visite (il faut le .zip enregistré sur le téléphone). ¦ Acest fișier nu conține rezultatele unei vizite (trebuie .zip-ul salvat pe telefon).
+Ce fichier n’est pas les résultats d’une visite aux archives. ¦ Acest fișier nu conține rezultatele unei vizite la arhive.
+Ce fichier vient d’une visite qui n’est pas dans cette généalogie. ¦ Acest fișier vine de la o vizită care nu e în această genealogie.
+Cette visite a déjà été emportée : supprime-la dans le Planificateur si tu n’en veux plus. ¦ Această vizită a fost deja luată: șterge-o în Planificator dacă nu o mai vrei.
+Choisis la cote de chaque photo. ¦ Alege cota fiecărei poze.
+Coche au moins une cote à ranger. ¦ Bifează cel puțin o cotă de pus deoparte.
+Fichier .zip illisible. ¦ Fișier .zip ilizibil.
+Fichier refusé : identifiant incorrect. ¦ Fișier refuzat: identificator greșit.
+Fichier refusé : il a été modifié depuis le téléphone (somme de contrôle). ¦ Fișier refuzat: a fost modificat după telefon (sumă de control).
+Fichier refusé : il contient des données inattendues. ¦ Fișier refuzat: conține date neașteptate.
+Fichier refusé : il ne correspond pas à la page emportée (somme de contrôle). ¦ Fișier refuzat: nu corespunde paginii luate (sumă de control).
+Fichier refusé : la liste des cotes manque. ¦ Fișier refuzat: lipsește lista cotelor.
+Fichier refusé : la liste des photos est mal formée. ¦ Fișier refuzat: lista pozelor e greșit formată.
+Fichier refusé : results.json est illisible. ¦ Fișier refuzat: results.json e ilizibil.
+Fichier refusé : results.json manque. ¦ Fișier refuzat: lipsește results.json.
+Fichier refusé : trop de fichiers dedans. ¦ Fișier refuzat: prea multe fișiere înăuntru.
+Fichier refusé : un chemin sort du dossier. ¦ Fișier refuzat: o cale iese din dosar.
+Fichier refusé : un résultat est inconnu. ¦ Fișier refuzat: un rezultat e necunoscut.
+Fichier refusé : un élément est trop gros. ¦ Fișier refuzat: un element e prea mare.
+Fichier refusé : une cote contient des données inattendues. ¦ Fișier refuzat: o cotă conține date neașteptate.
+Fichier refusé : une cote est mal formée. ¦ Fișier refuzat: o cotă e greșit formată.
+Fichier refusé : une photo annoncée manque. ¦ Fișier refuzat: lipsește o poză anunțată.
+Fichier refusé : une photo n’est pas une image. ¦ Fișier refuzat: o poză nu e o imagine.
+Impossible de ranger la photo dans les médias. ¦ Poza nu poate fi pusă în media.
+Lecture des fichiers .zip impossible sur cet ordinateur. ¦ Fișierele .zip nu pot fi citite pe acest computer.
+Trop de photos d’un coup (200 au plus). ¦ Prea multe poze deodată (cel mult 200).
+Une photo est trop grosse ou n’a pas été reçue. ¦ O poză e prea mare sau nu a sosit.

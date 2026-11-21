@@ -1,0 +1,186 @@
+fr ¦ hr ¦ sl
+# 🏛⚠️📋📱 Compléments aux outils existants (docs/design/complements-existants.html) : C tous les doutes, D visite aux archives, erreurs du serveur
+📋 Tous les doutes ¦ 📋 Sve dvojbe ¦ 📋 Vsi dvomi
+Points à revoir ¦ Točke za provjeru ¦ Točke za pregled
+Chaque ligne est lue dans l’outil d’origine au moment où tu ouvres la liste, et « ↗ » t’y emmène pour décider. Rien n’est copié : corriger dans l’outil fait disparaître la ligne. ¦ Svaki se redak čita iz izvornog alata kad otvoriš popis, a „↗” te vodi tamo da odlučiš. Ništa se ne kopira: ispravak u alatu uklanja redak. ¦ Vsaka vrstica se prebere iz izvirnega orodja, ko odpreš seznam, »↗« pa te pelje tja, da odločiš. Nič se ne kopira: popravek v orodju odstrani vrstico.
+Je lis les outils… ¦ Čitam alate… ¦ Berem orodja …
+Chercher une personne, un lieu… ¦ Traži osobu, mjesto… ¦ Išči osebo, kraj …
+et ses ancêtres ¦ i njezini preci ¦ in njeni predniki
+Branche ¦ Grana ¦ Veja
+paternelle (Sosa 2) ¦ očinska (Sosa 2) ¦ očetova (Sosa 2)
+maternelle (Sosa 3) ¦ majčinska (Sosa 3) ¦ materina (Sosa 3)
+Vus ¦ Viđeni ¦ Videni
+Pas encore vus ¦ Još neviđeni ¦ Še ne videni
+Vus aussi ¦ I viđeni ¦ Tudi videni
+Seulement les vus ¦ Samo viđeni ¦ Samo videni
+↗ Ouvrir dans l’outil ¦ ↗ Otvori u alatu ¦ ↗ Odpri v orodju
+👁 Ne plus marquer vu ¦ 👁 Ukloni oznaku viđeno ¦ 👁 Odstrani oznako videno
+👁 Marquer vu ¦ 👁 Označi viđenim ¦ 👁 Označi kot videno
+👤 Ouvrir la fiche de {name} ¦ 👤 Otvori karticu: {name} ¦ 👤 Odpri kartico: {name}
+🔍 Seulement les doutes de cette personne ¦ 🔍 Samo dvojbe ove osobe ¦ 🔍 Samo dvomi te osebe
+Aucun doute pour l’instant ¦ Zasad nema dvojbi ¦ Zaenkrat ni dvomov
+Les outils d’origine n’ont rien à vérifier : bravo ! ¦ Izvorni alati nemaju što provjeriti: bravo! ¦ Izvirna orodja nimajo česa preveriti: bravo!
+vu le {d} ¦ viđeno {d} ¦ videno {d}
+revenu : la chose a changé ¦ vraćeno: nešto se promijenilo ¦ vrnjeno: nekaj se je spremenilo
+👁 « {t} » n’est plus marqué vu. ¦ 👁 „{t}” više nije označeno viđenim. ¦ 👁 »{t}« ni več označeno kot videno.
+👁 « {t} » marqué vu. ¦ 👁 „{t}” označeno viđenim. ¦ 👁 »{t}« označeno kot videno.
+impossible ¦ nemoguće ¦ nemogoče
+impossibles ¦ nemoguće ¦ nemogoči
+curieux ¦ neobično ¦ nenavadno
+Le plus grave : {t} ¦ Najozbiljnije: {t} ¦ Najresnejše: {t}
+Doutes ¦ Dvojbe ¦ Dvomi
+Hypothèse ouverte ¦ Otvorena hipoteza ¦ Odprta hipoteza
+↗ Contrôle ¦ ↗ Provjera ¦ ↗ Preverjanje
+↗ Comparer ¦ ↗ Usporedi ¦ ↗ Primerjaj
+Liens fragiles ¦ Krhke veze ¦ Krhke povezave
+↗ Solidité ¦ ↗ Čvrstoća ¦ ↗ Trdnost
+Désaccord de preuve ¦ Neslaganje dokaza ¦ Neskladje dokazov
+↗ Dossier de preuve ¦ ↗ Spis dokaza ¦ ↗ Spis dokazov
+Lecture SocFace ¦ Čitanje SocFace ¦ Branje SocFace
+↗ Image ¦ ↗ Slika ¦ ↗ Slika
+Successoral ¦ Ostavinsko ¦ Zapuščinsko
+Naissance sans source ¦ Rođenje bez izvora ¦ Rojstvo brez vira
+Baptême sans source ¦ Krštenje bez izvora ¦ Krst brez vira
+Mariage sans source ¦ Brak bez izvora ¦ Poroka brez vira
+Décès sans source ¦ Smrt bez izvora ¦ Smrt brez vira
+Inhumation sans source ¦ Pokop bez izvora ¦ Pokop brez vira
+Événement sans source ¦ Događaj bez izvora ¦ Dogodek brez vira
+Lien parent-enfant supposé ¦ Pretpostavljena veza roditelj–dijete ¦ Domnevna povezava starš–otrok
+Lien parent-enfant sans source ¦ Veza roditelj–dijete bez izvora ¦ Povezava starš–otrok brez vira
+{a} réponses, {p} preuves ¦ odgovora: {a}, dokaza: {p} ¦ odgovorov: {a}, dokazov: {p}
+Désaccord sans résolution ¦ Neriješeno neslaganje ¦ Nerešeno neskladje
+Homonyme dans un dossier de succession ¦ Imenjak u ostavinskom predmetu ¦ Soimenjak v zapuščinski zadevi
+Personne vivante ¦ Živa osoba ¦ Živa oseba
+« Sans source » ¦ „Bez izvora” ¦ »Brez vira«
+Seulement les ancêtres Sosa ¦ Samo preci Sosa ¦ Samo predniki Sosa
+Pas du tout ¦ Nikako ¦ Sploh ne
+Une ligne marquée vue ¦ Redak označen viđenim ¦ Vrstica, označena kot videna
+Revient si la chose change ¦ Vraća se ako se nešto promijeni ¦ Vrne se, če se kaj spremeni
+Ne revient jamais ¦ Nikad se ne vraća ¦ Nikoli se ne vrne
+Les lignes vues ¦ Viđeni redci ¦ Videne vrstice
+Cachées par le filtre de départ « Pas encore vus » ¦ Skriveni početnim filtrom „Još neviđeni” ¦ Skrite z začetnim filtrom »Še ne videni«
+Montrées en pâle ¦ Prikazani blijedo ¦ Prikazane bledo
+Pistes du successoral ¦ Ostavinski tragovi ¦ Zapuščinske sledi
+À part, dans les dossiers ¦ Zasebno, u predmetima ¦ Ločeno, v zadevah
+Aussi dans cette liste ¦ I u ovom popisu ¦ Tudi v tem seznamu
+Le widget ¦ Widget ¦ Gradnik
+Les trois nombres et le plus grave ¦ Tri broja i najozbiljnije ¦ Tri številke in najresnejše
+Les 5 premières lignes ¦ Prvih 5 redaka ¦ Prvih 5 vrstic
+📱 Visite aux archives ¦ 📱 Posjet arhivu ¦ 📱 Obisk arhiva
+🗄 Préparer une visite ¦ 🗄 Pripremi posjet ¦ 🗄 Pripravi obisk
+Préparer une visite ¦ Pripremi posjet ¦ Pripravi obisk
+🗄 Créer la visite ¦ 🗄 Izradi posjet ¦ 🗄 Ustvari obisk
+Service ¦ Služba ¦ Služba
+Pour quel dossier ? (facultatif) ¦ Za koji predmet? (neobavezno) ¦ Za katero zadevo? (neobvezno)
+Ouvert : {h} ¦ Otvoreno: {h} ¦ Odprto: {h}
+Les horaires et l’adresse sont lus dans la fiche du service. ¦ Radno vrijeme i adresa čitaju se iz kartice službe. ¦ Urnik in naslov se preberejo iz kartice službe.
+Les cotes à voir ¦ Signature za pregled ¦ Signature za ogled
+déjà en ligne : Où chercher ? ¦ već na mreži: Gdje tražiti? ¦ že na spletu: Kje iskati?
+({n} cochées sur {m}) ¦ ({n} označeno od {m}) ¦ ({n} označenih od {m})
+Coche au moins une cote. ¦ Označi barem jednu signaturu. ¦ Označi vsaj eno signaturo.
+🗄 Visite créée : {n}. Elle est dans Listes → Visites d’archives. ¦ 🗄 Posjet izrađen: {n}. Nalazi se u Popisi → Posjeti arhivima. ¦ 🗄 Obisk ustvarjen: {n}. Je v Seznami → Obiski arhivov.
+⚖️ reliée à un dossier ¦ ⚖️ povezan s predmetom ¦ ⚖️ povezan z zadevo
+📱 Emporter sur le téléphone ¦ 📱 Ponesi na telefonu ¦ 📱 Vzemi s seboj na telefonu
+⤒ Rapporter les résultats ¦ ⤒ Donesi rezultate ¦ ⤒ Prinesi rezultate
+⤒ Importer les photos du jour ¦ ⤒ Uvezi današnje fotografije ¦ ⤒ Uvozi današnje fotografije
+Importer les photos du jour ¦ Uvezi današnje fotografije ¦ Uvozi današnje fotografije
+Visite aux archives · {what} ¦ Posjet arhivu · {what} ¦ Obisk arhiva · {what}
+Marche sans réseau. Tout est gardé dans ce téléphone au fur et à mesure. ¦ Radi bez mreže. Sve se odmah čuva u ovom telefonu. ¦ Deluje brez omrežja. Vse se sproti hrani v tem telefonu.
+Photo interdite ici : pas de bouton 📷. ¦ Ovdje je fotografiranje zabranjeno: nema gumba 📷. ¦ Tu je fotografiranje prepovedano: ni gumba 📷.
+＋ Une cote trouvée sur place, pas prévue au départ ¦ ＋ Signatura pronađena na licu mjesta, nije bila planirana ¦ ＋ Signatura, najdena na kraju samem, ni bila načrtovana
+⤓ Enregistrer mes résultats ¦ ⤓ Spremi moje rezultate ¦ ⤓ Shrani moje rezultate
+📷 Photo ¦ 📷 Fotografija ¦ 📷 Fotografija
+Retirer cette photo ¦ Ukloni ovu fotografiju ¦ Odstrani to fotografijo
+Cote ajoutée sur place ¦ Signatura dodana na licu mjesta ¦ Signatura, dodana na kraju samem
+✓ Gardé dans ce téléphone à {time} ¦ ✓ Spremljeno u ovaj telefon u {time} ¦ ✓ Shranjeno v tem telefonu ob {time}
+⚠️ Ce navigateur ne garde rien dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Ovaj preglednik ne čuva ništa na stranici: spremi rezultate nakon svake signature. ¦ ⚠️ Ta brskalnik na strani ne hrani ničesar: shrani rezultate po vsaki signaturi.
+⚠️ Ce téléphone ne garde pas les photos dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Ovaj telefon ne čuva fotografije na stranici: spremi rezultate nakon svake signature. ¦ ⚠️ Ta telefon na strani ne hrani fotografij: shrani rezultate po vsaki signaturi.
+⚠️ Ce fichier n’est pas une image. ¦ ⚠️ Ova datoteka nije slika. ¦ ⚠️ Ta datoteka ni slika.
+⚠️ Note au moins un résultat avant d’enregistrer. ¦ ⚠️ Zabilježi barem jedan rezultat prije spremanja. ¦ ⚠️ Pred shranjevanjem zabeleži vsaj en rezultat.
+✓ Fichier « {name} » enregistré : rapporte-le dans l’app (⤒ Rapporter les résultats). ¦ ✓ Datoteka „{name}” spremljena: donesi je u aplikaciju (⤒ Donesi rezultate). ¦ ✓ Datoteka »{name}« shranjena: prinesi jo v aplikacijo (⤒ Prinesi rezultate).
+Des photos manquaient : elles ne sont pas dans le fichier. ¦ Neke fotografije nedostaju: nisu u datoteci. ¦ Nekatere fotografije manjkajo: niso v datoteki.
+⤓ Enregistrer la page ¦ ⤓ Spremi stranicu ¦ ⤓ Shrani stran
+Ce qui part dans la page ¦ Što ide na stranicu ¦ Kaj gre na stran
+Les cotes, l’acte cherché, la personne et ses années ¦ Signature, traženi zapis, osoba i njezine godine ¦ Signature, iskani zapis, oseba in njena leta
+Ce qu’on sait déjà (parents, conjoint, dates connues) pour reconnaître l’acte sur place ¦ Ono što se već zna (roditelji, supružnik, poznati datumi) da prepoznaš zapis na licu mjesta ¦ Kar je že znano (starši, zakonec, znani datumi), da zapis prepoznaš na kraju samem
+Les personnes vivantes ¦ Žive osobe ¦ Žive osebe
+décoché : un vivant devient « Personne vivante » ¦ neoznačeno: živa osoba postaje „Živa osoba” ¦ neoznačeno: živa oseba postane »Živa oseba«
+Les fiches confidentielles : jamais ¦ Povjerljive kartice: nikad ¦ Zaupne kartice: nikoli
+Photo interdite ici ¦ Ovdje je fotografiranje zabranjeno ¦ Tu je fotografiranje prepovedano
+cache le bouton 📷 dans la page ¦ skriva gumb 📷 na stranici ¦ skrije gumb 📷 na strani
+Un seul fichier .html : aucune requête, rien à installer. Mets-le sur le téléphone (câble, AirDrop, partage Android, courriel à toi-même) ; il marche en mode avion. ¦ Jedna datoteka .html: nema zahtjeva, ništa za instalirati. Stavi je na telefon (kabel, AirDrop, Android dijeljenje, e-pošta sebi); radi u načinu rada u zrakoplovu. ¦ Ena datoteka .html: brez zahtevkov, nič za namestiti. Daj jo na telefon (kabel, AirDrop, deljenje v Androidu, e-pošta sebi); deluje v letalskem načinu.
+📲 Montrer comment le mettre sur le téléphone ¦ 📲 Pokaži kako je staviti na telefon ¦ 📲 Pokaži, kako jo dati na telefon
+iPhone : l’aperçu de l’app Fichiers montre la page mais ne la fait pas marcher (pas de cases à cocher). Ouvre-la avec une app qui lit les pages .html, ou passe par la feuille imprimée et les photos (réglage). Android : Chrome ou Firefox l’ouvrent et la font marcher. ¦ iPhone: pregled u aplikaciji Datoteke prikazuje stranicu, ali je ne pokreće (nema potvrdnih okvira). Otvori je aplikacijom koja čita stranice .html ili koristi ispisani list i fotografije (postavka). Android: Chrome ili Firefox je otvaraju i pokreću. ¦ iPhone: predogled v aplikaciji Datoteke prikaže stran, a je ne zažene (ni potrditvenih polj). Odpri jo z aplikacijo, ki bere strani .html, ali uporabi natisnjeni list in fotografije (nastavitev). Android: Chrome ali Firefox jo odpreta in zaženeta.
+📄 1 fichier, {n} Ko : mets-le sur ton téléphone. ¦ 📄 1 datoteka, {n} KB: stavi je na svoj telefon. ¦ 📄 1 datoteka, {n} KB: daj jo na svoj telefon.
+Résultats de la visite ¦ Rezultati posjeta ¦ Rezultati obiska
+Ce fichier vient d’une autre visite : « {t} ». ¦ Ova datoteka je iz drugog posjeta: „{t}”. ¦ Ta datoteka je iz drugega obiska: »{t}«.
+cote retirée de la visite depuis ¦ signatura je u međuvremenu uklonjena iz posjeta ¦ signatura je bila medtem odstranjena iz obiska
+ajoutée sur place : d’abord ajoutée à la visite ¦ dodano na licu mjesta: najprije dodano u posjet ¦ dodano na kraju samem: najprej dodano v obisk
+dépouillement déjà relié ¦ obrada već povezana ¦ obdelava že povezana
+＋ dépouillement du Journal ({r}) ¦ ＋ obrada iz Dnevnika ({r}) ¦ ＋ obdelava iz Dnevnika ({r})
+{n} → médias « à trier » ¦ {n} → mediji „za razvrstati” ¦ {n} → mediji »za razvrstitev«
+{n} → médias reliés à {who} ¦ {n} → mediji povezani s {who} ¦ {n} → mediji, povezani z {who}
+{n} → médias ¦ {n} → mediji ¦ {n} → mediji
+📑 pièce du dossier : reçue ¦ 📑 dokument predmeta: primljen ¦ 📑 dokument zadeve: prejet
+✓ fichier vérifié ¦ ✓ datoteka provjerena ¦ ✓ datoteka preverjena
+Rapporté du téléphone ¦ Doneseno s telefona ¦ Prineseno s telefona
+Ce que l’app fera ¦ Što će aplikacija učiniti ¦ Kaj bo naredila aplikacija
+Ranger cette cote ¦ Spremi ovu signaturu ¦ Shrani to signaturo
+→ Reporter sur la fiche ¦ → Prenesi na karticu ¦ → Prenesi na kartico
+Aucune date ni aucun lieu n’est écrit sur une fiche : ce qui est trouvé reste un dépouillement avec sa photo ; c’est toi qui le reportes sur la fiche, comme aujourd’hui. ¦ Na karticu se ne upisuje ni datum ni mjesto: pronađeno ostaje obrada sa svojom fotografijom; ti to prenosiš na karticu, kao i danas. ¦ Na kartico se ne zapiše ne datum ne kraj: najdeno ostane obdelava s fotografijo; ti to preneseš na kartico, kot danes.
+{n} rapportées, {m} ¦ donesenih: {n}, {m} ¦ prinesenih: {n}, {m}
+Ranger {n} et {m} ¦ Spremi {n} i {m} ¦ Shrani {n} in {m}
+→ Reporter sur la fiche : le dépouillement et ses photos y sont reliés. ¦ → Prenesi na karticu: obrada i njezine fotografije povezane su s njom. ¦ → Prenesi na kartico: obdelava in njene fotografije so povezane z njo.
+✓ Visite rangée : {d}, {m}, {p}. ¦ ✓ Posjet spremljen: {d}, {m}, {p}. ¦ ✓ Obisk shranjen: {d}, {m}, {p}.
+{n} pièce(s) reçue(s) ¦ primljenih dokumenata: {n} ¦ prejetih dokumentov: {n}
+Visite marquée « faite ». ¦ Posjet označen „obavljenim”. ¦ Obisk označen kot »opravljen«.
+Cette visite n’a pas encore de cote. ¦ Ovaj posjet još nema signaturu. ¦ Ta obisk še nima signature.
+Rangées dans l’ordre des cotes d’après l’heure de prise de vue : corrige la cote d’une photo si besoin. ¦ Poredano redom signatura prema vremenu snimanja: po potrebi ispravi signaturu fotografije. ¦ Razvrščeno po vrstnem redu signatur glede na čas posnetka: po potrebi popravi signaturo fotografije.
+— ne pas ranger — ¦ — ne spremaj — ¦ — ne shrani —
+{n} rangées dans les médias (« à trier »). ¦ {n} spremljeno u medije („za razvrstati”). ¦ {n} shranjenih v medije (»za razvrstitev«).
+Parents : {names} ¦ Roditelji: {names} ¦ Starši: {names}
+Conjoint : {names} ¦ Supružnik: {names} ¦ Zakonec: {names}
+Fiche confidentielle ¦ Povjerljiva kartica ¦ Zaupna kartica
+Ce fichier a déjà été rangé le {date} : rien n’est fait en double. ¦ Ova datoteka već je spremljena {date}: ništa se ne radi dvaput. ¦ Ta datoteka je bila že shranjena {date}: nič se ne naredi dvakrat.
+à trier ¦ za razvrstati ¦ za razvrstitev
+Trouvé à la visite : {where} ¦ Pronađeno u posjetu: {where} ¦ Najdeno na obisku: {where}
+Comment emporter la visite ¦ Kako ponijeti posjet ¦ Kako vzeti obisk s seboj
+Une page .html à ouvrir sur le téléphone ¦ Stranica .html za otvaranje na telefonu ¦ Stran .html za odpiranje na telefonu
+La feuille imprimée et les photos du téléphone ¦ Ispisani list i fotografije s telefona ¦ Natisnjeni list in fotografije s telefona
+Sans les vivants ¦ Bez živih ¦ Brez živih
+Avec les vivants ¦ Sa živima ¦ Z živimi
+Réduites à 2000 px ¦ Smanjene na 2000 px ¦ Pomanjšane na 2000 px
+Une naissance trouvée ¦ Pronađeno rođenje ¦ Najdeno rojstvo
+Reste un dépouillement, tu la reportes ¦ Ostaje obrada, ti je prenosiš ¦ Ostane obdelava, ti jo preneseš
+Proposer « → Reporter sur la fiche » dans la revue ¦ Ponudi „→ Prenesi na karticu” u pregledu ¦ Ponudi »→ Prenesi na kartico« v pregledu
+Après le rangement ¦ Nakon spremanja ¦ Po shranjevanju
+Visite marquée « faite » ¦ Posjet označen „obavljenim” ¦ Obisk označen kot »opravljen«
+Aucune photo reçue. ¦ Nije primljena nijedna fotografija. ¦ Nobena fotografija ni prejeta.
+Ce fichier est trop gros pour les résultats d’une visite. ¦ Ova je datoteka prevelika za rezultate posjeta. ¦ Ta datoteka je prevelika za rezultate obiska.
+Ce fichier n’est pas les résultats d’une visite (il faut le .zip enregistré sur le téléphone). ¦ Ova datoteka nisu rezultati posjeta (treba .zip spremljen na telefonu). ¦ Ta datoteka ni rezultat obiska (potrebuješ .zip, shranjen na telefonu).
+Ce fichier n’est pas les résultats d’une visite aux archives. ¦ Ova datoteka nisu rezultati posjeta arhivu. ¦ Ta datoteka ni rezultat obiska arhiva.
+Ce fichier vient d’une visite qui n’est pas dans cette généalogie. ¦ Ova datoteka je iz posjeta koji nije u ovom rodoslovlju. ¦ Ta datoteka je iz obiska, ki ga ni v tem rodoslovju.
+Cette visite a déjà été emportée : supprime-la dans le Planificateur si tu n’en veux plus. ¦ Ovaj je posjet već ponesen: izbriši ga u Planeru ako ga više ne želiš. ¦ Ta obisk je že vzet s seboj: izbriši ga v Načrtovalniku, če ga ne želiš več.
+Choisis la cote de chaque photo. ¦ Odaberi signaturu svake fotografije. ¦ Izberi signaturo vsake fotografije.
+Coche au moins une cote à ranger. ¦ Označi barem jednu signaturu za spremanje. ¦ Označi vsaj eno signaturo za shranjevanje.
+Fichier .zip illisible. ¦ Nečitljiva datoteka .zip. ¦ Neberljiva datoteka .zip.
+Fichier refusé : identifiant incorrect. ¦ Datoteka odbijena: neispravan identifikator. ¦ Datoteka zavrnjena: napačen identifikator.
+Fichier refusé : il a été modifié depuis le téléphone (somme de contrôle). ¦ Datoteka odbijena: izmijenjena je nakon telefona (kontrolni zbroj). ¦ Datoteka zavrnjena: spremenjena je bila po telefonu (kontrolna vsota).
+Fichier refusé : il contient des données inattendues. ¦ Datoteka odbijena: sadrži neočekivane podatke. ¦ Datoteka zavrnjena: vsebuje nepričakovane podatke.
+Fichier refusé : il ne correspond pas à la page emportée (somme de contrôle). ¦ Datoteka odbijena: ne odgovara ponesenoj stranici (kontrolni zbroj). ¦ Datoteka zavrnjena: ne ustreza vzeti strani (kontrolna vsota).
+Fichier refusé : la liste des cotes manque. ¦ Datoteka odbijena: nedostaje popis signatura. ¦ Datoteka zavrnjena: manjka seznam signatur.
+Fichier refusé : la liste des photos est mal formée. ¦ Datoteka odbijena: popis fotografija je neispravan. ¦ Datoteka zavrnjena: seznam fotografij je napačen.
+Fichier refusé : results.json est illisible. ¦ Datoteka odbijena: results.json je nečitljiv. ¦ Datoteka zavrnjena: results.json je neberljiv.
+Fichier refusé : results.json manque. ¦ Datoteka odbijena: nedostaje results.json. ¦ Datoteka zavrnjena: manjka results.json.
+Fichier refusé : trop de fichiers dedans. ¦ Datoteka odbijena: previše datoteka unutra. ¦ Datoteka zavrnjena: preveč datotek v njej.
+Fichier refusé : un chemin sort du dossier. ¦ Datoteka odbijena: putanja izlazi iz mape. ¦ Datoteka zavrnjena: pot gre iz mape.
+Fichier refusé : un résultat est inconnu. ¦ Datoteka odbijena: nepoznat rezultat. ¦ Datoteka zavrnjena: neznan rezultat.
+Fichier refusé : un élément est trop gros. ¦ Datoteka odbijena: element je prevelik. ¦ Datoteka zavrnjena: element je prevelik.
+Fichier refusé : une cote contient des données inattendues. ¦ Datoteka odbijena: signatura sadrži neočekivane podatke. ¦ Datoteka zavrnjena: signatura vsebuje nepričakovane podatke.
+Fichier refusé : une cote est mal formée. ¦ Datoteka odbijena: signatura je neispravna. ¦ Datoteka zavrnjena: signatura je napačna.
+Fichier refusé : une photo annoncée manque. ¦ Datoteka odbijena: najavljena fotografija nedostaje. ¦ Datoteka zavrnjena: napovedana fotografija manjka.
+Fichier refusé : une photo n’est pas une image. ¦ Datoteka odbijena: fotografija nije slika. ¦ Datoteka zavrnjena: fotografija ni slika.
+Impossible de ranger la photo dans les médias. ¦ Fotografiju nije moguće spremiti u medije. ¦ Fotografije ni mogoče shraniti v medije.
+Lecture des fichiers .zip impossible sur cet ordinateur. ¦ Na ovom računalu nije moguće čitati datoteke .zip. ¦ Na tem računalniku ni mogoče brati datotek .zip.
+Trop de photos d’un coup (200 au plus). ¦ Previše fotografija odjednom (najviše 200). ¦ Preveč fotografij naenkrat (največ 200).
+Une photo est trop grosse ou n’a pas été reçue. ¦ Fotografija je prevelika ili nije primljena. ¦ Fotografija je prevelika ali ni bila prejeta.

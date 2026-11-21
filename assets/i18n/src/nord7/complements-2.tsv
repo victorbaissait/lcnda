@@ -1,0 +1,186 @@
+fr ¦ is
+# 🏛⚠️📋📱 Compléments aux outils existants (docs/design/complements-existants.html) : C tous les doutes, D visite aux archives, erreurs du serveur
+📋 Tous les doutes ¦ 📋 Allur vafi
+Points à revoir ¦ Atriði til að skoða
+Chaque ligne est lue dans l’outil d’origine au moment où tu ouvres la liste, et « ↗ » t’y emmène pour décider. Rien n’est copié : corriger dans l’outil fait disparaître la ligne. ¦ Hver lína er lesin úr upprunalega tólinu þegar þú opnar listann og „↗“ fer með þig þangað til að ákveða. Ekkert er afritað: leiðrétting í tólinu fjarlægir línuna.
+Je lis les outils… ¦ Ég les tólin…
+Chercher une personne, un lieu… ¦ Leitaðu að manneskju, stað…
+et ses ancêtres ¦ og forfeður hans
+Branche ¦ Grein
+paternelle (Sosa 2) ¦ föðurætt (Sosa 2)
+maternelle (Sosa 3) ¦ móðurætt (Sosa 3)
+Vus ¦ Séð
+Pas encore vus ¦ Ekki séð enn
+Vus aussi ¦ Líka séð
+Seulement les vus ¦ Aðeins séð
+↗ Ouvrir dans l’outil ¦ ↗ Opna í tólinu
+👁 Ne plus marquer vu ¦ 👁 Taka af merkinguna „séð“
+👁 Marquer vu ¦ 👁 Merkja sem séð
+👤 Ouvrir la fiche de {name} ¦ 👤 Opna spjald: {name}
+🔍 Seulement les doutes de cette personne ¦ 🔍 Aðeins vafi þessarar manneskju
+Aucun doute pour l’instant ¦ Enginn vafi í bili
+Les outils d’origine n’ont rien à vérifier : bravo ! ¦ Upprunalegu tólin hafa ekkert til að athuga: vel gert!
+vu le {d} ¦ séð {d}
+revenu : la chose a changé ¦ kom aftur: eitthvað breyttist
+👁 « {t} » n’est plus marqué vu. ¦ 👁 „{t}“ er ekki lengur merkt sem séð.
+👁 « {t} » marqué vu. ¦ 👁 „{t}“ merkt sem séð.
+impossible ¦ ómögulegt
+impossibles ¦ ómöguleg
+curieux ¦ undarlegt
+Le plus grave : {t} ¦ Alvarlegast: {t}
+Doutes ¦ Vafi
+Hypothèse ouverte ¦ Opin tilgáta
+↗ Contrôle ¦ ↗ Athugun
+↗ Comparer ¦ ↗ Bera saman
+Liens fragiles ¦ Veik tengsl
+↗ Solidité ¦ ↗ Traustleiki
+Désaccord de preuve ¦ Ósamræmi í sönnunum
+↗ Dossier de preuve ¦ ↗ Sönnunarmappa
+Lecture SocFace ¦ SocFace-lestur
+↗ Image ¦ ↗ Mynd
+Successoral ¦ Erfðamál
+Naissance sans source ¦ Fæðing án heimildar
+Baptême sans source ¦ Skírn án heimildar
+Mariage sans source ¦ Hjónaband án heimildar
+Décès sans source ¦ Andlát án heimildar
+Inhumation sans source ¦ Greftrun án heimildar
+Événement sans source ¦ Atburður án heimildar
+Lien parent-enfant supposé ¦ Ætluð tengsl foreldris og barns
+Lien parent-enfant sans source ¦ Tengsl foreldris og barns án heimildar
+{a} réponses, {p} preuves ¦ svör: {a}, sannanir: {p}
+Désaccord sans résolution ¦ Óleyst ósamræmi
+Homonyme dans un dossier de succession ¦ Alnafni í dánarbúsmáli
+Personne vivante ¦ Lifandi manneskja
+« Sans source » ¦ „Án heimildar“
+Seulement les ancêtres Sosa ¦ Aðeins Sosa-forfeður
+Pas du tout ¦ Alls ekki
+Une ligne marquée vue ¦ Lína merkt sem séð
+Revient si la chose change ¦ Kemur aftur ef eitthvað breytist
+Ne revient jamais ¦ Kemur aldrei aftur
+Les lignes vues ¦ Séðu línurnar
+Cachées par le filtre de départ « Pas encore vus » ¦ Faldar með upphafssíunni „Ekki séð enn“
+Montrées en pâle ¦ Sýndar daufar
+Pistes du successoral ¦ Vísbendingar úr erfðamálum
+À part, dans les dossiers ¦ Sér, í málunum
+Aussi dans cette liste ¦ Líka í þessum lista
+Le widget ¦ Græjan
+Les trois nombres et le plus grave ¦ Tölurnar þrjár og það alvarlegasta
+Les 5 premières lignes ¦ Fyrstu 5 línurnar
+📱 Visite aux archives ¦ 📱 Heimsókn á skjalasafn
+🗄 Préparer une visite ¦ 🗄 Undirbúa heimsókn
+Préparer une visite ¦ Undirbúa heimsókn
+🗄 Créer la visite ¦ 🗄 Búa til heimsókn
+Service ¦ Þjónusta
+Pour quel dossier ? (facultatif) ¦ Fyrir hvaða mál? (valfrjálst)
+Ouvert : {h} ¦ Opið: {h}
+Les horaires et l’adresse sont lus dans la fiche du service. ¦ Opnunartími og heimilisfang eru lesin af spjaldi þjónustunnar.
+Les cotes à voir ¦ Safnmörk til að skoða
+déjà en ligne : Où chercher ? ¦ þegar á netinu: Hvar á að leita?
+({n} cochées sur {m}) ¦ ({n} hökuð af {m})
+Coche au moins une cote. ¦ Hakaðu við a.m.k. eitt safnmark.
+🗄 Visite créée : {n}. Elle est dans Listes → Visites d’archives. ¦ 🗄 Heimsókn búin til: {n}. Hún er í Listar → Heimsóknir á skjalasöfn.
+⚖️ reliée à un dossier ¦ ⚖️ tengd máli
+📱 Emporter sur le téléphone ¦ 📱 Taka með í símanum
+⤒ Rapporter les résultats ¦ ⤒ Koma með niðurstöðurnar
+⤒ Importer les photos du jour ¦ ⤒ Flytja inn myndir dagsins
+Importer les photos du jour ¦ Flytja inn myndir dagsins
+Visite aux archives · {what} ¦ Heimsókn á skjalasafn · {what}
+Marche sans réseau. Tout est gardé dans ce téléphone au fur et à mesure. ¦ Virkar án nets. Allt er geymt jafnóðum í þessum síma.
+Photo interdite ici : pas de bouton 📷. ¦ Myndatökur bannaðar hér: enginn 📷-hnappur.
+＋ Une cote trouvée sur place, pas prévue au départ ¦ ＋ Safnmark fundið á staðnum, ekki fyrirhugað
+⤓ Enregistrer mes résultats ¦ ⤓ Vista niðurstöðurnar mínar
+📷 Photo ¦ 📷 Mynd
+Retirer cette photo ¦ Fjarlægja þessa mynd
+Cote ajoutée sur place ¦ Safnmarki bætt við á staðnum
+✓ Gardé dans ce téléphone à {time} ¦ ✓ Geymt í þessum síma kl. {time}
+⚠️ Ce navigateur ne garde rien dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Þessi vafri geymir ekkert á síðunni: vistaðu niðurstöðurnar eftir hvert safnmark.
+⚠️ Ce téléphone ne garde pas les photos dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Þessi sími geymir ekki myndir á síðunni: vistaðu niðurstöðurnar eftir hvert safnmark.
+⚠️ Ce fichier n’est pas une image. ¦ ⚠️ Þessi skrá er ekki mynd.
+⚠️ Note au moins un résultat avant d’enregistrer. ¦ ⚠️ Skráðu a.m.k. eina niðurstöðu áður en þú vistar.
+✓ Fichier « {name} » enregistré : rapporte-le dans l’app (⤒ Rapporter les résultats). ¦ ✓ Skráin „{name}“ vistuð: komdu með hana í forritið (⤒ Koma með niðurstöðurnar).
+Des photos manquaient : elles ne sont pas dans le fichier. ¦ Nokkrar myndir vantaði: þær eru ekki í skránni.
+⤓ Enregistrer la page ¦ ⤓ Vista síðuna
+Ce qui part dans la page ¦ Hvað fer á síðuna
+Les cotes, l’acte cherché, la personne et ses années ¦ Safnmörkin, skjalið sem leitað er að, manneskjan og árin hennar
+Ce qu’on sait déjà (parents, conjoint, dates connues) pour reconnaître l’acte sur place ¦ Það sem þegar er vitað (foreldrar, maki, þekktar dagsetningar) til að þekkja skjalið á staðnum
+Les personnes vivantes ¦ Lifandi fólk
+décoché : un vivant devient « Personne vivante » ¦ óhakað: lifandi manneskja verður „Lifandi manneskja“
+Les fiches confidentielles : jamais ¦ Trúnaðarspjöld: aldrei
+Photo interdite ici ¦ Myndatökur bannaðar hér
+cache le bouton 📷 dans la page ¦ felur 📷-hnappinn á síðunni
+Un seul fichier .html : aucune requête, rien à installer. Mets-le sur le téléphone (câble, AirDrop, partage Android, courriel à toi-même) ; il marche en mode avion. ¦ Ein .html-skrá: engar beiðnir, ekkert að setja upp. Settu hana á símann (snúra, AirDrop, Android-deiling, tölvupóstur til þín); hún virkar í flugstillingu.
+📲 Montrer comment le mettre sur le téléphone ¦ 📲 Sýna hvernig hún er sett á símann
+iPhone : l’aperçu de l’app Fichiers montre la page mais ne la fait pas marcher (pas de cases à cocher). Ouvre-la avec une app qui lit les pages .html, ou passe par la feuille imprimée et les photos (réglage). Android : Chrome ou Firefox l’ouvrent et la font marcher. ¦ iPhone: forskoðun í Skrár-forritinu sýnir síðuna en lætur hana ekki virka (engir gátreitir). Opnaðu hana með forriti sem les .html-síður, eða notaðu útprentaða blaðið og myndirnar (stilling). Android: Chrome eða Firefox opna hana og láta hana virka.
+📄 1 fichier, {n} Ko : mets-le sur ton téléphone. ¦ 📄 1 skrá, {n} KB: settu hana á símann þinn.
+Résultats de la visite ¦ Niðurstöður heimsóknarinnar
+Ce fichier vient d’une autre visite : « {t} ». ¦ Þessi skrá er úr annarri heimsókn: „{t}“.
+cote retirée de la visite depuis ¦ safnmark síðan fjarlægt úr heimsókninni
+ajoutée sur place : d’abord ajoutée à la visite ¦ bætt við á staðnum: fyrst bætt við heimsóknina
+dépouillement déjà relié ¦ úrvinnsla þegar tengd
+＋ dépouillement du Journal ({r}) ¦ ＋ úrvinnsla úr Annál ({r})
+{n} → médias « à trier » ¦ {n} → miðlar „til flokkunar“
+{n} → médias reliés à {who} ¦ {n} → miðlar tengdir {who}
+{n} → médias ¦ {n} → miðlar
+📑 pièce du dossier : reçue ¦ 📑 skjal málsins: móttekið
+✓ fichier vérifié ¦ ✓ skrá staðfest
+Rapporté du téléphone ¦ Komið með úr símanum
+Ce que l’app fera ¦ Hvað forritið gerir
+Ranger cette cote ¦ Ganga frá þessu safnmarki
+→ Reporter sur la fiche ¦ → Færa á spjaldið
+Aucune date ni aucun lieu n’est écrit sur une fiche : ce qui est trouvé reste un dépouillement avec sa photo ; c’est toi qui le reportes sur la fiche, comme aujourd’hui. ¦ Engin dagsetning né staður er skrifaður á spjald: það sem finnst er áfram úrvinnsla með mynd sinni; þú færir það sjálf(ur) á spjaldið, eins og núna.
+{n} rapportées, {m} ¦ komið með: {n}, {m}
+Ranger {n} et {m} ¦ Ganga frá {n} og {m}
+→ Reporter sur la fiche : le dépouillement et ses photos y sont reliés. ¦ → Færa á spjaldið: úrvinnslan og myndir hennar eru tengdar því.
+✓ Visite rangée : {d}, {m}, {p}. ¦ ✓ Gengið frá heimsókn: {d}, {m}, {p}.
+{n} pièce(s) reçue(s) ¦ móttekin skjöl: {n}
+Visite marquée « faite ». ¦ Heimsókn merkt „lokið“.
+Cette visite n’a pas encore de cote. ¦ Þessi heimsókn hefur ekkert safnmark enn.
+Rangées dans l’ordre des cotes d’après l’heure de prise de vue : corrige la cote d’une photo si besoin. ¦ Raðað eftir röð safnmarka út frá tökutíma: leiðréttu safnmark myndar ef þarf.
+— ne pas ranger — ¦ — ekki ganga frá —
+{n} rangées dans les médias (« à trier »). ¦ {n} sett í miðla („til flokkunar“).
+Parents : {names} ¦ Foreldrar: {names}
+Conjoint : {names} ¦ Maki: {names}
+Fiche confidentielle ¦ Trúnaðarspjald
+Ce fichier a déjà été rangé le {date} : rien n’est fait en double. ¦ Þessi skrá var þegar frágengin {date}: ekkert er gert tvisvar.
+à trier ¦ til flokkunar
+Trouvé à la visite : {where} ¦ Fannst í heimsókn: {where}
+Comment emporter la visite ¦ Hvernig heimsóknin er tekin með
+Une page .html à ouvrir sur le téléphone ¦ .html-síða til að opna í símanum
+La feuille imprimée et les photos du téléphone ¦ Útprentaða blaðið og myndir símans
+Sans les vivants ¦ Án lifandi fólks
+Avec les vivants ¦ Með lifandi fólki
+Réduites à 2000 px ¦ Minnkaðar í 2000 px
+Une naissance trouvée ¦ Fundin fæðing
+Reste un dépouillement, tu la reportes ¦ Er áfram úrvinnsla, þú færir hana
+Proposer « → Reporter sur la fiche » dans la revue ¦ Bjóða „→ Færa á spjaldið“ í yfirferðinni
+Après le rangement ¦ Eftir frágang
+Visite marquée « faite » ¦ Heimsókn merkt „lokið“
+Aucune photo reçue. ¦ Engin mynd móttekin.
+Ce fichier est trop gros pour les résultats d’une visite. ¦ Þessi skrá er of stór fyrir niðurstöður heimsóknar.
+Ce fichier n’est pas les résultats d’une visite (il faut le .zip enregistré sur le téléphone). ¦ Þessi skrá er ekki niðurstöður heimsóknar (það þarf .zip-skrána sem vistuð var í símanum).
+Ce fichier n’est pas les résultats d’une visite aux archives. ¦ Þessi skrá er ekki niðurstöður heimsóknar á skjalasafn.
+Ce fichier vient d’une visite qui n’est pas dans cette généalogie. ¦ Þessi skrá er úr heimsókn sem er ekki í þessari ættfræði.
+Cette visite a déjà été emportée : supprime-la dans le Planificateur si tu n’en veux plus. ¦ Þessi heimsókn hefur þegar verið tekin með: eyddu henni í Skipuleggjaranum ef þú vilt hana ekki lengur.
+Choisis la cote de chaque photo. ¦ Veldu safnmark hverrar myndar.
+Coche au moins une cote à ranger. ¦ Hakaðu við a.m.k. eitt safnmark til að ganga frá.
+Fichier .zip illisible. ¦ Ólæsileg .zip-skrá.
+Fichier refusé : identifiant incorrect. ¦ Skrá hafnað: rangt auðkenni.
+Fichier refusé : il a été modifié depuis le téléphone (somme de contrôle). ¦ Skrá hafnað: henni hefur verið breytt eftir símann (gátsumma).
+Fichier refusé : il contient des données inattendues. ¦ Skrá hafnað: hún inniheldur óvænt gögn.
+Fichier refusé : il ne correspond pas à la page emportée (somme de contrôle). ¦ Skrá hafnað: hún passar ekki við síðuna sem tekin var með (gátsumma).
+Fichier refusé : la liste des cotes manque. ¦ Skrá hafnað: lista safnmarka vantar.
+Fichier refusé : la liste des photos est mal formée. ¦ Skrá hafnað: myndalistinn er rangt myndaður.
+Fichier refusé : results.json est illisible. ¦ Skrá hafnað: results.json er ólæsileg.
+Fichier refusé : results.json manque. ¦ Skrá hafnað: results.json vantar.
+Fichier refusé : trop de fichiers dedans. ¦ Skrá hafnað: of margar skrár í henni.
+Fichier refusé : un chemin sort du dossier. ¦ Skrá hafnað: slóð fer út fyrir möppuna.
+Fichier refusé : un résultat est inconnu. ¦ Skrá hafnað: óþekkt niðurstaða.
+Fichier refusé : un élément est trop gros. ¦ Skrá hafnað: eining er of stór.
+Fichier refusé : une cote contient des données inattendues. ¦ Skrá hafnað: safnmark inniheldur óvænt gögn.
+Fichier refusé : une cote est mal formée. ¦ Skrá hafnað: safnmark er rangt myndað.
+Fichier refusé : une photo annoncée manque. ¦ Skrá hafnað: tilkynnta mynd vantar.
+Fichier refusé : une photo n’est pas une image. ¦ Skrá hafnað: mynd er ekki myndskrá.
+Impossible de ranger la photo dans les médias. ¦ Ekki tókst að setja myndina í miðla.
+Lecture des fichiers .zip impossible sur cet ordinateur. ¦ Ekki er hægt að lesa .zip-skrár á þessari tölvu.
+Trop de photos d’un coup (200 au plus). ¦ Of margar myndir í einu (200 hið mesta).
+Une photo est trop grosse ou n’a pas été reçue. ¦ Mynd er of stór eða barst ekki.

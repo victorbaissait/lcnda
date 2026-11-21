@@ -1,0 +1,186 @@
+fr ¦ sk ¦ nb
+# 🏛⚠️📋📱 Compléments aux outils existants (docs/design/complements-existants.html) : C tous les doutes, D visite aux archives, erreurs du serveur
+📋 Tous les doutes ¦ 📋 Všetky pochybnosti ¦ 📋 All tvil
+Points à revoir ¦ Body na revíziu ¦ Punkter å gå gjennom
+Chaque ligne est lue dans l’outil d’origine au moment où tu ouvres la liste, et « ↗ » t’y emmène pour décider. Rien n’est copié : corriger dans l’outil fait disparaître la ligne. ¦ Každý riadok sa číta v pôvodnom nástroji vo chvíli, keď zoznam otvoríš, a „↗“ ťa tam zavedie rozhodnúť. Nič sa nekopíruje: oprava v nástroji riadok odstráni. ¦ Hver linje leses i det opprinnelige verktøyet når du åpner listen, og «↗» tar deg dit for å avgjøre. Ingenting kopieres: retter du i verktøyet, forsvinner linjen.
+Je lis les outils… ¦ Čítam nástroje… ¦ Leser verktøyene…
+Chercher une personne, un lieu… ¦ Hľadaj osobu, miesto… ¦ Søk etter en person, et sted…
+et ses ancêtres ¦ a jej predkovia ¦ og forfedrene
+Branche ¦ Vetva ¦ Gren
+paternelle (Sosa 2) ¦ otcovská (Sosa 2) ¦ farssiden (Sosa 2)
+maternelle (Sosa 3) ¦ materská (Sosa 3) ¦ morssiden (Sosa 3)
+Vus ¦ Videné ¦ Sett
+Pas encore vus ¦ Ešte nevidené ¦ Ikke sett ennå
+Vus aussi ¦ Aj videné ¦ Også sett
+Seulement les vus ¦ Len videné ¦ Bare sett
+↗ Ouvrir dans l’outil ¦ ↗ Otvoriť v nástroji ¦ ↗ Åpne i verktøyet
+👁 Ne plus marquer vu ¦ 👁 Zrušiť označenie „videné“ ¦ 👁 Ikke lenger merk som sett
+👁 Marquer vu ¦ 👁 Označiť ako videné ¦ 👁 Merk som sett
+👤 Ouvrir la fiche de {name} ¦ 👤 Otvoriť kartu: {name} ¦ 👤 Åpne oppføringen for {name}
+🔍 Seulement les doutes de cette personne ¦ 🔍 Len pochybnosti tejto osoby ¦ 🔍 Bare tvilen til denne personen
+Aucun doute pour l’instant ¦ Zatiaľ žiadna pochybnosť ¦ Ingen tvil akkurat nå
+Les outils d’origine n’ont rien à vérifier : bravo ! ¦ Pôvodné nástroje nemajú čo kontrolovať: výborne! ¦ De opprinnelige verktøyene har ingenting å kontrollere: flott!
+vu le {d} ¦ videné {d} ¦ sett {d}
+revenu : la chose a changé ¦ vrátilo sa: vec sa zmenila ¦ tilbake: noe har endret seg
+👁 « {t} » n’est plus marqué vu. ¦ 👁 „{t}“ už nie je označené ako videné. ¦ 👁 «{t}» er ikke lenger merket som sett.
+👁 « {t} » marqué vu. ¦ 👁 „{t}“ označené ako videné. ¦ 👁 «{t}» merket som sett.
+impossible ¦ nemožné ¦ umulig
+impossibles ¦ nemožné ¦ umulige
+curieux ¦ zvláštne ¦ merkelig
+Le plus grave : {t} ¦ Najvážnejšie: {t} ¦ Det alvorligste: {t}
+Doutes ¦ Pochybnosti ¦ Tvil
+Hypothèse ouverte ¦ Otvorená hypotéza ¦ Åpen hypotese
+↗ Contrôle ¦ ↗ Kontrola ¦ ↗ Kontroll
+↗ Comparer ¦ ↗ Porovnať ¦ ↗ Sammenlign
+Liens fragiles ¦ Krehké prepojenia ¦ Skjøre forbindelser
+↗ Solidité ¦ ↗ Pevnosť ¦ ↗ Holdbarhet
+Désaccord de preuve ¦ Rozpor v dôkazoch ¦ Motstrid i bevisene
+↗ Dossier de preuve ¦ ↗ Dôkazná zložka ¦ ↗ Bevismappe
+Lecture SocFace ¦ Čítanie SocFace ¦ SocFace-lesning
+↗ Image ¦ ↗ Obrázok ¦ ↗ Bilde
+Successoral ¦ Dedičstvá ¦ Arveforskning
+Naissance sans source ¦ Narodenie bez prameňa ¦ Fødsel uten kilde
+Baptême sans source ¦ Krst bez prameňa ¦ Dåp uten kilde
+Mariage sans source ¦ Sobáš bez prameňa ¦ Vielse uten kilde
+Décès sans source ¦ Úmrtie bez prameňa ¦ Død uten kilde
+Inhumation sans source ¦ Pohreb bez prameňa ¦ Begravelse uten kilde
+Événement sans source ¦ Udalosť bez prameňa ¦ Hendelse uten kilde
+Lien parent-enfant supposé ¦ Predpokladané spojenie rodič–dieťa ¦ Antatt forelder–barn-forbindelse
+Lien parent-enfant sans source ¦ Spojenie rodič–dieťa bez prameňa ¦ Forelder–barn-forbindelse uten kilde
+{a} réponses, {p} preuves ¦ odpovede: {a}, dôkazy: {p} ¦ {a} svar, {p} bevis
+Désaccord sans résolution ¦ Rozpor bez vyriešenia ¦ Motstrid uten løsning
+Homonyme dans un dossier de succession ¦ Zhoda mien v dedičskom spise ¦ Navnebror i en dødsbosak
+Personne vivante ¦ Žijúca osoba ¦ Levende person
+« Sans source » ¦ „Bez prameňa“ ¦ «Uten kilde»
+Seulement les ancêtres Sosa ¦ Len predkovia Sosa ¦ Bare Sosa-forfedrene
+Pas du tout ¦ Vôbec nie ¦ Ikke i det hele tatt
+Une ligne marquée vue ¦ Riadok označený ako videný ¦ En linje merket som sett
+Revient si la chose change ¦ Vráti sa, keď sa vec zmení ¦ Kommer tilbake hvis noe endrer seg
+Ne revient jamais ¦ Nikdy sa nevráti ¦ Kommer aldri tilbake
+Les lignes vues ¦ Videné riadky ¦ De sette linjene
+Cachées par le filtre de départ « Pas encore vus » ¦ Skryté východiskovým filtrom „Ešte nevidené“ ¦ Skjult av startfilteret «Ikke sett ennå»
+Montrées en pâle ¦ Zobrazené vyblednuto ¦ Vist bleke
+Pistes du successoral ¦ Stopy dedičstiev ¦ Spor fra arveforskningen
+À part, dans les dossiers ¦ Osobitne, v spisoch ¦ For seg, i sakene
+Aussi dans cette liste ¦ Aj v tomto zozname ¦ Også i denne listen
+Le widget ¦ Widget ¦ Widgeten
+Les trois nombres et le plus grave ¦ Tri čísla a to najvážnejšie ¦ De tre tallene og det alvorligste
+Les 5 premières lignes ¦ Prvých 5 riadkov ¦ De 5 første linjene
+📱 Visite aux archives ¦ 📱 Návšteva archívu ¦ 📱 Arkivbesøk
+🗄 Préparer une visite ¦ 🗄 Pripraviť návštevu ¦ 🗄 Forbered et besøk
+Préparer une visite ¦ Pripraviť návštevu ¦ Forbered et besøk
+🗄 Créer la visite ¦ 🗄 Vytvoriť návštevu ¦ 🗄 Opprett besøket
+Service ¦ Archív ¦ Arkiv
+Pour quel dossier ? (facultatif) ¦ Pre ktorý spis? (nepovinné) ¦ For hvilken sak? (valgfritt)
+Ouvert : {h} ¦ Otvorené: {h} ¦ Åpent: {h}
+Les horaires et l’adresse sont lus dans la fiche du service. ¦ Otváracie hodiny a adresa sa čítajú z karty archívu. ¦ Åpningstider og adresse leses i arkivets oppføring.
+Les cotes à voir ¦ Signatúry na prezretie ¦ Signaturer å se
+déjà en ligne : Où chercher ? ¦ už online: Kde hľadať? ¦ allerede på nett: Hvor skal jeg søke?
+({n} cochées sur {m}) ¦ (zaškrtnuté {n} z {m}) ¦ ({n} avkrysset av {m})
+Coche au moins une cote. ¦ Zaškrtni aspoň jednu signatúru. ¦ Kryss av minst én signatur.
+🗄 Visite créée : {n}. Elle est dans Listes → Visites d’archives. ¦ 🗄 Návšteva vytvorená: {n}. Je v Zoznamy → Návštevy archívov. ¦ 🗄 Besøk opprettet: {n}. Det ligger i Lister → Arkivbesøk.
+⚖️ reliée à un dossier ¦ ⚖️ prepojené so spisom ¦ ⚖️ knyttet til en sak
+📱 Emporter sur le téléphone ¦ 📱 Vziať so sebou do telefónu ¦ 📱 Ta med på telefonen
+⤒ Rapporter les résultats ¦ ⤒ Preniesť výsledky ¦ ⤒ Hent resultatene tilbake
+⤒ Importer les photos du jour ¦ ⤒ Importovať fotky z dňa ¦ ⤒ Importer dagens bilder
+Importer les photos du jour ¦ Importovať fotky z dňa ¦ Importer dagens bilder
+Visite aux archives · {what} ¦ Návšteva archívu · {what} ¦ Arkivbesøk · {what}
+Marche sans réseau. Tout est gardé dans ce téléphone au fur et à mesure. ¦ Funguje bez siete. Všetko sa priebežne ukladá v tomto telefóne. ¦ Virker uten nett. Alt lagres fortløpende på denne telefonen.
+Photo interdite ici : pas de bouton 📷. ¦ Fotografovanie tu zakázané: žiadne tlačidlo 📷. ¦ Fotografering forbudt her: ingen 📷-knapp.
+＋ Une cote trouvée sur place, pas prévue au départ ¦ ＋ Signatúra nájdená na mieste, vopred neplánovaná ¦ ＋ En signatur funnet på stedet, ikke planlagt
+⤓ Enregistrer mes résultats ¦ ⤓ Uložiť moje výsledky ¦ ⤓ Lagre resultatene mine
+📷 Photo ¦ 📷 Fotka ¦ 📷 Bilde
+Retirer cette photo ¦ Odobrať túto fotku ¦ Fjern dette bildet
+Cote ajoutée sur place ¦ Signatúra pridaná na mieste ¦ Signatur lagt til på stedet
+✓ Gardé dans ce téléphone à {time} ¦ ✓ Uložené v tomto telefóne o {time} ¦ ✓ Lagret på denne telefonen kl. {time}
+⚠️ Ce navigateur ne garde rien dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Tento prehliadač nič na stránke neuchováva: ulož výsledky po každej signatúre. ¦ ⚠️ Denne nettleseren lagrer ingenting i siden: lagre resultatene etter hver signatur.
+⚠️ Ce téléphone ne garde pas les photos dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Tento telefón neuchováva fotky na stránke: ulož výsledky po každej signatúre. ¦ ⚠️ Denne telefonen lagrer ikke bildene i siden: lagre resultatene etter hver signatur.
+⚠️ Ce fichier n’est pas une image. ¦ ⚠️ Tento súbor nie je obrázok. ¦ ⚠️ Denne filen er ikke et bilde.
+⚠️ Note au moins un résultat avant d’enregistrer. ¦ ⚠️ Pred uložením zapíš aspoň jeden výsledok. ¦ ⚠️ Noter minst ett resultat før du lagrer.
+✓ Fichier « {name} » enregistré : rapporte-le dans l’app (⤒ Rapporter les résultats). ¦ ✓ Súbor „{name}“ uložený: prenes ho do aplikácie (⤒ Preniesť výsledky). ¦ ✓ Filen «{name}» lagret: hent den inn i appen (⤒ Hent resultatene tilbake).
+Des photos manquaient : elles ne sont pas dans le fichier. ¦ Niektoré fotky chýbali: v súbore nie sú. ¦ Noen bilder manglet: de er ikke i filen.
+⤓ Enregistrer la page ¦ ⤓ Uložiť stránku ¦ ⤓ Lagre siden
+Ce qui part dans la page ¦ Čo ide na stránku ¦ Hva som går inn i siden
+Les cotes, l’acte cherché, la personne et ses années ¦ Signatúry, hľadaný záznam, osoba a jej roky ¦ Signaturene, akten som søkes, personen og årene
+Ce qu’on sait déjà (parents, conjoint, dates connues) pour reconnaître l’acte sur place ¦ Čo už vieme (rodičia, manžel, známe dátumy), aby si záznam na mieste spoznal ¦ Det som allerede er kjent (foreldre, ektefelle, kjente datoer), for å kjenne igjen akten på stedet
+Les personnes vivantes ¦ Žijúce osoby ¦ Levende personer
+décoché : un vivant devient « Personne vivante » ¦ nezaškrtnuté: žijúci sa stane „Žijúcou osobou“ ¦ uten kryss: en levende blir «Levende person»
+Les fiches confidentielles : jamais ¦ Dôverné karty: nikdy ¦ Fortrolige oppføringer: aldri
+Photo interdite ici ¦ Fotografovanie tu zakázané ¦ Fotografering forbudt her
+cache le bouton 📷 dans la page ¦ skryje tlačidlo 📷 na stránke ¦ skjuler 📷-knappen i siden
+Un seul fichier .html : aucune requête, rien à installer. Mets-le sur le téléphone (câble, AirDrop, partage Android, courriel à toi-même) ; il marche en mode avion. ¦ Jediný súbor .html: žiadna požiadavka, nič na inštaláciu. Daj ho do telefónu (kábel, AirDrop, zdieľanie v Androide, e-mail sebe); funguje aj v režime lietadlo. ¦ Én enkelt .html-fil: ingen forespørsler, ingenting å installere. Legg den på telefonen (kabel, AirDrop, deling på Android, e-post til deg selv); den virker i flymodus.
+📲 Montrer comment le mettre sur le téléphone ¦ 📲 Ukázať, ako ho dostať do telefónu ¦ 📲 Vis hvordan den legges på telefonen
+iPhone : l’aperçu de l’app Fichiers montre la page mais ne la fait pas marcher (pas de cases à cocher). Ouvre-la avec une app qui lit les pages .html, ou passe par la feuille imprimée et les photos (réglage). Android : Chrome ou Firefox l’ouvrent et la font marcher. ¦ iPhone: náhľad v aplikácii Súbory stránku ukáže, ale nespustí ju (žiadne začiarkavacie polia). Otvor ju aplikáciou, ktorá číta stránky .html, alebo použi vytlačený list a fotky (nastavenie). Android: Chrome alebo Firefox ju otvoria a spustia. ¦ iPhone: forhåndsvisningen i appen Filer viser siden, men får den ikke til å virke (ingen avkrysningsbokser). Åpne den med en app som leser .html-sider, eller bruk det utskrevne arket og bildene (innstilling). Android: Chrome eller Firefox åpner den og får den til å virke.
+📄 1 fichier, {n} Ko : mets-le sur ton téléphone. ¦ 📄 1 súbor, {n} kB: daj ho do svojho telefónu. ¦ 📄 1 fil, {n} kB: legg den på telefonen din.
+Résultats de la visite ¦ Výsledky návštevy ¦ Resultater fra besøket
+Ce fichier vient d’une autre visite : « {t} ». ¦ Tento súbor je z inej návštevy: „{t}“. ¦ Denne filen kommer fra et annet besøk: «{t}».
+cote retirée de la visite depuis ¦ signatúra medzitým z návštevy odobraná ¦ signatur fjernet fra besøket siden
+ajoutée sur place : d’abord ajoutée à la visite ¦ pridaná na mieste: najprv pridaná k návšteve ¦ lagt til på stedet: legges først til besøket
+dépouillement déjà relié ¦ výpis už prepojený ¦ registrering allerede knyttet
+＋ dépouillement du Journal ({r}) ¦ ＋ výpis v Denníku ({r}) ¦ ＋ registrering i Loggen ({r})
+{n} → médias « à trier » ¦ {n} → médiá „na roztriedenie“ ¦ {n} → medier «til sortering»
+{n} → médias reliés à {who} ¦ {n} → médiá prepojené s: {who} ¦ {n} → medier knyttet til {who}
+{n} → médias ¦ {n} → médiá ¦ {n} → medier
+📑 pièce du dossier : reçue ¦ 📑 doklad spisu: prijatý ¦ 📑 sakens dokument: mottatt
+✓ fichier vérifié ¦ ✓ súbor skontrolovaný ¦ ✓ fil kontrollert
+Rapporté du téléphone ¦ Prenesené z telefónu ¦ Hentet fra telefonen
+Ce que l’app fera ¦ Čo aplikácia urobí ¦ Hva appen vil gjøre
+Ranger cette cote ¦ Uložiť túto signatúru ¦ Lagre denne signaturen
+→ Reporter sur la fiche ¦ → Preniesť do karty ¦ → Overfør til oppføringen
+Aucune date ni aucun lieu n’est écrit sur une fiche : ce qui est trouvé reste un dépouillement avec sa photo ; c’est toi qui le reportes sur la fiche, comme aujourd’hui. ¦ Na kartu sa nezapíše žiadny dátum ani miesto: nález zostáva výpisom so svojou fotkou; do karty ho prenesieš sám, ako doteraz. ¦ Ingen dato og intet sted skrives inn i en oppføring: funnet forblir en registrering med bildet sitt; du overfører det selv til oppføringen, som i dag.
+{n} rapportées, {m} ¦ prenesené: {n}, {m} ¦ {n} hentet, {m}
+Ranger {n} et {m} ¦ Uložiť: {n} a {m} ¦ Lagre {n} og {m}
+→ Reporter sur la fiche : le dépouillement et ses photos y sont reliés. ¦ → Preniesť do karty: výpis a jeho fotky sú s ňou prepojené. ¦ → Overfør til oppføringen: registreringen og bildene er knyttet til den.
+✓ Visite rangée : {d}, {m}, {p}. ¦ ✓ Návšteva uložená: {d}, {m}, {p}. ¦ ✓ Besøket lagret: {d}, {m}, {p}.
+{n} pièce(s) reçue(s) ¦ prijaté doklady: {n} ¦ {n} dokument(er) mottatt
+Visite marquée « faite ». ¦ Návšteva označená ako „hotová“. ¦ Besøket merket som «utført».
+Cette visite n’a pas encore de cote. ¦ Táto návšteva ešte nemá signatúru. ¦ Dette besøket har ingen signatur ennå.
+Rangées dans l’ordre des cotes d’après l’heure de prise de vue : corrige la cote d’une photo si besoin. ¦ Zoradené podľa poradia signatúr podľa času snímky: v prípade potreby oprav signatúru fotky. ¦ Sortert i signaturenes rekkefølge etter tidspunktet bildet ble tatt: rett et bildes signatur om nødvendig.
+— ne pas ranger — ¦ — neukladať — ¦ — ikke lagre —
+{n} rangées dans les médias (« à trier »). ¦ {n} uložené v médiách („na roztriedenie“). ¦ {n} lagret blant mediene («til sortering»).
+Parents : {names} ¦ Rodičia: {names} ¦ Foreldre: {names}
+Conjoint : {names} ¦ Manžel(ka): {names} ¦ Ektefelle: {names}
+Fiche confidentielle ¦ Dôverná karta ¦ Fortrolig oppføring
+Ce fichier a déjà été rangé le {date} : rien n’est fait en double. ¦ Tento súbor už bol uložený {date}: nič sa nerobí dvakrát. ¦ Denne filen ble allerede lagret {date}: ingenting gjøres to ganger.
+à trier ¦ na roztriedenie ¦ til sortering
+Trouvé à la visite : {where} ¦ Nájdené pri návšteve: {where} ¦ Funnet ved besøket: {where}
+Comment emporter la visite ¦ Ako vziať návštevu so sebou ¦ Hvordan besøket tas med
+Une page .html à ouvrir sur le téléphone ¦ Stránka .html na otvorenie v telefóne ¦ En .html-side å åpne på telefonen
+La feuille imprimée et les photos du téléphone ¦ Vytlačený list a fotky z telefónu ¦ Det utskrevne arket og bildene fra telefonen
+Sans les vivants ¦ Bez žijúcich ¦ Uten de levende
+Avec les vivants ¦ So žijúcimi ¦ Med de levende
+Réduites à 2000 px ¦ Zmenšené na 2000 px ¦ Forminsket til 2000 px
+Une naissance trouvée ¦ Nájdené narodenie ¦ En funnet fødsel
+Reste un dépouillement, tu la reportes ¦ Zostáva výpisom, prenesieš ho sám ¦ Forblir en registrering, du overfører den
+Proposer « → Reporter sur la fiche » dans la revue ¦ Ponúknuť „→ Preniesť do karty“ pri kontrole ¦ Foreslå «→ Overfør til oppføringen» i gjennomgangen
+Après le rangement ¦ Po uložení ¦ Etter lagringen
+Visite marquée « faite » ¦ Návšteva označená ako „hotová“ ¦ Besøket merket som «utført»
+Aucune photo reçue. ¦ Nebola prijatá žiadna fotka. ¦ Ingen bilder mottatt.
+Ce fichier est trop gros pour les résultats d’une visite. ¦ Tento súbor je na výsledky návštevy príliš veľký. ¦ Denne filen er for stor for resultatene fra et besøk.
+Ce fichier n’est pas les résultats d’une visite (il faut le .zip enregistré sur le téléphone). ¦ Tento súbor nie sú výsledky návštevy (treba .zip uložený v telefóne). ¦ Denne filen er ikke resultatene fra et besøk (du trenger .zip-filen lagret på telefonen).
+Ce fichier n’est pas les résultats d’une visite aux archives. ¦ Tento súbor nie sú výsledky návštevy archívu. ¦ Denne filen er ikke resultatene fra et arkivbesøk.
+Ce fichier vient d’une visite qui n’est pas dans cette généalogie. ¦ Tento súbor je z návštevy, ktorá v tejto genealógii nie je. ¦ Denne filen kommer fra et besøk som ikke finnes i denne slektsdatabasen.
+Cette visite a déjà été emportée : supprime-la dans le Planificateur si tu n’en veux plus. ¦ Táto návšteva už bola vzatá so sebou: zmaž ju v Plánovači, ak ju už nechceš. ¦ Dette besøket er allerede tatt med: slett det i Planleggeren hvis du ikke vil ha det lenger.
+Choisis la cote de chaque photo. ¦ Vyber signatúru každej fotky. ¦ Velg signaturen for hvert bilde.
+Coche au moins une cote à ranger. ¦ Zaškrtni aspoň jednu signatúru na uloženie. ¦ Kryss av minst én signatur som skal lagres.
+Fichier .zip illisible. ¦ Nečitateľný súbor .zip. ¦ Uleselig .zip-fil.
+Fichier refusé : identifiant incorrect. ¦ Súbor odmietnutý: nesprávny identifikátor. ¦ Filen avvist: feil identifikator.
+Fichier refusé : il a été modifié depuis le téléphone (somme de contrôle). ¦ Súbor odmietnutý: bol zmenený po uložení v telefóne (kontrolný súčet). ¦ Filen avvist: den er endret etter telefonen (kontrollsum).
+Fichier refusé : il contient des données inattendues. ¦ Súbor odmietnutý: obsahuje neočakávané údaje. ¦ Filen avvist: den inneholder uventede data.
+Fichier refusé : il ne correspond pas à la page emportée (somme de contrôle). ¦ Súbor odmietnutý: nezodpovedá vzatej stránke (kontrolný súčet). ¦ Filen avvist: den stemmer ikke med siden som ble tatt med (kontrollsum).
+Fichier refusé : la liste des cotes manque. ¦ Súbor odmietnutý: chýba zoznam signatúr. ¦ Filen avvist: listen over signaturer mangler.
+Fichier refusé : la liste des photos est mal formée. ¦ Súbor odmietnutý: zoznam fotiek je chybný. ¦ Filen avvist: bildelisten er feil utformet.
+Fichier refusé : results.json est illisible. ¦ Súbor odmietnutý: results.json je nečitateľný. ¦ Filen avvist: results.json er uleselig.
+Fichier refusé : results.json manque. ¦ Súbor odmietnutý: chýba results.json. ¦ Filen avvist: results.json mangler.
+Fichier refusé : trop de fichiers dedans. ¦ Súbor odmietnutý: príliš veľa súborov vnútri. ¦ Filen avvist: for mange filer i den.
+Fichier refusé : un chemin sort du dossier. ¦ Súbor odmietnutý: cesta vedie mimo priečinka. ¦ Filen avvist: en sti går ut av mappen.
+Fichier refusé : un résultat est inconnu. ¦ Súbor odmietnutý: neznámy výsledok. ¦ Filen avvist: et resultat er ukjent.
+Fichier refusé : un élément est trop gros. ¦ Súbor odmietnutý: jedna položka je príliš veľká. ¦ Filen avvist: et element er for stort.
+Fichier refusé : une cote contient des données inattendues. ¦ Súbor odmietnutý: signatúra obsahuje neočakávané údaje. ¦ Filen avvist: en signatur inneholder uventede data.
+Fichier refusé : une cote est mal formée. ¦ Súbor odmietnutý: signatúra je chybná. ¦ Filen avvist: en signatur er feil utformet.
+Fichier refusé : une photo annoncée manque. ¦ Súbor odmietnutý: ohlásená fotka chýba. ¦ Filen avvist: et varslet bilde mangler.
+Fichier refusé : une photo n’est pas une image. ¦ Súbor odmietnutý: fotka nie je obrázok. ¦ Filen avvist: et bilde er ikke et bilde.
+Impossible de ranger la photo dans les médias. ¦ Fotku nemožno uložiť do médií. ¦ Bildet kan ikke lagres blant mediene.
+Lecture des fichiers .zip impossible sur cet ordinateur. ¦ Na tomto počítači nemožno čítať súbory .zip. ¦ .zip-filer kan ikke leses på denne datamaskinen.
+Trop de photos d’un coup (200 au plus). ¦ Príliš veľa fotiek naraz (najviac 200). ¦ For mange bilder på én gang (høyst 200).
+Une photo est trop grosse ou n’a pas été reçue. ¦ Fotka je príliš veľká alebo neprišla. ¦ Et bilde er for stort eller kom ikke fram.
