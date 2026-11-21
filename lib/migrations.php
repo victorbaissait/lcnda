@@ -7,12 +7,20 @@ declare(strict_types=1);
  * Le numéro de structure est rangé dans la base elle-même (PRAGMA user_version). À l'ouverture :
  *  - base à jour : rien à faire (une seule lecture, aucune vérification de colonnes à chaque requête) ;
  *  - base plus ancienne : un seul processus à la fois (verrou), copie de sécurité complète (VACUUM INTO)
- *    dans backups/, puis chaque migration manquante dans l'ordre, et le numéro est mis à jour après chacune ;
+ *    dans backups/, puis chaque migration manquante dans l'ordre. Chacune se fait dans UNE transaction SQLite, avec
+ *    son numéro (user_version) et sa ligne app_migrations : si l'ordinateur s'éteint ou si elle plante au milieu, la
+ *    base reste entière à la structure d'avant (aucune table à moitié faite) et la migration repart au lancement suivant ;
  *  - base plus récente que l'application : refus (ne jamais toucher une base qu'on ne connaît pas).
  *
  * POUR CHANGER LA STRUCTURE : ajouter une fonction schema_vN() et l'inscrire dans migration_steps(),
  * puis augmenter SCHEMA_VERSION. Ne jamais modifier une migration déjà publiée. Ne plus ajouter de
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
+ *
+ * DANS UNE MIGRATION : elle tourne déjà dans une transaction. Pas de VACUUM (impossible en transaction), pas de
+ * PRAGMA journal_mode (réglé dans db(), avant), PRAGMA foreign_keys sans effet (restent comme db() les a mis : ON).
+ * Pour un morceau qu'on veut pouvoir annuler seul : migration_tx_begin / _commit / _rollback (point de reprise
+ * SAVEPOINT), jamais $pdo->beginTransaction() directement (« already an active transaction »). Une fonction d'un
+ * autre fichier appelée ici doit faire « $own = !$pdo->inTransaction() » avant d'ouvrir la sienne.
  */
 
 const SCHEMA_VERSION = 100;
@@ -124,16 +132,22 @@ function migration_steps(): array
     ];
 }
 
-function migrate_database(PDO $pdo, string $dbPath): void
+/**
+ * @param array<int, callable(PDO): void>|null $steps pour les essais seulement (tests/test-migrations.js) : d'autres
+ *        marches que migration_steps() ; la dernière donne alors le numéro visé.
+ */
+function migrate_database(PDO $pdo, string $dbPath, ?array $steps = null): void
 {
+    $steps ??= migration_steps();
+    $latest = $steps ? max(array_keys($steps)) : SCHEMA_VERSION;
     $version = (int) $pdo->query('PRAGMA user_version')->fetchColumn();
-    if ($version === SCHEMA_VERSION) {
+    if ($version === $latest) {
         return;
     }
-    if ($version > SCHEMA_VERSION) {
+    if ($version > $latest) {
         throw new RuntimeException(
             "Cette base a été créée ou mise à jour par une version plus récente de l'application "
-            . "(structure n°{$version} ; cette version connaît jusqu'au n°" . SCHEMA_VERSION . "). "
+            . "(structure n°{$version} ; cette version connaît jusqu'au n°" . $latest . "). "
             . "Mets l'application à jour avant de l'ouvrir. La base n'a pas été modifiée."
         );
     }
@@ -147,31 +161,44 @@ function migrate_database(PDO $pdo, string $dbPath): void
     flock($lock, LOCK_EX);
     try {
         $version = (int) $pdo->query('PRAGMA user_version')->fetchColumn();
-        if ($version >= SCHEMA_VERSION) {
+        if ($version >= $latest) {
             return;
         }
         // La mise à jour doit aller au bout même si la fenêtre se ferme ou recharge pendant ce temps.
         ignore_user_abort(true);
         @set_time_limit(3600);
         $started = microtime(true);
+        // Copie de sécurité AVANT toute transaction : VACUUM INTO ne peut pas tourner dans une transaction.
         $backup = migration_backup($pdo, $dbPath, $version);
-        foreach (migration_steps() as $target => $step) {
+        if ($pdo->inTransaction()) {
+            throw new RuntimeException('mise à jour de la base demandée pendant une transaction');
+        }
+        foreach ($steps as $target => $step) {
             if ($target <= $version) {
                 continue;
             }
+            // Une marche = une transaction : la structure, son numéro et sa ligne app_migrations arrivent ensemble
+            // ou pas du tout (coupure de courant, plantage, disque plein…).
+            $pdo->beginTransaction();
             try {
                 if ($target === 9) { migration_v9_recover($pdo); }
                 $step($pdo);
+                $pdo->exec('PRAGMA user_version = ' . (int) $target);
+                $pdo->exec('CREATE TABLE IF NOT EXISTS app_migrations (name TEXT PRIMARY KEY, applied_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)');
+                $pdo->prepare('INSERT OR REPLACE INTO app_migrations(name) VALUES(?)')->execute(['schema_v' . $target]);
+                $pdo->commit();
             } catch (Throwable $e) {
+                if ($pdo->inTransaction()) {
+                    try { $pdo->rollBack(); } catch (Throwable $_) { /* SQLite a déjà tout annulé (disque plein…) */ }
+                }
                 throw new RuntimeException(
                     "La mise à jour de la base (structure n°{$target}) a échoué : " . $e->getMessage()
-                    . ($backup ? " — Copie de sécurité faite juste avant : backups/" . basename($backup) : ''),
+                    . " — La base est restée à la structure n°{$version}, sans changement à moitié fait."
+                    . ($backup ? ' Copie de sécurité faite juste avant : backups/' . basename($backup) : ''),
                     0,
                     $e
                 );
             }
-            $pdo->exec('PRAGMA user_version = ' . (int) $target);
-            $pdo->prepare('INSERT OR REPLACE INTO app_migrations(name) VALUES(?)')->execute(['schema_v' . $target]);
             $version = $target;
         }
         error_log(sprintf(
@@ -183,6 +210,45 @@ function migrate_database(PDO $pdo, string $dbPath): void
         flock($lock, LOCK_UN);
         fclose($lock);
     }
+}
+
+/**
+ * Morceau d'une migration qu'on veut pouvoir annuler seul (ex. reconstruire une table, et garder l'ancienne si ça
+ * échoue). Déjà dans la transaction de la marche : point de reprise SAVEPOINT ; sinon, transaction ordinaire.
+ * @return string jeton à rendre à migration_tx_commit / migration_tx_rollback
+ */
+function migration_tx_begin(PDO $pdo): string
+{
+    static $n = 0;
+    if (!$pdo->inTransaction()) {
+        $pdo->beginTransaction();
+        return '';
+    }
+    $name = 'lcnda_mig_' . (++$n);
+    $pdo->exec('SAVEPOINT ' . $name);
+    return $name;
+}
+
+function migration_tx_commit(PDO $pdo, ?string &$tx): void
+{
+    if ($tx === null) { return; }
+    $token = $tx;
+    $tx = null;
+    if ($token === '') { $pdo->commit(); } else { $pdo->exec('RELEASE ' . $token); }
+}
+
+/** Sans effet si le morceau n'avait pas commencé ($tx encore null) ou est déjà validé. */
+function migration_tx_rollback(PDO $pdo, ?string &$tx): void
+{
+    if ($tx === null) { return; }
+    $token = $tx;
+    $tx = null;
+    if ($token === '') {
+        if ($pdo->inTransaction()) { $pdo->rollBack(); }
+        return;
+    }
+    $pdo->exec('ROLLBACK TO ' . $token);
+    $pdo->exec('RELEASE ' . $token);
 }
 
 /**
@@ -1071,15 +1137,15 @@ function schema_v1_api_part(PDO $pdo): void
     if (!$legacyEventCollectionsApplied->fetchColumn()) {
         $legacyEvents = $pdo->query("SELECT entity_id FROM media_links WHERE entity_type='event' AND collection_key='' GROUP BY entity_id HAVING count(*) > 1")->fetchAll(PDO::FETCH_COLUMN);
         $assignLegacyCollection = $pdo->prepare("UPDATE media_links SET collection_key=?, collection_label=? WHERE entity_type='event' AND entity_id=? AND collection_key=''");
-        $pdo->beginTransaction();
+        $tx = migration_tx_begin($pdo);
         try {
             foreach ($legacyEvents as $legacyEventId) {
                 $assignLegacyCollection->execute(['event-'.(int)$legacyEventId.'-legacy', 'Documents de l’événement', (int)$legacyEventId]);
             }
             $pdo->prepare("INSERT INTO app_migrations(name) VALUES(?)")->execute(['event_media_collections_v1']);
-            $pdo->commit();
+            migration_tx_commit($pdo, $tx);
         } catch (Throwable $e) {
-            if ($pdo->inTransaction()) $pdo->rollBack();
+            migration_tx_rollback($pdo, $tx);
             throw $e;
         }
     }
@@ -1244,7 +1310,7 @@ function schema_v1_api_part(PDO $pdo): void
         $mlDdl = $pdo->query("SELECT sql FROM sqlite_master WHERE type='table' AND name='media_links'")->fetchColumn();
         if ($mlDdl !== false && str_contains((string)$mlDdl, "'census'") && !str_contains((string)$mlDdl, "'military'")) {
             $pdo->exec("PRAGMA foreign_keys=OFF");
-            $pdo->beginTransaction();
+            $tx = migration_tx_begin($pdo);
             $pdo->exec("CREATE TABLE IF NOT EXISTS media_links_new (
                 id        INTEGER PRIMARY KEY AUTOINCREMENT,
                 source_id INTEGER,
@@ -1262,15 +1328,15 @@ function schema_v1_api_part(PDO $pdo): void
             }
             $pdo->exec("DROP TABLE media_links");
             $pdo->exec("ALTER TABLE media_links_new RENAME TO media_links");
-            $pdo->commit();
+            migration_tx_commit($pdo, $tx);
             $pdo->exec("PRAGMA foreign_keys=ON");
         }
-    } catch (Throwable $_) { if ($pdo->inTransaction()) $pdo->rollBack(); }
+    } catch (Throwable $_) { migration_tx_rollback($pdo, $tx); }
     try {
         $mlDdl = $pdo->query("SELECT sql FROM sqlite_master WHERE type='table' AND name='media_links'")->fetchColumn();
         if ($mlDdl !== false && !str_contains((string)$mlDdl, "'battue_item'")) {
             $pdo->exec("PRAGMA foreign_keys=OFF");
-            $pdo->beginTransaction();
+            $tx = migration_tx_begin($pdo);
             $mlCols = array_column($pdo->query("PRAGMA table_info(media_links)")->fetchAll(PDO::FETCH_ASSOC), 'name');
             $pdo->exec("CREATE TABLE media_links_new (
                 id        INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -1287,10 +1353,10 @@ function schema_v1_api_part(PDO $pdo): void
             $pdo->exec("INSERT INTO media_links_new($colList) SELECT $colList FROM media_links");
             $pdo->exec("DROP TABLE media_links");
             $pdo->exec("ALTER TABLE media_links_new RENAME TO media_links");
-            $pdo->commit();
+            migration_tx_commit($pdo, $tx);
             $pdo->exec("PRAGMA foreign_keys=ON");
         }
-    } catch (Throwable $_) { if ($pdo->inTransaction()) $pdo->rollBack(); }
+    } catch (Throwable $_) { migration_tx_rollback($pdo, $tx); }
     // Additive migration: module Cimetière — une sépulture peut accueillir plusieurs personnes
     // (tombe familiale), et reste consultable même si elle n'existe plus (grave_exists=0).
     $pdo->exec("CREATE TABLE IF NOT EXISTS graves (
@@ -1332,7 +1398,7 @@ function schema_v1_api_part(PDO $pdo): void
         $mlDdl = $pdo->query("SELECT sql FROM sqlite_master WHERE type='table' AND name='media_links'")->fetchColumn();
         if ($mlDdl !== false && !str_contains((string)$mlDdl, "'grave'")) {
             $pdo->exec("PRAGMA foreign_keys=OFF");
-            $pdo->beginTransaction();
+            $tx = migration_tx_begin($pdo);
             $mlCols = array_column($pdo->query("PRAGMA table_info(media_links)")->fetchAll(PDO::FETCH_ASSOC), 'name');
             $pdo->exec("CREATE TABLE media_links_new (
                 id        INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -1349,10 +1415,10 @@ function schema_v1_api_part(PDO $pdo): void
             $pdo->exec("INSERT INTO media_links_new($colList) SELECT $colList FROM media_links");
             $pdo->exec("DROP TABLE media_links");
             $pdo->exec("ALTER TABLE media_links_new RENAME TO media_links");
-            $pdo->commit();
+            migration_tx_commit($pdo, $tx);
             $pdo->exec("PRAGMA foreign_keys=ON");
         }
-    } catch (Throwable $_) { if ($pdo->inTransaction()) $pdo->rollBack(); }
+    } catch (Throwable $_) { migration_tx_rollback($pdo, $tx); }
 
     // Seed des types d'événements généalogiques de base : évite une base neuve vide si la DB est supprimée.
     $defaultEventTypes = [
