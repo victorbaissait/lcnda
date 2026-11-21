@@ -244,6 +244,24 @@
     /* ─────────── 📜 Calendrier de la famille ─────────── */
     const genea = () => S().hCalGenea ||= {person: 0};
     /** la personne choisie dans Filtrer › Personne (une fiche) : le serveur lit ses événements et ceux de ses couples. Un nom tapé filtre ici. */
+    /** 🐘 la réponse serrée du serveur (lib/calendars.php, genea_calendar_stream : sortes, lieux, personnes une seule fois)
+     *  → les mêmes objets qu'avant, champ pour champ (un champ vide n'est pas écrit, comme avant) */
+    const geneaExpand = data => {
+        if (!data || !data.compact) return data;
+        const T = data.types || [], P = data.places || {}, H = data.people || {};
+        const events = (data.events || []).map(([id, y, m, d, approx, text, calendar, ti, title, placeId, who]) => {
+            const t = T[ti] || ['', '', '', 'other'], o = {id, y, m, d};
+            if (approx) o.approx = true;
+            o.text = text;
+            if (calendar !== 'gregorian' && calendar !== '') o.calendar = calendar;
+            o.type = t[0]; o.tag = t[1]; o.color = t[2]; o.group = t[3];
+            if (title !== '') o.title = title;
+            if (placeId) { o.place_id = placeId; const pl = P[placeId] || ['', '', '', '']; if (pl[0] !== '') o.place = pl[0]; if (pl[1] !== '') o.county = pl[1]; if (pl[2] !== '') o.region = pl[2]; if (pl[3] !== '') o.country = pl[3]; }
+            o.who = (who || []).map(pid => ({id: pid, name: H[pid]?.[0], gender: H[pid]?.[1]}));
+            return o;
+        });
+        return {events, undated: data.undated};
+    };
     const geneaPerson = () => { const v = window.LCNDA_UI?.listBarState?.('listes:genea_calendar')?.f?.person; return v && typeof v === 'object' && Number(v.id) ? Number(v.id) : 0; };
     /* ─── ⤓ Exporter les anniversaires dans un fichier .ics (calendrier du téléphone, de l'ordinateur) ─── */
     /* même fenêtre que Réglages → Export → « 📅 Agenda des anniversaires » : le fichier est fait par le serveur (lib/echanges.php, RFC 5545), avec les fêtes du prénom */
@@ -251,7 +269,7 @@
     ext.lists.genea_calendar = calendarScreen({
         key: 'genea', eyebrow: 'LISTES · CALENDRIERS', title: '📜 Calendrier de la famille',
         intro: 'Naissances, mariages, décès et tous les événements des fiches, au jour près quand la date le dit. Sous chaque jour, sa date dans les autres calendriers (julien, républicain…) : à choisir dans ⚙️ Réglages.',
-        load: () => { const pid = geneaPerson(); genea().person = pid; return A().api('genea_calendar', pid ? {person_id: pid} : {}); },
+        load: () => { const pid = geneaPerson(); genea().person = pid; return A().api('genea_calendar', pid ? {person_id: pid} : {}).then(geneaExpand); },
         // À l'ouverture : l'année du milieu des événements datés au jour (sinon de tous) ; en mode anniversaires, aujourd'hui
         initialCursor: (data, p) => { if (p.anniv || !data.events.length) return null; const pool = data.events.filter(e => e.d).length ? data.events.filter(e => e.d) : data.events; const ys = pool.map(e => e.y).sort((a, b) => a - b); const e = pool.find(x => x.y === ys[Math.floor(ys.length / 2)]); return [e.y, e.m || 1, e.d || 1]; },
         toItems: (data, p) => {
