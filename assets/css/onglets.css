@@ -104,6 +104,12 @@ span.ong-cov.is-empty, .ong-ico { font-size: 20px; }
 .ong-sh { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
 .ong-sh h3 { margin: 0; }
 .ong-sh .spacer { flex: 1; }
+.ong-trsec .ong-sh { flex-wrap: wrap; }
+.ong-trtitle { margin: 0 0 6px; font-weight: 700; }
+.ong-trmeta { margin: 8px 0 0; color: var(--muted); font-size: 12px; }
+.ong-unlinked { margin: 10px 0 0; font-size: 13px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.ong-uname { border: 1px dashed var(--line-color); padding: 2px 8px; border-radius: 999px; }
+.ong-uname small { color: var(--muted); }
 .ong-tr, .ong-pre { white-space: pre-wrap; font-family: Georgia, 'Times New Roman', serif; font-size: 14px; line-height: 1.55; margin: 0; max-height: 420px; overflow: auto; }
 .ong-people { display: flex; flex-wrap: wrap; gap: 8px; }
 .ong-person, .ong-app2 { display: inline-flex; gap: 8px; align-items: center; padding: 5px 10px 5px 5px; border: 1px solid var(--line-color); background: var(--card-bg); color: var(--ink); cursor: pointer; border-radius: 999px; font: inherit; text-align: left; }

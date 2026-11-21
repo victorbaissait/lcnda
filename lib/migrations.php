@@ -23,7 +23,7 @@ declare(strict_types=1);
  * autre fichier appelée ici doit faire « $own = !$pdo->inTransaction() » avant d'ouvrir la sienne.
  */
 
-const SCHEMA_VERSION = 101;
+const SCHEMA_VERSION = 102;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -130,6 +130,7 @@ function migration_steps(): array
         99 => 'schema_v99',
         100 => 'schema_v100',
         101 => 'schema_v101',
+        102 => 'schema_v102',
     ];
 }
 
@@ -2781,4 +2782,17 @@ function schema_v101(PDO $pdo): void
 {
     if (!function_exists('tw_schema')) { require_once __DIR__ . '/telephone_wifi.php'; }
     tw_schema($pdo);
+}
+
+/**
+ * Structure n°102 : 📄 un seul texte par document (maquette docs/design/dossier-et-transcriptions.html, B1). Quand un document
+ * avait la case de la visionneuse (media.transcription) et une transcription de l'Atelier (act_transcriptions) qui différaient,
+ * les deux sont gardés l'un sous l'autre dans l'acte (le texte de l'Atelier d'abord, puis celui de la visionneuse), et la copie du
+ * média devient le texte des actes. Rien n'est effacé ni écrasé. Sans risque si on la rejoue (lib/transcriptions.php,
+ * act_doc_text_merge_all : rien à faire une fois la copie à jour). Aucune table si l'Atelier n'a jamais servi.
+ */
+function schema_v102(PDO $pdo): void
+{
+    if (!function_exists('act_doc_text_merge_all')) { require_once __DIR__ . '/transcriptions.php'; }
+    act_doc_text_merge_all($pdo);
 }

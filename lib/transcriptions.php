@@ -7,15 +7,24 @@ declare(strict_types=1);
  * relié aux fiches. Table créée à la première utilisation (sans changer le numéro de structure).
  */
 
+/*
+ * 📄 Un seul texte par document (maquette docs/design/dossier-et-transcriptions.html, B1 ; essai tests/test-transcription-unique.js) :
+ * le texte de l'Atelier de transcription EST la transcription du document. media.transcription en garde une copie à jour à chaque
+ * enregistrement de l'Atelier (la recherche, les listes, la page du document, l'export la lisent sans rien changer chez elles) ;
+ * la case de la visionneuse écrit dans l'acte quand l'image n'en a qu'un ; avec plusieurs actes sur une image, un bloc par acte
+ * (titre puis texte), et chacun se modifie dans l'Atelier. Les textes d'avant qui différaient : gardés l'un sous l'autre
+ * (migration 102, act_doc_text_merge_all).
+ */
 const TRANSCRIPTION_KINDS = ['apreciser', 'naissance', 'bapteme', 'mariage', 'deces', 'sepulture', 'notarial', 'recensement', 'militaire', 'lettre', 'autre'];
 
 function act_transcriptions_ensure(PDO $pdo): void
 {
     static $done = false;
     if ($done) { return; }
-    $pdo->exec("CREATE TABLE IF NOT EXISTS act_transcriptions (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL DEFAULT '', kind TEXT NOT NULL DEFAULT 'autre',
+    $pdo->exec("CREATE TABLE IF NOT EXISTS act_transcriptions (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL DEFAULT '', kind TEXT NOT NULL DEFAULT 'apreciser',
         media_id INTEGER, date_text TEXT NOT NULL DEFAULT '', place TEXT NOT NULL DEFAULT '', source TEXT NOT NULL DEFAULT '', body TEXT NOT NULL DEFAULT '',
         data_json TEXT NOT NULL DEFAULT '{}', created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_act_transcriptions_media ON act_transcriptions(media_id)');
     $done = true;
 }
 
@@ -94,9 +103,12 @@ function act_transcriptions_page(PDO $pdo, array $q): array
 function act_transcriptions_for_media(PDO $pdo, int $mediaId): array
 {
     act_transcriptions_ensure($pdo);
-    $s = $pdo->prepare('SELECT id, title, kind, date_text, place, source, body, data_json, updated_at FROM act_transcriptions WHERE media_id=? ORDER BY updated_at DESC LIMIT 20'); $s->execute([$mediaId]);
-    return array_map(static function ($r) { $d = json_decode((string) $r['data_json'], true) ?: []; unset($r['data_json']);
-        $r['id'] = (int) $r['id']; $r['people'] = array_values(array_map(static fn($p) => ['name' => (string) ($p['name'] ?? ''), 'role' => (string) ($p['role'] ?? ''), 'person_id' => (int) ($p['person_id'] ?? 0)], array_filter(is_array($d['people'] ?? null) ? $d['people'] : [], 'is_array'))); return $r; }, $s->fetchAll());
+    $s = $pdo->prepare('SELECT id, title, kind, date_text, place, source, body, data_json, updated_at FROM act_transcriptions WHERE media_id=? ORDER BY id LIMIT 20'); $s->execute([$mediaId]);
+    $hide = act_doc_hidden_ids($pdo);
+    return array_map(static function ($r) use ($hide) { $d = json_decode((string) $r['data_json'], true) ?: []; unset($r['data_json']);
+        $r['id'] = (int) $r['id']; $r['zones'] = count(is_array($d['zones'] ?? null) ? $d['zones'] : []);
+        $r['status'] = in_array($d['status'] ?? '', ['todo', 'doing', 'done'], true) ? $d['status'] : (trim((string) $r['body']) === '' ? 'todo' : 'doing');
+        if ($hide) { $d['people'] = array_values(array_filter(is_array($d['people'] ?? null) ? $d['people'] : [], static fn($p) => is_array($p) && !isset($hide[(int) ($p['person_id'] ?? 0)]))); } $r['people'] = array_values(array_map(static fn($p) => ['name' => (string) ($p['name'] ?? ''), 'role' => (string) ($p['role'] ?? ''), 'person_id' => (int) ($p['person_id'] ?? 0)], array_filter(is_array($d['people'] ?? null) ? $d['people'] : [], 'is_array'))); return $r; }, $s->fetchAll());
 }
 
 function act_transcription_get(PDO $pdo, int $id): array
@@ -153,9 +165,19 @@ function save_act_transcription(PDO $pdo, array $data): array
     if ($mediaId) { $c = $pdo->prepare('SELECT 1 FROM media WHERE id=?'); $c->execute([$mediaId]);
         // « ↶ Annuler » d'une suppression : si l'image a été supprimée entre-temps, le texte revient quand même (sans image)
         if (!$c->fetchColumn()) { if (empty($data['restore'])) { throw new RuntimeException('Image de l’acte introuvable.'); } $mediaId = 0; } }
-    $kind = in_array($data['kind'] ?? '', TRANSCRIPTION_KINDS, true) ? $data['kind'] : 'autre';
+    $kind = in_array($data['kind'] ?? '', TRANSCRIPTION_KINDS, true) ? $data['kind'] : 'apreciser'; // « À préciser », comme l'Atelier
+    $oldMedia = 0;
+    if ($id) { $om = $pdo->prepare('SELECT media_id FROM act_transcriptions WHERE id=?'); $om->execute([$id]); $oldMedia = (int) $om->fetchColumn(); }
     $title = mb_substr(safe_text($data['title'] ?? ''), 0, 200) ?: 'Acte sans titre';
     $body = mb_substr(str_replace("\0", '', (string) (is_scalar($data['body'] ?? '') ? ($data['body'] ?? '') : '')), 0, 200000);
+    // 📄 le premier acte d'une image qui avait déjà un texte (case de la visionneuse, OCR…) : ce texte est gardé sous le nouveau (jamais écrasé)
+    if ($mediaId && $oldMedia !== $mediaId) {
+        $o = $pdo->prepare('SELECT count(*) FROM act_transcriptions WHERE media_id=? AND id<>?'); $o->execute([$mediaId, $id]);
+        if (!(int) $o->fetchColumn()) {
+            $mt = $pdo->prepare("SELECT COALESCE(transcription,'') FROM media WHERE id=?"); $mt->execute([$mediaId]); $was = trim(str_replace("\r\n", "\n", (string) $mt->fetchColumn()));
+            if ($was !== '' && !str_contains(str_replace("\r\n", "\n", $body), $was)) { $body = mb_substr(trim($body) === '' ? $was : rtrim($body) . "\n\n———\n" . $was, 0, 200000); }
+        }
+    }
     $json = json_encode(act_transcription_clean_data($pdo, $data['data'] ?? []), JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE);
     if ($json === false) { throw new RuntimeException('Zones ou personnes de l’acte illisibles : rien n’a été changé.'); }
     $vals = [$title, $kind, $mediaId ?: null, mb_substr(safe_text($data['date_text'] ?? ''), 0, 120), mb_substr(safe_text($data['place'] ?? ''), 0, 160), mb_substr(safe_text($data['source'] ?? ''), 0, 300), $body, $json];
@@ -171,16 +193,21 @@ function save_act_transcription(PDO $pdo, array $data): array
         $pdo->prepare('INSERT INTO act_transcriptions(title, kind, media_id, date_text, place, source, body, data_json) VALUES(?,?,?,?,?,?,?,?)')->execute($vals);
         $id = (int) $pdo->lastInsertId();
     }
-    // en option : le texte va aussi dans la transcription du média (visionneuse, recherche)
-    if ($mediaId && !empty($data['to_media'])) { $pdo->prepare('UPDATE media SET transcription=? WHERE id=?')->execute([$body, $mediaId]); }
+    // 📄 un seul texte par document : la copie du média suit (visionneuse, page du document, recherche, listes, export) ;
+    // l'ancienne image d'un acte déplacé garde son texte si elle n'a plus d'acte
+    media_doc_text_sync($pdo, $mediaId);
+    if ($oldMedia && $oldMedia !== $mediaId) { media_doc_text_sync($pdo, $oldMedia); }
     log_change($pdo, 'meta', 0, 'update', 'Transcription d’acte enregistrée : ' . $title);
-    return ['id' => $id];
+    return ['id' => $id, 'body' => $body];
 }
 
 function delete_act_transcription(PDO $pdo, array $data): array
 {
     act_transcriptions_ensure($pdo);
-    $pdo->prepare('DELETE FROM act_transcriptions WHERE id=?')->execute([safe_int($data['id'] ?? 0)]);
+    $id = safe_int($data['id'] ?? 0);
+    $m = $pdo->prepare('SELECT media_id FROM act_transcriptions WHERE id=?'); $m->execute([$id]); $mediaId = (int) $m->fetchColumn();
+    $pdo->prepare('DELETE FROM act_transcriptions WHERE id=?')->execute([$id]);
+    media_doc_text_sync($pdo, $mediaId); // le dernier acte parti : le média garde son texte (rien n'est perdu)
     return ['ok' => true];
 }
 
@@ -189,7 +216,9 @@ function rename_act_transcription(PDO $pdo, array $data): array
     act_transcriptions_ensure($pdo);
     $name = mb_substr(safe_text($data['name'] ?? ''), 0, 200);
     if ($name === '') { throw new RuntimeException('Nom manquant.'); }
-    $pdo->prepare('UPDATE act_transcriptions SET title=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$name, safe_int($data['id'] ?? 0)]);
+    $id = safe_int($data['id'] ?? 0);
+    $pdo->prepare('UPDATE act_transcriptions SET title=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$name, $id]);
+    $m = $pdo->prepare('SELECT media_id FROM act_transcriptions WHERE id=?'); $m->execute([$id]); media_doc_text_sync($pdo, (int) $m->fetchColumn()); // le titre d'un bloc (plusieurs actes)
     return ['ok' => true];
 }
 
@@ -210,4 +239,171 @@ function act_transcription_match_people(PDO $pdo, array $names): array
         $out[] = array_map(static fn($r) => ['id' => (int) $r['id'], 'name' => trim($r['first_name'] . ' ' . $r['last_name']), 'years' => trim(($r['birth_year'] ?: '?') . '–' . ($r['death_year'] ?: ''), '–')], $s->fetchAll());
     }
     return $out;
+}
+
+/* ═════════ 📄 Un seul texte par document ═════════ */
+
+/** les actes transcrits sur une image, dans l'ordre où ils ont été faits */
+function media_doc_acts(PDO $pdo, int $mediaId): array
+{
+    if ($mediaId <= 0) { return []; }
+    act_transcriptions_ensure($pdo);
+    $s = $pdo->prepare('SELECT id, title, body, updated_at FROM act_transcriptions WHERE media_id=? ORDER BY id'); $s->execute([$mediaId]);
+    return $s->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/** le texte du document fait de ses actes : le texte seul pour un acte ; un bloc par acte (titre, puis texte) pour plusieurs */
+function media_doc_text_of(array $acts): string
+{
+    if (count($acts) === 1) { return (string) $acts[0]['body']; }
+    return implode("\n\n", array_map(static fn($a) => trim((string) $a['title']) . "\n" . rtrim((string) $a['body']), $acts));
+}
+
+/** après un enregistrement de l'Atelier : la copie du média suit (sans acte, le média garde son texte) */
+function media_doc_text_sync(PDO $pdo, int $mediaId): void
+{
+    $acts = media_doc_acts($pdo, $mediaId); if (!$acts) { return; }
+    $pdo->prepare("UPDATE media SET transcription=? WHERE id=? AND COALESCE(transcription,'')<>?")->execute([$text = media_doc_text_of($acts), $mediaId, $text]);
+}
+
+/**
+ * La case de la visionneuse (ou la fenêtre du média) envoie un texte : avec un seul acte, c'est aussi le texte de l'acte ;
+ * avec plusieurs, chacun se modifie dans l'Atelier ($strict : refus avec une phrase ; sinon le texte d'avant est gardé).
+ * Rend le texte à garder dans le média.
+ */
+function media_doc_text_accept(PDO $pdo, int $mediaId, string $text, string $before, bool $strict = false): string
+{
+    $acts = media_doc_acts($pdo, $mediaId);
+    if (!$acts) { return $text; }
+    if (count($acts) === 1) {
+        if ((string) $acts[0]['body'] !== $text) { $pdo->prepare('UPDATE act_transcriptions SET body=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([mb_substr($text, 0, 200000), (int) $acts[0]['id']]); }
+        return $text;
+    }
+    $all = media_doc_text_of($acts);
+    if (str_replace("\r\n", "\n", $text) === str_replace("\r\n", "\n", $all)) { return $all; }
+    if ($strict) { throw new RuntimeException('Ce document a plusieurs actes : chacun se modifie dans l’📜 Atelier de transcription.'); }
+    return $before;
+}
+
+/**
+ * Migration 102 : quand un document avait les deux (case de la visionneuse et transcription de l'Atelier) et qu'ils différaient,
+ * les deux sont gardés l'un sous l'autre : le texte de l'Atelier d'abord (ses zones restent à leur place), puis, après un trait,
+ * celui de la visionneuse. Rien n'est effacé. Rejouable : une fois fait, la copie du média est le texte des actes.
+ */
+function act_doc_text_merge_all(PDO $pdo): int
+{
+    if (!(bool) $pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='act_transcriptions'")->fetchColumn()) { return 0; }
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_act_transcriptions_media ON act_transcriptions(media_id)');
+    $n = 0;
+    $ids = $pdo->query('SELECT DISTINCT t.media_id FROM act_transcriptions t JOIN media m ON m.id=t.media_id WHERE t.media_id IS NOT NULL')->fetchAll(PDO::FETCH_COLUMN);
+    $mt = $pdo->prepare('SELECT COALESCE(transcription,\'\') FROM media WHERE id=?');
+    $acts = $pdo->prepare('SELECT id, title, body, updated_at FROM act_transcriptions WHERE media_id=? ORDER BY id');
+    foreach ($ids as $mid) {
+        $mid = (int) $mid;
+        $mt->execute([$mid]); $media = trim(str_replace("\r\n", "\n", (string) $mt->fetchColumn()));
+        $acts->execute([$mid]); $list = $acts->fetchAll(PDO::FETCH_ASSOC);
+        if (!$list) { continue; }
+        $all = trim(str_replace("\r\n", "\n", media_doc_text_of($list)));
+        $inActs = $media === '' || $media === $all || str_contains($all, $media);
+        foreach ($list as $a) { if (trim(str_replace("\r\n", "\n", (string) $a['body'])) === $media) { $inActs = true; } }
+        if (!$inActs) {
+            // l'acte qui reçoit le texte de la visionneuse : le premier vide, sinon le plus récent
+            $target = null;
+            foreach ($list as $a) { if (trim((string) $a['body']) === '') { $target = $a; break; } }
+            if (!$target) { usort($list, static fn($x, $y) => strcmp((string) $y['updated_at'], (string) $x['updated_at']) ?: ((int) $y['id'] <=> (int) $x['id'])); $target = $list[0]; }
+            $body = trim((string) $target['body']) === '' ? $media : rtrim((string) $target['body']) . "\n\n———\n" . $media;
+            $pdo->prepare('UPDATE act_transcriptions SET body=? WHERE id=?')->execute([$body, (int) $target['id']]);
+            $n++;
+        }
+        $acts->execute([$mid]);
+        $text = media_doc_text_of($acts->fetchAll(PDO::FETCH_ASSOC));
+        $pdo->prepare("UPDATE media SET transcription=? WHERE id=? AND COALESCE(transcription,'')<>?")->execute([$text, $mid, $text]);
+    }
+    return $n;
+}
+
+/** mode consultation, appareil invité : les fiches qu'on ne nomme pas (vivantes, confidentielles) → [id => true] */
+function act_doc_hidden_ids(PDO $pdo): array
+{
+    if (!function_exists('kiosk_state') || empty(kiosk_state()['on'])) { return []; }
+    $priv = (bool) $pdo->query("SELECT count(*) FROM pragma_table_info('persons') WHERE name='is_private'")->fetchColumn();
+    return array_fill_keys(array_map('intval', $pdo->query("SELECT id FROM persons WHERE COALESCE(living_status,'')='living'" . ($priv ? ' OR COALESCE(is_private,0)=1' : ''))->fetchAll(PDO::FETCH_COLUMN)), true);
+}
+
+/**
+ * 👤 « 📜 Actes et transcriptions » sur la fiche (maquette B4) : chaque document où la personne est reliée (le média, ou un de ses
+ * événements) ou relevée dans l'Atelier (numéro de fiche), avec son rôle et un extrait ; et, si on le veut, les noms relevés pas
+ * encore reliés qui lui ressemblent (« à relier » : jamais relié tout seul).
+ */
+function act_transcriptions_for_person(PDO $pdo, int $pid, bool $withGuess = true): array
+{
+    if ($pid <= 0) { return []; }
+    act_transcriptions_ensure($pdo);
+    $hide = act_doc_hidden_ids($pdo); if (isset($hide[$pid])) { return []; }
+    $sealed = function_exists('sealed_media_sql') ? sealed_media_sql($pdo, 'm.id') : '';
+    $out = [];
+    $excerpt = static function (string $t, string $needle = ''): string {
+        $t = trim(preg_replace('/\s+/u', ' ', $t) ?? ''); if ($t === '') { return ''; }
+        $at = $needle !== '' ? mb_stripos($t, $needle) : false; $from = $at !== false && $at > 60 ? $at - 60 : 0;
+        return ($from ? '… ' : '') . mb_substr($t, $from, 180) . (mb_strlen($t) > $from + 180 ? '…' : '');
+    };
+    $p = $pdo->prepare('SELECT first_name, last_name FROM persons WHERE id=?'); $p->execute([$pid]); $me = $p->fetch(PDO::FETCH_ASSOC) ?: ['first_name' => '', 'last_name' => ''];
+    // 1. les actes de l'Atelier où elle est relevée avec son numéro de fiche (ou, à relier, un nom qui lui ressemble)
+    $fold = static fn($s) => function_exists('search_fold') ? search_fold((string) $s) : mb_strtolower((string) $s);
+    $last = $fold($me['last_name']); $first = $fold(preg_split('/[\s-]+/u', trim((string) $me['first_name']))[0] ?? '');
+    $like = $withGuess && mb_strlen($last) >= 2 ? ' OR t.data_json LIKE ? COLLATE NOCASE' : '';
+    $s = $pdo->prepare("SELECT t.id, t.title, t.kind, t.date_text, t.place, t.body, t.data_json, t.media_id, m.filename, COALESCE(NULLIF(m.thumbnail,''), m.filename) AS thumb
+        FROM act_transcriptions t LEFT JOIN media m ON m.id=t.media_id WHERE (t.data_json LIKE ?{$like}){$sealed} ORDER BY t.date_text, t.id LIMIT 300");
+    $s->execute($like ? ['%"person_id":' . $pid . '%', '%' . $me['last_name'] . '%'] : ['%"person_id":' . $pid . '%']);
+    $seenMedia = [];
+    foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $r) {
+        $people = json_decode((string) $r['data_json'], true)['people'] ?? [];
+        $hit = null; $guess = null;
+        foreach ((is_array($people) ? $people : []) as $i => $q) {
+            if (!is_array($q)) { continue; }
+            if ((int) ($q['person_id'] ?? 0) === $pid) { $hit = $q; break; }
+            if ($withGuess && !$guess && (int) ($q['person_id'] ?? 0) === 0 && $last !== '') {
+                $n = $fold($q['name'] ?? ''); $w = preg_split('/[\s,-]+/u', $n) ?: [];
+                if (in_array($last, $w, true) && ($first === '' || in_array($first, $w, true))) { $guess = $q + ['i' => $i]; }
+            }
+        }
+        if (!$hit && !$guess) { continue; }
+        $q = $hit ?: $guess;
+        $out[] = ['act_id' => (int) $r['id'], 'media_id' => (int) $r['media_id'], 'title' => (string) $r['title'], 'kind' => (string) $r['kind'], 'date_text' => (string) $r['date_text'], 'place' => (string) $r['place'],
+            'role' => mb_substr((string) ($q['role'] ?? ''), 0, 60), 'name' => mb_substr((string) ($q['name'] ?? ''), 0, 160), 'state' => $hit ? 'linked' : 'tolink', 'index' => $hit ? -1 : (int) $guess['i'],
+            'excerpt' => $excerpt((string) $r['body'], (string) ($q['name'] ?? '')), 'filename' => (string) ($r['filename'] ?? ''), 'thumb' => (string) ($r['thumb'] ?? '')];
+        if ($hit && $r['media_id']) { $seenMedia[(int) $r['media_id']] = true; }
+    }
+    // 2. les documents transcrits reliés à la fiche (le média, un de ses événements, un de ses couples)
+    $m = $pdo->prepare("SELECT DISTINCT m.id, m.title, m.document_title, m.filename, COALESCE(NULLIF(m.thumbnail,''), m.filename) AS thumb, COALESCE(m.date_text,'') AS date_text, m.transcription
+        FROM media_links ml JOIN media m ON m.id=ml.media_id
+        WHERE ((ml.entity_type='person' AND ml.entity_id=?) OR (ml.entity_type='event' AND ml.entity_id IN (SELECT id FROM events WHERE person_id=? OR family_id IN (SELECT id FROM families WHERE partner1_id=? OR partner2_id=?)))
+            OR (ml.entity_type='family' AND ml.entity_id IN (SELECT id FROM families WHERE partner1_id=? OR partner2_id=?)))
+            AND trim(COALESCE(m.transcription,''))<>''{$sealed} ORDER BY m.date_text, m.id LIMIT 60");
+    $m->execute([$pid, $pid, $pid, $pid, $pid, $pid]);
+    foreach ($m->fetchAll(PDO::FETCH_ASSOC) as $r) {
+        if (isset($seenMedia[(int) $r['id']])) { continue; }
+        $a = $pdo->prepare('SELECT id, kind FROM act_transcriptions WHERE media_id=? ORDER BY id LIMIT 1'); $a->execute([(int) $r['id']]); $act = $a->fetch(PDO::FETCH_ASSOC) ?: null;
+        $out[] = ['act_id' => $act ? (int) $act['id'] : 0, 'media_id' => (int) $r['id'], 'title' => trim((string) $r['title']) ?: trim((string) $r['document_title']) ?: (string) $r['filename'], 'kind' => $act ? (string) $act['kind'] : '',
+            'date_text' => (string) $r['date_text'], 'place' => '', 'role' => '', 'name' => '', 'state' => 'media', 'index' => -1, 'excerpt' => $excerpt((string) $r['transcription'], (string) $me['last_name']),
+            'filename' => (string) $r['filename'], 'thumb' => (string) $r['thumb']];
+    }
+    return array_slice($out, 0, 80);
+}
+
+/** « Relier » un nom relevé dans l'Atelier à une fiche (sur la fiche : « à relier » → Relier ; ↶ Annuler remet « was ») */
+function act_link_person(PDO $pdo, array $data): array
+{
+    act_transcriptions_ensure($pdo);
+    $id = safe_int($data['id'] ?? 0); $i = (int) ($data['index'] ?? -1); $pid = safe_int($data['person_id'] ?? 0); $was = safe_int($data['was'] ?? 0);
+    $s = $pdo->prepare('SELECT data_json, media_id, title FROM act_transcriptions WHERE id=?'); $s->execute([$id]); $r = $s->fetch(PDO::FETCH_ASSOC);
+    if (!$r) { throw new RuntimeException('Transcription introuvable.'); }
+    $d = json_decode((string) $r['data_json'], true) ?: [];
+    if (!isset($d['people'][$i]) || !is_array($d['people'][$i])) { throw new RuntimeException('Ce nom n’est plus dans la transcription.'); }
+    if ((int) ($d['people'][$i]['person_id'] ?? 0) !== $was) { throw new RuntimeException('Ce nom a été relié entre-temps : rien n’a été changé.'); }
+    if ($pid) { $c = $pdo->prepare('SELECT 1 FROM persons WHERE id=?'); $c->execute([$pid]); if (!$c->fetchColumn()) { throw new RuntimeException('Fiche introuvable.'); } }
+    $d['people'][$i]['person_id'] = $pid;
+    $pdo->prepare('UPDATE act_transcriptions SET data_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([json_encode($d, JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE), $id]);
+    log_change($pdo, 'meta', 0, 'update', ($pid ? 'Nom relié dans la transcription : ' : 'Nom délié dans la transcription : ') . $r['title']);
+    return ['ok' => true, 'id' => $id, 'index' => $i, 'person_id' => $pid, 'was' => $was];
 }

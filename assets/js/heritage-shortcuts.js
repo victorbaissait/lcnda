@@ -83,7 +83,7 @@
         ['visages', '🙂', 'Visages (reconnaissance)', () => ext.openFaces?.()],
         ['musee', '🏛️', 'Musée de famille', () => ext.openMuseum?.()],
         ['calculette', '🧮', 'Calculette (simple, scientifique, courbes)', () => ext.calculator?.open()],
-        ['transcription', '📜', 'Transcription d’actes', () => ext.openActTranscriber?.({})],
+        ['transcription', '📜', 'Atelier de transcription', () => ext.openActTranscriber?.({})],
         ['puzzle', '🧩', 'Jeux et puzzle', () => A().setModule('jeu')],
         ['battues', '🧭', 'Battues', enq('battue')],
         ['atelier', '📚', 'Atelier de recherche', enq('atelier')],

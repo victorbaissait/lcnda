@@ -500,7 +500,7 @@ try {
         'heritage_overview' => json_response(heritage_overview($pdo)),
         'heritage_place_search' => json_response(['places' => heritage_place_search($pdo, safe_text($_GET['q'] ?? ''))]),
         'image_pick' => json_response(['media' => heritage_image_pick($pdo, mb_substr(safe_text($_GET['q'] ?? ''), 0, 100), (string) ($_GET['filter'] ?? ''))]),
-        'act_transcriptions_media' => json_response(['items' => act_transcriptions_for_media($pdo, safe_int($_GET['media_id'] ?? 0))]),
+        'act_transcriptions_media' => json_response(['items' => act_transcriptions_for_media($pdo, safe_int($_GET['media_id'] ?? 0)), 'text' => (static function () use ($pdo) { $s = $pdo->prepare('SELECT COALESCE(transcription,\'\') FROM media m WHERE m.id=?' . (function_exists('sealed_media_sql') ? sealed_media_sql($pdo) : '')); $s->execute([safe_int($_GET['media_id'] ?? 0)]); return (string) $s->fetchColumn(); })()]), // 📄 le texte du document (un seul)
         'heritage_media_search' => json_response(['media' => heritage_media_search($pdo, safe_text($_GET['q'] ?? ''))]),
         'voyages' => json_response(['voyages' => voyages_data($pdo, safe_int($_GET['person_id'] ?? 0))]),
         'placements' => json_response(['placements' => placements_data($pdo, safe_int($_GET['person_id'] ?? 0)), 'kinds' => PLACEMENT_KINDS]),
@@ -5047,7 +5047,8 @@ function transcription_search_data(PDO $pdo): never
     $q = safe_text($_GET['q'] ?? '');
     if ($q === '') json_response(['query' => '', 'media' => []]);
     $like = '%' . $q . '%';
-    $stmt = $pdo->prepare("SELECT m.id,m.title,m.description,m.media_type,m.filename,m.thumbnail,m.transcription,m.date_text,m.date_calendar,m.document_reference,m.document_title,m.document_url,m.document_pages,m.postcard_group,m.postcard_side,m.is_person_photo,m.media_subject_type,m.correspondence_type,m.correspondent_name,m.correspondent_json,m.correspondence_reply_to_media_id,m.created_at,
+    act_transcriptions_ensure($pdo); // 📄 un seul texte par document : le texte de l'Atelier est dans m.transcription ; ici aussi son titre, son lieu, sa cote, ses personnes
+    $stmt = $pdo->prepare("SELECT m.id,m.title,m.description,m.media_type,m.filename,m.thumbnail,m.transcription,(SELECT count(*) FROM act_transcriptions ta WHERE ta.media_id=m.id) AS act_count,m.date_text,m.date_calendar,m.document_reference,m.document_title,m.document_url,m.document_pages,m.postcard_group,m.postcard_side,m.is_person_photo,m.media_subject_type,m.correspondence_type,m.correspondent_name,m.correspondent_json,m.correspondence_reply_to_media_id,m.created_at,
         count(ml.id) AS link_count,
         group_concat(DISTINCT CASE
             WHEN ml.entity_type='person' THEN 'Fiche individuelle'
@@ -5063,11 +5064,11 @@ function transcription_search_data(PDO $pdo): never
         LEFT JOIN events ev ON ml.entity_type='event' AND ev.id=ml.entity_id
         LEFT JOIN event_types et ON et.id=ev.event_type_id
         LEFT JOIN census_records cr ON ml.entity_type='census' AND cr.id=ml.entity_id
-        WHERE m.transcription LIKE ? COLLATE NOCASE" . (function_exists('audio_studio_ready') && audio_studio_ready($pdo) ? " OR m.id IN (SELECT media_id FROM audio_transcripts WHERE text LIKE ? COLLATE NOCASE)" : '') . " -- 🎚️ aussi la transcription des sons (Studio son)
+        WHERE (m.transcription LIKE ? COLLATE NOCASE OR m.id IN (SELECT media_id FROM act_transcriptions WHERE (title || ' ' || place || ' ' || source || ' ' || date_text || ' ' || COALESCE(json_extract(data_json, '$.people'), '')) LIKE ? COLLATE NOCASE))" . (function_exists('audio_studio_ready') && audio_studio_ready($pdo) ? " OR m.id IN (SELECT media_id FROM audio_transcripts WHERE text LIKE ? COLLATE NOCASE)" : '') . " -- 🎚️ aussi la transcription des sons (Studio son)
         GROUP BY m.id
         ORDER BY COALESCE(m.date_text,''), m.id DESC
         LIMIT 500");
-    $stmt->execute(function_exists('audio_studio_ready') && audio_studio_ready($pdo) ? [$like, $like] : [$like]);
+    $stmt->execute(function_exists('audio_studio_ready') && audio_studio_ready($pdo) ? [$like, $like, $like] : [$like, $like]);
     $rows = $stmt->fetchAll();
     if (!$rows) json_response(['query' => $q, 'media' => []]);
 
@@ -10052,6 +10053,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'rename_slideshow' => rename_slideshow($pdo,$data),
             'delete_act_transcription' => delete_act_transcription($pdo,$data),
             'rename_act_transcription' => rename_act_transcription($pdo,$data),
+            'act_link_person' => act_link_person($pdo,$data), // 👤 « Relier » un nom relevé dans l'Atelier (fiche → 📜 Actes et transcriptions)
             'act_match_people' => act_transcription_match_people($pdo, is_array($data['names'] ?? null) ? $data['names'] : []),
             'act_import_check' => act_import_check($pdo,$data), // 📜 Ce que l'app a trouvé : fiches ressemblantes (lib/transcription_actes.php)
             'act_import_apply' => act_import_apply($pdo,$data), // 📜 ✓ Ajouter à la généalogie, d'un coup
@@ -13182,6 +13184,7 @@ function save_media(PDO $pdo,array $data): array
     $mediaSubjectType=safe_text($data['media_subject_type']??$before['media_subject_type']??'');
     if(!in_array($mediaSubjectType,['','grave_photo','war_memorial_photo','voter_card','id_card','driving_permit'],true))$mediaSubjectType='';
     $transcription=(string)($data['transcription']??$before['transcription']);
+    if($transcription!==(string)$before['transcription'])$transcription=media_doc_text_accept($pdo,$mediaId,$transcription,(string)$before['transcription']); // 📄 un seul texte : l'acte de l'Atelier suit
     $correspondenceType=safe_text($data['correspondence_type']??$before['correspondence_type']??'');
     if (!in_array($correspondenceType, ['', 'lettre', 'carte_postale', 'telegramme', 'carte_voeux', 'faire_part', 'autre'], true) && !preg_match('/^custom:.{1,80}$/u',$correspondenceType)) $correspondenceType = '';
     $replyTo=safe_int($data['correspondence_reply_to_media_id']??$before['correspondence_reply_to_media_id']??0);
@@ -13263,7 +13266,7 @@ function save_media_transcription(PDO $pdo,array $data): array
 {
     $mediaId=safe_int($data['media_id']??0);if(!$mediaId)throw new RuntimeException('Média manquant');
     $stmt=$pdo->prepare('SELECT transcription,title FROM media WHERE id=?');$stmt->execute([$mediaId]);$before=$stmt->fetch();if(!$before)throw new RuntimeException('Média introuvable');
-    $transcription=(string)($data['transcription']??'');$pdo->prepare('UPDATE media SET transcription=? WHERE id=?')->execute([$transcription,$mediaId]);
+    $transcription=media_doc_text_accept($pdo,$mediaId,(string)($data['transcription']??''),(string)$before['transcription'],true);$pdo->prepare('UPDATE media SET transcription=? WHERE id=?')->execute([$transcription,$mediaId]); // 📄 un seul texte : l'acte de l'Atelier suit
     log_change($pdo,'media',$mediaId,'transcription','Transcription du média « '.($before['title']?:'#'.$mediaId).' » modifiée',['transcription'=>$before['transcription']],['transcription'=>$transcription]);return ['id'=>$mediaId,'transcription'=>$transcription];
 }
 
