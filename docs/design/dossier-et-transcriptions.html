@@ -1,0 +1,866 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dossier et transcriptions</title>
+<style>
+
+
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff;--sheet:#fffdf8}
+@media (prefers-color-scheme:dark){:root{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--sheet:#23262b}}
+*{box-sizing:border-box}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:19px;margin:40px 0 6px}
+.part{font:800 12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:46px 0 0;border-top:3px solid var(--ink);padding-top:10px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.wrap{max-width:1240px;margin:0 auto}
+.sum{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.sum div{background:var(--paper);border:2px solid var(--ink);padding:8px 14px;box-shadow:4px 4px 0 var(--shadow)}
+.sum b{font-size:18px;display:block}.sum span{font-size:12px;color:var(--muted)}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid var(--ink);padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.badge.new{border-color:var(--blue);color:#fff;background:var(--blue)}
+.badge.re{border-color:var(--green);color:var(--green);background:var(--green-bg)}
+.badge.have{border-color:#8a8f99;color:var(--muted);background:var(--grey-bg)}
+.badge.ok{border-color:var(--green);color:var(--green)}.badge.warn{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}.badge.red{border-color:var(--red);color:var(--red);background:var(--red-bg)}.badge.blue{border-color:var(--blue);color:var(--blue)}.badge.grey{border-color:#8a8f99;color:var(--muted)}.badge.violet{border-color:var(--vio);color:var(--vio);background:var(--vio-bg)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px;border-bottom:2px solid var(--ink)}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.num,th.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+tr.tot td{border-top:2px solid var(--ink);font-weight:800}
+code{font:11.5px ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 26px}
+.wide{grid-column:1 / -1}
+.grid>*{min-width:0}
+.case{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:16px 18px 18px;min-width:0}
+.case .head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.case .tag{font:700 11px/1 system-ui;letter-spacing:.1em;color:var(--blue);text-transform:uppercase}
+.num-b{display:inline-block;background:var(--blue);color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.case h3{margin:8px 0 10px;font-size:17px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.path{font-size:12px;color:var(--blue-ink);background:var(--blue-bg);border:1px dashed #9db8f0;padding:6px 10px;margin:0 0 10px}
+.path b{color:var(--blue)}
+.reuse{font-size:12px;color:var(--green);background:var(--green-bg);border:1px dashed #9bcfa9;padding:7px 10px;margin-top:12px}
+.reuse b{font-weight:800}
+.msg{border-left:4px solid var(--blue);background:var(--blue-bg);padding:9px 12px;font-size:13px;margin:12px 0}
+.msg.warn{border-color:var(--yel);background:var(--yel-bg)}.msg.ok{border-color:var(--green);background:var(--green-bg)}.msg.red{border-color:var(--red);background:var(--red-bg)}
+.dec{border:2px dashed var(--vio);background:var(--vio-bg);padding:10px 14px;margin:14px 0 0;font-size:13px}
+.dec>b:first-child{display:block;font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--vio);margin-bottom:6px}
+.dec ol,.dec ul{margin:4px 0 0;padding-left:20px}.dec li{margin:3px 0}
+.cons{font:800 10px system-ui;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--green);padding:2px 5px;margin-left:4px;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);background:var(--paper);font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 var(--shadow);color:var(--ink);white-space:nowrap}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:var(--line2);box-shadow:none;color:var(--muted)}
+.btn.red{border-color:var(--red);color:var(--red);box-shadow:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.lab{display:block;font-weight:700;font-size:13px;margin:12px 0 6px}
+.input{border:1.5px solid var(--line2);padding:5px 8px;font-size:13.5px;background:var(--paper);width:100%;min-height:30px}
+.seg{display:inline-flex;border:2px solid var(--ink);flex-wrap:wrap;max-width:100%}.seg span{padding:5px 9px;font:700 12px system-ui;border-right:1.5px solid var(--ink);background:var(--paper)}.seg span:last-child{border-right:0}.seg span.on{background:var(--blue);color:#fff}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.scrollx>table{min-width:760px}
+.hint{font-size:11.5px;color:var(--soft);margin-top:4px;display:none}
+.mini{font-size:12px;color:var(--muted)}
+.edge{margin:10px 0 0;padding-left:18px;font-size:12.5px;color:var(--muted)}.edge li{margin:3px 0}.edge b{color:var(--ink)}
+/* fenêtre */
+.win{border:2px solid var(--ink);background:var(--paper);min-width:0}
+.win-bar{display:flex;align-items:center;gap:10px;padding:7px 10px;border-bottom:2px solid var(--ink);background:var(--grey-bg);flex-wrap:wrap;justify-content:space-between}
+.win-bar .eyebrow{font:700 10.5px system-ui;letter-spacing:.12em;color:var(--soft);text-transform:uppercase}
+.win-bar b{font-size:14px}
+.win-body{padding:12px;min-width:0}
+.win-foot{display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;border-top:2px solid var(--ink);flex-wrap:wrap}
+/* barre du haut */
+.topbar{display:flex;align-items:center;gap:6px;background:var(--bar);color:var(--bar-ink);padding:8px 10px;flex-wrap:wrap}
+.topbar .nav{display:flex;gap:12px;font-weight:700;font-size:12.5px;flex:1 1 auto;min-width:0;overflow:hidden;white-space:nowrap;align-items:center}
+.topbar .nav span i{font-style:normal;opacity:.55;margin-right:3px;font-size:11px}
+.topbar .nav span.on{background:var(--blue);padding:2px 8px}
+.topbar .nav .plus{border:1.5px dashed #9aa0aa;color:#cfd3da;padding:0 7px;font-weight:800}
+.topbar .nav .plus.hot{border-color:#ffd166;color:#ffd166;border-style:solid}
+.tool{border:1.5px solid var(--bar-ink);min-width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;padding:0 6px;gap:5px;white-space:nowrap;position:relative}
+.tool.succ{border-color:#ffd166;color:#ffd166;font-weight:700}
+.tool.hot{background:#ffd166;color:#111;border-color:#ffd166}
+.pastille{position:absolute;top:-7px;right:-7px;background:#e5383b;color:#fff;font:800 10px/16px system-ui;min-width:17px;height:17px;border-radius:9px;text-align:center;padding:0 4px;border:1.5px solid var(--bar)}
+.chrono{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--green);color:var(--green);background:var(--green-bg);font:800 13px ui-monospace,Menlo,monospace;padding:4px 8px;white-space:nowrap}
+.chrono.pause{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}
+.chrono .dotr{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block}
+.chrono.pause .dotr{background:var(--yel)}
+/* sous-onglets d'un dossier */
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--ink);flex-wrap:wrap;font-size:12.5px}
+.tabs span{padding:6px 9px;border-right:1px solid var(--line);white-space:nowrap}
+.tabs span.on{background:var(--blue);color:#fff;font-weight:700}
+.dhead{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 12px;border-bottom:2px solid var(--ink)}
+.dhead h4{margin:0;font-size:16px}.dhead small{color:var(--soft);display:block;font-size:12px}
+/* catalogue d'onglets */
+.cat-g{font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin:14px 0 6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:8px}
+.tc{border:2px solid var(--line2);background:var(--paper);padding:8px 10px;display:grid;grid-template-columns:28px minmax(0,1fr) 18px;gap:4px 8px;align-items:start;font-size:12.5px;min-width:0}
+.tc .ic{font-size:20px;line-height:1.1}
+.tc b{display:block;font-size:13px}
+.tc small{color:var(--muted);display:block;line-height:1.3}
+.tc .where{grid-column:2 / 4;font-size:11px;color:var(--soft)}
+.tc .ck{width:16px;height:16px;border:2px solid var(--ink);margin-top:2px}
+.tc.on{border-color:var(--blue);background:var(--blue-bg)}.tc.on .ck{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+.tc.rec{border-color:var(--green)}
+.tc .tg{grid-column:2 / 4;display:flex;gap:4px;flex-wrap:wrap}
+.tc .tg .badge{font-size:9.5px;padding:2px 4px}
+/* matrice usages */
+.mx td,.mx th{text-align:center;padding:6px 4px}.mx td:first-child,.mx th:first-child{text-align:left;white-space:nowrap}
+.mx th{font-size:10px;letter-spacing:.02em;text-transform:none}
+.mx .y{color:var(--blue);font-weight:800}.mx .r{color:var(--green);font-weight:800}.mx .o{color:var(--line2)}.mx .x{color:var(--soft)}
+/* rangement */
+.ord{border:2px solid var(--ink);background:var(--paper)}
+.ord .or{display:grid;grid-template-columns:18px 26px 20px minmax(0,1fr) 54px auto;gap:6px;align-items:center;padding:5px 8px;border-bottom:1px solid var(--line);font-size:12.5px}
+.ord .or:last-child{border-bottom:0}
+.ord .or .g{color:var(--soft)}.ord .or .n{font:700 11px system-ui;color:var(--soft)}
+.ord .or.new{background:var(--blue-bg)}
+.cb{width:14px;height:14px;border:2px solid var(--ink);display:inline-block;flex:none;vertical-align:-2px}
+.cb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+/* listes de contrôle */
+.ck-l{list-style:none;margin:0;padding:0;font-size:13px}
+.ck-l li{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:8px;padding:7px 4px;border-bottom:1px solid var(--line);align-items:start}
+.ck-l .s{font-size:15px;line-height:1.2}
+.ck-l small{display:block;color:var(--muted)}
+.ck-l li.bad b{color:var(--red)}.ck-l li.wa b{color:var(--yel-ink)}
+/* panneau déroulant (cloche) */
+.drop{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 rgba(0,0,0,.14);max-width:470px;margin-left:auto;font-size:13px}
+.drop .dh{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-bottom:2px solid var(--ink);gap:8px;flex-wrap:wrap}
+.drop .grp{padding:5px 10px;font:800 10.5px system-ui;letter-spacing:.1em;color:var(--soft);text-transform:uppercase;background:var(--grey-bg)}
+.drop .it{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 8px;padding:7px 10px;border-bottom:1px solid var(--line)}
+.drop .it small{color:var(--muted)}
+.drop .it .acts{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.drop .it.late b{color:var(--red)}
+/* feuille imprimée */
+.sheet{background:var(--sheet);border:1.5px solid var(--line2);box-shadow:0 2px 10px rgba(0,0,0,.12);padding:22px 26px;font:12.5px/1.5 Georgia,"Times New Roman",serif;color:var(--ink);max-width:720px;margin:0 auto}
+.sheet h5{font:700 16px Georgia,serif;text-align:center;margin:0 0 2px;letter-spacing:.04em}
+.sheet .c{text-align:center;margin:0 0 14px;font-size:12px}
+.sheet h6{font:700 13px Georgia,serif;margin:14px 0 4px;border-bottom:1px solid var(--line2);padding-bottom:2px}
+.chain{list-style:none;margin:0;padding:0 0 0 14px;border-left:2px solid var(--ink)}
+.chain li{position:relative;padding:3px 0 3px 10px}
+.chain li:before{content:"";position:absolute;left:-19px;top:10px;width:8px;height:8px;background:var(--sheet);border:2px solid var(--ink);border-radius:50%}
+.chain .cote{font:11px ui-monospace,Menlo,monospace;color:var(--muted)}
+.chain .miss{color:var(--red);font-style:italic}
+.sheet a{color:var(--blue)}
+/* chips de champs */
+.fchips{display:flex;gap:5px;flex-wrap:wrap;margin:6px 0}
+.fchips span{font:700 11.5px ui-monospace,Menlo,monospace;border:1.5px solid var(--blue);color:var(--blue);background:var(--blue-bg);padding:2px 6px}
+.fchips span.bad{border-color:var(--red);color:var(--red);background:var(--red-bg)}
+.letter{border:1.5px solid var(--line2);background:var(--sheet);padding:12px 14px;font:12.5px/1.5 Georgia,serif;white-space:pre-wrap;min-height:220px}
+.letter mark{background:var(--blue-bg);color:var(--blue-ink);padding:0 2px}
+.who{list-style:none;margin:0;padding:0;font-size:12.5px;border:1.5px solid var(--line2)}
+.who li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:6px;padding:6px 8px;border-bottom:1px solid var(--line)}
+.who li small{display:block;color:var(--muted)}
+.who li.off{background:var(--grey-bg);color:var(--soft)}
+.two{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:12px}
+/* écran de verrou */
+.lock{background:linear-gradient(160deg,#1b2a4a,#0e1626);color:#fff;padding:36px 18px;text-align:center;border:2px solid var(--ink)}
+.lock .pad{max-width:330px;margin:0 auto;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.25);padding:18px}
+.lock .input{background:#fff;color:#111}
+.lock small{color:#c9d3e6}
+/* téléphone */
+.phone{width:100%;max-width:390px;border:10px solid #222;border-radius:26px;background:var(--paper);overflow:hidden;margin:0 auto}
+.phone .ptop{display:flex;align-items:center;gap:6px;background:var(--bar);color:var(--bar-ink);padding:8px 10px;font-size:13px;font-weight:700}
+.phone .ptop .sp{flex:1}
+.phone .pbody{padding:10px;font-size:13px}
+.stack{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}.stack>*{min-width:0}
+.qs{background:var(--paper);border:2px solid var(--ink);padding:14px 18px;box-shadow:6px 6px 0 var(--shadow)}
+.qs li{margin:0 0 9px}
+.ex td:first-child{white-space:nowrap;font-weight:700}
+@media (max-width:980px){.stack{grid-template-columns:1fr}}
+@media (max-width:900px){.grid{grid-template-columns:1fr}.two{grid-template-columns:1fr}}
+@media (max-width:760px){
+ body{padding:14px}
+ .hint{display:block}
+ .topbar .nav{display:none}
+ .case{padding:12px}
+ .sheet{padding:14px}
+ .ord .or{grid-template-columns:16px 22px 18px minmax(0,1fr) auto}
+ .ord .or .ico{display:none}
+ .phone{border-width:0;border-radius:0}
+}
+/* — ajouts de cette maquette — */
+.dv{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:18px;align-items:start;margin-top:12px}
+.dv>*{min-width:0}
+.dv .cap{font:800 10.5px system-ui;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin:0 0 6px}
+.pill{display:inline-block;font:700 11px/1.2 system-ui;padding:2px 6px;border:1.5px solid var(--line2);background:var(--grey-bg);color:var(--muted);white-space:nowrap}
+.pill.dead{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.pill.q{border-color:var(--yel);background:var(--yel-bg);color:var(--yel-ink)}
+.pill.ok{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.pill.red{border-color:var(--red);background:var(--red-bg);color:var(--red)}
+.pill.blue{border-color:var(--blue);background:var(--blue-bg);color:var(--blue-ink)}
+.cmp{display:grid;grid-template-columns:110px minmax(0,1fr) minmax(0,1fr) 22px;font-size:12.5px;border:1.5px solid var(--line2)}
+.cmp>div{padding:5px 7px;border-bottom:1px solid var(--line)}
+.cmp .h{font:700 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);background:var(--grey-bg)}
+.cmp .k{color:var(--muted)}
+.cmp .y{color:var(--green);font-weight:800}.cmp .n{color:var(--red);font-weight:800}.cmp .m{color:var(--yel-ink);font-weight:800}
+.score{display:inline-flex;align-items:center;gap:6px;font:800 12px system-ui}
+.score i{display:inline-block;width:70px;height:8px;background:var(--line);position:relative}
+.score i b{position:absolute;left:0;top:0;bottom:0;background:var(--green)}
+.score.mid i b{background:var(--yel)}.score.low i b{background:var(--red)}
+.rv{border:1.5px solid var(--line2);font-size:12.5px}
+.rv .r{display:grid;grid-template-columns:20px 130px minmax(0,1fr) minmax(0,1fr);gap:8px;padding:6px 8px;border-bottom:1px solid var(--line);align-items:start}
+.rv .r.h{font:700 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);background:var(--grey-bg)}
+.rv .r .old{color:var(--soft);text-decoration:line-through}
+.rv .r .new{color:var(--green);font-weight:700}
+.rv .r .same{color:var(--muted)}
+.tl{list-style:none;margin:0;padding:0;font-size:12.5px}
+.tl li{display:grid;grid-template-columns:62px 24px minmax(0,1fr);gap:8px;padding:7px 0;border-bottom:1px solid var(--line);align-items:start}
+.tl .d{font:700 11px system-ui;color:var(--soft)}
+.tl .i{font-size:16px;line-height:1}
+.tl small{display:block;color:var(--muted)}
+.tl .next{display:inline-block;margin-top:3px;font-size:11.5px;border:1.5px solid var(--blue);color:var(--blue-ink);background:var(--blue-bg);padding:1px 6px}
+.tl .next.late{border-color:var(--red);color:var(--red);background:var(--red-bg)}
+.inv{background:var(--sheet);border:1.5px solid var(--line2);box-shadow:0 2px 10px rgba(0,0,0,.12);padding:18px 20px;font:12.5px/1.45 system-ui;max-width:680px}
+.inv .ih{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.inv .ih b{font-size:15px}
+.inv .invno{font:800 18px system-ui;letter-spacing:.02em}
+.inv table{margin-top:10px}
+.inv .ment{margin-top:10px;font-size:11px;color:var(--muted);border-top:1px solid var(--line2);padding-top:6px}
+.inv .ment mark{background:var(--yel-bg);color:var(--yel-ink);padding:0 3px}
+.stamp{display:inline-block;border:2px solid var(--green);color:var(--green);font:800 11px system-ui;letter-spacing:.1em;padding:2px 6px;transform:rotate(-4deg)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.kpi{border:2px solid var(--ink);background:var(--paper);padding:8px 10px}
+.kpi small{display:block;font-size:11.5px;color:var(--muted)}
+.kpi b{display:block;font-size:22px;font-variant-numeric:tabular-nums;line-height:1.2}
+.kpi span{font-size:11px;color:var(--soft)}
+.chart{border:1.5px solid var(--line2);background:var(--paper);padding:10px}
+.chart h5{margin:0 0 2px;font-size:13px}
+.chart .lg{display:flex;gap:12px;font-size:11.5px;color:var(--muted);margin:4px 0 6px;flex-wrap:wrap}
+.chart .lg i{display:inline-block;width:10px;height:10px;margin-right:4px;vertical-align:-1px}
+.chart svg{width:100%;height:auto;display:block}
+.chart svg text{fill:var(--muted);font:11px system-ui}
+.chart svg .v{fill:var(--ink);font-weight:700}
+.chart svg .ax{stroke:var(--line2);stroke-width:1}
+.chart svg .gr{stroke:var(--line);stroke-width:1}
+.chart svg .s1{fill:var(--blue)}.chart svg .s2{fill:var(--vio)}
+.idea{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.idea>div{background:var(--paper);border:2px solid var(--ink);padding:10px 12px;font-size:13px;box-shadow:4px 4px 0 var(--shadow)}
+.idea b.t{display:block;font-size:14px;margin-bottom:4px}
+.idea p{margin:0 0 6px;color:var(--muted)}
+.idea .why{color:var(--ink)}
+.drawer{border:2px solid var(--ink);background:var(--paper)}
+.drawer .dh2{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border-bottom:2px solid var(--ink);gap:8px;flex-wrap:wrap;background:var(--grey-bg)}
+.track{display:flex;gap:0;font-size:11.5px;margin:6px 0;flex-wrap:wrap}
+.track span{padding:3px 7px;border:1.5px solid var(--line2);margin-right:-1.5px;background:var(--paper)}
+.track span.on{border-color:var(--green);background:var(--green-bg);color:var(--green);font-weight:700}
+.track span.wait{border-color:var(--yel);background:var(--yel-bg);color:var(--yel-ink);font-weight:700}
+.lockline{font-size:12px;border:1.5px solid var(--line2);background:var(--grey-bg);padding:6px 10px;margin-top:10px}
+.lockline b{color:var(--ink)}
+@media (max-width:1100px){.dv{grid-template-columns:1fr}}
+@media (max-width:760px){
+ .cmp{grid-template-columns:84px minmax(0,1fr) minmax(0,1fr) 18px;font-size:12px}
+ .rv .r{grid-template-columns:18px minmax(0,1fr);}
+ .rv .r>*:nth-child(3),.rv .r>*:nth-child(4){grid-column:2}
+ .rv .r.h{display:none}
+ .inv{padding:12px}
+ .tl li{grid-template-columns:54px 20px minmax(0,1fr)}
+}
+/* — ajouts communs aux deux maquettes (compléments, plusieurs ordinateurs) — */
+.lb{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:0 0 4px}
+.lb .q{flex:1 1 180px;min-width:0;border:1.5px solid var(--line2);padding:5px 8px;font-size:13px;color:var(--soft);background:var(--paper)}
+.lb .cnt{display:inline-block;background:var(--blue);color:#fff;font:800 10px/15px system-ui;min-width:15px;height:15px;border-radius:8px;text-align:center;padding:0 3px;font-style:normal}
+.lb-sub{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:0 0 8px}
+.fp{display:inline-block;border:1.5px solid var(--blue);background:var(--blue-bg);color:var(--blue-ink);font:700 11.5px system-ui;padding:1px 6px}
+.lb-sub u{cursor:pointer}
+.pk{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 rgba(0,0,0,.14);max-width:420px;font-size:13px}
+.pk .pq{padding:8px;border-bottom:1.5px solid var(--line2)}
+.pk .pg{padding:4px 10px;font:800 10.5px system-ui;letter-spacing:.1em;color:var(--soft);text-transform:uppercase;background:var(--grey-bg)}
+.pk .pi{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:6px;padding:6px 10px;border-bottom:1px solid var(--line);align-items:center}
+.pk .pi small{display:block;color:var(--muted)}
+.pk .pi.on{background:var(--blue-bg)}
+.pk .pf{padding:7px 10px;display:flex;justify-content:space-between;gap:6px;flex-wrap:wrap}
+.bandeau{border:2px solid var(--yel);background:var(--yel-bg);padding:10px 12px;font-size:13px;margin:0 0 10px}
+.bandeau b.t{display:block;color:var(--yel-ink);font-size:13.5px;margin-bottom:3px}
+.bandeau .row{margin-top:8px}
+.bandeau.red{border-color:var(--red);background:var(--red-bg)}.bandeau.red b.t{color:var(--red)}
+.bandeau.blue{border-color:var(--blue);background:var(--blue-bg)}.bandeau.blue b.t{color:var(--blue-ink)}
+.fld{display:grid;grid-template-columns:150px minmax(0,1fr);gap:6px 10px;font-size:13px;align-items:center}
+.fld>span:nth-child(odd){color:var(--muted);font-size:12.5px}
+.sect{font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin:14px 0 6px;border-bottom:1.5px solid var(--line2);padding-bottom:3px;display:flex;justify-content:space-between;gap:6px;flex-wrap:wrap}
+.dl{list-style:none;margin:0;padding:0;font-size:12.5px}
+.dl li{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:8px;padding:7px 4px;border-bottom:1px solid var(--line);align-items:start}
+.dl li .s{font-size:15px;line-height:1.2}
+.dl li small{display:block;color:var(--muted)}
+.dl li.seen{opacity:.55}
+.dl .go{font-size:11.5px;color:var(--blue);white-space:nowrap}
+.lv{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:0;margin-right:3px}
+.lv.r{background:var(--red)}.lv.o{background:#e8820c}.lv.y{background:var(--yel)}
+.chips{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 8px}
+.chips span{border:1.5px solid var(--line2);padding:2px 7px;font:700 11.5px system-ui;background:var(--paper);white-space:nowrap}
+.chips span.on{border-color:var(--blue);background:var(--blue);color:#fff}
+.chips span i{font-style:normal;opacity:.7;margin-left:3px}
+.wid{border:2px solid var(--ink);background:var(--paper);max-width:330px;font-size:13px}
+.wid .wh{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border-bottom:2px solid var(--ink);gap:6px}
+.wid .wb{padding:8px 10px}
+.wid .wb .l{display:flex;justify-content:space-between;gap:8px;padding:3px 0;border-bottom:1px solid var(--line)}
+.ck2{list-style:none;margin:0;padding:0;font-size:13px}
+.ck2 li{border-bottom:1px solid var(--line);padding:8px 2px}
+.ck2 .top{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;align-items:start}
+.ck2 .box{width:20px;height:20px;border:2px solid var(--ink);display:inline-block}
+.ck2 .box.on{background:var(--green);border-color:var(--green);box-shadow:inset 0 0 0 3px var(--paper)}
+.ck2 small{display:block;color:var(--muted)}
+.ck2 .acts{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0 0 30px}
+.ck2 .thumbs{display:flex;gap:4px;margin:6px 0 0 30px}
+.ck2 .thumbs i{width:44px;height:34px;background:linear-gradient(135deg,#c9b99a,#8c7a5b);border:1.5px solid var(--line2);display:inline-block}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:8px 0}
+.flow>div{border:2px solid var(--ink);background:var(--paper);padding:8px 10px;font-size:12.5px;position:relative}
+.flow>div b{display:block;font-size:13px;margin-bottom:2px}
+.flow>div .n{display:inline-block;background:var(--blue);color:#fff;font:800 11px system-ui;padding:1px 6px;margin-bottom:4px}
+.flow>div small{color:var(--muted)}
+.cx{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.cx>div{border:2px solid var(--ink);background:var(--paper);padding:10px 12px;font-size:13px}
+.cx h4{margin:0 0 6px;font-size:14px}
+.cx ul{margin:0;padding-left:18px}.cx li{margin:3px 0}
+.cx .ok{border-color:var(--green);box-shadow:4px 4px 0 rgba(26,127,55,.25)}
+.cx .mid{border-color:var(--yel);box-shadow:4px 4px 0 rgba(212,168,0,.3)}
+.cx .hard{border-color:var(--red);box-shadow:4px 4px 0 rgba(198,40,40,.25)}
+.steps{counter-reset:st;list-style:none;margin:12px 0 0;padding:0;display:grid;gap:10px}
+.steps>li{border:2px solid var(--ink);background:var(--paper);padding:10px 12px 10px 52px;position:relative;font-size:13px}
+.steps>li:before{counter-increment:st;content:counter(st);position:absolute;left:10px;top:10px;width:30px;height:30px;background:var(--blue);color:#fff;font:800 16px/30px system-ui;text-align:center}
+.steps>li.opt:before{background:var(--line2);color:var(--ink)}
+.steps>li b.t{font-size:14px}
+.steps ul{margin:4px 0 0;padding-left:18px}
+.sw{display:inline-block;width:34px;height:18px;border-radius:9px;background:var(--line2);position:relative;vertical-align:middle;flex:none}
+.sw:after{content:"";position:absolute;left:2px;top:2px;width:14px;height:14px;border-radius:50%;background:#fff}
+.sw.on{background:var(--green)}.sw.on:after{left:18px}
+.set{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;align-items:center}
+.set small{display:block;color:var(--muted);font-size:12px}
+.code6{font:800 26px ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;border:2px solid var(--ink);padding:4px 12px;display:inline-block;background:var(--paper)}
+.qr{width:96px;height:96px;flex:none;border:2px solid var(--ink);background:
+ repeating-linear-gradient(90deg,var(--ink) 0 6px,transparent 6px 12px),repeating-linear-gradient(0deg,var(--paper) 0 6px,transparent 6px 12px);position:relative}
+.qr:before,.qr:after{content:"";position:absolute;width:26px;height:26px;border:6px solid var(--ink);background:var(--paper);box-shadow:inset 0 0 0 4px var(--paper),inset 0 0 0 10px var(--ink)}
+.qr:before{left:4px;top:4px}.qr:after{right:4px;top:4px}
+.pres{display:inline-flex;align-items:center;gap:5px;font:700 11.5px system-ui;border:1.5px solid var(--vio);background:var(--vio-bg);color:var(--vio);padding:2px 7px;white-space:nowrap}
+.pres i{width:18px;height:18px;border-radius:50%;background:var(--vio);color:#fff;font:800 10px/18px system-ui;text-align:center;font-style:normal}
+.dot-on{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:4px}
+.dot-off{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--line2);margin-right:4px}
+.netd{border:1.5px solid var(--line2);background:var(--paper);padding:10px}
+.netd svg{width:100%;height:auto;display:block}
+.netd svg text{fill:var(--ink);font:12px system-ui}
+.netd svg .m{fill:var(--muted);font-size:11px}
+.netd svg .bx{fill:var(--paper);stroke:var(--ink);stroke-width:2}
+.netd svg .bxb{fill:var(--blue-bg);stroke:var(--blue);stroke-width:2}
+.netd svg .bxg{fill:var(--green-bg);stroke:var(--green);stroke-width:2}
+.netd svg .bxr{fill:var(--red-bg);stroke:var(--red);stroke-width:2;stroke-dasharray:5 4}
+.netd svg .ln{stroke:var(--ink);stroke-width:2;fill:none}
+.netd svg .lnb{stroke:var(--blue);stroke-width:2.5;fill:none}
+.netd svg .lnr{stroke:var(--red);stroke-width:2;fill:none;stroke-dasharray:5 4}
+.simple{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:12px 16px;font-size:14px;max-width:1000px}
+.simple p{margin:0 0 8px}
+.simple p:last-child{margin:0}
+@media (max-width:900px){.flow{grid-template-columns:1fr 1fr}.cx{grid-template-columns:1fr}.fld{grid-template-columns:110px minmax(0,1fr)}}
+@media (max-width:760px){.flow{grid-template-columns:1fr}.steps>li{padding-left:46px}}
+.sect .btn{text-transform:none;letter-spacing:0}
+.sect .mini{text-transform:none;letter-spacing:0;font:400 11.5px system-ui;color:var(--soft)}
+
+.arch{display:grid;grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr) 40px minmax(0,1fr) 40px minmax(0,1fr);align-items:center;gap:0;margin:8px 0}
+.arch>.bx{border:2px solid var(--ink);background:var(--paper);padding:8px 10px;font-size:12.5px;min-width:0}
+.arch>.bx>b{display:block;font-size:13px}
+.arch>.bx small{color:var(--muted);display:block}
+.arch>.bx.b{border-color:var(--blue);background:var(--blue-bg)}
+.arch>.bx.g{border-color:var(--green);background:var(--green-bg)}
+.arch>.ar{text-align:center;font:800 18px system-ui;color:var(--soft)}
+.house{border:3px dashed var(--green);padding:28px 12px 12px;position:relative;background:var(--paper)}
+.house>.hl{position:absolute;top:-12px;left:12px;background:var(--green);color:#fff;font:800 11px system-ui;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.2fr) 70px minmax(0,1fr);gap:10px;align-items:center}
+.hgrid .dev{border:2px solid var(--ink);background:var(--paper);padding:8px 10px;font-size:12.5px;margin-bottom:8px}
+.hgrid .dev:last-child{margin-bottom:0}
+.hgrid .dev>b{display:block;font-size:13px}
+.hgrid .dev small{color:var(--muted)}
+.hgrid .main{border:3px solid var(--blue);background:var(--blue-bg);padding:10px 12px;font-size:12.5px}
+.hgrid .main b.t{display:block;font-size:14px}
+.hgrid .wifi{text-align:center;font-size:12px;color:var(--green);font-weight:800}
+.hgrid .wifi i{display:block;font-size:26px;font-style:normal}
+.net-out{margin-top:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:12.5px}
+.net-out .x{border:2px dashed var(--red);color:var(--red);background:var(--red-bg);padding:5px 10px;font-weight:700}
+.inner{border:1.5px solid var(--line2);background:var(--paper);padding:6px 8px;margin-top:6px;font-size:12px}
+.inner code{font-size:11px}
+@media (max-width:900px){.arch{grid-template-columns:1fr}.arch>.ar{transform:rotate(90deg);height:24px}.hgrid{grid-template-columns:1fr}.hgrid .wifi{padding:4px 0}}
+
+/* — ajouts de cette maquette (dossier et transcriptions) — */
+.toc{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.toc a{background:var(--paper);border:2px solid var(--ink);padding:8px 14px;box-shadow:4px 4px 0 var(--shadow);color:var(--ink);text-decoration:none;font-size:13px}
+.toc a b{display:block;font-size:16px}
+.cap{font:800 10.5px system-ui;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin:12px 0 6px}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:18px;align-items:start}
+.pair>*{min-width:0}
+/* ancien dessin */
+.oldgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;padding:1px 0 0 1px}
+.oldgrid span{border:2px solid var(--ink);margin:-1px 0 0 -1px;padding:10px 6px;font:700 12px system-ui;text-align:center;background:var(--paper)}
+.oldgrid span.on{background:var(--blue);color:#fff}
+.oldsteps{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 10px}
+.oldsteps span{border:1px solid var(--line2);border-radius:999px;padding:4px 11px;font-size:12px;background:var(--grey-bg)}
+.oldsteps span.on{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:700}
+/* en-tête de dossier */
+.dh2x{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;padding:10px 12px 6px}
+.dh2x h4{margin:0;font-size:17px}.dh2x small{display:block;color:var(--soft);font-size:12px}
+/* étapes de l'état, compactes */
+.stp{display:flex;align-items:center;gap:0;font-size:12px;flex-wrap:nowrap;overflow:hidden;padding:0 12px 10px}
+.stp span{padding:3px 9px;border:1.5px solid var(--line2);margin-right:-1.5px;background:var(--paper);white-space:nowrap;color:var(--muted)}
+.stp span.done{color:var(--green);border-color:var(--green);background:var(--green-bg)}
+.stp span.on{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:700;position:relative;z-index:1}
+.stp .sel{border:2px solid var(--ink);background:var(--paper);color:var(--ink);font-weight:700;padding:4px 9px}
+/* barre d'onglets C5 */
+.ut{display:flex;flex-wrap:nowrap;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);background:var(--paper);overflow:hidden;position:relative}
+.ut>span{padding:8px 12px;font:700 12.5px system-ui;border-right:1.5px solid var(--line2);white-space:nowrap;display:inline-flex;align-items:center;gap:5px;flex:none}
+.ut>span i{font-style:normal}
+.ut>span.on{background:var(--blue);color:#fff;border-right-color:var(--blue)}
+.ut>span.mr{margin-left:auto;border-left:2px solid var(--ink);border-right:0}
+.ut.tight>span{padding:8px 7px;font-size:12px}.ut.scroll{overflow-x:auto}
+.ut.scroll:after{content:"";position:sticky;right:0;flex:none;width:22px;background:linear-gradient(90deg,transparent,var(--paper))}
+.k{display:inline-block;font:800 10.5px/15px system-ui;min-width:16px;padding:0 5px;border:1.5px solid var(--line2);background:var(--grey-bg);color:var(--ink);text-align:center}
+.on .k{background:#fff;border-color:#fff;color:var(--blue)}
+.k.red{background:var(--red);border-color:var(--red);color:#fff}
+.k.yel{background:var(--yel-bg);border-color:var(--yel);color:var(--yel-ink)}
+.drop2{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 rgba(0,0,0,.14);font-size:13px;width:240px;max-width:100%}
+.drop2 div{display:flex;justify-content:space-between;gap:8px;padding:7px 10px;border-bottom:1px solid var(--line);align-items:center}
+.drop2 div:last-child{border-bottom:0}
+.drop2 .g{font:800 10.5px system-ui;letter-spacing:.1em;color:var(--soft);text-transform:uppercase;background:var(--grey-bg);padding:4px 10px}
+.body-ph{padding:12px;font-size:12.5px;color:var(--muted);min-height:64px}
+.body-ph .ln{height:9px;background:var(--line);margin:7px 0}.body-ph .ln.s{width:60%}.body-ph .ln.m{width:80%}
+/* familles */
+.fam{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.fam>span{padding:8px 6px;font:700 12.5px system-ui;border-right:1.5px solid var(--line2);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fam>span:last-child{border-right:0}
+.fam>span small{display:block;font:400 11px system-ui;color:var(--soft)}
+.fam>span.on{background:var(--blue);color:#fff}.fam>span.on small{color:#dbe6ff}
+.subt{display:flex;gap:6px;padding:8px 12px;border-bottom:1.5px solid var(--line2);background:var(--blue-bg);flex-wrap:nowrap;overflow-x:auto}
+.subt span{border:1.5px solid var(--line2);background:var(--paper);padding:3px 9px;font:700 12px system-ui;white-space:nowrap;display:inline-flex;gap:5px;align-items:center}
+.subt span.on{border-color:var(--blue);color:var(--blue-ink);box-shadow:inset 0 -3px 0 var(--blue)}
+/* colonne à gauche */
+.side2{display:grid;grid-template-columns:210px minmax(0,1fr);border-top:2px solid var(--ink)}
+.side2 nav{border-right:2px solid var(--ink);background:var(--paper)}
+.side2 nav .g{font:800 10px system-ui;letter-spacing:.1em;color:var(--soft);text-transform:uppercase;padding:8px 10px 3px}
+.side2 nav span{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:5px 10px;font-size:12.5px;border-bottom:1px solid var(--line)}
+.side2 nav span.on{background:var(--blue);color:#fff;font-weight:700}
+.pickrow{display:flex;gap:8px;align-items:center;padding:8px 10px;border-top:2px solid var(--ink);border-bottom:1.5px solid var(--line2)}
+.pickrow .pk2{flex:1;border:2px solid var(--ink);padding:6px 9px;font:700 13px system-ui;display:flex;justify-content:space-between;background:var(--paper)}
+/* résumé cliquable du dossier */
+.recap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:10px 12px}
+.recap>div{border:2px solid var(--ink);padding:6px 8px;font-size:12px;background:var(--paper)}
+.recap b{display:block;font-size:17px}
+.recap .go{color:var(--blue);font-size:11.5px}
+/* visionneuse */
+.lbx{display:grid;grid-template-columns:minmax(0,1fr) 330px;border:2px solid var(--ink);background:#1b1d21;min-width:0}
+.lbx .ph{position:relative;min-height:380px;display:flex;align-items:center;justify-content:center;padding:18px}
+.lbx .paper{width:min(100%,330px);aspect-ratio:.72;background:linear-gradient(160deg,#efe5cf,#d9c9a6);position:relative;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+.lbx .paper i{position:absolute;left:10%;right:10%;height:5px;background:rgba(60,40,20,.35)}
+.lbx .zone{position:absolute;border:2px solid #ffb800;background:rgba(255,184,0,.14)}
+.lbx .zone b{position:absolute;top:-17px;left:-2px;background:#ffb800;color:#111;font:800 10px system-ui;padding:1px 4px;white-space:nowrap}
+.lbx .pane{background:var(--paper);border-left:2px solid var(--ink);padding:10px 12px;font-size:12.5px;min-width:0}
+.ta{border:1.5px solid var(--line2);background:var(--sheet);padding:8px 10px;font:12.5px/1.5 Georgia,serif;white-space:pre-wrap;min-height:90px}
+.ta.ro{background:var(--grey-bg)}
+.meta{display:flex;gap:5px;flex-wrap:wrap;margin:6px 0}
+.trbox{border:2px solid var(--blue);background:var(--blue-bg);padding:8px 10px;margin:8px 0}
+.trbox .h{display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap;font-weight:700}
+.trbox .ex{font:12.5px/1.45 Georgia,serif;margin:6px 0;color:var(--ink)}
+.cbl{display:flex;gap:7px;align-items:center;font-size:12.5px;margin:4px 0}
+/* page du document */
+.docp{display:grid;grid-template-columns:240px minmax(0,1fr);gap:14px}
+.docp .thumb{aspect-ratio:.72;background:linear-gradient(160deg,#efe5cf,#d9c9a6);border:2px solid var(--ink);position:relative}
+.docp .thumb i{position:absolute;left:12%;right:12%;height:4px;background:rgba(60,40,20,.35)}
+.card2{border:2px solid var(--ink);background:var(--paper);padding:10px 12px;margin-bottom:10px;font-size:13px}
+.card2 h5{margin:0 0 6px;font-size:14px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:5px;border:1.5px solid var(--ink);padding:2px 8px;font-size:12px;background:var(--paper);white-space:nowrap}
+.chip small{color:var(--soft)}
+/* Atelier */
+.atl{border:2px solid var(--ink);background:var(--paper)}
+.atl .top{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:7px 9px;border-bottom:2px solid var(--ink);background:var(--grey-bg);font-size:12.5px}
+.atl .top .menus{display:flex;gap:10px;font-weight:700}
+.atl .top .t{flex:1 1 260px;min-width:0;border:1.5px solid var(--line2);background:var(--paper);padding:4px 8px;font-weight:700}
+.atl .top .f{border:1.5px solid var(--line2);background:var(--paper);padding:4px 8px;color:var(--muted)}
+.atl .top .f.q{border-color:var(--yel);background:var(--yel-bg);color:var(--yel-ink);font-weight:700}
+.atl .mid{display:grid;grid-template-columns:200px minmax(0,1fr) minmax(0,1fr);min-height:230px}
+.atl .tools{border-right:2px solid var(--ink);padding:8px 10px;font-size:12.5px}
+.atl .img{background:#2a2c31;display:flex;align-items:center;justify-content:center;padding:12px}
+.atl .img .paper{width:150px;aspect-ratio:.72;background:linear-gradient(160deg,#efe5cf,#d9c9a6);position:relative}
+.atl .txt{border-left:2px solid var(--ink);padding:8px 10px;font:12.5px/1.5 Georgia,serif}
+.atl .foot{border-top:1.5px solid var(--line2);padding:6px 10px;font-size:12px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between}
+.guess{display:flex;gap:6px;align-items:center;flex-wrap:wrap;border:2px dashed var(--yel);background:var(--yel-bg);padding:6px 9px;font-size:12.5px;margin:8px 9px 0}
+/* fiche personne */
+.pers{border:2px solid var(--ink);background:var(--paper)}
+.pers .ph2{display:flex;gap:10px;align-items:center;padding:10px 12px;border-bottom:2px solid var(--ink)}
+.pers .av{width:44px;height:44px;border:2px solid var(--ink);background:var(--grey-bg);display:flex;align-items:center;justify-content:center;font-size:20px}
+.acts{list-style:none;margin:0;padding:0}
+.acts li{display:grid;grid-template-columns:46px minmax(0,1fr) auto;gap:10px;padding:8px 12px;border-bottom:1px solid var(--line);align-items:start;font-size:12.5px}
+.acts .mini-img{width:46px;height:58px;background:linear-gradient(160deg,#efe5cf,#d9c9a6);border:1.5px solid var(--line2)}
+.acts q{quotes:"« " " »";display:block;font:12.5px/1.4 Georgia,serif;color:var(--muted);margin-top:3px}
+/* tableau d'enquête */
+.wt td,.wt th{text-align:center;padding:6px 5px}.wt td:first-child,.wt th:first-child,.wt td:last-child,.wt th:last-child{text-align:left}
+.wt .y{color:var(--green);font-weight:800}.wt .n{color:var(--red);font-weight:800}.wt .p{color:var(--yel-ink);font-weight:800}
+.fix{list-style:none;margin:0;padding:0}
+.fix li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px;padding:8px 4px;border-bottom:1px solid var(--line);font-size:13px}
+.fix li .s{font-size:16px}
+.fix small{display:block;color:var(--muted)}
+.fix .was{text-decoration:line-through;color:var(--soft)}
+.fix .now{color:var(--green);font-weight:700}
+.setl{border:2px solid var(--ink);background:var(--paper);padding:4px 14px}
+.setl .set{grid-template-columns:minmax(0,1fr) minmax(0,auto)}
+.setl .set>div:last-child{text-align:right}
+.mc{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);padding:4px 9px;font:700 12.5px system-ui;background:var(--paper);white-space:nowrap}
+@media (max-width:1100px){.pair{grid-template-columns:1fr}.lbx{grid-template-columns:1fr}.lbx .pane{border-left:0;border-top:2px solid var(--ink)}}
+@media (max-width:900px){.docp{grid-template-columns:1fr}.docp .thumb{max-width:200px}.atl .mid{grid-template-columns:1fr}.atl .tools,.atl .txt{border:0;border-top:2px solid var(--ink)}.recap{grid-template-columns:1fr 1fr}.side2{grid-template-columns:150px minmax(0,1fr)}}
+@media (max-width:560px){.side2{grid-template-columns:1fr}.side2 nav{border-right:0;border-bottom:2px solid var(--ink)}.fam>span small{display:none}.setl .set{grid-template-columns:1fr}.setl .set>div:last-child{text-align:left}}
+
+</style></head><body><div class="wrap">
+<h1>⚖️ Les onglets d’un dossier, et 📜 les transcriptions qui ne se voient pas ailleurs</h1>
+<p class="sub">Maquette à valider, rien n’est construit. Tu demandes deux choses : un dessin plus léger pour les onglets d’un dossier de succession, « en cohérence avec le reste du site », et pourquoi une transcription faite dans l’Atelier ne s’affiche pas sur la page du document. Cette page montre d’abord <b>ce qui se passe aujourd’hui</b> (lu dans le code), puis des propositions dessinées en écran large et sur téléphone. Noms fictifs (Louis MAZAUD, Me Hélène LACOMBE, Pierre DURAND). Badges : <span class="badge new">nouveau</span> <span class="badge re">fait évoluer l’existant</span> <span class="badge have">existe</span>. Cadres violets : <b>chaque choix est un réglage</b>, l’option <span class="cons">conseillé</span> d’abord, réglée au départ.</p>
+
+<div class="simple">
+<p><b>En deux mots.</b> <b>Onglets</b> : les 10 onglets d’un dossier sont dessinés avec le bouton « segmenté » de l’app, et une règle générale de l’app range tout bouton segmenté de 3 boutons ou plus en <b>grille de 3 colonnes</b>. D’où les 4 lignes de gros boutons. Je propose 3 dessins ; le conseillé : <b>une seule ligne, le reste dans « Plus ▾ »</b>, comme les onglets des Réglages.</p>
+<p><b>Transcriptions</b> : l’app a <b>deux cases différentes</b> pour le texte d’un même document. La case de la visionneuse écrit dans le média ; l’Atelier écrit dans sa propre liste d’actes. La page du document ne lit que la première : elle montre « test », jamais ce que tu as fait dans l’Atelier. Le conseil : <b>un seul texte par document</b>, celui de l’Atelier, qui se voit partout.</p>
+</div>
+
+<div class="toc" style="margin-top:18px">
+<a href="#a"><b>A</b>Onglets d’un dossier</a>
+<a href="#b0"><b>B</b>Transcriptions : l’enquête</a>
+<a href="#b1"><b>B</b>Transcriptions : propositions</a>
+<a href="#c"><b>C</b>Petites corrections</a>
+<a href="#r"><b>R</b>Réglages proposés</a>
+<a href="#q"><b>?</b>Questions à trancher</a>
+</div>
+
+<!-- ═════════════ A ═════════════ -->
+<div class="part" id="a">A · Les onglets d’un dossier de succession</div>
+<h2>A0. Aujourd’hui <span class="badge have">relevé dans le code</span></h2>
+<p class="sub">L’en-tête du dossier, les pastilles d’état, puis les onglets. Tout est dans <code>assets/js/heritage-successoral.js</code> (<code>renderCase</code>) et <code>assets/css/successoral.css</code>.</p>
+<div class="grid">
+<div class="case">
+<div class="head"><span class="tag">Ce que tu vois</span><span class="badge have">existe</span></div>
+<h3>10 gros boutons sur 4 lignes</h3>
+<div class="win"><div class="dh2x"><div><h4>⚖️ Dossier n° 2026-014 · Succession MAZAUD</h4><small>Louis MAZAUD (1931-2025) · Me Hélène LACOMBE</small></div><span class="btn small">✎ Modifier</span></div>
+<div style="padding:0 12px 12px">
+<div class="oldsteps"><span>✓ Ouvert</span><span>✓ En recherche</span><span class="on">Héritiers trouvés</span><span>Remis au notaire</span><span>Clos</span></div>
+<div class="oldgrid"><span class="on">📁 Dossier</span><span>👥 Héritiers</span><span>🧑‍🤝‍🧑 Personnes</span><span>🌳 Arbre</span><span>📑 Pièces (1 / 2)</span><span>✉️ Héritiers contactés</span><span>📞 Échanges</span><span>🖨 Pour le notaire</span><span>🕓 Journal</span><span>💶 Temps et frais</span></div>
+</div></div>
+<p class="note">Et dans l’onglet 📁 Dossier, en bas, <b>les mêmes 9 boutons une deuxième fois</b> (<code>.succ-quick</code>) pour aller aux autres onglets.</p>
+</div>
+<div class="case">
+<div class="head"><span class="tag">Pourquoi c’est comme ça</span></div>
+<h3>Une règle générale qui fait la grille</h3>
+<table><tbody>
+<tr><td><b>Les onglets</b></td><td>Un bouton segmenté <code>&lt;div class="segmented succ-tabs"&gt;</code>, 9 onglets + 📞 Échanges quand il est réglé « en onglet » (<code>SP.tabs</code>, heritage-successoral-plus2.js).</td></tr>
+<tr><td><b>La grille</b></td><td><code>heritage.css</code> : <code>.segmented:has(&gt; button:nth-child(3)){grid-template-columns:repeat(3,1fr)}</code>. Tout bouton segmenté de 3 boutons ou plus devient une grille de 3 colonnes : 10 onglets = 4 lignes, le dernier seul.</td></tr>
+<tr><td><b>Le « flex-wrap »</b></td><td><code>.succ-tabs{flex-wrap:wrap}</code> dans successoral.css ne sert à rien : le bouton segmenté est une grille, pas une ligne.</td></tr>
+<tr><td><b>Les pastilles</b></td><td>Boutons ronds <code>.succ-step</code>, cliquables pour changer l’état ; seul endroit rond de l’app dans ce cadre carré.</td></tr>
+<tr><td><b>Ailleurs</b></td><td>Les <b>vues</b> du haut des Successions (Dossiers, Héritiers à contacter, Courriers, 📈 Activité) viennent de passer sur une ligne (<code>.succ-views</code>). Les onglets des <b>Réglages</b> : « noms courts, sur une seule ligne ; sur un petit écran, la barre défile » (REGLES-INTERFACE). La <b>fiche personne</b> en onglets : une ligne qui défile sur téléphone. Le modèle commun C5 est <code>.ui-tabs</code> : une ligne, bleu = actif.</td></tr>
+</tbody></table>
+</div>
+</div>
+
+<h2>A1. Une ligne, le reste dans « Plus ▾ » <span class="cons">conseillé</span> <span class="badge re">fait évoluer l’existant</span></h2>
+<p class="sub">La barre d’onglets C5 (bleu = actif) sur une seule ligne, noms courts, compteurs en petite pastille. Ce qui ne tient pas dans la largeur passe dans « Plus ▾ » (dans l’ordre). L’onglet ouvert reste toujours visible : s’il vient de « Plus ▾ », il prend la dernière place. Les pastilles d’état deviennent une petite frise d’étapes.</p>
+<div class="pair">
+<div><p class="cap">Écran large (1440)</p>
+<div class="win"><div class="dh2x"><div><h4>⚖️ Dossier n° 2026-014 · Succession MAZAUD</h4><small>Louis MAZAUD (1931-2025) · Me Hélène LACOMBE</small></div><div class="row"><span class="chrono"><i class="dotr"></i>0:42</span><span class="btn small">✎ Modifier</span><span class="btn small">⋯</span></div></div>
+<div class="stp"><span class="done">✓ Ouvert</span><span class="done">✓ En recherche</span><span class="on">Héritiers trouvés</span><span>Remis au notaire</span><span>Clos</span></div>
+<div class="ut"><span class="on"><i>📁</i> Dossier</span><span><i>👥</i> Héritiers <b class="k">6</b></span><span><i>🧑‍🤝‍🧑</i> Personnes</span><span><i>🌳</i> Arbre</span><span><i>📑</i> Pièces <b class="k yel">1 / 2</b></span><span><i>✉️</i> Contactés <b class="k">2 / 6</b></span><span><i>📞</i> Échanges <b class="k">3</b></span><span class="mr">Plus ▾ <b class="k">3</b></span></div>
+<div class="body-ph"><div class="ln m"></div><div class="ln"></div><div class="ln s"></div></div></div>
+<p class="mini">Ici, la colonne de l’app ouverte : 3 onglets passent dans « Plus ▾ ». Colonne repliée, sur 1440, les 10 tiennent sur la ligne et « Plus ▾ » disparaît.</p>
+<div class="row" style="margin-top:10px;justify-content:flex-end"><div class="drop2"><div class="g">Plus</div><div><span>🖨 Pour le notaire</span></div><div><span>🕓 Journal</span></div><div><span>💶 Temps et frais</span><b class="k">4 h 10</b></div><div class="g">Onglets</div><div><span>⠿ Ranger les onglets…</span></div></div></div>
+</div>
+<div><p class="cap">Téléphone (390)</p>
+<div class="phone"><div class="ptop">⚖️ <span class="sp">N° 2026-014 · MAZAUD</span>⋯</div>
+<div class="stp" style="padding:8px 10px"><span class="sel">État : Héritiers trouvés ▾</span></div>
+<div class="ut tight"><span class="on">📁 Dossier</span><span>👥 Héritiers <b class="k">6</b></span><span>📑 Pièces <b class="k yel">1/2</b></span><span class="mr">Plus ▾</span></div>
+<div class="body-ph"><div class="ln m"></div><div class="ln"></div><div class="ln s"></div><div class="ln m"></div></div></div>
+<p class="mini">Sur téléphone, la frise devient un menu de choix « État : … ▾ ». « Plus ▾ » s’ouvre en liste, avec les compteurs.</p></div>
+</div>
+<div class="grid" style="margin-top:14px">
+<div class="case"><div class="head"><span class="tag">Avantages</span></div><ul class="edge">
+<li><b>Une ligne au lieu de quatre</b> : le contenu de l’onglet monte d’environ 150 px.</li>
+<li><b>Même dessin</b> que les onglets C5 du reste de l’app (Réglages, fiche personne, Aide à la lecture…).</li>
+<li>Rien à apprendre : les mêmes onglets, au même endroit, dans le même ordre.</li>
+<li>Le plus simple à faire : la barre <code>.ui-tabs</code> existe, il manque seulement « Plus ▾ » (qui servira aussi ailleurs).</li>
+</ul></div>
+<div class="case"><div class="head"><span class="tag">Inconvénients</span></div><ul class="edge">
+<li>Ce qui est dans « Plus ▾ » se voit moins : d’où « ⠿ Ranger les onglets » pour mettre devant ceux dont tu te sers.</li>
+<li>Sur téléphone, 3 onglets seulement sont visibles.</li>
+</ul></div>
+</div>
+
+<h2>A2. Quatre familles, puis les onglets de la famille <span class="badge new">nouveau</span></h2>
+<p class="sub">Une première ligne de 5 grands onglets (📁 Dossier, 🔎 Recherche, 📑 Pièces, ✉️ Contacts, 🕓 Suivi), et sous celui qui est ouvert, ses onglets à lui. Chaque famille montre le compteur qui compte.</p>
+<div class="pair">
+<div><p class="cap">Écran large (1440)</p>
+<div class="win"><div class="dh2x"><div><h4>⚖️ Dossier n° 2026-014 · Succession MAZAUD</h4><small>Louis MAZAUD (1931-2025) · Me Hélène LACOMBE</small></div><span class="btn small">✎ Modifier</span></div>
+<div class="stp"><span class="done">✓ Ouvert</span><span class="done">✓ En recherche</span><span class="on">Héritiers trouvés</span><span>Remis au notaire</span><span>Clos</span></div>
+<div class="fam"><span>📁 Dossier<small>échéances, mandat</small></span><span class="on">🔎 Recherche<small>6 héritiers</small></span><span>📑 Pièces<small>1 / 2 pièces</small></span><span>✉️ Contacts<small>2 / 6 contactés</small></span><span>🕓 Suivi<small>journal, 4 h 10</small></span></div>
+<div class="subt"><span class="on">👥 Héritiers <b class="k">6</b></span><span>🧑‍🤝‍🧑 Personnes</span><span>🌳 Arbre</span></div>
+<div class="body-ph"><div class="ln m"></div><div class="ln"></div><div class="ln s"></div></div></div>
+<table style="margin-top:10px"><thead><tr><th>Famille</th><th>Ses onglets</th></tr></thead><tbody>
+<tr><td>📁 Dossier</td><td>Dossier (le défunt, le mandat, les échéances)</td></tr>
+<tr><td>🔎 Recherche</td><td>👥 Héritiers · 🧑‍🤝‍🧑 Personnes · 🌳 Arbre</td></tr>
+<tr><td>📑 Pièces</td><td>📑 Pièces · 🖨 Pour le notaire</td></tr>
+<tr><td>✉️ Contacts</td><td>✉️ Héritiers contactés · 📞 Échanges</td></tr>
+<tr><td>🕓 Suivi</td><td>🕓 Journal · 💶 Temps et frais</td></tr>
+</tbody></table>
+</div>
+<div><p class="cap">Téléphone (390)</p>
+<div class="phone"><div class="ptop">⚖️ <span class="sp">N° 2026-014 · MAZAUD</span>⋯</div>
+<div class="stp" style="padding:8px 10px"><span class="sel">État : Héritiers trouvés ▾</span></div>
+<div class="fam"><span>📁</span><span class="on">🔎</span><span>📑 <b class="k yel">1/2</b></span><span>✉️</span><span>🕓</span></div>
+<div class="subt"><span class="on">👥 Héritiers <b class="k">6</b></span><span>🧑‍🤝‍🧑 Personnes</span><span>🌳 Arbre</span></div>
+<div class="body-ph"><div class="ln m"></div><div class="ln"></div><div class="ln s"></div></div></div>
+<p class="mini">Sur téléphone, les familles passent en icônes seules (le nom en bulle) ; la deuxième ligne défile.</p></div>
+</div>
+<div class="grid" style="margin-top:14px">
+<div class="case"><div class="head"><span class="tag">Avantages</span></div><ul class="edge">
+<li>Tout est visible sans « Plus ▾ », même sur téléphone (5 icônes).</li>
+<li>Range le travail dans l’ordre du métier : chercher, prouver, contacter, suivre.</li>
+<li>Une place pour les futurs onglets sans rallonger la barre.</li>
+</ul></div>
+<div class="case"><div class="head"><span class="tag">Inconvénients</span></div><ul class="edge">
+<li><b>Deux clics</b> au lieu d’un pour aller d’Héritiers à Pièces, puis encore un pour « Pour le notaire ».</li>
+<li>Deux lignes d’onglets : moins lourd qu’aujourd’hui, mais plus haut qu’A1.</li>
+<li>Un dessin qui n’existe nulle part ailleurs dans l’app : à apprendre.</li>
+</ul></div>
+</div>
+
+<h2>A3. Une colonne à gauche dans le dossier <span class="badge new">nouveau</span></h2>
+<p class="sub">Comme les Réglages : la liste des onglets à gauche, rangée en familles, avec les compteurs à droite. Sur téléphone, un menu de choix unique en haut.</p>
+<div class="pair">
+<div><p class="cap">Écran large (1440)</p>
+<div class="win"><div class="dh2x"><div><h4>⚖️ Dossier n° 2026-014 · Succession MAZAUD</h4><small>Louis MAZAUD (1931-2025) · Me Hélène LACOMBE</small></div><span class="btn small">✎ Modifier</span></div>
+<div class="stp"><span class="done">✓ Ouvert</span><span class="done">✓ En recherche</span><span class="on">Héritiers trouvés</span><span>Remis au notaire</span><span>Clos</span></div>
+<div class="side2"><nav>
+<span>📁 Dossier</span>
+<div class="g">Recherche</div><span>👥 Héritiers <b class="k">6</b></span><span>🧑‍🤝‍🧑 Personnes</span><span>🌳 Arbre</span>
+<div class="g">Pièces</div><span class="on">📑 Pièces <b class="k">1 / 2</b></span><span>🖨 Pour le notaire</span>
+<div class="g">Contacts</div><span>✉️ Contactés <b class="k">2 / 6</b></span><span>📞 Échanges <b class="k">3</b></span>
+<div class="g">Suivi</div><span>🕓 Journal</span><span>💶 Temps et frais</span>
+</nav><div class="body-ph"><div class="ln m"></div><div class="ln"></div><div class="ln s"></div><div class="ln m"></div><div class="ln"></div></div></div></div>
+</div>
+<div><p class="cap">Téléphone (390)</p>
+<div class="phone"><div class="ptop">⚖️ <span class="sp">N° 2026-014 · MAZAUD</span>⋯</div>
+<div class="stp" style="padding:8px 10px"><span class="sel">État : Héritiers trouvés ▾</span></div>
+<div class="pickrow"><span class="pk2"><span>📑 Pièces · 1 / 2</span><span>▾</span></span></div>
+<div class="body-ph"><div class="ln m"></div><div class="ln"></div><div class="ln s"></div></div></div>
+<p class="mini">Le menu de choix unique, avec les familles en titres et les compteurs.</p></div>
+</div>
+<div class="grid" style="margin-top:14px">
+<div class="case"><div class="head"><span class="tag">Avantages</span></div><ul class="edge">
+<li>Tous les onglets, leurs familles et leurs compteurs visibles d’un coup, en un clic.</li>
+<li>Pas de limite au nombre d’onglets.</li>
+</ul></div>
+<div class="case"><div class="head"><span class="tag">Inconvénients</span></div><ul class="edge">
+<li><b>Une colonne de plus</b> : avec la colonne de l’app et la colonne des dossiers, le tableau des héritiers et l’arbre perdent environ 210 px de large.</li>
+<li>Sur téléphone, on ne voit plus les autres onglets sans ouvrir le menu.</li>
+</ul></div>
+</div>
+
+<div class="case wide" style="margin-top:20px">
+<div class="head"><span class="tag">Mon conseil</span></div>
+<h3>A1 par défaut, A2 et A3 en réglage ; et ôter les 9 boutons en double</h3>
+<ol class="edge" style="font-size:13px;color:var(--ink)">
+<li><b>A1, une ligne + « Plus ▾ »</b> : c’est le dessin des autres onglets de l’app, c’est le moins de place, et un clic suffit. Avec « ⠿ Ranger les onglets », tu mets devant ceux dont tu te sers ; tu peux aussi en cacher.</li>
+<li><b>La frise d’étapes</b> remplace les pastilles rondes : même rôle (clic = changer l’état, « ↶ Annuler »), une ligne fine, en carré comme le reste.</li>
+<li><b>Dans 📁 Dossier, les 9 boutons du bas</b> deviennent un petit résumé cliquable : on y voit où en est le dossier au lieu de répéter les onglets.</li>
+</ol>
+<div class="recap"><div>👥 Héritiers<b>6</b><span class="go">Voir →</span></div><div>📑 Pièces<b>1 / 2</b><span class="go">1 à demander →</span></div><div>✉️ Contactés<b>2 / 6</b><span class="go">Relancer →</span></div><div>🗓 Prochaine échéance<b>3 déc.</b><span class="go">Dans 12 j</span></div></div>
+</div>
+<div class="dec"><b>Réglage : Onglets d’un dossier</b>
+<div class="seg"><span class="on">Une ligne + Plus ▾</span><span>Par familles</span><span>Colonne à gauche</span><span>Grille (comme avant)</span></div>
+<p class="mini" style="margin:8px 0 0">Avec, pour les trois : « Icône et nom <span class="cons">conseillé</span> / Nom seul / Icône seule » et « ⠿ Ranger, cacher les onglets ». Les compteurs restent toujours visibles (Pièces 1 / 2, Contactés 2 / 6, Échanges 3).</p></div>
+
+<!-- ═════════════ B0 ═════════════ -->
+<div class="part" id="b0">B · Les transcriptions</div>
+<h2>B0. L’enquête : pourquoi la transcription de l’Atelier n’apparaît pas <span class="badge have">relevé dans le code</span></h2>
+<p class="sub">Tes trois captures, relues avec le code.</p>
+<div class="arch">
+<div class="bx b"><b>🖼 Visionneuse : la case « Transcription du document »</b><small>tu tapes « test » ; enregistré dans le média, colonne <code>media.transcription</code> (<code>save_media_transcription</code>). « 🔎 OCR » et « ✍ HTR manuscrit » ajoutent leur texte au bout.</small></div>
+<div class="ar">≠</div>
+<div class="bx"><b>📜 Atelier (Transcription d’actes)</b><small>enregistre dans une <b>autre table</b> : <code>act_transcriptions</code> (titre, sorte, date, lieu, source, texte, zones, personnes, état), reliée au média par <code>media_id</code>. Plusieurs actes possibles sur une même image.</small></div>
+<div class="ar">→</div>
+<div class="bx"><b>📄 Page du document</b><small>(<code>lib/onglets.php</code>, <code>heritage-onglets-documents.js</code>) lit <b>seulement</b> <code>media.transcription</code> : « test ».</small></div>
+<div class="ar">→</div>
+<div class="bx g"><b>Le pont existe, caché</b><small>Atelier → Fichier → « ↪ Mettre le texte dans le média » : <b>remplace</b> « test » par le texte de l’Atelier, sans prévenir. Sinon rien ne passe.</small></div>
+</div>
+<div class="grid" style="margin-top:14px">
+<div class="case"><div class="head"><span class="tag">Le titre</span></div><h3>Pourquoi « 84e6ae97-2284-… »</h3>
+<p style="font-size:13px">Le bouton « 📜 Atelier » de la visionneuse ouvre l’Atelier avec <code>title: le titre du média</code>. Le titre du média, quand tu ne l’as pas écrit, est le nom du fichier envoyé, et un téléphone ou un site d’archives donne souvent un code comme <code>84e6ae97-2284-4a51-9e3d-160902c51eda.jpg</code>. L’Atelier sait fabriquer un bon titre (« Baptême de Jean MARTIN, 1790 ») mais <b>seulement si le titre est vide</b> : il ne l’est jamais en venant de la visionneuse.</p></div>
+<div class="case"><div class="head"><span class="tag">La sorte</span></div><h3>Pourquoi « Baptême »</h3>
+<p style="font-size:13px">Dans l’Atelier, une nouvelle transcription part avec <code>kind: 'bapteme'</code> (<code>heritage-transcribe.js</code>), c’est la première de la liste. Le serveur, lui, met <code>'autre'</code> quand rien n’est dit. Rien ne regarde l’image ni ce que tu sais déjà du média (sa sorte « Registre militaire », sa cote). D’où « Baptême » sur une fiche matricule.</p></div>
+</div>
+
+<h3 style="margin-top:22px">Où c’est écrit, où ça se voit</h3>
+<div class="scrollx"><table class="wt" style="min-width:900px"><thead><tr><th>Où ça se voit</th><th>📝 Case de la visionneuse<br><code>media.transcription</code></th><th>📜 Atelier<br><code>act_transcriptions</code></th><th>Remarque</th></tr></thead><tbody>
+<tr><td><b>🖼 Visionneuse</b></td><td class="y">✓ la case</td><td class="p">≈ le titre seul</td><td>Le texte de l’Atelier ne s’y lit que par « 📖 Lire en entier ».</td></tr>
+<tr><td><b>📄 Page du document</b></td><td class="y">✓ section « Transcription »</td><td class="n">✗</td><td><b>La cause de ta capture 3.</b> La pastille « Transcrit » et le filtre « Déjà transcrits » des Documents aussi : le média seulement.</td></tr>
+<tr><td><b>👤 Fiche des personnes reliées</b></td><td class="n">✗</td><td class="n">✗</td><td>Seulement en ouvrant le média. Les personnes relevées dans l’Atelier ne sont même pas reliées à la fiche tant que « Ce que l’app a trouvé » n’est pas passé.</td></tr>
+<tr><td><b>🔎 Recherche → Transcriptions</b></td><td class="y">✓</td><td class="n">✗</td><td><code>transcription_search</code> lit le média (et les sons du Studio), pas l’Atelier.</td></tr>
+<tr><td><b>Recherche du haut</b></td><td class="n">✗</td><td class="n">✗</td><td>Elle ne cherche aucun média.</td></tr>
+<tr><td><b>Listes → Médias</b></td><td class="y">✓ colonne + recherche</td><td class="n">✗</td><td>Aussi l’export CSV des médias.</td></tr>
+<tr><td><b>Listes → Transcriptions d’actes</b></td><td class="n">✗</td><td class="y">✓ avec recherche dans le texte</td><td>La seule liste qui cherche dans le texte de l’Atelier.</td></tr>
+<tr><td><b>Outils de modification, widget Raccourcis</b></td><td class="n">✗</td><td class="y">✓</td><td></td></tr>
+<tr><td><b>🔎 Index des noms cités</b></td><td class="y">✓</td><td class="n">✗</td><td>Les témoins et voisins relevés dans les transcriptions.</td></tr>
+<tr><td><b>Diagramme « arbre de mots »</b></td><td class="y">✓</td><td class="y">✓</td><td>Le seul endroit qui lit les deux.</td></tr>
+<tr><td><b>⤓ Export GEDCOM</b></td><td class="n">✗</td><td class="n">✗</td><td>Seule la note du média part (<code>NOTE</code>).</td></tr>
+<tr><td><b>📖 Livre, mise en page</b></td><td class="n">✗</td><td class="n">✗</td><td></td></tr>
+<tr><td><b>Ta généalogie (fiches, événements)</b></td><td class="n">✗</td><td class="p">≈ en partie</td><td>Par « 🧭 Ce que l’app a trouvé… » de l’Atelier : fiches, événement, source et citation, en une fois (avec « ↶ Annuler »).</td></tr>
+</tbody></table></div>
+<p class="mini">Il existe aussi d’autres textes transcrits, à part : les sons (<code>audio_transcripts</code>), les dépouillements d’archives (<code>archive_digest_transcription_lines</code>), les livrets de famille, le dos d’une carte postale (la transcription du média du verso). Ils ne sont pas touchés ici.</p>
+
+<!-- ═════════════ B1 ═════════════ -->
+<h2 id="b1">B1. Le conseil : un seul texte par document <span class="cons">conseillé</span> <span class="badge re">fait évoluer l’existant</span></h2>
+<p class="sub">Un document = <b>une transcription principale</b>. Que tu écrives dans la case de la visionneuse ou dans l’Atelier, c’est <b>le même texte</b>. L’Atelier ajoute seulement des choses autour : zones, personnes, sorte, date, lieu, cote, état. Tout le reste de l’app (page du document, fiche des personnes, recherche, listes, export) lit ce texte-là.</p>
+<div class="flow">
+<div><span class="n">1</span><b>Tu écris où tu veux</b><small>la case de la visionneuse ou l’Atelier ; les deux montrent et changent le même texte.</small></div>
+<div><span class="n">2</span><b>L’Atelier garde le détail</b><small>zones sur l’image, personnes et rôles, sorte, date, lieu, cote, « À faire / En cours / Finie ».</small></div>
+<div><span class="n">3</span><b>Le média garde une copie à jour</b><small>à chaque enregistrement de l’Atelier : la recherche, les listes et la page du document suivent sans rien changer chez elles.</small></div>
+<div><span class="n">4</span><b>Plusieurs actes sur une page</b><small>(registre : 3 actes sur une vue) : un bloc par acte, l’un sous l’autre, chacun avec son titre.</small></div>
+</div>
+<div class="bandeau"><b class="t">⚠️ Quand les deux textes sont déjà différents (ton cas : « test » et « Prénoms »)</b>Une seule fois, à l’ouverture du document : « Ce document a deux transcriptions. Laquelle garder comme texte du document ? »
+<div class="row"><span class="btn small blue">Garder les deux, l’une sous l’autre</span><span class="btn small">Celle de l’Atelier</span><span class="btn small">Celle de la visionneuse</span></div><p class="mini" style="margin:6px 0 0">Rien n’est effacé sans « ↶ Annuler ». Le choix se fait aussi pour toute la base d’un coup (Réglages → Données → « Transcriptions »).</p></div>
+<div class="dec"><b>Les autres façons, si tu préfères</b><ol>
+<li><b>Un seul texte</b> (ci-dessus) <span class="cons">conseillé</span> : le plus simple à comprendre, un texte partout.</li>
+<li><b>Deux textes, un lien clair</b> : la case reste une note libre ; partout où on montre la case, on montre aussi « 📜 Transcrit dans l’Atelier : Registre militaire · Pierre DURAND » avec l’aperçu et « Ouvrir dans l’Atelier ». Moins de changements, mais deux textes à tenir.</li>
+<li><b>Comme aujourd’hui</b>, avec seulement l’aperçu de l’Atelier dans la page du document.</li>
+</ol></div>
+
+<h2>B2. La visionneuse <span class="badge re">fait évoluer l’existant</span></h2>
+<p class="sub">Une seule section « Transcription » : le texte, l’état, ce que l’Atelier a relevé, et « 📜 Ouvrir dans l’Atelier ». Plus de section « 📜 TRANSCRIPTION D’ACTES » à part.</p>
+<div class="lbx">
+<div class="ph"><div class="paper"><i style="top:12%"></i><i style="top:18%;right:30%"></i><i style="top:30%"></i><i style="top:36%"></i><i style="top:42%;right:40%"></i><i style="top:58%"></i><i style="top:64%"></i><i style="top:70%;right:22%"></i>
+<span class="zone" style="left:18%;top:26%;width:40%;height:8%"><b>Prénoms</b></span><span class="zone" style="left:52%;top:9%;width:36%;height:7%"><b>Classe 1912</b></span></div></div>
+<div class="pane">
+<div class="sect">Transcription <span class="mini">Enregistré ✓</span></div>
+<div class="meta"><span class="badge grey">Registre militaire</span><span class="badge warn">En cours</span><span class="badge blue">2 zones</span></div>
+<div class="ta">Fiche matricule n° 845, classe 1912
+Nom : DURAND
+Prénoms : Pierre Antoine
+Né le 4 mars 1892 à Tulle…</div>
+<div class="row" style="margin-top:8px"><span class="btn small blue">📜 Ouvrir dans l’Atelier</span><span class="btn small">📖 Lire en entier</span><span class="btn small">⋯</span></div>
+<p class="mini" style="margin:6px 0 0">« ⋯ » : 🔎 OCR, ✍ HTR manuscrit, [illisible], [?], ＋ Un autre acte sur cette image, ⤓ Exporter.</p>
+<div class="trbox"><div class="h"><span>👥 Relevés dans le texte</span><span class="mini">2</span></div>
+<div class="row" style="margin-top:6px"><span class="chip">Pierre DURAND <small>sujet</small> ✓</span><span class="chip">Jean DURAND <small>père</small> <u>Relier</u></span></div></div>
+<div class="sect">Personnes identifiées</div>
+<label class="cbl"><span class="cb on"></span> Afficher les zones sur la photo</label>
+<span class="btn small">＋ Identifier quelqu’un</span>
+</div></div>
+<p class="note">La case est la même qu’aujourd’hui : la taper ici change aussi le texte de l’Atelier. Les boutons d’aide (OCR, HTR, [illisible], [?]) passent dans « ⋯ » : il y en avait 6 sur une ligne.</p>
+
+<h2>B3. La page du document <span class="badge re">fait évoluer l’existant</span></h2>
+<p class="sub">Le texte de l’Atelier, avec ce qui va autour, et les personnes reliées avec leur rôle.</p>
+<div class="win"><div class="win-bar"><div><span class="eyebrow">📄 Documents</span><br><b>Fiche matricule de Pierre DURAND, classe 1912</b></div><div class="row"><span class="btn small">✎ Modifier</span><span class="btn small">⋯</span></div></div>
+<div class="win-body"><div class="docp">
+<div><div class="thumb"><i style="top:14%"></i><i style="top:22%"></i><i style="top:34%;right:30%"></i><i style="top:46%"></i><i style="top:58%"></i></div><p class="mini">2480 × 3508 px · assez grande pour imprimer en A4</p></div>
+<div>
+<div class="card2"><h5><span>📜 Transcription <span class="badge grey">Registre militaire</span> <span class="badge warn">En cours</span></span><span class="row"><span class="btn small blue">📜 Ouvrir dans l’Atelier</span><span class="btn small">📝 Dans le traitement de texte</span></span></h5>
+<div class="ta ro">Fiche matricule n° 845, classe 1912
+Nom : DURAND · Prénoms : Pierre Antoine
+Né le 4 mars 1892 à Tulle (Corrèze), fils de Jean et de Marie LACOMBE…</div>
+<p class="mini">Tulle · 1912 · AD 19, 1 R 612, vue 233 · 2 zones · modifié hier</p></div>
+<div class="card2"><h5>Personnes reliées · 2</h5><div class="row"><span class="chip">👤 Pierre DURAND <small>sujet</small></span><span class="chip">👤 Jean DURAND <small>père</small></span></div></div>
+<div class="card2"><h5>Relié à</h5><span class="mini">Événement « Service militaire » de Pierre DURAND</span></div>
+</div></div></div></div>
+<p class="note">Avec plusieurs actes sur la même image : un bloc 📜 par acte, l’un sous l’autre. La pastille « Transcrit » et le filtre des Documents comptent aussi l’Atelier.</p>
+
+<h2>B4. La fiche des personnes reliées <span class="badge new">nouveau</span></h2>
+<p class="sub">Un bloc « 📜 Actes et transcriptions » sur la fiche (rangé comme les autres blocs) : chaque document où la personne est reliée ou relevée, avec son rôle et un extrait.</p>
+<div class="grid">
+<div class="pers">
+<div class="ph2"><span class="av">👤</span><div><b>Pierre DURAND</b><br><small class="mini">1892 – 1958 · Tulle</small></div></div>
+<div class="sect" style="margin:10px 12px 4px">📜 Actes et transcriptions · 3</div>
+<ul class="acts">
+<li><span class="mini-img"></span><div><b>Registre militaire, classe 1912</b> <span class="badge grey">sujet</span><q>Prénoms : Pierre Antoine, né le 4 mars 1892 à Tulle…</q></div><span class="btn small">Ouvrir</span></li>
+<li><span class="mini-img"></span><div><b>Baptême, 6 mars 1892</b> <span class="badge grey">baptisé</span><q>L’an mil huit cent quatre-vingt-douze…</q></div><span class="btn small">Ouvrir</span></li>
+<li><span class="mini-img"></span><div><b>Mariage DURAND × MAZAUD, 1919</b> <span class="badge warn">relevé, à relier</span><q>… Pierre DURAND, cultivateur…</q></div><span class="btn small">Relier</span></li>
+</ul></div>
+<div class="case"><div class="head"><span class="tag">Comment</span></div>
+<ul class="edge">
+<li>Les personnes <b>reliées</b> au média (comme aujourd’hui) et celles <b>relevées dans l’Atelier</b> avec un numéro de fiche.</li>
+<li>Un nom relevé mais pas encore relié se montre « à relier » sur la fiche qui lui ressemble, avec « Relier » (jamais tout seul).</li>
+<li>« Ouvrir » = la visionneuse sur ce document ; « ⋯ » et clic droit : Ouvrir dans l’Atelier, Page du document.</li>
+<li>Rien de nouveau à écrire dans la base : tout est déjà là (<code>data_json.people</code>).</li>
+</ul></div>
+</div>
+
+<h2>B5. L’Atelier <span class="badge re">fait évoluer l’existant</span></h2>
+<p class="sub">Un titre lisible, une sorte « À préciser » qui propose sans imposer, des cases à cocher, et une phrase qui dit où le texte se verra.</p>
+<div class="atl">
+<div class="top"><span>📜</span><span class="menus"><span>Fichier</span><span>Édition</span><span>Outils</span><span>Affichage</span></span><span>↶ ↷</span>
+<span class="t">Registre militaire · Pierre DURAND · 1912</span><span class="f q">À préciser ▾</span><span class="f">1912</span><span class="f">Tulle</span><span class="f">AD 19, 1 R 612, vue 233</span><span class="f">État : En cours ▾</span><span class="btn small">⤓ Exporter ▾</span><span class="btn small blue">💾 Enregistrer</span></div>
+<div class="guess">💡 On dirait un <b>registre militaire</b> (« classe », « matricule », « signalement » ; et ce média est rangé en « Registre militaire »). <span class="btn small">✓ Oui, c’est ça</span><span class="btn small ghost">Choisir une autre sorte…</span></div>
+<div class="mid">
+<div class="tools"><div class="sect">Mieux voir</div>
+<label class="cbl"><span class="cb on"></span> Effacer le fond</label><label class="cbl"><span class="cb"></span> Gris</label><label class="cbl"><span class="cb"></span> Miroir</label><label class="cbl"><span class="cb"></span> Négatif</label>
+<div class="lab" style="margin-top:8px">Contraste</div><div class="input">140</div></div>
+<div class="img"><div class="paper"><span class="zone" style="position:absolute;left:14%;top:26%;width:46%;height:9%;border:2px solid #ffb800;background:rgba(255,184,0,.14)"></span></div></div>
+<div class="txt">Fiche matricule n° 845, classe 1912<br>Nom : DURAND<br><mark style="background:#fff1c2">Prénoms : Pierre Antoine</mark><br>Né le 4 mars 1892 à Tulle…</div>
+</div>
+<div class="foot"><span>📄 Ce texte est celui du document : il se voit dans la visionneuse, la page du document et la fiche de Pierre DURAND.</span><span>2 zones · 2 personnes</span></div>
+</div>
+<div class="grid" style="margin-top:14px">
+<div class="case"><div class="head"><span class="tag">Le titre par défaut</span></div>
+<p style="font-size:13px">Fabriqué avec ce qu’on sait, dans cet ordre, en sautant ce qui manque :</p>
+<p class="path"><b>sorte</b> · <b>personne</b> (le sujet relevé, sinon la personne reliée au média) · <b>date</b> (ou la classe, l’année) · sinon la <b>cote</b></p>
+<table><tbody>
+<tr><td>Tout connu</td><td><b>Registre militaire · Pierre DURAND · 1912</b></td></tr>
+<tr><td>Sorte à préciser</td><td><b>Document · Pierre DURAND · 1912</b></td></tr>
+<tr><td>Rien que la cote</td><td><b>Document · AD 19, 1 R 612, vue 233</b></td></tr>
+<tr><td>Rien du tout</td><td><b>Transcription du 21 nov. 2026</b></td></tr>
+</tbody></table>
+<p class="mini">Le nom du fichier n’est jamais repris s’il ressemble à un code (<code>84e6ae97-…</code>, <code>IMG_2041</code>, <code>scan0003</code>). Le titre se met à jour tout seul tant que tu ne l’as pas tapé toi-même.</p></div>
+<div class="case"><div class="head"><span class="tag">La sorte par défaut</span></div>
+<ul class="edge">
+<li><b>« À préciser »</b> au départ, jamais « Baptême ».</li>
+<li>L’app <b>propose</b> une sorte d’après : ce que tu sais déjà du média (sa sorte, une carte postale = lettre), puis des mots du texte (« classe », « matricule » → registre militaire ; « baptisé », « parrain » → baptême ; « recensement », « ménage »…).</li>
+<li>Elle ne la pose jamais toute seule : « ✓ Oui, c’est ça » ou « Choisir une autre sorte… ».</li>
+<li>La liste des sortes gagne « Fiche matricule » comme autre nom de « Registre militaire ».</li>
+</ul></div>
+</div>
+
+<h2>B6. Chercher dans les transcriptions, et les emporter <span class="badge re">fait évoluer l’existant</span></h2>
+<div class="idea">
+<div><b class="t">🔎 Recherche → Transcriptions</b><p class="why">Cherche aussi dans le texte de l’Atelier, son titre, ses personnes, son lieu et sa cote ; chaque résultat dit d’où il vient (📝 document, 📜 acte) avec l’extrait autour du mot.</p></div>
+<div><b class="t">Recherche du haut</b><p class="why">Une rubrique « 📜 Transcriptions » (6 résultats au plus) : « DURAND Tulle » trouve la fiche matricule.</p></div>
+<div><b class="t">Listes</b><p class="why">Listes → Médias : la colonne « Transcription » montre le texte de l’Atelier. Listes → Transcriptions d’actes : la même chose dans l’autre sens.</p></div>
+<div><b class="t">⤓ Export GEDCOM</b><p class="why">Case à cocher « Transcriptions des documents » (cochée) : le texte part dans le média (<code>NOTE</code>), lu par les autres logiciels.</p></div>
+<div><b class="t">📖 Livre et mise en page</b><p class="why">« Avec la transcription » à côté de l’image d’un document, dans la fenêtre d’ajout d’une image.</p></div>
+</div>
+
+<!-- ═════════════ C ═════════════ -->
+<div class="part" id="c">C · Petites corrections</div>
+<h2>C. Les écarts aux règles vus en passant</h2>
+<p class="sub">À faire en même temps, ou tout de suite : chacune est petite.</p>
+<ul class="fix">
+<li><span class="s">☑</span><div><b>Interrupteurs → cases à cocher</b> : visionneuse « Afficher les zones sur la photo » (deux fois : personnes et signatures, <code>index.php</code>) ; Atelier « Effacer le fond », « Gris », « Miroir », « Négatif » (<code>heritage-transcribe-view.js</code>) et « Lire et exporter l’image améliorée ». <small>Attention : <code>docs/UI.md</code> K16 dit encore « interrupteur pour un réglage qui s’applique tout de suite ». La règle est à mettre à jour (voir les questions).</small></div></li>
+<li><span class="s">🔗</span><div><b>« Rattaché à » → « Relié à »</b> sur la page du document ; <b>« Personnes liées » → « Personnes reliées »</b> (la même page dit déjà « Aucune personne reliée »). <small>Autres « Rattacher » dans Recueils et Successions : à relire avec la même règle.</small></div></li>
+<li><span class="s">📜</span><div><b>Un seul nom pour l’outil</b> : le bouton dit « 📜 Atelier », la section « Transcription d’actes », la bulle « l’outil », le menu « Transcription d’actes ». <small>Proposition : « 📜 Atelier de transcription » partout, « Atelier » en court.</small></div></li>
+<li><span class="s">🔤</span><div><b>Section « 📜 TRANSCRIPTION D’ACTES » en capitales</b> dans la visionneuse, alors que « Étiquettes » et « Personnes identifiées » ne le sont pas. <small>Disparaît avec B2.</small></div></li>
+<li><span class="s">⚠️</span><div><b>« ↪ Mettre le texte dans le média » écrase la case sans prévenir.</b> <small>Au moins une question « Remplacer le texte de la visionneuse ? » et « ↶ Annuler » ; inutile avec B1.</small></div></li>
+<li><span class="s">≠</span><div><b>Sorte par défaut différente</b> : « Baptême » dans l’Atelier, « Autre » sur le serveur. <small>Les deux deviennent « À préciser ».</small></div></li>
+<li><span class="s">⬛</span><div><b>Règle des boutons segmentés</b> : <code>.segmented:has(&gt; button:nth-child(3))</code> met en grille de 3 tout bouton segmenté de 3 boutons ou plus, même quand ce sont des onglets. <small>Les onglets d’une page passent en <code>.ui-tabs</code> (une ligne) ; la grille reste pour les vrais choix.</small></div></li>
+<li><span class="s">⧉</span><div><b>Les 9 boutons en double</b> en bas de 📁 Dossier (<code>.succ-quick</code>) <small>→ le résumé cliquable (A, conseil).</small></div></li>
+<li><span class="s">✂</span><div><b>« ✉️ Héritiers contactés »</b> est long pour un onglet <small>→ « ✉️ Contactés » (déjà le nom utilisé dans les liens de la liste de contrôle) ; « 🖨 Pour le notaire » → « 🖨 Notaire » dans la barre, le nom complet en bulle.</small></div></li>
+<li><span class="s">◯</span><div><b>Pastilles d’état rondes</b> dans une app toute en carrés <small>→ la frise d’étapes (A1).</small></div></li>
+</ul>
+
+<!-- ═════════════ R ═════════════ -->
+<div class="part" id="r">Réglages</div>
+<h2>Réglages proposés (défaut conseillé en premier)</h2>
+<p class="sub">Réglages → Successions pour les onglets, Réglages → Données → « Transcriptions » pour le reste. Chaque changement est gardé tout de suite, avec « ↶ Annuler ».</p>
+<div class="setl">
+<div class="set"><div><b>Onglets d’un dossier</b><small>A1, A2, A3</small></div><div><span class="mc">Une ligne + Plus ▾ ▾</span><br><small class="mini">Par familles · Colonne à gauche · Grille (comme avant)</small></div></div>
+<div class="set"><div><b>Nom des onglets</b></div><div><span class="mc">Icône et nom ▾</span><br><small class="mini">Nom seul · Icône seule</small></div></div>
+<div class="set"><div><b>État du dossier</b></div><div><span class="mc">Frise d’étapes ▾</span><br><small class="mini">Pastilles (comme avant) · Menu de choix</small></div></div>
+<div class="set"><div><b>Bas de 📁 Dossier</b></div><div><span class="mc">Résumé cliquable ▾</span><br><small class="mini">Rien · Les boutons des onglets (comme avant)</small></div></div>
+<div class="set"><div><b>Texte d’un document</b><small>B1</small></div><div><span class="mc">Un seul texte ▾</span><br><small class="mini">Deux textes reliés · Comme avant</small></div></div>
+<div class="set"><div><b>Quand les deux textes diffèrent</b></div><div><span class="mc">Me demander ▾</span><br><small class="mini">Garder les deux · Celui de l’Atelier · Celui de la visionneuse</small></div></div>
+<div class="set"><div><b>Titre d’une nouvelle transcription</b></div><div><span class="mc">Sorte · personne · date ▾</span><br><small class="mini">Titre du média · Vide</small></div></div>
+<div class="set"><div><b>Sorte d’une nouvelle transcription</b></div><div><span class="mc">À préciser, avec une proposition ▾</span><br><small class="mini">À préciser, sans proposition · La dernière choisie</small></div></div>
+<div class="set"><div><b>Transcriptions sur la fiche des personnes</b></div><div><label class="cbl" style="justify-content:flex-end"><span class="cb on"></span> Montrer le bloc « 📜 Actes et transcriptions »</label><label class="cbl" style="justify-content:flex-end"><span class="cb on"></span> Avec les noms relevés pas encore reliés</label></div></div>
+<div class="set"><div><b>Recherche</b></div><div><label class="cbl" style="justify-content:flex-end"><span class="cb on"></span> Chercher aussi dans les transcriptions</label></div></div>
+<div class="set"><div><b>⤓ Export GEDCOM</b></div><div><label class="cbl" style="justify-content:flex-end"><span class="cb on"></span> Transcriptions des documents</label></div></div>
+</div>
+
+<!-- ═════════════ Q ═════════════ -->
+<h2 id="q">Questions à trancher</h2>
+<div class="qs"><ol>
+<li><b>Onglets d’un dossier</b> : une ligne + « Plus ▾ » <i>(conseillé)</i>, par familles, ou une colonne à gauche ?</li>
+<li><b>Les pastilles d’état</b> deviennent une frise d’étapes carrée <i>(conseillé)</i>, ou elles restent ?</li>
+<li><b>Le bas de 📁 Dossier</b> : remplacer les 9 boutons en double par le résumé cliquable <i>(conseillé)</i> ?</li>
+<li><b>Un seul texte par document</b>, partagé entre la visionneuse et l’Atelier <i>(conseillé)</i>, ou deux textes avec un lien clair ?</li>
+<li><b>Tes deux textes actuels</b> (« test » et celui de l’Atelier) : garder les deux l’un sous l’autre <i>(conseillé)</i>, ou choisir ?</li>
+<li><b>Le bloc « 📜 Actes et transcriptions »</b> sur la fiche des personnes : oui, avec les noms relevés « à relier » <i>(conseillé)</i> ?</li>
+<li><b>Interrupteurs</b> : on remplace tous ceux de l’app par des cases à cocher et on met la règle K16 à jour <i>(conseillé)</i>, ou seulement ceux de la visionneuse et de l’Atelier ?</li>
+<li><b>Le nom de l’outil</b> : « 📜 Atelier de transcription » partout <i>(conseillé)</i> ?</li>
+</ol></div>
+</div>
+</body></html>
