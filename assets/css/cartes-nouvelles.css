@@ -18,7 +18,7 @@
 .cq-detail ul { margin: 0; padding-left: 18px; }
 
 /* ── 📍 Lieux à placer : le panneau ── */
-.lap-dlg { width: min(560px, 100vw); max-width: 100vw; max-height: 92vh; padding: 0; border: 2px solid var(--ink); background: var(--card-bg); color: var(--ink); overflow: auto; }
+.lap-dlg { width: min(var(--modal-s, 540px), 100vw); max-width: 100vw; max-height: 92vh; padding: 0; border: 2px solid var(--ink); background: var(--card-bg); color: var(--ink); overflow: auto; }
 .lap-dlg.is-side { position: fixed; inset: 64px 12px auto auto; margin: 0; z-index: 60; box-shadow: 6px 6px 0 rgba(0, 0, 0, .14); max-height: calc(100vh - 80px); }
 .lap-dlg::backdrop { background: rgba(0, 0, 0, .25); }
 .lap-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap; padding: 10px 12px; border-bottom: 2px solid var(--ink); position: sticky; top: 0; background: inherit; z-index: 1; }

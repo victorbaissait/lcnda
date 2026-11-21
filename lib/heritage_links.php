@@ -258,7 +258,9 @@ function question_relation(PDO $pdo, string $q, string $t, int $chosenId = 0): ?
     // 🐘 les mots des noms de toutes les fiches, et pour chaque mot les fiches qui le portent : lus une fois par requête ;
     // pour chaque suite de mots, seules les fiches qui portent le plus rare sont essayées (une fiche qui répond les porte tous)
     static $memo = null;
-    if ($memo === null || $memo[0] !== spl_object_id($pdo)) {
+    // gardé pour la durée de la requête, mais refait si les fiches ont changé entre-temps (jeton de calc_cache, sinon nombre et plus grand numéro)
+    $sig = spl_object_id($pdo) . ':' . ((function_exists('calc_gen_sig') ? calc_gen_sig($pdo, ['persons']) : null) ?? implode(',', (array) $pdo->query('SELECT COUNT(*), MAX(id), TOTAL(LENGTH(first_name) + LENGTH(last_name)) FROM persons')->fetch(PDO::FETCH_NUM)));
+    if ($memo === null || $memo[0] !== $sig) {
         $people = []; $idx = []; $wf = []; $wl = [];
         foreach ($pdo->query("SELECT id, COALESCE(first_name,'') AS f, COALESCE(last_name,'') AS l FROM persons") as $r) {
             // mêmes coupures que pour la question : espaces, traits d'union, apostrophes (« Marie-Thérèse », « D'ARTOIS »)
@@ -266,7 +268,7 @@ function question_relation(PDO $pdo, string $q, string $t, int $chosenId = 0): ?
             $last = $wl[(string) $r['l']] ??= question_name_words((string) $r['l']);
             if ($first && $last) { $k = count($people); $people[] = ['id' => (int) $r['id'], 'first' => $first, 'last' => $last]; foreach (array_unique(array_merge($first, $last)) as $w) { $idx[$w][] = $k; } }
         }
-        $memo = [spl_object_id($pdo), $people, $idx];
+        $memo = [$sig, $people, $idx];
     }
     [, $people, $idx] = $memo;
     $best = null;

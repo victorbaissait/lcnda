@@ -100,7 +100,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/plus-famille.css?v=1">
     <link rel="stylesheet" href="assets/css/cartes-outils.css?v=1">
     <link rel="stylesheet" href="assets/css/cartes-perso.css?v=1">
-    <link rel="stylesheet" href="assets/css/cartes-nouvelles.css?v=1">
+    <link rel="stylesheet" href="assets/css/cartes-nouvelles.css?v=2">
     <link rel="stylesheet" href="assets/css/traitement-texte.css?v=5">
     <link rel="stylesheet" href="assets/css/site-web.css?v=17">
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
