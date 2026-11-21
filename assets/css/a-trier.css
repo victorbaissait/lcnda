@@ -10,3 +10,5 @@
 .tw-note-in { width: 100%; }
 .tw-pill { font-weight: 600; }
 :root[data-theme="dark"] .tw-bulk { background: #26303a; }
+.tw-box .tw-acts { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.tw-box .ui-card-act { flex-wrap: wrap; }

@@ -74,7 +74,7 @@
             ['sorte', 'Sorte proposée quand la demande vient d’un téléphone', [['terrain', '📱 Téléphone de terrain'], ['lecture', '👁 Lecture seule']]],
             ['retrait', 'Retirer un téléphone', [['garder', 'ses photos déjà déposées restent à trier'], ['supprimer', 'elles sont supprimées aussi (30 jours dans « 🗑 Supprimées »)']]],
             ['registre', '📜 Registre', [['tout', 'noter chaque dépôt, chaque fichier refusé et chaque liste vue'], ['depots', 'seulement les dépôts']]]]]];
-    let twSet = null;
+    let twSet = null, phoneOpen = false;
     async function twLoad() { try { twSet = (await A().api('inbox_settings')).settings; } catch (_) { twSet = null; } return twSet; }
     const twHtml = set => !set ? '' : TW_GROUPS.map(([title, rows]) => `<div class="rl-twg"><h4>${esc(i18n(title))}</h4>${rows.map(([key, label, opts, unit]) => {
         if (opts === 'check' || (Array.isArray(unit) && opts === 'check')) { const on = Array.isArray(unit) ? unit[0] : 'oui', off = Array.isArray(unit) ? unit[1] : 'non';
@@ -129,7 +129,7 @@
                     <button type="button" class="button secondary small" data-rl-invite>${esc(i18n('↻ Nouveau code'))}</button></div>` : ''}
                 <div class="rl-qr" aria-hidden="true">${qrHtml(st.url)}</div>
                 <div class="page-actions"><button type="button" class="button secondary" data-rl-phone>${esc(i18n('＋ Ajouter un téléphone de terrain'))}</button></div>
-                <div class="rl-phone" data-rl-phonebox hidden><p><b>📱 ${esc(i18n('Scanne ce QR code avec l’appareil photo du téléphone'))}</b></p><code class="rl-url" data-i18n-off>${esc(phoneUrl(st))}</code><div class="rl-qr" aria-hidden="true">${qrHtml(phoneUrl(st))}</div>
+                <div class="rl-phone" data-rl-phonebox${phoneOpen ? '' : ' hidden'}><p><b>📱 ${esc(i18n('Scanne ce QR code avec l’appareil photo du téléphone'))}</b></p><code class="rl-url" data-i18n-off>${esc(phoneUrl(st))}</code><div class="rl-qr" aria-hidden="true">${qrHtml(phoneUrl(st))}</div>
                     <p class="ui-hint">${esc(i18n('Le code d’invitation est déjà dans le QR code. Sur le téléphone : « Demander l’accès », puis compare le code à 6 chiffres ici.'))}</p></div>
                 <p class="ui-hint">${esc(i18n('Sur l’autre ordinateur : ouvre un navigateur (Chrome, Firefox, Safari, Edge), tape cette adresse, puis le code. Ensuite, c’est toi qui acceptes ici, en comparant le code à 6 chiffres affiché des deux côtés.'))}</p></div>` : '';
         const reqs = st.requests.length ? `<div class="maintenance-panel rl-reqs"><h3>${esc(i18n('Demandes d’accès'))}</h3>${st.requests.map(r => `<div class="rl-req" data-rl-req="${esc(r.id)}">
@@ -192,7 +192,7 @@
         root.querySelectorAll('[data-rl-close]').forEach(b => b.addEventListener('click', async () => { await run(() => NET().close(), i18n('🖧 Coupé : l’app ne répond plus qu’à cet ordinateur.')); refresh(); }));
         root.querySelectorAll('[data-rl-invite]').forEach(b => b.addEventListener('click', async () => { await run(() => NET().newInvite()); refresh(); }));
         root.querySelector('[data-rl-log]')?.addEventListener('click', () => ext.openAccessLog?.());
-        root.querySelector('[data-rl-phone]')?.addEventListener('click', () => { const b = root.querySelector('[data-rl-phonebox]'); if (b) b.hidden = !b.hidden; });
+        root.querySelector('[data-rl-phone]')?.addEventListener('click', () => { const b = root.querySelector('[data-rl-phonebox]'); phoneOpen = !phoneOpen; if (b) b.hidden = !phoneOpen; });
         root.querySelector('[data-rl-box]')?.addEventListener('click', () => ext.aTrier?.open?.());
         root.querySelector('[data-rl-phones-off]')?.addEventListener('click', async () => {
             if (A().confirmBox && !(await A().confirmBox({title: i18n('⏻ Retirer tous les téléphones'), message: i18n('Plus aucun téléphone ne pourra rien envoyer. Leurs photos déjà déposées restent dans 📥 À trier (réglage).'), okLabel: i18n('Retirer')}))) return;

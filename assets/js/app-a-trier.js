@@ -76,9 +76,11 @@
                 const acts = view() === 'box' && !ro() ? `${r.for_kind ? `<button type="button" class="button small" data-tw-quick="${r.id}">${esc(r.for_kind === 'visit' ? i18n('🗄 Relier à la visite') : i18n('🔗 Relier à {name}', {name: r.for}))}</button>` : ''}
                     <button type="button" class="button small secondary" data-tw-to="${r.id}">${esc(i18n('Relier à…'))}</button>` : view() === 'deleted' && !ro() ? `<button type="button" class="button small secondary" data-tw-restore="${r.id}">${esc(i18n('Remettre'))}</button>` : '';
                 const more = view() === 'box' && !ro() ? `<button type="button" class="icon-button small" data-tw-more="${r.id}" title="${esc(i18n('Plus d’actions'))}" aria-label="${esc(i18n('Plus d’actions'))}">⋯</button>` : '';
+                const all = `${view() === 'box' && !ro() ? `<label class="tw-pick" title="${esc(i18n('Cocher'))}"><input type="checkbox" data-tw-check="${r.id}"${picked.has(r.id) ? ' checked' : ''} aria-label="${esc(i18n('Cocher'))}"></label>` : ''}${acts}${more}`;
+                // en fiches, les boutons restent visibles (quick) : « ⋯ » est déjà le nôtre (le menu d'actions)
                 return {name: r.note || i18n('(sans texte)'), cls: picked.has(r.id) ? 'is-picked' : '', attrs: `data-tw-row="${r.id}"`, when: r.at,
                     thumb: `<img src="${esc(fileUrl(r.id, '&thumb=1'))}" alt="" loading="lazy">`, open: `data-tw-big="${r.id}"`, lines: lines(r),
-                    actions: `${view() === 'box' && !ro() ? `<label class="tw-pick" title="${esc(i18n('Cocher'))}"><input type="checkbox" data-tw-check="${r.id}"${picked.has(r.id) ? ' checked' : ''} aria-label="${esc(i18n('Cocher'))}"></label>` : ''}${acts}${more}`};
+                    ...(st.view === 'cards' ? {quick: `<span class="tw-acts">${all}</span>`, noOpen: true} : {actions: all})};
             });
             const box = root.querySelector('[data-tw-list]');
             box.innerHTML = !DATA.rows.length ? A().empty(view() === 'box' ? i18n('Rien à trier : les photos du téléphone arriveront ici.') : i18n('Rien ici.'), {icon: '📥'})
