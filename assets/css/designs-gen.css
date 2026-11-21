@@ -3300,6 +3300,9 @@
 :root[data-lc-density] .lb-acts-head{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .lb-acts-btns{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .lb-acts-list{gap:calc(3px * var(--lc-sp))}
+:root[data-lc-density] .lb-acts-meta{gap:calc(5px * var(--lc-sp))}
+:root[data-lc-density] .lb-acts-people{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .lb-acts-chip{padding:1px calc(7px * var(--lc-sp))}
 :root[data-lc-density] .lb-read{gap:calc(18px * var(--lc-sp))}
 :root[data-lc-density] .lb-read-txt{padding-right:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .lb-read-pre{padding:calc(10px * var(--lc-sp)) calc(14px * var(--lc-sp))}
@@ -4566,6 +4569,8 @@
 :root[data-lc-density] .ong-sec{margin-bottom:calc(14px * var(--lc-sp))}
 :root[data-lc-density] .ong-sh{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .ong-sh{margin-bottom:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .ong-unlinked{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .ong-uname{padding:calc(2px * var(--lc-sp)) calc(8px * var(--lc-sp))}
 :root[data-lc-density] .ong-people{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .ong-person,:root[data-lc-density] .ong-app2{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .ong-person,:root[data-lc-density] .ong-app2{padding:calc(5px * var(--lc-sp)) calc(10px * var(--lc-sp)) calc(5px * var(--lc-sp)) calc(5px * var(--lc-sp))}
@@ -5448,6 +5453,10 @@
 :root[data-lc-density] .h-txb-row{row-gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .h-txb-row select{padding:calc(2px * var(--lc-sp)) calc(4px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-tools .h-tx-zoomlab{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-pacts-list li{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-pacts-list li{padding:calc(8px * var(--lc-sp)) calc(2px * var(--lc-sp))}
+:root[data-lc-density] .h-pacts-acts{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-pacts-foot{margin-top:calc(8px * var(--lc-sp))}
 /* photomaps.css */
 :root[data-lc-density] .pm-carte{padding:calc(18px * var(--lc-sp)) calc(22px * var(--lc-sp)) calc(28px * var(--lc-sp))}
 :root[data-lc-density] .pm-screen{gap:calc(10px * var(--lc-sp))}
@@ -6014,6 +6023,24 @@
   :root[data-lc-density] .succ-eur tr{padding:calc(8px * var(--lc-sp)) 0}
   :root[data-lc-density] .succ-eur td,:root[data-lc-density] .succ-eur th{padding:calc(2px * var(--lc-sp)) 0}
 }
+:root[data-lc-density] .succ-tabs > .succ-tab,:root[data-lc-density] .succ-fams > button{gap:calc(5px * var(--lc-sp))}
+:root[data-lc-density] .succ-k{padding:0 calc(5px * var(--lc-sp))}
+:root .succ-k:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .succ-tabmore{padding:calc(7px * var(--lc-sp)) calc(11px * var(--lc-sp))}
+:root[data-lc-density] .succ-tabmore{gap:calc(5px * var(--lc-sp))}
+:root .succ-fams:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .succ-fams > button{padding:calc(8px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .succ-side{gap:calc(16px * var(--lc-sp))}
+:root .succ-sidenav:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .succ-sg{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp)) calc(3px * var(--lc-sp))}
+:root[data-lc-density] .succ-sidetabs > .succ-tab{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .succ-narrow .succ-side{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .succ-narrow .succ-fams > button{padding:calc(8px * var(--lc-sp)) calc(2px * var(--lc-sp))}
+:root[data-lc-density] .succ-narrow .succ-tabrow > .succ-tab{padding-left:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .succ-narrow .succ-tabrow > .succ-tab{padding-right:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .succ-recap{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .succ-recap-i{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .succ-recap-i{padding:calc(7px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 /* successoral-plus2.css */
 :root[data-lc-density] .sp2-settings{margin-top:calc(16px * var(--lc-sp))}
 :root[data-lc-density] .sp2-settings{gap:calc(8px * var(--lc-sp))}

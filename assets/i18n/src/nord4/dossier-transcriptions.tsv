@@ -1,0 +1,49 @@
+fr ¦ fi ¦ hu
+Disposition des onglets… ¦ Välilehtien järjestys… ¦ A fülek elrendezése…
+Onglets du dossier ¦ Kansion välilehdet ¦ Az ügy fülei
+Où en est le dossier ¦ Missä kansio menee ¦ Hol tart az ügy
+Voir → ¦ Näytä → ¦ Megnézem →
+{n} à demander → ¦ {n} pyydettävänä → ¦ {n} igénylendő →
+🗓 Prochaine échéance ¦ 🗓 Seuraava määräaika ¦ 🗓 Következő határidő
+succ|🔎 Recherche ¦ 🔎 Tutkimus ¦ 🔎 Kutatás
+✉️ Contacts ¦ ✉️ Yhteydet ¦ ✉️ Kapcsolatok
+🕓 Suivi ¦ 🕓 Seuranta ¦ 🕓 Követés
+🗂 Onglets d’un dossier ¦ 🗂 Kansion välilehdet ¦ 🗂 Egy ügy fülei
+Une ligne, le reste dans « Plus ▾ » ¦ Yksi rivi, loput kohdassa ”Lisää ▾” ¦ Egy sor, a többi a „Továbbiak ▾” alatt
+Par familles (deux lignes) ¦ Ryhmittäin (kaksi riviä) ¦ Csoportonként (két sor)
+Une colonne à gauche ¦ Sarake vasemmalla ¦ Egy oszlop balra
+Comment ranger les onglets d’un dossier. Les compteurs restent visibles (Pièces 1 / 2, Contactés 2 / 6…). ¦ Miten kansion välilehdet järjestetään. Laskurit pysyvät näkyvissä (Asiakirjat 1 / 2, Yhteyttä otettu 2 / 6…). ¦ Hogyan rendezd el egy ügy füleit. A számlálók láthatók maradnak (Iratok 1 / 2, Megkeresettek 2 / 6…).
+📜 Atelier de transcription ¦ 📜 Litterointipaja ¦ 📜 Átíróműhely
+Atelier de transcription ¦ Litterointipaja ¦ Átíróműhely
+📝 Transcription du document ¦ 📝 Asiakirjan litterointi ¦ 📝 A dokumentum átirata
+Relié à ¦ Yhdistetty kohteeseen ¦ Kapcsolva ehhez:
+📜 Ouvrir dans l’Atelier ¦ 📜 Avaa Pajassa ¦ 📜 Megnyitás a Műhelyben
+Rien d’écrit pour l’instant. ¦ Ei vielä mitään kirjoitettu. ¦ Még nincs semmi leírva.
+Relevés dans le texte, pas encore reliés : ¦ Löydetty tekstistä, ei vielä yhdistetty: ¦ A szövegben talált, még nem kapcsolt nevek:
+Finie ¦ Valmis ¦ Kész
+Ce texte est celui du document : il se voit dans la visionneuse, la page du document et la fiche des personnes reliées. ¦ Tämä teksti on asiakirjan oma: se näkyy katselussa, asiakirjan sivulla ja yhdistettyjen henkilöiden sivulla. ¦ Ez a szöveg a dokumentumé: látszik a megjelenítőben, a dokumentum oldalán és a kapcsolt személyek lapján.
+Le texte déjà écrit pour ce document est gardé sous le tien. ¦ Tälle asiakirjalle jo kirjoitettu teksti säilyy sinun tekstisi alla. ¦ A dokumentumhoz már megírt szöveg megmarad a tiéd alatt.
+Ce document n’a pas de fichier. ¦ Tällä asiakirjalla ei ole tiedostoa. ¦ Ennek a dokumentumnak nincs fájlja.
+Plusieurs actes sur cette image : chacun se modifie dans l’Atelier de transcription. ¦ Tässä kuvassa on useita asiakirjoja: kutakin muokataan Litterointipajassa. ¦ Több irat van ezen a képen: mindegyik az Átíróműhelyben módosítható.
+Relevés dans le texte : ¦ Löydetty tekstistä: ¦ A szövegben talált nevek:
+Ce texte est aussi celui de l’Atelier de transcription. ¦ Tämä teksti on myös Litterointipajan teksti. ¦ Ez a szöveg az Átíróműhelyé is.
+Toute la transcription, en grand ¦ Koko litterointi, suurena ¦ A teljes átirat, nagyban
+Un autre acte sur cette image (un registre : plusieurs actes sur une vue) ¦ Toinen asiakirja tässä kuvassa (kirja: useita asiakirjoja yhdellä sivulla) ¦ Még egy irat ezen a képen (anyakönyv: több irat egy oldalon)
+Un autre acte ¦ Toinen asiakirja ¦ Még egy irat
+relevé, à relier ¦ löydetty, yhdistettävä ¦ megtalálva, kapcsolandó
+Aucun document transcrit pour l’instant. ¦ Ei vielä litteroituja asiakirjoja. ¦ Még nincs átírt dokumentum.
+Avec les noms relevés pas encore reliés ¦ Myös löydetyt, vielä yhdistämättömät nimet ¦ A talált, még nem kapcsolt nevekkel együtt
+📜 Actes et transcriptions ¦ 📜 Asiakirjat ja litteroinnit ¦ 📜 Iratok és átiratok
+Nom relié à la fiche : {name} ¦ Nimi yhdistetty henkilöön: {name} ¦ A név a laphoz kapcsolva: {name}
+Page du document ¦ Asiakirjan sivu ¦ A dokumentum oldala
+Transcriptions des documents ¦ Asiakirjojen litteroinnit ¦ A dokumentumok átiratai
+Ce document n’a pas encore de transcription. ¦ Tällä asiakirjalla ei ole vielä litterointia. ¦ Ennek a dokumentumnak még nincs átirata.
+Le texte du document (celui de l’Atelier de transcription) dans un bloc à côté de l’image ¦ Asiakirjan teksti (Litterointipajan teksti) laatikossa kuvan vieressä ¦ A dokumentum szövege (az Átíróműhelyé) egy blokkban a kép mellett
+Avec la transcription ¦ Litteroinnin kanssa ¦ Az átirattal
+📜 Atelier de transcription : barre d’outils ¦ 📜 Litterointipaja: työkalurivi ¦ 📜 Átíróműhely: eszköztár
+un PDF ne se transforme pas en texte modifiable ici : ouvre l’Atelier de transcription pour le recopier ¦ PDF:ää ei voi muuttaa tässä muokattavaksi tekstiksi: avaa Litterointipaja ja kirjoita se puhtaaksi ¦ egy PDF itt nem lesz szerkeszthető szöveg: nyisd meg az Átíróműhelyt, hogy átmásold
+Pour lire un acte : ouvre son image dans l’Atelier de transcription (« 📜 Ouvrir dans l’Atelier »), puis « ✨ Lire l’acte ». ¦ Asiakirjan lukeminen: avaa sen kuva Litterointipajassa (”📜 Avaa Pajassa”), sitten ”✨ Lue asiakirja”. ¦ Egy irat olvasásához: nyisd meg a képét az Átíróműhelyben („📜 Megnyitás a Műhelyben”), majd „✨ Okirat olvasása”.
+Dans l’Atelier de transcription (Listes → Outils de modification → 📜 Atelier de transcription, ou « 📜 Ouvrir dans l’Atelier » sur une image) : « ✨ Lire l’acte ». Tout se passe sur cet ordinateur, sans Internet. ¦ Litterointipajassa (Luettelot → Muokkaustyökalut → 📜 Litterointipaja, tai ”📜 Avaa Pajassa” kuvassa): ”✨ Lue asiakirja”. Kaikki tapahtuu tällä tietokoneella, ilman internetiä. ¦ Az Átíróműhelyben (Listák → Szerkesztőeszközök → 📜 Átíróműhely, vagy „📜 Megnyitás a Műhelyben” egy képen): „✨ Okirat olvasása”. Minden ezen a számítógépen történik, internet nélkül.
+Ce document a plusieurs actes : chacun se modifie dans l’📜 Atelier de transcription. ¦ Tässä asiakirjassa on useita asiakirjoja: kutakin muokataan 📜 Litterointipajassa. ¦ Ennek a dokumentumnak több irata van: mindegyik a 📜 Átíróműhelyben módosítható.
+Ce nom n’est plus dans la transcription. ¦ Tätä nimeä ei enää ole litteroinnissa. ¦ Ez a név már nincs az átiratban.
+Ce nom a été relié entre-temps : rien n’a été changé. ¦ Tämä nimi on sillä välin yhdistetty: mitään ei muutettu. ¦ Ezt a nevet közben már kapcsolták: semmi sem változott.

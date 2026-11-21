@@ -1,0 +1,49 @@
+fr ¦ sk ¦ nb
+Disposition des onglets… ¦ Usporiadanie kariet… ¦ Fanenes oppsett…
+Onglets du dossier ¦ Karty spisu ¦ Sakens faner
+Où en est le dossier ¦ Ako je na tom spis ¦ Hvor saken står
+Voir → ¦ Zobraziť → ¦ Se →
+{n} à demander → ¦ {n} na vyžiadanie → ¦ {n} å bestille →
+🗓 Prochaine échéance ¦ 🗓 Najbližšia lehota ¦ 🗓 Neste frist
+succ|🔎 Recherche ¦ 🔎 Pátranie ¦ 🔎 Forskning
+✉️ Contacts ¦ ✉️ Kontakty ¦ ✉️ Kontakter
+🕓 Suivi ¦ 🕓 Priebeh ¦ 🕓 Oppfølging
+🗂 Onglets d’un dossier ¦ 🗂 Karty spisu ¦ 🗂 Fanene i en sak
+Une ligne, le reste dans « Plus ▾ » ¦ Jeden riadok, zvyšok vo „Viac ▾“ ¦ Én rad, resten under «Mer ▾»
+Par familles (deux lignes) ¦ Podľa skupín (dva riadky) ¦ Etter grupper (to rader)
+Une colonne à gauche ¦ Stĺpec vľavo ¦ En kolonne til venstre
+Comment ranger les onglets d’un dossier. Les compteurs restent visibles (Pièces 1 / 2, Contactés 2 / 6…). ¦ Ako usporiadať karty spisu. Počítadlá zostávajú viditeľné (Doklady 1 / 2, Oslovení 2 / 6…). ¦ Hvordan fanene i en sak ordnes. Tellerne er fortsatt synlige (Dokumenter 1 / 2, Kontaktet 2 / 6…).
+📜 Atelier de transcription ¦ 📜 Dielňa prepisu ¦ 📜 Transkripsjonsverksted
+Atelier de transcription ¦ Dielňa prepisu ¦ Transkripsjonsverksted
+📝 Transcription du document ¦ 📝 Prepis dokumentu ¦ 📝 Dokumentets transkripsjon
+Relié à ¦ Prepojené s ¦ Koblet til
+📜 Ouvrir dans l’Atelier ¦ 📜 Otvoriť v Dielni ¦ 📜 Åpne i Verkstedet
+Rien d’écrit pour l’instant. ¦ Zatiaľ nič nenapísané. ¦ Ingenting skrevet ennå.
+Relevés dans le texte, pas encore reliés : ¦ Nájdené v texte, zatiaľ neprepojené: ¦ Funnet i teksten, ikke koblet ennå:
+Finie ¦ Hotové ¦ Ferdig
+Ce texte est celui du document : il se voit dans la visionneuse, la page du document et la fiche des personnes reliées. ¦ Tento text patrí dokumentu: vidno ho v prehliadači, na stránke dokumentu a na karte prepojených osôb. ¦ Denne teksten er dokumentets: den vises i visningen, på dokumentsiden og på siden til de koblede personene.
+Le texte déjà écrit pour ce document est gardé sous le tien. ¦ Text, ktorý už bol pre tento dokument napísaný, zostáva pod tvojím. ¦ Teksten som allerede er skrevet for dette dokumentet, beholdes under din.
+Ce document n’a pas de fichier. ¦ Tento dokument nemá súbor. ¦ Dette dokumentet har ingen fil.
+Plusieurs actes sur cette image : chacun se modifie dans l’Atelier de transcription. ¦ Na tomto obrázku je viac záznamov: každý sa upravuje v Dielni prepisu. ¦ Flere dokumenter på dette bildet: hvert endres i Transkripsjonsverkstedet.
+Relevés dans le texte : ¦ Nájdené v texte: ¦ Funnet i teksten:
+Ce texte est aussi celui de l’Atelier de transcription. ¦ Tento text je zároveň text z Dielne prepisu. ¦ Denne teksten er også den i Transkripsjonsverkstedet.
+Toute la transcription, en grand ¦ Celý prepis, vo veľkom ¦ Hele transkripsjonen, stort
+Un autre acte sur cette image (un registre : plusieurs actes sur une vue) ¦ Ďalší záznam na tomto obrázku (matrika: viac záznamov na jednej strane) ¦ Enda et dokument på dette bildet (en kirkebok: flere dokumenter på én side)
+Un autre acte ¦ Ďalší záznam ¦ Enda et dokument
+relevé, à relier ¦ nájdené, na prepojenie ¦ funnet, skal kobles
+Aucun document transcrit pour l’instant. ¦ Zatiaľ žiadny prepísaný dokument. ¦ Ingen transkribert dokument ennå.
+Avec les noms relevés pas encore reliés ¦ Aj s nájdenými, zatiaľ neprepojenými menami ¦ Med funne navn som ikke er koblet ennå
+📜 Actes et transcriptions ¦ 📜 Záznamy a prepisy ¦ 📜 Dokumenter og transkripsjoner
+Nom relié à la fiche : {name} ¦ Meno prepojené s kartou: {name} ¦ Navn koblet til personen: {name}
+Page du document ¦ Stránka dokumentu ¦ Dokumentside
+Transcriptions des documents ¦ Prepisy dokumentov ¦ Dokumentenes transkripsjoner
+Ce document n’a pas encore de transcription. ¦ Tento dokument zatiaľ nemá prepis. ¦ Dette dokumentet har ingen transkripsjon ennå.
+Le texte du document (celui de l’Atelier de transcription) dans un bloc à côté de l’image ¦ Text dokumentu (ten z Dielne prepisu) v bloku vedľa obrázka ¦ Dokumentets tekst (den fra Transkripsjonsverkstedet) i en blokk ved siden av bildet
+Avec la transcription ¦ S prepisom ¦ Med transkripsjonen
+📜 Atelier de transcription : barre d’outils ¦ 📜 Dielňa prepisu: panel nástrojov ¦ 📜 Transkripsjonsverksted: verktøylinje
+un PDF ne se transforme pas en texte modifiable ici : ouvre l’Atelier de transcription pour le recopier ¦ PDF sa tu nezmení na upraviteľný text: otvor Dielňu prepisu a prepíš ho ¦ en PDF blir ikke redigerbar tekst her: åpne Transkripsjonsverkstedet for å skrive den av
+Pour lire un acte : ouvre son image dans l’Atelier de transcription (« 📜 Ouvrir dans l’Atelier »), puis « ✨ Lire l’acte ». ¦ Ako prečítať záznam: otvor jeho obrázok v Dielni prepisu („📜 Otvoriť v Dielni“), potom „✨ Prečítať záznam“. ¦ Slik leser du et dokument: åpne bildet i Transkripsjonsverkstedet («📜 Åpne i Verkstedet»), deretter «✨ Les dokumentet».
+Dans l’Atelier de transcription (Listes → Outils de modification → 📜 Atelier de transcription, ou « 📜 Ouvrir dans l’Atelier » sur une image) : « ✨ Lire l’acte ». Tout se passe sur cet ordinateur, sans Internet. ¦ V Dielni prepisu (Zoznamy → Nástroje úprav → 📜 Dielňa prepisu, alebo „📜 Otvoriť v Dielni“ pri obrázku): „✨ Prečítať záznam“. Všetko prebieha na tomto počítači, bez internetu. ¦ I Transkripsjonsverkstedet (Lister → Redigeringsverktøy → 📜 Transkripsjonsverksted, eller «📜 Åpne i Verkstedet» på et bilde): «✨ Les dokumentet». Alt skjer på denne datamaskinen, uten Internett.
+Ce document a plusieurs actes : chacun se modifie dans l’📜 Atelier de transcription. ¦ Tento dokument má viac záznamov: každý sa upravuje v 📜 Dielni prepisu. ¦ Dette dokumentet har flere dokumenter: hvert endres i 📜 Transkripsjonsverkstedet.
+Ce nom n’est plus dans la transcription. ¦ Toto meno už v prepise nie je. ¦ Dette navnet finnes ikke lenger i transkripsjonen.
+Ce nom a été relié entre-temps : rien n’a été changé. ¦ Toto meno bolo medzitým prepojené: nič sa nezmenilo. ¦ Dette navnet ble koblet i mellomtiden: ingenting er endret.

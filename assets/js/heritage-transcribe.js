@@ -987,11 +987,12 @@
         ext.refreshView?.();
         A().undoToast?.(i18n('Nom relié à la fiche : {name}', {name: r.name || r.title}), {undo: async () => { await post('act_link_person', {id: r.act_id, index: r.index, person_id: 0, was: pid}); ext.refreshView?.(); }});
     }
-    const pactsMenu = (r, at) => window.LCNDA_UI?.menuAt?.(at, [
+    const pactsItems = r => [
         r.media_id ? {icon: '🖼️', label: i18n('Ouvrir'), run: () => ext.openDocMedia(r.media_id)} : null,
         r.act_id && !document.body?.classList.contains('is-kiosk') ? {icon: '📜', label: i18n('📜 Ouvrir dans l’Atelier').replace(/^📜\s*/, ''), run: () => open({id: r.act_id, onClose: () => ext.refreshView?.()})} : null,
         r.media_id ? {icon: '📄', label: i18n('Page du document'), run: async () => { await A().setModule('documents'); ext.onglets?.documents?.select?.(r.media_id); }} : null,
-        r.state === 'tolink' && !document.body?.classList.contains('is-kiosk') ? {icon: '🔗', label: i18n('Relier'), run: () => pactsLink(r)} : null].filter(Boolean), {title: r.title});
+        r.state === 'tolink' && !document.body?.classList.contains('is-kiosk') ? {icon: '🔗', label: i18n('Relier'), run: () => pactsLink(r)} : null].filter(Boolean);
+    const pactsMenu = (r, at) => window.LCNDA_UI?.menuAt?.(at, pactsItems(r), {title: r.title});
     document.addEventListener('click', e => {
         const b = e.target.closest?.('[data-pacts-open],[data-pacts-link],[data-pacts-more]'); if (!b || !b.closest('.h-pacts')) return;
         const r = pactsItem(b); if (!r) return; e.preventDefault();
@@ -999,7 +1000,7 @@
         if (b.hasAttribute('data-pacts-link')) return pactsLink(r);
         pactsMenu(r, b);
     });
-    document.addEventListener('contextmenu', e => { const li = e.target.closest?.('.h-pacts [data-pacts-row]'); if (!li) return; const r = pactsItem(li); if (!r) return; e.preventDefault(); pactsMenu(r, {x: e.clientX, y: e.clientY}); });
+    document.addEventListener('contextmenu', e => { const li = e.target.closest?.('.h-pacts [data-pacts-row]'); if (!li) return; const r = pactsItem(li); if (!r) return; window.LCNDA_UI?.contextMenu?.(e, pactsItems(r), {title: r.title}); });
     document.addEventListener('change', e => { if (!e.target.matches?.('[data-pacts-guess]')) return; try { localStorage.setItem(GUESS_KEY, e.target.checked ? '1' : '0'); } catch (_) {} ext.refreshView?.(); });
 
     ext.editToolsExtra = ext.editToolsExtra || [];

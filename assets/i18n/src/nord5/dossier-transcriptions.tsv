@@ -1,0 +1,49 @@
+fr ¦ hr ¦ sl
+Disposition des onglets… ¦ Raspored kartica… ¦ Razporeditev zavihkov…
+Onglets du dossier ¦ Kartice spisa ¦ Zavihki spisa
+Où en est le dossier ¦ Dokle je stigao spis ¦ Kako daleč je spis
+Voir → ¦ Pogledaj → ¦ Poglej →
+{n} à demander → ¦ {n} za zatražiti → ¦ {n} za naročiti →
+🗓 Prochaine échéance ¦ 🗓 Sljedeći rok ¦ 🗓 Naslednji rok
+succ|🔎 Recherche ¦ 🔎 Istraživanje ¦ 🔎 Raziskovanje
+✉️ Contacts ¦ ✉️ Kontakti ¦ ✉️ Stiki
+🕓 Suivi ¦ 🕓 Praćenje ¦ 🕓 Spremljanje
+🗂 Onglets d’un dossier ¦ 🗂 Kartice spisa ¦ 🗂 Zavihki spisa
+Une ligne, le reste dans « Plus ▾ » ¦ Jedan red, ostalo pod „Više ▾“ ¦ Ena vrstica, ostalo pod »Več ▾«
+Par familles (deux lignes) ¦ Po skupinama (dva reda) ¦ Po skupinah (dve vrstici)
+Une colonne à gauche ¦ Stupac lijevo ¦ Stolpec na levi
+Comment ranger les onglets d’un dossier. Les compteurs restent visibles (Pièces 1 / 2, Contactés 2 / 6…). ¦ Kako rasporediti kartice spisa. Brojači ostaju vidljivi (Isprave 1 / 2, Kontaktirani 2 / 6…). ¦ Kako razporediti zavihke spisa. Števci ostanejo vidni (Listine 1 / 2, Kontaktirani 2 / 6…).
+📜 Atelier de transcription ¦ 📜 Radionica prijepisa ¦ 📜 Delavnica prepisa
+Atelier de transcription ¦ Radionica prijepisa ¦ Delavnica prepisa
+📝 Transcription du document ¦ 📝 Prijepis dokumenta ¦ 📝 Prepis dokumenta
+Relié à ¦ Povezano s ¦ Povezano z
+📜 Ouvrir dans l’Atelier ¦ 📜 Otvori u Radionici ¦ 📜 Odpri v Delavnici
+Rien d’écrit pour l’instant. ¦ Još ništa nije napisano. ¦ Še nič napisanega.
+Relevés dans le texte, pas encore reliés : ¦ Pronađeno u tekstu, još nepovezano: ¦ Najdeno v besedilu, še nepovezano:
+Finie ¦ Gotova ¦ Končana
+Ce texte est celui du document : il se voit dans la visionneuse, la page du document et la fiche des personnes reliées. ¦ Ovaj tekst pripada dokumentu: vidi se u pregledniku, na stranici dokumenta i na listu povezanih osoba. ¦ To besedilo je besedilo dokumenta: vidi se v pregledovalniku, na strani dokumenta in na listu povezanih oseb.
+Le texte déjà écrit pour ce document est gardé sous le tien. ¦ Tekst koji je već napisan za ovaj dokument čuva se ispod tvojeg. ¦ Besedilo, ki je bilo za ta dokument že napisano, ostane pod tvojim.
+Ce document n’a pas de fichier. ¦ Ovaj dokument nema datoteku. ¦ Ta dokument nima datoteke.
+Plusieurs actes sur cette image : chacun se modifie dans l’Atelier de transcription. ¦ Na ovoj slici ima više isprava: svaka se mijenja u Radionici prijepisa. ¦ Na tej sliki je več listin: vsako se spreminja v Delavnici prepisa.
+Relevés dans le texte : ¦ Pronađeno u tekstu: ¦ Najdeno v besedilu:
+Ce texte est aussi celui de l’Atelier de transcription. ¦ Ovaj tekst je i tekst iz Radionice prijepisa. ¦ To besedilo je tudi besedilo iz Delavnice prepisa.
+Toute la transcription, en grand ¦ Cijeli prijepis, u velikom ¦ Ves prepis, v velikem
+Un autre acte sur cette image (un registre : plusieurs actes sur une vue) ¦ Još jedna isprava na ovoj slici (matica: više isprava na jednoj stranici) ¦ Še ena listina na tej sliki (matična knjiga: več listin na eni strani)
+Un autre acte ¦ Još jedna isprava ¦ Še ena listina
+relevé, à relier ¦ pronađeno, za povezati ¦ najdeno, za povezati
+Aucun document transcrit pour l’instant. ¦ Još nema prepisanog dokumenta. ¦ Še noben dokument ni prepisan.
+Avec les noms relevés pas encore reliés ¦ S pronađenim, još nepovezanim imenima ¦ Z najdenimi, še nepovezanimi imeni
+📜 Actes et transcriptions ¦ 📜 Isprave i prijepisi ¦ 📜 Listine in prepisi
+Nom relié à la fiche : {name} ¦ Ime povezano s listom: {name} ¦ Ime povezano z listom: {name}
+Page du document ¦ Stranica dokumenta ¦ Stran dokumenta
+Transcriptions des documents ¦ Prijepisi dokumenata ¦ Prepisi dokumentov
+Ce document n’a pas encore de transcription. ¦ Ovaj dokument još nema prijepis. ¦ Ta dokument še nima prepisa.
+Le texte du document (celui de l’Atelier de transcription) dans un bloc à côté de l’image ¦ Tekst dokumenta (onaj iz Radionice prijepisa) u bloku pokraj slike ¦ Besedilo dokumenta (tisto iz Delavnice prepisa) v polju ob sliki
+Avec la transcription ¦ S prijepisom ¦ S prepisom
+📜 Atelier de transcription : barre d’outils ¦ 📜 Radionica prijepisa: alatna traka ¦ 📜 Delavnica prepisa: orodna vrstica
+un PDF ne se transforme pas en texte modifiable ici : ouvre l’Atelier de transcription pour le recopier ¦ PDF se ovdje ne pretvara u tekst za uređivanje: otvori Radionicu prijepisa da ga prepišeš ¦ PDF se tu ne spremeni v urejljivo besedilo: odpri Delavnico prepisa, da ga prepišeš
+Pour lire un acte : ouvre son image dans l’Atelier de transcription (« 📜 Ouvrir dans l’Atelier »), puis « ✨ Lire l’acte ». ¦ Da pročitaš ispravu: otvori njezinu sliku u Radionici prijepisa („📜 Otvori u Radionici“), zatim „✨ Pročitaj ispravu“. ¦ Da prebereš listino: odpri njeno sliko v Delavnici prepisa (»📜 Odpri v Delavnici«), nato »✨ Preberi listino«.
+Dans l’Atelier de transcription (Listes → Outils de modification → 📜 Atelier de transcription, ou « 📜 Ouvrir dans l’Atelier » sur une image) : « ✨ Lire l’acte ». Tout se passe sur cet ordinateur, sans Internet. ¦ U Radionici prijepisa (Popisi → Alati za uređivanje → 📜 Radionica prijepisa, ili „📜 Otvori u Radionici“ na slici): „✨ Pročitaj ispravu“. Sve se odvija na ovom računalu, bez interneta. ¦ V Delavnici prepisa (Seznami → Orodja za urejanje → 📜 Delavnica prepisa ali »📜 Odpri v Delavnici« na sliki): »✨ Preberi listino«. Vse poteka na tem računalniku, brez interneta.
+Ce document a plusieurs actes : chacun se modifie dans l’📜 Atelier de transcription. ¦ Ovaj dokument ima više isprava: svaka se mijenja u 📜 Radionici prijepisa. ¦ Ta dokument ima več listin: vsako se spreminja v 📜 Delavnici prepisa.
+Ce nom n’est plus dans la transcription. ¦ Ovog imena više nema u prijepisu. ¦ Tega imena ni več v prepisu.
+Ce nom a été relié entre-temps : rien n’a été changé. ¦ Ovo je ime u međuvremenu povezano: ništa nije promijenjeno. ¦ To ime je bilo medtem povezano: nič ni spremenjeno.
