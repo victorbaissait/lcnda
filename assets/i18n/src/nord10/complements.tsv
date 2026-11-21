@@ -1,0 +1,166 @@
+fr ¦ sq ¦ mt
+# 🏛⚠️📋📱 Compléments aux outils existants (docs/design/complements-existants.html) : A études de notaire, B homonymes
+Le serveur ne répond pas. ¦ Serveri nuk përgjigjet. ¦ Is-server ma jwiġibx.
+⚙️ Réglages de cet outil ¦ ⚙️ Cilësimet e këtij mjeti ¦ ⚙️ Is-settings ta’ din l-għodda
+Enlève un filtre, ou cherche autrement. ¦ Hiq një filtër ose kërko ndryshe. ¦ Neħħi filtru, jew fittex b’mod ieħor.
+Listes · Archives et sources ¦ Listat · Arkivat dhe burimet ¦ Listi · Arkivji u sorsi
+=étude ¦ zyrë|zyra ¦ uffiċċju|uffiċċji|uffiċċji|uffiċċju|uffiċċju
+{n} j ¦ {n} d ¦ {n} jum
+sur {n} réponses ¦ nga {n} përgjigje ¦ minn {n} tweġibiet
+pas assez de réponses ¦ pak përgjigje ¦ mhux biżżejjed tweġibiet
+{n} sur {m} nécessaires ¦ {n} nga {m} të nevojshme ¦ {n} minn {m} meħtieġa
+clerc : {name} ¦ nëpunës: {name} ¦ skrivan: {name}
+Études de notaire ¦ Zyra noteriale ¦ Uffiċċji nutarili
+🏛 Études de notaire ¦ 🏛 Zyra noteriale ¦ 🏛 Uffiċċji nutarili
+Étude de notaire ¦ Zyrë noteriale ¦ Uffiċċju nutarili
+Une étude est un service d’archives de la sorte « Étude de notaire » : ses notaires et clercs, ses dossiers, ses courriers. ¦ Zyra është një shërbim arkivi i llojit «Zyrë noteriale»: noterët dhe nëpunësit e saj, dosjet e saj, letrat e saj. ¦ Uffiċċju huwa servizz tal-arkivju tat-tip “Uffiċċju nutarili”: in-nutara u l-iskrivani tiegħu, il-fajls tiegħu, l-ittri tiegħu.
+＋ Nouvelle étude ¦ ＋ Zyrë e re ¦ ＋ Uffiċċju ġdid
+🧩 Regrouper et créer leurs fiches… ¦ 🧩 Grupo dhe krijo skedat e tyre… ¦ 🧩 Iġbor flimkien u oħloq l-iskedi tagħhom…
+Chercher une étude, un notaire, une ville… ¦ Kërko një zyrë, një noter, një qytet… ¦ Fittex uffiċċju, nutar, belt…
+Département : {d} ¦ Departamenti: {d} ¦ Dipartiment: {d}
+Répond le plus vite ¦ Përgjigjet më shpejt ¦ Iwieġeb l-aktar malajr
+Le plus de dossiers ¦ Më shumë dosje ¦ L-aktar fajls
+Aucune étude de notaire pour l’instant ¦ Ende asnjë zyrë noteriale ¦ L-ebda uffiċċju nutarili s’issa
+Une étude est un service d’archives de la sorte « Étude de notaire » : crée-la ici, ou regroupe les notaires tapés à la main dans tes dossiers. ¦ Zyra është një shërbim arkivi i llojit «Zyrë noteriale»: krijoje këtu ose grupo noterët e shkruar me dorë në dosjet e tua. ¦ Uffiċċju huwa servizz tal-arkivju tat-tip “Uffiċċju nutarili”: oħolqu hawn, jew iġbor flimkien in-nutara miktuba bl-idejn fil-fajls tiegħek.
+Aucun notaire noté ¦ Asnjë noter i shënuar ¦ L-ebda nutar imniżżel
+{a} en cours · {b} clos ¦ {a} në vazhdim · {b} të mbyllura ¦ {a} għaddejjin · {b} magħluqa
+{n} en attente ¦ {n} në pritje ¦ {n} qed jistennew
+Appeler ¦ Telefono ¦ Ċempel
+fiche de personne n° {n} ¦ skeda e personit nr. {n} ¦ skeda tal-persuna nru {n}
+nom seulement ¦ vetëm emri ¦ l-isem biss
+ligne directe {tel} ¦ numër i drejtpërdrejtë {tel} ¦ numru dirett {tel}
+ancien depuis le {d} ¦ ish- që nga {d} ¦ ta’ qabel mill-{d}
+Aucun notaire ni clerc noté. ¦ Asnjë noter apo nëpunës i shënuar. ¦ L-ebda nutar jew skrivan imniżżel.
+Notaires et clercs ¦ Noterët dhe nëpunësit ¦ Nutara u skrivani
+lus dans les dossiers, rien n’est recopié ¦ lexuar nga dosjet, asgjë nuk kopjohet ¦ moqrija mill-fajls, xejn ma jiġi kkupjat
+réf. du notaire {ref} ¦ referenca e noterit {ref} ¦ referenza tan-nutar {ref}
+Aucun dossier relié à cette étude. ¦ Asnjë dosje e lidhur me këtë zyrë. ¦ L-ebda fajl marbut ma’ dan l-uffiċċju.
+reçue le {d} ¦ marrë më {d} ¦ riċevuta fil-{d}
+{n} j · d’habitude {m} j ¦ {n} d · zakonisht {m} d ¦ {n} jum · normalment {m} jum
+en attente · {n} j ¦ në pritje · {n} d ¦ qed tistenna · {n} jum
+✓ Réponse reçue ¦ ✓ Përgjigja u mor ¦ ✓ Tweġiba riċevuta
+⏳ Délai de réponse constaté : {days} j en moyenne (de {min} à {max} j). Réponses comptées : {n}, celles de ce registre dont la date est notée. C’est ce que tu as observé, rien d’autre : ce n’est ni un délai légal, ni une promesse de l’étude. ¦ ⏳ Koha e vënë re e përgjigjes: mesatarisht {days} d (nga {min} deri në {max} d). Përgjigjet e numëruara: {n}, ato të këtij regjistri me datë të shënuar. Është vetëm ajo që ke vënë re: nuk është as afat ligjor, as premtim i zyrës. ¦ ⏳ Żmien tat-tweġiba osservat: medja ta’ {days} jum (minn {min} sa {max} jum). Tweġibiet magħduda: {n}, dawk ta’ dan ir-reġistru bid-data mniżżla. Huwa biss dak li osservajt: la huwa terminu legali u lanqas wegħda tal-uffiċċju.
+⏳ Délai de réponse constaté : {days} j en médiane (de {min} à {max} j). Réponses comptées : {n}, celles de ce registre dont la date est notée. C’est ce que tu as observé, rien d’autre : ce n’est ni un délai légal, ni une promesse de l’étude. ¦ ⏳ Koha e vënë re e përgjigjes: mediana {days} d (nga {min} deri në {max} d). Përgjigjet e numëruara: {n}, ato të këtij regjistri me datë të shënuar. Është vetëm ajo që ke vënë re: nuk është as afat ligjor, as premtim i zyrës. ¦ ⏳ Żmien tat-tweġiba osservat: medjan ta’ {days} jum (minn {min} sa {max} jum). Tweġibiet magħduda: {n}, dawk ta’ dan ir-reġistru bid-data mniżżla. Huwa biss dak li osservajt: la huwa terminu legali u lanqas wegħda tal-uffiċċju.
+⏳ Pas assez de réponses datées pour un délai constaté ({n} sur {m} nécessaires). ¦ ⏳ Pak përgjigje me datë për një kohë të vënë re ({n} nga {m} të nevojshme). ¦ ⏳ M’hemmx biżżejjed tweġibiet b’data għal żmien osservat ({n} minn {m} meħtieġa).
+Ses courriers ¦ Letrat e saj ¦ L-ittri tiegħu
+＋ Courrier à l’étude ¦ ＋ Letër për zyrën ¦ ＋ Ittra lill-uffiċċju
+＋ {n} courriers plus anciens · tout voir dans le Registre ¦ ＋ {n} letra më të vjetra · shiko gjithçka te Regjistri ¦ ＋ {n} ittri eqdem · ara kollox fir-Reġistru
+Aucun courrier relié à cette étude. ¦ Asnjë letër e lidhur me këtë zyrë. ¦ L-ebda ittra marbuta ma’ dan l-uffiċċju.
+« {name} » retiré de l’étude ¦ «{name}» u hoq nga zyra ¦ “{name}” imneħħi mill-uffiċċju
+Réponse reçue le {d} ¦ Përgjigja u mor më {d} ¦ Tweġiba riċevuta fil-{d}
+Courrier remis en attente ¦ Letra sërish në pritje ¦ L-ittra għal darb’oħra qed tistenna
+Vide : le courrier repasse « en attente ». ¦ Bosh: letra kthehet «në pritje». ¦ Vojt: l-ittra terġa’ “qed tistenna”.
+Ajouter un notaire ou un clerc ¦ Shto një noter ose nëpunës ¦ Żid nutar jew skrivan
+Fiche de personne (facultatif) ¦ Skeda e personit (opsionale) ¦ Skeda tal-persuna (mhux obbligatorja)
+Jusqu’à (ancien) ¦ Deri më (ish-) ¦ Sa (ta’ qabel)
+Un notaire qui change d’étude reste nommé dans ses anciens dossiers : mets une date de fin, il passe « ancien ». ¦ Noteri që ndërron zyrë mbetet i përmendur në dosjet e tij të vjetra: vendos një datë mbarimi dhe ai bëhet «ish-». ¦ Nutar li jibdel l-uffiċċju jibqa’ msemmi fil-fajls il-qodma tiegħu: daħħal data tat-tmiem, u jsir “ta’ qabel”.
+Donne le nom du notaire ou du clerc. ¦ Jep emrin e noterit ose të nëpunësit. ¦ Agħti l-isem tan-nutar jew tal-iskrivan.
+Courrier à l’étude ¦ Letër për zyrën ¦ Ittra lill-uffiċċju
+état des recherches ¦ gjendja e kërkimeve ¦ stat tar-riċerka
+Courrier rangé au Registre ¦ Letra u vendos në Regjistër ¦ Ittra mqiegħda fir-Reġistru
+Une étude, ou un nom gardé en texte… ¦ Një zyrë, ose një emër i mbajtur si tekst… ¦ Uffiċċju, jew isem miżmum bħala test…
+Choisis l’étude ; le nom tapé dans le champ du notaire reste dans le dossier. ¦ Zgjidh zyrën; emri i shkruar në fushën e noterit mbetet në dosje. ¦ Agħżel l-uffiċċju; l-isem miktub fil-qasam tan-nutar jibqa’ fil-fajl.
+nom gardé en texte, sans fiche d’étude ¦ emër i mbajtur si tekst, pa skedë zyre ¦ isem miżmum bħala test, mingħajr skeda tal-uffiċċju
+texte ¦ tekst ¦ test
+Notaire chargé du dossier ¦ Noteri përgjegjës për dosjen ¦ Nutar inkarigat mill-fajl
+ancien ¦ ish- ¦ ta’ qabel
+Choisi parmi les notaires de l’étude, ou laissé vide. ¦ Zgjedhur nga noterët e zyrës, ose lënë bosh. ¦ Magħżul minn fost in-nutara tal-uffiċċju, jew imħolli vojt.
+✓ Notaire du dossier : {who}. Ligne au 🕓 Journal du dossier. ¦ ✓ Noteri i dosjes: {who}. Rresht në 🕓 Ditarin e dosjes. ¦ ✓ Nutar tal-fajl: {who}. Linja fil-🕓 Ġurnal tal-fajl.
+même nom « {n} » ¦ i njëjti emër «{n}» ¦ l-istess isem “{n}”
+même ville ¦ i njëjti qytet ¦ l-istess belt
+même ville que le défunt ¦ i njëjti qytet si i ndjeri ¦ l-istess belt tal-mejjet
+initiale {i} ¦ inicial {i} ¦ inizjali {i}
+une seule étude de ce nom ¦ vetëm një zyrë me këtë emër ¦ uffiċċju wieħed biss b’dan l-isem
+Autre étude ¦ Zyrë tjetër ¦ Uffiċċju ieħor
+Laisser en texte ¦ Lëre si tekst ¦ Ħalli bħala test
+{n} noms tapés à la main · rien n’est changé avant « Appliquer ». ¦ {n} emra të shkruar me dorë · asgjë nuk ndryshon para «Zbato». ¦ {n} ismijiet miktuba bl-idejn · xejn ma jinbidel qabel “Applika”.
+existe ¦ ekziston ¦ jeżisti
+plusieurs études possibles ¦ disa zyra të mundshme ¦ diversi uffiċċji possibbli
+Sans proposition ¦ Pa propozim ¦ Mingħajr proposta
+＋ Créer une étude ¦ ＋ Krijo një zyrë ¦ ＋ Oħloq uffiċċju
+Courriers qui ressemblent à une étude ¦ Letra që ngjajnë me një zyrë ¦ Ittri li jixbhu uffiċċju
+pour le délai constaté ¦ për kohën e vënë re ¦ għaż-żmien osservat
+Les rapprochements ne regardent que le nom de famille (sans « Me », « Maître », « SCP », « Étude », accents) et la ville quand elle est écrite. Deux études du même nom dans deux villes ne sont jamais réunies. Le nom tapé reste dans chaque dossier. ¦ Krahasimi shikon vetëm mbiemrin (pa «Me», «Maître», «SCP», «Étude», theksa) dhe qytetin kur është shkruar. Dy zyra me të njëjtin emër në dy qytete nuk bashkohen kurrë. Emri i shkruar mbetet në çdo dosje. ¦ It-tqabbil iħares biss lejn il-kunjom (mingħajr “Me”, “Maître”, “SCP”, “Étude”, aċċenti) u l-belt meta tkun miktuba. Żewġ uffiċċji bl-istess isem f’żewġ bliet qatt ma jingħaqdu. L-isem miktub jibqa’ f’kull fajl.
+Notaires tapés à la main ¦ Noterë të shkruar me dorë ¦ Nutara miktuba bl-idejn
+Aucun notaire tapé à la main sans fiche. ¦ Asnjë noter i shkruar me dorë pa skedë. ¦ L-ebda nutar miktub bl-idejn mingħajr skeda.
+Appliquer à {n} noms ({m} dossiers) ¦ Zbato për {n} emra ({m} dosje) ¦ Applika għal {n} ismijiet ({m} fajls)
+✓ {n} dossiers reliés à leur étude. Le nom tapé est gardé dans chaque dossier. ¦ ✓ {n} dosje të lidhura me zyrën e tyre. Emri i shkruar ruhet në çdo dosje. ¦ ✓ {n} fajls marbuta mal-uffiċċju tagħhom. L-isem miktub jinżamm f’kull fajl.
+{n} notaires tapés à la main dans tes dossiers n’ont pas encore de fiche. ¦ {n} noterë të shkruar me dorë në dosjet e tua nuk kanë ende skedë. ¦ {n} nutara miktuba bl-idejn fil-fajls tiegħek għad m’għandhomx skeda.
+{n} notaire tapé à la main dans tes dossiers n’a pas encore de fiche. ¦ {n} noter i shkruar me dorë në dosjet e tua nuk ka ende skedë. ¦ {n} nutar miktub bl-idejn fil-fajls tiegħek għad m’għandux skeda.
+{cases} · pas encore de fiche ¦ {cases} · ende pa skedë ¦ {cases} · għad m’hemmx skeda
+Déjà tapé dans d’autres dossiers ¦ Tashmë i shkruar në dosje të tjera ¦ Diġà miktub f’fajls oħra
+{n} dossiers en cours ¦ {n} dosje në vazhdim ¦ {n} fajls għaddejjin
+{n} dossier en cours ¦ {n} dosje në vazhdim ¦ {n} fajl għaddej
+Étude de notaire introuvable. ¦ Zyra noteriale nuk u gjet. ¦ Uffiċċju nutarili ma nstabx.
+Ce notaire n’est pas de cette étude. ¦ Ky noter nuk është i kësaj zyre. ¦ Dan in-nutar mhux minn dan l-uffiċċju.
+Ce dossier n’est pas relié à cette étude. ¦ Kjo dosje nuk është e lidhur me këtë zyrë. ¦ Dan il-fajl mhux marbut ma’ dan l-uffiċċju.
+Date de réponse incorrecte. ¦ Datë përgjigjeje e pasaktë. ¦ Data tat-tweġiba mhux korretta.
+Où ranger les études ¦ Ku të vendosen zyrat ¦ Fejn jitqiegħdu l-uffiċċji
+Dans 🏛 Services d’archives, sorte « Étude de notaire » ¦ Te 🏛 Shërbimet e arkivave, lloji «Zyrë noteriale» ¦ Fil-🏛 Servizzi tal-arkivji, tip “Uffiċċju nutarili”
+Une liste « Études de notaire » à part ¦ Një listë më vete «Zyra noteriale» ¦ Lista separata “Uffiċċji nutarili”
+Délai constaté ¦ Koha e vënë re ¦ Żmien osservat
+Moyenne, avec le plus court et le plus long ¦ Mesatarja, me më të shkurtrën dhe më të gjatën ¦ Medja, bl-iqsar u l-itwal
+Médiane (moins sensible à une réponse très lente) ¦ Mediana (më pak e ndjeshme ndaj një përgjigjeje shumë të vonë) ¦ Medjan (inqas sensittiv għal tweġiba bil-mod ħafna)
+Ne pas l’afficher ¦ Mos e shfaq ¦ Turihx
+Nombre de réponses avant d’afficher un délai ¦ Numri i përgjigjeve para se të shfaqet koha ¦ Numru ta’ tweġibiet qabel ma jintwera żmien
+Les courriers comptés ¦ Letrat e numëruara ¦ L-ittri magħduda
+Ceux des 3 dernières années ¦ Ato të 3 viteve të fundit ¦ Dawk tal-aħħar 3 snin
+Ce que propose le menu de choix ¦ Çfarë ofron menyja e zgjedhjes ¦ Dak li joffri l-menu tal-għażla
+Les études, puis les noms déjà tapés ¦ Zyrat, pastaj emrat e shkruar tashmë ¦ L-uffiċċji, imbagħad l-ismijiet diġà miktuba
+Les études seulement ¦ Vetëm zyrat ¦ L-uffiċċji biss
+Le notaire chargé du dossier ¦ Noteri përgjegjës për dosjen ¦ In-nutar inkarigat mill-fajl
+Un notaire de l’étude, facultatif ¦ Një noter i zyrës, opsional ¦ Nutar tal-uffiċċju, mhux obbligatorju
+Seulement l’étude ¦ Vetëm zyra ¦ L-uffiċċju biss
+Les propositions de regroupement ¦ Propozimet e grupimit ¦ Il-proposti biex jinġabru
+Cochées quand le nom et la ville concordent ¦ Të shënuara kur emri dhe qyteti përputhen ¦ Immarkati meta l-isem u l-belt jaqblu
+Toutes décochées ¦ Të gjitha pa shenjë ¦ Kollha mhux immarkati
+Le bandeau « notaires sans fiche » ¦ Shiriti «noterë pa skedë» ¦ Il-banner “nutara mingħajr skeda”
+Montré dans la liste des études ¦ Shfaqur në listën e zyrave ¦ Muri fil-lista tal-uffiċċji
+Jamais (on passe par ⋯) ¦ Kurrë (përmes ⋯) ¦ Qatt (permezz ta’ ⋯)
+⚠️ Homonymes ¦ ⚠️ Emonimë ¦ ⚠️ Omonimi
+fiche n° {n} (confidentielle) ¦ skeda nr. {n} (konfidenciale) ¦ skeda nru {n} (kunfidenzjali)
+naissance : date inconnue ¦ lindja: datë e panjohur ¦ twelid: data mhux magħrufa
+même année de naissance ¦ i njëjti vit lindjeje ¦ l-istess sena tat-twelid
+naissance à {n} an(s) près ¦ lindja brenda {n} vjetëve ¦ twelid sa {n} snin differenza
+même commune ¦ e njëjta komunë ¦ l-istess lokalità
+Nom, prénom ¦ Mbiemri, emri ¦ Kunjom, isem
+inconnus ¦ të panjohur ¦ mhux magħrufa
+arbre seulement · ajouté le {d} ¦ vetëm pema · shtuar më {d} ¦ siġra biss · miżjud fil-{d}
+arbre seulement ¦ vetëm pema ¦ siġra biss
+Critère ¦ Kriteri ¦ Kriterju
+Celui du dossier ¦ Ai i dosjes ¦ Dak tal-fajl
+L’autre fiche ¦ Skeda tjetër ¦ L-iskeda l-oħra
+↗ Ouvrir la fiche n° {n} ¦ ↗ Hap skedën nr. {n} ¦ ↗ Iftaħ l-iskeda nru {n}
+👥 Peut-être les mêmes : ouvrir la fusion ¦ 👥 Ndoshta i njëjti: hap bashkimin ¦ 👥 Forsi l-istess: iftaħ l-għaqda
+Une autre fiche porte le même nom ¦ Një skedë tjetër mban të njëjtin emër ¦ Skeda oħra għandha l-istess isem
+pas dans ce dossier. ¦ jo në këtë dosje. ¦ mhux f’dan il-fajl.
+Celui à qui tu écris : {who}. ¦ Ai të cilit i shkruan: {who}. ¦ Dak li qed tikteb lilu: {who}.
+enfant de {p} ¦ fëmijë i {p} ¦ wild ta’ {p}
+{n} héritiers sur {m} ont un homonyme dans la base ¦ {n} trashëgimtarë nga {m} kanë një emonim në bazë ¦ {n} werrieta minn {m} għandhom omonimu fid-database
+Voir les détails ¦ Shiko hollësitë ¦ Ara d-dettalji
+Envoyer quand même aux {n} ¦ Dërgo gjithsesi te të {n} ¦ Ibgħat xorta lil kull {n}
+✓ Retenu : {a} ({y1}) et {b} ({y2}) sont deux personnes. L’alerte ne reviendra plus pour eux deux. ¦ ✓ U mbajt mend: {a} ({y1}) dhe {b} ({y2}) janë dy persona. Sinjalizimi nuk do të kthehet më për ta. ¦ ✓ Miżmum: {a} ({y1}) u {b} ({y2}) huma żewġ persuni. It-twissija ma terġax lura għalihom it-tnejn.
+née à {place} en {y} ¦ lindur në {place} në vitin {y} ¦ imwielda f’{place} fis-sena {y}
+né à {place} en {y} ¦ lindur në {place} në vitin {y} ¦ imwieled f’{place} fis-sena {y}
+née à {place}, date inconnue ¦ lindur në {place}, datë e panjohur ¦ imwielda f’{place}, data mhux magħrufa
+né à {place}, date inconnue ¦ lindur në {place}, datë e panjohur ¦ imwieled f’{place}, data mhux magħrufa
+✓ C’est lui ¦ ✓ Është ai ¦ ✓ Huwa hu
+✓ C’est bien lui que je contacte ¦ ✓ Pikërisht atë po kontaktoj ¦ ✓ Huwa proprju hu li qed nikkuntattja
+👁 Voir ¦ 👁 Shiko ¦ 👁 Ara
+👁 Voir l’autre ¦ 👁 Shiko tjetrin ¦ 👁 Ara l-ieħor
+Ce n’est pas la même personne ¦ Nuk është i njëjti person ¦ Mhix l-istess persuna
+Noté au 🕓 Journal : homonyme vu, destinataire confirmé. L’alerte reviendra au prochain contact. ¦ Shënuar në 🕓 Ditar: emonimi u pa, marrësi u konfirmua. Sinjalizimi kthehet në kontaktin e ardhshëm. ¦ Imniżżel fil-🕓 Ġurnal: omonimu muri, destinatarju kkonfermat. It-twissija terġa’ lura fil-kuntatt li jmiss.
+Noté au 🕓 Journal : homonyme vu, destinataire confirmé. L’alerte ne reviendra plus dans ce dossier. ¦ Shënuar në 🕓 Ditar: emonimi u pa, marrësi u konfirmua. Sinjalizimi nuk kthehet më në këtë dosje. ¦ Imniżżel fil-🕓 Ġurnal: omonimu muri, destinatarju kkonfermat. It-twissija ma terġax lura f’dan il-fajl.
+Écart d’années de naissance ¦ Diferenca e viteve të lindjes ¦ Differenza fis-snin tat-twelid
+2 ans ¦ 2 vjet ¦ 2 snin
+Même département, ou lieu inconnu ¦ I njëjti departament, ose vend i panjohur ¦ L-istess dipartiment, jew post mhux magħruf
+Même commune seulement ¦ Vetëm e njëjta komunë ¦ L-istess lokalità biss
+Peu importe le lieu ¦ Vendi s’ka rëndësi ¦ Il-post ma jimpurtax
+Quand l’afficher ¦ Kur të shfaqet ¦ Meta turih
+À chaque courrier, appel et questionnaire ¦ Në çdo letër, telefonatë dhe pyetësor ¦ F’kull ittra, telefonata u kwestjonarju
+Au premier contact d’un héritier seulement ¦ Vetëm në kontaktin e parë me një trashëgimtar ¦ Fl-ewwel kuntatt ma’ werriet biss
+Après « ✓ C’est bien lui » ¦ Pas «✓ Pikërisht atë po kontaktoj» ¦ Wara “✓ Huwa proprju hu li qed nikkuntattja”
+L’alerte revient au prochain contact ¦ Sinjalizimi kthehet në kontaktin e ardhshëm ¦ It-twissija terġa’ lura fil-kuntatt li jmiss
+Elle ne revient plus dans ce dossier ¦ Nuk kthehet më në këtë dosje ¦ Ma terġax lura f’dan il-fajl
+Où chercher l’homonyme ¦ Ku të kërkohet emonimi ¦ Fejn jinfittex l-omonimu
+Seulement les autres dossiers ¦ Vetëm në dosjet e tjera ¦ Fil-fajls l-oħra biss

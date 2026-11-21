@@ -109,6 +109,17 @@ const backups = (dir) => (fs.existsSync(path.join(dir, 'backups')) ? fs.readdirS
     assert.ok(expected >= 97);
   });
 
+  await step('structure n°98 : compléments aux outils existants (🏛 études de notaire, ⚠️ homonymes, 📱 visite aux archives)', async () => {
+    const dir = path.join(tmp, 'ancienne');
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='archive_service_people'")), 1);
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM pragma_table_info('succ_cases') WHERE name IN ('notary_service_id','notary_people_id')")), 2);
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM pragma_table_info('courriers') WHERE name IN ('archive_service_id','recu_le')")), 2);
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM pragma_table_info('archive_visit_plans') WHERE name IN ('succ_case_id','export_uid','export_sum','imported_at','photos_off','import_json')")), 6);
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM pragma_table_info('archive_visit_items') WHERE name IN ('person_id','act_kind')")), 2);
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM archive_service_people")), 0, 'aucun notaire posé par la mise à jour');
+    assert.ok(expected >= 98);
+  });
+
   await step('la copie de sécurité est une base complète, dans l’état d’avant la mise à jour', async () => {
     const dir = path.join(tmp, 'ancienne');
     const copy = path.join(dir, 'backups', backups(dir)[0]);

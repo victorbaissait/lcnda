@@ -1,0 +1,186 @@
+fr ¦ fi ¦ hu
+# 🏛⚠️📋📱 Compléments aux outils existants (docs/design/complements-existants.html) : C tous les doutes, D visite aux archives, erreurs du serveur
+📋 Tous les doutes ¦ 📋 Kaikki epäilykset ¦ 📋 Minden kétség
+Points à revoir ¦ Tarkistettavat kohdat ¦ Átnézendő pontok
+Chaque ligne est lue dans l’outil d’origine au moment où tu ouvres la liste, et « ↗ » t’y emmène pour décider. Rien n’est copié : corriger dans l’outil fait disparaître la ligne. ¦ Jokainen rivi luetaan alkuperäisestä työkalusta, kun avaat luettelon, ja ”↗” vie sinut sinne päättämään. Mitään ei kopioida: korjaus työkalussa poistaa rivin. ¦ Minden sort az eredeti eszközből olvasunk, amikor megnyitod a listát, és a „↗” odavisz dönteni. Semmi sem másolódik: ha az eszközben javítod, a sor eltűnik.
+Je lis les outils… ¦ Luen työkaluja… ¦ Olvasom az eszközöket…
+Chercher une personne, un lieu… ¦ Hae henkilöä, paikkaa… ¦ Keress személyt, helyet…
+et ses ancêtres ¦ ja hänen esivanhempansa ¦ és felmenői
+Branche ¦ Haara ¦ Ág
+paternelle (Sosa 2) ¦ isän puoli (Sosa 2) ¦ apai (Sosa 2)
+maternelle (Sosa 3) ¦ äidin puoli (Sosa 3) ¦ anyai (Sosa 3)
+Vus ¦ Nähdyt ¦ Megnézettek
+Pas encore vus ¦ Ei vielä nähdyt ¦ Még nem megnézettek
+Vus aussi ¦ Myös nähdyt ¦ A megnézettek is
+Seulement les vus ¦ Vain nähdyt ¦ Csak a megnézettek
+↗ Ouvrir dans l’outil ¦ ↗ Avaa työkalussa ¦ ↗ Megnyitás az eszközben
+👁 Ne plus marquer vu ¦ 👁 Poista merkintä nähdyksi ¦ 👁 Megnézett jelölés levétele
+👁 Marquer vu ¦ 👁 Merkitse nähdyksi ¦ 👁 Megnézettnek jelölés
+👤 Ouvrir la fiche de {name} ¦ 👤 Avaa kortti: {name} ¦ 👤 Adatlap megnyitása: {name}
+🔍 Seulement les doutes de cette personne ¦ 🔍 Vain tämän henkilön epäilykset ¦ 🔍 Csak ennek a személynek a kétségei
+Aucun doute pour l’instant ¦ Ei epäilyksiä nyt ¦ Most nincs kétség
+Les outils d’origine n’ont rien à vérifier : bravo ! ¦ Alkuperäisissä työkaluissa ei ole tarkistettavaa: hienoa! ¦ Az eredeti eszközökben nincs mit ellenőrizni: szép munka!
+vu le {d} ¦ nähty {d} ¦ megnézve: {d}
+revenu : la chose a changé ¦ palannut: jokin on muuttunut ¦ visszatért: valami megváltozott
+👁 « {t} » n’est plus marqué vu. ¦ 👁 ”{t}” ei ole enää merkitty nähdyksi. ¦ 👁 „{t}” már nincs megnézettnek jelölve.
+👁 « {t} » marqué vu. ¦ 👁 ”{t}” merkitty nähdyksi. ¦ 👁 „{t}” megnézettnek jelölve.
+impossible ¦ mahdoton ¦ lehetetlen
+impossibles ¦ mahdottomat ¦ lehetetlenek
+curieux ¦ outo ¦ furcsa
+Le plus grave : {t} ¦ Vakavin: {t} ¦ A legsúlyosabb: {t}
+Doutes ¦ Epäilykset ¦ Kétségek
+Hypothèse ouverte ¦ Avoin hypoteesi ¦ Nyitott feltevés
+↗ Contrôle ¦ ↗ Tarkistus ¦ ↗ Ellenőrzés
+↗ Comparer ¦ ↗ Vertaa ¦ ↗ Összehasonlítás
+Liens fragiles ¦ Hauraat yhteydet ¦ Törékeny kapcsolatok
+↗ Solidité ¦ ↗ Vahvuus ¦ ↗ Szilárdság
+Désaccord de preuve ¦ Ristiriita todisteissa ¦ Ellentmondás a bizonyítékokban
+↗ Dossier de preuve ¦ ↗ Todistekansio ¦ ↗ Bizonyítékdosszié
+Lecture SocFace ¦ SocFace-luenta ¦ SocFace-olvasat
+↗ Image ¦ ↗ Kuva ¦ ↗ Kép
+Successoral ¦ Perintöselvitys ¦ Örököskutatás
+Naissance sans source ¦ Syntymä ilman lähdettä ¦ Születés forrás nélkül
+Baptême sans source ¦ Kaste ilman lähdettä ¦ Keresztelő forrás nélkül
+Mariage sans source ¦ Avioliitto ilman lähdettä ¦ Házasság forrás nélkül
+Décès sans source ¦ Kuolema ilman lähdettä ¦ Halál forrás nélkül
+Inhumation sans source ¦ Hautaus ilman lähdettä ¦ Temetés forrás nélkül
+Événement sans source ¦ Tapahtuma ilman lähdettä ¦ Esemény forrás nélkül
+Lien parent-enfant supposé ¦ Oletettu vanhempi–lapsi-yhteys ¦ Feltételezett szülő–gyermek kapcsolat
+Lien parent-enfant sans source ¦ Vanhempi–lapsi-yhteys ilman lähdettä ¦ Szülő–gyermek kapcsolat forrás nélkül
+{a} réponses, {p} preuves ¦ vastauksia: {a}, todisteita: {p} ¦ válaszok: {a}, bizonyítékok: {p}
+Désaccord sans résolution ¦ Ratkaisematon ristiriita ¦ Megoldatlan ellentmondás
+Homonyme dans un dossier de succession ¦ Kaima perunkirjoitusasiassa ¦ Névrokon egy hagyatéki ügyben
+Personne vivante ¦ Elossa oleva henkilö ¦ Élő személy
+« Sans source » ¦ ”Ilman lähdettä” ¦ „Forrás nélkül”
+Seulement les ancêtres Sosa ¦ Vain Sosa-esivanhemmat ¦ Csak a Sosa-felmenők
+Pas du tout ¦ Ei lainkaan ¦ Egyáltalán nem
+Une ligne marquée vue ¦ Nähdyksi merkitty rivi ¦ Megnézettnek jelölt sor
+Revient si la chose change ¦ Palaa, jos jokin muuttuu ¦ Visszatér, ha valami változik
+Ne revient jamais ¦ Ei palaa koskaan ¦ Soha nem tér vissza
+Les lignes vues ¦ Nähdyt rivit ¦ A megnézett sorok
+Cachées par le filtre de départ « Pas encore vus » ¦ Piilotettu aloitussuodattimella ”Ei vielä nähdyt” ¦ Elrejtve a „Még nem megnézettek” kezdőszűrővel
+Montrées en pâle ¦ Näytetään himmeinä ¦ Halványan megjelenítve
+Pistes du successoral ¦ Perintöselvityksen vihjeet ¦ Az örököskutatás nyomai
+À part, dans les dossiers ¦ Erikseen, asioissa ¦ Külön, az ügyekben
+Aussi dans cette liste ¦ Myös tässä luettelossa ¦ Ebben a listában is
+Le widget ¦ Pienoisohjelma ¦ A widget
+Les trois nombres et le plus grave ¦ Kolme lukua ja vakavin ¦ A három szám és a legsúlyosabb
+Les 5 premières lignes ¦ 5 ensimmäistä riviä ¦ Az első 5 sor
+📱 Visite aux archives ¦ 📱 Arkistokäynti ¦ 📱 Levéltári látogatás
+🗄 Préparer une visite ¦ 🗄 Valmistele käynti ¦ 🗄 Látogatás előkészítése
+Préparer une visite ¦ Valmistele käynti ¦ Látogatás előkészítése
+🗄 Créer la visite ¦ 🗄 Luo käynti ¦ 🗄 Látogatás létrehozása
+Service ¦ Arkisto ¦ Levéltár
+Pour quel dossier ? (facultatif) ¦ Mihin asiaan? (valinnainen) ¦ Melyik ügyhöz? (nem kötelező)
+Ouvert : {h} ¦ Auki: {h} ¦ Nyitva: {h}
+Les horaires et l’adresse sont lus dans la fiche du service. ¦ Aukioloajat ja osoite luetaan arkiston kortista. ¦ A nyitvatartást és a címet a levéltár adatlapjáról olvassuk.
+Les cotes à voir ¦ Katsottavat arkistotunnukset ¦ Megnézendő jelzetek
+déjà en ligne : Où chercher ? ¦ jo verkossa: Mistä etsiä? ¦ már online: Hol keressek?
+({n} cochées sur {m}) ¦ ({n}/{m} valittu) ¦ ({n} bejelölve {m}-ból)
+Coche au moins une cote. ¦ Valitse vähintään yksi arkistotunnus. ¦ Jelölj be legalább egy jelzetet.
+🗄 Visite créée : {n}. Elle est dans Listes → Visites d’archives. ¦ 🗄 Käynti luotu: {n}. Se on kohdassa Luettelot → Arkistokäynnit. ¦ 🗄 Látogatás létrehozva: {n}. Itt van: Listák → Levéltári látogatások.
+⚖️ reliée à un dossier ¦ ⚖️ liitetty asiaan ¦ ⚖️ ügyhöz kapcsolva
+📱 Emporter sur le téléphone ¦ 📱 Ota mukaan puhelimeen ¦ 📱 Vidd magaddal a telefonon
+⤒ Rapporter les résultats ¦ ⤒ Tuo tulokset takaisin ¦ ⤒ Eredmények visszahozása
+⤒ Importer les photos du jour ¦ ⤒ Tuo päivän kuvat ¦ ⤒ A nap fotóinak importálása
+Importer les photos du jour ¦ Tuo päivän kuvat ¦ A nap fotóinak importálása
+Visite aux archives · {what} ¦ Arkistokäynti · {what} ¦ Levéltári látogatás · {what}
+Marche sans réseau. Tout est gardé dans ce téléphone au fur et à mesure. ¦ Toimii ilman verkkoa. Kaikki tallentuu tähän puhelimeen sitä mukaa. ¦ Hálózat nélkül is működik. Minden folyamatosan ezen a telefonon marad.
+Photo interdite ici : pas de bouton 📷. ¦ Kuvaaminen kielletty täällä: ei 📷-painiketta. ¦ Itt tilos fényképezni: nincs 📷 gomb.
+＋ Une cote trouvée sur place, pas prévue au départ ¦ ＋ Paikan päällä löytynyt arkistotunnus, jota ei suunniteltu ¦ ＋ A helyszínen talált, előre nem tervezett jelzet
+⤓ Enregistrer mes résultats ¦ ⤓ Tallenna tulokseni ¦ ⤓ Eredményeim mentése
+📷 Photo ¦ 📷 Kuva ¦ 📷 Fotó
+Retirer cette photo ¦ Poista tämä kuva ¦ Fotó eltávolítása
+Cote ajoutée sur place ¦ Paikan päällä lisätty arkistotunnus ¦ A helyszínen hozzáadott jelzet
+✓ Gardé dans ce téléphone à {time} ¦ ✓ Tallennettu tähän puhelimeen klo {time} ¦ ✓ Mentve ezen a telefonon: {time}
+⚠️ Ce navigateur ne garde rien dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Tämä selain ei säilytä mitään sivulla: tallenna tuloksesi jokaisen arkistotunnuksen jälkeen. ¦ ⚠️ Ez a böngésző semmit sem őriz meg az oldalon: mentsd az eredményeidet minden jelzet után.
+⚠️ Ce téléphone ne garde pas les photos dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Tämä puhelin ei säilytä kuvia sivulla: tallenna tuloksesi jokaisen arkistotunnuksen jälkeen. ¦ ⚠️ Ez a telefon nem őrzi meg a fotókat az oldalon: mentsd az eredményeidet minden jelzet után.
+⚠️ Ce fichier n’est pas une image. ¦ ⚠️ Tämä tiedosto ei ole kuva. ¦ ⚠️ Ez a fájl nem kép.
+⚠️ Note au moins un résultat avant d’enregistrer. ¦ ⚠️ Kirjaa vähintään yksi tulos ennen tallennusta. ¦ ⚠️ Mentés előtt jegyezz fel legalább egy eredményt.
+✓ Fichier « {name} » enregistré : rapporte-le dans l’app (⤒ Rapporter les résultats). ¦ ✓ Tiedosto ”{name}” tallennettu: tuo se sovellukseen (⤒ Tuo tulokset takaisin). ¦ ✓ A(z) „{name}” fájl mentve: hozd vissza az alkalmazásba (⤒ Eredmények visszahozása).
+Des photos manquaient : elles ne sont pas dans le fichier. ¦ Kuvia puuttui: ne eivät ole tiedostossa. ¦ Hiányzott néhány fotó: nincsenek a fájlban.
+⤓ Enregistrer la page ¦ ⤓ Tallenna sivu ¦ ⤓ Oldal mentése
+Ce qui part dans la page ¦ Mitä sivulle tulee ¦ Ami az oldalra kerül
+Les cotes, l’acte cherché, la personne et ses années ¦ Arkistotunnukset, etsitty asiakirja, henkilö ja hänen vuotensa ¦ A jelzetek, a keresett irat, a személy és évei
+Ce qu’on sait déjà (parents, conjoint, dates connues) pour reconnaître l’acte sur place ¦ Se mitä jo tiedetään (vanhemmat, puoliso, tunnetut päivät), jotta tunnistat asiakirjan paikan päällä ¦ Amit már tudunk (szülők, házastárs, ismert dátumok), hogy a helyszínen felismerd az iratot
+Les personnes vivantes ¦ Elossa olevat henkilöt ¦ Élő személyek
+décoché : un vivant devient « Personne vivante » ¦ ei valittu: elossa olevasta tulee ”Elossa oleva henkilö” ¦ jelöletlen: az élő személyből „Élő személy” lesz
+Les fiches confidentielles : jamais ¦ Luottamukselliset kortit: ei koskaan ¦ Bizalmas adatlapok: soha
+Photo interdite ici ¦ Kuvaaminen kielletty täällä ¦ Itt tilos fényképezni
+cache le bouton 📷 dans la page ¦ piilottaa 📷-painikkeen sivulta ¦ elrejti a 📷 gombot az oldalon
+Un seul fichier .html : aucune requête, rien à installer. Mets-le sur le téléphone (câble, AirDrop, partage Android, courriel à toi-même) ; il marche en mode avion. ¦ Yksi .html-tiedosto: ei pyyntöjä, ei asennettavaa. Laita se puhelimeen (kaapeli, AirDrop, Android-jako, sähköposti itsellesi); se toimii lentotilassa. ¦ Egyetlen .html fájl: nincs kérés, nincs telepítés. Tedd a telefonra (kábel, AirDrop, Android-megosztás, e-mail magadnak); repülő üzemmódban is működik.
+📲 Montrer comment le mettre sur le téléphone ¦ 📲 Näytä, miten se laitetaan puhelimeen ¦ 📲 Mutasd meg, hogyan kerül a telefonra
+iPhone : l’aperçu de l’app Fichiers montre la page mais ne la fait pas marcher (pas de cases à cocher). Ouvre-la avec une app qui lit les pages .html, ou passe par la feuille imprimée et les photos (réglage). Android : Chrome ou Firefox l’ouvrent et la font marcher. ¦ iPhone: Tiedostot-sovelluksen esikatselu näyttää sivun, mutta ei saa sitä toimimaan (ei valintaruutuja). Avaa se sovelluksella, joka lukee .html-sivuja, tai käytä tulostettua arkkia ja kuvia (asetus). Android: Chrome tai Firefox avaa sen ja saa sen toimimaan. ¦ iPhone: a Fájlok alkalmazás előnézete megmutatja az oldalt, de nem működteti (nincsenek jelölőnégyzetek). Nyisd meg egy .html oldalakat olvasó alkalmazással, vagy használd a nyomtatott lapot és a fotókat (beállítás). Android: a Chrome vagy a Firefox megnyitja és működteti.
+📄 1 fichier, {n} Ko : mets-le sur ton téléphone. ¦ 📄 1 tiedosto, {n} kt: laita se puhelimeesi. ¦ 📄 1 fájl, {n} KB: tedd a telefonodra.
+Résultats de la visite ¦ Käynnin tulokset ¦ A látogatás eredményei
+Ce fichier vient d’une autre visite : « {t} ». ¦ Tämä tiedosto on toisesta käynnistä: ”{t}”. ¦ Ez a fájl egy másik látogatásból való: „{t}”.
+cote retirée de la visite depuis ¦ arkistotunnus poistettu käynnistä sittemmin ¦ a jelzetet azóta kivették a látogatásból
+ajoutée sur place : d’abord ajoutée à la visite ¦ lisätty paikan päällä: lisätään ensin käyntiin ¦ a helyszínen hozzáadva: előbb a látogatáshoz kerül
+dépouillement déjà relié ¦ indeksointi jo liitetty ¦ feldolgozás már kapcsolva
+＋ dépouillement du Journal ({r}) ¦ ＋ indeksointi Lokiin ({r}) ¦ ＋ feldolgozás a Naplóban ({r})
+{n} → médias « à trier » ¦ {n} → mediat ”lajiteltavaksi” ¦ {n} → média „rendezendő”
+{n} → médias reliés à {who} ¦ {n} → mediat liitetty: {who} ¦ {n} → média kapcsolva: {who}
+{n} → médias ¦ {n} → mediat ¦ {n} → média
+📑 pièce du dossier : reçue ¦ 📑 asian asiakirja: saatu ¦ 📑 az ügy irata: megérkezett
+✓ fichier vérifié ¦ ✓ tiedosto tarkistettu ¦ ✓ fájl ellenőrizve
+Rapporté du téléphone ¦ Tuotu puhelimesta ¦ A telefonról visszahozva
+Ce que l’app fera ¦ Mitä sovellus tekee ¦ Amit az alkalmazás tesz
+Ranger cette cote ¦ Tallenna tämä arkistotunnus ¦ A jelzet elrakása
+→ Reporter sur la fiche ¦ → Siirrä korttiin ¦ → Átvezetés az adatlapra
+Aucune date ni aucun lieu n’est écrit sur une fiche : ce qui est trouvé reste un dépouillement avec sa photo ; c’est toi qui le reportes sur la fiche, comme aujourd’hui. ¦ Korttiin ei kirjoiteta päivää eikä paikkaa: löytö jää indeksoinniksi kuvineen; siirrät sen itse korttiin, kuten nyt. ¦ Az adatlapra nem kerül dátum vagy hely: a lelet feldolgozás marad a fotójával; te vezeted át az adatlapra, ahogy most is.
+{n} rapportées, {m} ¦ tuotu: {n}, {m} ¦ visszahozva: {n}, {m}
+Ranger {n} et {m} ¦ Tallenna {n} ja {m} ¦ Elrakás: {n} és {m}
+→ Reporter sur la fiche : le dépouillement et ses photos y sont reliés. ¦ → Siirrä korttiin: indeksointi ja sen kuvat on liitetty siihen. ¦ → Átvezetés az adatlapra: a feldolgozás és fotói hozzá vannak kapcsolva.
+✓ Visite rangée : {d}, {m}, {p}. ¦ ✓ Käynti tallennettu: {d}, {m}, {p}. ¦ ✓ Látogatás elrakva: {d}, {m}, {p}.
+{n} pièce(s) reçue(s) ¦ saatuja asiakirjoja: {n} ¦ megérkezett iratok: {n}
+Visite marquée « faite ». ¦ Käynti merkitty ”tehdyksi”. ¦ Látogatás „megtörtént”-nek jelölve.
+Cette visite n’a pas encore de cote. ¦ Tällä käynnillä ei ole vielä arkistotunnusta. ¦ Ennek a látogatásnak még nincs jelzete.
+Rangées dans l’ordre des cotes d’après l’heure de prise de vue : corrige la cote d’une photo si besoin. ¦ Järjestetty arkistotunnusten mukaan kuvausajan perusteella: korjaa kuvan arkistotunnus tarvittaessa. ¦ A jelzetek sorrendjében, a felvétel ideje szerint rendezve: szükség esetén javítsd egy fotó jelzetét.
+— ne pas ranger — ¦ — älä tallenna — ¦ — ne kerüljön elrakásra —
+{n} rangées dans les médias (« à trier »). ¦ {n} tallennettu medioihin (”lajiteltavaksi”). ¦ {n} elrakva a médiák közé („rendezendő”).
+Parents : {names} ¦ Vanhemmat: {names} ¦ Szülők: {names}
+Conjoint : {names} ¦ Puoliso: {names} ¦ Házastárs: {names}
+Fiche confidentielle ¦ Luottamuksellinen kortti ¦ Bizalmas adatlap
+Ce fichier a déjà été rangé le {date} : rien n’est fait en double. ¦ Tämä tiedosto tallennettiin jo {date}: mitään ei tehdä kahdesti. ¦ Ezt a fájlt már elraktuk ekkor: {date}: semmi sem történik kétszer.
+à trier ¦ lajiteltavaksi ¦ rendezendő
+Trouvé à la visite : {where} ¦ Löytyi käynnillä: {where} ¦ Megtalálva a látogatáson: {where}
+Comment emporter la visite ¦ Miten käynti otetaan mukaan ¦ Hogyan vidd magaddal a látogatást
+Une page .html à ouvrir sur le téléphone ¦ Puhelimessa avattava .html-sivu ¦ Telefonon megnyitható .html oldal
+La feuille imprimée et les photos du téléphone ¦ Tulostettu arkki ja puhelimen kuvat ¦ A nyomtatott lap és a telefon fotói
+Sans les vivants ¦ Ilman eläviä ¦ Élők nélkül
+Avec les vivants ¦ Elävien kanssa ¦ Élőkkel
+Réduites à 2000 px ¦ Pienennetty 2000 px:iin ¦ 2000 px-re kicsinyítve
+Une naissance trouvée ¦ Löydetty syntymä ¦ Megtalált születés
+Reste un dépouillement, tu la reportes ¦ Jää indeksoinniksi, siirrät sen itse ¦ Feldolgozás marad, te vezeted át
+Proposer « → Reporter sur la fiche » dans la revue ¦ Ehdota ”→ Siirrä korttiin” tarkistuksessa ¦ „→ Átvezetés az adatlapra” felajánlása az átnézéskor
+Après le rangement ¦ Tallennuksen jälkeen ¦ Elrakás után
+Visite marquée « faite » ¦ Käynti merkitty ”tehdyksi” ¦ Látogatás „megtörtént”-nek jelölve
+Aucune photo reçue. ¦ Kuvaa ei saatu. ¦ Nem érkezett fotó.
+Ce fichier est trop gros pour les résultats d’une visite. ¦ Tämä tiedosto on liian suuri käynnin tuloksiksi. ¦ Ez a fájl túl nagy egy látogatás eredményeihez.
+Ce fichier n’est pas les résultats d’une visite (il faut le .zip enregistré sur le téléphone). ¦ Tämä tiedosto ei ole käynnin tulokset (tarvitset puhelimeen tallennetun .zip-tiedoston). ¦ Ez a fájl nem egy látogatás eredménye (a telefonon mentett .zip kell).
+Ce fichier n’est pas les résultats d’une visite aux archives. ¦ Tämä tiedosto ei ole arkistokäynnin tulokset. ¦ Ez a fájl nem egy levéltári látogatás eredménye.
+Ce fichier vient d’une visite qui n’est pas dans cette généalogie. ¦ Tämä tiedosto on käynnistä, jota ei ole tässä sukututkimuksessa. ¦ Ez a fájl olyan látogatásból való, amely nincs ebben a családfában.
+Cette visite a déjà été emportée : supprime-la dans le Planificateur si tu n’en veux plus. ¦ Tämä käynti on jo otettu mukaan: poista se Suunnittelijasta, jos et enää halua sitä. ¦ Ezt a látogatást már magaddal vitted: töröld a Tervezőben, ha már nem kell.
+Choisis la cote de chaque photo. ¦ Valitse jokaisen kuvan arkistotunnus. ¦ Válaszd ki minden fotó jelzetét.
+Coche au moins une cote à ranger. ¦ Valitse vähintään yksi tallennettava arkistotunnus. ¦ Jelölj be legalább egy elrakandó jelzetet.
+Fichier .zip illisible. ¦ Lukukelvoton .zip-tiedosto. ¦ Olvashatatlan .zip fájl.
+Fichier refusé : identifiant incorrect. ¦ Tiedosto hylätty: väärä tunniste. ¦ A fájl elutasítva: hibás azonosító.
+Fichier refusé : il a été modifié depuis le téléphone (somme de contrôle). ¦ Tiedosto hylätty: sitä on muutettu puhelimen jälkeen (tarkistussumma). ¦ A fájl elutasítva: a telefon óta módosították (ellenőrzőösszeg).
+Fichier refusé : il contient des données inattendues. ¦ Tiedosto hylätty: se sisältää odottamattomia tietoja. ¦ A fájl elutasítva: váratlan adatokat tartalmaz.
+Fichier refusé : il ne correspond pas à la page emportée (somme de contrôle). ¦ Tiedosto hylätty: se ei vastaa mukaan otettua sivua (tarkistussumma). ¦ A fájl elutasítva: nem egyezik az elvitt oldallal (ellenőrzőösszeg).
+Fichier refusé : la liste des cotes manque. ¦ Tiedosto hylätty: arkistotunnusten luettelo puuttuu. ¦ A fájl elutasítva: hiányzik a jelzetek listája.
+Fichier refusé : la liste des photos est mal formée. ¦ Tiedosto hylätty: kuvaluettelo on virheellinen. ¦ A fájl elutasítva: a fotók listája hibás.
+Fichier refusé : results.json est illisible. ¦ Tiedosto hylätty: results.json on lukukelvoton. ¦ A fájl elutasítva: a results.json olvashatatlan.
+Fichier refusé : results.json manque. ¦ Tiedosto hylätty: results.json puuttuu. ¦ A fájl elutasítva: hiányzik a results.json.
+Fichier refusé : trop de fichiers dedans. ¦ Tiedosto hylätty: liikaa tiedostoja sisällä. ¦ A fájl elutasítva: túl sok fájl van benne.
+Fichier refusé : un chemin sort du dossier. ¦ Tiedosto hylätty: polku menee kansion ulkopuolelle. ¦ A fájl elutasítva: egy útvonal kivezet a mappából.
+Fichier refusé : un résultat est inconnu. ¦ Tiedosto hylätty: tuntematon tulos. ¦ A fájl elutasítva: ismeretlen eredmény.
+Fichier refusé : un élément est trop gros. ¦ Tiedosto hylätty: osa on liian suuri. ¦ A fájl elutasítva: egy elem túl nagy.
+Fichier refusé : une cote contient des données inattendues. ¦ Tiedosto hylätty: arkistotunnus sisältää odottamattomia tietoja. ¦ A fájl elutasítva: egy jelzet váratlan adatokat tartalmaz.
+Fichier refusé : une cote est mal formée. ¦ Tiedosto hylätty: arkistotunnus on virheellinen. ¦ A fájl elutasítva: egy jelzet hibás.
+Fichier refusé : une photo annoncée manque. ¦ Tiedosto hylätty: ilmoitettu kuva puuttuu. ¦ A fájl elutasítva: hiányzik egy bejelentett fotó.
+Fichier refusé : une photo n’est pas une image. ¦ Tiedosto hylätty: kuva ei ole kuva. ¦ A fájl elutasítva: egy fotó nem kép.
+Impossible de ranger la photo dans les médias. ¦ Kuvaa ei voi tallentaa medioihin. ¦ A fotó nem rakható el a médiák közé.
+Lecture des fichiers .zip impossible sur cet ordinateur. ¦ .zip-tiedostoja ei voi lukea tällä tietokoneella. ¦ Ezen a számítógépen nem olvashatók .zip fájlok.
+Trop de photos d’un coup (200 au plus). ¦ Liikaa kuvia kerralla (enintään 200). ¦ Túl sok fotó egyszerre (legfeljebb 200).
+Une photo est trop grosse ou n’a pas été reçue. ¦ Kuva on liian suuri tai se ei tullut perille. ¦ Egy fotó túl nagy, vagy nem érkezett meg.

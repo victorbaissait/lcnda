@@ -343,6 +343,7 @@ function delete_archive_service(PDO $pdo, array $data): array
     $own = !$pdo->inTransaction(); if ($own) { $pdo->beginTransaction(); }
     try {
         foreach (array_keys($links) as $t) { $pdo->prepare("UPDATE {$t} SET archive_service_id=NULL WHERE archive_service_id=?")->execute([$id]); }
+        if (function_exists('etude_on_delete')) { $links['_etude'] = etude_on_delete($pdo, $id, $old); } // 🏛 une étude : ses dossiers gardent son nom en texte (lib/etudes_notaire.php)
         $pdo->prepare('DELETE FROM archive_services WHERE id=?')->execute([$id]);
         log_change($pdo, 'archive_service', $id, 'delete', 'Service d’archives supprimé : ' . $old['name'], $old + ['_links' => $links], null);
         if ($own) { $pdo->commit(); }
@@ -370,6 +371,7 @@ function restore_archive_service(PDO $pdo, array $data): array
             $u = $pdo->prepare("UPDATE {$t} SET archive_service_id=? WHERE id=? AND archive_service_id IS NULL");
             foreach (array_slice($links[$t], 0, 5000) as $lid) { $u->execute([$id, (int) $lid]); }
         }
+        if (function_exists('etude_on_restore') && is_array($links['_etude'] ?? null)) { etude_on_restore($pdo, $id, $links['_etude']); }
         log_change($pdo, 'archive_service', $id, 'restore', 'Suppression annulée : ' . $row['name'], null, null);
         if ($own) { $pdo->commit(); }
     } catch (Throwable $e) { if ($own && $pdo->inTransaction()) { $pdo->rollBack(); } throw $e; }

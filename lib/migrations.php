@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 97;
+const SCHEMA_VERSION = 98;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -118,6 +118,7 @@ function migration_steps(): array
         95 => 'schema_v95',
         96 => 'schema_v96',
         97 => 'schema_v97',
+        98 => 'schema_v98',
     ];
 }
 
@@ -2665,4 +2666,14 @@ function schema_v97(PDO $pdo): void
 {
     if (!function_exists('succ_p2_schema')) { require_once __DIR__ . '/successoral.php'; }
     succ_p2_schema($pdo);
+}
+
+/** 98 : 🧩 compléter quatre outils existants (lib/complements.php) : 🏛 les notaires et clercs d'une étude (archive_service_people),
+ *  succ_cases.notary_service_id / notary_people_id (l'étude et le notaire chargé d'un dossier ; notary_text, le nom tapé, reste),
+ *  courriers.archive_service_id et recu_le (la date de réponse, pour le délai constaté), 📱 archive_visit_plans.succ_case_id,
+ *  export_uid, export_sum, imported_at, photos_off, import_json et archive_visit_items.person_id, act_kind (visite aux archives). */
+function schema_v98(PDO $pdo): void
+{
+    if (!function_exists('compl_schema')) { require_once __DIR__ . '/complements.php'; }
+    compl_schema($pdo);
 }

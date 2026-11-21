@@ -288,6 +288,7 @@
                 <div class="succ-2"><label>${esc(i18n('Durée (minutes)'))}<input type="number" name="minutes" min="0" max="1440" value="${esc(c.minutes || '')}"></label><div>${call ? '' : ck(i18n('⏱ Compter la durée dans 💶 Temps'), 'name="count_time"')}</div></div>
                 ${ck(i18n('C’est une recherche (va dans 🕵️ Recherches)'), 'name="research"', c.research)}${ck(i18n('Ne répond pas'), 'name="noanswer"', c.noanswer)}
                 <p class="ui-hint">${esc(i18n('Avec une date, une échéance va dans le dossier et dans la 🔔 cloche (jamais le résumé).'))}</p></div>`,
+            onOpen: dlg => ext.succHomonym?.attach?.(dlg, D, {where: 'call', ids: () => { const w = dlg.querySelector('[name=who]')?.value || ''; return /^\d+$/.test(w) ? [Number(w)] : []; }}), // ⚠️ homonyme (heritage-complements.js)
             onSubmit: async f => {
                 const w = f.querySelector('[name=who]')?.value || '';
                 const body = {op: 'p2_call_save', case_id: D.id, id: c.id || 0, at: f.at.value, person_id: /^\d+$/.test(w) ? Number(w) : 0, who: w.startsWith('txt:') ? w.slice(4) : '', means: f.querySelector('[name=means]:checked')?.value || 'phone',
@@ -374,6 +375,7 @@
                 <span class="pk-lab">${esc(i18n('Comment l’envoyer'))}</span>${seg('how', [['file', '💾 Fichier à remplir'], ['paper', '🖨 Papier (PDF)'], ['both', 'Les deux']], 'file')}
                 <span class="pk-lab">${esc(i18n('Ce qui est pré-rempli'))}</span>${seg('prefill', [['yes', 'Ce qui le concerne'], ['no', 'Rien']], set.q_prefill)}
                 <p class="ui-hint">${esc(i18n('Jamais le nom du défunt ni un montant : « au sujet d’une succession ». Le fichier s’ouvre d’un double-clic, sans internet ; l’héritier renvoie un petit fichier.'))} ${setLink('q_format')}</p></div>`,
+            onOpen: dlg => ext.succHomonym?.attach?.(dlg, D, {where: 'questionnaire', ids: () => [...dlg.querySelectorAll('[data-sp2-qto]:checked')].map(x => Number(x.dataset.sp2Qto))}), // ⚠️ avant ⤓ Fabriquer
             onSubmit: async f => {
                 const ids = [...f.querySelectorAll('[data-sp2-qto]:checked')].map(x => Number(x.dataset.sp2Qto));
                 const fields = [...f.querySelectorAll('[data-sp2-qf]:checked')].map(x => x.dataset.sp2Qf);

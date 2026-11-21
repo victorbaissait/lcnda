@@ -1,0 +1,186 @@
+fr ¦ ru ¦ uk
+# 🏛⚠️📋📱 Compléments aux outils existants (docs/design/complements-existants.html) : C tous les doutes, D visite aux archives, erreurs du serveur
+📋 Tous les doutes ¦ 📋 Все сомнения ¦ 📋 Усі сумніви
+Points à revoir ¦ Что стоит проверить ¦ Що варто перевірити
+Chaque ligne est lue dans l’outil d’origine au moment où tu ouvres la liste, et « ↗ » t’y emmène pour décider. Rien n’est copié : corriger dans l’outil fait disparaître la ligne. ¦ Каждая строка читается из исходного инструмента в момент, когда ты открываешь список, а «↗» ведёт туда, чтобы решить. Ничего не копируется: исправь в инструменте — и строка исчезнет. ¦ Кожен рядок читається з початкового інструмента в момент, коли ти відкриваєш список, а «↗» веде туди, щоб вирішити. Нічого не копіюється: виправ в інструменті — і рядок зникне.
+Je lis les outils… ¦ Читаю инструменты… ¦ Читаю інструменти…
+Chercher une personne, un lieu… ¦ Найти человека, место… ¦ Знайти особу, місце…
+et ses ancêtres ¦ и его предки ¦ і його предки
+Branche ¦ Ветвь ¦ Гілка
+paternelle (Sosa 2) ¦ отцовская (Sosa 2) ¦ батьківська (Sosa 2)
+maternelle (Sosa 3) ¦ материнская (Sosa 3) ¦ материнська (Sosa 3)
+Vus ¦ Просмотренные ¦ Переглянуті
+Pas encore vus ¦ Ещё не просмотренные ¦ Ще не переглянуті
+Vus aussi ¦ И просмотренные ¦ І переглянуті
+Seulement les vus ¦ Только просмотренные ¦ Лише переглянуті
+↗ Ouvrir dans l’outil ¦ ↗ Открыть в инструменте ¦ ↗ Відкрити в інструменті
+👁 Ne plus marquer vu ¦ 👁 Снять отметку «просмотрено» ¦ 👁 Зняти позначку «переглянуто»
+👁 Marquer vu ¦ 👁 Отметить просмотренным ¦ 👁 Позначити переглянутим
+👤 Ouvrir la fiche de {name} ¦ 👤 Открыть карточку: {name} ¦ 👤 Відкрити картку: {name}
+🔍 Seulement les doutes de cette personne ¦ 🔍 Только сомнения этого человека ¦ 🔍 Лише сумніви цієї особи
+Aucun doute pour l’instant ¦ Пока сомнений нет ¦ Поки сумнівів немає
+Les outils d’origine n’ont rien à vérifier : bravo ! ¦ В исходных инструментах нечего проверять: браво! ¦ У початкових інструментах нічого перевіряти: браво!
+vu le {d} ¦ просмотрено {d} ¦ переглянуто {d}
+revenu : la chose a changé ¦ вернулось: что-то изменилось ¦ повернулося: щось змінилося
+👁 « {t} » n’est plus marqué vu. ¦ 👁 «{t}» больше не отмечено просмотренным. ¦ 👁 «{t}» більше не позначено переглянутим.
+👁 « {t} » marqué vu. ¦ 👁 «{t}» отмечено просмотренным. ¦ 👁 «{t}» позначено переглянутим.
+impossible ¦ невозможно ¦ неможливо
+impossibles ¦ невозможных ¦ неможливих
+curieux ¦ странно ¦ дивно
+Le plus grave : {t} ¦ Самое серьёзное: {t} ¦ Найсерйозніше: {t}
+Doutes ¦ Сомнения ¦ Сумніви
+Hypothèse ouverte ¦ Открытая гипотеза ¦ Відкрита гіпотеза
+↗ Contrôle ¦ ↗ Проверка ¦ ↗ Перевірка
+↗ Comparer ¦ ↗ Сравнить ¦ ↗ Порівняти
+Liens fragiles ¦ Хрупкие связи ¦ Крихкі зв’язки
+↗ Solidité ¦ ↗ Надёжность ¦ ↗ Надійність
+Désaccord de preuve ¦ Расхождение доказательств ¦ Розбіжність доказів
+↗ Dossier de preuve ¦ ↗ Досье доказательств ¦ ↗ Досьє доказів
+Lecture SocFace ¦ Чтение SocFace ¦ Читання SocFace
+↗ Image ¦ ↗ Изображение ¦ ↗ Зображення
+Successoral ¦ Наследственное ¦ Спадкове
+Naissance sans source ¦ Рождение без источника ¦ Народження без джерела
+Baptême sans source ¦ Крещение без источника ¦ Хрещення без джерела
+Mariage sans source ¦ Брак без источника ¦ Шлюб без джерела
+Décès sans source ¦ Смерть без источника ¦ Смерть без джерела
+Inhumation sans source ¦ Погребение без источника ¦ Поховання без джерела
+Événement sans source ¦ Событие без источника ¦ Подія без джерела
+Lien parent-enfant supposé ¦ Предполагаемая связь родитель–ребёнок ¦ Припущений зв’язок батько–дитина
+Lien parent-enfant sans source ¦ Связь родитель–ребёнок без источника ¦ Зв’язок батько–дитина без джерела
+{a} réponses, {p} preuves ¦ ответов: {a}, доказательств: {p} ¦ відповідей: {a}, доказів: {p}
+Désaccord sans résolution ¦ Нерешённое расхождение ¦ Нерозв’язана розбіжність
+Homonyme dans un dossier de succession ¦ Однофамилец в наследственном деле ¦ Однофамілець у спадковій справі
+Personne vivante ¦ Живой человек ¦ Жива особа
+« Sans source » ¦ «Без источника» ¦ «Без джерела»
+Seulement les ancêtres Sosa ¦ Только предки Sosa ¦ Лише предки Sosa
+Pas du tout ¦ Совсем нет ¦ Зовсім ні
+Une ligne marquée vue ¦ Строка, отмеченная просмотренной ¦ Рядок, позначений переглянутим
+Revient si la chose change ¦ Возвращается, если что-то меняется ¦ Повертається, якщо щось змінюється
+Ne revient jamais ¦ Никогда не возвращается ¦ Ніколи не повертається
+Les lignes vues ¦ Просмотренные строки ¦ Переглянуті рядки
+Cachées par le filtre de départ « Pas encore vus » ¦ Скрыты стартовым фильтром «Ещё не просмотренные» ¦ Приховані стартовим фільтром «Ще не переглянуті»
+Montrées en pâle ¦ Показаны бледно ¦ Показані блідо
+Pistes du successoral ¦ Наследственные зацепки ¦ Спадкові зачіпки
+À part, dans les dossiers ¦ Отдельно, в делах ¦ Окремо, у справах
+Aussi dans cette liste ¦ Также в этом списке ¦ Також у цьому списку
+Le widget ¦ Виджет ¦ Віджет
+Les trois nombres et le plus grave ¦ Три числа и самое серьёзное ¦ Три числа й найсерйозніше
+Les 5 premières lignes ¦ Первые 5 строк ¦ Перші 5 рядків
+📱 Visite aux archives ¦ 📱 Поход в архив ¦ 📱 Візит до архіву
+🗄 Préparer une visite ¦ 🗄 Подготовить поход ¦ 🗄 Підготувати візит
+Préparer une visite ¦ Подготовить поход ¦ Підготувати візит
+🗄 Créer la visite ¦ 🗄 Создать поход ¦ 🗄 Створити візит
+Service ¦ Служба ¦ Служба
+Pour quel dossier ? (facultatif) ¦ Для какого дела? (необязательно) ¦ Для якої справи? (необов’язково)
+Ouvert : {h} ¦ Открыто: {h} ¦ Відчинено: {h}
+Les horaires et l’adresse sont lus dans la fiche du service. ¦ Часы работы и адрес берутся из карточки службы. ¦ Години роботи й адресу взято з картки служби.
+Les cotes à voir ¦ Шифры для просмотра ¦ Шифри для перегляду
+déjà en ligne : Où chercher ? ¦ уже онлайн: Где искать? ¦ уже онлайн: Де шукати?
+({n} cochées sur {m}) ¦ (отмечено {n} из {m}) ¦ (позначено {n} з {m})
+Coche au moins une cote. ¦ Отметь хотя бы один шифр. ¦ Познач хоча б один шифр.
+🗄 Visite créée : {n}. Elle est dans Listes → Visites d’archives. ¦ 🗄 Поход создан: {n}. Он в Списки → Походы в архивы. ¦ 🗄 Візит створено: {n}. Він у Списки → Візити до архівів.
+⚖️ reliée à un dossier ¦ ⚖️ связан с делом ¦ ⚖️ пов’язаний зі справою
+📱 Emporter sur le téléphone ¦ 📱 Взять с собой на телефоне ¦ 📱 Узяти з собою на телефоні
+⤒ Rapporter les résultats ¦ ⤒ Принести результаты ¦ ⤒ Принести результати
+⤒ Importer les photos du jour ¦ ⤒ Импортировать фото за день ¦ ⤒ Імпортувати фото за день
+Importer les photos du jour ¦ Импортировать фото за день ¦ Імпортувати фото за день
+Visite aux archives · {what} ¦ Поход в архив · {what} ¦ Візит до архіву · {what}
+Marche sans réseau. Tout est gardé dans ce téléphone au fur et à mesure. ¦ Работает без сети. Всё сохраняется в этом телефоне по ходу дела. ¦ Працює без мережі. Усе зберігається в цьому телефоні по ходу.
+Photo interdite ici : pas de bouton 📷. ¦ Здесь фотографировать нельзя: кнопки 📷 нет. ¦ Тут фотографувати заборонено: кнопки 📷 немає.
+＋ Une cote trouvée sur place, pas prévue au départ ¦ ＋ Шифр, найденный на месте, не запланированный заранее ¦ ＋ Шифр, знайдений на місці, не запланований заздалегідь
+⤓ Enregistrer mes résultats ¦ ⤓ Сохранить мои результаты ¦ ⤓ Зберегти мої результати
+📷 Photo ¦ 📷 Фото ¦ 📷 Фото
+Retirer cette photo ¦ Убрать это фото ¦ Прибрати це фото
+Cote ajoutée sur place ¦ Шифр, добавленный на месте ¦ Шифр, доданий на місці
+✓ Gardé dans ce téléphone à {time} ¦ ✓ Сохранено в этом телефоне в {time} ¦ ✓ Збережено в цьому телефоні о {time}
+⚠️ Ce navigateur ne garde rien dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Этот браузер ничего не хранит на странице: сохраняй результаты после каждого шифра. ¦ ⚠️ Цей браузер нічого не зберігає на сторінці: зберігай результати після кожного шифру.
+⚠️ Ce téléphone ne garde pas les photos dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Этот телефон не хранит фото на странице: сохраняй результаты после каждого шифра. ¦ ⚠️ Цей телефон не зберігає фото на сторінці: зберігай результати після кожного шифру.
+⚠️ Ce fichier n’est pas une image. ¦ ⚠️ Этот файл — не изображение. ¦ ⚠️ Цей файл — не зображення.
+⚠️ Note au moins un résultat avant d’enregistrer. ¦ ⚠️ Отметь хотя бы один результат перед сохранением. ¦ ⚠️ Познач хоча б один результат перед збереженням.
+✓ Fichier « {name} » enregistré : rapporte-le dans l’app (⤒ Rapporter les résultats). ¦ ✓ Файл «{name}» сохранён: принеси его в приложение (⤒ Принести результаты). ¦ ✓ Файл «{name}» збережено: принеси його в застосунок (⤒ Принести результати).
+Des photos manquaient : elles ne sont pas dans le fichier. ¦ Некоторых фото не хватало: их нет в файле. ¦ Деяких фото бракувало: їх немає у файлі.
+⤓ Enregistrer la page ¦ ⤓ Сохранить страницу ¦ ⤓ Зберегти сторінку
+Ce qui part dans la page ¦ Что попадает на страницу ¦ Що потрапляє на сторінку
+Les cotes, l’acte cherché, la personne et ses années ¦ Шифры, искомая запись, человек и его годы ¦ Шифри, шуканий запис, особа та її роки
+Ce qu’on sait déjà (parents, conjoint, dates connues) pour reconnaître l’acte sur place ¦ То, что уже известно (родители, супруг, известные даты), чтобы узнать запись на месте ¦ Те, що вже відомо (батьки, подружжя, відомі дати), щоб упізнати запис на місці
+Les personnes vivantes ¦ Живые люди ¦ Живі особи
+décoché : un vivant devient « Personne vivante » ¦ без отметки: живой становится «Живой человек» ¦ без позначки: жива особа стає «Жива особа»
+Les fiches confidentielles : jamais ¦ Конфиденциальные карточки: никогда ¦ Конфіденційні картки: ніколи
+Photo interdite ici ¦ Здесь фотографировать нельзя ¦ Тут фотографувати заборонено
+cache le bouton 📷 dans la page ¦ скрывает кнопку 📷 на странице ¦ приховує кнопку 📷 на сторінці
+Un seul fichier .html : aucune requête, rien à installer. Mets-le sur le téléphone (câble, AirDrop, partage Android, courriel à toi-même) ; il marche en mode avion. ¦ Один файл .html: никаких запросов, ничего не нужно ставить. Перенеси его на телефон (кабель, AirDrop, «Поделиться» на Android, письмо самому себе); он работает в режиме полёта. ¦ Один файл .html: жодних запитів, нічого не треба встановлювати. Перенеси його на телефон (кабель, AirDrop, «Поділитися» на Android, лист самому собі); він працює в режимі польоту.
+📲 Montrer comment le mettre sur le téléphone ¦ 📲 Показать, как перенести на телефон ¦ 📲 Показати, як перенести на телефон
+iPhone : l’aperçu de l’app Fichiers montre la page mais ne la fait pas marcher (pas de cases à cocher). Ouvre-la avec une app qui lit les pages .html, ou passe par la feuille imprimée et les photos (réglage). Android : Chrome ou Firefox l’ouvrent et la font marcher. ¦ iPhone: предпросмотр в приложении «Файлы» показывает страницу, но не запускает её (нет флажков). Открой её приложением, которое читает страницы .html, или используй распечатанный лист и фото (настройка). Android: Chrome или Firefox открывают её и запускают. ¦ iPhone: попередній перегляд у застосунку «Файли» показує сторінку, але не запускає її (немає прапорців). Відкрий її застосунком, що читає сторінки .html, або скористайся надрукованим аркушем і фото (налаштування). Android: Chrome або Firefox відкривають її й запускають.
+📄 1 fichier, {n} Ko : mets-le sur ton téléphone. ¦ 📄 1 файл, {n} КБ: перенеси его на свой телефон. ¦ 📄 1 файл, {n} КБ: перенеси його на свій телефон.
+Résultats de la visite ¦ Результаты похода ¦ Результати візиту
+Ce fichier vient d’une autre visite : « {t} ». ¦ Этот файл из другого похода: «{t}». ¦ Цей файл з іншого візиту: «{t}».
+cote retirée de la visite depuis ¦ шифр с тех пор убран из похода ¦ шифр відтоді прибрано з візиту
+ajoutée sur place : d’abord ajoutée à la visite ¦ добавлено на месте: сначала добавляется в поход ¦ додано на місці: спершу додається до візиту
+dépouillement déjà relié ¦ выписка уже связана ¦ виписку вже пов’язано
+＋ dépouillement du Journal ({r}) ¦ ＋ выписка из Журнала ({r}) ¦ ＋ виписка з Журналу ({r})
+{n} → médias « à trier » ¦ {n} → медиа «разобрать» ¦ {n} → медіа «розібрати»
+{n} → médias reliés à {who} ¦ {n} → медиа связаны с {who} ¦ {n} → медіа пов’язано з {who}
+{n} → médias ¦ {n} → медиа ¦ {n} → медіа
+📑 pièce du dossier : reçue ¦ 📑 документ дела: получен ¦ 📑 документ справи: отримано
+✓ fichier vérifié ¦ ✓ файл проверен ¦ ✓ файл перевірено
+Rapporté du téléphone ¦ Принесено с телефона ¦ Принесено з телефона
+Ce que l’app fera ¦ Что сделает приложение ¦ Що зробить застосунок
+Ranger cette cote ¦ Разложить этот шифр ¦ Розкласти цей шифр
+→ Reporter sur la fiche ¦ → Перенести в карточку ¦ → Перенести в картку
+Aucune date ni aucun lieu n’est écrit sur une fiche : ce qui est trouvé reste un dépouillement avec sa photo ; c’est toi qui le reportes sur la fiche, comme aujourd’hui. ¦ В карточку не записывается ни дата, ни место: найденное остаётся выпиской со своим фото; переносишь в карточку ты сам, как и сейчас. ¦ У картку не записується ні дата, ні місце: знайдене лишається випискою зі своїм фото; переносиш у картку ти сам, як і зараз.
+{n} rapportées, {m} ¦ принесено: {n}, {m} ¦ принесено: {n}, {m}
+Ranger {n} et {m} ¦ Разложить {n} и {m} ¦ Розкласти {n} і {m}
+→ Reporter sur la fiche : le dépouillement et ses photos y sont reliés. ¦ → Перенести в карточку: выписка и её фото связаны с ней. ¦ → Перенести в картку: виписку та її фото пов’язано з нею.
+✓ Visite rangée : {d}, {m}, {p}. ¦ ✓ Поход разложен: {d}, {m}, {p}. ¦ ✓ Візит розкладено: {d}, {m}, {p}.
+{n} pièce(s) reçue(s) ¦ получено документов: {n} ¦ отримано документів: {n}
+Visite marquée « faite ». ¦ Поход отмечен «сделан». ¦ Візит позначено «зроблено».
+Cette visite n’a pas encore de cote. ¦ У этого похода ещё нет шифра. ¦ У цього візиту ще немає шифру.
+Rangées dans l’ordre des cotes d’après l’heure de prise de vue : corrige la cote d’une photo si besoin. ¦ Разложено по порядку шифров по времени съёмки: при необходимости исправь шифр фото. ¦ Розкладено за порядком шифрів за часом зйомки: за потреби виправ шифр фото.
+— ne pas ranger — ¦ — не раскладывать — ¦ — не розкладати —
+{n} rangées dans les médias (« à trier »). ¦ {n} разложено в медиа («разобрать»). ¦ {n} розкладено в медіа («розібрати»).
+Parents : {names} ¦ Родители: {names} ¦ Батьки: {names}
+Conjoint : {names} ¦ Супруг: {names} ¦ Подружжя: {names}
+Fiche confidentielle ¦ Конфиденциальная карточка ¦ Конфіденційна картка
+Ce fichier a déjà été rangé le {date} : rien n’est fait en double. ¦ Этот файл уже разложен {date}: ничего не делается дважды. ¦ Цей файл уже розкладено {date}: нічого не робиться двічі.
+à trier ¦ разобрать ¦ розібрати
+Trouvé à la visite : {where} ¦ Найдено в походе: {where} ¦ Знайдено під час візиту: {where}
+Comment emporter la visite ¦ Как взять поход с собой ¦ Як узяти візит із собою
+Une page .html à ouvrir sur le téléphone ¦ Страница .html для открытия на телефоне ¦ Сторінка .html для відкриття на телефоні
+La feuille imprimée et les photos du téléphone ¦ Распечатанный лист и фото с телефона ¦ Надрукований аркуш і фото з телефона
+Sans les vivants ¦ Без живых ¦ Без живих
+Avec les vivants ¦ С живыми ¦ З живими
+Réduites à 2000 px ¦ Уменьшенные до 2000 px ¦ Зменшені до 2000 px
+Une naissance trouvée ¦ Найденное рождение ¦ Знайдене народження
+Reste un dépouillement, tu la reportes ¦ Остаётся выпиской, переносишь ты ¦ Лишається випискою, переносиш ти
+Proposer « → Reporter sur la fiche » dans la revue ¦ Предлагать «→ Перенести в карточку» при просмотре ¦ Пропонувати «→ Перенести в картку» під час перегляду
+Après le rangement ¦ После раскладки ¦ Після розкладання
+Visite marquée « faite » ¦ Поход отмечен «сделан» ¦ Візит позначено «зроблено»
+Aucune photo reçue. ¦ Не получено ни одного фото. ¦ Не отримано жодного фото.
+Ce fichier est trop gros pour les résultats d’une visite. ¦ Этот файл слишком большой для результатов похода. ¦ Цей файл завеликий для результатів візиту.
+Ce fichier n’est pas les résultats d’une visite (il faut le .zip enregistré sur le téléphone). ¦ Этот файл — не результаты похода (нужен .zip, сохранённый на телефоне). ¦ Цей файл — не результати візиту (потрібен .zip, збережений на телефоні).
+Ce fichier n’est pas les résultats d’une visite aux archives. ¦ Этот файл — не результаты похода в архив. ¦ Цей файл — не результати візиту до архіву.
+Ce fichier vient d’une visite qui n’est pas dans cette généalogie. ¦ Этот файл из похода, которого нет в этой генеалогии. ¦ Цей файл з візиту, якого немає в цій генеалогії.
+Cette visite a déjà été emportée : supprime-la dans le Planificateur si tu n’en veux plus. ¦ Этот поход уже взят с собой: удали его в Планировщике, если он больше не нужен. ¦ Цей візит уже взято з собою: видали його в Планувальнику, якщо він більше не потрібен.
+Choisis la cote de chaque photo. ¦ Выбери шифр для каждого фото. ¦ Обери шифр для кожного фото.
+Coche au moins une cote à ranger. ¦ Отметь хотя бы один шифр для раскладки. ¦ Познач хоча б один шифр для розкладання.
+Fichier .zip illisible. ¦ Нечитаемый файл .zip. ¦ Нечитабельний файл .zip.
+Fichier refusé : identifiant incorrect. ¦ Файл отклонён: неверный идентификатор. ¦ Файл відхилено: неправильний ідентифікатор.
+Fichier refusé : il a été modifié depuis le téléphone (somme de contrôle). ¦ Файл отклонён: он изменён после телефона (контрольная сумма). ¦ Файл відхилено: його змінено після телефона (контрольна сума).
+Fichier refusé : il contient des données inattendues. ¦ Файл отклонён: в нём неожиданные данные. ¦ Файл відхилено: у ньому неочікувані дані.
+Fichier refusé : il ne correspond pas à la page emportée (somme de contrôle). ¦ Файл отклонён: он не соответствует взятой странице (контрольная сумма). ¦ Файл відхилено: він не відповідає взятій сторінці (контрольна сума).
+Fichier refusé : la liste des cotes manque. ¦ Файл отклонён: нет списка шифров. ¦ Файл відхилено: немає списку шифрів.
+Fichier refusé : la liste des photos est mal formée. ¦ Файл отклонён: список фото составлен неверно. ¦ Файл відхилено: список фото складено неправильно.
+Fichier refusé : results.json est illisible. ¦ Файл отклонён: results.json нечитаем. ¦ Файл відхилено: results.json нечитабельний.
+Fichier refusé : results.json manque. ¦ Файл отклонён: нет results.json. ¦ Файл відхилено: немає results.json.
+Fichier refusé : trop de fichiers dedans. ¦ Файл отклонён: внутри слишком много файлов. ¦ Файл відхилено: усередині забагато файлів.
+Fichier refusé : un chemin sort du dossier. ¦ Файл отклонён: путь выходит за пределы папки. ¦ Файл відхилено: шлях виходить за межі теки.
+Fichier refusé : un résultat est inconnu. ¦ Файл отклонён: неизвестный результат. ¦ Файл відхилено: невідомий результат.
+Fichier refusé : un élément est trop gros. ¦ Файл отклонён: элемент слишком большой. ¦ Файл відхилено: елемент завеликий.
+Fichier refusé : une cote contient des données inattendues. ¦ Файл отклонён: в шифре неожиданные данные. ¦ Файл відхилено: у шифрі неочікувані дані.
+Fichier refusé : une cote est mal formée. ¦ Файл отклонён: шифр составлен неверно. ¦ Файл відхилено: шифр складено неправильно.
+Fichier refusé : une photo annoncée manque. ¦ Файл отклонён: нет объявленного фото. ¦ Файл відхилено: немає оголошеного фото.
+Fichier refusé : une photo n’est pas une image. ¦ Файл отклонён: фото — не изображение. ¦ Файл відхилено: фото — не зображення.
+Impossible de ranger la photo dans les médias. ¦ Не удаётся разложить фото в медиа. ¦ Не вдається розкласти фото в медіа.
+Lecture des fichiers .zip impossible sur cet ordinateur. ¦ На этом компьютере нельзя читать файлы .zip. ¦ На цьому комп’ютері не можна читати файли .zip.
+Trop de photos d’un coup (200 au plus). ¦ Слишком много фото за раз (не больше 200). ¦ Забагато фото за раз (не більше 200).
+Une photo est trop grosse ou n’a pas été reçue. ¦ Фото слишком большое или не получено. ¦ Фото завелике або не отримане.

@@ -1,0 +1,186 @@
+fr ¦ sq ¦ mt
+# 🏛⚠️📋📱 Compléments aux outils existants (docs/design/complements-existants.html) : C tous les doutes, D visite aux archives, erreurs du serveur
+📋 Tous les doutes ¦ 📋 Të gjitha dyshimet ¦ 📋 Id-dubji kollha
+Points à revoir ¦ Pika për t’u rishikuar ¦ Punti x’tirrevedi
+Chaque ligne est lue dans l’outil d’origine au moment où tu ouvres la liste, et « ↗ » t’y emmène pour décider. Rien n’est copié : corriger dans l’outil fait disparaître la ligne. ¦ Çdo rresht lexohet nga mjeti burimor kur hap listën, dhe «↗» të çon atje për të vendosur. Asgjë nuk kopjohet: korrigjimi në mjet e zhduk rreshtin. ¦ Kull linja tinqara mill-għodda oriġinali meta tiftaħ il-lista, u “↗” teħodok hemm biex tiddeċiedi. Xejn ma jiġi kkupjat: korrezzjoni fl-għodda tneħħi l-linja.
+Je lis les outils… ¦ Po lexoj mjetet… ¦ Qed naqra l-għodod…
+Chercher une personne, un lieu… ¦ Kërko një person, një vend… ¦ Fittex persuna, post…
+et ses ancêtres ¦ dhe paraardhësit e tij ¦ u l-antenati tiegħu
+Branche ¦ Dega ¦ Fergħa
+paternelle (Sosa 2) ¦ atërore (Sosa 2) ¦ min-naħa tal-missier (Sosa 2)
+maternelle (Sosa 3) ¦ amtare (Sosa 3) ¦ min-naħa tal-omm (Sosa 3)
+Vus ¦ Të para ¦ Murija
+Pas encore vus ¦ Ende të papara ¦ Għadhom mhux murija
+Vus aussi ¦ Edhe të parat ¦ Anke l-murija
+Seulement les vus ¦ Vetëm të parat ¦ Il-murija biss
+↗ Ouvrir dans l’outil ¦ ↗ Hap në mjet ¦ ↗ Iftaħ fl-għodda
+👁 Ne plus marquer vu ¦ 👁 Hiq shenjën «parë» ¦ 👁 Neħħi l-marka “muri”
+👁 Marquer vu ¦ 👁 Shëno si të parë ¦ 👁 Immarka bħala muri
+👤 Ouvrir la fiche de {name} ¦ 👤 Hap skedën: {name} ¦ 👤 Iftaħ l-iskeda: {name}
+🔍 Seulement les doutes de cette personne ¦ 🔍 Vetëm dyshimet e këtij personi ¦ 🔍 Id-dubji ta’ din il-persuna biss
+Aucun doute pour l’instant ¦ Asnjë dyshim për momentin ¦ L-ebda dubju għalissa
+Les outils d’origine n’ont rien à vérifier : bravo ! ¦ Mjetet burimore s’kanë asgjë për të kontrolluar: bravo! ¦ L-għodod oriġinali m’għandhom xejn x’jivverifikaw: brava!
+vu le {d} ¦ parë më {d} ¦ muri fil-{d}
+revenu : la chose a changé ¦ u kthye: diçka ndryshoi ¦ reġa’ lura: xi ħaġa nbidlet
+👁 « {t} » n’est plus marqué vu. ¦ 👁 «{t}» nuk është më i shënuar si i parë. ¦ 👁 “{t}” m’għadux immarkat bħala muri.
+👁 « {t} » marqué vu. ¦ 👁 «{t}» u shënua si i parë. ¦ 👁 “{t}” immarkat bħala muri.
+impossible ¦ e pamundur ¦ impossibbli
+impossibles ¦ të pamundura ¦ impossibbli
+curieux ¦ i çuditshëm ¦ stramb
+Le plus grave : {t} ¦ Më i rëndi: {t} ¦ L-aktar serju: {t}
+Doutes ¦ Dyshime ¦ Dubji
+Hypothèse ouverte ¦ Hipotezë e hapur ¦ Ipoteżi miftuħa
+↗ Contrôle ¦ ↗ Kontroll ¦ ↗ Kontroll
+↗ Comparer ¦ ↗ Krahaso ¦ ↗ Qabbel
+Liens fragiles ¦ Lidhje të brishta ¦ Rabtiet fraġli
+↗ Solidité ¦ ↗ Qëndrueshmëria ¦ ↗ Solidità
+Désaccord de preuve ¦ Mospërputhje provash ¦ Nuqqas ta’ qbil fil-provi
+↗ Dossier de preuve ¦ ↗ Dosja e provave ¦ ↗ Fajl tal-provi
+Lecture SocFace ¦ Lexim SocFace ¦ Qari SocFace
+↗ Image ¦ ↗ Imazh ¦ ↗ Immaġni
+Successoral ¦ Trashëgimi ¦ Wirt
+Naissance sans source ¦ Lindje pa burim ¦ Twelid mingħajr sors
+Baptême sans source ¦ Pagëzim pa burim ¦ Magħmudija mingħajr sors
+Mariage sans source ¦ Martesë pa burim ¦ Żwieġ mingħajr sors
+Décès sans source ¦ Vdekje pa burim ¦ Mewt mingħajr sors
+Inhumation sans source ¦ Varrim pa burim ¦ Difna mingħajr sors
+Événement sans source ¦ Ngjarje pa burim ¦ Avveniment mingħajr sors
+Lien parent-enfant supposé ¦ Lidhje prind–fëmijë e supozuar ¦ Rabta ġenitur–wild preżunta
+Lien parent-enfant sans source ¦ Lidhje prind–fëmijë pa burim ¦ Rabta ġenitur–wild mingħajr sors
+{a} réponses, {p} preuves ¦ përgjigje: {a}, prova: {p} ¦ tweġibiet: {a}, provi: {p}
+Désaccord sans résolution ¦ Mospërputhje pa zgjidhje ¦ Nuqqas ta’ qbil mhux solvut
+Homonyme dans un dossier de succession ¦ Emonim në një dosje trashëgimie ¦ Omonimu f’fajl tal-wirt
+Personne vivante ¦ Person i gjallë ¦ Persuna ħajja
+« Sans source » ¦ «Pa burim» ¦ “Mingħajr sors”
+Seulement les ancêtres Sosa ¦ Vetëm paraardhësit Sosa ¦ L-antenati Sosa biss
+Pas du tout ¦ Aspak ¦ Xejn
+Une ligne marquée vue ¦ Një rresht i shënuar si i parë ¦ Linja mmarkata bħala murija
+Revient si la chose change ¦ Kthehet nëse diçka ndryshon ¦ Terġa’ lura jekk xi ħaġa tinbidel
+Ne revient jamais ¦ Nuk kthehet kurrë ¦ Qatt ma terġa’ lura
+Les lignes vues ¦ Rreshtat e parë ¦ Il-linji murija
+Cachées par le filtre de départ « Pas encore vus » ¦ Fshehur nga filtri fillestar «Ende të papara» ¦ Moħbija mill-filtru tal-bidu “Għadhom mhux murija”
+Montrées en pâle ¦ Shfaqur të zbehtë ¦ Murija ċari
+Pistes du successoral ¦ Gjurmët e trashëgimisë ¦ Indikazzjonijiet tal-wirt
+À part, dans les dossiers ¦ Më vete, në dosje ¦ Separati, fil-fajls
+Aussi dans cette liste ¦ Edhe në këtë listë ¦ Anke f’din il-lista
+Le widget ¦ Widget-i ¦ Il-widget
+Les trois nombres et le plus grave ¦ Tre numrat dhe më i rëndi ¦ It-tliet numri u l-aktar serju
+Les 5 premières lignes ¦ 5 rreshtat e parë ¦ L-ewwel 5 linji
+📱 Visite aux archives ¦ 📱 Vizitë në arkiv ¦ 📱 Żjara fl-arkivji
+🗄 Préparer une visite ¦ 🗄 Përgatit një vizitë ¦ 🗄 Ipprepara żjara
+Préparer une visite ¦ Përgatit një vizitë ¦ Ipprepara żjara
+🗄 Créer la visite ¦ 🗄 Krijo vizitën ¦ 🗄 Oħloq iż-żjara
+Service ¦ Shërbimi ¦ Servizz
+Pour quel dossier ? (facultatif) ¦ Për cilën dosje? (opsionale) ¦ Għal liema fajl? (mhux obbligatorju)
+Ouvert : {h} ¦ Hapur: {h} ¦ Miftuħ: {h}
+Les horaires et l’adresse sont lus dans la fiche du service. ¦ Orari dhe adresa lexohen nga skeda e shërbimit. ¦ Il-ħinijiet u l-indirizz jinqraw mill-iskeda tas-servizz.
+Les cotes à voir ¦ Shenjat e arkivit për t’u parë ¦ In-numri tal-arkivju x’tara
+déjà en ligne : Où chercher ? ¦ tashmë në internet: Ku të kërkosh? ¦ diġà online: Fejn tfittex?
+({n} cochées sur {m}) ¦ ({n} të shënuara nga {m}) ¦ ({n} immarkati minn {m})
+Coche au moins une cote. ¦ Shëno të paktën një shenjë arkivi. ¦ Immarka mill-inqas numru tal-arkivju wieħed.
+🗄 Visite créée : {n}. Elle est dans Listes → Visites d’archives. ¦ 🗄 Vizita u krijua: {n}. Është te Listat → Vizitat në arkiva. ¦ 🗄 Żjara maħluqa: {n}. Tinsab f’Listi → Żjarat fl-arkivji.
+⚖️ reliée à un dossier ¦ ⚖️ e lidhur me një dosje ¦ ⚖️ marbuta ma’ fajl
+📱 Emporter sur le téléphone ¦ 📱 Merre në telefon ¦ 📱 Ħudha fuq it-telefon
+⤒ Rapporter les résultats ¦ ⤒ Sill rezultatet ¦ ⤒ Ġib lura r-riżultati
+⤒ Importer les photos du jour ¦ ⤒ Importo fotot e ditës ¦ ⤒ Importa r-ritratti tal-jum
+Importer les photos du jour ¦ Importo fotot e ditës ¦ Importa r-ritratti tal-jum
+Visite aux archives · {what} ¦ Vizitë në arkiv · {what} ¦ Żjara fl-arkivji · {what}
+Marche sans réseau. Tout est gardé dans ce téléphone au fur et à mesure. ¦ Punon pa rrjet. Gjithçka ruhet në këtë telefon ndërkohë. ¦ Taħdem mingħajr netwerk. Kollox jinżamm f’dan it-telefon hekk kif tmur.
+Photo interdite ici : pas de bouton 📷. ¦ Fotografimi i ndaluar këtu: s’ka buton 📷. ¦ Ritratti projbiti hawn: l-ebda buttuna 📷.
+＋ Une cote trouvée sur place, pas prévue au départ ¦ ＋ Një shenjë arkivi e gjetur në vend, e pa parashikuar ¦ ＋ Numru tal-arkivju misjub fil-post, mhux ippjanat
+⤓ Enregistrer mes résultats ¦ ⤓ Ruaj rezultatet e mia ¦ ⤓ Issejvja r-riżultati tiegħi
+📷 Photo ¦ 📷 Foto ¦ 📷 Ritratt
+Retirer cette photo ¦ Hiq këtë foto ¦ Neħħi dan ir-ritratt
+Cote ajoutée sur place ¦ Shenjë arkivi e shtuar në vend ¦ Numru tal-arkivju miżjud fil-post
+✓ Gardé dans ce téléphone à {time} ¦ ✓ Ruajtur në këtë telefon në {time} ¦ ✓ Miżmum f’dan it-telefon fil-{time}
+⚠️ Ce navigateur ne garde rien dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Ky shfletues nuk ruan asgjë në faqe: ruaji rezultatet pas çdo shenje arkivi. ¦ ⚠️ Dan il-brawżer ma jżomm xejn fil-paġna: issejvja r-riżultati tiegħek wara kull numru tal-arkivju.
+⚠️ Ce téléphone ne garde pas les photos dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Ky telefon nuk ruan fotot në faqe: ruaji rezultatet pas çdo shenje arkivi. ¦ ⚠️ Dan it-telefon ma jżommx ir-ritratti fil-paġna: issejvja r-riżultati tiegħek wara kull numru tal-arkivju.
+⚠️ Ce fichier n’est pas une image. ¦ ⚠️ Ky skedar nuk është imazh. ¦ ⚠️ Dan il-fajl mhux immaġni.
+⚠️ Note au moins un résultat avant d’enregistrer. ¦ ⚠️ Shëno të paktën një rezultat para se të ruash. ¦ ⚠️ Niżżel mill-inqas riżultat wieħed qabel ma tissejvja.
+✓ Fichier « {name} » enregistré : rapporte-le dans l’app (⤒ Rapporter les résultats). ¦ ✓ Skedari «{name}» u ruajt: sille në aplikacion (⤒ Sill rezultatet). ¦ ✓ Fajl “{name}” issejvjat: ġibu lura fl-app (⤒ Ġib lura r-riżultati).
+Des photos manquaient : elles ne sont pas dans le fichier. ¦ Mungonin disa foto: nuk janë në skedar. ¦ Xi ritratti kienu neqsin: mhumiex fil-fajl.
+⤓ Enregistrer la page ¦ ⤓ Ruaj faqen ¦ ⤓ Issejvja l-paġna
+Ce qui part dans la page ¦ Çfarë shkon në faqe ¦ X’imur fil-paġna
+Les cotes, l’acte cherché, la personne et ses années ¦ Shenjat e arkivit, akti i kërkuar, personi dhe vitet e tij ¦ In-numri tal-arkivju, l-att imfittex, il-persuna u s-snin tagħha
+Ce qu’on sait déjà (parents, conjoint, dates connues) pour reconnaître l’acte sur place ¦ Ajo që dihet tashmë (prindër, bashkëshort, data të njohura) për ta njohur aktin në vend ¦ Dak li diġà jaf (ġenituri, konjuġi, dati magħrufa) biex tagħraf l-att fil-post
+Les personnes vivantes ¦ Personat e gjallë ¦ Il-persuni ħajjin
+décoché : un vivant devient « Personne vivante » ¦ pa shenjë: një i gjallë bëhet «Person i gjallë» ¦ mhux immarkat: persuna ħajja ssir “Persuna ħajja”
+Les fiches confidentielles : jamais ¦ Skedat konfidenciale: kurrë ¦ L-iskedi kunfidenzjali: qatt
+Photo interdite ici ¦ Fotografimi i ndaluar këtu ¦ Ritratti projbiti hawn
+cache le bouton 📷 dans la page ¦ fsheh butonin 📷 në faqe ¦ taħbi l-buttuna 📷 fil-paġna
+Un seul fichier .html : aucune requête, rien à installer. Mets-le sur le téléphone (câble, AirDrop, partage Android, courriel à toi-même) ; il marche en mode avion. ¦ Një skedar i vetëm .html: asnjë kërkesë, asgjë për të instaluar. Vendose në telefon (kabllo, AirDrop, ndarje Android, email vetes); punon në modalitetin e avionit. ¦ Fajl .html wieħed: l-ebda talba, xejn x’tinstalla. Poġġih fuq it-telefon (kejbil, AirDrop, qsim Android, email lilek innifsek); jaħdem f’modalità ajruplan.
+📲 Montrer comment le mettre sur le téléphone ¦ 📲 Trego si vendoset në telefon ¦ 📲 Uri kif jitpoġġa fuq it-telefon
+iPhone : l’aperçu de l’app Fichiers montre la page mais ne la fait pas marcher (pas de cases à cocher). Ouvre-la avec une app qui lit les pages .html, ou passe par la feuille imprimée et les photos (réglage). Android : Chrome ou Firefox l’ouvrent et la font marcher. ¦ iPhone: pamja paraprake e aplikacionit Skedarët e shfaq faqen, por nuk e vë në punë (s’ka kutiza). Hape me një aplikacion që lexon faqe .html, ose përdor fletën e shtypur dhe fotot (cilësim). Android: Chrome ose Firefox e hapin dhe e vënë në punë. ¦ iPhone: il-preview tal-app Files turi l-paġna iżda ma tħaddimhiex (l-ebda kaxxa). Iftaħha b’app li taqra paġni .html, jew uża l-folja stampata u r-ritratti (setting). Android: Chrome jew Firefox jiftħuha u jħaddmuha.
+📄 1 fichier, {n} Ko : mets-le sur ton téléphone. ¦ 📄 1 skedar, {n} KB: vendose në telefonin tënd. ¦ 📄 Fajl 1, {n} KB: poġġih fuq it-telefon tiegħek.
+Résultats de la visite ¦ Rezultatet e vizitës ¦ Riżultati taż-żjara
+Ce fichier vient d’une autre visite : « {t} ». ¦ Ky skedar vjen nga një vizitë tjetër: «{t}». ¦ Dan il-fajl ġej minn żjara oħra: “{t}”.
+cote retirée de la visite depuis ¦ shenja e arkivit u hoq nga vizita që atëherë ¦ numru tal-arkivju mneħħi miż-żjara minn dakinhar
+ajoutée sur place : d’abord ajoutée à la visite ¦ shtuar në vend: fillimisht shtohet në vizitë ¦ miżjud fil-post: l-ewwel jiżdied maż-żjara
+dépouillement déjà relié ¦ përshkrimi tashmë i lidhur ¦ spoll diġà marbut
+＋ dépouillement du Journal ({r}) ¦ ＋ përshkrim nga Ditari ({r}) ¦ ＋ spoll mill-Ġurnal ({r})
+{n} → médias « à trier » ¦ {n} → media «për t’u renditur» ¦ {n} → midja “biex jiġu ssortjati”
+{n} → médias reliés à {who} ¦ {n} → media të lidhura me {who} ¦ {n} → midja marbuta ma’ {who}
+{n} → médias ¦ {n} → media ¦ {n} → midja
+📑 pièce du dossier : reçue ¦ 📑 dokument i dosjes: marrë ¦ 📑 dokument tal-fajl: riċevut
+✓ fichier vérifié ¦ ✓ skedar i verifikuar ¦ ✓ fajl ivverifikat
+Rapporté du téléphone ¦ Sjellë nga telefoni ¦ Miġjub lura mit-telefon
+Ce que l’app fera ¦ Çfarë do të bëjë aplikacioni ¦ X’se tagħmel l-app
+Ranger cette cote ¦ Vendos këtë shenjë arkivi ¦ Poġġi dan in-numru tal-arkivju
+→ Reporter sur la fiche ¦ → Kalo në skedë ¦ → Għaddi fuq l-iskeda
+Aucune date ni aucun lieu n’est écrit sur une fiche : ce qui est trouvé reste un dépouillement avec sa photo ; c’est toi qui le reportes sur la fiche, comme aujourd’hui. ¦ Asnjë datë dhe asnjë vend nuk shkruhet në skedë: ajo që gjendet mbetet përshkrim me foton e saj; ti e kalon në skedë, si sot. ¦ L-ebda data u l-ebda post ma jinkitbu fuq skeda: dak li jinstab jibqa’ spoll bir-ritratt tiegħu; int tgħaddih fuq l-iskeda, bħal-lum.
+{n} rapportées, {m} ¦ të sjella: {n}, {m} ¦ miġjuba lura: {n}, {m}
+Ranger {n} et {m} ¦ Vendos {n} dhe {m} ¦ Poġġi {n} u {m}
+→ Reporter sur la fiche : le dépouillement et ses photos y sont reliés. ¦ → Kalo në skedë: përshkrimi dhe fotot e tij janë lidhur me të. ¦ → Għaddi fuq l-iskeda: l-ispoll u r-ritratti tiegħu huma marbuta magħha.
+✓ Visite rangée : {d}, {m}, {p}. ¦ ✓ Vizita u vendos: {d}, {m}, {p}. ¦ ✓ Żjara mqiegħda: {d}, {m}, {p}.
+{n} pièce(s) reçue(s) ¦ dokumente të marra: {n} ¦ dokumenti riċevuti: {n}
+Visite marquée « faite ». ¦ Vizita u shënua «e bërë». ¦ Żjara mmarkata “magħmula”.
+Cette visite n’a pas encore de cote. ¦ Kjo vizitë nuk ka ende shenjë arkivi. ¦ Din iż-żjara għad m’għandhiex numru tal-arkivju.
+Rangées dans l’ordre des cotes d’après l’heure de prise de vue : corrige la cote d’une photo si besoin. ¦ Renditur sipas rendit të shenjave të arkivit nga ora e fotografimit: korrigjo shenjën e një fotoje nëse duhet. ¦ Irranġati skont l-ordni tan-numri tal-arkivju mill-ħin tar-ritratt: ikkoreġi n-numru ta’ ritratt jekk meħtieġ.
+— ne pas ranger — ¦ — mos e vendos — ¦ — tpoġġihx —
+{n} rangées dans les médias (« à trier »). ¦ {n} të vendosura në media («për t’u renditur»). ¦ {n} imqiegħda fil-midja (“biex jiġu ssortjati”).
+Parents : {names} ¦ Prindërit: {names} ¦ Ġenituri: {names}
+Conjoint : {names} ¦ Bashkëshorti: {names} ¦ Konjuġi: {names}
+Fiche confidentielle ¦ Skedë konfidenciale ¦ Skeda kunfidenzjali
+Ce fichier a déjà été rangé le {date} : rien n’est fait en double. ¦ Ky skedar u vendos tashmë më {date}: asgjë nuk bëhet dy herë. ¦ Dan il-fajl diġà tqiegħed fil-{date}: xejn ma jsir darbtejn.
+à trier ¦ për t’u renditur ¦ biex jiġu ssortjati
+Trouvé à la visite : {where} ¦ Gjetur në vizitë: {where} ¦ Misjub fiż-żjara: {where}
+Comment emporter la visite ¦ Si ta marrësh vizitën ¦ Kif tieħu ż-żjara
+Une page .html à ouvrir sur le téléphone ¦ Një faqe .html për t’u hapur në telefon ¦ Paġna .html biex tiftaħ fuq it-telefon
+La feuille imprimée et les photos du téléphone ¦ Fleta e shtypur dhe fotot e telefonit ¦ Il-folja stampata u r-ritratti tat-telefon
+Sans les vivants ¦ Pa të gjallët ¦ Mingħajr il-ħajjin
+Avec les vivants ¦ Me të gjallët ¦ Mal-ħajjin
+Réduites à 2000 px ¦ Zvogëluar në 2000 px ¦ Imċekkna għal 2000 px
+Une naissance trouvée ¦ Një lindje e gjetur ¦ Twelid misjub
+Reste un dépouillement, tu la reportes ¦ Mbetet përshkrim, ti e kalon ¦ Jibqa’ spoll, int tgħaddih
+Proposer « → Reporter sur la fiche » dans la revue ¦ Ofro «→ Kalo në skedë» gjatë rishikimit ¦ Offri “→ Għaddi fuq l-iskeda” fir-reviżjoni
+Après le rangement ¦ Pas vendosjes ¦ Wara t-tqegħid
+Visite marquée « faite » ¦ Vizita shënohet «e bërë» ¦ Żjara mmarkata “magħmula”
+Aucune photo reçue. ¦ Asnjë foto e marrë. ¦ L-ebda ritratt ma wasal.
+Ce fichier est trop gros pour les résultats d’une visite. ¦ Ky skedar është shumë i madh për rezultatet e një vizite. ¦ Dan il-fajl huwa kbir wisq għar-riżultati ta’ żjara.
+Ce fichier n’est pas les résultats d’une visite (il faut le .zip enregistré sur le téléphone). ¦ Ky skedar nuk është rezultatet e një vizite (duhet .zip-i i ruajtur në telefon). ¦ Dan il-fajl mhuwiex ir-riżultati ta’ żjara (trid il-.zip issejvjat fuq it-telefon).
+Ce fichier n’est pas les résultats d’une visite aux archives. ¦ Ky skedar nuk është rezultatet e një vizite në arkiv. ¦ Dan il-fajl mhuwiex ir-riżultati ta’ żjara fl-arkivji.
+Ce fichier vient d’une visite qui n’est pas dans cette généalogie. ¦ Ky skedar vjen nga një vizitë që nuk është në këtë gjenealogji. ¦ Dan il-fajl ġej minn żjara li mhix f’din il-ġenealoġija.
+Cette visite a déjà été emportée : supprime-la dans le Planificateur si tu n’en veux plus. ¦ Kjo vizitë është marrë tashmë: fshije te Planifikuesi nëse s’e do më. ¦ Din iż-żjara diġà ttieħdet: ħassarha fil-Pjanifikatur jekk ma tridhiex aktar.
+Choisis la cote de chaque photo. ¦ Zgjidh shenjën e arkivit të çdo fotoje. ¦ Agħżel in-numru tal-arkivju ta’ kull ritratt.
+Coche au moins une cote à ranger. ¦ Shëno të paktën një shenjë arkivi për ta vendosur. ¦ Immarka mill-inqas numru tal-arkivju wieħed biex tpoġġi.
+Fichier .zip illisible. ¦ Skedar .zip i palexueshëm. ¦ Fajl .zip li ma jinqarax.
+Fichier refusé : identifiant incorrect. ¦ Skedari u refuzua: identifikues i pasaktë. ¦ Fajl miċħud: identifikatur mhux korrett.
+Fichier refusé : il a été modifié depuis le téléphone (somme de contrôle). ¦ Skedari u refuzua: është ndryshuar pas telefonit (shuma e kontrollit). ¦ Fajl miċħud: ġie mibdul wara t-telefon (checksum).
+Fichier refusé : il contient des données inattendues. ¦ Skedari u refuzua: përmban të dhëna të papritura. ¦ Fajl miċħud: fih data mhux mistennija.
+Fichier refusé : il ne correspond pas à la page emportée (somme de contrôle). ¦ Skedari u refuzua: nuk përputhet me faqen e marrë (shuma e kontrollit). ¦ Fajl miċħud: ma jaqbilx mal-paġna meħuda (checksum).
+Fichier refusé : la liste des cotes manque. ¦ Skedari u refuzua: mungon lista e shenjave të arkivit. ¦ Fajl miċħud: il-lista tan-numri tal-arkivju nieqsa.
+Fichier refusé : la liste des photos est mal formée. ¦ Skedari u refuzua: lista e fotove është e keqformuar. ¦ Fajl miċħud: il-lista tar-ritratti hija ħażina.
+Fichier refusé : results.json est illisible. ¦ Skedari u refuzua: results.json është i palexueshëm. ¦ Fajl miċħud: results.json ma jinqarax.
+Fichier refusé : results.json manque. ¦ Skedari u refuzua: mungon results.json. ¦ Fajl miċħud: results.json nieqes.
+Fichier refusé : trop de fichiers dedans. ¦ Skedari u refuzua: shumë skedarë brenda. ¦ Fajl miċħud: wisq fajls ġewwa.
+Fichier refusé : un chemin sort du dossier. ¦ Skedari u refuzua: një shteg del jashtë dosjes. ¦ Fajl miċħud: mogħdija toħroġ mill-folder.
+Fichier refusé : un résultat est inconnu. ¦ Skedari u refuzua: një rezultat i panjohur. ¦ Fajl miċħud: riżultat mhux magħruf.
+Fichier refusé : un élément est trop gros. ¦ Skedari u refuzua: një element është shumë i madh. ¦ Fajl miċħud: element kbir wisq.
+Fichier refusé : une cote contient des données inattendues. ¦ Skedari u refuzua: një shenjë arkivi përmban të dhëna të papritura. ¦ Fajl miċħud: numru tal-arkivju fih data mhux mistennija.
+Fichier refusé : une cote est mal formée. ¦ Skedari u refuzua: një shenjë arkivi është e keqformuar. ¦ Fajl miċħud: numru tal-arkivju huwa ħażin.
+Fichier refusé : une photo annoncée manque. ¦ Skedari u refuzua: mungon një foto e njoftuar. ¦ Fajl miċħud: ritratt imħabbar huwa nieqes.
+Fichier refusé : une photo n’est pas une image. ¦ Skedari u refuzua: një foto nuk është imazh. ¦ Fajl miċħud: ritratt mhuwiex immaġni.
+Impossible de ranger la photo dans les médias. ¦ Fotoja nuk mund të vendoset në media. ¦ Ir-ritratt ma jistax jitqiegħed fil-midja.
+Lecture des fichiers .zip impossible sur cet ordinateur. ¦ Skedarët .zip nuk mund të lexohen në këtë kompjuter. ¦ Il-fajls .zip ma jistgħux jinqraw fuq dan il-kompjuter.
+Trop de photos d’un coup (200 au plus). ¦ Shumë foto njëherësh (jo më shumë se 200). ¦ Wisq ritratti f’daqqa (200 l-aktar).
+Une photo est trop grosse ou n’a pas été reçue. ¦ Një foto është shumë e madhe ose nuk u mor. ¦ Ritratt huwa kbir wisq jew ma wasalx.

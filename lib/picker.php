@@ -137,6 +137,7 @@ function picker_search(PDO $pdo, array $get): array
     $opts['art_person'] = max(0, (int) ($get['art_person'] ?? 0));
     // 📈 graphiques : sortes de définitions (« chart,appstat » = ceux qui se posent comme un diagramme ; vide = tous les graphiques)
     $opts['graph_kinds'] = (string) preg_replace('/[^a-z,]/', '', strtolower(scalar_text($get['graph_kinds'] ?? '', 'graph_kinds')));
+    $opts['as_kind'] = (string) preg_replace('/[^a-z]/', '', strtolower(scalar_text($get['as_kind'] ?? '', 'as_kind'))); // 🏛 services d'archives d'une sorte (« notary » : les études de notaire)
     // near=lat,lon : les lieux les plus proches d'un point cliqué sur la carte
     if (in_array('place', $kinds, true) && preg_match('/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/', (string) ($get['near'] ?? ''), $m)) {
         return ['groups' => picker_places_near($pdo, (float) $m[1], (float) $m[2], min($limit, 30)), 'more' => false, 'next_offset' => 0];
@@ -188,6 +189,7 @@ function picker_kind(PDO $pdo, string $kind, string $q, int $offset, int $limit,
     $empty = ['groups' => [['kind' => $kind, 'key' => $kind, 'label' => PICKER_LABELS[$kind] ?? $kind, 'total' => 0, 'items' => []]], 'more' => false];
     try {
         if ($kind === 'place') { return picker_places($pdo, $q, $offset, $limit, $opts); }
+        if ($kind === 'archive_service' && ($opts['as_kind'] ?? '') === 'notary' && function_exists('etudes_picker')) { return etudes_picker($pdo, $q, $offset, $limit); } // 🏛 lib/etudes_notaire.php
         $r = match ($kind) {
             'person' => picker_persons($pdo, $q, $offset, $limit, $opts),
             'source' => picker_sources($pdo, $q, $offset, $limit),

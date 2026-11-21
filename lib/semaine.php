@@ -416,6 +416,7 @@ function semaine_mark(PDO $pdo, array $data): array
                 $s = $pdo->prepare('SELECT statut, relance_date FROM courriers WHERE id=?'); $s->execute([$id]); $r = $s->fetch();
                 if (!$r) { throw new RuntimeException('Courrier introuvable.'); }
                 $pdo->prepare("UPDATE courriers SET statut='reponse_recue', relance_date='', updated_at=CURRENT_TIMESTAMP WHERE id=?")->execute([$id]);
+                if (function_exists('compl_courrier_received')) { compl_courrier_received($pdo, $id); $prev['recu_le_set'] = 1; } // 📮 la date de réponse, pour le ⏳ délai constaté (lib/complements.php)
                 if (function_exists('log_change')) { log_change($pdo, 'courrier', $id, 'update', 'Courrier : réponse reçue', $r, ['statut' => 'reponse_recue']); }
                 $prev += ['statut' => (string) $r['statut'], 'relance_date' => (string) $r['relance_date']]; $label = 'Réponse reçue';
                 break;
@@ -495,6 +496,7 @@ function semaine_restore_real(PDO $pdo, string $sort, int $id, string $sub, arra
             $st = (string) ($p['statut'] ?? '');
             if ($st !== '' && function_exists('courrier_statuts') && array_key_exists($st, courrier_statuts())) { $pdo->prepare('UPDATE courriers SET statut=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$st, $id]); }
             if (array_key_exists('relance_date', $p) && ($d = $date($p['relance_date'])) !== null) { $pdo->prepare('UPDATE courriers SET relance_date=? WHERE id=?')->execute([$d, $id]); }
+            if (!empty($p['recu_le_set']) && function_exists('compl_has') && compl_has($pdo, 'courriers', 'recu_le')) { $pdo->prepare("UPDATE courriers SET recu_le='' WHERE id=?")->execute([$id]); } // ↶ : la date notée par « ✓ Réponse reçue » repart
             break;
         case 'visite':
             if (array_key_exists('done_at', $p) && ($d = $date($p['done_at'])) !== null) { save_archive_visit_done($pdo, ['visit_id' => $id, 'done_at' => substr($d, 0, 10)]); }

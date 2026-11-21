@@ -1,0 +1,166 @@
+fr ¦ cs ¦ sv ¦ da
+# 🏛⚠️📋📱 Compléments aux outils existants (docs/design/complements-existants.html) : A études de notaire, B homonymes
+Le serveur ne répond pas. ¦ Server neodpovídá. ¦ Servern svarar inte. ¦ Serveren svarer ikke.
+⚙️ Réglages de cet outil ¦ ⚙️ Nastavení tohoto nástroje ¦ ⚙️ Inställningar för det här verktyget ¦ ⚙️ Indstillinger for dette værktøj
+Enlève un filtre, ou cherche autrement. ¦ Odeber filtr nebo hledej jinak. ¦ Ta bort ett filter eller sök på annat sätt. ¦ Fjern et filter, eller søg på en anden måde.
+Listes · Archives et sources ¦ Seznamy · Archivy a prameny ¦ Listor · Arkiv och källor ¦ Lister · Arkiver og kilder
+=étude ¦ kancelář|kanceláře|kanceláří ¦ byrå|byråer ¦ kontor|kontorer
+{n} j ¦ {n} d. ¦ {n} d ¦ {n} d
+sur {n} réponses ¦ z {n} odpovědí ¦ av {n} svar ¦ ud af {n} svar
+pas assez de réponses ¦ málo odpovědí ¦ för få svar ¦ for få svar
+{n} sur {m} nécessaires ¦ {n} z {m} potřebných ¦ {n} av {m} som behövs ¦ {n} af {m} nødvendige
+clerc : {name} ¦ koncipient: {name} ¦ notariebiträde: {name} ¦ notarfuldmægtig: {name}
+Études de notaire ¦ Notářské kanceláře ¦ Notariebyråer ¦ Notarkontorer
+🏛 Études de notaire ¦ 🏛 Notářské kanceláře ¦ 🏛 Notariebyråer ¦ 🏛 Notarkontorer
+Étude de notaire ¦ Notářská kancelář ¦ Notariebyrå ¦ Notarkontor
+Une étude est un service d’archives de la sorte « Étude de notaire » : ses notaires et clercs, ses dossiers, ses courriers. ¦ Kancelář je archiv druhu „Notářská kancelář“: její notáři a koncipienti, její spisy, její dopisy. ¦ En byrå är ett arkiv av sorten ”Notariebyrå”: dess notarier och biträden, dess ärenden, dess brev. ¦ Et kontor er et arkiv af typen »Notarkontor«: dets notarer og fuldmægtige, dets sager, dets breve.
+＋ Nouvelle étude ¦ ＋ Nová kancelář ¦ ＋ Ny byrå ¦ ＋ Nyt kontor
+🧩 Regrouper et créer leurs fiches… ¦ 🧩 Seskupit a vytvořit jejich karty… ¦ 🧩 Gruppera och skapa deras poster… ¦ 🧩 Gruppér og opret deres poster…
+Chercher une étude, un notaire, une ville… ¦ Hledej kancelář, notáře, město… ¦ Sök en byrå, en notarie, en ort… ¦ Søg et kontor, en notar, en by…
+Département : {d} ¦ Departement: {d} ¦ Departement: {d} ¦ Departement: {d}
+Répond le plus vite ¦ Odpovídá nejrychleji ¦ Svarar snabbast ¦ Svarer hurtigst
+Le plus de dossiers ¦ Nejvíc spisů ¦ Flest ärenden ¦ Flest sager
+Aucune étude de notaire pour l’instant ¦ Zatím žádná notářská kancelář ¦ Ingen notariebyrå ännu ¦ Intet notarkontor endnu
+Une étude est un service d’archives de la sorte « Étude de notaire » : crée-la ici, ou regroupe les notaires tapés à la main dans tes dossiers. ¦ Kancelář je archiv druhu „Notářská kancelář“: vytvoř ji tady, nebo seskup notáře napsané ručně ve tvých spisech. ¦ En byrå är ett arkiv av sorten ”Notariebyrå”: skapa den här, eller gruppera notarierna du skrivit för hand i dina ärenden. ¦ Et kontor er et arkiv af typen »Notarkontor«: opret det her, eller gruppér de notarer, du har skrevet i hånden i dine sager.
+Aucun notaire noté ¦ Žádný notář nezapsán ¦ Ingen notarie antecknad ¦ Ingen notar noteret
+{a} en cours · {b} clos ¦ {a} rozpracované · {b} uzavřené ¦ {a} pågående · {b} avslutade ¦ {a} i gang · {b} lukkede
+{n} en attente ¦ {n} čeká ¦ {n} väntar ¦ {n} venter
+Appeler ¦ Zavolat ¦ Ring ¦ Ring op
+fiche de personne n° {n} ¦ karta osoby č. {n} ¦ personpost nr {n} ¦ personpost nr. {n}
+nom seulement ¦ jen jméno ¦ bara namnet ¦ kun navnet
+ligne directe {tel} ¦ přímá linka {tel} ¦ direktnummer {tel} ¦ direkte nummer {tel}
+ancien depuis le {d} ¦ bývalý od {d} ¦ tidigare sedan {d} ¦ tidligere siden {d}
+Aucun notaire ni clerc noté. ¦ Žádný notář ani koncipient nezapsán. ¦ Ingen notarie eller biträde antecknad. ¦ Ingen notar eller fuldmægtig noteret.
+Notaires et clercs ¦ Notáři a koncipienti ¦ Notarier och biträden ¦ Notarer og fuldmægtige
+lus dans les dossiers, rien n’est recopié ¦ čteno ze spisů, nic se nekopíruje ¦ lästa i ärendena, inget kopieras ¦ læst i sagerne, intet kopieres
+réf. du notaire {ref} ¦ č. j. notáře {ref} ¦ notariens ref. {ref} ¦ notarens ref. {ref}
+Aucun dossier relié à cette étude. ¦ Žádný spis není propojen s touto kanceláří. ¦ Inget ärende kopplat till den här byrån. ¦ Ingen sag knyttet til dette kontor.
+reçue le {d} ¦ přijata {d} ¦ mottaget {d} ¦ modtaget {d}
+{n} j · d’habitude {m} j ¦ {n} d. · obvykle {m} d. ¦ {n} d · vanligen {m} d ¦ {n} d · normalt {m} d
+en attente · {n} j ¦ čeká · {n} d. ¦ väntar · {n} d ¦ venter · {n} d
+✓ Réponse reçue ¦ ✓ Odpověď přijata ¦ ✓ Svar mottaget ¦ ✓ Svar modtaget
+⏳ Délai de réponse constaté : {days} j en moyenne (de {min} à {max} j). Réponses comptées : {n}, celles de ce registre dont la date est notée. C’est ce que tu as observé, rien d’autre : ce n’est ni un délai légal, ni une promesse de l’étude. ¦ ⏳ Zjištěná doba odpovědi: průměrně {days} d. (od {min} do {max} d.). Započtené odpovědi: {n}, ty z této evidence se zapsaným datem. Je to jen to, co jsi pozoroval: není to zákonná lhůta ani slib kanceláře. ¦ ⏳ Iakttagen svarstid: i snitt {days} d (från {min} till {max} d). Räknade svar: {n}, de i det här registret med antecknat datum. Det är vad du har sett, inget annat: varken en laglig frist eller ett löfte från byrån. ¦ ⏳ Iagttaget svartid: i gennemsnit {days} d (fra {min} til {max} d). Talte svar: {n}, dem i dette register med noteret dato. Det er det, du har set, intet andet: hverken en lovbestemt frist eller et løfte fra kontoret.
+⏳ Délai de réponse constaté : {days} j en médiane (de {min} à {max} j). Réponses comptées : {n}, celles de ce registre dont la date est notée. C’est ce que tu as observé, rien d’autre : ce n’est ni un délai légal, ni une promesse de l’étude. ¦ ⏳ Zjištěná doba odpovědi: medián {days} d. (od {min} do {max} d.). Započtené odpovědi: {n}, ty z této evidence se zapsaným datem. Je to jen to, co jsi pozoroval: není to zákonná lhůta ani slib kanceláře. ¦ ⏳ Iakttagen svarstid: median {days} d (från {min} till {max} d). Räknade svar: {n}, de i det här registret med antecknat datum. Det är vad du har sett, inget annat: varken en laglig frist eller ett löfte från byrån. ¦ ⏳ Iagttaget svartid: median {days} d (fra {min} til {max} d). Talte svar: {n}, dem i dette register med noteret dato. Det er det, du har set, intet andet: hverken en lovbestemt frist eller et løfte fra kontoret.
+⏳ Pas assez de réponses datées pour un délai constaté ({n} sur {m} nécessaires). ¦ ⏳ Málo datovaných odpovědí pro zjištěnou dobu odpovědi ({n} z {m} potřebných). ¦ ⏳ För få daterade svar för en iakttagen svarstid ({n} av {m} som behövs). ¦ ⏳ For få daterede svar til en iagttaget svartid ({n} af {m} nødvendige).
+Ses courriers ¦ Její dopisy ¦ Dess brev ¦ Dets breve
+＋ Courrier à l’étude ¦ ＋ Dopis kanceláři ¦ ＋ Brev till byrån ¦ ＋ Brev til kontoret
+＋ {n} courriers plus anciens · tout voir dans le Registre ¦ ＋ {n} starších dopisů · vše v Evidenci ¦ ＋ {n} äldre brev · se allt i Registret ¦ ＋ {n} ældre breve · se alt i Registret
+Aucun courrier relié à cette étude. ¦ Žádný dopis není propojen s touto kanceláří. ¦ Inget brev kopplat till den här byrån. ¦ Intet brev knyttet til dette kontor.
+« {name} » retiré de l’étude ¦ „{name}“ odebrán z kanceláře ¦ ”{name}” borttagen från byrån ¦ »{name}« fjernet fra kontoret
+Réponse reçue le {d} ¦ Odpověď přijata {d} ¦ Svar mottaget {d} ¦ Svar modtaget {d}
+Courrier remis en attente ¦ Dopis opět čeká ¦ Brevet väntar igen ¦ Brevet venter igen
+Vide : le courrier repasse « en attente ». ¦ Prázdné: dopis znovu „čeká“. ¦ Tomt: brevet blir ”väntar” igen. ¦ Tomt: brevet bliver »venter« igen.
+Ajouter un notaire ou un clerc ¦ Přidat notáře nebo koncipienta ¦ Lägg till en notarie eller ett biträde ¦ Tilføj en notar eller en fuldmægtig
+Fiche de personne (facultatif) ¦ Karta osoby (nepovinné) ¦ Personpost (valfritt) ¦ Personpost (valgfrit)
+Jusqu’à (ancien) ¦ Do (bývalý) ¦ Till (tidigare) ¦ Til (tidligere)
+Un notaire qui change d’étude reste nommé dans ses anciens dossiers : mets une date de fin, il passe « ancien ». ¦ Notář, který změní kancelář, zůstává uveden ve svých starých spisech: zadej datum konce, stane se „bývalým“. ¦ En notarie som byter byrå står kvar i sina gamla ärenden: ange ett slutdatum, så blir hen ”tidigare”. ¦ En notar, der skifter kontor, står fortsat i sine gamle sager: angiv en slutdato, så bliver vedkommende »tidligere«.
+Donne le nom du notaire ou du clerc. ¦ Zadej jméno notáře nebo koncipienta. ¦ Ange namnet på notarien eller biträdet. ¦ Angiv navnet på notaren eller fuldmægtigen.
+Courrier à l’étude ¦ Dopis kanceláři ¦ Brev till byrån ¦ Brev til kontoret
+état des recherches ¦ stav pátrání ¦ läget i sökandet ¦ status for søgningen
+Courrier rangé au Registre ¦ Dopis uložen do Evidence ¦ Brevet sparat i Registret ¦ Brevet gemt i Registret
+Une étude, ou un nom gardé en texte… ¦ Kancelář, nebo jméno ponechané jako text… ¦ En byrå, eller ett namn sparat som text… ¦ Et kontor, eller et navn gemt som tekst…
+Choisis l’étude ; le nom tapé dans le champ du notaire reste dans le dossier. ¦ Vyber kancelář; jméno napsané v poli notáře zůstává ve spisu. ¦ Välj byrån; namnet i notariefältet stannar i ärendet. ¦ Vælg kontoret; navnet i notarfeltet bliver i sagen.
+nom gardé en texte, sans fiche d’étude ¦ jméno ponechané jako text, bez karty kanceláře ¦ namn sparat som text, utan byråpost ¦ navn gemt som tekst, uden kontorpost
+texte ¦ text ¦ text ¦ tekst
+Notaire chargé du dossier ¦ Notář pověřený spisem ¦ Ansvarig notarie för ärendet ¦ Notar med ansvar for sagen
+ancien ¦ bývalý ¦ tidigare ¦ tidligere
+Choisi parmi les notaires de l’étude, ou laissé vide. ¦ Vybraný z notářů kanceláře, nebo prázdný. ¦ Vald bland byråns notarier, eller tom. ¦ Valgt blandt kontorets notarer, eller tomt.
+✓ Notaire du dossier : {who}. Ligne au 🕓 Journal du dossier. ¦ ✓ Notář spisu: {who}. Řádek v 🕓 Deníku spisu. ¦ ✓ Ärendets notarie: {who}. Rad i ärendets 🕓 Logg. ¦ ✓ Sagens notar: {who}. Linje i sagens 🕓 Log.
+même nom « {n} » ¦ stejné jméno „{n}“ ¦ samma namn ”{n}” ¦ samme navn »{n}«
+même ville ¦ stejné město ¦ samma ort ¦ samme by
+même ville que le défunt ¦ stejné město jako zesnulý ¦ samma ort som den avlidne ¦ samme by som afdøde
+initiale {i} ¦ iniciála {i} ¦ initial {i} ¦ initial {i}
+une seule étude de ce nom ¦ jediná kancelář tohoto jména ¦ bara en byrå med det namnet ¦ kun ét kontor med det navn
+Autre étude ¦ Jiná kancelář ¦ Annan byrå ¦ Andet kontor
+Laisser en texte ¦ Nechat jako text ¦ Lämna som text ¦ Lad stå som tekst
+{n} noms tapés à la main · rien n’est changé avant « Appliquer ». ¦ {n} jmen napsaných ručně · nic se nezmění před „Použít“. ¦ {n} namn skrivna för hand · inget ändras före ”Tillämpa”. ¦ {n} navne skrevet i hånden · intet ændres før »Anvend«.
+existe ¦ existuje ¦ finns ¦ findes
+plusieurs études possibles ¦ víc možných kanceláří ¦ flera möjliga byråer ¦ flere mulige kontorer
+Sans proposition ¦ Bez návrhu ¦ Utan förslag ¦ Uden forslag
+＋ Créer une étude ¦ ＋ Vytvořit kancelář ¦ ＋ Skapa en byrå ¦ ＋ Opret et kontor
+Courriers qui ressemblent à une étude ¦ Dopisy, které vypadají jako kancelář ¦ Brev som liknar en byrå ¦ Breve, der ligner et kontor
+pour le délai constaté ¦ pro zjištěnou dobu odpovědi ¦ för den iakttagna svarstiden ¦ til den iagttagne svartid
+Les rapprochements ne regardent que le nom de famille (sans « Me », « Maître », « SCP », « Étude », accents) et la ville quand elle est écrite. Deux études du même nom dans deux villes ne sont jamais réunies. Le nom tapé reste dans chaque dossier. ¦ Porovnání bere v úvahu jen příjmení (bez „Me“, „Maître“, „SCP“, „Étude“, diakritiky) a město, je-li uvedeno. Dvě kanceláře stejného jména ve dvou městech se nikdy nespojí. Napsané jméno zůstává v každém spisu. ¦ Jämförelsen ser bara på efternamnet (utan ”Me”, ”Maître”, ”SCP”, ”Étude”, accenter) och orten när den står med. Två byråer med samma namn på två orter slås aldrig ihop. Det skrivna namnet stannar i varje ärende. ¦ Sammenligningen ser kun på efternavnet (uden »Me«, »Maître«, »SCP«, »Étude«, accenter) og byen, når den står der. To kontorer med samme navn i to byer slås aldrig sammen. Det skrevne navn bliver i hver sag.
+Notaires tapés à la main ¦ Notáři napsaní ručně ¦ Notarier skrivna för hand ¦ Notarer skrevet i hånden
+Aucun notaire tapé à la main sans fiche. ¦ Žádný ručně napsaný notář bez karty. ¦ Ingen notarie skriven för hand utan post. ¦ Ingen notar skrevet i hånden uden post.
+Appliquer à {n} noms ({m} dossiers) ¦ Použít na {n} jmen ({m} spisů) ¦ Tillämpa på {n} namn ({m} ärenden) ¦ Anvend på {n} navne ({m} sager)
+✓ {n} dossiers reliés à leur étude. Le nom tapé est gardé dans chaque dossier. ¦ ✓ {n} spisů propojeno s jejich kanceláří. Napsané jméno zůstává v každém spisu. ¦ ✓ {n} ärenden kopplade till sin byrå. Det skrivna namnet sparas i varje ärende. ¦ ✓ {n} sager knyttet til deres kontor. Det skrevne navn bevares i hver sag.
+{n} notaires tapés à la main dans tes dossiers n’ont pas encore de fiche. ¦ {n} notářů napsaných ručně ve tvých spisech ještě nemá kartu. ¦ {n} notarier skrivna för hand i dina ärenden har ännu ingen post. ¦ {n} notarer skrevet i hånden i dine sager har endnu ingen post.
+{n} notaire tapé à la main dans tes dossiers n’a pas encore de fiche. ¦ {n} notář napsaný ručně ve tvých spisech ještě nemá kartu. ¦ {n} notarie skriven för hand i dina ärenden har ännu ingen post. ¦ {n} notar skrevet i hånden i dine sager har endnu ingen post.
+{cases} · pas encore de fiche ¦ {cases} · zatím bez karty ¦ {cases} · ingen post ännu ¦ {cases} · endnu ingen post
+Déjà tapé dans d’autres dossiers ¦ Už napsáno v jiných spisech ¦ Redan skrivet i andra ärenden ¦ Allerede skrevet i andre sager
+{n} dossiers en cours ¦ {n} rozpracovaných spisů ¦ {n} pågående ärenden ¦ {n} igangværende sager
+{n} dossier en cours ¦ {n} rozpracovaný spis ¦ {n} pågående ärende ¦ {n} igangværende sag
+Étude de notaire introuvable. ¦ Notářská kancelář nenalezena. ¦ Notariebyrån hittades inte. ¦ Notarkontoret blev ikke fundet.
+Ce notaire n’est pas de cette étude. ¦ Tento notář není z této kanceláře. ¦ Den här notarien hör inte till den här byrån. ¦ Denne notar hører ikke til dette kontor.
+Ce dossier n’est pas relié à cette étude. ¦ Tento spis není propojen s touto kanceláří. ¦ Det här ärendet är inte kopplat till den här byrån. ¦ Denne sag er ikke knyttet til dette kontor.
+Date de réponse incorrecte. ¦ Nesprávné datum odpovědi. ¦ Felaktigt svarsdatum. ¦ Forkert svardato.
+Où ranger les études ¦ Kam ukládat kanceláře ¦ Var byråerna ska ligga ¦ Hvor kontorerne skal ligge
+Dans 🏛 Services d’archives, sorte « Étude de notaire » ¦ V 🏛 Archivech, druh „Notářská kancelář“ ¦ I 🏛 Arkiv, sorten ”Notariebyrå” ¦ I 🏛 Arkiver, typen »Notarkontor«
+Une liste « Études de notaire » à part ¦ Samostatný seznam „Notářské kanceláře“ ¦ En egen lista ”Notariebyråer” ¦ En særskilt liste »Notarkontorer«
+Délai constaté ¦ Zjištěná doba odpovědi ¦ Iakttagen svarstid ¦ Iagttaget svartid
+Moyenne, avec le plus court et le plus long ¦ Průměr, s nejkratší a nejdelší ¦ Medelvärde, med den kortaste och den längsta ¦ Gennemsnit, med den korteste og den længste
+Médiane (moins sensible à une réponse très lente) ¦ Medián (méně citlivý na velmi pozdní odpověď) ¦ Median (mindre känslig för ett mycket sent svar) ¦ Median (mindre følsom for et meget sent svar)
+Ne pas l’afficher ¦ Nezobrazovat ¦ Visa inte ¦ Vis den ikke
+Nombre de réponses avant d’afficher un délai ¦ Počet odpovědí, než se doba zobrazí ¦ Antal svar innan en svarstid visas ¦ Antal svar, før en svartid vises
+Les courriers comptés ¦ Započtené dopisy ¦ De räknade breven ¦ De talte breve
+Ceux des 3 dernières années ¦ Ty z posledních 3 let ¦ De senaste 3 årens ¦ Dem fra de seneste 3 år
+Ce que propose le menu de choix ¦ Co nabízí výběrová nabídka ¦ Vad valmenyn föreslår ¦ Hvad valgmenuen foreslår
+Les études, puis les noms déjà tapés ¦ Kanceláře, pak už napsaná jména ¦ Byråerna, sedan de redan skrivna namnen ¦ Kontorerne, derefter de allerede skrevne navne
+Les études seulement ¦ Jen kanceláře ¦ Bara byråerna ¦ Kun kontorerne
+Le notaire chargé du dossier ¦ Notář pověřený spisem ¦ Den ansvariga notarien för ärendet ¦ Notaren med ansvar for sagen
+Un notaire de l’étude, facultatif ¦ Notář kanceláře, nepovinně ¦ En notarie från byrån, valfritt ¦ En notar fra kontoret, valgfrit
+Seulement l’étude ¦ Jen kancelář ¦ Bara byrån ¦ Kun kontoret
+Les propositions de regroupement ¦ Návrhy seskupení ¦ Grupperingsförslagen ¦ Forslagene til gruppering
+Cochées quand le nom et la ville concordent ¦ Zaškrtnuté, když se jméno a město shodují ¦ Ikryssade när namn och ort stämmer ¦ Afkrydsede, når navn og by stemmer
+Toutes décochées ¦ Všechny nezaškrtnuté ¦ Alla urkryssade ¦ Alle uden kryds
+Le bandeau « notaires sans fiche » ¦ Pruh „notáři bez karty“ ¦ Raden ”notarier utan post” ¦ Linjen »notarer uden post«
+Montré dans la liste des études ¦ Zobrazený v seznamu kanceláří ¦ Visas i listan över byråer ¦ Vist i listen over kontorer
+Jamais (on passe par ⋯) ¦ Nikdy (přes ⋯) ¦ Aldrig (via ⋯) ¦ Aldrig (via ⋯)
+⚠️ Homonymes ¦ ⚠️ Shody jmen ¦ ⚠️ Namnar ¦ ⚠️ Navnebrødre
+fiche n° {n} (confidentielle) ¦ karta č. {n} (důvěrná) ¦ post nr {n} (konfidentiell) ¦ post nr. {n} (fortrolig)
+naissance : date inconnue ¦ narození: datum neznámé ¦ födelse: okänt datum ¦ fødsel: ukendt dato
+même année de naissance ¦ stejný rok narození ¦ samma födelseår ¦ samme fødselsår
+naissance à {n} an(s) près ¦ narození s rozdílem {n} let ¦ födelse inom {n} år ¦ fødsel inden for {n} år
+même commune ¦ stejná obec ¦ samma kommun ¦ samme kommune
+Nom, prénom ¦ Příjmení, jméno ¦ Efternamn, förnamn ¦ Efternavn, fornavn
+inconnus ¦ neznámí ¦ okända ¦ ukendte
+arbre seulement · ajouté le {d} ¦ jen strom · přidáno {d} ¦ bara trädet · tillagd {d} ¦ kun træet · tilføjet {d}
+arbre seulement ¦ jen strom ¦ bara trädet ¦ kun træet
+Critère ¦ Kritérium ¦ Kriterium ¦ Kriterium
+Celui du dossier ¦ Ten ze spisu ¦ Den i ärendet ¦ Den i sagen
+L’autre fiche ¦ Druhá karta ¦ Den andra posten ¦ Den anden post
+↗ Ouvrir la fiche n° {n} ¦ ↗ Otevřít kartu č. {n} ¦ ↗ Öppna post nr {n} ¦ ↗ Åbn post nr. {n}
+👥 Peut-être les mêmes : ouvrir la fusion ¦ 👥 Možná tatáž osoba: otevřít slučování ¦ 👥 Kanske samma: öppna sammanslagningen ¦ 👥 Måske de samme: åbn sammenlægningen
+Une autre fiche porte le même nom ¦ Jiná karta nese stejné jméno ¦ En annan post har samma namn ¦ En anden post har samme navn
+pas dans ce dossier. ¦ není v tomto spisu. ¦ inte i det här ärendet. ¦ ikke i denne sag.
+Celui à qui tu écris : {who}. ¦ Ten, komu píšeš: {who}. ¦ Den du skriver till: {who}. ¦ Den, du skriver til: {who}.
+enfant de {p} ¦ dítě: {p} ¦ barn till {p} ¦ barn af {p}
+{n} héritiers sur {m} ont un homonyme dans la base ¦ {n} dědiců z {m} má v databázi osobu se stejným jménem ¦ {n} av {m} arvingar har en namne i databasen ¦ {n} af {m} arvinger har en navnebror i databasen
+Voir les détails ¦ Zobrazit podrobnosti ¦ Se detaljerna ¦ Se detaljerne
+Envoyer quand même aux {n} ¦ Přesto poslat všem {n} ¦ Skicka ändå till alla {n} ¦ Send alligevel til alle {n}
+✓ Retenu : {a} ({y1}) et {b} ({y2}) sont deux personnes. L’alerte ne reviendra plus pour eux deux. ¦ ✓ Zapamatováno: {a} ({y1}) a {b} ({y2}) jsou dvě osoby. Upozornění se pro ně už nevrátí. ¦ ✓ Noterat: {a} ({y1}) och {b} ({y2}) är två personer. Varningen kommer inte tillbaka för de två. ¦ ✓ Noteret: {a} ({y1}) og {b} ({y2}) er to personer. Advarslen kommer ikke igen for de to.
+née à {place} en {y} ¦ narozená v {place} v roce {y} ¦ född i {place} år {y} ¦ født i {place} i {y}
+né à {place} en {y} ¦ narozený v {place} v roce {y} ¦ född i {place} år {y} ¦ født i {place} i {y}
+née à {place}, date inconnue ¦ narozená v {place}, datum neznámé ¦ född i {place}, okänt datum ¦ født i {place}, ukendt dato
+né à {place}, date inconnue ¦ narozený v {place}, datum neznámé ¦ född i {place}, okänt datum ¦ født i {place}, ukendt dato
+✓ C’est lui ¦ ✓ To je ona osoba ¦ ✓ Det är personen ¦ ✓ Det er personen
+✓ C’est bien lui que je contacte ¦ ✓ Píšu opravdu této osobě ¦ ✓ Det är verkligen den jag kontaktar ¦ ✓ Det er virkelig den, jeg kontakter
+👁 Voir ¦ 👁 Zobrazit ¦ 👁 Visa ¦ 👁 Se
+👁 Voir l’autre ¦ 👁 Zobrazit druhou ¦ 👁 Visa den andra ¦ 👁 Se den anden
+Ce n’est pas la même personne ¦ Není to tatáž osoba ¦ Det är inte samma person ¦ Det er ikke den samme person
+Noté au 🕓 Journal : homonyme vu, destinataire confirmé. L’alerte reviendra au prochain contact. ¦ Zapsáno v 🕓 Deníku: shoda jmen viděna, adresát potvrzen. Upozornění se vrátí při dalším kontaktu. ¦ Antecknat i 🕓 Loggen: namne sedd, mottagare bekräftad. Varningen kommer tillbaka vid nästa kontakt. ¦ Noteret i 🕓 Loggen: navnebror set, modtager bekræftet. Advarslen kommer igen ved næste kontakt.
+Noté au 🕓 Journal : homonyme vu, destinataire confirmé. L’alerte ne reviendra plus dans ce dossier. ¦ Zapsáno v 🕓 Deníku: shoda jmen viděna, adresát potvrzen. Upozornění se v tomto spisu už nevrátí. ¦ Antecknat i 🕓 Loggen: namne sedd, mottagare bekräftad. Varningen kommer inte tillbaka i det här ärendet. ¦ Noteret i 🕓 Loggen: navnebror set, modtager bekræftet. Advarslen kommer ikke igen i denne sag.
+Écart d’années de naissance ¦ Rozdíl let narození ¦ Skillnad i födelseår ¦ Forskel i fødselsår
+2 ans ¦ 2 roky ¦ 2 år ¦ 2 år
+Même département, ou lieu inconnu ¦ Stejný departement, nebo neznámé místo ¦ Samma departement, eller okänd ort ¦ Samme departement, eller ukendt sted
+Même commune seulement ¦ Jen stejná obec ¦ Bara samma kommun ¦ Kun samme kommune
+Peu importe le lieu ¦ Na místě nezáleží ¦ Orten spelar ingen roll ¦ Stedet er ligegyldigt
+Quand l’afficher ¦ Kdy zobrazovat ¦ När den ska visas ¦ Hvornår den vises
+À chaque courrier, appel et questionnaire ¦ U každého dopisu, hovoru a dotazníku ¦ Vid varje brev, samtal och frågeformulär ¦ Ved hvert brev, opkald og spørgeskema
+Au premier contact d’un héritier seulement ¦ Jen při prvním kontaktu s dědicem ¦ Bara vid första kontakten med en arvinge ¦ Kun ved første kontakt med en arving
+Après « ✓ C’est bien lui » ¦ Po „✓ Píšu opravdu této osobě“ ¦ Efter ”✓ Det är verkligen den jag kontaktar” ¦ Efter »✓ Det er virkelig den, jeg kontakter«
+L’alerte revient au prochain contact ¦ Upozornění se vrátí při dalším kontaktu ¦ Varningen kommer tillbaka vid nästa kontakt ¦ Advarslen kommer igen ved næste kontakt
+Elle ne revient plus dans ce dossier ¦ V tomto spisu se už nevrátí ¦ Den kommer inte tillbaka i det här ärendet ¦ Den kommer ikke igen i denne sag
+Où chercher l’homonyme ¦ Kde hledat shodu jmen ¦ Var namnen ska sökas ¦ Hvor navnebroren søges
+Seulement les autres dossiers ¦ Jen ostatní spisy ¦ Bara de andra ärendena ¦ Kun de andre sager

@@ -105,17 +105,19 @@
 
     async function renderList(token) {
         if (Number(S().archiveServiceId)) return renderSheet(token, Number(S().archiveServiceId));
+        if (S().complEtudes && ext.complEtudes?.renderList) return ext.complEtudes.renderList(token); // 🏛 la liste des études de notaire (heritage-complements.js)
         const ws = A().$('#workspace'); if (!ws || !isCurrent(token)) return;
         ws.innerHTML = `<section class="page h-asv">${UI().pageHeader({title: 'Services d’archives',
             help: 'Tes services d’archives, avec leur adresse, leurs horaires, leur site, leurs séries, et tout ce que tu y as déjà consulté.',
             primary: '<button type="button" class="button" data-as-new>＋ Nouveau service</button>',
-            actions: ['<button type="button" class="button secondary" data-as-journal>🗓 Journal des recherches</button>', '<button type="button" class="button secondary" data-as-visits>🗄️ Visites d’archives</button>']})}
+            actions: [ext.complEtudes?.listButton?.() || '', '<button type="button" class="button secondary" data-as-journal>🗓 Journal des recherches</button>', '<button type="button" class="button secondary" data-as-visits>🗄️ Visites d’archives</button>']})}
             <div data-as-unmatched></div><div data-as-bar></div><div data-as-list>${UI().spinner('Chargement des services…')}</div></section>`;
         let data;
         try { data = await A().api('archive_services'); } catch (e) { if (isCurrent(token)) ws.querySelector('[data-as-list]').innerHTML = UI().notice('error', e.message || 'Chargement impossible.'); return; }
         if (!isCurrent(token)) return;
         KINDS = data.kinds || KINDS; DEPTS = data.departments || DEPTS;
-        const all = data.services || [];
+        const sepEtudes = ext.compl?.cfg?.().etude_where === 'separate'; // 🏛 réglage : les études dans une liste à part
+        const all = (data.services || []).filter(s => !(sepEtudes && s.kind === 'notary'));
         const um = data.unmatched || [];
         if (um.length) ws.querySelector('[data-as-unmatched]').innerHTML = `<div class="ui-notice ui-notice-info h-asv-unmatched" role="status"><span class="ui-notice-ico" aria-hidden="true">ℹ️</span><span><b>${i18n(um.length > 1 ? 'Ces services sont écrits dans tes recherches sans avoir encore de fiche :' : 'Ce service est écrit dans tes recherches sans avoir encore de fiche :')}</b> ${um.map(u => `<button type="button" class="button small secondary" data-as-new-name="${esc(u.name)}">＋ ${esc(u.name)} <small>(${esc(plural(u.count, 'recherche'))})</small></button>`).join(' ')}</span></div>`;
         const count = fn => all.filter(fn).length;
@@ -191,6 +193,7 @@
             </div>
             <section class="card h-asv-card"><header class="card-head"><div class="card-title"><h3>🗄️ Visites <small>(${d.visits.length})</small></h3></div></header><div class="card-body">${d.visits.length ? UI().rowsHtml(d.visits.map(v => ({thumb: '<span class="ui-card-ico" aria-hidden="true">🗄️</span>', name: v.title, open: openAttr({kind: 'visit', id: v.id}), lines: [[v.visit_date && i18n('prévue le {date}', {date: v.visit_date}), plural(v.items, 'cote')].filter(Boolean).join(' · ')], actions: v.done_at ? UI().badge('Faite', 'green') : UI().badge('À faire', 'blue')}))) : A().empty('Aucune visite préparée chez eux.', {icon: '🗄️', action: {label: '🗄️ Visites d’archives', attrs: 'data-as-visits-go'}})}</div></section>
         </section>`;
+        if (s.kind === 'notary') ext.complEtudes?.decorateSheet?.(ws, s); // 🏛 une étude : notaires et clercs, dossiers, courriers, délai constaté
         const box = ws.querySelector('[data-as-consulted]'), fbox = ws.querySelector('[data-as-filters]');
         const seriesCodes = [...new Set(consulted.map(c => c.series || ''))];
         function paintConsulted() {
@@ -205,7 +208,7 @@
         fbox.addEventListener('click', e => { const b = e.target.closest('[data-as-f]'); if (!b) return; serieFilter = b.dataset.asF; paintConsulted(); });
         ws.querySelectorAll('[data-as-serie]').forEach(tr => tr.addEventListener('click', () => { serieFilter = tr.dataset.asSerie; paintConsulted(); fbox.scrollIntoView({block: 'nearest', behavior: 'smooth'}); }));
         A().bindTableLinks?.();
-        ws.querySelector('[data-as-back]')?.addEventListener('click', () => { S().archiveServiceId = 0; refresh(); });
+        ws.querySelector('[data-as-back]')?.addEventListener('click', () => { S().archiveServiceId = 0; if (s.kind !== 'notary') S().complEtudes = false; refresh(); });
         ws.querySelector('[data-as-edit-me]')?.addEventListener('click', async () => { if (await editService(s)) await refresh(); });
         ws.querySelector('[data-as-del-me]')?.addEventListener('click', async () => { try { await removeService(s); } catch (err) { A().toast(err.message, 'error'); } });
         ws.querySelector('[data-as-new-digest]')?.addEventListener('click', () => { Object.assign(S(), {researchKind: 'archive_digest', archiveDigestAdding: true, archiveDigestEditId: 0, archiveDigestPrefill: {archive_service: s.short_name || s.name}}); A().persistUiState?.(); A().setModule('recherche'); });
@@ -224,7 +227,8 @@
         if (e.detail?.kind !== 'archive_service') return;
         e.preventDefault();
         const t = String(e.detail.text || '').trim();
-        editService(null, {name: t, short_name: t.length <= 12 ? t : '', kind: /^a\.?d\.?\b/i.test(t) ? 'ad' : /^a\.?m\.?\b/i.test(t) ? 'am' : 'other'})
+        let notary = false; try { notary = JSON.parse(e.detail.field?.dataset?.pkOpts || e.target?.closest?.('.pk')?.dataset?.pkOpts || '{}').filter?.as_kind === 'notary'; } catch (_) {} // 🏛 menu limité aux études
+        editService(null, {name: t, short_name: t.length <= 12 ? t : '', kind: notary ? 'notary' : /^a\.?d\.?\b/i.test(t) ? 'ad' : /^a\.?m\.?\b/i.test(t) ? 'am' : 'other'})
             .then(sv => sv && e.detail.pick({kind: 'archive_service', id: sv.id, title: sv.name, meta: [sv.kind_label, sv.city].filter(Boolean).join(' · '), icon: '🏛', short: sv.short_name || sv.city}));
     });
 

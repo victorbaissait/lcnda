@@ -1,0 +1,166 @@
+fr ¦ fi ¦ hu
+# 🏛⚠️📋📱 Compléments aux outils existants (docs/design/complements-existants.html) : A études de notaire, B homonymes
+Le serveur ne répond pas. ¦ Palvelin ei vastaa. ¦ A szerver nem válaszol.
+⚙️ Réglages de cet outil ¦ ⚙️ Tämän työkalun asetukset ¦ ⚙️ Az eszköz beállításai
+Enlève un filtre, ou cherche autrement. ¦ Poista suodatin tai hae toisin. ¦ Vegyél ki egy szűrőt, vagy keress másképp.
+Listes · Archives et sources ¦ Luettelot · Arkistot ja lähteet ¦ Listák · Levéltárak és források
+=étude ¦ toimisto|toimistoa ¦ iroda|iroda
+{n} j ¦ {n} pv ¦ {n} nap
+sur {n} réponses ¦ {n} vastauksesta ¦ {n} válaszból
+pas assez de réponses ¦ liian vähän vastauksia ¦ túl kevés válasz
+{n} sur {m} nécessaires ¦ {n}/{m} tarvittavasta ¦ {n} a szükséges {m}-ból
+clerc : {name} ¦ notaarin avustaja: {name} ¦ közjegyzőhelyettes: {name}
+Études de notaire ¦ Notaaritoimistot ¦ Közjegyzői irodák
+🏛 Études de notaire ¦ 🏛 Notaaritoimistot ¦ 🏛 Közjegyzői irodák
+Étude de notaire ¦ Notaaritoimisto ¦ Közjegyzői iroda
+Une étude est un service d’archives de la sorte « Étude de notaire » : ses notaires et clercs, ses dossiers, ses courriers. ¦ Toimisto on arkisto, jonka laji on ”Notaaritoimisto”: sen notaarit ja avustajat, sen asiat, sen kirjeet. ¦ Az iroda egy „Közjegyzői iroda” fajtájú levéltár: közjegyzői és helyettesei, ügyei, levelei.
+＋ Nouvelle étude ¦ ＋ Uusi toimisto ¦ ＋ Új iroda
+🧩 Regrouper et créer leurs fiches… ¦ 🧩 Ryhmittele ja luo niiden kortit… ¦ 🧩 Csoportosítás és adatlapjaik létrehozása…
+Chercher une étude, un notaire, une ville… ¦ Hae toimistoa, notaaria, paikkakuntaa… ¦ Keress irodát, közjegyzőt, települést…
+Département : {d} ¦ Departementti: {d} ¦ Megye: {d}
+Répond le plus vite ¦ Vastaa nopeimmin ¦ A leggyorsabban válaszol
+Le plus de dossiers ¦ Eniten asioita ¦ A legtöbb ügy
+Aucune étude de notaire pour l’instant ¦ Ei vielä notaaritoimistoa ¦ Még nincs közjegyzői iroda
+Une étude est un service d’archives de la sorte « Étude de notaire » : crée-la ici, ou regroupe les notaires tapés à la main dans tes dossiers. ¦ Toimisto on arkisto, jonka laji on ”Notaaritoimisto”: luo se tässä tai ryhmittele asioihisi käsin kirjoitetut notaarit. ¦ Az iroda egy „Közjegyzői iroda” fajtájú levéltár: hozd létre itt, vagy csoportosítsd az ügyeidben kézzel beírt közjegyzőket.
+Aucun notaire noté ¦ Ei notaaria merkitty ¦ Nincs feljegyzett közjegyző
+{a} en cours · {b} clos ¦ {a} käynnissä · {b} suljettu ¦ {a} folyamatban · {b} lezárva
+{n} en attente ¦ {n} odottaa ¦ {n} vár
+Appeler ¦ Soita ¦ Hívás
+fiche de personne n° {n} ¦ henkilökortti nro {n} ¦ személy adatlapja, sz. {n}
+nom seulement ¦ vain nimi ¦ csak a név
+ligne directe {tel} ¦ suora numero {tel} ¦ közvetlen szám {tel}
+ancien depuis le {d} ¦ entinen {d} alkaen ¦ korábbi, {d} óta
+Aucun notaire ni clerc noté. ¦ Ei notaaria eikä avustajaa merkitty. ¦ Nincs feljegyzett közjegyző vagy helyettes.
+Notaires et clercs ¦ Notaarit ja avustajat ¦ Közjegyzők és helyettesek
+lus dans les dossiers, rien n’est recopié ¦ luettu asioista, mitään ei kopioida ¦ az ügyekből olvasva, semmi sem másolódik
+réf. du notaire {ref} ¦ notaarin viite {ref} ¦ a közjegyző hivatkozása {ref}
+Aucun dossier relié à cette étude. ¦ Ei asiaa liitettynä tähän toimistoon. ¦ Ehhez az irodához nincs ügy kapcsolva.
+reçue le {d} ¦ saatu {d} ¦ megérkezett: {d}
+{n} j · d’habitude {m} j ¦ {n} pv · tavallisesti {m} pv ¦ {n} nap · általában {m} nap
+en attente · {n} j ¦ odottaa · {n} pv ¦ vár · {n} nap
+✓ Réponse reçue ¦ ✓ Vastaus saatu ¦ ✓ Válasz megérkezett
+⏳ Délai de réponse constaté : {days} j en moyenne (de {min} à {max} j). Réponses comptées : {n}, celles de ce registre dont la date est notée. C’est ce que tu as observé, rien d’autre : ce n’est ni un délai légal, ni une promesse de l’étude. ¦ ⏳ Havaittu vastausaika: keskimäärin {days} pv ({min}–{max} pv). Lasketut vastaukset: {n}, tämän rekisterin vastaukset, joilla on päivämäärä. Se on vain se, mitä olet havainnut: ei lakisääteinen määräaika eikä toimiston lupaus. ¦ ⏳ Tapasztalt válaszidő: átlagosan {days} nap ({min}–{max} nap). Számolt válaszok: {n}, a nyilvántartás azon válaszai, amelyeknek dátuma fel van jegyezve. Ez csak az, amit megfigyeltél: sem törvényes határidő, sem az iroda ígérete.
+⏳ Délai de réponse constaté : {days} j en médiane (de {min} à {max} j). Réponses comptées : {n}, celles de ce registre dont la date est notée. C’est ce que tu as observé, rien d’autre : ce n’est ni un délai légal, ni une promesse de l’étude. ¦ ⏳ Havaittu vastausaika: mediaani {days} pv ({min}–{max} pv). Lasketut vastaukset: {n}, tämän rekisterin vastaukset, joilla on päivämäärä. Se on vain se, mitä olet havainnut: ei lakisääteinen määräaika eikä toimiston lupaus. ¦ ⏳ Tapasztalt válaszidő: medián {days} nap ({min}–{max} nap). Számolt válaszok: {n}, a nyilvántartás azon válaszai, amelyeknek dátuma fel van jegyezve. Ez csak az, amit megfigyeltél: sem törvényes határidő, sem az iroda ígérete.
+⏳ Pas assez de réponses datées pour un délai constaté ({n} sur {m} nécessaires). ¦ ⏳ Liian vähän päivättyjä vastauksia havaittuun vastausaikaan ({n}/{m} tarvittavasta). ¦ ⏳ Túl kevés datált válasz a tapasztalt válaszidőhöz ({n} a szükséges {m}-ból).
+Ses courriers ¦ Sen kirjeet ¦ Levelei
+＋ Courrier à l’étude ¦ ＋ Kirje toimistolle ¦ ＋ Levél az irodának
+＋ {n} courriers plus anciens · tout voir dans le Registre ¦ ＋ {n} vanhempaa kirjettä · katso kaikki Rekisteristä ¦ ＋ {n} régebbi levél · mindet lásd a Nyilvántartásban
+Aucun courrier relié à cette étude. ¦ Ei kirjettä liitettynä tähän toimistoon. ¦ Ehhez az irodához nincs levél kapcsolva.
+« {name} » retiré de l’étude ¦ ”{name}” poistettu toimistosta ¦ „{name}” kivéve az irodából
+Réponse reçue le {d} ¦ Vastaus saatu {d} ¦ Válasz megérkezett: {d}
+Courrier remis en attente ¦ Kirje taas odottaa ¦ A levél ismét vár
+Vide : le courrier repasse « en attente ». ¦ Tyhjä: kirje on taas ”odottaa”. ¦ Üres: a levél újra „vár”.
+Ajouter un notaire ou un clerc ¦ Lisää notaari tai avustaja ¦ Közjegyző vagy helyettes hozzáadása
+Fiche de personne (facultatif) ¦ Henkilökortti (valinnainen) ¦ Személy adatlapja (nem kötelező)
+Jusqu’à (ancien) ¦ Asti (entinen) ¦ Eddig (korábbi)
+Un notaire qui change d’étude reste nommé dans ses anciens dossiers : mets une date de fin, il passe « ancien ». ¦ Toimistoa vaihtava notaari pysyy nimettynä vanhoissa asioissaan: anna päättymispäivä, niin hänestä tulee ”entinen”. ¦ Az irodát váltó közjegyző régi ügyeiben megnevezve marad: adj meg záró dátumot, és „korábbi” lesz.
+Donne le nom du notaire ou du clerc. ¦ Anna notaarin tai avustajan nimi. ¦ Add meg a közjegyző vagy a helyettes nevét.
+Courrier à l’étude ¦ Kirje toimistolle ¦ Levél az irodának
+état des recherches ¦ tutkimuksen tilanne ¦ a kutatás állása
+Courrier rangé au Registre ¦ Kirje tallennettu Rekisteriin ¦ A levél a Nyilvántartásba került
+Une étude, ou un nom gardé en texte… ¦ Toimisto tai tekstinä pidetty nimi… ¦ Iroda, vagy szövegként megtartott név…
+Choisis l’étude ; le nom tapé dans le champ du notaire reste dans le dossier. ¦ Valitse toimisto; notaarikenttään kirjoitettu nimi jää asiaan. ¦ Válaszd ki az irodát; a közjegyző mezőjébe írt név az ügyben marad.
+nom gardé en texte, sans fiche d’étude ¦ tekstinä pidetty nimi, ei toimistokorttia ¦ szövegként megtartott név, irodaadatlap nélkül
+texte ¦ teksti ¦ szöveg
+Notaire chargé du dossier ¦ Asiasta vastaava notaari ¦ Az ügyet intéző közjegyző
+ancien ¦ entinen ¦ korábbi
+Choisi parmi les notaires de l’étude, ou laissé vide. ¦ Valittu toimiston notaareista tai jätetty tyhjäksi. ¦ Az iroda közjegyzői közül választva, vagy üresen hagyva.
+✓ Notaire du dossier : {who}. Ligne au 🕓 Journal du dossier. ¦ ✓ Asian notaari: {who}. Rivi asian 🕓 Lokiin. ¦ ✓ Az ügy közjegyzője: {who}. Sor az ügy 🕓 Naplójában.
+même nom « {n} » ¦ sama nimi ”{n}” ¦ azonos név: „{n}”
+même ville ¦ sama paikkakunta ¦ azonos település
+même ville que le défunt ¦ sama paikkakunta kuin vainajalla ¦ azonos település, mint az elhunyté
+initiale {i} ¦ nimikirjain {i} ¦ kezdőbetű: {i}
+une seule étude de ce nom ¦ vain yksi tämänniminen toimisto ¦ csak egy ilyen nevű iroda
+Autre étude ¦ Toinen toimisto ¦ Másik iroda
+Laisser en texte ¦ Jätä tekstiksi ¦ Maradjon szöveg
+{n} noms tapés à la main · rien n’est changé avant « Appliquer ». ¦ {n} käsin kirjoitettua nimeä · mikään ei muutu ennen kuin painat ”Käytä”. ¦ Kézzel beírt nevek: {n} · semmi sem változik az „Alkalmaz” előtt.
+existe ¦ on olemassa ¦ létezik
+plusieurs études possibles ¦ useita mahdollisia toimistoja ¦ több lehetséges iroda
+Sans proposition ¦ Ei ehdotusta ¦ Javaslat nélkül
+＋ Créer une étude ¦ ＋ Luo toimisto ¦ ＋ Iroda létrehozása
+Courriers qui ressemblent à une étude ¦ Kirjeet, jotka näyttävät toimistolta ¦ Irodának tűnő levelek
+pour le délai constaté ¦ havaittua vastausaikaa varten ¦ a tapasztalt válaszidőhöz
+Les rapprochements ne regardent que le nom de famille (sans « Me », « Maître », « SCP », « Étude », accents) et la ville quand elle est écrite. Deux études du même nom dans deux villes ne sont jamais réunies. Le nom tapé reste dans chaque dossier. ¦ Vertailu katsoo vain sukunimeä (ilman ”Me”, ”Maître”, ”SCP”, ”Étude” ja aksentteja) ja paikkakuntaa, kun se on kirjoitettu. Kahta samannimistä toimistoa eri paikkakunnilla ei koskaan yhdistetä. Kirjoitettu nimi jää jokaiseen asiaan. ¦ Az egyeztetés csak a családnevet nézi („Me”, „Maître”, „SCP”, „Étude” és ékezetek nélkül), és a települést, ha be van írva. Két azonos nevű iroda két településen soha nem vonódik össze. A beírt név minden ügyben megmarad.
+Notaires tapés à la main ¦ Käsin kirjoitetut notaarit ¦ Kézzel beírt közjegyzők
+Aucun notaire tapé à la main sans fiche. ¦ Ei käsin kirjoitettua notaaria ilman korttia. ¦ Nincs adatlap nélküli, kézzel beírt közjegyző.
+Appliquer à {n} noms ({m} dossiers) ¦ Käytä {n} nimeen ({m} asiaa) ¦ Alkalmazás {n} névre ({m} ügy)
+✓ {n} dossiers reliés à leur étude. Le nom tapé est gardé dans chaque dossier. ¦ ✓ {n} asiaa liitetty toimistoonsa. Kirjoitettu nimi säilyy jokaisessa asiassa. ¦ ✓ {n} ügy az irodájához kapcsolva. A beírt név minden ügyben megmarad.
+{n} notaires tapés à la main dans tes dossiers n’ont pas encore de fiche. ¦ {n} käsin kirjoitetulla notaarilla asioissasi ei ole vielä korttia. ¦ Az ügyeidben kézzel beírt közjegyzők közül {n}-nak még nincs adatlapja.
+{n} notaire tapé à la main dans tes dossiers n’a pas encore de fiche. ¦ {n} käsin kirjoitetulla notaarilla asioissasi ei ole vielä korttia. ¦ Az ügyeidben kézzel beírt közjegyzők közül {n}-nak még nincs adatlapja.
+{cases} · pas encore de fiche ¦ {cases} · ei vielä korttia ¦ {cases} · még nincs adatlap
+Déjà tapé dans d’autres dossiers ¦ Jo kirjoitettu muihin asioihin ¦ Már beírva más ügyekben
+{n} dossiers en cours ¦ {n} käynnissä olevaa asiaa ¦ {n} folyamatban lévő ügy
+{n} dossier en cours ¦ {n} käynnissä oleva asia ¦ {n} folyamatban lévő ügy
+Étude de notaire introuvable. ¦ Notaaritoimistoa ei löytynyt. ¦ A közjegyzői iroda nem található.
+Ce notaire n’est pas de cette étude. ¦ Tämä notaari ei ole tästä toimistosta. ¦ Ez a közjegyző nem ehhez az irodához tartozik.
+Ce dossier n’est pas relié à cette étude. ¦ Tätä asiaa ei ole liitetty tähän toimistoon. ¦ Ez az ügy nincs ehhez az irodához kapcsolva.
+Date de réponse incorrecte. ¦ Virheellinen vastauspäivä. ¦ Hibás válaszdátum.
+Où ranger les études ¦ Minne toimistot sijoitetaan ¦ Hová kerüljenek az irodák
+Dans 🏛 Services d’archives, sorte « Étude de notaire » ¦ Kohtaan 🏛 Arkistot, lajiksi ”Notaaritoimisto” ¦ A 🏛 Levéltárak közé, „Közjegyzői iroda” fajtaként
+Une liste « Études de notaire » à part ¦ Erillinen luettelo ”Notaaritoimistot” ¦ Külön lista: „Közjegyzői irodák”
+Délai constaté ¦ Havaittu vastausaika ¦ Tapasztalt válaszidő
+Moyenne, avec le plus court et le plus long ¦ Keskiarvo, lyhin ja pisin mukana ¦ Átlag, a legrövidebbel és a leghosszabbal
+Médiane (moins sensible à une réponse très lente) ¦ Mediaani (vähemmän herkkä hyvin hitaalle vastaukselle) ¦ Medián (kevésbé érzékeny egy nagyon késő válaszra)
+Ne pas l’afficher ¦ Älä näytä ¦ Ne jelenjen meg
+Nombre de réponses avant d’afficher un délai ¦ Vastausten määrä ennen kuin aika näytetään ¦ Válaszok száma, mielőtt idő jelenik meg
+Les courriers comptés ¦ Lasketut kirjeet ¦ A számolt levelek
+Ceux des 3 dernières années ¦ Viimeisten 3 vuoden kirjeet ¦ Az utolsó 3 év levelei
+Ce que propose le menu de choix ¦ Mitä valintavalikko ehdottaa ¦ Amit a választómenü kínál
+Les études, puis les noms déjà tapés ¦ Toimistot, sitten jo kirjoitetut nimet ¦ Az irodák, aztán a már beírt nevek
+Les études seulement ¦ Vain toimistot ¦ Csak az irodák
+Le notaire chargé du dossier ¦ Asiasta vastaava notaari ¦ Az ügyet intéző közjegyző
+Un notaire de l’étude, facultatif ¦ Toimiston notaari, valinnainen ¦ Az iroda egyik közjegyzője, nem kötelező
+Seulement l’étude ¦ Vain toimisto ¦ Csak az iroda
+Les propositions de regroupement ¦ Ryhmittelyehdotukset ¦ A csoportosítási javaslatok
+Cochées quand le nom et la ville concordent ¦ Valittuina, kun nimi ja paikkakunta täsmäävät ¦ Bejelölve, ha a név és a település egyezik
+Toutes décochées ¦ Kaikki valitsematta ¦ Mind jelöletlen
+Le bandeau « notaires sans fiche » ¦ Palkki ”notaarit ilman korttia” ¦ A „közjegyzők adatlap nélkül” sáv
+Montré dans la liste des études ¦ Näytetään toimistojen luettelossa ¦ A irodák listájában látható
+Jamais (on passe par ⋯) ¦ Ei koskaan (⋯:n kautta) ¦ Soha (a ⋯ menün át)
+⚠️ Homonymes ¦ ⚠️ Kaimat ¦ ⚠️ Névrokonok
+fiche n° {n} (confidentielle) ¦ kortti nro {n} (luottamuksellinen) ¦ adatlap, sz. {n} (bizalmas)
+naissance : date inconnue ¦ syntymä: päivä tuntematon ¦ születés: ismeretlen dátum
+même année de naissance ¦ sama syntymävuosi ¦ azonos születési év
+naissance à {n} an(s) près ¦ syntymä {n} vuoden sisällä ¦ születés {n} év eltéréssel
+même commune ¦ sama kunta ¦ azonos község
+Nom, prénom ¦ Sukunimi, etunimi ¦ Családnév, utónév
+inconnus ¦ tuntemattomat ¦ ismeretlenek
+arbre seulement · ajouté le {d} ¦ vain puu · lisätty {d} ¦ csak a fa · hozzáadva: {d}
+arbre seulement ¦ vain puu ¦ csak a fa
+Critère ¦ Peruste ¦ Szempont
+Celui du dossier ¦ Asian henkilö ¦ Az ügyben szereplő
+L’autre fiche ¦ Toinen kortti ¦ A másik adatlap
+↗ Ouvrir la fiche n° {n} ¦ ↗ Avaa kortti nro {n} ¦ ↗ Adatlap megnyitása, sz. {n}
+👥 Peut-être les mêmes : ouvrir la fusion ¦ 👥 Ehkä sama henkilö: avaa yhdistäminen ¦ 👥 Talán ugyanaz: összevonás megnyitása
+Une autre fiche porte le même nom ¦ Toisella kortilla on sama nimi ¦ Egy másik adatlapon ugyanez a név áll
+pas dans ce dossier. ¦ ei tässä asiassa. ¦ nincs ebben az ügyben.
+Celui à qui tu écris : {who}. ¦ Henkilö, jolle kirjoitat: {who}. ¦ Akinek írsz: {who}.
+enfant de {p} ¦ lapsi: {p} ¦ gyermeke: {p}
+{n} héritiers sur {m} ont un homonyme dans la base ¦ {n} perillistä {m}:stä on kaima tietokannassa ¦ {m} örökösből {n}-nak névrokona van az adatbázisban
+Voir les détails ¦ Näytä tiedot ¦ Részletek megtekintése
+Envoyer quand même aux {n} ¦ Lähetä silti kaikille {n} ¦ Küldés mégis mind a {n} címzettnek
+✓ Retenu : {a} ({y1}) et {b} ({y2}) sont deux personnes. L’alerte ne reviendra plus pour eux deux. ¦ ✓ Muistettu: {a} ({y1}) ja {b} ({y2}) ovat kaksi henkilöä. Hälytys ei enää palaa heidän kohdallaan. ¦ ✓ Megjegyezve: {a} ({y1}) és {b} ({y2}) két külön személy. A figyelmeztetés rájuk már nem tér vissza.
+née à {place} en {y} ¦ syntynyt {place}, {y} ¦ született: {place}, {y}
+né à {place} en {y} ¦ syntynyt {place}, {y} ¦ született: {place}, {y}
+née à {place}, date inconnue ¦ syntynyt {place}, päivä tuntematon ¦ született: {place}, ismeretlen dátum
+né à {place}, date inconnue ¦ syntynyt {place}, päivä tuntematon ¦ született: {place}, ismeretlen dátum
+✓ C’est lui ¦ ✓ Se on hän ¦ ✓ Ő az
+✓ C’est bien lui que je contacte ¦ ✓ Otan yhteyttä juuri häneen ¦ ✓ Valóban vele veszem fel a kapcsolatot
+👁 Voir ¦ 👁 Näytä ¦ 👁 Megtekintés
+👁 Voir l’autre ¦ 👁 Näytä toinen ¦ 👁 A másik megtekintése
+Ce n’est pas la même personne ¦ Se ei ole sama henkilö ¦ Nem ugyanaz a személy
+Noté au 🕓 Journal : homonyme vu, destinataire confirmé. L’alerte reviendra au prochain contact. ¦ Kirjattu 🕓 Lokiin: kaima nähty, vastaanottaja vahvistettu. Hälytys palaa seuraavalla yhteydenotolla. ¦ Feljegyezve a 🕓 Naplóban: névrokon megnézve, címzett megerősítve. A figyelmeztetés a következő kapcsolatfelvételnél visszatér.
+Noté au 🕓 Journal : homonyme vu, destinataire confirmé. L’alerte ne reviendra plus dans ce dossier. ¦ Kirjattu 🕓 Lokiin: kaima nähty, vastaanottaja vahvistettu. Hälytys ei enää palaa tässä asiassa. ¦ Feljegyezve a 🕓 Naplóban: névrokon megnézve, címzett megerősítve. A figyelmeztetés ebben az ügyben már nem tér vissza.
+Écart d’années de naissance ¦ Syntymävuosien ero ¦ Születési évek eltérése
+2 ans ¦ 2 vuotta ¦ 2 év
+Même département, ou lieu inconnu ¦ Sama departementti tai tuntematon paikka ¦ Azonos megye, vagy ismeretlen hely
+Même commune seulement ¦ Vain sama kunta ¦ Csak azonos község
+Peu importe le lieu ¦ Paikalla ei väliä ¦ A hely mindegy
+Quand l’afficher ¦ Milloin näytetään ¦ Mikor jelenjen meg
+À chaque courrier, appel et questionnaire ¦ Jokaisen kirjeen, puhelun ja kyselyn yhteydessä ¦ Minden levélnél, hívásnál és kérdőívnél
+Au premier contact d’un héritier seulement ¦ Vain ensimmäisellä yhteydenotolla perilliseen ¦ Csak egy örökössel való első kapcsolatfelvételnél
+Après « ✓ C’est bien lui » ¦ Kun on valittu ”✓ Otan yhteyttä juuri häneen” ¦ A „✓ Valóban vele veszem fel a kapcsolatot” után
+L’alerte revient au prochain contact ¦ Hälytys palaa seuraavalla yhteydenotolla ¦ A figyelmeztetés a következő kapcsolatfelvételnél visszatér
+Elle ne revient plus dans ce dossier ¦ Se ei enää palaa tässä asiassa ¦ Ebben az ügyben már nem tér vissza
+Où chercher l’homonyme ¦ Mistä kaimaa etsitään ¦ Hol keressük a névrokont
+Seulement les autres dossiers ¦ Vain muista asioista ¦ Csak a többi ügyben

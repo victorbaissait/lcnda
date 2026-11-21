@@ -192,6 +192,7 @@ function succ_index_rows(PDO $pdo, bool $active = false): array
         $did = (int) $r['deceased_id'];
         $out[] = ['id' => (int) $r['id'], 'number' => (string) $r['number'], 'title' => (string) $r['title'], 'state' => (string) $r['state'],
             'deceased' => $name($pdo, $did), 'notary' => (int) $r['notary_person_id'] ? $name($pdo, (int) $r['notary_person_id']) : (string) $r['notary_text'],
+            'office' => function_exists('etude_case_office') ? etude_case_office($pdo, (int) $r['id']) : null, 'notary_typed' => !(int) $r['notary_person_id'] && trim((string) $r['notary_text']) !== '', // 🏛 l'étude du dossier (lib/etudes_notaire.php)
             'next_due' => (string) ($r['next_due'] ?? ''), 'late' => (int) $r['late'], 'opened_at' => (string) $r['opened_at'], 'updated_at' => (string) $r['updated_at'],
             'heirs' => is_array($snap['shares'] ?? null) ? count($snap['shares']) : 0, 'unknown' => is_array($snap['unknown'] ?? null) ? count($snap['unknown']) : 0,
             'progress' => $r['progress'] === null ? null : (int) $r['progress'], 'steps' => is_array($prog['steps'] ?? null) ? $prog['steps'] : null,

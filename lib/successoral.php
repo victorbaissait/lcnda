@@ -620,6 +620,7 @@ function succ_courrier_set(PDO $pdo, array $d): array
     $prev = array_intersect_key($r, $vals);
     $sets = implode(', ', array_map(static fn($c) => "$c=?", array_keys($vals)));
     $pdo->prepare("UPDATE courriers SET $sets, updated_at=CURRENT_TIMESTAMP WHERE id=?")->execute([...array_values($vals), $kid]);
+    if (($vals['statut'] ?? '') === 'reponse_recue' && (string) $r['statut'] !== 'reponse_recue' && empty($d['undo']) && function_exists('compl_courrier_received')) { compl_courrier_received($pdo, $kid); } // 📮 la date de réponse (lib/complements.php)
     if ((int) $r['succ_case_id'] && empty($d['undo'])) {
         $who = succ_person_name($pdo, (int) $r['person_id']);
         if (($vals['signe_le'] ?? '') !== '') { succ_journal($pdo, (int) $r['succ_case_id'], 'courrier', 'Contrat signé reçu : ' . $who . ' (' . $vals['signe_le'] . ')'); }

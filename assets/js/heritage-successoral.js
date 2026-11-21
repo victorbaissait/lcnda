@@ -103,7 +103,7 @@
         if (!VIEWS.some(v => v[0] === cur.view)) cur.view = 'cases';
         w.innerHTML = `<section class="page succ-page">${UI().pageHeader({title: i18n('Dossiers de succession'), icon: '⚖️', where,
             help: i18n('Retrouver les héritiers d’une personne décédée, pour un notaire : un dossier par défunt. À ne pas confondre avec « 🏠 Héritages et successions » (les actes anciens des ancêtres).'),
-            actions: [LAW_BTN(), `<button type="button" class="button" data-succ-new>${esc(i18n('＋ Ouvrir un dossier'))}</button>`], more: [...(ext.succDossiers?.boardMore?.() || []), ...(P2().boardMore?.() || []), `<button type="button" data-succ-b8all>📜 ${esc(i18n('Qui a vu quoi'))}</button>`]})}
+            actions: [LAW_BTN(), `<button type="button" class="button" data-succ-new>${esc(i18n('＋ Ouvrir un dossier'))}</button>`], more: [...(ext.succDossiers?.boardMore?.() || []), ...(P2().boardMore?.() || []), ...(ext.complEtudes?.boardMore?.() || []), `<button type="button" data-succ-b8all>📜 ${esc(i18n('Qui a vu quoi'))}</button>`]})}
             <div class="segmented succ-views" role="tablist" aria-label="${esc(i18n('Que montrer'))}">${VIEWS.map(([k, l]) => `<button type="button" role="tab" data-succ-view="${k}" class="${cur.view === k ? 'is-active' : ''}" aria-selected="${cur.view === k}">${esc(i18n(l))}</button>`).join('')}</div>
             <div data-succ-body>${UI().spinner(i18n(cur.view === 'heirs' ? 'Lecture des héritiers…' : cur.view === 'mail' ? 'Lecture des courriers…' : 'Lecture des dossiers…'))}</div></section>`;
         const body = w.querySelector('[data-succ-body]');
@@ -286,6 +286,7 @@
                 <label>${esc(i18n('Dernier domicile'))}<input name="last_address" maxlength="400" value="${esc(d.last_address || '')}"></label>
                 <div class="succ-2"><div><span class="pk-lab">${esc(i18n('Notaire mandant (fiche ou nom)'))}</span>${P().pickerField({name: 'notary', kind: 'person', animals: false, allowFree: true, value: notaryVal})}</div>
                 <label>${esc(i18n('Réf. du notaire'))}<input name="notary_ref" maxlength="80" value="${esc(d.notary_ref || '')}" placeholder="BR/26/0412"></label></div>
+                ${ext.complEtudes?.caseField?.(d) || ''}
                 <div class="succ-2"><label>${esc(i18n('Ouvert le'))}<input type="date" name="opened_at" value="${esc(d.opened_at || today())}"></label>
                 <label>${esc(i18n('Testament'))}<input name="testament" maxlength="1000" value="${esc(d.testament || '')}" placeholder="${esc(i18n('Aucun connu (le notaire interroge le fichier des dernières volontés)'))}"></label></div>
                 <label>${esc(i18n('Situation (notes)'))}<textarea name="situation" rows="2" maxlength="2000">${esc(d.situation || '')}</textarea></label>
@@ -298,6 +299,7 @@
                     notary_person_id: /^\d+$/.test(nv) ? Number(nv) : 0, notary_text: nv.startsWith('txt:') ? nv.slice(4) : '', notary_ref: v('notary_ref'), opened_at: v('opened_at'), testament: v('testament'), situation: v('situation')};
                 if (!body.death_date_text) delete body.death_date_text; // repris de la fiche
                 let r; try { r = await post(body); } catch (e) { toast(e.message, 'error'); return false; }
+                await ext.complEtudes?.caseSubmit?.(form, Number(r?.id || d.id) || 0); // 🏛 l'étude de notaire (heritage-complements.js)
                 if (!data) {
                     A().undoToast(i18n('Dossier ouvert'), {undo: async () => { await post({op: 'delete', id: r.id}); openCase(0); }});
                     cur.tab = 'heirs'; openCase(r.id, 'heirs');
@@ -368,6 +370,7 @@
         const own = {dossier: tabDossier, heirs: (b, D_, R_) => { if (OUT().euroMode?.() === 'eur') { b.innerHTML = `${OUT().heirsSwitch()}<div data-succ-eur></div>`; return OUT().heirsEuros(b.querySelector('[data-succ-eur]'), D_, R_); } tabHeirs(b, D_, R_); if (OUT().heirsSwitch) b.insertAdjacentHTML('afterbegin', OUT().heirsSwitch()); ext.succDossiers?.heirsExtra?.(b, D_); }, people: (b, D_) => ext.succDossiers?.tabPeople?.(b, D_), tree: tabTree, pieces: tabPieces, contacts: tabContacts, notary: tabNotary, journal: tabJournal, fees: tabFees};
         if (own[cur.tab]) own[cur.tab](body, D, R, P_); else P2().tab?.(cur.tab, body, D, R, P_); // 📞 Échanges
         try { P2().after?.(cur.tab, body, D, R, P_); } catch (e) { console.error(e); } // ⚖️ ajouts des outils de plus à chaque onglet
+        try { ext.complEtudes?.after?.(cur.tab, body, D); } catch (e) { console.error(e); } // 🏛 📁 Dossier → « Étude de notaire » (heritage-complements.js)
     }
 
     /* ── 📁 Dossier ── */
@@ -613,6 +616,7 @@
             onOpen: d => {
                 const f = d.querySelector('form');
                 const chosen = () => all.filter(r => sel.has(r.id));
+                ext.succHomonym?.attach?.(d, D, {where: serial || all.length > 1 ? 'serial' : 'letter', ids: () => chosen().map(r => r.id)}); // ⚠️ un homonyme dans la base (heritage-complements.js)
                 const vals = r => O_.letterValues(D, r, {t: i18n, date: fmtDate(f.date_envoi.value), sent: r.last ? fmtDate(r.last.date) : '', sender: senderTxt || ''});
                 const textOf = r => (own.has(r.id) ? own.get(r.id) : O_.fillLetter(f.letter.value, vals(r)).text);
                 const bad = () => O_.unknownFields(f.letter.value, O_.FIELDS.filter(x => x !== 'notaire' || f.kind.value === 'contrat' || mine.some(m => `t${m.id}` === f.kind.value)));

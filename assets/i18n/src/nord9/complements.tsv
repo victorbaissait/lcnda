@@ -1,0 +1,166 @@
+fr ¦ lb
+# 🏛⚠️📋📱 Compléments aux outils existants (docs/design/complements-existants.html) : A études de notaire, B homonymes
+Le serveur ne répond pas. ¦ De Server äntwert net.
+⚙️ Réglages de cet outil ¦ ⚙️ Astellunge vun dësem Tool
+Enlève un filtre, ou cherche autrement. ¦ Huel e Filter ewech oder sich anescht.
+Listes · Archives et sources ¦ Lëschten · Archiven a Quellen
+=étude ¦ Notairesbüro|Notairesbüroen
+{n} j ¦ {n} D.
+sur {n} réponses ¦ vun {n} Äntwerten
+pas assez de réponses ¦ net genuch Äntwerten
+{n} sur {m} nécessaires ¦ {n} vun {m} néidegen
+clerc : {name} ¦ Clerc: {name}
+Études de notaire ¦ Notairesbüroen
+🏛 Études de notaire ¦ 🏛 Notairesbüroen
+Étude de notaire ¦ Notairesbüro
+Une étude est un service d’archives de la sorte « Étude de notaire » : ses notaires et clercs, ses dossiers, ses courriers. ¦ E Büro ass en Archivdéngscht vun der Zort „Notairesbüro“: seng Notairen a Clercen, seng Dossieren, seng Bréiwer.
+＋ Nouvelle étude ¦ ＋ Neie Büro
+🧩 Regrouper et créer leurs fiches… ¦ 🧩 Gruppéieren an hir Fiche maachen…
+Chercher une étude, un notaire, une ville… ¦ Sich e Büro, en Notaire, eng Stad…
+Département : {d} ¦ Departement: {d}
+Répond le plus vite ¦ Äntwert am séiersten
+Le plus de dossiers ¦ Déi meescht Dossieren
+Aucune étude de notaire pour l’instant ¦ Nach keen Notairesbüro
+Une étude est un service d’archives de la sorte « Étude de notaire » : crée-la ici, ou regroupe les notaires tapés à la main dans tes dossiers. ¦ E Büro ass en Archivdéngscht vun der Zort „Notairesbüro“: maach en hei, oder gruppéier d’Notairen, déi s du mat der Hand an dengen Dossieren aginn hues.
+Aucun notaire noté ¦ Keen Notaire notéiert
+{a} en cours · {b} clos ¦ {a} amgaang · {b} ofgeschloss
+{n} en attente ¦ {n} waarden
+Appeler ¦ Uruffen
+fiche de personne n° {n} ¦ Persounefiche Nr. {n}
+nom seulement ¦ nëmmen den Numm
+ligne directe {tel} ¦ direkt Nummer {tel}
+ancien depuis le {d} ¦ fréier zënter dem {d}
+Aucun notaire ni clerc noté. ¦ Keen Notaire a kee Clerc notéiert.
+Notaires et clercs ¦ Notairen a Clercen
+lus dans les dossiers, rien n’est recopié ¦ aus den Dossieren gelies, näischt gëtt kopéiert
+réf. du notaire {ref} ¦ Referenz vum Notaire {ref}
+Aucun dossier relié à cette étude. ¦ Keen Dossier mat dësem Büro verbonnen.
+reçue le {d} ¦ kritt de {d}
+{n} j · d’habitude {m} j ¦ {n} D. · normalerweis {m} D.
+en attente · {n} j ¦ waart · {n} D.
+✓ Réponse reçue ¦ ✓ Äntwert kritt
+⏳ Délai de réponse constaté : {days} j en moyenne (de {min} à {max} j). Réponses comptées : {n}, celles de ce registre dont la date est notée. C’est ce que tu as observé, rien d’autre : ce n’est ni un délai légal, ni une promesse de l’étude. ¦ ⏳ Festgestallten Äntwertdelai: {days} D. am Duerchschnëtt (vun {min} bis {max} D.). Gezielt Äntwerten: {n}, déi aus dësem Register mat engem notéierten Datum. Et ass just dat, wat s du observéiert hues: weder e gesetzlechen Delai nach e Versprieche vum Büro.
+⏳ Délai de réponse constaté : {days} j en médiane (de {min} à {max} j). Réponses comptées : {n}, celles de ce registre dont la date est notée. C’est ce que tu as observé, rien d’autre : ce n’est ni un délai légal, ni une promesse de l’étude. ¦ ⏳ Festgestallten Äntwertdelai: {days} D. am Median (vun {min} bis {max} D.). Gezielt Äntwerten: {n}, déi aus dësem Register mat engem notéierten Datum. Et ass just dat, wat s du observéiert hues: weder e gesetzlechen Delai nach e Versprieche vum Büro.
+⏳ Pas assez de réponses datées pour un délai constaté ({n} sur {m} nécessaires). ¦ ⏳ Net genuch datéiert Äntwerte fir e festgestallten Delai ({n} vun {m} néidegen).
+Ses courriers ¦ Seng Bréiwer
+＋ Courrier à l’étude ¦ ＋ Bréif un de Büro
+＋ {n} courriers plus anciens · tout voir dans le Registre ¦ ＋ {n} méi al Bréiwer · alles am Register kucken
+Aucun courrier relié à cette étude. ¦ Kee Bréif mat dësem Büro verbonnen.
+« {name} » retiré de l’étude ¦ „{name}“ aus dem Büro ewechgeholl
+Réponse reçue le {d} ¦ Äntwert kritt de {d}
+Courrier remis en attente ¦ Bréif waart erëm
+Vide : le courrier repasse « en attente ». ¦ Eidel: de Bréif ass erëm „waart“.
+Ajouter un notaire ou un clerc ¦ En Notaire oder e Clerc derbäisetzen
+Fiche de personne (facultatif) ¦ Persounefiche (fräiwëlleg)
+Jusqu’à (ancien) ¦ Bis (fréier)
+Un notaire qui change d’étude reste nommé dans ses anciens dossiers : mets une date de fin, il passe « ancien ». ¦ En Notaire, deen de Büro wiesselt, bleift a sengen ale Dossieren genannt: setz en Ennerdatum, da gëtt hie „fréier“.
+Donne le nom du notaire ou du clerc. ¦ Gëff den Numm vum Notaire oder vum Clerc un.
+Courrier à l’étude ¦ Bréif un de Büro
+état des recherches ¦ Stand vun de Recherchen
+Courrier rangé au Registre ¦ Bréif am Register ofgeluecht
+Une étude, ou un nom gardé en texte… ¦ E Büro, oder en Numm als Text behalen…
+Choisis l’étude ; le nom tapé dans le champ du notaire reste dans le dossier. ¦ Wiel de Büro; den Numm am Feld vum Notaire bleift am Dossier.
+nom gardé en texte, sans fiche d’étude ¦ Numm als Text behalen, ouni Bürosfiche
+texte ¦ Text
+Notaire chargé du dossier ¦ Notaire, deen den Dossier féiert
+ancien ¦ fréier
+Choisi parmi les notaires de l’étude, ou laissé vide. ¦ Aus den Notaire vum Büro gewielt, oder eidel gelooss.
+✓ Notaire du dossier : {who}. Ligne au 🕓 Journal du dossier. ¦ ✓ Notaire vum Dossier: {who}. Zeil am 🕓 Journal vum Dossier.
+même nom « {n} » ¦ selwechten Numm „{n}“
+même ville ¦ selwecht Stad
+même ville que le défunt ¦ selwecht Stad wéi de Verstuerwenen
+initiale {i} ¦ Initial {i}
+une seule étude de ce nom ¦ nëmmen ee Büro mat dësem Numm
+Autre étude ¦ Anere Büro
+Laisser en texte ¦ Als Text loossen
+{n} noms tapés à la main · rien n’est changé avant « Appliquer ». ¦ {n} mat der Hand aginnen Nimm · näischt ännert sech virun „Uwenden“.
+existe ¦ gëtt et
+plusieurs études possibles ¦ e puer méiglech Büroen
+Sans proposition ¦ Ouni Virschlag
+＋ Créer une étude ¦ ＋ E Büro maachen
+Courriers qui ressemblent à une étude ¦ Bréiwer, déi engem Büro gläichen
+pour le délai constaté ¦ fir de festgestallten Delai
+Les rapprochements ne regardent que le nom de famille (sans « Me », « Maître », « SCP », « Étude », accents) et la ville quand elle est écrite. Deux études du même nom dans deux villes ne sont jamais réunies. Le nom tapé reste dans chaque dossier. ¦ De Vergläich kuckt nëmmen de Familljennumm (ouni „Me“, „Maître“, „SCP“, „Étude“, Akzenter) an d’Stad, wa se geschriwwen ass. Zwee Büroe mam selwechten Numm an zwou Stied ginn ni zesummegeluecht. Den aginnen Numm bleift an all Dossier.
+Notaires tapés à la main ¦ Mat der Hand aginnen Notairen
+Aucun notaire tapé à la main sans fiche. ¦ Keen mat der Hand aginnen Notaire ouni Fiche.
+Appliquer à {n} noms ({m} dossiers) ¦ Op {n} Nimm uwenden ({m} Dossieren)
+✓ {n} dossiers reliés à leur étude. Le nom tapé est gardé dans chaque dossier. ¦ ✓ {n} Dossiere mat hirem Büro verbonnen. Den aginnen Numm bleift an all Dossier.
+{n} notaires tapés à la main dans tes dossiers n’ont pas encore de fiche. ¦ {n} Notairen, mat der Hand an dengen Dossieren aginn, hunn nach keng Fiche.
+{n} notaire tapé à la main dans tes dossiers n’a pas encore de fiche. ¦ {n} Notaire, mat der Hand an dengen Dossieren aginn, huet nach keng Fiche.
+{cases} · pas encore de fiche ¦ {cases} · nach keng Fiche
+Déjà tapé dans d’autres dossiers ¦ Schonn an aneren Dossieren aginn
+{n} dossiers en cours ¦ {n} Dossieren amgaang
+{n} dossier en cours ¦ {n} Dossier amgaang
+Étude de notaire introuvable. ¦ Notairesbüro net fonnt.
+Ce notaire n’est pas de cette étude. ¦ Dësen Notaire ass net vun dësem Büro.
+Ce dossier n’est pas relié à cette étude. ¦ Dësen Dossier ass net mat dësem Büro verbonnen.
+Date de réponse incorrecte. ¦ Falscht Äntwertdatum.
+Où ranger les études ¦ Wou d’Büroe späicheren
+Dans 🏛 Services d’archives, sorte « Étude de notaire » ¦ An 🏛 Archivdéngschter, Zort „Notairesbüro“
+Une liste « Études de notaire » à part ¦ Eng separat Lëscht „Notairesbüroen“
+Délai constaté ¦ Festgestallten Delai
+Moyenne, avec le plus court et le plus long ¦ Duerchschnëtt, mam kierzsten a mam längsten
+Médiane (moins sensible à une réponse très lente) ¦ Median (manner empfindlech fir eng ganz lues Äntwert)
+Ne pas l’afficher ¦ Net weisen
+Nombre de réponses avant d’afficher un délai ¦ Zuel vun Äntwerten, ier en Delai gewise gëtt
+Les courriers comptés ¦ Déi gezielt Bréiwer
+Ceux des 3 dernières années ¦ Déi vun de leschten 3 Joer
+Ce que propose le menu de choix ¦ Wat de Wielmenü proposéiert
+Les études, puis les noms déjà tapés ¦ D’Büroen, dann déi schonn aginnen Nimm
+Les études seulement ¦ Nëmmen d’Büroen
+Le notaire chargé du dossier ¦ Den Notaire, deen den Dossier féiert
+Un notaire de l’étude, facultatif ¦ En Notaire vum Büro, fräiwëlleg
+Seulement l’étude ¦ Nëmmen de Büro
+Les propositions de regroupement ¦ D’Virschléi fir ze gruppéieren
+Cochées quand le nom et la ville concordent ¦ Ugekräizt, wann Numm a Stad iwwereneestëmmen
+Toutes décochées ¦ All net ugekräizt
+Le bandeau « notaires sans fiche » ¦ D’Band „Notairen ouni Fiche“
+Montré dans la liste des études ¦ An der Lëscht vun de Büroe gewisen
+Jamais (on passe par ⋯) ¦ Ni (iwwer ⋯)
+⚠️ Homonymes ¦ ⚠️ Homonymen
+fiche n° {n} (confidentielle) ¦ Fiche Nr. {n} (vertraulech)
+naissance : date inconnue ¦ Gebuert: Datum onbekannt
+même année de naissance ¦ selwecht Gebuertsjoer
+naissance à {n} an(s) près ¦ Gebuert op {n} Joer no
+même commune ¦ selwecht Gemeng
+Nom, prénom ¦ Numm, Virnumm
+inconnus ¦ onbekannt
+arbre seulement · ajouté le {d} ¦ nëmmen de Bam · derbäigesat de {d}
+arbre seulement ¦ nëmmen de Bam
+Critère ¦ Critère
+Celui du dossier ¦ Deen aus dem Dossier
+L’autre fiche ¦ Déi aner Fiche
+↗ Ouvrir la fiche n° {n} ¦ ↗ Fiche Nr. {n} opmaachen
+👥 Peut-être les mêmes : ouvrir la fusion ¦ 👥 Vläicht déiselwecht: d’Fusioun opmaachen
+Une autre fiche porte le même nom ¦ Eng aner Fiche huet dee selwechten Numm
+pas dans ce dossier. ¦ net an dësem Dossier.
+Celui à qui tu écris : {who}. ¦ Deen, deem s du schreifs: {who}.
+enfant de {p} ¦ Kand vu(n) {p}
+{n} héritiers sur {m} ont un homonyme dans la base ¦ {n} Ierwe vun {m} hunn en Homonym an der Datebank
+Voir les détails ¦ D’Detailer kucken
+Envoyer quand même aux {n} ¦ Trotzdeem un all {n} schécken
+✓ Retenu : {a} ({y1}) et {b} ({y2}) sont deux personnes. L’alerte ne reviendra plus pour eux deux. ¦ ✓ Behalen: {a} ({y1}) an {b} ({y2}) sinn zwou Persounen. D’Alerte kënnt fir déi zwee net méi zréck.
+née à {place} en {y} ¦ gebuer zu {place} am Joer {y}
+né à {place} en {y} ¦ gebuer zu {place} am Joer {y}
+née à {place}, date inconnue ¦ gebuer zu {place}, Datum onbekannt
+né à {place}, date inconnue ¦ gebuer zu {place}, Datum onbekannt
+✓ C’est lui ¦ ✓ Hien ass et
+✓ C’est bien lui que je contacte ¦ ✓ Et ass wierklech hien, deen ech kontaktéieren
+👁 Voir ¦ 👁 Kucken
+👁 Voir l’autre ¦ 👁 Deen anere kucken
+Ce n’est pas la même personne ¦ Et ass net déiselwecht Persoun
+Noté au 🕓 Journal : homonyme vu, destinataire confirmé. L’alerte reviendra au prochain contact. ¦ Am 🕓 Journal notéiert: Homonym gesinn, Empfänger bestätegt. D’Alerte kënnt beim nächste Kontakt zréck.
+Noté au 🕓 Journal : homonyme vu, destinataire confirmé. L’alerte ne reviendra plus dans ce dossier. ¦ Am 🕓 Journal notéiert: Homonym gesinn, Empfänger bestätegt. D’Alerte kënnt an dësem Dossier net méi zréck.
+Écart d’années de naissance ¦ Ënnerscheed vu Gebuertsjoren
+2 ans ¦ 2 Joer
+Même département, ou lieu inconnu ¦ Selwecht Departement, oder Plaz onbekannt
+Même commune seulement ¦ Nëmmen déiselwecht Gemeng
+Peu importe le lieu ¦ D’Plaz ass egal
+Quand l’afficher ¦ Wéini weisen
+À chaque courrier, appel et questionnaire ¦ Bei all Bréif, Uruff a Froebou
+Au premier contact d’un héritier seulement ¦ Nëmme beim éischte Kontakt mat engem Ierwen
+Après « ✓ C’est bien lui » ¦ No „✓ Et ass wierklech hien, deen ech kontaktéieren“
+L’alerte revient au prochain contact ¦ D’Alerte kënnt beim nächste Kontakt zréck
+Elle ne revient plus dans ce dossier ¦ Se kënnt an dësem Dossier net méi zréck
+Où chercher l’homonyme ¦ Wou den Homonym sichen
+Seulement les autres dossiers ¦ Nëmmen an deenen aneren Dossieren

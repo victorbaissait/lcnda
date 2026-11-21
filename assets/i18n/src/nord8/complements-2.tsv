@@ -1,0 +1,186 @@
+fr ¦ tr
+# 🏛⚠️📋📱 Compléments aux outils existants (docs/design/complements-existants.html) : C tous les doutes, D visite aux archives, erreurs du serveur
+📋 Tous les doutes ¦ 📋 Tüm şüpheler
+Points à revoir ¦ Gözden geçirilecek noktalar
+Chaque ligne est lue dans l’outil d’origine au moment où tu ouvres la liste, et « ↗ » t’y emmène pour décider. Rien n’est copié : corriger dans l’outil fait disparaître la ligne. ¦ Listeyi açtığında her satır kaynak araçtan okunur ve “↗” karar vermen için seni oraya götürür. Hiçbir şey kopyalanmaz: araçta düzeltmek satırı kaldırır.
+Je lis les outils… ¦ Araçları okuyorum…
+Chercher une personne, un lieu… ¦ Bir kişi, bir yer ara…
+et ses ancêtres ¦ ve ataları
+Branche ¦ Kol
+paternelle (Sosa 2) ¦ baba tarafı (Sosa 2)
+maternelle (Sosa 3) ¦ anne tarafı (Sosa 3)
+Vus ¦ Görülenler
+Pas encore vus ¦ Henüz görülmeyenler
+Vus aussi ¦ Görülenler de
+Seulement les vus ¦ Yalnızca görülenler
+↗ Ouvrir dans l’outil ¦ ↗ Araçta aç
+👁 Ne plus marquer vu ¦ 👁 Görüldü işaretini kaldır
+👁 Marquer vu ¦ 👁 Görüldü olarak işaretle
+👤 Ouvrir la fiche de {name} ¦ 👤 Kartı aç: {name}
+🔍 Seulement les doutes de cette personne ¦ 🔍 Yalnızca bu kişinin şüpheleri
+Aucun doute pour l’instant ¦ Şimdilik şüphe yok
+Les outils d’origine n’ont rien à vérifier : bravo ! ¦ Kaynak araçlarda kontrol edilecek bir şey yok: bravo!
+vu le {d} ¦ görüldü {d}
+revenu : la chose a changé ¦ geri döndü: bir şey değişti
+👁 « {t} » n’est plus marqué vu. ¦ 👁 “{t}” artık görüldü olarak işaretli değil.
+👁 « {t} » marqué vu. ¦ 👁 “{t}” görüldü olarak işaretlendi.
+impossible ¦ imkânsız
+impossibles ¦ imkânsız
+curieux ¦ tuhaf
+Le plus grave : {t} ¦ En ciddisi: {t}
+Doutes ¦ Şüpheler
+Hypothèse ouverte ¦ Açık hipotez
+↗ Contrôle ¦ ↗ Denetim
+↗ Comparer ¦ ↗ Karşılaştır
+Liens fragiles ¦ Zayıf bağlar
+↗ Solidité ¦ ↗ Sağlamlık
+Désaccord de preuve ¦ Kanıt uyuşmazlığı
+↗ Dossier de preuve ¦ ↗ Kanıt dosyası
+Lecture SocFace ¦ SocFace okuması
+↗ Image ¦ ↗ Görüntü
+Successoral ¦ Miras
+Naissance sans source ¦ Kaynaksız doğum
+Baptême sans source ¦ Kaynaksız vaftiz
+Mariage sans source ¦ Kaynaksız evlilik
+Décès sans source ¦ Kaynaksız ölüm
+Inhumation sans source ¦ Kaynaksız defin
+Événement sans source ¦ Kaynaksız olay
+Lien parent-enfant supposé ¦ Varsayılan ebeveyn–çocuk bağı
+Lien parent-enfant sans source ¦ Kaynaksız ebeveyn–çocuk bağı
+{a} réponses, {p} preuves ¦ yanıtlar: {a}, kanıtlar: {p}
+Désaccord sans résolution ¦ Çözülmemiş uyuşmazlık
+Homonyme dans un dossier de succession ¦ Bir miras dosyasında adaş
+Personne vivante ¦ Yaşayan kişi
+« Sans source » ¦ “Kaynaksız”
+Seulement les ancêtres Sosa ¦ Yalnızca Sosa ataları
+Pas du tout ¦ Hiç
+Une ligne marquée vue ¦ Görüldü işaretli satır
+Revient si la chose change ¦ Bir şey değişirse geri döner
+Ne revient jamais ¦ Asla geri dönmez
+Les lignes vues ¦ Görülen satırlar
+Cachées par le filtre de départ « Pas encore vus » ¦ Başlangıç filtresi “Henüz görülmeyenler” ile gizli
+Montrées en pâle ¦ Soluk gösterilir
+Pistes du successoral ¦ Miras ipuçları
+À part, dans les dossiers ¦ Ayrı, dosyalarda
+Aussi dans cette liste ¦ Bu listede de
+Le widget ¦ Widget
+Les trois nombres et le plus grave ¦ Üç sayı ve en ciddisi
+Les 5 premières lignes ¦ İlk 5 satır
+📱 Visite aux archives ¦ 📱 Arşiv ziyareti
+🗄 Préparer une visite ¦ 🗄 Ziyaret hazırla
+Préparer une visite ¦ Ziyaret hazırla
+🗄 Créer la visite ¦ 🗄 Ziyareti oluştur
+Service ¦ Birim
+Pour quel dossier ? (facultatif) ¦ Hangi dosya için? (isteğe bağlı)
+Ouvert : {h} ¦ Açık: {h}
+Les horaires et l’adresse sont lus dans la fiche du service. ¦ Çalışma saatleri ve adres birimin kartından okunur.
+Les cotes à voir ¦ Bakılacak arşiv numaraları
+déjà en ligne : Où chercher ? ¦ zaten çevrimiçi: Nerede aramalı?
+({n} cochées sur {m}) ¦ ({m} içinden {n} işaretli)
+Coche au moins une cote. ¦ En az bir arşiv numarası işaretle.
+🗄 Visite créée : {n}. Elle est dans Listes → Visites d’archives. ¦ 🗄 Ziyaret oluşturuldu: {n}. Listeler → Arşiv ziyaretleri içinde.
+⚖️ reliée à un dossier ¦ ⚖️ bir dosyaya bağlı
+📱 Emporter sur le téléphone ¦ 📱 Telefonda götür
+⤒ Rapporter les résultats ¦ ⤒ Sonuçları geri getir
+⤒ Importer les photos du jour ¦ ⤒ Günün fotoğraflarını içe aktar
+Importer les photos du jour ¦ Günün fotoğraflarını içe aktar
+Visite aux archives · {what} ¦ Arşiv ziyareti · {what}
+Marche sans réseau. Tout est gardé dans ce téléphone au fur et à mesure. ¦ Ağ olmadan çalışır. Her şey anında bu telefonda saklanır.
+Photo interdite ici : pas de bouton 📷. ¦ Burada fotoğraf yasak: 📷 düğmesi yok.
+＋ Une cote trouvée sur place, pas prévue au départ ¦ ＋ Yerinde bulunan, baştan planlanmamış bir arşiv numarası
+⤓ Enregistrer mes résultats ¦ ⤓ Sonuçlarımı kaydet
+📷 Photo ¦ 📷 Fotoğraf
+Retirer cette photo ¦ Bu fotoğrafı kaldır
+Cote ajoutée sur place ¦ Yerinde eklenen arşiv numarası
+✓ Gardé dans ce téléphone à {time} ¦ ✓ Bu telefonda saklandı: {time}
+⚠️ Ce navigateur ne garde rien dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Bu tarayıcı sayfada hiçbir şey saklamıyor: her arşiv numarasından sonra sonuçlarını kaydet.
+⚠️ Ce téléphone ne garde pas les photos dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Bu telefon fotoğrafları sayfada saklamıyor: her arşiv numarasından sonra sonuçlarını kaydet.
+⚠️ Ce fichier n’est pas une image. ¦ ⚠️ Bu dosya bir görüntü değil.
+⚠️ Note au moins un résultat avant d’enregistrer. ¦ ⚠️ Kaydetmeden önce en az bir sonuç not et.
+✓ Fichier « {name} » enregistré : rapporte-le dans l’app (⤒ Rapporter les résultats). ¦ ✓ “{name}” dosyası kaydedildi: onu uygulamaya geri getir (⤒ Sonuçları geri getir).
+Des photos manquaient : elles ne sont pas dans le fichier. ¦ Bazı fotoğraflar eksikti: dosyada yoklar.
+⤓ Enregistrer la page ¦ ⤓ Sayfayı kaydet
+Ce qui part dans la page ¦ Sayfaya neler gider
+Les cotes, l’acte cherché, la personne et ses années ¦ Arşiv numaraları, aranan kayıt, kişi ve yılları
+Ce qu’on sait déjà (parents, conjoint, dates connues) pour reconnaître l’acte sur place ¦ Zaten bilinenler (ebeveynler, eş, bilinen tarihler), kaydı yerinde tanıman için
+Les personnes vivantes ¦ Yaşayan kişiler
+décoché : un vivant devient « Personne vivante » ¦ işaretsiz: yaşayan kişi “Yaşayan kişi” olur
+Les fiches confidentielles : jamais ¦ Gizli kartlar: asla
+Photo interdite ici ¦ Burada fotoğraf yasak
+cache le bouton 📷 dans la page ¦ sayfadaki 📷 düğmesini gizler
+Un seul fichier .html : aucune requête, rien à installer. Mets-le sur le téléphone (câble, AirDrop, partage Android, courriel à toi-même) ; il marche en mode avion. ¦ Tek bir .html dosyası: istek yok, kurulacak bir şey yok. Onu telefona koy (kablo, AirDrop, Android paylaşımı, kendine e-posta); uçak modunda çalışır.
+📲 Montrer comment le mettre sur le téléphone ¦ 📲 Telefona nasıl konulacağını göster
+iPhone : l’aperçu de l’app Fichiers montre la page mais ne la fait pas marcher (pas de cases à cocher). Ouvre-la avec une app qui lit les pages .html, ou passe par la feuille imprimée et les photos (réglage). Android : Chrome ou Firefox l’ouvrent et la font marcher. ¦ iPhone: Dosyalar uygulamasının önizlemesi sayfayı gösterir ama çalıştırmaz (onay kutusu yok). Onu .html sayfalarını okuyan bir uygulamayla aç ya da basılı sayfayı ve fotoğrafları kullan (ayar). Android: Chrome ya da Firefox onu açar ve çalıştırır.
+📄 1 fichier, {n} Ko : mets-le sur ton téléphone. ¦ 📄 1 dosya, {n} KB: onu telefonuna koy.
+Résultats de la visite ¦ Ziyaret sonuçları
+Ce fichier vient d’une autre visite : « {t} ». ¦ Bu dosya başka bir ziyaretten: “{t}”.
+cote retirée de la visite depuis ¦ arşiv numarası o zamandan beri ziyaretten çıkarıldı
+ajoutée sur place : d’abord ajoutée à la visite ¦ yerinde eklendi: önce ziyarete eklenir
+dépouillement déjà relié ¦ döküm zaten bağlı
+＋ dépouillement du Journal ({r}) ¦ ＋ Günlük’ten döküm ({r})
+{n} → médias « à trier » ¦ {n} → medya “ayıklanacak”
+{n} → médias reliés à {who} ¦ {n} → medya, bağlı: {who}
+{n} → médias ¦ {n} → medya
+📑 pièce du dossier : reçue ¦ 📑 dosya belgesi: alındı
+✓ fichier vérifié ¦ ✓ dosya doğrulandı
+Rapporté du téléphone ¦ Telefondan getirildi
+Ce que l’app fera ¦ Uygulamanın yapacakları
+Ranger cette cote ¦ Bu arşiv numarasını yerleştir
+→ Reporter sur la fiche ¦ → Karta aktar
+Aucune date ni aucun lieu n’est écrit sur une fiche : ce qui est trouvé reste un dépouillement avec sa photo ; c’est toi qui le reportes sur la fiche, comme aujourd’hui. ¦ Bir karta ne tarih ne yer yazılır: bulunan şey fotoğrafıyla bir döküm olarak kalır; onu karta bugünkü gibi sen aktarırsın.
+{n} rapportées, {m} ¦ getirilen: {n}, {m}
+Ranger {n} et {m} ¦ {n} ve {m} yerleştir
+→ Reporter sur la fiche : le dépouillement et ses photos y sont reliés. ¦ → Karta aktar: döküm ve fotoğrafları ona bağlıdır.
+✓ Visite rangée : {d}, {m}, {p}. ¦ ✓ Ziyaret yerleştirildi: {d}, {m}, {p}.
+{n} pièce(s) reçue(s) ¦ alınan belgeler: {n}
+Visite marquée « faite ». ¦ Ziyaret “yapıldı” olarak işaretlendi.
+Cette visite n’a pas encore de cote. ¦ Bu ziyaretin henüz arşiv numarası yok.
+Rangées dans l’ordre des cotes d’après l’heure de prise de vue : corrige la cote d’une photo si besoin. ¦ Çekim saatine göre arşiv numaralarının sırasıyla dizildi: gerekirse bir fotoğrafın arşiv numarasını düzelt.
+— ne pas ranger — ¦ — yerleştirme —
+{n} rangées dans les médias (« à trier »). ¦ {n} medyaya yerleştirildi (“ayıklanacak”).
+Parents : {names} ¦ Ebeveynler: {names}
+Conjoint : {names} ¦ Eş: {names}
+Fiche confidentielle ¦ Gizli kart
+Ce fichier a déjà été rangé le {date} : rien n’est fait en double. ¦ Bu dosya zaten {date} tarihinde yerleştirildi: hiçbir şey iki kez yapılmaz.
+à trier ¦ ayıklanacak
+Trouvé à la visite : {where} ¦ Ziyarette bulundu: {where}
+Comment emporter la visite ¦ Ziyaret nasıl götürülsün
+Une page .html à ouvrir sur le téléphone ¦ Telefonda açılacak bir .html sayfası
+La feuille imprimée et les photos du téléphone ¦ Basılı sayfa ve telefon fotoğrafları
+Sans les vivants ¦ Yaşayanlar olmadan
+Avec les vivants ¦ Yaşayanlarla
+Réduites à 2000 px ¦ 2000 px’e küçültülmüş
+Une naissance trouvée ¦ Bulunan bir doğum
+Reste un dépouillement, tu la reportes ¦ Döküm olarak kalır, sen aktarırsın
+Proposer « → Reporter sur la fiche » dans la revue ¦ İncelemede “→ Karta aktar” öner
+Après le rangement ¦ Yerleştirmeden sonra
+Visite marquée « faite » ¦ Ziyaret “yapıldı” olarak işaretlenir
+Aucune photo reçue. ¦ Hiç fotoğraf alınmadı.
+Ce fichier est trop gros pour les résultats d’une visite. ¦ Bu dosya bir ziyaretin sonuçları için çok büyük.
+Ce fichier n’est pas les résultats d’une visite (il faut le .zip enregistré sur le téléphone). ¦ Bu dosya bir ziyaretin sonuçları değil (telefonda kaydedilen .zip gerekir).
+Ce fichier n’est pas les résultats d’une visite aux archives. ¦ Bu dosya bir arşiv ziyaretinin sonuçları değil.
+Ce fichier vient d’une visite qui n’est pas dans cette généalogie. ¦ Bu dosya bu soy ağacında olmayan bir ziyaretten.
+Cette visite a déjà été emportée : supprime-la dans le Planificateur si tu n’en veux plus. ¦ Bu ziyaret zaten götürüldü: artık istemiyorsan Planlayıcı’da sil.
+Choisis la cote de chaque photo. ¦ Her fotoğrafın arşiv numarasını seç.
+Coche au moins une cote à ranger. ¦ Yerleştirmek için en az bir arşiv numarası işaretle.
+Fichier .zip illisible. ¦ Okunamayan .zip dosyası.
+Fichier refusé : identifiant incorrect. ¦ Dosya reddedildi: geçersiz kimlik.
+Fichier refusé : il a été modifié depuis le téléphone (somme de contrôle). ¦ Dosya reddedildi: telefondan sonra değiştirilmiş (sağlama toplamı).
+Fichier refusé : il contient des données inattendues. ¦ Dosya reddedildi: beklenmeyen veriler içeriyor.
+Fichier refusé : il ne correspond pas à la page emportée (somme de contrôle). ¦ Dosya reddedildi: götürülen sayfaya uymuyor (sağlama toplamı).
+Fichier refusé : la liste des cotes manque. ¦ Dosya reddedildi: arşiv numaraları listesi eksik.
+Fichier refusé : la liste des photos est mal formée. ¦ Dosya reddedildi: fotoğraf listesi bozuk.
+Fichier refusé : results.json est illisible. ¦ Dosya reddedildi: results.json okunamıyor.
+Fichier refusé : results.json manque. ¦ Dosya reddedildi: results.json eksik.
+Fichier refusé : trop de fichiers dedans. ¦ Dosya reddedildi: içinde çok fazla dosya var.
+Fichier refusé : un chemin sort du dossier. ¦ Dosya reddedildi: bir yol klasörün dışına çıkıyor.
+Fichier refusé : un résultat est inconnu. ¦ Dosya reddedildi: bilinmeyen bir sonuç.
+Fichier refusé : un élément est trop gros. ¦ Dosya reddedildi: bir öğe çok büyük.
+Fichier refusé : une cote contient des données inattendues. ¦ Dosya reddedildi: bir arşiv numarası beklenmeyen veriler içeriyor.
+Fichier refusé : une cote est mal formée. ¦ Dosya reddedildi: bir arşiv numarası bozuk.
+Fichier refusé : une photo annoncée manque. ¦ Dosya reddedildi: bildirilen bir fotoğraf eksik.
+Fichier refusé : une photo n’est pas une image. ¦ Dosya reddedildi: bir fotoğraf görüntü değil.
+Impossible de ranger la photo dans les médias. ¦ Fotoğraf medyaya yerleştirilemiyor.
+Lecture des fichiers .zip impossible sur cet ordinateur. ¦ Bu bilgisayarda .zip dosyaları okunamıyor.
+Trop de photos d’un coup (200 au plus). ¦ Bir seferde çok fazla fotoğraf (en çok 200).
+Une photo est trop grosse ou n’a pas été reçue. ¦ Bir fotoğraf çok büyük ya da alınmadı.

@@ -298,6 +298,9 @@ try {
         require_once __DIR__ . '/lib/photo_ask.php';
         pa_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if (!$isWrite && ($action === 'compl' || $action === 'compl_export')) { // 🧩 études de notaire, homonymes, tous les doutes, visite aux archives (lib/complements.php)
+        compl_get($pdo, (string) $action);
+    }
     if ($action === 'successoral' || $action === 'successoral_write') { // ⚖️ généalogiste successoral : dossiers de succession (lib/successoral.php)
         successoral_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
@@ -9798,6 +9801,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_battue_commune_status' => save_battue_commune_status($pdo,$data),
             'dismiss_issue' => dismiss_issue($pdo,$data),
             'semaine_mark' => semaine_mark($pdo,$data), // 🗓 Ma semaine : ✓ fait, ⏭ reporter, ↶ Annuler (lib/semaine.php)
+            'compl_write' => compl_write($pdo,$data), // 🧩 🏛 études de notaire, ⚠️ homonymes, 📋 doutes, 📱 visite aux archives (lib/complements.php)
             'ou_chercher_piste' => ouc_make_lead($pdo,$data), // 🌍 Où chercher ? : « ＋ En faire une piste » (lib/ou_chercher.php)
             'mur_save' => ouc_wall_save($pdo,$data), // 🧩 Murs de brique : 🧱 Je bloque ici, statut, note
             'mur_restore' => ouc_wall_restore($pdo,$data), // 🧩 Murs de brique : ↶ Annuler
@@ -11796,11 +11800,13 @@ function save_courrier(PDO $pdo,array $data): array
         if (!$old) throw new RuntimeException('Courrier introuvable.');
         $pdo->prepare('UPDATE courriers SET organisme=?,destinataire=?,objet=?,date_envoi=?,statut=?,relance_delai_jours=?,relance_date=?,fait=?,fait_type=?,notes=?,copy_order_json=?,updated_at=CURRENT_TIMESTAMP WHERE id=?')
             ->execute([$organisme,$destinataire,$objet,$dateEnvoi,$statut,$delai,$relanceDate,$fait,$faitType,$notes,$copyOrderJson,$id]);
+        if (function_exists('compl_courrier_store')) compl_courrier_store($pdo, $id, $statut === 'reponse_recue' ? $data : ['recu_le' => ''] + array_intersect_key($data, ['archive_service_id' => 1]), (string) ($old['statut'] ?? '')); // 📮 « Réponse reçue le » (lib/complements.php)
         log_change($pdo,'courrier',$id,'update','Courrier modifié : '.$destinataire.' — '.$objet,$old,['id'=>$id,'organisme'=>$organisme,'destinataire'=>$destinataire,'objet'=>$objet,'date_envoi'=>$dateEnvoi,'statut'=>$statut,'relance_delai_jours'=>$delai,'relance_date'=>$relanceDate,'fait'=>$fait,'fait_type'=>$faitType,'notes'=>$notes,'copy_order_json'=>$copyOrderJson]);
     } else {
         $pdo->prepare('INSERT INTO courriers(organisme,destinataire,objet,date_envoi,statut,relance_delai_jours,relance_date,fait,fait_type,notes,copy_order_json) VALUES(?,?,?,?,?,?,?,?,?,?,?)')
             ->execute([$organisme,$destinataire,$objet,$dateEnvoi,$statut,$delai,$relanceDate,$fait,$faitType,$notes,$copyOrderJson]);
         $id = (int)$pdo->lastInsertId();
+        if (function_exists('compl_courrier_store')) compl_courrier_store($pdo, $id, $statut === 'reponse_recue' ? $data : array_intersect_key($data, ['archive_service_id' => 1]), ''); // 📮 lib/complements.php
         log_change($pdo,'courrier',$id,'create','Courrier ajouté : '.$destinataire.' — '.$objet,null,['id'=>$id,'organisme'=>$organisme,'destinataire'=>$destinataire,'objet'=>$objet,'date_envoi'=>$dateEnvoi,'statut'=>$statut,'relance_delai_jours'=>$delai,'relance_date'=>$relanceDate,'fait'=>$fait,'fait_type'=>$faitType,'notes'=>$notes,'copy_order_json'=>$copyOrderJson]);
     }
     return ['id'=>$id];

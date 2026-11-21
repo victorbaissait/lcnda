@@ -1,0 +1,166 @@
+fr ¦ ru ¦ uk
+# 🏛⚠️📋📱 Compléments aux outils existants (docs/design/complements-existants.html) : A études de notaire, B homonymes
+Le serveur ne répond pas. ¦ Сервер не отвечает. ¦ Сервер не відповідає.
+⚙️ Réglages de cet outil ¦ ⚙️ Настройки этого инструмента ¦ ⚙️ Налаштування цього інструмента
+Enlève un filtre, ou cherche autrement. ¦ Убери фильтр или поищи иначе. ¦ Прибери фільтр або пошукай інакше.
+Listes · Archives et sources ¦ Списки · Архивы и источники ¦ Списки · Архіви та джерела
+=étude ¦ контора|конторы|контор ¦ контора|контори|контор
+{n} j ¦ {n} дн. ¦ {n} дн.
+sur {n} réponses ¦ по {n} ответам ¦ за {n} відповідями
+pas assez de réponses ¦ мало ответов ¦ замало відповідей
+{n} sur {m} nécessaires ¦ {n} из {m} нужных ¦ {n} з {m} потрібних
+clerc : {name} ¦ помощник: {name} ¦ помічник: {name}
+Études de notaire ¦ Нотариальные конторы ¦ Нотаріальні контори
+🏛 Études de notaire ¦ 🏛 Нотариальные конторы ¦ 🏛 Нотаріальні контори
+Étude de notaire ¦ Нотариальная контора ¦ Нотаріальна контора
+Une étude est un service d’archives de la sorte « Étude de notaire » : ses notaires et clercs, ses dossiers, ses courriers. ¦ Контора — это архивная служба вида «Нотариальная контора»: её нотариусы и помощники, её дела, её письма. ¦ Контора — це архівна служба виду «Нотаріальна контора»: її нотаріуси й помічники, її справи, її листи.
+＋ Nouvelle étude ¦ ＋ Новая контора ¦ ＋ Нова контора
+🧩 Regrouper et créer leurs fiches… ¦ 🧩 Сгруппировать и создать их карточки… ¦ 🧩 Згрупувати й створити їхні картки…
+Chercher une étude, un notaire, une ville… ¦ Найти контору, нотариуса, город… ¦ Знайти контору, нотаріуса, місто…
+Département : {d} ¦ Департамент: {d} ¦ Департамент: {d}
+Répond le plus vite ¦ Отвечает быстрее всех ¦ Відповідає найшвидше
+Le plus de dossiers ¦ Больше всего дел ¦ Найбільше справ
+Aucune étude de notaire pour l’instant ¦ Пока нет нотариальной конторы ¦ Поки немає нотаріальної контори
+Une étude est un service d’archives de la sorte « Étude de notaire » : crée-la ici, ou regroupe les notaires tapés à la main dans tes dossiers. ¦ Контора — это архивная служба вида «Нотариальная контора»: создай её здесь или сгруппируй нотариусов, вписанных вручную в твоих делах. ¦ Контора — це архівна служба виду «Нотаріальна контора»: створи її тут або згрупуй нотаріусів, уписаних вручну у твоїх справах.
+Aucun notaire noté ¦ Нотариус не указан ¦ Нотаріуса не вказано
+{a} en cours · {b} clos ¦ {a} в работе · {b} закрыто ¦ {a} у роботі · {b} закрито
+{n} en attente ¦ {n} ждут ¦ {n} чекають
+Appeler ¦ Позвонить ¦ Зателефонувати
+fiche de personne n° {n} ¦ карточка человека № {n} ¦ картка особи № {n}
+nom seulement ¦ только имя ¦ лише ім’я
+ligne directe {tel} ¦ прямой номер {tel} ¦ прямий номер {tel}
+ancien depuis le {d} ¦ бывший с {d} ¦ колишній з {d}
+Aucun notaire ni clerc noté. ¦ Не указаны ни нотариус, ни помощник. ¦ Не вказано ні нотаріуса, ні помічника.
+Notaires et clercs ¦ Нотариусы и помощники ¦ Нотаріуси й помічники
+lus dans les dossiers, rien n’est recopié ¦ прочитано из дел, ничего не копируется ¦ прочитано зі справ, нічого не копіюється
+réf. du notaire {ref} ¦ номер у нотариуса {ref} ¦ номер у нотаріуса {ref}
+Aucun dossier relié à cette étude. ¦ С этой конторой не связано ни одно дело. ¦ З цією конторою не пов’язано жодної справи.
+reçue le {d} ¦ получено {d} ¦ отримано {d}
+{n} j · d’habitude {m} j ¦ {n} дн. · обычно {m} дн. ¦ {n} дн. · зазвичай {m} дн.
+en attente · {n} j ¦ ждёт · {n} дн. ¦ чекає · {n} дн.
+✓ Réponse reçue ¦ ✓ Ответ получен ¦ ✓ Відповідь отримано
+⏳ Délai de réponse constaté : {days} j en moyenne (de {min} à {max} j). Réponses comptées : {n}, celles de ce registre dont la date est notée. C’est ce que tu as observé, rien d’autre : ce n’est ni un délai légal, ni une promesse de l’étude. ¦ ⏳ Замеченный срок ответа: в среднем {days} дн. (от {min} до {max} дн.). Учтённые ответы: {n}, те из этого реестра, у которых указана дата. Это только то, что ты заметил: это не срок по закону и не обещание конторы. ¦ ⏳ Помічений строк відповіді: у середньому {days} дн. (від {min} до {max} дн.). Враховані відповіді: {n}, ті з цього реєстру, де вказано дату. Це лише те, що ти помітив: це не строк за законом і не обіцянка контори.
+⏳ Délai de réponse constaté : {days} j en médiane (de {min} à {max} j). Réponses comptées : {n}, celles de ce registre dont la date est notée. C’est ce que tu as observé, rien d’autre : ce n’est ni un délai légal, ni une promesse de l’étude. ¦ ⏳ Замеченный срок ответа: медиана {days} дн. (от {min} до {max} дн.). Учтённые ответы: {n}, те из этого реестра, у которых указана дата. Это только то, что ты заметил: это не срок по закону и не обещание конторы. ¦ ⏳ Помічений строк відповіді: медіана {days} дн. (від {min} до {max} дн.). Враховані відповіді: {n}, ті з цього реєстру, де вказано дату. Це лише те, що ти помітив: це не строк за законом і не обіцянка контори.
+⏳ Pas assez de réponses datées pour un délai constaté ({n} sur {m} nécessaires). ¦ ⏳ Мало датированных ответов для замеченного срока ({n} из {m} нужных). ¦ ⏳ Замало датованих відповідей для поміченого строку ({n} з {m} потрібних).
+Ses courriers ¦ Её письма ¦ Її листи
+＋ Courrier à l’étude ¦ ＋ Письмо в контору ¦ ＋ Лист до контори
+＋ {n} courriers plus anciens · tout voir dans le Registre ¦ ＋ ещё {n} старых писем · всё смотри в Реестре ¦ ＋ ще {n} старіших листів · усе дивись у Реєстрі
+Aucun courrier relié à cette étude. ¦ С этой конторой не связано ни одно письмо. ¦ З цією конторою не пов’язано жодного листа.
+« {name} » retiré de l’étude ¦ «{name}» убран из конторы ¦ «{name}» прибрано з контори
+Réponse reçue le {d} ¦ Ответ получен {d} ¦ Відповідь отримано {d}
+Courrier remis en attente ¦ Письмо снова ждёт ¦ Лист знову чекає
+Vide : le courrier repasse « en attente ». ¦ Пусто: письмо снова «ждёт». ¦ Порожньо: лист знову «чекає».
+Ajouter un notaire ou un clerc ¦ Добавить нотариуса или помощника ¦ Додати нотаріуса чи помічника
+Fiche de personne (facultatif) ¦ Карточка человека (необязательно) ¦ Картка особи (необов’язково)
+Jusqu’à (ancien) ¦ До (бывший) ¦ До (колишній)
+Un notaire qui change d’étude reste nommé dans ses anciens dossiers : mets une date de fin, il passe « ancien ». ¦ Нотариус, сменивший контору, остаётся указанным в своих старых делах: поставь дату окончания, и он станет «бывшим». ¦ Нотаріус, що змінив контору, лишається вказаним у своїх старих справах: постав дату завершення, і він стане «колишнім».
+Donne le nom du notaire ou du clerc. ¦ Укажи имя нотариуса или помощника. ¦ Вкажи ім’я нотаріуса чи помічника.
+Courrier à l’étude ¦ Письмо в контору ¦ Лист до контори
+état des recherches ¦ состояние поисков ¦ стан пошуків
+Courrier rangé au Registre ¦ Письмо сохранено в Реестре ¦ Лист збережено в Реєстрі
+Une étude, ou un nom gardé en texte… ¦ Контора или имя, сохранённое текстом… ¦ Контора або ім’я, збережене текстом…
+Choisis l’étude ; le nom tapé dans le champ du notaire reste dans le dossier. ¦ Выбери контору; имя, вписанное в поле нотариуса, остаётся в деле. ¦ Обери контору; ім’я, уписане в поле нотаріуса, лишається у справі.
+nom gardé en texte, sans fiche d’étude ¦ имя сохранено текстом, без карточки конторы ¦ ім’я збережено текстом, без картки контори
+texte ¦ текст ¦ текст
+Notaire chargé du dossier ¦ Нотариус, ведущий дело ¦ Нотаріус, що веде справу
+ancien ¦ бывший ¦ колишній
+Choisi parmi les notaires de l’étude, ou laissé vide. ¦ Выбран из нотариусов конторы или оставлен пустым. ¦ Обраний з нотаріусів контори або залишений порожнім.
+✓ Notaire du dossier : {who}. Ligne au 🕓 Journal du dossier. ¦ ✓ Нотариус дела: {who}. Строка в 🕓 Журнале дела. ¦ ✓ Нотаріус справи: {who}. Рядок у 🕓 Журналі справи.
+même nom « {n} » ¦ то же имя «{n}» ¦ те саме ім’я «{n}»
+même ville ¦ тот же город ¦ те саме місто
+même ville que le défunt ¦ тот же город, что у умершего ¦ те саме місто, що в померлого
+initiale {i} ¦ инициал {i} ¦ ініціал {i}
+une seule étude de ce nom ¦ только одна контора с таким именем ¦ лише одна контора з таким ім’ям
+Autre étude ¦ Другая контора ¦ Інша контора
+Laisser en texte ¦ Оставить текстом ¦ Залишити текстом
+{n} noms tapés à la main · rien n’est changé avant « Appliquer ». ¦ {n} имён вписано вручную · ничего не меняется до «Применить». ¦ {n} імен уписано вручну · нічого не змінюється до «Застосувати».
+existe ¦ есть ¦ є
+plusieurs études possibles ¦ несколько возможных контор ¦ кілька можливих контор
+Sans proposition ¦ Без предложения ¦ Без пропозиції
+＋ Créer une étude ¦ ＋ Создать контору ¦ ＋ Створити контору
+Courriers qui ressemblent à une étude ¦ Письма, похожие на контору ¦ Листи, схожі на контору
+pour le délai constaté ¦ для замеченного срока ¦ для поміченого строку
+Les rapprochements ne regardent que le nom de famille (sans « Me », « Maître », « SCP », « Étude », accents) et la ville quand elle est écrite. Deux études du même nom dans deux villes ne sont jamais réunies. Le nom tapé reste dans chaque dossier. ¦ Сравнение смотрит только на фамилию (без «Me», «Maître», «SCP», «Étude», диакритики) и на город, если он указан. Две конторы с одним именем в двух городах никогда не объединяются. Вписанное имя остаётся в каждом деле. ¦ Порівняння дивиться лише на прізвище (без «Me», «Maître», «SCP», «Étude», діакритики) і на місто, якщо його вказано. Дві контори з тим самим ім’ям у двох містах ніколи не об’єднуються. Уписане ім’я лишається в кожній справі.
+Notaires tapés à la main ¦ Нотариусы, вписанные вручную ¦ Нотаріуси, уписані вручну
+Aucun notaire tapé à la main sans fiche. ¦ Нет нотариуса, вписанного вручную, без карточки. ¦ Немає нотаріуса, уписаного вручну, без картки.
+Appliquer à {n} noms ({m} dossiers) ¦ Применить к {n} именам ({m} дел) ¦ Застосувати до {n} імен ({m} справ)
+✓ {n} dossiers reliés à leur étude. Le nom tapé est gardé dans chaque dossier. ¦ ✓ {n} дел связано со своей конторой. Вписанное имя сохраняется в каждом деле. ¦ ✓ {n} справ пов’язано зі своєю конторою. Уписане ім’я зберігається в кожній справі.
+{n} notaires tapés à la main dans tes dossiers n’ont pas encore de fiche. ¦ {n} нотариусов, вписанных вручную в твоих делах, пока без карточки. ¦ {n} нотаріусів, уписаних вручну у твоїх справах, ще без картки.
+{n} notaire tapé à la main dans tes dossiers n’a pas encore de fiche. ¦ {n} нотариус, вписанный вручную в твоих делах, пока без карточки. ¦ {n} нотаріус, уписаний вручну у твоїх справах, ще без картки.
+{cases} · pas encore de fiche ¦ {cases} · пока без карточки ¦ {cases} · ще без картки
+Déjà tapé dans d’autres dossiers ¦ Уже вписано в других делах ¦ Уже вписано в інших справах
+{n} dossiers en cours ¦ {n} дел в работе ¦ {n} справ у роботі
+{n} dossier en cours ¦ {n} дело в работе ¦ {n} справа в роботі
+Étude de notaire introuvable. ¦ Нотариальная контора не найдена. ¦ Нотаріальну контору не знайдено.
+Ce notaire n’est pas de cette étude. ¦ Этот нотариус не из этой конторы. ¦ Цей нотаріус не з цієї контори.
+Ce dossier n’est pas relié à cette étude. ¦ Это дело не связано с этой конторой. ¦ Ця справа не пов’язана з цією конторою.
+Date de réponse incorrecte. ¦ Неверная дата ответа. ¦ Неправильна дата відповіді.
+Où ranger les études ¦ Куда класть конторы ¦ Куди класти контори
+Dans 🏛 Services d’archives, sorte « Étude de notaire » ¦ В 🏛 Архивные службы, вид «Нотариальная контора» ¦ До 🏛 Архівних служб, вид «Нотаріальна контора»
+Une liste « Études de notaire » à part ¦ Отдельный список «Нотариальные конторы» ¦ Окремий список «Нотаріальні контори»
+Délai constaté ¦ Замеченный срок ¦ Помічений строк
+Moyenne, avec le plus court et le plus long ¦ Среднее, с самым коротким и самым долгим ¦ Середнє, з найкоротшим і найдовшим
+Médiane (moins sensible à une réponse très lente) ¦ Медиана (меньше зависит от очень медленного ответа) ¦ Медіана (менше залежить від дуже повільної відповіді)
+Ne pas l’afficher ¦ Не показывать ¦ Не показувати
+Nombre de réponses avant d’afficher un délai ¦ Сколько ответов нужно, чтобы показать срок ¦ Скільки відповідей треба, щоб показати строк
+Les courriers comptés ¦ Учитываемые письма ¦ Враховані листи
+Ceux des 3 dernières années ¦ За последние 3 года ¦ За останні 3 роки
+Ce que propose le menu de choix ¦ Что предлагает меню выбора ¦ Що пропонує меню вибору
+Les études, puis les noms déjà tapés ¦ Конторы, затем уже вписанные имена ¦ Контори, потім уже вписані імена
+Les études seulement ¦ Только конторы ¦ Лише контори
+Le notaire chargé du dossier ¦ Нотариус, ведущий дело ¦ Нотаріус, що веде справу
+Un notaire de l’étude, facultatif ¦ Нотариус конторы, необязательно ¦ Нотаріус контори, необов’язково
+Seulement l’étude ¦ Только контора ¦ Лише контора
+Les propositions de regroupement ¦ Предложения группировки ¦ Пропозиції групування
+Cochées quand le nom et la ville concordent ¦ Отмечены, когда совпадают имя и город ¦ Позначені, коли збігаються ім’я та місто
+Toutes décochées ¦ Все без отметки ¦ Усі без позначки
+Le bandeau « notaires sans fiche » ¦ Полоса «нотариусы без карточки» ¦ Смуга «нотаріуси без картки»
+Montré dans la liste des études ¦ Видна в списке контор ¦ Показана в списку контор
+Jamais (on passe par ⋯) ¦ Никогда (через ⋯) ¦ Ніколи (через ⋯)
+⚠️ Homonymes ¦ ⚠️ Однофамильцы ¦ ⚠️ Однофамільці
+fiche n° {n} (confidentielle) ¦ карточка № {n} (конфиденциальная) ¦ картка № {n} (конфіденційна)
+naissance : date inconnue ¦ рождение: дата неизвестна ¦ народження: дата невідома
+même année de naissance ¦ тот же год рождения ¦ той самий рік народження
+naissance à {n} an(s) près ¦ рождение ±{n} г. ¦ народження ±{n} р.
+même commune ¦ та же коммуна ¦ та сама комуна
+Nom, prénom ¦ Фамилия, имя ¦ Прізвище, ім’я
+inconnus ¦ неизвестны ¦ невідомі
+arbre seulement · ajouté le {d} ¦ только древо · добавлено {d} ¦ лише дерево · додано {d}
+arbre seulement ¦ только древо ¦ лише дерево
+Critère ¦ Критерий ¦ Критерій
+Celui du dossier ¦ Тот, что в деле ¦ Той, що у справі
+L’autre fiche ¦ Другая карточка ¦ Інша картка
+↗ Ouvrir la fiche n° {n} ¦ ↗ Открыть карточку № {n} ¦ ↗ Відкрити картку № {n}
+👥 Peut-être les mêmes : ouvrir la fusion ¦ 👥 Может, это один человек: открыть слияние ¦ 👥 Можливо, це одна особа: відкрити злиття
+Une autre fiche porte le même nom ¦ У другой карточки то же имя ¦ Інша картка має те саме ім’я
+pas dans ce dossier. ¦ не в этом деле. ¦ не в цій справі.
+Celui à qui tu écris : {who}. ¦ Тот, кому ты пишешь: {who}. ¦ Той, кому ти пишеш: {who}.
+enfant de {p} ¦ ребёнок: {p} ¦ дитина: {p}
+{n} héritiers sur {m} ont un homonyme dans la base ¦ У {n} наследников из {m} есть однофамилец в базе ¦ {n} спадкоємців із {m} мають однофамільця в базі
+Voir les détails ¦ Посмотреть подробности ¦ Переглянути подробиці
+Envoyer quand même aux {n} ¦ Всё равно отправить всем {n} ¦ Усе одно надіслати всім {n}
+✓ Retenu : {a} ({y1}) et {b} ({y2}) sont deux personnes. L’alerte ne reviendra plus pour eux deux. ¦ ✓ Запомнено: {a} ({y1}) и {b} ({y2}) — два разных человека. Предупреждение для них больше не появится. ¦ ✓ Запам’ятовано: {a} ({y1}) і {b} ({y2}) — дві різні особи. Попередження для них більше не з’явиться.
+née à {place} en {y} ¦ родилась в {place} в {y} г. ¦ народилася в {place} у {y} р.
+né à {place} en {y} ¦ родился в {place} в {y} г. ¦ народився в {place} у {y} р.
+née à {place}, date inconnue ¦ родилась в {place}, дата неизвестна ¦ народилася в {place}, дата невідома
+né à {place}, date inconnue ¦ родился в {place}, дата неизвестна ¦ народився в {place}, дата невідома
+✓ C’est lui ¦ ✓ Это он ¦ ✓ Це він
+✓ C’est bien lui que je contacte ¦ ✓ Да, я связываюсь именно с ним ¦ ✓ Так, я зв’язуюся саме з ним
+👁 Voir ¦ 👁 Посмотреть ¦ 👁 Переглянути
+👁 Voir l’autre ¦ 👁 Посмотреть другого ¦ 👁 Переглянути іншого
+Ce n’est pas la même personne ¦ Это не один и тот же человек ¦ Це не та сама особа
+Noté au 🕓 Journal : homonyme vu, destinataire confirmé. L’alerte reviendra au prochain contact. ¦ Записано в 🕓 Журнал: однофамилец просмотрен, адресат подтверждён. Предупреждение появится при следующем контакте. ¦ Записано в 🕓 Журнал: однофамільця переглянуто, адресата підтверджено. Попередження з’явиться при наступному контакті.
+Noté au 🕓 Journal : homonyme vu, destinataire confirmé. L’alerte ne reviendra plus dans ce dossier. ¦ Записано в 🕓 Журнал: однофамилец просмотрен, адресат подтверждён. В этом деле предупреждение больше не появится. ¦ Записано в 🕓 Журнал: однофамільця переглянуто, адресата підтверджено. У цій справі попередження більше не з’явиться.
+Écart d’années de naissance ¦ Разница в годах рождения ¦ Різниця в роках народження
+2 ans ¦ 2 года ¦ 2 роки
+Même département, ou lieu inconnu ¦ Тот же департамент или место неизвестно ¦ Той самий департамент або місце невідоме
+Même commune seulement ¦ Только та же коммуна ¦ Лише та сама комуна
+Peu importe le lieu ¦ Место неважно ¦ Місце неважливе
+Quand l’afficher ¦ Когда показывать ¦ Коли показувати
+À chaque courrier, appel et questionnaire ¦ При каждом письме, звонке и анкете ¦ При кожному листі, дзвінку й анкеті
+Au premier contact d’un héritier seulement ¦ Только при первом контакте с наследником ¦ Лише при першому контакті зі спадкоємцем
+Après « ✓ C’est bien lui » ¦ После «✓ Да, я связываюсь именно с ним» ¦ Після «✓ Так, я зв’язуюся саме з ним»
+L’alerte revient au prochain contact ¦ Предупреждение появляется при следующем контакте ¦ Попередження з’являється при наступному контакті
+Elle ne revient plus dans ce dossier ¦ В этом деле больше не появляется ¦ У цій справі більше не з’являється
+Où chercher l’homonyme ¦ Где искать однофамильца ¦ Де шукати однофамільця
+Seulement les autres dossiers ¦ Только в других делах ¦ Лише в інших справах
