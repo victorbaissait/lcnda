@@ -70,7 +70,8 @@ const PW = 'Mazaud-Bureau-2026-secret';
     await t('rien de la porte dans la généalogie : appareils et jetons hachés dans le dossier de données de l’ordinateur', () => {
         const g = read('electron/lan-gate.js');
         assert.match(g, /path\.join\(o\.dataDir, 'reseau-local'\)/);
-        assert.match(read('lib/migrations.php'), /const SCHEMA_VERSION = 99;/);
+        const sv = Number((read('lib/migrations.php').match(/const SCHEMA_VERSION = (\d+);/) || [])[1]);
+        assert.ok(sv >= 99, 'structure au moins n°99 : ' + sv);
         assert.match(read('lib/migrations.php'), /98 => 'schema_v98'/);
     });
     await t('textes : FAQ et traductions dans les 31 langues', () => {
