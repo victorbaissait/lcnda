@@ -62,6 +62,7 @@ function ad_config(bool $fresh = false): array
 {
     static $c = null;
     if ($c !== null && !$fresh) { return $c; }
+    ad_memo_gen(true);
     $c = ['departements' => [], 'generated' => '', 'note' => '', 'present' => false];
     $path = ad_config_path();
     if (!is_file($path) || filesize($path) > 4_000_000) { return $c; }
@@ -101,6 +102,14 @@ function ad_fold(string $s): string
 /** « 12 mars 1904 » → [1904, 1904] ; « vers 1910 » → [1905, 1915] ; « entre 1905 et 1912 » ; « avant 1920 » → [1910, 1920] ; « après 1900 » → [1900, 1910] */
 function ad_range(string $text, ?int $year): ?array
 {
+    static $memo = []; // fonction pure, appelée pour chaque acte : gardée par date
+    $mk = $text . "\x1f" . $year;
+    if (array_key_exists($mk, $memo)) { return $memo[$mk]; }
+    if (count($memo) > 100000) { $memo = []; }
+    return $memo[$mk] = ad_range_raw($text, $year);
+}
+function ad_range_raw(string $text, ?int $year): ?array
+{
     $t = ad_fold($text);
     $ys = preg_match_all('/(?<!\d)(1[0-9]\d\d|20\d\d)(?!\d)/', $t, $m) ? array_map('intval', $m[1]) : [];
     if (!$ys && $year) { $ys = [$year]; }
@@ -118,6 +127,7 @@ function ad_corrections(PDO $pdo, bool $fresh = false): array
 {
     static $rows = null;
     if ($rows !== null && !$fresh) { return $rows; }
+    ad_memo_gen(true);
     $rows = [];
     if (!ad_ready($pdo)) { return $rows; }
     foreach ($pdo->query('SELECT * FROM archives_dispo_corr ORDER BY id')->fetchAll(PDO::FETCH_ASSOC) as $r) { $rows[] = $r; }
@@ -128,6 +138,15 @@ function ad_corrections(PDO $pdo, bool $fresh = false): array
  * personne), from (registres paroissiaux), la source et ce que la personne a corrigé.
  */
 function ad_limit(PDO $pdo, string $dept, string $key, string $commune = ''): ?array
+{
+    static $memo = [], $gen = -1;
+    if ($gen !== ad_memo_gen()) { $memo = []; $gen = ad_memo_gen(); }
+    $mk = spl_object_id($pdo) . "\x1f" . $dept . "\x1f" . $key . "\x1f" . $commune;
+    if (array_key_exists($mk, $memo)) { return $memo[$mk]; }
+    if (count($memo) > 50000) { $memo = []; }
+    return $memo[$mk] = ad_limit_raw($pdo, $dept, $key, $commune);
+}
+function ad_limit_raw(PDO $pdo, string $dept, string $key, string $commune = ''): ?array
 {
     $cfg = ad_config()['departements'][$dept]['acts'][$key] ?? null;
     $lim = $cfg ? ['until' => $cfg['until'], 'from' => $cfg['from'], 'confirmed' => ($cfg['verified'] && $cfg['confidence'] === 'officielle') ? $cfg['until'] : null,
@@ -149,6 +168,48 @@ function ad_limit(PDO $pdo, string $dept, string $key, string $commune = ''): ?a
     return $lim;
 }
 
+/** le « numéro de version » des tables (livrée, corrections) : les calculs gardés par lieu ou par limite repartent à zéro s'il change */
+function ad_memo_gen(bool $bump = false): int
+{
+    static $g = 0;
+    if ($bump) { $g++; }
+    return $g;
+}
+/**
+ * Ce que la pastille d'un acte tire de son seul lieu (ad_status) : pays (un lieu qui est lui-même un pays étranger,
+ * « Pologne » sans pays noté, compte comme l'étranger), à l'étranger ou non, à qui demander alors, département, site,
+ * commune. Gardé par lieu.
+ */
+function ad_place_info(string $place, string $county, string $countryRaw, string $admin2): array
+{
+    static $memo = [], $gen = -1;
+    if ($gen !== ad_memo_gen()) { $memo = []; $gen = ad_memo_gen(); }
+    $mk = $place . "\x1f" . $county . "\x1f" . $countryRaw . "\x1f" . $admin2;
+    if (isset($memo[$mk])) { return $memo[$mk]; }
+    if (count($memo) > 50000) { $memo = []; }
+    $out = ['abroad' => false, 'who' => '', 'country' => '', 'noplace' => false, 'code' => '', 'dept' => null, 'site' => '', 'commune' => ''];
+    $country = trim($countryRaw);
+    $first = trim((string) preg_replace('/\s*,.*$/', '', $place));
+    if (($country === '' || preg_match('/^(france|fr|fra)$/i', $country)) && $first !== '' && preg_match(AD_FOREIGN, $first)) { $country = $first; }
+    $out['country'] = $country;
+    if ($country !== '' && !preg_match('/^(france|fr|fra)$/i', $country)) {
+        $out['abroad'] = true; $out['who'] = preg_match(AD_COLONIES, $country) ? 'anom' : 'scec';
+        return $memo[$mk] = $out;
+    }
+    if (trim($place) === '') { $out['noplace'] = true; return $memo[$mk] = $out; }
+    $a = function_exists('gaps_archive_of') ? gaps_archive_of(['name' => $place, 'county' => $county, 'country' => $country, 'admin2_code' => $admin2]) : [];
+    if (empty($a['code'])) { return $memo[$mk] = $out; }
+    $code = (string) $a['code'];
+    $dcfg = ad_config()['departements'][$code] ?? null;
+    $site = $dcfg['site'] ?? '';
+    if ($site === '' && function_exists('so_department')) { $sd = so_department((string) $a['department'], $place); $site = $sd['url'] ?? ''; }
+    $out['code'] = $code;
+    $out['dept'] = ['code' => $code, 'name' => (string) $a['department'], 'service' => (string) $a['label'], 'note' => (string) ($dcfg['note'] ?? '')];
+    $out['site'] = $site;
+    $out['commune'] = trim((string) preg_replace('/\s*[,(].*$/', '', $place));
+    return $memo[$mk] = $out;
+}
+
 /* ═════ la pastille d'un acte ═════ */
 /**
  * $e : {id, tag, date_text, year, place, county, country, admin2_code, linked}. → {status, reason, key, dept, range, limit,
@@ -163,29 +224,24 @@ function ad_status(PDO $pdo, array $e, ?string $today = null): array
         'open_at' => null, 'open_year' => null, 'who' => '', 'site' => '', 'linked' => !empty($e['linked']), 'place' => (string) ($e['place'] ?? ''), 'date' => (string) ($e['date_text'] ?? '')];
     if (!in_array($tag, AD_TAGS, true)) { $out['reason'] = 'tag'; return $out; }
     $r = ad_range((string) ($e['date_text'] ?? ''), isset($e['year']) && $e['year'] !== null && $e['year'] !== '' ? (int) $e['year'] : null);
-    $country = trim((string) ($e['country'] ?? ''));
-    // un lieu qui est lui-même un pays étranger (« Pologne », sans pays noté) : à l'étranger
-    $first = trim((string) preg_replace('/\s*,.*$/', '', (string) ($e['place'] ?? '')));
-    if (($country === '' || preg_match('/^(france|fr|fra)$/i', $country)) && $first !== '' && preg_match(AD_FOREIGN, $first)) { $country = $first; }
+    // 🐘 tout ce qui ne dépend que du lieu (pays, département, site, commune) : calculé une fois par lieu (20 000 lieux pour
+    // 466 000 actes sur une base de 200 000 fiches), mêmes règles et même ordre qu'avant
+    $P = ad_place_info((string) ($e['place'] ?? ''), (string) ($e['county'] ?? ''), (string) ($e['country'] ?? ''), (string) ($e['admin2_code'] ?? ''));
     // à l'étranger : la table ne couvre que les départements français
-    if ($country !== '' && !preg_match('/^(france|fr|fra)$/i', $country)) {
-        $out['reason'] = 'abroad'; $out['who'] = preg_match(AD_COLONIES, $country) ? 'anom' : 'scec'; $out['country'] = $country; $out['range'] = $r;
+    if ($P['abroad']) {
+        $out['reason'] = 'abroad'; $out['who'] = $P['who']; $out['country'] = $P['country']; $out['range'] = $r;
         if ($out['who'] === 'anom' && $r) { $out['status'] = 'ask'; }
         return $out;
     }
     if (!$r) { $out['reason'] = 'nodate'; return $out; }
     [$lo, $hi, $approx] = $r;
     $out['range'] = [$lo, $hi, $approx];
-    if (trim((string) ($e['place'] ?? '')) === '') { $out['reason'] = 'noplace'; return $out; }
-    $a = function_exists('gaps_archive_of') ? gaps_archive_of(['name' => (string) $e['place'], 'county' => (string) ($e['county'] ?? ''), 'country' => $country, 'admin2_code' => (string) ($e['admin2_code'] ?? '')]) : [];
-    if (empty($a['code'])) { $out['reason'] = 'nodept'; return $out; }
-    $code = (string) $a['code'];
-    $dcfg = ad_config()['departements'][$code] ?? null;
-    $site = $dcfg['site'] ?? '';
-    if ($site === '' && function_exists('so_department')) { $sd = so_department((string) $a['department'], (string) $e['place']); $site = $sd['url'] ?? ''; }
-    $out['dept'] = ['code' => $code, 'name' => (string) $a['department'], 'service' => (string) $a['label'], 'note' => (string) ($dcfg['note'] ?? '')];
-    $out['site'] = $site;
-    $commune = trim((string) preg_replace('/\s*[,(].*$/', '', (string) $e['place']));
+    if ($P['noplace']) { $out['reason'] = 'noplace'; return $out; }
+    if ($P['code'] === '') { $out['reason'] = 'nodept'; return $out; }
+    $code = $P['code'];
+    $out['dept'] = $P['dept'];
+    $out['site'] = $P['site'];
+    $commune = $P['commune'];
     $out['commune'] = $commune;
     // la clé de la table : avant 1793, les registres paroissiaux ; ensuite l'état civil (baptême et sépulture : religieux)
     $religious = in_array($tag, ['CHR', 'BAPM', 'BURI'], true);
@@ -195,8 +251,14 @@ function ad_status(PDO $pdo, array $e, ?string $today = null): array
     // 75 ans (naissance, mariage) : la date la plus tardive de la fourchette (prudent)
     $restricted = false;
     if ($key === 'N' || $key === 'M') {
-        $exact = !$approx && function_exists('exact_date') ? exact_date((string) ($e['date_text'] ?? '')) : null;
-        $openAt = $exact ? date('Y-m-d', (int) strtotime($exact . ' +75 years')) : ($hi + 75) . '-12-31';
+        static $openMemo = []; // la date d'ouverture ne dépend que de la date écrite (gardée : 466 000 actes, 117 000 dates)
+        $ok = ($approx ? '1' : '0') . $hi . "\x1f" . (string) ($e['date_text'] ?? '');
+        if (!isset($openMemo[$ok])) {
+            if (count($openMemo) > 100000) { $openMemo = []; }
+            $exact = !$approx && function_exists('exact_date') ? exact_date((string) ($e['date_text'] ?? '')) : null;
+            $openMemo[$ok] = $exact ? date('Y-m-d', (int) strtotime($exact . ' +75 years')) : ($hi + 75) . '-12-31';
+        }
+        $openAt = $openMemo[$ok];
         $out['open_at'] = $openAt; $out['open_year'] = (int) substr($openAt, 0, 4);
         $restricted = $openAt > $today;
     }
@@ -263,6 +325,14 @@ function ad_person(PDO $pdo, int $pid, ?string $today = null): array
 /** le compteur du widget : actes 🟢 pas encore liés à une source (par sorte), et les autres pastilles */
 function ad_counts(PDO $pdo, bool $sosaOnly = false, ?string $today = null): array
 {
+    if ($today !== null || !function_exists('calc_cached')) { return ad_counts_raw($pdo, $sosaOnly, $today); }
+    // 🐘 gardé tant que les actes, les lieux, les liens et les corrections ne changent pas (le jour compte : 75 ans, 100 ans)
+    $cfg = ad_config_path();
+    return calc_cached($pdo, 'ad_counts' . ($sosaOnly ? '_sosa' : ''), ['events', 'event_types', 'places', 'source_links', 'media_links', 'persons', 'families', 'family_children', 'archives_dispo_corr'],
+        [date('Y-m-d'), $cfg, is_file($cfg) ? filemtime($cfg) . ':' . filesize($cfg) : '-'], static fn() => ad_counts_raw($pdo, $sosaOnly, null));
+}
+function ad_counts_raw(PDO $pdo, bool $sosaOnly = false, ?string $today = null): array
+{
     $where = '1=1';
     if ($sosaOnly) {
         $ids = [];
@@ -282,7 +352,9 @@ function ad_counts(PDO $pdo, bool $sosaOnly = false, ?string $today = null): arr
     $n = ['online' => 0, 'maybe' => 0, 'ask' => 0, 'restricted' => 0, 'verify' => 0];
     $todo = ['N' => 0, 'M' => 0, 'D' => 0, 'B' => 0, 'S' => 0];
     $ids = [];
+    $today = $today ?: date('Y-m-d');
     foreach (ad_event_rows($pdo, $where) as $r) {
+        if (!empty($r['linked'])) { continue; } // un acte déjà lié à une source ou à un média ne compte nulle part
         $s = ad_status($pdo, $r, $today);
         if ($s['status'] === 'online' && !$s['linked']) {
             $k = ['BIRT' => 'N', 'MARR' => 'M', 'DEAT' => 'D', 'CHR' => 'B', 'BAPM' => 'B', 'BURI' => 'S'][$s['tag']];

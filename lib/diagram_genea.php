@@ -33,6 +33,12 @@ function dgn_links(PDO $pdo): array
 {
     static $cache = null;
     if ($cache !== null) { return $cache; }
+    // 🐘 gardé tant que fiches et familles ne changent pas (lib/calc_cache.php) : lu par tous les diagrammes et la fiche
+    if (function_exists('calc_cached')) { return $cache = calc_cached($pdo, 'dgn_links', ['persons', 'families', 'family_children'], [], static fn() => dgn_links_raw($pdo)); }
+    return $cache = dgn_links_raw($pdo);
+}
+function dgn_links_raw(PDO $pdo): array
+{
     $gender = [];
     foreach ($pdo->query('SELECT id, gender FROM persons') as $r) { $gender[(int) $r['id']] = (string) $r['gender']; }
     $parents = []; $children = [];
@@ -48,7 +54,7 @@ function dgn_links(PDO $pdo): array
             if (!in_array($c, $children[$p] ?? [], true)) { $children[$p][] = $c; }
         }
     }
-    return $cache = ['parents' => $parents, 'children' => $children, 'gender' => $gender];
+    return ['parents' => $parents, 'children' => $children, 'gender' => $gender];
 }
 
 /** ancêtres : numéro Sosa → personne (le premier numéro rencontré pour chaque personne compte pour « ancêtres ») */

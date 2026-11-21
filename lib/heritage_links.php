@@ -255,13 +255,20 @@ function question_relation(PDO $pdo, string $q, string $t, int $chosenId = 0): ?
     if (!$found) { return null; }
     // La personne : la plus longue suite de mots qui forme un prénom et un nom de la base (accents et majuscules sans importance)
     $particles = ['de', 'du', 'des', 'd', 'la', 'le', 'les', 'l', 'van', 'von', 'der', 'di', 'da', 'y', 'et'];
-    $people = [];
-    foreach ($pdo->query("SELECT id, COALESCE(first_name,'') AS f, COALESCE(last_name,'') AS l FROM persons") as $r) {
-        // mêmes coupures que pour la question : espaces, traits d'union, apostrophes (« Marie-Thérèse », « D'ARTOIS »)
-        $first = question_name_words((string) $r['f']);
-        $last = question_name_words((string) $r['l']);
-        if ($first && $last) { $people[] = ['id' => (int) $r['id'], 'first' => $first, 'last' => $last]; }
+    // 🐘 les mots des noms de toutes les fiches, et pour chaque mot les fiches qui le portent : lus une fois par requête ;
+    // pour chaque suite de mots, seules les fiches qui portent le plus rare sont essayées (une fiche qui répond les porte tous)
+    static $memo = null;
+    if ($memo === null || $memo[0] !== spl_object_id($pdo)) {
+        $people = []; $idx = []; $wf = []; $wl = [];
+        foreach ($pdo->query("SELECT id, COALESCE(first_name,'') AS f, COALESCE(last_name,'') AS l FROM persons") as $r) {
+            // mêmes coupures que pour la question : espaces, traits d'union, apostrophes (« Marie-Thérèse », « D'ARTOIS »)
+            $first = $wf[(string) $r['f']] ??= question_name_words((string) $r['f']);
+            $last = $wl[(string) $r['l']] ??= question_name_words((string) $r['l']);
+            if ($first && $last) { $k = count($people); $people[] = ['id' => (int) $r['id'], 'first' => $first, 'last' => $last]; foreach (array_unique(array_merge($first, $last)) as $w) { $idx[$w][] = $k; } }
+        }
+        $memo = [spl_object_id($pdo), $people, $idx];
     }
+    [, $people, $idx] = $memo;
     $best = null;
     $n = count($tokens);
     for ($i = 0; $i < $n; $i++) {
@@ -270,8 +277,10 @@ function question_relation(PDO $pdo, string $q, string $t, int $chosenId = 0): ?
             $words = [];
             for ($k = $i; $k <= $j; $k++) { if (isset($relTokens[$k])) { continue 2; } foreach (preg_split('/-/', $tokens[$k]['fold'], -1, PREG_SPLIT_NO_EMPTY) as $w) { if (!in_array($w, $particles, true)) { $words[] = $w; } } }
             if (count($words) < 2) { continue; }
-            $matches = [];
-            foreach ($people as $p) {
+            $matches = []; $cand = null;
+            foreach (array_unique($words) as $w) { $l = $idx[$w] ?? []; if ($cand === null || count($l) < count($cand)) { $cand = $l; } }
+            foreach ($cand ?? [] as $ck) {
+                $p = $people[$ck];
                 $all = array_merge($p['first'], $p['last']);
                 if (array_diff($words, $all) || !array_intersect($words, $p['first']) || !array_intersect($words, array_diff($p['last'], $particles))) { continue; }
                 $matches[] = ['id' => $p['id'], 'extra' => count(array_diff(array_diff($all, $particles), $words))];
@@ -332,9 +341,9 @@ function question_first_name_ids(PDO $pdo, string $word, bool $withAnimals = fal
 {
     static $index = null;
     if ($index === null) {
-        $index = [];
+        $index = []; $fw = []; // $fw : les mots d'un même prénom, découpés une seule fois (🐘 200 000 fiches)
         $hasKind = (bool) array_filter($pdo->query('PRAGMA table_info(persons)')->fetchAll(), static fn($c) => $c['name'] === 'kind');
-        foreach ($pdo->query("SELECT id, COALESCE(first_name,'') || ' ' || COALESCE(middle_name,'') AS f, " . ($hasKind ? "COALESCE(kind,'human')='animal'" : '0') . " AS animal FROM persons") as $r) { foreach (question_name_words((string) $r['f']) as $w) { $index[$w][(int) $r['id']] = (bool) $r['animal']; } }
+        foreach ($pdo->query("SELECT id, COALESCE(first_name,'') || ' ' || COALESCE(middle_name,'') AS f, " . ($hasKind ? "COALESCE(kind,'human')='animal'" : '0') . " AS animal FROM persons") as $r) { foreach ($fw[(string) $r['f']] ??= question_name_words((string) $r['f']) as $w) { $index[$w][(int) $r['id']] = (bool) $r['animal']; } }
     }
     $words = question_name_words($word);
     if (!$words) { return []; }
@@ -480,6 +489,9 @@ function question_normalize_case(PDO $pdo, string $q): string
  */
 function ask_question(PDO $pdo, string $question, int $personId = 0, string $placeKey = ''): array
 {
+    // 🐘 une très grosse base (500 000 fiches) : toutes les fiches et leurs repères sont lus en mémoire (≈ 1 Go) ; de la marge
+    // au-delà du réglage habituel de 1 Go, comme pour l'export et le contrôle
+    if (function_exists('memory_for_persons')) { memory_for_persons($pdo, 4); } elseif (function_exists('memory_at_least')) { memory_at_least(2048); }
     if (mb_strlen($question) > 300) { $question = mb_substr($question, 0, 300); }
     $question = question_normalize_case($pdo, $question); // une question en capitales : lieux et noms remis comme dans la base
     if (!function_exists('qp_rewrite')) { return ask_question_base($pdo, $question, $personId, $placeKey); }

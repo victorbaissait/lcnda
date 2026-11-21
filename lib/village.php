@@ -40,12 +40,18 @@ function village_place_ids(PDO $pdo, string $key): array
 /** Les communes où la famille a vécu (au moins un événement ou un recensement), les plus riches d'abord. */
 function villages_list(PDO $pdo, string $q = ''): array
 {
-    $rows = $pdo->query("SELECT p.id, p.name, p.county, p.state, p.country, p.admin4_code,
-            (SELECT count(*) FROM events e WHERE e.place_id=p.id) AS events,
-            (SELECT count(DISTINCT e.person_id) FROM events e WHERE e.place_id=p.id AND e.person_id IS NOT NULL) AS persons,
-            (SELECT min(e.year) FROM events e WHERE e.place_id=p.id) AS y1, (SELECT max(e.year) FROM events e WHERE e.place_id=p.id) AS y2,
-            (SELECT count(*) FROM census_records c WHERE c.place_id=p.id) AS census
-        FROM places p WHERE EXISTS (SELECT 1 FROM events e WHERE e.place_id=p.id) OR EXISTS (SELECT 1 FROM census_records c WHERE c.place_id=p.id)")->fetchAll();
+    // 🐘 les comptes de chaque lieu en une seule lecture des événements (avant : quatre sous-requêtes par lieu, 1,5 s à
+    // 200 000 fiches) ; mêmes valeurs, et les lieux dans le même ordre (leur numéro)
+    $ev = []; $cs = [];
+    foreach ($pdo->query('SELECT place_id, count(*) AS n, count(DISTINCT person_id) AS persons, min(year) AS y1, max(year) AS y2 FROM events WHERE place_id IS NOT NULL GROUP BY place_id', PDO::FETCH_ASSOC) as $r) { $ev[(int) $r['place_id']] = $r; }
+    foreach ($pdo->query('SELECT place_id, count(*) AS n FROM census_records WHERE place_id IS NOT NULL GROUP BY place_id', PDO::FETCH_ASSOC) as $r) { $cs[(int) $r['place_id']] = (int) $r['n']; }
+    $rows = [];
+    foreach ($pdo->query('SELECT p.id, p.name, p.county, p.state, p.country, p.admin4_code FROM places p ORDER BY p.id', PDO::FETCH_ASSOC) as $r) {
+        $id = (int) $r['id']; $e = $ev[$id] ?? null;
+        if (!$e && !isset($cs[$id])) { continue; }
+        $rows[] = $r + ['events' => $e ? (int) $e['n'] : 0, 'persons' => $e ? (int) $e['persons'] : 0, 'y1' => $e['y1'] ?? null, 'y2' => $e['y2'] ?? null, 'census' => $cs[$id] ?? 0];
+    }
+    unset($ev, $cs);
     $out = [];
     foreach ($rows as $r) {
         $k = village_key($r);

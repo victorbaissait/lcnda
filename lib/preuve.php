@@ -423,7 +423,7 @@ function solidite_run(PDO $pdo, bool $fresh = false): array
         if (is_array($c) && ($c['sig'] ?? '') === $sig) { return $memo = $c; }
     }
     $t0 = microtime(true);
-    if (function_exists('memory_at_least')) { memory_at_least(1024); }
+    if (function_exists('memory_for_persons')) { memory_for_persons($pdo, 4.5, 1024); } elseif (function_exists('memory_at_least')) { memory_at_least(1024); } // 🐘 200 000 fiches : 720 Mo
     @set_time_limit(300);
     $res = solidite_compute($pdo);
     $res['sig'] = $sig;

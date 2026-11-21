@@ -325,7 +325,11 @@ try {
     }
     if (!$isWrite && $action === 'dates_feter') { // 🎂 dates à fêter du tableau de bord (lib/dates_feter.php)
         require_once __DIR__ . '/lib/dates_feter.php';
-        json_response(dates_feter_data($pdo, $_GET));
+        // 🐘 gardé pour la journée tant que fiches, événements, lieux et familles ne changent pas (3 s à 200 000 fiches)
+        $dfQ = array_intersect_key($_GET, array_flip(['period', 'who', 'sosa', 'round', 'branch', 'kinds', 'today']));
+        ksort($dfQ);
+        json_response(calc_cached($pdo, 'dates_feter_' . substr(md5(json_encode(array_diff_key($dfQ, ['today' => 1]))), 0, 12), ['persons', 'events', 'event_types', 'families', 'family_children', 'places'],
+            [$dfQ, date('Y-m-d'), function_exists('kiosk_state') && !empty(kiosk_state()['on'])], static fn() => dates_feter_data($pdo, $_GET)));
     }
     if (!$isWrite && in_array($action, ['family_share_preview', 'family_share_export'], true)) { // 📤 partager avec la famille (lib/family_share.php)
         require_once __DIR__ . '/lib/family_share.php';
@@ -530,7 +534,8 @@ try {
         'atelier_projects' => json_response(atelier_projects($pdo)),
         'media_av_list' => json_response(media_av_list($pdo, safe_text($_GET['kind'] ?? 'audio'))),
         'recueils' => json_response(recueils_list($pdo, safe_text($_GET['q'] ?? ''))),
-        'genea_calendar' => genea_calendar_stream($pdo, $_GET), // écrit au fur et à mesure (lib/calendars.php)
+        // 🐘 les anniversaires des prochains jours (widget, 2 s et 4 Mo à 200 000 fiches) : gardés pour la journée tant que la base ne change pas
+        'genea_calendar' => safe_int($_GET['anniv_days'] ?? 0) > 0 && !safe_int($_GET['person_id'] ?? 0) && !isset($_GET['succ_cases']) ? json_response(calc_cached($pdo, 'genea_anniv_' . safe_int($_GET['anniv_days'] ?? 0), ['persons', 'events', 'event_types', 'places', 'families'], [date('Y-m-d'), safe_int($_GET['anniv_days'] ?? 0), safe_int($_GET['person_id'] ?? 0)], static fn() => genea_calendar_events($pdo, $_GET))) : genea_calendar_stream($pdo, $_GET), // écrit au fur et à mesure (lib/calendars.php)
         'my_agenda' => json_response(my_agenda($pdo)),
         'recueil' => json_response(recueil_detail($pdo, safe_int($_GET['id'] ?? 0))),
         'recueils_for' => json_response(['recueils' => recueils_for_entity($pdo, safe_text($_GET['type'] ?? ''), safe_text($_GET['key'] ?? ''))]),
@@ -546,9 +551,11 @@ try {
         'museum_pick' => json_response(['items' => museum_pick($pdo, (string) ($_GET['what'] ?? 'media'), mb_substr(safe_text($_GET['q'] ?? ''), 0, 100))]),
         'museum_export' => museum_export($pdo, safe_int($_GET['id'] ?? 0), (string) ($_GET['format'] ?? 'lcnda')),
         'media_versions' => json_response(['versions' => retouch_versions($pdo, safe_int($_GET['id'] ?? 0))]),
-        'recent_acts' => json_response(recent_acts_page($pdo, $_GET)),
+        // 🐘 les actes récents à demander (liste des courriers : 4 s à 200 000 fiches) : gardés pour la journée tant que la base ne change pas
+        'recent_acts' => json_response(isset($_GET['succ_cases']) || !function_exists('ad_config_path') ? recent_acts_page($pdo, $_GET) : calc_cached($pdo, 'recent_acts_' . substr(md5(json_encode([$_GET['all'] ?? null, $_GET['kind'] ?? null, $_GET['limit'] ?? null])), 0, 12), ['courriers', 'events', 'event_types', 'places', 'families', 'persons', 'media', 'media_links', 'source_links', 'archives_dispo_corr', 'surname_groups'], [date('Y-m-d'), $_GET['all'] ?? null, $_GET['kind'] ?? null, $_GET['limit'] ?? null, is_file(ad_config_path()) ? filemtime(ad_config_path()) . ':' . filesize(ad_config_path()) : '-'], static fn() => recent_acts_page($pdo, $_GET))),
         'act_request_letter' => json_response(act_request_letter($pdo, safe_int($_GET['event_id'] ?? 0), safe_text($_GET['requester'] ?? ''), safe_text($_GET['relation'] ?? ''))),
-        'historical_context' => json_response(historical_context($pdo)),
+        // 🐘 épidémies, guerres, hivers : toute la base (3,5 s et 29 Mo à 200 000 fiches), gardé déjà encodé tant que la base ne change pas
+        'historical_context' => json_response_encoded(calc_cached($pdo, 'historical_context', ['persons', 'events', 'event_types', 'places', 'surname_groups', 'families', 'media'], [], static function () use ($pdo): string { memory_for_persons($pdo, 3, 1024); return json_encode(historical_context($pdo), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR); })),
         'vault_status' => json_response(vault_status($pdo)),
         'vault_download' => vault_download($pdo, safe_int($_GET['id'] ?? 0)),
         'age_checks' => json_response(age_checks($pdo)),
@@ -736,7 +743,9 @@ try {
         'census_member_memberships' => census_member_memberships_data($pdo, safe_int($_GET['person_id'] ?? 0)),
         'tree' => tree_data($pdo, safe_int($_GET['id'] ?? 0)),
         'kinship' => kinship_data($pdo, safe_int($_GET['from'] ?? 0), safe_int($_GET['to'] ?? 0)),
-        'map' => map_data($pdo),
+        // 🐘 la carte de toute la base (2 s à 200 000 fiches) : gardée tant que la base ne change pas, pour les réglages
+        // sans filtre de personne (sorte, limite, lieu précis) ; jamais avec le filtre des dossiers de succession
+        'map' => !isset($_GET['succ_cases']) && !array_diff(array_keys($_GET), ['action', 'tag', 'limit', 'location_mode', 'surname_mode']) ? calc_cached_response($pdo, 'map_' . substr(md5(json_encode([$_GET['tag'] ?? '', $_GET['limit'] ?? '', $_GET['location_mode'] ?? '', $_GET['surname_mode'] ?? ''])), 0, 12), ['persons', 'events', 'event_types', 'families', 'places', 'surname_groups', 'census_records', 'census_members'], [$_GET['tag'] ?? '', $_GET['limit'] ?? '', $_GET['location_mode'] ?? '', $_GET['surname_mode'] ?? ''], static fn() => map_data($pdo)) : map_data($pdo),
         'list' => list_data($pdo),
         'graph_stats' => graph_stats_data($pdo),
         'graph_distribution' => graph_distribution_data($pdo),
@@ -832,68 +841,73 @@ try {
 
 function bootstrap_data(PDO $pdo): never
 {
-    $stats = [];
-    foreach (['persons' => 'personnes', 'families' => 'familles', 'events' => 'événements', 'media' => 'médias'] as $table => $label) {
-        $stats[$label] = (int) $pdo->query("SELECT count(*) FROM {$table}" . ($table === 'persons' ? " WHERE kind<>'animal'" : ''))->fetchColumn();
-    }
-    $stats['animaux'] = (int) $pdo->query("SELECT count(*) FROM persons WHERE kind='animal'")->fetchColumn();
-    $start = $pdo->query("SELECT id FROM persons ORDER BY is_start DESC, id LIMIT 1")->fetchColumn();
-    $types = $pdo->query('SELECT t.id,t.scope,t.slug,t.label,t.gedcom_tag,t.icon,t.color,t.is_custom,t.is_artistic,t.custom_fields,count(e.id) AS usage_count FROM event_types t LEFT JOIN events e ON e.event_type_id=t.id WHERE t.is_active=1 GROUP BY t.id ORDER BY t.label COLLATE NOCASE,t.scope')->fetchAll();
     $views = $pdo->query('SELECT * FROM saved_views ORDER BY module,sort_order,id')->fetchAll();
     $viewLabels = labels_for_entities($pdo, 'view', array_map(static fn($view)=>(int)$view['id'], $views));
     foreach ($views as &$view) $view['config'] = json_decode($view['config_json'], true) ?: [];
     foreach ($views as &$view) $view['labels'] = $viewLabels[(int)$view['id']] ?? [];
     unset($view);
-    $occupations = $pdo->query("
-        SELECT TRIM(val) AS name, COUNT(DISTINCT person_id) AS person_count
-        FROM (
-            SELECT p.id AS person_id, p.occupation AS val
-            FROM persons p WHERE p.occupation IS NOT NULL AND TRIM(p.occupation)!=''
-            UNION ALL
-            SELECT e.person_id, COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),'')) AS val
-            FROM events e JOIN event_types t ON t.id=e.event_type_id
-            WHERE e.person_id IS NOT NULL AND t.gedcom_tag='OCCU'
-              AND COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),'')) IS NOT NULL
-            UNION ALL
-            SELECT cm.person_id, cm.occupation AS val
-            FROM census_members cm WHERE cm.person_id IS NOT NULL AND cm.occupation IS NOT NULL AND TRIM(cm.occupation)!=''
-        ) src
-        WHERE TRIM(val)!=''
-        GROUP BY LOWER(TRIM(val))
-        ORDER BY person_count DESC, LOWER(TRIM(val)) COLLATE NOCASE
-    ")->fetchAll();
-    $mapTags = $pdo->query("
-        SELECT t.gedcom_tag, t.label, count(e.id) AS cnt
-        FROM events e
-        JOIN event_types t ON t.id=e.event_type_id
-        JOIN places pl ON pl.id=e.place_id
-        WHERE pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL
-          AND pl.name IS NOT NULL AND trim(pl.name)<>''
-          AND lower(trim(pl.name)) NOT IN ('lieu sans nom','sans lieu','lieu inconnu','inconnu','unknown','pays inconnu')
-          AND NOT (pl.county IS NULL AND pl.state IS NULL AND lower(trim(pl.name))=lower(trim(pl.country)))
-          AND t.gedcom_tag IS NOT NULL AND t.gedcom_tag<>''
-        GROUP BY t.gedcom_tag, t.label
-        ORDER BY cnt DESC, t.label COLLATE NOCASE
-    ")->fetchAll();
-    // Ajouter CENS si des recensements géocodés existent (census_records n'est pas dans events)
-    $censusCnt = (int)$pdo->query("
-        SELECT count(*) FROM census_records cr
-        JOIN places pl ON pl.id=cr.place_id
-        WHERE pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL
-          AND pl.name IS NOT NULL AND trim(pl.name)<>''
-    ")->fetchColumn();
-    if($censusCnt>0 && !in_array('CENS',array_column($mapTags,'gedcom_tag'),true)){
-        $mapTags[] = ['gedcom_tag'=>'CENS','label'=>'Recensement','cnt'=>$censusCnt];
-    }
-    $surnames = $pdo->query("
-        SELECT last_name AS name, count(*) AS person_count
-        FROM persons
-        WHERE last_name IS NOT NULL AND trim(last_name)<>''
-          AND lower(trim(last_name)) NOT IN ('inconnu','unknown')
-          AND last_name NOT GLOB '[?X]*'
-        GROUP BY last_name COLLATE NOCASE
-        ORDER BY person_count DESC, last_name COLLATE NOCASE
-    ")->fetchAll();
+    // 🐘 les comptes et les listes tirés de toute la base (sortes d'événements, métiers, noms, lieux de la carte) : 1,5 s à
+    // 200 000 fiches à chaque ouverture ; gardés tant que les tables lues ne changent pas (lib/calc_cache.php)
+    [$stats, $start, $types, $occupations, $mapTags, $surnames] = calc_cached($pdo, 'bootstrap_lists', ['persons', 'families', 'events', 'media', 'event_types', 'places', 'census_members', 'census_records'], [], static function () use ($pdo): array {
+        $stats = [];
+        foreach (['persons' => 'personnes', 'families' => 'familles', 'events' => 'événements', 'media' => 'médias'] as $table => $label) {
+            $stats[$label] = (int) $pdo->query("SELECT count(*) FROM {$table}" . ($table === 'persons' ? " WHERE kind<>'animal'" : ''))->fetchColumn();
+        }
+        $stats['animaux'] = (int) $pdo->query("SELECT count(*) FROM persons WHERE kind='animal'")->fetchColumn();
+        $start = $pdo->query("SELECT id FROM persons ORDER BY is_start DESC, id LIMIT 1")->fetchColumn();
+        $types = $pdo->query('SELECT t.id,t.scope,t.slug,t.label,t.gedcom_tag,t.icon,t.color,t.is_custom,t.is_artistic,t.custom_fields,count(e.id) AS usage_count FROM event_types t LEFT JOIN events e ON e.event_type_id=t.id WHERE t.is_active=1 GROUP BY t.id ORDER BY t.label COLLATE NOCASE,t.scope')->fetchAll();
+        $occupations = $pdo->query("
+            SELECT TRIM(val) AS name, COUNT(DISTINCT person_id) AS person_count
+            FROM (
+                SELECT p.id AS person_id, p.occupation AS val
+                FROM persons p WHERE p.occupation IS NOT NULL AND TRIM(p.occupation)!=''
+                UNION ALL
+                SELECT e.person_id, COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),'')) AS val
+                FROM events e JOIN event_types t ON t.id=e.event_type_id
+                WHERE e.person_id IS NOT NULL AND t.gedcom_tag='OCCU'
+                  AND COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),'')) IS NOT NULL
+                UNION ALL
+                SELECT cm.person_id, cm.occupation AS val
+                FROM census_members cm WHERE cm.person_id IS NOT NULL AND cm.occupation IS NOT NULL AND TRIM(cm.occupation)!=''
+            ) src
+            WHERE TRIM(val)!=''
+            GROUP BY LOWER(TRIM(val))
+            ORDER BY person_count DESC, LOWER(TRIM(val)) COLLATE NOCASE
+        ")->fetchAll();
+        $mapTags = $pdo->query("
+            SELECT t.gedcom_tag, t.label, count(e.id) AS cnt
+            FROM events e
+            JOIN event_types t ON t.id=e.event_type_id
+            JOIN places pl ON pl.id=e.place_id
+            WHERE pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL
+              AND pl.name IS NOT NULL AND trim(pl.name)<>''
+              AND lower(trim(pl.name)) NOT IN ('lieu sans nom','sans lieu','lieu inconnu','inconnu','unknown','pays inconnu')
+              AND NOT (pl.county IS NULL AND pl.state IS NULL AND lower(trim(pl.name))=lower(trim(pl.country)))
+              AND t.gedcom_tag IS NOT NULL AND t.gedcom_tag<>''
+            GROUP BY t.gedcom_tag, t.label
+            ORDER BY cnt DESC, t.label COLLATE NOCASE
+        ")->fetchAll();
+        // Ajouter CENS si des recensements géocodés existent (census_records n'est pas dans events)
+        $censusCnt = (int)$pdo->query("
+            SELECT count(*) FROM census_records cr
+            JOIN places pl ON pl.id=cr.place_id
+            WHERE pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL
+              AND pl.name IS NOT NULL AND trim(pl.name)<>''
+        ")->fetchColumn();
+        if($censusCnt>0 && !in_array('CENS',array_column($mapTags,'gedcom_tag'),true)){
+            $mapTags[] = ['gedcom_tag'=>'CENS','label'=>'Recensement','cnt'=>$censusCnt];
+        }
+        $surnames = $pdo->query("
+            SELECT last_name AS name, count(*) AS person_count
+            FROM persons
+            WHERE last_name IS NOT NULL AND trim(last_name)<>''
+              AND lower(trim(last_name)) NOT IN ('inconnu','unknown')
+              AND last_name NOT GLOB '[?X]*'
+            GROUP BY last_name COLLATE NOCASE
+            ORDER BY person_count DESC, last_name COLLATE NOCASE
+        ")->fetchAll();
+        return [$stats, $start, $types, $occupations, $mapTags, $surnames];
+    });
     json_response([
         'csrf' => csrf_token(),
         'stats' => $stats,
@@ -1076,18 +1090,30 @@ function person_select(): string
  * le premier acte de chaque sorte dans l'ordre des événements), mais en trois lectures au lieu de douze sous-requêtes par fiche —
  * l'export GEDCOM d'une base de 100 000 personnes y passait plusieurs secondes.
  */
-function person_select_rows(PDO $pdo): array
+function person_select_rows(PDO $pdo, ?array $ids = null, bool $light = false): array
 {
+    // $ids : seulement ces fiches (par paquets : l'export d'une très grosse base ne garde plus toutes les fiches entières en
+    // mémoire) ; $light : seulement ce que les règles de partage lisent (id, sexe, statut, confidentielle, années de
+    // naissance, de décès, de mariage), les mêmes valeurs
+    $in = $ids === null ? '' : implode(',', array_map('intval', $ids) ?: [0]);
     $first = []; // [person_id][clé] => [date_text, year] (le premier acte, par numéro d'événement)
     $kinds = ['BIRT' => 'birth', 'DEAT' => 'death', 'BURI' => 'buri', 'CHR' => 'bapt', 'BAPM' => 'bapt'];
-    foreach ($pdo->query("SELECT e.person_id, t.gedcom_tag, e.date_text, e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id IS NOT NULL AND t.gedcom_tag IN ('BIRT','DEAT','BURI','CHR','BAPM') ORDER BY e.id") as $e) {
-        $first[(int) $e['person_id']][$kinds[$e['gedcom_tag']]] ??= [$e['date_text'], $e['year']];
+    foreach ($pdo->query("SELECT e.person_id, t.gedcom_tag, e.date_text, e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id IS NOT NULL AND t.gedcom_tag IN ('BIRT','DEAT','BURI','CHR','BAPM')" . ($in !== '' ? " AND e.person_id IN ($in)" : '') . " ORDER BY e.id") as $e) {
+        if ($light && $e['gedcom_tag'] !== 'BIRT' && $e['gedcom_tag'] !== 'DEAT') { continue; }
+        $first[(int) $e['person_id']][$kinds[$e['gedcom_tag']]] ??= $light ? [null, $e['year']] : [$e['date_text'], $e['year']];
     }
-    foreach ($pdo->query("SELECT f.partner1_id, f.partner2_id, e.date_text, e.year FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN families f ON f.id=e.family_id WHERE t.gedcom_tag IN ('MARR','MRCI','MRRE') ORDER BY e.id") as $e) {
-        foreach (array_unique([(int) $e['partner1_id'], (int) $e['partner2_id']]) as $pid) { if ($pid) { $first[$pid]['marr'] ??= [$e['date_text'], $e['year']]; } }
+    foreach ($pdo->query("SELECT f.partner1_id, f.partner2_id, e.date_text, e.year FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN families f ON f.id=e.family_id WHERE t.gedcom_tag IN ('MARR','MRCI','MRRE')" . ($in !== '' ? " AND (f.partner1_id IN ($in) OR f.partner2_id IN ($in))" : '') . " ORDER BY e.id") as $e) {
+        foreach (array_unique([(int) $e['partner1_id'], (int) $e['partner2_id']]) as $pid) { if ($pid) { $first[$pid]['marr'] ??= $light ? [null, $e['year']] : [$e['date_text'], $e['year']]; } }
     }
     $rows = [];
-    foreach ($pdo->query("SELECT p.*, g.name AS surname_group, (SELECT COALESCE(NULLIF(m.thumbnail,''),m.filename) FROM media m WHERE m.id=p.portrait_media_id) AS portrait FROM persons p LEFT JOIN surname_groups g ON g.id=p.surname_group_id ORDER BY p.id") as $r) {
+    if ($light) {
+        foreach ($pdo->query('SELECT id, gender, living_status, is_private FROM persons' . ($in !== '' ? " WHERE id IN ($in)" : '') . ' ORDER BY id') as $r) {
+            $f = $first[(int) $r['id']] ?? [];
+            $rows[] = $r + ['birth_year' => $f['birth'][1] ?? null, 'death_year' => $f['death'][1] ?? null, 'marr_year' => $f['marr'][1] ?? null];
+        }
+        return $rows;
+    }
+    foreach ($pdo->query("SELECT p.*, g.name AS surname_group, (SELECT COALESCE(NULLIF(m.thumbnail,''),m.filename) FROM media m WHERE m.id=p.portrait_media_id) AS portrait FROM persons p LEFT JOIN surname_groups g ON g.id=p.surname_group_id" . ($in !== '' ? " WHERE p.id IN ($in)" : '') . " ORDER BY p.id") as $r) {
         $portrait = $r['portrait']; unset($r['portrait']);
         $f = $first[(int) $r['id']] ?? [];
         foreach (['birth', 'death', 'marr', 'buri', 'bapt'] as $k) { $r[$k . '_date'] = $f[$k][0] ?? null; $r[$k . '_year'] = $f[$k][1] ?? null; }
@@ -1849,6 +1875,12 @@ function dashboard_data(PDO $pdo): never
     $total = max(1, $stats['persons']);
     $coverageCount = function(string $sql) use ($pdo): int { return (int)$pdo->query($sql)->fetchColumn(); };
     $coverageRow = fn(int $value): array => ['count'=>$value, 'percent'=>round($value * 100 / $total, 1)];
+    $coverage = calc_cached($pdo, 'dash_coverage', ['persons', 'events', 'event_types', 'families', 'media_links', 'source_links'], [], static fn() => array_map($coverageCount, [
+        "SELECT count(DISTINCT p.id) FROM persons p JOIN events e ON e.person_id=p.id JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='BIRT'",
+        "SELECT count(DISTINCT p.id) FROM persons p JOIN events e ON e.person_id=p.id JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='DEAT'",
+        "SELECT count(DISTINCT p.id) FROM persons p WHERE EXISTS(SELECT 1 FROM media_links ml WHERE ml.entity_type='person' AND ml.entity_id=p.id) OR EXISTS(SELECT 1 FROM media_links ml WHERE ml.entity_type='event' AND ml.entity_id IN (SELECT id FROM events WHERE person_id=p.id UNION ALL SELECT fe.id FROM families ff JOIN events fe ON fe.family_id=ff.id WHERE ff.partner1_id=p.id OR ff.partner2_id=p.id))",
+        "SELECT count(DISTINCT p.id) FROM persons p WHERE EXISTS(SELECT 1 FROM source_links sl WHERE sl.entity_type='person' AND sl.entity_id=p.id) OR EXISTS(SELECT 1 FROM source_links sl WHERE sl.entity_type='event' AND sl.entity_id IN (SELECT id FROM events WHERE person_id=p.id UNION ALL SELECT fe.id FROM families ff JOIN events fe ON fe.family_id=ff.id WHERE ff.partner1_id=p.id OR ff.partner2_id=p.id))",
+    ]));
     $workReminders = (int)$pdo->query("SELECT count(*) FROM investigation_items WHERE reminder_mode<>'none' AND reminder_due_at<>'' AND reminder_done=0 AND reminder_due_at<=date('now','+30 days')")->fetchColumn()
         + (int)$pdo->query("SELECT count(*) FROM standalone_reminders WHERE reminder_due_at<>'' AND reminder_done=0 AND reminder_due_at<=date('now','+30 days')")->fetchColumn();
     // ✅ Contrôle de la base (lib/controle.php) : le même nombre que la page et le widget (toutes sortes, sans les exceptions ; gardé en cache)
@@ -1860,7 +1892,8 @@ function dashboard_data(PDO $pdo): never
         'open_battues' => (int)$pdo->query("SELECT count(*) FROM battues WHERE status<>'closed'")->fetchColumn(),
         'restorable_deletions' => count(recent_restore_candidate_ids($pdo, 15)),
     ];
-    $topPlaces = $pdo->query("SELECT pl.name,COALESCE(pl.subdivision,'') AS subdivision,COALESCE(pl.county,'') AS county,COALESCE(pl.state,'') AS state,pl.country,count(e.id) AS event_count FROM places pl JOIN events e ON e.place_id=pl.id GROUP BY pl.id ORDER BY event_count DESC,pl.name LIMIT 30")->fetchAll();
+    // 🐘 les blocs les plus lourds sur une très grosse base (lib/calc_cache.php) : gardés tant que les tables lues ne changent pas
+    $topPlaces = calc_cached($pdo, 'dash_top_places', ['places', 'events'], [], static fn() => $pdo->query("SELECT pl.name,COALESCE(pl.subdivision,'') AS subdivision,COALESCE(pl.county,'') AS county,COALESCE(pl.state,'') AS state,pl.country,count(e.id) AS event_count FROM places pl JOIN events e ON e.place_id=pl.id GROUP BY pl.id ORDER BY event_count DESC,pl.name LIMIT 30")->fetchAll());
     foreach($topPlaces as &$place){
         $place['name'] = trim(implode(', ', array_filter([$place['name'] ?? '', $place['subdivision'] ?? '', $place['county'] ?? '', $place['state'] ?? '', $place['country'] ?? ''])));
     }
@@ -1899,7 +1932,7 @@ function dashboard_data(PDO $pdo): never
         'media_to_identify' => dashboard_media_to_identify($pdo),
         'signatures_to_compare' => dashboard_signatures_to_compare($pdo),
         'places_to_complete' => dashboard_places_to_complete($pdo),
-        'branches_less_documented' => dashboard_branches_less_documented($pdo),
+        'branches_less_documented' => calc_cached($pdo, 'dash_branches_less_documented', ['persons', 'surname_groups', 'events', 'families', 'source_links', 'media_links'], [], static fn() => dashboard_branches_less_documented($pdo)),
         'couples_without_marriage' => dashboard_couples_without_marriage($pdo),
         'children_missing_parents' => dashboard_children_missing_parents($pdo),
         'consistency_issues' => [], // ✅ le widget lit controle_summary (heritage-controle.js)
@@ -1912,17 +1945,17 @@ function dashboard_data(PDO $pdo): never
         'daily_research' => dashboard_daily_research($pdo),
         'reread_items' => dashboard_reread_items($pdo),
         'sosa_progress' => dashboard_sosa_progress($pdo, $sosaRootId),
-        'duplicates' => dashboard_duplicate_groups($pdo),
+        'duplicates' => calc_cached($pdo, 'dash_duplicates', ['persons', 'events', 'event_types'], [], static fn() => dashboard_duplicate_groups($pdo)),
         'labels_overview' => dashboard_labels_overview($pdo),
-        'map_overview' => dashboard_map_overview($pdo),
+        'map_overview' => calc_cached($pdo, 'dash_map_overview', ['events', 'places'], [], static fn() => dashboard_map_overview($pdo)),
         'branch_map' => dashboard_branch_map($pdo, $dashboardBranch),
         'random_person_map' => dashboard_random_person_map($pdo),
         'coverage' => [
             'total' => $stats['persons'],
-            'birth' => $coverageRow($coverageCount("SELECT count(DISTINCT p.id) FROM persons p JOIN events e ON e.person_id=p.id JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='BIRT'")),
-            'death' => $coverageRow($coverageCount("SELECT count(DISTINCT p.id) FROM persons p JOIN events e ON e.person_id=p.id JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='DEAT'")),
-            'media' => $coverageRow($coverageCount("SELECT count(DISTINCT p.id) FROM persons p WHERE EXISTS(SELECT 1 FROM media_links ml WHERE ml.entity_type='person' AND ml.entity_id=p.id) OR EXISTS(SELECT 1 FROM media_links ml WHERE ml.entity_type='event' AND ml.entity_id IN (SELECT id FROM events WHERE person_id=p.id UNION ALL SELECT fe.id FROM families ff JOIN events fe ON fe.family_id=ff.id WHERE ff.partner1_id=p.id OR ff.partner2_id=p.id))")),
-            'sources' => $coverageRow($coverageCount("SELECT count(DISTINCT p.id) FROM persons p WHERE EXISTS(SELECT 1 FROM source_links sl WHERE sl.entity_type='person' AND sl.entity_id=p.id) OR EXISTS(SELECT 1 FROM source_links sl WHERE sl.entity_type='event' AND sl.entity_id IN (SELECT id FROM events WHERE person_id=p.id UNION ALL SELECT fe.id FROM families ff JOIN events fe ON fe.family_id=ff.id WHERE ff.partner1_id=p.id OR ff.partner2_id=p.id))")),
+            'birth' => $coverageRow($coverage[0]),
+            'death' => $coverageRow($coverage[1]),
+            'media' => $coverageRow($coverage[2]),
+            'sources' => $coverageRow($coverage[3]),
         ],
         'top_places' => $topPlaces,
     ]);
@@ -3807,14 +3840,18 @@ function occupation_attach_people(PDO $pdo,array $rows,string $field): array
     $labelsByPerson=[];
     if($allPersonIds){
         $allPersonIds=array_values(array_unique($allPersonIds));
-        $lmarks=implode(',',array_fill(0,count($allPersonIds),'?'));
-        $lstmt=$pdo->prepare("SELECT ll.entity_id AS person_id,l.id,l.name,l.color
-            FROM label_links ll JOIN labels l ON l.id=ll.label_id
-            WHERE ll.entity_type='person' AND ll.entity_id IN ($lmarks)
-            ORDER BY l.name COLLATE NOCASE");
-        $lstmt->execute($allPersonIds);
-        foreach($lstmt->fetchAll() as $lr){
-            $labelsByPerson[(int)$lr['person_id']][]=['id'=>(int)$lr['id'],'name'=>$lr['name'],'color'=>$lr['color']];
+        // 🐘 par paquets : un métier porté par des dizaines de milliers de fiches dépassait la limite de SQLite (32 766 « ? ») ;
+        // chaque fiche est dans un seul paquet, ses étiquettes restent dans l'ordre de leur nom
+        foreach(array_chunk($allPersonIds,5000) as $idChunk){
+            $lmarks=implode(',',array_fill(0,count($idChunk),'?'));
+            $lstmt=$pdo->prepare("SELECT ll.entity_id AS person_id,l.id,l.name,l.color
+                FROM label_links ll JOIN labels l ON l.id=ll.label_id
+                WHERE ll.entity_type='person' AND ll.entity_id IN ($lmarks)
+                ORDER BY l.name COLLATE NOCASE");
+            $lstmt->execute($idChunk);
+            foreach($lstmt->fetchAll() as $lr){
+                $labelsByPerson[(int)$lr['person_id']][]=['id'=>(int)$lr['id'],'name'=>$lr['name'],'color'=>$lr['color']];
+            }
         }
     }
     foreach($rows as &$row){
@@ -7482,11 +7519,13 @@ function import_package(PDO $pdo, ?array $file): never
     $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
     $existingPersons = (int) $pdo->query('SELECT count(*) FROM persons')->fetchColumn();
     @set_time_limit(0); // un gros paquet (photos) peut dépasser les 300 s par défaut
-    memory_at_least(4096); // un GEDCOM de 100 000 personnes est lu en entier : ≈ 2 Go (au-delà du réglage habituel de 1 Go)
+    // un GEDCOM est lu en entier : 🐘 environ 16 fois sa taille en mémoire (200 000 fiches, 128 Mo : 2 Go) ; au moins 4 Go, 8 Go au plus
+    memory_at_least((int) min(8192, max(4096, ceil((float) @filesize((string) $file['tmp_name']) / 1048576 * 20))));
 
     $receipt = import_receipt_begin($pdo); // ce que l'import ajoute : pour « ↶ Annuler » (lib/imports.php)
     $pdo->beginTransaction();
     try {
+        calc_gen_suspend($pdo); // 🐘 pas de déclencheur par ligne pendant l'import (lib/calc_cache.php) ; remis avant la fin
         if ($ext === 'gramps' || $ext === 'gpkg') {
             // Gramps : XML (gzippé) ou paquet tar.gz avec ses médias ; traduit en GEDCOM puis importé comme lui (lib/imports.php)
             $stats = gramps_import_into_db($pdo, $file['tmp_name'], $ext === 'gpkg');
@@ -7502,12 +7541,16 @@ function import_package(PDO $pdo, ?array $file): never
         } else {
             throw new RuntimeException("Format non supporté pour l'import direct : .{$ext}");
         }
+        calc_gen_resume($pdo);
         $pdo->commit();
     } catch (Throwable $e) {
         if ($pdo->inTransaction()) { $pdo->rollBack(); }
         throw $e;
     }
     $pdo->exec('ANALYZE');
+    // 🐘 les clés des noms de la recherche « à la française » (lib/recherche_fr.php) calculées pendant l'import, et non à la
+    // première recherche qui suit (200 000 fiches importées : 10 s d'attente dans la liste des personnes)
+    if (function_exists('rfr_refresh')) { try { rfr_refresh($pdo, true); } catch (Throwable) {} }
     $undo = '';
     try { $undo = import_receipt_save($pdo, 'tree', $receipt, ['label' => (string) $file['name']]); } catch (Throwable) {}
     if (!empty($file['pending'])) { @unlink($file['tmp_name']); @unlink($file['tmp_name'] . '.json'); }
@@ -7524,21 +7567,42 @@ function import_package(PDO $pdo, ?array $file): never
 
 // ── Parseur GEDCOM générique (arbre level/tag/value) ──
 
+/**
+ * 🐘 Un nœud du GEDCOM lu : un stdClass (les fonctions qui le lisent l'attendent), mais avec ses cinq propriétés déclarées,
+ * rangées dans l'objet même au lieu d'une table de propriétés : trois fois moins de mémoire par ligne (un GEDCOM de
+ * 500 000 fiches, 9 millions de lignes, dépassait 4 Go). Mêmes propriétés, même ordre, mêmes valeurs ; d'autres peuvent
+ * toujours être ajoutées comme sur un stdClass.
+ */
+class GedNode extends stdClass
+{
+    public $level;
+    public $xref;
+    public $tag;
+    public $value;
+    public $children;
+}
+
 function gedimport_parse(string $text): array
 {
-    $lines = preg_split('/\r\n|\r|\n/', $text) ?: [];
     $root = [];
     $stack = [];
-    foreach ($lines as $raw) {
-        $raw = rtrim($raw, "\r\n"); // jamais les espaces de fin : une ligne CONC coupée juste avant une espace la garderait collée
+    $tags = []; $vals = []; // une seule copie de chaque balise (NAME, DATE, PLAC…) et de chaque valeur courte
+    // les lignes une à une (plus de tableau de toutes les lignes) : strtok rend les suites de caractères entre deux fins de
+    // ligne (\r, \n), c'est-à-dire exactement les lignes non vides du découpage d'avant (les lignes vides étaient sautées)
+    for ($raw = strtok($text, "\r\n"); $raw !== false; $raw = strtok("\r\n")) {
+        // jamais les espaces de fin : une ligne CONC coupée juste avant une espace la garderait collée
         if (trim($raw) === '') { continue; }
         if (!preg_match('/^(\d+)\s(@[^@]+@\s)?([A-Za-z0-9_]+)\s?(.*)$/', $raw, $m)) { continue; }
         $level = (int) $m[1];
-        $node = new stdClass();
+        $node = new GedNode();
         $node->level = $level;
         $node->xref = $m[2] !== '' ? trim($m[2], "@ ") : null;
-        $node->tag = strtoupper($m[3]);
-        $node->value = $m[4];
+        $tg = strtoupper($m[3]);
+        $node->tag = $tags[$tg] ??= $tg;
+        // une valeur courte qui revient (lieu, date, prénom, « Y ») : une seule copie en mémoire ; « s » devant la clé, pour qu'un
+        // texte comme « 1850 » reste une clé de texte
+        $v = $m[4];
+        if (strlen($v) <= 48) { $node->value = $vals['s' . $v] ??= $v; if (count($vals) > 2000000) { $vals = []; } } else { $node->value = $v; }
         $node->children = [];
         if ($level === 0) {
             $root[] = $node;
