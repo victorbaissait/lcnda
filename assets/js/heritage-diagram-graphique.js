@@ -128,6 +128,8 @@
             ['Cousins proches (90 cM et plus)', {'[data-dac="min"]': '90', '[data-dac="max"]': '3000'}], ['Au moins 50 cM, toutes', {'[data-dac="min"]': '50', '[data-dac="max"]': '3000'}]],
         // les types venus ensuite (cartes du temps, lots A et B, D23–D38…) : leurs panneaux propres ont aussi leur « Graphique »
         surnamemap: CPEV, heatdecades: CPEV,
+        dnamap: [['Sans le nom des correspondances', {'[data-cp="names"]': false}], ['Avec le nom des correspondances (pas pour un export partagé)', {'[data-cp="names"]': true}]],
+        researchmap: [['Tout : vu, en partie, à chercher', {'[data-cp="rstate"]': ''}], ['Seulement ce qui reste à faire', {'[data-cp="rstate"]': 'todo'}], ['Seulement ce qui a été vu', {'[data-cp="rstate"]': 'seen'}]],
         censusgrid: popList(), proofmap: popList(),
         lexis: [...popList(), ...periods()], ternary: [...popList(), ...periods()], namevariants: [...popList(), ...periods()],
         wordtree: [['Ce qui suit', {'[data-lotc="dir"]': 'after'}], ['Ce qui précède', {'[data-lotc="dir"]': 'before'}]],
