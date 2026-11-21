@@ -25,6 +25,7 @@ require_once __DIR__ . '/text.php';    // ascii_fold()
 require_once __DIR__ . '/recherche_fr.php'; // 🔎 recherche « à la française » (noms, prénoms, lieux, dates)
 require_once __DIR__ . '/i18n.php';    // 🌐 i18n_t() : messages d'erreur dans la langue de la page
 require_once __DIR__ . '/migrations.php'; // migrate_database(), SCHEMA_VERSION
+require_once __DIR__ . '/calc_cache.php'; // 🐘 calculs lourds gardés tant que la généalogie ne change pas (data_gen, migration 100)
 require_once __DIR__ . '/reference.php';
 require_once __DIR__ . '/registers.php';
 require_once __DIR__ . '/research.php';
@@ -283,15 +284,19 @@ function db(): PDO
 /**
  * Sécurité : l'application ne crée aucun TRIGGER ni aucune VIEW. Une base ouverte (sauvegarde, fichier reçu…)
  * qui en contient en a reçu d'ailleurs : ils sont supprimés avant toute écriture, pour qu'aucun code caché
- * ne s'exécute pendant les modifications. Si un jour l'app en prévoit, les ajouter à $allowed.
+ * ne s'exécute pendant les modifications. Si un jour l'app en prévoit, les ajouter à $allowed. Seule exception : les
+ * déclencheurs de lib/calc_cache.php (migration 100), reconnus à leur texte exact.
  */
 function drop_unexpected_schema_objects(PDO $pdo): void
 {
     $allowed = [];
     try {
-        $rows = $pdo->query("SELECT type,name FROM sqlite_master WHERE type IN ('trigger','view')")->fetchAll(PDO::FETCH_NUM);
-        foreach ($rows as [$type, $name]) {
+        $rows = $pdo->query("SELECT type,name,sql FROM sqlite_master WHERE type IN ('trigger','view')")->fetchAll(PDO::FETCH_NUM);
+        foreach ($rows as [$type, $name, $sql]) {
             if (in_array($name, $allowed, true)) { continue; }
+            // 🐘 les déclencheurs de lib/calc_cache.php, seulement s'ils sont mot pour mot les nôtres (ils ne font que
+            // retirer un jeton dans data_gen) ; un déclencheur du même nom mais d'un autre texte est supprimé comme les autres
+            if ($type === 'trigger' && function_exists('calc_gen_trigger_allowed') && calc_gen_trigger_allowed((string) $name, $sql === null ? null : (string) $sql)) { continue; }
             $pdo->exec('DROP ' . ($type === 'view' ? 'VIEW' : 'TRIGGER') . ' IF EXISTS "' . str_replace('"', '""', (string) $name) . '"');
             error_log('LCNDA : ' . $type . ' inattendu supprimé de la base : ' . $name);
         }

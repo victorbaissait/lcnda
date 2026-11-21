@@ -1,0 +1,163 @@
+<?php
+declare(strict_types=1);
+
+/**
+ * 🐘 Calculs gardés tant que la généalogie ne change pas (très grosses bases : 200 000 à 500 000 fiches).
+ *
+ * Chaque table suivie a une ligne dans data_gen (migration 100) avec un jeton tiré au hasard ; des déclencheurs SQLite
+ * le retirent au hasard à CHAQUE ligne ajoutée, modifiée ou supprimée, d'où qu'elle vienne (l'app, un import, une
+ * synchronisation, un autre programme). Un calcul gardé note les jetons des tables qu'il lit : si l'un a bougé, il est
+ * refait. Un jeton au hasard (et pas un compteur) : une base remise d'une sauvegarde puis modifiée ne peut pas retomber
+ * par hasard sur un calcul gardé d'un autre état.
+ *
+ * Si un déclencheur a disparu (table reconstruite par une migration future, base d'une autre version), il est recréé et
+ * tous les jetons sont retirés (tout est refait une fois). Base en lecture seule, ou erreur : rien n'est gardé, le calcul
+ * est fait à chaque fois (comme avant).
+ *
+ * Le résultat est gardé dans DATA_DIR/cache/calc-<nom>.ser (serialize : les mêmes valeurs PHP, types compris) (un fichier par généalogie) : jamais dans la base, pour ne
+ * pas la faire grossir ni déclencher une sauvegarde automatique.
+ */
+
+const CALC_GEN_TABLES = ['persons', 'events', 'families', 'family_children', 'places', 'sources', 'source_links', 'media', 'media_links',
+    'notes', 'name_variants', 'labels', 'label_links', 'event_types', 'surname_groups', 'archives_dispo_corr', 'app_settings', 'tresor_items', 'proof_cases', 'link_strength', 'living_contacts'];
+/** à augmenter si un calcul gardé change de forme (tous les fichiers gardés sont alors refaits) */
+const CALC_CACHE_VERSION = 1;
+
+/** Le texte exact de chaque déclencheur (nom => CREATE TRIGGER …) : seuls ceux-là sont gardés à l'ouverture d'une base. */
+function calc_gen_triggers(array $tables): array
+{
+    $out = [];
+    foreach (CALC_GEN_TABLES as $t) {
+        if (!in_array($t, $tables, true)) { continue; }
+        foreach (['INSERT', 'UPDATE', 'DELETE'] as $op) {
+            $name = 'lcnda_gen_' . $t . '_' . strtolower($op);
+            $out[$name] = "CREATE TRIGGER {$name} AFTER {$op} ON \"{$t}\" BEGIN UPDATE data_gen SET tok=random() WHERE tbl='{$t}'; END";
+        }
+    }
+    return $out;
+}
+
+/**
+ * 🛡 Pour drop_unexpected_schema_objects() (lib/bootstrap.php : une base reçue ne garde aucun déclencheur) : ce
+ * déclencheur est-il exactement l'un des nôtres (même nom ET même texte, qui ne fait que retirer un jeton) ?
+ */
+function calc_gen_trigger_allowed(string $name, ?string $sql): bool
+{
+    static $all = null;
+    $all ??= calc_gen_triggers(CALC_GEN_TABLES);
+    return isset($all[$name]) && $sql !== null && $all[$name] === $sql;
+}
+
+/** La table des jetons et les déclencheurs (migration 100 ; refait sans risque s'il manque quelque chose). */
+function calc_gen_install(PDO $pdo): void
+{
+    $pdo->exec('CREATE TABLE IF NOT EXISTS data_gen (tbl TEXT PRIMARY KEY, tok INTEGER NOT NULL DEFAULT 0) WITHOUT ROWID');
+    $tables = $pdo->query("SELECT name FROM sqlite_master WHERE type='table'")->fetchAll(PDO::FETCH_COLUMN);
+    $have = $pdo->query("SELECT name, sql FROM sqlite_master WHERE type='trigger' AND substr(name, 1, 10)='lcnda_gen_'")->fetchAll(PDO::FETCH_KEY_PAIR);
+    foreach (calc_gen_triggers($tables) as $name => $sql) {
+        if (($have[$name] ?? null) === $sql) { continue; }
+        if (isset($have[$name])) { $pdo->exec('DROP TRIGGER IF EXISTS "' . $name . '"'); }
+        $pdo->exec($sql);
+    }
+    foreach (CALC_GEN_TABLES as $t) {
+        if (in_array($t, $tables, true)) { $pdo->prepare('INSERT OR IGNORE INTO data_gen(tbl, tok) VALUES(?, random())')->execute([$t]); }
+    }
+}
+
+/**
+ * Gros import (des centaines de milliers de lignes) : les déclencheurs ralentiraient chaque ligne (journal d'instruction) ;
+ * retirés pendant l'import, DANS sa transaction (une annulation les remet), puis calc_gen_resume() les remet et retire
+ * tous les jetons. Oubli ou plantage entre les deux : calc_gen_ok() le voit à la requête suivante et fait de même.
+ */
+function calc_gen_suspend(PDO $pdo): void
+{
+    try { foreach ($pdo->query("SELECT name FROM sqlite_master WHERE type='trigger' AND substr(name, 1, 10)='lcnda_gen_'")->fetchAll(PDO::FETCH_COLUMN) as $n) { $pdo->exec('DROP TRIGGER IF EXISTS "' . str_replace('"', '""', (string) $n) . '"'); } }
+    catch (Throwable $_) {}
+}
+function calc_gen_resume(PDO $pdo): void
+{
+    try { calc_gen_install($pdo); $pdo->exec('UPDATE data_gen SET tok=random()'); } catch (Throwable $_) {}
+}
+
+/** Les déclencheurs attendus sont-ils tous là ? (sinon : recréés, et tous les jetons retirés) — une fois par requête */
+function calc_gen_ok(PDO $pdo): bool
+{
+    static $ok = [];
+    $k = spl_object_id($pdo);
+    if (isset($ok[$k])) { return $ok[$k]; }
+    try {
+        $tables = $pdo->query("SELECT name FROM sqlite_master WHERE type='table'")->fetchAll(PDO::FETCH_COLUMN);
+        $want = calc_gen_triggers($tables);
+        $have = $pdo->query("SELECT name, sql FROM sqlite_master WHERE type='trigger' AND substr(name, 1, 10)='lcnda_gen_'")->fetchAll(PDO::FETCH_KEY_PAIR);
+        $rows = in_array('data_gen', $tables, true) ? (int) $pdo->query('SELECT count(*) FROM data_gen')->fetchColumn() : -1;
+        ksort($want); ksort($have);
+        if ($have !== $want || $rows !== count($want) / 3) {
+            $pdo->beginTransaction();
+            try {
+                calc_gen_install($pdo);
+                $pdo->exec('UPDATE data_gen SET tok=random()');
+                $pdo->commit();
+            } catch (Throwable $e) { if ($pdo->inTransaction()) { $pdo->rollBack(); } throw $e; }
+        }
+        return $ok[$k] = true;
+    } catch (Throwable $_) {
+        return $ok[$k] = false; // base en lecture seule, verrouillée… : pas de calcul gardé
+    }
+}
+
+/** La signature des tables $tables (leurs jetons), ou null si on ne peut pas s'y fier. */
+function calc_gen_sig(PDO $pdo, array $tables): ?string
+{
+    if (!calc_gen_ok($pdo)) { return null; }
+    try {
+        $tok = $pdo->query('SELECT tbl, tok FROM data_gen')->fetchAll(PDO::FETCH_KEY_PAIR);
+    } catch (Throwable $_) { return null; }
+    $out = [];
+    foreach ($tables as $t) {
+        if (!in_array($t, CALC_GEN_TABLES, true)) { return null; } // une table non suivie : pas de cache possible
+        $out[] = $t . '=' . ($tok[$t] ?? 'absente');
+    }
+    return implode(',', $out);
+}
+
+/** la version du code (une mise à jour de l'app refait les calculs gardés) : dates des fichiers PHP de l'app */
+function calc_code_sig(): string
+{
+    static $sig = null;
+    if ($sig !== null) { return $sig; }
+    $root = dirname(__DIR__); $m = 0; $n = 0;
+    foreach (array_merge([$root . '/api.php'], glob(__DIR__ . '/*.php') ?: []) as $f) { $m = max($m, (int) @filemtime($f)); $n++; }
+    return $sig = $m . '.' . $n;
+}
+
+/**
+ * Le résultat de $fn, gardé tant que les tables $tables ne changent pas et que $extra (langue, date du jour, mode
+ * consultation, paramètres…) est le même. $name : un nom de fichier court. Sans cache possible : $fn() simplement.
+ */
+function calc_cached(PDO $pdo, string $name, array $tables, array $extra, callable $fn): mixed
+{
+    $sig = calc_gen_sig($pdo, $tables);
+    if ($sig === null || !defined('DATA_DIR')) { return $fn(); }
+    $extra = [$extra, calc_code_sig()];
+    $sig = md5(json_encode([$sig, $extra, CALC_CACHE_VERSION]));
+    $file = DATA_DIR . '/cache/calc-' . preg_replace('/[^a-z0-9_-]+/i', '_', $name) . '.ser';
+    if (is_file($file)) {
+        $raw = (string) @file_get_contents($file);
+        // la signature en tête (32 caractères) : un fichier d'un autre état n'est pas désérialisé
+        if (strlen($raw) > 33 && substr($raw, 0, 32) === $sig) {
+            $c = @unserialize(substr($raw, 33), ['allowed_classes' => false]);
+            if (is_array($c) && array_key_exists('v', $c)) { return $c['v']; }
+        }
+    }
+    $v = $fn();
+    // relu après le calcul : si la base a changé pendant ce temps, le résultat n'est pas gardé
+    $after = calc_gen_sig($pdo, $tables);
+    if ($after !== null && md5(json_encode([$after, $extra, CALC_CACHE_VERSION])) === $sig) {
+        $dir = dirname($file);
+        if (is_dir($dir) || @mkdir($dir, 0775, true)) {
+            $tmp = $file . '.' . bin2hex(random_bytes(4)) . '.tmp';
+            if (@file_put_contents($tmp, $sig . "\n" . serialize(['v' => $v])) !== false) { @rename($tmp, $file); } else { @unlink($tmp); }
+        }
+    }
+    return $v;
+}

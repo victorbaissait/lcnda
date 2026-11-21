@@ -94,7 +94,7 @@ const backups = (dir) => (fs.existsSync(path.join(dir, 'backups')) ? fs.readdirS
     assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM pragma_table_info('rfr_names') WHERE name IN ('person_id','src','vtype','sig','words','last_keys','last_phon','first_canons','first_phons')")), 9);
     assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM rfr_names WHERE src=0")), 1, 'la personne de la base ancienne a ses clés');
     assert.equal(JSON.parse(sql(dir, "SELECT words||'|'||last_keys||'|'||last_phon FROM rfr_names WHERE src=0")), 'jeanne essai| essai |es');
-    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM sqlite_master WHERE type='trigger'")), 0, 'aucun déclencheur (bootstrap.php les retire)');
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM sqlite_master WHERE type='trigger' AND name NOT LIKE 'lcnda_gen_%'")), 0, 'aucun déclencheur (bootstrap.php les retire ; seuls ceux des calculs gardés, n°100, restent)');
     assert.ok(expected >= 96);
   });
 
@@ -125,6 +125,31 @@ const backups = (dir) => (fs.existsSync(path.join(dir, 'backups')) ? fs.readdirS
     assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM pragma_table_info('access_log') WHERE name='device'")), 1);
     assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM sqlite_master WHERE name LIKE '%appareil%' OR name LIKE '%device_token%'")), 0, 'les appareils et leurs jetons ne sont pas dans la généalogie');
     assert.ok(expected >= 99);
+  });
+
+  await step('structure n°100 : 🐘 jetons des calculs gardés (data_gen) et leurs déclencheurs ; un déclencheur étranger reste supprimé', async () => {
+    const dir = path.join(tmp, 'ancienne');
+    const tok = (t) => JSON.parse(sql(dir, `SELECT tok FROM data_gen WHERE tbl='${t}'`));
+    assert.ok(JSON.parse(sql(dir, "SELECT count(*) FROM data_gen")) >= 10, 'une ligne par table suivie');
+    const nTrig = JSON.parse(sql(dir, "SELECT count(*) FROM sqlite_master WHERE type='trigger' AND name LIKE 'lcnda_gen_%'"));
+    assert.equal(nTrig, JSON.parse(sql(dir, "SELECT count(*) FROM data_gen")) * 3, 'trois déclencheurs par table suivie');
+    // une ligne ajoutée change le jeton de SA table, pas celui des autres
+    const [p0, e0] = [tok('persons'), tok('events')];
+    sql(dir, "INSERT INTO persons(first_name,last_name) VALUES('Paul','Essai')");
+    assert.notEqual(tok('persons'), p0); assert.equal(tok('events'), e0);
+    // 🛡 une base reçue avec un déclencheur caché (même sous un de nos noms) : supprimé à l'ouverture ; les nôtres restent
+    sql(dir, "DROP TRIGGER lcnda_gen_events_delete");
+    sql(dir, "CREATE TRIGGER lcnda_gen_events_delete AFTER DELETE ON events BEGIN DELETE FROM persons; END");
+    sql(dir, "CREATE TRIGGER piege AFTER INSERT ON notes BEGIN DELETE FROM persons; END");
+    await withServer(dir, 1, async (s) => {
+      assert.equal((await status(s)).code, 200);
+      await s.request('/api.php?action=ad_counts', { timeout: 0 }); // un calcul gardé : remet le déclencheur manquant
+    });
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM sqlite_master WHERE name='piege'")), 0, 'déclencheur étranger supprimé');
+    assert.equal(JSON.parse(sql(dir, "SELECT sql FROM sqlite_master WHERE name='lcnda_gen_events_delete'")), `CREATE TRIGGER lcnda_gen_events_delete AFTER DELETE ON "events" BEGIN UPDATE data_gen SET tok=random() WHERE tbl='events'; END`, 'le nôtre, remis mot pour mot');
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM sqlite_master WHERE type='trigger' AND name LIKE 'lcnda_gen_%'")), nTrig);
+    assert.ok(JSON.parse(sql(dir, 'SELECT count(*) FROM persons')) >= 2, 'aucune fiche effacée');
+    assert.ok(expected >= 100);
   });
 
   await step('la copie de sécurité est une base complète, dans l’état d’avant la mise à jour', async () => {

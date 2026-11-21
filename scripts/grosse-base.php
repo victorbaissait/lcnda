@@ -35,6 +35,7 @@ $p = null;
 require __DIR__ . '/../lib/bootstrap.php';
 $pdo = db();
 $pdo->exec('PRAGMA synchronous = OFF');
+calc_gen_suspend($pdo); // 🐘 pas de déclencheur par ligne pendant la fabrication (lib/calc_cache.php), remis à la fin
 $type = static function (string $tag) use ($pdo): int {
     $s = $pdo->prepare('SELECT id FROM event_types WHERE gedcom_tag=? ORDER BY id LIMIT 1'); $s->execute([$tag]);
     return (int) $s->fetchColumn();
@@ -241,6 +242,7 @@ for ($i = 1; $i <= $nMed; $i++) {
     if ($photo && mt_rand(0, 1)) { $pdo->prepare('UPDATE persons SET portrait_media_id=? WHERE id=?')->execute([$mid, $pid]); }
 }
 $pdo->commit();
+calc_gen_resume($pdo);
 $pdo->exec('PRAGMA synchronous = NORMAL');
 
 $c = static fn(string $t) => (int) $pdo->query("SELECT count(*) FROM $t")->fetchColumn();

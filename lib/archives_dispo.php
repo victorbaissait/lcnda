@@ -325,6 +325,14 @@ function ad_person(PDO $pdo, int $pid, ?string $today = null): array
 /** le compteur du widget : actes 🟢 pas encore liés à une source (par sorte), et les autres pastilles */
 function ad_counts(PDO $pdo, bool $sosaOnly = false, ?string $today = null): array
 {
+    if ($today !== null || !function_exists('calc_cached')) { return ad_counts_raw($pdo, $sosaOnly, $today); }
+    // 🐘 gardé tant que les actes, les lieux, les liens et les corrections ne changent pas (le jour compte : 75 ans, 100 ans)
+    $cfg = ad_config_path();
+    return calc_cached($pdo, 'ad_counts' . ($sosaOnly ? '_sosa' : ''), ['events', 'event_types', 'places', 'source_links', 'media_links', 'persons', 'families', 'family_children', 'archives_dispo_corr'],
+        [date('Y-m-d'), $cfg, is_file($cfg) ? filemtime($cfg) . ':' . filesize($cfg) : '-'], static fn() => ad_counts_raw($pdo, $sosaOnly, null));
+}
+function ad_counts_raw(PDO $pdo, bool $sosaOnly = false, ?string $today = null): array
+{
     $where = '1=1';
     if ($sosaOnly) {
         $ids = [];

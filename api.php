@@ -7484,6 +7484,7 @@ function import_package(PDO $pdo, ?array $file): never
     $receipt = import_receipt_begin($pdo); // ce que l'import ajoute : pour « ↶ Annuler » (lib/imports.php)
     $pdo->beginTransaction();
     try {
+        calc_gen_suspend($pdo); // 🐘 pas de déclencheur par ligne pendant l'import (lib/calc_cache.php) ; remis avant la fin
         if ($ext === 'gramps' || $ext === 'gpkg') {
             // Gramps : XML (gzippé) ou paquet tar.gz avec ses médias ; traduit en GEDCOM puis importé comme lui (lib/imports.php)
             $stats = gramps_import_into_db($pdo, $file['tmp_name'], $ext === 'gpkg');
@@ -7499,6 +7500,7 @@ function import_package(PDO $pdo, ?array $file): never
         } else {
             throw new RuntimeException("Format non supporté pour l'import direct : .{$ext}");
         }
+        calc_gen_resume($pdo);
         $pdo->commit();
     } catch (Throwable $e) {
         if ($pdo->inTransaction()) { $pdo->rollBack(); }

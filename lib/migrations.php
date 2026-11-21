@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 99;
+const SCHEMA_VERSION = 100;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -120,6 +120,7 @@ function migration_steps(): array
         97 => 'schema_v97',
         98 => 'schema_v98',
         99 => 'schema_v99',
+        100 => 'schema_v100',
     ];
 }
 
@@ -2689,4 +2690,16 @@ function schema_v99(PDO $pdo): void
     if (!(bool) $pdo->query("SELECT count(*) FROM pragma_table_info('access_log') WHERE name='device'")->fetchColumn()) {
         $pdo->exec("ALTER TABLE access_log ADD COLUMN device TEXT NOT NULL DEFAULT ''");
     }
+}
+
+/**
+ * Structure n°100 (chantier « très grosses bases » ; si un autre chantier voulait aussi le n°100, le sien prend le n°101) :
+ * la table des jetons data_gen et ses déclencheurs (lib/calc_cache.php). Les calculs lourds du tableau de bord (actes en
+ * ligne aux archives, dates à fêter…) sont gardés tant que les tables qu'ils lisent ne changent pas. Sans risque si on la
+ * rejoue (CREATE … IF NOT EXISTS).
+ */
+function schema_v100(PDO $pdo): void
+{
+    if (!function_exists('calc_gen_install')) { require_once __DIR__ . '/calc_cache.php'; }
+    calc_gen_install($pdo);
 }
