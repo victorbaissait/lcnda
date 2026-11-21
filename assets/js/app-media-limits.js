@@ -52,7 +52,7 @@
     ext.mediaLimits = mediaLimits;
 
     /* ═════════ 3. l'événement commun « un média a été ajouté ou changé » ═════════ */
-    const MEDIA_ACTION = /media|photo|image|upload|import|inbox|scan|retouch|postcard|transcri|recueil|collection|socface|atelier|restore|undo|trash/;
+    const MEDIA_ACTION = /media|photo|image|upload|import|inbox|scan|retouch|postcard|transcri|recueil|collection|socface|atelier|restore|undo|trash|lot_item/; // lot_item : « Importer des photos » par lots
     const emit = detail => { try { document.dispatchEvent(new CustomEvent('lcnda:media-changed', {detail})); } catch (_) {} };
     ext.mediaChanged = (detail = {}) => emit({source: 'app', ...detail});
     if (!window.fetch.__lcndaMedia) {
