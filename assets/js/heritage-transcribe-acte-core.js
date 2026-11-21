@@ -259,7 +259,7 @@
         [/\b(?:conscrits?|d[ée]serteurs?|r[ée]fractaires?)\b/gi, 'conscrit'], [/\b(?:[ée]pid[ée]mie|peste|chol[ée]ra|variole|petite v[ée]role|disette|famine|incendie|inondation|naufrage)\b/gi, 'malheur'], [/\b(?:retourner|retour)\s+dans\s+leur\s+pays\b/gi, 'retour']];
     const MILITARY = /\bprisonni|\bbataille\b|\br[ée]giment\b|\bsoldats?\b|\barm[ée]e\b|\bconscri|\bd[ée]serteur|\bdans les armes\b/i;
     /** la phrase (ou la ligne) autour d'un passage, pour la citation */
-    const quoteAt = (src, s, e) => { let a = s, b = e; while (a > 0 && !/[.;\n]/.test(src[a - 1]) && s - a < 160) a--; while (b < src.length && !/[.;\n]/.test(src[b]) && b - e < 160) b++; return src.slice(a, b).replace(/\s+/g, ' ').trim(); };
+    const quoteAt = (src, s, e) => { let a = s, b = e; while (a > 0 && !/[.;\n]/.test(src[a - 1]) && s - a < 160) a--; while (b < src.length && !/[.;\n]/.test(src[b]) && b - e < 160) b++; let q = src.slice(a, b).replace(/\s+/g, ' ').trim(); if (a > 0 && !/[.;\n]/.test(src[a - 1])) q = '…' + q.replace(/^\S*\s/, ''); if (b < src.length && !/[.;\n]/.test(src[b])) q = q.replace(/\s\S*$/, '') + '…'; return q; };
     const lineOf = (src, s) => src.slice(0, Math.max(0, s)).split('\n').length;
 
     function richFind(text, opt = {}) {
@@ -424,6 +424,10 @@
      */
     function mergeRich(ex, rf, keep = () => true) {
         if (!ex || !rf) return ex;
+        // les faux noms (« BTIS Afoaut ») et les variantes du même nom (« Jemielet » pour « Jemichet ») ne font pas de fiche à part
+        const gone = new Set(ex.people.filter(q => rf.rejected.some(r => norm(r.label) === norm(q.name)) || rf.people.some(p => p.name && norm(p.name) !== norm(q.name) && (p.variants || []).some(w => norm(w) === norm(q.name)) && ex.people.some(x => norm(x.name) === norm(p.name)))).map(q => q.key));
+        if (gone.size) { ex.people = ex.people.filter(q => !gone.has(q.key)); ex.people.forEach(q => { q.relations = q.relations.filter(r => !gone.has(r.of)); });
+            ex.relations = ex.relations.filter(r => ![r.a, r.b, r.child, r.father, r.mother].some(k => k && gone.has(k))); }
         let seq = ex.people.reduce((n, p) => Math.max(n, Number(String(p.key).slice(1)) || 0), 0);
         rf.people.filter(p => p.name && keep(p.key, '')).forEach(p => {
             const F = p.fields, v = k => (F[k] && keep(p.key, k) ? F[k].value : null);

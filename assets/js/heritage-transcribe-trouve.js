@@ -125,7 +125,7 @@
         const counts = () => [rf.people.length && `👤 ${rf.people.length}`, rf.places.length && `📍 ${rf.places.length}`, rf.dates.length && `📅 ${rf.dates.length}`, rf.events.length && `⚔️ ${rf.events.length}`].filter(Boolean).join(' · ');
         function paint() {
             P = prefs();
-            el.innerHTML = `<div class="h-tf" data-tf><div class="h-tf-top"><span><b>🧭 ${esc(i18n('Ce que l’app a trouvé dans l’acte'))}</b> <small class="muted">${esc(counts())}</small></span>
+            el.innerHTML = `<div class="h-tf" data-tf><div class="h-tf-top"><span><b>🔎 ${esc(i18n('Repéré dans le texte'))}</b> <small class="muted">${esc(counts())}</small></span>
                 <button type="button" class="icon-button" data-tf-prefs title="${esc(i18n('Réglages du repérage'))}" aria-label="${esc(i18n('Réglages du repérage'))}">⚙️</button></div>${aiLine()}${sections()}
                 <p class="ui-hint">${esc(i18n('Tout est proposé : garde, écarte ou ajoute à une fiche. Rien n’est écrit sans ton clic.'))}</p></div>`;
         }

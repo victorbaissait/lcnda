@@ -78,6 +78,7 @@ const AI = { personnes: [{ nom: 'Corby', prenom: '', age: '22', metier: 'charpen
 const rAi = core.mergeAi(JSON.parse(JSON.stringify(r1)), AI);
 // « ✓ Ajouter à la généalogie » : les fiches du repérage riche complètent celles de l'acte
 const exm = core.mergeRich(core.extractAct(PAGE2, { helpers }), r2, () => true);
+const ex1raw = core.extractAct(PAGE1, { helpers, date: '1808' }), ex1names = ex1raw.people.map(p => p.name), ex1 = core.mergeRich(core.extractAct(PAGE1, { helpers, date: '1808' }), r1, (k, f) => !(k === byName(r1, 'Poëtrey')[0].key && f === 'job'));
 
 /* ─── une image pour l'Atelier ─── */
 const crc32 = buf => { let c, crc = 0xFFFFFFFF; for (let n = 0; n < buf.length; n++) { c = (crc ^ buf[n]) & 0xFF; for (let q = 0; q < 8; q++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; crc = (crc >>> 8) ^ c; } return (crc ^ 0xFFFFFFFF) >>> 0; };
@@ -197,9 +198,9 @@ echo json_encode($o, JSON_UNESCAPED_UNICODE);`));
                 p.on('request', r => { if (/action=tx_find_start/.test(r.url())) { try { sentFind.push(JSON.parse(r.postData() || '{}')); } catch (_) {} } });
                 const shot = async name => { if (SHOTS) { fs.mkdirSync(SHOTS, { recursive: true }); await p.screenshot({ path: path.join(SHOTS, name) }); } };
                 await p.goto(base); await p.waitForFunction(() => window.LCNDA_EXT?.openActTranscriber && window.LCNDA_EXT?.txTrouve, null, { timeout: 30000 });
-                const openWith = async (text, date) => {
-                    await p.evaluate(() => window.LCNDA_EXT.openActTranscriber({ mediaId: 1, filename: 'page-prisonniers.png', title: 'Prisonniers' }));
-                    await p.waitForFunction(() => document.querySelector('dialog.h-tx-dlg [data-tx-body]'), null, { timeout: 15000 }); await sleep(400);
+                const openWith = async (text, date, again = false) => {
+                    if (!again) { await p.evaluate(() => window.LCNDA_EXT.openActTranscriber({ mediaId: 1, filename: 'page-prisonniers.png', title: 'Prisonniers' }));
+                        await p.waitForFunction(() => document.querySelector('dialog.h-tx-dlg [data-tx-body]'), null, { timeout: 15000 }); await sleep(400); }
                     await p.evaluate(([t, d]) => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); a.value = t; a.dispatchEvent(new Event('input')); const f = document.querySelector('dialog.h-tx-dlg [data-tx="date_text"]'); f.value = d; f.dispatchEvent(new Event('input', { bubbles: true })); document.querySelector('dialog.h-tx-dlg [data-tx="source"]').value = 'AD Cher, 3 E 1234'; }, [text, date]);
                     await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="detect"]').click());
                     await p.waitForFunction(() => document.querySelector('[data-tf-card]'), null, { timeout: 10000 }); await sleep(800);
@@ -232,11 +233,9 @@ echo json_encode($o, JSON_UNESCAPED_UNICODE);`));
                 await p.evaluate(() => { document.querySelector('[name="tfp_numbers"]').checked = false; document.querySelector('[name="tfp_ai"][value="never"]').checked = true; [...document.querySelectorAll('dialog[open] button[type=submit]')].at(-1).click(); }); await sleep(300);
                 out.prefs1 = await p.evaluate(() => ({ secs: [...document.querySelectorAll('[data-tf-sec]')].map(s => s.dataset.tfSec), ai: !!document.querySelector('[data-tf-aigo]'), saved: localStorage.getItem('genealogie-trouve-prefs') }));
                 await p.evaluate(() => localStorage.removeItem('genealogie-trouve-prefs'));
-                await p.evaluate(() => [...document.querySelectorAll('dialog.h-tx-dlg [data-h-close], dialog.h-tx-dlg [data-tx-cmd="close"]')][0]?.click()); await sleep(300);
-                await p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => d.close())); await sleep(200);
 
                 // l'autre page : Gaspard, la bataille d'Ulm → ＋ Ajouter à sa fiche, comme événement
-                await openWith(PAGE2, '');
+                await openWith(PAGE2, '', true);
                 await p.waitForFunction(() => /BAISSAIT/.test(document.querySelector('[data-tf-sec="people"]')?.textContent || ''), null, { timeout: 10000 }).catch(() => {});
                 out.b2 = await p.evaluate(() => ({ people: document.querySelector('[data-tf-sec="people"]')?.textContent || '', places: [...document.querySelectorAll('[data-tf-sec="places"] [data-tf-item]')].map(b => b.textContent), events: [...document.querySelectorAll('[data-tf-sec="events"] [data-tf-item]')].map(b => b.textContent), dates: [...document.querySelectorAll('[data-tf-sec="dates"] [data-tf-item]')].map(b => b.textContent) }));
                 await shot('trouve-2-page2.png');
@@ -333,6 +332,10 @@ echo json_encode($o, JSON_UNESCAPED_UNICODE);`));
         }],
         ['« ✓ Ajouter à la généalogie » : les âges et lieux du repérage riche complètent l’acte', () => {
             const g = exm.people.find(p => p.name === 'Gaspard Baisser'); assert.deepEqual([g.age, g.birthYear], [25, 1781]);
+            assert.ok(ex1names.includes('BTIS Afoaut') && ex1names.includes('Antoine Jemielet'), 'avant : ' + ex1names.join());
+            const n1 = ex1.people.map(p => p.name); assert.ok(!n1.includes('BTIS Afoaut') && !n1.includes('Antoine Jemielet') && !n1.includes('Sainct Michel'), n1.join());
+            const c = ex1.people.find(p => p.name === 'Corby'); assert.deepEqual([c.age, c.job, c.birthYear], [22, 'charpentier', 1786]);
+            assert.equal(ex1.people.find(p => p.name === 'Poëtrey').job, '', 'une case décochée n’entre pas');
         }],
         ['JSON de l’IA : un objet valide gardé et borné', () => {
             assert.deepEqual(valid.ok, { personnes: [{ nom: 'Baisser', prenom: 'Gaspard', age: '25', metier: '', lieu: 'Pologne', lien: '', role: 'comparant' }], lieux: ['Ulm', 'Pologne'], dates: ['23 octobre 1806'], sorte: 'mariage' });
