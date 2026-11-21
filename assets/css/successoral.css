@@ -95,7 +95,7 @@ body.is-kiosk .nav-item[data-module="successoral"], html.ms-open .nav-item[data-
 }
 
 /* Le sélecteur de la liste : Dossiers · Héritiers à contacter · Courriers */
-.succ-views { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 640px; margin: 4px 0 14px; }
+.succ-views { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); max-width: 860px; margin: 4px 0 14px; } /* toutes les vues sur une ligne (Dossiers, Héritiers à contacter, Courriers, 📈 Activité…) */
 .succ-views button { padding: 4px 8px; line-height: 1.2; }
 .succ-noaddr { color: var(--succ-orange); font-weight: 600; }
 .succ-full { margin: 10px 0 0; }

@@ -75,7 +75,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/photo-courriers.css?v=2">
     <link rel="stylesheet" href="assets/css/sante.css?v=1">
     <link rel="stylesheet" href="assets/css/cousinade.css?v=1">
-    <link rel="stylesheet" href="assets/css/successoral.css?v=6">
+    <link rel="stylesheet" href="assets/css/successoral.css?v=7">
     <link rel="stylesheet" href="assets/css/successoral-plus2.css?v=1">
     <link rel="stylesheet" href="assets/css/complements.css?v=1">
     <link rel="stylesheet" href="assets/css/verrou.css?v=1">
