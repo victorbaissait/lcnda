@@ -1515,6 +1515,8 @@
   :root[data-lc-density] .sidebar-footer{padding:calc(6px * var(--lc-sp)) calc(14px * var(--lc-sp)) !important}
 }
 :root[data-lc-density] .ord-row{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .order-row .order-icon-pick{padding:calc(2px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root .order-row .order-icon-pick:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
 :root .icon-action.ia-auto:is([data-lc-sh="douces"], [data-lc-sh="douces"] *) {box-shadow:var(--lc-sh-s)}
 :root .icon-action.ia-auto:is([data-lc-sh="aucune"], [data-lc-sh="aucune"] *) {box-shadow:none}
 :root[data-lc-density] .h-hr-panel{gap:calc(8px * var(--lc-sp))}

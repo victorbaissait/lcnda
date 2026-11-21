@@ -785,6 +785,7 @@
 :root.lc-frame .sg-panel ol.sg-sum li, :root .sg-panel ol.sg-sum li:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line-soft,#e4e4e4)}
 :root.lc-frame .drawer-btn, :root .drawer-btn:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root.lc-frame .ord-row .ord-arrow, :root .ord-row .ord-arrow:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .order-row .order-icon-pick, :root .order-row .order-icon-pick:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line,#ccd)}
 :root.lc-frame .icon-action.ia-auto, :root .icon-action.ia-auto:is([data-lc-lines], [data-lc-lines] *) {border:calc(1.5px * var(--lc-frame-k)) solid var(--lc-frame-color) !important}
 :root.lc-frame .h-fp-ftools button, :root .h-fp-ftools button:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--border,#d6d9df)}
 :root.lc-frame .h-fp-ftools .h-fp-tg.on, :root .h-fp-ftools .h-fp-tg.on:is([data-lc-lines], [data-lc-lines] *) {border-color:#055dff}
