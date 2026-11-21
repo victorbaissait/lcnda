@@ -79,7 +79,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/successoral-plus2.css?v=1">
     <link rel="stylesheet" href="assets/css/complements.css?v=1">
     <link rel="stylesheet" href="assets/css/verrou.css?v=1">
-    <link rel="stylesheet" href="assets/css/reseau-local.css?v=1">
+    <link rel="stylesheet" href="assets/css/reseau-local.css?v=2">
     <link rel="stylesheet" href="assets/css/indicateurs.css?v=2">
     <link rel="stylesheet" href="assets/css/mode-simple.css?v=7">
     <link rel="stylesheet" href="assets/css/formats.css?v=1">
@@ -106,8 +106,8 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
     <link rel="stylesheet" href="assets/css/versions.css?v=1">
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
-    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=16" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=16" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=17" id="lc-frame-css" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=17" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=13">
     <script>/* 🎨 Designs au choix (app-designs.js) : le style choisi est posé avant le premier dessin, sans clignotement */
     (function(){try{var c=JSON.parse(localStorage.getItem('lcnda-designs-ui-v2')||'null');if(!c||typeof c!=='object'||!c.a)return;var r=document.documentElement,k;
@@ -1184,7 +1184,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
 <script src="assets/js/app.js?v=566" defer></script>
 <script src="assets/js/app-verrou.js?v=5" defer></script>
-<script src="assets/js/app-reseau-local.js?v=1" defer></script>
+<script src="assets/js/app-reseau-local.js?v=2" defer></script>
 <script src="assets/js/app-indicateurs.js?v=2" defer></script>
 <script src="assets/js/app-picker.js?v=29" defer></script>
 <script src="assets/js/app-media-picker.js?v=4" defer></script>

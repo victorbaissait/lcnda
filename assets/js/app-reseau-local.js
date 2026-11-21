@@ -72,7 +72,7 @@
         const noPw = st.settings.password === 'obligatoire' && !lock.locked;
         const primary = st.on ? `<button type="button" class="button danger" data-rl-close>${esc(i18n('⏻ Tout couper maintenant'))}</button>` : '';
         const more = [`<button type="button" role="menuitem" data-rl-log>${esc(i18n('📜 Qui a vu quoi'))}</button>`];
-        const sw = `<label class="rl-switch"><input type="checkbox" data-rl-switch${st.on ? ' checked' : ''}${noPw && !st.on ? ' disabled' : ''}><span class="rl-knob" aria-hidden="true"></span>
+        const sw = `<label class="checkbox-line rl-open-cb"><input type="checkbox" data-rl-switch${st.on ? ' checked' : ''}${noPw && !st.on ? ' disabled' : ''}>
             <span><b>${esc(i18n('Ouvrir « {name} » aux autres ordinateurs de la maison', {name: genealogyName}))}</b><br><small class="muted">${st.on
                 ? esc(i18n('Ouvert depuis {time}. Se coupe si cet ordinateur se met en veille, change de réseau ou ferme l’app.', {time: timeTxt(st.since)}))
                 : esc(i18n('Coupé : l’app ne répond qu’à cet ordinateur (comme aujourd’hui).'))}</small></span></label>`;

@@ -6074,6 +6074,24 @@
 :root[data-lc-density] .succ-jbtns{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .glk-mins .glk-chip{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .glk-mins .glk-chip{padding:calc(6px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+/* reseau-local.css */
+:root[data-lc-density] .rl-grid{gap:calc(18px * var(--lc-sp))}
+:root[data-lc-density] .rl-open-cb{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .rl-open{gap:calc(10px * var(--lc-sp)) calc(18px * var(--lc-sp))}
+:root[data-lc-density] .rl-open{margin-top:calc(14px * var(--lc-sp))}
+:root[data-lc-density] .rl-open{padding-top:calc(14px * var(--lc-sp))}
+:root[data-lc-density] .rl-addr,:root[data-lc-density] .rl-inv{gap:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .rl-req{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .rl-req{padding:calc(10px * var(--lc-sp)) 0}
+:root[data-lc-density] .rl-choice{margin-top:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .rl-honest{padding:calc(14px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+:root[data-lc-density] .rl-dl{gap:calc(6px * var(--lc-sp)) calc(14px * var(--lc-sp))}
+:root[data-lc-density] .lan-pair-body{padding:calc(16px * var(--lc-sp))}
+:root[data-lc-density] .lan-card{padding:calc(24px * var(--lc-sp)) calc(22px * var(--lc-sp))}
+:root[data-lc-density] .lan-form{gap:calc(12px * var(--lc-sp))}
+:root[data-lc-density] .lan-form label{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .lan-form input{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .lan-button{padding:calc(12px * var(--lc-sp)) calc(16px * var(--lc-sp))}
 /* indicateurs.css */
 :root[data-lc-density] .sosa-star,:root[data-lc-density] .daboville-tag,:root[data-lc-density] .investigation-status{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .sosa-star,:root[data-lc-density] .daboville-tag,:root[data-lc-density] .investigation-status{padding:calc(4px * var(--lc-sp)) calc(7px * var(--lc-sp))}
@@ -6934,6 +6952,36 @@
 @media (max-width: 720px){
   :root[data-lc-density] .mcp-row{gap:calc(3px * var(--lc-sp))}
 }
+/* cartes-nouvelles.css */
+:root[data-lc-density] .cq-app .cq-pick{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .cq-app .cq-checks{gap:calc(4px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root .cq-app fieldset:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .cq-app fieldset{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cq-detail{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .cq-detail th,:root[data-lc-density] .cq-detail td{padding:calc(5px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .cq-detail .cq-careful{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .cq-detail ul{padding-left:calc(18px * var(--lc-sp))}
+:root .lap-dlg:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root .lap-dlg.is-side:is([data-lc-sh="douces"], [data-lc-sh="douces"] *) {box-shadow:var(--lc-sh-l)}
+:root .lap-dlg.is-side:is([data-lc-sh="aucune"], [data-lc-sh="aucune"] *) {box-shadow:none}
+:root[data-lc-density] .lap-head{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .lap-head{padding:calc(10px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .lap-acts{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .lap-bar,:root[data-lc-density] .lap-chips,:root[data-lc-density] .lap-sum,:root[data-lc-density] .lap-only{padding:0 calc(12px * var(--lc-sp))}
+:root[data-lc-density] .lap-bar{padding-top:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .lap-chips{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .lap-chip{padding:calc(3px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .lap-list{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .lap-list{padding:0 calc(12px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root .lap-item:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .lap-item{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .lap-item header{gap:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .lap-btns{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .lap-tab th,:root[data-lc-density] .lap-tab td{padding:calc(5px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .lap-rv-acts{gap:calc(6px * var(--lc-sp))}
+:root .lap-set fieldset:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}
+:root[data-lc-density] .lap-set fieldset{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .lap-rec{padding:1px calc(5px * var(--lc-sp))}
 /* traitement-texte.css */
 :root[data-lc-density] .wp .ui-topbar{row-gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .wp-menus summary{padding:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}

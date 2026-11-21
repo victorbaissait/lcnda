@@ -3617,6 +3617,11 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .sp2-calls li, :root .sp2-calls li:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--sp2-line, #d8dde6)}
 :root.lc-frame .sp2-map, :root .sp2-map:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--sp2-line)}
 :root.lc-frame .sp2-tile, :root .sp2-tile:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--sp2-line)}
+/* complements.css */
+:root.lc-frame .compl-set-f, :root .compl-set-f:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #d8d4cc)}
+:root.lc-frame .compl-ce-gr, :root .compl-ce-gr:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line, #e2ded6)}
+:root.lc-frame .compl-dtw-n, :root .compl-dtw-n:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #d8d4cc)}
+:root.lc-frame .compl-vm-ph img, :root .compl-vm-ph img:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #d8d4cc)}
 /* verrou.css */
 :root.lc-frame .gl-card, :root .gl-card:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--gl-line)}
 :root.lc-frame .gl-input, :root .gl-input:is([data-lc-lines], [data-lc-lines] *) {border:2px solid var(--gl-line)}
@@ -3631,6 +3636,13 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .b8-table td, :root .b8-table td:is([data-lc-lines], [data-lc-lines] *) {border:0}
 :root.lc-frame .glk-mins .glk-chip, :root .glk-mins .glk-chip:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid currentColor}
 :root.lc-frame .glk-mins .glk-chip:has(input:checked), :root .glk-mins .glk-chip:has(input:checked):is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue, #0066cc)}
+/* reseau-local.css */
+:root.lc-frame .rl-open, :root .rl-open:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid var(--line, #ddd)}
+:root.lc-frame .rl-req, :root .rl-req:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid var(--line, #ddd)}
+:root.lc-frame .rl-req:first-of-type, :root .rl-req:first-of-type:is([data-lc-lines], [data-lc-lines] *) {border-top:0}
+:root.lc-frame .lan-form input, :root .lan-form input:is([data-lc-lines], [data-lc-lines] *) {border-color:#555}
+:root.lc-frame .lan-form input, :root .lan-form input:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid #bbb}
+:root.lc-frame .lan-button, :root .lan-button:is([data-lc-lines], [data-lc-lines] *) {border:0}
 /* indicateurs.css */
 :root.lc-frame .ui-badge, :root .ui-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .status-badge, :root .status-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .sosa-star, :root .sosa-star:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .daboville-tag, :root .daboville-tag:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .outside-genealogy-badge, :root .outside-genealogy-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .artist-badge, :root .artist-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .investigation-status, :root .investigation-status:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .entity-date-badge, :root .entity-date-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .h-badge, :root .h-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .h-new-badge, :root .h-new-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .tag-conf-badge, :root .tag-conf-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .grave-status-badge, :root .grave-status-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .grave-condition-badge, :root .grave-condition-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .branch-closed-badge, :root .branch-closed-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .ar-badge, :root .ar-badge:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .investigation-item-status-badge, :root .investigation-item-status-badge:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid;border-color:#8a8f99}
 :root.lc-frame .label-chip, :root .label-chip:is([data-lc-lines], [data-lc-lines] *) {border-width:calc(1.5px * var(--lc-frame-k))}
@@ -4034,6 +4046,21 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .mcp-lbody, :root .mcp-lbody:is([data-lc-lines], [data-lc-lines] *) {border-top:1.5px solid var(--line, #d0d4da)}
 :root.lc-frame .mcp-pop, :root .mcp-pop:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
 :root.lc-frame .mcp-pop-it img, :root .mcp-pop-it img:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line, #d0d4da)}
+/* cartes-nouvelles.css */
+:root.lc-frame .cq-app fieldset, :root .cq-app fieldset:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}
+:root.lc-frame .cq-detail th, :root .cq-detail th:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .cq-detail td, :root .cq-detail td:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line-color)}
+:root.lc-frame .cq-detail .cq-careful, :root .cq-detail .cq-careful:is([data-lc-lines], [data-lc-lines] *) {border-left:4px solid #d4a800}
+:root.lc-frame .lap-dlg, :root .lap-dlg:is([data-lc-lines], [data-lc-lines] *) {border:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .lap-head, :root .lap-head:is([data-lc-lines], [data-lc-lines] *) {border-bottom:calc(2px * var(--lc-frame-k)) solid var(--lc-frame-color)}
+:root.lc-frame .lap-chip, :root .lap-chip:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}
+:root.lc-frame .lap-chip.is-on, :root .lap-chip.is-on:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--blue-bright)}
+:root.lc-frame .lap-item, :root .lap-item:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}
+:root.lc-frame .lap-btns .button.is-far, :root .lap-btns .button.is-far:is([data-lc-lines], [data-lc-lines] *) {border-color:#c62828}
+:root.lc-frame .lap-badge, :root .lap-badge:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid currentColor}
+:root.lc-frame .lap-tab th, :root .lap-tab th:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .lap-tab td, :root .lap-tab td:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line-color)}
+:root.lc-frame .lap-set fieldset, :root .lap-set fieldset:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}
+:root.lc-frame .lap-dlg, :root .lap-dlg:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .lap-dlg.is-side, :root .lap-dlg.is-side:is([data-lc-lines], [data-lc-lines] *) {border-width:0}
+:root[data-theme="dark"].lc-frame .lap-far, :root[data-theme="dark"] .lap-far:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .lap-tab tr.is-far td, :root[data-theme="dark"] .lap-tab tr.is-far td:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .lap-btns .button.is-far, :root[data-theme="dark"] .lap-btns .button.is-far:is([data-lc-lines], [data-lc-lines] *) {border-color:#ff8a80}
 /* traitement-texte.css */
 :root.lc-frame dialog.modal.wp-dlg.is-full, :root dialog.modal.wp-dlg.is-full:is([data-lc-lines], [data-lc-lines] *) {border:0}
 :root.lc-frame .wp-menus summary, :root .wp-menus summary:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid transparent}
