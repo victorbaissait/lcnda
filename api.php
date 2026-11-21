@@ -533,7 +533,8 @@ try {
         'atelier_projects' => json_response(atelier_projects($pdo)),
         'media_av_list' => json_response(media_av_list($pdo, safe_text($_GET['kind'] ?? 'audio'))),
         'recueils' => json_response(recueils_list($pdo, safe_text($_GET['q'] ?? ''))),
-        'genea_calendar' => genea_calendar_stream($pdo, $_GET), // écrit au fur et à mesure (lib/calendars.php)
+        // 🐘 les anniversaires des prochains jours (widget, 2 s et 4 Mo à 200 000 fiches) : gardés pour la journée tant que la base ne change pas
+        'genea_calendar' => safe_int($_GET['anniv_days'] ?? 0) > 0 && !safe_int($_GET['person_id'] ?? 0) && !isset($_GET['succ_cases']) ? json_response(calc_cached($pdo, 'genea_anniv_' . safe_int($_GET['anniv_days'] ?? 0), ['persons', 'events', 'event_types', 'places', 'families'], [date('Y-m-d'), safe_int($_GET['anniv_days'] ?? 0), safe_int($_GET['person_id'] ?? 0)], static fn() => genea_calendar_events($pdo, $_GET))) : genea_calendar_stream($pdo, $_GET), // écrit au fur et à mesure (lib/calendars.php)
         'my_agenda' => json_response(my_agenda($pdo)),
         'recueil' => json_response(recueil_detail($pdo, safe_int($_GET['id'] ?? 0))),
         'recueils_for' => json_response(['recueils' => recueils_for_entity($pdo, safe_text($_GET['type'] ?? ''), safe_text($_GET['key'] ?? ''))]),
