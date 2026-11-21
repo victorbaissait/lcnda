@@ -52,7 +52,7 @@ Combinaisons montrées (les plus grandes) ¦ Zobrazené kombinace (největší) 
 Combinaisons pas montrées : {n} ¦ Nezobrazené kombinace: {n} ¦ Kombinationer som inte visas: {n} ¦ Kombinationer, der ikke vises: {n}
 Commune (titre) ¦ Obec (název) ¦ Kommun (rubrik) ¦ Kommune (titel)
 Comparer avec le recensement de ¦ Porovnat se sčítáním z roku ¦ Jämför med folkräkningen från ¦ Sammenlign med folketællingen fra
-Consanguinité de l’ancêtre (%) ¦ Příbuzenská plemenitba předka (%) ¦ Anans inavel (%) ¦ Anens indavl (%)
+Consanguinité de l’ancêtre ¦ Příbuzenská plemenitba předka ¦ Anans inavel ¦ Anens indavl
 Couleur de l’écu (sans image) ¦ Barva štítu (bez obrázku) ¦ Sköldens färg (utan bild) ¦ Skjoldets farve (uden billede)
 Couleur des parts ¦ Barva dílů ¦ Delarnas färg ¦ Delenes farve
 Couleur du côté maternel ¦ Barva mateřské strany ¦ Färg för mödernet ¦ Farve for mødrene side
@@ -169,7 +169,7 @@ vient de {name} ¦ pochází z {name} ¦ kommer från {name} ¦ kommer fra {name
 {name} : armoiries pas encore trouvées ¦ {name}: erb zatím nenalezen ¦ {name}: vapen ännu inte hittat ¦ {name}: våben endnu ikke fundet
 {name} : {n} en tout ¦ {name}: celkem {n} ¦ {name}: {n} totalt ¦ {name}: {n} i alt
 {place}, {year} ¦ {place}, {year} ¦ {place}, {year} ¦ {place}, {year}
-« vers » : plus ou moins (ans) ¦ „kolem“: plus minus (roky) ¦ ”omkring”: plus minus (år) ¦ »omkring«: plus/minus (år)
+« vers » : plus ou moins ¦ „kolem“: plus minus ¦ ”omkring”: plus minus ¦ »omkring«: plus/minus
 Âge (recensement) ¦ Věk (sčítání) ¦ Ålder (folkräkning) ¦ Alder (folketælling)
 Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Psát druh vazby na čáru (jméno dítěte…) ¦ Skriv typen av band på linjen (barnets namn…) ¦ Skriv forbindelsens art på stregen (barnets navn…)
 Écrits s’il y a la place ¦ Psané, pokud je místo ¦ Skrivna om det finns plats ¦ Skrevet, hvis der er plads

@@ -52,7 +52,7 @@ Combinaisons montrées (les plus grandes) ¦ Συνδυασμοί που εμφ�
 Combinaisons pas montrées : {n} ¦ Συνδυασμοί που δεν εμφανίζονται: {n} ¦ Непоказани комбинации: {n}
 Commune (titre) ¦ Δήμος (τίτλος) ¦ Община (заглавие)
 Comparer avec le recensement de ¦ Σύγκριση με την απογραφή του ¦ Сравни с преброяването от
-Consanguinité de l’ancêtre (%) ¦ Ενδογαμία του προγόνου (%) ¦ Кръвно родство на предшественика (%)
+Consanguinité de l’ancêtre ¦ Ενδογαμία του προγόνου ¦ Кръвно родство на предшественика
 Couleur de l’écu (sans image) ¦ Χρώμα ασπίδας (χωρίς εικόνα) ¦ Цвят на щита (без изображение)
 Couleur des parts ¦ Χρώμα τμημάτων ¦ Цвят на частите
 Couleur du côté maternel ¦ Χρώμα μητρικής πλευράς ¦ Цвят на майчината страна
@@ -169,7 +169,7 @@ vient de {name} ¦ προέρχεται από {name} ¦ идва от {name}
 {name} : armoiries pas encore trouvées ¦ {name}: το οικόσημο δεν βρέθηκε ακόμη ¦ {name}: гербът още не е намерен
 {name} : {n} en tout ¦ {name}: {n} συνολικά ¦ {name}: общо {n}
 {place}, {year} ¦ {place}, {year} ¦ {place}, {year} г.
-« vers » : plus ou moins (ans) ¦ «περίπου»: συν πλην (έτη) ¦ „около“: плюс-минус (години)
+« vers » : plus ou moins ¦ «περίπου»: συν πλην ¦ „около“: плюс-минус
 Âge (recensement) ¦ Ηλικία (απογραφή) ¦ Възраст (преброяване)
 Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Γράψε το είδος της σύνδεσης στη γραμμή (όνομα παιδιού…) ¦ Пиши вида на връзката върху линията (име на детето…)
 Écrits s’il y a la place ¦ Γραμμένα αν υπάρχει χώρος ¦ Изписани, ако има място

@@ -176,7 +176,7 @@
             if (c.type === 'readonly') return `<td class="h-dg-ro">${esc(v)}</td>`;
             if (c.type === 'color') return `<td class="h-dg-colcell"><input type="color" ${at} value="${esc(R().color(v, pal[ri % pal.length]).startsWith('#') && /^#[0-9a-f]{6}$/i.test(R().color(v, '')) ? v : pal[ri % pal.length])}" title="${v ? 'Couleur choisie' : 'Couleur automatique'}" class="${v ? '' : 'is-auto'}">${v ? `<button type="button" class="h-dg-x" data-dg-autocolor ${at} title="Revenir à la couleur automatique">↺</button>` : ''}</td>`;
             if (c.type === 'select') return `<td><select ${at}>${c.choices.map(([k, l]) => `<option value="${esc(k)}" ${String(v) === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></td>`;
-            return `<td><input ${at} value="${esc(v)}" ${c.type === 'number' ? 'inputmode="decimal" class="is-num"' : ''} placeholder="${esc(c.ph || '')}"></td>`;
+            return `<td><input ${at} value="${esc(v)}" ${c.type === 'number' ? 'inputmode="decimal" class="is-num"' : ''}${c.unit != null ? ` data-unit="${esc(c.unit)}"` : ''} placeholder="${esc(c.ph || '')}"></td>`;
         };
         return rows.slice(from, to).map((r, k) => { const ri = from + k; return `<tr>${cols.map(c => cell(c, r, ri)).join('')}<td class="h-dg-rowtools">${g.fixed ? '' : `<button type="button" data-dg-row="up" data-g="${gi}" data-r="${ri}" title="Monter">↑</button><button type="button" data-dg-row="down" data-g="${gi}" data-r="${ri}" title="Descendre">↓</button><button type="button" data-dg-row="dup" data-g="${gi}" data-r="${ri}" title="Dupliquer">⧉</button><button type="button" data-dg-row="del" data-g="${gi}" data-r="${ri}" title="Supprimer">✕</button>`}</td></tr>`; }).join('');
     }

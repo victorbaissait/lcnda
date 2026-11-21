@@ -52,7 +52,7 @@ Combinaisons montrées (les plus grandes) ¦ Näytetyt yhdistelmät (suurimmat) 
 Combinaisons pas montrées : {n} ¦ Näyttämättömät yhdistelmät: {n} ¦ Nem mutatott kombinációk: {n}
 Commune (titre) ¦ Kunta (otsikko) ¦ Település (cím)
 Comparer avec le recensement de ¦ Vertaa väestönlaskentaan vuodelta ¦ Összevetés ezzel az összeírással
-Consanguinité de l’ancêtre (%) ¦ Esivanhemman sukusiitos (%) ¦ Az ős beltenyészete (%)
+Consanguinité de l’ancêtre ¦ Esivanhemman sukusiitos ¦ Az ős beltenyészete
 Couleur de l’écu (sans image) ¦ Kilven väri (ilman kuvaa) ¦ Pajzs színe (kép nélkül)
 Couleur des parts ¦ Osien väri ¦ A részek színe
 Couleur du côté maternel ¦ Äidin puolen väri ¦ Anyai oldal színe
@@ -169,7 +169,7 @@ vient de {name} ¦ juontaa muodosta {name} ¦ ebből ered: {name}
 {name} : armoiries pas encore trouvées ¦ {name}: vaakunaa ei vielä löydetty ¦ {name}: a címer még nincs meg
 {name} : {n} en tout ¦ {name}: yhteensä {n} ¦ {name}: összesen {n}
 {place}, {year} ¦ {place}, {year} ¦ {place}, {year}
-« vers » : plus ou moins (ans) ¦ ”noin”: plus miinus (vuotta) ¦ „körülbelül”: plusz-mínusz (év)
+« vers » : plus ou moins ¦ ”noin”: plus miinus ¦ „körülbelül”: plusz-mínusz
 Âge (recensement) ¦ Ikä (väestönlaskenta) ¦ Kor (összeírás)
 Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Kirjoita yhteyden laji viivalle (lapsen nimi…) ¦ A kapcsolat fajtája a vonalon (a gyermek neve…)
 Écrits s’il y a la place ¦ Kirjoitettuina, jos tilaa on ¦ Kiírva, ha van hely

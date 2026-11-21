@@ -177,7 +177,10 @@
     const harmonizeNow = () => { const ws = document.getElementById('workspace'); const head = ws?.querySelector('.page-header'); if (head && !head.closest('dialog')) UI.harmonizePageHeader(head); };
     const watchWs = () => {
         const ws = document.getElementById('workspace'); if (!ws) return setTimeout(watchWs, 400);
-        new MutationObserver(() => { clearTimeout(phTimer); phTimer = setTimeout(harmonizeNow, 20); }).observe(ws, {childList: true, subtree: true, characterData: false});
+        // 20 ms après le dernier changement ; mais une page qui bouge sans arrêt (Réglages › Apparence : cadres posés en plusieurs fois) est rangée au plus tard après 150 ms
+        let phSince = 0;
+        const phRun = () => { phSince = 0; harmonizeNow(); };
+        new MutationObserver(() => { const now = performance.now(); phSince ||= now; clearTimeout(phTimer); if (now - phSince > 150) phRun(); else phTimer = setTimeout(phRun, 20); }).observe(ws, {childList: true, subtree: true, characterData: false});
         harmonizeNow();
     };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', watchWs); else watchWs();

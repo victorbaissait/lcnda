@@ -52,7 +52,7 @@ Combinaisons montrées (les plus grandes) ¦ Prikazane kombinacije (najveće) ¦
 Combinaisons pas montrées : {n} ¦ Neprikazane kombinacije: {n} ¦ Neprikazane kombinacije: {n}
 Commune (titre) ¦ Općina (naslov) ¦ Občina (naslov)
 Comparer avec le recensement de ¦ Usporedi s popisom iz ¦ Primerjaj s popisom iz leta
-Consanguinité de l’ancêtre (%) ¦ Srodstvo pretka (%) ¦ Sorodstvo prednika (%)
+Consanguinité de l’ancêtre ¦ Srodstvo pretka ¦ Sorodstvo prednika
 Couleur de l’écu (sans image) ¦ Boja štita (bez slike) ¦ Barva ščita (brez slike)
 Couleur des parts ¦ Boja dijelova ¦ Barva delov
 Couleur du côté maternel ¦ Boja majčine strane ¦ Barva materine strani
@@ -169,7 +169,7 @@ vient de {name} ¦ dolazi od {name} ¦ izvira iz {name}
 {name} : armoiries pas encore trouvées ¦ {name}: grb još nije pronađen ¦ {name}: grb še ni najden
 {name} : {n} en tout ¦ {name}: ukupno {n} ¦ {name}: skupaj {n}
 {place}, {year} ¦ {place}, {year}. ¦ {place}, {year}
-« vers » : plus ou moins (ans) ¦ „oko”: plus-minus (godine) ¦ »okoli«: plus minus (leta)
+« vers » : plus ou moins ¦ „oko”: plus-minus ¦ »okoli«: plus minus
 Âge (recensement) ¦ Dob (popis) ¦ Starost (popis)
 Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Upiši vrstu veze na crtu (ime djeteta…) ¦ Vrsto povezave napiši na črto (ime otroka…)
 Écrits s’il y a la place ¦ Napisana ako ima mjesta ¦ Izpisana, če je prostor

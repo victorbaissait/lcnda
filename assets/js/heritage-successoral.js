@@ -997,7 +997,10 @@
     document.addEventListener('contextmenu', e => {
         const node = e.target.closest?.('[data-succ-node]'); if (!node || !cur.R || !ext.preuve?.openLink) return;
         const id = Number(node.dataset.succNode), ps = cur.R._ctx.legalParents(id); if (!ps.length) return;
-        e.preventDefault(); ext.preuve.openLink(id, ps[0]);
+        // K14 : le menu de l'app (un lien par parent, puis la fiche), pas une fenêtre ouverte d'emblée sur le premier parent
+        const nm = x => (cur.data?.graph?.persons?.[x] ? nameOf(cur.data, x) : `n° ${x}`), vowel = n => /^[aeiouyhàâéèêëîïôöûü]/i.test(String(n || '').trim());
+        const items = ps.map(pid => ({icon: '🛡', label: i18n(vowel(nm(pid)) ? 'Solidité du lien : {nm}, enfant d’{par}' : 'Solidité du lien : {nm}, enfant de {par}', {nm: nm(id), par: nm(pid)}), run: () => ext.preuve.openLink(id, pid)}));
+        UI().contextMenu(e, [...items, '-', {icon: '↗', label: i18n('Ouvrir la fiche'), run: () => A().openPersonById(id)}], {title: nm(id)});
     });
     document.addEventListener('keydown', e => { const node = e.target.closest?.('[data-succ-node]'); if (node && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); A().openPersonById(Number(node.dataset.succNode)); } });
     document.addEventListener('change', async e => {

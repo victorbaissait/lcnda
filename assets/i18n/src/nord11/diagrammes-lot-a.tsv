@@ -52,7 +52,7 @@ Combinaisons montrées (les plus grandes) ¦ Tổ hợp hiển thị (lớn nh�
 Combinaisons pas montrées : {n} ¦ Tổ hợp không hiển thị: {n} ¦ Kombinasi tidak ditampilkan: {n}
 Commune (titre) ¦ Xã (tiêu đề) ¦ Wilayah (judul)
 Comparer avec le recensement de ¦ So sánh với điều tra năm ¦ Bandingkan dengan sensus tahun
-Consanguinité de l’ancêtre (%) ¦ Cận huyết của tổ tiên (%) ¦ Kekerabatan leluhur (%)
+Consanguinité de l’ancêtre ¦ Cận huyết của tổ tiên ¦ Kekerabatan leluhur
 Couleur de l’écu (sans image) ¦ Màu khiên (không có ảnh) ¦ Warna perisai (tanpa gambar)
 Couleur des parts ¦ Màu các phần ¦ Warna bagian
 Couleur du côté maternel ¦ Màu bên ngoại ¦ Warna pihak ibu
@@ -169,7 +169,7 @@ vient de {name} ¦ bắt nguồn từ {name} ¦ berasal dari {name}
 {name} : armoiries pas encore trouvées ¦ {name}: chưa tìm thấy huy hiệu ¦ {name}: lambang belum ditemukan
 {name} : {n} en tout ¦ {name}: tổng {n} ¦ {name}: total {n}
 {place}, {year} ¦ {place}, {year} ¦ {place}, {year}
-« vers » : plus ou moins (ans) ¦ “khoảng”: cộng trừ (năm) ¦ “sekitar”: plus minus (tahun)
+« vers » : plus ou moins ¦ “khoảng”: cộng trừ ¦ “sekitar”: plus minus
 Âge (recensement) ¦ Tuổi (điều tra) ¦ Umur (sensus)
 Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Ghi loại liên kết trên đường (tên con…) ¦ Tulis jenis hubungan di garis (nama anak…)
 Écrits s’il y a la place ¦ Ghi ra nếu đủ chỗ ¦ Ditulis jika ada tempat

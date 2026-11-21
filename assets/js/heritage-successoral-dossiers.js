@@ -501,7 +501,7 @@
             const set = await filterPeople();
             if (set && !set.has(Number(p.id))) {
                 const c = localCases().find(x => x.id === ids[0]);
-                host.insertAdjacentHTML('beforeend', `<span class="ui-badge is-yellow succ-out-badge" data-succ-out>${esc(i18n('hors du dossier {n}', {n: c ? c.number : ''}))} · <button type="button" class="link-button" data-succ-attach-here="${p.id}">${esc(i18n('＋ Rattacher'))}</button></span>`);
+                host.insertAdjacentHTML('beforeend', `<span class="ui-badge is-yellow succ-out-badge" data-succ-out>${esc(i18n('hors du dossier {n}', {n: c ? c.number : ''}))} · <button type="button" class="link-button" data-succ-attach-here="${p.id}">＋ ${esc(i18n('Relier'))}</button></span>`);
             }
         }
     }
@@ -554,7 +554,7 @@
             <section class="succ-box"><div class="succ-box-head"><h3>${esc(i18n('Les fiches du dossier'))} <small class="muted">${esc(plural(on.length, 'fiche'))}</small></h3></div>
             ${ro ? '' : `<div class="succ-cp-add"><div class="succ-cp-pk">${P().pickerField({name: 'succ_add_person', kind: 'person', animals: false, placeholder: i18n('＋ Ajouter une personne…')})}</div>
                 <select data-succ-cp-newrole aria-label="${esc(i18n('Rôle'))}">${ROLES.filter(k => k[0] !== 'deceased').map(([k, l]) => `<option value="${k}"${k === 'verify' ? ' selected' : ''}>${esc(i18n(l))}</option>`).join('')}</select>
-                <button type="button" class="button small" data-succ-cp-add>${esc(i18n('Rattacher'))}</button></div>`}
+                <button type="button" class="button small" data-succ-cp-add>${esc(i18n('Relier'))}</button></div>`}
             <div class="succ-scroll"><table class="succ-table succ-cp"><thead><tr><th>${esc(i18n('Personne'))}</th><th>${esc(i18n('Rôle'))}</th><th>${esc(i18n('Comment'))}</th><th></th></tr></thead><tbody>${on.map(row).join('')}</tbody></table></div>
             <p class="ui-hint succ-swipe">${esc(i18n('↔ Faire glisser le tableau.'))}</p>
             ${off.length ? `<details class="succ-cp-off"><summary>${esc(i18n('Retirées à la main ({n}) : jamais remises toutes seules', {n: off.length}))}</summary><ul>${off.map(x => `<li>${esc(x.name)} <button type="button" class="link-button" data-succ-cpback="${x.person_id}">${esc(i18n('Remettre'))}</button></li>`).join('')}</ul></details>` : ''}</section>`;
