@@ -358,12 +358,12 @@
         // au zoom, seules les épaisseurs et les poignées changent : pas besoin de tout redessiner
         function paintOverlay() { const sw = 2 / zoom; $('[data-tx-zones]')?.querySelectorAll('rect').forEach(r => r.setAttribute('stroke-width', r.classList.contains('is-sel') ? sw * 2 : sw)); paintHandles(); }
         /* 🪄 les corrections proposées sur le texte de l'Atelier : soulignées dans le miroir, un clic dans le texte → le menu */
-        let txFix = [], txFixOn = false, txFixT = 0; const txFixUndo = [];
-        const fixSeg = (text, a, b) => { let h = '', q = a; txFix.filter(f => f.s >= a && f.e <= b).forEach(f => { h += esc(text.slice(q, f.s)) + `<u class="h-tx-fix${f.sure ? ' is-sure' : ''}">${esc(text.slice(f.s, f.e))}</u>`; q = f.e; }); return h + esc(text.slice(q, b)); };
+        let txFix = [], txFixOn = false, txFixT = 0; const txFixUndo = [], txKept = new Set();
+        const fixSeg = (text, a, b) => { let h = '', q = a; txFix.filter(f => f.e > a && f.s < b).forEach(f => { const s0 = Math.max(a, f.s), e0 = Math.min(b, f.e); if (s0 < q) return; h += esc(text.slice(q, s0)) + `<u class="h-tx-fix${f.sure ? ' is-sure' : ''}">${esc(text.slice(s0, e0))}</u>`; q = e0; }); return h + esc(text.slice(q, b)); }; // un mot coupé par le bord d'une zone : souligné des deux côtés
         async function runFix({quiet = false} = {}) {
             if (!window.LCNDA_HTRFIX) { if (!quiet) toast(i18n('Les corrections proposées ne sont pas chargées.'), 'error'); return; }
             const lex = await fixLexicon($('[data-tx-lang]').value, $('[data-tx="place"]').value); if (!lex || !dlg.isConnected) return;
-            txFix = window.LCNDA_HTRFIX.propose(area.value, lex, {level: fixLevel()}); txFixOn = true; paintMirror(); paintTxFix();
+            txFix = window.LCNDA_HTRFIX.propose(area.value, lex, {level: fixLevel(), keep: txKept}); txFixOn = true; paintMirror(); paintTxFix();
             if (!quiet) status(txFix.length ? (A().plural ? A().plural(txFix.length, 'correction proposée', 'corrections proposées') : String(txFix.length)) : i18n('Aucune correction à proposer'));
         }
         function paintTxFix() {
@@ -392,7 +392,7 @@
             if (!txFix.length || area.selectionStart !== area.selectionEnd) return;
             const c = area.selectionStart, fx = txFix.find(f => c >= f.s && c <= f.e); if (!fx) return;
             fixMenu({x: e.clientX, y: e.clientY}, fx, {apply: v => setTxText(window.LCNDA_HTRFIX.applyFix(area.value, fx, v), `« ${fx.word} » → « ${v} »`),
-                keep: () => { txFix = txFix.filter(f => f !== fx); paintMirror(); paintTxFix(); A().undoToast?.(i18n('« {w} » gardé tel quel', {w: fx.word}), {undo: () => { txFix.push(fx); txFix.sort((x, y) => x.s - y.s); paintMirror(); paintTxFix(); }}); },
+                keep: () => { txFix = txFix.filter(f => f !== fx); txKept.add(fx.word); paintMirror(); paintTxFix(); A().undoToast?.(i18n('« {w} » gardé tel quel', {w: fx.word}), {undo: () => { txKept.delete(fx.word); txFix.push(fx); txFix.sort((x, y) => x.s - y.s); paintMirror(); paintTxFix(); }}); },
                 addLex: () => addToLexicon(fx.word, () => runFix({quiet: true}))});
         });
         function paintMirror() {
@@ -679,10 +679,10 @@
             let lex = null; if (FX) { try { lex = await fixLexicon(fxLang, fxPlace); } catch (_) { lex = null; } }
             const wordsOf = l => (l.words?.length ? l.words : String(l.text || '').split(/\s+/).map(w => ({t: w, c: null}))).filter(w => w.t);
             const lineText = l => wordsOf(l).map(w => w.t).join(' ');
-            let fixSeq = 0; const fixMap = new Map();
+            let fixSeq = 0; const fixMap = new Map(), kept = new Set(); // kept : les mots « gardés tels quels » (pas reproposés)
             const fixesFor = (text, ws) => { if (!lex || !fixOn()) return []; const spans = []; let o = 0; ws.forEach(w => { spans.push({s: o, e: o + w.t.length, c: w.c}); o += w.t.length + 1; });
                 const at = (a, b) => spans.find(x => a >= x.s && b <= x.e);
-                return FX.propose(text, lex, {level: fixLevel(), unsure: (a, b) => { const x = at(a, b); return !!(x && x.c != null && x.c < UNSURE); }, sure: (a, b) => { const x = at(a, b); return !!(x && x.c != null && x.c >= .95); }}); };
+                return FX.propose(text, lex, {level: fixLevel(), keep: kept, unsure: (a, b) => { const x = at(a, b); return !!(x && x.c != null && x.c < UNSURE); }, sure: (a, b) => { const x = at(a, b); return !!(x && x.c != null && x.c >= .95); }}); };
             const fixSpan = (fx, inner) => { const id = 'f' + (++fixSeq); fixMap.set(id, fx); return `<span class="h-htr-fix${fx.sure ? ' is-sure' : ''}" data-fx="${id}" title="${esc(i18n('Correction proposée : « {x} » — clique pour choisir', {x: fx.props[0].value}))}">${inner}</span>`; };
             /** une ligne : les mots peu sûrs surlignés, les corrections soulignées ; textNow : le texte déjà corrigé à la main (sans les mots peu sûrs) */
             const lineHtml = (l, textNow = null) => {
@@ -733,7 +733,7 @@
                         const fx = fixMap.get(sp.dataset.fx); if (!fx) return;
                         e.preventDefault(); e.stopPropagation();
                         fixMenu(sp, fx, {apply: v => applyFix([sp], [v], `« ${fx.word} » → « ${v} »`),
-                            keep: () => { const sn = snap(); unwrap(sp); done(sn, i18n('« {w} » gardé tel quel', {w: fx.word})); },
+                            keep: () => { const sn = snap(); unwrap(sp); kept.add(fx.word); done(sn, i18n('« {w} » gardé tel quel', {w: fx.word})); },
                             addLex: () => { const sn = snap(); addToLexicon(fx.word, undone => { if (undone) { restore(sn); return; } d.querySelectorAll('.h-htr-fix').forEach(x => { if (FX.norm(fixMap.get(x.dataset.fx)?.word) === FX.norm(fx.word)) unwrap(x); }); paintFixBar(); }); }});
                     }, true);
                     d.addEventListener('input', e => { const s2 = getSelection(), sp = s2.anchorNode?.parentElement?.closest?.('.h-htr-fix'); if (sp && e.target.closest('[data-htr-line]')) { unwrap(sp); paintFixBar(); } });

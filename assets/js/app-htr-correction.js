@@ -1,7 +1,7 @@
 /* LCNDA — 🪄 Corrections proposées après « ✨ Lire l'acte » (et à la demande sur le texte de l'Atelier) : calculs purs, sans réseau ni page.
  * window.LCNDA_HTRFIX (navigateur) ou require() (Node, tests/test-htr-correction.js).
  *
- * La lecture d'une écriture à la main (Kraken) donne « décembe », « Répablique », « trobunul » : des mots presque justes.
+ * La lecture d'une écriture à la main (Kraken) donne « novembe », « Répnblique », « tribnnal » : des mots presque justes.
  * On compare chaque mot qui n'est pas dans le lexique (ou que Kraken dit peu sûr) aux mots du lexique, avec une distance
  * d'édition où les lettres qui se ressemblent dans l'écriture ancienne coûtent peu (u/n, m/nn, a/o, a/u, e/c, i/l, r/v,
  * b/l, s/ſ… : celles de LCNDA_LECTURE, app-lecture-auto.js, et quelques-unes en plus), et avec le contexte des dates en
@@ -271,7 +271,7 @@
             if (rowMin > lim + 0.01) return 99;
         }
         let c = prev[m];
-        if (first && a[0] !== b[0] && sub(a[0], b[0], 1) >= 1 && a[1] !== b[0] && a[0] !== b[1]) c += 0.4; // la première lettre se lit d'habitude bien
+        if (first && a[0] !== b[0] && sub(a[0], b[0], 1) >= 1 && a[1] !== b[0] && a[0] !== b[1] && !C.has(a.slice(0, 2) + '>' + b[0]) && !C.has(a[0] + '>' + b.slice(0, 2)) && !C.has(a.slice(0, 2) + '>' + b.slice(0, 2))) c += 0.4; // la première lettre se lit d'habitude bien
         c = Math.round(c * 100) / 100;
         return c > lim ? 99 : c;
     }
@@ -303,8 +303,8 @@
      */
     function buildLexicon({lang = 'fra', names = {}, personal = [], place = ''} = {}) {
         const common = new Map(), proper = new Map(), codes = langsOf(lang);
-        const addC = (w, wt = 1, only = false) => { w = String(w || '').trim(); if (!w || /[0-9.…()[\]«»]/.test(w)) return; for (const f of (only ? [w] : forms(w))) { const k = norm(f); if (!k) continue; const o = common.get(k); if (!o) common.set(k, {form: f.toLowerCase(), w: wt, forms: new Set([f.toLowerCase()])}); else { o.forms.add(f.toLowerCase()); if (wt > o.w) o.w = wt; } } };
-        /** un nom propre (ou plusieurs : « Saint-Genest-de-Sonzay » → Saint, Genest, Sonzay) ; generic : d'une liste générale (prénoms
+        const addC = (w, wt = 1, only = false) => { w = String(w || '').trim(); if (!w || /[0-9.…()[\]«»]/.test(w)) return; if (/-/.test(w)) w.split('-').forEach(x => { if (x.length >= 2) addC(x, wt, only); }); for (const f of (only ? [w] : forms(w))) { const k = norm(f); if (!k) continue; const o = common.get(k); if (!o) common.set(k, {form: f.toLowerCase(), w: wt, forms: new Set([f.toLowerCase()])}); else { o.forms.add(f.toLowerCase()); if (wt > o.w) o.w = wt; } } };
+        /** un nom propre (ou plusieurs : « Saint-Félix-des-Bois » → Saint, Félix, Bois) ; generic : d'une liste générale (prénoms
          *  courants), pas de la base : il ne remplace un mot que de très près */
         const addP = (x, wt = 1, generic = false) => { const w = String(typeof x === 'string' ? x : x?.value || x?.name || '').trim(); if (!w || w.length < 2 || /[0-9]/.test(w)) return;
             w.split(/[\s,()/-]+/).forEach(part => { const p = part.replace(/^['’]+|['’.]+$/g, ''); if (p.length < 3 || !/^[A-ZÀ-ÝŒ]/.test(p)) return; const k = norm(p), f = p[0].toUpperCase() + p.slice(1), o = proper.get(k);
@@ -328,6 +328,7 @@
     }
     /** le mot (sans apostrophe ni trait d'union) est-il dans le lexique ? (avec quelques terminaisons : -s, -x, -e, -es) */
     function knows(lex, w) {
+        if (/-/.test(String(w))) return String(w).split('-').filter(Boolean).every(x => knows(lex, x));
         const k = norm(w); if (!k) return true;
         if (lex.common.has(k) || lex.proper.has(k) || lex.common.has(k + 's')) return true;
         if (!lex.fr) return false;
@@ -377,7 +378,7 @@
     }
     /**
      * Les propositions pour un texte. o.level : 'prudent' (par défaut) | 'plus' ; o.unsure : (s, e) → vrai si Kraken dit le mot peu sûr ;
-     * o.sure : (s, e) → vrai si Kraken est très sûr. → [{s, e, word, props: [{value, cost, why}], sure, kind}]
+     * o.sure : (s, e) → vrai si Kraken est très sûr ; o.keep : un Set des mots « gardés tels quels ». → [{s, e, word, props: [{value, cost, why}], sure, kind}]
      *  kind : 'word' (un mot proche), 'number' (une date en toutes lettres), 'accent', 'split' (deux mots collés), 'elision' (« l' » collé)
      */
     function propose(text, lex, o = {}) {
@@ -417,7 +418,7 @@
             const commonLim = inName ? -1 : midCap && level !== 'plus' ? Math.min(lim, n <= 6 ? 0.6 : 1.3) : lim;
             const near = nearest(lex, w, {lim, properOk: true, properLim: cap ? lim : (level === 'plus' ? 0.6 : 0.35)}).filter(x => x.proper || x.cost <= commonLim);
             near.forEach(x => props.push({full: full(tk, x.value, x.proper, preFix?.value), cost: x.cost + (preFix?.c || 0), why: why(w, x.value), proper: x.proper}));
-            // « Cordonnunce » → « l'ordonnance » : une lettre collée devant un mot qui commence par une voyelle
+            // « Cacte » → « l’acte » : une lettre collée devant un mot qui commence par une voyelle
             if (lex.fr && !tk.pre && n >= 5 && /^[lcdsti]/i.test(w) && /^[aeiouyéèêh]/i.test(k.slice(1))) {
                 const into = /^[d]/i.test(w) ? 'd' : /^s/i.test(w) ? 's' : 'l', c0 = into === norm(w[0]) ? 0.2 : 0.4, rest = w.slice(1);
                 nearest(lex, rest, {lim: limitOf(n - 1, level) - c0, properOk: false}).filter(x => /^[aeiouyh]/.test(norm(x.value))).slice(0, 2).forEach(x => props.push({full: (cap && i > 0 && !/[.!?]\s*$/.test(text.slice(0, tk.s)) ? into : (cap ? into.toUpperCase() : into)) + "'" + caseLike(rest, x.value), cost: x.cost + c0 + 0.1, why: i18n('« {x} » collé au mot suivant', {x: into + "'"}), elision: true}));
@@ -471,7 +472,7 @@
             const merged = [...near.map(x => ({full: caseLike(tk.t, x.value), cost: x.cost, why: i18n('Un mois, dans une date')})), ...before.map(p => ({full: p.value, cost: p.cost + 0.2, why: p.why}))];
             res[i] = mk(i, merged, 'number', near[0].cost <= 1.0);
         });
-        return res.filter(Boolean);
+        return res.filter(f => f && !(o.keep && o.keep.has && o.keep.has(f.word)));
     }
     /** le texte avec la proposition mise à la place du mot (la ponctuation et les espaces autour ne bougent pas) */
     function applyFix(text, fix, value) { return text.slice(0, fix.s) + value + text.slice(fix.e); }
