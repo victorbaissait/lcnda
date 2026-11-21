@@ -1,0 +1,114 @@
+fr ¦ sq ¦ mt
+# Zone « reseau » : 🖧 plusieurs ordinateurs de la maison
+conseillé ¦ e rekomanduar ¦ rakkomandat
+connecté maintenant ¦ i lidhur tani ¦ konness issa
+jamais venu ¦ nuk është lidhur kurrë ¦ qatt ma kkonnettja
+Plusieurs ordinateurs ¦ Disa kompjutera ¦ Diversi kompjuters
+Ouvrir cette généalogie aux autres ordinateurs de la maison, par le wifi, jamais par internet. ¦ Hap këtë gjenealogji për kompjuterat e tjerë të shtëpisë, përmes wifi-t, kurrë përmes internetit. ¦ Iftaħ din il-ġenealoġija għall-kompjuters l-oħra tad-dar, permezz tal-wifi, qatt permezz tal-internet.
+Ce réglage ne se change que sur l’ordinateur principal : cet appareil est un appareil invité, en lecture seule. ¦ Ky cilësim ndryshohet vetëm në kompjuterin kryesor: kjo pajisje është pajisje e ftuar, vetëm për lexim. ¦ Dan is-setting jinbidel biss fuq il-kompjuter ewlieni: dan l-apparat huwa apparat mistieden, għall-qari biss.
+Seulement dans l’app de bureau LCNDA, sur l’ordinateur qui garde la généalogie. ¦ Vetëm në aplikacionin e desktopit LCNDA, në kompjuterin që ruan gjenealogjinë. ¦ Biss fl-app tad-desktop LCNDA, fuq il-kompjuter li jżomm il-ġenealoġija.
+⏻ Tout couper maintenant ¦ ⏻ Ndërprit gjithçka tani ¦ ⏻ Aqta’ kollox issa
+↻ Nouveau code ¦ ↻ Kod i ri ¦ ↻ Kodiċi ġdid
+Ouvrir « {name} » aux autres ordinateurs de la maison ¦ Hap «{name}» për kompjuterat e tjerë të shtëpisë ¦ Iftaħ “{name}” għall-kompjuters l-oħra tad-dar
+Ouvert depuis {time}. Se coupe si cet ordinateur se met en veille, change de réseau ou ferme l’app. ¦ E hapur që nga {time}. Ndërpritet nëse ky kompjuter fle, ndryshon rrjet ose mbyll aplikacionin. ¦ Miftuħ minn {time}. Jinqata’ jekk dan il-kompjuter imur fl-irqad, ibiddel in-netwerk jew jagħlaq l-app.
+Coupé : l’app ne répond qu’à cet ordinateur (comme aujourd’hui). ¦ E fikur: aplikacioni u përgjigjet vetëm këtij kompjuteri (si sot). ¦ Mitfi: l-app twieġeb biss lil dan il-kompjuter (bħal-lum).
+Avant d’ouvrir : cette généalogie n’a pas de mot de passe. Il en faut un pour l’ouvrir au réseau. ¦ Para se ta hapësh: kjo gjenealogji nuk ka fjalëkalim. Duhet një që të hapet në rrjet. ¦ Qabel ma tiftaħ: din il-ġenealoġija m’għandhiex password. Hemm bżonn waħda biex tinfetaħ fin-netwerk.
+🔐 En mettre un ¦ 🔐 Vendos një ¦ 🔐 Issettja waħda
+Cet ordinateur n’est relié à aucun réseau de la maison (adresse privée introuvable) : branche le wifi, puis réessaie. ¦ Ky kompjuter nuk është i lidhur me asnjë rrjet shtëpie (nuk u gjet adresë private): ndiz wifi-n, pastaj provo përsëri. ¦ Dan il-kompjuter mhuwiex konness ma’ ebda netwerk tad-dar (ma nstabx indirizz privat): ixgħel il-wifi, imbagħad erġa’ pprova.
+5 codes d’invitation faux : plus aucune demande jusqu’à {time}. ¦ 5 kode ftese të gabuara: asnjë kërkesë më deri në {time}. ¦ 5 kodiċijiet ta’ stedina żbaljati: l-ebda talba oħra sa {time}.
+5 demandes refusées : plus aucune demande jusqu’à {time}. ¦ 5 kërkesa të refuzuara: asnjë kërkesë më deri në {time}. ¦ 5 talbiet miċħuda: l-ebda talba oħra sa {time}.
+Le réseau a changé : tout a été coupé. ¦ Rrjeti ndryshoi: gjithçka u ndërpre. ¦ In-netwerk inbidel: kollox inqata’.
+Adresse à taper sur l’autre ordinateur ¦ Adresa që shkruhet në kompjuterin tjetër ¦ L-indirizz li tikteb fuq il-kompjuter l-ieħor
+Code d’invitation (valable 10 min, une seule fois) ¦ Kodi i ftesës (i vlefshëm 10 min, vetëm një herë) ¦ Kodiċi ta’ stedina (validu għal 10 min, darba biss)
+Sur l’autre ordinateur : ouvre un navigateur (Chrome, Firefox, Safari, Edge), tape cette adresse, puis le code. Ensuite, c’est toi qui acceptes ici, en comparant le code à 6 chiffres affiché des deux côtés. ¦ Në kompjuterin tjetër: hap një shfletues (Chrome, Firefox, Safari, Edge), shkruaj këtë adresë, pastaj kodin. Më pas je ti që pranon këtu, duke krahasuar kodin 6-shifror që shfaqet në të dyja anët. ¦ Fuq il-kompjuter l-ieħor: iftaħ browser (Chrome, Firefox, Safari, Edge), ikteb dan l-indirizz, imbagħad il-kodiċi. Wara, int taċċetta hawn, billi tqabbel il-kodiċi ta’ 6 ċifri li jidher fuq iż-żewġ naħat.
+Demandes d’accès ¦ Kërkesa për qasje ¦ Talbiet għal aċċess
+✓ Autoriser ¦ ✓ Lejo ¦ ✓ Ippermetti
+Appareils autorisés ¦ Pajisje të lejuara ¦ Apparati permessi
+Tous les appareils invités sont en lecture seule : ils regardent la généalogie, rien ne peut être modifié depuis eux. ¦ Të gjitha pajisjet e ftuara janë vetëm për lexim: shohin gjenealogjinë, prej tyre nuk mund të ndryshohet asgjë. ¦ L-apparati mistednin kollha huma għall-qari biss: iħarsu lejn il-ġenealoġija, xejn ma jista’ jinbidel minnhom.
+Ce qu’il faut savoir ¦ Çfarë duhet të dish ¦ X’għandek tkun taf
+🧱 La première fois, Windows (« Autoriser LCNDA sur les réseaux privés ? ») ou macOS (« Accepter les connexions entrantes ? ») pose la question : réponds oui, et sous Windows seulement pour les réseaux privés. ¦ 🧱 Herën e parë, Windows («Të lejohet LCNDA në rrjetet private?») ose macOS («Të pranohen lidhjet hyrëse?») bën pyetjen: përgjigju po, dhe në Windows vetëm për rrjetet private. ¦ 🧱 L-ewwel darba, Windows (“Tippermetti LCNDA fuq netwerks privati?”) jew macOS (“Taċċetta konnessjonijiet deħlin?”) jistaqsi: wieġeb iva, u fuq Windows għan-netwerks privati biss.
+📶 Dans cette version, ce qui passe dans le wifi n’est pas chiffré : n’ouvre que sur le wifi de la maison, protégé par sa clé, jamais sur un wifi d’hôtel, de gare ou de médiathèque. ¦ 📶 Në këtë version, ajo që kalon në wifi nuk është e enkriptuar: hape vetëm në wifi-n e shtëpisë, të mbrojtur me çelësin e tij, kurrë në wifi hoteli, stacioni apo biblioteke. ¦ 📶 F’din il-verżjoni, dak li jgħaddi mill-wifi mhuwiex kriptat: iftaħ biss fuq il-wifi tad-dar, protett biċ-ċavetta tiegħu, qatt fuq wifi ta’ lukanda, stazzjon jew librerija.
+🖥 Cet ordinateur doit rester allumé, avec LCNDA ouvert : s’il dort ou que tu fermes l’app, les autres ne voient plus rien. ¦ 🖥 Ky kompjuter duhet të qëndrojë i ndezur, me LCNDA të hapur: nëse fle ose mbyll aplikacionin, të tjerët nuk shohin më asgjë. ¦ 🖥 Dan il-kompjuter irid jibqa’ mixgħul, b’LCNDA miftuħ: jekk jorqod jew tagħlaq l-app, l-oħrajn ma jaraw xejn aktar.
+autorisé le {date} ¦ lejuar më {date} ¦ permess fl-{date}
+lecture seule ¦ vetëm lexim ¦ qari biss
+jusqu’au {date} ¦ deri më {date} ¦ sal-{date}
+pour cette fois seulement ¦ vetëm këtë herë ¦ għal din id-darba biss
+Pas vu depuis plus de 30 jours : le retirer ? ¦ Nuk është parë prej më shumë se 30 ditësh: ta heq? ¦ Ma deherx għal aktar minn 30 jum: tneħħih?
+Aucun appareil autorisé pour l’instant. ¦ Ende asnjë pajisje e lejuar. ¦ L-ebda apparat permess s’issa.
+Aucun appareil ne correspond. ¦ Asnjë pajisje nuk përputhet. ¦ L-ebda apparat ma jaqbel.
+Appareils : {n} · connectés : {c} ¦ Pajisje: {n} · të lidhura: {c} ¦ Apparati: {n} · konnessi: {c}
+Chercher un appareil… ¦ Kërko një pajisje… ¦ Fittex apparat…
+La porte du wifi n’a pas pu s’ouvrir (pare-feu, ou adresse déjà prise). Réessaie dans un instant. ¦ Dera e wifi-t nuk u hap dot (muri i zjarrit, ose adresa është e zënë). Provo përsëri pas pak. ¦ Il-bieb tal-wifi ma setax jinfetaħ (firewall, jew indirizz diġà meħud). Erġa’ pprova ftit wara.
+Cette demande n’existe plus (refusée, ou plus de 2 minutes sans réponse). ¦ Kjo kërkesë nuk ekziston më (e refuzuar, ose më shumë se 2 minuta pa përgjigje). ¦ Din it-talba ma teżistix aktar (miċħuda, jew aktar minn 2 minuti mingħajr tweġiba).
+Trop tard pour annuler : autorise l’appareil de nouveau. ¦ Tepër vonë për ta zhbërë: lejoje pajisjen përsëri. ¦ Tard wisq biex tħassar: erġa’ ippermetti l-apparat.
+🖧 Ouvert aux ordinateurs de la maison. ¦ 🖧 E hapur për kompjuterat e shtëpisë. ¦ 🖧 Miftuħ għall-kompjuters tad-dar.
+🖧 Coupé : l’app ne répond plus qu’à cet ordinateur. ¦ 🖧 E fikur: aplikacioni tani u përgjigjet vetëm këtij kompjuteri. ¦ 🖧 Mitfi: l-app issa twieġeb biss lil dan il-kompjuter.
+Adresse copiée ¦ Adresa u kopjua ¦ Indirizz ikkupjat
+✓ « {name} » retiré : il ne peut plus se connecter. ¦ ✓ «{name}» u hoq: nuk mund të lidhet më. ¦ ✓ “{name}” tneħħa: ma jistax jikkonnettja aktar.
+« {name} » peut de nouveau se connecter. ¦ «{name}» mund të lidhet përsëri. ¦ “{name}” jista’ jerġa’ jikkonnettja.
+Réglage enregistré ¦ Cilësimi u ruajt ¦ Setting issejvjat
+Demande refusée. ¦ Kërkesa u refuzua. ¦ Talba miċħuda.
+✓ « {name} » autorisé, en lecture seule. ¦ ✓ «{name}» u lejua, vetëm për lexim. ¦ ✓ “{name}” permess, għall-qari biss.
+Demande d’accès ¦ Kërkesë për qasje ¦ Talba għal aċċess
+Un appareil veut ouvrir « {name} » ¦ Një pajisje do të hapë «{name}» ¦ Apparat irid jiftaħ “{name}”
+Nom donné ¦ Emri i dhënë ¦ Isem mogħti
+(il peut être faux : compare le code) ¦ (mund të jetë i rremë: krahaso kodin) ¦ (jista’ jkun falz: qabbel il-kodiċi)
+Code affiché ¦ Kodi i shfaqur ¦ Kodiċi muri
+Regarde l’écran de l’appareil : il doit montrer le même code. Sinon, refuse. ¦ Shiko ekranin e pajisjes: duhet të tregojë të njëjtin kod. Përndryshe, refuzo. ¦ Ħares lejn l-iskrin tal-apparat: irid juri l-istess kodiċi. Inkella, iċħad.
+Ce qu’il pourra faire : 👁 lecture seule (rien ne peut être modifié depuis cet appareil). Il devra aussi donner le mot de passe de la généalogie. ¦ Çfarë do të mund të bëjë: 👁 vetëm lexim (nga kjo pajisje nuk mund të ndryshohet asgjë). Do të duhet të japë edhe fjalëkalimin e gjenealogjisë. ¦ X’se jkun jista’ jagħmel: 👁 qari biss (xejn ma jista’ jinbidel minn dan l-apparat). Ikollu wkoll jagħti l-password tal-ġenealoġija.
+Sans réponse en 2 minutes, la demande disparaît toute seule (refusée). ¦ Pa përgjigje brenda 2 minutave, kërkesa zhduket vetë (e refuzuar). ¦ Mingħajr tweġiba fi żmien 2 minuti, it-talba tisparixxi waħedha (miċħuda).
+✓ Autoriser « {name} » ¦ ✓ Lejo «{name}» ¦ ✓ Ippermetti “{name}”
+Ouvert aux ordinateurs de la maison · appareils connectés : {n} ¦ E hapur për kompjuterat e shtëpisë · pajisje të lidhura: {n} ¦ Miftuħ għall-kompjuters tad-dar · apparati konnessi: {n}
+🖧 Rouvrir sur ce réseau ¦ 🖧 Rihap në këtë rrjet ¦ 🖧 Erġa’ iftaħ fuq dan in-netwerk
+Autre ordinateur ¦ Kompjuter tjetër ¦ Kompjuter ieħor
+Se connecter ¦ Lidhu ¦ Ikkonnettja
+Se connecter à l’ordinateur principal ¦ Lidhu me kompjuterin kryesor ¦ Ikkonnettja mal-kompjuter ewlieni
+Cet appareil n’est pas encore autorisé. Demande l’accès : c’est sur l’ordinateur principal qu’on l’accepte. ¦ Kjo pajisje ende nuk është e lejuar. Kërko qasje: ajo pranohet në kompjuterin kryesor. ¦ Dan l-apparat għadu mhux permess. Itlob aċċess: jiġi aċċettat fuq il-kompjuter ewlieni.
+Nom de cet appareil ¦ Emri i kësaj pajisjeje ¦ Isem dan l-apparat
+Code d’invitation ¦ Kodi i ftesës ¦ Kodiċi ta’ stedina
+(affiché sur l’ordinateur principal) ¦ (i shfaqur në kompjuterin kryesor) ¦ (muri fuq il-kompjuter ewlieni)
+Demander l’accès ¦ Kërko qasje ¦ Itlob aċċess
+Donne un nom à cet appareil. ¦ Jepi një emër kësaj pajisjeje. ¦ Agħti isem lil dan l-apparat.
+L’ordinateur principal ne répond pas (en veille, éteint, ou porte coupée). ¦ Kompjuteri kryesor nuk përgjigjet (në gjumë, i fikur, ose dera e mbyllur). ¦ Il-kompjuter ewlieni mhux qed iwieġeb (fl-irqad, mitfi, jew il-bieb magħluq).
+Code d’invitation faux ou périmé. Demande le code affiché sur l’ordinateur principal. ¦ Kodi i ftesës është i gabuar ose i skaduar. Kërko kodin që shfaqet në kompjuterin kryesor. ¦ Kodiċi ta’ stedina żbaljat jew skadut. Itlob il-kodiċi li jidher fuq il-kompjuter ewlieni.
+Trop d’essais : réessaie dans {n} min. ¦ Shumë përpjekje: provo përsëri pas {n} min. ¦ Wisq tentattivi: erġa’ pprova wara {n} min.
+Une demande de cet appareil attend déjà sa réponse. ¦ Një kërkesë nga kjo pajisje po pret tashmë përgjigje. ¦ Talba minn dan l-apparat diġà qed tistenna t-tweġiba.
+Trop de demandes en même temps : réessaie dans un instant. ¦ Shumë kërkesa njëkohësisht: provo përsëri pas pak. ¦ Wisq talbiet fl-istess ħin: erġa’ pprova ftit wara.
+Va sur l’ordinateur principal et vérifie qu’il affiche ce code : ¦ Shko te kompjuteri kryesor dhe kontrollo që shfaq këtë kod: ¦ Mur għand il-kompjuter ewlieni u ċċekkja li juri dan il-kodiċi:
+Ouverture de la généalogie… Elle demande ensuite son mot de passe : il est vérifié par l’ordinateur principal, jamais gardé ici. ¦ Po hapet gjenealogjia… Pastaj kërkon fjalëkalimin e saj: e verifikon kompjuteri kryesor, nuk ruhet kurrë këtu. ¦ Il-ġenealoġija qed tinfetaħ… Imbagħad titlob il-password tagħha: jivverifikaha l-kompjuter ewlieni, qatt ma tinżamm hawn.
+La demande a expiré (2 minutes sans réponse). Recommence. ¦ Kërkesa skadoi (2 minuta pa përgjigje). Fillo nga e para. ¦ It-talba skadiet (2 minuti mingħajr tweġiba). Ibda mill-ġdid.
+<strong>Appareil invité « {name} »</strong> : lecture seule. La généalogie reste sur l’ordinateur principal ; rien ne peut être modifié depuis cet appareil. ¦ <strong>Pajisje e ftuar «{name}»</strong>: vetëm lexim. Gjenealogjia mbetet në kompjuterin kryesor; nga kjo pajisje nuk mund të ndryshohet asgjë. ¦ <strong>Apparat mistieden “{name}”</strong>: qari biss. Il-ġenealoġija tibqa’ fuq il-kompjuter ewlieni; xejn ma jista’ jinbidel minn dan l-apparat.
+Appareil ¦ Pajisja ¦ Apparat
+Il faut un mot de passe ¦ Duhet një fjalëkalim ¦ Hemm bżonn password
+Cette généalogie n’a pas de mot de passe : elle ne s’ouvre pas sur un autre appareil. Sur l’ordinateur principal : Réglages → 🔐 Mot de passe de cette généalogie. ¦ Kjo gjenealogji nuk ka fjalëkalim: nuk hapet në një pajisje tjetër. Në kompjuterin kryesor: Cilësimet → 🔐 Fjalëkalimi i kësaj gjenealogjie. ¦ Din il-ġenealoġija m’għandhiex password: ma tinfetaħx fuq apparat ieħor. Fuq il-kompjuter ewlieni: Issettjar → 🔐 Password ta’ din il-ġenealoġija.
+Appareil invité « {name} » : lecture seule. ¦ Pajisje e ftuar «{name}»: vetëm lexim. ¦ Apparat mistieden “{name}”: qari biss.
+Au prochain lancement de l’app ¦ Në nisjen e ardhshme të aplikacionit ¦ Id-darba li jmiss li titnieda l-app
+reste coupé, il faut le rouvrir ¦ mbetet i fikur, duhet rihapur ¦ jibqa’ mitfi, trid terġa’ tiftħu
+se rouvre tout seul ¦ rihapet vetë ¦ jerġa’ jinfetaħ waħdu
+Après une mise en veille ¦ Pas gjumit ¦ Wara l-irqad
+se rouvre au réveil si l’app est restée ouverte ¦ rihapet kur zgjohet, nëse aplikacioni mbeti i hapur ¦ jerġa’ jinfetaħ meta jqum jekk l-app baqgħet miftuħa
+reste coupé ¦ mbetet i fikur ¦ jibqa’ mitfi
+Mot de passe de la généalogie ¦ Fjalëkalimi i gjenealogjisë ¦ Password tal-ġenealoġija
+obligatoire pour ouvrir au réseau ¦ i detyrueshëm për ta hapur në rrjet ¦ obbligatorja biex tiftaħ fin-netwerk
+facultatif (déconseillé) ¦ fakultativ (nuk rekomandohet) ¦ fakultattiva (mhux rakkomandat)
+demandé en plus du code à 6 chiffres ¦ kërkohet përveç kodit 6-shifror ¦ mitlub flimkien mal-kodiċi ta’ 6 ċifri
+seulement le code à 6 chiffres ¦ vetëm kodi 6-shifror ¦ il-kodiċi ta’ 6 ċifri biss
+Durée d’un accès ¦ Kohëzgjatja e një qasjeje ¦ Tul ta’ aċċess
+jusqu’à ce que tu le retires ¦ derisa ta heqësh ¦ sakemm tneħħih
+Empêcher la veille tant qu’un appareil est connecté ¦ Mos lejo gjumin sa kohë që një pajisje është e lidhur ¦ Ipprevjeni l-irqad sakemm apparat ikun konness
+oui (cet ordinateur ne s’endort plus) ¦ po (ky kompjuter nuk fle më) ¦ iva (dan il-kompjuter ma jorqodx aktar)
+Si cet ordinateur change de réseau ¦ Nëse ky kompjuter ndryshon rrjet ¦ Jekk dan il-kompjuter ibiddel in-netwerk
+tout couper ¦ ndërprit gjithçka ¦ aqta’ kollox
+tout couper, puis demander s’il faut rouvrir ¦ ndërprit gjithçka, pastaj pyet nëse duhet rihapur ¦ aqta’ kollox, imbagħad staqsi jekk għandux jerġa’ jinfetaħ
+Appareil pas vu depuis 30 jours ¦ Pajisje e paparë prej 30 ditësh ¦ Apparat li ma deherx għal 30 jum
+proposer de le retirer ¦ propozo heqjen ¦ ipproponi li tneħħih
+Ouvert au réseau de la maison ¦ U hap për rrjetin e shtëpisë ¦ Miftuħ għan-netwerk tad-dar
+Fermé au réseau de la maison ¦ U mbyll për rrjetin e shtëpisë ¦ Magħluq għan-netwerk tad-dar
+Appareil autorisé ¦ Pajisja u lejua ¦ Apparat permess
+Demande d’accès refusée ¦ Kërkesa për qasje u refuzua ¦ Talba għal aċċess miċħuda
+Appareil retiré ¦ Pajisja u hoq ¦ Apparat imneħħi
+Connexion en lecture seule ¦ Lidhje vetëm për lexim ¦ Konnessjoni għall-qari biss
+en quittant l’app ¦ kur mbyllet aplikacioni ¦ meta toħroġ mill-app
+mise en veille ¦ gjumi ¦ irqad
+le réseau a changé ¦ rrjeti ndryshoi ¦ in-netwerk inbidel
+Appareil invité : lecture seule. Cela ne se fait que sur l’ordinateur principal. ¦ Pajisje e ftuar: vetëm lexim. Kjo bëhet vetëm në kompjuterin kryesor. ¦ Apparat mistieden: qari biss. Dan isir biss fuq il-kompjuter ewlieni.

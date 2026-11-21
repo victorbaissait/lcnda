@@ -662,7 +662,8 @@ function glock_backup_password(string $pw): void
 
 /* ═════════ 📜 B8 : Qui a vu quoi ═════════ */
 
-const ACCESS_LOG_KINDS = ['case_open', 'print', 'export', 'letters', 'unlock_ok', 'unlock_fail', 'lock_now', 'lock_idle', 'lock_set', 'lock_change', 'lock_remove', 'lock_minutes', 'purge', 'retention'];
+const ACCESS_LOG_KINDS = ['case_open', 'print', 'export', 'letters', 'unlock_ok', 'unlock_fail', 'lock_now', 'lock_idle', 'lock_set', 'lock_change', 'lock_remove', 'lock_minutes', 'purge', 'retention',
+    'lan_open', 'lan_close', 'lan_ok', 'lan_refuse', 'lan_remove', 'lan_connect']; // 🖧 plusieurs ordinateurs (lib/reseau_local.php)
 
 /** Ce qui est noté quand on télécharge ou copie : l'action de l'API → un code court (le libellé est écrit par la page). */
 const ACCESS_LOG_EXPORTS = ['export_csv' => 'csv', 'export_csv_global' => 'csv', 'export_gedcom' => 'gedcom', 'export_plus' => 'plus', 'export_json' => 'json',
@@ -673,9 +674,15 @@ const ACCESS_LOG_EXPORTS = ['export_csv' => 'csv', 'export_csv_global' => 'csv',
 function access_log_schema(PDO $pdo): void
 {
     $pdo->exec("CREATE TABLE IF NOT EXISTS access_log (id INTEGER PRIMARY KEY AUTOINCREMENT, at TEXT NOT NULL, kind TEXT NOT NULL, obj_type TEXT NOT NULL DEFAULT '',
-        obj_id INTEGER, obj_label TEXT NOT NULL DEFAULT '', what TEXT NOT NULL DEFAULT '', machine TEXT NOT NULL DEFAULT '')");
+        obj_id INTEGER, obj_label TEXT NOT NULL DEFAULT '', what TEXT NOT NULL DEFAULT '', machine TEXT NOT NULL DEFAULT '', device TEXT NOT NULL DEFAULT '')");
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_access_log_at ON access_log(at)');
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_access_log_obj ON access_log(obj_type, obj_id)');
+}
+
+/** La colonne « device » existe-t-elle ? (une base pas encore passée à la structure n°99 : on écrit sans elle) */
+function access_log_has_device(PDO $pdo): bool
+{
+    try { return (bool) $pdo->query("SELECT count(*) FROM pragma_table_info('access_log') WHERE name='device'")->fetchColumn(); } catch (Throwable $_) { return false; }
 }
 
 function access_log_machine(): string
@@ -704,9 +711,13 @@ function access_log_add(?PDO $pdo, string $kind, string $objType = '', ?int $obj
         if (!$pdo) { return; }
         static $ready = [];
         $k = spl_object_id($pdo);
-        if (!isset($ready[$k])) { access_log_schema($pdo); $ready[$k] = true; }
-        $pdo->prepare('INSERT INTO access_log(at, kind, obj_type, obj_id, obj_label, what, machine) VALUES(?,?,?,?,?,?,?)')
-            ->execute([date('Y-m-d H:i:s', glock_now()), $kind, access_log_label($objType, 20), $objId, access_log_label($label), access_log_label($what, 40), access_log_label(access_log_machine(), 60)]);
+        if (!isset($ready[$k])) { access_log_schema($pdo); $ready[$k] = access_log_has_device($pdo); }
+        $row = [date('Y-m-d H:i:s', glock_now()), $kind, access_log_label($objType, 20), $objId, access_log_label($label), access_log_label($what, 40), access_log_label(access_log_machine(), 60)];
+        if ($ready[$k]) { // 🖧 l'appareil réel (vide : l'ordinateur principal) — colonne ajoutée par la migration 99
+            $pdo->prepare('INSERT INTO access_log(at, kind, obj_type, obj_id, obj_label, what, machine, device) VALUES(?,?,?,?,?,?,?,?)')->execute([...$row, access_log_label(function_exists('lan_device_name') ? lan_device_name() : '', 40)]);
+        } else {
+            $pdo->prepare('INSERT INTO access_log(at, kind, obj_type, obj_id, obj_label, what, machine) VALUES(?,?,?,?,?,?,?)')->execute($row);
+        }
     } catch (Throwable $e) {
         error_log('LCNDA : registre « Qui a vu quoi » non écrit : ' . get_class($e));
     }
@@ -724,7 +735,7 @@ function access_case_label(PDO $pdo, int $caseId): string
 /** 📂 Dossier ouvert : une fois par séance et par dossier (pas à chaque onglet). */
 function access_case_open(PDO $pdo, int $caseId): void
 {
-    if ($caseId <= 0 || (function_exists('kiosk_state') && !empty(kiosk_state()['on']))) { return; }
+    if ($caseId <= 0 || (function_exists('kiosk_state') && !empty(kiosk_state()['on']) && empty(kiosk_state()['guest']))) { return; } // 🖧 un appareil invité : noté (avec son nom)
     $key = glock_key() . ':' . $caseId;
     if (!empty($_SESSION['b8_open'][$key])) { return; }
     glock_session_write(static function () use ($key): void { $_SESSION['b8_open'][$key] = 1; });
@@ -770,10 +781,11 @@ function access_log_rows(PDO $pdo, array $q): array
     $kind = (string) ($q['kind'] ?? '');
     if ($kind !== '' && in_array($kind, ACCESS_LOG_KINDS, true)) { $where[] = 'kind=?'; $p[] = $kind; }
     $limit = max(1, min(5000, (int) ($q['limit'] ?? 2000)));
-    $sql = 'SELECT id, at, kind, obj_type, obj_id, obj_label, what, machine FROM access_log' . ($where ? ' WHERE ' . implode(' AND ', $where) : '') . ' ORDER BY id DESC LIMIT ' . $limit;
+    $dev = access_log_has_device($pdo);
+    $sql = 'SELECT id, at, kind, obj_type, obj_id, obj_label, what, machine' . ($dev ? ', device' : ", '' AS device") . ' FROM access_log' . ($where ? ' WHERE ' . implode(' AND ', $where) : '') . ' ORDER BY id DESC LIMIT ' . $limit;
     $st = $pdo->prepare($sql); $st->execute($p);
     $rows = array_map(static fn($r) => ['id' => (int) $r['id'], 'at' => (string) $r['at'], 'kind' => (string) $r['kind'], 'obj_type' => (string) $r['obj_type'],
-        'obj_id' => $r['obj_id'] === null ? null : (int) $r['obj_id'], 'obj_label' => (string) $r['obj_label'], 'what' => (string) $r['what'], 'machine' => (string) $r['machine']], $st->fetchAll(PDO::FETCH_ASSOC));
+        'obj_id' => $r['obj_id'] === null ? null : (int) $r['obj_id'], 'obj_label' => (string) $r['obj_label'], 'what' => (string) $r['what'], 'machine' => (string) $r['machine'], 'device' => (string) $r['device']], $st->fetchAll(PDO::FETCH_ASSOC));
     return ['rows' => $rows, 'total' => (int) $pdo->query('SELECT count(*) FROM access_log')->fetchColumn(), 'months' => access_log_settings($pdo)['months'], 'kinds' => ACCESS_LOG_KINDS, 'machine' => access_log_machine()];
 }
 
@@ -781,8 +793,8 @@ function access_log_csv(PDO $pdo): never
 {
     $rows = access_log_rows($pdo, ['limit' => 5000])['rows'];
     $cell = static function (string $v): string { if ($v !== '' && strpbrk($v[0], '=+-@') !== false) { $v = "'" . $v; } return '"' . str_replace('"', '""', $v) . '"'; };
-    $out = "\xEF\xBB\xBF" . implode(';', ['Date', 'Sorte', 'Objet', 'Numéro', 'Libellé', 'Détail', 'Poste']) . "\r\n";
-    foreach ($rows as $r) { $out .= implode(';', array_map($cell, [$r['at'], $r['kind'], $r['obj_type'], (string) ($r['obj_id'] ?? ''), $r['obj_label'], $r['what'], $r['machine']])) . "\r\n"; }
+    $out = "\xEF\xBB\xBF" . implode(';', ['Date', 'Sorte', 'Objet', 'Numéro', 'Libellé', 'Détail', 'Poste', 'Appareil']) . "\r\n";
+    foreach ($rows as $r) { $out .= implode(';', array_map($cell, [$r['at'], $r['kind'], $r['obj_type'], (string) ($r['obj_id'] ?? ''), $r['obj_label'], $r['what'], $r['machine'], $r['device']])) . "\r\n"; }
     while (ob_get_level() > 0) { ob_end_clean(); }
     header('Content-Type: text/csv; charset=utf-8');
     header('Content-Disposition: attachment; filename="qui-a-vu-quoi-' . date('Ymd') . '.csv"');

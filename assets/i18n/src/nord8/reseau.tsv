@@ -1,0 +1,114 @@
+fr ¦ tr
+# Zone « reseau » : 🖧 plusieurs ordinateurs de la maison
+conseillé ¦ önerilen
+connecté maintenant ¦ şu an bağlı
+jamais venu ¦ hiç bağlanmadı
+Plusieurs ordinateurs ¦ Birden çok bilgisayar
+Ouvrir cette généalogie aux autres ordinateurs de la maison, par le wifi, jamais par internet. ¦ Bu soy ağacını evdeki diğer bilgisayarlara wifi üzerinden aç, asla internet üzerinden değil.
+Ce réglage ne se change que sur l’ordinateur principal : cet appareil est un appareil invité, en lecture seule. ¦ Bu ayar yalnızca ana bilgisayarda değiştirilir: bu cihaz bir misafir cihaz, yalnızca okuma.
+Seulement dans l’app de bureau LCNDA, sur l’ordinateur qui garde la généalogie. ¦ Yalnızca LCNDA masaüstü uygulamasında, soy ağacını tutan bilgisayarda.
+⏻ Tout couper maintenant ¦ ⏻ Her şeyi şimdi kes
+↻ Nouveau code ¦ ↻ Yeni kod
+Ouvrir « {name} » aux autres ordinateurs de la maison ¦ “{name}” soy ağacını evdeki diğer bilgisayarlara aç
+Ouvert depuis {time}. Se coupe si cet ordinateur se met en veille, change de réseau ou ferme l’app. ¦ {time} saatinden beri açık. Bu bilgisayar uykuya geçerse, ağ değiştirirse ya da uygulamayı kapatırsa kesilir.
+Coupé : l’app ne répond qu’à cet ordinateur (comme aujourd’hui). ¦ Kapalı: uygulama yalnızca bu bilgisayara yanıt verir (bugünkü gibi).
+Avant d’ouvrir : cette généalogie n’a pas de mot de passe. Il en faut un pour l’ouvrir au réseau. ¦ Açmadan önce: bu soy ağacının parolası yok. Ağa açmak için bir parola gerekir.
+🔐 En mettre un ¦ 🔐 Parola koy
+Cet ordinateur n’est relié à aucun réseau de la maison (adresse privée introuvable) : branche le wifi, puis réessaie. ¦ Bu bilgisayar hiçbir ev ağına bağlı değil (özel adres bulunamadı): wifi’yi aç, sonra yeniden dene.
+5 codes d’invitation faux : plus aucune demande jusqu’à {time}. ¦ 5 yanlış davet kodu: {time} saatine kadar başka istek yok.
+5 demandes refusées : plus aucune demande jusqu’à {time}. ¦ 5 istek reddedildi: {time} saatine kadar başka istek yok.
+Le réseau a changé : tout a été coupé. ¦ Ağ değişti: her şey kesildi.
+Adresse à taper sur l’autre ordinateur ¦ Diğer bilgisayarda yazılacak adres
+Code d’invitation (valable 10 min, une seule fois) ¦ Davet kodu (10 dk geçerli, yalnızca bir kez)
+Sur l’autre ordinateur : ouvre un navigateur (Chrome, Firefox, Safari, Edge), tape cette adresse, puis le code. Ensuite, c’est toi qui acceptes ici, en comparant le code à 6 chiffres affiché des deux côtés. ¦ Diğer bilgisayarda: bir tarayıcı aç (Chrome, Firefox, Safari, Edge), bu adresi, sonra kodu yaz. Ardından iki tarafta görünen 6 haneli kodu karşılaştırarak burada sen kabul edersin.
+Demandes d’accès ¦ Erişim istekleri
+✓ Autoriser ¦ ✓ İzin ver
+Appareils autorisés ¦ İzin verilen cihazlar
+Tous les appareils invités sont en lecture seule : ils regardent la généalogie, rien ne peut être modifié depuis eux. ¦ Tüm misafir cihazlar yalnızca okuma modunda: soy ağacına bakarlar, onlardan hiçbir şey değiştirilemez.
+Ce qu’il faut savoir ¦ Bilmen gerekenler
+🧱 La première fois, Windows (« Autoriser LCNDA sur les réseaux privés ? ») ou macOS (« Accepter les connexions entrantes ? ») pose la question : réponds oui, et sous Windows seulement pour les réseaux privés. ¦ 🧱 İlk seferde Windows (“LCNDA özel ağlarda izin verilsin mi?”) ya da macOS (“Gelen bağlantılar kabul edilsin mi?”) soru sorar: evet de, Windows’ta yalnızca özel ağlar için.
+📶 Dans cette version, ce qui passe dans le wifi n’est pas chiffré : n’ouvre que sur le wifi de la maison, protégé par sa clé, jamais sur un wifi d’hôtel, de gare ou de médiathèque. ¦ 📶 Bu sürümde wifi üzerinden geçenler şifrelenmez: yalnızca şifresiyle korunan ev wifi’sinde aç, asla otel, istasyon ya da kütüphane wifi’sinde değil.
+🖥 Cet ordinateur doit rester allumé, avec LCNDA ouvert : s’il dort ou que tu fermes l’app, les autres ne voient plus rien. ¦ 🖥 Bu bilgisayar açık kalmalı, LCNDA da açık olmalı: uyursa ya da uygulamayı kapatırsan diğerleri artık hiçbir şey görmez.
+autorisé le {date} ¦ {date} tarihinde izin verildi
+lecture seule ¦ yalnızca okuma
+jusqu’au {date} ¦ {date} tarihine kadar
+pour cette fois seulement ¦ yalnızca bu seferlik
+Pas vu depuis plus de 30 jours : le retirer ? ¦ 30 günden uzun süredir görülmedi: kaldırılsın mı?
+Aucun appareil autorisé pour l’instant. ¦ Henüz izin verilen cihaz yok.
+Aucun appareil ne correspond. ¦ Eşleşen cihaz yok.
+Appareils : {n} · connectés : {c} ¦ Cihazlar: {n} · bağlı: {c}
+Chercher un appareil… ¦ Cihaz ara…
+La porte du wifi n’a pas pu s’ouvrir (pare-feu, ou adresse déjà prise). Réessaie dans un instant. ¦ Wifi kapısı açılamadı (güvenlik duvarı ya da adres zaten kullanımda). Biraz sonra yeniden dene.
+Cette demande n’existe plus (refusée, ou plus de 2 minutes sans réponse). ¦ Bu istek artık yok (reddedildi ya da 2 dakikadan uzun süre yanıtsız kaldı).
+Trop tard pour annuler : autorise l’appareil de nouveau. ¦ Geri almak için çok geç: cihaza yeniden izin ver.
+🖧 Ouvert aux ordinateurs de la maison. ¦ 🖧 Evdeki bilgisayarlara açık.
+🖧 Coupé : l’app ne répond plus qu’à cet ordinateur. ¦ 🖧 Kapalı: uygulama artık yalnızca bu bilgisayara yanıt veriyor.
+Adresse copiée ¦ Adres kopyalandı
+✓ « {name} » retiré : il ne peut plus se connecter. ¦ ✓ “{name}” kaldırıldı: artık bağlanamaz.
+« {name} » peut de nouveau se connecter. ¦ “{name}” yeniden bağlanabilir.
+Réglage enregistré ¦ Ayar kaydedildi
+Demande refusée. ¦ İstek reddedildi.
+✓ « {name} » autorisé, en lecture seule. ¦ ✓ “{name}” için izin verildi, yalnızca okuma.
+Demande d’accès ¦ Erişim isteği
+Un appareil veut ouvrir « {name} » ¦ Bir cihaz “{name}” soy ağacını açmak istiyor
+Nom donné ¦ Verilen ad
+(il peut être faux : compare le code) ¦ (yanlış olabilir: kodu karşılaştır)
+Code affiché ¦ Görünen kod
+Regarde l’écran de l’appareil : il doit montrer le même code. Sinon, refuse. ¦ Cihazın ekranına bak: aynı kodu göstermeli. Göstermiyorsa reddet.
+Ce qu’il pourra faire : 👁 lecture seule (rien ne peut être modifié depuis cet appareil). Il devra aussi donner le mot de passe de la généalogie. ¦ Neler yapabilecek: 👁 yalnızca okuma (bu cihazdan hiçbir şey değiştirilemez). Soy ağacının parolasını da girmesi gerekecek.
+Sans réponse en 2 minutes, la demande disparaît toute seule (refusée). ¦ 2 dakika içinde yanıt gelmezse istek kendiliğinden kaybolur (reddedilmiş sayılır).
+✓ Autoriser « {name} » ¦ ✓ “{name}” için izin ver
+Ouvert aux ordinateurs de la maison · appareils connectés : {n} ¦ Evdeki bilgisayarlara açık · bağlı cihazlar: {n}
+🖧 Rouvrir sur ce réseau ¦ 🖧 Bu ağda yeniden aç
+Autre ordinateur ¦ Diğer bilgisayar
+Se connecter ¦ Bağlan
+Se connecter à l’ordinateur principal ¦ Ana bilgisayara bağlan
+Cet appareil n’est pas encore autorisé. Demande l’accès : c’est sur l’ordinateur principal qu’on l’accepte. ¦ Bu cihaza henüz izin verilmedi. Erişim iste: ana bilgisayarda kabul edilir.
+Nom de cet appareil ¦ Bu cihazın adı
+Code d’invitation ¦ Davet kodu
+(affiché sur l’ordinateur principal) ¦ (ana bilgisayarda görünür)
+Demander l’accès ¦ Erişim iste
+Donne un nom à cet appareil. ¦ Bu cihaza bir ad ver.
+L’ordinateur principal ne répond pas (en veille, éteint, ou porte coupée). ¦ Ana bilgisayar yanıt vermiyor (uykuda, kapalı ya da kapı kesik).
+Code d’invitation faux ou périmé. Demande le code affiché sur l’ordinateur principal. ¦ Davet kodu yanlış ya da süresi dolmuş. Ana bilgisayarda görünen kodu iste.
+Trop d’essais : réessaie dans {n} min. ¦ Çok fazla deneme: {n} dk sonra yeniden dene.
+Une demande de cet appareil attend déjà sa réponse. ¦ Bu cihazdan bir istek zaten yanıt bekliyor.
+Trop de demandes en même temps : réessaie dans un instant. ¦ Aynı anda çok fazla istek: biraz sonra yeniden dene.
+Va sur l’ordinateur principal et vérifie qu’il affiche ce code : ¦ Ana bilgisayara git ve bu kodu gösterdiğini kontrol et:
+Ouverture de la généalogie… Elle demande ensuite son mot de passe : il est vérifié par l’ordinateur principal, jamais gardé ici. ¦ Soy ağacı açılıyor… Ardından parolasını ister: parolayı ana bilgisayar doğrular, burada asla saklanmaz.
+La demande a expiré (2 minutes sans réponse). Recommence. ¦ İsteğin süresi doldu (2 dakika yanıtsız). Yeniden başla.
+<strong>Appareil invité « {name} »</strong> : lecture seule. La généalogie reste sur l’ordinateur principal ; rien ne peut être modifié depuis cet appareil. ¦ <strong>Misafir cihaz “{name}”</strong>: yalnızca okuma. Soy ağacı ana bilgisayarda kalır; bu cihazdan hiçbir şey değiştirilemez.
+Appareil ¦ Cihaz
+Il faut un mot de passe ¦ Parola gerekiyor
+Cette généalogie n’a pas de mot de passe : elle ne s’ouvre pas sur un autre appareil. Sur l’ordinateur principal : Réglages → 🔐 Mot de passe de cette généalogie. ¦ Bu soy ağacının parolası yok: başka bir cihazda açılmaz. Ana bilgisayarda: Ayarlar → 🔐 Bu soy ağacının parolası.
+Appareil invité « {name} » : lecture seule. ¦ Misafir cihaz “{name}”: yalnızca okuma.
+Au prochain lancement de l’app ¦ Uygulamanın bir sonraki açılışında
+reste coupé, il faut le rouvrir ¦ kapalı kalır, yeniden açmak gerekir
+se rouvre tout seul ¦ kendiliğinden yeniden açılır
+Après une mise en veille ¦ Uykudan sonra
+se rouvre au réveil si l’app est restée ouverte ¦ uygulama açık kaldıysa uyanınca yeniden açılır
+reste coupé ¦ kapalı kalır
+Mot de passe de la généalogie ¦ Soy ağacının parolası
+obligatoire pour ouvrir au réseau ¦ ağa açmak için zorunlu
+facultatif (déconseillé) ¦ isteğe bağlı (önerilmez)
+demandé en plus du code à 6 chiffres ¦ 6 haneli koda ek olarak istenir
+seulement le code à 6 chiffres ¦ yalnızca 6 haneli kod
+Durée d’un accès ¦ Erişim süresi
+jusqu’à ce que tu le retires ¦ sen kaldırana kadar
+Empêcher la veille tant qu’un appareil est connecté ¦ Bir cihaz bağlıyken uykuyu engelle
+oui (cet ordinateur ne s’endort plus) ¦ evet (bu bilgisayar artık uykuya geçmez)
+Si cet ordinateur change de réseau ¦ Bu bilgisayar ağ değiştirirse
+tout couper ¦ her şeyi kes
+tout couper, puis demander s’il faut rouvrir ¦ her şeyi kes, sonra yeniden açılsın mı diye sor
+Appareil pas vu depuis 30 jours ¦ 30 gündür görülmeyen cihaz
+proposer de le retirer ¦ kaldırmayı öner
+Ouvert au réseau de la maison ¦ Ev ağına açıldı
+Fermé au réseau de la maison ¦ Ev ağına kapatıldı
+Appareil autorisé ¦ Cihaza izin verildi
+Demande d’accès refusée ¦ Erişim isteği reddedildi
+Appareil retiré ¦ Cihaz kaldırıldı
+Connexion en lecture seule ¦ Yalnızca okuma bağlantısı
+en quittant l’app ¦ uygulamadan çıkarken
+mise en veille ¦ uyku
+le réseau a changé ¦ ağ değişti
+Appareil invité : lecture seule. Cela ne se fait que sur l’ordinateur principal. ¦ Misafir cihaz: yalnızca okuma. Bu yalnızca ana bilgisayarda yapılır.

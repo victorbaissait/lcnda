@@ -1,0 +1,114 @@
+fr ¦ vi ¦ id
+# Zone « reseau » : 🖧 plusieurs ordinateurs de la maison
+conseillé ¦ khuyên dùng ¦ disarankan
+connecté maintenant ¦ đang kết nối ¦ terhubung sekarang
+jamais venu ¦ chưa từng kết nối ¦ belum pernah terhubung
+Plusieurs ordinateurs ¦ Nhiều máy tính ¦ Beberapa komputer
+Ouvrir cette généalogie aux autres ordinateurs de la maison, par le wifi, jamais par internet. ¦ Mở gia phả này cho các máy tính khác trong nhà, qua wifi, không bao giờ qua internet. ¦ Buka silsilah ini untuk komputer lain di rumah, lewat wifi, tidak pernah lewat internet.
+Ce réglage ne se change que sur l’ordinateur principal : cet appareil est un appareil invité, en lecture seule. ¦ Cài đặt này chỉ thay đổi được trên máy tính chính: thiết bị này là thiết bị khách, chỉ đọc. ¦ Pengaturan ini hanya diubah di komputer utama: perangkat ini adalah perangkat tamu, hanya baca.
+Seulement dans l’app de bureau LCNDA, sur l’ordinateur qui garde la généalogie. ¦ Chỉ trong ứng dụng máy tính LCNDA, trên máy tính giữ gia phả. ¦ Hanya di aplikasi desktop LCNDA, di komputer yang menyimpan silsilah.
+⏻ Tout couper maintenant ¦ ⏻ Ngắt tất cả ngay ¦ ⏻ Putuskan semua sekarang
+↻ Nouveau code ¦ ↻ Mã mới ¦ ↻ Kode baru
+Ouvrir « {name} » aux autres ordinateurs de la maison ¦ Mở “{name}” cho các máy tính khác trong nhà ¦ Buka “{name}” untuk komputer lain di rumah
+Ouvert depuis {time}. Se coupe si cet ordinateur se met en veille, change de réseau ou ferme l’app. ¦ Mở từ {time}. Sẽ ngắt nếu máy tính này ngủ, đổi mạng hoặc đóng ứng dụng. ¦ Terbuka sejak {time}. Terputus jika komputer ini tidur, berganti jaringan, atau menutup aplikasi.
+Coupé : l’app ne répond qu’à cet ordinateur (comme aujourd’hui). ¦ Đã tắt: ứng dụng chỉ trả lời máy tính này (như hiện nay). ¦ Mati: aplikasi hanya menjawab komputer ini (seperti sekarang).
+Avant d’ouvrir : cette généalogie n’a pas de mot de passe. Il en faut un pour l’ouvrir au réseau. ¦ Trước khi mở: gia phả này chưa có mật khẩu. Cần có một mật khẩu để mở ra mạng. ¦ Sebelum membuka: silsilah ini tidak punya kata sandi. Perlu satu untuk membukanya ke jaringan.
+🔐 En mettre un ¦ 🔐 Đặt mật khẩu ¦ 🔐 Pasang kata sandi
+Cet ordinateur n’est relié à aucun réseau de la maison (adresse privée introuvable) : branche le wifi, puis réessaie. ¦ Máy tính này không nối với mạng gia đình nào (không tìm thấy địa chỉ riêng): bật wifi rồi thử lại. ¦ Komputer ini tidak terhubung ke jaringan rumah mana pun (alamat pribadi tidak ditemukan): nyalakan wifi, lalu coba lagi.
+5 codes d’invitation faux : plus aucune demande jusqu’à {time}. ¦ 5 mã mời sai: không nhận thêm yêu cầu nào đến {time}. ¦ 5 kode undangan salah: tidak ada permintaan lagi sampai {time}.
+5 demandes refusées : plus aucune demande jusqu’à {time}. ¦ 5 yêu cầu bị từ chối: không nhận thêm yêu cầu nào đến {time}. ¦ 5 permintaan ditolak: tidak ada permintaan lagi sampai {time}.
+Le réseau a changé : tout a été coupé. ¦ Mạng đã thay đổi: mọi thứ đã bị ngắt. ¦ Jaringan berubah: semuanya diputus.
+Adresse à taper sur l’autre ordinateur ¦ Địa chỉ cần gõ trên máy tính kia ¦ Alamat yang diketik di komputer lain
+Code d’invitation (valable 10 min, une seule fois) ¦ Mã mời (có hiệu lực 10 phút, chỉ một lần) ¦ Kode undangan (berlaku 10 menit, hanya sekali)
+Sur l’autre ordinateur : ouvre un navigateur (Chrome, Firefox, Safari, Edge), tape cette adresse, puis le code. Ensuite, c’est toi qui acceptes ici, en comparant le code à 6 chiffres affiché des deux côtés. ¦ Trên máy tính kia: mở trình duyệt (Chrome, Firefox, Safari, Edge), gõ địa chỉ này rồi gõ mã. Sau đó chính bạn chấp nhận ở đây, bằng cách so mã 6 chữ số hiện ở cả hai bên. ¦ Di komputer lain: buka peramban (Chrome, Firefox, Safari, Edge), ketik alamat ini, lalu kodenya. Setelah itu kamu yang menerima di sini, dengan membandingkan kode 6 angka yang tampil di kedua sisi.
+Demandes d’accès ¦ Yêu cầu truy cập ¦ Permintaan akses
+✓ Autoriser ¦ ✓ Cho phép ¦ ✓ Izinkan
+Appareils autorisés ¦ Thiết bị được phép ¦ Perangkat yang diizinkan
+Tous les appareils invités sont en lecture seule : ils regardent la généalogie, rien ne peut être modifié depuis eux. ¦ Mọi thiết bị khách đều chỉ đọc: chúng xem gia phả, không thể sửa gì từ chúng. ¦ Semua perangkat tamu hanya baca: mereka melihat silsilah, tidak ada yang bisa diubah dari mereka.
+Ce qu’il faut savoir ¦ Điều cần biết ¦ Yang perlu diketahui
+🧱 La première fois, Windows (« Autoriser LCNDA sur les réseaux privés ? ») ou macOS (« Accepter les connexions entrantes ? ») pose la question : réponds oui, et sous Windows seulement pour les réseaux privés. ¦ 🧱 Lần đầu, Windows (“Cho phép LCNDA trên mạng riêng?”) hoặc macOS (“Chấp nhận kết nối đến?”) sẽ hỏi: hãy trả lời có, và trên Windows chỉ cho mạng riêng. ¦ 🧱 Pertama kali, Windows (“Izinkan LCNDA di jaringan pribadi?”) atau macOS (“Terima koneksi masuk?”) akan bertanya: jawab ya, dan di Windows hanya untuk jaringan pribadi.
+📶 Dans cette version, ce qui passe dans le wifi n’est pas chiffré : n’ouvre que sur le wifi de la maison, protégé par sa clé, jamais sur un wifi d’hôtel, de gare ou de médiathèque. ¦ 📶 Trong phiên bản này, những gì đi qua wifi không được mã hóa: chỉ mở trên wifi gia đình, có khóa bảo vệ, không bao giờ trên wifi khách sạn, nhà ga hay thư viện. ¦ 📶 Di versi ini, yang lewat wifi tidak dienkripsi: buka hanya di wifi rumah yang dilindungi kuncinya, jangan pernah di wifi hotel, stasiun, atau perpustakaan.
+🖥 Cet ordinateur doit rester allumé, avec LCNDA ouvert : s’il dort ou que tu fermes l’app, les autres ne voient plus rien. ¦ 🖥 Máy tính này phải luôn bật, với LCNDA đang mở: nếu nó ngủ hoặc bạn đóng ứng dụng, những người khác không còn thấy gì. ¦ 🖥 Komputer ini harus tetap menyala, dengan LCNDA terbuka: jika tidur atau kamu menutup aplikasi, yang lain tidak melihat apa pun lagi.
+autorisé le {date} ¦ được phép ngày {date} ¦ diizinkan pada {date}
+lecture seule ¦ chỉ đọc ¦ hanya baca
+jusqu’au {date} ¦ đến {date} ¦ sampai {date}
+pour cette fois seulement ¦ chỉ lần này ¦ hanya kali ini
+Pas vu depuis plus de 30 jours : le retirer ? ¦ Không thấy hơn 30 ngày: gỡ bỏ? ¦ Tidak terlihat lebih dari 30 hari: hapus?
+Aucun appareil autorisé pour l’instant. ¦ Chưa có thiết bị nào được phép. ¦ Belum ada perangkat yang diizinkan.
+Aucun appareil ne correspond. ¦ Không có thiết bị nào khớp. ¦ Tidak ada perangkat yang cocok.
+Appareils : {n} · connectés : {c} ¦ Thiết bị: {n} · đang kết nối: {c} ¦ Perangkat: {n} · terhubung: {c}
+Chercher un appareil… ¦ Tìm thiết bị… ¦ Cari perangkat…
+La porte du wifi n’a pas pu s’ouvrir (pare-feu, ou adresse déjà prise). Réessaie dans un instant. ¦ Không mở được cửa wifi (tường lửa, hoặc địa chỉ đã bị dùng). Thử lại sau giây lát. ¦ Pintu wifi tidak bisa dibuka (firewall, atau alamat sudah dipakai). Coba lagi sebentar lagi.
+Cette demande n’existe plus (refusée, ou plus de 2 minutes sans réponse). ¦ Yêu cầu này không còn nữa (bị từ chối, hoặc hơn 2 phút không trả lời). ¦ Permintaan ini sudah tidak ada (ditolak, atau lebih dari 2 menit tanpa jawaban).
+Trop tard pour annuler : autorise l’appareil de nouveau. ¦ Quá muộn để hoàn tác: hãy cho phép thiết bị lại. ¦ Terlambat untuk membatalkan: izinkan perangkat lagi.
+🖧 Ouvert aux ordinateurs de la maison. ¦ 🖧 Đã mở cho các máy tính trong nhà. ¦ 🖧 Terbuka untuk komputer di rumah.
+🖧 Coupé : l’app ne répond plus qu’à cet ordinateur. ¦ 🖧 Đã tắt: ứng dụng giờ chỉ trả lời máy tính này. ¦ 🖧 Mati: aplikasi kini hanya menjawab komputer ini.
+Adresse copiée ¦ Đã sao chép địa chỉ ¦ Alamat disalin
+✓ « {name} » retiré : il ne peut plus se connecter. ¦ ✓ Đã gỡ “{name}”: nó không thể kết nối nữa. ¦ ✓ “{name}” dihapus: tidak bisa terhubung lagi.
+« {name} » peut de nouveau se connecter. ¦ “{name}” có thể kết nối lại. ¦ “{name}” bisa terhubung lagi.
+Réglage enregistré ¦ Đã lưu cài đặt ¦ Pengaturan disimpan
+Demande refusée. ¦ Đã từ chối yêu cầu. ¦ Permintaan ditolak.
+✓ « {name} » autorisé, en lecture seule. ¦ ✓ Đã cho phép “{name}”, chỉ đọc. ¦ ✓ “{name}” diizinkan, hanya baca.
+Demande d’accès ¦ Yêu cầu truy cập ¦ Permintaan akses
+Un appareil veut ouvrir « {name} » ¦ Một thiết bị muốn mở “{name}” ¦ Sebuah perangkat ingin membuka “{name}”
+Nom donné ¦ Tên được đưa ra ¦ Nama yang diberikan
+(il peut être faux : compare le code) ¦ (có thể là giả: hãy so mã) ¦ (bisa palsu: bandingkan kodenya)
+Code affiché ¦ Mã hiển thị ¦ Kode yang tampil
+Regarde l’écran de l’appareil : il doit montrer le même code. Sinon, refuse. ¦ Hãy nhìn màn hình của thiết bị: nó phải hiện cùng một mã. Nếu không, hãy từ chối. ¦ Lihat layar perangkat: harus menampilkan kode yang sama. Jika tidak, tolak.
+Ce qu’il pourra faire : 👁 lecture seule (rien ne peut être modifié depuis cet appareil). Il devra aussi donner le mot de passe de la généalogie. ¦ Những gì nó có thể làm: 👁 chỉ đọc (không thể sửa gì từ thiết bị này). Nó cũng sẽ phải nhập mật khẩu của gia phả. ¦ Yang bisa dilakukannya: 👁 hanya baca (tidak ada yang bisa diubah dari perangkat ini). Perangkat ini juga harus memasukkan kata sandi silsilah.
+Sans réponse en 2 minutes, la demande disparaît toute seule (refusée). ¦ Không trả lời trong 2 phút, yêu cầu sẽ tự biến mất (bị từ chối). ¦ Tanpa jawaban dalam 2 menit, permintaan hilang sendiri (ditolak).
+✓ Autoriser « {name} » ¦ ✓ Cho phép “{name}” ¦ ✓ Izinkan “{name}”
+Ouvert aux ordinateurs de la maison · appareils connectés : {n} ¦ Đã mở cho các máy tính trong nhà · thiết bị đang kết nối: {n} ¦ Terbuka untuk komputer di rumah · perangkat terhubung: {n}
+🖧 Rouvrir sur ce réseau ¦ 🖧 Mở lại trên mạng này ¦ 🖧 Buka lagi di jaringan ini
+Autre ordinateur ¦ Máy tính khác ¦ Komputer lain
+Se connecter ¦ Kết nối ¦ Hubungkan
+Se connecter à l’ordinateur principal ¦ Kết nối với máy tính chính ¦ Hubungkan ke komputer utama
+Cet appareil n’est pas encore autorisé. Demande l’accès : c’est sur l’ordinateur principal qu’on l’accepte. ¦ Thiết bị này chưa được phép. Hãy xin quyền truy cập: việc chấp nhận được làm trên máy tính chính. ¦ Perangkat ini belum diizinkan. Minta akses: akses diterima di komputer utama.
+Nom de cet appareil ¦ Tên thiết bị này ¦ Nama perangkat ini
+Code d’invitation ¦ Mã mời ¦ Kode undangan
+(affiché sur l’ordinateur principal) ¦ (hiện trên máy tính chính) ¦ (tampil di komputer utama)
+Demander l’accès ¦ Xin quyền truy cập ¦ Minta akses
+Donne un nom à cet appareil. ¦ Hãy đặt tên cho thiết bị này. ¦ Beri nama perangkat ini.
+L’ordinateur principal ne répond pas (en veille, éteint, ou porte coupée). ¦ Máy tính chính không trả lời (đang ngủ, đã tắt, hoặc cửa đã đóng). ¦ Komputer utama tidak menjawab (sedang tidur, mati, atau pintu ditutup).
+Code d’invitation faux ou périmé. Demande le code affiché sur l’ordinateur principal. ¦ Mã mời sai hoặc đã hết hạn. Hãy hỏi mã đang hiện trên máy tính chính. ¦ Kode undangan salah atau kedaluwarsa. Minta kode yang tampil di komputer utama.
+Trop d’essais : réessaie dans {n} min. ¦ Thử quá nhiều lần: thử lại sau {n} phút. ¦ Terlalu banyak percobaan: coba lagi dalam {n} menit.
+Une demande de cet appareil attend déjà sa réponse. ¦ Một yêu cầu từ thiết bị này đang chờ trả lời. ¦ Permintaan dari perangkat ini sudah menunggu jawaban.
+Trop de demandes en même temps : réessaie dans un instant. ¦ Quá nhiều yêu cầu cùng lúc: thử lại sau giây lát. ¦ Terlalu banyak permintaan sekaligus: coba lagi sebentar lagi.
+Va sur l’ordinateur principal et vérifie qu’il affiche ce code : ¦ Hãy đến máy tính chính và kiểm tra rằng nó hiện mã này: ¦ Pergi ke komputer utama dan periksa bahwa ia menampilkan kode ini:
+Ouverture de la généalogie… Elle demande ensuite son mot de passe : il est vérifié par l’ordinateur principal, jamais gardé ici. ¦ Đang mở gia phả… Sau đó nó hỏi mật khẩu: mật khẩu được máy tính chính kiểm tra, không bao giờ lưu ở đây. ¦ Membuka silsilah… Lalu silsilah meminta kata sandinya: diperiksa oleh komputer utama, tidak pernah disimpan di sini.
+La demande a expiré (2 minutes sans réponse). Recommence. ¦ Yêu cầu đã hết hạn (2 phút không trả lời). Hãy làm lại. ¦ Permintaan kedaluwarsa (2 menit tanpa jawaban). Mulai lagi.
+<strong>Appareil invité « {name} »</strong> : lecture seule. La généalogie reste sur l’ordinateur principal ; rien ne peut être modifié depuis cet appareil. ¦ <strong>Thiết bị khách “{name}”</strong>: chỉ đọc. Gia phả vẫn ở trên máy tính chính; không thể sửa gì từ thiết bị này. ¦ <strong>Perangkat tamu “{name}”</strong>: hanya baca. Silsilah tetap di komputer utama; tidak ada yang bisa diubah dari perangkat ini.
+Appareil ¦ Thiết bị ¦ Perangkat
+Il faut un mot de passe ¦ Cần có mật khẩu ¦ Perlu kata sandi
+Cette généalogie n’a pas de mot de passe : elle ne s’ouvre pas sur un autre appareil. Sur l’ordinateur principal : Réglages → 🔐 Mot de passe de cette généalogie. ¦ Gia phả này chưa có mật khẩu: nó không mở trên thiết bị khác. Trên máy tính chính: Cài đặt → 🔐 Mật khẩu của gia phả này. ¦ Silsilah ini tidak punya kata sandi: tidak terbuka di perangkat lain. Di komputer utama: Pengaturan → 🔐 Kata sandi silsilah ini.
+Appareil invité « {name} » : lecture seule. ¦ Thiết bị khách “{name}”: chỉ đọc. ¦ Perangkat tamu “{name}”: hanya baca.
+Au prochain lancement de l’app ¦ Lần khởi động ứng dụng tiếp theo ¦ Saat aplikasi dibuka berikutnya
+reste coupé, il faut le rouvrir ¦ vẫn tắt, phải mở lại ¦ tetap mati, harus dibuka lagi
+se rouvre tout seul ¦ tự mở lại ¦ terbuka lagi sendiri
+Après une mise en veille ¦ Sau khi ngủ ¦ Setelah tidur
+se rouvre au réveil si l’app est restée ouverte ¦ tự mở lại khi thức dậy nếu ứng dụng vẫn mở ¦ terbuka lagi saat bangun jika aplikasi tetap terbuka
+reste coupé ¦ vẫn tắt ¦ tetap mati
+Mot de passe de la généalogie ¦ Mật khẩu của gia phả ¦ Kata sandi silsilah
+obligatoire pour ouvrir au réseau ¦ bắt buộc để mở ra mạng ¦ wajib untuk membuka ke jaringan
+facultatif (déconseillé) ¦ không bắt buộc (không khuyên dùng) ¦ opsional (tidak disarankan)
+demandé en plus du code à 6 chiffres ¦ yêu cầu thêm ngoài mã 6 chữ số ¦ diminta selain kode 6 angka
+seulement le code à 6 chiffres ¦ chỉ mã 6 chữ số ¦ hanya kode 6 angka
+Durée d’un accès ¦ Thời hạn truy cập ¦ Lama akses
+jusqu’à ce que tu le retires ¦ cho đến khi bạn gỡ bỏ ¦ sampai kamu menghapusnya
+Empêcher la veille tant qu’un appareil est connecté ¦ Không cho ngủ khi có thiết bị đang kết nối ¦ Cegah tidur selama ada perangkat terhubung
+oui (cet ordinateur ne s’endort plus) ¦ có (máy tính này không còn ngủ) ¦ ya (komputer ini tidak tidur lagi)
+Si cet ordinateur change de réseau ¦ Nếu máy tính này đổi mạng ¦ Jika komputer ini berganti jaringan
+tout couper ¦ ngắt tất cả ¦ putuskan semua
+tout couper, puis demander s’il faut rouvrir ¦ ngắt tất cả, rồi hỏi có mở lại không ¦ putuskan semua, lalu tanya apakah perlu dibuka lagi
+Appareil pas vu depuis 30 jours ¦ Thiết bị không thấy trong 30 ngày ¦ Perangkat tidak terlihat selama 30 hari
+proposer de le retirer ¦ đề nghị gỡ bỏ ¦ tawarkan untuk menghapusnya
+Ouvert au réseau de la maison ¦ Đã mở cho mạng gia đình ¦ Dibuka untuk jaringan rumah
+Fermé au réseau de la maison ¦ Đã đóng với mạng gia đình ¦ Ditutup untuk jaringan rumah
+Appareil autorisé ¦ Đã cho phép thiết bị ¦ Perangkat diizinkan
+Demande d’accès refusée ¦ Đã từ chối yêu cầu truy cập ¦ Permintaan akses ditolak
+Appareil retiré ¦ Đã gỡ thiết bị ¦ Perangkat dihapus
+Connexion en lecture seule ¦ Kết nối chỉ đọc ¦ Koneksi hanya baca
+en quittant l’app ¦ khi thoát ứng dụng ¦ saat keluar dari aplikasi
+mise en veille ¦ ngủ ¦ tidur
+le réseau a changé ¦ mạng đã thay đổi ¦ jaringan berubah
+Appareil invité : lecture seule. Cela ne se fait que sur l’ordinateur principal. ¦ Thiết bị khách: chỉ đọc. Việc này chỉ làm được trên máy tính chính. ¦ Perangkat tamu: hanya baca. Ini hanya bisa dilakukan di komputer utama.

@@ -50,7 +50,7 @@
     forgot.addEventListener('click', () => { forgotText.hidden = !forgotText.hidden; forgot.setAttribute('aria-expanded', String(!forgotText.hidden)); });
 
     const list = $('[data-glock-list]');
-    $('[data-glock-others]').addEventListener('click', async () => {
+    $('[data-glock-others]')?.addEventListener('click', async () => {
         if (!list.hidden) { list.hidden = true; return; }
         list.hidden = false; list.textContent = t('Chargement…');
         let data;

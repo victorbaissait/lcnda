@@ -1,0 +1,114 @@
+fr ¦ cs ¦ sv ¦ da
+# Zone « reseau » : 🖧 plusieurs ordinateurs de la maison
+conseillé ¦ doporučeno ¦ rekommenderas ¦ anbefalet
+connecté maintenant ¦ připojeno teď ¦ ansluten nu ¦ forbundet nu
+jamais venu ¦ nikdy nepřipojeno ¦ aldrig ansluten ¦ aldrig forbundet
+Plusieurs ordinateurs ¦ Více počítačů ¦ Flera datorer ¦ Flere computere
+Ouvrir cette généalogie aux autres ordinateurs de la maison, par le wifi, jamais par internet. ¦ Otevřít tento rodokmen ostatním počítačům v domácnosti, přes wifi, nikdy přes internet. ¦ Öppna det här släktträdet för de andra datorerna hemma, via wifi, aldrig via internet. ¦ Åbn dette slægtstræ for de andre computere i hjemmet, via wifi, aldrig via internettet.
+Ce réglage ne se change que sur l’ordinateur principal : cet appareil est un appareil invité, en lecture seule. ¦ Toto nastavení se mění jen na hlavním počítači: toto zařízení je zařízení hosta, jen pro čtení. ¦ Den här inställningen ändras bara på huvuddatorn: den här enheten är en gästenhet, skrivskyddad. ¦ Denne indstilling ændres kun på hovedcomputeren: denne enhed er en gæsteenhed, skrivebeskyttet.
+Seulement dans l’app de bureau LCNDA, sur l’ordinateur qui garde la généalogie. ¦ Jen v desktopové aplikaci LCNDA, na počítači, který uchovává rodokmen. ¦ Bara i skrivbordsappen LCNDA, på datorn som har släktträdet. ¦ Kun i skrivebordsappen LCNDA, på den computer, der har slægtstræet.
+⏻ Tout couper maintenant ¦ ⏻ Vše hned odpojit ¦ ⏻ Stäng allt nu ¦ ⏻ Afbryd alt nu
+↻ Nouveau code ¦ ↻ Nový kód ¦ ↻ Ny kod ¦ ↻ Ny kode
+Ouvrir « {name} » aux autres ordinateurs de la maison ¦ Otevřít „{name}“ ostatním počítačům v domácnosti ¦ Öppna ”{name}” för de andra datorerna hemma ¦ Åbn »{name}« for de andre computere i hjemmet
+Ouvert depuis {time}. Se coupe si cet ordinateur se met en veille, change de réseau ou ferme l’app. ¦ Otevřeno od {time}. Odpojí se, když tento počítač přejde do režimu spánku, změní síť nebo zavře aplikaci. ¦ Öppet sedan {time}. Stängs om den här datorn går i viloläge, byter nätverk eller stänger appen. ¦ Åben siden {time}. Afbrydes, hvis denne computer går i dvale, skifter netværk eller lukker appen.
+Coupé : l’app ne répond qu’à cet ordinateur (comme aujourd’hui). ¦ Vypnuto: aplikace odpovídá jen tomuto počítači (jako dnes). ¦ Av: appen svarar bara den här datorn (som i dag). ¦ Slået fra: appen svarer kun denne computer (som i dag).
+Avant d’ouvrir : cette généalogie n’a pas de mot de passe. Il en faut un pour l’ouvrir au réseau. ¦ Před otevřením: tento rodokmen nemá heslo. Aby se dal otevřít do sítě, potřebuje ho. ¦ Innan du öppnar: det här släktträdet har inget lösenord. Det behövs ett för att öppna det i nätverket. ¦ Før du åbner: dette slægtstræ har ingen adgangskode. Der skal bruges en for at åbne det på netværket.
+🔐 En mettre un ¦ 🔐 Nastavit heslo ¦ 🔐 Ange ett ¦ 🔐 Angiv en
+Cet ordinateur n’est relié à aucun réseau de la maison (adresse privée introuvable) : branche le wifi, puis réessaie. ¦ Tento počítač není připojen k žádné domácí síti (soukromá adresa nenalezena): zapni wifi a zkus to znovu. ¦ Den här datorn är inte ansluten till något hemnätverk (ingen privat adress hittades): slå på wifi och försök igen. ¦ Denne computer er ikke forbundet til noget hjemmenetværk (ingen privat adresse fundet): slå wifi til, og prøv igen.
+5 codes d’invitation faux : plus aucune demande jusqu’à {time}. ¦ 5 chybných kódů pozvánky: žádné další žádosti až do {time}. ¦ 5 felaktiga inbjudningskoder: inga fler förfrågningar förrän {time}. ¦ 5 forkerte invitationskoder: ingen flere anmodninger før {time}.
+5 demandes refusées : plus aucune demande jusqu’à {time}. ¦ 5 odmítnutých žádostí: žádné další žádosti až do {time}. ¦ 5 förfrågningar nekade: inga fler förfrågningar förrän {time}. ¦ 5 anmodninger afvist: ingen flere anmodninger før {time}.
+Le réseau a changé : tout a été coupé. ¦ Síť se změnila: vše bylo odpojeno. ¦ Nätverket har ändrats: allt har stängts. ¦ Netværket er ændret: alt er blevet afbrudt.
+Adresse à taper sur l’autre ordinateur ¦ Adresa, kterou napíšeš na druhém počítači ¦ Adress att skriva på den andra datorn ¦ Adresse, der skal skrives på den anden computer
+Code d’invitation (valable 10 min, une seule fois) ¦ Kód pozvánky (platí 10 min, jen jednou) ¦ Inbjudningskod (gäller 10 min, bara en gång) ¦ Invitationskode (gyldig i 10 min, kun én gang)
+Sur l’autre ordinateur : ouvre un navigateur (Chrome, Firefox, Safari, Edge), tape cette adresse, puis le code. Ensuite, c’est toi qui acceptes ici, en comparant le code à 6 chiffres affiché des deux côtés. ¦ Na druhém počítači: otevři prohlížeč (Chrome, Firefox, Safari, Edge), napiš tuto adresu a pak kód. Potom to tady přijmeš ty, po porovnání šestimístného kódu zobrazeného na obou stranách. ¦ På den andra datorn: öppna en webbläsare (Chrome, Firefox, Safari, Edge), skriv den här adressen och sedan koden. Sedan godkänner du här, genom att jämföra den 6-siffriga koden som visas på båda sidor. ¦ På den anden computer: åbn en browser (Chrome, Firefox, Safari, Edge), skriv denne adresse og derefter koden. Bagefter er det dig, der godkender her, ved at sammenligne den 6-cifrede kode, der vises på begge sider.
+Demandes d’accès ¦ Žádosti o přístup ¦ Förfrågningar om åtkomst ¦ Anmodninger om adgang
+✓ Autoriser ¦ ✓ Povolit ¦ ✓ Tillåt ¦ ✓ Tillad
+Appareils autorisés ¦ Povolená zařízení ¦ Tillåtna enheter ¦ Tilladte enheder
+Tous les appareils invités sont en lecture seule : ils regardent la généalogie, rien ne peut être modifié depuis eux. ¦ Všechna zařízení hostů jsou jen pro čtení: prohlížejí rodokmen, nic z nich nelze změnit. ¦ Alla gästenheter är skrivskyddade: de tittar på släktträdet, inget kan ändras från dem. ¦ Alle gæsteenheder er skrivebeskyttede: de ser på slægtstræet, intet kan ændres fra dem.
+Ce qu’il faut savoir ¦ Co je dobré vědět ¦ Bra att veta ¦ Godt at vide
+🧱 La première fois, Windows (« Autoriser LCNDA sur les réseaux privés ? ») ou macOS (« Accepter les connexions entrantes ? ») pose la question : réponds oui, et sous Windows seulement pour les réseaux privés. ¦ 🧱 Poprvé se Windows („Povolit LCNDA v privátních sítích?“) nebo macOS („Přijímat příchozí připojení?“) zeptá: odpověz ano, a ve Windows jen pro privátní sítě. ¦ 🧱 Första gången frågar Windows (”Tillåt LCNDA i privata nätverk?”) eller macOS (”Acceptera inkommande anslutningar?”): svara ja, och i Windows bara för privata nätverk. ¦ 🧱 Første gang spørger Windows (»Tillad LCNDA på private netværk?«) eller macOS (»Accepter indgående forbindelser?«): svar ja, og i Windows kun for private netværk.
+📶 Dans cette version, ce qui passe dans le wifi n’est pas chiffré : n’ouvre que sur le wifi de la maison, protégé par sa clé, jamais sur un wifi d’hôtel, de gare ou de médiathèque. ¦ 📶 V této verzi není to, co jde přes wifi, šifrované: otevírej jen na domácí wifi chráněné heslem, nikdy na wifi v hotelu, na nádraží nebo v knihovně. ¦ 📶 I den här versionen är det som går via wifi inte krypterat: öppna bara på wifi hemma, skyddat med sin nyckel, aldrig på wifi på hotell, station eller bibliotek. ¦ 📶 I denne version er det, der går via wifi, ikke krypteret: åbn kun på wifi derhjemme, beskyttet af sin nøgle, aldrig på wifi på hotel, station eller bibliotek.
+🖥 Cet ordinateur doit rester allumé, avec LCNDA ouvert : s’il dort ou que tu fermes l’app, les autres ne voient plus rien. ¦ 🖥 Tento počítač musí zůstat zapnutý a LCNDA otevřené: když usne nebo aplikaci zavřeš, ostatní už nic neuvidí. ¦ 🖥 Den här datorn måste vara på, med LCNDA öppet: om den sover eller du stänger appen ser de andra ingenting längre. ¦ 🖥 Denne computer skal være tændt med LCNDA åben: hvis den sover, eller du lukker appen, ser de andre ikke noget mere.
+autorisé le {date} ¦ povoleno {date} ¦ tillåten {date} ¦ tilladt {date}
+lecture seule ¦ jen pro čtení ¦ skrivskyddad ¦ skrivebeskyttet
+jusqu’au {date} ¦ do {date} ¦ till {date} ¦ indtil {date}
+pour cette fois seulement ¦ jen tentokrát ¦ bara den här gången ¦ kun denne gang
+Pas vu depuis plus de 30 jours : le retirer ? ¦ Neviděno déle než 30 dní: odebrat? ¦ Inte sedd på mer än 30 dagar: ta bort den? ¦ Ikke set i mere end 30 dage: fjerne den?
+Aucun appareil autorisé pour l’instant. ¦ Zatím žádné povolené zařízení. ¦ Ingen tillåten enhet ännu. ¦ Ingen tilladt enhed endnu.
+Aucun appareil ne correspond. ¦ Žádné zařízení neodpovídá. ¦ Ingen enhet matchar. ¦ Ingen enhed passer.
+Appareils : {n} · connectés : {c} ¦ Zařízení: {n} · připojená: {c} ¦ Enheter: {n} · anslutna: {c} ¦ Enheder: {n} · forbundne: {c}
+Chercher un appareil… ¦ Hledat zařízení… ¦ Sök en enhet… ¦ Søg efter en enhed…
+La porte du wifi n’a pas pu s’ouvrir (pare-feu, ou adresse déjà prise). Réessaie dans un instant. ¦ Dveře wifi se nepodařilo otevřít (firewall nebo už obsazená adresa). Zkus to za chvíli znovu. ¦ Wifi-dörren kunde inte öppnas (brandvägg, eller adressen är redan upptagen). Försök igen om en stund. ¦ Wifi-døren kunne ikke åbnes (firewall, eller adressen er allerede optaget). Prøv igen om lidt.
+Cette demande n’existe plus (refusée, ou plus de 2 minutes sans réponse). ¦ Tato žádost už neexistuje (odmítnuta, nebo víc než 2 minuty bez odpovědi). ¦ Den här förfrågan finns inte längre (nekad, eller mer än 2 minuter utan svar). ¦ Denne anmodning findes ikke længere (afvist, eller mere end 2 minutter uden svar).
+Trop tard pour annuler : autorise l’appareil de nouveau. ¦ Příliš pozdě na vrácení: povol zařízení znovu. ¦ För sent att ångra: tillåt enheten igen. ¦ For sent at fortryde: tillad enheden igen.
+🖧 Ouvert aux ordinateurs de la maison. ¦ 🖧 Otevřeno počítačům v domácnosti. ¦ 🖧 Öppet för datorerna hemma. ¦ 🖧 Åben for computerne i hjemmet.
+🖧 Coupé : l’app ne répond plus qu’à cet ordinateur. ¦ 🖧 Vypnuto: aplikace už odpovídá jen tomuto počítači. ¦ 🖧 Av: appen svarar nu bara den här datorn. ¦ 🖧 Slået fra: appen svarer nu kun denne computer.
+Adresse copiée ¦ Adresa zkopírována ¦ Adressen kopierad ¦ Adressen er kopieret
+✓ « {name} » retiré : il ne peut plus se connecter. ¦ ✓ „{name}“ odebráno: už se nemůže připojit. ¦ ✓ ”{name}” borttagen: den kan inte längre ansluta. ¦ ✓ »{name}« fjernet: den kan ikke længere forbinde.
+« {name} » peut de nouveau se connecter. ¦ „{name}“ se může znovu připojit. ¦ ”{name}” kan ansluta igen. ¦ »{name}« kan forbinde igen.
+Réglage enregistré ¦ Nastavení uloženo ¦ Inställningen sparad ¦ Indstillingen er gemt
+Demande refusée. ¦ Žádost odmítnuta. ¦ Förfrågan nekad. ¦ Anmodning afvist.
+✓ « {name} » autorisé, en lecture seule. ¦ ✓ „{name}“ povoleno, jen pro čtení. ¦ ✓ ”{name}” tillåten, skrivskyddad. ¦ ✓ »{name}« tilladt, skrivebeskyttet.
+Demande d’accès ¦ Žádost o přístup ¦ Förfrågan om åtkomst ¦ Anmodning om adgang
+Un appareil veut ouvrir « {name} » ¦ Zařízení chce otevřít „{name}“ ¦ En enhet vill öppna ”{name}” ¦ En enhed vil åbne »{name}«
+Nom donné ¦ Uvedený název ¦ Angivet namn ¦ Angivet navn
+(il peut être faux : compare le code) ¦ (může být nepravdivý: porovnej kód) ¦ (det kan vara falskt: jämför koden) ¦ (det kan være falsk: sammenlign koden)
+Code affiché ¦ Zobrazený kód ¦ Visad kod ¦ Vist kode
+Regarde l’écran de l’appareil : il doit montrer le même code. Sinon, refuse. ¦ Podívej se na obrazovku zařízení: musí ukazovat stejný kód. Jinak odmítni. ¦ Titta på enhetens skärm: den måste visa samma kod. Annars, neka. ¦ Se på enhedens skærm: den skal vise den samme kode. Ellers afvis.
+Ce qu’il pourra faire : 👁 lecture seule (rien ne peut être modifié depuis cet appareil). Il devra aussi donner le mot de passe de la généalogie. ¦ Co bude moci dělat: 👁 jen čtení (z tohoto zařízení nelze nic změnit). Bude také muset zadat heslo rodokmenu. ¦ Vad den får göra: 👁 bara läsa (inget kan ändras från den här enheten). Den måste också ange släktträdets lösenord. ¦ Hvad den må: 👁 kun læse (intet kan ændres fra denne enhed). Den skal også angive slægtstræets adgangskode.
+Sans réponse en 2 minutes, la demande disparaît toute seule (refusée). ¦ Bez odpovědi do 2 minut žádost sama zmizí (odmítnuta). ¦ Utan svar inom 2 minuter försvinner förfrågan av sig själv (nekad). ¦ Uden svar inden for 2 minutter forsvinder anmodningen af sig selv (afvist).
+✓ Autoriser « {name} » ¦ ✓ Povolit „{name}“ ¦ ✓ Tillåt ”{name}” ¦ ✓ Tillad »{name}«
+Ouvert aux ordinateurs de la maison · appareils connectés : {n} ¦ Otevřeno počítačům v domácnosti · připojená zařízení: {n} ¦ Öppet för datorerna hemma · anslutna enheter: {n} ¦ Åben for computerne i hjemmet · forbundne enheder: {n}
+🖧 Rouvrir sur ce réseau ¦ 🖧 Znovu otevřít v této síti ¦ 🖧 Öppna igen på det här nätverket ¦ 🖧 Åbn igen på dette netværk
+Autre ordinateur ¦ Jiný počítač ¦ Annan dator ¦ Anden computer
+Se connecter ¦ Připojit se ¦ Anslut ¦ Forbind
+Se connecter à l’ordinateur principal ¦ Připojit se k hlavnímu počítači ¦ Anslut till huvuddatorn ¦ Forbind til hovedcomputeren
+Cet appareil n’est pas encore autorisé. Demande l’accès : c’est sur l’ordinateur principal qu’on l’accepte. ¦ Toto zařízení zatím není povoleno. Požádej o přístup: přijímá se na hlavním počítači. ¦ Den här enheten är inte tillåten ännu. Be om åtkomst: den godkänns på huvuddatorn. ¦ Denne enhed er ikke tilladt endnu. Bed om adgang: den godkendes på hovedcomputeren.
+Nom de cet appareil ¦ Název tohoto zařízení ¦ Namn på den här enheten ¦ Navn på denne enhed
+Code d’invitation ¦ Kód pozvánky ¦ Inbjudningskod ¦ Invitationskode
+(affiché sur l’ordinateur principal) ¦ (zobrazený na hlavním počítači) ¦ (visas på huvuddatorn) ¦ (vist på hovedcomputeren)
+Demander l’accès ¦ Požádat o přístup ¦ Be om åtkomst ¦ Bed om adgang
+Donne un nom à cet appareil. ¦ Pojmenuj toto zařízení. ¦ Ge den här enheten ett namn. ¦ Giv denne enhed et navn.
+L’ordinateur principal ne répond pas (en veille, éteint, ou porte coupée). ¦ Hlavní počítač neodpovídá (spí, je vypnutý nebo jsou dveře zavřené). ¦ Huvuddatorn svarar inte (i viloläge, avstängd eller dörren stängd). ¦ Hovedcomputeren svarer ikke (i dvale, slukket eller døren lukket).
+Code d’invitation faux ou périmé. Demande le code affiché sur l’ordinateur principal. ¦ Kód pozvánky je chybný nebo prošlý. Zeptej se na kód zobrazený na hlavním počítači. ¦ Inbjudningskoden är fel eller har gått ut. Be om koden som visas på huvuddatorn. ¦ Invitationskoden er forkert eller udløbet. Bed om koden, der vises på hovedcomputeren.
+Trop d’essais : réessaie dans {n} min. ¦ Příliš mnoho pokusů: zkus to znovu za {n} min. ¦ För många försök: försök igen om {n} min. ¦ For mange forsøg: prøv igen om {n} min.
+Une demande de cet appareil attend déjà sa réponse. ¦ Žádost z tohoto zařízení už čeká na odpověď. ¦ En förfrågan från den här enheten väntar redan på svar. ¦ En anmodning fra denne enhed venter allerede på svar.
+Trop de demandes en même temps : réessaie dans un instant. ¦ Příliš mnoho žádostí najednou: zkus to za chvíli znovu. ¦ För många förfrågningar samtidigt: försök igen om en stund. ¦ For mange anmodninger på én gang: prøv igen om lidt.
+Va sur l’ordinateur principal et vérifie qu’il affiche ce code : ¦ Jdi k hlavnímu počítači a ověř, že ukazuje tento kód: ¦ Gå till huvuddatorn och kontrollera att den visar den här koden: ¦ Gå til hovedcomputeren, og tjek, at den viser denne kode:
+Ouverture de la généalogie… Elle demande ensuite son mot de passe : il est vérifié par l’ordinateur principal, jamais gardé ici. ¦ Otevírání rodokmenu… Potom požádá o heslo: ověří ho hlavní počítač, tady se nikdy neukládá. ¦ Släktträdet öppnas… Sedan frågar det efter sitt lösenord: det kontrolleras av huvuddatorn och sparas aldrig här. ¦ Slægtstræet åbnes… Derefter beder det om sin adgangskode: den kontrolleres af hovedcomputeren og gemmes aldrig her.
+La demande a expiré (2 minutes sans réponse). Recommence. ¦ Žádost vypršela (2 minuty bez odpovědi). Začni znovu. ¦ Förfrågan har gått ut (2 minuter utan svar). Börja om. ¦ Anmodningen er udløbet (2 minutter uden svar). Begynd forfra.
+<strong>Appareil invité « {name} »</strong> : lecture seule. La généalogie reste sur l’ordinateur principal ; rien ne peut être modifié depuis cet appareil. ¦ <strong>Zařízení hosta „{name}“</strong>: jen pro čtení. Rodokmen zůstává na hlavním počítači; z tohoto zařízení nelze nic změnit. ¦ <strong>Gästenhet ”{name}”</strong>: skrivskyddad. Släktträdet stannar på huvuddatorn; inget kan ändras från den här enheten. ¦ <strong>Gæsteenhed »{name}«</strong>: skrivebeskyttet. Slægtstræet bliver på hovedcomputeren; intet kan ændres fra denne enhed.
+Appareil ¦ Zařízení ¦ Enhet ¦ Enhed
+Il faut un mot de passe ¦ Je potřeba heslo ¦ Ett lösenord behövs ¦ Der skal bruges en adgangskode
+Cette généalogie n’a pas de mot de passe : elle ne s’ouvre pas sur un autre appareil. Sur l’ordinateur principal : Réglages → 🔐 Mot de passe de cette généalogie. ¦ Tento rodokmen nemá heslo: na jiném zařízení se neotevře. Na hlavním počítači: Nastavení → 🔐 Heslo tohoto rodokmenu. ¦ Det här släktträdet har inget lösenord: det öppnas inte på en annan enhet. På huvuddatorn: Inställningar → 🔐 Lösenord för släktträdet. ¦ Dette slægtstræ har ingen adgangskode: det åbnes ikke på en anden enhed. På hovedcomputeren: Indstillinger → 🔐 Adgangskode til slægtstræet.
+Appareil invité « {name} » : lecture seule. ¦ Zařízení hosta „{name}“: jen pro čtení. ¦ Gästenhet ”{name}”: skrivskyddad. ¦ Gæsteenhed »{name}«: skrivebeskyttet.
+Au prochain lancement de l’app ¦ Při příštím spuštění aplikace ¦ Nästa gång appen startar ¦ Næste gang appen starter
+reste coupé, il faut le rouvrir ¦ zůstane vypnuto, je třeba ho znovu otevřít ¦ förblir av, du måste öppna igen ¦ forbliver slået fra, du skal åbne igen
+se rouvre tout seul ¦ otevře se samo znovu ¦ öppnas igen av sig själv ¦ åbner igen af sig selv
+Après une mise en veille ¦ Po režimu spánku ¦ Efter viloläge ¦ Efter dvale
+se rouvre au réveil si l’app est restée ouverte ¦ po probuzení se znovu otevře, pokud aplikace zůstala otevřená ¦ öppnas igen vid uppvaknandet om appen var öppen ¦ åbner igen ved opvågning, hvis appen var åben
+reste coupé ¦ zůstane vypnuto ¦ förblir av ¦ forbliver slået fra
+Mot de passe de la généalogie ¦ Heslo rodokmenu ¦ Släktträdets lösenord ¦ Slægtstræets adgangskode
+obligatoire pour ouvrir au réseau ¦ povinné pro otevření do sítě ¦ krävs för att öppna i nätverket ¦ påkrævet for at åbne på netværket
+facultatif (déconseillé) ¦ nepovinné (nedoporučeno) ¦ valfritt (avråds) ¦ valgfri (frarådes)
+demandé en plus du code à 6 chiffres ¦ vyžadován navíc k šestimístnému kódu ¦ krävs utöver den 6-siffriga koden ¦ kræves ud over den 6-cifrede kode
+seulement le code à 6 chiffres ¦ jen šestimístný kód ¦ bara den 6-siffriga koden ¦ kun den 6-cifrede kode
+Durée d’un accès ¦ Doba přístupu ¦ Hur länge en åtkomst gäller ¦ Varighed af en adgang
+jusqu’à ce que tu le retires ¦ dokud ho neodebereš ¦ tills du tar bort den ¦ indtil du fjerner den
+Empêcher la veille tant qu’un appareil est connecté ¦ Zabránit spánku, dokud je připojeno zařízení ¦ Förhindra viloläge så länge en enhet är ansluten ¦ Forhindr dvale, så længe en enhed er forbundet
+oui (cet ordinateur ne s’endort plus) ¦ ano (tento počítač už neusíná) ¦ ja (den här datorn somnar inte längre) ¦ ja (denne computer falder ikke længere i søvn)
+Si cet ordinateur change de réseau ¦ Když tento počítač změní síť ¦ Om den här datorn byter nätverk ¦ Hvis denne computer skifter netværk
+tout couper ¦ vše odpojit ¦ stäng allt ¦ afbryd alt
+tout couper, puis demander s’il faut rouvrir ¦ vše odpojit a pak se zeptat, zda znovu otevřít ¦ stäng allt och fråga sedan om det ska öppnas igen ¦ afbryd alt, og spørg så, om der skal åbnes igen
+Appareil pas vu depuis 30 jours ¦ Zařízení neviděné 30 dní ¦ Enhet som inte setts på 30 dagar ¦ Enhed, der ikke er set i 30 dage
+proposer de le retirer ¦ nabídnout odebrání ¦ föreslå att ta bort den ¦ foreslå at fjerne den
+Ouvert au réseau de la maison ¦ Otevřeno do domácí sítě ¦ Öppnat för hemnätverket ¦ Åbnet for hjemmenetværket
+Fermé au réseau de la maison ¦ Zavřeno pro domácí síť ¦ Stängt för hemnätverket ¦ Lukket for hjemmenetværket
+Appareil autorisé ¦ Zařízení povoleno ¦ Enhet tillåten ¦ Enhed tilladt
+Demande d’accès refusée ¦ Žádost o přístup odmítnuta ¦ Förfrågan om åtkomst nekad ¦ Anmodning om adgang afvist
+Appareil retiré ¦ Zařízení odebráno ¦ Enhet borttagen ¦ Enhed fjernet
+Connexion en lecture seule ¦ Připojení jen pro čtení ¦ Skrivskyddad anslutning ¦ Skrivebeskyttet forbindelse
+en quittant l’app ¦ při ukončení aplikace ¦ när appen avslutas ¦ når appen lukkes
+mise en veille ¦ režim spánku ¦ viloläge ¦ dvale
+le réseau a changé ¦ síť se změnila ¦ nätverket ändrades ¦ netværket blev ændret
+Appareil invité : lecture seule. Cela ne se fait que sur l’ordinateur principal. ¦ Zařízení hosta: jen pro čtení. To jde jen na hlavním počítači. ¦ Gästenhet: skrivskyddad. Det görs bara på huvuddatorn. ¦ Gæsteenhed: skrivebeskyttet. Det kan kun gøres på hovedcomputeren.

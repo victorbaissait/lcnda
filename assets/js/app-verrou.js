@@ -208,9 +208,12 @@
     const KIND = {case_open: ['📂', 'Dossier ouvert'], print: ['🖨', 'Impression ou PDF'], export: ['⤓', 'Export'], letters: ['✉️', 'Courriers en série'],
         unlock_ok: ['🔓', 'Généalogie ouverte avec le mot de passe'], unlock_fail: ['⛔', 'Mot de passe refusé'], lock_now: ['🔐', 'Verrouillée à la main'],
         lock_idle: ['🔐', 'Reverrouillée (délai passé ou app relancée)'], lock_set: ['🔐', 'Mot de passe posé'], lock_change: ['🔐', 'Mot de passe changé'],
-        lock_remove: ['🔓', 'Mot de passe retiré'], lock_minutes: ['🔐', 'Délai de reverrouillage changé'], purge: ['🧹', 'Lignes anciennes effacées'], retention: ['🧹', 'Durée de conservation changée']};
+        lock_remove: ['🔓', 'Mot de passe retiré'], lock_minutes: ['🔐', 'Délai de reverrouillage changé'], purge: ['🧹', 'Lignes anciennes effacées'], retention: ['🧹', 'Durée de conservation changée'],
+        // 🖧 plusieurs ordinateurs (electron/lan-gate.js, lib/reseau_local.php)
+        lan_open: ['🖧', 'Ouvert au réseau de la maison'], lan_close: ['🖧', 'Fermé au réseau de la maison'], lan_ok: ['🖧', 'Appareil autorisé'], lan_refuse: ['🖧', 'Demande d’accès refusée'],
+        lan_remove: ['🖧', 'Appareil retiré'], lan_connect: ['🖧', 'Connexion en lecture seule']};
     const FILTERS = [['open', 'Ouvertures', ['case_open']], ['print', 'Impressions', ['print']], ['export', 'Exports', ['export']], ['letters', 'Courriers', ['letters']],
-        ['lock', 'Mot de passe', ['unlock_ok', 'unlock_fail', 'lock_now', 'lock_idle', 'lock_set', 'lock_change', 'lock_remove', 'lock_minutes']], ['other', 'Lignes anciennes effacées', ['purge', 'retention']]];
+        ['lock', 'Mot de passe', ['unlock_ok', 'unlock_fail', 'lock_now', 'lock_idle', 'lock_set', 'lock_change', 'lock_remove', 'lock_minutes']], ['lan', 'Plusieurs ordinateurs', ['lan_open', 'lan_close', 'lan_ok', 'lan_refuse', 'lan_remove', 'lan_connect']], ['other', 'Lignes anciennes effacées', ['purge', 'retention']]];
     const EXP = {csv: 'CSV', gedcom: 'GEDCOM', plus: 'Autre format', json: 'JSON', sqlite: 'Base .db', backup: 'Sauvegarde complète', report: 'Rapport de recherche', book: 'Livre de famille',
         sync: 'Paquet du travail à deux', vault: 'Copie chez un cousin', museum: 'Musée de famille', list: 'Liste', block: 'Bloc', share: 'Partage avec la famille', website: 'Site web',
         website_publish: 'Site web publié', offsite: 'Copie hors de l’ordinateur', access_csv: 'Registre « Qui a vu quoi » (CSV)', succ_archive: 'Archive du dossier (.zip)',
@@ -229,19 +232,20 @@
         if (r.kind === 'unlock_ok' || r.kind === 'unlock_fail') return i18n(WHY[code] || 'pour ouvrir la généalogie');
         if (r.kind === 'purge') { const [k, m] = [code, n]; return i18n('Lignes effacées : {n} (gardées : {m})', {n: Number(k) || 0, m: i18n((MONTHS.find(x => x[0] === Number(m)) || [0, '?'])[1])}); }
         if (r.kind === 'retention') return `${i18n((MONTHS.find(x => x[0] === Number(code)) || [0, '?'])[1])} → ${i18n((MONTHS.find(x => x[0] === Number(n)) || [0, '?'])[1])}`;
+        if (r.kind === 'lan_close') { const W = {main: 'à la main', quit: 'en quittant l’app', veille: 'mise en veille', reseau: 'le réseau a changé'}; return W[code] ? i18n(W[code]) : ''; }
         if (['lock_set', 'lock_change', 'lock_minutes'].includes(r.kind)) { const m = MINS.find(x => x[0] === Number(code)); return m ? i18n('après {m}', {m: i18n(m[1])}) : ''; }
         return '';
     }
     const atTxt = at => { const m = String(at).match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/); return m ? `${m[3]}/${m[2]}/${m[1]} ${m[4]}:${m[5]}` : String(at); };
     const rowHtml = r => { const k = KIND[r.kind] || ['•', r.kind]; return `<tr class="${r.kind === 'unlock_fail' ? 'is-fail' : ''}"><td class="b8-when">${esc(atTxt(r.at))}</td>
-        <td data-i18n-off>${r.obj_label ? esc(r.obj_label) : '—'}</td><td>${esc(k[0])} ${esc(i18n(k[1]))}${whatText(r) ? ` <small class="muted">· ${esc(whatText(r))}</small>` : ''}</td><td data-i18n-off>${esc(r.machine)}</td></tr>`; };
-    const tableHtml = rows => `<div class="table-wrap"><table class="b8-table"><thead><tr><th>${esc(i18n('Quand'))}</th><th>${esc(i18n('Dossier ou objet'))}</th><th>${esc(i18n('Quoi'))}</th><th>${esc(i18n('Poste'))}</th></tr></thead><tbody>${rows.map(rowHtml).join('')}</tbody></table></div>`;
+        <td data-i18n-off>${r.obj_label ? esc(r.obj_label) : '—'}</td><td>${esc(k[0])} ${esc(i18n(k[1]))}${whatText(r) ? ` <small class="muted">· ${esc(whatText(r))}</small>` : ''}</td><td data-i18n-off>${r.device ? `🖧 ${esc(r.device)}` : esc(r.machine)}</td></tr>`; };
+    const tableHtml = rows => `<div class="table-wrap"><table class="b8-table"><thead><tr><th>${esc(i18n('Quand'))}</th><th>${esc(i18n('Dossier ou objet'))}</th><th>${esc(i18n('Quoi'))}</th><th>${esc(i18n('Appareil'))}</th></tr></thead><tbody>${rows.map(rowHtml).join('')}</tbody></table></div>`;
     const csvUrl = () => { const u = new URL('api.php', location.href); u.searchParams.set('action', 'access_log_csv'); if (typeof window.LCNDA_GENEALOGY === 'string') u.searchParams.set('g', window.LCNDA_GENEALOGY); return u.toString(); };
     function match(r, st) {
         const f = st.filters?.kind;
         if (f && f.length) { const kinds = FILTERS.filter(x => f.includes(x[0])).flatMap(x => x[2]); if (!kinds.includes(r.kind)) return false; }
         const q = String(st.q || '').trim(); if (!q) return true;
-        const txt = [atTxt(r.at), r.obj_label, r.machine, i18n((KIND[r.kind] || ['', ''])[1]), whatText(r)].join(' ');
+        const txt = [atTxt(r.at), r.obj_label, r.machine, r.device || '', i18n((KIND[r.kind] || ['', ''])[1]), whatText(r)].join(' ');
         return UI().listMatch?.text ? UI().listMatch.text(q, txt) : txt.toLowerCase().includes(q.toLowerCase());
     }
 

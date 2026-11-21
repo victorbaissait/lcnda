@@ -40,9 +40,15 @@ $lang = i18n_page_lang();
             <button type="submit" class="gl-button" data-glock-open><?= $e(i18n_t('Ouvrir')) ?></button>
             <p class="gl-msg" data-glock-msg role="status" aria-live="polite"></p>
         </form>
+        <?php $glockGuest = function_exists('lan_device') ? lan_device() : null; ?>
+        <?php if ($glockGuest): /* 🖧 appareil invité : il ne change pas de généalogie (réservé à l'ordinateur principal) */ ?>
+        <p class="gl-lead">🖧 <?= str_replace('§NAME§', '<span data-i18n-off>' . $e((string) $glockGuest['name']) . '</span>', $e(i18n_t('Appareil invité « {name} » : lecture seule.', ['name' => '§NAME§']))) ?></p>
+        <?php endif; ?>
         <p class="gl-links">
+            <?php if (!$glockGuest): ?>
             <button type="button" class="gl-link" data-glock-others>⇄ <?= $e(i18n_t('Ouvrir une autre généalogie')) ?></button>
             <span aria-hidden="true">·</span>
+            <?php endif; ?>
             <button type="button" class="gl-link" data-glock-forgot aria-expanded="false"><?= $e(i18n_t('Mot de passe oublié ?')) ?></button>
         </p>
         <div class="gl-others" data-glock-list hidden></div>
@@ -54,7 +60,7 @@ $lang = i18n_page_lang();
 </main>
 <script>window.LCNDA_GENEALOGY = <?= json_encode(glock_key()) ?>; window.INSTALL_CSRF = <?= json_encode(csrf_token()) ?>; window.LCNDA_GLOCK_SCREEN = true;</script>
 <?= i18n_page_script() ?>
-<script src="assets/js/app-i18n.js?v=42"></script>
-<script src="assets/js/app-verrou-ecran.js?v=1"></script>
+<script src="assets/js/app-i18n.js?v=48"></script>
+<script src="assets/js/app-verrou-ecran.js?v=2"></script>
 </body>
 </html>

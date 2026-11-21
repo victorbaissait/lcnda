@@ -226,6 +226,7 @@
         } catch (_) {}
     }
     async function tick() {
+        if (window.LCNDA_GUEST) return; // 🖧 appareil invité : la sauvegarde se fait sur l'ordinateur principal
         try {
             const r = await api('autobackup_tick');
             if (r.missing || (r.ran && !r.ok && r.error && !r.busy)) {

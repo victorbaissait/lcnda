@@ -43,6 +43,8 @@ function kiosk_path(): string { return DATA_DIR . '/consultation.json'; }
 
 function kiosk_state(): array
 {
+    // 🖧 un appareil invité (lib/reseau_local.php) : lecture seule, avec les mêmes règles que le mode consultation (kiosk_blocks)
+    if (function_exists('lan_device') && ($dev = lan_device())) { return ['on' => true, 'since' => '', 'guest' => (string) $dev['name']]; }
     $raw = is_file(kiosk_path()) ? json_decode((string) file_get_contents(kiosk_path()), true) : null;
     return is_array($raw) && !empty($raw['hash']) ? ['on' => true, 'since' => (string) ($raw['since'] ?? '')] : ['on' => false, 'since' => ''];
 }

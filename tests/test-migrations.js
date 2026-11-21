@@ -109,6 +109,13 @@ const backups = (dir) => (fs.existsSync(path.join(dir, 'backups')) ? fs.readdirS
     assert.ok(expected >= 97);
   });
 
+  await step('structure n°99 : 🖧 plusieurs ordinateurs (access_log.device : l’appareil réel au registre ; 98 : autre chantier, raccordé à la fusion)', async () => {
+    const dir = path.join(tmp, 'ancienne');
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM pragma_table_info('access_log') WHERE name='device'")), 1);
+    assert.equal(JSON.parse(sql(dir, "SELECT count(*) FROM sqlite_master WHERE name LIKE '%appareil%' OR name LIKE '%device_token%'")), 0, 'les appareils et leurs jetons ne sont pas dans la généalogie');
+    assert.ok(expected >= 99);
+  });
+
   await step('la copie de sécurité est une base complète, dans l’état d’avant la mise à jour', async () => {
     const dir = path.join(tmp, 'ancienne');
     const copy = path.join(dir, 'backups', backups(dir)[0]);
