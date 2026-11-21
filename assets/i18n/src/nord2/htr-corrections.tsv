@@ -1,0 +1,34 @@
+fr ¦ sk ¦ nb
+# 🪄 Corrections proposées après « ✨ Lire l’acte » (app-htr-correction.js, heritage-transcribe.js, heritage-more.js)
+« {w} » ajouté au lexique ¦ „{w}“ pridané do slovníka ¦ «{w}» er lagt til i ordlisten
+Garder tel quel ¦ Nechať bez zmeny ¦ Behold som det er
+Ajouter au lexique ¦ Pridať do slovníka ¦ Legg til i ordlisten
+Ce mot ne sera plus souligné ¦ Toto slovo už nebude podčiarknuté ¦ Dette ordet blir ikke lenger understreket
+Proposer des corrections (conseillé) ¦ Navrhovať opravy (odporúčané) ¦ Foreslå rettelser (anbefalt)
+Prudent (conseillé) ¦ Opatrne (odporúčané) ¦ Forsiktig (anbefalt)
+Plus de propositions ¦ Viac návrhov ¦ Flere forslag
+Correction proposée : « {x} » — clique pour choisir ¦ Navrhnutá oprava: „{x}“ — klikni a vyber ¦ Foreslått rettelse: «{x}» — klikk for å velge
+=correction proposée ¦ navrhnutá oprava|navrhnuté opravy|navrhnutých opráv ¦ foreslått rettelse|foreslåtte rettelser
+(soulignées en violet : clique un mot) ¦ (podčiarknuté fialovo: klikni na slovo) ¦ (understreket med lilla: klikk på et ord)
+Aucune correction à proposer ¦ Žiadna oprava na navrhnutie ¦ Ingen rettelse å foreslå
+Corrections proposées : non ¦ Navrhované opravy: nie ¦ Foreslåtte rettelser: av
+Accepter les {n} propositions sûres ¦ Prijať isté návrhy ({n}) ¦ Godta de {n} sikre forslagene
+Accepter la proposition sûre ¦ Prijať istý návrh ¦ Godta det sikre forslaget
+=proposition sûre acceptée ¦ prijatý istý návrh|prijaté isté návrhy|prijatých istých návrhov ¦ sikkert forslag godtatt|sikre forslag godtatt
+« {w} » gardé tel quel ¦ „{w}“ ponechané bez zmeny ¦ «{w}» beholdt som det er
+Proposer des corrections pour les mots mal lus (un mot souligné : clique-le pour choisir) ¦ Navrhovať opravy zle prečítaných slov (podčiarknuté slovo: klikni naň a vyber) ¦ Foreslå rettelser for feillest ord (et understreket ord: klikk på det for å velge)
+Corrections ¦ Opravy ¦ Rettelser
+Les corrections proposées ne sont pas chargées. ¦ Navrhované opravy nie sú načítané. ¦ De foreslåtte rettelsene er ikke lastet inn.
+Corrections proposées après la lecture ¦ Opravy navrhnuté po prečítaní ¦ Rettelser foreslått etter lesingen
+Après « ✨ Lire l’acte », les mots qui ressemblent à un mot connu (« décembe » → « décembre ») sont soulignés en violet : un clic, et tu choisis. Rien n’est changé sans toi. Le lexique : les mots des actes, ceux de « 📜 Aide à la lecture », et les noms, prénoms, lieux et métiers de ta base (sans les vivants ni les fiches confidentielles). ¦ Po „✨ Prečítať záznam“ sú slová podobné známemu slovu („décembe“ → „décembre“) podčiarknuté fialovo: jedno kliknutie a vyberieš si. Bez teba sa nič nezmení. Slovník: slová zo záznamov, z „📜 Pomoc s čítaním“ a priezviská, mená, miesta a povolania z tvojej databázy (bez žijúcich osôb a dôverných kariet). ¦ Etter «✨ Les dokumentet» blir ord som ligner et kjent ord («décembe» → «décembre») understreket med lilla: ett klikk, og du velger. Ingenting endres uten deg. Ordlisten: ordene i dokumentene, ordene i «📜 Lesehjelp» og etternavn, fornavn, steder og yrker i databasen din (uten levende personer og konfidensielle oppføringer).
+Ton lexique personnel : {x}. ¦ Tvoj vlastný slovník: {x}. ¦ Din egen ordliste: {x}.
+Vider le lexique personnel ¦ Vyprázdniť vlastný slovník ¦ Tøm din egen ordliste
+Ton lexique personnel est vide : « Ajouter au lexique » dans le menu d’un mot souligné. ¦ Tvoj vlastný slovník je prázdny: „Pridať do slovníka“ v ponuke podčiarknutého slova. ¦ Din egen ordliste er tom: «Legg til i ordlisten» i menyen til et understreket ord.
+Lexique personnel vidé ¦ Vlastný slovník vyprázdnený ¦ Egen ordliste tømt
+Il manque l’accent ¦ Chýba diakritika ¦ Aksenten mangler
+« {x} » ressemble à « {y} » ¦ „{x}“ sa podobá na „{y}“ ¦ «{x}» ligner «{y}»
+« {x} » collé au mot suivant ¦ „{x}“ prilepené k ďalšiemu slovu ¦ «{x}» skrevet sammen med neste ord
+Deux mots collés ¦ Dve zlepené slová ¦ To ord skrevet sammen
+Après « mil {x} », on attend « cent » ¦ Po „mil {x}“ sa čaká „cent“ ¦ Etter «mil {x}» ventes «cent»
+Dans une date en toutes lettres : « {x} » ¦ V dátume písanom slovami: „{x}“ ¦ I en dato skrevet med bokstaver: «{x}»
+Un mois, dans une date ¦ Mesiac v dátume ¦ En måned, i en dato

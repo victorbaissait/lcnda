@@ -215,15 +215,10 @@
     /** petits mots qui peuvent être dans une date sans être des nombres (« vingt et un », « le », « de ») */
     const NUM_GLUE = new Set(['et', 'le', 'la', 'de', 'du', 'an', 'l', 'mois']);
 
-    /* ═════════ Lettres qui se ressemblent (en plus de LCNDA_LECTURE.CONFUSIONS) ═════════
-     * [a, b, coût, pourquoi] dans les deux sens */
-    const EXTRA = [
-        ['a', 'u', 0.3, '« a » ouvert ressemble à « u »'], ['b', 'l', 0.3, '« b » sans sa panse ressemble à « l »'], ['c', 'l', 0.4, '« l » sans sa boucle ressemble à « c »'],
-        ['ct', 'a', 0.5, '« ct » lié ressemble à « a »'], ['e', 'i', 0.6, '« e » fermé ressemble à « i » sans point'], ['r', 'n', 0.6, '« r » et « n » se confondent'],
-        ['m', 'nn', 0.3, '« m » et « nn » ont le même nombre de jambages'], ['m', 'ni', 0.3, '« m » et « ni » ont le même nombre de jambages'], ['m', 'ui', 0.3, '« m » et « ui » ont le même nombre de jambages'],
-        ['nn', 'un', 0.3, '« nn » et « un » ont les mêmes jambages'], ['nn', 'uu', 0.3, '« nn » et « uu » ont les mêmes jambages'],
-        ['z', 's', 0.5, '« z » et « s » se confondent'], ['y', 'j', 0.4, '« y » et « j » se confondent'], ['v', 'u', 0.3, '« v » et « u » sont la même lettre dans l’écriture ancienne'],
-        ['i', 'j', 0.3, '« i » et « j » sont la même lettre dans l’écriture ancienne'],
+    /* ═════════ Lettres qui se ressemblent (en plus de LCNDA_LECTURE.CONFUSIONS) ═════════ */
+    const EXTRA = [ // [lu, juste, coût] dans les deux sens ; la phrase « pourquoi » vient de LCNDA_LECTURE.why
+        ['a', 'u', 0.3], ['b', 'l', 0.3], ['c', 'l', 0.4], ['ct', 'a', 0.5], ['e', 'i', 0.6], ['r', 'n', 0.6], ['m', 'nn', 0.3], ['m', 'ni', 0.3], ['m', 'ui', 0.3],
+        ['nn', 'un', 0.3], ['nn', 'uu', 0.3], ['z', 's', 0.5], ['y', 'j', 0.4], ['v', 'u', 0.3], ['i', 'j', 0.3],
     ];
     let CONF = null, MULTI = null, SUB = null;
     /** ces ressemblances ne valent que pour une majuscule ancienne, en tête du mot (S/L, T/F) */
@@ -233,7 +228,7 @@
         CONF = new Map(); MULTI = new Set(); SUB = Object.create(null);
         const put = (a, b, c, w) => { for (const [x, y] of [[norm(a), norm(b)], [norm(b), norm(a)]]) { if (x === y) continue; const k = x + '>' + y, o = CONF.get(k); if (!o || o.c > c) CONF.set(k, {c, w}); if (x.length > 1 || y.length > 1) { MULTI.add(x); MULTI.add(y); } } };
         const L = LX(); (L?.CONFUSIONS || []).forEach(([a, b, w]) => put(a, b, 0.3, w));
-        EXTRA.forEach(([a, b, c, w]) => put(a, b, c, i18n(w)));
+        EXTRA.forEach(([a, b, c]) => put(a, b, c, ''));
         CONF.forEach((v, k) => { const [x, y] = k.split('>'); if (x.length === 1 && y.length === 1 && !CAP_ONLY.has(k)) (SUB[x] ||= Object.create(null))[y] = v.c; });
         return CONF;
     }

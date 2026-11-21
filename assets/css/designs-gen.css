@@ -1930,6 +1930,9 @@
 :root[data-lc-density] .h-htr-rev-body{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .h-htr-crop.is-none{padding:calc(2px * var(--lc-sp)) 0}
 :root[data-lc-density] .h-htr-line{padding:calc(4px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-htr-fixbar,:root[data-lc-density] .h-tx-fixbar{gap:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-htr-fixbar,:root[data-lc-density] .h-tx-fixbar{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-htr-fixset-row{gap:calc(8px * var(--lc-sp)) calc(18px * var(--lc-sp))}
 :root[data-lc-density] .h-htr-conf{padding-top:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .h-htr-keep{padding-top:calc(6px * var(--lc-sp))}
 :root .h-lr-row:is([data-lc-r], [data-lc-r] *) {border-radius:var(--lc-r)}

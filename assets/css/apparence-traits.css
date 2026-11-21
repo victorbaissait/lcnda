@@ -1182,6 +1182,8 @@ html:root.lc-frame.lc-frame :is(.icon-action, .icon-button, .button.small, .stat
 :root.lc-frame .h-htr-rev > li, :root .h-htr-rev > li:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #e6e7ea}
 :root.lc-frame .h-htr-line, :root .h-htr-line:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d6d6db}
 :root.lc-frame .h-htr-line:focus, :root .h-htr-line:focus:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
+:root.lc-frame .h-htr-fixbar, :root .h-htr-fixbar:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .h-tx-fixbar, :root .h-tx-fixbar:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #ddd0f7}
+:root[data-theme="dark"].lc-frame .h-htr-fixbar, :root[data-theme="dark"] .h-htr-fixbar:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-tx-fixbar, :root[data-theme="dark"] .h-tx-fixbar:is([data-lc-lines], [data-lc-lines] *) {border-color:#45386a}
 :root.lc-frame .h-lr-row, :root .h-lr-row:is([data-lc-lines], [data-lc-lines] *) {border:1px solid var(--line-color)}
 :root.lc-frame .h-lr-row input:not([type=checkbox]):not([type=radio]), :root .h-lr-row input:not([type=checkbox]):not([type=radio]):is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .h-lr-row select, :root .h-lr-row select:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #bbb}
 :root.lc-frame .h-layouts-list li, :root .h-layouts-list li:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #ddd}

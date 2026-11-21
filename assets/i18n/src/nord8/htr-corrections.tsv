@@ -1,0 +1,34 @@
+fr ¦ tr
+# 🪄 Corrections proposées après « ✨ Lire l’acte » (app-htr-correction.js, heritage-transcribe.js, heritage-more.js)
+« {w} » ajouté au lexique ¦ “{w}” sözlüğe eklendi
+Garder tel quel ¦ Olduğu gibi bırak
+Ajouter au lexique ¦ Sözlüğe ekle
+Ce mot ne sera plus souligné ¦ Bu sözcüğün altı artık çizilmeyecek
+Proposer des corrections (conseillé) ¦ Düzeltme öner (önerilen)
+Prudent (conseillé) ¦ Temkinli (önerilen)
+Plus de propositions ¦ Daha çok öneri
+Correction proposée : « {x} » — clique pour choisir ¦ Önerilen düzeltme: “{x}” — seçmek için tıkla
+=correction proposée ¦ önerilen düzeltme|önerilen düzeltme
+(soulignées en violet : clique un mot) ¦ (altı mor çizili: bir sözcüğe tıkla)
+Aucune correction à proposer ¦ Önerilecek düzeltme yok
+Corrections proposées : non ¦ Önerilen düzeltmeler: kapalı
+Accepter les {n} propositions sûres ¦ Kesin önerileri kabul et ({n})
+Accepter la proposition sûre ¦ Kesin öneriyi kabul et
+=proposition sûre acceptée ¦ kesin öneri kabul edildi|kesin öneri kabul edildi
+« {w} » gardé tel quel ¦ “{w}” olduğu gibi bırakıldı
+Proposer des corrections pour les mots mal lus (un mot souligné : clique-le pour choisir) ¦ Yanlış okunan sözcükler için düzeltme öner (altı çizili bir sözcük: seçmek için tıkla)
+Corrections ¦ Düzeltmeler
+Les corrections proposées ne sont pas chargées. ¦ Önerilen düzeltmeler yüklenmedi.
+Corrections proposées après la lecture ¦ Okumadan sonra önerilen düzeltmeler
+Après « ✨ Lire l’acte », les mots qui ressemblent à un mot connu (« décembe » → « décembre ») sont soulignés en violet : un clic, et tu choisis. Rien n’est changé sans toi. Le lexique : les mots des actes, ceux de « 📜 Aide à la lecture », et les noms, prénoms, lieux et métiers de ta base (sans les vivants ni les fiches confidentielles). ¦ “✨ Belgeyi oku” sonrasında bilinen bir sözcüğe benzeyen sözcüklerin (“décembe” → “décembre”) altı mor çizilir: bir tıklama, seçimi sen yaparsın. Sensiz hiçbir şey değişmez. Sözlük: belgelerin sözcükleri, “📜 Okuma yardımı” sözcükleri ve veritabanındaki soyadları, adlar, yerler ve meslekler (yaşayanlar ve gizli kayıtlar olmadan).
+Ton lexique personnel : {x}. ¦ Kişisel sözlüğün: {x}.
+Vider le lexique personnel ¦ Kişisel sözlüğü boşalt
+Ton lexique personnel est vide : « Ajouter au lexique » dans le menu d’un mot souligné. ¦ Kişisel sözlüğün boş: altı çizili bir sözcüğün menüsünde “Sözlüğe ekle”.
+Lexique personnel vidé ¦ Kişisel sözlük boşaltıldı
+Il manque l’accent ¦ Aksan eksik
+« {x} » ressemble à « {y} » ¦ “{x}”, “{y}” sözcüğüne benziyor
+« {x} » collé au mot suivant ¦ “{x}” sonraki sözcüğe bitişik
+Deux mots collés ¦ Bitişik yazılmış iki sözcük
+Après « mil {x} », on attend « cent » ¦ “mil {x}” sonrasında “cent” beklenir
+Dans une date en toutes lettres : « {x} » ¦ Yazıyla yazılmış bir tarihte: “{x}”
+Un mois, dans une date ¦ Bir tarihte ay

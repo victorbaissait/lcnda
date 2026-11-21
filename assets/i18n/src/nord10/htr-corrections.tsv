@@ -1,0 +1,34 @@
+fr ¦ sq ¦ mt
+# 🪄 Corrections proposées après « ✨ Lire l’acte » (app-htr-correction.js, heritage-transcribe.js, heritage-more.js)
+« {w} » ajouté au lexique ¦ «{w}» u shtua në fjalor ¦ “{w}” miżjuda mal-lessiku
+Garder tel quel ¦ Lëre siç është ¦ Ħallih kif inhu
+Ajouter au lexique ¦ Shto në fjalor ¦ Żid mal-lessiku
+Ce mot ne sera plus souligné ¦ Kjo fjalë nuk do të nënvizohet më ¦ Din il-kelma mhux se tibqa’ tiġi ssottolinjata
+Proposer des corrections (conseillé) ¦ Propozo korrigjime (këshillohet) ¦ Ipproponi korrezzjonijiet (rakkomandat)
+Prudent (conseillé) ¦ I kujdesshëm (këshillohet) ¦ Prudenti (rakkomandat)
+Plus de propositions ¦ Më shumë propozime ¦ Aktar proposti
+Correction proposée : « {x} » — clique pour choisir ¦ Korrigjim i propozuar: «{x}» — kliko për të zgjedhur ¦ Korrezzjoni proposta: “{x}” — ikklikkja biex tagħżel
+=correction proposée ¦ korrigjim i propozuar|korrigjime të propozuara ¦ korrezzjoni proposta|korrezzjonijiet proposti|korrezzjonijiet proposti|korrezzjoni proposta|korrezzjoni proposta
+(soulignées en violet : clique un mot) ¦ (të nënvizuara me vjollcë: kliko një fjalë) ¦ (issottolinjati bil-vjola: ikklikkja kelma)
+Aucune correction à proposer ¦ Asnjë korrigjim për të propozuar ¦ L-ebda korrezzjoni x’nipproponu
+Corrections proposées : non ¦ Korrigjime të propozuara: jo ¦ Korrezzjonijiet proposti: le
+Accepter les {n} propositions sûres ¦ Prano {n} propozimet e sigurta ¦ Aċċetta l-proposti ċerti ({n})
+Accepter la proposition sûre ¦ Prano propozimin e sigurt ¦ Aċċetta l-proposta ċerta
+=proposition sûre acceptée ¦ propozim i sigurt i pranuar|propozime të sigurta të pranuara ¦ proposta ċerta aċċettata|proposti ċerti aċċettati|proposti ċerti aċċettati|proposta ċerta aċċettata|proposta ċerta aċċettata
+« {w} » gardé tel quel ¦ «{w}» u la siç është ¦ “{w}” tħalla kif inhu
+Proposer des corrections pour les mots mal lus (un mot souligné : clique-le pour choisir) ¦ Propozo korrigjime për fjalët e lexuara keq (një fjalë e nënvizuar: klikoje për të zgjedhur) ¦ Ipproponi korrezzjonijiet għall-kliem moqri ħażin (kelma ssottolinjata: ikklikkjaha biex tagħżel)
+Corrections ¦ Korrigjime ¦ Korrezzjonijiet
+Les corrections proposées ne sont pas chargées. ¦ Korrigjimet e propozuara nuk janë ngarkuar. ¦ Il-korrezzjonijiet proposti mhumiex mgħobbija.
+Corrections proposées après la lecture ¦ Korrigjime të propozuara pas leximit ¦ Korrezzjonijiet proposti wara l-qari
+Après « ✨ Lire l’acte », les mots qui ressemblent à un mot connu (« décembe » → « décembre ») sont soulignés en violet : un clic, et tu choisis. Rien n’est changé sans toi. Le lexique : les mots des actes, ceux de « 📜 Aide à la lecture », et les noms, prénoms, lieux et métiers de ta base (sans les vivants ni les fiches confidentielles). ¦ Pas «✨ Lexo aktin», fjalët që i ngjajnë një fjale të njohur («décembe» → «décembre») nënvizohen me vjollcë: një klikim dhe zgjedh ti. Asgjë nuk ndryshon pa ty. Fjalori: fjalët e akteve, ato të «📜 Ndihmë për leximin» dhe mbiemrat, emrat, vendet dhe zanatet e bazës sate (pa personat e gjallë dhe pa skedat konfidenciale). ¦ Wara “✨ Aqra l-att”, il-kliem li jixbah kelma magħrufa (“décembe” → “décembre”) jiġi ssottolinjat bil-vjola: klikk wieħed u tagħżel int. Xejn ma jinbidel mingħajrek. Il-lessiku: il-kliem tal-atti, dak ta’ “📜 Għajnuna għall-qari”, u l-kunjomijiet, l-ismijiet, il-postijiet u s-snajja’ tad-database tiegħek (mingħajr il-ħajjin u l-iskedi kunfidenzjali).
+Ton lexique personnel : {x}. ¦ Fjalori yt personal: {x}. ¦ Il-lessiku personali tiegħek: {x}.
+Vider le lexique personnel ¦ Zbraz fjalorin personal ¦ Battal il-lessiku personali
+Ton lexique personnel est vide : « Ajouter au lexique » dans le menu d’un mot souligné. ¦ Fjalori yt personal është bosh: «Shto në fjalor» në menunë e një fjale të nënvizuar. ¦ Il-lessiku personali tiegħek huwa vojt: “Żid mal-lessiku” fil-menu ta’ kelma ssottolinjata.
+Lexique personnel vidé ¦ Fjalori personal u zbraz ¦ Il-lessiku personali tbattal
+Il manque l’accent ¦ Mungon theksi ¦ Nieqes l-aċċent
+« {x} » ressemble à « {y} » ¦ «{x}» i ngjan «{y}» ¦ “{x}” jixbah lil “{y}”
+« {x} » collé au mot suivant ¦ «{x}» ngjitur me fjalën pasuese ¦ “{x}” imwaħħal mal-kelma ta’ wara
+Deux mots collés ¦ Dy fjalë të ngjitura ¦ Żewġ kelmiet imwaħħla
+Après « mil {x} », on attend « cent » ¦ Pas «mil {x}» pritet «cent» ¦ Wara “mil {x}” nistennew “cent”
+Dans une date en toutes lettres : « {x} » ¦ Në një datë të shkruar me fjalë: «{x}» ¦ F’data miktuba bil-kliem: “{x}”
+Un mois, dans une date ¦ Një muaj, në një datë ¦ Xahar, f’data

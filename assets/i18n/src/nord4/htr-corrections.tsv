@@ -1,0 +1,34 @@
+fr ¦ fi ¦ hu
+# 🪄 Corrections proposées après « ✨ Lire l’acte » (app-htr-correction.js, heritage-transcribe.js, heritage-more.js)
+« {w} » ajouté au lexique ¦ ”{w}” lisätty sanastoon ¦ „{w}” hozzáadva a szótárhoz
+Garder tel quel ¦ Jätä ennalleen ¦ Maradjon így
+Ajouter au lexique ¦ Lisää sanastoon ¦ Hozzáadás a szótárhoz
+Ce mot ne sera plus souligné ¦ Tätä sanaa ei enää alleviivata ¦ Ez a szó többé nem lesz aláhúzva
+Proposer des corrections (conseillé) ¦ Ehdota korjauksia (suositus) ¦ Javítások javaslása (ajánlott)
+Prudent (conseillé) ¦ Varovainen (suositus) ¦ Óvatos (ajánlott)
+Plus de propositions ¦ Enemmän ehdotuksia ¦ Több javaslat
+Correction proposée : « {x} » — clique pour choisir ¦ Ehdotettu korjaus: ”{x}” — valitse napsauttamalla ¦ Javasolt javítás: „{x}” — kattints a választáshoz
+=correction proposée ¦ ehdotettu korjaus|ehdotettua korjausta ¦ javasolt javítás|javasolt javítás
+(soulignées en violet : clique un mot) ¦ (alleviivattu violetilla: napsauta sanaa) ¦ (lilával aláhúzva: kattints egy szóra)
+Aucune correction à proposer ¦ Ei korjattavaa ehdotettavaksi ¦ Nincs javasolható javítás
+Corrections proposées : non ¦ Korjausehdotukset: pois ¦ Javasolt javítások: ki
+Accepter les {n} propositions sûres ¦ Hyväksy varmat ehdotukset ({n}) ¦ A biztos javaslatok elfogadása ({n})
+Accepter la proposition sûre ¦ Hyväksy varma ehdotus ¦ A biztos javaslat elfogadása
+=proposition sûre acceptée ¦ varma ehdotus hyväksytty|varmaa ehdotusta hyväksytty ¦ biztos javaslat elfogadva|biztos javaslat elfogadva
+« {w} » gardé tel quel ¦ ”{w}” jätetty ennalleen ¦ „{w}” változatlanul hagyva
+Proposer des corrections pour les mots mal lus (un mot souligné : clique-le pour choisir) ¦ Ehdota korjauksia väärin luetuille sanoille (alleviivattu sana: valitse napsauttamalla) ¦ Javítások javaslása a rosszul olvasott szavakhoz (aláhúzott szó: kattints rá a választáshoz)
+Corrections ¦ Korjaukset ¦ Javítások
+Les corrections proposées ne sont pas chargées. ¦ Korjausehdotuksia ei ole ladattu. ¦ A javasolt javítások nincsenek betöltve.
+Corrections proposées après la lecture ¦ Korjausehdotukset lukemisen jälkeen ¦ Olvasás utáni javítási javaslatok
+Après « ✨ Lire l’acte », les mots qui ressemblent à un mot connu (« décembe » → « décembre ») sont soulignés en violet : un clic, et tu choisis. Rien n’est changé sans toi. Le lexique : les mots des actes, ceux de « 📜 Aide à la lecture », et les noms, prénoms, lieux et métiers de ta base (sans les vivants ni les fiches confidentielles). ¦ Toiminnon ”✨ Lue asiakirja” jälkeen tunnettua sanaa muistuttavat sanat (”décembe” → ”décembre”) alleviivataan violetilla: yksi napsautus, ja sinä valitset. Mikään ei muutu ilman sinua. Sanasto: asiakirjojen sanat, ”📜 Lukuapu” -osion sanat sekä tietokantasi sukunimet, etunimet, paikat ja ammatit (ilman eläviä henkilöitä ja luottamuksellisia tietoja). ¦ A „✨ Okirat olvasása” után az ismert szóhoz hasonló szavak („décembe” → „décembre”) lilával alá vannak húzva: egy kattintás, és te választasz. Nélküled semmi sem változik. A szótár: az okiratok szavai, a „📜 Olvasási segéd” szavai, valamint az adatbázisod vezetéknevei, keresztnevei, helyei és foglalkozásai (élők és bizalmas adatlapok nélkül).
+Ton lexique personnel : {x}. ¦ Oma sanastosi: {x}. ¦ A saját szótárad: {x}.
+Vider le lexique personnel ¦ Tyhjennä oma sanasto ¦ A saját szótár ürítése
+Ton lexique personnel est vide : « Ajouter au lexique » dans le menu d’un mot souligné. ¦ Oma sanastosi on tyhjä: ”Lisää sanastoon” alleviivatun sanan valikossa. ¦ A saját szótárad üres: „Hozzáadás a szótárhoz” egy aláhúzott szó menüjében.
+Lexique personnel vidé ¦ Oma sanasto tyhjennetty ¦ Saját szótár kiürítve
+Il manque l’accent ¦ Aksentti puuttuu ¦ Hiányzik az ékezet
+« {x} » ressemble à « {y} » ¦ ”{x}” muistuttaa sanaa ”{y}” ¦ „{x}” hasonlít erre: „{y}”
+« {x} » collé au mot suivant ¦ ”{x}” kiinni seuraavassa sanassa ¦ „{x}” egybeírva a következő szóval
+Deux mots collés ¦ Kaksi yhteen kirjoitettua sanaa ¦ Két egybeírt szó
+Après « mil {x} », on attend « cent » ¦ Sanojen ”mil {x}” jälkeen odotetaan sanaa ”cent” ¦ A „mil {x}” után „cent” várható
+Dans une date en toutes lettres : « {x} » ¦ Kirjaimin kirjoitetussa päivämäärässä: ”{x}” ¦ Betűvel írt dátumban: „{x}”
+Un mois, dans une date ¦ Kuukausi päivämäärässä ¦ Egy hónap, dátumban
