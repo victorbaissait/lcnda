@@ -288,7 +288,7 @@ async function lanOpen() {
   return r;
 }
 function lanBlockerUpdate() {
-  const want = !!(gate && gate.on && gate.settings.preventSleep === 'oui' && gate.connectedCount() > 0);
+  const want = !!(gate && gate.isOn && gate.settings.preventSleep === 'oui' && gate.connectedCount() > 0);
   if (want && lanBlocker === null) lanBlocker = powerSaveBlocker.start('prevent-app-suspension');
   if (!want && lanBlocker !== null) { try { powerSaveBlocker.stop(lanBlocker); } catch { /* ignore */ } lanBlocker = null; }
 }
@@ -315,7 +315,7 @@ function setupLan(p) {
     const again = lanResume && gate.settings.wake === 'rouvre' && !gate.networkChanged();
     lanResume = false;
     if (again) { const r = await lanOpen(); if (!r.ok) lanEmit('reopen-failed', r); }
-    else if (gate.state.wasOpen && !gate.on) { gate.state.wasOpen = false; gate._saveState(); lanEmit('change'); }
+    else if (gate.state.wasOpen && !gate.isOn) { gate.state.wasOpen = false; gate._saveState(); lanEmit('change'); }
   });
   // au lancement : reste coupé (conseillé), ou se rouvre si le réglage le dit
   if (gate.state.wasOpen && gate.settings.relaunch === 'rouvre') lanOpen();

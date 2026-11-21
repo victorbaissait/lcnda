@@ -205,7 +205,7 @@ class LanGate extends EventEmitter {
         this._dropTemporary(); // un accès « jusqu'à la fermeture » ne survit pas à un lancement
     }
 
-    get on() { return !!this.httpd; }
+    get isOn() { return !!this.httpd; }
     get settings() { return { ...this.state.settings }; }
     get url() { if (!this.address) return ''; return `http://${this.address.family === 6 ? `[${this.address.ip}]` : this.address.ip}:${this.port}`; }
 
@@ -235,13 +235,13 @@ class LanGate extends EventEmitter {
         this._expire();
         const stale = this.state.settings.stale === 'proposer';
         return {
-            on: this.on, url: this.url, address: this.address ? this.address.ip : '', port: this.port || this.state.port || 0, since: this.since,
-            invite: this.on && this.state.settings.invite === 'demande' && !(this.fails.pauseUntil > t) ? this._currentInvite() : null, // en pause : aucun code
+            on: this.isOn, url: this.url, address: this.address ? this.address.ip : '', port: this.port || this.state.port || 0, since: this.since,
+            invite: this.isOn && this.state.settings.invite === 'demande' && !(this.fails.pauseUntil > t) ? this._currentInvite() : null, // en pause : aucun code
             requests: [...this.requests.values()].map((r) => ({ id: r.id, name: r.name, ip: r.ip, code: r.code, at: r.at, expires: r.at + REQUEST_MS })),
             devices: this.devices.map((d) => {
                 const s = this.seen.get(d.id);
                 const last = Math.max(Number(d.lastSeen) || 0, s ? s.at : 0);
-                return { id: d.id, name: d.name, created: d.created, lastSeen: last, lastIp: (s && s.ip) || d.lastIp || '', connected: !!(this.on && s && t - s.at < SEEN_MS),
+                return { id: d.id, name: d.name, created: d.created, lastSeen: last, lastIp: (s && s.ip) || d.lastIp || '', connected: !!(this.isOn && s && t - s.at < SEEN_MS),
                     duration: d.duration || 'toujours', expires: d.expires || 0, rights: 'lecture', stale: stale && last > 0 ? t - last > STALE_DAYS * 86400e3 : stale && t - (Number(d.created) || t) > STALE_DAYS * 86400e3 };
             }),
             connected: this.connectedCount(),
@@ -250,7 +250,7 @@ class LanGate extends EventEmitter {
             canOpen: !!(this.test || pickLanAddress(this.interfaces())),
         };
     }
-    connectedCount() { const t = now(); let n = 0; for (const d of this.devices) { const s = this.seen.get(d.id); if (this.on && s && t - s.at < SEEN_MS) n++; } return n; }
+    connectedCount() { const t = now(); let n = 0; for (const d of this.devices) { const s = this.seen.get(d.id); if (this.isOn && s && t - s.at < SEEN_MS) n++; } return n; }
 
     _currentInvite() {
         if (!this.invite || this.invite.expires < now() || this.invite.used) this.invite = { code: inviteCode(), expires: now() + INVITE_MS, used: false };
@@ -262,7 +262,7 @@ class LanGate extends EventEmitter {
 
     /** @param {{passwordOk?: boolean}} [o] passwordOk : la généalogie ouverte a un mot de passe (vérifié par main.js auprès de PHP) */
     async open(o = {}) {
-        if (this.on) return { ok: true, url: this.url };
+        if (this.isOn) return { ok: true, url: this.url };
         this.lastError = ''; this.closedReason = '';
         if (this.state.settings.password === 'obligatoire' && o.passwordOk === false) return { ok: false, error: 'nopw' };
         let address, bind;
@@ -432,7 +432,7 @@ class LanGate extends EventEmitter {
 
     _handle(req, res) {
         const peer = this._peer(req.socket);
-        if (!this.on || !this._peerOk(peer)) { req.socket.destroy(); return; }
+        if (!this.isOn || !this._peerOk(peer)) { req.socket.destroy(); return; }
         if (!this._hostOk(req)) { this._send(res, 421, { error: 'host' }); return; }
         let u;
         try { u = new URL(String(req.url || '/'), 'http://gate.invalid'); } catch { this._send(res, 400, { error: 'url' }); return; }

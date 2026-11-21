@@ -135,16 +135,17 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
 
     try {
         await t('coupée par défaut : rien n’écoute, aucun port ; ouvrir sans adresse privée est refusé (192.0.2.2 est publique)', async () => {
-            assert.equal(gate.on, false); assert.equal(gate.port, 0); assert.equal(gate.status().on, false);
+            assert.equal(typeof gate.on, 'function', 'gate.on reste la fonction des événements (main.js : gate.on(« request », …))');
+            assert.equal(gate.isOn, false); assert.equal(gate.port, 0); assert.equal(gate.status().on, false);
             const real = new LanGate({ server, dataDir: path.join(tmp, 'autre'), appRoot, interfaces: () => ({ eth0: [{ address: '192.0.2.2', internal: false, cidr: '192.0.2.2/24' }], lo: [{ address: '127.0.0.1', internal: true }] }) });
             const r = await real.open({ passwordOk: true });
-            assert.deepEqual(r, { ok: false, error: 'noprivate' }); assert.equal(real.on, false);
+            assert.deepEqual(r, { ok: false, error: 'noprivate' }); assert.equal(real.isOn, false);
             const s = real.settings;
             assert.deepEqual(s, { relaunch: 'coupe', wake: 'rouvre', password: 'obligatoire', preventSleep: 'non', invite: 'demande', duration: 'toujours', stale: 'proposer', network: 'couper' }, 'les options conseillées au départ');
         });
         await t('mot de passe de la généalogie obligatoire (réglage conseillé) : refus d’ouvrir sans lui', async () => {
             assert.deepEqual(await gate.open({ passwordOk: false }), { ok: false, error: 'nopw' });
-            assert.equal(gate.on, false);
+            assert.equal(gate.isOn, false);
         });
         await t('ouverte : un port ; appareil non appairé → seulement la page « Demander l’accès » (rien de la généalogie), API et médias 401', async () => {
             const r = await gate.open({ passwordOk: true });
@@ -335,12 +336,12 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
             const port = gate.port;
             assert.equal(await connectTo(port), 'ouvert');
             await gate.close('main');
-            assert.equal(gate.on, false);
+            assert.equal(gate.isOn, false);
             assert.equal(await connectTo(port), 'ECONNREFUSED', 'plus rien n’écoute');
             assert.ok(!gate.status().devices.some(x => x.name === 'Une fois'));
             assert.equal(gate.status().devices.length, 0);
             const again = new LanGate({ server, dataDir, appRoot, test: { bind: '127.0.0.1', address: HOME, peer: () => peer } });
-            assert.equal(again.on, false, 'au lancement suivant : coupée');
+            assert.equal(again.isOn, false, 'au lancement suivant : coupée');
             assert.equal(again.state.port, port, 'le port est gardé pour la prochaine ouverture');
             assert.equal(again.settings.duration, 'fermeture', 'les réglages sont gardés');
         });
