@@ -86,6 +86,7 @@
           "upload.php",
           "router.php",
           "telecharger.php",
+          "terrain.php",
           "carnet-numerique-des-ancetres.php",
           "faq-data.js",
           "LICENSE",

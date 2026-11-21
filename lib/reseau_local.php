@@ -36,7 +36,9 @@ function lan_device(): ?array
     }
     $name = trim((string) preg_replace('/[\x00-\x1f\x7f]+/u', ' ', rawurldecode((string) ($_SERVER['HTTP_X_CARNET_DEVICE_NAME'] ?? ''))));
     $memo = ['id' => $id, 'name' => mb_substr($name !== '' ? $name : 'Appareil', 0, 40), 'ip' => substr((string) ($_SERVER['HTTP_X_CARNET_DEVICE_IP'] ?? ''), 0, 45),
-        'pw' => (string) ($_SERVER['HTTP_X_CARNET_DEVICE_PW'] ?? '') === '1', 'forged' => false];
+        'pw' => (string) ($_SERVER['HTTP_X_CARNET_DEVICE_PW'] ?? '') === '1', 'forged' => false,
+        // 📱 la sorte, signée par la porte comme le reste : « terrain » (téléphone de terrain, déposer seulement) ou « lecture » (👁)
+        'kind' => (string) ($_SERVER['HTTP_X_CARNET_DEVICE_KIND'] ?? '') === 'terrain' ? 'terrain' : 'lecture'];
     return $memo;
 }
 
@@ -52,7 +54,8 @@ function lan_device_name(): string
 const LAN_GUEST_WRITES = ['glock_unlock', 'glock_lock_now', 'glock_touch', 'save_settings'];
 /** Lectures réservées à l'ordinateur principal, en plus de celles du mode consultation (kiosk_blocks) */
 const LAN_GUEST_BLOCKED_READS = ['access_log', 'access_log_csv', 'autobackup_close', 'autobackup_tick', 'autobackup_check', 'lan_note', 'database_profiles',
-    'export_sqlite', 'export_full_backup', 'website_live', 'website_live_rev', 'desk_widget_page', 'desk_widget_file'];
+    'export_sqlite', 'export_full_backup', 'website_live', 'website_live_rev', 'desk_widget_page', 'desk_widget_file',
+    'inbox_list', 'inbox_count', 'inbox_file', 'inbox_settings']; // 📥 À trier : seulement sur l'ordinateur principal (lib/telephone_wifi.php)
 
 function lan_refuse(int $status, string $error, array $extra = []): bool
 {
@@ -73,6 +76,12 @@ function lan_guest_route(string $path): bool
     $d = lan_device();
     if (!$d) { return false; }
     if (!empty($d['forged'])) { return lan_refuse(403, 'Refusé.'); }
+    $terrain = ($d['kind'] ?? '') === 'terrain';
+    // 📱 un téléphone de terrain : UNE seule adresse, /terrain.php (liste blanche de ses actions : lib/telephone_wifi.php). Tout le
+    // reste lui est refusé, lectures comprises : il ne voit ni l'arbre, ni les médias, ni l'app.
+    if ($terrain && $path !== '/terrain.php') {
+        return lan_refuse(403, 'Téléphone de terrain : il peut seulement déposer des photos dans 📥 À trier.', ['lan_terrain' => true]);
+    }
     $method = strtoupper((string) ($_SERVER['REQUEST_METHOD'] ?? 'GET'));
     $read = in_array($method, ['GET', 'HEAD'], true);
     $action = is_string($_GET['action'] ?? null) ? (string) $_GET['action'] : '';
@@ -85,6 +94,7 @@ function lan_guest_route(string $path): bool
             return lan_refuse(423, 'Cette généalogie n’a pas de mot de passe : elle ne s’ouvre pas sur un autre appareil. Sur l’ordinateur principal : Réglages → 🔐 Mot de passe de cette généalogie.', ['lan_nopw' => true]);
         }
     }
+    if ($terrain) { return false; } // /terrain.php : ses six actions, chacune vérifiée là (méthode, CSRF, mot de passe, fichier)
     if (in_array($lower, ['/telecharger.php', '/upload.php'], true)) {
         return lan_refuse(423, 'Appareil invité : lecture seule. Cela ne se fait que sur l’ordinateur principal.');
     }
@@ -135,6 +145,10 @@ function lan_note_route(): bool
         $GLOBALS['LCNDA_LOG_DEVICE'] = $device;
         access_log_add(null, $kind, 'device', null, (string) ($_GET['label'] ?? ''), mb_substr((string) ($_GET['what'] ?? ''), 0, 40));
         unset($GLOBALS['LCNDA_LOG_DEVICE']);
+        // 📱 un téléphone de terrain retiré : ses photos restent à trier (conseillé) ou vont dans « 🗑 Supprimées » (réglage)
+        if ($kind === 'lan_remove' && is_string($_GET['dev'] ?? null) && preg_match('/^[a-f0-9]{16}$/', (string) $_GET['dev'])) {
+            try { require_once __DIR__ . '/telephone_wifi.php'; $pdo = glock_raw_pdo(); if ($pdo) { tw_device_removed($pdo, (string) $_GET['dev']); } } catch (Throwable $_) {}
+        }
     }
     header('Content-Type: application/json; charset=utf-8');
     echo '{"ok":true}';

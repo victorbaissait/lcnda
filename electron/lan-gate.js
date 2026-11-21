@@ -29,6 +29,11 @@
  *    de passe de la généalogie est demandé à chaque appareil (séance par appareil, lib/verrou.php) et, réglage conseillé,
  *    une généalogie sans mot de passe ne s'ouvre pas au réseau ; 📜 le registre note l'appareil.
  *
+ * 📱 TÉLÉPHONE DE TERRAIN (maquette docs/design/telephone-wifi.html ; lib/telephone_wifi.php) : une sorte d'appareil choisie sur
+ *    l'ordinateur au moment d'accepter. Elle ne lit RIEN de la généalogie : une liste blanche ici (sa page, ses fichiers, et
+ *    /terrain.php avec six actions, chacune avec sa méthode : TERRAIN_ACTIONS), une origine exacte exigée pour écrire (Origin,
+ *    Referer), un corps borné (Content-Length obligatoire), un débit limité par appareil ; PHP refuse aussi tout le reste.
+ *
  * LIMITE ÉCRITE : pas de HTTPS dans cette première version (seulement le jeton et les vérifications) : ce qui passe dans le
  * wifi n'est pas chiffré. Le wifi de la maison doit être protégé par sa clé (WPA2 / WPA3).
  */
@@ -50,6 +55,14 @@ const MAX_PENDING = 3;                 // demandes en attente en même temps (un
 const SEEN_MS = 2 * 60 * 1000;         // « connecté » = vu depuis moins de 2 min
 const STALE_DAYS = 30;
 const INVITE_ALPHABET = 'ACDEFGHJKMNPQRTUVWXY34679'; // sans 0/O, 1/I/L, 2/Z, 5/S, 8/B
+const KINDS = ['lecture', 'terrain'];  // 👁 lecture seule | 📱 téléphone de terrain (déposer seulement)
+/** 📱 Les seules actions qu'un téléphone de terrain peut demander à PHP (/terrain.php?action=…), avec leur méthode. Liste blanche. */
+const TERRAIN_ACTIONS = { state: 'GET', list: 'GET', unlock: 'POST', lock: 'POST', deposit: 'POST', undo: 'POST' };
+const TERRAIN_FILES = ['terrain.js', 'terrain.css', 'i18n.js'];
+const TERRAIN_MAX_BODY = 101 * 1024 * 1024;   // une photo (100 Mo au plus, réglage) et ses champs ; PHP vérifie la taille réglée
+const TERRAIN_SMALL_BODY = 16 * 1024;         // les autres écritures (mot de passe, ↶ Annuler)
+const TERRAIN_RATE = { n: 60, ms: 10000 };    // 60 demandes en 10 s par téléphone, au plus (inondation : 429)
+const PAIR_RATE = { n: 90, ms: 60000 };       // un appareil inconnu : 90 demandes d'accès ou questions « où en est ma demande ? » par minute et par adresse
 
 /** Réglages (Réglages → Données → 🖧 Plusieurs ordinateurs) : la première valeur est la conseillée, réglée au départ. */
 const SETTINGS = {
@@ -194,6 +207,8 @@ class LanGate extends EventEmitter {
         this.sockets = new Map(); // socket → id de l'appareil (pour couper tout de suite au retrait)
         this.seen = new Map();    // id → {at, ip} depuis l'ouverture
         this.removed = new Map(); // id → appareil retiré (↶ Annuler pendant 10 s)
+        this.rate = new Map();    // id d'un téléphone de terrain → heures de ses dernières demandes (débit limité)
+        this.pairRate = new Map(); // adresse d'un appareil inconnu → heures de ses demandes d'accès (débit limité)
         this.lastError = '';
         this.closedReason = '';
         this._timer = null;
@@ -237,12 +252,12 @@ class LanGate extends EventEmitter {
         return {
             on: this.isOn, url: this.url, address: this.address ? this.address.ip : '', port: this.port || this.state.port || 0, since: this.since,
             invite: this.isOn && this.state.settings.invite === 'demande' && !(this.fails.pauseUntil > t) ? this._currentInvite() : null, // en pause : aucun code
-            requests: [...this.requests.values()].map((r) => ({ id: r.id, name: r.name, ip: r.ip, code: r.code, at: r.at, expires: r.at + REQUEST_MS })),
+            requests: [...this.requests.values()].map((r) => ({ id: r.id, name: r.name, ip: r.ip, code: r.code, at: r.at, expires: r.at + REQUEST_MS, wants: r.wants || 'lecture' })),
             devices: this.devices.map((d) => {
                 const s = this.seen.get(d.id);
                 const last = Math.max(Number(d.lastSeen) || 0, s ? s.at : 0);
                 return { id: d.id, name: d.name, created: d.created, lastSeen: last, lastIp: (s && s.ip) || d.lastIp || '', connected: !!(this.isOn && s && t - s.at < SEEN_MS),
-                    duration: d.duration || 'toujours', expires: d.expires || 0, rights: 'lecture', stale: stale && last > 0 ? t - last > STALE_DAYS * 86400e3 : stale && t - (Number(d.created) || t) > STALE_DAYS * 86400e3 };
+                    duration: d.duration || 'toujours', expires: d.expires || 0, rights: d.kind === 'terrain' ? 'depot' : 'lecture', kind: d.kind === 'terrain' ? 'terrain' : 'lecture', stale: stale && last > 0 ? t - last > STALE_DAYS * 86400e3 : stale && t - (Number(d.created) || t) > STALE_DAYS * 86400e3 };
             }),
             connected: this.connectedCount(),
             pauseUntil: this.fails.pauseUntil > t ? this.fails.pauseUntil : 0, pauseReason: this.fails.pauseUntil > t ? this.fails.reason : '',
@@ -368,21 +383,23 @@ class LanGate extends EventEmitter {
 
     /* ─── accepter, refuser, retirer (seulement depuis la fenêtre de l'ordinateur principal : main.js) ─── */
 
-    accept(id) {
+    /** @param {string} id  @param {string} [kind] la sorte choisie sur l'ordinateur : 'lecture' (👁) ou 'terrain' (📱) ; sans choix : celle que l'appareil a demandée */
+    accept(id, kind) {
         this._expire();
         const r = this.requests.get(String(id || ''));
         if (!r) return { ok: false, error: 'gone' };
+        if (kind !== undefined && kind !== '' && !KINDS.includes(kind)) return { ok: false, error: 'kind' };
         this.requests.delete(r.id);
         const token = crypto.randomBytes(32).toString('base64url');
         const dur = this.state.settings.duration;
         const dev = { id: crypto.randomBytes(8).toString('hex'), name: r.name, hash: sha256(token), created: now(), lastSeen: 0, lastIp: r.ip, duration: dur,
-            expires: dur === '30j' ? now() + 30 * 86400e3 : 0 };
+            expires: dur === '30j' ? now() + 30 * 86400e3 : 0, kind: kind || (r.wants === 'terrain' ? 'terrain' : 'lecture') };
         this.devices.push(dev); this._saveDevices();
         this.answered.set(r.id, { state: 'accepte', token, at: now(), poll: r.poll, deviceId: dev.id });
         this.fails.refused = 0;
-        this.emit('device-added', { id: dev.id, name: dev.name, ip: r.ip });
+        this.emit('device-added', { id: dev.id, name: dev.name, ip: r.ip, kind: dev.kind });
         this.emit('change');
-        return { ok: true, device: { id: dev.id, name: dev.name } };
+        return { ok: true, device: { id: dev.id, name: dev.name, kind: dev.kind } };
     }
     refuse(id) {
         const r = this.requests.get(String(id || ''));
@@ -404,9 +421,15 @@ class LanGate extends EventEmitter {
         this._saveDevices();     // tout de suite : le jeton est refusé dès la prochaine demande…
         this._cut(d.id);         // …et ses connexions déjà ouvertes sont fermées
         this.removed.set(d.id, { ...d, removedAt: now() });
-        this.emit('device-removed', { id: d.id, name: d.name });
+        this.emit('device-removed', { id: d.id, name: d.name, kind: d.kind || 'lecture' });
         this.emit('change');
         return { ok: true, name: d.name };
+    }
+    /** ⏻ Retirer tous les téléphones de terrain (ou toute une sorte) d'un coup. */
+    removeKind(kind = 'terrain') {
+        const ids = this.devices.filter((d) => (d.kind || 'lecture') === kind).map((d) => d.id);
+        ids.forEach((id) => this.remove(id));
+        return { ok: true, n: ids.length };
     }
     /** ↶ Annuler un retrait, dans les 10 secondes (ensuite, il faut autoriser l'appareil de nouveau). */
     undoRemove(id) {
@@ -450,7 +473,9 @@ class LanGate extends EventEmitter {
         if (!this.isOn || !this._peerOk(peer)) { req.socket.destroy(); return; }
         if (!this._hostOk(req)) { this._send(res, 421, { error: 'host' }); return; }
         let u;
-        try { u = new URL(String(req.url || '/'), 'http://gate.invalid'); } catch { this._send(res, 400, { error: 'url' }); return; }
+        const raw = String(req.url || '/');
+        if (!raw.startsWith('/') || raw.startsWith('//')) { this._send(res, 400, { error: 'url' }); return; } // « //hôte/… » se lirait comme un autre hôte
+        try { u = new URL(raw, 'http://gate.invalid'); } catch { this._send(res, 400, { error: 'url' }); return; }
         const method = String(req.method || 'GET').toUpperCase();
         // une écriture vient de cette même adresse (une page d'un autre site ne peut pas écrire ici)
         const origin = req.headers.origin;
@@ -459,23 +484,83 @@ class LanGate extends EventEmitter {
         const dev = this._deviceFor(req);
         if (!dev) {
             if (method === 'GET' && (u.pathname === '/' || u.pathname === '/index.php')) { this._pairingPage(req, res); return; }
+            if (method === 'GET' && u.pathname === '/terrain') { this._pairingPage(req, res, true); return; } // 📱 le QR code du téléphone mène ici
             // les mots de la page « Demander l'accès » (assets/js/app-i18n.js les lit à cette adresse) : un dictionnaire, rien de la généalogie
             const m = u.pathname.match(/^\/assets\/i18n\/([a-z]{2})\.json$/);
             if (method === 'GET' && m) { this._asset(res, `i18n-${m[1]}.json`); return; }
             this._send(res, 401, { error: 'Cet appareil n’est pas autorisé.', lan_unknown: true });
             return;
         }
+        if (dev.kind === 'terrain') { this._terrain(req, res, dev, peer, u, method); return; }
         this._forward(req, res, dev, peer, u);
     }
 
-    _forward(req, res, dev, peer, u) {
+    /**
+     * 📱 Un téléphone de terrain : sa page, ses trois fichiers, les mots de la langue, et /terrain.php avec une action de la liste
+     * blanche et sa méthode. Tout le reste : 403 (rien n'est transmis à PHP).
+     */
+    _terrain(req, res, dev, peer, u, method) {
+        const t = now();
+        const hits = (this.rate.get(dev.id) || []).filter((x) => t - x < TERRAIN_RATE.ms);
+        hits.push(t); this.rate.set(dev.id, hits);
+        if (hits.length > TERRAIN_RATE.n) { req.resume(); this._send(res, 429, { error: 'flood', lan_terrain: true }, undefined, { 'Retry-After': String(Math.ceil(TERRAIN_RATE.ms / 1000)) }); return; }
+        const refuse = (status = 403, error = 'terrain') => { req.resume(); this._send(res, status, { error, lan_terrain: true }); };
+        // jamais une page d'un autre site (origine, page d'où vient le lien), même pour lire
+        const origin = req.headers.origin, referer = req.headers.referer;
+        if (origin !== undefined && origin !== this.url) { refuse(403, 'origin'); return; }
+        if (referer !== undefined && !String(referer).startsWith(this.url + '/')) { refuse(403, 'referer'); return; }
+        const p = u.pathname;
+        if (method === 'GET' && (p === '/' || p === '/terrain')) { this._seen(dev, peer); this._terrainPage(req, res); return; }
+        if (method === 'GET' && p.startsWith('/__lan/f/') && TERRAIN_FILES.includes(p.slice('/__lan/f/'.length))) { this._asset(res, p.slice('/__lan/f/'.length)); return; }
+        const m = p.match(/^\/assets\/i18n\/([a-z]{2})\.json$/);
+        if (method === 'GET' && m) { this._asset(res, `i18n-${m[1]}.json`); return; }
+        if (p !== '/terrain.php') { refuse(); return; }
+        const action = String(u.searchParams.get('action') || '');
+        if (!Object.prototype.hasOwnProperty.call(TERRAIN_ACTIONS, action)) { refuse(); return; }
+        if (TERRAIN_ACTIONS[action] !== method) { refuse(405, 'method'); return; }
+        if (method === 'POST') {
+            if (origin !== this.url) { refuse(403, 'origin'); return; } // une écriture : l'origine exacte est exigée (fetch l'envoie toujours)
+            if (req.headers['transfer-encoding'] !== undefined) { refuse(411, 'length'); return; }
+            const len = Number(req.headers['content-length']);
+            const max = action === 'deposit' ? TERRAIN_MAX_BODY : TERRAIN_SMALL_BODY;
+            if (req.headers['content-length'] === undefined || !Number.isFinite(len) || len < 0) { refuse(411, 'length'); return; }
+            if (len > max) { this._send(res, 413, { error: 'size', lan_terrain: true }, undefined, { Connection: 'close' }); req.socket.destroySoon?.(); return; }
+        }
+        // la demande transmise est refaite ici : seulement l'action et, pour la liste, le texte cherché (40 caractères au plus)
+        const q = new URLSearchParams({ action });
+        if (action === 'list') q.set('q', String(u.searchParams.get('q') || '').slice(0, 40));
+        // un dépôt : un formulaire de 5 parties au plus (csrf, batch, note, for, photo) ; au-delà, l'envoi est coupé avant PHP
+        let inspect = null;
+        if (action === 'deposit') {
+            const bm = String(req.headers['content-type'] || '').match(/^multipart\/form-data;\s*boundary=("?)([^";]{1,70})\1\s*$/i);
+            if (!bm) { refuse(415, 'type'); return; }
+            const mark = Buffer.from('\r\n--' + bm[2]);
+            let tail = Buffer.from('\r\n'), parts = 0;
+            inspect = (chunk) => {
+                const buf = Buffer.concat([tail, chunk]);
+                for (let i = buf.indexOf(mark); i >= 0; i = buf.indexOf(mark, i + mark.length)) if (i + mark.length > tail.length) parts++; // déjà comptée si elle tenait dans la fin d'avant
+                tail = buf.subarray(Math.max(0, buf.length - mark.length + 1));
+                return parts <= 6; // 5 parties et la marque de fin
+            };
+        }
+        this._forward(req, res, dev, peer, u, `/terrain.php?${q.toString()}`, (status) => { if (action === 'deposit' && status === 200) this.emit('terrain-deposit', { id: dev.id, name: dev.name }); }, inspect);
+    }
+    _seen(dev, peer) {
+        const t = now(), prev = this.seen.get(dev.id);
+        this.seen.set(dev.id, { at: t, ip: peer });
+        if (!prev || t - prev.at > 60000) { dev.lastSeen = t; dev.lastIp = peer; this._dirty = true; }
+        if (!prev) this.emit('device-connect', { id: dev.id, name: dev.name, ip: peer, kind: dev.kind });
+        if (!prev || t - prev.at > SEEN_MS) this.emit('change');
+    }
+
+    _forward(req, res, dev, peer, u, pathOverride, onDone, inspect) {
         this.sockets.set(req.socket, dev.id);
         const first = !this.seen.has(dev.id);
         const t = now();
         const prev = this.seen.get(dev.id);
         this.seen.set(dev.id, { at: t, ip: peer });
         if (!prev || t - prev.at > 60000) { dev.lastSeen = t; dev.lastIp = peer; this._dirty = true; }
-        if (first) this.emit('device-connect', { id: dev.id, name: dev.name, ip: peer });
+        if (first) this.emit('device-connect', { id: dev.id, name: dev.name, ip: peer, kind: dev.kind || 'lecture' });
         if (!prev || t - prev.at > SEEN_MS) this.emit('change');
         const target = this.o.server;
         const headers = {};
@@ -496,7 +581,8 @@ class LanGate extends EventEmitter {
         headers['x-carnet-device-name'] = encodeURIComponent(dev.name);
         headers['x-carnet-device-ip'] = peer;
         if (this.state.settings.password === 'obligatoire') headers['x-carnet-device-pw'] = '1';
-        const upstream = http.request({ host: '127.0.0.1', port: target.port, method: req.method, path: u.pathname + u.search, headers, agent: false }, (up) => {
+        headers['x-carnet-device-kind'] = dev.kind === 'terrain' ? 'terrain' : 'lecture'; // signé comme le reste (x-carnet-gate)
+        const upstream = http.request({ host: '127.0.0.1', port: target.port, method: req.method, path: pathOverride || (u.pathname + u.search), headers, agent: false }, (up) => {
             const out = {};
             for (const [k, v] of Object.entries(up.headers)) {
                 const key = k.toLowerCase();
@@ -507,10 +593,15 @@ class LanGate extends EventEmitter {
             out['x-frame-options'] = out['x-frame-options'] || 'SAMEORIGIN';
             res.writeHead(up.statusCode, out);
             up.pipe(res);
+            if (onDone) up.on('end', () => onDone(up.statusCode));
             up.on('error', () => res.destroy());
         });
         upstream.on('error', () => { if (!res.headersSent) this._send(res, 502, { error: 'PHP injoignable' }); else res.destroy(); });
         res.on('close', () => { if (!res.writableFinished) upstream.destroy(); });
+        if (inspect) { // lu au passage : à la première chose refusée, rien ne va plus loin (PHP voit un envoi coupé et n'enregistre rien)
+            let cut = false;
+            req.on('data', (c) => { if (!cut && !inspect(c)) { cut = true; req.unpipe(upstream); upstream.destroy(); if (!res.headersSent) this._send(res, 422, { error: 'parts', lan_terrain: true }, undefined, { Connection: 'close' }); req.resume(); } });
+        }
         req.pipe(upstream);
     }
 
@@ -529,6 +620,12 @@ class LanGate extends EventEmitter {
         const p = u.pathname;
         // les fichiers de la page (rien de la généalogie) : servis tels quels, liste fermée
         if (method === 'GET' && p.startsWith('/__lan/f/')) { this._asset(res, p.slice('/__lan/f/'.length)); return; }
+        if (p === '/__lan/demande' || p === '/__lan/etat') { // freine qui essaierait des numéros de demande ou des clés au hasard
+            const t = now(), hits = (this.pairRate.get(peer) || []).filter((x) => t - x < PAIR_RATE.ms);
+            hits.push(t); this.pairRate.set(peer, hits);
+            if (this.pairRate.size > 512) { for (const [k, v] of this.pairRate) if (!v.length || t - v[v.length - 1] > PAIR_RATE.ms) this.pairRate.delete(k); }
+            if (hits.length > PAIR_RATE.n) { req.resume(); this._send(res, 429, { error: 'flood' }, undefined, { 'Retry-After': '60' }); return; }
+        }
         if (method === 'POST' && p === '/__lan/demande') {
             const t = now();
             this._expire();
@@ -550,9 +647,10 @@ class LanGate extends EventEmitter {
             if ([...this.requests.values()].some((r) => r.ip === peer)) { this._send(res, 409, { error: 'pending' }); return; }
             if (this.requests.size >= MAX_PENDING) { this._send(res, 429, { error: 'busy' }); return; }
             if (this.state.settings.invite === 'demande') { this.invite.used = true; this.fails.invite = 0; }
-            const r = { id: crypto.randomBytes(12).toString('hex'), poll: crypto.randomBytes(24).toString('base64url'), name: cleanName(body.name) || 'Appareil', ip: peer, code: sixDigits(), at: t };
+            const r = { id: crypto.randomBytes(12).toString('hex'), poll: crypto.randomBytes(24).toString('base64url'), name: cleanName(body.name) || 'Appareil', ip: peer, code: sixDigits(), at: t,
+                wants: body.kind === 'terrain' ? 'terrain' : 'lecture' }; // seulement une proposition : la sorte se choisit sur l'ordinateur
             this.requests.set(r.id, r);
-            this.emit('request', { id: r.id, name: r.name, ip: r.ip, code: r.code, at: r.at });
+            this.emit('request', { id: r.id, name: r.name, ip: r.ip, code: r.code, at: r.at, wants: r.wants });
             this.emit('change');
             this._send(res, 200, { id: r.id, poll: r.poll, code: r.code, expires: r.at + REQUEST_MS });
             return;
@@ -585,6 +683,8 @@ class LanGate extends EventEmitter {
             'appairage.js': ['assets/js/app-reseau-appairage.js', 'text/javascript; charset=utf-8'],
             'appairage.css': ['assets/css/reseau-local.css', 'text/css; charset=utf-8'],
             'i18n.js': ['assets/js/app-i18n.js', 'text/javascript; charset=utf-8'],
+            'terrain.js': ['assets/js/app-terrain.js', 'text/javascript; charset=utf-8'],     // 📱 la page du téléphone de terrain
+            'terrain.css': ['assets/css/terrain.css', 'text/css; charset=utf-8'],
         };
         let file = allowed[name];
         const m = String(name).match(/^i18n-([a-z]{2})\.json$/);
@@ -596,14 +696,24 @@ class LanGate extends EventEmitter {
         });
     }
 
-    _pairingPage(req, res) {
+    /** @param {boolean} [terrain] le QR code « ＋ Ajouter un téléphone de terrain » : la demande propose cette sorte, puis la page du téléphone */
+    _pairingPage(req, res, terrain = false) {
         const lang = this._lang(req.headers['accept-language']);
         const html = `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="no-referrer"><title>🖧 LCNDA</title><link rel="stylesheet" href="/__lan/f/appairage.css">
-<script>window.LCNDA_I18N_FIRST=${JSON.stringify(lang)};window.LCNDA_LAN_PAIR={invite:${this.state.settings.invite === 'demande' ? 'true' : 'false'}};</script>
+<script>window.LCNDA_I18N_FIRST=${JSON.stringify(lang)};window.LCNDA_LAN_PAIR={invite:${this.state.settings.invite === 'demande' ? 'true' : 'false'},terrain:${terrain ? 'true' : 'false'}};</script>
 <script src="/__lan/f/i18n.js"></script></head><body class="lan-pair-body"><main id="lan-pair" class="lan-pair"></main>
 <script src="/__lan/f/appairage.js"></script></body></html>`;
         this._send(res, 200, html, 'text/html; charset=utf-8', { 'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'none'" });
+    }
+    /** 📱 La page du téléphone de terrain (rien de la généalogie dedans : elle lit son état par /terrain.php). */
+    _terrainPage(req, res) {
+        const lang = this._lang(req.headers['accept-language']);
+        const html = `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="referrer" content="no-referrer"><meta name="theme-color" content="#2f5d8a"><title>📱 LCNDA</title>
+<link rel="stylesheet" href="/__lan/f/terrain.css"><script>window.LCNDA_I18N_FIRST=${JSON.stringify(lang)};</script>
+<script src="/__lan/f/i18n.js"></script></head><body class="tw-body"><main id="tw" class="tw"></main><script src="/__lan/f/terrain.js"></script></body></html>`;
+        this._send(res, 200, html, 'text/html; charset=utf-8', { 'Content-Security-Policy': "default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; connect-src 'self'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'" });
     }
     _lang(accept) {
         const codes = ['fr', 'en', 'es', 'de', 'it', 'pt', 'pl', 'nl', 'cs', 'sv', 'da', 'sk', 'nb', 'ro', 'fi', 'hu', 'hr', 'sl', 'lt', 'lv', 'et', 'is', 'tr', 'lb', 'sq', 'mt', 'vi', 'id', 'ru', 'uk', 'el', 'bg'];
@@ -615,4 +725,4 @@ class LanGate extends EventEmitter {
     }
 }
 
-module.exports = { LanGate, SETTINGS, defaultSettings, isPrivateAddress, sameNetwork, pickLanAddress, normalizeIp, cleanName, COOKIE, REQUEST_MS, INVITE_MS, PAUSE_MS, MAX_FAILS };
+module.exports = { LanGate, TERRAIN_ACTIONS, TERRAIN_RATE, TERRAIN_MAX_BODY, SETTINGS, defaultSettings, isPrivateAddress, sameNetwork, pickLanAddress, normalizeIp, cleanName, COOKIE, REQUEST_MS, INVITE_MS, PAUSE_MS, MAX_FAILS };

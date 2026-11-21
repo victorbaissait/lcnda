@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 100;
+const SCHEMA_VERSION = 101;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -121,6 +121,7 @@ function migration_steps(): array
         98 => 'schema_v98',
         99 => 'schema_v99',
         100 => 'schema_v100',
+        101 => 'schema_v101',
     ];
 }
 
@@ -2702,4 +2703,16 @@ function schema_v100(PDO $pdo): void
 {
     if (!function_exists('calc_gen_install')) { require_once __DIR__ . '/calc_cache.php'; }
     calc_gen_install($pdo);
+}
+
+/**
+ * Structure n°101 : 📱 le téléphone par le wifi (lib/telephone_wifi.php, maquette docs/design/telephone-wifi.html) : la boîte
+ * « 📥 À trier » (phone_inbox), où arrivent les photos déposées par un téléphone de terrain, hors de l'arbre tant qu'on ne les
+ * relie pas. Les fichiers eux-mêmes sont dans le dossier de données (a-trier/), jamais servis tels quels. Sans risque si on
+ * la rejoue (CREATE … IF NOT EXISTS).
+ */
+function schema_v101(PDO $pdo): void
+{
+    if (!function_exists('tw_schema')) { require_once __DIR__ . '/telephone_wifi.php'; }
+    tw_schema($pdo);
 }

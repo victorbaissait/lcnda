@@ -348,7 +348,7 @@ function lanEmit(type, data = {}) { if (win && !win.isDestroyed()) win.webConten
 /** 📜 un geste de la porte au registre « Qui a vu quoi » (second secret : seul ce processus peut l'écrire) */
 function lanNote(kind, o = {}) {
   if (!server) return;
-  const q = new URLSearchParams({ action: 'lan_note', kind, label: String(o.label || ''), what: String(o.what || ''), device: String(o.device || '') });
+  const q = new URLSearchParams({ action: 'lan_note', kind, label: String(o.label || ''), what: String(o.what || ''), device: String(o.device || ''), ...(o.dev ? { dev: String(o.dev) } : {}) });
   server.request('/api.php?' + q.toString(), { timeout: 15000, headers: { 'x-carnet-local': server.localSecret } }).catch(() => {});
 }
 /** La généalogie ouverte a-t-elle un mot de passe ? (réglage conseillé : obligatoire pour l'ouvrir au réseau) */
@@ -381,7 +381,9 @@ function setupLan(p) {
   gate.on('network-changed', (r) => lanEmit('network-changed', r));
   gate.on('device-added', (d) => lanNote('lan_ok', { label: d.name }));
   gate.on('request-refused', (d) => lanNote('lan_refuse', { label: d.name }));
-  gate.on('device-removed', (d) => lanNote('lan_remove', { label: d.name }));
+  gate.on('device-removed', (d) => lanNote('lan_remove', { label: d.name, ...(d.kind === 'terrain' ? { dev: d.id, what: 'terrain' } : {}) })); // 📱 ses photos : réglage « Retirer un téléphone »
+  gate.on('device-added', (d) => { if (d.kind === 'terrain') lanEmit('change'); });
+  gate.on('terrain-deposit', (d) => lanEmit('deposit', { name: d.name })); // 📥 À trier : la pastille se met à jour
   gate.on('device-connect', (d) => lanNote('lan_connect', { device: d.name }));
   gate.on('close', ({ reason }) => { lanNote('lan_close', { what: reason }); lanBlockerUpdate(); });
   // gate.sleep() regarde gate.isOn (et non gate.on, la méthode d'EventEmitter, toujours « vraie ») : avant, chaque mise en veille
@@ -410,10 +412,11 @@ ipcMain.handle('lcnda:reseau', async (event, cmd, arg) => {
     case 'open': return lanOpen();
     case 'close': await gate.close('main'); return { ok: true };
     case 'invite': return gate.newInvite();
-    case 'accept': return gate.accept(id);
+    case 'accept': return gate.accept(id, ['lecture', 'terrain'].includes(arg && arg.kind) ? arg.kind : undefined);
     case 'refuse': return gate.refuse(id);
     case 'remove': return gate.remove(id);
     case 'undo-remove': return gate.undoRemove(id);
+    case 'remove-phones': return gate.removeKind('terrain'); // ⏻ Retirer tous les téléphones
     case 'settings': return { ok: true, settings: gate.setSettings(arg && typeof arg === 'object' ? arg : {}) };
     default: return { ok: false, error: 'Refusé' };
   }
