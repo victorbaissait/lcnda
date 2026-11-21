@@ -7514,7 +7514,8 @@ function import_package(PDO $pdo, ?array $file): never
     $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
     $existingPersons = (int) $pdo->query('SELECT count(*) FROM persons')->fetchColumn();
     @set_time_limit(0); // un gros paquet (photos) peut dépasser les 300 s par défaut
-    memory_at_least(4096); // un GEDCOM de 100 000 personnes est lu en entier : ≈ 2 Go (au-delà du réglage habituel de 1 Go)
+    // un GEDCOM est lu en entier : 🐘 environ 16 fois sa taille en mémoire (200 000 fiches, 128 Mo : 2 Go) ; au moins 4 Go, 8 Go au plus
+    memory_at_least((int) min(8192, max(4096, ceil((float) @filesize((string) $file['tmp_name']) / 1048576 * 20))));
 
     $receipt = import_receipt_begin($pdo); // ce que l'import ajoute : pour « ↶ Annuler » (lib/imports.php)
     $pdo->beginTransaction();
@@ -7580,7 +7581,7 @@ function gedimport_parse(string $text): array
 {
     $root = [];
     $stack = [];
-    $tags = []; // une seule copie de chaque balise (NAME, DATE, PLAC…)
+    $tags = []; $vals = []; // une seule copie de chaque balise (NAME, DATE, PLAC…) et de chaque valeur courte
     // les lignes une à une (plus de tableau de toutes les lignes) : strtok rend les suites de caractères entre deux fins de
     // ligne (\r, \n), c'est-à-dire exactement les lignes non vides du découpage d'avant (les lignes vides étaient sautées)
     for ($raw = strtok($text, "\r\n"); $raw !== false; $raw = strtok("\r\n")) {
@@ -7593,7 +7594,10 @@ function gedimport_parse(string $text): array
         $node->xref = $m[2] !== '' ? trim($m[2], "@ ") : null;
         $tg = strtoupper($m[3]);
         $node->tag = $tags[$tg] ??= $tg;
-        $node->value = $m[4];
+        // une valeur courte qui revient (lieu, date, prénom, « Y ») : une seule copie en mémoire ; « s » devant la clé, pour qu'un
+        // texte comme « 1850 » reste une clé de texte
+        $v = $m[4];
+        if (strlen($v) <= 48) { $node->value = $vals['s' . $v] ??= $v; if (count($vals) > 2000000) { $vals = []; } } else { $node->value = $v; }
         $node->children = [];
         if ($level === 0) {
             $root[] = $node;
