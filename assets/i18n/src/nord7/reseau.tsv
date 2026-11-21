@@ -1,0 +1,114 @@
+fr ¦ is
+# Zone « reseau » : 🖧 plusieurs ordinateurs de la maison
+conseillé ¦ mælt með
+connecté maintenant ¦ tengt núna
+jamais venu ¦ aldrei tengt
+Plusieurs ordinateurs ¦ Fleiri tölvur
+Ouvrir cette généalogie aux autres ordinateurs de la maison, par le wifi, jamais par internet. ¦ Opna þessa ættfræði fyrir hinum tölvunum á heimilinu, um þráðlausa netið, aldrei um internetið.
+Ce réglage ne se change que sur l’ordinateur principal : cet appareil est un appareil invité, en lecture seule. ¦ Þessari stillingu er aðeins breytt á aðaltölvunni: þetta tæki er gestatæki, aðeins til lestrar.
+Seulement dans l’app de bureau LCNDA, sur l’ordinateur qui garde la généalogie. ¦ Aðeins í LCNDA-skjáborðsforritinu, á tölvunni sem geymir ættfræðina.
+⏻ Tout couper maintenant ¦ ⏻ Rjúfa allt núna
+↻ Nouveau code ¦ ↻ Nýr kóði
+Ouvrir « {name} » aux autres ordinateurs de la maison ¦ Opna „{name}“ fyrir hinum tölvunum á heimilinu
+Ouvert depuis {time}. Se coupe si cet ordinateur se met en veille, change de réseau ou ferme l’app. ¦ Opið síðan {time}. Rofnar ef þessi tölva fer í svefn, skiptir um net eða lokar forritinu.
+Coupé : l’app ne répond qu’à cet ordinateur (comme aujourd’hui). ¦ Slökkt: forritið svarar aðeins þessari tölvu (eins og í dag).
+Avant d’ouvrir : cette généalogie n’a pas de mot de passe. Il en faut un pour l’ouvrir au réseau. ¦ Áður en þú opnar: þessi ættfræði er ekki með lykilorð. Hún þarf eitt til að opnast á netinu.
+🔐 En mettre un ¦ 🔐 Setja lykilorð
+Cet ordinateur n’est relié à aucun réseau de la maison (adresse privée introuvable) : branche le wifi, puis réessaie. ¦ Þessi tölva er ekki tengd neinu heimaneti (ekkert einkavistfang fannst): kveiktu á þráðlausa netinu og reyndu aftur.
+5 codes d’invitation faux : plus aucune demande jusqu’à {time}. ¦ 5 rangir boðskóðar: engar fleiri beiðnir fyrr en {time}.
+5 demandes refusées : plus aucune demande jusqu’à {time}. ¦ 5 beiðnum hafnað: engar fleiri beiðnir fyrr en {time}.
+Le réseau a changé : tout a été coupé. ¦ Netið hefur breyst: allt hefur verið rofið.
+Adresse à taper sur l’autre ordinateur ¦ Vistfang til að slá inn á hinni tölvunni
+Code d’invitation (valable 10 min, une seule fois) ¦ Boðskóði (gildir í 10 mín, aðeins einu sinni)
+Sur l’autre ordinateur : ouvre un navigateur (Chrome, Firefox, Safari, Edge), tape cette adresse, puis le code. Ensuite, c’est toi qui acceptes ici, en comparant le code à 6 chiffres affiché des deux côtés. ¦ Á hinni tölvunni: opnaðu vafra (Chrome, Firefox, Safari, Edge), sláðu inn þetta vistfang og síðan kóðann. Svo samþykkir þú hér með því að bera saman 6 stafa kóðann sem birtist á báðum stöðum.
+Demandes d’accès ¦ Aðgangsbeiðnir
+✓ Autoriser ¦ ✓ Leyfa
+Appareils autorisés ¦ Leyfð tæki
+Tous les appareils invités sont en lecture seule : ils regardent la généalogie, rien ne peut être modifié depuis eux. ¦ Öll gestatæki eru aðeins til lestrar: þau skoða ættfræðina, engu er hægt að breyta úr þeim.
+Ce qu’il faut savoir ¦ Gott að vita
+🧱 La première fois, Windows (« Autoriser LCNDA sur les réseaux privés ? ») ou macOS (« Accepter les connexions entrantes ? ») pose la question : réponds oui, et sous Windows seulement pour les réseaux privés. ¦ 🧱 Í fyrsta skiptið spyr Windows („Leyfa LCNDA á einkanetum?“) eða macOS („Samþykkja innkomnar tengingar?“): svaraðu já, og í Windows aðeins fyrir einkanet.
+📶 Dans cette version, ce qui passe dans le wifi n’est pas chiffré : n’ouvre que sur le wifi de la maison, protégé par sa clé, jamais sur un wifi d’hôtel, de gare ou de médiathèque. ¦ 📶 Í þessari útgáfu er það sem fer um þráðlausa netið ekki dulkóðað: opnaðu aðeins á þráðlausa netinu heima, sem er varið með lykli, aldrei á neti á hóteli, stöð eða bókasafni.
+🖥 Cet ordinateur doit rester allumé, avec LCNDA ouvert : s’il dort ou que tu fermes l’app, les autres ne voient plus rien. ¦ 🖥 Þessi tölva verður að vera í gangi með LCNDA opið: ef hún sefur eða þú lokar forritinu sjá hinir ekkert lengur.
+autorisé le {date} ¦ leyft {date}
+lecture seule ¦ aðeins lestur
+jusqu’au {date} ¦ til {date}
+pour cette fois seulement ¦ aðeins í þetta sinn
+Pas vu depuis plus de 30 jours : le retirer ? ¦ Ekki sést í meira en 30 daga: fjarlægja það?
+Aucun appareil autorisé pour l’instant. ¦ Ekkert leyft tæki ennþá.
+Aucun appareil ne correspond. ¦ Ekkert tæki passar.
+Appareils : {n} · connectés : {c} ¦ Tæki: {n} · tengd: {c}
+Chercher un appareil… ¦ Leita að tæki…
+La porte du wifi n’a pas pu s’ouvrir (pare-feu, ou adresse déjà prise). Réessaie dans un instant. ¦ Ekki tókst að opna dyr þráðlausa netsins (eldveggur, eða vistfangið er þegar í notkun). Reyndu aftur eftir smástund.
+Cette demande n’existe plus (refusée, ou plus de 2 minutes sans réponse). ¦ Þessi beiðni er ekki lengur til (hafnað, eða meira en 2 mínútur án svars).
+Trop tard pour annuler : autorise l’appareil de nouveau. ¦ Of seint að afturkalla: leyfðu tækið aftur.
+🖧 Ouvert aux ordinateurs de la maison. ¦ 🖧 Opið fyrir tölvum heimilisins.
+🖧 Coupé : l’app ne répond plus qu’à cet ordinateur. ¦ 🖧 Slökkt: forritið svarar nú aðeins þessari tölvu.
+Adresse copiée ¦ Vistfang afritað
+✓ « {name} » retiré : il ne peut plus se connecter. ¦ ✓ „{name}“ fjarlægt: það getur ekki lengur tengst.
+« {name} » peut de nouveau se connecter. ¦ „{name}“ getur tengst aftur.
+Réglage enregistré ¦ Stilling vistuð
+Demande refusée. ¦ Beiðni hafnað.
+✓ « {name} » autorisé, en lecture seule. ¦ ✓ „{name}“ leyft, aðeins til lestrar.
+Demande d’accès ¦ Aðgangsbeiðni
+Un appareil veut ouvrir « {name} » ¦ Tæki vill opna „{name}“
+Nom donné ¦ Uppgefið nafn
+(il peut être faux : compare le code) ¦ (það getur verið rangt: berðu saman kóðann)
+Code affiché ¦ Birtur kóði
+Regarde l’écran de l’appareil : il doit montrer le même code. Sinon, refuse. ¦ Skoðaðu skjá tækisins: hann verður að sýna sama kóða. Annars skaltu hafna.
+Ce qu’il pourra faire : 👁 lecture seule (rien ne peut être modifié depuis cet appareil). Il devra aussi donner le mot de passe de la généalogie. ¦ Það sem það má gera: 👁 aðeins lestur (engu er hægt að breyta úr þessu tæki). Það þarf líka að gefa upp lykilorð ættfræðinnar.
+Sans réponse en 2 minutes, la demande disparaît toute seule (refusée). ¦ Án svars innan 2 mínútna hverfur beiðnin sjálfkrafa (hafnað).
+✓ Autoriser « {name} » ¦ ✓ Leyfa „{name}“
+Ouvert aux ordinateurs de la maison · appareils connectés : {n} ¦ Opið fyrir tölvum heimilisins · tengd tæki: {n}
+🖧 Rouvrir sur ce réseau ¦ 🖧 Opna aftur á þessu neti
+Autre ordinateur ¦ Önnur tölva
+Se connecter ¦ Tengjast
+Se connecter à l’ordinateur principal ¦ Tengjast aðaltölvunni
+Cet appareil n’est pas encore autorisé. Demande l’accès : c’est sur l’ordinateur principal qu’on l’accepte. ¦ Þetta tæki er ekki leyft ennþá. Biddu um aðgang: hann er samþykktur á aðaltölvunni.
+Nom de cet appareil ¦ Nafn þessa tækis
+Code d’invitation ¦ Boðskóði
+(affiché sur l’ordinateur principal) ¦ (birtur á aðaltölvunni)
+Demander l’accès ¦ Biðja um aðgang
+Donne un nom à cet appareil. ¦ Gefðu þessu tæki nafn.
+L’ordinateur principal ne répond pas (en veille, éteint, ou porte coupée). ¦ Aðaltölvan svarar ekki (í svefni, slökkt eða dyrunum lokað).
+Code d’invitation faux ou périmé. Demande le code affiché sur l’ordinateur principal. ¦ Boðskóðinn er rangur eða útrunninn. Biddu um kóðann sem birtist á aðaltölvunni.
+Trop d’essais : réessaie dans {n} min. ¦ Of margar tilraunir: reyndu aftur eftir {n} mín.
+Une demande de cet appareil attend déjà sa réponse. ¦ Beiðni frá þessu tæki bíður þegar svars.
+Trop de demandes en même temps : réessaie dans un instant. ¦ Of margar beiðnir í einu: reyndu aftur eftir smástund.
+Va sur l’ordinateur principal et vérifie qu’il affiche ce code : ¦ Farðu að aðaltölvunni og athugaðu að hún sýni þennan kóða:
+Ouverture de la généalogie… Elle demande ensuite son mot de passe : il est vérifié par l’ordinateur principal, jamais gardé ici. ¦ Ættfræðin opnast… Síðan biður hún um lykilorðið sitt: aðaltölvan athugar það, það er aldrei geymt hér.
+La demande a expiré (2 minutes sans réponse). Recommence. ¦ Beiðnin rann út (2 mínútur án svars). Byrjaðu aftur.
+<strong>Appareil invité « {name} »</strong> : lecture seule. La généalogie reste sur l’ordinateur principal ; rien ne peut être modifié depuis cet appareil. ¦ <strong>Gestatæki „{name}“</strong>: aðeins lestur. Ættfræðin er áfram á aðaltölvunni; engu er hægt að breyta úr þessu tæki.
+Appareil ¦ Tæki
+Il faut un mot de passe ¦ Lykilorð vantar
+Cette généalogie n’a pas de mot de passe : elle ne s’ouvre pas sur un autre appareil. Sur l’ordinateur principal : Réglages → 🔐 Mot de passe de cette généalogie. ¦ Þessi ættfræði er ekki með lykilorð: hún opnast ekki á öðru tæki. Á aðaltölvunni: Stillingar → 🔐 Lykilorð þessarar ættfræði.
+Appareil invité « {name} » : lecture seule. ¦ Gestatæki „{name}“: aðeins lestur.
+Au prochain lancement de l’app ¦ Næst þegar forritið ræsist
+reste coupé, il faut le rouvrir ¦ helst slökkt, það þarf að opna aftur
+se rouvre tout seul ¦ opnast aftur sjálfkrafa
+Après une mise en veille ¦ Eftir svefn
+se rouvre au réveil si l’app est restée ouverte ¦ opnast aftur við vöknun ef forritið var opið
+reste coupé ¦ helst slökkt
+Mot de passe de la généalogie ¦ Lykilorð ættfræðinnar
+obligatoire pour ouvrir au réseau ¦ skylda til að opna á netinu
+facultatif (déconseillé) ¦ valfrjálst (ekki mælt með)
+demandé en plus du code à 6 chiffres ¦ beðið um auk 6 stafa kóðans
+seulement le code à 6 chiffres ¦ aðeins 6 stafa kóðinn
+Durée d’un accès ¦ Lengd aðgangs
+jusqu’à ce que tu le retires ¦ þar til þú fjarlægir það
+Empêcher la veille tant qu’un appareil est connecté ¦ Koma í veg fyrir svefn á meðan tæki er tengt
+oui (cet ordinateur ne s’endort plus) ¦ já (þessi tölva sofnar ekki lengur)
+Si cet ordinateur change de réseau ¦ Ef þessi tölva skiptir um net
+tout couper ¦ rjúfa allt
+tout couper, puis demander s’il faut rouvrir ¦ rjúfa allt og spyrja svo hvort eigi að opna aftur
+Appareil pas vu depuis 30 jours ¦ Tæki sem hefur ekki sést í 30 daga
+proposer de le retirer ¦ bjóðast til að fjarlægja það
+Ouvert au réseau de la maison ¦ Opnað fyrir heimanetinu
+Fermé au réseau de la maison ¦ Lokað fyrir heimanetinu
+Appareil autorisé ¦ Tæki leyft
+Demande d’accès refusée ¦ Aðgangsbeiðni hafnað
+Appareil retiré ¦ Tæki fjarlægt
+Connexion en lecture seule ¦ Tenging aðeins til lestrar
+en quittant l’app ¦ þegar forritinu er lokað
+mise en veille ¦ svefn
+le réseau a changé ¦ netið breyttist
+Appareil invité : lecture seule. Cela ne se fait que sur l’ordinateur principal. ¦ Gestatæki: aðeins lestur. Þetta er aðeins gert á aðaltölvunni.

@@ -1,0 +1,114 @@
+fr ¦ lt ¦ lv ¦ et
+# Zone « reseau » : 🖧 plusieurs ordinateurs de la maison
+conseillé ¦ rekomenduojama ¦ ieteicams ¦ soovitatav
+connecté maintenant ¦ prisijungęs dabar ¦ pievienots tagad ¦ praegu ühendatud
+jamais venu ¦ niekada neprisijungė ¦ nekad nav pievienojies ¦ pole kunagi ühendatud
+Plusieurs ordinateurs ¦ Keli kompiuteriai ¦ Vairāki datori ¦ Mitu arvutit
+Ouvrir cette généalogie aux autres ordinateurs de la maison, par le wifi, jamais par internet. ¦ Atverk šią genealogiją kitiems namų kompiuteriams per wifi, niekada per internetą. ¦ Atver šo ģenealoģiju citiem mājas datoriem caur wifi, nekad caur internetu. ¦ Ava see sugupuu kodu teistele arvutitele wifi kaudu, mitte kunagi interneti kaudu.
+Ce réglage ne se change que sur l’ordinateur principal : cet appareil est un appareil invité, en lecture seule. ¦ Šis nustatymas keičiamas tik pagrindiniame kompiuteryje: šis įrenginys yra svečio įrenginys, tik skaityti. ¦ Šo iestatījumu maina tikai galvenajā datorā: šī ierīce ir viesa ierīce, tikai lasīšanai. ¦ Seda seadet muudetakse ainult põhiarvutis: see seade on külalisseade, ainult lugemiseks.
+Seulement dans l’app de bureau LCNDA, sur l’ordinateur qui garde la généalogie. ¦ Tik LCNDA darbalaukio programoje, kompiuteryje, kuriame saugoma genealogija. ¦ Tikai LCNDA darbvirsmas lietotnē, datorā, kurā glabājas ģenealoģija. ¦ Ainult LCNDA töölauarakenduses, arvutis, kus sugupuu asub.
+⏻ Tout couper maintenant ¦ ⏻ Viską atjungti dabar ¦ ⏻ Atslēgt visu tagad ¦ ⏻ Katkesta kõik kohe
+↻ Nouveau code ¦ ↻ Naujas kodas ¦ ↻ Jauns kods ¦ ↻ Uus kood
+Ouvrir « {name} » aux autres ordinateurs de la maison ¦ Atverti „{name}“ kitiems namų kompiuteriams ¦ Atvērt “{name}” citiem mājas datoriem ¦ Ava „{name}” kodu teistele arvutitele
+Ouvert depuis {time}. Se coupe si cet ordinateur se met en veille, change de réseau ou ferme l’app. ¦ Atverta nuo {time}. Atsijungia, jei šis kompiuteris užmiega, pakeičia tinklą arba uždaro programą. ¦ Atvērts kopš {time}. Atslēdzas, ja šis dators pāriet miega režīmā, maina tīklu vai aizver lietotni. ¦ Avatud alates {time}. Katkeb, kui see arvuti läheb unerežiimi, vahetab võrku või sulgeb rakenduse.
+Coupé : l’app ne répond qu’à cet ordinateur (comme aujourd’hui). ¦ Išjungta: programa atsako tik šiam kompiuteriui (kaip šiandien). ¦ Izslēgts: lietotne atbild tikai šim datoram (kā šodien). ¦ Väljas: rakendus vastab ainult sellele arvutile (nagu praegu).
+Avant d’ouvrir : cette généalogie n’a pas de mot de passe. Il en faut un pour l’ouvrir au réseau. ¦ Prieš atveriant: ši genealogija neturi slaptažodžio. Jo reikia, kad būtų galima atverti tinkle. ¦ Pirms atvēršanas: šai ģenealoģijai nav paroles. Tā ir vajadzīga, lai to atvērtu tīklā. ¦ Enne avamist: sellel sugupuul pole parooli. Võrgus avamiseks on seda vaja.
+🔐 En mettre un ¦ 🔐 Nustatyti slaptažodį ¦ 🔐 Iestatīt paroli ¦ 🔐 Määra parool
+Cet ordinateur n’est relié à aucun réseau de la maison (adresse privée introuvable) : branche le wifi, puis réessaie. ¦ Šis kompiuteris neprijungtas prie jokio namų tinklo (privatus adresas nerastas): įjunk wifi ir bandyk dar kartą. ¦ Šis dators nav pievienots nevienam mājas tīklam (privātā adrese nav atrasta): ieslēdz wifi un mēģini vēlreiz. ¦ See arvuti pole ühendatud ühegi koduvõrguga (privaatset aadressi ei leitud): lülita wifi sisse ja proovi uuesti.
+5 codes d’invitation faux : plus aucune demande jusqu’à {time}. ¦ 5 neteisingi kvietimo kodai: daugiau jokių užklausų iki {time}. ¦ 5 nepareizi ielūguma kodi: vairs nekādu pieprasījumu līdz {time}. ¦ 5 valet kutsekoodi: rohkem taotlusi kuni {time} ei võeta.
+5 demandes refusées : plus aucune demande jusqu’à {time}. ¦ 5 atmestos užklausos: daugiau jokių užklausų iki {time}. ¦ 5 noraidīti pieprasījumi: vairs nekādu pieprasījumu līdz {time}. ¦ 5 taotlust keeldutud: rohkem taotlusi kuni {time} ei võeta.
+Le réseau a changé : tout a été coupé. ¦ Tinklas pasikeitė: viskas atjungta. ¦ Tīkls ir mainījies: viss ir atslēgts. ¦ Võrk on muutunud: kõik on katkestatud.
+Adresse à taper sur l’autre ordinateur ¦ Adresas, kurį reikia įvesti kitame kompiuteryje ¦ Adrese, kas jāieraksta otrā datorā ¦ Aadress, mis tuleb teises arvutis sisestada
+Code d’invitation (valable 10 min, une seule fois) ¦ Kvietimo kodas (galioja 10 min, tik vieną kartą) ¦ Ielūguma kods (derīgs 10 min, tikai vienu reizi) ¦ Kutsekood (kehtib 10 min, ainult üks kord)
+Sur l’autre ordinateur : ouvre un navigateur (Chrome, Firefox, Safari, Edge), tape cette adresse, puis le code. Ensuite, c’est toi qui acceptes ici, en comparant le code à 6 chiffres affiché des deux côtés. ¦ Kitame kompiuteryje: atverk naršyklę (Chrome, Firefox, Safari, Edge), įvesk šį adresą, tada kodą. Paskui čia priimi tu, palyginęs abiejose pusėse rodomą 6 skaitmenų kodą. ¦ Otrā datorā: atver pārlūku (Chrome, Firefox, Safari, Edge), ieraksti šo adresi un pēc tam kodu. Pēc tam tu pieņem šeit, salīdzinot 6 ciparu kodu, kas redzams abās pusēs. ¦ Teises arvutis: ava brauser (Chrome, Firefox, Safari, Edge), sisesta see aadress ja siis kood. Seejärel kinnitad sina siin, võrreldes mõlemal pool kuvatud 6-kohalist koodi.
+Demandes d’accès ¦ Prieigos užklausos ¦ Piekļuves pieprasījumi ¦ Juurdepääsutaotlused
+✓ Autoriser ¦ ✓ Leisti ¦ ✓ Atļaut ¦ ✓ Luba
+Appareils autorisés ¦ Leisti įrenginiai ¦ Atļautās ierīces ¦ Lubatud seadmed
+Tous les appareils invités sont en lecture seule : ils regardent la généalogie, rien ne peut être modifié depuis eux. ¦ Visi svečių įrenginiai skirti tik skaityti: jie žiūri genealogiją, iš jų nieko negalima pakeisti. ¦ Visas viesu ierīces ir tikai lasīšanai: tās skatās ģenealoģiju, no tām neko nevar mainīt. ¦ Kõik külalisseadmed on ainult lugemiseks: nad vaatavad sugupuud, neist ei saa midagi muuta.
+Ce qu’il faut savoir ¦ Ką reikia žinoti ¦ Kas jāzina ¦ Mida tasub teada
+🧱 La première fois, Windows (« Autoriser LCNDA sur les réseaux privés ? ») ou macOS (« Accepter les connexions entrantes ? ») pose la question : réponds oui, et sous Windows seulement pour les réseaux privés. ¦ 🧱 Pirmą kartą Windows („Leisti LCNDA privačiuose tinkluose?“) arba macOS („Priimti gaunamus ryšius?“) paklausia: atsakyk taip, o Windows – tik privatiems tinklams. ¦ 🧱 Pirmajā reizē Windows (“Atļaut LCNDA privātos tīklos?”) vai macOS (“Pieņemt ienākošos savienojumus?”) uzdod jautājumu: atbildi jā, un Windows – tikai privātajiem tīkliem. ¦ 🧱 Esimesel korral küsib Windows („Kas lubada LCNDA privaatvõrkudes?”) või macOS („Kas lubada sissetulevad ühendused?”): vasta jah, Windowsis ainult privaatvõrkude jaoks.
+📶 Dans cette version, ce qui passe dans le wifi n’est pas chiffré : n’ouvre que sur le wifi de la maison, protégé par sa clé, jamais sur un wifi d’hôtel, de gare ou de médiathèque. ¦ 📶 Šioje versijoje tai, kas eina per wifi, nėra šifruojama: atverk tik namų wifi, apsaugotame raktu, niekada viešbučio, stoties ar bibliotekos wifi. ¦ 📶 Šajā versijā tas, kas iet caur wifi, nav šifrēts: atver tikai mājas wifi, kas aizsargāts ar atslēgu, nekad viesnīcas, stacijas vai bibliotēkas wifi. ¦ 📶 Selles versioonis pole wifi kaudu liikuv info krüpteeritud: ava ainult kodu wifis, mis on võtmega kaitstud, mitte kunagi hotelli, jaama või raamatukogu wifis.
+🖥 Cet ordinateur doit rester allumé, avec LCNDA ouvert : s’il dort ou que tu fermes l’app, les autres ne voient plus rien. ¦ 🖥 Šis kompiuteris turi likti įjungtas, su atverta LCNDA: jei jis užmiega arba uždarai programą, kiti nieko nebemato. ¦ 🖥 Šim datoram jāpaliek ieslēgtam ar atvērtu LCNDA: ja tas guļ vai tu aizver lietotni, pārējie vairs neko neredz. ¦ 🖥 See arvuti peab jääma sisse, LCNDA avatuna: kui see magab või sa sulged rakenduse, ei näe teised enam midagi.
+autorisé le {date} ¦ leista {date} ¦ atļauts {date} ¦ lubatud {date}
+lecture seule ¦ tik skaityti ¦ tikai lasīšanai ¦ ainult lugemiseks
+jusqu’au {date} ¦ iki {date} ¦ līdz {date} ¦ kuni {date}
+pour cette fois seulement ¦ tik šį kartą ¦ tikai šoreiz ¦ ainult seekord
+Pas vu depuis plus de 30 jours : le retirer ? ¦ Nematytas daugiau nei 30 dienų: pašalinti? ¦ Nav redzēta vairāk nekā 30 dienas: noņemt? ¦ Pole nähtud üle 30 päeva: eemaldada?
+Aucun appareil autorisé pour l’instant. ¦ Kol kas nėra leistų įrenginių. ¦ Pagaidām nav atļautu ierīču. ¦ Lubatud seadmeid veel pole.
+Aucun appareil ne correspond. ¦ Neatitinka nė vienas įrenginys. ¦ Neviena ierīce neatbilst. ¦ Ükski seade ei sobi.
+Appareils : {n} · connectés : {c} ¦ Įrenginiai: {n} · prisijungę: {c} ¦ Ierīces: {n} · pievienotas: {c} ¦ Seadmed: {n} · ühendatud: {c}
+Chercher un appareil… ¦ Ieškoti įrenginio… ¦ Meklēt ierīci… ¦ Otsi seadet…
+La porte du wifi n’a pas pu s’ouvrir (pare-feu, ou adresse déjà prise). Réessaie dans un instant. ¦ Nepavyko atverti wifi durų (užkarda arba adresas jau užimtas). Bandyk dar kartą po akimirkos. ¦ Wifi durvis neizdevās atvērt (ugunsmūris vai adrese jau aizņemta). Mēģini vēlreiz pēc brīža. ¦ Wifi ust ei õnnestunud avada (tulemüür või aadress juba kasutusel). Proovi hetke pärast uuesti.
+Cette demande n’existe plus (refusée, ou plus de 2 minutes sans réponse). ¦ Šios užklausos nebėra (atmesta arba daugiau nei 2 minutes be atsakymo). ¦ Šī pieprasījuma vairs nav (noraidīts vai vairāk nekā 2 minūtes bez atbildes). ¦ Seda taotlust enam pole (keeldutud või üle 2 minuti vastuseta).
+Trop tard pour annuler : autorise l’appareil de nouveau. ¦ Per vėlu atšaukti: leisk įrenginį iš naujo. ¦ Par vēlu atsaukt: atļauj ierīci no jauna. ¦ Tühistamiseks on liiga hilja: luba seade uuesti.
+🖧 Ouvert aux ordinateurs de la maison. ¦ 🖧 Atverta namų kompiuteriams. ¦ 🖧 Atvērts mājas datoriem. ¦ 🖧 Avatud kodu arvutitele.
+🖧 Coupé : l’app ne répond plus qu’à cet ordinateur. ¦ 🖧 Išjungta: programa dabar atsako tik šiam kompiuteriui. ¦ 🖧 Izslēgts: lietotne tagad atbild tikai šim datoram. ¦ 🖧 Väljas: rakendus vastab nüüd ainult sellele arvutile.
+Adresse copiée ¦ Adresas nukopijuotas ¦ Adrese nokopēta ¦ Aadress kopeeritud
+✓ « {name} » retiré : il ne peut plus se connecter. ¦ ✓ „{name}“ pašalintas: nebegali prisijungti. ¦ ✓ “{name}” noņemta: vairs nevar pieslēgties. ¦ ✓ „{name}” eemaldatud: see ei saa enam ühenduda.
+« {name} » peut de nouveau se connecter. ¦ „{name}“ vėl gali prisijungti. ¦ “{name}” atkal var pieslēgties. ¦ „{name}” saab jälle ühenduda.
+Réglage enregistré ¦ Nustatymas išsaugotas ¦ Iestatījums saglabāts ¦ Seade salvestatud
+Demande refusée. ¦ Užklausa atmesta. ¦ Pieprasījums noraidīts. ¦ Taotlusest keelduti.
+✓ « {name} » autorisé, en lecture seule. ¦ ✓ „{name}“ leistas, tik skaityti. ¦ ✓ “{name}” atļauta, tikai lasīšanai. ¦ ✓ „{name}” lubatud, ainult lugemiseks.
+Demande d’accès ¦ Prieigos užklausa ¦ Piekļuves pieprasījums ¦ Juurdepääsutaotlus
+Un appareil veut ouvrir « {name} » ¦ Įrenginys nori atverti „{name}“ ¦ Ierīce vēlas atvērt “{name}” ¦ Seade soovib avada „{name}”
+Nom donné ¦ Nurodytas pavadinimas ¦ Norādītais nosaukums ¦ Antud nimi
+(il peut être faux : compare le code) ¦ (gali būti netikras: palygink kodą) ¦ (var būt neīsts: salīdzini kodu) ¦ (see võib olla vale: võrdle koodi)
+Code affiché ¦ Rodomas kodas ¦ Parādītais kods ¦ Kuvatud kood
+Regarde l’écran de l’appareil : il doit montrer le même code. Sinon, refuse. ¦ Pažiūrėk į įrenginio ekraną: jame turi būti tas pats kodas. Kitaip atmesk. ¦ Paskaties ierīces ekrānā: tajā jābūt tam pašam kodam. Citādi noraidi. ¦ Vaata seadme ekraani: see peab näitama sama koodi. Muidu keeldu.
+Ce qu’il pourra faire : 👁 lecture seule (rien ne peut être modifié depuis cet appareil). Il devra aussi donner le mot de passe de la généalogie. ¦ Ką jis galės daryti: 👁 tik skaityti (iš šio įrenginio nieko negalima pakeisti). Jam taip pat reikės įvesti genealogijos slaptažodį. ¦ Ko tā varēs darīt: 👁 tikai lasīt (no šīs ierīces neko nevar mainīt). Tai būs jāievada arī ģenealoģijas parole. ¦ Mida see teha saab: 👁 ainult lugeda (sellest seadmest ei saa midagi muuta). See peab andma ka sugupuu parooli.
+Sans réponse en 2 minutes, la demande disparaît toute seule (refusée). ¦ Jei per 2 minutes nėra atsakymo, užklausa dingsta savaime (atmesta). ¦ Ja 2 minūtēs nav atbildes, pieprasījums pazūd pats (noraidīts). ¦ Kui 2 minuti jooksul vastust pole, kaob taotlus ise (keeldutud).
+✓ Autoriser « {name} » ¦ ✓ Leisti „{name}“ ¦ ✓ Atļaut “{name}” ¦ ✓ Luba „{name}”
+Ouvert aux ordinateurs de la maison · appareils connectés : {n} ¦ Atverta namų kompiuteriams · prisijungę įrenginiai: {n} ¦ Atvērts mājas datoriem · pievienotās ierīces: {n} ¦ Avatud kodu arvutitele · ühendatud seadmed: {n}
+🖧 Rouvrir sur ce réseau ¦ 🖧 Vėl atverti šiame tinkle ¦ 🖧 Atvērt vēlreiz šajā tīklā ¦ 🖧 Ava uuesti selles võrgus
+Autre ordinateur ¦ Kitas kompiuteris ¦ Cits dators ¦ Teine arvuti
+Se connecter ¦ Prisijungti ¦ Pieslēgties ¦ Ühenda
+Se connecter à l’ordinateur principal ¦ Prisijungti prie pagrindinio kompiuterio ¦ Pieslēgties galvenajam datoram ¦ Ühenda põhiarvutiga
+Cet appareil n’est pas encore autorisé. Demande l’accès : c’est sur l’ordinateur principal qu’on l’accepte. ¦ Šis įrenginys dar neleistas. Paprašyk prieigos: ji priimama pagrindiniame kompiuteryje. ¦ Šī ierīce vēl nav atļauta. Pieprasi piekļuvi: to pieņem galvenajā datorā. ¦ See seade pole veel lubatud. Küsi juurdepääsu: see kinnitatakse põhiarvutis.
+Nom de cet appareil ¦ Šio įrenginio pavadinimas ¦ Šīs ierīces nosaukums ¦ Selle seadme nimi
+Code d’invitation ¦ Kvietimo kodas ¦ Ielūguma kods ¦ Kutsekood
+(affiché sur l’ordinateur principal) ¦ (rodomas pagrindiniame kompiuteryje) ¦ (redzams galvenajā datorā) ¦ (kuvatud põhiarvutis)
+Demander l’accès ¦ Paprašyti prieigos ¦ Pieprasīt piekļuvi ¦ Küsi juurdepääsu
+Donne un nom à cet appareil. ¦ Suteik šiam įrenginiui pavadinimą. ¦ Piešķir šai ierīcei nosaukumu. ¦ Anna sellele seadmele nimi.
+L’ordinateur principal ne répond pas (en veille, éteint, ou porte coupée). ¦ Pagrindinis kompiuteris neatsako (miega, išjungtas arba durys uždarytos). ¦ Galvenais dators neatbild (miega režīmā, izslēgts vai durvis aizvērtas). ¦ Põhiarvuti ei vasta (unerežiimis, väljas või uks suletud).
+Code d’invitation faux ou périmé. Demande le code affiché sur l’ordinateur principal. ¦ Kvietimo kodas neteisingas arba pasibaigęs. Paprašyk kodo, rodomo pagrindiniame kompiuteryje. ¦ Ielūguma kods ir nepareizs vai beidzies. Palūdz kodu, kas redzams galvenajā datorā. ¦ Kutsekood on vale või aegunud. Küsi põhiarvutis kuvatud koodi.
+Trop d’essais : réessaie dans {n} min. ¦ Per daug bandymų: bandyk dar kartą po {n} min. ¦ Pārāk daudz mēģinājumu: mēģini vēlreiz pēc {n} min. ¦ Liiga palju katseid: proovi uuesti {n} min pärast.
+Une demande de cet appareil attend déjà sa réponse. ¦ Šio įrenginio užklausa jau laukia atsakymo. ¦ Šīs ierīces pieprasījums jau gaida atbildi. ¦ Selle seadme taotlus ootab juba vastust.
+Trop de demandes en même temps : réessaie dans un instant. ¦ Per daug užklausų vienu metu: bandyk dar kartą po akimirkos. ¦ Pārāk daudz pieprasījumu vienlaikus: mēģini vēlreiz pēc brīža. ¦ Liiga palju taotlusi korraga: proovi hetke pärast uuesti.
+Va sur l’ordinateur principal et vérifie qu’il affiche ce code : ¦ Eik prie pagrindinio kompiuterio ir patikrink, ar jis rodo šį kodą: ¦ Ej pie galvenā datora un pārbaudi, vai tas rāda šo kodu: ¦ Mine põhiarvuti juurde ja kontrolli, et see näitab seda koodi:
+Ouverture de la généalogie… Elle demande ensuite son mot de passe : il est vérifié par l’ordinateur principal, jamais gardé ici. ¦ Atveriama genealogija… Paskui ji paprašys slaptažodžio: jį tikrina pagrindinis kompiuteris, čia jis niekada nesaugomas. ¦ Atver ģenealoģiju… Pēc tam tā prasīs paroli: to pārbauda galvenais dators, šeit tā nekad netiek glabāta. ¦ Sugupuu avaneb… Seejärel küsib see parooli: seda kontrollib põhiarvuti, siin seda kunagi ei hoita.
+La demande a expiré (2 minutes sans réponse). Recommence. ¦ Užklausos laikas baigėsi (2 minutės be atsakymo). Pradėk iš naujo. ¦ Pieprasījuma termiņš beidzies (2 minūtes bez atbildes). Sāc no jauna. ¦ Taotlus aegus (2 minutit vastuseta). Alusta uuesti.
+<strong>Appareil invité « {name} »</strong> : lecture seule. La généalogie reste sur l’ordinateur principal ; rien ne peut être modifié depuis cet appareil. ¦ <strong>Svečio įrenginys „{name}“</strong>: tik skaityti. Genealogija lieka pagrindiniame kompiuteryje; iš šio įrenginio nieko negalima pakeisti. ¦ <strong>Viesa ierīce “{name}”</strong>: tikai lasīšanai. Ģenealoģija paliek galvenajā datorā; no šīs ierīces neko nevar mainīt. ¦ <strong>Külalisseade „{name}”</strong>: ainult lugemiseks. Sugupuu jääb põhiarvutisse; sellest seadmest ei saa midagi muuta.
+Appareil ¦ Įrenginys ¦ Ierīce ¦ Seade
+Il faut un mot de passe ¦ Reikia slaptažodžio ¦ Vajadzīga parole ¦ Parool on vajalik
+Cette généalogie n’a pas de mot de passe : elle ne s’ouvre pas sur un autre appareil. Sur l’ordinateur principal : Réglages → 🔐 Mot de passe de cette généalogie. ¦ Ši genealogija neturi slaptažodžio: kitame įrenginyje ji neatsidaro. Pagrindiniame kompiuteryje: Nustatymai → 🔐 Šios genealogijos slaptažodis. ¦ Šai ģenealoģijai nav paroles: citā ierīcē tā neatveras. Galvenajā datorā: Iestatījumi → 🔐 Šīs ģenealoģijas parole. ¦ Sellel sugupuul pole parooli: teises seadmes see ei avane. Põhiarvutis: Seaded → 🔐 Selle sugupuu parool.
+Appareil invité « {name} » : lecture seule. ¦ Svečio įrenginys „{name}“: tik skaityti. ¦ Viesa ierīce “{name}”: tikai lasīšanai. ¦ Külalisseade „{name}”: ainult lugemiseks.
+Au prochain lancement de l’app ¦ Kitą kartą paleidus programą ¦ Nākamajā lietotnes palaišanas reizē ¦ Rakenduse järgmisel käivitamisel
+reste coupé, il faut le rouvrir ¦ lieka išjungta, reikia atverti iš naujo ¦ paliek izslēgts, jāatver no jauna ¦ jääb välja, tuleb uuesti avada
+se rouvre tout seul ¦ atsidaro savaime ¦ atveras pats ¦ avaneb ise uuesti
+Après une mise en veille ¦ Po miego režimo ¦ Pēc miega režīma ¦ Pärast unerežiimi
+se rouvre au réveil si l’app est restée ouverte ¦ pabudus vėl atsidaro, jei programa liko atverta ¦ pamostoties atveras no jauna, ja lietotne palika atvērta ¦ avaneb ärkamisel uuesti, kui rakendus jäi avatuks
+reste coupé ¦ lieka išjungta ¦ paliek izslēgts ¦ jääb välja
+Mot de passe de la généalogie ¦ Genealogijos slaptažodis ¦ Ģenealoģijas parole ¦ Sugupuu parool
+obligatoire pour ouvrir au réseau ¦ privalomas norint atverti tinkle ¦ obligāta, lai atvērtu tīklā ¦ kohustuslik võrgus avamiseks
+facultatif (déconseillé) ¦ neprivalomas (nerekomenduojama) ¦ neobligāta (nav ieteicams) ¦ vabatahtlik (ei soovitata)
+demandé en plus du code à 6 chiffres ¦ prašomas be 6 skaitmenų kodo ¦ prasīts papildus 6 ciparu kodam ¦ küsitakse lisaks 6-kohalisele koodile
+seulement le code à 6 chiffres ¦ tik 6 skaitmenų kodas ¦ tikai 6 ciparu kods ¦ ainult 6-kohaline kood
+Durée d’un accès ¦ Prieigos trukmė ¦ Piekļuves ilgums ¦ Juurdepääsu kestus
+jusqu’à ce que tu le retires ¦ kol jo nepašalinsi ¦ kamēr to noņemsi ¦ kuni sa selle eemaldad
+Empêcher la veille tant qu’un appareil est connecté ¦ Neleisti užmigti, kol prijungtas įrenginys ¦ Neļaut pāriet miega režīmā, kamēr ierīce ir pievienota ¦ Takista unerežiimi, kuni seade on ühendatud
+oui (cet ordinateur ne s’endort plus) ¦ taip (šis kompiuteris nebeužmiega) ¦ jā (šis dators vairs neiemieg) ¦ jah (see arvuti ei jää enam magama)
+Si cet ordinateur change de réseau ¦ Jei šis kompiuteris pakeičia tinklą ¦ Ja šis dators maina tīklu ¦ Kui see arvuti vahetab võrku
+tout couper ¦ viską atjungti ¦ atslēgt visu ¦ katkesta kõik
+tout couper, puis demander s’il faut rouvrir ¦ viską atjungti, tada paklausti, ar atverti iš naujo ¦ atslēgt visu, pēc tam jautāt, vai atvērt no jauna ¦ katkesta kõik, siis küsi, kas uuesti avada
+Appareil pas vu depuis 30 jours ¦ Įrenginys nematytas 30 dienų ¦ Ierīce nav redzēta 30 dienas ¦ Seade, mida pole 30 päeva nähtud
+proposer de le retirer ¦ pasiūlyti pašalinti ¦ piedāvāt to noņemt ¦ paku eemaldamist
+Ouvert au réseau de la maison ¦ Atverta namų tinklui ¦ Atvērts mājas tīklam ¦ Avatud koduvõrgule
+Fermé au réseau de la maison ¦ Uždaryta namų tinklui ¦ Aizvērts mājas tīklam ¦ Suletud koduvõrgule
+Appareil autorisé ¦ Įrenginys leistas ¦ Ierīce atļauta ¦ Seade lubatud
+Demande d’accès refusée ¦ Prieigos užklausa atmesta ¦ Piekļuves pieprasījums noraidīts ¦ Juurdepääsutaotlusest keelduti
+Appareil retiré ¦ Įrenginys pašalintas ¦ Ierīce noņemta ¦ Seade eemaldatud
+Connexion en lecture seule ¦ Ryšys tik skaityti ¦ Savienojums tikai lasīšanai ¦ Ainult lugemise ühendus
+en quittant l’app ¦ išeinant iš programos ¦ izejot no lietotnes ¦ rakendusest väljumisel
+mise en veille ¦ miego režimas ¦ miega režīms ¦ unerežiim
+le réseau a changé ¦ tinklas pasikeitė ¦ tīkls mainījās ¦ võrk muutus
+Appareil invité : lecture seule. Cela ne se fait que sur l’ordinateur principal. ¦ Svečio įrenginys: tik skaityti. Tai daroma tik pagrindiniame kompiuteryje. ¦ Viesa ierīce: tikai lasīšanai. To dara tikai galvenajā datorā. ¦ Külalisseade: ainult lugemiseks. Seda saab teha ainult põhiarvutis.

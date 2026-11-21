@@ -49,10 +49,14 @@
         if (kiosk.on && !banner) {
             banner = document.createElement('div');
             banner.id = 'kiosk-banner';
-            banner.innerHTML = `<span>🔒 ${i18n('<strong>Mode consultation</strong> : parcours la généalogie librement, rien ne peut être modifié ni supprimé.')}</span><button type="button" class="button small" data-kiosk-exit>${i18n('Quitter la consultation')}</button>`;
+            // 🖧 un appareil invité (porte du wifi, lib/reseau_local.php) : lecture seule, réglé sur l'ordinateur principal (pas de bouton pour en sortir)
+            banner.innerHTML = kiosk.guest !== undefined
+                ? `<span>🖧 ${i18n('<strong>Appareil invité « {name} »</strong> : lecture seule. La généalogie reste sur l’ordinateur principal ; rien ne peut être modifié depuis cet appareil.', {name: esc(kiosk.guest)})}</span>`
+                : `<span>🔒 ${i18n('<strong>Mode consultation</strong> : parcours la généalogie librement, rien ne peut être modifié ni supprimé.')}</span><button type="button" class="button small" data-kiosk-exit>${i18n('Quitter la consultation')}</button>`;
             document.body.prepend(banner);
         } else if (!kiosk.on && banner) banner.remove();
         const t = document.getElementById('kiosk-toggle');
+        if (t && kiosk.guest !== undefined) t.hidden = true;
         if (t) { t.classList.toggle('is-active', !!kiosk.on); t.title = kiosk.on ? i18n('Quitter le mode consultation (mot de passe)') : i18n('Mode consultation : la famille peut tout parcourir sans rien modifier'); }
     }
     function passwordDialog(title, text, confirmTwice, onOk) {

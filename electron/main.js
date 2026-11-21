@@ -7,7 +7,7 @@
  *   npm run start:local     données = dossiers data/ et media/ du projet (pour tester avec tes copies)
  *   GENEALOGY_DATA_DIR=… GENEALOGY_MEDIA_DIR=… npm start     dossiers de ton choix
  */
-const { app, BrowserWindow, Menu, Notification, dialog, ipcMain, net, session, shell } = require('electron');
+const { app, BrowserWindow, Menu, Notification, dialog, ipcMain, net, powerMonitor, powerSaveBlocker, session, shell } = require('electron');
 const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -15,6 +15,7 @@ const { PhpServer, findPhp, checkPhp, devBundledPhp, SECRET_HEADER } = require('
 const desk = require('./desk-widgets'); // 🪟 widgets sur le bureau
 const browsers = require('./browsers'); // 🌐 ouvrir l'aperçu d'un site dans un navigateur précis
 const updates = require('./updates'); // 🔄 mises à jour (dernière version publiée sur GitHub)
+const { LanGate } = require('./lan-gate'); // 🖧 plusieurs ordinateurs : la porte du wifi (coupée au départ)
 
 const APP_TITLE = 'Carnet numérique des ancêtres';
 app.setName(APP_TITLE);
@@ -259,6 +260,83 @@ async function checkReminders() {
   writeConfig(file, { keys: [...notified].slice(-500) });
 }
 ipcMain.on('lcnda:refresh-reminders', (event) => { if (fromApp(event)) checkReminders(); });
+
+/**
+ * 🖧 Plusieurs ordinateurs (electron/lan-gate.js ; maquette docs/design/plusieurs-ordinateurs.html) : la porte du wifi, coupée
+ * au départ. Seule la grande fenêtre de cet ordinateur (fromApp) l'ouvre, la ferme, accepte ou refuse un appareil, le
+ * retire ; les appareils invités n'ont pas ce pont (ils passent par un navigateur). Coupée à la mise en veille (powerMonitor)
+ * et en quittant ; rouverte au réveil si le réglage le dit et que le réseau n'a pas changé.
+ */
+let gate = null;
+let lanBlocker = null;
+let lanResume = false;
+function lanEmit(type, data = {}) { if (win && !win.isDestroyed()) win.webContents.send('lcnda:reseau', { type, ...data }); }
+/** 📜 un geste de la porte au registre « Qui a vu quoi » (second secret : seul ce processus peut l'écrire) */
+function lanNote(kind, o = {}) {
+  if (!server) return;
+  const q = new URLSearchParams({ action: 'lan_note', kind, label: String(o.label || ''), what: String(o.what || ''), device: String(o.device || '') });
+  server.request('/api.php?' + q.toString(), { timeout: 15000, headers: { 'x-carnet-local': server.localSecret } }).catch(() => {});
+}
+/** La généalogie ouverte a-t-elle un mot de passe ? (réglage conseillé : obligatoire pour l'ouvrir au réseau) */
+async function lanPasswordOk() {
+  try { const r = await server.request('/api.php?action=glock_state', { timeout: 15000 }); return !!JSON.parse(r.body.toString()).locked; } catch { return false; }
+}
+async function lanOpen() {
+  if (!gate) return { ok: false, error: 'off' };
+  const r = await gate.open({ passwordOk: await lanPasswordOk() });
+  if (r.ok) lanNote('lan_open', { label: gate.address ? gate.address.ip : '' });
+  return r;
+}
+function lanBlockerUpdate() {
+  const want = !!(gate && gate.on && gate.settings.preventSleep === 'oui' && gate.connectedCount() > 0);
+  if (want && lanBlocker === null) lanBlocker = powerSaveBlocker.start('prevent-app-suspension');
+  if (!want && lanBlocker !== null) { try { powerSaveBlocker.stop(lanBlocker); } catch { /* ignore */ } lanBlocker = null; }
+}
+function setupLan(p) {
+  gate = new LanGate({ server, dataDir: p.dataDir, appRoot: APP_ROOT, packaged: app.isPackaged });
+  gate.on('request', (r) => {
+    lanEmit('request', r);
+    if (win && !win.isDestroyed()) {
+      try { win.flashFrame(true); } catch { /* ignore */ }
+      if (!win.isFocused() && Notification.isSupported()) { const n = new Notification({ title: '🖧 LCNDA', body: `${r.name} · ${r.code.slice(0, 3)} ${r.code.slice(3)}` }); n.on('click', () => showMain()); n.show(); }
+    }
+  });
+  gate.on('change', () => { lanEmit('change'); lanBlockerUpdate(); });
+  gate.on('request-gone', (r) => lanEmit('request-gone', r));
+  gate.on('paused', (r) => lanEmit('paused', r));
+  gate.on('network-changed', (r) => lanEmit('network-changed', r));
+  gate.on('device-added', (d) => lanNote('lan_ok', { label: d.name }));
+  gate.on('request-refused', (d) => lanNote('lan_refuse', { label: d.name }));
+  gate.on('device-removed', (d) => lanNote('lan_remove', { label: d.name }));
+  gate.on('device-connect', (d) => lanNote('lan_connect', { device: d.name }));
+  gate.on('close', ({ reason }) => { lanNote('lan_close', { what: reason }); lanBlockerUpdate(); });
+  powerMonitor.on('suspend', async () => { if (gate.on) { lanResume = true; await gate.close('veille', { keepWasOpen: true }); } });
+  powerMonitor.on('resume', async () => {
+    const again = lanResume && gate.settings.wake === 'rouvre' && !gate.networkChanged();
+    lanResume = false;
+    if (again) { const r = await lanOpen(); if (!r.ok) lanEmit('reopen-failed', r); }
+    else if (gate.state.wasOpen && !gate.on) { gate.state.wasOpen = false; gate._saveState(); lanEmit('change'); }
+  });
+  // au lancement : reste coupé (conseillé), ou se rouvre si le réglage le dit
+  if (gate.state.wasOpen && gate.settings.relaunch === 'rouvre') lanOpen();
+  else if (gate.state.wasOpen) { gate.state.wasOpen = false; gate._saveState(); }
+}
+ipcMain.handle('lcnda:reseau', async (event, cmd, arg) => {
+  if (!fromApp(event) || !gate) return { ok: false, error: 'Refusé' };
+  const id = String((arg && arg.id) || '');
+  switch (String(cmd || '')) {
+    case 'status': return gate.status();
+    case 'open': return lanOpen();
+    case 'close': await gate.close('main'); return { ok: true };
+    case 'invite': return gate.newInvite();
+    case 'accept': return gate.accept(id);
+    case 'refuse': return gate.refuse(id);
+    case 'remove': return gate.remove(id);
+    case 'undo-remove': return gate.undoRemove(id);
+    case 'settings': return { ok: true, settings: gate.setSettings(arg && typeof arg === 'object' ? arg : {}) };
+    default: return { ok: false, error: 'Refusé' };
+  }
+});
 
 /**
  * 🪟 Widgets sur le bureau (Tableau de bord → 🪟) : petites fenêtres sans cadre, en lecture seule, qui montrent une page
@@ -639,6 +717,7 @@ async function boot() {
   // Le même port d'un lancement à l'autre = la même « origine » web : le navigateur intégré conserve ainsi
   // les préférences d'affichage que l'interface range dans son localStorage.
   if (config.port !== server.port) writeConfig(p.configFile, { ...config, port: server.port });
+  if (!selfTestFile) setupLan(p); // 🖧 la porte du wifi : rien n'écoute sur le réseau tant qu'on ne l'ouvre pas
 
   // Chaque requête de la fenêtre porte le secret ; router.php refuse tout le reste.
   session.defaultSession.webRequest.onBeforeSendHeaders({ urls: [server.origin + '/*'] }, (details, callback) => {
@@ -770,6 +849,8 @@ if (!app.requestSingleInstanceLock()) {
     quitting = true;
     clearInterval(reminderTimer);
     try { app.setBadgeCount(0); } catch { /* ignore */ }
-    server.closeBackup().finally(() => server.stop().finally(() => app.quit())); // 🗓 sauvegarde « à la fermeture » si elle est réglée
+    // 🖧 la porte du wifi se ferme d'abord (plus personne ne voit rien), puis 🗓 sauvegarde « à la fermeture » si elle est réglée
+    (gate ? gate.close('quit', { keepWasOpen: true }) : Promise.resolve()).catch(() => {})
+      .finally(() => server.closeBackup().finally(() => server.stop().finally(() => app.quit())));
   });
 }

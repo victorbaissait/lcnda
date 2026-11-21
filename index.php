@@ -79,6 +79,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/successoral-plus2.css?v=1">
     <link rel="stylesheet" href="assets/css/complements.css?v=1">
     <link rel="stylesheet" href="assets/css/verrou.css?v=1">
+    <link rel="stylesheet" href="assets/css/reseau-local.css?v=1">
     <link rel="stylesheet" href="assets/css/indicateurs.css?v=2">
     <link rel="stylesheet" href="assets/css/mode-simple.css?v=7">
     <link rel="stylesheet" href="assets/css/formats.css?v=1">
@@ -1174,14 +1175,15 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script src="assets/js/app-journal.js?v=2"></script>
 <?= i18n_page_script() ?>
-<script src="assets/js/app-i18n.js?v=48"></script>
-<script>window.LCNDA_GENEALOGY = <?= json_encode(GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID) ?>;window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_GLOCK = <?= json_encode(['on' => glock_info()['locked'], 'minutes' => glock_info()['minutes']]) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
+<script src="assets/js/app-i18n.js?v=49"></script>
+<script>window.LCNDA_GENEALOGY = <?= json_encode(GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID) ?>;window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_GLOCK = <?= json_encode(['on' => glock_info()['locked'], 'minutes' => glock_info()['minutes']]) ?>;window.LCNDA_GUEST = <?= json_encode(lan_device() ? ['name' => lan_device()['name']] : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
 <script src="assets/js/app-fond.js?v=9" defer></script>
 <script src="assets/js/app-accord.js?v=1" defer></script>
 <script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/js/app-recherche-fr.js?v=1" defer></script>
-<script src="assets/js/app.js?v=565" defer></script>
-<script src="assets/js/app-verrou.js?v=2" defer></script>
+<script src="assets/js/app.js?v=566" defer></script>
+<script src="assets/js/app-verrou.js?v=4" defer></script>
+<script src="assets/js/app-reseau-local.js?v=1" defer></script>
 <script src="assets/js/app-indicateurs.js?v=2" defer></script>
 <script src="assets/js/app-picker.js?v=29" defer></script>
 <script src="assets/js/app-media-picker.js?v=4" defer></script>
@@ -1269,26 +1271,26 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-editeurs.js?v=4" defer></script>
 <script src="assets/js/app-versions.js?v=4" defer></script>
 <script src="assets/js/app-formats.js?v=1" defer></script>
-<script src="assets/js/app-pages.js?v=13" defer></script>
+<script src="assets/js/app-pages.js?v=14" defer></script>
 <script src="assets/js/app-access.js?v=18" defer></script>
 <script src="assets/js/app-mode-simple.js?v=16" defer></script>
 <script src="assets/js/app-sidegroups.js?v=13" defer></script>
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
 <script src="assets/js/app-listes.js?v=57" defer></script>
-<script src="assets/js/app-maintenance.js?v=59" defer></script>
+<script src="assets/js/app-maintenance.js?v=61" defer></script>
 <script src="assets/js/app-recherche.js?v=31" defer></script>
 <script src="assets/js/app-graphiques.js?v=25" defer></script>
 <script src="assets/js/app-side-folders.js?v=3" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=44" defer></script>
-<script src="assets/js/heritage-tools.js?v=21" defer></script>
-<script src="assets/js/heritage-sauvegarde.js?v=4" defer></script>
+<script src="assets/js/heritage-tools.js?v=22" defer></script>
+<script src="assets/js/heritage-sauvegarde.js?v=5" defer></script>
 <script src="assets/js/heritage-alphabets-data.js?v=2" defer></script>
 <script src="assets/js/heritage-alphabets.js?v=4" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=6" defer></script>
 <script src="assets/js/heritage-lecture-autrefois.js?v=5" defer></script>
 <script src="assets/js/heritage-links.js?v=24" defer></script>
-<script src="assets/js/heritage-more.js?v=359" defer></script>
+<script src="assets/js/heritage-more.js?v=360" defer></script>
 <script src="assets/js/heritage-controle.js?v=9" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
 <script src="assets/js/heritage-research.js?v=40" defer></script>
@@ -1462,10 +1464,10 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-successoral-core.js?v=5" defer></script>
 <script src="assets/js/heritage-successoral-outils-core.js?v=2" defer></script>
 <script src="assets/js/heritage-successoral-plus2-core.js?v=2" defer></script>
-<script src="assets/js/heritage-successoral.js?v=10" defer></script>
-<script src="assets/js/heritage-successoral-dossiers.js?v=6" defer></script>
+<script src="assets/js/heritage-successoral.js?v=11" defer></script>
+<script src="assets/js/heritage-successoral-dossiers.js?v=7" defer></script>
 <script src="assets/js/heritage-successoral-outils.js?v=1" defer></script>
-<script src="assets/js/heritage-successoral-plus2.js?v=4" defer></script>
+<script src="assets/js/heritage-successoral-plus2.js?v=5" defer></script>
 <script src="assets/js/heritage-successoral-plus2b.js?v=3" defer></script>
 <script src="assets/js/heritage-complements-core.js?v=1" defer></script>
 <script src="assets/js/heritage-complements.js?v=1" defer></script>

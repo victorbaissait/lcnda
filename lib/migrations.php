@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 98;
+const SCHEMA_VERSION = 99;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -119,6 +119,7 @@ function migration_steps(): array
         96 => 'schema_v96',
         97 => 'schema_v97',
         98 => 'schema_v98',
+        99 => 'schema_v99',
     ];
 }
 
@@ -2676,4 +2677,16 @@ function schema_v98(PDO $pdo): void
 {
     if (!function_exists('compl_schema')) { require_once __DIR__ . '/complements.php'; }
     compl_schema($pdo);
+}
+
+/** 99 : 🖧 plusieurs ordinateurs (lib/reseau_local.php, electron/lan-gate.js) : 📜 « Qui a vu quoi » note l'appareil réel
+ * (access_log.device : vide pour l'ordinateur principal, sinon le nom de l'appareil invité). La liste des appareils et leurs
+ * jetons (hachés) ne sont pas dans la généalogie : dossier de données de l'ordinateur, reseau-local/appareils.json. */
+function schema_v99(PDO $pdo): void
+{
+    if (!function_exists('access_log_schema')) { require_once __DIR__ . '/verrou.php'; }
+    access_log_schema($pdo);
+    if (!(bool) $pdo->query("SELECT count(*) FROM pragma_table_info('access_log') WHERE name='device'")->fetchColumn()) {
+        $pdo->exec("ALTER TABLE access_log ADD COLUMN device TEXT NOT NULL DEFAULT ''");
+    }
 }

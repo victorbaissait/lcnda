@@ -1,0 +1,114 @@
+fr ¦ lb
+# Zone « reseau » : 🖧 plusieurs ordinateurs de la maison
+conseillé ¦ recommandéiert
+connecté maintenant ¦ elo verbonnen
+jamais venu ¦ nach ni verbonnen
+Plusieurs ordinateurs ¦ Méi Computeren
+Ouvrir cette généalogie aux autres ordinateurs de la maison, par le wifi, jamais par internet. ¦ Dës Genealogie fir déi aner Computeren am Haus opmaachen, iwwer de WLAN, ni iwwer den Internet.
+Ce réglage ne se change que sur l’ordinateur principal : cet appareil est un appareil invité, en lecture seule. ¦ Dës Astellung gëtt nëmmen um Haaptcomputer geännert: dësen Apparat ass e Gaaschtapparat, nëmmen zum Liesen.
+Seulement dans l’app de bureau LCNDA, sur l’ordinateur qui garde la généalogie. ¦ Nëmmen an der Desktop-App LCNDA, um Computer, deen d’Genealogie hält.
+⏻ Tout couper maintenant ¦ ⏻ Elo alles ofschneiden
+↻ Nouveau code ¦ ↻ Neie Code
+Ouvrir « {name} » aux autres ordinateurs de la maison ¦ „{name}“ fir déi aner Computeren am Haus opmaachen
+Ouvert depuis {time}. Se coupe si cet ordinateur se met en veille, change de réseau ou ferme l’app. ¦ Op zënter {time}. Et gëtt ofgeschnidden, wann dëse Computer an de Schlofmodus geet, d’Netz wiesselt oder d’App zoumécht.
+Coupé : l’app ne répond qu’à cet ordinateur (comme aujourd’hui). ¦ Aus: d’App äntwert nëmmen dësem Computer (wéi haut).
+Avant d’ouvrir : cette généalogie n’a pas de mot de passe. Il en faut un pour l’ouvrir au réseau. ¦ Virum Opmaachen: dës Genealogie huet kee Passwuert. Si brauch eent, fir am Netz opgemaach ze ginn.
+🔐 En mettre un ¦ 🔐 Eent festleeën
+Cet ordinateur n’est relié à aucun réseau de la maison (adresse privée introuvable) : branche le wifi, puis réessaie. ¦ Dëse Computer ass mat kengem Heemnetz verbonnen (keng privat Adress fonnt): schalt de WLAN un a prouf nach eng Kéier.
+5 codes d’invitation faux : plus aucune demande jusqu’à {time}. ¦ 5 falsch Invitatiounscoden: keng Ufroe méi bis {time}.
+5 demandes refusées : plus aucune demande jusqu’à {time}. ¦ 5 Ufroen ofgeleent: keng Ufroe méi bis {time}.
+Le réseau a changé : tout a été coupé. ¦ D’Netz huet geännert: alles gouf ofgeschnidden.
+Adresse à taper sur l’autre ordinateur ¦ Adress, fir um anere Computer anzetippen
+Code d’invitation (valable 10 min, une seule fois) ¦ Invitatiounscode (10 Min. gëlteg, nëmmen eng Kéier)
+Sur l’autre ordinateur : ouvre un navigateur (Chrome, Firefox, Safari, Edge), tape cette adresse, puis le code. Ensuite, c’est toi qui acceptes ici, en comparant le code à 6 chiffres affiché des deux côtés. ¦ Um anere Computer: maach e Browser op (Chrome, Firefox, Safari, Edge), tipp dës Adress an, duerno de Code. Dann akzeptéiers du hei, andeems s du de 6-stellege Code vergläichs, deen op béide Säite steet.
+Demandes d’accès ¦ Zougangsufroen
+✓ Autoriser ¦ ✓ Erlaben
+Appareils autorisés ¦ Erlaabten Apparater
+Tous les appareils invités sont en lecture seule : ils regardent la généalogie, rien ne peut être modifié depuis eux. ¦ All Gaaschtapparater sinn nëmmen zum Liesen: si kucken d’Genealogie, vun hinnen aus kann näischt geännert ginn.
+Ce qu’il faut savoir ¦ Wat s du wësse solls
+🧱 La première fois, Windows (« Autoriser LCNDA sur les réseaux privés ? ») ou macOS (« Accepter les connexions entrantes ? ») pose la question : réponds oui, et sous Windows seulement pour les réseaux privés. ¦ 🧱 Déi éischte Kéier freet Windows („LCNDA op privaten Netzer erlaben?“) oder macOS („Erakommend Verbindungen akzeptéieren?“): äntwer mat Jo, ënner Windows nëmme fir privat Netzer.
+📶 Dans cette version, ce qui passe dans le wifi n’est pas chiffré : n’ouvre que sur le wifi de la maison, protégé par sa clé, jamais sur un wifi d’hôtel, de gare ou de médiathèque. ¦ 📶 An dëser Versioun ass dat, wat iwwer de WLAN geet, net verschlësselt: maach nëmmen um WLAN doheem op, dee mat sengem Schlëssel geschützt ass, ni um WLAN vun engem Hotel, enger Gare oder enger Bibliothéik.
+🖥 Cet ordinateur doit rester allumé, avec LCNDA ouvert : s’il dort ou que tu fermes l’app, les autres ne voient plus rien. ¦ 🖥 Dëse Computer muss un bleiwen, mat LCNDA op: wann e schléift oder s du d’App zoumécht, gesinn déi aner näischt méi.
+autorisé le {date} ¦ erlaabt de(n) {date}
+lecture seule ¦ nëmmen zum Liesen
+jusqu’au {date} ¦ bis {date}
+pour cette fois seulement ¦ nëmme fir dës Kéier
+Pas vu depuis plus de 30 jours : le retirer ? ¦ Zënter méi wéi 30 Deeg net gesinn: ewechhuelen?
+Aucun appareil autorisé pour l’instant. ¦ Nach keen Apparat erlaabt.
+Aucun appareil ne correspond. ¦ Keen Apparat passt.
+Appareils : {n} · connectés : {c} ¦ Apparater: {n} · verbonnen: {c}
+Chercher un appareil… ¦ En Apparat sichen…
+La porte du wifi n’a pas pu s’ouvrir (pare-feu, ou adresse déjà prise). Réessaie dans un instant. ¦ D’WLAN-Dier konnt net opgoen (Firewall, oder Adress scho besat). Prouf et gläich nach eng Kéier.
+Cette demande n’existe plus (refusée, ou plus de 2 minutes sans réponse). ¦ Dës Ufro gëtt et net méi (ofgeleent, oder méi wéi 2 Minutten ouni Äntwert).
+Trop tard pour annuler : autorise l’appareil de nouveau. ¦ Ze spéit fir réckgängeg ze maachen: erlaab den Apparat nach eng Kéier.
+🖧 Ouvert aux ordinateurs de la maison. ¦ 🖧 Fir d’Computeren am Haus opgemaach.
+🖧 Coupé : l’app ne répond plus qu’à cet ordinateur. ¦ 🖧 Aus: d’App äntwert elo nëmme méi dësem Computer.
+Adresse copiée ¦ Adress kopéiert
+✓ « {name} » retiré : il ne peut plus se connecter. ¦ ✓ „{name}“ ewechgeholl: en kann sech net méi verbannen.
+« {name} » peut de nouveau se connecter. ¦ „{name}“ kann sech erëm verbannen.
+Réglage enregistré ¦ Astellung gespäichert
+Demande refusée. ¦ Ufro ofgeleent.
+✓ « {name} » autorisé, en lecture seule. ¦ ✓ „{name}“ erlaabt, nëmmen zum Liesen.
+Demande d’accès ¦ Zougangsufro
+Un appareil veut ouvrir « {name} » ¦ En Apparat wëll „{name}“ opmaachen
+Nom donné ¦ Uginnen Numm
+(il peut être faux : compare le code) ¦ (en ka falsch sinn: vergläich de Code)
+Code affiché ¦ Ugewisene Code
+Regarde l’écran de l’appareil : il doit montrer le même code. Sinon, refuse. ¦ Kuck op den Ecran vum Apparat: en muss dee selwechte Code weisen. Soss leen of.
+Ce qu’il pourra faire : 👁 lecture seule (rien ne peut être modifié depuis cet appareil). Il devra aussi donner le mot de passe de la généalogie. ¦ Wat en däerf: 👁 nëmmen zum Liesen (vun dësem Apparat aus kann näischt geännert ginn). En muss och d’Passwuert vun der Genealogie uginn.
+Sans réponse en 2 minutes, la demande disparaît toute seule (refusée). ¦ Ouni Äntwert bannent 2 Minutte verschwënnt d’Ufro vum selwen (ofgeleent).
+✓ Autoriser « {name} » ¦ ✓ „{name}“ erlaben
+Ouvert aux ordinateurs de la maison · appareils connectés : {n} ¦ Fir d’Computeren am Haus opgemaach · verbonnen Apparater: {n}
+🖧 Rouvrir sur ce réseau ¦ 🖧 An dësem Netz nees opmaachen
+Autre ordinateur ¦ Anere Computer
+Se connecter ¦ Verbannen
+Se connecter à l’ordinateur principal ¦ Mam Haaptcomputer verbannen
+Cet appareil n’est pas encore autorisé. Demande l’accès : c’est sur l’ordinateur principal qu’on l’accepte. ¦ Dësen Apparat ass nach net erlaabt. Fro no Zougang: en gëtt um Haaptcomputer akzeptéiert.
+Nom de cet appareil ¦ Numm vun dësem Apparat
+Code d’invitation ¦ Invitatiounscode
+(affiché sur l’ordinateur principal) ¦ (um Haaptcomputer ugewisen)
+Demander l’accès ¦ No Zougang froen
+Donne un nom à cet appareil. ¦ Gëff dësem Apparat en Numm.
+L’ordinateur principal ne répond pas (en veille, éteint, ou porte coupée). ¦ Den Haaptcomputer äntwert net (am Schlofmodus, aus, oder Dier ofgeschnidden).
+Code d’invitation faux ou périmé. Demande le code affiché sur l’ordinateur principal. ¦ Invitatiounscode falsch oder ofgelaf. Fro no dem Code, deen um Haaptcomputer steet.
+Trop d’essais : réessaie dans {n} min. ¦ Ze vill Versich: prouf an {n} Min. nach eng Kéier.
+Une demande de cet appareil attend déjà sa réponse. ¦ Eng Ufro vun dësem Apparat waart schonn op eng Äntwert.
+Trop de demandes en même temps : réessaie dans un instant. ¦ Ze vill Ufroen op eemol: prouf et gläich nach eng Kéier.
+Va sur l’ordinateur principal et vérifie qu’il affiche ce code : ¦ Géi bei den Haaptcomputer a kuck no, ob en dëse Code weist:
+Ouverture de la généalogie… Elle demande ensuite son mot de passe : il est vérifié par l’ordinateur principal, jamais gardé ici. ¦ D’Genealogie gëtt opgemaach… Duerno freet si no hirem Passwuert: et gëtt vum Haaptcomputer iwwerpréift, ni hei gespäichert.
+La demande a expiré (2 minutes sans réponse). Recommence. ¦ D’Ufro ass ofgelaf (2 Minutten ouni Äntwert). Fänk nach eng Kéier un.
+<strong>Appareil invité « {name} »</strong> : lecture seule. La généalogie reste sur l’ordinateur principal ; rien ne peut être modifié depuis cet appareil. ¦ <strong>Gaaschtapparat „{name}“</strong>: nëmmen zum Liesen. D’Genealogie bleift um Haaptcomputer; vun dësem Apparat aus kann näischt geännert ginn.
+Appareil ¦ Apparat
+Il faut un mot de passe ¦ Et brauch e Passwuert
+Cette généalogie n’a pas de mot de passe : elle ne s’ouvre pas sur un autre appareil. Sur l’ordinateur principal : Réglages → 🔐 Mot de passe de cette généalogie. ¦ Dës Genealogie huet kee Passwuert: si geet op kengem aneren Apparat op. Um Haaptcomputer: Astellungen → 🔐 Passwuert vun dëser Genealogie.
+Appareil invité « {name} » : lecture seule. ¦ Gaaschtapparat „{name}“: nëmmen zum Liesen.
+Au prochain lancement de l’app ¦ Beim nächste Start vun der App
+reste coupé, il faut le rouvrir ¦ bleift aus, et muss nees opgemaach ginn
+se rouvre tout seul ¦ geet vum selwen erëm op
+Après une mise en veille ¦ Nom Schlofmodus
+se rouvre au réveil si l’app est restée ouverte ¦ geet beim Erwächen erëm op, wann d’App op bliwwen ass
+reste coupé ¦ bleift aus
+Mot de passe de la généalogie ¦ Passwuert vun der Genealogie
+obligatoire pour ouvrir au réseau ¦ obligatoresch, fir am Netz opzemaachen
+facultatif (déconseillé) ¦ fräiwëlleg (net recommandéiert)
+demandé en plus du code à 6 chiffres ¦ zousätzlech zum 6-stellege Code gefrot
+seulement le code à 6 chiffres ¦ nëmmen de 6-stellege Code
+Durée d’un accès ¦ Dauer vun engem Zougang
+jusqu’à ce que tu le retires ¦ bis s du en ewechhëls
+Empêcher la veille tant qu’un appareil est connecté ¦ De Schlofmodus verhënneren, soulaang en Apparat verbonnen ass
+oui (cet ordinateur ne s’endort plus) ¦ jo (dëse Computer schléift net méi an)
+Si cet ordinateur change de réseau ¦ Wann dëse Computer d’Netz wiesselt
+tout couper ¦ alles ofschneiden
+tout couper, puis demander s’il faut rouvrir ¦ alles ofschneiden, duerno froen, ob nees opgemaach soll ginn
+Appareil pas vu depuis 30 jours ¦ Apparat zënter 30 Deeg net gesinn
+proposer de le retirer ¦ proposéieren, en ewechzehuelen
+Ouvert au réseau de la maison ¦ Fir d’Heemnetz opgemaach
+Fermé au réseau de la maison ¦ Fir d’Heemnetz zougemaach
+Appareil autorisé ¦ Apparat erlaabt
+Demande d’accès refusée ¦ Zougangsufro ofgeleent
+Appareil retiré ¦ Apparat ewechgeholl
+Connexion en lecture seule ¦ Verbindung nëmmen zum Liesen
+en quittant l’app ¦ beim Zoumaache vun der App
+mise en veille ¦ Schlofmodus
+le réseau a changé ¦ d’Netz huet geännert
+Appareil invité : lecture seule. Cela ne se fait que sur l’ordinateur principal. ¦ Gaaschtapparat: nëmmen zum Liesen. Dat geet nëmmen um Haaptcomputer.

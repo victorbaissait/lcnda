@@ -20,6 +20,7 @@ function json_keep_objects(mixed $v, array $objectKeys): mixed
 require_once __DIR__ . '/host_guard.php'; // noms d'hôte locaux seulement (aussi sous Apache / MAMP, sans router.php)
 if (!lcnda_host_guard()) exit;
 require_once __DIR__ . '/paths.php';   // APP_ROOT, DATA_DIR, MEDIA_DIR
+require_once __DIR__ . '/reseau_local.php'; // 🖧 appareil invité (porte du wifi) : lecture seule, registre
 require_once __DIR__ . '/text.php';    // ascii_fold()
 require_once __DIR__ . '/recherche_fr.php'; // 🔎 recherche « à la française » (noms, prénoms, lieux, dates)
 require_once __DIR__ . '/i18n.php';    // 🌐 i18n_t() : messages d'erreur dans la langue de la page

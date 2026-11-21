@@ -1,0 +1,114 @@
+fr ¦ sk ¦ nb
+# Zone « reseau » : 🖧 plusieurs ordinateurs de la maison
+conseillé ¦ odporúčané ¦ anbefalt
+connecté maintenant ¦ pripojené teraz ¦ tilkoblet nå
+jamais venu ¦ nikdy nepripojené ¦ aldri tilkoblet
+Plusieurs ordinateurs ¦ Viac počítačov ¦ Flere datamaskiner
+Ouvrir cette généalogie aux autres ordinateurs de la maison, par le wifi, jamais par internet. ¦ Otvoriť tento rodokmeň ostatným počítačom v domácnosti, cez wifi, nikdy cez internet. ¦ Åpne dette slektstreet for de andre datamaskinene hjemme, via wifi, aldri via internett.
+Ce réglage ne se change que sur l’ordinateur principal : cet appareil est un appareil invité, en lecture seule. ¦ Toto nastavenie sa mení len na hlavnom počítači: toto zariadenie je zariadenie hosťa, len na čítanie. ¦ Denne innstillingen endres bare på hoveddatamaskinen: denne enheten er en gjesteenhet, skrivebeskyttet.
+Seulement dans l’app de bureau LCNDA, sur l’ordinateur qui garde la généalogie. ¦ Len v počítačovej aplikácii LCNDA, na počítači, ktorý uchováva rodokmeň. ¦ Bare i skrivebordsappen LCNDA, på datamaskinen som har slektstreet.
+⏻ Tout couper maintenant ¦ ⏻ Všetko hneď odpojiť ¦ ⏻ Steng alt nå
+↻ Nouveau code ¦ ↻ Nový kód ¦ ↻ Ny kode
+Ouvrir « {name} » aux autres ordinateurs de la maison ¦ Otvoriť „{name}“ ostatným počítačom v domácnosti ¦ Åpne «{name}» for de andre datamaskinene hjemme
+Ouvert depuis {time}. Se coupe si cet ordinateur se met en veille, change de réseau ou ferme l’app. ¦ Otvorené od {time}. Odpojí sa, keď tento počítač prejde do režimu spánku, zmení sieť alebo zatvorí aplikáciu. ¦ Åpen siden {time}. Stenges hvis denne datamaskinen går i dvale, bytter nettverk eller lukker appen.
+Coupé : l’app ne répond qu’à cet ordinateur (comme aujourd’hui). ¦ Vypnuté: aplikácia odpovedá len tomuto počítaču (ako dnes). ¦ Av: appen svarer bare denne datamaskinen (som i dag).
+Avant d’ouvrir : cette généalogie n’a pas de mot de passe. Il en faut un pour l’ouvrir au réseau. ¦ Pred otvorením: tento rodokmeň nemá heslo. Aby sa dal otvoriť do siete, potrebuje ho. ¦ Før du åpner: dette slektstreet har ikke passord. Det trengs et for å åpne det på nettverket.
+🔐 En mettre un ¦ 🔐 Nastaviť heslo ¦ 🔐 Angi et
+Cet ordinateur n’est relié à aucun réseau de la maison (adresse privée introuvable) : branche le wifi, puis réessaie. ¦ Tento počítač nie je pripojený k žiadnej domácej sieti (súkromná adresa sa nenašla): zapni wifi a skús to znova. ¦ Denne datamaskinen er ikke koblet til noe hjemmenettverk (ingen privat adresse funnet): slå på wifi, og prøv igjen.
+5 codes d’invitation faux : plus aucune demande jusqu’à {time}. ¦ 5 chybných kódov pozvánky: žiadne ďalšie žiadosti až do {time}. ¦ 5 feil invitasjonskoder: ingen flere forespørsler før {time}.
+5 demandes refusées : plus aucune demande jusqu’à {time}. ¦ 5 odmietnutých žiadostí: žiadne ďalšie žiadosti až do {time}. ¦ 5 forespørsler avvist: ingen flere forespørsler før {time}.
+Le réseau a changé : tout a été coupé. ¦ Sieť sa zmenila: všetko bolo odpojené. ¦ Nettverket er endret: alt er stengt.
+Adresse à taper sur l’autre ordinateur ¦ Adresa, ktorú napíšeš na druhom počítači ¦ Adresse som skal skrives på den andre datamaskinen
+Code d’invitation (valable 10 min, une seule fois) ¦ Kód pozvánky (platí 10 min, len raz) ¦ Invitasjonskode (gyldig i 10 min, bare én gang)
+Sur l’autre ordinateur : ouvre un navigateur (Chrome, Firefox, Safari, Edge), tape cette adresse, puis le code. Ensuite, c’est toi qui acceptes ici, en comparant le code à 6 chiffres affiché des deux côtés. ¦ Na druhom počítači: otvor prehliadač (Chrome, Firefox, Safari, Edge), napíš túto adresu a potom kód. Potom to tu prijmeš ty, po porovnaní šesťmiestneho kódu zobrazeného na oboch stranách. ¦ På den andre datamaskinen: åpne en nettleser (Chrome, Firefox, Safari, Edge), skriv denne adressen og så koden. Deretter er det du som godtar her, ved å sammenligne den 6-sifrede koden som vises på begge sider.
+Demandes d’accès ¦ Žiadosti o prístup ¦ Forespørsler om tilgang
+✓ Autoriser ¦ ✓ Povoliť ¦ ✓ Tillat
+Appareils autorisés ¦ Povolené zariadenia ¦ Tillatte enheter
+Tous les appareils invités sont en lecture seule : ils regardent la généalogie, rien ne peut être modifié depuis eux. ¦ Všetky zariadenia hostí sú len na čítanie: prezerajú rodokmeň, nič sa z nich nedá zmeniť. ¦ Alle gjesteenheter er skrivebeskyttet: de ser på slektstreet, ingenting kan endres fra dem.
+Ce qu’il faut savoir ¦ Čo treba vedieť ¦ Greit å vite
+🧱 La première fois, Windows (« Autoriser LCNDA sur les réseaux privés ? ») ou macOS (« Accepter les connexions entrantes ? ») pose la question : réponds oui, et sous Windows seulement pour les réseaux privés. ¦ 🧱 Prvýkrát sa Windows („Povoliť LCNDA v súkromných sieťach?“) alebo macOS („Prijímať prichádzajúce pripojenia?“) opýta: odpovedz áno, a vo Windows len pre súkromné siete. ¦ 🧱 Første gang spør Windows («Tillate LCNDA på private nettverk?») eller macOS («Godta innkommende tilkoblinger?»): svar ja, og i Windows bare for private nettverk.
+📶 Dans cette version, ce qui passe dans le wifi n’est pas chiffré : n’ouvre que sur le wifi de la maison, protégé par sa clé, jamais sur un wifi d’hôtel, de gare ou de médiathèque. ¦ 📶 V tejto verzii nie je to, čo ide cez wifi, šifrované: otváraj len na domácej wifi chránenej heslom, nikdy na wifi v hoteli, na stanici alebo v knižnici. ¦ 📶 I denne versjonen er det som går via wifi ikke kryptert: åpne bare på wifi hjemme, beskyttet med nøkkelen, aldri på wifi på hotell, stasjon eller bibliotek.
+🖥 Cet ordinateur doit rester allumé, avec LCNDA ouvert : s’il dort ou que tu fermes l’app, les autres ne voient plus rien. ¦ 🖥 Tento počítač musí zostať zapnutý a LCNDA otvorené: keď zaspí alebo aplikáciu zatvoríš, ostatní už nič neuvidia. ¦ 🖥 Denne datamaskinen må være på, med LCNDA åpen: hvis den sover eller du lukker appen, ser de andre ingenting lenger.
+autorisé le {date} ¦ povolené {date} ¦ tillatt {date}
+lecture seule ¦ len na čítanie ¦ skrivebeskyttet
+jusqu’au {date} ¦ do {date} ¦ til {date}
+pour cette fois seulement ¦ len tentoraz ¦ bare denne gangen
+Pas vu depuis plus de 30 jours : le retirer ? ¦ Nevidené viac ako 30 dní: odobrať? ¦ Ikke sett på mer enn 30 dager: fjerne den?
+Aucun appareil autorisé pour l’instant. ¦ Zatiaľ žiadne povolené zariadenie. ¦ Ingen tillatt enhet ennå.
+Aucun appareil ne correspond. ¦ Žiadne zariadenie nezodpovedá. ¦ Ingen enhet passer.
+Appareils : {n} · connectés : {c} ¦ Zariadenia: {n} · pripojené: {c} ¦ Enheter: {n} · tilkoblet: {c}
+Chercher un appareil… ¦ Hľadať zariadenie… ¦ Søk etter en enhet…
+La porte du wifi n’a pas pu s’ouvrir (pare-feu, ou adresse déjà prise). Réessaie dans un instant. ¦ Dvere wifi sa nepodarilo otvoriť (firewall alebo už obsadená adresa). Skús to o chvíľu znova. ¦ Wifi-døren kunne ikke åpnes (brannmur, eller adressen er allerede i bruk). Prøv igjen om litt.
+Cette demande n’existe plus (refusée, ou plus de 2 minutes sans réponse). ¦ Táto žiadosť už neexistuje (odmietnutá, alebo viac ako 2 minúty bez odpovede). ¦ Denne forespørselen finnes ikke lenger (avvist, eller mer enn 2 minutter uten svar).
+Trop tard pour annuler : autorise l’appareil de nouveau. ¦ Príliš neskoro na vrátenie: povoľ zariadenie znova. ¦ For sent å angre: tillat enheten igjen.
+🖧 Ouvert aux ordinateurs de la maison. ¦ 🖧 Otvorené počítačom v domácnosti. ¦ 🖧 Åpen for datamaskinene hjemme.
+🖧 Coupé : l’app ne répond plus qu’à cet ordinateur. ¦ 🖧 Vypnuté: aplikácia už odpovedá len tomuto počítaču. ¦ 🖧 Av: appen svarer nå bare denne datamaskinen.
+Adresse copiée ¦ Adresa skopírovaná ¦ Adressen er kopiert
+✓ « {name} » retiré : il ne peut plus se connecter. ¦ ✓ „{name}“ odobrané: už sa nemôže pripojiť. ¦ ✓ «{name}» fjernet: den kan ikke lenger koble til.
+« {name} » peut de nouveau se connecter. ¦ „{name}“ sa môže znova pripojiť. ¦ «{name}» kan koble til igjen.
+Réglage enregistré ¦ Nastavenie uložené ¦ Innstillingen er lagret
+Demande refusée. ¦ Žiadosť odmietnutá. ¦ Forespørsel avvist.
+✓ « {name} » autorisé, en lecture seule. ¦ ✓ „{name}“ povolené, len na čítanie. ¦ ✓ «{name}» tillatt, skrivebeskyttet.
+Demande d’accès ¦ Žiadosť o prístup ¦ Forespørsel om tilgang
+Un appareil veut ouvrir « {name} » ¦ Zariadenie chce otvoriť „{name}“ ¦ En enhet vil åpne «{name}»
+Nom donné ¦ Uvedený názov ¦ Oppgitt navn
+(il peut être faux : compare le code) ¦ (môže byť nepravdivý: porovnaj kód) ¦ (det kan være falskt: sammenlign koden)
+Code affiché ¦ Zobrazený kód ¦ Vist kode
+Regarde l’écran de l’appareil : il doit montrer le même code. Sinon, refuse. ¦ Pozri sa na obrazovku zariadenia: musí ukazovať rovnaký kód. Inak odmietni. ¦ Se på enhetens skjerm: den må vise den samme koden. Ellers avvis.
+Ce qu’il pourra faire : 👁 lecture seule (rien ne peut être modifié depuis cet appareil). Il devra aussi donner le mot de passe de la généalogie. ¦ Čo bude môcť robiť: 👁 len čítanie (z tohto zariadenia sa nedá nič zmeniť). Bude tiež musieť zadať heslo rodokmeňa. ¦ Hva den kan gjøre: 👁 bare lese (ingenting kan endres fra denne enheten). Den må også oppgi slektstreets passord.
+Sans réponse en 2 minutes, la demande disparaît toute seule (refusée). ¦ Bez odpovede do 2 minút žiadosť sama zmizne (odmietnutá). ¦ Uten svar innen 2 minutter forsvinner forespørselen av seg selv (avvist).
+✓ Autoriser « {name} » ¦ ✓ Povoliť „{name}“ ¦ ✓ Tillat «{name}»
+Ouvert aux ordinateurs de la maison · appareils connectés : {n} ¦ Otvorené počítačom v domácnosti · pripojené zariadenia: {n} ¦ Åpen for datamaskinene hjemme · tilkoblede enheter: {n}
+🖧 Rouvrir sur ce réseau ¦ 🖧 Znova otvoriť v tejto sieti ¦ 🖧 Åpne igjen på dette nettverket
+Autre ordinateur ¦ Iný počítač ¦ Annen datamaskin
+Se connecter ¦ Pripojiť sa ¦ Koble til
+Se connecter à l’ordinateur principal ¦ Pripojiť sa k hlavnému počítaču ¦ Koble til hoveddatamaskinen
+Cet appareil n’est pas encore autorisé. Demande l’accès : c’est sur l’ordinateur principal qu’on l’accepte. ¦ Toto zariadenie ešte nie je povolené. Požiadaj o prístup: prijíma sa na hlavnom počítači. ¦ Denne enheten er ikke tillatt ennå. Be om tilgang: den godtas på hoveddatamaskinen.
+Nom de cet appareil ¦ Názov tohto zariadenia ¦ Navn på denne enheten
+Code d’invitation ¦ Kód pozvánky ¦ Invitasjonskode
+(affiché sur l’ordinateur principal) ¦ (zobrazený na hlavnom počítači) ¦ (vist på hoveddatamaskinen)
+Demander l’accès ¦ Požiadať o prístup ¦ Be om tilgang
+Donne un nom à cet appareil. ¦ Pomenuj toto zariadenie. ¦ Gi denne enheten et navn.
+L’ordinateur principal ne répond pas (en veille, éteint, ou porte coupée). ¦ Hlavný počítač neodpovedá (spí, je vypnutý alebo sú dvere zatvorené). ¦ Hoveddatamaskinen svarer ikke (i dvale, slått av eller døren stengt).
+Code d’invitation faux ou périmé. Demande le code affiché sur l’ordinateur principal. ¦ Kód pozvánky je chybný alebo prepadnutý. Spýtaj sa na kód zobrazený na hlavnom počítači. ¦ Invitasjonskoden er feil eller utløpt. Be om koden som vises på hoveddatamaskinen.
+Trop d’essais : réessaie dans {n} min. ¦ Príliš veľa pokusov: skús to znova o {n} min. ¦ For mange forsøk: prøv igjen om {n} min.
+Une demande de cet appareil attend déjà sa réponse. ¦ Žiadosť z tohto zariadenia už čaká na odpoveď. ¦ En forespørsel fra denne enheten venter allerede på svar.
+Trop de demandes en même temps : réessaie dans un instant. ¦ Príliš veľa žiadostí naraz: skús to o chvíľu znova. ¦ For mange forespørsler samtidig: prøv igjen om litt.
+Va sur l’ordinateur principal et vérifie qu’il affiche ce code : ¦ Choď k hlavnému počítaču a over, že ukazuje tento kód: ¦ Gå til hoveddatamaskinen og sjekk at den viser denne koden:
+Ouverture de la généalogie… Elle demande ensuite son mot de passe : il est vérifié par l’ordinateur principal, jamais gardé ici. ¦ Otváranie rodokmeňa… Potom požiada o heslo: overí ho hlavný počítač, tu sa nikdy neukladá. ¦ Slektstreet åpnes… Deretter ber det om passordet sitt: det kontrolleres av hoveddatamaskinen og lagres aldri her.
+La demande a expiré (2 minutes sans réponse). Recommence. ¦ Žiadosť vypršala (2 minúty bez odpovede). Začni znova. ¦ Forespørselen er utløpt (2 minutter uten svar). Begynn på nytt.
+<strong>Appareil invité « {name} »</strong> : lecture seule. La généalogie reste sur l’ordinateur principal ; rien ne peut être modifié depuis cet appareil. ¦ <strong>Zariadenie hosťa „{name}“</strong>: len na čítanie. Rodokmeň zostáva na hlavnom počítači; z tohto zariadenia sa nedá nič zmeniť. ¦ <strong>Gjesteenhet «{name}»</strong>: skrivebeskyttet. Slektstreet blir på hoveddatamaskinen; ingenting kan endres fra denne enheten.
+Appareil ¦ Zariadenie ¦ Enhet
+Il faut un mot de passe ¦ Je potrebné heslo ¦ Et passord trengs
+Cette généalogie n’a pas de mot de passe : elle ne s’ouvre pas sur un autre appareil. Sur l’ordinateur principal : Réglages → 🔐 Mot de passe de cette généalogie. ¦ Tento rodokmeň nemá heslo: na inom zariadení sa neotvorí. Na hlavnom počítači: Nastavenia → 🔐 Heslo tohto rodokmeňa. ¦ Dette slektstreet har ikke passord: det åpnes ikke på en annen enhet. På hoveddatamaskinen: Innstillinger → 🔐 Passord for slektstreet.
+Appareil invité « {name} » : lecture seule. ¦ Zariadenie hosťa „{name}“: len na čítanie. ¦ Gjesteenhet «{name}»: skrivebeskyttet.
+Au prochain lancement de l’app ¦ Pri ďalšom spustení aplikácie ¦ Neste gang appen starter
+reste coupé, il faut le rouvrir ¦ zostane vypnuté, treba ho znova otvoriť ¦ forblir av, du må åpne igjen
+se rouvre tout seul ¦ otvorí sa samo znova ¦ åpnes igjen av seg selv
+Après une mise en veille ¦ Po režime spánku ¦ Etter dvale
+se rouvre au réveil si l’app est restée ouverte ¦ po prebudení sa znova otvorí, ak aplikácia zostala otvorená ¦ åpnes igjen ved oppvåkning hvis appen var åpen
+reste coupé ¦ zostane vypnuté ¦ forblir av
+Mot de passe de la généalogie ¦ Heslo rodokmeňa ¦ Slektstreets passord
+obligatoire pour ouvrir au réseau ¦ povinné na otvorenie do siete ¦ påkrevd for å åpne på nettverket
+facultatif (déconseillé) ¦ nepovinné (neodporúčané) ¦ valgfritt (frarådes)
+demandé en plus du code à 6 chiffres ¦ vyžadovaný navyše k šesťmiestnemu kódu ¦ kreves i tillegg til den 6-sifrede koden
+seulement le code à 6 chiffres ¦ len šesťmiestny kód ¦ bare den 6-sifrede koden
+Durée d’un accès ¦ Trvanie prístupu ¦ Varighet for en tilgang
+jusqu’à ce que tu le retires ¦ kým ho neodoberieš ¦ til du fjerner den
+Empêcher la veille tant qu’un appareil est connecté ¦ Zabrániť spánku, kým je pripojené zariadenie ¦ Hindre dvale så lenge en enhet er tilkoblet
+oui (cet ordinateur ne s’endort plus) ¦ áno (tento počítač už nezaspáva) ¦ ja (denne datamaskinen sovner ikke lenger)
+Si cet ordinateur change de réseau ¦ Keď tento počítač zmení sieť ¦ Hvis denne datamaskinen bytter nettverk
+tout couper ¦ všetko odpojiť ¦ steng alt
+tout couper, puis demander s’il faut rouvrir ¦ všetko odpojiť a potom sa opýtať, či znova otvoriť ¦ steng alt, og spør så om det skal åpnes igjen
+Appareil pas vu depuis 30 jours ¦ Zariadenie nevidené 30 dní ¦ Enhet som ikke er sett på 30 dager
+proposer de le retirer ¦ ponúknuť odobratie ¦ foreslå å fjerne den
+Ouvert au réseau de la maison ¦ Otvorené do domácej siete ¦ Åpnet for hjemmenettverket
+Fermé au réseau de la maison ¦ Zatvorené pre domácu sieť ¦ Stengt for hjemmenettverket
+Appareil autorisé ¦ Zariadenie povolené ¦ Enhet tillatt
+Demande d’accès refusée ¦ Žiadosť o prístup odmietnutá ¦ Forespørsel om tilgang avvist
+Appareil retiré ¦ Zariadenie odobrané ¦ Enhet fjernet
+Connexion en lecture seule ¦ Pripojenie len na čítanie ¦ Skrivebeskyttet tilkobling
+en quittant l’app ¦ pri ukončení aplikácie ¦ når appen avsluttes
+mise en veille ¦ režim spánku ¦ dvale
+le réseau a changé ¦ sieť sa zmenila ¦ nettverket ble endret
+Appareil invité : lecture seule. Cela ne se fait que sur l’ordinateur principal. ¦ Zariadenie hosťa: len na čítanie. To sa dá len na hlavnom počítači. ¦ Gjesteenhet: skrivebeskyttet. Dette kan bare gjøres på hoveddatamaskinen.

@@ -1,0 +1,114 @@
+fr ¦ el ¦ bg
+# Zone « reseau » : 🖧 plusieurs ordinateurs de la maison
+conseillé ¦ προτείνεται ¦ препоръчително
+connecté maintenant ¦ συνδεδεμένη τώρα ¦ свързано сега
+jamais venu ¦ δεν συνδέθηκε ποτέ ¦ никога не се е свързвало
+Plusieurs ordinateurs ¦ Πολλοί υπολογιστές ¦ Няколко компютъра
+Ouvrir cette généalogie aux autres ordinateurs de la maison, par le wifi, jamais par internet. ¦ Άνοιξε αυτή τη γενεαλογία στους άλλους υπολογιστές του σπιτιού, μέσω wifi, ποτέ μέσω διαδικτύου. ¦ Отвори тази генеалогия за другите компютри вкъщи, през wifi, никога през интернет.
+Ce réglage ne se change que sur l’ordinateur principal : cet appareil est un appareil invité, en lecture seule. ¦ Αυτή η ρύθμιση αλλάζει μόνο στον κύριο υπολογιστή: αυτή η συσκευή είναι συσκευή επισκέπτη, μόνο για ανάγνωση. ¦ Тази настройка се променя само на главния компютър: това устройство е гостуващо, само за четене.
+Seulement dans l’app de bureau LCNDA, sur l’ordinateur qui garde la généalogie. ¦ Μόνο στην εφαρμογή υπολογιστή LCNDA, στον υπολογιστή που κρατά τη γενεαλογία. ¦ Само в настолното приложение LCNDA, на компютъра, който пази генеалогията.
+⏻ Tout couper maintenant ¦ ⏻ Διάκοψε τα πάντα τώρα ¦ ⏻ Прекъсни всичко сега
+↻ Nouveau code ¦ ↻ Νέος κωδικός ¦ ↻ Нов код
+Ouvrir « {name} » aux autres ordinateurs de la maison ¦ Άνοιξε τη «{name}» στους άλλους υπολογιστές του σπιτιού ¦ Отвори „{name}“ за другите компютри вкъщи
+Ouvert depuis {time}. Se coupe si cet ordinateur se met en veille, change de réseau ou ferme l’app. ¦ Ανοιχτό από τις {time}. Διακόπτεται αν αυτός ο υπολογιστής μπει σε αναστολή, αλλάξει δίκτυο ή κλείσει την εφαρμογή. ¦ Отворено от {time}. Прекъсва се, ако този компютър заспи, смени мрежата или затвори приложението.
+Coupé : l’app ne répond qu’à cet ordinateur (comme aujourd’hui). ¦ Κλειστό: η εφαρμογή απαντά μόνο σε αυτόν τον υπολογιστή (όπως σήμερα). ¦ Изключено: приложението отговаря само на този компютър (както днес).
+Avant d’ouvrir : cette généalogie n’a pas de mot de passe. Il en faut un pour l’ouvrir au réseau. ¦ Πριν ανοίξεις: αυτή η γενεαλογία δεν έχει κωδικό. Χρειάζεται έναν για να ανοίξει στο δίκτυο. ¦ Преди да отвориш: тази генеалогия няма парола. Нужна е, за да се отвори в мрежата.
+🔐 En mettre un ¦ 🔐 Βάλε έναν ¦ 🔐 Задай парола
+Cet ordinateur n’est relié à aucun réseau de la maison (adresse privée introuvable) : branche le wifi, puis réessaie. ¦ Αυτός ο υπολογιστής δεν είναι συνδεδεμένος σε κανένα οικιακό δίκτυο (δεν βρέθηκε ιδιωτική διεύθυνση): άνοιξε το wifi και δοκίμασε ξανά. ¦ Този компютър не е свързан с никоя домашна мрежа (не е намерен частен адрес): включи wifi и опитай отново.
+5 codes d’invitation faux : plus aucune demande jusqu’à {time}. ¦ 5 λάθος κωδικοί πρόσκλησης: κανένα αίτημα μέχρι τις {time}. ¦ 5 грешни кода за покана: никакви заявки до {time}.
+5 demandes refusées : plus aucune demande jusqu’à {time}. ¦ 5 αιτήματα απορρίφθηκαν: κανένα αίτημα μέχρι τις {time}. ¦ 5 отказани заявки: никакви заявки до {time}.
+Le réseau a changé : tout a été coupé. ¦ Το δίκτυο άλλαξε: όλα διακόπηκαν. ¦ Мрежата се смени: всичко е прекъснато.
+Adresse à taper sur l’autre ordinateur ¦ Διεύθυνση για πληκτρολόγηση στον άλλο υπολογιστή ¦ Адрес, който се въвежда на другия компютър
+Code d’invitation (valable 10 min, une seule fois) ¦ Κωδικός πρόσκλησης (ισχύει 10 λεπτά, μόνο μία φορά) ¦ Код за покана (валиден 10 мин, само веднъж)
+Sur l’autre ordinateur : ouvre un navigateur (Chrome, Firefox, Safari, Edge), tape cette adresse, puis le code. Ensuite, c’est toi qui acceptes ici, en comparant le code à 6 chiffres affiché des deux côtés. ¦ Στον άλλο υπολογιστή: άνοιξε ένα πρόγραμμα περιήγησης (Chrome, Firefox, Safari, Edge), πληκτρολόγησε αυτή τη διεύθυνση και μετά τον κωδικό. Έπειτα εσύ αποδέχεσαι εδώ, συγκρίνοντας τον 6ψήφιο κωδικό που φαίνεται και στις δύο πλευρές. ¦ На другия компютър: отвори браузър (Chrome, Firefox, Safari, Edge), въведи този адрес, после кода. След това ти приемаш тук, като сравниш 6-цифрения код, показан от двете страни.
+Demandes d’accès ¦ Αιτήματα πρόσβασης ¦ Заявки за достъп
+✓ Autoriser ¦ ✓ Επίτρεψε ¦ ✓ Разреши
+Appareils autorisés ¦ Επιτρεπόμενες συσκευές ¦ Разрешени устройства
+Tous les appareils invités sont en lecture seule : ils regardent la généalogie, rien ne peut être modifié depuis eux. ¦ Όλες οι συσκευές επισκεπτών είναι μόνο για ανάγνωση: βλέπουν τη γενεαλογία, τίποτα δεν αλλάζει από αυτές. ¦ Всички гостуващи устройства са само за четене: разглеждат генеалогията, от тях нищо не може да се промени.
+Ce qu’il faut savoir ¦ Τι πρέπει να ξέρεις ¦ Какво трябва да знаеш
+🧱 La première fois, Windows (« Autoriser LCNDA sur les réseaux privés ? ») ou macOS (« Accepter les connexions entrantes ? ») pose la question : réponds oui, et sous Windows seulement pour les réseaux privés. ¦ 🧱 Την πρώτη φορά, τα Windows («Να επιτραπεί το LCNDA στα ιδιωτικά δίκτυα;») ή το macOS («Αποδοχή εισερχόμενων συνδέσεων;») ρωτούν: απάντησε ναι, και στα Windows μόνο για ιδιωτικά δίκτυα. ¦ 🧱 Първия път Windows („Разрешаване на LCNDA в частни мрежи?“) или macOS („Приемане на входящи връзки?“) пита: отговори с да, а в Windows само за частни мрежи.
+📶 Dans cette version, ce qui passe dans le wifi n’est pas chiffré : n’ouvre que sur le wifi de la maison, protégé par sa clé, jamais sur un wifi d’hôtel, de gare ou de médiathèque. ¦ 📶 Σε αυτή την έκδοση, ό,τι περνά από το wifi δεν είναι κρυπτογραφημένο: άνοιγε μόνο στο wifi του σπιτιού, προστατευμένο με κλειδί, ποτέ σε wifi ξενοδοχείου, σταθμού ή βιβλιοθήκης. ¦ 📶 В тази версия това, което минава през wifi, не е шифровано: отваряй само в домашния wifi, защитен с ключ, никога в wifi на хотел, гара или библиотека.
+🖥 Cet ordinateur doit rester allumé, avec LCNDA ouvert : s’il dort ou que tu fermes l’app, les autres ne voient plus rien. ¦ 🖥 Αυτός ο υπολογιστής πρέπει να μείνει ανοιχτός, με το LCNDA ανοιχτό: αν κοιμηθεί ή κλείσεις την εφαρμογή, οι άλλοι δεν βλέπουν πια τίποτα. ¦ 🖥 Този компютър трябва да остане включен, с отворено LCNDA: ако заспи или затвориш приложението, другите вече не виждат нищо.
+autorisé le {date} ¦ επιτράπηκε στις {date} ¦ разрешено на {date}
+lecture seule ¦ μόνο ανάγνωση ¦ само четене
+jusqu’au {date} ¦ έως {date} ¦ до {date}
+pour cette fois seulement ¦ μόνο αυτή τη φορά ¦ само този път
+Pas vu depuis plus de 30 jours : le retirer ? ¦ Δεν εμφανίστηκε πάνω από 30 μέρες: να αφαιρεθεί; ¦ Не е виждано повече от 30 дни: да се премахне ли?
+Aucun appareil autorisé pour l’instant. ¦ Καμία επιτρεπόμενη συσκευή ακόμη. ¦ Все още няма разрешено устройство.
+Aucun appareil ne correspond. ¦ Καμία συσκευή δεν ταιριάζει. ¦ Нито едно устройство не съвпада.
+Appareils : {n} · connectés : {c} ¦ Συσκευές: {n} · συνδεδεμένες: {c} ¦ Устройства: {n} · свързани: {c}
+Chercher un appareil… ¦ Αναζήτηση συσκευής… ¦ Търси устройство…
+La porte du wifi n’a pas pu s’ouvrir (pare-feu, ou adresse déjà prise). Réessaie dans un instant. ¦ Η πόρτα του wifi δεν μπόρεσε να ανοίξει (τείχος προστασίας ή διεύθυνση ήδη σε χρήση). Δοκίμασε ξανά σε λίγο. ¦ Вратата на wifi не можа да се отвори (защитна стена или адресът вече е зает). Опитай отново след малко.
+Cette demande n’existe plus (refusée, ou plus de 2 minutes sans réponse). ¦ Αυτό το αίτημα δεν υπάρχει πια (απορρίφθηκε ή πάνω από 2 λεπτά χωρίς απάντηση). ¦ Тази заявка вече не съществува (отказана или повече от 2 минути без отговор).
+Trop tard pour annuler : autorise l’appareil de nouveau. ¦ Πολύ αργά για αναίρεση: επίτρεψε ξανά τη συσκευή. ¦ Твърде късно за отмяна: разреши устройството отново.
+🖧 Ouvert aux ordinateurs de la maison. ¦ 🖧 Ανοιχτό στους υπολογιστές του σπιτιού. ¦ 🖧 Отворено за компютрите вкъщи.
+🖧 Coupé : l’app ne répond plus qu’à cet ordinateur. ¦ 🖧 Κλειστό: η εφαρμογή απαντά πλέον μόνο σε αυτόν τον υπολογιστή. ¦ 🖧 Изключено: приложението вече отговаря само на този компютър.
+Adresse copiée ¦ Η διεύθυνση αντιγράφηκε ¦ Адресът е копиран
+✓ « {name} » retiré : il ne peut plus se connecter. ¦ ✓ Η «{name}» αφαιρέθηκε: δεν μπορεί πια να συνδεθεί. ¦ ✓ „{name}“ е премахнато: вече не може да се свързва.
+« {name} » peut de nouveau se connecter. ¦ Η «{name}» μπορεί να συνδεθεί ξανά. ¦ „{name}“ може отново да се свързва.
+Réglage enregistré ¦ Η ρύθμιση αποθηκεύτηκε ¦ Настройката е запазена
+Demande refusée. ¦ Το αίτημα απορρίφθηκε. ¦ Заявката е отказана.
+✓ « {name} » autorisé, en lecture seule. ¦ ✓ Η «{name}» επιτράπηκε, μόνο για ανάγνωση. ¦ ✓ „{name}“ е разрешено, само за четене.
+Demande d’accès ¦ Αίτημα πρόσβασης ¦ Заявка за достъп
+Un appareil veut ouvrir « {name} » ¦ Μια συσκευή θέλει να ανοίξει τη «{name}» ¦ Устройство иска да отвори „{name}“
+Nom donné ¦ Όνομα που δόθηκε ¦ Посочено име
+(il peut être faux : compare le code) ¦ (μπορεί να είναι ψεύτικο: σύγκρινε τον κωδικό) ¦ (може да е фалшиво: сравни кода)
+Code affiché ¦ Κωδικός που φαίνεται ¦ Показан код
+Regarde l’écran de l’appareil : il doit montrer le même code. Sinon, refuse. ¦ Κοίτα την οθόνη της συσκευής: πρέπει να δείχνει τον ίδιο κωδικό. Αλλιώς, απόρριψε. ¦ Погледни екрана на устройството: трябва да показва същия код. Иначе откажи.
+Ce qu’il pourra faire : 👁 lecture seule (rien ne peut être modifié depuis cet appareil). Il devra aussi donner le mot de passe de la généalogie. ¦ Τι θα μπορεί να κάνει: 👁 μόνο ανάγνωση (τίποτα δεν αλλάζει από αυτή τη συσκευή). Θα πρέπει επίσης να δώσει τον κωδικό της γενεαλογίας. ¦ Какво ще може да прави: 👁 само четене (от това устройство нищо не може да се промени). Ще трябва да въведе и паролата на генеалогията.
+Sans réponse en 2 minutes, la demande disparaît toute seule (refusée). ¦ Χωρίς απάντηση σε 2 λεπτά, το αίτημα εξαφανίζεται μόνο του (απορρίπτεται). ¦ Без отговор до 2 минути заявката изчезва сама (отказана).
+✓ Autoriser « {name} » ¦ ✓ Επίτρεψε τη «{name}» ¦ ✓ Разреши „{name}“
+Ouvert aux ordinateurs de la maison · appareils connectés : {n} ¦ Ανοιχτό στους υπολογιστές του σπιτιού · συνδεδεμένες συσκευές: {n} ¦ Отворено за компютрите вкъщи · свързани устройства: {n}
+🖧 Rouvrir sur ce réseau ¦ 🖧 Άνοιξε ξανά σε αυτό το δίκτυο ¦ 🖧 Отвори отново в тази мрежа
+Autre ordinateur ¦ Άλλος υπολογιστής ¦ Друг компютър
+Se connecter ¦ Σύνδεση ¦ Свържи се
+Se connecter à l’ordinateur principal ¦ Σύνδεση στον κύριο υπολογιστή ¦ Свържи се с главния компютър
+Cet appareil n’est pas encore autorisé. Demande l’accès : c’est sur l’ordinateur principal qu’on l’accepte. ¦ Αυτή η συσκευή δεν επιτρέπεται ακόμη. Ζήτα πρόσβαση: η αποδοχή γίνεται στον κύριο υπολογιστή. ¦ Това устройство още не е разрешено. Поискай достъп: той се приема на главния компютър.
+Nom de cet appareil ¦ Όνομα αυτής της συσκευής ¦ Име на това устройство
+Code d’invitation ¦ Κωδικός πρόσκλησης ¦ Код за покана
+(affiché sur l’ordinateur principal) ¦ (φαίνεται στον κύριο υπολογιστή) ¦ (показан на главния компютър)
+Demander l’accès ¦ Ζήτα πρόσβαση ¦ Поискай достъп
+Donne un nom à cet appareil. ¦ Δώσε ένα όνομα σε αυτή τη συσκευή. ¦ Дай име на това устройство.
+L’ordinateur principal ne répond pas (en veille, éteint, ou porte coupée). ¦ Ο κύριος υπολογιστής δεν απαντά (σε αναστολή, κλειστός ή πόρτα κλειστή). ¦ Главният компютър не отговаря (заспал, изключен или вратата е затворена).
+Code d’invitation faux ou périmé. Demande le code affiché sur l’ordinateur principal. ¦ Ο κωδικός πρόσκλησης είναι λάθος ή έληξε. Ζήτα τον κωδικό που φαίνεται στον κύριο υπολογιστή. ¦ Кодът за покана е грешен или изтекъл. Поискай кода, показан на главния компютър.
+Trop d’essais : réessaie dans {n} min. ¦ Πάρα πολλές προσπάθειες: δοκίμασε ξανά σε {n} λεπτά. ¦ Твърде много опити: опитай отново след {n} мин.
+Une demande de cet appareil attend déjà sa réponse. ¦ Ένα αίτημα από αυτή τη συσκευή περιμένει ήδη απάντηση. ¦ Заявка от това устройство вече чака отговор.
+Trop de demandes en même temps : réessaie dans un instant. ¦ Πάρα πολλά αιτήματα ταυτόχρονα: δοκίμασε ξανά σε λίγο. ¦ Твърде много заявки наведнъж: опитай отново след малко.
+Va sur l’ordinateur principal et vérifie qu’il affiche ce code : ¦ Πήγαινε στον κύριο υπολογιστή και έλεγξε ότι δείχνει αυτόν τον κωδικό: ¦ Иди при главния компютър и провери дали показва този код:
+Ouverture de la généalogie… Elle demande ensuite son mot de passe : il est vérifié par l’ordinateur principal, jamais gardé ici. ¦ Άνοιγμα της γενεαλογίας… Μετά ζητά τον κωδικό της: τον ελέγχει ο κύριος υπολογιστής, δεν φυλάσσεται ποτέ εδώ. ¦ Отваряне на генеалогията… После тя ще поиска паролата си: проверява я главният компютър, тук никога не се пази.
+La demande a expiré (2 minutes sans réponse). Recommence. ¦ Το αίτημα έληξε (2 λεπτά χωρίς απάντηση). Ξεκίνα ξανά. ¦ Заявката изтече (2 минути без отговор). Започни отначало.
+<strong>Appareil invité « {name} »</strong> : lecture seule. La généalogie reste sur l’ordinateur principal ; rien ne peut être modifié depuis cet appareil. ¦ <strong>Συσκευή επισκέπτη «{name}»</strong>: μόνο ανάγνωση. Η γενεαλογία μένει στον κύριο υπολογιστή· τίποτα δεν αλλάζει από αυτή τη συσκευή. ¦ <strong>Гостуващо устройство „{name}“</strong>: само четене. Генеалогията остава на главния компютър; от това устройство нищо не може да се промени.
+Appareil ¦ Συσκευή ¦ Устройство
+Il faut un mot de passe ¦ Χρειάζεται κωδικός ¦ Нужна е парола
+Cette généalogie n’a pas de mot de passe : elle ne s’ouvre pas sur un autre appareil. Sur l’ordinateur principal : Réglages → 🔐 Mot de passe de cette généalogie. ¦ Αυτή η γενεαλογία δεν έχει κωδικό: δεν ανοίγει σε άλλη συσκευή. Στον κύριο υπολογιστή: Ρυθμίσεις → 🔐 Κωδικός αυτής της γενεαλογίας. ¦ Тази генеалогия няма парола: не се отваря на друго устройство. На главния компютър: Настройки → 🔐 Парола на тази генеалогия.
+Appareil invité « {name} » : lecture seule. ¦ Συσκευή επισκέπτη «{name}»: μόνο ανάγνωση. ¦ Гостуващо устройство „{name}“: само четене.
+Au prochain lancement de l’app ¦ Στην επόμενη εκκίνηση της εφαρμογής ¦ При следващото стартиране на приложението
+reste coupé, il faut le rouvrir ¦ μένει κλειστό, πρέπει να το ανοίξεις ξανά ¦ остава изключено, трябва да се отвори отново
+se rouvre tout seul ¦ ξανανοίγει μόνο του ¦ отваря се отново само
+Après une mise en veille ¦ Μετά από αναστολή ¦ След заспиване
+se rouvre au réveil si l’app est restée ouverte ¦ ξανανοίγει στο ξύπνημα αν η εφαρμογή έμεινε ανοιχτή ¦ отваря се отново при събуждане, ако приложението е останало отворено
+reste coupé ¦ μένει κλειστό ¦ остава изключено
+Mot de passe de la généalogie ¦ Κωδικός της γενεαλογίας ¦ Парола на генеалогията
+obligatoire pour ouvrir au réseau ¦ υποχρεωτικός για άνοιγμα στο δίκτυο ¦ задължителна за отваряне в мрежата
+facultatif (déconseillé) ¦ προαιρετικός (δεν προτείνεται) ¦ по избор (не се препоръчва)
+demandé en plus du code à 6 chiffres ¦ ζητείται επιπλέον του 6ψήφιου κωδικού ¦ иска се освен 6-цифрения код
+seulement le code à 6 chiffres ¦ μόνο ο 6ψήφιος κωδικός ¦ само 6-цифреният код
+Durée d’un accès ¦ Διάρκεια πρόσβασης ¦ Срок на достъпа
+jusqu’à ce que tu le retires ¦ μέχρι να την αφαιρέσεις ¦ докато не го премахнеш
+Empêcher la veille tant qu’un appareil est connecté ¦ Απότρεψε την αναστολή όσο μια συσκευή είναι συνδεδεμένη ¦ Не позволявай заспиване, докато има свързано устройство
+oui (cet ordinateur ne s’endort plus) ¦ ναι (αυτός ο υπολογιστής δεν κοιμάται πια) ¦ да (този компютър вече не заспива)
+Si cet ordinateur change de réseau ¦ Αν αυτός ο υπολογιστής αλλάξει δίκτυο ¦ Ако този компютър смени мрежата
+tout couper ¦ διάκοψε τα πάντα ¦ прекъсни всичко
+tout couper, puis demander s’il faut rouvrir ¦ διάκοψε τα πάντα και μετά ρώτα αν θα ξανανοίξει ¦ прекъсни всичко, после попитай дали да се отвори отново
+Appareil pas vu depuis 30 jours ¦ Συσκευή που δεν εμφανίστηκε 30 μέρες ¦ Устройство, невиждано 30 дни
+proposer de le retirer ¦ πρότεινε την αφαίρεσή της ¦ предложи да се премахне
+Ouvert au réseau de la maison ¦ Ανοιχτό στο οικιακό δίκτυο ¦ Отворено за домашната мрежа
+Fermé au réseau de la maison ¦ Κλειστό στο οικιακό δίκτυο ¦ Затворено за домашната мрежа
+Appareil autorisé ¦ Η συσκευή επιτράπηκε ¦ Устройството е разрешено
+Demande d’accès refusée ¦ Το αίτημα πρόσβασης απορρίφθηκε ¦ Заявката за достъп е отказана
+Appareil retiré ¦ Η συσκευή αφαιρέθηκε ¦ Устройството е премахнато
+Connexion en lecture seule ¦ Σύνδεση μόνο για ανάγνωση ¦ Връзка само за четене
+en quittant l’app ¦ κατά την έξοδο από την εφαρμογή ¦ при излизане от приложението
+mise en veille ¦ αναστολή ¦ заспиване
+le réseau a changé ¦ το δίκτυο άλλαξε ¦ мрежата се смени
+Appareil invité : lecture seule. Cela ne se fait que sur l’ordinateur principal. ¦ Συσκευή επισκέπτη: μόνο ανάγνωση. Αυτό γίνεται μόνο στον κύριο υπολογιστή. ¦ Гостуващо устройство: само четене. Това става само на главния компютър.

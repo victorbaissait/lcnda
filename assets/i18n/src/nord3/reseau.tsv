@@ -1,0 +1,114 @@
+fr ¦ ro
+# Zone « reseau » : 🖧 plusieurs ordinateurs de la maison
+conseillé ¦ recomandat
+connecté maintenant ¦ conectat acum
+jamais venu ¦ niciodată conectat
+Plusieurs ordinateurs ¦ Mai multe calculatoare
+Ouvrir cette généalogie aux autres ordinateurs de la maison, par le wifi, jamais par internet. ¦ Deschide această genealogie pentru celelalte calculatoare din casă, prin wifi, niciodată prin internet.
+Ce réglage ne se change que sur l’ordinateur principal : cet appareil est un appareil invité, en lecture seule. ¦ Această setare se schimbă doar pe calculatorul principal: acest dispozitiv este un dispozitiv invitat, doar pentru citire.
+Seulement dans l’app de bureau LCNDA, sur l’ordinateur qui garde la généalogie. ¦ Doar în aplicația de birou LCNDA, pe calculatorul care păstrează genealogia.
+⏻ Tout couper maintenant ¦ ⏻ Oprește tot acum
+↻ Nouveau code ¦ ↻ Cod nou
+Ouvrir « {name} » aux autres ordinateurs de la maison ¦ Deschide „{name}” pentru celelalte calculatoare din casă
+Ouvert depuis {time}. Se coupe si cet ordinateur se met en veille, change de réseau ou ferme l’app. ¦ Deschis de la {time}. Se oprește dacă acest calculator intră în repaus, schimbă rețeaua sau închide aplicația.
+Coupé : l’app ne répond qu’à cet ordinateur (comme aujourd’hui). ¦ Oprit: aplicația răspunde doar acestui calculator (ca azi).
+Avant d’ouvrir : cette généalogie n’a pas de mot de passe. Il en faut un pour l’ouvrir au réseau. ¦ Înainte de a deschide: această genealogie nu are parolă. E nevoie de una pentru a o deschide în rețea.
+🔐 En mettre un ¦ 🔐 Pune una
+Cet ordinateur n’est relié à aucun réseau de la maison (adresse privée introuvable) : branche le wifi, puis réessaie. ¦ Acest calculator nu este conectat la nicio rețea de acasă (nicio adresă privată găsită): pornește wifi-ul, apoi încearcă din nou.
+5 codes d’invitation faux : plus aucune demande jusqu’à {time}. ¦ 5 coduri de invitație greșite: nicio cerere până la {time}.
+5 demandes refusées : plus aucune demande jusqu’à {time}. ¦ 5 cereri refuzate: nicio cerere până la {time}.
+Le réseau a changé : tout a été coupé. ¦ Rețeaua s-a schimbat: totul a fost oprit.
+Adresse à taper sur l’autre ordinateur ¦ Adresa de scris pe celălalt calculator
+Code d’invitation (valable 10 min, une seule fois) ¦ Cod de invitație (valabil 10 min, o singură dată)
+Sur l’autre ordinateur : ouvre un navigateur (Chrome, Firefox, Safari, Edge), tape cette adresse, puis le code. Ensuite, c’est toi qui acceptes ici, en comparant le code à 6 chiffres affiché des deux côtés. ¦ Pe celălalt calculator: deschide un browser (Chrome, Firefox, Safari, Edge), scrie această adresă, apoi codul. Apoi tu accepți aici, comparând codul de 6 cifre afișat pe ambele părți.
+Demandes d’accès ¦ Cereri de acces
+✓ Autoriser ¦ ✓ Permite
+Appareils autorisés ¦ Dispozitive permise
+Tous les appareils invités sont en lecture seule : ils regardent la généalogie, rien ne peut être modifié depuis eux. ¦ Toate dispozitivele invitate sunt doar pentru citire: se uită la genealogie, nimic nu poate fi modificat de pe ele.
+Ce qu’il faut savoir ¦ Ce trebuie să știi
+🧱 La première fois, Windows (« Autoriser LCNDA sur les réseaux privés ? ») ou macOS (« Accepter les connexions entrantes ? ») pose la question : réponds oui, et sous Windows seulement pour les réseaux privés. ¦ 🧱 Prima dată, Windows („Permiți LCNDA în rețelele private?”) sau macOS („Accepți conexiunile de intrare?”) pune întrebarea: răspunde da, iar în Windows doar pentru rețelele private.
+📶 Dans cette version, ce qui passe dans le wifi n’est pas chiffré : n’ouvre que sur le wifi de la maison, protégé par sa clé, jamais sur un wifi d’hôtel, de gare ou de médiathèque. ¦ 📶 În această versiune, ce trece prin wifi nu este criptat: deschide doar pe wifi-ul de acasă, protejat de cheia lui, niciodată pe un wifi de hotel, de gară sau de bibliotecă.
+🖥 Cet ordinateur doit rester allumé, avec LCNDA ouvert : s’il dort ou que tu fermes l’app, les autres ne voient plus rien. ¦ 🖥 Acest calculator trebuie să rămână pornit, cu LCNDA deschis: dacă intră în repaus sau închizi aplicația, ceilalți nu mai văd nimic.
+autorisé le {date} ¦ permis pe {date}
+lecture seule ¦ doar citire
+jusqu’au {date} ¦ până pe {date}
+pour cette fois seulement ¦ doar de data aceasta
+Pas vu depuis plus de 30 jours : le retirer ? ¦ Nevăzut de peste 30 de zile: îl elimini?
+Aucun appareil autorisé pour l’instant. ¦ Niciun dispozitiv permis deocamdată.
+Aucun appareil ne correspond. ¦ Niciun dispozitiv nu se potrivește.
+Appareils : {n} · connectés : {c} ¦ Dispozitive: {n} · conectate: {c}
+Chercher un appareil… ¦ Caută un dispozitiv…
+La porte du wifi n’a pas pu s’ouvrir (pare-feu, ou adresse déjà prise). Réessaie dans un instant. ¦ Ușa wifi nu s-a putut deschide (firewall sau adresă deja ocupată). Încearcă din nou peste o clipă.
+Cette demande n’existe plus (refusée, ou plus de 2 minutes sans réponse). ¦ Această cerere nu mai există (refuzată sau peste 2 minute fără răspuns).
+Trop tard pour annuler : autorise l’appareil de nouveau. ¦ Prea târziu pentru anulare: permite din nou dispozitivul.
+🖧 Ouvert aux ordinateurs de la maison. ¦ 🖧 Deschis pentru calculatoarele din casă.
+🖧 Coupé : l’app ne répond plus qu’à cet ordinateur. ¦ 🖧 Oprit: aplicația nu mai răspunde decât acestui calculator.
+Adresse copiée ¦ Adresă copiată
+✓ « {name} » retiré : il ne peut plus se connecter. ¦ ✓ „{name}” eliminat: nu se mai poate conecta.
+« {name} » peut de nouveau se connecter. ¦ „{name}” se poate conecta din nou.
+Réglage enregistré ¦ Setare salvată
+Demande refusée. ¦ Cerere refuzată.
+✓ « {name} » autorisé, en lecture seule. ¦ ✓ „{name}” permis, doar pentru citire.
+Demande d’accès ¦ Cerere de acces
+Un appareil veut ouvrir « {name} » ¦ Un dispozitiv vrea să deschidă „{name}”
+Nom donné ¦ Nume dat
+(il peut être faux : compare le code) ¦ (poate fi fals: compară codul)
+Code affiché ¦ Cod afișat
+Regarde l’écran de l’appareil : il doit montrer le même code. Sinon, refuse. ¦ Uită-te la ecranul dispozitivului: trebuie să arate același cod. Altfel, refuză.
+Ce qu’il pourra faire : 👁 lecture seule (rien ne peut être modifié depuis cet appareil). Il devra aussi donner le mot de passe de la généalogie. ¦ Ce va putea face: 👁 doar citire (nimic nu poate fi modificat de pe acest dispozitiv). Va trebui să dea și parola genealogiei.
+Sans réponse en 2 minutes, la demande disparaît toute seule (refusée). ¦ Fără răspuns în 2 minute, cererea dispare singură (refuzată).
+✓ Autoriser « {name} » ¦ ✓ Permite „{name}”
+Ouvert aux ordinateurs de la maison · appareils connectés : {n} ¦ Deschis pentru calculatoarele din casă · dispozitive conectate: {n}
+🖧 Rouvrir sur ce réseau ¦ 🖧 Redeschide în această rețea
+Autre ordinateur ¦ Alt calculator
+Se connecter ¦ Conectează-te
+Se connecter à l’ordinateur principal ¦ Conectează-te la calculatorul principal
+Cet appareil n’est pas encore autorisé. Demande l’accès : c’est sur l’ordinateur principal qu’on l’accepte. ¦ Acest dispozitiv nu este încă permis. Cere acces: se acceptă pe calculatorul principal.
+Nom de cet appareil ¦ Numele acestui dispozitiv
+Code d’invitation ¦ Cod de invitație
+(affiché sur l’ordinateur principal) ¦ (afișat pe calculatorul principal)
+Demander l’accès ¦ Cere acces
+Donne un nom à cet appareil. ¦ Dă un nume acestui dispozitiv.
+L’ordinateur principal ne répond pas (en veille, éteint, ou porte coupée). ¦ Calculatorul principal nu răspunde (în repaus, oprit sau ușă închisă).
+Code d’invitation faux ou périmé. Demande le code affiché sur l’ordinateur principal. ¦ Cod de invitație greșit sau expirat. Cere codul afișat pe calculatorul principal.
+Trop d’essais : réessaie dans {n} min. ¦ Prea multe încercări: încearcă din nou peste {n} min.
+Une demande de cet appareil attend déjà sa réponse. ¦ O cerere de la acest dispozitiv își așteaptă deja răspunsul.
+Trop de demandes en même temps : réessaie dans un instant. ¦ Prea multe cereri în același timp: încearcă din nou peste o clipă.
+Va sur l’ordinateur principal et vérifie qu’il affiche ce code : ¦ Mergi la calculatorul principal și verifică dacă afișează acest cod:
+Ouverture de la généalogie… Elle demande ensuite son mot de passe : il est vérifié par l’ordinateur principal, jamais gardé ici. ¦ Se deschide genealogia… Apoi îi cere parola: e verificată de calculatorul principal, niciodată păstrată aici.
+La demande a expiré (2 minutes sans réponse). Recommence. ¦ Cererea a expirat (2 minute fără răspuns). Începe din nou.
+<strong>Appareil invité « {name} »</strong> : lecture seule. La généalogie reste sur l’ordinateur principal ; rien ne peut être modifié depuis cet appareil. ¦ <strong>Dispozitiv invitat „{name}”</strong>: doar citire. Genealogia rămâne pe calculatorul principal; nimic nu poate fi modificat de pe acest dispozitiv.
+Appareil ¦ Dispozitiv
+Il faut un mot de passe ¦ E nevoie de o parolă
+Cette généalogie n’a pas de mot de passe : elle ne s’ouvre pas sur un autre appareil. Sur l’ordinateur principal : Réglages → 🔐 Mot de passe de cette généalogie. ¦ Această genealogie nu are parolă: nu se deschide pe alt dispozitiv. Pe calculatorul principal: Setări → 🔐 Parola acestei genealogii.
+Appareil invité « {name} » : lecture seule. ¦ Dispozitiv invitat „{name}”: doar citire.
+Au prochain lancement de l’app ¦ La următoarea pornire a aplicației
+reste coupé, il faut le rouvrir ¦ rămâne oprit, trebuie redeschis
+se rouvre tout seul ¦ se redeschide singur
+Après une mise en veille ¦ După un repaus
+se rouvre au réveil si l’app est restée ouverte ¦ se redeschide la trezire dacă aplicația a rămas deschisă
+reste coupé ¦ rămâne oprit
+Mot de passe de la généalogie ¦ Parola genealogiei
+obligatoire pour ouvrir au réseau ¦ obligatorie pentru a deschide în rețea
+facultatif (déconseillé) ¦ facultativă (nerecomandat)
+demandé en plus du code à 6 chiffres ¦ cerut în plus față de codul de 6 cifre
+seulement le code à 6 chiffres ¦ doar codul de 6 cifre
+Durée d’un accès ¦ Durata unui acces
+jusqu’à ce que tu le retires ¦ până îl elimini
+Empêcher la veille tant qu’un appareil est connecté ¦ Împiedică repausul cât timp un dispozitiv e conectat
+oui (cet ordinateur ne s’endort plus) ¦ da (acest calculator nu mai adoarme)
+Si cet ordinateur change de réseau ¦ Dacă acest calculator schimbă rețeaua
+tout couper ¦ oprește tot
+tout couper, puis demander s’il faut rouvrir ¦ oprește tot, apoi întreabă dacă trebuie redeschis
+Appareil pas vu depuis 30 jours ¦ Dispozitiv nevăzut de 30 de zile
+proposer de le retirer ¦ propune eliminarea lui
+Ouvert au réseau de la maison ¦ Deschis pentru rețeaua de acasă
+Fermé au réseau de la maison ¦ Închis pentru rețeaua de acasă
+Appareil autorisé ¦ Dispozitiv permis
+Demande d’accès refusée ¦ Cerere de acces refuzată
+Appareil retiré ¦ Dispozitiv eliminat
+Connexion en lecture seule ¦ Conexiune doar pentru citire
+en quittant l’app ¦ la ieșirea din aplicație
+mise en veille ¦ repaus
+le réseau a changé ¦ rețeaua s-a schimbat
+Appareil invité : lecture seule. Cela ne se fait que sur l’ordinateur principal. ¦ Dispozitiv invitat: doar citire. Asta se face doar pe calculatorul principal.

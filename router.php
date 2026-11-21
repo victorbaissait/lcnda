@@ -134,6 +134,15 @@ if (is_string($appSecret) && $appSecret !== '' && !$liveOk) {
         return router_deny(403);
     }
 }
+// 🖧 Plusieurs ordinateurs (lib/reseau_local.php) : un appareil invité, vérifié par la porte du wifi (electron/lan-gate.js), est
+// en lecture seule et ne touche à rien de ce qui est réservé à l'ordinateur principal ; le registre note les gestes de la porte.
+require_once __DIR__ . '/lib/reseau_local.php';
+if ($path === '/api.php' && ($_GET['action'] ?? '') === 'lan_note') {
+    return lan_note_route();
+}
+if (lan_guest_route($path)) {
+    return true;
+}
 if ($path === '/__health') {
     header('Content-Type: text/plain; charset=utf-8');
     echo 'ok';

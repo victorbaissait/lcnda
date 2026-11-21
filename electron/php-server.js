@@ -175,6 +175,9 @@ class PhpServer extends EventEmitter {
     // 🔐 un lancement de l'app : une généalogie protégée par un mot de passe et ouverte au lancement précédent est
     // reverrouillée (lib/verrou.php compare ce numéro à celui de la séance). Gardé si PHP redémarre après un plantage.
     this.bootId = crypto.randomBytes(16).toString('hex');
+    // 🖧 Plusieurs ordinateurs (electron/lan-gate.js) : la porte du wifi signe avec ce secret l'appareil qu'elle a vérifié
+    // (en-tête x-carnet-gate) ; PHP (lib/reseau_local.php) ne croit l'en-tête x-carnet-device qu'avec lui.
+    this.gateSecret = crypto.randomBytes(24).toString('hex');
     this.port = 0;
     this.poolSize = Math.max(1, Math.min(16, Math.floor(o.pool || 1)));
     this.backends = []; // { id, port, child, active, ready }
@@ -264,6 +267,7 @@ class PhpServer extends EventEmitter {
       GENEALOGY_APP_SECRET: this.secret,
       GENEALOGY_LOCAL_SECRET: this.localSecret,
       GENEALOGY_BOOT_ID: this.bootId,
+      GENEALOGY_GATE_SECRET: this.gateSecret,
     };
     // 🔐 portes de test (horloge avancée, nom d'ordinateur imposé) : jamais transmises au PHP de l'app installée
     if (o.packaged || isPackagedApp()) { for (const k of ['LCNDA_TEST_CLOCK_FILE', 'GENEALOGY_TEST', 'GENEALOGY_MACHINE_NAME']) delete env[k]; }

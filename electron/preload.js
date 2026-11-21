@@ -4,7 +4,8 @@
  * ouvrir la fenêtre système de choix d'un fichier à importer, puis lancer l'import du fichier choisi ; télécharger les
  * communes d’un pays des battues (code pays seulement) ; poser, retirer ou régler un widget sur le bureau (sorte connue seulement) ;
  * lister les navigateurs installés et y ouvrir une page de l’application (aperçu en direct d’un site ; adresse vérifiée) ;
- * regarder s’il existe une nouvelle version, la télécharger (vérifiée par empreinte) et l’ouvrir.
+ * regarder s’il existe une nouvelle version, la télécharger (vérifiée par empreinte) et l’ouvrir ; 🖧 ouvrir ou couper la porte du
+ * wifi, accepter ou refuser un appareil, le retirer (seulement des identifiants : ni jeton, ni empreinte, ni adresse choisie).
  * Elle ne voit jamais de chemin et ne peut pas en désigner un elle-même.
  */
 const { contextBridge, ipcRenderer } = require('electron');
@@ -48,5 +49,18 @@ contextBridge.exposeInMainWorld('lcnda', {
     show: () => ipcRenderer.invoke('lcnda:updates', 'show', {}),
     page: () => ipcRenderer.invoke('lcnda:updates', 'page', {}),
     onProgress: (callback) => ipcRenderer.on('lcnda:update-progress', (_event, p) => callback({ received: Number(p && p.received) || 0, total: Number(p && p.total) || 0 })),
+  },
+  /** 🖧 Plusieurs ordinateurs (electron/lan-gate.js) : la porte du wifi de cet ordinateur. */
+  reseau: {
+    status: () => ipcRenderer.invoke('lcnda:reseau', 'status', {}),
+    open: () => ipcRenderer.invoke('lcnda:reseau', 'open', {}),
+    close: () => ipcRenderer.invoke('lcnda:reseau', 'close', {}),
+    newInvite: () => ipcRenderer.invoke('lcnda:reseau', 'invite', {}),
+    accept: (id) => ipcRenderer.invoke('lcnda:reseau', 'accept', { id: String(id || '').slice(0, 64) }),
+    refuse: (id) => ipcRenderer.invoke('lcnda:reseau', 'refuse', { id: String(id || '').slice(0, 64) }),
+    remove: (id) => ipcRenderer.invoke('lcnda:reseau', 'remove', { id: String(id || '').slice(0, 64) }),
+    undoRemove: (id) => ipcRenderer.invoke('lcnda:reseau', 'undo-remove', { id: String(id || '').slice(0, 64) }),
+    setSettings: (s) => ipcRenderer.invoke('lcnda:reseau', 'settings', s && typeof s === 'object' ? Object.fromEntries(Object.entries(s).filter(([k, v]) => typeof k === 'string' && typeof v === 'string').map(([k, v]) => [k.slice(0, 20), v.slice(0, 20)])) : {}),
+    onEvent: (callback) => ipcRenderer.on('lcnda:reseau', (_event, e) => callback(e && typeof e === 'object' ? JSON.parse(JSON.stringify(e)) : {})),
   },
 });
