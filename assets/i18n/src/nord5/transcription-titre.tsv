@@ -1,2 +1,10 @@
 fr ¦ hr ¦ sl
 À préciser ¦ Treba precizirati ¦ Treba določiti
+Lecture approfondie (IA sur cet ordinateur) ¦ Detaljno čitanje (UI na ovom računalu) ¦ Poglobljeno branje (UI na tem računalniku)
+En plus du moteur ci-dessus : un modèle « vision » ouvert (Qwen3-VL, licence Apache 2.0) qui lit toute la page, servi par Ollama sur cet ordinateur. Facultatif. Rien ne part sur Internet, sauf le téléchargement du modèle (3 à 6 Go, une seule fois). ¦ Uz pogon iznad: otvoreni „vizualni“ model (Qwen3-VL, licenca Apache 2.0) koji čita cijelu stranicu, pokreće ga Ollama na ovom računalu. Neobavezno. Ništa ne ide na internet osim preuzimanja modela (3 do 6 GB, jednom). ¦ Poleg zgornjega pogona: odprt »vizualni« model (Qwen3-VL, licenca Apache 2.0), ki prebere vso stran, poganja ga Ollama na tem računalniku. Neobvezno. Nič ne gre na internet razen prenosa modela (3 do 6 GB, enkrat).
+Ensuite, dans l’atelier de transcription : « 🔍 Essayer aussi la lecture approfondie » montre les deux lectures côte à côte, et tu gardes la meilleure. ¦ Zatim, u radionici za prijepis: „🔍 Isprobaj i detaljno čitanje“ prikazuje oba čitanja jedno uz drugo, a ti zadržiš bolje. ¦ Nato v delavnici za prepis: »🔍 Preizkusi tudi poglobljeno branje« pokaže obe branji drugo ob drugem, ti pa obdržiš boljše.
+Installer ou vérifier la lecture approfondie… ¦ Instaliraj ili provjeri detaljno čitanje… ¦ Namesti ali preveri poglobljeno branje…
+La lecture approfondie n’est pas encore chargée : réessaie dans un instant. ¦ Detaljno čitanje još nije učitano: pokušaj ponovno za trenutak. ¦ Poglobljeno branje še ni naloženo: poskusi znova čez trenutek.
+Pour lire un acte : ouvre son image dans l’atelier de transcription (« 📜 Atelier »), puis « ✨ Lire l’acte ». ¦ Za čitanje isprave: otvori njezinu sliku u radionici za prijepis („📜 Radionica“), zatim „✨ Pročitaj ispravu“. ¦ Za branje listine: odpri njeno sliko v delavnici za prepis (»📜 Delavnica«), nato »✨ Preberi listino«.
+Transcrire ¦ Prepiši ¦ Prepiši
+Ouvrir l’outil de transcription complet sur cette image ¦ Otvori cijeli alat za prijepis za ovu sliku ¦ Odpri celotno orodje za prepis za to sliko

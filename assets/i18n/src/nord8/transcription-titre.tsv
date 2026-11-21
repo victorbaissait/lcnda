@@ -1,2 +1,10 @@
 fr ¦ tr
 À préciser ¦ Belirtilecek
+Lecture approfondie (IA sur cet ordinateur) ¦ Ayrıntılı okuma (bu bilgisayarda yapay zekâ)
+En plus du moteur ci-dessus : un modèle « vision » ouvert (Qwen3-VL, licence Apache 2.0) qui lit toute la page, servi par Ollama sur cet ordinateur. Facultatif. Rien ne part sur Internet, sauf le téléchargement du modèle (3 à 6 Go, une seule fois). ¦ Yukarıdaki motora ek olarak: tüm sayfayı okuyan açık bir “görü” modeli (Qwen3-VL, Apache 2.0 lisansı), bu bilgisayarda Ollama ile çalışır. İsteğe bağlı. Modelin indirilmesi dışında (bir kez, 3–6 GB) internete hiçbir şey gitmez.
+Ensuite, dans l’atelier de transcription : « 🔍 Essayer aussi la lecture approfondie » montre les deux lectures côte à côte, et tu gardes la meilleure. ¦ Sonra, transkripsiyon atölyesinde: “🔍 Ayrıntılı okumayı da dene” iki okumayı yan yana gösterir, sen de daha iyisini tutarsın.
+Installer ou vérifier la lecture approfondie… ¦ Ayrıntılı okumayı kur veya denetle…
+La lecture approfondie n’est pas encore chargée : réessaie dans un instant. ¦ Ayrıntılı okuma henüz yüklenmedi: birazdan yeniden dene.
+Pour lire un acte : ouvre son image dans l’atelier de transcription (« 📜 Atelier »), puis « ✨ Lire l’acte ». ¦ Bir belgeyi okumak için: görüntüsünü transkripsiyon atölyesinde aç (“📜 Atölye”), sonra “✨ Belgeyi oku”.
+Transcrire ¦ Transkribe et
+Ouvrir l’outil de transcription complet sur cette image ¦ Bu görüntü için tam transkripsiyon aracını aç

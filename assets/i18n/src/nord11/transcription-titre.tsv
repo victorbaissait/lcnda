@@ -1,2 +1,10 @@
 fr ¦ vi ¦ id
 À préciser ¦ Cần xác định ¦ Perlu diperjelas
+Lecture approfondie (IA sur cet ordinateur) ¦ Đọc chuyên sâu (AI trên máy tính này) ¦ Pembacaan mendalam (AI di komputer ini)
+En plus du moteur ci-dessus : un modèle « vision » ouvert (Qwen3-VL, licence Apache 2.0) qui lit toute la page, servi par Ollama sur cet ordinateur. Facultatif. Rien ne part sur Internet, sauf le téléchargement du modèle (3 à 6 Go, une seule fois). ¦ Ngoài công cụ ở trên: một mô hình “thị giác” mở (Qwen3-VL, giấy phép Apache 2.0) đọc toàn bộ trang, chạy bằng Ollama trên máy tính này. Không bắt buộc. Không có gì gửi lên Internet, trừ việc tải mô hình (3 đến 6 GB, một lần). ¦ Selain mesin di atas: model “visi” terbuka (Qwen3-VL, lisensi Apache 2.0) yang membaca seluruh halaman, dijalankan oleh Ollama di komputer ini. Opsional. Tidak ada yang dikirim ke Internet kecuali unduhan model (3 sampai 6 GB, sekali saja).
+Ensuite, dans l’atelier de transcription : « 🔍 Essayer aussi la lecture approfondie » montre les deux lectures côte à côte, et tu gardes la meilleure. ¦ Sau đó, trong xưởng chép lại: “🔍 Thử cả đọc chuyên sâu” hiển thị hai cách đọc cạnh nhau và bạn giữ cách tốt hơn. ¦ Lalu, di bengkel transkripsi: “🔍 Coba juga pembacaan mendalam” menampilkan kedua bacaan berdampingan, dan kamu menyimpan yang terbaik.
+Installer ou vérifier la lecture approfondie… ¦ Cài đặt hoặc kiểm tra đọc chuyên sâu… ¦ Pasang atau periksa pembacaan mendalam…
+La lecture approfondie n’est pas encore chargée : réessaie dans un instant. ¦ Đọc chuyên sâu chưa được tải: hãy thử lại sau giây lát. ¦ Pembacaan mendalam belum dimuat: coba lagi sebentar lagi.
+Pour lire un acte : ouvre son image dans l’atelier de transcription (« 📜 Atelier »), puis « ✨ Lire l’acte ». ¦ Để đọc một giấy tờ: mở hình ảnh của nó trong xưởng chép lại (“📜 Xưởng”), rồi “✨ Đọc giấy tờ”. ¦ Untuk membaca akta: buka gambarnya di bengkel transkripsi (“📜 Bengkel”), lalu “✨ Baca akta”.
+Transcrire ¦ Chép lại ¦ Transkripsikan
+Ouvrir l’outil de transcription complet sur cette image ¦ Mở công cụ chép lại đầy đủ cho hình ảnh này ¦ Buka alat transkripsi lengkap untuk gambar ini

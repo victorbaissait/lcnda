@@ -309,7 +309,7 @@
         ws.innerHTML = `<section class="page ong-page ong-docpage" data-ong-page="document" data-ong-id="${id}">
             ${UI().pageHeader({where: ['Documents', ...path].join(' › '), icon, title: d.title, help: esc(help || 'Document de ta base.'), detail: true,
                 primary: ro ? '' : '<button type="button" class="button" data-ong-edit>✎ Modifier</button>',
-                actions: ro ? [] : [SF()?.rangeButtonHtml ? SF().rangeButtonHtml('document', id, d.title) : ''].filter(Boolean), more})}
+                actions: ro ? [] : [isImg && ext.openActTranscriber ? `<button type="button" class="button secondary" data-ong-tx title="${esc(T('Ouvrir l’outil de transcription complet sur cette image'))}">📜 ${esc(T('Transcrire'))}</button>` : '', SF()?.rangeButtonHtml ? SF().rangeButtonHtml('document', id, d.title) : ''].filter(Boolean), more})}
             <button type="button" class="button small secondary ong-back" data-ong-back>← Liste</button>
             <div class="ong-doc">
                 <figure class="ong-view">${isImg ? `<button type="button" class="ong-big" data-ong-view title="Voir en grand"><img src="${src}" alt="" data-ong-img></button>` : `<button type="button" class="ong-big is-file" data-ong-view><span aria-hidden="true">${icon}</span><small>${esc(d.filename || 'Pas de fichier')}</small></button>`}
@@ -361,6 +361,14 @@
             A().openLightbox([asMedia(d)], 0, kiosk());
             const lb = document.getElementById('lightbox');
             lb?.addEventListener('close', async () => { cache.delete(d.id); await load(true); if (A().state?.module === 'documents') { paintList(); if (cur === d.id) showDoc(d.id); } }, {once: true});
+            return;
+        }
+        if (b.matches('[data-ong-tx]')) { // 📜 l'outil de transcription complet : la transcription déjà commencée sur cette image, sinon une nouvelle
+            if (!d.filename || !ext.openActTranscriber) return;
+            let acts = []; try { acts = (await A().api('act_transcriptions_media', {media_id: d.id})).items || []; } catch (_) { acts = []; }
+            const again = async () => { cache.delete(d.id); await load(true); if (A().state?.module === 'documents') { paintList(); if (cur === d.id) showDoc(d.id); } };
+            if (acts.length) ext.openActTranscriber({id: acts[0].id, onClose: again});
+            else ext.openActTranscriber({mediaId: d.id, filename: d.filename, title: d.title || '', text: d.transcription || '', onClose: again});
             return;
         }
         if (b.matches('[data-ong-dl]')) { if (!d.filename) return; const a = Object.assign(document.createElement('a'), {href: `media/${encodeURIComponent(d.filename)}`, download: d.filename}); document.body.appendChild(a); a.click(); a.remove(); return; }

@@ -1,2 +1,10 @@
 fr ¦ is
 À préciser ¦ Á eftir að tilgreina
+Lecture approfondie (IA sur cet ordinateur) ¦ Ítarlegur lestur (gervigreind á þessari tölvu)
+En plus du moteur ci-dessus : un modèle « vision » ouvert (Qwen3-VL, licence Apache 2.0) qui lit toute la page, servi par Ollama sur cet ordinateur. Facultatif. Rien ne part sur Internet, sauf le téléchargement du modèle (3 à 6 Go, une seule fois). ¦ Til viðbótar við vélina hér að ofan: opið „sjón“líkan (Qwen3-VL, Apache 2.0 leyfi) sem les alla síðuna, keyrt af Ollama á þessari tölvu. Valfrjálst. Ekkert fer á netið nema niðurhal líkansins (3 til 6 GB, einu sinni).
+Ensuite, dans l’atelier de transcription : « 🔍 Essayer aussi la lecture approfondie » montre les deux lectures côte à côte, et tu gardes la meilleure. ¦ Síðan, í umritunarsmiðjunni: „🔍 Prófa líka ítarlegan lestur“ sýnir báða lestrana hlið við hlið og þú heldur þeim betri.
+Installer ou vérifier la lecture approfondie… ¦ Setja upp eða athuga ítarlegan lestur…
+La lecture approfondie n’est pas encore chargée : réessaie dans un instant. ¦ Ítarlegur lestur er ekki enn hlaðinn: reyndu aftur eftir augnablik.
+Pour lire un acte : ouvre son image dans l’atelier de transcription (« 📜 Atelier »), puis « ✨ Lire l’acte ». ¦ Til að lesa skjal: opnaðu mynd þess í umritunarsmiðjunni („📜 Smiðja“), síðan „✨ Lesa skjalið“.
+Transcrire ¦ Umrita
+Ouvrir l’outil de transcription complet sur cette image ¦ Opna allt umritunartólið fyrir þessa mynd
