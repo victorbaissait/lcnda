@@ -3504,6 +3504,7 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-tx-people li{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .h-tx-people select{font:inherit;padding:1px 4px}
 .h-tx-linked{border:1px solid #9fd29a;background:#effbea;border-radius:12px;padding:1px 8px;cursor:pointer;font:inherit}
+.h-tx-extra{display:inline-flex;flex-wrap:wrap;align-items:center;gap:4px;min-width:0;max-width:100%}.h-tx-extra .h-tx-useenh{margin-left:6px}
 .h-tx-more{position:relative}.h-tx-more summary{cursor:pointer;list-style:none;border:1px solid #d6d6db;border-radius:6px;padding:3px 8px;background:#fff}
 .h-tx-more>div{position:absolute;right:0;top:110%;background:#fff;border:1px solid #d6d6db;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.15);display:grid;padding:4px;z-index:5;min-width:230px}
 .h-tx-more>div button{border:0;text-align:left;padding:6px 8px}

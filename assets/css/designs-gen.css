@@ -3150,6 +3150,7 @@
 :root[data-lc-density] .h-tx-people li{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-people select{padding:1px calc(4px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-linked{padding:1px calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-extra{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-more summary{padding:calc(3px * var(--lc-sp)) calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-more>div{padding:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-more>div button{padding:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}

@@ -28,7 +28,7 @@ header('X-Content-Type-Options: nosniff');
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=286">
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=268">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=269">
     <link rel="stylesheet" href="assets/css/transcription-actes.css?v=1">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
     <link rel="stylesheet" href="assets/css/heritage-diagram-cartes.css?v=2">
@@ -107,7 +107,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/versions.css?v=1">
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
     <link rel="stylesheet" href="assets/css/apparence-traits.css?v=23" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=23" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=24" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=13">
     <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
     <script>/* 🎨 Designs au choix (app-designs.js) : le style choisi est posé avant le premier dessin, sans clignotement */
@@ -1482,7 +1482,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-transcribe-view.js?v=8" defer></script>
 <script src="assets/js/heritage-transcribe-acte-core.js?v=1" defer></script>
 <script src="assets/js/heritage-transcribe-acte.js?v=4" defer></script>
-<script src="assets/js/heritage-transcribe.js?v=36" defer></script>
+<script src="assets/js/heritage-transcribe.js?v=37" defer></script>
 <script src="assets/js/heritage-photomaps-time.js?v=2" defer></script>
 <script src="assets/js/heritage-photomaps.js?v=15" defer></script>
 <script src="assets/js/heritage-transcribe-list.js?v=5" defer></script>
