@@ -15,3 +15,18 @@ Tout est relié ¦ Всё связано ¦ Усе пов’язано
 Personne dans l’acte pour l’instant : « 🧭 Repérer » les trouve dans le texte ¦ В записи пока никого: «🧭 Найти» найдёт их в тексте ¦ У записі поки нікого: «🧭 Знайти» знайде їх у тексті
 # — téléphone : trois onglets
 Image, texte ou personnes ¦ Изображение, текст или люди ¦ Зображення, текст або люди
+# — 👁 relecture ligne à ligne en plein écran
+Le morceau d’image de la ligne ¦ Фрагмент изображения для строки ¦ Фрагмент зображення для рядка
+Pas de zone pour cette ligne : dessine-la sur l’image (▭), elle restera reliée. ¦ Для этой строки нет области: нарисуй её на изображении (▭), она останется связанной. ¦ Для цього рядка немає області: намалюй її на зображенні (▭), вона залишиться пов’язаною.
+Ligne à relire ¦ Строка для проверки ¦ Рядок для перевірки
+Relue ¦ Проверено ¦ Перевірено
+Ligne d’avant ¦ Предыдущая строка ¦ Попередній рядок
+atelier|Ligne suivante ¦ Следующая строка ¦ Наступний рядок
+Entrée : la ligne est relue, ligne suivante · ⇧ Entrée : ligne d’avant · ↑ ↓ : changer de ligne sans la marquer · Échap : fermer ¦ Enter: строка проверена, следующая строка · ⇧ Enter: предыдущая строка · ↑ ↓: сменить строку, не отмечая её · Esc: закрыть ¦ Enter: рядок перевірено, наступний рядок · ⇧ Enter: попередній рядок · ↑ ↓: змінити рядок, не позначаючи його · Esc: закрити
+Ligne {n} sur {total} ¦ Строка {n} из {total} ¦ Рядок {n} з {total}
+=ligne relue ¦ строка проверена|строки проверены|строк проверено ¦ рядок перевірено|рядки перевірено|рядків перевірено
+Toutes les lignes sont relues. ¦ Все строки проверены. ¦ Усі рядки перевірено.
+C’était la dernière ligne. ¦ Это была последняя строка. ¦ Це був останній рядок.
+Relire ligne à ligne ¦ Проверять строку за строкой ¦ Перевіряти рядок за рядком
+Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Проверять строку за строкой на весь экран: фрагмент изображения над каждой строкой ¦ Перевіряти рядок за рядком на весь екран: фрагмент зображення над кожним рядком
+Relecture ligne à ligne en plein écran (conseillé) ¦ Проверка строка за строкой на весь экран (рекомендуется) ¦ Перевірка рядок за рядком на весь екран (рекомендовано)

@@ -15,3 +15,18 @@ Tout est relié ¦ Hepsi bağlı
 Personne dans l’acte pour l’instant : « 🧭 Repérer » les trouve dans le texte ¦ Kayıtta henüz kimse yok: “🧭 Bul” onları metinde bulur
 # — téléphone : trois onglets
 Image, texte ou personnes ¦ Resim, metin ya da kişiler
+# — 👁 relecture ligne à ligne en plein écran
+Le morceau d’image de la ligne ¦ Satırın resim parçası
+Pas de zone pour cette ligne : dessine-la sur l’image (▭), elle restera reliée. ¦ Bu satır için alan yok: onu resmin üzerine çiz (▭), bağlı kalır.
+Ligne à relire ¦ Gözden geçirilecek satır
+Relue ¦ Gözden geçirildi
+Ligne d’avant ¦ Önceki satır
+atelier|Ligne suivante ¦ Sonraki satır
+Entrée : la ligne est relue, ligne suivante · ⇧ Entrée : ligne d’avant · ↑ ↓ : changer de ligne sans la marquer · Échap : fermer ¦ Enter: satır gözden geçirildi, sonraki satır · ⇧ Enter: önceki satır · ↑ ↓: işaretlemeden satır değiştir · Esc: kapat
+Ligne {n} sur {total} ¦ Satır {n}/{total}
+=ligne relue ¦ satır gözden geçirildi|satır gözden geçirildi
+Toutes les lignes sont relues. ¦ Tüm satırlar gözden geçirildi.
+C’était la dernière ligne. ¦ Bu son satırdı.
+Relire ligne à ligne ¦ Satır satır gözden geçir
+Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Tam ekranda satır satır gözden geçir: her satırın üstünde resim parçası
+Relecture ligne à ligne en plein écran (conseillé) ¦ Tam ekranda satır satır gözden geçirme (önerilen)

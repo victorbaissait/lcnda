@@ -15,3 +15,18 @@ Tout est relié ¦ Kaikki linkitetty ¦ Minden kapcsolva
 Personne dans l’acte pour l’instant : « 🧭 Repérer » les trouve dans le texte ¦ Asiakirjassa ei vielä ketään: ”🧭 Tunnista” löytää heidät tekstistä ¦ Még senki sincs az iratban: a „🧭 Felismerés” megtalálja őket a szövegben
 # — téléphone : trois onglets
 Image, texte ou personnes ¦ Kuva, teksti tai henkilöt ¦ Kép, szöveg vagy személyek
+# — 👁 relecture ligne à ligne en plein écran
+Le morceau d’image de la ligne ¦ Rivin kuvan pala ¦ A sor képrészlete
+Pas de zone pour cette ligne : dessine-la sur l’image (▭), elle restera reliée. ¦ Tällä rivillä ei ole aluetta: piirrä se kuvaan (▭), se pysyy linkitettynä. ¦ Ennek a sornak nincs területe: rajzold meg a képen (▭), kapcsolva marad.
+Ligne à relire ¦ Tarkistettava rivi ¦ Átnézendő sor
+Relue ¦ Tarkistettu ¦ Átnézve
+Ligne d’avant ¦ Edellinen rivi ¦ Előző sor
+atelier|Ligne suivante ¦ Seuraava rivi ¦ Következő sor
+Entrée : la ligne est relue, ligne suivante · ⇧ Entrée : ligne d’avant · ↑ ↓ : changer de ligne sans la marquer · Échap : fermer ¦ Enter: rivi tarkistettu, seuraava rivi · ⇧ Enter: edellinen rivi · ↑ ↓: vaihda riviä merkitsemättä · Esc: sulje ¦ Enter: a sor átnézve, következő sor · ⇧ Enter: előző sor · ↑ ↓: sorváltás jelölés nélkül · Esc: bezárás
+Ligne {n} sur {total} ¦ Rivi {n}/{total} ¦ {n}. sor / {total}
+=ligne relue ¦ rivi tarkistettu|riviä tarkistettu ¦ sor átnézve|sor átnézve
+Toutes les lignes sont relues. ¦ Kaikki rivit on tarkistettu. ¦ Minden sor át van nézve.
+C’était la dernière ligne. ¦ Se oli viimeinen rivi. ¦ Ez volt az utolsó sor.
+Relire ligne à ligne ¦ Tarkista rivi riviltä ¦ Átnézés soronként
+Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Tarkista rivi riviltä koko näytöllä: kuvan pala jokaisen rivin yläpuolella ¦ Soronkénti átnézés teljes képernyőn: a képrészlet minden sor fölött
+Relecture ligne à ligne en plein écran (conseillé) ¦ Rivikohtainen tarkistus koko näytöllä (suositus) ¦ Soronkénti átnézés teljes képernyőn (ajánlott)

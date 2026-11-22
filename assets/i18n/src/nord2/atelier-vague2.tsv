@@ -15,3 +15,18 @@ Tout est relié ¦ Všetko prepojené ¦ Alt koblet
 Personne dans l’acte pour l’instant : « 🧭 Repérer » les trouve dans le texte ¦ Zatiaľ nikto v zázname: „🧭 Nájsť“ ich nájde v texte ¦ Ingen i akten ennå: «🧭 Finn» finner dem i teksten
 # — téléphone : trois onglets
 Image, texte ou personnes ¦ Obrázok, text alebo osoby ¦ Bilde, tekst eller personer
+# — 👁 relecture ligne à ligne en plein écran
+Le morceau d’image de la ligne ¦ Výrez obrázka pre riadok ¦ Bildeutsnittet for linjen
+Pas de zone pour cette ligne : dessine-la sur l’image (▭), elle restera reliée. ¦ Pre tento riadok nie je oblasť: nakresli ju na obrázok (▭), zostane prepojená. ¦ Ikke noe område for denne linjen: tegn det på bildet (▭), det forblir koblet.
+Ligne à relire ¦ Riadok na kontrolu ¦ Linje å gå gjennom
+Relue ¦ Skontrolované ¦ Gjennomgått
+Ligne d’avant ¦ Predchádzajúci riadok ¦ Forrige linje
+atelier|Ligne suivante ¦ Ďalší riadok ¦ Neste linje
+Entrée : la ligne est relue, ligne suivante · ⇧ Entrée : ligne d’avant · ↑ ↓ : changer de ligne sans la marquer · Échap : fermer ¦ Enter: riadok skontrolovaný, ďalší riadok · ⇧ Enter: predchádzajúci riadok · ↑ ↓: zmeniť riadok bez označenia · Esc: zavrieť ¦ Enter: linjen gjennomgått, neste linje · ⇧ Enter: forrige linje · ↑ ↓: bytt linje uten å merke den · Esc: lukk
+Ligne {n} sur {total} ¦ Riadok {n} z {total} ¦ Linje {n} av {total}
+=ligne relue ¦ riadok skontrolovaný|riadky skontrolované|riadkov skontrolovaných ¦ linje gjennomgått|linjer gjennomgått
+Toutes les lignes sont relues. ¦ Všetky riadky sú skontrolované. ¦ Alle linjene er gjennomgått.
+C’était la dernière ligne. ¦ To bol posledný riadok. ¦ Det var den siste linjen.
+Relire ligne à ligne ¦ Kontrolovať riadok po riadku ¦ Gå gjennom linje for linje
+Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Kontrolovať riadok po riadku na celej obrazovke: výrez obrázka nad každým riadkom ¦ Gå gjennom linje for linje i fullskjerm: bildeutsnittet over hver linje
+Relecture ligne à ligne en plein écran (conseillé) ¦ Kontrola riadok po riadku na celej obrazovke (odporúčané) ¦ Gjennomgang linje for linje i fullskjerm (anbefalt)

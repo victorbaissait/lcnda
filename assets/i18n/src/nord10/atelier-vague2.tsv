@@ -15,3 +15,18 @@ Tout est relié ¦ Gjithçka e lidhur ¦ Kollox marbut
 Personne dans l’acte pour l’instant : « 🧭 Repérer » les trouve dans le texte ¦ Ende askush në akt: «🧭 Gjej» i gjen në tekst ¦ Għadu ħadd fl-att: “🧭 Sib” isibhom fit-test
 # — téléphone : trois onglets
 Image, texte ou personnes ¦ Imazh, tekst ose persona ¦ Stampa, test jew persuni
+# — 👁 relecture ligne à ligne en plein écran
+Le morceau d’image de la ligne ¦ Copa e imazhit për rreshtin ¦ Il-biċċa tal-istampa tal-linja
+Pas de zone pour cette ligne : dessine-la sur l’image (▭), elle restera reliée. ¦ Nuk ka zonë për këtë rresht: vizatoje në imazh (▭), do të mbetet e lidhur. ¦ M’hemmx żona għal din il-linja: pinġiha fuq l-istampa (▭), tibqa’ marbuta.
+Ligne à relire ¦ Rresht për t’u rishikuar ¦ Linja x’tiċċekkja
+Relue ¦ E rishikuar ¦ Iċċekkjata
+Ligne d’avant ¦ Rreshti i mëparshëm ¦ Il-linja ta’ qabel
+atelier|Ligne suivante ¦ Rreshti tjetër ¦ Il-linja li jmiss
+Entrée : la ligne est relue, ligne suivante · ⇧ Entrée : ligne d’avant · ↑ ↓ : changer de ligne sans la marquer · Échap : fermer ¦ Enter: rreshti u rishikua, rreshti tjetër · ⇧ Enter: rreshti i mëparshëm · ↑ ↓: ndrysho rreshtin pa e shënuar · Esc: mbyll ¦ Enter: il-linja ċċekkjata, il-linja li jmiss · ⇧ Enter: il-linja ta’ qabel · ↑ ↓: biddel il-linja mingħajr ma timmarkaha · Esc: agħlaq
+Ligne {n} sur {total} ¦ Rreshti {n} nga {total} ¦ Linja {n} minn {total}
+=ligne relue ¦ rresht i rishikuar|rreshta të rishikuar ¦ linja ċċekkjata|linji ċċekkjati|linji ċċekkjati|linja ċċekkjata|linja ċċekkjata
+Toutes les lignes sont relues. ¦ Të gjithë rreshtat janë rishikuar. ¦ Il-linji kollha huma ċċekkjati.
+C’était la dernière ligne. ¦ Ky ishte rreshti i fundit. ¦ Din kienet l-aħħar linja.
+Relire ligne à ligne ¦ Rishiko rresht pas rreshti ¦ Iċċekkja linja b’linja
+Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Rishiko rresht pas rreshti në ekran të plotë: copa e imazhit mbi çdo rresht ¦ Iċċekkja linja b’linja fuq l-iskrin kollu: il-biċċa tal-istampa fuq kull linja
+Relecture ligne à ligne en plein écran (conseillé) ¦ Rishikim rresht pas rreshti në ekran të plotë (këshillohet) ¦ Ċekkjar linja b’linja fuq l-iskrin kollu (rakkomandat)

@@ -15,3 +15,18 @@ Tout est relié ¦ Vše propojeno ¦ Allt länkat ¦ Alt tilknyttet
 Personne dans l’acte pour l’instant : « 🧭 Repérer » les trouve dans le texte ¦ Zatím nikdo v záznamu: „🧭 Najít“ je najde v textu ¦ Ingen i akten ännu: ”🧭 Hitta” hittar dem i texten ¦ Ingen i akten endnu: »🧭 Find« finder dem i teksten
 # — téléphone : trois onglets
 Image, texte ou personnes ¦ Obrázek, text nebo osoby ¦ Bild, text eller personer ¦ Billede, tekst eller personer
+# — 👁 relecture ligne à ligne en plein écran
+Le morceau d’image de la ligne ¦ Výřez obrázku pro řádek ¦ Bildbiten för raden ¦ Billedudsnittet for linjen
+Pas de zone pour cette ligne : dessine-la sur l’image (▭), elle restera reliée. ¦ Pro tento řádek není oblast: nakresli ji na obrázek (▭), zůstane propojená. ¦ Inget område för den här raden: rita det på bilden (▭), det förblir länkat. ¦ Intet område til denne linje: tegn det på billedet (▭), det forbliver tilknyttet.
+Ligne à relire ¦ Řádek ke kontrole ¦ Rad att granska ¦ Linje at gennemse
+Relue ¦ Zkontrolováno ¦ Granskad ¦ Gennemset
+Ligne d’avant ¦ Předchozí řádek ¦ Föregående rad ¦ Forrige linje
+atelier|Ligne suivante ¦ Další řádek ¦ Nästa rad ¦ Næste linje
+Entrée : la ligne est relue, ligne suivante · ⇧ Entrée : ligne d’avant · ↑ ↓ : changer de ligne sans la marquer · Échap : fermer ¦ Enter: řádek zkontrolován, další řádek · ⇧ Enter: předchozí řádek · ↑ ↓: změnit řádek bez označení · Esc: zavřít ¦ Enter: raden granskad, nästa rad · ⇧ Enter: föregående rad · ↑ ↓: byt rad utan att markera den · Esc: stäng ¦ Enter: linjen gennemset, næste linje · ⇧ Enter: forrige linje · ↑ ↓: skift linje uden at markere den · Esc: luk
+Ligne {n} sur {total} ¦ Řádek {n} z {total} ¦ Rad {n} av {total} ¦ Linje {n} af {total}
+=ligne relue ¦ řádek zkontrolován|řádky zkontrolovány|řádků zkontrolováno ¦ rad granskad|rader granskade ¦ linje gennemset|linjer gennemset
+Toutes les lignes sont relues. ¦ Všechny řádky jsou zkontrolované. ¦ Alla rader är granskade. ¦ Alle linjer er gennemset.
+C’était la dernière ligne. ¦ To byl poslední řádek. ¦ Det var sista raden. ¦ Det var den sidste linje.
+Relire ligne à ligne ¦ Kontrolovat řádek po řádku ¦ Granska rad för rad ¦ Gennemse linje for linje
+Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Kontrolovat řádek po řádku na celé obrazovce: výřez obrázku nad každým řádkem ¦ Granska rad för rad i helskärm: bildbiten ovanför varje rad ¦ Gennemse linje for linje i fuld skærm: billedudsnittet over hver linje
+Relecture ligne à ligne en plein écran (conseillé) ¦ Kontrola řádek po řádku na celé obrazovce (doporučeno) ¦ Granskning rad för rad i helskärm (rekommenderas) ¦ Gennemsyn linje for linje i fuld skærm (anbefalet)

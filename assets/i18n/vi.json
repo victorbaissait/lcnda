@@ -9079,6 +9079,7 @@
  "Atelier de transcription : barre d’outils": "Xưởng chép văn bản: thanh công cụ",
  "Atelier et compagnons": "Xưởng và thợ bạn",
  "Atelier, maître verrier": "Xưởng, thợ cả làm kính",
+ "atelier|Ligne suivante": "Dòng tiếp theo",
  "atelier|Lire": "Đọc",
  "Ateliers et studios": "Xưởng và studio",
  "Athlétisme": "Điền kinh",
@@ -11498,6 +11499,7 @@
  "C’est une sauvegarde complète de LCNDA : elle remplacerait toute ta base. Ouvre-la plutôt depuis Réglages → Sauvegarde.": "Đây là bản sao lưu đầy đủ của LCNDA: nó sẽ thay thế toàn bộ cơ sở dữ liệu của bạn. Hãy mở nó từ Cài đặt → Sao lưu.",
  "C’est une sauvegarde de RootsMagic (.rmbackup) : ouvre-la dans RootsMagic (Fichier → Restaurer), puis importe ici le fichier .rmtree.": "Đây là bản sao lưu RootsMagic (.rmbackup): hãy mở nó trong RootsMagic (File → Restore), rồi nhập tệp .rmtree vào đây.",
  "C’est…": "Đây là…",
+ "C’était la dernière ligne.": "Đó là dòng cuối cùng.",
  "C’était un {day}": "Hôm đó là {day}",
  "ça avertit, ça n’empêche pas": "chỉ cảnh báo, không ngăn cản",
  "Ça avertit, ça n’empêche pas : tu peux remettre quand même, ce sera noté au journal.": "Chỉ cảnh báo, không ngăn cản: bạn vẫn có thể giao, việc này sẽ được ghi vào nhật ký.",
@@ -20140,6 +20142,7 @@
  },
  "Entrée": "Enter",
  "Entrée : calculer · ↑ : reprendre le dernier": "Enter: tính · ↑: dùng lại phép tính trước",
+ "Entrée : la ligne est relue, ligne suivante · ⇧ Entrée : ligne d’avant · ↑ ↓ : changer de ligne sans la marquer · Échap : fermer": "Enter: dòng đã đọc lại, sang dòng tiếp · ⇧ Enter: dòng trước · ↑ ↓: đổi dòng mà không đánh dấu · Esc: đóng",
  "Entrée (embauche)": "Vào làm (tuyển dụng)",
  "Entrée 5 €, parking 2 €": "Vào cửa 5 €, đỗ xe 2 €",
  "Entrée active": "Nhập ngũ thường trực",
@@ -29250,6 +29253,7 @@
  "le morceau": "đoạn",
  "Le morceau choisi commence à la tête de lecture": "Đoạn đang chọn bắt đầu tại đầu phát",
  "Le morceau choisi finit à la tête de lecture": "Đoạn đang chọn kết thúc tại đầu phát",
+ "Le morceau d’image de la ligne": "Mảnh hình ảnh của dòng",
  "le mot": "từ",
  "Le mot": "Lời nhắn",
  "Le mot à mot tout de suite, la traduction complète si le modèle de la lecture approfondie est installé": "Dịch từng từ ngay lập tức, dịch đầy đủ nếu đã cài mô hình đọc chuyên sâu",
@@ -31617,9 +31621,11 @@
  "Ligne {n}": "Dòng {n}",
  "Ligne {n} : {msg}": "Dòng {n}: {msg}",
  "ligne {n} de {file}": "dòng {n} của {file}",
+ "Ligne {n} sur {total}": "Dòng {n} / {total}",
  "Ligne {r}, colonne {c}": "Hàng {r}, cột {c}",
  "Ligne {r}, colonne {c} : {name}": "Hàng {r}, cột {c}: {name}",
  "Ligne {x} sur l’image": "Dòng {x} trên hình",
+ "Ligne à relire": "Dòng cần đọc lại",
  "ligne à toi sans fiche : retirée": {
   "other": "dòng của bạn không có hồ sơ: đã gỡ"
  },
@@ -31647,6 +31653,7 @@
  "ligne coupée en colonnes": {
   "other": "dòng đã tách thành cột"
  },
+ "Ligne d’avant": "Dòng trước",
  "Ligne d’en-tête (répétée sur chaque page)": "Dòng tiêu đề (lặp lại trên mỗi trang)",
  "Ligne d’horizon (hauteur)": "Đường chân trời (độ cao)",
  "Ligne de base": "Đường cơ sở",
@@ -31710,6 +31717,9 @@
  },
  "Ligne reliée à {name}": "Dòng đã liên kết với {name}",
  "Ligne reliée sans certitude : vérifie sur l’image": "Dòng được nối nhưng chưa chắc chắn: kiểm tra trên hình ảnh",
+ "ligne relue": {
+  "other": "dòng đã đọc lại"
+ },
  "ligne remplie depuis l’app": {
   "other": "dòng được điền từ ứng dụng"
  },
@@ -37023,6 +37033,7 @@
  "Pas de visite guidée en mode consultation.": "Không có chuyến tham quan ở chế độ chỉ xem.",
  "pas de vue à moi": "không có chế độ xem riêng",
  "Pas de wifi de la maison : les photos se prennent avec l’appareil photo du téléphone, puis « 🖼 Choisir » au retour.": "Không có wifi ở nhà: chụp ảnh bằng máy ảnh của điện thoại, rồi “🖼 Chọn” khi về.",
+ "Pas de zone pour cette ligne : dessine-la sur l’image (▭), elle restera reliée.": "Dòng này chưa có vùng: hãy vẽ nó trên hình ảnh (▭), nó sẽ được liên kết.",
  "Pas des angles": "Bước góc",
  "Pas des doublons": "Không phải trùng lặp",
  "Pas disponible ici (voir au-dessus).": "Không có ở đây (xem phía trên).",
@@ -41016,6 +41027,7 @@
  "relecture « {title} », le {date}": "đọc soát “{title}”, ngày {date}",
  "Relecture d’une branche": "Đọc soát một nhánh",
  "Relecture introuvable.": "Không tìm thấy lần đọc soát.",
+ "Relecture ligne à ligne en plein écran (conseillé)": "Đọc lại từng dòng toàn màn hình (khuyên dùng)",
  "Relectures de branche": "Đọc soát nhánh",
  "Relevé": "Đã ghi lại",
  "Relevé : colonnes de {year}": "Bản chép: các cột của năm {year}",
@@ -41117,9 +41129,12 @@
  "Relire et corriger : corrections proposées, mots douteux [?], aide à la lecture": "Đọc lại và sửa: các đề xuất sửa, từ đáng ngờ [?], hỗ trợ đọc",
  "Relire le contour et la surface dans le cadastre d’aujourd’hui": "Đọc lại đường viền và diện tích trong địa chính ngày nay",
  "Relire les blocs de la généalogie": "Đọc lại các khối của gia phả",
+ "Relire ligne à ligne": "Đọc lại từng dòng",
+ "Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne": "Đọc lại từng dòng toàn màn hình: mảnh hình ảnh phía trên mỗi dòng",
  "reliure d’art": "đóng sách mỹ thuật",
  "relu": "đã đọc lại",
  "relu par {who}": "đã đọc soát bởi {who}",
+ "Relue": "Đã đọc lại",
  "Remariage, veuvage, célibat": "Tái hôn, góa bụa, độc thân",
  "Remarié(e)": "Tái hôn",
  "remarque": {
@@ -45806,6 +45821,7 @@
  "Toutes les images, sons, vidéos en tableau.": "Tất cả hình ảnh, âm thanh, video trong một bảng.",
  "Toutes les langues": "Mọi ngôn ngữ",
  "Toutes les lignes de cette liste de l’app.": "Tất cả các dòng của danh sách này.",
+ "Toutes les lignes sont relues.": "Đã đọc lại tất cả các dòng.",
  "Toutes les minutes": "Mỗi phút",
  "Toutes les missions sont faites !": "Đã hoàn thành mọi nhiệm vụ!",
  "Toutes les monnaies à cette époque": "Tất cả các đồng tiền thời đó",

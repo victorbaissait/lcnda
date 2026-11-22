@@ -15,3 +15,18 @@ Tout est relié ¦ Đã liên kết hết ¦ Semua tertaut
 Personne dans l’acte pour l’instant : « 🧭 Repérer » les trouve dans le texte ¦ Chưa có ai trong văn bản: “🧭 Nhận diện” sẽ tìm họ trong văn bản ¦ Belum ada orang dalam akta: “🧭 Kenali” menemukan mereka di teks
 # — téléphone : trois onglets
 Image, texte ou personnes ¦ Hình ảnh, văn bản hoặc người ¦ Gambar, teks atau orang
+# — 👁 relecture ligne à ligne en plein écran
+Le morceau d’image de la ligne ¦ Mảnh hình ảnh của dòng ¦ Potongan gambar untuk baris
+Pas de zone pour cette ligne : dessine-la sur l’image (▭), elle restera reliée. ¦ Dòng này chưa có vùng: hãy vẽ nó trên hình ảnh (▭), nó sẽ được liên kết. ¦ Tidak ada area untuk baris ini: gambar di atas gambar (▭), area itu tetap tertaut.
+Ligne à relire ¦ Dòng cần đọc lại ¦ Baris untuk diperiksa
+Relue ¦ Đã đọc lại ¦ Sudah diperiksa
+Ligne d’avant ¦ Dòng trước ¦ Baris sebelumnya
+atelier|Ligne suivante ¦ Dòng tiếp theo ¦ Baris berikutnya
+Entrée : la ligne est relue, ligne suivante · ⇧ Entrée : ligne d’avant · ↑ ↓ : changer de ligne sans la marquer · Échap : fermer ¦ Enter: dòng đã đọc lại, sang dòng tiếp · ⇧ Enter: dòng trước · ↑ ↓: đổi dòng mà không đánh dấu · Esc: đóng ¦ Enter: baris sudah diperiksa, baris berikutnya · ⇧ Enter: baris sebelumnya · ↑ ↓: pindah baris tanpa menandainya · Esc: tutup
+Ligne {n} sur {total} ¦ Dòng {n} / {total} ¦ Baris {n} dari {total}
+=ligne relue ¦ dòng đã đọc lại ¦ baris sudah diperiksa
+Toutes les lignes sont relues. ¦ Đã đọc lại tất cả các dòng. ¦ Semua baris sudah diperiksa.
+C’était la dernière ligne. ¦ Đó là dòng cuối cùng. ¦ Itu baris terakhir.
+Relire ligne à ligne ¦ Đọc lại từng dòng ¦ Periksa baris demi baris
+Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Đọc lại từng dòng toàn màn hình: mảnh hình ảnh phía trên mỗi dòng ¦ Periksa baris demi baris dalam layar penuh: potongan gambar di atas setiap baris
+Relecture ligne à ligne en plein écran (conseillé) ¦ Đọc lại từng dòng toàn màn hình (khuyên dùng) ¦ Pemeriksaan baris demi baris dalam layar penuh (disarankan)

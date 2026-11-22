@@ -154,7 +154,9 @@ function act_transcription_clean_data(PDO $pdo, $data): array
     $frame = mb_substr(safe_text(is_string($data['frame_text'] ?? null) ? $data['frame_text'] : ''), 0, 600);
     // 🌐 la traduction gardée avec la transcription (« Traduire », lib/plus_famille.php) : du texte, borné
     $translation = mb_substr(str_replace("\0", '', is_string($data['translation'] ?? null) ? $data['translation'] : ''), 0, 40000);
-    return ['zones' => $zones, 'people' => $people, 'view' => $cleanView, 'status' => $status] + ($frame !== '' ? ['frame_text' => $frame] : []) + ($translation !== '' ? ['translation' => $translation] : []);
+    // 👁 les lignes relues (relecture ligne à ligne) : l'empreinte de chaque ligne relue, de courts textes en base 36
+    $reviewed = array_values(array_unique(array_filter(array_slice(is_array($data['reviewed'] ?? null) ? $data['reviewed'] : [], -5000), static fn($k) => is_string($k) && preg_match('/^[0-9a-z]{1,10}$/', $k))));
+    return ['zones' => $zones, 'people' => $people, 'view' => $cleanView, 'status' => $status] + ($frame !== '' ? ['frame_text' => $frame] : []) + ($translation !== '' ? ['translation' => $translation] : []) + ($reviewed ? ['reviewed' => $reviewed] : []);
 }
 
 function save_act_transcription(PDO $pdo, array $data): array

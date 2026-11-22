@@ -3438,6 +3438,9 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .h-tx-dlg .h-tx-ptabs, :root .h-tx-dlg .h-tx-ptabs:is([data-lc-lines], [data-lc-lines] *) {border-width:0 0 calc(2px * var(--lc-frame-k))}
 :root.lc-frame .h-tx-dlg .h-tx:not([data-ptab=image]) .h-tx-main>.h-tx-right, :root .h-tx-dlg .h-tx:not([data-ptab=image]) .h-tx-main>.h-tx-right:is([data-lc-lines], [data-lc-lines] *) {border-left:0}
 :root.lc-frame .h-tx-dlg .h-tx[data-ptab=people] .h-tx-found, :root .h-tx-dlg .h-tx[data-ptab=people] .h-tx-found:is([data-lc-lines], [data-lc-lines] *) {border-top:0}
+:root.lc-frame .h-txr-top, :root .h-txr-top:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #3a3f46}
+:root.lc-frame .h-txr-line, :root .h-txr-line:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #5b93ff}
+:root.lc-frame .h-txr-bar, :root .h-txr-bar:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid #3a3f46}
 /* photomaps.css */
 :root.lc-frame .pm-filter, :root .pm-filter:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .pm-chip, :root .pm-chip:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}
 :root.lc-frame .pm-filter.is-active, :root .pm-filter.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}

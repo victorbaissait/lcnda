@@ -9079,6 +9079,7 @@
  "Atelier de transcription : barre d’outils": "Bengkel transkripsi: bilah alat",
  "Atelier et compagnons": "Bengkel dan para tukang",
  "Atelier, maître verrier": "Bengkel, ahli kaca",
+ "atelier|Ligne suivante": "Baris berikutnya",
  "atelier|Lire": "Baca",
  "Ateliers et studios": "Bengkel dan studio",
  "Athlétisme": "Atletik",
@@ -11498,6 +11499,7 @@
  "C’est une sauvegarde complète de LCNDA : elle remplacerait toute ta base. Ouvre-la plutôt depuis Réglages → Sauvegarde.": "Ini cadangan lengkap LCNDA: cadangan ini akan mengganti seluruh basis datamu. Buka saja dari Pengaturan → Cadangan.",
  "C’est une sauvegarde de RootsMagic (.rmbackup) : ouvre-la dans RootsMagic (Fichier → Restaurer), puis importe ici le fichier .rmtree.": "Ini cadangan RootsMagic (.rmbackup): buka di RootsMagic (File → Restore), lalu impor berkas .rmtree di sini.",
  "C’est…": "Ini…",
+ "C’était la dernière ligne.": "Itu baris terakhir.",
  "C’était un {day}": "Hari itu {day}",
  "ça avertit, ça n’empêche pas": "hanya memperingatkan, tidak menghalangi",
  "Ça avertit, ça n’empêche pas : tu peux remettre quand même, ce sera noté au journal.": "Hanya memperingatkan, tidak menghalangi: kamu tetap bisa menyerahkan, dan itu dicatat di jurnal.",
@@ -20140,6 +20142,7 @@
  },
  "Entrée": "Enter",
  "Entrée : calculer · ↑ : reprendre le dernier": "Enter: hitung · ↑: pakai lagi yang terakhir",
+ "Entrée : la ligne est relue, ligne suivante · ⇧ Entrée : ligne d’avant · ↑ ↓ : changer de ligne sans la marquer · Échap : fermer": "Enter: baris sudah diperiksa, baris berikutnya · ⇧ Enter: baris sebelumnya · ↑ ↓: pindah baris tanpa menandainya · Esc: tutup",
  "Entrée (embauche)": "Masuk (perekrutan)",
  "Entrée 5 €, parking 2 €": "Masuk 5 €, parkir 2 €",
  "Entrée active": "Masuk dinas aktif",
@@ -29250,6 +29253,7 @@
  "le morceau": "potongan",
  "Le morceau choisi commence à la tête de lecture": "Potongan yang dipilih mulai di kepala putar",
  "Le morceau choisi finit à la tête de lecture": "Potongan yang dipilih selesai di kepala putar",
+ "Le morceau d’image de la ligne": "Potongan gambar untuk baris",
  "le mot": "kata",
  "Le mot": "Pesannya",
  "Le mot à mot tout de suite, la traduction complète si le modèle de la lecture approfondie est installé": "Kata demi kata langsung, terjemahan lengkap jika model pembacaan mendalam terpasang",
@@ -31617,9 +31621,11 @@
  "Ligne {n}": "Baris {n}",
  "Ligne {n} : {msg}": "Baris {n}: {msg}",
  "ligne {n} de {file}": "baris {n} di {file}",
+ "Ligne {n} sur {total}": "Baris {n} dari {total}",
  "Ligne {r}, colonne {c}": "Baris {r}, kolom {c}",
  "Ligne {r}, colonne {c} : {name}": "Baris {r}, kolom {c}: {name}",
  "Ligne {x} sur l’image": "Baris {x} di gambar",
+ "Ligne à relire": "Baris untuk diperiksa",
  "ligne à toi sans fiche : retirée": {
   "other": "barismu tanpa profil: dilepas"
  },
@@ -31647,6 +31653,7 @@
  "ligne coupée en colonnes": {
   "other": "baris dipisah menjadi kolom"
  },
+ "Ligne d’avant": "Baris sebelumnya",
  "Ligne d’en-tête (répétée sur chaque page)": "Baris judul (diulang di setiap halaman)",
  "Ligne d’horizon (hauteur)": "Garis cakrawala (tinggi)",
  "Ligne de base": "Garis dasar",
@@ -31710,6 +31717,9 @@
  },
  "Ligne reliée à {name}": "Baris dihubungkan ke {name}",
  "Ligne reliée sans certitude : vérifie sur l’image": "Baris dihubungkan tanpa kepastian: periksa di gambar",
+ "ligne relue": {
+  "other": "baris sudah diperiksa"
+ },
  "ligne remplie depuis l’app": {
   "other": "baris diisi dari aplikasi"
  },
@@ -37023,6 +37033,7 @@
  "Pas de visite guidée en mode consultation.": "Tidak ada tur terpandu dalam mode lihat saja.",
  "pas de vue à moi": "tidak ada tampilanku",
  "Pas de wifi de la maison : les photos se prennent avec l’appareil photo du téléphone, puis « 🖼 Choisir » au retour.": "Tidak ada wifi rumah: ambil foto dengan kamera ponsel, lalu “🖼 Pilih” saat kamu kembali.",
+ "Pas de zone pour cette ligne : dessine-la sur l’image (▭), elle restera reliée.": "Tidak ada area untuk baris ini: gambar di atas gambar (▭), area itu tetap tertaut.",
  "Pas des angles": "Langkah sudut",
  "Pas des doublons": "Bukan duplikat",
  "Pas disponible ici (voir au-dessus).": "Tidak tersedia di sini (lihat di atas).",
@@ -41016,6 +41027,7 @@
  "relecture « {title} », le {date}": "tinjauan “{title}”, {date}",
  "Relecture d’une branche": "Tinjauan cabang",
  "Relecture introuvable.": "Tinjauan tidak ditemukan.",
+ "Relecture ligne à ligne en plein écran (conseillé)": "Pemeriksaan baris demi baris dalam layar penuh (disarankan)",
  "Relectures de branche": "Tinjauan cabang",
  "Relevé": "Dicatat",
  "Relevé : colonnes de {year}": "Salinan: kolom tahun {year}",
@@ -41117,9 +41129,12 @@
  "Relire et corriger : corrections proposées, mots douteux [?], aide à la lecture": "Periksa dan koreksi: usulan koreksi, kata yang meragukan [?], bantuan membaca",
  "Relire le contour et la surface dans le cadastre d’aujourd’hui": "Baca ulang batas dan luas di kadaster masa kini",
  "Relire les blocs de la généalogie": "Muat ulang blok silsilah",
+ "Relire ligne à ligne": "Periksa baris demi baris",
+ "Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne": "Periksa baris demi baris dalam layar penuh: potongan gambar di atas setiap baris",
  "reliure d’art": "penjilidan seni",
  "relu": "sudah diperiksa",
  "relu par {who}": "ditinjau oleh {who}",
+ "Relue": "Sudah diperiksa",
  "Remariage, veuvage, célibat": "Menikah lagi, menjanda/menduda, melajang",
  "Remarié(e)": "Menikah lagi",
  "remarque": {
@@ -45806,6 +45821,7 @@
  "Toutes les images, sons, vidéos en tableau.": "Semua gambar, suara, video dalam tabel.",
  "Toutes les langues": "Semua bahasa",
  "Toutes les lignes de cette liste de l’app.": "Semua baris dari daftar aplikasi ini.",
+ "Toutes les lignes sont relues.": "Semua baris sudah diperiksa.",
  "Toutes les minutes": "Setiap menit",
  "Toutes les missions sont faites !": "Semua misi sudah selesai!",
  "Toutes les monnaies à cette époque": "Semua mata uang pada zaman itu",

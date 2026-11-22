@@ -5514,6 +5514,20 @@
   :root[data-lc-density] .h-tx-dlg .h-tx .h-tx-top>.h-tx-menus button{padding-left:calc(5px * var(--lc-sp))}
   :root[data-lc-density] .h-tx-dlg .h-tx .h-tx-top>.h-tx-menus button{padding-right:calc(5px * var(--lc-sp))}
 }
+:root[data-lc-density] .h-txr-top{gap:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .h-txr-top{padding:calc(10px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+:root[data-lc-density] .h-txr-prog{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-txr-body{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-txr-band{padding:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-txr-edit{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-txr-line{padding:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .h-txr-bar{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-txr-bar{padding:calc(10px * var(--lc-sp)) calc(16px * var(--lc-sp))}
+:root[data-lc-density] .h-txr-zoom{gap:calc(4px * var(--lc-sp))}
+@media (max-width:700px){
+  :root[data-lc-density] .h-txr-body{padding:calc(12px * var(--lc-sp))}
+  :root[data-lc-density] .h-txr-top{padding:calc(8px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+}
 /* photomaps.css */
 :root[data-lc-density] .pm-carte{padding:calc(18px * var(--lc-sp)) calc(22px * var(--lc-sp)) calc(28px * var(--lc-sp))}
 :root[data-lc-density] .pm-screen{gap:calc(10px * var(--lc-sp))}

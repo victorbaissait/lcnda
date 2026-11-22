@@ -15,3 +15,18 @@ Tout est relié ¦ Όλα συνδεδεμένα ¦ Всичко е свърза
 Personne dans l’acte pour l’instant : « 🧭 Repérer » les trouve dans le texte ¦ Κανείς ακόμη στην πράξη: το «🧭 Εντοπισμός» τους βρίσκει στο κείμενο ¦ Засега никой в акта: „🧭 Открий“ ги намира в текста
 # — téléphone : trois onglets
 Image, texte ou personnes ¦ Εικόνα, κείμενο ή άτομα ¦ Изображение, текст или хора
+# — 👁 relecture ligne à ligne en plein écran
+Le morceau d’image de la ligne ¦ Το κομμάτι της εικόνας για τη γραμμή ¦ Частта от изображението за реда
+Pas de zone pour cette ligne : dessine-la sur l’image (▭), elle restera reliée. ¦ Δεν υπάρχει περιοχή για αυτή τη γραμμή: σχεδίασέ τη στην εικόνα (▭), θα μείνει συνδεδεμένη. ¦ Няма област за този ред: начертай я върху изображението (▭), ще остане свързана.
+Ligne à relire ¦ Γραμμή για έλεγχο ¦ Ред за проверка
+Relue ¦ Ελέγχθηκε ¦ Проверено
+Ligne d’avant ¦ Προηγούμενη γραμμή ¦ Предишен ред
+atelier|Ligne suivante ¦ Επόμενη γραμμή ¦ Следващ ред
+Entrée : la ligne est relue, ligne suivante · ⇧ Entrée : ligne d’avant · ↑ ↓ : changer de ligne sans la marquer · Échap : fermer ¦ Enter: η γραμμή ελέγχθηκε, επόμενη γραμμή · ⇧ Enter: προηγούμενη γραμμή · ↑ ↓: αλλαγή γραμμής χωρίς σήμανση · Esc: κλείσιμο ¦ Enter: редът е проверен, следващ ред · ⇧ Enter: предишен ред · ↑ ↓: смяна на реда, без да се отбелязва · Esc: затваряне
+Ligne {n} sur {total} ¦ Γραμμή {n} από {total} ¦ Ред {n} от {total}
+=ligne relue ¦ γραμμή ελέγχθηκε|γραμμές ελέγχθηκαν ¦ ред проверен|реда проверени
+Toutes les lignes sont relues. ¦ Όλες οι γραμμές ελέγχθηκαν. ¦ Всички редове са проверени.
+C’était la dernière ligne. ¦ Αυτή ήταν η τελευταία γραμμή. ¦ Това беше последният ред.
+Relire ligne à ligne ¦ Έλεγχος γραμμή γραμμή ¦ Проверка ред по ред
+Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Έλεγχος γραμμή γραμμή σε πλήρη οθόνη: το κομμάτι της εικόνας πάνω από κάθε γραμμή ¦ Проверка ред по ред на цял екран: частта от изображението над всеки ред
+Relecture ligne à ligne en plein écran (conseillé) ¦ Έλεγχος γραμμή γραμμή σε πλήρη οθόνη (συνιστάται) ¦ Проверка ред по ред на цял екран (препоръчително)

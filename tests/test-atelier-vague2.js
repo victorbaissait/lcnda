@@ -161,6 +161,68 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
             assert.ok((await phoneState()).stage > 500, 'retour au grand écran : tout revient');
         });
 
+        /* ─── 3. 👁 relecture ligne à ligne en plein écran ─── */
+        const rv = () => p.evaluate(() => { const d = document.querySelector('dialog.h-txr-dlg[open]'); if (!d) return null; const cv = d.querySelector('[data-txr-img]'), r = cv.getBoundingClientRect();
+            let ink = 0; try { const g = cv.getContext('2d'), px = g.getImageData(0, 0, cv.width, cv.height).data; let lo = 255, hi = 0; for (let i = 0; i < px.length; i += 16) { lo = Math.min(lo, px[i]); hi = Math.max(hi, px[i]); } ink = hi - lo; } catch (_) {}
+            const band = d.querySelector('[data-txr-band]').getBoundingClientRect(), line = d.querySelector('[data-txr-line]').getBoundingClientRect();
+            return {pos: d.querySelector('[data-txr-pos]').textContent, done: d.querySelector('[data-txr-done]').textContent, line: d.querySelector('[data-txr-line]').value, focus: document.activeElement === d.querySelector('[data-txr-line]'),
+                img: {w: Math.round(r.width), h: Math.round(r.height), ink, above: band.bottom <= line.top + 1}, zone: d.dataset.txrZone, undo: !d.querySelector('[data-txr="undo"]').disabled, ok: !d.querySelector('[data-txr-ok]').hidden,
+                sw: document.documentElement.scrollWidth, out: [...d.querySelectorAll('*')].filter(el => { const q = el.getBoundingClientRect(); return q.width && (q.right > innerWidth + 1 || q.left < -1) && !el.closest('[data-txr-band]'); }).map(el => el.className)}; });
+        const reviewed = () => p.evaluate(() => (document.querySelector('dialog.h-tx-dlg').txApi.get().data.reviewed || []).length);
+        await t('👁 relecture : R ouvre le plein écran sur la ligne 1, le morceau d’image de la ligne juste au-dessus de la ligne de texte', async () => {
+            await p.evaluate(() => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); a.setSelectionRange(0, 0); });
+            await p.click(`${D} [data-tx-step="fix"]`); await p.keyboard.press('r');
+            await p.waitForSelector('dialog.h-txr-dlg[open]'); await sleep(500);
+            const r = await rv(); assert.equal(r.pos, 'Ligne 1 sur 7'); assert.equal(r.line, LINES[0]); assert.ok(r.focus, 'on écrit tout de suite dans la ligne');
+            assert.equal(r.zone, 'z1'); assert.ok(r.img.w > 300 && r.img.h > 20 && r.img.ink > 60 && r.img.above, JSON.stringify(r.img)); assert.equal(r.done, '0 ligne relue');
+            await shot('v2-relecture.png');
+        });
+        await t('👁 relecture : Entrée = ligne relue et suivante, ⇧ Entrée = ligne d’avant, ↑ ↓ sans marquer', async () => {
+            await p.keyboard.press('Enter'); await sleep(200);
+            let r = await rv(); assert.equal(r.pos, 'Ligne 2 sur 7'); assert.equal(r.line, LINES[1]); assert.equal(r.done, '1 ligne relue'); assert.equal(r.zone, 'z2'); assert.equal(await reviewed(), 1);
+            await p.keyboard.press('Shift+Enter'); await sleep(150); r = await rv(); assert.equal(r.pos, 'Ligne 1 sur 7'); assert.ok(r.ok, '✓ sur la ligne relue');
+            await p.keyboard.press('ArrowDown'); await p.keyboard.press('ArrowDown'); await sleep(150); r = await rv(); assert.equal(r.pos, 'Ligne 3 sur 7'); assert.equal(r.done, '1 ligne relue');
+            await p.keyboard.press('ArrowUp'); await sleep(150); assert.equal((await rv()).pos, 'Ligne 2 sur 7');
+        });
+        await t('👁 relecture : corriger sur place (le texte de l’acte et sa zone suivent), puis « ↶ Annuler »', async () => {
+            await p.keyboard.press('ControlOrMeta+a'); await p.keyboard.type('mars, a été baptisé Jean, né d’hier, fils légitime et naturel');
+            const now = (await body()).split('\n'); assert.equal(now[1], 'mars, a été baptisé Jean, né d’hier, fils légitime et naturel');
+            const z2 = await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), x = d.txApi.get(), z = x.data.zones.find(q => q.id === 'z2'); return x.body.slice(z.s, z.e); });
+            assert.equal(z2, now[1], 'la zone de la ligne suit la correction'); assert.ok((await rv()).undo);
+            await p.click('dialog.h-txr-dlg [data-txr="undo"]'); await sleep(200);
+            assert.equal((await body()).split('\n')[1], LINES[1]); assert.equal((await rv()).line, LINES[1]);
+        });
+        await t('👁 relecture : en sombre et à 390 px, rien ne dépasse ; Échap ferme et la ligne relue reste choisie dans le texte, sa zone allumée', async () => {
+            await theme('dark'); await sleep(150); await shot('v2-relecture-sombre.png');
+            await p.setViewportSize({width: 390, height: 844}); await sleep(400);
+            const r = await rv(); assert.ok(r.sw <= 391, 'largeur ' + r.sw); assert.deepEqual(r.out, []); assert.ok(r.img.w > 200, JSON.stringify(r.img));
+            await shot('v2-relecture-390.png'); await p.setViewportSize({width: 1440, height: 900}); await theme(''); await sleep(300);
+            await p.keyboard.press('Escape'); await sleep(300);
+            assert.equal(await p.evaluate(() => !!document.querySelector('dialog.h-txr-dlg')), false);
+            const sel = await p.evaluate(() => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); return [a.value.slice(a.selectionStart, a.selectionEnd), document.querySelector('dialog.h-tx-dlg [data-tx-zones] rect.is-sel')?.dataset.txZone]; });
+            assert.deepEqual(sel, [LINES[1], 'z2']);
+        });
+        await t('👁 relecture : les lignes relues sont gardées avec l’acte (💾 puis réouverture)', async () => {
+            await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="save"]').click());
+            await p.waitForFunction(() => /Enregistré/.test(document.querySelector('dialog.h-tx-dlg [data-tx-status]').textContent), null, {timeout: 8000});
+            await openAct(); assert.equal(await reviewed(), 1);
+        });
+        await t('👁 relecture : un réglage (Réglages, « (conseillé) », allumé au départ) ; éteint, ni bouton, ni menu, ni touche R', async () => {
+            const html = await p.evaluate(() => window.LCNDA_EXT.transcribePrefs.html()); assert.match(html, /data-txb-rv checked><i><\/i>Relecture ligne à ligne en plein écran \(conseillé\)/);
+            assert.ok(await p.evaluate(() => !document.querySelector('dialog.h-tx-dlg [data-tx-cmd="review"]').hidden));
+            await p.evaluate(() => window.LCNDA_EXT.txView.setReviewMode(false)); await sleep(200);
+            assert.ok(await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="review"]').hidden));
+            await p.click(`${D} [data-tx-step="fix"]`); await p.keyboard.press('r'); await sleep(300);
+            assert.equal(await p.evaluate(() => !!document.querySelector('dialog.h-txr-dlg')), false);
+            await p.evaluate(() => [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-menus] button')].find(b => b.textContent.trim() === 'Affichage').click()); await p.waitForSelector('.ui-actmenu');
+            const items = await p.evaluate(() => [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].map(b => b.textContent)); await p.keyboard.press('Escape');
+            assert.ok(!items.some(x => /Relire/.test(x)), items.join(' | '));
+            await p.evaluate(() => window.LCNDA_EXT.txView.setReviewMode(true)); await sleep(200);
+            await p.evaluate(() => [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-menus] button')].find(b => b.textContent.trim() === 'Affichage').click()); await p.waitForSelector('.ui-actmenu');
+            await p.evaluate(() => [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].find(b => /Relire ligne à ligne/.test(b.textContent)).click());
+            await p.waitForSelector('dialog.h-txr-dlg[open]'); await p.keyboard.press('Escape'); await sleep(200);
+        });
+
         await t('aucune erreur JavaScript', async () => { assert.deepStrictEqual(errs, []); });
     } finally {
         await browser.close(); proc.kill(); fs.rmSync(tmp, {recursive: true, force: true});
