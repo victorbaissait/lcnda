@@ -2381,6 +2381,7 @@
  "{years} {months} et {days}": "{years} {months} og {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "{yes} ja, {maybe} kanskje, {no} nei, {wait} uten svar",
  "{yr} est dans le futur.": "{yr} ligger i fremtiden.",
+ "{zones} sur cette page ({n} en tout)": "{zones} på denne siden ({n} totalt)",
  "⟦ Commence ici": "⟦ Begynner her",
  "⟧ Finit ici": "⟧ Slutter her",
  "‖ même hauteur": "‖ samme høyde",

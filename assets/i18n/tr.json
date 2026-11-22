@@ -2381,6 +2381,7 @@
  "{years} {months} et {days}": "{years} {months} ve {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "{yes} evet, {maybe} belki, {no} hayır, {wait} yanıtsız",
  "{yr} est dans le futur.": "Gelecekte bir tarih: {yr}.",
+ "{zones} sur cette page ({n} en tout)": "Bu sayfada {zones} (toplam {n})",
  "⟦ Commence ici": "⟦ Burada başlar",
  "⟧ Finit ici": "⟧ Burada biter",
  "‖ même hauteur": "‖ aynı yükseklik",

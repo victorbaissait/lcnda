@@ -731,7 +731,12 @@
             setGeom(z, editRect({x: z.x, y: z.y, w: z.w, h: z.h}, corner, dx, dy)); touch(); paintZoneRects(); reveal(z);
         }
         const TOOL_HELP = {pan: i18n('Glisse pour déplacer l’image (ou barre d’espace) · molette : zoomer · clic sur une zone : la choisir'), zone: i18n('Choisis un passage dans le texte, puis dessine son rectangle sur l’image : les deux restent liés')};
-        function paintTxBar() { if (!txBar) return; txBar.setHelp(TOOL_HELP[tool] || ''); txBar.setWhere(imgW ? `${imgW} × ${imgH} px · ${A().plural ? A().plural(t.data.zones.length, 'zone') : t.data.zones.length + ' zones'}` : i18n('Pas encore d’image')); txBar.sync(); }
+        // 📑 plusieurs pages (un seul texte) : les zones de la page affichée, et le total du document
+        function zoneCount() {
+            const pl = n => (A().plural ? A().plural(n, 'zone') : n + ' zones'), all = t.data.zones.length, here = t.data.zones.filter(onHere).length;
+            return PAGES.length > 1 && here !== all ? i18n('{zones} sur cette page ({n} en tout)', {zones: pl(here), n: all}) : pl(all);
+        }
+        function paintTxBar() { if (!txBar) return; txBar.setHelp(TOOL_HELP[tool] || ''); txBar.setWhere(imgW ? `${imgW} × ${imgH} px · ${zoneCount()}` : i18n('Pas encore d’image')); txBar.sync(); }
         const setTool = k => { tool = k; dlg.querySelectorAll('[data-tx-tool]').forEach(b => { b.classList.toggle('is-active', b.dataset.txTool === k); b.setAttribute('aria-pressed', String(b.dataset.txTool === k)); }); stage.dataset.tool = k; paintTxBar(); };
         setTool('pan');
         /* ─── ce qui est repéré : noms (et fiches), dates, lieux, métiers ─── */

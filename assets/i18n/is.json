@@ -2381,6 +2381,7 @@
  "{years} {months} et {days}": "{years} {months} og {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "{yes} já, {maybe} kannski, {no} nei, {wait} án svars",
  "{yr} est dans le futur.": "{yr} er í framtíðinni.",
+ "{zones} sur cette page ({n} en tout)": "{zones} á þessari síðu ({n} alls)",
  "⟦ Commence ici": "⟦ Byrjar hér",
  "⟧ Finit ici": "⟧ Endar hér",
  "‖ même hauteur": "‖ sama hæð",

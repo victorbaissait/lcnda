@@ -2381,6 +2381,7 @@
  "{years} {months} et {days}": "{years} {months} ja {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "jah: {yes}, võib-olla: {maybe}, ei: {no}, vastuseta: {wait}",
  "{yr} est dans le futur.": "{yr} on tulevikus.",
+ "{zones} sur cette page ({n} en tout)": "{zones} sellel leheküljel (kokku {n})",
  "⟦ Commence ici": "⟦ Algab siit",
  "⟧ Finit ici": "⟧ Lõpeb siin",
  "‖ même hauteur": "‖ sama kõrgus",

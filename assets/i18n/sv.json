@@ -2381,6 +2381,7 @@
  "{years} {months} et {days}": "{years} {months} och {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "{yes} ja, {maybe} kanske, {no} nej, {wait} utan svar",
  "{yr} est dans le futur.": "{yr} ligger i framtiden.",
+ "{zones} sur cette page ({n} en tout)": "{zones} på den här sidan ({n} totalt)",
  "⟦ Commence ici": "⟦ Börjar här",
  "⟧ Finit ici": "⟧ Slutar här",
  "‖ même hauteur": "‖ samma höjd",

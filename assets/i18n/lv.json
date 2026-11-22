@@ -2427,6 +2427,7 @@
  "{years} {months} et {days}": "{years} {months} un {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "jā: {yes}, varbūt: {maybe}, nē: {no}, bez atbildes: {wait}",
  "{yr} est dans le futur.": "{yr} ir nākotnē.",
+ "{zones} sur cette page ({n} en tout)": "{zones} šajā lappusē (kopā {n})",
  "⟦ Commence ici": "⟦ Sākas šeit",
  "⟧ Finit ici": "⟧ Beidzas šeit",
  "‖ même hauteur": "‖ vienāds augstums",

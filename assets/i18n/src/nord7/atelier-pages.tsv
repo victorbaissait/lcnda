@@ -41,3 +41,4 @@ Un texte par page : la lecture rapide et la lecture d’un imprimé se font page
 Lecture approfondie : page {i} sur {n}… ¦ Ítarlestur: síða {i} af {n}…
 Lire toutes les pages avec ce modèle ({n}) ¦ Lesa allar síður með þessu líkani ({n})
 Ce document a plusieurs pages : pour changer l’image d’une page, ouvre « 📑 Pages du document », retire l’ancienne page puis relie la nouvelle. ¦ Þetta skjal hefur nokkrar síður: til að skipta um mynd á síðu skaltu opna „📑 Síður skjalsins“, fjarlægja gömlu síðuna og tengja svo þá nýju.
+{zones} sur cette page ({n} en tout) ¦ {zones} á þessari síðu ({n} alls)

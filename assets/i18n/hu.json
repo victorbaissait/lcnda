@@ -2381,6 +2381,7 @@
  "{years} {months} et {days}": "{years} {months} és {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "{yes} igen, {maybe} talán, {no} nem, {wait} válasz nélkül",
  "{yr} est dans le futur.": "{yr} a jövőben van.",
+ "{zones} sur cette page ({n} en tout)": "{zones} ezen az oldalon (összesen {n})",
  "⟦ Commence ici": "⟦ Itt kezdődik",
  "⟧ Finit ici": "⟧ Itt ér véget",
  "‖ même hauteur": "‖ azonos magasság",

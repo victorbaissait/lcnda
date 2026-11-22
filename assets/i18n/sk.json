@@ -2473,6 +2473,7 @@
  "{years} {months} et {days}": "{years} {months} a {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "{yes} áno, {maybe} možno, {no} nie, {wait} bez odpovede",
  "{yr} est dans le futur.": "{yr} je v budúcnosti.",
+ "{zones} sur cette page ({n} en tout)": "{zones} na tejto strane ({n} spolu)",
  "⟦ Commence ici": "⟦ Začína tu",
  "⟧ Finit ici": "⟧ Končí tu",
  "‖ même hauteur": "‖ rovnaká výška",

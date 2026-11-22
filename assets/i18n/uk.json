@@ -2473,6 +2473,7 @@
  "{years} {months} et {days}": "{years} {months} і {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "так: {yes}, можливо: {maybe}, ні: {no}, без відповіді: {wait}",
  "{yr} est dans le futur.": "{yr} — це в майбутньому.",
+ "{zones} sur cette page ({n} en tout)": "{zones} на цій сторінці (усього {n})",
  "⟦ Commence ici": "⟦ Початок тут",
  "⟧ Finit ici": "⟧ Кінець тут",
  "‖ même hauteur": "‖ однакова висота",

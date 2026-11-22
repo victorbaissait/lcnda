@@ -2335,6 +2335,7 @@
  "{years} {months} et {days}": "{years} {months} dan {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "{yes} ya, {maybe} mungkin, {no} tidak, {wait} belum menjawab",
  "{yr} est dans le futur.": "{yr} ada di masa depan.",
+ "{zones} sur cette page ({n} en tout)": "{zones} di halaman ini ({n} seluruhnya)",
  "⟦ Commence ici": "⟦ Mulai di sini",
  "⟧ Finit ici": "⟧ Selesai di sini",
  "‖ même hauteur": "‖ tinggi sama",

@@ -2427,6 +2427,7 @@
  "{years} {months} et {days}": "{years} {months} e {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "{yes} sim, {maybe} talvez, {no} não, {wait} sem resposta",
  "{yr} est dans le futur.": "{yr} está no futuro.",
+ "{zones} sur cette page ({n} en tout)": "{zones} nesta página ({n} no total)",
  "⟦ Commence ici": "⟦ Começa aqui",
  "⟧ Finit ici": "⟧ Acaba aqui",
  "‖ même hauteur": "‖ mesma altura",

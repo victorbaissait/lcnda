@@ -2381,6 +2381,7 @@
  "{years} {months} et {days}": "{years} {months} и {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "{yes} да, {maybe} може би, {no} не, {wait} без отговор",
  "{yr} est dans le futur.": "{yr} е в бъдещето.",
+ "{zones} sur cette page ({n} en tout)": "{zones} на тази страница (общо {n})",
  "⟦ Commence ici": "⟦ Започва тук",
  "⟧ Finit ici": "⟧ Свършва тук",
  "‖ même hauteur": "‖ еднаква височина",

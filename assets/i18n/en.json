@@ -2381,6 +2381,7 @@
  "{years} {months} et {days}": "{years} {months} and {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "{yes} yes, {maybe} maybe, {no} no, {wait} no answer",
  "{yr} est dans le futur.": "{yr} is in the future.",
+ "{zones} sur cette page ({n} en tout)": "{zones} on this page ({n} in all)",
  "⟦ Commence ici": "⟦ Starts here",
  "⟧ Finit ici": "⟧ Ends here",
  "‖ même hauteur": "‖ same height",

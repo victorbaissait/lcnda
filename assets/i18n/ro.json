@@ -2427,6 +2427,7 @@
  "{years} {months} et {days}": "{years} {months} și {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "{yes} da, {maybe} poate, {no} nu, {wait} fără răspuns",
  "{yr} est dans le futur.": "{yr} este în viitor.",
+ "{zones} sur cette page ({n} en tout)": "{zones} pe această pagină ({n} în total)",
  "⟦ Commence ici": "⟦ Începe aici",
  "⟧ Finit ici": "⟧ Se termină aici",
  "‖ même hauteur": "‖ aceeași înălțime",

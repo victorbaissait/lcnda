@@ -2381,6 +2381,7 @@
  "{years} {months} et {days}": "{years} {months} e {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "{yes} po, {maybe} ndoshta, {no} jo, {wait} pa përgjigje",
  "{yr} est dans le futur.": "{yr} është në të ardhmen.",
+ "{zones} sur cette page ({n} en tout)": "{zones} në këtë faqe ({n} gjithsej)",
  "⟦ Commence ici": "⟦ Fillon këtu",
  "⟧ Finit ici": "⟧ Mbaron këtu",
  "‖ même hauteur": "‖ e njëjta lartësi",

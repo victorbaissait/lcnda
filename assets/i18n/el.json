@@ -2381,6 +2381,7 @@
  "{years} {months} et {days}": "{years} {months} και {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "{yes} ναι, {maybe} ίσως, {no} όχι, {wait} χωρίς απάντηση",
  "{yr} est dans le futur.": "Το {yr} είναι στο μέλλον.",
+ "{zones} sur cette page ({n} en tout)": "{zones} σε αυτή τη σελίδα ({n} συνολικά)",
  "⟦ Commence ici": "⟦ Ξεκινά εδώ",
  "⟧ Finit ici": "⟧ Τελειώνει εδώ",
  "‖ même hauteur": "‖ ίδιο ύψος",

@@ -238,6 +238,9 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             assert.equal(await p.evaluate(() => !!document.querySelector('dialog[open] [data-pick-media], dialog.media-picker[open]')), false, 'pas de fenêtre de choix d’image');
             const after = await p.evaluate(() => { const g = document.querySelector('dialog.h-tx-dlg').txApi.get(); return {m: g.media_id, z: g.data.zones.length}; });
             assert.deepStrictEqual(after, before);
+            // la barre du bas compte les zones de la page affichée, puis le total du document
+            const where = await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-ed-where]')?.textContent || '');
+            assert.match(where, /0 zone sur cette page \(1 en tout\)/, where);
             await p.click(`${D} [data-tx-page="0"]`); await sleep(400);
         });
         await t('✨ Lire sur la page affichée : le texte lu va dans la page 2, sa zone est sur la page 2', async () => {

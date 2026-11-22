@@ -2335,6 +2335,7 @@
  "{years} {months} et {days}": "{years} {months} và {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "{yes} có, {maybe} có thể, {no} không, {wait} chưa trả lời",
  "{yr} est dans le futur.": "{yr} nằm trong tương lai.",
+ "{zones} sur cette page ({n} en tout)": "{zones} trên trang này (tổng cộng {n})",
  "⟦ Commence ici": "⟦ Bắt đầu ở đây",
  "⟧ Finit ici": "⟧ Kết thúc ở đây",
  "‖ même hauteur": "‖ cùng chiều cao",

@@ -2381,6 +2381,7 @@
  "{years} {months} et {days}": "{years} {months} ja {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "{yes} kyllä, {maybe} ehkä, {no} ei, {wait} ilman vastausta",
  "{yr} est dans le futur.": "{yr} on tulevaisuudessa.",
+ "{zones} sur cette page ({n} en tout)": "{zones} tällä sivulla (yhteensä {n})",
  "⟦ Commence ici": "⟦ Alkaa tästä",
  "⟧ Finit ici": "⟧ Päättyy tähän",
  "‖ même hauteur": "‖ sama korkeus",

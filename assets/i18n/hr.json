@@ -2427,6 +2427,7 @@
  "{years} {months} et {days}": "{years} {months} i {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "{yes} da, {maybe} možda, {no} ne, {wait} bez odgovora",
  "{yr} est dans le futur.": "{yr} je u budućnosti.",
+ "{zones} sur cette page ({n} en tout)": "{zones} na ovoj stranici (ukupno {n})",
  "⟦ Commence ici": "⟦ Počinje ovdje",
  "⟧ Finit ici": "⟧ Završava ovdje",
  "‖ même hauteur": "‖ ista visina",

@@ -41,3 +41,4 @@ Un texte par page : la lecture rapide et la lecture d’un imprimé se font page
 Lecture approfondie : page {i} sur {n}… ¦ Đọc kỹ: trang {i} trên {n}… ¦ Pembacaan mendalam: halaman {i} dari {n}…
 Lire toutes les pages avec ce modèle ({n}) ¦ Đọc tất cả các trang bằng mô hình này ({n}) ¦ Baca semua halaman dengan model ini ({n})
 Ce document a plusieurs pages : pour changer l’image d’une page, ouvre « 📑 Pages du document », retire l’ancienne page puis relie la nouvelle. ¦ Tài liệu này có nhiều trang: để đổi hình của một trang, hãy mở “📑 Các trang của tài liệu”, gỡ trang cũ rồi liên kết trang mới. ¦ Dokumen ini punya beberapa halaman: untuk mengganti gambar sebuah halaman, buka “📑 Halaman dokumen”, lepaskan halaman lama, lalu tautkan yang baru.
+{zones} sur cette page ({n} en tout) ¦ {zones} trên trang này (tổng cộng {n}) ¦ {zones} di halaman ini ({n} seluruhnya)

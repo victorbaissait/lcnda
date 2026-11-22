@@ -2473,6 +2473,7 @@
  "{years} {months} et {days}": "{years} {months} i {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "{yes} tak, {maybe} może, {no} nie, {wait} bez odpowiedzi",
  "{yr} est dans le futur.": "{yr} to przyszłość.",
+ "{zones} sur cette page ({n} en tout)": "{zones} na tej stronie ({n} łącznie)",
  "⟦ Commence ici": "⟦ Zaczyna się tutaj",
  "⟧ Finit ici": "⟧ Kończy się tutaj",
  "‖ même hauteur": "‖ ta sama wysokość",

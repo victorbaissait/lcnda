@@ -2381,6 +2381,7 @@
  "{years} {months} et {days}": "{years} {months} en {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "{yes} ja, {maybe} misschien, {no} nee, {wait} zonder antwoord",
  "{yr} est dans le futur.": "{yr} ligt in de toekomst.",
+ "{zones} sur cette page ({n} en tout)": "{zones} op deze pagina ({n} in totaal)",
  "⟦ Commence ici": "⟦ Begint hier",
  "⟧ Finit ici": "⟧ Eindigt hier",
  "‖ même hauteur": "‖ zelfde hoogte",

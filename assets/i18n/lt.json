@@ -2473,6 +2473,7 @@
  "{years} {months} et {days}": "{years} {months} ir {days}",
  "{yes} oui, {maybe} peut-être, {no} non, {wait} sans réponse": "taip: {yes}, galbūt: {maybe}, ne: {no}, be atsakymo: {wait}",
  "{yr} est dans le futur.": "{yr} yra ateityje.",
+ "{zones} sur cette page ({n} en tout)": "{zones} šiame puslapyje (iš viso {n})",
  "⟦ Commence ici": "⟦ Prasideda čia",
  "⟧ Finit ici": "⟧ Baigiasi čia",
  "‖ même hauteur": "‖ vienodas aukštis",
