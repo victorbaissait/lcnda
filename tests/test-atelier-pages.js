@@ -514,6 +514,17 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
                 return {pos: d.querySelector('[data-txr-pos]').textContent, zone: d.dataset.txrZone, shown: !cv.hidden, ink}; });
             assert.match(r.pos, /\(3 sur 4\) · Ligne \d+ sur \d+/, r.pos);
             assert.equal(r.zone, pick.id); assert.ok(r.shown && r.ink > 20, 'le morceau de l’image de la page 3 : ' + JSON.stringify(r));
+            // le choix des lignes : cette page, ou seulement celles pas encore relues ; l'avancement de la page
+            const st = () => p.evaluate(() => { const d = document.querySelector('dialog.h-txr-dlg[open]'); return {pos: d.querySelector('[data-txr-pos]').textContent, done: d.querySelector('[data-txr-done]').textContent, line: d.querySelector('[data-txr-line]').value}; });
+            const total = x => Number((x.pos.match(/sur (\d+)$/) || [])[1]);
+            const s0 = await st(); assert.match(s0.done, /\(3 sur 4\) : \d+\/\d+$/, s0.done);
+            const pg3 = (await tx()).body.split(/\n— page \d —\n/)[2].split('\n').filter(l => l.trim()).length;
+            await p.check('dialog.h-txr-dlg [name="txr_scope"][value="page"]'); await sleep(200);
+            const s1 = await st(); assert.equal(total(s1), pg3, 'cette page seulement : ' + s1.pos); assert.equal(s1.line, s0.line, 'on reste sur la même ligne');
+            await p.check('dialog.h-txr-dlg [name="txr_scope"][value="todo"]'); await sleep(200);
+            const s2 = await st(); await p.keyboard.press('Enter'); await sleep(300); const s3 = await st();
+            assert.equal(total(s3), total(s2) - 1, 'la ligne relue sort de la liste : ' + s2.pos + ' → ' + s3.pos); assert.notEqual(s3.line, s2.line);
+            assert.match(s3.done, /\(\d sur 4\) : \d+\/\d+$/);
             await p.keyboard.press('Escape'); await sleep(300); await p.click(`${D} [data-tx-step="read"]`);
         });
         await t('🎚 chaque page garde ses réglages d’image : tourner la page 1 ne tourne pas la page 2 ; gardé après enregistrement', async () => {

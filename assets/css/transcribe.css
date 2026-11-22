@@ -237,6 +237,7 @@
 .h-txr-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 16px;background:#1d1f23;border-top:1px solid #3a3f46}
 .h-txr-zoom{display:inline-flex;align-items:center;gap:4px;font-variant-numeric:tabular-nums}
 .h-txr-hint{color:#9aa0aa;flex:1 1 260px;min-width:0}
+.h-txr-scope{display:flex;flex-wrap:wrap;gap:4px 12px;color:#d7dae0;font-size:13px}.h-txr-scope label{display:inline-flex;align-items:center;gap:5px;cursor:pointer}
 :root[data-theme="dark"] .h-txr-line{background:#24272c;color:#eceef2}
 @media (max-width:700px){.h-txr-body{padding:12px}.h-txr-line{font-size:17px}.h-txr-hint{display:none}.h-txr-top{padding:8px 12px}}
 /* ─── 🔍 Chercher / Remplacer dans le texte (⌘F, ⌥⌘F) ─── */

@@ -65,7 +65,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/graphs.css?v=1">
     <link rel="stylesheet" href="assets/css/apparence.css?v=7">
     <link rel="stylesheet" href="assets/css/sections.css?v=3">
-    <link rel="stylesheet" href="assets/css/transcribe.css?v=19">
+    <link rel="stylesheet" href="assets/css/transcribe.css?v=20">
     <link rel="stylesheet" href="assets/css/photomaps.css?v=9">
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=3">
     <link rel="stylesheet" href="assets/css/meteo.css?v=2">
@@ -1177,7 +1177,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script src="assets/js/app-journal.js?v=2"></script>
 <?= i18n_page_script() ?>
-<script src="assets/js/app-i18n.js?v=91"></script>
+<script src="assets/js/app-i18n.js?v=92"></script>
 <script>window.LCNDA_GENEALOGY = <?= json_encode(GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID) ?>;window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_GLOCK = <?= json_encode(['on' => glock_info()['locked'], 'minutes' => glock_info()['minutes']]) ?>;window.LCNDA_GUEST = <?= json_encode(lan_device() ? ['name' => lan_device()['name']] : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
 <script src="assets/js/app-fond.js?v=9" defer></script>
 <script src="assets/js/app-accord.js?v=1" defer></script>
@@ -1485,7 +1485,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-transcribe-acte-core.js?v=3" defer></script>
 <script src="assets/js/heritage-transcribe-acte.js?v=12" defer></script>
 <script src="assets/js/heritage-transcribe-trouve.js?v=4" defer></script>
-<script src="assets/js/heritage-transcribe-relecture.js?v=6" defer></script>
+<script src="assets/js/heritage-transcribe-relecture.js?v=7" defer></script>
 <script src="assets/js/heritage-pages.js?v=4" defer></script>
 <script src="assets/js/heritage-transcribe-pages.js?v=1" defer></script>
 <script src="assets/js/heritage-transcribe.js?v=63" defer></script>

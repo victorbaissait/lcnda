@@ -25,9 +25,14 @@
      * open({title, text(), replace(s, e, str), zones(), imageSrc(), filter(), reviewed: () => [clés], setReviewed([clés]), start (position dans le texte), onClose(ligne)})
      */
     function open(ctx) {
+        // 📑 plusieurs pages (ctx.pageOf) : relire toutes les lignes, celles de la page de départ, ou seulement celles pas encore relues
+        let scope = 'all', homePage = '';
+        const allLines = () => { const L = linesOf(ctx.text()); if (scope === 'page' && homePage) return L.filter(l => ctx.pageOf(l.s) === homePage);
+            if (scope === 'todo') { const set = new Set(ctx.reviewed() || []); return L.filter(l => !set.has(lineKey(l.text))); } return L; };
         let lines = linesOf(ctx.text());
         if (!lines.length) { A().toast(i18n('Le texte est vide : lis ou écris d’abord l’acte.'), 'error'); return null; }
         let idx = Math.max(0, lines.findIndex(l => ctx.start != null && ctx.start >= l.s && ctx.start <= l.e)), zoomK = 1, im = null, editBefore = null;
+        homePage = ctx.pageOf?.(lines[idx]?.s ?? 0) || ''; const multi = !!homePage;
         const undo = []; // [{n, text}] : la ligne d'avant chaque correction
         const dlg = document.createElement('dialog'); dlg.className = 'modal is-full h-txr-dlg';
         dlg.innerHTML = `<div class="h-txr" role="document">
@@ -45,6 +50,7 @@
                 <button type="button" class="button small" data-txr="next" data-shortcut="↩">✓ ${esc(i18n('Ligne suivante', {ctx: 'atelier'}))}</button>
                 <span class="h-txr-zoom"><button type="button" class="button small secondary" data-txr="zout" title="${esc(i18n('Zoom arrière'))}" aria-label="${esc(i18n('Zoom arrière'))}">−</button><span data-txr-zk>100 %</span><button type="button" class="button small secondary" data-txr="zin" title="${esc(i18n('Zoom avant'))}" aria-label="${esc(i18n('Zoom avant'))}">＋</button></span>
                 <button type="button" class="button small secondary" data-txr="undo" disabled>↶ ${esc(i18n('Annuler'))}</button>
+                ${multi ? `<span class="h-txr-scope" role="radiogroup" aria-label="${esc(i18n('Lignes à relire'))}"><label><input type="radio" name="txr_scope" value="all" checked> ${esc(i18n('Sur toutes les pages'))}</label><label><input type="radio" name="txr_scope" value="page"> ${esc(homePage)}</label><label><input type="radio" name="txr_scope" value="todo"> ${esc(i18n('Seulement les lignes pas encore relues'))}</label></span>` : ''}
                 <small class="h-txr-hint">${esc(i18n('Entrée : la ligne est relue, ligne suivante · ⇧ Entrée : ligne d’avant · ↑ ↓ : changer de ligne sans la marquer · Échap : fermer'))}</small>
             </footer></div>`;
         document.body.appendChild(dlg); dlg.showModal();
@@ -63,10 +69,12 @@
             $('[data-txr-zk]').textContent = `${Math.round(zoomK * 100)} %`;
         }
         function paint({focus = true} = {}) {
-            lines = linesOf(ctx.text()); idx = Math.min(idx, lines.length - 1); const l = lines[idx]; if (!l) return close();
+            lines = allLines(); idx = Math.min(idx, lines.length - 1); const l = lines[idx];
+            if (!l) { if (scope === 'todo') { A().toast?.(i18n('Toutes les lignes sont relues.')); } return close(); }
             const set = keys(), done = lines.filter(x => set.has(lineKey(x.text))).length, prev = lines[idx - 1], next = lines[idx + 1];
-            const pg = ctx.pageOf?.(l.s) || ''; $('[data-txr-pos]').textContent = (pg ? pg + ' · ' : '') + i18n('Ligne {n} sur {total}', {n: idx + 1, total: lines.length});
-            $('[data-txr-done]').textContent = plural(done, 'ligne relue', 'lignes relues'); $('[data-txr-progfill]').style.width = `${Math.round(done / lines.length * 100)}%`;
+            const pgName = ctx.pageOf?.(l.s) || ''; $('[data-txr-pos]').textContent = (pgName ? pgName + ' · ' : '') + i18n('Ligne {n} sur {total}', {n: idx + 1, total: lines.length});
+            const pg = multi ? ctx.pageOf(l.s) : '', inPg = pg ? linesOf(ctx.text()).filter(x => ctx.pageOf(x.s) === pg) : [];
+            $('[data-txr-done]').textContent = plural(done, 'ligne relue', 'lignes relues') + (pg ? ` · ${pg} : ${inPg.filter(x => set.has(lineKey(x.text))).length}/${inPg.length}` : ''); $('[data-txr-progfill]').style.width = `${Math.round(done / lines.length * 100)}%`;
             $('[data-txr-prev]').textContent = prev ? `${prev.n} · ${prev.text}` : ''; $('[data-txr-next]').textContent = next ? `${next.n} · ${next.text}` : '';
             $('[data-txr-n]').textContent = String(l.n); if (input.value !== l.text || document.activeElement !== input) input.value = l.text;
             $('[data-txr-ok]').hidden = !set.has(lineKey(l.text)); $('[data-txr="prev"]').disabled = idx === 0; $('[data-txr="undo"]').disabled = !undo.length;
@@ -74,7 +82,7 @@
             drawBand(); if (focus) { input.focus({preventScroll: true}); }
         }
         const go = (d, mark = false) => {
-            if (mark) { const l = lines[idx], set = keys(); set.add(lineKey(l.text)); ctx.setReviewed([...set]); }
+            if (mark) { const l = lines[idx], set = keys(); set.add(lineKey(l.text)); ctx.setReviewed([...set]); if (scope === 'todo' && d > 0) { paint(); input.select(); return; } }
             if (idx + d >= 0 && idx + d < lines.length) idx += d;
             else if (mark && idx === lines.length - 1) A().toast?.(lines.length > 1 && keys().size >= lines.length ? i18n('Toutes les lignes sont relues.') : i18n('C’était la dernière ligne.'));
             paint(); input.select();
@@ -83,17 +91,20 @@
         input.addEventListener('input', () => {
             const l = lines[idx]; if (!l) return; const v = input.value.replace(/\n/g, ' ');
             if (editBefore != null && !undo.some(u => u.visit === dlg.dataset.txrVisit)) { dlg.dataset.txrVisit = String(Date.now()); undo.push({n: l.n, text: editBefore, visit: dlg.dataset.txrVisit}); }
-            ctx.replace(l.s, l.e, v); lines = linesOf(ctx.text()); $('[data-txr="undo"]').disabled = false; $('[data-txr-ok]').hidden = !keys().has(lineKey(v));
+            ctx.replace(l.s, l.e, v); lines = allLines(); $('[data-txr="undo"]').disabled = false; $('[data-txr-ok]').hidden = !keys().has(lineKey(v));
         });
         input.addEventListener('focus', () => { dlg.dataset.txrVisit = ''; });
         function undoLast() {
             const u = undo.pop(); if (!u) return A().toast?.(i18n('Rien à annuler'));
             const all = linesOf(ctx.text()), l = all.find(x => x.n === u.n); if (!l) return;
-            ctx.replace(l.s, l.e, u.text); idx = Math.max(0, linesOf(ctx.text()).findIndex(x => x.n === u.n)); dlg.dataset.txrVisit = ''; paint(); input.select();
+            ctx.replace(l.s, l.e, u.text); idx = Math.max(0, allLines().findIndex(x => x.n === u.n)); dlg.dataset.txrVisit = ''; paint(); input.select();
         }
         function close() { if (!dlg.isConnected) return; dlg.close(); }
         dlg.addEventListener('close', () => { const l = lines[idx]; dlg.remove(); ctx.onClose?.(l ? linesOf(ctx.text()).find(x => x.n === l.n) || null : null); });
         dlg.addEventListener('cancel', e => { e.preventDefault(); close(); });
+        dlg.addEventListener('change', e => { if (e.target.name !== 'txr_scope') return; const cur = lines[idx]; scope = e.target.value; lines = allLines();
+            idx = Math.max(0, lines.findIndex(x => cur && x.n >= cur.n)); if (!lines.length) { A().toast?.(scope === 'todo' ? i18n('Toutes les lignes sont relues.') : i18n('Le texte est vide : lis ou écris d’abord l’acte.')); scope = 'all'; dlg.querySelector('[name="txr_scope"][value="all"]').checked = true; lines = allLines(); }
+            paint(); input.select(); });
         dlg.addEventListener('click', e => { const b = e.target.closest('[data-txr]'); if (!b) return; const k = b.dataset.txr;
             if (k === 'close') return close(); if (k === 'next') return go(1, true); if (k === 'prev') return go(-1); if (k === 'undo') return undoLast();
             if (k === 'zin' || k === 'zout') { zoomK = Math.max(.5, Math.min(4, zoomK * (k === 'zin' ? 1.25 : .8))); drawBand(); } });
