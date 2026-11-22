@@ -823,7 +823,10 @@
             if (!TV.reviewMode?.() || !ext.txReview) return;
             if (!area.value.trim()) return toast(i18n('Le texte est vide : lis ou écris d’abord l’acte.'), 'error');
             flushCommit();
-            return ext.txReview.open({title: $('[data-tx="title"]').value, text: () => area.value, start: area.selectionStart, zones: () => t.data.zones.filter(onHere), imageSrc: () => (t.filename ? origSrc() : ''), filter: () => TV.cssFilter(t.data.view),
+            return ext.txReview.open({title: $('[data-tx="title"]').value, text: () => area.value, start: area.selectionStart, zones: () => (pageForm === 'one' && PAGES.length > 1 ? t.data.zones : t.data.zones.filter(onHere)), imageSrc: () => (t.filename ? origSrc() : ''),
+                // 📑 un seul texte pour plusieurs pages : l'image de la page de chaque zone, et la page de chaque ligne (« Page 2 (2 sur 4) · Ligne 7 sur 39 »)
+                imageFor: z => { if (pageForm !== 'one' || PAGES.length < 2) return ''; const p = PAGES.find(q => Number(q.media_id) === Number(z.p || t.media_id)); return p?.filename ? `media/${encodeURIComponent(p.filename)}` : ''; },
+                pageOf: pos => { if (pageForm === 'per' && PAGES.length > 1) return i18n('{page} ({i} sur {n})', {page: pageName(PAGES[pageIx], pageIx), i: pageIx + 1, n: PAGES.length}); const r = pageRef(pos); if (!r) return ''; const i = PAGES.findIndex(q => Number(q.media_id) === Number((t.data.pages || [])[PG.lineOf(area.value, pos).seg])); return i < 0 ? '' : i18n('{page} ({i} sur {n})', {page: pageName(PAGES[i], i), i: i + 1, n: PAGES.length}); }, filter: () => TV.cssFilter(t.data.view),
                 replace: (s, e, str) => { area.setRangeText(str, s, e, 'end'); area.dispatchEvent(new Event('input')); },
                 reviewed: () => t.data.reviewed || [], setReviewed: list => { t.data.reviewed = list.slice(-5000); touch(); flowSoon(60); },
                 onClose: l => { flushCommit(); if (phone()) showPtab('text', false); if (!l) return; selectText(l); const z = t.data.zones.find(q => q.e > q.s && q.s < l.e && l.s < q.e); if (z) { selZone = z.id; drawZones(); reveal(z); } }});

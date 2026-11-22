@@ -497,6 +497,21 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             let v1 = v0; for (let k = 0; k < 20 && v1 === v0; k++) { await sleep(200); v1 = (await p.evaluate(i => window.LCNDA_APP.api('act_transcription_versions', {act_id: i}), id)).items.length; }
             assert.ok(v1 > v0, 'une version « Avant… » gardée');
         });
+        await t('👁 relire ligne à ligne, un seul texte : une ligne de la page 3 dit sa page et montre le morceau de l’image de la page 3', async () => {
+            await p.click(`${D} [data-tx-page="0"]`); await sleep(400);
+            const pick = await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), g = d.txApi.get(), a = d.querySelector('[data-tx-body]').value;
+                const z = g.data.zones.find(q => Number(q.p) === 3 && q.src && q.e > q.s); return z ? {s: z.s, id: z.id, text: a.slice(z.s, z.e)} : null; });
+            assert.ok(pick, 'une zone reliée sur la page 3');
+            await p.evaluate(s0 => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); a.focus(); a.setSelectionRange(s0, s0); }, pick.s);
+            await p.click(`${D} [data-tx-step="fix"]`); await p.keyboard.press('r');
+            await p.waitForSelector('dialog.h-txr-dlg[open]'); await sleep(900);
+            const r = await p.evaluate(() => { const d = document.querySelector('dialog.h-txr-dlg[open]'), cv = d.querySelector('[data-txr-img]'); let ink = 0;
+                try { const px = cv.getContext('2d').getImageData(0, 0, cv.width, cv.height).data; let lo = 255, hi = 0; for (let i = 0; i < px.length; i += 16) { lo = Math.min(lo, px[i]); hi = Math.max(hi, px[i]); } ink = hi - lo; } catch (_) {}
+                return {pos: d.querySelector('[data-txr-pos]').textContent, zone: d.dataset.txrZone, shown: !cv.hidden, ink}; });
+            assert.match(r.pos, /\(3 sur 4\) · Ligne \d+ sur \d+/, r.pos);
+            assert.equal(r.zone, pick.id); assert.ok(r.shown && r.ink > 20, 'le morceau de l’image de la page 3 : ' + JSON.stringify(r));
+            await p.keyboard.press('Escape'); await sleep(300); await p.click(`${D} [data-tx-step="read"]`);
+        });
         await t('🔬 toutes les pages : « ■ Arrêter » pendant la page 1 arrête tout, rien n’est ajouté', async () => {
             ollama.delay = 700; const b0 = (await tx()).body, c0 = ollama.chats;
             await deepAll();

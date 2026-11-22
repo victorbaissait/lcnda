@@ -55,7 +55,7 @@
         function drawBand() {
             const l = lines[idx], z = l && zoneOf(l), band = $('[data-txr-band]');
             $('[data-txr-noimg]').hidden = !!z; cv.hidden = !z; dlg.dataset.txrZone = z ? z.id : '';
-            if (!z || !im?.naturalWidth) return;
+            const im = imgFor(z); if (!z || !im?.naturalWidth) return;
             const padY = Math.round(z.h * .25), x = Math.max(0, z.x - 6), y = Math.max(0, z.y - padY), w = Math.min(im.naturalWidth - x, z.w + 12), h = Math.min(im.naturalHeight - y, z.h + padY * 2);
             const avail = Math.max(120, band.clientWidth - 4), k = Math.min(avail / w, 160 / h) * zoomK, dpr = devicePixelRatio || 1;
             cv.width = Math.max(1, Math.round(w * k * dpr)); cv.height = Math.max(1, Math.round(h * k * dpr)); cv.style.width = `${Math.round(w * k)}px`; cv.style.height = `${Math.round(h * k)}px`;
@@ -65,7 +65,7 @@
         function paint({focus = true} = {}) {
             lines = linesOf(ctx.text()); idx = Math.min(idx, lines.length - 1); const l = lines[idx]; if (!l) return close();
             const set = keys(), done = lines.filter(x => set.has(lineKey(x.text))).length, prev = lines[idx - 1], next = lines[idx + 1];
-            $('[data-txr-pos]').textContent = i18n('Ligne {n} sur {total}', {n: idx + 1, total: lines.length});
+            const pg = ctx.pageOf?.(l.s) || ''; $('[data-txr-pos]').textContent = (pg ? pg + ' · ' : '') + i18n('Ligne {n} sur {total}', {n: idx + 1, total: lines.length});
             $('[data-txr-done]').textContent = plural(done, 'ligne relue', 'lignes relues'); $('[data-txr-progfill]').style.width = `${Math.round(done / lines.length * 100)}%`;
             $('[data-txr-prev]').textContent = prev ? `${prev.n} · ${prev.text}` : ''; $('[data-txr-next]').textContent = next ? `${next.n} · ${next.text}` : '';
             $('[data-txr-n]').textContent = String(l.n); if (input.value !== l.text || document.activeElement !== input) input.value = l.text;
@@ -105,7 +105,11 @@
             if ((e.metaKey || e.ctrlKey) && !e.shiftKey && e.key.toLowerCase() === 'z' && undo.length && input.value === editBefore) { e.preventDefault(); e.stopPropagation(); undoLast(); }
         });
         const ro = new ResizeObserver(() => drawBand()); ro.observe($('[data-txr-band]')); dlg.addEventListener('close', () => ro.disconnect());
-        im = new Image(); im.onload = () => { if (dlg.isConnected) drawBand(); }; const src = ctx.imageSrc?.(); if (src) im.src = src;
+        // l'image de la zone : celle de sa page (document en plusieurs pages, ctx.imageFor), sinon l'image de l'acte
+        const imgs = new Map();
+        const imgFor = z => { const src = (z && ctx.imageFor?.(z)) || ctx.imageSrc?.() || ''; if (!src) return null;
+            if (!imgs.has(src)) { const m = new Image(); m.onload = () => { if (dlg.isConnected) drawBand(); }; m.src = src; imgs.set(src, m); } return imgs.get(src); };
+        im = imgFor(null);
         paint(); input.select();
         dlg.txReview = {get index() { return idx; }, lines: () => lines};
         return dlg;
