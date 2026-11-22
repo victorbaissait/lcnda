@@ -301,7 +301,11 @@ function db(): PDO
  */
 function db_open_wait_ms(): int
 {
-    return PHP_SAPI !== 'cli' && ($_GET['action'] ?? null) === 'schema_status' ? 5000 : 30000;
+    if (PHP_SAPI === 'cli' || ($_GET['action'] ?? null) !== 'schema_status') { return 30000; }
+    // Au lancement, les 5 s comptent depuis le début de la requête : une lecture faite avant db() qui a déjà attendu la base
+    // (mot de passe, sauvegarde automatique, dossier partagé…) n'ajoute pas une deuxième attente complète (vu sur Mac : 10 s).
+    $waited = (int) ((microtime(true) - (float) ($_SERVER['REQUEST_TIME_FLOAT'] ?? microtime(true))) * 1000);
+    return max(300, 5000 - $waited);
 }
 
 /** La base $path a-t-elle déjà été trouvée tenue par un autre programme pendant cette requête ? ($mark : le noter) */
