@@ -57,3 +57,14 @@ Chaque gros outil : maquette d'abord.
     - la fenêtre « Lecture approfondie » dit quelle page elle lit (« Page 2 sur 2… 36 s ») et pour quelle page est le texte montré.
 15. Lecture approfondie : repérer les lignes répétées par le modèle (ex. la même ligne deux fois de suite) et les signaler, avec « Retirer le doublon ».
 16. « 👁 Relire ligne à ligne » avec plusieurs pages : dire quelle page on relit (« Page 1 · ligne 7 sur 39 »), l'image affichée suit la page de la ligne, passage d'une page à l'autre sans quitter la relecture (« Page suivante → »), et au départ le choix « Cette page / Toutes les pages / Seulement les lignes pas encore relues ». L'avancement de la relecture est compté par page.
+17. Revue « plusieurs pages » de l'Atelier (22 novembre, lecture du code assets/js/heritage-transcribe.js) — à corriger :
+    - IMPORTANT · Changer l'image (glisser une image sur l'acte, ou Fichier → Image de l'acte…) : remplace toujours l'image principale (t.media_id), même quand on est sur la page 2 ; et « Les retirer » efface les zones de TOUTES les pages (t.data.zones = []), pas seulement celles de la page changée (lignes ~276 et ~1369). À faire : changer l'image de la page affichée, ne retirer que ses zones, le dire clairement.
+    - Barre du bas « … px · 41 zones » : compte les zones de toutes les pages ; dire « 12 zones sur cette page (41 en tout) » (ligne ~733).
+    - Export (texte, PDF, imprimer) : ne connaît pas les pages (ni titre de page, ni image de chaque page) ; proposer « cette page / toutes les pages » et un titre par page.
+    - Fichier → Image de l'acte / image améliorée : seulement l'image affichée ; dire laquelle et proposer toutes les pages.
+    - 🪄 Corrections : la liste ne dit pas la page de chaque mot ; l'ajouter (« page 2, ligne 7 ») et aller à la bonne page au clic.
+    - 🧭 Repérer et 🧩 Modèle : en mode « un texte par page », vérifier qu'ils travaillent sur la bonne page (ou toutes), et le dire.
+    - Rotation, miroir, redressement, « Mieux voir » : à vérifier s'ils sont gardés pour chaque page (deux photos n'ont pas le même cadrage) ou partagés ; les garder par page.
+    - Frise (Lire 39 lignes / Corriger 11 mots) et avancement : dire si c'est la page ou tout le document (« 39 lignes · 2 pages »).
+    - 🕘 Versions, chercher / remplacer : préciser si on cherche dans la page ou dans toutes (choix).
+    (+ points 14 et 16 : Lire et Relire ligne à ligne.)
