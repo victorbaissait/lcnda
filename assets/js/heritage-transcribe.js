@@ -830,7 +830,7 @@
             const hand = t.data.zones.filter(z => !z.src && z.e > z.s), byHand = l => hand.some(z => z.s < l.e && l.s < z.e); // une ligne déjà reliée à la main reste comme elle est
             L0 = {main: L0.main.filter(l => !byHand(l)), margin: L0.margin.filter(l => !byHand(l))};
             if (!L0.main.length && !L0.margin.length) return manual ? toast(i18n('Pas de ligne de texte à relier.'), 'error') : null;
-            if (box === undefined) { box = htrArea(); if (!box) box = (await pageArea({ask: false})) || null; }
+            if (box === undefined) { const sz = t.data.zones.find(q => q.id === selZone); box = sz && !sz.src ? htrArea() : null; if (!box) box = (await pageArea({ask: false})) || null; } // une zone dessinée à la main et choisie : seulement elle (pas une zone de ligne)
             status(i18n('Découpage de la page en lignes…'));
             let B; try { B = await lineBands(box); } catch (err) { status(''); return toast(err.message || String(err), 'error'); }
             if (!dlg.isConnected) return null;

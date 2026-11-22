@@ -208,6 +208,12 @@ $pdo->exec("INSERT INTO media(title, media_type, filename) VALUES('Naissance Gar
         await p.evaluate(() => { delete document.querySelector('dialog.h-tx-dlg').dataset.txLines; document.querySelector('dialog.h-tx-dlg [data-tx-cmd="lines"]').click(); });
         await p.waitForFunction(() => document.querySelector('dialog.h-tx-dlg')?.dataset.txLines, null, { timeout: 30000 }); await sleep(200);
         out.again = await zonesNow(); out.againStarts = starts.length;
+        // une zone de ligne choisie (pas une zone dessinée à la main) : toute la page est quand même reliée
+        await p.evaluate(y => { const d = document.querySelector('dialog.h-tx-dlg'), a = d.querySelector('[data-tx-body]'), r = [...d.querySelectorAll('[data-tx-zones] rect')].find(x => +x.getAttribute('y') === y); void r; a.focus(); const at = a.value.indexOf('En présence') + 2; a.setSelectionRange(at, at); a.dispatchEvent(new MouseEvent('click', { bubbles: true })); }, BOX[6][1]);
+        out.selBefore = await p.evaluate(() => !!document.querySelector('dialog.h-tx-dlg [data-tx-zones] rect.is-sel'));
+        await p.evaluate(() => { delete document.querySelector('dialog.h-tx-dlg').dataset.txLines; document.querySelector('dialog.h-tx-dlg [data-tx-cmd="lines"]').click(); });
+        await p.waitForFunction(() => document.querySelector('dialog.h-tx-dlg')?.dataset.txLines, null, { timeout: 30000 }); await sleep(200);
+        out.againSel = await zonesNow();
         // sans Kraken : la lecture rapide « pas installée », la lecture rapide oubliée (nouvelle ouverture) → découpage simple
         await p.unroute(/action=htr_read_job/);
         await p.route(/action=htr_setup_status/, route => route.fulfill({ contentType: 'application/json', body: JSON.stringify({ ready: false, models: [] }) }));
@@ -256,8 +262,9 @@ $pdo->exec("INSERT INTO media(title, media_type, filename) VALUES('Naissance Gar
             }],
             ['navigateur : corrections proposées aussi sur le texte gardé (barre 🪄 de l’Atelier)', () => assert.match(out.fixbar, /🪄/)],
             ['navigateur : clic ligne → sa zone s’allume ; clic zone → sa ligne est choisie', () => { assert.equal(out.lineToZone, BOX[1][1]); assert.equal(out.zoneToLine, IMG[6]); }],
-            ['navigateur : ↶ Annuler retire les zones posées ; « ▤ Relier » après coup les remet sans relire la page', () => {
+            ['navigateur : ↶ Annuler retire les zones posées ; « ▤ Relier » après coup les remet sans relire la page (même avec une zone de ligne choisie)', () => {
                 assert.equal(out.afterUndo, 0); assert.equal(out.again.info.zones, 12); assert.equal(out.againStarts, out.kStarts); assert.deepEqual(ys(out.again), ys(out.k));
+                assert.equal(out.selBefore, true); assert.equal(out.againSel.info.zones, 12, 'une zone de ligne choisie ne limite pas le découpage'); assert.equal(out.againSel.rects.length, 12);
             }],
             ['navigateur : sans Kraken, découpage simple de l’image : 11 zones (la mention sans zone), dans l’ordre, aucune lecture lancée', () => {
                 assert.equal(out.simple.info.how, 'image'); assert.equal(out.simpleStarts, 0);
