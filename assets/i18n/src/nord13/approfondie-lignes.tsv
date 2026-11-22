@@ -1,0 +1,17 @@
+fr ¦ el ¦ bg
+# ▤ La lecture approfondie, ligne par ligne : relier les lignes du texte à l’image (app-lignes-alignement.js, heritage-transcribe.js)
+Relier les lignes à l’image ¦ Σύνδεση των γραμμών με την εικόνα ¦ Свързване на редовете с изображението
+Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis ¦ Σύνδεση κάθε γραμμής του κειμένου με τη γραμμή της στην εικόνα (χρωματιστές ζώνες, κλικ γραμμή ↔ ζώνη): μετά την εις βάθος ανάγνωση ή σε κείμενο που έχει ήδη μπει ¦ Свързване на всеки ред от текста с неговия ред в изображението (цветни зони, щракване ред ↔ зона): след задълбоченото четене или при вече въведен текст
+Relier les lignes à l’image (une zone par ligne, comme la lecture rapide) ¦ Σύνδεση των γραμμών με την εικόνα (μία ζώνη ανά γραμμή, όπως στη γρήγορη ανάγνωση) ¦ Свързване на редовете с изображението (по една зона на ред, както при бързото четене)
+Découpage de la page en lignes… ¦ Χωρισμός της σελίδας σε γραμμές… ¦ Разделяне на страницата на редове…
+Découpage de la page en lignes (lecture rapide)… ¦ Χωρισμός της σελίδας σε γραμμές (γρήγορη ανάγνωση)… ¦ Разделяне на страницата на редове (бързо четене)…
+Découpage simple de la page en lignes… ¦ Απλός χωρισμός της σελίδας σε γραμμές… ¦ Просто разделяне на страницата на редове…
+Le découpage en lignes n’est pas chargé. ¦ Ο χωρισμός σε γραμμές δεν έχει φορτωθεί. ¦ Разделянето на редове не е заредено.
+Pas de ligne de texte à relier. ¦ Δεν υπάρχει γραμμή κειμένου για σύνδεση. ¦ Няма ред от текста за свързване.
+Le texte a changé pendant le découpage : « ▤ Relier les lignes à l’image » pour recommencer. ¦ Το κείμενο άλλαξε κατά τον χωρισμό: «▤ Σύνδεση των γραμμών με την εικόνα» για να ξεκινήσεις ξανά. ¦ Текстът се промени по време на разделянето: „▤ Свързване на редовете с изображението“, за да започнеш отначало.
+Ligne reliée sans certitude : vérifie sur l’image ¦ Γραμμή συνδεδεμένη χωρίς βεβαιότητα: έλεγξέ τη στην εικόνα ¦ Ред, свързан без сигурност: провери го в изображението
+Lignes reliées à l’image : {x} ¦ Γραμμές συνδεδεμένες με την εικόνα: {x} ¦ Редове, свързани с изображението: {x}
+à vérifier (❔) : {n} ¦ για έλεγχο (❔): {n} ¦ за проверка (❔): {n}
+sans zone : {n} ¦ χωρίς ζώνη: {n} ¦ без зона: {n}
+d’après la lecture rapide ¦ με βάση τη γρήγορη ανάγνωση ¦ според бързото четене
+d’après un découpage simple de l’image ¦ με βάση έναν απλό χωρισμό της εικόνας ¦ според просто разделяне на изображението

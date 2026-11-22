@@ -1,0 +1,17 @@
+fr ¦ hr ¦ sl
+# ▤ La lecture approfondie, ligne par ligne : relier les lignes du texte à l’image (app-lignes-alignement.js, heritage-transcribe.js)
+Relier les lignes à l’image ¦ Poveži retke sa slikom ¦ Poveži vrstice s sliko
+Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis ¦ Poveži svaki redak teksta s njegovim retkom na slici (obojena područja, klik redak ↔ područje): nakon detaljnog čitanja ili na već unesenom tekstu ¦ Poveži vsako vrstico besedila z njeno vrstico na sliki (obarvana območja, klik vrstica ↔ območje): po poglobljenem branju ali pri že vnesenem besedilu
+Relier les lignes à l’image (une zone par ligne, comme la lecture rapide) ¦ Poveži retke sa slikom (jedno područje po retku, kao kod brzog čitanja) ¦ Poveži vrstice s sliko (eno območje na vrstico, kot pri hitrem branju)
+Découpage de la page en lignes… ¦ Dijeljenje stranice na retke… ¦ Delitev strani na vrstice…
+Découpage de la page en lignes (lecture rapide)… ¦ Dijeljenje stranice na retke (brzo čitanje)… ¦ Delitev strani na vrstice (hitro branje)…
+Découpage simple de la page en lignes… ¦ Jednostavna podjela stranice na retke… ¦ Preprosta delitev strani na vrstice…
+Le découpage en lignes n’est pas chargé. ¦ Podjela na retke nije učitana. ¦ Delitev na vrstice ni naložena.
+Pas de ligne de texte à relier. ¦ Nema retka teksta za povezivanje. ¦ Ni vrstice besedila za povezavo.
+Le texte a changé pendant le découpage : « ▤ Relier les lignes à l’image » pour recommencer. ¦ Tekst se promijenio tijekom podjele: „▤ Poveži retke sa slikom” za ponovni početak. ¦ Besedilo se je med delitvijo spremenilo: »▤ Poveži vrstice s sliko« za ponoven začetek.
+Ligne reliée sans certitude : vérifie sur l’image ¦ Redak povezan bez sigurnosti: provjeri ga na slici ¦ Vrstica povezana brez gotovosti: preveri jo na sliki
+Lignes reliées à l’image : {x} ¦ Retci povezani sa slikom: {x} ¦ Vrstice, povezane s sliko: {x}
+à vérifier (❔) : {n} ¦ za provjeru (❔): {n} ¦ za preverjanje (❔): {n}
+sans zone : {n} ¦ bez područja: {n} ¦ brez območja: {n}
+d’après la lecture rapide ¦ prema brzom čitanju ¦ po hitrem branju
+d’après un découpage simple de l’image ¦ prema jednostavnoj podjeli slike ¦ po preprosti delitvi slike

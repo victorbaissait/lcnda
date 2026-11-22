@@ -1,0 +1,17 @@
+fr ¦ lt ¦ lv ¦ et
+# ▤ La lecture approfondie, ligne par ligne : relier les lignes du texte à l’image (app-lignes-alignement.js, heritage-transcribe.js)
+Relier les lignes à l’image ¦ Susieti eilutes su vaizdu ¦ Saistīt rindas ar attēlu ¦ Seo read pildiga
+Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis ¦ Susieti kiekvieną teksto eilutę su jos eilute vaizde (spalvotos zonos, spustelėjimas eilutė ↔ zona): po išsamaus skaitymo arba jau įrašytam tekstui ¦ Saistīt katru teksta rindu ar tās rindu attēlā (krāsainas zonas, klikšķis rinda ↔ zona): pēc padziļinātās lasīšanas vai jau ievietotam tekstam ¦ Seo teksti iga rida selle reaga pildil (värvilised alad, klõps rida ↔ ala): pärast põhjalikku lugemist või juba sisestatud tekstil
+Relier les lignes à l’image (une zone par ligne, comme la lecture rapide) ¦ Susieti eilutes su vaizdu (viena zona eilutei, kaip greitame skaityme) ¦ Saistīt rindas ar attēlu (viena zona katrai rindai, kā ātrajā lasīšanā) ¦ Seo read pildiga (üks ala rea kohta, nagu kiirlugemisel)
+Découpage de la page en lignes… ¦ Puslapis skaidomas į eilutes… ¦ Lapa tiek sadalīta rindās… ¦ Lehekülg jagatakse ridadeks…
+Découpage de la page en lignes (lecture rapide)… ¦ Puslapis skaidomas į eilutes (greitas skaitymas)… ¦ Lapa tiek sadalīta rindās (ātrā lasīšana)… ¦ Lehekülg jagatakse ridadeks (kiirlugemine)…
+Découpage simple de la page en lignes… ¦ Paprastas puslapio skaidymas į eilutes… ¦ Vienkārša lapas sadalīšana rindās… ¦ Lehekülje lihtne jagamine ridadeks…
+Le découpage en lignes n’est pas chargé. ¦ Skaidymas į eilutes neįkeltas. ¦ Sadalīšana rindās nav ielādēta. ¦ Ridadeks jagamine pole laaditud.
+Pas de ligne de texte à relier. ¦ Nėra teksto eilutės, kurią būtų galima susieti. ¦ Nav teksta rindas, ko saistīt. ¦ Pole tekstirida, mida siduda.
+Le texte a changé pendant le découpage : « ▤ Relier les lignes à l’image » pour recommencer. ¦ Skaidymo metu tekstas pasikeitė: „▤ Susieti eilutes su vaizdu“, kad pradėtum iš naujo. ¦ Sadalīšanas laikā teksts mainījās: „▤ Saistīt rindas ar attēlu“, lai sāktu no jauna. ¦ Tekst muutus jagamise ajal: „▤ Seo read pildiga“, et uuesti alustada.
+Ligne reliée sans certitude : vérifie sur l’image ¦ Eilutė susieta be tikrumo: patikrink ją vaizde ¦ Rinda saistīta bez pārliecības: pārbaudi to attēlā ¦ Rida seotud ebakindlalt: kontrolli seda pildil
+Lignes reliées à l’image : {x} ¦ Su vaizdu susietos eilutės: {x} ¦ Ar attēlu saistītās rindas: {x} ¦ Pildiga seotud read: {x}
+à vérifier (❔) : {n} ¦ reikia patikrinti (❔): {n} ¦ jāpārbauda (❔): {n} ¦ kontrollida (❔): {n}
+sans zone : {n} ¦ be zonos: {n} ¦ bez zonas: {n} ¦ alata: {n}
+d’après la lecture rapide ¦ pagal greitą skaitymą ¦ pēc ātrās lasīšanas ¦ kiirlugemise järgi
+d’après un découpage simple de l’image ¦ pagal paprastą vaizdo skaidymą ¦ pēc vienkāršas attēla sadalīšanas ¦ pildi lihtsa jagamise järgi

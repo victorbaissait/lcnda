@@ -1,0 +1,17 @@
+fr ¦ fi ¦ hu
+# ▤ La lecture approfondie, ligne par ligne : relier les lignes du texte à l’image (app-lignes-alignement.js, heritage-transcribe.js)
+Relier les lignes à l’image ¦ Yhdistä rivit kuvaan ¦ Sorok összekapcsolása a képpel
+Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis ¦ Yhdistä tekstin jokainen rivi sen riviin kuvassa (värilliset alueet, napsautus rivi ↔ alue): perusteellisen luvun jälkeen tai jo lisättyyn tekstiin ¦ A szöveg minden sorának összekapcsolása a kép megfelelő sorával (színes területek, kattintás sor ↔ terület): az alapos olvasás után vagy egy már beírt szövegen
+Relier les lignes à l’image (une zone par ligne, comme la lecture rapide) ¦ Yhdistä rivit kuvaan (yksi alue riviä kohden, kuten pikaluvussa) ¦ Sorok összekapcsolása a képpel (soronként egy terület, mint a gyors olvasásnál)
+Découpage de la page en lignes… ¦ Sivua jaetaan riveihin… ¦ Az oldal sorokra bontása…
+Découpage de la page en lignes (lecture rapide)… ¦ Sivua jaetaan riveihin (pikaluku)… ¦ Az oldal sorokra bontása (gyors olvasás)…
+Découpage simple de la page en lignes… ¦ Sivun yksinkertainen jako riveihin… ¦ Az oldal egyszerű sorokra bontása…
+Le découpage en lignes n’est pas chargé. ¦ Rivijakoa ei ole ladattu. ¦ A sorokra bontás nincs betöltve.
+Pas de ligne de texte à relier. ¦ Ei yhdistettävää tekstiriviä. ¦ Nincs összekapcsolható szövegsor.
+Le texte a changé pendant le découpage : « ▤ Relier les lignes à l’image » pour recommencer. ¦ Teksti muuttui jaon aikana: ”▤ Yhdistä rivit kuvaan” aloittaaksesi alusta. ¦ A szöveg megváltozott a bontás közben: „▤ Sorok összekapcsolása a képpel” az újrakezdéshez.
+Ligne reliée sans certitude : vérifie sur l’image ¦ Rivi yhdistetty epävarmasti: tarkista se kuvasta ¦ Bizonytalanul összekapcsolt sor: ellenőrizd a képen
+Lignes reliées à l’image : {x} ¦ Kuvaan yhdistetyt rivit: {x} ¦ A képpel összekapcsolt sorok: {x}
+à vérifier (❔) : {n} ¦ tarkistettavana (❔): {n} ¦ ellenőrizendő (❔): {n}
+sans zone : {n} ¦ ilman aluetta: {n} ¦ terület nélkül: {n}
+d’après la lecture rapide ¦ pikaluvun mukaan ¦ a gyors olvasás alapján
+d’après un découpage simple de l’image ¦ kuvan yksinkertaisen jaon mukaan ¦ a kép egyszerű bontása alapján
