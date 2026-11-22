@@ -23,6 +23,7 @@
     const KINDS = [['apreciser', i18n('À préciser')], ['bapteme', i18n('Baptême')], ['naissance', i18n('Naissance')], ['mariage', i18n('Mariage')], ['deces', i18n('Décès')], ['sepulture', i18n('Sépulture')], ['notarial', i18n('Acte notarié')], ['recensement', i18n('Recensement')], ['militaire', i18n('Registre militaire')], ['lettre', i18n('Lettre')], ['autre', i18n('Autre')]];
     const COLORS = ['#f6c343', '#7cc4f0', '#9be08f', '#f59ab0', '#c3a6f2', '#f7a35c', '#6fd6c8', '#e6e15a'];
     // des modèles d'acte, pour ne pas partir d'une page blanche
+    let fixAfterSwitch = false; // 📑 un texte par page : la barre des corrections suit sur l'acte de l'autre page
     const TEMPLATES = {
         bapteme: 'L’an [année], le [jour] du mois de [mois], a été [baptisé / baptisée] [prénom], [né / née] [hier / ce jour], [fils / fille] légitime de [prénom et nom du père], [métier], et de [prénom et nom de la mère], son épouse, de cette paroisse. Le parrain a été [nom], la marraine [nom], qui ont signé avec nous / déclaré ne savoir signer.\n[signatures]',
         naissance: 'L’an [année], le [jour] [mois], à [heure], par-devant nous, [nom], maire, officier de l’état civil de la commune de [commune], est comparu [prénom et nom du père], [âge], [métier], demeurant à [lieu], lequel nous a présenté un enfant de sexe [masculin / féminin], né [date] de lui déclarant et de [prénom et nom de la mère], son épouse, auquel il a donné le prénom de [prénom]. En présence de [témoin 1] et de [témoin 2].\n[signatures]',
@@ -583,11 +584,16 @@
         async function runFix({quiet = false} = {}) {
             if (!window.LCNDA_HTRFIX) { if (!quiet) toast(i18n('Les corrections proposées ne sont pas chargées.'), 'error'); return; }
             const lex = await fixLexicon($('[data-tx-lang]').value, $('[data-tx="place"]').value); if (!lex || !dlg.isConnected) return;
-            txFix = window.LCNDA_HTRFIX.propose(area.value, lex, {level: fixLevel(), keep: txKept}); txFixOn = true; paintMirror(); paintTxFix();
+            txFix = window.LCNDA_HTRFIX.propose(area.value, lex, {level: fixLevel(), keep: txKept}); txFixOn = true;
+            // 📑 un texte par page : les corrections des autres pages (leurs actes), comptées pour la barre
+            perFix = pageForm === 'per' && PAGES.length > 1 ? PAGES.map((_, i) => (i === pageIx ? txFix.length : window.LCNDA_HTRFIX.propose(String(perSet?.[i]?.body || ''), lex, {level: fixLevel()}).length)) : null;
+            paintMirror(); paintTxFix();
             if (!quiet) status(txFix.length ? (A().plural ? A().plural(txFix.length, 'correction proposée', 'corrections proposées') : String(txFix.length)) : i18n('Aucune correction à proposer'));
         }
         // 📑 un seul texte pour plusieurs pages : combien de corrections sur chaque page (un clic montre la page)
+        let perFix = null;
         function fixByPage() {
+            if (pageForm === 'per' && perFix && PAGES.length > 1) return perFix.some(n => n) ? `<span class="h-tx-fixpages">${perFix.map((n, i) => (n ? `<button type="button" class="button small ${i === pageIx ? '' : 'secondary'}" data-txfix-page="${i}">${esc(pageName(PAGES[i], i))} : ${n}</button>` : '')).join('')}</span>` : '';
             if (pageForm !== 'one' || PAGES.length < 2 || !txFix.length) return '';
             const per = new Map(); txFix.forEach(f => { const id = Number((t.data.pages || [])[PG.segAt(area.value, f.s)] || 0), i = PAGES.findIndex(p => Number(p.media_id) === id); if (i >= 0) per.set(i, (per.get(i) || 0) + 1); });
             return `<span class="h-tx-fixpages">${[...per].sort((x, y) => x[0] - y[0]).map(([i, n]) => `<button type="button" class="button small secondary" data-txfix-page="${i}">${esc(pageName(PAGES[i], i))} : ${n}</button>`).join('')}</span>`;
@@ -609,7 +615,7 @@
             runFix({quiet: true}); A().undoToast?.(label, {undo: back});
         }
         $('[data-tx-fixbar]')?.addEventListener('click', e => {
-            const pg = e.target.closest('[data-txfix-page]'); if (pg) { goPage(Number(pg.dataset.txfixPage)); return; }
+            const pg = e.target.closest('[data-txfix-page]'); if (pg) { const i = Number(pg.dataset.txfixPage); if (pageForm === 'per') { if (i !== pageIx) { fixAfterSwitch = true; goPage(i).finally(() => { fixAfterSwitch = false; }); } return; } goPage(i); return; }
             const b = e.target.closest('[data-txfix]'); if (!b) return; const k = b.dataset.txfix;
             if (k === 'close') { txFixOn = false; txFix = []; paintMirror(); paintTxFix(); return; }
             if (k === 'undo') { const old = txFixUndo.pop(); if (old != null) { area.value = old; area.dispatchEvent(new Event('input')); runFix({quiet: true}); } return; }
@@ -1607,6 +1613,7 @@
         function docNote() { const n = $('[data-tx-docnote]'); if (n) n.hidden = !t.media_id; }
         renderBar(); paintMirror(); paintPeople(); docNote(); await initPages(); if (PAGES.length) { paintMirror(); paintPeople(); } await loadImage();
         if (deepRun && dlg.isConnected) setTimeout(deepAllStep, 0); // 📑 la lecture approfondie de toutes les pages continue sur cette page
+        if (fixAfterSwitch && dlg.isConnected) { fixAfterSwitch = false; runFix({quiet: true}); }
         if (ctx.goto && dlg.isConnected) { runDetect(); setTimeout(() => gotoRange(ctx.goto.s, ctx.goto.e), 60); } // 📑 venu d'un « (page 3, ligne 7) » d'une autre page
         /* E1 : l'historique (instantanés de tout l'acte) ; ⌘Z dans une case de texte garde l'annulation de la case */
         const F_KEYS = ['title', 'kind', 'date_text', 'place', 'source'];

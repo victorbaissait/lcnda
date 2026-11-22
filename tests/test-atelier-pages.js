@@ -404,6 +404,23 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             assert.match(sl.page, /(^|, )page 2 \(verso\)$/, 'la page dans la source : ' + JSON.stringify(sl)); assert.match(sl.note, /^Page 2, ligne 3 : « .*trente ans/);
             await closeAtelier(); await p.evaluate(() => localStorage.removeItem('genealogie-transcribe-pages-mode'));
         });
+        await t('🪄 corrections, un texte par page : le nombre sur chaque page ; un clic ouvre l’acte de l’autre page, corrections affichées', async () => {
+            await p.evaluate(() => { localStorage.setItem('genealogie-transcribe-pages-mode', 'per'); window.LCNDA_EXT.mediaPages.clear(); });
+            const a7 = Number(php(`require 'lib/bootstrap.php'; echo db()->query('SELECT id FROM act_transcriptions WHERE media_id=7')->fetchColumn();`).stdout);
+            await openTx({id: a7}); assert.equal((await tx()).body, P7);
+            const setBody = v => p.evaluate(x => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); a.value = x; a.dispatchEvent(new Event('input')); }, v);
+            await setBody(P7 + '\nle quinze novembe'); await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="save"]').click()); await sleep(900);
+            await p.click(`${D} [data-tx-page="1"]`); await p.waitForFunction(() => /page8\.png/.test(document.querySelector('dialog.h-tx-dlg [data-tx-img]')?.getAttribute('href') || ''), null, {timeout: 15000}); await sleep(700);
+            await p.click(`${D} [data-tx-step="fix"]`); await p.click(`${D} [data-tx-cmd="fix"]`);
+            await p.waitForSelector(`${D} [data-txfix-page="0"]`, {timeout: 15000});
+            assert.match(await p.textContent(`${D} [data-txfix-page="0"]`), / : [1-9]/);
+            await p.click(`${D} [data-txfix-page="0"]`);
+            await p.waitForFunction(() => /page7\.png/.test(document.querySelector('dialog.h-tx-dlg [data-tx-img]')?.getAttribute('href') || ''), null, {timeout: 15000});
+            await p.waitForFunction(() => { const b = document.querySelector('dialog.h-tx-dlg [data-tx-fixbar]'); return b && !b.hidden && /correction/.test(b.textContent); }, null, {timeout: 10000});
+            await setBody(P7); await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="save"]').click()); await sleep(900);
+            assert.equal(php(`require 'lib/bootstrap.php'; echo db()->query('SELECT body FROM act_transcriptions WHERE media_id=7')->fetchColumn();`).stdout, P7);
+            await closeAtelier(); await p.evaluate(() => localStorage.removeItem('genealogie-transcribe-pages-mode'));
+        });
         /* ─── 4. « 🔬 Lecture approfondie (IA) » sur toutes les pages (faux Ollama) ─── */
         await p.evaluate(async () => { const A = window.LCNDA_APP, st = await A.api('tx_deep_status'), m = (st.models.find(x => x.recommended) || st.models[0]).tag;
             const r = await A.api('tx_deep_pull', {}, {method: 'POST', body: {model: m}}); for (let i = 0; i < 60; i++) { const j = await A.api('tx_deep_job', {id: r.result.id}); if (j.state !== 'running') break; await new Promise(x => setTimeout(x, 150)); } });
