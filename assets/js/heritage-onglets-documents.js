@@ -289,7 +289,7 @@
     }
     /* 📄 un seul texte par document (maquette docs/design/dossier-et-transcriptions.html, B3) : le texte de l'Atelier de transcription,
        un bloc par acte (sorte, état, lieu, date, cote, zones) avec « 📜 Ouvrir dans l'Atelier » ; sans acte, le texte du document */
-    const TXST = {todo: ['À faire', 'grey'], doing: ['En cours', 'yellow'], done: ['Finie', 'green']};
+    const TXST = {todo: ['À faire', 'grey'], doing: ['En cours', 'yellow'], checked: ['Relue', 'blue'], done: ['Finie', 'green']};
     const bdg = (t, k) => (UI().badge ? UI().badge(t, k) : `<span class="ui-badge is-${k}">${esc(t)}</span>`);
     function trHtml(d, isImg, ro) {
         const acts = d.acts || [], wp = ext.openTextDoc ? `<button type="button" class="button small secondary" data-ong-wp>${esc(T('📝 Dans le traitement de texte'))}</button>` : '';

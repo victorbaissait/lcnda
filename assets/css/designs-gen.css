@@ -5498,6 +5498,7 @@
 :root[data-lc-density] .h-tx-step{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-step{padding:calc(5px * var(--lc-sp)) calc(8px * var(--lc-sp)) calc(4px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-pane{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-pane{padding:calc(2px * var(--lc-sp)) calc(4px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-addbar{gap:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-addbar{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-pcount{padding:0 calc(5px * var(--lc-sp))}
@@ -5534,6 +5535,17 @@
 :root[data-lc-density] .h-tx-find button{padding:calc(3px * var(--lc-sp)) calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-frep{gap:calc(6px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-keys td{padding:calc(5px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-prog{gap:calc(4px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-prog{padding:calc(4px * var(--lc-sp)) calc(8px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-pstate{padding:0 calc(2px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-pchip{padding:1px calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-prog .button{padding:calc(2px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+@media (max-width:700px){
+  :root[data-lc-density] .h-tx-dlg .h-tx-prog{padding:calc(2px * var(--lc-sp)) calc(8px * var(--lc-sp)) calc(4px * var(--lc-sp))}
+}
+:root .h-tx-abtip:is([data-lc-sh="douces"], [data-lc-sh="douces"] *) {box-shadow:var(--lc-sh-m)}
+:root .h-tx-abtip:is([data-lc-sh="aucune"], [data-lc-sh="aucune"] *) {box-shadow:none}
+:root[data-lc-density] .h-tx-abtip{padding:calc(7px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 /* photomaps.css */
 :root[data-lc-density] .pm-carte{padding:calc(18px * var(--lc-sp)) calc(22px * var(--lc-sp)) calc(28px * var(--lc-sp))}
 :root[data-lc-density] .pm-screen{gap:calc(10px * var(--lc-sp))}

@@ -45,3 +45,15 @@ Déplacer la zone choisie (⇧ : l’agrandir) ¦ Siirrä valittua aluetta (⇧:
 Supprimer la zone choisie ¦ Poista valittu alue ¦ A kijelölt terület törlése
 Zoom avant, zoom arrière ¦ Lähennä, loitonna ¦ Nagyítás, kicsinyítés
 Cette liste des touches ¦ Tämä näppäinluettelo ¦ Ez a billentyűlista
+# — avancement et abréviations au survol
+=mot douteux ¦ epävarma sana|epävarmaa sanaa ¦ kétes szó|kétes szó
+aucun mot douteux ¦ ei epävarmoja sanoja ¦ nincs kétes szó
+{n} / {total} lignes relues ¦ {n} / {total} riviä tarkistettu ¦ {n} / {total} sor átnézve
+{n} / {total} lignes reliées ¦ {n} / {total} riviä linkitetty ¦ {n} / {total} sor kapcsolva
+Marquer comme finie ¦ Merkitse valmiiksi ¦ Megjelölés késznek
+Marquer comme relue ¦ Merkitse tarkistetuksi ¦ Megjelölés átnézettként
+Ligne sans zone : dessine-la sur l’image (▭) ¦ Rivi ilman aluetta: piirrä se kuvaan (▭) ¦ Terület nélküli sor: rajzold meg a képen (▭)
+Ne plus souligner les abréviations ¦ Älä enää alleviivaa lyhenteitä ¦ Ne húzza alá többé a rövidítéseket
+Souligner les abréviations connues ¦ Alleviivaa tunnetut lyhenteet ¦ Ismert rövidítések aláhúzása
+Abréviations connues soulignées, leur sens au survol (conseillé) ¦ Tunnetut lyhenteet alleviivattuina, merkitys osoitettaessa (suositus) ¦ Ismert rövidítések aláhúzva, jelentésük rámutatáskor (ajánlott)
+Relues ¦ Tarkistetut ¦ Átnézettek

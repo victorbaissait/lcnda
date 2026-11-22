@@ -75,7 +75,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
         /* ─── 1. la frise ─── */
         const flow = () => p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), vis = el => !!el && el.getBoundingClientRect().width > 0 && !el.closest('[hidden]');
             return {cur: d.dataset.txFlow, view: d.dataset.txFlowView, steps: [...d.querySelectorAll('[data-tx-step]')].map(b => ({k: b.dataset.txStep, name: b.querySelector('b').textContent, rest: b.querySelector('[data-tx-steprest]').textContent, done: b.classList.contains('is-done'), cur: b.classList.contains('is-cur'), sel: b.getAttribute('aria-selected'), mark: b.querySelector('i').textContent})),
-                panes: [...d.querySelectorAll('[data-tx-pane]')].filter(vis).map(x => x.dataset.txPane), add: d.querySelector('[data-tx-addinfo]').textContent,
+                panes: [...d.querySelectorAll('[data-tx-pane]')].filter(vis).map(x => x.dataset.txPane), shown: [...d.querySelectorAll('[data-tx-pane].is-shown')].filter(vis).map(x => x.dataset.txPane), add: d.querySelector('[data-tx-addinfo]').textContent,
                 addBtn: (() => { const b = d.querySelector('[data-tx-addbar] [data-tx-cmd="found"]'), r = b.getBoundingClientRect(); return {vis: vis(b), text: b.textContent.trim(), bottom: Math.round(r.bottom), h: innerHeight}; })()}; });
         const expectFixes = () => p.evaluate(async () => { const d = document.querySelector('dialog.h-tx-dlg'), text = d.querySelector('[data-tx-body]').value;
             const lex = await window.LCNDA_EXT.htrFix.lexicon(d.querySelector('[data-tx-lang]').value, d.querySelector('[data-tx="place"]').value);
@@ -86,7 +86,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
             assert.deepEqual(f.steps.map(s => s.name), ['Lire', 'Corriger', 'Repérer', 'Ajouter']);
             assert.ok(f.steps[0].done && f.steps[0].mark === '✓', JSON.stringify(f.steps[0])); assert.match(f.steps[0].rest, /^7 lignes$/);
             assert.ok(f.steps[1].cur && !f.steps[1].done && f.steps[1].sel === 'true', JSON.stringify(f.steps[1]));
-            assert.deepEqual(f.panes, ['fix'], 'seuls les boutons de l’étape montrée');
+            assert.deepEqual(f.shown, ['fix'], 'les boutons de l’étape montrée en avant'); assert.deepEqual(f.panes, ['read', 'fix', 'find', 'add'], 'sur grand écran, tous les outils restent à portée');
         });
         await t('frise : ce qui reste à chaque étape (« N mots à revoir » = corrections proposées + [?]), Repérer à faire', async () => {
             const n = await expectFixes(), f = await flow();
@@ -100,7 +100,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
             await shot('v2-frise-1440.png');
         });
         await t('cliquer une étape montre ses boutons ; « Étape suivante › » ; flèches du clavier entre les étapes', async () => {
-            await p.click(`${D} [data-tx-step="find"]`); let f = await flow(); assert.equal(f.view, 'find'); assert.deepEqual(f.panes, ['find']);
+            await p.click(`${D} [data-tx-step="find"]`); let f = await flow(); assert.equal(f.view, 'find'); assert.deepEqual(f.shown, ['find']);
             assert.ok(await p.isVisible(`${D} [data-tx-pane="find"] [data-tx-cmd="detect"]`));
             await p.keyboard.press('ArrowRight'); f = await flow(); assert.equal(f.view, 'add'); assert.ok(await p.isVisible(`${D} [data-tx-pane="add"] [data-tx-cmd="found"]`));
             assert.equal(await p.isVisible(`${D} [data-tx-stepnext]`), false, 'pas d’étape après Ajouter');
@@ -140,6 +140,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
             await p.setViewportSize({width: 390, height: 844}); await sleep(500);
             const s = await phoneState();
             assert.deepEqual(s.tabs, ['image', 'text*', 'people']); assert.equal(s.stage, 0, 'image cachée'); assert.ok(s.editor && s.flow && s.add && !s.found, JSON.stringify(s));
+            assert.equal(await p.evaluate(() => [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-pane]')].filter(x => x.getBoundingClientRect().width > 0).length), 1, 'sur téléphone, seulement les boutons de l’étape montrée');
             await shot("v2-390-texte.png"); assert.ok(s.editorTop < 330, "le texte commence haut : " + s.editorTop); assert.ok(s.sw <= 391, 'largeur ' + s.sw); assert.deepEqual(s.out, []);
             const lab = await p.textContent(`${D} [data-tx-ptab="people"]`); assert.match(lab, /Personnes\s*\d+/);
             await shot('v2-390-texte.png');
@@ -288,6 +289,79 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
             await p.evaluate(() => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); a.focus(); a.setSelectionRange(3, 3); }); await p.keyboard.press('Alt+ArrowDown'); await sleep(150);
             const s = await findState(); assert.equal(s.sel, LINES[1]); assert.equal(await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-zones] rect.is-sel')?.dataset.txZone), 'z2');
             await p.keyboard.press('Alt+ArrowUp'); await sleep(100); assert.equal((await findState()).sel, LINES[0]);
+        });
+
+        /* ─── 5. avancement et abréviations au survol ─── */
+        const prog = () => p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), b = d.querySelector('[data-tx-prog]'); return {...JSON.parse(d.dataset.txProg || '{}'), vis: b.getBoundingClientRect().height > 0, text: b.textContent.replace(/\s+/g, ' ').trim(),
+            chips: [...b.querySelectorAll('[data-tx-pgo]')].map(x => x.dataset.txPgo + (x.classList.contains('is-warn') ? '!' : '')), propose: [...b.querySelectorAll('[data-tx-pset]')].map(x => x.dataset.txPset)}; });
+        const waitProg = fn => p.waitForFunction(src => { const d = document.querySelector('dialog.h-tx-dlg'); const s = JSON.parse(d?.dataset.txProg || '{}'); return new Function('s', 'return ' + src)(s); }, fn, {timeout: 6000});
+        await t('avancement : l’état de l’acte, les mots douteux, les lignes relues et reliées, visibles sous la frise', async () => {
+            await setBody(LINES.join('\n')); await waitProg('s.total === 7 && s.doubt >= 1');
+            const g = await prog(), exp = await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), x = d.txApi.get(); return window.LCNDA_EXT.txReview.reviewedCount(x.body, x.data.reviewed).done; });
+            assert.ok(g.vis); assert.equal(g.state, 'doing'); assert.equal(g.reviewed, exp); assert.equal(g.linked, 7);
+            assert.match(g.text, /En cours/); assert.match(g.text, new RegExp(`${g.doubt} mots? douteux`)); assert.match(g.text, new RegExp(`${exp} / 7 lignes relues`)); assert.match(g.text, /7 \/ 7 lignes reliées/);
+            assert.deepEqual(g.chips, ['doubt!', 'review!', 'zone', 'link!']);
+            await shot('v2-avancement.png');
+        });
+        await t('avancement : un clic sur un compteur va au premier endroit concerné ([?], ligne sans zone, ligne pas relue)', async () => {
+            await p.click(`${D} [data-tx-pgo="doubt"]`); await sleep(150); assert.equal((await findState()).sel, '[?]');
+            await setBody(LINES.join('\n').replace('\n', '\nSigné : Delpeiroux\n')); await waitProg('s.total === 8 && s.linked === 7');
+            await p.click(`${D} [data-tx-pgo="zone"]`); await sleep(150); assert.equal((await findState()).sel, 'Signé : Delpeiroux');
+            await p.click(`${D} [data-tx-pgo="review"]`); await p.waitForSelector('dialog.h-txr-dlg[open]');
+            const first = await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), x = d.txApi.get(), R = window.LCNDA_EXT.txReview, k = new Set(x.data.reviewed || []); return R.linesOf(x.body).find(l => !k.has(R.lineKey(l.text))).n; });
+            assert.equal((await rv()).pos, `Ligne ${first} sur 8`); await p.keyboard.press('Escape'); await sleep(200);
+        });
+        await t('avancement : l’état se choisit dans un menu de choix unique (↶ Annuler) ; tout relu et plus de mot douteux → « ✓ Marquer comme relue » (jamais tout seul), gardé à l’enregistrement', async () => {
+            await p.click(`${D} [data-tx-pstate]`); await p.waitForSelector('.ui-actmenu');
+            const items = await p.evaluate(() => [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].map(b => b.textContent.replace(/\s+/g, ' ').trim()));
+            assert.deepEqual(items.map(x => x.replace(/\s+/g, '')), ['○Àfaire', '●Encours', '○Relue', '○Finie']);
+            await p.evaluate(() => [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].find(b => /Finie/.test(b.textContent)).click()); await sleep(150);
+            assert.equal((await prog()).state, 'done'); assert.equal(await p.inputValue(`${D} [data-tx-state]`), 'done');
+            assert.ok(await lastToastUndo(/État/)); await sleep(150); assert.equal((await prog()).state, 'doing');
+            await setBody(LINES.join('\n').replace(' [?]', '')); await waitProg('s.total === 7 && s.doubt === 0');
+            assert.deepEqual((await prog()).propose, [], 'pas tout relu : rien de proposé');
+            await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), x = d.txApi.get(), R = window.LCNDA_EXT.txReview; x.data.reviewed = R.linesOf(x.body).map(l => R.lineKey(l.text)); d.txApi.touch(); });
+            await setBody((await body()) + ''); await sleep(500);
+            let g = await prog(); assert.equal(g.reviewed, 7); assert.deepEqual(g.propose, ['checked']); assert.equal(g.state, 'doing', 'jamais tout seul');
+            await p.click(`${D} [data-tx-pset="checked"]`); await sleep(150); g = await prog(); assert.equal(g.state, 'checked'); assert.match(g.text, /Relue/);
+            await shot('v2-avancement-relue.png');
+            await saveAct(); assert.equal(await p.evaluate(async () => (await window.LCNDA_APP.api('act_transcription', {id: 1})).data.status), 'checked');
+            const list = await p.evaluate(async () => (await window.LCNDA_APP.api('act_transcriptions_page', {status: 'checked'})).items.length); assert.equal(list, 1, 'la liste « Transcriptions d’actes » filtre « Relues »');
+        });
+        const abState = () => p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), tip = d.querySelector('[data-tx-abtip]'); return {spans: [...d.querySelectorAll('[data-tx-mirror] .h-tx-ab')].map(s => s.textContent), tip: tip.hidden ? '' : tip.textContent, word: d.dataset.txAb || ''}; });
+        await t('abréviations : un mot abrégé connu (« labr ») est souligné en pointillé ; au survol, sa forme pleine, sans changer le texte', async () => {
+            await setBody(LINES.join('\n').replace('le vingt trois', 'le 23 7bre')); await sleep(300);
+            let a = await abState(); assert.deepEqual(a.spans, ['7bre', 'labr']);
+            const r = await p.evaluate(() => { const s = [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-mirror] .h-tx-ab')].find(x => x.textContent === 'labr').getBoundingClientRect(); return {x: s.left + s.width / 2, y: s.top + s.height / 2}; });
+            const before = await body();
+            await p.mouse.move(r.x - 80, r.y - 60); await p.mouse.move(r.x, r.y, {steps: 4}); await p.waitForFunction(() => document.querySelector('dialog.h-tx-dlg').dataset.txAb === 'labr', null, {timeout: 3000});
+            a = await abState(); assert.match(a.tip, /labr = laboureur/); assert.match(a.tip, /Aide à la lecture/); assert.equal(await body(), before, 'le texte ne change pas');
+            const tipBox = await p.evaluate(() => { const b = document.querySelector('dialog.h-tx-dlg [data-tx-abtip]').getBoundingClientRect(); return [b.left, b.right, b.top]; }); assert.ok(tipBox[0] >= 0 && tipBox[1] <= 1440 && tipBox[2] > r.y, 'la bulle sous le mot : ' + tipBox);
+            await shot('v2-abreviation.png');
+            await theme('dark'); await sleep(150); await shot('v2-abreviation-sombre.png');
+            const c = await p.evaluate(() => [getComputedStyle(document.querySelector('dialog.h-tx-dlg [data-tx-abtip]')).backgroundColor, getComputedStyle(document.querySelector('dialog.h-tx-dlg [data-tx-abtip]')).color]);
+            assert.notEqual(c[0], c[1]); await theme('');
+            await p.mouse.move(r.x + 400, r.y + 300, {steps: 3}); await sleep(700); assert.equal((await abState()).tip, '', 'la bulle s’en va');
+        });
+        await t('abréviations : au toucher (clic dans le mot) aussi, « 📖 Ouvrir » l’Aide à la lecture ; un réglage (conseillé : oui) dans Affichage et Réglages', async () => {
+            const at = (await body()).indexOf('7bre') + 2;
+            await p.evaluate(i => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); a.focus(); a.setSelectionRange(i, i); a.dispatchEvent(new MouseEvent('click', {bubbles: true})); }, at); await sleep(150);
+            assert.match((await abState()).tip, /7bre = septembre/);
+            await p.click(`${D} [data-tx-abopen]`); await sleep(600);
+            assert.ok(await p.evaluate(() => [...document.querySelectorAll('dialog[open]')].some(d => d !== document.querySelector('dialog.h-tx-dlg') && /Aide à la lecture|lecture/i.test(d.textContent))), 'l’Aide à la lecture s’ouvre');
+            await p.evaluate(() => [...document.querySelectorAll('dialog[open]')].filter(d => !d.matches('.h-tx-dlg')).forEach(d => d.close())); await sleep(200);
+            const html = await p.evaluate(() => window.LCNDA_EXT.transcribePrefs.html()); assert.match(html, /data-txb-ab checked><i><\/i>Abréviations connues soulignées, leur sens au survol \(conseillé\)/);
+            await p.evaluate(() => [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-menus] button')].find(b => b.textContent.trim() === 'Affichage').click()); await p.waitForSelector('.ui-actmenu');
+            await p.evaluate(() => [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].find(b => /Ne plus souligner les abréviations/.test(b.textContent)).click()); await sleep(200);
+            assert.deepEqual((await abState()).spans, []);
+            await p.evaluate(() => window.LCNDA_EXT.txView.setAbbrevOn(true)); await sleep(200); assert.equal((await abState()).spans.length, 2);
+        });
+        await t('textes de la vague 2 traduits dans les 31 langues', async () => {
+            const KEYS = ['Les étapes : Lire, Corriger, Repérer, Ajouter à la généalogie', 'mot à revoir', 'Image, texte ou personnes', 'Relire ligne à ligne', 'Relecture ligne à ligne en plein écran (conseillé)', 'Ligne {n} sur {total}', 'Chercher dans le texte', 'Avant « Tout remplacer »', 'Cette liste des touches',
+                'mot douteux', '{n} / {total} lignes relues', 'Marquer comme relue', 'Abréviations connues soulignées, leur sens au survol (conseillé)', 'Souligner les abréviations connues', 'Relue'];
+            const langs = await p.evaluate(() => window.LCNDA_I18N.CODES.filter(c => c !== 'fr')); const missing = [];
+            for (const c of langs) { const d = JSON.parse(fs.readFileSync(path.join(root, 'assets/i18n', c + '.json'), 'utf8')); KEYS.forEach(k => { if (!d[k]) missing.push(`${c}: ${k}`); }); }
+            assert.deepEqual(missing, []);
         });
 
         await t('aucune erreur JavaScript', async () => { assert.deepStrictEqual(errs, []); });

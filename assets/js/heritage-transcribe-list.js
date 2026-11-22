@@ -15,7 +15,7 @@
     const KEY = 'act_transcriptions_list', STEP = 50;
     const KINDS = [['apreciser', 'À préciser'], ['bapteme', 'Baptême'], ['naissance', 'Naissance'], ['mariage', 'Mariage'], ['deces', 'Décès'], ['sepulture', 'Sépulture'], ['notarial', 'Acte notarié'], ['recensement', 'Recensement'], ['militaire', 'Registre militaire'], ['lettre', 'Lettre'], ['autre', 'Autre']];
     const kindLabel = k => (KINDS.find(x => x[0] === k) || [, k || 'Acte'])[1];
-    const STATUS = {todo: ['À faire', '⚪'], doing: ['En cours', '🟡'], done: ['Finie', '🟢']};
+    const STATUS = {todo: ['À faire', '⚪'], doing: ['En cours', '🟡'], checked: ['Relue', '🔵'], done: ['Finie', '🟢']};
     const plural = (n, w, many) => (A().plural ? A().plural(n, w, many) : `${n} ${n > 1 ? many || w + 's' : w}`);
     let kindCounts = null; // le nombre de chaque sorte, pour « Filtrer ▾ » (relu à chaque affichage)
 
@@ -88,7 +88,7 @@
                     {id: 'place', label: 'Lieu', group: 'Personne et lieu', type: 'place', chipPrefix: '📍'},
                     {id: 'from', label: 'De l’année', group: 'Période', type: 'text', placeholder: 'ex. 1750', chipPrefix: 'Depuis'},
                     {id: 'to', label: 'À l’année', group: 'Période', type: 'text', placeholder: 'ex. 1800', chipPrefix: 'Jusqu’à'},
-                    {id: 'status', label: 'État', type: 'radio', options: [['', 'Tous les états'], ['todo', 'À faire', 'À faire'], ['doing', 'En cours', 'En cours'], ['done', 'Finie', 'Finies']], dflt: ''},
+                    {id: 'status', label: 'État', type: 'radio', options: [['', 'Tous les états'], ['todo', 'À faire', 'À faire'], ['doing', 'En cours', 'En cours'], ['checked', 'Relue', 'Relues'], ['done', 'Finie', 'Finies']], dflt: ''},
                     {id: 'zones', label: 'Avec des zones', group: 'Autres', type: 'check', text: 'Avec des zones sur l’image'},
                     {id: 'linked', label: 'Reliée à une fiche', group: 'Autres', type: 'check', text: 'Avec une personne reliée à sa fiche'},
                 ],

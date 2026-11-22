@@ -45,3 +45,15 @@ Déplacer la zone choisie (⇧ : l’agrandir) ¦ Posunout vybranou oblast (⇧:
 Supprimer la zone choisie ¦ Smazat vybranou oblast ¦ Ta bort det valda området ¦ Slet det valgte område
 Zoom avant, zoom arrière ¦ Přiblížit, oddálit ¦ Zooma in, zooma ut ¦ Zoom ind, zoom ud
 Cette liste des touches ¦ Tento seznam kláves ¦ Den här listan med tangenter ¦ Denne liste over taster
+# — avancement et abréviations au survol
+=mot douteux ¦ nejisté slovo|nejistá slova|nejistých slov ¦ osäkert ord|osäkra ord ¦ tvivlsomt ord|tvivlsomme ord
+aucun mot douteux ¦ žádné nejisté slovo ¦ inget osäkert ord ¦ intet tvivlsomt ord
+{n} / {total} lignes relues ¦ {n} / {total} řádků zkontrolováno ¦ {n} / {total} rader granskade ¦ {n} / {total} linjer gennemset
+{n} / {total} lignes reliées ¦ {n} / {total} řádků propojeno ¦ {n} / {total} rader länkade ¦ {n} / {total} linjer tilknyttet
+Marquer comme finie ¦ Označit jako hotovou ¦ Markera som klar ¦ Markér som færdig
+Marquer comme relue ¦ Označit jako zkontrolovanou ¦ Markera som granskad ¦ Markér som gennemset
+Ligne sans zone : dessine-la sur l’image (▭) ¦ Řádek bez oblasti: nakresli ji na obrázek (▭) ¦ Rad utan område: rita det på bilden (▭) ¦ Linje uden område: tegn det på billedet (▭)
+Ne plus souligner les abréviations ¦ Už nepodtrhávat zkratky ¦ Sluta stryka under förkortningar ¦ Stop med at understrege forkortelser
+Souligner les abréviations connues ¦ Podtrhávat známé zkratky ¦ Stryk under kända förkortningar ¦ Understreg kendte forkortelser
+Abréviations connues soulignées, leur sens au survol (conseillé) ¦ Známé zkratky podtržené, jejich význam po najetí myší (doporučeno) ¦ Kända förkortningar understrukna, deras betydelse vid hovring (rekommenderas) ¦ Kendte forkortelser understreget, deres betydning ved hover (anbefalet)
+Relues ¦ Zkontrolované ¦ Granskade ¦ Gennemsete

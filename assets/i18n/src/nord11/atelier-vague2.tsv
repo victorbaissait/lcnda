@@ -45,3 +45,15 @@ Déplacer la zone choisie (⇧ : l’agrandir) ¦ Di chuyển vùng đã chọn 
 Supprimer la zone choisie ¦ Xóa vùng đã chọn ¦ Hapus area yang dipilih
 Zoom avant, zoom arrière ¦ Phóng to, thu nhỏ ¦ Perbesar, perkecil
 Cette liste des touches ¦ Danh sách phím này ¦ Daftar tombol ini
+# — avancement et abréviations au survol
+=mot douteux ¦ từ đáng ngờ ¦ kata meragukan
+aucun mot douteux ¦ không có từ đáng ngờ ¦ tidak ada kata meragukan
+{n} / {total} lignes relues ¦ {n} / {total} dòng đã đọc lại ¦ {n} / {total} baris sudah diperiksa
+{n} / {total} lignes reliées ¦ {n} / {total} dòng đã liên kết ¦ {n} / {total} baris tertaut
+Marquer comme finie ¦ Đánh dấu là đã xong ¦ Tandai selesai
+Marquer comme relue ¦ Đánh dấu là đã đọc lại ¦ Tandai sudah diperiksa
+Ligne sans zone : dessine-la sur l’image (▭) ¦ Dòng chưa có vùng: hãy vẽ nó trên hình ảnh (▭) ¦ Baris tanpa area: gambar di atas gambar (▭)
+Ne plus souligner les abréviations ¦ Thôi gạch chân các chữ viết tắt ¦ Berhenti menggarisbawahi singkatan
+Souligner les abréviations connues ¦ Gạch chân các chữ viết tắt đã biết ¦ Garis bawahi singkatan yang dikenal
+Abréviations connues soulignées, leur sens au survol (conseillé) ¦ Gạch chân các chữ viết tắt đã biết, nghĩa hiện khi rê chuột (khuyên dùng) ¦ Singkatan yang dikenal digarisbawahi, artinya muncul saat kursor di atasnya (disarankan)
+Relues ¦ Đã đọc lại ¦ Sudah diperiksa

@@ -281,6 +281,7 @@
                 <button type="button" data-txb-layout="B" class="${B ? 'is-active' : ''}" aria-pressed="${B}" title="${esc(i18n('Une barre courte ; des recettes en un clic et les autres réglages dans le panneau « 🎚️ Mieux voir », rangés en trois rubriques'))}">${esc(i18n('Barre courte + « 🎚️ Mieux voir » (conseillé)'))}</button>
                 <button type="button" data-txb-layout="A" class="${B ? '' : 'is-active'}" aria-pressed="${!B}" title="${esc(i18n('Tous les réglages dans la barre ; elle passe à la ligne s’il le faut'))}">${esc(i18n('Barre complète'))}</button></span></div>
             <label class="ui-toggle h-txb-ln"><input type="checkbox" data-txb-ln ${lineNos() ? 'checked' : ''}><i></i>${esc(i18n('Numéros de ligne dans la marge du texte (conseillé)'))}</label>
+            <label class="ui-toggle h-txb-ab"><input type="checkbox" data-txb-ab ${abbrevOn() ? 'checked' : ''}><i></i>${esc(i18n('Abréviations connues soulignées, leur sens au survol (conseillé)'))}</label>
             <label class="ui-toggle h-txb-rv"><input type="checkbox" data-txb-rv ${reviewMode() ? 'checked' : ''}><i></i>${esc(i18n('Relecture ligne à ligne en plein écran (conseillé)'))}</label>
             <div data-presets-slot="txb"></div>
             <p class="muted">${i18n('Coche ce qu’on montre (👁), range avec ↑ ↓ (ou en glissant ⠿){x}. Gardé aussitôt ; l’outil ouvert suit tout de suite.', {x: B ? i18n(', et choisis ce qui va dans la barre ou dans le panneau « 🎚️ Mieux voir »') : ''})}</p>

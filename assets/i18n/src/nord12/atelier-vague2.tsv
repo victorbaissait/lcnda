@@ -45,3 +45,15 @@ Déplacer la zone choisie (⇧ : l’agrandir) ¦ Двигать выбранн�
 Supprimer la zone choisie ¦ Удалить выбранную область ¦ Видалити вибрану область
 Zoom avant, zoom arrière ¦ Увеличить, уменьшить ¦ Збільшити, зменшити
 Cette liste des touches ¦ Этот список клавиш ¦ Цей список клавіш
+# — avancement et abréviations au survol
+=mot douteux ¦ сомнительное слово|сомнительных слова|сомнительных слов ¦ сумнівне слово|сумнівні слова|сумнівних слів
+aucun mot douteux ¦ нет сомнительных слов ¦ немає сумнівних слів
+{n} / {total} lignes relues ¦ {n} / {total} строк проверено ¦ {n} / {total} рядків перевірено
+{n} / {total} lignes reliées ¦ {n} / {total} строк связано ¦ {n} / {total} рядків пов’язано
+Marquer comme finie ¦ Отметить как готовую ¦ Позначити як завершену
+Marquer comme relue ¦ Отметить как проверенную ¦ Позначити як перевірену
+Ligne sans zone : dessine-la sur l’image (▭) ¦ Строка без области: нарисуй её на изображении (▭) ¦ Рядок без області: намалюй її на зображенні (▭)
+Ne plus souligner les abréviations ¦ Больше не подчёркивать сокращения ¦ Більше не підкреслювати скорочення
+Souligner les abréviations connues ¦ Подчёркивать известные сокращения ¦ Підкреслювати відомі скорочення
+Abréviations connues soulignées, leur sens au survol (conseillé) ¦ Известные сокращения подчёркнуты, их смысл при наведении (рекомендуется) ¦ Відомі скорочення підкреслено, їхнє значення при наведенні (рекомендовано)
+Relues ¦ Проверенные ¦ Перевірені

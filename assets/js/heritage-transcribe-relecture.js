@@ -26,7 +26,7 @@
     function open(ctx) {
         let lines = linesOf(ctx.text());
         if (!lines.length) { A().toast(i18n('Le texte est vide : lis ou écris d’abord l’acte.'), 'error'); return null; }
-        let idx = Math.max(0, lines.findIndex(l => ctx.start != null && ctx.start >= l.s && ctx.start <= l.e + 1)), zoomK = 1, im = null, editBefore = null;
+        let idx = Math.max(0, lines.findIndex(l => ctx.start != null && ctx.start >= l.s && ctx.start <= l.e)), zoomK = 1, im = null, editBefore = null;
         const undo = []; // [{n, text}] : la ligne d'avant chaque correction
         const dlg = document.createElement('dialog'); dlg.className = 'modal is-full h-txr-dlg';
         dlg.innerHTML = `<div class="h-txr" role="document">

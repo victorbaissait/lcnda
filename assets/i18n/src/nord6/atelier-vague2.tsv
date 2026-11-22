@@ -45,3 +45,15 @@ Déplacer la zone choisie (⇧ : l’agrandir) ¦ Perkelti pasirinktą sritį (�
 Supprimer la zone choisie ¦ Ištrinti pasirinktą sritį ¦ Dzēst izvēlēto apgabalu ¦ Kustuta valitud ala
 Zoom avant, zoom arrière ¦ Priartinti, nutolinti ¦ Tuvināt, tālināt ¦ Suurenda, vähenda
 Cette liste des touches ¦ Šis klavišų sąrašas ¦ Šis taustiņu saraksts ¦ See klahvide loend
+# — avancement et abréviations au survol
+=mot douteux ¦ abejotinas žodis|abejotini žodžiai|abejotinų žodžių ¦ šaubīgu vārdu|šaubīgs vārds|šaubīgi vārdi ¦ kahtlane sõna|kahtlast sõna
+aucun mot douteux ¦ nėra abejotinų žodžių ¦ nav šaubīgu vārdu ¦ kahtlasi sõnu pole
+{n} / {total} lignes relues ¦ {n} / {total} eilučių peržiūrėta ¦ {n} / {total} rindas pārskatītas ¦ {n} / {total} rida üle vaadatud
+{n} / {total} lignes reliées ¦ {n} / {total} eilučių susieta ¦ {n} / {total} rindas sasaistītas ¦ {n} / {total} rida seotud
+Marquer comme finie ¦ Pažymėti kaip baigtą ¦ Atzīmēt kā pabeigtu ¦ Märgi valmis
+Marquer comme relue ¦ Pažymėti kaip peržiūrėtą ¦ Atzīmēt kā pārskatītu ¦ Märgi üle vaadatuks
+Ligne sans zone : dessine-la sur l’image (▭) ¦ Eilutė be srities: nubrėžk ją vaizde (▭) ¦ Rinda bez apgabala: uzzīmē to attēlā (▭) ¦ Rida ilma alata: joonista see pildile (▭)
+Ne plus souligner les abréviations ¦ Nebepabraukti santrumpų ¦ Vairs nepasvītrot saīsinājumus ¦ Ära enam lühendeid alla kriipsuta
+Souligner les abréviations connues ¦ Pabraukti žinomas santrumpas ¦ Pasvītrot zināmos saīsinājumus ¦ Kriipsuta tuntud lühendid alla
+Abréviations connues soulignées, leur sens au survol (conseillé) ¦ Žinomos santrumpos pabrauktos, jų reikšmė užvedus pelę (rekomenduojama) ¦ Zināmie saīsinājumi pasvītroti, to nozīme, uzvirzot peli (ieteicams) ¦ Tuntud lühendid alla kriipsutatud, nende tähendus hiirega osutades (soovitatav)
+Relues ¦ Peržiūrėtos ¦ Pārskatītās ¦ Üle vaadatud

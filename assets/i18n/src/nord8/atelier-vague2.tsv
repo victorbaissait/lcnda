@@ -45,3 +45,15 @@ Déplacer la zone choisie (⇧ : l’agrandir) ¦ Seçilen alanı kaydır (⇧: 
 Supprimer la zone choisie ¦ Seçilen alanı sil
 Zoom avant, zoom arrière ¦ Yakınlaştır, uzaklaştır
 Cette liste des touches ¦ Bu tuş listesi
+# — avancement et abréviations au survol
+=mot douteux ¦ şüpheli sözcük|şüpheli sözcük
+aucun mot douteux ¦ şüpheli sözcük yok
+{n} / {total} lignes relues ¦ {n} / {total} satır gözden geçirildi
+{n} / {total} lignes reliées ¦ {n} / {total} satır bağlı
+Marquer comme finie ¦ Bitti olarak işaretle
+Marquer comme relue ¦ Gözden geçirildi olarak işaretle
+Ligne sans zone : dessine-la sur l’image (▭) ¦ Alanı olmayan satır: onu resmin üzerine çiz (▭)
+Ne plus souligner les abréviations ¦ Kısaltmaların altını artık çizme
+Souligner les abréviations connues ¦ Bilinen kısaltmaların altını çiz
+Abréviations connues soulignées, leur sens au survol (conseillé) ¦ Bilinen kısaltmaların altı çizili, üzerine gelince anlamları (önerilen)
+Relues ¦ Gözden geçirilenler

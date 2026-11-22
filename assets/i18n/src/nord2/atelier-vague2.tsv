@@ -45,3 +45,15 @@ Déplacer la zone choisie (⇧ : l’agrandir) ¦ Posunúť vybranú oblasť (�
 Supprimer la zone choisie ¦ Odstrániť vybranú oblasť ¦ Slett det valgte området
 Zoom avant, zoom arrière ¦ Priblížiť, oddialiť ¦ Zoom inn, zoom ut
 Cette liste des touches ¦ Tento zoznam klávesov ¦ Denne listen over taster
+# — avancement et abréviations au survol
+=mot douteux ¦ neisté slovo|neisté slová|neistých slov ¦ usikkert ord|usikre ord
+aucun mot douteux ¦ žiadne neisté slovo ¦ ingen usikre ord
+{n} / {total} lignes relues ¦ {n} / {total} riadkov skontrolovaných ¦ {n} / {total} linjer gjennomgått
+{n} / {total} lignes reliées ¦ {n} / {total} riadkov prepojených ¦ {n} / {total} linjer koblet
+Marquer comme finie ¦ Označiť ako hotovú ¦ Merk som ferdig
+Marquer comme relue ¦ Označiť ako skontrolovanú ¦ Merk som gjennomgått
+Ligne sans zone : dessine-la sur l’image (▭) ¦ Riadok bez oblasti: nakresli ju na obrázok (▭) ¦ Linje uten område: tegn det på bildet (▭)
+Ne plus souligner les abréviations ¦ Už nepodčiarkovať skratky ¦ Slutt å understreke forkortelser
+Souligner les abréviations connues ¦ Podčiarkovať známe skratky ¦ Understrek kjente forkortelser
+Abréviations connues soulignées, leur sens au survol (conseillé) ¦ Známe skratky podčiarknuté, ich význam po prejdení myšou (odporúčané) ¦ Kjente forkortelser understreket, betydningen når du holder over (anbefalt)
+Relues ¦ Skontrolované ¦ Gjennomgåtte

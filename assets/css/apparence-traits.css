@@ -3451,6 +3451,18 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root[data-theme="dark"].lc-frame .h-tx-find input, :root[data-theme="dark"] .h-tx-find input:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-tx-find button, :root[data-theme="dark"] .h-tx-find button:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-tx-find button.is-active, :root[data-theme="dark"] .h-tx-find button.is-active:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-tx-find button[aria-pressed=true], :root[data-theme="dark"] .h-tx-find button[aria-pressed=true]:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
 :root[data-theme="dark"].lc-frame .h-tx-keys td, :root[data-theme="dark"] .h-tx-keys td:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root.lc-frame .h-tx-pstate, :root .h-tx-pstate:is([data-lc-lines], [data-lc-lines] *) {border:0}
+:root.lc-frame .h-tx-pchip, :root .h-tx-pchip:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d6d6db}
+:root.lc-frame .h-tx-pchip.is-warn, :root .h-tx-pchip.is-warn:is([data-lc-lines], [data-lc-lines] *) {border-color:#e0b93a}
+:root.lc-frame .h-tx-pchip.is-ok, :root .h-tx-pchip.is-ok:is([data-lc-lines], [data-lc-lines] *) {border-color:#b7dfc2}
+:root.lc-frame .h-tx-pchip:hover, :root .h-tx-pchip:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
+:root[data-theme="dark"].lc-frame .h-tx-pchip, :root[data-theme="dark"] .h-tx-pchip:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .h-tx-pchip.is-warn, :root[data-theme="dark"] .h-tx-pchip.is-warn:is([data-lc-lines], [data-lc-lines] *) {border-color:#8a6d1c}
+:root[data-theme="dark"].lc-frame .h-tx-pchip.is-ok, :root[data-theme="dark"] .h-tx-pchip.is-ok:is([data-lc-lines], [data-lc-lines] *) {border-color:#2b5a3a}
+:root.lc-frame .h-tx-mirror .h-tx-ab, :root .h-tx-mirror .h-tx-ab:is([data-lc-lines], [data-lc-lines] *) {border-bottom:2px dotted #1473e6}
+:root.lc-frame .h-tx-abtip, :root .h-tx-abtip:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #1d1d1f}
+:root[data-theme="dark"].lc-frame .h-tx-mirror .h-tx-ab, :root[data-theme="dark"] .h-tx-mirror .h-tx-ab:is([data-lc-lines], [data-lc-lines] *) {border-bottom-color:#7db6ff}
+:root[data-theme="dark"].lc-frame .h-tx-abtip, :root[data-theme="dark"] .h-tx-abtip:is([data-lc-lines], [data-lc-lines] *) {border-color:#8a6d1c}
 /* photomaps.css */
 :root.lc-frame .pm-filter, :root .pm-filter:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .pm-chip, :root .pm-chip:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}
 :root.lc-frame .pm-filter.is-active, :root .pm-filter.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}

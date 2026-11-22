@@ -45,3 +45,15 @@ Déplacer la zone choisie (⇧ : l’agrandir) ¦ Færa valið svæði (⇧: st�
 Supprimer la zone choisie ¦ Eyða völdu svæði
 Zoom avant, zoom arrière ¦ Auka aðdrátt, minnka aðdrátt
 Cette liste des touches ¦ Þessi listi yfir lykla
+# — avancement et abréviations au survol
+=mot douteux ¦ vafasamt orð|vafasöm orð
+aucun mot douteux ¦ ekkert vafasamt orð
+{n} / {total} lignes relues ¦ {n} / {total} línur yfirfarnar
+{n} / {total} lignes reliées ¦ {n} / {total} línur tengdar
+Marquer comme finie ¦ Merkja sem lokið
+Marquer comme relue ¦ Merkja sem yfirfarið
+Ligne sans zone : dessine-la sur l’image (▭) ¦ Lína án svæðis: teiknaðu það á myndina (▭)
+Ne plus souligner les abréviations ¦ Hætta að undirstrika skammstafanir
+Souligner les abréviations connues ¦ Undirstrika þekktar skammstafanir
+Abréviations connues soulignées, leur sens au survol (conseillé) ¦ Þekktar skammstafanir undirstrikaðar, merking þeirra þegar bendill fer yfir (mælt með)
+Relues ¦ Yfirfarnar

@@ -45,3 +45,15 @@ Déplacer la zone choisie (⇧ : l’agrandir) ¦ Μετακίνηση της ε
 Supprimer la zone choisie ¦ Διαγραφή της επιλεγμένης περιοχής ¦ Изтриване на избраната област
 Zoom avant, zoom arrière ¦ Μεγέθυνση, σμίκρυνση ¦ Увеличаване, намаляване
 Cette liste des touches ¦ Αυτή η λίστα πλήκτρων ¦ Този списък с клавиши
+# — avancement et abréviations au survol
+=mot douteux ¦ αμφίβολη λέξη|αμφίβολες λέξεις ¦ съмнителна дума|съмнителни думи
+aucun mot douteux ¦ καμία αμφίβολη λέξη ¦ няма съмнителни думи
+{n} / {total} lignes relues ¦ {n} / {total} γραμμές ελέγχθηκαν ¦ {n} / {total} реда проверени
+{n} / {total} lignes reliées ¦ {n} / {total} γραμμές συνδεδεμένες ¦ {n} / {total} реда свързани
+Marquer comme finie ¦ Σήμανση ως ολοκληρωμένη ¦ Отбележи като завършена
+Marquer comme relue ¦ Σήμανση ως ελεγμένη ¦ Отбележи като проверена
+Ligne sans zone : dessine-la sur l’image (▭) ¦ Γραμμή χωρίς περιοχή: σχεδίασέ τη στην εικόνα (▭) ¦ Ред без област: начертай я върху изображението (▭)
+Ne plus souligner les abréviations ¦ Να μην υπογραμμίζονται πια οι συντομογραφίες ¦ Без подчертаване на съкращенията
+Souligner les abréviations connues ¦ Υπογράμμιση γνωστών συντομογραφιών ¦ Подчертаване на известните съкращения
+Abréviations connues soulignées, leur sens au survol (conseillé) ¦ Γνωστές συντομογραφίες υπογραμμισμένες, η σημασία τους στο πέρασμα του ποντικιού (συνιστάται) ¦ Известните съкращения са подчертани, значението им при посочване (препоръчително)
+Relues ¦ Ελεγμένες ¦ Проверени

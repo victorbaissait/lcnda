@@ -155,7 +155,7 @@ function act_transcriptions_page(PDO $pdo, array $q): array
     if ($to) { $where[] = 'act_year(t.date_text) <= CAST(? AS INTEGER)'; $args[] = $to; }
     $statusSql = "COALESCE(NULLIF(json_extract(t.data_json, '$.status'), ''), CASE WHEN trim(t.body) = '' THEN 'todo' ELSE 'doing' END)";
     $status = (string) ($q['status'] ?? '');
-    if (in_array($status, ['todo', 'doing', 'done'], true)) { $where[] = "$statusSql = ?"; $args[] = $status; }
+    if (in_array($status, ['todo', 'doing', 'checked', 'done'], true)) { $where[] = "$statusSql = ?"; $args[] = $status; }
     if (!empty($q['zones'])) { $where[] = "COALESCE(json_array_length(t.data_json, '$.zones'), 0) > 0"; }
     if (!empty($q['linked'])) { $where[] = "EXISTS (SELECT 1 FROM json_each(t.data_json, '$.people') j WHERE CAST(json_extract(j.value, '$.person_id') AS INTEGER) > 0)"; }
     $sql = ' FROM act_transcriptions t LEFT JOIN media m ON m.id=t.media_id' . ($where ? ' WHERE ' . implode(' AND ', $where) : '');
@@ -187,7 +187,7 @@ function act_transcriptions_for_media(PDO $pdo, int $mediaId): array
     $hide = act_doc_hidden_ids($pdo);
     return array_map(static function ($r) use ($hide) { $d = json_decode((string) $r['data_json'], true) ?: []; unset($r['data_json']);
         $r['id'] = (int) $r['id']; $r['zones'] = count(is_array($d['zones'] ?? null) ? $d['zones'] : []);
-        $r['status'] = in_array($d['status'] ?? '', ['todo', 'doing', 'done'], true) ? $d['status'] : (trim((string) $r['body']) === '' ? 'todo' : 'doing');
+        $r['status'] = in_array($d['status'] ?? '', ['todo', 'doing', 'checked', 'done'], true) ? $d['status'] : (trim((string) $r['body']) === '' ? 'todo' : 'doing');
         if ($hide) { $d['people'] = array_values(array_filter(is_array($d['people'] ?? null) ? $d['people'] : [], static fn($p) => is_array($p) && !isset($hide[(int) ($p['person_id'] ?? 0)]))); } $r['people'] = array_values(array_map(static fn($p) => ['name' => (string) ($p['name'] ?? ''), 'role' => (string) ($p['role'] ?? ''), 'person_id' => (int) ($p['person_id'] ?? 0)], array_filter(is_array($d['people'] ?? null) ? $d['people'] : [], 'is_array'))); return $r; }, $s->fetchAll());
 }
 
@@ -229,7 +229,7 @@ function act_transcription_clean_data(PDO $pdo, $data): array
         'channel' => in_array($view['channel'] ?? '', ['', 'r', 'g', 'b'], true) ? (string) ($view['channel'] ?? '') : '', 'thr' => $range($view['thr'] ?? 0, 0, 254, 0),
         'lvB' => $range($view['lvB'] ?? 0, 0, 200, 0), 'lvW' => $range($view['lvW'] ?? 255, 55, 255, 255), 'lvG' => $range($view['lvG'] ?? 1, .3, 3, 1),
         'bg' => !empty($view['bg']), 'tilt' => $range($view['tilt'] ?? 0, -10, 10, 0), 'mirror' => !empty($view['mirror'])];
-    $status = in_array($data['status'] ?? '', ['todo', 'doing', 'done'], true) ? $data['status'] : '';
+    $status = in_array($data['status'] ?? '', ['todo', 'doing', 'checked', 'done'], true) ? $data['status'] : '';
     // 📜 le texte lu autour de l'acte sur une capture d'écran (« Saint-Amand-Montrond, 1807-1809, N, M, D », « 139 / 268 ») : pour la source
     $frame = mb_substr(safe_text(is_string($data['frame_text'] ?? null) ? $data['frame_text'] : ''), 0, 600);
     // 🌐 la traduction gardée avec la transcription (« Traduire », lib/plus_famille.php) : du texte, borné

@@ -490,7 +490,38 @@
         return out.sort((a, b) => a.at - b.at).slice(0, limit).map(({word, item}) => ({word, item}));
     }
 
-    const api = {fold, ENTRIES, KINDS, ACTES, G, glyphSvg, glyphs, parseExercise, correct, tokens, search, counts, langCounts, known, allEntries, allLetters, allExercises,
+    /**
+     * abbrevs('… Pierre MAZAUD, labr, … le 3 7bre …', 'la') → [{s, e, word, item}] : les abréviations connues du dictionnaire (k = 'abrev')
+     * trouvées dans le texte, en français et dans la langue donnée, dans l'ordre du texte (📜 Atelier : soulignées, leur sens au survol).
+     * Une abréviation écrite avec son point (« led. », « par. ») n'est reconnue qu'avec le point ; une écrite avec une majuscule (« Me », « Sr »)
+     * seulement avec la majuscule ; un vrai mot (« pour », « dit », présent dans sa propre définition) n'est jamais souligné.
+     */
+    const AB_STOP = new Set(['croix', 'do', 'de', 'le', 'la', 'et', 'en']);
+    let abIdx = null;
+    function abbrevIndex() {
+        const list = allEntries(); if (abIdx && abIdx.list === list) return abIdx.map;
+        const map = new Map();
+        list.filter(e => e.k === 'abrev').forEach(e => String(e.t).split(/\s*,\s*/).forEach(raw => {
+            const p = raw.trim(); if (!p || /\s/.test(p) || /…/.test(p)) return;
+            const dot = /\.$/.test(p), core = p.replace(/\.+$/, ''), f = fold(core).replace(/[^\p{L}\p{N}]/gu, '');
+            if (f.length < 2 || !/\p{L}/u.test(f) || AB_STOP.has(f) || fold(e.d).split(/[^\p{L}]+/u).includes(f)) return;
+            if (!map.has(f)) map.set(f, []); map.get(f).push({item: e, dot, cap: /^\p{Lu}/u.test(core)});
+        }));
+        abIdx = {list, map}; return map;
+    }
+    function abbrevs(text, lang = '') {
+        const t = String(text || ''), map = abbrevIndex(), out = [], rx = /[\p{L}\p{M}\p{N}]+/gu; let m;
+        while ((m = rx.exec(t))) {
+            const w = m[0], vs = map.get(fold(w).replace(/[^\p{L}\p{N}]/gu, '')); if (!vs) continue;
+            const prev = t[m.index - 1] || '', next = t[m.index + w.length] || ''; if (/[\p{L}’'-]/u.test(prev)) continue; // un morceau de mot
+            const v = vs.find(x => (x.item.lang === 'fr' || x.item.lang === lang) && (!x.dot || next === '.') && (!x.cap || /^\p{Lu}/u.test(w))); if (!v) continue;
+            if (!v.dot && /[’']/.test(next)) continue;
+            out.push({s: m.index, e: m.index + w.length + (v.dot ? 1 : 0), word: w + (v.dot ? '.' : ''), item: v.item});
+        }
+        return out;
+    }
+
+    const api = {fold, ENTRIES, KINDS, ACTES, G, glyphSvg, glyphs, parseExercise, correct, tokens, search, counts, langCounts, known, abbrevs, allEntries, allLetters, allExercises,
         langs, langOf, langForOcr, translitOf, _reset: () => { mergedCache = null; langCache = null; glyphCache = null; nodeLangs = null; }};
     // LETTERS et EXERCISES : relus à chaque fois (les langues s'ajoutent en chargeant leur fichier)
     Object.defineProperty(api, 'LETTERS', {get: allLetters, enumerable: true});

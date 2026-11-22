@@ -45,3 +45,15 @@ Déplacer la zone choisie (⇧ : l’agrandir) ¦ Lëviz zonën e zgjedhur (⇧:
 Supprimer la zone choisie ¦ Fshi zonën e zgjedhur ¦ Ħassar iż-żona magħżula
 Zoom avant, zoom arrière ¦ Zmadho, zvogëlo ¦ Żum ’il ġewwa, żum ’il barra
 Cette liste des touches ¦ Kjo listë tastesh ¦ Din il-lista ta’ tasti
+# — avancement et abréviations au survol
+=mot douteux ¦ fjalë e dyshimtë|fjalë të dyshimta ¦ kelma dubjuża|kelmiet dubjużi|kelmiet dubjużi|kelma dubjuża|kelma dubjuża
+aucun mot douteux ¦ asnjë fjalë e dyshimtë ¦ ebda kelma dubjuża
+{n} / {total} lignes relues ¦ {n} / {total} rreshta të rishikuar ¦ {n} / {total} linji ċċekkjati
+{n} / {total} lignes reliées ¦ {n} / {total} rreshta të lidhur ¦ {n} / {total} linji marbuta
+Marquer comme finie ¦ Shëno si të përfunduar ¦ Immarka bħala lesta
+Marquer comme relue ¦ Shëno si të rishikuar ¦ Immarka bħala ċċekkjata
+Ligne sans zone : dessine-la sur l’image (▭) ¦ Rresht pa zonë: vizatoje në imazh (▭) ¦ Linja mingħajr żona: pinġiha fuq l-istampa (▭)
+Ne plus souligner les abréviations ¦ Mos i nënvizo më shkurtimet ¦ Tibqax tisottolinja l-abbrevjazzjonijiet
+Souligner les abréviations connues ¦ Nënvizo shkurtimet e njohura ¦ Issottolinja l-abbrevjazzjonijiet magħrufa
+Abréviations connues soulignées, leur sens au survol (conseillé) ¦ Shkurtimet e njohura të nënvizuara, kuptimi i tyre kur kalon miun (këshillohet) ¦ Abbrevjazzjonijiet magħrufa sottolinjati, it-tifsira tagħhom meta tgħaddi l-maws (rakkomandat)
+Relues ¦ Të rishikuara ¦ Iċċekkjati

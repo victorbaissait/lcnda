@@ -45,3 +45,15 @@ Déplacer la zone choisie (⇧ : l’agrandir) ¦ Pomakni odabrano područje (�
 Supprimer la zone choisie ¦ Izbriši odabrano područje ¦ Izbriši izbrano območje
 Zoom avant, zoom arrière ¦ Povećaj, smanji ¦ Povečaj, pomanjšaj
 Cette liste des touches ¦ Ovaj popis tipki ¦ Ta seznam tipk
+# — avancement et abréviations au survol
+=mot douteux ¦ dvojbena riječ|dvojbene riječi|dvojbenih riječi ¦ dvomljiva beseda|dvomljivi besedi|dvomljive besede|dvomljivih besed
+aucun mot douteux ¦ nema dvojbenih riječi ¦ nobene dvomljive besede
+{n} / {total} lignes relues ¦ {n} / {total} redaka provjereno ¦ {n} / {total} vrstic pregledanih
+{n} / {total} lignes reliées ¦ {n} / {total} redaka povezano ¦ {n} / {total} vrstic povezanih
+Marquer comme finie ¦ Označi kao završenu ¦ Označi kot končano
+Marquer comme relue ¦ Označi kao provjerenu ¦ Označi kot pregledano
+Ligne sans zone : dessine-la sur l’image (▭) ¦ Redak bez područja: nacrtaj ga na slici (▭) ¦ Vrstica brez območja: nariši ga na sliko (▭)
+Ne plus souligner les abréviations ¦ Ne podcrtavaj više kratice ¦ Ne podčrtuj več okrajšav
+Souligner les abréviations connues ¦ Podcrtaj poznate kratice ¦ Podčrtaj znane okrajšave
+Abréviations connues soulignées, leur sens au survol (conseillé) ¦ Poznate kratice podcrtane, njihovo značenje pri prelasku mišem (preporučeno) ¦ Znane okrajšave podčrtane, njihov pomen ob prehodu z miško (priporočeno)
+Relues ¦ Provjerene ¦ Pregledane
