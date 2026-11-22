@@ -132,3 +132,5 @@
 .h-pacts-list q{quotes:"« " " »";display:block;font:12.5px/1.4 Georgia,serif;color:var(--muted,#666);margin-top:3px;overflow-wrap:anywhere}
 .h-pacts-acts{display:flex;gap:4px;align-items:center}
 .h-pacts-foot{margin-top:8px}
+/* écran étroit : « 🎚️ Mieux voir » part du bord gauche de la barre et tient dans sa largeur (sinon il sort de l’écran à droite) */
+@media (max-width:640px){.h-tx-betterw{position:static}.h-tx-better{left:8px;right:8px;width:auto}}

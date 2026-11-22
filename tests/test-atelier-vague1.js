@@ -157,6 +157,61 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
             await p.evaluate(() => document.querySelector('[data-txa-deep]')?.closest('dialog')?.close());
         });
 
+        /* ─── 4. menus rangés, symboles, numéros de ligne ─── */
+        const menu = async name => { await p.evaluate(n => [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-menus] button')].find(b => b.textContent.trim() === n).click(), name); await p.waitForSelector('.ui-actmenu');
+            const items = await p.evaluate(() => [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].map(b => b.textContent.replace(/\s+/g, ' ').trim()));
+            await p.keyboard.press('Escape'); await sleep(100); return items; };
+        await t('menus rangés (K1) : les lectures, Repérer et « Ajouter à la généalogie » dans Outils, plus dans Édition ; un symbole = une action (K2)', async () => {
+            const ed = await menu('Édition'), ou = await menu('Outils'), af = await menu('Affichage');
+            assert.ok(!ed.some(x => /Lire|Lecture|Repérer|trouvé/.test(x)), 'Édition : ' + ed.join(' | '));
+            for (const w of ['✍️Lire l’écriture à la main (rapide)', '🖨Lire un texte imprimé', '🔬Lecture approfondie (IA)', '🧭Repérer', '✓Ajouter à la généalogie', '📖Aide à la lecture']) assert.ok(ou.some(x => x.replace(/\s/g, '').startsWith(w.replace(/\s/g, ''))), w + ' dans Outils : ' + ou.join(' | '));
+            assert.ok(af.some(x => /Remettre l’image comme au départ/.test(x)) && af.some(x => /numéros de ligne/.test(x)), 'Affichage : ' + af.join(' | '));
+            const syms = await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), txt = s => d.querySelector(s)?.textContent.trim() || ''; return {model: txt('.h-tx-tools [data-tx-cmd="template"]'), aide: txt('.h-tx-tools [data-tx-cmd="aide"]'), found: txt('.h-tx-tools [data-tx-cmd="found"]'), deep: txt('[data-tx-readpanel] [data-tx-cmd="deep"] .h-tx-readt')}; });
+            assert.match(syms.model, /^🧩/); assert.match(syms.aide, /^📖/); assert.match(syms.found, /^✓ Ajouter à la généalogie/); assert.match(syms.deep, /^🔬/);
+        });
+        const lines = () => p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), ta = d.querySelector('[data-tx-body]').getBoundingClientRect();
+            return [...d.querySelectorAll('[data-tx-mirror] .h-tx-ln')].map(s => { const r = s.getBoundingClientRect(), b = getComputedStyle(s, '::before'); return {n: s.dataset.n, content: b.content, y: Math.round(r.top), inMargin: b.position === 'absolute' && parseFloat(b.left) + parseFloat(b.width) <= parseFloat(getComputedStyle(d.querySelector('[data-tx-mirror]')).paddingLeft) - 4 && r.left >= ta.left + 30}; }); });
+        await t('numéros de ligne dans la marge du texte, montrés au départ, une ligne = un numéro, alignés', async () => {
+            const l = await lines(); assert.deepEqual(l.map(x => x.n), ['1', '2', '3', '4', '5', '6']); assert.ok(l.every(x => x.content === 'attr(data-n)' || /\d/.test(x.content)), JSON.stringify(l));
+            assert.ok(l.every((x, i) => !i || x.y > l[i - 1].y), 'de haut en bas'); assert.ok(l.every(x => x.inMargin), 'dans la marge');
+            const pad = await p.evaluate(() => [getComputedStyle(document.querySelector('dialog.h-tx-dlg [data-tx-body]')).paddingLeft, getComputedStyle(document.querySelector('dialog.h-tx-dlg [data-tx-mirror]')).paddingLeft]);
+            assert.equal(pad[0], pad[1], 'texte et couleurs restent alignés');
+            await shot('v1-numeros.png');
+        });
+        await t('numéros de ligne : un réglage (Affichage, et Réglages en interrupteur « (conseillé) »)', async () => {
+            await p.evaluate(() => [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-menus] button')].find(b => b.textContent.trim() === 'Affichage').click()); await p.waitForSelector('.ui-actmenu');
+            await p.evaluate(() => [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].find(b => /numéros de ligne/.test(b.textContent)).click()); await sleep(200);
+            assert.equal((await lines()).length, 0); assert.equal(await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-editor]').classList.contains('has-ln')), false);
+            const html = await p.evaluate(() => window.LCNDA_EXT.transcribePrefs.html()); assert.match(html, /class="ui-toggle h-txb-ln"><input type="checkbox" data-txb-ln >/); assert.match(html, /conseillé/);
+            await p.evaluate(() => window.LCNDA_EXT.txView.setLineNos(true)); await sleep(200); assert.equal((await lines()).length, 6);
+        });
+        await t('textes de l’Atelier traduits (les mots qui étaient écrits en dur, et les nouveaux) dans les 31 langues', async () => {
+            const KEYS = ['Naissance', 'Mariage', 'Finie', 'Texte seul', 'Image puis texte', 'Paroisse, commune', 'Note (mot illisible, signature…)', 'Loupe', 'Zoom avant', 'Largeur', 'Encre pâle', 'Lire', 'Lecture approfondie (IA)', 'Lire l’écriture à la main (rapide)', 'Lire un texte imprimé', 'Position', 'Autres outils', 'Gris', 'Miroir', 'Recettes', 'Installé', 'À installer', 'Numéros de ligne dans la marge du texte (conseillé)', 'Barre courte + « 🎚️ Mieux voir » (conseillé)', 'Remettre l’image comme au départ'];
+            const langs = await p.evaluate(() => window.LCNDA_I18N.CODES.filter(c => c !== 'fr'));
+            assert.ok(langs.length >= 30, String(langs));
+            const missing = [];
+            for (const c of langs) { const d = JSON.parse(fs.readFileSync(path.join(root, 'assets/i18n', c + '.json'), 'utf8')); KEYS.forEach(k => { if (!d[k]) missing.push(`${c}: ${k}`); }); }
+            assert.deepEqual(missing, []);
+        });
+
+        /* ─── 5. téléphone (390 px) ─── */
+        await t('390 px, clair et sombre : rien ne dépasse, le menu « ✨ Lire ▾ » et « 🎚️ Mieux voir » restent dans l’écran', async () => {
+            await p.setViewportSize({width: 390, height: 844}); await sleep(500);
+            for (const th of ['', 'dark']) {
+                await theme(th); await sleep(150);
+                const over = await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'); return {sw: document.documentElement.scrollWidth, out: [...d.querySelectorAll('.h-tx-top > *, .h-tx-tools > *, [data-tx-bar] > *, .h-tx-editor')].filter(e => { const r = e.getBoundingClientRect(); return r.width && (r.right > 391 || r.left < -1); }).map(e => e.className || e.tagName)}; });
+                assert.ok(over.sw <= 391, 'largeur ' + over.sw);
+                await p.click('dialog.h-tx-dlg [data-tx-cmd="readmenu"]'); await sleep(300);
+                const r = await readPanel(); assert.ok(r.open && r.left >= 0 && r.right <= 390, JSON.stringify(r));
+                await shot(`v1-390-lire${th ? '-sombre' : ''}.png`); await p.keyboard.press('Escape');
+                await p.click('dialog.h-tx-dlg [data-tx-cmd="better"]'); await sleep(200);
+                const b = await p.evaluate(() => { const r = document.querySelector('dialog.h-tx-dlg [data-tx-panel]').getBoundingClientRect(); return [Math.round(r.left), Math.round(r.right)]; });
+                assert.ok(b[0] >= 0 && b[1] <= 390, 'Mieux voir ' + b); await p.keyboard.press('Escape');
+                void over.out;
+            }
+            await theme(''); await p.setViewportSize({width: 1440, height: 900}); await sleep(300);
+        });
+
         await t('aucune erreur JavaScript', async () => { assert.deepStrictEqual(errs, []); });
     } finally {
         await browser.close(); proc.kill(); fs.rmSync(tmp, {recursive: true, force: true});

@@ -52,7 +52,7 @@
                     <div><span class="pk-lab">Écrite par</span>${P().pickerField({name: 'writer', kind: 'person', allowFree: true, animals: false, value: writer})}</div>
                     <div><span class="pk-lab">À (destinataire)</span>${P().pickerField({name: 'recipient', kind: 'person', allowFree: true, animals: false, value: recip})}</div>
                     <label class="span-2">Adresse du destinataire<textarea name="recipient_address" rows="2" maxlength="600" placeholder="Madame Borie, rue du Lycée, Tulle">${esc(v.recipient_address || '')}</textarea></label>
-                    <div class="span-2 h-cpo-back"><div class="h-cpo-backhead"><span class="pk-lab">Texte écrit au dos</span><button type="button" class="button small secondary" data-cpo-transcribe title="L’atelier de transcription : l’image du dos à gauche, le texte à droite, lecture automatique, repérage des noms">📜 Transcrire dans l’atelier</button></div>
+                    <div class="span-2 h-cpo-back"><div class="h-cpo-backhead"><span class="pk-lab">Texte écrit au dos</span><button type="button" class="button small secondary" data-cpo-transcribe title="L’Atelier de transcription : l’image du dos à gauche, le texte à droite, lecture automatique, repérage des noms">📜 Transcrire dans l’atelier</button></div>
                         <textarea name="back_text" rows="5" maxlength="50000" placeholder="« Ma chère cousine, nous voici bien arrivés… »">${esc(v.back_text || '')}</textarea>
                         <small class="muted">${vs ? i18n('C’est la transcription de l’image du verso : la même que dans la visionneuse et la recherche.') : i18n('C’est la transcription de l’image du dos : la même que dans la visionneuse et la recherche.')}</small></div>
                     <div class="span-2"><span class="pk-lab">Lieu montré sur la carte${r?.id && window.LCNDA_EXT?.placePhotos ? ` <button type="button" class="link-button" data-pp-open="${Number(r.id)}" title="Plusieurs lieux possibles, une zone, la certitude, les indices, comparer avec aujourd’hui, demander de l’aide">📍 Plusieurs lieux possibles, zone, certitude…</button>` : ''}</span>${P().pickerField({name: 'place_id', kind: 'place', value: pl ? {id: pl.id, title: pl.name, name: pl.name, kind: 'place', short: pl.county || ''} : null})}</div>
@@ -75,7 +75,7 @@
                 d.querySelector('[data-cpo-transcribe]').addEventListener('click', async () => {
                     const vid = Number(f.elements.verso_media_id?.value) || Number(f.elements.media_id?.value) || 0;
                     if (!vid) return UI().fail?.(f.elements.verso_media_id || f.elements.media_id, 'Choisis d’abord l’image du verso (ou du recto).');
-                    if (!ext.openActTranscriber) return A().toast('L’atelier de transcription n’est pas encore chargé.', 'error');
+                    if (!ext.openActTranscriber) return A().toast('L’Atelier de transcription n’est pas encore chargé.', 'error');
                     const [m] = await (P().loadMedia?.([vid], true) || Promise.resolve([]));
                     await ext.openActTranscriber({mediaId: vid, filename: m?.filename || '', title: i18n('Carte postale — {title}', {title: f.elements.title.value.trim() || m?.title || i18n('texte du dos')}), text: f.elements.back_text.value, kind: 'lettre'});
                     // à la fermeture de l'atelier : son texte, s'il a été « mis dans le média », revient ici

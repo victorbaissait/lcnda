@@ -1,4 +1,4 @@
-/* LCNDA — 📜 Transcription d'actes : « 🎚️ Mieux voir » l'image de l'acte, et la barre d'outils réglable.
+/* LCNDA — 📜 Atelier de transcription : « 🎚️ Mieux voir » l'image de l'acte, et la barre d'outils réglable.
  *
  * 1. Les réglages de l'image (netteté, contraste local façon CLAHE, canal rouge / vert / bleu, seuil noir et blanc,
  *    niveaux, effacer le fond, redresser, miroir…) se calculent en local, dans un Web Worker (OffscreenCanvas) :
@@ -6,7 +6,7 @@
  * 2. La barre d'outils : barre courte + panneau « 🎚️ Mieux voir » (B, conseillée et de départ, avec trois recettes en un clic)
  *    ou barre complète (A, tout dans la barre),
  *    boutons rangés, cachés, et (en B) placés dans la barre ou dans le panneau. Réglage :
- *    Réglages → Montage, retouche, mise en page et son → « 📜 Transcription d'actes : barre d'outils »,
+ *    Réglages → Montage, retouche, mise en page et son → « 📜 Atelier de transcription : barre d’outils »,
  *    ou « ⚙️ » dans l'outil. Gardé sur cet ordinateur (genealogie-transcribe-bar), avec ses « 💾 Réglages enregistrés ».
  * Utilisé par heritage-transcribe.js (ext.txView).
  */
@@ -196,7 +196,7 @@
     }
 
     /* ═════════ La barre d'outils : A (tout dans la barre) ou B (barre courte + « 🎚️ Mieux voir ») ═════════ */
-    const RUBRICS = [['ink', i18n('Faire ressortir l’encre')], ['bw', i18n('Noir et blanc')], ['pos', 'Position'], ['nav', 'Autres outils'], ['act', '']];
+    const RUBRICS = [['ink', i18n('Faire ressortir l’encre')], ['bw', i18n('Noir et blanc')], ['pos', i18n('Position')], ['nav', i18n('Autres outils')], ['act', '']];
     const rg = (key, label, min, max, step, val, unit, def, extra = '') => `<label class="h-tx-rg" title="${esc(i18n('{label} — double-clic : valeur de départ', {label: esc(label)}))}"><span class="h-tx-rgl">${label}</span><input type="range" data-tx-view="${key}" min="${min}" max="${max}" step="${step}" value="${val}" data-unit="${unit}" data-default="${def}" aria-label="${esc(label)}"${extra}></label>`;
     const ck = (key, label, v, title = '') => `<label class="ui-toggle h-tx-ck"${title ? ` title="${esc(title)}"` : ''}><input type="checkbox" data-tx-view="${key}" ${v[key] ? 'checked' : ''}><i></i>${label}</label>`;
     /** [clé, nom (Réglages), rubrique, html(v, dansLePanneau)] — l'ordre est celui de départ */
@@ -206,16 +206,16 @@
         ['rot', `⟳ ${i18n('Tourner de 90°')}`, 'pos', () => `<button type="button" data-tx-cmd="rot" title="${esc(i18n('Tourner de 90°'))}">⟳</button>`],
         ['contrast', i18n('Contraste'), 'ink', v => rg('contrast', i18n('Contraste'), 50, 300, 1, v.contrast, '%', 100)],
         ['bright', `☀ ${i18n('Luminosité')}`, 'ink', v => rg('bright', '☀', 40, 220, 1, v.bright, '%', 100)],
-        ['clahe', 'Contraste local', 'ink', v => rg('clahe', 'Contraste local', 0, 100, 1, v.clahe, '', 0)],
-        ['sharp', i18n('Netteté (et son rayon)'), 'ink', (v, inPanel) => `<span class="h-tx-pair">${rg('sharp', i18n('Netteté'), 0, 300, 5, v.sharp, '%', 0)}${rg('sharpR', inPanel ? 'rayon' : 'r', .5, 5, .1, v.sharpR, 'px', 1.5)}</span>`],
-        ['channel', i18n('Canal de couleur'), 'ink', (v, inPanel) => `<span class="h-tx-chanw">${inPanel ? `<span class="h-tx-rgl">${i18n('Canal de couleur')}</span>` : ''}<span class="segmented h-tx-seg" role="group" aria-label="${esc(i18n('Canal de couleur'))}" title="${esc(i18n('Un seul canal : l’encre ferro-gallique ressort souvent mieux sur le rouge ou le bleu'))}">${[['', inPanel ? i18n('Tout') : 'RVB', i18n('Toutes les couleurs')], ['r', inPanel ? 'Rouge' : 'R', 'Canal rouge seul'], ['g', inPanel ? 'Vert' : 'V', 'Canal vert seul'], ['b', inPanel ? 'Bleu' : 'B', 'Canal bleu seul']].map(([k, l, ti]) => `<button type="button" data-tx-chan="${k}" class="${v.channel === k ? 'is-active' : ''}" title="${ti}" aria-pressed="${v.channel === k}">${l}</button>`).join('')}</span></span>`],
+        ['clahe', i18n('Contraste local'), 'ink', v => rg('clahe', i18n('Contraste local'), 0, 100, 1, v.clahe, '', 0)],
+        ['sharp', i18n('Netteté (et son rayon)'), 'ink', (v, inPanel) => `<span class="h-tx-pair">${rg('sharp', i18n('Netteté'), 0, 300, 5, v.sharp, '%', 0)}${rg('sharpR', inPanel ? i18n('rayon') : i18n('rayon').charAt(0), .5, 5, .1, v.sharpR, 'px', 1.5)}</span>`],
+        ['channel', i18n('Canal de couleur'), 'ink', (v, inPanel) => `<span class="h-tx-chanw">${inPanel ? `<span class="h-tx-rgl">${i18n('Canal de couleur')}</span>` : ''}<span class="segmented h-tx-seg" role="group" aria-label="${esc(i18n('Canal de couleur'))}" title="${esc(i18n('Un seul canal : l’encre ferro-gallique ressort souvent mieux sur le rouge ou le bleu'))}">${[['', inPanel ? i18n('Tout') : i18n('RVB'), i18n('Toutes les couleurs')], ['r', inPanel ? i18n('Rouge') : i18n('Rouge').charAt(0), i18n('Canal rouge seul')], ['g', inPanel ? i18n('Vert') : i18n('Vert').charAt(0), i18n('Canal vert seul')], ['b', inPanel ? i18n('Bleu') : i18n('Bleu').charAt(0), i18n('Canal bleu seul')]].map(([k, l, ti]) => `<button type="button" data-tx-chan="${k}" class="${v.channel === k ? 'is-active' : ''}" title="${esc(ti)}" aria-pressed="${v.channel === k}">${l}</button>`).join('')}</span></span>`],
         ['bg', i18n('Effacer le fond'), 'ink', v => ck('bg', i18n('Effacer le fond'), v, i18n('Jaunissement et taches : le papier redevient blanc, l’encre reste'))],
-        ['thr', i18n('Seuil noir et blanc'), 'bw', v => rg('thr', 'Seuil', 0, 254, 1, v.thr, '', 0, ' title="Seuil noir et blanc (0 = sans)"')],
-        ['levels', 'Niveaux (noir, blanc, gamma)', 'bw', (v, inPanel) => `<span class="h-tx-pair h-tx-levels">${inPanel ? '' : '<span class="h-tx-rgl">Niveaux</span>'}${rg('lvB', inPanel ? 'Point noir' : 'noir', 0, 200, 1, v.lvB, '', 0)}${rg('lvW', inPanel ? 'Point blanc' : 'blanc', 55, 255, 1, v.lvW, '', 255)}${rg('lvG', inPanel ? 'Gamma' : 'γ', .3, 3, .05, v.lvG, '', 1)}</span>`],
-        ['tilt', i18n('Redresser (au degré près)'), 'pos', v => rg('tilt', 'Redresser', -10, 10, .1, v.tilt, '°', 0)],
+        ['thr', i18n('Seuil noir et blanc'), 'bw', v => rg('thr', i18n('Seuil'), 0, 254, 1, v.thr, '', 0, ` title="${esc(i18n('Seuil noir et blanc (0 = sans)'))}"`)],
+        ['levels', i18n('Niveaux (noir, blanc, gamma)'), 'bw', (v, inPanel) => `<span class="h-tx-pair h-tx-levels">${inPanel ? '' : `<span class="h-tx-rgl">${esc(i18n('Niveaux'))}</span>`}${rg('lvB', inPanel ? i18n('Point noir') : i18n('noir'), 0, 200, 1, v.lvB, '', 0)}${rg('lvW', inPanel ? i18n('Point blanc') : i18n('blanc'), 55, 255, 1, v.lvW, '', 255)}${rg('lvG', inPanel ? i18n('Gamma') : 'γ', .3, 3, .05, v.lvG, '', 1)}</span>`],
+        ['tilt', i18n('Redresser (au degré près)'), 'pos', v => rg('tilt', i18n('Redresser'), -10, 10, .1, v.tilt, '°', 0)],
         ['invert', i18n('Négatif'), 'pos', v => ck('invert', i18n('Négatif'), v, i18n('Négatif : encre claire sur fond sombre'))],
-        ['gray', 'Gris', 'pos', v => ck('gray', 'Gris', v)],
-        ['mirror', 'Miroir', 'pos', v => ck('mirror', 'Miroir', v, i18n('Retourner l’image : pour lire un texte vu par transparence (le verso)'))],
+        ['gray', i18n('Gris'), 'pos', v => ck('gray', i18n('Gris'), v)],
+        ['mirror', i18n('Miroir'), 'pos', v => ck('mirror', i18n('Miroir'), v, i18n('Retourner l’image : pour lire un texte vu par transparence (le verso)'))],
         ['keep', `💾 ${i18n('Retenir pour cet acte')}`, 'act', () => `<button type="button" data-tx-cmd="keepview" title="${esc(i18n('Ces réglages de l’image sont enregistrés avec l’acte et reviennent à la prochaine ouverture'))}">💾 ${i18n('Retenir pour cet acte')}</button>`],
         ['reset', `↺ ${i18n('Remettre l’image comme au départ')}`, 'act', (v, inPanel, layout) => resetBtn(layout === 'B' && !inPanel)],
     ];
@@ -224,6 +224,10 @@
     const ITEM_KEYS = ITEMS.map(i => i[0]), itemOf = k => ITEMS.find(i => i[0] === k);
     const DEFAULT_PANEL = ['clahe', 'sharp', 'channel', 'bg', 'thr', 'levels', 'tilt', 'invert', 'gray', 'mirror', 'keep'];
     const DEFAULT_HIDDEN = ['image', 'rot'];
+    /** les numéros de ligne dans la marge du texte : montrés au départ (conseillé) */
+    const LN_KEY = 'genealogie-tx-linenos';
+    const lineNos = () => { try { return localStorage.getItem(LN_KEY) !== '0'; } catch (_) { return true; } };
+    const setLineNos = on => { try { localStorage.setItem(LN_KEY, on ? '1' : '0'); } catch (_) {} window.dispatchEvent(new CustomEvent('lcnda-txbar-change')); };
     const BAR_KEY = 'genealogie-transcribe-bar', SETS_KEY = 'genealogie-toolbar-sets', SETS_ID = 'transcribe';
     const readJson = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v && typeof v === 'object' ? v : d; } catch (_) { return d; } };
     const writeJson = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (_) { toast(i18n('Plus de place pour garder ce réglage.'), 'error'); return false; } };
@@ -264,13 +268,14 @@
     const setsSave = list => { const all = readJson(SETS_KEY, {}); all[SETS_ID] = list.slice(-60); return writeJson(SETS_KEY, all); };
     function prefsHtml(cfg = barCfg()) {
         const B = cfg.layout === 'B';
-        const row = k => { const [, label, rub] = itemOf(k); return `<li class="h-pet-lrow h-txb-row" data-k="${k}"><input type="checkbox" ${cfg.hidden.includes(k) ? '' : 'checked'} title="👁 ${esc(i18n('Montrer dans la barre'))}" aria-label="Montrer ${esc(label)}"><span>${esc(label)}</span>
+        const row = k => { const [, label, rub] = itemOf(k); return `<li class="h-pet-lrow h-txb-row" data-k="${k}"><input type="checkbox" ${cfg.hidden.includes(k) ? '' : 'checked'} title="👁 ${esc(i18n('Montrer dans la barre'))}" aria-label="${esc(i18n('Montrer {label}', {label}))}"><span>${esc(label)}</span>
             ${B ? `<select data-txb-place aria-label="${esc(i18n('Où va {label}', {label: esc(label)}))}" title="${esc(i18n('Dans la barre, ou dans le panneau « 🎚️ Mieux voir »'))}"><option value="bar" ${cfg.panel.includes(k) ? '' : 'selected'}>${i18n('Dans la barre')}</option><option value="panel" ${cfg.panel.includes(k) ? 'selected' : ''}>${i18n('Dans « Mieux voir »')}${rub === 'nav' || rub === 'act' ? '' : ` · ${esc((RUBRICS.find(r => r[0] === rub) || [])[1] || '')}`}</option></select>` : ''}
-            <button type="button" class="h-bt" data-txb-up title="Monter">↑</button><button type="button" class="h-bt" data-txb-down title="Descendre">↓</button></li>`; };
+            <button type="button" class="h-bt" data-txb-up title="${esc(i18n('Monter'))}">↑</button><button type="button" class="h-bt" data-txb-down title="${esc(i18n('Descendre'))}">↓</button></li>`; };
         return `<div class="h-txb">
             <div class="h-txb-layout"><span class="h-txb-lab">${esc(i18n('Disposition'))}</span><span class="segmented h-txb-seg" role="group" aria-label="${esc(i18n('Disposition de la barre'))}">
                 <button type="button" data-txb-layout="B" class="${B ? 'is-active' : ''}" aria-pressed="${B}" title="${esc(i18n('Une barre courte ; des recettes en un clic et les autres réglages dans le panneau « 🎚️ Mieux voir », rangés en trois rubriques'))}">${esc(i18n('Barre courte + « 🎚️ Mieux voir » (conseillé)'))}</button>
                 <button type="button" data-txb-layout="A" class="${B ? '' : 'is-active'}" aria-pressed="${!B}" title="${esc(i18n('Tous les réglages dans la barre ; elle passe à la ligne s’il le faut'))}">${esc(i18n('Barre complète'))}</button></span></div>
+            <label class="ui-toggle h-txb-ln"><input type="checkbox" data-txb-ln ${lineNos() ? 'checked' : ''}><i></i>${esc(i18n('Numéros de ligne dans la marge du texte (conseillé)'))}</label>
             <div data-presets-slot="txb"></div>
             <p class="muted">${i18n('Coche ce qu’on montre (👁), range avec ↑ ↓ (ou en glissant ⠿){x}. Gardé aussitôt ; l’outil ouvert suit tout de suite.', {x: B ? i18n(', et choisis ce qui va dans la barre ou dans le panneau « 🎚️ Mieux voir »') : ''})}</p>
             <ol class="h-pet-layout h-txb-list" data-txb-list>${cfg.order.map(row).join('')}</ol>
@@ -302,20 +307,20 @@
             if (e.target.closest('[data-txb-reset]')) { const before = readJson(BAR_KEY, null); try { localStorage.removeItem(BAR_KEY); } catch (_) {} window.dispatchEvent(new CustomEvent('lcnda-txbar-change')); redraw2();
                 A().undoToast?.(i18n('Barre de la transcription remise comme au départ'), {undo: () => { if (before) saveBar(before); redraw2(); }, redo: () => { try { localStorage.removeItem(BAR_KEY); } catch (_) {} window.dispatchEvent(new CustomEvent('lcnda-txbar-change')); redraw2(); }}); return; }
         });
-        box.addEventListener('change', e => { if (e.target.closest('[data-txb-list]')) keep(); });
+        box.addEventListener('change', e => { if (e.target.matches('[data-txb-ln]')) { setLineNos(e.target.checked); return; } if (e.target.closest('[data-txb-list]')) keep(); });
     }
     /** ⚙️ dans l'outil : la même liste, dans une fenêtre */
     function openBarDialog(parent) {
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-tbcfg h-txb-dlg';
         const paint = () => { dlg.querySelector('[data-txb-box]').innerHTML = prefsHtml(); };
-        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">PERSONNALISER</span><h2>⚙️ ${i18n('Barre de la transcription')}</h2></div><button type="button" class="icon-button" data-x aria-label="${esc(i18n('Fermer'))}">×</button></div>
+        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">${esc(i18n('PERSONNALISER'))}</span><h2>⚙️ ${i18n('Barre de la transcription')}</h2></div><button type="button" class="icon-button" data-x aria-label="${esc(i18n('Fermer'))}">×</button></div>
             <div class="h-tbcfg-body" data-txb-box></div><div class="modal-actions"><span class="spacer"></span><button type="button" class="button" data-x>${i18n('Fermer')}</button></div>`;
         (parent || document.body).appendChild(dlg); paint(); prefsBind(dlg.querySelector('[data-txb-box]'), paint);
         dlg.addEventListener('click', e => { if (e.target.closest('[data-x]')) dlg.close(); });
         dlg.addEventListener('close', () => dlg.remove()); dlg.showModal();
     }
 
-    ext.txView = {DEFAULT_VIEW, viewOf, needsPixels, cssFilter, changedCount, CHANGED, enhancer, toolbarHtml, barCfg, saveBar, cleanBar, panelKeys, badgeKeys, openBarDialog, ITEMS, DEFAULT_PANEL, RECIPES, recipeView, recipeOn};
-    // Réglages → Montage, retouche, mise en page et son → « 📜 Transcription d'actes : barre d'outils »
+    ext.txView = {DEFAULT_VIEW, viewOf, needsPixels, cssFilter, changedCount, CHANGED, enhancer, toolbarHtml, barCfg, saveBar, cleanBar, panelKeys, badgeKeys, openBarDialog, ITEMS, DEFAULT_PANEL, RECIPES, recipeView, recipeOn, lineNos, setLineNos};
+    // Réglages → Montage, retouche, mise en page et son → « 📜 Atelier de transcription : barre d’outils »
     ext.transcribePrefs = {html: () => prefsHtml(), bind: (box, redraw) => prefsBind(box, redraw)};
 })();

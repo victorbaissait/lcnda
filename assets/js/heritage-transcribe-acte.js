@@ -55,7 +55,7 @@
     /* ═════════ B. Une lecture peu sûre ═════════ */
     function lowNoticeHtml(st) {
         return notice('info', `🔎 <b>${esc(i18n('La lecture à la main a donné un texte peu sûr'))}</b> ${esc(i18n('({x} % de mots douteux). Souvent à cause des bords de l’écran autour de l’acte, ou d’une écriture trop difficile pour ce modèle.', {x: Math.round(st.ratio * 100)}))}
-            <span class="h-txa-row"><button type="button" class="button small secondary" data-txa-recrop>✂ ${esc(i18n('Recadrer et relire'))}</button><button type="button" class="button small" data-txa-deep>🔍 ${esc(i18n('Essayer la lecture approfondie'))}</button></span>`);
+            <span class="h-txa-row"><button type="button" class="button small secondary" data-txa-recrop>✂ ${esc(i18n('Recadrer et relire'))}</button><button type="button" class="button small" data-txa-deep>🔬 ${esc(i18n('Essayer la lecture approfondie'))}</button></span>`);
     }
 
     /* ═════════ G. Lecture approfondie (Ollama, sur cet ordinateur) ═════════ */
@@ -69,7 +69,7 @@
     async function openDeep(o = {}) {
         let st = null, job = null, timer = 0, model = '';
         try { model = localStorage.getItem(DEEP_KEY) || ''; } catch (_) {}
-        const dlg = ext.openDialog({eyebrow: i18n('LECTURE APPROFONDIE'), title: `🔍 ${i18n('Lecture approfondie')}`, wide: true, body: '<div data-txa-deep></div>',
+        const dlg = ext.openDialog({eyebrow: i18n('LECTURE APPROFONDIE'), title: `🔬 ${i18n('Lecture approfondie')}`, wide: true, body: '<div data-txa-deep></div>',
             onOpen: d => { d.addEventListener('close', () => { clearTimeout(timer); if (job && job.state === 'running') post('tx_deep_cancel', {id: job.id}).catch(() => {}); }); }});
         const box = dlg.querySelector('[data-txa-deep]');
         const info = () => `<div class="h-txa-grid">
@@ -91,10 +91,10 @@
             box.innerHTML = `${head}${info()}<div class="h-txa-prog" data-txa-prog hidden><div class="h-txa-bar"><i></i></div><small data-txa-progtxt></small></div><div class="h-txa-out" data-txa-out></div>
                 <div class="h-txa-row h-txa-deepbtns">${!st.installed ? `<a class="button" href="${esc(st.download_url)}" target="_blank" rel="noopener noreferrer">↗ ${esc(i18n('Télécharger Ollama (ollama.com)'))}</a>` : ''}
                 ${st.running && !ready ? `<button type="button" class="button" data-txa-pull>⤓ ${esc(i18n('Installer la lecture approfondie'))}</button>` : ''}
-                ${ready && !o.setupOnly ? `<button type="button" class="button" data-txa-read>🔍 ${esc(i18n('Lire l’acte avec ce modèle'))}</button>` : ''}
+                ${ready && !o.setupOnly ? `<button type="button" class="button" data-txa-read>🔬 ${esc(i18n('Lire l’acte avec ce modèle'))}</button>` : ''}
                 <button type="button" class="button secondary" data-txa-recheck>↻ ${esc(i18n('Vérifier à nouveau'))}</button></div>
                 ${ready && o.setupOnly ? notice('info', esc(i18n('Pour lire un acte : ouvre son image dans l’Atelier de transcription (« 📜 Ouvrir dans l’Atelier »), puis « ✨ Lire l’acte ».'))) : ''}
-                <p class="ui-hint">${esc(i18n('« 🔍 Essayer aussi la lecture approfondie » sur une page déjà lue montre les deux textes côte à côte, et on garde la meilleure. Relis toujours : un modèle peut se tromper sur les noms.'))}</p>`;
+                <p class="ui-hint">${esc(i18n('« 🔬 Lecture approfondie (IA) » sur une page déjà lue montre les deux textes côte à côte, et tu gardes le meilleur. Relis toujours : un modèle peut se tromper sur les noms.'))}</p>`;
         }
         const prog = (on, pct, txt) => { const p = box.querySelector('[data-txa-prog]'); if (!p) return; p.hidden = !on; p.querySelector('i').style.width = `${Math.max(0, Math.min(100, pct))}%`; p.querySelector('[data-txa-progtxt]').textContent = txt || ''; };
         async function poll(onDone) {
@@ -118,7 +118,7 @@
             const out = box.querySelector('[data-txa-out]'); const two = !!String(o.htrText || '').trim();
             out.innerHTML = `<h4>${esc(two ? i18n('Les deux lectures côte à côte') : i18n('Le texte lu'))}</h4><div class="h-txa-cmp2${two ? '' : ' is-one'}">
                 ${two ? `<div><b>✍ ${esc(i18n('Écriture à la main'))}</b><textarea data-txa-t="htr" spellcheck="false">${esc(o.htrText)}</textarea><button type="button" class="button small secondary" data-txa-keep="htr">✓ ${esc(i18n('Garder celle-ci'))}</button></div>` : ''}
-                <div><b>🔍 ${esc(i18n('Lecture approfondie'))}</b><textarea data-txa-t="deep" spellcheck="false">${esc(deepText)}</textarea><button type="button" class="button small" data-txa-keep="deep">✓ ${esc(two ? i18n('Garder celle-ci') : i18n('Mettre dans le texte'))}</button></div></div>`;
+                <div><b>🔬 ${esc(i18n('Lecture approfondie'))}</b><textarea data-txa-t="deep" spellcheck="false">${esc(deepText)}</textarea><button type="button" class="button small" data-txa-keep="deep">✓ ${esc(two ? i18n('Garder celle-ci') : i18n('Mettre dans le texte'))}</button></div></div>`;
             o.onCompare?.(out); // 🪄 corrections proposées et ▤ « Relier les lignes à l'image » (app-lignes-alignement.js, posés par l'Atelier)
         }
         box.addEventListener('click', async e => {

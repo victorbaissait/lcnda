@@ -2530,7 +2530,7 @@
         const pyMode = (() => { try { return localStorage.getItem('genealogie-htr-python') || 'auto'; } catch (_) { return 'auto'; } })();
         const banner = running ? htrProgressHtml(ins)
             : err ? `<div class="h-htr-err">${UI.notice('error', ins.step || 'L’installation n’a pas abouti.')}<p class="ui-hint">${ext.htrErrorHelp(ins.code, s.os)}</p><div class="page-actions"><button type="button" class="button" data-htr-retry>↻ Réessayer</button></div></div>`
-            : verified ? `<div class="h-htr-ready">${UI.notice('ok', '✓ Prêt : lecture d’écriture manuscrite')}<p class="ui-hint">Dans l’Atelier de transcription (Listes → Outils de modification → 📜 Atelier de transcription, ou « 📜 Ouvrir dans l’Atelier » sur une image) : « ✨ Lire l’acte ». Tout se passe sur cet ordinateur, sans Internet.</p></div>`
+            : verified ? `<div class="h-htr-ready">${UI.notice('ok', '✓ Prêt : lecture d’écriture manuscrite')}<p class="ui-hint">${i18n('Dans l’Atelier de transcription (Listes → Outils de modification → 📜 Atelier de transcription, ou « 📜 Ouvrir dans l’Atelier » sur une image) : « ✨ Lire ▾ » → « ✍️ Lire l’écriture à la main (rapide) ». Tout se passe sur cet ordinateur, sans Internet.')}</p></div>`
             : s.ready ? UI.notice('info', 'Le moteur et un modèle sont là : fais la vérification (étape ③).')
             : UI.notice('info', 'Pas encore installée : suis les 3 étapes ci-dessous. Compte 5 à 15 minutes la première fois.');
         const check = (ok, label, detail, why) => `<li class="${ok === true ? 'is-ok' : ok === false ? 'is-missing' : ''}"><span class="h-htr-ico" aria-hidden="true">${ok === true ? '✓' : ok === false ? '✗' : '•'}</span><div><b>${label}</b> ${detail}<small class="ui-hint">${why}</small></div></li>`;
@@ -2569,7 +2569,7 @@
             </section>
             <section class="maintenance-panel h-htr-step h-htr-deep" id="htr-deep"><h3>🔍 ${i18n('Lecture approfondie (IA sur cet ordinateur)')}</h3>
                 <p class="ui-hint">${i18n('En plus du moteur ci-dessus : un modèle « vision » ouvert (Qwen3-VL, licence Apache 2.0) qui lit toute la page, servi par Ollama sur cet ordinateur. Facultatif. Rien ne part sur Internet, sauf le téléchargement du modèle (3 à 6 Go, une seule fois).')}</p>
-                <p class="ui-hint">${i18n('Ensuite, dans l’atelier de transcription : « 🔍 Essayer aussi la lecture approfondie » montre les deux lectures côte à côte, et tu gardes la meilleure.')}</p>
+                <p class="ui-hint">${i18n('Ensuite, dans l’Atelier de transcription : « ✨ Lire ▾ » → « 🔬 Lecture approfondie (IA) » sur une page déjà lue montre les deux lectures côte à côte, et tu gardes la meilleure.')}</p>
                 <div class="page-actions"><button type="button" class="button secondary" data-htr-deep>🔍 ${i18n('Installer ou vérifier la lecture approfondie…')}</button></div>
             </section>
             <section class="maintenance-panel h-htr-step h-htr-fixset" id="htr-fix"><h3>🪄 ${i18n('Corrections proposées après la lecture')}</h3>
