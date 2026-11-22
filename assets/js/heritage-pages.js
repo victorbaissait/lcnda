@@ -168,7 +168,7 @@
         new MutationObserver(() => { if (lb.open) go(); }).observe(lb, {attributes: true, attributeFilter: ['open']});
         document.getElementById('lightbox-counter') && new MutationObserver(go).observe(document.getElementById('lightbox-counter'), {childList: true, characterData: true, subtree: true}); };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', lbWatch); else lbWatch();
-    document.addEventListener('lcnda:media-changed', e => { if (e.detail?.what !== 'pages') cache.clear(); });
+    document.addEventListener('lcnda:media-changed', e => { if (e.detail?.what === 'pages' || e.detail?.action === 'media_pages_save') return; cache.clear(); }); // nos propres enregistrements (déjà à jour) ne vident pas le cache
 
     ext.mediaPages = {get, save, mount, labelOf, NAMES, clear: () => cache.clear()};
 })();
