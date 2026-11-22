@@ -732,7 +732,7 @@
             try { const lex = await fixLexicon($('[data-tx-lang]').value, $('[data-tx="place"]').value); if (!lex || !dlg.isConnected || area.value !== text) return; fixCount = window.LCNDA_HTRFIX.propose(text, lex, {level: fixLevel(), keep: txKept}).length; fixCountFor = key; } catch (_) { fixCount = 0; }
         }
         function flowState() {
-            const text = area.value, has = !!text.trim(), lines = text.split('\n').filter(l => l.trim()).length;
+            const text = area.value, has = !!findText().trim(), lines = ext.txReview ? ext.txReview.linesOf(text).length : text.split('\n').filter(l => l.trim()).length; // 📑 sans les repères « — page 2 — »
             const fixes = txFixOn ? txFix.length : (fixCount ?? 0), marks = markCount(text), toFix = fixes + marks;
             const people = t.data.people, toLink = people.filter(p => !p.person_id).length, names = found.filter(f => f.type === 'person' && !people.some(p => p.s < f.e && f.s < p.e)).length;
             const st = {read: {done: has, rest: has ? plural(lines, 'ligne') : i18n('À faire')},
