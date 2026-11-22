@@ -183,7 +183,7 @@
         root.querySelector('[data-fix-on]')?.addEventListener('change', e => { lsSet(FIX_KEY, e.target.checked ? '1' : '0'); onChange?.(); });
         root.querySelector('[data-fix-level]')?.addEventListener('change', e => { lsSet(FIX_LEVEL_KEY, e.target.value); onChange?.(); });
     };
-    ext.htrFix = {fixOn, fixLevel, personalLex, fixSettingsHtml, bindFixSettings, lexicon: fixLexicon, KEYS: {FIX_KEY, FIX_LEVEL_KEY, FIX_LEX_KEY}};
+    ext.htrFix = {fixOn, fixLevel, personalLex, fixSettingsHtml, bindFixSettings, lexicon: fixLexicon, addToLexicon, menu: fixMenu, KEYS: {FIX_KEY, FIX_LEVEL_KEY, FIX_LEX_KEY}};
 
     /* ═════════ L'atelier ═════════ */
     async function open(ctx = {}) {
@@ -208,7 +208,7 @@
                     <div class="h-tx-zonebar" data-tx-zonebar hidden></div>
                 </section>
                 <section class="h-tx-right">
-                    <div class="h-tx-tools"><button type="button" data-tx-cmd="ocr" title="${esc(i18n('Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne)'))}">🔎 ${i18n('Lire (imprimé)')}</button><button type="button" data-tx-cmd="htr" title="${esc(i18n('Lire l’écriture à la main : toute la page, ou seulement la zone choisie (▭). Le texte est proposé ligne par ligne, à relire.'))}" data-help="${esc(i18n('La lecture d’une écriture à la main (HTR), sur cet ordinateur : le texte est proposé ligne par ligne à côté de l’image, les mots peu sûrs surlignés. Elle s’installe une fois dans les Réglages. Relis toujours : elle se trompe sur les noms.'))}" data-help-faq="Lire l’acte">✨ ${i18n('Lire l’acte')}</button><button type="button" data-tx-cmd="deep" class="h-tx-deepbtn" title="${esc(i18n('Un modèle « vision » ouvert qui tourne sur ton ordinateur (Ollama) : lit mieux les écritures difficiles, plus lent'))}">🔍 ${i18n('Lecture approfondie (IA)')}</button><span class="h-tx-htrrun" data-tx-htrrun hidden>${window.LCNDA_UI.spinner('', {inline: true})}<button type="button" class="button small secondary" data-tx-cmd="htrstop" title="${esc(i18n('Arrêter la lecture'))}">■ ${i18n('Arrêter')}</button></span>
+                    <div class="h-tx-tools"><button type="button" data-tx-cmd="ocr" title="${esc(i18n('Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne)'))}">🔎 ${i18n('Lire (imprimé)')}</button><button type="button" data-tx-cmd="htr" title="${esc(i18n('Lire l’écriture à la main : toute la page, ou seulement la zone choisie (▭). Le texte est proposé ligne par ligne, à relire.'))}" data-help="${esc(i18n('La lecture d’une écriture à la main (HTR), sur cet ordinateur : le texte est proposé ligne par ligne à côté de l’image, les mots peu sûrs surlignés. Elle s’installe une fois dans les Réglages. Relis toujours : elle se trompe sur les noms.'))}" data-help-faq="Lire l’acte">✨ ${i18n('Lire l’acte')}</button><button type="button" data-tx-cmd="deep" class="h-tx-deepbtn" title="${esc(i18n('Un modèle « vision » ouvert qui tourne sur ton ordinateur (Ollama) : lit mieux les écritures difficiles, plus lent'))}">🔍 ${i18n('Lecture approfondie (IA)')}</button><button type="button" data-tx-cmd="lines" title="${esc(i18n('Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis'))}">▤ ${i18n('Relier les lignes à l’image')}</button><span class="h-tx-htrrun" data-tx-htrrun hidden>${window.LCNDA_UI.spinner('', {inline: true})}<button type="button" class="button small secondary" data-tx-cmd="htrstop" title="${esc(i18n('Arrêter la lecture'))}">■ ${i18n('Arrêter')}</button></span>
                         <select data-tx-lang title="${esc(i18n('Langue du texte : sert à la lecture automatique, et « 📜 Aide à la lecture » s’ouvre sur cette langue'))}">${txLangs().map(([v, l]) => `<option value="${esc(v)}" ${txLang() === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>
                         <button type="button" data-tx-cmd="template" title="${esc(i18n('Un modèle d’acte à compléter'))}">📋 ${i18n('Modèle')}</button><button type="button" data-tx-cmd="aide" title="${esc(i18n('Le latin des registres, les abréviations, les anciennes lettres (ſ, ꝑ…) et des exercices : choisis d’abord un mot dans le texte pour le chercher'))}">📜 ${i18n('Aide à la lecture')}</button><button type="button" data-tx-cmd="fix" title="${esc(i18n('Proposer des corrections pour les mots mal lus (un mot souligné : clique-le pour choisir)'))}">🪄 ${i18n('Corrections')}</button><button type="button" data-tx-cmd="detect" title="${esc(i18n('Repérer les noms, dates, lieux et métiers'))}" data-help="${esc(i18n('Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.'))}">🧭 ${i18n('Repérer')}</button><span class="spacer"></span>
                         <span class="h-tx-extra"><button type="button" data-tx-cmd="found" title="${esc(i18n('L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches'))}">🧭 ${i18n('Ce que l’app a trouvé…')}</button><button type="button" data-tx-cmd="copy">📋 ${i18n('Copier le texte')}</button><label class="ui-toggle h-tx-useenh" title="${esc(i18n('La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine'))}"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}><i></i>${i18n('Lire et exporter l’image améliorée')}</label></span></div>
@@ -608,7 +608,7 @@
         const HTR_MODEL_KEY = 'genealogie-htr-model', UNSURE = .75;
         const htrRunEl = () => $('[data-tx-htrrun]');
         function htrBusy(on, text = '') { const el = htrRunEl(); if (!el) return; el.hidden = !on; if (on) el.querySelector('.ui-spinner > span:last-child').textContent = text; $('[data-tx-cmd="htr"]').disabled = on; }
-        function htrStop(silent = false) { if (!htrJob) return; clearTimeout(htrJob.timer); const id = htrJob.id; htrJob = null; htrBusy(false); if (id) post('htr_read_cancel', {id}).catch(() => {}); if (!silent) status(i18n('Lecture arrêtée')); }
+        function htrStop(silent = false) { if (!htrJob) return; clearTimeout(htrJob.timer); const id = htrJob.id, then = htrJob.then; htrJob = null; then?.(false); htrBusy(false); if (id) post('htr_read_cancel', {id}).catch(() => {}); if (!silent) status(i18n('Lecture arrêtée')); }
         /** la zone choisie (en pixels de l'image), sinon toute la page */
         const htrArea = () => { const z = t.data.zones.find(q => q.id === selZone); return z && z.w > 8 && z.h > 8 ? {x: Math.max(0, Math.round(z.x)), y: Math.max(0, Math.round(z.y)), w: Math.round(z.w), h: Math.round(z.h)} : null; };
         /* ─── A : recadrer sur le texte avant la lecture (heritage-transcribe-acte.js) ─── */
@@ -637,17 +637,18 @@
             const b = await new Promise(r2 => c.toBlob(r2, 'image/png'));
             return new Promise(r2 => { const fr = new FileReader(); fr.onload = () => r2(String(fr.result).split(',')[1] || ''); fr.readAsDataURL(b); });
         }
-        async function runHtr({model = '', zone} = {}) {
-            if (!t.media_id) return toast(i18n('Choisis d’abord l’image de l’acte.'), 'error');
-            if (htrJob) return toast(i18n('Une lecture est déjà en cours.'), 'error');
-            if (A().mediaLimits?.tooBig(imgW, imgH)) return; // 📎 trop de points pour être lue sans saturer la mémoire (le message le dit)
-            let st; try { st = await api('htr_setup_status'); } catch (e) { return toast(e.message, 'error'); }
+        async function runHtr({model = '', zone, then} = {}) { // then(true | false) : seulement le découpage en lignes (▤), sans la fenêtre de relecture
+            const bail = v => { then?.(false); return v; };
+            if (!t.media_id) return bail(toast(i18n('Choisis d’abord l’image de l’acte.'), 'error'));
+            if (htrJob) return bail(toast(i18n('Une lecture est déjà en cours.'), 'error'));
+            if (A().mediaLimits?.tooBig(imgW, imgH)) return bail(); // 📎 trop de points pour être lue sans saturer la mémoire (le message le dit)
+            let st; try { st = await api('htr_setup_status'); } catch (e) { return bail(toast(e.message, 'error')); }
             const installed = (st.models || []).filter(m => m.present);
-            if (!st.ready || !installed.length) return toast(i18n('La lecture d’écriture manuscrite n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) (une seule fois, l’assistant explique tout).'), 'error');
+            if (!st.ready || !installed.length) return bail(), toast(i18n('La lecture d’écriture manuscrite n’est pas encore installée : Réglages → Reconnaissance d’écriture (HTR) (une seule fois, l’assistant explique tout).'), 'error');
             let pick = model; if (!pick) { try { pick = localStorage.getItem(HTR_MODEL_KEY) || ''; } catch (_) {} }
             if (!installed.some(m => m.file === pick)) pick = (installed.find(m => m.recommended) || installed[0]).file;
             let box = zone === undefined ? htrArea() : zone;
-            if (zone === undefined && !box) { box = await pageArea(); if (box === false) return; } // A : capture d'écran → recadrer sur le texte ?
+            if (zone === undefined && !box) { box = await pageArea(); if (box === false) return bail(); } // A : capture d'écran → recadrer sur le texte ?
             htrBusy(true, box && !box.mask && zone !== undefined ? i18n('Lecture de la zone…') : i18n('Lecture de l’acte…')); status('');
             try {
                 const body = {media_id: t.media_id, model_file: pick, language: $('[data-tx-lang]').value};
@@ -660,21 +661,24 @@
                     body.image_b64 = await new Promise(r2 => { const fr = new FileReader(); fr.onload = () => r2(String(fr.result).split(',')[1] || ''); fr.readAsDataURL(b); });
                 }
                 const r = await post('htr_read_start', body);
-                htrJob = {id: r.result.id, t0: Date.now(), timer: 0};
+                htrJob = {id: r.result.id, t0: Date.now(), timer: 0, then};
                 const poll = async () => {
                     if (!htrJob || !dlg.isConnected) return;
-                    let j; try { j = await api('htr_read_job', {id: htrJob.id}); } catch (e) { htrJob = null; htrBusy(false); return toast(e.message, 'error'); }
+                    let j; try { j = await api('htr_read_job', {id: htrJob.id}); } catch (e) { htrJob = null; htrBusy(false); return bail(toast(e.message, 'error')); }
                     if (!htrJob) return;
                     if (j.state === 'running') { htrBusy(true, `${box ? i18n('Lecture de la zone') : i18n('Lecture de l’acte')}… ${j.elapsed} s`); htrJob.timer = setTimeout(poll, 1200); return; }
                     htrJob = null; htrBusy(false);
-                    if (j.state === 'error') return toast(j.error || i18n('La lecture n’a pas abouti.'), 'error');
-                    if (j.state !== 'done') return;
+                    if (j.state === 'error') return bail(toast(j.error || i18n('La lecture n’a pas abouti.'), 'error'));
+                    if (j.state !== 'done') return bail();
+                    const ox = box?.x || 0, oy = box?.y || 0; // ▤ la lecture rapide gardée pour relier plus tard les lignes d'un autre texte
+                    htrCache = {file: t.filename, lines: (j.lines || []).map(l => (Array.isArray(l.bbox) ? {...l, bbox: [l.bbox[0] + ox, l.bbox[1] + oy, l.bbox[2] + ox, l.bbox[3] + oy]} : l))};
+                    if (then) { htrBusy(false); return then(true); }
                     try { localStorage.setItem(HTR_MODEL_KEY, j.model_file || pick); } catch (_) {}
                     if (!(j.lines || []).length) return toast(i18n('Aucune ligne d’écriture trouvée : essaie « 🎚️ Mieux voir » (contraste), ou une zone plus serrée.'), 'error');
                     htrReview(j.lines, box, j.model_file || pick, installed);
                 };
                 htrJob.timer = setTimeout(poll, 700);
-            } catch (e) { htrJob = null; htrBusy(false); toast(e.message || 'Lecture impossible.', 'error'); }
+            } catch (e) { htrJob = null; htrBusy(false); bail(); toast(e.message || 'Lecture impossible.', 'error'); }
         }
         /** Les lignes lues, à côté de leur morceau d'image ; les mots peu sûrs surlignés ; on corrige, puis on met dans le texte */
         async function htrReview(lines, box, modelFile, installed) {
@@ -799,7 +803,61 @@
             let b = box; if (b === undefined) { b = htrArea(); if (!b) { b = await pageArea(); if (b === false) return; } }
             const cur = htrText || area.value.trim();
             ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, getImage: () => areaB64(b, {max: 2200}),
-                onKeep: text => { if (text.trim() === area.value.trim()) return; area.value += (area.value.trim() ? '\n\n' : '') + text.trim() + '\n'; before = area.value; t.body = area.value; touch(); paintMirror(); status(i18n('Texte lu (à relire)')); runDetect(); }});
+                onCompare: out => LG()?.compareExtras(out, {fix: ext.htrFix, lang: $('[data-tx-lang]').value, place: $('[data-tx="place"]').value}), // 🪄 et la case ▤ dans la fenêtre des deux lectures
+                onKeep: (text, from) => { if (text.trim() === area.value.trim()) return; const start = area.value.length + (area.value.trim() ? 2 : 0);
+                    area.value += (area.value.trim() ? '\n\n' : '') + text.trim() + '\n'; before = area.value; t.body = area.value; touch(); paintMirror(); status(i18n('Texte lu (à relire)')); runDetect();
+                    if (LG()?.linkOn()) linkLines({s: start, e: area.value.length, box: b || null, src: from === 'htr' ? 'htr' : 'deep'}); // ▤ une zone par ligne, comme la lecture rapide
+                    if (fixOn()) runFix({quiet: true}); }}); // 🪄 les corrections proposées aussi sur ce texte
+        }
+        /* ─── ▤ Relier les lignes du texte à l'image (calculs : app-lignes-alignement.js) : après la lecture approfondie, ou à la demande ─── */
+        let htrCache = null; // la dernière lecture rapide de cette image : {file, lines} (boîtes en pixels de l'image)
+        const LG = () => window.LCNDA_LIGNES, DOUBT_C = '#8d8d96';
+        /** l'image (gris, améliorée si c'est choisi) découpée sur la zone ; seulement les zones dessinées si box.mask */
+        const cropCanvas = (full, box) => { if (!box) return full; const c = document.createElement('canvas'); c.width = Math.max(1, Math.min(box.w, imgW - box.x)); c.height = Math.max(1, Math.min(box.h, imgH - box.y)); const g = c.getContext('2d');
+            if (box.mask) { g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height); box.mask.forEach(z => g.drawImage(full, z.x, z.y, z.w, z.h, z.x - box.x, z.y - box.y, z.w, z.h)); } else g.drawImage(full, box.x, box.y, c.width, c.height, 0, 0, c.width, c.height); return c; };
+        /** les lignes de l'image : la lecture rapide déjà faite, sinon Kraken (s'il est installé), sinon un découpage simple de l'image */
+        async function lineBands(box) {
+            const inBox = q => !box || (q.x + q.w / 2 >= box.x && q.x + q.w / 2 <= box.x + box.w && q.y + q.h / 2 >= box.y && q.y + q.h / 2 <= box.y + box.h);
+            const cached = () => { if (htrCache?.file !== t.filename) return null; const B = LG().bandsFromHtr(htrCache.lines); B.main = B.main.filter(inBox); B.margin = B.margin.filter(inBox); return B.main.length ? {...B, how: 'htr'} : null; };
+            let B = cached(); if (B) return B;
+            let ready = false; try { const st = await api('htr_setup_status'); ready = !!(st.ready && (st.models || []).some(m => m.present)); } catch (_) {}
+            if (ready && !htrJob && !A().mediaLimits?.tooBig(imgW, imgH)) { status(i18n('Découpage de la page en lignes (lecture rapide)…')); if (await new Promise(res => runHtr({zone: box || null, then: res})) && (B = cached())) return B; }
+            if (!dlg.isConnected) return {main: [], margin: [], how: 'image'};
+            status(i18n('Découpage simple de la page en lignes…'));
+            const c = cropCanvas(await filteredCanvas(), box), G = LG().grayOf(c), seg = LG().segment(G.gray, G.w, G.h), k = 1 / G.k, ox = box?.x || 0, oy = box?.y || 0;
+            return {main: seg.bands.map(q => ({x: q.x * k + ox, y: q.y * k + oy, w: q.w * k, h: q.h * k, ink: q.ink * k})), margin: [], how: 'image'};
+        }
+        /** relie les lignes du texte (de s à e ; tout le texte à la demande) à leurs lignes sur l'image ; ↶ Annuler remet les zones d'avant */
+        async function linkLines({s = 0, e, box, src = 'deep', manual = false} = {}) {
+            if (!LG()) return manual ? toast(i18n('Le découpage en lignes n’est pas chargé.'), 'error') : null;
+            if (!imgW || !t.filename) return manual ? toast(i18n('Choisis d’abord l’image de l’acte.'), 'error') : null;
+            const text0 = area.value; e = e == null ? text0.length : Math.min(e, text0.length);
+            let L0 = LG().textLines(text0, {from: s, to: e, marginTitles: [i18n('Mention en marge :')]});
+            const hand = t.data.zones.filter(z => !z.src && z.e > z.s), byHand = l => hand.some(z => z.s < l.e && l.s < z.e); // une ligne déjà reliée à la main reste comme elle est
+            L0 = {main: L0.main.filter(l => !byHand(l)), margin: L0.margin.filter(l => !byHand(l))};
+            if (!L0.main.length && !L0.margin.length) return manual ? toast(i18n('Pas de ligne de texte à relier.'), 'error') : null;
+            if (box === undefined) { const sz = t.data.zones.find(q => q.id === selZone); box = sz && !sz.src ? htrArea() : null; if (!box) box = (await pageArea({ask: false})) || null; } // une zone dessinée à la main et choisie : seulement elle (pas une zone de ligne)
+            status(i18n('Découpage de la page en lignes…'));
+            let B; try { B = await lineBands(box); } catch (err) { status(''); return toast(err.message || String(err), 'error'); }
+            if (!dlg.isConnected) return null;
+            let shift = 0; // le texte a pu changer pendant le découpage : on retrouve le passage, sinon on s'arrête
+            if (area.value !== text0) { const seg = text0.slice(s, e), at = seg ? area.value.indexOf(seg) : -1; if (at < 0) { status(''); return toast(i18n('Le texte a changé pendant le découpage : « ▤ Relier les lignes à l’image » pour recommencer.'), 'error'); } shift = at - s; }
+            const mv = l => ({...l, s: l.s + shift, e: l.e + shift}), lines = {main: L0.main.map(mv), margin: L0.margin.map(mv)};
+            if (!B.main.length && !B.margin.length) { status(''); return toast(i18n('Aucune ligne d’écriture trouvée : essaie « 🎚️ Mieux voir » (contraste), ou une zone plus serrée.'), 'error'); }
+            const r = LG().link(lines, B), linked = [...lines.main, ...(B.margin.length ? lines.margin : [])];
+            const replaced = z => z.src && linked.some(l => z.s < l.e && l.s < z.e); // les zones d'une lecture sur ces lignes : remplacées
+            const made = r.zones.map(z => ({id: zid(), x: z.x, y: z.y, w: z.w, h: z.h, s: z.s, e: z.e, note: z.doubt ? `❔ ${i18n('Ligne reliée sans certitude : vérifie sur l’image')}` : '', c: z.doubt ? DOUBT_C : '', src}));
+            const prev = cloneZones(); snap(); t.data.zones = [...t.data.zones.filter(z => !replaced(z)), ...made]; touch(); drawZones(); const next = cloneZones();
+            const put = list => () => { snap(); t.data.zones = list.map(z => ({...z})); if (!t.data.zones.some(z => z.id === selZone)) selZone = null; touch(); drawZones(); };
+            const msg = [`▤ ${i18n('Lignes reliées à l’image : {x}', {x: A().plural ? A().plural(made.length, 'zone') : made.length})}`, r.doubt ? i18n('à vérifier (❔) : {n}', {n: r.doubt}) : '', r.missing.length ? i18n('sans zone : {n}', {n: r.missing.length}) : '',
+                B.how === 'htr' ? i18n('d’après la lecture rapide') : i18n('d’après un découpage simple de l’image')].filter(Boolean).join(' · ');
+            status(msg); const note = (A().undoToast || toast)(msg, {undo: put(prev), redo: put(next)});
+            // le texte de toutes ces lignes remplacé ou effacé : le message « ↶ Annuler » n'a plus de sens et s'en va
+            const was = new Map(made.map(m => [m.id, area.value.slice(m.s, m.e)]));
+            const gone = () => { if (!note?.isConnected) { area.removeEventListener('input', gone); return; } if (!t.data.zones.some(z => was.has(z.id) && z.e > z.s && area.value.slice(z.s, z.e) === was.get(z.id))) { note.close?.(); area.removeEventListener('input', gone); } };
+            area.addEventListener('input', gone);
+            dlg.dataset.txLines = JSON.stringify({zones: made.length, doubt: r.doubt, missing: r.missing.length, how: B.how, mode: r.mode}); // pour les essais
+            return r;
         }
         /** le texte écrit autour de l'acte sur une capture d'écran (titre du registre, « 139 / 268 ») : pour préparer la source */
         async function frameText() {
@@ -907,6 +965,7 @@
             if (k === 'detect') return runDetect();
             if (k === 'fix') return runFix();
             if (k === 'deep') return openDeep({});
+            if (k === 'lines') return linkLines({manual: true});
             if (k === 'found') return openFound();
             if (k === 'aide') { const sel = area.value.slice(area.selectionStart, area.selectionEnd).trim().slice(0, 40); return ext.readingAid ? ext.readingAid.open({q: /\n/.test(sel) ? '' : sel, lang: aideLang($('[data-tx-lang]').value)}) : toast(i18n('L’aide à la lecture n’est pas chargée.'), 'error'); } // heritage-lecture-autrefois.js : ouverte sur la langue du texte
             if (k === 'template') { const tp = TEMPLATES[$('[data-tx="kind"]').value]; if (!tp) return toast(i18n('Pas de modèle pour ce genre d’acte.'), 'error'); if (area.value.trim() && !await A().confirmBox(i18n('Le texte déjà écrit est gardé.'), {title: i18n('Ajouter le modèle à la fin du texte ?'), okLabel: i18n('Ajouter le modèle')})) return; area.value += (area.value.trim() ? '\n\n' : '') + tp; area.dispatchEvent(new Event('input')); return; }
@@ -997,7 +1056,7 @@
         const cmdOf = k => () => { const b = document.createElement('button'); b.type = 'button'; b.hidden = true; b.dataset.txCmd = k; dlg.appendChild(b); b.click(); b.remove(); };
         UI.editorMenus?.($('[data-tx-menus]'), {
             Fichier: () => [{icon: '💾', label: i18n('Enregistrer'), shortcut: '⌘S', run: cmdOf('save')}, {icon: '⤓', label: i18n('Exporter (texte, PDF, imprimer)…'), run: cmdOf('export')}, '-', {icon: '🖼️', label: i18n('Image de l’acte…'), run: cmdOf('image')}, {icon: '📋', label: i18n('Copier le texte'), run: cmdOf('copy')}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
-            Édition: () => [{icon: '↶', label: i18n('Annuler'), shortcut: '⌘Z', disabled: !HX?.canUndo(), run: () => undoZones(false)}, {icon: '↷', label: i18n('Rétablir'), shortcut: '⇧⌘Z', disabled: !HX?.canRedo(), run: () => undoZones(true)}, '-', {icon: '📋', label: i18n('Modèle d’acte'), run: cmdOf('template')}, {icon: '🧭', label: i18n('Repérer les noms, dates, lieux'), run: cmdOf('detect')}, {icon: '🔎', label: i18n('Lire (imprimé)'), run: cmdOf('ocr')}, {icon: '✨', label: i18n('Lire l’acte (écriture à la main)'), run: cmdOf('htr')}, {icon: '🔍', label: `${i18n('Lecture approfondie')}…`, run: cmdOf('deep')}, {icon: '🧭', label: i18n('Ce que l’app a trouvé…'), run: cmdOf('found')}],
+            Édition: () => [{icon: '↶', label: i18n('Annuler'), shortcut: '⌘Z', disabled: !HX?.canUndo(), run: () => undoZones(false)}, {icon: '↷', label: i18n('Rétablir'), shortcut: '⇧⌘Z', disabled: !HX?.canRedo(), run: () => undoZones(true)}, '-', {icon: '📋', label: i18n('Modèle d’acte'), run: cmdOf('template')}, {icon: '🧭', label: i18n('Repérer les noms, dates, lieux'), run: cmdOf('detect')}, {icon: '🔎', label: i18n('Lire (imprimé)'), run: cmdOf('ocr')}, {icon: '✨', label: i18n('Lire l’acte (écriture à la main)'), run: cmdOf('htr')}, {icon: '🔍', label: `${i18n('Lecture approfondie')}…`, run: cmdOf('deep')}, {icon: '▤', label: i18n('Relier les lignes à l’image'), run: cmdOf('lines')}, {icon: '🧭', label: i18n('Ce que l’app a trouvé…'), run: cmdOf('found')}],
             Outils: () => [{icon: '✋', label: i18n('Déplacer l’image'), shortcut: 'H', run: () => setTool('pan')}, {icon: '▭', label: i18n('Dessiner une zone'), shortcut: 'Z', run: () => setTool('zone')}, {icon: '🔍', label: 'Loupe', shortcut: 'L', run: cmdOf('loupe')}, '-', {icon: '📜', label: i18n('Aide à la lecture…'), run: cmdOf('aide')}, {icon: '🪙', label: i18n('Convertisseur d’autrefois…'), run: () => ext.autrefois?.open()}],
             Affichage: () => [{icon: '⤢', label: i18n('Ajuster à la fenêtre'), shortcut: '⌘0', run: () => txBar?.zoom.fit()}, {icon: '↔', label: i18n('Toute la largeur (pour lire)'), run: () => imgW && applyFit('width')}, {label: '100 %', shortcut: '⌘1', run: () => txBar?.zoom.actual()}, {icon: '＋', label: 'Zoom avant', shortcut: '⌘+', run: () => txBar?.zoom.in()}, {icon: '−', label: i18n('Zoom arrière'), shortcut: '⌘−', run: () => txBar?.zoom.out()}, '-', {icon: '⟳', label: i18n('Tourner de 90°'), run: cmdOf('rot')}, {icon: '↺', label: i18n('Image d’origine'), run: cmdOf('resetview')}]});
         UI.editorRail?.($('[data-tx-rail]'), {breaks: ['[data-tx-cmd="loupe"]', '[data-tx-cmd="image"]']});

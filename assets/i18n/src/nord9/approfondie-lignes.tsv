@@ -1,0 +1,17 @@
+fr ¦ lb
+# ▤ La lecture approfondie, ligne par ligne : relier les lignes du texte à l’image (app-lignes-alignement.js, heritage-transcribe.js)
+Relier les lignes à l’image ¦ D’Zeilen mam Bild verbannen
+Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis ¦ All Zeil vum Text mat hirer Zeil um Bild verbannen (faarweg Zonen, Klick Zeil ↔ Zon): nom grëndleche Liesen oder op engem Text, deen schonn do ass
+Relier les lignes à l’image (une zone par ligne, comme la lecture rapide) ¦ D’Zeilen mam Bild verbannen (eng Zon pro Zeil, wéi beim séiere Liesen)
+Découpage de la page en lignes… ¦ D’Säit gëtt an Zeilen opgedeelt…
+Découpage de la page en lignes (lecture rapide)… ¦ D’Säit gëtt an Zeilen opgedeelt (séier Liesen)…
+Découpage simple de la page en lignes… ¦ Einfach Opdeelung vun der Säit an Zeilen…
+Le découpage en lignes n’est pas chargé. ¦ D’Opdeelung an Zeilen ass net gelueden.
+Pas de ligne de texte à relier. ¦ Keng Textzeil fir ze verbannen.
+Le texte a changé pendant le découpage : « ▤ Relier les lignes à l’image » pour recommencer. ¦ Den Text huet sech während der Opdeelung geännert: „▤ D’Zeilen mam Bild verbannen“ fir nei unzefänken.
+Ligne reliée sans certitude : vérifie sur l’image ¦ Zeil ouni Gewëssheet verbonnen: kontrolléier se um Bild
+Lignes reliées à l’image : {x} ¦ Mam Bild verbonnen Zeilen: {x}
+à vérifier (❔) : {n} ¦ ze kontrolléieren (❔): {n}
+sans zone : {n} ¦ ouni Zon: {n}
+d’après la lecture rapide ¦ no dem séiere Liesen
+d’après un découpage simple de l’image ¦ no enger einfacher Opdeelung vum Bild

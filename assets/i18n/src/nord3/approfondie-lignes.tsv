@@ -1,0 +1,17 @@
+fr ¦ ro
+# ▤ La lecture approfondie, ligne par ligne : relier les lignes du texte à l’image (app-lignes-alignement.js, heritage-transcribe.js)
+Relier les lignes à l’image ¦ Leagă rândurile de imagine
+Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis ¦ Leagă fiecare rând din text de rândul lui din imagine (zone colorate, clic rând ↔ zonă): după citirea aprofundată sau pe un text deja pus
+Relier les lignes à l’image (une zone par ligne, comme la lecture rapide) ¦ Leagă rândurile de imagine (o zonă pe rând, ca la citirea rapidă)
+Découpage de la page en lignes… ¦ Se împarte pagina în rânduri…
+Découpage de la page en lignes (lecture rapide)… ¦ Se împarte pagina în rânduri (citire rapidă)…
+Découpage simple de la page en lignes… ¦ Împărțire simplă a paginii în rânduri…
+Le découpage en lignes n’est pas chargé. ¦ Împărțirea în rânduri nu este încărcată.
+Pas de ligne de texte à relier. ¦ Niciun rând de text de legat.
+Le texte a changé pendant le découpage : « ▤ Relier les lignes à l’image » pour recommencer. ¦ Textul s-a schimbat în timpul împărțirii: „▤ Leagă rândurile de imagine” pentru a reîncepe.
+Ligne reliée sans certitude : vérifie sur l’image ¦ Rând legat fără siguranță: verifică-l pe imagine
+Lignes reliées à l’image : {x} ¦ Rânduri legate de imagine: {x}
+à vérifier (❔) : {n} ¦ de verificat (❔): {n}
+sans zone : {n} ¦ fără zonă: {n}
+d’après la lecture rapide ¦ după citirea rapidă
+d’après un découpage simple de l’image ¦ după o împărțire simplă a imaginii

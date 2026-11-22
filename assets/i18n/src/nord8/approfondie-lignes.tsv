@@ -1,0 +1,17 @@
+fr ¦ tr
+# ▤ La lecture approfondie, ligne par ligne : relier les lignes du texte à l’image (app-lignes-alignement.js, heritage-transcribe.js)
+Relier les lignes à l’image ¦ Satırları görüntüye bağla
+Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis ¦ Metnin her satırını görüntüdeki satırına bağla (renkli bölgeler, tıkla satır ↔ bölge): ayrıntılı okumadan sonra veya zaten girilmiş bir metinde
+Relier les lignes à l’image (une zone par ligne, comme la lecture rapide) ¦ Satırları görüntüye bağla (satır başına bir bölge, hızlı okumadaki gibi)
+Découpage de la page en lignes… ¦ Sayfa satırlara bölünüyor…
+Découpage de la page en lignes (lecture rapide)… ¦ Sayfa satırlara bölünüyor (hızlı okuma)…
+Découpage simple de la page en lignes… ¦ Sayfanın satırlara basit bölünmesi…
+Le découpage en lignes n’est pas chargé. ¦ Satırlara bölme yüklenmedi.
+Pas de ligne de texte à relier. ¦ Bağlanacak metin satırı yok.
+Le texte a changé pendant le découpage : « ▤ Relier les lignes à l’image » pour recommencer. ¦ Bölme sırasında metin değişti: yeniden başlamak için “▤ Satırları görüntüye bağla”.
+Ligne reliée sans certitude : vérifie sur l’image ¦ Kesin olmadan bağlanan satır: görüntüde kontrol et
+Lignes reliées à l’image : {x} ¦ Görüntüye bağlanan satırlar: {x}
+à vérifier (❔) : {n} ¦ kontrol edilecek (❔): {n}
+sans zone : {n} ¦ bölgesiz: {n}
+d’après la lecture rapide ¦ hızlı okumaya göre
+d’après un découpage simple de l’image ¦ görüntünün basit bölünmesine göre
