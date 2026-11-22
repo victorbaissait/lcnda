@@ -63,7 +63,7 @@ Chaque gros outil : maquette d'abord.
     - ✅ FAIT le 22 novembre (un seul texte) : export .txt avec le nom de chaque page, impression/PDF page par page (titre, image, texte), choix « Sur toutes les pages / Sur la page affichée ». — Export (texte, PDF, imprimer) : ne connaît pas les pages (ni titre de page, ni image de chaque page) ; proposer « cette page / toutes les pages » et un titre par page.
     - Fichier → Image de l'acte / image améliorée : seulement l'image affichée ; dire laquelle et proposer toutes les pages.
     - ✅ FAIT le 22 novembre (un seul texte) : 🪄 la barre des corrections donne leur nombre par page (« Page 2 : 7 »), un clic montre la page. Reste : un texte par page.
-    - 🧭 Repérer et 🧩 Modèle : en mode « un texte par page », vérifier qu'ils travaillent sur la bonne page (ou toutes), et le dire.
+    - ✅ VÉRIFIÉ ET CORRIGÉ le 22 novembre : 🧭 Repérer travaille sur tout le document (chaque information garde sa page) ; 🧩 Modèle allait à la fin de la DERNIÈRE page (un seul texte), il va maintenant à la fin de la page affichée. — 🧭 Repérer et 🧩 Modèle : en mode « un texte par page », vérifier qu'ils travaillent sur la bonne page (ou toutes), et le dire.
     - ✅ FAIT le 22 novembre : chaque page garde ses réglages d'image (data.pageViews, vérifiés côté serveur). — Rotation, miroir, redressement, « Mieux voir » : à vérifier s'ils sont gardés pour chaque page (deux photos n'ont pas le même cadrage) ou partagés ; les garder par page.
     - Frise (Lire 39 lignes / Corriger 11 mots) et avancement : dire si c'est la page ou tout le document (« 39 lignes · 2 pages »).
     - 🕘 Versions, chercher / remplacer : préciser si on cherche dans la page ou dans toutes (choix).

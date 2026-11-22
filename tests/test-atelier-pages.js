@@ -562,6 +562,19 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             r.allH.forEach(h => assert.ok(r.txt.includes(`— ${h} —`), 'le texte exporté nomme la page ' + h + ' : ' + r.txt.slice(0, 200)));
             assert.ok(!/— page \d —/.test(r.txt), 'plus de repère « — page 2 — » sans nom');
         });
+        await t('🧩 Modèle, un seul texte : ajouté à la fin de la page affichée (pas de la dernière page) ; ↶ Annuler', async () => {
+            await p.click(`${D} [data-tx-page="1"]`); await sleep(400);
+            const b0 = (await tx()).body, sg0 = b0.split(/\n— page \d —\n/), k0 = await p.$eval(`${D} [data-tx="kind"]`, e => e.value);
+            await p.selectOption(`${D} [data-tx="kind"]`, 'bapteme').catch(async () => { await p.evaluate(() => { const k = document.querySelector('dialog.h-tx-dlg [data-tx="kind"]'); k.value = 'bapteme'; k.dispatchEvent(new Event('change', {bubbles: true})); }); });
+            await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="template"]').click()); await sleep(300);
+            await p.evaluate(() => { const c = [...document.querySelectorAll('dialog[open]')].find(d => /Ajouter le modèle/.test(d.textContent) && !d.classList.contains('h-tx-dlg')); [...(c?.querySelectorAll('button') || [])].find(b => /Ajouter le modèle/.test(b.textContent))?.click(); }); await sleep(400);
+            const sg = (await tx()).body.split(/\n— page \d —\n/);
+            assert.match(sg[1], /L’an \[année\], le \[jour\] du mois/, 'le modèle dans la page 2'); assert.ok(sg[1].startsWith(sg0[1].replace(/\n+$/, '')), 'le texte de la page 2 reste devant');
+            [0, 2, 3].forEach(i => assert.equal(sg[i], sg0[i], `page ${i + 1} inchangée`));
+            await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-hist="undo"]').click()); await sleep(400);
+            assert.equal((await tx()).body, b0, '↶ Annuler retire le modèle');
+            await p.evaluate(k => { const e = document.querySelector('dialog.h-tx-dlg [data-tx="kind"]'); e.value = k; e.dispatchEvent(new Event('change', {bubbles: true})); }, k0);
+        });
         await t('🔬 toutes les pages : « ■ Arrêter » pendant la page 1 arrête tout, rien n’est ajouté', async () => {
             ollama.delay = 700; const b0 = (await tx()).body, c0 = ollama.chats;
             await deepAll();
