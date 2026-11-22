@@ -201,9 +201,11 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
                 await theme(th); await sleep(150);
                 const over = await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'); return {sw: document.documentElement.scrollWidth, out: [...d.querySelectorAll('.h-tx-top > *, .h-tx-tools > *, [data-tx-bar] > *, .h-tx-editor')].filter(e => { const r = e.getBoundingClientRect(); return r.width && (r.right > 391 || r.left < -1); }).map(e => e.className || e.tagName)}; });
                 assert.ok(over.sw <= 391, 'largeur ' + over.sw);
+                await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-ptab="text"]')?.click()); await sleep(200); // vague 2 : « ✨ Lire ▾ » est dans l’onglet Texte
                 await p.click('dialog.h-tx-dlg [data-tx-cmd="readmenu"]'); await sleep(300);
                 const r = await readPanel(); assert.ok(r.open && r.left >= 0 && r.right <= 390, JSON.stringify(r));
                 await shot(`v1-390-lire${th ? '-sombre' : ''}.png`); await p.keyboard.press('Escape');
+                await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-ptab="image"]')?.click()); await sleep(300); // vague 2 : sur téléphone, « Mieux voir » est dans l’onglet Image
                 await p.click('dialog.h-tx-dlg [data-tx-cmd="better"]'); await sleep(200);
                 const b = await p.evaluate(() => { const r = document.querySelector('dialog.h-tx-dlg [data-tx-panel]').getBoundingClientRect(); return [Math.round(r.left), Math.round(r.right)]; });
                 assert.ok(b[0] >= 0 && b[1] <= 390, 'Mieux voir ' + b); await p.keyboard.press('Escape');

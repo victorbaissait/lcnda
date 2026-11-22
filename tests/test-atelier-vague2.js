@@ -129,6 +129,38 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
             await shot('v2-frise-sombre.png'); await theme(''); await sleep(100);
         });
 
+        /* ─── 2. téléphone : trois onglets ─── */
+        const phoneState = () => p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), vis = el => { if (!el) return false; const r = el.getBoundingClientRect(); return r.width > 0 && r.height > 0 && getComputedStyle(el).visibility !== 'hidden'; };
+            const out = [...d.querySelectorAll('*')].filter(el => !el.closest('svg, .h-tx-stage, [data-tx-readpanel], [data-tx-panel]') && vis(el)).filter(el => { const r = el.getBoundingClientRect(); return r.right > innerWidth + 1 || r.left < -1; }).map(el => (el.className && el.className.baseVal === undefined ? el.className : el.tagName) + ':' + Math.round(el.getBoundingClientRect().right));
+            return {tabs: [...d.querySelectorAll('[data-tx-ptab]')].filter(vis).map(b => b.dataset.txPtab + (b.classList.contains('is-active') ? '*' : '')), stage: vis(d.querySelector('[data-tx-stage]')) ? Math.round(d.querySelector('[data-tx-stage]').getBoundingClientRect().width) : 0,
+                editor: vis(d.querySelector('[data-tx-editor]')), found: vis(d.querySelector('[data-tx-found]')), add: vis(d.querySelector('[data-tx-addbar] [data-tx-cmd="found"]')), kind: vis(d.querySelector('[data-tx="kind"]')), flow: vis(d.querySelector('[data-tx-flow]')),
+                editorTop: Math.round(d.querySelector('[data-tx-editor]').getBoundingClientRect().top), sw: document.documentElement.scrollWidth, out}; });
+        await t('1440 px : pas d’onglets, l’image et le texte côte à côte', async () => { const s = await phoneState(); assert.deepEqual(s.tabs, []); assert.ok(s.stage > 500 && s.editor && s.found); });
+        await t('390 px : trois onglets Image / Texte / Personnes ; Texte au départ, en grand, avec la frise et « ✓ Ajouter » en bas', async () => {
+            await p.setViewportSize({width: 390, height: 844}); await sleep(500);
+            const s = await phoneState();
+            assert.deepEqual(s.tabs, ['image', 'text*', 'people']); assert.equal(s.stage, 0, 'image cachée'); assert.ok(s.editor && s.flow && s.add && !s.found, JSON.stringify(s));
+            await shot("v2-390-texte.png"); assert.ok(s.editorTop < 330, "le texte commence haut : " + s.editorTop); assert.ok(s.sw <= 391, 'largeur ' + s.sw); assert.deepEqual(s.out, []);
+            const lab = await p.textContent(`${D} [data-tx-ptab="people"]`); assert.match(lab, /Personnes\s*\d+/);
+            await shot('v2-390-texte.png');
+        });
+        await t('390 px : l’onglet Image montre l’image en grand (ses zones), l’onglet Personnes les personnes et la fiche de l’acte ; rien ne dépasse, clair et sombre', async () => {
+            for (const th of ['', 'dark']) {
+                await theme(th);
+                await p.click(`${D} [data-tx-ptab="image"]`); await sleep(400);
+                let s = await phoneState(); assert.ok(s.stage > 300 && !s.editor && !s.found, JSON.stringify(s)); assert.deepEqual(s.out, []); assert.ok(s.sw <= 391);
+                assert.equal(await p.evaluate(() => document.querySelectorAll('dialog.h-tx-dlg [data-tx-zones] rect').length), 7);
+                await shot(`v2-390-image${th ? '-sombre' : ''}.png`);
+                await p.keyboard.press('ArrowRight'); await p.keyboard.press('ArrowRight'); await sleep(200);
+                s = await phoneState(); assert.deepEqual(s.tabs, ['image', 'text', 'people*']); assert.ok(s.found && s.kind && s.add && !s.editor, JSON.stringify(s)); assert.deepEqual(s.out, []);
+                await shot(`v2-390-personnes${th ? '-sombre' : ''}.png`);
+                await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-found] [data-tx-goto]')?.click()); await sleep(200);
+                s = await phoneState(); assert.deepEqual(s.tabs, ['image', 'text*', 'people'], '« voir dans le texte » passe à l’onglet Texte'); assert.deepEqual(s.out, []);
+            }
+            await theme(''); await p.setViewportSize({width: 1440, height: 900}); await sleep(400);
+            assert.ok((await phoneState()).stage > 500, 'retour au grand écran : tout revient');
+        });
+
         await t('aucune erreur JavaScript', async () => { assert.deepStrictEqual(errs, []); });
     } finally {
         await browser.close(); proc.kill(); fs.rmSync(tmp, {recursive: true, force: true});

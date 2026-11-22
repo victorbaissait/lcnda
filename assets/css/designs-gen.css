@@ -5500,6 +5500,20 @@
 :root[data-lc-density] .h-tx-pane{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-addbar{gap:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-addbar{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-pcount{padding:0 calc(5px * var(--lc-sp))}
+@media (max-width:700px){
+  :root[data-lc-density] .h-tx-dlg .h-tx-ptabs>button{gap:calc(5px * var(--lc-sp))}
+  :root[data-lc-density] .h-tx-dlg .h-tx-ptabs>button{padding:calc(8px * var(--lc-sp)) calc(4px * var(--lc-sp))}
+  :root[data-lc-density] .h-tx-dlg .h-tx-step{padding:calc(5px * var(--lc-sp)) calc(4px * var(--lc-sp)) calc(3px * var(--lc-sp))}
+  :root[data-lc-density] .h-tx-dlg .h-tx-step{gap:calc(4px * var(--lc-sp))}
+}
+@media (max-width:700px){
+  :root[data-lc-density] .h-tx-dlg .h-tx .h-tx-top{gap:calc(4px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+  :root[data-lc-density] .h-tx-dlg .h-tx .h-tx-top{padding:calc(5px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+  :root[data-lc-density] .h-tx-dlg .h-tx .h-tx-top>.h-tx-menus{gap:calc(2px * var(--lc-sp))}
+  :root[data-lc-density] .h-tx-dlg .h-tx .h-tx-top>.h-tx-menus button{padding-left:calc(5px * var(--lc-sp))}
+  :root[data-lc-density] .h-tx-dlg .h-tx .h-tx-top>.h-tx-menus button{padding-right:calc(5px * var(--lc-sp))}
+}
 /* photomaps.css */
 :root[data-lc-density] .pm-carte{padding:calc(18px * var(--lc-sp)) calc(22px * var(--lc-sp)) calc(28px * var(--lc-sp))}
 :root[data-lc-density] .pm-screen{gap:calc(10px * var(--lc-sp))}

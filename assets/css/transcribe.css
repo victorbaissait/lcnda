@@ -165,3 +165,45 @@
 :root[data-theme="dark"] .h-tx-step:hover{background:#2c3036}
 :root[data-theme="dark"] .h-tx-step.is-active{background:#18233a;border-bottom-color:#5b93ff}
 :root[data-theme="dark"] .h-tx-addbar{background:#18233a;border-top-color:#5b93ff}
+/* ─── 📱 téléphone (décision 4) : trois onglets Image / Texte / Personnes, un seul à la fois, en grand ─── */
+.h-tx-ptabs{display:none}
+.h-tx-pcount:empty{display:none}
+.h-tx-pcount{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#1473e6;color:#fff;font-size:11px}
+.h-tx-ptabs>.is-active .h-tx-pcount{background:#fff;color:#1473e6}
+@media (max-width:700px){
+    .h-tx-dlg .h-tx-ptabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));flex:none;max-width:none;border-width:0 0 2px;margin:0}
+    .h-tx-dlg .h-tx-ptabs>button{display:flex;align-items:center;justify-content:center;gap:5px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:8px 4px}
+    .h-tx-dlg .h-tx .h-tx-main{grid-template-columns:var(--ed-tool) minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr)!important}
+    .h-tx-dlg .h-tx[data-ptab=image] .h-tx-right{display:none!important}
+    .h-tx-dlg .h-tx:not([data-ptab=image]) .h-tx-left,.h-tx-dlg .h-tx:not([data-ptab=image]) .h-tx-main>.h-tx-rail,.h-tx-dlg .h-tx:not([data-ptab=image]) .ed-status{display:none!important}
+    .h-tx-dlg .h-tx:not([data-ptab=image]) .h-tx-main>.h-tx-right{grid-column:1 / -1!important;grid-row:1!important;border-left:0}
+    .h-tx-dlg .h-tx[data-ptab=image] .h-tx-main>.h-tx-left{grid-row:1!important}
+    .h-tx-dlg .h-tx[data-ptab=text] .h-tx-found{display:none}
+    .h-tx-dlg .h-tx[data-ptab=people] :is(.h-tx-flow,.h-tx-chars,.h-tx-editor,.h-tx-fixbar,.h-tx-docnote){display:none!important}
+    .h-tx-dlg .h-tx[data-ptab=people] .h-tx-found{flex:1 1 auto;border-top:0}
+    /* la fiche de l'acte (sorte, date, lieu, source, état) : avec les personnes ; en haut, le titre et les commandes */
+    .h-tx-dlg .h-tx:not([data-ptab=people]) .h-tx-top :is([data-tx=kind],[data-tx=date_text],[data-tx=place],[data-tx=source],[data-tx-state]){display:none}
+    .h-tx-dlg .h-tx .h-tx-top [data-tx-cmd=export]{display:none}
+    .h-tx-dlg .h-tx[data-ptab=people] .h-tx-top :is([data-tx=kind],[data-tx=date_text],[data-tx=place],[data-tx=source]){flex:1 1 40%;max-width:none;min-width:0}
+    .h-tx-dlg .h-tx-steps{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .h-tx-dlg .h-tx-step{padding:5px 4px 3px;gap:4px}
+    .h-tx-dlg .h-tx-step i{width:18px;height:18px}
+}
+:root[data-theme="dark"] .h-tx-ptabs>.is-active .h-tx-pcount{background:#fff;color:#1473e6}
+@media (max-width:700px){
+    /* la barre du haut sur deux lignes : 📜 titre 💾 × ; puis les menus, ↶ ↷ et l’état */
+    .h-tx-dlg .h-tx .h-tx-top{gap:4px 6px;padding:5px 8px}
+    .h-tx-dlg .h-tx .h-tx-top>.h-tx-logo{order:0}
+    .h-tx-dlg .h-tx .h-tx-top>[data-tx=title]{order:1;flex:1 1 120px;min-width:0;max-width:none;font-size:13.5px}
+    .h-tx-dlg .h-tx .h-tx-top>[data-tx-cmd=save]{order:2}
+    .h-tx-dlg .h-tx .h-tx-top>[data-tx-cmd=close]{order:3}
+    .h-tx-dlg .h-tx .h-tx-top>[data-full-toggle]{display:none}
+    .h-tx-dlg .h-tx .h-tx-top>.h-tx-menus{order:4;flex:0 1 auto;min-width:0}
+    .h-tx-dlg .h-tx .h-tx-top>.h-tx-hist{order:5}
+    .h-tx-dlg .h-tx .h-tx-top>.spacer{order:6;flex:1 1 0;min-width:0}
+    .h-tx-dlg .h-tx .h-tx-top>.h-tx-status{order:7;flex:0 1 auto;width:auto;min-width:0}
+    .h-tx-dlg .h-tx[data-ptab=people] .h-tx-top>:is([data-tx=kind],[data-tx=date_text],[data-tx=place],[data-tx=source],[data-tx-state]){order:8}
+    .h-tx-dlg .h-tx .h-tx-top>.h-tx-menus{gap:2px}
+    .h-tx-dlg .h-tx .h-tx-top>.h-tx-menus button{padding-left:5px;padding-right:5px}
+    .h-tx-dlg .h-tx .h-tx-panehint{display:none}
+}
