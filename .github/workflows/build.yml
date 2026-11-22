@@ -57,8 +57,9 @@ jobs:
           notes="release-notes/$T.md"
           if [ ! -f "$notes" ]; then printf 'Installateurs de LCNDA %s — vérifie les empreintes dans SHA256SUMS.txt.\n' "$T" > /tmp/notes.md; notes=/tmp/notes.md; fi
           if gh release list --repo "$R" --limit 100 --json tagName -q '.[].tagName' | grep -qx "$T"; then
-            echo "Brouillon $T déjà présent : description remise à jour"
-            gh release edit "$T" --repo "$R" --notes-file "$notes"
+            echo "Brouillon $T déjà présent : description et commit remis à jour"
+            # un brouillon relancé sur un commit plus récent : son étiquette (créée à la publication) suit ce commit
+            gh release edit "$T" --repo "$R" --target "$SHA" --notes-file "$notes"
           else
             gh release create "$T" --draft --repo "$R" --target "$SHA" --title "LCNDA $T" --notes-file "$notes"
           fi
