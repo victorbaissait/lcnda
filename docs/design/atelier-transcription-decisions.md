@@ -30,3 +30,9 @@ Autres modèles d'IA possibles (tous avec Ollama, sur l'ordinateur) — à teste
 - Granite 3.2 Vision (2B, Apache 2.0, IBM) : très léger, fait pour les documents, ordinateurs modestes.
 - MiniCPM-V (8B) : bon en écriture manuscrite selon ses auteurs.
 Chacun doit être essayé sur les mêmes actes (Qwen3-VL sert de référence) avant d'entrer dans la liste.
+
+### Décision du 22 novembre
+- Idées A, B, C, D, E : toutes retenues.
+- Tous les modèles proposés ci-dessus sont retenus pour essai ; chacun aura, comme Qwen3-VL aujourd'hui, sa présentation avec avantages et inconvénients (taille à télécharger, mémoire conseillée, vitesse, langues, licence).
+- Ajouter un modèle pour les ordinateurs à 64 Go de mémoire. Candidats à essayer : Qwen3-VL 32B (même famille que le modèle conseillé, Apache 2.0, ~21 Go, plus précis mais plus lent) ; Qwen3-VL 30B-A3B (presque aussi précis, bien plus rapide) ; Qwen2.5-VL 72B (~49 Go, le plus gros qui tienne, très lent). Le meilleur des essais devient « Pour les ordinateurs puissants (64 Go) ».
+- L'app propose d'elle-même le modèle qui convient à la mémoire de l'ordinateur.
