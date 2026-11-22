@@ -28,8 +28,8 @@ header('X-Content-Type-Options: nosniff');
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=286">
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=272">
-    <link rel="stylesheet" href="assets/css/transcription-actes.css?v=5">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=274">
+    <link rel="stylesheet" href="assets/css/transcription-actes.css?v=6">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
     <link rel="stylesheet" href="assets/css/heritage-diagram-cartes.css?v=2">
     <link rel="stylesheet" href="assets/css/heritage-diagram-more.css?v=1">
@@ -106,8 +106,8 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
     <link rel="stylesheet" href="assets/css/versions.css?v=1">
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
-    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=33" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=33" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=34" id="lc-frame-css" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=34" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=13">
     <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
     <script>/* 🎨 Designs au choix (app-designs.js) : le style choisi est posé avant le premier dessin, sans clignotement */
@@ -1177,7 +1177,7 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script src="assets/js/app-journal.js?v=2"></script>
 <?= i18n_page_script() ?>
-<script src="assets/js/app-i18n.js?v=81"></script>
+<script src="assets/js/app-i18n.js?v=82"></script>
 <script>window.LCNDA_GENEALOGY = <?= json_encode(GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID) ?>;window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_GLOCK = <?= json_encode(['on' => glock_info()['locked'], 'minutes' => glock_info()['minutes']]) ?>;window.LCNDA_GUEST = <?= json_encode(lan_device() ? ['name' => lan_device()['name']] : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
 <script src="assets/js/app-fond.js?v=9" defer></script>
 <script src="assets/js/app-accord.js?v=1" defer></script>
@@ -1294,7 +1294,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-calendar-more.js?v=6" defer></script>
 <script src="assets/js/heritage-lecture-autrefois.js?v=5" defer></script>
 <script src="assets/js/heritage-links.js?v=24" defer></script>
-<script src="assets/js/heritage-more.js?v=385" defer></script>
+<script src="assets/js/heritage-more.js?v=387" defer></script>
 <script src="assets/js/heritage-controle.js?v=9" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
 <script src="assets/js/heritage-research.js?v=40" defer></script>
@@ -1486,7 +1486,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-transcribe-acte.js?v=8" defer></script>
 <script src="assets/js/heritage-transcribe-trouve.js?v=1" defer></script>
 <script src="assets/js/heritage-transcribe-relecture.js?v=3" defer></script>
-<script src="assets/js/heritage-transcribe.js?v=50" defer></script>
+<script src="assets/js/heritage-transcribe.js?v=51" defer></script>
 <script src="assets/js/heritage-photomaps-time.js?v=2" defer></script>
 <script src="assets/js/heritage-photomaps.js?v=15" defer></script>
 <script src="assets/js/heritage-transcribe-list.js?v=6" defer></script>
@@ -1572,8 +1572,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-premier.js?v=7" defer></script>
 <script src="assets/js/app-visite.js?v=2" defer></script>
 <script src="assets/js/app-a-trier.js?v=1" defer></script>
-<script src="assets/js/app-htr-correction.js?v=1" defer></script>
-<script src="assets/js/app-lignes-alignement.js?v=1" defer></script>
+<script src="assets/js/app-htr-correction.js?v=2" defer></script>
+<script src="assets/js/app-lignes-alignement.js?v=2" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

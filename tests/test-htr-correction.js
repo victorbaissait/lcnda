@@ -7,9 +7,13 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *     les propositions (casse et ponctuation gardées, jamais imposées), le seuil, le lexique personnel ;
  *     LA MESURE sur une vraie lecture Kraken (jugement de rectification, 1873) : bonnes / mauvaises propositions, bornées ;
  *     et des actes justes (personnes et lieux fictifs) : presque rien à proposer ;
+ *     📖 le dictionnaire général du français (assets/dico/fr-mots.txt.gz) : un texte français juste (la lecture approfondie
+ *     d'un registre matricule, 1813) → ZÉRO proposition ; les dates gardent leurs règles (« Vingt-hui » → « huit ») ;
  *  2. un vrai « php -S » : GET htr_lexicon sans vivants ni fiches confidentielles ;
  *  3. dans le navigateur : le panneau des lignes lues (mots soulignés, menu, Garder tel quel, Ajouter au lexique, ✓ Accepter
- *     les sûres, ↶ Annuler, réglages oui / non et prudent / plus), puis le texte de l'Atelier (soulignés, menu, Accepter, Annuler).
+ *     les sûres, ↶ Annuler, réglages oui / non et prudent / plus), puis le texte de l'Atelier (soulignés, menu, Accepter, Annuler) ;
+ *     l'endroit de chaque proposition (fenêtre des deux lectures : survol et clavier → le mot choisi et surligné, la bulle avec
+ *     la ligne ; le choix remplace CE mot, pas le premier pareil ; dans l'Atelier, le clic sur le 2e mot pareil corrige le 2e).
  * Les personnes de la base d'essai sont fictives ; le texte mesuré est celui envoyé par l'utilisateur (son propre acte).
  */
 const assert = require('node:assert/strict');
@@ -88,6 +92,10 @@ function measure(names, level) {
     });
     return { good, bad, sureGood, sureBad, log };
 }
+/* ─── un texte français juste (la lecture approfondie, IA, d'un registre ; capture de l'utilisateur) : RIEN à proposer.
+ *     Avant le dictionnaire général : armées → aimées, ramené → amené, troupes → trouvés, disposition → déposition… ─── */
+const CORRECT_FR = `Aujourd'hui vingt-huit octobre mil huit cent treize, est comparu devant nous Joseph Martinez, né en Espagne, âgé de vingt-huit ans, ayant servi dans les armées de l'Empire Autrichien, ayant été fait prisonnier à la bataille d'Ulm, ramené en France, puis incorporé dans les troupes à la disposition du ministre de la guerre ; lequel, se trouvant libre, nous a remis les items de son inventaire, à défaut de papiers, avec l'intention de s'établir en cette commune, craignant d'être poursuivi ; d'ailleurs son compagnon, le nommé Battant, nous a dit l'avoir senti malade.`;
+const CORRECT_WORDS = ['armées', 'ramené', 'troupes', 'disposition', 'libre', 'items', 'défaut', "l'intention", 'craignant', "d'ailleurs", 'compagnon', 'Battant', 'senti', 'ministre', 'remis', 'papiers', 'prisonnier', "Aujourd'hui"];
 /* ─── des actes justes (personnes et lieux fictifs) : on ne doit presque rien y proposer ─── */
 const RIGHT = [
     `L'an mil huit cent cinquante-deux, le quinze mars, à dix heures du matin, par-devant nous, Jules Vernier, maire et officier de l'état civil de la commune de Villebrune, canton de Montclar, est comparu le sieur Antoine Bessac, âgé de trente-quatre ans, cultivateur, domicilié en cette commune, lequel nous a présenté un enfant du sexe féminin, né hier à quatre heures du soir, de lui déclarant et de Marie Chabrol, son épouse, âgée de vingt-huit ans, sans profession, et auquel il a déclaré vouloir donner les prénoms de Jeanne Rosalie. Lesdites déclaration et présentation faites en présence des sieurs Pierre Lagarde, maréchal-ferrant, et Michel Fabre, propriétaire, et ont, le père et les témoins, signé avec nous le présent acte après qu'il leur en a été donné lecture.`,
@@ -179,6 +187,45 @@ const RIGHT = [
         assert.ok(props <= 3, `${props} propositions sur ${words} mots justes (au plus 3)`); assert.equal(sure, 0);
         const old = 'Le vingt six de may mil sept cent quarante deux a esté baptisé Jean filz legitime de Pierre Martin'; // un vieux registre sans accents
         assert.ok(!F.propose(old, lexB).some(f => f.word === 'legitime'), 'un texte sans accents : on ne propose pas d’en ajouter');
+    });
+    await t('📖 le dictionnaire général du français : compact (fichier statique, licence MIT citée), chargé une fois, livré avec l’app de bureau', () => {
+        const file = path.join(appRoot, 'assets/dico/fr-mots.txt.gz'), size = fs.statSync(file).size;
+        assert.ok(size < 1024 * 1024, `${size} octets (moins de 1 Mo)`);
+        const head = require('node:zlib').gunzipSync(fs.readFileSync(file)).toString('utf8').slice(0, 1500);
+        assert.match(head, /an-array-of-french-words/); assert.match(head, /Licence MIT/); assert.match(head, /Zeke Sikelianos/);
+        assert.ok(lex.dico && lex.dico.size > 300000, `${lex.dico?.size} mots`);
+        for (const w of ['armées', 'ramené', 'troupes', 'disposition', 'compagnon', 'craignant']) assert.ok(F.inDico(lex, w), w);
+        assert.ok(!F.inDico(lex, 'décembe') && !F.inDico(lex, 'Répablique'), 'les mots mal lus n’y sont pas');
+        assert.ok(!F.inDico(lex, 'te') && !F.inDico(lex, 'mie'), 'les petits mots volontairement absents non plus');
+        assert.equal(F.buildLexicon({ lang: 'lat' }).dico, null, 'pas pour le latin');
+        const pkg = JSON.parse(fs.readFileSync(path.join(appRoot, 'package.json'), 'utf8')), filter = pkg.build.extraResources.find(e => e.to === 'php-app').filter;
+        assert.ok(filter.includes('assets/**/*') && !filter.some(f => /^!.*(dico|\.gz)/.test(f)), 'dans l’app de bureau (package.json → extraResources)');
+        assert.ok(!(pkg.dependencies || {})['an-array-of-french-words'], 'pas une dépendance d’exécution');
+        assert.match(fs.readFileSync(path.join(appRoot, 'README.md'), 'utf8'), /an-array-of-french-words[^\n]*MIT/, 'cité dans les composants tiers (README)');
+        assert.ok(fs.existsSync(path.join(appRoot, 'scripts/build-dico-fr.js')), 'le script qui le fabrique');
+    });
+    await t('📖 un texte français juste (lecture approfondie) : ZÉRO proposition ; les mots courants ne sont jamais remplacés', () => {
+        const lexB = F.buildLexicon({ lang: 'fra', names: BASE });
+        const fx = F.propose(CORRECT_FR, lexB); assert.deepEqual(fx.map(f => `${f.word} → ${f.props[0].value}`), []);
+        const plus = F.propose(CORRECT_FR, lexB, { level: 'plus' }).map(f => f.word);
+        assert.deepEqual(plus.filter(w => CORRECT_WORDS.includes(w)), [], '« plus de propositions » non plus');
+        assert.deepEqual(F.propose('Pierre fiance sa fille ; il domicilie ses biens', lexB).map(f => f.word), [], 'pas d’accent « oublié » quand le mot sans accent existe');
+        assert.equal(F.propose('vu la requete présentée', lexB)[0]?.props[0].value, 'requête', 'mais un vrai accent oublié, oui');
+    });
+    await t('📖 les dates gardent leurs règles : « Vingt-hui » → « huit », « mie huit cent » → « mil », « cinquante trais » → « trois »', () => {
+        const p = s => Object.fromEntries(F.propose(s, lex).map(f => [f.word, f.props[0].value]));
+        assert.equal(p('Vingt-hui octobre mil huit cent treize').hui, 'huit');
+        assert.equal(p('décembre mie huit cent soirante treize').mie, 'mil');
+        assert.equal(p('mil huit cent cinquante trais du mois').trais, 'trois');
+        assert.deepEqual(p("Aujourd'hui vingt-huit octobre"), {}, '« Aujourd’hui » : rien');
+        assert.deepEqual(p('il lui a dit trais fois'), {}, 'hors d’une date : un mot du dictionnaire reste');
+    });
+    await t('l’endroit d’une proposition : la ligne et quelques mots autour ; le choix remplace CE mot (pas le premier pareil)', () => {
+        const txt = 'la Répablique\nmil huit cent et la Répablique française', fx = F.propose(txt, lex).filter(f => f.word === 'Répablique');
+        assert.equal(fx.length, 2);
+        const w = F.where(txt, fx[1]); assert.equal(w.line, 2); assert.equal(w.before, '… cent et la'); assert.equal(w.after, 'française');
+        assert.equal(F.applyFix(txt, fx[1], 'République'), 'la Répablique\nmil huit cent et la République française');
+        assert.equal(F.applyFix('xx ' + txt, fx[1], 'République'), 'xx la Répablique\nmil huit cent et la République française', 'le texte a bougé : le mot le plus proche de l’endroit');
     });
     await t('rapide : la page entière en moins d’une seconde', () => {
         const t0 = Date.now(); F.propose(READ, F.buildLexicon({ lang: 'fra', names: BASE })); const ms = Date.now() - t0;
@@ -321,6 +368,13 @@ echo 'ok';`);
                 await shot('htrfix-4-petit.png');
                 await p.setViewportSize({ width: 1440, height: 900 });
             });
+            await t('l’Atelier : un clic sur le 2e mot pareil (souligné violet) corrige le 2e, pas le 1er', async () => {
+                await p.evaluate(() => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); a.value = 'Vu la Répablique, et la Répablique française.'; a.dispatchEvent(new Event('input')); document.querySelector('[data-tx-cmd="fix"]').click(); });
+                await p.waitForFunction(() => document.querySelectorAll('.h-tx-mirror u.h-tx-fix').length === 2, null, { timeout: 10000 });
+                await p.evaluate(() => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); const i = a.value.lastIndexOf('Répablique') + 3; a.focus(); a.setSelectionRange(i, i); a.dispatchEvent(new MouseEvent('click', { bubbles: true, clientX: 900, clientY: 400 })); }); await sleep(150);
+                await p.evaluate(() => [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].find(b => /République/.test(b.textContent)).click()); await sleep(200);
+                assert.equal(await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-body]').value), 'Vu la Répablique, et la République française.');
+            });
             await t('Réglages → Reconnaissance d’écriture (HTR) : l’interrupteur, le seuil, le lexique personnel (vider, ↶ Annuler)', async () => {
                 await p.evaluate(() => { document.querySelectorAll('dialog[open]').forEach(d => d.close()); location.hash = '#maintenance/htr'; });
                 await p.waitForFunction(() => document.querySelector('[data-htr-fixset] [data-fix-on]'), null, { timeout: 15000 });
@@ -333,6 +387,35 @@ echo 'ok';`);
                 await p.evaluate(() => [...document.querySelectorAll('button')].filter(b => b.textContent.trim() === '↶ Annuler' && b.offsetParent).at(-1)?.click()); await sleep(200);
                 assert.equal(await p.evaluate(() => localStorage.getItem('genealogie-htr-lexique')), '["precurcir"]', '↶ Annuler remet le lexique');
                 await shot('htrfix-5-reglages.png');
+            });
+            await t('📖 dans la page : le dictionnaire chargé une fois depuis le fichier statique (servi par le routeur)', async () => {
+                const r = await p.evaluate(async () => { const a = await window.LCNDA_HTRFIX.loadDico(), b = await window.LCNDA_HTRFIX.loadDico(); return { n: a?.size || 0, same: a === b }; });
+                assert.ok(r.n > 300000, `${r.n} mots`); assert.ok(r.same, 'gardé en cache');
+            });
+            await t('fenêtre des deux lectures : chaque proposition montre son endroit (survol, clavier : le mot choisi, surligné, visible ; bulle « … » (ligne n)) ; le choix corrige CE mot', async () => {
+                const lines = Array.from({ length: 14 }, (_, i) => i === 1 ? 'Vu la Répablique et la requête' : i === 12 ? 'au nom de la Répablique française' : 'le tribunal civil de première instance');
+                await p.evaluate(txt => { document.querySelectorAll('dialog[open]').forEach(d => d.close()); const d = document.createElement('dialog'); d.dataset.essaiTxl = '';
+                    d.innerHTML = '<div class="h-txa-cmp"><div class="h-txa-cmp2"></div><textarea data-txa-t="deep" rows="4" style="width:420px;height:90px;font:14px/20px sans-serif"></textarea></div>'; document.body.append(d); d.showModal();
+                    d.querySelector('textarea').value = txt; window.LCNDA_LIGNES.compareExtras(d.querySelector('.h-txa-cmp'), { fix: window.LCNDA_EXT.htrFix, lang: 'fra' }); }, lines.join('\n'));
+                await p.waitForFunction(() => document.querySelectorAll('[data-essai-txl] [data-txl-fx]').length === 2, null, { timeout: 15000 });
+                const info = await p.evaluate(() => [...document.querySelectorAll('[data-essai-txl] [data-txl-fx]')].map(b => ({ t: b.textContent, title: b.title, s: +b.dataset.s, e: +b.dataset.e })));
+                assert.match(info[1].title, /« … nom de la \[Répablique\] française » \(ligne 13\)/, info[1].title); assert.match(info[0].title, /\(ligne 2\)/);
+                const at = sel => p.evaluate(sel => { const d = document.querySelector('[data-essai-txl]'), ta = d.querySelector('textarea'), b = [...d.querySelectorAll('[data-txl-fx]')];
+                    if (sel.over != null) b[sel.over].dispatchEvent(new MouseEvent('mouseover', { bubbles: true })); if (sel.focus != null) b[sel.focus].focus();
+                    const mk = d.querySelector('.h-txl-spot'), r = mk && !mk.hidden ? mk.getBoundingClientRect() : null, tr = ta.getBoundingClientRect();
+                    return { s: ta.selectionStart, e: ta.selectionEnd, top: ta.scrollTop, spot: !!r, inside: !!r && r.top >= tr.top - 1 && r.bottom <= tr.bottom + 1 && r.width > 10 }; }, sel);
+                let r = await at({ over: 1 }); assert.deepEqual([r.s, r.e], [info[1].s, info[1].e], 'survol : le 2e mot choisi'); assert.ok(r.top > 0 && r.spot && r.inside, JSON.stringify(r));
+                await shot('htrfix-6-endroit.png');
+                r = await at({ focus: 0 }); assert.deepEqual([r.s, r.e], [info[0].s, info[0].e], 'clavier : le 1er mot'); assert.ok(r.spot && r.inside, 'surligné et visible ' + JSON.stringify(r));
+                await p.evaluate(() => [...document.querySelectorAll('[data-essai-txl] [data-txl-fx]')][1].click()); await p.waitForSelector('.ui-actmenu .ui-actmenu-i');
+                await p.evaluate(() => [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].find(b => /République/.test(b.textContent)).click()); await sleep(200);
+                const after = (await p.evaluate(() => document.querySelector('[data-essai-txl] textarea').value)).split('\n');
+                assert.equal(after[1], 'Vu la Répablique et la requête', 'le 1er reste'); assert.equal(after[12], 'au nom de la République française', 'le 2e corrigé');
+                // le texte juste de la lecture approfondie : aucune proposition
+                await p.evaluate(txt => { const ta = document.querySelector('[data-essai-txl] textarea'); ta.value = txt; ta.dispatchEvent(new Event('input')); }, CORRECT_FR);
+                await p.waitForFunction(() => /Aucune correction à proposer/.test(document.querySelector('[data-essai-txl] [data-txl-fix]')?.textContent || ''), null, { timeout: 10000 });
+                assert.equal(await p.evaluate(() => document.querySelectorAll('[data-essai-txl] [data-txl-fx]').length), 0);
+                await p.evaluate(() => { const d = document.querySelector('[data-essai-txl]'); d.close(); d.remove(); });
             });
             await t('aucune erreur dans la page', () => assert.deepEqual(errs, []));
         } finally { await browser.close(); }

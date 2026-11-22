@@ -15,6 +15,13 @@
  *  - les noms, prénoms, lieux et métiers de la base (GET htr_lexicon, lib/htr_correction.php : sans vivants ni fiches
  *    confidentielles), le lieu de l'acte ;
  *  - le lexique personnel (« Ajouter au lexique », réglage genealogie-htr-lexique, gardé aussi dans la base).
+ * 📖 Le dictionnaire général du français (assets/dico/fr-mots.txt.gz, ~330 000 mots, an-array-of-french-words, licence MIT ;
+ *    fabriqué par scripts/build-dico-fr.js, chargé à la demande une seule fois : loadDico()) : un mot qui y figure n'est JAMAIS
+ *    remplacé (« armées », « ramené », « troupes », « disposition » sont justes même s'ils ne sont pas dans le lexique des actes).
+ *    Restent permis : les règles des dates en toutes lettres (« Vingt-hui » → « huit », un nombre incomplet) et la correction
+ *    d'une apostrophe mal lue (« Pu'il » → « Qu'il ») ; un accent oublié seulement si la forme sans accent n'est pas un mot.
+ *    Les mots « anciens » des actes restent corrigeables s'ils ne sont pas dans le dictionnaire. Les petits mots volontairement
+ *    absents (« te », « tu », « toi », « mie », « tes », « ton ») ne comptent pas comme des mots du dictionnaire.
  * Pour le latin et l'allemand, un lexique plus petit (LEX_LA, LEX_DE + l'Aide à la lecture) ; les autres langues : seulement
  * les mots de l'Aide à la lecture et de la base.
  *
@@ -23,6 +30,8 @@
  *  - propose(texte, lexique, {level, unsure, sure})  [{s, e, word, props: [{value, cost, why}], sure, kind}]
  *  - applyFix(texte, fix, valeur)     le texte avec ce mot remplacé (même casse, même ponctuation autour)
  *  - knows(lexique, mot)              le mot est-il dans le lexique ?
+ *  - loadDico() / setDico(texte|Set)  le dictionnaire général (navigateur : fetch ; Node : lu tout seul) ; inDico(lexique, mot)
+ *  - where(texte, fix)                l'endroit d'une proposition : {line, before, after} (« … mil huit cent … », ligne 1)
  */
 (function (root, factory) {
     const api = factory(root);
@@ -208,9 +217,43 @@
         achtzig neunzig hundert tausend ersten zweiten dritten alt Alter Bauer Bürger Einwohner wohnhaft hier hiesigen
         `;
     const words = s => String(s).split(/\s+/).map(w => w.trim()).filter(Boolean);
+
+    /* ═════════ 📖 Le dictionnaire général du français (assets/dico/fr-mots.txt.gz) ═════════ */
+    const DICO_PATH = 'assets/dico/fr-mots.txt.gz', DICO_V = '1';
+    /** les petits mots presque jamais écrits dans un acte et qui ressemblent à un mot courant mal lu : pas « du dictionnaire » */
+    const DICO_SKIP = ['te', 'tu', 'toi', 'mie', 'tes', 'ton'];
+    let DICO = null, dicoP = null;
+    /** le texte du fichier (codé par préfixe, voir scripts/build-dico-fr.js) → un Set des mots en minuscules */
+    function parseDico(text) {
+        const set = new Set(); let prev = '';
+        for (const line of String(text).split('\n')) { if (!line || line[0] === '#') continue; const n = line.charCodeAt(0) - 48; if (n < 0 || n > 35) continue; const w = prev.slice(0, n) + line.slice(1); set.add(w); prev = w; }
+        DICO_SKIP.forEach(w => set.delete(w));
+        return set;
+    }
+    function setDico(x) { DICO = x == null ? null : x instanceof Set ? x : parseDico(x); return DICO; }
+    /** Node (essais) : lu tout de suite depuis le fichier */
+    function dicoSync() {
+        if (DICO || typeof window !== 'undefined') return DICO;
+        try { const fs = require('fs'), path = require('path'), zlib = require('zlib'); DICO = parseDico(zlib.gunzipSync(fs.readFileSync(path.join(__dirname, '..', 'dico', 'fr-mots.txt.gz'))).toString('utf8')); } catch (_) { DICO = null; }
+        return DICO;
+    }
+    /** Navigateur : chargé une seule fois, à la demande (≈ 180 Ko) ; si le serveur l'a déjà décompressé, lu tel quel */
+    function loadDico(base = '') {
+        if (DICO) return Promise.resolve(DICO);
+        if (typeof window === 'undefined') return Promise.resolve(dicoSync());
+        if (!dicoP) dicoP = (async () => {
+            const r = await fetch(base + DICO_PATH + '?v=' + DICO_V); if (!r.ok) throw new Error('dico ' + r.status);
+            const buf = new Uint8Array(await r.arrayBuffer()); let text;
+            if (buf[0] === 0x1f && buf[1] === 0x8b) text = await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
+            else text = new TextDecoder().decode(buf);
+            return setDico(text);
+        })().catch(() => { dicoP = null; return null; });
+        return dicoP;
+    }
     /** nombres en toutes lettres (les dates) */
     const NUMW = new Set(words('un une deux trois quatre cinq six sept huit neuf dix onze douze treize quatorze quinze seize vingt vingts trente quarante cinquante soixante septante octante nonante cent cents mil mille').map(norm));
     const UNITS = new Set(words('un deux trois quatre cinq six sept huit neuf dix').map(norm));
+    const TENS = new Set(words('vingt trente quarante cinquante soixante septante octante nonante').map(norm));
     const MONTHS = words('janvier février mars avril mai juin juillet août septembre octobre novembre décembre');
     /** petits mots qui peuvent être dans une date sans être des nombres (« vingt et un », « le », « de ») */
     const NUM_GLUE = new Set(['et', 'le', 'la', 'de', 'du', 'an', 'l', 'mois']);
@@ -296,7 +339,7 @@
      * Le lexique : {common: Map(norm → {form, w}), proper: Map(norm → {form, w}), byLen: Map(longueur → [norm])}.
      * names : {surnames, firstNames, places, trades} (textes ou {value, weight}) ; personal : [mots] ; place : le lieu de l'acte.
      */
-    function buildLexicon({lang = 'fra', names = {}, personal = [], place = ''} = {}) {
+    function buildLexicon({lang = 'fra', names = {}, personal = [], place = '', dico} = {}) {
         const common = new Map(), proper = new Map(), codes = langsOf(lang);
         const addC = (w, wt = 1, only = false) => { w = String(w || '').trim(); if (!w || /[0-9.…()[\]«»]/.test(w)) return; if (/-/.test(w)) w.split('-').forEach(x => { if (x.length >= 2) addC(x, wt, only); }); for (const f of (only ? [w] : forms(w))) { const k = norm(f); if (!k) continue; const o = common.get(k); if (!o) common.set(k, {form: f.toLowerCase(), w: wt, forms: new Set([f.toLowerCase()])}); else { o.forms.add(f.toLowerCase()); if (wt > o.w) o.w = wt; } } };
         /** un nom propre (ou plusieurs : « Saint-Félix-des-Bois » → Saint, Félix, Bois) ; generic : d'une liste générale (prénoms
@@ -319,7 +362,8 @@
         if (codes.includes('fr')) ['te', 'tu', 'toi', 'mie', 'tes', 'ton'].forEach(w => { if (!(personal || []).some(p => norm(p) === w)) common.delete(w); });
         const byLen = new Map(); const put = k => { const n = k.length; if (!byLen.has(n)) byLen.set(n, []); byLen.get(n).push(k); };
         common.forEach((_, k) => put(k)); proper.forEach((_, k) => { if (!common.has(k)) put(k); });
-        return {common, proper, byLen, codes, fr: codes.includes('fr'), size: common.size + proper.size};
+        const D = codes.includes('fr') ? (dico === false ? null : dico instanceof Set ? dico : dicoSync()) : null;
+        return {common, proper, byLen, codes, fr: codes.includes('fr'), size: common.size + proper.size, dico: D};
     }
     /** le mot (sans apostrophe ni trait d'union) est-il dans le lexique ? (avec quelques terminaisons : -s, -x, -e, -es) */
     function knows(lex, w) {
@@ -330,6 +374,9 @@
         for (const end of ['s', 'x', 'e', 'es']) if (k.length > end.length + 2 && k.endsWith(end) && lex.common.has(k.slice(0, -end.length))) return true;
         return false;
     }
+
+    /** le mot est-il un mot du dictionnaire général du français ? (tel quel, accents compris, en minuscules) */
+    function inDico(lex, w) { const D = lex && lex.dico; if (!D) return false; const k = lowAcc(w); return D.has(k) || (k.includes('œ') && D.has(k.replace(/œ/g, 'oe'))); }
 
     /* ═════════ Les propositions ═════════ */
     /** jusqu'où on propose, selon la longueur du mot */
@@ -379,6 +426,7 @@
     function propose(text, lex, o = {}) {
         const level = o.level === 'plus' ? 'plus' : 'prudent', toks = tokenize(String(text || '')), res = new Array(toks.length).fill(null);
         const known = toks.map(tk => knows(lex, tk.t));
+        const dict = toks.map(tk => inDico(lex, tk.t)); // 📖 un mot du dictionnaire : jamais remplacé (sauf les dates)
         const isNum = (i, useRes = true) => { if (i < 0 || i >= toks.length) return false; const r = useRes && res[i]?.props?.[0]; return NUMW.has(norm(r ? r.value : toks[i].t)); };
         const gapOk = (i, j) => !/[.;:!?()\n]/.test(text.slice(toks[Math.min(i, j)].e, toks[Math.max(i, j)].s)); // pas de point ni de ligne entre deux nombres
         const mk = (i, props, kind, sure) => { const tk = toks[i]; const word = text.slice(tk.s, tk.e);
@@ -395,6 +443,7 @@
             let pre = tk.pre ? tk.pre : null, preFix = null;
             if (pre !== null && lex.fr) { const pk = norm(pre); if (!ELISION.includes(pk)) { const c = ELISION.map(e => ({e, c: cost(pk, e, 99, {first: false})})).sort((a, b) => a.c - b.c)[0]; if (c && c.c <= 1) preFix = {value: /^[A-ZÀ-Ý]/.test(pre) ? c.e[0].toUpperCase() + c.e.slice(1) : c.e, c: c.c}; } }
             if (n < 2 || (n < 3 && level !== 'plus') || /\d/.test(w)) return; // deux lettres : trop d'hésitations (« ue » : ne ? de ?)
+            if (dict[i] && !preFix) return; // 📖 un mot français juste (même absent du lexique des actes ; même si Kraken hésite)
             const acc = lex.common.get(k); // un accent oublié ou faux (« requete » → « requête », « conformement » → « conformément »)
             if (accents && acc && n >= 5 && acc.forms.size === 1 && !lex.proper.has(k) && lowAcc(w) !== acc.form && !preFix) { res[i] = mk(i, [{full: full(tk, acc.form, false), cost: 0.05, why: why(w, acc.form)}], 'accent', true); return; }
             if (known[i] && !preFix) {
@@ -406,7 +455,7 @@
             }
             const cap = /^[A-ZÀ-ÝŒ]/.test(w), lim = limitOf(n, level) + (o.sure && o.sure(tk.s, tk.e) ? -0.3 : 0);
             const props = [];
-            if (known[i] && preFix) { props.push({full: preFix.value + (tk.ap || "'") + w, cost: preFix.c, why: i18n('« {x} » lu au lieu de « {y} »', {x: pre, y: preFix.value})}); res[i] = mk(i, props, 'elision', false); return; }
+            if ((known[i] || dict[i]) && preFix) { props.push({full: preFix.value + (tk.ap || "'") + w, cost: preFix.c, why: i18n('« {x} » lu au lieu de « {y} »', {x: pre, y: preFix.value})}); res[i] = mk(i, props, 'elision', false); return; }
             // une majuscule au milieu d'une phrase : plutôt un nom propre ; un mot commun court ne la remplace que de près (« Faure » ≠ « faute »)
             const midCap = cap && !sentenceStart(tk);
             const inName = cap && (/[A-ZÀ-Ý][\p{L}]*-$/u.test(text.slice(Math.max(0, tk.s - 30), tk.s)) || /^-[A-ZÀ-Ý]/u.test(text.slice(tk.e, tk.e + 2))); // « Saint-Amand-Montrond » : un nom composé
@@ -445,10 +494,13 @@
             if ((p2 === 'mil' || p2 === 'mille') && UNITS.has(p1) && k.length <= 6 && (!known[i] || k.length <= 4))
                 props.push({full: caseLike(tk.t, 'cent'), cost: Math.min(0.6, cost(k, 'cent')), why: i18n('Après « mil {x} », on attend « cent »', {x: p1})});
             const strong = prev && next; // un nombre avant ET après : même un vrai mot (« suivante ») peut être un nombre mal lu
-            if (!known[i] || strong) {
+            // 📖 un mot du dictionnaire n'est un nombre mal lu que collé par un trait d'union à un nombre (« Vingt-hui » → « huit »)
+            const glued = (prev && /^-$/.test(text.slice(toks[i - 1].e, tk.s))) || (next && /^-$/.test(text.slice(tk.e, toks[i + 1].s)));
+            if ((!known[i] && (!dict[i] || glued)) || strong) {
                 const lim = limitOf(k.length, level) + (known[i] ? 0.1 : 0.8);
                 nearest(lex, tk.t, {lim, properOk: false, only: NUMW}).forEach(x => props.push({full: caseLike(tk.t, x.value), cost: x.cost, why: i18n('Dans une date en toutes lettres : « {x} »', {x: x.value})}));
-            }
+            } else if (!known[i] && dict[i] && prev && TENS.has(p1)) // « cinquante trais » : après une dizaine, une unité à une lettre près (confusion connue)
+                nearest(lex, tk.t, {lim: 0.35, properOk: false, only: UNITS}).forEach(x => props.push({full: caseLike(tk.t, x.value), cost: x.cost, why: i18n('Dans une date en toutes lettres : « {x} »', {x: x.value})}));
             if (!props.length) return;
             props.sort((a, b) => a.cost - b.cost);
             const before = res[i]?.props || [];
@@ -458,7 +510,7 @@
         });
         // 3. un mois : un nombre avant, une année (« mil ») ou un nombre après
         if (lex.fr) toks.forEach((tk, i) => {
-            const k = norm(tk.t); if (known[i] || res[i]?.kind === 'number' || k.length < 4) return;
+            const k = norm(tk.t); if (known[i] || dict[i] || res[i]?.kind === 'number' || k.length < 4) return;
             const prev = i > 0 && (isNum(i - 1) || /\d\s*$/.test(text.slice(0, tk.s))), next = i + 1 < toks.length && (isNum(i + 1) || /^\s*\d/.test(text.slice(tk.e)));
             if (!prev || !next) return;
             const near = nearest(lex, tk.t, {lim: limitOf(k.length, level) + 0.5, properOk: false, only: new Set(MONTHS.map(norm))});
@@ -470,9 +522,24 @@
         return res.filter(f => f && !(o.keep && o.keep.has && o.keep.has(f.word)));
     }
     /** le texte avec la proposition mise à la place du mot (la ponctuation et les espaces autour ne bougent pas) */
-    function applyFix(text, fix, value) { return text.slice(0, fix.s) + value + text.slice(fix.e); }
+    function applyFix(text, fix, value) {
+        let s = fix.s, e = fix.e; const t = String(text);
+        if (fix.word != null && t.slice(s, e) !== fix.word) { // le texte a bougé : l'occurrence du mot la plus proche de cet endroit
+            let best = -1; for (let i = t.indexOf(fix.word); i >= 0; i = t.indexOf(fix.word, i + 1)) if (best < 0 || Math.abs(i - fix.s) < Math.abs(best - fix.s)) best = i;
+            if (best < 0) return t; s = best; e = best + fix.word.length;
+        }
+        return t.slice(0, s) + value + t.slice(e);
+    }
     /** toutes les propositions « sûres » d'un coup (de la fin vers le début, pour garder les positions) */
     function applySure(text, fixes) { let t = String(text); [...fixes].filter(f => f.sure).sort((a, b) => b.s - a.s).forEach(f => { t = applyFix(t, f, f.props[0].value); }); return t; }
 
-    return {norm, cost, why, buildLexicon, knows, propose, tokenize, applyFix, applySure, limitOf, langsOf, LEX_FR, LEX_LA, LEX_DE, NUMW, EXTRA};
+    /** l'endroit d'une proposition dans le texte : la ligne (à partir de 1) et quelques mots avant et après */
+    function where(text, fix, n = 3) {
+        const t = String(text || ''), line = t.slice(0, fix.s).split('\n').length;
+        const ls = t.lastIndexOf('\n', fix.s - 1) + 1, le0 = t.indexOf('\n', fix.e), le = le0 < 0 ? t.length : le0;
+        const bw = t.slice(ls, fix.s).split(/\s+/).filter(Boolean), aw = t.slice(fix.e, le).split(/\s+/).filter(Boolean);
+        const before = (bw.length > n ? '… ' : '') + bw.slice(-n).join(' '), after = aw.slice(0, n).join(' ') + (aw.length > n ? ' …' : '');
+        return {line, before, after, word: t.slice(fix.s, fix.e)};
+    }
+    return {norm, cost, why, buildLexicon, knows, inDico, loadDico, setDico, where, propose, tokenize, applyFix, applySure, limitOf, langsOf, LEX_FR, LEX_LA, LEX_DE, NUMW, EXTRA};
 });

@@ -32,3 +32,4 @@ Deux mots collés ¦ Bitişik yazılmış iki sözcük
 Après « mil {x} », on attend « cent » ¦ “mil {x}” sonrasında “cent” beklenir
 Dans une date en toutes lettres : « {x} » ¦ Yazıyla yazılmış bir tarihte: “{x}”
 Un mois, dans une date ¦ Bir tarihte ay
+À cet endroit : « {where} » (ligne {n}) ¦ Bu yerde: “{where}” ({n}. satır)

@@ -288,6 +288,42 @@
         return {gray, w, h, k};
     }
 
+    /* ═════════ 🪄 où est une correction dans une zone de texte (survol, clavier) ═════════ */
+    /** la boîte du texte [s, e) dans la zone de texte, en pixels depuis le haut du contenu (un double caché, mêmes styles) */
+    function wordBox(ta, s, e) {
+        const cs = getComputedStyle(ta), m = document.createElement('div'), px = v => parseFloat(v) || 0;
+        ['fontFamily', 'fontSize', 'fontWeight', 'fontStyle', 'letterSpacing', 'lineHeight', 'textTransform', 'wordSpacing', 'textIndent', 'tabSize', 'wordBreak', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'].forEach(k => { m.style[k] = cs[k]; });
+        Object.assign(m.style, {position: 'absolute', visibility: 'hidden', top: '0', left: '-99999px', whiteSpace: 'pre-wrap', overflowWrap: 'break-word', boxSizing: 'content-box', border: '0', width: Math.max(10, ta.clientWidth - px(cs.paddingLeft) - px(cs.paddingRight)) + 'px'});
+        const v = ta.value, sp = document.createElement('span'); sp.textContent = v.slice(s, e) || '.';
+        m.append(document.createTextNode(v.slice(0, s)), sp, document.createTextNode(v.slice(e) + ' '));
+        document.body.append(m); const r = {top: sp.offsetTop, left: sp.offsetLeft, w: sp.offsetWidth, h: sp.offsetHeight}; m.remove();
+        return r;
+    }
+    /**
+     * Montre l'endroit d'une proposition : le mot choisi dans la zone de texte (setSelectionRange, sans lui prendre le clavier),
+     * la zone défilée pour qu'il soit visible, et un surlignage posé dessus (.h-txl-spot). spot(ta, null) l'enlève.
+     */
+    function spot(ta, fx) {
+        const host = ta?.parentElement; if (!host) return;
+        let mk = host.querySelector(':scope > .h-txl-spot');
+        if (!fx) { if (mk) mk.hidden = true; return; }
+        try { ta.setSelectionRange(fx.s, fx.e); } catch (_) {}
+        const b = wordBox(ta, fx.s, fx.e);
+        if (b.top < ta.scrollTop || b.top + b.h > ta.scrollTop + ta.clientHeight) ta.scrollTop = Math.max(0, b.top - (ta.clientHeight - b.h) / 2);
+        if (!mk) { mk = document.createElement('span'); mk.className = 'h-txl-spot'; mk.setAttribute('aria-hidden', 'true'); host.append(mk); }
+        if (getComputedStyle(host).position === 'static') host.style.position = 'relative';
+        const hr = host.getBoundingClientRect(), tr = ta.getBoundingClientRect(), cs = getComputedStyle(ta);
+        const top = tr.top - hr.top + host.scrollTop + (parseFloat(cs.borderTopWidth) || 0) + b.top - ta.scrollTop, left = tr.left - hr.left + host.scrollLeft + (parseFloat(cs.borderLeftWidth) || 0) + b.left - ta.scrollLeft;
+        Object.assign(mk.style, {top: top + 'px', left: left + 'px', width: b.w + 'px', height: b.h + 'px'}); mk.hidden = false;
+        mk.dataset.s = fx.s; mk.dataset.e = fx.e;
+    }
+    /** la bulle d'une proposition : ce qu'on propose, et où (« … mil huit cent … » (ligne 1)) */
+    function spotTitle(text, fx) {
+        const FX = root.LCNDA_HTRFIX, w = FX?.where ? FX.where(text, fx) : null;
+        const head = i18n('Correction proposée : « {x} » — clique pour choisir', {x: fx.props[0].value});
+        return w ? head + '\n' + i18n('À cet endroit : « {where} » (ligne {n})', {where: [w.before, '[' + w.word + ']', w.after].filter(Boolean).join(' '), n: w.line}) : head;
+    }
+
     /* ═════════ 🪄 dans la fenêtre des deux lectures (heritage-transcribe-acte.js compare → o.onCompare) ═════════ */
     const LINK_KEY = 'genealogie-tx-deep-lines';
     const linkOn = () => { try { return localStorage.getItem(LINK_KEY) !== '0'; } catch (_) { return true; } };
@@ -320,11 +356,18 @@
         function paint() {
             const sure = fixes.filter(f => f.sure).length;
             bar.innerHTML = `<span class="h-htr-fixn">🪄 ${H.fixOn() ? (fixes.length ? esc(plural(fixes.length, 'correction proposée', 'corrections proposées')) : esc(i18n('Aucune correction à proposer'))) : esc(i18n('Corrections proposées : non'))}</span>
-                ${fixes.slice(0, 40).map((f, i) => `<button type="button" class="button small ${f.sure ? '' : 'secondary'}" data-txl-fx="${i}" title="${esc(i18n('Correction proposée : « {x} » — clique pour choisir', {x: f.props[0].value}))}">${esc(f.word)} → ${esc(f.props[0].value)}</button>`).join('')}
+                ${fixes.slice(0, 40).map((f, i) => `<button type="button" class="button small ${f.sure ? '' : 'secondary'}" data-txl-fx="${i}" data-s="${f.s}" data-e="${f.e}" title="${esc(spotTitle(ta.value, f))}">${esc(f.word)} → ${esc(f.props[0].value)}</button>`).join('')}
                 ${sure ? `<button type="button" class="button small" data-txl-accept>✓ ${esc(sure > 1 ? i18n('Accepter les {n} propositions sûres', {n: sure}) : i18n('Accepter la proposition sûre'))}</button>` : ''}
                 <button type="button" class="button small secondary" data-txl-undo ${undo.length ? '' : 'disabled'}>↶ ${esc(i18n('Annuler'))}</button><span class="spacer"></span>${H.fixSettingsHtml()}`;
-            H.bindFixSettings(bar, run);
+            H.bindFixSettings(bar, run); spot(ta, null);
         }
+        // 🪄 où est la correction : au survol et au clavier, le mot est choisi et surligné dans le texte (la zone défile jusqu'à lui)
+        const fxOf = b => (b && b.dataset.txlFx != null ? fixes[Number(b.dataset.txlFx)] : null);
+        const show = e => { const fx = fxOf(e.target.closest?.('[data-txl-fx]')); if (fx) spot(ta, fx); };
+        const hide = e => { if (!e.relatedTarget?.closest?.('[data-txl-fx]')) spot(ta, null); };
+        bar.addEventListener('mouseover', show); bar.addEventListener('focusin', show);
+        bar.addEventListener('mouseout', hide); bar.addEventListener('focusout', hide);
+        ta.addEventListener('scroll', () => spot(ta, null));
         function setText(next, label) {
             const old = ta.value; if (next === old) return;
             undo.push(old); ta.value = next; run();
@@ -335,14 +378,14 @@
             addLex: () => H.addToLexicon?.(fx.word, () => run())});
         bar.addEventListener('click', e => {
             const b = e.target.closest('button'); if (!b) return;
-            if (b.dataset.txlFx != null) { const fx = fixes[Number(b.dataset.txlFx)]; if (fx) menu(b, fx); return; }
+            if (b.dataset.txlFx != null) { const fx = fixes[Number(b.dataset.txlFx)]; if (fx) { spot(ta, fx); menu(b, fx); } return; } // le menu ; « ✓ » remplace le mot à CET endroit (fx.s, fx.e)
             if (b.matches('[data-txl-accept]')) { const s = fixes.filter(f => f.sure); if (s.length) setText(FX.applySure(ta.value, s), plural(s.length, 'proposition sûre acceptée', 'propositions sûres acceptées')); return; }
             if (b.matches('[data-txl-undo]')) { const old = undo.pop(); if (old != null) { ta.value = old; run(); } }
         });
-        ta.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(run, 700); });
+        ta.addEventListener('input', () => { spot(ta, null); clearTimeout(tm); tm = setTimeout(run, 700); });
         ta.addEventListener('click', e => { if (ta.selectionStart !== ta.selectionEnd) return; const c = ta.selectionStart, fx = fixes.find(f => c >= f.s && c <= f.e); if (fx) menu({x: e.clientX, y: e.clientY}, fx); });
         run();
     }
 
-    return {norm, lev, textSim, textLines, bandsFromHtr, otsu, segment, align, splitPoint, link, grayOf, compareExtras, linkOn, LINK_KEY};
+    return {norm, lev, textSim, textLines, bandsFromHtr, otsu, segment, align, splitPoint, link, grayOf, compareExtras, linkOn, LINK_KEY, spot, spotTitle, wordBox};
 });

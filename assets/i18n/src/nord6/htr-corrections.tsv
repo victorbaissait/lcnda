@@ -32,3 +32,4 @@ Deux mots collés ¦ Du suklijuoti žodžiai ¦ Divi salipuši vārdi ¦ Kaks ko
 Après « mil {x} », on attend « cent » ¦ Po „mil {x}“ laukiama „cent“ ¦ Pēc „mil {x}“ gaidāms „cent“ ¦ Pärast „mil {x}“ oodatakse „cent“
 Dans une date en toutes lettres : « {x} » ¦ Žodžiais parašytoje datoje: „{x}“ ¦ Ar vārdiem rakstītā datumā: „{x}“ ¦ Sõnadega kirjutatud kuupäevas: „{x}“
 Un mois, dans une date ¦ Mėnuo datoje ¦ Mēnesis datumā ¦ Kuu kuupäevas
+À cet endroit : « {where} » (ligne {n}) ¦ Šioje vietoje: „{where}“ ({n} eilutė) ¦ Šajā vietā: “{where}” ({n}. rinda) ¦ Selles kohas: „{where}” ({n}. rida)
