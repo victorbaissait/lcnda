@@ -390,6 +390,7 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             await p.waitForFunction(() => document.querySelector('dialog.h-tx-dlg [data-tx-trouve] [data-tf-card]'), null, {timeout: 10000});
         });
         await t('un texte par page : « ＋ Ajouter à une fiche… » sur une information de la page 2 met la page 2 (et son image) dans la source', async () => {
+            await p.evaluate(() => document.querySelectorAll('.ui-toast').forEach(x => { x.dataset.seen = '1'; }));
             const card = p.locator(`${D} [data-tx-trouve] [data-tf-card]`, {hasText: 'Louis VERNIAL'}).first();
             await card.locator('.h-tf-fields li', {hasText: 'Âge'}).locator('[data-tf-add]').click();
             await p.waitForSelector('dialog[open] [data-tf-prev]'); await sleep(300);
@@ -397,7 +398,8 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             await p.evaluate(() => { const d = [...document.querySelectorAll('dialog[open]')].at(-1); const fld = d.querySelector('.pk[data-picker]'); (window.LCNDA_PICKER?.pickerSet || window.LCNDA_APP.pickerSet)(fld, 2); });
             await sleep(200);
             await p.evaluate(() => { const d = [...document.querySelectorAll('dialog[open]')].at(-1); [...d.querySelectorAll('button')].find(b => /Ajouter$/.test(b.textContent.trim()) && b.type === 'submit' || /＋ Ajouter$/.test(b.textContent.trim()))?.click(); });
-            await p.waitForFunction(() => [...document.querySelectorAll('.ui-toast')].filter(x => /Ajouté à la fiche/.test(x.textContent)).length >= 2, null, {timeout: 10000});
+            // la bulle de CET ajout (celle de l'essai d'avant a pu disparaître quand l'ordinateur est lent) : les bulles déjà là sont marquées avant
+            await p.waitForFunction(() => [...document.querySelectorAll('.ui-toast')].some(x => !x.dataset.seen && /Ajouté à la fiche/.test(x.textContent)), null, {timeout: 10000});
             const sl = JSON.parse(php(`require 'lib/bootstrap.php'; echo json_encode(db()->query("SELECT * FROM source_links ORDER BY id DESC LIMIT 1")->fetch(PDO::FETCH_ASSOC));`).stdout || 'null');
             assert.match(sl.page, /(^|, )page 2 \(verso\)$/, 'la page dans la source : ' + JSON.stringify(sl)); assert.match(sl.note, /^Page 2, ligne 3 : « .*trente ans/);
             await closeAtelier(); await p.evaluate(() => localStorage.removeItem('genealogie-transcribe-pages-mode'));
