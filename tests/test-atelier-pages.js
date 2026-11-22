@@ -164,7 +164,8 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             assert.equal(s.cur, 1); assert.deepEqual([...s.ids].sort(), [1, 2, 3, 4]);
             await p.evaluate(() => document.getElementById('lightbox').close()); await sleep(300);
             await p.evaluate(() => window.LCNDA_APP.openLightbox([{id: 6, title: 'Carte de Lucien BARDOUX', filename: 'page6.png', media_type: 'image'}], 0, false));
-            await p.waitForSelector('#lightbox-pages [data-mp-add]', {timeout: 10000});
+            // attendre que le bloc soit celui de la nouvelle image (sans page) : le bouton « ＋ » de l'image d'avant (4 pages) existe encore un instant
+            await p.waitForFunction(() => document.querySelector('#lightbox-pages [data-mp-add]') && !document.querySelector('#lightbox-pages [data-mp-id]'), null, {timeout: 10000});
             await p.click('#lightbox-pages [data-mp-add]'); await p.waitForSelector('dialog.mpk-dialog[open] .mpk-tile'); await sleep(300);
             await p.locator('dialog.mpk-dialog[open] .mpk-tile', {hasText: 'Naissance de Paul'}).first().click(); await p.click('dialog.mpk-dialog[open] [data-mp="ok"]');
             await p.waitForFunction(() => document.querySelectorAll('#lightbox-pages [data-mp-id]').length === 2, null, {timeout: 10000, polling: 200});
