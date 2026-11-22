@@ -363,7 +363,13 @@
     document.addEventListener('click', async e => {
         const page = e.target.closest?.('#workspace [data-ong-page]'); if (!page || A().state?.module !== 'documents') return;
         const b = e.target.closest('button, a'); if (!b) return;
-        const d = cache.get(cur);
+        let d = cache.get(cur);
+        // la page affichée peut venir d'avant un vidage du cache (ouverture de l'app, média changé ailleurs) : on relit le document au lieu de ne rien faire
+        if (!d && !b.matches('[data-ong-doc], [data-ong-back], [data-ong-medias], [data-ong-import]')) {
+            const id = Number(page.dataset.ongId) || cur;
+            if (id) { try { d = (await A().api('onglets', {op: 'document', id})).document; if (d) { cache.set(id, d); if (!cur) cur = id; } } catch (_) {} }
+            if (!d) return A().toast(T('Ce document n’a pas pu être relu : réessaie dans un instant.'), 'error');
+        }
         if (b.matches('[data-ong-doc]')) { e.preventDefault(); return select(Number(b.dataset.ongDoc)); }
         if (b.matches('[data-ong-back]')) { cur = 0; writePref({cur: 0}); history.pushState(null, '', '#documents'); document.querySelectorAll('#sidebar-content [data-ong-doc].is-active').forEach(x => x.classList.remove('is-active')); render(); if (matchMedia('(max-width: 850px)').matches) document.getElementById('sidebar')?.scrollIntoView({block: 'start'}); return; }
         if (b.matches('[data-ong-medias]')) { if (A().state) A().state.listType = 'media'; return A().setModule('listes'); }

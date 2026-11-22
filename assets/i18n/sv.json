@@ -12348,6 +12348,7 @@
  "Ce document n’a pas de fichier.": "Det här dokumentet har ingen fil.",
  "Ce document n’a pas encore de champ de fusion (Insertion → « 📨 Champ de fusion »). Insérer d’abord une petite fiche d’identité à l’endroit du curseur ?": "Dokumentet har inget kopplingsfält än (Infoga → ”📨 Kopplingsfält”). Infoga först ett litet identitetskort vid markören?",
  "Ce document n’a pas encore de transcription.": "Det här dokumentet har ingen transkription ännu.",
+ "Ce document n’a pas pu être relu : réessaie dans un instant.": "Det gick inte att läsa in dokumentet igen: försök igen om en stund.",
  "Ce domino ne va sur aucun bout de la chaîne.": "Brickan passar inte i någon ände av kedjan.",
  "Ce domino va des deux côtés : touche ◀ ou ▶ sur la chaîne.": "Brickan passar på båda sidor: tryck på ◀ eller ▶ vid kedjan.",
  "Ce dossier a déjà {n} lignes : ouvre-en un autre.": "Mappen har redan {n} rader: öppna en annan.",

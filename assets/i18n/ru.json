@@ -12610,6 +12610,7 @@
  "Ce document n’a pas de fichier.": "У этого документа нет файла.",
  "Ce document n’a pas encore de champ de fusion (Insertion → « 📨 Champ de fusion »). Insérer d’abord une petite fiche d’identité à l’endroit du curseur ?": "В этом документе ещё нет полей слияния (Вставка → «📨 Поле слияния»). Сначала вставить небольшую карточку личности в место курсора?",
  "Ce document n’a pas encore de transcription.": "У этого документа пока нет расшифровки.",
+ "Ce document n’a pas pu être relu : réessaie dans un instant.": "Не удалось перечитать этот документ: попробуй снова через мгновение.",
  "Ce domino ne va sur aucun bout de la chaîne.": "Эта костяшка не подходит ни к одному концу цепочки.",
  "Ce domino va des deux côtés : touche ◀ ou ▶ sur la chaîne.": "Эта костяшка подходит к обоим концам: коснись ◀ или ▶ на цепочке.",
  "Ce dossier a déjà {n} lignes : ouvre-en un autre.": "В этой папке уже есть строки ({n}): открой другую.",

@@ -12348,6 +12348,7 @@
  "Ce document n’a pas de fichier.": "Sellel dokumendil pole faili.",
  "Ce document n’a pas encore de champ de fusion (Insertion → « 📨 Champ de fusion »). Insérer d’abord une petite fiche d’identité à l’endroit du curseur ?": "Selles dokumendis pole veel ühendusvälju (Lisamine → „📨 Ühendusväli“). Kas lisada kõigepealt kursori kohale väike isikukaart?",
  "Ce document n’a pas encore de transcription.": "Sellel dokumendil pole veel ümberkirja.",
+ "Ce document n’a pas pu être relu : réessaie dans un instant.": "Seda dokumenti ei õnnestunud uuesti lugeda: proovi hetke pärast.",
  "Ce domino ne va sur aucun bout de la chaîne.": "See kivi ei sobi kummassegi keti otsa.",
  "Ce domino va des deux côtés : touche ◀ ou ▶ sur la chaîne.": "See kivi sobib mõlemale poole: puuduta ketil ◀ või ▶.",
  "Ce dossier a déjà {n} lignes : ouvre-en un autre.": "Selles kaustas on juba ridu: {n}. Ava teine.",

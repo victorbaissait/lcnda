@@ -101,4 +101,6 @@
 .h-tf .h-tf-fields .icon-button,.h-tf .h-tf-item .icon-button{width:26px;height:26px;min-width:0;min-height:0;padding:0;border:1px solid transparent;background:none;border-radius:6px;font-size:13px;line-height:1}
 .h-tf .h-tf-fields .icon-button:hover,.h-tf .h-tf-item .icon-button:hover{border-color:#c9ced8;background:#f3f5f8}
 .h-tf .h-tf-more{width:28px;height:28px;min-width:0;min-height:0;padding:0}
-.h-tx-zop{display:flex;align-items:center;gap:6px;padding:2px 10px;font-size:12px;color:#5b6170;background:#fafafa;border-bottom:1px solid #e3e3e8}.h-tx-zop input{width:130px;margin:0}:root[data-theme="dark"] .h-tx-zop{background:#1d2025;color:#a9aebb;border-bottom-color:#33363d}
+/* « Cadres » (opacité des zones) : sur la ligne de la barre de l'image quand il y a la place, sinon à la ligne */
+.h-tx-barwrap{display:flex;flex-wrap:wrap;align-items:center;background:var(--card-bg,#fff)}.h-tx-barwrap>:first-child{flex:0 1 auto;width:auto!important;min-width:0;border-bottom:0!important}
+.h-tx-zop{display:flex;align-items:center;gap:6px;padding:2px 10px;font-size:13px;white-space:nowrap}.h-tx-zop input{width:110px;margin:0}

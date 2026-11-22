@@ -12610,6 +12610,7 @@
  "Ce document n’a pas de fichier.": "Tento dokument nemá soubor.",
  "Ce document n’a pas encore de champ de fusion (Insertion → « 📨 Champ de fusion »). Insérer d’abord une petite fiche d’identité à l’endroit du curseur ?": "Tento dokument zatím nemá žádné slučovací pole (Vložit → „📨 Slučovací pole“). Vložit nejdřív na místo kurzoru malou identifikační kartu?",
  "Ce document n’a pas encore de transcription.": "Tento dokument zatím nemá přepis.",
+ "Ce document n’a pas pu être relu : réessaie dans un instant.": "Tento dokument se nepodařilo znovu načíst: zkus to za chvíli.",
  "Ce domino ne va sur aucun bout de la chaîne.": "Tato kostka se nehodí na žádný konec řady.",
  "Ce domino va des deux côtés : touche ◀ ou ▶ sur la chaîne.": "Tato kostka se hodí na obě strany: ťukni na ◀ nebo ▶ u řady.",
  "Ce dossier a déjà {n} lignes : ouvre-en un autre.": "Tato složka má už {n} řádků: otevři jinou.",

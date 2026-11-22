@@ -12479,6 +12479,7 @@
  "Ce document n’a pas de fichier.": "Este documento no tiene archivo.",
  "Ce document n’a pas encore de champ de fusion (Insertion → « 📨 Champ de fusion »). Insérer d’abord une petite fiche d’identité à l’endroit du curseur ?": "Este documento aún no tiene campos de combinación (Insertar → «📨 Campo de combinación»). ¿Insertar primero una pequeña ficha de identidad en el lugar del cursor?",
  "Ce document n’a pas encore de transcription.": "Este documento aún no tiene transcripción.",
+ "Ce document n’a pas pu être relu : réessaie dans un instant.": "No se ha podido volver a leer este documento: vuelve a intentarlo en un momento.",
  "Ce domino ne va sur aucun bout de la chaîne.": "Esta ficha no va en ningún extremo de la cadena.",
  "Ce domino va des deux côtés : touche ◀ ou ▶ sur la chaîne.": "Esta ficha va por los dos lados: toca ◀ o ▶ en la cadena.",
  "Ce dossier a déjà {n} lignes : ouvre-en un autre.": "Este expediente ya tiene {n} líneas: abre otro.",
