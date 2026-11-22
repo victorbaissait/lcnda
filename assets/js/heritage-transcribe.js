@@ -271,6 +271,7 @@
         const touch = () => { dirty = true; status(i18n('modifié')); clearTimeout(commitT); commitT = setTimeout(() => { commitT = 0; HX?.commit(); }, 450); };
         // E4 : une image glissée (ou collée) sur l'acte entre dans les Médias et devient l'image de l'acte
         UI.bindFileDrop?.(stage, async files => {
+            if (pagesLocked()) return;
             const f = files[0], fd = new FormData(); fd.append('file', f, f.name); fd.append('kind', 'image'); fd.append('title', f.name.replace(/\.[^.]+$/, '')); fd.append('csrf', A().state.csrf);
             try { const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}}), j = await r.json().catch(() => ({})); if (!r.ok || j.error) throw new Error(j.error || 'envoi impossible');
                 if (t.data.zones.length && !await A().confirmBox(i18n('Elles étaient posées pour l’ancienne image.'), {title: i18n('Garder les zones déjà posées ?'), okLabel: i18n('Garder les zones'), cancelLabel: i18n('Les retirer'), danger: false})) { snap(); t.data.zones = []; }
@@ -1361,7 +1362,15 @@
                 onUndone: async () => { if (!undoSnap) return; t.data.people = undoSnap.people; $('[data-tx="source"]').value = undoSnap.source; t.source = undoSnap.source; touch(); paintPeople(); await save(); }});
         }
         /* ─── image : de la base ou de l'ordinateur ─── */
+        // 📑 document en plusieurs pages : changer l'image ici remplaçait toujours la page 1 et « Les retirer » effaçait les zones de
+        // toutes les pages ; on change une page dans « 📑 Pages du document » (retirer l'ancienne, relier la nouvelle)
+        function pagesLocked() {
+            if (PAGES.length < 2) return false;
+            toast(i18n('Ce document a plusieurs pages : pour changer l’image d’une page, ouvre « 📑 Pages du document », retire l’ancienne page puis relie la nouvelle.'), 'error');
+            return true;
+        }
         async function pickImage() {
+            if (pagesLocked()) return;
             const m = await ext.pickImage({eyebrow: 'TRANSCRIPTION', title: i18n('Image de l’acte'), intro: i18n('Clique sur l’image de l’acte. Une image de l’ordinateur est ajoutée aux Médias.')}); if (!m) return;
             t.media_id = Number(m.id); t.filename = m.filename;
             if (!t.title && m.title && !m.imported) { t.title = m.title; $('[data-tx="title"]').value = t.title; }

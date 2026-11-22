@@ -228,6 +228,18 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             await caretAt(b.indexOf('Rose') + 1); await sleep(700);
             const s2 = await tx(); assert.equal(s2.on, '2'); assert.match(s2.href, /page3\.png/); assert.equal(s2.rects, 1);
         });
+        await t('plusieurs pages : « Image de l’acte… » ne remplace pas la page 1 et ne retire aucune zone (phrase qui renvoie à « 📑 Pages du document »)', async () => {
+            await p.click(`${D} [data-tx-page="1"]`); await sleep(500);
+            const before = await p.evaluate(() => { const g = document.querySelector('dialog.h-tx-dlg').txApi.get(); return {m: g.media_id, z: g.data.zones.length}; });
+            await p.evaluate(() => [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-menus] button')].find(b => b.textContent.trim() === 'Fichier').click()); await p.waitForSelector('.ui-actmenu');
+            await p.evaluate(() => [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].find(b => /Image de l’acte/.test(b.textContent)).click()); await sleep(500);
+            const toastTxt = await p.evaluate(() => [...document.querySelectorAll('.toast, [role=status], .ui-toast')].map(e => e.textContent).join(' | '));
+            assert.match(toastTxt, /plusieurs pages.*Pages du document/s, 'phrase claire : ' + toastTxt);
+            assert.equal(await p.evaluate(() => !!document.querySelector('dialog[open] [data-pick-media], dialog.media-picker[open]')), false, 'pas de fenêtre de choix d’image');
+            const after = await p.evaluate(() => { const g = document.querySelector('dialog.h-tx-dlg').txApi.get(); return {m: g.media_id, z: g.data.zones.length}; });
+            assert.deepStrictEqual(after, before);
+            await p.click(`${D} [data-tx-page="0"]`); await sleep(400);
+        });
         await t('✨ Lire sur la page affichée : le texte lu va dans la page 2, sa zone est sur la page 2', async () => {
             await p.click(`${D} [data-tx-page="1"]`); await sleep(500);
             await p.click(`${D} [data-tx-cmd="readmenu"]`); await p.click(`${D} [data-tx-readpanel] [data-tx-cmd="ocr"]`); await sleep(900);
