@@ -64,11 +64,11 @@ Chaque gros outil : maquette d'abord.
     - Fichier → Image de l'acte / image améliorée : seulement l'image affichée ; dire laquelle et proposer toutes les pages.
     - ✅ FAIT le 22 novembre (un seul texte) : 🪄 la barre des corrections donne leur nombre par page (« Page 2 : 7 »), un clic montre la page. Reste : un texte par page.
     - 🧭 Repérer et 🧩 Modèle : en mode « un texte par page », vérifier qu'ils travaillent sur la bonne page (ou toutes), et le dire.
-    - Rotation, miroir, redressement, « Mieux voir » : à vérifier s'ils sont gardés pour chaque page (deux photos n'ont pas le même cadrage) ou partagés ; les garder par page.
+    - ✅ FAIT le 22 novembre : chaque page garde ses réglages d'image (data.pageViews, vérifiés côté serveur). — Rotation, miroir, redressement, « Mieux voir » : à vérifier s'ils sont gardés pour chaque page (deux photos n'ont pas le même cadrage) ou partagés ; les garder par page.
     - Frise (Lire 39 lignes / Corriger 11 mots) et avancement : dire si c'est la page ou tout le document (« 39 lignes · 2 pages »).
     - 🕘 Versions, chercher / remplacer : préciser si on cherche dans la page ou dans toutes (choix).
     (+ points 14 et 16 : Lire et Relire ligne à ligne.)
     - ✅ FAIT le 22 novembre : la fenêtre « Lecture approfondie » dit la page (« Page 2 (2 sur 4) · Lecture approfondie… 36 s », et dans le titre de la comparaison) ; elle compare avec le texte de la page affichée seulement (avant : tout le document) ; « Garder celle-ci » sur le texte déjà là ne l'ajoute plus une deuxième fois.
     - ✅ FAIT le 22 novembre : « ✨ Lire ▾ » montre « Lignes déjà écrites — Page 1 : 39 · Page 2 : 0 ».
     - ✅ FAIT le 22 novembre : choix « Seulement les pages pas encore lues » (lecture rapide, imprimé, approfondie) ; si toutes ont du texte : « Toutes les pages ont déjà du texte. »
-    - ✅ CORRIGÉ le 22 novembre : l'essai « visionneuse ouverte sur une seule page… » cliquait « ＋ » du bloc de l'image d'avant (encore affiché un instant) ; il attend maintenant le bloc de la nouvelle image (vérifications inchangées).
+    - ⚠️ PAS FINI : l'essai « visionneuse ouverte sur une seule page… » a encore échoué une fois (2e attente, 2 pages après « ＋ ») ; un message d'échec détaillé est en place pour trouver la cause. Avant : l'essai ouverte sur une seule page… » cliquait « ＋ » du bloc de l'image d'avant (encore affiché un instant) ; il attend maintenant le bloc de la nouvelle image (vérifications inchangées).

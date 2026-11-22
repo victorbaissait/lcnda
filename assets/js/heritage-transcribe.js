@@ -341,6 +341,7 @@
             if (pageForm === 'one' && layoutText()) { dirty = true; status(i18n('modifié')); }
             if (pageForm === 'per') await loadPerSet();
             t.filename = PAGES[pageIx].filename; paintPages();
+            const pv0 = t.data.pageViews?.[curPid()]; if (pageForm === 'one' && pv0 && typeof pv0 === 'object') { t.data.view = TV.viewOf(pv0); syncControls(); paintBadge(); } // 🎚 les réglages de cette page
         }
         function layoutText() {
             const ids = PAGES.map(p => Number(p.media_id)), byId = id => PAGES.find(p => Number(p.media_id) === id);
@@ -367,7 +368,11 @@
         async function goPage(i, {keepText = false, goto = null} = {}) {
             if (i < 0 || i >= PAGES.length || i === pageIx) return;
             if (pageForm === 'per') return switchAct(i, goto);
+            // 🎚 chaque page garde ses réglages d'image (rotation, miroir, redressement, « Mieux voir ») : deux photos n'ont pas le même cadrage
+            const pv = t.data.pageViews = (t.data.pageViews && typeof t.data.pageViews === 'object' && !Array.isArray(t.data.pageViews)) ? t.data.pageViews : {};
+            pv[curPid()] = {...t.data.view};
             pageIx = i; t.filename = PAGES[i].filename; selZone = null; paintPages();
+            t.data.view = TV.viewOf(pv[curPid()] || {...t.data.view, rot: 0, tilt: 0, mirror: false}); syncControls(); paintBadge();
             if (!keepText) { const sg = PG.segments(area.value)[segIx()]; if (sg) { area.setSelectionRange(sg.s, sg.s); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20; area.scrollTop = Math.max(0, (area.value.slice(0, sg.s).split('\n').length - 2) * lineH); mirror.scrollTop = area.scrollTop; } }
             await loadImage();
         }
@@ -1421,6 +1426,7 @@
             ['title', 'kind', 'date_text', 'place', 'source'].forEach(k => { t[k] = $(`[data-tx="${k}"]`).value; }); t.body = area.value; t.data.status = $('[data-tx-state]').value;
             if (!t.title.trim()) { const subj = t.data.people.find(p => p.role === 'sujet' || p.role === 'défunt'); t.title = `${t.kind === 'apreciser' ? i18n('Acte') : (KINDS.find(k => k[0] === t.kind)?.[1] || i18n('Acte'))}${subj ? ` — ${subj.name}` : ''}${t.date_text ? ` — ${t.date_text}` : ''}`; $('[data-tx="title"]').value = t.title; }
             status('Enregistrement…');
+            if (pageForm === 'one' && PAGES.length > 1) { if (!t.data.pageViews || typeof t.data.pageViews !== 'object' || Array.isArray(t.data.pageViews)) t.data.pageViews = {}; t.data.pageViews[curPid()] = {...t.data.view}; }
             try { const r = await post('save_act_transcription', {id: t.id, title: t.title, kind: t.kind, media_id: t.media_id, date_text: t.date_text, place: t.place, source: t.source, body: t.body, data: t.data}); t.id = r.result.id; dirty = false; status(`✓ ${i18n('Enregistré')}`);
                 // 📄 un seul texte par document : le texte d'avant de cette image est gardé sous le tien (rien n'est écrasé)
                 if (typeof r.result.body === 'string' && r.result.body !== t.body) { snap(); area.value = r.result.body; before = area.value; t.body = area.value; paintMirror(); toast(i18n('Le texte déjà écrit pour ce document est gardé sous le tien.')); }

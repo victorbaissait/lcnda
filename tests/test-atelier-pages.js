@@ -168,7 +168,9 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             await p.waitForFunction(() => document.querySelector('#lightbox-pages [data-mp-add]') && !document.querySelector('#lightbox-pages [data-mp-id]'), null, {timeout: 10000});
             await p.click('#lightbox-pages [data-mp-add]'); await p.waitForSelector('dialog.mpk-dialog[open] .mpk-tile'); await sleep(300);
             await p.locator('dialog.mpk-dialog[open] .mpk-tile', {hasText: 'Naissance de Paul'}).first().click(); await p.click('dialog.mpk-dialog[open] [data-mp="ok"]');
-            await p.waitForFunction(() => document.querySelectorAll('#lightbox-pages [data-mp-id]').length === 2, null, {timeout: 10000, polling: 200});
+            try { await p.waitForFunction(() => document.querySelectorAll('#lightbox-pages [data-mp-id]').length === 2, null, {timeout: 10000, polling: 200}); }
+            catch (e) { const why = await p.evaluate(() => ({ids: [...document.querySelectorAll('#lightbox-pages [data-mp-id]')].map(x => x.dataset.mpId), cur: window.LCNDA_APP.state.lightboxMedia?.[window.LCNDA_APP.state.lightboxIndex]?.id, toasts: [...document.querySelectorAll('.toast, .ui-toast, [role=status]')].map(x => x.textContent).join(' | '), picker: !!document.querySelector('dialog.mpk-dialog[open]')}));
+                throw new Error('le bloc des pages ne montre pas les 2 pages : ' + JSON.stringify(why) + ' · en base : ' + JSON.stringify(await pagesOf(6)) + ' / ' + JSON.stringify(await pagesOf(5))); }
             assert.deepEqual((await pagesOf(6)).map(x => x[0]), [6, 5]);
             await undoLast('Page reliée'); assert.deepEqual(await pagesOf(6), []);
             await p.evaluate(() => document.getElementById('lightbox').close()); await sleep(300);
@@ -511,6 +513,21 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             assert.match(r.pos, /\(3 sur 4\) · Ligne \d+ sur \d+/, r.pos);
             assert.equal(r.zone, pick.id); assert.ok(r.shown && r.ink > 20, 'le morceau de l’image de la page 3 : ' + JSON.stringify(r));
             await p.keyboard.press('Escape'); await sleep(300); await p.click(`${D} [data-tx-step="read"]`);
+        });
+        await t('🎚 chaque page garde ses réglages d’image : tourner la page 1 ne tourne pas la page 2 ; gardé après enregistrement', async () => {
+            const rot = () => p.evaluate(() => document.querySelector('dialog.h-tx-dlg').txApi.get().data.view.rot || 0);
+            await p.click(`${D} [data-tx-page="0"]`); await sleep(400); const r0 = await rot();
+            await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="rot"]').click()); await sleep(400);
+            assert.equal(await rot(), (r0 + 90) % 360, 'la page 1 tournée');
+            await p.click(`${D} [data-tx-page="1"]`); await sleep(500); assert.equal(await rot(), 0, 'la page 2 n’est pas tournée');
+            await p.click(`${D} [data-tx-page="0"]`); await sleep(500); assert.equal(await rot(), (r0 + 90) % 360, 'la page 1 l’est toujours');
+            await p.click(`${D} [data-tx-page="1"]`); await sleep(400);
+            await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="save"]').click()); await sleep(1200);
+            await openTx({id: act3a, page: 1}); assert.equal(await rot(), (r0 + 90) % 360, 'rouvert sur la page 1 : toujours tournée');
+            await p.click(`${D} [data-tx-page="1"]`); await sleep(500); assert.equal(await rot(), 0);
+            await p.click(`${D} [data-tx-page="0"]`); await sleep(500);
+            for (let k = 0; k < 3; k++) { await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="rot"]').click()); await sleep(250); } // remise à l'endroit
+            assert.equal(await rot(), r0);
         });
         await t('🔬 toutes les pages : « ■ Arrêter » pendant la page 1 arrête tout, rien n’est ajouté', async () => {
             ollama.delay = 700; const b0 = (await tx()).body, c0 = ollama.chats;

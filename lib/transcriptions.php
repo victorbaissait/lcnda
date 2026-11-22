@@ -224,15 +224,21 @@ function act_transcription_clean_data(PDO $pdo, $data): array
         if ($pid) { $c = $pdo->prepare('SELECT 1 FROM persons WHERE id=?'); $c->execute([$pid]); if (!$c->fetchColumn()) { $pid = 0; } }
         $people[] = ['name' => mb_substr(safe_text($p['name'] ?? ''), 0, 160), 'role' => mb_substr(safe_text($p['role'] ?? ''), 0, 60), 'person_id' => $pid, 's' => max(0, (int) ($p['s'] ?? 0)), 'e' => max(0, (int) ($p['e'] ?? 0))];
     }
-    $view = is_array($data['view'] ?? null) ? $data['view'] : [];
     $range = static fn($v, float $min, float $max, float $def) => is_numeric($v) && is_finite((float) $v) ? max($min, min($max, round((float) $v, 3))) : $def;
-    $rot = ((int) ($view['rot'] ?? 0) % 360 + 360) % 360;
     // « 🎚 Mieux voir » : les réglages de l'image retenus pour cet acte (des nombres bornés, rien d'autre)
-    $cleanView = ['contrast' => $range($view['contrast'] ?? 100, 50, 300, 100), 'bright' => $range($view['bright'] ?? 100, 40, 220, 100), 'invert' => !empty($view['invert']), 'rot' => $rot - $rot % 90, 'gray' => !empty($view['gray']),
+    $cleanOne = static function ($view) use ($range): array {
+    $view = is_array($view) ? $view : [];
+    $rot = ((int) ($view['rot'] ?? 0) % 360 + 360) % 360;
+    return ['contrast' => $range($view['contrast'] ?? 100, 50, 300, 100), 'bright' => $range($view['bright'] ?? 100, 40, 220, 100), 'invert' => !empty($view['invert']), 'rot' => $rot - $rot % 90, 'gray' => !empty($view['gray']),
         'sharp' => $range($view['sharp'] ?? 0, 0, 300, 0), 'sharpR' => $range($view['sharpR'] ?? 1.5, .5, 5, 1.5), 'clahe' => $range($view['clahe'] ?? 0, 0, 100, 0),
         'channel' => in_array($view['channel'] ?? '', ['', 'r', 'g', 'b'], true) ? (string) ($view['channel'] ?? '') : '', 'thr' => $range($view['thr'] ?? 0, 0, 254, 0),
         'lvB' => $range($view['lvB'] ?? 0, 0, 200, 0), 'lvW' => $range($view['lvW'] ?? 255, 55, 255, 255), 'lvG' => $range($view['lvG'] ?? 1, .3, 3, 1),
         'bg' => !empty($view['bg']), 'tilt' => $range($view['tilt'] ?? 0, -10, 10, 0), 'mirror' => !empty($view['mirror'])];
+    };
+    $cleanView = $cleanOne($data['view'] ?? []);
+    // 📑 plusieurs pages (un seul texte) : les réglages de l'image de chaque page (n° du média → réglages), 200 pages au plus
+    $pageViews = [];
+    foreach (array_slice(is_array($data['pageViews'] ?? null) ? $data['pageViews'] : [], 0, 200, true) as $mid => $pv) { if (safe_int($mid) > 0 && is_array($pv)) { $pageViews[(string) safe_int($mid)] = $cleanOne($pv); } }
     $status = in_array($data['status'] ?? '', ['todo', 'doing', 'checked', 'done'], true) ? $data['status'] : '';
     // 📜 le texte lu autour de l'acte sur une capture d'écran (« Saint-Amand-Montrond, 1807-1809, N, M, D », « 139 / 268 ») : pour la source
     $frame = mb_substr(safe_text(is_string($data['frame_text'] ?? null) ? $data['frame_text'] : ''), 0, 600);
@@ -242,7 +248,7 @@ function act_transcription_clean_data(PDO $pdo, $data): array
     $reviewed = array_values(array_unique(array_filter(array_slice(is_array($data['reviewed'] ?? null) ? $data['reviewed'] : [], -5000), static fn($k) => is_string($k) && preg_match('/^[0-9a-z]{1,10}$/', $k))));
     // 📑 un acte en plusieurs pages, un seul texte coupé par « — page 2 — » : les médias des morceaux du texte, dans l'ordre du texte
     $pages = array_values(array_unique(array_filter(array_map('safe_int', array_slice(is_array($data['pages'] ?? null) ? $data['pages'] : [], 0, 200)), static fn($v) => $v > 0)));
-    return ['zones' => $zones, 'people' => $people, 'view' => $cleanView, 'status' => $status] + (count($pages) >= 2 ? ['pages' => $pages] : []) + ($frame !== '' ? ['frame_text' => $frame] : []) + ($translation !== '' ? ['translation' => $translation] : []) + ($reviewed ? ['reviewed' => $reviewed] : []);
+    return ['zones' => $zones, 'people' => $people, 'view' => $cleanView, 'status' => $status] + (count($pages) >= 2 ? ['pages' => $pages] : []) + ($pageViews ? ['pageViews' => $pageViews] : []) + ($frame !== '' ? ['frame_text' => $frame] : []) + ($translation !== '' ? ['translation' => $translation] : []) + ($reviewed ? ['reviewed' => $reviewed] : []);
 }
 
 function save_act_transcription(PDO $pdo, array $data): array
