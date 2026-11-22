@@ -5548,6 +5548,21 @@
 :root .h-tx-abtip:is([data-lc-sh="douces"], [data-lc-sh="douces"] *) {box-shadow:var(--lc-sh-m)}
 :root .h-tx-abtip:is([data-lc-sh="aucune"], [data-lc-sh="aucune"] *) {box-shadow:none}
 :root[data-lc-density] .h-tx-abtip{padding:calc(7px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .dpg-pages{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .dpg-pages .dpg-head{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .dpg-list{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .dpg-row{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .dpg-row{padding:calc(4px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .dpg-grip{padding:0 calc(2px * var(--lc-sp))}
+:root[data-lc-density] .lb-pages{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-pages{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-pages{padding:calc(4px * var(--lc-sp)) calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-page{gap:calc(5px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-page{padding:calc(3px * var(--lc-sp)) calc(9px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-pagesinfo{padding-left:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-readscope{gap:calc(4px * var(--lc-sp)) calc(12px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-readscope{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-readscope label{gap:calc(5px * var(--lc-sp))}
 /* photomaps.css */
 :root[data-lc-density] .pm-carte{padding:calc(18px * var(--lc-sp)) calc(22px * var(--lc-sp)) calc(28px * var(--lc-sp))}
 :root[data-lc-density] .pm-screen{gap:calc(10px * var(--lc-sp))}

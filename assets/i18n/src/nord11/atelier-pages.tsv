@@ -1,0 +1,37 @@
+fr ¦ vi ¦ id
+# 📑 Atelier de transcription, vague 3 (3a) : un document en plusieurs pages (heritage-pages.js, heritage-transcribe.js, lib/media_pages.php)
+# — 1. relier des pages (page du document, visionneuse)
+Glisser pour changer l’ordre ¦ Kéo để đổi thứ tự ¦ Seret untuk mengubah urutan
+Voir cette page ¦ Xem trang này ¦ Lihat halaman ini
+Une seule page pour l’instant. Un recto et son verso, un acte sur plusieurs pages : relie les autres images, elles s’ouvriront ensemble. ¦ Hiện chỉ có một trang. Mặt trước và mặt sau, một văn bản nhiều trang: hãy liên kết các ảnh khác, chúng sẽ mở cùng nhau. ¦ Baru satu halaman untuk saat ini. Halaman depan dan belakang, akta beberapa halaman: tautkan gambar lainnya, kamu akan melihatnya terbuka bersama.
+Relier une autre page… ¦ Liên kết thêm một trang… ¦ Tautkan halaman lain…
+PAGES DU DOCUMENT ¦ CÁC TRANG CỦA TÀI LIỆU ¦ HALAMAN DOKUMEN
+Relier ces pages ¦ Liên kết các trang này ¦ Tautkan halaman ini
+Pages reliées : {n} ¦ Số trang đã liên kết: {n} ¦ Halaman yang ditautkan: {n}
+Page reliée ¦ Đã liên kết trang ¦ Halaman ditautkan
+Page renommée : « {x} » ¦ Đã đổi tên trang: “{x}” ¦ Halaman diganti nama: “{x}”
+Autre nom… ¦ Tên khác… ¦ Nama lain…
+Par exemple : Plan, Feuillet 2, Suite ¦ Ví dụ: Sơ đồ, Tờ 2, Phần tiếp ¦ Misalnya: Denah, Lembar 2, Lanjutan
+Ordre des pages changé ¦ Đã đổi thứ tự trang ¦ Urutan halaman diubah
+Retirer de l’ensemble ¦ Gỡ khỏi bộ ¦ Keluarkan dari kumpulan
+La page reste dans les médias, seule (rien n’est supprimé) ¦ Trang vẫn nằm riêng trong mục phương tiện (không xóa gì) ¦ Halaman tetap ada di media, sendiri (tidak ada yang dihapus)
+Recto ¦ Mặt trước ¦ Depan
+Verso ¦ Mặt sau ¦ Belakang
+Annexe ¦ Phụ lục ¦ Lampiran
+Une de ces pages est déjà dans un autre document : retire-la d’abord de celui-ci (une page n’appartient qu’à un seul ensemble). ¦ Một trong các trang này đã thuộc tài liệu khác: hãy gỡ nó khỏi tài liệu đó trước (mỗi trang chỉ thuộc một bộ). ¦ Salah satu halaman ini sudah ada di dokumen lain: keluarkan dulu dari sana (satu halaman hanya milik satu kumpulan).
+Une des pages n’est plus dans les médias : rien n’a été changé. ¦ Một trong các trang không còn trong mục phương tiện: không có gì thay đổi. ¦ Salah satu halaman sudah tidak ada di media: tidak ada yang diubah.
+Trop de pages dans un même document (200 au plus). ¦ Quá nhiều trang trong một tài liệu (tối đa 200). ¦ Terlalu banyak halaman dalam satu dokumen (paling banyak 200).
+# — 2. l’Atelier ouvre toutes les pages (onglets, un seul texte ou un texte par page, ✨ Lire)
+Plusieurs pages ¦ Nhiều trang ¦ Beberapa halaman
+Sur la page affichée ¦ Trên trang đang hiện ¦ Di halaman yang ditampilkan
+Sur toutes les pages ¦ Trên tất cả các trang ¦ Di semua halaman
+Un seul texte, coupé par « — page 2 — » ¦ Một văn bản, chia bằng “— trang 2 —” ¦ Satu teks, dipisah dengan “— halaman 2 —”
+Un seul texte, coupé par « — page 2 — » (conseillé) ¦ Một văn bản, chia bằng “— trang 2 —” (nên dùng) ¦ Satu teks, dipisah dengan “— halaman 2 —” (disarankan)
+Un texte par page ¦ Mỗi trang một văn bản ¦ Satu teks per halaman
+— page {n} — ¦ — trang {n} — ¦ — halaman {n} —
+Toutes les pages sont lues (à relire) ¦ Đã đọc tất cả các trang (cần đọc lại) ¦ Semua halaman sudah dibaca (untuk diperiksa)
+Réglage gardé : il vaut pour les documents pas encore commencés ; celui-ci garde sa forme. ¦ Đã giữ thiết lập: áp dụng cho các tài liệu chưa bắt đầu; tài liệu này giữ nguyên dạng. ¦ Pengaturan disimpan: berlaku untuk dokumen yang belum kamu mulai; dokumen ini tetap seperti bentuknya.
+Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription. ¦ Trang này thuộc một văn bản nhiều trang: văn bản của nó được sửa trong Xưởng chép văn bản. ¦ Halaman ini bagian dari akta beberapa halaman: teksnya kamu ubah di Bengkel transkripsi.
+# — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
+(page {n}, ligne {line}) ¦ (trang {n}, dòng {line}) ¦ (halaman {n}, baris {line})
+page {n}, ligne {line} ¦ trang {n}, dòng {line} ¦ halaman {n}, baris {line}

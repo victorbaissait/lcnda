@@ -1,0 +1,37 @@
+fr ¦ el ¦ bg
+# 📑 Atelier de transcription, vague 3 (3a) : un document en plusieurs pages (heritage-pages.js, heritage-transcribe.js, lib/media_pages.php)
+# — 1. relier des pages (page du document, visionneuse)
+Glisser pour changer l’ordre ¦ Σύρε για να αλλάξεις τη σειρά ¦ Плъзни, за да смениш реда
+Voir cette page ¦ Δες αυτή τη σελίδα ¦ Виж тази страница
+Une seule page pour l’instant. Un recto et son verso, un acte sur plusieurs pages : relie les autres images, elles s’ouvriront ensemble. ¦ Μόνο μία σελίδα προς το παρόν. Μπροστινή και πίσω όψη, μια πράξη σε πολλές σελίδες: σύνδεσε τις άλλες εικόνες και θα ανοίγουν μαζί. ¦ Засега само една страница. Лице и гръб, акт на няколко страници: свържи другите изображения и те ще се отварят заедно.
+Relier une autre page… ¦ Σύνδεσε άλλη σελίδα… ¦ Свържи още една страница…
+PAGES DU DOCUMENT ¦ ΣΕΛΙΔΕΣ ΤΟΥ ΕΓΓΡΑΦΟΥ ¦ СТРАНИЦИ НА ДОКУМЕНТА
+Relier ces pages ¦ Σύνδεσε αυτές τις σελίδες ¦ Свържи тези страници
+Pages reliées : {n} ¦ Συνδεδεμένες σελίδες: {n} ¦ Свързани страници: {n}
+Page reliée ¦ Η σελίδα συνδέθηκε ¦ Страницата е свързана
+Page renommée : « {x} » ¦ Η σελίδα μετονομάστηκε: «{x}» ¦ Страницата е преименувана: „{x}“
+Autre nom… ¦ Άλλο όνομα… ¦ Друго име…
+Par exemple : Plan, Feuillet 2, Suite ¦ Για παράδειγμα: Σχέδιο, Φύλλο 2, Συνέχεια ¦ Например: План, Лист 2, Продължение
+Ordre des pages changé ¦ Η σειρά των σελίδων άλλαξε ¦ Редът на страниците е сменен
+Retirer de l’ensemble ¦ Αφαίρεση από το σύνολο ¦ Махни от комплекта
+La page reste dans les médias, seule (rien n’est supprimé) ¦ Η σελίδα μένει στα πολυμέσα, μόνη της (δεν διαγράφεται τίποτα) ¦ Страницата остава в медиите самостоятелно (нищо не се изтрива)
+Recto ¦ Εμπρός όψη ¦ Лице
+Verso ¦ Πίσω όψη ¦ Гръб
+Annexe ¦ Παράρτημα ¦ Приложение
+Une de ces pages est déjà dans un autre document : retire-la d’abord de celui-ci (une page n’appartient qu’à un seul ensemble). ¦ Μία από αυτές τις σελίδες ανήκει ήδη σε άλλο έγγραφο: αφαίρεσέ την πρώτα από εκεί (μια σελίδα ανήκει μόνο σε ένα σύνολο). ¦ Една от тези страници вече е в друг документ: първо я махни оттам (една страница принадлежи само на един комплект).
+Une des pages n’est plus dans les médias : rien n’a été changé. ¦ Μία από τις σελίδες δεν υπάρχει πια στα πολυμέσα: δεν άλλαξε τίποτα. ¦ Една от страниците вече я няма в медиите: нищо не е променено.
+Trop de pages dans un même document (200 au plus). ¦ Πάρα πολλές σελίδες σε ένα έγγραφο (το πολύ 200). ¦ Твърде много страници в един документ (най-много 200).
+# — 2. l’Atelier ouvre toutes les pages (onglets, un seul texte ou un texte par page, ✨ Lire)
+Plusieurs pages ¦ Πολλές σελίδες ¦ Няколко страници
+Sur la page affichée ¦ Στη σελίδα που φαίνεται ¦ На показаната страница
+Sur toutes les pages ¦ Σε όλες τις σελίδες ¦ На всички страници
+Un seul texte, coupé par « — page 2 — » ¦ Ένα κείμενο, χωρισμένο με «— σελίδα 2 —» ¦ Един текст, разделен с „— страница 2 —“
+Un seul texte, coupé par « — page 2 — » (conseillé) ¦ Ένα κείμενο, χωρισμένο με «— σελίδα 2 —» (προτείνεται) ¦ Един текст, разделен с „— страница 2 —“ (препоръчително)
+Un texte par page ¦ Ένα κείμενο ανά σελίδα ¦ По един текст на страница
+— page {n} — ¦ — σελίδα {n} — ¦ — страница {n} —
+Toutes les pages sont lues (à relire) ¦ Όλες οι σελίδες διαβάστηκαν (για έλεγχο) ¦ Всички страници са прочетени (за проверка)
+Réglage gardé : il vaut pour les documents pas encore commencés ; celui-ci garde sa forme. ¦ Η ρύθμιση κρατήθηκε: ισχύει για έγγραφα που δεν έχουν αρχίσει ακόμη· αυτό κρατά τη μορφή του. ¦ Настройката е запазена: важи за още незапочнати документи; този запазва формата си.
+Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription. ¦ Αυτή η σελίδα ανήκει σε πράξη πολλών σελίδων: το κείμενό της αλλάζει στο Εργαστήριο μεταγραφής. ¦ Тази страница е част от акт на няколко страници: текстът ѝ се променя в Работилницата за препис.
+# — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
+(page {n}, ligne {line}) ¦ (σελίδα {n}, γραμμή {line}) ¦ (страница {n}, ред {line})
+page {n}, ligne {line} ¦ σελίδα {n}, γραμμή {line} ¦ страница {n}, ред {line}

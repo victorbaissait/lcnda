@@ -46,6 +46,7 @@ require_once __DIR__ . '/website.php'; // 🌐 Mon site web : les sites, leurs v
 require_once __DIR__ . '/cadastre.php'; // 🗺 Cadastre : les parcelles et leurs liens (Listes → Lieux et maisons)
 require_once __DIR__ . '/successions.php'; // 🏠 Héritages et successions : actes, héritiers, biens, chaîne des propriétaires
 require_once __DIR__ . '/transcriptions.php'; // 📜 Transcription d'actes
+require_once __DIR__ . '/media_pages.php'; // 📑 un document en plusieurs pages (ensembles de pages)
 require_once __DIR__ . '/slideshows.php'; // 🎞️ Diaporamas et récits
 require_once __DIR__ . '/houses.php'; // 🏠 Maisons de famille
 require_once __DIR__ . '/house_library.php'; // 🏠 Plan de maison : objets créés, bibliothèque en ligne libre de droit, packs ZIP

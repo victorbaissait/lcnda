@@ -285,3 +285,41 @@
 :root[data-theme="dark"] .h-tx-mirror .h-tx-ab{border-bottom-color:#7db6ff}
 :root[data-theme="dark"] .h-tx-abtip{background:#2c2612;color:#eceef2;border-color:#8a6d1c}
 :root[data-theme="dark"] .h-tx-abtip small{color:#c9c1a0}
+/* 📑 Un document en plusieurs pages (heritage-pages.js) : le bloc « Pages du document » (page du document, visionneuse) */
+.dpg-pages{display:flex;flex-direction:column;gap:8px}
+.dpg-pages .dpg-head{display:flex;align-items:center;gap:8px}.dpg-pages .dpg-head h3{margin:0;font-size:1rem}.dpg-count{color:var(--muted,#666);font-weight:400}
+.dpg-list{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.dpg-row{display:flex;align-items:center;gap:8px;padding:4px 6px;border:1px solid var(--line,#ddd);border-radius:8px;background:var(--panel,#fff);min-width:0}
+.dpg-row.is-current{border-color:var(--blue,#0066cc);box-shadow:inset 3px 0 0 var(--blue,#0066cc)}
+.dpg-row.is-dragging{opacity:.5}
+.dpg-grip{cursor:grab;color:var(--muted,#888);font-size:16px;padding:0 2px;user-select:none}
+.dpg-thumb{flex:0 0 auto;width:44px;height:44px;padding:0;border:1px solid var(--line,#ccc);border-radius:6px;overflow:hidden;background:var(--soft-bg,#f4f5f7);display:grid;place-items:center;cursor:pointer}
+.dpg-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.dpg-txt{display:flex;flex-direction:column;min-width:0;flex:1 1 auto;gap:1px}
+.dpg-txt .dpg-num{font-size:11px;color:var(--muted,#666);font-weight:600}
+.dpg-name{font-weight:600;text-align:left;padding:0;font-size:13.5px}
+.dpg-title{font-size:12px;color:var(--muted,#666);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dpg-add{align-self:flex-start}.dpg-empty{margin:0;font-size:12.5px}
+.lb-pages{border:1px solid var(--line,#ddd);border-radius:8px;padding:8px 10px;margin:6px 0 10px}
+.lb-pages .dpg-head h3{font-size:.9rem}
+:root[data-theme="dark"] .dpg-row{background:#26282c;border-color:#44474d}
+:root[data-theme="dark"] .dpg-thumb{background:#1d1f22;border-color:#44474d}
+/* 📑 l'Atelier sur un document en plusieurs pages : les onglets des pages au-dessus de l'image, « Sur toutes les pages » dans ✨ Lire ▾ */
+.h-tx-pages{display:flex;align-items:center;gap:4px;flex-wrap:nowrap;overflow-x:auto;padding:4px 6px;border-bottom:1px solid var(--line,#ddd);background:var(--soft-bg,#f4f5f7);scrollbar-width:thin}
+.h-tx-pages[hidden]{display:none}
+.h-tx-page{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line,#ccc);border-radius:7px;background:#fff;padding:3px 9px;font:inherit;font-size:12.5px;cursor:pointer;white-space:nowrap;color:inherit}
+.h-tx-page b{font-size:11px;color:var(--muted,#666)}
+.h-tx-page.is-on{border-color:var(--blue,#0066cc);box-shadow:inset 0 -3px 0 var(--blue,#0066cc);font-weight:600}
+.h-tx-pagesinfo{margin-left:auto;font-size:11.5px;color:var(--muted,#666);white-space:nowrap;padding-left:8px}
+.h-tx-pagesmore{flex:0 0 auto}
+.h-tx-readscope{display:flex;flex-wrap:wrap;gap:4px 12px;padding:6px 10px;font-size:12.5px;border-bottom:1px solid var(--line,#e3e3e3)}
+.h-tx-readscope[hidden]{display:none}
+.h-tx-readscope label{display:inline-flex;align-items:center;gap:5px;cursor:pointer}
+:root[data-theme="dark"] .h-tx-pages{background:#1f2124;border-color:#44474d}
+:root[data-theme="dark"] .h-tx-page{background:#2a2c30;border-color:#4a4d53}
+:root[data-theme="dark"] .h-tx-page b,:root[data-theme="dark"] .h-tx-pagesinfo{color:#a9adb5}
+@media (max-width:640px){.h-tx-pagesinfo{display:none}}
+/* 📑 « Ce que l'app a trouvé » sur plusieurs pages : « (page 3, ligne 7) » à côté de chaque information (un clic montre la page) */
+.h-tf-where{font-size:11.5px;color:var(--muted,#666);margin-left:4px;white-space:nowrap;padding:0}
+.h-tf-where:hover{color:var(--blue,#0066cc)}
+:root[data-theme="dark"] .h-tf-where{color:#a9adb5}

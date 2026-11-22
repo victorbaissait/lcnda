@@ -668,6 +668,11 @@ function act_item_add(PDO $pdo, array $d): array
     $title = ip_txt($d['title'] ?? '', 200); $date = ip_txt($d['date'] ?? '', 120); $place = ip_txt($d['place'] ?? '', 200);
     $quote = mb_substr(trim(preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/u', '', (string) (is_scalar($d['quote'] ?? '') ? ($d['quote'] ?? '') : '')) ?? ''), 0, 2000);
     $line = min(100000, max(0, safe_int($d['line'] ?? 0)));
+    // 📑 un acte en plusieurs pages : la page de l'élément (n° dans l'ordre du document, et son nom : recto, verso, annexe, nom libre)
+    $pageNo = min(1000, max(0, safe_int($d['page'] ?? 0)));
+    $pageName = mb_substr(safe_text(is_scalar($d['page_label'] ?? '') ? (string) ($d['page_label'] ?? '') : ''), 0, 60);
+    $pageName = ['recto' => 'recto', 'verso' => 'verso', 'annexe' => 'annexe', 'page' => ''][mb_strtolower($pageName)] ?? $pageName;
+    $page = $pageNo ? 'page ' . $pageNo . ($pageName !== '' ? ' (' . $pageName . ')' : '') : '';
     if ($title === '' && $quote === '') { throw new LcndaBadInput('Rien à ajouter : l’élément est vide.'); }
     if ($as === 'job' && $title === '') { throw new LcndaBadInput('Rien à ajouter : l’élément est vide.'); }
     if ($as === 'residence' && $place === '' && $title === '') { throw new LcndaBadInput('Rien à ajouter : l’élément est vide.'); }
@@ -684,12 +689,13 @@ function act_item_add(PDO $pdo, array $d): array
     $before = import_receipt_begin($pdo);
     $count = ['events' => 0, 'notes' => 0, 'citations' => 0, 'source_created' => 0];
     $source = act_item_source($pdo, is_array($d['source'] ?? null) ? $d['source'] : [], $count);
-    $note = trim(($line ? 'Ligne ' . $line . ' : ' : '') . ($quote !== '' ? '« ' . $quote . ' »' : ''));
+    $note = trim(($page !== '' ? 'Page ' . $pageNo . ($line ? ', ligne ' . $line : '') . ' : ' : ($line ? 'Ligne ' . $line . ' : ' : '')) . ($quote !== '' ? '« ' . $quote . ' »' : ''));
     $occBefore = []; $eventId = 0; $noteId = 0;
-    $cite = static function (string $type, int $id) use ($pdo, $source, $note, &$count): void {
+    $cite = static function (string $type, int $id) use ($pdo, $source, $note, $page, &$count): void {
         if (!$source['_id']) { return; }
-        $pdo->prepare('INSERT INTO source_links(entity_type,entity_id,source_record_id,page,quality,note) VALUES(?,?,?,?,?,?)')->execute([$type, $id, $source['_id'], '', '', $note]);
+        $pdo->prepare('INSERT INTO source_links(entity_type,entity_id,source_record_id,page,quality,note) VALUES(?,?,?,?,?,?)')->execute([$type, $id, $source['_id'], $page, '', $note]);
         $c = []; foreach (['archive', 'commune', 'register', 'years', 'cote', 'view', 'view_total', 'act'] as $f) { $c['citation_' . $f] = $source['c_' . $f]; } if ($source['url'] !== '') { $c['citation_view_url'] = $source['url']; }
+        if ($page !== '') { $cf = function_exists('citation_from') ? citation_from($c) : []; $ref = $cf ? citation_reference($cf) : ''; $c['page'] = $ref !== '' ? $ref . ', ' . $page : $page; } // 📑 la page de l'acte, après la référence
         store_citation($pdo, (int) $pdo->lastInsertId(), $c); $count['citations']++;
     };
     $tagFor = static function (string $tag, string $label) use ($pdo): int {

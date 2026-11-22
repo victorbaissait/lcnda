@@ -1,0 +1,37 @@
+fr ¦ hr ¦ sl
+# 📑 Atelier de transcription, vague 3 (3a) : un document en plusieurs pages (heritage-pages.js, heritage-transcribe.js, lib/media_pages.php)
+# — 1. relier des pages (page du document, visionneuse)
+Glisser pour changer l’ordre ¦ Povuci za promjenu redoslijeda ¦ Povleci, da spremeniš vrstni red
+Voir cette page ¦ Pogledaj ovu stranicu ¦ Poglej to stran
+Une seule page pour l’instant. Un recto et son verso, un acte sur plusieurs pages : relie les autres images, elles s’ouvriront ensemble. ¦ Zasad samo jedna stranica. Prednja i stražnja strana, zapis na više stranica: poveži ostale slike i otvarat će se zajedno. ¦ Zaenkrat samo ena stran. Sprednja in zadnja stran, zapis na več straneh: poveži ostale slike in odprle se bodo skupaj.
+Relier une autre page… ¦ Poveži još jednu stranicu… ¦ Poveži še eno stran…
+PAGES DU DOCUMENT ¦ STRANICE DOKUMENTA ¦ STRANI DOKUMENTA
+Relier ces pages ¦ Poveži ove stranice ¦ Poveži te strani
+Pages reliées : {n} ¦ Povezane stranice: {n} ¦ Povezane strani: {n}
+Page reliée ¦ Stranica povezana ¦ Stran povezana
+Page renommée : « {x} » ¦ Stranica preimenovana: „{x}“ ¦ Stran preimenovana: »{x}«
+Autre nom… ¦ Drugi naziv… ¦ Drugo ime…
+Par exemple : Plan, Feuillet 2, Suite ¦ Na primjer: Plan, List 2, Nastavak ¦ Na primer: Načrt, List 2, Nadaljevanje
+Ordre des pages changé ¦ Redoslijed stranica promijenjen ¦ Vrstni red strani spremenjen
+Retirer de l’ensemble ¦ Ukloni iz skupa ¦ Odstrani iz zbirke
+La page reste dans les médias, seule (rien n’est supprimé) ¦ Stranica ostaje u medijima, sama (ništa se ne briše) ¦ Stran ostane v medijih, sama (nič se ne izbriše)
+Recto ¦ Prednja strana ¦ Sprednja stran
+Verso ¦ Stražnja strana ¦ Zadnja stran
+Annexe ¦ Prilog ¦ Priloga
+Une de ces pages est déjà dans un autre document : retire-la d’abord de celui-ci (une page n’appartient qu’à un seul ensemble). ¦ Jedna od ovih stranica već je u drugom dokumentu: najprije je ukloni odande (stranica pripada samo jednom skupu). ¦ Ena od teh strani je že v drugem dokumentu: najprej jo odstrani od tam (stran spada samo v eno zbirko).
+Une des pages n’est plus dans les médias : rien n’a été changé. ¦ Jedne od stranica više nema u medijima: ništa nije promijenjeno. ¦ Ene od strani ni več med mediji: nič ni bilo spremenjeno.
+Trop de pages dans un même document (200 au plus). ¦ Previše stranica u jednom dokumentu (najviše 200). ¦ Preveč strani v enem dokumentu (največ 200).
+# — 2. l’Atelier ouvre toutes les pages (onglets, un seul texte ou un texte par page, ✨ Lire)
+Plusieurs pages ¦ Više stranica ¦ Več strani
+Sur la page affichée ¦ Na prikazanoj stranici ¦ Na prikazani strani
+Sur toutes les pages ¦ Na svim stranicama ¦ Na vseh straneh
+Un seul texte, coupé par « — page 2 — » ¦ Jedan tekst, podijeljen s „— stranica 2 —“ ¦ En sam besedilo, razdeljeno z »— stran 2 —«
+Un seul texte, coupé par « — page 2 — » (conseillé) ¦ Jedan tekst, podijeljen s „— stranica 2 —“ (preporučeno) ¦ En sam besedilo, razdeljeno z »— stran 2 —« (priporočeno)
+Un texte par page ¦ Jedan tekst po stranici ¦ En besedilo na stran
+— page {n} — ¦ — stranica {n} — ¦ — stran {n} —
+Toutes les pages sont lues (à relire) ¦ Sve su stranice pročitane (za provjeru) ¦ Vse strani so prebrane (za pregled)
+Réglage gardé : il vaut pour les documents pas encore commencés ; celui-ci garde sa forme. ¦ Postavka spremljena: vrijedi za dokumente koji još nisu započeti; ovaj zadržava svoj oblik. ¦ Nastavitev shranjena: velja za dokumente, ki še niso začeti; ta ohrani svojo obliko.
+Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription. ¦ Ova stranica dio je zapisa na više stranica: njezin se tekst uređuje u Radionici prijepisa. ¦ Ta stran je del zapisa na več straneh: njeno besedilo urejaš v Delavnici prepisa.
+# — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
+(page {n}, ligne {line}) ¦ (stranica {n}, redak {line}) ¦ (stran {n}, vrstica {line})
+page {n}, ligne {line} ¦ stranica {n}, redak {line} ¦ stran {n}, vrstica {line}

@@ -1,0 +1,37 @@
+fr ¦ ro
+# 📑 Atelier de transcription, vague 3 (3a) : un document en plusieurs pages (heritage-pages.js, heritage-transcribe.js, lib/media_pages.php)
+# — 1. relier des pages (page du document, visionneuse)
+Glisser pour changer l’ordre ¦ Trage pentru a schimba ordinea
+Voir cette page ¦ Vezi această pagină
+Une seule page pour l’instant. Un recto et son verso, un acte sur plusieurs pages : relie les autres images, elles s’ouvriront ensemble. ¦ Deocamdată o singură pagină. Un recto și versoul lui, un act pe mai multe pagini: leagă celelalte imagini și se vor deschide împreună.
+Relier une autre page… ¦ Leagă încă o pagină…
+PAGES DU DOCUMENT ¦ PAGINILE DOCUMENTULUI
+Relier ces pages ¦ Leagă aceste pagini
+Pages reliées : {n} ¦ Pagini legate: {n}
+Page reliée ¦ Pagină legată
+Page renommée : « {x} » ¦ Pagină redenumită: „{x}”
+Autre nom… ¦ Alt nume…
+Par exemple : Plan, Feuillet 2, Suite ¦ De exemplu: Plan, Fila 2, Continuare
+Ordre des pages changé ¦ Ordinea paginilor schimbată
+Retirer de l’ensemble ¦ Scoate din set
+La page reste dans les médias, seule (rien n’est supprimé) ¦ Pagina rămâne în media, singură (nu se șterge nimic)
+Recto ¦ Recto
+Verso ¦ Verso
+Annexe ¦ Anexă
+Une de ces pages est déjà dans un autre document : retire-la d’abord de celui-ci (une page n’appartient qu’à un seul ensemble). ¦ Una dintre aceste pagini este deja în alt document: scoate-o mai întâi de acolo (o pagină aparține unui singur set).
+Une des pages n’est plus dans les médias : rien n’a été changé. ¦ Una dintre pagini nu mai este în media: nu s-a schimbat nimic.
+Trop de pages dans un même document (200 au plus). ¦ Prea multe pagini într-un document (cel mult 200).
+# — 2. l’Atelier ouvre toutes les pages (onglets, un seul texte ou un texte par page, ✨ Lire)
+Plusieurs pages ¦ Mai multe pagini
+Sur la page affichée ¦ Pe pagina afișată
+Sur toutes les pages ¦ Pe toate paginile
+Un seul texte, coupé par « — page 2 — » ¦ Un singur text, împărțit prin „— pagina 2 —”
+Un seul texte, coupé par « — page 2 — » (conseillé) ¦ Un singur text, împărțit prin „— pagina 2 —” (recomandat)
+Un texte par page ¦ Un text pe pagină
+— page {n} — ¦ — pagina {n} —
+Toutes les pages sont lues (à relire) ¦ Toate paginile sunt citite (de verificat)
+Réglage gardé : il vaut pour les documents pas encore commencés ; celui-ci garde sa forme. ¦ Setare păstrată: se aplică documentelor încă neîncepute; acesta își păstrează forma.
+Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription. ¦ Această pagină face parte dintr-un act pe mai multe pagini: textul ei se modifică în Atelierul de transcriere.
+# — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
+(page {n}, ligne {line}) ¦ (pagina {n}, rândul {line})
+page {n}, ligne {line} ¦ pagina {n}, rândul {line}

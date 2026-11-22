@@ -183,12 +183,15 @@ function act_transcriptions_page(PDO $pdo, array $q): array
 function act_transcriptions_for_media(PDO $pdo, int $mediaId): array
 {
     act_transcriptions_ensure($pdo);
-    $s = $pdo->prepare('SELECT id, title, kind, date_text, place, source, body, data_json, updated_at FROM act_transcriptions WHERE media_id=? ORDER BY id LIMIT 20'); $s->execute([$mediaId]);
+    $s = $pdo->prepare('SELECT id, title, kind, date_text, place, source, body, data_json, updated_at, media_id FROM act_transcriptions WHERE media_id=? ORDER BY id LIMIT 20'); $s->execute([$mediaId]);
+    $rows = $s->fetchAll();
+    // 📑 l'image est une page d'un acte en plusieurs pages (un seul texte) : cet acte aussi, marqué page_of
+    if (!$rows && ($owner = act_page_owner($pdo, $mediaId))) { $o = $pdo->prepare('SELECT id, title, kind, date_text, place, source, body, data_json, updated_at, media_id FROM act_transcriptions WHERE id=?'); $o->execute([$owner]); $rows = $o->fetchAll(); }
     $hide = act_doc_hidden_ids($pdo);
-    return array_map(static function ($r) use ($hide) { $d = json_decode((string) $r['data_json'], true) ?: []; unset($r['data_json']);
+    return array_map(static function ($r) use ($hide, $mediaId) { $r['page_of'] = (int) $r['media_id'] !== $mediaId ? (int) $r['media_id'] : 0; unset($r['media_id']); $d = json_decode((string) $r['data_json'], true) ?: []; unset($r['data_json']);
         $r['id'] = (int) $r['id']; $r['zones'] = count(is_array($d['zones'] ?? null) ? $d['zones'] : []);
         $r['status'] = in_array($d['status'] ?? '', ['todo', 'doing', 'checked', 'done'], true) ? $d['status'] : (trim((string) $r['body']) === '' ? 'todo' : 'doing');
-        if ($hide) { $d['people'] = array_values(array_filter(is_array($d['people'] ?? null) ? $d['people'] : [], static fn($p) => is_array($p) && !isset($hide[(int) ($p['person_id'] ?? 0)]))); } $r['people'] = array_values(array_map(static fn($p) => ['name' => (string) ($p['name'] ?? ''), 'role' => (string) ($p['role'] ?? ''), 'person_id' => (int) ($p['person_id'] ?? 0)], array_filter(is_array($d['people'] ?? null) ? $d['people'] : [], 'is_array'))); return $r; }, $s->fetchAll());
+        if ($hide) { $d['people'] = array_values(array_filter(is_array($d['people'] ?? null) ? $d['people'] : [], static fn($p) => is_array($p) && !isset($hide[(int) ($p['person_id'] ?? 0)]))); } $r['people'] = array_values(array_map(static fn($p) => ['name' => (string) ($p['name'] ?? ''), 'role' => (string) ($p['role'] ?? ''), 'person_id' => (int) ($p['person_id'] ?? 0)], array_filter(is_array($d['people'] ?? null) ? $d['people'] : [], 'is_array'))); return $r;     }, $rows);
 }
 
 function act_transcription_get(PDO $pdo, int $id): array
@@ -211,7 +214,8 @@ function act_transcription_clean_data(PDO $pdo, $data): array
     foreach (array_slice(is_array($data['zones'] ?? null) ? $data['zones'] : [], 0, 2000) as $z) {
         if (!is_array($z)) { continue; }
         $zones[] = ['id' => mb_substr(preg_replace('/[^\w-]/', '', (string) ($z['id'] ?? '')), 0, 24), 'x' => $num($z['x'] ?? 0), 'y' => $num($z['y'] ?? 0), 'w' => $num($z['w'] ?? 0), 'h' => $num($z['h'] ?? 0),
-            's' => max(0, (int) ($z['s'] ?? 0)), 'e' => max(0, (int) ($z['e'] ?? 0)), 'note' => mb_substr(safe_text($z['note'] ?? ''), 0, 300), 'c' => preg_match('/^#[0-9a-f]{6}$/i', (string) ($z['c'] ?? '')) ? $z['c'] : ''] + (in_array($z['src'] ?? '', ['htr', 'ocr', 'deep'], true) ? ['src' => $z['src']] : []); // src : posée par une lecture (sinon dessinée à la main)
+            's' => max(0, (int) ($z['s'] ?? 0)), 'e' => max(0, (int) ($z['e'] ?? 0)), 'note' => mb_substr(safe_text($z['note'] ?? ''), 0, 300), 'c' => preg_match('/^#[0-9a-f]{6}$/i', (string) ($z['c'] ?? '')) ? $z['c'] : ''] + (in_array($z['src'] ?? '', ['htr', 'ocr', 'deep'], true) ? ['src' => $z['src']] : [])
+            + (safe_int($z['p'] ?? 0) > 0 ? ['p' => safe_int($z['p'])] : []); // p : la page (n° du média) d'un acte en plusieurs pages ; absente = l'image de l'acte // src : posée par une lecture (sinon dessinée à la main)
     }
     $people = [];
     foreach (array_slice(is_array($data['people'] ?? null) ? $data['people'] : [], 0, 200) as $p) {
@@ -236,7 +240,9 @@ function act_transcription_clean_data(PDO $pdo, $data): array
     $translation = mb_substr(str_replace("\0", '', is_string($data['translation'] ?? null) ? $data['translation'] : ''), 0, 40000);
     // 👁 les lignes relues (relecture ligne à ligne) : l'empreinte de chaque ligne relue, de courts textes en base 36
     $reviewed = array_values(array_unique(array_filter(array_slice(is_array($data['reviewed'] ?? null) ? $data['reviewed'] : [], -5000), static fn($k) => is_string($k) && preg_match('/^[0-9a-z]{1,10}$/', $k))));
-    return ['zones' => $zones, 'people' => $people, 'view' => $cleanView, 'status' => $status] + ($frame !== '' ? ['frame_text' => $frame] : []) + ($translation !== '' ? ['translation' => $translation] : []) + ($reviewed ? ['reviewed' => $reviewed] : []);
+    // 📑 un acte en plusieurs pages, un seul texte coupé par « — page 2 — » : les médias des morceaux du texte, dans l'ordre du texte
+    $pages = array_values(array_unique(array_filter(array_map('safe_int', array_slice(is_array($data['pages'] ?? null) ? $data['pages'] : [], 0, 200)), static fn($v) => $v > 0)));
+    return ['zones' => $zones, 'people' => $people, 'view' => $cleanView, 'status' => $status] + (count($pages) >= 2 ? ['pages' => $pages] : []) + ($frame !== '' ? ['frame_text' => $frame] : []) + ($translation !== '' ? ['translation' => $translation] : []) + ($reviewed ? ['reviewed' => $reviewed] : []);
 }
 
 function save_act_transcription(PDO $pdo, array $data): array
@@ -279,6 +285,7 @@ function save_act_transcription(PDO $pdo, array $data): array
     // l'ancienne image d'un acte déplacé garde son texte si elle n'a plus d'acte
     media_doc_text_sync($pdo, $mediaId);
     if ($oldMedia && $oldMedia !== $mediaId) { media_doc_text_sync($pdo, $oldMedia); }
+    act_pages_text_sync($pdo, $mediaId, $body, json_decode($json, true) ?: []); // 📑 chaque autre page reçoit son morceau du texte
     act_version_on_save($pdo, $id, $body, is_array($data['data'] ?? null) ? $data['data'] : []); // 🕘 une version à chaque enregistrement (si le texte a changé)
     log_change($pdo, 'meta', 0, 'update', 'Transcription d’acte enregistrée : ' . $title);
     return ['id' => $id, 'body' => $body];
@@ -489,4 +496,53 @@ function act_link_person(PDO $pdo, array $data): array
     $pdo->prepare('UPDATE act_transcriptions SET data_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([json_encode($d, JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE), $id]);
     log_change($pdo, 'meta', 0, 'update', ($pid ? 'Nom relié dans la transcription : ' : 'Nom délié dans la transcription : ') . $r['title']);
     return ['ok' => true, 'id' => $id, 'index' => $i, 'person_id' => $pid, 'was' => $was];
+}
+
+/* ═════════ 📑 Un acte en plusieurs pages (lib/media_pages.php ; assets/js/heritage-transcribe-pages.js) ═════════ */
+
+/** les repères « — page 2 — » du texte : une ligne entière « — <un mot> <nombre> — » (le mot dépend de la langue de l'écran) */
+const ACT_PAGE_MARK = '/^—[ \t]*[\p{L}.]+[ \t]+\d+[^\n—]*—[ \t]*$/mu';
+
+/** le texte coupé en morceaux, un par page (dans l'ordre du texte) : [texte du morceau 0, du morceau 1…] */
+function act_page_segments(string $body): array
+{
+    $body = str_replace("\r\n", "\n", $body);
+    if (!preg_match_all(ACT_PAGE_MARK, $body, $m, PREG_OFFSET_CAPTURE)) { return [$body]; }
+    $out = []; $from = 0;
+    foreach ($m[0] as [$line, $at]) { $out[] = substr($body, $from, max(0, $at - 1 - $from)); $from = min(strlen($body), $at + strlen($line) + 1); }
+    $out[] = substr($body, $from);
+    return $out;
+}
+
+/** l'acte « un seul texte » dont ce média est une page (0 : aucun) */
+function act_page_owner(PDO $pdo, int $mediaId): int
+{
+    if ($mediaId <= 0) { return 0; }
+    act_transcriptions_ensure($pdo);
+    $s = $pdo->prepare("SELECT t.id FROM act_transcriptions t WHERE t.data_json LIKE '%\"pages\"%' AND EXISTS (SELECT 1 FROM json_each(t.data_json, '$.pages') j WHERE CAST(j.value AS INTEGER) = ?) ORDER BY t.id LIMIT 1");
+    $s->execute([$mediaId]);
+    return (int) $s->fetchColumn();
+}
+
+/**
+ * Après l'enregistrement d'un acte en plusieurs pages : chaque autre page (sans acte à elle) reçoit son morceau du texte dans
+ * media.transcription (la recherche, la visionneuse, la page du document la lisent). Jamais d'écrasement : un texte de la page
+ * qui n'est pas déjà dans l'acte reste tel quel (l'Atelier le reprend à la prochaine ouverture).
+ */
+function act_pages_text_sync(PDO $pdo, int $mediaId, string $body, array $data): void
+{
+    $pages = is_array($data['pages'] ?? null) ? array_map('intval', $data['pages']) : [];
+    if (count($pages) < 2) { return; }
+    $seg = act_page_segments($body); $flat = str_replace("\r\n", "\n", $body);
+    $own = $pdo->prepare('SELECT count(*) FROM act_transcriptions WHERE media_id=?');
+    $cur = $pdo->prepare("SELECT COALESCE(transcription,'') FROM media WHERE id=?");
+    $put = $pdo->prepare('UPDATE media SET transcription=? WHERE id=?');
+    foreach ($pages as $i => $mid) {
+        if ($mid <= 0 || $mid === $mediaId || !array_key_exists($i, $seg)) { continue; }
+        $own->execute([$mid]); if ((int) $own->fetchColumn()) { continue; }
+        $cur->execute([$mid]); $was = $cur->fetchColumn(); if ($was === false) { continue; }
+        $was = trim(str_replace("\r\n", "\n", (string) $was)); $text = trim($seg[$i]);
+        if ($was === $text || ($was !== '' && !str_contains($flat, $was))) { continue; }
+        $put->execute([$text, $mid]);
+    }
 }
