@@ -32198,6 +32198,7 @@
   "one": "bulunan çizgi",
   "other": "bulunan çizgi"
  },
+ "Ligne répétée deux fois de suite : {n}": "Art arda iki kez tekrarlanan satır: {n}",
  "Ligne retirée": "Satır çıkarıldı",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Alanı olmayan satır: onu resmin üzerine çiz (▭)",
  "Ligne SocFace introuvable.": "SocFace satırı bulunamadı.",
@@ -42495,6 +42496,7 @@
  "Retirer la racine": "Kökü çıkar",
  "Retirer la règle": "Kuralı çıkar",
  "retirer la voix": "ses kaydını kaldır",
+ "Retirer le doublon": "Tekrarı kaldır",
  "Retirer le fichier": "Dosyayı çıkar",
  "Retirer le filtre": "Filtreyi kaldır",
  "Retirer le filtre de la personne": "Kişi filtresini kaldır",

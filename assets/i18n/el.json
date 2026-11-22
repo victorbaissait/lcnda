@@ -32198,6 +32198,7 @@
   "one": "εντοπισμένη γραμμή",
   "other": "εντοπισμένες γραμμές"
  },
+ "Ligne répétée deux fois de suite : {n}": "Γραμμή που επαναλαμβάνεται δύο φορές στη σειρά: {n}",
  "Ligne retirée": "Η γραμμή αφαιρέθηκε",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Γραμμή χωρίς περιοχή: σχεδίασέ τη στην εικόνα (▭)",
  "Ligne SocFace introuvable.": "Δεν βρέθηκε η γραμμή SocFace.",
@@ -42495,6 +42496,7 @@
  "Retirer la racine": "Αφαίρεση της ρίζας",
  "Retirer la règle": "Αφαίρεση του κανόνα",
  "retirer la voix": "αφαίρεση της φωνής",
+ "Retirer le doublon": "Αφαίρεση του διπλότυπου",
  "Retirer le fichier": "Αφαίρεση του αρχείου",
  "Retirer le filtre": "Αφαίρεση του φίλτρου",
  "Retirer le filtre de la personne": "Αφαίρεση του φίλτρου ατόμου",

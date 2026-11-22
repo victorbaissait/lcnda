@@ -31761,6 +31761,7 @@
  "ligne repérée": {
   "other": "garis ditemukan"
  },
+ "Ligne répétée deux fois de suite : {n}": "Baris diulang dua kali berturut-turut: {n}",
  "Ligne retirée": "Baris dilepas",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Baris tanpa area: gambar di atas gambar (▭)",
  "Ligne SocFace introuvable.": "Baris SocFace tidak ditemukan.",
@@ -41850,6 +41851,7 @@
  "Retirer la racine": "Lepas akar",
  "Retirer la règle": "Lepas aturan",
  "retirer la voix": "hapus suara",
+ "Retirer le doublon": "Hapus duplikat",
  "Retirer le fichier": "Lepas berkas",
  "Retirer le filtre": "Lepas filter",
  "Retirer le filtre de la personne": "Lepas saringan orang",

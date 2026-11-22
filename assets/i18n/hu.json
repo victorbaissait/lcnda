@@ -32198,6 +32198,7 @@
   "one": "talált vonal",
   "other": "talált vonal"
  },
+ "Ligne répétée deux fois de suite : {n}": "Kétszer egymás után ismételt sor: {n}",
  "Ligne retirée": "Sor eltávolítva",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Terület nélküli sor: rajzold meg a képen (▭)",
  "Ligne SocFace introuvable.": "A SocFace-sor nem található.",
@@ -42495,6 +42496,7 @@
  "Retirer la racine": "Gyökér eltávolítása",
  "Retirer la règle": "Szabály eltávolítása",
  "retirer la voix": "a hang eltávolítása",
+ "Retirer le doublon": "Ismétlés eltávolítása",
  "Retirer le fichier": "Fájl eltávolítása",
  "Retirer le filtre": "Szűrő eltávolítása",
  "Retirer le filtre de la personne": "A személyszűrő eltávolítása",

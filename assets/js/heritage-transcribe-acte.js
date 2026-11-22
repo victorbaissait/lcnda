@@ -116,11 +116,25 @@
             }
             if (j.state === 'done') onDone(j);
         }
+        // 🔁 un modèle d'IA écrit parfois deux fois de suite la même ligne : le signaler, et « Retirer le doublon » (↶ Annuler)
+        const normLine = l => l.toLowerCase().replace(/[\s.,;:!?«»"'’-]+/g, ' ').trim();
+        const repeats = v => { const L = String(v || '').split('\n'); return L.filter((l, i) => i > 0 && normLine(l) && normLine(l) === normLine(L[i - 1])).length; };
+        const dedup = v => String(v || '').split('\n').filter((l, i, L) => !(i > 0 && normLine(l) && normLine(l) === normLine(L[i - 1]))).join('\n');
+        let dedupBefore = null;
+        function paintRepeats() {
+            const ta = box.querySelector('[data-txa-t="deep"]'); if (!ta) return;
+            let el = box.querySelector('[data-txa-rep]'); const n = repeats(ta.value);
+            if (!n && dedupBefore == null) { el?.remove(); return; }
+            if (!el) { el = document.createElement('div'); el.dataset.txaRep = ''; el.className = 'h-txa-rep'; ta.after(el); }
+            el.innerHTML = n ? `${notice('warn', `🔁 ${esc(i18n('Ligne répétée deux fois de suite : {n}', {n}))}`)}<button type="button" class="button small secondary" data-txa-dedup>${esc(i18n('Retirer le doublon'))}</button>`
+                : `<button type="button" class="button small secondary" data-txa-redup>↶ ${esc(i18n('Annuler'))}</button>`;
+        }
         function compare(deepText) {
             const out = box.querySelector('[data-txa-out]'); const two = !!String(o.htrText || '').trim();
             out.innerHTML = `<h4>${esc(two ? i18n('Les deux lectures côte à côte') : i18n('Le texte lu'))}${o.pageLabel ? ` · ${esc(o.pageLabel)}` : ''}</h4><div class="h-txa-cmp2${two ? '' : ' is-one'}">
                 ${two ? `<div><b>✍ ${esc(i18n('Écriture à la main'))}</b><textarea data-txa-t="htr" spellcheck="false">${esc(o.htrText)}</textarea><button type="button" class="button small secondary" data-txa-keep="htr">✓ ${esc(i18n('Garder celle-ci'))}</button></div>` : ''}
                 <div><b>🔬 ${esc(i18n('Lecture approfondie'))}</b><textarea data-txa-t="deep" spellcheck="false">${esc(deepText)}</textarea><button type="button" class="button small" data-txa-keep="deep">✓ ${esc(two ? i18n('Garder celle-ci') : i18n('Mettre dans le texte'))}</button></div></div>`;
+            paintRepeats(); out.querySelector('[data-txa-t="deep"]')?.addEventListener('input', () => paintRepeats());
             o.onCompare?.(out); // 🪄 corrections proposées et ▤ « Relier les lignes à l'image » (app-lignes-alignement.js, posés par l'Atelier)
         }
         box.addEventListener('click', async e => {
@@ -136,6 +150,8 @@
                 try { const r = await post('tx_deep_read', {model: pick(), language: o.lang || 'fra', image_b64: img}); job = {id: r.result.id, state: 'running'}; b.disabled = true; prog(true, 2, `${i18n('Lecture approfondie')}…`); poll(j => { b.disabled = false; compare(j.text); }); } catch (err) { toast(err.message, 'error'); }
                 return;
             }
+            if (b.matches('[data-txa-dedup]')) { const ta = box.querySelector('[data-txa-t="deep"]'); dedupBefore = ta.value; ta.value = dedup(ta.value); paintRepeats(); return; }
+            if (b.matches('[data-txa-redup]')) { const ta = box.querySelector('[data-txa-t="deep"]'); if (dedupBefore != null) ta.value = dedupBefore; dedupBefore = null; paintRepeats(); return; }
             if (b.dataset.txaKeep) { const v = box.querySelector(`[data-txa-t="${b.dataset.txaKeep}"]`)?.value || ''; if (!v.trim()) return; o.onKeep?.(v, b.dataset.txaKeep); dlg.close(); }
         });
         box.addEventListener('change', e => { if (e.target.name === 'txa_model') { pick(); refresh(); } });

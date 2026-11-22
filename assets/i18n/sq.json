@@ -32198,6 +32198,7 @@
   "one": "vijë e gjetur",
   "other": "vija të gjetura"
  },
+ "Ligne répétée deux fois de suite : {n}": "Rresht i përsëritur dy herë radhazi: {n}",
  "Ligne retirée": "Rreshti u hoq",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Rresht pa zonë: vizatoje në imazh (▭)",
  "Ligne SocFace introuvable.": "Rreshti SocFace nuk u gjet.",
@@ -42495,6 +42496,7 @@
  "Retirer la racine": "Hiq rrënjën",
  "Retirer la règle": "Hiq rregullin",
  "retirer la voix": "hiq zërin",
+ "Retirer le doublon": "Hiq dublikatën",
  "Retirer le fichier": "Hiq skedarin",
  "Retirer le filtre": "Hiq filtrin",
  "Retirer le filtre de la personne": "Hiq filtrin e personit",

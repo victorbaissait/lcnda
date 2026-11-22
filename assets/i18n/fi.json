@@ -32198,6 +32198,7 @@
   "one": "löydetty viiva",
   "other": "löydettyä viivaa"
  },
+ "Ligne répétée deux fois de suite : {n}": "Kahdesti peräkkäin toistettu rivi: {n}",
  "Ligne retirée": "Rivi irrotettu",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Rivi ilman aluetta: piirrä se kuvaan (▭)",
  "Ligne SocFace introuvable.": "SocFace-riviä ei löydy.",
@@ -42495,6 +42496,7 @@
  "Retirer la racine": "Irrota juuri",
  "Retirer la règle": "Poista sääntö",
  "retirer la voix": "poista puhe",
+ "Retirer le doublon": "Poista kaksoiskappale",
  "Retirer le fichier": "Irrota tiedosto",
  "Retirer le filtre": "Poista suodatin",
  "Retirer le filtre de la personne": "Poista henkilösuodatin",

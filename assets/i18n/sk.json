@@ -33072,6 +33072,7 @@
   "many": "nájdené čiary",
   "other": "nájdených čiar"
  },
+ "Ligne répétée deux fois de suite : {n}": "Riadok zopakovaný dvakrát za sebou: {n}",
  "Ligne retirée": "Riadok je odobratý",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Riadok bez oblasti: nakresli ju na obrázok (▭)",
  "Ligne SocFace introuvable.": "Riadok SocFace sa nenašiel.",
@@ -43785,6 +43786,7 @@
  "Retirer la racine": "Odobrať koreň",
  "Retirer la règle": "Odobrať pravidlo",
  "retirer la voix": "odobrať hlas",
+ "Retirer le doublon": "Odobrať duplikát",
  "Retirer le fichier": "Odobrať súbor",
  "Retirer le filtre": "Odobrať filter",
  "Retirer le filtre de la personne": "Odobrať filter osoby",

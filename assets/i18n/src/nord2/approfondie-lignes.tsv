@@ -15,3 +15,5 @@ Lignes reliées à l’image : {x} ¦ Riadky prepojené s obrázkom: {x} ¦ Linj
 sans zone : {n} ¦ bez oblasti: {n} ¦ uten område: {n}
 d’après la lecture rapide ¦ podľa rýchleho čítania ¦ ut fra hurtiglesingen
 d’après un découpage simple de l’image ¦ podľa jednoduchého rozdelenia obrázka ¦ ut fra en enkel oppdeling av bildet
+Retirer le doublon ¦ Odobrať duplikát ¦ Fjern duplikatet
+Ligne répétée deux fois de suite : {n} ¦ Riadok zopakovaný dvakrát za sebou: {n} ¦ Linje gjentatt to ganger på rad: {n}

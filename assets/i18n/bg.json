@@ -32198,6 +32198,7 @@
   "one": "открита линия",
   "other": "открити линии"
  },
+ "Ligne répétée deux fois de suite : {n}": "Ред, повторен два пъти подред: {n}",
  "Ligne retirée": "Редът е премахнат",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Ред без област: начертай я върху изображението (▭)",
  "Ligne SocFace introuvable.": "Редът в SocFace не е намерен.",
@@ -42495,6 +42496,7 @@
  "Retirer la racine": "Премахни началото",
  "Retirer la règle": "Премахни правилото",
  "retirer la voix": "махни гласа",
+ "Retirer le doublon": "Махни повторението",
  "Retirer le fichier": "Премахни файла",
  "Retirer le filtre": "Премахни филтъра",
  "Retirer le filtre de la personne": "Премахни филтъра за човека",

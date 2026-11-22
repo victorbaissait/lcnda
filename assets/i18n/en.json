@@ -32198,6 +32198,7 @@
   "one": "line found",
   "other": "lines found"
  },
+ "Ligne répétée deux fois de suite : {n}": "Line repeated twice in a row: {n}",
  "Ligne retirée": "Row removed",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Line without an area: draw it on the image (▭)",
  "Ligne SocFace introuvable.": "SocFace row not found.",
@@ -42495,6 +42496,7 @@
  "Retirer la racine": "Remove the root",
  "Retirer la règle": "Remove the rule",
  "retirer la voix": "remove the voice",
+ "Retirer le doublon": "Remove the duplicate",
  "Retirer le fichier": "Remove the file",
  "Retirer le filtre": "Remove the filter",
  "Retirer le filtre de la personne": "Remove the person filter",

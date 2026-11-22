@@ -32198,6 +32198,7 @@
   "one": "Linie gefunden",
   "other": "Linien gefunden"
  },
+ "Ligne répétée deux fois de suite : {n}": "Zweimal hintereinander wiederholte Zeile: {n}",
  "Ligne retirée": "Zeile entfernt",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Zeile ohne Bereich: zeichne ihn auf dem Bild (▭)",
  "Ligne SocFace introuvable.": "SocFace-Zeile nicht gefunden.",
@@ -42495,6 +42496,7 @@
  "Retirer la racine": "Ausgangsperson entfernen",
  "Retirer la règle": "Regel entfernen",
  "retirer la voix": "Stimme entfernen",
+ "Retirer le doublon": "Doppelte Zeile entfernen",
  "Retirer le fichier": "Datei entfernen",
  "Retirer le filtre": "Filter entfernen",
  "Retirer le filtre de la personne": "Personenfilter entfernen",

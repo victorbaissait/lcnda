@@ -32635,6 +32635,7 @@
   "one": "atrasta līnija",
   "other": "atrastas līnijas"
  },
+ "Ligne répétée deux fois de suite : {n}": "Rinda atkārtota divreiz pēc kārtas: {n}",
  "Ligne retirée": "Rinda noņemta",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Rinda bez apgabala: uzzīmē to attēlā (▭)",
  "Ligne SocFace introuvable.": "SocFace rinda nav atrasta.",
@@ -43140,6 +43141,7 @@
  "Retirer la racine": "Noņemt sākumu",
  "Retirer la règle": "Noņemt noteikumu",
  "retirer la voix": "noņemt balsi",
+ "Retirer le doublon": "Noņemt dublikātu",
  "Retirer le fichier": "Noņemt failu",
  "Retirer le filtre": "Noņemt filtru",
  "Retirer le filtre de la personne": "Noņemt personas filtru",

@@ -33072,6 +33072,7 @@
   "many": "найденных линий",
   "other": "найденные линии"
  },
+ "Ligne répétée deux fois de suite : {n}": "Строка повторена два раза подряд: {n}",
  "Ligne retirée": "Строка убрана",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Строка без области: нарисуй её на изображении (▭)",
  "Ligne SocFace introuvable.": "Строка SocFace не найдена.",
@@ -43785,6 +43786,7 @@
  "Retirer la racine": "Убрать корень",
  "Retirer la règle": "Убрать правило",
  "retirer la voix": "убрать голос",
+ "Retirer le doublon": "Убрать повтор",
  "Retirer le fichier": "Убрать файл",
  "Retirer le filtre": "Убрать фильтр",
  "Retirer le filtre de la personne": "Убрать фильтр по человеку",

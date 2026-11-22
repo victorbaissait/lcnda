@@ -32198,6 +32198,7 @@
   "one": "leitud joon",
   "other": "leitud joont"
  },
+ "Ligne répétée deux fois de suite : {n}": "Kaks korda järjest korratud rida: {n}",
  "Ligne retirée": "Rida eemaldatud",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Rida ilma alata: joonista see pildile (▭)",
  "Ligne SocFace introuvable.": "SocFace'i rida ei leitud.",
@@ -42495,6 +42496,7 @@
  "Retirer la racine": "Eemalda juur",
  "Retirer la règle": "Eemalda reegel",
  "retirer la voix": "eemalda hääl",
+ "Retirer le doublon": "Eemalda kordus",
  "Retirer le fichier": "Eemalda fail",
  "Retirer le filtre": "Eemalda filter",
  "Retirer le filtre de la personne": "Eemalda isikufilter",

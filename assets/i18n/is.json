@@ -32198,6 +32198,7 @@
   "one": "lína fundin",
   "other": "línur fundnar"
  },
+ "Ligne répétée deux fois de suite : {n}": "Lína endurtekin tvisvar í röð: {n}",
  "Ligne retirée": "Lína fjarlægð",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Lína án svæðis: teiknaðu það á myndina (▭)",
  "Ligne SocFace introuvable.": "SocFace-lína fannst ekki.",
@@ -42495,6 +42496,7 @@
  "Retirer la racine": "Fjarlægja rótina",
  "Retirer la règle": "Fjarlægja regluna",
  "retirer la voix": "fjarlægja röddina",
+ "Retirer le doublon": "Fjarlægja tvítekninguna",
  "Retirer le fichier": "Fjarlægja skrána",
  "Retirer le filtre": "Fjarlægja síuna",
  "Retirer le filtre de la personne": "Fjarlægja einstaklingssíuna",

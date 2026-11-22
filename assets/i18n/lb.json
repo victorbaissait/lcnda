@@ -32198,6 +32198,7 @@
   "one": "fonnt Linn",
   "other": "fonnt Linnen"
  },
+ "Ligne répétée deux fois de suite : {n}": "Linn zweemol hannereneen widderholl: {n}",
  "Ligne retirée": "Zeil ewechgeholl",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Zeil ouni Beräich: zeechen en um Bild (▭)",
  "Ligne SocFace introuvable.": "SocFace-Linn net fonnt.",
@@ -42495,6 +42496,7 @@
  "Retirer la racine": "D’Wuerzel ewechhuelen",
  "Retirer la règle": "D’Regel ewechhuelen",
  "retirer la voix": "d’Stëmm ewechhuelen",
+ "Retirer le doublon": "Den Duplikat ewechhuelen",
  "Retirer le fichier": "De Fichier ewechhuelen",
  "Retirer le filtre": "De Filter ewechhuelen",
  "Retirer le filtre de la personne": "De Filter vun der Persoun ewechhuelen",

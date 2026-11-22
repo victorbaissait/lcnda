@@ -32635,6 +32635,7 @@
   "few": "pronađene linije",
   "other": "pronađenih linija"
  },
+ "Ligne répétée deux fois de suite : {n}": "Redak ponovljen dvaput zaredom: {n}",
  "Ligne retirée": "Redak uklonjen",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Redak bez područja: nacrtaj ga na slici (▭)",
  "Ligne SocFace introuvable.": "Redak SocFace nije pronađen.",
@@ -43140,6 +43141,7 @@
  "Retirer la racine": "Ukloni korijen",
  "Retirer la règle": "Ukloni pravilo",
  "retirer la voix": "ukloni glas",
+ "Retirer le doublon": "Ukloni duplikat",
  "Retirer le fichier": "Ukloni datoteku",
  "Retirer le filtre": "Ukloni filtar",
  "Retirer le filtre de la personne": "Ukloni filtar osobe",

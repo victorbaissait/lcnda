@@ -33072,6 +33072,7 @@
   "many": "знайдених ліній",
   "other": "знайдені лінії"
  },
+ "Ligne répétée deux fois de suite : {n}": "Рядок повторено двічі поспіль: {n}",
  "Ligne retirée": "Рядок прибрано",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Рядок без області: намалюй її на зображенні (▭)",
  "Ligne SocFace introuvable.": "Рядок SocFace не знайдено.",
@@ -43785,6 +43786,7 @@
  "Retirer la racine": "Прибрати корінь",
  "Retirer la règle": "Прибрати правило",
  "retirer la voix": "прибрати голос",
+ "Retirer le doublon": "Прибрати повтор",
  "Retirer le fichier": "Прибрати файл",
  "Retirer le filtre": "Прибрати фільтр",
  "Retirer le filtre de la personne": "Прибрати фільтр за людиною",

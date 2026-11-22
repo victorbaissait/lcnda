@@ -32635,6 +32635,7 @@
   "other": "linee trovate",
   "many": "linee trovate"
  },
+ "Ligne répétée deux fois de suite : {n}": "Riga ripetuta due volte di seguito: {n}",
  "Ligne retirée": "Riga tolta",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Riga senza zona: disegnala sull’immagine (▭)",
  "Ligne SocFace introuvable.": "Riga SocFace non trovata.",
@@ -43140,6 +43141,7 @@
  "Retirer la racine": "Togli la radice",
  "Retirer la règle": "Togli la regola",
  "retirer la voix": "togli la voce",
+ "Retirer le doublon": "Togli il doppione",
  "Retirer le fichier": "Rimuovi il file",
  "Retirer le filtre": "Togli il filtro",
  "Retirer le filtre de la personne": "Togli il filtro della persona",

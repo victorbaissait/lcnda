@@ -15,3 +15,5 @@ Lignes reliées à l’image : {x} ¦ Kuvaan yhdistetyt rivit: {x} ¦ A képpel 
 sans zone : {n} ¦ ilman aluetta: {n} ¦ terület nélkül: {n}
 d’après la lecture rapide ¦ pikaluvun mukaan ¦ a gyors olvasás alapján
 d’après un découpage simple de l’image ¦ kuvan yksinkertaisen jaon mukaan ¦ a kép egyszerű bontása alapján
+Retirer le doublon ¦ Poista kaksoiskappale ¦ Ismétlés eltávolítása
+Ligne répétée deux fois de suite : {n} ¦ Kahdesti peräkkäin toistettu rivi: {n} ¦ Kétszer egymás után ismételt sor: {n}

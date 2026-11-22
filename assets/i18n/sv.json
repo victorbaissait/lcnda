@@ -32198,6 +32198,7 @@
   "one": "linje hittad",
   "other": "linjer hittade"
  },
+ "Ligne répétée deux fois de suite : {n}": "Rad upprepad två gånger i rad: {n}",
  "Ligne retirée": "Raden borttagen",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Rad utan område: rita det på bilden (▭)",
  "Ligne SocFace introuvable.": "SocFace-raden hittades inte.",
@@ -42495,6 +42496,7 @@
  "Retirer la racine": "Ta bort roten",
  "Retirer la règle": "Ta bort regeln",
  "retirer la voix": "ta bort rösten",
+ "Retirer le doublon": "Ta bort dubbletten",
  "Retirer le fichier": "Ta bort filen",
  "Retirer le filtre": "Ta bort filtret",
  "Retirer le filtre de la personne": "Ta bort personfiltret",

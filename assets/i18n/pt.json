@@ -32635,6 +32635,7 @@
   "other": "linhas encontradas",
   "many": "linhas encontradas"
  },
+ "Ligne répétée deux fois de suite : {n}": "Linha repetida duas vezes seguidas: {n}",
  "Ligne retirée": "Linha retirada",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Linha sem zona: desenha-a na imagem (▭)",
  "Ligne SocFace introuvable.": "Linha SocFace não encontrada.",
@@ -43140,6 +43141,7 @@
  "Retirer la racine": "Retirar a raiz",
  "Retirer la règle": "Retirar a regra",
  "retirer la voix": "retirar a voz",
+ "Retirer le doublon": "Retirar o duplicado",
  "Retirer le fichier": "Retirar o ficheiro",
  "Retirer le filtre": "Retirar o filtro",
  "Retirer le filtre de la personne": "Retirar o filtro da pessoa",

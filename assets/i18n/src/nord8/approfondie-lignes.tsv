@@ -15,3 +15,5 @@ Lignes reliées à l’image : {x} ¦ Görüntüye bağlanan satırlar: {x}
 sans zone : {n} ¦ bölgesiz: {n}
 d’après la lecture rapide ¦ hızlı okumaya göre
 d’après un découpage simple de l’image ¦ görüntünün basit bölünmesine göre
+Retirer le doublon ¦ Tekrarı kaldır
+Ligne répétée deux fois de suite : {n} ¦ Art arda iki kez tekrarlanan satır: {n}

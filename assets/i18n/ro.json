@@ -32635,6 +32635,7 @@
   "few": "linii găsite",
   "other": "de linii găsite"
  },
+ "Ligne répétée deux fois de suite : {n}": "Rând repetat de două ori la rând: {n}",
  "Ligne retirée": "Rând scos",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Rând fără zonă: deseneaz-o pe imagine (▭)",
  "Ligne SocFace introuvable.": "Rând SocFace negăsit.",
@@ -43140,6 +43141,7 @@
  "Retirer la racine": "Scoate rădăcina",
  "Retirer la règle": "Scoate regula",
  "retirer la voix": "scoate vocea",
+ "Retirer le doublon": "Scoate dublura",
  "Retirer le fichier": "Scoate fișierul",
  "Retirer le filtre": "Scoate filtrul",
  "Retirer le filtre de la personne": "Scoate filtrul persoanei",

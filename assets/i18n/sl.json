@@ -33072,6 +33072,7 @@
   "few": "najdene črte",
   "other": "najdenih črt"
  },
+ "Ligne répétée deux fois de suite : {n}": "Vrstica, ponovljena dvakrat zapored: {n}",
  "Ligne retirée": "Vrstica odstranjena",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Vrstica brez območja: nariši ga na sliko (▭)",
  "Ligne SocFace introuvable.": "Vrstice SocFace ni mogoče najti.",
@@ -43785,6 +43786,7 @@
  "Retirer la racine": "Odstrani koren",
  "Retirer la règle": "Odstrani pravilo",
  "retirer la voix": "odstrani glas",
+ "Retirer le doublon": "Odstrani dvojnik",
  "Retirer le fichier": "Odstrani datoteko",
  "Retirer le filtre": "Odstrani filter",
  "Retirer le filtre de la personne": "Odstrani filter osebe",

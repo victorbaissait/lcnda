@@ -33072,6 +33072,7 @@
   "other": "rastų linijų",
   "many": "rastų linijų"
  },
+ "Ligne répétée deux fois de suite : {n}": "Eilutė pakartota du kartus iš eilės: {n}",
  "Ligne retirée": "Eilutė pašalinta",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Eilutė be srities: nubrėžk ją vaizde (▭)",
  "Ligne SocFace introuvable.": "SocFace eilutė nerasta.",
@@ -43785,6 +43786,7 @@
  "Retirer la racine": "Pašalinti pradžią",
  "Retirer la règle": "Pašalinti taisyklę",
  "retirer la voix": "pašalinti balsą",
+ "Retirer le doublon": "Pašalinti dublikatą",
  "Retirer le fichier": "Pašalinti failą",
  "Retirer le filtre": "Pašalinti filtrą",
  "Retirer le filtre de la personne": "Pašalinti asmens filtrą",

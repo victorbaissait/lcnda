@@ -31761,6 +31761,7 @@
  "ligne repérée": {
   "other": "đường được tìm thấy"
  },
+ "Ligne répétée deux fois de suite : {n}": "Dòng lặp lại hai lần liên tiếp: {n}",
  "Ligne retirée": "Đã gỡ dòng",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Dòng chưa có vùng: hãy vẽ nó trên hình ảnh (▭)",
  "Ligne SocFace introuvable.": "Không tìm thấy dòng SocFace.",
@@ -41850,6 +41851,7 @@
  "Retirer la racine": "Gỡ người gốc",
  "Retirer la règle": "Gỡ quy tắc",
  "retirer la voix": "bỏ giọng nói",
+ "Retirer le doublon": "Gỡ dòng trùng",
  "Retirer le fichier": "Gỡ tệp ra",
  "Retirer le filtre": "Gỡ bộ lọc",
  "Retirer le filtre de la personne": "Gỡ bộ lọc theo người",

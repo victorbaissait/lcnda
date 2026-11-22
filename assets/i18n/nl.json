@@ -32198,6 +32198,7 @@
   "one": "lijn gevonden",
   "other": "lijnen gevonden"
  },
+ "Ligne répétée deux fois de suite : {n}": "Regel twee keer achter elkaar herhaald: {n}",
  "Ligne retirée": "Rij weggehaald",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Regel zonder gebied: teken het op de afbeelding (▭)",
  "Ligne SocFace introuvable.": "SocFace-regel niet gevonden.",
@@ -42495,6 +42496,7 @@
  "Retirer la racine": "Beginpersoon weghalen",
  "Retirer la règle": "Regel weghalen",
  "retirer la voix": "stem verwijderen",
+ "Retirer le doublon": "Dubbele regel weghalen",
  "Retirer le fichier": "Bestand weghalen",
  "Retirer le filtre": "Filter weghalen",
  "Retirer le filtre de la personne": "Persoonsfilter weghalen",

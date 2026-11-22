@@ -33072,6 +33072,7 @@
   "many": "znalezionych linii",
   "other": "znalezione linie"
  },
+ "Ligne répétée deux fois de suite : {n}": "Wiersz powtórzony dwa razy z rzędu: {n}",
  "Ligne retirée": "Wiersz usunięty",
  "Ligne sans zone : dessine-la sur l’image (▭)": "Wiersz bez obszaru: narysuj go na obrazie (▭)",
  "Ligne SocFace introuvable.": "Nie znaleziono wiersza SocFace.",
@@ -43785,6 +43786,7 @@
  "Retirer la racine": "Odłącz korzeń",
  "Retirer la règle": "Usuń regułę",
  "retirer la voix": "usuń głos",
+ "Retirer le doublon": "Usuń powtórzenie",
  "Retirer le fichier": "Usuń plik",
  "Retirer le filtre": "Usuń filtr",
  "Retirer le filtre de la personne": "Usuń filtr osoby",

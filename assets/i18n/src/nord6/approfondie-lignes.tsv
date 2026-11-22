@@ -15,3 +15,5 @@ Lignes reliées à l’image : {x} ¦ Su vaizdu susietos eilutės: {x} ¦ Ar att
 sans zone : {n} ¦ be zonos: {n} ¦ bez zonas: {n} ¦ alata: {n}
 d’après la lecture rapide ¦ pagal greitą skaitymą ¦ pēc ātrās lasīšanas ¦ kiirlugemise järgi
 d’après un découpage simple de l’image ¦ pagal paprastą vaizdo skaidymą ¦ pēc vienkāršas attēla sadalīšanas ¦ pildi lihtsa jagamise järgi
+Retirer le doublon ¦ Pašalinti dublikatą ¦ Noņemt dublikātu ¦ Eemalda kordus
+Ligne répétée deux fois de suite : {n} ¦ Eilutė pakartota du kartus iš eilės: {n} ¦ Rinda atkārtota divreiz pēc kārtas: {n} ¦ Kaks korda järjest korratud rida: {n}

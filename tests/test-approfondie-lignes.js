@@ -180,6 +180,16 @@ $pdo->exec("INSERT INTO media(title, media_type, filename) VALUES('Naissance Gar
         await p.waitForFunction(() => document.querySelector('[data-txa-keep="deep"]') && document.querySelector('[data-txl-fix] [data-txl-fx]'), null, { timeout: 30000 }); await sleep(200);
         out.cmp = await p.evaluate(() => ({ deep: document.querySelector('[data-txa-t="deep"]').value, chips: [...document.querySelectorAll('[data-txl-fix] [data-txl-fx]')].map(b => b.textContent), link: document.querySelector('[data-txl-link]')?.checked, linkType: document.querySelector('[data-txl-link]')?.closest('label')?.className || '', settings: !!document.querySelector('[data-txl-fix] [data-fix-level]') }));
         await shot('txl-1-comparaison.png');
+        // 🔁 une ligne écrite deux fois de suite par le modèle : signalée, « Retirer le doublon », ↶ Annuler
+        out.rep = await p.evaluate(async () => {
+            const ta = document.querySelector('[data-txa-t="deep"]'), v0 = ta.value, L = v0.split('\n');
+            const set = v => { ta.value = v; ta.dispatchEvent(new Event('input')); }, w = () => new Promise(r => setTimeout(r, 80));
+            const r = {none: !document.querySelector('[data-txa-rep]')};
+            set([L[0], L[1], L[1].toUpperCase() + ' ', ...L.slice(2)].join('\n')); await w();
+            r.warn = document.querySelector('[data-txa-rep]')?.textContent || '';
+            document.querySelector('[data-txa-dedup]').click(); await w(); r.after = ta.value === v0;
+            document.querySelector('[data-txa-redup]').click(); await w(); r.back = ta.value.split('\n').length === L.length + 1;
+            set(v0); await w(); r.clean = !document.querySelector('[data-txa-dedup]'); return r; });
         // 🪄 « novembe » → « novembre », puis ↶ Annuler, puis encore
         const fixOnce = async () => { await p.evaluate(() => [...document.querySelectorAll('[data-txl-fix] [data-txl-fx]')].find(b => /novembe/.test(b.textContent)).click()); await p.waitForSelector('.ui-actmenu .ui-actmenu-i'); await p.evaluate(() => document.querySelector('.ui-actmenu .ui-actmenu-i').click()); await sleep(300); return p.evaluate(() => document.querySelector('[data-txa-t="deep"]').value.split('\n')[0]); };
         out.fixed = await fixOnce();
@@ -251,6 +261,9 @@ $pdo->exec("INSERT INTO media(title, media_type, filename) VALUES('Naissance Gar
                 assert.match(out.cmp.deep, /novembe,/); assert.ok(out.cmp.chips.some(c => /novembe → novembre/.test(c)), String(out.cmp.chips)); assert.equal(out.cmp.settings, true);
                 assert.equal(out.cmp.link, true); assert.match(out.cmp.linkType, /checkbox-line/);
             }],
+            ['navigateur : 🔁 ligne répétée deux fois de suite (même à la casse près) : signalée, « Retirer le doublon », ↶ Annuler', () => {
+                assert.equal(out.rep.none, true, 'rien quand il n’y a pas de répétition'); assert.match(out.rep.warn, /Ligne répétée deux fois de suite : 1/);
+                assert.equal(out.rep.after, true, 'le doublon retiré'); assert.equal(out.rep.back, true, '↶ Annuler le remet'); assert.equal(out.rep.clean, true); }],
             ['navigateur : la correction appliquée en un clic, ↶ Annuler la défait', () => { assert.match(out.fixed, /novembre,/); assert.match(out.unfixed, /novembe,/); assert.match(out.fixed2, /novembre,/); }],
             ['navigateur : « Mettre dans le texte » → 12 zones (10 lignes, dont la ligne collée sur 2 bandes, et la mention), d’après la lecture rapide, une seule lecture lancée', () => {
                 assert.equal(out.k.info.how, 'htr'); assert.equal(out.k.info.zones, 12, JSON.stringify(out.k.info)); assert.equal(out.kStarts, 1); assert.match(out.k.text, /novembre/);
