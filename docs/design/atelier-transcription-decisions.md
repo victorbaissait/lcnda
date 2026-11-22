@@ -36,3 +36,12 @@ Chacun doit être essayé sur les mêmes actes (Qwen3-VL sert de référence) av
 - Tous les modèles proposés ci-dessus sont retenus pour essai ; chacun aura, comme Qwen3-VL aujourd'hui, sa présentation avec avantages et inconvénients (taille à télécharger, mémoire conseillée, vitesse, langues, licence).
 - Ajouter un modèle pour les ordinateurs à 64 Go de mémoire. Candidats à essayer : Qwen3-VL 32B (même famille que le modèle conseillé, Apache 2.0, ~21 Go, plus précis mais plus lent) ; Qwen3-VL 30B-A3B (presque aussi précis, bien plus rapide) ; Qwen2.5-VL 72B (~49 Go, le plus gros qui tienne, très lent). Le meilleur des essais devient « Pour les ordinateurs puissants (64 Go) ».
 - L'app propose d'elle-même le modèle qui convient à la mémoire de l'ordinateur.
+
+## Autres ajouts retenus (22 novembre)
+1. Relevé automatique : après une transcription, remplir les fiches (baptême, parrain, marraine, témoins) en une fois, avec aperçu avant d'accepter.
+2. Même acte en double : deux photos du même acte (archives, site) signalées « probablement le même ».
+3. Frise des documents d'une personne, avec les trous visibles (« aucun acte entre 1820 et 1845 »).
+4. Prochaine piste conseillée : pour une personne, quel acte chercher en premier et où (ce qui manque + archives en ligne).
+5. Comparer deux personnes côte à côte (concorde / se contredit) pour décider si c'est la même : partir de l'outil de comparaison qui existe déjà dans l'app (doublons et fusion — à repérer et réutiliser, pas un deuxième outil), et le mettre dans la liste des outils.
+8. Recherche et commandes par la voix dans toute l'app (« ouvre la fiche de Jean MAZAUD »), sur la même base que la dictée (idée A).
+Chaque gros outil : maquette d'abord.
