@@ -42,3 +42,4 @@ Lecture approfondie : page {i} sur {n}… ¦ Derin okuma: sayfa {i} / {n}…
 Lire toutes les pages avec ce modèle ({n}) ¦ Tüm sayfaları bu modelle oku ({n})
 Ce document a plusieurs pages : pour changer l’image d’une page, ouvre « 📑 Pages du document », retire l’ancienne page puis relie la nouvelle. ¦ Bu belgenin birkaç sayfası var: bir sayfanın görüntüsünü değiştirmek için “📑 Belgenin sayfaları”nı aç, eski sayfayı kaldır, sonra yenisini bağla.
 {zones} sur cette page ({n} en tout) ¦ Bu sayfada {zones} (toplam {n})
+{page} ({i} sur {n}) ¦ {page} ({i}/{n})

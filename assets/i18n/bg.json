@@ -2107,6 +2107,7 @@
  "{p} % du génome côté père et {m} % côté mère": "{p} % от генома по бащина линия и {m} % по майчина линия",
  "{p} % morts avant {n} ans.": "{p} % са починали преди възраст {n}.",
  "{p} % signés · {n} sans réponse": "{p} % подписани · без отговор: {n}",
+ "{page} ({i} sur {n})": "{page} ({i} от {n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. Word и LibreOffice запазват стиловете, списъците, таблиците, изображенията, бележките, колонтитулите, коментарите и проследените промени.",
  "{paper}, prêt pour l’imprimeur": "{paper}, готово за печатницата",
  "{path} : la formule tourne en rond.": "{path}: формулата се върти в кръг.",

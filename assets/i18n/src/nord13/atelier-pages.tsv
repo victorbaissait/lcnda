@@ -42,3 +42,4 @@ Lecture approfondie : page {i} sur {n}… ¦ Σε βάθος ανάγνωση: �
 Lire toutes les pages avec ce modèle ({n}) ¦ Διάβασε όλες τις σελίδες με αυτό το μοντέλο ({n}) ¦ Прочети всички страници с този модел ({n})
 Ce document a plusieurs pages : pour changer l’image d’une page, ouvre « 📑 Pages du document », retire l’ancienne page puis relie la nouvelle. ¦ Αυτό το έγγραφο έχει πολλές σελίδες: για να αλλάξεις την εικόνα μιας σελίδας, άνοιξε «📑 Σελίδες του εγγράφου», αφαίρεσε την παλιά σελίδα και μετά σύνδεσε τη νέα. ¦ Този документ има няколко страници: за да смениш изображението на страница, отвори „📑 Страници на документа“, махни старата страница и после свържи новата.
 {zones} sur cette page ({n} en tout) ¦ {zones} σε αυτή τη σελίδα ({n} συνολικά) ¦ {zones} на тази страница (общо {n})
+{page} ({i} sur {n}) ¦ {page} ({i} από {n}) ¦ {page} ({i} от {n})

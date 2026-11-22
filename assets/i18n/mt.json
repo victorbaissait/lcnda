@@ -2245,6 +2245,7 @@
  "{p} % du génome côté père et {m} % côté mère": "{p} % tal-ġenoma min-naħa tal-missier u {m} % min-naħa tal-omm",
  "{p} % morts avant {n} ans.": "{p} % mietu qabel l-età ta’ {n} sena.",
  "{p} % signés · {n} sans réponse": "{p} % iffirmati · {n} mingħajr tweġiba",
+ "{page} ({i} sur {n})": "{page} ({i} minn {n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. Word u LibreOffice iżommu l-istili, il-listi, it-tabelli, l-istampi, in-noti, il-header u l-footer, il-kummenti u l-bidliet segwiti.",
  "{paper}, prêt pour l’imprimeur": "{paper}, lest għall-istamperija",
  "{path} : la formule tourne en rond.": "{path}: il-formula ddur fiċ-ċirku.",

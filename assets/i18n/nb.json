@@ -2107,6 +2107,7 @@
  "{p} % du génome côté père et {m} % côté mère": "{p} % av genomet på farssiden og {m} % på morssiden",
  "{p} % morts avant {n} ans.": "{p} % døde før fylte {n} år.",
  "{p} % signés · {n} sans réponse": "{p} % signert · {n} uten svar",
+ "{page} ({i} sur {n})": "{page} ({i} av {n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. Word og LibreOffice beholder stiler, lister, tabeller, bilder, notater, topptekst og bunntekst, kommentarer og sporede endringer.",
  "{paper}, prêt pour l’imprimeur": "{paper}, klar for trykkeriet",
  "{path} : la formule tourne en rond.": "{path}: formelen går i ring.",

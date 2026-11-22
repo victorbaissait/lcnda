@@ -2107,6 +2107,7 @@
  "{p} % du génome côté père et {m} % côté mère": "{p} % e gjenomit nga babai dhe {m} % nga nëna",
  "{p} % morts avant {n} ans.": "{p} % vdiqën para {n} vjeç.",
  "{p} % signés · {n} sans réponse": "{p} % të nënshkruara · {n} pa përgjigje",
+ "{page} ({i} sur {n})": "{page} ({i} nga {n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. Word dhe LibreOffice ruajnë stilet, listat, tabelat, imazhet, shënimet, kreun dhe fundin e faqes, komentet dhe ndryshimet e ndjekura.",
  "{paper}, prêt pour l’imprimeur": "{paper}, gati për shtypshkronjën",
  "{path} : la formule tourne en rond.": "{path}: formula sillet në rreth.",

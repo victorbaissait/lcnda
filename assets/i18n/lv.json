@@ -2153,6 +2153,7 @@
  "{p} % du génome côté père et {m} % côté mère": "{p} % genoma tēva pusē un {m} % mātes pusē",
  "{p} % morts avant {n} ans.": "{p} % miruši pirms {n} g. vecuma.",
  "{p} % signés · {n} sans réponse": "{p} % parakstīti · {n} bez atbildes",
+ "{page} ({i} sur {n})": "{page} ({i} no {n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. Word un LibreOffice saglabā stilus, sarakstus, tabulas, attēlus, piezīmes, galveni un kājeni, komentārus un izsekotās izmaiņas.",
  "{paper}, prêt pour l’imprimeur": "{paper}, gatavs tipogrāfijai",
  "{path} : la formule tourne en rond.": "{path}: formula griežas pa apli.",

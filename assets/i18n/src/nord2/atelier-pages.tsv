@@ -42,3 +42,4 @@ Lecture approfondie : page {i} sur {n}… ¦ Dôkladné čítanie: strana {i} z 
 Lire toutes les pages avec ce modèle ({n}) ¦ Prečítať všetky strany týmto modelom ({n}) ¦ Les alle sidene med denne modellen ({n})
 Ce document a plusieurs pages : pour changer l’image d’une page, ouvre « 📑 Pages du document », retire l’ancienne page puis relie la nouvelle. ¦ Tento dokument má viac strán: ak chceš zmeniť obrázok strany, otvor „📑 Strany dokumentu“, odober starú stranu a potom pripoj novú. ¦ Dette dokumentet har flere sider: for å bytte bildet på en side, åpner du «📑 Dokumentets sider», fjerner den gamle siden og kobler så til den nye.
 {zones} sur cette page ({n} en tout) ¦ {zones} na tejto strane ({n} spolu) ¦ {zones} på denne siden ({n} totalt)
+{page} ({i} sur {n}) ¦ {page} ({i} z {n}) ¦ {page} ({i} av {n})

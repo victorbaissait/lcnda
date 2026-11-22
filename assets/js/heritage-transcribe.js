@@ -1223,10 +1223,13 @@
             if (all) { if (deepRun) return toast(i18n('Lecture approfondie : page {i} sur {n}…', {i: deepRun.done + 1, n: deepRun.n})); // 📑 toutes les pages, l'une après l'autre
                 return ext.txActe.openDeep({lang: $('[data-tx-lang]').value, all: {n: PAGES.length, run: model => startDeepAll(model)}, onCompare: out => LG()?.compareExtras(out, {})}); }
             let b = box; if (b === undefined) { b = htrArea(); if (!b) { b = await pageArea(); if (b === false) return; } }
-            const cur = htrText || area.value.trim();
-            ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, getImage: () => areaB64(b, {max: 2200}),
+            // 📑 un seul texte pour plusieurs pages : on compare avec le morceau de la page affichée, pas avec tout le document
+            const many = pageForm === 'one' && PAGES.length > 1, sg = many ? PG.segments(area.value)[segIx()] : null;
+            const cur = htrText || (sg ? area.value.slice(sg.s, sg.e) : area.value).trim();
+            const pageLabel = PAGES.length > 1 ? i18n('{page} ({i} sur {n})', {page: pageName(PAGES[pageIx], pageIx), i: pageIx + 1, n: PAGES.length}) : '';
+            ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, pageLabel, getImage: () => areaB64(b, {max: 2200}),
                 onCompare: out => LG()?.compareExtras(out, {fix: ext.htrFix, lang: $('[data-tx-lang]').value, place: $('[data-tx="place"]').value}), // 🪄 et la case ▤ dans la fenêtre des deux lectures
-                onKeep: (text, from) => { if (text.trim() === area.value.trim()) return; const put = appendRead(text.trim() + '\n'), start = put.s;
+                onKeep: (text, from) => { if (text.trim() === area.value.trim() || (!htrText && from === 'htr' && text.trim() === cur)) return; /* garder le texte déjà là : rien à ajouter */ const put = appendRead(text.trim() + '\n'), start = put.s;
                     before = area.value; t.body = area.value; touch(); paintMirror(); status(i18n('Texte lu (à relire)')); runDetect();
                     if (LG()?.linkOn()) linkLines({s: start, e: put.e, box: b || null, src: from === 'htr' ? 'htr' : 'deep'}); // ▤ une zone par ligne, comme la lecture rapide
                     if (fixOn()) runFix({quiet: true}); }}); // 🪄 les corrections proposées aussi sur ce texte

@@ -2107,6 +2107,7 @@
  "{p} % du génome côté père et {m} % côté mère": "{p} % vum Genom vu Papps Säit an {m} % vu Mammes Säit",
  "{p} % morts avant {n} ans.": "{p} % gestuerwe virun {n} Joer.",
  "{p} % signés · {n} sans réponse": "{p} % ënnerschriwwen · {n} ouni Äntwert",
+ "{page} ({i} sur {n})": "{page} ({i} vun {n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. Word a LibreOffice behalen d’Stiler, d’Lëschten, d’Tabellen, d’Biller, d’Notizen, d’Kapp- an d’Fousszeil, d’Kommentaren an d’verfollegt Ännerungen.",
  "{paper}, prêt pour l’imprimeur": "{paper}, prett fir d'Drécke",
  "{path} : la formule tourne en rond.": "{path}: d’Formel dréint sech am Krees.",

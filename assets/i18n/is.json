@@ -2107,6 +2107,7 @@
  "{p} % du génome côté père et {m} % côté mère": "{p} % erfðamengisins föðurmegin og {m} % móðurmegin",
  "{p} % morts avant {n} ans.": "{p} % dóu fyrir {n} ára aldur.",
  "{p} % signés · {n} sans réponse": "{p} % undirritaðir · {n} án svars",
+ "{page} ({i} sur {n})": "{page} ({i} af {n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. Word og LibreOffice halda stílunum, listunum, töflunum, myndunum, athugasemdunum, síðuhaus og síðufæti, athugasemdum og röktum breytingum.",
  "{paper}, prêt pour l’imprimeur": "{paper}, tilbúið fyrir prentsmiðjuna",
  "{path} : la formule tourne en rond.": "{path}: formúlan fer í hringi.",

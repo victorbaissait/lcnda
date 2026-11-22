@@ -2061,6 +2061,7 @@
  "{p} % du génome côté père et {m} % côté mère": "{p} % genom dari sisi ayah dan {m} % dari sisi ibu",
  "{p} % morts avant {n} ans.": "{p} % meninggal sebelum umur {n}.",
  "{p} % signés · {n} sans réponse": "{p} % ditandatangani · {n} tanpa jawaban",
+ "{page} ({i} sur {n})": "{page} ({i} dari {n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. Word dan LibreOffice mempertahankan gaya, daftar, tabel, gambar, catatan, header dan footer, komentar, serta perubahan terlacak.",
  "{paper}, prêt pour l’imprimeur": "{paper}, siap untuk percetakan",
  "{path} : la formule tourne en rond.": "{path}: rumusnya berputar-putar.",

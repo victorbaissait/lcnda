@@ -2199,6 +2199,7 @@
  "{p} % du génome côté père et {m} % côté mère": "{p} % genomo tėvo pusėje ir {m} % motinos pusėje",
  "{p} % morts avant {n} ans.": "{p} % mirė nesulaukę {n} m.",
  "{p} % signés · {n} sans réponse": "{p} % pasirašyta · {n} be atsakymo",
+ "{page} ({i} sur {n})": "{page} ({i} iš {n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. Word ir LibreOffice išlaiko stilius, sąrašus, lenteles, vaizdus, pastabas, antraštę ir poraštę, komentarus bei sekamus pakeitimus.",
  "{paper}, prêt pour l’imprimeur": "{paper}, paruošta spaustuvei",
  "{path} : la formule tourne en rond.": "{path}: formulė sukasi ratu.",

@@ -2199,6 +2199,7 @@
  "{p} % du génome côté père et {m} % côté mère": "{p} % genomu ze strony ojca i {m} % ze strony matki",
  "{p} % morts avant {n} ans.": "{p} % zmarło przed {n}. rokiem życia.",
  "{p} % signés · {n} sans réponse": "{p} % podpisanych · bez odpowiedzi: {n}",
+ "{page} ({i} sur {n})": "{page} ({i} z {n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. Word i LibreOffice zachowują style, listy, tabele, obrazy, przypisy, nagłówek i stopkę, komentarze oraz śledzone zmiany.",
  "{paper}, prêt pour l’imprimeur": "{paper}, gotowe do drukarni",
  "{path} : la formule tourne en rond.": "{path}: formuła kręci się w kółko.",

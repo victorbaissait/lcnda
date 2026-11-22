@@ -2153,6 +2153,7 @@
  "{p} % du génome côté père et {m} % côté mère": "{p} % din genom pe partea tatălui și {m} % pe partea mamei",
  "{p} % morts avant {n} ans.": "{p} % morți înainte de {n} ani.",
  "{p} % signés · {n} sans réponse": "{p} % semnate · {n} fără răspuns",
+ "{page} ({i} sur {n})": "{page} ({i} din {n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. Word și LibreOffice păstrează stilurile, listele, tabelele, imaginile, notele, antetul și subsolul, comentariile și modificările urmărite.",
  "{paper}, prêt pour l’imprimeur": "{paper}, gata pentru tipografie",
  "{path} : la formule tourne en rond.": "{path}: formula se învârte în cerc.",

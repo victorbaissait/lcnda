@@ -2107,6 +2107,7 @@
  "{p} % du génome côté père et {m} % côté mère": "Genomun %{p} kadarı baba tarafında, %{m} kadarı anne tarafında",
  "{p} % morts avant {n} ans.": "%{p} {n} yaşından önce öldü.",
  "{p} % signés · {n} sans réponse": "% {p} imzalandı · {n} yanıtsız",
+ "{page} ({i} sur {n})": "{page} ({i}/{n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. Word ve LibreOffice stilleri, listeleri, tabloları, resimleri, notları, üst ve alt bilgiyi, yorumları ve izlenen değişiklikleri korur.",
  "{paper}, prêt pour l’imprimeur": "{paper}, matbaaya hazır",
  "{path} : la formule tourne en rond.": "{path}: formül kendi etrafında dönüyor.",

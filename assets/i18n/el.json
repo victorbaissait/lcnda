@@ -2107,6 +2107,7 @@
  "{p} % du génome côté père et {m} % côté mère": "{p} % του γονιδιώματος από την πλευρά του πατέρα και {m} % από την πλευρά της μητέρας",
  "{p} % morts avant {n} ans.": "{p} % πέθαναν πριν από την ηλικία {n}.",
  "{p} % signés · {n} sans réponse": "{p} % υπογεγραμμένες · χωρίς απάντηση: {n}",
+ "{page} ({i} sur {n})": "{page} ({i} από {n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. Το Word και το LibreOffice κρατούν τα στυλ, τις λίστες, τους πίνακες, τις εικόνες, τις σημειώσεις, την κεφαλίδα και το υποσέλιδο, τα σχόλια και τις παρακολουθούμενες αλλαγές.",
  "{paper}, prêt pour l’imprimeur": "{paper}, έτοιμο για το τυπογραφείο",
  "{path} : la formule tourne en rond.": "{path}: ο τύπος κάνει κύκλους.",

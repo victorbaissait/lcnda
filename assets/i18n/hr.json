@@ -2153,6 +2153,7 @@
  "{p} % du génome côté père et {m} % côté mère": "{p} % genoma s očeve strane i {m} % s majčine",
  "{p} % morts avant {n} ans.": "{p} % umrlo prije {n}. godine.",
  "{p} % signés · {n} sans réponse": "{p} % potpisano · {n} bez odgovora",
+ "{page} ({i} sur {n})": "{page} ({i} od {n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. Word i LibreOffice zadržavaju stilove, popise, tablice, slike, bilješke, zaglavlje i podnožje, komentare i praćene promjene.",
  "{paper}, prêt pour l’imprimeur": "{paper}, spremno za tiskaru",
  "{path} : la formule tourne en rond.": "{path}: formula se vrti u krug.",

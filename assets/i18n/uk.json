@@ -2199,6 +2199,7 @@
  "{p} % du génome côté père et {m} % côté mère": "{p} % геному з боку батька та {m} % з боку матері",
  "{p} % morts avant {n} ans.": "{p} % померли, не досягнувши віку {n}.",
  "{p} % signés · {n} sans réponse": "{p} % підписано · без відповіді: {n}",
+ "{page} ({i} sur {n})": "{page} ({i} з {n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. Word і LibreOffice зберігають стилі, списки, таблиці, зображення, виноски, колонтитули, коментарі та відстежувані зміни.",
  "{paper}, prêt pour l’imprimeur": "{paper}, готово для друкарні",
  "{path} : la formule tourne en rond.": "{path}: формула ходить по колу.",

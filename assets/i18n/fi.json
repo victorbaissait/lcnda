@@ -2107,6 +2107,7 @@
  "{p} % du génome côté père et {m} % côté mère": "{p} % genomista isän puolelta ja {m} % äidin puolelta",
  "{p} % morts avant {n} ans.": "{p} % kuoli ennen {n} vuoden ikää.",
  "{p} % signés · {n} sans réponse": "{p} % allekirjoitettu · {n} ilman vastausta",
+ "{page} ({i} sur {n})": "{page} ({i}/{n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. Word ja LibreOffice säilyttävät tyylit, luettelot, taulukot, kuvat, viitteet, ylä- ja alatunnisteen, kommentit ja seuratut muutokset.",
  "{paper}, prêt pour l’imprimeur": "{paper}, valmis painoon",
  "{path} : la formule tourne en rond.": "{path}: kaava kiertää kehää.",

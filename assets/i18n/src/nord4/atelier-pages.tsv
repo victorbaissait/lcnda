@@ -42,3 +42,4 @@ Lecture approfondie : page {i} sur {n}… ¦ Perusteellinen luku: sivu {i}/{n}�
 Lire toutes les pages avec ce modèle ({n}) ¦ Lue kaikki sivut tällä mallilla ({n}) ¦ Minden oldal olvasása ezzel a modellel ({n})
 Ce document a plusieurs pages : pour changer l’image d’une page, ouvre « 📑 Pages du document », retire l’ancienne page puis relie la nouvelle. ¦ Tässä asiakirjassa on useita sivuja: vaihtaaksesi sivun kuvan avaa ”📑 Asiakirjan sivut”, poista vanha sivu ja liitä sitten uusi. ¦ Ennek a dokumentumnak több oldala van: egy oldal képének cseréjéhez nyisd meg a „📑 A dokumentum oldalai” részt, vedd ki a régi oldalt, majd kapcsold hozzá az újat.
 {zones} sur cette page ({n} en tout) ¦ {zones} tällä sivulla (yhteensä {n}) ¦ {zones} ezen az oldalon (összesen {n})
+{page} ({i} sur {n}) ¦ {page} ({i}/{n}) ¦ {page} ({i}/{n})

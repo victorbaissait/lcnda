@@ -2107,6 +2107,7 @@
  "{p} % du génome côté père et {m} % côté mère": "A genom {p} %-a apai és {m} %-a anyai oldalról",
  "{p} % morts avant {n} ans.": "{p} % halt meg {n} éves kora előtt.",
  "{p} % signés · {n} sans réponse": "{p} % aláírva · {n} válasz nélkül",
+ "{page} ({i} sur {n})": "{page} ({i}/{n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. A Word és a LibreOffice megőrzi a stílusokat, listákat, táblázatokat, képeket, jegyzeteket, az élőfejet és az élőlábat, a megjegyzéseket és a követett módosításokat.",
  "{paper}, prêt pour l’imprimeur": "{paper}, nyomdakész",
  "{path} : la formule tourne en rond.": "{path}: a képlet körbe-körbe jár.",

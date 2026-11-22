@@ -2061,6 +2061,7 @@
  "{p} % du génome côté père et {m} % côté mère": "{p} % bộ gen bên cha và {m} % bên mẹ",
  "{p} % morts avant {n} ans.": "{p} % mất trước {n} tuổi.",
  "{p} % signés · {n} sans réponse": "{p} % đã ký · {n} chưa trả lời",
+ "{page} ({i} sur {n})": "{page} ({i} trên {n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. Word và LibreOffice giữ các kiểu, danh sách, bảng, hình ảnh, chú thích, đầu trang và chân trang, bình luận và các thay đổi được theo dõi.",
  "{paper}, prêt pour l’imprimeur": "{paper}, sẵn sàng cho nhà in",
  "{path} : la formule tourne en rond.": "{path}: công thức bị lặp vòng.",

@@ -42,3 +42,4 @@ Lecture approfondie : page {i} sur {n}… ¦ Lexim i thelluar: faqja {i} nga {n}
 Lire toutes les pages avec ce modèle ({n}) ¦ Lexo të gjitha faqet me këtë model ({n}) ¦ Aqra l-paġni kollha b’dan il-mudell ({n})
 Ce document a plusieurs pages : pour changer l’image d’une page, ouvre « 📑 Pages du document », retire l’ancienne page puis relie la nouvelle. ¦ Ky dokument ka disa faqe: për të ndryshuar imazhin e një faqeje, hap «📑 Faqet e dokumentit», hiq faqen e vjetër dhe pastaj lidh të renë. ¦ Dan id-dokument għandu diversi paġni: biex tibdel l-immaġni ta’ paġna, iftaħ “📑 Paġni tad-dokument”, neħħi l-paġna l-qadima u mbagħad orbot il-ġdida.
 {zones} sur cette page ({n} en tout) ¦ {zones} në këtë faqe ({n} gjithsej) ¦ {zones} f’din il-paġna ({n} b’kollox)
+{page} ({i} sur {n}) ¦ {page} ({i} nga {n}) ¦ {page} ({i} minn {n})

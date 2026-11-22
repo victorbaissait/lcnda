@@ -2107,6 +2107,7 @@
  "{p} % du génome côté père et {m} % côté mère": "{p} % van het genoom aan vaderskant en {m} % aan moederskant",
  "{p} % morts avant {n} ans.": "{p} % overleden vóór {n} jaar.",
  "{p} % signés · {n} sans réponse": "{p} % getekend · {n} zonder antwoord",
+ "{page} ({i} sur {n})": "{page} ({i} van {n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. Word en LibreOffice behouden de stijlen, lijsten, tabellen, afbeeldingen, noten, kop- en voettekst, opmerkingen en bijgehouden wijzigingen.",
  "{paper}, prêt pour l’imprimeur": "{paper}, klaar voor de drukker",
  "{path} : la formule tourne en rond.": "{path}: de formule draait in een kringetje.",

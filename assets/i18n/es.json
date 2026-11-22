@@ -2153,6 +2153,7 @@
  "{p} % du génome côté père et {m} % côté mère": "{p} % del genoma del lado paterno y {m} % del materno",
  "{p} % morts avant {n} ans.": "{p} % muertos antes de los {n} años.",
  "{p} % signés · {n} sans réponse": "{p} % firmados · {n} sin respuesta",
+ "{page} ({i} sur {n})": "{page} ({i} de {n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. Word y LibreOffice conservan los estilos, las listas, las tablas, las imágenes, las notas, el encabezado y el pie, los comentarios y los cambios registrados.",
  "{paper}, prêt pour l’imprimeur": "{paper}, listo para la imprenta",
  "{path} : la formule tourne en rond.": "{path}: la fórmula da vueltas en círculo.",

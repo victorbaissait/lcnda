@@ -2199,6 +2199,7 @@
  "{p} % du génome côté père et {m} % côté mère": "{p} % genomu z otcovy strany a {m} % z matčiny strany",
  "{p} % morts avant {n} ans.": "{p} % zemřelo před {n}. rokem.",
  "{p} % signés · {n} sans réponse": "{p} % podepsáno · bez odpovědi: {n}",
+ "{page} ({i} sur {n})": "{page} ({i} z {n})",
  "{pages} · {words}. Word et LibreOffice gardent les styles, les listes, les tableaux, les images, les notes, l’en-tête et le pied, les commentaires et les modifications suivies.": "{pages} · {words}. Word a LibreOffice zachovají styly, seznamy, tabulky, obrázky, poznámky, záhlaví a zápatí, komentáře i sledované změny.",
  "{paper}, prêt pour l’imprimeur": "{paper}, připraveno pro tiskárnu",
  "{path} : la formule tourne en rond.": "{path}: vzorec se točí v kruhu.",
