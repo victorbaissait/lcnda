@@ -65,7 +65,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/graphs.css?v=1">
     <link rel="stylesheet" href="assets/css/apparence.css?v=7">
     <link rel="stylesheet" href="assets/css/sections.css?v=3">
-    <link rel="stylesheet" href="assets/css/transcribe.css?v=18">
+    <link rel="stylesheet" href="assets/css/transcribe.css?v=19">
     <link rel="stylesheet" href="assets/css/photomaps.css?v=9">
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=3">
     <link rel="stylesheet" href="assets/css/meteo.css?v=2">
@@ -1488,7 +1488,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-transcribe-relecture.js?v=5" defer></script>
 <script src="assets/js/heritage-pages.js?v=3" defer></script>
 <script src="assets/js/heritage-transcribe-pages.js?v=1" defer></script>
-<script src="assets/js/heritage-transcribe.js?v=58" defer></script>
+<script src="assets/js/heritage-transcribe.js?v=59" defer></script>
 <script src="assets/js/heritage-photomaps-time.js?v=2" defer></script>
 <script src="assets/js/heritage-photomaps.js?v=15" defer></script>
 <script src="assets/js/heritage-transcribe-list.js?v=6" defer></script>

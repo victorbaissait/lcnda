@@ -442,6 +442,19 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             zt.forEach(([pg, tt]) => { const m = tt.match(/(?:numéro|lecture) (\d+)/); if (m) assert.equal(Number(m[1]) - c0, pg, 'la zone de ' + tt + ' est sur sa page'); });
             assert.ok(zt.length >= 4 && (await p.evaluate(() => document.querySelector('dialog.h-tx-dlg').txApi.get().data.zones.length)) > z0);
         });
+        await t('🪄 corrections, un seul texte : le nombre par page, un clic montre la page', async () => {
+            const b0 = (await tx()).body, sg = b0.split(/\n— page \d —\n/), at = b0.indexOf(sg[1]) + sg[1].length;
+            await p.evaluate(([v]) => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); a.value = v; a.dispatchEvent(new Event('input')); }, [b0.slice(0, at) + '\nle quinze novembe' + b0.slice(at)]);
+            await p.click(`${D} [data-tx-step="fix"]`); await p.click(`${D} [data-tx-cmd="fix"]`);
+            await p.waitForSelector(`${D} [data-txfix-page]`, {timeout: 15000});
+            const btns = await p.$$eval(`${D} [data-txfix-page]`, b => b.map(x => [x.dataset.txfixPage, x.textContent]));
+            const two = btns.find(x => x[0] === '1'); assert.ok(two && / : [1-9]/.test(two[1]), 'la page 2 a sa correction : ' + JSON.stringify(btns));
+            await p.click(`${D} [data-tx-page="3"]`); await sleep(400);
+            await p.click(`${D} [data-txfix-page="1"]`); await sleep(500); assert.equal((await tx()).on, '1', 'le clic montre la page 2');
+            await p.click(`${D} [data-txfix="close"]`);
+            await p.evaluate(([v]) => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); a.value = v; a.dispatchEvent(new Event('input')); }, [b0]);
+            await p.click(`${D} [data-tx-step="read"]`); await sleep(300);
+        });
         await t('« Seulement les pages pas encore lues » : toutes ont du texte → une phrase, aucune lecture lancée', async () => {
             const c0 = ollama.chats;
             await p.click(`${D} [data-tx-cmd="readmenu"]`); await p.check(`${D} [data-tx-readscope] input[value="empty"]`); await p.click(`${D} [data-tx-readpanel] [data-tx-cmd="deep"]`); await sleep(600);

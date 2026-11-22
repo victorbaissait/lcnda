@@ -574,10 +574,16 @@
             txFix = window.LCNDA_HTRFIX.propose(area.value, lex, {level: fixLevel(), keep: txKept}); txFixOn = true; paintMirror(); paintTxFix();
             if (!quiet) status(txFix.length ? (A().plural ? A().plural(txFix.length, 'correction proposée', 'corrections proposées') : String(txFix.length)) : i18n('Aucune correction à proposer'));
         }
+        // 📑 un seul texte pour plusieurs pages : combien de corrections sur chaque page (un clic montre la page)
+        function fixByPage() {
+            if (pageForm !== 'one' || PAGES.length < 2 || !txFix.length) return '';
+            const per = new Map(); txFix.forEach(f => { const id = Number((t.data.pages || [])[PG.segAt(area.value, f.s)] || 0), i = PAGES.findIndex(p => Number(p.media_id) === id); if (i >= 0) per.set(i, (per.get(i) || 0) + 1); });
+            return `<span class="h-tx-fixpages">${[...per].sort((x, y) => x[0] - y[0]).map(([i, n]) => `<button type="button" class="button small secondary" data-txfix-page="${i}">${esc(pageName(PAGES[i], i))} : ${n}</button>`).join('')}</span>`;
+        }
         function paintTxFix() {
             const bar = $('[data-tx-fixbar]'); if (!bar) return; bar.hidden = !txFixOn; if (!txFixOn) return;
             const sure = txFix.filter(f => f.sure).length;
-            bar.innerHTML = `<span>🪄 ${txFix.length ? esc(A().plural ? A().plural(txFix.length, 'correction proposée', 'corrections proposées') : txFix.length) + ` <small class="muted">${esc(i18n('(soulignées en violet : clique un mot)'))}</small>` : esc(i18n('Aucune correction à proposer'))}</span>
+            bar.innerHTML = `<span>🪄 ${txFix.length ? esc(A().plural ? A().plural(txFix.length, 'correction proposée', 'corrections proposées') : txFix.length) + ` <small class="muted">${esc(i18n('(soulignées en violet : clique un mot)'))}</small>` : esc(i18n('Aucune correction à proposer'))}</span>${fixByPage()}
                 ${sure ? `<button type="button" class="button small" data-txfix="accept">✓ ${esc(sure > 1 ? i18n('Accepter les {n} propositions sûres', {n: sure}) : i18n('Accepter la proposition sûre'))}</button>` : ''}
                 <button type="button" class="button small secondary" data-txfix="undo" ${txFixUndo.length ? '' : 'disabled'}>↶ ${esc(i18n('Annuler'))}</button><span class="spacer"></span>${fixSettingsHtml()}
                 <button type="button" class="icon-button small" data-txfix="close" title="${esc(i18n('Fermer'))}">×</button>`;
@@ -591,6 +597,7 @@
             runFix({quiet: true}); A().undoToast?.(label, {undo: back});
         }
         $('[data-tx-fixbar]')?.addEventListener('click', e => {
+            const pg = e.target.closest('[data-txfix-page]'); if (pg) { goPage(Number(pg.dataset.txfixPage)); return; }
             const b = e.target.closest('[data-txfix]'); if (!b) return; const k = b.dataset.txfix;
             if (k === 'close') { txFixOn = false; txFix = []; paintMirror(); paintTxFix(); return; }
             if (k === 'undo') { const old = txFixUndo.pop(); if (old != null) { area.value = old; area.dispatchEvent(new Event('input')); runFix({quiet: true}); } return; }
