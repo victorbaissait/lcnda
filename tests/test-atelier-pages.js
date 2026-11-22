@@ -480,6 +480,23 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             assert.equal((await tx()).body, b0, 'garder le texte déjà là ne l’ajoute pas une deuxième fois');
             await p.evaluate(() => document.querySelectorAll('dialog[open]:not(.h-tx-dlg)').forEach(d => d.close()));
         });
+        await t('🔬 page 2 déjà écrite : « ⇄ Remplacer le texte » remplace la page 2 seulement, l’ancien texte dans 🕘 Versions', async () => {
+            await p.click(`${D} [data-tx-page="1"]`); await sleep(400);
+            const b0 = (await tx()).body, sg0 = b0.split(/\n— page \d —\n/);
+            const id = await p.evaluate(() => document.querySelector('dialog.h-tx-dlg').txApi.get().id);
+            const v0 = (await p.evaluate(i => window.LCNDA_APP.api('act_transcription_versions', {act_id: i}), id)).items.length;
+            await p.click(`${D} [data-tx-cmd="readmenu"]`); await p.check(`${D} [data-tx-readscope] input[value="page"]`); await p.click(`${D} [data-tx-readpanel] [data-tx-cmd="deep"]`);
+            await p.waitForSelector('[data-txa-read]', {timeout: 15000}); await p.click('[data-txa-read]');
+            await p.waitForSelector('[data-txa-keep="deep"][data-txa-mode="replace"]', {timeout: 30000});
+            assert.equal(await p.isVisible('[data-txa-keep="deep"][data-txa-mode="append"]'), true, '« ＋ Ajouter à la suite » aussi');
+            const deep = (await p.$eval('[data-txa-t="deep"]', e => e.value)).trim();
+            await p.click('[data-txa-keep="deep"][data-txa-mode="replace"]'); await sleep(800);
+            const sg = (await tx()).body.split(/\n— page \d —\n/);
+            assert.equal(sg.length, sg0.length); assert.equal(sg[1].trim(), deep, 'la page 2 = la lecture');
+            [0, 2, 3].forEach(i => assert.equal(sg[i], sg0[i], `page ${i + 1} inchangée`));
+            let v1 = v0; for (let k = 0; k < 20 && v1 === v0; k++) { await sleep(200); v1 = (await p.evaluate(i => window.LCNDA_APP.api('act_transcription_versions', {act_id: i}), id)).items.length; }
+            assert.ok(v1 > v0, 'une version « Avant… » gardée');
+        });
         await t('🔬 toutes les pages : « ■ Arrêter » pendant la page 1 arrête tout, rien n’est ajouté', async () => {
             ollama.delay = 700; const b0 = (await tx()).body, c0 = ollama.chats;
             await deepAll();
