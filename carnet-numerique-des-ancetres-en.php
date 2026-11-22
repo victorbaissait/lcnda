@@ -181,7 +181,7 @@
         <section class="presentation-hero">
             <nav class="presentation-lang" aria-label="Language"><a href="carnet-numerique-des-ancetres.php" hreflang="fr" lang="fr" title="Version française">FR</a> · <strong aria-current="page">EN</strong></nav>
             <div class="presentation-hero-copy">
-                <span class="eyebrow">BETA VERSION · 0.9.2</span>
+                <span class="eyebrow">BETA VERSION · 0.10.0</span>
                 <p class="presentation-acronym" aria-hidden="true">LCNDA</p>
                 <h1>The Digital<br>Ancestors' Notebook</h1>
                 <p class="presentation-lead">A local, open-source, free and flexible genealogy app for working on your family history — and also for your inventories and for tracking your animals. Conceived and designed by Victor Baissait, coded by Codex (ChatGPT) &amp; Claude.</p>
@@ -211,8 +211,8 @@
                     <h3>macOS</h3>
                     <p class="presentation-os-req">macOS 13 Ventura or later</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.9.2-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 590 MB</small></span><span aria-hidden="true">↓</span></a>
-                        <a class="button secondary" href="download/LCNDA-0.9.2-mac-x64.dmg"><span>Mac Intel<small>2017 models and later · 596 MB</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.10.0-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 596 MB</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button secondary" href="download/LCNDA-0.10.0-mac-x64.dmg"><span>Mac Intel<small>2017 models and later · 602 MB</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Which Mac do you have? Apple menu → About This Mac → “Chip” (Apple Silicon) or “Processor” (Intel). Open the .dmg file and drag LCNDA into Applications.</p>
                 </article>
@@ -221,7 +221,7 @@
                     <h3>Windows</h3>
                     <p class="presentation-os-req">Windows 10 / 11 (64-bit) — Intel or AMD PCs, and Windows 11 on ARM processors</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.9.2-windows-x64.exe"><span>Windows 10 / 11<small>64-bit · 596 MB</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.10.0-windows-x64.exe"><span>Windows 10 / 11<small>64-bit · 601 MB</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Run the file and follow the installer. The required Microsoft Visual C++ component is installed automatically if it is missing.</p>
                 </article>
@@ -232,16 +232,16 @@
                     <div class="presentation-os-groups">
                         <div class="presentation-os-group">
                             <strong>Intel or AMD PC</strong>
-                            <a class="button" href="download/LCNDA-0.9.2-linux-x86_64.AppImage"><span>AppImage<small>All distributions · 586 MB</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.9.2-linux-amd64.deb"><span>.deb package<small>Ubuntu, Debian, Mint · 546 MB</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.10.0-linux-x86_64.AppImage"><span>AppImage<small>All distributions · 592 MB</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.10.0-linux-amd64.deb"><span>.deb package<small>Ubuntu, Debian, Mint · 551 MB</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                         <div class="presentation-os-group">
                             <strong>ARM processor (Raspberry Pi…)</strong>
-                            <a class="button" href="download/LCNDA-0.9.2-linux-arm64.AppImage"><span>ARM AppImage<small>All distributions · 588 MB</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.9.2-linux-arm64.deb"><span>ARM .deb package<small>Raspberry Pi OS, Ubuntu, Debian · 542 MB</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.10.0-linux-arm64.AppImage"><span>ARM AppImage<small>All distributions · 594 MB</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.10.0-linux-arm64.deb"><span>ARM .deb package<small>Raspberry Pi OS, Ubuntu, Debian · 547 MB</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                     </div>
-                    <p class="presentation-os-help">Use the .deb on Ubuntu or Debian (<code>sudo apt install ./LCNDA-0.9.2-linux-amd64.deb</code>), otherwise the AppImage: make it executable (right-click → Properties → Allow executing as program), then double-click it.</p>
+                    <p class="presentation-os-help">Use the .deb on Ubuntu or Debian (<code>sudo apt install ./LCNDA-0.10.0-linux-amd64.deb</code>), otherwise the AppImage: make it executable (right-click → Properties → Allow executing as program), then double-click it.</p>
                 </article>
             </div>
 
@@ -249,17 +249,47 @@
                 <div>
                     <h3>Source code</h3>
                     <p class="presentation-os-req">For developers: LCNDA is free software (AGPL-3.0 licence)</p>
-                    <p class="presentation-os-help">The complete code of version 0.9.2, including the municipalities of the 226 countries used by search sweeps (hence its size). The worldwide gazetteer of places is not included because it is too large: it builds itself on first launch (or with <code>npm run fetch:geo</code>).</p>
+                    <p class="presentation-os-help">The complete code of version 0.10.0, including the municipalities of the 226 countries used by search sweeps (hence its size). The worldwide gazetteer of places is not included because it is too large: it builds itself on first launch (or with <code>npm run fetch:geo</code>).</p>
                 </div>
                 <div class="presentation-os-group">
-                    <a class="button" href="download/lcnda-0.9.2.zip"><span>.zip archive<small>Windows, macOS · 270 MB</small></span><span aria-hidden="true">↓</span></a>
-                    <a class="button secondary" href="download/lcnda-0.9.2.tar.gz"><span>.tar.gz archive<small>Linux, macOS · 269 MB</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button" href="download/lcnda-0.10.0.zip"><span>.zip archive<small>Windows, macOS · 279 MB</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button secondary" href="download/lcnda-0.10.0.tar.gz"><span>.tar.gz archive<small>Linux, macOS · 278 MB</small></span><span aria-hidden="true">↓</span></a>
                 </div>
             </article>
 
             <details class="presentation-changes">
-                <summary><span>What's new in version 0.9.2<small>The app in 32 languages, guided first launch with a sample database, online archives in one place, evidence and strength of links, new tools, imports and exports, maps and diagrams, games</small></span></summary>
+                <summary><span>What's new in version 0.10.0<small>Transcription workshop, records read by an AI on your own computer, multi-page documents, phone photos over wifi, several computers, six new maps, very large databases</small></span></summary>
                 <div class="presentation-changes-body">
+                    <h4>📜 Transcription workshop</h4>
+                    <p>One text per document, the same everywhere: workshop, viewer, document page, the records of linked people, search and GEDCOM export. A readable title instead of the file name. A simpler layout: the “🎚️ See better” bar with 3 ready-made settings, a single “✨ Read ▾” button that explains each kind of reading, the “Read → Correct → Mark → Add” strip, a full-screen line-by-line proofreading mode, 🕘 text versions, find / replace, the progress of each record and abbreviations explained on hover. On a phone, three tabs: Image, Text, People.</p>
+                    <h4>🔍 In-depth reading by an AI, on your own computer</h4>
+                    <p>With Qwen3-VL and Ollama, the record is read on your computer: nothing goes to the Internet. Each line read is linked to its place on the image, and notes written at 90° in the margin are turned and kept apart.</p>
+                    <h4>🪄 Corrections suggested, never forced</h4>
+                    <p>After reading, the app suggests corrections: words of old records, names and places from your database, a French dictionary (fewer false corrections). The place of each word is shown in the text.</p>
+                    <h4>🧾 A much richer “What the app found”</h4>
+                    <p>A card per person (age, estimated birth, occupation, origin, relationship), places, dates, events (for example the battle of Ulm) and the guessed kind of record. “＋ Add to a record…” adds an event, a note, an occupation or a residence, with the source attached.</p>
+                    <h4>📑 Multi-page documents</h4>
+                    <p>Front, back, pages 1 to N, appendix: pages are linked and ordered by dragging. The workshop opens them as tabs (one text split by “— page 2 —”, or one text per page), reads them all (also with the AI) and says where each piece of information is (“page 3, line 7”). With the ✋ hand, dragging on a frame moves the image; a slider sets the opacity of the frames.</p>
+                    <h4>📄 Documents</h4>
+                    <p>The names of linked people under each document, a “👤 By person” order, search by name, the same style as the rest of the app, “📜 Transcription workshop” on each image page, and an added image shows up straight away.</p>
+                    <h4>📱 Your phone over wifi, 🖧 several computers</h4>
+                    <p>An authorised phone drops its photos (graves, records, plaques) into a “📥 To sort” box on the computer: GPS position removed, password asked again, no living person or confidential record visible (42 security tests). Another computer on the same wifi can browse your genealogy, after approval with a code to compare.</p>
+                    <h4>⚖️ Probate genealogy, 🗺 maps</h4>
+                    <p>Probate genealogy: new tools, a case's tabs on one line (or by family, or in a column), a clickable summary. Six new maps: places to locate, occupations, mirrored lineages, life range, godparents and witnesses, crises; “from the app” candlesticks (births, deaths, marriages per year).</p>
+                    <h4>⚡ Faster and sturdier</h4>
+                    <p>Very large databases: 200,000 people with ease, 500,000 without crashing; slow screens sped up. Database updates are made in one block, never halfway. A clear message within seconds when the database is held by another program; slow start on Mac and antivirus software better explained.</p>
+                    <h4>⚙️ Settings your way, and the rest</h4>
+                    <p>An emoji for each tab, menu order from “＋”, your own tabs at the end, 12 tools as shortcuts, switches or checkboxes, maximum file size (100 MB by default) with memory protection for very large images, archive badges you can hide. New event type “Act of notoriety”, many fixes, a fuller help (FAQ), everything translated into the 32 languages.</p>
+                    <p>The database updates itself the first time it is opened (a safety copy is made first): nothing to do.</p>
+                </div>
+            </details>
+
+            <details class="presentation-changes presentation-changes-old">
+                <summary><span>What was new in earlier versions<small>What the previous versions brought</small></span></summary>
+                <div class="presentation-changes-body">
+                    <details class="presentation-version">
+                        <summary>Version 0.9.2 <small>The app in 32 languages, guided first launch with a sample database, online archives in one place, evidence and strength of links, new tools, imports and exports, maps and diagrams, games</small></summary>
+                        <div class="presentation-version-body">
                     <h4>🌐 The app in 32 languages</h4>
                     <p>Français, English, Español, Deutsch, Italiano, Português, Polski, Nederlands, Čeština, Svenska, Dansk, Slovenčina, Norsk (bokmål), Română, Suomi, Magyar, Hrvatski, Slovenščina, Lietuvių, Latviešu, Eesti, Íslenska, Türkçe, Lëtzebuergesch, Shqip, Malti, Tiếng Việt, Bahasa Indonesia, Русский, Українська, Ελληνικά, Български. The whole app is translated (menus, records, tools, Settings, games, editors), as are the 806 answers in the FAQ. The first time, the app opens in your computer's language (otherwise in English), with two buttons, “Français” / “English”. The translations are made by an AI: a banner says so, with “Report a mistake”. Your data (names, notes, places) is never translated.</p>
                     <h4>🧭 First launch and guided tour</h4>
@@ -277,12 +307,8 @@
                     <h4>🎲 Games, video editing and the rest</h4>
                     <p>Chess, draughts, dominoes, Yahtzee, 8 card games against the computer (belote, tarot, rummy…) and 131 solitaire games. Video editing: volume over time, compressor, reverb, panning, rich text. The app checks for new versions; a 🐞 “Report a bug” button sends a report without any genealogy data. Large databases (up to 100,000 people) stay smooth.</p>
                     <p>The database updates itself the first time you open it: nothing to do.</p>
-                </div>
-            </details>
-
-            <details class="presentation-changes presentation-changes-old">
-                <summary><span>What was new in earlier versions<small>What the previous versions brought</small></span></summary>
-                <div class="presentation-changes-body">
+    </div>
+                    </details>
                     <details class="presentation-version">
                         <summary>Version 0.9.1 <small>The same bar above every list, a single “Print” window and a single “Versions” window, search in Settings, a much richer bunker, more readable colours, lots of fixes</small></summary>
                         <div class="presentation-version-body">
@@ -1130,7 +1156,7 @@
     </main>
 
      <footer class="presentation-footer">
-        <span>LCNDA — THE DIGITAL ANCESTORS' NOTEBOOK · BETA VERSION · 0.9.2 · AGPL-3.0 LICENCE</span>
+        <span>LCNDA — THE DIGITAL ANCESTORS' NOTEBOOK · BETA VERSION · 0.10.0 · AGPL-3.0 LICENCE</span>
         <a href="#haut">Back to top ↑</a>
     </footer>
     <script src="faq-data-en.js"></script>
