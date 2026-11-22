@@ -1434,19 +1434,30 @@
             catch (e) { status(''); toast(e.message, 'error'); }
         }
         /** L1 : la fenêtre « Imprimer » commune — image et texte côte à côte, l'un puis l'autre, ou le texte seul ; image améliorée ; personnes et rôles */
+        // 📑 un seul texte pour plusieurs pages : les morceaux du texte avec le nom et l'image de leur page (export et impression)
+        const multiPages = () => pageForm === 'one' && PAGES.length > 1;
+        function pageParts() {
+            const segs = PG.segments(area.value);
+            return segs.map((sg, k) => { const id = Number((t.data.pages || [])[k] || 0), i = PAGES.findIndex(p => Number(p.media_id) === id);
+                return {i, name: i >= 0 ? pageName(PAGES[i], i) : i18n('Page {n}', {n: k + 1}), text: area.value.slice(sg.s, sg.e).replace(/^\n+|\n+$/g, ''), file: i >= 0 ? PAGES[i].filename : ''}; });
+        }
+        const namedText = () => (multiPages() ? pageParts().map(q => `— ${q.name} —\n${q.text}`).join('\n\n') : area.value);
         async function printIt() {
             const UI2 = window.LCNDA_UI; if (!UI2?.openPrintDialog) return toast(i18n('La fenêtre « Imprimer » n’est pas chargée.'), 'error');
             const plainUrl = t.filename ? `${location.origin}${location.pathname.replace(/[^/]*$/, '')}media/${encodeURIComponent(t.filename)}` : '';
             let enhUrl = '';
             const canEnh = !!t.filename && viewChanged();
+            const base = `${location.origin}${location.pathname.replace(/[^/]*$/, '')}media/`;
             const imgFor = async c => { if (!c.enh || !canEnh) return plainUrl; if (!enhUrl) { try { const cv = await filteredCanvas({gray: false}); enhUrl = URL.createObjectURL(await new Promise(r2 => cv.toBlob(r2, 'image/png'))); setTimeout(() => URL.revokeObjectURL(enhUrl), 300000); } catch (_) { return plainUrl; } } return enhUrl; };
             const title = $('[data-tx="title"]').value || 'Transcription', meta = [KINDS.find(k => k[0] === $('[data-tx="kind"]').value)?.[1], $('[data-tx="date_text"]').value, $('[data-tx="place"]').value, $('[data-tx="source"]').value].filter(Boolean).join(' · ');
             UI2.openPrintDialog({title, key: 'transcription', zone: 'Transcription', photos: false, margin: 14,
                 options: [{key: 'lay', type: 'radio', value: 'side', choices: [['side', i18n('Image + texte côte à côte')], ['stack', i18n('Image puis texte')], ['text', i18n('Texte seul')]]},
+                    ...(multiPages() ? [{key: 'pages', type: 'radio', value: 'all', choices: [['all', i18n('Sur toutes les pages')], ['here', i18n('Sur la page affichée')]]}] : []),
                     ...(canEnh ? [{key: 'enh', label: i18n('Image améliorée'), checked: useEnh(), show: c => c.lay !== 'text'}] : []), {key: 'people', label: i18n('Personnes et rôles'), checked: true}],
                 html: async c => { const img = c.lay === 'text' ? '' : await imgFor(c);
-                    return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(title)}</title><style>body{font:14px/1.5 Georgia,serif;margin:0;color:#111}h1{font-size:20px;margin:0 0 4px}.m{color:#555;margin:0 0 12px}.g{display:grid;gap:16px;align-items:start}.g.side{grid-template-columns:1fr 1fr}img{max-width:100%;border:1px solid #ccc;display:block}.g.stack img{max-height:150mm;margin:0 auto 4mm;object-fit:contain}pre{white-space:pre-wrap;font:inherit;margin:0}ul{padding-left:18px}</style></head><body>
-                        <h1>${esc(title)}</h1><p class="m">${esc(meta)}</p><div class="g ${c.lay}">${img ? `<img src="${esc(img)}" alt="">` : ''}<div><pre>${esc(area.value)}</pre>${c.people && t.data.people.length ? `<h3>${i18n('Personnes')}</h3><ul>${t.data.people.map(p => `<li>${esc(p.name)}${p.role ? ` — ${esc(p.role)}` : ''}</li>`).join('')}</ul>` : ''}</div></div></body></html>`; }});
+                    return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(title)}</title><style>body{font:14px/1.5 Georgia,serif;margin:0;color:#111}h1{font-size:20px;margin:0 0 4px}.m{color:#555;margin:0 0 12px}.g{display:grid;gap:16px;align-items:start}.g.side{grid-template-columns:1fr 1fr}img{max-width:100%;border:1px solid #ccc;display:block}.g.stack img{max-height:150mm;margin:0 auto 4mm;object-fit:contain}pre{white-space:pre-wrap;font:inherit;margin:0}ul{padding-left:18px}h2{font-size:16px;margin:12px 0 6px}.brk{break-before:page}</style></head><body>
+                        <h1>${esc(title)}</h1><p class="m">${esc(meta)}</p>${multiPages() ? (await Promise.all(pageParts().filter(q => c.pages !== 'here' || q.i === pageIx).map(async (q, k) => { const u = c.lay === 'text' || !q.file ? '' : q.i === pageIx ? img : base + encodeURIComponent(q.file);
+                            return `<section class="pg${k ? ' brk' : ''}"><h2>${esc(q.name)}</h2><div class="g ${c.lay}">${u ? `<img src="${esc(u)}" alt="">` : ''}<div><pre>${esc(q.text)}</pre></div></div></section>`; }))).join('') + '<div><div>' : `<div class="g ${c.lay}">${img ? `<img src="${esc(img)}" alt="">` : ''}<div><pre>${esc(area.value)}</pre>`}${c.people && t.data.people.length ? `<h3>${i18n('Personnes')}</h3><ul>${t.data.people.map(p => `<li>${esc(p.name)}${p.role ? ` — ${esc(p.role)}` : ''}</li>`).join('')}</ul>` : ''}</div></div></body></html>`; }});
         }
         window.LCNDA_UI?.onPrintKey?.(dlg, () => printIt()); // L1 : ⌘P
         dlg.addEventListener('click', async e => {
@@ -1491,14 +1502,14 @@
             if (k === 'found') return openFound();
             if (k === 'aide') { const sel = area.value.slice(area.selectionStart, area.selectionEnd).trim().slice(0, 40); return ext.readingAid ? ext.readingAid.open({q: /\n/.test(sel) ? '' : sel, lang: aideLang($('[data-tx-lang]').value)}) : toast(i18n('L’aide à la lecture n’est pas chargée.'), 'error'); } // heritage-lecture-autrefois.js : ouverte sur la langue du texte
             if (k === 'template') { const tp = TEMPLATES[$('[data-tx="kind"]').value]; if (!tp) return toast(i18n('Pas de modèle pour ce genre d’acte.'), 'error'); if (area.value.trim() && !await A().confirmBox(i18n('Le texte déjà écrit est gardé.'), {title: i18n('Ajouter le modèle à la fin du texte ?'), okLabel: i18n('Ajouter le modèle')})) return; area.value += (area.value.trim() ? '\n\n' : '') + tp; area.dispatchEvent(new Event('input')); return; }
-            if (k === 'txt') { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([area.value], {type: 'text/plain;charset=utf-8'})); a.download = `${(A().safeExportFilename ? A().safeExportFilename($('[data-tx="title"]').value || 'transcription', 'transcription') : 'transcription')}.txt`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); return; }
+            if (k === 'txt') { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([namedText()], {type: 'text/plain;charset=utf-8'})); a.download = `${(A().safeExportFilename ? A().safeExportFilename($('[data-tx="title"]').value || 'transcription', 'transcription') : 'transcription')}.txt`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); return; }
             if (k === 'copy') { navigator.clipboard?.writeText(area.value).then(() => toast(i18n('Texte copié.'))).catch(() => toast(i18n('Copie impossible ici.'), 'error')); return; }
             if (k === 'print') return printIt();
             if (k === 'export') { // E3 : une seule fenêtre d'export
                 if (!UI.openExportDialog) return printIt();
                 const nm = $('[data-tx="title"]').value || 'transcription';
                 return UI.openExportDialog({title: nm, defaultName: nm, quality: false, info: `${i18n('Mots : {n}', {n: area.value.trim().split(/\s+/).filter(Boolean).length})}${t.filename ? ` · ${i18n('avec l’image de l’acte')}` : ''}`, formats: [
-                    {id: 'file', label: '📝 Texte', hint: i18n('le texte seul (.txt)'), ext: 'txt', run: async o => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([area.value], {type: 'text/plain;charset=utf-8'})); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }},
+                    {id: 'file', label: '📝 Texte', hint: i18n('le texte seul (.txt)'), ext: 'txt', run: async o => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([namedText()], {type: 'text/plain;charset=utf-8'})); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }},
                     {id: 'pdf', hint: i18n('image + texte (« Enregistrer en PDF »)'), ext: '', run: async () => printIt()},
                     {id: 'print', hint: 'image + texte', run: async () => printIt()}]});
             }

@@ -529,6 +529,26 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             for (let k = 0; k < 3; k++) { await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="rot"]').click()); await sleep(250); } // remise à l'endroit
             assert.equal(await rot(), r0);
         });
+        await t('⤓ export et 🖨 impression, un seul texte : le nom de chaque page, son image, « Sur la page affichée » ou toutes', async () => {
+            await p.click(`${D} [data-tx-page="1"]`); await sleep(400);
+            const r = await p.evaluate(async () => { const UI = window.LCNDA_UI, keep = {pr: UI.openPrintDialog, ex: UI.openExportDialog}; let pr = null, ex = null;
+                UI.openPrintDialog = o => { pr = o; }; UI.openExportDialog = o => { ex = o; };
+                try { const d = document.querySelector('dialog.h-tx-dlg'); [...d.querySelectorAll('[data-tx-menus] button')].find(b => b.textContent.trim() === 'Fichier').click(); await new Promise(x => setTimeout(x, 200));
+                    [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].find(b => /Exporter/.test(b.textContent)).click(); await new Promise(x => setTimeout(x, 200));
+                    let blob = ''; const oc = URL.createObjectURL; URL.createObjectURL = b => { blob = b; return oc.call(URL, b); };
+                    await ex.formats.find(f => f.id === 'file').run({filename: 'x.txt'}); URL.createObjectURL = oc; const txt = await blob.text();
+                    await ex.formats.find(f => f.id === 'print').run({});
+                    const all = await pr.html({lay: 'side', pages: 'all', people: false}), here = await pr.html({lay: 'side', pages: 'here', people: false});
+                    const imgs = h => [...h.matchAll(/<img src="([^"]+)"/g)].map(m => m[1].split('/').pop()), hs = h => [...h.matchAll(/<h2>([^<]+)<\/h2>/g)].map(m => m[1]);
+                    return {txt, opt: pr.options.some(o => o.key === 'pages'), allH: hs(all), allImg: imgs(all), hereH: hs(here), hereImg: imgs(here)};
+                } finally { UI.openPrintDialog = keep.pr; UI.openExportDialog = keep.ex; } });
+            assert.equal(r.opt, true, 'le choix des pages dans « Imprimer »');
+            assert.equal(r.allH.length, 4, JSON.stringify(r.allH));
+            assert.equal(r.allImg.length, 4); assert.equal(new Set(r.allImg).size, 4, 'une image différente par page : ' + JSON.stringify(r.allImg));
+            assert.deepEqual(r.hereH, [r.allH[1]], 'la page affichée seulement'); assert.equal(r.hereImg.length, 1);
+            r.allH.forEach(h => assert.ok(r.txt.includes(`— ${h} —`), 'le texte exporté nomme la page ' + h + ' : ' + r.txt.slice(0, 200)));
+            assert.ok(!/— page \d —/.test(r.txt), 'plus de repère « — page 2 — » sans nom');
+        });
         await t('🔬 toutes les pages : « ■ Arrêter » pendant la page 1 arrête tout, rien n’est ajouté', async () => {
             ollama.delay = 700; const b0 = (await tx()).body, c0 = ollama.chats;
             await deepAll();
