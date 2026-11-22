@@ -35,3 +35,8 @@ Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dan
 # — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
 (page {n}, ligne {line}) ¦ (strana {n}, riadok {line}) ¦ (side {n}, linje {line})
 page {n}, ligne {line} ¦ strana {n}, riadok {line} ¦ side {n}, linje {line}
+# — 3a+ : « Ce que l’app a trouvé » sur toutes les pages (un texte par page), la lecture approfondie de toutes les pages
+« {name} » est sur une autre page : ouvre sa page pour le garder. ¦ „{name}“ je na inej strane: otvor jej stranu, aby si to ponechal. ¦ «{name}» står på en annen side: åpne den siden for å beholde personen.
+Un texte par page : la lecture rapide et la lecture d’un imprimé se font page par page ; la lecture approfondie peut lire toutes les pages. ¦ Jeden text na stranu: rýchle čítanie a čítanie tlače idú stranu po strane; dôkladné čítanie vie prečítať všetky strany. ¦ Én tekst per side: hurtiglesing og lesing av trykt tekst skjer side for side; den grundige lesingen kan lese alle sidene.
+Lecture approfondie : page {i} sur {n}… ¦ Dôkladné čítanie: strana {i} z {n}… ¦ Grundig lesing: side {i} av {n}…
+Lire toutes les pages avec ce modèle ({n}) ¦ Prečítať všetky strany týmto modelom ({n}) ¦ Les alle sidene med denne modellen ({n})

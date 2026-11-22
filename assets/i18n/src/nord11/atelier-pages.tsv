@@ -35,3 +35,8 @@ Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dan
 # — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
 (page {n}, ligne {line}) ¦ (trang {n}, dòng {line}) ¦ (halaman {n}, baris {line})
 page {n}, ligne {line} ¦ trang {n}, dòng {line} ¦ halaman {n}, baris {line}
+# — 3a+ : « Ce que l’app a trouvé » sur toutes les pages (un texte par page), la lecture approfondie de toutes les pages
+« {name} » est sur une autre page : ouvre sa page pour le garder. ¦ “{name}” ở một trang khác: hãy mở trang đó để giữ lại. ¦ “{name}” ada di halaman lain: buka halamannya agar kamu bisa menyimpannya.
+Un texte par page : la lecture rapide et la lecture d’un imprimé se font page par page ; la lecture approfondie peut lire toutes les pages. ¦ Mỗi trang một văn bản: đọc nhanh và đọc chữ in làm từng trang một; đọc kỹ có thể đọc tất cả các trang. ¦ Satu teks per halaman: pembacaan cepat dan pembacaan teks cetak dilakukan halaman demi halaman; pembacaan mendalam bisa membaca semua halaman.
+Lecture approfondie : page {i} sur {n}… ¦ Đọc kỹ: trang {i} trên {n}… ¦ Pembacaan mendalam: halaman {i} dari {n}…
+Lire toutes les pages avec ce modèle ({n}) ¦ Đọc tất cả các trang bằng mô hình này ({n}) ¦ Baca semua halaman dengan model ini ({n})

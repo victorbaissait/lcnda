@@ -35,3 +35,8 @@ Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dan
 # — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
 (page {n}, ligne {line}) ¦ (страница {n}, строка {line}) ¦ (сторінка {n}, рядок {line})
 page {n}, ligne {line} ¦ страница {n}, строка {line} ¦ сторінка {n}, рядок {line}
+# — 3a+ : « Ce que l’app a trouvé » sur toutes les pages (un texte par page), la lecture approfondie de toutes les pages
+« {name} » est sur une autre page : ouvre sa page pour le garder. ¦ «{name}» на другой странице: открой её, чтобы сохранить. ¦ «{name}» на іншій сторінці: відкрий її, щоб зберегти.
+Un texte par page : la lecture rapide et la lecture d’un imprimé se font page par page ; la lecture approfondie peut lire toutes les pages. ¦ Один текст на страницу: быстрое чтение и чтение печатного текста идут постранично; углублённое чтение может прочитать все страницы. ¦ Один текст на сторінку: швидке читання й читання друкованого тексту йдуть посторінково; поглиблене читання може прочитати всі сторінки.
+Lecture approfondie : page {i} sur {n}… ¦ Углублённое чтение: страница {i} из {n}… ¦ Поглиблене читання: сторінка {i} з {n}…
+Lire toutes les pages avec ce modèle ({n}) ¦ Прочитать все страницы этой моделью ({n}) ¦ Прочитати всі сторінки цією моделлю ({n})

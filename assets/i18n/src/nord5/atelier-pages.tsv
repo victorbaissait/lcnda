@@ -35,3 +35,8 @@ Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dan
 # — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
 (page {n}, ligne {line}) ¦ (stranica {n}, redak {line}) ¦ (stran {n}, vrstica {line})
 page {n}, ligne {line} ¦ stranica {n}, redak {line} ¦ stran {n}, vrstica {line}
+# — 3a+ : « Ce que l’app a trouvé » sur toutes les pages (un texte par page), la lecture approfondie de toutes les pages
+« {name} » est sur une autre page : ouvre sa page pour le garder. ¦ „{name}” je na drugoj stranici: otvori tu stranicu da to zadržiš. ¦ »{name}« je na drugi strani: odpri to stran, da to obdržiš.
+Un texte par page : la lecture rapide et la lecture d’un imprimé se font page par page ; la lecture approfondie peut lire toutes les pages. ¦ Jedan tekst po stranici: brzo čitanje i čitanje tiska idu stranicu po stranicu; temeljito čitanje može pročitati sve stranice. ¦ En besedilo na stran: hitro branje in branje tiska gresta stran za stranjo; temeljito branje lahko prebere vse strani.
+Lecture approfondie : page {i} sur {n}… ¦ Temeljito čitanje: stranica {i} od {n}… ¦ Temeljito branje: stran {i} od {n}…
+Lire toutes les pages avec ce modèle ({n}) ¦ Pročitaj sve stranice ovim modelom ({n}) ¦ Preberi vse strani s tem modelom ({n})

@@ -35,3 +35,8 @@ Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dan
 # — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
 (page {n}, ligne {line}) ¦ (sivu {n}, rivi {line}) ¦ ({n}. oldal, {line}. sor)
 page {n}, ligne {line} ¦ sivu {n}, rivi {line} ¦ {n}. oldal, {line}. sor
+# — 3a+ : « Ce que l’app a trouvé » sur toutes les pages (un texte par page), la lecture approfondie de toutes les pages
+« {name} » est sur une autre page : ouvre sa page pour le garder. ¦ ”{name}” on toisella sivulla: avaa sen sivu, niin voit pitää sen. ¦ „{name}” egy másik oldalon van: nyisd meg azt az oldalt, hogy megtartsd.
+Un texte par page : la lecture rapide et la lecture d’un imprimé se font page par page ; la lecture approfondie peut lire toutes les pages. ¦ Yksi teksti sivua kohden: pikaluku ja painetun tekstin luku tehdään sivu kerrallaan; perusteellinen luku voi lukea kaikki sivut. ¦ Oldalanként egy szöveg: a gyors olvasás és a nyomtatott szöveg olvasása oldalanként megy; az alapos olvasás minden oldalt el tud olvasni.
+Lecture approfondie : page {i} sur {n}… ¦ Perusteellinen luku: sivu {i}/{n}… ¦ Alapos olvasás: {i}. oldal / {n}…
+Lire toutes les pages avec ce modèle ({n}) ¦ Lue kaikki sivut tällä mallilla ({n}) ¦ Minden oldal olvasása ezzel a modellel ({n})

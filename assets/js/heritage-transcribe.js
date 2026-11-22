@@ -17,6 +17,7 @@
     const post = (action, body) => api(action, {}, {method: 'POST', body});
     const toast = (...a) => A().toast(...a);
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    let deepRun = null; // 📑 « 🔬 Lecture approfondie » sur toutes les pages : la lecture en cours (elle suit l'Atelier d'un acte à l'autre, un texte par page)
     let seq = 0; const zid = () => 'z' + Date.now().toString(36) + (++seq);
 
     const KINDS = [['apreciser', i18n('À préciser')], ['bapteme', i18n('Baptême')], ['naissance', i18n('Naissance')], ['mariage', i18n('Mariage')], ['deces', i18n('Décès')], ['sepulture', i18n('Sépulture')], ['notarial', i18n('Acte notarié')], ['recensement', i18n('Recensement')], ['militaire', i18n('Registre militaire')], ['lettre', i18n('Lettre')], ['autre', i18n('Autre')]];
@@ -280,7 +281,7 @@
          * les onglets des pages au-dessus de l'image ; réglage « Plusieurs pages » : un seul texte coupé par « — page 2 — » (conseillé :
          * le morceau n° i du texte est la page t.data.pages[i], chaque zone sait sa page, z.p) ou un texte par page (un acte par page). ─── */
         const PG = ext.txPages;
-        let PAGES = [], pageIx = 0, pageForm = '', switching = false, readQ = null;
+        let PAGES = [], pageIx = 0, pageForm = '', switching = false, readQ = null, perSet = null, perCombo = null, perWarnAt = 0;
         const curPid = () => Number(PAGES[pageIx]?.media_id || t.media_id);
         const onHere = z => pageForm !== 'one' || Number(z.p || t.media_id) === curPid();
         const pz = () => (pageForm === 'one' ? {p: curPid()} : {});
@@ -314,7 +315,7 @@
         function paintPages() {
             const bar = $('[data-tx-pages]'); if (!bar) return;
             const many = PAGES.length > 1; bar.hidden = !many; dlg.dataset.txPages = many ? pageForm : '';
-            const sc = $('[data-tx-readscope]'); if (sc) sc.hidden = !(many && pageForm === 'one');
+            const sc = $('[data-tx-readscope]'); if (sc) sc.hidden = !many;
             if (!many) { bar.innerHTML = ''; return; }
             bar.innerHTML = PAGES.map((p, i) => `<button type="button" role="tab" class="h-tx-page${i === pageIx ? ' is-on' : ''}" data-tx-page="${i}" aria-selected="${i === pageIx}" title="${esc(p.title || p.filename)}"><b>${i + 1}</b> ${esc(pageName(p, i))}</button>`).join('')
                 + `<span class="h-tx-pagesinfo">${esc(pageForm === 'one' ? i18n('Un seul texte, coupé par « — page 2 — »') : i18n('Un texte par page'))}</span><button type="button" class="icon-button small h-tx-pagesmore" data-tx-pagesmenu title="${esc(i18n('Pages du document'))}" aria-label="${esc(i18n('Pages du document'))}" aria-haspopup="menu">⋯</button>`;
@@ -330,6 +331,7 @@
             pageForm = has ? 'one' : set.some(p => Number(p.media_id) !== Number(t.media_id) && (p.acts || []).length) ? 'per' : PG.mode();
             pageIx = Math.max(0, PAGES.findIndex(p => Number(p.media_id) === Number(ctx.page || t.media_id)));
             if (pageForm === 'one' && layoutText()) { dirty = true; status(i18n('modifié')); }
+            if (pageForm === 'per') await loadPerSet();
             t.filename = PAGES[pageIx].filename; paintPages();
         }
         function layoutText() {
@@ -354,20 +356,37 @@
             if (JSON.stringify(t.data.pages || []) !== JSON.stringify(pages)) { t.data.pages = pages; changed = true; }
             return changed;
         }
-        async function goPage(i, {keepText = false} = {}) {
+        async function goPage(i, {keepText = false, goto = null} = {}) {
             if (i < 0 || i >= PAGES.length || i === pageIx) return;
-            if (pageForm === 'per') return switchAct(i);
+            if (pageForm === 'per') return switchAct(i, goto);
             pageIx = i; t.filename = PAGES[i].filename; selZone = null; paintPages();
             if (!keepText) { const sg = PG.segments(area.value)[segIx()]; if (sg) { area.setSelectionRange(sg.s, sg.s); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20; area.scrollTop = Math.max(0, (area.value.slice(0, sg.s).split('\n').length - 2) * lineH); mirror.scrollTop = area.scrollTop; } }
             await loadImage();
         }
+        /** un texte par page : les actes des autres pages du même ensemble (pour « Ce que l'app a trouvé » sur tout le document) */
+        async function loadPerSet() {
+            perSet = await Promise.all(PAGES.map(async (p, i) => { if (i === pageIx) return null; const id = Number((p.acts || [])[0] || 0);
+                if (id) { try { const r = await api('act_transcription', {id}); return {id, body: String(r.body || '')}; } catch (_) {} }
+                return {id: 0, body: String(p.transcription || '')}; }));
+        }
+        /** le texte de toutes les pages (celle-ci telle qu'elle est écrite), coupé par « — page N — » : {text, starts} */
+        function makeCombo() {
+            if (pageForm !== 'per' || PAGES.length < 2 || !perSet) return null;
+            let text = ''; const starts = [];
+            PAGES.forEach((p, i) => { if (i) text += '\n' + PG.markerText(i + 1) + '\n'; starts.push(text.length); text += i === pageIx ? area.value : (perSet[i]?.body || ''); });
+            return {text, starts};
+        }
+        /** « (page 3, ligne 7) » d'une position du texte de toutes les pages (un texte par page) : la page, son acte, la position dans son texte */
+        const perRef = pos => { const c = perCombo; if (!c || !(pos >= 0)) return null; const li = PG.lineOf(c.text, pos), i = li.seg; if (!PAGES[i]) return null;
+            return {n: i + 1, code: PAGES[i].label || 'page', name: pageName(PAGES[i], i), line: li.line, text: i18n('(page {n}, ligne {line})', {n: i + 1, line: li.line}),
+                mediaId: Number(PAGES[i].media_id), actId: i === pageIx ? t.id : (perSet?.[i]?.id || 0), seg: i, at: pos - c.starts[i]}; };
         /** un texte par page : chaque page a son acte ; changer de page enregistre celui-ci et ouvre celui de la page */
-        async function switchAct(i) {
+        async function switchAct(i, goto = null) {
             const p = PAGES[i]; if (!p) return;
             if (dirty) { await save(); if (dirty) return; }
             switching = true; teardown();
             const next = (p.acts || []).length ? {id: Number(p.acts[0])} : {mediaId: Number(p.media_id), filename: p.filename, title: '', text: p.transcription || ''};
-            return open({...next, page: Number(p.media_id), onClose: ctx.onClose, onSaved: ctx.onSaved});
+            return open({...next, page: Number(p.media_id), goto, onClose: ctx.onClose, onSaved: ctx.onSaved});
         }
         /** un clic (ou les flèches) dans le texte d'une autre page : son image s'affiche */
         function followCaret() {
@@ -378,8 +397,11 @@
         /** « (page 3, ligne 7) » d'une position du texte (un seul texte sur plusieurs pages) ; null sinon */
         const pageRef = pos => { if (pageForm !== 'one' || PAGES.length < 2 || !(pos >= 0)) return null; const li = PG.lineOf(area.value, pos), id = Number((t.data.pages || [])[li.seg] || 0), i = PAGES.findIndex(p => Number(p.media_id) === id); if (i < 0) return null;
             return {n: i + 1, code: PAGES[i].label || 'page', name: pageName(PAGES[i], i), line: li.line, text: i18n('(page {n}, ligne {line})', {n: i + 1, line: li.line})}; };
-        const findText = () => (PG ? area.value.replace(/^—[ \t]*[\p{L}.]+[ \t]+\d+[^\n—]*—[ \t]*$/gmu, m => ' '.repeat(m.length)) : area.value);
-        const readAllOn = () => pageForm === 'one' && PAGES.length > 1 && !!$('[data-tx-readscope] input[value="all"]')?.checked;
+        const blankMarks = v => (PG ? v.replace(/^—[ \t]*[\p{L}.]+[ \t]+\d+[^\n—]*—[ \t]*$/gmu, m => ' '.repeat(m.length)) : v);
+        const findText = () => blankMarks(area.value);
+        const readAllAny = () => PAGES.length > 1 && !!$('[data-tx-readscope] input[value="all"]')?.checked;
+        const readAllOn = () => pageForm === 'one' && readAllAny();
+        const perOnly = () => { if (pageForm === 'per' && readAllAny()) toast(i18n('Un texte par page : la lecture rapide et la lecture d’un imprimé se font page par page ; la lecture approfondie peut lire toutes les pages.')); };
         function readAll(kind) { readQ = {kind, left: PAGES.map((_, i) => i)}; readNext(true); }
         async function readNext(ok) {
             if (!readQ) return; if (!ok || !dlg.isConnected) { readQ = null; return; }
@@ -629,6 +651,7 @@
         area.addEventListener('click', () => { const c = area.selectionStart, z = t.data.zones.find(q => q.e > q.s && c >= q.s && c <= q.e); if (z && z.id !== selZone) { selZone = z.id; drawZones(); reveal(z); } });
         const reveal = z => { if (!onHere(z)) { const i = PAGES.findIndex(p => Number(p.media_id) === Number(z.p || t.media_id)); if (i >= 0) { goPage(i, {keepText: true}).then(() => { if (onHere(z)) { drawZones(); revealNow(z); } }); return; } } revealNow(z); };
         const revealNow = z => { const r = stage.getBoundingClientRect(); const cx = z.x + z.w / 2, cy = z.y + z.h / 2; const [X, Y] = rotPt(cx, cy); if (X * zoom + panX < 0 || X * zoom + panX > r.width || Y * zoom + panY < 0 || Y * zoom + panY > r.height) { panX = r.width / 2 - X * zoom; panY = r.height / 2 - Y * zoom; applyView(); } };
+        const gotoRange = (s, en) => { if (phone()) showPtab('text', false); selectText({s, e: en}); const z = t.data.zones.find(q => q.s < en && s < q.e); if (z) { selZone = z.id; drawZones(); reveal(z); } else followCaret(); };
         const selectText = (z, focus = true) => { if (!(z?.e > z?.s)) return; if (focus) area.focus(); area.setSelectionRange(z.s, z.e); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20, lines = area.value.slice(0, z.s).split('\n').length; area.scrollTop = Math.max(0, (lines - 3) * lineH); mirror.scrollTop = area.scrollTop; };
         /* ─── glisser sur l'image : déplacer l'image, dessiner une zone, déplacer ou redimensionner la zone choisie ─── */
         let drag = null, space = false, pinch = null;
@@ -721,11 +744,13 @@
             const lg = aideLang($('[data-tx-lang]').value), kw = lg && found.length + people.length ? (window.LCNDA_AIDE_LECTURE?.known?.(area.value, lg) || []) : [];
             const words = kw.length ? `<h4>📖 ${esc(i18n('Mots connus ({lang})', {lang: langName(lg).toLowerCase()}))} <small class="muted">${kw.length}</small></h4><div class="h-tx-chips">${kw.map(w => `<span class="h-tx-chip is-word"><button type="button" data-tx-lookword="${esc(String(w.item.t).split(',')[0].trim())}" title="${esc(i18n('Ouvrir dans 📖 Aide à la lecture'))}">${esc(w.word)} <i>${esc(w.item.d.length > 48 ? `${w.item.d.slice(0, 46)}…` : w.item.d)}</i></button></span>`).join('')}</div>` : '';
             const ex = lastExtract && (found.length || lastRich?.people.length) ? lastExtract : null;
-            const tf = ext.txTrouve && lastRich && (found.length || lastRich.people.length) ? '<div data-tx-trouve></div>' : ''; // 🧭 le bloc riche (heritage-transcribe-trouve.js)
+            const rfT = perCombo && lastRichAll ? lastRichAll : lastRich;
+            const tf = ext.txTrouve && rfT && (found.length || rfT.people.length) ? '<div data-tx-trouve></div>' : ''; // 🧭 le bloc riche (heritage-transcribe-trouve.js)
             const cta = ex && ex.people.length && ext.txActe ? `<div class="h-txa-cta"><span><b>${{mariage: '💍', bapteme: '💧', naissance: '👶', deces: '✝', sepulture: '⚱'}[ex.kind] || '📜'} ${esc(i18n('Ce que l’app a trouvé dans l’acte'))}</b> <small class="muted">${esc(A().plural ? A().plural(ex.people.length, 'personne') : ex.people.length)}${ex.date ? ' · ' + esc(ex.date.label) : ''}${ex.place ? ' · ' + esc(ex.place) : ''}</small></span><button type="button" class="button small" data-tx-cmd="found">✓ ${i18n('Ajouter à la généalogie')}…</button></div>` : '';
             box.innerHTML = cta + kept + (tf || groups) + words || `<p class="muted h-tx-hint">${i18n('« 🧭 Repérer » cherche dans le texte les noms (et leur rôle : parrain, témoin, fils de…), les dates (même en toutes lettres, ou au calendrier républicain), les lieux et les métiers, et propose les fiches de ta base qui leur ressemblent.')}</p>`;
-            if (tf) ext.txTrouve.mount($('[data-tx-trouve]'), {text: area.value, rf: lastRich, kind: $('[data-tx="kind"]').value, date: $('[data-tx="date_text"]').value, place: $('[data-tx="place"]').value, source: $('[data-tx="source"]').value,
-                filename: t.filename, title: $('[data-tx="title"]').value, mediaId: t.media_id, transcriptionId: t.id, people: t.data.people, keep: (f, pid) => keep({label: f.label, role: f.role, s: f.s, e: f.e}, pid), pageRef: pageForm === 'one' && PAGES.length > 1 ? pageRef : null,
+            if (tf) ext.txTrouve.mount($('[data-tx-trouve]'), {text: rfT === lastRichAll ? blankMarks(perCombo.text) : area.value, rf: rfT, kind: $('[data-tx="kind"]').value, date: $('[data-tx="date_text"]').value, place: $('[data-tx="place"]').value, source: $('[data-tx="source"]').value,
+                filename: t.filename, title: $('[data-tx="title"]').value, mediaId: t.media_id, transcriptionId: t.id, people: t.data.people, keep: (f, pid) => keepAt(f, pid, rfT === lastRichAll), pageRef: rfT === lastRichAll ? perRef : pageForm === 'one' && PAGES.length > 1 ? pageRef : null,
+                gotoOf: rfT === lastRichAll ? (a, b) => { const r = perRef(a); return r ? `p${r.seg}:${r.at}:${r.at + (b - a)}` : `${a}:${b}`; } : null,
                 setDate: v => { if (!v) return; t.date_text = v; $('[data-tx="date_text"]').value = v; touch(); }, setPlace: v => { if (!v) return; t.place = v; $('[data-tx="place"]').value = v; touch(); },
                 setKind: k => { const sel = $('[data-tx="kind"]'); if (!sel || ![...sel.options].some(o => o.value === k)) return; sel.value = k; sel.dispatchEvent(new Event('change', {bubbles: true})); }});
             flowSoon(60);
@@ -918,7 +943,7 @@
         // au toucher (ou un clic) : le mot touché montre sa bulle (sauf s'il a une correction proposée : son menu passe d'abord)
         area.addEventListener('click', () => { if (!abbrevs.length || area.selectionStart !== area.selectionEnd) return hideAb(); const c = area.selectionStart; if (txFix.some(f => c >= f.s && c <= f.e)) return; const i = abbrevs.findIndex(a => c >= a.s && c <= a.e); if (i >= 0) showAb(i); else hideAb(); });
         area.addEventListener('input', hideAb); area.addEventListener('scroll', hideAb);
-        let lastExtract = null, lastUnsure = 0, lastRich = null;
+        let lastExtract = null, lastUnsure = 0, lastRich = null, lastRichAll = null;
         async function runDetect() {
             const src = findText(); // 📑 les repères « — page 2 — » ne sont ni des noms, ni des nombres
             found = detect(src);
@@ -926,7 +951,17 @@
             if (names.length) { try { const r = await post('act_match_people', {names}); (r.result || []).forEach((list, i) => matchCache.set(names[i], list)); } catch (_) {} }
             try { lastExtract = window.LCNDA_TXACTE?.extractAct(src, {kind: $('[data-tx="kind"]').value, place: $('[data-tx="place"]').value, date: $('[data-tx="date_text"]').value, helpers: {detect, findDates, wordsToNumber}}) || null; } catch (_) { lastExtract = null; }
             try { lastRich = window.LCNDA_TXACTE?.richFind?.(src, {kind: $('[data-tx="kind"]').value, place: $('[data-tx="place"]').value, date: $('[data-tx="date_text"]').value, helpers: {detect, findDates, wordsToNumber}}) || null; if (lastExtract && lastRich) window.LCNDA_TXACTE.mergeRich(lastExtract, lastRich); } catch (_) { lastRich = null; }
+            // 📑 un texte par page : « Ce que l'app a trouvé » lit aussi les actes des autres pages (une carte par personne sur tout le document)
+            perCombo = makeCombo(); lastRichAll = null; 
+            if (perCombo) { try { lastRichAll = window.LCNDA_TXACTE?.richFind?.(blankMarks(perCombo.text), {kind: $('[data-tx="kind"]').value, place: $('[data-tx="place"]').value, date: $('[data-tx="date_text"]').value, helpers: {detect, findDates, wordsToNumber}}) || null; } catch (_) { lastRichAll = null; } }
             paintMirror(); paintPeople(); status(i18n(found.length > 1 ? '{n} éléments repérés' : '{n} élément repéré', {n: found.length}));
+        }
+        /** garder une personne de « Ce que l'app a trouvé » ; sur toutes les pages (un texte par page) : une mention sur la page affichée */
+        function keepAt(f, pid, all) {
+            if (!all) return keep({label: f.label, role: f.role, s: f.s, e: f.e}, pid);
+            const st0 = perCombo.starts[pageIx], en0 = st0 + area.value.length, m = [[f.s, f.e], ...(f.mentions || [])].find(q => q[0] >= st0 && q[1] <= en0);
+            if (!m) { if (Date.now() - perWarnAt > 1500) { perWarnAt = Date.now(); toast(i18n('« {name} » est sur une autre page : ouvre sa page pour le garder.', {name: f.label})); } return; }
+            keep({label: f.label, role: f.role, s: m[0] - st0, e: m[1] - st0}, pid);
         }
         const keep = (f, personId = 0) => { if (t.data.people.some(p => p.s === f.s && p.e === f.e)) { if (personId) t.data.people.find(p => p.s === f.s && p.e === f.e).person_id = personId; } else t.data.people.push({name: f.label, role: f.role || '', person_id: personId, s: f.s, e: f.e}); touch(); paintPeople(); };
         function linkPerson(i) {
@@ -939,7 +974,8 @@
         $('[data-tx-found]').addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b) return; const d = b.dataset;
             if (d.txLookword) return ext.readingAid?.open({q: d.txLookword, lang: aideLang($('[data-tx-lang]').value)});
-            if (d.txGoto) { if (phone()) showPtab('text', false); const [s, en] = d.txGoto.split(':').map(Number); selectText({s, e: en}); const z = t.data.zones.find(q => q.s < en && s < q.e); if (z) { selZone = z.id; drawZones(); reveal(z); } else followCaret(); return; }
+            if (d.txGoto && d.txGoto[0] === 'p') { const [i, s, en] = d.txGoto.slice(1).split(':').map(Number); if (i !== pageIx) return void goPage(i, {goto: {s, e: en}}); return gotoRange(s, en); } // 📑 un texte par page : l'acte de l'autre page
+            if (d.txGoto) { const [s, en] = d.txGoto.split(':').map(Number); return gotoRange(s, en); }
             if (d.txKeep) return keep(found[Number(d.txKeep)]);
             if (d.txKeepall !== undefined) { found.filter(f => f.type === 'person').forEach(f => keep(f)); return; }
             if (d.txMatch) { const [fi, pid] = d.txMatch.split(':').map(Number); keep(found[fi], pid); toast(i18n('Personne gardée et reliée à sa fiche.')); return; }
@@ -1175,9 +1211,11 @@
             return dlgR;
         }
         /* ─── G : 🔍 la lecture approfondie (Ollama, sur cet ordinateur), les deux lectures côte à côte ─── */
-        async function openDeep({htrText = '', box} = {}) {
+        async function openDeep({htrText = '', box, all = false} = {}) {
             if (!ext.txActe) return toast(i18n('La lecture approfondie n’est pas chargée.'), 'error');
             if (!t.media_id || !imgW) return toast(i18n('Choisis d’abord l’image de l’acte.'), 'error');
+            if (all) { if (deepRun) return toast(i18n('Lecture approfondie : page {i} sur {n}…', {i: deepRun.done + 1, n: deepRun.n})); // 📑 toutes les pages, l'une après l'autre
+                return ext.txActe.openDeep({lang: $('[data-tx-lang]').value, all: {n: PAGES.length, run: model => startDeepAll(model)}, onCompare: out => LG()?.compareExtras(out, {})}); }
             let b = box; if (b === undefined) { b = htrArea(); if (!b) { b = await pageArea(); if (b === false) return; } }
             const cur = htrText || area.value.trim();
             ext.txActe.openDeep({lang: $('[data-tx-lang]').value, htrText: cur, getImage: () => areaB64(b, {max: 2200}),
@@ -1186,6 +1224,54 @@
                     before = area.value; t.body = area.value; touch(); paintMirror(); status(i18n('Texte lu (à relire)')); runDetect();
                     if (LG()?.linkOn()) linkLines({s: start, e: put.e, box: b || null, src: from === 'htr' ? 'htr' : 'deep'}); // ▤ une zone par ligne, comme la lecture rapide
                     if (fixOn()) runFix({quiet: true}); }}); // 🪄 les corrections proposées aussi sur ce texte
+        }
+        /* ─── 📑 la lecture approfondie de toutes les pages : une demande à Ollama par page, l'une après l'autre ; le texte de chaque page
+         * dans son morceau (un seul texte) ou dans l'acte de sa page (un texte par page, l'Atelier passe d'un acte à l'autre) ;
+         * ▤ les lignes reliées à l'image page par page si la case est cochée ; 🪄 les corrections proposées comme pour une page ─── */
+        function startDeepAll(model) {
+            if (deepRun || PAGES.length < 2) return;
+            deepRun = {model, lang: $('[data-tx-lang]').value, left: PAGES.map((_, i) => i), n: PAGES.length, done: 0, stop: false, job: 0, busy: false};
+            deepAllStep();
+        }
+        function paintDeepAll() {
+            let bar = $('[data-tx-deepall]'); const R = deepRun;
+            if (!R) { if (bar) bar.hidden = true; return; }
+            if (!bar) { bar = document.createElement('div'); bar.className = 'h-tx-deepall'; bar.dataset.txDeepall = ''; bar.setAttribute('role', 'status'); ($('[data-tx-pages]') || stage).after(bar);
+                bar.addEventListener('click', e => { if (!e.target.closest('[data-tx-deepstop]') || !deepRun) return; deepRun.stop = true; if (deepRun.job) post('tx_deep_cancel', {id: deepRun.job}).catch(() => {}); paintDeepAll(); }); }
+            bar.hidden = false;
+            bar.innerHTML = `<span>🔬 ${esc(i18n('Lecture approfondie : page {i} sur {n}…', {i: Math.min(R.done + 1, R.n), n: R.n}))}</span><div class="h-txa-bar"><i style="width:${Math.round((R.done + .5) / R.n * 100)}%"></i></div><button type="button" class="button small secondary" data-tx-deepstop ${R.stop ? 'disabled' : ''}>■ ${esc(i18n('Arrêter'))}</button>`;
+        }
+        async function deepAllStep() {
+            const R = deepRun; if (!R || R.busy) return;
+            if (R.stop || !dlg.isConnected) return deepAllEnd(true);
+            const i = R.left[0]; if (i == null) return deepAllEnd(false);
+            if (i !== pageIx) { await goPage(i); if (pageForm === 'per') { if (dlg.isConnected) deepAllEnd(true); return; } } // un texte par page : l'Atelier de l'autre acte continue
+            R.busy = true; paintDeepAll();
+            let txt = '', err = '', b = null;
+            try {
+                b = await pageArea({ask: false}); if (b === false) b = null;
+                const img = await areaB64(b, {max: 2200});
+                if (!R.stop) { const r = await post('tx_deep_read', {model: R.model, language: R.lang, image_b64: img}); R.job = r.result.id; }
+                while (!R.stop && R.job) { await new Promise(res => setTimeout(res, 900)); if (R.stop) break;
+                    const j = await api('tx_deep_job', {id: R.job}); if (j.state === 'running') continue;
+                    if (j.state === 'done') txt = String(j.text || ''); else if (j.state !== 'cancelled') err = j.error ? i18n(j.error) : i18n('La lecture approfondie n’a pas abouti.');
+                    break; }
+            } catch (e) { err = e?.message || String(e); }
+            R.busy = false; R.job = 0;
+            if (R.stop || !dlg.isConnected) return deepAllEnd(true);
+            if (err) { toast(err, 'error'); return deepAllEnd(true); }
+            if (txt.trim()) { const put = appendRead(txt.trim() + '\n'); before = area.value; t.body = area.value; touch(); paintMirror();
+                if (LG()?.linkOn()) await linkLines({s: put.s, e: put.e, box: b || null, src: 'deep'}); // ▤ une zone par ligne, sur l'image de cette page
+                if (fixOn()) runFix({quiet: true}); } // 🪄
+            R.left.shift(); R.done++;
+            deepAllStep();
+        }
+        async function deepAllEnd(stopped) {
+            const R = deepRun; deepRun = null; paintDeepAll(); if (!R || !dlg.isConnected) return;
+            await runDetect();
+            if (pageForm === 'per' && dirty) await save(); // un texte par page : l'acte de la dernière page aussi (les autres l'ont été en changeant de page)
+            status(stopped ? i18n('La lecture a été arrêtée.') : i18n('Toutes les pages sont lues (à relire)'));
+            if (!stopped) toast(i18n('Toutes les pages sont lues (à relire)'));
         }
         /* ─── ▤ Relier les lignes du texte à l'image (calculs : app-lignes-alignement.js) : après la lecture approfondie, ou à la demande ─── */
         let htrCache = null; // la dernière lecture rapide de cette image : {file, lines} (boîtes en pixels de l'image)
@@ -1346,14 +1432,14 @@
             if (k === 'resetview') { const before = {...t.data.view}, origin = () => { t.data.view = TV.viewOf(); fitOn = true; fitMode = 'page'; syncControls(); geom({keepCenter: false}); applyFit('page'); applyImage(); touch(); };
                 if (!Object.entries(TV.DEFAULT_VIEW).some(([kk, d]) => String(before[kk]) !== String(d))) return status(i18n('L’image est déjà comme au départ'));
                 origin(); A().undoToast?.(i18n('Image remise comme au départ'), {undo: () => { t.data.view = TV.viewOf(before); syncControls(); geom({keepCenter: false}); applyFit(fitMode); applyImage(); touch(); }, redo: origin}); return; }
-            if (k === 'ocr') return readAllOn() ? readAll('ocr') : runOcr();
-            if (k === 'htr') return readAllOn() ? readAll('htr') : runHtr();
+            if (k === 'ocr') return readAllOn() ? readAll('ocr') : (perOnly(), runOcr());
+            if (k === 'htr') return readAllOn() ? readAll('htr') : (perOnly(), runHtr());
             if (k === 'htrstop') return htrStop();
             if (k === 'htrzone') return runHtr({zone: htrArea()});
             if (k === 'review') return openReview();
             if (k === 'detect') return runDetect();
             if (k === 'fix') return runFix();
-            if (k === 'deep') return openDeep({});
+            if (k === 'deep') return openDeep({all: readAllAny()});
             if (k === 'lines') return linkLines({manual: true});
             if (k === 'found') return openFound();
             if (k === 'aide') { const sel = area.value.slice(area.selectionStart, area.selectionEnd).trim().slice(0, 40); return ext.readingAid ? ext.readingAid.open({q: /\n/.test(sel) ? '' : sel, lang: aideLang($('[data-tx-lang]').value)}) : toast(i18n('L’aide à la lecture n’est pas chargée.'), 'error'); } // heritage-lecture-autrefois.js : ouverte sur la langue du texte
@@ -1442,7 +1528,7 @@
         const onKeyUp = e => { if (e.key === ' ') { space = false; stage.dataset.tool = tool; } };
         document.addEventListener('keydown', onKey, true); document.addEventListener('keyup', onKeyUp, true);
         /** l'outil s'en va (× ou Échap, ou « ↗ Fiche » d'une personne) : touches, worker « Mieux voir », observateurs, fenêtre */
-        function teardown() { if (!dlg.isConnected) return; htrStop(true); document.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp, true); window.removeEventListener('lcnda-txbar-change', onBar); enh?.stop(); ro.disconnect(); roBar.disconnect(); dlg.close(); dlg.remove(); if (!switching) ctx.onClose?.(); }
+        function teardown() { if (!dlg.isConnected) return; htrStop(true); if (!switching && deepRun) { deepRun.stop = true; if (deepRun.job) post('tx_deep_cancel', {id: deepRun.job}).catch(() => {}); deepRun = null; } document.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp, true); window.removeEventListener('lcnda-txbar-change', onBar); enh?.stop(); ro.disconnect(); roBar.disconnect(); dlg.close(); dlg.remove(); if (!switching) ctx.onClose?.(); }
         async function close() { if (dirty && !await A().confirmBox(i18n('Les dernières modifications de la transcription seront perdues.'), {title: i18n('Fermer sans enregistrer la transcription ?'), okLabel: i18n('Fermer sans enregistrer'), danger: true})) return; teardown(); }
         dlg.dataset.ownClose = '1'; // Échap : l'outil demande lui-même s'il faut (une seule question « Fermer sans enregistrer ? »)
         dlg.addEventListener('cancel', e => { e.preventDefault(); close(); });
@@ -1450,6 +1536,8 @@
         let roW = 0, roH = 0; const ro = new ResizeObserver(() => { const r = stage.getBoundingClientRect(); if (!imgW || drag || (r.width === roW && r.height === roH)) return; roW = r.width; roH = r.height; if (fitOn && fitMode !== 'real') applyFit(fitMode, {keepY: true}); else applyView(); }); ro.observe(stage);
         function docNote() { const n = $('[data-tx-docnote]'); if (n) n.hidden = !t.media_id; }
         renderBar(); paintMirror(); paintPeople(); docNote(); await initPages(); if (PAGES.length) { paintMirror(); paintPeople(); } await loadImage();
+        if (deepRun && dlg.isConnected) setTimeout(deepAllStep, 0); // 📑 la lecture approfondie de toutes les pages continue sur cette page
+        if (ctx.goto && dlg.isConnected) { runDetect(); setTimeout(() => gotoRange(ctx.goto.s, ctx.goto.e), 60); } // 📑 venu d'un « (page 3, ligne 7) » d'une autre page
         /* E1 : l'historique (instantanés de tout l'acte) ; ⌘Z dans une case de texte garde l'annulation de la case */
         const F_KEYS = ['title', 'kind', 'date_text', 'place', 'source'];
         HX = UI.editorHistory?.({get: () => ({f: Object.fromEntries(F_KEYS.map(k => [k, $(`[data-tx="${k}"]`).value])), st: $('[data-tx-state]').value, body: area.value, zones: t.data.zones, people: t.data.people, view: t.data.view}),

@@ -91,10 +91,12 @@
             box.innerHTML = `${head}${info()}<div class="h-txa-prog" data-txa-prog hidden><div class="h-txa-bar"><i></i></div><small data-txa-progtxt></small></div><div class="h-txa-out" data-txa-out></div>
                 <div class="h-txa-row h-txa-deepbtns">${!st.installed ? `<a class="button" href="${esc(st.download_url)}" target="_blank" rel="noopener noreferrer">↗ ${esc(i18n('Télécharger Ollama (ollama.com)'))}</a>` : ''}
                 ${st.running && !ready ? `<button type="button" class="button" data-txa-pull>⤓ ${esc(i18n('Installer la lecture approfondie'))}</button>` : ''}
-                ${ready && !o.setupOnly ? `<button type="button" class="button" data-txa-read>🔬 ${esc(i18n('Lire l’acte avec ce modèle'))}</button>` : ''}
+                ${ready && !o.setupOnly && o.all ? `<button type="button" class="button" data-txa-readall>🔬 ${esc(i18n('Lire toutes les pages avec ce modèle ({n})', {n: o.all.n}))}</button>` : ready && !o.setupOnly ? `<button type="button" class="button" data-txa-read>🔬 ${esc(i18n('Lire l’acte avec ce modèle'))}</button>` : ''}
                 <button type="button" class="button secondary" data-txa-recheck>↻ ${esc(i18n('Vérifier à nouveau'))}</button></div>
                 ${ready && o.setupOnly ? notice('info', esc(i18n('Pour lire un acte : ouvre son image dans l’Atelier de transcription (« 📜 Ouvrir dans l’Atelier »), puis « ✨ Lire ▾ ».'))) : ''}
                 <p class="ui-hint">${esc(i18n('« 🔬 Lecture approfondie (IA) » sur une page déjà lue montre les deux textes côte à côte, et tu gardes le meilleur. Relis toujours : un modèle peut se tromper sur les noms.'))}</p>`;
+            // 📑 toutes les pages : la case ▤ « Relier les lignes à l'image » se choisit avant ; chaque page est lue l'une après l'autre dans l'Atelier
+            if (ready && o.all) { const out = box.querySelector('[data-txa-out]'); out.innerHTML = '<div class="h-txa-cmp2 is-one" hidden></div>'; o.onCompare?.(out); }
         }
         const prog = (on, pct, txt) => { const p = box.querySelector('[data-txa-prog]'); if (!p) return; p.hidden = !on; p.querySelector('i').style.width = `${Math.max(0, Math.min(100, pct))}%`; p.querySelector('[data-txa-progtxt]').textContent = txt || ''; };
         async function poll(onDone) {
@@ -128,6 +130,7 @@
                 try { const r = await post('tx_deep_pull', {model: pick()}); job = {id: r.result.id, state: 'running'}; b.disabled = true; prog(true, 2, i18n('Téléchargement du modèle…')); poll(() => { toast(i18n('La lecture approfondie est installée.')); refresh(); }); } catch (err) { toast(err.message, 'error'); }
                 return;
             }
+            if (b.matches('[data-txa-readall]')) { const m = pick(); dlg.close(); o.all.run(m); return; }
             if (b.matches('[data-txa-read]')) {
                 let img; try { img = await o.getImage(); } catch (err) { return toast(err.message, 'error'); }
                 try { const r = await post('tx_deep_read', {model: pick(), language: o.lang || 'fra', image_b64: img}); job = {id: r.result.id, state: 'running'}; b.disabled = true; prog(true, 2, `${i18n('Lecture approfondie')}…`); poll(j => { b.disabled = false; compare(j.text); }); } catch (err) { toast(err.message, 'error'); }

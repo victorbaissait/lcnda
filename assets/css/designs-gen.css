@@ -5563,6 +5563,8 @@
 :root[data-lc-density] .h-tx-readscope{gap:calc(4px * var(--lc-sp)) calc(12px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-readscope{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-readscope label{gap:calc(5px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-deepall{gap:calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-deepall{padding:calc(4px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 /* photomaps.css */
 :root[data-lc-density] .pm-carte{padding:calc(18px * var(--lc-sp)) calc(22px * var(--lc-sp)) calc(28px * var(--lc-sp))}
 :root[data-lc-density] .pm-screen{gap:calc(10px * var(--lc-sp))}

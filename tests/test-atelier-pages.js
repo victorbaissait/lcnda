@@ -17,6 +17,7 @@ const os = require('os');
 const path = require('path');
 const net = require('net');
 const {spawn, spawnSync} = require('child_process');
+const http = require('http');
 let chromium; try { ({chromium} = require('playwright')); } catch (_) { ({chromium} = require('/opt/node22/lib/node_modules/playwright')); }
 const root = path.join(__dirname, '..');
 const {findPhp, phpRuntimeArgs, devBundledPhp} = require('../electron/php-server.js');
@@ -63,8 +64,20 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
     if (seed.status !== 0 || !/"ok"/.test(seed.stdout)) { console.error(seed.stderr || seed.stdout); process.exit(1); }
     const soloBefore = php(String.raw`require 'lib/bootstrap.php'; $pdo = db(); echo json_encode($pdo->query('SELECT title,kind,media_id,body,data_json FROM act_transcriptions WHERE id=1')->fetch(PDO::FETCH_ASSOC));`).stdout;
 
-    const port = await new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
-    const proc = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-S', `127.0.0.1:${port}`, '-t', root, path.join(root, 'router.php')], {cwd: root, env, stdio: 'ignore'});
+    const freePort = () => new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
+    // un faux Ollama sur cet ordinateur (la lecture approfondie de toutes les pages) : la k-ième demande rend « Lecture approfondie numéro k »
+    const ollama = {pulled: new Set(), chats: 0, delay: 20};
+    const fake = http.createServer((req, res) => { let body = ''; req.on('data', c => { body += c; }); req.on('end', async () => {
+        if (req.url === '/api/version') return void res.end(JSON.stringify({version: '0.12.0'}));
+        if (req.url === '/api/tags') return void res.end(JSON.stringify({models: [...ollama.pulled].map(name => ({name, size: 1}))}));
+        if (req.url === '/api/pull') { const j = JSON.parse(body || '{}'); ollama.pulled.add(j.model); res.setHeader('Content-Type', 'application/x-ndjson'); return void res.end(JSON.stringify({status: 'success'}) + '\n'); }
+        if (req.url === '/api/chat') { const k = ++ollama.chats; res.setHeader('Content-Type', 'application/x-ndjson');
+            for (const l of [`Lecture approfondie numéro ${k},`, `deuxième ligne de la lecture ${k}.`]) { res.write(JSON.stringify({message: {role: 'assistant', content: l + '\n'}, done: false}) + '\n'); await sleep(ollama.delay); }
+            return void res.end(JSON.stringify({message: {role: 'assistant', content: ''}, done: true}) + '\n'); }
+        res.statusCode = 404; res.end('{}'); }); });
+    const oport = await freePort(); await new Promise(r => fake.listen(oport, '127.0.0.1', r));
+    const port = await freePort();
+    const proc = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-S', `127.0.0.1:${port}`, '-t', root, path.join(root, 'router.php')], {cwd: root, env: {...env, LCNDA_OLLAMA_URL: `http://127.0.0.1:${oport}`}, stdio: 'ignore'});
     const base = `http://127.0.0.1:${port}/`;
     for (let i = 0; i < 100; i++) { try { await fetch(base + 'api.php?action=kiosk_state'); break; } catch (_) { await sleep(100); } }
     const browser = await chromium.launch();
@@ -327,6 +340,103 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             assert.match(sl.page, /(^|, )page 3$/, 'la page dans la source'); assert.match(sl.note, /^Page 3, ligne 3 : « .*trente ans/);
             await closeAtelier();
         });
+        /* ─── 3 bis. un texte par page : « Ce que l'app a trouvé » lit aussi les actes des autres pages ─── */
+        const P7 = 'Par-devant Maître Jacques ROUDIL, notaire à Tulle,\nfurent présents Louis VERNIAL, laboureur,\ndemeurant à Naves.';
+        const P8 = 'et Rose TAVERGNE, sa future épouse,\nfille de Pierre TAVERGNE ; ledit Louis VERNIAL\nâgé de trente ans.';
+        await t('un texte par page : une seule carte par personne sur les deux pages, « (page 2, ligne 2) » sur chaque information', async () => {
+            await p.evaluate(() => { localStorage.setItem('genealogie-transcribe-pages-mode', 'per'); window.LCNDA_EXT.mediaPages.clear(); });
+            const a7 = Number(php(`require 'lib/bootstrap.php'; echo db()->query('SELECT id FROM act_transcriptions WHERE media_id=7')->fetchColumn();`).stdout); assert.ok(a7 > 0);
+            await openTx({id: a7}); assert.equal((await tx()).form, 'per');
+            await setBody(P7); await saveTx();
+            await p.click(`${D} [data-tx-page="1"]`);
+            await p.waitForFunction(() => /page8\.png/.test(document.querySelector('dialog.h-tx-dlg [data-tx-img]')?.getAttribute('href') || ''), null, {timeout: 15000}); await sleep(500);
+            await setBody(P8); await p.click(`${D} [data-tx-cmd="detect"]`);
+            await p.waitForFunction(() => document.querySelector('dialog.h-tx-dlg [data-tx-trouve] [data-tf-card]'), null, {timeout: 10000}); await sleep(600);
+            const r = await trouve(), louis = r.cards.filter(c => /Louis VERNIAL/i.test(c.name || ''));
+            assert.equal(louis.length, 1, 'une seule carte pour Louis VERNIAL : ' + JSON.stringify(r.cards.map(c => c.name)));
+            assert.deepEqual(louis[0].where, ['(page 1, ligne 2)', '(page 2, ligne 2)']);
+            assert.equal(louis[0].fields.find(f => /Âge/.test(f.k))?.where, '(page 2, ligne 3)');
+            assert.equal(r.items.find(i => /Naves/.test(i.main))?.where, '(page 1, ligne 3)', 'le lieu de la page 1, lu dans l’acte de la page 1');
+            assert.doesNotMatch(r.all, /— page/);
+            assert.equal((await tx()).body, P8, 'le texte de la page affichée ne change pas');
+            await shot('atelier-trouve-par-page.png');
+        });
+        await t('un texte par page : un clic sur « (page 1, ligne 2) » ouvre l’acte de la page 1, au passage', async () => {
+            await p.locator(`${D} [data-tx-trouve] .h-tf-where`, {hasText: '(page 1, ligne 2)'}).first().click();
+            await p.waitForFunction(() => /page7\.png/.test(document.querySelector('dialog.h-tx-dlg [data-tx-img]')?.getAttribute('href') || ''), null, {timeout: 15000}); await sleep(900);
+            const s = await tx(); assert.equal(s.on, '0'); assert.equal(s.body, P7);
+            const sel = await p.evaluate(() => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); return a.value.slice(a.selectionStart, a.selectionEnd); });
+            assert.match(sel, /Louis VERNIAL/);
+            const rows = JSON.parse(php(`require 'lib/bootstrap.php'; echo json_encode(db()->query('SELECT media_id, body FROM act_transcriptions WHERE media_id IN (7,8) ORDER BY media_id')->fetchAll(PDO::FETCH_ASSOC));`).stdout);
+            assert.deepEqual(rows.map(x => [x.media_id, x.body]), [[7, P7], [8, P8]], 'la page 2 a été enregistrée en changeant de page');
+            await p.waitForFunction(() => document.querySelector('dialog.h-tx-dlg [data-tx-trouve] [data-tf-card]'), null, {timeout: 10000});
+        });
+        await t('un texte par page : « ＋ Ajouter à une fiche… » sur une information de la page 2 met la page 2 (et son image) dans la source', async () => {
+            const card = p.locator(`${D} [data-tx-trouve] [data-tf-card]`, {hasText: 'Louis VERNIAL'}).first();
+            await card.locator('.h-tf-fields li', {hasText: 'Âge'}).locator('[data-tf-add]').click();
+            await p.waitForSelector('dialog[open] [data-tf-prev]'); await sleep(300);
+            assert.match(await p.textContent('dialog[open] [data-tf-prev]'), /page 2, ligne 3/);
+            await p.evaluate(() => { const d = [...document.querySelectorAll('dialog[open]')].at(-1); const fld = d.querySelector('.pk[data-picker]'); (window.LCNDA_PICKER?.pickerSet || window.LCNDA_APP.pickerSet)(fld, 2); });
+            await sleep(200);
+            await p.evaluate(() => { const d = [...document.querySelectorAll('dialog[open]')].at(-1); [...d.querySelectorAll('button')].find(b => /Ajouter$/.test(b.textContent.trim()) && b.type === 'submit' || /＋ Ajouter$/.test(b.textContent.trim()))?.click(); });
+            await p.waitForFunction(() => [...document.querySelectorAll('.ui-toast')].filter(x => /Ajouté à la fiche/.test(x.textContent)).length >= 2, null, {timeout: 10000});
+            const sl = JSON.parse(php(`require 'lib/bootstrap.php'; echo json_encode(db()->query("SELECT * FROM source_links ORDER BY id DESC LIMIT 1")->fetch(PDO::FETCH_ASSOC));`).stdout || 'null');
+            assert.match(sl.page, /(^|, )page 2 \(verso\)$/, 'la page dans la source : ' + JSON.stringify(sl)); assert.match(sl.note, /^Page 2, ligne 3 : « .*trente ans/);
+            await closeAtelier(); await p.evaluate(() => localStorage.removeItem('genealogie-transcribe-pages-mode'));
+        });
+        /* ─── 4. « 🔬 Lecture approfondie (IA) » sur toutes les pages (faux Ollama) ─── */
+        await p.evaluate(async () => { const A = window.LCNDA_APP, st = await A.api('tx_deep_status'), m = (st.models.find(x => x.recommended) || st.models[0]).tag;
+            const r = await A.api('tx_deep_pull', {}, {method: 'POST', body: {model: m}}); for (let i = 0; i < 60; i++) { const j = await A.api('tx_deep_job', {id: r.result.id}); if (j.state !== 'running') break; await new Promise(x => setTimeout(x, 150)); } });
+        const deepAll = async () => {
+            await p.click(`${D} [data-tx-cmd="readmenu"]`); assert.equal(await p.isVisible(`${D} [data-tx-readscope]`), true, 'le choix « Sur toutes les pages » se voit');
+            await p.check(`${D} [data-tx-readscope] input[value="all"]`); await p.click(`${D} [data-tx-readpanel] [data-tx-cmd="deep"]`);
+            await p.waitForSelector('[data-txa-readall]', {timeout: 15000});
+            const o = await p.evaluate(() => ({btn: document.querySelector('[data-txa-readall]').textContent, link: document.querySelector('[data-txl-link]')?.checked, one: !!document.querySelector('[data-txa-read]')}));
+            await p.click('[data-txa-readall]'); return o; };
+        const statusTx = () => p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-status]')?.textContent || '');
+        await t('🔬 toutes les pages, un texte par page : une demande par page, chaque texte dans l’acte de sa page (enregistré)', async () => {
+            await p.evaluate(() => { localStorage.setItem('genealogie-transcribe-pages-mode', 'per'); window.LCNDA_EXT.mediaPages.clear(); });
+            const a7 = Number(php(`require 'lib/bootstrap.php'; echo db()->query('SELECT id FROM act_transcriptions WHERE media_id=7')->fetchColumn();`).stdout);
+            await openTx({id: a7}); const c0 = ollama.chats;
+            const o = await deepAll(); assert.match(o.btn, /Lire toutes les pages avec ce modèle \(2\)/); assert.equal(o.link, true, 'la case ▤ se choisit avant'); assert.equal(o.one, false);
+            const bars = new Set();
+            for (let i = 0; i < 120; i++) { const b = await p.evaluate(() => { const x = document.querySelector('dialog.h-tx-dlg [data-tx-deepall]'); return x && !x.hidden ? x.textContent : ''; }); if (b) bars.add(b.replace(/\s+/g, ' ').trim()); if (/Toutes les pages sont lues/.test(await statusTx())) break; await sleep(250); }
+            assert.match(await statusTx(), /Toutes les pages sont lues/);
+            assert.ok([...bars].some(b => /page 1 sur 2/.test(b)) && [...bars].some(b => /page 2 sur 2/.test(b)), 'la barre « page 2 sur 2 » : ' + JSON.stringify([...bars]));
+            assert.ok([...bars].every(b => /Arrêter/.test(b)));
+            assert.equal(ollama.chats - c0, 2, 'une demande par page');
+            await sleep(800);
+            const rows = JSON.parse(php(`require 'lib/bootstrap.php'; echo json_encode(db()->query('SELECT media_id, body, data_json FROM act_transcriptions WHERE media_id IN (7,8) ORDER BY media_id')->fetchAll(PDO::FETCH_ASSOC));`).stdout);
+            assert.equal(rows[0].body, P7 + '\n\nLecture approfondie numéro ' + (c0 + 1) + ',\ndeuxième ligne de la lecture ' + (c0 + 1) + '.\n');
+            assert.equal(rows[1].body, P8 + '\n\nLecture approfondie numéro ' + (c0 + 2) + ',\ndeuxième ligne de la lecture ' + (c0 + 2) + '.\n');
+            rows.forEach(r => assert.ok(JSON.parse(r.data_json).zones.some(z => z.src === 'deep'), '▤ des zones reliées sur chaque page : ' + r.data_json));
+            assert.match((await tx()).href, /page8\.png/);
+            await closeAtelier(); await p.evaluate(() => localStorage.removeItem('genealogie-transcribe-pages-mode'));
+        });
+        await t('🔬 toutes les pages, un seul texte : chaque page lue dans son morceau, ses lignes reliées sur sa page', async () => {
+            await openTx({id: act3a}); const b0 = (await tx()).body, z0 = await p.evaluate(() => document.querySelector('dialog.h-tx-dlg').txApi.get().data.zones.length), c0 = ollama.chats;
+            await deepAll();
+            await p.waitForFunction(() => /Toutes les pages sont lues/.test(document.querySelector('dialog.h-tx-dlg [data-tx-status]')?.textContent || ''), null, {timeout: 60000});
+            const s = await tx(), seg = s.body.split(/\n— page \d —\n/), seg0 = b0.split(/\n— page \d —\n/);
+            assert.equal(seg.length, 4);
+            [1, 2, 3, 4].forEach(n => { assert.ok(seg[n - 1].startsWith(seg0[n - 1].replace(/\n+$/, '')), `page ${n} : le texte d’avant reste`); assert.match(seg[n - 1], new RegExp(`Lecture approfondie numéro ${c0 + n},\\ndeuxième ligne de la lecture ${c0 + n}\\.`), `page ${n}`); });
+            const zp = await p.evaluate(() => [...new Set(document.querySelector('dialog.h-tx-dlg').txApi.get().data.zones.filter(q => q.src === 'deep').map(q => q.p))].sort());
+            assert.deepEqual(zp, [1, 2, 3, 4], 'des zones ▤ sur chaque page');
+            const zt = await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), a = d.querySelector('[data-tx-body]').value; return d.txApi.get().data.zones.filter(q => q.src === 'deep').map(q => [q.p, a.slice(q.s, q.e)]); });
+            zt.forEach(([pg, tt]) => { const m = tt.match(/(?:numéro|lecture) (\d+)/); if (m) assert.equal(Number(m[1]) - c0, pg, 'la zone de ' + tt + ' est sur sa page'); });
+            assert.ok(zt.length >= 4 && (await p.evaluate(() => document.querySelector('dialog.h-tx-dlg').txApi.get().data.zones.length)) > z0);
+        });
+        await t('🔬 toutes les pages : « ■ Arrêter » pendant la page 1 arrête tout, rien n’est ajouté', async () => {
+            ollama.delay = 700; const b0 = (await tx()).body, c0 = ollama.chats;
+            await deepAll();
+            await p.waitForFunction(() => { const x = document.querySelector('dialog.h-tx-dlg [data-tx-deepall]'); return x && !x.hidden && /page 1 sur 4/.test(x.textContent); }, null, {timeout: 15000});
+            for (let i = 0; i < 40 && ollama.chats === c0; i++) await sleep(100);
+            await p.click(`${D} [data-tx-deepstop]`);
+            await p.waitForFunction(() => document.querySelector('dialog.h-tx-dlg [data-tx-deepall]')?.hidden, null, {timeout: 10000});
+            await sleep(2500);
+            assert.match(await statusTx(), /arrêtée/); assert.equal((await tx()).body, b0); assert.equal(ollama.chats - c0, 1, 'pas de demande pour les pages suivantes');
+            ollama.delay = 20; await closeAtelier();
+        });
         await t('un acte d’une seule page : « Ce que l’app a trouvé » sans page (comme avant)', async () => {
             await openTx({id: 1}); await p.click(`${D} [data-tx-cmd="detect"]`);
             await p.waitForFunction(() => document.querySelector('dialog.h-tx-dlg [data-tx-trouve] [data-tf-card]'), null, {timeout: 10000}); await sleep(400);
@@ -346,7 +456,7 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
         });
         await t('aucune erreur JavaScript', async () => { assert.deepEqual(errs, []); });
     } finally {
-        await browser.close(); proc.kill();
+        await browser.close(); proc.kill(); fake.close();
         fs.rmSync(tmp, {recursive: true, force: true});
     }
     console.log(fails ? `${fails} essai(s) en échec` : 'Les documents en plusieurs pages marchent.');

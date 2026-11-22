@@ -35,3 +35,8 @@ Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dan
 # — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
 (page {n}, ligne {line}) ¦ ({n} puslapis, {line} eilutė) ¦ ({n}. lapa, {line}. rinda) ¦ (lehekülg {n}, rida {line})
 page {n}, ligne {line} ¦ {n} puslapis, {line} eilutė ¦ {n}. lapa, {line}. rinda ¦ lehekülg {n}, rida {line}
+# — 3a+ : « Ce que l’app a trouvé » sur toutes les pages (un texte par page), la lecture approfondie de toutes les pages
+« {name} » est sur une autre page : ouvre sa page pour le garder. ¦ „{name}“ yra kitame puslapyje: atidaryk tą puslapį, kad tai išsaugotum. ¦ “{name}” ir citā lapā: atver to lapu, lai to paturētu. ¦ „{name}” on teisel lehel: ava see leht, et see alles jätta.
+Un texte par page : la lecture rapide et la lecture d’un imprimé se font page par page ; la lecture approfondie peut lire toutes les pages. ¦ Vienas tekstas puslapiui: greitas skaitymas ir spausdinto teksto skaitymas vyksta puslapis po puslapio; išsamus skaitymas gali perskaityti visus puslapius. ¦ Viens teksts katrai lapai: ātrā lasīšana un iespieduma lasīšana notiek lapu pa lapai; padziļinātā lasīšana var izlasīt visas lapas. ¦ Üks tekst lehe kohta: kiirlugemine ja trükiteksti lugemine käivad leht lehe haaval; põhjalik lugemine oskab lugeda kõiki lehti.
+Lecture approfondie : page {i} sur {n}… ¦ Išsamus skaitymas: puslapis {i} iš {n}… ¦ Padziļinātā lasīšana: lapa {i} no {n}… ¦ Põhjalik lugemine: leht {i}/{n}…
+Lire toutes les pages avec ce modèle ({n}) ¦ Perskaityti visus puslapius šiuo modeliu ({n}) ¦ Izlasīt visas lapas ar šo modeli ({n}) ¦ Loe kõik lehed selle mudeliga ({n})

@@ -323,3 +323,6 @@
 .h-tf-where{font-size:11.5px;color:var(--muted,#666);margin-left:4px;white-space:nowrap;padding:0}
 .h-tf-where:hover{color:var(--blue,#0066cc)}
 :root[data-theme="dark"] .h-tf-where{color:#a9adb5}
+/* 📑 la lecture approfondie de toutes les pages : la barre « page 2 sur 4 » et ■ Arrêter */
+.h-tx-deepall{display:flex;align-items:center;gap:10px;padding:4px 10px;font-size:12.5px;border-bottom:1px solid var(--line,#e3e5ea)}
+.h-tx-deepall .h-txa-bar{flex:1;min-width:60px;margin:0}

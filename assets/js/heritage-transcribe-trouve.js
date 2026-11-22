@@ -80,7 +80,7 @@
         const head = (key, n, extra = '') => { const s = SECTIONS.find(x => x[0] === key); return `<h4 class="h-tf-h">${s[1]} ${esc(i18n(s[2]))} <small class="muted">${n}</small>${n ? ` <button type="button" class="link-button" data-tf-all="${key}">${esc(i18n('tout garder'))}</button>` : ''}${extra}</h4>`; };
         const offCls = k => (st.off.has(k) ? ' is-off' : '');
         /* 📑 un acte sur plusieurs pages : chaque information dit sa page et sa ligne, « (page 3, ligne 7) » ; un clic montre la page */
-        const whereOf = (a, b) => { const r = ctx.pageRef && a >= 0 ? ctx.pageRef(a) : null; return r ? ` <button type="button" class="link-button h-tf-where" data-tx-goto="${a}:${b}" title="${esc(i18n('Montrer dans le texte'))}">${esc(r.text)}</button>` : ''; };
+        const whereOf = (a, b) => { const r = ctx.pageRef && a >= 0 ? ctx.pageRef(a) : null; return r ? ` <button type="button" class="link-button h-tf-where" data-tx-goto="${esc(ctx.gotoOf ? ctx.gotoOf(a, b) : `${a}:${b}`)}" title="${esc(i18n('Montrer dans le texte'))}">${esc(r.text)}</button>` : ''; };
         const wherePerson = p => { if (!ctx.pageRef) return ''; const seen = new Set(); return (p.mentions?.length ? p.mentions : [[p.s, p.e]]).filter(m => m[0] >= 0).map(m => { const r = ctx.pageRef(m[0]); if (!r || seen.has(r.n)) return ''; seen.add(r.n); return whereOf(m[0], m[1]); }).join(''); };
         function card(p) {
             const F = p.fields, keys = Object.keys(FIELD).filter(k => F[k]), lid = linkedId(p), cs = cands(p);
@@ -182,7 +182,7 @@
             if (off) st.off.add(k); else st.off.delete(k); paint();
             if (off) (A().undoToast || toast)(i18n('Élément écarté.'), {undo: () => { st.off.delete(k); if (el.isConnected) paint(); }});
         }
-        function keepPerson(p, pid = 0) { if (!p?.name) return; ctx.keep?.({label: p.name, role: ({temoin: 'témoin', parrain: 'parrain', marraine: 'marraine', defunt: 'défunt', declarant: 'déclarant', conjoint: 'conjoint', sujet: 'sujet'})[p.fields.role?.value] || '', s: Math.max(0, p.s), e: Math.max(0, p.e)}, pid); }
+        function keepPerson(p, pid = 0) { if (!p?.name) return; ctx.keep?.({label: p.name, role: ({temoin: 'témoin', parrain: 'parrain', marraine: 'marraine', defunt: 'défunt', declarant: 'déclarant', conjoint: 'conjoint', sujet: 'sujet'})[p.fields.role?.value] || '', s: Math.max(0, p.s), e: Math.max(0, p.e), mentions: p.mentions || []}, pid); }
         el.addEventListener('click', e => {
             const b = e.target.closest('button'); if (!b || !el.contains(b)) return; const d = b.dataset;
             if (d.tfMore) { UI().menuAt?.(b, itemsFor(d.tfMore), {title: (() => { const x = byKey(d.tfMore); return x ? (x.name || x.label || x.text || '') : ''; })()}); return; }
@@ -264,7 +264,7 @@
                     const pid = Number(pv) || 0; if (!pid) { UI().fail?.(frm.querySelector('.pk-input') || frm.elements.tf_title, i18n('Choisis une fiche.')); return false; }
                     const v = n => frm.elements[n]?.value || '';
                     const body = {person_id: pid, as: frm.querySelector('[name="tf_as"]:checked')?.value || 'info', title: v('tf_title'), date: v('tf_date'), place: v('tf_place'), quote: v('tf_quote'), line,
-                        world_id: frm.elements.tf_world?.checked ? world.id : '', media_id: ctx.mediaId || 0, ...(pr ? {page: pr.n, page_label: pr.code} : {}), transcription_id: ctx.transcriptionId || 0, source: src};
+                        world_id: frm.elements.tf_world?.checked ? world.id : '', media_id: pr?.mediaId || ctx.mediaId || 0, ...(pr ? {page: pr.n, page_label: pr.code} : {}), transcription_id: (pr && pr.actId != null ? pr.actId : ctx.transcriptionId) || 0, source: src}; // 📑 un texte par page : l'image et l'acte de la page
                     let r; try { r = await post('act_item_add', body); } catch (err) { toast(err.message, 'error'); return false; }
                     const res = r.result || {}; let undone = false;
                     (A().undoToast || toast)(i18n('✓ Ajouté à la fiche.'), {undo: async () => { if (undone) return {already: true}; await post('act_import_undo', {token: res.undo}); undone = true; }});

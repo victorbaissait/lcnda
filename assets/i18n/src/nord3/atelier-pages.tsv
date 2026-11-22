@@ -35,3 +35,8 @@ Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dan
 # — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
 (page {n}, ligne {line}) ¦ (pagina {n}, rândul {line})
 page {n}, ligne {line} ¦ pagina {n}, rândul {line}
+# — 3a+ : « Ce que l’app a trouvé » sur toutes les pages (un texte par page), la lecture approfondie de toutes les pages
+« {name} » est sur une autre page : ouvre sa page pour le garder. ¦ „{name}” este pe altă pagină: deschide pagina ei ca să o păstrezi.
+Un texte par page : la lecture rapide et la lecture d’un imprimé se font page par page ; la lecture approfondie peut lire toutes les pages. ¦ Un text pe pagină: citirea rapidă și citirea unui text tipărit se fac pagină cu pagină; citirea aprofundată poate citi toate paginile.
+Lecture approfondie : page {i} sur {n}… ¦ Citire aprofundată: pagina {i} din {n}…
+Lire toutes les pages avec ce modèle ({n}) ¦ Citește toate paginile cu acest model ({n})

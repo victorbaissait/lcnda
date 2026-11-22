@@ -35,3 +35,8 @@ Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dan
 # — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
 (page {n}, ligne {line}) ¦ (σελίδα {n}, γραμμή {line}) ¦ (страница {n}, ред {line})
 page {n}, ligne {line} ¦ σελίδα {n}, γραμμή {line} ¦ страница {n}, ред {line}
+# — 3a+ : « Ce que l’app a trouvé » sur toutes les pages (un texte par page), la lecture approfondie de toutes les pages
+« {name} » est sur une autre page : ouvre sa page pour le garder. ¦ Το «{name}» είναι σε άλλη σελίδα: άνοιξε τη σελίδα του για να το κρατήσεις. ¦ „{name}“ е на друга страница: отвори я, за да го запазиш.
+Un texte par page : la lecture rapide et la lecture d’un imprimé se font page par page ; la lecture approfondie peut lire toutes les pages. ¦ Ένα κείμενο ανά σελίδα: η γρήγορη ανάγνωση και η ανάγνωση έντυπου γίνονται σελίδα προς σελίδα· η σε βάθος ανάγνωση μπορεί να διαβάσει όλες τις σελίδες. ¦ Един текст на страница: бързото четене и четенето на печатен текст вървят страница по страница; задълбоченото четене може да прочете всички страници.
+Lecture approfondie : page {i} sur {n}… ¦ Σε βάθος ανάγνωση: σελίδα {i} από {n}… ¦ Задълбочено четене: страница {i} от {n}…
+Lire toutes les pages avec ce modèle ({n}) ¦ Διάβασε όλες τις σελίδες με αυτό το μοντέλο ({n}) ¦ Прочети всички страници с този модел ({n})

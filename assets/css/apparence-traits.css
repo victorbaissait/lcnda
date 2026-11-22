@@ -3476,6 +3476,7 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .h-tx-readscope, :root .h-tx-readscope:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line,#e3e3e3)}
 :root[data-theme="dark"].lc-frame .h-tx-pages, :root[data-theme="dark"] .h-tx-pages:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-tx-page, :root[data-theme="dark"] .h-tx-page:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root.lc-frame .h-tx-deepall, :root .h-tx-deepall:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line,#e3e5ea)}
 /* photomaps.css */
 :root.lc-frame .pm-filter, :root .pm-filter:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .pm-chip, :root .pm-chip:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}
 :root.lc-frame .pm-filter.is-active, :root .pm-filter.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
