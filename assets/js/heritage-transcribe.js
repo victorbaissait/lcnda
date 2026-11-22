@@ -401,7 +401,7 @@
             t.data.zones.forEach((z, i) => { if (z.e > z.s) marks.push({s: z.s, e: z.e, c: colorOf(z, i), on: selZone === z.id}); });
             found.forEach(f => marks.push({s: f.s, e: f.e, cls: `is-${f.type}`}));
             marks.sort((a, b) => a.s - b.s); let h = '', pos = 0;
-            marks.forEach(m => { if (m.s < pos) return; h += fixSeg(text, pos, m.s); h += `<mark class="${m.cls || ''}${m.on ? ' is-on' : ''}" ${m.c ? `style="background:${m.c}${m.on ? '' : '66'}"` : ''}>${fixSeg(text, m.s, m.e)}</mark>`; pos = m.e; });
+            marks.forEach(m => { if (m.s < pos) return; h += fixSeg(text, pos, m.s); h += `<mark class="${m.cls || (m.c ? 'h-tx-zm' : '')}${m.on ? ' is-on' : ''}" ${m.c ? `style="--zc:${m.c}"` : ''}>${fixSeg(text, m.s, m.e)}</mark>`; pos = m.e; });
             mirror.innerHTML = h + fixSeg(text, pos, text.length) + '\n';
             mirror.scrollTop = area.scrollTop;
         }

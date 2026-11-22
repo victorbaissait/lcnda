@@ -406,7 +406,8 @@ button.secondary.is-busy .ui-spin, .button.secondary.is-busy .ui-spin { border-c
 :root[data-theme="dark"] .ui-skel { background: linear-gradient(90deg, #2c2f34, #383c42, #2c2f34); background-size: 200% 100%; }
 :root[data-theme="dark"] .ui-bubble { background: #2e2a17; border-color: #e8e8e8; }
 :root[data-theme="dark"] .ui-bubble-faq { border-top-color: #5a5232; }
-:root[data-theme="dark"] .ui-toggle > i { background: #555; }
+/* le gris sombre ne vaut que pour l'interrupteur éteint : plus fort que « :checked », il cachait le bleu « allumé » */
+:root[data-theme="dark"] .ui-toggle > input:not(:checked) + i { background: #555; }
 :root[data-theme="dark"] .ui-filters > .is-active { color: #111; }
 :root[data-theme="dark"] .ui-export-fmt.is-active { background: #1d2f4d; }
 :root[data-theme="dark"] .ui-export-prev { background: linear-gradient(160deg, #3a352a, #2a261d); color: #c9b892; }

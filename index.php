@@ -28,7 +28,7 @@ header('X-Content-Type-Options: nosniff');
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=286">
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=271">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=272">
     <link rel="stylesheet" href="assets/css/transcription-actes.css?v=3">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
     <link rel="stylesheet" href="assets/css/heritage-diagram-cartes.css?v=2">
@@ -42,7 +42,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/tresors.css?v=14">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=30">
-    <link rel="stylesheet" href="assets/css/ui.css?v=22">
+    <link rel="stylesheet" href="assets/css/ui.css?v=23">
     <link rel="stylesheet" href="assets/css/saisies.css?v=4">
     <link rel="stylesheet" href="assets/css/board-shapelib.css?v=1">
     <link rel="stylesheet" href="assets/css/artist.css?v=5">
@@ -1276,7 +1276,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-versions.js?v=4" defer></script>
 <script src="assets/js/app-formats.js?v=1" defer></script>
 <script src="assets/js/app-pages.js?v=14" defer></script>
-<script src="assets/js/app-access.js?v=18" defer></script>
+<script src="assets/js/app-access.js?v=19" defer></script>
 <script src="assets/js/app-mode-simple.js?v=16" defer></script>
 <script src="assets/js/app-sidegroups.js?v=13" defer></script>
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
@@ -1485,7 +1485,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-transcribe-acte-core.js?v=3" defer></script>
 <script src="assets/js/heritage-transcribe-acte.js?v=7" defer></script>
 <script src="assets/js/heritage-transcribe-trouve.js?v=1" defer></script>
-<script src="assets/js/heritage-transcribe.js?v=42" defer></script>
+<script src="assets/js/heritage-transcribe.js?v=43" defer></script>
 <script src="assets/js/heritage-photomaps-time.js?v=2" defer></script>
 <script src="assets/js/heritage-photomaps.js?v=15" defer></script>
 <script src="assets/js/heritage-transcribe-list.js?v=5" defer></script>

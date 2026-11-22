@@ -3503,6 +3503,7 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-tx-mirror{color:transparent;pointer-events:none;background:#fff}
 .h-tx-mirror mark{color:transparent;border-radius:2px;background:#f6c34366}
 .h-tx-mirror mark.is-on{outline:2px solid #1473e6}
+.h-tx-mirror mark.h-tx-zm{background:color-mix(in srgb,var(--zc) 40%,transparent)}.h-tx-mirror mark.h-tx-zm.is-on{background:var(--zc)}
 .h-tx-mirror mark.is-person{background:#ffd9a8}.h-tx-mirror mark.is-date{background:#c6e3ff}.h-tx-mirror mark.is-place{background:#c9f0c3}.h-tx-mirror mark.is-job{background:#ecd7ff}
 .h-tx-found{flex:1;overflow:auto;padding:6px 12px 14px;border-top:1px solid #e3e3e8;background:#fff;min-height:120px}
 .h-tx-found h4{margin:10px 0 4px;font-size:12.5px}
@@ -3524,6 +3525,9 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 @media (max-width:900px){.h-tx-main{grid-template-columns:1fr;grid-template-rows:1fr 1fr}}
 :root[data-theme="dark"] .h-tx-dlg{background:#1b1d21}
 :root[data-theme="dark"] .h-tx,:root[data-theme="dark"] .h-tx-editor textarea{color:#e6e6e6}
+/* K4 : en sombre, le texte reste transparent (sinon son fond cache les couleurs des lignes) ; les couleurs des zones en teintes sombres */
+:root[data-theme="dark"] .h-tx-editor textarea{background:transparent}
+:root[data-theme="dark"] .h-tx-mirror mark.h-tx-zm{background:color-mix(in srgb,var(--zc) 38%,#24272c)}:root[data-theme="dark"] .h-tx-mirror mark.h-tx-zm.is-on{background:color-mix(in srgb,var(--zc) 62%,#24272c)}
 :root[data-theme="dark"] .h-tx-top,:root[data-theme="dark"] .h-tx-tools,:root[data-theme="dark"] .h-tx-found,:root[data-theme="dark"] .h-tx-mirror,:root[data-theme="dark"] .h-tx-chars{background:#24272c;border-color:#3a3f46}
 :root[data-theme="dark"] .h-tx-tools button,:root[data-theme="dark"] .h-tx-chars button,:root[data-theme="dark"] .h-tx-more summary,:root[data-theme="dark"] .h-tx-more>div{background:#2c3036;border-color:#3a3f46;color:#e6e6e6}
 /* 🧭 Retouche : restauration pas à pas */

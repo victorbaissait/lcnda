@@ -230,7 +230,7 @@ html.side-right .a11y-dock, .app-shell.sidebar-collapsed ~ .a11y-dock { left: 16
 .a11y-page .ui-toggle > input:focus-visible + i { outline: 3px solid rgba(5, 93, 255, .5); outline-offset: 2px; }
 .a11y-toggle span { display: grid; gap: 2px; font-weight: 700; }
 .a11y-toggle small { font-weight: 400; color: var(--muted); font-size: 12.5px; line-height: 1.4; }
-:root[data-theme="dark"] .a11y-page .ui-toggle > i { background: #555; }
+:root[data-theme="dark"] .a11y-page .ui-toggle > input:not(:checked) + i { background: #555; }
 
 /* aide « ? » (si app-ui.js n'est pas là) */
 .a11y-help { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--ink); background: var(--card-bg, #fff); color: var(--ink); font: 800 12px/1 Arial, sans-serif; padding: 0; cursor: pointer; display: inline-grid; place-items: center; }
