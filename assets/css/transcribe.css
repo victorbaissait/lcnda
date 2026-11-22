@@ -319,3 +319,7 @@
 :root[data-theme="dark"] .h-tx-page{background:#2a2c30;border-color:#4a4d53}
 :root[data-theme="dark"] .h-tx-page b,:root[data-theme="dark"] .h-tx-pagesinfo{color:#a9adb5}
 @media (max-width:640px){.h-tx-pagesinfo{display:none}}
+/* 📑 « Ce que l'app a trouvé » sur plusieurs pages : « (page 3, ligne 7) » à côté de chaque information (un clic montre la page) */
+.h-tf-where{font-size:11.5px;color:var(--muted,#666);margin-left:4px;white-space:nowrap;padding:0}
+.h-tf-where:hover{color:var(--blue,#0066cc)}
+:root[data-theme="dark"] .h-tf-where{color:#a9adb5}

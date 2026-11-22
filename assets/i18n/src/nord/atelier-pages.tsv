@@ -32,3 +32,6 @@ Un texte par page ¦ Jeden text na stránku ¦ En text per sida ¦ Én tekst pr.
 Toutes les pages sont lues (à relire) ¦ Všechny stránky jsou přečtené (ke kontrole) ¦ Alla sidor är lästa (att granska) ¦ Alle sider er læst (skal tjekkes)
 Réglage gardé : il vaut pour les documents pas encore commencés ; celui-ci garde sa forme. ¦ Nastavení uloženo: platí pro dosud nezačaté dokumenty; tento si ponechá svou podobu. ¦ Inställningen sparad: den gäller dokument som inte påbörjats än; det här behåller sin form. ¦ Indstillingen er gemt: den gælder dokumenter, der ikke er påbegyndt endnu; dette beholder sin form.
 Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription. ¦ Tato stránka je součástí vícestránkového záznamu: její text se upravuje v Dílně přepisu. ¦ Den här sidan hör till en handling på flera sidor: texten ändras i Transkriptionsverkstaden. ¦ Denne side hører til en optegnelse på flere sider: teksten ændres i Transskriptionsværkstedet.
+# — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
+(page {n}, ligne {line}) ¦ (stránka {n}, řádek {line}) ¦ (sida {n}, rad {line}) ¦ (side {n}, linje {line})
+page {n}, ligne {line} ¦ stránka {n}, řádek {line} ¦ sida {n}, rad {line} ¦ side {n}, linje {line}

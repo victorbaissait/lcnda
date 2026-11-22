@@ -32,3 +32,6 @@ Un texte par page ¦ Jedan tekst po stranici ¦ En besedilo na stran
 Toutes les pages sont lues (à relire) ¦ Sve su stranice pročitane (za provjeru) ¦ Vse strani so prebrane (za pregled)
 Réglage gardé : il vaut pour les documents pas encore commencés ; celui-ci garde sa forme. ¦ Postavka spremljena: vrijedi za dokumente koji još nisu započeti; ovaj zadržava svoj oblik. ¦ Nastavitev shranjena: velja za dokumente, ki še niso začeti; ta ohrani svojo obliko.
 Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription. ¦ Ova stranica dio je zapisa na više stranica: njezin se tekst uređuje u Radionici prijepisa. ¦ Ta stran je del zapisa na več straneh: njeno besedilo urejaš v Delavnici prepisa.
+# — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
+(page {n}, ligne {line}) ¦ (stranica {n}, redak {line}) ¦ (stran {n}, vrstica {line})
+page {n}, ligne {line} ¦ stranica {n}, redak {line} ¦ stran {n}, vrstica {line}

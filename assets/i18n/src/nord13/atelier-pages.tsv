@@ -32,3 +32,6 @@ Un texte par page ¦ Ένα κείμενο ανά σελίδα ¦ По един 
 Toutes les pages sont lues (à relire) ¦ Όλες οι σελίδες διαβάστηκαν (για έλεγχο) ¦ Всички страници са прочетени (за проверка)
 Réglage gardé : il vaut pour les documents pas encore commencés ; celui-ci garde sa forme. ¦ Η ρύθμιση κρατήθηκε: ισχύει για έγγραφα που δεν έχουν αρχίσει ακόμη· αυτό κρατά τη μορφή του. ¦ Настройката е запазена: важи за още незапочнати документи; този запазва формата си.
 Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription. ¦ Αυτή η σελίδα ανήκει σε πράξη πολλών σελίδων: το κείμενό της αλλάζει στο Εργαστήριο μεταγραφής. ¦ Тази страница е част от акт на няколко страници: текстът ѝ се променя в Работилницата за препис.
+# — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
+(page {n}, ligne {line}) ¦ (σελίδα {n}, γραμμή {line}) ¦ (страница {n}, ред {line})
+page {n}, ligne {line} ¦ σελίδα {n}, γραμμή {line} ¦ страница {n}, ред {line}

@@ -32,3 +32,6 @@ Un texte par page ¦ Sayfa başına bir metin
 Toutes les pages sont lues (à relire) ¦ Tüm sayfalar okundu (kontrol edilecek)
 Réglage gardé : il vaut pour les documents pas encore commencés ; celui-ci garde sa forme. ¦ Ayar saklandı: henüz başlanmamış belgeler için geçerli; bu belge biçimini korur.
 Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription. ¦ Bu sayfa çok sayfalı bir kaydın parçası: metni Transkripsiyon atölyesinde değiştirilir.
+# — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
+(page {n}, ligne {line}) ¦ (sayfa {n}, satır {line})
+page {n}, ligne {line} ¦ sayfa {n}, satır {line}

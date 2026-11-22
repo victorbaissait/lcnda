@@ -369,6 +369,10 @@
             const id = Number((t.data.pages || [])[PG.segAt(area.value, area.selectionStart)] || 0), i = PAGES.findIndex(p => Number(p.media_id) === id);
             if (i >= 0 && i !== pageIx) goPage(i, {keepText: true});
         }
+        /** « (page 3, ligne 7) » d'une position du texte (un seul texte sur plusieurs pages) ; null sinon */
+        const pageRef = pos => { if (pageForm !== 'one' || PAGES.length < 2 || !(pos >= 0)) return null; const li = PG.lineOf(area.value, pos), id = Number((t.data.pages || [])[li.seg] || 0), i = PAGES.findIndex(p => Number(p.media_id) === id); if (i < 0) return null;
+            return {n: i + 1, code: PAGES[i].label || 'page', name: pageName(PAGES[i], i), line: li.line, text: i18n('(page {n}, ligne {line})', {n: i + 1, line: li.line})}; };
+        const findText = () => (PG ? area.value.replace(/^—[ \t]*[\p{L}.]+[ \t]+\d+[^\n—]*—[ \t]*$/gmu, m => ' '.repeat(m.length)) : area.value);
         const readAllOn = () => pageForm === 'one' && PAGES.length > 1 && !!$('[data-tx-readscope] input[value="all"]')?.checked;
         function readAll(kind) { readQ = {kind, left: PAGES.map((_, i) => i)}; readNext(true); }
         async function readNext(ok) {
@@ -713,7 +717,7 @@
             const cta = ex && ex.people.length && ext.txActe ? `<div class="h-txa-cta"><span><b>${{mariage: '💍', bapteme: '💧', naissance: '👶', deces: '✝', sepulture: '⚱'}[ex.kind] || '📜'} ${esc(i18n('Ce que l’app a trouvé dans l’acte'))}</b> <small class="muted">${esc(A().plural ? A().plural(ex.people.length, 'personne') : ex.people.length)}${ex.date ? ' · ' + esc(ex.date.label) : ''}${ex.place ? ' · ' + esc(ex.place) : ''}</small></span><button type="button" class="button small" data-tx-cmd="found">✓ ${i18n('Ajouter à la généalogie')}…</button></div>` : '';
             box.innerHTML = cta + kept + (tf || groups) + words || `<p class="muted h-tx-hint">${i18n('« 🧭 Repérer » cherche dans le texte les noms (et leur rôle : parrain, témoin, fils de…), les dates (même en toutes lettres, ou au calendrier républicain), les lieux et les métiers, et propose les fiches de ta base qui leur ressemblent.')}</p>`;
             if (tf) ext.txTrouve.mount($('[data-tx-trouve]'), {text: area.value, rf: lastRich, kind: $('[data-tx="kind"]').value, date: $('[data-tx="date_text"]').value, place: $('[data-tx="place"]').value, source: $('[data-tx="source"]').value,
-                filename: t.filename, title: $('[data-tx="title"]').value, mediaId: t.media_id, transcriptionId: t.id, people: t.data.people, keep: (f, pid) => keep({label: f.label, role: f.role, s: f.s, e: f.e}, pid),
+                filename: t.filename, title: $('[data-tx="title"]').value, mediaId: t.media_id, transcriptionId: t.id, people: t.data.people, keep: (f, pid) => keep({label: f.label, role: f.role, s: f.s, e: f.e}, pid), pageRef: pageForm === 'one' && PAGES.length > 1 ? pageRef : null,
                 setDate: v => { if (!v) return; t.date_text = v; $('[data-tx="date_text"]').value = v; touch(); }, setPlace: v => { if (!v) return; t.place = v; $('[data-tx="place"]').value = v; touch(); },
                 setKind: k => { const sel = $('[data-tx="kind"]'); if (!sel || ![...sel.options].some(o => o.value === k)) return; sel.value = k; sel.dispatchEvent(new Event('change', {bubbles: true})); }});
             flowSoon(60);
@@ -908,11 +912,12 @@
         area.addEventListener('input', hideAb); area.addEventListener('scroll', hideAb);
         let lastExtract = null, lastUnsure = 0, lastRich = null;
         async function runDetect() {
-            found = detect(area.value);
+            const src = findText(); // 📑 les repères « — page 2 — » ne sont ni des noms, ni des nombres
+            found = detect(src);
             const names = [...new Set(found.filter(f => f.type === 'person').map(f => f.label))].filter(n => !matchCache.has(n));
             if (names.length) { try { const r = await post('act_match_people', {names}); (r.result || []).forEach((list, i) => matchCache.set(names[i], list)); } catch (_) {} }
-            try { lastExtract = window.LCNDA_TXACTE?.extractAct(area.value, {kind: $('[data-tx="kind"]').value, place: $('[data-tx="place"]').value, date: $('[data-tx="date_text"]').value, helpers: {detect, findDates, wordsToNumber}}) || null; } catch (_) { lastExtract = null; }
-            try { lastRich = window.LCNDA_TXACTE?.richFind?.(area.value, {kind: $('[data-tx="kind"]').value, place: $('[data-tx="place"]').value, date: $('[data-tx="date_text"]').value, helpers: {detect, findDates, wordsToNumber}}) || null; if (lastExtract && lastRich) window.LCNDA_TXACTE.mergeRich(lastExtract, lastRich); } catch (_) { lastRich = null; }
+            try { lastExtract = window.LCNDA_TXACTE?.extractAct(src, {kind: $('[data-tx="kind"]').value, place: $('[data-tx="place"]').value, date: $('[data-tx="date_text"]').value, helpers: {detect, findDates, wordsToNumber}}) || null; } catch (_) { lastExtract = null; }
+            try { lastRich = window.LCNDA_TXACTE?.richFind?.(src, {kind: $('[data-tx="kind"]').value, place: $('[data-tx="place"]').value, date: $('[data-tx="date_text"]').value, helpers: {detect, findDates, wordsToNumber}}) || null; if (lastExtract && lastRich) window.LCNDA_TXACTE.mergeRich(lastExtract, lastRich); } catch (_) { lastRich = null; }
             paintMirror(); paintPeople(); status(i18n(found.length > 1 ? '{n} éléments repérés' : '{n} élément repéré', {n: found.length}));
         }
         const keep = (f, personId = 0) => { if (t.data.people.some(p => p.s === f.s && p.e === f.e)) { if (personId) t.data.people.find(p => p.s === f.s && p.e === f.e).person_id = personId; } else t.data.people.push({name: f.label, role: f.role || '', person_id: personId, s: f.s, e: f.e}); touch(); paintPeople(); };
@@ -926,7 +931,7 @@
         $('[data-tx-found]').addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b) return; const d = b.dataset;
             if (d.txLookword) return ext.readingAid?.open({q: d.txLookword, lang: aideLang($('[data-tx-lang]').value)});
-            if (d.txGoto) { if (phone()) showPtab('text', false); const [s, en] = d.txGoto.split(':').map(Number); selectText({s, e: en}); const z = t.data.zones.find(q => q.s < en && s < q.e); if (z) { selZone = z.id; drawZones(); reveal(z); } return; }
+            if (d.txGoto) { if (phone()) showPtab('text', false); const [s, en] = d.txGoto.split(':').map(Number); selectText({s, e: en}); const z = t.data.zones.find(q => q.s < en && s < q.e); if (z) { selZone = z.id; drawZones(); reveal(z); } else followCaret(); return; }
             if (d.txKeep) return keep(found[Number(d.txKeep)]);
             if (d.txKeepall !== undefined) { found.filter(f => f.type === 'person').forEach(f => keep(f)); return; }
             if (d.txMatch) { const [fi, pid] = d.txMatch.split(':').map(Number); keep(found[fi], pid); toast(i18n('Personne gardée et reliée à sa fiche.')); return; }
@@ -1250,7 +1255,7 @@
             if (!area.value.trim()) return toast(i18n('Le texte est vide : lis ou écris d’abord l’acte.'), 'error');
             flushCommit();
             let undoSnap = null;
-            ext.txActe.openFound({text: area.value, kind: $('[data-tx="kind"]').value, date: $('[data-tx="date_text"]').value, place: $('[data-tx="place"]').value, source: $('[data-tx="source"]').value,
+            ext.txActe.openFound({text: findText(), kind: $('[data-tx="kind"]').value, date: $('[data-tx="date_text"]').value, place: $('[data-tx="place"]').value, source: $('[data-tx="source"]').value,
                 filename: t.filename, title: $('[data-tx="title"]').value, mediaId: t.media_id, transcriptionId: t.id, unsure: lastUnsure, kinds: KINDS, helpers: {detect, findDates, wordsToNumber}, frameText, rich: ext.txTrouve?.selection(area.value),
                 onKeepOnly: list => { keepPeople(list.map(p => ({...p, person_id: p.person_id || 0}))); touch(); paintPeople(); toast(i18n('Personnes gardées dans la transcription, sans créer de fiche.')); },
                 onApplied: async ({result, people, source}) => {

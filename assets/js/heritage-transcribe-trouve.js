@@ -79,20 +79,23 @@
         const addBtn = (k, small) => `<button type="button" class="${small ? 'icon-button' : 'button small secondary'} h-tf-add" data-tf-add="${k}" title="${esc(i18n('Ajouter à une fiche…'))}">＋${small ? '' : ` ${esc(i18n('Ajouter à une fiche…'))}`}</button>`;
         const head = (key, n, extra = '') => { const s = SECTIONS.find(x => x[0] === key); return `<h4 class="h-tf-h">${s[1]} ${esc(i18n(s[2]))} <small class="muted">${n}</small>${n ? ` <button type="button" class="link-button" data-tf-all="${key}">${esc(i18n('tout garder'))}</button>` : ''}${extra}</h4>`; };
         const offCls = k => (st.off.has(k) ? ' is-off' : '');
+        /* 📑 un acte sur plusieurs pages : chaque information dit sa page et sa ligne, « (page 3, ligne 7) » ; un clic montre la page */
+        const whereOf = (a, b) => { const r = ctx.pageRef && a >= 0 ? ctx.pageRef(a) : null; return r ? ` <button type="button" class="link-button h-tf-where" data-tx-goto="${a}:${b}" title="${esc(i18n('Montrer dans le texte'))}">${esc(r.text)}</button>` : ''; };
+        const wherePerson = p => { if (!ctx.pageRef) return ''; const seen = new Set(); return (p.mentions?.length ? p.mentions : [[p.s, p.e]]).filter(m => m[0] >= 0).map(m => { const r = ctx.pageRef(m[0]); if (!r || seen.has(r.n)) return ''; seen.add(r.n); return whereOf(m[0], m[1]); }).join(''); };
         function card(p) {
             const F = p.fields, keys = Object.keys(FIELD).filter(k => F[k]), lid = linkedId(p), cs = cands(p);
             const fields = keys.map(k => { const f = F[k], id = `${p.key}:${k}`;
-                return `<li><label class="checkbox-line"><input type="checkbox" data-tf-f="${id}" ${st.unchecked.has(id) ? '' : 'checked'}> <span class="k">${esc(i18n(FIELD[k]))}</span> <span class="v">${fieldText(p, k, f)}</span>${f.ai ? aiBadge(f) : ''}</label>${f.s >= 0 ? `<button type="button" class="icon-button" data-tx-goto="${f.s}:${f.e}" title="${esc(i18n('Montrer dans le texte'))}">↗</button>` : ''}${addBtn(id, true)}</li>`; }).join('');
+                return `<li><label class="checkbox-line"><input type="checkbox" data-tf-f="${id}" ${st.unchecked.has(id) ? '' : 'checked'}> <span class="k">${esc(i18n(FIELD[k]))}</span> <span class="v">${fieldText(p, k, f)}</span>${f.ai ? aiBadge(f) : ''}</label>${f.s >= 0 ? `${whereOf(f.s, f.e)}<button type="button" class="icon-button" data-tx-goto="${f.s}:${f.e}" title="${esc(i18n('Montrer dans le texte'))}">↗</button>` : ''}${addBtn(id, true)}</li>`; }).join('');
             const match = lid ? `<span class="h-tx-linked">👤 ${esc(i18n('fiche n° {person_id}', {person_id: lid}))}</span>`
                 : cs.length ? `${esc(cs.length > 1 ? i18n('Fiches proches :') : i18n('Fiche existante :'))} ${cs.map(c => `<button type="button" class="h-txa-chip" data-tf-link="${p.key}:${c.id}" title="${esc(i18n('Garder et relier à cette fiche'))}"><b>${esc(c.title)}</b> <small>${esc(c.years || '')}</small></button>`).join(' ')} ${cs[0].same ? `<span class="h-txa-badge is-ok">${esc(i18n('même personne probable'))}</span>` : `<span class="h-txa-badge is-warn">${esc(i18n('à vérifier'))}</span>`}` : '';
             const sex = p.sex === 'f' ? 'f' : p.sex === 'm' ? 'm' : 'u';
             return `<div class="h-tf-card${offCls(p.key)}" data-tf-card="${p.key}" data-ctx-menu><div class="h-tf-card-h"><span class="h-txa-av is-${sex}">${esc(p.name ? (p.given || p.name).charAt(0) + (p.surname || '').charAt(0) : '?')}</span>
-                <div class="h-tf-name"><button type="button" class="link-button"${gotoAttr(p.s, p.e)}><b>${p.name ? raw(personTitle(p)) : esc(personTitle(p))}</b></button>${p.variants?.length ? ` <small class="muted">${esc(i18n('aussi écrit :'))} ${raw(p.variants.join(', '))}</small>` : ''}${aiBadge(p)}${st.off.has(p.key) ? ` <span class="h-txa-badge">${esc(i18n('Écarté'))}</span>` : ''}</div>${more(p.key)}</div>
+                <div class="h-tf-name"><button type="button" class="link-button"${gotoAttr(p.s, p.e)}><b>${p.name ? raw(personTitle(p)) : esc(personTitle(p))}</b></button>${wherePerson(p)}${p.variants?.length ? ` <small class="muted">${esc(i18n('aussi écrit :'))} ${raw(p.variants.join(', '))}</small>` : ''}${aiBadge(p)}${st.off.has(p.key) ? ` <span class="h-txa-badge">${esc(i18n('Écarté'))}</span>` : ''}</div>${more(p.key)}</div>
                 ${fields ? `<ul class="h-tf-fields">${fields}</ul>` : `<p class="muted h-tf-none">${esc(i18n('Le texte ne dit rien d’autre sur cette personne.'))}</p>`}
                 ${match ? `<div class="h-tf-match">${match}</div>` : ''}
                 <div class="h-tf-acts">${p.name && !lid ? `<button type="button" class="button small secondary" data-tf-keep="${p.key}">＋ ${esc(i18n('Garder dans l’acte'))}</button>` : ''}${addBtn(p.key)}</div></div>`;
         }
-        const item = (k, main, sub = '', extra = '', x = null) => `<div class="h-tf-item${offCls(k)}" data-tf-item="${k}" data-ctx-menu><button type="button" class="h-tf-main"${x && x.s >= 0 ? gotoAttr(x.s, x.e) : ''} title="${esc(i18n('Montrer dans le texte'))}">${main}</button>${sub ? ` <small class="muted">${sub}</small>` : ''}${aiBadge(x)}${extra}${addBtn(k, true)}${more(k)}</div>`;
+        const item = (k, main, sub = '', extra = '', x = null) => `<div class="h-tf-item${offCls(k)}" data-tf-item="${k}" data-ctx-menu><button type="button" class="h-tf-main"${x && x.s >= 0 ? gotoAttr(x.s, x.e) : ''} title="${esc(i18n('Montrer dans le texte'))}">${main}</button>${sub ? ` <small class="muted">${sub}</small>` : ''}${x && x.s >= 0 ? whereOf(x.s, x.e) : ''}${aiBadge(x)}${extra}${addBtn(k, true)}${more(k)}</div>`;
         function sections() {
             const out = [];
             if (P.show.people) {
@@ -220,6 +223,8 @@
             else if (/^a\d+$/.test(key)) { as = 'info'; title = i18n('{n} ans dans l’acte', {n: x.n}); quote = x.quote; line = x.line; }
             else if (/^n\d+$/.test(key)) { as = 'info'; title = String(x.n); quote = x.quote; line = x.line; }
             // la personne : celle de l'acte d'abord (sa fiche reliée, ou la fiche proche)
+            // 📑 la page de l'élément (et sa ligne dans la page) : écrite dans la source
+            const at = f ? f.s : x && x.s >= 0 ? x.s : -1, pr = ctx.pageRef && at >= 0 ? ctx.pageRef(at) : null; if (pr) line = pr.line;
             const owner = person || (/^a\d+$/.test(key) ? rf.people.find(p => p.key === x.owner) : null);
             const first = owner ? (linkedId(owner) || (cands(owner)[0]?.same ? cands(owner)[0].id : 0)) : 0;
             const actPeople = [...new Map((ctx.people || []).filter(q => q.person_id).map(q => [q.person_id, q])).values()].slice(0, 8);
@@ -249,7 +254,7 @@
                         dg.querySelectorAll('[data-tf-r="date"]').forEach(n => { n.hidden = a === 'note'; }); dg.querySelectorAll('[data-tf-r="place"]').forEach(n => { n.hidden = a === 'note'; });
                         const what = {event: `📅 ${i18n('Autre événement')}`, note: `📝 ${i18n('Note')}`, job: `🔨 ${i18n('Profession')}`, residence: `🏠 ${i18n('Lieu de résidence')}`, info: `ℹ️ ${i18n('Info')}`}[a];
                         dg.querySelector('[data-tf-prev]').innerHTML = `<p><b>${esc(what)}</b> · <span data-i18n-off>${esc(a === 'residence' ? (pl || v('tf_title')) : v('tf_title'))}</span>${a !== 'note' && dt ? ` · ${esc(dt)}` : ''}${a !== 'note' && a !== 'residence' && pl ? ` · ${esc(pl)}` : ''}</p>
-                            <p class="muted">📚 ${esc(src.title || i18n('(sans titre)'))}${line ? ` · ${esc(i18n('ligne {n}', {n: line}))}` : ''}${v('tf_quote') ? ` · « <span data-i18n-off>${esc(v('tf_quote').slice(0, 160))}</span> »` : ''}</p>`;
+                            <p class="muted">📚 ${esc(src.title || i18n('(sans titre)'))}${pr ? ` · ${esc(i18n('page {n}, ligne {line}', {n: pr.n, line}))}${pr.code !== 'page' ? ` (${esc(pr.name)})` : ''}` : line ? ` · ${esc(i18n('ligne {n}', {n: line}))}` : ''}${v('tf_quote') ? ` · « <span data-i18n-off>${esc(v('tf_quote').slice(0, 160))}</span> »` : ''}</p>`;
                     };
                     dg.addEventListener('input', prev); dg.addEventListener('change', prev); prev();
                     dg.addEventListener('click', ev => { const c = ev.target.closest('[data-tf-pick]'); if (!c) return; ev.preventDefault(); const fld = dg.querySelector('.pk[data-picker]'); (P0.pickerSet || A().pickerSet)?.(fld, Number(c.dataset.tfPick)); });
@@ -259,7 +264,7 @@
                     const pid = Number(pv) || 0; if (!pid) { UI().fail?.(frm.querySelector('.pk-input') || frm.elements.tf_title, i18n('Choisis une fiche.')); return false; }
                     const v = n => frm.elements[n]?.value || '';
                     const body = {person_id: pid, as: frm.querySelector('[name="tf_as"]:checked')?.value || 'info', title: v('tf_title'), date: v('tf_date'), place: v('tf_place'), quote: v('tf_quote'), line,
-                        world_id: frm.elements.tf_world?.checked ? world.id : '', media_id: ctx.mediaId || 0, transcription_id: ctx.transcriptionId || 0, source: src};
+                        world_id: frm.elements.tf_world?.checked ? world.id : '', media_id: ctx.mediaId || 0, ...(pr ? {page: pr.n, page_label: pr.code} : {}), transcription_id: ctx.transcriptionId || 0, source: src};
                     let r; try { r = await post('act_item_add', body); } catch (err) { toast(err.message, 'error'); return false; }
                     const res = r.result || {}; let undone = false;
                     (A().undoToast || toast)(i18n('✓ Ajouté à la fiche.'), {undo: async () => { if (undone) return {already: true}; await post('act_import_undo', {token: res.undo}); undone = true; }});

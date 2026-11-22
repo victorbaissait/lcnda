@@ -32,3 +32,6 @@ Un texte par page ¦ Një tekst për faqe ¦ Test wieħed għal kull paġna
 Toutes les pages sont lues (à relire) ¦ Të gjitha faqet u lexuan (për t’u rishikuar) ¦ Il-paġni kollha nqraw (biex jiġu ċċekkjati)
 Réglage gardé : il vaut pour les documents pas encore commencés ; celui-ci garde sa forme. ¦ Rregullimi u ruajt: vlen për dokumentet që s’kanë nisur ende; ky e mban formën e vet. ¦ Is-settings inżammu: japplikaw għad-dokumenti li għadhom ma bdewx; dan iżomm il-forma tiegħu.
 Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription. ¦ Kjo faqe është pjesë e një akti me disa faqe: teksti i saj ndryshohet te Punishtja e transkriptimit. ¦ Din il-paġna hija parti minn att fuq diversi paġni: it-test tagħha jinbidel fil-Laboratorju tat-traskrizzjoni.
+# — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
+(page {n}, ligne {line}) ¦ (faqja {n}, rreshti {line}) ¦ (paġna {n}, linja {line})
+page {n}, ligne {line} ¦ faqja {n}, rreshti {line} ¦ paġna {n}, linja {line}

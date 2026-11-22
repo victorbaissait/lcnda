@@ -136,7 +136,7 @@
         const onChanged = ev => { const ids = new Set([cur, ...st.pages.map(p => Number(p.media_id)), ...(ev.detail?.state?.pages || []).map(p => Number(p.media_id)), Number(ev.detail?.media_id)]); if (!host.isConnected) { document.removeEventListener('lcnda:media-pages-changed', onChanged); return; } if (ids.has(cur)) load(true); };
         document.addEventListener('lcnda:media-pages-changed', onChanged);
         draw(); load(!!o.force);
-        return {reload: () => load(true), setMedia: id => { cur = Number(id); load(); }, state: () => st};
+        return {reload: () => load(true), setMedia: id => { if (Number(id) === cur) return; cur = Number(id); if (!st.pages.some(p => Number(p.media_id) === cur)) { st = {set_id: 0, pages: []}; draw(); } load(); }, state: () => st};
     }
 
     /* ─── la visionneuse : le bloc sous « RATTACHÉ À », et passer d'une page à l'autre (même absente de la liste ouverte) ─── */

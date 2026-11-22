@@ -154,7 +154,7 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             await p.waitForSelector('#lightbox-pages [data-mp-add]', {timeout: 10000});
             await p.click('#lightbox-pages [data-mp-add]'); await p.waitForSelector('dialog.mpk-dialog[open] .mpk-tile'); await sleep(300);
             await p.locator('dialog.mpk-dialog[open] .mpk-tile', {hasText: 'Naissance de Paul'}).first().click(); await p.click('dialog.mpk-dialog[open] [data-mp="ok"]');
-            await p.waitForFunction(() => document.querySelectorAll('#lightbox-pages [data-mp-id]').length === 2, null, {timeout: 10000});
+            await p.waitForFunction(() => document.querySelectorAll('#lightbox-pages [data-mp-id]').length === 2, null, {timeout: 10000, polling: 200});
             assert.deepEqual((await pagesOf(6)).map(x => x[0]), [6, 5]);
             await undoLast('Page reliée'); assert.deepEqual(await pagesOf(6), []);
             await p.evaluate(() => document.getElementById('lightbox').close()); await sleep(300);
@@ -286,7 +286,53 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             await closeAtelier();
         });
 
-        /*@@ETAPE3@@*/
+        /* ─── 3. « Ce que l'app a trouvé » sur toutes les pages ─── */
+        const CONTRAT = 'Par-devant Maître Jacques ROUDIL, notaire à Tulle,\nfurent présents Louis VERNIAL, laboureur,\ndemeurant à Naves.\n— page 2 —\nlesquels ont fait le contrat suivant.\n— page 3 —\net Rose TAVERGNE, sa future épouse,\nfille de Pierre TAVERGNE ; ledit Louis VERNIAL\nâgé de trente ans.\n— page 4 —\nFait à Tulle le trois mai mil huit cent douze.\n';
+        const trouve = () => p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg [data-tx-trouve]'); if (!d) return null;
+            return {cards: [...d.querySelectorAll('[data-tf-card]')].map(c => ({name: c.querySelector('.h-tf-name b')?.textContent.trim(), where: [...c.querySelector('.h-tf-name').querySelectorAll('.h-tf-where')].map(b => b.textContent.trim()),
+                fields: [...c.querySelectorAll('.h-tf-fields li')].map(li => ({k: li.querySelector('.k')?.textContent.trim(), where: li.querySelector('.h-tf-where')?.textContent.trim() || ''}))})),
+                items: [...d.querySelectorAll('[data-tf-item]')].map(i => ({main: i.querySelector('.h-tf-main')?.textContent.trim(), where: i.querySelector('.h-tf-where')?.textContent.trim() || ''})), all: d.textContent}; });
+        await t('une personne citée sur deux pages : une seule carte ; chaque information dit sa page et sa ligne', async () => {
+            await openTx({id: act3a});
+            await setBody(CONTRAT); await p.click(`${D} [data-tx-cmd="detect"]`);
+            await p.waitForFunction(() => document.querySelector('dialog.h-tx-dlg [data-tx-trouve] [data-tf-card]'), null, {timeout: 10000}); await sleep(600);
+            const r = await trouve(), louis = r.cards.filter(c => /Louis VERNIAL/i.test(c.name || ''));
+            assert.equal(louis.length, 1, 'une seule carte pour Louis VERNIAL : ' + JSON.stringify(r.cards.map(c => c.name)));
+            assert.deepEqual(louis[0].where, ['(page 1, ligne 2)', '(page 3, ligne 2)']);
+            const age = louis[0].fields.find(f => /Âge/.test(f.k)); assert.ok(age, 'l’âge de Louis : ' + JSON.stringify(louis[0].fields)); assert.equal(age.where, '(page 3, ligne 3)');
+            const rose = r.cards.find(c => /Rose TAVERGNE/.test(c.name || '')); assert.deepEqual(rose.where, ['(page 3, ligne 1)']);
+            const naves = r.items.find(i => /Naves/.test(i.main)); assert.equal(naves?.where, '(page 1, ligne 3)');
+            assert.ok(r.items.some(i => /1812|douze/.test(i.main) && i.where === '(page 4, ligne 1)'), 'la date, page 4 : ' + JSON.stringify(r.items));
+            assert.doesNotMatch(r.all, /page 2 —|— page/, 'les repères « — page 2 — » ne sont pas repérés');
+            assert.ok(!r.items.some(i => /^[234]$/.test(i.main)), 'pas de nombre tiré des repères');
+            await shot('atelier-trouve.png');
+        });
+        await t('un clic sur « (page 3, ligne 2) » : la page 3 et le passage', async () => {
+            await p.click(`${D} [data-tx-page="0"]`); await sleep(400);
+            await p.locator(`${D} [data-tx-trouve] .h-tf-where`, {hasText: '(page 3, ligne 2)'}).first().click(); await sleep(700);
+            const s = await tx(); assert.equal(s.on, '2'); assert.match(s.href, /page3\.png/);
+            const sel = await p.evaluate(() => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); return a.value.slice(a.selectionStart, a.selectionEnd); });
+            assert.match(sel, /Louis VERNIAL/);
+        });
+        await t('« ＋ Ajouter à une fiche… » met la page dans la source (page 3, ligne 3)', async () => {
+            const card = p.locator(`${D} [data-tx-trouve] [data-tf-card]`, {hasText: 'Louis VERNIAL'}).first();
+            await card.locator('.h-tf-fields li', {hasText: 'Âge'}).locator('[data-tf-add]').click();
+            await p.waitForSelector('dialog[open] [data-tf-prev]'); await sleep(300);
+            assert.match(await p.textContent('dialog[open] [data-tf-prev]'), /page 3, ligne 3/);
+            await p.evaluate(() => { const d = [...document.querySelectorAll('dialog[open]')].at(-1); const fld = d.querySelector('.pk[data-picker]'); (window.LCNDA_PICKER?.pickerSet || window.LCNDA_APP.pickerSet)(fld, 2); });
+            await sleep(200);
+            await p.evaluate(() => { const d = [...document.querySelectorAll('dialog[open]')].at(-1); [...d.querySelectorAll('button')].find(b => /Ajouter$/.test(b.textContent.trim()) && b.type === 'submit' || /＋ Ajouter$/.test(b.textContent.trim()))?.click(); });
+            await p.waitForFunction(() => [...document.querySelectorAll('.ui-toast')].some(x => /Ajouté à la fiche/.test(x.textContent)), null, {timeout: 10000});
+            const sl = JSON.parse(php(`require 'lib/bootstrap.php'; echo json_encode(db()->query("SELECT page, note FROM source_links ORDER BY id DESC LIMIT 1")->fetch(PDO::FETCH_ASSOC));`).stdout || 'null');
+            assert.match(sl.page, /(^|, )page 3$/, 'la page dans la source'); assert.match(sl.note, /^Page 3, ligne 3 : « .*trente ans/);
+            await closeAtelier();
+        });
+        await t('un acte d’une seule page : « Ce que l’app a trouvé » sans page (comme avant)', async () => {
+            await openTx({id: 1}); await p.click(`${D} [data-tx-cmd="detect"]`);
+            await p.waitForFunction(() => document.querySelector('dialog.h-tx-dlg [data-tx-trouve] [data-tf-card]'), null, {timeout: 10000}); await sleep(400);
+            const r = await trouve(); assert.ok(r.cards.length >= 2); assert.equal((r.all.match(/\(page \d/g) || []).length, 0);
+            await closeAtelier();
+        });
 
         await t('un acte d’une seule page est resté exactement comme avant', async () => {
             const now = php(String.raw`require 'lib/bootstrap.php'; $pdo = db(); echo json_encode($pdo->query('SELECT title,kind,media_id,body,data_json FROM act_transcriptions WHERE id=1')->fetch(PDO::FETCH_ASSOC));`).stdout;

@@ -32,3 +32,6 @@ Un texte par page ¦ Een Text pro Säit
 Toutes les pages sont lues (à relire) ¦ All d’Säite sinn gelies (nozekucken)
 Réglage gardé : il vaut pour les documents pas encore commencés ; celui-ci garde sa forme. ¦ Astellung gehalen: si gëllt fir Dokumenter, déi nach net ugefaange sinn; dëst behält seng Form.
 Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription. ¦ Dës Säit gehéiert zu engem Akt op méi Säiten: hiren Text gëtt am Transkriptiouns-Atelier geännert.
+# — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
+(page {n}, ligne {line}) ¦ (Säit {n}, Linn {line})
+page {n}, ligne {line} ¦ Säit {n}, Linn {line}

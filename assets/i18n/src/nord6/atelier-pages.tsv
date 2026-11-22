@@ -32,3 +32,6 @@ Un texte par page ¦ Po vieną tekstą puslapiui ¦ Viens teksts katrai lapai ¦
 Toutes les pages sont lues (à relire) ¦ Visi puslapiai perskaityti (reikia patikrinti) ¦ Visas lapas ir nolasītas (jāpārbauda) ¦ Kõik lehed on loetud (vaata üle)
 Réglage gardé : il vaut pour les documents pas encore commencés ; celui-ci garde sa forme. ¦ Nustatymas išsaugotas: jis galioja dar nepradėtiems dokumentams; šis išlaiko savo formą. ¦ Iestatījums saglabāts: tas attiecas uz vēl nesāktiem dokumentiem; šis saglabā savu formu. ¦ Seade jäi alles: see kehtib veel alustamata dokumentidele; see säilitab oma kuju.
 Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription. ¦ Šis puslapis yra kelių puslapių įrašo dalis: jo tekstas keičiamas Transkripcijos dirbtuvėse. ¦ Šī lapa ir daļa no vairāku lapu ieraksta: tās teksts tiek mainīts Pārrakstīšanas darbnīcā. ¦ See leht on mitmelehelise akti osa: selle teksti muudad Ümberkirjutuse töökojas.
+# — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
+(page {n}, ligne {line}) ¦ ({n} puslapis, {line} eilutė) ¦ ({n}. lapa, {line}. rinda) ¦ (lehekülg {n}, rida {line})
+page {n}, ligne {line} ¦ {n} puslapis, {line} eilutė ¦ {n}. lapa, {line}. rinda ¦ lehekülg {n}, rida {line}

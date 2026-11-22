@@ -32,3 +32,6 @@ Un texte par page ¦ Один текст на страницу ¦ Один те�
 Toutes les pages sont lues (à relire) ¦ Все страницы прочитаны (проверь) ¦ Усі сторінки прочитано (перевір)
 Réglage gardé : il vaut pour les documents pas encore commencés ; celui-ci garde sa forme. ¦ Настройка сохранена: она действует для ещё не начатых документов; этот сохраняет свой вид. ¦ Налаштування збережено: воно діє для ще не розпочатих документів; цей зберігає свій вигляд.
 Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription. ¦ Эта страница — часть многостраничной записи: её текст меняется в Мастерской расшифровки. ¦ Ця сторінка — частина багатосторінкового запису: її текст змінюється в Майстерні транскрипції.
+# — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
+(page {n}, ligne {line}) ¦ (страница {n}, строка {line}) ¦ (сторінка {n}, рядок {line})
+page {n}, ligne {line} ¦ страница {n}, строка {line} ¦ сторінка {n}, рядок {line}

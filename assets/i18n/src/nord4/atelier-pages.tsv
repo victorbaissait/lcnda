@@ -32,3 +32,6 @@ Un texte par page ¦ Yksi teksti sivua kohden ¦ Oldalanként egy szöveg
 Toutes les pages sont lues (à relire) ¦ Kaikki sivut on luettu (tarkistettava) ¦ Minden oldal beolvasva (ellenőrizendő)
 Réglage gardé : il vaut pour les documents pas encore commencés ; celui-ci garde sa forme. ¦ Asetus tallennettu: se koskee vielä aloittamattomia asiakirjoja; tämä säilyttää muotonsa. ¦ Beállítás megtartva: a még el nem kezdett dokumentumokra vonatkozik; ez megtartja a formáját.
 Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription. ¦ Tämä sivu kuuluu monisivuiseen asiakirjaan: sen tekstiä muokataan Litterointipajassa. ¦ Ez az oldal egy több oldalas irat része: a szövege az Átíróműhelyben módosítható.
+# — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
+(page {n}, ligne {line}) ¦ (sivu {n}, rivi {line}) ¦ ({n}. oldal, {line}. sor)
+page {n}, ligne {line} ¦ sivu {n}, rivi {line} ¦ {n}. oldal, {line}. sor

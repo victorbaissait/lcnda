@@ -32,3 +32,6 @@ Un texte par page ¦ Einn texti á hverja síðu
 Toutes les pages sont lues (à relire) ¦ Allar síður lesnar (til yfirferðar)
 Réglage gardé : il vaut pour les documents pas encore commencés ; celui-ci garde sa forme. ¦ Stillingin geymd: hún gildir fyrir skjöl sem eru ekki hafin; þetta heldur sínu formi.
 Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription. ¦ Þessi síða er hluti af færslu á mörgum síðum: textanum er breytt í Uppskriftarsmiðjunni.
+# — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
+(page {n}, ligne {line}) ¦ (síða {n}, lína {line})
+page {n}, ligne {line} ¦ síða {n}, lína {line}
