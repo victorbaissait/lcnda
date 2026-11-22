@@ -45,3 +45,4 @@ Chacun doit être essayé sur les mêmes actes (Qwen3-VL sert de référence) av
 5. Comparer deux personnes côte à côte (concorde / se contredit) pour décider si c'est la même : partir de l'outil de comparaison qui existe déjà dans l'app (doublons et fusion — à repérer et réutiliser, pas un deuxième outil), et le mettre dans la liste des outils.
 8. Recherche et commandes par la voix dans toute l'app (« ouvre la fiche de Jean MAZAUD »), sur la même base que la dictée (idée A).
 Chaque gros outil : maquette d'abord.
+9. « Ce que l'app a trouvé » → menu ⋯ d'une carte personne : en plus de « Écarter », « Écarter : ce n'est pas une personne » (ex. « Empire Autrichien »). L'app retient le mot et ne le propose plus comme personne dans les autres actes (liste revue dans les Réglages, « ↶ Annuler »), et propose de le ranger ailleurs : lieu, événement, ou simple mot du texte.
