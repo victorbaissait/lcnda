@@ -441,6 +441,14 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
             zt.forEach(([pg, tt]) => { const m = tt.match(/(?:numéro|lecture) (\d+)/); if (m) assert.equal(Number(m[1]) - c0, pg, 'la zone de ' + tt + ' est sur sa page'); });
             assert.ok(zt.length >= 4 && (await p.evaluate(() => document.querySelector('dialog.h-tx-dlg').txApi.get().data.zones.length)) > z0);
         });
+        await t('« Seulement les pages pas encore lues » : toutes ont du texte → une phrase, aucune lecture lancée', async () => {
+            const c0 = ollama.chats;
+            await p.click(`${D} [data-tx-cmd="readmenu"]`); await p.check(`${D} [data-tx-readscope] input[value="empty"]`); await p.click(`${D} [data-tx-readpanel] [data-tx-cmd="deep"]`); await sleep(600);
+            const toastTxt = await p.evaluate(() => [...document.querySelectorAll('.toast, [role=status], .ui-toast')].map(e => e.textContent).join(' | '));
+            assert.match(toastTxt, /Toutes les pages ont déjà du texte/, toastTxt);
+            assert.equal(await p.evaluate(() => !!document.querySelector('[data-txa-deep]')), false, 'pas de fenêtre de lecture');
+            assert.equal(ollama.chats, c0);
+        });
         await t('🔬 sur la page affichée (page 2) : la fenêtre dit la page, et compare avec le texte de cette page seulement', async () => {
             await p.click(`${D} [data-tx-page="1"]`); await sleep(500);
             const seg2 = (await tx()).body.split(/\n— page \d —\n/)[1].trim();

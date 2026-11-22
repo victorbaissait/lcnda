@@ -200,7 +200,7 @@
     function readPanelHtml() {
         const opt = ([k, ic, label, what]) => `<button type="button" class="h-tx-readopt" data-tx-cmd="${k}" role="menuitem"><span class="h-tx-readt">${ic} <b>${esc(i18n(label))}</b><span class="h-tx-readst" data-tx-readst="${k}"></span></span><small>${esc(i18n(what))}</small></button>`;
         return `<div class="h-tx-readpanel" data-tx-readpanel hidden role="menu" aria-label="${esc(i18n('Lire', {ctx: 'atelier'}))}">${READS.map(opt).join('')}
-            <div class="h-tx-readscope" data-tx-readscope hidden role="radiogroup" aria-label="${esc(i18n('Plusieurs pages'))}"><label><input type="radio" name="txreadscope" value="page" checked> ${esc(i18n('Sur la page affichée'))}</label><label><input type="radio" name="txreadscope" value="all"> ${esc(i18n('Sur toutes les pages'))}</label><small class="h-tx-pread" data-tx-pread></small></div>
+            <div class="h-tx-readscope" data-tx-readscope hidden role="radiogroup" aria-label="${esc(i18n('Plusieurs pages'))}"><label><input type="radio" name="txreadscope" value="page" checked> ${esc(i18n('Sur la page affichée'))}</label><label><input type="radio" name="txreadscope" value="all"> ${esc(i18n('Sur toutes les pages'))}</label><label><input type="radio" name="txreadscope" value="empty"> ${esc(i18n('Seulement les pages pas encore lues'))}</label><small class="h-tx-pread" data-tx-pread></small></div>
             <div class="h-tx-readmore"><button type="button" class="h-tx-readopt h-tx-readline" data-tx-cmd="lines" role="menuitem" title="${esc(i18n('Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis'))}">▤ ${esc(i18n('Relier les lignes à l’image'))}</button>
             <label class="h-tx-readlang">🌐 ${esc(i18n('Langue du texte'))} <select data-tx-lang title="${esc(i18n('Langue du texte : sert à la lecture automatique, et « 📖 Aide à la lecture » s’ouvre sur cette langue'))}">${txLangs().map(([v, l]) => `<option value="${esc(v)}" ${txLang() === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
             <label class="ui-toggle h-tx-useenh" title="${esc(i18n('La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine'))}"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}><i></i>${i18n('Lire et exporter l’image améliorée')}</label></div></div>`;
@@ -400,10 +400,12 @@
             return {n: i + 1, code: PAGES[i].label || 'page', name: pageName(PAGES[i], i), line: li.line, text: i18n('(page {n}, ligne {line})', {n: i + 1, line: li.line})}; };
         const blankMarks = v => (PG ? v.replace(/^—[ \t]*[\p{L}.]+[ \t]+\d+[^\n—]*—[ \t]*$/gmu, m => ' '.repeat(m.length)) : v);
         const findText = () => blankMarks(area.value);
-        const readAllAny = () => PAGES.length > 1 && !!$('[data-tx-readscope] input[value="all"]')?.checked;
+        const readAllAny = () => PAGES.length > 1 && !!$('[data-tx-readscope] input:is([value="all"], [value="empty"]):checked');
+        // 📑 les pages à lire : toutes, ou seulement celles sans texte (« Seulement les pages pas encore lues »)
+        const pagesToRead = () => PAGES.map((_, i) => i).filter(i => !$('[data-tx-readscope] input[value="empty"]')?.checked || !pageLines(i));
         const readAllOn = () => pageForm === 'one' && readAllAny();
         const perOnly = () => { if (pageForm === 'per' && readAllAny()) toast(i18n('Un texte par page : la lecture rapide et la lecture d’un imprimé se font page par page ; la lecture approfondie peut lire toutes les pages.')); };
-        function readAll(kind) { readQ = {kind, left: PAGES.map((_, i) => i)}; readNext(true); }
+        function readAll(kind) { const left = pagesToRead(); if (!left.length) return toast(i18n('Toutes les pages ont déjà du texte.')); readQ = {kind, left}; readNext(true); }
         async function readNext(ok) {
             if (!readQ) return; if (!ok || !dlg.isConnected) { readQ = null; return; }
             const i = readQ.left.shift(); if (i == null) { readQ = null; status(i18n('Toutes les pages sont lues (à relire)')); return; }
@@ -1220,8 +1222,9 @@
         async function openDeep({htrText = '', box, all = false} = {}) {
             if (!ext.txActe) return toast(i18n('La lecture approfondie n’est pas chargée.'), 'error');
             if (!t.media_id || !imgW) return toast(i18n('Choisis d’abord l’image de l’acte.'), 'error');
+            if (all && !pagesToRead().length) return toast(i18n('Toutes les pages ont déjà du texte.'));
             if (all) { if (deepRun) return toast(i18n('Lecture approfondie : page {i} sur {n}…', {i: deepRun.done + 1, n: deepRun.n})); // 📑 toutes les pages, l'une après l'autre
-                return ext.txActe.openDeep({lang: $('[data-tx-lang]').value, all: {n: PAGES.length, run: model => startDeepAll(model)}, onCompare: out => LG()?.compareExtras(out, {})}); }
+                return ext.txActe.openDeep({lang: $('[data-tx-lang]').value, all: {n: pagesToRead().length, run: model => startDeepAll(model)}, onCompare: out => LG()?.compareExtras(out, {})}); }
             let b = box; if (b === undefined) { b = htrArea(); if (!b) { b = await pageArea(); if (b === false) return; } }
             // 📑 un seul texte pour plusieurs pages : on compare avec le morceau de la page affichée, pas avec tout le document
             const many = pageForm === 'one' && PAGES.length > 1, sg = many ? PG.segments(area.value)[segIx()] : null;
@@ -1239,7 +1242,8 @@
          * ▤ les lignes reliées à l'image page par page si la case est cochée ; 🪄 les corrections proposées comme pour une page ─── */
         function startDeepAll(model) {
             if (deepRun || PAGES.length < 2) return;
-            deepRun = {model, lang: $('[data-tx-lang]').value, left: PAGES.map((_, i) => i), n: PAGES.length, done: 0, stop: false, job: 0, busy: false};
+            const left = pagesToRead(); if (!left.length) return toast(i18n('Toutes les pages ont déjà du texte.'));
+            deepRun = {model, lang: $('[data-tx-lang]').value, left, n: left.length, done: 0, stop: false, job: 0, busy: false};
             deepAllStep();
         }
         function paintDeepAll() {

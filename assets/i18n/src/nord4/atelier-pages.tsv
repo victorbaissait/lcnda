@@ -44,3 +44,5 @@ Ce document a plusieurs pages : pour changer l’image d’une page, ouvre « �
 {zones} sur cette page ({n} en tout) ¦ {zones} tällä sivulla (yhteensä {n}) ¦ {zones} ezen az oldalon (összesen {n})
 {page} ({i} sur {n}) ¦ {page} ({i}/{n}) ¦ {page} ({i}/{n})
 Lignes déjà écrites ¦ Jo kirjoitetut rivit ¦ Már leírt sorok
+Seulement les pages pas encore lues ¦ Vain sivut, joita ei ole vielä luettu ¦ Csak a még nem olvasott oldalak
+Toutes les pages ont déjà du texte. ¦ Kaikilla sivuilla on jo tekstiä. ¦ Minden oldalon van már szöveg.

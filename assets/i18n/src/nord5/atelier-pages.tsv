@@ -44,3 +44,5 @@ Ce document a plusieurs pages : pour changer l’image d’une page, ouvre « �
 {zones} sur cette page ({n} en tout) ¦ {zones} na ovoj stranici (ukupno {n}) ¦ {zones} na tej strani (skupaj {n})
 {page} ({i} sur {n}) ¦ {page} ({i} od {n}) ¦ {page} ({i} od {n})
 Lignes déjà écrites ¦ Već napisani retci ¦ Že napisane vrstice
+Seulement les pages pas encore lues ¦ Samo stranice koje još nisu pročitane ¦ Samo strani, ki še niso prebrane
+Toutes les pages ont déjà du texte. ¦ Sve stranice već imaju tekst. ¦ Vse strani že imajo besedilo.

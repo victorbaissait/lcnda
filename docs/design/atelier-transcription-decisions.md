@@ -70,4 +70,6 @@ Chaque gros outil : maquette d'abord.
     (+ points 14 et 16 : Lire et Relire ligne à ligne.)
     - ✅ FAIT le 22 novembre : la fenêtre « Lecture approfondie » dit la page (« Page 2 (2 sur 4) · Lecture approfondie… 36 s », et dans le titre de la comparaison) ; elle compare avec le texte de la page affichée seulement (avant : tout le document) ; « Garder celle-ci » sur le texte déjà là ne l'ajoute plus une deuxième fois.
     - ✅ FAIT le 22 novembre : « ✨ Lire ▾ » montre « Lignes déjà écrites — Page 1 : 39 · Page 2 : 0 ».
+    - ✅ FAIT le 22 novembre : choix « Seulement les pages pas encore lues » (lecture rapide, imprimé, approfondie) ; si toutes ont du texte : « Toutes les pages ont déjà du texte. »
+    - À corriger : l'essai « visionneuse ouverte sur une seule page… » (test-atelier-pages.js, ligne ~170, attente de 10 s) échoue parfois, même seul (1 fois sur 3) ; trouver la cause, sans affaiblir l'essai.
     - À surveiller : test-atelier-pages.js échoue parfois quand plusieurs essais tournent en même temps (visionneuse, lenteur) ; seul, il passe.
