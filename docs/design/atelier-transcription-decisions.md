@@ -56,3 +56,4 @@ Chaque gros outil : maquette d'abord.
     - relire une page déjà transcrite ne remplace jamais le texte en silence : l'app demande « Comparer côte à côte (conseillé) / Remplacer / Ajouter à la suite », et la version d'avant reste dans 🕘 Versions ;
     - la fenêtre « Lecture approfondie » dit quelle page elle lit (« Page 2 sur 2… 36 s ») et pour quelle page est le texte montré.
 15. Lecture approfondie : repérer les lignes répétées par le modèle (ex. la même ligne deux fois de suite) et les signaler, avec « Retirer le doublon ».
+16. « 👁 Relire ligne à ligne » avec plusieurs pages : dire quelle page on relit (« Page 1 · ligne 7 sur 39 »), l'image affichée suit la page de la ligne, passage d'une page à l'autre sans quitter la relecture (« Page suivante → »), et au départ le choix « Cette page / Toutes les pages / Seulement les lignes pas encore relues ». L'avancement de la relecture est compté par page.
