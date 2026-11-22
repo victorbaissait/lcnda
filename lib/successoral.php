@@ -253,7 +253,7 @@ function succ_row(PDO $pdo, int $id, bool $withDeleted = false): array
     if (!$r) { throw new LcndaBadInput('Dossier introuvable.'); }
     return $r;
 }
-function succ_name(array $p = null): string
+function succ_name(?array $p = null): string
 {
     if (!$p) { return ''; }
     return trim(trim((string) ($p['first'] ?? $p['first_name'] ?? '')) . ' ' . mb_strtoupper(trim((string) ($p['last'] ?? $p['last_name'] ?? '')))) ?: 'Sans nom';
