@@ -1,0 +1,69 @@
+fr ¦ fi ¦ hu
+# 📜 Atelier de transcription, vague 1 « Ranger » (barre courte, ✨ Lire ▾, numéros de ligne, symboles, nom unique)
+Langue du texte : sert à la lecture automatique, et « 📖 Aide à la lecture » s’ouvre sur cette langue ¦ Tekstin kieli: käytetään automaattisessa luvussa, ja ”📖 Lukuapu” avautuu tällä kielellä ¦ A szöveg nyelve: az automatikus olvasáshoz kell, és a „📖 Olvasási segéd” ezen a nyelven nyílik meg
+Paroisse, commune ¦ Seurakunta, kunta ¦ Plébánia, település
+Loupe ¦ Suurennuslasi ¦ Nagyító
+Lire le texte de l’image : écriture à la main, texte imprimé, ou lecture approfondie par l’IA ¦ Lue kuvan teksti: käsiala, painettu teksti tai perusteellinen luku tekoälyllä ¦ A kép szövegének olvasása: kézírás, nyomtatott szöveg vagy alapos olvasás MI-vel
+Zoom : {now}. Clic : {next} (puis {then}, {last}) ¦ Zoomaus: {now}. Napsautus: {next} (sitten {then}, {last}) ¦ Nagyítás: {now}. Kattintás: {next} (aztán {then}, {last})
+Note (mot illisible, signature…) ¦ Huomautus (lukukelvoton sana, allekirjoitus…) ¦ Megjegyzés (olvashatatlan szó, aláírás…)
+La personne reste dans l’acte, sans fiche reliée ¦ Henkilö jää asiakirjaan ilman linkitettyä korttia ¦ A személy az okiratban marad, kapcsolt adatlap nélkül
+Relier… ¦ Linkitä… ¦ Kapcsolás…
+Retirer de l’acte ¦ Poista asiakirjasta ¦ Eltávolítás az okiratból
+Mots connus ({lang}) ¦ Tunnetut sanat ({lang}) ¦ Ismert szavak ({lang})
+Ouvrir dans 📖 Aide à la lecture ¦ Avaa kohteessa 📖 Lukuapu ¦ Megnyitás itt: 📖 Olvasási segéd
+Image puis texte ¦ Kuva ja sitten teksti ¦ Kép, majd szöveg
+Texte seul ¦ Vain teksti ¦ Csak szöveg
+Recette « {name} » posée sur l’image ¦ Resepti ”{name}” käytetty kuvaan ¦ A(z) „{name}” recept alkalmazva a képre
+L’image est déjà comme au départ ¦ Kuva on jo alkuperäisessä tilassa ¦ A kép már olyan, mint az elején
+Image remise comme au départ ¦ Kuva palautettu alkuperäiseksi ¦ A kép visszaállítva az eredetire
+Mots : {n} ¦ Sanat: {n} ¦ Szavak: {n}
+À installer ¦ Asennettava ¦ Telepítendő
+Lire l’écriture à la main (rapide) ¦ Lue käsiala (nopea) ¦ Kézírás olvasása (gyors)
+Lire un texte imprimé ¦ Lue painettu teksti ¦ Nyomtatott szöveg olvasása
+Mieux voir ¦ Näe paremmin ¦ Jobb láthatóság
+Remettre l’image comme au départ ¦ Palauta kuva alkuperäiseksi ¦ A kép visszaállítása az eredetire
+Cacher les numéros de ligne ¦ Piilota rivinumerot ¦ Sorszámok elrejtése
+Montrer les numéros de ligne ¦ Näytä rivinumerot ¦ Sorszámok mutatása
+Encre pâle ¦ Haalistunut muste ¦ Halvány tinta
+contraste local + netteté ¦ paikallinen kontrasti + terävyys ¦ helyi kontraszt + élesség
+Papier jauni ou taché ¦ Kellastunut tai tahrainen paperi ¦ Megsárgult vagy foltos papír
+effacer le fond + canal bleu ¦ poista tausta + sininen kanava ¦ háttér törlése + kék csatorna
+Verso vu par transparence ¦ Läpi kuultava kääntöpuoli ¦ Átütő hátoldal
+miroir + seuil ¦ peilaus + kynnys ¦ tükrözés + küszöb
+Position ¦ Sijainti ¦ Helyzet
+Autres outils ¦ Muut työkalut ¦ Egyéb eszközök
+Contraste local ¦ Paikallinen kontrasti ¦ Helyi kontraszt
+rayon ¦ säde ¦ sugár
+Canal rouge seul ¦ Vain punainen kanava ¦ Csak a vörös csatorna
+Canal vert seul ¦ Vain vihreä kanava ¦ Csak a zöld csatorna
+Canal bleu seul ¦ Vain sininen kanava ¦ Csak a kék csatorna
+Seuil noir et blanc (0 = sans) ¦ Mustavalkokynnys (0 = ei) ¦ Fekete-fehér küszöb (0 = nincs)
+Niveaux (noir, blanc, gamma) ¦ Tasot (musta, valkoinen, gamma) ¦ Szintek (fekete, fehér, gamma)
+Point noir ¦ Mustapiste ¦ Feketepont
+noir ¦ musta ¦ fekete
+Point blanc ¦ Valkopiste ¦ Fehérpont
+blanc ¦ valkoinen ¦ fehér
+Gamma ¦ Gamma ¦ Gamma
+Remettre l’image comme au départ (tous les réglages de l’image à zéro) ¦ Palauta kuva alkuperäiseksi (kaikki kuvan asetukset nollaan) ¦ A kép visszaállítása az eredetire (a kép minden beállítása nullára)
+Recettes ¦ Reseptit ¦ Receptek
+Des recettes en un clic, et tous les réglages de l’image : contraste local, netteté, canal, seuil, niveaux, redresser… ¦ Reseptit yhdellä napsautuksella ja kaikki kuvan asetukset: paikallinen kontrasti, terävyys, kanava, kynnys, tasot, suoristus… ¦ Receptek egy kattintással és a kép összes beállítása: helyi kontraszt, élesség, csatorna, küszöb, szintek, kiegyenesítés…
+Tous les réglages ¦ Kaikki asetukset ¦ Minden beállítás
+Montrer {label} ¦ Näytä {label} ¦ {label} mutatása
+Une barre courte ; des recettes en un clic et les autres réglages dans le panneau « 🎚️ Mieux voir », rangés en trois rubriques ¦ Lyhyt palkki; reseptit yhdellä napsautuksella ja muut asetukset paneelissa ”🎚️ Näe paremmin”, kolmessa osiossa ¦ Rövid sáv; receptek egy kattintással és a többi beállítás a „🎚️ Jobb láthatóság” panelen, három részben
+Barre courte + « 🎚️ Mieux voir » (conseillé) ¦ Lyhyt palkki + ”🎚️ Näe paremmin” (suositus) ¦ Rövid sáv + „🎚️ Jobb láthatóság” (ajánlott)
+Barre complète ¦ Täysi palkki ¦ Teljes sáv
+Numéros de ligne dans la marge du texte (conseillé) ¦ Rivinumerot tekstin reunuksessa (suositus) ¦ Sorszámok a szöveg margóján (ajánlott)
+PERSONNALISER ¦ MUKAUTA ¦ TESTRESZABÁS
+« 🔬 Lecture approfondie (IA) » sur une page déjà lue montre les deux textes côte à côte, et tu gardes le meilleur. Relis toujours : un modèle peut se tromper sur les noms. ¦ ”🔬 Perusteellinen luku (tekoäly)” jo luetulla sivulla näyttää molemmat tekstit rinnakkain, ja sinä pidät paremman. Tarkista aina: malli voi erehtyä nimissä. ¦ A „🔬 Alapos olvasás (MI)” egy már elolvasott oldalon egymás mellett mutatja a két szöveget, és te a jobbat tartod meg. Mindig nézd át: egy modell tévedhet a nevekben.
+Atelier de transcription : barre d’outils ¦ Litterointipaja: työkalurivi ¦ Átíróműhely: eszköztár
+La barre au-dessus de l’image de l’acte : une barre courte et le panneau « 🎚️ Mieux voir » (conseillé), ou la barre complète ; les numéros de ligne du texte ; les boutons et réglages montrés, cachés et rangés. Aussi avec « ⚙️ » dans l’outil. ¦ Asiakirjan kuvan yläpuolella oleva palkki: lyhyt palkki ja paneeli ”🎚️ Näe paremmin” (suositus) tai täysi palkki; tekstin rivinumerot; painikkeet ja asetukset näytettyinä, piilotettuina ja järjestettyinä. Myös ”⚙️”-painikkeella työkalussa. ¦ Az okirat képe fölötti sáv: rövid sáv és a „🎚️ Jobb láthatóság” panel (ajánlott), vagy a teljes sáv; a szöveg sorszámai; a gombok és beállítások megjelenítve, elrejtve és rendezve. A „⚙️” gombbal is az eszközben.
+Dans l’Atelier de transcription (Listes → Outils de modification → 📜 Atelier de transcription, ou « 📜 Ouvrir dans l’Atelier » sur une image) : « ✨ Lire ▾ » → « ✍️ Lire l’écriture à la main (rapide) ». Tout se passe sur cet ordinateur, sans Internet. ¦ Litterointipajassa (Luettelot → Muokkaustyökalut → 📜 Litterointipaja, tai ”📜 Avaa Pajassa” kuvassa): ”✨ Lue ▾” → ”✍️ Lue käsiala (nopea)”. Kaikki tapahtuu tällä tietokoneella, ilman internetiä. ¦ Az Átíróműhelyben (Listák → Szerkesztőeszközök → 📜 Átíróműhely, vagy „📜 Megnyitás a Műhelyben” egy képen): „✨ Olvasás ▾” → „✍️ Kézírás olvasása (gyors)”. Minden ezen a számítógépen történik, internet nélkül.
+Ensuite, dans l’Atelier de transcription : « ✨ Lire ▾ » → « 🔬 Lecture approfondie (IA) » sur une page déjà lue montre les deux lectures côte à côte, et tu gardes la meilleure. ¦ Sitten Litterointipajassa: ”✨ Lue ▾” → ”🔬 Perusteellinen luku (tekoäly)” jo luetulla sivulla näyttää molemmat luennat rinnakkain, ja sinä pidät paremman. ¦ Ezután az Átíróműhelyben: „✨ Olvasás ▾” → „🔬 Alapos olvasás (MI)” egy már elolvasott oldalon egymás mellett mutatja a két olvasatot, és te a jobbat tartod meg.
+Quelques secondes par page, sur cet ordinateur. Toute la page ou la zone choisie (▭) ; chaque ligne est reliée à sa zone de l’image, les mots peu sûrs surlignés. S’installe une fois (Réglages). ¦ Muutama sekunti sivua kohden, tällä tietokoneella. Koko sivu tai valittu alue (▭); jokainen rivi linkitetään kuvan alueeseensa, epävarmat sanat korostettuina. Asennetaan kerran (Asetukset). ¦ Oldalanként néhány másodperc, ezen a számítógépen. Az egész oldal vagy a kiválasztott terület (▭); minden sor a kép saját területéhez kapcsolódik, a bizonytalan szavak kiemelve. Egyszer kell telepíteni (Beállítások).
+Pour un texte imprimé ou tapé (journaux, fiches matricules) : rapide, rien à installer, chaque ligne reliée à sa zone. Ne sait pas lire l’écriture à la main. ¦ Painetulle tai konekirjoitetulle tekstille (sanomalehdet, sotilasrullat): nopea, ei asennettavaa, jokainen rivi linkitetty alueeseensa. Ei osaa lukea käsialaa. ¦ Nyomtatott vagy gépelt szöveghez (újságok, katonai anyakönyvek): gyors, nincs mit telepíteni, minden sor a saját területéhez kapcsolva. Kézírást nem tud olvasni.
+Plus lente (de 20 s à quelques minutes par page) mais meilleure sur une écriture difficile : un modèle d’IA qui tourne sur cet ordinateur (Ollama, plusieurs Go à télécharger une fois). Les lignes se relient ensuite à l’image (▤). ¦ Hitaampi (20 s:sta muutamaan minuuttiin sivulta), mutta parempi vaikealle käsialalle: tällä tietokoneella toimiva tekoälymalli (Ollama, useita gigatavuja ladattavaksi kerran). Rivit linkitetään sitten kuvaan (▤). ¦ Lassabb (oldalanként 20 mp-től néhány percig), de jobb nehéz kézírásnál: ezen a számítógépen futó MI-modell (Ollama, több GB egyszeri letöltéssel). A sorok ezután kapcsolódnak a képhez (▤).
+L’Atelier de transcription s’ouvre sur une image. ¦ Litterointipaja avautuu kuvaan. ¦ Az Átíróműhely egy képen nyílik meg.
+L’Atelier de transcription n’est pas encore chargé. ¦ Litterointipajaa ei ole vielä ladattu. ¦ Az Átíróműhely még nincs betöltve.
+L’Atelier de transcription : l’image du dos à gauche, le texte à droite, lecture automatique, repérage des noms ¦ Litterointipaja: kääntöpuolen kuva vasemmalla, teksti oikealla, automaattinen luku, nimien tunnistus ¦ Az Átíróműhely: a hátoldal képe balra, a szöveg jobbra, automatikus olvasás, névkeresés
+Les transcriptions des actes (📜 Atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris. ¦ Asiakirjojen (📜 Litterointipaja) ja medioiden litteroinnit: mitä aloitussanaa seuraa (tai edeltää). Vain hyödylliset lauseen osat otetaan. ¦ Az okiratok (📜 Átíróműhely) és a médiák átiratai: ami a kiinduló szót követi (vagy megelőzi). Csak a hasznos mondatrészek kerülnek bele.
+atelier|Lire ¦ Lue ¦ Olvasás
