@@ -1,0 +1,81 @@
+fr ¦ lb
+# Zone « trouve-plus » : « Ce que l’app a trouvé dans l’acte », plus riche (heritage-transcribe-trouve.js, lib/transcription_actes.php : 🔍 Repérer avec l’IA, ＋ Ajouter à une fiche)
+Événements et contexte ¦ Evenementer a Kontext
+Naissance estimée ¦ Geschate Gebuert
+finit par une particule seule ¦ hält mat enger eenzeger Partikel op
+c’est un métier ¦ dat ass e Beruff
+c’est un lieu ¦ dat ass eng Plaz
+pas un nom ¦ keen Numm
+proposer (conseillé) ¦ virschloen (recommandéiert)
+vers {year} ¦ ëm {year}
+de {name} ¦ vu(n) {name}
+(de la personne d’avant) ¦ (vun der Persoun virdrun)
+Nom non lu ¦ Numm net gelies
+Proposé par l’IA locale : vérifie dans le texte ¦ Vun der lokaler KI virgeschloen: kontrolléier et am Text
+IA ¦ KI
+Actions ¦ Aktiounen
+Ajouter à une fiche… ¦ Bei eng Fiche derbäisetzen…
+aussi écrit : ¦ och geschriwwen:
+Le texte ne dit rien d’autre sur cette personne. ¦ Den Text seet näischt anescht iwwer dës Persoun.
+Garder dans l’acte ¦ Am Akt halen
+Aucune personne repérée. ¦ Keng Persoun fonnt.
+Écartés : pas des noms ({n}) ¦ Ofgesat: keng Nimm ({n})
+Lieu de ta base ¦ Plaz aus denger Datebank
+date de l’acte ¦ Datum vum Akt
+calendrier républicain ¦ republikanesche Kalenner
+d’après le champ Date ¦ no dem Feld Datum
+Créer dans « Le monde autour »… ¦ An „D’Welt ronderëm“ uleeën…
+mots : {x} ¦ Wierder: {x}
+Choisir cette sorte ¦ Dës Zort wielen
+choisie ¦ gewielt
+Proposée seulement : la sorte d’acte ne change que si tu la choisis. ¦ Just virgeschloen: d’Zort vum Akt ännert sech nëmmen, wann s du se wiels.
+Pas d’indice dans le texte. ¦ Keen Hiwäis am Text.
+L’IA lit le texte… {n} s ¦ D’KI liest den Text… {n} s
+Propositions de l’IA ajoutées ({n}), marquées 🔍 IA : vérifie-les dans le texte. ¦ Virschléi vun der KI derbäigesat ({n}), markéiert 🔍 KI: kontrolléier se am Text.
+Repérer avec l’IA ¦ Mat der KI sichen
+Seul le texte part au modèle, sur cet ordinateur. ¦ Nëmmen den Text geet un de Modell, op dësem Computer.
+Repéré dans le texte ¦ Am Text fonnt
+Réglages du repérage ¦ Astellunge vun der Sich
+Tout est proposé : garde, écarte ou ajoute à une fiche. Rien n’est écrit sans ton clic. ¦ Alles ass e Virschlag: halen, ofsetzen oder bei eng Fiche derbäisetzen. Näischt gëtt ouni däi Klick geschriwwen.
+Écarter ¦ Ofsetzen
+Élément écarté. ¦ Element ofgesat.
+Naissance estimée vers {year} (âge dans l’acte) ¦ Geschate Gebuert ëm {year} (Alter am Akt)
+{n} ans dans l’acte ¦ {n} Joer al am Akt
+Nommé dans l’acte : {name} ¦ Am Akt genannt: {name}
+Nommé dans l’acte ¦ Am Akt genannt
+Ajouter à une fiche ¦ Bei eng Fiche derbäisetzen
+Dans l’acte : ¦ Am Akt:
+Comme quoi ? ¦ Als wat?
+vide si le texte ne la donne pas ¦ eidel, wann den Text en net gëtt
+Relier à « {title} » du monde autour (sa date et son lieu) ¦ Mat „{title}“ aus der Welt ronderëm verbannen (Datum a Plaz)
+Voilà ce qui sera écrit ¦ Dat gëtt geschriwwen
+Toujours avec sa source (ce document, la ligne) et la phrase en citation. « ↶ Annuler » défait l’ajout. ¦ Ëmmer mat senger Quell (dëst Dokument, d’Zeil) an dem Saz als Zitat. „↶ Réckgängeg“ mécht d’Derbäisetze réckgängeg.
+Info ¦ Info
+✓ Ajouté à la fiche. ¦ ✓ Bei d’Fiche derbäigesat.
+LE MONDE AUTOUR ¦ D’WELT RONDERËM
+Créer dans « Le monde autour » ¦ An „D’Welt ronderëm“ uleeën
+Créer l’événement ¦ Evenement uleeën
+Le texte ne donne pas l’année : écris-la toi-même si tu la connais (l’app ne l’invente pas). ¦ Den Text gëtt d’Joer net: schreif et selwer, wann s du et weess (d’App erfënnt et net).
+✓ Ajouté au monde autour. ¦ ✓ An d’Welt ronderëm derbäigesat.
+Prête : la lecture approfondie est installée sur cet ordinateur. ¦ Prett: dat grëndlecht Liesen ass op dësem Computer installéiert.
+Pas prête : installe la lecture approfondie (Ollama) pour t’en servir. ¦ Net prett: installéier dat grëndlecht Liesen (Ollama), fir et ze benotzen.
+Rubriques montrées ¦ Gewisen Rubriken
+Repérer avec l’IA quand elle est prête ¦ Mat der KI sichen, wann se prett ass
+Nombres ¦ Zuelen
+Registre militaire ¦ Militärregister
+mot courant ¦ gewéinlecht Wuert
+lettres mal lues ¦ falsch geliese Buschtawen
+L’IA a répondu autre chose que le JSON demandé : rien n’est repris. ¦ D’KI huet eppes anescht wéi de gefrote JSON geäntwert: näischt gëtt iwwerholl.
+Texte trop long pour l’IA (20 000 signes au plus) : choisis un passage. ¦ Text ze laang fir d’KI (héchstens 20.000 Zeechen): wiel e Passage.
+Choisis la fiche où ajouter cet élément. ¦ Wiel d’Fiche, bei déi dëst Element kënnt.
+Choisis comment ajouter cet élément. ¦ Wiel, wéi dëst Element derbäikënnt.
+Rien à ajouter : l’élément est vide. ¦ Näischt derbäizesetzen: d’Element ass eidel.
+réponse trop longue ¦ Äntwert ze laang
+réponse vide ¦ eidel Äntwert
+pas un objet JSON ¦ keen JSON-Objet
+clé inattendue ¦ onerwaarte Schlëssel
+valeur qui n’est pas un texte ¦ Wäert, deen keen Text ass
+liste attendue ¦ Lëscht erwaart
+liste trop longue ¦ Lëscht ze laang
+personne qui n’est pas un objet ¦ Persoun, déi keen Objet ass
+champ de personne inattendu ¦ onerwaart Persounefeld

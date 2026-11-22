@@ -1,0 +1,81 @@
+fr ¦ sk ¦ nb
+# Zone « trouve-plus » : « Ce que l’app a trouvé dans l’acte », plus riche (heritage-transcribe-trouve.js, lib/transcription_actes.php : 🔍 Repérer avec l’IA, ＋ Ajouter à une fiche)
+Événements et contexte ¦ Udalosti a súvislosti ¦ Hendelser og sammenheng
+Naissance estimée ¦ Odhadované narodenie ¦ Anslått fødsel
+finit par une particule seule ¦ končí samotnou časticou ¦ slutter med en enslig partikkel
+c’est un métier ¦ je to povolanie ¦ det er et yrke
+c’est un lieu ¦ je to miesto ¦ det er et sted
+pas un nom ¦ nie je to meno ¦ ikke et navn
+proposer (conseillé) ¦ navrhnúť (odporúčané) ¦ foreslå (anbefalt)
+vers {year} ¦ okolo {year} ¦ omkring {year}
+de {name} ¦ {name} ¦ til {name}
+(de la personne d’avant) ¦ (predchádzajúcej osoby) ¦ (til personen før)
+Nom non lu ¦ Meno neprečítané ¦ Navn ikke lest
+Proposé par l’IA locale : vérifie dans le texte ¦ Navrhnuté miestnou AI: over to v texte ¦ Foreslått av den lokale KI-en: sjekk det i teksten
+IA ¦ AI ¦ KI
+Actions ¦ Akcie ¦ Handlinger
+Ajouter à une fiche… ¦ Pridať k záznamu… ¦ Legg til i en oppføring…
+aussi écrit : ¦ písané aj: ¦ også skrevet:
+Le texte ne dit rien d’autre sur cette personne. ¦ Text o tejto osobe nič ďalšie nehovorí. ¦ Teksten sier ikke mer om denne personen.
+Garder dans l’acte ¦ Ponechať v zázname ¦ Behold i akten
+Aucune personne repérée. ¦ Nenašla sa žiadna osoba. ¦ Ingen person funnet.
+Écartés : pas des noms ({n}) ¦ Vyradené: nie sú to mená ({n}) ¦ Valgt bort: ikke navn ({n})
+Lieu de ta base ¦ Miesto z tvojej databázy ¦ Sted i databasen din
+date de l’acte ¦ dátum záznamu ¦ aktens dato
+calendrier républicain ¦ republikánsky kalendár ¦ revolusjonskalenderen
+d’après le champ Date ¦ podľa poľa Dátum ¦ fra feltet Dato
+Créer dans « Le monde autour »… ¦ Vytvoriť vo „Svete okolo“… ¦ Opprett i «Verden rundt»…
+mots : {x} ¦ slová: {x} ¦ ord: {x}
+Choisir cette sorte ¦ Zvoliť tento druh ¦ Velg denne typen
+choisie ¦ zvolené ¦ valgt
+Proposée seulement : la sorte d’acte ne change que si tu la choisis. ¦ Len návrh: druh záznamu sa zmení, len keď ho zvolíš. ¦ Bare et forslag: aktens type endres bare hvis du velger den.
+Pas d’indice dans le texte. ¦ Žiadna stopa v texte. ¦ Ingen spor i teksten.
+L’IA lit le texte… {n} s ¦ AI číta text… {n} s ¦ KI-en leser teksten… {n} s
+Propositions de l’IA ajoutées ({n}), marquées 🔍 IA : vérifie-les dans le texte. ¦ Návrhy AI pridané ({n}), označené 🔍 AI: over ich v texte. ¦ KI-ens forslag lagt til ({n}), merket 🔍 KI: sjekk dem i teksten.
+Repérer avec l’IA ¦ Nájsť pomocou AI ¦ Finn med KI
+Seul le texte part au modèle, sur cet ordinateur. ¦ K modelu ide len text, na tomto počítači. ¦ Bare teksten går til modellen, på denne datamaskinen.
+Repéré dans le texte ¦ Nájdené v texte ¦ Funnet i teksten
+Réglages du repérage ¦ Nastavenia hľadania ¦ Innstillinger for søket
+Tout est proposé : garde, écarte ou ajoute à une fiche. Rien n’est écrit sans ton clic. ¦ Všetko je návrh: ponechaj, vyraď alebo pridaj k záznamu. Nič sa nezapíše bez tvojho kliknutia. ¦ Alt er forslag: behold, velg bort eller legg til i en oppføring. Ingenting skrives uten ditt klikk.
+Écarter ¦ Vyradiť ¦ Velg bort
+Élément écarté. ¦ Položka vyradená. ¦ Element valgt bort.
+Naissance estimée vers {year} (âge dans l’acte) ¦ Odhadované narodenie okolo {year} (vek v zázname) ¦ Anslått fødsel omkring {year} (alder i akten)
+{n} ans dans l’acte ¦ {n} rokov v zázname ¦ {n} år i akten
+Nommé dans l’acte : {name} ¦ Uvedený v zázname: {name} ¦ Nevnt i akten: {name}
+Nommé dans l’acte ¦ Uvedený v zázname ¦ Nevnt i akten
+Ajouter à une fiche ¦ Pridať k záznamu ¦ Legg til i en oppføring
+Dans l’acte : ¦ V zázname: ¦ I akten:
+Comme quoi ? ¦ Ako čo? ¦ Som hva?
+vide si le texte ne la donne pas ¦ prázdne, ak ho text neuvádza ¦ tomt hvis teksten ikke oppgir den
+Relier à « {title} » du monde autour (sa date et son lieu) ¦ Prepojiť s „{title}“ zo sveta okolo (dátum a miesto) ¦ Knytt til «{title}» i verden rundt (dato og sted)
+Voilà ce qui sera écrit ¦ Toto sa zapíše ¦ Dette blir skrevet
+Toujours avec sa source (ce document, la ligne) et la phrase en citation. « ↶ Annuler » défait l’ajout. ¦ Vždy so zdrojom (tento dokument, riadok) a vetou ako citátom. „↶ Späť“ pridanie vráti. ¦ Alltid med kilden (dette dokumentet, linjen) og setningen som sitat. «↶ Angre» fjerner tillegget.
+Info ¦ Info ¦ Info
+✓ Ajouté à la fiche. ¦ ✓ Pridané k záznamu. ¦ ✓ Lagt til i oppføringen.
+LE MONDE AUTOUR ¦ SVET OKOLO ¦ VERDEN RUNDT
+Créer dans « Le monde autour » ¦ Vytvoriť vo „Svete okolo“ ¦ Opprett i «Verden rundt»
+Créer l’événement ¦ Vytvoriť udalosť ¦ Opprett hendelsen
+Le texte ne donne pas l’année : écris-la toi-même si tu la connais (l’app ne l’invente pas). ¦ Text neuvádza rok: napíš ho sám, ak ho poznáš (aplikácia si ho nevymýšľa). ¦ Teksten oppgir ikke året: skriv det selv hvis du vet det (appen finner ikke på det).
+✓ Ajouté au monde autour. ¦ ✓ Pridané do sveta okolo. ¦ ✓ Lagt til i verden rundt.
+Prête : la lecture approfondie est installée sur cet ordinateur. ¦ Pripravené: dôkladné čítanie je na tomto počítači nainštalované. ¦ Klar: grundig lesing er installert på denne datamaskinen.
+Pas prête : installe la lecture approfondie (Ollama) pour t’en servir. ¦ Nepripravené: nainštaluj dôkladné čítanie (Ollama), aby si ho mohol používať. ¦ Ikke klar: installer grundig lesing (Ollama) for å bruke den.
+Rubriques montrées ¦ Zobrazené oddiely ¦ Viste avsnitt
+Repérer avec l’IA quand elle est prête ¦ Nájsť pomocou AI, keď je pripravená ¦ Finn med KI når den er klar
+Nombres ¦ Čísla ¦ Tall
+Registre militaire ¦ Vojenská matrika ¦ Militærregister
+mot courant ¦ bežné slovo ¦ vanlig ord
+lettres mal lues ¦ zle prečítané písmená ¦ feillest bokstaver
+L’IA a répondu autre chose que le JSON demandé : rien n’est repris. ¦ AI odpovedala niečím iným než požadovaným JSON: nič sa nepreberá. ¦ KI-en svarte noe annet enn ønsket JSON: ingenting brukes.
+Texte trop long pour l’IA (20 000 signes au plus) : choisis un passage. ¦ Text je pre AI príliš dlhý (najviac 20 000 znakov): vyber úryvok. ¦ Teksten er for lang for KI-en (høyst 20 000 tegn): velg et utdrag.
+Choisis la fiche où ajouter cet élément. ¦ Vyber záznam, ku ktorému túto položku pridať. ¦ Velg oppføringen elementet skal legges til i.
+Choisis comment ajouter cet élément. ¦ Vyber, ako túto položku pridať. ¦ Velg hvordan elementet skal legges til.
+Rien à ajouter : l’élément est vide. ¦ Nie je čo pridať: položka je prázdna. ¦ Ingenting å legge til: elementet er tomt.
+réponse trop longue ¦ odpoveď je príliš dlhá ¦ for langt svar
+réponse vide ¦ prázdna odpoveď ¦ tomt svar
+pas un objet JSON ¦ nie je to objekt JSON ¦ ikke et JSON-objekt
+clé inattendue ¦ neočakávaný kľúč ¦ uventet nøkkel
+valeur qui n’est pas un texte ¦ hodnota, ktorá nie je text ¦ verdi som ikke er tekst
+liste attendue ¦ očakáva sa zoznam ¦ liste ventet
+liste trop longue ¦ zoznam je príliš dlhý ¦ for lang liste
+personne qui n’est pas un objet ¦ osoba, ktorá nie je objekt ¦ person som ikke er et objekt
+champ de personne inattendu ¦ neočakávané pole osoby ¦ uventet personfelt
