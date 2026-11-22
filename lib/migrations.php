@@ -23,7 +23,7 @@ declare(strict_types=1);
  * autre fichier appelée ici doit faire « $own = !$pdo->inTransaction() » avant d'ouvrir la sienne.
  */
 
-const SCHEMA_VERSION = 103;
+const SCHEMA_VERSION = 104;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -132,6 +132,7 @@ function migration_steps(): array
         101 => 'schema_v101',
         102 => 'schema_v102',
         103 => 'schema_v103',
+        104 => 'schema_v104',
     ];
 }
 
@@ -2810,4 +2811,16 @@ function schema_v103(PDO $pdo): void
     $has->execute();
     if ($has->fetchColumn()) { return; }
     $pdo->prepare("INSERT INTO event_types(scope,slug,label,gedcom_tag,icon,color,is_custom,is_active,is_artistic,custom_fields) VALUES('person','acte-notoriete','Acte de notoriété','EVEN','diamond','#0066cc',0,1,0,'')")->execute();
+}
+
+/**
+ * Structure n°104 : 📑 un document en plusieurs pages (Atelier de transcription, vague 3 ; lib/media_pages.php). La table
+ * media_pages relie des médias en un ensemble ordonné (recto / verso, page 1…N, annexe, nom libre) ; une page n'appartient qu'à
+ * un ensemble. Ajoutée seulement : aucune donnée n'est changée (les cartes postales gardent postcard_group / postcard_side).
+ * Rejouable (CREATE … IF NOT EXISTS).
+ */
+function schema_v104(PDO $pdo): void
+{
+    if (!function_exists('media_pages_install')) { require_once __DIR__ . '/media_pages.php'; }
+    media_pages_install($pdo);
 }

@@ -1,0 +1,23 @@
+fr ¦ lb
+# 📑 Atelier de transcription, vague 3 (3a) : un document en plusieurs pages (heritage-pages.js, heritage-transcribe.js, lib/media_pages.php)
+# — 1. relier des pages (page du document, visionneuse)
+Glisser pour changer l’ordre ¦ Zéi fir d’Reiefolleg z’änneren
+Voir cette page ¦ Dës Säit kucken
+Une seule page pour l’instant. Un recto et son verso, un acte sur plusieurs pages : relie les autres images, elles s’ouvriront ensemble. ¦ Fir de Moment just eng Säit. Eng Viischt an hir Récksäit, en Akt op e puer Säiten: verbann déi aner Biller, da ginn se zesummen op.
+Relier une autre page… ¦ Eng aner Säit verbannen…
+PAGES DU DOCUMENT ¦ SÄITE VUM DOKUMENT
+Relier ces pages ¦ Dës Säite verbannen
+Pages reliées : {n} ¦ Verbonne Säiten: {n}
+Page reliée ¦ Säit verbonnen
+Page renommée : « {x} » ¦ Säit ëmbenannt: „{x}“
+Autre nom… ¦ Aneren Numm…
+Par exemple : Plan, Feuillet 2, Suite ¦ Zum Beispill: Plang, Blat 2, Fortsetzung
+Ordre des pages changé ¦ Reiefolleg vun de Säiten geännert
+Retirer de l’ensemble ¦ Aus dem Ensembel eraushuelen
+La page reste dans les médias, seule (rien n’est supprimé) ¦ D’Säit bleift eleng bei de Medien (näischt gëtt geläscht)
+Recto ¦ Viischt
+Verso ¦ Récksäit
+Annexe ¦ Annex
+Une de ces pages est déjà dans un autre document : retire-la d’abord de celui-ci (une page n’appartient qu’à un seul ensemble). ¦ Eng vun dëse Säiten ass schonn an engem aneren Dokument: huel se do fir d’éischt eraus (eng Säit gehéiert just zu engem Ensembel).
+Une des pages n’est plus dans les médias : rien n’a été changé. ¦ Eng vun de Säiten ass net méi bei de Medien: näischt gouf geännert.
+Trop de pages dans un même document (200 au plus). ¦ Ze vill Säiten an engem Dokument (héchstens 200).

@@ -347,12 +347,16 @@
                     ${field('Fichier', d.filename)}
                 </dl>${!d.cote && !d.date_text && !ro ? `<p class="ong-hint">${A().empty ? A().empty('Pas encore de date ni de cote : « ✎ Modifier » pour les écrire.', {icon: '✎'}) : ''}</p>` : ''}</div>
             </div>
+            <section class="card ong-sec ong-pagessec" data-ong-pages hidden></section>
             ${d.description ? `<section class="card ong-sec"><h3>Notes</h3><p class="ong-pre">${esc(d.description)}</p></section>` : ''}
             ${trHtml(d, isImg, ro)}
             <section class="card ong-sec"><h3>${esc(T('Personnes reliées'))} · ${ppl.length}</h3>${ppl.length ? `<div class="ong-people">${ppl.map(personChip).join('')}</div>` : (A().empty ? A().empty('Aucune personne reliée à ce document.', {icon: '👤'}) : '')}${unlinked(d)}</section>
             ${(d.links || []).length ? `<section class="card ong-sec"><h3>${esc(T('Relié à'))}</h3><ul class="ong-links">${d.links.map(l => `<li>${esc(l.label)}</li>`).join('')}</ul></section>` : ''}
             <p class="ong-when">${d.created_at ? when(d.created_at, {label: 'Ajouté'}) : ''}</p>
         </section>`;
+        // 📑 les autres pages du même document (recto / verso, page 1…N, annexe : heritage-pages.js), montrées ensemble ; ＋ Relier une autre page…
+        const pg = ws.querySelector('[data-ong-pages]');
+        if (pg && ext.mediaPages) ext.mediaPages.mount(pg, id, {ro, onOpen: pid => { if (Number(pid) !== Number(id)) select(Number(pid)); }});
         const img = ws.querySelector('[data-ong-img]');
         if (img) { const put = () => { const cap = ws.querySelector('[data-ong-size]'); if (cap && img.naturalWidth) cap.textContent = `${img.naturalWidth} × ${img.naturalHeight} px · ${printFit(img.naturalWidth, img.naturalHeight)}`; }; if (img.complete) put(); else img.addEventListener('load', put, {once: true}); }
     }
@@ -375,7 +379,10 @@
         }
         if (!d) return;
         if (b.matches('[data-ong-person]')) { A().openPersonById?.(Number(b.dataset.ongPerson)); return; }
-        if (b.matches('[data-ong-view]')) { if (d.filename) A().openLightbox([asMedia(d)], 0, true); return; }
+        if (b.matches('[data-ong-view]')) { if (!d.filename) return; // 📑 un document en plusieurs pages : toutes ses pages dans la visionneuse
+            let pages = []; try { pages = ((await ext.mediaPages?.get(d.id)) || {}).pages || []; } catch (_) { pages = []; }
+            const list = pages.length > 1 ? pages.map(p => (Number(p.media_id) === Number(d.id) ? asMedia(d) : {id: Number(p.media_id), title: p.title, filename: p.filename, thumbnail: p.thumbnail, media_type: p.media_type, date_text: p.date_text, document_reference: p.document_reference, transcription: p.transcription, description: p.description})) : [asMedia(d)];
+            A().openLightbox(list, Math.max(0, list.findIndex(m => Number(m.id) === Number(d.id))), true); return; }
         if (b.matches('[data-ong-edit]')) {
             if (!d.filename) return A().toast('Ce document n’a pas de fichier : modifie-le depuis la fiche à laquelle il est rattaché.', 'error');
             A().openLightbox([asMedia(d)], 0, kiosk());

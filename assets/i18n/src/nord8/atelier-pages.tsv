@@ -1,0 +1,23 @@
+fr ¦ tr
+# 📑 Atelier de transcription, vague 3 (3a) : un document en plusieurs pages (heritage-pages.js, heritage-transcribe.js, lib/media_pages.php)
+# — 1. relier des pages (page du document, visionneuse)
+Glisser pour changer l’ordre ¦ Sırayı değiştirmek için sürükle
+Voir cette page ¦ Bu sayfayı gör
+Une seule page pour l’instant. Un recto et son verso, un acte sur plusieurs pages : relie les autres images, elles s’ouvriront ensemble. ¦ Şimdilik tek sayfa. Ön ve arka yüz, birkaç sayfalık bir kayıt: diğer görüntüleri bağla, birlikte açılsınlar.
+Relier une autre page… ¦ Başka bir sayfa bağla…
+PAGES DU DOCUMENT ¦ BELGENİN SAYFALARI
+Relier ces pages ¦ Bu sayfaları bağla
+Pages reliées : {n} ¦ Bağlanan sayfalar: {n}
+Page reliée ¦ Sayfa bağlandı
+Page renommée : « {x} » ¦ Sayfa yeniden adlandırıldı: “{x}”
+Autre nom… ¦ Başka bir ad…
+Par exemple : Plan, Feuillet 2, Suite ¦ Örneğin: Plan, Yaprak 2, Devamı
+Ordre des pages changé ¦ Sayfa sırası değişti
+Retirer de l’ensemble ¦ Kümeden çıkar
+La page reste dans les médias, seule (rien n’est supprimé) ¦ Sayfa medyada tek başına kalır (hiçbir şey silinmez)
+Recto ¦ Ön yüz
+Verso ¦ Arka yüz
+Annexe ¦ Ek
+Une de ces pages est déjà dans un autre document : retire-la d’abord de celui-ci (une page n’appartient qu’à un seul ensemble). ¦ Bu sayfalardan biri zaten başka bir belgede: önce onu oradan çıkar (bir sayfa yalnızca bir kümeye ait olur).
+Une des pages n’est plus dans les médias : rien n’a été changé. ¦ Sayfalardan biri artık medyada değil: hiçbir şey değişmedi.
+Trop de pages dans un même document (200 au plus). ¦ Bir belgede çok fazla sayfa var (en fazla 200).

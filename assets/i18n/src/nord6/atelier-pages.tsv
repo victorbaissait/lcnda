@@ -1,0 +1,23 @@
+fr ¦ lt ¦ lv ¦ et
+# 📑 Atelier de transcription, vague 3 (3a) : un document en plusieurs pages (heritage-pages.js, heritage-transcribe.js, lib/media_pages.php)
+# — 1. relier des pages (page du document, visionneuse)
+Glisser pour changer l’ordre ¦ Vilk, kad pakeistum tvarką ¦ Velc, lai mainītu secību ¦ Lohista, et järjekorda muuta
+Voir cette page ¦ Žiūrėti šį puslapį ¦ Skatīt šo lapu ¦ Vaata seda lehte
+Une seule page pour l’instant. Un recto et son verso, un acte sur plusieurs pages : relie les autres images, elles s’ouvriront ensemble. ¦ Kol kas tik vienas puslapis. Priekinė ir galinė pusė, įrašas per kelis puslapius: susiek kitus vaizdus ir jie atsidarys kartu. ¦ Pagaidām tikai viena lapa. Priekšpuse un aizmugure, ieraksts vairākās lapās: sasaisti pārējos attēlus, un tie atvērsies kopā. ¦ Praegu ainult üks leht. Esi- ja tagakülg, mitmeleheline akt: seo teised pildid ja need avanevad koos.
+Relier une autre page… ¦ Susieti kitą puslapį… ¦ Sasaistīt vēl vienu lapu… ¦ Seo veel üks leht…
+PAGES DU DOCUMENT ¦ DOKUMENTO PUSLAPIAI ¦ DOKUMENTA LAPAS ¦ DOKUMENDI LEHED
+Relier ces pages ¦ Susieti šiuos puslapius ¦ Sasaistīt šīs lapas ¦ Seo need lehed
+Pages reliées : {n} ¦ Susieti puslapiai: {n} ¦ Sasaistītās lapas: {n} ¦ Seotud lehed: {n}
+Page reliée ¦ Puslapis susietas ¦ Lapa sasaistīta ¦ Leht seotud
+Page renommée : « {x} » ¦ Puslapis pervadintas: „{x}“ ¦ Lapa pārdēvēta: “{x}” ¦ Leht ümber nimetatud: „{x}“
+Autre nom… ¦ Kitas pavadinimas… ¦ Cits nosaukums… ¦ Muu nimi…
+Par exemple : Plan, Feuillet 2, Suite ¦ Pavyzdžiui: Planas, 2 lapas, Tęsinys ¦ Piemēram: Plāns, 2. lapa, Turpinājums ¦ Näiteks: Plaan, Leht 2, Järg
+Ordre des pages changé ¦ Puslapių tvarka pakeista ¦ Lapu secība mainīta ¦ Lehtede järjekord muudetud
+Retirer de l’ensemble ¦ Pašalinti iš rinkinio ¦ Izņemt no kopas ¦ Eemalda kogumist
+La page reste dans les médias, seule (rien n’est supprimé) ¦ Puslapis lieka medijoje atskirai (niekas neištrinama) ¦ Lapa paliek multivides failos atsevišķi (nekas netiek dzēsts) ¦ Leht jääb meediasse eraldi (midagi ei kustutata)
+Recto ¦ Priekinė pusė ¦ Priekšpuse ¦ Esikülg
+Verso ¦ Galinė pusė ¦ Aizmugure ¦ Tagakülg
+Annexe ¦ Priedas ¦ Pielikums ¦ Lisa
+Une de ces pages est déjà dans un autre document : retire-la d’abord de celui-ci (une page n’appartient qu’à un seul ensemble). ¦ Vienas iš šių puslapių jau yra kitame dokumente: pirmiausia pašalink jį iš ten (puslapis priklauso tik vienam rinkiniui). ¦ Viena no šīm lapām jau ir citā dokumentā: vispirms izņem to no turienes (lapa pieder tikai vienai kopai). ¦ Üks neist lehtedest on juba teises dokumendis: eemalda see sealt kõigepealt (leht kuulub ainult ühte kogumisse).
+Une des pages n’est plus dans les médias : rien n’a été changé. ¦ Vieno iš puslapių nebėra medijoje: niekas nepakeista. ¦ Vienas no lapām vairs nav multivides failos: nekas netika mainīts. ¦ Üht lehte pole enam meedias: midagi ei muudetud.
+Trop de pages dans un même document (200 au plus). ¦ Per daug puslapių viename dokumente (daugiausia 200). ¦ Pārāk daudz lapu vienā dokumentā (ne vairāk kā 200). ¦ Liiga palju lehti ühes dokumendis (kuni 200).

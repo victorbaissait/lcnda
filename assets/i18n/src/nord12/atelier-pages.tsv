@@ -1,0 +1,23 @@
+fr ¦ ru ¦ uk
+# 📑 Atelier de transcription, vague 3 (3a) : un document en plusieurs pages (heritage-pages.js, heritage-transcribe.js, lib/media_pages.php)
+# — 1. relier des pages (page du document, visionneuse)
+Glisser pour changer l’ordre ¦ Перетащи, чтобы изменить порядок ¦ Перетягни, щоб змінити порядок
+Voir cette page ¦ Открыть эту страницу ¦ Переглянути цю сторінку
+Une seule page pour l’instant. Un recto et son verso, un acte sur plusieurs pages : relie les autres images, elles s’ouvriront ensemble. ¦ Пока только одна страница. Лицевая и оборотная сторона, запись на нескольких страницах: свяжи другие изображения, и они откроются вместе. ¦ Поки що лише одна сторінка. Лицьовий і зворотний бік, запис на кількох сторінках: пов’яжи інші зображення, і вони відкриватимуться разом.
+Relier une autre page… ¦ Связать ещё одну страницу… ¦ Пов’язати ще одну сторінку…
+PAGES DU DOCUMENT ¦ СТРАНИЦЫ ДОКУМЕНТА ¦ СТОРІНКИ ДОКУМЕНТА
+Relier ces pages ¦ Связать эти страницы ¦ Пов’язати ці сторінки
+Pages reliées : {n} ¦ Связано страниц: {n} ¦ Пов’язано сторінок: {n}
+Page reliée ¦ Страница связана ¦ Сторінку пов’язано
+Page renommée : « {x} » ¦ Страница переименована: «{x}» ¦ Сторінку перейменовано: «{x}»
+Autre nom… ¦ Другое название… ¦ Інша назва…
+Par exemple : Plan, Feuillet 2, Suite ¦ Например: План, Лист 2, Продолжение ¦ Наприклад: План, Аркуш 2, Продовження
+Ordre des pages changé ¦ Порядок страниц изменён ¦ Порядок сторінок змінено
+Retirer de l’ensemble ¦ Убрать из набора ¦ Прибрати з набору
+La page reste dans les médias, seule (rien n’est supprimé) ¦ Страница остаётся в медиафайлах отдельно (ничего не удаляется) ¦ Сторінка лишається в медіафайлах окремо (нічого не видаляється)
+Recto ¦ Лицевая сторона ¦ Лицьовий бік
+Verso ¦ Оборотная сторона ¦ Зворотний бік
+Annexe ¦ Приложение ¦ Додаток
+Une de ces pages est déjà dans un autre document : retire-la d’abord de celui-ci (une page n’appartient qu’à un seul ensemble). ¦ Одна из этих страниц уже есть в другом документе: сначала убери её оттуда (страница принадлежит только одному набору). ¦ Одна з цих сторінок уже є в іншому документі: спершу прибери її звідти (сторінка належить лише одному набору).
+Une des pages n’est plus dans les médias : rien n’a été changé. ¦ Одной из страниц больше нет в медиафайлах: ничего не изменено. ¦ Однієї зі сторінок більше немає в медіафайлах: нічого не змінено.
+Trop de pages dans un même document (200 au plus). ¦ Слишком много страниц в одном документе (не больше 200). ¦ Забагато сторінок в одному документі (не більше 200).

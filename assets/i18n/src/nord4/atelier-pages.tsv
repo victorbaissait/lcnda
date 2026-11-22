@@ -1,0 +1,23 @@
+fr ¦ fi ¦ hu
+# 📑 Atelier de transcription, vague 3 (3a) : un document en plusieurs pages (heritage-pages.js, heritage-transcribe.js, lib/media_pages.php)
+# — 1. relier des pages (page du document, visionneuse)
+Glisser pour changer l’ordre ¦ Vedä muuttaaksesi järjestystä ¦ Húzd a sorrend módosításához
+Voir cette page ¦ Näytä tämä sivu ¦ Oldal megtekintése
+Une seule page pour l’instant. Un recto et son verso, un acte sur plusieurs pages : relie les autres images, elles s’ouvriront ensemble. ¦ Toistaiseksi vain yksi sivu. Etu- ja takapuoli, usean sivun asiakirja: yhdistä muut kuvat, niin ne avautuvat yhdessä. ¦ Egyelőre csak egy oldal. Elő- és hátlap, több oldalas irat: kapcsold hozzá a többi képet, és együtt nyílnak meg.
+Relier une autre page… ¦ Yhdistä toinen sivu… ¦ Másik oldal kapcsolása…
+PAGES DU DOCUMENT ¦ ASIAKIRJAN SIVUT ¦ A DOKUMENTUM OLDALAI
+Relier ces pages ¦ Yhdistä nämä sivut ¦ Oldalak kapcsolása
+Pages reliées : {n} ¦ Yhdistetyt sivut: {n} ¦ Kapcsolt oldalak: {n}
+Page reliée ¦ Sivu yhdistetty ¦ Oldal kapcsolva
+Page renommée : « {x} » ¦ Sivu nimetty uudelleen: ”{x}” ¦ Oldal átnevezve: „{x}”
+Autre nom… ¦ Muu nimi… ¦ Más név…
+Par exemple : Plan, Feuillet 2, Suite ¦ Esimerkiksi: Kartta, Lehti 2, Jatkoa ¦ Például: Térkép, 2. levél, Folytatás
+Ordre des pages changé ¦ Sivujärjestys muutettu ¦ Oldalsorrend módosítva
+Retirer de l’ensemble ¦ Poista kokonaisuudesta ¦ Eltávolítás a csoportból
+La page reste dans les médias, seule (rien n’est supprimé) ¦ Sivu jää mediaan yksinään (mitään ei poisteta) ¦ Az oldal önállóan a médiában marad (semmi sem törlődik)
+Recto ¦ Etupuoli ¦ Előlap
+Verso ¦ Takapuoli ¦ Hátlap
+Annexe ¦ Liite ¦ Melléklet
+Une de ces pages est déjà dans un autre document : retire-la d’abord de celui-ci (une page n’appartient qu’à un seul ensemble). ¦ Yksi näistä sivuista on jo toisessa asiakirjassa: poista se ensin sieltä (sivu kuuluu vain yhteen kokonaisuuteen). ¦ Az egyik oldal már egy másik dokumentumhoz tartozik: előbb onnan vedd ki (egy oldal csak egy csoporthoz tartozhat).
+Une des pages n’est plus dans les médias : rien n’a été changé. ¦ Yksi sivuista ei ole enää mediassa: mitään ei muutettu. ¦ Az egyik oldal már nincs a médiában: semmi sem változott.
+Trop de pages dans un même document (200 au plus). ¦ Liian monta sivua yhdessä asiakirjassa (enintään 200). ¦ Túl sok oldal egy dokumentumban (legfeljebb 200).

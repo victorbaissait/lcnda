@@ -1,0 +1,23 @@
+fr ¦ sk ¦ nb
+# 📑 Atelier de transcription, vague 3 (3a) : un document en plusieurs pages (heritage-pages.js, heritage-transcribe.js, lib/media_pages.php)
+# — 1. relier des pages (page du document, visionneuse)
+Glisser pour changer l’ordre ¦ Potiahni a zmeň poradie ¦ Dra for å endre rekkefølgen
+Voir cette page ¦ Zobraziť túto stranu ¦ Se denne siden
+Une seule page pour l’instant. Un recto et son verso, un acte sur plusieurs pages : relie les autres images, elles s’ouvriront ensemble. ¦ Zatiaľ len jedna strana. Líce a rub, záznam na viacerých stranách: prepoj ďalšie obrázky a otvoria sa spolu. ¦ Bare én side foreløpig. En for- og bakside, en akt over flere sider: koble de andre bildene, så åpnes de sammen.
+Relier une autre page… ¦ Prepojiť ďalšiu stranu… ¦ Koble en side til…
+PAGES DU DOCUMENT ¦ STRANY DOKUMENTU ¦ DOKUMENTETS SIDER
+Relier ces pages ¦ Prepojiť tieto strany ¦ Koble disse sidene
+Pages reliées : {n} ¦ Prepojené strany: {n} ¦ Koblede sider: {n}
+Page reliée ¦ Strana prepojená ¦ Side koblet
+Page renommée : « {x} » ¦ Strana premenovaná: „{x}“ ¦ Siden har fått nytt navn: «{x}»
+Autre nom… ¦ Iný názov… ¦ Annet navn…
+Par exemple : Plan, Feuillet 2, Suite ¦ Napríklad: Plán, List 2, Pokračovanie ¦ For eksempel: Kart, Blad 2, Fortsettelse
+Ordre des pages changé ¦ Poradie strán zmenené ¦ Siderekkefølgen endret
+Retirer de l’ensemble ¦ Odobrať zo súboru ¦ Fjern fra samlingen
+La page reste dans les médias, seule (rien n’est supprimé) ¦ Strana zostane v médiách samostatne (nič sa nemaže) ¦ Siden blir værende i mediene, for seg selv (ingenting slettes)
+Recto ¦ Líce ¦ Forside
+Verso ¦ Rub ¦ Bakside
+Annexe ¦ Príloha ¦ Vedlegg
+Une de ces pages est déjà dans un autre document : retire-la d’abord de celui-ci (une page n’appartient qu’à un seul ensemble). ¦ Jedna z týchto strán už patrí k inému dokumentu: najprv ju odtiaľ odober (strana patrí len do jedného súboru). ¦ En av disse sidene er allerede i et annet dokument: fjern den derfra først (en side hører bare til én samling).
+Une des pages n’est plus dans les médias : rien n’a été changé. ¦ Jedna zo strán už v médiách nie je: nič sa nezmenilo. ¦ En av sidene finnes ikke lenger i mediene: ingenting er endret.
+Trop de pages dans un même document (200 au plus). ¦ Príliš veľa strán v jednom dokumente (najviac 200). ¦ For mange sider i ett dokument (høyst 200).

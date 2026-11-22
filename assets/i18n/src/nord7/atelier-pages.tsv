@@ -1,0 +1,23 @@
+fr ¦ is
+# 📑 Atelier de transcription, vague 3 (3a) : un document en plusieurs pages (heritage-pages.js, heritage-transcribe.js, lib/media_pages.php)
+# — 1. relier des pages (page du document, visionneuse)
+Glisser pour changer l’ordre ¦ Dragðu til að breyta röðinni
+Voir cette page ¦ Skoða þessa síðu
+Une seule page pour l’instant. Un recto et son verso, un acte sur plusieurs pages : relie les autres images, elles s’ouvriront ensemble. ¦ Aðeins ein síða í bili. Fram- og bakhlið, færsla á mörgum síðum: tengdu hinar myndirnar og þær opnast saman.
+Relier une autre page… ¦ Tengja aðra síðu…
+PAGES DU DOCUMENT ¦ SÍÐUR SKJALSINS
+Relier ces pages ¦ Tengja þessar síður
+Pages reliées : {n} ¦ Tengdar síður: {n}
+Page reliée ¦ Síða tengd
+Page renommée : « {x} » ¦ Síða endurnefnd: „{x}“
+Autre nom… ¦ Annað heiti…
+Par exemple : Plan, Feuillet 2, Suite ¦ Til dæmis: Kort, Blað 2, Framhald
+Ordre des pages changé ¦ Röð síðna breytt
+Retirer de l’ensemble ¦ Fjarlægja úr safninu
+La page reste dans les médias, seule (rien n’est supprimé) ¦ Síðan verður áfram í miðlunum, ein og sér (engu er eytt)
+Recto ¦ Framhlið
+Verso ¦ Bakhlið
+Annexe ¦ Viðauki
+Une de ces pages est déjà dans un autre document : retire-la d’abord de celui-ci (une page n’appartient qu’à un seul ensemble). ¦ Ein af þessum síðum er þegar í öðru skjali: fjarlægðu hana þaðan fyrst (síða tilheyrir aðeins einu safni).
+Une des pages n’est plus dans les médias : rien n’a été changé. ¦ Ein síðnanna er ekki lengur í miðlunum: engu var breytt.
+Trop de pages dans un même document (200 au plus). ¦ Of margar síður í einu skjali (200 að hámarki).
