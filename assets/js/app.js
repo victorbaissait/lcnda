@@ -6964,7 +6964,7 @@ ${backupSectionHtml()}
         $('#assist-transcription').addEventListener('click',structureCurrentTranscription);
         $('#ocr-transcription')?.addEventListener('click',runOcrTranscription);
         $('#handwriting-transcription')?.addEventListener('click',runHandwritingTranscription);
-        $('#act-transcriber-open')?.addEventListener('click',()=>{const item=state.lightboxMedia?.[state.lightboxIndex];if(!item||normalizedMediaType(item)!=='image')return toast('L’atelier de transcription s’ouvre sur une image.','error');window.LCNDA_EXT?.openActTranscriber?.({mediaId:item.id,filename:item.filename,title:item.title||'',text:$('#lightbox-transcription')?.value||item.transcription||''});});
+        $('#act-transcriber-open')?.addEventListener('click',()=>{const item=state.lightboxMedia?.[state.lightboxIndex];if(!item||normalizedMediaType(item)!=='image')return toast(window.LCNDA_I18N?window.LCNDA_I18N.t('L’Atelier de transcription s’ouvre sur une image.'):'L’Atelier de transcription s’ouvre sur une image.','error');window.LCNDA_EXT?.openActTranscriber?.({mediaId:item.id,filename:item.filename,title:item.title||'',text:$('#lightbox-transcription')?.value||item.transcription||''});});
         $('#compare-media')?.addEventListener('click',openMediaCompareDialog);
         $('#rotate-media-left')?.addEventListener('click',()=>rotateCurrentMedia('left'));
         $('#rotate-media-right')?.addEventListener('click',()=>rotateCurrentMedia('right'));

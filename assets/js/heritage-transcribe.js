@@ -19,7 +19,7 @@
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
     let seq = 0; const zid = () => 'z' + Date.now().toString(36) + (++seq);
 
-    const KINDS = [['apreciser', i18n('À préciser')], ['bapteme', i18n('Baptême')], ['naissance', 'Naissance'], ['mariage', 'Mariage'], ['deces', i18n('Décès')], ['sepulture', i18n('Sépulture')], ['notarial', i18n('Acte notarié')], ['recensement', 'Recensement'], ['militaire', 'Registre militaire'], ['lettre', 'Lettre'], ['autre', 'Autre']];
+    const KINDS = [['apreciser', i18n('À préciser')], ['bapteme', i18n('Baptême')], ['naissance', i18n('Naissance')], ['mariage', i18n('Mariage')], ['deces', i18n('Décès')], ['sepulture', i18n('Sépulture')], ['notarial', i18n('Acte notarié')], ['recensement', i18n('Recensement')], ['militaire', i18n('Registre militaire')], ['lettre', i18n('Lettre')], ['autre', i18n('Autre')]];
     const COLORS = ['#f6c343', '#7cc4f0', '#9be08f', '#f59ab0', '#c3a6f2', '#f7a35c', '#6fd6c8', '#e6e15a'];
     // des modèles d'acte, pour ne pas partir d'une page blanche
     const TEMPLATES = {
@@ -185,6 +185,28 @@
     };
     ext.htrFix = {fixOn, fixLevel, personalLex, fixSettingsHtml, bindFixSettings, lexicon: fixLexicon, addToLexicon, menu: fixMenu, KEYS: {FIX_KEY, FIX_LEVEL_KEY, FIX_LEX_KEY}};
 
+    /* ═════════ « ✨ Lire ▾ » : un seul bouton, trois lectures expliquées (maquette atelier-transcription-idees.html, P2) ═════════ */
+    // [commande, symbole, nom, ce qui la distingue] — la lecture à la main d'abord : c'est la plus utile pour les registres
+    const READS = [
+        ['htr', '✍️', 'Lire l’écriture à la main (rapide)', 'Quelques secondes par page, sur cet ordinateur. Toute la page ou la zone choisie (▭) ; chaque ligne est reliée à sa zone de l’image, les mots peu sûrs surlignés. S’installe une fois (Réglages).'],
+        ['ocr', '🖨', 'Lire un texte imprimé', 'Pour un texte imprimé ou tapé (journaux, fiches matricules) : rapide, rien à installer, chaque ligne reliée à sa zone. Ne sait pas lire l’écriture à la main.'],
+        ['deep', '🔬', 'Lecture approfondie (IA)', 'Plus lente (de 20 s à quelques minutes par page) mais meilleure sur une écriture difficile : un modèle d’IA qui tourne sur cet ordinateur (Ollama, plusieurs Go à télécharger une fois). Les lignes se relient ensuite à l’image (▤).'],
+    ];
+    function readPanelHtml() {
+        const opt = ([k, ic, label, what]) => `<button type="button" class="h-tx-readopt" data-tx-cmd="${k}" role="menuitem"><span class="h-tx-readt">${ic} <b>${esc(i18n(label))}</b><span class="h-tx-readst" data-tx-readst="${k}"></span></span><small>${esc(i18n(what))}</small></button>`;
+        return `<div class="h-tx-readpanel" data-tx-readpanel hidden role="menu" aria-label="${esc(i18n('Lire', {ctx: 'atelier'}))}">${READS.map(opt).join('')}
+            <div class="h-tx-readmore"><button type="button" class="h-tx-readopt h-tx-readline" data-tx-cmd="lines" role="menuitem" title="${esc(i18n('Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis'))}">▤ ${esc(i18n('Relier les lignes à l’image'))}</button>
+            <label class="h-tx-readlang">🌐 ${esc(i18n('Langue du texte'))} <select data-tx-lang title="${esc(i18n('Langue du texte : sert à la lecture automatique, et « 📖 Aide à la lecture » s’ouvre sur cette langue'))}">${txLangs().map(([v, l]) => `<option value="${esc(v)}" ${txLang() === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+            <label class="ui-toggle h-tx-useenh" title="${esc(i18n('La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine'))}"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}><i></i>${i18n('Lire et exporter l’image améliorée')}</label></div></div>`;
+    }
+    /** l'état de chaque lecture : installée ou à installer (demandé à l'ouverture du menu, gardé une minute) */
+    let readSt = null, readStAt = 0;
+    async function readStates() {
+        if (readSt && Date.now() - readStAt < 60000) return readSt;
+        const [h, d] = await Promise.all([api('htr_setup_status').catch(() => null), api('tx_deep_status').catch(() => null)]);
+        readSt = {ocr: true, htr: !!(h && h.ready && (h.models || []).some(m => m.present)), deep: !!(d && d.local_only !== false && d.running && (d.models || []).some(m => m.present))}; readStAt = Date.now(); return readSt;
+    }
+
     /* ═════════ L'atelier ═════════ */
     async function open(ctx = {}) {
         const TV = ext.txView; // « 🎚️ Mieux voir » et la barre réglable (heritage-transcribe-view.js)
@@ -196,24 +218,23 @@
         dlg.innerHTML = `<div class="h-tx">
             <header class="h-tx-top"><span class="h-tx-logo">📜</span><nav class="h-tx-menus" data-tx-menus></nav><span class="ui-topbar-hist h-tx-hist"><button type="button" class="icon-button small" data-tx-hist="undo" title="${esc(i18n('Annuler'))}" data-shortcut="⌘Z" disabled>↶</button><button type="button" class="icon-button small" data-tx-hist="redo" title="${esc(i18n('Rétablir'))}" data-shortcut="⇧⌘Z" disabled>↷</button></span><input data-tx="title" class="h-tx-title" maxlength="200" placeholder="${esc(i18n('Titre de l’acte (ex. Baptême de Jean Martin, 1790)'))}" value="${esc(t.title)}">
                 <select data-tx="kind" title="${esc(i18n('Genre d’acte'))}">${KINDS.map(([k, l]) => `<option value="${k}" ${t.kind === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
-                <input data-tx="date_text" placeholder="Date" value="${esc(t.date_text)}" title="${esc(i18n('Date de l’acte'))}"><input data-tx="place" placeholder="${esc(i18n('Lieu'))}" value="${esc(t.place)}" title="Paroisse, commune"><input data-tx="source" placeholder="${esc(i18n('Source (AD, cote, vue)'))}" value="${esc(t.source)}" title="${esc(i18n('Archives, cote, numéro de vue'))}">
-                <select data-tx-state title="${esc(i18n('Où en est cette transcription (pour la liste « Transcriptions d’actes »)'))}">${[['todo', i18n('À faire')], ['doing', i18n('En cours')], ['done', 'Finie']].map(([k, l]) => `<option value="${k}" ${t.data.status === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
+                <input data-tx="date_text" placeholder="${esc(i18n('Date'))}" value="${esc(t.date_text)}" title="${esc(i18n('Date de l’acte'))}"><input data-tx="place" placeholder="${esc(i18n('Lieu'))}" value="${esc(t.place)}" title="${esc(i18n('Paroisse, commune'))}"><input data-tx="source" placeholder="${esc(i18n('Source (AD, cote, vue)'))}" value="${esc(t.source)}" title="${esc(i18n('Archives, cote, numéro de vue'))}">
+                <select data-tx-state title="${esc(i18n('Où en est cette transcription (pour la liste « Transcriptions d’actes »)'))}">${[['todo', i18n('À faire')], ['doing', i18n('En cours')], ['done', i18n('Finie')]].map(([k, l]) => `<option value="${k}" ${t.data.status === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
                 <span class="spacer"></span><span class="muted h-tx-status" data-tx-status data-ui-status></span>
                 <button type="button" class="button small secondary" data-tx-cmd="export" title="${esc(i18n('Le texte (.txt), l’impression ou un PDF (image + texte)'))}">⤓ ${i18n('Exporter ▾')}</button><button type="button" class="button small" data-tx-cmd="save" title="${esc(i18n('Enregistrer'))}" data-shortcut="${esc(ext.shortcutLabel?.('⌘S') || '⌘S')}">💾 ${i18n('Enregistrer')}</button>${ext.fullButton ? ext.fullButton('transcribe') : ''}<button type="button" class="icon-button" data-tx-cmd="close" title="${esc(i18n('Fermer'))}">×</button></header>
             <div class="h-tx-main">
-                <nav class="h-tx-rail" data-tx-rail aria-label="Outils"><button type="button" data-tx-tool="pan" title="${esc(i18n('Déplacer l’image, ou barre d’espace'))}" aria-label="${esc(i18n('Déplacer l’image'))}" data-shortcut="H">✋</button><button type="button" data-tx-tool="zone" title="${esc(i18n('Dessiner une zone : choisis un passage dans le texte, puis dessine son rectangle sur l’image (les deux restent liés)'))}" aria-label="${esc(i18n('Dessiner une zone'))}" data-shortcut="Z">▭</button><button type="button" data-tx-cmd="loupe" title="${esc(i18n('Loupe qui suit la souris (la molette change le grossissement)'))}" aria-label="Loupe" data-shortcut="L">🔍</button><button type="button" data-tx-cmd="rot" title="${esc(i18n('Tourner l’image de 90°'))}" aria-label="${esc(i18n('Tourner de 90°'))}">⟳</button><button type="button" data-tx-cmd="image" title="${esc(i18n('Choisir l’image de l’acte (base ou ordinateur)'))}" aria-label="${esc(i18n('Image de l’acte'))}">🖼️</button></nav>
+                <nav class="h-tx-rail" data-tx-rail aria-label="${esc(i18n('Outils'))}"><button type="button" data-tx-tool="pan" title="${esc(i18n('Déplacer l’image, ou barre d’espace'))}" aria-label="${esc(i18n('Déplacer l’image'))}" data-shortcut="H">✋</button><button type="button" data-tx-tool="zone" title="${esc(i18n('Dessiner une zone : choisis un passage dans le texte, puis dessine son rectangle sur l’image (les deux restent liés)'))}" aria-label="${esc(i18n('Dessiner une zone'))}" data-shortcut="Z">▭</button><button type="button" data-tx-cmd="loupe" title="${esc(i18n('Loupe qui suit la souris (la molette change le grossissement)'))}" aria-label="${esc(i18n('Loupe'))}" data-shortcut="L">🔍</button><button type="button" data-tx-cmd="rot" title="${esc(i18n('Tourner l’image de 90°'))}" aria-label="${esc(i18n('Tourner de 90°'))}">⟳</button><button type="button" data-tx-cmd="image" title="${esc(i18n('Choisir l’image de l’acte (base ou ordinateur)'))}" aria-label="${esc(i18n('Image de l’acte'))}">🖼️</button></nav>
                 <section class="h-tx-left">
                     <div class="h-tx-barwrap" data-tx-barwrap>${TV.toolbarHtml(t.data.view)}</div>
                     <div class="h-tx-stage" data-tx-stage tabindex="-1"><svg data-tx-svg><g data-tx-world><image data-tx-img/><g data-tx-zones></g><g data-tx-handles></g><rect data-tx-draw class="h-tx-draw" hidden/></g></svg><canvas class="h-tx-loupe" data-tx-loupe hidden aria-hidden="true"></canvas><p class="h-tx-empty" data-tx-empty>${i18n('Choisis l’image de l’acte : « 🖼️ Image… » (une photo de la base, ou un fichier de l’ordinateur).')}</p></div>
                     <div class="h-tx-zonebar" data-tx-zonebar hidden></div>
                 </section>
                 <section class="h-tx-right">
-                    <div class="h-tx-tools"><button type="button" data-tx-cmd="ocr" title="${esc(i18n('Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne)'))}">🔎 ${i18n('Lire (imprimé)')}</button><button type="button" data-tx-cmd="htr" title="${esc(i18n('Lire l’écriture à la main : toute la page, ou seulement la zone choisie (▭). Le texte est proposé ligne par ligne, à relire.'))}" data-help="${esc(i18n('La lecture d’une écriture à la main (HTR), sur cet ordinateur : le texte est proposé ligne par ligne à côté de l’image, les mots peu sûrs surlignés. Elle s’installe une fois dans les Réglages. Relis toujours : elle se trompe sur les noms.'))}" data-help-faq="Lire l’acte">✨ ${i18n('Lire l’acte')}</button><button type="button" data-tx-cmd="deep" class="h-tx-deepbtn" title="${esc(i18n('Un modèle « vision » ouvert qui tourne sur ton ordinateur (Ollama) : lit mieux les écritures difficiles, plus lent'))}">🔍 ${i18n('Lecture approfondie (IA)')}</button><button type="button" data-tx-cmd="lines" title="${esc(i18n('Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis'))}">▤ ${i18n('Relier les lignes à l’image')}</button><span class="h-tx-htrrun" data-tx-htrrun hidden>${window.LCNDA_UI.spinner('', {inline: true})}<button type="button" class="button small secondary" data-tx-cmd="htrstop" title="${esc(i18n('Arrêter la lecture'))}">■ ${i18n('Arrêter')}</button></span>
-                        <select data-tx-lang title="${esc(i18n('Langue du texte : sert à la lecture automatique, et « 📜 Aide à la lecture » s’ouvre sur cette langue'))}">${txLangs().map(([v, l]) => `<option value="${esc(v)}" ${txLang() === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>
-                        <button type="button" data-tx-cmd="template" title="${esc(i18n('Un modèle d’acte à compléter'))}">📋 ${i18n('Modèle')}</button><button type="button" data-tx-cmd="aide" title="${esc(i18n('Le latin des registres, les abréviations, les anciennes lettres (ſ, ꝑ…) et des exercices : choisis d’abord un mot dans le texte pour le chercher'))}">📜 ${i18n('Aide à la lecture')}</button><button type="button" data-tx-cmd="fix" title="${esc(i18n('Proposer des corrections pour les mots mal lus (un mot souligné : clique-le pour choisir)'))}">🪄 ${i18n('Corrections')}</button><button type="button" data-tx-cmd="detect" title="${esc(i18n('Repérer les noms, dates, lieux et métiers'))}" data-help="${esc(i18n('Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.'))}">🧭 ${i18n('Repérer')}</button><span class="spacer"></span>
-                        <span class="h-tx-extra"><button type="button" data-tx-cmd="found" title="${esc(i18n('L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches'))}">🧭 ${i18n('Ce que l’app a trouvé…')}</button><button type="button" data-tx-cmd="copy">📋 ${i18n('Copier le texte')}</button><label class="ui-toggle h-tx-useenh" title="${esc(i18n('La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine'))}"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}><i></i>${i18n('Lire et exporter l’image améliorée')}</label></span></div>
+                    <div class="h-tx-tools"><span class="h-tx-readw"><button type="button" class="h-tx-readbtn" data-tx-cmd="readmenu" aria-haspopup="true" aria-expanded="false" title="${esc(i18n('Lire le texte de l’image : écriture à la main, texte imprimé, ou lecture approfondie par l’IA'))}">✨ ${esc(i18n('Lire', {ctx: 'atelier'}))} ▾</button>${readPanelHtml()}</span><span class="h-tx-htrrun" data-tx-htrrun hidden>${window.LCNDA_UI.spinner('', {inline: true})}<button type="button" class="button small secondary" data-tx-cmd="htrstop" title="${esc(i18n('Arrêter la lecture'))}">■ ${i18n('Arrêter')}</button></span>
+                        <button type="button" data-tx-cmd="template" title="${esc(i18n('Un modèle d’acte à compléter'))}">🧩 ${i18n('Modèle')}</button><button type="button" data-tx-cmd="aide" title="${esc(i18n('Le latin des registres, les abréviations, les anciennes lettres (ſ, ꝑ…) et des exercices : choisis d’abord un mot dans le texte pour le chercher'))}">📖 ${i18n('Aide à la lecture')}</button><button type="button" data-tx-cmd="fix" title="${esc(i18n('Proposer des corrections pour les mots mal lus (un mot souligné : clique-le pour choisir)'))}">🪄 ${i18n('Corrections')}</button><button type="button" data-tx-cmd="detect" title="${esc(i18n('Repérer les noms, dates, lieux et métiers'))}" data-help="${esc(i18n('Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.'))}">🧭 ${i18n('Repérer')}</button><span class="spacer"></span>
+                        <span class="h-tx-extra"><button type="button" data-tx-cmd="found" title="${esc(i18n('L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches'))}">✓ ${i18n('Ajouter à la généalogie')}…</button><button type="button" data-tx-cmd="copy">📋 ${i18n('Copier le texte')}</button></span></div>
                     <div class="h-tx-chars">${SPECIAL.map(c => `<button type="button" data-tx-char="${esc(c)}" title="${esc(i18n('Insérer {c}', {c: esc(c)}))}">${esc(c)}</button>`).join('')}</div>
-                    <div class="h-tx-editor"><div class="h-tx-mirror" data-tx-mirror aria-hidden="true"></div><textarea data-tx-body spellcheck="false" placeholder="${esc(i18n('La transcription, ligne à ligne comme sur l’acte. Choisis un passage, puis dessine sa zone sur l’image (▭ Zone) : les deux restent liés.'))}">${esc(t.body)}</textarea></div>
+                    <div class="h-tx-editor${TV.lineNos() ? ' has-ln' : ''}" data-tx-editor><div class="h-tx-mirror" data-tx-mirror aria-hidden="true"></div><textarea data-tx-body spellcheck="false" placeholder="${esc(i18n('La transcription, ligne à ligne comme sur l’acte. Choisis un passage, puis dessine sa zone sur l’image (▭ Zone) : les deux restent liés.'))}">${esc(t.body)}</textarea></div>
                     <div class="h-tx-fixbar" data-tx-fixbar hidden></div>
                     <p class="h-tx-docnote" data-tx-docnote hidden>📄 ${esc(i18n('Ce texte est celui du document : il se voit dans la visionneuse, la page du document et la fiche des personnes reliées.'))}</p>
                     <div class="h-tx-found" data-tx-found></div>
@@ -255,14 +276,14 @@
             if (before) { const [ax, ay] = rotPt(cx, cy); panX += (before[0] - ax) * zoom; panY += (before[1] - ay) * zoom; } // le centre de l'image ne bouge pas à l'écran
         }
         const rotWH = () => WH;
-        const FIT = {page: i18n('Toute l’image'), width: 'Largeur', real: '100 %'}, FIT_NEXT = {page: 'width', width: 'real', real: 'page'};
+        const FIT = {page: i18n('Toute l’image'), width: i18n('Largeur'), real: '100 %'}, FIT_NEXT = {page: 'width', width: 'real', real: 'page'};
         const FIT_HELP = {page: i18n('Toute l’image'), width: i18n('Largeur (l’image prend toute la largeur, le mieux pour lire)'), real: i18n('Taille réelle (100 %)')};
         const fitZoom = mode => { const r = stage.getBoundingClientRect(), [w, h] = rotWH(); return mode === 'real' ? 1 : clamp(mode === 'width' ? (r.width - 20) / w : Math.min((r.width - 20) / w, (r.height - 20) / h), .02, 20); };
         function paintZoomLabel() {
             const b = $('[data-tx-zoomlab]'); if (!b) return;
             const on = fitOn && !!imgW, now = on ? FIT[fitMode] : `${Math.round(zoom * 100)} %`, next = FIT_NEXT[on ? fitMode : 'real'];
             $('[data-tx-zoomtxt]').textContent = now; b.dataset.fit = on ? fitMode : '';
-            b.title = `Zoom : ${on ? FIT_HELP[fitMode] : now}. Clic : ${FIT_HELP[next]} (puis ${FIT_HELP[FIT_NEXT[next]]}, ${FIT_HELP[FIT_NEXT[FIT_NEXT[next]]]})`;
+            b.title = i18n('Zoom : {now}. Clic : {next} (puis {then}, {last})', {now: on ? FIT_HELP[fitMode] : now, next: FIT_HELP[next], then: FIT_HELP[FIT_NEXT[next]], last: FIT_HELP[FIT_NEXT[FIT_NEXT[next]]]});
         }
         const applyView = () => { world.setAttribute('transform', `translate(${panX} ${panY}) scale(${zoom})`); paintOverlay(); paintZoomLabel(); txBar?.sync(); };
         /** ⤢ : trois façons d'ajuster — toute l'image, la largeur (on lit l'acte de haut en bas), la taille réelle (100 %) */
@@ -316,6 +337,7 @@
             const v = t.data.view;
             dlg.querySelectorAll('[data-tx-barwrap] [data-tx-view]').forEach(i => { if (i.type === 'checkbox') i.checked = !!v[i.dataset.txView]; else i.value = String(v[i.dataset.txView]); });
             dlg.querySelectorAll('[data-tx-chan]').forEach(b => { const on = b.dataset.txChan === v.channel; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
+            dlg.querySelectorAll('[data-tx-recipe]').forEach(b => { const on = TV.recipeOn(v, b.dataset.txRecipe); b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
             paintBadge();
         }
         function paintBadge() { const b = $('[data-tx-badge]'); if (!b) return; const n = TV.changedCount(t.data.view, TV.panelKeys(TV.barCfg(), narrow)); b.hidden = !n; b.textContent = String(n); b.title = n ? i18n(n > 1 ? '{n} réglages actifs dans « Mieux voir »' : '{n} réglage actif dans « Mieux voir »', {n}) : ''; }
@@ -401,15 +423,17 @@
             t.data.zones.forEach((z, i) => { if (z.e > z.s) marks.push({s: z.s, e: z.e, c: colorOf(z, i), on: selZone === z.id}); });
             found.forEach(f => marks.push({s: f.s, e: f.e, cls: `is-${f.type}`}));
             marks.sort((a, b) => a.s - b.s); let h = '', pos = 0;
-            marks.forEach(m => { if (m.s < pos) return; h += fixSeg(text, pos, m.s); h += `<mark class="${m.cls || ''}${m.on ? ' is-on' : ''}" ${m.c ? `style="background:${m.c}${m.on ? '' : '66'}"` : ''}>${fixSeg(text, m.s, m.e)}</mark>`; pos = m.e; });
-            mirror.innerHTML = h + fixSeg(text, pos, text.length) + '\n';
+            marks.forEach(m => { if (m.s < pos) return; h += fixSeg(text, pos, m.s); h += `<mark class="${m.cls || (m.c ? 'h-tx-zm' : '')}${m.on ? ' is-on' : ''}" ${m.c ? `style="--zc:${m.c}"` : ''}>${fixSeg(text, m.s, m.e)}</mark>`; pos = m.e; });
+            h += fixSeg(text, pos, text.length);
+            if (TV.lineNos()) { let n = 1; h = `<span class="h-tx-ln" data-n="1"></span>${h.replace(/\n/g, () => `\n<span class="h-tx-ln" data-n="${++n}"></span>`)}`; } // le numéro au début de chaque ligne, dans la marge
+            mirror.innerHTML = h + '\n';
             mirror.scrollTop = area.scrollTop;
         }
         function paintZoneBar() {
             const bar = $('[data-tx-zonebar]'), z = t.data.zones.find(q => q.id === selZone); bar.hidden = !z; if (!z) return;
             const linked = z.e > z.s;
             bar.innerHTML = `<b>Zone</b> ${linked ? `« ${esc(t.body.slice(z.s, z.e).slice(0, 60))}${z.e - z.s > 60 ? '…' : ''} »` : `<span class="muted">${i18n('pas encore reliée au texte')}</span>`}
-                <button type="button" class="button small secondary" data-tx-zlink title="${esc(i18n('Relier cette zone au passage choisi dans le texte'))}">🔗 ${i18n('Au passage choisi')}</button><input data-tx-znote placeholder="Note (mot illisible, signature…)" value="${esc(z.note || '')}" maxlength="300"><input type="color" data-tx-zcolor value="${esc(z.c || COLORS[t.data.zones.indexOf(z) % COLORS.length])}" title="Couleur"><button type="button" class="button small secondary" data-tx-cmd="htrzone" title="${esc(i18n('Lire l’écriture à la main dans cette zone seulement'))}">✨ ${i18n('Lire cette zone')}</button><button type="button" class="button small danger" data-tx-zdel title="${esc(i18n('Supprimer la zone (Suppr) — « ↶ Annuler » la remet'))}">🗑</button>
+                <button type="button" class="button small secondary" data-tx-zlink title="${esc(i18n('Relier cette zone au passage choisi dans le texte'))}">🔗 ${i18n('Au passage choisi')}</button><input data-tx-znote placeholder="${esc(i18n('Note (mot illisible, signature…)'))}" value="${esc(z.note || '')}" maxlength="300"><input type="color" data-tx-zcolor value="${esc(z.c || COLORS[t.data.zones.indexOf(z) % COLORS.length])}" title="${esc(i18n('Couleur'))}"><button type="button" class="button small secondary" data-tx-cmd="htrzone" title="${esc(i18n('Lire l’écriture à la main dans cette zone seulement'))}">✨ ${i18n('Lire cette zone')}</button><button type="button" class="button small danger" data-tx-zdel title="${esc(i18n('Supprimer la zone (Suppr) — « ↶ Annuler » la remet'))}">🗑</button>
                 <small class="muted h-tx-zkeys" title="${esc(i18n('Glisse la zone pour la déplacer, tire une des 8 poignées pour changer sa taille'))}">↔ ${i18n('glisser · poignées · flèches · Maj + flèches · ⌘Z')}</small>`;
         }
         /* ─── ⌘Z / ⇧⌘Z pour les zones (le texte garde l'annulation de la case) ─── */
@@ -528,11 +552,11 @@
             const box = $('[data-tx-found]'), people = t.data.people;
             const kept = people.length ? `<h4>${i18n('Personnes de l’acte')}</h4><ul class="h-tx-people">${people.map((p, i) => `<li><button type="button" class="link-button" data-tx-goto="${p.s}:${p.e}">${esc(p.name)}</button>
                 <select data-tx-prole="${i}" title="${esc(i18n('Rôle dans l’acte'))}">${['', 'sujet', 'parent', 'conjoint', 'conjoint défunt', 'défunt', 'parrain', 'marraine', 'témoin', 'déclarant', 'officiant', 'officier', 'notaire', 'autre'].map(r => `<option value="${r}" ${p.role === r ? 'selected' : ''}>${r ? esc(i18n(r, {ctx: 'role'})) : i18n('— rôle —')}</option>`).join('')}</select>
-                ${p.person_id ? `<button type="button" class="h-tx-linked" data-tx-popen="${p.person_id}" title="${esc(i18n('Ouvrir la fiche'))}">👤 ${i18n('fiche n° {person_id}', {person_id: p.person_id})}</button><button type="button" class="link-button" data-tx-punlink="${i}">${i18n('délier')}</button>` : `<button type="button" class="button small secondary" data-tx-plink="${i}">🔗 ${i18n('Fiche…')}</button>`}<button type="button" class="icon-button" data-tx-pdel="${i}" title="${esc(i18n('Retirer'))}">×</button></li>`).join('')}</ul>` : '';
-            const groups = [['person', `👤 ${i18n('Noms repérés')}`], ['date', '📅 Dates'], ['place', `📍 ${i18n('Lieux')}`], ['job', `🔨 ${i18n('Métiers')}`]].map(([k, l]) => { const list = found.filter(f => f.type === k); if (!list.length) return '';
+                ${p.person_id ? `<button type="button" class="h-tx-linked" data-tx-popen="${p.person_id}" title="${esc(i18n('Ouvrir la fiche'))}">👤 ${i18n('fiche n° {person_id}', {person_id: p.person_id})}</button><button type="button" class="link-button" data-tx-punlink="${i}" title="${esc(i18n('La personne reste dans l’acte, sans fiche reliée'))}">${i18n('Retirer le lien')}</button>` : `<button type="button" class="button small secondary" data-tx-plink="${i}">🔗 ${i18n('Relier…')}</button>`}<button type="button" class="icon-button" data-tx-pdel="${i}" title="${esc(i18n('Retirer de l’acte'))}" aria-label="${esc(i18n('Retirer de l’acte'))}">×</button></li>`).join('')}</ul>` : '';
+            const groups = [['person', `👤 ${i18n('Noms repérés')}`], ['date', `📅 ${i18n('Dates')}`], ['place', `📍 ${i18n('Lieux')}`], ['job', `🔨 ${i18n('Métiers')}`]].map(([k, l]) => { const list = found.filter(f => f.type === k); if (!list.length) return '';
                 return `<h4>${l} <small class="muted">${list.length}</small>${k === 'person' ? ` <button type="button" class="link-button" data-tx-keepall>${i18n('tout garder')}</button>` : ''}</h4><div class="h-tx-chips">${list.map(f => `<span class="h-tx-chip is-${k}"><button type="button" data-tx-goto="${f.s}:${f.e}" title="${esc(i18n('Montrer dans le texte'))}">${esc(f.label)}${f.role ? ` <i>${esc(f.role)}</i>` : ''}</button>${k === 'person' ? `${(matchCache.get(f.label) || []).slice(0, 2).map(m => `<button type="button" class="h-tx-match" data-tx-match="${found.indexOf(f)}:${m.id}" title="${esc(i18n('Garder et relier à cette fiche'))}">↔ ${esc(m.name)} <small>${esc(m.years)}</small></button>`).join('')}<button type="button" data-tx-keep="${found.indexOf(f)}" title="${esc(i18n('Garder dans les personnes de l’acte'))}">＋</button>` : k === 'date' && f.iso ? `<button type="button" data-tx-setdate="${esc(f.label)}" title="${esc(i18n('Date de l’acte'))}">⇢ date</button>` : k === 'place' ? `<button type="button" data-tx-setplace="${esc(f.label)}" title="${esc(i18n('Lieu de l’acte'))}">⇢ ${i18n('lieu')}</button>` : ''}</span>`).join('')}</div>`; }).join('');
             const lg = aideLang($('[data-tx-lang]').value), kw = lg && found.length + people.length ? (window.LCNDA_AIDE_LECTURE?.known?.(area.value, lg) || []) : [];
-            const words = kw.length ? `<h4>📜 Mots connus (${esc(langName(lg).toLowerCase())}) <small class="muted">${kw.length}</small></h4><div class="h-tx-chips">${kw.map(w => `<span class="h-tx-chip is-word"><button type="button" data-tx-lookword="${esc(String(w.item.t).split(',')[0].trim())}" title="${esc(i18n('Ouvrir dans 📜 Aide à la lecture'))}">${esc(w.word)} <i>${esc(w.item.d.length > 48 ? `${w.item.d.slice(0, 46)}…` : w.item.d)}</i></button></span>`).join('')}</div>` : '';
+            const words = kw.length ? `<h4>📖 ${esc(i18n('Mots connus ({lang})', {lang: langName(lg).toLowerCase()}))} <small class="muted">${kw.length}</small></h4><div class="h-tx-chips">${kw.map(w => `<span class="h-tx-chip is-word"><button type="button" data-tx-lookword="${esc(String(w.item.t).split(',')[0].trim())}" title="${esc(i18n('Ouvrir dans 📖 Aide à la lecture'))}">${esc(w.word)} <i>${esc(w.item.d.length > 48 ? `${w.item.d.slice(0, 46)}…` : w.item.d)}</i></button></span>`).join('')}</div>` : '';
             const ex = lastExtract && (found.length || lastRich?.people.length) ? lastExtract : null;
             const tf = ext.txTrouve && lastRich && (found.length || lastRich.people.length) ? '<div data-tx-trouve></div>' : ''; // 🧭 le bloc riche (heritage-transcribe-trouve.js)
             const cta = ex && ex.people.length && ext.txActe ? `<div class="h-txa-cta"><span><b>${{mariage: '💍', bapteme: '💧', naissance: '👶', deces: '✝', sepulture: '⚱'}[ex.kind] || '📜'} ${esc(i18n('Ce que l’app a trouvé dans l’acte'))}</b> <small class="muted">${esc(A().plural ? A().plural(ex.people.length, 'personne') : ex.people.length)}${ex.date ? ' · ' + esc(ex.date.label) : ''}${ex.place ? ' · ' + esc(ex.place) : ''}</small></span><button type="button" class="button small" data-tx-cmd="found">✓ ${i18n('Ajouter à la généalogie')}…</button></div>` : '';
@@ -930,7 +954,7 @@
             const imgFor = async c => { if (!c.enh || !canEnh) return plainUrl; if (!enhUrl) { try { const cv = await filteredCanvas({gray: false}); enhUrl = URL.createObjectURL(await new Promise(r2 => cv.toBlob(r2, 'image/png'))); setTimeout(() => URL.revokeObjectURL(enhUrl), 300000); } catch (_) { return plainUrl; } } return enhUrl; };
             const title = $('[data-tx="title"]').value || 'Transcription', meta = [KINDS.find(k => k[0] === $('[data-tx="kind"]').value)?.[1], $('[data-tx="date_text"]').value, $('[data-tx="place"]').value, $('[data-tx="source"]').value].filter(Boolean).join(' · ');
             UI2.openPrintDialog({title, key: 'transcription', zone: 'Transcription', photos: false, margin: 14,
-                options: [{key: 'lay', type: 'radio', value: 'side', choices: [['side', i18n('Image + texte côte à côte')], ['stack', 'Image puis texte'], ['text', 'Texte seul']]},
+                options: [{key: 'lay', type: 'radio', value: 'side', choices: [['side', i18n('Image + texte côte à côte')], ['stack', i18n('Image puis texte')], ['text', i18n('Texte seul')]]},
                     ...(canEnh ? [{key: 'enh', label: i18n('Image améliorée'), checked: useEnh(), show: c => c.lay !== 'text'}] : []), {key: 'people', label: i18n('Personnes et rôles'), checked: true}],
                 html: async c => { const img = c.lay === 'text' ? '' : await imgFor(c);
                     return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(title)}</title><style>body{font:14px/1.5 Georgia,serif;margin:0;color:#111}h1{font-size:20px;margin:0 0 4px}.m{color:#555;margin:0 0 12px}.g{display:grid;gap:16px;align-items:start}.g.side{grid-template-columns:1fr 1fr}img{max-width:100%;border:1px solid #ccc;display:block}.g.stack img{max-height:150mm;margin:0 auto 4mm;object-fit:contain}pre{white-space:pre-wrap;font:inherit;margin:0}ul{padding-left:18px}</style></head><body>
@@ -940,11 +964,17 @@
         dlg.addEventListener('click', async e => {
             const tl = e.target.closest('[data-tx-tool]'); if (tl) return setTool(tl.dataset.txTool);
             const chan = e.target.closest('[data-tx-chan]'); if (chan) { setView('channel', chan.dataset.txChan); syncControls(); return; }
+            const rcp = e.target.closest('[data-tx-recipe]'); if (rcp) { // 🎚️ une recette en un clic, puis on ajuste ; « ↶ Annuler » sur le message
+                const before = {...t.data.view}, id = rcp.dataset.txRecipe, r = TV.RECIPES.find(x => x[0] === id); if (!r) return;
+                const put = v => { t.data.view = TV.viewOf(v); syncControls(); geom({keepCenter: !fitOn}); if (fitOn) applyFit(fitMode); else applyView(); applyImage(); touch(); };
+                put(TV.recipeView(before, id)); A().undoToast?.(i18n('Recette « {name} » posée sur l’image', {name: r[2]}), {undo: () => put(before), redo: () => put(TV.recipeView(before, id))}); return; }
             const ch = e.target.closest('[data-tx-char]'); if (ch) { const s = area.selectionStart, en = area.selectionEnd, c = ch.dataset.txChar; area.setRangeText(c, s, en, 'end'); area.dispatchEvent(new Event('input')); area.focus(); return; }
             if (e.target.closest('[data-tx-zlink]')) { const z = t.data.zones.find(q => q.id === selZone), s = area.selectionStart, en = area.selectionEnd; if (!z) return; if (en <= s) return toast(i18n('Choisis d’abord un passage dans le texte.'), 'error'); snap(); z.s = s; z.e = en; touch(); drawZones(); return; }
             if (e.target.closest('[data-tx-zdel]')) return deleteZone();
             const c = e.target.closest('[data-tx-cmd]'); if (!c) return; c.closest('details')?.removeAttribute('open');
             const k = c.dataset.txCmd;
+            if (k === 'readmenu') { toggleRead(); return; }
+            if (c.closest('[data-tx-readpanel]')) toggleRead(false);
             if (k === 'close') return close();
             if (k === 'save') return save();
             if (k === 'image') return pickImage();
@@ -956,8 +986,8 @@
             if (k === 'barcfg') { TV.openBarDialog(dlg); return; }
             if (k === 'keepview') { await save(); if (!dirty) toast(i18n('Réglages de l’image retenus pour cet acte : ils reviennent à la prochaine ouverture.')); return; }
             if (k === 'resetview') { const before = {...t.data.view}, origin = () => { t.data.view = TV.viewOf(); fitOn = true; fitMode = 'page'; syncControls(); geom({keepCenter: false}); applyFit('page'); applyImage(); touch(); };
-                if (!Object.entries(TV.DEFAULT_VIEW).some(([kk, d]) => String(before[kk]) !== String(d))) return status(i18n('L’image est déjà d’origine'));
-                origin(); A().undoToast?.(i18n('Image remise d’origine'), {undo: () => { t.data.view = TV.viewOf(before); syncControls(); geom({keepCenter: false}); applyFit(fitMode); applyImage(); touch(); }, redo: origin}); return; }
+                if (!Object.entries(TV.DEFAULT_VIEW).some(([kk, d]) => String(before[kk]) !== String(d))) return status(i18n('L’image est déjà comme au départ'));
+                origin(); A().undoToast?.(i18n('Image remise comme au départ'), {undo: () => { t.data.view = TV.viewOf(before); syncControls(); geom({keepCenter: false}); applyFit(fitMode); applyImage(); touch(); }, redo: origin}); return; }
             if (k === 'ocr') return runOcr();
             if (k === 'htr') return runHtr();
             if (k === 'htrstop') return htrStop();
@@ -975,7 +1005,7 @@
             if (k === 'export') { // E3 : une seule fenêtre d'export
                 if (!UI.openExportDialog) return printIt();
                 const nm = $('[data-tx="title"]').value || 'transcription';
-                return UI.openExportDialog({title: nm, defaultName: nm, quality: false, info: `${area.value.trim().split(/\s+/).filter(Boolean).length} mots${t.filename ? ` · ${i18n('avec l’image de l’acte')}` : ''}`, formats: [
+                return UI.openExportDialog({title: nm, defaultName: nm, quality: false, info: `${i18n('Mots : {n}', {n: area.value.trim().split(/\s+/).filter(Boolean).length})}${t.filename ? ` · ${i18n('avec l’image de l’acte')}` : ''}`, formats: [
                     {id: 'file', label: '📝 Texte', hint: i18n('le texte seul (.txt)'), ext: 'txt', run: async o => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([area.value], {type: 'text/plain;charset=utf-8'})); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }},
                     {id: 'pdf', hint: i18n('image + texte (« Enregistrer en PDF »)'), ext: '', run: async () => printIt()},
                     {id: 'print', hint: 'image + texte', run: async () => printIt()}]});
@@ -992,12 +1022,20 @@
             if (e.target.matches('[data-tx-lang]')) { try { localStorage.setItem(TX_LANG_KEY, e.target.value); } catch (_) {} if (found.length) paintPeople(); } }); // la langue : retenue, et les mots connus suivent
         /* ─── « 🎚️ Mieux voir » (disposition B) : un panneau qui s'ouvre sous son bouton ─── */
         const togglePanel = (open) => { const pn = $('[data-tx-panel]'), b = $('[data-tx-cmd="better"]'); if (!pn) return; const on = open ?? pn.hidden; pn.hidden = !on; b.setAttribute('aria-expanded', String(on)); b.classList.toggle('is-active', on); };
-        dlg.addEventListener('pointerdown', e => { const pn = $('[data-tx-panel]'); if (pn && !pn.hidden && !e.target.closest('[data-tx-item="better"]')) togglePanel(false); });
+        dlg.addEventListener('pointerdown', e => { const pn = $('[data-tx-panel]'); if (pn && !pn.hidden && !e.target.closest('[data-tx-item="better"]')) togglePanel(false);
+            const rp = $('[data-tx-readpanel]'); if (rp && !rp.hidden && !e.target.closest('.h-tx-readw')) toggleRead(false); });
+        /* ─── « ✨ Lire ▾ » : le menu des trois lectures, avec l'état de chacune ─── */
+        function toggleRead(open) {
+            const pn = $('[data-tx-readpanel]'), b = $('[data-tx-cmd="readmenu"]'); if (!pn) return; const on = open ?? pn.hidden; pn.hidden = !on; b.setAttribute('aria-expanded', String(on)); b.classList.toggle('is-active', on);
+            if (!on) return; pn.querySelector('.h-tx-readopt:not(:disabled)')?.focus();
+            readStates().then(st => { if (!dlg.isConnected) return; pn.querySelectorAll('[data-tx-readst]').forEach(el => { const ok = st[el.dataset.txReadst];
+                el.innerHTML = UI.badge ? UI.badge(ok ? i18n('Installé') : i18n('À installer'), ok ? 'green' : 'yellow') : esc(ok ? i18n('Installé') : i18n('À installer')); el.dataset.state = ok ? 'ok' : 'todo'; }); });
+        }
         /* ─── la barre se redessine quand on la règle (⚙️, ou Réglages) ─── */
         let narrow = false; const isNarrow = () => ($('.h-tx-left')?.getBoundingClientRect().width || 1000) < 620;
         function renderBar() { narrow = isNarrow(); $('[data-tx-barwrap]').innerHTML = TV.toolbarHtml(t.data.view, TV.barCfg(), {narrow}); setTool(tool); paintZoomLabel(); paintBadge(); paintLoupeBtn(); }
         const roBar = new ResizeObserver(() => { if (dlg.isConnected && isNarrow() !== narrow) renderBar(); }); roBar.observe($('.h-tx-left'));
-        const onBar = () => renderBar(); window.addEventListener('lcnda-txbar-change', onBar);
+        const onBar = () => { renderBar(); $('[data-tx-editor]')?.classList.toggle('has-ln', TV.lineNos()); paintMirror(); }; window.addEventListener('lcnda-txbar-change', onBar);
         /* ─── 🔍 Loupe : suit la souris ; la molette change le grossissement ─── */
         const loupe = {on: false, mag: 3}, lc = $('[data-tx-loupe]');
         const paintLoupeBtn = () => { const b = $('[data-tx-cmd="loupe"]'); if (b) { b.classList.toggle('is-active', loupe.on); b.setAttribute('aria-pressed', String(loupe.on)); } };
@@ -1020,6 +1058,7 @@
             if (!dlg.open || [...document.querySelectorAll('dialog[open]')].at(-1) !== dlg) return; // une fenêtre par-dessus (confirmation…) garde ses touches
             if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); save(); return; }
             if (e.key === 'Escape' && e.target.closest?.('[data-tx-panel]')) { e.preventDefault(); e.stopPropagation(); togglePanel(false); $('[data-tx-cmd="better"]')?.focus(); return; }
+            if (e.key === 'Escape' && $('[data-tx-readpanel]') && !$('[data-tx-readpanel]').hidden) { e.preventDefault(); e.stopPropagation(); toggleRead(false); $('[data-tx-cmd="readmenu"]')?.focus(); return; }
             if (e.target.closest?.('input, textarea, select')) return;
             if (e.target.closest?.('button, [contenteditable="true"]') && (e.key === ' ' || e.key === 'Enter')) return;
             const mod = e.metaKey || e.ctrlKey, k = e.key.toLowerCase();
@@ -1055,10 +1094,16 @@
         dlg.addEventListener('click', e => { const hb = e.target.closest('[data-tx-hist]'); if (hb) undoZones(hb.dataset.txHist === 'redo'); });
         const cmdOf = k => () => { const b = document.createElement('button'); b.type = 'button'; b.hidden = true; b.dataset.txCmd = k; dlg.appendChild(b); b.click(); b.remove(); };
         UI.editorMenus?.($('[data-tx-menus]'), {
-            Fichier: () => [{icon: '💾', label: i18n('Enregistrer'), shortcut: '⌘S', run: cmdOf('save')}, {icon: '⤓', label: i18n('Exporter (texte, PDF, imprimer)…'), run: cmdOf('export')}, '-', {icon: '🖼️', label: i18n('Image de l’acte…'), run: cmdOf('image')}, {icon: '📋', label: i18n('Copier le texte'), run: cmdOf('copy')}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
-            Édition: () => [{icon: '↶', label: i18n('Annuler'), shortcut: '⌘Z', disabled: !HX?.canUndo(), run: () => undoZones(false)}, {icon: '↷', label: i18n('Rétablir'), shortcut: '⇧⌘Z', disabled: !HX?.canRedo(), run: () => undoZones(true)}, '-', {icon: '📋', label: i18n('Modèle d’acte'), run: cmdOf('template')}, {icon: '🧭', label: i18n('Repérer les noms, dates, lieux'), run: cmdOf('detect')}, {icon: '🔎', label: i18n('Lire (imprimé)'), run: cmdOf('ocr')}, {icon: '✨', label: i18n('Lire l’acte (écriture à la main)'), run: cmdOf('htr')}, {icon: '🔍', label: `${i18n('Lecture approfondie')}…`, run: cmdOf('deep')}, {icon: '▤', label: i18n('Relier les lignes à l’image'), run: cmdOf('lines')}, {icon: '🧭', label: i18n('Ce que l’app a trouvé…'), run: cmdOf('found')}],
-            Outils: () => [{icon: '✋', label: i18n('Déplacer l’image'), shortcut: 'H', run: () => setTool('pan')}, {icon: '▭', label: i18n('Dessiner une zone'), shortcut: 'Z', run: () => setTool('zone')}, {icon: '🔍', label: 'Loupe', shortcut: 'L', run: cmdOf('loupe')}, '-', {icon: '📜', label: i18n('Aide à la lecture…'), run: cmdOf('aide')}, {icon: '🪙', label: i18n('Convertisseur d’autrefois…'), run: () => ext.autrefois?.open()}],
-            Affichage: () => [{icon: '⤢', label: i18n('Ajuster à la fenêtre'), shortcut: '⌘0', run: () => txBar?.zoom.fit()}, {icon: '↔', label: i18n('Toute la largeur (pour lire)'), run: () => imgW && applyFit('width')}, {label: '100 %', shortcut: '⌘1', run: () => txBar?.zoom.actual()}, {icon: '＋', label: 'Zoom avant', shortcut: '⌘+', run: () => txBar?.zoom.in()}, {icon: '−', label: i18n('Zoom arrière'), shortcut: '⌘−', run: () => txBar?.zoom.out()}, '-', {icon: '⟳', label: i18n('Tourner de 90°'), run: cmdOf('rot')}, {icon: '↺', label: i18n('Image d’origine'), run: cmdOf('resetview')}]});
+            Fichier: () => [{icon: '💾', label: i18n('Enregistrer'), shortcut: '⌘S', run: cmdOf('save')}, {icon: '⤓', label: i18n('Exporter (texte, PDF, imprimer)…'), run: cmdOf('export')}, '-', {icon: '🖼️', label: i18n('Image de l’acte…'), run: cmdOf('image')}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
+            Édition: () => [{icon: '↶', label: i18n('Annuler'), shortcut: '⌘Z', disabled: !HX?.canUndo(), run: () => undoZones(false)}, {icon: '↷', label: i18n('Rétablir'), shortcut: '⇧⌘Z', disabled: !HX?.canRedo(), run: () => undoZones(true)}, '-', {icon: '📋', label: i18n('Copier le texte'), run: cmdOf('copy')}, {icon: '🧩', label: i18n('Modèle d’acte'), run: cmdOf('template')}],
+            // K1 : les lectures, Repérer et « Ajouter à la généalogie » sont des outils (plus dans Édition) ; un symbole = une action (K11)
+            Outils: () => [{icon: '✋', label: i18n('Déplacer l’image'), shortcut: 'H', run: () => setTool('pan')}, {icon: '▭', label: i18n('Dessiner une zone'), shortcut: 'Z', run: () => setTool('zone')}, {icon: '🔍', label: i18n('Loupe'), shortcut: 'L', run: cmdOf('loupe')}, '-',
+                {icon: '✍️', label: i18n('Lire l’écriture à la main (rapide)'), run: cmdOf('htr')}, {icon: '🖨', label: i18n('Lire un texte imprimé'), run: cmdOf('ocr')}, {icon: '🔬', label: `${i18n('Lecture approfondie (IA)')}…`, run: cmdOf('deep')}, {icon: '▤', label: i18n('Relier les lignes à l’image'), run: cmdOf('lines')}, '-',
+                {icon: '🪄', label: i18n('Corrections'), run: cmdOf('fix')}, {icon: '🧭', label: i18n('Repérer les noms, dates, lieux'), run: cmdOf('detect')}, {icon: '✓', label: `${i18n('Ajouter à la généalogie')}…`, run: cmdOf('found')}, '-',
+                {icon: '📖', label: i18n('Aide à la lecture…'), run: cmdOf('aide')}, {icon: '🪙', label: i18n('Convertisseur d’autrefois…'), run: () => ext.autrefois?.open()}],
+            Affichage: () => [{icon: '⤢', label: i18n('Ajuster à la fenêtre'), shortcut: '⌘0', run: () => txBar?.zoom.fit()}, {icon: '↔', label: i18n('Toute la largeur (pour lire)'), run: () => imgW && applyFit('width')}, {label: '100 %', shortcut: '⌘1', run: () => txBar?.zoom.actual()}, {icon: '＋', label: i18n('Zoom avant'), shortcut: '⌘+', run: () => txBar?.zoom.in()}, {icon: '−', label: i18n('Zoom arrière'), shortcut: '⌘−', run: () => txBar?.zoom.out()}, '-',
+                {icon: '⟳', label: i18n('Tourner de 90°'), run: cmdOf('rot')}, $('[data-tx-cmd="better"]') ? {icon: '🎚️', label: `${i18n('Mieux voir')}…`, run: () => togglePanel(true)} : null, {icon: '↺', label: i18n('Remettre l’image comme au départ'), run: cmdOf('resetview')}, '-',
+                {icon: '№', label: TV.lineNos() ? i18n('Cacher les numéros de ligne') : i18n('Montrer les numéros de ligne'), run: () => TV.setLineNos(!TV.lineNos())}]});
         UI.editorRail?.($('[data-tx-rail]'), {breaks: ['[data-tx-cmd="loupe"]', '[data-tx-cmd="image"]']});
         if (UI.editorStatus) { // K18 : l'image à gauche, l'aide de l'outil au milieu, le zoom à droite (⌘ + molette, ⌘0, ⌘1)
             txBar = UI.editorStatus({zoom: {get: () => zoom, set: k => { if (!imgW) return; const r = stage.getBoundingClientRect(); zoomAt(k, r.width / 2, r.height / 2); }, fit: () => imgW && applyFit('page'), min: .02, max: 20}});
@@ -1129,7 +1174,7 @@
                 const noPeople = src.cloneNode(true); noPeople.querySelectorAll('.lb-read-act p').forEach(p => { if (/Personnes/.test(p.textContent)) p.remove(); });
                 const imgUrl = `media/${encodeURIComponent(it.filename)}`;
                 UI2.openPrintDialog({title: it.title || 'Transcription', key: 'transcription', zone: 'Transcription', photos: false, margin: 14,
-                    options: [{key: 'lay', type: 'radio', value: 'side', choices: [['side', i18n('Image + texte côte à côte')], ['stack', 'Image puis texte'], ['text', 'Texte seul']]}, {key: 'people', label: i18n('Personnes et rôles'), checked: true}],
+                    options: [{key: 'lay', type: 'radio', value: 'side', choices: [['side', i18n('Image + texte côte à côte')], ['stack', i18n('Image puis texte')], ['text', i18n('Texte seul')]]}, {key: 'people', label: i18n('Personnes et rôles'), checked: true}],
                     html: c => `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(it.title || 'Transcription')}</title><style>body{font:14px/1.5 Georgia,serif;margin:0}pre{white-space:pre-wrap;font:inherit}h3{margin:18px 0 4px}small,.muted{color:#666}.g{display:grid;gap:16px;align-items:start}.g.side{grid-template-columns:1fr 1fr}img{max-width:100%;display:block;border:1px solid #ccc}.g.stack img{max-height:150mm;margin:0 auto;object-fit:contain}</style></head><body><h2>${esc(it.title || 'Transcription')}</h2><div class="g ${c.lay}">${c.lay === 'text' ? '' : `<img src="${esc(imgUrl)}" alt="">`}<div>${(c.people ? src : noPeople).innerHTML}</div></div></body></html>`});
                 return false; }});
     }

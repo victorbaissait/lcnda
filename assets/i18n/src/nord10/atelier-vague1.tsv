@@ -1,0 +1,71 @@
+fr ¦ sq ¦ mt
+# 📜 Atelier de transcription, vague 1 « Ranger » (barre courte, ✨ Lire ▾, numéros de ligne, symboles, nom unique)
+Langue du texte : sert à la lecture automatique, et « 📖 Aide à la lecture » s’ouvre sur cette langue ¦ Gjuha e tekstit: shërben për leximin automatik, dhe «📖 Ndihmë për leximin» hapet në këtë gjuhë ¦ Il-lingwa tat-test: isservi għall-qari awtomatiku, u “📖 Għajnuna għall-qari” tinfetaħ f’din il-lingwa
+Paroisse, commune ¦ Famulli, komunë ¦ Parroċċa, lokalità
+Loupe ¦ Zmadhues ¦ Lenti
+Lire le texte de l’image : écriture à la main, texte imprimé, ou lecture approfondie par l’IA ¦ Lexo tekstin e imazhit: shkrim dore, tekst i shtypur ose lexim i thelluar me IA ¦ Aqra t-test tal-immaġni: kitba bl-idejn, test stampat jew qari fil-fond bl-IA
+Zoom : {now}. Clic : {next} (puis {then}, {last}) ¦ Zmadhimi: {now}. Klikim: {next} (pastaj {then}, {last}) ¦ Żum: {now}. Klikk: {next} (imbagħad {then}, {last})
+Note (mot illisible, signature…) ¦ Shënim (fjalë e palexueshme, nënshkrim…) ¦ Nota (kelma li ma tinqarax, firma…)
+La personne reste dans l’acte, sans fiche reliée ¦ Personi mbetet në akt, pa skedë të lidhur ¦ Il-persuna tibqa’ fl-att, mingħajr skeda marbuta
+Relier… ¦ Lidh… ¦ Orbot…
+Retirer de l’acte ¦ Hiqe nga akti ¦ Neħħi mill-att
+Mots connus ({lang}) ¦ Fjalë të njohura ({lang}) ¦ Kliem magħruf ({lang})
+Ouvrir dans 📖 Aide à la lecture ¦ Hape te 📖 Ndihmë për leximin ¦ Iftaħ f’📖 Għajnuna għall-qari
+Image puis texte ¦ Imazhi, pastaj teksti ¦ Immaġni u mbagħad test
+Texte seul ¦ Vetëm teksti ¦ Test biss
+Recette « {name} » posée sur l’image ¦ Receta «{name}» u vu në imazh ¦ Ir-riċetta “{name}” applikata fuq l-immaġni
+L’image est déjà comme au départ ¦ Imazhi është tashmë si në fillim ¦ L-immaġni diġà kif kienet fil-bidu
+Image remise comme au départ ¦ Imazhi u kthye si në fillim ¦ L-immaġni reġgħet kif kienet fil-bidu
+Mots : {n} ¦ Fjalë: {n} ¦ Kliem: {n}
+À installer ¦ Për t’u instaluar ¦ Trid tiġi installata
+Lire l’écriture à la main (rapide) ¦ Lexo shkrimin e dorës (shpejt) ¦ Aqra l-kitba bl-idejn (malajr)
+Lire un texte imprimé ¦ Lexo një tekst të shtypur ¦ Aqra test stampat
+Mieux voir ¦ Shih më mirë ¦ Ara aħjar
+Remettre l’image comme au départ ¦ Ktheje imazhin si në fillim ¦ Erġa’ poġġi l-immaġni kif kienet fil-bidu
+Cacher les numéros de ligne ¦ Fshih numrat e rreshtave ¦ Aħbi n-numri tal-linji
+Montrer les numéros de ligne ¦ Shfaq numrat e rreshtave ¦ Uri n-numri tal-linji
+Encre pâle ¦ Bojë e zbehtë ¦ Linka ċara
+contraste local + netteté ¦ kontrast lokal + mprehtësi ¦ kuntrast lokali + nitidezza
+Papier jauni ou taché ¦ Letër e zverdhur ose me njolla ¦ Karta sfaruta jew imtebba’
+effacer le fond + canal bleu ¦ fshi sfondin + kanali blu ¦ ħassar l-isfond + kanal blu
+Verso vu par transparence ¦ Ana e pasme që duket tejpërtej ¦ In-naħa ta’ wara tidher minn ġewwa
+miroir + seuil ¦ pasqyrë + prag ¦ mera + limitu
+Position ¦ Pozicioni ¦ Pożizzjoni
+Autres outils ¦ Mjete të tjera ¦ Għodod oħra
+Contraste local ¦ Kontrast lokal ¦ Kuntrast lokali
+rayon ¦ rreze ¦ raġġ
+Canal rouge seul ¦ Vetëm kanali i kuq ¦ Il-kanal aħmar biss
+Canal vert seul ¦ Vetëm kanali i gjelbër ¦ Il-kanal aħdar biss
+Canal bleu seul ¦ Vetëm kanali blu ¦ Il-kanal blu biss
+Seuil noir et blanc (0 = sans) ¦ Pragu bardhë e zi (0 = pa) ¦ Limitu iswed u abjad (0 = xejn)
+Niveaux (noir, blanc, gamma) ¦ Nivelet (e zezë, e bardhë, gama) ¦ Livelli (iswed, abjad, gamma)
+Point noir ¦ Pika e zezë ¦ Punt iswed
+noir ¦ e zezë ¦ iswed
+Point blanc ¦ Pika e bardhë ¦ Punt abjad
+blanc ¦ e bardhë ¦ abjad
+Gamma ¦ Gama ¦ Gamma
+Remettre l’image comme au départ (tous les réglages de l’image à zéro) ¦ Ktheje imazhin si në fillim (të gjitha cilësimet e imazhit në zero) ¦ Erġa’ poġġi l-immaġni kif kienet fil-bidu (is-settings kollha tal-immaġni għal żero)
+Recettes ¦ Receta ¦ Riċetti
+Des recettes en un clic, et tous les réglages de l’image : contraste local, netteté, canal, seuil, niveaux, redresser… ¦ Receta me një klikim dhe të gjitha cilësimet e imazhit: kontrast lokal, mprehtësi, kanal, prag, nivele, drejtim… ¦ Riċetti bi klikk waħda, u s-settings kollha tal-immaġni: kuntrast lokali, nitidezza, kanal, limitu, livelli, iddritta…
+Tous les réglages ¦ Të gjitha cilësimet ¦ Is-settings kollha
+Montrer {label} ¦ Shfaq {label} ¦ Uri {label}
+Une barre courte ; des recettes en un clic et les autres réglages dans le panneau « 🎚️ Mieux voir », rangés en trois rubriques ¦ Një shirit i shkurtër; receta me një klikim dhe cilësimet e tjera në panelin «🎚️ Shih më mirë», në tri rubrika ¦ Barra qasira; riċetti bi klikk waħda u s-settings l-oħra fil-pannell “🎚️ Ara aħjar”, fi tliet taqsimiet
+Barre courte + « 🎚️ Mieux voir » (conseillé) ¦ Shirit i shkurtër + «🎚️ Shih më mirë» (këshillohet) ¦ Barra qasira + “🎚️ Ara aħjar” (rakkomandat)
+Barre complète ¦ Shirit i plotë ¦ Barra sħiħa
+Numéros de ligne dans la marge du texte (conseillé) ¦ Numrat e rreshtave në kufirin e tekstit (këshillohet) ¦ Numri tal-linji fil-marġni tat-test (rakkomandat)
+PERSONNALISER ¦ PËRSHTAT ¦ PERSONALIZZA
+« 🔬 Lecture approfondie (IA) » sur une page déjà lue montre les deux textes côte à côte, et tu gardes le meilleur. Relis toujours : un modèle peut se tromper sur les noms. ¦ «🔬 Lexim i thelluar (IA)» në një faqe të lexuar tashmë tregon të dy tekstet krah për krah, dhe ti mban më të mirin. Rishiko gjithmonë: një model mund të gabojë me emrat. ¦ “🔬 Qari fil-fond (IA)” fuq paġna diġà moqrija juri ż-żewġ testi ħdejn xulxin, u int iżżomm l-aħjar wieħed. Dejjem irrevedi: mudell jista’ jiżbalja fl-ismijiet.
+Atelier de transcription : barre d’outils ¦ Punishtja e transkriptimit: shiriti i mjeteve ¦ Laboratorju tat-traskrizzjoni: barra tal-għodod
+La barre au-dessus de l’image de l’acte : une barre courte et le panneau « 🎚️ Mieux voir » (conseillé), ou la barre complète ; les numéros de ligne du texte ; les boutons et réglages montrés, cachés et rangés. Aussi avec « ⚙️ » dans l’outil. ¦ Shiriti mbi imazhin e aktit: një shirit i shkurtër dhe paneli «🎚️ Shih më mirë» (këshillohet), ose shiriti i plotë; numrat e rreshtave të tekstit; butonat dhe cilësimet e shfaqura, të fshehura dhe të renditura. Edhe me «⚙️» te mjeti. ¦ Il-barra fuq l-immaġni tal-att: barra qasira u l-pannell “🎚️ Ara aħjar” (rakkomandat), jew il-barra sħiħa; in-numri tal-linji tat-test; il-buttuni u s-settings murija, moħbija u mqassma. Ukoll bil-“⚙️” fl-għodda.
+Dans l’Atelier de transcription (Listes → Outils de modification → 📜 Atelier de transcription, ou « 📜 Ouvrir dans l’Atelier » sur une image) : « ✨ Lire ▾ » → « ✍️ Lire l’écriture à la main (rapide) ». Tout se passe sur cet ordinateur, sans Internet. ¦ Në Punishten e transkriptimit (Listat → Mjetet e ndryshimit → 📜 Punishtja e transkriptimit, ose «📜 Hape në Punishte» te një imazh): «✨ Lexo ▾» → «✍️ Lexo shkrimin e dorës (shpejt)». Gjithçka ndodh në këtë kompjuter, pa internet. ¦ Fil-Laboratorju tat-traskrizzjoni (Listi → Għodod tal-editjar → 📜 Laboratorju tat-traskrizzjoni, jew “📜 Iftaħ fil-Laboratorju” fuq immaġni): “✨ Aqra ▾” → “✍️ Aqra l-kitba bl-idejn (malajr)”. Kollox isir fuq dan il-kompjuter, mingħajr Internet.
+Ensuite, dans l’Atelier de transcription : « ✨ Lire ▾ » → « 🔬 Lecture approfondie (IA) » sur une page déjà lue montre les deux lectures côte à côte, et tu gardes la meilleure. ¦ Pastaj, në Punishten e transkriptimit: «✨ Lexo ▾» → «🔬 Lexim i thelluar (IA)» në një faqe të lexuar tashmë tregon të dy leximet krah për krah, dhe ti mban më të mirin. ¦ Imbagħad, fil-Laboratorju tat-traskrizzjoni: “✨ Aqra ▾” → “🔬 Qari fil-fond (IA)” fuq paġna diġà moqrija juri ż-żewġ qarijiet ħdejn xulxin, u int iżżomm l-aħjar wieħed.
+Quelques secondes par page, sur cet ordinateur. Toute la page ou la zone choisie (▭) ; chaque ligne est reliée à sa zone de l’image, les mots peu sûrs surlignés. S’installe une fois (Réglages). ¦ Disa sekonda për faqe, në këtë kompjuter. E gjithë faqja ose zona e zgjedhur (▭); çdo rresht lidhet me zonën e vet në imazh, fjalët e pasigurta të theksuara. Instalohet një herë (Cilësimet). ¦ Ftit sekondi għal kull paġna, fuq dan il-kompjuter. Il-paġna kollha jew iż-żona magħżula (▭); kull linja tintrabat maż-żona tagħha fl-immaġni, il-kliem inċert enfasizzat. Tiġi installata darba (Settings).
+Pour un texte imprimé ou tapé (journaux, fiches matricules) : rapide, rien à installer, chaque ligne reliée à sa zone. Ne sait pas lire l’écriture à la main. ¦ Për një tekst të shtypur ose të daktilografuar (gazeta, regjistra ushtarakë): shpejt, asgjë për të instaluar, çdo rresht i lidhur me zonën e vet. Nuk di të lexojë shkrimin e dorës. ¦ Għal test stampat jew ittajpjat (gazzetti, reġistri militari): malajr, xejn x’tinstalla, kull linja marbuta maż-żona tagħha. Ma tafx taqra l-kitba bl-idejn.
+Plus lente (de 20 s à quelques minutes par page) mais meilleure sur une écriture difficile : un modèle d’IA qui tourne sur cet ordinateur (Ollama, plusieurs Go à télécharger une fois). Les lignes se relient ensuite à l’image (▤). ¦ Më i ngadaltë (nga 20 s deri në disa minuta për faqe) por më i mirë me shkrim të vështirë: një model IA që punon në këtë kompjuter (Ollama, disa GB për t’u shkarkuar një herë). Rreshtat lidhen pastaj me imazhin (▤). ¦ Iktar bil-mod (minn 20 s sa ftit minuti għal kull paġna) imma aħjar fuq kitba diffiċli: mudell tal-IA li jaħdem fuq dan il-kompjuter (Ollama, diversi GB x’tniżżel darba). Il-linji mbagħad jintrabtu mal-immaġni (▤).
+L’Atelier de transcription s’ouvre sur une image. ¦ Punishtja e transkriptimit hapet mbi një imazh. ¦ Il-Laboratorju tat-traskrizzjoni jinfetaħ fuq immaġni.
+L’Atelier de transcription n’est pas encore chargé. ¦ Punishtja e transkriptimit nuk është ngarkuar ende. ¦ Il-Laboratorju tat-traskrizzjoni għadu mhux mgħobbi.
+L’Atelier de transcription : l’image du dos à gauche, le texte à droite, lecture automatique, repérage des noms ¦ Punishtja e transkriptimit: imazhi i anës së pasme majtas, teksti djathtas, lexim automatik, gjetje emrash ¦ Il-Laboratorju tat-traskrizzjoni: l-immaġni tan-naħa ta’ wara fuq ix-xellug, it-test fuq il-lemin, qari awtomatiku, sejba tal-ismijiet
+Les transcriptions des actes (📜 Atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris. ¦ Transkriptimet e akteve (📜 Punishtja e transkriptimit) dhe të medias: çfarë vjen pas (ose para) fjalës së nisjes. Merren vetëm copat e dobishme të fjalive. ¦ It-traskrizzjonijiet tal-atti (📜 Laboratorju tat-traskrizzjoni) u tal-midja: x’jiġi wara (jew qabel) il-kelma tal-bidu. Jittieħdu biss il-biċċiet utli tas-sentenzi.
+atelier|Lire ¦ Lexo ¦ Aqra
+Après « ✍️ Lire l’écriture à la main (rapide) », les mots qui ressemblent à un mot connu (« décembe » → « décembre ») sont soulignés en violet : un clic, et tu choisis. Rien n’est changé sans toi. Le lexique : les mots des actes, ceux de « 📖 Aide à la lecture », et les noms, prénoms, lieux et métiers de ta base (sans les vivants ni les fiches confidentielles). ¦ Pas «✍️ Lexo shkrimin e dorës (shpejt)», fjalët që i ngjajnë një fjale të njohur («décembe» → «décembre») nënvizohen me vjollcë: një klikim dhe zgjedh ti. Asgjë nuk ndryshon pa ty. Fjalori: fjalët e akteve, ato të «📖 Ndihmë për leximin» dhe mbiemrat, emrat, vendet dhe zanatet e bazës sate (pa personat e gjallë dhe pa skedat konfidenciale). ¦ Wara “✍️ Aqra l-kitba bl-idejn (malajr)”, il-kliem li jixbah kelma magħrufa (“décembe” → “décembre”) jiġi ssottolinjat bil-vjola: klikk wieħed u tagħżel int. Xejn ma jinbidel mingħajrek. Il-lessiku: il-kliem tal-atti, dak ta’ “📖 Għajnuna għall-qari”, u l-kunjomijiet, l-ismijiet, il-postijiet u s-snajja’ tad-database tiegħek (mingħajr il-ħajjin u l-iskedi kunfidenzjali).
+Pour lire un acte : ouvre son image dans l’Atelier de transcription (« 📜 Ouvrir dans l’Atelier »), puis « ✨ Lire ▾ ». ¦ Për të lexuar një akt: hap imazhin e tij në Punishten e transkriptimit («📜 Hape në Punishte»), pastaj «✨ Lexo ▾». ¦ Biex taqra att: iftaħ l-immaġni tiegħu fil-Laboratorju tat-traskrizzjoni (“📜 Iftaħ fil-Laboratorju”), imbagħad “✨ Aqra ▾”.

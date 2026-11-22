@@ -334,7 +334,7 @@
                 const r = await api({what: m[1], id: m[2]});
                 return {rows: r.rows || [], o: {question: r.question || '', conclusion: r.conclusion || '', certainty: r.certainty || 'tocheck', title: str(r.question, 90) || i18n('Schéma de preuve')}, empty: i18n('Ce dossier n’a encore aucune ligne : ajoute des indices dans le dossier, ou ici à la main.')}; },
             {btn: 'Prendre ce dossier'}),
-        wordtree: appPanel('wordtree', '🌿 Les mots de mes transcriptions', 'Les transcriptions des actes (atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris.',
+        wordtree: appPanel('wordtree', '🌿 Les mots de mes transcriptions', 'Les transcriptions des actes (📜 Atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris.',
             `<label>${esc(i18n('Le mot de départ'))}<input type="text" data-lotc="root" maxlength="60" value="fils de" list="lotc-roots"><datalist id="lotc-roots">${['fils de', 'fille de', 'veuve de', 'veuf de', 'épouse de', 'époux de', 'natif de', 'demeurant à', 'parrain', 'marraine', 'feu'].map(w => `<option value="${esc(w)}">`).join('')}</datalist></label>
             <div class="lotc-two">${sel('dir', 'Ce qu’on montre', [['after', 'Ce qui suit'], ['before', 'Ce qui précède']], 'after')}${sel('depth', 'Profondeur', [2, 3, 4, 5].map(n => [n, pl(n, 'mot')]), 3)}</div>
             <label>${esc(i18n('Commune (dans le lieu ou le titre de l’acte)'))}<input type="text" data-lotc="place" maxlength="60" placeholder="${esc(i18n('Toutes'))}"></label>

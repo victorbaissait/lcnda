@@ -1,0 +1,71 @@
+fr ¦ sk ¦ nb
+# 📜 Atelier de transcription, vague 1 « Ranger » (barre courte, ✨ Lire ▾, numéros de ligne, symboles, nom unique)
+Langue du texte : sert à la lecture automatique, et « 📖 Aide à la lecture » s’ouvre sur cette langue ¦ Jazyk textu: slúži automatickému čítaniu a „📖 Pomoc s čítaním“ sa otvorí v tomto jazyku ¦ Tekstens språk: brukes ved automatisk lesing, og «📖 Lesehjelp» åpnes på dette språket
+Paroisse, commune ¦ Farnosť, obec ¦ Sogn, kommune
+Loupe ¦ Lupa ¦ Lupe
+Lire le texte de l’image : écriture à la main, texte imprimé, ou lecture approfondie par l’IA ¦ Prečítať text z obrázka: ručné písmo, tlačený text alebo dôkladné čítanie pomocou AI ¦ Les bildets tekst: håndskrift, trykt tekst eller grundig lesing med KI
+Zoom : {now}. Clic : {next} (puis {then}, {last}) ¦ Lupa: {now}. Kliknutie: {next} (potom {then}, {last}) ¦ Zoom: {now}. Klikk: {next} (så {then}, {last})
+Note (mot illisible, signature…) ¦ Poznámka (nečitateľné slovo, podpis…) ¦ Merknad (uleselig ord, underskrift…)
+La personne reste dans l’acte, sans fiche reliée ¦ Osoba zostáva v zázname, bez prepojenej karty ¦ Personen blir værende i dokumentet, uten koblet oppføring
+Relier… ¦ Prepojiť… ¦ Koble…
+Retirer de l’acte ¦ Odobrať zo záznamu ¦ Fjern fra dokumentet
+Mots connus ({lang}) ¦ Známe slová ({lang}) ¦ Kjente ord ({lang})
+Ouvrir dans 📖 Aide à la lecture ¦ Otvoriť v 📖 Pomoc s čítaním ¦ Åpne i 📖 Lesehjelp
+Image puis texte ¦ Obrázok, potom text ¦ Bilde og så tekst
+Texte seul ¦ Len text ¦ Bare tekst
+Recette « {name} » posée sur l’image ¦ Recept „{name}“ použitý na obrázok ¦ Oppskriften «{name}» lagt på bildet
+L’image est déjà comme au départ ¦ Obrázok je už ako na začiatku ¦ Bildet er allerede som fra start
+Image remise comme au départ ¦ Obrázok vrátený do pôvodného stavu ¦ Bildet tilbakestilt som fra start
+Mots : {n} ¦ Slová: {n} ¦ Ord: {n}
+À installer ¦ Na inštaláciu ¦ Må installeres
+Lire l’écriture à la main (rapide) ¦ Prečítať ručné písmo (rýchlo) ¦ Les håndskrift (raskt)
+Lire un texte imprimé ¦ Prečítať tlačený text ¦ Les trykt tekst
+Mieux voir ¦ Lepšie vidieť ¦ Se bedre
+Remettre l’image comme au départ ¦ Vrátiť obrázok do pôvodného stavu ¦ Tilbakestill bildet som fra start
+Cacher les numéros de ligne ¦ Skryť čísla riadkov ¦ Skjul linjenumrene
+Montrer les numéros de ligne ¦ Zobraziť čísla riadkov ¦ Vis linjenumrene
+Encre pâle ¦ Bledý atrament ¦ Blekt blekk
+contraste local + netteté ¦ miestny kontrast + ostrosť ¦ lokal kontrast + skarphet
+Papier jauni ou taché ¦ Zažltnutý alebo zašpinený papier ¦ Gulnet eller flekkete papir
+effacer le fond + canal bleu ¦ zmazať pozadie + modrý kanál ¦ fjern bakgrunnen + blå kanal
+Verso vu par transparence ¦ Rub presvitajúci papierom ¦ Baksiden som skinner gjennom
+miroir + seuil ¦ zrkadlo + prah ¦ speil + terskel
+Position ¦ Poloha ¦ Plassering
+Autres outils ¦ Ďalšie nástroje ¦ Andre verktøy
+Contraste local ¦ Miestny kontrast ¦ Lokal kontrast
+rayon ¦ polomer ¦ radius
+Canal rouge seul ¦ Len červený kanál ¦ Bare rød kanal
+Canal vert seul ¦ Len zelený kanál ¦ Bare grønn kanal
+Canal bleu seul ¦ Len modrý kanál ¦ Bare blå kanal
+Seuil noir et blanc (0 = sans) ¦ Prah čiernobielej (0 = bez) ¦ Svart-hvitt-terskel (0 = ingen)
+Niveaux (noir, blanc, gamma) ¦ Úrovne (čierna, biela, gama) ¦ Nivåer (svart, hvitt, gamma)
+Point noir ¦ Čierny bod ¦ Svartpunkt
+noir ¦ čierna ¦ svart
+Point blanc ¦ Biely bod ¦ Hvitpunkt
+blanc ¦ biela ¦ hvitt
+Gamma ¦ Gama ¦ Gamma
+Remettre l’image comme au départ (tous les réglages de l’image à zéro) ¦ Vrátiť obrázok do pôvodného stavu (všetky nastavenia obrázka na nulu) ¦ Tilbakestill bildet som fra start (alle bildeinnstillinger til null)
+Recettes ¦ Recepty ¦ Oppskrifter
+Des recettes en un clic, et tous les réglages de l’image : contraste local, netteté, canal, seuil, niveaux, redresser… ¦ Recepty na jedno kliknutie a všetky nastavenia obrázka: miestny kontrast, ostrosť, kanál, prah, úrovne, narovnanie… ¦ Oppskrifter med ett klikk, og alle bildeinnstillingene: lokal kontrast, skarphet, kanal, terskel, nivåer, rette opp…
+Tous les réglages ¦ Všetky nastavenia ¦ Alle innstillinger
+Montrer {label} ¦ Zobraziť {label} ¦ Vis {label}
+Une barre courte ; des recettes en un clic et les autres réglages dans le panneau « 🎚️ Mieux voir », rangés en trois rubriques ¦ Krátka lišta; recepty na jedno kliknutie a ostatné nastavenia v paneli „🎚️ Lepšie vidieť“, v troch oddieloch ¦ En kort linje; oppskrifter med ett klikk og de andre innstillingene i panelet «🎚️ Se bedre», i tre avsnitt
+Barre courte + « 🎚️ Mieux voir » (conseillé) ¦ Krátka lišta + „🎚️ Lepšie vidieť“ (odporúčané) ¦ Kort linje + «🎚️ Se bedre» (anbefalt)
+Barre complète ¦ Celá lišta ¦ Full linje
+Numéros de ligne dans la marge du texte (conseillé) ¦ Čísla riadkov na okraji textu (odporúčané) ¦ Linjenumre i tekstens marg (anbefalt)
+PERSONNALISER ¦ PRISPÔSOBIŤ ¦ TILPASS
+« 🔬 Lecture approfondie (IA) » sur une page déjà lue montre les deux textes côte à côte, et tu gardes le meilleur. Relis toujours : un modèle peut se tromper sur les noms. ¦ „🔬 Dôkladné čítanie (AI)“ na už prečítanej stránke ukáže oba texty vedľa seba a ty si necháš lepší. Vždy skontroluj: model sa môže pomýliť v menách. ¦ «🔬 Grundig lesing (KI)» på en side som allerede er lest, viser begge tekstene side om side, og du beholder den beste. Les alltid korrektur: en modell kan ta feil av navn.
+Atelier de transcription : barre d’outils ¦ Dielňa prepisu: panel nástrojov ¦ Transkripsjonsverksted: verktøylinje
+La barre au-dessus de l’image de l’acte : une barre courte et le panneau « 🎚️ Mieux voir » (conseillé), ou la barre complète ; les numéros de ligne du texte ; les boutons et réglages montrés, cachés et rangés. Aussi avec « ⚙️ » dans l’outil. ¦ Lišta nad obrázkom záznamu: krátka lišta a panel „🎚️ Lepšie vidieť“ (odporúčané), alebo celá lišta; čísla riadkov textu; tlačidlá a nastavenia zobrazené, skryté a zoradené. Aj cez „⚙️“ v nástroji. ¦ Linjen over dokumentets bilde: en kort linje og panelet «🎚️ Se bedre» (anbefalt), eller den fulle linjen; tekstens linjenumre; knapper og innstillinger vist, skjult og ordnet. Også med «⚙️» i verktøyet.
+Dans l’Atelier de transcription (Listes → Outils de modification → 📜 Atelier de transcription, ou « 📜 Ouvrir dans l’Atelier » sur une image) : « ✨ Lire ▾ » → « ✍️ Lire l’écriture à la main (rapide) ». Tout se passe sur cet ordinateur, sans Internet. ¦ V Dielni prepisu (Zoznamy → Nástroje úprav → 📜 Dielňa prepisu, alebo „📜 Otvoriť v Dielni“ pri obrázku): „✨ Prečítať ▾“ → „✍️ Prečítať ručné písmo (rýchlo)“. Všetko prebieha na tomto počítači, bez internetu. ¦ I Transkripsjonsverkstedet (Lister → Redigeringsverktøy → 📜 Transkripsjonsverksted, eller «📜 Åpne i Verkstedet» på et bilde): «✨ Les ▾» → «✍️ Les håndskrift (raskt)». Alt skjer på denne datamaskinen, uten Internett.
+Ensuite, dans l’Atelier de transcription : « ✨ Lire ▾ » → « 🔬 Lecture approfondie (IA) » sur une page déjà lue montre les deux lectures côte à côte, et tu gardes la meilleure. ¦ Potom v Dielni prepisu: „✨ Prečítať ▾“ → „🔬 Dôkladné čítanie (AI)“ na už prečítanej stránke ukáže obe čítania vedľa seba a ty si necháš lepšie. ¦ Deretter, i Transkripsjonsverkstedet: «✨ Les ▾» → «🔬 Grundig lesing (KI)» på en side som allerede er lest, viser begge lesingene side om side, og du beholder den beste.
+Quelques secondes par page, sur cet ordinateur. Toute la page ou la zone choisie (▭) ; chaque ligne est reliée à sa zone de l’image, les mots peu sûrs surlignés. S’installe une fois (Réglages). ¦ Pár sekúnd na stránku, na tomto počítači. Celá stránka alebo vybraná oblasť (▭); každý riadok je prepojený so svojou oblasťou obrázka, neisté slová zvýraznené. Inštaluje sa raz (Nastavenia). ¦ Noen sekunder per side, på denne datamaskinen. Hele siden eller det valgte området (▭); hver linje kobles til sitt område i bildet, usikre ord uthevet. Installeres én gang (Innstillinger).
+Pour un texte imprimé ou tapé (journaux, fiches matricules) : rapide, rien à installer, chaque ligne reliée à sa zone. Ne sait pas lire l’écriture à la main. ¦ Pre tlačený alebo písaný strojom text (noviny, vojenské kmeňové listy): rýchle, nič na inštaláciu, každý riadok prepojený so svojou oblasťou. Nevie čítať ručné písmo. ¦ For trykt eller maskinskrevet tekst (aviser, militære ruller): raskt, ingenting å installere, hver linje koblet til sitt område. Kan ikke lese håndskrift.
+Plus lente (de 20 s à quelques minutes par page) mais meilleure sur une écriture difficile : un modèle d’IA qui tourne sur cet ordinateur (Ollama, plusieurs Go à télécharger une fois). Les lignes se relient ensuite à l’image (▤). ¦ Pomalšie (od 20 s do niekoľkých minút na stránku), ale lepšie na ťažké písmo: model AI, ktorý beží na tomto počítači (Ollama, niekoľko GB na stiahnutie raz). Riadky sa potom prepoja s obrázkom (▤). ¦ Tregere (fra 20 s til noen minutter per side), men bedre på vanskelig håndskrift: en KI-modell som kjører på denne datamaskinen (Ollama, flere GB å laste ned én gang). Linjene kobles deretter til bildet (▤).
+L’Atelier de transcription s’ouvre sur une image. ¦ Dielňa prepisu sa otvára nad obrázkom. ¦ Transkripsjonsverkstedet åpnes på et bilde.
+L’Atelier de transcription n’est pas encore chargé. ¦ Dielňa prepisu ešte nie je načítaná. ¦ Transkripsjonsverkstedet er ikke lastet ennå.
+L’Atelier de transcription : l’image du dos à gauche, le texte à droite, lecture automatique, repérage des noms ¦ Dielňa prepisu: obrázok rubu vľavo, text vpravo, automatické čítanie, vyhľadanie mien ¦ Transkripsjonsverkstedet: baksidens bilde til venstre, teksten til høyre, automatisk lesing, navnesøk
+Les transcriptions des actes (📜 Atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris. ¦ Prepisy záznamov (📜 Dielňa prepisu) a médií: čo nasleduje po východiskovom slove (alebo mu predchádza). Berú sa len užitočné kúsky viet. ¦ Transkripsjoner av dokumenter (📜 Transkripsjonsverksted) og medier: det som følger etter (eller kommer før) startordet. Bare de nyttige setningsbitene tas med.
+atelier|Lire ¦ Prečítať ¦ Les
+Après « ✍️ Lire l’écriture à la main (rapide) », les mots qui ressemblent à un mot connu (« décembe » → « décembre ») sont soulignés en violet : un clic, et tu choisis. Rien n’est changé sans toi. Le lexique : les mots des actes, ceux de « 📖 Aide à la lecture », et les noms, prénoms, lieux et métiers de ta base (sans les vivants ni les fiches confidentielles). ¦ Po „✍️ Prečítať ručné písmo (rýchlo)“ sú slová podobné známemu slovu („décembe“ → „décembre“) podčiarknuté fialovo: jedno kliknutie a vyberieš si. Bez teba sa nič nezmení. Slovník: slová zo záznamov, z „📖 Pomoc s čítaním“ a priezviská, mená, miesta a povolania z tvojej databázy (bez žijúcich osôb a dôverných kariet). ¦ Etter «✍️ Les håndskrift (raskt)» blir ord som ligner et kjent ord («décembe» → «décembre») understreket med lilla: ett klikk, og du velger. Ingenting endres uten deg. Ordlisten: ordene i dokumentene, ordene i «📖 Lesehjelp» og etternavn, fornavn, steder og yrker i databasen din (uten levende personer og konfidensielle oppføringer).
+Pour lire un acte : ouvre son image dans l’Atelier de transcription (« 📜 Ouvrir dans l’Atelier »), puis « ✨ Lire ▾ ». ¦ Ako prečítať záznam: otvor jeho obrázok v Dielni prepisu („📜 Otvoriť v Dielni“), potom „✨ Prečítať ▾“. ¦ Slik leser du et dokument: åpne bildet i Transkripsjonsverkstedet («📜 Åpne i Verkstedet»), deretter «✨ Les ▾».

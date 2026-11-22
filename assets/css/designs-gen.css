@@ -5468,6 +5468,21 @@
 :root[data-lc-density] .h-tx-better .h-tx-pair{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-better .h-tx-chanw{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-better .h-tx-rub-act{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-readpanel{padding:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-readpanel{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-tools .h-tx-readpanel .h-tx-readopt{gap:calc(2px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-tools .h-tx-readpanel .h-tx-readopt{padding:calc(8px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-readt{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-readmore{padding:calc(6px * var(--lc-sp)) calc(4px * var(--lc-sp)) calc(2px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-readmore{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-tools .h-tx-readpanel .h-tx-readline{padding:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-readlang{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-readlang{padding:0 calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-readpanel .h-tx-useenh{padding:0 calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-better .h-tx-recipes{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-better .h-tx-recipe{gap:calc(2px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-better .h-tx-recipe{padding:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-better .h-tx-allt{padding-top:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-better .h-tx-rub-act button{padding:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-better button{padding:calc(3px * var(--lc-sp)) calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-useenh{padding:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}

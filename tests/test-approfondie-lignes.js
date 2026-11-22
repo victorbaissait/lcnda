@@ -233,7 +233,9 @@ $pdo->exec("INSERT INTO media(title, media_type, filename) VALUES('Naissance Gar
         out.simpleUndo = (await zonesNow()).rects.length;
         // 390 px
         await p.setViewportSize({ width: 390, height: 844 }); await sleep(400);
-        out.narrow = await p.evaluate(() => { const b = document.querySelector('dialog.h-tx-dlg [data-tx-cmd="lines"]'); const r = b.getBoundingClientRect(); return document.documentElement.scrollWidth <= 392 && r.width > 0; });
+        // « ▤ Relier les lignes à l'image » est dans le menu « ✨ Lire ▾ » (vague 1) : on l'ouvre, et le bouton reste dans l'écran
+        await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="readmenu"]').click()); await sleep(200);
+        out.narrow = await p.evaluate(() => { const b = document.querySelector('dialog.h-tx-dlg [data-tx-cmd="lines"]'); const r = b.getBoundingClientRect(); return document.documentElement.scrollWidth <= 392 && r.width > 0 && r.left >= 0 && r.right <= 390; });
         out.errs = errs;
     } finally { await browser.close(); proc.kill(); fake.close(); fs.rmSync(tmp, { recursive: true, force: true }); }
 }
