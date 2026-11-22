@@ -1,0 +1,192 @@
+fr ¦ ru ¦ uk
+# Zone « diagrammes-lot-a » : tableau de quartiers, variantes d’un nom, boucles d’implexe, double éventail, nœud papillon, réseau « toute la famille », barres croisées, cercles de parenté, dates incertaines, pyramide d’un recensement, tableau périodique (heritage-diagram-lot-a.js, lib/diagram_lot_a.php)
+(deviné) ¦ (предположено) ¦ (припущено)
+1 (enfants) ¦ 1 (дети) ¦ 1 (діти)
+1 (parents) ¦ 1 (родители) ¦ 1 (батьки)
+16 quartiers ¦ 16 гербов предков ¦ 16 гербів предків
+20 ans ¦ 20 лет ¦ 20 років
+32 quartiers ¦ 32 герба предков ¦ 32 герби предків
+8 quartiers (arrière-grands-parents) ¦ 8 гербов (прадеды и прабабушки) ¦ 8 гербів (прадіди і прабабусі)
+Actes comptés ¦ Учитываемые записи ¦ Враховані записи
+Ajoute les ancêtres (n° Sosa, nom) et leurs armoiries. ¦ Добавь предков (№ Соса, имя) и их гербы. ¦ Додай предків (№ Соса, ім’я) та їхні герби.
+Ajoute les formes du nom : la forme, ses années, le nombre d’actes. ¦ Добавь формы фамилии: форма, годы, число записей. ¦ Додай форми прізвища: форма, роки, кількість записів.
+Ajoute les personnes recensées : âge, sexe, année. ¦ Добавь людей из переписи: возраст, пол, год. ¦ Додай людей із перепису: вік, стать, рік.
+Ancêtre à trouver ¦ Предок, которого нужно найти ¦ Предок, якого треба знайти
+Ancêtres pris dans ta base : {n} (armoiries : {k}). ¦ Предков из твоей базы: {n} (гербов: {k}). ¦ Предків із твоєї бази: {n} (гербів: {k}).
+Arbre des variantes (formes du nom : {n}). ¦ Дерево вариантов (формы фамилии: {n}). ¦ Дерево варіантів (форми прізвища: {n}).
+Arbre des variantes d’un nom ¦ Дерево вариантов фамилии ¦ Дерево варіантів прізвища
+Armoiries (nom) ¦ Герб (название) ¦ Герб (назва)
+Au survol seulement ¦ Только при наведении ¦ Лише при наведенні
+Aucun ancêtre connu à cette génération. ¦ В этом поколении нет известных предков. ¦ У цьому поколінні немає відомих предків.
+Aucun lien entre les couples de ce groupe. ¦ Между парами этой группы нет связей. ¦ Між парами цієї групи немає зв’язків.
+Aucun recensement dans ta base ¦ В твоей базе нет переписей ¦ У твоїй базі немає переписів
+Aucun âge lisible dans ce recensement. ¦ В этой переписи нет читаемого возраста. ¦ У цьому переписі немає читабельного віку.
+Aucune forme trouvée pour ce nom. ¦ Для этой фамилии формы не найдены. ¦ Для цього прізвища форм не знайдено.
+Avec au moins une source ¦ Хотя бы с одним источником ¦ Принаймні з одним джерелом
+Axe des années ¦ Ось лет ¦ Вісь років
+Barres croisées (UpSet) ¦ Перекрёстные столбцы (UpSet) ¦ Перехресні стовпці (UpSet)
+Barres croisées (ensembles : {n}, combinaisons montrées : {k}). ¦ Перекрёстные столбцы (множеств: {n}, показано сочетаний: {k}). ¦ Перехресні стовпці (множин: {n}, показано поєднань: {k}).
+Blason absent ¦ Герба нет ¦ Герба немає
+Blasonnement en note (en bas) ¦ Описание герба в примечании (внизу) ¦ Опис герба в примітці (унизу)
+Boucles d’implexe (chemins : {n}), F = {f}. ¦ Петли импликса (путей: {n}), F = {f}. ¦ Петлі імплексу (шляхів: {n}), F = {f}.
+Boucles plus lointaines pas dessinées : {n} (comptées dans F). ¦ Дальние петли не нарисованы: {n} (учтены в F). ¦ Дальші петлі не намальовано: {n} (враховано в F).
+Branche (paternelle, maternelle) ¦ Ветвь (отцовская, материнская) ¦ Гілка (батькова, материна)
+Branche maternelle ¦ Материнская ветвь ¦ Материна гілка
+Branche paternelle ¦ Отцовская ветвь ¦ Батькова гілка
+Branche « {name} » ¦ Ветвь «{name}» ¦ Гілка «{name}»
+Cases façon tableau périodique ¦ Клетки как в таблице Менделеева ¦ Клітинки як у періодичній таблиці
+Cases vides pour les ancêtres à trouver ¦ Пустые клетки для ненайденных предков ¦ Порожні клітинки для ненайдених предків
+Ce qu’on dessine ¦ Что рисуется ¦ Що малюється
+Cercles (2 à 4 ensembles) ¦ Круги (от 2 до 4 множеств) ¦ Кола (від 2 до 4 множин)
+Cercles de parenté autour de {name} (personnes : {n}). ¦ Круги родства вокруг {name} (человек: {n}). ¦ Кола спорідненості навколо {name} (осіб: {n}).
+Chemins trouvés : {n} (F = {f}). ¦ Найдено путей: {n} (F = {f}). ¦ Знайдено шляхів: {n} (F = {f}).
+Chercher les boucles ¦ Искать петли ¦ Шукати петлі
+Chiffre (couleur, éventails) ¦ Число (цвет, веера) ¦ Число (колір, віяла)
+Choisis de 2 à 8 ensembles (là : {n}). ¦ Выбери от 2 до 8 множеств (сейчас: {n}). ¦ Обери від 2 до 8 множин (зараз: {n}).
+Choisis un groupe de noms ou écris un nom. ¦ Выбери группу фамилий или впиши фамилию. ¦ Обери групу прізвищ або впиши прізвище.
+Choisis un recensement (commune et année). ¦ Выбери перепись (место и год). ¦ Обери перепис (місце і рік).
+Choisis une personne (« Depuis l’app ») ou écris les boucles à la main. ¦ Выбери человека («Из приложения») или впиши петли вручную. ¦ Обери особу («З застосунку») або впиши петлі вручну.
+Coefficient aussi en fraction ¦ Коэффициент также дробью ¦ Коефіцієнт також дробом
+Coefficient de consanguinité de {name} : F = {f} ¦ Коэффициент инбридинга {name}: F = {f} ¦ Коефіцієнт інбридингу {name}: F = {f}
+Combinaisons montrées (les plus grandes) ¦ Показанные сочетания (самые большие) ¦ Показані поєднання (найбільші)
+Combinaisons pas montrées : {n} ¦ Не показано сочетаний: {n} ¦ Не показано поєднань: {n}
+Commune (titre) ¦ Населённый пункт (заголовок) ¦ Населений пункт (заголовок)
+Comparer avec le recensement de ¦ Сравнить с переписью ¦ Порівняти з переписом
+Consanguinité de l’ancêtre ¦ Инбридинг предка ¦ Інбридинг предка
+Couleur de l’écu (sans image) ¦ Цвет щита (без изображения) ¦ Колір щита (без зображення)
+Couleur des parts ¦ Цвет частей ¦ Колір частин
+Couleur du côté maternel ¦ Цвет материнской стороны ¦ Колір материнської сторони
+Couleurs des branches ¦ Цвета ветвей ¦ Кольори гілок
+Couple ¦ Пара ¦ Пара
+Critères de mauvaise forme. ¦ Неверные критерии. ¦ Неправильні критерії.
+Côté (paternel, maternel, branches) ¦ Сторона (отца, матери, ветви) ¦ Сторона (батька, матері, гілки)
+Côté maternel ¦ Материнская сторона ¦ Материнська сторона
+Côté paternel ¦ Отцовская сторона ¦ Батьківська сторона
+Date incertaine (fourchette) ¦ Неточная дата (интервал) ¦ Неточна дата (проміжок)
+Date inconnue ¦ Дата неизвестна ¦ Дата невідома
+Dates sous le nom ¦ Даты под именем ¦ Дати під ім’ям
+De la famille ¦ Из семьи ¦ З родини
+De la famille (oui) ¦ Из семьи (да) ¦ З родини (так)
+De la mère vers l’ancêtre ¦ От матери к предку ¦ Від матері до предка
+Degrés montrés (jusqu’à) ¦ Показанные степени (до) ¦ Показані ступені (до)
+Dessin de la fourchette ¦ Рисунок интервала ¦ Малюнок проміжку
+Deux éventails ¦ Два веера ¦ Два віяла
+Deviner d’où vient chaque forme (date et ressemblance) ¦ Угадывать происхождение каждой формы (дата и сходство) ¦ Вгадувати походження кожної форми (дата й подібність)
+Diagramme de Venn (2 à 8 ensembles) ¦ Диаграмма Венна (от 2 до 8 множеств) ¦ Діаграма Венна (від 2 до 8 множин)
+Diagramme de Venn : {names}. ¦ Диаграмма Венна: {names}. ¦ Діаграма Венна: {names}.
+Double éventail (ascendants : {up}, descendants : {down}). ¦ Двойной веер (предков: {up}, потомков: {down}). ¦ Подвійне віяло (предків: {up}, нащадків: {down}).
+Du père vers l’ancêtre ¦ От отца к предку ¦ Від батька до предка
+Décédé ou inconnu ¦ Умер или неизвестно ¦ Помер або невідомо
+En accordéon (branches qu’on plie) ¦ Гармошка (сворачиваемые ветви) ¦ Гармошка (згортані гілки)
+En cercles (un cercle par degré) ¦ Кругами (один круг на степень) ¦ Колами (одне коло на ступінь)
+En vie ou non ¦ Жив или нет ¦ Живий чи ні
+En {year} (contour) ¦ В {year} г. (контур) ¦ У {year} р. (контур)
+Ensemble {x} ¦ Множество {x} ¦ Множина {x}
+Faire ressortir la famille ¦ Выделить семью ¦ Виділити родину
+Formes prises dans ta base : {n}. ¦ Форм из твоей базы: {n}. ¦ Форм із твоєї бази: {n}.
+Groupe de noms ¦ Группа фамилий ¦ Група прізвищ
+Générations : {n} côté père, {m} côté mère ¦ Поколения: {n} по отцу, {m} по матери ¦ Покоління: {n} по батькові, {m} по матері
+Il faut de 2 à 8 ensembles. ¦ Нужно от 2 до 8 множеств. ¦ Потрібно від 2 до 8 множин.
+Image (media/…) ¦ Изображение (media/…) ¦ Зображення (media/…)
+Initiales du prénom et du nom ¦ Инициалы имени и фамилии ¦ Ініціали імені та прізвища
+La branche ¦ Ветвь ¦ Гілка
+La personne étudiée ¦ Изучаемый человек ¦ Досліджувана особа
+Le calcul n’est pas prêt. ¦ Расчёт не готов. ¦ Розрахунок не готовий.
+Le chemin entre deux personnes ¦ Путь между двумя людьми ¦ Шлях між двома особами
+Le nom (2 lettres) ¦ Фамилия (2 буквы) ¦ Прізвище (2 літери)
+Le plus proche seulement ¦ Только ближайший ¦ Лише найближчий
+Le prénom (2 lettres) ¦ Имя (2 буквы) ¦ Ім’я (2 літери)
+Le recensement de {place} ¦ Перепись: {place} ¦ Перепис: {place}
+Les 8, 16 ou 32 ancêtres d’une génération, chacun avec son blason ; un écu vide : armoiries à trouver. ¦ 8, 16 или 32 предка одного поколения, каждый со своим гербом; пустой щит — герб ещё не найден. ¦ 8, 16 або 32 предки одного покоління, кожен зі своїм гербом; порожній щит — герб ще не знайдено.
+Les boucles d’implexe (entre les deux parents) ¦ Петли импликса (между родителями) ¦ Петлі імплексу (між батьками)
+Les boucles d’implexe de {name} ¦ Петли импликса: {name} ¦ Петлі імплексу: {name}
+Les deux parents de cette personne ne sont pas connus. ¦ Оба родителя этого человека неизвестны. ¦ Обоє батьків цієї особи невідомі.
+Les ensembles (2 à 8) : A, B, C… H ¦ Множества (от 2 до 8): A, B, C… H ¦ Множини (від 2 до 8): A, B, C… H
+Les formes du nom ¦ Формы фамилии ¦ Форми прізвища
+Les formes du nom {name} ¦ Формы фамилии {name} ¦ Форми прізвища {name}
+Les noms du groupe (ou écrits pareil) et leurs variantes notées, avec leurs années et le nombre d’actes. ¦ Фамилии группы (или так же пишущиеся) и их записанные варианты, с годами и числом записей. ¦ Прізвища групи (або так само написані) та їхні записані варіанти, з роками й кількістю записів.
+Les quartiers de {name} ¦ Гербы предков: {name} ¦ Герби предків: {name}
+Les seize quartiers de {name} ¦ Шестнадцать гербов предков: {name} ¦ Шістнадцять гербів предків: {name}
+Liens pris dans l’app : {n}. ¦ Связей из приложения: {n}. ¦ Зв’язків із застосунку: {n}.
+Losange pour les dates exactes ¦ Ромб для точных дат ¦ Ромб для точних дат
+Montrer le calcul (½ puissance n) ¦ Показать расчёт (½ в степени n) ¦ Показати розрахунок (½ у степені n)
+Montrer l’incertitude des dates ¦ Показывать неточность дат ¦ Показувати неточність дат
+Naissances et décès (qui vivait en …) ¦ Рождения и смерти (кто жил в …) ¦ Народження і смерті (хто жив у …)
+Nom inconnu ¦ Фамилия неизвестна ¦ Прізвище невідоме
+Nom sous l’écu ¦ Имя под щитом ¦ Ім’я під щитом
+Nom trop long (80 lettres au plus). ¦ Слишком длинная фамилия (не более 80 букв). ¦ Задовге прізвище (не більше 80 літер).
+Nombre d’actes sous la forme ¦ Число записей под формой ¦ Кількість записів під формою
+Noms les plus portés ¦ Самые частые фамилии ¦ Найпоширеніші прізвища
+N° Sosa ¦ № Соса ¦ № Соса
+N° Sosa (ascendants, éventails) ¦ № Соса (предки, веера) ¦ № Соса (предки, віяла)
+Nœud papillon (père à gauche, mère à droite) ¦ Бабочка (отец слева, мать справа) ¦ Метелик (батько ліворуч, мати праворуч)
+Ordre des combinaisons ¦ Порядок сочетаний ¦ Порядок поєднань
+Ou un nom ¦ Или фамилия ¦ Або прізвище
+Par nombre d’ensembles ¦ По числу множеств ¦ За кількістю множин
+Parent (descendants, éventails) ¦ Родитель (потомки, веера) ¦ Батько чи мати (нащадки, віяла)
+Personne cachée ¦ Скрытый человек ¦ Прихована особа
+Personnes recensées : {n} ¦ Учтено людей: {n} ¦ Переписано осіб: {n}
+Personnes recensées : {n} en {y1}, {m} en {y2} ¦ Учтено людей: {n} в {y1} г., {m} в {y2} г. ¦ Переписано осіб: {n} у {y1} р., {m} у {y2} р.
+Personnes recensées prises dans ta base : {n}. ¦ Людей из переписи из твоей базы: {n}. ¦ Осіб із перепису з твоєї бази: {n}.
+Portraits (arbre dessiné, nœud papillon) ¦ Портреты (рисованное дерево, бабочка) ¦ Портрети (мальоване дерево, метелик)
+Pyramide du recensement de {year} (personnes : {n}). ¦ Пирамида переписи {year} г. (человек: {n}). ¦ Піраміда перепису {year} р. (осіб: {n}).
+Ressortent : les personnes reliées à une fiche (ou au groupe choisi). ¦ Выделены: люди, связанные с карточкой (или с выбранной группой). ¦ Виділено: особи, пов’язані з карткою (або з обраною групою).
+Selon le nombre de descendants ¦ По числу потомков ¦ За кількістю нащадків
+Selon le tableau ¦ По таблице ¦ За таблицею
+Ses ancêtres au-dessus (place Sosa), ses descendants au-dessous (sous leur parent) ; le chiffre : l’âge au décès. ¦ Предки сверху (место Соса), потомки снизу (под родителем); число — возраст смерти. ¦ Предки згори (місце Соса), нащадки знизу (під батьком чи матір’ю); число — вік смерті.
+Ses ancêtres de la génération choisie (ordre Sosa) et les armoiries reliées à chacun (Listes → Armoiries). ¦ Предки выбранного поколения (порядок Соса) и связанные с ними гербы (Списки → Гербы). ¦ Предки обраного покоління (порядок Соса) і пов’язані з ними герби (Списки → Герби).
+Seulement l’ancêtre commun le plus proche ¦ Только ближайший общий предок ¦ Лише найближчий спільний предок
+Sexe inconnu (pas dans la pyramide) : {n} ¦ Пол неизвестен (вне пирамиды): {n} ¦ Стать невідома (поза пірамідою): {n}
+Sosa {n} : ancêtre à trouver ¦ Соса {n}: предок не найден ¦ Соса {n}: предка не знайдено
+Source, note ¦ Источник, примечание ¦ Джерело, примітка
+Sources sous la forme ¦ Источники под формой ¦ Джерела під формою
+Tableau de quartiers (armoiries des ancêtres) ¦ Таблица гербов предков ¦ Таблиця гербів предків
+Tableau de quartiers ({n}), armoiries connues : {k}. ¦ Таблица гербов ({n}), известных гербов: {k}. ¦ Таблиця гербів ({n}), відомих гербів: {k}.
+Tableau périodique : ancêtres trouvés {found} / {total} ({pct} %). ¦ Периодическая таблица: найдено предков {found} / {total} ({pct} %). ¦ Періодична таблиця: знайдено предків {found} / {total} ({pct} %).
+Taux de recherche (%) ¦ Степень изученности (%) ¦ Рівень дослідженості (%)
+Tous les ancêtres répétés ¦ Все повторяющиеся предки ¦ Усі повторювані предки
+Tous les chemins du père et de la mère vers un même ancêtre (filiations biologiques) et le coefficient de consanguinité (méthode de Wright). ¦ Все пути отца и матери к одному предку (биологическое родство) и коэффициент инбридинга (метод Райта). ¦ Усі шляхи батька й матері до одного предка (біологічне походження) і коефіцієнт інбридингу (метод Райта).
+Toute la base (qui vivait en …) ¦ Вся база (кто жил в …) ¦ Уся база (хто жив у …)
+Toute la base (qui vivait l’année choisie) ou un recensement (les âges écrits ce jour-là). ¦ Вся база (кто жил в выбранный год) или перепись (возраст, записанный в тот день). ¦ Уся база (хто жив обраного року) або перепис (вік, записаний того дня).
+Toute la famille, un point par couple ¦ Вся семья, одна точка на пару ¦ Уся родина, одна точка на пару
+Trop de critères. ¦ Слишком много критериев. ¦ Забагато критеріїв.
+Trop d’ensembles. ¦ Слишком много множеств. ¦ Забагато множин.
+Trouvé chez le notaire (successions, inventaires) ¦ Найден у нотариуса (наследства, описи) ¦ Знайдено в нотаріуса (спадщини, описи)
+Trouvé dans les sources militaires (poilus) ¦ Найден в военных источниках (солдаты Первой мировой) ¦ Знайдено у військових джерелах (солдати Першої світової)
+Trouvé dans un recensement ¦ Найден в переписи ¦ Знайдено в переписі
+Un chiffre (colonne « Chiffre ») ¦ Число (столбец «Число») ¦ Число (стовпець «Число»)
+Un recensement (commune, année) ¦ Перепись (место, год) ¦ Перепис (місце, рік)
+Un recensement (âges écrits) ¦ Перепись (записанный возраст) ¦ Перепис (записаний вік)
+Une par branche ¦ Один на ветвь ¦ Один на гілку
+Une par forme ¦ Один на форму ¦ Один на форму
+Une seule source : couleur de l’ensemble ¦ Один источник: цвет множества ¦ Одне джерело: колір множини
+Une source précise ¦ Конкретный источник ¦ Конкретне джерело
+Vérifie le groupe de personnes. ¦ Проверь группу людей. ¦ Перевір групу осіб.
+actes : {n} ¦ записей: {n} ¦ записів: {n}
+vient de {name} ¦ происходит от {name} ¦ походить від {name}
+{label} (famille) : {n} ¦ {label} (семья): {n} ¦ {label} (родина): {n}
+{names} (seulement) : {n} ¦ {names} (только): {n} ¦ {names} (лише): {n}
+{name} : armoiries pas encore trouvées ¦ {name}: герб ещё не найден ¦ {name}: герб ще не знайдено
+{name} : {n} en tout ¦ {name}: всего {n} ¦ {name}: усього {n}
+{place}, {year} ¦ {place}, {year} г. ¦ {place}, {year} р.
+« vers » : plus ou moins ¦ «около»: плюс-минус ¦ «близько»: плюс-мінус
+Âge (recensement) ¦ Возраст (перепись) ¦ Вік (перепис)
+Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Писать вид связи на линии (имя ребёнка…) ¦ Писати вид зв’язку на лінії (ім’я дитини…)
+Écrits s’il y a la place ¦ Подписаны, если есть место ¦ Підписані, якщо є місце
+Écu vide ¦ Пустой щит ¦ Порожній щит
+Épaisseur selon le nombre d’actes ¦ Толщина по числу записей ¦ Товщина за кількістю записів
+— Aucun (le nom écrit à côté) — ¦ — Нет (фамилия, вписанная рядом) — ¦ — Немає (прізвище, вписане поруч) —
+— Rien — ¦ — Ничего — ¦ — Нічого —
+🌿 Les formes d’un nom de ma base ¦ 🌿 Формы фамилии из моей базы ¦ 🌿 Форми прізвища з моєї бази
+🔁 Entre les deux parents de… ¦ 🔁 Между родителями… ¦ 🔁 Між батьками…
+🔺 Les personnes de ma base ¦ 🔺 Люди из моей базы ¦ 🔺 Люди з моєї бази
+🛡 Les quartiers d’une personne de ma base ¦ 🛡 Гербы предков человека из моей базы ¦ 🛡 Герби предків особи з моєї бази
+Choisis de 2 à 8 ensembles : chaque zone compte les personnes de ces ensembles-là seulement. Dès 5 ensembles : barres croisées. ¦ Выбери от 2 до 8 множеств: каждая зона считает людей только из этих множеств. От 5 множеств — перекрёстные столбцы. ¦ Обери від 2 до 8 множин: кожна зона рахує осіб лише з цих множин. Від 5 множин — перехресні стовпці.
+Les témoins, parrains et marraines des actes ; ou toute la famille, un point par couple, reliés par leurs enfants. ¦ Свидетели, крёстные из записей; или вся семья, точка на пару, связанные детьми. ¦ Свідки й хрещені із записів; або вся родина, точка на пару, пов’язані дітьми.
+Nom de l’enfant sur le trait ¦ Имя ребёнка на линии ¦ Ім’я дитини на лінії
+Par nom de famille ¦ По фамилии ¦ За прізвищем
+Par siècle (du mariage) ¦ По веку (брака) ¦ За століттям (шлюбу)
+Un point par couple ¦ Одна точка на пару ¦ Одна точка на пару
+Un point par personne ¦ Одна точка на человека ¦ Одна точка на особу
+🕸 Les liens de ma base ¦ 🕸 Связи из моей базы ¦ 🕸 Зв’язки з моєї бази
+Quartiers ¦ Гербы предков ¦ Герби предків

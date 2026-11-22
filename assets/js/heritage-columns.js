@@ -22,7 +22,7 @@
         last_name: 'Nom', middle_name: 'Deuxième prénom', gender: 'Sexe', birth_year: 'Année de naissance', death_year: 'Année de décès', birth_date: 'Naissance', death_date: 'Décès', marr_date: 'Mariage', birth_place: 'Lieu de naissance',
         death_place: 'Lieu de décès', county: 'Département', country: 'Pays', state: 'Région', latitude: 'Latitude', longitude: 'Longitude', occupation: 'Métier', reference_number: 'Référence', familysearch_id: 'FamilySearch',
         duration_seconds: 'Durée (s)', format: 'Format', date_calendar: 'Calendrier', type: 'Type', person: 'Personne', people: 'Personnes', address: 'Adresse', postal_code: 'Code postal', city: 'Ville', email: 'Courriel', phone: 'Téléphone',
-        sosa_number: 'N° SOSA', status: 'Statut', category: 'Catégorie', amount: 'Montant', vendor: 'Fournisseur', destinataire: 'Destinataire', organisme: 'Organisme', objet: 'Objet', statut: 'Statut', event_count: 'Événements', surname_group: 'Groupe'};
+        sosa_number: 'N° SOSA', status: 'Statut', category: 'Catégorie', amount: 'Montant', vendor: 'Fournisseur', destinataire: 'Destinataire', organisme: 'Organisme', objet: 'Objet', statut: 'Statut', event_count: 'Événements', surname_group: 'Groupe', reliability: '🛡 Fiabilité'};
     const label = k => LABELS[k] || k.replace(/_/g, ' ').replace(/^./, c => c.toUpperCase());
     /** Colonnes calculées, en plus des champs des lignes. */
     const VIRTUAL = {media: {format: row => String(row.filename || '').split('.').pop().toUpperCase()}, signatures: {format: row => String(row.filename || '').split('.').pop().toUpperCase()}};

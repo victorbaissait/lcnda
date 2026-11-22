@@ -1,0 +1,71 @@
+fr ¦ is
+# 🔎 Poser une question, suite (lib/question_plus.php, assets/js/heritage-questions-plus.js) : fautes, dates, « moi », négations, OU, renvois, ⌘K
+« {a} » lu « {b} » ¦ „{a}“ lesið sem „{b}“
+vers {y} ({a}-{b}) ¦ um {y} ({a}-{b})
+dans les années {y} ({a}-{b}) ¦ á árunum {y} ({a}-{b})
+« moi » = la personne de départ : {name} ¦ „ég“ = upphafsmanneskjan: {name}
+qui est : {name} ¦ hver er: {name}
+« {a} » compris comme {b} ¦ „{a}“ skilið sem {b}
+dossiers de succession ¦ dánarbú
+Aucun dossier de succession dans cette généalogie. ¦ Ekkert dánarbú í þessari ættfræði.
+courriers sans réponse ¦ ósvöruð bréf
+Courriers aux héritiers sans réponse : {n}. ¦ Ósvöruð bréf til erfingja: {n}.
+Aucun courrier de dossier n’attend de réponse. ¦ Ekkert bréf í málunum bíður svars.
+échéances en retard ¦ fresti sem eru liðnir
+Dossiers avec des échéances en retard : {n}. ¦ Mál þar sem frestir eru liðnir: {n}.
+Aucun dossier n’a d’échéance en retard. ¦ Engin mál eru með liðinn frest.
+défunt : {name} ¦ hinn látni: {name}
+Aucun dossier de succession pour {name}. ¦ Ekkert dánarbú fyrir {name}.
+⚖️ Rechercher les héritiers… ¦ ⚖️ Leita að erfingjum…
+Pièces notées « manquante » : {n}. La liste complète (en main, demandées, à demander) est dans l’onglet Pièces du dossier. ¦ Skjöl merkt „vantar“: {n}. Allur listinn (til staðar, beðið um, á eftir að biðja um) er á flipanum Skjöl í málinu.
+Aucune pièce notée « manquante ». La liste des pièces de chaque dossier est dans son onglet Pièces. ¦ Ekkert skjal er merkt „vantar“. Listi hvers máls er á flipanum Skjöl.
+pièces manquantes ¦ skjöl sem vantar
+Héritiers introuvables ou qui ne répondent pas : {n}. ¦ Erfingjar sem finnast ekki eða svara ekki: {n}.
+Aucun héritier noté introuvable ou sans réponse. ¦ Enginn erfingi er merktur ófundinn eða án svars.
+héritiers introuvables ¦ ófundnir erfingjar
+De qui ? Écris par exemple « les héritiers de Jean Dupont ». ¦ Hverra? Skrifaðu til dæmis „les héritiers de Jean Dupont“.
+héritiers de {name} ¦ erfingjar: {name}
+Aucun dossier de succession pour {name}. Le dossier calcule les héritiers d’après l’arbre. ¦ Ekkert dánarbú fyrir {name}. Málið reiknar út erfingjana eftir trénu.
+Dossier {d} : les héritiers n’ont pas encore été calculés. Ouvre le dossier pour faire le calcul. ¦ Mál {d}: erfingjarnir hafa ekki verið reiknaðir út enn. Opnaðu málið til að reikna.
+Dossier {d} — héritiers d’après le dernier calcul enregistré : {n}. ¦ Mál {d} — erfingjar samkvæmt síðasta vistaða útreikningi: {n}.
+Branches encore à rechercher : {n}. ¦ Greinar sem enn á eftir að rannsaka: {n}.
+Actes ou documents à chercher pour {name} : {n}. Les 3 premiers ci-dessous ; la liste complète, avec où chercher et dans quelle série, est dans « Que manque-t-il ? ». ¦ Skrár eða skjöl sem þarf að leita að fyrir {name}: {n}. Fyrstu 3 hér fyrir neðan; allur listinn, með hvar og í hvaða röð á að leita, er í „Hvað vantar?“.
+Rien de connu à chercher pour {name}. ¦ Ekkert þekkt að leita að fyrir {name}.
+actes à chercher ¦ skrár sem þarf að leita að
+où chercher ¦ hvar á að leita
+« Où chercher ? » donne pour {name} les sites et les séries d’archives les plus utiles, et pourquoi. ¦ „Hvar á að leita?“ sýnir fyrir {name} gagnlegustu vefina og skjalaraðirnar, og hvers vegna.
+« Où chercher ? » donne pour chaque personne les sites et les séries d’archives les plus utiles, et pourquoi. ¦ „Hvar á að leita?“ sýnir fyrir hverja manneskju gagnlegustu vefina og skjalaraðirnar, og hvers vegna.
+doublons ¦ tvítök
+Le Contrôle de la base cherche les doublons probables (mêmes noms, mêmes dates, mêmes parents) et aide à les fusionner. ¦ Gagnagrunnsprófunin leitar að líklegum tvítökum (sömu nöfn, dagsetningar, foreldrar) og hjálpar þér að sameina þau.
+mort pendant la guerre, en âge de combattre ¦ dó í stríðinu, á herskyldualdri
+mort pendant la guerre ¦ dó í stríðinu
+morts pendant {era} ¦ dóu á tímabilinu: {era}
+morts à la guerre ¦ féllu í stríði
+Morts pendant {era} : {n}. ¦ Dóu ({era}): {n}.
+Notés « Mort pour la France » : {n}. Morts pendant une guerre, en âge de combattre ou soldats (à vérifier) : {m}. ¦ Merkt „Mort pour la France“: {n}. Dóu í stríði, á herskyldualdri eða hermenn (þarf að kanna): {m}.
+Dont « Mort pour la France » : {n}. ¦ Þar af „Mort pour la France“: {n}.
+Pour les soldats : Mémoire des hommes et les registres matricules. ¦ Fyrir hermenn: Mémoire des hommes og herskráningarbækurnar.
+sans date de décès ¦ án dánardags
+sans date de naissance ¦ án fæðingardags
+sans date de mariage ¦ án giftingardags
+sans parents connus ¦ án þekktra foreldra
+sans profession notée ¦ án skráðrar starfsgreinar
+qui ne sont pas des ancêtres ¦ sem eru ekki forfeður
+pas {ev} à {place} ¦ ekki „{ev}“ í {place}
+vivants ou probablement vivants ¦ á lífi eða líklega á lífi
+pas à {place} ¦ ekki í {place}
+recherche de nom : « {x} » ¦ nafnaleit: „{x}“
+orthographe proche ¦ svipuð stafsetning
+femmes ¦ konur
+Réponse réunie : {a} {c} {b}. ¦ Sameinað svar: {a} {c} {b}.
+Je n’ai pas tenu compte de : « {x} ». ¦ Ég tók ekki tillit til: „{x}“.
+Plusieurs “{w}” : choisir… ¦ Fleiri „{w}“: veldu…
+J’ai compris : {x} ¦ Ég skildi: {x}
+Question en français ¦ Spurning á frönsku
+Poser la question : « {q} » ¦ Spyrja: „{q}“
+Questions dans la recherche rapide (⌘K) ¦ Spurningar í flýtileit (⌘K)
+Répondre aux questions dans la recherche rapide ¦ Svara spurningum í flýtileit
+« les enfants de Pierre Mazaud » : la réponse courte s’affiche dans la liste ; sinon seulement « Poser la question » ¦ „les enfants de Pierre Mazaud“: stutta svarið birtist í listanum; annars aðeins „Spyrja“
+Pour aller plus loin, pose la question avec le nom de la personne voulue. ¦ Til að halda áfram skaltu spyrja með nafni manneskjunnar sem þú átt við.
+« {a} » cherché d’abord ¦ „{a}“ leitað fyrst
+« {a} » = {name} ¦ „{a}“ = {name}

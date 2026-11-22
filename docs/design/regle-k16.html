@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Règle K16</title>
+<style>
+:root{--ink:#111;--muted:#5b6170;--blue:#2b5ff0;--line:#111;--bg:#fafafa;--card:#fff;--ok:#1f7a3a;--no:#b3261e}
+@media (prefers-color-scheme:dark){:root{--ink:#eee;--muted:#a9aebb;--line:#ddd;--bg:#16181d;--card:#20232a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;padding:24px 16px}
+main{max-width:980px;margin:0 auto}
+h1{font-size:28px;margin:0 0 4px}
+.eyebrow{color:var(--blue);font-weight:800;letter-spacing:.12em;font-size:12px}
+p.lead{color:var(--muted);margin:4px 0 24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{background:var(--card);border:2px solid var(--line);box-shadow:4px 4px 0 rgba(43,95,240,.2);padding:16px}
+.card h2{font-size:18px;margin:0 0 4px}
+.card .when{color:var(--muted);font-size:14px;margin:0 0 12px}
+.demo{border:1px dashed var(--muted);padding:12px;display:grid;gap:10px;margin-bottom:10px}
+.row{display:flex;align-items:center;gap:10px}
+.sw{width:38px;height:22px;border-radius:11px;background:#c9ccd3;position:relative;flex:0 0 auto}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.2s}
+.sw.on{background:var(--blue)}.sw.on::after{left:19px}
+.cb{width:18px;height:18px;border:2px solid var(--ink);flex:0 0 auto;display:grid;place-items:center;font-size:13px;font-weight:900}
+.cb.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn{border:2px solid var(--line);padding:6px 12px;font-weight:700;background:var(--card);display:inline-block}
+.btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+small{color:var(--muted)}
+.choice{margin-top:28px}
+.choice h2{font-size:20px}
+.opt{border-left:4px solid var(--blue);padding:8px 12px;margin:10px 0;background:var(--card)}
+.opt b{display:block}
+</style>
+</head>
+<body>
+<main>
+<span class="eyebrow">RÈGLE DE L’APP · K16</span>
+<h1>Interrupteur ou case à cocher ?</h1>
+<p class="lead">Aujourd’hui, l’app choisit le composant selon <b>quand</b> le réglage agit.</p>
+
+<div class="grid">
+  <section class="card">
+    <h2>1 · Interrupteur</h2>
+    <p class="when">Le réglage agit <b>tout de suite</b>, sans bouton à cliquer après.</p>
+    <div class="demo">
+      <div class="row"><span class="sw on"></span>Afficher les zones sur la photo</div>
+      <div class="row"><span class="sw"></span>Négatif</div>
+      <div class="row"><span class="sw"></span>Miroir</div>
+    </div>
+    <small>Exemples : Réglages, outils d’image (Gris, Miroir, Négatif, Effacer le fond), « Aimanter à la grille », « Afficher les valeurs ».</small>
+  </section>
+
+  <section class="card">
+    <h2>2 · Case à cocher : choisir dans une liste</h2>
+    <p class="when">On <b>choisit des éléments</b> parmi plusieurs.</p>
+    <div class="demo">
+      <div class="row"><span class="cb on">✓</span>Naissances</div>
+      <div class="row"><span class="cb on">✓</span>Mariages</div>
+      <div class="row"><span class="cb"></span>Décès</div>
+    </div>
+    <small>Exemples : colonnes à montrer, filtres, sortes d’actes, personnes.</small>
+  </section>
+
+  <section class="card">
+    <h2>3 · Case à cocher : option validée ensuite</h2>
+    <p class="when">L’option ne compte <b>qu’après un bouton</b> (Enregistrer, Créer, Exporter…).</p>
+    <div class="demo">
+      <div class="row"><span class="cb on">✓</span>Inclure les médias</div>
+      <div class="row"><span class="cb"></span>Date incertaine</div>
+      <div><span class="btn primary">⤓ Exporter</span></div>
+    </div>
+    <small>Exemples : options d’export et d’import, cases d’une fenêtre avec « Enregistrer ».</small>
+  </section>
+</div>
+
+<section class="choice">
+  <h2>Ce que tu peux décider</h2>
+  <div class="opt"><b>A · Garder la règle telle quelle</b>Les interrupteurs restent pour ce qui agit tout de suite (c’est le cas des outils d’image et de « Afficher les zones »). Rien à changer.</div>
+  <div class="opt"><b>B · Cases à cocher partout</b>Plus aucun interrupteur dans l’app : un seul composant à reconnaître. Gros changement (environ 90 endroits), la règle K16 est réécrite.</div>
+  <div class="opt"><b>C · Un réglage d’apparence</b>« Interrupteurs ou cases à cocher » dans Réglages → Apparence : chacun choisit, l’app affiche le même réglage sous la forme voulue. Le conseillé par défaut : la règle actuelle.</div>
+</section>
+</main>
+</body>
+</html>

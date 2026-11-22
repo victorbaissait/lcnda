@@ -1,0 +1,635 @@
+fr ¦ ro
+# Zone « successoral-plus-2 » : ⚖️ outils de plus du généalogiste successoral (heritage-successoral-plus2*.js, lib/successoral_plus2.php, lib/successoral_factures.php)
+Réglages de cet outil ¦ Setările acestui instrument
+(conseillé) ¦ (recomandat)
+Autre : ¦ Altele:
+Outils du dossier : réglages ¦ Instrumentele dosarului: setări
+Chaque choix se change ici ; l’option conseillée est celle du départ. ¦ Fiecare alegere o schimbi aici; cea recomandată este cea implicită.
+Réglage enregistré : {what} ¦ Setare salvată: {what}
+Adresse refusée : https:// et {numero} sont obligatoires. ¦ Adresă refuzată: https:// și {numero} sunt obligatorii.
+Carte des héritiers (dossiers en cours) ¦ Harta moștenitorilor (dosare în lucru)
+Délai de réponse par organisme ¦ Timp de răspuns pe serviciu
+🙈 Écran partagé ¦ 🙈 Ecran partajat
+Fusionner avec un autre dossier… ¦ Unește cu alt dosar…
+Annuler la dernière fusion ¦ Anulează ultima unire
+nom de naissance ¦ nume la naștere
+prénom ¦ prenume
+né(e) le {d} ¦ născut(ă) {d}
+même mois ¦ aceeași lună
+même année ¦ același an
+± 1 an ¦ ± 1 an
+date inconnue ¦ dată necunoscută
+date de naissance différente ¦ altă dată de naștere
+même département ¦ același departament
+lieu inconnu sur la fiche ¦ loc necunoscut pe fișă
+lieu : {p} ¦ loc: {p}
+Le fichier des décès n’est pas dans l’app. ¦ Fișierul deceselor nu este în aplicație.
+⤒ Importer les décès ¦ ⤒ Importă decesele
+L’import se fait une seule fois, depuis data.gouv.fr (environ 25 millions de lignes depuis 1970), ou par années choisies. ¦ Importul se face o singură dată, de pe data.gouv.fr (circa 25 de milioane de rânduri din 1970), sau pe anii aleși.
+fichier importé : décès {a} → {b} ¦ fișier importat: decese {a} → {b}
+un décès plus ancien ne peut pas être trouvé ¦ un deces mai vechi nu poate fi găsit
+plafonné à {n} ¦ limitat la {n}
+acte n° {n} ¦ act nr. {n}
+avant le défunt : si c’est cette personne, ses enfants viennent à sa place (représentation). ¦ înaintea defunctului: dacă este această persoană, copiii ei moștenesc în locul ei (reprezentare).
+après le défunt : sa part passe à ses propres héritiers. ¦ după defunct: partea ei trece la propriii ei moștenitori.
+Les Français nés à l’étranger ont leur acte au Service central d’état civil (Nantes). ¦ Francezii născuți în străinătate își au actul la Serviciul central de stare civilă (Nantes).
+déjà confirmé ¦ deja confirmat
+C’est cette personne ¦ Este această persoană
+Pas la même personne ¦ Nu este aceeași persoană
+Nom de naissance inconnu : cherché sous {n}, pistes moins sûres ¦ Nume la naștere necunoscut: căutat ca {n}, piste mai puțin sigure
+Deux personnes se ressemblent : demande l’acte avant de choisir ¦ Două persoane seamănă: cere actul înainte să alegi
+rien trouvé dans le fichier ¦ nimic găsit în fișier
+« Rien trouvé » ne veut pas dire « vivant » (un décès à l’étranger manque souvent). ¦ „Nimic găsit” nu înseamnă „în viață” (decesul în străinătate lipsește adesea).
+Les héritiers « vivants » comparés au fichier des décès ¦ Moștenitorii „în viață” comparați cu fișierul deceselor
+pistes à partir de {n} ¦ piste de la {n}
+Aucun héritier « vivant » à vérifier dans ce dossier. ¦ Niciun moștenitor „în viață” de verificat în acest dosar.
+Comment c’est calculé ¦ Cum se calculează
+Le nom de naissance, sans accents ni tirets ; jamais le nom d’épouse (l’INSEE donne le nom de naissance). ¦ Nume la naștere, fără accente și cratime; niciodată numele de căsătorie (INSEE păstrează numele la naștere).
+Le premier prénom de la fiche parmi les prénoms INSEE ; Jean-Pierre = Jean Pierre. ¦ Primul prenume de pe fișă printre prenumele INSEE; Jean-Pierre = Jean Pierre.
+Jour exact 30 · même mois 20 · même année 12 · ± 1 an 6 ; sans date : plafond 70. ¦ Ziua exactă 30 · aceeași lună 20 · același an 12 · ± 1 an 6; fără dată: maximum 70.
+La commune ; même département 10 ; né à l’étranger : le pays (plafond 80). ¦ Comună; același departament 10; născut în străinătate: țara (maximum 80).
+Différent : la piste est écartée. ¦ Altfel: pista este respinsă.
+Pistes écartées ({n}) ¦ Piste respinse ({n})
+Piste remise ¦ Pistă restabilită
+« Pas la même personne » retenu : cette piste ne reviendra plus ¦ „Nu este aceeași persoană” reținut: această pistă nu va mai reveni
+Sur la fiche de {n} : un décès le {d}, source « Fichier des personnes décédées (INSEE) », avec la date du relevé. ¦ Pe fișa lui {n}: deces {d}, sursa „Fișierul persoanelor decedate (INSEE)”, cu data verificării.
+Dans ce dossier : statut retenu « {s} » ; le calcul est refait. ¦ În acest dosar: statutul „{s}” reținut; calculul se reface.
+Ce qui va changer ¦ Ce se schimbă
+{n} marqué(e) décédé(e) (INSEE). Calcul refait. ¦ {n} marcat(ă) decedat(ă) (INSEE). Calcul refăcut.
+Vérifier les décès ¦ Verifică decesele
+Questionnaire… ¦ Chestionar…
+⚰️ INSEE : {n} piste(s) ¦ ⚰️ INSEE: {n} piste
+⚰️ vérifié le {d} ¦ ⚰️ verificat {d}
+🕵️ Recherches ¦ 🕵️ Căutări
+📞 Noter un échange ¦ 📞 Notează un schimb
+Ouvrir un dossier lié ¦ Deschide dosarul legat
+Dossiers liés ¦ Dosare legate
+Succession de {n} ¦ Succesiunea lui {n}
+dossier d’origine {n} ¦ dosarul de origine {n}
+Deux défunts, deux calculs : les successions restent distinctes. ¦ Doi defuncți, două calcule: succesiunile rămân separate.
+Aucun héritier trouvé d’après les fiches. ¦ Niciun moștenitor găsit după fișe.
+Échanges ¦ Schimburi
+Noter un échange ¦ Notează un schimb
+Les courriers du Registre ne sont pas recopiés ici : ils sont montrés en gris, en lecture. ¦ Scrisorile din registru nu sunt copiate aici: apar în gri, doar pentru citire.
+Chercher… (personne, résumé) ¦ Caută… (persoană, rezumat)
+du dossier fusionné ¦ din dosarul unit
+Registre de courriers, n° {n} ¦ Registrul de corespondență, nr. {n}
+Aucun échange noté. ¦ Niciun schimb notat.
+✎ Corriger un échange ¦ ✎ Corectează schimbul
+＋ Noter un échange ¦ ＋ Notează un schimb
+Avec (héritier, notaire, mairie…) ¦ Cu cine (moștenitor, notar, primărie…)
+Prochaine action ¦ Pasul următor
+Durée (minutes) ¦ Durată (minute)
+⏱ Compter la durée dans 💶 Temps ¦ ⏱ Adaugă timpul în 💶 Timp
+C’est une recherche (va dans 🕵️ Recherches) ¦ Este o căutare (merge în 🕵️ Căutări)
+Avec une date, une échéance va dans le dossier et dans la 🔔 cloche (jamais le résumé). ¦ Cu o dată, termenul intră în dosar și în 🔔 clopoțel (niciodată rezumatul).
+Échange corrigé (noté au 🕓 Journal) ¦ Schimb corectat (trecut în 🕓 Jurnal)
+Échange noté ¦ Schimb notat
+Trois fois « ne répond pas » de suite : noter 🔇 ne répond pas ? ¦ De trei ori la rând „nu răspunde”: notezi 🔇 nu răspunde?
+Recommandé ¦ Recomandat
+Envoyé en recommandé ¦ Trimis recomandat
+N° du recommandé ¦ Nr. recomandatei
+Numéro inhabituel, gardé tel quel. ¦ Număr neobișnuit, păstrat așa cum este.
+AR reçu le ¦ Confirmare de primire sosită
+Relance si rien après (jours) ¦ Reamintire dacă nimic după (zile)
+Réponse reçue le ¦ Răspuns sosit
+Retour du courrier ¦ Scrisoare returnată
+pli non distribué ¦ destinatar absent
+destinataire inconnu ¦ destinatar necunoscut
+AR reçu aujourd’hui ¦ Confirmare de primire azi
+Suivre en ligne ¦ Urmărește online
+Copier le numéro ¦ Copiază numărul
+L’app ne fait aucune requête : le lien ouvre la page de suivi dans ton navigateur ; tu notes toi-même la date de l’AR. ¦ Aplicația nu trimite nicio cerere: linkul deschide pagina de urmărire în browserul tău; data confirmării de primire o notezi tu.
+Tape d’abord le numéro. ¦ Scrie mai întâi numărul.
+Numéro copié ¦ Număr copiat
+Courrier revenu : noter 🔎 introuvable pour cet héritier ? ¦ Scrisoarea s-a întors: notezi 🔎 negăsit pentru acest moștenitor?
+✓ AR {d} ¦ ✓ Confirmare {d}
+revenu ¦ returnată
+📮 sans AR · {n} j ¦ 📮 fără confirmare · {n} z
+Recommandés ¦ Recomandate
+Sans AR ¦ Fără confirmare
+{n} recommandés, {m} sans accusé ¦ {n} recomandate, {m} fără confirmare
+Importer des réponses… ¦ Importă răspunsurile…
+Saisir un questionnaire papier ¦ Introdu un chestionar pe hârtie
+📮 Recommandé ¦ 📮 Recomandat
+Questionnaires ¦ Chestionare
+préparé le {d} ¦ pregătit {d}
+réponses écrites le {d} ¦ răspunsuri introduse {d}
+Questionnaire ¦ Chestionar
+au sujet d’une succession ¦ privind o succesiune
+Vous ¦ Dumneavoastră
+Nom de naissance ¦ Nume la naștere
+Conjoint(s) ¦ Soț / soție (soți)
+Date du mariage (ou PACS) ¦ Data căsătoriei (sau a parteneriatului)
+Adresse, téléphone, courriel ¦ Adresă, telefon, e-mail
+Code postal ¦ Cod poștal
+Autres membres de la famille connus ¦ Alți membri ai familiei cunoscuți
+Frères, sœurs, cousins…, avec un moyen de les joindre ¦ Frați, surori, veri…, cu o modalitate de a-i contacta
+Documents que vous pouvez fournir ¦ Documente pe care le puteți furniza
+livret de famille ¦ carnet de familie
+acte de naissance ¦ act de naștere
+acte de mariage ¦ act de căsătorie
+jugement ¦ hotărâre judecătorească
+Vos réponses restent sur cet appareil tant que vous n’envoyez rien. ¦ Răspunsurile rămân pe acest dispozitiv până nu trimiteți nimic.
+Enregistrer mes réponses ¦ Salvează răspunsurile mele
+Un questionnaire à envoyer ¦ Chestionar de trimis
+Fabriquer et ranger au Registre ¦ Creează și clasează în registru
+Ce qu’on demande ¦ Ce întrebăm
+Ta question ¦ Întrebarea ta
+Comment l’envoyer ¦ Cum îl trimiți
+Ce qui est pré-rempli ¦ Ce este precompletat
+Jamais le nom du défunt ni un montant : « au sujet d’une succession ». Le fichier s’ouvre d’un double-clic, sans internet ; l’héritier renvoie un petit fichier. ¦ Niciodată numele defunctului sau o sumă: „privind o succesiune”. Fișierul se deschide cu dublu clic, fără internet; moștenitorul trimite înapoi un fișier mic.
+{n} prêts, rangés au Registre de courriers ¦ {n} pregătite, clasate în registrul de corespondență
+Ce fichier ne vient pas d’un questionnaire de ce dossier. ¦ Acest fișier nu provine dintr-un chestionar al acestui dosar.
+Revoir avant d’écrire ¦ Verifică înainte de a introduce
+Enfants (un par ligne : prénom, année) ¦ Copii (unul pe rând: nume, an)
+Documents promis ¦ Documente promise
+Réponses de {n} ¦ Răspunsuri de la {n}
+Écrire les changements cochés ¦ Introdu modificările bifate
+Une réponse a déjà été importée le {d} : compare avec celle-ci. ¦ Un răspuns a fost deja importat {d}: compară-l cu acesta.
+fichier vérifié ✓ (bon questionnaire, pas modifié) ¦ fișier verificat ✓ (chestionarul corect, nemodificat)
+Coche ce qui doit aller dans le dossier. Rien n’est écrit sans ta revue ; « source : déclaration de l’héritier » accompagne tout ce qui est écrit. ¦ Bifează ce trebuie să intre în dosar. Nimic nu se introduce fără verificarea ta; tot ce se introduce poartă „sursa: declarația moștenitorului”.
+Dans la base ¦ În bază
+« Famille connue » va en note du dossier, jamais en fiches. Les enfants créent des fiches reliées à l’héritier. Les documents promis deviennent une échéance. ¦ „Familia cunoscută” merge în nota dosarului, niciodată în fișe. Copiii creează fișe legate de moștenitor. Documentele promise devin un termen.
+{n} écrits. Calcul refait. ¦ {n} introduse. Calcul refăcut.
+passée ¦ depășit
+dans {n} j ¦ peste {n} z
+était le {d} ¦ era {d}
+Une date importante ¦ Dată importantă
+Mes dates importantes ¦ Datele mele importante
+D’où vient cette date ¦ De unde vine această dată
+Les dates que le notaire t’a données, rappelées à temps. ¦ Datele pe care ți le-a dat notarul, reamintite la timp.
+L’app ne calcule aucun délai légal : elle ne connaît pas ta situation. ¦ Aplicația nu calculează niciun termen legal: nu îți cunoaște situația.
+✎ Modifier la date ¦ ✎ Modifică data
+＋ Une date importante ¦ ＋ O dată importantă
+D’où vient cette date (obligatoire) ¦ De unde vine această dată (obligatoriu)
+ex. : Me VIALLE, courriel du 4 nov. ¦ ex.: Me VIALLE, e-mail din 4/11
+Date déplacée : l’ancienne reste en dessous et la modification est notée au 🕓 Journal. ¦ Dată mutată: cea veche rămâne dedesubt, iar schimbarea se trece în 🕓 Jurnal.
+Date modifiée ¦ Dată modificată
+Date importante ajoutée ¦ Dată importantă adăugată
+🔗 {a} liens ne reposent que sur une pièce, {b} sur aucune. Ce n’est pas une erreur : c’est à vérifier avant la remise. ¦ 🔗 {a} legături se sprijină pe o singură dovadă, {b} pe niciuna. Nu este o eroare: de verificat înainte de predare.
+🔗 Chaque lien repose sur assez de pièces. ¦ 🔗 Fiecare legătură se sprijină pe suficiente dovezi.
+Voir les liens ¦ Vezi legăturile
+Une lettre par service ({n}) ¦ O scrisoare pe serviciu ({n})
+délivrée le {d} ¦ eliberat {d}
+valable jusqu’au {d} ¦ valabil până la {d}
+📅 Date de délivrance ¦ 📅 Data eliberării
+Chaque maillon : combien de pièces le prouvent ¦ Fiecare verigă: câte dovezi o atestă
+Héritier concerné ¦ Moștenitorul vizat
+dossier de preuve « prouvé » ¦ dosar de probă „dovedit”
+1 pièce, jugée suffisante le {d} ¦ 1 dovadă, considerată suficientă {d}
+Demander l’acte ¦ Cere actul
+✓ Une pièce me suffit ici ¦ ✓ O singură dovadă îmi ajunge aici
+Une « pièce » = une source citée sur l’acte (deux copies du même acte comptent pour une) ; un dossier de preuve « prouvé » compte pour une de plus. ¦ „Dovadă” = sursa citată la un eveniment (două copii ale aceluiași act contează ca una); dosarul de probă „dovedit” contează ca încă una.
+Noté au 🕓 Journal ¦ Trecut în 🕓 Jurnal
+Remise bloquée (réglage) ¦ Predare blocată (setare)
+Des liens ont trop peu de pièces : la remise est bloquée tant qu’ils ne sont pas complétés (ou « Une pièce me suffit ici »). ¦ Unele legături au prea puține dovezi: predarea este blocată până sunt completate (sau „O singură dovadă îmi ajunge aici”).
+Pour une recherche, je vous serais reconnaissant(e) de m’adresser une copie des actes suivants : ¦ Pentru o cercetare, v-aș fi recunoscător dacă mi-ați trimite o copie a următoarelor acte:
+Les actes manquants, regroupés ¦ Acte lipsă, grupate
+Une seule lettre par service au lieu d’une par acte : moins de timbres, moins de relances. Relis et corrige chaque lettre. ¦ O singură scrisoare pe serviciu în loc de una pe act: mai puține timbre, mai puține reamintiri. Citește și corectează fiecare scrisoare.
+{n} rangées dans le Registre de courriers ¦ {n} clasate în registrul de corespondență
+Copie délivrée le ¦ Copie eliberată
+Durée de validité demandée par ton notaire (mois) ¦ Durata de valabilitate cerută de notarul tău (luni)
+Aucune durée par défaut : c’est toi qui la tapes. La 🔔 cloche prévient avant qu’elle ne soit trop ancienne. ¦ Nicio durată implicită: o introduci tu. 🔔 Clopoțelul te anunță înainte să fie prea veche.
+Date de délivrance notée ¦ Data eliberării notată
+recherches négatives : {n} ¦ {n} căutări fără rezultat
+« Rien trouvé » est un résultat utile : il montre la diligence au notaire. ¦ „Nimic găsit” este un rezultat util: îi arată notarului seriozitatea ta.
+Aucune recherche notée pour cette personne. ¦ Nicio căutare notată pentru această persoană.
+Rien n’est recopié : les lignes viennent du 🗓 Journal des recherches, des ⚰️ vérifications INSEE et des 📞 échanges marqués « recherche ». ¦ Nimic nu se copiază: rândurile vin din 🗓 Jurnalul de cercetare, din ⚰️ verificările INSEE și din 📞 schimburile marcate „căutare”.
+Noter une recherche ¦ Notează o căutare
+Pour le notaire ¦ Pentru notar
+Recherches faites — {n} ¦ Căutări efectuate — {n}
+＋ Noter une recherche ¦ ＋ Notează o căutare
+Où (service, site, mairie…) ¦ Unde (arhive, site, primărie…)
+Ce qui a été trouvé ¦ Ce s-a găsit
+Écrit un dépouillement dans le 🗓 Journal des recherches (comme « Où chercher »). ¦ Trece o fișă de lectură în 🗓 Jurnalul de cercetare (ca „Unde să cauți”).
+Recherche notée ¦ Căutare notată
+Carte des héritiers ¦ Harta moștenitorilor
+au numéro (BAN) ¦ la număr (BAN)
+Hors carte ¦ În afara hărții
+à l’étranger ({c}) ¦ în străinătate ({c})
+commune pas placée ({c}) ¦ comună neplasată ({c})
+adresse inconnue ¦ adresă necunoscută
+Où vivent les héritiers ¦ Unde locuiesc moștenitorii
+Tous les dossiers en cours ¦ Toate dosarele în lucru
+Aucune adresse d’héritier placée sur la carte. ¦ Nicio adresă de moștenitor plasată pe hartă.
+héritier (adresse connue, au niveau de la commune) ¦ moștenitor (adresă cunoscută, la nivel de comună)
+notaire connu de l’app ¦ notar cunoscut de aplicație
+Rien n’est envoyé en ligne. ¦ Nimic nu se trimite online.
+La BAN n’est pas encore téléchargée : position à la commune. ¦ BAN încă nedescărcată: poziție la nivel de comună.
+Image de la carte (sans noms) ¦ Imaginea hărții (fără nume)
+Par organisme, d’après le Registre ¦ Pe serviciu, din registru
+Organisme ¦ Serviciu
+pas assez de courriers ¦ puține scrisori
+De l’envoi à la réponse reçue (demandes d’actes des dossiers). Aide à prévoir la remise et à relancer au bon moment. ¦ De la trimitere la răspunsul primit (cereri de acte din dosare). Te ajută să planifici predarea și să revii la timp.
+Pas encore de réponse notée dans le Registre. ¦ Niciun răspuns notat încă în registru.
+Sa part passe dans sa propre succession : ouvrir un dossier lié pour {n} ? ¦ Partea lui trece în propria lui succesiune: deschizi un dosar legat pentru {n}?
+🔗 Dossier lié ¦ 🔗 Dosar legat
+Ouvrir le dossier lié ¦ Deschide un dosar legat
+Dossier lié {n} ouvert ({what}) ¦ Dosar legat {n} deschis ({what})
+Aucun autre dossier en cours dans cette généalogie (d’abord ⇄ Déplacer s’il est dans une autre). ¦ Niciun alt dosar în lucru în acest arbore (⇄ Mută-l mai întâi dacă este în altul).
+Fusionner avec un autre dossier ¦ Unește cu alt dosar
+Le dossier à réunir dans {n} ¦ Dosar de unit cu {n}
+Le numéro du dossier réuni n’est pas réutilisé. ↶ Annuler sépare à nouveau, comme avant. ¦ Numărul dosarului unit nu va mai fi folosit. ↶ Anulează îi separă din nou ca înainte.
+Ce qui ¦ Ce
+Ce qui se passe ¦ Ce se întâmplă
+{a} déjà communes, {b} ajoutées ¦ {a} comune, {b} adăugate
+{d} en double gardée(s) une fois ¦ dubluri păstrate o dată: {d}
+rattachés, chacun garde son dossier d’origine en étiquette ¦ adăugate, fiecare își păstrează dosarul de origine ca etichetă
+rattachés ; les factures émises ne changent pas ¦ adăugate; facturile emise nu se schimbă
+mis bout à bout, chaque ligne marquée de son dossier ¦ una după alta, fiecare rând marcat cu dosarul lui
+Deux notaires différents : lequel garder ? ¦ Doi notari diferiți: pe care îl păstrezi?
+Dossiers réunis ¦ Dosare unite
+Copie à envoyer au notaire ¦ Copie pentru notar
+Copie à envoyer au notaire… ¦ Copie pentru notar…
+Un fichier que le notaire ouvre d’un double-clic, sans rien pouvoir modifier, chiffré si tu le veux. ¦ Un fișier pe care notarul îl deschide cu dublu clic și în care nu poate modifica nimic, criptat dacă vrei.
+Part aussi ¦ Pleacă și
+📞 échanges · 💶 fonds · ⚰️ vérifications INSEE · 🧾 copie des factures (le registre, lui, ne change pas) ¦ 📞 schimburi · 💶 fonduri · ⚰️ verificări INSEE · 🧾 copia facturilor (registrul însuși nu se schimbă)
+Mot de passe (obligatoire) ¦ Parolă (obligatorie)
+🔐 Mot de passe ¦ 🔐 Parolă
+AES-256, comme les sauvegardes protégées. Oublié = archive perdue. Le réimport le demande. ¦ AES-256, ca salvările protejate. Uitată = arhivă pierdută. Reimportul o va cere.
+Mot de passe trop court (8 caractères au moins). ¦ Parola este prea scurtă (cel puțin 8 caractere).
+Les deux mots de passe ne sont pas les mêmes. ¦ Cele două parole nu coincid.
+Mot de passe de l’archive ¦ Parola arhivei
+🙈 Écran partagé : noms, adresses et montants masqués ¦ 🙈 Ecran partajat: nume, adrese și sume ascunse
+Échange mis à la corbeille ¦ Schimb mutat în coș
+Fusion annulée : les deux dossiers sont séparés comme avant ¦ Unire anulată: cele două dosare sunt separate ca înainte
+Mon cabinet (factures) ¦ Biroul meu (facturi)
+L’app ne connaît ni ton statut, ni ton régime de TVA, ni les mentions que ta facture doit porter : c’est toi qui les écris, avec ton comptable. L’app les recopie telles quelles. ¦ Aplicația nu îți cunoaște statutul, regimul de TVA sau mențiunile pe care trebuie să le poarte factura ta: le scrii tu, cu contabilul tău. Aplicația le reia fără să le schimbe.
+Mentions à imprimer sur chaque facture (ton texte) ¦ Mențiuni tipărite pe fiecare factură (textul tău)
+vide : à écrire avec ton comptable ¦ gol: de scris cu contabilul tău
+Champs obligatoires pour émettre une facture ¦ Câmpuri obligatorii pentru a emite o factură
+Un champ que tu as déclaré obligatoire et laissé vide : la facture n’est pas émise. ¦ Un câmp pe care l-ai declarat obligatoriu și l-ai lăsat gol: factura nu se emite.
+🏢 Mon cabinet ¦ 🏢 Biroul meu
+EXEMPLE NON JURIDIQUE — à faire écrire ou relire par ton conseil avant tout usage. ¦ EXEMPLU NEJURIDIC — dă-l spre redactare sau verificare consilierului tău înainte de orice utilizare.
+ton titre ¦ titlul tău
+ton texte : écrit ou relu par ton conseil ¦ textul tău: redactat sau verificat de consilierul tău
+Mes modèles de contrat ¦ Modelele mele de contract
+Ton contrat, avec des champs que l’app remplit ¦ Contractul tău, cu câmpurile pe care le completează aplicația
+Enregistrer la version ¦ Salvează versiunea
+L’app ne fournit aucun texte de contrat : c’est un acte qui t’engage et qui engage l’héritier, à faire écrire ou relire par ton conseil. L’app remplit des champs et garde l’historique de tes versions. ¦ Aplicația nu furnizează niciun text de contract: este un act care te angajează pe tine și pe moștenitor; dă-l spre redactare sau verificare consilierului tău. Aplicația completează câmpurile și păstrează istoricul versiunilor tale.
+＋ Nouveau modèle ¦ ＋ Model nou
+Mon contrat ¦ Contractul meu
+Versions ¦ Versiuni
+Écris ou importe ton contrat ¦ Scrie sau importă contractul tău
+Importer un .docx / .txt ¦ Importă .docx / .txt
+Aperçu pour un héritier ¦ Previzualizare pentru moștenitor
+{defunt} n’existe pas : le nom du défunt n’est jamais dans un courrier envoyé avant signature. {pourcentage} vient de 💶 « Honoraires d’un contrat ». ¦ {defunt} nu există: numele defunctului nu apare niciodată într-o scrisoare trimisă înainte de semnare. {pourcentage} vine din 💶 „Onorariu din contract”.
+version {n} ¦ versiunea {n}
+Champ inconnu : {f} (ligne {l}). Corrige-le avant d’enregistrer. ¦ Câmp necunoscut: {f} (rândul {l}). Corectează-l înainte de salvare.
+% à noter ¦ % de completat
+Champ vide : {f} ¦ Câmp gol: {f}
+Version {n} enregistrée (Mes modèles) ¦ Versiunea {n} salvată (Modelele mele)
+Fonds par héritier ¦ Fonduri pe moștenitor
+Aucun montant de succession : l’app ne connaît ni l’actif, ni le passif. On note seulement des mouvements réels que tu as vus passer. ¦ Nicio sumă a succesiunii: aplicația nu cunoaște nici activul, nici pasivul. Notezi doar mișcările reale pe care le-ai văzut trecând.
+Reçu du notaire ¦ Primit de la notar
+Frais refacturés ¦ Cheltuieli refacturate
+Reversé ¦ Plătit
+Reste dû ¦ Rămas de plătit
+pas de contrat ¦ fără contract
+reversé de trop : {s} ¦ plătit în plus: {s}
+✓ soldé ¦ ✓ achitat
+à reverser ¦ de plătit
+Mouvements ¦ Mișcări
+＋ Noter un mouvement ¦ ＋ Notează o mișcare
+Commission = % du contrat × montant reçu. Reste dû = reçu − commission − frais − reversé. ¦ Comision = % din contract × suma primită. Rămas = primit − comision − cheltuieli − plătit.
+✎ Corriger un mouvement ¦ ✎ Corectează mișcarea
+Commission proposée : {p} % de {r} = {c} (modifiable) ¦ Comision propus: {p} % din {r} = {c} (modificabil)
+virement, chèque… ¦ transfer, cec…
+Versé à (représentant, si mineur ou sous tutelle) ¦ Plătit (reprezentantului dacă e minor sau sub tutelă)
+Montant incorrect. ¦ Sumă invalidă.
+Mouvement corrigé ¦ Mișcare corectată
+Mouvement noté ¦ Mișcare notată
+versé à {n} ¦ {n} plătit
+Décompte — {n} ¦ Decont — {n}
+Aucun mouvement noté. ¦ Nicio mișcare notată.
+Reste à reverser ¦ Rămas de plătit
+Noter un mouvement ¦ Notează o mișcare
+Décompte pour l’héritier ¦ Decont pentru moștenitor
+Facturer la commission ¦ Facturează comisionul
+Facture ¦ Factură
+Avoir ¦ Factură de stornare
+Devis ¦ Ofertă
+N° de TVA ¦ Cod TVA
+BROUILLON ¦ CIORNĂ
+ÉMIS ¦ EMIS
+ÉMISE ¦ EMISĂ
+Client ¦ Client
+Total HT ¦ Total fără TVA
+TVA {r} % ¦ TVA {r} %
+Total TTC ¦ Total cu TVA
+Commission du contrat de révélation ({p} % de la part reçue : {r}) ¦ Comision conform contractului de revelație ({p} % din partea primită: {r})
+Commission du contrat de révélation ({p} %) ¦ Comision conform contractului de revelație ({p} %)
+Temps passé ({h} h {m}) ¦ Timp petrecut ({h} h {m})
+Frais ¦ Cheltuieli
+🧾 DEVIS ¦ 🧾 OFERTĂ
+🧾 FACTURE ¦ 🧾 FACTURĂ
+{k} {n} ¦ {k} {n}
+Brouillon, pas encore numéroté ¦ Ciornă, încă fără număr
+Garder en brouillon ¦ Păstrează ca ciornă
+Ce que l’app ne fait pas : elle ne connaît ni ton statut, ni ton régime de TVA, ni les mentions que ta facture doit porter. C’est toi qui choisis le taux et qui écris les mentions (avec ton comptable). L’app numérote sans trou, interdit de modifier une facture émise, fait les additions et garde tout. ¦ Ce nu face aplicația: nu îți cunoaște statutul, regimul de TVA sau mențiunile obligatorii. Cota o alegi tu și mențiunile le scrii tu (cu contabilul tău). Aplicația numerotează fără goluri, interzice modificarea unei facturi emise, adună și păstrează totul.
+🏢 Mon cabinet : des champs obligatoires sont vides ({f}) : la facture ne pourra pas être émise. ¦ 🏢 Biroul meu: câmpuri obligatorii goale ({f}): factura nu va putea fi emisă.
+Adresse du client ¦ Adresa clientului
+Prix HT ¦ Preț fără TVA
+Taux de TVA (%) — choisi par toi ¦ Cota TVA (%) — aleasă de tine
+ton taux ¦ cota ta
+Repris de ta dernière facture ; jamais deviné. ¦ Preluată din ultima ta factură; niciodată ghicită.
+Aucun taux proposé : tape celui que t’a indiqué ton comptable. ¦ Nicio cotă propusă: scrie-o pe cea dată de contabilul tău.
+Émettre le devis n° {n} ¦ Emite oferta nr. {n}
+Émettre la facture n° {n} ¦ Emite factura nr. {n}
+Sur la facture ¦ Pe factură
+à remplir ¦ de completat
+⏱ Temps passé : non coché, compris dans la commission ¦ ⏱ Timp petrecut: nebifat, inclus în comision
+taux à choisir ¦ cotă de ales
+Émettre le devis {n} ? Il reste modifiable tant qu’il n’est pas accepté. ¦ Emiți oferta {n}? Poate fi modificată cât timp nu e acceptată.
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. Émettre {n} ? ¦ O factură emisă nu mai poate fi modificată sau ștearsă. O factură de stornare o corectează. Emiți {n}?
+Émettre ¦ Emite
+{n} émise ¦ {n} emisă
+Brouillon gardé ¦ Ciornă păstrată
+brouillon ¦ ciornă
+émis ¦ emisă
+avoir ¦ stornare
+✓ payée le {d} ¦ ✓ plătită {d}
+attendue ¦ așteptată
+Tout le cabinet ¦ Tot biroul
+avec les mouvements de fonds ¦ cu mișcările de fonduri
+CSV pour le comptable ¦ CSV pentru contabil
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. ¦ O factură emisă nu mai poate fi modificată sau ștearsă. O factură de stornare o corectează.
+Chercher… (n°, client, dossier) ¦ Caută… (nr., client, dosar)
+TTC ¦ cu TVA
+🧾 Faire un avoir ¦ 🧾 Emite o stornare
+Payée… ¦ Plătită…
+Accepté ¦ Acceptată
+Transformer en facture ¦ Transformă în factură
+Pas encore de facture. ¦ Încă nicio factură.
+Brouillon supprimé (aucun numéro consommé) ¦ Ciornă ștearsă (niciun număr consumat)
+L’avoir reprend les lignes de la facture en négatif, avec son propre numéro. Il ne peut plus être modifié. ¦ Stornarea reia rândurile facturii cu semnul minus, cu propriul număr. Nu mai poate fi modificată.
+Payée ¦ Plătită
+Date (AAAA-MM-JJ) et moyen, ex. : 2026-11-20 virement ¦ Data (AAAA-LL-ZZ) și modul, ex.: 2026-11-20 transfer
+Paiement noté ¦ Plată notată
+Devis accepté ¦ Ofertă acceptată
+Brouillon de facture prêt ¦ Ciornă de factură gata
+Registre des factures ¦ Registrul facturilor
+Factures du dossier ¦ Facturile dosarului
+Devis et factures ¦ Oferte și facturi
+Faire un devis ¦ Creează o ofertă
+Faire une facture ¦ Creează o factură
+Pas encore de facture pour ce dossier. ¦ Încă nicio factură pentru acest dosar.
+HT ¦ fără TVA
+{n} base(s) verrouillée(s) non lue(s) ¦ {n} baze blocate necitite
+Dossiers ouverts ¦ Dosare deschise
+dont {n} clos ¦ dintre care {n} închise
+Délai moyen (ouvert → remis) ¦ Durata medie (deschis → predat)
+sur {n} dossiers remis ¦ pe {n} dosare predate
+pas assez de dossiers pour une moyenne ¦ prea puține dosare pentru o medie
+Contrats signés / refusés ¦ Contracte semnate / refuzate
+{p} % signés · {n} sans réponse ¦ {p} % semnate · {n} fără răspuns
+Facturé / encaissé ({k}) ¦ Facturat / încasat ({k})
+encaissé {a} · reste {b} ¦ {a} încasat · {b} rămas
+Pas encore de facture : seuls le temps et les contrats sont comptés ¦ Încă nicio factură: se numără doar timpul și contractele
+{n} en cours depuis {m} mois en moyenne ¦ {n} în lucru, în medie {m} luni
+Temps passé par dossier (heures) ¦ Timp petrecut pe dosar (ore)
+Aucun temps noté. ¦ Niciun timp notat.
+Voir en tableau ¦ Vezi ca tabel
+Facturé et encaissé par trimestre ({k}) ¦ Facturat și încasat pe trimestru ({k})
+Facturé ¦ Facturat
+Encaissé ¦ Încasat
+Aucun nom d’héritier dans cette vue : des numéros de dossier et des totaux. Rien n’est écrit. ¦ Niciun nume de moștenitor în această vedere: numere de dosar și totaluri. Nimic nu se scrie.
+Pour {n} ¦ Pentru {n}
+le notaire ¦ notar
+⤓ Fabriquer la copie ¦ ⤓ Creează copia
+Ce qui part ¦ Ce pleacă
+Tableau des héritiers et parts, arbre, chaîne de filiation (comme le PDF) ¦ Tabelul moștenitorilor și cotelor, arbore, lanț de filiație (ca PDF-ul)
+📑 Pièces (images des actes) ¦ 📑 Dovezi (imagini ale actelor)
+Adresses des héritiers ¦ Adresele moștenitorilor
+🕵️ Joindre les recherches faites ¦ 🕵️ Atașează căutările efectuate
+Journal, échanges, temps, factures ne partent jamais. ¦ Jurnalul, schimburile, timpul și facturile nu pleacă niciodată.
+Protection ¦ Protecție
+Le fichier est chiffré (AES-256) ; la page demande le mot de passe à l’ouverture. Donne-le au notaire par un autre moyen (téléphone, SMS). Oublié = fichier illisible, même pour toi (refais-en un). ¦ Fișierul este criptat (AES-256); pagina cere parola la deschidere. Dă-i-o notarului pe altă cale (telefon, SMS). Uitată = fișier ilizibil, și pentru tine (creează altul).
+Copie v{n} ; l’app garde la liste des copies faites, pas les fichiers. ¦ Copia v{n}; aplicația păstrează lista copiilor create, nu fișierele.
+Voilà ce qui part : {h} héritiers, {p} pièces, {a} adresse(s). ¦ Pleacă: {h} moștenitori, {p} dovezi, {a} adrese.
+Fiche confidentielle : {n} retirée (calcul inchangé). ¦ Fișă confidențială: {n} omis(ă) (calcul neschimbat).
+une branche n’est pas tranchée ¦ o ramură nu este decisă
+Fichier trop lourd pour un courriel (plus de 20 Mo). Continuer quand même ? ¦ Fișierul este prea mare pentru un e-mail (peste 20 MB). Continui oricum?
+🤝 Copie pour le notaire ¦ 🤝 Copie pentru notar
+Copie v{v} du {d}, calcul indicatif : à vérifier par l’étude. ¦ Copia v{v} din {d}, calcul orientativ: de verificat de biroul notarial.
+{n} · {t} ¦ {n} · {t}
+Copie protégée par un mot de passe. ¦ Copie protejată prin parolă.
+Copie v{n} fabriquée ¦ Copia v{n} creată
+Mouvement supprimé ¦ Mișcare ștearsă
+⚰️ Décès d’un héritier ¦ ⚰️ Decesul unui moștenitor
+Ce que « ✓ C’est lui » écrit : la fiche sert aussi aux autres dossiers. ¦ Ce notează „✓ Este această persoană”: fișa servește și altor dosare.
+Le décès sur la fiche et le statut du dossier ¦ Decesul pe fișă și statutul în dosar
+Seulement le statut du dossier ¦ Doar statutul în dosar
+Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de bruit, risque d’en rater. ¦ Pistele apar de la acest scor (din 100). Mai sus: mai puțin zgomot, risc să ratezi una.
+Après chaque nouvel import du fichier INSEE : vérifier les dossiers en cours tout seul (jamais de changement sans ton clic). ¦ După fiecare nou import al fișierului INSEE: verifică singur dosarele în lucru (niciodată o modificare fără clicul tău).
+Automatique, dans la cloche ¦ Automat, în clopoțel
+Seulement à la main ¦ Doar manual
+📋 Questionnaire ¦ 📋 Chestionar
+Ce que l’héritier te renvoie après avoir rempli le questionnaire. ¦ Ce îți trimite moștenitorul după completare.
+Un petit fichier .json ¦ Un fișier mic .json
+La page .html remplie ¦ Pagina .html completată
+Pré-rempli : son nom et sa naissance seulement, jamais le défunt ni un montant. ¦ Precompletat: doar numele și nașterea lui, niciodată defunctul sau o sumă.
+Pré-rempli (ce qui le concerne) ¦ Precompletat (ce îl privește)
+Tout vide ¦ Totul gol
+📞 Échanges ¦ 📞 Schimburi
+Où noter et relire les appels, courriels et visites. ¦ Unde se notează și se citesc apelurile, e-mailurile și vizitele.
+Un onglet du dossier et un raccourci dans 👥 Héritiers ¦ Fila dosarului și scurtătură în 👥 Moștenitori
+Seulement dans 👥 Héritiers ¦ Doar în 👥 Moștenitori
+Les courriers du Registre dans la liste des échanges. ¦ Scrisorile din registru în lista schimburilor.
+Montrés en gris, en lecture ¦ Afișate în gri, doar pentru citire
+Pas montrés ¦ Neafișate
+📮 Recommandés ¦ 📮 Recomandate
+Relance quand l’accusé de réception n’est pas revenu (réglable aussi pour chaque courrier). ¦ Reamintire când confirmarea de primire nu s-a întors (reglabil și pe scrisoare).
+15 jours ¦ 15 zile
+8 jours ¦ 8 zile
+21 jours ¦ 21 de zile
+L’app n’interroge jamais La Poste : le lien ouvre la page dans ton navigateur, tu notes toi-même l’AR. ¦ Aplicația nu interoghează niciodată La Poste: linkul deschide pagina în browserul tău, confirmarea o notezi tu.
+Lien vers la page de suivi ¦ Link spre pagina de urmărire
+Pas de lien (on copie le numéro) ¦ Fără link (numărul se copiază)
+Adresse de la page de suivi, avec {numero} (https:// seulement). ¦ Adresa paginii de urmărire, cu {numero} (doar https://).
+🧾 Devis et factures ¦ 🧾 Oferte și facturi
+Un seul registre pour le cabinet ¦ Un singur registru pentru birou
+Dans la généalogie des dossiers ¦ În arborele dosarelor
+F-2026-0042 (remis à 1 chaque année) ¦ F-2026-0042 (de la 1 în fiecare an)
+Compteur unique (F-0042) ¦ Contor unic (F-0042)
+La ligne « temps passé » proposée sur la facture. ¦ Rândul „timp petrecut” propus pe factură.
+Temps décoché quand il y a une commission ¦ Timp nebifat dacă există comision
+Temps toujours coché ¦ Timp mereu bifat
+Préfixe des factures. ¦ Prefixul facturilor.
+Préfixe des avoirs. ¦ Prefixul stornărilor.
+Préfixe des devis. ¦ Prefixul ofertelor.
+📈 Activité ¦ 📈 Activitate
+La période montrée en ouvrant le tableau de bord. ¦ Perioada afișată la deschiderea tabloului.
+L’année en cours ¦ Anul acesta
+Les 12 derniers mois ¦ Ultimele 12 luni
+Les montants facturés et encaissés. ¦ Sumele facturate și încasate.
+Au choix (bouton) ¦ La cerere (comutator)
+La copie contient des actes et des noms de vivants. ¦ Copia conține acte și nume de persoane în viață.
+Mot de passe coché au départ ¦ Parolă bifată de la început
+Décoché au départ ¦ Nebifată de la început
+Le notaire reçoit souvent les adresses à part. ¦ Notarul primește adesea adresele separat.
+Adresses décochées au départ ¦ Adrese nebifate de la început
+Cochées au départ ¦ Bifate de la început
+🗺 Carte des héritiers ¦ 🗺 Harta moștenitorilor
+Rien n’est envoyé en ligne : la commune vient de la base ; le numéro, seulement si la BAN du département est déjà dans l’app (🗺️ Plan des adresses). ¦ Nimic nu se trimite online: comuna vine din bază; numărul doar dacă BAN a departamentului este deja în aplicație (🗺️ Planul adreselor).
+Le numéro de rue (BAN déjà téléchargée) ¦ Număr (BAN deja descărcată)
+L’app n’a pas d’annuaire des notaires et n’en invente pas. ¦ Aplicația nu are o listă de notari și nu inventează niciunul.
+Les notaires de tes dossiers et contacts ¦ Notarii dosarelor și contactelor tale
+Pas de notaires ¦ Niciun notar
+Le brouillon de contrat écrit par l’app. Un contrat t’engage : fais-le écrire ou relire par ton conseil. ¦ Ciornă de contract redactată de aplicație. Un contract te angajează: dă-l spre redactare sau verificare consilierului tău.
+Retiré : page vide avec les champs ¦ Eliminat: pagină goală cu câmpurile
+Gardé, marqué « exemple non juridique » ¦ Păstrat, marcat „exemplu nejuridic”
+Chaque contrat rangé retient la version utilisée. ¦ Fiecare contract clasat ține minte versiunea folosită.
+Toutes les versions gardées ¦ Toate versiunile păstrate
+Seulement la dernière ¦ Doar ultima
+💶 Fonds ¦ 💶 Fonduri
+Commission = % du contrat × montant reçu. ¦ Comision = % din contract × suma primită.
+Calculée puis modifiable ¦ Calculat, apoi modificabil
+Toujours tapée à la main ¦ Mereu scris de mână
+Le décompte à l’héritier. ¦ Decontul pentru moștenitor.
+Décompte imprimable ¦ Decont de tipărit
+Écran seulement ¦ Doar pe ecran
+🔗 Double preuve ¦ 🔗 Dublă dovadă
+Le seuil d’un lien solide. ¦ Pragul unei legături solide.
+Deux pièces par lien ¦ Două dovezi pe legătură
+Une seule (signaler seulement « aucune ») ¦ Una singură (semnalează doar „niciuna”)
+Dans la liste « avant de remettre ». ¦ În lista „înainte de predare”.
+« À revoir » (n’empêche rien) ¦ „De revăzut” (nu blochează nimic)
+Bloquant ¦ Blocant
+🗓 Dates importantes ¦ 🗓 Date importante
+Les rappels proposés pour une nouvelle date (réglables pour chaque date). L’app ne calcule aucun délai légal. ¦ Reamintiri propuse pentru o dată nouă (reglabile pe dată). Aplicația nu calculează niciun termen legal.
+J−30, J−7, J−1 ¦ Z−30, Z−7, Z−1
+J−7 seulement ¦ Doar Z−7
+Où les voir dans 📁 Dossier. ¦ Unde le vezi în 📁 Dosar.
+Dans les échéances, avec un drapeau 🗓 ¦ În termene, cu insigna 🗓
+Un bloc à part ¦ Bloc separat
+👥 Fusion de dossiers ¦ 👥 Unirea dosarelor
+Les successions restent distinctes : le calcul n’est jamais mélangé. ¦ Succesiunile rămân separate: calculul nu se amestecă niciodată.
+Deux défunts, deux calculs côte à côte ¦ Doi defuncți, două calcule alăturate
+Dossiers liés (recherches en commun) ¦ Dosare legate (căutări comune)
+Combien de temps la fusion peut être annulée. ¦ Cât timp se poate anula o unire.
+↶ pendant 30 jours ¦ ↶ timp de 30 de zile
+↶ tant que rien n’a été ajouté ¦ ↶ cât timp nu s-a adăugat nimic
+Joindre les recherches faites au dossier du notaire. ¦ Atașează căutările efectuate la dosarul pentru notar.
+Coché au départ ¦ Bifate de la început
+📦 Archive ¦ 📦 Arhivă
+Le mot de passe de l’archive de fin de dossier. Oublié = archive perdue. ¦ Parola arhivei la sfârșitul unui dosar. Uitată = arhivă pierdută.
+Proposé, coché ¦ Propusă, bifată
+Pas proposé ¦ Nepropusă
+💡 Autres idées ¦ 💡 Și alte idei
+🔗 Le dossier lié d’un héritier mort après le défunt. ¦ 🔗 Dosar legat pentru un moștenitor decedat după defunct.
+Ses descendants rattachés ¦ Descendenții lui atașați
+📮 Une lettre par service : quels actes. ¦ 📮 O scrisoare pe serviciu: ce acte.
+Manquants et déjà demandés ¦ Lipsă și deja cerute
+⏳ Délai de réponse par organisme. ¦ ⏳ Timp de răspuns pe serviciu.
+⏳ Nombre de courriers avant de donner un délai. ¦ ⏳ Număr de scrisori înainte de afișarea unui timp.
+📅 La cloche prévient avant qu’une copie d’acte soit trop ancienne (durée tapée par toi pour chaque pièce). ¦ 📅 Clopoțelul anunță înainte ca o copie de act să fie prea veche (durata o introduci pe dovadă).
+7 jours ¦ 7 zile
+🙈 Écran partagé : ce qui remplace les noms. ¦ 🙈 Ecran partajat: ce înlocuiește numele.
+Initiales ¦ Inițiale
+Numéros (Héritier 1, 2…) ¦ Numere (Moștenitor 1, 2…)
+🙈 Écran partagé : les montants. ¦ 🙈 Ecran partajat: sumele.
+Montants masqués ¦ Sume ascunse
+Montants visibles ¦ Sume vizibile
+avec AR ¦ cu confirmare de primire
+sans AR ¦ fără confirmare de primire
+lettre suivie ¦ trimitere urmărită
+pas en recommandé ¦ nu recomandat
+Son état civil ¦ Starea lui civilă
+nom de naissance, prénoms, date et lieu de naissance ¦ nume la naștere, prenume, data și locul nașterii
+mariage, PACS, divorce, dates ¦ căsătorie, parteneriat, divorț, date
+prénoms, dates de naissance, décédés ? ¦ nume, date de naștere, decedați?
+avec un moyen de les joindre ¦ cu o modalitate de a-i contacta
+Documents qu’il peut fournir ¦ Documente pe care le poate furniza
+livret de famille, actes, jugement… ¦ carnet de familie, acte, hotărâre…
+Une question à toi ¦ Întrebarea ta
+💾 Fichier à remplir ¦ 💾 Fișier de completat
+🖨 Papier (PDF) ¦ 🖨 Hârtie (PDF)
+Ce qui le concerne ¦ Ce îl privește
+Famille connue ¦ Familia cunoscută
+Sa question ¦ Întrebarea lui
+Reversé à l’héritier ¦ Plătit moștenitorului
+SIRET ¦ SIRET
+Mentions ¦ Mențiuni
+Trimestre ¦ Trimestru
+Personnes rattachées ¦ Fișe atașate
+Courriers, échanges, fonds ¦ Scrisori, schimburi, fonduri
+Temps et frais, échéances ¦ Timp și cheltuieli, termene
+Questionnaire d’héritier fabriqué ¦ Chestionar pentru moștenitor creat
+Réponses d’un questionnaire écrites ¦ Răspunsuri la chestionar introduse
+Copie du dossier pour le notaire ¦ Copia dosarului pentru notar
+Facture émise ou imprimée ¦ Factură emisă sau tipărită
+Registre des factures (CSV) ¦ Registrul facturilor (CSV)
+Décompte des fonds imprimé ¦ Decont de fonduri tipărit
+Recherches faites (pour le notaire) ¦ Căutări efectuate (pentru notar)
+Image de la carte des héritiers ¦ Imaginea hărții moștenitorilor
+Contrat imprimé ¦ Contract tipărit
+Dossiers fusionnés ¦ Dosare unite
+chiffrée ¦ criptată
+sans mot de passe ¦ fără parolă
+avec les adresses ¦ cu adrese
+sans adresse ¦ fără adresă
+deux défunts ¦ doi defuncți
+dossiers liés ¦ dosare legate
+Aucune lettre à ranger. ¦ Nicio scrisoare de clasat.
+Avec qui ? ¦ Cu cine?
+Ce dossier est archivé : rouvre-le d’abord. ¦ Acest dosar este arhivat: redeschide-l mai întâi.
+Ce fichier n’est pas un .docx. ¦ Acest fișier nu este un .docx.
+Ce n’est pas un devis. ¦ Aceasta nu este o ofertă.
+Cette facture a déjà un avoir. ¦ Această factură are deja o stornare.
+Choisis la date. ¦ Alege o dată.
+Choisis toi-même le taux de TVA (avec ton comptable) avant d’émettre. ¦ Alege tu cota de TVA (cu contabilul tău) înainte de emitere.
+Choisis un autre dossier. ¦ Alege alt dosar.
+Dossier clos ou archivé : rouvre-le d’abord. ¦ Dosar închis sau arhivat: redeschide-l mai întâi.
+Déjà émise. ¦ Deja emisă.
+Facture introuvable. ¦ Factură negăsită.
+La facture n’a aucune ligne. ¦ Factura nu are niciun rând.
+La fusion date de plus de 30 jours : elle ne peut plus être annulée. ¦ Unirea are mai mult de 30 de zile: nu mai poate fi anulată.
+Le mot de passe est obligatoire (réglage). ¦ Parola este obligatorie (setare).
+Ligne INSEE introuvable. ¦ Rând INSEE negăsit.
+Ligne incorrecte : quantité ou prix. ¦ Rând invalid: cantitate sau preț.
+Mouvement introuvable. ¦ Mișcare negăsită.
+Numéro déjà pris : renuméroter le brouillon. ¦ Număr deja luat: renumerotează ciorna.
+Où as-tu cherché ? ¦ Unde ai căutat?
+Quelque chose a été ajouté depuis la fusion : elle ne peut plus être annulée. ¦ S-a adăugat ceva de la unire: nu mai poate fi anulată.
+Seule une facture émise peut être payée. ¦ Doar o factură emisă poate fi plătită.
+Taux de TVA incorrect (ex. : le taux que t’a indiqué ton comptable). ¦ Cotă de TVA invalidă (ex.: cota dată de contabilul tău).
+Type d’événement « Décès » introuvable. ¦ Tipul de eveniment „Deces” nu a fost găsit.
+Un avoir corrige une facture émise. ¦ O stornare corectează o factură emisă.
+Un devis accepté ne se modifie plus. ¦ O ofertă acceptată nu se mai modifică.
+« D’où vient cette date » est obligatoire. ¦ „De unde vine această dată” este obligatoriu.
+Échange introuvable. ¦ Schimb negăsit.
+💶 Un reversement reste en attente : archiver quand même ? ¦ 💶 O plată este încă în așteptare: arhivezi oricum?
+🔐 Archive protégée : tape son mot de passe. ¦ 🔐 Arhivă protejată: scrie parola ei.
+🏢 Mon cabinet : un champ que tu as déclaré obligatoire est vide ({f}) : la facture n’est pas émise. ¦ 🏢 Biroul meu: un câmp pe care l-ai declarat obligatoriu este gol ({f}): factura nu se emite.
+J−{n} ¦ Z−{n}
+=descendant rattaché ¦ descendent atașat|descendenți atașați|de descendenți atașați
+=échange noté ¦ schimb notat|schimburi notate|de schimburi notate
+# corrections : préfixes, émission datée du jour, INSEE, fiches verrouillées, registre partagé
+le même jour que le défunt, ou une date incomplète : l’ordre des décès n’est pas connu ; le statut reste « Inconnu », à vérifier sur les actes. ¦ în aceeași zi cu defunctul sau o dată incompletă: ordinea deceselor nu se cunoaște; statutul rămâne „Necunoscut”, de verificat în acte.
+Sur la fiche de {n} : un décès en {d} (date incomplète dans le fichier), source « Fichier des personnes décédées (INSEE) », avec la date du relevé. ¦ Pe fișa lui {n}: un deces în {d} (dată incompletă în fișier), sursa „Fișierul persoanelor decedate (INSEE)”, cu data consultării.
+Ce préfixe est déjà celui des factures, des avoirs ou des devis : choisis-en un autre (les trois doivent être différents). ¦ Acest prefix este deja cel al facturilor, notelor de credit sau devizelor: alege altul (toate trei trebuie să fie diferite).
+Préfixe refusé : de 1 à 6 lettres ou chiffres, sans accent. ¦ Prefix refuzat: de la 1 la 6 litere sau cifre, fără diacritice.
+Un seul registre : numérotation continue même si les dossiers sont dans plusieurs généalogies. Passer de l’un à l’autre repartirait d’un autre compteur (numéros en double) : ce choix est bloqué dès la première facture émise. ¦ Un singur registru: numerotare continuă chiar dacă dosarele sunt în mai multe genealogii. Trecerea de la unul la altul ar reporni de la alt contor (numere duble): alegerea se blochează de la prima factură emisă.
+Le compteur ne recule jamais ; un brouillon effacé ne consomme pas de numéro. Bloqué dès la première facture émise. ¦ Contorul nu dă niciodată înapoi; o ciornă ștearsă nu consumă număr. Blocat de la prima factură emisă.
+Une facture est déjà émise dans ce registre : le registre et la numérotation ne se changent plus (sinon, des numéros en double). ¦ În acest registru a fost deja emisă o factură: registrul și numerotarea nu se mai schimbă (altfel, numere duble).
+La dernière pièce émise est datée après aujourd’hui : vérifie la date de l’ordinateur avant d’émettre. ¦ Ultimul document emis are o dată ulterioară zilei de azi: verifică data calculatorului înainte de a emite.
+Émettre le devis ¦ Emite devizul
+Émettre la facture ¦ Emite factura
+À l’émission, la pièce prend la date du jour et le prochain numéro du registre ; le numéro donné s’affiche une fois émise. ¦ La emitere, documentul primește data zilei și următorul număr din registru; numărul dat se afișează după emitere.
+Émettre le devis ? Il prend la date du jour et le prochain numéro du registre ; il reste modifiable tant qu’il n’est pas accepté. ¦ Emiți devizul? Primește data zilei și următorul număr din registru; rămâne modificabil cât timp nu e acceptat.
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. Émettre la facture ? Elle prend la date du jour et le prochain numéro du registre. ¦ O factură emisă nu mai poate fi modificată sau ștearsă. Pentru corectare: o notă de credit. Emiți factura? Primește data zilei și următorul număr din registru.
+{n} émise le {d} ¦ {n} emisă la {d}
+Ce devis a déjà sa facture (brouillon ou émise) : ouvre-la dans le registre. ¦ Acest deviz are deja factura lui (ciornă sau emisă): deschide-o în registru.
+Fiche verrouillée : le décès n’est pas écrit. Déverrouille la fiche d’abord, ou choisis « Seulement le statut du dossier » dans les réglages. ¦ Fișă blocată: decesul nu se scrie. Deblochează mai întâi fișa sau alege „Doar statutul dosarului” în setări.
+Fiche verrouillée : les réponses ne sont pas écrites sur la fiche. Déverrouille-la d’abord. ¦ Fișă blocată: răspunsurile nu se scriu pe fișă. Deblocheaz-o mai întâi.
+Fiche verrouillée : les réponses ne sont pas retirées. Déverrouille-la d’abord. ¦ Fișă blocată: răspunsurile nu se retrag. Deblocheaz-o mai întâi.
+💶 Un reversement reste en attente, et un héritier a été trop payé (plus reversé que reçu) : archiver quand même ? ¦ 💶 O plată este încă în așteptare, iar un moștenitor a primit prea mult (plătit mai mult decât s-a primit): arhivezi totuși?
+💶 Trop versé : un héritier a reçu plus que ce que le notaire a versé pour lui (reste négatif) : archiver quand même ? ¦ 💶 Plătit în plus: un moștenitor a primit mai mult decât a virat notarul pentru el (rest negativ): arhivezi totuși?
+Cette pièce appartient à une généalogie verrouillée par un mot de passe : ouvre-la d’abord. ¦ Acest document aparține unei genealogii blocate cu parolă: deschide-o mai întâi.
+Cette généalogie est protégée par un mot de passe : l’archive doit être chiffrée. Choisis un mot de passe pour l’archive. ¦ Această genealogie este protejată cu parolă: arhiva trebuie criptată. Alege o parolă pentru arhivă.
+Cette généalogie est protégée par un mot de passe : la copie pour le notaire doit être chiffrée (coche « Mot de passe »). ¦ Această genealogie este protejată cu parolă: copia pentru notar trebuie criptată (bifează „Parolă”).
+Cette généalogie est protégée par un mot de passe : ce qui en sort est toujours chiffré. ¦ Această genealogie este protejată cu parolă: ce iese din ea este mereu criptat.
+Copie chiffrée · {n} ¦ Copie criptată · {n}
+Pièce introuvable. ¦ Document negăsit.

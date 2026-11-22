@@ -1,0 +1,71 @@
+fr ¦ hr ¦ sl
+# 🔎 Poser une question, suite (lib/question_plus.php, assets/js/heritage-questions-plus.js) : fautes, dates, « moi », négations, OU, renvois, ⌘K
+« {a} » lu « {b} » ¦ „{a}” pročitano kao „{b}” ¦ »{a}« prebrano kot »{b}«
+vers {y} ({a}-{b}) ¦ oko {y}. ({a}-{b}) ¦ okoli leta {y} ({a}-{b})
+dans les années {y} ({a}-{b}) ¦ u {y}-ima ({a}-{b}) ¦ v letih {y} ({a}-{b})
+« moi » = la personne de départ : {name} ¦ „ja” = početna osoba: {name} ¦ »jaz« = izhodiščna oseba: {name}
+qui est : {name} ¦ tko je: {name} ¦ kdo je: {name}
+« {a} » compris comme {b} ¦ „{a}” shvaćeno kao {b} ¦ »{a}« razumljeno kot {b}
+dossiers de succession ¦ ostavinski predmeti ¦ zapuščinske zadeve
+Aucun dossier de succession dans cette généalogie. ¦ U ovom rodoslovlju nema ostavinskih predmeta. ¦ V tem rodoslovju ni zapuščinskih zadev.
+courriers sans réponse ¦ pisma bez odgovora ¦ pisma brez odgovora
+Courriers aux héritiers sans réponse : {n}. ¦ Pisma nasljednicima bez odgovora: {n}. ¦ Pisma dedičem brez odgovora: {n}.
+Aucun courrier de dossier n’attend de réponse. ¦ Nijedno pismo iz predmeta ne čeka odgovor. ¦ Nobeno pismo iz zadev ne čaka na odgovor.
+échéances en retard ¦ prekoračeni rokovi ¦ zamujeni roki
+Dossiers avec des échéances en retard : {n}. ¦ Predmeti s prekoračenim rokovima: {n}. ¦ Zadeve z zamujenimi roki: {n}.
+Aucun dossier n’a d’échéance en retard. ¦ Nijedan predmet nema prekoračen rok. ¦ Nobena zadeva nima zamujenega roka.
+défunt : {name} ¦ pokojnik: {name} ¦ pokojnik: {name}
+Aucun dossier de succession pour {name}. ¦ Nema ostavinskog predmeta za {name}. ¦ Ni zapuščinske zadeve za {name}.
+⚖️ Rechercher les héritiers… ¦ ⚖️ Traži nasljednike… ¦ ⚖️ Poišči dediče…
+Pièces notées « manquante » : {n}. La liste complète (en main, demandées, à demander) est dans l’onglet Pièces du dossier. ¦ Isprave označene „nedostaje”: {n}. Cijeli popis (u rukama, zatražene, za zatražiti) nalazi se na kartici Isprave u predmetu. ¦ Listine, označene »manjka«: {n}. Celoten seznam (v rokah, zahtevane, za zahtevati) je na zavihku Listine v zadevi.
+Aucune pièce notée « manquante ». La liste des pièces de chaque dossier est dans son onglet Pièces. ¦ Nijedna isprava nije označena „nedostaje”. Popis svakog predmeta nalazi se na njegovoj kartici Isprave. ¦ Nobena listina ni označena »manjka«. Seznam vsake zadeve je na njenem zavihku Listine.
+pièces manquantes ¦ isprave koje nedostaju ¦ manjkajoče listine
+Héritiers introuvables ou qui ne répondent pas : {n}. ¦ Nasljednici koji se ne mogu pronaći ili ne odgovaraju: {n}. ¦ Dediči, ki jih ni mogoče najti ali ne odgovarjajo: {n}.
+Aucun héritier noté introuvable ou sans réponse. ¦ Nijedan nasljednik nije označen kao nepronađen ili bez odgovora. ¦ Noben dedič ni označen kot nenajden ali brez odgovora.
+héritiers introuvables ¦ nepronađeni nasljednici ¦ nenajdeni dediči
+De qui ? Écris par exemple « les héritiers de Jean Dupont ». ¦ Čiji? Napiši na primjer „les héritiers de Jean Dupont”. ¦ Čigavi? Napiši na primer »les héritiers de Jean Dupont«.
+héritiers de {name} ¦ nasljednici: {name} ¦ dediči: {name}
+Aucun dossier de succession pour {name}. Le dossier calcule les héritiers d’après l’arbre. ¦ Nema ostavinskog predmeta za {name}. Predmet izračunava nasljednike iz stabla. ¦ Ni zapuščinske zadeve za {name}. Zadeva izračuna dediče iz drevesa.
+Dossier {d} : les héritiers n’ont pas encore été calculés. Ouvre le dossier pour faire le calcul. ¦ Predmet {d}: nasljednici još nisu izračunati. Otvori predmet za izračun. ¦ Zadeva {d}: dediči še niso izračunani. Odpri zadevo za izračun.
+Dossier {d} — héritiers d’après le dernier calcul enregistré : {n}. ¦ Predmet {d} — nasljednici prema posljednjem spremljenom izračunu: {n}. ¦ Zadeva {d} — dediči po zadnjem shranjenem izračunu: {n}.
+Branches encore à rechercher : {n}. ¦ Grane koje još treba istražiti: {n}. ¦ Veje, ki jih je treba še raziskati: {n}.
+Actes ou documents à chercher pour {name} : {n}. Les 3 premiers ci-dessous ; la liste complète, avec où chercher et dans quelle série, est dans « Que manque-t-il ? ». ¦ Spisi ili dokumenti koje treba potražiti za {name}: {n}. Prva 3 u nastavku; cijeli popis, s time gdje i u kojoj seriji tražiti, nalazi se u „Što nedostaje?”. ¦ Listine ali dokumenti za iskanje za {name}: {n}. Prvi 3 spodaj; celoten seznam s tem, kje in v kateri seriji iskati, je v »Kaj manjka?«.
+Rien de connu à chercher pour {name}. ¦ Ništa poznato za potražiti za {name}. ¦ Nič znanega za iskanje za {name}.
+actes à chercher ¦ spisi za potražiti ¦ listine za iskanje
+où chercher ¦ gdje tražiti ¦ kje iskati
+« Où chercher ? » donne pour {name} les sites et les séries d’archives les plus utiles, et pourquoi. ¦ „Gdje tražiti?” daje za {name} najkorisnije stranice i arhivske serije, i zašto. ¦ »Kje iskati?« pokaže za {name} najkoristnejše strani in arhivske serije ter zakaj.
+« Où chercher ? » donne pour chaque personne les sites et les séries d’archives les plus utiles, et pourquoi. ¦ „Gdje tražiti?” daje za svaku osobu najkorisnije stranice i arhivske serije, i zašto. ¦ »Kje iskati?« pokaže za vsako osebo najkoristnejše strani in arhivske serije ter zakaj.
+doublons ¦ duplikati ¦ dvojniki
+Le Contrôle de la base cherche les doublons probables (mêmes noms, mêmes dates, mêmes parents) et aide à les fusionner. ¦ Provjera baze traži vjerojatne duplikate (ista imena, datumi, roditelji) i pomaže ih spojiti. ¦ Preverjanje baze išče verjetne dvojnike (enaka imena, datumi, starši) in pomaga pri združevanju.
+mort pendant la guerre, en âge de combattre ¦ umro tijekom rata, u dobi za borbu ¦ umrl med vojno, v vojaški starosti
+mort pendant la guerre ¦ umro tijekom rata ¦ umrl med vojno
+morts pendant {era} ¦ umrli tijekom: {era} ¦ umrli med: {era}
+morts à la guerre ¦ poginuli u ratu ¦ padli v vojni
+Morts pendant {era} : {n}. ¦ Umrli tijekom: {era}: {n}. ¦ Umrli med: {era}: {n}.
+Notés « Mort pour la France » : {n}. Morts pendant une guerre, en âge de combattre ou soldats (à vérifier) : {m}. ¦ Označeni „Mort pour la France”: {n}. Umrli tijekom rata, u dobi za borbu ili vojnici (provjeriti): {m}. ¦ Označeni »Mort pour la France«: {n}. Umrli med vojno, v vojaški starosti ali vojaki (preveriti): {m}.
+Dont « Mort pour la France » : {n}. ¦ Od toga „Mort pour la France”: {n}. ¦ Od tega »Mort pour la France«: {n}.
+Pour les soldats : Mémoire des hommes et les registres matricules. ¦ Za vojnike: Mémoire des hommes i matične knjige. ¦ Za vojake: Mémoire des hommes in matične knjige.
+sans date de décès ¦ bez datuma smrti ¦ brez datuma smrti
+sans date de naissance ¦ bez datuma rođenja ¦ brez datuma rojstva
+sans date de mariage ¦ bez datuma vjenčanja ¦ brez datuma poroke
+sans parents connus ¦ bez poznatih roditelja ¦ brez znanih staršev
+sans profession notée ¦ bez zabilježenog zanimanja ¦ brez zabeleženega poklica
+qui ne sont pas des ancêtres ¦ koji nisu preci ¦ ki niso predniki
+pas {ev} à {place} ¦ ne „{ev}” u {place} ¦ ne »{ev}« v {place}
+vivants ou probablement vivants ¦ živi ili vjerojatno živi ¦ živi ali verjetno živi
+pas à {place} ¦ ne u {place} ¦ ne v {place}
+recherche de nom : « {x} » ¦ traženje imena: „{x}” ¦ iskanje imena: »{x}«
+orthographe proche ¦ slično pisanje ¦ podoben zapis
+femmes ¦ žene ¦ ženske
+Réponse réunie : {a} {c} {b}. ¦ Spojeni odgovor: {a} {c} {b}. ¦ Združen odgovor: {a} {c} {b}.
+Je n’ai pas tenu compte de : « {x} ». ¦ Nisam uzeo u obzir: „{x}”. ¦ Nisem upošteval: »{x}«.
+Plusieurs “{w}” : choisir… ¦ Više „{w}”: odaberi… ¦ Več »{w}«: izberi…
+J’ai compris : {x} ¦ Shvatio sam: {x} ¦ Razumel sem: {x}
+Question en français ¦ Pitanje na francuskom ¦ Vprašanje v francoščini
+Poser la question : « {q} » ¦ Postavi pitanje: „{q}” ¦ Zastavi vprašanje: »{q}«
+Questions dans la recherche rapide (⌘K) ¦ Pitanja u brzoj pretrazi (⌘K) ¦ Vprašanja v hitrem iskanju (⌘K)
+Répondre aux questions dans la recherche rapide ¦ Odgovaraj na pitanja u brzoj pretrazi ¦ Odgovarjaj na vprašanja v hitrem iskanju
+« les enfants de Pierre Mazaud » : la réponse courte s’affiche dans la liste ; sinon seulement « Poser la question » ¦ „les enfants de Pierre Mazaud”: kratki odgovor prikazuje se na popisu; inače samo „Postavi pitanje” ¦ »les enfants de Pierre Mazaud«: kratek odgovor se pokaže na seznamu; sicer samo »Zastavi vprašanje«
+Pour aller plus loin, pose la question avec le nom de la personne voulue. ¦ Za dalje postavi pitanje s imenom osobe koju misliš. ¦ Za naprej postavi vprašanje z imenom osebe, ki jo misliš.
+« {a} » cherché d’abord ¦ „{a}” traženo najprije ¦ «{a}« najprej poiskano
+« {a} » = {name} ¦ „{a}” = {name} ¦ «{a}« = {name}

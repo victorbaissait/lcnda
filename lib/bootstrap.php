@@ -3,6 +3,9 @@ declare(strict_types=1);
 /** Enregistrement refusé parce que la même chose a changé ailleurs (autre onglet, autre fenêtre) depuis son ouverture : réponse 409. */
 if (!class_exists('LcndaConflict')) { class LcndaConflict extends RuntimeException {} }
 if (!class_exists('LcndaBadInput')) { class LcndaBadInput extends RuntimeException {} } // donnée de mauvaise forme envoyée par la page → 422
+/** La base est tenue par un autre programme (verrou SQLite) dès son ouverture : réponse 503, message « que faire » (db()). */
+if (!class_exists('LcndaDbBusy')) { class LcndaDbBusy extends RuntimeException {} }
+const DB_BUSY_MESSAGE = 'La base est occupée par un autre programme : une autre copie de l’application, un logiciel qui a ouvert le fichier, ou une synchronisation (OneDrive, Dropbox, iCloud…) en train de le recopier. Ferme cet autre programme ou attends la fin de la synchronisation, puis relance l’application. Rien n’a été modifié.';
 /** Version d'un contenu enregistré (tableau, mise en page) : change dès que le contenu change, même dans la même seconde. */
 function content_rev(?string $json): string { return substr(sha1((string) $json), 0, 16); }
 /** Le JSON reçu est lu en tableaux PHP : un objet vide {} y devient [] et repartait ainsi au navigateur (où ce qu'on y range
@@ -20,9 +23,12 @@ function json_keep_objects(mixed $v, array $objectKeys): mixed
 require_once __DIR__ . '/host_guard.php'; // noms d'hôte locaux seulement (aussi sous Apache / MAMP, sans router.php)
 if (!lcnda_host_guard()) exit;
 require_once __DIR__ . '/paths.php';   // APP_ROOT, DATA_DIR, MEDIA_DIR
+require_once __DIR__ . '/reseau_local.php'; // 🖧 appareil invité (porte du wifi) : lecture seule, registre
 require_once __DIR__ . '/text.php';    // ascii_fold()
+require_once __DIR__ . '/recherche_fr.php'; // 🔎 recherche « à la française » (noms, prénoms, lieux, dates)
 require_once __DIR__ . '/i18n.php';    // 🌐 i18n_t() : messages d'erreur dans la langue de la page
 require_once __DIR__ . '/migrations.php'; // migrate_database(), SCHEMA_VERSION
+require_once __DIR__ . '/calc_cache.php'; // 🐘 calculs lourds gardés tant que la généalogie ne change pas (data_gen, migration 100)
 require_once __DIR__ . '/reference.php';
 require_once __DIR__ . '/registers.php';
 require_once __DIR__ . '/research.php';
@@ -40,6 +46,7 @@ require_once __DIR__ . '/website.php'; // 🌐 Mon site web : les sites, leurs v
 require_once __DIR__ . '/cadastre.php'; // 🗺 Cadastre : les parcelles et leurs liens (Listes → Lieux et maisons)
 require_once __DIR__ . '/successions.php'; // 🏠 Héritages et successions : actes, héritiers, biens, chaîne des propriétaires
 require_once __DIR__ . '/transcriptions.php'; // 📜 Transcription d'actes
+require_once __DIR__ . '/media_pages.php'; // 📑 un document en plusieurs pages (ensembles de pages)
 require_once __DIR__ . '/slideshows.php'; // 🎞️ Diaporamas et récits
 require_once __DIR__ . '/houses.php'; // 🏠 Maisons de famille
 require_once __DIR__ . '/house_library.php'; // 🏠 Plan de maison : objets créés, bibliothèque en ligne libre de droit, packs ZIP
@@ -64,6 +71,7 @@ require_once __DIR__ . '/sources_ouvertes_7.php'; // 🌍 Archives en ligne (7e 
 require_once __DIR__ . '/research_journal.php'; // 🗓 Journal des recherches : tout ce qui a été cherché, « Déjà dans ton suivi », visites faites
 require_once __DIR__ . '/semaine.php'; // 🗓 Ma semaine de recherche : rappels, courriers, visites, pistes, « Que manque-t-il ? », à vérifier, entraide, fait cette semaine
 require_once __DIR__ . '/ou_chercher.php'; // 🌍 Où chercher ? (sites à consulter pour une personne) et 🧩 Murs de brique (ancêtres où l'on bloque)
+require_once __DIR__ . '/archives_dispo.php'; // 🏛 Cet acte est-il en ligne aux archives ? (pastilles, config/archives-en-ligne.json, corrections ✓ / ✗)
 require_once __DIR__ . '/preuve.php'; // ⚖️ Dossiers de preuve (pour / contre, conclusion, certitude) et 🛡 solidité des liens parent-enfant (Branches fragiles)
 require_once __DIR__ . '/archive_services.php'; // 🏛 Services d'archives (F14) : fiches, séries, ce qui a été consulté chez eux
 require_once __DIR__ . '/citation_styles.php'; // ❝ Citation des sources toute prête (F4) : classique, Evidence Explained, Chicago, forum
@@ -76,6 +84,8 @@ require_once __DIR__ . '/sciences.php'; // 🔬 inventions, découvertes, public
 require_once __DIR__ . '/blocs.php'; // 📰 🏆 🎓 blocs communs à toute personne : médias, récompenses, formation
 require_once __DIR__ . '/faces.php'; // 🏷️ « Qui est qui ? » : empreintes des visages (reconnaissance en local)
 require_once __DIR__ . '/question_more.php'; // 🔎 questions en français qui demandent un calcul (parenté, records, moyennes…)
+require_once __DIR__ . '/question_famille.php'; // 🔎 questions en français : mariage (âge, remariage, célibataires) et nombre d'enfants
+require_once __DIR__ . '/question_plus.php'; // 🔎 questions en français : fautes, dates, « moi », négations, OU, parenté élargie, renvois vers les outils
 require_once __DIR__ . '/collections.php';
 require_once __DIR__ . '/heritage.php';
 require_once __DIR__ . '/heritage_tools.php';
@@ -85,10 +95,12 @@ require_once __DIR__ . '/biographie.php';     // 📖 biographie écrite par l'a
 require_once __DIR__ . '/monde_autour.php';   // 🌍 le monde autour : grands événements et histoire locale
 require_once __DIR__ . '/sante.php';          // 🩺 santé de la famille (privée : cachée au départ, jamais exportée)
 require_once __DIR__ . '/cousinade.php';      // 🎉 organiser une cousinade (descendants vivants, invités, badges, plan de table)
+require_once __DIR__ . '/successoral.php';    // ⚖️ généalogiste successoral : dossiers de succession (jamais exportés)
 require_once __DIR__ . '/metiers_anciens.php'; // 🛠️ fiche d'un métier ancien (dictionnaire livré)
 require_once __DIR__ . '/village.php';
 require_once __DIR__ . '/voters.php';         // cartes d'électeur, dates de vote, droit de vote dans le monde
 require_once __DIR__ . '/insee_remote.php';   // décès INSEE : fichiers de data.gouv.fr téléchargés et importés
+require_once __DIR__ . '/media_limits.php';   // 📎 taille des fichiers ajoutés, points d'une image décodée (Réglages → Fichiers des médias)
 require_once __DIR__ . '/htr_setup.php';
 require_once __DIR__ . '/studio.php';         // retouche des photos (l'original est gardé)
 require_once __DIR__ . '/museum.php';         // musée de famille en 3D (pièce d'archives), visite guidée, partage
@@ -102,6 +114,8 @@ require_once __DIR__ . '/atelier.php';         // Atelier de recherche : projets
 require_once __DIR__ . '/offline_map.php';
 require_once __DIR__ . '/merge.php';
 require_once __DIR__ . '/shortcuts.php';       // fusion de l'arbre d'un cousin // fond de carte sans Internet // objets, mémoire familiale, lieux précis, liens web   // dates estimées, implexe  // « Registres en ligne » des battues
+require_once __DIR__ . '/verrou.php';
+require_once __DIR__ . '/complements.php'; // 🧩 🏛 études de notaire, ⚠️ homonyme avant de contacter, 📋 tous les doutes, 📱 visite aux archives     // 🔐 mot de passe d'une généalogie (verrou d'ouverture) et 📜 registre « Qui a vu quoi »
 require_once __DIR__ . '/settings.php';   // réglages de l'interface rangés dans la base  // ensure_reference_data() : communes françaises livrées avec l'app
 
 // Aucun avertissement PHP ne doit s'afficher dans une réponse : il s'ajouterait au JSON et l'interface
@@ -188,7 +202,8 @@ if (PHP_SAPI !== 'cli' && session_status() !== PHP_SESSION_ACTIVE) {
             session_save_path($sessionDir);
         }
     }
-    session_set_cookie_params(['httponly' => true, 'samesite' => 'Lax']);
+    // 🔐 cookie HttpOnly + SameSite=Strict, identifiants de session inconnus refusés (lib/verrou.php)
+    lcnda_session_config();
     session_start();
     // Le jeton CSRF est créé tout de suite, puis la session est refermée : PHP verrouille le fichier
     // de session tant qu'elle est ouverte, ce qui bloquerait toutes les autres requêtes pendant
@@ -241,10 +256,23 @@ function db(): PDO
         throw new RuntimeException('La base locale n\'a pas encore été importée.');
     }
 
-    $pdo = new PDO('sqlite:' . DB_PATH, null, null, [
+    $c = new PDO('sqlite:' . DB_PATH, null, null, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     ]);
+    // Base tenue par un autre programme (logiciel qui l'a ouverte en exclusif, synchronisation qui la recopie…) : une seule
+    // lecture d'essai, qui attend au plus db_open_wait_ms(), puis un message clair. Avant, chaque lecture de l'ouverture
+    // (mode du journal, objets inattendus, numéro de structure) attendait 30 s chacune : 96 s avant le message au lancement.
+    // En mode WAL, les écritures de l'application elle-même ne bloquent jamais cette lecture.
+    // déjà attendue dans cette requête (🔐 lecture du mot de passe, lib/verrou.php glock_db_row) : un dernier essai court
+    $c->exec('PRAGMA busy_timeout = ' . (db_busy_seen(DB_PATH) ? 300 : db_open_wait_ms()));
+    try {
+        $c->query('SELECT count(*) FROM sqlite_master')->fetchColumn();
+    } catch (PDOException $e) {
+        if (db_error_is_busy($e)) { throw new LcndaDbBusy(DB_BUSY_MESSAGE, 0, $e); }
+        throw $e;
+    }
+    $pdo = $c;
     $pdo->exec('PRAGMA foreign_keys = ON');
     register_search_fold($pdo); // lc_fold(x) : recherche sans accents ni tirets (lib/text.php)
     // Une écriture qui trouve la base occupée attend jusqu'à 30 s (au lieu d'échouer) : utile quand plusieurs
@@ -267,6 +295,36 @@ function db(): PDO
 }
 
 /**
+ * Attente maximale de la lecture d'essai de db(). Au lancement de l'app de bureau (schema_status, electron/php-server.js
+ * prepareDatabase) : 5 s, pour dire vite que la base est tenue ailleurs. Ailleurs : 30 s, comme les écritures (une page
+ * ouverte n'échoue pas pour une attente courte).
+ */
+function db_open_wait_ms(): int
+{
+    if (PHP_SAPI === 'cli' || ($_GET['action'] ?? null) !== 'schema_status') { return 30000; }
+    // Au lancement, les 5 s comptent depuis le début de la requête : une lecture faite avant db() qui a déjà attendu la base
+    // (mot de passe, sauvegarde automatique, dossier partagé…) n'ajoute pas une deuxième attente complète (vu sur Mac : 10 s).
+    $waited = (int) ((microtime(true) - (float) ($_SERVER['REQUEST_TIME_FLOAT'] ?? microtime(true))) * 1000);
+    return max(300, 5000 - $waited);
+}
+
+/** La base $path a-t-elle déjà été trouvée tenue par un autre programme pendant cette requête ? ($mark : le noter) */
+function db_busy_seen(string $path, bool $mark = false): bool
+{
+    static $seen = [];
+    $k = (string) (realpath($path) ?: $path);
+    if ($mark) { $seen[$k] = true; }
+    return isset($seen[$k]);
+}
+
+/** SQLITE_BUSY (5) ou SQLITE_LOCKED (6) : la base est tenue par une autre connexion. */
+function db_error_is_busy(Throwable $e): bool
+{
+    $code = $e instanceof PDOException ? (int) ($e->errorInfo[1] ?? 0) : 0;
+    return $code === 5 || $code === 6 || (bool) preg_match('/database (table )?is locked|SQLITE_BUSY/i', $e->getMessage());
+}
+
+/**
  * Crée le fichier SQLite et applique le schéma de base si la base n'existe pas encore.
  * Utilisée par l'écran d'installation (créer une première personne / importer un fichier)
  * pour permettre un premier usage sans passer par scripts/import.php.
@@ -274,15 +332,19 @@ function db(): PDO
 /**
  * Sécurité : l'application ne crée aucun TRIGGER ni aucune VIEW. Une base ouverte (sauvegarde, fichier reçu…)
  * qui en contient en a reçu d'ailleurs : ils sont supprimés avant toute écriture, pour qu'aucun code caché
- * ne s'exécute pendant les modifications. Si un jour l'app en prévoit, les ajouter à $allowed.
+ * ne s'exécute pendant les modifications. Si un jour l'app en prévoit, les ajouter à $allowed. Seule exception : les
+ * déclencheurs de lib/calc_cache.php (migration 100), reconnus à leur texte exact.
  */
 function drop_unexpected_schema_objects(PDO $pdo): void
 {
     $allowed = [];
     try {
-        $rows = $pdo->query("SELECT type,name FROM sqlite_master WHERE type IN ('trigger','view')")->fetchAll(PDO::FETCH_NUM);
-        foreach ($rows as [$type, $name]) {
+        $rows = $pdo->query("SELECT type,name,sql FROM sqlite_master WHERE type IN ('trigger','view')")->fetchAll(PDO::FETCH_NUM);
+        foreach ($rows as [$type, $name, $sql]) {
             if (in_array($name, $allowed, true)) { continue; }
+            // 🐘 les déclencheurs de lib/calc_cache.php, seulement s'ils sont mot pour mot les nôtres (ils ne font que
+            // retirer un jeton dans data_gen) ; un déclencheur du même nom mais d'un autre texte est supprimé comme les autres
+            if ($type === 'trigger' && function_exists('calc_gen_trigger_allowed') && calc_gen_trigger_allowed((string) $name, $sql === null ? null : (string) $sql)) { continue; }
             $pdo->exec('DROP ' . ($type === 'view' ? 'VIEW' : 'TRIGGER') . ' IF EXISTS "' . str_replace('"', '""', (string) $name) . '"');
             error_log('LCNDA : ' . $type . ' inattendu supprimé de la base : ' . $name);
         }
@@ -1310,6 +1372,17 @@ function memory_at_least(int $mb): void
     if ($bytes < $mb * 1048576) { @ini_set('memory_limit', $mb . 'M'); }
 }
 
+/**
+ * 🐘 Un calcul qui lit toute la base en mémoire (contrôle, fiabilité, export…) : au moins $minMb Mo, et plus sur une très
+ * grosse base, à raison de $kbPerPerson Ko par fiche (mesuré à 200 000 fiches) + 512 Mo de marge, jusqu'à 8 Go au plus.
+ * Sans cela, 500 000 fiches finissaient en « Allowed memory size exhausted » (erreur 500).
+ */
+function memory_for_persons(PDO $pdo, float $kbPerPerson, int $minMb = 2048): void
+{
+    try { $n = (int) $pdo->query('SELECT COALESCE(max(rowid),0) FROM persons')->fetchColumn(); } catch (Throwable $_) { $n = 0; }
+    memory_at_least((int) min(8192, max($minMb, ceil($n * $kbPerPerson / 1024) + 512)));
+}
+
 function json_response(mixed $data, int $status = 200): never
 {
     http_response_code($status);
@@ -1319,6 +1392,17 @@ function json_response(mixed $data, int $status = 200): never
     // 🌐 un message d'erreur connu part dans la langue de la page (lib/i18n.php) ; en français rien ne change
     if (is_array($data) && isset($data['error']) && is_string($data['error']) && function_exists('i18n_t') && i18n_lang() !== 'fr') { $data['error'] = i18n_t($data['error']); }
     echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+    exit;
+}
+
+/** Une réponse JSON déjà encodée (comme json_response, pour un calcul gardé tel quel : lib/calc_cache.php) */
+function json_response_encoded(string $json, int $status = 200): never
+{
+    http_response_code($status);
+    header('Content-Type: application/json; charset=utf-8');
+    header('Cache-Control: no-store, private');
+    header('X-Content-Type-Options: nosniff');
+    echo $json;
     exit;
 }
 
@@ -1357,6 +1441,8 @@ function log_change(PDO $pdo, string $entityType, ?int $entityId, string $action
         $before ? json_encode($before, JSON_UNESCAPED_UNICODE) : null,
         $after ? json_encode($after, JSON_UNESCAPED_UNICODE) : null,
     ]);
+    // ⚖️ une fiche créée pendant que le filtre ⚖️ est actif est rattachée d'office au(x) dossier(s) du filtre (lib/successoral_dossiers.php)
+    if ($entityType === 'person' && $action === 'create' && $entityId && !empty($_SERVER['HTTP_X_LCNDA_SUCC']) && function_exists('succ_auto_attach')) { succ_auto_attach($pdo, (int) $entityId); }
 }
 
 function safe_int(mixed $value, int $fallback = 0): int

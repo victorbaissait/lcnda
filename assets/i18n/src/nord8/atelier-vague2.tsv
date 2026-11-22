@@ -1,0 +1,59 @@
+fr ¦ tr
+# 📜 Atelier de transcription, vague 2 « Guider »
+Les étapes : Lire, Corriger, Repérer, Ajouter à la généalogie ¦ Adımlar: Oku, Düzelt, Bul, Soy ağacına ekle
+Lire l’image (« ✨ Lire ▾ ») ou écrire le texte, ligne à ligne ¦ Resmi oku (“✨ Oku ▾”) ya da metni satır satır yaz
+Relire et corriger : corrections proposées, mots douteux [?], aide à la lecture ¦ Gözden geçir ve düzelt: önerilen düzeltmeler, şüpheli sözcükler [?], okuma yardımı
+Ajouter les personnes et l’événement à la généalogie ¦ Kişileri ve olayı soy ağacına ekle
+Toute la page ou la zone choisie (▭) ; ou écris le texte toi-même, ligne à ligne. ¦ Tüm sayfa ya da seçilen alan (▭); ya da metni kendin satır satır yaz.
+=mot à revoir ¦ gözden geçirilecek sözcük|gözden geçirilecek sözcük
+rien à revoir ¦ gözden geçirilecek bir şey yok
+=nom repéré ¦ bulunan ad|bulunan ad
+{n} à relier ¦ {n} bağlanacak
+Tout est relié ¦ Hepsi bağlı
+{n} × [?] ou [illisible] ¦ {n} × [?] ya da [okunaksız]
+=personne dans l’acte ¦ kayıttaki kişi|kayıttaki kişi
+Personne dans l’acte pour l’instant : « 🧭 Repérer » les trouve dans le texte ¦ Kayıtta henüz kimse yok: “🧭 Bul” onları metinde bulur
+# — téléphone : trois onglets
+Image, texte ou personnes ¦ Resim, metin ya da kişiler
+# — 👁 relecture ligne à ligne en plein écran
+Le morceau d’image de la ligne ¦ Satırın resim parçası
+Pas de zone pour cette ligne : dessine-la sur l’image (▭), elle restera reliée. ¦ Bu satır için alan yok: onu resmin üzerine çiz (▭), bağlı kalır.
+Ligne à relire ¦ Gözden geçirilecek satır
+Relue ¦ Gözden geçirildi
+Ligne d’avant ¦ Önceki satır
+atelier|Ligne suivante ¦ Sonraki satır
+Entrée : la ligne est relue, ligne suivante · ⇧ Entrée : ligne d’avant · ↑ ↓ : changer de ligne sans la marquer · Échap : fermer ¦ Enter: satır gözden geçirildi, sonraki satır · ⇧ Enter: önceki satır · ↑ ↓: işaretlemeden satır değiştir · Esc: kapat
+Ligne {n} sur {total} ¦ Satır {n}/{total}
+=ligne relue ¦ satır gözden geçirildi|satır gözden geçirildi
+Toutes les lignes sont relues. ¦ Tüm satırlar gözden geçirildi.
+C’était la dernière ligne. ¦ Bu son satırdı.
+Relire ligne à ligne ¦ Satır satır gözden geçir
+Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Tam ekranda satır satır gözden geçir: her satırın üstünde resim parçası
+Relecture ligne à ligne en plein écran (conseillé) ¦ Tam ekranda satır satır gözden geçirme (önerilen)
+# — 🕘 Versions, 🔍 Chercher / Remplacer, ⌨️ touches
+Chercher dans le texte ¦ Metinde ara
+Chercher et remplacer ¦ Ara ve değiştir
+« {q} » → « {by} » : {n} ¦ “{q}” → “{by}”: {n}
+Avant « Remplacer » ¦ “Değiştir” öncesi
+Avant « Tout remplacer » ¦ “Tümünü değiştir” öncesi
+Avant « Accepter les propositions sûres » ¦ “Kesin önerileri kabul et” öncesi
+Avant la lecture mise dans le texte ¦ Okunan metne eklenmeden önce
+Résultat suivant, résultat d’avant ¦ Sonraki sonuç, önceki sonuç
+Ligne suivante, ligne d’avant : l’image suit sa zone ¦ Sonraki satır, önceki satır: resim alanını izler
+Déplacer l’image, en restant appuyé ¦ Resmi kaydır, basılı tutarak
+Déplacer la zone choisie (⇧ : l’agrandir) ¦ Seçilen alanı kaydır (⇧: büyüt)
+Supprimer la zone choisie ¦ Seçilen alanı sil
+Zoom avant, zoom arrière ¦ Yakınlaştır, uzaklaştır
+Cette liste des touches ¦ Bu tuş listesi
+# — avancement et abréviations au survol
+=mot douteux ¦ şüpheli sözcük|şüpheli sözcük
+aucun mot douteux ¦ şüpheli sözcük yok
+{n} / {total} lignes relues ¦ {n} / {total} satır gözden geçirildi
+{n} / {total} lignes reliées ¦ {n} / {total} satır bağlı
+Marquer comme finie ¦ Bitti olarak işaretle
+Marquer comme relue ¦ Gözden geçirildi olarak işaretle
+Ligne sans zone : dessine-la sur l’image (▭) ¦ Alanı olmayan satır: onu resmin üzerine çiz (▭)
+Ne plus souligner les abréviations ¦ Kısaltmaların altını artık çizme
+Souligner les abréviations connues ¦ Bilinen kısaltmaların altını çiz
+Abréviations connues soulignées, leur sens au survol (conseillé) ¦ Bilinen kısaltmaların altı çizili, üzerine gelince anlamları (önerilen)
+Relues ¦ Gözden geçirilenler

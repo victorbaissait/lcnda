@@ -61,11 +61,19 @@
             try { if (CAN_POP) el.hidePopover(); } catch (_) {}
             el.remove(); onClose?.();
         };
-        setTimeout(() => { document.addEventListener('pointerdown', outside, true); document.addEventListener('keydown', key, true); addEventListener('resize', place); });
+        // Échap écouté tout de suite : le menu est déjà affiché (et a le focus) ; attendre un tour laissait passer un Échap rapide
+        // jusqu'à la fenêtre <dialog> derrière, qui se fermait (« cancel » natif). Seul le clic dehors attend (le clic qui ouvre ne doit pas fermer).
+        document.addEventListener('keydown', key, true);
+        setTimeout(() => { if (openPop?.el !== el) return; document.addEventListener('pointerdown', outside, true); addEventListener('resize', place); });
         openPop = {el, close, place};
         return openPop;
     }
     function closePop() { openPop?.close(); }
+    // filet : une fenêtre <dialog> qui reçoit « cancel » (Échap) pendant qu'un petit menu est ouvert ne se ferme pas, c'est le menu qui se ferme
+    document.addEventListener('cancel', e => {
+        if (!openPop || !(e.target instanceof HTMLDialogElement) || !e.target.contains(openPop.el)) return;
+        e.preventDefault(); e.stopImmediatePropagation(); const a = openPop.el._uiFor; closePop(); a?.focus?.();
+    }, true);
 
     /* ═════ C1 Cases de recherche ═════ */
     const SEARCH_SEL = 'input[type=search], input[data-ui-search], .search-row > input';

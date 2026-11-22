@@ -1,0 +1,179 @@
+fr ¦ tr
+# Zone « diagrammes-lot-c » : grille des recensements, schéma de preuve, arbre de mots (heritage-diagram-lot-c.js), zones des paroisses et carte en étoile (heritage-diagram-cartes.js), cercles d’une journée (heritage-cartes-outils.js)
+Hors de France ¦ Fransa dışında
+Ajoute des personnes (nom, naissance, décès), puis leurs recensements (année, statut). ¦ Kişileri ekle (ad, doğum, ölüm), sonra sayımlarını (yıl, durum).
+Aucune année de recensement entre ces deux dates. ¦ Bu iki tarih arasında sayım yılı yok.
+Plus rien à chercher : tous les recensements sont trouvés ou sans objet. ¦ Aranacak bir şey kalmadı: tüm sayımlar bulundu ya da geçersiz.
+à chercher : {list} ¦ aranacak: {list}
+non trouvés : {list} ¦ bulunamadı: {list}
+Liste de travail des recensements : {n}. ¦ Sayım çalışma listesi: {n}.
+Grille des recensements : {n}, {y} recensements, {d} sur {t} cherchés. ¦ Sayım ızgarası: {n}, {y} sayım, {t} içinden {d} arandı.
+Les recensements de la famille {name} ¦ {name} ailesinin sayımları
+Contre ¦ Karşı
+Conflit ¦ Çelişki
+Écris la question (Réglages), puis les indices : pour, contre, recherches, conflits. ¦ Soruyu yaz (Ayarlar), sonra ipuçlarını: lehte, aleyhte, aramalar, çelişkiler.
+Indices contre ¦ Aleyhte ipuçları
+Recherches et conflits ¦ Aramalar ve çelişkiler
+Résolu : {note} ¦ Çözüldü: {note}
+À résoudre ¦ Çözülecek
+poids {n} sur 3 ¦ ağırlık {n}/3
+Pas encore de conclusion ¦ Henüz sonuç yok
+Schéma de preuve : {a} pour, {b} contre ; certitude : {c}. ¦ Kanıt şeması: {a} lehte, {b} aleyhte; kesinlik: {c}.
+Antoine MAZAUD est-il le père de Jean MAZAUD (né vers 1818) ? ¦ Antoine MAZAUD, Jean MAZAUD’nun (d. 1818 dolayları) babası mı?
+Oui : Antoine MAZAUD est le père de Jean. ¦ Evet: Antoine MAZAUD, Jean’ın babası.
+Acte de mariage de Jean (1842) : « fils d’Antoine MAZAUD, cultivateur » ¦ Jean’ın evlilik kaydı (1842): “çiftçi Antoine MAZAUD’nun oğlu”
+Registre paroissial, original ¦ Kilise defteri, asıl
+Recensement 1836 : Jean, 18 ans, au foyer d’Antoine ¦ 1836 sayımı: Jean, 18 yaşında, Antoine’ın hanesinde
+Recensement 1836, original ¦ 1836 sayımı, asıl
+Antoine est parrain du premier fils de Jean ¦ Antoine, Jean’ın ilk oğlunun vaftiz babası
+Baptême 1844 ¦ Vaftiz 1844
+Un autre Jean MAZAUD, né en 1817 au village voisin ¦ Başka bir Jean MAZAUD, 1817’de komşu köyde doğmuş
+Acte de naissance de Jean : registre lacunaire 1815-1820 ¦ Jean’ın doğum kaydı: defter eksik 1815-1820
+Âge au décès : 64 ans (né vers 1820) au lieu de 66 ¦ Ölüm yaşı: 66 yerine 64 (d. 1820 dolayları)
+Acte de décès 1884 ¦ Ölüm kaydı 1884
+l’âge déclaré au décès est souvent approximatif ¦ ölümde bildirilen yaş çoğu zaman yaklaşıktır
+Écris le mot de départ (Réglages), par exemple « fils de » ou « veuve de ». ¦ Başlangıç sözcüğünü yaz (Ayarlar), örneğin “fils de” ya da “veuve de”.
+Colle des transcriptions (une par ligne) ou prends-les « Depuis l’app ». ¦ Transkripsiyonları yapıştır (satır başına bir) ya da “Uygulamadan” al.
+« {w} » n’est dans aucun de ces textes. ¦ “{w}” bu metinlerin hiçbirinde yok.
+… {n} autres ¦ … {n} diğer
+Trop de branches : baisse la profondeur ou le nombre de branches (Réglages). ¦ Çok fazla dal: derinliği ya da dal sayısını azalt (Ayarlar).
+« {w} » : {n} fois ¦ “{w}”: {n} kez
+Arbre de mots : « {w} » trouvé {n} fois dans {t}. ¦ Sözcük ağacı: “{w}” {t} içinde {n} kez bulundu.
+Ce qui suit « {w} » dans les actes ¦ Kayıtlarda “{w}” sözcüğünden sonra gelenler
+{n} lignes prises dans l’arbre : tu peux les corriger dans l’onglet Données. ¦ Ağaçtan {n} satır alındı: Veriler sekmesinde düzeltebilirsin.
+🗓️ Les recensements de mon arbre ¦ 🗓️ Ağacımdaki sayımlar
+Une ligne par personne, une case par recensement : ce qui est relevé sur les fiches (trouvé, non trouvé…), et « à chercher » pour le reste. Sans groupe choisi : tes ancêtres. ¦ Kişi başına bir satır, sayım başına bir hücre: kartlarda kayıtlı olan (bulundu, bulunamadı…) ve geri kalanı için “aranacak”. Grup seçilmezse: ataların.
+Du recensement de ¦ Şu sayımdan
+à celui de ¦ şu sayıma
+Les recensements de {n} ¦ Sayımlar: {n}
+Personne dans ce groupe ne vivait entre ces deux recensements (il faut au moins une date de naissance ou de décès). ¦ Bu gruptan kimse bu iki sayım arasında yaşamıyordu (en az bir doğum ya da ölüm tarihi gerekir).
+{n} sur {t} prises (les premières) : change « Au plus » pour en voir davantage. ¦ {t} içinden {n} alındı (ilkler): daha fazlası için “En çok” değerini değiştir.
+⚖️ Un dossier de preuve ou une hypothèse ¦ ⚖️ Bir kanıt dosyası ya da bir hipotez
+Choisis un dossier : sa question, ses indices pour et contre, ses recherches et ses conflits, sa conclusion. Une hypothèse à comparer donne une colonne par réponse possible. ¦ Bir dosya seç: sorusu, lehte ve aleyhte ipuçları, aramalar ve çelişkiler, sonucu. Karşılaştırılacak bir hipotez her olası yanıt için bir sütun verir.
+Le dossier ¦ Dosya
+Choisis d’abord un dossier. ¦ Önce bir dosya seç.
+Schéma de preuve ¦ Kanıt şeması
+Ce dossier n’a encore aucune ligne : ajoute des indices dans le dossier, ou ici à la main. ¦ Bu dosyanın henüz satırı yok: dosyaya ya da buraya elle ipucu ekle.
+Prendre ce dossier ¦ Bu dosyayı al
+🌿 Les mots de mes transcriptions ¦ 🌿 Transkripsiyonlarımdaki sözcükler
+Les transcriptions des actes (atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris. ¦ Kayıtların (transkripsiyon atölyesi) ve medyanın transkripsiyonları: başlangıç sözcüğünden sonra (ya da önce) gelenler. Yalnızca işe yarar cümle parçaları alınır.
+Le mot de départ ¦ Başlangıç sözcüğü
+Ce qui suit ¦ Sonra gelenler
+Ce qui précède ¦ Önce gelenler
+Commune (dans le lieu ou le titre de l’acte) ¦ Belde (yerde ya da kaydın başlığında)
+Actes pris ¦ Alınan kayıtlar
+Actes notariés ¦ Noter senetleri
+Militaires ¦ Askerî
+Lettres ¦ Mektuplar
+Transcriptions des médias ¦ Medya transkripsiyonları
+Écris le mot de départ (par exemple « fils de »). ¦ Başlangıç sözcüğünü yaz (örneğin “fils de”).
+Coche au moins une sorte d’acte. ¦ En az bir kayıt türü işaretle.
+Ce qui précède « {w} » dans les actes ¦ Kayıtlarda “{w}” sözcüğünden önce gelenler
+« {w} » n’est dans aucune transcription de ce choix ({n} lues). ¦ “{w}” bu seçimin hiçbir transkripsiyonunda yok ({n} okundu).
+« {w} » : {n} fois, dans {a}. ¦ “{w}”: {n} kez, {a} içinde.
+Dossier sans question ¦ Sorusuz dosya
+Aucun dossier pour ce groupe de personnes ¦ Bu kişi grubu için dosya yok
+Ferme l’éditeur, puis clique sur la case pour ouvrir la fiche (bloc « Recensements »). ¦ Düzenleyiciyi kapat, sonra kartı açmak için hücreye tıkla (“Sayımlar” bölümü).
+Recensement {yr} : dans le bloc « Recensements » de la fiche. ¦ {yr} sayımı: kartın “Sayımlar” bölümünde.
+Grille des recensements (personnes × années) ¦ Sayım ızgarası (kişiler × yıllar)
+Ma recherche ¦ Araştırmam
+Une ligne par personne, une colonne par recensement : ce qui est trouvé, pas trouvé, et ce qui reste à chercher. ¦ Kişi başına bir satır, sayım başına bir sütun: bulunan, bulunamayan ve aranacak olan.
+Les personnes (une ligne sans année : naissance, décès) et leurs recensements (une ligne par année) ¦ Kişiler (yılsız satır: doğum, ölüm) ve sayımları (yıl başına bir satır)
+Naissance (année) ¦ Doğum (yıl)
+Décès (année) ¦ Ölüm (yıl)
+Recensement (année) ¦ Sayım (yıl)
+Note (lieu, adresse…) ¦ Not (yer, adres…)
+Grille (une case par recensement) ¦ Izgara (sayım başına bir hücre)
+Liste de travail à imprimer (ce qui reste à chercher) ¦ Yazdırılacak çalışma listesi (aranacak olanlar)
+À celui de ¦ Şu sayıma
+Ou mes années (ex. 1846, 1851, 1872) ¦ Ya da benim yıllarım (ör. 1846, 1851, 1872)
+Personnes montrées ¦ Gösterilen kişiler
+Seulement celles qui ont encore un recensement à chercher ¦ Yalnızca hâlâ aranacak sayımı olanlar
+Le plus à chercher d’abord ¦ En çok aranacak önce
+Par naissance ¦ Doğuma göre
+Par nom ¦ Ada göre
+Couleur « Trouvé » ¦ “Bulundu” rengi
+Couleur « Non trouvé » ¦ “Bulunamadı” rengi
+Couleur « À chercher » ¦ “Aranacak” rengi
+Couleur « Hors de France » ¦ “Fransa dışında” rengi
+Couleur « Pas né / déjà décédé » ¦ “Doğmamış / ölmüş” rengi
+Écart entre les cases ¦ Hücreler arası boşluk
+Signes dans les cases (✓ ✗ ?) ¦ Hücrelerde işaretler (✓ ✗ ?)
+Années de vie à côté du nom ¦ Adın yanında yaşam yılları
+Schéma de preuve (question, indices pour et contre, conclusion) ¦ Kanıt şeması (soru, lehte ve aleyhte ipuçları, sonuç)
+La question en haut, les indices pour et contre (avec leur poids et leur source), les recherches et les conflits, puis la conclusion et sa certitude. ¦ Üstte soru, lehte ve aleyhte ipuçları (ağırlık ve kaynaklarıyla), aramalar ve çelişkiler, sonra sonuç ve kesinliği.
+Les lignes du dossier (pour, contre, recherche, conflit ; « réponse » pour une hypothèse à plusieurs réponses) ¦ Dosya satırları (lehte, aleyhte, arama, çelişki; çok yanıtlı hipotez için “yanıt”)
+Indice (ou réponse) ¦ İpucu (ya da yanıt)
+Poids (1 à 3) ¦ Ağırlık (1–3)
+Pour la réponse… (hypothèse) ¦ Yanıt için… (hipotez)
+Note (résolution d’un conflit) ¦ Not (bir çelişkinin çözümü)
+La conclusion ¦ Sonuç
+Montrer les recherches et les conflits (ce qui reste à chercher) ¦ Aramaları ve çelişkileri göster (aranacak olanlar)
+Couleur « confirme » ¦ “Doğrular” rengi
+Couleur « contredit » ¦ “Çelişir” rengi
+Couleur des recherches ¦ Aramaların rengi
+Couleur des conflits ¦ Çelişkilerin rengi
+Couleur des réponses ¦ Yanıtların rengi
+Couleur de la question ¦ Sorunun rengi
+Arbre de mots des actes (ce qui suit « fils de »…) ¦ Kayıtların sözcük ağacı (“fils de” sonrası…)
+Un mot de départ à gauche ; à droite, les mots qui le suivent dans les actes, plus gros quand ils reviennent souvent. ¦ Solda bir başlangıç sözcüğü; sağda kayıtlarda onu izleyen sözcükler, sık geçtikçe daha büyük.
+Les textes (une transcription ou un bout de phrase par ligne) ¦ Metinler (satır başına bir transkripsiyon ya da cümle parçası)
+Acte ou source ¦ Kayıt ya da kaynak
+Le mot de départ (ex. fils de, veuve de) ¦ Başlangıç sözcüğü (ör. fils de, veuve de)
+Profondeur (mots) ¦ Derinlik (sözcük)
+Branches par mot ¦ Sözcük başına dal
+Seulement les mots vus au moins ¦ Yalnızca en az şu kadar görülen sözcükler
+Le reste dans « … autres » ¦ Diğerleri “… diğer” altında
+Écrire le nombre de fois ¦ Kaç kez geçtiğini yaz
+Sans tenir compte des capitales ni des accents ¦ Büyük harf ve aksanları gözetmeden
+Seulement les actes de (lieu) ¦ Yalnızca şu yerin kayıtları
+Couleur des mots ¦ Sözcüklerin rengi
+Couleur du mot de départ ¦ Başlangıç sözcüğünün rengi
+⭕ En une journée ¦ ⭕ Bir günde
+Lieu de départ ¦ Çıkış yeri
+Montrer les lieux de la famille ¦ Ailenin yerlerini göster
+Ce qu’on atteignait en une journée ¦ Bir günde varılabilen yerler
+Choisis le lieu de départ ¦ Çıkış yerini seç
+Ce lieu n’a pas de position sur la carte : place-le d’abord. ¦ Bu yerin haritada konumu yok: önce yerleştir.
+Coche au moins un moyen de voyager ¦ En az bir yolculuk aracı işaretle
+Les fonds de carte ne sont pas chargés. ¦ Altlık haritalar yüklenmedi.
+Je dessine les cercles… ¦ Daireleri çiziyorum…
+En {d} jours depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ {year} yılında {from} çıkışlı {d} günde: kuş uçuşu yaklaşık {list}.
+En une journée depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ {year} yılında {from} çıkışlı bir günde: kuş uçuşu yaklaşık {list}.
+Rayon (vol d’oiseau) ¦ Yarıçap (kuş uçuşu)
+Lieux de la famille ¦ Ailenin yerleri
+Le rayon tient compte du détour de la route (réglage « Vitesses et sources »). Un trait pointillé : ce moyen n’existait pas encore cette année-là. ¦ Yarıçap yolun dolambacını hesaba katar (“Hızlar ve kaynaklar” ayarı). Noktalı çizgi: bu araç o yıl henüz yoktu.
+Paroisses (zones autour des églises) ¦ Kilise bölgeleri (kiliselerin çevresindeki alanlar)
+⚠ Paroisses sans position : {list} — choisis-les dans la liste (onglet Données) ou écris « Nom 45.27, 1.77 » ¦ ⚠ Konumsuz kilise bölgeleri: {list} — listeden seç (Veriler sekmesi) ya da “Ad 45.27, 1.77” yaz
+Ajoute des paroisses (une ville de la liste, ou « Depuis l’app ») et leurs chiffres. ¦ Kilise bölgeleri ekle (listeden bir yer ya da “Uygulamadan”) ve sayılarını gir.
+Zones des paroisses : {n}. ¦ Kilise bölgeleri: {n}.
+Un point à chaque église ¦ Her kilisede bir nokta
+Limites des départements par-dessus les paroisses ¦ Kilise bölgelerinin üstünde departman sınırları
+Cadrer tout seul sur les paroisses ¦ Kilise bölgelerine kendiliğinden yakınlaştır
+Liens montrés ¦ Gösterilen bağlar
+Ceux qui arrivent et ceux qui partent ¦ Gelenler ve gidenler
+Seulement ceux qui arrivent ¦ Yalnızca gelenler
+Seulement ceux qui partent ¦ Yalnızca gidenler
+Les liens de {name} ¦ {name} bağları
+bleu : conjoints venus ¦ mavi: gelen eşler
+orange : enfants partis ¦ turuncu: giden çocuklar
+rouge : émigrés ¦ kırmızı: göç edenler
+Lieux : {list} ¦ Yerler: {list}
+⛪ Au niveau « Paroisses » (Réglages → Niveau de détail) : une zone autour de chaque église, d’après les paroisses d’Ancien Régime de tes lieux ; un lieu sans paroisse compte pour lui-même. ¦ ⛪ “Kilise bölgeleri” düzeyinde (Ayarlar → Ayrıntı düzeyi): yerlerinin eski kilise bölgelerine göre her kilisenin çevresinde bir alan; kilisesiz bir yer kendi başına sayılır.
+✳️ Tous les liens d’un lieu (carte en étoile) ¦ ✳️ Bir yerin tüm bağları (yıldız haritası)
+Le village ¦ Köy
+Conjoints venus s’y marier ¦ Evlenmek için oraya gelen eşler
+Enfants partis (nés ici, morts ou mariés ailleurs) ¦ Giden çocuklar (burada doğup başka yerde ölen ya da evlenen)
+Émigrés (morts dans un autre pays) ¦ Göç edenler (başka ülkede ölen)
+Choisis d’abord le village. ¦ Önce köyü seç.
+Coche au moins une sorte de lien. ¦ En az bir bağ türü işaretle.
+Aucun lien trouvé pour ce lieu (naissance, mariage ou décès ailleurs). ¦ Bu yer için bağ bulunamadı (başka yerde doğum, evlilik ya da ölüm).
+{n} prises dans l’arbre ({m} lieux rattachés à une paroisse d’Ancien Régime, les autres comptent pour eux-mêmes). ¦ Ağaçtan alınan: {n} ({m} yer eski bir kilise bölgesine bağlı, diğerleri kendi başına sayılır).
+Aucun lieu avec des coordonnées pour ce choix : place d’abord tes lieux sur la carte. ¦ Bu seçim için koordinatlı yer yok: önce yerlerini haritaya yerleştir.
+sa paroisse ¦ kilise bölgesi
+leur paroisse ¦ kilise bölgeleri
+une paroisse ¦ bir kilise bölgesi
+Paroisse sans position : choisis sa commune dans la liste, ou écris « Nom 45.27, 1.77 ». ¦ Konumsuz kilise bölgesi: listeden beldesini seç ya da “Ad 45.27, 1.77” yaz.
+Carte en étoile : seulement les liens de ce lieu (vide = tous les flux) ¦ Yıldız haritası: yalnızca bu yerin bağları (boş = tüm akışlar)
+niveau|paroisse ¦ kilise bölgesi
+=paroisse ¦ kilise bölgesi|kilise bölgesi

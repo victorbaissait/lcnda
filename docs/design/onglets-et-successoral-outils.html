@@ -1,0 +1,862 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Onglets en option et outils du successoral</title>
+<style>
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff;--sheet:#fffdf8}
+@media (prefers-color-scheme:dark){:root{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--sheet:#23262b}}
+*{box-sizing:border-box}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:19px;margin:40px 0 6px}
+.part{font:800 12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:46px 0 0;border-top:3px solid var(--ink);padding-top:10px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.wrap{max-width:1240px;margin:0 auto}
+.sum{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.sum div{background:var(--paper);border:2px solid var(--ink);padding:8px 14px;box-shadow:4px 4px 0 var(--shadow)}
+.sum b{font-size:18px;display:block}.sum span{font-size:12px;color:var(--muted)}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid var(--ink);padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.badge.new{border-color:var(--blue);color:#fff;background:var(--blue)}
+.badge.re{border-color:var(--green);color:var(--green);background:var(--green-bg)}
+.badge.have{border-color:#8a8f99;color:var(--muted);background:var(--grey-bg)}
+.badge.ok{border-color:var(--green);color:var(--green)}.badge.warn{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}.badge.red{border-color:var(--red);color:var(--red);background:var(--red-bg)}.badge.blue{border-color:var(--blue);color:var(--blue)}.badge.grey{border-color:#8a8f99;color:var(--muted)}.badge.violet{border-color:var(--vio);color:var(--vio);background:var(--vio-bg)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px;border-bottom:2px solid var(--ink)}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.num,th.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+tr.tot td{border-top:2px solid var(--ink);font-weight:800}
+code{font:11.5px ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 26px}
+.wide{grid-column:1 / -1}
+.grid>*{min-width:0}
+.case{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:16px 18px 18px;min-width:0}
+.case .head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.case .tag{font:700 11px/1 system-ui;letter-spacing:.1em;color:var(--blue);text-transform:uppercase}
+.num-b{display:inline-block;background:var(--blue);color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.case h3{margin:8px 0 10px;font-size:17px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.path{font-size:12px;color:var(--blue-ink);background:var(--blue-bg);border:1px dashed #9db8f0;padding:6px 10px;margin:0 0 10px}
+.path b{color:var(--blue)}
+.reuse{font-size:12px;color:var(--green);background:var(--green-bg);border:1px dashed #9bcfa9;padding:7px 10px;margin-top:12px}
+.reuse b{font-weight:800}
+.msg{border-left:4px solid var(--blue);background:var(--blue-bg);padding:9px 12px;font-size:13px;margin:12px 0}
+.msg.warn{border-color:var(--yel);background:var(--yel-bg)}.msg.ok{border-color:var(--green);background:var(--green-bg)}.msg.red{border-color:var(--red);background:var(--red-bg)}
+.dec{border:2px dashed var(--vio);background:var(--vio-bg);padding:10px 14px;margin:14px 0 0;font-size:13px}
+.dec>b:first-child{display:block;font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--vio);margin-bottom:6px}
+.dec ol,.dec ul{margin:4px 0 0;padding-left:20px}.dec li{margin:3px 0}
+.cons{font:800 10px system-ui;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--green);padding:2px 5px;margin-left:4px;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);background:var(--paper);font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 var(--shadow);color:var(--ink);white-space:nowrap}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:var(--line2);box-shadow:none;color:var(--muted)}
+.btn.red{border-color:var(--red);color:var(--red);box-shadow:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.lab{display:block;font-weight:700;font-size:13px;margin:12px 0 6px}
+.input{border:1.5px solid var(--line2);padding:5px 8px;font-size:13.5px;background:var(--paper);width:100%;min-height:30px}
+.seg{display:inline-flex;border:2px solid var(--ink);flex-wrap:wrap;max-width:100%}.seg span{padding:5px 9px;font:700 12px system-ui;border-right:1.5px solid var(--ink);background:var(--paper)}.seg span:last-child{border-right:0}.seg span.on{background:var(--blue);color:#fff}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.scrollx>table{min-width:760px}
+.hint{font-size:11.5px;color:var(--soft);margin-top:4px;display:none}
+.mini{font-size:12px;color:var(--muted)}
+.edge{margin:10px 0 0;padding-left:18px;font-size:12.5px;color:var(--muted)}.edge li{margin:3px 0}.edge b{color:var(--ink)}
+/* fenêtre */
+.win{border:2px solid var(--ink);background:var(--paper);min-width:0}
+.win-bar{display:flex;align-items:center;gap:10px;padding:7px 10px;border-bottom:2px solid var(--ink);background:var(--grey-bg);flex-wrap:wrap;justify-content:space-between}
+.win-bar .eyebrow{font:700 10.5px system-ui;letter-spacing:.12em;color:var(--soft);text-transform:uppercase}
+.win-bar b{font-size:14px}
+.win-body{padding:12px;min-width:0}
+.win-foot{display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;border-top:2px solid var(--ink);flex-wrap:wrap}
+/* barre du haut */
+.topbar{display:flex;align-items:center;gap:6px;background:var(--bar);color:var(--bar-ink);padding:8px 10px;flex-wrap:wrap}
+.topbar .nav{display:flex;gap:12px;font-weight:700;font-size:12.5px;flex:1 1 auto;min-width:0;overflow:hidden;white-space:nowrap;align-items:center}
+.topbar .nav span i{font-style:normal;opacity:.55;margin-right:3px;font-size:11px}
+.topbar .nav span.on{background:var(--blue);padding:2px 8px}
+.topbar .nav .plus{border:1.5px dashed #9aa0aa;color:#cfd3da;padding:0 7px;font-weight:800}
+.topbar .nav .plus.hot{border-color:#ffd166;color:#ffd166;border-style:solid}
+.tool{border:1.5px solid var(--bar-ink);min-width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;padding:0 6px;gap:5px;white-space:nowrap;position:relative}
+.tool.succ{border-color:#ffd166;color:#ffd166;font-weight:700}
+.tool.hot{background:#ffd166;color:#111;border-color:#ffd166}
+.pastille{position:absolute;top:-7px;right:-7px;background:#e5383b;color:#fff;font:800 10px/16px system-ui;min-width:17px;height:17px;border-radius:9px;text-align:center;padding:0 4px;border:1.5px solid var(--bar)}
+.chrono{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--green);color:var(--green);background:var(--green-bg);font:800 13px ui-monospace,Menlo,monospace;padding:4px 8px;white-space:nowrap}
+.chrono.pause{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}
+.chrono .dotr{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block}
+.chrono.pause .dotr{background:var(--yel)}
+/* sous-onglets d'un dossier */
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--ink);flex-wrap:wrap;font-size:12.5px}
+.tabs span{padding:6px 9px;border-right:1px solid var(--line);white-space:nowrap}
+.tabs span.on{background:var(--blue);color:#fff;font-weight:700}
+.dhead{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 12px;border-bottom:2px solid var(--ink)}
+.dhead h4{margin:0;font-size:16px}.dhead small{color:var(--soft);display:block;font-size:12px}
+/* catalogue d'onglets */
+.cat-g{font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin:14px 0 6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:8px}
+.tc{border:2px solid var(--line2);background:var(--paper);padding:8px 10px;display:grid;grid-template-columns:28px minmax(0,1fr) 18px;gap:4px 8px;align-items:start;font-size:12.5px;min-width:0}
+.tc .ic{font-size:20px;line-height:1.1}
+.tc b{display:block;font-size:13px}
+.tc small{color:var(--muted);display:block;line-height:1.3}
+.tc .where{grid-column:2 / 4;font-size:11px;color:var(--soft)}
+.tc .ck{width:16px;height:16px;border:2px solid var(--ink);margin-top:2px}
+.tc.on{border-color:var(--blue);background:var(--blue-bg)}.tc.on .ck{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+.tc.rec{border-color:var(--green)}
+.tc .tg{grid-column:2 / 4;display:flex;gap:4px;flex-wrap:wrap}
+.tc .tg .badge{font-size:9.5px;padding:2px 4px}
+/* matrice usages */
+.mx td,.mx th{text-align:center;padding:6px 4px}.mx td:first-child,.mx th:first-child{text-align:left;white-space:nowrap}
+.mx th{font-size:10px;letter-spacing:.02em;text-transform:none}
+.mx .y{color:var(--blue);font-weight:800}.mx .r{color:var(--green);font-weight:800}.mx .o{color:var(--line2)}.mx .x{color:var(--soft)}
+/* rangement */
+.ord{border:2px solid var(--ink);background:var(--paper)}
+.ord .or{display:grid;grid-template-columns:18px 26px 20px minmax(0,1fr) 54px auto;gap:6px;align-items:center;padding:5px 8px;border-bottom:1px solid var(--line);font-size:12.5px}
+.ord .or:last-child{border-bottom:0}
+.ord .or .g{color:var(--soft)}.ord .or .n{font:700 11px system-ui;color:var(--soft)}
+.ord .or.new{background:var(--blue-bg)}
+.cb{width:14px;height:14px;border:2px solid var(--ink);display:inline-block;flex:none;vertical-align:-2px}
+.cb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+/* listes de contrôle */
+.ck-l{list-style:none;margin:0;padding:0;font-size:13px}
+.ck-l li{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:8px;padding:7px 4px;border-bottom:1px solid var(--line);align-items:start}
+.ck-l .s{font-size:15px;line-height:1.2}
+.ck-l small{display:block;color:var(--muted)}
+.ck-l li.bad b{color:var(--red)}.ck-l li.wa b{color:var(--yel-ink)}
+/* panneau déroulant (cloche) */
+.drop{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 rgba(0,0,0,.14);max-width:470px;margin-left:auto;font-size:13px}
+.drop .dh{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-bottom:2px solid var(--ink);gap:8px;flex-wrap:wrap}
+.drop .grp{padding:5px 10px;font:800 10.5px system-ui;letter-spacing:.1em;color:var(--soft);text-transform:uppercase;background:var(--grey-bg)}
+.drop .it{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 8px;padding:7px 10px;border-bottom:1px solid var(--line)}
+.drop .it small{color:var(--muted)}
+.drop .it .acts{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.drop .it.late b{color:var(--red)}
+/* feuille imprimée */
+.sheet{background:var(--sheet);border:1.5px solid var(--line2);box-shadow:0 2px 10px rgba(0,0,0,.12);padding:22px 26px;font:12.5px/1.5 Georgia,"Times New Roman",serif;color:var(--ink);max-width:720px;margin:0 auto}
+.sheet h5{font:700 16px Georgia,serif;text-align:center;margin:0 0 2px;letter-spacing:.04em}
+.sheet .c{text-align:center;margin:0 0 14px;font-size:12px}
+.sheet h6{font:700 13px Georgia,serif;margin:14px 0 4px;border-bottom:1px solid var(--line2);padding-bottom:2px}
+.chain{list-style:none;margin:0;padding:0 0 0 14px;border-left:2px solid var(--ink)}
+.chain li{position:relative;padding:3px 0 3px 10px}
+.chain li:before{content:"";position:absolute;left:-19px;top:10px;width:8px;height:8px;background:var(--sheet);border:2px solid var(--ink);border-radius:50%}
+.chain .cote{font:11px ui-monospace,Menlo,monospace;color:var(--muted)}
+.chain .miss{color:var(--red);font-style:italic}
+.sheet a{color:var(--blue)}
+/* chips de champs */
+.fchips{display:flex;gap:5px;flex-wrap:wrap;margin:6px 0}
+.fchips span{font:700 11.5px ui-monospace,Menlo,monospace;border:1.5px solid var(--blue);color:var(--blue);background:var(--blue-bg);padding:2px 6px}
+.fchips span.bad{border-color:var(--red);color:var(--red);background:var(--red-bg)}
+.letter{border:1.5px solid var(--line2);background:var(--sheet);padding:12px 14px;font:12.5px/1.5 Georgia,serif;white-space:pre-wrap;min-height:220px}
+.letter mark{background:var(--blue-bg);color:var(--blue-ink);padding:0 2px}
+.who{list-style:none;margin:0;padding:0;font-size:12.5px;border:1.5px solid var(--line2)}
+.who li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:6px;padding:6px 8px;border-bottom:1px solid var(--line)}
+.who li small{display:block;color:var(--muted)}
+.who li.off{background:var(--grey-bg);color:var(--soft)}
+.two{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:12px}
+/* écran de verrou */
+.lock{background:linear-gradient(160deg,#1b2a4a,#0e1626);color:#fff;padding:36px 18px;text-align:center;border:2px solid var(--ink)}
+.lock .pad{max-width:330px;margin:0 auto;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.25);padding:18px}
+.lock .input{background:#fff;color:#111}
+.lock small{color:#c9d3e6}
+/* téléphone */
+.phone{width:100%;max-width:390px;border:10px solid #222;border-radius:26px;background:var(--paper);overflow:hidden;margin:0 auto}
+.phone .ptop{display:flex;align-items:center;gap:6px;background:var(--bar);color:var(--bar-ink);padding:8px 10px;font-size:13px;font-weight:700}
+.phone .ptop .sp{flex:1}
+.phone .pbody{padding:10px;font-size:13px}
+.stack{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}.stack>*{min-width:0}
+.qs{background:var(--paper);border:2px solid var(--ink);padding:14px 18px;box-shadow:6px 6px 0 var(--shadow)}
+.qs li{margin:0 0 9px}
+.ex td:first-child{white-space:nowrap;font-weight:700}
+@media (max-width:980px){.stack{grid-template-columns:1fr}}
+@media (max-width:900px){.grid{grid-template-columns:1fr}.two{grid-template-columns:1fr}}
+@media (max-width:760px){
+ body{padding:14px}
+ .hint{display:block}
+ .topbar .nav{display:none}
+ .case{padding:12px}
+ .sheet{padding:14px}
+ .ord .or{grid-template-columns:16px 22px 18px minmax(0,1fr) auto}
+ .ord .or .ico{display:none}
+ .phone{border-width:0;border-radius:0}
+}
+</style></head><body><div class="wrap">
+
+<h1>＋ Onglets en option · ⚖️ Nouveaux outils du successoral</h1>
+<p class="sub">Maquette à valider. Partie A : des onglets <b>du menu principal</b> (01 Tableau de bord … 11 Réglages) qu’on ajoute en option, pour tous les usages, à partir d’outils <b>qui existent déjà</b>. Partie B : huit outils pour les généalogistes successoraux. Partie C : l’ordre de construction. Tout est <b>fictif</b> (dossiers 2026-014 MAZAUD, 2026-015 LACOMBE, 2026-016 ROUSSILHE…). Badges : <span class="badge new">nouveau</span> <span class="badge re">fait évoluer l’existant</span> <span class="badge have">existe</span>. Les cadres violets en pointillés sont des <b>décisions à prendre</b>.</p>
+<div class="sum">
+ <div><b>0</b><span>Ce qui existe déjà</span></div>
+ <div><b>A1–A3</b><span>＋ Ajouter un onglet</span></div>
+ <div><b>B1</b><span>⏱ Chronomètre</span></div>
+ <div><b>B2</b><span>🔔 Échéances du jour</span></div>
+ <div><b>B3</b><span>📋 Avant le notaire</span></div>
+ <div><b>B4</b><span>🧾 Filiation</span></div>
+ <div><b>B5</b><span>📊 Parts en euros</span></div>
+ <div><b>B6</b><span>✉️ Courriers en série</span></div>
+ <div><b>B7</b><span>🔐 Mot de passe</span></div>
+ <div><b>B8</b><span>📜 Qui a vu quoi</span></div>
+ <div><b>C</b><span>Récapitulatif</span></div>
+</div>
+
+<!-- ═════════════ 0. EXISTANT ═════════════ -->
+<h2>0. Ce qui existe déjà <span class="badge have">relevé dans le code</span></h2>
+<p class="sub">Vérifié fichier par fichier avant de dessiner, pour ne rien proposer en double. Chaque outil de la partie B dit ce qu’il réutilise.</p>
+<div class="case wide"><div class="scrollx"><table style="min-width:900px"><thead><tr><th>Quoi</th><th>Où dans l’app</th><th>Fichier · fonction</th><th>Ce qu’on en fait ici</th></tr></thead><tbody>
+ <tr><td><b>Menu principal</b> (onglets)</td><td>Barre du haut, <code>data-module</code> : dashboard, personnes, animaux, suivi, documents, catalogue, successoral, graphiques, carte, listes, chronologie, recherche, enquetes, fiches, adn, comparaison, tresors, maintenance</td><td><code>index.php</code> l. 115-132 · <code>app.js</code> <code>modules</code>, <code>applyMenuOrder()</code>, <code>menuHiddenKeys()</code></td><td>A : rien de neuf côté onglets eux-mêmes</td></tr>
+ <tr><td>Cacher / montrer un onglet</td><td>Réglages → <b>Menus, colonne et listes</b> → onglet « Menu » → « Ordre et noms du menu principal » (⠿, case, nom, émoji)</td><td><code>app.js</code> <code>menuOrderEditor()</code>, enregistrement <code>data-order-save="menu-order"</code> ; clés <code>genealogie-menu-order</code>, <code>-hidden</code>, <code>-names</code>, <code>-icons</code></td><td>A3 : réutilisé tel quel pour ranger, renommer, cacher</td></tr>
+ <tr><td>Onglets cachés au départ</td><td>🐾 Animaux, 🐾 Suivi, 📒 Fiches, 🧬 ADN, ✨ Trésors, 📄 Documents, 🎨 Catalogue, ⚖️ Successions</td><td><code>menuHiddenKeys()</code> + repère <code>genealogie-menu-&lt;onglet&gt;</code></td><td>A1 : deviennent des cartes « à ajouter »</td></tr>
+ <tr><td><b>Onglets à soi</b> (raccourcis)</td><td>Réglages → <b>Éditeur d’onglets</b> : « 🔗 Raccourci vers un écran de l’app » (une liste, un diagramme, une statistique, une page des Réglages) ou page de widgets</td><td><code>heritage-tabs.js</code> <code>screenTargets()</code> ; clé <code>genealogie-custom-tabs</code> <code>{kind:'screen', target:'list:courriers'}</code></td><td>A1 : un onglet « raccourci » ajouté = un onglet à soi, rien de neuf à stocker</td></tr>
+ <tr><td>Usages (10)</td><td>Réglages → Apparence → 🧭 Usage de l’app ; premier lancement</td><td><code>app-premier.js</code> <code>USAGES</code> (show / tabs / start), <code>MANAGED</code>, <code>FLAGGED</code>, <code>usageChanges()</code> ; ancien raccourci retiré <code>ct_uscourriers</code></td><td>A2 : « conseillé pour ton usage »</td></tr>
+ <tr><td>📄 Documents</td><td>Onglet caché au départ ; montré par les usages 📚 Archives et ⚖️ Successoral. Lit les <b>médias</b> de la base (rien à ressaisir)</td><td><code>heritage-onglets-documents.js</code> · <code>lib/onglets.php</code></td><td>A : proposé à <b>tous</b> les usages</td></tr>
+ <tr><td>Boutons en haut à droite</td><td>Réglages → Apparence → « Boutons en haut à droite » (◫ ↗ 🔒 🧓 🧮 🐞 ⚖️ 🌳 + raccourcis d’outils)</td><td><code>app-apparence.js</code> <code>TB_ITEMS</code>, clé <code>genealogie-topbar-buttons</code></td><td>B1, B2, B7 : nouvelles lignes en option</td></tr>
+ <tr><td>Dossiers de succession</td><td>⚖️ Successions → un dossier : 📁 Dossier · 👥 Héritiers · 🧑‍🤝‍🧑 Personnes · 🌳 Arbre · 📑 Pièces · ✉️ Héritiers contactés · 🖨 Pour le notaire · 🕓 Journal · 💶 Temps et frais</td><td><code>heritage-successoral.js</code> <code>TABS</code> · <code>lib/successoral.php</code> (tables succ_cases, succ_deadlines, succ_pieces, succ_journal, succ_fees)</td><td>B : tout part de là</td></tr>
+ <tr><td>Colonne « Temps »</td><td>Tableau de bord des dossiers (somme des temps notés)</td><td><code>lib/successoral_dossiers.php</code> <code>succ_index_rows()</code> → <code>minutes</code> ; <code>heritage-successoral-dossiers.js</code> <code>timeTxt()</code></td><td>B1 la remplit</td></tr>
+ <tr><td>💶 Temps et frais</td><td>＋ Temps (heures, minutes), ＋ Frais, ＋ Honoraires d’un contrat (% par héritier), relevé imprimable ; « Aucun montant de succession n’est noté »</td><td><code>heritage-successoral.js</code> <code>tabFees()</code>, <code>feeDialog()</code> ; <code>succ_deadline</code>/<code>fee_save</code> (ajout <b>et</b> modification)</td><td>B1 (temps), B5 (le % du contrat)</td></tr>
+ <tr><td><b>Chronomètre</b></td><td>Atelier de recherche : widget « ⏱️ Chronomètre » par projet (+ ⏳ Minuteur)</td><td><code>heritage-atelier-widgets.js</code> (chrono-toggle, timers gardés hors de l’écran)</td><td>B1 réutilise sa mécanique</td></tr>
+ <tr><td>Échéances</td><td>Dans chaque dossier ; aussi dans 🗓 Ma semaine de recherche (une base à la fois) ; colonne « Échéance » du tableau de bord ; widget « ⚖️ Mes dossiers »</td><td><code>succ_deadlines</code> ; <code>lib/semaine.php</code> ; index léger <code>succ_index()</code> (toutes les généalogies, <code>next_due</code> et <code>late</code> seulement)</td><td>B2 : rien ne <b>prévient</b> aujourd’hui (pas de pastille)</td></tr>
+ <tr><td>Avancement en 7 étapes</td><td>Défunt et acte de décès · Arbre · Héritiers trouvés · Adresses · Contrats signés · Pièces · Remis au notaire</td><td><code>heritage-successoral-core.js</code> <code>progress()</code>, <code>STEP_KEYS</code></td><td>B3 la transforme en liste de contrôle</td></tr>
+ <tr><td><b>Tableau pour le notaire</b></td><td>🖨 Pour le notaire : 3 pages (tableau Héritier · Qualité · Part · <b>Sources du lien</b> ; arbre ; liste des pièces) ; PDF, traitement de texte, copie dans les médias</td><td><code>heritage-successoral.js</code> <code>notaryHtml()</code>, <code>tabNotary()</code> ; cotes = titre de la source + page (<code>lib/successoral.php</code>)</td><td>B4 ajoute une page « chaîne par héritier »</td></tr>
+ <tr><td>Liens Légifrance</td><td>Chaque « art. 7xx » cité par le moteur devient un lien</td><td><code>heritage-successoral-core.js</code> <code>lawLinks()</code></td><td>B4 : seulement ceux-là</td></tr>
+ <tr><td>Parts exactes</td><td>Fractions exactes (BigInt) qui totalisent 1</td><td><code>heritage-successoral-core.js</code> <code>F()</code>, <code>compute()</code></td><td>B5 les applique à un montant</td></tr>
+ <tr><td><b>Lettres à plusieurs héritiers</b></td><td>✉️ Héritiers contactés → « 📝 Contrat de révélation » / « ✉️ Lettre de premier contact » : cases par héritier (ceux sans adresse décochés), champs <code>{heir}</code> <code>{sender}</code> <code>{sent}</code>, 🖨 tout imprimer, rangés d’un coup dans le Registre avec relance, ↶ Annuler</td><td><code>heritage-successoral.js</code> <code>letterDialog()</code>, op <code>file_letter</code> / <code>unfile_letter</code></td><td>B6 : c’est déjà un publipostage ; il manque l’aperçu par lettre, des champs et l’exclusion des « 🔎 introuvables »</td></tr>
+ <tr><td><b>Mots de passe</b></td><td>🔒 Mode consultation (mot de passe pour en sortir) ; sauvegarde protégée (AES-256) ; 🗄 Copie chez un cousin chiffrée ; partage temporaire d’une branche chiffré</td><td><code>lib/heritage_tools.php</code> <code>kiosk_enter()</code> (<code>password_hash</code> dans <code>consultation.json</code> de la généalogie), <code>kiosk_blocks()</code> ; <code>app.js</code> <code>askBackupPassword()</code> ; <code>lib/heritage_more.php</code> (Argon2id) ; <code>heritage-tresors-papiers.js</code> <code>encrypt()</code></td><td>B7 : <b>aucun</b> verrou à l’ouverture ; la base SQLite n’est pas chiffrée</td></tr>
+ <tr><td>Journaux</td><td>🕓 Journal du dossier (jamais modifié ni effacé : ouverture, calcul, pièces, courriers, PDF, export, recherche…) ; Réglages → Journal des modifications</td><td><code>succ_journal</code>, <code>SUCC_JOURNAL_KINDS</code> ; table <code>change_log</code> (sans « qui »)</td><td>B8 : il n’y a ni « qui », ni les simples ouvertures</td></tr>
+ <tr><td>Profils d’utilisateur</td><td><b>Aucun</b>. Seul le nom de l’ordinateur est connu (🔄 Deux ordinateurs)</td><td><code>lib/sync_dossier.php</code> <code>sd_machine()</code></td><td>B8 : « par poste »</td></tr>
+ <tr><td>Mode consultation</td><td>Le successoral est entièrement caché (rien ne se lit ni ne s’écrit)</td><td><code>heritage-successoral*.js</code> <code>hidden()</code></td><td>B1-B8 : cachés aussi</td></tr>
+</tbody></table></div><p class="hint">↔ Faire glisser le tableau.</p></div>
+
+<!-- ═════════════ PARTIE A ═════════════ -->
+<div class="part">Partie A</div>
+<h2>A. ＋ Onglets en option, pour toutes les configurations <span class="badge new">nouveau</span></h2>
+<p class="sub">Aujourd’hui, montrer 📄 Documents quand on fait sa généalogie est <b>déjà possible</b> (Réglages → Menus, colonne et listes → cocher la ligne), mais personne ne le sait. Et ajouter un raccourci vers le Registre de courriers demande l’Éditeur d’onglets. On réunit les deux dans un seul catalogue, simple. <b>Rien de neuf n’est stocké</b> : un onglet de l’app est « montré » (comme la case du réglage), un raccourci est un « onglet à soi » de sorte « raccourci ».</p>
+
+<div class="grid">
+ <div class="case wide">
+  <div class="head"><span class="tag"><span class="num-b">A1</span>le petit ＋ au bout du menu</span><span class="badge new">nouveau</span></div>
+  <h3>Un « ＋ » discret après le dernier onglet, et le même bouton dans Réglages</h3>
+  <div class="topbar"><div class="nav"><span><i>01</i>Tableau de bord</span><span><i>02</i>Personnes</span><span><i>03</i>Graphiques</span><span><i>04</i>Carte</span><span><i>05</i>Listes</span><span><i>06</i>Chronologie</span><span><i>07</i>Recherche</span><span><i>08</i>Enquêtes</span><span><i>09</i>Comparaison</span><span><i>10</i>Réglages</span><span class="plus hot" title="Ajouter un onglet">＋</span></div><span class="tool">◫</span><span class="tool">🔒</span><span class="tool">🌳</span></div>
+  <div class="path" style="margin-top:10px">Deux entrées : le <b>＋</b> au bout du menu (survol : « Ajouter un onglet ») · Réglages → <b>Menus, colonne et listes</b> → onglet « Menu » → bouton <b>＋ Ajouter un onglet…</b> au-dessus de « Ordre et noms du menu principal »</div>
+  <ul class="edge">
+   <li><b>Mode consultation et mode simple</b> : pas de ＋ (on ne change rien au menu).</li>
+   <li><b>Menu à gauche</b> (réglage « position du menu ») : le ＋ est la dernière ligne, « ＋ Ajouter un onglet ».</li>
+   <li><b>Téléphone</b> : le menu est replié ; le ＋ est la dernière ligne du menu déplié.</li>
+  </ul>
+  <div class="dec"><b>Décision à prendre · le ＋ au bout du menu</b>
+   <ol>
+    <li><b>Visible tout le temps</b>, petit et gris, plus vif au survol <span class="cons">conseillé</span> : on le découvre sans le chercher ; une case « Montrer le ＋ au bout du menu » dans Réglages → Menus permet de l’enlever.</li>
+    <li>Seulement quand on range le menu (après « ✎ Ranger le menu » dans Réglages) : plus propre, mais on ne le trouve jamais.</li>
+   </ol>
+  </div>
+ </div>
+
+ <div class="case wide">
+  <div class="head"><span class="tag"><span class="num-b">A1</span>la fenêtre « ＋ Ajouter un onglet »</span><span class="badge new">nouveau</span></div>
+  <h3>Des cartes groupées ; « conseillé pour ton usage » ; ce qui est déjà là est coché</h3>
+  <div class="win">
+   <div class="win-bar"><div><div class="eyebrow">＋ Ajouter un onglet</div><b>Qu’est-ce que tu veux avoir sous la main ?</b></div><span class="mini">Ton usage : 🌳 Ma généalogie <u>changer</u></span></div>
+   <div class="win-body">
+    <div class="row"><div class="input" style="max-width:340px">🔍 Chercher un onglet… (courrier, acte, agenda)</div><span class="seg"><span class="on">Tous</span><span>Conseillés (7)</span><span>Déjà dans le menu (10)</span></span></div>
+
+    <div class="cat-g">1 · Des parties de l’app, cachées au départ <span class="badge have">existent</span></div>
+    <div class="cards">
+     <div class="tc rec"><span class="ic">📄</span><span><b>Documents</b><small>Tes photos, actes, lettres de A à Z, rangés en dossiers.</small></span><span class="ck"></span><span class="tg"><span class="badge ok">conseillé pour toi</span></span></div>
+     <div class="tc rec"><span class="ic">✨</span><span><b>Trésors de famille</b><small>Lettres à ouvrir plus tard, recettes, musée de famille.</small></span><span class="ck"></span><span class="tg"><span class="badge ok">conseillé pour toi</span></span></div>
+     <div class="tc rec"><span class="ic">📒</span><span><b>Fiches</b><small>Fiches thématiques : un métier, une guerre, un village.</small></span><span class="ck"></span><span class="tg"><span class="badge ok">conseillé pour toi</span></span></div>
+     <div class="tc"><span class="ic">🧬</span><span><b>ADN</b><small>Tes correspondances ADN et leurs liens.</small></span><span class="ck"></span></div>
+     <div class="tc"><span class="ic">🎨</span><span><b>Catalogue raisonné</b><small>Les œuvres d’un artiste, albums, expositions.</small></span><span class="ck"></span></div>
+     <div class="tc"><span class="ic">🐾</span><span><b>Animaux</b><small>Pedigree, portées. (Suivi des animaux : à part.)</small></span><span class="ck"></span></div>
+     <div class="tc"><span class="ic">⚖️</span><span><b>Successions</b><small>Dossiers de succession, pour un notaire.</small></span><span class="ck"></span><span class="tg"><span class="badge grey">métier</span></span></div>
+    </div>
+
+    <div class="cat-g">2 · Un raccourci vers une liste <span class="badge have">les listes existent</span><span class="mini" style="text-transform:none;letter-spacing:0;font-weight:400">devient un « onglet à soi » (Éditeur d’onglets)</span></div>
+    <div class="cards">
+     <div class="tc rec on"><span class="ic">📮</span><span><b>Courriers</b><small>Le Registre de courriers : demandes d’actes, relances, réponses.</small></span><span class="ck"></span><span class="tg"><span class="badge blue">✓ déjà dans le menu</span></span><span class="where">Listes → Archives et sources → Registre de courriers</span></div>
+     <div class="tc rec"><span class="ic">📜</span><span><b>Transcriptions d’actes</b><small>Tes actes recopiés, mot à mot.</small></span><span class="ck"></span><span class="tg"><span class="badge ok">conseillé pour toi</span></span><span class="where">Listes → Archives et sources</span></div>
+     <div class="tc rec"><span class="ic">🗓</span><span><b>Mon agenda</b><small>Visites, rendez-vous, relances, à la semaine.</small></span><span class="ck"></span><span class="tg"><span class="badge ok">conseillé pour toi</span></span><span class="where">Listes → Recherche et organisation</span></div>
+     <div class="tc"><span class="ic">⏰</span><span><b>Rappels</b><small>Les choses à faire, avec leur date.</small></span><span class="ck"></span><span class="where">Listes → Recherche et organisation</span></div>
+     <div class="tc"><span class="ic">🖼</span><span><b>Médias</b><small>Toutes les images, sons, vidéos en tableau.</small></span><span class="ck"></span><span class="where">Listes → Médias et documents</span></div>
+     <div class="tc rec"><span class="ic">💬</span><span><b>Questions aux proches</b><small>Questionnaires pour recueillir les souvenirs.</small></span><span class="ck"></span><span class="tg"><span class="badge ok">conseillé pour toi</span></span><span class="where">Listes → Médias et documents</span></div>
+     <div class="tc"><span class="ic">🏠</span><span><b>Maisons de famille</b><small>Les maisons, pièce par pièce, et qui y a vécu.</small></span><span class="ck"></span><span class="where">Listes → Lieux et maisons</span></div>
+     <div class="tc"><span class="ic">📇</span><span><b>Répertoire des vivants</b><small>Adresses et contacts des cousins vivants.</small></span><span class="ck"></span><span class="where">Listes → Personnes et familles</span></div>
+     <div class="tc"><span class="ic">🏛</span><span><b>Archives</b><small>Les dépôts, leurs cotes, leurs horaires.</small></span><span class="ck"></span><span class="where">Listes → Archives et sources</span></div>
+     <div class="tc"><span class="ic">🧭</span><span><b>Visites d’archives</b><small>Le planificateur : quoi consulter, où, quand.</small></span><span class="ck"></span><span class="where">Listes → Archives et sources</span></div>
+     <div class="tc"><span class="ic">🏠</span><span><b>Héritages et successions</b><small>Qui a hérité de quoi d’après les actes anciens.</small></span><span class="ck"></span><span class="where">Listes → Médias et documents</span></div>
+    </div>
+
+    <div class="cat-g">3 · Un raccourci vers un outil</div>
+    <div class="cards">
+     <div class="tc rec"><span class="ic">🌍</span><span><b>Où chercher ?</b><small>Les bons sites pour la personne ouverte.</small></span><span class="ck"></span><span class="tg"><span class="badge ok">conseillé pour toi</span><span class="badge new">raccourci nouveau</span></span><span class="where">Recherche → Type de recherche</span></div>
+     <div class="tc"><span class="ic">🧩</span><span><b>Doublons</b><small>Trouver et fusionner les fiches en double.</small></span><span class="ck"></span><span class="where">Réglages → Fusion de doublons</span></div>
+     <div class="tc"><span class="ic">✅</span><span><b>Contrôle de la base</b><small>Dates impossibles, liens bizarres.</small></span><span class="ck"></span><span class="where">Réglages → Contrôle de la base</span></div>
+     <div class="tc"><span class="ic">🔤</span><span><b>Le nom étudié</b><small>Les porteurs d’un nom, ses variantes.</small></span><span class="ck"></span><span class="where">Graphiques → statistique des noms</span></div>
+     <div class="tc"><span class="ic">🏭</span><span><b>L’entreprise</b><small>Employeurs, salariés, membres.</small></span><span class="ck"></span><span class="where">Listes → Employeurs</span></div>
+    </div>
+    <p class="note">Une carte cochée = l’onglet est dans le menu. Cocher l’ajoute tout de suite à la fin du menu (message « ✓ Onglet « 📄 Documents » ajouté · ↶ Annuler ») ; décocher le cache (un raccourci est caché, pas effacé : on le retrouve coché ici). « Où chercher ? » demande un petit ajout : un nouveau type d’écran <code>search:ou_chercher</code> dans <code>screenTargets()</code>.</p>
+   </div>
+   <div class="win-foot"><span class="btn ghost">↗ Faire un onglet à moi (Éditeur d’onglets)</span><span class="btn blue">Fermer</span></div>
+  </div>
+  <div class="reuse"><b>Réutilise</b> : la case « montré » de <code>menuOrderEditor()</code> (<code>genealogie-menu-hidden</code> + <code>genealogie-menu-&lt;onglet&gt;</code> = '1') ; les onglets à soi <code>{kind:'screen', target:'list:…'}</code> de <code>heritage-tabs.js</code> ; les usages de <code>app-premier.js</code> pour « conseillé ». Les identifiants de raccourcis ajoutés ici sont fixes (<code>ct_addcourriers</code>…) pour que deux clics ne fassent pas deux onglets.</div>
+  <div class="dec"><b>Décision à prendre · ⚖️ et le 📮 Courriers</b>
+   L’usage successoral avait un raccourci « Courriers » (<code>ct_uscourriers</code>) qui a été <b>retiré</b> (les courriers sont dans les dossiers). Faut-il le <b>proposer</b> à nouveau dans le catalogue, coché « conseillé » mais jamais ajouté tout seul <span class="cons">conseillé</span>, ou le laisser hors du catalogue pour l’usage successoral ?
+  </div>
+ </div>
+
+ <div class="case wide">
+  <div class="head"><span class="tag"><span class="num-b">A2</span>usage × onglet</span><span class="badge new">nouveau</span></div>
+  <h3>Ce qui est conseillé pour chaque usage</h3>
+  <p class="mini"><span class="y">✓</span> déjà montré par l’usage (aujourd’hui, <code>show</code> / <code>tabs</code>) · <span class="r" style="color:var(--green);font-weight:800">●</span> conseillé dans le catalogue · <span style="color:var(--line2)">○</span> possible · <span class="x">—</span> n’a pas de sens ici (absent du catalogue)</p>
+  <div class="scrollx"><table class="mx" style="min-width:960px"><thead><tr><th>Onglet</th><th>🌳<br>Généalogie</th><th>🐾<br>Lignée</th><th>🔭<br>Recenser</th><th>🏠<br>Maison</th><th>🎨<br>Artiste</th><th>📚<br>Archives</th><th>🔤<br>Nom</th><th>🏭<br>Entreprise</th><th>✨<br>Souvenirs</th><th>⚖️<br>Successoral</th></tr></thead><tbody>
+   <tr><td>📄 Documents</td><td class="r">●</td><td class="o">○</td><td class="o">○</td><td class="r">●</td><td class="r">●</td><td class="y">✓</td><td class="r">●</td><td class="r">●</td><td class="r">●</td><td class="y">✓</td></tr>
+   <tr><td>✨ Trésors</td><td class="r">●</td><td class="o">○</td><td class="x">—</td><td class="r">●</td><td class="o">○</td><td class="y">✓</td><td class="o">○</td><td class="o">○</td><td class="y">✓</td><td class="x">—</td></tr>
+   <tr><td>📒 Fiches</td><td class="r">●</td><td class="o">○</td><td class="o">○</td><td class="r">●</td><td class="o">○</td><td class="r">●</td><td class="r">●</td><td class="r">●</td><td class="o">○</td><td class="o">○</td></tr>
+   <tr><td>🧬 ADN</td><td class="o">○</td><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="r">●</td><td class="x">—</td><td class="o">○</td><td class="o">○</td></tr>
+   <tr><td>🎨 Catalogue raisonné</td><td class="o">○</td><td class="x">—</td><td class="x">—</td><td class="o">○</td><td class="y">✓</td><td class="r">●</td><td class="x">—</td><td class="o">○</td><td class="o">○</td><td class="x">—</td></tr>
+   <tr><td>🐾 Animaux · Suivi</td><td class="o">○</td><td class="y">✓</td><td class="y">✓</td><td class="o">○</td><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="o">○</td><td class="x">—</td></tr>
+   <tr><td>⚖️ Successions</td><td class="o">○</td><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="y">✓</td></tr>
+   <tr><td>📮 Courriers</td><td class="r">●</td><td class="o">○</td><td class="x">—</td><td class="o">○</td><td class="o">○</td><td class="r">●</td><td class="r">●</td><td class="o">○</td><td class="o">○</td><td class="r">●</td></tr>
+   <tr><td>📜 Transcriptions d’actes</td><td class="r">●</td><td class="x">—</td><td class="x">—</td><td class="r">●</td><td class="x">—</td><td class="o">○</td><td class="r">●</td><td class="o">○</td><td class="x">—</td><td class="r">●</td></tr>
+   <tr><td>🗓 Mon agenda · ⏰ Rappels</td><td class="r">●</td><td class="o">○</td><td class="r">●</td><td class="o">○</td><td class="o">○</td><td class="o">○</td><td class="o">○</td><td class="r">●</td><td class="o">○</td><td class="r">●</td></tr>
+   <tr><td>🖼 Médias</td><td class="o">○</td><td class="o">○</td><td class="o">○</td><td class="o">○</td><td class="r">●</td><td class="o">○</td><td class="o">○</td><td class="o">○</td><td class="o">○</td><td class="o">○</td></tr>
+   <tr><td>💬 Questions aux proches</td><td class="r">●</td><td class="x">—</td><td class="x">—</td><td class="r">●</td><td class="o">○</td><td class="o">○</td><td class="o">○</td><td class="o">○</td><td class="r">●</td><td class="x">—</td></tr>
+   <tr><td>🏠 Maisons de famille</td><td class="o">○</td><td class="x">—</td><td class="x">—</td><td class="y">✓</td><td class="o">○</td><td class="o">○</td><td class="o">○</td><td class="o">○</td><td class="o">○</td><td class="x">—</td></tr>
+   <tr><td>📇 Répertoire des vivants</td><td class="o">○</td><td class="o">○</td><td class="x">—</td><td class="x">—</td><td class="o">○</td><td class="x">—</td><td class="o">○</td><td class="o">○</td><td class="o">○</td><td class="r">●</td></tr>
+   <tr><td>🏛 Archives · 🧭 Visites</td><td class="r">●</td><td class="x">—</td><td class="x">—</td><td class="r">●</td><td class="o">○</td><td class="r">●</td><td class="r">●</td><td class="o">○</td><td class="x">—</td><td class="r">●</td></tr>
+   <tr><td>🏠 Héritages et successions</td><td class="o">○</td><td class="x">—</td><td class="x">—</td><td class="r">●</td><td class="x">—</td><td class="o">○</td><td class="o">○</td><td class="x">—</td><td class="o">○</td><td class="o">○</td></tr>
+   <tr><td>🌍 Où chercher ?</td><td class="r">●</td><td class="x">—</td><td class="x">—</td><td class="o">○</td><td class="x">—</td><td class="x">—</td><td class="r">●</td><td class="x">—</td><td class="x">—</td><td class="r">●</td></tr>
+   <tr><td>🧩 Doublons · ✅ Contrôle</td><td class="o">○</td><td class="o">○</td><td class="o">○</td><td class="o">○</td><td class="o">○</td><td class="o">○</td><td class="r">●</td><td class="o">○</td><td class="o">○</td><td class="o">○</td></tr>
+   <tr><td>🔤 Le nom étudié</td><td class="o">○</td><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="x">—</td><td class="y">✓</td><td class="x">—</td><td class="x">—</td><td class="x">—</td></tr>
+   <tr><td>🏭 L’entreprise</td><td class="o">○</td><td class="x">—</td><td class="x">—</td><td class="o">○</td><td class="x">—</td><td class="o">○</td><td class="x">—</td><td class="y">✓</td><td class="x">—</td><td class="x">—</td></tr>
+  </tbody></table></div><p class="hint">↔ Faire glisser le tableau.</p>
+  <p class="note"><b>Écartés</b> (pas d’écran à part dans l’app aujourd’hui) : 📚 Sources (elles sont dans chaque fiche et dans Listes → Archives) ; 🗂 Tâches (ce sont les ⏰ Rappels et 🗓 Mon agenda). Quand plusieurs usages sont allumés, « conseillé » = conseillé pour au moins l’un d’eux.</p>
+  <div class="dec"><b>Décision à prendre · ⚖️ et les fiches de famille</b> ✨ Trésors et 💬 Questions aux proches sont marqués « — » pour l’usage successoral seul (ce sont des outils de famille, pas de dossiers clients). D’accord <span class="cons">conseillé</span>, ou les laisser « ○ possible » ?</div>
+ </div>
+
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">A3</span>ranger, renommer, retirer</span><span class="badge re">réglage existant</span></div>
+  <h3>L’onglet ajouté se range comme les autres</h3>
+  <div class="path">Réglages → <b>Menus, colonne et listes</b> → « Menu » → Ordre et noms du menu principal</div>
+  <div class="ord">
+   <div class="or"><span class="g">⠿</span><span class="n">01</span><span class="cb on"></span><span>Tableau de bord</span><span class="ico mini">🏠</span><span></span></div>
+   <div class="or"><span class="g">⠿</span><span class="n">02</span><span class="cb on"></span><span>Personnes</span><span class="ico mini">👤</span><span></span></div>
+   <div class="or new"><span class="g">⠿</span><span class="n">03</span><span class="cb on"></span><span><b>📄 Documents</b> <span class="badge ok" style="font-size:9px">ajouté</span></span><span class="ico mini">📄</span><span></span></div>
+   <div class="or"><span class="g">⠿</span><span class="n">04</span><span class="cb on"></span><span>Graphiques</span><span class="ico mini">📊</span><span></span></div>
+   <div class="or"><span class="g">⠿</span><span class="n">05</span><span class="cb on"></span><span>Listes</span><span class="ico mini">📋</span><span></span></div>
+   <div class="or new"><span class="g">⠿</span><span class="n">06</span><span class="cb on"></span><span><b>📮 Courriers</b> <small class="mini">(mon onglet · raccourci)</small></span><span class="ico mini">📮</span><span class="btn small red">Retirer</span></div>
+   <div class="or"><span class="g">⠿</span><span class="n">…</span><span class="cb on"></span><span>…</span><span class="ico mini"></span><span></span></div>
+   <div class="or"><span class="g"></span><span class="n">11</span><span class="cb on"></span><span>Réglages <small class="mini">(toujours là)</small></span><span class="ico mini">⚙️</span><span></span></div>
+  </div>
+  <ul class="edge">
+   <li><b>Ordre</b> : glisser ⠿ (ou Alt + ↑ / ↓), comme aujourd’hui. Un onglet ajouté arrive <b>avant Réglages</b>.</li>
+   <li><b>Renommer</b> : le champ nom et l’émoji de la ligne (déjà là : <code>genealogie-menu-names</code> / <code>-icons</code>).</li>
+   <li><b>Cacher</b> : la case. <b>Retirer</b> (raccourcis seulement) : supprime l’onglet à soi, avec ↶ Annuler. Un onglet de l’app ne se retire pas, il se cache.</li>
+   <li><b>Changement d’usage</b> : un onglet ajouté à la main n’est jamais caché par un usage (<code>usageChanges()</code> ne touche que les onglets dont l’état change avec l’usage).</li>
+  </ul>
+ </div>
+
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">A3</span>téléphone · 390</span><span class="badge new">nouveau</span></div>
+  <h3>Le catalogue sur un téléphone</h3>
+  <div class="phone"><div class="ptop">☰ <span class="sp">＋ Ajouter un onglet</span>✕</div><div class="pbody">
+   <div class="input">🔍 Chercher un onglet…</div>
+   <div class="cat-g">Conseillés pour toi</div>
+   <div class="cards" style="grid-template-columns:1fr">
+    <div class="tc rec"><span class="ic">📄</span><span><b>Documents</b><small>Photos, actes, lettres de A à Z.</small></span><span class="ck"></span></div>
+    <div class="tc rec on"><span class="ic">📮</span><span><b>Courriers</b><small>Le Registre de courriers.</small></span><span class="ck"></span><span class="tg"><span class="badge blue">✓ dans le menu</span></span></div>
+    <div class="tc rec"><span class="ic">🗓</span><span><b>Mon agenda</b><small>Visites, relances, rendez-vous.</small></span><span class="ck"></span></div>
+   </div>
+   <div class="cat-g">Tout le reste ▾</div>
+  </div></div>
+ </div>
+</div>
+
+<!-- ═════════════ PARTIE B ═════════════ -->
+<div class="part">Partie B</div>
+<h2>B. Outils pour les généalogistes successoraux</h2>
+<p class="sub">Tous ces outils ne se voient qu’avec l’usage « ⚖️ Généalogiste successoral », jamais en mode consultation 🔒 ni en mode simple 🧓 (comme les dossiers aujourd’hui). Exemple commun : dossier <b>2026-014 MAZAUD</b>, succession de Paul MAZAUD (†&nbsp;2025, Limoges), sans conjoint ni enfant ; héritiers : son frère André MAZAUD (1/3), ses neveux Jeanne et Marc LACOMBE (1/6 chacun, représentant leur mère Louise), sa nièce Sylvie ROUSSILHE (1/3, représentant sa mère Hélène).</p>
+
+<!-- B1 -->
+<h2>B1. ⏱ Chronomètre par dossier <span class="badge new">nouveau</span> <span class="badge re">remplit 💶 Temps et frais</span></h2>
+<div class="grid">
+ <div class="case wide">
+  <div class="head"><span class="tag"><span class="num-b">B1</span>en haut du dossier ouvert</span></div>
+  <h3>Un bouton qui compte le temps sur le dossier ouvert</h3>
+  <div class="path">⚖️ Successions → un dossier → en-tête du dossier, à côté de « ⚖️ Un doute ? »</div>
+  <div class="win">
+   <div class="dhead"><div><h4>2026-014 · Succession de Paul MAZAUD</h4><small>Notaire : Me VIALLE · En recherche · 64 %</small></div><div class="row"><span class="chrono"><span class="dotr"></span>00:42:10 <small style="font-weight:600">· ⏸</small></span><span class="btn small ghost">⚖️ Un doute ?</span><span class="btn small ghost">⋯</span></div></div>
+   <div class="tabs"><span>📁 Dossier</span><span class="on">👥 Héritiers</span><span>🧑‍🤝‍🧑 Personnes</span><span>🌳 Arbre</span><span>📑 Pièces</span><span>✉️ Contactés</span><span>🖨 Pour le notaire</span><span>🕓 Journal</span><span>💶 Temps et frais</span></div>
+   <div class="win-body">
+    <div class="grid" style="gap:14px">
+     <div>
+      <span class="lab">1 · Il tourne</span>
+      <div class="row"><span class="chrono"><span class="dotr"></span>00:42:10</span><span class="btn small">⏸ Pause</span><span class="btn small">⏹ Arrêter et noter</span></div>
+      <p class="mini">Clic sur ⏱ : démarre. Un seul chronomètre à la fois. Le titre de la fenêtre montre « ⏱ 2026-014 ».</p>
+      <span class="lab">2 · Pause toute seule</span>
+      <div class="row"><span class="chrono pause"><span class="dotr"></span>01:05:00 · en pause</span></div>
+      <div class="msg warn">⏸ Rien touché depuis 10 min : chronomètre en pause à 11 h 52. <u>Reprendre</u> · <u>Compter aussi ces 10 min</u></div>
+     </div>
+     <div>
+      <span class="lab">3 · ⏹ Arrêter et noter</span>
+      <div class="win"><div class="win-bar"><div><div class="eyebrow">💶 Temps et frais</div><b>Noter le temps passé</b></div></div><div class="win-body">
+       <div class="row"><div style="flex:1"><span class="lab" style="margin-top:0">Heures</span><div class="input">1</div></div><div style="flex:1"><span class="lab" style="margin-top:0">Minutes</span><div class="input">05</div></div></div>
+       <span class="lab">Quoi</span><div class="input">Recherches : 👥 Héritiers, 📑 Pièces</div>
+       <p class="mini">Proposé d’après les onglets ouverts ; à corriger si besoin. Date : aujourd’hui.</p>
+      </div><div class="win-foot"><span class="btn ghost">Jeter ce temps</span><span class="btn blue">Noter 1 h 05</span></div></div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="grid" style="margin-top:14px;gap:14px">
+   <div>
+    <span class="lab">4 · Ça remplit la colonne « Temps »</span>
+    <div class="scrollx"><table style="min-width:420px"><thead><tr><th>Dossier</th><th>État</th><th class="num">Temps</th></tr></thead><tbody>
+     <tr><td>2026-014 MAZAUD</td><td><span class="badge blue">En recherche</span></td><td class="num"><b>14 h 20</b> <small class="mini">(+1 h 05)</small></td></tr>
+     <tr><td>2026-015 LACOMBE</td><td><span class="badge ok">Trouvés</span></td><td class="num">6 h 45</td></tr>
+     <tr><td>2026-016 ROUSSILHE</td><td><span class="badge grey">Ouvert</span></td><td class="num">—</td></tr>
+    </tbody></table></div>
+   </div>
+   <div>
+    <span class="lab">5 · Saisie à la main et correction</span>
+    <div class="scrollx"><table style="min-width:420px"><thead><tr><th>Date</th><th>Quoi</th><th class="num">Valeur</th><th></th></tr></thead><tbody>
+     <tr><td>20 nov.</td><td>⏱ Recherches : Héritiers, Pièces</td><td class="num">1 h 05</td><td><span class="btn small">✎</span></td></tr>
+     <tr><td>18 nov.</td><td>⏱ AD 87, état civil</td><td class="num">3 h 00</td><td><span class="btn small">✎</span></td></tr>
+     <tr><td>12 nov.</td><td>Appels à la mairie <small class="mini">(à la main)</small></td><td class="num">0 h 30</td><td><span class="btn small">✎</span></td></tr>
+    </tbody></table></div>
+    <p class="mini">« ＋ Temps » existe déjà. Nouveau : le ✎ sur chaque ligne (le serveur sait déjà modifier une ligne : <code>fee_save</code> avec <code>id</code>). Le ⏱ devant le texte dit « compté par le chronomètre ».</p>
+   </div>
+  </div>
+  <ul class="edge">
+   <li><b>Changer de dossier</b> pendant qu’il tourne : « Le chronomètre compte pour 2026-014. ⏹ Noter et passer à 2026-015 · Continuer sur 2026-014 ».</li>
+   <li><b>Fermer l’app</b> : le temps est gardé (comme le chronomètre de l’Atelier). À la réouverture : « ⏱ 2026-014 : 1 h 05 notées avant la fermeture. Noter · Jeter ».</li>
+   <li><b>Minuit</b> passé : deux lignes, une par jour. <b>Plus de 10 h d’affilée</b> : on demande avant de noter.</li>
+   <li><b>Deux fenêtres</b> de l’app : un seul chronomètre, visible dans les deux.</li>
+   <li><b>Dossier clos ou archivé</b> : pas de bouton ⏱ (lecture seule).</li>
+   <li><b>Honoraires</b> : le relevé imprimable « Relevé de temps et de frais » (existe) peut montrer <i>temps × taux horaire</i> si tu tapes un taux (facultatif, jamais un montant de succession).</li>
+   <li><b>Téléphone</b> : le bouton se réduit à « ⏱ 42 min » dans l’en-tête du dossier.</li>
+  </ul>
+  <div class="reuse"><b>Réutilise</b> : la mécanique du widget ⏱️ Chronomètre de l’Atelier (<code>heritage-atelier-widgets.js</code> : départ gardé, il tourne même ailleurs) ; <code>feeDialog()</code> et la table <code>succ_fees</code> (kind <code>time</code>) ; la colonne Temps de <code>succ_index_rows()</code> (aucune modification). Pause = aucune frappe, clic ni défilement dans l’app.</div>
+  <div class="dec"><b>Décisions à prendre · B1</b>
+   <ol>
+    <li><b>Où mettre le bouton</b> : dans l’en-tête du dossier <span class="cons">conseillé</span> (on voit à quoi il compte) · ou en haut à droite (visible partout, mais compte « pour quel dossier ? ») · ou les deux (le bouton en haut à droite en option dans « Boutons en haut à droite »).</li>
+    <li><b>Arrondi</b> : à la minute <span class="cons">conseillé</span> · au quart d’heure supérieur (usage de certains cabinets).</li>
+    <li><b>Pause automatique</b> : après 10 min <span class="cons">conseillé</span>, réglable 5 / 10 / 15 / 30 min / jamais.</li>
+   </ol>
+  </div>
+ </div>
+</div>
+
+<!-- B2 -->
+<h2>B2. 🔔 Échéances du jour <span class="badge new">nouveau</span></h2>
+<div class="grid">
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">B2</span>bouton en haut à droite</span></div>
+  <h3>Une cloche avec une pastille rouge : ce qui est dû aujourd’hui ou en retard, dans tous les dossiers</h3>
+  <div class="path">Boutons en haut à droite : <b>🔔</b> à gauche de ⚖️ · réglage : Réglages → Apparence → Boutons en haut à droite</div>
+  <div class="topbar" style="justify-content:flex-end"><span class="tool">◫</span><span class="tool">🔒</span><span class="tool hot">🔔<span class="pastille">5</span></span><span class="tool succ">⚖️</span><span class="tool">🌳</span></div>
+  <div class="drop" style="margin-top:8px">
+   <div class="dh"><b>🔔 À faire · jeudi 20 novembre</b><span class="seg"><span class="on">Tous les dossiers</span><span>Cette généalogie</span></span></div>
+   <div class="grp">En retard · 3</div>
+   <div class="it late"><span><b>Relance courrier n° 482</b> — premier contact<br><small>2026-014 MAZAUD · ⚖️ Dossiers de succession · prévu le 14 nov.</small></span><span class="acts"><span class="btn small">✓</span><span class="btn small">⏭</span><span class="btn small">↗</span></span></div>
+   <div class="it late"><span><b>Rendre le tableau au notaire</b><br><small>2026-011 PEYRAT · 🌳 Ma généalogie · prévu le 18 nov.</small></span><span class="acts"><span class="btn small">✓</span><span class="btn small">⏭</span><span class="btn small">↗</span></span></div>
+   <div class="it late"><span><b>Relance acte de naissance (mairie)</b><br><small>2026-015 LACOMBE · prévu le 19 nov.</small></span><span class="acts"><span class="btn small">✓</span><span class="btn small">⏭</span><span class="btn small">↗</span></span></div>
+   <div class="grp">Aujourd’hui · 2</div>
+   <div class="it"><span><b>Déclaration de succession (6 mois), côté notaire</b><br><small>2026-016 ROUSSILHE · ⚖️ 2026-016 ROUSSILHE</small></span><span class="acts"><span class="btn small">✓</span><span class="btn small">⏭</span><span class="btn small">↗</span></span></div>
+   <div class="it"><span><b>Relance contrat de révélation</b><br><small>2026-014 MAZAUD</small></span><span class="acts"><span class="btn small">✓</span><span class="btn small">⏭</span><span class="btn small">↗</span></span></div>
+   <div class="grp">Cette semaine · 4 <u style="text-transform:none;letter-spacing:0">voir ▾</u></div>
+   <div class="dh" style="border-top:2px solid var(--ink);border-bottom:0"><span class="mini">✓ fait · ⏭ demain / lundi · ↗ ouvre le dossier (change de généalogie si besoin)</span><span class="btn small ghost">🗓 Ma semaine</span></div>
+  </div>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">B2</span>d’où ça vient · cas limites</span></div>
+  <h3>Lu par l’index léger du tableau de bord, sans rien recopier</h3>
+  <p class="mini">Aujourd’hui <code>succ_index()</code> lit, dans <b>chaque</b> généalogie, un petit résumé des dossiers (n°, titre, état, notaire, prochaine échéance, nombre en retard). On y ajoute, pour la cloche :</p>
+  <ul class="edge">
+   <li>les échéances non faites <b>dues aujourd’hui ou avant</b> (et les 7 jours qui viennent, repliés) : date, texte, sorte ;</li>
+   <li>les <b>relances</b> des courriers reliés aux dossiers (<code>courriers.succ_case_id</code>, <code>relance_date</code>, réponse pas reçue) : n° du courrier et objet seulement ;</li>
+   <li><b>jamais</b> le nom d’un héritier vivant ni une adresse (la règle de l’index reste vraie) : le nom se voit une fois le dossier ouvert.</li>
+  </ul>
+  <span class="lab">Cas limites</span>
+  <ul class="edge">
+   <li><b>Rien à faire</b> : pas de pastille ; le panneau dit « ✓ Rien pour aujourd’hui. Prochaine : 24 nov. (2026-014) ».</li>
+   <li><b>Plus de 9</b> : « 9+ ». Les retards d’abord, puis le plus ancien.</li>
+   <li><b>Une généalogie illisible</b> (fichier abîmé, autre version) : une ligne grise « ⚠️ ⚖️ 2026-016 : impossible de lire les échéances ».</li>
+   <li><b>⏭ Reporter / ✓ Fait</b> dans une autre généalogie : écrit dans celle-là (comme ⇄ Déplacer), avec ↶ Annuler ; note au journal du dossier.</li>
+   <li><b>Mise à jour</b> : à l’ouverture de l’app, à minuit, et après chaque changement d’échéance — pas de lecture en boucle.</li>
+   <li><b>Mode consultation / mode simple</b> : pas de cloche. <b>Usage non successoral</b> : pas de cloche.</li>
+  </ul>
+  <div class="reuse"><b>Réutilise</b> : <code>succ_index_rows()</code> (un champ <code>due_items</code> de plus), <code>semaine_mark()</code> pour ✓ / ⏭ quand c’est la base ouverte, le style des boutons <code>TB_ITEMS</code>.</div>
+  <div class="dec"><b>Décisions à prendre · B2</b>
+   <ol>
+    <li><b>La pastille compte</b> : retards + aujourd’hui <span class="cons">conseillé</span> · ou aussi la semaine (le chiffre est alors toujours là, on ne le regarde plus).</li>
+    <li><b>Les ⏰ Rappels de la généalogie</b> (hors dossiers) dans la cloche ? Non au départ <span class="cons">conseillé</span>, case « Ajouter mes rappels » dans le panneau.</li>
+    <li><b>Notification du système</b> (bulle de l’ordinateur à l’ouverture de l’app) : désactivée au départ <span class="cons">conseillé</span>.</li>
+   </ol>
+  </div>
+ </div>
+</div>
+
+<!-- B3 -->
+<h2>B3. 📋 Liste de contrôle avant remise au notaire <span class="badge new">nouveau</span> <span class="badge re">à partir de l’avancement</span></h2>
+<div class="grid">
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">B3</span>avant de remettre</span></div>
+  <h3>Ce qui bloque, avec un lien pour corriger. Ça avertit, ça n’empêche pas.</h3>
+  <div class="path">Deux entrées : 🖨 <b>Pour le notaire</b> → encadré en haut « 📋 Avant de remettre » · et quand on passe l’état à <b>« Remis au notaire »</b></div>
+  <div class="win"><div class="win-bar"><div><div class="eyebrow">📋 Avant de remettre · 2026-014 MAZAUD</div><b>5 points sur 8 sont prêts</b></div><span class="badge warn">2 à revoir · 1 manque</span></div>
+   <div class="win-body"><ul class="ck-l">
+    <li><span class="s">✓</span><span><b>Acte de décès de Paul MAZAUD en main</b><small>Limoges, 2025 · AD 87, état civil Limoges, D 2025 n° 412</small></span><span></span></li>
+    <li><span class="s">✓</span><span><b>Arbre de dévolution complet</b><small>Aucune branche à chercher.</small></span><span></span></li>
+    <li class="bad"><span class="s">✗</span><span><b>Un lien n’est prouvé par aucun acte</b><small>Mariage de Louise MAZAUD et Pierre LACOMBE : pas d’acte (il relie Jeanne et Marc LACOMBE au défunt).</small></span><span class="btn small">→ 📑 Pièces</span></li>
+    <li class="wa"><span class="s">⚠️</span><span><b>1 acte demandé, pas encore reçu</b><small>Naissance de Marc LACOMBE · demandé le 3 nov. (courrier n° 471).</small></span><span class="btn small">→ Relancer</span></li>
+    <li><span class="s">✓</span><span><b>Adresses des 4 héritiers vivants</b></span><span></span></li>
+    <li class="wa"><span class="s">⚠️</span><span><b>Contrat pas encore signé : Sylvie ROUSSILHE</b><small>A répondu « oui » le 10 nov., pas de date de signature.</small></span><span class="btn small">→ ✉️ Contactés</span></li>
+    <li><span class="s">✓</span><span><b>Parts : le total fait bien 1</b><small>1/3 + 1/6 + 1/6 + 1/3</small></span><span></span></li>
+    <li><span class="s">✓</span><span><b>Aucune échéance en retard</b></span><span></span></li>
+   </ul></div>
+   <div class="win-foot"><span class="btn ghost">Fermer</span><span class="btn">🖨 Imprimer quand même</span><span class="btn blue">Passer à « Remis au notaire »</span></div>
+  </div>
+  <p class="note">« Passer à Remis… » avec des points ouverts : une ligne au 🕓 Journal « Remis au notaire avec 1 manque et 2 points à revoir (lien Louise × Pierre LACOMBE ; naissance Marc LACOMBE ; contrat Sylvie ROUSSILHE) ».</p>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">B3</span>les vérifications</span></div>
+  <h3>Rien de nouveau à saisir : tout est déjà calculé</h3>
+  <div class="scrollx"><table style="min-width:440px"><thead><tr><th>Vérification</th><th>D’où ça vient</th><th>Si ça manque</th></tr></thead><tbody>
+   <tr><td>Acte de décès en main</td><td>étape 1 de <code>progress()</code></td><td>✗ → 📑 Pièces</td></tr>
+   <tr><td>Arbre complet / hypothèse notée</td><td>étape 2 (<code>R.search</code>, <code>hypothesis_note</code>)</td><td>✗ → 🌳 Arbre</td></tr>
+   <tr><td>Héritiers à l’existence non établie</td><td><code>R.rows[].unknown</code></td><td>⚠️ → 👥 Héritiers</td></tr>
+   <tr><td>Chaque lien prouvé par un acte</td><td>pièces par héritier (<code>pieces()</code>, groupes)</td><td>✗ manquant · ⚠️ demandé</td></tr>
+   <tr><td>Adresses des vivants</td><td>étape 4 (Répertoire des vivants)</td><td>⚠️ → 📇</td></tr>
+   <tr><td>Contrats signés (ou refus noté)</td><td>étape 5 (<code>signe_le</code>, <code>reponse</code>)</td><td>⚠️ → ✉️</td></tr>
+   <tr><td>« 🔎 Introuvable » / « 🔇 Ne répond pas »</td><td><code>contact_state</code></td><td>⚠️ avec la date</td></tr>
+   <tr><td>Total des parts = 1</td><td>moteur (fractions exactes)</td><td>✗ (ne devrait jamais arriver)</td></tr>
+   <tr><td>Échéances en retard</td><td><code>succ_deadlines</code></td><td>⚠️ → 📁 Dossier</td></tr>
+  </tbody></table></div><p class="hint">↔ Faire glisser le tableau.</p>
+  <ul class="edge">
+   <li><b>Hypothèse retenue</b> (héritier dont on ignore s’il vit) : le point est ⚠️, pas ✗, si la note d’hypothèse est écrite.</li>
+   <li><b>Dossier clos ou archivé</b> : la liste se lit, rien ne s’y change.</li>
+   <li><b>Téléphone</b> : une ligne par point, les boutons « → » passent sous le texte.</li>
+  </ul>
+  <div class="dec"><b>Décisions à prendre · B3</b>
+   <ol>
+    <li>Un lien prouvé seulement par un acte <b>demandé</b> (pas reçu) : ⚠️ à revoir <span class="cons">conseillé</span> · ou ✗ manque.</li>
+    <li>Pouvoir <b>ajouter ses propres vérifications</b> (« ＋ Ma vérification », cochées à la main, communes à tous les dossiers) ? Plus tard <span class="cons">conseillé</span>.</li>
+   </ol>
+  </div>
+ </div>
+</div>
+
+<!-- B4 -->
+<h2>B4. 🧾 Tableau de filiation pour le notaire <span class="badge re">fait évoluer « 🖨 Pour le notaire »</span></h2>
+<div class="grid">
+ <div class="case wide">
+  <div class="head"><span class="tag"><span class="num-b">B4</span>une page de plus dans le PDF</span></div>
+  <h3>Pour chaque héritier, la chaîne d’actes qui le relie au défunt, avec la cote de chaque acte</h3>
+  <div class="path">⚖️ Successions → un dossier → <b>🖨 Pour le notaire</b> → « Ce que contient le PDF » : ☑ Tableau ☑ Arbre ☑ <b>Chaîne par héritier</b> <span class="badge new">nouveau</span> ☑ Liste des pièces · ☐ Adresses</div>
+  <p class="mini">Le tableau d’aujourd’hui a déjà une colonne « Sources du lien » (abréviations « N. Limoges 1952 [cote] »), serrée dans une case. La nouvelle page déroule la même chose, <b>un héritier à la fois, du défunt vers l’héritier</b>, lisible par le notaire. Impression par la fenêtre d’impression de l’app (⤓ PDF du navigateur).</p>
+  <div class="sheet">
+   <h5>CHAÎNE DE FILIATION</h5>
+   <p class="c">Succession de Paul MAZAUD, décédé à Limoges le 2 mars 2025<br>Dossier 2026-014 · Réf. notaire VIA-25-118</p>
+   <h6>1. Jeanne LACOMBE — nièce, représentant sa mère Louise MAZAUD — 1/6</h6>
+   <ol class="chain">
+    <li><b>D.</b> Paul MAZAUD, Limoges, 2 mars 2025 <span class="cote">· AD 87, état civil Limoges, D 2025 n° 412</span></li>
+    <li><b>N.</b> Paul MAZAUD, fils de Jean MAZAUD et Marie PEYRAT, Ambazac, 1938 <span class="cote">· AD 87, 3 E 2/41, f° 12</span></li>
+    <li><b>N.</b> Louise MAZAUD, fille de Jean MAZAUD et Marie PEYRAT, Ambazac, 1941 <span class="cote">· AD 87, 3 E 2/44, f° 7</span></li>
+    <li><b>D.</b> Louise MAZAUD, Brive, 2019 <span class="cote">· mairie de Brive, D 2019 n° 233</span> <small>(prédécédée : sa fille la représente)</small></li>
+    <li><b>M.</b> Louise MAZAUD × Pierre LACOMBE, <span class="miss">acte à fournir</span></li>
+    <li><b>N.</b> Jeanne LACOMBE, fille de Pierre LACOMBE et Louise MAZAUD, Brive, 1967 <span class="cote">· mairie de Brive, N 1967 n° 88</span></li>
+   </ol>
+   <h6>2. André MAZAUD — frère — 1/3</h6>
+   <ol class="chain">
+    <li><b>D.</b> Paul MAZAUD … <span class="cote">(commun, voir 1)</span></li>
+    <li><b>N.</b> Paul MAZAUD … <span class="cote">(commun, voir 1)</span></li>
+    <li><b>N.</b> André MAZAUD, fils de Jean MAZAUD et Marie PEYRAT, Ambazac, 1945 <span class="cote">· AD 87, 3 E 2/48, f° 3</span></li>
+   </ol>
+   <p style="font-size:10.5px;margin-top:12px">Calcul établi d’après les actes cités, <a>art. 731</a> et suiv. du Code civil ; représentation : <a>art. 752-2</a>. Sous réserve de vérification par le notaire. N. = naissance, M. = mariage, D. = décès. Page 3 / 5</p>
+  </div>
+  <ul class="edge">
+   <li><b>Actes communs</b> (décès et naissance du défunt, parents communs) : écrits en entier une seule fois, puis « (commun, voir 1) ».</li>
+   <li><b>Acte manquant</b> : « acte à fournir » en italique rouge à l’écran, en italique noir à l’impression ; <b>demandé</b> : « demandé le 3 nov. ».</li>
+   <li><b>Pas de cote</b> (acte en main mais sans source) : « en main, cote non notée » — et B3 le signale.</li>
+   <li><b>Lois</b> : <b>aucun texte de loi recopié</b>. Seuls les articles <b>déjà cités par le moteur</b> pour ce dossier (731, 752-2…) deviennent des liens Légifrance (<code>lawLinks()</code>) ; dans le PDF ce sont des liens cliquables.</li>
+   <li><b>Adresses</b> : jamais sur cette page (seulement dans le tableau, si la case « Adresses » est cochée, comme aujourd’hui).</li>
+   <li><b>Journal</b> : « Tableau pour le notaire : PDF (5 pages, avec chaîne par héritier) ».</li>
+  </ul>
+  <div class="reuse"><b>Réutilise</b> : <code>notaryHtml()</code> (une page de plus), <code>P_.perHeir</code> / groupes de pièces, <code>D.acts[clé].sources</code> (titre de la source + page = la cote), <code>abbr()</code>, <code>openPrintDialog()</code>, <code>lawLinks()</code>.</div>
+  <div class="dec"><b>Décision à prendre · B4</b> Ordre de la chaîne : <b>du défunt vers l’héritier</b> (on remonte au parent commun puis on redescend) <span class="cons">conseillé</span> · ou de l’héritier vers le défunt. Et la page « Chaîne par héritier » cochée au départ <span class="cons">conseillé</span> ?</div>
+ </div>
+</div>
+
+<!-- B5 -->
+<h2>B5. 📊 Part de chacun en euros <span class="badge new">nouveau</span></h2>
+<div class="grid">
+ <div class="case wide">
+  <div class="head"><span class="tag"><span class="num-b">B5</span>dans 👥 Héritiers</span></div>
+  <h3>Tu tapes l’actif net ; l’app applique les fractions exactes du moteur et le % de chaque contrat</h3>
+  <div class="path">⚖️ Successions → un dossier → <b>👥 Héritiers</b> → bascule « Fractions | <b>💶 En euros</b> »</div>
+  <div class="win"><div class="win-body">
+   <div class="row" style="align-items:flex-end"><div style="flex:0 1 260px"><span class="lab" style="margin-top:0">Actif net à partager (tapé par toi)</span><div class="input" style="font-weight:800">187 450,00 €</div></div><span class="mini" style="flex:1 1 240px">D’après le notaire. <b>Pas gardé</b> : effacé quand tu fermes le dossier.</span></div>
+   <div class="msg warn">⚠️ <b>Hors droits de succession et frais : l’app ne calcule pas l’impôt.</b> Ces montants sont un ordre d’idée, à faire vérifier par le notaire.</div>
+   <div class="scrollx"><table style="min-width:760px"><thead><tr><th>Héritier</th><th>Qualité</th><th class="num">Part</th><th class="num">Montant</th><th class="num">Contrat</th><th class="num">Commission</th><th class="num">Reste à l’héritier</th></tr></thead><tbody>
+    <tr><td>André MAZAUD</td><td>frère</td><td class="num">1/3</td><td class="num">62 483,33 €</td><td class="num">—</td><td class="num">—</td><td class="num">62 483,33 €</td></tr>
+    <tr><td>Jeanne LACOMBE</td><td>nièce, repr. Louise</td><td class="num">1/6</td><td class="num">31 241,67 € <small title="arrondi : centime du reste">¹</small></td><td class="num">30 %</td><td class="num">9 372,50 €</td><td class="num">21 869,17 €</td></tr>
+    <tr><td>Marc LACOMBE</td><td>neveu, repr. Louise</td><td class="num">1/6</td><td class="num">31 241,67 € <small>¹</small></td><td class="num">30 %</td><td class="num">9 372,50 €</td><td class="num">21 869,17 €</td></tr>
+    <tr><td>Sylvie ROUSSILHE</td><td>nièce, repr. Hélène</td><td class="num">1/3</td><td class="num">62 483,33 €</td><td class="num">25 % <small class="mini">non signé</small></td><td class="num">15 620,83 €</td><td class="num">46 862,50 €</td></tr>
+    <tr class="tot"><td>Total</td><td></td><td class="num">1</td><td class="num">187 450,00 €</td><td></td><td class="num">34 365,83 €</td><td class="num">153 084,17 €</td></tr>
+   </tbody></table></div><p class="hint">↔ Faire glisser le tableau.</p>
+   <p class="mini">¹ Arrondi au centime : 1/3 et 1/6 de 187 450 € ne tombent pas juste. On arrondit chaque part au centime inférieur, puis les <b>2 centimes de reste</b> vont aux parts qui en ont perdu le plus (ici les deux 1/6) : le total tombe juste. Commission = % tapé dans « ＋ Honoraires d’un contrat » × montant, arrondie au centime le plus proche ; reste = montant − commission.</p>
+  </div><div class="win-foot"><span class="btn ghost">⤓ Copier le tableau</span><span class="btn">🖨 Imprimer</span></div></div>
+  <ul class="edge">
+   <li><b>Conjoint qui a l’usufruit</b> : pas de montant en euros (sa valeur dépend de l’âge, c’est un barème fiscal) : « usufruit : demande la valeur au notaire » ; les nus-propriétaires de même.</li>
+   <li><b>Hypothèse</b> (héritier dont on ignore s’il vivait) : un tableau par hypothèse, comme les parts aujourd’hui.</li>
+   <li><b>Renonçant / part 0</b> : ligne grise « 0 € ». <b>Pas de contrat</b> : « — ». <b>Contrat non signé</b> : le % est pris, avec « non signé ».</li>
+   <li><b>Actif vide, négatif ou absurde</b> (lettres) : rien n’est calculé, « Tape un montant en euros ». Plus de 1 milliard : on demande de confirmer.</li>
+   <li><b>Impression</b> : le bandeau « hors droits et frais » est imprimé en tête ; une ligne au 🕓 Journal « Parts en euros imprimées » <b>sans le montant</b>.</li>
+   <li><b>Téléphone</b> : une carte par héritier (Part · Montant · Commission · Reste), le total en bas.</li>
+  </ul>
+  <div class="reuse"><b>Réutilise</b> : les fractions exactes du moteur (<code>F()</code>, BigInt : calcul en centimes entiers, sans virgule flottante), les % de <code>succ_fees</code> (kind <code>percent</code>, par héritier), la règle actuelle « aucun montant de succession n’est noté ».</div>
+  <div class="dec"><b>Décisions à prendre · B5</b>
+   <ol>
+    <li><b>Garder l’actif net dans le dossier</b> ? Non, jamais <span class="cons">conseillé</span> (la règle « aucun montant de succession » reste vraie ; on le retape) · ou le garder pour ne pas le retaper.</li>
+    <li><b>TVA sur la commission</b> : l’app prend le % tel qu’écrit dans le contrat, sans rien ajouter <span class="cons">conseillé</span> · ou une case « + TVA 20 % ».</li>
+   </ol>
+  </div>
+ </div>
+</div>
+
+<!-- B6 -->
+<h2>B6. ✉️ Courriers en série <span class="badge re">fait évoluer la lettre aux héritiers</span></h2>
+<div class="grid">
+ <div class="case wide">
+  <div class="head"><span class="tag"><span class="num-b">B6</span>la même lettre à plusieurs héritiers</span></div>
+  <h3>Choisir les héritiers, écrire avec des champs, voir chaque lettre, tout ranger d’un coup</h3>
+  <div class="path">⚖️ un dossier → <b>✉️ Héritiers contactés</b> → « ✉️ Courrier à plusieurs… » (même fenêtre que « 📝 Contrat » et « Premier contact », agrandie)</div>
+  <div class="win">
+   <div class="win-bar"><div><div class="eyebrow">✉️ Courriers en série · 2026-014 MAZAUD</div><b>3 lettres prêtes sur 5 héritiers</b></div><span class="seg"><span>Premier contact</span><span>Contrat</span><span class="on">Relance</span><span>Mes modèles ▾</span></span></div>
+   <div class="win-body"><div class="two">
+    <div>
+     <span class="lab" style="margin-top:0">À qui</span>
+     <ul class="who">
+      <li><span class="cb on"></span><span><b>André MAZAUD</b><small>12 rue des Écoles, 87000 Limoges</small></span></li>
+      <li><span class="cb on"></span><span><b>Jeanne LACOMBE</b><small>4 av. de Paris, 19100 Brive</small></span></li>
+      <li><span class="cb on"></span><span><b>Sylvie ROUSSILHE</b><small>déjà écrit le 3 oct. (premier contact)</small></span></li>
+      <li class="off"><span class="cb"></span><span><b>Marc LACOMBE</b><small>🔎 introuvable depuis le 2 sept. · décoché</small></span></li>
+      <li class="off"><span class="cb"></span><span><b>X. PEYRAT</b><small>pas d’adresse dans le Répertoire des vivants · décoché</small></span></li>
+     </ul>
+     <p class="mini">Les héritiers dont l’existence n’est pas établie ne sont pas dans la liste. Les décochés peuvent être cochés à la main (une lettre sans adresse est alors imprimée sans bloc adresse).</p>
+     <div class="row"><div style="flex:1"><span class="lab">Envoyé le</span><div class="input">20/11/2026</div></div><div style="flex:1"><span class="lab">Relance dans</span><div class="input">30 jours</div></div></div>
+    </div>
+    <div>
+     <span class="lab" style="margin-top:0">La lettre · clic sur un champ pour l’insérer</span>
+     <div class="fchips"><span>{civilité}</span><span>{prénom}</span><span>{nom}</span><span>{adresse}</span><span>{qualité}</span><span>{dossier}</span><span>{notaire}</span><span>{date}</span><span>{envoyé_le}</span><span>{expéditeur}</span></div>
+     <div class="row" style="justify-content:space-between"><span class="lab">Aperçu</span><span class="row"><span class="btn small">‹</span><b class="mini">Lettre 2 / 3 · Jeanne LACOMBE</b><span class="btn small">›</span><span class="seg"><span>Modèle</span><span class="on">Aperçu</span></span></span></div>
+     <div class="letter">Jeanne LACOMBE
+4 av. de Paris
+19100 Brive
+
+Madame,
+
+Je me permets de revenir vers vous au sujet de mon courrier du <mark>3 octobre 2026</mark>, resté sans réponse. Une succession en cours pourrait vous concerner : pourriez-vous me contacter ?
+
+Je vous prie d’agréer, Madame, l’expression de mes salutations distinguées.
+
+<mark>Claire D., généalogiste</mark></div>
+     <div class="msg red">⚠️ Champ inconnu : <code>{dossierr}</code> (ligne 6). Corrige-le avant de ranger les lettres.</div>
+    </div>
+   </div></div>
+   <div class="win-foot"><span class="btn ghost">＋ Enregistrer comme modèle</span><span class="btn">🖨 Imprimer les 3</span><span class="btn">📝 Traitement de texte</span><span class="btn blue">📋 Ranger les 3 dans le Registre de courriers</span></div>
+  </div>
+  <div class="msg ok">✓ 3 courriers rangés dans le Registre de courriers, relance le 20 déc. <b>↶ Annuler</b> <span class="mini">(enlève les 3 d’un coup)</span></div>
+  <ul class="edge">
+   <li><b>Le nom du défunt</b> n’est jamais un champ (il est révélé après signature, comme aujourd’hui) ; <code>{notaire}</code> est proposé seulement dans le modèle « Contrat ».</li>
+   <li><b>Champ vide</b> pour une personne (pas de civilité) : la ligne s’écrit sans le mot ; l’aperçu le surligne en jaune.</li>
+   <li><b>Lettre retouchée dans l’aperçu</b> : seulement celle-là (« ✎ modifiée à la main ») ; repasser au modèle demande confirmation.</li>
+   <li><b>Plus de 50 héritiers</b> : on range par paquets, la barre d’avancement s’affiche ; ↶ Annuler reste en une fois.</li>
+   <li><b>Courriel</b> : « ✉️ Courriel prêt » (existe) ouvre ton logiciel de courriel ; l’app n’envoie rien elle-même.</li>
+   <li><b>Journal</b> : « Courriers en série : relance à 3 héritiers (n° 501 à 503) ».</li>
+  </ul>
+  <div class="reuse"><b>Réutilise</b> : <code>letterDialog()</code> (cases, ⬚ sans adresse décochés, impression de toutes les lettres, <code>file_letter</code> par héritier, ↶ Annuler qui appelle <code>unfile_letter</code>), <code>TEMPLATES</code>, l’expéditeur de <code>genealogie-courriers-lettres</code>. <b>Ajouts</b> : les champs en plus (aujourd’hui <code>{heir}</code>, <code>{sender}</code>, <code>{sent}</code>), l’aperçu lettre par lettre, l’exclusion des « 🔎 introuvables » (aujourd’hui seul « existence non établie » est exclu), les modèles à soi.</div>
+  <div class="dec"><b>Décision à prendre · B6</b> Les <b>modèles à soi</b> sont rangés dans la généalogie des dossiers, communs à tous les dossiers <span class="cons">conseillé</span> · ou gardés sur cet ordinateur seulement.</div>
+ </div>
+</div>
+
+<!-- B7 -->
+<h2>B7. 🔐 Mot de passe sur une généalogie <span class="badge new">nouveau</span> <span class="badge re">même méthode que le 🔒 mode consultation</span></h2>
+<div class="grid">
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">B7</span>ce que ça protège vraiment</span></div>
+  <h3>Soyons honnêtes : un verrou d’écran n’est pas un coffre-fort</h3>
+  <p class="mini">Aujourd’hui, rien n’est demandé pour <b>ouvrir</b> une généalogie. Le 🔒 mode consultation a un mot de passe, mais seulement pour <b>en sortir</b>, et il laisse tout lire. Le fichier de la base (SQLite) n’est <b>pas chiffré</b> : qui copie le dossier de l’app peut le lire avec un autre logiciel. Les sauvegardes, elles, peuvent déjà être protégées (AES-256).</p>
+  <div class="scrollx"><table style="min-width:520px"><thead><tr><th></th><th>① Verrou de la généalogie</th><th>② Fichier chiffré</th><th>③ Disque chiffré (système)</th></tr></thead><tbody>
+   <tr><td>Quelqu’un s’assoit devant l’app ouverte</td><td>✓ protégé (verrou après inactivité)</td><td>✓</td><td>✗</td></tr>
+   <tr><td>Un proche ouvre l’app sur ton ordinateur</td><td>✓</td><td>✓</td><td>✗ (ta session est ouverte)</td></tr>
+   <tr><td>Quelqu’un copie le dossier des données</td><td><b>✗ lisible</b></td><td>✓</td><td>✗ si ta session est ouverte</td></tr>
+   <tr><td>Ordinateur volé, éteint</td><td><b>✗ lisible</b></td><td>✓</td><td>✓</td></tr>
+   <tr><td>Mot de passe oublié</td><td>rien n’est perdu</td><td><b>tout est perdu</b></td><td>selon le système</td></tr>
+   <tr><td>Travail pour faire l’outil</td><td>petit</td><td>très gros (PHP spécial, médias, sauvegardes, deux ordinateurs)</td><td>aucun (FileVault, BitLocker)</td></tr>
+  </tbody></table></div><p class="hint">↔ Faire glisser le tableau.</p>
+  <div class="msg">💡 Proposition réaliste : <b>① le verrou</b>, plus un conseil clair d’allumer <b>③ le chiffrement du disque</b> (FileVault sur Mac, BitLocker sur Windows), plus <b>« les sauvegardes de cette généalogie sont toujours protégées »</b> (existe déjà, on le force pour cette généalogie).</div>
+  <div class="dec"><b>Décision à prendre · B7</b>
+   <ol>
+    <li><b>① Verrou de la généalogie</b> + conseil ③ + sauvegardes protégées <span class="cons">conseillé</span>.</li>
+    <li>② Chiffrer le fichier lui-même : la vraie protection, mais un gros chantier, un risque de tout perdre si on oublie le mot de passe, et plus lent avec beaucoup de médias. À étudier à part.</li>
+   </ol>
+  </div>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag"><span class="num-b">B7</span>le verrou ①</span></div>
+  <h3>Mettre, demander, oublier</h3>
+  <div class="path">🌳 Mes généalogies → la généalogie → ⋯ → <b>🔐 Mot de passe…</b> · aussi : ⚖️ Réglages du successoral → « 🔐 Protéger ⚖️ Dossiers de succession »</div>
+  <div class="win"><div class="win-bar"><div><div class="eyebrow">🔐 Mot de passe</div><b>⚖️ Dossiers de succession</b></div></div><div class="win-body">
+   <span class="lab" style="margin-top:0">Mot de passe (8 caractères au moins)</span><div class="input">••••••••••</div>
+   <span class="lab">Le retaper</span><div class="input">••••••••••</div>
+   <span class="lab">Verrouiller après</span><div class="seg"><span>5 min</span><span class="on">15 min</span><span>1 h</span><span>jamais</span></div>
+   <p class="mini" style="margin-top:8px"><span class="cb on"></span> Les sauvegardes de cette généalogie sont toujours protégées par ce mot de passe</p>
+   <div class="msg warn">Ce mot de passe empêche d’<b>ouvrir</b> cette généalogie dans l’app. Il ne chiffre pas le fichier : pour ça, chiffre le disque de ton ordinateur (<u>comment faire ?</u>).</div>
+  </div><div class="win-foot"><span class="btn ghost">Annuler</span><span class="btn blue">Protéger</span></div></div>
+  <span class="lab">À l’ouverture, ou après 15 min sans rien toucher</span>
+  <div class="lock"><div class="pad">
+   <div style="font-size:30px">🔐</div><b>⚖️ Dossiers de succession</b><br><small>est protégée par un mot de passe</small>
+   <div class="input" style="margin:12px 0 8px">••••••</div>
+   <span class="btn blue">Ouvrir</span>
+   <p><small>⇄ Ouvrir une autre généalogie · Mot de passe oublié ?</small></p>
+  </div></div>
+  <ul class="edge">
+   <li><b>Oublié</b> : rien n’est perdu, le fichier n’est pas chiffré ; la fenêtre explique comment retirer le verrou à la main (supprimer le fichier <code>verrou.json</code> du dossier de cette généalogie). C’est aussi sa limite, et c’est écrit.</li>
+   <li><b>Essais</b> : freinés comme le mode consultation (0,4 s par essai, puis 30 s après 5 erreurs).</li>
+   <li><b>Changer de généalogie</b> vers une généalogie verrouillée : l’écran de verrou s’affiche avant tout.</li>
+   <li><b>Pendant le verrou</b> : la cloche 🔔 et le widget ⚖️ des <b>autres</b> généalogies ne lisent plus celle-ci (« 🔐 verrouillée »). Le chronomètre B1 se met en pause.</li>
+   <li><b>Mode consultation</b> : le verrou passe avant ; une fois ouverte, la consultation s’applique.</li>
+   <li><b>Deux ordinateurs</b> 🔄 : le verrou est par ordinateur (chacun choisit le sien).</li>
+  </ul>
+  <div class="reuse"><b>Réutilise</b> : <code>password_hash</code> / <code>password_verify</code> et le freinage de <code>kiosk_exit()</code> ; le blocage serveur de <code>kiosk_guard()</code> (toute lecture refusée tant que c’est verrouillé, pas seulement l’écran) ; les sauvegardes protégées de <code>askBackupPassword()</code>.</div>
+ </div>
+</div>
+
+<!-- B8 -->
+<h2>B8. 📜 Registre de qui a vu quoi <span class="badge new">nouveau</span> <span class="badge re">à côté du 🕓 Journal</span></h2>
+<div class="grid">
+ <div class="case wide">
+  <div class="head"><span class="tag"><span class="num-b">B8</span>lecture seule</span></div>
+  <h3>Les ouvertures de dossier, les impressions, les exports, les courriers en série</h3>
+  <div class="path">⚖️ Successions → ⋯ → <b>📜 Qui a vu quoi</b> (tous les dossiers) · dans un dossier : 🕓 Journal → bascule « Ce qui a changé | <b>Qui a vu quoi</b> »</div>
+  <div class="win"><div class="win-bar"><div><div class="eyebrow">📜 Qui a vu quoi · ⚖️ Dossiers de succession</div><b>Gardé 12 mois · 214 lignes</b></div><div class="row"><div class="input" style="width:200px">🔍 Dossier, poste…</div><span class="btn small">Filtrer ▾</span><span class="btn small">⤓ CSV</span></div></div>
+   <div class="win-body"><div class="scrollx"><table style="min-width:720px"><thead><tr><th>Quand</th><th>Dossier</th><th>Quoi</th><th>Poste</th></tr></thead><tbody>
+    <tr><td>20/11/2026 14:02</td><td>2026-014 MAZAUD</td><td>✉️ Courriers en série : 3 lettres rangées (n° 501 à 503)</td><td>MacBook-Claire</td></tr>
+    <tr><td>20/11/2026 13:40</td><td>2026-014 MAZAUD</td><td>🖨 Tableau pour le notaire : PDF (5 pages, sans adresses)</td><td>MacBook-Claire</td></tr>
+    <tr><td>20/11/2026 13:12</td><td>2026-014 MAZAUD</td><td>📂 Dossier ouvert</td><td>MacBook-Claire</td></tr>
+    <tr><td>19/11/2026 17:55</td><td>2026-015 LACOMBE</td><td>📊 Parts en euros imprimées</td><td>PC-Bureau</td></tr>
+    <tr><td>19/11/2026 09:30</td><td>2026-015 LACOMBE</td><td>📂 Dossier ouvert</td><td>PC-Bureau</td></tr>
+    <tr><td>18/11/2026 11:21</td><td>—</td><td>⤓ Tableau de bord des dossiers exporté (CSV, 6 dossiers)</td><td>PC-Bureau</td></tr>
+    <tr><td>02/11/2026 08:00</td><td>—</td><td>🧹 Lignes de plus de 12 mois effacées (37)</td><td>MacBook-Claire</td></tr>
+   </tbody></table></div><p class="hint">↔ Faire glisser le tableau.</p></div>
+  </div>
+  <div class="grid" style="margin-top:12px;gap:14px">
+   <div>
+    <span class="lab">Ce qui est noté</span>
+    <ul class="edge">
+     <li><b>Ouverture d’un dossier</b> : une fois par séance et par dossier (pas à chaque onglet).</li>
+     <li><b>Impressions et PDF</b> : tableau du notaire, lettres, parts en euros, relevé de temps.</li>
+     <li><b>Exports</b> : CSV du tableau de bord, journal, archive d’un dossier (🗄), ⇄ déplacement.</li>
+     <li><b>Courriers en série</b>, ↶ annulations comprises.</li>
+     <li><b>Poste</b> = le nom de l’ordinateur (déjà connu de 🔄 Deux ordinateurs). Jamais une adresse, jamais un montant.</li>
+    </ul>
+   </div>
+   <div>
+    <span class="lab">Réglage · durée de conservation</span>
+    <div class="seg"><span>3 mois</span><span>6 mois</span><span class="on">12 mois</span><span>3 ans</span><span>tout garder</span></div>
+    <ul class="edge">
+     <li>Les lignes plus vieilles sont effacées à l’ouverture de l’app, et l’effacement est lui-même noté.</li>
+     <li><b>Lecture seule</b> : rien ne se modifie ; seul ce réglage fait disparaître des lignes.</li>
+     <li><b>Mode consultation</b> : rien à noter (le successoral est fermé) ; le registre ne se lit pas.</li>
+     <li><b>Dossier archivé dans un fichier</b> : ses lignes partent avec lui dans l’archive.</li>
+     <li><b>Téléphone</b> : une carte par ligne (quand · dossier · quoi · poste).</li>
+    </ul>
+   </div>
+  </div>
+  <div class="reuse"><b>Réutilise</b> : l’idée et le style du 🕓 Journal (<code>succ_journal</code>, jamais modifié, déjà les sortes <code>pdf</code>, <code>export</code>, <code>search</code>) ; <code>sd_machine()</code> pour le nom du poste ; la liste H10 (barre 🔍 · Filtrer · CSV). Nouveau : une table à part <code>succ_access</code> (le 🕓 Journal reste le récit du dossier, pas un mouchard).</div>
+  <div class="dec"><b>Décisions à prendre · B8</b>
+   <ol>
+    <li><b>Profils d’utilisateur</b> (« Claire », « Paul ») : l’app n’en a pas. Rester <b>par poste</b> <span class="cons">conseillé</span> · ou créer des profils (gros chantier : qui se connecte, avec quoi).</li>
+    <li><b>Durée de conservation par défaut</b> : 12 mois <span class="cons">conseillé</span> · 6 mois · 3 ans.</li>
+    <li>Noter aussi quand on <b>regarde</b> les parts en euros (sans imprimer) ? Non <span class="cons">conseillé</span>.</li>
+   </ol>
+  </div>
+ </div>
+
+ <div class="case wide">
+  <div class="head"><span class="tag"><span class="num-b">B</span>téléphone · 390</span></div>
+  <h3>Le dossier sur un téléphone : chronomètre, cloche, liste de contrôle</h3>
+  <div class="stack">
+   <div class="phone"><div class="ptop">☰ <span class="sp">⚖️ 2026-014</span><span class="tool hot" style="height:26px">🔔<span class="pastille">5</span></span></div><div class="pbody">
+    <div class="row" style="justify-content:space-between"><b>Succession de Paul MAZAUD</b><span class="chrono"><span class="dotr"></span>42 min</span></div>
+    <div class="mini">Me VIALLE · En recherche · 64 %</div>
+    <div class="input" style="margin:8px 0">👥 Héritiers ▾</div>
+    <div class="seg"><span>Fractions</span><span class="on">💶 En euros</span></div>
+    <div style="border:1.5px solid var(--line2);padding:8px;margin-top:8px"><b>Jeanne LACOMBE</b> <span class="mini">nièce · 1/6</span><div class="row" style="justify-content:space-between;font-size:12.5px"><span>Montant</span><b>31 241,67 €</b></div><div class="row" style="justify-content:space-between;font-size:12.5px"><span>Commission 30 %</span><span>9 372,50 €</span></div><div class="row" style="justify-content:space-between;font-size:12.5px"><span>Reste</span><b>21 869,17 €</b></div></div>
+    <div class="msg warn" style="font-size:12px">Hors droits de succession et frais.</div>
+   </div></div>
+   <div class="phone"><div class="ptop">✕ <span class="sp">🔔 À faire · 20 nov.</span></div><div class="pbody" style="padding:0">
+    <div class="drop" style="border:0;box-shadow:none;max-width:none">
+     <div class="grp">En retard · 3</div>
+     <div class="it late"><span><b>Relance courrier n° 482</b><br><small>2026-014 MAZAUD · 14 nov.</small></span><span class="acts"><span class="btn small">✓</span><span class="btn small">⏭</span></span></div>
+     <div class="it late"><span><b>Rendre le tableau au notaire</b><br><small>2026-011 PEYRAT · 18 nov.</small></span><span class="acts"><span class="btn small">✓</span><span class="btn small">⏭</span></span></div>
+     <div class="grp">Aujourd’hui · 2</div>
+     <div class="it"><span><b>Déclaration de succession</b><br><small>2026-016 ROUSSILHE</small></span><span class="acts"><span class="btn small">✓</span><span class="btn small">⏭</span></span></div>
+    </div>
+   </div></div>
+   <div class="phone"><div class="ptop">← <span class="sp">📋 Avant de remettre</span></div><div class="pbody">
+    <ul class="ck-l">
+     <li><span class="s">✓</span><span><b>Acte de décès en main</b></span><span></span></li>
+     <li class="bad"><span class="s">✗</span><span><b>Mariage Louise × Pierre LACOMBE</b><small>aucun acte</small><span class="btn small" style="margin-top:4px">→ 📑 Pièces</span></span><span></span></li>
+     <li class="wa"><span class="s">⚠️</span><span><b>Contrat non signé</b><small>Sylvie ROUSSILHE</small><span class="btn small" style="margin-top:4px">→ ✉️</span></span><span></span></li>
+    </ul>
+    <span class="btn blue" style="margin-top:10px">Passer à « Remis au notaire »</span>
+   </div></div>
+  </div>
+ </div>
+</div>
+
+<!-- ═════════════ PARTIE C ═════════════ -->
+<div class="part">Partie C</div>
+<h2>C. Récapitulatif</h2>
+<div class="grid">
+ <div class="case">
+  <div class="head"><span class="tag">ordre de construction proposé</span></div>
+  <h3>Du plus utile et du plus sûr, au plus lourd</h3>
+  <div class="scrollx"><table class="ex" style="min-width:460px"><thead><tr><th>#</th><th>Quoi</th><th>Pourquoi à ce rang</th></tr></thead><tbody>
+   <tr><td>1</td><td>A · ＋ Ajouter un onglet</td><td>Demandé (📄 Documents pour tous) ; rien de neuf à stocker</td></tr>
+   <tr><td>2</td><td>B3 · Liste de contrôle</td><td>Tout est déjà calculé par <code>progress()</code></td></tr>
+   <tr><td>3</td><td>B6 · Courriers en série</td><td>Fait évoluer <code>letterDialog()</code></td></tr>
+   <tr><td>4</td><td>B4 · Chaîne de filiation</td><td>Une page de plus dans <code>notaryHtml()</code></td></tr>
+   <tr><td>5</td><td>B1 · Chronomètre</td><td>Mécanique de l’Atelier + <code>succ_fees</code></td></tr>
+   <tr><td>6</td><td>B2 · 🔔 Échéances</td><td>Un champ de plus dans l’index léger</td></tr>
+   <tr><td>7</td><td>B5 · Parts en euros</td><td>Calcul en centimes à tester avec soin</td></tr>
+   <tr><td>8</td><td>B8 · Qui a vu quoi</td><td>Une table neuve (migration)</td></tr>
+   <tr><td>9</td><td>B7 · Mot de passe ①</td><td>Touche à l’ouverture de l’app : en dernier, bien testé</td></tr>
+  </tbody></table></div><p class="hint">↔ Faire glisser le tableau.</p>
+ </div>
+ <div class="case">
+  <div class="head"><span class="tag">boutons en haut à droite (en option)</span></div>
+  <h3>Trois lignes de plus dans « Boutons en haut à droite »</h3>
+  <div class="path">Réglages → Apparence → <b>Boutons en haut à droite</b> (<code>TB_ITEMS</code>), usage successoral seulement, comme ⚖️</div>
+  <div class="ord">
+   <div class="or"><span class="g">⠿</span><span class="n">07</span><span class="cb on"></span><span>🔔 Échéances du jour</span><span class="ico mini">montré</span><span></span></div>
+   <div class="or"><span class="g">⠿</span><span class="n">08</span><span class="cb on"></span><span>⚖️ Dossiers de succession</span><span class="ico mini">existe</span><span></span></div>
+   <div class="or"><span class="g">⠿</span><span class="n">09</span><span class="cb"></span><span>⏱ Chronomètre (si B1 « en haut »)</span><span class="ico mini">caché</span><span></span></div>
+   <div class="or"><span class="g">⠿</span><span class="n">10</span><span class="cb"></span><span>🔐 Verrouiller maintenant (si B7)</span><span class="ico mini">caché</span><span></span></div>
+  </div>
+  <span class="lab">Traductions et aide</span>
+  <ul class="edge">
+   <li><b>31 langues</b> : chaque texte nouveau passe par <code>i18n()</code> ; le français est la source, les 30 autres dans <code>assets/i18n/*.json</code> (de bg à vi), au même moment que l’outil. Termes du glossaire (<code>docs/i18n-glossaire.md</code>) : dévolution, représentation, contrat de révélation.</li>
+   <li><b>FAQ prévues</b> (<code>faq-data.js</code>, <code>faq-data-en.js</code>, <code>assets/i18n/faq</code>) : « Comment ajouter un onglet au menu ? » · « Comment avoir l’onglet 📄 Documents ? » · « Comment compter mon temps sur un dossier ? » · « Que veut dire la pastille rouge 🔔 ? » · « Que vérifie la liste avant remise ? » · « Comment imprimer la chaîne de filiation ? » · « Les parts en euros comprennent-elles l’impôt ? » (non) · « Comment écrire à tous les héritiers d’un coup ? » · « Que protège le mot de passe d’une généalogie ? » · « Qui a vu mes dossiers ? ».</li>
+   <li><b>Recherche dans les Réglages</b> : mots-clés « onglet, ajouter, menu » sur la page Menus (<code>app-maintenance.js</code>).</li>
+  </ul>
+ </div>
+</div>
+
+<h2>Questions à poser à l’utilisateur</h2>
+<div class="qs"><ol>
+ <li><b>Le ＋ au bout du menu</b> (A1) : visible tout le temps, petit et gris <i>(conseillé)</i>, ou seulement quand tu ranges le menu ?</li>
+ <li><b>📮 Courriers pour l’usage successoral</b> (A1) : le proposer dans le catalogue comme « conseillé » sans l’ajouter tout seul <i>(conseillé)</i>, ou ne pas le proposer ?</li>
+ <li><b>Trésors et Questions aux proches</b> (A2) : absents du catalogue pour l’usage successoral seul <i>(conseillé)</i>, ou proposés quand même ?</li>
+ <li><b>Chronomètre</b> (B1) : bouton dans l’en-tête du dossier <i>(conseillé)</i>, en haut à droite, ou les deux ? Arrondi à la minute <i>(conseillé)</i> ou au quart d’heure ? Pause après 10 min <i>(conseillé)</i> ?</li>
+ <li><b>Cloche 🔔</b> (B2) : la pastille compte les retards et le jour <i>(conseillé)</i>, ou aussi la semaine ? Y mettre tes ⏰ Rappels de famille : non au départ <i>(conseillé)</i> ?</li>
+ <li><b>Liste de contrôle</b> (B3) : un acte demandé mais pas reçu = « à revoir » <i>(conseillé)</i> ou « manque » ?</li>
+ <li><b>Chaîne de filiation</b> (B4) : du défunt vers l’héritier <i>(conseillé)</i> ou l’inverse ? Page cochée au départ <i>(conseillé)</i> ?</li>
+ <li><b>Parts en euros</b> (B5) : l’actif net n’est jamais gardé, on le retape <i>(conseillé)</i>, ou on le garde dans le dossier ? La commission est prise telle qu’écrite dans le contrat, sans TVA ajoutée <i>(conseillé)</i> ?</li>
+ <li><b>Modèles de courriers</b> (B6) : rangés dans la généalogie des dossiers <i>(conseillé)</i> ou sur cet ordinateur seulement ?</li>
+ <li><b>Mot de passe</b> (B7) : verrou de la généalogie + conseil de chiffrer le disque + sauvegardes toujours protégées <i>(conseillé)</i>, ou lancer le gros chantier du fichier chiffré (avec le risque de tout perdre si le mot de passe est oublié) ?</li>
+ <li><b>Qui a vu quoi</b> (B8) : par poste (nom de l’ordinateur) <i>(conseillé)</i> ou créer des profils d’utilisateur ? Gardé 12 mois <i>(conseillé)</i> ?</li>
+</ol></div>
+
+</div></body></html>

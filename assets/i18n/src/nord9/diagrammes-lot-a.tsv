@@ -1,0 +1,192 @@
+fr ¦ lb
+# Zone « diagrammes-lot-a » : tableau de quartiers, variantes d’un nom, boucles d’implexe, double éventail, nœud papillon, réseau « toute la famille », barres croisées, cercles de parenté, dates incertaines, pyramide d’un recensement, tableau périodique (heritage-diagram-lot-a.js, lib/diagram_lot_a.php)
+(deviné) ¦ (geroden)
+1 (enfants) ¦ 1 (Kanner)
+1 (parents) ¦ 1 (Elteren)
+16 quartiers ¦ 16 Ahnewopen
+20 ans ¦ 20 Joer
+32 quartiers ¦ 32 Ahnewopen
+8 quartiers (arrière-grands-parents) ¦ 8 Ahnewopen (Urgrousselteren)
+Actes comptés ¦ Gezielten Akten
+Ajoute les ancêtres (n° Sosa, nom) et leurs armoiries. ¦ Setz d’Virfahren (Sosa-Nr., Numm) an hir Wopen derbäi.
+Ajoute les formes du nom : la forme, ses années, le nombre d’actes. ¦ Setz d’Forme vum Numm derbäi: d’Form, hir Joren, d’Zuel vun Akten.
+Ajoute les personnes recensées : âge, sexe, année. ¦ Setz déi gezielt Leit derbäi: Alter, Geschlecht, Joer.
+Ancêtre à trouver ¦ Virfar ze fannen
+Ancêtres pris dans ta base : {n} (armoiries : {k}). ¦ Virfahren aus denger Datebank: {n} (Wopen: {k}).
+Arbre des variantes (formes du nom : {n}). ¦ Bam vun de Varianten (Nummforme: {n}).
+Arbre des variantes d’un nom ¦ Bam vun de Variante vun engem Numm
+Armoiries (nom) ¦ Wopen (Numm)
+Au survol seulement ¦ Nëmmen beim Driwwerfueren
+Aucun ancêtre connu à cette génération. ¦ Kee bekannte Virfar an dëser Generatioun.
+Aucun lien entre les couples de ce groupe. ¦ Keng Verbindung tëscht de Koppelen vun dësem Grupp.
+Aucun recensement dans ta base ¦ Keng Vollekszielung an denger Datebank
+Aucun âge lisible dans ce recensement. ¦ Keen liesbaart Alter an dëser Zielung.
+Aucune forme trouvée pour ce nom. ¦ Keng Form fir dësen Numm fonnt.
+Avec au moins une source ¦ Mat mindestens enger Quell
+Axe des années ¦ Joreschs
+Barres croisées (UpSet) ¦ Gekräizte Balken (UpSet)
+Barres croisées (ensembles : {n}, combinaisons montrées : {k}). ¦ Gekräizte Balken (Mengen: {n}, gewisen Kombinatiounen: {k}).
+Blason absent ¦ Wope feelt
+Blasonnement en note (en bas) ¦ Wopebeschreiwung als Notiz (ënnen)
+Boucles d’implexe (chemins : {n}), F = {f}. ¦ Ahneschwond-Schleifen (Weeër: {n}), F = {f}.
+Boucles plus lointaines pas dessinées : {n} (comptées dans F). ¦ Méi wäit Schleifen net gezeechent: {n} (an F gezielt).
+Branche (paternelle, maternelle) ¦ Zweig (vum Papp, vun der Mamm)
+Branche maternelle ¦ Mammesäit
+Branche paternelle ¦ Pappesäit
+Branche « {name} » ¦ Zweig „{name}“
+Cases façon tableau périodique ¦ Felder wéi am Periodesystem
+Cases vides pour les ancêtres à trouver ¦ Eidel Felder fir Virfahren ze fannen
+Ce qu’on dessine ¦ Wat gezeechent gëtt
+Cercles (2 à 4 ensembles) ¦ Kreesser (2 bis 4 Mengen)
+Cercles de parenté autour de {name} (personnes : {n}). ¦ Verwandtschaftskreesser ronderëm {name} (Leit: {n}).
+Chemins trouvés : {n} (F = {f}). ¦ Fonnt Weeër: {n} (F = {f}).
+Chercher les boucles ¦ Schleife sichen
+Chiffre (couleur, éventails) ¦ Zuel (Faarf, Fächer)
+Choisis de 2 à 8 ensembles (là : {n}). ¦ Wiel 2 bis 8 Mengen (elo: {n}).
+Choisis un groupe de noms ou écris un nom. ¦ Wiel e Grupp vun Nimm oder schreif en Numm.
+Choisis un recensement (commune et année). ¦ Wiel eng Zielung (Gemeng a Joer).
+Choisis une personne (« Depuis l’app ») ou écris les boucles à la main. ¦ Wiel eng Persoun („Aus der App“) oder schreif d’Schleifen mat der Hand.
+Coefficient aussi en fraction ¦ Koeffizient och als Bruch
+Coefficient de consanguinité de {name} : F = {f} ¦ Inzuchtkoeffizient vun {name}: F = {f}
+Combinaisons montrées (les plus grandes) ¦ Gewisen Kombinatiounen (déi gréisst)
+Combinaisons pas montrées : {n} ¦ Net gewisen Kombinatiounen: {n}
+Commune (titre) ¦ Gemeng (Titel)
+Comparer avec le recensement de ¦ Vergläiche mat der Zielung vun
+Consanguinité de l’ancêtre ¦ Inzucht vum Virfar
+Couleur de l’écu (sans image) ¦ Faarf vum Schëld (ouni Bild)
+Couleur des parts ¦ Faarf vun den Deeler
+Couleur du côté maternel ¦ Faarf vun der Mammesäit
+Couleurs des branches ¦ Faarwe vun den Zweigen
+Couple ¦ Koppel
+Critères de mauvaise forme. ¦ Falsch Critèren.
+Côté (paternel, maternel, branches) ¦ Säit (Papp, Mamm, Zweigen)
+Côté maternel ¦ Mammesäit
+Côté paternel ¦ Pappesäit
+Date incertaine (fourchette) ¦ Onsécher Datum (Spann)
+Date inconnue ¦ Onbekannten Datum
+Dates sous le nom ¦ Datumer ënnert dem Numm
+De la famille ¦ Vun der Famill
+De la famille (oui) ¦ Vun der Famill (jo)
+De la mère vers l’ancêtre ¦ Vun der Mamm bis bei de Virfar
+Degrés montrés (jusqu’à) ¦ Gewise Graden (bis)
+Dessin de la fourchette ¦ Zeechnung vun der Spann
+Deux éventails ¦ Zwee Fächer
+Deviner d’où vient chaque forme (date et ressemblance) ¦ Rodden, wou all Form hierkënnt (Datum an Ähnlechkeet)
+Diagramme de Venn (2 à 8 ensembles) ¦ Venn-Diagramm (2 bis 8 Mengen)
+Diagramme de Venn : {names}. ¦ Venn-Diagramm: {names}.
+Double éventail (ascendants : {up}, descendants : {down}). ¦ Duebelfächer (Virfahren: {up}, Nokommen: {down}).
+Du père vers l’ancêtre ¦ Vum Papp bis bei de Virfar
+Décédé ou inconnu ¦ Gestuerwen oder onbekannt
+En accordéon (branches qu’on plie) ¦ Akkordeon (Zweige zum Zesummeklappen)
+En cercles (un cercle par degré) ¦ A Kreesser (ee Krees pro Grad)
+En vie ou non ¦ Lieweg oder net
+En {year} (contour) ¦ {year} (Kontur)
+Ensemble {x} ¦ Mengen {x}
+Faire ressortir la famille ¦ D’Famill ervirhiewen
+Formes prises dans ta base : {n}. ¦ Forme aus denger Datebank: {n}.
+Groupe de noms ¦ Grupp vun Nimm
+Générations : {n} côté père, {m} côté mère ¦ Generatiounen: {n} vum Papp, {m} vun der Mamm
+Il faut de 2 à 8 ensembles. ¦ Et brauch 2 bis 8 Mengen.
+Image (media/…) ¦ Bild (media/…)
+Initiales du prénom et du nom ¦ Initialë vu Virnumm a Numm
+La branche ¦ Den Zweig
+La personne étudiée ¦ Déi ënnersicht Persoun
+Le calcul n’est pas prêt. ¦ D’Berechnung ass net prett.
+Le chemin entre deux personnes ¦ De Wee tëscht zwou Persounen
+Le nom (2 lettres) ¦ De Familljennumm (2 Buschtawen)
+Le plus proche seulement ¦ Nëmmen deen nootsten
+Le prénom (2 lettres) ¦ De Virnumm (2 Buschtawen)
+Le recensement de {place} ¦ D’Zielung vun {place}
+Les 8, 16 ou 32 ancêtres d’une génération, chacun avec son blason ; un écu vide : armoiries à trouver. ¦ D’8, 16 oder 32 Virfahre vun enger Generatioun, jidderee mat sengem Wopen; en eidelt Schëld: Wope nach ze fannen.
+Les boucles d’implexe (entre les deux parents) ¦ Ahneschwond-Schleifen (tëscht béide Elteren)
+Les boucles d’implexe de {name} ¦ D’Ahneschwond-Schleife vun {name}
+Les deux parents de cette personne ne sont pas connus. ¦ Déi zwee Elteren vun dëser Persoun sinn net bekannt.
+Les ensembles (2 à 8) : A, B, C… H ¦ D’Mengen (2 bis 8): A, B, C… H
+Les formes du nom ¦ D’Forme vum Numm
+Les formes du nom {name} ¦ D’Forme vum Numm {name}
+Les noms du groupe (ou écrits pareil) et leurs variantes notées, avec leurs années et le nombre d’actes. ¦ D’Nimm vum Grupp (oder gläich geschriwwen) an hir notéiert Varianten, mat Joren an Zuel vun Akten.
+Les quartiers de {name} ¦ D’Ahnewope vun {name}
+Les seize quartiers de {name} ¦ Déi siechzéng Ahnewope vun {name}
+Liens pris dans l’app : {n}. ¦ Verbindungen aus der App: {n}.
+Losange pour les dates exactes ¦ Raut fir genee Datumer
+Montrer le calcul (½ puissance n) ¦ D’Berechnung weisen (½ hoch n)
+Montrer l’incertitude des dates ¦ Onsécherheet vun den Datumer weisen
+Naissances et décès (qui vivait en …) ¦ Gebuerten an Doudesfäll (wien huet … gelieft)
+Nom inconnu ¦ Onbekannten Numm
+Nom sous l’écu ¦ Numm ënnert dem Schëld
+Nom trop long (80 lettres au plus). ¦ Numm ze laang (héchstens 80 Buschtawen).
+Nombre d’actes sous la forme ¦ Zuel vun Akten ënnert der Form
+Noms les plus portés ¦ Meescht gedroe Nimm
+N° Sosa ¦ Sosa-Nr.
+N° Sosa (ascendants, éventails) ¦ Sosa-Nr. (Virfahren, Fächer)
+Nœud papillon (père à gauche, mère à droite) ¦ Mësch (Papp lénks, Mamm riets)
+Ordre des combinaisons ¦ Reiefolleg vun de Kombinatiounen
+Ou un nom ¦ Oder en Numm
+Par nombre d’ensembles ¦ No der Zuel vu Mengen
+Parent (descendants, éventails) ¦ Elterendeel (Nokommen, Fächer)
+Personne cachée ¦ Verstoppt Persoun
+Personnes recensées : {n} ¦ Gezielt Leit: {n}
+Personnes recensées : {n} en {y1}, {m} en {y2} ¦ Gezielt Leit: {n} am Joer {y1}, {m} am Joer {y2}
+Personnes recensées prises dans ta base : {n}. ¦ Gezielt Leit aus denger Datebank: {n}.
+Portraits (arbre dessiné, nœud papillon) ¦ Portraiten (gezeechente Bam, Mësch)
+Pyramide du recensement de {year} (personnes : {n}). ¦ Pyramid vun der Zielung {year} (Leit: {n}).
+Ressortent : les personnes reliées à une fiche (ou au groupe choisi). ¦ Ervirgehuewen: Leit, déi mat enger Fiche (oder dem gewielte Grupp) verbonne sinn.
+Selon le nombre de descendants ¦ No der Zuel vun Nokommen
+Selon le tableau ¦ No der Tabell
+Ses ancêtres au-dessus (place Sosa), ses descendants au-dessous (sous leur parent) ; le chiffre : l’âge au décès. ¦ Virfahren uewen (Sosa-Plaz), Nokommen ënnen (ënnert hirem Elterendeel); d’Zuel: Alter beim Doud.
+Ses ancêtres de la génération choisie (ordre Sosa) et les armoiries reliées à chacun (Listes → Armoiries). ¦ D’Virfahre vun der gewielter Generatioun (Sosa-Reiefolleg) an hir Wopen (Lëschten → Wopen).
+Seulement l’ancêtre commun le plus proche ¦ Nëmmen den nootste gemeinsame Virfar
+Sexe inconnu (pas dans la pyramide) : {n} ¦ Geschlecht onbekannt (net an der Pyramid): {n}
+Sosa {n} : ancêtre à trouver ¦ Sosa {n}: Virfar ze fannen
+Source, note ¦ Quell, Notiz
+Sources sous la forme ¦ Quellen ënnert der Form
+Tableau de quartiers (armoiries des ancêtres) ¦ Ahnewopentafel (Wope vun de Virfahren)
+Tableau de quartiers ({n}), armoiries connues : {k}. ¦ Ahnewopentafel ({n}), bekannte Wopen: {k}.
+Tableau périodique : ancêtres trouvés {found} / {total} ({pct} %). ¦ Periodesystem: fonnt Virfahren {found} / {total} ({pct} %).
+Taux de recherche (%) ¦ Fuerschungsgrad (%)
+Tous les ancêtres répétés ¦ All widderholl Virfahren
+Tous les chemins du père et de la mère vers un même ancêtre (filiations biologiques) et le coefficient de consanguinité (méthode de Wright). ¦ All Weeër vum Papp a vun der Mamm bis bei dee selwechte Virfar (biologesch Ofstamung) an den Inzuchtkoeffizient (Method vu Wright).
+Toute la base (qui vivait en …) ¦ Déi ganz Datebank (wien huet … gelieft)
+Toute la base (qui vivait l’année choisie) ou un recensement (les âges écrits ce jour-là). ¦ Déi ganz Datebank (wien am gewielte Joer gelieft huet) oder eng Zielung (d’Alter vun deem Dag).
+Toute la famille, un point par couple ¦ Déi ganz Famill, ee Punkt pro Koppel
+Trop de critères. ¦ Ze vill Critèren.
+Trop d’ensembles. ¦ Ze vill Mengen.
+Trouvé chez le notaire (successions, inventaires) ¦ Beim Notaire fonnt (Ierfschaften, Inventairen)
+Trouvé dans les sources militaires (poilus) ¦ An de militäresche Quelle fonnt (Zaldoten vum Éischte Weltkrich)
+Trouvé dans un recensement ¦ An enger Zielung fonnt
+Un chiffre (colonne « Chiffre ») ¦ Eng Zuel (Kolonn „Zuel“)
+Un recensement (commune, année) ¦ Eng Zielung (Gemeng, Joer)
+Un recensement (âges écrits) ¦ Eng Zielung (geschriwwent Alter)
+Une par branche ¦ Eng pro Zweig
+Une par forme ¦ Eng pro Form
+Une seule source : couleur de l’ensemble ¦ Eng eenzeg Quell: Faarf vun der Mengen
+Une source précise ¦ Eng bestëmmte Quell
+Vérifie le groupe de personnes. ¦ Kontrolléier de Grupp vu Leit.
+actes : {n} ¦ Akten: {n}
+vient de {name} ¦ kënnt vun {name}
+{label} (famille) : {n} ¦ {label} (Famill): {n}
+{names} (seulement) : {n} ¦ {names} (nëmmen): {n}
+{name} : armoiries pas encore trouvées ¦ {name}: Wope nach net fonnt
+{name} : {n} en tout ¦ {name}: {n} am Ganzen
+{place}, {year} ¦ {place}, {year}
+« vers » : plus ou moins ¦ „ëm“: plus oder minus
+Âge (recensement) ¦ Alter (Zielung)
+Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ D’Zort vun der Verbindung op d’Linn schreiwen (Numm vum Kand…)
+Écrits s’il y a la place ¦ Geschriwwen, wann et Plaz huet
+Écu vide ¦ Eidelt Schëld
+Épaisseur selon le nombre d’actes ¦ Déckt no der Zuel vun Akten
+— Aucun (le nom écrit à côté) — ¦ — Keng (den Numm dernieft) —
+— Rien — ¦ — Näischt —
+🌿 Les formes d’un nom de ma base ¦ 🌿 D’Forme vun engem Numm aus menger Datebank
+🔁 Entre les deux parents de… ¦ 🔁 Tëscht den Elteren vun…
+🔺 Les personnes de ma base ¦ 🔺 D’Leit aus menger Datebank
+🛡 Les quartiers d’une personne de ma base ¦ 🛡 D’Ahnewope vun enger Persoun aus menger Datebank
+Choisis de 2 à 8 ensembles : chaque zone compte les personnes de ces ensembles-là seulement. Dès 5 ensembles : barres croisées. ¦ Wiel 2 bis 8 Mengen: all Zon zielt just d’Leit aus dëse Mengen. Vu 5 Mengen un: gekräizte Balken.
+Les témoins, parrains et marraines des actes ; ou toute la famille, un point par couple, reliés par leurs enfants. ¦ D’Zeien a Pätter aus den Akten; oder déi ganz Famill, ee Punkt pro Koppel, verbonne vun hire Kanner.
+Nom de l’enfant sur le trait ¦ Numm vum Kand op der Linn
+Par nom de famille ¦ No Familljennumm
+Par siècle (du mariage) ¦ No Joerhonnert (vum Bestietnes)
+Un point par couple ¦ Ee Punkt pro Koppel
+Un point par personne ¦ Ee Punkt pro Persoun
+🕸 Les liens de ma base ¦ 🕸 D’Verbindungen aus menger Datebank
+Quartiers ¦ Ahnewopen

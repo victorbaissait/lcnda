@@ -25,7 +25,10 @@
     const ACTS = [['naissance', 'Naissance'], ['mariage', 'Mariage'], ['deces', 'Décès']];
     const WHATS = [['integrale', 'Copie intégrale'], ['extrait_filiation', 'Extrait avec filiation'], ['extrait_sans', 'Extrait sans filiation'], ['recherche', 'Recherche aux archives'], ['transcription', 'Transcription (acte à l’étranger)'], ['dispense', 'Dossier de dispense de mariage']];
     const RELS = [['descendant', 'Je suis son descendant direct'], ['moi', 'C’est mon propre acte'], ['ascendant', 'Je suis son ascendant direct'], ['conjoint', 'Je suis son conjoint'], ['representant', 'Je suis son représentant légal'], ['autre', 'Autre lien (cousin…) ou aucun']];
-    const RECIPS = [['mairie', 'Mairie de la commune'], ['ad', 'Archives départementales'], ['scec', 'Service central d’état civil (Nantes)'], ['diocese', 'Archives diocésaines'], ['autre', 'Autre destinataire']];
+    const RECIPS = [['mairie', 'Mairie de la commune'], ['ad', 'Archives départementales'], ['scec', 'Service central d’état civil (Nantes)'], ['shd', 'Service historique de la Défense (Vincennes, Caen)'], ['anom', 'Archives nationales d’outre-mer (Aix-en-Provence)'], ['diocese', 'Archives diocésaines'], ['notaire', 'Notaire ou Archives départementales (série E)'], ['autre', 'Autre destinataire']];
+    /* le code du patrimoine, art. L213-2, cité en texte : un lien vers Légifrance (recherche ; l'identifiant exact de l'article n'est pas écrit en dur) */
+    const LEGI_L213 = 'https://www.legifrance.gouv.fr/search/code?tab_selection=code&searchField=ALL&query=L213-2%20code%20du%20patrimoine&page=1&init=true';
+    const legiLink = html => String(html).replace(/art\. L213-2/g, `<a href="${LEGI_L213}" target="_blank" rel="noopener noreferrer" title="Légifrance">art. L213-2 ↗</a>`);
     const ls = {get(k, d) { try { const v = JSON.parse(localStorage.getItem(k)); return v ?? d; } catch (_) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} }};
     const cfg = () => { const v = ls.get(KEY, {}) || {}; const s = v.sender && typeof v.sender === 'object' ? v.sender : {};
         return {sender: {name: String(s.name || '').slice(0, 120), address: String(s.address || '').slice(0, 400), city: String(s.city || '').slice(0, 80), email: String(s.email || '').slice(0, 160), phone: String(s.phone || '').slice(0, 40)},
@@ -75,7 +78,7 @@
                 const paint = (regen = true) => {
                     if (!b) { $('[data-cl-legal]').innerHTML = UI().notice ? UI().notice('info', 'Choisis la personne : la lettre s’écrit toute seule.') : ''; return; }
                     const L = b.legal, kind = L.status === 'warn' ? 'warn' : L.status === 'info' ? 'info' : 'ok';
-                    $('[data-cl-legal]').innerHTML = `${UI().notice(kind, L.says.join(' '))}<details class="cl-rule"><summary>La règle</summary><p>${esc(L.rule)}</p></details>${b.context.missing ? UI().notice('info', 'Cet acte n’est pas encore dans ta généalogie : la lettre le dit et laisse la mairie chercher. Ajoute tes précisions (années, lieu probable).') : ''}`;
+                    $('[data-cl-legal]').innerHTML = `${UI().notice(kind, L.says.join(' '))}<details class="cl-rule"><summary>La règle</summary><p>${legiLink(esc(L.rule))}</p></details>${b.context.missing ? UI().notice('info', 'Cet acte n’est pas encore dans ta généalogie : la lettre le dit et laisse la mairie chercher. Ajoute tes précisions (années, lieu probable).') : ''}`;
                     f.act.value = b.act; f.what.value = b.asked; f.relation.value = b.relation; f.recipient.value = b.recipient_kind;
                     if (!st.recipient_address) f.recipient_address.value = b.recipient.address;
                     if (!f.recipient_email.value && b.recipient.email) f.recipient_email.value = b.recipient.email;
@@ -168,7 +171,9 @@
             onOpen: async d => {
                 d.classList.add('cl-dialog');
                 const f = d.querySelector('form');
-                try { defaults = (await api('cl_templates')).templates || null; } catch (_) {}
+                // la fenêtre s'enregistre toute seule dès qu'elle s'ouvre : ce qu'on tape pendant que les modèles de départ arrivent n'est pas perdu ;
+                // le modèle, lui, n'est gardé qu'une fois montré (sinon la case encore vide effacerait un modèle retouché)
+                let tplReady = false;
                 const showTpl = () => { const cur = cfg().templates[tplKey]; f.tpl_text.value = cur || defaults?.[tplKey] || ''; d.querySelector('[data-cl-tpl-state]').textContent = cur ? '✎ Modèle retouché (gardé tout seul).' : 'Modèle de départ.'; };
                 const ph = {'{expediteur}': 'ton nom et ton adresse', '{destinataire}': 'l’adresse du destinataire', '{lieu_date}': '« À Tulle, le 9 novembre 2026 »', '{objet}': 'l’objet', '{demande}': '« une copie intégrale de l’acte de naissance »', '{acte}': 'naissance, mariage ou décès', '{personne}': 'le nom de la personne', '{filiation}': '« , fils de … et de … »', '{evenement}': '« né le 7 mai 1925 à Tulle (Corrèze) »', '{conjoint}': 'le conjoint', '{lien_phrase}': 'ton lien', '{pieces_phrase}': 'les pièces jointes', '{precision}': 'tes précisions', '{retour_phrase}': 'l’enveloppe timbrée', '{signature}': 'ta signature'};
                 d.querySelector('[data-cl-ph]').innerHTML = Object.entries(ph).map(([k, v]) => `<li><code>${esc(k)}</code> : ${esc(v)}</li>`).join('');
@@ -176,12 +181,17 @@
                 const save = () => { const v = ls.get(KEY, {}) || {};
                     v.sender = {name: f.s_name.value.trim(), address: f.s_address.value.trim(), city: f.s_city.value.trim(), email: f.s_email.value.trim(), phone: f.s_phone.value.trim()};
                     v.delay = Math.max(0, Math.min(365, Number(f.delay.value) || 45)); v.byEmail = f.byEmail.checked;
-                    v.templates = v.templates || {}; const t = f.tpl_text.value.trim(); if (t && t !== (defaults?.[tplKey] || '').trim()) v.templates[tplKey] = t; else delete v.templates[tplKey];
+                    v.templates = v.templates || {}; if (tplReady) { const t = f.tpl_text.value.trim(); if (t && t !== (defaults?.[tplKey] || '').trim()) v.templates[tplKey] = t; else delete v.templates[tplKey]; }
                     ls.set(KEY, v); onChange?.(); };
                 const reload = () => { const n = cfg(); f.s_name.value = n.sender.name; f.s_address.value = n.sender.address; f.s_city.value = n.sender.city; f.s_email.value = n.sender.email; f.s_phone.value = n.sender.phone; f.delay.value = n.delay; f.byEmail.checked = n.byEmail; showTpl(); onChange?.(); };
                 f.tpl.addEventListener('change', () => { tplKey = f.tpl.value; showTpl(); });
                 d.querySelector('[data-cl-tpl-reset]').addEventListener('click', () => { const v = ls.get(KEY, {}) || {}; const before = JSON.stringify(v); if (v.templates) delete v.templates[tplKey]; ls.set(KEY, v); showTpl(); onChange?.(); A().undoToast?.('Modèle remis comme au départ', {undo: () => { try { localStorage.setItem(KEY, before); } catch (_) {} showTpl(); onChange?.(); }}); });
                 UI().autoSaveDialog?.(d, {keys: [KEY], save, reload, reset: () => { try { localStorage.removeItem(KEY); } catch (_) {} }});
+                let tplTyped = false; f.tpl_text.addEventListener('input', () => { tplTyped = true; });
+                try { defaults = (await api('cl_templates')).templates || null; } catch (_) {}
+                if (!d.isConnected) return;
+                if (!tplTyped) showTpl(); // le modèle de départ, s'il n'a pas été retouché entre-temps
+                tplReady = true;
                 // 💾 Réglages enregistrés : l'adresse, le délai et les modèles, sous un nom
                 const slot = d.querySelector('[data-cl-presets]');
                 if (slot && UI().presetsFrame) {

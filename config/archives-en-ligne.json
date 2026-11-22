@@ -1,0 +1,1867 @@
+{
+ "format": "lcnda-archives-en-ligne",
+ "version": 1,
+ "generated": "2026-11-20",
+ "note": "Années jusqu’auxquelles les registres sont en ligne, d’après la source citée. Absent = à vérifier. verified=false : année lue dans un extrait de recherche citant la source, page non ouverte : l’app l’affiche au mieux en « peut-être en ligne » tant que l’utilisateur ne l’a pas confirmée.",
+ "departements": {
+  "10": {
+   "name": "Aube",
+   "site": "https://www.archives-aube.fr/",
+   "acts": {},
+   "note": "Mise en ligne glissante des registres de plus de 100 ans (FAQ du site) ; année limite non publiée."
+  },
+  "11": {
+   "name": "Aude",
+   "site": "https://archivesdepartementales.aude.fr/",
+   "acts": {
+    "N": {
+     "until": 1922,
+     "source": "https://www.rfgenealogie.com/node/66879",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "M": {
+     "until": 1922,
+     "source": "https://www.rfgenealogie.com/node/66879",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "D": {
+     "until": 1922,
+     "source": "https://www.rfgenealogie.com/node/66879",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "TD": {
+     "until": 1932,
+     "source": "https://www.rfgenealogie.com/node/66879",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "BMS": {
+     "from": 1547,
+     "source": "https://www.rfgenealogie.com/node/66879",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    }
+   }
+  },
+  "12": {
+   "name": "Aveyron",
+   "site": "https://archives.aveyron.fr/archive/recherche/etatcivil/n:122",
+   "acts": {
+    "N": {
+     "until": 1919,
+     "source": "https://archives.aveyron.fr/archive/recherche/etatcivil/n:122",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1919,
+     "source": "https://archives.aveyron.fr/archive/recherche/etatcivil/n:122",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1919,
+     "source": "https://archives.aveyron.fr/archive/recherche/etatcivil/n:122",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Registres clos au 31/12/1919 en ligne librement ; actes de moins de 100 ans numérisés (jusqu'en 1937 pour certaines communes) accessibles via la salle de lecture virtuelle (FranceConnect)."
+  },
+  "13": {
+   "name": "Bouches-du-Rhône",
+   "site": "https://www.archives13.fr/archive/recherche/etatcivil/n:64",
+   "acts": {
+    "N": {
+     "until": 1925,
+     "source": "https://www.archives13.fr/archive/recherche/etatcivil/n:64",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Mariages, décès et tables en ligne « jusqu'aux années 1932/1935 » selon la page officielle (limite variable)."
+  },
+  "14": {
+   "name": "Calvados",
+   "site": "https://archives.calvados.fr/",
+   "acts": {
+    "N": {
+     "until": 1924,
+     "source": "https://www.rfgenealogie.com/node/65573",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "M": {
+     "until": 1949,
+     "source": "https://www.rfgenealogie.com/node/65573",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "D": {
+     "until": 1999,
+     "source": "https://www.rfgenealogie.com/node/65573",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    }
+   },
+   "note": "Article de début 2025. Registres mixtes (petites communes) soumis au délai des naissances ; décès les plus récents surtout pour Lisieux."
+  },
+  "15": {
+   "name": "Cantal",
+   "site": "https://archives.cantal.fr/vos-archives/etat-civil/recherche-dans-letat-civil",
+   "acts": {
+    "M": {
+     "until": 1932,
+     "source": "https://archives.cantal.fr/vos-archives/etat-civil/recherche-dans-letat-civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1932,
+     "source": "https://archives.cantal.fr/vos-archives/etat-civil/recherche-dans-letat-civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Page officielle : registres paroissiaux et d'état civil « des origines à 1932 », décès jusqu'aux années 1950 pour certaines communes. Limite des naissances (délai de 100 ans) à vérifier."
+  },
+  "16": {
+   "name": "Charente",
+   "site": "https://lasource.archives.lacharente.fr/",
+   "acts": {}
+  },
+  "17": {
+   "name": "Charente-Maritime",
+   "site": "https://archives.charente-maritime.fr/archives-en-ligne",
+   "acts": {},
+   "note": "Registres paroissiaux et d'état civil mis en ligne au bout de 100 ans ; année limite non publiée."
+  },
+  "18": {
+   "name": "Cher",
+   "site": "https://www.archives18.fr/archives-numerisees/registres-paroissiaux-et-etat-civil",
+   "acts": {}
+  },
+  "19": {
+   "name": "Corrèze",
+   "site": "https://www.archives.correze.fr/",
+   "acts": {}
+  },
+  "21": {
+   "name": "Côte-d'Or",
+   "site": "https://archives.cotedor.fr/v2/site/AD21/Rechercher/Recherche_thematique/Genealogie",
+   "acts": {}
+  },
+  "22": {
+   "name": "Côtes-d'Armor",
+   "site": "https://archives.cotesdarmor.fr/registres-paroissiaux-et-d-etat-civil",
+   "acts": {
+    "N": {
+     "until": 1922,
+     "source": "https://archives.cotesdarmor.fr/actualites/etat-civil-les-actes-jusqu-en-1922-en-ligne",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1922,
+     "source": "https://archives.cotesdarmor.fr/actualites/etat-civil-les-actes-jusqu-en-1922-en-ligne",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1922,
+     "source": "https://archives.cotesdarmor.fr/actualites/etat-civil-les-actes-jusqu-en-1922-en-ligne",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "TD": {
+     "until": 1922,
+     "source": "https://archives.cotesdarmor.fr/actualites/etat-civil-les-tables-decennales-sont-en-ligne-jusqu-en-1922",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   }
+  },
+  "23": {
+   "name": "Creuse",
+   "site": "https://archives.creuse.fr/rechercher/archives-numerisees/registres-paroissiaux-et-de-letat-civil",
+   "acts": {
+    "D": {
+     "until": 1932,
+     "source": "https://archives.creuse.fr/rechercher/archives-numerisees/registres-paroissiaux-et-de-letat-civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Décès en ligne jusqu'en 1932, 1937 ou 1942 selon les communes (2007 pour Aubusson). Naissances/mariages : limite autour de 1920-1922, informations contradictoires sur le site, à vérifier."
+  },
+  "24": {
+   "name": "Dordogne",
+   "site": "https://archives.dordogne.fr/r/126/la-recherche-genealogique/",
+   "acts": {
+    "N": {
+     "until": 1902,
+     "source": "https://archives.dordogne.fr/r/126/la-recherche-genealogique/",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1902,
+     "source": "https://archives.dordogne.fr/r/126/la-recherche-genealogique/",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1902,
+     "source": "https://archives.dordogne.fr/r/126/la-recherche-genealogique/",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "TD": {
+     "until": 1902,
+     "source": "https://archives.dordogne.fr/r/126/la-recherche-genealogique/",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "La page officielle indique « numérisés jusqu'en 1902 » (page possiblement ancienne : la limite réelle peut être plus récente)."
+  },
+  "25": {
+   "name": "Doubs",
+   "site": "https://archives.doubs.fr/",
+   "acts": {},
+   "note": "Le portail annonce des registres 1737-1922 (« constitution de la série en cours »), d'autres pages 1737-1912 : limite à vérifier."
+  },
+  "26": {
+   "name": "Drôme",
+   "site": "https://archives.ladrome.fr/",
+   "acts": {},
+   "note": "Selon RFG (non daté) : communes d'Aix-en-Diois à Lus-la-Croix-Haute en ligne jusqu'en 1916 ; limite pour le reste du département à vérifier."
+  },
+  "27": {
+   "name": "Eure",
+   "site": "https://archives.eure.fr/",
+   "acts": {}
+  },
+  "28": {
+   "name": "Eure-et-Loir",
+   "site": "https://panoramiques.archives28.fr/s/2/etat-civil/",
+   "acts": {
+    "N": {
+     "until": 1921,
+     "source": "https://panoramiques.archives28.fr/s/2/etat-civil/",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1921,
+     "source": "https://panoramiques.archives28.fr/s/2/etat-civil/",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1921,
+     "source": "https://panoramiques.archives28.fr/s/2/etat-civil/",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Mise en ligne arrêtée en général vers 1921 ; décès jusqu'en 1931 (Châteaudun, Cloyes) ou 1932 (Chartres, Nogent-le-Rotrou)."
+  },
+  "29": {
+   "name": "Finistère",
+   "site": "https://archives.finistere.fr/rechercher/aides-la-recherche/aide-la-recherche-etat-civil/les-reponses-vos-questions-etat-civil",
+   "acts": {},
+   "note": "En ligne : mariages et décès de plus de 75 ans, naissances de plus de 100 ans ; naissances plus récentes via FranceConnect ou en salle de lecture. Registres numérisés jusqu'à 1936-1937 selon les communes."
+  },
+  "30": {
+   "name": "Gard",
+   "site": "https://archives.gard.fr/rechercher/des-informations-sur-une-personne/les-registres-paroissiaux-et-detat-civil/comment-les-consulter.html",
+   "acts": {
+    "N": {
+     "until": 1924,
+     "source": "https://archives.gard.fr/rechercher/des-informations-sur-une-personne/les-registres-paroissiaux-et-detat-civil/comment-les-consulter.html",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1948,
+     "source": "https://archives.gard.fr/rechercher/des-informations-sur-une-personne/les-registres-paroissiaux-et-detat-civil/comment-les-consulter.html",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1999,
+     "source": "https://archives.gard.fr/rechercher/des-informations-sur-une-personne/les-registres-paroissiaux-et-detat-civil/comment-les-consulter.html",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "TD": {
+     "until": 1942,
+     "source": "https://archives.gard.fr/rechercher/des-informations-sur-une-personne/les-registres-paroissiaux-et-detat-civil/comment-les-consulter.html",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Mise à jour automatique au 1er janvier (naissances +100 ans, mariages +75 ans, décès +25 ans) ; selon la tenue des registres (registres mixtes)."
+  },
+  "31": {
+   "name": "Haute-Garonne",
+   "site": "https://archives.haute-garonne.fr/archive/recherche/etatcivil/n:97",
+   "acts": {
+    "N": {
+     "until": 1911,
+     "source": "https://archives.haute-garonne.fr/archive/recherche/etatcivil/n:97",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1911,
+     "source": "https://archives.haute-garonne.fr/archive/recherche/etatcivil/n:97",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1911,
+     "source": "https://archives.haute-garonne.fr/archive/recherche/etatcivil/n:97",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Registres antérieurs à 1912 en ligne ; jusqu'en 1922 (voire 1924) pour certaines communes seulement."
+  },
+  "32": {
+   "name": "Gers",
+   "site": "https://www.archives32.fr/",
+   "acts": {}
+  },
+  "33": {
+   "name": "Gironde",
+   "site": "https://archives.gironde.fr/n/je-debute-ma-recherche/n:648",
+   "acts": {},
+   "note": "En ligne : naissances après 100 ans, mariages après 75 ans, décès après 25 ans (AU-029 CNIL) ; numérisation de toutes les communes jusqu'en 1945. Année limite non publiée. Bordeaux, Bruges, Pessac, Caudéran : archives municipales de Bordeaux."
+  },
+  "34": {
+   "name": "Hérault",
+   "site": "https://archives-pierresvives.herault.fr/archive/recherche/etatcivil/tableau",
+   "acts": {
+    "M": {
+     "until": 1949,
+     "source": "https://archives-pierresvives.herault.fr/archive/recherche/etatcivil/tableau",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1953,
+     "source": "https://archives-pierresvives.herault.fr/archive/recherche/etatcivil/tableau",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "TD": {
+     "until": 1952,
+     "source": "https://archives-pierresvives.herault.fr/archive/recherche/etatcivil/tableau",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Montpellier : une partie des registres est sur le site des archives de la ville (naissances 1905-1921, mariages 1905-1942, décès 1903-1991)."
+  },
+  "35": {
+   "name": "Ille-et-Vilaine",
+   "site": "https://archives.ille-et-vilaine.fr/",
+   "acts": {
+    "N": {
+     "until": 1925,
+     "source": "https://archives.ille-et-vilaine.fr/actualites/genealogie-lannee-1925-est-en-ligne",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1925,
+     "source": "https://archives.ille-et-vilaine.fr/actualites/genealogie-lannee-1925-est-en-ligne",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1925,
+     "source": "https://archives.ille-et-vilaine.fr/actualites/genealogie-lannee-1925-est-en-ligne",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Une année supplémentaire mise en ligne chaque année (règle des 100 ans) ; actes plus récents sur les postes de la salle de lecture (jusqu'en 1942)."
+  },
+  "36": {
+   "name": "Indre",
+   "site": "https://www.archives36.fr/fonds-numerises/etat-civil",
+   "acts": {
+    "N": {
+     "until": 1922,
+     "source": "https://www.archives36.fr/actualites/actualites/letat-civil-1913-1922-est-en-ligne-",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1922,
+     "source": "https://www.archives36.fr/actualites/actualites/letat-civil-1913-1922-est-en-ligne-",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1922,
+     "source": "https://www.archives36.fr/actualites/actualites/letat-civil-1913-1922-est-en-ligne-",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   }
+  },
+  "37": {
+   "name": "Indre-et-Loire",
+   "site": "https://archives.touraine.fr/",
+   "acts": {
+    "N": {
+     "until": 1905,
+     "source": "https://www.rfgenealogie.com/infos/indre-et-loire-l-etat-civil-enfin-en-ligne-mais-en-partie",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "M": {
+     "until": 1937,
+     "source": "https://www.rfgenealogie.com/infos/indre-et-loire-l-etat-civil-enfin-en-ligne-mais-en-partie",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    }
+   },
+   "note": "Article RFG ancien : naissances jusqu'en 1905, mariages jusqu'en 1937, décès jusqu'en 1950 environ selon les communes ; un article plus récent annonce tout l'état civil en ligne (limites non précisées). Tours : registres sur le site des archives municipales."
+  },
+  "38": {
+   "name": "Isère",
+   "site": "https://archives.isere.fr/page/registres-paroissiaux-et-detat-civil",
+   "acts": {},
+   "note": "Limite par arrondissement selon la page officielle : Grenoble et La Tour-du-Pin jusqu'en 1902, Saint-Marcellin 1896 (commune de Saint-Marcellin 1892), Vienne 1906. Grenoble : partie de l'état civil sur archives.grenoble.fr."
+  },
+  "39": {
+   "name": "Jura",
+   "site": "https://archives39.fr/",
+   "acts": {}
+  },
+  "40": {
+   "name": "Landes",
+   "site": "https://archives.landes.fr/faire-une-recherche/archives-numerisees/etat-civil",
+   "acts": {
+    "N": {
+     "until": 1926,
+     "source": "https://archives.landes.fr/faire-une-recherche",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1926,
+     "source": "https://archives.landes.fr/faire-une-recherche",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1926,
+     "source": "https://archives.landes.fr/faire-une-recherche",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Tous les registres détenus (jusqu'en 1945) sont numérisés ; les actes de 1927 à 1945 nécessitent une connexion FranceConnect."
+  },
+  "41": {
+   "name": "Loir-et-Cher",
+   "site": "https://archives.culture41.fr/",
+   "acts": {
+    "N": {
+     "until": 1923,
+     "source": "https://archives.culture41.fr/archives/recherche/etatcivil/Archives-departementales/Decouvrir-et-transmettre/Tresors-des-archives",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1923,
+     "source": "https://archives.culture41.fr/archives/recherche/etatcivil/Archives-departementales/Decouvrir-et-transmettre/Tresors-des-archives",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "TD": {
+     "until": 1952,
+     "source": "https://archives.culture41.fr/archives/recherche/etatcivil/Archives-departementales/Decouvrir-et-transmettre/Tresors-des-archives",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Décès en ligne jusqu'aux années 1950 ou 1960 selon les communes ; registres paroissiaux jusqu'en 1792 ; registres uniques (N/M/D) vers 1930 en ligne seulement à partir de 2031."
+  },
+  "42": {
+   "name": "Loire",
+   "site": "https://archives.loire.fr/",
+   "acts": {},
+   "note": "Limites variables selon les communes (ex. Firminy 1793-1946, Crémeaux 1793-1940), certaines années en ligne en partie ou en salle de lecture seulement."
+  },
+  "43": {
+   "name": "Haute-Loire",
+   "site": "https://www.archives43.fr/archives-en-ligne/familles-et-individus-en-haute-loire/etat-civil-de-la-haute-loire",
+   "acts": {
+    "M": {
+     "until": 1932,
+     "source": "https://www.archives43.fr/article.php?laref=168&titre=etat-civil-jusqu-en-1932",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1932,
+     "source": "https://www.archives43.fr/article.php?laref=168&titre=etat-civil-jusqu-en-1932",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "TD": {
+     "until": 1932,
+     "source": "https://www.archives43.fr/article.php?laref=168&titre=etat-civil-jusqu-en-1932",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Page officielle « État civil jusqu'en 1932 » ; registres mixtes soumis au délai le plus long (100 ans pour les naissances), donc naissances récentes possiblement absentes : à vérifier."
+  },
+  "44": {
+   "name": "Loire-Atlantique",
+   "site": "https://archives.loire-atlantique.fr/",
+   "acts": {
+    "N": {
+     "until": 1921,
+     "source": "https://archives.loire-atlantique.fr/44/archives-numerisees-les-dernieres-mises-en-ligne/c_35223",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1921,
+     "source": "https://archives.loire-atlantique.fr/44/archives-numerisees-les-dernieres-mises-en-ligne/c_35223",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1921,
+     "source": "https://archives.loire-atlantique.fr/44/archives-numerisees-les-dernieres-mises-en-ligne/c_35223",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Quelques exceptions ; décès jusqu'en 1950 pour certaines communes. Nantes (avec Chantenay et Doulon) : état civil sur le site des Archives municipales."
+  },
+  "45": {
+   "name": "Loiret",
+   "site": "https://archives-loiret.fr/faire-vos-recherches/archives-numerisees/etat-civil",
+   "acts": {
+    "N": {
+     "until": 1902,
+     "source": "https://archives-loiret.fr/faire-vos-recherches/archives-numerisees/etat-civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1902,
+     "source": "https://archives-loiret.fr/faire-vos-recherches/archives-numerisees/etat-civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1902,
+     "source": "https://archives-loiret.fr/faire-vos-recherches/archives-numerisees/etat-civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Registres paroissiaux des origines à 1792 et état civil 1792-1902 en ligne."
+  },
+  "46": {
+   "name": "Lot",
+   "site": "https://archives.lot.fr/",
+   "acts": {
+    "N": {
+     "until": 1912,
+     "source": "https://archives.lot.fr/f/EtatCivilAp1802/tableau/?debut=64200",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1912,
+     "source": "https://archives.lot.fr/f/EtatCivilAp1802/tableau/?debut=64200",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1912,
+     "source": "https://archives.lot.fr/f/EtatCivilAp1802/tableau/?debut=64200",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Une page du site est intitulée « État civil de 1802 à 1922 » : extension possible jusqu'en 1922, à vérifier."
+  },
+  "47": {
+   "name": "Lot-et-Garonne",
+   "site": "https://www.cg47.org/archives/",
+   "acts": {}
+  },
+  "48": {
+   "name": "Lozère",
+   "site": "https://archives.lozere.fr/",
+   "acts": {}
+  },
+  "49": {
+   "name": "Maine-et-Loire",
+   "site": "https://archives.maine-et-loire.fr/",
+   "acts": {
+    "N": {
+     "until": 1902,
+     "source": "https://archives.maine-et-loire.fr/recherche-et-consulter/archives-consultables-en-ligne/etat-civil-apres-1902",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1902,
+     "source": "https://archives.maine-et-loire.fr/recherche-et-consulter/archives-consultables-en-ligne/etat-civil-apres-1902",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1902,
+     "source": "https://archives.maine-et-loire.fr/recherche-et-consulter/archives-consultables-en-ligne/etat-civil-apres-1902",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "TD": {
+     "until": 1902,
+     "source": "https://archives.maine-et-loire.fr/recherche-et-consulter/archives-consultables-en-ligne/etat-civil-apres-1902",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Registres postérieurs à 1902 non conservés aux Archives départementales (à consulter en mairie) ; registres paroissiaux du XVe siècle à 1792 en ligne."
+  },
+  "50": {
+   "name": "Manche",
+   "acts": {},
+   "note": "Registres de catholicité en ligne (vers 1800-1880) pour pallier les destructions de 1944 ; état civil communal 1893-1912 ajouté pour certaines communes. Limite générale à vérifier."
+  },
+  "51": {
+   "name": "Marne",
+   "site": "https://archives.marne.fr/",
+   "acts": {
+    "N": {
+     "until": 1902,
+     "source": "https://archives.marne.fr/search/results?formUuid=6977c5eb-072c-470c-8dfa-6d6488a2d71e",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1902,
+     "source": "https://archives.marne.fr/search/results?formUuid=6977c5eb-072c-470c-8dfa-6d6488a2d71e",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1902,
+     "source": "https://archives.marne.fr/search/results?formUuid=6977c5eb-072c-470c-8dfa-6d6488a2d71e",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Formulaire de recherche officiel intitulé « État civil jusqu'en 1902 »."
+  },
+  "52": {
+   "name": "Haute-Marne",
+   "site": "https://archives.haute-marne.fr/rechercher/consulter-en-ligne/les-fonds-numerises/etat-civil-tables-decennales-et-recensements-de",
+   "acts": {
+    "N": {
+     "until": 1902,
+     "source": "https://archives.haute-marne.fr/rechercher/consulter-en-ligne/les-fonds-numerises/etat-civil-tables-decennales-et-recensements-de",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1902,
+     "source": "https://archives.haute-marne.fr/rechercher/consulter-en-ligne/les-fonds-numerises/etat-civil-tables-decennales-et-recensements-de",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1902,
+     "source": "https://archives.haute-marne.fr/rechercher/consulter-en-ligne/les-fonds-numerises/etat-civil-tables-decennales-et-recensements-de",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "TD": {
+     "until": 1902,
+     "source": "https://archives.haute-marne.fr/rechercher/consulter-en-ligne/les-fonds-numerises/etat-civil-tables-decennales-et-recensements-de",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Registres et tables décennales jusqu'en 1902 pour toutes les communes, jusqu'en 1932 pour quelques communes."
+  },
+  "53": {
+   "name": "Mayenne",
+   "site": "https://archives.lamayenne.fr/page/etat-civil",
+   "acts": {
+    "N": {
+     "until": 1918,
+     "source": "https://archives.lamayenne.fr/article/actu_internte_etat-civil-jusqua-1918",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1918,
+     "source": "https://archives.lamayenne.fr/article/actu_internte_etat-civil-jusqua-1918",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1918,
+     "source": "https://archives.lamayenne.fr/article/actu_internte_etat-civil-jusqua-1918",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Limite variable selon le découpage des registres (ex. Ahuillé jusqu'en 1910 seulement)."
+  },
+  "54": {
+   "name": "Meurthe-et-Moselle",
+   "site": "https://archives.meurthe-et-moselle.fr/archives-en-ligne",
+   "acts": {
+    "M": {
+     "until": 1922,
+     "source": "https://archives.meurthe-et-moselle.fr/archives-en-ligne",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1922,
+     "source": "https://archives.meurthe-et-moselle.fr/archives-en-ligne",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "État civil en ligne jusqu'en 1922 (dates variables selon les communes) ; naissances soumises au délai de 100 ans. Nancy : état civil sur le site des archives municipales (jusqu'en 1945) ; Lunéville : AD jusqu'en 1883, 1884-1922 sur le site municipal."
+  },
+  "55": {
+   "name": "Meuse",
+   "site": "https://archives.meuse.fr/",
+   "acts": {
+    "N": {
+     "until": 1902,
+     "source": "https://archives.meuse.fr/ark:/52669/3f8mgv2xcjd5",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1902,
+     "source": "https://archives.meuse.fr/ark:/52669/3f8mgv2xcjd5",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1902,
+     "source": "https://archives.meuse.fr/ark:/52669/3f8mgv2xcjd5",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   }
+  },
+  "56": {
+   "name": "Morbihan",
+   "site": "https://recherche.archives.morbihan.fr/",
+   "acts": {
+    "N": {
+     "until": 1918,
+     "source": "https://recherche.archives.morbihan.fr/archive/resultats/etatcivil/tableau?REch_commune_Index=828715&REch_commune_Libel=S%C3%A9glien+%28paroisse+et+commune%29&type=etatcivil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1936,
+     "source": "https://recherche.archives.morbihan.fr/archive/resultats/etatcivil/tableau?REch_commune_Index=828715&REch_commune_Libel=S%C3%A9glien+%28paroisse+et+commune%29&type=etatcivil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1936,
+     "source": "https://recherche.archives.morbihan.fr/archive/resultats/etatcivil/tableau?REch_commune_Index=828715&REch_commune_Libel=S%C3%A9glien+%28paroisse+et+commune%29&type=etatcivil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "TD": {
+     "until": 1932,
+     "source": "https://recherche.archives.morbihan.fr/archive/resultats/etatcivil/tableau?REch_commune_Index=828715&REch_commune_Libel=S%C3%A9glien+%28paroisse+et+commune%29&type=etatcivil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Limites maximales indiquées par le moteur de recherche (naissances jusqu'en 1918, voire 1920 pour certains registres) ; variables selon les communes."
+  },
+  "57": {
+   "name": "Moselle",
+   "site": "https://www.archives57.com/",
+   "acts": {
+    "N": {
+     "until": 1904,
+     "source": "https://www.archives57.com/index.php/actualites/autres?start=10",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1904,
+     "source": "https://www.archives57.com/index.php/actualites/autres?start=10",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1904,
+     "source": "https://www.archives57.com/index.php/actualites/autres?start=10",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "TD": {
+     "until": 1952,
+     "source": "https://www.archives57.com/index.php/recherches/archives-en-ligne/94-recherches/",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Moselle (Alsace-Moselle) : tables décennales en ligne (1802-1952) ; état civil 1872-1904 en ligne pour toutes les communes, registres 1793-1871 mis en ligne progressivement. Communes de l'arrondissement de Briey : voir Meurthe-et-Moselle. Actes de certaines communes cédées à la Prusse en 1815 conservés en Allemagne."
+  },
+  "58": {
+   "name": "Nièvre",
+   "site": "https://archives.nievre.fr/",
+   "acts": {}
+  },
+  "59": {
+   "name": "Nord",
+   "site": "https://archivesdepartementales.lenord.fr/page/registres-paroissiaux-et-d-etat-civil",
+   "acts": {},
+   "note": "En ligne : naissances après 100 ans, mariages après 75 ans, décès après 25 ans ; registres mixtes soumis au délai de 100 ans. Année limite non publiée."
+  },
+  "60": {
+   "name": "Oise",
+   "site": "https://archives.oise.fr/rechercher/archives-en-ligne/etat-civil",
+   "acts": {
+    "TD": {
+     "until": 1942,
+     "source": "https://archives.oise.fr/rechercher/archives-en-ligne/etat-civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Actes N/M/D en ligne pour les registres antérieurs à 1923-1926 selon les pages (contradictoires) ; registres paroissiaux jusqu'en 1792."
+  },
+  "61": {
+   "name": "Orne",
+   "site": "https://archives.orne.fr/etat-civil",
+   "acts": {
+    "N": {
+     "until": 1902,
+     "source": "https://archives.orne.fr/etat-civil-aide-la-consultation",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1902,
+     "source": "https://archives.orne.fr/etat-civil-aide-la-consultation",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1902,
+     "source": "https://archives.orne.fr/etat-civil-aide-la-consultation",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "TD": {
+     "until": 1942,
+     "source": "https://archives.orne.fr/etat-civil-aide-la-consultation",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   }
+  },
+  "62": {
+   "name": "Pas-de-Calais",
+   "site": "https://www.archivespasdecalais.fr/Chercher/Archives-numerisees/Etat-civil",
+   "acts": {
+    "N": {
+     "until": 1922,
+     "source": "https://www.archivespasdecalais.fr/Chercher/Archives-numerisees/Etat-civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1942,
+     "source": "https://www.archivespasdecalais.fr/Chercher/Archives-numerisees/Etat-civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1942,
+     "source": "https://www.archivespasdecalais.fr/Chercher/Archives-numerisees/Etat-civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "TD": {
+     "until": 1942,
+     "source": "https://www.archivespasdecalais.fr/Chercher/Archives-numerisees/Etat-civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "BMS": {
+     "from": 1553,
+     "source": "https://www.archivespasdecalais.fr/Chercher/Archives-numerisees/Etat-civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Registres mixtes diffusés une fois tous les délais écoulés : limites variables selon les communes."
+  },
+  "63": {
+   "name": "Puy-de-Dôme",
+   "site": "https://www.archivesdepartementales.puy-de-dome.fr/",
+   "acts": {
+    "N": {
+     "until": 1912,
+     "source": "https://www.archivesdepartementales.puy-de-dome.fr/archive/actualites/etat-civil-en-ligne-111/page:1/n:71",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1912,
+     "source": "https://www.archivesdepartementales.puy-de-dome.fr/archive/actualites/etat-civil-en-ligne-111/page:1/n:71",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1912,
+     "source": "https://www.archivesdepartementales.puy-de-dome.fr/archive/actualites/etat-civil-en-ligne-111/page:1/n:71",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Toutes les communes jusqu'en 1912 ; certains registres numérisés non diffusables (salle de lecture) ; quelques communes conservent leurs registres en mairie."
+  },
+  "64": {
+   "name": "Pyrénées-Atlantiques",
+   "site": "https://archives.le64.fr/faire-une-recherche/collections-en-ligne.html/",
+   "acts": {},
+   "note": "Couverture commune par commune (date maximale généralement 1908 selon un article ancien de RFG) ; offre numérique signalée incomplète pour raisons techniques. À vérifier."
+  },
+  "65": {
+   "name": "Hautes-Pyrénées",
+   "site": "https://archivesenligne65.fr/",
+   "acts": {}
+  },
+  "66": {
+   "name": "Pyrénées-Orientales",
+   "site": "https://archives.ledepartement66.fr/",
+   "acts": {
+    "N": {
+     "until": 1902,
+     "source": "https://www.rfgenealogie.com/infos/pyrenees-orientales-ouverture-des-archives-en-ligne",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "M": {
+     "until": 1902,
+     "source": "https://www.rfgenealogie.com/infos/pyrenees-orientales-ouverture-des-archives-en-ligne",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "D": {
+     "until": 1902,
+     "source": "https://www.rfgenealogie.com/infos/pyrenees-orientales-ouverture-des-archives-en-ligne",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    }
+   },
+   "note": "Article ancien : registres paroissiaux du XVIe siècle à 1792 et état civil 1793-1902 ; images en partie issues des mairies. Limite actuelle probablement plus récente."
+  },
+  "67": {
+   "name": "Bas-Rhin",
+   "site": "https://archives.alsace.eu/",
+   "acts": {},
+   "note": "Alsace (Archives d'Alsace, site de Strasbourg) : état civil N/M en ligne jusqu'en 1892 ou 1912 selon les localités, décès jusqu'en 1922 selon une autre page ; registres paroissiaux catholiques, luthériens et réformés du XVIe siècle à 1792. En Alsace-Moselle, l'état civil 1871-1918 est tenu en allemand. À vérifier."
+  },
+  "68": {
+   "name": "Haut-Rhin",
+   "site": "https://archives68.alsace.eu/",
+   "acts": {},
+   "note": "Alsace (Archives d'Alsace, site de Colmar) : état civil 1793-1892 en ligne, jusqu'en 1902 pour naissances et mariages selon RFG ; registres paroissiaux mis en ligne depuis 2020 par ordre alphabétique inversé. Registres restés en commune (Colmar, Guebwiller, Huningue, Mulhouse) traités en fin de projet. À vérifier."
+  },
+  "69": {
+   "name": "Rhône",
+   "site": "https://archives.rhone.fr/",
+   "acts": {
+    "N": {
+     "until": 1922,
+     "source": "https://www.rfgenealogie.com/infos/archives-du-rhone-l-etat-civil-de-1922-et-un-nouveau-fonds-cinema",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "TD": {
+     "until": 1922,
+     "source": "https://www.rfgenealogie.com/infos/archives-du-rhone-l-etat-civil-de-1922-et-un-nouveau-fonds-cinema",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    }
+   },
+   "note": "Selon RFG, mariages en ligne jusqu'en 1947 et décès jusqu'en 1949 (publication plus récente, à vérifier). Lyon : état civil sur le site des Archives municipales de Lyon (service distinct)."
+  },
+  "70": {
+   "name": "Haute-Saône",
+   "site": "https://archives.haute-saone.fr/n/archives-numerisees/n:118",
+   "acts": {
+    "N": {
+     "until": 1922,
+     "source": "https://archives.haute-saone.fr/n/archives-numerisees/n:118",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1922,
+     "source": "https://archives.haute-saone.fr/n/archives-numerisees/n:118",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1922,
+     "source": "https://archives.haute-saone.fr/n/archives-numerisees/n:118",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "TD": {
+     "until": 1922,
+     "source": "https://archives.haute-saone.fr/n/archives-numerisees/n:118",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "BMS": {
+     "from": 1550,
+     "source": "https://archives.haute-saone.fr/n/archives-numerisees/n:118",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   }
+  },
+  "71": {
+   "name": "Saône-et-Loire",
+   "site": "https://www.archives71.fr/consulter/en-ligne/familles-et-individus/etat-civil",
+   "acts": {
+    "N": {
+     "until": 1902,
+     "source": "https://www.geneanet.org/forum/viewtopic.php?p=2974217",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "M": {
+     "until": 1902,
+     "source": "https://www.geneanet.org/forum/viewtopic.php?p=2974217",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "D": {
+     "until": 1902,
+     "source": "https://www.geneanet.org/forum/viewtopic.php?p=2974217",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    }
+   },
+   "note": "Forum Geneanet : état civil postérieur à 1902 conservé par les communes (non versé) ; tables décennales postérieures à 1902 parfois en ligne."
+  },
+  "72": {
+   "name": "Sarthe",
+   "site": "https://archives.sarthe.fr/",
+   "acts": {
+    "N": {
+     "until": 1902,
+     "source": "https://en.geneanet.org/forum/viewtopic.php?p=2968407",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "M": {
+     "until": 1902,
+     "source": "https://en.geneanet.org/forum/viewtopic.php?p=2968407",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "D": {
+     "until": 1902,
+     "source": "https://en.geneanet.org/forum/viewtopic.php?p=2968407",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    }
+   },
+   "note": "Forum Geneanet citant les AD72 : registres et tables décennales postérieurs à 1902 non versés aux Archives départementales."
+  },
+  "73": {
+   "name": "Savoie",
+   "site": "https://recherche-archives.savoie.fr/",
+   "acts": {},
+   "note": "De 1815 à 1860 (Savoie sarde), pas d'état civil : recourir aux registres paroissiaux. Limites en ligne à vérifier."
+  },
+  "74": {
+   "name": "Haute-Savoie",
+   "site": "https://archives.hautesavoie.fr/",
+   "acts": {
+    "N": {
+     "until": 1919,
+     "source": "https://www.rfgenealogie.com/infos/la-haute-savoie-donne-un-nouveau-relief-a-ses-archives-sur-internet",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "M": {
+     "until": 1919,
+     "source": "https://www.rfgenealogie.com/infos/la-haute-savoie-donne-un-nouveau-relief-a-ses-archives-sur-internet",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "D": {
+     "until": 1919,
+     "source": "https://www.rfgenealogie.com/infos/la-haute-savoie-donne-un-nouveau-relief-a-ses-archives-sur-internet",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    }
+   },
+   "note": "Article RFG (non daté) sur la refonte du portail : registres disponibles jusqu'en 1919 ; limite actuelle possiblement plus récente. Avant 1860, registres paroissiaux confiés par le diocèse et numérisés par vagues."
+  },
+  "75": {
+   "name": "Paris",
+   "site": "https://archives.paris.fr/archives-numerisees/etat-civil-de-paris",
+   "acts": {
+    "N": {
+     "until": 1924,
+     "source": "https://www.paris.fr/pages/plongez-dans-les-archives-numerisees-de-la-ville-de-paris-7679",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1945,
+     "source": "https://www.paris.fr/pages/plongez-dans-les-archives-numerisees-de-la-ville-de-paris-7679",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1986,
+     "source": "https://www.paris.fr/pages/plongez-dans-les-archives-numerisees-de-la-ville-de-paris-7679",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "TD": {
+     "until": 1932,
+     "source": "https://www.paris.fr/pages/plongez-dans-les-archives-numerisees-de-la-ville-de-paris-7679",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Registres antérieurs à 1860 détruits en 1871 : état civil reconstitué (XVIe s.-1859), naissances et mariages consultables en ligne avec le fichier alphabétique de la 1re reconstitution ; décès reconstitués et 2e reconstitution en salle de lecture (microfilms). Tables : naissances jusqu'en 1932, mariages 1974, décès 1986. Un guide des Archives de Paris (janv. 2022) donne mariages jusqu'en 1943."
+  },
+  "76": {
+   "name": "Seine-Maritime",
+   "site": "https://www.archivesdepartementales76.net/",
+   "acts": {
+    "N": {
+     "until": 1918,
+     "source": "https://archives.lehavre.fr/sites/default/files/2019-06/g%C3%A9n%C3%A9alogie-public.pdf",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "M": {
+     "until": 1935,
+     "source": "https://archives.lehavre.fr/sites/default/files/2019-06/g%C3%A9n%C3%A9alogie-public.pdf",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "D": {
+     "until": 1935,
+     "source": "https://archives.lehavre.fr/sites/default/files/2019-06/g%C3%A9n%C3%A9alogie-public.pdf",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    }
+   },
+   "note": "Fiche des Archives municipales du Havre (2019) décrivant le site des AD76 ; registres de naissances de moins de 100 ans non diffusés."
+  },
+  "77": {
+   "name": "Seine-et-Marne",
+   "site": "https://archives.seine-et-marne.fr/fr/etat-civil",
+   "acts": {
+    "TD": {
+     "until": 1937,
+     "source": "https://archives.seine-et-marne.fr/fr/archives-numerisees",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Pages officielles contradictoires pour les registres (1885-1940, 1913, 1920) ; délais CNIL : naissances 100 ans, mariages 75 ans, décès 25 ans."
+  },
+  "78": {
+   "name": "Yvelines",
+   "site": "https://archives.yvelines.fr/rechercher/archives-en-ligne/registres-paroissiaux-et-detat-civil",
+   "acts": {},
+   "note": "Selon RFG (ancien) : naissances et mariages 1792-1916 en ligne, décès jusqu'aux années 1950 pour quelques communes, tables décennales 1792-1952 (lacunaires après 1932). À vérifier."
+  },
+  "79": {
+   "name": "Deux-Sèvres",
+   "site": "https://archives-deux-sevres-vienne.fr/",
+   "acts": {},
+   "note": "Portail commun Deux-Sèvres/Vienne. Limite en libre accès 1902 ou 1912 selon les sources ; naissances et mariages de moins de 100 ans (env. 1913-1952) via la salle de lecture virtuelle (espace personnel). À vérifier."
+  },
+  "80": {
+   "name": "Somme",
+   "site": "https://archives.somme.fr/",
+   "acts": {},
+   "note": "Amiens : registres sur le site des archives municipales (naissances, mariages, décès jusqu'en 1920 ; tables 1773-1942). Limite départementale à vérifier."
+  },
+  "81": {
+   "name": "Tarn",
+   "site": "https://archives.tarn.fr/rechercher/archives-et-images-en-ligne/documents-numerises/registres-paroissiaux-et-detat-civil",
+   "acts": {
+    "TD": {
+     "until": 1982,
+     "source": "https://archives.tarn.fr/rechercher/archives-et-images-en-ligne/documents-numerises/registres-paroissiaux-et-detat-civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Tables décennales jusqu'en 1982 pour la plupart des communes ; registres numérisés jusqu'aux années 1950 (arrondissement d'Albi) et 1932 (Castres), diffusion en ligne limitée aux registres de plus de 100 ans."
+  },
+  "82": {
+   "name": "Tarn-et-Garonne",
+   "site": "https://www.archives82.fr/",
+   "acts": {
+    "N": {
+     "until": 1922,
+     "source": "https://www.archives82.fr/index.php?id=2151",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1932,
+     "source": "https://www.archives82.fr/index.php?id=2151",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1932,
+     "source": "https://www.archives82.fr/index.php?id=2151",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Naissances jusqu'en 1922/1923 ; mariages et décès jusqu'en 1932/1933 sauf s'ils sont sur des registres communs avec les naissances ; publications de bans jusqu'en 1927. Une autre page officielle (ancienne) indique 1913."
+  },
+  "83": {
+   "name": "Var",
+   "site": "https://archives.var.fr/",
+   "acts": {
+    "N": {
+     "until": 1912,
+     "source": "https://archives.var.fr/arkotheque/consult_fonds/index.php?ref_fonds=2&action=1&todo=modif_recherche",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1912,
+     "source": "https://archives.var.fr/arkotheque/consult_fonds/index.php?ref_fonds=2&action=1&todo=modif_recherche",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1912,
+     "source": "https://archives.var.fr/arkotheque/consult_fonds/index.php?ref_fonds=2&action=1&todo=modif_recherche",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Collection du greffe jusqu'en 1912 (Toulon) ou 1912/1914 (Brignoles, Draguignan) ; certaines communes jusqu'en 1927, 1932, voire 1942."
+  },
+  "84": {
+   "name": "Vaucluse",
+   "site": "https://archives.vaucluse.fr/",
+   "acts": {
+    "N": {
+     "until": 1922,
+     "source": "https://archives.vaucluse.fr/ma-recherche-genealogique/je-debute-ma-recherche/je-cherche-un-acte-d-etat-civil-date-entre-1792-et-1922-2196.html",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1922,
+     "source": "https://archives.vaucluse.fr/ma-recherche-genealogique/je-debute-ma-recherche/je-cherche-un-acte-d-etat-civil-date-entre-1792-et-1922-2196.html",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1922,
+     "source": "https://archives.vaucluse.fr/ma-recherche-genealogique/je-debute-ma-recherche/je-cherche-un-acte-d-etat-civil-date-entre-1792-et-1922-2196.html",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "TD": {
+     "until": 1932,
+     "source": "https://archives.vaucluse.fr/ma-recherche-genealogique/je-debute-ma-recherche/je-cherche-un-acte-d-etat-civil-date-entre-1923-et-1932-2195.html",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Registres 1923-1932 non en ligne (tables décennales seulement) ; registres postérieurs à 1932 non versés (s'adresser à la commune)."
+  },
+  "85": {
+   "name": "Vendée",
+   "site": "https://www.archives.vendee.fr/",
+   "acts": {
+    "N": {
+     "until": 1912,
+     "source": "https://www.archives.vendee.fr/Connaitre-les-Archives/Actualites-archivees2/2019/Toujours-plus-d-etat-civil-en-ligne",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1940,
+     "source": "https://www.archives.vendee.fr/Connaitre-les-Archives/Actualites-archivees2/2019/Toujours-plus-d-etat-civil-en-ligne",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1950,
+     "source": "https://www.archives.vendee.fr/Connaitre-les-Archives/Actualites-archivees2/2019/Toujours-plus-d-etat-civil-en-ligne",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "TD": {
+     "until": 1942,
+     "source": "https://www.archives.vendee.fr/Connaitre-les-Archives/Actualites-archivees2/2019/Toujours-plus-d-etat-civil-en-ligne",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Situation annoncée en 2019 ; limites probablement étendues depuis."
+  },
+  "86": {
+   "name": "Vienne",
+   "site": "https://archives-deux-sevres-vienne.fr/",
+   "acts": {},
+   "note": "Portail commun Deux-Sèvres/Vienne ; naissances et mariages de moins de 100 ans via la salle de lecture virtuelle. Limites à vérifier."
+  },
+  "87": {
+   "name": "Haute-Vienne",
+   "site": "https://archives.haute-vienne.fr/rechercher/archives-en-ligne/etat-civil",
+   "acts": {
+    "N": {
+     "until": 1918,
+     "source": "https://archives.haute-vienne.fr/rechercher/archives-en-ligne/etat-civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1948,
+     "source": "https://archives.haute-vienne.fr/rechercher/archives-en-ligne/etat-civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1950,
+     "source": "https://archives.haute-vienne.fr/rechercher/archives-en-ligne/etat-civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Une autre page officielle indique naissances jusqu'en 1923 inclus ; décès jusqu'en 1952 pour Oradour-sur-Glane ; naissances et mariages 1949-1950 sur dérogation."
+  },
+  "88": {
+   "name": "Vosges",
+   "site": "https://archives.vosges.fr/recherches-en-ligne/",
+   "acts": {
+    "N": {
+     "until": 1923,
+     "source": "https://archives.vosges.fr/recherches-en-ligne/",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1923,
+     "source": "https://archives.vosges.fr/recherches-en-ligne/",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1923,
+     "source": "https://archives.vosges.fr/recherches-en-ligne/",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Délai de 100 ans pour la diffusion en ligne ; une partie des registres R à Z (1905-1933) temporairement retirée pour numérisation."
+  },
+  "89": {
+   "name": "Yonne",
+   "site": "https://archives.yonne.fr/archive/recherche/etatcivil/n:157",
+   "acts": {},
+   "note": "Ressorts d'Avallon et Joigny : registres généralement numérisés jusqu'en 1932 ; registres clos depuis 75 à 100 ans via un accès certifié. Limite en accès libre à vérifier."
+  },
+  "90": {
+   "name": "Territoire de Belfort",
+   "site": "https://archives.territoiredebelfort.fr/",
+   "acts": {
+    "N": {
+     "until": 1900,
+     "source": "https://archives.territoiredebelfort.fr/search/results?target=controlledAccessSubject&keyword=%C3%A9tat+civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1900,
+     "source": "https://archives.territoiredebelfort.fr/search/results?target=controlledAccessSubject&keyword=%C3%A9tat+civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1900,
+     "source": "https://archives.territoiredebelfort.fr/search/results?target=controlledAccessSubject&keyword=%C3%A9tat+civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "« L'état civil des origines à 1900 a été numérisé » ; mise en ligne postérieure à 1900 non confirmée."
+  },
+  "91": {
+   "name": "Essonne",
+   "site": "https://archives.essonne.fr/",
+   "acts": {}
+  },
+  "92": {
+   "name": "Hauts-de-Seine",
+   "site": "https://archives.hauts-de-seine.fr/n/genealogie/n:245",
+   "acts": {
+    "N": {
+     "until": 1923,
+     "source": "https://archives.hauts-de-seine.fr/actualites/archives-de-l-etat-civil-registres-des-actes-de-naissance-de-l-annee-39/n:269",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1942,
+     "source": "https://archives.hauts-de-seine.fr/actualites/mise-en-ligne-des-actes-de-mariages-a-12/n:269",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1952,
+     "source": "https://archives.hauts-de-seine.fr/wform/wform/fill/etat_civil/n:305",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Recherche par commune uniquement (pas de recherche nominative). Naissances 1923-1952 et mariages postérieurs : demande de copie."
+  },
+  "93": {
+   "name": "Seine-Saint-Denis",
+   "site": "https://archives.seinesaintdenis.fr/",
+   "acts": {
+    "N": {
+     "until": 1923,
+     "source": "https://archives.seinesaintdenis.fr/actualites/la-famille-s-agrandit-46/n:54",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Registres paroissiaux numérisés depuis le XVIe siècle ; registres d'état civil jusqu'en 1944 pour certaines communes. Limites mariages/décès à vérifier."
+  },
+  "94": {
+   "name": "Val-de-Marne",
+   "site": "https://archives.valdemarne.fr/recherches/archives-en-ligne/etat-civil",
+   "acts": {
+    "N": {
+     "until": 1921,
+     "source": "https://archives.valdemarne.fr/recherches/archives-en-ligne/etat-civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1921,
+     "source": "https://archives.valdemarne.fr/recherches/archives-en-ligne/etat-civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1921,
+     "source": "https://archives.valdemarne.fr/recherches/archives-en-ligne/etat-civil",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Mariages et décès en ligne jusqu'en 1937 selon les communes ; tables décennales en ligne si plus de 75 ans."
+  },
+  "95": {
+   "name": "Val-d'Oise",
+   "site": "https://archives.valdoise.fr/",
+   "acts": {
+    "M": {
+     "until": 1932,
+     "source": "https://www.rfgenealogie.com/infos/le-val-d-oise-ajoute-plus-de-30-ans-d-etat-civil-en-ligne-et-de-nombreux-inventaires",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "D": {
+     "until": 1932,
+     "source": "https://www.rfgenealogie.com/infos/le-val-d-oise-ajoute-plus-de-30-ans-d-etat-civil-en-ligne-et-de-nombreux-inventaires",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    }
+   },
+   "note": "Selon RFG : mariages et décès en ligne jusqu'en 1932, naissances soumises au délai de 100 ans."
+  },
+  "971": {
+   "name": "Guadeloupe",
+   "site": "https://www.archivesguadeloupe.fr/",
+   "acts": {},
+   "note": "ANOM (anom.archivesnationales.culture.gouv.fr/caomec2) : état civil de la Guadeloupe (3e exemplaire) consultable en ligne pour 1639-1907 ; au-delà, s'adresser aux Archives départementales. Limites du site des AD à vérifier."
+  },
+  "972": {
+   "name": "Martinique",
+   "site": "https://www.patrimoines-martinique.org/",
+   "acts": {},
+   "note": "Archives territoriales (Banque numérique des patrimoines martiniquais) : Fort-de-France 1900-1926 partiellement en ligne (naissances, reconnaissances, décès) selon RFG. ANOM : registres post-révolutionnaires jusqu'en 1907-1909 environ. À vérifier."
+  },
+  "973": {
+   "name": "Guyane",
+   "acts": {},
+   "note": "ANOM (caomec2) : état civil de la Guyane consultable en ligne pour 1677-1907. Site des archives territoriales non vérifié."
+  },
+  "974": {
+   "name": "La Réunion",
+   "acts": {},
+   "note": "Registres paroissiaux et d'état civil en ligne sur le site de l'ANOM (avant 1907 environ) ; site des AD de La Réunion signalé indisponible un temps après un incident informatique. Limites à vérifier."
+  },
+  "976": {
+   "name": "Mayotte",
+   "acts": {},
+   "note": "État civil de Mayotte en ligne sur le site de l'ANOM (originaux conservés à Aix-en-Provence) ; les AD de Mayotte ne le diffusent pas. Limites à vérifier."
+  },
+  "01": {
+   "name": "Ain",
+   "site": "https://www.archives.ain.fr/",
+   "acts": {}
+  },
+  "02": {
+   "name": "Aisne",
+   "site": "https://archives.aisne.fr/",
+   "acts": {},
+   "note": "Mise en ligne glissante : naissances et mariages après 100 ans, décès après 25 ans, tables décennales après 50 ans (règle CNIL 2012). Registres après 1905 en ligne en partie seulement."
+  },
+  "03": {
+   "name": "Allier",
+   "site": "https://recherche.archives.allier.fr/archives-en-ligne/genealogie-histoire-des-familles/etat-civil-en-ligne",
+   "acts": {
+    "TD": {
+     "until": 1952,
+     "source": "https://recherche.archives.allier.fr/archives-en-ligne/genealogie-histoire-des-familles/etat-civil-en-ligne",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Actes en ligne jusqu'en 1924 pour certaines communes seulement (mariages jusqu'en 1945 pour d'autres) : limite variable selon la commune."
+  },
+  "04": {
+   "name": "Alpes-de-Haute-Provence",
+   "site": "https://archives04.fr/",
+   "acts": {
+    "N": {
+     "until": 1922,
+     "source": "https://www.rfgenealogie.com/infos/alpes-de-haute-provence-nouveaux-registres-d-etat-civil-de-1843-a-1922",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "M": {
+     "until": 1922,
+     "source": "https://www.rfgenealogie.com/infos/alpes-de-haute-provence-nouveaux-registres-d-etat-civil-de-1843-a-1922",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    },
+    "D": {
+     "until": 1922,
+     "source": "https://www.rfgenealogie.com/infos/alpes-de-haute-provence-nouveaux-registres-d-etat-civil-de-1843-a-1922",
+     "checked": "2026-11-20",
+     "confidence": "secondaire",
+     "verified": false
+    }
+   },
+   "note": "Selon RFG, actes jusqu'en 1922 en ligne (dernière série de registres numérisée) ; actes jusqu'en 1942 numérisés mais consultables seulement en salle de lecture à Digne-les-Bains."
+  },
+  "05": {
+   "name": "Hautes-Alpes",
+   "site": "https://archives.hautes-alpes.fr/",
+   "acts": {
+    "N": {
+     "until": 1925,
+     "source": "https://archives.hautes-alpes.fr/archive/recherche/hypotheques/n:204",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1925,
+     "source": "https://archives.hautes-alpes.fr/archive/recherche/hypotheques/n:204",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1925,
+     "source": "https://archives.hautes-alpes.fr/archive/recherche/hypotheques/n:204",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Actualité du site : « Les actes d'état civil de 1925 de toutes les communes du département sont désormais diffusés » (encart d'actualité, non daté)."
+  },
+  "06": {
+   "name": "Alpes-Maritimes",
+   "site": "https://archives06.fr/",
+   "acts": {},
+   "note": "Application État civil : actes du XVIe au XXe siècle pour toutes les communes ; limites non précisées."
+  },
+  "07": {
+   "name": "Ardèche",
+   "site": "https://archives.ardeche.fr/n/archives-numerisees-et-numeriques/n:1",
+   "acts": {},
+   "note": "Selon RFG (juillet 2025) : mise en ligne de 773 registres du XXe siècle, état civil numérisé jusqu'en 1932 pour toutes les communes (au-delà pour certaines) ; conditions d'accès aux actes de moins de 100 ans non précisées, à vérifier. Annonay mise en ligne progressivement."
+  },
+  "08": {
+   "name": "Ardennes",
+   "site": "https://archives.cd08.fr/archives-numerisees/sources-genealogiques/registres-paroissiaux-et-detat-civil",
+   "acts": {},
+   "note": "Nombreuses communes (surtout au sud) ont perdu leur état civil pendant la Première Guerre mondiale ; reconstitutions partielles (loi du 15/12/1923) en ligne. Limites à vérifier."
+  },
+  "09": {
+   "name": "Ariège",
+   "site": "https://archives.ariege.fr/rechercher-et-consulter/archives-en-ligne/etat-civil/",
+   "acts": {
+    "N": {
+     "until": 1919,
+     "source": "https://archives.ariege.fr/rechercher-et-consulter/archives-en-ligne/etat-civil/",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "M": {
+     "until": 1922,
+     "source": "https://archives.ariege.fr/rechercher-et-consulter/archives-en-ligne/etat-civil/",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "D": {
+     "until": 1922,
+     "source": "https://archives.ariege.fr/rechercher-et-consulter/archives-en-ligne/etat-civil/",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "TD": {
+     "until": 1932,
+     "source": "https://archives.ariege.fr/rechercher-et-consulter/archives-en-ligne/etat-civil/",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    },
+    "BMS": {
+     "from": 1551,
+     "source": "https://archives.ariege.fr/rechercher-et-consulter/archives-en-ligne/etat-civil/",
+     "checked": "2026-11-20",
+     "confidence": "officielle",
+     "verified": false
+    }
+   },
+   "note": "Mariages, publications et décès jusqu'en 1922, voire 1932 selon les communes (reliure des registres) ; registres mixtes contenant des naissances de moins de 100 ans non mis en ligne."
+  },
+  "2A": {
+   "name": "Corse-du-Sud",
+   "site": "https://archives.isula.corsica/",
+   "acts": {},
+   "note": "Archives de la Collectivité de Corse (site unique depuis 2020). État civil introduit en Corse-du-Sud après août 1796 ; tables décennales à partir de 1803. Limites en ligne à vérifier."
+  },
+  "2B": {
+   "name": "Haute-Corse",
+   "site": "https://archives.isula.corsica/",
+   "acts": {},
+   "note": "Archives de la Collectivité de Corse (site unique depuis 2020). Lacunes dues au bombardement du greffe de Bastia (1943). Limites en ligne à vérifier."
+  }
+ }
+}

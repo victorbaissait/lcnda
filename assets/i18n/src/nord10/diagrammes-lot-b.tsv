@@ -1,0 +1,233 @@
+fr ¦ sq ¦ mt
+# Zone « diagrammes-lot-b » : diagramme de Lexis, ternaire, chandeliers, courbe avec marge, horizon, dendrogramme, durée des générations, couverture des sources, trajectoires de vie, alluvial (heritage-diagram-lot-b.js et réglages de heritage-diagram-plus/vie/famille.js, heritage-diagrams-render.js)
+=vie ¦ jetë|jetë ¦ ħajja|ħajjiet|ħajjiet|ħajja|ħajja
+=période ¦ periudhë|periudha ¦ perjodu|perjodi|perjodi|perjodu|perjodu
+Célibataire ¦ Beqar/e ¦ Xebba/Ġuvni
+Marié(e) ¦ I/e martuar ¦ Miżżewweġ/a
+Remarié(e) ¦ I/e rimartuar ¦ Reġa’ miżżewweġ/a
+Veuf ou veuve ¦ I/e ve ¦ Armel jew armla
+Divorcé(e) ¦ I/e divorcuar ¦ Iddivorzjat/a
+Décédé(e) ¦ I/e vdekur ¦ Mejjet/a
+État civil inconnu ¦ Gjendje civile e panjohur ¦ Stat ċivili mhux magħruf
+Métier inconnu ¦ Profesion i panjohur ¦ Xogħol mhux magħruf
+Pays inconnu ¦ Vend i panjohur ¦ Pajjiż mhux magħruf
+Autres états ¦ Gjendje të tjera ¦ Stati oħra
+Sexe inconnu ¦ Gjinia e panjohur ¦ Sess mhux magħruf
+Départ (autre commune) ¦ Largim (komunë tjetër) ¦ Tluq (lokalità oħra)
+Ajoute des personnes : le nom, la naissance et le décès (années ou dates). ¦ Shto persona: emrin, lindjen dhe vdekjen (vite ose data). ¦ Żid persuni: l-isem, it-twelid u l-mewt (snin jew dati).
+Diagramme de Lexis : {n}, de {a} à {b}. ¦ Diagrami Lexis: {n}, nga {a} deri në {b}. ¦ Dijagramma ta’ Lexis: {n}, minn {a} sa {b}.
+Choléra ¦ Kolera ¦ Kolera
+Guerre de 1870 ¦ Lufta e 1870 ¦ Il-gwerra tal-1870
+Grande Guerre ¦ Lufta e Madhe ¦ L-Ewwel Gwerra Dinjija
+📐 Les vies de ma base ¦ 📐 Jetët në bazën time ¦ 📐 Il-ħajjiet fid-database tiegħi
+Chaque vie devient une diagonale, de la naissance (âge 0) au décès ; les mariages, les naissances des enfants et les départs posés dessus. ¦ Çdo jetë bëhet një diagonale, nga lindja (mosha 0) te vdekja; mbi të martesat, lindjet e fëmijëve dhe largimet. ¦ Kull ħajja ssir dijagonali, mit-twelid (età 0) sal-mewt; fuqha ż-żwiġijiet, it-twelid tat-tfal u t-tluq.
+Combien de vies au plus ¦ Sa jetë më së shumti ¦ Kemm ħajjiet l-aktar
+Une par nom de famille ¦ Një për mbiemër ¦ Waħda għal kull kunjom
+Naissances des enfants ¦ Lindjet e fëmijëve ¦ It-twelid tat-tfal
+Départs (première commune autre que celle de naissance) ¦ Largime (komuna e parë jashtë vendlindjes) ¦ Tluq (l-ewwel lokalità barra mill-post tat-twelid)
+Bandes historiques (guerres, épidémies) ¦ Breza historike (luftëra, epidemi) ¦ Faxex storiċi (gwerer, epidemiji)
+Personne avec une date de naissance dans ce groupe. ¦ Askush me datë lindjeje në këtë grup. ¦ Ħadd b’data tat-twelid f’dan il-grupp.
+Diagramme de Lexis ¦ Diagrami Lexis ¦ Dijagramma ta’ Lexis
+Diagramme de Lexis (âge × année : une vie = une diagonale) ¦ Diagrami Lexis (mosha × viti: një jetë = një diagonale) ¦ Dijagramma ta’ Lexis (età × sena: ħajja = dijagonali)
+Les années en bas, les âges à gauche : chaque vie monte en diagonale de sa naissance à son décès ; les mariages, les enfants, les départs et les grandes crises s’y lisent d’un coup d’œil. ¦ Poshtë vitet, majtas moshat: çdo jetë ngjitet diagonalisht nga lindja te vdekja; martesat, fëmijët, largimet dhe krizat e mëdha lexohen me një shikim. ¦ Is-snin isfel, l-etajiet fuq ix-xellug: kull ħajja titla’ dijagonalment mit-twelid sal-mewt; iż-żwiġijiet, it-tfal, it-tluq u l-kriżijiet kbar jinqraw f’daqqa t’għajn.
+Les vies ¦ Jetët ¦ Il-ħajjiet
+Les vies de la famille {name} ¦ Jetët e familjes {name} ¦ Il-ħajjiet tal-familja {name}
+Personne (même nom que ci-dessus) ¦ Personi (i njëjti emër si më lart) ¦ Persuna (l-istess isem bħal fuq)
+Les marques (sur la vie de la personne) ¦ Shenjat (në jetën e personit) ¦ Il-marki (fuq il-ħajja tal-persuna)
+Bandes historiques ¦ Breza historike ¦ Faxex storiċi
+Groupe (couleur) ¦ Grup (ngjyra) ¦ Grupp (kulur)
+Couleur de chaque groupe (facultatif) ¦ Ngjyra e çdo grupi (opsionale) ¦ Kulur ta’ kull grupp (mhux obbligatorju)
+Âge au plus ¦ Mosha më së shumti ¦ Età l-aktar
+Couleur des vies ¦ Ngjyra e jetëve ¦ Kulur tal-ħajjiet
+Homme / femme ¦ Burrë / grua ¦ Raġel / mara
+Montrer les marques ¦ Shfaq shenjat ¦ Uri l-marki
+Taille des marques ¦ Madhësia e shenjave ¦ Daqs tal-marki
+Nom des bandes ¦ Emrat e brezave ¦ Isem il-faxex
+Diagonales des générations ¦ Diagonalet e brezave ¦ Dijagonali tal-ġenerazzjonijiet
+Nom au bout de chaque vie ¦ Emri në fund të çdo jete ¦ Isem fl-aħħar ta’ kull ħajja
+Épaisseur des vies ¦ Trashësia e jetëve ¦ Ħxuna tal-ħajjiet
+Ajoute des points : un nom et ses trois parts (des nombres ou des %). ¦ Shto pika: një emër dhe tri pjesët e tij (numra ose %). ¦ Żid punti: isem u t-tliet partijiet tiegħu (numri jew %).
+Part A ¦ Pjesa A ¦ Parti A
+Part B ¦ Pjesa B ¦ Parti B
+Part C ¦ Pjesa C ¦ Parti C
+Diagramme ternaire : {n} ({a}, {b}, {c}). ¦ Diagram trekëndor: {n} ({a}, {b}, {c}). ¦ Dijagramma trijangolari: {n} ({a}, {b}, {c}).
+Agriculture ¦ Bujqësi ¦ Agrikoltura
+Artisanat et industrie ¦ Zejtari dhe industri ¦ Snajja u industrija
+Commerce et services ¦ Tregti dhe shërbime ¦ Kummerċ u servizzi
+Agriculture et forêt ¦ Bujqësi dhe pyje ¦ Agrikoltura u foresti
+Artisanat ¦ Zejtari ¦ Snajja
+Industrie, mines ¦ Industri, miniera ¦ Industrija, minjieri
+Transports et mer ¦ Transport dhe det ¦ Trasport u baħar
+Services, domestiques ¦ Shërbime, shërbëtorë ¦ Servizzi, qaddejja
+Armée et police ¦ Ushtri dhe polici ¦ Armata u pulizija
+Clergé ¦ Kleri ¦ Kleru
+Professions libérales, école, administration ¦ Profesione të lira, shkollë, administratë ¦ Professjonijiet, skola, amministrazzjoni
+Rentiers, rangs et statuts ¦ Rentierë, ranguar dhe statuse ¦ Sidien ta’ dħul, gradi u status
+Au foyer, sans profession ¦ Në shtëpi, pa profesion ¦ Fid-dar, bla xogħol
+Autre métier ¦ Profesion tjetër ¦ Xogħol ieħor
+Tous les autres métiers ¦ Të gjitha profesionet e tjera ¦ Ix-xogħlijiet l-oħra kollha
+🔺 Les métiers de ma base ¦ 🔺 Profesionet në bazën time ¦ 🔺 Ix-xogħlijiet fid-database tiegħi
+Les métiers (fiche, événements « Profession », recensements) rangés en grands secteurs ; un point par commune de naissance, par décennie ou par famille, placé selon ses trois parts. ¦ Profesionet (skedë, ngjarje «Profesion», regjistrime) të ndara në sektorë të mëdhenj; një pikë për komunë lindjeje, dekadë ose familje, vendosur sipas tri pjesëve të saj. ¦ Ix-xogħlijiet (skeda, avvenimenti “Professjoni”, ċensimenti) miġbura f’setturi kbar; punt għal kull post tat-twelid, deċennju jew familja, imqiegħed skont it-tliet partijiet tiegħu.
+Un point par ¦ Një pikë për ¦ Punt għal kull
+Décennie de naissance (reliées dans le temps) ¦ Dekada e lindjes (të lidhura në kohë) ¦ Deċennju tat-twelid (marbuta fiż-żmien)
+Combien de points au plus ¦ Sa pika më së shumti ¦ Kemm punti l-aktar
+Part du haut ¦ Pjesa e sipërme ¦ Parti ta’ fuq
+Part de gauche ¦ Pjesa e majtë ¦ Parti tax-xellug
+Part de droite ¦ Pjesa e djathtë ¦ Parti tal-lemin
+« Tous les autres métiers » ne peut servir qu’une fois. ¦ «Të gjitha profesionet e tjera» përdoret vetëm një herë. ¦ “Ix-xogħlijiet l-oħra kollha” jista’ jintuża darba biss.
+Décennies ¦ Dekada ¦ Deċennji
+Aucun métier connu pour ces personnes. ¦ Asnjë profesion i njohur për këta persona. ¦ L-ebda xogħol magħruf għal dawn il-persuni.
+Les métiers de ma base, en trois parts ¦ Profesionet në bazën time, në tri pjesë ¦ Ix-xogħlijiet fid-database tiegħi, fi tliet partijiet
+Les métiers de trois villages, siècle par siècle ¦ Profesionet e tre fshatrave, shekull pas shekulli ¦ Ix-xogħlijiet ta’ tliet irħula, seklu wara seklu
+Diagramme ternaire (trois parts qui font 100 %) ¦ Diagram trekëndor (tri pjesë që bëjnë 100 %) ¦ Dijagramma trijangolari (tliet partijiet li jagħmlu 100 %)
+Parts ¦ Pjesë ¦ Partijiet
+Un triangle : chaque point a trois parts (par exemple agriculture, artisanat, commerce) ; plus il est près d’un coin, plus cette part est grande. ¦ Një trekëndësh: çdo pikë ka tri pjesë (p.sh. bujqësi, zejtari, tregti); sa më afër një kënde, aq më e madhe ajo pjesë. ¦ Trijangolu: kull punt għandu tliet partijiet (pereżempju agrikoltura, snajja, kummerċ); iktar ma jkun qrib rokna, iktar tkun kbira dik il-parti.
+Les points (trois parts chacun) ¦ Pikat (secila tri pjesë) ¦ Il-punti (tliet partijiet kull wieħed)
+Groupe (couleur, points reliés) ¦ Grup (ngjyrë, pika të lidhura) ¦ Grupp (kulur, punti marbuta)
+Ordre (année…) ¦ Radha (viti…) ¦ Ordni (sena…)
+Nom de la part du haut ¦ Emri i pjesës së sipërme ¦ Isem il-parti ta’ fuq
+Nom de la part de gauche ¦ Emri i pjesës së majtë ¦ Isem il-parti tax-xellug
+Nom de la part de droite ¦ Emri i pjesës së djathtë ¦ Isem il-parti tal-lemin
+Couleur du haut ¦ Ngjyra lart ¦ Kulur ta’ fuq
+Couleur de gauche ¦ Ngjyra majtas ¦ Kulur tax-xellug
+Couleur de droite ¦ Ngjyra djathtas ¦ Kulur tal-lemin
+Tous les 10 % ¦ Çdo 10 % ¦ Kull 10 %
+Tous les 20 % ¦ Çdo 20 % ¦ Kull 20 %
+Sans grille ¦ Pa rrjetë ¦ Bla grilja
+Une par point ¦ Një për pikë ¦ Waħda għal kull punt
+Selon le total ¦ Sipas totalit ¦ Skont it-total
+Relier les points d’un groupe dans l’ordre ¦ Lidh me radhë pikat e një grupi ¦ Orbot il-punti ta’ grupp f’ordni
+Noms des points ¦ Emrat e pikave ¦ Ismijiet tal-punti
+Ajoute des périodes : la date, le prix d’ouverture, de clôture, le plus bas et le plus haut. ¦ Shto periudha: datën, çmimin e hapjes, të mbylljes, më të ulëtin dhe më të lartin. ¦ Żid perjodi: id-data, il-prezz tal-ftuħ, tal-għeluq, l-iktar baxx u l-ogħla.
+ouverture ¦ hapje ¦ ftuħ
+clôture ¦ mbyllje ¦ għeluq
+plus bas ¦ më i ulët ¦ l-iktar baxx
+plus haut ¦ më i lartë ¦ l-ogħla
+Hausse (clôture plus haute) ¦ Rritje (mbyllje më e lartë) ¦ Żieda (għeluq ogħla)
+Baisse (clôture plus basse) ¦ Rënie (mbyllje më e ulët) ¦ Tnaqqis (għeluq aktar baxx)
+Moyenne mobile sur {n} périodes ¦ Mesatare lëvizëse për {n} periudha ¦ Medja mobbli fuq {n} perjodi
+Chandeliers : {n}, de {a} à {b} ({p} %). ¦ Qirinj: {n}, nga {a} deri {b} ({p} %). ¦ Xemgħat: {n}, minn {a} sa {b} ({p} %).
+Prix du setier de blé au marché de {name} ¦ Çmimi i një mase gruri në tregun e {name} ¦ Prezz ta’ kejl qamħ fis-suq ta’ {name}
+Disette ¦ Mungesë ¦ Nuqqas
+Guerre des farines ¦ Lufta e miellit ¦ Il-gwerra tad-dqiq
+Chandeliers (prix du blé, mercuriales) ¦ Qirinj (çmimi i grurit, çmimet e tregut) ¦ Xemgħat (prezz tal-qamħ, prezzijiet tas-suq)
+Pour chaque période : le prix au début (ouverture), à la fin (clôture), le plus bas et le plus haut. Vert si le prix monte, rouge s’il baisse ; les années de disette en bandes. ¦ Për çdo periudhë: çmimi në fillim (hapja), në fund (mbyllja), më i ulëti dhe më i larti. Jeshile nëse rritet, e kuqe nëse bie; vitet e mungesës si breza. ¦ Għal kull perjodu: il-prezz fil-bidu (ftuħ), fl-aħħar (għeluq), l-iktar baxx u l-ogħla. Aħdar jekk jogħla, aħmar jekk jinżel; is-snin tan-nuqqas bħala faxex.
+Les périodes (date, ouverture, clôture, plus bas, plus haut) ¦ Periudhat (data, hapja, mbyllja, më e ulëta, më e larta) ¦ Il-perjodi (data, ftuħ, għeluq, l-iktar baxx, l-ogħla)
+Date ou période ¦ Data ose periudha ¦ Data jew perjodu
+Plus bas ¦ Më e ulëta ¦ L-iktar baxx
+Plus haut ¦ Më e larta ¦ L-ogħla
+Les années à part (disette, guerre…) ¦ Vitet e veçanta (mungesë, luftë…) ¦ Is-snin speċjali (nuqqas, gwerra…)
+Autre unité (écrite) ¦ Njësi tjetër (e shkruar) ¦ Unità oħra (miktuba)
+livres ¦ livra ¦ liri
+sols ¦ sol ¦ soldi
+deniers ¦ denierë ¦ denari
+Couleur de la hausse ¦ Ngjyra e rritjes ¦ Kulur taż-żieda
+Couleur de la baisse ¦ Ngjyra e rënies ¦ Kulur tat-tnaqqis
+Hausse en creux (bougie vide) ¦ Rritje e zbrazët (qiri bosh) ¦ Żieda vojta (xemgħa vojta)
+Moyenne mobile (périodes, 0 = non) ¦ Mesatare lëvizëse (periudha, 0 = jo) ¦ Medja mobbli (perjodi, 0 = le)
+Couleur de la moyenne ¦ Ngjyra e mesatares ¦ Kulur tal-medja
+Années à part en bandes ¦ Vitet e veçanta si breza ¦ Snin speċjali bħala faxex
+Largeur des bougies ¦ Gjerësia e qirinjve ¦ Wisa’ tax-xemgħat
+Âge au premier mariage ¦ Mosha në martesën e parë ¦ Età fl-ewwel żwieġ
+Âge au premier enfant ¦ Mosha në fëmijën e parë ¦ Età fl-ewwel tifel
+± un écart-type ¦ ± një devijim standard ¦ ± devjazzjoni standard waħda
+intervalle à 95 % ¦ interval 95 % ¦ intervall ta’ 95 %
+mes ancêtres ¦ paraardhësit e mi ¦ l-antenati tiegħi
+📏 Moyenne et marge : {x} ¦ 📏 Mesatarja dhe marzhi: {x} ¦ 📏 Medja u marġni: {x}
+Pas assez de personnes datées (au moins 3 par période). ¦ Nuk ka mjaft persona me data (të paktën 3 për periudhë). ¦ M’hemmx biżżejjed persuni b’data (mill-inqas 3 għal kull perjodu).
+Basse ¦ E ulët ¦ Baxxa
+Haute ¦ E lartë ¦ Għolja
+{x} : moyenne et marge ¦ {x}: mesatarja dhe marzhi ¦ {x}: medja u marġni
+Marge : un écart-type de part et d’autre, par quart de siècle de naissance ¦ Marzhi: një devijim standard nga secila anë, sipas çerekshekullit të lindjes ¦ Marġni: devjazzjoni standard waħda fuq kull naħa, skont kwart ta’ seklu tat-twelid
+Marge : intervalle de confiance à 95 % de la moyenne, par quart de siècle de naissance ¦ Marzhi: intervali i besueshmërisë 95 % i mesatares, sipas çerekshekullit të lindjes ¦ Marġni: intervall ta’ kunfidenza ta’ 95 % tal-medja, skont kwart ta’ seklu tat-twelid
+Marge (basse – haute) ¦ Marzhi (i ulët – i lartë) ¦ Marġni (baxx – għoli)
+Marge (±) ¦ Marzhi (±) ¦ Marġni (±)
+Fourchette (marge autour de la courbe) ¦ Diapazoni (marzh rreth lakores) ¦ Firxa (marġni madwar il-kurva)
+Deux colonnes : basse et haute ¦ Dy kolona: e ulët dhe e lartë ¦ Żewġ kolonni: baxxa u għolja
+Une colonne ± écart ¦ Një kolonë ± shmangie ¦ Kolonna waħda ± devjazzjoni
+Colonne basse (n°) ¦ Kolona e ulët (nr.) ¦ Kolonna baxxa (nru)
+Colonne haute (n°) ¦ Kolona e lartë (nr.) ¦ Kolonna għolja (nru)
+Colonne de l’écart (n°) ¦ Kolona e shmangies (nr.) ¦ Kolonna tad-devjazzjoni (nru)
+Autour de la colonne (n°) ¦ Rreth kolonës (nr.) ¦ Madwar il-kolonna (nru)
+Opacité de la marge ¦ Opaciteti i marzhit ¦ Opaċità tal-marġni
+Couleur de la marge ¦ Ngjyra e marzhit ¦ Kulur tal-marġni
+Axe : minimum ¦ Boshti: minimumi ¦ Assi: minimu
+Axe : maximum ¦ Boshti: maksimumi ¦ Assi: massimu
+(axe de droite) ¦ (boshti i djathtë) ¦ (assi tal-lemin)
+Clôture ¦ Mbyllje ¦ Għeluq
+{name} : de {a} à {b}, le plus en {peak} ({v}) ¦ {name}: nga {a} deri {b}, më së shumti në {peak} ({v}) ¦ {name}: minn {a} sa {b}, l-ogħla f’{peak} ({v})
+Le plus bas ¦ Më i ulëti ¦ L-iktar baxx
+Le plus haut ¦ Më i larti ¦ L-ogħla
+Négatif (replié) ¦ Negative (e palosur) ¦ Negattiv (mitwi)
+Graphique en horizon : {s} séries sur {n} périodes. ¦ Grafik horizonti: {s} seri në {n} periudha. ¦ Grafika ta’ orizzont: {s} serje fuq {n} perjodi.
+Horizon (bandes repliées) ¦ Horizont (breza të palosur) ¦ Orizzont (faxex mitwija)
+Collines ¦ Kodra ¦ Għoljiet
+Nombre de couches ¦ Numri i shtresave ¦ Numru ta’ saffi
+Teinte des négatifs ¦ Ngjyrimi i negativeve ¦ Lewn tan-negattivi
+Chevauchement ¦ Mbivendosje ¦ Sovrappożizzjoni
+Courbes douces ¦ Lakore të buta ¦ Kurvi rotob
+Trait blanc autour ¦ Kontur i bardhë ¦ Kontorn abjad
+Arbre de regroupement à gauche (dendrogramme) ¦ Pema e grupimit majtas (dendrogram) ¦ Siġra tal-grupplar fuq ix-xellug (dendrogramma)
+Groupes de couleur ¦ Grupe ngjyrash ¦ Gruppi tal-kulur
+Les branches de l’arbre ¦ Degët e pemës ¦ Il-friegħi tas-siġra
+Cacher les noms des correspondances ¦ Fshih emrat e përputhjeve ¦ Aħbi l-ismijiet tal-qbil
+Durée des générations ¦ Kohëzgjatja e brezave ¦ Tul tal-ġenerazzjonijiet
+Durée des générations — {name} ¦ Kohëzgjatja e brezave — {name} ¦ Tul tal-ġenerazzjonijiet — {name}
+Lignée paternelle : une génération = {n} ans en moyenne ¦ Linja atërore: një brez = mesatarisht {n} vjet ¦ Linja tal-missier: ġenerazzjoni = medja ta’ {n} sena
+Lignée maternelle : une génération = {n} ans en moyenne ¦ Linja amësore: një brez = mesatarisht {n} vjet ¦ Linja tal-omm: ġenerazzjoni = medja ta’ {n} sena
+moyenne {n} ans ¦ mesatarja {n} vjet ¦ medja {n} sena
+Toutes les naissances du groupe ¦ Të gjitha lindjet e grupit ¦ It-twelidiet kollha tal-grupp
+Seulement la lignée paternelle directe (père du père…) ¦ Vetëm linja e drejtpërdrejtë atërore (babai i babait…) ¦ Il-linja diretta tal-missier biss (missier il-missier…)
+Seulement la lignée maternelle directe (mère de la mère…) ¦ Vetëm linja e drejtpërdrejtë amësore (nëna e nënës…) ¦ Il-linja diretta tal-omm biss (omm l-omm…)
+Les deux lignées directes ¦ Të dyja linjat e drejtpërdrejta ¦ Iż-żewġ linji diretti
+La personne dont on suit les lignées ¦ Personi, linjat e të cilit ndiqen ¦ Il-persuna li jiġu segwiti l-linji tagħha
+Aucune génération datée dans cette lignée (il faut la naissance de l’enfant et celle du parent). ¦ Asnjë brez me datë në këtë linjë (duhen lindja e fëmijës dhe e prindit). ¦ L-ebda ġenerazzjoni b’data f’din il-linja (meħtieġ it-twelid tat-tifel u tal-ġenitur).
+Génération (lignée) ¦ Brezi (linja) ¦ Ġenerazzjoni (linja)
+Paternelle ¦ Atërore ¦ Tal-missier
+Maternelle ¦ Amësore ¦ Tal-omm
+Relier les points d’une lignée ¦ Lidh pikat e një linje ¦ Orbot il-punti ta’ linja
+Ligne de repère ¦ Vijë reference ¦ Linja ta’ referenza
+Les générations (lignées) ¦ Brezat (linjat) ¦ Il-ġenerazzjonijiet (linji)
+Pas attendu ¦ E papritur ¦ Mhux mistenni
+Manquant ¦ Mungon ¦ Nieqes
+Ajoute des ancêtres : le numéro Sosa, le nom et, pour chaque acte, sourcé, sans source ou manquant. ¦ Shto paraardhës: numrin Sosa, emrin dhe për çdo akt: me burim, pa burim ose mungon. ¦ Żid antenati: in-numru Sosa, l-isem u għal kull att, b’sors, bla sors jew nieqes.
+Une ligne par ancêtre ¦ Një rresht për paraardhës ¦ Ringiela għal kull antenat
+Une ligne par ancêtre (+ recensements, notaire, militaire) ¦ Një rresht për paraardhës (+ regjistrime, noter, ushtri) ¦ Ringiela għal kull antenat (+ ċensimenti, nutar, militar)
+Fiches militaires ¦ Skeda ushtarake ¦ Skedi militari
+Colonnes en plus ¦ Kolona shtesë ¦ Kolonni żejda
+Recensement, notaire, militaire ¦ Regjistrim, noter, ushtri ¦ Ċensiment, nutar, militar
+Recensement seulement ¦ Vetëm regjistrim ¦ Ċensiment biss
+Les trous d’abord ¦ Boshllëqet së pari ¦ Il-vojt l-ewwel
+Par numéro Sosa ¦ Sipas numrit Sosa ¦ Skont in-numru Sosa
+Ancêtres au plus ¦ Paraardhës më së shumti ¦ Antenati l-aktar
+Axe ¦ Boshti ¦ Assi
+Ce qu’on suit ¦ Çfarë ndjekim ¦ X’qed nsegwu
+L’état civil ¦ Gjendja civile ¦ L-istat ċivili
+L’état civil (célibataire, marié, veuf…) : trajectoires de vie ¦ Gjendja civile (beqar, i martuar, i ve…): trajektore jete ¦ L-istat ċivili (xebba, miżżewweġ, armel…): mogħdijiet tal-ħajja
+La commune ¦ Komuna ¦ Il-lokalità
+Les lieux de vie ¦ Vendbanimet ¦ Il-postijiet tal-ħajja
+Un groupe de personnes (critères) ¦ Një grup personash (kritere) ¦ Grupp ta’ persuni (kriterji)
+Trajectoires de vie ¦ Trajektore jete ¦ Mogħdijiet tal-ħajja
+Trajectoires de vie de {n}. ¦ Trajektore jete të {n}. ¦ Mogħdijiet tal-ħajja ta’ {n}.
+Métiers au fil de la vie de {n}. ¦ Profesionet gjatë jetës së {n}. ¦ Xogħlijiet matul il-ħajja ta’ {n}.
+Les métiers au fil de la vie ¦ Profesionet gjatë jetës ¦ Ix-xogħlijiet matul il-ħajja
+Les mêmes personnes à plusieurs âges (20, 40, 60 ans…) ¦ Të njëjtët persona në disa mosha (20, 40, 60…) ¦ L-istess persuni f’diversi etajiet (20, 40, 60…)
+Âges des colonnes ¦ Moshat e kolonave ¦ Etajiet tal-kolonni
+{a} ans ¦ {a} vjeç ¦ {a} sena
+À {n} ans ¦ Në {n} vjeç ¦ Fl-età ta’ {n}
+L’état civil des mêmes personnes à {a} ans ¦ Gjendja civile e të njëjtëve persona në {a} vjeç ¦ L-istat ċivili tal-istess persuni fl-età ta’ {a}
+Où vivaient les mêmes personnes à {a} ans ¦ Ku jetonin të njëjtët persona në {a} vjeç ¦ Fejn kienu jgħixu l-istess persuni fl-età ta’ {a}
+Le métier des mêmes personnes à {a} ans ¦ Profesioni i të njëjtëve persona në {a} vjeç ¦ Ix-xogħol tal-istess persuni fl-età ta’ {a}
+Le même qu’à l’âge d’avant — {list} ¦ Njësoj si në moshën e mëparshme — {list} ¦ L-istess bħall-età ta’ qabel — {list}
+Les mêmes personnes à {n} âges : {l}. ¦ Të njëjtët persona në {n} mosha: {l}. ¦ L-istess persuni f’{n} etajiet: {l}.
+En % de la colonne (au lieu des nombres) ¦ Në % të kolonës (në vend të numrave) ¦ F’% tal-kolonna (minflok numri)
+État civil (trajectoires de vie) ¦ Gjendja civile (trajektore jete) ¦ Stat ċivili (mogħdijiet tal-ħajja)
+Naissance (pour l’axe des âges) ¦ Lindja (për boshtin e moshave) ¦ Twelid (għall-assi tal-etajiet)
+Début (année ou âge, vide = auto) ¦ Fillimi (viti ose mosha, bosh = auto) ¦ Bidu (sena jew età, vojt = awto)
+Fin (année ou âge, vide = auto) ¦ Fundi (viti ose mosha, bosh = auto) ¦ Tmiem (sena jew età, vojt = awto)
+Par durée de vie ¦ Sipas jetëgjatësisë ¦ Skont it-tul tal-ħajja
+Par état à 50 ans ¦ Sipas gjendjes në 50 vjeç ¦ Skont l-istat fl-età ta’ 50
+âge (années) ¦ mosha (vite) ¦ età (snin)
+Vérifie le groupe de personnes et la période. ¦ Kontrollo grupin e personave dhe periudhën. ¦ Iċċekkja l-grupp ta’ persuni u l-perjodu.
+{n} pris dans ta base. ¦ {n} marrë nga baza jote. ¦ {n} meħuda mid-database tiegħek.
+{n} prises dans ta base. ¦ {n} marrë nga baza jote. ¦ {n} meħuda mid-database tiegħek.

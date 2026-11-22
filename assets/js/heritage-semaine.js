@@ -62,7 +62,7 @@
         if (!rows.length) return '';
         const lim = big ? Infinity : cfg.limit;
         const more = rows.length - lim;
-        return `<section class="msr-sec" data-msr-sec="${esc(id)}"><h4 class="msr-sec-h"><span aria-hidden="true">${icon}</span> ${esc(label)} <small>${rows.length}</small></h4>
+        return `<section class="msr-sec" data-msr-sec="${esc(id)}"><h4 class="msr-sec-h"><span aria-hidden="true">${icon}</span> ${esc(label)} <small>${rows.length}</small>${id === 'verifier' && ext.doutes ? ` <button type="button" class="link-button msr-all" data-doutes-all>${esc(i18n('Tout voir →'))}</button>` : ''}</h4>
             <ul class="msr-list">${rows.map((r, i) => rowHtml(r, cfg, i >= lim)).join('')}</ul>${more > 0 ? `<button type="button" class="link-button msr-more" data-msr-more="${lim}">Voir les ${Math.min(more, lim)} suivants ↓</button>` : ''}</section>`;
     }
     function countersHtml(items, done) {

@@ -1,0 +1,24 @@
+fr ¦ lb
+À préciser ¦ Nach ze präziséieren
+Lecture approfondie (IA sur cet ordinateur) ¦ Grëndlecht Liesen (KI op dësem Computer)
+En plus du moteur ci-dessus : un modèle « vision » ouvert (Qwen3-VL, licence Apache 2.0) qui lit toute la page, servi par Ollama sur cet ordinateur. Facultatif. Rien ne part sur Internet, sauf le téléchargement du modèle (3 à 6 Go, une seule fois). ¦ Nieft dem Motor uewen: en oppent „Vision“-Modell (Qwen3-VL, Lizenz Apache 2.0), dat déi ganz Säit liest, vun Ollama op dësem Computer bereetgestallt. Fräiwëlleg. Näischt geet op den Internet, ausser den Download vum Modell (3 bis 6 GB, eemol).
+Ensuite, dans l’atelier de transcription : « 🔍 Essayer aussi la lecture approfondie » montre les deux lectures côte à côte, et tu gardes la meilleure. ¦ Duerno, an der Transkriptiounsatelier: „🔍 Och grëndlecht Liesen probéieren“ weist déi zwou Liesunge niewteneen, an s du behäls déi besser.
+Installer ou vérifier la lecture approfondie… ¦ Grëndlecht Liesen installéieren oder kontrolléieren…
+La lecture approfondie n’est pas encore chargée : réessaie dans un instant. ¦ Grëndlecht Liesen ass nach net gelueden: probéier et gläich nach eng Kéier.
+Pour lire un acte : ouvre son image dans l’atelier de transcription (« 📜 Atelier »), puis « ✨ Lire l’acte ». ¦ Fir en Akt ze liesen: maach säi Bild am Transkriptiounsatelier op („📜 Atelier“), duerno „✨ Den Akt liesen“.
+Transcrire ¦ Transkribéieren
+Ouvrir l’outil de transcription complet sur cette image ¦ Dat komplett Transkriptiounsinstrument fir dëst Bild opmaachen
+Le modèle a réfléchi sans écrire de transcription. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ De Modell huet iwwerluecht, ouni eng Transkriptioun ze schreiwen. Schneid e méi klengt Stéck zou (e puer Zeilen) oder probéier de Modell 8B, an da start nach eng Kéier.
+Le modèle n’a rien lu sur cette image. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ De Modell huet op dësem Bild näischt gelies. Schneid e méi klengt Stéck zou (e puer Zeilen) oder probéier de Modell 8B, an da start nach eng Kéier.
+La lecture a été arrêtée. ¦ D’Liesen gouf gestoppt.
+Modèle : {m} · {n} s ¦ Modell: {m} · {n} s
+Ce document n’a pas d’image : l’Atelier de transcription a besoin d’une image. ¦ Dëst Dokument huet kee Bild: den Transkriptiounsatelier brauch e Bild.
+L’Atelier de transcription n’est pas encore chargé : réessaie dans un instant. ¦ Den Transkriptiounsatelier ass nach net gelueden: probéier et gläich nach eng Kéier.
+L’Atelier de transcription n’a pas pu s’ouvrir : {x} ¦ Den Transkriptiounsatelier konnt net opgemaach ginn: {x}
+Lecture approfondie (IA) ¦ Grëndlecht Liesen (KI)
+Impossible de suivre la lecture : {x} ¦ D’Liesen kann net verfollegt ginn: {x}
+Le programme de lecture n’a pas démarré. ¦ De Liesprogramm ass net gestart.
+Acte de notoriété ¦ Akt vun der Notorietéit
+Cadres ¦ Rummen
+Opacité des cadres de couleur (0 = presque invisibles) ¦ Deckkraaft vun de faarwege Rummen (0 = bal net ze gesinn)
+Ce document n’a pas pu être relu : réessaie dans un instant. ¦ Dëst Dokument konnt net nach eng Kéier gelies ginn: probéier et gläich nach eng Kéier.

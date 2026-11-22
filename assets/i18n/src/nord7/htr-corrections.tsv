@@ -1,0 +1,35 @@
+fr ¦ is
+# 🪄 Corrections proposées après « ✨ Lire l’acte » (app-htr-correction.js, heritage-transcribe.js, heritage-more.js)
+« {w} » ajouté au lexique ¦ „{w}“ bætt við orðasafnið
+Garder tel quel ¦ Halda óbreyttu
+Ajouter au lexique ¦ Bæta við orðasafnið
+Ce mot ne sera plus souligné ¦ Þetta orð verður ekki lengur undirstrikað
+Proposer des corrections (conseillé) ¦ Stinga upp á leiðréttingum (mælt með)
+Prudent (conseillé) ¦ Varlega (mælt með)
+Plus de propositions ¦ Fleiri tillögur
+Correction proposée : « {x} » — clique pour choisir ¦ Tillaga að leiðréttingu: „{x}“ — smelltu til að velja
+=correction proposée ¦ tillaga að leiðréttingu|tillögur að leiðréttingum
+(soulignées en violet : clique un mot) ¦ (undirstrikað með fjólubláu: smelltu á orð)
+Aucune correction à proposer ¦ Engin leiðrétting til að stinga upp á
+Corrections proposées : non ¦ Tillögur að leiðréttingum: af
+Accepter les {n} propositions sûres ¦ Samþykkja öruggar tillögur ({n})
+Accepter la proposition sûre ¦ Samþykkja öruggu tillöguna
+=proposition sûre acceptée ¦ örugg tillaga samþykkt|öruggar tillögur samþykktar
+« {w} » gardé tel quel ¦ „{w}“ haldið óbreyttu
+Proposer des corrections pour les mots mal lus (un mot souligné : clique-le pour choisir) ¦ Stinga upp á leiðréttingum fyrir rangt lesin orð (undirstrikað orð: smelltu á það til að velja)
+Corrections ¦ Leiðréttingar
+Les corrections proposées ne sont pas chargées. ¦ Tillögur að leiðréttingum eru ekki hlaðnar.
+Corrections proposées après la lecture ¦ Leiðréttingar lagðar til eftir lesturinn
+Après « ✨ Lire l’acte », les mots qui ressemblent à un mot connu (« décembe » → « décembre ») sont soulignés en violet : un clic, et tu choisis. Rien n’est changé sans toi. Le lexique : les mots des actes, ceux de « 📜 Aide à la lecture », et les noms, prénoms, lieux et métiers de ta base (sans les vivants ni les fiches confidentielles). ¦ Eftir „✨ Lesa skjalið“ eru orð sem líkjast þekktu orði („décembe“ → „décembre“) undirstrikuð með fjólubláu: einn smellur og þú velur. Ekkert breytist án þín. Orðasafnið: orð skjalanna, orðin í „📜 Lestrarhjálp“ og eftirnöfn, fornöfn, staðir og störf í gagnagrunninum þínum (án lifandi fólks og trúnaðarfærslna).
+Ton lexique personnel : {x}. ¦ Þitt eigið orðasafn: {x}.
+Vider le lexique personnel ¦ Tæma eigið orðasafn
+Ton lexique personnel est vide : « Ajouter au lexique » dans le menu d’un mot souligné. ¦ Þitt eigið orðasafn er tómt: „Bæta við orðasafnið“ í valmynd undirstrikaðs orðs.
+Lexique personnel vidé ¦ Eigið orðasafn tæmt
+Il manque l’accent ¦ Kommuna vantar
+« {x} » ressemble à « {y} » ¦ „{x}“ líkist „{y}“
+« {x} » collé au mot suivant ¦ „{x}“ fast við næsta orð
+Deux mots collés ¦ Tvö orð skrifuð saman
+Après « mil {x} », on attend « cent » ¦ Á eftir „mil {x}“ er búist við „cent“
+Dans une date en toutes lettres : « {x} » ¦ Í dagsetningu skrifaðri með orðum: „{x}“
+Un mois, dans une date ¦ Mánuður, í dagsetningu
+À cet endroit : « {where} » (ligne {n}) ¦ Á þessum stað: „{where}“ (lína {n})

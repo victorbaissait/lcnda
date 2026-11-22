@@ -129,7 +129,8 @@ require 'lib/bootstrap.php'; $pdo = db(); echo 'ok';`], { cwd: appRoot, encoding
             const tag = `${w}${dark ? '-sombre' : ''}`;
             const go = (kind, id) => p.evaluate(async ([kind, id]) => { const A = window.LCNDA_APP; document.querySelectorAll('dialog[open]').forEach(d => d.close()); if (kind === 'maint') { A.state.maintenanceTab = id; await A.setModule('maintenance'); } else if (kind === 'list') { A.state.listType = id; await A.setModule('listes'); } else await A.setModule(id); }, [kind, id]).then(() => p.waitForTimeout(1200));
             await t(`${tag} K12 : la bulle de l’app (title remis après), touches de la page Raccourcis`, async () => {
-                const sel = await p.evaluate(() => { const b = [...document.querySelectorAll('button[title]')].find(x => { const r = x.getBoundingClientRect(); return r.width > 0 && r.top > 0 && r.top < 800; }); if (!b) return null; b.id = b.id || 'k-probe'; return '#' + b.id; });
+                // un bouton vraiment sous la souris (pas le ＋ du bout du menu, coupé par le défilement ou caché sous la flèche ›)
+                const sel = await p.evaluate(() => { const b = [...document.querySelectorAll('button[title]')].find(x => { const r = x.getBoundingClientRect(); if (!(r.width > 0 && r.top > 0 && r.top < 800 && r.left >= 0 && r.right <= innerWidth)) return false; const hit = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); return !!hit && (hit === x || x.contains(hit)); }); if (!b) return null; b.id = b.id || 'k-probe'; return '#' + b.id; });
                 assert.ok(sel, 'un bouton avec une bulle');
                 const before = await p.getAttribute(sel, 'title');
                 await p.hover(sel); await p.waitForTimeout(700);

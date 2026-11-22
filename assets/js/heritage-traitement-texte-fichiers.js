@@ -243,7 +243,7 @@
     async function chooseTemplate(ctx = {}) {
         let mine = []; try { mine = (await api('textdocs', {kind: 'template'})).items || []; } catch (_) {}
         ext.openDialog({eyebrow: i18n('TRAITEMENT DE TEXTE'), title: i18n('📋 Partir d’un modèle'), wide: true, submitLabel: i18n('Fermer'),
-            body: `<div class="wp-tpls">${tools.TEMPLATES.map(t => `<button type="button" class="wp-tpl" data-tpl="${t.key}"><b>${t.icon} ${esc(i18n(t.name))}</b><small>${esc(i18n(t.hint))}</small></button>`).join('')}</div>
+            body: `<div class="wp-tpls">${tools.TEMPLATES.filter(t => !t.when || t.when()).map(t => `<button type="button" class="wp-tpl" data-tpl="${t.key}"><b>${t.icon} ${esc(i18n(t.name))}</b><small>${esc(i18n(t.hint))}</small></button>`).join('')}</div>
                 <h4>${esc(i18n('Mes modèles'))}</h4>${mine.length ? `<div class="wp-tpls">${mine.map(t => `<button type="button" class="wp-tpl" data-mine="${t.id}"><b data-i18n-off>📝 ${esc(t.name)}</b><small>${esc(plural(t.info?.words || 0, 'mot'))} · ${UI()?.whenText ? esc(UI().whenText(t.updated_at, {label: i18n('Modifié')})) : ''}</small></button>`).join('')}</div>` : A().empty(i18n('Pas encore de modèle à toi : dans un document, Fichier → « Enregistrer comme modèle… ».'), {icon: '📋'})}`,
             onOpen: d => d.addEventListener('click', async e => {
                 const b = e.target.closest('[data-tpl], [data-mine]'); if (!b) return; d.close();

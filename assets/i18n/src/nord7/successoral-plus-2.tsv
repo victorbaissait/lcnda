@@ -1,0 +1,635 @@
+fr ¦ is
+# Zone « successoral-plus-2 » : ⚖️ outils de plus du généalogiste successoral (heritage-successoral-plus2*.js, lib/successoral_plus2.php, lib/successoral_factures.php)
+Réglages de cet outil ¦ Stillingar þessa verkfæris
+(conseillé) ¦ (mælt með)
+Autre : ¦ Annað:
+Outils du dossier : réglages ¦ Verkfæri málsins: stillingar
+Chaque choix se change ici ; l’option conseillée est celle du départ. ¦ Hverju vali breytir þú hér; það sem mælt er með er sjálfgefið.
+Réglage enregistré : {what} ¦ Stilling vistuð: {what}
+Adresse refusée : https:// et {numero} sont obligatoires. ¦ Vistfangi hafnað: https:// og {numero} eru skylda.
+Carte des héritiers (dossiers en cours) ¦ Kort af erfingjum (mál í vinnslu)
+Délai de réponse par organisme ¦ Svartími eftir skrifstofu
+🙈 Écran partagé ¦ 🙈 Samnýttur skjár
+Fusionner avec un autre dossier… ¦ Sameina öðru máli…
+Annuler la dernière fusion ¦ Afturkalla síðustu sameiningu
+nom de naissance ¦ fæðingarnafn
+prénom ¦ fornafn
+né(e) le {d} ¦ fædd(ur) {d}
+même mois ¦ sami mánuður
+même année ¦ sama ár
+± 1 an ¦ ± 1 ár
+date inconnue ¦ dagsetning óþekkt
+date de naissance différente ¦ önnur fæðingardagsetning
+même département ¦ sama umdæmi
+lieu inconnu sur la fiche ¦ staður á spjaldi óþekktur
+lieu : {p} ¦ staður: {p}
+Le fichier des décès n’est pas dans l’app. ¦ Dánarskráin er ekki í forritinu.
+⤒ Importer les décès ¦ ⤒ Flytja inn andlát
+L’import se fait une seule fois, depuis data.gouv.fr (environ 25 millions de lignes depuis 1970), ou par années choisies. ¦ Innflutningur er gerður einu sinni, frá data.gouv.fr (um 25 milljónir lína frá 1970), eða fyrir valin ár.
+fichier importé : décès {a} → {b} ¦ innflutt skrá: andlát {a} → {b}
+un décès plus ancien ne peut pas être trouvé ¦ ekki er hægt að finna eldra andlát
+plafonné à {n} ¦ takmarkað við {n}
+acte n° {n} ¦ skjal nr. {n}
+avant le défunt : si c’est cette personne, ses enfants viennent à sa place (représentation). ¦ á undan arfláta: ef það er þessi manneskja erfa börn hennar í hennar stað (staðarerfð).
+après le défunt : sa part passe à ses propres héritiers. ¦ á eftir arfláta: hlutur hennar fer til hennar eigin erfingja.
+Les Français nés à l’étranger ont leur acte au Service central d’état civil (Nantes). ¦ Frakkar fæddir erlendis eiga skjal sitt hjá Miðlægu þjóðskránni (Nantes).
+déjà confirmé ¦ þegar staðfest
+C’est cette personne ¦ Það er þessi manneskja
+Pas la même personne ¦ Ekki sama manneskja
+Nom de naissance inconnu : cherché sous {n}, pistes moins sûres ¦ Fæðingarnafn óþekkt: leitað sem {n}, ótraustari vísbendingar
+Deux personnes se ressemblent : demande l’acte avant de choisir ¦ Tvær manneskjur líkjast: biddu um skjalið áður en þú velur
+rien trouvé dans le fichier ¦ ekkert fannst í skránni
+« Rien trouvé » ne veut pas dire « vivant » (un décès à l’étranger manque souvent). ¦ „Ekkert fannst“ þýðir ekki „á lífi“ (andlát erlendis vantar oft).
+Les héritiers « vivants » comparés au fichier des décès ¦ „Lifandi“ erfingjar bornir saman við dánarskrána
+pistes à partir de {n} ¦ vísbendingar frá {n}
+Aucun héritier « vivant » à vérifier dans ce dossier. ¦ Enginn „lifandi“ erfingi að athuga í þessu máli.
+Comment c’est calculé ¦ Hvernig það er reiknað
+Le nom de naissance, sans accents ni tirets ; jamais le nom d’épouse (l’INSEE donne le nom de naissance). ¦ Fæðingarnafn, án kommu og bandstrika; aldrei nafn eftir hjúskap (INSEE heldur fæðingarnafninu).
+Le premier prénom de la fiche parmi les prénoms INSEE ; Jean-Pierre = Jean Pierre. ¦ Fyrsta fornafn spjaldsins meðal fornafna INSEE; Jean-Pierre = Jean Pierre.
+Jour exact 30 · même mois 20 · même année 12 · ± 1 an 6 ; sans date : plafond 70. ¦ Nákvæmur dagur 30 · sami mánuður 20 · sama ár 12 · ± 1 ár 6; án dagsetningar: hámark 70.
+La commune ; même département 10 ; né à l’étranger : le pays (plafond 80). ¦ Sveitarfélag; sama umdæmi 10; fædd(ur) erlendis: landið (hámark 80).
+Différent : la piste est écartée. ¦ Annars: vísbendingunni er hafnað.
+Pistes écartées ({n}) ¦ Hafnaðar vísbendingar ({n})
+Piste remise ¦ Vísbending endurheimt
+« Pas la même personne » retenu : cette piste ne reviendra plus ¦ „Ekki sama manneskja“ munað: þessi vísbending kemur ekki aftur
+Sur la fiche de {n} : un décès le {d}, source « Fichier des personnes décédées (INSEE) », avec la date du relevé. ¦ Á spjaldi {n}: andlát {d}, heimild „Skrá yfir látna (INSEE)“, með dagsetningu athugunar.
+Dans ce dossier : statut retenu « {s} » ; le calcul est refait. ¦ Í þessu máli: staðan „{s}“ haldið; útreikningurinn er endurgerður.
+Ce qui va changer ¦ Hvað breytist
+{n} marqué(e) décédé(e) (INSEE). Calcul refait. ¦ {n} merkt(ur) látin(n) (INSEE). Útreikningur endurgerður.
+Vérifier les décès ¦ Athuga andlát
+Questionnaire… ¦ Spurningalisti…
+⚰️ INSEE : {n} piste(s) ¦ ⚰️ INSEE: {n} vísbendingar
+⚰️ vérifié le {d} ¦ ⚰️ athugað {d}
+🕵️ Recherches ¦ 🕵️ Leitir
+📞 Noter un échange ¦ 📞 Skrá samskipti
+Ouvrir un dossier lié ¦ Opna tengda málið
+Dossiers liés ¦ Tengd mál
+Succession de {n} ¦ Dánarbú {n}
+dossier d’origine {n} ¦ upprunalegt mál {n}
+Deux défunts, deux calculs : les successions restent distinctes. ¦ Tveir látnir, tveir útreikningar: dánarbúin haldast aðskilin.
+Aucun héritier trouvé d’après les fiches. ¦ Enginn erfingi fannst samkvæmt spjöldunum.
+Échanges ¦ Samskipti
+Noter un échange ¦ Skrá samskipti
+Les courriers du Registre ne sont pas recopiés ici : ils sont montrés en gris, en lecture. ¦ Bréf úr skránni eru ekki afrituð hingað: þau birtast grá, aðeins til lestrar.
+Chercher… (personne, résumé) ¦ Leita… (manneskja, samantekt)
+du dossier fusionné ¦ úr sameinuðu máli
+Registre de courriers, n° {n} ¦ Bréfaskrá, nr. {n}
+Aucun échange noté. ¦ Engin samskipti skráð.
+✎ Corriger un échange ¦ ✎ Leiðrétta samskiptin
+＋ Noter un échange ¦ ＋ Skrá samskipti
+Avec (héritier, notaire, mairie…) ¦ Við hvern (erfingi, lögbókandi, sveitarskrifstofa…)
+Prochaine action ¦ Næsta skref
+Durée (minutes) ¦ Lengd (mínútur)
+⏱ Compter la durée dans 💶 Temps ¦ ⏱ Telja tímann með í 💶 Tíma
+C’est une recherche (va dans 🕵️ Recherches) ¦ Þetta er leit (fer í 🕵️ Leitir)
+Avec une date, une échéance va dans le dossier et dans la 🔔 cloche (jamais le résumé). ¦ Með dagsetningu fer fresturinn í málið og í 🔔 bjölluna (aldrei samantektin).
+Échange corrigé (noté au 🕓 Journal) ¦ Samskipti leiðrétt (skráð í 🕓 Dagbók)
+Échange noté ¦ Samskipti skráð
+Trois fois « ne répond pas » de suite : noter 🔇 ne répond pas ? ¦ Þrisvar í röð „svarar ekki“: skrá 🔇 svarar ekki?
+Recommandé ¦ Ábyrgðarbréf
+Envoyé en recommandé ¦ Sent í ábyrgð
+N° du recommandé ¦ Nr. ábyrgðarsendingar
+Numéro inhabituel, gardé tel quel. ¦ Óvenjulegt númer, haldið óbreyttu.
+AR reçu le ¦ Móttökukvittun komin
+Relance si rien après (jours) ¦ Áminning ef ekkert eftir (daga)
+Réponse reçue le ¦ Svar komið
+Retour du courrier ¦ Bréf endursent
+pli non distribué ¦ viðtakandi sótti ekki
+destinataire inconnu ¦ viðtakandi óþekktur
+AR reçu aujourd’hui ¦ Móttökukvittun í dag
+Suivre en ligne ¦ Rekja á netinu
+Copier le numéro ¦ Afrita númerið
+L’app ne fait aucune requête : le lien ouvre la page de suivi dans ton navigateur ; tu notes toi-même la date de l’AR. ¦ Forritið sendir enga beiðni: hlekkurinn opnar rakningarsíðuna í vafranum þínum; dagsetningu kvittunar skráir þú sjálf(ur).
+Tape d’abord le numéro. ¦ Sláðu fyrst inn númerið.
+Numéro copié ¦ Númer afritað
+Courrier revenu : noter 🔎 introuvable pour cet héritier ? ¦ Bréfið kom til baka: skrá 🔎 finnst ekki fyrir þennan erfingja?
+✓ AR {d} ¦ ✓ Kvittun {d}
+revenu ¦ endursent
+📮 sans AR · {n} j ¦ 📮 án kvittunar · {n} d
+Recommandés ¦ Ábyrgðarbréf
+Sans AR ¦ Án kvittunar
+{n} recommandés, {m} sans accusé ¦ {n} í ábyrgð, {m} án kvittunar
+Importer des réponses… ¦ Flytja inn svör…
+Saisir un questionnaire papier ¦ Slá inn pappírsspurningalista
+📮 Recommandé ¦ 📮 Ábyrgð
+Questionnaires ¦ Spurningalistar
+préparé le {d} ¦ undirbúinn {d}
+réponses écrites le {d} ¦ svör slegin inn {d}
+Questionnaire ¦ Spurningalisti
+au sujet d’une succession ¦ varðandi dánarbú
+Vous ¦ Þú
+Nom de naissance ¦ Fæðingarnafn
+Conjoint(s) ¦ Maki (makar)
+Date du mariage (ou PACS) ¦ Dagsetning hjúskapar (eða sambúðar)
+Adresse, téléphone, courriel ¦ Heimilisfang, sími, netfang
+Code postal ¦ Póstnúmer
+Autres membres de la famille connus ¦ Aðrir þekktir fjölskyldumeðlimir
+Frères, sœurs, cousins…, avec un moyen de les joindre ¦ Bræður, systur, frændsystkin…, með leið til að ná í þau
+Documents que vous pouvez fournir ¦ Skjöl sem þú getur lagt fram
+livret de famille ¦ fjölskyldubók
+acte de naissance ¦ fæðingarvottorð
+acte de mariage ¦ hjúskaparvottorð
+jugement ¦ dómur
+Vos réponses restent sur cet appareil tant que vous n’envoyez rien. ¦ Svör þín eru á þessu tæki þar til þú sendir eitthvað.
+Enregistrer mes réponses ¦ Vista svörin mín
+Un questionnaire à envoyer ¦ Spurningalisti til sendingar
+Fabriquer et ranger au Registre ¦ Búa til og skrá í skrána
+Ce qu’on demande ¦ Hvað við spyrjum um
+Ta question ¦ Spurning þín
+Comment l’envoyer ¦ Hvernig á að senda hann
+Ce qui est pré-rempli ¦ Hvað er fyrirfram útfyllt
+Jamais le nom du défunt ni un montant : « au sujet d’une succession ». Le fichier s’ouvre d’un double-clic, sans internet ; l’héritier renvoie un petit fichier. ¦ Aldrei nafn arfláta né upphæð: „varðandi dánarbú“. Skráin opnast með tvísmelli, án nettengingar; erfinginn sendir litla skrá til baka.
+{n} prêts, rangés au Registre de courriers ¦ {n} undirbúið, skráð í bréfaskrána
+Ce fichier ne vient pas d’un questionnaire de ce dossier. ¦ Þessi skrá kemur ekki úr spurningalista þessa máls.
+Revoir avant d’écrire ¦ Fara yfir áður en skráð er
+Enfants (un par ligne : prénom, année) ¦ Börn (eitt í línu: nafn, ár)
+Documents promis ¦ Lofuð skjöl
+Réponses de {n} ¦ Svör frá {n}
+Écrire les changements cochés ¦ Skrá merktu breytingarnar
+Une réponse a déjà été importée le {d} : compare avec celle-ci. ¦ Svar var þegar flutt inn {d}: berðu það saman við þetta.
+fichier vérifié ✓ (bon questionnaire, pas modifié) ¦ skrá athuguð ✓ (réttur spurningalisti, óbreyttur)
+Coche ce qui doit aller dans le dossier. Rien n’est écrit sans ta revue ; « source : déclaration de l’héritier » accompagne tout ce qui est écrit. ¦ Merktu það sem á að fara í málið. Ekkert er skráð án þinnar yfirferðar; allt skráð ber „heimild: yfirlýsing erfingja“.
+Dans la base ¦ Í grunninum
+« Famille connue » va en note du dossier, jamais en fiches. Les enfants créent des fiches reliées à l’héritier. Les documents promis deviennent une échéance. ¦ „Þekkt fjölskylda“ fer í athugasemd málsins, aldrei á spjöldin. Börnin búa til spjöld tengd erfingjanum. Lofuðu skjölin verða að fresti.
+{n} écrits. Calcul refait. ¦ {n} skráð. Útreikningur endurgerður.
+passée ¦ liðið
+dans {n} j ¦ eftir {n} d
+était le {d} ¦ var {d}
+Une date importante ¦ Mikilvæg dagsetning
+Mes dates importantes ¦ Mikilvægu dagsetningarnar mínar
+D’où vient cette date ¦ Hvaðan kemur þessi dagsetning
+Les dates que le notaire t’a données, rappelées à temps. ¦ Dagsetningar sem lögbókandinn gaf þér, minnt á í tæka tíð.
+L’app ne calcule aucun délai légal : elle ne connaît pas ta situation. ¦ Forritið reiknar engan lögbundinn frest: það þekkir ekki aðstæður þínar.
+✎ Modifier la date ¦ ✎ Breyta dagsetningunni
+＋ Une date importante ¦ ＋ Mikilvæg dagsetning
+D’où vient cette date (obligatoire) ¦ Hvaðan kemur þessi dagsetning (skylda)
+ex. : Me VIALLE, courriel du 4 nov. ¦ t.d.: Me VIALLE, tölvupóstur 4/11
+Date déplacée : l’ancienne reste en dessous et la modification est notée au 🕓 Journal. ¦ Dagsetning færð: sú gamla stendur fyrir neðan og breytingin er skráð í 🕓 Dagbók.
+Date modifiée ¦ Dagsetningu breytt
+Date importante ajoutée ¦ Mikilvægri dagsetningu bætt við
+🔗 {a} liens ne reposent que sur une pièce, {b} sur aucune. Ce n’est pas une erreur : c’est à vérifier avant la remise. ¦ 🔗 {a} tengsl hvíla á einni sönnun, {b} á engri. Það er ekki villa: að athuga fyrir afhendingu.
+🔗 Chaque lien repose sur assez de pièces. ¦ 🔗 Hver tengsl hvíla á nægum sönnunum.
+Voir les liens ¦ Sjá tengslin
+Une lettre par service ({n}) ¦ Eitt bréf á skrifstofu ({n})
+délivrée le {d} ¦ gefið út {d}
+valable jusqu’au {d} ¦ gilt til {d}
+📅 Date de délivrance ¦ 📅 Útgáfudagur
+Chaque maillon : combien de pièces le prouvent ¦ Hver hlekkur: hve margar sannanir sýna hann
+Héritier concerné ¦ Viðkomandi erfingi
+dossier de preuve « prouvé » ¦ sönnunarmappa „sannað“
+1 pièce, jugée suffisante le {d} ¦ 1 sönnun, talin nægja {d}
+Demander l’acte ¦ Biðja um skjalið
+✓ Une pièce me suffit ici ¦ ✓ Ein sönnun nægir mér hér
+Une « pièce » = une source citée sur l’acte (deux copies du même acte comptent pour une) ; un dossier de preuve « prouvé » compte pour une de plus. ¦ „Sönnun“ = heimildin sem vitnað er í við atburð (tvö afrit sama skjals teljast sem eitt); sönnunarmappan „sannað“ telst sem ein í viðbót.
+Noté au 🕓 Journal ¦ Skráð í 🕓 Dagbók
+Remise bloquée (réglage) ¦ Afhending læst (stilling)
+Des liens ont trop peu de pièces : la remise est bloquée tant qu’ils ne sont pas complétés (ou « Une pièce me suffit ici »). ¦ Sum tengsl hafa of fáar sannanir: afhendingin er læst þar til þeim er bætt við (eða „Ein sönnun nægir mér hér“).
+Pour une recherche, je vous serais reconnaissant(e) de m’adresser une copie des actes suivants : ¦ Vegna rannsóknar væri ég þakklát(ur) ef þú gætir sent mér afrit af eftirfarandi skjölum:
+Les actes manquants, regroupés ¦ Skjöl sem vantar, flokkuð
+Une seule lettre par service au lieu d’une par acte : moins de timbres, moins de relances. Relis et corrige chaque lettre. ¦ Eitt bréf á skrifstofu í stað eins á skjal: færri frímerki, færri áminningar. Lestu og leiðréttu hvert bréf.
+{n} rangées dans le Registre de courriers ¦ {n} skráð í bréfaskrána
+Copie délivrée le ¦ Afrit gefið út
+Durée de validité demandée par ton notaire (mois) ¦ Gildistími sem lögbókandinn þinn krefst (mánuðir)
+Aucune durée par défaut : c’est toi qui la tapes. La 🔔 cloche prévient avant qu’elle ne soit trop ancienne. ¦ Enginn sjálfgefinn tími: þú slærð hann inn. 🔔 Bjallan varar við áður en það verður of gamalt.
+Date de délivrance notée ¦ Útgáfudagur skráður
+recherches négatives : {n} ¦ {n} leitir án árangurs
+« Rien trouvé » est un résultat utile : il montre la diligence au notaire. ¦ „Ekkert fannst“ er gagnleg niðurstaða: hún sýnir lögbókandanum vandvirkni þína.
+Aucune recherche notée pour cette personne. ¦ Engin leit skráð fyrir þessa manneskju.
+Rien n’est recopié : les lignes viennent du 🗓 Journal des recherches, des ⚰️ vérifications INSEE et des 📞 échanges marqués « recherche ». ¦ Ekkert er afritað: línurnar koma úr 🗓 Rannsóknardagbókinni, ⚰️ INSEE-athugunum og 📞 samskiptum merktum „leit“.
+Noter une recherche ¦ Skrá leit
+Pour le notaire ¦ Fyrir lögbókandann
+Recherches faites — {n} ¦ Leitir framkvæmdar — {n}
+＋ Noter une recherche ¦ ＋ Skrá leit
+Où (service, site, mairie…) ¦ Hvar (skjalasafn, vefur, sveitarskrifstofa…)
+Ce qui a été trouvé ¦ Hvað fannst
+Écrit un dépouillement dans le 🗓 Journal des recherches (comme « Où chercher »). ¦ Skráir lestrarblað í 🗓 Rannsóknardagbókina (eins og „Hvar á að leita“).
+Recherche notée ¦ Leit skráð
+Carte des héritiers ¦ Kort af erfingjum
+au numéro (BAN) ¦ að húsnúmeri (BAN)
+Hors carte ¦ Utan korts
+à l’étranger ({c}) ¦ erlendis ({c})
+commune pas placée ({c}) ¦ sveitarfélag ekki staðsett ({c})
+adresse inconnue ¦ heimilisfang óþekkt
+Où vivent les héritiers ¦ Hvar erfingjarnir búa
+Tous les dossiers en cours ¦ Öll mál í vinnslu
+Aucune adresse d’héritier placée sur la carte. ¦ Ekkert heimilisfang erfingja staðsett á kortinu.
+héritier (adresse connue, au niveau de la commune) ¦ erfingi (heimilisfang þekkt, á stigi sveitarfélags)
+notaire connu de l’app ¦ lögbókandi þekktur af forritinu
+Rien n’est envoyé en ligne. ¦ Ekkert er sent á netið.
+La BAN n’est pas encore téléchargée : position à la commune. ¦ BAN ekki enn sótt: staðsetning á stigi sveitarfélags.
+Image de la carte (sans noms) ¦ Mynd af kortinu (án nafna)
+Par organisme, d’après le Registre ¦ Eftir skrifstofu, úr skránni
+Organisme ¦ Skrifstofa
+pas assez de courriers ¦ fá bréf
+De l’envoi à la réponse reçue (demandes d’actes des dossiers). Aide à prévoir la remise et à relancer au bon moment. ¦ Frá sendingu til móttekins svars (beiðnir um skjöl úr málum). Hjálpar þér að skipuleggja afhendingu og minna á í tæka tíð.
+Pas encore de réponse notée dans le Registre. ¦ Ekkert svar skráð í skrána enn.
+Sa part passe dans sa propre succession : ouvrir un dossier lié pour {n} ? ¦ Hlutur hans fer í hans eigið dánarbú: opna tengt mál fyrir {n}?
+🔗 Dossier lié ¦ 🔗 Tengt mál
+Ouvrir le dossier lié ¦ Opna tengt mál
+Dossier lié {n} ouvert ({what}) ¦ Tengt mál {n} opnað ({what})
+Aucun autre dossier en cours dans cette généalogie (d’abord ⇄ Déplacer s’il est dans une autre). ¦ Ekkert annað mál í vinnslu í þessu tré (⇄ Færðu það fyrst ef það er í öðru).
+Fusionner avec un autre dossier ¦ Sameina öðru máli
+Le dossier à réunir dans {n} ¦ Mál til að sameina {n}
+Le numéro du dossier réuni n’est pas réutilisé. ↶ Annuler sépare à nouveau, comme avant. ¦ Númer sameinaða málsins verður ekki notað aftur. ↶ Afturkalla aðskilur þau aftur eins og áður.
+Ce qui ¦ Hvað
+Ce qui se passe ¦ Hvað gerist
+{a} déjà communes, {b} ajoutées ¦ {a} sameiginleg, {b} bætt við
+{d} en double gardée(s) une fois ¦ tvítök haldið einu sinni: {d}
+rattachés, chacun garde son dossier d’origine en étiquette ¦ bætt við, hvert heldur upprunalegu máli sínu sem merki
+rattachés ; les factures émises ne changent pas ¦ bætt við; útgefnir reikningar breytast ekki
+mis bout à bout, chaque ligne marquée de son dossier ¦ hvert á eftir öðru, hver lína merkt máli sínu
+Deux notaires différents : lequel garder ? ¦ Tveir ólíkir lögbókendur: hvorum á að halda?
+Dossiers réunis ¦ Mál sameinuð
+Copie à envoyer au notaire ¦ Afrit fyrir lögbókanda
+Copie à envoyer au notaire… ¦ Afrit fyrir lögbókanda…
+Un fichier que le notaire ouvre d’un double-clic, sans rien pouvoir modifier, chiffré si tu le veux. ¦ Skrá sem lögbókandinn opnar með tvísmelli og getur engu breytt í, dulkóðuð ef þú vilt.
+Part aussi ¦ Fer líka
+📞 échanges · 💶 fonds · ⚰️ vérifications INSEE · 🧾 copie des factures (le registre, lui, ne change pas) ¦ 📞 samskipti · 💶 fjármunir · ⚰️ INSEE-athuganir · 🧾 afrit reikninga (skráin sjálf breytist ekki)
+Mot de passe (obligatoire) ¦ Lykilorð (skylda)
+🔐 Mot de passe ¦ 🔐 Lykilorð
+AES-256, comme les sauvegardes protégées. Oublié = archive perdue. Le réimport le demande. ¦ AES-256, eins og varin afrit. Gleymt = safn glatað. Endurinnflutningur mun biðja um það.
+Mot de passe trop court (8 caractères au moins). ¦ Lykilorðið er of stutt (minnst 8 stafir).
+Les deux mots de passe ne sont pas les mêmes. ¦ Lykilorðin tvö eru ekki eins.
+Mot de passe de l’archive ¦ Lykilorð safns
+🙈 Écran partagé : noms, adresses et montants masqués ¦ 🙈 Samnýttur skjár: nöfn, heimilisföng og upphæðir falin
+Échange mis à la corbeille ¦ Samskipti færð í ruslið
+Fusion annulée : les deux dossiers sont séparés comme avant ¦ Sameining afturkölluð: málin tvö eru aðskilin eins og áður
+Mon cabinet (factures) ¦ Skrifstofan mín (reikningar)
+L’app ne connaît ni ton statut, ni ton régime de TVA, ni les mentions que ta facture doit porter : c’est toi qui les écris, avec ton comptable. L’app les recopie telles quelles. ¦ Forritið þekkir ekki stöðu þína, virðisaukaskattsfyrirkomulag þitt né þau atriði sem reikningurinn þinn verður að bera: þú skrifar þau með bókaranum þínum. Forritið birtir þau óbreytt.
+Mentions à imprimer sur chaque facture (ton texte) ¦ Atriði prentuð á hvern reikning (þinn texti)
+vide : à écrire avec ton comptable ¦ autt: skrifaðu með bókaranum þínum
+Champs obligatoires pour émettre une facture ¦ Skyldureitir til að gefa út reikning
+Un champ que tu as déclaré obligatoire et laissé vide : la facture n’est pas émise. ¦ Reitur sem þú merktir sem skyldu og skildir eftir auðan: reikningurinn er ekki gefinn út.
+🏢 Mon cabinet ¦ 🏢 Skrifstofan mín
+EXEMPLE NON JURIDIQUE — à faire écrire ou relire par ton conseil avant tout usage. ¦ ÓLÖGFRÆÐILEGT DÆMI — láttu ráðgjafa þinn semja það eða yfirfara áður en það er notað.
+ton titre ¦ fyrirsögnin þín
+ton texte : écrit ou relu par ton conseil ¦ textinn þinn: saminn eða yfirfarinn af ráðgjafa þínum
+Mes modèles de contrat ¦ Samningssniðmátin mín
+Ton contrat, avec des champs que l’app remplit ¦ Samningurinn þinn, með reitunum sem forritið fyllir út
+Enregistrer la version ¦ Vista útgáfuna
+L’app ne fournit aucun texte de contrat : c’est un acte qui t’engage et qui engage l’héritier, à faire écrire ou relire par ton conseil. L’app remplit des champs et garde l’historique de tes versions. ¦ Forritið leggur ekki til neinn samningstexta: það er skjal sem bindur þig og erfingjann; láttu ráðgjafa þinn semja það eða yfirfara. Forritið fyllir út reitina og geymir sögu útgáfanna þinna.
+＋ Nouveau modèle ¦ ＋ Nýtt sniðmát
+Mon contrat ¦ Samningurinn minn
+Versions ¦ Útgáfur
+Écris ou importe ton contrat ¦ Skrifaðu eða fluttu inn samninginn þinn
+Importer un .docx / .txt ¦ Flytja inn .docx / .txt
+Aperçu pour un héritier ¦ Forskoðun fyrir erfingjann
+{defunt} n’existe pas : le nom du défunt n’est jamais dans un courrier envoyé avant signature. {pourcentage} vient de 💶 « Honoraires d’un contrat ». ¦ {defunt} er ekki til: nafn arfláta er aldrei í bréfi sem sent er fyrir undirritun. {pourcentage} kemur úr 💶 „Þóknun samkvæmt samningi“.
+version {n} ¦ útgáfa {n}
+Champ inconnu : {f} (ligne {l}). Corrige-le avant d’enregistrer. ¦ Óþekktur reitur: {f} (lína {l}). Leiðréttu hann áður en þú vistar.
+% à noter ¦ % til að fylla inn
+Champ vide : {f} ¦ Auður reitur: {f}
+Version {n} enregistrée (Mes modèles) ¦ Útgáfa {n} vistuð (Sniðmátin mín)
+Fonds par héritier ¦ Fjármunir eftir erfingja
+Aucun montant de succession : l’app ne connaît ni l’actif, ni le passif. On note seulement des mouvements réels que tu as vus passer. ¦ Engin upphæð dánarbús: forritið þekkir hvorki eignir né skuldir. Þú skráir aðeins raunverulegar hreyfingar sem þú hefur séð fara í gegn.
+Reçu du notaire ¦ Móttekið frá lögbókanda
+Frais refacturés ¦ Endurreiknaður kostnaður
+Reversé ¦ Greitt út
+Reste dû ¦ Eftir að greiða
+pas de contrat ¦ án samnings
+reversé de trop : {s} ¦ ofgreitt: {s}
+✓ soldé ¦ ✓ gert upp
+à reverser ¦ til útgreiðslu
+Mouvements ¦ Hreyfingar
+＋ Noter un mouvement ¦ ＋ Skrá hreyfingu
+Commission = % du contrat × montant reçu. Reste dû = reçu − commission − frais − reversé. ¦ Þóknun = % samnings × móttekin upphæð. Eftir = móttekið − þóknun − kostnaður − greitt út.
+✎ Corriger un mouvement ¦ ✎ Leiðrétta hreyfinguna
+Commission proposée : {p} % de {r} = {c} (modifiable) ¦ Tillaga að þóknun: {p} % af {r} = {c} (má breyta)
+virement, chèque… ¦ millifærsla, ávísun…
+Versé à (représentant, si mineur ou sous tutelle) ¦ Greitt út (til fulltrúa ef ólögráða eða í lögráðamennsku)
+Montant incorrect. ¦ Ógild upphæð.
+Mouvement corrigé ¦ Hreyfing leiðrétt
+Mouvement noté ¦ Hreyfing skráð
+versé à {n} ¦ {n} greitt út
+Décompte — {n} ¦ Uppgjör — {n}
+Aucun mouvement noté. ¦ Engin hreyfing skráð.
+Reste à reverser ¦ Eftir að greiða út
+Noter un mouvement ¦ Skrá hreyfingu
+Décompte pour l’héritier ¦ Uppgjör fyrir erfingjann
+Facturer la commission ¦ Reikningsfæra þóknunina
+Facture ¦ Reikningur
+Avoir ¦ Kreditreikningur
+Devis ¦ Tilboð
+N° de TVA ¦ VSK-númer
+BROUILLON ¦ DRÖG
+ÉMIS ¦ ÚTGEFIÐ
+ÉMISE ¦ ÚTGEFINN
+Client ¦ Viðskiptavinur
+Total HT ¦ Samtals án VSK
+TVA {r} % ¦ VSK {r} %
+Total TTC ¦ Samtals með VSK
+Commission du contrat de révélation ({p} % de la part reçue : {r}) ¦ Þóknun samkvæmt uppljóstrunarsamningi ({p} % af mótteknum hlut: {r})
+Commission du contrat de révélation ({p} %) ¦ Þóknun samkvæmt uppljóstrunarsamningi ({p} %)
+Temps passé ({h} h {m}) ¦ Tími varið ({h} klst. {m})
+Frais ¦ Kostnaður
+🧾 DEVIS ¦ 🧾 TILBOÐ
+🧾 FACTURE ¦ 🧾 REIKNINGUR
+{k} {n} ¦ {k} {n}
+Brouillon, pas encore numéroté ¦ Drög, enn án númers
+Garder en brouillon ¦ Halda sem drögum
+Ce que l’app ne fait pas : elle ne connaît ni ton statut, ni ton régime de TVA, ni les mentions que ta facture doit porter. C’est toi qui choisis le taux et qui écris les mentions (avec ton comptable). L’app numérote sans trou, interdit de modifier une facture émise, fait les additions et garde tout. ¦ Það sem forritið gerir ekki: það þekkir ekki stöðu þína, VSK-fyrirkomulag né skylduatriði. Þú velur hlutfallið og skrifar atriðin (með bókaranum þínum). Forritið númerar án gata, bannar breytingu á útgefnum reikningi, leggur saman og geymir allt.
+🏢 Mon cabinet : des champs obligatoires sont vides ({f}) : la facture ne pourra pas être émise. ¦ 🏢 Skrifstofan mín: skyldureitir auðir ({f}): ekki verður hægt að gefa reikninginn út.
+Adresse du client ¦ Heimilisfang viðskiptavinar
+Prix HT ¦ Verð án VSK
+Taux de TVA (%) — choisi par toi ¦ VSK-hlutfall (%) — valið af þér
+ton taux ¦ hlutfallið þitt
+Repris de ta dernière facture ; jamais deviné. ¦ Tekið af síðasta reikningi þínum; aldrei giskað.
+Aucun taux proposé : tape celui que t’a indiqué ton comptable. ¦ Ekkert hlutfall lagt til: skrifaðu það sem bókarinn þinn gaf þér.
+Émettre le devis n° {n} ¦ Gefa út tilboð nr. {n}
+Émettre la facture n° {n} ¦ Gefa út reikning nr. {n}
+Sur la facture ¦ Á reikningnum
+à remplir ¦ til að fylla út
+⏱ Temps passé : non coché, compris dans la commission ¦ ⏱ Tími varið: ekki hakað, innifalið í þóknuninni
+taux à choisir ¦ hlutfall til að velja
+Émettre le devis {n} ? Il reste modifiable tant qu’il n’est pas accepté. ¦ Gefa út tilboð {n}? Það má breyta því meðan það er ekki samþykkt.
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. Émettre {n} ? ¦ Útgefnum reikningi má ekki lengur breyta né eyða. Kreditreikningur leiðréttir hann. Gefa út {n}?
+Émettre ¦ Gefa út
+{n} émise ¦ {n} útgefinn
+Brouillon gardé ¦ Drögum haldið
+brouillon ¦ drög
+émis ¦ útgefinn
+avoir ¦ kredit
+✓ payée le {d} ¦ ✓ greitt {d}
+attendue ¦ væntanlegt
+Tout le cabinet ¦ Öll skrifstofan
+avec les mouvements de fonds ¦ með hreyfingum fjármuna
+CSV pour le comptable ¦ CSV fyrir bókara
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. ¦ Útgefnum reikningi má ekki lengur breyta né eyða. Kreditreikningur leiðréttir hann.
+Chercher… (n°, client, dossier) ¦ Leita… (nr., viðskiptavinur, mál)
+TTC ¦ með VSK
+🧾 Faire un avoir ¦ 🧾 Gefa út kreditreikning
+Payée… ¦ Greitt…
+Accepté ¦ Samþykkt
+Transformer en facture ¦ Breyta í reikning
+Pas encore de facture. ¦ Enginn reikningur enn.
+Brouillon supprimé (aucun numéro consommé) ¦ Drögum eytt (ekkert númer notað)
+L’avoir reprend les lignes de la facture en négatif, avec son propre numéro. Il ne peut plus être modifié. ¦ Kreditreikningurinn tekur línur reikningsins með mínusmerki, með eigin númeri. Honum má ekki lengur breyta.
+Payée ¦ Greitt
+Date (AAAA-MM-JJ) et moyen, ex. : 2026-11-20 virement ¦ Dagsetning (ÁÁÁÁ-MM-DD) og greiðslumáti, t.d.: 2026-11-20 millifærsla
+Paiement noté ¦ Greiðsla skráð
+Devis accepté ¦ Tilboð samþykkt
+Brouillon de facture prêt ¦ Reikningsdrög tilbúin
+Registre des factures ¦ Reikningaskrá
+Factures du dossier ¦ Reikningar málsins
+Devis et factures ¦ Tilboð og reikningar
+Faire un devis ¦ Búa til tilboð
+Faire une facture ¦ Búa til reikning
+Pas encore de facture pour ce dossier. ¦ Enginn reikningur fyrir þetta mál enn.
+HT ¦ án VSK
+{n} base(s) verrouillée(s) non lue(s) ¦ {n} læstir grunnar ólesnir
+Dossiers ouverts ¦ Opin mál
+dont {n} clos ¦ þar af {n} lokuð
+Délai moyen (ouvert → remis) ¦ Meðaltími (opnað → afhent)
+sur {n} dossiers remis ¦ yfir {n} afhent mál
+pas assez de dossiers pour une moyenne ¦ of fá mál fyrir meðaltal
+Contrats signés / refusés ¦ Samningar undirritaðir / hafnaðir
+{p} % signés · {n} sans réponse ¦ {p} % undirritaðir · {n} án svars
+Facturé / encaissé ({k}) ¦ Reikningsfært / innheimt ({k})
+encaissé {a} · reste {b} ¦ {a} innheimt · {b} eftir
+Pas encore de facture : seuls le temps et les contrats sont comptés ¦ Enginn reikningur enn: aðeins tími og samningar taldir
+{n} en cours depuis {m} mois en moyenne ¦ {n} í vinnslu, að meðaltali {m} mánuðir
+Temps passé par dossier (heures) ¦ Tími varið á mál (klukkustundir)
+Aucun temps noté. ¦ Enginn tími skráður.
+Voir en tableau ¦ Sjá sem töflu
+Facturé et encaissé par trimestre ({k}) ¦ Reikningsfært og innheimt eftir ársfjórðungi ({k})
+Facturé ¦ Reikningsfært
+Encaissé ¦ Innheimt
+Aucun nom d’héritier dans cette vue : des numéros de dossier et des totaux. Rien n’est écrit. ¦ Engin nöfn erfingja í þessari sýn: málsnúmer og samtölur. Ekkert er skrifað.
+Pour {n} ¦ Fyrir {n}
+le notaire ¦ lögbókandi
+⤓ Fabriquer la copie ¦ ⤓ Búa til afritið
+Ce qui part ¦ Hvað fer
+Tableau des héritiers et parts, arbre, chaîne de filiation (comme le PDF) ¦ Tafla yfir erfingja og hluti, tré, ættartengslakeðja (eins og PDF-ið)
+📑 Pièces (images des actes) ¦ 📑 Sannanir (myndir af skjölum)
+Adresses des héritiers ¦ Heimilisföng erfingja
+🕵️ Joindre les recherches faites ¦ 🕵️ Láta framkvæmdar leitir fylgja
+Journal, échanges, temps, factures ne partent jamais. ¦ Dagbók, samskipti, tími og reikningar fara aldrei.
+Protection ¦ Vernd
+Le fichier est chiffré (AES-256) ; la page demande le mot de passe à l’ouverture. Donne-le au notaire par un autre moyen (téléphone, SMS). Oublié = fichier illisible, même pour toi (refais-en un). ¦ Skráin er dulkóðuð (AES-256); síðan biður um lykilorðið við opnun. Gefðu lögbókandanum það eftir annarri leið (sími, SMS). Gleymt = ólæsileg skrá, líka fyrir þig (búðu til nýja).
+Copie v{n} ; l’app garde la liste des copies faites, pas les fichiers. ¦ Afrit v{n}; forritið geymir lista yfir gerð afrit, ekki skrárnar.
+Voilà ce qui part : {h} héritiers, {p} pièces, {a} adresse(s). ¦ Fer: {h} erfingjar, {p} sannanir, {a} heimilisföng.
+Fiche confidentielle : {n} retirée (calcul inchangé). ¦ Trúnaðarspjald: {n} sleppt (útreikningur óbreyttur).
+une branche n’est pas tranchée ¦ ein grein er óákveðin
+Fichier trop lourd pour un courriel (plus de 20 Mo). Continuer quand même ? ¦ Skráin er of stór fyrir tölvupóst (yfir 20 MB). Halda samt áfram?
+🤝 Copie pour le notaire ¦ 🤝 Afrit fyrir lögbókanda
+Copie v{v} du {d}, calcul indicatif : à vérifier par l’étude. ¦ Afrit v{v} frá {d}, leiðbeinandi útreikningur: lögbókandaskrifstofan yfirfer.
+{n} · {t} ¦ {n} · {t}
+Copie protégée par un mot de passe. ¦ Afrit varið með lykilorði.
+Copie v{n} fabriquée ¦ Afrit v{n} búið til
+Mouvement supprimé ¦ Hreyfingu eytt
+⚰️ Décès d’un héritier ¦ ⚰️ Andlát erfingja
+Ce que « ✓ C’est lui » écrit : la fiche sert aussi aux autres dossiers. ¦ Hvað „✓ Það er þessi manneskja“ skráir: spjaldið þjónar líka öðrum málum.
+Le décès sur la fiche et le statut du dossier ¦ Andlát á spjaldi og staða í málinu
+Seulement le statut du dossier ¦ Aðeins staða í málinu
+Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de bruit, risque d’en rater. ¦ Vísbendingar birtast frá þessu skori (af 100). Hærra: minni hávaði, hætta á að missa af einni.
+Après chaque nouvel import du fichier INSEE : vérifier les dossiers en cours tout seul (jamais de changement sans ton clic). ¦ Eftir hvern nýjan innflutning INSEE-skrárinnar: athuga málin í vinnslu sjálfkrafa (aldrei breyting án þíns smells).
+Automatique, dans la cloche ¦ Sjálfvirkt, í bjöllunni
+Seulement à la main ¦ Aðeins handvirkt
+📋 Questionnaire ¦ 📋 Spurningalisti
+Ce que l’héritier te renvoie après avoir rempli le questionnaire. ¦ Það sem erfinginn sendir þér til baka eftir útfyllingu.
+Un petit fichier .json ¦ Lítil .json-skrá
+La page .html remplie ¦ Útfyllta .html-síðan
+Pré-rempli : son nom et sa naissance seulement, jamais le défunt ni un montant. ¦ Fyrirfram útfyllt: aðeins nafn hans og fæðing, aldrei arfláti né upphæð.
+Pré-rempli (ce qui le concerne) ¦ Fyrirfram útfyllt (það sem varðar hann)
+Tout vide ¦ Allt autt
+📞 Échanges ¦ 📞 Samskipti
+Où noter et relire les appels, courriels et visites. ¦ Hvar símtöl, tölvupóstar og heimsóknir eru skráð og lesin.
+Un onglet du dossier et un raccourci dans 👥 Héritiers ¦ Málsflipi og flýtileið í 👥 Erfingjum
+Seulement dans 👥 Héritiers ¦ Aðeins í 👥 Erfingjum
+Les courriers du Registre dans la liste des échanges. ¦ Bréf úr skránni í samskiptalistanum.
+Montrés en gris, en lecture ¦ Birt grá, aðeins til lestrar
+Pas montrés ¦ Ekki birt
+📮 Recommandés ¦ 📮 Ábyrgðarbréf
+Relance quand l’accusé de réception n’est pas revenu (réglable aussi pour chaque courrier). ¦ Áminning þegar móttökukvittunin hefur ekki skilað sér (stillanlegt líka fyrir hvert bréf).
+15 jours ¦ 15 dagar
+8 jours ¦ 8 dagar
+21 jours ¦ 21 dagur
+L’app n’interroge jamais La Poste : le lien ouvre la page dans ton navigateur, tu notes toi-même l’AR. ¦ Forritið spyr aldrei La Poste: hlekkurinn opnar síðuna í vafranum þínum, kvittunina skráir þú sjálf(ur).
+Lien vers la page de suivi ¦ Hlekkur á rakningarsíðuna
+Pas de lien (on copie le numéro) ¦ Enginn hlekkur (númerið er afritað)
+Adresse de la page de suivi, avec {numero} (https:// seulement). ¦ Vistfang rakningarsíðunnar, með {numero} (aðeins https://).
+🧾 Devis et factures ¦ 🧾 Tilboð og reikningar
+Un seul registre pour le cabinet ¦ Ein skrá fyrir skrifstofuna
+Dans la généalogie des dossiers ¦ Í tré málanna
+F-2026-0042 (remis à 1 chaque année) ¦ F-2026-0042 (frá 1 á hverju ári)
+Compteur unique (F-0042) ¦ Einn teljari (F-0042)
+La ligne « temps passé » proposée sur la facture. ¦ Línan „tími varið“ lögð til á reikningnum.
+Temps décoché quand il y a une commission ¦ Tími ekki hakaður ef þóknun
+Temps toujours coché ¦ Tími alltaf hakaður
+Préfixe des factures. ¦ Forskeyti reikninga.
+Préfixe des avoirs. ¦ Forskeyti kreditreikninga.
+Préfixe des devis. ¦ Forskeyti tilboða.
+📈 Activité ¦ 📈 Virkni
+La période montrée en ouvrant le tableau de bord. ¦ Tímabil sem birtist þegar yfirlitið er opnað.
+L’année en cours ¦ Þetta ár
+Les 12 derniers mois ¦ Síðustu 12 mánuðir
+Les montants facturés et encaissés. ¦ Reikningsfærðar og innheimtar upphæðir.
+Au choix (bouton) ¦ Eftir þörfum (rofi)
+La copie contient des actes et des noms de vivants. ¦ Afritið inniheldur skjöl og nöfn lifandi fólks.
+Mot de passe coché au départ ¦ Lykilorð hakað í upphafi
+Décoché au départ ¦ Ekki hakað í upphafi
+Le notaire reçoit souvent les adresses à part. ¦ Lögbókandinn fær heimilisföngin oft sér.
+Adresses décochées au départ ¦ Heimilisföng ekki hökuð í upphafi
+Cochées au départ ¦ Hakað í upphafi
+🗺 Carte des héritiers ¦ 🗺 Kort af erfingjum
+Rien n’est envoyé en ligne : la commune vient de la base ; le numéro, seulement si la BAN du département est déjà dans l’app (🗺️ Plan des adresses). ¦ Ekkert er sent á netið: sveitarfélagið kemur úr grunninum; húsnúmerið aðeins ef BAN umdæmisins er þegar í forritinu (🗺️ Heimilisfangakort).
+Le numéro de rue (BAN déjà téléchargée) ¦ Húsnúmer (BAN þegar sótt)
+L’app n’a pas d’annuaire des notaires et n’en invente pas. ¦ Forritið hefur engan lista yfir lögbókendur og býr enga til.
+Les notaires de tes dossiers et contacts ¦ Lögbókendur málanna og tengiliða þinna
+Pas de notaires ¦ Engir lögbókendur
+Le brouillon de contrat écrit par l’app. Un contrat t’engage : fais-le écrire ou relire par ton conseil. ¦ Samningsdrög samin af forritinu. Samningur bindur þig: láttu ráðgjafa þinn semja hann eða yfirfara.
+Retiré : page vide avec les champs ¦ Fjarlægt: auð síða með reitunum
+Gardé, marqué « exemple non juridique » ¦ Haldið, merkt „ólögfræðilegt dæmi“
+Chaque contrat rangé retient la version utilisée. ¦ Hver skráður samningur man útgáfuna sem var notuð.
+Toutes les versions gardées ¦ Öllum útgáfum haldið
+Seulement la dernière ¦ Aðeins sú síðasta
+💶 Fonds ¦ 💶 Fjármunir
+Commission = % du contrat × montant reçu. ¦ Þóknun = % samnings × móttekin upphæð.
+Calculée puis modifiable ¦ Reiknuð, síðan breytanleg
+Toujours tapée à la main ¦ Alltaf skrifuð í höndunum
+Le décompte à l’héritier. ¦ Uppgjör fyrir erfingjann.
+Décompte imprimable ¦ Uppgjör til prentunar
+Écran seulement ¦ Aðeins skjár
+🔗 Double preuve ¦ 🔗 Tvöföld sönnun
+Le seuil d’un lien solide. ¦ Þröskuldur traustra tengsla.
+Deux pièces par lien ¦ Tvær sannanir á tengsl
+Une seule (signaler seulement « aucune ») ¦ Aðeins ein (gefa aðeins til kynna „engin“)
+Dans la liste « avant de remettre ». ¦ Í listanum „fyrir afhendingu“.
+« À revoir » (n’empêche rien) ¦ „Til yfirferðar“ (lokar engu)
+Bloquant ¦ Lokandi
+🗓 Dates importantes ¦ 🗓 Mikilvægar dagsetningar
+Les rappels proposés pour une nouvelle date (réglables pour chaque date). L’app ne calcule aucun délai légal. ¦ Áminningar lagðar til fyrir nýja dagsetningu (stillanlegar fyrir hverja). Forritið reiknar engan lögbundinn frest.
+J−30, J−7, J−1 ¦ D−30, D−7, D−1
+J−7 seulement ¦ Aðeins D−7
+Où les voir dans 📁 Dossier. ¦ Hvar þú sérð þær í 📁 Máli.
+Dans les échéances, avec un drapeau 🗓 ¦ Í frestum, með merkinu 🗓
+Un bloc à part ¦ Sér reitur
+👥 Fusion de dossiers ¦ 👥 Sameining mála
+Les successions restent distinctes : le calcul n’est jamais mélangé. ¦ Dánarbúin haldast aðskilin: útreikningnum er aldrei blandað saman.
+Deux défunts, deux calculs côte à côte ¦ Tveir látnir, tveir útreikningar hlið við hlið
+Dossiers liés (recherches en commun) ¦ Tengd mál (sameiginlegar leitir)
+Combien de temps la fusion peut être annulée. ¦ Hve lengi má afturkalla sameiningu.
+↶ pendant 30 jours ¦ ↶ í 30 daga
+↶ tant que rien n’a été ajouté ¦ ↶ meðan engu hefur verið bætt við
+Joindre les recherches faites au dossier du notaire. ¦ Láta framkvæmdar leitir fylgja möppu lögbókandans.
+Coché au départ ¦ Hakað í upphafi
+📦 Archive ¦ 📦 Safn
+Le mot de passe de l’archive de fin de dossier. Oublié = archive perdue. ¦ Lykilorð safns í lok máls. Gleymt = safn glatað.
+Proposé, coché ¦ Lagt til, hakað
+Pas proposé ¦ Ekki lagt til
+💡 Autres idées ¦ 💡 Fleiri hugmyndir
+🔗 Le dossier lié d’un héritier mort après le défunt. ¦ 🔗 Tengt mál fyrir erfingja sem lést á eftir arfláta.
+Ses descendants rattachés ¦ Afkomendur hans tengdir
+📮 Une lettre par service : quels actes. ¦ 📮 Eitt bréf á skrifstofu: hvaða skjöl.
+Manquants et déjà demandés ¦ Vantar og þegar beðið um
+⏳ Délai de réponse par organisme. ¦ ⏳ Svartími eftir skrifstofu.
+⏳ Nombre de courriers avant de donner un délai. ¦ ⏳ Fjöldi bréfa áður en tími birtist.
+📅 La cloche prévient avant qu’une copie d’acte soit trop ancienne (durée tapée par toi pour chaque pièce). ¦ 📅 Bjallan varar við áður en skjalafrit verður of gamalt (tímann slærðu inn fyrir hverja sönnun).
+7 jours ¦ 7 dagar
+🙈 Écran partagé : ce qui remplace les noms. ¦ 🙈 Samnýttur skjár: hvað kemur í stað nafna.
+Initiales ¦ Upphafsstafir
+Numéros (Héritier 1, 2…) ¦ Númer (Erfingi 1, 2…)
+🙈 Écran partagé : les montants. ¦ 🙈 Samnýttur skjár: upphæðirnar.
+Montants masqués ¦ Upphæðir faldar
+Montants visibles ¦ Upphæðir sýnilegar
+avec AR ¦ með móttökukvittun
+sans AR ¦ án móttökukvittunar
+lettre suivie ¦ rakin sending
+pas en recommandé ¦ ekki í ábyrgð
+Son état civil ¦ Hjúskaparstaða hans
+nom de naissance, prénoms, date et lieu de naissance ¦ fæðingarnafn, fornöfn, fæðingardagur og -staður
+mariage, PACS, divorce, dates ¦ hjúskapur, sambúð, skilnaður, dagsetningar
+prénoms, dates de naissance, décédés ? ¦ nöfn, fæðingardagar, látin?
+avec un moyen de les joindre ¦ með leið til að ná í þau
+Documents qu’il peut fournir ¦ Skjöl sem hann getur lagt fram
+livret de famille, actes, jugement… ¦ fjölskyldubók, skjöl, dómur…
+Une question à toi ¦ Spurning þín
+💾 Fichier à remplir ¦ 💾 Skrá til útfyllingar
+🖨 Papier (PDF) ¦ 🖨 Pappír (PDF)
+Ce qui le concerne ¦ Það sem varðar hann
+Famille connue ¦ Þekkt fjölskylda
+Sa question ¦ Spurning hans
+Reversé à l’héritier ¦ Greitt út til erfingja
+SIRET ¦ SIRET
+Mentions ¦ Atriði
+Trimestre ¦ Ársfjórðungur
+Personnes rattachées ¦ Tengd spjöld
+Courriers, échanges, fonds ¦ Bréf, samskipti, fjármunir
+Temps et frais, échéances ¦ Tími og kostnaður, frestir
+Questionnaire d’héritier fabriqué ¦ Spurningalisti erfingja búinn til
+Réponses d’un questionnaire écrites ¦ Svör spurningalista skráð
+Copie du dossier pour le notaire ¦ Afrit málsins fyrir lögbókanda
+Facture émise ou imprimée ¦ Reikningur gefinn út eða prentaður
+Registre des factures (CSV) ¦ Reikningaskrá (CSV)
+Décompte des fonds imprimé ¦ Uppgjör fjármuna prentað
+Recherches faites (pour le notaire) ¦ Framkvæmdar leitir (fyrir lögbókanda)
+Image de la carte des héritiers ¦ Mynd af korti erfingja
+Contrat imprimé ¦ Samningur prentaður
+Dossiers fusionnés ¦ Mál sameinuð
+chiffrée ¦ dulkóðað
+sans mot de passe ¦ án lykilorðs
+avec les adresses ¦ með heimilisföngum
+sans adresse ¦ án heimilisfangs
+deux défunts ¦ tveir látnir
+dossiers liés ¦ tengd mál
+Aucune lettre à ranger. ¦ Ekkert bréf til að skrá.
+Avec qui ? ¦ Við hvern?
+Ce dossier est archivé : rouvre-le d’abord. ¦ Þetta mál er í safni: opnaðu það fyrst aftur.
+Ce fichier n’est pas un .docx. ¦ Þessi skrá er ekki .docx.
+Ce n’est pas un devis. ¦ Þetta er ekki tilboð.
+Cette facture a déjà un avoir. ¦ Þessi reikningur hefur þegar kreditreikning.
+Choisis la date. ¦ Veldu dagsetningu.
+Choisis toi-même le taux de TVA (avec ton comptable) avant d’émettre. ¦ Veldu VSK-hlutfallið sjálf(ur) (með bókaranum þínum) áður en þú gefur út.
+Choisis un autre dossier. ¦ Veldu annað mál.
+Dossier clos ou archivé : rouvre-le d’abord. ¦ Máli lokað eða í safni: opnaðu það fyrst aftur.
+Déjà émise. ¦ Þegar útgefinn.
+Facture introuvable. ¦ Reikningur fannst ekki.
+La facture n’a aucune ligne. ¦ Reikningurinn hefur enga línu.
+La fusion date de plus de 30 jours : elle ne peut plus être annulée. ¦ Sameiningin er eldri en 30 daga: ekki er lengur hægt að afturkalla hana.
+Le mot de passe est obligatoire (réglage). ¦ Lykilorðið er skylda (stilling).
+Ligne INSEE introuvable. ¦ INSEE-lína fannst ekki.
+Ligne incorrecte : quantité ou prix. ¦ Ógild lína: magn eða verð.
+Mouvement introuvable. ¦ Hreyfing fannst ekki.
+Numéro déjà pris : renuméroter le brouillon. ¦ Númerið er þegar tekið: endurnúmeraðu drögin.
+Où as-tu cherché ? ¦ Hvar leitaðir þú?
+Quelque chose a été ajouté depuis la fusion : elle ne peut plus être annulée. ¦ Einhverju hefur verið bætt við frá sameiningunni: ekki er lengur hægt að afturkalla hana.
+Seule une facture émise peut être payée. ¦ Aðeins útgefinn reikning má greiða.
+Taux de TVA incorrect (ex. : le taux que t’a indiqué ton comptable). ¦ Ógilt VSK-hlutfall (t.d.: hlutfallið sem bókarinn þinn gaf þér).
+Type d’événement « Décès » introuvable. ¦ Atburðategundin „Andlát“ fannst ekki.
+Un avoir corrige une facture émise. ¦ Kreditreikningur leiðréttir útgefinn reikning.
+Un devis accepté ne se modifie plus. ¦ Samþykktu tilboði er ekki lengur breytt.
+« D’où vient cette date » est obligatoire. ¦ „Hvaðan kemur þessi dagsetning“ er skylda.
+Échange introuvable. ¦ Samskipti fundust ekki.
+💶 Un reversement reste en attente : archiver quand même ? ¦ 💶 Útgreiðsla bíður enn: setja samt í safn?
+🔐 Archive protégée : tape son mot de passe. ¦ 🔐 Varið safn: sláðu inn lykilorð þess.
+🏢 Mon cabinet : un champ que tu as déclaré obligatoire est vide ({f}) : la facture n’est pas émise. ¦ 🏢 Skrifstofan mín: reitur sem þú merktir sem skyldu er auður ({f}): reikningurinn er ekki gefinn út.
+J−{n} ¦ D−{n}
+=descendant rattaché ¦ tengdur afkomandi|tengdir afkomendur
+=échange noté ¦ skráð samskipti|skráð samskipti
+# corrections : préfixes, émission datée du jour, INSEE, fiches verrouillées, registre partagé
+le même jour que le défunt, ou une date incomplète : l’ordre des décès n’est pas connu ; le statut reste « Inconnu », à vérifier sur les actes. ¦ sama dag og arfleifandi, eða ófullgerð dagsetning: röð andlátanna er óþekkt; staðan verður áfram „Óþekkt“, athugaðu skjölin.
+Sur la fiche de {n} : un décès en {d} (date incomplète dans le fichier), source « Fichier des personnes décédées (INSEE) », avec la date du relevé. ¦ Á skrá {n}: andlát árið {d} (ófullgerð dagsetning í skránni), heimild „Skrá yfir látna (INSEE)“, með dagsetningu uppflettingar.
+Ce préfixe est déjà celui des factures, des avoirs ou des devis : choisis-en un autre (les trois doivent être différents). ¦ Þetta forskeyti er þegar notað fyrir reikninga, kreditreikninga eða tilboð: veldu annað (öll þrjú verða að vera ólík).
+Préfixe refusé : de 1 à 6 lettres ou chiffres, sans accent. ¦ Forskeyti hafnað: 1 til 6 bókstafir eða tölustafir, án kommu.
+Un seul registre : numérotation continue même si les dossiers sont dans plusieurs généalogies. Passer de l’un à l’autre repartirait d’un autre compteur (numéros en double) : ce choix est bloqué dès la première facture émise. ¦ Ein skrá: samfelld númering jafnvel þótt málin séu í fleiri ættartrjám. Að skipta myndi byrja upp á nýtt á öðrum teljara (tvítekin númer): valið læsist um leið og fyrsti reikningurinn er gefinn út.
+Le compteur ne recule jamais ; un brouillon effacé ne consomme pas de numéro. Bloqué dès la première facture émise. ¦ Teljarinn fer aldrei til baka; eytt drög nota ekkert númer. Læst um leið og fyrsti reikningurinn er gefinn út.
+Une facture est déjà émise dans ce registre : le registre et la numérotation ne se changent plus (sinon, des numéros en double). ¦ Reikningur hefur þegar verið gefinn út í þessari skrá: skránni og númeringunni verður ekki lengur breytt (annars tvítekin númer).
+La dernière pièce émise est datée après aujourd’hui : vérifie la date de l’ordinateur avant d’émettre. ¦ Síðasta útgefna skjalið er dagsett eftir daginn í dag: athugaðu dagsetningu tölvunnar áður en þú gefur út.
+Émettre le devis ¦ Gefa út tilboðið
+Émettre la facture ¦ Gefa út reikninginn
+À l’émission, la pièce prend la date du jour et le prochain numéro du registre ; le numéro donné s’affiche une fois émise. ¦ Við útgáfu fær skjalið daginn í dag og næsta númer skrárinnar; úthlutaða númerið birtist eftir útgáfu.
+Émettre le devis ? Il prend la date du jour et le prochain numéro du registre ; il reste modifiable tant qu’il n’est pas accepté. ¦ Gefa út tilboðið? Það fær daginn í dag og næsta númer skrárinnar; því má breyta þar til það er samþykkt.
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. Émettre la facture ? Elle prend la date du jour et le prochain numéro du registre. ¦ Útgefnum reikningi verður hvorki breytt né eytt. Til að leiðrétta: kreditreikningur. Gefa út reikninginn? Hann fær daginn í dag og næsta númer skrárinnar.
+{n} émise le {d} ¦ {n} gefið út {d}
+Ce devis a déjà sa facture (brouillon ou émise) : ouvre-la dans le registre. ¦ Þetta tilboð er þegar með reikning (drög eða útgefinn): opnaðu hann í skránni.
+Fiche verrouillée : le décès n’est pas écrit. Déverrouille la fiche d’abord, ou choisis « Seulement le statut du dossier » dans les réglages. ¦ Læst skrá: andlátið er ekki skráð. Opnaðu skrána fyrst, eða veldu „Aðeins staða málsins“ í stillingunum.
+Fiche verrouillée : les réponses ne sont pas écrites sur la fiche. Déverrouille-la d’abord. ¦ Læst skrá: svörin eru ekki skráð. Opnaðu hana fyrst.
+Fiche verrouillée : les réponses ne sont pas retirées. Déverrouille-la d’abord. ¦ Læst skrá: svörin eru ekki fjarlægð. Opnaðu hana fyrst.
+💶 Un reversement reste en attente, et un héritier a été trop payé (plus reversé que reçu) : archiver quand même ? ¦ 💶 Útborgun bíður enn, og erfingi fékk ofgreitt (meira greitt út en móttekið): setja samt í safn?
+💶 Trop versé : un héritier a reçu plus que ce que le notaire a versé pour lui (reste négatif) : archiver quand même ? ¦ 💶 Ofgreitt: erfingi fékk meira en lögbókandinn greiddi inn fyrir hann (neikvæð staða): setja samt í safn?
+Cette pièce appartient à une généalogie verrouillée par un mot de passe : ouvre-la d’abord. ¦ Þetta skjal tilheyrir ættartré sem er læst með lykilorði: opnaðu það fyrst.
+Cette généalogie est protégée par un mot de passe : l’archive doit être chiffrée. Choisis un mot de passe pour l’archive. ¦ Þetta ættartré er varið með lykilorði: safnið verður að vera dulkóðað. Veldu lykilorð fyrir safnið.
+Cette généalogie est protégée par un mot de passe : la copie pour le notaire doit être chiffrée (coche « Mot de passe »). ¦ Þetta ættartré er varið með lykilorði: afritið fyrir lögbókandann verður að vera dulkóðað (hakaðu við „Lykilorð“).
+Cette généalogie est protégée par un mot de passe : ce qui en sort est toujours chiffré. ¦ Þetta ættartré er varið með lykilorði: það sem fer úr því er alltaf dulkóðað.
+Copie chiffrée · {n} ¦ Dulkóðað afrit · {n}
+Pièce introuvable. ¦ Skjalið fannst ekki.

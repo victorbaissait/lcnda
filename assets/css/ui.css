@@ -247,6 +247,11 @@ button:disabled, .button:disabled, .is-disabled, .icon-button:disabled { opacity
 .ui-toggle > input:checked + i::after { left: 17px; }
 .ui-toggle > input:focus-visible + i { outline: 3px solid rgba(5, 93, 255, .4); outline-offset: 2px; }
 .ui-toggle > input:disabled + i { opacity: .45; }
+/* K16 au choix (Réglages → Notifications et boutons → Interrupteurs) : les mêmes réglages, dessinés en cases à cocher */
+:root[data-toggles="check"] .ui-toggle > i { width: 18px !important; height: 18px !important; border-radius: 3px !important; background: var(--ui-bg, #fff) !important; border: 2px solid currentColor; box-sizing: border-box; transform: none !important; }
+:root[data-toggles="check"] .ui-toggle > i::after { content: '' !important; display: none; }
+:root[data-toggles="check"] .ui-toggle > input:checked + i { background: var(--ui-blue, #0066cc) !important; border-color: var(--ui-blue, #0066cc); }
+:root[data-toggles="check"] .ui-toggle > input:checked + i::after { display: block; left: 4px !important; top: 0 !important; width: 5px !important; height: 10px !important; background: none !important; border: solid #fff; border-width: 0 2px 2px 0; border-radius: 0 !important; transform: rotate(45deg); }
 
 /* ═════ E1 Barre du haut des éditeurs ═════ */
 .ui-topbar { display: flex; align-items: center; gap: 8px; border: 2px solid var(--ui-ink); background: var(--ui-bg); padding: 8px 10px; flex-wrap: wrap; color: var(--ui-ink); }
@@ -401,7 +406,8 @@ button.secondary.is-busy .ui-spin, .button.secondary.is-busy .ui-spin { border-c
 :root[data-theme="dark"] .ui-skel { background: linear-gradient(90deg, #2c2f34, #383c42, #2c2f34); background-size: 200% 100%; }
 :root[data-theme="dark"] .ui-bubble { background: #2e2a17; border-color: #e8e8e8; }
 :root[data-theme="dark"] .ui-bubble-faq { border-top-color: #5a5232; }
-:root[data-theme="dark"] .ui-toggle > i { background: #555; }
+/* le gris sombre ne vaut que pour l'interrupteur éteint : plus fort que « :checked », il cachait le bleu « allumé » */
+:root[data-theme="dark"] .ui-toggle > input:not(:checked) + i { background: #555; }
 :root[data-theme="dark"] .ui-filters > .is-active { color: #111; }
 :root[data-theme="dark"] .ui-export-fmt.is-active { background: #1d2f4d; }
 :root[data-theme="dark"] .ui-export-prev { background: linear-gradient(160deg, #3a352a, #2a261d); color: #c9b892; }

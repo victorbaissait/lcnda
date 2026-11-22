@@ -1584,7 +1584,7 @@
             cur().push(...objs); sel = objs.map(o => o.id); setTool('select'); commit(label);
         }
         async function importFile(f) {
-            if (!f) return; if (f.size > 25e6) return toast('Fichier trop gros (25 Mo au plus).', 'error');
+            if (!f) return; { const big = window.LCNDA_APP?.mediaLimits?.fileError(f, 'image') ?? (f.size > 100 * 1048576 ? i18n('Fichier trop gros.') : ''); if (big) return toast(big, 'error'); } // 📎 la taille réglée (Réglages → Fichiers des médias)
             try {
                 if (/svg/i.test(f.type) || /\.svg$/i.test(f.name)) { addImported(importSvgText(await f.text()), `SVG importé : ${f.name}`); return; }
                 if (/\.json$/i.test(f.name) || f.type === 'application/json') { await openDrawingFile(f); return; }

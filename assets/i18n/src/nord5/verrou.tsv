@@ -1,0 +1,131 @@
+fr ¦ hr ¦ sl
+# Zone « verrou » : 🔐 mot de passe d’une généalogie et 📜 « Qui a vu quoi » (assets/js/app-verrou*.js, lib/verrou.php, lib/verrou_page.php)
+1 h ¦ 1 h ¦ 1 h
+12 mois ¦ 12 mjeseci ¦ 12 mesecev
+15 min ¦ 15 min ¦ 15 min
+3 ans ¦ 3 godine ¦ 3 leta
+3 mois ¦ 3 mjeseca ¦ 3 meseci
+5 min ¦ 5 min ¦ 5 min
+6 mois ¦ 6 mjeseci ¦ 6 mesecev
+Archive du dossier (.zip) ¦ Arhiva spisa (.zip) ¦ Arhiv spisa (.zip)
+Attention : le verrou n’empêche pas de lire le fichier si quelqu’un le copie (il n’est pas chiffré). Pour ça, chiffre le disque de ton ordinateur (FileVault sur Mac, BitLocker sous Windows). ¦ Pažnja: brava ne sprječava čitanje datoteke ako je netko kopira (nije šifrirana). Za to šifriraj disk svojeg računala (FileVault na Macu, BitLocker na Windowsima). ¦ Pozor: ključavnica ne prepreči branja datoteke, če jo kdo kopira (ni šifrirana). Za to šifriraj disk svojega računalnika (FileVault na Macu, BitLocker v Windows).
+Autre format ¦ Drugi format ¦ Druga oblika
+Base .db ¦ Baza .db ¦ Baza .db
+Bloc ¦ Blok ¦ Blok
+Ce mot de passe contient des caractères illisibles. ¦ Ova lozinka sadrži nečitljive znakove. ¦ To geslo vsebuje neberljive znake.
+Ce mot de passe empêche d’ouvrir cette généalogie dans l’app, ici et après chaque délai sans rien toucher. ¦ Ova lozinka sprječava otvaranje ovog rodoslovlja u aplikaciji, ovdje i nakon svakog razdoblja bez aktivnosti. ¦ To geslo preprečuje odpiranje tega rodoslovja v aplikaciji, tukaj in po vsakem obdobju nedejavnosti.
+Ce que ce mot de passe protège vraiment ¦ Što ova lozinka stvarno štiti ¦ Kaj to geslo res ščiti
+Cette généalogie a déjà un mot de passe : change-le plutôt. ¦ Ovo rodoslovlje već ima lozinku: radije je promijeni. ¦ To rodoslovje že ima geslo: raje ga spremeni.
+Cette généalogie est maintenant protégée par un mot de passe. ¦ Ovo rodoslovlje sada je zaštićeno lozinkom. ¦ To rodoslovje je zdaj zaščiteno z geslom.
+Cette généalogie est protégée : sa sauvegarde l’est aussi, avec le même mot de passe. ¦ Ovo rodoslovlje je zaštićeno: i njegova sigurnosna kopija, istom lozinkom. ¦ To rodoslovje je zaščiteno: tudi njegova varnostna kopija, z istim geslom.
+Cette généalogie est protégée par un mot de passe : dans le dossier choisi, elle n’est jamais copiée en clair. Une copie chiffrée (AES-256, même mot de passe) y est faite quand tu l’ouvres avec son mot de passe ; dans le dossier de l’app, les copies restent comme la base. ¦ Ovo rodoslovlje je zaštićeno lozinkom: u odabranu mapu nikad se ne kopira nešifrirano. Šifrirana kopija (AES-256, ista lozinka) ondje se izrađuje kad ga otvoriš njegovom lozinkom; u mapi aplikacije kopije ostaju kao baza. ¦ To rodoslovje je zaščiteno z geslom: v izbrano mapo se nikoli ne kopira nešifrirano. Šifrirana kopija (AES-256, isto geslo) se tam naredi, ko ga odpreš z njegovim geslom; v mapi aplikacije kopije ostanejo kot baza.
+Cette généalogie est protégée par un mot de passe : ses sauvegardes le sont aussi. Utilise « Sauvegarde complète protégée » avec le même mot de passe. ¦ Ovo rodoslovlje je zaštićeno lozinkom: i njegove sigurnosne kopije. Koristi „Zaštićenu potpunu sigurnosnu kopiju” s istom lozinkom. ¦ To rodoslovje je zaščiteno z geslom: tudi njegove varnostne kopije. Uporabi »Zaščiteno popolno varnostno kopijo« z istim geslom.
+Cette généalogie est verrouillée : donne son mot de passe pour l’ouvrir. ¦ Ovo rodoslovlje je zaključano: upiši njegovu lozinku da ga otvoriš. ¦ To rodoslovje je zaklenjeno: vpiši njegovo geslo, da ga odpreš.
+Cette généalogie est verrouillée par un mot de passe : ouvre-la d’abord. ¦ Ovo rodoslovlje je zaključano lozinkom: najprije ga otvori. ¦ To rodoslovje je zaklenjeno z geslom: najprej ga odpri.
+Cette généalogie n’a pas de mot de passe. ¦ Ovo rodoslovlje nema lozinku. ¦ To rodoslovje nima gesla.
+Changer le délai ¦ Promijeni vrijeme ¦ Spremeni čas
+Changer le mot de passe ¦ Promijeni lozinku ¦ Spremeni geslo
+Changer, ou retirer ¦ Promijeni ili ukloni ¦ Spremeni ali odstrani
+Coche la case : sans ce mot de passe, tu ne pourras plus ouvrir cette généalogie dans l’app. ¦ Označi kućicu: bez ove lozinke više nećeš moći otvoriti ovo rodoslovlje u aplikaciji. ¦ Označi polje: brez tega gesla tega rodoslovja v aplikaciji ne boš mogel več odpreti.
+Courriers en série ¦ Skupna pisma ¦ Serijska pisma
+Dossier déplacé vers une autre généalogie ¦ Spis premješten u drugo rodoslovlje ¦ Spis premaknjen v drugo rodoslovje
+Dossier ou objet ¦ Spis ili stavka ¦ Spis ali predmet
+Dossier, poste, action… ¦ Spis, računalo, radnja… ¦ Spis, računalnik, dejanje…
+Durée changée. Lignes plus anciennes effacées : {n} ¦ Razdoblje promijenjeno. Izbrisani stariji redci: {n} ¦ Obdobje spremenjeno. Izbrisane starejše vrstice: {n}
+Durée de conservation changée ¦ Razdoblje čuvanja promijenjeno ¦ Obdobje hranjenja spremenjeno
+Durée inconnue. ¦ Nepoznato razdoblje. ¦ Neznano obdobje.
+Délai de reverrouillage changé ¦ Vrijeme do ponovnog zaključavanja promijenjeno ¦ Čas do ponovnega zaklepa spremenjen
+Délai de reverrouillage inconnu. ¦ Nepoznato vrijeme do ponovnog zaključavanja. ¦ Neznan čas do ponovnega zaklepa.
+Elle est protégée par un mot de passe. ¦ Zaštićeno je lozinkom. ¦ Zaščiteno je z geslom.
+Export ¦ Izvoz ¦ Izvoz
+Exports ¦ Izvozi ¦ Izvozi
+Force : {s} ¦ Jačina: {s} ¦ Moč: {s}
+Généalogie ouverte avec le mot de passe ¦ Rodoslovlje otvoreno lozinkom ¦ Rodoslovje odprto z geslom
+Il n’y a pas d’autre généalogie. ¦ Nema drugog rodoslovlja. ¦ Drugega rodoslovja ni.
+Impossible de retirer le verrou (dossier des données en lecture seule ?). ¦ Nije moguće ukloniti bravu (mapa podataka samo za čitanje?). ¦ Ključavnice ni mogoče odstraniti (mapa s podatki samo za branje?).
+Impossible de vérifier le mot de passe (dossier des données en lecture seule ?). ¦ Nije moguće provjeriti lozinku (mapa podataka samo za čitanje?). ¦ Gesla ni mogoče preveriti (mapa s podatki samo za branje?).
+Impossible d’enregistrer le verrou (dossier des données en lecture seule ?). ¦ Nije moguće spremiti bravu (mapa podataka samo za čitanje?). ¦ Ključavnice ni mogoče shraniti (mapa s podatki samo za branje?).
+Impossible d’ouvrir cette généalogie. ¦ Nije moguće otvoriti ovo rodoslovlje. ¦ Tega rodoslovja ni mogoče odpreti.
+Impression ou PDF ¦ Ispis ili PDF ¦ Tiskanje ali PDF
+Impressions ¦ Ispisi ¦ Tiskanja
+Journal du dossier (CSV) ¦ Dnevnik spisa (CSV) ¦ Dnevnik spisa (CSV)
+J’ai compris : sans ce mot de passe, je ne pourrai plus ouvrir cette généalogie dans l’app. ¦ Razumijem: bez ove lozinke više neću moći otvoriti ovo rodoslovlje u aplikaciji. ¦ Razumem: brez tega gesla tega rodoslovja v aplikaciji ne bom mogel več odpreti.
+Le mot de passe est trop long (1024 caractères au plus). ¦ Lozinka je preduga (najviše 1024 znaka). ¦ Geslo je predolgo (največ 1024 znakov).
+Le serveur de l’app ne répond pas. Réessaie. ¦ Poslužitelj aplikacije ne odgovara. Pokušaj ponovno. ¦ Strežnik aplikacije se ne odziva. Poskusi znova.
+Le verrou n’empêche pas de lire le fichier si quelqu’un le copie : il n’est pas chiffré. Pour ça, chiffre le disque de ton ordinateur : FileVault sur Mac (Réglages Système → Confidentialité et sécurité), BitLocker sous Windows (Paramètres → Confidentialité et sécurité → Chiffrement de l’appareil). ¦ Brava ne sprječava čitanje datoteke ako je netko kopira: nije šifrirana. Za to šifriraj disk svojeg računala: FileVault na Macu (Postavke sustava → Privatnost i sigurnost), BitLocker na Windowsima (Postavke → Privatnost i sigurnost → Šifriranje uređaja). ¦ Ključavnica ne prepreči branja datoteke, če jo kdo kopira: ni šifrirana. Za to šifriraj disk svojega računalnika: FileVault na Macu (Sistemske nastavitve → Zasebnost in varnost), BitLocker v Windows (Nastavitve → Zasebnost in varnost → Šifriranje naprave).
+Lecture seule : rien ne se modifie ; seule cette durée fait disparaître les lignes plus vieilles (et c’est noté). ¦ Samo za čitanje: ništa se ne mijenja; samo ovo razdoblje uklanja starije retke (i to se bilježi). ¦ Samo za branje: nič se ne spreminja; le to obdobje odstrani starejše vrstice (in to se zabeleži).
+Lecture seule. Tous les dossiers : Réglages → 📜 Qui a vu quoi. ¦ Samo za čitanje. Svi spisi: Postavke → 📜 Tko je što vidio. ¦ Samo za branje. Vsi spisi: Nastavitve → 📜 Kdo je kaj videl.
+Les deux mots de passe ne sont pas pareils. ¦ Dvije lozinke nisu iste. ¦ Gesli nista enaki.
+Les ouvertures de dossier, les impressions, les exports, les courriers en série et chaque essai du mot de passe, notés par l’app sur ce poste ({machine}). ¦ Otvaranja spisa, ispisi, izvozi, skupna pisma i svaki pokušaj lozinke, koje je aplikacija zabilježila na ovom računalu ({machine}). ¦ Odpiranja spisov, tiskanja, izvozi, serijska pisma in vsak poskus gesla, ki jih je aplikacija zabeležila na tem računalniku ({machine}).
+Les sauvegardes de cette généalogie sont toujours protégées par ce mot de passe (AES-256) : aucune copie ne sort en clair de son dossier. ¦ Sigurnosne kopije ovog rodoslovlja uvijek su zaštićene ovom lozinkom (AES-256): nijedna kopija ne izlazi nešifrirana iz njegove mape. ¦ Varnostne kopije tega rodoslovja so vedno zaščitene s tem geslom (AES-256): nobena kopija ne zapusti njegove mape nešifrirana.
+Lettres rangées : {n} ¦ Spremljena pisma: {n} ¦ Vložena pisma: {n}
+Lettres retirées (↶ Annuler) : {n} ¦ Povučena pisma (↶ Poništi): {n} ¦ Umaknjena pisma (↶ Razveljavi): {n}
+Lignes : {n} sur {t} ¦ Redci: {n} od {t} ¦ Vrstice: {n} od {t}
+Lignes anciennes effacées ¦ Izbrisani stari redci ¦ Izbrisane stare vrstice
+Lignes effacées : {n} (gardées : {m}) ¦ Izbrisani redci: {n} (čuva se: {m}) ¦ Izbrisane vrstice: {n} (hrani se: {m})
+Mode consultation : le registre ne se lit pas. ¦ Način pregledavanja: zapisnik se ne može čitati. ¦ Način ogleda: zapisnika ni mogoče brati.
+Mot de passe changé ¦ Lozinka promijenjena ¦ Geslo spremenjeno
+Mot de passe changé. Les autres fenêtres ouvertes devront le redemander. ¦ Lozinka promijenjena. Ostali otvoreni prozori morat će je ponovno zatražiti. ¦ Geslo spremenjeno. Druga odprta okna ga bodo morala znova zahtevati.
+Mot de passe de cette généalogie ¦ Lozinka ovog rodoslovlja ¦ Geslo tega rodoslovja
+Mot de passe oublié : il n’y a pas de porte dérobée. Sans lui, cette généalogie ne peut plus être ouverte dans l’app. ¦ Zaboravljena lozinka: nema stražnjih vrata. Bez nje se ovo rodoslovlje više ne može otvoriti u aplikaciji. ¦ Pozabljeno geslo: zadnjih vrat ni. Brez njega tega rodoslovja v aplikaciji ni več mogoče odpreti.
+Mot de passe oublié ? ¦ Zaboravio si lozinku? ¦ Si pozabil geslo?
+Mot de passe posé ¦ Lozinka postavljena ¦ Geslo nastavljeno
+Mot de passe refusé ¦ Lozinka odbijena ¦ Geslo zavrnjeno
+Mot de passe retiré ¦ Lozinka uklonjena ¦ Geslo odstranjeno
+Musée de famille ¦ Obiteljski muzej ¦ Družinski muzej
+Ouvertures ¦ Otvaranja ¦ Odpiranja
+Ouverture… ¦ Otvaranje… ¦ Odpiranje…
+Ouvrir une autre généalogie ¦ Otvori drugo rodoslovlje ¦ Odpri drugo rodoslovje
+Paquet du travail à deux ¦ Paket rada u dvoje ¦ Paket dela v dvoje
+Partage avec la famille ¦ Dijeljenje s obitelji ¦ Deljenje z družino
+Patiente {n} s ¦ Pričekaj {n} s ¦ Počakaj {n} s
+Patiente {n} s avant de réessayer. ¦ Pričekaj {n} s prije novog pokušaja. ¦ Počakaj {n} s, preden poskusiš znova.
+Poste ¦ Računalo ¦ Računalnik
+Pour une généalogie protégée, tape son mot de passe : la sauvegarde est chiffrée avec lui (AES-256). ¦ Za zaštićeno rodoslovlje upiši njegovu lozinku: kopija se njome šifrira (AES-256). ¦ Pri zaščitenem rodoslovju vpiši njegovo geslo: kopija se z njim šifrira (AES-256).
+Protéger ¦ Zaštiti ¦ Zaščiti
+Protéger cette généalogie ¦ Zaštiti ovo rodoslovlje ¦ Zaščiti to rodoslovje
+Protégée ¦ Zaštićeno ¦ Zaščiteno
+Qui a vu ce dossier ¦ Tko je vidio ovaj spis ¦ Kdo je videl ta spis
+Qui a vu le dossier {n} ¦ Tko je vidio spis {n} ¦ Kdo je videl spis {n}
+Qui a vu quoi ¦ Tko je što vidio ¦ Kdo je kaj videl
+Registre « Qui a vu quoi » (CSV) ¦ Zapisnik „Tko je što vidio” (CSV) ¦ Zapisnik »Kdo je kaj videl« (CSV)
+Retirer le mot de passe ¦ Ukloni lozinku ¦ Odstrani geslo
+Retirer le mot de passe de « {name} » ? Elle s’ouvrira sans rien demander, et ses sauvegardes ne seront plus forcément protégées. ¦ Ukloniti lozinku rodoslovlja „{name}”? Otvarat će se bez pitanja, a njegove sigurnosne kopije više neće nužno biti zaštićene. ¦ Odstraniti geslo rodoslovja »{name}«? Odpiralo se bo brez vprašanja, njegove varnostne kopije pa ne bodo več nujno zaščitene.
+Reverrouillée (délai passé ou app relancée) ¦ Ponovno zaključano (vrijeme isteklo ili aplikacija ponovno pokrenuta) ¦ Znova zaklenjeno (čas je potekel ali je bila aplikacija znova zagnana)
+Sans ce mot de passe, cette généalogie ne peut plus être ouverte dans l’app : il n’existe pas de porte dérobée, et personne ne peut le retrouver pour toi. ¦ Bez ove lozinke ovo se rodoslovlje više ne može otvoriti u aplikaciji: ne postoje stražnja vrata i nitko je ne može pronaći za tebe. ¦ Brez tega gesla tega rodoslovja v aplikaciji ni več mogoče odpreti: zadnjih vrat ni in nihče ga ne more najti zate.
+Sauvegarde complète ¦ Potpuna sigurnosna kopija ¦ Popolna varnostna kopija
+Se verrouille après {m} sans rien toucher, à la fermeture de l’app et quand on change de généalogie. ¦ Zaključava se nakon {m} bez aktivnosti, pri zatvaranju aplikacije i pri promjeni rodoslovlja. ¦ Zaklene se po {m} nedejavnosti, ob zaprtju aplikacije in ob menjavi rodoslovja.
+Site web ¦ Web-mjesto ¦ Spletno mesto
+Site web publié ¦ Web-mjesto objavljeno ¦ Spletno mesto objavljeno
+Tableau de bord des dossiers (CSV) · dossiers : {n} ¦ Pregled spisa (CSV) · spisi: {n} ¦ Pregled spisov (CSV) · spisi: {n}
+Tableau, arbre ou parts imprimés ¦ Ispisana tablica, stablo ili udjeli ¦ Natisnjena tabela, drevo ali deleži
+Tape d’abord le mot de passe actuel. ¦ Najprije upiši trenutačnu lozinku. ¦ Najprej vpiši trenutno geslo.
+Tape le mot de passe. ¦ Upiši lozinku. ¦ Vpiši geslo.
+Tout le registre ¦ Cijeli zapisnik ¦ Ves zapisnik
+Un verrou à l’ouverture de « {name} », sur cet ordinateur et sur les autres. ¦ Brava pri otvaranju „{name}”, na ovom računalu i na ostalima. ¦ Ključavnica ob odpiranju »{name}«, na tem računalniku in na drugih.
+Verrouiller après ¦ Zaključaj nakon ¦ Zakleni po
+Verrouiller maintenant ¦ Zaključaj sada ¦ Zakleni zdaj
+Verrouiller maintenant (généalogie protégée par un mot de passe) ¦ Zaključaj sada (rodoslovlje zaštićeno lozinkom) ¦ Zakleni zdaj (rodoslovje, zaščiteno z geslom)
+Verrouillée : {names} (ouvre-la avec son mot de passe pour voir ses dossiers) ¦ Zaključano: {names} (otvori ga lozinkom da vidiš njegove spise) ¦ Zaklenjeno: {names} (odpri ga z geslom, da vidiš njegove spise)
+Verrouillée à la main ¦ Ručno zaključano ¦ Ročno zaklenjeno
+après {m} ¦ nakon {m} ¦ po {m}
+pour changer le délai ¦ za promjenu vremena ¦ za spremembo časa
+pour changer le mot de passe ¦ za promjenu lozinke ¦ za spremembo gesla
+pour retirer le mot de passe ¦ za uklanjanje lozinke ¦ za odstranitev gesla
+pour une sauvegarde protégée ¦ za zaštićenu kopiju ¦ za zaščiteno kopijo
+protégée par un mot de passe ¦ zaštićeno lozinkom ¦ zaščiteno z geslom
+sans rien toucher ¦ bez aktivnosti ¦ nedejavnosti
+très bon ¦ vrlo dobra ¦ zelo dobra
+« {name} » est verrouillée ¦ „{name}” je zaključano ¦ »{name}« je zaklenjeno
+📜 Qui a vu quoi ¦ 📜 Tko je što vidio ¦ 📜 Kdo je kaj videl
+🔐 Généalogie verrouillée ¦ 🔐 Rodoslovlje zaključano ¦ 🔐 Rodoslovje zaklenjeno
+🔐 Mot de passe de cette généalogie ¦ 🔐 Lozinka ovog rodoslovlja ¦ 🔐 Geslo tega rodoslovja
+faible ¦ slaba ¦ šibka
+moyen ¦ srednja ¦ srednja
+bon ¦ dobra ¦ dobra
+pour ouvrir la généalogie ¦ za otvaranje rodoslovlja ¦ za odpiranje rodoslovja
+Ce dossier appartient à l’app (données, médias ou sauvegardes d’une généalogie) : choisis un autre dossier. ¦ Ova mapa pripada aplikaciji (podaci, mediji ili kopije rodoslovlja): odaberi drugu mapu. ¦ Ta mapa pripada aplikaciji (podatki, mediji ali kopije rodoslovja): izberi drugo mapo.
+Ce fichier est rangé dans les dossiers de l’app : choisis un fichier ailleurs. ¦ Ova je datoteka u mapama aplikacije: odaberi datoteku negdje drugdje. ¦ Ta datoteka je v mapah aplikacije: izberi datoteko drugje.
+Cette copie est rangée dans les dossiers d’une autre généalogie : elle ne peut pas être remise ici. ¦ Ova je kopija u mapama drugog rodoslovlja: ne može se vratiti ovdje. ¦ Ta kopija je v mapah drugega rodoslovja: tukaj je ni mogoče obnoviti.
+Cette copie vient d’une généalogie protégée par un mot de passe : ouvre-la pour la restaurer. ¦ Ova kopija dolazi iz rodoslovlja zaštićenog lozinkom: otvori ga da je vratiš. ¦ Ta kopija prihaja iz rodoslovja, zaščitenega z geslom: odpri ga, da jo obnoviš.
+Cette base est protégée par un mot de passe : donne-le pour l’ouvrir. ¦ Ova je baza zaštićena lozinkom: upiši je da je otvoriš. ¦ Ta baza je zaščitena z geslom: vpiši ga, da jo odpreš.

@@ -1614,3 +1614,37 @@ Lien à consolider : {child}, le fils de {parent} ¦ Güçlendirilecek bağ: {ch
 Lien à consolider : {child}, la fille de {parent} ¦ Güçlendirilecek bağ: {child} ({parent} kişisinin kızı)
 Lien à consolider : {child}, l’enfant de {parent} ¦ Güçlendirilecek bağ: {child} ({parent} kişisinin çocuğu)
 cherche l’acte de naissance ou de baptême qui le nomme ¦ onu adıyla anan doğum ya da vaftiz belgesini ara
+# ═════ Poser une question : mariage et enfants (lib/question_famille.php) ═════
+mariées ¦ evli
+mariés ¦ evli
+jamais mariées ¦ hiç evlenmemiş
+jamais mariés ¦ hiç evlenmemiş
+=au moins {n} mariages ¦ en az {n} evlilik|en az {n} evlilik
+mariées à {n} ans ¦ {n} yaşında evlenmiş
+mariés à {n} ans ¦ {n} yaşında evlenmiş
+mariées entre {a} et {b} ans ¦ {a}–{b} yaşları arasında evlenmiş
+mariés entre {a} et {b} ans ¦ {a}–{b} yaşları arasında evlenmiş
+mariées après {n} ans ¦ {n} yaşından sonra evlenmiş
+mariés après {n} ans ¦ {n} yaşından sonra evlenmiş
+mariées avant {n} ans ¦ {n} yaşından önce evlenmiş
+mariés avant {n} ans ¦ {n} yaşından önce evlenmiş
+sans enfant ¦ çocuksuz
+avec des enfants ¦ çocuklu
+entre {a} et {b} enfants ¦ {a} ile {b} arası çocuk
+=exactement {n} enfants ¦ tam {n} çocuk|tam {n} çocuk
+=au moins {n} enfants ¦ en az {n} çocuk|en az {n} çocuk
+=au plus {n} enfants ¦ en fazla {n} çocuk|en fazla {n} çocuk
+exactement 1 enfant ¦ tam 1 çocuk
+au plus 1 enfant ¦ en fazla 1 çocuk
+nées avant {y} ¦ {y} öncesi doğmuş
+nés avant {y} ¦ {y} öncesi doğmuş
+nées après {y} ¦ {y} sonrası doğmuş
+nés après {y} ¦ {y} sonrası doğmuş
+nées en {y} ¦ doğum yılı {y}
+nés en {y} ¦ doğum yılı {y}
+nées au {n}e siècle ¦ {n}. yüzyılda doğmuş
+nés au {n}e siècle ¦ {n}. yüzyılda doğmuş
+1 fiche sans date n’a pas pu être vérifiée pour l’âge au mariage (année de naissance ou de mariage inconnue). ¦ Tarihi olmayan 1 kayıt evlenme yaşı için kontrol edilemedi (doğum veya evlilik yılı bilinmiyor).
+={n} fiches sans date n’ont pas pu être vérifiées pour l’âge au mariage (année de naissance ou de mariage inconnue). ¦ Tarihi olmayan {n} kayıt evlenme yaşı için kontrol edilemedi (doğum veya evlilik yılı bilinmiyor).|Tarihi olmayan {n} kayıt evlenme yaşı için kontrol edilemedi (doğum veya evlilik yılı bilinmiyor).
+« Jeunes » n’est pas assez précis pour un âge : écris par exemple « mariées avant 20 ans ». ¦ “Jeunes” (genç) bir yaş için yeterince kesin değil: örneğin “mariées avant 20 ans” yaz.
+Venue d’une question : les critères de mariage et d’enfants sont gardés. ¦ Bir sorudan: evlilik ve çocuk ölçütleri korunur.

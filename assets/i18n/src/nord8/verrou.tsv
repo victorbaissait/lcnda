@@ -1,0 +1,131 @@
+fr ¦ tr
+# Zone « verrou » : 🔐 mot de passe d’une généalogie et 📜 « Qui a vu quoi » (assets/js/app-verrou*.js, lib/verrou.php, lib/verrou_page.php)
+1 h ¦ 1 sa
+12 mois ¦ 12 ay
+15 min ¦ 15 dk
+3 ans ¦ 3 yıl
+3 mois ¦ 3 ay
+5 min ¦ 5 dk
+6 mois ¦ 6 ay
+Archive du dossier (.zip) ¦ Dosya arşivi (.zip)
+Attention : le verrou n’empêche pas de lire le fichier si quelqu’un le copie (il n’est pas chiffré). Pour ça, chiffre le disque de ton ordinateur (FileVault sur Mac, BitLocker sous Windows). ¦ Dikkat: kilit, biri dosyayı kopyalarsa onu okumasını engellemez (şifreli değildir). Bunun için bilgisayarının diskini şifrele (Mac'te FileVault, Windows'ta BitLocker).
+Autre format ¦ Başka biçim
+Base .db ¦ .db veritabanı
+Bloc ¦ Blok
+Ce mot de passe contient des caractères illisibles. ¦ Bu parola okunamayan karakterler içeriyor.
+Ce mot de passe empêche d’ouvrir cette généalogie dans l’app, ici et après chaque délai sans rien toucher. ¦ Bu parola, bu soy ağacının uygulamada açılmasını engeller; burada ve her hareketsiz sürenin ardından.
+Ce que ce mot de passe protège vraiment ¦ Bu parolanın gerçekten koruduğu şey
+Cette généalogie a déjà un mot de passe : change-le plutôt. ¦ Bu soy ağacının zaten bir parolası var: onu değiştir.
+Cette généalogie est maintenant protégée par un mot de passe. ¦ Bu soy ağacı artık bir parolayla korunuyor.
+Cette généalogie est protégée : sa sauvegarde l’est aussi, avec le même mot de passe. ¦ Bu soy ağacı korunuyor: yedeği de aynı parolayla.
+Cette généalogie est protégée par un mot de passe : dans le dossier choisi, elle n’est jamais copiée en clair. Une copie chiffrée (AES-256, même mot de passe) y est faite quand tu l’ouvres avec son mot de passe ; dans le dossier de l’app, les copies restent comme la base. ¦ Bu soy ağacı bir parolayla korunuyor: seçilen klasöre asla şifresiz kopyalanmaz. Onu parolasıyla açtığında oraya şifreli bir kopya (AES-256, aynı parola) yapılır; uygulamanın klasöründe kopyalar veritabanı gibi kalır.
+Cette généalogie est protégée par un mot de passe : ses sauvegardes le sont aussi. Utilise « Sauvegarde complète protégée » avec le même mot de passe. ¦ Bu soy ağacı bir parolayla korunuyor: yedekleri de. Aynı parolayla “Korumalı tam yedek”i kullan.
+Cette généalogie est verrouillée : donne son mot de passe pour l’ouvrir. ¦ Bu soy ağacı kilitli: açmak için parolasını gir.
+Cette généalogie est verrouillée par un mot de passe : ouvre-la d’abord. ¦ Bu soy ağacı bir parolayla kilitli: önce onu aç.
+Cette généalogie n’a pas de mot de passe. ¦ Bu soy ağacının parolası yok.
+Changer le délai ¦ Süreyi değiştir
+Changer le mot de passe ¦ Parolayı değiştir
+Changer, ou retirer ¦ Değiştir ya da kaldır
+Coche la case : sans ce mot de passe, tu ne pourras plus ouvrir cette généalogie dans l’app. ¦ Kutuyu işaretle: bu parola olmadan bu soy ağacını uygulamada artık açamazsın.
+Courriers en série ¦ Toplu mektuplar
+Dossier déplacé vers une autre généalogie ¦ Dosya başka bir soy ağacına taşındı
+Dossier ou objet ¦ Dosya ya da nesne
+Dossier, poste, action… ¦ Dosya, bilgisayar, işlem…
+Durée changée. Lignes plus anciennes effacées : {n} ¦ Süre değişti. Silinen eski satırlar: {n}
+Durée de conservation changée ¦ Saklama süresi değişti
+Durée inconnue. ¦ Bilinmeyen süre.
+Délai de reverrouillage changé ¦ Yeniden kilitleme süresi değişti
+Délai de reverrouillage inconnu. ¦ Bilinmeyen yeniden kilitleme süresi.
+Elle est protégée par un mot de passe. ¦ Bir parolayla korunuyor.
+Export ¦ Dışa aktarma
+Exports ¦ Dışa aktarmalar
+Force : {s} ¦ Güç: {s}
+Généalogie ouverte avec le mot de passe ¦ Soy ağacı parolayla açıldı
+Il n’y a pas d’autre généalogie. ¦ Başka soy ağacı yok.
+Impossible de retirer le verrou (dossier des données en lecture seule ?). ¦ Kilit kaldırılamıyor (veri klasörü salt okunur mu?).
+Impossible de vérifier le mot de passe (dossier des données en lecture seule ?). ¦ Parola denetlenemiyor (veri klasörü salt okunur mu?).
+Impossible d’enregistrer le verrou (dossier des données en lecture seule ?). ¦ Kilit kaydedilemiyor (veri klasörü salt okunur mu?).
+Impossible d’ouvrir cette généalogie. ¦ Bu soy ağacı açılamıyor.
+Impression ou PDF ¦ Yazdırma ya da PDF
+Impressions ¦ Yazdırmalar
+Journal du dossier (CSV) ¦ Dosya günlüğü (CSV)
+J’ai compris : sans ce mot de passe, je ne pourrai plus ouvrir cette généalogie dans l’app. ¦ Anladım: bu parola olmadan bu soy ağacını uygulamada artık açamam.
+Le mot de passe est trop long (1024 caractères au plus). ¦ Parola çok uzun (en fazla 1024 karakter).
+Le serveur de l’app ne répond pas. Réessaie. ¦ Uygulamanın sunucusu yanıt vermiyor. Yeniden dene.
+Le verrou n’empêche pas de lire le fichier si quelqu’un le copie : il n’est pas chiffré. Pour ça, chiffre le disque de ton ordinateur : FileVault sur Mac (Réglages Système → Confidentialité et sécurité), BitLocker sous Windows (Paramètres → Confidentialité et sécurité → Chiffrement de l’appareil). ¦ Kilit, biri dosyayı kopyalarsa onu okumasını engellemez: şifreli değildir. Bunun için bilgisayarının diskini şifrele: Mac'te FileVault (Sistem Ayarları → Gizlilik ve Güvenlik), Windows'ta BitLocker (Ayarlar → Gizlilik ve güvenlik → Cihaz şifrelemesi).
+Lecture seule : rien ne se modifie ; seule cette durée fait disparaître les lignes plus vieilles (et c’est noté). ¦ Salt okunur: hiçbir şey değişmez; yalnızca bu süre eski satırları kaldırır (ve bu kaydedilir).
+Lecture seule. Tous les dossiers : Réglages → 📜 Qui a vu quoi. ¦ Salt okunur. Tüm dosyalar: Ayarlar → 📜 Kim neyi gördü.
+Les deux mots de passe ne sont pas pareils. ¦ İki parola aynı değil.
+Les ouvertures de dossier, les impressions, les exports, les courriers en série et chaque essai du mot de passe, notés par l’app sur ce poste ({machine}). ¦ Dosya açılışları, yazdırmalar, dışa aktarmalar, toplu mektuplar ve her parola denemesi; uygulama tarafından bu bilgisayarda kaydedildi ({machine}).
+Les sauvegardes de cette généalogie sont toujours protégées par ce mot de passe (AES-256) : aucune copie ne sort en clair de son dossier. ¦ Bu soy ağacının yedekleri her zaman bu parolayla korunur (AES-256): hiçbir kopya klasöründen şifresiz çıkmaz.
+Lettres rangées : {n} ¦ Dosyalanan mektuplar: {n}
+Lettres retirées (↶ Annuler) : {n} ¦ Geri alınan mektuplar (↶ Geri al): {n}
+Lignes : {n} sur {t} ¦ Satırlar: {n} / {t}
+Lignes anciennes effacées ¦ Eski satırlar silindi
+Lignes effacées : {n} (gardées : {m}) ¦ Silinen satırlar: {n} (saklama: {m})
+Mode consultation : le registre ne se lit pas. ¦ Görüntüleme modu: kayıt okunamaz.
+Mot de passe changé ¦ Parola değişti
+Mot de passe changé. Les autres fenêtres ouvertes devront le redemander. ¦ Parola değişti. Açık olan diğer pencerelerin onu yeniden istemesi gerekecek.
+Mot de passe de cette généalogie ¦ Bu soy ağacının parolası
+Mot de passe oublié : il n’y a pas de porte dérobée. Sans lui, cette généalogie ne peut plus être ouverte dans l’app. ¦ Unutulan parola: arka kapı yok. O olmadan bu soy ağacı uygulamada artık açılamaz.
+Mot de passe oublié ? ¦ Parolanı mı unuttun?
+Mot de passe posé ¦ Parola ayarlandı
+Mot de passe refusé ¦ Parola reddedildi
+Mot de passe retiré ¦ Parola kaldırıldı
+Musée de famille ¦ Aile müzesi
+Ouvertures ¦ Açılışlar
+Ouverture… ¦ Açılıyor…
+Ouvrir une autre généalogie ¦ Başka bir soy ağacı aç
+Paquet du travail à deux ¦ İkili çalışma paketi
+Partage avec la famille ¦ Aileyle paylaşım
+Patiente {n} s ¦ {n} sn bekle
+Patiente {n} s avant de réessayer. ¦ Yeniden denemeden önce {n} sn bekle.
+Poste ¦ Bilgisayar
+Pour une généalogie protégée, tape son mot de passe : la sauvegarde est chiffrée avec lui (AES-256). ¦ Korumalı bir soy ağacı için parolasını yaz: yedek onunla şifrelenir (AES-256).
+Protéger ¦ Koru
+Protéger cette généalogie ¦ Bu soy ağacını koru
+Protégée ¦ Korumalı
+Qui a vu ce dossier ¦ Bu dosyayı kim gördü
+Qui a vu le dossier {n} ¦ {n} dosyasını kim gördü
+Qui a vu quoi ¦ Kim neyi gördü
+Registre « Qui a vu quoi » (CSV) ¦ “Kim neyi gördü” kaydı (CSV)
+Retirer le mot de passe ¦ Parolayı kaldır
+Retirer le mot de passe de « {name} » ? Elle s’ouvrira sans rien demander, et ses sauvegardes ne seront plus forcément protégées. ¦ “{name}” parolası kaldırılsın mı? Hiçbir şey sormadan açılacak ve yedekleri artık mutlaka korunmayacak.
+Reverrouillée (délai passé ou app relancée) ¦ Yeniden kilitlendi (süre doldu ya da uygulama yeniden başlatıldı)
+Sans ce mot de passe, cette généalogie ne peut plus être ouverte dans l’app : il n’existe pas de porte dérobée, et personne ne peut le retrouver pour toi. ¦ Bu parola olmadan bu soy ağacı uygulamada artık açılamaz: arka kapı yok ve kimse onu senin için bulamaz.
+Sauvegarde complète ¦ Tam yedek
+Se verrouille après {m} sans rien toucher, à la fermeture de l’app et quand on change de généalogie. ¦ {m} hareketsizlikten sonra, uygulama kapanınca ve soy ağacı değiştirilince kilitlenir.
+Site web ¦ Web sitesi
+Site web publié ¦ Web sitesi yayımlandı
+Tableau de bord des dossiers (CSV) · dossiers : {n} ¦ Dosyalar panosu (CSV) · dosyalar: {n}
+Tableau, arbre ou parts imprimés ¦ Tablo, ağaç ya da paylar yazdırıldı
+Tape d’abord le mot de passe actuel. ¦ Önce geçerli parolayı yaz.
+Tape le mot de passe. ¦ Parolayı yaz.
+Tout le registre ¦ Tüm kayıt
+Un verrou à l’ouverture de « {name} », sur cet ordinateur et sur les autres. ¦ “{name}” açılırken bir kilit; bu bilgisayarda ve diğerlerinde.
+Verrouiller après ¦ Şu süre sonra kilitle
+Verrouiller maintenant ¦ Şimdi kilitle
+Verrouiller maintenant (généalogie protégée par un mot de passe) ¦ Şimdi kilitle (parolayla korunan soy ağacı)
+Verrouillée : {names} (ouvre-la avec son mot de passe pour voir ses dossiers) ¦ Kilitli: {names} (dosyalarını görmek için parolasıyla aç)
+Verrouillée à la main ¦ Elle kilitlendi
+après {m} ¦ {m} sonra
+pour changer le délai ¦ süreyi değiştirmek için
+pour changer le mot de passe ¦ parolayı değiştirmek için
+pour retirer le mot de passe ¦ parolayı kaldırmak için
+pour une sauvegarde protégée ¦ korumalı yedek için
+protégée par un mot de passe ¦ parolayla korunuyor
+sans rien toucher ¦ hareketsizlikte
+très bon ¦ çok iyi
+« {name} » est verrouillée ¦ “{name}” kilitli
+📜 Qui a vu quoi ¦ 📜 Kim neyi gördü
+🔐 Généalogie verrouillée ¦ 🔐 Soy ağacı kilitli
+🔐 Mot de passe de cette généalogie ¦ 🔐 Bu soy ağacının parolası
+faible ¦ zayıf
+moyen ¦ orta
+bon ¦ iyi
+pour ouvrir la généalogie ¦ soy ağacını açmak için
+Ce dossier appartient à l’app (données, médias ou sauvegardes d’une généalogie) : choisis un autre dossier. ¦ Bu klasör uygulamaya ait (bir soy ağacının verileri, medyası ya da yedekleri): başka bir klasör seç.
+Ce fichier est rangé dans les dossiers de l’app : choisis un fichier ailleurs. ¦ Bu dosya uygulamanın klasörlerinde: başka bir yerden dosya seç.
+Cette copie est rangée dans les dossiers d’une autre généalogie : elle ne peut pas être remise ici. ¦ Bu kopya başka bir soy ağacının klasörlerinde: buraya geri yüklenemez.
+Cette copie vient d’une généalogie protégée par un mot de passe : ouvre-la pour la restaurer. ¦ Bu kopya parolayla korunan bir soy ağacından geliyor: geri yüklemek için onu aç.
+Cette base est protégée par un mot de passe : donne-le pour l’ouvrir. ¦ Bu veritabanı bir parolayla korunuyor: açmak için parolayı gir.

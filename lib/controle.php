@@ -43,6 +43,7 @@ const CONTROLE_SEUILS = [
     'baptism_days' => [90, 15, 365, 5],
     'burial_days' => [15, 3, 90, 1],
     'dup_min' => [60, 40, 95, 5],
+    'reliability_min' => [50, 20, 90, 5], // 🛡 fiabilité d'une fiche : « à revoir avant publication » en dessous (lib/plus_famille.php)
 ];
 
 function controle_seuils(PDO $pdo): array
@@ -121,7 +122,14 @@ function controle_span_text(float $days): string
 /** Signature de ce qui sert au contrôle : si elle ne bouge pas, le résultat gardé est encore bon. */
 function controle_signature(PDO $pdo, array $th): string
 {
-    $row = $pdo->query("SELECT
+    // 🐘 les comptes de toute la base (0,2 s à 200 000 fiches) relus tant que ces tables ne changent pas (lib/calc_cache.php)
+    $row = function_exists('calc_cached') ? calc_cached($pdo, 'controle_sig', ['persons', 'events', 'families', 'family_children', 'places'], [], static fn() => controle_signature_row($pdo)) : controle_signature_row($pdo);
+    unset($th['banner']);
+    return md5(json_encode([$row, $th, CONTROLE_VERSION]));
+}
+function controle_signature_row(PDO $pdo): array
+{
+    return $pdo->query("SELECT
         (SELECT count(*)||'.'||COALESCE(max(id),0)||'.'||COALESCE(max(updated_at),'') FROM persons),
         (SELECT count(*)||'.'||COALESCE(max(id),0)||'.'||COALESCE(max(updated_at),'')||'.'||COALESCE(total(year),0) FROM events),
         (SELECT count(*)||'.'||COALESCE(max(id),0)||'.'||COALESCE(total(COALESCE(partner1_id,0)*3+COALESCE(partner2_id,0)),0) FROM families),
@@ -129,8 +137,6 @@ function controle_signature(PDO $pdo, array $th): string
         (SELECT COALESCE(max(id),0) FROM change_log),
         (SELECT COALESCE(max(id),0) FROM persons WHERE is_start=1),
         (SELECT total(COALESCE(latitude,0))+total(COALESCE(longitude,0)) FROM places WHERE id IN (SELECT place_id FROM events WHERE place_id IS NOT NULL))")->fetch(PDO::FETCH_NUM);
-    unset($th['banner']);
-    return md5(json_encode([$row, $th, CONTROLE_VERSION]));
 }
 
 // 🌐 les phrases des alertes sont écrites dans la langue de la page : un fichier gardé par langue (le français garde l'ancien nom)
@@ -150,7 +156,7 @@ function controle_run(PDO $pdo, bool $fresh = false): array
     }
     $t0 = microtime(true);
     // une très grosse base (100 000 fiches) demande ≈ 750 Mo : on laisse de la marge au-delà du réglage habituel (1 Go)
-    if (function_exists('memory_at_least')) { memory_at_least(2048); }
+    if (function_exists('memory_for_persons')) { memory_for_persons($pdo, 8); } elseif (function_exists('memory_at_least')) { memory_at_least(2048); } // 200 000 fiches : 1,45 Go
     @set_time_limit(300);
     $res = controle_compute($pdo, $th);
     $res['sig'] = $sig;
@@ -542,7 +548,16 @@ function controle_compute(PDO $pdo, array $th): array
         if ($ln === '' || $fn === '') { continue; }
         $P[$id]['lk'] = $ln; $P[$id]['fk'] = $fn;
         $groups[$ln . '|' . substr($fn, 0, 3)][] = $id;
+        // 🔎 rapprochement « à la française » (lib/recherche_fr.php) : en plus, même nom à l'oreille (Dupont / Dupond, Mazaud / Mazeau)
+        // et même prénom de référence (Petrus / Pierre, J.-Bte / Jean-Baptiste, Toinette / Antoinette) — des paires en plus, jamais en moins
+        if (function_exists('rfr_name_keys')) {
+            $ph = rfr_name_keys($p['ln'])['phon']; $ff = rfr_first_forms($p['fn'])[0] ?? null;
+            $P[$id]['ph'] = $ph; $P[$id]['fc'] = $ff ? $ff['canon'] : $fn;
+            $alt = '~' . $ph . '|' . $P[$id]['fc'];
+            if ($ph !== '' && $alt !== '~' . $ln . '|' . substr($fn, 0, 3)) { $groups[$alt][] = $id; }
+        }
     }
+    $pairSeen = [];
     $parentsMemo = []; // gardés : les doublons et les mariages entre ancêtre et descendant les redemandent des milliers de fois
     $parentsOf = static function (int $id) use ($parentFams, $families, &$parentsMemo): array { if (isset($parentsMemo[$id])) { return $parentsMemo[$id]; } $out = []; foreach ($parentFams[$id] ?? [] as $f) { foreach ($families[$f] ?? [] as $x) { if ($x) { $out[$x] = true; } } } return $parentsMemo[$id] = $out; };
     $dupCount = 0;
@@ -551,6 +566,8 @@ function controle_compute(PDO $pdo, array $th): array
         for ($i = 0; $i < $n; $i++) {
             for ($j = $i + 1; $j < $n; $j++) {
                 $a = min($ids[$i], $ids[$j]); $b = max($ids[$i], $ids[$j]); $pa = $P[$a]; $pb = $P[$b];
+                if (isset($pairSeen[$a . ':' . $b])) { continue; }
+                $pairSeen[$a . ':' . $b] = true;
                 $ba = $birth($a); $bb = $birth($b); $da = $death($a); $db = $death($b);
                 if ($ba && $bb && abs($ba['y'] - $bb['y']) > 5) { continue; }
                 // sexes connus et différents : deux personnes (fini « Marie ↔ Martin »)
@@ -563,8 +580,12 @@ function controle_compute(PDO $pdo, array $th): array
                 if ($sameParents && $ba && $bb && $ba['j'] !== null && $bb['j'] !== null && abs($ba['j'] - $bb['j']) > 270) { continue; }
                 if (isset($par1[$b]) || isset($par2[$a])) { continue; }
                 $checks = []; $score = 0; $max = 0;
-                $checks[] = ['ok', $T('même nom')]; $score += 25; $max += 25;
-                $max += 20; if ($pa['fk'] === $pb['fk']) { $checks[] = ['ok', $T('même prénom')]; $score += 20; } else { $checks[] = ['?', $T('prénom proche')]; $score += 8; }
+                if ($pa['lk'] === $pb['lk']) { $checks[] = ['ok', $T('même nom')]; $score += 25; } else { $checks[] = ['?', $T('nom proche à l’oreille ({a} / {b})', ['a' => $pa['ln'], 'b' => $pb['ln']])]; $score += 18; }
+                $max += 25;
+                $max += 20;
+                if ($pa['fk'] === $pb['fk']) { $checks[] = ['ok', $T('même prénom')]; $score += 20; }
+                elseif (($pa['fc'] ?? 1) === ($pb['fc'] ?? 2)) { $checks[] = ['ok', $T('même prénom, écrit autrement ({a} / {b})', ['a' => $pa['fn'], 'b' => $pb['fn']])]; $score += 17; }
+                else { $checks[] = ['?', $T('prénom proche')]; $score += 8; }
                 $max += 5; if ($pa['g'] === $pb['g'] && $pa['g'] !== 'unknown') { $checks[] = ['ok', $T('même sexe')]; $score += 5; } else { $checks[] = ['?', $T('sexe')]; $score += 2; }
                 $max += 20;
                 if ($ba && $bb) { if ($ba['j'] !== null && $ba['j'] === $bb['j']) { $checks[] = ['ok', $T('même naissance')]; $score += 20; } elseif (abs($ba['y'] - $bb['y']) <= 2) { $checks[] = ['ok', abs($ba['y'] - $bb['y']) ? $T('nés à {n} an près', ['n' => abs($ba['y'] - $bb['y'])]) : $T('nés la même année')]; $score += 14; } else { $checks[] = ['no', $T('nés {a} / {b}', ['a' => $ba['y'], 'b' => $bb['y']])]; } }

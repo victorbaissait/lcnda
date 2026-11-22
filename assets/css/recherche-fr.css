@@ -1,0 +1,19 @@
+/* 🔎 Recherche « à la française » : « Trouvé par » sous un résultat, repli phonétique, Réglages → 🔎 Recherche */
+.rfr-why { display: block; margin-top: 2px; font-size: .74rem; line-height: 1.25; color: var(--muted, #6b7280); font-style: italic; white-space: normal; overflow-wrap: anywhere; }
+.person-list-item .rfr-why { font-size: .7rem; }
+.pk-why { margin-top: 1px; }
+.rfr-fallback { margin: 6px 8px; padding: 6px 10px; border-radius: 8px; background: var(--soft-yellow, #fff8e1); color: var(--text, #3d3200); font-size: .82rem; line-height: 1.3; }
+.quick-search-note { list-style: none; padding: 0 !important; background: none !important; cursor: default; }
+.quick-search-note .rfr-fallback { margin: 4px 0; }
+.rfr-page .rfr-vers { display: flex; align-items: center; gap: 10px; margin: 10px 0; }
+.rfr-page .rfr-vers input { width: 5.5em; }
+.rfr-page [data-rfr-try] { width: 100%; max-width: 560px; }
+.rfr-understood { margin: 10px 0 0; padding-left: 1.2em; }
+.rfr-understood li { margin: 4px 0; }
+:root[data-theme="dark"] .rfr-why { color: #a8b0bd; }
+:root[data-theme="dark"] .rfr-fallback { background: #3a3218; color: #f6e7b0; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .rfr-why { color: #a8b0bd; } :root:not([data-theme="light"]) .rfr-fallback { background: #3a3218; color: #f6e7b0; } }
+/* ⌘K : la ligne d'une question en phrase (heritage-questions-plus.js) : la réponse, puis « J'ai compris » en dessous */
+.quick-search-results li.is-question{flex-direction:column;align-items:flex-start;gap:.15rem}
+.quick-search-results li.is-question small{white-space:normal}
+.h-question-open{display:flex;flex-wrap:wrap;gap:.4rem;margin:.4rem 0}

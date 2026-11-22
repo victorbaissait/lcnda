@@ -137,6 +137,8 @@ function ouc_person_context(PDO $pdo, int $pid): array
     $mil = trim((string) ($p['military_data'] ?? ''));
     if (($mil !== '' && $mil !== '[]' && $mil !== '{}') || !empty($p['show_military_block']) || !empty($p['show_poilu_block']) || (string) ($p['mort_pour_la_france'] ?? '') === 'yes'
         || $has(['MISE', 'MIIN', 'MIDE', 'MIAW', '_MILT', 'MILI']) || preg_match('/\b(soldat|militaire|caporal|sergent|adjudant|officier|capitaine|lieutenant|colonel|general|zouave|chasseur|cuirassier|dragon|hussard|artilleur|fantassin|grenadier|poilu)\b/', $occ)) { $prof['soldier'] = true; }
+    // un officier (Polytechnique, Saint-Cyr…) : pas seulement « soldat »
+    if (preg_match('/\b(officier|sous lieutenant|lieutenant|capitaine|commandant|chef de bataillon|colonel|lieutenant colonel|general|polytechnicien|saint cyrien|amiral|enseigne de vaisseau)\b/', $occ)) { $prof['officer'] = true; $prof['soldier'] = true; }
     if ((string) ($p['mort_pour_la_france'] ?? '') === 'yes') { $prof['mpf'] = true; }
     if (preg_match('/\b(marin|matelot|mousse|pecheur|navigateur|calfat|capitaine au long cours|maitre au cabotage|second capitaine|timonier|novice|terre neuvas|armateur)\b/', $occ)) { $prof['sailor'] = true; }
     if (preg_match('/\b(notaire|clerc de notaire|tabellion)\b/', $occ)) { $prof['notary'] = true; }

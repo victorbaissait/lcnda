@@ -1,0 +1,42 @@
+fr ¦ sk ¦ nb
+# 📑 Atelier de transcription, vague 3 (3a) : un document en plusieurs pages (heritage-pages.js, heritage-transcribe.js, lib/media_pages.php)
+# — 1. relier des pages (page du document, visionneuse)
+Glisser pour changer l’ordre ¦ Potiahni a zmeň poradie ¦ Dra for å endre rekkefølgen
+Voir cette page ¦ Zobraziť túto stranu ¦ Se denne siden
+Une seule page pour l’instant. Un recto et son verso, un acte sur plusieurs pages : relie les autres images, elles s’ouvriront ensemble. ¦ Zatiaľ len jedna strana. Líce a rub, záznam na viacerých stranách: prepoj ďalšie obrázky a otvoria sa spolu. ¦ Bare én side foreløpig. En for- og bakside, en akt over flere sider: koble de andre bildene, så åpnes de sammen.
+Relier une autre page… ¦ Prepojiť ďalšiu stranu… ¦ Koble en side til…
+PAGES DU DOCUMENT ¦ STRANY DOKUMENTU ¦ DOKUMENTETS SIDER
+Relier ces pages ¦ Prepojiť tieto strany ¦ Koble disse sidene
+Pages reliées : {n} ¦ Prepojené strany: {n} ¦ Koblede sider: {n}
+Page reliée ¦ Strana prepojená ¦ Side koblet
+Page renommée : « {x} » ¦ Strana premenovaná: „{x}“ ¦ Siden har fått nytt navn: «{x}»
+Autre nom… ¦ Iný názov… ¦ Annet navn…
+Par exemple : Plan, Feuillet 2, Suite ¦ Napríklad: Plán, List 2, Pokračovanie ¦ For eksempel: Kart, Blad 2, Fortsettelse
+Ordre des pages changé ¦ Poradie strán zmenené ¦ Siderekkefølgen endret
+Retirer de l’ensemble ¦ Odobrať zo súboru ¦ Fjern fra samlingen
+La page reste dans les médias, seule (rien n’est supprimé) ¦ Strana zostane v médiách samostatne (nič sa nemaže) ¦ Siden blir værende i mediene, for seg selv (ingenting slettes)
+Recto ¦ Líce ¦ Forside
+Verso ¦ Rub ¦ Bakside
+Annexe ¦ Príloha ¦ Vedlegg
+Une de ces pages est déjà dans un autre document : retire-la d’abord de celui-ci (une page n’appartient qu’à un seul ensemble). ¦ Jedna z týchto strán už patrí k inému dokumentu: najprv ju odtiaľ odober (strana patrí len do jedného súboru). ¦ En av disse sidene er allerede i et annet dokument: fjern den derfra først (en side hører bare til én samling).
+Une des pages n’est plus dans les médias : rien n’a été changé. ¦ Jedna zo strán už v médiách nie je: nič sa nezmenilo. ¦ En av sidene finnes ikke lenger i mediene: ingenting er endret.
+Trop de pages dans un même document (200 au plus). ¦ Príliš veľa strán v jednom dokumente (najviac 200). ¦ For mange sider i ett dokument (høyst 200).
+# — 2. l’Atelier ouvre toutes les pages (onglets, un seul texte ou un texte par page, ✨ Lire)
+Plusieurs pages ¦ Viac strán ¦ Flere sider
+Sur la page affichée ¦ Na zobrazenej strane ¦ På siden som vises
+Sur toutes les pages ¦ Na všetkých stranách ¦ På alle sider
+Un seul texte, coupé par « — page 2 — » ¦ Jeden text rozdelený „— strana 2 —“ ¦ Én tekst, delt med «— side 2 —»
+Un seul texte, coupé par « — page 2 — » (conseillé) ¦ Jeden text rozdelený „— strana 2 —“ (odporúča sa) ¦ Én tekst, delt med «— side 2 —» (anbefalt)
+Un texte par page ¦ Jeden text na stranu ¦ Én tekst per side
+— page {n} — ¦ — strana {n} — ¦ — side {n} —
+Toutes les pages sont lues (à relire) ¦ Všetky strany sú prečítané (na kontrolu) ¦ Alle sider er lest (må kontrolleres)
+Réglage gardé : il vaut pour les documents pas encore commencés ; celui-ci garde sa forme. ¦ Nastavenie uložené: platí pre ešte nezačaté dokumenty; tento si ponechá svoju podobu. ¦ Innstillingen er lagret: den gjelder dokumenter som ikke er påbegynt ennå; dette beholder formen sin.
+Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription. ¦ Táto strana patrí k viacstranovému záznamu: jej text sa upravuje v Dielni prepisu. ¦ Denne siden hører til en akt på flere sider: teksten endres i Transkripsjonsverkstedet.
+# — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
+(page {n}, ligne {line}) ¦ (strana {n}, riadok {line}) ¦ (side {n}, linje {line})
+page {n}, ligne {line} ¦ strana {n}, riadok {line} ¦ side {n}, linje {line}
+# — 3a+ : « Ce que l’app a trouvé » sur toutes les pages (un texte par page), la lecture approfondie de toutes les pages
+« {name} » est sur une autre page : ouvre sa page pour le garder. ¦ „{name}“ je na inej strane: otvor jej stranu, aby si to ponechal. ¦ «{name}» står på en annen side: åpne den siden for å beholde personen.
+Un texte par page : la lecture rapide et la lecture d’un imprimé se font page par page ; la lecture approfondie peut lire toutes les pages. ¦ Jeden text na stranu: rýchle čítanie a čítanie tlače idú stranu po strane; dôkladné čítanie vie prečítať všetky strany. ¦ Én tekst per side: hurtiglesing og lesing av trykt tekst skjer side for side; den grundige lesingen kan lese alle sidene.
+Lecture approfondie : page {i} sur {n}… ¦ Dôkladné čítanie: strana {i} z {n}… ¦ Grundig lesing: side {i} av {n}…
+Lire toutes les pages avec ce modèle ({n}) ¦ Prečítať všetky strany týmto modelom ({n}) ¦ Les alle sidene med denne modellen ({n})

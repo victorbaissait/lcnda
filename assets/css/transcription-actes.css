@@ -1,0 +1,106 @@
+/* 📜 Transcription d'actes, la suite (assets/js/heritage-transcribe-acte.js ; maquette docs/design/transcription-actes.html) :
+   recadrage, lecture peu sûre, lecture approfondie, « Ce que l'app a trouvé », comparer, source, récapitulatif. Même allure que l'atelier. */
+.h-txa-msg{margin:10px 0;align-items:flex-start}
+.h-txa-msg b{font-weight:700}
+.h-txa-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+.h-txa-cropprev{display:block;max-width:100%;height:auto;margin:10px auto 4px;border:1px solid #d6d6db;border-radius:6px;background:#3a3a40}
+/* la carte dans le panneau de droite de l'atelier */
+.h-txa-cta{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;justify-content:space-between;padding:8px 10px;margin:4px 0 10px;border:1px solid #c9d8f5;border-left:4px solid #1473e6;border-radius:8px;background:#f3f7ff}
+.h-txa-cta small{display:inline-block;margin-left:4px}
+/* lecture approfondie */
+.h-txa-grid{display:grid;grid-template-columns:150px 1fr;gap:6px 12px;font-size:13.5px;align-items:center;margin:8px 0}
+.h-txa-grid .k{color:#666}
+.h-txa-models{display:grid;gap:4px}
+.h-txa-models label{display:flex;flex-wrap:wrap;gap:4px;align-items:baseline;cursor:pointer}
+.h-txa-prog{margin:10px 0 4px}
+.h-txa-prog[hidden]{display:none}
+.h-txa-bar{height:8px;background:#e3e5ea;border-radius:4px;overflow:hidden;margin-bottom:4px}
+.h-txa-bar i{display:block;height:100%;width:0;background:#1473e6;transition:width .4s}
+.h-txa-live{white-space:pre-wrap;font:14px/1.5 Georgia,serif;max-height:200px;overflow:auto;padding:8px 10px;border:1px solid #e1e3e8;border-radius:8px;background:#fbfaf6}
+.h-txa-cmp2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.h-txa-cmp2.is-one{grid-template-columns:1fr}
+.h-txa-cmp2 > div{display:grid;gap:6px;align-content:start}
+.h-txa-cmp2 textarea{min-height:240px;font:15px/1.55 Georgia,serif;padding:8px 10px;border:1px solid #d6d6db;border-radius:8px;resize:vertical}
+.h-txa-cmp2 .button{justify-self:start}
+/* ce que l'app a trouvé */
+.h-txa-box{border:1px solid #d6d6db;border-radius:10px;background:#fff;overflow:hidden}
+.h-txa-head{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;padding:9px 12px;border-bottom:1px solid #d6d6db;background:#fafbfc}
+.h-txa-head .h-txa-row{margin:0}
+.h-txa-kind{display:inline-flex;gap:6px;align-items:center;font-size:13px}
+.h-txa-sec{padding:4px 12px 10px;border-bottom:1px solid #e3e5ea}
+.h-txa-sec.is-last{border-bottom:0}
+.h-txa-sec h4{font:700 11px/1 system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#666;margin:12px 0 8px}
+.h-txa-in{border:1px solid #c9ced8;border-radius:6px;padding:5px 8px;font:inherit;font-size:13.5px;background:#fff;width:100%;box-sizing:border-box}
+.h-txa-okline{font-size:12px;color:#1a7f37;margin-top:2px}
+.h-txa-pers{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px 0;border-top:1px solid #f0f1f4}
+.h-txa-av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:700 13px system-ui,sans-serif;color:#fff;background:#8a8f99;flex:none}
+.h-txa-av.is-m{background:#3c78d8}.h-txa-av.is-f{background:#d9488f}
+.h-txa-pers b{font-size:14.5px}
+.h-txa-meta{font-size:12.5px;color:#555;margin-top:2px}
+.h-txa-role{font:700 11px system-ui,sans-serif;color:#1473e6;background:#eaf1ff;padding:2px 6px;margin-right:6px;border-radius:4px}
+.h-txa-match{font-size:12.5px;margin-top:5px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.h-txa-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid #c9ced8;border-radius:999px;background:#fff;padding:2px 8px 2px 3px;font:inherit;font-size:13px;cursor:pointer;color:inherit}
+.h-txa-chip.is-on{border-color:#1473e6;box-shadow:inset 0 0 0 1px #1473e6;background:#f3f7ff}
+.h-txa-chip .h-txa-av{width:22px;height:22px;font-size:9px}
+.h-txa-badge{font:700 11px/1 system-ui,sans-serif;border:1px solid currentColor;border-radius:4px;padding:3px 6px;white-space:nowrap;text-transform:uppercase;letter-spacing:.03em}
+.h-txa-badge.is-ok{color:#1a7f37}.h-txa-badge.is-warn{color:#7a5d00;background:#fff8d6;border-color:#b08800}
+.h-txa-seg{display:inline-flex;border:1px solid #c9ced8;border-radius:8px;overflow:hidden;flex-wrap:wrap}
+.h-txa-seg button{padding:5px 9px;font:600 12px system-ui,sans-serif;cursor:pointer;border:0;border-right:1px solid #c9ced8;background:#fff;color:inherit}
+.h-txa-seg button:last-child{border-right:0}
+.h-txa-seg button.is-on{background:#1473e6;color:#fff}
+.h-txa-opts{display:grid;gap:4px;font-size:13.5px}
+.h-txa-sig{margin:6px 0 0;font-size:13px}.h-txa-sig .k{color:#666;margin-right:6px}
+.h-txa-src{border:1px solid #e1e3e8;border-radius:8px;padding:4px 12px 2px}
+.h-txa-recap{padding-left:18px;margin:8px 0}.h-txa-recap li{margin:5px 0;font-size:14px}
+.h-txa-keeponly{margin-right:auto}
+/* comparer */
+.h-txa-cmp{width:100%;border-collapse:collapse;font-size:13.5px}
+.h-txa-cmp th{font:700 11px system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#666;text-align:left;padding:6px 8px;border-bottom:1px solid #d6d6db}
+.h-txa-cmp td{padding:7px 8px;border-bottom:1px solid #eceef2;vertical-align:top}
+.h-txa-cmp td.is-new{background:#eaf6ee}.h-txa-cmp td.is-diff{background:#fff8d6}
+.h-txa-add{display:inline-flex;gap:4px;align-items:center;margin-left:6px;font-size:12px;color:#1a7f37}
+@media (max-width:760px){.h-txa-grid{grid-template-columns:1fr}.h-txa-cmp2{grid-template-columns:1fr}.h-txa-pers{grid-template-columns:34px minmax(0,1fr)}.h-txa-pers .h-txa-seg{grid-column:1 / -1}}
+:root[data-theme="dark"] .h-txa-box,:root[data-theme="dark"] .h-txa-in,:root[data-theme="dark"] .h-txa-chip,:root[data-theme="dark"] .h-txa-seg button,:root[data-theme="dark"] .h-txa-cmp2 textarea{background:#1f1f23;color:#eee;border-color:#45454d}
+:root[data-theme="dark"] .h-txa-head,:root[data-theme="dark"] .h-txa-cta{background:#26262b;border-color:#45454d}
+:root[data-theme="dark"] .h-txa-seg button.is-on{background:#1473e6;color:#fff}
+:root[data-theme="dark"] .h-txa-live{background:#26262b;border-color:#45454d}
+:root[data-theme="dark"] .h-txa-cmp td.is-new{background:#183a24}:root[data-theme="dark"] .h-txa-cmp td.is-diff{background:#3d3410}
+/* 🧭 « Ce que l'app a trouvé », plus riche (assets/js/heritage-transcribe-trouve.js) : cartes par personne et rubriques */
+.h-tf{margin:4px 0 10px}
+.h-tf-top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.h-tf-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;margin:12px 0 6px}
+.h-tf-card{border:1px solid #dfe2e8;border-radius:10px;padding:8px 10px;margin:6px 0;background:#fff}
+.h-tf-card.is-off,.h-tf-item.is-off{opacity:.5}
+.h-tf-card-h{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:8px;align-items:center}
+.h-tf-card-h .h-txa-av{width:28px;height:28px;font-size:11px}
+.h-tf-name{min-width:0;overflow-wrap:anywhere}
+.h-tf-fields{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:2px}
+.h-tf-fields li{display:flex;align-items:center;gap:4px;flex-wrap:wrap;font-size:13px}
+.h-tf-fields .checkbox-line{flex:1 1 auto;min-width:0;margin:0}
+.h-tf-fields .k{color:#666;min-width:7.5em;display:inline-block}
+.h-tf-fields .icon-button,.h-tf-item .icon-button{min-width:26px;min-height:26px;padding:0 4px}
+.h-tf-match{margin-top:6px;font-size:13px;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.h-tf-acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.h-tf-list{display:grid;gap:4px}
+.h-tf-item{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;font-size:13px;border:1px solid #e6e8ee;border-radius:8px;padding:3px 6px;background:#fff}
+.h-tf-main{border:0;background:none;padding:0;font:inherit;color:inherit;cursor:pointer;text-align:left}
+.h-tf-base{font-size:12.5px;color:#2f5f9e}
+.h-tf-rej{margin:6px 0;font-size:13px}
+.h-tf-rej ul{margin:4px 0 0;padding-left:18px}
+.h-tf-ai{margin:6px 0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.h-txa-badge.is-ai{background:#efe8ff;color:#5b2fb8;border-color:#d8c9fb}
+.h-tf-as{border:1px solid #e1e3e8;border-radius:8px;padding:6px 10px;margin:8px 0;display:flex;flex-wrap:wrap;gap:6px 14px}
+.h-tf-as legend{font-weight:600;padding:0 4px}
+.h-tf-sugg{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin:6px 0}
+.h-tf-prev{border:1px dashed #c9ced8;border-radius:8px;padding:6px 10px;font-size:13.5px}
+.h-tf-prev p{margin:2px 0}
+[data-tf-r][hidden]{display:none}
+:root[data-theme="dark"] .h-tf-card,:root[data-theme="dark"] .h-tf-item{background:#1f1f23;border-color:#45454d;color:#eee}
+:root[data-theme="dark"] .h-tf-fields .k{color:#aaa}
+:root[data-theme="dark"] .h-tf-base{color:#8fb8f0}
+.h-tf .h-tf-fields .icon-button,.h-tf .h-tf-item .icon-button{width:26px;height:26px;min-width:0;min-height:0;padding:0;border:1px solid transparent;background:none;border-radius:6px;font-size:13px;line-height:1}
+.h-tf .h-tf-fields .icon-button:hover,.h-tf .h-tf-item .icon-button:hover{border-color:#c9ced8;background:#f3f5f8}
+.h-tf .h-tf-more{width:28px;height:28px;min-width:0;min-height:0;padding:0}
+/* « Cadres » (opacité des zones) : sur la ligne de la barre de l'image quand il y a la place, sinon à la ligne */
+.h-tx-barwrap{display:flex;flex-wrap:wrap;align-items:center;background:var(--card-bg,#fff)}.h-tx-barwrap>:first-child{flex:0 1 auto;width:auto!important;min-width:0;border-bottom:0!important}
+.h-tx-zop{display:flex;align-items:center;gap:6px;padding:2px 10px;font-size:13px;white-space:nowrap}.h-tx-zop input{width:110px;margin:0}

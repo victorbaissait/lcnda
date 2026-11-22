@@ -11,7 +11,9 @@ const fs = require('node:fs');
 const http = require('node:http');
 const os = require('node:os');
 const path = require('node:path');
-const { PhpServer, findPhp, checkPhp, devBundledPhp } = require('./php-server');
+const { PhpServer, findPhp, checkPhp, checkPhpAsync, devBundledPhp, phpRuntimeArgs, explainPhpFailure, ensureWritableDir, killStalePhp, isVersionedAsset, validPort } = require('./php-server');
+const { spawn } = require('node:child_process');
+const net = require('node:net');
 
 const appRoot = path.resolve(__dirname, '..');
 let passed = 0;
@@ -134,6 +136,176 @@ async function suite(phpPath, pool) {
   await step('PHP a toutes les extensions nécessaires (SQLite, FTS5, zip, gd…)', async () => {
     const c = checkPhp(phpPath);
     assert.ok(c.ok, 'extensions manquantes : ' + (c.missing || []).join(', ') + (c.error ? ' ' + c.error : ''));
+  });
+  await step('vérification sans bloquer (checkPhpAsync) : même réponse que checkPhp', async () => {
+    const c = await checkPhpAsync(phpPath);
+    assert.ok(c.ok, c.error || ''); assert.equal(c.version, checkPhp(phpPath).version);
+  });
+  if (process.platform !== 'win32') await step('PHP trop lent au premier lancement (antivirus, macOS) : « Démarrage trop lent », pas « ne convient pas », et sans attendre la fin du processus', async () => {
+    const slow = path.join(os.tmpdir(), 'lcnda-slow-php-' + process.pid + '.sh');
+    fs.writeFileSync(slow, '#!/bin/sh\nsleep 6\n', { mode: 0o755 });
+    try {
+      const t0 = Date.now();
+      const c = await checkPhpAsync(slow, { timeouts: [300, 500] });
+      assert.ok(Date.now() - t0 < 3000, 'a attendu la fin du processus : ' + (Date.now() - t0) + ' ms');
+      assert.equal(c.ok, false); assert.equal(c.slow, true);
+      assert.match(c.error, /trop de temps/); assert.doesNotMatch(c.error, /ne convient pas/);
+    } finally { fs.rmSync(slow, { force: true }); }
+  });
+  await step('messages de PHP qui ne démarre pas : antivirus (fichier disparu), droits, macOS (signature), Windows (Visual C++)', async () => {
+    assert.match(explainPhpFailure({ error: Object.assign(new Error('spawn php ENOENT'), { code: 'ENOENT' }), phpPath: '/x/php' }), /introuvable \(\/x\/php\).*quarantaine/);
+    assert.match(explainPhpFailure({ error: Object.assign(new Error('spawn EACCES'), { code: 'EACCES' }) }), /refuse de lancer/);
+    assert.match(explainPhpFailure({ status: null, signal: 'SIGKILL', platform: 'darwin' }), /macOS a bloqué.*Ouvrir quand même/);
+    assert.doesNotMatch(explainPhpFailure({ status: null, signal: 'SIGKILL', platform: 'linux' }), /macOS/);
+    assert.match(explainPhpFailure({ status: 3221225781, signal: null, platform: 'win32' }), /Visual C\+\+/);
+    assert.match(explainPhpFailure({ error: Object.assign(new Error('ETIMEDOUT'), { code: 'ETIMEDOUT' }), signal: 'SIGTERM', timeoutMs: 60000 }), /plus de 60 s.*antivirus/);
+  });
+  await step('port gardé dans config.json : seulement un entier entre 1024 et 65535 (« abc », 99999, 80, null : non)', async () => {
+    for (const ok of [1024, 8080, 65535]) assert.equal(validPort(ok), true, String(ok));
+    for (const no of ['abc', '8080', 99999, 80, 0, -1, null, undefined, 1.5, {}, []]) assert.equal(validPort(no), false, JSON.stringify(no));
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-port-'));
+    const cwd = process.cwd();
+    process.chdir(tmp); // un port « abc » était pris pour un nom de fichier (socket) dans le dossier courant
+    const server = new PhpServer({ phpPath, appRoot, pool: 1, preferredPort: 'abc', dataDir: path.join(tmp, 'd'), mediaDir: path.join(tmp, 'm'), sessionDir: path.join(tmp, 's'), logFile: path.join(tmp, 'l', 'php.log') });
+    try { await server.start(); assert.ok(validPort(server.port)); assert.ok(!fs.existsSync(path.join(tmp, 'abc'))); } finally { await server.stop(); process.chdir(cwd); fs.rmSync(tmp, { recursive: true, force: true }); }
+  });
+  await step('port habituel pris par un autre programme : un autre port, noté dans le journal', async () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-port-'));
+    const held = net.createServer(); await new Promise((r) => held.listen(0, '127.0.0.1', r));
+    const busy = held.address().port;
+    const server = new PhpServer({ phpPath, appRoot, pool: 2, preferredPort: busy, dataDir: path.join(tmp, 'd'), mediaDir: path.join(tmp, 'm'), sessionDir: path.join(tmp, 's'), logFile: path.join(tmp, 'l', 'php.log') });
+    try {
+      await server.start();
+      assert.notEqual(server.port, busy);
+      assert.equal((await server.request('/__health')).status, 200);
+      assert.match(fs.readFileSync(path.join(tmp, 'l', 'php.log'), 'utf8'), new RegExp(`port habituel ${busy} est pris`));
+    } finally { await server.stop(); held.close(); fs.rmSync(tmp, { recursive: true, force: true }); }
+  });
+  await step('dossier de données inutilisable : message en français qui dit lequel et pourquoi (code LCNDA_DIR)', async () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-dossier-'));
+    const file = path.join(tmp, 'un-fichier'); fs.writeFileSync(file, 'x');
+    assert.throws(() => ensureWritableDir(path.join(file, 'data'), 'des données'), (e) => e.code === 'LCNDA_DIR' && /Le dossier des données ne peut pas être utilisé/.test(e.message) && e.message.includes(path.join(file, 'data')) && /Un fichier porte le nom/.test(e.message));
+    if (process.platform !== 'win32' && process.getuid && process.getuid() !== 0) {
+      const ro = path.join(tmp, 'ro'); fs.mkdirSync(ro); fs.chmodSync(ro, 0o500);
+      assert.throws(() => ensureWritableDir(ro, 'des données'), (e) => e.code === 'LCNDA_DIR' && /pas le droit d’y écrire/.test(e.message));
+      fs.chmodSync(ro, 0o700);
+    }
+    ensureWritableDir(path.join(tmp, 'neuf', 'data'), 'des données'); // créé, et rien de laissé dedans
+    assert.deepEqual(fs.readdirSync(path.join(tmp, 'neuf', 'data')), []);
+    const server = new PhpServer({ phpPath, appRoot, pool: 2, dataDir: path.join(file, 'data'), mediaDir: path.join(tmp, 'm'), sessionDir: path.join(tmp, 's'), logFile: path.join(tmp, 'l', 'php.log') });
+    await assert.rejects(() => server.start(), (e) => e.code === 'LCNDA_DIR');
+    assert.equal(server.backends.length, 0, 'aucun PHP lancé');
+    await server.stop();
+    fs.rmSync(tmp, { recursive: true, force: true });
+  });
+  await step('PHP restés d’un lancement interrompu (plantage de l’app) : arrêtés au lancement suivant, jamais un autre programme', async () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-orphelin-'));
+    const pidFile = path.join(tmp, 'php-en-cours.json');
+    const dirs = { dataDir: path.join(tmp, 'd'), mediaDir: path.join(tmp, 'm'), sessionDir: path.join(tmp, 's'), logFile: path.join(tmp, 'l', 'php.log') };
+    const first = new PhpServer({ phpPath, appRoot, pool: 2, pidFile, ...dirs });
+    await first.start();
+    const pids = JSON.parse(fs.readFileSync(pidFile, 'utf8')).php;
+    assert.equal(pids.length, 2);
+    // l'app « plante » : ses PHP restent (on ne les arrête pas) ; un autre programme sans rapport, lui, ne doit pas être touché
+    const other = spawn(process.execPath, ['-e', 'setTimeout(() => {}, 60000)'], { stdio: 'ignore' });
+    const list = JSON.parse(fs.readFileSync(pidFile, 'utf8'));
+    list.php.push({ pid: other.pid, port: 45678 });
+    fs.writeFileSync(pidFile, JSON.stringify(list));
+    first._stopping = true; first.backends.forEach((b) => b.child.removeAllListeners('exit')); // comme si l'app avait disparu
+    const second = new PhpServer({ phpPath, appRoot, pool: 2, pidFile, ...dirs });
+    try {
+      await second.start();
+      await new Promise((r) => setTimeout(r, 300));
+      for (const e of pids) assert.throws(() => process.kill(e.pid, 0), `PHP n° ${e.pid} toujours là`);
+      process.kill(other.pid, 0); // toujours vivant
+      assert.match(fs.readFileSync(dirs.logFile, 'utf8'), /resté d'un lancement interrompu arrêté/);
+      assert.equal(JSON.parse(fs.readFileSync(pidFile, 'utf8')).php.length, 2, 'la liste ne contient que les nouveaux PHP');
+    } finally {
+      await second.stop(); other.kill();
+      for (const b of first.backends) { try { b.child.kill('SIGKILL'); } catch { /* déjà fini */ } }
+      await first.stop(); // son relais écoutait encore
+    }
+    assert.ok(!fs.existsSync(pidFile), 'liste effacée à l’arrêt normal');
+    assert.equal(killStalePhp(path.join(tmp, 'absent.json')), 0);
+    fs.writeFileSync(pidFile, '{abîmé'); assert.equal(killStalePhp(pidFile), 0);
+    fs.rmSync(tmp, { recursive: true, force: true });
+  });
+  await step('fichiers versionnés (/assets/…?v=) gardés par la fenêtre ; page, API, médias, fichiers sans numéro : jamais', async () => {
+    for (const u of ['/assets/js/app.js?v=566', '/assets/css/app.css?v=1', '/assets/i18n/en.json?v=49', '/assets/js/x.js?a=1&v=2']) assert.ok(isVersionedAsset({ method: 'GET', url: u }), u);
+    for (const u of ['/assets/js/app.js', '/api.php?action=bootstrap&v=1', '/?v=1', '/media/a.jpg?v=1', '/index.php?v=2', '/assets/js/app.js?vv=1']) assert.ok(!isVersionedAsset({ method: 'GET', url: u }), u);
+    assert.ok(!isVersionedAsset({ method: 'POST', url: '/assets/js/app.js?v=1' }));
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-cache-'));
+    const server = new PhpServer({ phpPath, appRoot, pool: 2, cacheAssets: true, dataDir: path.join(tmp, 'd'), mediaDir: path.join(tmp, 'm'), sessionDir: path.join(tmp, 's'), logFile: path.join(tmp, 'l', 'php.log') });
+    try {
+      await server.start();
+      const js = await server.request('/assets/js/app-i18n.js?v=49');
+      assert.equal(js.status, 200); assert.match(js.headers['cache-control'] || '', /immutable/);
+      for (const u of ['/', '/api.php?action=kiosk_state', '/assets/js/app-i18n.js', '/assets/js/absent.js?v=1']) {
+        const r = await server.request(u);
+        assert.doesNotMatch(r.headers['cache-control'] || '', /immutable|max-age=31536000/, u);
+      }
+      assert.equal((await server.request('/assets/js/app-i18n.js?v=49', { withSecret: false })).status, 403, 'toujours le secret');
+      // la page ne recopie plus le dictionnaire de la langue (3 à 5 Mo) : app-i18n.js le lit à part
+      const en = await server.request('/', { headers: { cookie: 'lcnda_lang=en' } });
+      assert.doesNotMatch(en.body.toString(), /LCNDA_I18N_DATA=/);
+    } finally { await server.stop(); fs.rmSync(tmp, { recursive: true, force: true }); }
+  });
+  await step('villes du monde en préparation (PHP à part, au lancement) : la recherche répond tout de suite sans elles, sans tout refaire', async () => {
+    const { spawnSync } = require('node:child_process');
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-monde-'));
+    fs.mkdirSync(path.join(tmp, 'cache'), { recursive: true });
+    const env = { ...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'm'), GENEALOGY_SKIP_REFERENCE: '' };
+    // la préparation tient le verrou (comme prepare_world_reference pendant ~20 s)
+    const holder = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-r', "$f=fopen(getenv('GENEALOGY_DATA_DIR').'/cache/world-prepare.lock','c');flock($f,LOCK_EX);echo 'tenu';sleep(30);"], { env, stdio: ['ignore', 'pipe', 'ignore'] });
+    await new Promise((r) => holder.stdout.once('data', r));
+    try {
+      const t0 = Date.now();
+      const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', "require 'lib/bootstrap.php'; echo json_encode(['busy' => world_prepare_busy(), 'world' => world_reference() !== null]); prepare_world_reference(); echo ' fini';"], { cwd: appRoot, env, encoding: 'utf8', timeout: 20000 });
+      assert.equal(r.stdout.trim(), '{"busy":true,"world":false} fini', r.stderr);
+      assert.ok(Date.now() - t0 < 10000, 'la recherche a attendu la préparation : ' + (Date.now() - t0) + ' ms');
+      assert.deepEqual(fs.readdirSync(path.join(tmp, 'cache')).filter((f) => /world|\.part$/.test(f) && f !== 'world-prepare.lock'), [], 'rien décompressé une seconde fois');
+    } finally { holder.kill('SIGKILL'); fs.rmSync(tmp, { recursive: true, force: true }); }
+  });
+  await step('base tenue par un autre programme au lancement : message clair et traduit en quelques secondes (avant : 96 s), puis l’app repart', async () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-tenue-'));
+    const dirs = { dataDir: path.join(tmp, 'd'), mediaDir: path.join(tmp, 'm'), sessionDir: path.join(tmp, 's'), logFile: path.join(tmp, 'l', 'php.log') };
+    fs.mkdirSync(dirs.dataDir, { recursive: true });
+    const db = path.join(dirs.dataDir, 'genealogy.sqlite');
+    require('node:child_process').spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', "$p=new PDO('sqlite:'.getenv('DB'));$p->exec(file_get_contents('data/schema.sql'));$p->exec(\"INSERT INTO persons(first_name,last_name) VALUES('Rose','Essai')\");"], { cwd: appRoot, env: { ...process.env, DB: db } });
+    const server = new PhpServer({ phpPath, appRoot, pool: 1, ...dirs });
+    server.on('error', () => {});
+    let holder = null;
+    try {
+      await server.start();
+      assert.equal((await server.prepareDatabase()).ok, true, 'la base doit d’abord s’ouvrir (mise à jour de structure)');
+      // un autre programme la tient (verrou exclusif, comme un logiciel qui l'a ouverte ou une synchronisation)
+      holder = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-r', "$p=new PDO('sqlite:'.getenv('DB'));$p->exec('PRAGMA locking_mode=EXCLUSIVE');$p->exec('BEGIN EXCLUSIVE');$p->exec('CREATE TABLE IF NOT EXISTS essai_verrou(x)');echo 'tenue';sleep(120);"], { env: { ...process.env, DB: db }, stdio: ['ignore', 'pipe', 'ignore'] });
+      await new Promise((r) => holder.stdout.once('data', r));
+      let t0 = Date.now();
+      const fr = await server.prepareDatabase();
+      const ms = Date.now() - t0;
+      assert.equal(fr.ok, false); assert.equal(fr.busy, true, JSON.stringify(fr));
+      assert.match(fr.error, /occupée par un autre programme.*Ferme cet autre programme ou attends la fin de la synchronisation, puis relance/s);
+      assert.match(fr.detail, /database is locked/);
+      assert.ok(ms >= 4000 && ms < 9000, `message après ${ms} ms (attendu : environ 5 s)`);
+      t0 = Date.now();
+      const en = await server.prepareDatabase({ lang: 'en' });
+      assert.equal(en.busy, true);
+      assert.match(en.error, /being used by another program.*wait for the sync to finish/s, 'message traduit (cookie lcnda_lang de l’app)');
+      assert.ok(Date.now() - t0 < 9000);
+      // une page déjà ouverte : une seule attente (au lieu de trois de 30 s), même message, réponse 503
+      t0 = Date.now();
+      const page = await server.request('/api.php?action=bootstrap', { timeout: 0 });
+      assert.equal(page.status, 503);
+      assert.equal(JSON.parse(page.body.toString()).busy, true);
+      assert.ok(Date.now() - t0 < 40000, 'la page a attendu ' + (Date.now() - t0) + ' ms');
+      // l'autre programme fermé : tout repart, sans relancer PHP
+      holder.kill('SIGKILL'); holder = null;
+      await new Promise((r) => setTimeout(r, 300));
+      const ok = await server.prepareDatabase();
+      assert.equal(ok.ok, true, JSON.stringify(ok));
+      assert.equal((await server.request('/api.php?action=bootstrap', { timeout: 0 })).status, 200);
+    } finally { if (holder) holder.kill('SIGKILL'); await server.stop(); fs.rmSync(tmp, { recursive: true, force: true }); }
   });
   await suite(phpPath, 1);
   await suite(phpPath, 3);

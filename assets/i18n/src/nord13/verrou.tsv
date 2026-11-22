@@ -1,0 +1,131 @@
+fr ¦ el ¦ bg
+# Zone « verrou » : 🔐 mot de passe d’une généalogie et 📜 « Qui a vu quoi » (assets/js/app-verrou*.js, lib/verrou.php, lib/verrou_page.php)
+1 h ¦ 1 ώρα ¦ 1 ч
+12 mois ¦ 12 μήνες ¦ 12 месеца
+15 min ¦ 15 λεπτά ¦ 15 мин
+3 ans ¦ 3 χρόνια ¦ 3 години
+3 mois ¦ 3 μήνες ¦ 3 месеца
+5 min ¦ 5 λεπτά ¦ 5 мин
+6 mois ¦ 6 μήνες ¦ 6 месеца
+Archive du dossier (.zip) ¦ Αρχειοθήκη φακέλου (.zip) ¦ Архив на преписката (.zip)
+Attention : le verrou n’empêche pas de lire le fichier si quelqu’un le copie (il n’est pas chiffré). Pour ça, chiffre le disque de ton ordinateur (FileVault sur Mac, BitLocker sous Windows). ¦ Προσοχή: το κλείδωμα δεν εμποδίζει την ανάγνωση του αρχείου αν κάποιος το αντιγράψει (δεν είναι κρυπτογραφημένο). Γι’ αυτό, κρυπτογράφησε τον δίσκο του υπολογιστή σου (FileVault σε Mac, BitLocker σε Windows). ¦ Внимание: заключването не пречи файлът да бъде прочетен, ако някой го копира (той не е шифрован). За това шифровай диска на компютъра си (FileVault на Mac, BitLocker в Windows).
+Autre format ¦ Άλλη μορφή ¦ Друг формат
+Base .db ¦ Βάση .db ¦ База .db
+Bloc ¦ Μπλοκ ¦ Блок
+Ce mot de passe contient des caractères illisibles. ¦ Αυτός ο κωδικός περιέχει μη αναγνώσιμους χαρακτήρες. ¦ Тази парола съдържа нечетими знаци.
+Ce mot de passe empêche d’ouvrir cette généalogie dans l’app, ici et après chaque délai sans rien toucher. ¦ Αυτός ο κωδικός εμποδίζει το άνοιγμα αυτής της γενεαλογίας στην εφαρμογή, εδώ και μετά από κάθε διάστημα χωρίς δραστηριότητα. ¦ Тази парола не позволява тази генеалогия да се отвори в приложението — тук и след всеки период без действие.
+Ce que ce mot de passe protège vraiment ¦ Τι προστατεύει πραγματικά αυτός ο κωδικός ¦ Какво наистина защитава тази парола
+Cette généalogie a déjà un mot de passe : change-le plutôt. ¦ Αυτή η γενεαλογία έχει ήδη κωδικό: καλύτερα άλλαξέ τον. ¦ Тази генеалогия вече има парола: по-добре я смени.
+Cette généalogie est maintenant protégée par un mot de passe. ¦ Αυτή η γενεαλογία προστατεύεται πλέον με κωδικό. ¦ Тази генеалогия вече е защитена с парола.
+Cette généalogie est protégée : sa sauvegarde l’est aussi, avec le même mot de passe. ¦ Αυτή η γενεαλογία προστατεύεται: και το αντίγραφο ασφαλείας της, με τον ίδιο κωδικό. ¦ Тази генеалогия е защитена: резервното ѝ копие също, със същата парола.
+Cette généalogie est protégée par un mot de passe : dans le dossier choisi, elle n’est jamais copiée en clair. Une copie chiffrée (AES-256, même mot de passe) y est faite quand tu l’ouvres avec son mot de passe ; dans le dossier de l’app, les copies restent comme la base. ¦ Αυτή η γενεαλογία προστατεύεται με κωδικό: στον επιλεγμένο φάκελο δεν αντιγράφεται ποτέ μη κρυπτογραφημένη. Ένα κρυπτογραφημένο αντίγραφο (AES-256, ίδιος κωδικός) γίνεται εκεί όταν την ανοίγεις με τον κωδικό της· στον φάκελο της εφαρμογής, τα αντίγραφα μένουν όπως η βάση. ¦ Тази генеалогия е защитена с парола: в избраната папка никога не се копира нешифрована. Шифровано копие (AES-256, същата парола) се прави там, когато я отваряш с паролата ѝ; в папката на приложението копията остават като базата.
+Cette généalogie est protégée par un mot de passe : ses sauvegardes le sont aussi. Utilise « Sauvegarde complète protégée » avec le même mot de passe. ¦ Αυτή η γενεαλογία προστατεύεται με κωδικό: και τα αντίγραφα ασφαλείας της. Χρησιμοποίησε «Προστατευμένο πλήρες αντίγραφο» με τον ίδιο κωδικό. ¦ Тази генеалогия е защитена с парола: резервните ѝ копия също. Използвай „Защитено пълно копие“ със същата парола.
+Cette généalogie est verrouillée : donne son mot de passe pour l’ouvrir. ¦ Αυτή η γενεαλογία είναι κλειδωμένη: πληκτρολόγησε τον κωδικό της για να την ανοίξεις. ¦ Тази генеалогия е заключена: въведи паролата ѝ, за да я отвориш.
+Cette généalogie est verrouillée par un mot de passe : ouvre-la d’abord. ¦ Αυτή η γενεαλογία είναι κλειδωμένη με κωδικό: άνοιξέ την πρώτα. ¦ Тази генеалогия е заключена с парола: първо я отвори.
+Cette généalogie n’a pas de mot de passe. ¦ Αυτή η γενεαλογία δεν έχει κωδικό. ¦ Тази генеалогия няма парола.
+Changer le délai ¦ Αλλαγή χρόνου ¦ Смени времето
+Changer le mot de passe ¦ Αλλαγή κωδικού ¦ Смени паролата
+Changer, ou retirer ¦ Αλλαγή ή αφαίρεση ¦ Смени или премахни
+Coche la case : sans ce mot de passe, tu ne pourras plus ouvrir cette généalogie dans l’app. ¦ Τσέκαρε το πλαίσιο: χωρίς αυτόν τον κωδικό δεν θα μπορείς πια να ανοίξεις αυτή τη γενεαλογία στην εφαρμογή. ¦ Отметни квадратчето: без тази парола вече няма да можеш да отвориш тази генеалогия в приложението.
+Courriers en série ¦ Μαζικές επιστολές ¦ Серийни писма
+Dossier déplacé vers une autre généalogie ¦ Ο φάκελος μεταφέρθηκε σε άλλη γενεαλογία ¦ Преписката е преместена в друга генеалогия
+Dossier ou objet ¦ Φάκελος ή αντικείμενο ¦ Преписка или обект
+Dossier, poste, action… ¦ Φάκελος, υπολογιστής, ενέργεια… ¦ Преписка, компютър, действие…
+Durée changée. Lignes plus anciennes effacées : {n} ¦ Η διάρκεια άλλαξε. Παλαιότερες γραμμές που διαγράφηκαν: {n} ¦ Срокът е сменен. Изтрити по-стари редове: {n}
+Durée de conservation changée ¦ Η διάρκεια διατήρησης άλλαξε ¦ Срокът на съхранение е сменен
+Durée inconnue. ¦ Άγνωστη διάρκεια. ¦ Неизвестен срок.
+Délai de reverrouillage changé ¦ Ο χρόνος ως το νέο κλείδωμα άλλαξε ¦ Времето до повторно заключване е сменено
+Délai de reverrouillage inconnu. ¦ Άγνωστος χρόνος ως το νέο κλείδωμα. ¦ Неизвестно време до повторно заключване.
+Elle est protégée par un mot de passe. ¦ Προστατεύεται με κωδικό. ¦ Тя е защитена с парола.
+Export ¦ Εξαγωγή ¦ Експорт
+Exports ¦ Εξαγωγές ¦ Експорти
+Force : {s} ¦ Ισχύς: {s} ¦ Сила: {s}
+Généalogie ouverte avec le mot de passe ¦ Η γενεαλογία άνοιξε με τον κωδικό ¦ Генеалогията е отворена с паролата
+Il n’y a pas d’autre généalogie. ¦ Δεν υπάρχει άλλη γενεαλογία. ¦ Няма друга генеалогия.
+Impossible de retirer le verrou (dossier des données en lecture seule ?). ¦ Αδύνατη η αφαίρεση του κλειδώματος (φάκελος δεδομένων μόνο για ανάγνωση;). ¦ Заключването не може да се премахне (папката с данни само за четене?).
+Impossible de vérifier le mot de passe (dossier des données en lecture seule ?). ¦ Αδύνατος ο έλεγχος του κωδικού (φάκελος δεδομένων μόνο για ανάγνωση;). ¦ Паролата не може да се провери (папката с данни само за четене?).
+Impossible d’enregistrer le verrou (dossier des données en lecture seule ?). ¦ Αδύνατη η αποθήκευση του κλειδώματος (φάκελος δεδομένων μόνο για ανάγνωση;). ¦ Заключването не може да се запише (папката с данни само за четене?).
+Impossible d’ouvrir cette généalogie. ¦ Αδύνατο το άνοιγμα αυτής της γενεαλογίας. ¦ Тази генеалогия не може да се отвори.
+Impression ou PDF ¦ Εκτύπωση ή PDF ¦ Печат или PDF
+Impressions ¦ Εκτυπώσεις ¦ Отпечатвания
+Journal du dossier (CSV) ¦ Ημερολόγιο φακέλου (CSV) ¦ Дневник на преписката (CSV)
+J’ai compris : sans ce mot de passe, je ne pourrai plus ouvrir cette généalogie dans l’app. ¦ Κατάλαβα: χωρίς αυτόν τον κωδικό δεν θα μπορώ πια να ανοίξω αυτή τη γενεαλογία στην εφαρμογή. ¦ Разбрах: без тази парола вече няма да мога да отворя тази генеалогия в приложението.
+Le mot de passe est trop long (1024 caractères au plus). ¦ Ο κωδικός είναι πολύ μεγάλος (έως 1024 χαρακτήρες). ¦ Паролата е твърде дълга (най-много 1024 знака).
+Le serveur de l’app ne répond pas. Réessaie. ¦ Ο διακομιστής της εφαρμογής δεν απαντά. Δοκίμασε ξανά. ¦ Сървърът на приложението не отговаря. Опитай пак.
+Le verrou n’empêche pas de lire le fichier si quelqu’un le copie : il n’est pas chiffré. Pour ça, chiffre le disque de ton ordinateur : FileVault sur Mac (Réglages Système → Confidentialité et sécurité), BitLocker sous Windows (Paramètres → Confidentialité et sécurité → Chiffrement de l’appareil). ¦ Το κλείδωμα δεν εμποδίζει την ανάγνωση του αρχείου αν κάποιος το αντιγράψει: δεν είναι κρυπτογραφημένο. Γι’ αυτό, κρυπτογράφησε τον δίσκο του υπολογιστή σου: FileVault σε Mac (Ρυθμίσεις συστήματος → Απόρρητο και ασφάλεια), BitLocker σε Windows (Ρυθμίσεις → Προστασία προσωπικών δεδομένων και ασφάλεια → Κρυπτογράφηση συσκευής). ¦ Заключването не пречи файлът да бъде прочетен, ако някой го копира: той не е шифрован. За това шифровай диска на компютъра си: FileVault на Mac (Системни настройки → Поверителност и сигурност), BitLocker в Windows (Настройки → Поверителност и защита → Шифроване на устройството).
+Lecture seule : rien ne se modifie ; seule cette durée fait disparaître les lignes plus vieilles (et c’est noté). ¦ Μόνο ανάγνωση: τίποτα δεν αλλάζει· μόνο αυτή η διάρκεια εξαφανίζει τις παλαιότερες γραμμές (και αυτό καταγράφεται). ¦ Само за четене: нищо не се променя; само този срок премахва по-старите редове (и това се записва).
+Lecture seule. Tous les dossiers : Réglages → 📜 Qui a vu quoi. ¦ Μόνο ανάγνωση. Όλοι οι φάκελοι: Ρυθμίσεις → 📜 Ποιος είδε τι. ¦ Само за четене. Всички преписки: Настройки → 📜 Кой какво е видял.
+Les deux mots de passe ne sont pas pareils. ¦ Οι δύο κωδικοί δεν είναι ίδιοι. ¦ Двете пароли не са еднакви.
+Les ouvertures de dossier, les impressions, les exports, les courriers en série et chaque essai du mot de passe, notés par l’app sur ce poste ({machine}). ¦ Ανοίγματα φακέλων, εκτυπώσεις, εξαγωγές, μαζικές επιστολές και κάθε δοκιμή κωδικού, καταγεγραμμένα από την εφαρμογή σε αυτόν τον υπολογιστή ({machine}). ¦ Отваряния на преписки, отпечатвания, експорти, серийни писма и всеки опит за парола, записани от приложението на този компютър ({machine}).
+Les sauvegardes de cette généalogie sont toujours protégées par ce mot de passe (AES-256) : aucune copie ne sort en clair de son dossier. ¦ Τα αντίγραφα ασφαλείας αυτής της γενεαλογίας προστατεύονται πάντα με αυτόν τον κωδικό (AES-256): κανένα αντίγραφο δεν βγαίνει μη κρυπτογραφημένο από τον φάκελό της. ¦ Резервните копия на тази генеалогия винаги са защитени с тази парола (AES-256): никое копие не излиза нешифровано от папката ѝ.
+Lettres rangées : {n} ¦ Επιστολές που αρχειοθετήθηκαν: {n} ¦ Подредени писма: {n}
+Lettres retirées (↶ Annuler) : {n} ¦ Επιστολές που αποσύρθηκαν (↶ Αναίρεση): {n} ¦ Оттеглени писма (↶ Отмяна): {n}
+Lignes : {n} sur {t} ¦ Γραμμές: {n} από {t} ¦ Редове: {n} от {t}
+Lignes anciennes effacées ¦ Οι παλιές γραμμές διαγράφηκαν ¦ Старите редове са изтрити
+Lignes effacées : {n} (gardées : {m}) ¦ Γραμμές που διαγράφηκαν: {n} (διατήρηση: {m}) ¦ Изтрити редове: {n} (съхранение: {m})
+Mode consultation : le registre ne se lit pas. ¦ Λειτουργία προβολής: το μητρώο δεν διαβάζεται. ¦ Режим на разглеждане: регистърът не се чете.
+Mot de passe changé ¦ Ο κωδικός άλλαξε ¦ Паролата е сменена
+Mot de passe changé. Les autres fenêtres ouvertes devront le redemander. ¦ Ο κωδικός άλλαξε. Τα άλλα ανοιχτά παράθυρα θα πρέπει να τον ζητήσουν ξανά. ¦ Паролата е сменена. Другите отворени прозорци ще трябва да я поискат отново.
+Mot de passe de cette généalogie ¦ Κωδικός αυτής της γενεαλογίας ¦ Парола на тази генеалогия
+Mot de passe oublié : il n’y a pas de porte dérobée. Sans lui, cette généalogie ne peut plus être ouverte dans l’app. ¦ Ξεχασμένος κωδικός: δεν υπάρχει πίσω πόρτα. Χωρίς αυτόν, αυτή η γενεαλογία δεν ανοίγει πια στην εφαρμογή. ¦ Забравена парола: няма задна вратичка. Без нея тази генеалогия вече не може да се отвори в приложението.
+Mot de passe oublié ? ¦ Ξέχασες τον κωδικό; ¦ Забрави паролата?
+Mot de passe posé ¦ Ο κωδικός ορίστηκε ¦ Паролата е зададена
+Mot de passe refusé ¦ Ο κωδικός απορρίφθηκε ¦ Паролата е отказана
+Mot de passe retiré ¦ Ο κωδικός αφαιρέθηκε ¦ Паролата е премахната
+Musée de famille ¦ Οικογενειακό μουσείο ¦ Семеен музей
+Ouvertures ¦ Ανοίγματα ¦ Отваряния
+Ouverture… ¦ Άνοιγμα… ¦ Отваряне…
+Ouvrir une autre généalogie ¦ Άνοιγμα άλλης γενεαλογίας ¦ Отвори друга генеалогия
+Paquet du travail à deux ¦ Πακέτο δουλειάς για δύο ¦ Пакет от работата по двама
+Partage avec la famille ¦ Κοινοποίηση στην οικογένεια ¦ Споделяне със семейството
+Patiente {n} s ¦ Περίμενε {n} δευτ. ¦ Изчакай {n} с
+Patiente {n} s avant de réessayer. ¦ Περίμενε {n} δευτ. πριν ξαναδοκιμάσεις. ¦ Изчакай {n} с, преди да опиташ пак.
+Poste ¦ Υπολογιστής ¦ Компютър
+Pour une généalogie protégée, tape son mot de passe : la sauvegarde est chiffrée avec lui (AES-256). ¦ Για μια προστατευμένη γενεαλογία, πληκτρολόγησε τον κωδικό της: το αντίγραφο κρυπτογραφείται με αυτόν (AES-256). ¦ За защитена генеалогия въведи паролата ѝ: копието се шифрова с нея (AES-256).
+Protéger ¦ Προστασία ¦ Защити
+Protéger cette généalogie ¦ Προστασία αυτής της γενεαλογίας ¦ Защити тази генеалогия
+Protégée ¦ Προστατευμένη ¦ Защитена
+Qui a vu ce dossier ¦ Ποιος είδε αυτόν τον φάκελο ¦ Кой е видял тази преписка
+Qui a vu le dossier {n} ¦ Ποιος είδε τον φάκελο {n} ¦ Кой е видял преписка {n}
+Qui a vu quoi ¦ Ποιος είδε τι ¦ Кой какво е видял
+Registre « Qui a vu quoi » (CSV) ¦ Μητρώο «Ποιος είδε τι» (CSV) ¦ Регистър „Кой какво е видял“ (CSV)
+Retirer le mot de passe ¦ Αφαίρεση κωδικού ¦ Премахни паролата
+Retirer le mot de passe de « {name} » ? Elle s’ouvrira sans rien demander, et ses sauvegardes ne seront plus forcément protégées. ¦ Αφαίρεση του κωδικού της «{name}»; Θα ανοίγει χωρίς να ζητά τίποτα και τα αντίγραφα ασφαλείας της δεν θα προστατεύονται πια απαραίτητα. ¦ Да се премахне ли паролата на „{name}“? Тя ще се отваря без питане и резервните ѝ копия вече няма непременно да са защитени.
+Reverrouillée (délai passé ou app relancée) ¦ Ξανακλειδώθηκε (πέρασε ο χρόνος ή η εφαρμογή ξεκίνησε ξανά) ¦ Заключена отново (времето изтече или приложението беше рестартирано)
+Sans ce mot de passe, cette généalogie ne peut plus être ouverte dans l’app : il n’existe pas de porte dérobée, et personne ne peut le retrouver pour toi. ¦ Χωρίς αυτόν τον κωδικό, αυτή η γενεαλογία δεν ανοίγει πια στην εφαρμογή: δεν υπάρχει πίσω πόρτα και κανείς δεν μπορεί να τον βρει για σένα. ¦ Без тази парола тази генеалогия вече не може да се отвори в приложението: няма задна вратичка и никой не може да я възстанови вместо теб.
+Sauvegarde complète ¦ Πλήρες αντίγραφο ασφαλείας ¦ Пълно резервно копие
+Se verrouille après {m} sans rien toucher, à la fermeture de l’app et quand on change de généalogie. ¦ Κλειδώνει μετά από {m} χωρίς δραστηριότητα, όταν κλείνει η εφαρμογή και όταν αλλάζεις γενεαλογία. ¦ Заключва се след {m} без действие, при затваряне на приложението и при смяна на генеалогията.
+Site web ¦ Ιστότοπος ¦ Уебсайт
+Site web publié ¦ Ο ιστότοπος δημοσιεύτηκε ¦ Уебсайтът е публикуван
+Tableau de bord des dossiers (CSV) · dossiers : {n} ¦ Πίνακας φακέλων (CSV) · φάκελοι: {n} ¦ Табло на преписките (CSV) · преписки: {n}
+Tableau, arbre ou parts imprimés ¦ Πίνακας, δέντρο ή μερίδια εκτυπώθηκαν ¦ Отпечатани таблица, дърво или дялове
+Tape d’abord le mot de passe actuel. ¦ Πληκτρολόγησε πρώτα τον τρέχοντα κωδικό. ¦ Първо въведи текущата парола.
+Tape le mot de passe. ¦ Πληκτρολόγησε τον κωδικό. ¦ Въведи паролата.
+Tout le registre ¦ Όλο το μητρώο ¦ Целият регистър
+Un verrou à l’ouverture de « {name} », sur cet ordinateur et sur les autres. ¦ Ένα κλείδωμα στο άνοιγμα της «{name}», σε αυτόν τον υπολογιστή και στους άλλους. ¦ Заключване при отваряне на „{name}“ — на този компютър и на другите.
+Verrouiller après ¦ Κλείδωμα μετά από ¦ Заключи след
+Verrouiller maintenant ¦ Κλείδωμα τώρα ¦ Заключи сега
+Verrouiller maintenant (généalogie protégée par un mot de passe) ¦ Κλείδωμα τώρα (γενεαλογία προστατευμένη με κωδικό) ¦ Заключи сега (генеалогия, защитена с парола)
+Verrouillée : {names} (ouvre-la avec son mot de passe pour voir ses dossiers) ¦ Κλειδωμένη: {names} (άνοιξέ την με τον κωδικό της για να δεις τους φακέλους της) ¦ Заключена: {names} (отвори я с паролата ѝ, за да видиш преписките ѝ)
+Verrouillée à la main ¦ Κλειδώθηκε με το χέρι ¦ Заключена ръчно
+après {m} ¦ μετά από {m} ¦ след {m}
+pour changer le délai ¦ για αλλαγή του χρόνου ¦ за смяна на времето
+pour changer le mot de passe ¦ για αλλαγή του κωδικού ¦ за смяна на паролата
+pour retirer le mot de passe ¦ για αφαίρεση του κωδικού ¦ за премахване на паролата
+pour une sauvegarde protégée ¦ για προστατευμένο αντίγραφο ¦ за защитено копие
+protégée par un mot de passe ¦ προστατευμένη με κωδικό ¦ защитена с парола
+sans rien toucher ¦ χωρίς δραστηριότητα ¦ без действие
+très bon ¦ πολύ καλή ¦ много добра
+« {name} » est verrouillée ¦ Η «{name}» είναι κλειδωμένη ¦ „{name}“ е заключена
+📜 Qui a vu quoi ¦ 📜 Ποιος είδε τι ¦ 📜 Кой какво е видял
+🔐 Généalogie verrouillée ¦ 🔐 Γενεαλογία κλειδωμένη ¦ 🔐 Генеалогията е заключена
+🔐 Mot de passe de cette généalogie ¦ 🔐 Κωδικός αυτής της γενεαλογίας ¦ 🔐 Парола на тази генеалогия
+faible ¦ αδύναμη ¦ слаба
+moyen ¦ μέτρια ¦ средна
+bon ¦ καλή ¦ добра
+pour ouvrir la généalogie ¦ για άνοιγμα της γενεαλογίας ¦ за отваряне на генеалогията
+Ce dossier appartient à l’app (données, médias ou sauvegardes d’une généalogie) : choisis un autre dossier. ¦ Αυτός ο φάκελος ανήκει στην εφαρμογή (δεδομένα, πολυμέσα ή αντίγραφα μιας γενεαλογίας): διάλεξε άλλο φάκελο. ¦ Тази папка принадлежи на приложението (данни, медии или копия на генеалогия): избери друга папка.
+Ce fichier est rangé dans les dossiers de l’app : choisis un fichier ailleurs. ¦ Αυτό το αρχείο βρίσκεται στους φακέλους της εφαρμογής: διάλεξε αρχείο από αλλού. ¦ Този файл е в папките на приложението: избери файл от другаде.
+Cette copie est rangée dans les dossiers d’une autre généalogie : elle ne peut pas être remise ici. ¦ Αυτό το αντίγραφο βρίσκεται στους φακέλους άλλης γενεαλογίας: δεν μπορεί να επαναφερθεί εδώ. ¦ Това копие е в папките на друга генеалогия: не може да бъде възстановено тук.
+Cette copie vient d’une généalogie protégée par un mot de passe : ouvre-la pour la restaurer. ¦ Αυτό το αντίγραφο προέρχεται από γενεαλογία προστατευμένη με κωδικό: άνοιξέ την για να το επαναφέρεις. ¦ Това копие е от генеалогия, защитена с парола: отвори я, за да го възстановиш.
+Cette base est protégée par un mot de passe : donne-le pour l’ouvrir. ¦ Αυτή η βάση προστατεύεται με κωδικό: πληκτρολόγησέ τον για να την ανοίξεις. ¦ Тази база е защитена с парола: въведи я, за да я отвориш.

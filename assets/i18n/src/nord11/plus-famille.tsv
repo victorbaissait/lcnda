@@ -1,0 +1,218 @@
+fr ¦ vi ¦ id
+# Zone « plus-famille » : 💌 lettre de famille, 🛡 fiabilité par personne, 🖊 relecture d’une branche, 🌐 traduire un acte latin (assets/js/plus-famille*.js, lib/plus_famille.php)
+Fiabilité : {n} sur 100 ¦ Độ tin cậy: {n}/100 ¦ Keandalan: {n} dari 100
+🛡 Fiabilité ¦ 🛡 Độ tin cậy ¦ 🛡 Keandalan
+Calcul de la note… ¦ Đang tính điểm… ¦ Menghitung nilai…
+Comment la note est calculée ¦ Cách tính điểm ¦ Cara nilai dihitung
+? Comment c’est calculé ¦ ? Cách tính ¦ ? Cara menghitungnya
+en doute : {what} ¦ còn nghi ngờ: {what} ¦ diragukan: {what}
+date estimée : {what} ¦ ngày ước tính: {what} ¦ tanggal perkiraan: {what}
+aucun fait noté (naissance, mariage, décès…) ¦ chưa ghi sự kiện nào (sinh, kết hôn, mất…) ¦ belum ada fakta (kelahiran, pernikahan, kematian…)
+sans source : {what} ¦ không có nguồn: {what} ¦ tanpa sumber: {what}
+une source sur la fiche, mais sur aucun fait ¦ có nguồn trên hồ sơ nhưng không gắn với sự kiện nào ¦ ada sumber di kartu, tetapi tidak pada fakta
+aucune source ¦ không có nguồn ¦ tidak ada sumber
+{who} : lien {lvl} ¦ {who}: quan hệ {lvl} ¦ {who}: hubungan {lvl}
+pas de parents dans la base : cette part ne compte pas ¦ không có cha mẹ trong cơ sở dữ liệu: phần này không tính ¦ tidak ada orang tua di basis data: bagian ini tidak dihitung
+ajouter une source à : {what} ¦ thêm nguồn cho: {what} ¦ tambahkan sumber untuk: {what}
+vérifier {what}, marqué « doute » ¦ kiểm tra {what}, đánh dấu “nghi ngờ” ¦ periksa {what}, ditandai “diragukan”
+confirmer le lien avec {name} (⚖️ dossier de preuve) ¦ xác nhận quan hệ với {name} (⚖️ hồ sơ chứng minh) ¦ konfirmasi hubungan dengan {name} (⚖️ berkas bukti)
+ajouter ses faits (naissance, mariage, décès) avec leur source ¦ thêm sự kiện (sinh, kết hôn, mất) kèm nguồn ¦ tambahkan fakta (kelahiran, pernikahan, kematian) beserta sumber
+sur 100 ¦ / 100 ¦ dari 100
+À revoir avant publication ¦ Cần xem lại trước khi công bố ¦ Perlu ditinjau sebelum diterbitkan
+(vivant ou fiche confidentielle : ne part pas à la publication) ¦ (còn sống hoặc hồ sơ mật: không công bố) ¦ (masih hidup atau kartu rahasia: tidak diterbitkan)
+Seuil « à revoir » : {n} ¦ Ngưỡng “cần xem lại”: {n} ¦ Ambang “perlu ditinjau”: {n}
+Pour gagner des points : ¦ Để tăng điểm: ¦ Untuk menambah nilai:
+La note n’est pas le score de complétude (qui compte ce qui est rempli) : une fiche peut être bien remplie et peu sûre. ¦ Điểm này không phải điểm đầy đủ (vốn đếm phần đã điền): một hồ sơ có thể điền đủ mà vẫn kém tin cậy. ¦ Nilai ini bukan nilai kelengkapan (yang menghitung isian): kartu bisa terisi lengkap namun kurang andal.
+Calcul impossible. ¦ Không tính được. ¦ Perhitungan tidak mungkin.
+🛡 FIABILITÉ ¦ 🛡 ĐỘ TIN CẬY ¦ 🛡 KEANDALAN
+Trois parts, sur 100 chacune, puis une moyenne : ¦ Ba phần, mỗi phần trên 100, rồi lấy trung bình: ¦ Tiga bagian, masing-masing dari 100, lalu dirata-rata:
+Ses faits (40 %) ¦ Sự kiện (40%) ¦ Fakta (40%)
+la fiabilité de chaque fait : certain 100, déduit 80, estimé 55, doute 15, non évalué 60 ; une date « vers… », « avant… » compte comme estimée. ¦ độ tin cậy của mỗi sự kiện: chắc chắn 100, suy ra 80, ước tính 55, nghi ngờ 15, chưa đánh giá 60; ngày “khoảng…”, “trước…” tính là ước tính. ¦ keandalan tiap fakta: pasti 100, disimpulkan 80, perkiraan 55, diragukan 15, belum dinilai 60; tanggal “sekitar…”, “sebelum…” dihitung perkiraan.
+Ses sources (35 %) ¦ Nguồn (35%) ¦ Sumber (35%)
+la part des faits qui ont une source citée ou un acte en image. ¦ tỷ lệ sự kiện có nguồn được trích hoặc ảnh văn bản. ¦ porsi fakta yang punya sumber dikutip atau gambar akta.
+Ses liens (25 %) ¦ Quan hệ (25%) ¦ Hubungan (25%)
+la solidité du lien avec chaque parent : prouvé 100, probable 75, supposé 45, sans source 20, réfuté 0. Sans parents dans la base, cette part ne compte pas. ¦ độ vững của quan hệ với từng cha mẹ: đã chứng minh 100, có thể 75, giả định 45, không nguồn 20, bị bác bỏ 0. Không có cha mẹ trong cơ sở dữ liệu thì phần này không tính. ¦ kekuatan hubungan dengan tiap orang tua: terbukti 100, mungkin 75, diduga 45, tanpa sumber 20, terbantah 0. Tanpa orang tua di basis data, bagian ini tidak dihitung.
+Sous le seuil (50 au départ), la fiche est « à revoir avant publication ». Le seuil se règle dans Réglages → ⚙️ Seuils du contrôle. ¦ Dưới ngưỡng (mặc định 50), hồ sơ “cần xem lại trước khi công bố”. Chỉnh ngưỡng trong Cài đặt → ⚙️ Ngưỡng kiểm tra. ¦ Di bawah ambang (awalnya 50), kartu “perlu ditinjau sebelum diterbitkan”. Ambang diatur di Pengaturan → ⚙️ Ambang pemeriksaan.
+Rien n’est changé dans ta base : la note est recalculée dès qu’un fait ou une source change. ¦ Không có gì trong cơ sở dữ liệu bị thay đổi: điểm được tính lại khi một sự kiện hay nguồn thay đổi. ¦ Tidak ada yang diubah di basis datamu: nilai dihitung ulang begitu fakta atau sumber berubah.
+{day} : {first}, {age} ¦ {day}: {first}, {age} ¦ {day}: {first}, {age}
+{day} : il y a {n} ans, {a} et {b} se mariaient ¦ {day}: {n} năm trước, {a} và {b} kết hôn ¦ {day}: {n} tahun lalu, {a} dan {b} menikah
+{day} : il y a {n} ans naissait {name} ¦ {day}: {n} năm trước, {name} chào đời ¦ {day}: {n} tahun lalu {name} lahir
+{what} dans l’arbre : {list} ¦ {what} trong cây: {list} ¦ {what} di pohon: {list}
+Nouveau dans les médias : « {title} » ¦ Mới trong tư liệu: “{title}” ¦ Baru di media: “{title}”
+La lettre des {nm} ¦ Thư gia đình {nm} ¦ Surat keluarga {nm}
+Bonjour à tous ! Voici les nouvelles de la famille ce mois-ci. ¦ Chào cả nhà! Đây là tin tức gia đình tháng này. ¦ Halo semuanya! Inilah kabar keluarga bulan ini.
+Photo : {title} ¦ Ảnh: {title} ¦ Foto: {title}
+Les anniversaires du mois ¦ Ngày kỷ niệm trong tháng ¦ Ulang tahun bulan ini
+Pas d’anniversaire ce mois-ci. ¦ Tháng này không có ngày kỷ niệm. ¦ Tidak ada ulang tahun bulan ini.
+Les dernières découvertes ¦ Những phát hiện mới nhất ¦ Penemuan terbaru
+Rien de nouveau ce mois-ci : à vous de m’envoyer vos souvenirs ! ¦ Tháng này chưa có gì mới: đến lượt mọi người gửi kỷ niệm cho mình nhé! ¦ Tidak ada yang baru bulan ini: giliran kalian mengirimkan kenangan!
+L’ancêtre à l’honneur ¦ Tổ tiên được vinh danh ¦ Leluhur yang disorot
+Avec toute mon affection, ¦ Thương mến, ¦ Dengan penuh kasih,
+Ce qu’on y met ¦ Nội dung đưa vào ¦ Isi yang dimasukkan
+🖼 Changer ¦ 🖼 Đổi ¦ 🖼 Ganti
+Tout se retouche dans la lettre (clique sur un texte). Les personnes vivantes n’y figurent que par leur prénom et leur âge ; les fiches confidentielles jamais. ¦ Mọi thứ đều sửa được ngay trong thư (bấm vào chữ). Người còn sống chỉ hiện tên và tuổi; hồ sơ mật không bao giờ hiện. ¦ Semua bisa diubah di surat (klik teks). Orang yang masih hidup hanya tampil dengan nama depan dan usia; kartu rahasia tidak pernah.
+Je remplis la lettre… ¦ Đang điền thư… ¦ Mengisi surat…
+Lettre refaite avec les nouveaux choix ¦ Đã làm lại thư theo lựa chọn mới ¦ Surat dibuat ulang dengan pilihan baru
+LETTRE DE FAMILLE ¦ THƯ GIA ĐÌNH ¦ SURAT KELUARGA
+La photo de la lettre ¦ Ảnh của thư ¦ Foto surat
+Lettre de famille ¦ Thư gia đình ¦ Surat keluarga
+La lettre du mois remplie toute seule : anniversaires, dernières découvertes, une photo, un ancêtre à l’honneur. Tout se retouche. ¦ Thư hằng tháng tự điền: ngày kỷ niệm, phát hiện mới, một tấm ảnh, một tổ tiên được vinh danh. Mọi thứ đều sửa được. ¦ Surat bulanan terisi sendiri: ulang tahun, penemuan terbaru, sebuah foto, leluhur yang disorot. Semua bisa diubah.
+Lettre gardée : « {title} » (Listes → Lettres de famille) ¦ Đã lưu thư: “{title}” (Danh sách → Thư gia đình) ¦ Surat disimpan: “{title}” (Daftar → Surat keluarga)
+💾 Garder ¦ 💾 Lưu ¦ 💾 Simpan
+Ranger la lettre dans Listes → Lettres de famille ¦ Cất thư vào Danh sách → Thư gia đình ¦ Simpan surat di Daftar → Surat keluarga
+PDF ¦ PDF ¦ PDF
+par la fenêtre « Imprimer » (⤓ PDF) ¦ qua cửa sổ “In” (⤓ PDF) ¦ lewat jendela “Cetak” (⤓ PDF)
+Image (PNG) ¦ Hình ảnh (PNG) ¦ Gambar (PNG)
+Ouvre ta messagerie avec la lettre déjà écrite : rien n’est envoyé par l’app ¦ Mở hộp thư với lá thư đã soạn sẵn: ứng dụng không gửi gì ¦ Membuka email dengan surat sudah tertulis: aplikasi tidak mengirim apa pun
+📝 Retoucher ¦ 📝 Chỉnh sửa ¦ 📝 Sunting
+Ouvrir la lettre dans le traitement de texte ¦ Mở thư trong trình soạn thảo ¦ Buka surat di pengolah kata
+Chers cousins, chères cousines, ¦ Các anh chị em họ thân mến, ¦ Para sepupu yang tercinta,
+Ce que j’ai trouvé ce mois-ci… ¦ Những gì mình tìm được tháng này… ¦ Yang kutemukan bulan ini…
+Si vous avez des photos, des lettres ou des souvenirs, je serais très heureux de les voir ! ¦ Nếu mọi người có ảnh, thư hay kỷ niệm, mình rất vui được xem! ¦ Jika kalian punya foto, surat, atau kenangan, aku senang sekali melihatnya!
+Je vous embrasse, ¦ Thân thương, ¦ Peluk hangat,
+📋 Voir dans Listes › Lettres de famille ¦ 📋 Xem trong Danh sách › Thư gia đình ¦ 📋 Lihat di Daftar › Surat keluarga
+remplie toute seule : anniversaires du mois, découvertes, photo, ancêtre ¦ tự điền: ngày kỷ niệm trong tháng, phát hiện, ảnh, tổ tiên ¦ terisi sendiri: ulang tahun bulan ini, penemuan, foto, leluhur
+Lettres de famille ¦ Thư gia đình ¦ Surat keluarga
+💌 Lettres de famille ¦ 💌 Thư gia đình ¦ 💌 Surat keluarga
+Les lettres du mois gardées depuis ✨ Trésors → « 💌 Lettre de famille ». À ne pas confondre avec les « ✉️ Lettres aux descendants », qui s’ouvrent plus tard. ¦ Thư hằng tháng đã lưu từ ✨ Kho báu → “💌 Thư gia đình”. Đừng nhầm với “✉️ Thư gửi con cháu”, loại thư mở về sau. ¦ Surat bulanan yang disimpan dari ✨ Harta → “💌 Surat keluarga”. Jangan tertukar dengan “✉️ Surat untuk keturunan”, yang dibuka nanti.
+💌 Nouvelle lettre ¦ 💌 Thư mới ¦ 💌 Surat baru
+Chercher… (titre, mois) ¦ Tìm… (tiêu đề, tháng) ¦ Cari… (judul, bulan)
+Supprimer la lettre ¦ Xóa thư ¦ Hapus surat
+Aucune lettre gardée pour l’instant ¦ Chưa lưu thư nào ¦ Belum ada surat yang disimpan
+Fais celle du mois dans ✨ Trésors → « 💌 Lettre de famille », puis « 💾 Garder ». ¦ Làm thư tháng này trong ✨ Kho báu → “💌 Thư gia đình”, rồi “💾 Lưu”. ¦ Buat surat bulan ini di ✨ Harta → “💌 Surat keluarga”, lalu “💾 Simpan”.
+💌 Faire la lettre du mois ¦ 💌 Làm thư tháng này ¦ 💌 Buat surat bulan ini
+Lettre « {title} » supprimée ¦ Đã xóa thư “{title}” ¦ Surat “{title}” dihapus
+« d’accord », dit {who}. ¦ “đồng ý”, {who} nói. ¦ “setuju”, kata {who}.
+« faux », dit {who}. ¦ “sai”, {who} nói. ¦ “salah”, kata {who}.
+Que faire de cette remarque ? ¦ Xử lý ghi chú này thế nào? ¦ Apa yang dilakukan dengan catatan ini?
+✓ Accepter (témoignage) ¦ ✓ Chấp nhận (lời kể) ¦ ✓ Terima (kesaksian)
+✓ Accepter (note sur le fait, « doute ») ¦ ✓ Chấp nhận (ghi chú cho sự kiện, “nghi ngờ”) ¦ ✓ Terima (catatan pada fakta, “diragukan”)
+{what} par {who} : ajoutés comme témoignage si tu acceptes ¦ {what} bởi {who}: thêm làm lời kể nếu bạn chấp nhận ¦ {what} oleh {who}: ditambahkan sebagai kesaksian jika kamu terima
+Pour tous : ¦ Cho tất cả: ¦ Untuk semua:
+Importer les remarques d’une relecture ¦ Nhập ghi chú của một lần đọc soát ¦ Impor catatan tinjauan
+le fichier « remarques-….json » ¦ tệp “remarques-….json” ¦ berkas “remarques-….json”
+Le fichier que ton cousin t’a renvoyé avec « ⤓ Renvoyer mes remarques ». ¦ Tệp người họ hàng gửi lại bằng “⤓ Gửi lại ghi chú của tôi”. ¦ Berkas yang dikirim balik sepupumu dengan “⤓ Kirim balik catatanku”.
+Ce fichier est trop gros pour un fichier de remarques. ¦ Tệp quá lớn đối với tệp ghi chú. ¦ Berkas ini terlalu besar untuk berkas catatan.
+<b>{what}</b> de <b>{who}</b> sur « {title} » ({date}). Pour chaque fait : accepte, refuse ou garde pour plus tard ¦ <b>{what}</b> từ <b>{who}</b> về “{title}” ({date}). Với mỗi sự kiện: chấp nhận, từ chối hoặc để sau ¦ <b>{what}</b> dari <b>{who}</b> tentang “{title}” ({date}). Untuk tiap fakta: terima, tolak, atau simpan untuk nanti
+Ces remarques ont <b>déjà été importées</b> ¦ Các ghi chú này <b>đã được nhập</b> ¦ Catatan ini <b>sudah diimpor</b>
+Aucune remarque dans ce fichier ¦ Tệp này không có ghi chú ¦ Tidak ada catatan di berkas ini
+{what} sur des faits qui ne sont plus dans la base : mises de côté. ¦ {what} về sự kiện không còn trong cơ sở dữ liệu: để sang một bên. ¦ {what} tentang fakta yang sudah tidak ada di basis data: disisihkan.
+⤒ Importer les remarques ¦ ⤒ Nhập ghi chú ¦ ⤒ Impor catatan
+{what} (relecture de {who}) ¦ {what} (đọc soát bởi {who}) ¦ {what} (tinjauan oleh {who})
+Remarques de {who} gardées avec la relecture. ¦ Đã lưu ghi chú của {who} cùng lần đọc soát. ¦ Catatan dari {who} disimpan bersama tinjauan.
+relu par {who} ¦ đã đọc soát bởi {who} ¦ ditinjau oleh {who}
+En attente des remarques ¦ Đang chờ ghi chú ¦ Menunggu catatan
+{n} à ranger ¦ {n} cần xử lý ¦ {n} perlu dirapikan
+tout est rangé ¦ đã xử lý hết ¦ semua sudah rapi
+Envoyé, en attente des remarques ¦ Đã gửi, đang chờ ghi chú ¦ Terkirim, menunggu catatan
+Supprimer la relecture ¦ Xóa lần đọc soát ¦ Hapus tinjauan
+Relectures de branche ¦ Đọc soát nhánh ¦ Tinjauan cabang
+＋ Demander une relecture… ¦ ＋ Nhờ đọc soát… ¦ ＋ Minta tinjauan…
+Aucune relecture : « 📤 Partager avec la famille » avec la case « 🖊 Demander une relecture », ou fiche → ⋯ → « 🖊 Faire relire cette branche… ». ¦ Chưa có lần đọc soát: “📤 Chia sẻ với gia đình” với ô “🖊 Nhờ đọc soát”, hoặc hồ sơ → ⋯ → “🖊 Nhờ đọc soát nhánh này…”. ¦ Belum ada tinjauan: “📤 Bagikan ke keluarga” dengan kotak “🖊 Minta tinjauan”, atau kartu → ⋯ → “🖊 Minta tinjau cabang ini…”.
+Relecture « {title} » supprimée ¦ Đã xóa lần đọc soát “{title}” ¦ Tinjauan “{title}” dihapus
+Faire relire cette branche… ¦ Nhờ đọc soát nhánh này… ¦ Minta tinjau cabang ini…
+{who} pense que c’est faux : {c} ¦ {who} cho rằng điều này sai: {c} ¦ {who} menganggap ini salah: {c}
+{who} est d’accord ¦ {who} đồng ý ¦ {who} setuju
+Remarque refusée ¦ Đã từ chối ghi chú ¦ Catatan ditolak
+Remarque notée sur le fait ¦ Đã ghi chú cho sự kiện ¦ Catatan dicatat pada fakta
+Témoignage ajouté ¦ Đã thêm lời kể ¦ Kesaksian ditambahkan
+« je pense que c’est faux » ¦ “tôi nghĩ điều này sai” ¦ “menurutku ini salah”
+« d’accord » ¦ “đồng ý” ¦ “setuju”
+Corriger le fait ¦ Sửa sự kiện ¦ Perbaiki fakta
+ouvre le fait ; la remarque reste jusqu’à « Noter » ou « Refuser » ¦ mở sự kiện; ghi chú còn đó đến khi “Ghi lại” hoặc “Từ chối” ¦ membuka fakta; catatan tetap ada sampai “Catat” atau “Tolak”
+Noter (note sur le fait, « doute ») ¦ Ghi lại (ghi chú cho sự kiện, “nghi ngờ”) ¦ Catat (catatan pada fakta, “diragukan”)
+Accepter (témoignage) ¦ Chấp nhận (lời kể) ¦ Terima (kesaksian)
+🖊 Remarque de relecture ¦ 🖊 Ghi chú đọc soát ¦ 🖊 Catatan tinjauan
+l’année {y} ¦ năm {y} ¦ tahun {y}
+Traduire ¦ Dịch ¦ Terjemahkan
+Le mot à mot tout de suite, la traduction complète si le modèle de la lecture approfondie est installé ¦ Dịch từng từ ngay lập tức, dịch đầy đủ nếu đã cài mô hình đọc chuyên sâu ¦ Kata demi kata langsung, terjemahan lengkap jika model pembacaan mendalam terpasang
+latin → français ¦ tiếng Latinh → tiếng Pháp ¦ Latin → Prancis
+Revenir au texte ¦ Quay lại văn bản ¦ Kembali ke teks
+Écris ou lis d’abord le texte de l’acte : la traduction part du texte transcrit. ¦ Hãy viết hoặc đọc văn bản trước: bản dịch dựa trên văn bản đã chép. ¦ Tulis atau baca dulu teks akta: terjemahan berangkat dari teks yang ditranskripsi.
+L’acte (latin, transcrit) ¦ Văn bản (tiếng Latinh, đã chép) ¦ Akta (Latin, ditranskripsi)
+vert : formule connue ¦ xanh lá: công thức đã biết ¦ hijau: rumus dikenal
+bleu : mot du dictionnaire ¦ xanh dương: từ trong từ điển ¦ biru: kata kamus
+pointillé : peu sûr ¦ chấm chấm: chưa chắc ¦ titik-titik: kurang pasti
+Niveau 1 · mot à mot sans installation ¦ Mức 1 · từng từ, không cần cài ¦ Tingkat 1 · kata demi kata tanpa instalasi
+Aucun mot reconnu. ¦ Không nhận ra từ nào. ¦ Tidak ada kata yang dikenali.
+Date : {d} ¦ Ngày: {d} ¦ Tanggal: {d}
+Niveau 2 · traduction complète ¦ Mức 2 · bản dịch đầy đủ ¦ Tingkat 2 · terjemahan lengkap
+Je regarde si le modèle est installé… ¦ Đang kiểm tra mô hình đã cài chưa… ¦ Memeriksa apakah model terpasang…
+📋 Garder dans la transcription ¦ 📋 Lưu vào bản chép ¦ 📋 Simpan di transkripsi
+Copier la traduction ¦ Sao chép bản dịch ¦ Salin terjemahan
+📝 Mise au propre ¦ 📝 Bản sạch ¦ 📝 Salinan bersih
+Le niveau 1 marche toujours, sans rien installer. Les noms, dates et rôles repérés partent ensuite, comme d’habitude, dans « Ce que l’app a trouvé ». ¦ Mức 1 luôn hoạt động, không cần cài gì. Tên, ngày và vai trò tìm được sau đó vẫn chuyển vào “Ứng dụng đã tìm thấy” như thường lệ. ¦ Tingkat 1 selalu berfungsi tanpa instalasi. Nama, tanggal, dan peran yang ditemukan lalu masuk seperti biasa ke “Yang ditemukan aplikasi”.
+✓ Les deux lectures sont d’accord sur les noms, la date et les rôles. ¦ ✓ Hai cách đọc khớp nhau về tên, ngày và vai trò. ¦ ✓ Kedua pembacaan sepakat soal nama, tanggal, dan peran.
+À vérifier : la traduction complète ne dit pas la même chose pour : {list} ¦ Cần kiểm tra: bản dịch đầy đủ nói khác ở: {list} ¦ Perlu dicek: terjemahan lengkap berkata lain untuk: {list}
+Traduction copiée. ¦ Đã sao chép bản dịch. ¦ Terjemahan disalin.
+Copie impossible dans ce navigateur. ¦ Trình duyệt này không sao chép được. ¦ Tidak bisa menyalin di peramban ini.
+Traduction gardée dans la transcription (enregistre avec ⌘S) ¦ Đã lưu bản dịch vào bản chép (lưu bằng ⌘S) ¦ Terjemahan disimpan di transkripsi (simpan dengan ⌘S)
+Traduction en cours (le modèle tourne sur cet ordinateur)… ¦ Đang dịch (mô hình chạy trên máy này)… ¦ Menerjemahkan (model berjalan di komputer ini)…
+La traduction n’a pas abouti. ¦ Không dịch được. ¦ Terjemahan gagal.
+La traduction gardée avec cette transcription. ¦ Bản dịch đã lưu cùng bản chép này. ¦ Terjemahan yang disimpan bersama transkripsi ini.
+↻ Retraduire ¦ ↻ Dịch lại ¦ ↻ Terjemahkan ulang
+Le modèle de la lecture approfondie est installé : la traduction complète prend quelques dizaines de secondes. ¦ Đã cài mô hình đọc chuyên sâu: bản dịch đầy đủ mất vài chục giây. ¦ Model pembacaan mendalam terpasang: terjemahan lengkap butuh beberapa puluh detik.
+🌐 Traduire tout l’acte ¦ 🌐 Dịch toàn bộ văn bản ¦ 🌐 Terjemahkan seluruh akta
+La traduction complète utilise le modèle de la lecture approfondie (Ollama, ≈ 6 Go, rien ne part sur Internet). ¦ Bản dịch đầy đủ dùng mô hình đọc chuyên sâu (Ollama, ≈ 6 GB, không gì được gửi lên Internet). ¦ Terjemahan lengkap memakai model pembacaan mendalam (Ollama, ≈ 6 GB, tidak ada yang dikirim ke Internet).
+Le niveau 1 marche toujours. ¦ Mức 1 luôn hoạt động. ¦ Tingkat 1 selalu berfungsi.
+Transcription d’acte ¦ Bản chép văn bản ¦ Transkripsi akta
+Traduction ¦ Bản dịch ¦ Terjemahan
+Mots difficiles et abréviations ¦ Từ khó và chữ viết tắt ¦ Kata sulit dan singkatan
+Les personnes de l’acte ¦ Những người trong văn bản ¦ Orang-orang dalam akta
+=fait certain ¦ sự kiện chắc chắn ¦ fakta pasti
+=fait déduit ¦ sự kiện suy ra ¦ fakta disimpulkan
+=fait estimé ¦ sự kiện ước tính ¦ fakta perkiraan
+=fait en doute ¦ sự kiện còn nghi ngờ ¦ fakta diragukan
+=fait non évalué ¦ sự kiện chưa đánh giá ¦ fakta belum dinilai
+=fait ¦ sự kiện ¦ fakta
+=fiche à revoir ¦ hồ sơ cần xem lại ¦ kartu perlu ditinjau
+=fait confirmé ¦ sự kiện được xác nhận ¦ fakta dikonfirmasi
+=remarque notée ¦ ghi chú đã ghi lại ¦ catatan dicatat
+=remarque pour plus tard ¦ ghi chú để sau ¦ catatan untuk nanti
+=relecture ¦ lần đọc soát ¦ tinjauan
+Très sûr ¦ Rất chắc chắn ¦ Sangat andal
+Assez sûr ¦ Khá chắc chắn ¦ Cukup andal
+Peu sûr ¦ Kém tin cậy ¦ Kurang andal
+prouvé ¦ đã chứng minh ¦ terbukti
+probable ¦ có thể ¦ mungkin
+réfuté ¦ bị bác bỏ ¦ terbantah
+parent ¦ cha hoặc mẹ ¦ orang tua
+baptisé(e) ¦ được rửa tội ¦ dibaptis
+note sous ¦ điểm dưới ¦ nilai di bawah
+{a} sur {n} ont une source ¦ {a} trên {n} có nguồn ¦ {a} dari {n} punya sumber
+{a} sur {n} a une source ¦ {a} trên {n} có nguồn ¦ {a} dari {n} punya sumber
+{n} sont à revoir avant publication (note sous {min}). ¦ {n} cần xem lại trước khi công bố (điểm dưới {min}). ¦ {n} perlu ditinjau sebelum diterbitkan (nilai di bawah {min}).
+{n} est à revoir avant publication (note sous {min}). ¦ {n} cần xem lại trước khi công bố (điểm dưới {min}). ¦ {n} perlu ditinjau sebelum diterbitkan (nilai di bawah {min}).
+La fiabilité n’a pas pu être calculée. ¦ Không tính được độ tin cậy. ¦ Keandalan tidak dapat dihitung.
+Aucune fiche à revoir avant publication, bravo ! ¦ Không có hồ sơ nào cần xem lại trước khi công bố, tuyệt! ¦ Tidak ada kartu yang perlu ditinjau sebelum diterbitkan, hebat!
+Pas encore de fiche à publier. ¦ Chưa có hồ sơ để công bố. ¦ Belum ada kartu untuk diterbitkan.
+{n} sous {min} sur 100 ¦ {n} dưới {min}/100 ¦ {n} di bawah {min} dari 100
+🛡 Fiches les moins fiables ¦ 🛡 Hồ sơ kém tin cậy nhất ¦ 🛡 Kartu paling kurang andal
+Listes → Personnes, filtrée sur « À revoir avant publication » ¦ Danh sách → Người, lọc theo “Cần xem lại trước khi công bố” ¦ Daftar → Orang, disaring “Perlu ditinjau sebelum diterbitkan”
+Les voir ¦ Xem ¦ Lihat
+Les laisser de côté ¦ Bỏ qua ¦ Abaikan
+Exporter quand même ¦ Vẫn xuất ¦ Tetap ekspor
+Transcription ¦ Bản chép ¦ Transkripsi
+🖊 Relecture ¦ 🖊 Đọc soát ¦ 🖊 Tinjauan
+🖊 Demander une relecture (le cousin peut cocher et commenter chaque fait) ¦ 🖊 Nhờ đọc soát (người họ hàng có thể đánh dấu và bình luận từng sự kiện) ¦ 🖊 Minta tinjauan (sepupu bisa mencentang dan mengomentari tiap fakta)
+La copie montre alors « ✓ D’accord / ✗ Je pense que c’est faux » sur chaque fait, et « ⤓ Renvoyer mes remarques » : un petit fichier .json à importer dans Questions aux proches → « ⤒ Importer les réponses ». ¦ Khi đó bản sao hiện “✓ Đồng ý / ✗ Tôi nghĩ điều này sai” ở mỗi sự kiện, và “⤓ Gửi lại ghi chú của tôi”: một tệp .json nhỏ để nhập trong Câu hỏi cho người thân → “⤒ Nhập câu trả lời”. ¦ Salinan lalu menampilkan “✓ Setuju / ✗ Menurutku ini salah” di tiap fakta, dan “⤓ Kirim balik catatanku”: berkas .json kecil untuk diimpor di Pertanyaan untuk kerabat → “⤒ Impor jawaban”.
+Copie à relire prête : {name}. Le cousin te renverra ses remarques (un fichier .json) : Questions aux proches → « ⤒ Importer les réponses ». ¦ Bản sao để đọc soát đã sẵn sàng: {name}. Người họ hàng sẽ gửi lại ghi chú (tệp .json): Câu hỏi cho người thân → “⤒ Nhập câu trả lời”. ¦ Salinan untuk ditinjau siap: {name}. Sepupu akan mengirim balik catatannya (berkas .json): Pertanyaan untuk kerabat → “⤒ Impor jawaban”.
+Donne un titre à la lettre. ¦ Hãy đặt tiêu đề cho thư. ¦ Beri judul pada surat.
+Lettre introuvable. ¦ Không tìm thấy thư. ¦ Surat tidak ditemukan.
+Relecture introuvable. ¦ Không tìm thấy lần đọc soát. ¦ Tinjauan tidak ditemukan.
+Remarque introuvable. ¦ Không tìm thấy ghi chú. ¦ Catatan tidak ditemukan.
+Ce n’est pas un fichier de remarques de relecture. ¦ Đây không phải tệp ghi chú đọc soát. ¦ Ini bukan berkas catatan tinjauan.
+Cette relecture n’est pas dans cette base (ou elle a été supprimée). ¦ Lần đọc soát này không có trong cơ sở dữ liệu (hoặc đã bị xóa). ¦ Tinjauan ini tidak ada di basis data ini (atau sudah dihapus).
+Ce fait n’existe plus. ¦ Sự kiện này không còn nữa. ¦ Fakta ini sudah tidak ada.
+Cette remarque est déjà rangée. ¦ Ghi chú này đã được xử lý. ¦ Catatan ini sudah dirapikan.
+Il n’y a pas encore de texte à traduire. ¦ Chưa có văn bản để dịch. ¦ Belum ada teks untuk diterjemahkan.
+Le modèle de la lecture approfondie n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Chưa tải mô hình đọc chuyên sâu: “⤓ Cài đọc chuyên sâu”. ¦ Model pembacaan mendalam belum diunduh: “⤓ Pasang pembacaan mendalam”.
+Ces outils ne sont pas encore prêts : relance l’app. ¦ Các công cụ này chưa sẵn sàng: hãy khởi động lại ứng dụng. ¦ Alat ini belum siap: mulai ulang aplikasi.
+Cette demande de relecture n’existe plus. ¦ Yêu cầu đọc soát này không còn nữa. ¦ Permintaan tinjauan ini sudah tidak ada.
+{who} confirme : {fact}. ¦ {who} xác nhận: {fact}. ¦ {who} mengonfirmasi: {fact}.
+Confirmé par {who} : {fact} ¦ {who} xác nhận: {fact} ¦ Dikonfirmasi oleh {who}: {fact}
+{who}, relecture « {title} », le {date} ¦ {who}, đọc soát “{title}”, ngày {date} ¦ {who}, tinjauan “{title}”, {date}
+Relecture d’une branche ¦ Đọc soát một nhánh ¦ Tinjauan cabang
+{who} pense que c’est faux. ¦ {who} cho rằng điều này sai. ¦ {who} menganggap ini salah.
+relecture « {title} », le {date} ¦ đọc soát “{title}”, ngày {date} ¦ tinjauan “{title}”, {date}
+💬 Remarque de {who} ¦ 💬 Ghi chú của {who} ¦ 💬 Catatan dari {who}

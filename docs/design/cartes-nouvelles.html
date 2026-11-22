@@ -1,0 +1,1151 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Six cartes de plus</title>
+<style>
+
+:root{--bg:#f4f5f7;--paper:#fff;--ink:#111;--muted:#555;--soft:#777;--line:#eceef2;--line2:#c9ced8;--blue:#055dff;--blue-bg:#eef4ff;--blue-ink:#1a3d8f;--green:#1a7f37;--green-bg:#eaf6ee;--yel:#d4a800;--yel-bg:#fff8d6;--yel-ink:#7a5d00;--red:#c62828;--red-bg:#fdecec;--vio:#6929c4;--vio-bg:#f3ecff;--grey-bg:#f1f2f4;--shadow:rgba(5,93,255,.25);--bar:#141414;--bar-ink:#fff;--sheet:#fffdf8}
+@media (prefers-color-scheme:dark){:root{--bg:#121417;--paper:#1c1f24;--ink:#eceef2;--muted:#b4b9c3;--soft:#9aa0aa;--line:#2c3038;--line2:#454b55;--blue:#5b93ff;--blue-bg:#18233a;--blue-ink:#a9c4ff;--green:#4cc070;--green-bg:#15281c;--yel:#e0b93a;--yel-bg:#2c2612;--yel-ink:#f0d276;--red:#ff6b6b;--red-bg:#331a1a;--vio:#b48cff;--vio-bg:#261d38;--grey-bg:#262a31;--shadow:rgba(91,147,255,.22);--bar:#000;--bar-ink:#eceef2;--sheet:#23262b}}
+*{box-sizing:border-box}
+body{background:var(--bg);padding:28px;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);margin:0;line-height:1.45}
+h1{font-size:22px;margin:0 0 4px}h2{font-size:19px;margin:40px 0 6px}
+.part{font:800 12px system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:46px 0 0;border-top:3px solid var(--ink);padding-top:10px}
+.sub{color:var(--muted);margin:0 0 18px;font-size:14px;max-width:1000px}
+.wrap{max-width:1240px;margin:0 auto}
+.sum{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.sum div{background:var(--paper);border:2px solid var(--ink);padding:8px 14px;box-shadow:4px 4px 0 var(--shadow)}
+.sum b{font-size:18px;display:block}.sum span{font-size:12px;color:var(--muted)}
+.badge{font:700 10.5px/1.2 system-ui;border:1.5px solid var(--ink);padding:3px 6px;letter-spacing:.03em;display:inline-block;text-transform:uppercase;white-space:nowrap;vertical-align:middle}
+.badge.new{border-color:var(--blue);color:#fff;background:var(--blue)}
+.badge.re{border-color:var(--green);color:var(--green);background:var(--green-bg)}
+.badge.have{border-color:#8a8f99;color:var(--muted);background:var(--grey-bg)}
+.badge.ok{border-color:var(--green);color:var(--green)}.badge.warn{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}.badge.red{border-color:var(--red);color:var(--red);background:var(--red-bg)}.badge.blue{border-color:var(--blue);color:var(--blue)}.badge.grey{border-color:#8a8f99;color:var(--muted)}.badge.violet{border-color:var(--vio);color:var(--vio);background:var(--vio-bg)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px;border-bottom:2px solid var(--ink)}
+td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.num,th.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+tr.tot td{border-top:2px solid var(--ink);font-weight:800}
+code{font:11.5px ui-monospace,Menlo,Consolas,monospace;color:var(--muted);word-break:break-word}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 26px}
+.wide{grid-column:1 / -1}
+.grid>*{min-width:0}
+.case{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:16px 18px 18px;min-width:0}
+.case .head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.case .tag{font:700 11px/1 system-ui;letter-spacing:.1em;color:var(--blue);text-transform:uppercase}
+.num-b{display:inline-block;background:var(--blue);color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px;letter-spacing:0}
+.case h3{margin:8px 0 10px;font-size:17px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.path{font-size:12px;color:var(--blue-ink);background:var(--blue-bg);border:1px dashed #9db8f0;padding:6px 10px;margin:0 0 10px}
+.path b{color:var(--blue)}
+.reuse{font-size:12px;color:var(--green);background:var(--green-bg);border:1px dashed #9bcfa9;padding:7px 10px;margin-top:12px}
+.reuse b{font-weight:800}
+.msg{border-left:4px solid var(--blue);background:var(--blue-bg);padding:9px 12px;font-size:13px;margin:12px 0}
+.msg.warn{border-color:var(--yel);background:var(--yel-bg)}.msg.ok{border-color:var(--green);background:var(--green-bg)}.msg.red{border-color:var(--red);background:var(--red-bg)}
+.dec{border:2px dashed var(--vio);background:var(--vio-bg);padding:10px 14px;margin:14px 0 0;font-size:13px}
+.dec>b:first-child{display:block;font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--vio);margin-bottom:6px}
+.dec ol,.dec ul{margin:4px 0 0;padding-left:20px}.dec li{margin:3px 0}
+.cons{font:800 10px system-ui;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--green);padding:2px 5px;margin-left:4px;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);background:var(--paper);font:700 13px system-ui;padding:7px 11px;box-shadow:3px 3px 0 var(--shadow);color:var(--ink);white-space:nowrap}
+.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:var(--line2);box-shadow:none;color:var(--muted)}
+.btn.red{border-color:var(--red);color:var(--red);box-shadow:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.lab{display:block;font-weight:700;font-size:13px;margin:12px 0 6px}
+.input{border:1.5px solid var(--line2);padding:5px 8px;font-size:13.5px;background:var(--paper);width:100%;min-height:30px}
+.seg{display:inline-flex;border:2px solid var(--ink);flex-wrap:wrap;max-width:100%}.seg span{padding:5px 9px;font:700 12px system-ui;border-right:1.5px solid var(--ink);background:var(--paper)}.seg span:last-child{border-right:0}.seg span.on{background:var(--blue);color:#fff}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.scrollx>table{min-width:760px}
+.hint{font-size:11.5px;color:var(--soft);margin-top:4px;display:none}
+.mini{font-size:12px;color:var(--muted)}
+.edge{margin:10px 0 0;padding-left:18px;font-size:12.5px;color:var(--muted)}.edge li{margin:3px 0}.edge b{color:var(--ink)}
+/* fenêtre */
+.win{border:2px solid var(--ink);background:var(--paper);min-width:0}
+.win-bar{display:flex;align-items:center;gap:10px;padding:7px 10px;border-bottom:2px solid var(--ink);background:var(--grey-bg);flex-wrap:wrap;justify-content:space-between}
+.win-bar .eyebrow{font:700 10.5px system-ui;letter-spacing:.12em;color:var(--soft);text-transform:uppercase}
+.win-bar b{font-size:14px}
+.win-body{padding:12px;min-width:0}
+.win-foot{display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;border-top:2px solid var(--ink);flex-wrap:wrap}
+/* barre du haut */
+.topbar{display:flex;align-items:center;gap:6px;background:var(--bar);color:var(--bar-ink);padding:8px 10px;flex-wrap:wrap}
+.topbar .nav{display:flex;gap:12px;font-weight:700;font-size:12.5px;flex:1 1 auto;min-width:0;overflow:hidden;white-space:nowrap;align-items:center}
+.topbar .nav span i{font-style:normal;opacity:.55;margin-right:3px;font-size:11px}
+.topbar .nav span.on{background:var(--blue);padding:2px 8px}
+.topbar .nav .plus{border:1.5px dashed #9aa0aa;color:#cfd3da;padding:0 7px;font-weight:800}
+.topbar .nav .plus.hot{border-color:#ffd166;color:#ffd166;border-style:solid}
+.tool{border:1.5px solid var(--bar-ink);min-width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;padding:0 6px;gap:5px;white-space:nowrap;position:relative}
+.tool.succ{border-color:#ffd166;color:#ffd166;font-weight:700}
+.tool.hot{background:#ffd166;color:#111;border-color:#ffd166}
+.pastille{position:absolute;top:-7px;right:-7px;background:#e5383b;color:#fff;font:800 10px/16px system-ui;min-width:17px;height:17px;border-radius:9px;text-align:center;padding:0 4px;border:1.5px solid var(--bar)}
+.chrono{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--green);color:var(--green);background:var(--green-bg);font:800 13px ui-monospace,Menlo,monospace;padding:4px 8px;white-space:nowrap}
+.chrono.pause{border-color:var(--yel);color:var(--yel-ink);background:var(--yel-bg)}
+.chrono .dotr{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block}
+.chrono.pause .dotr{background:var(--yel)}
+/* sous-onglets d'un dossier */
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--ink);flex-wrap:wrap;font-size:12.5px}
+.tabs span{padding:6px 9px;border-right:1px solid var(--line);white-space:nowrap}
+.tabs span.on{background:var(--blue);color:#fff;font-weight:700}
+.dhead{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 12px;border-bottom:2px solid var(--ink)}
+.dhead h4{margin:0;font-size:16px}.dhead small{color:var(--soft);display:block;font-size:12px}
+/* catalogue d'onglets */
+.cat-g{font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin:14px 0 6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:8px}
+.tc{border:2px solid var(--line2);background:var(--paper);padding:8px 10px;display:grid;grid-template-columns:28px minmax(0,1fr) 18px;gap:4px 8px;align-items:start;font-size:12.5px;min-width:0}
+.tc .ic{font-size:20px;line-height:1.1}
+.tc b{display:block;font-size:13px}
+.tc small{color:var(--muted);display:block;line-height:1.3}
+.tc .where{grid-column:2 / 4;font-size:11px;color:var(--soft)}
+.tc .ck{width:16px;height:16px;border:2px solid var(--ink);margin-top:2px}
+.tc.on{border-color:var(--blue);background:var(--blue-bg)}.tc.on .ck{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+.tc.rec{border-color:var(--green)}
+.tc .tg{grid-column:2 / 4;display:flex;gap:4px;flex-wrap:wrap}
+.tc .tg .badge{font-size:9.5px;padding:2px 4px}
+/* matrice usages */
+.mx td,.mx th{text-align:center;padding:6px 4px}.mx td:first-child,.mx th:first-child{text-align:left;white-space:nowrap}
+.mx th{font-size:10px;letter-spacing:.02em;text-transform:none}
+.mx .y{color:var(--blue);font-weight:800}.mx .r{color:var(--green);font-weight:800}.mx .o{color:var(--line2)}.mx .x{color:var(--soft)}
+/* rangement */
+.ord{border:2px solid var(--ink);background:var(--paper)}
+.ord .or{display:grid;grid-template-columns:18px 26px 20px minmax(0,1fr) 54px auto;gap:6px;align-items:center;padding:5px 8px;border-bottom:1px solid var(--line);font-size:12.5px}
+.ord .or:last-child{border-bottom:0}
+.ord .or .g{color:var(--soft)}.ord .or .n{font:700 11px system-ui;color:var(--soft)}
+.ord .or.new{background:var(--blue-bg)}
+.cb{width:14px;height:14px;border:2px solid var(--ink);display:inline-block;flex:none;vertical-align:-2px}
+.cb.on{background:var(--blue);border-color:var(--blue);box-shadow:inset 0 0 0 2px var(--paper)}
+/* listes de contrôle */
+.ck-l{list-style:none;margin:0;padding:0;font-size:13px}
+.ck-l li{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:8px;padding:7px 4px;border-bottom:1px solid var(--line);align-items:start}
+.ck-l .s{font-size:15px;line-height:1.2}
+.ck-l small{display:block;color:var(--muted)}
+.ck-l li.bad b{color:var(--red)}.ck-l li.wa b{color:var(--yel-ink)}
+/* panneau déroulant (cloche) */
+.drop{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 rgba(0,0,0,.14);max-width:470px;margin-left:auto;font-size:13px}
+.drop .dh{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-bottom:2px solid var(--ink);gap:8px;flex-wrap:wrap}
+.drop .grp{padding:5px 10px;font:800 10.5px system-ui;letter-spacing:.1em;color:var(--soft);text-transform:uppercase;background:var(--grey-bg)}
+.drop .it{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 8px;padding:7px 10px;border-bottom:1px solid var(--line)}
+.drop .it small{color:var(--muted)}
+.drop .it .acts{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.drop .it.late b{color:var(--red)}
+/* feuille imprimée */
+.sheet{background:var(--sheet);border:1.5px solid var(--line2);box-shadow:0 2px 10px rgba(0,0,0,.12);padding:22px 26px;font:12.5px/1.5 Georgia,"Times New Roman",serif;color:var(--ink);max-width:720px;margin:0 auto}
+.sheet h5{font:700 16px Georgia,serif;text-align:center;margin:0 0 2px;letter-spacing:.04em}
+.sheet .c{text-align:center;margin:0 0 14px;font-size:12px}
+.sheet h6{font:700 13px Georgia,serif;margin:14px 0 4px;border-bottom:1px solid var(--line2);padding-bottom:2px}
+.chain{list-style:none;margin:0;padding:0 0 0 14px;border-left:2px solid var(--ink)}
+.chain li{position:relative;padding:3px 0 3px 10px}
+.chain li:before{content:"";position:absolute;left:-19px;top:10px;width:8px;height:8px;background:var(--sheet);border:2px solid var(--ink);border-radius:50%}
+.chain .cote{font:11px ui-monospace,Menlo,monospace;color:var(--muted)}
+.chain .miss{color:var(--red);font-style:italic}
+.sheet a{color:var(--blue)}
+/* chips de champs */
+.fchips{display:flex;gap:5px;flex-wrap:wrap;margin:6px 0}
+.fchips span{font:700 11.5px ui-monospace,Menlo,monospace;border:1.5px solid var(--blue);color:var(--blue);background:var(--blue-bg);padding:2px 6px}
+.fchips span.bad{border-color:var(--red);color:var(--red);background:var(--red-bg)}
+.letter{border:1.5px solid var(--line2);background:var(--sheet);padding:12px 14px;font:12.5px/1.5 Georgia,serif;white-space:pre-wrap;min-height:220px}
+.letter mark{background:var(--blue-bg);color:var(--blue-ink);padding:0 2px}
+.who{list-style:none;margin:0;padding:0;font-size:12.5px;border:1.5px solid var(--line2)}
+.who li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:6px;padding:6px 8px;border-bottom:1px solid var(--line)}
+.who li small{display:block;color:var(--muted)}
+.who li.off{background:var(--grey-bg);color:var(--soft)}
+.two{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:12px}
+/* écran de verrou */
+.lock{background:linear-gradient(160deg,#1b2a4a,#0e1626);color:#fff;padding:36px 18px;text-align:center;border:2px solid var(--ink)}
+.lock .pad{max-width:330px;margin:0 auto;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.25);padding:18px}
+.lock .input{background:#fff;color:#111}
+.lock small{color:#c9d3e6}
+/* téléphone */
+.phone{width:100%;max-width:390px;border:10px solid #222;border-radius:26px;background:var(--paper);overflow:hidden;margin:0 auto}
+.phone .ptop{display:flex;align-items:center;gap:6px;background:var(--bar);color:var(--bar-ink);padding:8px 10px;font-size:13px;font-weight:700}
+.phone .ptop .sp{flex:1}
+.phone .pbody{padding:10px;font-size:13px}
+.stack{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}.stack>*{min-width:0}
+.qs{background:var(--paper);border:2px solid var(--ink);padding:14px 18px;box-shadow:6px 6px 0 var(--shadow)}
+.qs li{margin:0 0 9px}
+.ex td:first-child{white-space:nowrap;font-weight:700}
+@media (max-width:980px){.stack{grid-template-columns:1fr}}
+@media (max-width:900px){.grid{grid-template-columns:1fr}.two{grid-template-columns:1fr}}
+@media (max-width:760px){
+ body{padding:14px}
+ .hint{display:block}
+ .topbar .nav{display:none}
+ .case{padding:12px}
+ .sheet{padding:14px}
+ .ord .or{grid-template-columns:16px 22px 18px minmax(0,1fr) auto}
+ .ord .or .ico{display:none}
+ .phone{border-width:0;border-radius:0}
+}
+/* — ajouts de cette maquette — */
+.dv{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:18px;align-items:start;margin-top:12px}
+.dv>*{min-width:0}
+.dv .cap{font:800 10.5px system-ui;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin:0 0 6px}
+.pill{display:inline-block;font:700 11px/1.2 system-ui;padding:2px 6px;border:1.5px solid var(--line2);background:var(--grey-bg);color:var(--muted);white-space:nowrap}
+.pill.dead{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.pill.q{border-color:var(--yel);background:var(--yel-bg);color:var(--yel-ink)}
+.pill.ok{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.pill.red{border-color:var(--red);background:var(--red-bg);color:var(--red)}
+.pill.blue{border-color:var(--blue);background:var(--blue-bg);color:var(--blue-ink)}
+.cmp{display:grid;grid-template-columns:110px minmax(0,1fr) minmax(0,1fr) 22px;font-size:12.5px;border:1.5px solid var(--line2)}
+.cmp>div{padding:5px 7px;border-bottom:1px solid var(--line)}
+.cmp .h{font:700 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);background:var(--grey-bg)}
+.cmp .k{color:var(--muted)}
+.cmp .y{color:var(--green);font-weight:800}.cmp .n{color:var(--red);font-weight:800}.cmp .m{color:var(--yel-ink);font-weight:800}
+.score{display:inline-flex;align-items:center;gap:6px;font:800 12px system-ui}
+.score i{display:inline-block;width:70px;height:8px;background:var(--line);position:relative}
+.score i b{position:absolute;left:0;top:0;bottom:0;background:var(--green)}
+.score.mid i b{background:var(--yel)}.score.low i b{background:var(--red)}
+.rv{border:1.5px solid var(--line2);font-size:12.5px}
+.rv .r{display:grid;grid-template-columns:20px 130px minmax(0,1fr) minmax(0,1fr);gap:8px;padding:6px 8px;border-bottom:1px solid var(--line);align-items:start}
+.rv .r.h{font:700 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);background:var(--grey-bg)}
+.rv .r .old{color:var(--soft);text-decoration:line-through}
+.rv .r .new{color:var(--green);font-weight:700}
+.rv .r .same{color:var(--muted)}
+.tl{list-style:none;margin:0;padding:0;font-size:12.5px}
+.tl li{display:grid;grid-template-columns:62px 24px minmax(0,1fr);gap:8px;padding:7px 0;border-bottom:1px solid var(--line);align-items:start}
+.tl .d{font:700 11px system-ui;color:var(--soft)}
+.tl .i{font-size:16px;line-height:1}
+.tl small{display:block;color:var(--muted)}
+.tl .next{display:inline-block;margin-top:3px;font-size:11.5px;border:1.5px solid var(--blue);color:var(--blue-ink);background:var(--blue-bg);padding:1px 6px}
+.tl .next.late{border-color:var(--red);color:var(--red);background:var(--red-bg)}
+.inv{background:var(--sheet);border:1.5px solid var(--line2);box-shadow:0 2px 10px rgba(0,0,0,.12);padding:18px 20px;font:12.5px/1.45 system-ui;max-width:680px}
+.inv .ih{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.inv .ih b{font-size:15px}
+.inv .invno{font:800 18px system-ui;letter-spacing:.02em}
+.inv table{margin-top:10px}
+.inv .ment{margin-top:10px;font-size:11px;color:var(--muted);border-top:1px solid var(--line2);padding-top:6px}
+.inv .ment mark{background:var(--yel-bg);color:var(--yel-ink);padding:0 3px}
+.stamp{display:inline-block;border:2px solid var(--green);color:var(--green);font:800 11px system-ui;letter-spacing:.1em;padding:2px 6px;transform:rotate(-4deg)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.kpi{border:2px solid var(--ink);background:var(--paper);padding:8px 10px}
+.kpi small{display:block;font-size:11.5px;color:var(--muted)}
+.kpi b{display:block;font-size:22px;font-variant-numeric:tabular-nums;line-height:1.2}
+.kpi span{font-size:11px;color:var(--soft)}
+.chart{border:1.5px solid var(--line2);background:var(--paper);padding:10px}
+.chart h5{margin:0 0 2px;font-size:13px}
+.chart .lg{display:flex;gap:12px;font-size:11.5px;color:var(--muted);margin:4px 0 6px;flex-wrap:wrap}
+.chart .lg i{display:inline-block;width:10px;height:10px;margin-right:4px;vertical-align:-1px}
+.chart svg{width:100%;height:auto;display:block}
+.chart svg text{fill:var(--muted);font:11px system-ui}
+.chart svg .v{fill:var(--ink);font-weight:700}
+.chart svg .ax{stroke:var(--line2);stroke-width:1}
+.chart svg .gr{stroke:var(--line);stroke-width:1}
+.chart svg .s1{fill:var(--blue)}.chart svg .s2{fill:var(--vio)}
+.idea{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.idea>div{background:var(--paper);border:2px solid var(--ink);padding:10px 12px;font-size:13px;box-shadow:4px 4px 0 var(--shadow)}
+.idea b.t{display:block;font-size:14px;margin-bottom:4px}
+.idea p{margin:0 0 6px;color:var(--muted)}
+.idea .why{color:var(--ink)}
+.drawer{border:2px solid var(--ink);background:var(--paper)}
+.drawer .dh2{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border-bottom:2px solid var(--ink);gap:8px;flex-wrap:wrap;background:var(--grey-bg)}
+.track{display:flex;gap:0;font-size:11.5px;margin:6px 0;flex-wrap:wrap}
+.track span{padding:3px 7px;border:1.5px solid var(--line2);margin-right:-1.5px;background:var(--paper)}
+.track span.on{border-color:var(--green);background:var(--green-bg);color:var(--green);font-weight:700}
+.track span.wait{border-color:var(--yel);background:var(--yel-bg);color:var(--yel-ink);font-weight:700}
+.lockline{font-size:12px;border:1.5px solid var(--line2);background:var(--grey-bg);padding:6px 10px;margin-top:10px}
+.lockline b{color:var(--ink)}
+@media (max-width:1100px){.dv{grid-template-columns:1fr}}
+@media (max-width:760px){
+ .cmp{grid-template-columns:84px minmax(0,1fr) minmax(0,1fr) 18px;font-size:12px}
+ .rv .r{grid-template-columns:18px minmax(0,1fr);}
+ .rv .r>*:nth-child(3),.rv .r>*:nth-child(4){grid-column:2}
+ .rv .r.h{display:none}
+ .inv{padding:12px}
+ .tl li{grid-template-columns:54px 20px minmax(0,1fr)}
+}
+/* — ajouts communs aux deux maquettes (compléments, plusieurs ordinateurs) — */
+.lb{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:0 0 4px}
+.lb .q{flex:1 1 180px;min-width:0;border:1.5px solid var(--line2);padding:5px 8px;font-size:13px;color:var(--soft);background:var(--paper)}
+.lb .cnt{display:inline-block;background:var(--blue);color:#fff;font:800 10px/15px system-ui;min-width:15px;height:15px;border-radius:8px;text-align:center;padding:0 3px;font-style:normal}
+.lb-sub{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:0 0 8px}
+.fp{display:inline-block;border:1.5px solid var(--blue);background:var(--blue-bg);color:var(--blue-ink);font:700 11.5px system-ui;padding:1px 6px}
+.lb-sub u{cursor:pointer}
+.pk{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 rgba(0,0,0,.14);max-width:420px;font-size:13px}
+.pk .pq{padding:8px;border-bottom:1.5px solid var(--line2)}
+.pk .pg{padding:4px 10px;font:800 10.5px system-ui;letter-spacing:.1em;color:var(--soft);text-transform:uppercase;background:var(--grey-bg)}
+.pk .pi{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:6px;padding:6px 10px;border-bottom:1px solid var(--line);align-items:center}
+.pk .pi small{display:block;color:var(--muted)}
+.pk .pi.on{background:var(--blue-bg)}
+.pk .pf{padding:7px 10px;display:flex;justify-content:space-between;gap:6px;flex-wrap:wrap}
+.bandeau{border:2px solid var(--yel);background:var(--yel-bg);padding:10px 12px;font-size:13px;margin:0 0 10px}
+.bandeau b.t{display:block;color:var(--yel-ink);font-size:13.5px;margin-bottom:3px}
+.bandeau .row{margin-top:8px}
+.bandeau.red{border-color:var(--red);background:var(--red-bg)}.bandeau.red b.t{color:var(--red)}
+.bandeau.blue{border-color:var(--blue);background:var(--blue-bg)}.bandeau.blue b.t{color:var(--blue-ink)}
+.fld{display:grid;grid-template-columns:150px minmax(0,1fr);gap:6px 10px;font-size:13px;align-items:center}
+.fld>span:nth-child(odd){color:var(--muted);font-size:12.5px}
+.sect{font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin:14px 0 6px;border-bottom:1.5px solid var(--line2);padding-bottom:3px;display:flex;justify-content:space-between;gap:6px;flex-wrap:wrap}
+.dl{list-style:none;margin:0;padding:0;font-size:12.5px}
+.dl li{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:8px;padding:7px 4px;border-bottom:1px solid var(--line);align-items:start}
+.dl li .s{font-size:15px;line-height:1.2}
+.dl li small{display:block;color:var(--muted)}
+.dl li.seen{opacity:.55}
+.dl .go{font-size:11.5px;color:var(--blue);white-space:nowrap}
+.lv{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:0;margin-right:3px}
+.lv.r{background:var(--red)}.lv.o{background:#e8820c}.lv.y{background:var(--yel)}
+.chips{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 8px}
+.chips span{border:1.5px solid var(--line2);padding:2px 7px;font:700 11.5px system-ui;background:var(--paper);white-space:nowrap}
+.chips span.on{border-color:var(--blue);background:var(--blue);color:#fff}
+.chips span i{font-style:normal;opacity:.7;margin-left:3px}
+.wid{border:2px solid var(--ink);background:var(--paper);max-width:330px;font-size:13px}
+.wid .wh{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border-bottom:2px solid var(--ink);gap:6px}
+.wid .wb{padding:8px 10px}
+.wid .wb .l{display:flex;justify-content:space-between;gap:8px;padding:3px 0;border-bottom:1px solid var(--line)}
+.ck2{list-style:none;margin:0;padding:0;font-size:13px}
+.ck2 li{border-bottom:1px solid var(--line);padding:8px 2px}
+.ck2 .top{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;align-items:start}
+.ck2 .box{width:20px;height:20px;border:2px solid var(--ink);display:inline-block}
+.ck2 .box.on{background:var(--green);border-color:var(--green);box-shadow:inset 0 0 0 3px var(--paper)}
+.ck2 small{display:block;color:var(--muted)}
+.ck2 .acts{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0 0 30px}
+.ck2 .thumbs{display:flex;gap:4px;margin:6px 0 0 30px}
+.ck2 .thumbs i{width:44px;height:34px;background:linear-gradient(135deg,#c9b99a,#8c7a5b);border:1.5px solid var(--line2);display:inline-block}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:8px 0}
+.flow>div{border:2px solid var(--ink);background:var(--paper);padding:8px 10px;font-size:12.5px;position:relative}
+.flow>div b{display:block;font-size:13px;margin-bottom:2px}
+.flow>div .n{display:inline-block;background:var(--blue);color:#fff;font:800 11px system-ui;padding:1px 6px;margin-bottom:4px}
+.flow>div small{color:var(--muted)}
+.cx{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.cx>div{border:2px solid var(--ink);background:var(--paper);padding:10px 12px;font-size:13px}
+.cx h4{margin:0 0 6px;font-size:14px}
+.cx ul{margin:0;padding-left:18px}.cx li{margin:3px 0}
+.cx .ok{border-color:var(--green);box-shadow:4px 4px 0 rgba(26,127,55,.25)}
+.cx .mid{border-color:var(--yel);box-shadow:4px 4px 0 rgba(212,168,0,.3)}
+.cx .hard{border-color:var(--red);box-shadow:4px 4px 0 rgba(198,40,40,.25)}
+.steps{counter-reset:st;list-style:none;margin:12px 0 0;padding:0;display:grid;gap:10px}
+.steps>li{border:2px solid var(--ink);background:var(--paper);padding:10px 12px 10px 52px;position:relative;font-size:13px}
+.steps>li:before{counter-increment:st;content:counter(st);position:absolute;left:10px;top:10px;width:30px;height:30px;background:var(--blue);color:#fff;font:800 16px/30px system-ui;text-align:center}
+.steps>li.opt:before{background:var(--line2);color:var(--ink)}
+.steps>li b.t{font-size:14px}
+.steps ul{margin:4px 0 0;padding-left:18px}
+.sw{display:inline-block;width:34px;height:18px;border-radius:9px;background:var(--line2);position:relative;vertical-align:middle;flex:none}
+.sw:after{content:"";position:absolute;left:2px;top:2px;width:14px;height:14px;border-radius:50%;background:#fff}
+.sw.on{background:var(--green)}.sw.on:after{left:18px}
+.set{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;align-items:center}
+.set small{display:block;color:var(--muted);font-size:12px}
+.code6{font:800 26px ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;border:2px solid var(--ink);padding:4px 12px;display:inline-block;background:var(--paper)}
+.qr{width:96px;height:96px;flex:none;border:2px solid var(--ink);background:
+ repeating-linear-gradient(90deg,var(--ink) 0 6px,transparent 6px 12px),repeating-linear-gradient(0deg,var(--paper) 0 6px,transparent 6px 12px);position:relative}
+.qr:before,.qr:after{content:"";position:absolute;width:26px;height:26px;border:6px solid var(--ink);background:var(--paper);box-shadow:inset 0 0 0 4px var(--paper),inset 0 0 0 10px var(--ink)}
+.qr:before{left:4px;top:4px}.qr:after{right:4px;top:4px}
+.pres{display:inline-flex;align-items:center;gap:5px;font:700 11.5px system-ui;border:1.5px solid var(--vio);background:var(--vio-bg);color:var(--vio);padding:2px 7px;white-space:nowrap}
+.pres i{width:18px;height:18px;border-radius:50%;background:var(--vio);color:#fff;font:800 10px/18px system-ui;text-align:center;font-style:normal}
+.dot-on{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:4px}
+.dot-off{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--line2);margin-right:4px}
+.netd{border:1.5px solid var(--line2);background:var(--paper);padding:10px}
+.netd svg{width:100%;height:auto;display:block}
+.netd svg text{fill:var(--ink);font:12px system-ui}
+.netd svg .m{fill:var(--muted);font-size:11px}
+.netd svg .bx{fill:var(--paper);stroke:var(--ink);stroke-width:2}
+.netd svg .bxb{fill:var(--blue-bg);stroke:var(--blue);stroke-width:2}
+.netd svg .bxg{fill:var(--green-bg);stroke:var(--green);stroke-width:2}
+.netd svg .bxr{fill:var(--red-bg);stroke:var(--red);stroke-width:2;stroke-dasharray:5 4}
+.netd svg .ln{stroke:var(--ink);stroke-width:2;fill:none}
+.netd svg .lnb{stroke:var(--blue);stroke-width:2.5;fill:none}
+.netd svg .lnr{stroke:var(--red);stroke-width:2;fill:none;stroke-dasharray:5 4}
+.simple{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--shadow);padding:12px 16px;font-size:14px;max-width:1000px}
+.simple p{margin:0 0 8px}
+.simple p:last-child{margin:0}
+@media (max-width:900px){.flow{grid-template-columns:1fr 1fr}.cx{grid-template-columns:1fr}.fld{grid-template-columns:110px minmax(0,1fr)}}
+@media (max-width:760px){.flow{grid-template-columns:1fr}.steps>li{padding-left:46px}}
+.sect .btn{text-transform:none;letter-spacing:0}
+.sect .mini{text-transform:none;letter-spacing:0;font:400 11.5px system-ui;color:var(--soft)}
+
+/* — ajouts de cette maquette (cartes) — */
+:root{--pat:#1f5fd1;--mat:#d9480f;--meet:#6929c4;--land:#fbfaf6;--water:#9cc3ea}
+@media (prefers-color-scheme:dark){:root{--pat:#6aa0ff;--mat:#ff8a4c;--meet:#b48cff;--land:#23262b;--water:#3d6a96}}
+.ed{display:grid;grid-template-columns:250px minmax(0,1fr);min-width:0}
+.ed>aside{border-right:2px solid var(--ink);padding:10px;font-size:12.5px;min-width:0;background:var(--paper)}
+.ed>main{padding:10px;min-width:0}
+.dgt{display:flex;flex-wrap:wrap;border:2px solid var(--ink);margin:0 0 8px}
+.dgt span{padding:4px 6px;font:700 11px system-ui;border-right:1.5px solid var(--ink);background:var(--paper);white-space:nowrap}
+.dgt span:last-child{border-right:0}.dgt span.on{background:var(--blue);color:#fff}
+.gm{border:1.5px solid var(--line2);font-size:12px;margin:4px 0 8px}
+.gm div{padding:5px 8px;border-bottom:1px solid var(--line);display:flex;gap:6px;align-items:baseline}
+.gm div:last-child{border-bottom:0}
+.gm div.on{background:var(--blue-bg);font-weight:700;color:var(--blue-ink)}
+.gm div i{font-style:normal;width:12px;flex:none;color:var(--blue)}
+.gm .h{font:800 10px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);background:var(--grey-bg)}
+.mp{width:100%;height:auto;display:block;border:1.5px solid var(--line2);background:var(--water)}
+.mp text{font:700 11px system-ui;fill:var(--ink);paint-order:stroke;stroke:var(--paper);stroke-width:3px;stroke-linejoin:round}
+.mp text.m{font-weight:400;fill:var(--muted);font-size:10.5px}
+.mp text.b{font-size:13px;font-weight:800}
+.tb{display:flex;align-items:center;gap:8px;font:700 12px system-ui;margin:8px 0 0;flex-wrap:wrap}
+.tb .rail{flex:1 1 140px;height:6px;background:var(--line2);position:relative;min-width:100px}
+.tb .rail b{position:absolute;left:0;top:0;bottom:0;background:var(--blue)}
+.tb .rail i{position:absolute;top:-6px;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:var(--blue);border:3px solid var(--paper);box-shadow:0 0 0 1.5px var(--blue)}
+.tb .y{font:800 14px ui-monospace,Menlo,monospace;color:var(--blue-ink);background:var(--blue-bg);border:1.5px solid var(--blue);padding:1px 6px}
+.lgd{display:flex;gap:6px 12px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin:6px 0 0}
+.lgd i{display:inline-block;width:11px;height:11px;margin-right:4px;vertical-align:-1px;border-radius:50%}
+.lgd i.sq{border-radius:0}.lgd i.ring{background:transparent!important;border:2.5px solid var(--meet)}
+.lgd i.ln{width:22px;height:4px;border-radius:0;vertical-align:2px}
+.menu{border:2px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 rgba(0,0,0,.14);font-size:12.5px;max-width:280px}
+.menu div{padding:6px 10px;border-bottom:1px solid var(--line)}.menu div:last-child{border-bottom:0}
+.menu .h{font:800 10px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);background:var(--grey-bg)}
+.calc{counter-reset:cs;list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.calc li{border:2px solid var(--ink);background:var(--paper);padding:8px 10px 8px 40px;position:relative;font-size:12.5px;min-width:0}
+.calc li:before{counter-increment:cs;content:counter(cs);position:absolute;left:8px;top:8px;width:24px;height:24px;background:var(--vio);color:#fff;font:800 13px/24px system-ui;text-align:center}
+.calc li b{display:block;font-size:13px;margin-bottom:2px}
+.calc li .ex{display:block;margin-top:4px;font:12px ui-monospace,Menlo,monospace;color:var(--vio);background:var(--vio-bg);padding:2px 5px}
+.smg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.smg figure{margin:0;border:1.5px solid var(--line2);background:var(--paper);min-width:0}
+.smg figcaption{font:700 11px system-ui;padding:3px 6px;display:flex;justify-content:space-between;gap:4px}
+.smg svg{border:0;border-top:1.5px solid var(--line2)}
+.bs{border-top:2px solid var(--ink);padding:8px 10px;background:var(--grey-bg);font-size:12.5px}
+.bs .seg{margin-top:4px}
+.mt{margin-top:10px}
+.where{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 10px}
+.where>div{border:1.5px dashed var(--line2);padding:6px 9px;font-size:12px;background:var(--paper)}
+.where>div>b:first-child{display:block;font:800 10.5px system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-bottom:2px}
+.where>div.main{border:2px solid var(--blue);background:var(--blue-bg)}
+.where>div.main>b:first-child{color:var(--blue)}
+.grp{font:800 10.5px system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);background:var(--grey-bg);padding:5px 8px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:6px;flex-wrap:wrap}
+.plc{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.3fr) auto;gap:6px 12px;padding:8px;border-bottom:1px solid var(--line);font-size:12.5px;align-items:start}
+.plc small{display:block;color:var(--muted)}
+.plc .acts{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.plc.done{background:var(--green-bg)}
+.plc .typed span{display:inline-block;font:12px ui-monospace,Menlo,monospace;border:1.5px solid var(--line2);background:var(--grey-bg);padding:0 5px;margin:0 3px 3px 0}
+.why{font-size:11.5px;color:var(--muted)}
+.why b{color:var(--ink)}
+@media (max-width:900px){.calc{grid-template-columns:1fr 1fr}.where{grid-template-columns:1fr}}
+@media (max-width:760px){
+ .ed{grid-template-columns:1fr}.ed>aside{border-right:0;border-bottom:2px solid var(--ink)}
+ .calc{grid-template-columns:1fr}
+ .plc{grid-template-columns:minmax(0,1fr)}.plc .acts{justify-content:flex-start}
+ .smg{grid-template-columns:1fr 1fr}
+ h2 .badge,.head .badge{white-space:normal;max-width:100%}
+}
+</style></head><body><div class="wrap">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+ <symbol id="land" viewBox="0 0 600 380">
+  <path d="M70 60 L200 30 L330 45 L470 40 L560 95 L575 200 L520 300 L400 355 L250 350 L120 330 L60 250 L40 150 Z" fill="var(--land)" stroke="var(--line2)" stroke-width="2"/>
+  <path d="M200 30 L230 160 L120 330 M230 160 L400 355 M230 160 L420 150 L470 40 M420 150 L575 200" fill="none" stroke="var(--line2)" stroke-width="1" stroke-dasharray="4 4" opacity=".7"/>
+  <path d="M470 60 C430 120 360 150 320 205 C290 250 240 280 175 300 L120 330" fill="none" stroke="var(--water)" stroke-width="3"/>
+ </symbol>
+ <symbol id="landsm" viewBox="0 0 600 380">
+  <path d="M70 60 L200 30 L330 45 L470 40 L560 95 L575 200 L520 300 L400 355 L250 350 L120 330 L60 250 L40 150 Z" fill="var(--land)" stroke="var(--line2)" stroke-width="3"/>
+  <path d="M470 60 C430 120 360 150 320 205 C290 250 240 280 175 300 L120 330" fill="none" stroke="var(--water)" stroke-width="4"/>
+ </symbol>
+</defs></svg>
+
+<h1>🗺 Six cartes de plus</h1>
+<p class="sub">Maquette à valider, rien n’est construit. Six cartes qui s’ajoutent à <b>Graphiques → Cartes</b> (le catalogue des diagrammes) ou à la <b>🗺 Carte</b> (et à 🗺 Mes cartes, où elles deviennent des couches). Chacune part de ce que l’app sait <b>déjà</b> faire (relevé dans le code, partie 0) et montre <b>où elle se branche</b>. Tout est <b>fictif</b> (familles MAZAUD, LACOMBE, DURAND, VIALLE, BESSE ; villages de Corrèze dessinés à la main). Badges : <span class="badge new">nouveau</span> <span class="badge re">fait évoluer l’existant</span> <span class="badge have">existe</span>. Cadres violets en pointillés : <b>chaque choix est un réglage</b> (on laisse la liberté de réglages, toutes les options possibles), l’option <span class="cons">conseillé</span> d’abord, c’est elle qui est réglée au départ. Chaque écran est montré sur grand écran (1440) et sur téléphone (390) ; la page suit le mode clair ou sombre de l’ordinateur.</p>
+<p class="sub"><b>Règle commune</b> : jamais un vivant ni une fiche confidentielle sur une carte exportée ou imprimée (comme la 🖼 grande carte : filtrés côté serveur, pas seulement cachés à l’écran). L’app compte, compare et propose ; elle n’affirme pas de cause et ne place aucun lieu sans ton clic. Partout : menu de choix unique (<code>LCNDA_PICKER</code>), messages avec « ↶ Annuler » (H7), listes avec la barre H10 (<code>UI.listBar</code>), « ⋯ » ouvre le menu de l’app, ⤒ importer / ⤓ exporter, « Relier », « ＋ » pour ajouter ; export E3 (PDF, PNG, JPG, SVG) et impression L1 comme tous les diagrammes ; onglet « Depuis l’app » avec son menu « Graphique » (au moins deux points de départ par type).</p>
+<div class="sum">
+ <div><b>0</b><span>Ce qui existe déjà</span></div>
+ <div><b>1</b><span>👫 Les deux lignées en miroir</span></div>
+ <div><b>2</b><span>🕸 Parrains et témoins</span></div>
+ <div><b>3</b><span>⚰️ Crises et épidémies</span></div>
+ <div><b>4</b><span>🔨 Les métiers</span></div>
+ <div><b>5</b><span>⭕ L’aire de vie</span></div>
+ <div><b>6</b><span>📍 Lieux à placer</span></div>
+ <div><b>7</b><span>Ordre et questions</span></div>
+</div>
+
+<!-- ═════════════ 0. EXISTANT ═════════════ -->
+<h2>0. Ce qui existe déjà et où ça se branche <span class="badge have">relevé dans le code</span></h2>
+<p class="sub">Lu fichier par fichier avant de dessiner. Rien de ce tableau n’est redessiné : les six cartes s’y accrochent. Les fonds, projections, cadrages, légendes, le curseur du temps et l’export sont <b>ceux qui existent</b> ; aucune carte n’a son propre moteur.</p>
+<div class="case wide"><div class="scrollx"><table style="min-width:1000px"><thead><tr><th>Quoi</th><th>Où dans l’app</th><th>Fichier · fonction · table</th><th>Servira à</th></tr></thead><tbody>
+ <tr><td><b>Le catalogue des diagrammes</b></td><td>Graphiques → ＋ Nouveau diagramme → groupe « Cartes » ; éditeur à onglets Données · Réglages · ⚙️ Personnaliser · Depuis l’app · Relier</td><td><code>heritage-diagrams-render.js</code> (<code>KINDS</code> : <code>{icon, label, group, render, grids, options, sample, fromApp}</code>) · éditeur <code>heritage-diagrams.js</code></td><td>1 à 5 (nouvelles sortes, groupe <code>'Cartes'</code>)</td></tr>
+ <tr><td><b>Les fonds de carte</b></td><td>Toutes les cartes de Graphiques : France, Belgique, Suisse, Luxembourg, Europe, Monde ; niveaux départements, régions, communes, paroisses</td><td><code>heritage-diagram-cartes.js</code> = <code>ext.diagramCartes</code> (GC) : fonds <code>assets/data/geo/</code> (Natural Earth, IGN Admin Express, INSEE COG 2025, EuroGeographics…), projections Equal Earth, Robinson, Lambert, Mercator ; <code>GC.resolve</code>, <code>GC.afterDraw</code> (cadrage à la souris), <code>GC.fitView</code>, <code>GC.placeOf</code>, <code>GC.remember</code> · données <code>diagram_geo</code> (<code>lib/diagram_cartes.php</code>)</td><td>1 à 5</td></tr>
+ <tr><td>🗺️ 🧭 ⚪ cartes de la 1ʳᵉ vague</td><td>Carte colorée par zones, des migrations (flèches courbes plus épaisses quand plus de personnes), à symboles proportionnels</td><td><code>choropleth</code>, <b><code>flowmap</code></b>, <code>bubblemap</code> (<code>heritage-diagram-cartes.js</code>)</td><td>2 (les traits), 3 et 4 (les ronds)</td></tr>
+ <tr><td>📍 ⬢ 🫧 📖 🎀 2ᵉ vague</td><td>Carte en points, en hexagones, déformée, qui raconte ; 🎀 prénoms transmis (parrain, marraine → filleul)</td><td><code>heritage-diagram-cartes2.js</code> : <code>dotmap</code>, <code>hexmap</code>, <code>cartogram</code>, <code>storymap</code>, <b><code>godnames</code></b> (<code>godApp</code>) · <code>lib/diagram_cartes2.php</code> (<code>what=godnames</code> : témoins dont le rôle dit « parrain » ou « marraine »)</td><td>2</td></tr>
+ <tr><td>🔤 🔥 🧬 🔎 cartes du temps</td><td>Patronymes siècle par siècle, chaleur décennie par décennie, cousins ADN, tes recherches</td><td><code>heritage-diagram-cartes-plus.js</code> : <b><code>timeOf(step)</code></b> = <code>kind.time {range, at}</code>, <code>atOf</code>, rampes de couleurs, « ⚠ Lieux sans position » · <code>lib/cartes_plus.php</code> : <b><code>cp_hidden()</code></b> (vivants et confidentielles jamais montrés), <code>cp_places</code>, <code>cp_events</code></td><td>1, 3, 4 (curseur), toutes (filtre)</td></tr>
+ <tr><td><b>Le curseur du temps ▶</b> et ▦ petits multiples</td><td>⚙️ Personnaliser → « lecture dans le temps », « petits multiples » (un petit dessin par siècle, branche, génération…)</td><td><code>heritage-diagram-perso.js</code> (lit <code>kind.time.range</code> / <code>kind.time.at</code> ; un seul lecteur pour toute l’app)</td><td>1, 3, 4, 5</td></tr>
+ <tr><td><b>Menu « Graphique »</b> de « Depuis l’app »</td><td>Des points de départ tout prêts en tête de chaque panneau, « ✏️ Sur mesure » en dernier</td><td><code>heritage-diagram-graphique.js</code> : <code>PANELS</code>, <code>popList()</code> (toute ma base, mes ancêtres, <b>branche paternelle / maternelle</b>), <code>periods()</code>, <code>STEP()</code> · <code>lib/diagram_options.php</code> : <b><code>dgo_branch()</code></b>, <code>dgo_restrict()</code>, populations <code>pat</code> / <code>mat</code></td><td>1 à 5 (une ligne <code>PANELS</code> chacune)</td></tr>
+ <tr><td><b>La 🗺 Carte</b> et ses crochets</td><td>Barre de la Carte : ⇆ Comparer, 🏛 Frontières, 🧭 Outils, ✏️ Mes couches, 🗺 Mes cartes</td><td><code>app-carte.js</code> : <b><code>ext.mapSetup</code></b> (l. 95), <b><code>ext.mapDraw</code></b> (l. 203, reçoit <code>{stage, left, top, z, width, height}</code>)</td><td>1, 2, 6</td></tr>
+ <tr><td>⇆ Comparer deux époques</td><td>Carte → ⇆ : un trait à glisser, côte à côte, ou en transparence</td><td><code>heritage-cartes-plus.js</code> : <code>ext.mapCompare</code> (modes <code>swipe</code>, <code>side</code>, <code>fade</code> ; <code>mount</code> / <code>draw</code>)</td><td>1 (côte à côte, glisser)</td></tr>
+ <tr><td>🖼 Grande carte, ✏️ Mes couches</td><td>Carte → 🧭 Outils</td><td><code>heritage-cartes-outils.js</code>, <code>lib/cartes_outils.php</code> : <b><code>cartes_outils_hidden()</code></b> (vivants et confidentielles filtrés côté serveur pour l’impression), export E3, table <code>map_layers</code></td><td>toutes (règle d’export)</td></tr>
+ <tr><td><b>🗺 Mes cartes</b> (couches)</td><td>Carte → 🗺 Mes cartes : une carte = des couches avec filtres, style, curseur ▶, légende, export E3, widget</td><td><code>heritage-cartes-perso.js</code>, <code>app-cartes-perso-core.js</code> (<code>KINDS</code> : 20 sortes dont <b>🔨 <code>trades</code></b> ; filtres <b><code>side</code> = <code>father</code> / <code>mother</code></b>, <code>branch</code>, <code>sosa</code>, lieu + rayon, zone dessinée) · <code>lib/cartes_perso.php</code> (<code>MCP_KINDS</code>, <code>mcp_ctx</code>, <code>mcp_person_scope</code>)</td><td>1, 2, 3, 4, 5 (nouvelles couches)</td></tr>
+ <tr><td>🕸 Réseau de relations</td><td>Graphiques → Généalogie → « Réseau de relations (témoins, parrains…) » ; aussi 🌈 arcs « Témoins, parrains et marraines »</td><td><code>heritage-diagram-genea.js</code> : <code>network</code>, <code>netApp</code>, <code>arcs</code> · <code>lib/diagram_genea.php</code> : <b><code>dgn_witness()</code></b> (table <code>event_witnesses</code> ; rôle lu dans la note : parrain, marraine, témoin, déclarant, voisin, officier, employeur, tuteur, curé)</td><td>2</td></tr>
+ <tr><td>📉 Naissances, décès et crises</td><td>Graphiques → Frises : courbes année par année, pour une commune ou toute la base ; crises marquées</td><td><code>heritage-diagram-more.js</code> (<code>crises</code>, <code>crisesApp</code>) · <code>lib/diagram_more.php</code> : <code>dmo_crises()</code></td><td>3 (clic sur une commune)</td></tr>
+ <tr><td>🌡️ Épidémies, guerres, hivers terribles</td><td>Listes → Histoire ; diaporama</td><td><code>lib/heritage_more.php</code> : <b><code>historical_context()</code></b> — « années de forte mortalité de la famille » : <b>au moins 3 décès et 2,5 fois la moyenne des 5 ans avant et après</b> (toute la base, sans commune) ; <code>crisis_in_scope()</code></td><td>3 (même règle par défaut, mais commune par commune)</td></tr>
+ <tr><td><b>🌍 Le monde autour</b></td><td>Bloc de fiche, Chronologie (colonne Contexte), Listes → Histoire</td><td><code>assets/data/monde-autour.json</code> (331 événements, <code>crisis: true</code> pour les épidémies, famines, hivers, guerres ; portée commune / département / France / monde) · <code>lib/monde_autour.php</code> : <code>historical_crises()</code>, <code>world_around()</code>, table <code>history_events</code> · <code>heritage-monde.js</code></td><td>3 (les repères de l’époque)</td></tr>
+ <tr><td><b>Classement des métiers</b></td><td>🧬 Arbre des métiers, 🗺 Carte de la vie, 🛠️ fiche d’un métier ancien</td><td><code>lib/metiers_carte.php</code> : <b><code>METIERS_SECTORS</code></b> (12 secteurs avec icône et couleur lisible clair / sombre), <code>METIERS_DOMAIN_SECTOR</code> (18 domaines → secteurs), <code>METIERS_WORDS</code> · <code>lib/metiers_anciens.php</code> : <code>trade_match()</code>, dictionnaire <code>assets/data/metiers-anciens.json</code> · <code>app-metiers-carte-core.js</code> : <code>mainSector</code>, <code>centuryLabel</code> · <code>heritage-metiers-anciens.js</code> : <code>ext.oldTrade.open()</code></td><td>4</td></tr>
+ <tr><td>🧭 Loin du berceau · 💍 Rayon des mariages</td><td>Graphiques → Lieux / Généalogie</td><td><code>heritage-diagram-vie.js</code> : <code>vieberceau</code> (<code>cradle</code> : distance moyenne, médiane, maximum par génération ; référence <code>root</code> ou <code>oldest</code>) · <code>lib/diagram_vie.php</code> · <code>heritage-diagram-famille.js</code> : <code>famariages</code> (<code>radius</code>, médiane en km) · <code>h_distance_km()</code> (<code>lib/heritage.php</code>)</td><td>5</td></tr>
+ <tr><td><b>Le référentiel des communes</b> (hors ligne)</td><td>Livré avec l’app, chargé une fois dans chaque base</td><td><code>lib/reference.php</code> : <code>data/reference/geo-fr.sqlite.gz</code> (~81 000 communes et lieux-dits GeoNames ; table <code>commune_contours</code> avec <code>insee_code</code> et centre ; <code>commune_neighbors</code>), <code>world_place_suggestions()</code>, <code>world_place_exact()</code>, <code>place_from_world()</code> ; pays en plus téléchargeables · fond <code>fr-communes.json.gz</code> (recherche par code puis nom + département, homonymes refusés)</td><td>6</td></tr>
+ <tr><td>Trouver une position sans internet</td><td>Voyages, adresses, Mes listes</td><td><code>heritage_geocode()</code> (<code>lib/heritage.php</code> l. 121) : un lieu de la base au même nom, puis les villes du monde livrées, départagées par le pays ou le département écrit à côté</td><td>6</td></tr>
+ <tr><td>Communes disparues</td><td>Carte → 🏛 Frontières anciennes (téléchargé une fois, sur ta demande)</td><td><code>lib/cartes_plus.php</code> : <code>cp_front_communes()</code> (historique officiel INSEE : fusions, changements de nom)</td><td>6</td></tr>
+ <tr><td><b>Lieux sans coordonnées</b></td><td>Tableau de bord → widget « Communes à compléter » (bouton « Lieux ») ; Contrôle de la base → « Lieux mal placés » → <b>✎ Placer sur la carte</b></td><td><code>dashboard_places_to_complete()</code> (<code>api.php</code> l. 1205 : 80 lieux, triés par nombre d’événements) · <code>suspicious_places()</code>, <b><code>fix_place()</code></b> (POST, <code>lib/heritage_more.php</code>) · <code>fixPlace()</code> + <code>undoToast</code> ↶ (<code>heritage-controle.js</code>) · <code>openPicker({kind:'place'})</code> (<code>app-picker.js</code>) · lieux écartés <code>lcnda-place-ignored</code></td><td>6 (c’est la base)</td></tr>
+ <tr><td>Seul appel en ligne pour un lieu</td><td>Cadastre : adresse d’aujourd’hui la plus proche</td><td><code>lib/cadastre.php</code> (Géoplateforme, à la demande)</td><td>6 (modèle du bouton « 🌐 en ligne », jamais par défaut)</td></tr>
+</tbody></table></div><p class="hint">↔ Faire glisser le tableau.</p></div>
+
+<h2>Où chacune se branche</h2>
+<div class="case wide"><div class="scrollx"><table class="mx" style="min-width:820px"><thead><tr><th>Carte</th><th>Graphiques → Cartes (nouvelle sorte)</th><th>🗺 Mes cartes (couche)</th><th>🗺 Carte (outil)</th><th>Depuis un écran existant</th><th>Graphique : départs</th></tr></thead><tbody>
+ <tr><td>👫 Lignées en miroir</td><td class="y">● <code>mirrormap</code></td><td class="r">● modèle « Deux lignées » (filtre <code>side</code> existe)</td><td class="r">⇆ côte à côte</td><td>fiche → ⋯</td><td>5</td></tr>
+ <tr><td>🕸 Parrains et témoins</td><td class="y">● <code>linkmap</code></td><td class="y">● couche « Liens »</td><td class="o">—</td><td>🕸 Réseau → « 🗺 Sur la carte »</td><td>6</td></tr>
+ <tr><td>⚰️ Crises</td><td class="y">● <code>crisismap</code></td><td class="y">● couche « Crises »</td><td class="o">—</td><td>🌡️ Épidémies… → « 🗺 Sur la carte » ; 📉 frise</td><td>5</td></tr>
+ <tr><td>🔨 Métiers</td><td class="y">● <code>trademap</code></td><td class="r">● 🔨 <code>trades</code> + « couleur par secteur »</td><td class="o">—</td><td>🛠️ fiche métier → « 🗺 Où »</td><td>6</td></tr>
+ <tr><td>⭕ Aire de vie</td><td class="y">● <code>lifearea</code></td><td class="y">● couche « Aire »</td><td class="o">—</td><td>🧭 Loin du berceau → « ⭕ »</td><td>5</td></tr>
+ <tr><td>📍 Lieux à placer</td><td class="o">— (le bandeau « ⚠ » y renvoie)</td><td class="o">—</td><td class="y">● ⋯ → 📍</td><td>widget, Listes → Lieux, Contrôle</td><td>—</td></tr>
+</tbody></table></div><p class="mini"><span class="y" style="color:var(--blue);font-weight:800">●</span> nouveau · <span style="color:var(--green);font-weight:800">●</span> fait évoluer l’existant. Les cinq nouvelles sortes vont dans un seul fichier <code>heritage-diagram-cartes-plus2.js</code> (vague 2, sur le modèle de <code>heritage-diagram-cartes-plus.js</code>) et un seul point d’entrée serveur <code>api.php?action=cartes_plus2</code> (<code>lib/cartes_plus2.php</code>), qui passe tout par <code>cp_hidden()</code>.</p></div>
+
+<!-- ═════════════ 1. LIGNÉES EN MIROIR ═════════════ -->
+<div class="part">Partie 1</div>
+<h2>1. 👫 Les deux lignées en miroir <span class="badge new">nouvelle sorte de carte</span> <span class="badge re">branches paternelle et maternelle qui existent déjà</span></h2>
+<p class="sub">Les ancêtres du côté du père en bleu, ceux du côté de la mère en orange, sur la même carte. Les communes où <b>les deux lignées sont passées</b> sont entourées : c’est souvent là que les parents se sont rencontrés. Le curseur ▶ montre les deux familles se rapprocher décennie après décennie. Au lieu de père / mère, tu peux prendre deux personnes ou deux branches au choix.</p>
+<div class="where"><div class="main"><b>Se branche · principal</b>Graphiques → ＋ Nouveau diagramme → Cartes → <b>👫 Les deux lignées en miroir</b></div><div><b>Aussi</b>🗺 Mes cartes → ＋ Nouvelle carte → modèle <b>« Deux lignées »</b> (deux couches déjà réglées : côté père, côté mère)</div><div><b>Aussi</b>Fiche d’une personne → ⋯ → <b>👫 Ses deux lignées sur la carte</b> (ouvre le diagramme réglé sur elle)</div></div>
+<div class="grid">
+ <div class="case wide">
+  <div class="head"><span class="tag"><span class="num-b">1</span>Graphiques → Cartes · onglet Depuis l’app</span><span class="badge blue">jamais un vivant à l’export</span></div>
+  <h3>L’éditeur, avec le menu « Graphique » et l’aperçu</h3>
+  <div class="dv">
+   <div>
+    <p class="cap">Grand écran · 1440</p>
+    <div class="win"><div class="win-bar"><div><div class="eyebrow">Graphiques · Cartes</div><b>👫 Les deux lignées de Jean MAZAUD</b></div><div class="row"><span class="btn small">⤓ Exporter ▾</span><span class="btn small ghost">🖨</span><span class="btn small ghost">⋯</span></div></div>
+     <div class="ed">
+      <aside>
+       <div class="dgt"><span>Données</span><span>Réglages</span><span>⚙️ Personnaliser</span><span class="on">Depuis l’app</span><span>Relier</span></div>
+       <span class="lab" style="margin-top:0">Graphique</span>
+       <div class="gm">
+        <div class="on"><i>●</i>Côté père / côté mère <span class="cons">conseillé</span></div>
+        <div><i></i>Mes quatre grands-parents (4 couleurs)</div>
+        <div><i></i>Deux personnes au choix</div>
+        <div><i></i>Deux noms de famille</div>
+        <div><i></i>Côté père / côté mère, avant la Révolution</div>
+        <div><i></i>✏️ Sur mesure</div>
+       </div>
+       <span class="lab">Personne de départ</span><div class="input">Jean MAZAUD (1921–1990) ▾</div>
+       <span class="lab">Générations</span><div class="seg"><span>4</span><span>6</span><span class="on">8</span><span>10</span><span>tout</span></div>
+       <span class="lab">Événements</span>
+       <div class="mini"><span class="cb on"></span> naissances <span class="cb on"></span> mariages <span class="cb on"></span> décès <span class="cb"></span> résidences</div>
+       <div class="row mt"><span class="btn small blue">Prendre ces données</span></div>
+       <p class="mini">Rien n’est pris tant que tu ne cliques pas (comme tous les panneaux).</p>
+      </aside>
+      <main>
+       <div class="row" style="justify-content:space-between"><span class="seg"><span class="on">Superposées</span><span>Côte à côte</span><span>⇆ Glisser</span></span><span class="mini">fond : Communes (IGN, INSEE COG 2025)</span></div>
+       <svg class="mp mt" viewBox="0 0 600 380" role="img" aria-label="Carte fictive des deux lignées">
+        <use href="#land" width="600" height="380"/>
+        <g fill="var(--pat)" stroke="var(--paper)" stroke-width="2">
+         <circle cx="120" cy="90" r="8"/><circle cx="215" cy="70" r="11"/><circle cx="255" cy="120" r="9"/><circle cx="250" cy="195" r="7"/><circle cx="284" cy="150" r="7"/><circle cx="293" cy="200" r="10"/>
+        </g>
+        <g fill="var(--mat)" stroke="var(--paper)" stroke-width="2">
+         <circle cx="365" cy="140" r="12"/><circle cx="430" cy="165" r="9"/><circle cx="490" cy="130" r="8"/><circle cx="325" cy="228" r="6"/><circle cx="307" cy="200" r="8"/><circle cx="296" cy="150" r="5"/>
+        </g>
+        <circle cx="300" cy="200" r="22" fill="none" stroke="var(--meet)" stroke-width="3"/>
+        <circle cx="290" cy="150" r="16" fill="none" stroke="var(--meet)" stroke-width="3" stroke-dasharray="5 3"/>
+        <text x="100" y="72">Lubersac</text><text x="195" y="52">Uzerche</text><text x="200" y="125">Seilhac</text><text x="196" y="210">Chameyrat</text>
+        <text x="380" y="132">Corrèze</text><text x="420" y="188">Égletons</text><text x="470" y="112">Meymac</text><text x="334" y="246">Laguenne</text>
+        <text class="b" x="326" y="196">Tulle · 💍 1919</text><text x="310" y="168">Naves</text>
+        <text class="m" x="48" y="362">⚠ 2 lieux sans position : « Le Mas Bas », « St Martin » — 📍 Les placer</text>
+       </svg>
+       <div class="tb"><span class="btn small">▶</span><span class="y">1860</span><span class="rail"><b style="width:48%"></b><i style="left:48%"></i></span><span class="mini">1740 → 1921 · par décennie · tout jusqu’à cette date</span></div>
+       <div class="lgd"><span><i style="background:var(--pat)"></i>Côté père (MAZAUD, CHASTANG…) · 41 lieux</span><span><i style="background:var(--mat)"></i>Côté mère (LACOMBE, BESSE…) · 33 lieux</span><span><i class="ring"></i>Les deux lignées</span><span>taille = nombre d’événements</span></div>
+       <div class="sect"><span>⭕ Où elles se rencontrent</span><span class="mini">clic : les personnes et les actes</span></div>
+       <ul class="dl">
+        <li><span class="s">💍</span><div><b>Tulle</b><small>côté père 14 événements (1838–1921) · côté mère 9 (1861–1919) · <b>ensemble de 1861 à 1919</b> · mariage de Pierre MAZAUD et Marie LACOMBE le 12 avril 1919</small></div><span class="go">↗ Voir</span></li>
+        <li><span class="s">⭕</span><div><b>Naves</b><small>côté père 5 (1772–1840) · côté mère 2 (1895–1902) · <b>jamais à la même époque</b> (trait pointillé)</small></div><span class="go">↗ Voir</span></li>
+        <li><span class="s">↔</span><div><b>Chameyrat et Laguenne</b><small>pas la même commune, mais à 6 km l’une de l’autre (voisines) — montré seulement si tu règles « à moins de 10 km »</small></div><span></span></li>
+       </ul>
+      </main>
+     </div>
+    </div>
+    <span class="lab">« Côte à côte » : les deux cartes au même cadrage (le ▦ des petits multiples, deux cases) · ⤓ Exporter ▾</span>
+    <div class="row" style="align-items:flex-start">
+     <div class="smg" style="grid-template-columns:repeat(2,minmax(0,1fr));flex:1 1 360px">
+      <figure><figcaption><span style="color:var(--pat)">● Côté père</span><span class="mini">41 lieux</span></figcaption><svg class="mp" viewBox="0 0 600 380"><use href="#landsm" width="600" height="380"/><g fill="var(--pat)"><circle cx="120" cy="90" r="12"/><circle cx="215" cy="70" r="16"/><circle cx="255" cy="120" r="13"/><circle cx="250" cy="195" r="10"/><circle cx="290" cy="150" r="11"/><circle cx="300" cy="200" r="15"/></g><circle cx="300" cy="200" r="26" fill="none" stroke="var(--meet)" stroke-width="4"/></svg></figure>
+      <figure><figcaption><span style="color:var(--mat)">● Côté mère</span><span class="mini">33 lieux</span></figcaption><svg class="mp" viewBox="0 0 600 380"><use href="#landsm" width="600" height="380"/><g fill="var(--mat)"><circle cx="365" cy="140" r="17"/><circle cx="430" cy="165" r="13"/><circle cx="490" cy="130" r="12"/><circle cx="325" cy="225" r="9"/><circle cx="300" cy="200" r="12"/><circle cx="290" cy="150" r="7"/></g><circle cx="300" cy="200" r="26" fill="none" stroke="var(--meet)" stroke-width="4"/></svg></figure>
+     </div>
+     <div class="menu" style="flex:0 1 230px"><div class="h">⤓ Exporter</div><div>📄 PDF</div><div>🖼 PNG</div><div>🖼 JPG</div><div>✒️ SVG</div><div>🖨 Imprimer (L1)</div><div class="mini">Sans les vivants ni les fiches confidentielles : elles ne sont pas dans les données de la carte.</div></div>
+    </div>
+   </div>
+   <div>
+    <p class="cap">Téléphone · 390</p>
+    <div class="phone"><div class="ptop">← <span class="sp">👫 Deux lignées</span>⤓ ⋯</div><div class="pbody" style="padding:0">
+     <svg class="mp" style="border:0" viewBox="0 0 600 380"><use href="#landsm" width="600" height="380"/>
+      <g fill="var(--pat)" stroke="var(--paper)" stroke-width="3"><circle cx="120" cy="90" r="12"/><circle cx="215" cy="70" r="16"/><circle cx="255" cy="120" r="13"/><circle cx="284" cy="150" r="10"/><circle cx="290" cy="200" r="15"/></g>
+      <g fill="var(--mat)" stroke="var(--paper)" stroke-width="3"><circle cx="365" cy="140" r="17"/><circle cx="430" cy="165" r="13"/><circle cx="490" cy="130" r="12"/><circle cx="310" cy="200" r="12"/></g>
+      <circle cx="300" cy="200" r="30" fill="none" stroke="var(--meet)" stroke-width="5"/><text class="b" x="336" y="230" style="font-size:22px">Tulle 💍</text>
+     </svg>
+     <div class="bs"><div class="tb" style="margin:0"><span class="btn small">▶</span><span class="y">1860</span><span class="rail"><b style="width:48%"></b><i style="left:48%"></i></span></div>
+      <div class="lgd"><span><i style="background:var(--pat)"></i>Père · 41</span><span><i style="background:var(--mat)"></i>Mère · 33</span><span><i class="ring"></i>Les deux</span></div>
+      <div class="seg mt"><span class="on">Superposées</span><span>Côte à côte</span></div></div>
+     <div class="pbody">
+      <div class="drawer"><div class="dh2"><b>⭕ Où elles se rencontrent</b><span class="pill blue">2</span></div><div class="win-body"><p class="mini" style="margin:0"><b>Tulle</b> · ensemble 1861–1919 · 💍 1919<br><b>Naves</b> · jamais à la même époque</p></div></div>
+      <p class="mini">« Côte à côte » sur téléphone : les deux cartes l’une sous l’autre.</p>
+     </div>
+    </div></div>
+   </div>
+  </div>
+  <ul class="edge">
+   <li><b>Implexe</b> (un même ancêtre des deux côtés, cousins qui se marient) : ses lieux comptent des deux côtés, en couleur mélangée, et la commune est entourée ; la bulle dit « ancêtre des deux côtés : Antoine BESSE (Sosa 18 et 26) ».</li>
+   <li><b>Un côté vide</b> (père inconnu) : « Aucun ancêtre connu du côté du père » au-dessus de la carte, l’autre côté reste dessiné.</li>
+   <li><b>Lieux sans position</b> : listés sous la carte comme les autres cartes (« ⚠ Lieux sans position »), avec le lien vers <b>📍 Lieux à placer</b> (partie 6).</li>
+   <li><b>Personne de départ vivante</b> : elle n’est jamais un point ; à l’export, le titre dit « Les deux lignées de la famille MAZAUD » au lieu de son nom (réglable).</li>
+   <li><b>Deux personnes au choix</b> : ce sont leurs ancêtres qui sont comparés ; si elles en ont en commun, ils sont entourés comme les rencontres.</li>
+  </ul>
+  <div class="lockline">🔒 <b>Mode consultation</b> : on voit et on exporte (comme les autres diagrammes, sans les vivants). 🔐 <b>Généalogie verrouillée</b> : rien. Sur la 🗺 Carte, « Côte à côte » et « ⇆ Glisser » reprennent ⇆ Comparer (même composant, deux couches au lieu de deux fonds).</div>
+  <div class="reuse"><b>Réutilise</b> : <code>dgo_branch()</code> (branche paternelle / maternelle, <code>lib/diagram_options.php</code>), <code>dgn_sosa</code>, le filtre <code>side</code> = <code>father</code> / <code>mother</code> de 🗺 Mes cartes (<code>app-cartes-perso-core.js</code> l. 82), les fonds et cadrages GC, <code>timeOf(10)</code> et ▦ petits multiples (<code>heritage-diagram-perso.js</code>), <code>ext.mapCompare</code> (modes <code>side</code>, <code>swipe</code>), <code>cp_hidden()</code>, <code>h_distance_km()</code>. <b>Nouveau</b> : la sorte <code>mirrormap</code>, l’op <code>mirror</code> de <code>lib/cartes_plus2.php</code> (deux groupes de personnes → lieux, années, communes partagées), une ligne <code>PANELS.mirrormap</code> du menu Graphique, le modèle « Deux lignées » de Mes cartes. Rien en base.</div>
+  <div class="dec"><b>Réglages · 1</b> <span class="mini">(onglet Réglages du diagramme ; gardés avec lui)</span>
+   <ol>
+    <li><b>Les deux côtés</b> : père / mère <span class="cons">conseillé</span> · les quatre grands-parents (4 couleurs) · deux personnes au choix · deux noms de famille (branches) · deux groupes de Mes listes.</li>
+    <li><b>Dessin</b> : superposées <span class="cons">conseillé</span> · côte à côte · ⇆ glisser (un trait à déplacer, comme ⇆ Comparer).</li>
+    <li><b>« Elles se rencontrent »</b> : même commune <span class="cons">conseillé</span> · même commune à la même époque (± 25 ans, réglable) · à moins de 10 km (réglable 1 à 50 km).</li>
+    <li><b>Ancêtre des deux côtés</b> : compté des deux côtés, couleur mélangée <span class="cons">conseillé</span> · seulement du côté du chemin le plus court.</li>
+    <li><b>Curseur ▶</b> : par décennie <span class="cons">conseillé</span> · par 25 ans · par génération ; chaque image montre tout jusqu’à cette date <span class="cons">conseillé</span> · seulement la période.</li>
+    <li><b>Couleurs</b> : bleu / orange <span class="cons">conseillé</span> (lisibles aussi par les daltoniens) · bleu / rose · mes deux couleurs.</li>
+    <li><b>Taille des points</b> : selon le nombre d’événements <span class="cons">conseillé</span> · tous pareils.</li>
+    <li><b>Titre à l’export</b> : le nom de famille si la personne de départ est vivante <span class="cons">conseillé</span> · toujours le titre tapé.</li>
+   </ol>
+  </div>
+ </div>
+</div>
+
+<!-- ═════════════ 2. PARRAINS ═════════════ -->
+<div class="part">Partie 2</div>
+<h2>2. 🕸 Le réseau des parrains, marraines et témoins sur la carte <span class="badge new">nouvelle sorte de carte</span> <span class="badge re">lit les liens du 🕸 Réseau de relations</span></h2>
+<p class="sub">Le 🕸 Réseau de relations dessine déjà qui est parrain ou témoin de qui, mais sans géographie. Ici, chaque lien devient un <b>trait entre deux villages</b> : celui de l’acte (le baptême, le mariage) et celui d’où vient le parrain ou le témoin. Plus il y a de liens, plus le trait est épais. Les liens dans le même village font un anneau autour du point.</p>
+<div class="where"><div class="main"><b>Se branche · principal</b>Graphiques → Cartes → <b>🕸 Parrains, marraines et témoins</b></div><div><b>Aussi</b>Graphiques → Généalogie → 🕸 Réseau de relations → onglet Relier → <b>🗺 Voir sur la carte</b> (mêmes filtres)</div><div><b>Aussi</b>🗺 Mes cartes → ＋ Couche → <b>🕸 Liens (parrains, témoins)</b> : nouvelle sorte de couche</div></div>
+<div class="grid">
+ <div class="case wide">
+  <div class="head"><span class="tag"><span class="num-b">2</span>Graphiques → Cartes · filtres rôle, période, branche</span><span class="badge blue">les témoins vivants ne sont jamais comptés</span></div>
+  <h3>Les traits entre villages, et ce qu’il y a derrière un trait</h3>
+  <div class="dv">
+   <div>
+    <p class="cap">Grand écran · 1440</p>
+    <div class="win"><div class="win-bar"><div><div class="eyebrow">Graphiques · Cartes</div><b>🕸 Parrains et marraines, 1750–1850</b></div><div class="row"><span class="btn small">⤓ Exporter ▾</span><span class="btn small ghost">⋯</span></div></div>
+     <div class="ed">
+      <aside>
+       <div class="dgt"><span>Données</span><span>Réglages</span><span>⚙️ Personnaliser</span><span class="on">Depuis l’app</span><span>Relier</span></div>
+       <span class="lab" style="margin-top:0">Graphique</span>
+       <div class="gm">
+        <div class="on"><i>●</i>Parrains et marraines des baptêmes <span class="cons">conseillé</span></div>
+        <div><i></i>Témoins des mariages</div>
+        <div><i></i>Tous les liens (parrains, témoins, déclarants…)</div>
+        <div><i></i>Autour d’une personne (ses liens et ceux de ses liens)</div>
+        <div><i></i>Avant la Révolution</div>
+        <div><i></i>Au XIXe siècle</div>
+        <div><i></i>✏️ Sur mesure</div>
+       </div>
+       <span class="lab">Rôles</span>
+       <div class="chips"><span class="on">Parrain <i>212</i></span><span class="on">Marraine <i>198</i></span><span>Témoin <i>143</i></span><span>Déclarant <i>61</i></span><span>Voisin <i>9</i></span><span>Curé, officier <i>40</i></span></div>
+       <span class="lab">Période</span><div class="row"><div class="input" style="width:70px">1750</div>→<div class="input" style="width:70px">1850</div></div>
+       <span class="lab">Branche</span><div class="input">Toute ma base ▾</div>
+       <p class="mini">Le menu propose aussi : mes ancêtres, côté père, côté mère, un nom de famille.</p>
+       <div class="row mt"><span class="btn small blue">Prendre ces données</span></div>
+      </aside>
+      <main>
+       <svg class="mp" viewBox="0 0 600 380" role="img" aria-label="Carte fictive des liens de parrainage">
+        <use href="#land" width="600" height="380"/>
+        <g fill="none" stroke="var(--blue)" stroke-linecap="round" opacity=".85">
+         <path d="M290 150 Q300 172 300 200" stroke-width="9"/>
+         <path d="M300 200 Q312 214 325 225" stroke-width="6"/>
+         <path d="M255 120 Q270 128 290 150" stroke-width="5"/>
+         <path d="M250 195 Q275 192 300 200" stroke-width="4"/>
+         <path d="M300 200 Q330 160 365 140" stroke-width="3"/>
+         <path d="M215 70 Q240 88 255 120" stroke-width="2"/>
+         <path d="M365 140 Q400 140 430 165" stroke-width="2"/>
+         <path d="M300 200 Q230 260 170 300" stroke-width="1.5" stroke-dasharray="4 3"/>
+        </g>
+        <g fill="var(--paper)" stroke="var(--ink)" stroke-width="2">
+         <circle cx="290" cy="150" r="7"/><circle cx="300" cy="200" r="7"/><circle cx="325" cy="225" r="5"/><circle cx="255" cy="120" r="5"/><circle cx="250" cy="195" r="5"/><circle cx="365" cy="140" r="5"/><circle cx="215" cy="70" r="4"/><circle cx="430" cy="165" r="4"/><circle cx="170" cy="300" r="4"/>
+        </g>
+        <circle cx="290" cy="150" r="15" fill="none" stroke="var(--green)" stroke-width="5" opacity=".75"/>
+        <circle cx="300" cy="200" r="13" fill="none" stroke="var(--green)" stroke-width="3" opacity=".75"/>
+        <text class="b" x="230" y="146">Naves</text><text class="b" x="312" y="196">Tulle</text><text x="334" y="244">Laguenne</text><text x="212" y="112">Seilhac</text><text x="196" y="212">Chameyrat</text><text x="374" y="132">Corrèze</text><text x="195" y="56">Uzerche</text><text x="420" y="188">Égletons</text><text x="150" y="322">Brive</text>
+        <text class="m" x="320" y="176">Naves ↔ Tulle : 23 liens</text>
+       </svg>
+       <div class="lgd"><span><i class="ln" style="background:var(--blue)"></i>trait = des liens entre deux villages (épaisseur = nombre)</span><span><i class="ring" style="border-color:var(--green)"></i>anneau = parrains du village même</span><span>pointillé = un seul lien</span></div>
+       <div class="msg"><b>Naves : 61 % des parrains et marraines sont du village même</b> ; les autres viennent surtout de Tulle (23) et de Seilhac (11). <span class="mini">Calculé sur 410 liens dont le village du parrain est connu ; 37 liens sans lieu ne sont pas dessinés (<u>voir la liste</u>).</span></div>
+       <div class="sect"><span>Clic sur le trait Naves ↔ Tulle</span><span class="btn small">🕸 Ouvrir dans le Réseau</span></div>
+       <div class="scrollx"><table style="min-width:520px"><thead><tr><th>Acte</th><th>Filleul ou époux</th><th>Parrain, marraine, témoin</th><th>Rôle</th></tr></thead><tbody>
+        <tr><td>bapt. 1788, Naves</td><td>Jean MAZAUD</td><td>Jean DURAND, de Tulle</td><td>parrain</td></tr>
+        <tr><td>bapt. 1791, Naves</td><td>Marie MAZAUD</td><td>Marie VIALLE, de Tulle</td><td>marraine</td></tr>
+        <tr><td>bapt. 1802, Tulle</td><td>Antoine DURAND</td><td>Antoine MAZAUD, de Naves</td><td>parrain</td></tr>
+        <tr><td colspan="4" class="mini">+ 20 autres · trié par date</td></tr>
+       </tbody></table></div>
+      </main>
+     </div>
+    </div>
+   </div>
+   <div>
+    <p class="cap">Téléphone · 390</p>
+    <div class="phone"><div class="ptop">← <span class="sp">🕸 Parrains · 1750–1850</span>⋯</div><div class="pbody" style="padding:0">
+     <svg class="mp" style="border:0" viewBox="0 0 600 380"><use href="#landsm" width="600" height="380"/>
+      <g fill="none" stroke="var(--blue)" stroke-linecap="round" opacity=".85"><path d="M290 150 Q300 172 300 200" stroke-width="14"/><path d="M300 200 Q312 214 325 225" stroke-width="9"/><path d="M255 120 Q270 128 290 150" stroke-width="8"/><path d="M250 195 Q275 192 300 200" stroke-width="6"/><path d="M300 200 Q330 160 365 140" stroke-width="5"/></g>
+      <g fill="var(--paper)" stroke="var(--ink)" stroke-width="3"><circle cx="290" cy="150" r="10"/><circle cx="300" cy="200" r="10"/><circle cx="325" cy="225" r="7"/><circle cx="255" cy="120" r="7"/><circle cx="250" cy="195" r="7"/><circle cx="365" cy="140" r="7"/></g>
+      <circle cx="290" cy="150" r="22" fill="none" stroke="var(--green)" stroke-width="7" opacity=".75"/>
+      <text class="b" x="200" y="150" style="font-size:22px">Naves</text><text class="b" x="320" y="196" style="font-size:22px">Tulle</text>
+     </svg>
+     <div class="bs"><div class="chips" style="margin:0"><span class="on">Parrain</span><span class="on">Marraine</span><span>Témoin</span><span>Déclarant</span><span>＋</span></div><div class="lgd"><span>1750 → 1850</span><span>Toute ma base</span><span><u>Filtrer ▾</u></span></div></div>
+     <div class="pbody">
+      <div class="drawer"><div class="dh2"><b>Naves ↔ Tulle</b><span class="pill blue">23 liens</span></div><div class="win-body"><p class="mini" style="margin:0">Jean DURAND, parrain de Jean MAZAUD (1788)<br>Marie VIALLE, marraine de Marie MAZAUD (1791)<br>+ 21 autres · <u>tout voir</u></p></div></div>
+     </div>
+    </div></div>
+   </div>
+  </div>
+  <ul class="edge">
+   <li><b>D’où vient le parrain</b> : le village <b>écrit dans l’acte</b> s’il est noté avec le témoin (« de Tulle », « demeurant à Seilhac »), sinon sa résidence la plus proche de la date, sinon sa naissance ; sinon le lien n’est pas dessiné et il est compté dans « liens sans lieu ». Le choix est un réglage.</li>
+   <li><b>Témoin sans fiche</b> (seulement un nom tapé) : pas de lieu connu, compté à part ; « ＋ Créer sa fiche » mène à l’outil qui existe.</li>
+   <li><b>Curé, officier d’état civil</b> : décochés au départ (ils sont là par leur charge, pas par lien de famille) ; on les coche dans les rôles.</li>
+   <li><b>Une même personne</b> parrain de six enfants : six liens (épaisseur), mais « 1 personne » dans la bulle (le réglage « compter les personnes » change l’épaisseur).</li>
+   <li><b>Vivants et fiches confidentielles</b> : ni parrain ni filleul, ni à l’écran ni à l’export (même filtre que les autres cartes du temps).</li>
+  </ul>
+  <div class="lockline">🔒 <b>Mode consultation</b> : on voit et on exporte. Le tableau d’un trait ouvre les fiches en lecture seule. 🔐 <b>Verrouillée</b> : rien.</div>
+  <div class="reuse"><b>Réutilise</b> : la lecture des rôles de <code>dgn_witness()</code> (<code>lib/diagram_genea.php</code> : parrain, marraine, témoin, déclarant, voisin, officier, employeur, tuteur, curé, lus dans <code>event_witnesses.note</code>) — sortie en une petite fonction commune <code>dgn_witness_role()</code> que le Réseau garde ; <code>godnames</code> (<code>lib/diagram_cartes2.php</code>) pour les baptêmes ; les traits courbes de <code>flowmap</code> (<code>heritage-diagram-cartes.js</code>) ; <code>network</code> / <code>netApp</code> pour « 🕸 Ouvrir dans le Réseau » (onglet Relier) ; <code>dgo_branch()</code> ; <code>cp_hidden()</code>. <b>Nouveau</b> : la sorte <code>linkmap</code>, l’op <code>links</code> de <code>lib/cartes_plus2.php</code>, la sorte de couche <code>links</code> dans <code>MCP_KINDS</code> / <code>KINDS</code> de Mes cartes, <code>PANELS.linkmap</code>. Rien en base.</div>
+  <div class="dec"><b>Réglages · 2</b>
+   <ol>
+    <li><b>D’où vient le parrain</b> : ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance <span class="cons">conseillé</span> · seulement ce qui est écrit dans l’acte · seulement sa naissance.</li>
+    <li><b>Épaisseur</b> : nombre de liens <span class="cons">conseillé</span> · nombre de personnes différentes.</li>
+    <li><b>Liens dans le même village</b> : anneau autour du point <span class="cons">conseillé</span> · cachés · un chiffre seulement.</li>
+    <li><b>Rôles cochés au départ</b> : parrain, marraine <span class="cons">conseillé</span> · parrain, marraine, témoin · tous sauf curé et officier · tous.</li>
+    <li><b>Traits montrés</b> : à partir de 1 lien <span class="cons">conseillé</span> · 2 · 3 · les 30 plus forts seulement.</li>
+    <li><b>Couleur des traits</b> : une seule <span class="cons">conseillé</span> · par rôle · par branche (bleu père, orange mère, comme la partie 1).</li>
+    <li><b>Sens</b> : sans flèche <span class="cons">conseillé</span> · flèche du village du parrain vers celui de l’acte.</li>
+    <li><b>Curseur ▶</b> : sans <span class="cons">conseillé</span> · par 25 ans · par génération.</li>
+   </ol>
+  </div>
+ </div>
+</div>
+
+<!-- ═════════════ 3. CRISES ═════════════ -->
+<div class="part">Partie 3</div>
+<h2>3. ⚰️ Crises et épidémies <span class="badge new">nouvelle sorte de carte</span> <span class="badge re">règle de 🌡️ Épidémies, guerres, hivers, commune par commune</span> <span class="badge re">renvoie au 🌍 Monde autour</span></h2>
+<p class="sub">La carte montre les <b>communes et les années où les décès de la famille montent d’un coup</b> par rapport à l’habitude de cette commune. À côté de chaque année repérée, l’app cherche dans 🌍 Le monde autour ce qui se passait à la même époque dans cette région : c’est <b>un repère à vérifier, jamais une cause affirmée</b>.</p>
+<div class="where"><div class="main"><b>Se branche · principal</b>Graphiques → Cartes → <b>⚰️ Crises et épidémies</b></div><div><b>Aussi</b>Listes → Histoire → 🌡️ Épidémies, guerres, hivers terribles → <b>🗺 Sur la carte</b> ; 📉 Naissances, décès et crises : clic sur une commune de la carte → la frise de cette commune</div><div><b>Aussi</b>🗺 Mes cartes → ＋ Couche → <b>⚰️ Années de crise</b></div></div>
+<div class="grid">
+ <div class="case wide">
+  <div class="head"><span class="tag"><span class="num-b">3</span>La méthode, expliquée et réglable</span><span class="badge warn">un repère, pas une cause</span></div>
+  <h3>Comment l’app repère une année « à voir »</h3>
+  <ol class="calc">
+   <li><b>Compter</b>Les décès de la famille, commune par commune, année par année (le décès, sinon l’inhumation ; chaque personne une seule fois).<span class="ex">Naves 1832 : 6 décès</span></li>
+   <li><b>L’habitude</b>La moyenne des décès de cette commune sur les <b>5 ans avant et les 5 ans après</b>, sans l’année elle-même.<span class="ex">Naves 1827–1837 : 0,9 par an</span></li>
+   <li><b>Comparer</b>L’année est « à voir » si elle a <b>au moins 3 décès</b> et <b>au moins 2,5 fois</b> l’habitude.<span class="ex">6 ÷ 0,9 = 6,7 fois → à voir</span></li>
+   <li><b>Petits villages</b>Une commune avec trop peu de décès sur la période est regroupée avec ses voisines (ou son canton), pour ne pas crier à la crise pour 3 décès.<span class="ex">Saint-Clément + 2 voisines</span></li>
+  </ol>
+  <p class="note">Par défaut, c’est la <b>même règle</b> que la liste 🌡️ « Années de forte mortalité de la famille » qui existe (<code>historical_context()</code> : au moins 3, au moins 2,5 fois, 5 ans de chaque côté), mais faite pour chaque commune au lieu de toute la base. Les trois nombres se règlent (Réglages · 3).</p>
+  <div class="dv">
+   <div>
+    <p class="cap">Grand écran · 1440</p>
+    <div class="win"><div class="win-bar"><div><div class="eyebrow">Graphiques · Cartes</div><b>⚰️ Les années de crise de la famille</b></div><div class="row"><span class="btn small">⤓ Exporter ▾</span><span class="btn small ghost">⋯</span></div></div>
+     <div class="ed">
+      <aside>
+       <div class="dgt"><span>Données</span><span class="on">Réglages</span><span>⚙️ Personnaliser</span><span>Depuis l’app</span><span>Relier</span></div>
+       <span class="lab" style="margin-top:0">Une année est « à voir » si…</span>
+       <div class="set"><div>au moins<small>décès dans l’année</small></div><div class="seg"><span>2</span><span class="on">3</span><span>5</span></div></div>
+       <div class="set"><div>fois l’habitude<small>seuil</small></div><div class="seg"><span>×2</span><span class="on">×2,5</span><span>×3</span><span>×4</span></div></div>
+       <div class="set"><div>l’habitude sur<small>fenêtre autour</small></div><div class="seg"><span class="on">±5 ans</span><span>±10</span><span>10 avant</span></div></div>
+       <div class="set"><div>calculée par<small></small></div><div class="seg"><span class="on">moyenne</span><span>médiane</span></div></div>
+       <span class="lab">Échelle</span><div class="seg"><span class="on">Commune</span><span>Canton</span><span>Département</span></div>
+       <span class="lab">Graphique (Depuis l’app)</span>
+       <div class="gm"><div class="on"><i>●</i>Toute ma base <span class="cons">conseillé</span></div><div><i></i>Mes ancêtres et leurs familles</div><div><i></i>Les enfants à part (moins de 10 ans)</div><div><i></i>Le XVIIIe siècle</div><div><i></i>Le XIXe siècle</div></div>
+      </aside>
+      <main>
+       <svg class="mp" viewBox="0 0 600 380" role="img" aria-label="Carte fictive des crises">
+        <use href="#land" width="600" height="380"/>
+        <g stroke="var(--paper)" stroke-width="2">
+         <circle cx="290" cy="150" r="20" fill="#e31a1c" opacity=".9"/>
+         <circle cx="300" cy="200" r="13" fill="#fd8d3c" opacity=".9"/>
+         <circle cx="325" cy="225" r="8" fill="#fed976"/>
+         <circle cx="255" cy="120" r="7" fill="#fed976"/>
+        </g>
+        <g fill="var(--paper)" stroke="var(--line2)" stroke-width="1.5"><circle cx="215" cy="70" r="3"/><circle cx="365" cy="140" r="3"/><circle cx="430" cy="165" r="3"/><circle cx="490" cy="130" r="3"/><circle cx="250" cy="195" r="3"/><circle cx="170" cy="300" r="3"/></g>
+        <text class="b" x="194" y="160">Naves · 6 ×6,7</text><text x="316" y="196">Tulle · 4 ×3,1</text><text x="336" y="244">Laguenne · 3 ×2,6</text><text x="198" y="112">Seilhac · 3</text>
+        <text class="m" x="44" y="362">les communes sans crise cette année : petit point gris</text>
+       </svg>
+       <div class="tb"><span class="btn small">▶</span><span class="y">1832</span><span class="rail"><b style="width:61%"></b><i style="left:61%"></i></span><span class="mini">année par année · 1700 → 1900 · ◀ ▶ saute d’une année repérée à la suivante</span></div>
+       <div class="lgd"><span><i style="background:#fed976"></i>×2,5 à 3</span><span><i style="background:#fd8d3c"></i>×3 à 5</span><span><i style="background:#e31a1c"></i>plus de ×5</span><span>taille = nombre de décès</span></div>
+       <div class="sect"><span>Les années à voir · 7</span><span class="mini">clic : les personnes, la frise 📉 de la commune</span></div>
+       <div class="scrollx"><table style="min-width:560px"><thead><tr><th>Commune</th><th>Année</th><th class="num">Décès</th><th class="num">Habitude</th><th>🌍 À la même époque (repère)</th></tr></thead><tbody>
+        <tr style="background:var(--blue-bg)"><td><b>Naves</b></td><td>1832</td><td class="num"><b>6</b></td><td class="num">0,9 · ×6,7</td><td>Choléra de 1832 <span class="mini">(France)</span> · <u>voir</u></td></tr>
+        <tr><td>Tulle</td><td>1832</td><td class="num">4</td><td class="num">1,3 · ×3,1</td><td>Choléra de 1832 <span class="mini">(France)</span></td></tr>
+        <tr><td>Meymac</td><td>1709</td><td class="num">5</td><td class="num">1,1 · ×4,5</td><td>Grand hiver de 1709 <span class="mini">(France)</span></td></tr>
+        <tr><td>Seilhac</td><td>1854</td><td class="num">3</td><td class="num">0,7 · ×4,3</td><td><span class="mini">rien de connu dans cette région à cette date</span> · <u>＋ Noter un événement local</u></td></tr>
+        <tr><td colspan="5" class="mini">+ 3 autres</td></tr>
+       </tbody></table></div>
+       <div class="msg warn"><b>À lire avec prudence.</b> L’app compare des nombres de décès : elle ne sait pas pourquoi ils montent. « Choléra de 1832 » est ce qui se passait en France cette année-là ; c’est une piste à vérifier dans les actes (cause notée, âge des morts, mois). <span class="mini">Sur de petits nombres, le hasard suffit parfois.</span></div>
+      </main>
+     </div>
+    </div>
+    <span class="lab">Clic sur « Naves 1832 »</span>
+    <div class="drawer" style="max-width:560px"><div class="dh2"><b>Naves · 1832 · 6 décès (d’habitude 0,9 par an)</b><span class="btn small ghost">⋯</span></div><div class="win-body">
+     <ul class="dl">
+      <li><span class="s">✝</span><div><b>Antoine MAZAUD</b><small>† 14 août 1832, 52 ans · cause notée : « fièvre »</small></div><span class="go">↗ Fiche</span></li>
+      <li><span class="s">✝</span><div><b>Jeanne DURAND</b><small>† 19 août 1832, 3 ans</small></div><span class="go">↗ Fiche</span></li>
+      <li><span class="s">✝</span><div><b>4 autres</b><small>entre le 11 août et le 2 septembre · <b>5 décès sur 6 en 3 semaines</b></small></div><span class="go">tout voir</span></li>
+     </ul>
+     <div class="msg"><b>🌍 À la même époque</b> : Choléra de 1832 (mars à octobre, France) — <span class="mini">un repère, pas une explication.</span> <u>Ouvrir dans 🌍 Le monde autour</u> · <u>📉 La frise de Naves</u></div>
+    </div></div>
+   </div>
+   <div>
+    <p class="cap">Téléphone · 390</p>
+    <div class="phone"><div class="ptop">← <span class="sp">⚰️ Années de crise</span>⋯</div><div class="pbody" style="padding:0">
+     <svg class="mp" style="border:0" viewBox="0 0 600 380"><use href="#landsm" width="600" height="380"/>
+      <g stroke="var(--paper)" stroke-width="3"><circle cx="290" cy="150" r="30" fill="#e31a1c" opacity=".9"/><circle cx="300" cy="210" r="20" fill="#fd8d3c" opacity=".9"/><circle cx="335" cy="240" r="12" fill="#fed976"/></g>
+      <text class="b" x="200" y="110" style="font-size:22px">Naves ×6,7</text>
+     </svg>
+     <div class="bs"><div class="tb" style="margin:0"><span class="btn small">◀</span><span class="y">1832</span><span class="rail"><b style="width:61%"></b><i style="left:61%"></i></span><span class="btn small">▶</span></div><p class="mini" style="margin:4px 0 0">au moins 3 décès · ×2,5 · ±5 ans · <u>Régler</u></p></div>
+     <div class="pbody">
+      <div class="drawer"><div class="dh2"><b>Naves · 1832</b><span class="pill red">6 décès</span></div><div class="win-body"><p class="mini" style="margin:0">d’habitude 0,9 par an · 5 en 3 semaines<br>🌍 même époque : Choléra de 1832 <span class="mini">(repère)</span></p></div></div>
+      <div class="drawer" style="margin-top:8px"><div class="dh2"><b>Tulle · 1832</b><span class="pill q">4 décès</span></div><div class="win-body"><p class="mini" style="margin:0">d’habitude 1,3 par an</p></div></div>
+     </div>
+    </div></div>
+   </div>
+  </div>
+  <ul class="edge">
+   <li><b>Formulation</b> : toujours « à la même époque », « repère », « piste » ; jamais « mort du choléra ». Si une cause de décès est notée sur la fiche, elle est montrée telle quelle, à part.</li>
+   <li><b>Quels événements</b> : ceux de 🌍 Le monde autour marqués crise dont la portée couvre la commune (France, son département, sa région : <code>crisis_in_scope()</code>), et tes propres événements locaux (<code>history_events</code>). « ＋ Noter un événement local » ouvre le formulaire qui existe.</li>
+   <li><b>Trop peu de données</b> (moins de 20 décès placés) : « Pas assez de décès placés pour repérer des crises » au lieu d’une carte vide ou trompeuse.</li>
+   <li><b>Décès sans année ou sans lieu</b> : comptés à part, avec le lien 📍 Lieux à placer (partie 6).</li>
+   <li><b>Enfants</b> : la mortalité des tout-petits est forte d’ordinaire ; le réglage « enfants à part » évite qu’une année d’épidémie d’enfants noie le reste.</li>
+  </ul>
+  <div class="lockline">🔒 <b>Mode consultation</b> : on voit et on exporte ; pas de « ＋ Noter un événement ». À l’export, les noms des morts ne sont pas écrits sur la carte, seulement les nombres (le détail reste à l’écran).</div>
+  <div class="reuse"><b>Réutilise</b> : la règle de <code>historical_context()</code> (<code>lib/heritage_more.php</code>, « années de forte mortalité »), <code>historical_crises()</code> et <code>crisis_in_scope()</code>, <code>assets/data/monde-autour.json</code>, <code>history_events</code>, <code>world_around()</code> / <code>heritage-monde.js</code> pour « Ouvrir dans 🌍 », <code>dmo_crises()</code> (frise 📉 d’une commune), <code>commune_neighbors</code> (regrouper les petits villages), les ronds de <code>bubblemap</code>, <code>timeOf(1)</code>, <code>cp_hidden()</code>. <b>Nouveau</b> : la sorte <code>crisismap</code>, l’op <code>crises</code> de <code>lib/cartes_plus2.php</code>, la couche « ⚰️ Années de crise » de Mes cartes, <code>PANELS.crisismap</code>, le bouton « 🗺 Sur la carte » de la liste 🌡️. Rien en base.</div>
+  <div class="dec"><b>Réglages · 3</b>
+   <ol>
+    <li><b>Minimum de décès</b> dans l’année : 3 <span class="cons">conseillé</span> · 2 · 5 · à la main.</li>
+    <li><b>Seuil</b> : 2,5 fois l’habitude <span class="cons">conseillé</span> · 2 fois · 3 fois · 4 fois · à la main.</li>
+    <li><b>Fenêtre de l’habitude</b> : 5 ans avant et 5 ans après <span class="cons">conseillé</span> · 10 et 10 · seulement les 10 ans avant (comme le calcul des crises connues).</li>
+    <li><b>L’habitude se calcule par</b> la moyenne <span class="cons">conseillé</span> · la médiane (moins dérangée par une autre crise toute proche).</li>
+    <li><b>Échelle</b> : la commune, les petites regroupées avec leurs voisines <span class="cons">conseillé</span> · toujours la commune · le canton · le département.</li>
+    <li><b>Qui</b> : toute ma base <span class="cons">conseillé</span> · mes ancêtres et leurs familles · une branche · un nom.</li>
+    <li><b>Enfants</b> : comptés avec tout le monde <span class="cons">conseillé</span> · à part (moins de 10 ans, réglable) · pas comptés.</li>
+    <li><b>Repères proposés</b> : les crises du 🌍 Monde autour qui couvrent la commune, et mes événements <span class="cons">conseillé</span> · toutes les crises de l’année · aucun.</li>
+    <li><b>Pas du temps</b> : année par année <span class="cons">conseillé</span> · par 5 ans · par 10 ans.</li>
+   </ol>
+  </div>
+ </div>
+</div>
+
+<!-- ═════════════ 4. MÉTIERS ═════════════ -->
+<div class="part">Partie 4</div>
+<h2>4. 🔨 Les métiers sur la carte <span class="badge new">nouvelle sorte de carte</span> <span class="badge re">classement des métiers anciens</span> <span class="badge re">couche 🔨 Métiers de Mes cartes</span></h2>
+<p class="sub">Une couleur par grand secteur (🌾 agriculture, 🔨 artisanat, 🛒 commerce…) ou par famille de métiers du dictionnaire, commune par commune, siècle par siècle. On voit les villages de tisserands, les familles de meuniers le long de la rivière, l’arrivée des cheminots. Le classement est <b>celui qui existe</b> pour l’Arbre des métiers : rien n’est reclassé à part.</p>
+<div class="where"><div class="main"><b>Se branche · principal</b>Graphiques → Cartes → <b>🔨 Les métiers sur la carte</b></div><div><b>Aussi</b>🗺 Mes cartes → couche 🔨 Métiers (existe) → Style → <b>Couleur : par secteur</b> / par famille de métiers (nouveau)</div><div><b>Aussi</b>🛠️ Fiche d’un métier ancien (« sabotier ») → <b>🗺 Où on l’exerçait</b> (la carte réglée sur ce métier et ses variantes)</div></div>
+<div class="grid">
+ <div class="case wide">
+  <div class="head"><span class="tag"><span class="num-b">4</span>Graphiques → Cartes · siècle par siècle</span></div>
+  <h3>Un camembert par commune, ou un petit dessin par siècle</h3>
+  <div class="dv">
+   <div>
+    <p class="cap">Grand écran · 1440</p>
+    <div class="win"><div class="win-bar"><div><div class="eyebrow">Graphiques · Cartes</div><b>🔨 Les métiers de la famille</b></div><div class="row"><span class="btn small">⤓ Exporter ▾</span><span class="btn small ghost">⋯</span></div></div>
+     <div class="ed">
+      <aside>
+       <div class="dgt"><span>Données</span><span>Réglages</span><span>⚙️ Personnaliser</span><span class="on">Depuis l’app</span><span>Relier</span></div>
+       <span class="lab" style="margin-top:0">Graphique</span>
+       <div class="gm">
+        <div class="on"><i>●</i>Par grand secteur (12) <span class="cons">conseillé</span></div>
+        <div><i></i>Par famille de métiers du dictionnaire (18)</div>
+        <div><i></i>Un métier et ses variantes…</div>
+        <div><i></i>Mes ancêtres seulement</div>
+        <div><i></i>Au XIXe siècle</div>
+        <div><i></i>Les hommes / les femmes</div>
+        <div><i></i>✏️ Sur mesure</div>
+       </div>
+       <span class="lab">Dessin</span><div class="seg"><span class="on">Camembert</span><span>Le plus fréquent</span><span>1 point / personne</span></div>
+       <span class="lab">Temps</span><div class="seg"><span class="on">▶ siècle</span><span>▦ côte à côte</span><span>tout</span></div>
+       <div class="row mt"><span class="btn small blue">Prendre ces données</span></div>
+       <p class="mini">412 métiers notés · 388 classés · <u>24 « ❔ autre » à classer</u></p>
+      </aside>
+      <main>
+       <svg class="mp" viewBox="0 0 600 380" role="img" aria-label="Carte fictive des métiers">
+        <use href="#land" width="600" height="380"/>
+        <g stroke="var(--paper)" stroke-width="1.5">
+         <!-- Naves : agri 70 %, arti 30 % -->
+         <circle cx="290" cy="150" r="16" fill="#4d8a2f"/><path d="M290 150 L290 134 A16 16 0 0 1 305.2 145 Z" fill="#c2611a"/><path d="M290 150 L305.2 145 A16 16 0 0 1 299.4 163 Z" fill="#c2611a"/>
+         <!-- Tulle : arti, comm, lib, indu -->
+         <circle cx="300" cy="210" r="20" fill="#c2611a"/><path d="M300 210 L300 190 A20 20 0 0 1 319 216 Z" fill="#c99a06"/><path d="M300 210 L319 216 A20 20 0 0 1 292 228.4 Z" fill="#2563c9"/><path d="M300 210 L292 228.4 A20 20 0 0 1 281 204 Z" fill="#5b6573"/>
+         <circle cx="215" cy="70" r="10" fill="#4d8a2f"/>
+         <circle cx="255" cy="120" r="12" fill="#4d8a2f"/><path d="M255 120 L255 108 A12 12 0 0 1 266 125 Z" fill="#c99a06"/>
+         <circle cx="365" cy="140" r="11" fill="#4d8a2f"/><path d="M365 140 L365 129 A11 11 0 0 1 375 145 Z" fill="#c2611a"/>
+         <circle cx="430" cy="165" r="9" fill="#c2611a"/>
+         <circle cx="490" cy="130" r="10" fill="#4d8a2f"/>
+         <circle cx="170" cy="300" r="13" fill="#0e7f99"/><path d="M170 300 L170 287 A13 13 0 0 1 182 305 Z" fill="#c99a06"/>
+        </g>
+        <text class="b" x="224" y="150">Naves</text><text class="b" x="326" y="214">Tulle</text><text x="195" y="52">Uzerche</text><text x="200" y="122">Seilhac</text><text x="380" y="132">Corrèze</text><text x="420" y="188">Égletons</text><text x="470" y="112">Meymac</text><text x="120" y="328">Brive</text>
+        <text class="m" x="44" y="362">XIXe siècle · taille = nombre de personnes</text>
+       </svg>
+       <div class="tb"><span class="btn small">▶</span><span class="y">XIXe</span><span class="rail"><b style="width:75%"></b><i style="left:75%"></i></span><span class="mini">XVIe → XXe · siècle par siècle</span></div>
+       <div class="lgd"><span><i class="sq" style="background:#4d8a2f"></i>🌾 Agriculture et forêt · 214</span><span><i class="sq" style="background:#c2611a"></i>🔨 Artisanat · 96</span><span><i class="sq" style="background:#c99a06"></i>🛒 Commerce · 31</span><span><i class="sq" style="background:#0e7f99"></i>🚂 Transports · 18</span><span><i class="sq" style="background:#5b6573"></i>🏭 Industrie · 12</span><span><i class="sq" style="background:#2563c9"></i>⚖️ Libérales, école… · 9</span><span class="mini">+ 6 secteurs vides ce siècle-ci</span></div>
+       <div class="sect"><span>Clic sur Tulle</span><span class="mini">au XIXe siècle</span></div>
+       <ul class="dl">
+        <li><span class="s">🔨</span><div><b>Artisanat · 11</b><small>tanneur (4), sabotier (3), cordonnier (2), tisserand (2) · <u>🛠️ tanneur</u></small></div><span class="go">↗ Liste</span></li>
+        <li><span class="s">🛒</span><div><b>Commerce · 5</b><small>marchand (3), aubergiste (2)</small></div><span class="go">↗ Liste</span></li>
+        <li><span class="s">⚖️</span><div><b>Libérales, école, administration · 4</b><small>instituteur, notaire (Me VIALLE), greffier, employé de mairie</small></div><span class="go">↗ Liste</span></li>
+       </ul>
+      </main>
+     </div>
+    </div>
+    <span class="lab">« ▦ côte à côte » : un petit dessin par siècle (petits multiples de ⚙️ Personnaliser)</span>
+    <div class="smg">
+     <figure><figcaption><span>XVIIe</span><span class="mini">38 pers.</span></figcaption><svg class="mp" viewBox="0 0 600 380"><use href="#landsm" width="600" height="380"/><g stroke="var(--paper)" stroke-width="3"><circle cx="290" cy="150" r="22" fill="#4d8a2f"/><circle cx="215" cy="70" r="16" fill="#4d8a2f"/><circle cx="490" cy="130" r="14" fill="#4d8a2f"/><circle cx="300" cy="210" r="16" fill="#c2611a"/></g></svg></figure>
+     <figure><figcaption><span>XVIIIe</span><span class="mini">121 pers.</span></figcaption><svg class="mp" viewBox="0 0 600 380"><use href="#landsm" width="600" height="380"/><g stroke="var(--paper)" stroke-width="3"><circle cx="290" cy="150" r="28" fill="#4d8a2f"/><circle cx="215" cy="70" r="18" fill="#4d8a2f"/><circle cx="255" cy="120" r="16" fill="#4d8a2f"/><circle cx="300" cy="210" r="22" fill="#c2611a"/><circle cx="430" cy="165" r="14" fill="#c2611a"/></g></svg></figure>
+     <figure><figcaption><span>XIXe</span><span class="mini">253 pers.</span></figcaption><svg class="mp" viewBox="0 0 600 380"><use href="#landsm" width="600" height="380"/><g stroke="var(--paper)" stroke-width="3"><circle cx="290" cy="150" r="26" fill="#4d8a2f"/><circle cx="300" cy="215" r="30" fill="#c2611a"/><circle cx="170" cy="300" r="20" fill="#0e7f99"/><circle cx="365" cy="140" r="16" fill="#4d8a2f"/><circle cx="255" cy="120" r="16" fill="#c99a06"/></g></svg></figure>
+    </div>
+   </div>
+   <div>
+    <p class="cap">Téléphone · 390</p>
+    <div class="phone"><div class="ptop">← <span class="sp">🔨 Métiers · XIXe</span>⋯</div><div class="pbody" style="padding:0">
+     <svg class="mp" style="border:0" viewBox="0 0 600 380"><use href="#landsm" width="600" height="380"/><g stroke="var(--paper)" stroke-width="3"><circle cx="290" cy="150" r="26" fill="#4d8a2f"/><circle cx="300" cy="215" r="30" fill="#c2611a"/><circle cx="170" cy="300" r="20" fill="#0e7f99"/><circle cx="365" cy="140" r="16" fill="#4d8a2f"/><circle cx="255" cy="120" r="16" fill="#c99a06"/></g><text class="b" x="336" y="222" style="font-size:22px">Tulle</text></svg>
+     <div class="bs"><div class="tb" style="margin:0"><span class="btn small">▶</span><span class="y">XIXe</span><span class="rail"><b style="width:75%"></b><i style="left:75%"></i></span></div>
+      <div class="lgd"><span><i class="sq" style="background:#4d8a2f"></i>🌾 214</span><span><i class="sq" style="background:#c2611a"></i>🔨 96</span><span><i class="sq" style="background:#c99a06"></i>🛒 31</span><span><i class="sq" style="background:#0e7f99"></i>🚂 18</span><span><u>tout ▾</u></span></div></div>
+     <div class="pbody"><div class="drawer"><div class="dh2"><b>Tulle · XIXe</b><span class="mini">23 personnes</span></div><div class="win-body"><p class="mini" style="margin:0">🔨 Artisanat 11 · 🛒 Commerce 5 · ⚖️ 4 · 🏭 3<br>tanneur, sabotier, cordonnier…</p></div></div>
+      <p class="mini">Le camembert devient un rond de la couleur du secteur le plus fréquent quand il est trop petit pour être lu.</p></div>
+    </div></div>
+   </div>
+  </div>
+  <ul class="edge">
+   <li><b>Où placer un métier</b> : au lieu de l’événement où il est noté (profession, recensement, acte), sinon la résidence de l’époque, sinon le lieu de naissance (réglable). Le siècle est celui de l’acte, pas de la naissance.</li>
+   <li><b>Plusieurs métiers</b> pour une personne (« tisserand puis cultivateur ») : chacun compté à sa date ; « une personne = son métier principal » est un réglage.</li>
+   <li><b>Métier inconnu du dictionnaire</b> : rangé en « ❔ Autre métier » ; « 24 à classer » ouvre la liste, et chaque mot mène à 🛠️ la fiche du métier où on peut le relier (rien n’est reclassé tout seul).</li>
+   <li><b>« Ménagère », « sans profession »</b> (secteur 🧺 Au foyer) : montrés au départ, décochables, parce qu’ils écrasent souvent la carte des femmes.</li>
+   <li><b>Un métier et ses variantes</b> : « tisserand » prend aussi « tissier, texier, tisserant » (les variantes du dictionnaire).</li>
+  </ul>
+  <div class="lockline">🔒 <b>Mode consultation</b> : on voit et on exporte ; pas de « à classer ». Sans vivants à l’export (les métiers récents sont souvent ceux de vivants).</div>
+  <div class="reuse"><b>Réutilise</b> : <code>metiers_arbre</code> (<code>lib/metiers_carte.php</code> : <code>METIERS_SECTORS</code> avec icônes et couleurs, <code>METIERS_DOMAIN_SECTOR</code>, <code>METIERS_WORDS</code>), <code>trade_match()</code> et le dictionnaire (<code>lib/metiers_anciens.php</code>, <code>metiers-anciens.json</code>), <code>mainSector</code> et <code>centuryLabel</code> (<code>app-metiers-carte-core.js</code>), <code>ext.oldTrade.open()</code> (<code>heritage-metiers-anciens.js</code>), la couche 🔨 <code>trades</code> de Mes cartes, <code>timeOf(100)</code> et ▦ petits multiples, <code>cp_hidden()</code>. <b>Nouveau</b> : la sorte <code>trademap</code> (camemberts par lieu), l’op <code>trades</code> de <code>lib/cartes_plus2.php</code>, le style « couleur par secteur » de la couche <code>trades</code>, <code>PANELS.trademap</code>, le bouton « 🗺 Où on l’exerçait ». Rien en base.</div>
+  <div class="dec"><b>Réglages · 4</b>
+   <ol>
+    <li><b>Classer par</b> : grand secteur (12) <span class="cons">conseillé</span> · famille de métiers du dictionnaire (18) · un seul métier et ses variantes · mes couleurs à moi par métier.</li>
+    <li><b>Dessin</b> : camembert par commune <span class="cons">conseillé</span> · un rond de la couleur du plus fréquent · un point par personne · départements colorés.</li>
+    <li><b>Temps</b> : ▶ siècle par siècle <span class="cons">conseillé</span> · ▦ un petit dessin par siècle · par demi-siècle · tout ensemble.</li>
+    <li><b>Où placer le métier</b> : lieu de l’acte, sinon résidence, sinon naissance <span class="cons">conseillé</span> · lieu de l’acte seulement.</li>
+    <li><b>Plusieurs métiers</b> : chacun à sa date <span class="cons">conseillé</span> · le principal seulement.</li>
+    <li><b>🧺 Au foyer, sans profession</b> : montrés <span class="cons">conseillé</span> · cachés.</li>
+    <li><b>Taille</b> : nombre de personnes <span class="cons">conseillé</span> · nombre de mentions · tous pareils.</li>
+   </ol>
+  </div>
+ </div>
+</div>
+
+<!-- ═════════════ 5. AIRE DE VIE ═════════════ -->
+<div class="part">Partie 5</div>
+<h2>5. ⭕ L’aire de vie, génération par génération <span class="badge new">nouvelle sorte de carte</span> <span class="badge re">mêmes distances que 🧭 Loin du berceau et 💍 Rayon des mariages</span></h2>
+<p class="sub">Pour chaque génération d’ancêtres, la zone qui contient l’essentiel de leurs naissances, mariages et décès. Les plus anciens tiennent souvent dans quelques villages ; les plus récents s’étalent jusqu’à la ville, puis plus loin. On <b>voit le monde s’agrandir</b>. 🧭 Loin du berceau donne la même chose en chiffres (distance par génération) ; cette carte la dessine.</p>
+<div class="where"><div class="main"><b>Se branche · principal</b>Graphiques → Cartes → <b>⭕ L’aire de vie</b></div><div><b>Aussi</b>🧭 Loin du berceau et 💍 Rayon des mariages → onglet Relier → <b>⭕ Voir sur la carte</b> (même personne, mêmes générations)</div><div><b>Aussi</b>🗺 Mes cartes → ＋ Couche → <b>⭕ Aire de vie</b> (par génération ou par siècle)</div></div>
+<div class="grid">
+ <div class="case wide">
+  <div class="head"><span class="tag"><span class="num-b">5</span>La méthode</span></div>
+  <h3>Comment l’aire est tracée</h3>
+  <ol class="calc">
+   <li><b>Les événements</b>Naissances, mariages et décès des ancêtres de cette génération (Sosa 16 à 31 pour la génération 5), placés.<span class="ex">Gén. 5 : 38 événements</span></li>
+   <li><b>Le centre</b>Le point du milieu de ces événements (la médiane : un ancêtre parti au loin ne le tire pas).<span class="ex">près de Naves</span></li>
+   <li><b>La part</b>On garde les <b>80 %</b> les plus proches du centre ; les autres sont des « hors de l’aire », listés.<span class="ex">30 gardés · 8 hors</span></li>
+   <li><b>La forme</b>Un <b>cercle</b> qui passe par le plus loin des gardés, ou l’<b>enveloppe</b> : le contour qui les entoure au plus juste.<span class="ex">rayon 14 km · 610 km²</span></li>
+  </ol>
+  <div class="dv">
+   <div>
+    <p class="cap">Grand écran · 1440</p>
+    <div class="win"><div class="win-bar"><div><div class="eyebrow">Graphiques · Cartes</div><b>⭕ L’aire de vie des ancêtres de Jean MAZAUD</b></div><div class="row"><span class="btn small">⤓ Exporter ▾</span><span class="btn small ghost">⋯</span></div></div>
+     <div class="ed">
+      <aside>
+       <div class="dgt"><span>Données</span><span>Réglages</span><span>⚙️ Personnaliser</span><span class="on">Depuis l’app</span><span>Relier</span></div>
+       <span class="lab" style="margin-top:0">Graphique</span>
+       <div class="gm">
+        <div class="on"><i>●</i>Mes ancêtres, 8 générations <span class="cons">conseillé</span></div>
+        <div><i></i>Le plus loin possible (14 générations)</div>
+        <div><i></i>Toute ma base, siècle par siècle</div>
+        <div><i></i>Côté père et côté mère (deux couleurs)</div>
+        <div><i></i>Une vie (les étapes d’une personne)</div>
+        <div><i></i>✏️ Sur mesure</div>
+       </div>
+       <span class="lab">Part des événements</span><div class="seg"><span>50 %</span><span class="on">80 %</span><span>90 %</span><span>à la main</span></div>
+       <span class="lab">Forme</span><div class="seg"><span class="on">Cercle</span><span>Enveloppe</span><span>Les deux</span></div>
+       <span class="lab">Centre</span><div class="input">Le milieu des événements ▾</div>
+       <p class="mini">Aussi : le lieu de naissance de la personne de départ, le berceau des plus anciens (comme 🧭 Loin du berceau).</p>
+       <div class="row mt"><span class="btn small blue">Prendre ces données</span></div>
+      </aside>
+      <main>
+       <svg class="mp" viewBox="0 0 600 380" role="img" aria-label="Carte fictive des aires de vie par génération">
+        <use href="#land" width="600" height="380"/>
+        <g fill-opacity=".10" stroke-width="2.5">
+         <circle cx="282" cy="168" r="175" fill="#08306b" stroke="#08306b"/>
+         <circle cx="290" cy="165" r="105" fill="#2171b5" stroke="#2171b5"/>
+         <circle cx="288" cy="158" r="62" fill="#4292c6" stroke="#4292c6"/>
+         <circle cx="285" cy="150" r="34" fill="#6baed6" stroke="#6baed6" stroke-dasharray="5 3"/>
+        </g>
+        <g fill="var(--ink)"><circle cx="282" cy="168" r="3"/><circle cx="290" cy="165" r="3"/><circle cx="288" cy="158" r="3"/><circle cx="285" cy="150" r="3"/></g>
+        <circle cx="170" cy="300" r="4" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><circle cx="300" cy="200" r="4" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/>
+        <text x="300" y="132" style="fill:#4a88c0">gén. 8 · 1700–1760 · 6 km</text>
+        <text x="352" y="104">gén. 6 · 1760–1820 · 11 km</text>
+        <text x="392" y="226">gén. 4 · 1820–1880 · 19 km</text>
+        <text x="96" y="352">gén. 2 · 1880–1950 · 32 km</text>
+        <text class="b" x="310" y="210">Tulle</text><text class="b" x="150" y="290">Brive</text>
+        <text class="m" x="430" y="40">hors de l’aire : Paris, Lyon →</text>
+       </svg>
+       <div class="lgd"><span><i class="ring" style="border-color:#6baed6"></i>gén. 8</span><span><i class="ring" style="border-color:#4292c6"></i>gén. 6</span><span><i class="ring" style="border-color:#2171b5"></i>gén. 4</span><span><i class="ring" style="border-color:#08306b"></i>gén. 2</span><span>pointillé : peu d’événements (moins de 10)</span><span>80 % des événements dans chaque cercle</span></div>
+       <div class="scrollx mt"><table style="min-width:560px"><thead><tr><th>Génération</th><th>Années</th><th class="num">Événements</th><th class="num">Rayon (80 %)</th><th class="num">Surface</th><th>Hors de l’aire</th></tr></thead><tbody>
+        <tr><td>2 · ses parents</td><td>1880–1950</td><td class="num">9</td><td class="num"><b>32 km</b></td><td class="num">3 200 km²</td><td>Paris (1938)</td></tr>
+        <tr><td>3</td><td>1850–1910</td><td class="num">17</td><td class="num">24 km</td><td class="num">1 810 km²</td><td>Lyon (1902)</td></tr>
+        <tr><td>4</td><td>1820–1880</td><td class="num">31</td><td class="num">19 km</td><td class="num">1 130 km²</td><td>—</td></tr>
+        <tr><td>5</td><td>1790–1850</td><td class="num">38</td><td class="num">14 km</td><td class="num">610 km²</td><td>2 lieux</td></tr>
+        <tr><td>6</td><td>1760–1820</td><td class="num">44</td><td class="num">11 km</td><td class="num">380 km²</td><td>—</td></tr>
+        <tr><td>8</td><td>1700–1760</td><td class="num">8 <span class="pill q">peu</span></td><td class="num">6 km</td><td class="num">110 km²</td><td>—</td></tr>
+       </tbody></table></div>
+       <p class="mini">Même calcul de distance que 🧭 Loin du berceau (moyenne 9 km à la gén. 6) et 💍 Rayon des mariages (médiane 7 km au XVIIIe) : les trois se répondent ; <u>Relier</u> les ouvre côte à côte.</p>
+      </main>
+     </div>
+    </div>
+    <span class="lab">« ▦ une génération par case », avec l’enveloppe</span>
+    <div class="smg">
+     <figure><figcaption><span>Gén. 6</span><span class="mini">11 km</span></figcaption><svg class="mp" viewBox="0 0 600 380"><use href="#landsm" width="600" height="380"/><path d="M255 120 L300 128 L325 170 L305 205 L250 200 L240 160 Z" fill="#4292c6" fill-opacity=".25" stroke="#4292c6" stroke-width="4"/></svg></figure>
+     <figure><figcaption><span>Gén. 4</span><span class="mini">19 km</span></figcaption><svg class="mp" viewBox="0 0 600 380"><use href="#landsm" width="600" height="380"/><path d="M215 70 L300 95 L370 135 L380 210 L330 240 L240 230 L210 150 Z" fill="#2171b5" fill-opacity=".25" stroke="#2171b5" stroke-width="4"/></svg></figure>
+     <figure><figcaption><span>Gén. 2</span><span class="mini">32 km</span></figcaption><svg class="mp" viewBox="0 0 600 380"><use href="#landsm" width="600" height="380"/><path d="M120 90 L300 60 L440 130 L440 220 L330 260 L170 310 L110 240 Z" fill="#08306b" fill-opacity=".25" stroke="#08306b" stroke-width="4"/></svg></figure>
+    </div>
+   </div>
+   <div>
+    <p class="cap">Téléphone · 390</p>
+    <div class="phone"><div class="ptop">← <span class="sp">⭕ Aire de vie</span>⋯</div><div class="pbody" style="padding:0">
+     <svg class="mp" style="border:0" viewBox="0 0 600 380"><use href="#landsm" width="600" height="380"/>
+      <g fill-opacity=".12" stroke-width="5"><circle cx="282" cy="168" r="175" fill="#08306b" stroke="#08306b"/><circle cx="290" cy="165" r="105" fill="#2171b5" stroke="#2171b5"/><circle cx="288" cy="158" r="62" fill="#4292c6" stroke="#4292c6"/><circle cx="285" cy="150" r="34" fill="#6baed6" stroke="#6baed6"/></g>
+     </svg>
+     <div class="bs"><div class="seg"><span>50 %</span><span class="on">80 %</span><span>90 %</span></div> <div class="seg"><span class="on">Cercle</span><span>Enveloppe</span></div></div>
+     <div class="pbody">
+      <div class="drawer"><div class="dh2"><b>Gén. 2 → gén. 8</b><span class="pill blue">×5 en rayon</span></div><div class="win-body"><p class="mini" style="margin:0">gén. 8 : 6 km · gén. 6 : 11 km · gén. 4 : 19 km · gén. 2 : 32 km<br>hors de l’aire : Paris (1938), Lyon (1902)</p></div></div>
+      <p class="mini">Touche un cercle : sa génération, ses lieux, ceux qui sont hors de l’aire.</p>
+     </div>
+    </div></div>
+   </div>
+  </div>
+  <ul class="edge">
+   <li><b>Trop peu d’événements</b> : moins de 5 dans une génération → pas d’aire (« trop peu ») ; de 5 à 9 → aire en pointillé avec la pastille « peu ».</li>
+   <li><b>Un ancêtre parti très loin</b> (Alger, Buenos Aires) : il reste hors de l’aire et listé ; la carte ne se dézoome pas pour lui, sauf si tu règles « cadrer sur tout ».</li>
+   <li><b>Implexe</b> : un même ancêtre à deux places compte une fois par génération où il apparaît.</li>
+   <li><b>La personne de départ vivante</b> : la génération 1 n’est jamais dessinée à l’export ; les générations des vivants (souvent 2) ne gardent que les événements des personnes décédées.</li>
+   <li><b>Surface</b> : arrondie (« ≈ 610 km² ») ; c’est une image de l’étendue, pas un territoire.</li>
+  </ul>
+  <div class="lockline">🔒 <b>Mode consultation</b> : on voit et on exporte. 🔐 <b>Verrouillée</b> : rien.</div>
+  <div class="reuse"><b>Réutilise</b> : les générations et les distances de <code>vieberceau</code> (<code>lib/diagram_vie.php</code>, <code>cradle</code> dans <code>heritage-diagram-vie.js</code>, références <code>root</code> / <code>oldest</code>), <code>famariages</code> (<code>heritage-diagram-famille.js</code>), <code>dgn_sosa</code>, <code>h_distance_km()</code>, <code>GC.fitView</code> et les fonds, ▦ petits multiples et ▶ (<code>heritage-diagram-perso.js</code>), <code>dgo_branch()</code> pour « côté père et côté mère », <code>cp_hidden()</code>. <b>Nouveau</b> : la sorte <code>lifearea</code> (cercle par quantile de distance, enveloppe convexe des points gardés), l’op <code>areas</code> de <code>lib/cartes_plus2.php</code>, la couche « ⭕ Aire de vie », <code>PANELS.lifearea</code>. Rien en base.</div>
+  <div class="dec"><b>Réglages · 5</b>
+   <ol>
+    <li><b>Part des événements</b> : 80 % <span class="cons">conseillé</span> · 50 % (le cœur) · 90 % · à la main (40 à 100 %).</li>
+    <li><b>Forme</b> : cercle <span class="cons">conseillé</span> (facile à comparer) · enveloppe (le contour au plus juste) · les deux.</li>
+    <li><b>Regrouper par</b> : génération d’ancêtres <span class="cons">conseillé</span> · siècle (toute la base) · personne (l’aire d’une vie).</li>
+    <li><b>Centre</b> : le milieu des événements <span class="cons">conseillé</span> · le lieu de naissance de la personne de départ · le berceau des plus anciens.</li>
+    <li><b>Événements</b> : naissances, mariages, décès <span class="cons">conseillé</span> · avec les résidences et recensements · naissances seules.</li>
+    <li><b>Dessin</b> : toutes les aires superposées <span class="cons">conseillé</span> · ▦ une par case · une à la fois avec ▶.</li>
+    <li><b>Minimum</b> pour tracer une aire : 5 événements <span class="cons">conseillé</span> · 3 · 10.</li>
+    <li><b>Couleurs</b> : du clair (anciens) au foncé (récents) <span class="cons">conseillé</span> · l’inverse · bleu / orange pour père / mère.</li>
+   </ol>
+  </div>
+ </div>
+</div>
+
+<!-- ═════════════ 6. LIEUX À PLACER ═════════════ -->
+<div class="part">Partie 6</div>
+<h2>6. 📍 Les lieux encore à placer <span class="badge new">nouvel outil de la Carte</span> <span class="badge re">fait évoluer « Communes à compléter » et « ✎ Placer sur la carte »</span></h2>
+<p class="sub">Toutes les cartes ci-dessus perdent les lieux sans position (« ⚠ Lieux sans position »). Cet outil les rassemble, les <b>regroupe par commune probable</b> grâce au référentiel des communes livré avec l’app (sans internet), et te laisse les placer <b>en un clic</b>, ou <b>en lot après une revue</b>. Rien n’est jamais placé sans ta confirmation, et aucun service en ligne n’est appelé sans que tu le choisisses, lieu par lieu.</p>
+<div class="where"><div class="main"><b>Se branche · principal</b>🗺 Carte → ⋯ → <b>📍 Lieux à placer</b> (panneau à droite de la carte, la carte suit le lieu choisi)</div><div><b>Aussi</b>Tableau de bord → widget « Communes à compléter » → <b>📍 Placer…</b> · Listes → Lieux → filtre « Sans position » → <b>📍 Placer…</b></div><div><b>Aussi</b>Le bandeau « ⚠ N lieux sans position » de chaque carte de Graphiques → <b>📍 Les placer</b> (seulement ceux de cette carte)</div></div>
+<div class="grid">
+ <div class="case wide">
+  <div class="head"><span class="tag"><span class="num-b">6a</span>Carte → ⋯ → 📍 Lieux à placer · un par un</span><span class="badge blue">rien en ligne sans ton choix</span></div>
+  <h3>La liste, regroupée par commune probable</h3>
+  <div class="dv">
+   <div>
+    <p class="cap">Grand écran · 1440</p>
+    <div class="win"><div class="win-bar"><div><div class="eyebrow">Carte</div><b>📍 Lieux à placer · 27</b></div><div class="row"><span class="btn small blue">☑ Revoir et placer en lot…</span><span class="btn small ghost">⋯</span></div></div><div class="win-body">
+     <div class="lb"><span class="q">🔍 Chercher un lieu…</span><span class="btn small">Filtrer ▾ <i class="cnt">1</i></span><span class="btn small ghost">Trier : Le plus d’événements ▾</span></div>
+     <div class="lb-sub">27 lieux · 214 événements concernés · <span class="fp">Proposition : toutes ×</span> <u>Tout effacer</u></div>
+     <div class="chips"><span class="on">Tous <i>27</i></span><span>✓ Sûr <i>12</i></span><span>? Plusieurs communes <i>5</i></span><span>🕰 Ancienne commune <i>2</i></span><span>🌍 Hors de France <i>3</i></span><span>✕ Rien trouvé <i>5</i></span></div>
+     <div style="border:1.5px solid var(--line2)">
+      <div class="grp"><span>✓ Sûr · Naves (Corrèze, 19146)</span><span>3 façons de l’écrire · 41 événements</span></div>
+      <div class="plc"><div class="typed"><span>Naves</span><span>Naves (19)</span><span>NAVES, Corrèze</span><small>3 lieux de ta base, 41 événements</small></div><div class="why">Même nom et <b>même département</b> que dans le référentiel des communes ; une seule commune « Naves » en Corrèze. <br>→ centre de la commune, code INSEE et département repris.</div><div class="acts"><span class="btn small blue">✓ Placer ici</span><span class="btn small ghost">🧩 Regrouper les 3</span><span class="btn small ghost">⋯</span></div></div>
+      <div class="plc"><div class="typed"><span>Le Mas Bas, Naves</span><small>lieu-dit · 6 événements</small></div><div class="why">Lieu-dit <b>connu</b> dans le référentiel (GeoNames) dans la commune de Naves. <br>→ placé au lieu-dit, rattaché à Naves.</div><div class="acts"><span class="btn small blue">✓ Placer ici</span><span class="btn small ghost">Au centre de Naves</span></div></div>
+      <div class="grp"><span>? Plusieurs communes possibles · « St Martin »</span><span>9 événements</span></div>
+      <div class="plc"><div class="typed"><span>St Martin</span><small>sans département · 9 événements (1760–1802)</small></div><div class="why"><b>214 communes</b> « Saint-Martin… » en France. Les plus proches des autres lieux de ces 9 événements : <b>Saint-Martin-la-Méanne</b> (19, à 18 km de Tulle) · Saint-Martin-Sepert (19, à 31 km). <br><span class="mini">Proposées, jamais cochées toutes seules.</span></div><div class="acts"><span class="btn small">Saint-Martin-la-Méanne</span><span class="btn small">Saint-Martin-Sepert</span><span class="btn small ghost">Choisir…</span></div></div>
+      <div class="grp"><span>🕰 Ancienne commune</span><span>4 événements</span></div>
+      <div class="plc"><div class="typed"><span>Saint-Hilaire-le-Vieux</span><small>4 événements (1790–1820)</small></div><div class="why">Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes, déjà téléchargé) dit : <b>réunie à Saint-Hilaire-Peyroux en 1823</b>. <br>→ placée au centre de l’ancienne commune si connu, sinon de la commune actuelle (« approché »).</div><div class="acts"><span class="btn small blue">✓ Placer ici</span><span class="btn small ghost">Choisir…</span></div></div>
+      <div class="grp"><span>✕ Rien trouvé</span><span>5 lieux</span></div>
+      <div class="plc"><div class="typed"><span>Ste Fereol</span><small>2 événements</small></div><div class="why">Pas de commune à ce nom. Orthographe proche : <b>Sainte-Féréole</b> (19). <br><span class="mini">Rien n’est cherché en ligne.</span></div><div class="acts"><span class="btn small">Sainte-Féréole ?</span><span class="btn small ghost">📍 Sur la carte</span><span class="btn small ghost">🌐 En ligne…</span><span class="btn small ghost">✕ Pas un lieu</span></div></div>
+     </div>
+     <div class="msg ok"><b>✓ Naves placé (3 lieux, 41 événements)</b> · Corrèze, 19146 <span class="btn small" style="margin-left:6px">↶ Annuler</span></div>
+    </div></div>
+   </div>
+   <div>
+    <p class="cap">Téléphone · 390</p>
+    <div class="phone"><div class="ptop">← <span class="sp">📍 Lieux à placer · 27</span>⋯</div><div class="pbody">
+     <div class="lb"><span class="q">🔍 Chercher…</span><span class="btn small">Filtrer ▾</span></div>
+     <div class="chips"><span class="on">Tous 27</span><span>✓ 12</span><span>? 5</span><span>✕ 5</span></div>
+     <div class="drawer"><div class="dh2"><b>Naves (19)</b><span class="pill ok">✓ sûr</span></div><div class="win-body"><p class="mini" style="margin:0">« Naves », « Naves (19) », « NAVES, Corrèze » · 41 év.</p><div class="row" style="margin-top:6px"><span class="btn small blue">✓ Placer ici</span><span class="btn small ghost">⋯</span></div></div></div>
+     <div class="drawer" style="margin-top:8px"><div class="dh2"><b>« St Martin »</b><span class="pill q">? plusieurs</span></div><div class="win-body"><p class="mini" style="margin:0">9 év. · le plus proche des autres lieux :</p><div class="row" style="margin-top:6px"><span class="btn small">Saint-Martin-la-Méanne</span><span class="btn small ghost">Choisir…</span></div></div></div>
+     <div class="drawer" style="margin-top:8px"><div class="dh2"><b>« Ste Fereol »</b><span class="pill red">✕ rien</span></div><div class="win-body"><div class="row"><span class="btn small">Sainte-Féréole ?</span><span class="btn small ghost">📍 Carte</span></div></div></div>
+     <div class="msg ok" style="margin-top:10px">✓ Naves placé · <b>↶ Annuler</b></div>
+    </div></div>
+   </div>
+  </div>
+ </div>
+
+ <div class="case wide">
+  <div class="head"><span class="tag"><span class="num-b">6b</span>☑ Revoir et placer en lot</span><span class="badge blue">seuls les « sûrs » sont cochés</span></div>
+  <h3>La revue avant de placer plusieurs lieux d’un coup</h3>
+  <div class="dv">
+   <div>
+    <p class="cap">Grand écran · 1440</p>
+    <div class="win"><div class="win-bar"><div><div class="eyebrow">📍 Lieux à placer</div><b>Revoir avant de placer · 12 cochés sur 22</b></div><span class="btn small ghost">⋯</span></div><div class="win-body">
+     <div class="scrollx"><table style="min-width:680px"><thead><tr><th></th><th>Lieu tapé</th><th>Placé à</th><th>Pourquoi</th><th class="num">Distance au reste</th><th class="num">Év.</th></tr></thead><tbody>
+      <tr><td><span class="cb on"></span></td><td>Naves · Naves (19) · NAVES, Corrèze</td><td>Naves (19146)</td><td><span class="pill ok">sûr</span> nom + département</td><td class="num">4 km</td><td class="num">41</td></tr>
+      <tr><td><span class="cb on"></span></td><td>Tulle (Corrèze)</td><td>Tulle (19272)</td><td><span class="pill ok">sûr</span> nom + département</td><td class="num">0 km</td><td class="num">38</td></tr>
+      <tr><td><span class="cb on"></span></td><td>Le Mas Bas, Naves</td><td>lieu-dit, Naves</td><td><span class="pill ok">sûr</span> lieu-dit connu</td><td class="num">5 km</td><td class="num">6</td></tr>
+      <tr><td><span class="cb"></span></td><td>St Martin</td><td>Saint-Martin-la-Méanne ?</td><td><span class="pill q">probable</span> le plus proche de 214</td><td class="num">18 km</td><td class="num">9</td></tr>
+      <tr><td><span class="cb"></span></td><td>Lyon</td><td>Lyon (69123)</td><td><span class="pill q">probable</span> pas de département écrit, la plus peuplée</td><td class="num"><span style="color:var(--red)">380 km</span></td><td class="num">1</td></tr>
+      <tr><td colspan="6" class="mini">+ 17 lignes · les « rien trouvé » ne sont pas dans la revue</td></tr>
+     </tbody></table></div><p class="hint">↔ Faire glisser le tableau.</p>
+     <div class="row mt" style="justify-content:space-between"><span class="mini"><u>Tout cocher</u> · <u>Seulement les sûrs</u> · <u>Rien</u></span><span class="row"><span class="btn ghost">Fermer</span><span class="btn blue">✓ Placer les 12 cochés</span></span></div>
+     <div class="msg ok"><b>✓ 12 lieux placés</b> (96 événements) · ils apparaissent sur toutes les cartes <span class="btn small" style="margin-left:6px">↶ Annuler les 12</span></div>
+    </div></div>
+   </div>
+   <div>
+    <p class="cap">Téléphone · 390</p>
+    <div class="phone"><div class="ptop">← <span class="sp">Revoir · 12 / 22</span></div><div class="pbody">
+     <ul class="ck2">
+      <li><div class="top"><span class="box on"></span><div><b>Naves</b> → Naves (19146)<small>sûr · 41 év. · 4 km du reste</small></div></div></li>
+      <li><div class="top"><span class="box on"></span><div><b>Tulle (Corrèze)</b> → Tulle<small>sûr · 38 év.</small></div></div></li>
+      <li><div class="top"><span class="box"></span><div><b>St Martin</b> → Saint-Martin-la-Méanne ?<small>probable · 9 év. · 18 km</small></div></div></li>
+      <li><div class="top"><span class="box"></span><div><b>Lyon</b> → Lyon ?<small style="color:var(--red)">probable · 380 km du reste</small></div></div></li>
+     </ul>
+     <div class="row" style="margin-top:10px;justify-content:flex-end"><span class="btn blue">✓ Placer les 12</span></div>
+    </div></div>
+   </div>
+  </div>
+  <span class="lab">« 🌐 En ligne… » sur un lieu : rien ne part sans ce message</span>
+  <div class="win" style="max-width:560px"><div class="win-bar"><b>🌐 Chercher « Ste Fereol » en ligne ?</b></div><div class="win-body" style="font-size:13px">
+   <p style="margin:0 0 6px">Seul le <b>nom du lieu</b> « Ste Fereol » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). <b>Aucun nom de personne</b>, aucune date.</p>
+   <p class="mini" style="margin:0">La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ».</p>
+   <div class="row" style="margin-top:8px"><span class="cb"></span><span class="mini">Ne plus me demander pour cette séance</span></div>
+  </div><div class="win-foot"><span class="btn ghost">Annuler</span><span class="btn blue">🌐 Chercher</span></div></div>
+  <ul class="edge">
+   <li><b>Placer modifie le lieu</b> (latitude, longitude, et si tu le veux le code INSEE et le département) : un seul message H7 « ↶ Annuler » remet les anciennes valeurs, pour un lieu comme pour un lot (comme ✎ Placer sur la carte du Contrôle).</li>
+   <li><b>🧩 Regrouper les 3</b> (« Naves », « Naves (19) », « NAVES, Corrèze ») ouvre la fusion des lieux en double qui existe (<code>merge_duplicate_places</code>), avec sa revue ; placer ne fusionne jamais tout seul.</li>
+   <li><b>Distance au reste</b> : un lieu proposé à plus de 200 km des autres lieux de ses événements est en rouge, jamais coché, même s’il est « sûr ».</li>
+   <li><b>📍 Sur la carte</b> : clic sur la carte pour poser le point à la main ; « position approchée » est ajouté à la description du lieu (la table <code>places</code> n’a pas de colonne de précision : rien de nouveau en base).</li>
+   <li><b>✕ Pas un lieu</b> (« idem », « à l’église ») ou à laisser : mis de côté comme les lieux écartés du Contrôle (<code>lcnda-place-ignored</code>), avec « ↺ Remettre dans la liste ».</li>
+   <li><b>Hors de France</b> : les villes du monde livrées avec l’app (<code>world_places</code>), départagées par le pays écrit ; un pays non installé propose « ⤓ Ajouter ce pays au référentiel » (téléchargement qui existe, taille annoncée).</li>
+  </ul>
+  <div class="lockline">🔒 <b>Mode consultation</b> : la liste se lit, aucun bouton « Placer ». 🔐 <b>Verrouillée</b> : rien. La liste ne montre que des lieux, jamais de personnes ; « 41 événements » ouvre leur liste dans l’app, pas à l’export.</div>
+  <div class="reuse"><b>Réutilise</b> : <code>dashboard_places_to_complete()</code> (<code>api.php</code>), <code>heritage_geocode()</code> (<code>lib/heritage.php</code>), le référentiel <code>geo-fr.sqlite.gz</code> (<code>lib/reference.php</code> : <code>commune_contours</code> avec <code>insee_code</code> et centre, <code>world_place_suggestions()</code>, <code>world_place_exact()</code>, <code>place_from_world()</code>, <code>world_search_key()</code> pour Saint / St et les accents), la recherche « code puis nom + département, homonymes refusés » du fond des communes (<code>heritage-diagram-cartes.js</code>), <code>cp_front_communes()</code> (communes disparues), <b><code>fix_place()</code></b> et <code>fixPlace()</code> + <code>undoToast</code> (<code>heritage-controle.js</code>), <code>openPicker({kind:'place'})</code>, <code>lcnda-place-ignored</code>, le bouton en ligne de <code>lib/cadastre.php</code> comme modèle. <b>Nouveau</b> : <code>lib/lieux_a_placer.php</code> (ops <code>list</code>, <code>place</code>, <code>place_batch</code>, <code>undo</code>, <code>online</code>), l’écran <code>heritage-lieux-a-placer.js</code> (crochet <code>ext.mapSetup</code> pour le panneau, <code>ext.mapDraw</code> pour montrer le lieu choisi), <code>fix_place</code> qui accepte un lot (une seule annulation). Rien de nouveau en base.</div>
+  <div class="dec"><b>Réglages · 6</b> <span class="mini">(Réglages → 🗺 Carte → 📍 Lieux à placer)</span>
+   <ol>
+    <li><b>Cochés au départ dans la revue</b> : seulement les « sûrs » <span class="cons">conseillé</span> · sûrs et probables · rien.</li>
+    <li><b>Un lieu-dit</b> : au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » <span class="cons">conseillé</span> · toujours au centre de la commune · ne pas le placer.</li>
+    <li><b>Plusieurs communes du même nom</b> : proposer la plus proche des autres lieux, jamais cochée <span class="cons">conseillé</span> · toujours me demander sans proposer.</li>
+    <li><b>Orthographes</b> : rapprocher St / Saint, accents, tirets, majuscules <span class="cons">conseillé</span> · aussi les fautes proches (« Fereol » → « Féréole »), proposées seulement · le nom exact seulement.</li>
+    <li><b>Ce qui est repris</b> : position, code INSEE et département <span class="cons">conseillé</span> · la position seulement.</li>
+    <li><b>Recherche en ligne</b> : jamais, le bouton est caché <span class="cons">conseillé</span> · un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois · <i>(jamais en lot, jamais toute seule)</i>.</li>
+    <li><b>Alerte « loin du reste »</b> : à partir de 200 km <span class="cons">conseillé</span> · 50 · 100 · 500 km.</li>
+   </ol>
+  </div>
+ </div>
+</div>
+
+<!-- ═════════════ 7. ORDRE ═════════════ -->
+<div class="part">Partie 7</div>
+<h2>7. Ordre de construction</h2>
+<div class="case wide"><div class="scrollx"><table style="min-width:880px"><thead><tr><th>#</th><th>Quoi</th><th>Où</th><th>Base</th><th>Taille</th><th>Pourquoi à ce rang</th></tr></thead><tbody>
+ <tr><td>0</td><td>Le socle : <code>heritage-diagram-cartes-plus2.js</code> + <code>lib/cartes_plus2.php</code> (<code>cp_hidden()</code> partout), test <code>tests/test-cartes-plus-2.js</code></td><td>Graphiques → Cartes</td><td>—</td><td><span class="badge ok">facile</span></td><td>tout le reste s’y range, sur le modèle de la vague 1</td></tr>
+ <tr><td>1</td><td>📍 Lieux à placer (6)</td><td>Carte → ⋯, widget, Listes → Lieux, bandeaux ⚠</td><td>— (<code>fix_place</code> en lot)</td><td><span class="badge warn">moyen</span></td><td>chaque lieu placé améliore toutes les cartes de l’app, celles-ci comprises</td></tr>
+ <tr><td>2</td><td>🔨 Les métiers (4)</td><td>Graphiques → Cartes ; couche 🔨 de Mes cartes</td><td>—</td><td><span class="badge ok">facile</span></td><td>le classement et la couche existent ; il manque le dessin en camemberts</td></tr>
+ <tr><td>3</td><td>👫 Lignées en miroir (1)</td><td>Graphiques → Cartes ; modèle Mes cartes ; fiche → ⋯</td><td>—</td><td><span class="badge ok">facile</span></td><td><code>dgo_branch</code>, le filtre <code>side</code> et ⇆ Comparer existent</td></tr>
+ <tr><td>4</td><td>⭕ Aire de vie (5)</td><td>Graphiques → Cartes ; Relier depuis 🧭 et 💍</td><td>—</td><td><span class="badge warn">moyen</span></td><td>calcul d’enveloppe à écrire ; les générations et distances existent</td></tr>
+ <tr><td>5</td><td>🕸 Parrains et témoins (2)</td><td>Graphiques → Cartes ; couche ; 🕸 Réseau → Relier</td><td>—</td><td><span class="badge warn">moyen</span></td><td>sortir la lecture des rôles de <code>dgn_witness</code> sans changer le Réseau ; trouver le village du témoin</td></tr>
+ <tr><td>6</td><td>⚰️ Crises (3)</td><td>Graphiques → Cartes ; 🌡️ liste ; 📉 frise ; 🌍</td><td>—</td><td><span class="badge warn">moyen</span></td><td>la règle existe, mais les textes prudents et le regroupement des petits villages demandent du soin ; profite des lieux placés en 1</td></tr>
+</tbody></table></div><p class="hint">↔ Faire glisser le tableau.</p>
+<p class="mini">Pour toutes : textes en français dans <code>assets/i18n</code> ; une ligne <code>PANELS</code> dans <code>heritage-diagram-graphique.js</code> (au moins deux départs, « ✏️ Sur mesure » en dernier) ; clair / sombre, 390 px, export E3 et impression L1 ceux de tous les diagrammes ; mode d’emploi dans <code>docs/UI.md</code> (« 🗺️ Cartes en plus, vague 2 ») ; aucune table nouvelle, aucun export (GEDCOM, site, partage famille) touché.</p></div>
+
+<h2>Questions à poser à l’utilisateur</h2>
+<div class="qs"><ol>
+ <li><b>👫 Lignées</b> : bleu / orange <i>(conseillé)</i> ? « Se rencontrent » = même commune <i>(conseillé)</i>, ou aussi « à la même époque » ?</li>
+ <li><b>🕸 Parrains</b> : le village écrit dans l’acte d’abord, puis la résidence, puis la naissance <i>(conseillé)</i> ? Curé et officier décochés au départ <i>(conseillé)</i> ?</li>
+ <li><b>⚰️ Crises</b> : garder la règle de la liste 🌡️ (3 décès, ×2,5, ±5 ans) <i>(conseillé)</i> ? Regrouper les petits villages avec leurs voisines <i>(conseillé)</i> ?</li>
+ <li><b>🔨 Métiers</b> : les 12 grands secteurs <i>(conseillé)</i> ou les 18 familles du dictionnaire au départ ? « Au foyer » montré <i>(conseillé)</i> ?</li>
+ <li><b>⭕ Aire</b> : 80 % et un cercle <i>(conseillé)</i> ? Par génération <i>(conseillé)</i> ou par siècle ?</li>
+ <li><b>📍 Lieux</b> : seuls les « sûrs » cochés dans la revue <i>(conseillé)</i> ? Le bouton « 🌐 En ligne… » caché au départ <i>(conseillé)</i>, à montrer dans les Réglages ?</li>
+</ol></div>
+
+</div></body></html>

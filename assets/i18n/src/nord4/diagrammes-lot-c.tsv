@@ -1,0 +1,179 @@
+fr ¦ fi ¦ hu
+# Zone « diagrammes-lot-c » : grille des recensements, schéma de preuve, arbre de mots (heritage-diagram-lot-c.js), zones des paroisses et carte en étoile (heritage-diagram-cartes.js), cercles d’une journée (heritage-cartes-outils.js)
+Hors de France ¦ Ranskan ulkopuolella ¦ Franciaországon kívül
+Ajoute des personnes (nom, naissance, décès), puis leurs recensements (année, statut). ¦ Lisää henkilöt (nimi, syntymä, kuolema) ja sitten heidän väestönlaskentansa (vuosi, tila). ¦ Adj hozzá személyeket (név, születés, halál), majd a népszámlálásaikat (év, állapot).
+Aucune année de recensement entre ces deux dates. ¦ Näiden päivämäärien välillä ei ole laskentavuotta. ¦ E két dátum között nincs népszámlálási év.
+Plus rien à chercher : tous les recensements sont trouvés ou sans objet. ¦ Ei mitään etsittävää: kaikki laskennat löydetty tai eivät koske. ¦ Nincs több keresnivaló: minden népszámlálás megvan vagy nem releváns.
+à chercher : {list} ¦ etsittävä: {list} ¦ keresendő: {list}
+non trouvés : {list} ¦ ei löydetty: {list} ¦ nem található: {list}
+Liste de travail des recensements : {n}. ¦ Väestönlaskentojen työlista: {n}. ¦ Népszámlálási munkalista: {n}.
+Grille des recensements : {n}, {y} recensements, {d} sur {t} cherchés. ¦ Laskentaruudukko: {n}, {y} laskentaa, {d}/{t} etsitty. ¦ Népszámlálási rács: {n}, {y} népszámlálás, {d} / {t} keresve.
+Les recensements de la famille {name} ¦ Suvun {name} väestönlaskennat ¦ A(z) {name} család népszámlálásai
+Contre ¦ Vastaan ¦ Ellene
+Conflit ¦ Ristiriita ¦ Ellentmondás
+Écris la question (Réglages), puis les indices : pour, contre, recherches, conflits. ¦ Kirjoita kysymys (Asetukset) ja sitten vihjeet: puolesta, vastaan, haut, ristiriidat. ¦ Írd be a kérdést (Beállítások), majd a nyomokat: mellette, ellene, kutatások, ellentmondások.
+Indices contre ¦ Vihjeet vastaan ¦ Ellenszóló nyomok
+Recherches et conflits ¦ Haut ja ristiriidat ¦ Kutatások és ellentmondások
+Résolu : {note} ¦ Ratkaistu: {note} ¦ Megoldva: {note}
+À résoudre ¦ Ratkaistava ¦ Megoldandó
+poids {n} sur 3 ¦ paino {n}/3 ¦ súly: {n} / 3
+Pas encore de conclusion ¦ Ei vielä johtopäätöstä ¦ Még nincs következtetés
+Schéma de preuve : {a} pour, {b} contre ; certitude : {c}. ¦ Todistekaavio: {a} puolesta, {b} vastaan; varmuus: {c}. ¦ Bizonyítási ábra: {a} mellette, {b} ellene; bizonyosság: {c}.
+Antoine MAZAUD est-il le père de Jean MAZAUD (né vers 1818) ? ¦ Onko Antoine MAZAUD Jean MAZAUDin (s. n. 1818) isä? ¦ Antoine MAZAUD-e Jean MAZAUD (szül. 1818 körül) apja?
+Oui : Antoine MAZAUD est le père de Jean. ¦ Kyllä: Antoine MAZAUD on Jeanin isä. ¦ Igen: Antoine MAZAUD Jean apja.
+Acte de mariage de Jean (1842) : « fils d’Antoine MAZAUD, cultivateur » ¦ Jeanin vihkimerkintä (1842): ”Antoine MAZAUDin, maanviljelijän, poika” ¦ Jean házassági anyakönyve (1842): „Antoine MAZAUD földműves fia”
+Registre paroissial, original ¦ Seurakunnan kirja, alkuperäinen ¦ Plébániai anyakönyv, eredeti
+Recensement 1836 : Jean, 18 ans, au foyer d’Antoine ¦ Laskenta 1836: Jean, 18 v., Antoinen taloudessa ¦ 1836-os népszámlálás: Jean, 18 éves, Antoine háztartásában
+Recensement 1836, original ¦ Laskenta 1836, alkuperäinen ¦ 1836-os népszámlálás, eredeti
+Antoine est parrain du premier fils de Jean ¦ Antoine on Jeanin esikoispojan kummi ¦ Antoine Jean első fiának keresztapja
+Baptême 1844 ¦ Kaste 1844 ¦ Keresztelő 1844
+Un autre Jean MAZAUD, né en 1817 au village voisin ¦ Toinen Jean MAZAUD, s. 1817 naapurikylässä ¦ Egy másik Jean MAZAUD, szül. 1817 a szomszéd faluban
+Acte de naissance de Jean : registre lacunaire 1815-1820 ¦ Jeanin syntymämerkintä: kirja puutteellinen 1815-1820 ¦ Jean születési anyakönyve: hiányos 1815-1820
+Âge au décès : 64 ans (né vers 1820) au lieu de 66 ¦ Ikä kuollessa: 64 v. (s. n. 1820) eikä 66 ¦ Halálkori életkor: 64 év (szül. 1820 körül) 66 helyett
+Acte de décès 1884 ¦ Kuolinmerkintä 1884 ¦ Halotti anyakönyv 1884
+l’âge déclaré au décès est souvent approximatif ¦ kuollessa ilmoitettu ikä on usein likimääräinen ¦ a halálkor bejelentett életkor gyakran csak közelítő
+Écris le mot de départ (Réglages), par exemple « fils de » ou « veuve de ». ¦ Kirjoita aloitussana (Asetukset), esimerkiksi ”fils de” tai ”veuve de”. ¦ Írd be a kiinduló szót (Beállítások), például „fils de” vagy „veuve de”.
+Colle des transcriptions (une par ligne) ou prends-les « Depuis l’app ». ¦ Liitä litteroinnit (yksi riville) tai hae ne ”Sovelluksesta”. ¦ Illessz be átiratokat (soronként egyet), vagy vedd őket „Az alkalmazásból”.
+« {w} » n’est dans aucun de ces textes. ¦ ”{w}” ei ole yhdessäkään näistä teksteistä. ¦ „{w}” egyik szövegben sincs benne.
+… {n} autres ¦ … {n} muuta ¦ … további {n}
+Trop de branches : baisse la profondeur ou le nombre de branches (Réglages). ¦ Liian monta haaraa: pienennä syvyyttä tai haarojen määrää (Asetukset). ¦ Túl sok ág: csökkentsd a mélységet vagy az ágak számát (Beállítások).
+« {w} » : {n} fois ¦ ”{w}”: {n} kertaa ¦ „{w}”: {n} alkalommal
+Arbre de mots : « {w} » trouvé {n} fois dans {t}. ¦ Sanapuu: ”{w}” löytyi {n} kertaa ({t}). ¦ Szófa: „{w}” {n} alkalommal található ebben: {t}.
+Ce qui suit « {w} » dans les actes ¦ Mitä ”{w}” seuraa asiakirjoissa ¦ Ami „{w}” után következik az iratokban
+{n} lignes prises dans l’arbre : tu peux les corriger dans l’onglet Données. ¦ {n} riviä otettu puusta: voit korjata ne Tiedot-välilehdellä. ¦ {n} sor a fából: az Adatok lapon javíthatod őket.
+🗓️ Les recensements de mon arbre ¦ 🗓️ Puuni väestönlaskennat ¦ 🗓️ A fám népszámlálásai
+Une ligne par personne, une case par recensement : ce qui est relevé sur les fiches (trouvé, non trouvé…), et « à chercher » pour le reste. Sans groupe choisi : tes ancêtres. ¦ Yksi rivi henkilöä kohden, yksi ruutu laskentaa kohden: mitä henkilösivuille on merkitty (löydetty, ei löydetty…), muuten ”etsittävä”. Ilman valittua ryhmää: esivanhempasi. ¦ Személyenként egy sor, népszámlálásonként egy cella: ami az adatlapokon szerepel (megtalálva, nem található…), a többi „keresendő”. Csoport nélkül: az őseid.
+Du recensement de ¦ Laskennasta ¦ A népszámlálástól
+à celui de ¦ laskentaan ¦ eddig:
+Les recensements de {n} ¦ Väestönlaskennat: {n} ¦ Népszámlálások: {n}
+Personne dans ce groupe ne vivait entre ces deux recensements (il faut au moins une date de naissance ou de décès). ¦ Kukaan ryhmästä ei elänyt näiden laskentojen välillä (tarvitaan ainakin syntymä- tai kuolinaika). ¦ A csoportból senki sem élt e két népszámlálás között (legalább születési vagy halálozási dátum kell).
+{n} sur {t} prises (les premières) : change « Au plus » pour en voir davantage. ¦ {n}/{t} otettu (ensimmäiset): muuta ”Enintään” nähdäksesi lisää. ¦ {t}-ből {n} átvéve (az elsők): módosítsd a „Legfeljebb” értéket, hogy többet láss.
+⚖️ Un dossier de preuve ou une hypothèse ¦ ⚖️ Todistekansio tai hypoteesi ¦ ⚖️ Bizonyítási dosszié vagy hipotézis
+Choisis un dossier : sa question, ses indices pour et contre, ses recherches et ses conflits, sa conclusion. Une hypothèse à comparer donne une colonne par réponse possible. ¦ Valitse kansio: sen kysymys, vihjeet puolesta ja vastaan, haut ja ristiriidat, johtopäätös. Vertailtava hypoteesi antaa sarakkeen kutakin mahdollista vastausta kohden. ¦ Válassz dossziét: a kérdés, a melletti és elleni nyomok, a kutatások és ellentmondások, a következtetés. Egy összevetendő hipotézis minden lehetséges válaszhoz egy oszlopot ad.
+Le dossier ¦ Kansio ¦ A dosszié
+Choisis d’abord un dossier. ¦ Valitse ensin kansio. ¦ Előbb válassz dossziét.
+Schéma de preuve ¦ Todistekaavio ¦ Bizonyítási ábra
+Ce dossier n’a encore aucune ligne : ajoute des indices dans le dossier, ou ici à la main. ¦ Kansiossa ei ole vielä rivejä: lisää vihjeitä kansioon tai tähän käsin. ¦ A dossziéban még nincs sor: adj hozzá nyomokat a dossziéban vagy itt kézzel.
+Prendre ce dossier ¦ Ota tämä kansio ¦ Ennek a dossziénak az átvétele
+🌿 Les mots de mes transcriptions ¦ 🌿 Litterointieni sanat ¦ 🌿 Az átirataim szavai
+Les transcriptions des actes (atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris. ¦ Asiakirjojen (litterointipaja) ja medioiden litteroinnit: mitä aloitussanaa seuraa (tai edeltää). Vain hyödylliset lauseenpätkät otetaan. ¦ Az iratok (átíró műhely) és a médiák átiratai: ami a kiinduló szó után (vagy előtt) áll. Csak a hasznos mondatrészek kerülnek be.
+Le mot de départ ¦ Aloitussana ¦ A kiinduló szó
+Ce qui suit ¦ Mitä seuraa ¦ Ami utána jön
+Ce qui précède ¦ Mitä edeltää ¦ Ami előtte áll
+Commune (dans le lieu ou le titre de l’acte) ¦ Kunta (paikassa tai asiakirjan otsikossa) ¦ Település (a helyben vagy az irat címében)
+Actes pris ¦ Otetut asiakirjat ¦ Figyelembe vett iratok
+Actes notariés ¦ Notaarin asiakirjat ¦ Közjegyzői okiratok
+Militaires ¦ Sotilaalliset ¦ Katonai
+Lettres ¦ Kirjeet ¦ Levelek
+Transcriptions des médias ¦ Medioiden litteroinnit ¦ Médiák átiratai
+Écris le mot de départ (par exemple « fils de »). ¦ Kirjoita aloitussana (esimerkiksi ”fils de”). ¦ Írd be a kiinduló szót (például „fils de”).
+Coche au moins une sorte d’acte. ¦ Valitse vähintään yksi asiakirjatyyppi. ¦ Jelölj be legalább egy irattípust.
+Ce qui précède « {w} » dans les actes ¦ Mitä ”{w}” edeltää asiakirjoissa ¦ Ami „{w}” előtt áll az iratokban
+« {w} » n’est dans aucune transcription de ce choix ({n} lues). ¦ ”{w}” ei ole missään tämän valinnan litteroinnissa ({n} luettu). ¦ „{w}” egyik átiratban sincs ebben a választásban ({n} elolvasva).
+« {w} » : {n} fois, dans {a}. ¦ ”{w}”: {n} kertaa ({a}). ¦ „{w}”: {n} alkalommal, itt: {a}.
+Dossier sans question ¦ Kansio ilman kysymystä ¦ Kérdés nélküli dosszié
+Aucun dossier pour ce groupe de personnes ¦ Tälle henkilöryhmälle ei ole kansiota ¦ Nincs dosszié ehhez a csoporthoz
+Ferme l’éditeur, puis clique sur la case pour ouvrir la fiche (bloc « Recensements »). ¦ Sulje muokkain ja napsauta ruutua avataksesi henkilösivun (lohko ”Väestönlaskennat”). ¦ Zárd be a szerkesztőt, majd kattints a cellára az adatlap megnyitásához („Népszámlálások” blokk).
+Recensement {yr} : dans le bloc « Recensements » de la fiche. ¦ Laskenta {yr}: henkilösivun lohkossa ”Väestönlaskennat”. ¦ {yr}. évi népszámlálás: az adatlap „Népszámlálások” blokkjában.
+Grille des recensements (personnes × années) ¦ Laskentaruudukko (henkilöt × vuodet) ¦ Népszámlálási rács (személyek × évek)
+Ma recherche ¦ Tutkimukseni ¦ Kutatásom
+Une ligne par personne, une colonne par recensement : ce qui est trouvé, pas trouvé, et ce qui reste à chercher. ¦ Yksi rivi henkilöä ja yksi sarake laskentaa kohden: mikä on löydetty, mitä ei ja mitä vielä etsitään. ¦ Személyenként egy sor, népszámlálásonként egy oszlop: mi van meg, mi nincs, és mit kell még keresni.
+Les personnes (une ligne sans année : naissance, décès) et leurs recensements (une ligne par année) ¦ Henkilöt (rivi ilman vuotta: syntymä, kuolema) ja heidän laskentansa (rivi vuotta kohden) ¦ A személyek (év nélküli sor: születés, halál) és népszámlálásaik (évenként egy sor)
+Naissance (année) ¦ Syntymä (vuosi) ¦ Születés (év)
+Décès (année) ¦ Kuolema (vuosi) ¦ Halál (év)
+Recensement (année) ¦ Laskenta (vuosi) ¦ Népszámlálás (év)
+Note (lieu, adresse…) ¦ Huomautus (paikka, osoite…) ¦ Megjegyzés (hely, cím…)
+Grille (une case par recensement) ¦ Ruudukko (yksi ruutu laskentaa kohden) ¦ Rács (népszámlálásonként egy cella)
+Liste de travail à imprimer (ce qui reste à chercher) ¦ Tulostettava työlista (mitä vielä etsitään) ¦ Nyomtatható munkalista (amit még keresni kell)
+À celui de ¦ Laskentaan ¦ Eddig
+Ou mes années (ex. 1846, 1851, 1872) ¦ Tai omat vuoteni (esim. 1846, 1851, 1872) ¦ Vagy a saját éveim (pl. 1846, 1851, 1872)
+Personnes montrées ¦ Näytetyt henkilöt ¦ Megjelenített személyek
+Seulement celles qui ont encore un recensement à chercher ¦ Vain ne, joilla on vielä etsittävä laskenta ¦ Csak akiknél még van keresendő népszámlálás
+Le plus à chercher d’abord ¦ Eniten etsittävää ensin ¦ A legtöbb keresnivaló elöl
+Par naissance ¦ Syntymän mukaan ¦ Születés szerint
+Par nom ¦ Nimen mukaan ¦ Név szerint
+Couleur « Trouvé » ¦ Väri ”Löydetty” ¦ „Megtalálva” színe
+Couleur « Non trouvé » ¦ Väri ”Ei löydetty” ¦ „Nem található” színe
+Couleur « À chercher » ¦ Väri ”Etsittävä” ¦ „Keresendő” színe
+Couleur « Hors de France » ¦ Väri ”Ranskan ulkopuolella” ¦ „Franciaországon kívül” színe
+Couleur « Pas né / déjà décédé » ¦ Väri ”Ei syntynyt / jo kuollut” ¦ „Még nem született / már elhunyt” színe
+Écart entre les cases ¦ Ruutujen väli ¦ Cellák közötti hely
+Signes dans les cases (✓ ✗ ?) ¦ Merkit ruuduissa (✓ ✗ ?) ¦ Jelek a cellákban (✓ ✗ ?)
+Années de vie à côté du nom ¦ Elinvuodet nimen vieressä ¦ Életévek a név mellett
+Schéma de preuve (question, indices pour et contre, conclusion) ¦ Todistekaavio (kysymys, vihjeet puolesta ja vastaan, johtopäätös) ¦ Bizonyítási ábra (kérdés, mellette és ellene szóló nyomok, következtetés)
+La question en haut, les indices pour et contre (avec leur poids et leur source), les recherches et les conflits, puis la conclusion et sa certitude. ¦ Ylhäällä kysymys, vihjeet puolesta ja vastaan (painoineen ja lähteineen), haut ja ristiriidat, sitten johtopäätös ja sen varmuus. ¦ Felül a kérdés, a melletti és elleni nyomok (súllyal és forrással), a kutatások és ellentmondások, majd a következtetés és bizonyossága.
+Les lignes du dossier (pour, contre, recherche, conflit ; « réponse » pour une hypothèse à plusieurs réponses) ¦ Kansion rivit (puolesta, vastaan, haku, ristiriita; ”vastaus” usean vastauksen hypoteesille) ¦ A dosszié sorai (mellette, ellene, kutatás, ellentmondás; „válasz” a több válaszú hipotézishez)
+Indice (ou réponse) ¦ Vihje (tai vastaus) ¦ Nyom (vagy válasz)
+Poids (1 à 3) ¦ Paino (1–3) ¦ Súly (1–3)
+Pour la réponse… (hypothèse) ¦ Vastaukselle… (hypoteesi) ¦ A válaszhoz… (hipotézis)
+Note (résolution d’un conflit) ¦ Huomautus (ristiriidan ratkaisu) ¦ Megjegyzés (ellentmondás feloldása)
+La conclusion ¦ Johtopäätös ¦ A következtetés
+Montrer les recherches et les conflits (ce qui reste à chercher) ¦ Näytä haut ja ristiriidat (mitä vielä etsitään) ¦ Kutatások és ellentmondások mutatása (amit még keresni kell)
+Couleur « confirme » ¦ Väri ”vahvistaa” ¦ „Megerősít” színe
+Couleur « contredit » ¦ Väri ”kumoaa” ¦ „Ellentmond” színe
+Couleur des recherches ¦ Hakujen väri ¦ Kutatások színe
+Couleur des conflits ¦ Ristiriitojen väri ¦ Ellentmondások színe
+Couleur des réponses ¦ Vastausten väri ¦ Válaszok színe
+Couleur de la question ¦ Kysymyksen väri ¦ A kérdés színe
+Arbre de mots des actes (ce qui suit « fils de »…) ¦ Asiakirjojen sanapuu (mitä ”fils de” seuraa…) ¦ Iratok szófája (ami a „fils de” után jön…)
+Un mot de départ à gauche ; à droite, les mots qui le suivent dans les actes, plus gros quand ils reviennent souvent. ¦ Aloitussana vasemmalla; oikealla sitä asiakirjoissa seuraavat sanat, isompina kun ne toistuvat usein. ¦ Balra a kiinduló szó; jobbra az iratokban utána következő szavak, nagyobbak, ha gyakran előfordulnak.
+Les textes (une transcription ou un bout de phrase par ligne) ¦ Tekstit (yksi litterointi tai lauseenpätkä riville) ¦ A szövegek (soronként egy átirat vagy mondatrész)
+Acte ou source ¦ Asiakirja tai lähde ¦ Irat vagy forrás
+Le mot de départ (ex. fils de, veuve de) ¦ Aloitussana (esim. fils de, veuve de) ¦ A kiinduló szó (pl. fils de, veuve de)
+Profondeur (mots) ¦ Syvyys (sanaa) ¦ Mélység (szavak)
+Branches par mot ¦ Haaroja sanaa kohden ¦ Ágak szavanként
+Seulement les mots vus au moins ¦ Vain sanat, jotka nähty vähintään ¦ Csak a legalább ennyiszer látott szavak
+Le reste dans « … autres » ¦ Loput kohtaan ”… muuta” ¦ A többi a „… további” alatt
+Écrire le nombre de fois ¦ Kirjoita esiintymiskerrat ¦ Az előfordulások számának kiírása
+Sans tenir compte des capitales ni des accents ¦ Isoista kirjaimista ja aksenteista välittämättä ¦ A kis- és nagybetűk és ékezetek figyelmen kívül hagyásával
+Seulement les actes de (lieu) ¦ Vain asiakirjat paikasta ¦ Csak innen származó iratok (hely)
+Couleur des mots ¦ Sanojen väri ¦ A szavak színe
+Couleur du mot de départ ¦ Aloitussanan väri ¦ A kiinduló szó színe
+⭕ En une journée ¦ ⭕ Yhdessä päivässä ¦ ⭕ Egy nap alatt
+Lieu de départ ¦ Lähtöpaikka ¦ Kiindulási hely
+Montrer les lieux de la famille ¦ Näytä suvun paikat ¦ A család helyeinek mutatása
+Ce qu’on atteignait en une journée ¦ Mihin päivässä ehti ¦ Ameddig egy nap alatt el lehetett jutni
+Choisis le lieu de départ ¦ Valitse lähtöpaikka ¦ Válaszd ki a kiindulási helyet
+Ce lieu n’a pas de position sur la carte : place-le d’abord. ¦ Paikalla ei ole sijaintia kartalla: sijoita se ensin. ¦ Ennek a helynek nincs pozíciója a térképen: előbb helyezd el.
+Coche au moins un moyen de voyager ¦ Valitse vähintään yksi kulkutapa ¦ Jelölj be legalább egy utazási módot
+Les fonds de carte ne sont pas chargés. ¦ Taustakarttoja ei ole ladattu. ¦ Az alaptérképek nincsenek betöltve.
+Je dessine les cercles… ¦ Piirrän ympyröitä… ¦ Rajzolom a köröket…
+En {d} jours depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ {d} päivässä paikasta {from}, vuonna {year}: linnuntietä noin {list}. ¦ {d} nap alatt innen: {from}, {year}-ban: légvonalban kb. {list}.
+En une journée depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ Päivässä paikasta {from}, vuonna {year}: linnuntietä noin {list}. ¦ Egy nap alatt innen: {from}, {year}-ban: légvonalban kb. {list}.
+Rayon (vol d’oiseau) ¦ Säde (linnuntietä) ¦ Sugár (légvonalban)
+Lieux de la famille ¦ Suvun paikat ¦ A család helyei
+Le rayon tient compte du détour de la route (réglage « Vitesses et sources »). Un trait pointillé : ce moyen n’existait pas encore cette année-là. ¦ Säde huomioi tien mutkat (asetus ”Nopeudet ja lähteet”). Pisteviiva: tätä kulkutapaa ei vielä ollut sinä vuonna. ¦ A sugár számol az út kerülőjével („Sebességek és források” beállítás). Pontozott vonal: ez a mód abban az évben még nem létezett.
+Paroisses (zones autour des églises) ¦ Seurakunnat (alueet kirkkojen ympärillä) ¦ Plébániák (területek a templomok körül)
+⚠ Paroisses sans position : {list} — choisis-les dans la liste (onglet Données) ou écris « Nom 45.27, 1.77 » ¦ ⚠ Seurakunnat ilman sijaintia: {list} — valitse ne luettelosta (Tiedot-välilehti) tai kirjoita ”Nimi 45.27, 1.77” ¦ ⚠ Pozíció nélküli plébániák: {list} — válaszd ki őket a listából (Adatok lap), vagy írd: „Név 45.27, 1.77”
+Ajoute des paroisses (une ville de la liste, ou « Depuis l’app ») et leurs chiffres. ¦ Lisää seurakuntia (paikka luettelosta tai ”Sovelluksesta”) ja niiden luvut. ¦ Adj hozzá plébániákat (egy települést a listából vagy „Az alkalmazásból”) és számaikat.
+Zones des paroisses : {n}. ¦ Seurakuntien alueet: {n}. ¦ Plébániák területei: {n}.
+Un point à chaque église ¦ Piste jokaisen kirkon kohdalla ¦ Egy pont minden templomnál
+Limites des départements par-dessus les paroisses ¦ Departementtien rajat seurakuntien päällä ¦ Megyehatárok a plébániák fölött
+Cadrer tout seul sur les paroisses ¦ Rajaa automaattisesti seurakuntiin ¦ Automatikus kivágás a plébániákra
+Liens montrés ¦ Näytetyt yhteydet ¦ Megjelenített kapcsolatok
+Ceux qui arrivent et ceux qui partent ¦ Tulijat ja lähtijät ¦ Az érkezők és a távozók
+Seulement ceux qui arrivent ¦ Vain tulijat ¦ Csak az érkezők
+Seulement ceux qui partent ¦ Vain lähtijät ¦ Csak a távozók
+Les liens de {name} ¦ Paikan {name} yhteydet ¦ {name} kapcsolatai
+bleu : conjoints venus ¦ sininen: tulleet puolisot ¦ kék: beköltözött házastársak
+orange : enfants partis ¦ oranssi: lähteneet lapset ¦ narancs: elköltözött gyerekek
+rouge : émigrés ¦ punainen: siirtolaiset ¦ piros: kivándorlók
+Lieux : {list} ¦ Paikat: {list} ¦ Helyek: {list}
+⛪ Au niveau « Paroisses » (Réglages → Niveau de détail) : une zone autour de chaque église, d’après les paroisses d’Ancien Régime de tes lieux ; un lieu sans paroisse compte pour lui-même. ¦ ⛪ Tasolla ”Seurakunnat” (Asetukset → Tarkkuustaso): alue jokaisen kirkon ympärillä paikkojesi vanhojen seurakuntien mukaan; paikka ilman seurakuntaa lasketaan itsenään. ¦ ⛪ A „Plébániák” szinten (Beállítások → Részletesség): egy terület minden templom körül, helyeid régi plébániái szerint; a plébánia nélküli hely önmagában számít.
+✳️ Tous les liens d’un lieu (carte en étoile) ¦ ✳️ Paikan kaikki yhteydet (tähtikartta) ¦ ✳️ Egy hely minden kapcsolata (csillagtérkép)
+Le village ¦ Kylä ¦ A falu
+Conjoints venus s’y marier ¦ Puolisot, jotka tulivat sinne naimisiin ¦ Házastársak, akik oda jöttek házasodni
+Enfants partis (nés ici, morts ou mariés ailleurs) ¦ Lähteneet lapset (syntyneet täällä, kuolleet tai vihitty muualla) ¦ Elköltözött gyerekek (itt születtek, máshol haltak meg vagy házasodtak)
+Émigrés (morts dans un autre pays) ¦ Siirtolaiset (kuolleet toisessa maassa) ¦ Kivándorlók (más országban haltak meg)
+Choisis d’abord le village. ¦ Valitse ensin kylä. ¦ Előbb válaszd ki a falut.
+Coche au moins une sorte de lien. ¦ Valitse vähintään yksi yhteystyyppi. ¦ Jelölj be legalább egy kapcsolattípust.
+Aucun lien trouvé pour ce lieu (naissance, mariage ou décès ailleurs). ¦ Paikalle ei löytynyt yhteyksiä (syntymä, avioliitto tai kuolema muualla). ¦ Ehhez a helyhez nincs kapcsolat (születés, házasság vagy halál máshol).
+{n} prises dans l’arbre ({m} lieux rattachés à une paroisse d’Ancien Régime, les autres comptent pour eux-mêmes). ¦ Puusta {n} ({m} paikkaa liitetty vanhaan seurakuntaan, muut lasketaan itsenään). ¦ A fából: {n} ({m} hely régi plébániához kötve, a többi önmagában számít).
+Aucun lieu avec des coordonnées pour ce choix : place d’abord tes lieux sur la carte. ¦ Tälle valinnalle ei ole paikkoja koordinaatein: sijoita ensin paikkasi kartalle. ¦ Ehhez a választáshoz nincs koordinátás hely: előbb helyezd el a helyeidet a térképen.
+sa paroisse ¦ sen seurakunta ¦ a plébániája
+leur paroisse ¦ niiden seurakunta ¦ a plébániájuk
+une paroisse ¦ seurakunta ¦ egy plébánia
+Paroisse sans position : choisis sa commune dans la liste, ou écris « Nom 45.27, 1.77 ». ¦ Seurakunta ilman sijaintia: valitse sen kunta luettelosta tai kirjoita ”Nimi 45.27, 1.77”. ¦ Pozíció nélküli plébánia: válaszd ki a települését a listából, vagy írd: „Név 45.27, 1.77”.
+Carte en étoile : seulement les liens de ce lieu (vide = tous les flux) ¦ Tähtikartta: vain tämän paikan yhteydet (tyhjä = kaikki virrat) ¦ Csillagtérkép: csak ennek a helynek a kapcsolatai (üres = minden áramlás)
+niveau|paroisse ¦ seurakunta ¦ plébánia
+=paroisse ¦ seurakunta|seurakuntaa ¦ plébánia|plébánia

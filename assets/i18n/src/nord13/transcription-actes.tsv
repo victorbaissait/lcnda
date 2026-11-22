@@ -1,0 +1,145 @@
+fr ¦ el ¦ bg
+# Zone « transcription-actes » : recadrage, lecture approfondie (Ollama), « Ce que l’app a trouvé » (heritage-transcribe-acte.js, lib/transcription_actes.php)
+LECTURE AUTOMATIQUE ¦ ΑΥΤΟΜΑΤΗ ΑΝΑΓΝΩΣΗ ¦ АВТОМАТИЧНО ЧЕТЕНЕ
+Recadrer sur le texte ? ¦ Περικοπή στο κείμενο; ¦ Да изрежа ли до текста?
+Recadrer sur le texte ¦ Περικοπή στο κείμενο ¦ Изрежи до текста
+Lire quand même ¦ Ανάγνωση ούτως ή άλλως ¦ Прочети въпреки това
+Cette image ressemble à une capture d’écran ¦ Η εικόνα μοιάζει με στιγμιότυπο οθόνης ¦ Това изображение прилича на снимка на екрана
+(boutons et bords gris autour) : la lecture sera moins bonne. Télécharge l’image en grand sur le site des archives, ou recadre sur le texte. ¦ (κουμπιά και γκρίζα περιθώρια γύρω): η ανάγνωση θα είναι χειρότερη. Κατέβασε την εικόνα σε μεγάλο μέγεθος από τον ιστότοπο του αρχείου ή κάνε περικοπή στο κείμενο. ¦ (бутони и сиви краища наоколо): четенето ще е по-лошо. Изтегли изображението в голям размер от сайта на архива или го изрежи до текста.
+La zone qui sera lue ¦ Η περιοχή που θα διαβαστεί ¦ Областта, която ще се прочете
+Le cadre bleu montre la zone qui sera lue. Pour choisir toi-même, dessine une zone (▭) puis « ✨ Lire cette zone ». ¦ Το μπλε πλαίσιο δείχνει την περιοχή που θα διαβαστεί. Για να διαλέξεις μόνος σου, σχεδίασε μια περιοχή (▭) και μετά «✨ Ανάγνωση αυτής της περιοχής». ¦ Синята рамка показва областта, която ще се прочете. За да избереш сам, начертай област (▭), после „✨ Прочети тази област“.
+La lecture à la main a donné un texte peu sûr ¦ Η ανάγνωση του χειρογράφου έδωσε αβέβαιο κείμενο ¦ Четенето на ръкописа даде несигурен текст
+({x} % de mots douteux). Souvent à cause des bords de l’écran autour de l’acte, ou d’une écriture trop difficile pour ce modèle. ¦ ({x} % αμφίβολες λέξεις). Συχνά λόγω των άκρων της οθόνης γύρω από την πράξη ή γραφής πολύ δύσκολης για αυτό το μοντέλο. ¦ ({x} % съмнителни думи). Често заради краищата на екрана около акта или почерк, твърде труден за този модел.
+Recadrer et relire ¦ Περικοπή και νέα ανάγνωση ¦ Изрежи и прочети отново
+Essayer la lecture approfondie ¦ Δοκίμασε την εις βάθος ανάγνωση ¦ Опитай задълбоченото четене
+LECTURE APPROFONDIE ¦ ΕΙΣ ΒΑΘΟΣ ΑΝΑΓΝΩΣΗ ¦ ЗАДЪЛБОЧЕНО ЧЕТЕНЕ
+Lecture approfondie ¦ Εις βάθος ανάγνωση ¦ Задълбочено четене
+Ce qu’il faut ¦ Τι χρειάζεται ¦ Какво е нужно
+Ollama (gratuit, open source) et un modèle vision ouvert, au choix : ¦ Ollama (δωρεάν, ανοιχτού κώδικα) και ένα ανοιχτό μοντέλο όρασης της επιλογής σου: ¦ Ollama (безплатно, с отворен код) и отворен визуален модел по избор:
+le meilleur, ≈ {x} Go ¦ το καλύτερο, ≈ {x} GB ¦ най-добрият, ≈ {x} ГБ
+plus léger, ≈ {x} Go, pour un ordinateur modeste ¦ πιο ελαφρύ, ≈ {x} GB, για έναν απλό υπολογιστή ¦ по-лек, ≈ {x} ГБ, за по-скромен компютър
+déjà téléchargé ¦ ήδη κατεβασμένο ¦ вече изтеглен
+8 Go conseillés (16 Go pour le 8B) · téléchargé une seule fois ¦ προτείνονται 8 GB (16 GB για το 8B) · κατεβαίνει μόνο μία φορά ¦ препоръчват се 8 ГБ (16 ГБ за 8B) · изтегля се само веднъж
+≈ 20 à 60 s par page sur un ordinateur récent ¦ ≈ 20 έως 60 δευτ. ανά σελίδα σε πρόσφατο υπολογιστή ¦ ≈ 20 до 60 с на страница на по-нов компютър
+Confidentialité ¦ Απόρρητο ¦ Поверителност
+rien ne quitte ton ordinateur ; l’app vérifie qu’Ollama ne répond que sur ton ordinateur ¦ τίποτα δεν φεύγει από τον υπολογιστή σου· η εφαρμογή ελέγχει ότι το Ollama απαντά μόνο στον υπολογιστή σου ¦ нищо не напуска компютъра ти; приложението проверява, че Ollama отговаря само на твоя компютър
+Recherche d’Ollama sur cet ordinateur… ¦ Αναζήτηση του Ollama σε αυτόν τον υπολογιστή… ¦ Търсене на Ollama на този компютър…
+L’adresse d’Ollama n’est pas sur cet ordinateur : la lecture approfondie est refusée. ¦ Η διεύθυνση του Ollama δεν είναι σε αυτόν τον υπολογιστή: η εις βάθος ανάγνωση απορρίπτεται. ¦ Адресът на Ollama не е на този компютър: задълбоченото четене е отказано.
+Ollama n’est pas encore sur cet ordinateur. ¦ Το Ollama δεν υπάρχει ακόμη σε αυτόν τον υπολογιστή. ¦ Ollama още не е на този компютър.
+Installe-le une fois depuis son site (gratuit), lance-le, puis « ↻ Vérifier à nouveau ». ¦ Εγκατάστησέ το μία φορά από τον ιστότοπό του (δωρεάν), άνοιξέ το και μετά «↻ Νέος έλεγχος». ¦ Инсталирай го веднъж от сайта му (безплатно), стартирай го, после „↻ Провери отново“.
+Ollama est installé mais ne tourne pas. ¦ Το Ollama είναι εγκατεστημένο αλλά δεν τρέχει. ¦ Ollama е инсталиран, но не работи.
+Lance l’application Ollama, puis « ↻ Vérifier à nouveau ». ¦ Άνοιξε την εφαρμογή Ollama και μετά «↻ Νέος έλεγχος». ¦ Стартирай приложението Ollama, после „↻ Провери отново“.
+Prêt : la lecture se fait sur cet ordinateur, sans Internet. ¦ Έτοιμο: η ανάγνωση γίνεται σε αυτόν τον υπολογιστή, χωρίς Διαδίκτυο. ¦ Готово: четенето става на този компютър, без интернет.
+Télécharger Ollama (ollama.com) ¦ Λήψη του Ollama (ollama.com) ¦ Изтегли Ollama (ollama.com)
+Installer la lecture approfondie ¦ Εγκατάσταση της εις βάθος ανάγνωσης ¦ Инсталирай задълбоченото четене
+Lire l’acte avec ce modèle ¦ Ανάγνωση της πράξης με αυτό το μοντέλο ¦ Прочети акта с този модел
+Vérifier à nouveau ¦ Νέος έλεγχος ¦ Провери отново
+« 🔍 Essayer aussi la lecture approfondie » sur une page déjà lue montre les deux textes côte à côte, et on garde la meilleure. Relis toujours : un modèle peut se tromper sur les noms. ¦ Το «🔍 Δοκίμασε και την εις βάθος ανάγνωση» σε σελίδα που έχει ήδη διαβαστεί δείχνει τα δύο κείμενα δίπλα δίπλα και κρατάς το καλύτερο. Έλεγχε πάντα: ένα μοντέλο μπορεί να κάνει λάθος στα ονόματα. ¦ „🔍 Опитай и задълбоченото четене“ на вече прочетена страница показва двата текста един до друг и запазваш по-добрия. Винаги проверявай: моделът може да сбърка имената.
+Téléchargement du modèle… {done} sur {total} ¦ Λήψη του μοντέλου… {done} από {total} ¦ Изтегляне на модела… {done} от {total}
+Téléchargement du modèle… ¦ Λήψη του μοντέλου… ¦ Изтегляне на модела…
+Lecture approfondie… {n} s ¦ Εις βάθος ανάγνωση… {n} δ. ¦ Задълбочено четене… {n} с
+La lecture approfondie n’a pas abouti. ¦ Η εις βάθος ανάγνωση δεν πέτυχε. ¦ Задълбоченото четене не успя.
+Les deux lectures côte à côte ¦ Οι δύο αναγνώσεις δίπλα δίπλα ¦ Двете четения едно до друго
+Le texte lu ¦ Το κείμενο που διαβάστηκε ¦ Прочетеният текст
+Écriture à la main ¦ Χειρόγραφο ¦ Ръкопис
+Garder celle-ci ¦ Κράτα αυτό ¦ Запази този
+Mettre dans le texte ¦ Βάλε το στο κείμενο ¦ Постави в текста
+La lecture approfondie est installée. ¦ Η εις βάθος ανάγνωση εγκαταστάθηκε. ¦ Задълбоченото четене е инсталирано.
+Défunte ¦ Η θανούσα ¦ Починалата
+Conjointe ¦ Σύζυγος (γυναίκα) ¦ Съпруга
+Autre personne ¦ Άλλο πρόσωπο ¦ Друго лице
+{n} ans → née vers {year} ¦ {n} ετών → γεννήθηκε περίπου το {year} ¦ {n} г. → родена около {year}
+{n} ans → né vers {year} ¦ {n} ετών → γεννήθηκε περίπου το {year} ¦ {n} г. → роден около {year}
+Aucune personne trouvée dans le texte : relis-le, puis « 🧭 Repérer ». ¦ Δεν βρέθηκε κανένα πρόσωπο στο κείμενο: έλεγξέ το και μετά «🧭 Εντοπισμός». ¦ В текста не е намерен никой: прегледай го, после „🧭 Открий“.
+TRANSCRIPTION ¦ ΜΕΤΑΓΡΑΦΗ ¦ ПРЕПИС
+Ce que l’app a trouvé dans l’acte ¦ Τι βρήκε η εφαρμογή στην πράξη ¦ Какво намери приложението в акта
+Ajouter à la généalogie ¦ Προσθήκη στη γενεαλογία ¦ Добави към родословието
+Garder seulement la transcription ¦ Κράτα μόνο τη μεταγραφή ¦ Запази само преписа
+demeurant à {place} ¦ κάτοικος {place} ¦ живущ в {place}
+fille de {a} et de {b} ¦ κόρη του/της {a} και του/της {b} ¦ дъщеря на {a} и {b}
+fils de {a} et de {b} ¦ γιος του/της {a} και του/της {b} ¦ син на {a} и {b}
+fille de {a} ¦ κόρη του/της {a} ¦ дъщеря на {a}
+fils de {a} ¦ γιος του/της {a} ¦ син на {a}
+sœur de {name} ¦ αδελφή του/της {name} ¦ сестра на {name}
+frère de {name} ¦ αδελφός του/της {name} ¦ брат на {name}
+parent de {name} ¦ συγγενής του/της {name} ¦ роднина на {name}
+conjoint décédé de {name} ¦ ο εκλιπών σύζυγος του/της {name} ¦ починал съпруг на {name}
+conjoint de {name} ¦ σύζυγος του/της {name} ¦ съпруг на {name}
+décédée avant l’acte ¦ πέθανε πριν από την πράξη ¦ починала преди акта
+décédé avant l’acte ¦ πέθανε πριν από την πράξη ¦ починал преди акта
+Relier à cette fiche ¦ Σύνδεση με αυτό το δελτίο ¦ Свържи с този запис
+Reliée à : ¦ Συνδεδεμένο με: ¦ Свързано с:
+Fiches proches : ¦ Παρόμοια δελτία: ¦ Подобни записи:
+Fiche existante : ¦ Υπάρχον δελτίο: ¦ Съществуващ запис:
+même personne probable ¦ πιθανότατα το ίδιο πρόσωπο ¦ вероятно същото лице
+Pas de fiche · restera dans l’acte avec son rôle, sans créer de fiche ¦ Χωρίς δελτίο · θα μείνει στην πράξη με τον ρόλο του, χωρίς να δημιουργηθεί δελτίο ¦ Няма запис · ще остане в акта с ролята си, без да се създава запис
+Aucune fiche : elle sera créée et reliée comme mère de {name} ¦ Κανένα δελτίο: θα δημιουργηθεί και θα συνδεθεί ως μητέρα του/της {name} ¦ Няма запис: ще бъде създаден и свързан като майка на {name}
+Aucune fiche : elle sera créée et reliée comme père de {name} ¦ Κανένα δελτίο: θα δημιουργηθεί και θα συνδεθεί ως πατέρας του/της {name} ¦ Няма запис: ще бъде създаден и свързан като баща на {name}
+Aucune fiche : elle sera créée ¦ Κανένα δελτίο: θα δημιουργηθεί ¦ Няма запис: ще бъде създаден
+Témoin seul ¦ Μόνο μάρτυρας ¦ Само свидетел
+Que faire de cette personne ¦ Τι να γίνει με αυτό το πρόσωπο ¦ Какво да се направи с това лице
+Décès estimé avant l’acte ¦ Θάνατος κατ’ εκτίμηση πριν από την πράξη ¦ Смърт, предполагаемо преди акта
+Gardés dans l’acte, sans fiche ¦ Διατηρούνται στην πράξη, χωρίς δελτίο ¦ Запазени в акта, без запис
+La source ¦ Η πηγή ¦ Източникът
+déjà dans ta base, reprise ¦ ήδη στη βάση σου, επαναχρησιμοποιείται ¦ вече в базата ти, използва се отново
+Relever à nouveau ¦ Νέα εξαγωγή ¦ Извлечи отново
+Compris : {date} ¦ Κατανοήθηκε: {date} ¦ Разбрано: {date}
+Les personnes ({n}) ¦ Τα πρόσωπα ({n}) ¦ Лицата ({n})
+Ce que l’acte ajoute aussi ¦ Τι προσθέτει επίσης η πράξη ¦ Какво още добавя актът
+Naissance estimée d’après l’âge (marquée « estimée ») ¦ Γέννηση κατ’ εκτίμηση από την ηλικία (σημειώνεται «εκτίμηση») ¦ Раждане по възрастта (отбелязано „приблизително“)
+Décès d’avant l’acte (« feu », « veuve de ») ¦ Θάνατοι πριν από την πράξη («ο μακαρίτης», «χήρα του») ¦ Смърти преди акта („покойният“, „вдовица на“)
+Domiciles ¦ Κατοικίες ¦ Местоживеене
+La source, toute prête ¦ Η πηγή, έτοιμη ¦ Източникът, готов
+La même source est déjà dans ta base : elle est reprise au lieu d’en créer une deuxième. ¦ Η ίδια πηγή υπάρχει ήδη στη βάση σου: επαναχρησιμοποιείται αντί να δημιουργηθεί δεύτερη. ¦ Същият източник вече е в базата ти: използва се отново, вместо да се създава втори.
+Remplie d’après le champ Source, le nom du fichier et le texte lu autour de l’image. Vérifie avant d’ajouter. ¦ Συμπληρώθηκε από το πεδίο Πηγή, το όνομα του αρχείου και το κείμενο γύρω από την εικόνα. Έλεγξε πριν την προσθήκη. ¦ Попълнено по полето „Източник“, името на файла и текста около изображението. Провери преди добавяне.
+Remplie d’après le champ Source et le nom du fichier. Vérifie avant d’ajouter. ¦ Συμπληρώθηκε από το πεδίο Πηγή και το όνομα του αρχείου. Έλεγξε πριν την προσθήκη. ¦ Попълнено по полето „Източник“ и името на файла. Провери преди добавяне.
+Voilà ce qui va entrer dans ta généalogie ¦ Αυτά θα μπουν στη γενεαλογία σου ¦ Ето какво ще влезе в родословието ти
+Rien n’est écrasé : une information différente de la fiche est proposée, jamais imposée. « ↶ Annuler » défait tout l’ajout d’un coup. ¦ Τίποτα δεν αντικαθίσταται: μια πληροφορία διαφορετική από το δελτίο προτείνεται, ποτέ δεν επιβάλλεται. Το «↶ Αναίρεση» αναιρεί όλη την προσθήκη με μιας. ¦ Нищо не се презаписва: различна от записа информация се предлага, никога не се налага. „↶ Отмени“ отменя цялото добавяне наведнъж.
+C’est elle : relier ¦ Είναι αυτή: σύνδεση ¦ Тя е: свържи
+C’est lui : relier ¦ Είναι αυτός: σύνδεση ¦ Той е: свържи
+Ce n’est pas elle ¦ Δεν είναι αυτή ¦ Не е тя
+Ce n’est pas lui ¦ Δεν είναι αυτός ¦ Не е той
+ajouter ¦ προσθήκη ¦ добави
+{name} : l’acte et la fiche côte à côte ¦ {name}: η πράξη και το δελτίο δίπλα δίπλα ¦ {name}: актът и записът един до друг
+Dans l’acte ¦ Στην πράξη ¦ В акта
+Fiche · {name} ¦ Δελτίο · {name} ¦ Запис · {name}
+vers {year} ({n} ans) ¦ περίπου {year} ({n} ετών) ¦ около {year} ({n} г.)
+{date} avec {name} ¦ {date} με {name} ¦ {date} с {name}
+avant le {date} ¦ πριν από {date} ¦ преди {date}
+Les parents sont les mêmes : c’est très probablement elle. ¦ Οι γονείς είναι οι ίδιοι: πολύ πιθανόν είναι αυτή. ¦ Родителите са същите: много вероятно е тя.
+Les parents sont les mêmes : c’est très probablement lui. ¦ Οι γονείς είναι οι ίδιοι: πολύ πιθανόν είναι αυτός. ¦ Родителите са същите: много вероятно е той.
+Les parents ne sont pas les mêmes : vérifie avant de relier. ¦ Οι γονείς δεν είναι οι ίδιοι: έλεγξε πριν τη σύνδεση. ¦ Родителите не са същите: провери преди свързване.
+La date de naissance de la fiche est gardée (elle est plus précise que l’âge de l’acte). ¦ Η ημερομηνία γέννησης του δελτίου διατηρείται (είναι πιο ακριβής από την ηλικία της πράξης). ¦ Датата на раждане в записа се запазва (по-точна е от възрастта в акта).
+✓ Acte ajouté : {what} ¦ ✓ Η πράξη προστέθηκε: {what} ¦ ✓ Актът е добавен: {what}
+Déjà d’autres parents, lien non fait : {names} ¦ Έχει ήδη άλλους γονείς, δεν έγινε σύνδεση: {names} ¦ Вече има други родители, връзката не е направена: {names}
+Un modèle « vision » ouvert qui tourne sur ton ordinateur (Ollama) : lit mieux les écritures difficiles, plus lent ¦ Ένα ανοιχτό μοντέλο «όρασης» που τρέχει στον υπολογιστή σου (Ollama): διαβάζει καλύτερα τις δύσκολες γραφές, πιο αργό ¦ Отворен „визуален“ модел на компютъра ти (Ollama): чете по-добре труден почерк, по-бавен
+L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches ¦ Το γεγονός, τα πρόσωπα και οι δεσμοί τους, η πηγή: σύνδεση, σύγκριση ή δημιουργία δελτίων ¦ Събитието, лицата и връзките им, източникът: свържи, сравни или създай записи
+Ce que l’app a trouvé… ¦ Τι βρήκε η εφαρμογή… ¦ Какво намери приложението…
+La lecture approfondie n’est pas chargée. ¦ Η εις βάθος ανάγνωση δεν έχει φορτωθεί. ¦ Задълбоченото четене не е заредено.
+Lecture du texte autour de l’acte… ¦ Ανάγνωση του κειμένου γύρω από την πράξη… ¦ Четене на текста около акта…
+Le texte est vide : lis ou écris d’abord l’acte. ¦ Το κείμενο είναι κενό: διάβασε ή γράψε πρώτα την πράξη. ¦ Текстът е празен: първо прочети или напиши акта.
+Personnes gardées dans la transcription, sans créer de fiche. ¦ Τα πρόσωπα κρατήθηκαν στη μεταγραφή, χωρίς δημιουργία δελτίων. ¦ Лицата са запазени в преписа, без да се създават записи.
+Père du défunt ¦ Πατέρας του θανόντα ¦ Баща на починалия
+Mère du défunt ¦ Μητέρα του θανόντα ¦ Майка на починалия
+Déclarant ¦ Δηλών ¦ Заявител
+Acte de mariage ¦ Ληξιαρχική πράξη γάμου ¦ Акт за брак
+Acte de baptême ¦ Πράξη βάπτισης ¦ Акт за кръщене
+Acte de naissance ¦ Ληξιαρχική πράξη γέννησης ¦ Акт за раждане
+Acte de sépulture ¦ Πράξη ταφής ¦ Акт за погребение
+Registre ¦ Βιβλίο ¦ Регистър
+Vue ¦ Εικόνα ¦ Кадър
+Vues en tout ¦ Εικόνες συνολικά ¦ Кадри общо
+La lecture approfondie ne parle qu’à Ollama sur cet ordinateur (127.0.0.1) : adresse refusée. ¦ Η εις βάθος ανάγνωση μιλά μόνο με το Ollama σε αυτόν τον υπολογιστή (127.0.0.1): η διεύθυνση απορρίφθηκε. ¦ Задълбоченото четене работи само с Ollama на този компютър (127.0.0.1): адресът е отказан.
+Modèle de lecture approfondie inconnu. ¦ Άγνωστο μοντέλο εις βάθος ανάγνωσης. ¦ Непознат модел за задълбочено четене.
+La lecture approfondie a besoin de l’extension cURL de PHP. ¦ Η εις βάθος ανάγνωση χρειάζεται την επέκταση cURL της PHP. ¦ Задълбоченото четене изисква разширението cURL на PHP.
+Ollama ne répond pas sur cet ordinateur : installe-le (ollama.com), lance-le, puis réessaie. ¦ Το Ollama δεν απαντά σε αυτόν τον υπολογιστή: εγκατάστησέ το (ollama.com), άνοιξέ το και δοκίμασε ξανά. ¦ Ollama не отговаря на този компютър: инсталирай го (ollama.com), стартирай го и опитай отново.
+Image manquante. ¦ Λείπει η εικόνα. ¦ Липсва изображение.
+Image trop lourde. ¦ Η εικόνα είναι πολύ βαριά. ¦ Изображението е твърде тежко.
+Image trop grande. ¦ Η εικόνα είναι πολύ μεγάλη. ¦ Изображението е твърде голямо.
+Ce modèle n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Αυτό το μοντέλο δεν έχει κατέβει ακόμη: «⤓ Εγκατάσταση της εις βάθος ανάγνωσης». ¦ Този модел още не е изтеглен: „⤓ Инсталирай задълбоченото четене“.
+Une fiche à relier n’existe plus : choisis-en une autre. ¦ Ένα δελτίο προς σύνδεση δεν υπάρχει πια: διάλεξε άλλο. ¦ Запис за свързване вече не съществува: избери друг.
+Une personne à créer n’a ni prénom ni nom. ¦ Ένα πρόσωπο προς δημιουργία δεν έχει ούτε όνομα ούτε επώνυμο. ¦ Лице за създаване няма нито име, нито фамилия.
+Trop de personnes dans un seul acte. ¦ Πάρα πολλά πρόσωπα σε μία πράξη. ¦ Твърде много лица в един акт.
+Annulation impossible : ce n’est pas l’ajout d’un acte. ¦ Αδύνατη η αναίρεση: δεν πρόκειται για προσθήκη πράξης. ¦ Отмяната е невъзможна: това не е добавяне на акт.
+Le téléchargement du modèle n’a pas abouti. ¦ Η λήψη του μοντέλου δεν πέτυχε. ¦ Изтеглянето на модела не успя.
+La lecture approfondie a pris trop de temps. ¦ Η εις βάθος ανάγνωση κράτησε πολύ. ¦ Задълбоченото четене отне твърде много време.

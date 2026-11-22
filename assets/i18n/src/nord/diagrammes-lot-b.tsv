@@ -1,0 +1,233 @@
+fr ¦ cs ¦ sv ¦ da
+# Zone « diagrammes-lot-b » : diagramme de Lexis, ternaire, chandeliers, courbe avec marge, horizon, dendrogramme, durée des générations, couverture des sources, trajectoires de vie, alluvial (heritage-diagram-lot-b.js et réglages de heritage-diagram-plus/vie/famille.js, heritage-diagrams-render.js)
+=vie ¦ život|životy|životů ¦ liv|liv ¦ liv|liv
+=période ¦ období|období|období ¦ period|perioder ¦ periode|perioder
+Célibataire ¦ Svobodný/á ¦ Ogift ¦ Ugift
+Marié(e) ¦ Ženatý/vdaná ¦ Gift ¦ Gift
+Remarié(e) ¦ Znovu ženatý/vdaná ¦ Omgift ¦ Gift igen
+Veuf ou veuve ¦ Vdovec nebo vdova ¦ Änka eller änkling ¦ Enke eller enkemand
+Divorcé(e) ¦ Rozvedený/á ¦ Skild ¦ Skilt
+Décédé(e) ¦ Zemřelý/á ¦ Avliden ¦ Afdød
+État civil inconnu ¦ Rodinný stav neznámý ¦ Civilstånd okänt ¦ Civilstand ukendt
+Métier inconnu ¦ Povolání neznámé ¦ Yrke okänt ¦ Erhverv ukendt
+Pays inconnu ¦ Země neznámá ¦ Land okänt ¦ Land ukendt
+Autres états ¦ Jiné stavy ¦ Andra stånd ¦ Andre stande
+Sexe inconnu ¦ Pohlaví neznámé ¦ Kön okänt ¦ Køn ukendt
+Départ (autre commune) ¦ Odchod (jiná obec) ¦ Flytt (annan kommun) ¦ Fraflytning (anden kommune)
+Ajoute des personnes : le nom, la naissance et le décès (années ou dates). ¦ Přidej osoby: jméno, narození a úmrtí (roky nebo data). ¦ Lägg till personer: namnet, födelsen och döden (år eller datum). ¦ Tilføj personer: navnet, fødslen og dødsfaldet (år eller datoer).
+Diagramme de Lexis : {n}, de {a} à {b}. ¦ Lexisův diagram: {n}, od {a} do {b}. ¦ Lexisdiagram: {n}, från {a} till {b}. ¦ Lexisdiagram: {n}, fra {a} til {b}.
+Choléra ¦ Cholera ¦ Kolera ¦ Kolera
+Guerre de 1870 ¦ Válka 1870 ¦ Kriget 1870 ¦ Krigen i 1870
+Grande Guerre ¦ Velká válka ¦ Första världskriget ¦ Første Verdenskrig
+📐 Les vies de ma base ¦ 📐 Životy v mé databázi ¦ 📐 Liven i min databas ¦ 📐 Livene i min database
+Chaque vie devient une diagonale, de la naissance (âge 0) au décès ; les mariages, les naissances des enfants et les départs posés dessus. ¦ Každý život je úhlopříčka od narození (věk 0) do úmrtí; na ní sňatky, narození dětí a odchody. ¦ Varje liv blir en diagonal, från födelsen (ålder 0) till döden; med giftermål, barnens födslar och flyttar på den. ¦ Hvert liv bliver en diagonal, fra fødslen (alder 0) til døden; med ægteskaber, børnenes fødsler og fraflytninger på.
+Combien de vies au plus ¦ Kolik životů nejvýše ¦ Hur många liv högst ¦ Hvor mange liv højst
+Une par nom de famille ¦ Jedna na příjmení ¦ En per efternamn ¦ Én pr. efternavn
+Naissances des enfants ¦ Narození dětí ¦ Barnens födslar ¦ Børnenes fødsler
+Départs (première commune autre que celle de naissance) ¦ Odchody (první obec jiná než rodná) ¦ Flyttar (första kommun utöver födelseorten) ¦ Fraflytninger (første kommune ud over fødestedet)
+Bandes historiques (guerres, épidémies) ¦ Historické pruhy (války, epidemie) ¦ Historiska band (krig, epidemier) ¦ Historiske bånd (krige, epidemier)
+Personne avec une date de naissance dans ce groupe. ¦ V této skupině nikdo nemá datum narození. ¦ Ingen med födelsedatum i den här gruppen. ¦ Ingen med fødselsdato i denne gruppe.
+Diagramme de Lexis ¦ Lexisův diagram ¦ Lexisdiagram ¦ Lexisdiagram
+Diagramme de Lexis (âge × année : une vie = une diagonale) ¦ Lexisův diagram (věk × rok: jeden život = jedna úhlopříčka) ¦ Lexisdiagram (ålder × år: ett liv = en diagonal) ¦ Lexisdiagram (alder × år: ét liv = én diagonal)
+Les années en bas, les âges à gauche : chaque vie monte en diagonale de sa naissance à son décès ; les mariages, les enfants, les départs et les grandes crises s’y lisent d’un coup d’œil. ¦ Dole roky, vlevo věk: každý život stoupá šikmo od narození do úmrtí; sňatky, děti, odchody a velké krize jsou vidět na první pohled. ¦ Åren nedtill, åldern till vänster: varje liv stiger diagonalt från födelse till död; giftermål, barn, flyttar och stora kriser syns direkt. ¦ Årene nederst, alderen til venstre: hvert liv stiger diagonalt fra fødsel til død; ægteskaber, børn, fraflytninger og store kriser ses med det samme.
+Les vies ¦ Životy ¦ Liven ¦ Livene
+Les vies de la famille {name} ¦ Životy rodiny {name} ¦ Familjen {name}s liv ¦ Familien {name}s liv
+Personne (même nom que ci-dessus) ¦ Osoba (stejné jméno jako výše) ¦ Person (samma namn som ovan) ¦ Person (samme navn som ovenfor)
+Les marques (sur la vie de la personne) ¦ Značky (na životě osoby) ¦ Markeringar (på personens liv) ¦ Markeringer (på personens liv)
+Bandes historiques ¦ Historické pruhy ¦ Historiska band ¦ Historiske bånd
+Groupe (couleur) ¦ Skupina (barva) ¦ Grupp (färg) ¦ Gruppe (farve)
+Couleur de chaque groupe (facultatif) ¦ Barva každé skupiny (nepovinné) ¦ Färg för varje grupp (valfritt) ¦ Farve for hver gruppe (valgfrit)
+Âge au plus ¦ Věk nejvýše ¦ Ålder högst ¦ Alder højst
+Couleur des vies ¦ Barva životů ¦ Livens färg ¦ Livenes farve
+Homme / femme ¦ Muž / žena ¦ Man / kvinna ¦ Mand / kvinde
+Montrer les marques ¦ Zobrazit značky ¦ Visa markeringar ¦ Vis markeringer
+Taille des marques ¦ Velikost značek ¦ Markeringarnas storlek ¦ Markeringernes størrelse
+Nom des bandes ¦ Názvy pruhů ¦ Bandens namn ¦ Båndenes navne
+Diagonales des générations ¦ Úhlopříčky generací ¦ Generationsdiagonaler ¦ Generationsdiagonaler
+Nom au bout de chaque vie ¦ Jméno na konci každého života ¦ Namn i slutet av varje liv ¦ Navn for enden af hvert liv
+Épaisseur des vies ¦ Tloušťka životů ¦ Livens tjocklek ¦ Livenes tykkelse
+Ajoute des points : un nom et ses trois parts (des nombres ou des %). ¦ Přidej body: název a jeho tři podíly (čísla nebo %). ¦ Lägg till punkter: ett namn och dess tre delar (tal eller %). ¦ Tilføj punkter: et navn og dets tre dele (tal eller %).
+Part A ¦ Podíl A ¦ Del A ¦ Del A
+Part B ¦ Podíl B ¦ Del B ¦ Del B
+Part C ¦ Podíl C ¦ Del C ¦ Del C
+Diagramme ternaire : {n} ({a}, {b}, {c}). ¦ Trojúhelníkový diagram: {n} ({a}, {b}, {c}). ¦ Triangeldiagram: {n} ({a}, {b}, {c}). ¦ Trekantsdiagram: {n} ({a}, {b}, {c}).
+Agriculture ¦ Zemědělství ¦ Jordbruk ¦ Landbrug
+Artisanat et industrie ¦ Řemesla a průmysl ¦ Hantverk och industri ¦ Håndværk og industri
+Commerce et services ¦ Obchod a služby ¦ Handel och tjänster ¦ Handel og service
+Agriculture et forêt ¦ Zemědělství a lesnictví ¦ Jordbruk och skog ¦ Landbrug og skovbrug
+Artisanat ¦ Řemesla ¦ Hantverk ¦ Håndværk
+Industrie, mines ¦ Průmysl, doly ¦ Industri, gruvor ¦ Industri, miner
+Transports et mer ¦ Doprava a moře ¦ Transport och sjöfart ¦ Transport og søfart
+Services, domestiques ¦ Služby, čeleď ¦ Tjänster, tjänstefolk ¦ Service, tjenestefolk
+Armée et police ¦ Armáda a policie ¦ Armé och polis ¦ Hær og politi
+Clergé ¦ Duchovenstvo ¦ Prästerskap ¦ Gejstlighed
+Professions libérales, école, administration ¦ Svobodná povolání, škola, správa ¦ Fria yrken, skola, förvaltning ¦ Liberale erhverv, skole, forvaltning
+Rentiers, rangs et statuts ¦ Rentiéři, stavy a postavení ¦ Rentierer, stånd och titlar ¦ Rentenydere, stande og titler
+Au foyer, sans profession ¦ V domácnosti, bez povolání ¦ Hemma, utan yrke ¦ Hjemme, uden erhverv
+Autre métier ¦ Jiné povolání ¦ Annat yrke ¦ Andet erhverv
+Tous les autres métiers ¦ Všechna ostatní povolání ¦ Alla andra yrken ¦ Alle andre erhverv
+🔺 Les métiers de ma base ¦ 🔺 Povolání v mé databázi ¦ 🔺 Yrkena i min databas ¦ 🔺 Erhvervene i min database
+Les métiers (fiche, événements « Profession », recensements) rangés en grands secteurs ; un point par commune de naissance, par décennie ou par famille, placé selon ses trois parts. ¦ Povolání (karta, události „Povolání“, sčítání) seřazená do velkých odvětví; jeden bod na rodnou obec, desetiletí nebo rodinu, umístěný podle tří podílů. ¦ Yrkena (kort, händelser ”Yrke”, folkräkningar) sorterade i stora sektorer; en punkt per födelseort, årtionde eller familj, placerad efter sina tre delar. ¦ Erhvervene (kort, begivenheder “Erhverv”, folketællinger) ordnet i store sektorer; ét punkt pr. fødested, årti eller familie, placeret efter sine tre dele.
+Un point par ¦ Jeden bod na ¦ En punkt per ¦ Ét punkt pr.
+Décennie de naissance (reliées dans le temps) ¦ Desetiletí narození (spojená v čase) ¦ Födelseårtionde (förbundna i tiden) ¦ Fødselsårti (forbundet i tid)
+Combien de points au plus ¦ Kolik bodů nejvýše ¦ Hur många punkter högst ¦ Hvor mange punkter højst
+Part du haut ¦ Horní podíl ¦ Övre delen ¦ Øverste del
+Part de gauche ¦ Levý podíl ¦ Vänstra delen ¦ Venstre del
+Part de droite ¦ Pravý podíl ¦ Högra delen ¦ Højre del
+« Tous les autres métiers » ne peut servir qu’une fois. ¦ „Všechna ostatní povolání“ lze použít jen jednou. ¦ ”Alla andra yrken” kan bara användas en gång. ¦ “Alle andre erhverv” kan kun bruges én gang.
+Décennies ¦ Desetiletí ¦ Årtionden ¦ Årtier
+Aucun métier connu pour ces personnes. ¦ Žádné známé povolání těchto osob. ¦ Inget känt yrke för dessa personer. ¦ Intet kendt erhverv for disse personer.
+Les métiers de ma base, en trois parts ¦ Povolání v mé databázi ve třech podílech ¦ Yrkena i min databas, i tre delar ¦ Erhvervene i min database, i tre dele
+Les métiers de trois villages, siècle par siècle ¦ Povolání tří vesnic, století po století ¦ Yrkena i tre byar, sekel för sekel ¦ Erhvervene i tre landsbyer, århundrede for århundrede
+Diagramme ternaire (trois parts qui font 100 %) ¦ Trojúhelníkový diagram (tři podíly dávající 100 %) ¦ Triangeldiagram (tre delar som blir 100 %) ¦ Trekantsdiagram (tre dele, der giver 100 %)
+Parts ¦ Podíly ¦ Delar ¦ Dele
+Un triangle : chaque point a trois parts (par exemple agriculture, artisanat, commerce) ; plus il est près d’un coin, plus cette part est grande. ¦ Trojúhelník: každý bod má tři podíly (např. zemědělství, řemesla, obchod); čím blíž k rohu, tím větší ten podíl. ¦ En triangel: varje punkt har tre delar (till exempel jordbruk, hantverk, handel); ju närmare ett hörn, desto större den delen. ¦ En trekant: hvert punkt har tre dele (for eksempel landbrug, håndværk, handel); jo tættere på et hjørne, jo større den del.
+Les points (trois parts chacun) ¦ Body (každý tři podíly) ¦ Punkterna (tre delar var) ¦ Punkterne (tre dele hver)
+Groupe (couleur, points reliés) ¦ Skupina (barva, spojené body) ¦ Grupp (färg, sammanbundna punkter) ¦ Gruppe (farve, forbundne punkter)
+Ordre (année…) ¦ Pořadí (rok…) ¦ Ordning (år …) ¦ Rækkefølge (år …)
+Nom de la part du haut ¦ Název horního podílu ¦ Namn på övre delen ¦ Navn på øverste del
+Nom de la part de gauche ¦ Název levého podílu ¦ Namn på vänstra delen ¦ Navn på venstre del
+Nom de la part de droite ¦ Název pravého podílu ¦ Namn på högra delen ¦ Navn på højre del
+Couleur du haut ¦ Barva nahoře ¦ Färg upptill ¦ Farve øverst
+Couleur de gauche ¦ Barva vlevo ¦ Färg till vänster ¦ Farve til venstre
+Couleur de droite ¦ Barva vpravo ¦ Färg till höger ¦ Farve til højre
+Tous les 10 % ¦ Po 10 % ¦ Var 10:e % ¦ Hver 10. %
+Tous les 20 % ¦ Po 20 % ¦ Var 20:e % ¦ Hver 20. %
+Sans grille ¦ Bez mřížky ¦ Utan rutnät ¦ Uden gitter
+Une par point ¦ Jedna na bod ¦ En per punkt ¦ Én pr. punkt
+Selon le total ¦ Podle součtu ¦ Efter totalen ¦ Efter totalen
+Relier les points d’un groupe dans l’ordre ¦ Spojit body skupiny v pořadí ¦ Binda ihop en grupps punkter i ordning ¦ Forbind en gruppes punkter i rækkefølge
+Noms des points ¦ Názvy bodů ¦ Punkternas namn ¦ Punkternes navne
+Ajoute des périodes : la date, le prix d’ouverture, de clôture, le plus bas et le plus haut. ¦ Přidej období: datum, otevírací, závěrečnou, nejnižší a nejvyšší cenu. ¦ Lägg till perioder: datum, öppnings-, stängnings-, lägsta och högsta pris. ¦ Tilføj perioder: dato, åbnings-, luknings-, laveste og højeste pris.
+ouverture ¦ otevření ¦ öppning ¦ åbning
+clôture ¦ závěr ¦ stängning ¦ lukning
+plus bas ¦ minimum ¦ lägsta ¦ laveste
+plus haut ¦ maximum ¦ högsta ¦ højeste
+Hausse (clôture plus haute) ¦ Růst (vyšší závěr) ¦ Uppgång (högre stängning) ¦ Stigning (højere lukning)
+Baisse (clôture plus basse) ¦ Pokles (nižší závěr) ¦ Nedgång (lägre stängning) ¦ Fald (lavere lukning)
+Moyenne mobile sur {n} périodes ¦ Klouzavý průměr za {n} období ¦ Glidande medelvärde över {n} perioder ¦ Glidende gennemsnit over {n} perioder
+Chandeliers : {n}, de {a} à {b} ({p} %). ¦ Svíčky: {n}, od {a} do {b} ({p} %). ¦ Ljus: {n}, från {a} till {b} ({p} %). ¦ Lys: {n}, fra {a} til {b} ({p} %).
+Prix du setier de blé au marché de {name} ¦ Cena korce pšenice na trhu v {name} ¦ Priset på en tunna vete på marknaden i {name} ¦ Prisen på en tønde hvede på markedet i {name}
+Disette ¦ Nedostatek ¦ Missväxt ¦ Knaphed
+Guerre des farines ¦ Moučná válka ¦ Mjölkriget ¦ Melkrigen
+Chandeliers (prix du blé, mercuriales) ¦ Svíčky (cena pšenice, tržní ceníky) ¦ Ljus (vetepris, marknadspriser) ¦ Lys (hvedepris, markedspriser)
+Pour chaque période : le prix au début (ouverture), à la fin (clôture), le plus bas et le plus haut. Vert si le prix monte, rouge s’il baisse ; les années de disette en bandes. ¦ Pro každé období: cena na začátku (otevření), na konci (závěr), nejnižší a nejvyšší. Zeleně, když roste, červeně, když klesá; roky nedostatku jako pruhy. ¦ För varje period: priset i början (öppning), i slutet (stängning), lägsta och högsta. Grönt om priset stiger, rött om det sjunker; missväxtår som band. ¦ For hver periode: prisen i starten (åbning), i slutningen (lukning), laveste og højeste. Grøn hvis prisen stiger, rød hvis den falder; knaphedsår som bånd.
+Les périodes (date, ouverture, clôture, plus bas, plus haut) ¦ Období (datum, otevření, závěr, minimum, maximum) ¦ Perioderna (datum, öppning, stängning, lägsta, högsta) ¦ Perioderne (dato, åbning, lukning, laveste, højeste)
+Date ou période ¦ Datum nebo období ¦ Datum eller period ¦ Dato eller periode
+Plus bas ¦ Minimum ¦ Lägsta ¦ Laveste
+Plus haut ¦ Maximum ¦ Högsta ¦ Højeste
+Les années à part (disette, guerre…) ¦ Zvláštní roky (nedostatek, válka…) ¦ Särskilda år (missväxt, krig …) ¦ Særlige år (knaphed, krig …)
+Autre unité (écrite) ¦ Jiná jednotka (napsaná) ¦ Annan enhet (skriven) ¦ Anden enhed (skrevet)
+livres ¦ livry ¦ livres ¦ livres
+sols ¦ soly ¦ sols ¦ sols
+deniers ¦ deniéry ¦ deniers ¦ deniers
+Couleur de la hausse ¦ Barva růstu ¦ Färg för uppgång ¦ Farve for stigning
+Couleur de la baisse ¦ Barva poklesu ¦ Färg för nedgång ¦ Farve for fald
+Hausse en creux (bougie vide) ¦ Růst dutý (prázdná svíčka) ¦ Uppgång ihålig (tomt ljus) ¦ Stigning hul (tomt lys)
+Moyenne mobile (périodes, 0 = non) ¦ Klouzavý průměr (období, 0 = ne) ¦ Glidande medelvärde (perioder, 0 = nej) ¦ Glidende gennemsnit (perioder, 0 = nej)
+Couleur de la moyenne ¦ Barva průměru ¦ Medelvärdets färg ¦ Gennemsnittets farve
+Années à part en bandes ¦ Zvláštní roky jako pruhy ¦ Särskilda år som band ¦ Særlige år som bånd
+Largeur des bougies ¦ Šířka svíček ¦ Ljusens bredd ¦ Lysenes bredde
+Âge au premier mariage ¦ Věk při prvním sňatku ¦ Ålder vid första giftermålet ¦ Alder ved første ægteskab
+Âge au premier enfant ¦ Věk při prvním dítěti ¦ Ålder vid första barnet ¦ Alder ved første barn
+± un écart-type ¦ ± jedna směrodatná odchylka ¦ ± en standardavvikelse ¦ ± én standardafvigelse
+intervalle à 95 % ¦ 95% interval ¦ 95 %-intervall ¦ 95 %-interval
+mes ancêtres ¦ moji předkové ¦ mina förfäder ¦ mine aner
+📏 Moyenne et marge : {x} ¦ 📏 Průměr a rozpětí: {x} ¦ 📏 Medelvärde och marginal: {x} ¦ 📏 Gennemsnit og margen: {x}
+Pas assez de personnes datées (au moins 3 par période). ¦ Málo datovaných osob (aspoň 3 na období). ¦ För få daterade personer (minst 3 per period). ¦ For få daterede personer (mindst 3 pr. periode).
+Basse ¦ Dolní ¦ Låg ¦ Lav
+Haute ¦ Horní ¦ Hög ¦ Høj
+{x} : moyenne et marge ¦ {x}: průměr a rozpětí ¦ {x}: medelvärde och marginal ¦ {x}: gennemsnit og margen
+Marge : un écart-type de part et d’autre, par quart de siècle de naissance ¦ Rozpětí: jedna směrodatná odchylka na obě strany, podle čtvrtstoletí narození ¦ Marginal: en standardavvikelse åt båda hållen, per kvartssekel av födelse ¦ Margen: én standardafvigelse til hver side, pr. kvartårhundrede for fødsel
+Marge : intervalle de confiance à 95 % de la moyenne, par quart de siècle de naissance ¦ Rozpětí: 95% interval spolehlivosti průměru, podle čtvrtstoletí narození ¦ Marginal: 95 % konfidensintervall för medelvärdet, per kvartssekel av födelse ¦ Margen: 95 %-konfidensinterval for gennemsnittet, pr. kvartårhundrede for fødsel
+Marge (basse – haute) ¦ Rozpětí (dolní – horní) ¦ Marginal (låg – hög) ¦ Margen (lav – høj)
+Marge (±) ¦ Rozpětí (±) ¦ Marginal (±) ¦ Margen (±)
+Fourchette (marge autour de la courbe) ¦ Rozpětí (pás kolem křivky) ¦ Spann (marginal runt kurvan) ¦ Spænd (margen omkring kurven)
+Deux colonnes : basse et haute ¦ Dva sloupce: dolní a horní ¦ Två kolumner: låg och hög ¦ To kolonner: lav og høj
+Une colonne ± écart ¦ Jeden sloupec ± odchylka ¦ En kolumn ± avvikelse ¦ Én kolonne ± afvigelse
+Colonne basse (n°) ¦ Dolní sloupec (č.) ¦ Låg kolumn (nr) ¦ Lav kolonne (nr.)
+Colonne haute (n°) ¦ Horní sloupec (č.) ¦ Hög kolumn (nr) ¦ Høj kolonne (nr.)
+Colonne de l’écart (n°) ¦ Sloupec odchylky (č.) ¦ Avvikelsens kolumn (nr) ¦ Afvigelsens kolonne (nr.)
+Autour de la colonne (n°) ¦ Kolem sloupce (č.) ¦ Runt kolumn (nr) ¦ Omkring kolonne (nr.)
+Opacité de la marge ¦ Krytí rozpětí ¦ Marginalens opacitet ¦ Margenens opacitet
+Couleur de la marge ¦ Barva rozpětí ¦ Marginalens färg ¦ Margenens farve
+Axe : minimum ¦ Osa: minimum ¦ Axel: minimum ¦ Akse: minimum
+Axe : maximum ¦ Osa: maximum ¦ Axel: maximum ¦ Akse: maksimum
+(axe de droite) ¦ (pravá osa) ¦ (högra axeln) ¦ (højre akse)
+Clôture ¦ Závěr ¦ Stängning ¦ Lukning
+{name} : de {a} à {b}, le plus en {peak} ({v}) ¦ {name}: od {a} do {b}, nejvíc v {peak} ({v}) ¦ {name}: från {a} till {b}, högst {peak} ({v}) ¦ {name}: fra {a} til {b}, højest i {peak} ({v})
+Le plus bas ¦ Nejníž ¦ Lägst ¦ Lavest
+Le plus haut ¦ Nejvýš ¦ Högst ¦ Højest
+Négatif (replié) ¦ Záporné (přeložené) ¦ Negativt (vikt) ¦ Negativ (foldet)
+Graphique en horizon : {s} séries sur {n} périodes. ¦ Horizontový graf: {s} řad za {n} období. ¦ Horisontdiagram: {s} serier över {n} perioder. ¦ Horisontdiagram: {s} serier over {n} perioder.
+Horizon (bandes repliées) ¦ Horizont (přeložené pruhy) ¦ Horisont (vikta band) ¦ Horisont (foldede bånd)
+Collines ¦ Kopce ¦ Kullar ¦ Bakker
+Nombre de couches ¦ Počet vrstev ¦ Antal lager ¦ Antal lag
+Teinte des négatifs ¦ Odstín záporných ¦ Ton för negativa ¦ Farvetone for negative
+Chevauchement ¦ Překrytí ¦ Överlappning ¦ Overlap
+Courbes douces ¦ Hladké křivky ¦ Mjuka kurvor ¦ Bløde kurver
+Trait blanc autour ¦ Bílý obrys ¦ Vit kontur ¦ Hvid kontur
+Arbre de regroupement à gauche (dendrogramme) ¦ Shlukovací strom vlevo (dendrogram) ¦ Klusterträd till vänster (dendrogram) ¦ Klyngetræ til venstre (dendrogram)
+Groupes de couleur ¦ Barevné skupiny ¦ Färggrupper ¦ Farvegrupper
+Les branches de l’arbre ¦ Větve stromu ¦ Trädets grenar ¦ Træets grene
+Cacher les noms des correspondances ¦ Skrýt jména shod ¦ Dölj matchningarnas namn ¦ Skjul matchenes navne
+Durée des générations ¦ Délka generací ¦ Generationernas längd ¦ Generationernes længde
+Durée des générations — {name} ¦ Délka generací — {name} ¦ Generationernas längd — {name} ¦ Generationernes længde — {name}
+Lignée paternelle : une génération = {n} ans en moyenne ¦ Otcovská linie: jedna generace = průměrně {n} let ¦ Fädernet: en generation = i snitt {n} år ¦ Fædrenelinjen: én generation = i snit {n} år
+Lignée maternelle : une génération = {n} ans en moyenne ¦ Mateřská linie: jedna generace = průměrně {n} let ¦ Mödernet: en generation = i snitt {n} år ¦ Mødrenelinjen: én generation = i snit {n} år
+moyenne {n} ans ¦ průměr {n} let ¦ medel {n} år ¦ gennemsnit {n} år
+Toutes les naissances du groupe ¦ Všechna narození ve skupině ¦ Alla födslar i gruppen ¦ Alle fødsler i gruppen
+Seulement la lignée paternelle directe (père du père…) ¦ Jen přímá otcovská linie (otec otce…) ¦ Bara den raka fäderneslinjen (far till far …) ¦ Kun den direkte fædrenelinje (far til far …)
+Seulement la lignée maternelle directe (mère de la mère…) ¦ Jen přímá mateřská linie (matka matky…) ¦ Bara den raka möderneslinjen (mor till mor …) ¦ Kun den direkte mødrenelinje (mor til mor …)
+Les deux lignées directes ¦ Obě přímé linie ¦ Båda raka linjerna ¦ Begge direkte linjer
+La personne dont on suit les lignées ¦ Osoba, jejíž linie sledujeme ¦ Personen vars linjer följs ¦ Personen, hvis linjer følges
+Aucune génération datée dans cette lignée (il faut la naissance de l’enfant et celle du parent). ¦ V této linii není datovaná generace (je třeba narození dítěte i rodiče). ¦ Ingen daterad generation i den här linjen (barnets och förälderns födslar behövs). ¦ Ingen dateret generation i denne linje (barnets og forælderens fødsler kræves).
+Génération (lignée) ¦ Generace (linie) ¦ Generation (linje) ¦ Generation (linje)
+Paternelle ¦ Otcovská ¦ Fädernet ¦ Fædrene
+Maternelle ¦ Mateřská ¦ Mödernet ¦ Mødrene
+Relier les points d’une lignée ¦ Spojit body linie ¦ Binda ihop en linjes punkter ¦ Forbind en linjes punkter
+Ligne de repère ¦ Referenční čára ¦ Referenslinje ¦ Referencelinje
+Les générations (lignées) ¦ Generace (linie) ¦ Generationerna (linjer) ¦ Generationerne (linjer)
+Pas attendu ¦ Neočekává se ¦ Förväntas inte ¦ Forventes ikke
+Manquant ¦ Chybí ¦ Saknas ¦ Mangler
+Ajoute des ancêtres : le numéro Sosa, le nom et, pour chaque acte, sourcé, sans source ou manquant. ¦ Přidej předky: číslo Sosa, jméno a u každého záznamu se zdrojem, bez zdroje nebo chybí. ¦ Lägg till förfäder: Sosanumret, namnet och för varje akt: med källa, utan källa eller saknas. ¦ Tilføj aner: Sosa-nummeret, navnet og for hver akt: med kilde, uden kilde eller mangler.
+Une ligne par ancêtre ¦ Jeden řádek na předka ¦ En rad per förfader ¦ Én række pr. ane
+Une ligne par ancêtre (+ recensements, notaire, militaire) ¦ Jeden řádek na předka (+ sčítání, notář, vojsko) ¦ En rad per förfader (+ folkräkningar, notarie, militär) ¦ Én række pr. ane (+ folketællinger, notar, militær)
+Fiches militaires ¦ Vojenské karty ¦ Militärkort ¦ Militærkort
+Colonnes en plus ¦ Sloupce navíc ¦ Extra kolumner ¦ Ekstra kolonner
+Recensement, notaire, militaire ¦ Sčítání, notář, vojsko ¦ Folkräkning, notarie, militär ¦ Folketælling, notar, militær
+Recensement seulement ¦ Jen sčítání ¦ Bara folkräkning ¦ Kun folketælling
+Les trous d’abord ¦ Nejdřív mezery ¦ Luckorna först ¦ Hullerne først
+Par numéro Sosa ¦ Podle čísla Sosa ¦ Efter Sosanummer ¦ Efter Sosa-nummer
+Ancêtres au plus ¦ Předků nejvýše ¦ Förfäder högst ¦ Aner højst
+Axe ¦ Osa ¦ Axel ¦ Akse
+Ce qu’on suit ¦ Co sledujeme ¦ Vad som följs ¦ Hvad der følges
+L’état civil ¦ Rodinný stav ¦ Civilståndet ¦ Civilstanden
+L’état civil (célibataire, marié, veuf…) : trajectoires de vie ¦ Rodinný stav (svobodný, ženatý, vdovec…): životní dráhy ¦ Civilstånd (ogift, gift, änka…): livsbanor ¦ Civilstand (ugift, gift, enke…): livsforløb
+La commune ¦ Obec ¦ Kommunen ¦ Kommunen
+Les lieux de vie ¦ Místa života ¦ Bostadsorterna ¦ Bopælene
+Un groupe de personnes (critères) ¦ Skupina osob (kritéria) ¦ En grupp personer (kriterier) ¦ En gruppe personer (kriterier)
+Trajectoires de vie ¦ Životní dráhy ¦ Livsbanor ¦ Livsforløb
+Trajectoires de vie de {n}. ¦ Životní dráhy: {n}. ¦ Livsbanor för {n}. ¦ Livsforløb for {n}.
+Métiers au fil de la vie de {n}. ¦ Povolání v průběhu života: {n}. ¦ Yrken genom livet för {n}. ¦ Erhverv gennem livet for {n}.
+Les métiers au fil de la vie ¦ Povolání v průběhu života ¦ Yrkena genom livet ¦ Erhvervene gennem livet
+Les mêmes personnes à plusieurs âges (20, 40, 60 ans…) ¦ Tytéž osoby v několika věcích (20, 40, 60 let…) ¦ Samma personer vid flera åldrar (20, 40, 60 …) ¦ De samme personer i flere aldre (20, 40, 60 …)
+Âges des colonnes ¦ Věk ve sloupcích ¦ Kolumnernas åldrar ¦ Kolonnernes aldre
+{a} ans ¦ {a} let ¦ {a} år ¦ {a} år
+À {n} ans ¦ Ve {n} letech ¦ Vid {n} år ¦ Som {n}-årig
+L’état civil des mêmes personnes à {a} ans ¦ Rodinný stav týchž osob ve {a} letech ¦ Samma personers civilstånd vid {a} år ¦ De samme personers civilstand som {a}-årige
+Où vivaient les mêmes personnes à {a} ans ¦ Kde žily tytéž osoby ve {a} letech ¦ Var samma personer bodde vid {a} år ¦ Hvor de samme personer boede som {a}-årige
+Le métier des mêmes personnes à {a} ans ¦ Povolání týchž osob ve {a} letech ¦ Samma personers yrke vid {a} år ¦ De samme personers erhverv som {a}-årige
+Le même qu’à l’âge d’avant — {list} ¦ Stejné jako v předchozím věku — {list} ¦ Samma som vid åldern före — {list} ¦ Det samme som i alderen før — {list}
+Les mêmes personnes à {n} âges : {l}. ¦ Tytéž osoby v {n} věcích: {l}. ¦ Samma personer vid {n} åldrar: {l}. ¦ De samme personer i {n} aldre: {l}.
+En % de la colonne (au lieu des nombres) ¦ V % sloupce (místo čísel) ¦ I % av kolumnen (i stället för tal) ¦ I % af kolonnen (i stedet for tal)
+État civil (trajectoires de vie) ¦ Rodinný stav (životní dráhy) ¦ Civilstånd (livsbanor) ¦ Civilstand (livsforløb)
+Naissance (pour l’axe des âges) ¦ Narození (pro osu věku) ¦ Födelse (för åldersaxeln) ¦ Fødsel (til aldersaksen)
+Début (année ou âge, vide = auto) ¦ Začátek (rok nebo věk, prázdné = auto) ¦ Början (år eller ålder, tomt = auto) ¦ Start (år eller alder, tom = auto)
+Fin (année ou âge, vide = auto) ¦ Konec (rok nebo věk, prázdné = auto) ¦ Slut (år eller ålder, tomt = auto) ¦ Slut (år eller alder, tom = auto)
+Par durée de vie ¦ Podle délky života ¦ Efter livslängd ¦ Efter levetid
+Par état à 50 ans ¦ Podle stavu v 50 letech ¦ Efter stånd vid 50 år ¦ Efter stand som 50-årig
+âge (années) ¦ věk (roky) ¦ ålder (år) ¦ alder (år)
+Vérifie le groupe de personnes et la période. ¦ Zkontroluj skupinu osob a období. ¦ Kontrollera persongruppen och perioden. ¦ Kontrollér persongruppen og perioden.
+{n} pris dans ta base. ¦ {n} z tvé databáze. ¦ {n} hämtade från din databas. ¦ {n} hentet fra din database.
+{n} prises dans ta base. ¦ {n} z tvé databáze. ¦ {n} hämtade från din databas. ¦ {n} hentet fra din database.

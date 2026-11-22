@@ -178,10 +178,12 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
                     const big = ws.querySelector('.ui-row button').getBoundingClientRect(), tiny = document.getElementById('tiny');
                     return { ms: performance.now() - t0, big: [Math.round(big.width), Math.round(big.height)], tiny: tiny.classList.contains('ia-tool'), tinyH: Math.round(tiny.getBoundingClientRect().height) };
                 });
-                // f. 390 px : « ⋯ Plus » s'ouvre dans l'écran
+                // f. 390 px : les commandes sorties de l'ancien « Plus ▾ » (Ce que l'app a trouvé, Copier, image améliorée) restent dans l'écran
                 await p.setViewportSize({ width: 390, height: 844 });
                 await p.evaluate(() => window.LCNDA_EXT.openActTranscriber({ mediaId: 1, filename: 'acte.png', title: 'T' })); await p.waitForTimeout(1200);
-                out.more390 = await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg .h-tx-more'); d.open = true; const r = d.querySelector(':scope > div').getBoundingClientRect(); return [Math.round(r.left), Math.round(r.right)]; });
+                // « image améliorée » est dans le menu « ✨ Lire ▾ » (vague 1) : on l'ouvre, l'interrupteur compte avec les autres
+                await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="readmenu"]').click()); await p.waitForTimeout(200);
+                out.more390 = await p.evaluate(() => { const els = [...document.querySelectorAll('dialog.h-tx-dlg .h-tx-extra > *'), document.querySelector('dialog.h-tx-dlg .h-tx-useenh')].filter(Boolean); if (els.length < 3 || els.some(e => !e.getBoundingClientRect().width)) return [-1, 9999]; const rs = els.map(e => e.getBoundingClientRect()); return [Math.round(Math.min(...rs.map(r => r.left))), Math.round(Math.max(...rs.map(r => r.right)))]; });
                 out.errs = errs;
             } finally { await browser.close(); }
         }
@@ -228,7 +230,7 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
         ['navigateur : 3 000 petits boutons transformés vite, 29 px dans une liste, taille « outil » dans une barre serrée', () => {
             assert.ok(out.harmony.ms < 5000, `${Math.round(out.harmony.ms)} ms`); assert.deepEqual(out.harmony.big, [29, 29]); assert.equal(out.harmony.tiny, true); assert.equal(out.harmony.tinyH, 22);
         }],
-        ['navigateur : à 390 px, le menu « ⋯ Plus » reste dans l’écran', () => assert.ok(out.more390[0] >= 0 && out.more390[1] <= 390, String(out.more390))],
+        ['navigateur : à 390 px, « Ce que l’app a trouvé », « Copier le texte » et « image améliorée » restent dans l’écran', () => assert.ok(out.more390[0] >= 0 && out.more390[1] <= 390, String(out.more390))],
         ['navigateur : aucune erreur JS', () => assert.deepEqual(out.errs, [])],
     );
     let failed = 0;

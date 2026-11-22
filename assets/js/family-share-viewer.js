@@ -37,6 +37,42 @@
     function parentsOf(p) { var f = (p.par || []).map(function (k) { return fams[k]; }).filter(Boolean)[0]; return f ? [byI[f.a], byI[f.b]] : [null, null]; }
     function go(hash) { if (location.hash === hash) render(); else location.hash = hash; }
 
+    /* ─── 🖊 relecture demandée (lib/plus_famille.php) : « d'accord / faux » et un mot sur chaque fait, gardés dans ce navigateur ─── */
+    var RV = D.review || null, RKEY = RV ? 'lcnda-relecture-' + RV.t : '', ans = {}, from = '';
+    function store() { try { return window.localStorage; } catch (e) { return null; } }
+    if (RV) { try { var s0 = JSON.parse((store() && store().getItem(RKEY)) || 'null'); if (s0 && typeof s0 === 'object') { ans = s0.a || {}; from = String(s0.from || '').slice(0, 120); } } catch (e) {} }
+    function keep() { try { var s = store(); if (s) s.setItem(RKEY, JSON.stringify({a: ans, from: from})); } catch (e) {} }
+    function nAns() { return Object.keys(ans).filter(function (k) { return ans[k] && (ans[k].v || ans[k].c); }).length; }
+    function reviewBox(e) {
+        if (!RV || !e.r) return null;
+        var a = ans[e.r] || {}, note = el('textarea', {class: 'fs-rv-c', rows: 2, maxlength: 4000, placeholder: 'Un mot ? (ce que tu sais, d’où tu le sais)', 'aria-label': 'Ton commentaire sur ce fait'});
+        note.value = a.c || ''; note.hidden = a.v !== 'wrong' && !a.c;
+        var set = function (v) { var cur = ans[e.r] || {}; cur.v = cur.v === v ? '' : v; ans[e.r] = cur; keep(); paint(); if (cur.v === 'wrong') { note.hidden = false; note.focus(); } counter(); };
+        var ok = el('button', {type: 'button', class: 'fs-rv-b is-ok', onclick: function () { set('ok'); }, text: '✓ D’accord'});
+        var no = el('button', {type: 'button', class: 'fs-rv-b is-no', onclick: function () { set('wrong'); }, text: '✗ Je pense que c’est faux'});
+        var talk = el('button', {type: 'button', class: 'fs-rv-b', title: 'Ajouter un mot', onclick: function () { note.hidden = false; note.focus(); }, text: '💬'});
+        note.addEventListener('input', function () { var cur = ans[e.r] || {}; cur.c = note.value.slice(0, 4000); ans[e.r] = cur; keep(); counter(); });
+        function paint() { var v = (ans[e.r] || {}).v; ok.setAttribute('aria-pressed', v === 'ok' ? 'true' : 'false'); no.setAttribute('aria-pressed', v === 'wrong' ? 'true' : 'false'); }
+        paint();
+        return el('div', {class: 'fs-rv'}, [ok, no, talk, note]);
+    }
+    function counter() { var c = document.getElementById('fs-rv-n'); if (c) c.className = 'fs-muted'; if (c) c.textContent = nAns() ? plural(nAns(), 'remarque') + ' (gardées dans ce navigateur)' : 'Aucune remarque pour l’instant'; }
+    function sendBack() {
+        var list = Object.keys(ans).filter(function (k) { return ans[k] && (ans[k].v || ans[k].c); }).map(function (k) { return {r: k, v: ans[k].v || '', c: ans[k].c || ''}; });
+        if (!list.length) { var c = document.getElementById('fs-rv-n'); if (c) { c.textContent = 'Coche d’abord « D’accord » ou « Je pense que c’est faux » sur au moins un fait.'; c.className = 'fs-rv-warn'; } return; }
+        var d = new Date(), iso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+        var blob = new Blob([JSON.stringify({format: 'lcnda-relecture', v: 1, token: RV.t, title: RV.title || D.title || '', from: from, date: iso, answers: list}, null, 1)], {type: 'application/json'});
+        var a = el('a', {href: URL.createObjectURL(blob), download: 'remarques-' + (fold(from || 'relecture').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'relecture') + '.json'});
+        document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 2000);
+    }
+    function reviewBar() {
+        if (!RV) return null;
+        var who = el('input', {type: 'text', maxlength: 120, placeholder: 'Ton prénom', 'aria-label': 'Ton prénom', value: from});
+        who.addEventListener('input', function () { from = who.value.trim(); keep(); });
+        return el('section', {class: 'fs-rv-bar', 'aria-label': 'Relecture'}, [el('p', {}, [el('b', {text: '🖊 Relecture demandée'}), ' — sur chaque fait, coche « ✓ D’accord » ou « ✗ Je pense que c’est faux », et ajoute un mot si tu veux. Puis renvoie tes remarques : un petit fichier .json à envoyer par courriel.']),
+            el('div', {class: 'fs-rv-row'}, [who, el('span', {id: 'fs-rv-n', class: 'fs-muted'}), el('button', {type: 'button', class: 'fs-btn', onclick: sendBack, text: '⤓ Renvoyer mes remarques'})])]);
+    }
+
     function avatar(p, size) {
         var m = p && p.ph !== undefined && media[p.ph] && !media[p.ph].gone ? media[p.ph] : null;
         var box = el('span', {class: 'fs-av fs-av-' + (p && p.s || 'u') + (size ? ' is-' + size : ''), 'aria-hidden': 'true'});
@@ -61,7 +97,9 @@
             el('a', {href: '#arbre/' + (D.root || (people[0] && people[0].i) || ''), class: current === 'tree' ? 'is-active' : ''}, ['🌳 L’arbre'])]);
         app.appendChild(el('header', {class: 'fs-top'}, [el('div', {class: 'fs-brand'}, [el('h1', {text: D.title || 'L’arbre de la famille'}),
             el('p', {text: 'Copie en lecture seule du ' + frDate(D.made) + ' · ' + plural(people.length, 'personne')})]), el('div', {class: 'fs-search'}, [search]), nav]));
+        var bar = reviewBar(); if (bar) app.appendChild(bar);
         app.appendChild(el('main', {class: 'fs-main', id: 'fs-main'}, [main]));
+        counter();
         app.appendChild(el('footer', {class: 'fs-foot'}, [el('p', {text: 'Cette copie ne peut pas être modifiée. ' + (D.living === 'first' ? 'Les personnes vivantes n’y apparaissent que par leur prénom' : 'Les personnes vivantes n’y figurent pas') + ', ni les fiches confidentielles. Fait avec LCNDA — Le Carnet numérique des ancêtres.'})]));
         return search;
     }
@@ -116,7 +154,7 @@
             p.lv ? null : el('a', {class: 'fs-btn', href: '#arbre/' + p.i, text: '🌳 Ses ancêtres'})])]);
         var kids = [head];
         if (!p.lv && (p.ev || []).length) kids.push(section('📅 Sa vie', [el('ul', {class: 'fs-events'}, p.ev.map(function (e) {
-            return el('li', {}, [el('b', {text: e.t}), e.d ? el('span', {text: ' ' + e.d}) : null, e.p ? el('span', {class: 'fs-muted', text: ' · ' + e.p}) : null, e.x ? el('p', {class: 'fs-note', text: e.x}) : null]);
+            return el('li', {}, [el('b', {text: e.t}), e.d ? el('span', {text: ' ' + e.d}) : null, e.p ? el('span', {class: 'fs-muted', text: ' · ' + e.p}) : null, e.x ? el('p', {class: 'fs-note', text: e.x}) : null, reviewBox(e)]);
         }))]));
         var par = parentsOf(p);
         if (par[0] || par[1]) kids.push(section('👪 Ses parents', [el('div', {class: 'fs-people'}, [par[0] ? personLink(par[0], 'père') : null, par[1] ? personLink(par[1], 'mère') : null])]));
@@ -126,6 +164,7 @@
             var ev = (f.ev || []).map(function (e) { return e.t + (e.d ? ' ' + e.d : '') + (e.p ? ' · ' + e.p : ''); }).join(' ; ');
             var children = (f.c || []).map(function (c) { return byI[c]; }).filter(Boolean);
             kids.push(section(other ? '💍 Avec ' + name(other) : '👶 Ses enfants', [other ? el('div', {class: 'fs-people'}, [personLink(other, ev)]) : null,
+                RV && (f.ev || []).some(function (e) { return e.r; }) ? el('ul', {class: 'fs-events'}, f.ev.filter(function (e) { return e.r; }).map(function (e) { return el('li', {}, [el('b', {text: e.t}), e.d ? el('span', {text: ' ' + e.d}) : null, e.p ? el('span', {class: 'fs-muted', text: ' · ' + e.p}) : null, reviewBox(e)]); })) : null,
                 children.length ? el('h3', {text: plural(children.length, 'enfant')}) : null, children.length ? el('div', {class: 'fs-people'}, children.map(function (c) { return personLink(c); })) : null]));
         });
         var mine = (p.md || []).map(function (k) { return media[k]; }).filter(Boolean);

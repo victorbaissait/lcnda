@@ -92,10 +92,10 @@
     }
     /** la fenêtre « 🧭 Distances et temps de trajet » : {from, to} = lieux {id, title, lat, lon}, year, person = id */
     function openTravel(o = {}) {
-        const tab0 = o.person ? 'life' : (lsGet('lcnda-trajets-onglet', 'two') === 'life' ? 'life' : 'two');
+        const tab0 = o.person ? 'life' : o.day ? 'day' : (['life', 'day'].includes(lsGet('lcnda-trajets-onglet', 'two')) ? lsGet('lcnda-trajets-onglet', 'two') : 'two');
         const y0 = isF(Number(o.year)) && o.year ? Number(o.year) : '';
         const body = `<div class="cpo-travel" data-cpo-travel>
-            <div class="segmented" role="tablist"><button type="button" role="tab" data-cpo-tab="two" class="${tab0 === 'two' ? 'is-active' : ''}">📍 Entre deux lieux</button><button type="button" role="tab" data-cpo-tab="life" class="${tab0 === 'life' ? 'is-active' : ''}">👤 Le long d’une vie</button></div>
+            <div class="segmented" role="tablist"><button type="button" role="tab" data-cpo-tab="two" class="${tab0 === 'two' ? 'is-active' : ''}">📍 Entre deux lieux</button><button type="button" role="tab" data-cpo-tab="life" class="${tab0 === 'life' ? 'is-active' : ''}">👤 Le long d’une vie</button><button type="button" role="tab" data-cpo-tab="day" class="${tab0 === 'day' ? 'is-active' : ''}">${esc(i18n('⭕ En une journée'))}</button></div>
             <div data-cpo-pane="two" ${tab0 === 'two' ? '' : 'hidden'}>
                 <div class="cpo-grid2"><div><span class="pk-lab">Départ</span>${P().pickerField({name: 'cp_from', kind: 'place', value: o.from || null, placeholder: i18n('Tulle, Brive…')})}</div>
                 <div><span class="pk-lab">Arrivée</span>${P().pickerField({name: 'cp_to', kind: 'place', value: o.to || null, placeholder: i18n('Paris…')})}</div></div>
@@ -106,6 +106,7 @@
                 <span class="pk-lab">Personne</span>${P().pickerField({name: 'cp_person', kind: 'person', value: o.person || null})}
                 <div data-cpo-life aria-live="polite"></div>
             </div>
+            <div data-cpo-pane="day" ${tab0 === 'day' ? '' : 'hidden'}>${dayFormHtml(o, y0)}<div data-cpo-day aria-live="polite"></div></div>
             <div data-cpo-setbox>${settingsHtml(y0 || yearNow())}</div></div>`;
         const dlg = ext.openDialog({eyebrow: 'CARTE', title: '🧭 Distances et temps de trajet', wide: true, submitLabel: 'Fermer', body, onSubmit: () => true});
         dlg.classList.add('cpo-travel-dlg');
@@ -132,15 +133,83 @@
             dlg.querySelectorAll('[data-cpo-tab]').forEach(b => b.classList.toggle('is-active', b === t));
             dlg.querySelectorAll('[data-cpo-pane]').forEach(p => { p.hidden = p.dataset.cpoPane !== t.dataset.cpoTab; });
             lsSet('lcnda-trajets-onglet', t.dataset.cpoTab);
-            if (t.dataset.cpoTab === 'life') drawLife(); else drawTwo();
+            if (t.dataset.cpoTab === 'life') drawLife(); else if (t.dataset.cpoTab === 'day') drawDay(dlg); else drawTwo();
         });
-        dlg.addEventListener('picker-change', e => { if (e.detail.name === 'cp_person') drawLife(); else drawTwo(); });
+        dlg.addEventListener('picker-change', e => { if (e.detail.name === 'cp_person') drawLife(); else if (e.detail.name === 'cp_day') drawDay(dlg); else drawTwo(); });
+        dlg.querySelector('[data-cpo-pane="day"]').addEventListener('change', e => { if (!e.target.closest('.pk')) drawDay(dlg); });
         $('[data-cpo-year]').addEventListener('input', () => { drawTwo(); });
-        bindSettings($('[data-cpo-setbox]'), () => { drawTwo(); if (!$('[data-cpo-pane="life"]').hidden) drawLife(); });
+        bindSettings($('[data-cpo-setbox]'), () => { drawTwo(); if (!$('[data-cpo-pane="life"]').hidden) drawLife(); if (!$('[data-cpo-pane="day"]').hidden) drawDay(dlg); });
         // les lieux prérempli par un numéro seulement : relus par le menu de choix, puis le calcul
         setTimeout(drawTwo, 50); setTimeout(drawTwo, 700);
         if (tab0 === 'life') drawLife();
+        if (tab0 === 'day') setTimeout(() => drawDay(dlg), 60);
         return dlg;
+    }
+    /* ── ⭕ Ce qu'on atteignait en une journée : des cercles autour d'un lieu (à pied, à cheval, en diligence…), les lieux de la famille dedans ── */
+    const DAY_COLORS = {pied: '#59a14f', cheval: '#f28e2b', diligence: '#4e79a7', train: '#b07aa1', riviere: '#76b7b2', mer: '#9c755f'};
+    const DAY_MODES = ['pied', 'cheval', 'diligence', 'train'];
+    function dayFormHtml(o, y0) {
+        const on = lsGet('lcnda-trajets-jour', {modes: ['pied', 'cheval', 'diligence'], days: 1, family: true});
+        return `<div class="cpo-grid2"><div><span class="pk-lab">${esc(i18n('Lieu de départ'))}</span>${P().pickerField({name: 'cp_day', kind: 'place', value: o.from || null, placeholder: i18n('Tulle, Brive…')})}</div>
+            <label class="cpo-year">${esc(i18n('Année'))} <input type="number" min="1000" max="2100" step="1" data-cpo-dyear value="${esc(y0 || 1820)}"></label></div>
+            <div class="cpo-day-opts">${DAY_MODES.map(m => { const M = C().modeOf(m); return `<label class="checkbox-line"><input type="checkbox" data-cpo-dmode="${m}" ${(on.modes || []).includes(m) ? 'checked' : ''}> ${M.icon} ${esc(i18n(M.name))}</label>`; }).join('')}
+            <label>${esc(i18n('Nombre de jours'))} <select data-cpo-ddays>${[1, 2, 3].map(d => `<option value="${d}" ${Number(on.days) === d ? 'selected' : ''}>${esc(d === 1 ? i18n('{n} jour', {n: d}) : i18n('{n} jours', {n: d}))}</option>`).join('')}</select></label>
+            <label class="checkbox-line"><input type="checkbox" data-cpo-dfam ${on.family !== false ? 'checked' : ''}> ${esc(i18n('Montrer les lieux de la famille'))}</label></div>`;
+    }
+    /** un cercle (km) autour d'un point, en degrés : [[lon, lat]…] (formule de la destination sur la sphère) */
+    function geoCircle(lat, lon, km, n = 96) {
+        const d = km / 6371.0088, la1 = lat * Math.PI / 180, lo1 = lon * Math.PI / 180, out = [];
+        for (let i = 0; i <= n; i++) { const b = i / n * 2 * Math.PI, la2 = Math.asin(Math.sin(la1) * Math.cos(d) + Math.cos(la1) * Math.sin(d) * Math.cos(b)), lo2 = lo1 + Math.atan2(Math.sin(b) * Math.sin(d) * Math.cos(la1), Math.cos(d) - Math.sin(la1) * Math.sin(la2)); out.push([lo2 * 180 / Math.PI, la2 * 180 / Math.PI]); }
+        return out;
+    }
+    /** les rayons : par moyen, ce qu'on fait à vol d'oiseau en N jours (distance par jour ÷ détour) */
+    function dayRings(year, modes, days, st = settings()) {
+        return modes.map(m => { const M = C().modeOf(m), sp = C().speedAt(m, year, st); if (!M || !sp) return null; const det = st.detour[M.route] || 1;
+            return {mode: m, icon: M.icon, name: M.name, kmDay: sp.kmDay, km: sp.kmDay * days / det, available: sp.available, color: DAY_COLORS[m] || '#4e79a7'}; }).filter(Boolean);
+    }
+    let famPlaces = null;
+    const familyPlaces = () => famPlaces ? Promise.resolve(famPlaces) : A().api('diagram_geo', {what: 'all'}).then(r => (famPlaces = (r.places || []).filter(p => isF(Number(p.lat)) && isF(Number(p.lon)) && p.lat !== null).map(p => ({name: String(p.name || ''), lat: Number(p.lat), lon: Number(p.lon), n: Number(p.n) || 0})))).catch(() => []);
+    /** le dessin : fond de carte (départements, pays), les cercles du plus grand au plus petit, le lieu, les lieux de la famille */
+    async function daySvg(center, rings, fam, w) {
+        const big = Math.max(...rings.map(r => r.km), 5), dLat = big / 111 * 1.15, dLon = dLat / Math.max(.2, Math.cos(center.lat * Math.PI / 180));
+        const view = [center.lon - dLon, center.lat - dLat, center.lon + dLon, center.lat + dLat];
+        const inFr = center.lat > 41 && center.lat < 51.5 && center.lon > -5.5 && center.lon < 10, baseId = inFr ? 'fr-departements' : 'monde-50m';
+        const [base, ctx] = await Promise.all([DC().load(baseId), DC().load('monde-50m')]);
+        const pr = DC().fitProj('laea', view, w, Math.min(560, w * 1.1), true), h = pr.h, uid = 'cpod' + Math.round(Math.random() * 1e6);
+        const B = DC().drawBase({o: {borderColor: '#cfcabe'}}, base, inFr ? ctx : null, pr, w, h, () => ({fill: DC().LAND, title: ''}), uid);
+        const path = pts => pts.map(([lo, la], i) => { const [x, y] = pr.p(lo, la); return `${i ? 'L' : 'M'}${r1(x)} ${r1(y)}`; }).join('') + 'Z';
+        let svg = `<svg viewBox="0 0 ${r1(w)} ${r1(h)}" width="100%" role="img" aria-label="${esc(i18n('Ce qu’on atteignait en une journée'))}" class="cpo-day-svg">${B.svg}<g clip-path="url(#${uid}c)">`;
+        [...rings].sort((a, b) => b.km - a.km).forEach(r => { svg += `<path d="${path(geoCircle(center.lat, center.lon, r.km))}" fill="${r.color}" fill-opacity=".14" stroke="${r.color}" stroke-width="2"${r.available ? '' : ' stroke-dasharray="5 4"'}><title>${esc(`${r.icon} ${i18n(r.name)} : ${kmT(r.km)}`)}</title></path>`; });
+        const inside = fam.map(p => ({...p, d: C().km(center, p)})).filter(p => p.d !== null && p.d <= big && p.d > .3).sort((a, b) => b.n - a.n);
+        const ringOf = p => [...rings].sort((a, b) => a.km - b.km).find(r => p.d <= r.km);
+        const placed = [];
+        inside.slice(0, 400).forEach((p, i) => { const [x, y] = pr.p(p.lon, p.lat), r = ringOf(p), c = r?.color || '#55606e';
+            svg += `<circle cx="${r1(x)}" cy="${r1(y)}" r="3.2" fill="${c}" stroke="#ffffff" stroke-width="1"><title>${esc(`${p.name} : ${kmT(p.d)}${r ? ' · ' + r.icon + ' ' + i18n(r.name) : ''}`)}</title></circle>`;
+            if (i < 14) { const tw = String(p.name).length * 6, box = [x + 5, y - 7, x + 5 + tw, y + 7]; if (!placed.some(b => !(box[2] < b[0] || box[0] > b[2] || box[3] < b[1] || box[1] > b[3])) && box[2] < w) { placed.push(box); svg += `<text x="${r1(x + 5)}" y="${r1(y)}" font-size="10.5" dominant-baseline="middle" fill="#1d1d1f" stroke="#ffffff" stroke-width="2.6" paint-order="stroke">${esc(p.name)}</text>`; } } });
+        const [cx, cy] = pr.p(center.lon, center.lat);
+        svg += `<circle cx="${r1(cx)}" cy="${r1(cy)}" r="5.5" fill="#1d1d1f" stroke="#ffffff" stroke-width="2"/><text x="${r1(cx + 8)}" y="${r1(cy - 8)}" font-size="12.5" font-weight="700" fill="#1d1d1f" stroke="#ffffff" stroke-width="3" paint-order="stroke">${esc(placeName(center))}</text>`;
+        svg += `</g><text x="${r1(w - 4)}" y="${r1(h - 4)}" font-size="9" text-anchor="end" fill="#555">${esc(DC().attrOf(base, inFr ? ctx : null))}</text></svg>`;
+        return {svg, inside, ringOf};
+    }
+    async function drawDay(dlg) {
+        const box = dlg.querySelector('[data-cpo-day]'); if (!box) return;
+        const it = pkItem(dlg.querySelector('[data-pk-opts*="cp_day"]')), year = Number(dlg.querySelector('[data-cpo-dyear]')?.value) || 1820;
+        const modes = [...dlg.querySelectorAll('[data-cpo-dmode]')].filter(x => x.checked).map(x => x.dataset.cpoDmode), days = Number(dlg.querySelector('[data-cpo-ddays]')?.value) || 1, fam = !!dlg.querySelector('[data-cpo-dfam]')?.checked;
+        lsSet('lcnda-trajets-jour', {modes, days, family: fam});
+        if (!it) { box.innerHTML = A().empty('Choisis le lieu de départ', {icon: '⭕'}); return; }
+        if (!isF(Number(it.lat)) || !isF(Number(it.lon)) || it.lat === null) { box.innerHTML = UI().notice('warn', esc(i18n('Ce lieu n’a pas de position sur la carte : place-le d’abord.'))); return; }
+        if (!modes.length) { box.innerHTML = A().empty('Coche au moins un moyen de voyager', {icon: '⭕'}); return; }
+        if (!DC()?.load) { box.innerHTML = UI().notice('warn', esc(i18n('Les fonds de carte ne sont pas chargés.'))); return; }
+        const tok = (box._tok = (box._tok || 0) + 1); box.innerHTML = UI().spinner ? UI().spinner(i18n('Je dessine les cercles…')) : '';
+        try {
+            const center = {lat: Number(it.lat), lon: Number(it.lon), title: it.title}, rings = dayRings(year, modes, days), places = fam ? await familyPlaces() : [];
+            const w = Math.max(300, Math.min(900, (box.clientWidth || dlg.clientWidth || 700) - 4)), D = await daySvg(center, rings, places, w);
+            if (tok !== box._tok) return;
+            const rows = rings.map(r => `<tr${r.available ? '' : ' class="is-off"'}><td><span aria-hidden="true" style="color:${r.color}">●</span> ${r.icon} ${esc(i18n(r.name))}${r.available ? '' : ' ' + (UI().badge ? UI().badge(i18n('pas encore'), 'grey') : esc(i18n('pas encore')))}</td><td>${esc(kmT(r.kmDay))}</td><td><b>${esc(kmT(r.km))}</b></td>${fam ? `<td>${D.inside.filter(p => p.d <= r.km).length}</td>` : ''}</tr>`).join('');
+            const phrase = i18n(days > 1 ? 'En {d} jours depuis {from}, en {year} : à vol d’oiseau, environ {list}.' : 'En une journée depuis {from}, en {year} : à vol d’oiseau, environ {list}.', {d: days, from: placeName(center), year: String(year), list: rings.filter(r => r.available).map(r => `${kmT(r.km)} ${i18n(C().modeOf(r.mode).label)}`).join(', ') || '—'});
+            box.innerHTML = `<p class="cpo-phrase">${esc(phrase)}</p>${D.svg}<div class="cpo-modes-wrap"><table class="data-table cpo-modes"><thead><tr><th>${esc(i18n('Moyen'))}</th><th>${esc(i18n('Par jour'))}</th><th>${esc(i18n('Rayon (vol d’oiseau)'))}</th>${fam ? `<th>${esc(i18n('Lieux de la famille'))}</th>` : ''}</tr></thead><tbody>${rows}</tbody></table></div>
+                <p class="ui-hint">${esc(i18n('Le rayon tient compte du détour de la route (réglage « Vitesses et sources »). Un trait pointillé : ce moyen n’existait pas encore cette année-là.'))}</p>`;
+        } catch (e) { if (tok === box._tok) box.innerHTML = UI().notice ? UI().notice('error', esc(e.message || String(e))) : esc(e.message || e); }
     }
     /** les étapes d'une vie (événements placés + voyages en mer) → HTML : liste des déplacements, phrase du plus long, total */
     function lifeLegs(detail) {
@@ -788,6 +857,6 @@
     });
     ext.mapDraw.push(({left, top, z, width, height}) => { L.last = {left, top, z, width, height}; redraw(); });
 
-    ext.cartesOutils = {openTravel, openPoster, openRelief, posterSvg, lifeLegs, STYLES, helpers: {viewFor, baseLayers, rasterize, jpegPdf, photoData, compassSvg}, // helpers : aussi pour 🗺 Mes cartes (heritage-cartes-perso.js)
+    ext.cartesOutils = {openTravel, openPoster, openRelief, posterSvg, lifeLegs, STYLES, dayRings, geoCircle, helpers: {viewFor, baseLayers, rasterize, jpegPdf, photoData, compassSvg}, // helpers : aussi pour 🗺 Mes cartes (heritage-cartes-perso.js)
         layers: {load: loadLayers, save: saveLayer, toggle, list: () => L.list, state: L, exportLayers, importLayers}};
 })();

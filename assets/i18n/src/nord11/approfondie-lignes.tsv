@@ -1,0 +1,17 @@
+fr ¦ vi ¦ id
+# ▤ La lecture approfondie, ligne par ligne : relier les lignes du texte à l’image (app-lignes-alignement.js, heritage-transcribe.js)
+Relier les lignes à l’image ¦ Nối các dòng với hình ảnh ¦ Hubungkan baris dengan gambar
+Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis ¦ Nối mỗi dòng của văn bản với dòng tương ứng trên hình ảnh (vùng màu, bấm dòng ↔ vùng): sau khi đọc chuyên sâu, hoặc trên văn bản đã có sẵn ¦ Hubungkan setiap baris teks dengan barisnya di gambar (area berwarna, klik baris ↔ area): setelah pembacaan mendalam, atau pada teks yang sudah kamu masukkan
+Relier les lignes à l’image (une zone par ligne, comme la lecture rapide) ¦ Nối các dòng với hình ảnh (mỗi dòng một vùng, như khi đọc nhanh) ¦ Hubungkan baris dengan gambar (satu area per baris, seperti pembacaan cepat)
+Découpage de la page en lignes… ¦ Đang chia trang thành các dòng… ¦ Membagi halaman menjadi baris…
+Découpage de la page en lignes (lecture rapide)… ¦ Đang chia trang thành các dòng (đọc nhanh)… ¦ Membagi halaman menjadi baris (pembacaan cepat)…
+Découpage simple de la page en lignes… ¦ Chia trang thành các dòng theo cách đơn giản… ¦ Pembagian sederhana halaman menjadi baris…
+Le découpage en lignes n’est pas chargé. ¦ Chưa tải phần chia dòng. ¦ Pembagian baris belum dimuat.
+Pas de ligne de texte à relier. ¦ Không có dòng văn bản nào để nối. ¦ Tidak ada baris teks untuk dihubungkan.
+Le texte a changé pendant le découpage : « ▤ Relier les lignes à l’image » pour recommencer. ¦ Văn bản đã thay đổi trong lúc chia: bấm “▤ Nối các dòng với hình ảnh” để làm lại. ¦ Teks berubah selama pembagian: “▤ Hubungkan baris dengan gambar” untuk mulai lagi.
+Ligne reliée sans certitude : vérifie sur l’image ¦ Dòng được nối nhưng chưa chắc chắn: kiểm tra trên hình ảnh ¦ Baris dihubungkan tanpa kepastian: periksa di gambar
+Lignes reliées à l’image : {x} ¦ Các dòng đã nối với hình ảnh: {x} ¦ Baris yang dihubungkan dengan gambar: {x}
+à vérifier (❔) : {n} ¦ cần kiểm tra (❔): {n} ¦ perlu diperiksa (❔): {n}
+sans zone : {n} ¦ không có vùng: {n} ¦ tanpa area: {n}
+d’après la lecture rapide ¦ theo lần đọc nhanh ¦ menurut pembacaan cepat
+d’après un découpage simple de l’image ¦ theo cách chia hình ảnh đơn giản ¦ menurut pembagian sederhana gambar

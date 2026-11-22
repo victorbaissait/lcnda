@@ -80,7 +80,7 @@
                 <label class="checkbox-line"><input type="radio" name="living" value="drop"> Retirés du fichier</label></fieldset>
                 <label class="checkbox-line"><input type="checkbox" name="include_notes" checked> Notes</label><label class="checkbox-line"><input type="checkbox" name="include_sources" checked> Sources</label>`,
             run: form => download('export_gedcom', {target: 'geneanet', gedcom_version: '5.5.1', share: '1', living: form.querySelector('[name=living]:checked').value, include_living: '1', include_media: '1',
-                include_notes: form.elements.include_notes.checked ? '1' : '0', include_sources: form.elements.include_sources.checked ? '1' : '0'}, {noun: 'fichier'})},
+                include_notes: form.elements.include_notes.checked ? '1' : '0', include_sources: form.elements.include_sources.checked ? '1' : '0', rel_skip: form.dataset.relSkip === '1' ? '1' : '0'}, {noun: 'fichier'})},
         gramps: {icon: '🌳', title: 'Vers Gramps', what: 'fichier .gramps',
             body: () => `<p>Un fichier <b>.gramps</b> (XML de Gramps 5, compressé) : personnes, familles, événements, lieux rangés par pays, région, département et commune avec leurs coordonnées, sources, citations, notes, étiquettes et témoins. Dans Gramps : « Famille → Importer… ». Les photos ne sont pas dans le fichier : seulement leur nom.</p>${shareBlock(false)}`,
             onOpen: bindShare, run: form => download('export_plus', {format: 'gramps', ...shareParams(form)}, {noun: 'personne', feminine: true})},
@@ -202,7 +202,8 @@
         if (key === 'ics') return openIcsExport();
         const f = FORMATS[key]; if (!f) return;
         ext.openDialog({eyebrow: 'EXPORTER · ' + f.what.toUpperCase(), title: `${f.icon} ${f.title}`, submitLabel: `⤓ Exporter`, body: f.body(), onOpen: f.onOpen,
-            onSubmit: async form => { try { const r = await f.run(form); if (r === false) return false; } catch (e) { toast(e.message, 'error'); return false; } }});
+            onSubmit: async form => { try { const g = ext.exportGate?.[key]; if (g && await g(form) === false) return false; // 🛡 « à revoir avant publication » (plus-famille.js)
+                const r = await f.run(form); if (r === false) return false; } catch (e) { toast(e.message, 'error'); return false; } }});
     }
     ext.openExportFormat = openFormat;
 

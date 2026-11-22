@@ -1,0 +1,192 @@
+fr ¦ el ¦ bg
+# Zone « diagrammes-lot-a » : tableau de quartiers, variantes d’un nom, boucles d’implexe, double éventail, nœud papillon, réseau « toute la famille », barres croisées, cercles de parenté, dates incertaines, pyramide d’un recensement, tableau périodique (heritage-diagram-lot-a.js, lib/diagram_lot_a.php)
+(deviné) ¦ (εικασία) ¦ (предположено)
+1 (enfants) ¦ 1 (παιδιά) ¦ 1 (деца)
+1 (parents) ¦ 1 (γονείς) ¦ 1 (родители)
+16 quartiers ¦ 16 προγονικά οικόσημα ¦ 16 родови герба
+20 ans ¦ 20 έτη ¦ 20 години
+32 quartiers ¦ 32 προγονικά οικόσημα ¦ 32 родови герба
+8 quartiers (arrière-grands-parents) ¦ 8 οικόσημα (προπάπποι) ¦ 8 герба (прадядовци)
+Actes comptés ¦ Πράξεις που μετρώνται ¦ Отчетени записи
+Ajoute les ancêtres (n° Sosa, nom) et leurs armoiries. ¦ Πρόσθεσε τους προγόνους (αρ. Sosa, όνομα) και τα οικόσημά τους. ¦ Добави предците (№ Соса, име) и гербовете им.
+Ajoute les formes du nom : la forme, ses années, le nombre d’actes. ¦ Πρόσθεσε τις μορφές του ονόματος: μορφή, έτη, αριθμός πράξεων. ¦ Добави формите на името: форма, години, брой записи.
+Ajoute les personnes recensées : âge, sexe, année. ¦ Πρόσθεσε τα πρόσωπα της απογραφής: ηλικία, φύλο, έτος. ¦ Добави преброените хора: възраст, пол, година.
+Ancêtre à trouver ¦ Πρόγονος προς εύρεση ¦ Предшественик за намиране
+Ancêtres pris dans ta base : {n} (armoiries : {k}). ¦ Πρόγονοι από τη βάση σου: {n} (οικόσημα: {k}). ¦ Предци от твоята база: {n} (гербове: {k}).
+Arbre des variantes (formes du nom : {n}). ¦ Δέντρο παραλλαγών (μορφές ονόματος: {n}). ¦ Дърво на вариантите (форми на името: {n}).
+Arbre des variantes d’un nom ¦ Δέντρο παραλλαγών ενός ονόματος ¦ Дърво на вариантите на име
+Armoiries (nom) ¦ Οικόσημο (όνομα) ¦ Герб (име)
+Au survol seulement ¦ Μόνο με το πέρασμα του ποντικιού ¦ Само при посочване
+Aucun ancêtre connu à cette génération. ¦ Κανένας γνωστός πρόγονος σε αυτή τη γενιά. ¦ Няма известни предци в това поколение.
+Aucun lien entre les couples de ce groupe. ¦ Καμία σύνδεση ανάμεσα στα ζευγάρια αυτής της ομάδας. ¦ Няма връзка между двойките в тази група.
+Aucun recensement dans ta base ¦ Καμία απογραφή στη βάση σου ¦ Няма преброявания в твоята база
+Aucun âge lisible dans ce recensement. ¦ Καμία αναγνώσιμη ηλικία σε αυτή την απογραφή. ¦ Няма четлива възраст в това преброяване.
+Aucune forme trouvée pour ce nom. ¦ Δεν βρέθηκε μορφή για αυτό το όνομα. ¦ Не е намерена форма за това име.
+Avec au moins une source ¦ Με τουλάχιστον μία πηγή ¦ С поне един източник
+Axe des années ¦ Άξονας ετών ¦ Ос на годините
+Barres croisées (UpSet) ¦ Διασταυρωμένες ράβδοι (UpSet) ¦ Кръстосани стълбове (UpSet)
+Barres croisées (ensembles : {n}, combinaisons montrées : {k}). ¦ Διασταυρωμένες ράβδοι (σύνολα: {n}, συνδυασμοί: {k}). ¦ Кръстосани стълбове (множества: {n}, показани комбинации: {k}).
+Blason absent ¦ Χωρίς οικόσημο ¦ Липсващ герб
+Blasonnement en note (en bas) ¦ Περιγραφή οικοσήμου σε σημείωση (κάτω) ¦ Описание на герба в бележка (долу)
+Boucles d’implexe (chemins : {n}), F = {f}. ¦ Βρόχοι γενεαλογικής σύμπτωσης (διαδρομές: {n}), F = {f}. ¦ Примки на импликса (пътища: {n}), F = {f}.
+Boucles plus lointaines pas dessinées : {n} (comptées dans F). ¦ Πιο μακρινοί βρόχοι δεν σχεδιάστηκαν: {n} (μετρούν στο F). ¦ По-далечни примки не са начертани: {n} (включени във F).
+Branche (paternelle, maternelle) ¦ Κλάδος (πατρικός, μητρικός) ¦ Клон (бащин, майчин)
+Branche maternelle ¦ Μητρικός κλάδος ¦ Майчин клон
+Branche paternelle ¦ Πατρικός κλάδος ¦ Бащин клон
+Branche « {name} » ¦ Κλάδος «{name}» ¦ Клон „{name}“
+Cases façon tableau périodique ¦ Κελιά σαν τον περιοδικό πίνακα ¦ Клетки като в периодичната таблица
+Cases vides pour les ancêtres à trouver ¦ Κενά κελιά για προγόνους προς εύρεση ¦ Празни клетки за ненамерените предци
+Ce qu’on dessine ¦ Τι σχεδιάζεται ¦ Какво се рисува
+Cercles (2 à 4 ensembles) ¦ Κύκλοι (2 έως 4 σύνολα) ¦ Кръгове (2 до 4 множества)
+Cercles de parenté autour de {name} (personnes : {n}). ¦ Κύκλοι συγγένειας γύρω από {name} (πρόσωπα: {n}). ¦ Кръгове на родство около {name} (души: {n}).
+Chemins trouvés : {n} (F = {f}). ¦ Διαδρομές που βρέθηκαν: {n} (F = {f}). ¦ Намерени пътища: {n} (F = {f}).
+Chercher les boucles ¦ Αναζήτηση βρόχων ¦ Търси примките
+Chiffre (couleur, éventails) ¦ Αριθμός (χρώμα, βεντάλιες) ¦ Число (цвят, ветрила)
+Choisis de 2 à 8 ensembles (là : {n}). ¦ Διάλεξε 2 έως 8 σύνολα (τώρα: {n}). ¦ Избери от 2 до 8 множества (сега: {n}).
+Choisis un groupe de noms ou écris un nom. ¦ Διάλεξε ομάδα ονομάτων ή γράψε ένα όνομα. ¦ Избери група имена или напиши име.
+Choisis un recensement (commune et année). ¦ Διάλεξε απογραφή (δήμος και έτος). ¦ Избери преброяване (община и година).
+Choisis une personne (« Depuis l’app ») ou écris les boucles à la main. ¦ Διάλεξε πρόσωπο («Από την εφαρμογή») ή γράψε τους βρόχους με το χέρι. ¦ Избери човек („От приложението“) или въведи примките на ръка.
+Coefficient aussi en fraction ¦ Συντελεστής και ως κλάσμα ¦ Коефициент и като дроб
+Coefficient de consanguinité de {name} : F = {f} ¦ Συντελεστής ενδογαμίας του/της {name}: F = {f} ¦ Коефициент на кръвно родство на {name}: F = {f}
+Combinaisons montrées (les plus grandes) ¦ Συνδυασμοί που εμφανίζονται (οι μεγαλύτεροι) ¦ Показани комбинации (най-големите)
+Combinaisons pas montrées : {n} ¦ Συνδυασμοί που δεν εμφανίζονται: {n} ¦ Непоказани комбинации: {n}
+Commune (titre) ¦ Δήμος (τίτλος) ¦ Община (заглавие)
+Comparer avec le recensement de ¦ Σύγκριση με την απογραφή του ¦ Сравни с преброяването от
+Consanguinité de l’ancêtre ¦ Ενδογαμία του προγόνου ¦ Кръвно родство на предшественика
+Couleur de l’écu (sans image) ¦ Χρώμα ασπίδας (χωρίς εικόνα) ¦ Цвят на щита (без изображение)
+Couleur des parts ¦ Χρώμα τμημάτων ¦ Цвят на частите
+Couleur du côté maternel ¦ Χρώμα μητρικής πλευράς ¦ Цвят на майчината страна
+Couleurs des branches ¦ Χρώματα κλάδων ¦ Цветове на клоновете
+Couple ¦ Ζευγάρι ¦ Двойка
+Critères de mauvaise forme. ¦ Λανθασμένα κριτήρια. ¦ Грешни критерии.
+Côté (paternel, maternel, branches) ¦ Πλευρά (πατρική, μητρική, κλάδοι) ¦ Страна (бащина, майчина, клонове)
+Côté maternel ¦ Μητρική πλευρά ¦ Майчина страна
+Côté paternel ¦ Πατρική πλευρά ¦ Бащина страна
+Date incertaine (fourchette) ¦ Αβέβαιη ημερομηνία (εύρος) ¦ Несигурна дата (интервал)
+Date inconnue ¦ Άγνωστη ημερομηνία ¦ Неизвестна дата
+Dates sous le nom ¦ Ημερομηνίες κάτω από το όνομα ¦ Дати под името
+De la famille ¦ Από την οικογένεια ¦ От семейството
+De la famille (oui) ¦ Από την οικογένεια (ναι) ¦ От семейството (да)
+De la mère vers l’ancêtre ¦ Από τη μητέρα στον πρόγονο ¦ От майката до предшественика
+Degrés montrés (jusqu’à) ¦ Βαθμοί που εμφανίζονται (έως) ¦ Показани степени (до)
+Dessin de la fourchette ¦ Σχέδιο εύρους ¦ Рисуване на интервала
+Deux éventails ¦ Δύο βεντάλιες ¦ Две ветрила
+Deviner d’où vient chaque forme (date et ressemblance) ¦ Εικασία προέλευσης κάθε μορφής (ημερομηνία και ομοιότητα) ¦ Отгатвай произхода на всяка форма (дата и сходство)
+Diagramme de Venn (2 à 8 ensembles) ¦ Διάγραμμα Venn (2 έως 8 σύνολα) ¦ Диаграма на Вен (2 до 8 множества)
+Diagramme de Venn : {names}. ¦ Διάγραμμα Venn: {names}. ¦ Диаграма на Вен: {names}.
+Double éventail (ascendants : {up}, descendants : {down}). ¦ Διπλή βεντάλια (πρόγονοι: {up}, απόγονοι: {down}). ¦ Двойно ветрило (предци: {up}, потомци: {down}).
+Du père vers l’ancêtre ¦ Από τον πατέρα στον πρόγονο ¦ От бащата до предшественика
+Décédé ou inconnu ¦ Απεβίωσε ή άγνωστο ¦ Починал или неизвестно
+En accordéon (branches qu’on plie) ¦ Ακορντεόν (κλάδοι που διπλώνουν) ¦ Акордеон (сгъваеми клонове)
+En cercles (un cercle par degré) ¦ Σε κύκλους (ένας κύκλος ανά βαθμό) ¦ В кръгове (по един кръг на степен)
+En vie ou non ¦ Εν ζωή ή όχι ¦ Жив или не
+En {year} (contour) ¦ Το {year} (περίγραμμα) ¦ През {year} г. (контур)
+Ensemble {x} ¦ Σύνολο {x} ¦ Множество {x}
+Faire ressortir la famille ¦ Ανάδειξη της οικογένειας ¦ Открои семейството
+Formes prises dans ta base : {n}. ¦ Μορφές από τη βάση σου: {n}. ¦ Форми от твоята база: {n}.
+Groupe de noms ¦ Ομάδα ονομάτων ¦ Група имена
+Générations : {n} côté père, {m} côté mère ¦ Γενιές: {n} από τον πατέρα, {m} από τη μητέρα ¦ Поколения: {n} по бащина линия, {m} по майчина
+Il faut de 2 à 8 ensembles. ¦ Χρειάζονται 2 έως 8 σύνολα. ¦ Нужни са от 2 до 8 множества.
+Image (media/…) ¦ Εικόνα (media/…) ¦ Изображение (media/…)
+Initiales du prénom et du nom ¦ Αρχικά ονόματος και επωνύμου ¦ Инициали на име и фамилия
+La branche ¦ Ο κλάδος ¦ Клонът
+La personne étudiée ¦ Το πρόσωπο που μελετάται ¦ Изследваният човек
+Le calcul n’est pas prêt. ¦ Ο υπολογισμός δεν είναι έτοιμος. ¦ Изчислението не е готово.
+Le chemin entre deux personnes ¦ Η διαδρομή ανάμεσα σε δύο πρόσωπα ¦ Пътят между двама души
+Le nom (2 lettres) ¦ Το επώνυμο (2 γράμματα) ¦ Фамилията (2 букви)
+Le plus proche seulement ¦ Μόνο ο πλησιέστερος ¦ Само най-близкият
+Le prénom (2 lettres) ¦ Το όνομα (2 γράμματα) ¦ Името (2 букви)
+Le recensement de {place} ¦ Η απογραφή του {place} ¦ Преброяването в {place}
+Les 8, 16 ou 32 ancêtres d’une génération, chacun avec son blason ; un écu vide : armoiries à trouver. ¦ Οι 8, 16 ή 32 πρόγονοι μιας γενιάς, ο καθένας με το οικόσημό του· κενή ασπίδα: οικόσημο προς εύρεση. ¦ 8, 16 или 32 предци от едно поколение, всеки с герба си; празен щит: герб за намиране.
+Les boucles d’implexe (entre les deux parents) ¦ Βρόχοι γενεαλογικής σύμπτωσης (ανάμεσα στους γονείς) ¦ Примки на импликса (между родителите)
+Les boucles d’implexe de {name} ¦ Βρόχοι γενεαλογικής σύμπτωσης: {name} ¦ Примките на импликса на {name}
+Les deux parents de cette personne ne sont pas connus. ¦ Δεν είναι γνωστοί και οι δύο γονείς αυτού του προσώπου. ¦ Двамата родители на този човек не са известни.
+Les ensembles (2 à 8) : A, B, C… H ¦ Τα σύνολα (2 έως 8): A, B, C… H ¦ Множествата (2 до 8): A, B, C… H
+Les formes du nom ¦ Οι μορφές του ονόματος ¦ Формите на името
+Les formes du nom {name} ¦ Οι μορφές του ονόματος {name} ¦ Формите на името {name}
+Les noms du groupe (ou écrits pareil) et leurs variantes notées, avec leurs années et le nombre d’actes. ¦ Τα ονόματα της ομάδας (ή όσα γράφονται ίδια) και οι καταγεγραμμένες παραλλαγές, με έτη και αριθμό πράξεων. ¦ Имената от групата (или изписани еднакво) и записаните им варианти, с годините и броя записи.
+Les quartiers de {name} ¦ Τα προγονικά οικόσημα του/της {name} ¦ Родовите гербове на {name}
+Les seize quartiers de {name} ¦ Τα δεκαέξι προγονικά οικόσημα του/της {name} ¦ Шестнайсетте родови герба на {name}
+Liens pris dans l’app : {n}. ¦ Συνδέσεις από την εφαρμογή: {n}. ¦ Връзки от приложението: {n}.
+Losange pour les dates exactes ¦ Ρόμβος για ακριβείς ημερομηνίες ¦ Ромб за точните дати
+Montrer le calcul (½ puissance n) ¦ Εμφάνιση υπολογισμού (½ εις την n) ¦ Покажи изчислението (½ на степен n)
+Montrer l’incertitude des dates ¦ Εμφάνιση αβεβαιότητας ημερομηνιών ¦ Покажи несигурността на датите
+Naissances et décès (qui vivait en …) ¦ Γεννήσεις και θάνατοι (ποιος ζούσε το …) ¦ Раждания и смърти (кой е живял през …)
+Nom inconnu ¦ Άγνωστο όνομα ¦ Неизвестно име
+Nom sous l’écu ¦ Όνομα κάτω από την ασπίδα ¦ Име под щита
+Nom trop long (80 lettres au plus). ¦ Πολύ μεγάλο όνομα (έως 80 γράμματα). ¦ Твърде дълго име (до 80 букви).
+Nombre d’actes sous la forme ¦ Αριθμός πράξεων κάτω από τη μορφή ¦ Брой записи под формата
+Noms les plus portés ¦ Τα πιο συχνά ονόματα ¦ Най-разпространени имена
+N° Sosa ¦ Αρ. Sosa ¦ № Соса
+N° Sosa (ascendants, éventails) ¦ Αρ. Sosa (πρόγονοι, βεντάλιες) ¦ № Соса (предци, ветрила)
+Nœud papillon (père à gauche, mère à droite) ¦ Παπιγιόν (πατέρας αριστερά, μητέρα δεξιά) ¦ Папийонка (баща вляво, майка вдясно)
+Ordre des combinaisons ¦ Σειρά συνδυασμών ¦ Ред на комбинациите
+Ou un nom ¦ Ή ένα όνομα ¦ Или име
+Par nombre d’ensembles ¦ Κατά αριθμό συνόλων ¦ По брой множества
+Parent (descendants, éventails) ¦ Γονέας (απόγονοι, βεντάλιες) ¦ Родител (потомци, ветрила)
+Personne cachée ¦ Κρυφό πρόσωπο ¦ Скрит човек
+Personnes recensées : {n} ¦ Πρόσωπα στην απογραφή: {n} ¦ Преброени души: {n}
+Personnes recensées : {n} en {y1}, {m} en {y2} ¦ Πρόσωπα στην απογραφή: {n} το {y1}, {m} το {y2} ¦ Преброени: {n} през {y1} г., {m} през {y2} г.
+Personnes recensées prises dans ta base : {n}. ¦ Πρόσωπα απογραφής από τη βάση σου: {n}. ¦ Преброени от твоята база: {n}.
+Portraits (arbre dessiné, nœud papillon) ¦ Πορτρέτα (σχεδιασμένο δέντρο, παπιγιόν) ¦ Портрети (рисувано дърво, папийонка)
+Pyramide du recensement de {year} (personnes : {n}). ¦ Πυραμίδα της απογραφής του {year} (πρόσωπα: {n}). ¦ Пирамида на преброяването от {year} г. (души: {n}).
+Ressortent : les personnes reliées à une fiche (ou au groupe choisi). ¦ Επισημαίνονται: πρόσωπα συνδεδεμένα με καρτέλα (ή με την επιλεγμένη ομάδα). ¦ Откроени: хората, свързани с картон (или с избраната група).
+Selon le nombre de descendants ¦ Κατά αριθμό απογόνων ¦ Според броя потомци
+Selon le tableau ¦ Σύμφωνα με τον πίνακα ¦ Според таблицата
+Ses ancêtres au-dessus (place Sosa), ses descendants au-dessous (sous leur parent) ; le chiffre : l’âge au décès. ¦ Πρόγονοι πάνω (θέση Sosa), απόγονοι κάτω (κάτω από τον γονέα)· ο αριθμός: ηλικία θανάτου. ¦ Предци отгоре (място Соса), потомци отдолу (под родителя); числото: възраст при смърт.
+Ses ancêtres de la génération choisie (ordre Sosa) et les armoiries reliées à chacun (Listes → Armoiries). ¦ Οι πρόγονοι της επιλεγμένης γενιάς (σειρά Sosa) και τα οικόσημά τους (Λίστες → Οικόσημα). ¦ Предците от избраното поколение (ред Соса) и свързаните с тях гербове (Списъци → Гербове).
+Seulement l’ancêtre commun le plus proche ¦ Μόνο ο πλησιέστερος κοινός πρόγονος ¦ Само най-близкият общ предшественик
+Sexe inconnu (pas dans la pyramide) : {n} ¦ Άγνωστο φύλο (εκτός πυραμίδας): {n} ¦ Неизвестен пол (извън пирамидата): {n}
+Sosa {n} : ancêtre à trouver ¦ Sosa {n}: πρόγονος προς εύρεση ¦ Соса {n}: предшественик за намиране
+Source, note ¦ Πηγή, σημείωση ¦ Източник, бележка
+Sources sous la forme ¦ Πηγές κάτω από τη μορφή ¦ Източници под формата
+Tableau de quartiers (armoiries des ancêtres) ¦ Πίνακας προγονικών οικοσήμων ¦ Таблица на родовите гербове
+Tableau de quartiers ({n}), armoiries connues : {k}. ¦ Πίνακας οικοσήμων ({n}), γνωστά οικόσημα: {k}. ¦ Таблица на гербовете ({n}), известни гербове: {k}.
+Tableau périodique : ancêtres trouvés {found} / {total} ({pct} %). ¦ Περιοδικός πίνακας: πρόγονοι που βρέθηκαν {found} / {total} ({pct} %). ¦ Периодична таблица: намерени предци {found} / {total} ({pct} %).
+Taux de recherche (%) ¦ Βαθμός έρευνας (%) ¦ Степен на проученост (%)
+Tous les ancêtres répétés ¦ Όλοι οι επαναλαμβανόμενοι πρόγονοι ¦ Всички повтарящи се предци
+Tous les chemins du père et de la mère vers un même ancêtre (filiations biologiques) et le coefficient de consanguinité (méthode de Wright). ¦ Όλες οι διαδρομές πατέρα και μητέρας προς τον ίδιο πρόγονο (βιολογική καταγωγή) και ο συντελεστής ενδογαμίας (μέθοδος Wright). ¦ Всички пътища на бащата и майката до един и същ предшественик (биологичен произход) и коефициентът на кръвно родство (метод на Райт).
+Toute la base (qui vivait en …) ¦ Όλη η βάση (ποιος ζούσε το …) ¦ Цялата база (кой е живял през …)
+Toute la base (qui vivait l’année choisie) ou un recensement (les âges écrits ce jour-là). ¦ Όλη η βάση (ποιος ζούσε το επιλεγμένο έτος) ή μια απογραφή (οι ηλικίες εκείνης της ημέρας). ¦ Цялата база (кой е живял в избраната година) или преброяване (възрастите, записани в този ден).
+Toute la famille, un point par couple ¦ Όλη η οικογένεια, ένα σημείο ανά ζευγάρι ¦ Цялото семейство, по една точка на двойка
+Trop de critères. ¦ Πάρα πολλά κριτήρια. ¦ Твърде много критерии.
+Trop d’ensembles. ¦ Πάρα πολλά σύνολα. ¦ Твърде много множества.
+Trouvé chez le notaire (successions, inventaires) ¦ Βρέθηκε στον συμβολαιογράφο (κληρονομιές, απογραφές) ¦ Намерен при нотариуса (наследства, описи)
+Trouvé dans les sources militaires (poilus) ¦ Βρέθηκε σε στρατιωτικές πηγές (στρατιώτες του Α΄ Παγκοσμίου) ¦ Намерен във военни източници (войници от Първата световна)
+Trouvé dans un recensement ¦ Βρέθηκε σε απογραφή ¦ Намерен в преброяване
+Un chiffre (colonne « Chiffre ») ¦ Ένας αριθμός (στήλη «Αριθμός») ¦ Число (колона „Число“)
+Un recensement (commune, année) ¦ Μια απογραφή (δήμος, έτος) ¦ Преброяване (община, година)
+Un recensement (âges écrits) ¦ Μια απογραφή (γραμμένες ηλικίες) ¦ Преброяване (записани възрасти)
+Une par branche ¦ Ένα ανά κλάδο ¦ По един на клон
+Une par forme ¦ Ένα ανά μορφή ¦ По един на форма
+Une seule source : couleur de l’ensemble ¦ Μία πηγή: χρώμα του συνόλου ¦ Един източник: цвят на множеството
+Une source précise ¦ Μια συγκεκριμένη πηγή ¦ Конкретен източник
+Vérifie le groupe de personnes. ¦ Έλεγξε την ομάδα προσώπων. ¦ Провери групата хора.
+actes : {n} ¦ πράξεις: {n} ¦ записи: {n}
+vient de {name} ¦ προέρχεται από {name} ¦ идва от {name}
+{label} (famille) : {n} ¦ {label} (οικογένεια): {n} ¦ {label} (семейство): {n}
+{names} (seulement) : {n} ¦ {names} (μόνο): {n} ¦ {names} (само): {n}
+{name} : armoiries pas encore trouvées ¦ {name}: το οικόσημο δεν βρέθηκε ακόμη ¦ {name}: гербът още не е намерен
+{name} : {n} en tout ¦ {name}: {n} συνολικά ¦ {name}: общо {n}
+{place}, {year} ¦ {place}, {year} ¦ {place}, {year} г.
+« vers » : plus ou moins ¦ «περίπου»: συν πλην ¦ „около“: плюс-минус
+Âge (recensement) ¦ Ηλικία (απογραφή) ¦ Възраст (преброяване)
+Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Γράψε το είδος της σύνδεσης στη γραμμή (όνομα παιδιού…) ¦ Пиши вида на връзката върху линията (име на детето…)
+Écrits s’il y a la place ¦ Γραμμένα αν υπάρχει χώρος ¦ Изписани, ако има място
+Écu vide ¦ Κενή ασπίδα ¦ Празен щит
+Épaisseur selon le nombre d’actes ¦ Πάχος κατά αριθμό πράξεων ¦ Дебелина според броя записи
+— Aucun (le nom écrit à côté) — ¦ — Καμία (το όνομα δίπλα) — ¦ — Няма (името, написано до него) —
+— Rien — ¦ — Τίποτα — ¦ — Нищо —
+🌿 Les formes d’un nom de ma base ¦ 🌿 Οι μορφές ενός ονόματος της βάσης μου ¦ 🌿 Формите на име от моята база
+🔁 Entre les deux parents de… ¦ 🔁 Ανάμεσα στους γονείς του/της… ¦ 🔁 Между родителите на…
+🔺 Les personnes de ma base ¦ 🔺 Τα πρόσωπα της βάσης μου ¦ 🔺 Хората от моята база
+🛡 Les quartiers d’une personne de ma base ¦ 🛡 Τα προγονικά οικόσημα ενός προσώπου της βάσης μου ¦ 🛡 Родовите гербове на човек от моята база
+Choisis de 2 à 8 ensembles : chaque zone compte les personnes de ces ensembles-là seulement. Dès 5 ensembles : barres croisées. ¦ Διάλεξε 2 έως 8 σύνολα: κάθε ζώνη μετρά μόνο τα πρόσωπα αυτών των συνόλων. Από 5 σύνολα: διασταυρωμένες ράβδοι. ¦ Избери от 2 до 8 множества: всяка зона брои само хората от тези множества. От 5 нататък: кръстосани стълбове.
+Les témoins, parrains et marraines des actes ; ou toute la famille, un point par couple, reliés par leurs enfants. ¦ Οι μάρτυρες και ανάδοχοι των πράξεων· ή όλη η οικογένεια, ένα σημείο ανά ζευγάρι, ενωμένα με τα παιδιά τους. ¦ Свидетелите и кръстниците от записите; или цялото семейство, точка на двойка, свързани чрез децата си.
+Nom de l’enfant sur le trait ¦ Όνομα παιδιού στη γραμμή ¦ Името на детето върху линията
+Par nom de famille ¦ Κατά επώνυμο ¦ По фамилия
+Par siècle (du mariage) ¦ Κατά αιώνα (του γάμου) ¦ По век (на брака)
+Un point par couple ¦ Ένα σημείο ανά ζευγάρι ¦ По една точка на двойка
+Un point par personne ¦ Ένα σημείο ανά πρόσωπο ¦ По една точка на човек
+🕸 Les liens de ma base ¦ 🕸 Οι συνδέσεις της βάσης μου ¦ 🕸 Връзките от моята база
+Quartiers ¦ Προγονικά οικόσημα ¦ Родови гербове

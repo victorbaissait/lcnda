@@ -62,7 +62,8 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
             const s = fs.readFileSync(path.join(root, 'assets', 'js', f), 'utf8');
             s.split('\n').forEach((line, i) => {
                 if (/'Symboles':/.test(line)) return; // la palette d'émojis garde ➕
-                if (/➕ [A-Za-zÀ-ÿ]/.test(line)) bad.push(`${f}:${i + 1} ➕`);
+                // les noms français des émojis (app-icones.js, « ➕ plus| ») ne sont pas un bouton : seule cette entrée est mise de côté
+                if (/➕ [A-Za-zÀ-ÿ]/.test(line.replace(/\|➕ plus\|/g, '|'))) bad.push(`${f}:${i + 1} ➕`);
                 if (/['"`>]Rattacher à une fiche/.test(line)) bad.push(`${f}:${i + 1} Rattacher`);
             });
         }

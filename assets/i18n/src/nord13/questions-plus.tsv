@@ -1,0 +1,71 @@
+fr ¦ el ¦ bg
+# 🔎 Poser une question, suite (lib/question_plus.php, assets/js/heritage-questions-plus.js) : fautes, dates, « moi », négations, OU, renvois, ⌘K
+« {a} » lu « {b} » ¦ «{a}» διαβάστηκε ως «{b}» ¦ „{a}“ прочетено като „{b}“
+vers {y} ({a}-{b}) ¦ περίπου το {y} ({a}-{b}) ¦ около {y} г. ({a}-{b})
+dans les années {y} ({a}-{b}) ¦ στη δεκαετία του {y} ({a}-{b}) ¦ през {y}-те години ({a}-{b})
+« moi » = la personne de départ : {name} ¦ «εγώ» = το πρόσωπο αφετηρίας: {name} ¦ „аз“ = изходното лице: {name}
+qui est : {name} ¦ ποιος είναι: {name} ¦ кой е: {name}
+« {a} » compris comme {b} ¦ «{a}» κατανοήθηκε ως {b} ¦ „{a}“ разбрано като {b}
+dossiers de succession ¦ φάκελοι κληρονομιάς ¦ наследствени преписки
+Aucun dossier de succession dans cette généalogie. ¦ Κανένας φάκελος κληρονομιάς σε αυτή τη γενεαλογία. ¦ В тази генеалогия няма наследствени преписки.
+courriers sans réponse ¦ επιστολές χωρίς απάντηση ¦ писма без отговор
+Courriers aux héritiers sans réponse : {n}. ¦ Επιστολές σε κληρονόμους χωρίς απάντηση: {n}. ¦ Писма до наследници без отговор: {n}.
+Aucun courrier de dossier n’attend de réponse. ¦ Καμία επιστολή φακέλου δεν περιμένει απάντηση. ¦ Нито едно писмо по преписките не чака отговор.
+échéances en retard ¦ εκπρόθεσμες προθεσμίες ¦ просрочени срокове
+Dossiers avec des échéances en retard : {n}. ¦ Φάκελοι με εκπρόθεσμες προθεσμίες: {n}. ¦ Преписки с просрочени срокове: {n}.
+Aucun dossier n’a d’échéance en retard. ¦ Κανένας φάκελος δεν έχει εκπρόθεσμη προθεσμία. ¦ Няма преписка с просрочен срок.
+défunt : {name} ¦ αποθανών: {name} ¦ починал: {name}
+Aucun dossier de succession pour {name}. ¦ Κανένας φάκελος κληρονομιάς για {name}. ¦ Няма наследствена преписка за {name}.
+⚖️ Rechercher les héritiers… ¦ ⚖️ Αναζήτηση κληρονόμων… ¦ ⚖️ Търсене на наследниците…
+Pièces notées « manquante » : {n}. La liste complète (en main, demandées, à demander) est dans l’onglet Pièces du dossier. ¦ Έγγραφα με σήμανση «λείπει»: {n}. Ο πλήρης κατάλογος (στα χέρια, ζητήθηκαν, προς αίτηση) είναι στην καρτέλα Έγγραφα του φακέλου. ¦ Документи с отметка „липсва“: {n}. Пълният списък (налични, поискани, за искане) е в раздела „Документи“ на преписката.
+Aucune pièce notée « manquante ». La liste des pièces de chaque dossier est dans son onglet Pièces. ¦ Κανένα έγγραφο με σήμανση «λείπει». Ο κατάλογος κάθε φακέλου είναι στην καρτέλα Έγγραφα. ¦ Няма документ с отметка „липсва“. Списъкът на всяка преписка е в нейния раздел „Документи“.
+pièces manquantes ¦ έγγραφα που λείπουν ¦ липсващи документи
+Héritiers introuvables ou qui ne répondent pas : {n}. ¦ Κληρονόμοι που δεν βρέθηκαν ή δεν απαντούν: {n}. ¦ Ненамерени или неотговарящи наследници: {n}.
+Aucun héritier noté introuvable ou sans réponse. ¦ Κανένας κληρονόμος δεν έχει σημειωθεί ως μη εντοπισμένος ή χωρίς απάντηση. ¦ Няма наследник, отбелязан като ненамерен или без отговор.
+héritiers introuvables ¦ κληρονόμοι που δεν βρέθηκαν ¦ ненамерени наследници
+De qui ? Écris par exemple « les héritiers de Jean Dupont ». ¦ Ποιανού; Γράψε για παράδειγμα «les héritiers de Jean Dupont». ¦ Чии? Напиши например „les héritiers de Jean Dupont“.
+héritiers de {name} ¦ κληρονόμοι: {name} ¦ наследници: {name}
+Aucun dossier de succession pour {name}. Le dossier calcule les héritiers d’après l’arbre. ¦ Κανένας φάκελος κληρονομιάς για {name}. Ο φάκελος υπολογίζει τους κληρονόμους από το δέντρο. ¦ Няма наследствена преписка за {name}. Преписката изчислява наследниците по дървото.
+Dossier {d} : les héritiers n’ont pas encore été calculés. Ouvre le dossier pour faire le calcul. ¦ Φάκελος {d}: οι κληρονόμοι δεν έχουν υπολογιστεί ακόμα. Άνοιξε τον φάκελο για τον υπολογισμό. ¦ Преписка {d}: наследниците още не са изчислени. Отвори преписката, за да направиш изчислението.
+Dossier {d} — héritiers d’après le dernier calcul enregistré : {n}. ¦ Φάκελος {d} — κληρονόμοι κατά τον τελευταίο αποθηκευμένο υπολογισμό: {n}. ¦ Преписка {d} — наследници според последното запазено изчисление: {n}.
+Branches encore à rechercher : {n}. ¦ Κλάδοι προς διερεύνηση ακόμα: {n}. ¦ Клонове, които още трябва да се проучат: {n}.
+Actes ou documents à chercher pour {name} : {n}. Les 3 premiers ci-dessous ; la liste complète, avec où chercher et dans quelle série, est dans « Que manque-t-il ? ». ¦ Πράξεις ή έγγραφα προς αναζήτηση για {name}: {n}. Τα 3 πρώτα παρακάτω· ο πλήρης κατάλογος, με το πού και σε ποια σειρά να ψάξεις, είναι στο «Τι λείπει;». ¦ Актове или документи за търсене за {name}: {n}. Първите 3 са по-долу; пълният списък, с това къде и в коя серия да търсиш, е в „Какво липсва?“.
+Rien de connu à chercher pour {name}. ¦ Τίποτα γνωστό προς αναζήτηση για {name}. ¦ Няма нищо известно за търсене за {name}.
+actes à chercher ¦ πράξεις προς αναζήτηση ¦ актове за търсене
+où chercher ¦ πού να ψάξεις ¦ къде да търсиш
+« Où chercher ? » donne pour {name} les sites et les séries d’archives les plus utiles, et pourquoi. ¦ Το «Πού να ψάξεις;» δίνει για {name} τους πιο χρήσιμους ιστότοπους και αρχειακές σειρές, και γιατί. ¦ „Къде да търсиш?“ дава за {name} най-полезните сайтове и архивни серии и защо.
+« Où chercher ? » donne pour chaque personne les sites et les séries d’archives les plus utiles, et pourquoi. ¦ Το «Πού να ψάξεις;» δίνει για κάθε πρόσωπο τους πιο χρήσιμους ιστότοπους και αρχειακές σειρές, και γιατί. ¦ „Къде да търсиш?“ дава за всеки човек най-полезните сайтове и архивни серии и защо.
+doublons ¦ διπλότυπα ¦ дубликати
+Le Contrôle de la base cherche les doublons probables (mêmes noms, mêmes dates, mêmes parents) et aide à les fusionner. ¦ Ο Έλεγχος της βάσης αναζητά πιθανά διπλότυπα (ίδια ονόματα, ημερομηνίες, γονείς) και βοηθά να τα συγχωνεύσεις. ¦ Проверката на базата търси вероятни дубликати (същите имена, дати, родители) и помага да ги обединиш.
+mort pendant la guerre, en âge de combattre ¦ πέθανε στον πόλεμο, σε ηλικία μάχης ¦ починал по време на войната, в наборна възраст
+mort pendant la guerre ¦ πέθανε στον πόλεμο ¦ починал по време на войната
+morts pendant {era} ¦ πέθαναν κατά: {era} ¦ починали по време на: {era}
+morts à la guerre ¦ νεκροί στον πόλεμο ¦ загинали във война
+Morts pendant {era} : {n}. ¦ Πέθαναν κατά {era}: {n}. ¦ Починали по време на „{era}“: {n}.
+Notés « Mort pour la France » : {n}. Morts pendant une guerre, en âge de combattre ou soldats (à vérifier) : {m}. ¦ Με σήμανση «Mort pour la France»: {n}. Πέθαναν σε πόλεμο, σε ηλικία μάχης ή στρατιώτες (προς έλεγχο): {m}. ¦ С отметка „Mort pour la France“: {n}. Починали по време на война, в наборна възраст или войници (за проверка): {m}.
+Dont « Mort pour la France » : {n}. ¦ Από αυτούς «Mort pour la France»: {n}. ¦ От тях „Mort pour la France“: {n}.
+Pour les soldats : Mémoire des hommes et les registres matricules. ¦ Για στρατιώτες: Mémoire des hommes και τα μητρώα στρατολογίας. ¦ За войниците: Mémoire des hommes и военните регистри.
+sans date de décès ¦ χωρίς ημερομηνία θανάτου ¦ без дата на смърт
+sans date de naissance ¦ χωρίς ημερομηνία γέννησης ¦ без дата на раждане
+sans date de mariage ¦ χωρίς ημερομηνία γάμου ¦ без дата на брак
+sans parents connus ¦ χωρίς γνωστούς γονείς ¦ без известни родители
+sans profession notée ¦ χωρίς καταγεγραμμένο επάγγελμα ¦ без отбелязана професия
+qui ne sont pas des ancêtres ¦ που δεν είναι πρόγονοι ¦ които не са предци
+pas {ev} à {place} ¦ όχι «{ev}» σε {place} ¦ не „{ev}“ в {place}
+vivants ou probablement vivants ¦ ζωντανοί ή πιθανώς ζωντανοί ¦ живи или вероятно живи
+pas à {place} ¦ όχι σε {place} ¦ не в {place}
+recherche de nom : « {x} » ¦ αναζήτηση ονόματος: «{x}» ¦ търсене по име: „{x}“
+orthographe proche ¦ παρόμοια ορθογραφία ¦ сходно изписване
+femmes ¦ γυναίκες ¦ жени
+Réponse réunie : {a} {c} {b}. ¦ Συνδυασμένη απάντηση: {a} {c} {b}. ¦ Обединен отговор: {a} {c} {b}.
+Je n’ai pas tenu compte de : « {x} ». ¦ Δεν έλαβα υπόψη: «{x}». ¦ Не взех предвид: „{x}“.
+Plusieurs “{w}” : choisir… ¦ Πολλοί «{w}»: επίλεξε… ¦ Няколко „{w}“: избери…
+J’ai compris : {x} ¦ Κατάλαβα: {x} ¦ Разбрах: {x}
+Question en français ¦ Ερώτηση στα γαλλικά ¦ Въпрос на френски
+Poser la question : « {q} » ¦ Κάνε την ερώτηση: «{q}» ¦ Задай въпроса: „{q}“
+Questions dans la recherche rapide (⌘K) ¦ Ερωτήσεις στη γρήγορη αναζήτηση (⌘K) ¦ Въпроси в бързото търсене (⌘K)
+Répondre aux questions dans la recherche rapide ¦ Απάντηση σε ερωτήσεις στη γρήγορη αναζήτηση ¦ Отговаряй на въпроси в бързото търсене
+« les enfants de Pierre Mazaud » : la réponse courte s’affiche dans la liste ; sinon seulement « Poser la question » ¦ «les enfants de Pierre Mazaud»: η σύντομη απάντηση εμφανίζεται στη λίστα· αλλιώς μόνο «Κάνε την ερώτηση» ¦ „les enfants de Pierre Mazaud“: краткият отговор се показва в списъка; иначе само „Задай въпроса“
+Pour aller plus loin, pose la question avec le nom de la personne voulue. ¦ Για να συνεχίσεις, κάνε την ερώτηση με το όνομα του προσώπου που εννοείς. ¦ За да продължиш, задай въпроса с името на човека, когото имаш предвид.
+« {a} » cherché d’abord ¦ «{a}»: αναζητήθηκε πρώτα ¦ първо е потърсено „{a}“
+« {a} » = {name} ¦ «{a}» = {name} ¦ „{a}“ = {name}

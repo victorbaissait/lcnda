@@ -1,0 +1,75 @@
+fr ¦ el ¦ bg
+# 🌍 Où chercher ? — filtres par sorte de source (docs/design/ou-chercher-filtres.html)
+Ouvrir la page filtrée sur une sorte de source ¦ Άνοιγμα σελίδας φιλτραρισμένης σε ένα είδος πηγής ¦ Отвори страницата, филтрирана по вид източник
+Les autres sortes ¦ Τα άλλα είδη ¦ Другите видове
+Proposés ({n} sur {m}) ¦ Προτεινόμενα ({n} από {m}) ¦ Предложени ({n} от {m})
+✓ Déjà cherchés ({n} sur {m}) ¦ ✓ Ήδη αναζητήθηκαν ({n} από {m}) ¦ ✓ Вече търсени ({n} от {m})
+Écartés ({n} sur {m}) ¦ Αποκλεισμένα ({n} από {m}) ¦ Изключени ({n} от {m})
+Chercher un site… (ex. Gallica, matricule) ¦ Αναζήτηση ιστότοπου… (π.χ. Gallica, μητρώο στρατού) ¦ Търси сайт… (напр. Gallica, военен регистър)
+Sorte de source ¦ Είδος πηγής ¦ Вид източник
+Ses pays : {list} ¦ Οι χώρες: {list} ¦ Страните: {list}
+Ses pays ¦ Οι χώρες ¦ Страните
+Un seul : {country} ¦ Μόνο μία: {country} ¦ Само една: {country}
+Pays : {country} ¦ Χώρα: {country} ¦ Държава: {country}
+Sites du monde entier seulement (FamilySearch, Geneanet…) ¦ Μόνο παγκόσμιοι ιστότοποι (FamilySearch, Geneanet…) ¦ Само световни сайтове (FamilySearch, Geneanet…)
+🌍 Monde entier ¦ 🌍 Όλος ο κόσμος ¦ 🌍 Целият свят
+Prix ¦ Τιμή ¦ Цена
+Gratuites seulement · {n} ¦ Μόνο δωρεάν · {n} ¦ Само безплатни · {n}
+💶 Gratuites seulement ¦ 💶 Μόνο δωρεάν ¦ 💶 Само безплатни
+En français seulement ¦ Μόνο στα γαλλικά ¦ Само на френски
+🇫🇷 En français ¦ 🇫🇷 Στα γαλλικά ¦ 🇫🇷 На френски
+Les plus utiles ¦ Τα πιο χρήσιμα ¦ Най-полезните
+Gratuits d’abord ¦ Πρώτα τα δωρεάν ¦ Първо безплатните
+🔗 depuis sa fiche ¦ 🔗 από την καρτέλα ¦ 🔗 от картона
+Ce filtre vient de sa fiche : ton choix habituel n’est pas changé. ¦ Αυτό το φίλτρο έρχεται από την καρτέλα: η συνηθισμένη σου επιλογή δεν αλλάζει. ¦ Този филтър идва от картона: обичайният ти избор не се променя.
+Revenir à mon choix ¦ Επιστροφή στην επιλογή μου ¦ Обратно към моя избор
+↗ Chercher quand même ¦ ↗ Αναζήτηση παρ’ όλα αυτά ¦ ↗ Търси все пак
+de ces filtres ¦ με αυτά τα φίλτρα ¦ с тези филтри
+Aucun site {sorts} pour ce pays ({country}) parmi les {n} sites que l’app connaît ¦ Κανένας ιστότοπος {sorts} για αυτή τη χώρα ({country}) από τους {n} που γνωρίζει η εφαρμογή ¦ Няма сайт {sorts} за тази държава ({country}) сред {n} сайта, известни на приложението
+Pour ses autres pays : {ok} proposés ; {out} écartés. ¦ Για τις άλλες χώρες: {ok} προτεινόμενα· {out} αποκλεισμένα. ¦ За другите държави: предложени {ok}; изключени {out}.
+Ses autres pays ({n}) ¦ Οι άλλες χώρες ({n}) ¦ Другите държави ({n})
+Voir les {n} sites écartés ¦ Δες τους {n} αποκλεισμένους ιστότοπους ¦ Виж {n} изключени сайта
+＋ Ajouter un site à moi ¦ ＋ Πρόσθεσε δικό μου ιστότοπο ¦ ＋ Добави мой сайт
+Aucun site {sorts} pour {name} ({life}) ¦ Κανένας ιστότοπος {sorts} για {name} ({life}) ¦ Няма сайт {sorts} за {name} ({life})
+Les {n} sites de cette sorte sont écartés : ¦ Οι {n} ιστότοποι αυτού του είδους είναι αποκλεισμένοι: ¦ {n} сайта от този вид са изключени:
+Aucun site de cette sorte parmi ceux que l’app connaît. ¦ Κανένας ιστότοπος αυτού του είδους από όσους γνωρίζει η εφαρμογή. ¦ Няма сайт от този вид сред известните на приложението.
+Enlever {sort} ¦ Αφαίρεσε {sort} ¦ Махни {sort}
+Aucun site écarté avec ces filtres. ¦ Κανένας αποκλεισμένος ιστότοπος με αυτά τα φίλτρα. ¦ Няма изключени сайтове с тези филтри.
+Sa vie ({life}) croise les années du site ({from}–{to}) ¦ Η ζωή ({life}) διασταυρώνεται με τα έτη του ιστότοπου ({from}–{to}) ¦ Животът ({life}) се пресича с годините на сайта ({from}–{to})
+Actes (état civil, paroissiaux) ¦ Πράξεις (ληξιαρχικές, ενοριακές) ¦ Актове (граждански, енорийски)
+Journaux ¦ Εφημερίδες ¦ Вестници
+Militaire et guerres ¦ Στρατός και πόλεμοι ¦ Армия и войни
+Recensements et annuaires ¦ Απογραφές και κατάλογοι ¦ Преброявания и указатели
+Marins, colonies ¦ Ναυτικοί, αποικίες ¦ Моряци, колонии
+Marins et colonies ¦ Ναυτικοί και αποικίες ¦ Моряци и колонии
+Cimetières, décès ¦ Νεκροταφεία, θάνατοι ¦ Гробища, смъртни случаи
+Cimetières et décès ¦ Νεκροταφεία και θάνατοι ¦ Гробища и смъртни случаи
+Notaires, terres et justice ¦ Συμβολαιογράφοι, γη και δικαιοσύνη ¦ Нотариуси, земя и правосъдие
+Métiers (élus, médecins, cheminots, photographes…) ¦ Επαγγέλματα (αιρετοί, γιατροί, σιδηροδρομικοί, φωτογράφοι…) ¦ Професии (избрани, лекари, железничари, фотографи…)
+Arbres en ligne ¦ Δέντρα στο διαδίκτυο ¦ Дървета онлайн
+Bibliothèques ¦ Βιβλιοθήκες ¦ Библиотеки
+Bibliothèques et livres ¦ Βιβλιοθήκες και βιβλία ¦ Библиотеки и книги
+Cartes et lieux ¦ Χάρτες και τόποι ¦ Карти и места
+Déportation et répression ¦ Εκτοπίσεις και καταστολή ¦ Депортации и репресии
+Guides ¦ Οδηγοί ¦ Ръководства
+Guides et modes d’emploi ¦ Οδηγοί και οδηγίες χρήσης ¦ Ръководства и инструкции
+Moteurs ¦ Μηχανές αναζήτησης ¦ Търсачки
+Moteurs et encyclopédies ¦ Μηχανές αναζήτησης και εγκυκλοπαίδειες ¦ Търсачки и енциклопедии
+Tout le militaire ¦ Όλα τα στρατιωτικά ¦ Всичко военно
+Tout pour un marin ¦ Όλα για ναυτικό ¦ Всичко за моряк
+Tout sur l’émigration ¦ Όλα για τη μετανάστευση ¦ Всичко за емиграцията
+Tout sur son métier ¦ Όλα για το επάγγελμα ¦ Всичко за професията
+Tout chez les notaires ¦ Όλα στους συμβολαιογράφους ¦ Всичко при нотариусите
+⚓ Il était marin ? Le dire sur sa fiche ¦ ⚓ Ήταν ναυτικός; Γράψ’ το στην καρτέλα ¦ ⚓ Бил е моряк? Отбележи го в картона
+🎖 Il était soldat ? Le dire sur sa fiche ¦ 🎖 Ήταν στρατιώτης; Γράψ’ το στην καρτέλα ¦ 🎖 Бил е войник? Отбележи го в картона
+🚢 Il a émigré ? Le dire sur sa fiche ¦ 🚢 Μετανάστευσε; Γράψ’ το στην καρτέλα ¦ 🚢 Емигрирал ли е? Отбележи го в картона
+💼 Son métier ? Le dire sur sa fiche ¦ 💼 Το επάγγελμα; Γράψ’ το στην καρτέλα ¦ 💼 Професията? Отбележи я в картона
+Pas de lieu dans ce pays ¦ Κανένας τόπος σε αυτή τη χώρα ¦ Няма място в тази държава
+Hors de ses années ¦ Εκτός των ετών της ζωής ¦ Извън годините на живота
+Seulement pour un autre cas (métier, profil) ¦ Μόνο για άλλη περίπτωση (επάγγελμα, προφίλ) ¦ Само за друг случай (професия, профил)
+Pour l’autre sexe ¦ Για το άλλο φύλο ¦ За другия пол
+Né hors de France ¦ Γεννήθηκε εκτός Γαλλίας ¦ Роден извън Франция
+Peu utile pour cette fiche ¦ Λίγο χρήσιμο για αυτή την καρτέλα ¦ Малко полезно за този картон
+Autres raisons ¦ Άλλοι λόγοι ¦ Други причини
+officier (armée) ¦ αξιωματικός (στρατός) ¦ офицер (армия)
+=payant caché ¦ επί πληρωμή κρυφό|επί πληρωμή κρυφά ¦ платен скрит|платени скрити

@@ -1,0 +1,218 @@
+fr ¦ fi ¦ hu
+# Zone « plus-famille » : 💌 lettre de famille, 🛡 fiabilité par personne, 🖊 relecture d’une branche, 🌐 traduire un acte latin (assets/js/plus-famille*.js, lib/plus_famille.php)
+Fiabilité : {n} sur 100 ¦ Luotettavuus: {n}/100 ¦ Megbízhatóság: {n}/100
+🛡 Fiabilité ¦ 🛡 Luotettavuus ¦ 🛡 Megbízhatóság
+Calcul de la note… ¦ Lasketaan pisteitä… ¦ Pontszám számítása…
+Comment la note est calculée ¦ Miten pisteet lasketaan ¦ Hogyan számoljuk a pontszámot
+? Comment c’est calculé ¦ ? Miten se lasketaan ¦ ? Hogyan számoljuk
+en doute : {what} ¦ epävarma: {what} ¦ kétes: {what}
+date estimée : {what} ¦ arvioitu päivämäärä: {what} ¦ becsült dátum: {what}
+aucun fait noté (naissance, mariage, décès…) ¦ ei kirjattuja tietoja (syntymä, avioliitto, kuolema…) ¦ nincs rögzített tény (születés, házasság, halál…)
+sans source : {what} ¦ ilman lähdettä: {what} ¦ forrás nélkül: {what}
+une source sur la fiche, mais sur aucun fait ¦ lähde kortilla, mutta ei yhdessäkään tiedossa ¦ forrás az adatlapon, de egyik tényen sem
+aucune source ¦ ei lähteitä ¦ nincs forrás
+{who} : lien {lvl} ¦ {who}: yhteys {lvl} ¦ {who}: kapcsolat {lvl}
+pas de parents dans la base : cette part ne compte pas ¦ ei vanhempia tietokannassa: tämä osa ei lasketa ¦ nincsenek szülők az adatbázisban: ez a rész nem számít
+ajouter une source à : {what} ¦ lisää lähde: {what} ¦ forrás hozzáadása ehhez: {what}
+vérifier {what}, marqué « doute » ¦ tarkista {what}, merkitty ”epävarma” ¦ ellenőrizni: {what}, „kétes” jelöléssel
+confirmer le lien avec {name} (⚖️ dossier de preuve) ¦ vahvista yhteys henkilöön {name} (⚖️ todisteaineisto) ¦ a kapcsolat megerősítése: {name} (⚖️ bizonyítéki dosszié)
+ajouter ses faits (naissance, mariage, décès) avec leur source ¦ lisää tiedot (syntymä, avioliitto, kuolema) lähteineen ¦ a tények (születés, házasság, halál) felvétele forrással
+sur 100 ¦ / 100 ¦ / 100
+À revoir avant publication ¦ Tarkista ennen julkaisua ¦ Közzététel előtt átnézendő
+(vivant ou fiche confidentielle : ne part pas à la publication) ¦ (elossa tai luottamuksellinen kortti: ei julkaista) ¦ (élő vagy bizalmas adatlap: nem kerül közzétételre)
+Seuil « à revoir » : {n} ¦ ”Tarkistettava”-raja: {n} ¦ „Átnézendő” küszöb: {n}
+Pour gagner des points : ¦ Lisää pisteitä saat näin: ¦ Így szerezhetsz pontokat:
+La note n’est pas le score de complétude (qui compte ce qui est rempli) : une fiche peut être bien remplie et peu sûre. ¦ Pisteet eivät ole täydellisyysaste (joka laskee täytetyt tiedot): kortti voi olla hyvin täytetty mutta epävarma. ¦ A pontszám nem a kitöltöttség (az azt számolja, mi van kitöltve): egy adatlap lehet jól kitöltött, mégis bizonytalan.
+Calcul impossible. ¦ Laskenta ei onnistu. ¦ A számítás nem lehetséges.
+🛡 FIABILITÉ ¦ 🛡 LUOTETTAVUUS ¦ 🛡 MEGBÍZHATÓSÁG
+Trois parts, sur 100 chacune, puis une moyenne : ¦ Kolme osaa, kukin /100, sitten keskiarvo: ¦ Három rész, mindegyik 100-ból, aztán átlag:
+Ses faits (40 %) ¦ Tiedot (40 %) ¦ A tények (40%)
+la fiabilité de chaque fait : certain 100, déduit 80, estimé 55, doute 15, non évalué 60 ; une date « vers… », « avant… » compte comme estimée. ¦ kunkin tiedon luotettavuus: varma 100, päätelty 80, arvioitu 55, epävarma 15, arvioimaton 60; päivämäärä ”noin…”, ”ennen…” lasketaan arvioiduksi. ¦ minden tény megbízhatósága: biztos 100, következtetett 80, becsült 55, kétes 15, nem értékelt 60; a „kb…”, „előtt…” dátum becsültnek számít.
+Ses sources (35 %) ¦ Lähteet (35 %) ¦ A források (35%)
+la part des faits qui ont une source citée ou un acte en image. ¦ niiden tietojen osuus, joilla on lähde tai asiakirjan kuva. ¦ azon tények aránya, amelyeknek van idézett forrása vagy iratképe.
+Ses liens (25 %) ¦ Yhteydet (25 %) ¦ A kapcsolatok (25%)
+la solidité du lien avec chaque parent : prouvé 100, probable 75, supposé 45, sans source 20, réfuté 0. Sans parents dans la base, cette part ne compte pas. ¦ yhteyden vahvuus kumpaankin vanhempaan: todistettu 100, todennäköinen 75, oletettu 45, lähteetön 20, kumottu 0. Ilman vanhempia tämä osa ei lasketa. ¦ a kapcsolat erőssége minden szülővel: bizonyított 100, valószínű 75, feltételezett 45, forrás nélküli 20, cáfolt 0. Szülők nélkül ez a rész nem számít.
+Sous le seuil (50 au départ), la fiche est « à revoir avant publication ». Le seuil se règle dans Réglages → ⚙️ Seuils du contrôle. ¦ Rajan alla (aluksi 50) kortti on ”tarkistettava ennen julkaisua”. Rajan voi asettaa kohdassa Asetukset → ⚙️ Tarkistuksen rajat. ¦ A küszöb alatt (kezdetben 50) az adatlap „közzététel előtt átnézendő”. A küszöb a Beállítások → ⚙️ Ellenőrzési küszöbök alatt állítható.
+Rien n’est changé dans ta base : la note est recalculée dès qu’un fait ou une source change. ¦ Tietokantaasi ei muuteta: pisteet lasketaan uudelleen heti, kun tieto tai lähde muuttuu. ¦ Az adatbázisod nem változik: a pontszám újraszámolódik, amint egy tény vagy forrás változik.
+{day} : {first}, {age} ¦ {day}: {first}, {age} ¦ {day}: {first}, {age}
+{day} : il y a {n} ans, {a} et {b} se mariaient ¦ {day}: {n} vuotta sitten {a} ja {b} menivät naimisiin ¦ {day}: {n} éve házasodott össze {a} és {b}
+{day} : il y a {n} ans naissait {name} ¦ {day}: {n} vuotta sitten syntyi {name} ¦ {day}: {n} éve született {name}
+{what} dans l’arbre : {list} ¦ {what} sukupuussa: {list} ¦ {what} a családfán: {list}
+Nouveau dans les médias : « {title} » ¦ Uutta medioissa: ”{title}” ¦ Új a médiák között: „{title}”
+La lettre des {nm} ¦ {nm}-suvun kirje ¦ A {nm} család levele
+Bonjour à tous ! Voici les nouvelles de la famille ce mois-ci. ¦ Hei kaikki! Tässä suvun uutiset tältä kuulta. ¦ Sziasztok! Íme a család e havi hírei.
+Photo : {title} ¦ Kuva: {title} ¦ Fénykép: {title}
+Les anniversaires du mois ¦ Kuukauden merkkipäivät ¦ A hónap évfordulói
+Pas d’anniversaire ce mois-ci. ¦ Ei merkkipäiviä tässä kuussa. ¦ Ebben a hónapban nincs évforduló.
+Les dernières découvertes ¦ Uusimmat löydöt ¦ A legújabb felfedezések
+Rien de nouveau ce mois-ci : à vous de m’envoyer vos souvenirs ! ¦ Ei mitään uutta tässä kuussa: nyt on teidän vuoronne lähettää muistonne! ¦ Ebben a hónapban nincs újdonság: most ti küldjétek el az emlékeiteket!
+L’ancêtre à l’honneur ¦ Kuukauden esivanhempi ¦ A hónap őse
+Avec toute mon affection, ¦ Rakkaudella, ¦ Szeretettel,
+Ce qu’on y met ¦ Mitä siihen tulee ¦ Mi kerüljön bele
+🖼 Changer ¦ 🖼 Vaihda ¦ 🖼 Csere
+Tout se retouche dans la lettre (clique sur un texte). Les personnes vivantes n’y figurent que par leur prénom et leur âge ; les fiches confidentielles jamais. ¦ Kaikkea voi muokata kirjeessä (napsauta tekstiä). Elossa olevat näkyvät vain etunimellä ja iällä, luottamukselliset kortit eivät koskaan. ¦ Minden a levélben szerkeszthető (kattints egy szövegre). Az élők csak keresztnévvel és életkorral szerepelnek, a bizalmas adatlapok soha.
+Je remplis la lettre… ¦ Täytetään kirjettä… ¦ A levél kitöltése…
+Lettre refaite avec les nouveaux choix ¦ Kirje tehty uudelleen uusilla valinnoilla ¦ A levél újra elkészült az új beállításokkal
+LETTRE DE FAMILLE ¦ SUKUKIRJE ¦ CSALÁDI LEVÉL
+La photo de la lettre ¦ Kirjeen kuva ¦ A levél fényképe
+Lettre de famille ¦ Sukukirje ¦ Családi levél
+La lettre du mois remplie toute seule : anniversaires, dernières découvertes, une photo, un ancêtre à l’honneur. Tout se retouche. ¦ Kuukauden kirje täyttyy itsestään: merkkipäivät, uusimmat löydöt, kuva ja esivanhempi. Kaikkea voi muokata. ¦ A havi levél magától kitöltődik: évfordulók, legújabb felfedezések, egy fénykép, a hónap őse. Minden szerkeszthető.
+Lettre gardée : « {title} » (Listes → Lettres de famille) ¦ Kirje tallennettu: ”{title}” (Luettelot → Sukukirjeet) ¦ Levél megőrizve: „{title}” (Listák → Családi levelek)
+💾 Garder ¦ 💾 Tallenna ¦ 💾 Megőrzés
+Ranger la lettre dans Listes → Lettres de famille ¦ Tallenna kirje kohtaan Luettelot → Sukukirjeet ¦ A levél elmentése: Listák → Családi levelek
+PDF ¦ PDF ¦ PDF
+par la fenêtre « Imprimer » (⤓ PDF) ¦ ”Tulosta”-ikkunan kautta (⤓ PDF) ¦ a „Nyomtatás” ablakkal (⤓ PDF)
+Image (PNG) ¦ Kuva (PNG) ¦ Kép (PNG)
+Ouvre ta messagerie avec la lettre déjà écrite : rien n’est envoyé par l’app ¦ Avaa sähköpostin valmiin kirjeen kanssa: sovellus ei lähetä mitään ¦ Megnyitja a levelezőt a kész levéllel: az app semmit sem küld
+📝 Retoucher ¦ 📝 Muokkaa ¦ 📝 Szerkesztés
+Ouvrir la lettre dans le traitement de texte ¦ Avaa kirje tekstinkäsittelyssä ¦ A levél megnyitása a szövegszerkesztőben
+Chers cousins, chères cousines, ¦ Rakkaat serkut, ¦ Kedves unokatestvérek!
+Ce que j’ai trouvé ce mois-ci… ¦ Mitä löysin tässä kuussa… ¦ Amit ebben a hónapban találtam…
+Si vous avez des photos, des lettres ou des souvenirs, je serais très heureux de les voir ! ¦ Jos teillä on kuvia, kirjeitä tai muistoja, näkisin ne mielelläni! ¦ Ha van fényképetek, leveletek vagy emléketek, nagyon szívesen megnézném!
+Je vous embrasse, ¦ Halauksin, ¦ Ölellek benneteket,
+📋 Voir dans Listes › Lettres de famille ¦ 📋 Näytä: Luettelot › Sukukirjeet ¦ 📋 Megnézés: Listák › Családi levelek
+remplie toute seule : anniversaires du mois, découvertes, photo, ancêtre ¦ täyttyy itsestään: kuukauden merkkipäivät, löydöt, kuva, esivanhempi ¦ magától kitöltődik: a hónap évfordulói, felfedezések, fénykép, ős
+Lettres de famille ¦ Sukukirjeet ¦ Családi levelek
+💌 Lettres de famille ¦ 💌 Sukukirjeet ¦ 💌 Családi levelek
+Les lettres du mois gardées depuis ✨ Trésors → « 💌 Lettre de famille ». À ne pas confondre avec les « ✉️ Lettres aux descendants », qui s’ouvrent plus tard. ¦ Kuukauden kirjeet tallennettuina kohdasta ✨ Aarteet → ”💌 Sukukirje”. Eri asia kuin ”✉️ Kirjeet jälkipolville”, jotka avautuvat myöhemmin. ¦ A havi levelek, a ✨ Kincsek → „💌 Családi levél” alól megőrizve. Nem azonos a „✉️ Levelek az utódoknak” kincsekkel, amelyek később nyílnak meg.
+💌 Nouvelle lettre ¦ 💌 Uusi kirje ¦ 💌 Új levél
+Chercher… (titre, mois) ¦ Hae… (otsikko, kuukausi) ¦ Keresés… (cím, hónap)
+Supprimer la lettre ¦ Poista kirje ¦ Levél törlése
+Aucune lettre gardée pour l’instant ¦ Ei vielä tallennettuja kirjeitä ¦ Még nincs megőrzött levél
+Fais celle du mois dans ✨ Trésors → « 💌 Lettre de famille », puis « 💾 Garder ». ¦ Tee kuukauden kirje kohdassa ✨ Aarteet → ”💌 Sukukirje” ja sitten ”💾 Tallenna”. ¦ Készítsd el a havit itt: ✨ Kincsek → „💌 Családi levél”, majd „💾 Megőrzés”.
+💌 Faire la lettre du mois ¦ 💌 Tee kuukauden kirje ¦ 💌 A havi levél elkészítése
+Lettre « {title} » supprimée ¦ Kirje ”{title}” poistettu ¦ A(z) „{title}” levél törölve
+« d’accord », dit {who}. ¦ ”samaa mieltä”, sanoo {who}. ¦ „egyetértek”, mondja {who}.
+« faux », dit {who}. ¦ ”väärin”, sanoo {who}. ¦ „téves”, mondja {who}.
+Que faire de cette remarque ? ¦ Mitä tälle huomautukselle tehdään? ¦ Mi legyen ezzel a megjegyzéssel?
+✓ Accepter (témoignage) ¦ ✓ Hyväksy (todistus) ¦ ✓ Elfogadás (tanúságtétel)
+✓ Accepter (note sur le fait, « doute ») ¦ ✓ Hyväksy (huomautus tietoon, ”epävarma”) ¦ ✓ Elfogadás (megjegyzés a tényhez, „kétes”)
+{what} par {who} : ajoutés comme témoignage si tu acceptes ¦ {what} ({who}): lisätään todistukseksi, jos hyväksyt ¦ {what} ({who}): tanúságtételként kerülnek be, ha elfogadod
+Pour tous : ¦ Kaikille: ¦ Mindre:
+Importer les remarques d’une relecture ¦ Tuo tarkistuksen huomautukset ¦ Átnézés megjegyzéseinek importálása
+le fichier « remarques-….json » ¦ tiedosto ”remarques-….json” ¦ a „remarques-….json” fájl
+Le fichier que ton cousin t’a renvoyé avec « ⤓ Renvoyer mes remarques ». ¦ Tiedosto, jonka serkkusi lähetti painikkeella ”⤓ Lähetä huomautukseni”. ¦ A fájl, amelyet az unokatestvéred a „⤓ Megjegyzéseim visszaküldése” gombbal küldött.
+Ce fichier est trop gros pour un fichier de remarques. ¦ Tiedosto on liian suuri huomautustiedostoksi. ¦ Ez a fájl túl nagy egy megjegyzésfájlhoz.
+<b>{what}</b> de <b>{who}</b> sur « {title} » ({date}). Pour chaque fait : accepte, refuse ou garde pour plus tard ¦ <b>{what}</b> henkilöltä <b>{who}</b>: ”{title}” ({date}). Jokaiselle tiedolle: hyväksy, hylkää tai jätä myöhemmäksi ¦ <b>{what}</b> tőle: <b>{who}</b> – „{title}” ({date}). Minden tényhez: elfogadás, elutasítás vagy későbbre
+Ces remarques ont <b>déjà été importées</b> ¦ Nämä huomautukset on <b>jo tuotu</b> ¦ Ezeket a megjegyzéseket <b>már importáltad</b>
+Aucune remarque dans ce fichier ¦ Tiedostossa ei ole huomautuksia ¦ Ebben a fájlban nincs megjegyzés
+{what} sur des faits qui ne sont plus dans la base : mises de côté. ¦ {what} tiedoista, joita ei enää ole tietokannassa: jätetty sivuun. ¦ {what} olyan tényekről, amelyek már nincsenek az adatbázisban: félretéve.
+⤒ Importer les remarques ¦ ⤒ Tuo huomautukset ¦ ⤒ Megjegyzések importálása
+{what} (relecture de {who}) ¦ {what} (tarkistus: {who}) ¦ {what} (átnézte: {who})
+Remarques de {who} gardées avec la relecture. ¦ Huomautukset ({who}) tallennettu tarkistuksen kanssa. ¦ {who} megjegyzései az átnézéssel együtt megőrizve.
+relu par {who} ¦ tarkistanut: {who} ¦ átnézte: {who}
+En attente des remarques ¦ Odotetaan huomautuksia ¦ A megjegyzésekre vár
+{n} à ranger ¦ {n} käsiteltävänä ¦ {n} elrendezendő
+tout est rangé ¦ kaikki käsitelty ¦ minden elrendezve
+Envoyé, en attente des remarques ¦ Lähetetty, odotetaan huomautuksia ¦ Elküldve, a megjegyzésekre vár
+Supprimer la relecture ¦ Poista tarkistus ¦ Átnézés törlése
+Relectures de branche ¦ Haarojen tarkistukset ¦ Ágak átnézései
+＋ Demander une relecture… ¦ ＋ Pyydä tarkistusta… ¦ ＋ Átnézés kérése…
+Aucune relecture : « 📤 Partager avec la famille » avec la case « 🖊 Demander une relecture », ou fiche → ⋯ → « 🖊 Faire relire cette branche… ». ¦ Ei tarkistuksia: ”📤 Jaa suvun kanssa” ja ruutu ”🖊 Pyydä tarkistusta”, tai kortti → ⋯ → ”🖊 Tarkistuta tämä haara…”. ¦ Nincs átnézés: „📤 Megosztás a családdal” a „🖊 Átnézés kérése” jelölővel, vagy adatlap → ⋯ → „🖊 Ennek az ágnak az átnézetése…”.
+Relecture « {title} » supprimée ¦ Tarkistus ”{title}” poistettu ¦ A(z) „{title}” átnézés törölve
+Faire relire cette branche… ¦ Tarkistuta tämä haara… ¦ Ennek az ágnak az átnézetése…
+{who} pense que c’est faux : {c} ¦ {who} uskoo, että tämä on väärin: {c} ¦ {who} szerint ez téves: {c}
+{who} est d’accord ¦ {who} on samaa mieltä ¦ {who} egyetért
+Remarque refusée ¦ Huomautus hylätty ¦ Megjegyzés elutasítva
+Remarque notée sur le fait ¦ Huomautus kirjattu tietoon ¦ Megjegyzés rögzítve a tényhez
+Témoignage ajouté ¦ Todistus lisätty ¦ Tanúságtétel hozzáadva
+« je pense que c’est faux » ¦ ”luulen, että tämä on väärin” ¦ „szerintem ez téves”
+« d’accord » ¦ ”samaa mieltä” ¦ „egyetértek”
+Corriger le fait ¦ Korjaa tieto ¦ A tény javítása
+ouvre le fait ; la remarque reste jusqu’à « Noter » ou « Refuser » ¦ avaa tiedon; huomautus pysyy, kunnes valitset ”Kirjaa” tai ”Hylkää” ¦ megnyitja a tényt; a megjegyzés megmarad a „Rögzítés” vagy „Elutasítás” választásáig
+Noter (note sur le fait, « doute ») ¦ Kirjaa (huomautus tietoon, ”epävarma”) ¦ Rögzítés (megjegyzés a tényhez, „kétes”)
+Accepter (témoignage) ¦ Hyväksy (todistus) ¦ Elfogadás (tanúságtétel)
+🖊 Remarque de relecture ¦ 🖊 Tarkistuksen huomautus ¦ 🖊 Átnézési megjegyzés
+l’année {y} ¦ vuosi {y} ¦ a(z) {y}. év
+Traduire ¦ Käännä ¦ Fordítás
+Le mot à mot tout de suite, la traduction complète si le modèle de la lecture approfondie est installé ¦ Sana sanalta heti, koko käännös, jos syvälukemisen malli on asennettu ¦ Azonnal szóról szóra, a teljes fordítás, ha a mélyolvasás modellje telepítve van
+latin → français ¦ latina → ranska ¦ latin → francia
+Revenir au texte ¦ Takaisin tekstiin ¦ Vissza a szöveghez
+Écris ou lis d’abord le texte de l’acte : la traduction part du texte transcrit. ¦ Kirjoita tai lue ensin asiakirjan teksti: käännös tehdään litteroidusta tekstistä. ¦ Előbb írd be vagy olvasd be az irat szövegét: a fordítás az átírt szövegből indul.
+L’acte (latin, transcrit) ¦ Asiakirja (latinaa, litteroitu) ¦ Az irat (latin, átírt)
+vert : formule connue ¦ vihreä: tunnettu kaava ¦ zöld: ismert formula
+bleu : mot du dictionnaire ¦ sininen: sanakirjan sana ¦ kék: szótári szó
+pointillé : peu sûr ¦ pisteviiva: epävarma ¦ pontozott: bizonytalan
+Niveau 1 · mot à mot sans installation ¦ Taso 1 · sana sanalta ilman asennusta ¦ 1. szint · szóról szóra, telepítés nélkül
+Aucun mot reconnu. ¦ Sanoja ei tunnistettu. ¦ Nincs felismert szó.
+Date : {d} ¦ Päivämäärä: {d} ¦ Dátum: {d}
+Niveau 2 · traduction complète ¦ Taso 2 · koko käännös ¦ 2. szint · teljes fordítás
+Je regarde si le modèle est installé… ¦ Tarkistetaan, onko malli asennettu… ¦ Megnézem, telepítve van-e a modell…
+📋 Garder dans la transcription ¦ 📋 Tallenna litterointiin ¦ 📋 Megőrzés az átiratban
+Copier la traduction ¦ Kopioi käännös ¦ Fordítás másolása
+📝 Mise au propre ¦ 📝 Puhtaaksikirjoitus ¦ 📝 Tisztázat
+Le niveau 1 marche toujours, sans rien installer. Les noms, dates et rôles repérés partent ensuite, comme d’habitude, dans « Ce que l’app a trouvé ». ¦ Taso 1 toimii aina ilman asennusta. Löydetyt nimet, päivämäärät ja roolit menevät sitten tavalliseen tapaan kohtaan ”Mitä sovellus löysi”. ¦ Az 1. szint mindig működik, telepítés nélkül. A felismert nevek, dátumok és szerepek aztán a szokásos módon a „Mit talált az app” részbe kerülnek.
+✓ Les deux lectures sont d’accord sur les noms, la date et les rôles. ¦ ✓ Molemmat luennat ovat samaa mieltä nimistä, päivämäärästä ja rooleista. ¦ ✓ A két olvasat egyezik a nevekben, a dátumban és a szerepekben.
+À vérifier : la traduction complète ne dit pas la même chose pour : {list} ¦ Tarkistettavaa: koko käännös sanoo eri asian kohdassa: {list} ¦ Ellenőrizendő: a teljes fordítás mást mond itt: {list}
+Traduction copiée. ¦ Käännös kopioitu. ¦ Fordítás másolva.
+Copie impossible dans ce navigateur. ¦ Kopiointi ei onnistu tässä selaimessa. ¦ Ebben a böngészőben nem lehet másolni.
+Traduction gardée dans la transcription (enregistre avec ⌘S) ¦ Käännös tallennettu litterointiin (tallenna ⌘S) ¦ Fordítás megőrizve az átiratban (mentés: ⌘S)
+Traduction en cours (le modèle tourne sur cet ordinateur)… ¦ Käännetään (malli toimii tällä tietokoneella)… ¦ Fordítás folyamatban (a modell ezen a gépen fut)…
+La traduction n’a pas abouti. ¦ Käännös ei onnistunut. ¦ A fordítás nem sikerült.
+La traduction gardée avec cette transcription. ¦ Tämän litteroinnin kanssa tallennettu käännös. ¦ Az átirattal megőrzött fordítás.
+↻ Retraduire ¦ ↻ Käännä uudelleen ¦ ↻ Újrafordítás
+Le modèle de la lecture approfondie est installé : la traduction complète prend quelques dizaines de secondes. ¦ Syvälukemisen malli on asennettu: koko käännös vie muutamia kymmeniä sekunteja. ¦ A mélyolvasás modellje telepítve van: a teljes fordítás néhány tucat másodpercig tart.
+🌐 Traduire tout l’acte ¦ 🌐 Käännä koko asiakirja ¦ 🌐 Az egész irat lefordítása
+La traduction complète utilise le modèle de la lecture approfondie (Ollama, ≈ 6 Go, rien ne part sur Internet). ¦ Koko käännös käyttää syvälukemisen mallia (Ollama, ≈ 6 Gt, mitään ei lähetetä internetiin). ¦ A teljes fordítás a mélyolvasás modelljét használja (Ollama, ≈ 6 GB, semmi sem megy az internetre).
+Le niveau 1 marche toujours. ¦ Taso 1 toimii aina. ¦ Az 1. szint mindig működik.
+Transcription d’acte ¦ Asiakirjan litterointi ¦ Irat átirata
+Traduction ¦ Käännös ¦ Fordítás
+Mots difficiles et abréviations ¦ Vaikeat sanat ja lyhenteet ¦ Nehéz szavak és rövidítések
+Les personnes de l’acte ¦ Asiakirjan henkilöt ¦ Az irat szereplői
+=fait certain ¦ varma tieto|varmaa tietoa ¦ biztos tény|biztos tény
+=fait déduit ¦ päätelty tieto|päätelty tietoa ¦ következtetett tény|következtetett tény
+=fait estimé ¦ arvioitu tieto|arvioitua tietoa ¦ becsült tény|becsült tény
+=fait en doute ¦ epävarma tieto|epävarmaa tietoa ¦ kétes tény|kétes tény
+=fait non évalué ¦ arvioimaton tieto|arvioimatonta tietoa ¦ nem értékelt tény|nem értékelt tény
+=fait ¦ tieto|tietoa ¦ tény|tény
+=fiche à revoir ¦ tarkistettava kortti|tarkistettavaa korttia ¦ átnézendő adatlap|átnézendő adatlap
+=fait confirmé ¦ vahvistettu tieto|vahvistettua tietoa ¦ megerősített tény|megerősített tény
+=remarque notée ¦ kirjattu huomautus|kirjattua huomautusta ¦ rögzített megjegyzés|rögzített megjegyzés
+=remarque pour plus tard ¦ huomautus myöhemmäksi|huomautusta myöhemmäksi ¦ későbbre hagyott megjegyzés|későbbre hagyott megjegyzés
+=relecture ¦ tarkistus|tarkistusta ¦ átnézés|átnézés
+Très sûr ¦ Erittäin varma ¦ Nagyon biztos
+Assez sûr ¦ Melko varma ¦ Elég biztos
+Peu sûr ¦ Epävarma ¦ Bizonytalan
+prouvé ¦ todistettu ¦ bizonyított
+probable ¦ todennäköinen ¦ valószínű
+réfuté ¦ kumottu ¦ cáfolt
+parent ¦ vanhempi ¦ szülő
+baptisé(e) ¦ kastettu ¦ megkeresztelt
+note sous ¦ pisteet alle ¦ pontszám ez alatt:
+{a} sur {n} ont une source ¦ {a} / {n} on lähde ¦ {n}-ból {a} rendelkezik forrással
+{a} sur {n} a une source ¦ {a} / {n} on lähde ¦ {n}-ból {a} rendelkezik forrással
+{n} sont à revoir avant publication (note sous {min}). ¦ {n}: tarkistettava ennen julkaisua (pisteet alle {min}). ¦ {n}: közzététel előtt átnézendő (pontszám {min} alatt).
+{n} est à revoir avant publication (note sous {min}). ¦ {n}: tarkistettava ennen julkaisua (pisteet alle {min}). ¦ {n}: közzététel előtt átnézendő (pontszám {min} alatt).
+La fiabilité n’a pas pu être calculée. ¦ Luotettavuutta ei voitu laskea. ¦ A megbízhatóságot nem sikerült kiszámolni.
+Aucune fiche à revoir avant publication, bravo ! ¦ Ei tarkistettavia kortteja ennen julkaisua, hienoa! ¦ Nincs átnézendő adatlap közzététel előtt, gratulálok!
+Pas encore de fiche à publier. ¦ Ei vielä julkaistavia kortteja. ¦ Még nincs közzéteendő adatlap.
+{n} sous {min} sur 100 ¦ {n} alle {min}/100 ¦ {n} {min}/100 alatt
+🛡 Fiches les moins fiables ¦ 🛡 Vähiten luotettavat kortit ¦ 🛡 A legkevésbé megbízható adatlapok
+Listes → Personnes, filtrée sur « À revoir avant publication » ¦ Luettelot → Henkilöt, suodatettu: ”Tarkista ennen julkaisua” ¦ Listák → Személyek, szűrve: „Közzététel előtt átnézendő”
+Les voir ¦ Näytä ne ¦ Megnézem
+Les laisser de côté ¦ Jätä pois ¦ Kihagyom őket
+Exporter quand même ¦ Vie silti ¦ Exportálás mégis
+Transcription ¦ Litterointi ¦ Átirat
+🖊 Relecture ¦ 🖊 Tarkistus ¦ 🖊 Átnézés
+🖊 Demander une relecture (le cousin peut cocher et commenter chaque fait) ¦ 🖊 Pyydä tarkistusta (serkku voi merkitä ja kommentoida jokaista tietoa) ¦ 🖊 Átnézés kérése (az unokatestvér minden tényt bejelölhet és kommentálhat)
+La copie montre alors « ✓ D’accord / ✗ Je pense que c’est faux » sur chaque fait, et « ⤓ Renvoyer mes remarques » : un petit fichier .json à importer dans Questions aux proches → « ⤒ Importer les réponses ». ¦ Kopio näyttää silloin jokaisen tiedon kohdalla ”✓ Samaa mieltä / ✗ Luulen, että tämä on väärin” sekä ”⤓ Lähetä huomautukseni”: pienen .json-tiedoston, jonka tuot kohdassa Kysymykset läheisille → ”⤒ Tuo vastaukset”. ¦ A másolat ekkor minden ténynél „✓ Egyetértek / ✗ Szerintem ez téves” gombot és „⤓ Megjegyzéseim visszaküldése” gombot mutat: egy kis .json-fájlt, amelyet a Kérdések a hozzátartozóknak → „⤒ Válaszok importálása” alatt töltesz be.
+Copie à relire prête : {name}. Le cousin te renverra ses remarques (un fichier .json) : Questions aux proches → « ⤒ Importer les réponses ». ¦ Tarkistettava kopio valmis: {name}. Serkku lähettää huomautuksensa (.json-tiedosto): Kysymykset läheisille → ”⤒ Tuo vastaukset”. ¦ Az átnézendő másolat kész: {name}. Az unokatestvér visszaküldi a megjegyzéseit (.json fájl): Kérdések a hozzátartozóknak → „⤒ Válaszok importálása”.
+Donne un titre à la lettre. ¦ Anna kirjeelle otsikko. ¦ Adj címet a levélnek.
+Lettre introuvable. ¦ Kirjettä ei löydy. ¦ A levél nem található.
+Relecture introuvable. ¦ Tarkistusta ei löydy. ¦ Az átnézés nem található.
+Remarque introuvable. ¦ Huomautusta ei löydy. ¦ A megjegyzés nem található.
+Ce n’est pas un fichier de remarques de relecture. ¦ Tämä ei ole tarkistuksen huomautustiedosto. ¦ Ez nem átnézési megjegyzésfájl.
+Cette relecture n’est pas dans cette base (ou elle a été supprimée). ¦ Tätä tarkistusta ei ole tässä tietokannassa (tai se on poistettu). ¦ Ez az átnézés nincs ebben az adatbázisban (vagy törölték).
+Ce fait n’existe plus. ¦ Tätä tietoa ei enää ole. ¦ Ez a tény már nem létezik.
+Cette remarque est déjà rangée. ¦ Huomautus on jo käsitelty. ¦ Ez a megjegyzés már el van rendezve.
+Il n’y a pas encore de texte à traduire. ¦ Käännettävää tekstiä ei vielä ole. ¦ Még nincs lefordítandó szöveg.
+Le modèle de la lecture approfondie n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Syvälukemisen mallia ei ole vielä ladattu: ”⤓ Asenna syvälukeminen”. ¦ A mélyolvasás modellje még nincs letöltve: „⤓ Mélyolvasás telepítése”.
+Ces outils ne sont pas encore prêts : relance l’app. ¦ Työkalut eivät ole vielä valmiita: käynnistä sovellus uudelleen. ¦ Ezek az eszközök még nem állnak készen: indítsd újra az appot.
+Cette demande de relecture n’existe plus. ¦ Tätä tarkistuspyyntöä ei enää ole. ¦ Ez az átnézési kérés már nem létezik.
+{who} confirme : {fact}. ¦ {who} vahvistaa: {fact}. ¦ {who} megerősíti: {fact}.
+Confirmé par {who} : {fact} ¦ Vahvistanut {who}: {fact} ¦ Megerősítette {who}: {fact}
+{who}, relecture « {title} », le {date} ¦ {who}, tarkistus ”{title}”, {date} ¦ {who}, „{title}” átnézés, {date}
+Relecture d’une branche ¦ Haaran tarkistus ¦ Egy ág átnézése
+{who} pense que c’est faux. ¦ {who} uskoo, että tämä on väärin. ¦ {who} szerint ez téves.
+relecture « {title} », le {date} ¦ tarkistus ”{title}”, {date} ¦ „{title}” átnézés, {date}
+💬 Remarque de {who} ¦ 💬 Huomautus: {who} ¦ 💬 {who} megjegyzése

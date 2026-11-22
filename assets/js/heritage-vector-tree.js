@@ -58,11 +58,12 @@
         pat: [hx(t.pat?.[0], b.pat[0]), hx(t.pat?.[1], b.pat[1])], mat: [hx(t.mat?.[0], b.mat[0]), hx(t.mat?.[1], b.mat[1])], center: hx(t.center, b.center), empty: hx(t.empty, b.empty), trunk: hx(t.trunk, b.trunk), leaf: (() => { const l = (Array.isArray(t.leaf) ? t.leaf : []).filter(c => HEX.test(c)).slice(0, 5); return l.length ? l : b.leaf; })(), title: hx(t.title, b.title), frame: t.frame !== false}; }
     const themeOf = k => (themes().find(x => x[0] === k) || themes()[0])[1];
     const SHAPES = [['fan180', 'Éventail (demi-cercle)', 'land', 12], ['fan240', 'Éventail ouvert (240°)', 'land', 12], ['fan270', 'Éventail trois-quarts (270°)', 'land', 12], ['wheel', 'Roue (cercle complet)', 'port', 12],
-        ['tree', 'Arbre dessiné (tronc et branches)', 'port', 8], ['boxesV', 'Arbre en cases (de bas en haut)', 'land', 7], ['boxesH', 'Tableau d’ascendance (de gauche à droite)', 'land', 7]];
+        ['tree', 'Arbre dessiné (tronc et branches)', 'port', 8], ['boxesV', 'Arbre en cases (de bas en haut)', 'land', 7], ['boxesH', 'Tableau d’ascendance (de gauche à droite)', 'land', 7], ['bowtie', 'Nœud papillon (père à gauche, mère à droite)', 'land', 7]];
     // la petite image de chaque forme (dans le choix)
     const SHAPE_ICON = {fan180: '<path d="M4 30a20 20 0 0 1 40 0Z M14 30a10 10 0 0 1 20 0" fill="none" stroke="currentColor" stroke-width="2"/>', fan240: '<path d="M7.7 34A20 20 0 1 1 40.3 34L24 24Z M24 24L14.3 9.4M24 24l9.7-14.6" fill="none" stroke="currentColor" stroke-width="2"/>',
         fan270: '<path d="M9.9 38.1A20 20 0 1 1 38.1 38.1L24 24Z M24 24V4M24 24H4M24 24h20" fill="none" stroke="currentColor" stroke-width="2"/>', wheel: '<circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M24 4v12M24 32v12M4 24h12M32 24h12" stroke="currentColor" stroke-width="2"/>',
         tree: '<path d="M24 44V26M24 30l-9-9M24 28l9-10" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="24" cy="15" r="11" fill="currentColor" opacity=".35"/>', boxesV: '<g fill="none" stroke="currentColor" stroke-width="2"><rect x="18" y="38" width="12" height="7"/><rect x="7" y="22" width="12" height="7"/><rect x="29" y="22" width="12" height="7"/><rect x="2" y="6" width="9" height="6"/><rect x="13" y="6" width="9" height="6"/><rect x="26" y="6" width="9" height="6"/><rect x="37" y="6" width="9" height="6"/><path d="M24 38v-5H13v-4M24 33h11v-4"/></g>',
+        bowtie: '<g fill="none" stroke="currentColor" stroke-width="2"><rect x="18" y="20" width="12" height="8"/><rect x="6" y="9" width="8" height="6"/><rect x="6" y="33" width="8" height="6"/><rect x="34" y="9" width="8" height="6"/><rect x="34" y="33" width="8" height="6"/><path d="M18 24h-2V12h-2M16 24v12h-2M30 24h2V12h2M32 24v12h2"/><path d="M2 4v40M46 4v40" stroke-dasharray="2 3"/></g>',
         boxesH: '<g fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="20" width="12" height="8"/><rect x="18" y="9" width="12" height="7"/><rect x="18" y="32" width="12" height="7"/><rect x="34" y="3" width="12" height="6"/><rect x="34" y="14" width="12" height="6"/><rect x="34" y="28" width="12" height="6"/><rect x="34" y="39" width="12" height="6"/><path d="M14 24h2v-11h2M16 24v11h2"/></g>'};
 
     /* mesure des textes (pour qu'ils tiennent dans leur case) */
@@ -243,6 +244,33 @@
         return {groups, branches: links, leaves: [], labels, box: {cx: W / 2, cy: H / 2, R: Math.min(w, h) / 2}};
     }
 
+    /* ═════════ 🎀 Nœud papillon : la personne au centre, la lignée du père à gauche, celle de la mère à droite ═════════ */
+    function buildBowtie(people, o, T, W, H, band) {
+        const G = clamp(o.gens, 1, 6), m = Math.min(W, H) * .05, unit = Math.min(W, H) / 1000, top = o.titlePos === 'top' ? band : 0, bottom = o.titlePos === 'bottom' ? band : 0;
+        const x0 = m, w = W - 2 * m, lab = o.genLabels ? (H - 2 * m - top - bottom) * .05 : 0, y0 = m + top + lab, h = H - 2 * m - top - bottom - lab;
+        const cW = w * (G <= 2 ? .2 : G <= 4 ? .14 : .11), colW = (w - cW) / 2 / G, cx = W / 2, cy = y0 + h / 2;
+        const box = s => { if (s === 1) { const bh = Math.min(h * .2, cW * .7); return {x: cx - cW * .46, y: cy - bh / 2, w: cW * .92, h: bh}; }
+            const g = genOf(s), half = 2 ** (g - 1), pat = (s >> (g - 1)) === 2, j = s - 2 ** g - (pat ? 0 : half), slot = h / half, bw = colW * .84, bh = Math.min(slot * .82, colW * .62);
+            const xc = pat ? cx - cW / 2 - (g - .5) * colW : cx + cW / 2 + (g - .5) * colW; return {x: xc - bw / 2, y: y0 + slot * (j + .5) - bh / 2, w: bw, h: bh, pat}; };
+        const groups = [], links = [], labels = [], sw = n2(Math.max(.6, 1.4 * unit));
+        for (let s = 1; s < 2 ** (G + 1); s++) {
+            const p = people.get(s); if (!p && !o.empty) continue;
+            if (s > 1 && !people.get(s >> 1) && !o.empty) continue;
+            const b = box(s), fill = fillOf(s, p, o, T, G), kids = [{id: uid(), type: 'rect', name: 'Case', x: n2(b.x), y: n2(b.y), w: n2(b.w), h: n2(b.h), r: n2(Math.min(b.w, b.h) * .12), fill, stroke: T.ink, sw}];
+            let tx = b.x, tw = b.w;
+            if (o.photos && p?.portraitData && genOf(s) <= 2 && b.h > 20 * unit) { const ph = b.h * .82, px2 = b.x + b.h * .09, clip = {id: uid(), type: 'rect', x: n2(px2), y: n2(b.y + b.h * .09), w: n2(ph * .8), h: n2(ph), r: n2(ph * .1)};
+                kids.push({id: uid(), type: 'group', name: 'Portrait', clip, children: [{id: uid(), type: 'image', name: 'Portrait', src: p.portraitData, x: clip.x, y: clip.y, w: clip.w, h: clip.h}]}); tx = px2 + ph * .8; tw = b.x + b.w - tx; }
+            const {lines: L, size} = fitLines(p ? linesOf(p, o, s) : ['?'], tw * .86, b.h * .8, T, (s === 1 ? 34 : 24) * unit * 1.5, 4 * unit);
+            if (L.length) kids.push(textObj(L, tx + tw / 2, b.y + b.h / 2, size, 0, p ? ink(fill, T) : T.ink, T));
+            groups.push({id: uid(), type: 'group', name: p ? `${s}. ${`${p.first_name || ''} ${p.last_name || ''}`.trim() || 'Sans nom'}` : `${s}. (à trouver)`, children: kids});
+            if (s > 1) { const c = box(s >> 1), right = b.x > cx, x1 = right ? c.x + c.w : c.x, y1 = c.y + c.h / 2, x2 = right ? b.x : b.x + b.w, y2 = b.y + b.h / 2, xm = (x1 + x2) / 2;
+                links.push({id: uid(), type: 'svgpath', name: `Lien ${s}`, d: `M${n2(x1)} ${n2(y1)}H${n2(xm)}V${n2(y2)}H${n2(x2)}`, fill: 'none', stroke: T.trunk, sw: n2(Math.max(.8, 2 * unit * .85 ** genOf(s))), join: 'round'}); }
+        }
+        if (o.genLabels) for (let g = 1; g <= G; g++) { const name = g === 1 ? 'Parents' : g === 2 ? 'Grands-parents' : g === 3 ? 'Arrière-grands-parents' : `${g + 1}ᵉ génération`;
+            [2 ** g, 2 ** g + 2 ** (g - 1)].forEach(s => { const b = box(s); labels.push({id: uid(), type: 'text', name, text: i18n(name), x: n2(b.x + b.w / 2), y: n2(y0 - lab * .35), size: n2(Math.min(14 * unit * 1.4, lab * .55, colW / 9)), font: T.font, align: 'middle', fill: T.ink, sw: 0, italic: true, op: .75, rot: 0}); }); }
+        return {groups, branches: links, leaves: [], labels, box: {cx, cy, R: Math.min(w, h) / 2}};
+    }
+
     /* ═════════ Habillage : cadre, titre ═════════ */
     function decor(o, T, W, H, band) {
         const out = [], unit = Math.min(W, H) / 1000, m = Math.min(W, H) * .02;
@@ -275,7 +303,7 @@
         if (!r.tree) throw new Error('Aucune ascendance pour cette personne.');
         const people = bySosa(r.tree);
         if (o.photos) { let n = 0; for (const [s, p] of people) { if (n >= 40 || genOf(s) > 4) continue; if (p?.portrait) { p.portraitData = await portraitData(p.portrait); n++; } } }
-        const built = o.shape === 'tree' ? buildTree(people, o, T, W, H, band) : o.shape === 'boxesV' || o.shape === 'boxesH' ? buildBoxes(people, o, T, W, H, band, o.shape === 'boxesV') : buildFan(people, o, T, W, H, band), d = decor(o, T, W, H, band);
+        const built = o.shape === 'tree' ? buildTree(people, o, T, W, H, band) : o.shape === 'boxesV' || o.shape === 'boxesH' ? buildBoxes(people, o, T, W, H, band, o.shape === 'boxesV') : o.shape === 'bowtie' ? buildBowtie(people, o, T, W, H, band) : buildFan(people, o, T, W, H, band), d = decor(o, T, W, H, band);
         const layer = (name, children) => ({id: uid(), type: 'group', layer: true, name, children});
         const objs = [layer('Cadre et ornements', d.frame), ...(built.branches ? [layer('Tronc et branches', built.branches)] : []), ...(built.leaves?.length ? [layer('Feuillage', built.leaves)] : []), layer('Ancêtres', built.groups), ...(built.labels.length ? [layer('Générations', built.labels)] : []), layer('Titre', d.titles)];
         return {w: W, h: H, bg: T.paper, grid: 0, snap: false, kind: 'tree', objs, count: [...people.values()].filter(Boolean).length};
@@ -341,7 +369,7 @@
                     <label><span data-help="Comment colorer les cases : côté du père et côté de la mère, hommes et femmes, une teinte qui pâlit à chaque génération, ou une seule couleur (pour imprimer).">Couleurs</span>${sel('colors', [['branch', 'Côté paternel / maternel'], ['gender', 'Hommes / femmes'], ['generation', 'Dégradé par génération'], ['none', 'Une seule couleur']], v('colors', 'branch'))}</label>
                     <label>Noms${sel('layoutNames', [['two', 'Prénom, puis NOM dessous'], ['one', 'Prénom NOM sur une ligne']], v('layoutNames', 'two'))}</label></div>
                 <fieldset class="h-dt-checks"><legend>Dans les cases</legend>${chk('dates', 'Années', v('dates', true))}${chk('fullDates', 'Dates complètes', v('fullDates', false))}${chk('places', 'Lieu de naissance', v('places', false))}${chk('jobs', 'Métier', v('jobs', false))}${chk('sosa', 'Numéro Sosa', v('sosa', false))}${chk('empty', 'Cases vides (ancêtres à trouver)', v('empty', true))}</fieldset>
-                <fieldset class="h-dt-checks"><legend>Habillage</legend>${chk('photos', 'Portraits (arbre dessiné)', v('photos', false))}${chk('leaves', 'Feuillage (arbre dessiné)', v('leaves', true))}${chk('frame', 'Cadre et ornements', v('frame', true))}${chk('genLabels', 'Noms des générations', v('genLabels', true))}</fieldset>
+                <fieldset class="h-dt-checks"><legend>Habillage</legend>${chk('photos', 'Portraits (arbre dessiné, nœud papillon)', v('photos', false))}${chk('leaves', 'Feuillage (arbre dessiné)', v('leaves', true))}${chk('frame', 'Cadre et ornements', v('frame', true))}${chk('genLabels', 'Noms des générations', v('genLabels', true))}</fieldset>
                 <div class="form-grid"><label>Titre<input name="title" maxlength="120" value="${esc(v('title', ''))}" placeholder="Arbre de la famille …"></label><label>Sous-titre<input name="subtitle" maxlength="160" value="${esc(v('subtitle', ''))}" placeholder="${esc(i18n('Établi par … en {y}', {y: String(new Date().getFullYear())}))}"></label>
                     <label>Place du titre${sel('titlePos', [['bottom', 'En bas'], ['top', 'En haut']], v('titlePos', 'bottom'))}</label></div></div>`,
             onOpen: dg => {

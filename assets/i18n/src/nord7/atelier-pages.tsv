@@ -1,0 +1,42 @@
+fr ¦ is
+# 📑 Atelier de transcription, vague 3 (3a) : un document en plusieurs pages (heritage-pages.js, heritage-transcribe.js, lib/media_pages.php)
+# — 1. relier des pages (page du document, visionneuse)
+Glisser pour changer l’ordre ¦ Dragðu til að breyta röðinni
+Voir cette page ¦ Skoða þessa síðu
+Une seule page pour l’instant. Un recto et son verso, un acte sur plusieurs pages : relie les autres images, elles s’ouvriront ensemble. ¦ Aðeins ein síða í bili. Fram- og bakhlið, færsla á mörgum síðum: tengdu hinar myndirnar og þær opnast saman.
+Relier une autre page… ¦ Tengja aðra síðu…
+PAGES DU DOCUMENT ¦ SÍÐUR SKJALSINS
+Relier ces pages ¦ Tengja þessar síður
+Pages reliées : {n} ¦ Tengdar síður: {n}
+Page reliée ¦ Síða tengd
+Page renommée : « {x} » ¦ Síða endurnefnd: „{x}“
+Autre nom… ¦ Annað heiti…
+Par exemple : Plan, Feuillet 2, Suite ¦ Til dæmis: Kort, Blað 2, Framhald
+Ordre des pages changé ¦ Röð síðna breytt
+Retirer de l’ensemble ¦ Fjarlægja úr safninu
+La page reste dans les médias, seule (rien n’est supprimé) ¦ Síðan verður áfram í miðlunum, ein og sér (engu er eytt)
+Recto ¦ Framhlið
+Verso ¦ Bakhlið
+Annexe ¦ Viðauki
+Une de ces pages est déjà dans un autre document : retire-la d’abord de celui-ci (une page n’appartient qu’à un seul ensemble). ¦ Ein af þessum síðum er þegar í öðru skjali: fjarlægðu hana þaðan fyrst (síða tilheyrir aðeins einu safni).
+Une des pages n’est plus dans les médias : rien n’a été changé. ¦ Ein síðnanna er ekki lengur í miðlunum: engu var breytt.
+Trop de pages dans un même document (200 au plus). ¦ Of margar síður í einu skjali (200 að hámarki).
+# — 2. l’Atelier ouvre toutes les pages (onglets, un seul texte ou un texte par page, ✨ Lire)
+Plusieurs pages ¦ Margar síður
+Sur la page affichée ¦ Á síðunni sem sést
+Sur toutes les pages ¦ Á öllum síðum
+Un seul texte, coupé par « — page 2 — » ¦ Einn texti, skiptur með „— síða 2 —“
+Un seul texte, coupé par « — page 2 — » (conseillé) ¦ Einn texti, skiptur með „— síða 2 —“ (mælt með)
+Un texte par page ¦ Einn texti á hverja síðu
+— page {n} — ¦ — síða {n} —
+Toutes les pages sont lues (à relire) ¦ Allar síður lesnar (til yfirferðar)
+Réglage gardé : il vaut pour les documents pas encore commencés ; celui-ci garde sa forme. ¦ Stillingin geymd: hún gildir fyrir skjöl sem eru ekki hafin; þetta heldur sínu formi.
+Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription. ¦ Þessi síða er hluti af færslu á mörgum síðum: textanum er breytt í Uppskriftarsmiðjunni.
+# — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
+(page {n}, ligne {line}) ¦ (síða {n}, lína {line})
+page {n}, ligne {line} ¦ síða {n}, lína {line}
+# — 3a+ : « Ce que l’app a trouvé » sur toutes les pages (un texte par page), la lecture approfondie de toutes les pages
+« {name} » est sur une autre page : ouvre sa page pour le garder. ¦ „{name}“ er á annarri síðu: opnaðu þá síðu til að halda því.
+Un texte par page : la lecture rapide et la lecture d’un imprimé se font page par page ; la lecture approfondie peut lire toutes les pages. ¦ Einn texti á hverja síðu: hraðlestur og lestur prentaðs texta fara síðu fyrir síðu; ítarlestur getur lesið allar síðurnar.
+Lecture approfondie : page {i} sur {n}… ¦ Ítarlestur: síða {i} af {n}…
+Lire toutes les pages avec ce modèle ({n}) ¦ Lesa allar síður með þessu líkani ({n})

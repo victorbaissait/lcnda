@@ -1,0 +1,87 @@
+/* 💌 🛡 🖊 🌐 Écrans 9 à 12 de docs/design/successoral-et-plus.html (assets/js/plus-famille*.js) :
+ * bloc « 🛡 Fiabilité » de la fiche, pastille de la note (liste des personnes, widget), contrôle avant l'export,
+ * lettre de famille (Trésors), pastille 💬 des remarques de relecture, vue « 🌐 Traduire » de l'atelier de transcription. */
+:root { --pf-high: #1f8a4c; --pf-good: #1f6fd1; --pf-medium: #b07d0a; --pf-review: #c93636; --pf-soft: #f5f7fa; --pf-line: #dfe3e8; --pf-formule: #d7f2df; --pf-dico: #dbe9ff; }
+:root[data-theme="dark"] { --pf-high: #4cc27d; --pf-good: #6ea8ff; --pf-medium: #e2b33c; --pf-review: #ff7a7a; --pf-soft: #1d2129; --pf-line: #3a404c; --pf-formule: #1f4a2e; --pf-dico: #1d3556; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --pf-high: #4cc27d; --pf-good: #6ea8ff; --pf-medium: #e2b33c; --pf-review: #ff7a7a; --pf-soft: #1d2129; --pf-line: #3a404c; --pf-formule: #1f4a2e; --pf-dico: #1d3556; } }
+
+/* 🛡 la note */
+.pf-rel { min-width: 0; }
+.pf-rel-top { display: flex; gap: 14px; align-items: center; margin: 0 0 10px; flex-wrap: wrap; }
+.pf-rel-big { display: grid; place-items: center; width: 84px; height: 84px; border-radius: 50%; border: 6px solid var(--pf-medium); flex: none; line-height: 1; }
+.pf-rel-big strong { font-size: 28px; }
+.pf-rel-big small { font-size: 11px; color: var(--muted); }
+.pf-rel-big.is-high { border-color: var(--pf-high); } .pf-rel-big.is-good { border-color: var(--pf-good); } .pf-rel-big.is-review { border-color: var(--pf-review); }
+.pf-rel-who { flex: 1 1 220px; min-width: 0; display: grid; gap: 8px; }
+.pf-rel-bar { position: relative; display: block; height: 8px; border-radius: 4px; background: var(--pf-line); max-width: 360px; }
+.pf-rel-bar b { display: block; height: 100%; border-radius: 4px; background: var(--pf-good); }
+.pf-rel-bar em { position: absolute; top: -3px; width: 2px; height: 14px; background: var(--pf-review); }
+.pf-rel-row { display: grid; grid-template-columns: 26px minmax(0, 1fr) 40px; gap: 8px; align-items: baseline; padding: 6px 0; border-top: 1px solid var(--pf-line); overflow-wrap: anywhere; }
+.pf-rel-sc { font-weight: 700; text-align: right; }
+.pf-rel-sc.is-off { color: var(--muted); font-weight: 400; }
+.pf-rel-tip { margin: 8px 0 4px; padding: 8px 10px; border-radius: 8px; background: var(--pf-soft); }
+.pf-rel-how li { margin: 0 0 6px; }
+.pf-rel-pill { display: inline-block; min-width: 2.2em; padding: 1px 6px; border-radius: 999px; text-align: center; font-weight: 700; font-size: 12.5px; color: #fff; background: var(--pf-medium); }
+.pf-rel-pill.is-high { background: var(--pf-high); } .pf-rel-pill.is-good { background: var(--pf-good); } .pf-rel-pill.is-review { background: var(--pf-review); }
+:root[data-theme="dark"] .pf-rel-pill { color: #10141a; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pf-rel-pill { color: #10141a; } }
+
+/* 🛡 le widget et le contrôle avant l'export */
+.pf-w-sum { margin: 0 0 6px; color: var(--muted); }
+.pf-w-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.pf-w-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px; align-items: center; width: 100%; text-align: left; background: none; border: 0; padding: 4px 2px; cursor: pointer; color: inherit; font: inherit; }
+.pf-w-row:hover b { text-decoration: underline; }
+.pf-gate { grid-column: 1 / -1; margin: 8px 0; padding: 10px 12px; border: 1px solid var(--pf-medium); border-left-width: 4px; border-radius: 8px; background: var(--pf-soft); }
+.pf-gate p { margin: 0 0 8px; } .pf-gate small { display: block; margin-top: 4px; }
+.pf-gate-acts { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* 💌 la lettre de famille */
+.pf-lt-tools { display: grid; gap: 8px; margin: 0 0 12px; }
+.pf-lt-what { display: flex; flex-wrap: wrap; gap: 4px 16px; border: 1px solid var(--pf-line); border-radius: 8px; padding: 6px 10px; margin: 0; }
+.pf-lt-pick { align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+.pf-lt-anc { min-width: min(320px, 100%); }
+.pf-lt-chip { display: inline-flex; align-items: center; gap: 6px; padding: 2px 6px; border: 1px solid var(--pf-line); border-radius: 999px; max-width: 100%; }
+.pf-lt-chip img { width: 28px; height: 28px; object-fit: cover; border-radius: 50%; }
+.pf-lt-out [contenteditable="true"]:hover { outline: 1px dashed #b9a98c; }
+.pf-lt-out [contenteditable="true"]:focus { outline: 2px solid #2a6fdb; }
+.pf-lt-acts { display: flex; gap: 6px; justify-content: flex-end; }
+@media (max-width: 640px) { .pf-lt { padding: 6mm 5mm !important; } }
+
+/* 🖊 relecture : la pastille 💬 sur un fait, la fenêtre d'import */
+.pf-rv-pill { margin-left: 6px; border: 1px solid var(--pf-medium); background: var(--pf-soft); border-radius: 999px; padding: 0 6px; cursor: pointer; font-size: 13px; line-height: 1.6; }
+.pf-rv-answers { display: grid; gap: 8px; }
+.pf-rv-ans { border: 1px solid var(--pf-line); border-left: 4px solid var(--pf-good); border-radius: 8px; padding: 8px 10px; }
+.pf-rv-ans.is-wrong { border-left-color: var(--pf-review); }
+.pf-rv-ans p { margin: 0 0 4px; overflow-wrap: anywhere; }
+.pf-rv-ok summary { cursor: pointer; padding: 6px 0; }
+.pf-rv-all { margin-left: 8px; font-size: 13px; }
+.pf-rv-list { margin-top: 18px; }
+
+/* 🌐 traduire : la vue côte à côte */
+.pf-tr { display: grid; align-content: start; gap: 10px; min-width: 0; min-height: 0; flex: 1 1 auto; overflow: auto; padding: 4px 2px 8px; }
+.pf-tr-src p[lang] { max-height: 30vh; overflow: auto; }
+.pf-tr-list { max-height: 46vh; overflow: auto; }
+.pf-tr-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.pf-tr-head h3 { margin: 0; font-size: 16px; }
+.pf-tr h4 { margin: 0 0 6px; font-size: 13.5px; }
+.pf-tr-src p[lang] { margin: 0; line-height: 1.9; font-family: Georgia, serif; overflow-wrap: anywhere; }
+.pf-tr-w { border-radius: 3px; padding: 0 1px; cursor: pointer; }
+.pf-tr-w.is-formule { background: var(--pf-formule); }
+.pf-tr-w.is-dico, .pf-tr-w.is-nombre { background: var(--pf-dico); }
+.pf-tr-w.is-nom { font-weight: 600; }
+.pf-tr-w.is-unsure { background: none; border-bottom: 2px dotted var(--pf-medium); }
+.pf-tr-w.is-hi, .pf-tr-row.is-hi { outline: 2px solid #2a6fdb; }
+.pf-tr-legend { font-size: 12px; color: var(--muted); margin: 6px 0 0 !important; line-height: 1.6 !important; font-family: inherit !important; }
+.pf-tr-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.pf-tr-cols > section { border: 1px solid var(--pf-line); border-radius: 8px; padding: 8px 10px; min-width: 0; }
+.pf-tr-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.pf-tr-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; padding: 3px 4px; border-radius: 4px; cursor: pointer; font-size: 13px; }
+.pf-tr-row span:first-child { font-style: italic; overflow-wrap: anywhere; }
+.pf-tr-row.is-formule span:first-child { color: var(--pf-high); }
+.pf-tr-row.is-unsure span:last-child { border-bottom: 1px dotted var(--pf-medium); }
+.pf-tr-out { margin: 0 0 6px; font-family: Georgia, serif; line-height: 1.6; white-space: pre-wrap; }
+.pf-tr-out.is-running { color: var(--muted); }
+.pf-tr-found { font-size: 13px; margin: 8px 0 0; }
+.pf-tr-acts { display: flex; flex-wrap: wrap; gap: 6px; }
+[data-pf-translate].is-active { outline: 2px solid #2a6fdb; }
+@media (max-width: 900px) { .pf-tr-cols { grid-template-columns: minmax(0, 1fr); } }

@@ -1,0 +1,81 @@
+fr ¦ hr ¦ sl
+# Zone « trouve-plus » : « Ce que l’app a trouvé dans l’acte », plus riche (heritage-transcribe-trouve.js, lib/transcription_actes.php : 🔍 Repérer avec l’IA, ＋ Ajouter à une fiche)
+Événements et contexte ¦ Događaji i kontekst ¦ Dogodki in okoliščine
+Naissance estimée ¦ Procijenjeno rođenje ¦ Ocenjeno rojstvo
+finit par une particule seule ¦ završava samom česticom ¦ se konča s samim členkom
+c’est un métier ¦ to je zanimanje ¦ to je poklic
+c’est un lieu ¦ to je mjesto ¦ to je kraj
+pas un nom ¦ nije ime ¦ ni ime
+proposer (conseillé) ¦ predloži (preporučeno) ¦ predlagaj (priporočeno)
+vers {year} ¦ oko {year} ¦ okoli {year}
+de {name} ¦ {name} ¦ {name}
+(de la personne d’avant) ¦ (prethodne osobe) ¦ (prejšnje osebe)
+Nom non lu ¦ Ime nije pročitano ¦ Ime ni prebrano
+Proposé par l’IA locale : vérifie dans le texte ¦ Predložila lokalna UI: provjeri u tekstu ¦ Predlagala lokalna UI: preveri v besedilu
+IA ¦ UI ¦ UI
+Actions ¦ Radnje ¦ Dejanja
+Ajouter à une fiche… ¦ Dodaj u zapis… ¦ Dodaj v zapis…
+aussi écrit : ¦ napisano i: ¦ napisano tudi:
+Le texte ne dit rien d’autre sur cette personne. ¦ Tekst ne govori ništa drugo o ovoj osobi. ¦ Besedilo o tej osebi ne pove nič drugega.
+Garder dans l’acte ¦ Zadrži u ispravi ¦ Obdrži v listini
+Aucune personne repérée. ¦ Nije pronađena nijedna osoba. ¦ Ni najdene nobene osebe.
+Écartés : pas des noms ({n}) ¦ Odbačeno: nisu imena ({n}) ¦ Izločeno: niso imena ({n})
+Lieu de ta base ¦ Mjesto iz tvoje baze ¦ Kraj iz tvoje baze
+date de l’acte ¦ datum isprave ¦ datum listine
+calendrier républicain ¦ republikanski kalendar ¦ republikanski koledar
+d’après le champ Date ¦ prema polju Datum ¦ po polju Datum
+Créer dans « Le monde autour »… ¦ Stvori u „Svijetu oko njih“… ¦ Ustvari v »Svetu okoli njih«…
+mots : {x} ¦ riječi: {x} ¦ besede: {x}
+Choisir cette sorte ¦ Odaberi ovu vrstu ¦ Izberi to vrsto
+choisie ¦ odabrano ¦ izbrano
+Proposée seulement : la sorte d’acte ne change que si tu la choisis. ¦ Samo prijedlog: vrsta isprave mijenja se samo ako je odabereš. ¦ Samo predlog: vrsta listine se spremeni le, če jo izbereš.
+Pas d’indice dans le texte. ¦ Nema traga u tekstu. ¦ V besedilu ni namiga.
+L’IA lit le texte… {n} s ¦ UI čita tekst… {n} s ¦ UI bere besedilo… {n} s
+Propositions de l’IA ajoutées ({n}), marquées 🔍 IA : vérifie-les dans le texte. ¦ Prijedlozi UI dodani ({n}), označeni 🔍 UI: provjeri ih u tekstu. ¦ Predlogi UI dodani ({n}), označeni 🔍 UI: preveri jih v besedilu.
+Repérer avec l’IA ¦ Pronađi pomoću UI ¦ Poišči z UI
+Seul le texte part au modèle, sur cet ordinateur. ¦ Modelu ide samo tekst, na ovom računalu. ¦ Modelu gre samo besedilo, na tem računalniku.
+Repéré dans le texte ¦ Pronađeno u tekstu ¦ Najdeno v besedilu
+Réglages du repérage ¦ Postavke pronalaženja ¦ Nastavitve iskanja
+Tout est proposé : garde, écarte ou ajoute à une fiche. Rien n’est écrit sans ton clic. ¦ Sve je prijedlog: zadrži, odbaci ili dodaj u zapis. Ništa se ne upisuje bez tvog klika. ¦ Vse je predlog: obdrži, izloči ali dodaj v zapis. Nič se ne zapiše brez tvojega klika.
+Écarter ¦ Odbaci ¦ Izloči
+Élément écarté. ¦ Stavka odbačena. ¦ Element izločen.
+Naissance estimée vers {year} (âge dans l’acte) ¦ Procijenjeno rođenje oko {year} (dob u ispravi) ¦ Ocenjeno rojstvo okoli {year} (starost v listini)
+{n} ans dans l’acte ¦ {n} godina u ispravi ¦ {n} let v listini
+Nommé dans l’acte : {name} ¦ Spomenut u ispravi: {name} ¦ Omenjen v listini: {name}
+Nommé dans l’acte ¦ Spomenut u ispravi ¦ Omenjen v listini
+Ajouter à une fiche ¦ Dodaj u zapis ¦ Dodaj v zapis
+Dans l’acte : ¦ U ispravi: ¦ V listini:
+Comme quoi ? ¦ Kao što? ¦ Kot kaj?
+vide si le texte ne la donne pas ¦ prazno ako ga tekst ne navodi ¦ prazno, če ga besedilo ne navaja
+Relier à « {title} » du monde autour (sa date et son lieu) ¦ Poveži sa „{title}“ iz svijeta oko njih (datum i mjesto) ¦ Poveži z »{title}« iz sveta okoli njih (datum in kraj)
+Voilà ce qui sera écrit ¦ Ovo će se upisati ¦ To se bo zapisalo
+Toujours avec sa source (ce document, la ligne) et la phrase en citation. « ↶ Annuler » défait l’ajout. ¦ Uvijek s izvorom (ovaj dokument, redak) i rečenicom kao citatom. „↶ Poništi“ poništava dodavanje. ¦ Vedno z virom (ta dokument, vrstica) in stavkom kot navedkom. »↶ Razveljavi« razveljavi dodajanje.
+Info ¦ Info ¦ Info
+✓ Ajouté à la fiche. ¦ ✓ Dodano u zapis. ¦ ✓ Dodano v zapis.
+LE MONDE AUTOUR ¦ SVIJET OKO NJIH ¦ SVET OKOLI NJIH
+Créer dans « Le monde autour » ¦ Stvori u „Svijetu oko njih“ ¦ Ustvari v »Svetu okoli njih«
+Créer l’événement ¦ Stvori događaj ¦ Ustvari dogodek
+Le texte ne donne pas l’année : écris-la toi-même si tu la connais (l’app ne l’invente pas). ¦ Tekst ne navodi godinu: upiši je sam ako je znaš (aplikacija je ne izmišlja). ¦ Besedilo ne navaja leta: vpiši ga sam, če ga poznaš (aplikacija si ga ne izmišljuje).
+✓ Ajouté au monde autour. ¦ ✓ Dodano u svijet oko njih. ¦ ✓ Dodano v svet okoli njih.
+Prête : la lecture approfondie est installée sur cet ordinateur. ¦ Spremno: temeljito čitanje instalirano je na ovom računalu. ¦ Pripravljeno: poglobljeno branje je nameščeno na tem računalniku.
+Pas prête : installe la lecture approfondie (Ollama) pour t’en servir. ¦ Nije spremno: instaliraj temeljito čitanje (Ollama) da bi ga koristio. ¦ Ni pripravljeno: namesti poglobljeno branje (Ollama), da ga boš lahko uporabljal.
+Rubriques montrées ¦ Prikazani odjeljci ¦ Prikazani razdelki
+Repérer avec l’IA quand elle est prête ¦ Pronađi pomoću UI kad je spremna ¦ Poišči z UI, ko je pripravljena
+Nombres ¦ Brojevi ¦ Števila
+Registre militaire ¦ Vojni upisnik ¦ Vojaški register
+mot courant ¦ uobičajena riječ ¦ običajna beseda
+lettres mal lues ¦ pogrešno pročitana slova ¦ napačno prebrane črke
+L’IA a répondu autre chose que le JSON demandé : rien n’est repris. ¦ UI je odgovorila nešto drugo od traženog JSON-a: ništa se ne preuzima. ¦ UI je odgovorila nekaj drugega kot zahtevani JSON: nič se ne prevzame.
+Texte trop long pour l’IA (20 000 signes au plus) : choisis un passage. ¦ Tekst je predug za UI (najviše 20.000 znakova): odaberi odlomak. ¦ Besedilo je predolgo za UI (največ 20.000 znakov): izberi odlomek.
+Choisis la fiche où ajouter cet élément. ¦ Odaberi zapis u koji dodaješ ovu stavku. ¦ Izberi zapis, v katerega dodaš ta element.
+Choisis comment ajouter cet élément. ¦ Odaberi kako dodaješ ovu stavku. ¦ Izberi, kako dodaš ta element.
+Rien à ajouter : l’élément est vide. ¦ Nema se što dodati: stavka je prazna. ¦ Ni česa dodati: element je prazen.
+réponse trop longue ¦ predug odgovor ¦ predolg odgovor
+réponse vide ¦ prazan odgovor ¦ prazen odgovor
+pas un objet JSON ¦ nije JSON objekt ¦ ni objekt JSON
+clé inattendue ¦ neočekivani ključ ¦ nepričakovan ključ
+valeur qui n’est pas un texte ¦ vrijednost koja nije tekst ¦ vrednost, ki ni besedilo
+liste attendue ¦ očekivan popis ¦ pričakovan seznam
+liste trop longue ¦ predug popis ¦ predolg seznam
+personne qui n’est pas un objet ¦ osoba koja nije objekt ¦ oseba, ki ni objekt
+champ de personne inattendu ¦ neočekivano polje osobe ¦ nepričakovano polje osebe

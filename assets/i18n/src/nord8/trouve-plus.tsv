@@ -1,0 +1,81 @@
+fr ¦ tr
+# Zone « trouve-plus » : « Ce que l’app a trouvé dans l’acte », plus riche (heritage-transcribe-trouve.js, lib/transcription_actes.php : 🔍 Repérer avec l’IA, ＋ Ajouter à une fiche)
+Événements et contexte ¦ Olaylar ve bağlam
+Naissance estimée ¦ Tahmini doğum
+finit par une particule seule ¦ tek başına bir ekle bitiyor
+c’est un métier ¦ bu bir meslek
+c’est un lieu ¦ bu bir yer
+pas un nom ¦ ad değil
+proposer (conseillé) ¦ öner (önerilen)
+vers {year} ¦ {year} civarı
+de {name} ¦ {name}
+(de la personne d’avant) ¦ (önceki kişinin)
+Nom non lu ¦ Ad okunamadı
+Proposé par l’IA locale : vérifie dans le texte ¦ Yerel yapay zekânın önerisi: metinde kontrol et
+IA ¦ YZ
+Actions ¦ İşlemler
+Ajouter à une fiche… ¦ Bir kayda ekle…
+aussi écrit : ¦ şöyle de yazılmış:
+Le texte ne dit rien d’autre sur cette personne. ¦ Metin bu kişi hakkında başka bir şey söylemiyor.
+Garder dans l’acte ¦ Belgede tut
+Aucune personne repérée. ¦ Hiç kişi bulunamadı.
+Écartés : pas des noms ({n}) ¦ Ayrılanlar: ad değil ({n})
+Lieu de ta base ¦ Veritabanındaki yer
+date de l’acte ¦ belgenin tarihi
+calendrier républicain ¦ cumhuriyet takvimi
+d’après le champ Date ¦ Tarih alanına göre
+Créer dans « Le monde autour »… ¦ “Çevredeki dünya”da oluştur…
+mots : {x} ¦ kelimeler: {x}
+Choisir cette sorte ¦ Bu türü seç
+choisie ¦ seçildi
+Proposée seulement : la sorte d’acte ne change que si tu la choisis. ¦ Yalnızca öneri: belgenin türü ancak sen seçersen değişir.
+Pas d’indice dans le texte. ¦ Metinde ipucu yok.
+L’IA lit le texte… {n} s ¦ YZ metni okuyor… {n} sn
+Propositions de l’IA ajoutées ({n}), marquées 🔍 IA : vérifie-les dans le texte. ¦ YZ önerileri eklendi ({n}), 🔍 YZ ile işaretli: metinde kontrol et.
+Repérer avec l’IA ¦ YZ ile bul
+Seul le texte part au modèle, sur cet ordinateur. ¦ Modele yalnızca metin gider, bu bilgisayarda.
+Repéré dans le texte ¦ Metinde bulunan
+Réglages du repérage ¦ Bulma ayarları
+Tout est proposé : garde, écarte ou ajoute à une fiche. Rien n’est écrit sans ton clic. ¦ Her şey öneridir: tut, ayır ya da bir kayda ekle. Senin tıklaman olmadan hiçbir şey yazılmaz.
+Écarter ¦ Ayır
+Élément écarté. ¦ Öğe ayrıldı.
+Naissance estimée vers {year} (âge dans l’acte) ¦ Tahmini doğum {year} civarı (belgedeki yaş)
+{n} ans dans l’acte ¦ Belgede {n} yaşında
+Nommé dans l’acte : {name} ¦ Belgede adı geçen: {name}
+Nommé dans l’acte ¦ Belgede adı geçen
+Ajouter à une fiche ¦ Bir kayda ekle
+Dans l’acte : ¦ Belgede:
+Comme quoi ? ¦ Ne olarak?
+vide si le texte ne la donne pas ¦ metin vermiyorsa boş
+Relier à « {title} » du monde autour (sa date et son lieu) ¦ “{title}” ile çevredeki dünyadan bağla (tarih ve yer)
+Voilà ce qui sera écrit ¦ Yazılacak olan bu
+Toujours avec sa source (ce document, la ligne) et la phrase en citation. « ↶ Annuler » défait l’ajout. ¦ Her zaman kaynağıyla (bu belge, satır) ve alıntı olarak cümleyle. “↶ Geri al” eklemeyi geri alır.
+Info ¦ Bilgi
+✓ Ajouté à la fiche. ¦ ✓ Kayda eklendi.
+LE MONDE AUTOUR ¦ ÇEVREDEKİ DÜNYA
+Créer dans « Le monde autour » ¦ “Çevredeki dünya”da oluştur
+Créer l’événement ¦ Olayı oluştur
+Le texte ne donne pas l’année : écris-la toi-même si tu la connais (l’app ne l’invente pas). ¦ Metin yılı vermiyor: biliyorsan kendin yaz (uygulama uydurmaz).
+✓ Ajouté au monde autour. ¦ ✓ Çevredeki dünyaya eklendi.
+Prête : la lecture approfondie est installée sur cet ordinateur. ¦ Hazır: ayrıntılı okuma bu bilgisayarda kurulu.
+Pas prête : installe la lecture approfondie (Ollama) pour t’en servir. ¦ Hazır değil: kullanmak için ayrıntılı okumayı (Ollama) kur.
+Rubriques montrées ¦ Gösterilen bölümler
+Repérer avec l’IA quand elle est prête ¦ Hazır olduğunda YZ ile bul
+Nombres ¦ Sayılar
+Registre militaire ¦ Askerî kayıt
+mot courant ¦ sıradan kelime
+lettres mal lues ¦ yanlış okunmuş harfler
+L’IA a répondu autre chose que le JSON demandé : rien n’est repris. ¦ YZ istenen JSON dışında bir şey yanıtladı: hiçbir şey alınmıyor.
+Texte trop long pour l’IA (20 000 signes au plus) : choisis un passage. ¦ Metin YZ için çok uzun (en fazla 20.000 karakter): bir bölüm seç.
+Choisis la fiche où ajouter cet élément. ¦ Bu öğenin ekleneceği kaydı seç.
+Choisis comment ajouter cet élément. ¦ Bu öğenin nasıl ekleneceğini seç.
+Rien à ajouter : l’élément est vide. ¦ Eklenecek bir şey yok: öğe boş.
+réponse trop longue ¦ yanıt çok uzun
+réponse vide ¦ boş yanıt
+pas un objet JSON ¦ JSON nesnesi değil
+clé inattendue ¦ beklenmeyen anahtar
+valeur qui n’est pas un texte ¦ metin olmayan değer
+liste attendue ¦ liste bekleniyordu
+liste trop longue ¦ liste çok uzun
+personne qui n’est pas un objet ¦ nesne olmayan kişi
+champ de personne inattendu ¦ beklenmeyen kişi alanı

@@ -52,7 +52,8 @@ function fs_options(array $q): array
     }
     $title = trim(preg_replace('/\s+/u', ' ', str_replace("\0", '', is_scalar($q['title'] ?? '') ? (string) ($q['title'] ?? '') : '')));
     return ['branches' => $branches, 'living' => ($q['living'] ?? '') === 'first' ? 'first' : 'hide',
-        'photos' => $flag('photos', true), 'docs' => $flag('docs', true), 'notes' => $flag('notes', true), 'title' => mb_substr($title, 0, 120)];
+        'photos' => $flag('photos', true), 'docs' => $flag('docs', true), 'notes' => $flag('notes', true), 'title' => mb_substr($title, 0, 120),
+        'review' => preg_match('/^[a-f0-9]{16,40}$/', (string) ($q['review'] ?? '')) ? (string) $q['review'] : '']; // 🖊 relecture demandée (lib/plus_famille.php)
 }
 
 /** Personnes des branches choisies (null = toute la base). */
@@ -119,6 +120,10 @@ function family_share_build(PDO $pdo, array $o): array
         $num[$id] = ++$n;
     }
     $open = static fn(int $id) => isset($num[$id]) && !isset($hidden[$id]); // une fiche qui part en entier
+    // 🖊 relecture : chaque fait reçoit un repère opaque (HMAC avec un secret gardé dans la base : aucun numéro ne part)
+    $rv = null;
+    if ($o['review'] !== '') { if (!function_exists('pfam_review_secret')) { require_once __DIR__ . '/plus_famille.php'; } $rv = pfam_review_secret($pdo, $o['review']); if (!$rv) { throw new LcndaBadInput('Cette demande de relecture n’existe plus.'); } }
+    $rvCount = 0;
 
     // événements des personnes (et des couples) qui partent en entier
     $events = $pdo->query("SELECT e.id, e.person_id, e.family_id, e.date_text, e.year, e.title, e.description, t.label AS type_label, t.gedcom_tag, pl.name AS place_name, pl.county, pl.country
@@ -134,6 +139,7 @@ function family_share_build(PDO $pdo, array $o): array
         $pid = (int) ($e['person_id'] ?? 0); $fid = (int) ($e['family_id'] ?? 0);
         $row = ['t' => (string) ($e['type_label'] ?: 'Événement'), 'd' => trim((string) $e['date_text']), 'p' => fs_place($e)];
         if ($o['notes']) { $desc = trim(fs_plain((string) $e['title']) . ((string) $e['title'] !== '' && (string) $e['description'] !== '' ? ' — ' : '') . fs_plain((string) $e['description'])); if ($desc !== '') { $row['x'] = mb_substr($desc, 0, 4000); } }
+        if ($rv && (($pid && $open($pid)) || (!$pid && $fid && $famOpen($fid)))) { $row['r'] = pfam_fact_key($rv['secret'], (int) $e['id']); $rvCount++; }
         if ($pid && $open($pid)) { $evByPerson[$pid][] = $row; $evOk[(int) $e['id']] = true; }
         elseif ($fid && $famOpen($fid)) { $evByFam[$fid][] = $row; $evOk[(int) $e['id']] = true; }
     }
@@ -289,6 +295,7 @@ function family_share_build(PDO $pdo, array $o): array
     $data = ['v' => 1, 'title' => $title, 'made' => date('Y-m-d'), 'living' => $o['living'], 'root' => $rootId ? ($num[$rootId] ?? 0) : 0,
         'people' => array_values($people), 'fams' => $fams, 'media' => $media,
         'counts' => ['people' => $sum['people'], 'living_hidden' => $sum['living_hidden'] + $sum['living_first'], 'private' => $sum['private_removed']]];
+    if ($rv) { $data['review'] = ['t' => $rv['token'], 'n' => $rvCount, 'title' => $rv['title']]; $sum['review_facts'] = $rvCount; }
     return ['data' => $data, 'files' => $files, 'summary' => $sum, 'forbidden' => $forbidden];
 }
 

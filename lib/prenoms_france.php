@@ -92,6 +92,13 @@ function pf_people(PDO $pdo): array
 {
     static $cache = null;
     if ($cache !== null) { return $cache; }
+    // 🐘 toute la base (1,8 s à 200 000 fiches, à chaque fiche ouverte : « Transmission des prénoms ») : gardée tant que
+    // fiches et événements ne changent pas ; l'année compte (une fiche de moins de 100 ans sans décès reste cachée)
+    if (function_exists('calc_cached')) { return $cache = calc_cached($pdo, 'pf_people', ['persons', 'events', 'event_types'], [date('Y')], static fn() => pf_people_raw($pdo)); }
+    return $cache = pf_people_raw($pdo);
+}
+function pf_people_raw(PDO $pdo): array
+{
     $lives = dmo_lives($pdo); $now = (int) date('Y');
     $hasPriv = (bool) $pdo->query("SELECT 1 FROM pragma_table_info('persons') WHERE name='is_private'")->fetchColumn();
     $out = [];
@@ -102,7 +109,7 @@ function pf_people(PDO $pdo): array
         $out[$id] = ['id' => $id, 'first' => trim((string) $r['first_name']), 'names' => pf_names((string) $r['first_name'], (string) $r['middle_name']),
             'name' => $l['name'], 'g' => (string) $r['gender'], 'b' => $l['b'], 'd' => $l['d'], 'hidden' => $hidden, 'dead' => $r['living_status'] === 'deceased' || $l['d'] !== null];
     }
-    return $cache = $out;
+    return $out;
 }
 
 /** parrains et marraines : enfant → [[personne, 'parrain'|'marraine']] (témoins des naissances et baptêmes) */

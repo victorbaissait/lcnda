@@ -35,8 +35,9 @@
         5: {global: 'LCNDA_SOURCES_OUVERTES_5', ui: 'sourcesOuvertes5', store: 'genealogie-sources-ouvertes-5-sites', import: '🌳 FamilySearch, WikiTree, Québec, passagers, Sainte-Hélène, Maitron, mémoriaux'},
         6: {global: 'LCNDA_SOURCES_OUVERTES_6', ui: 'sourcesOuvertes6', store: 'genealogie-sources-ouvertes-6-sites', import: '📚 Bibliothèque, auteur, HisKi, Old Bailey, notaire de Paris'},
         7: {global: 'LCNDA_SOURCES_OUVERTES_7', ui: 'sourcesOuvertes7', store: 'genealogie-sources-ouvertes-7-sites', format: 'so7', import: '🇪🇺 Archives d’Europe, Juste, enfant assisté, monument, cadastre'},
+        8: {global: 'LCNDA_SOURCES_OUVERTES_8', ui: 'sourcesOuvertes8', store: 'genealogie-sources-ouvertes-8-sites', import: ''}, // sites gratuits : pas d'import propre (« Coller un lien »)
     };
-    const LOT_IDS = [1, 2, 3, 4, 5, 6, 7];
+    const LOT_IDS = [1, 2, 3, 4, 5, 6, 7, 8];
     const STORE_KEYS = LOT_IDS.map(n => LOTS[n].store);
     const prefix = n => (Number(n) === 1 ? 'so_' : `so${n}_`);
 
@@ -51,8 +52,9 @@
         'France': ['fr', '🇫🇷'], 'Belgique': ['eu', '🇧🇪'], 'Suisse': ['eu', '🇨🇭'], 'Allemagne': ['eu', '🇩🇪'], 'Pays-Bas': ['eu', '🇳🇱'],
         'Italie': ['eu', '🇮🇹'], 'Espagne': ['eu', '🇪🇸'], 'Portugal': ['eu', '🇵🇹'], 'Royaume-Uni': ['eu', '🇬🇧'], 'Irlande': ['eu', '🇮🇪'],
         'Norvège': ['eu', '🇳🇴'], 'Suède': ['eu', '🇸🇪'], 'Danemark': ['eu', '🇩🇰'], 'Finlande': ['eu', '🇫🇮'], 'Pologne': ['eu', '🇵🇱'],
-        'Tchéquie': ['eu', '🇨🇿'], 'Hongrie': ['eu', '🇭🇺'], 'Russie': ['eu', '🇷🇺'], 'Europe': ['eu', '🇪🇺'],
-        'Canada': ['am', '🇨🇦'], 'États-Unis': ['am', '🇺🇸'],
+        'Tchéquie': ['eu', '🇨🇿'], 'Hongrie': ['eu', '🇭🇺'], 'Russie': ['eu', '🇷🇺'], 'Luxembourg': ['eu', '🇱🇺'], 'Estonie': ['eu', '🇪🇪'],
+        'Lettonie': ['eu', '🇱🇻'], 'Lituanie': ['eu', '🇱🇹'], 'Europe': ['eu', '🇪🇺'],
+        'Canada': ['am', '🇨🇦'], 'États-Unis': ['am', '🇺🇸'], 'Argentine': ['am', '🇦🇷'], 'Brésil': ['am', '🇧🇷'],
         'Israël': ['monde', '🇮🇱'], 'Australie': ['monde', '🇦🇺'], 'Nouvelle-Zélande': ['monde', '🇳🇿'], 'Monde': ['monde', '🌍'],
     };
     const THEMES = [
@@ -90,6 +92,12 @@
         '6:fi': ['Finlande', 'registres'], '6:uk': ['Royaume-Uni', 'registres'], '6:payant': ['Monde', 'arbres'],
         '7:europe': ['Europe', 'registres'], '7:fr_memoire': ['France', 'memoire'], '7:fr_enfants': ['France', 'enfants'], '7:fr_cercles': ['France', 'registres'],
         '7:aide': ['Monde', 'lieux'], '7:allemagne': ['Allemagne', 'registres'], '7:centre': ['Europe', 'lieux'], '7:bibliotheque': ['Monde', 'arbres'],
+        // lot 8 : la rubrique porte le pays (« Monde » ou « Europe » : celui de chaque site)
+        '8:france': ['France', 'registres'], '8:guerres': ['Monde', 'soldats'], '8:presse': ['Europe', 'presse'], '8:pays_bas': ['Pays-Bas', 'registres'],
+        '8:allemagne': ['Allemagne', 'registres'], '8:autriche': ['Europe', 'registres'], '8:suisse': ['Suisse', 'registres'], '8:royaume_uni': ['Royaume-Uni', 'registres'],
+        '8:irlande': ['Irlande', 'registres'], '8:danemark': ['Danemark', 'migrations'], '8:norvege': ['Norvège', 'migrations'], '8:pologne': ['Pologne', 'registres'],
+        '8:estonie': ['Estonie', 'registres'], '8:lettonie': ['Lettonie', 'registres'], '8:lituanie': ['Lituanie', 'registres'], '8:tchequie': ['Tchéquie', 'registres'],
+        '8:etats_unis': ['États-Unis', 'registres'], '8:canada': ['Canada', 'registres'], '8:argentine': ['Argentine', 'migrations'],
     };
     const SITE_META = {
         '1:europeana': ['Europe', 'presse'], '1:retronews': [null, null, {paid: 'partiel'}],
@@ -106,6 +114,9 @@
         '6:oldbailey': [null, 'notaires'], '6:filae': ['France'], '6:geneanet_premium': ['France'],
         '7:cfyv_justes': [null, 'memoire'], '7:monumentsmorts': [null, 'tombes'], '7:genwiki': ['Allemagne'], '7:gov': ['Allemagne'],
         '7:archivni_mapy': ['Tchéquie'], '7:arcanum_adt': ['Hongrie', 'presse'],
+        '8:francais_libres': [null, 'soldats'], '8:cgj': [null, 'memoire'], '8:ghcaraibe': [null, 'migrations'], '8:anchoukaj': [null, 'migrations'], '8:geneawiki_releves': [null, 'registres'],
+        '8:joodsmonument': [null, 'memoire'], '8:gedenkbuch': [null, 'memoire'], '8:verlustlisten': [null, 'soldats'], '8:verlustlisten_at': ['Europe', 'soldats'],
+        '8:passagierlisten': [null, 'migrations'], '8:stevemorse': [null, 'migrations'], '8:glo_records': [null, 'lieux'], '8:famn_ch': [null, 'registres'],
     };
     /** les doublons : le site de gauche n'a pas sa propre ligne, il est rangé dans celui de droite (« Aussi : … » s'il a une autre adresse) */
     const MERGED = {

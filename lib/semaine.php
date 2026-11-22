@@ -119,6 +119,7 @@ function semaine_rappels(PDO $pdo): array
             'open' => $standalone ? ['kind' => 'list', 'list' => 'reminders'] : ['kind' => 'investigation', 'id' => (int) ($r['investigation_id'] ?? 0)],
             'done_label' => i18n_t('Fait'), 'snooze' => 'date'];
     }
+    if (function_exists('succ_semaine_items')) { try { $out = array_merge($out, succ_semaine_items($pdo)); } catch (Throwable $_) {} } // ⚖️ échéances des dossiers de succession (lib/successoral.php)
     return $out;
 }
 
@@ -368,6 +369,7 @@ function semaine_parse_key(string $key): array
     if (preg_match('/^rappel:([si]):(\d{1,10})$/', $key, $m)) { return ['rappel', (int) $m[2], $m[1]]; }
     if (preg_match('/^(courrier|visite|piste|hypo|socface|entraide):(\d{1,10})$/', $key, $m)) { return [$m[1], (int) $m[2], '']; }
     if (preg_match('/^manque:\d{1,10}:[a-z]{2,20}:\d{1,4}$/', $key)) { return ['manque', 0, '']; }
+    if (preg_match('/^succ:(\d{1,10})$/', $key, $m)) { return ['succ', (int) $m[1], '']; } // ⚖️ échéance d'un dossier de succession
     if (preg_match('/^mur:\d{1,10}:\d{6}$/', $key)) { return ['mur', 0, '']; } // 🧩 mur de la semaine : une marque « fait »
     if (preg_match('/^solidite:\d{1,10}:\d{1,10}:\d{6}$/', $key)) { return ['solidite', 0, '']; } // 🛡 lien fragile de la semaine : une marque « fait »
     if (preg_match('/^controle:[\p{L}\p{N}:_.,\- ]{1,160}$/u', $key)) { return ['controle', 0, '']; }
@@ -414,6 +416,7 @@ function semaine_mark(PDO $pdo, array $data): array
                 $s = $pdo->prepare('SELECT statut, relance_date FROM courriers WHERE id=?'); $s->execute([$id]); $r = $s->fetch();
                 if (!$r) { throw new RuntimeException('Courrier introuvable.'); }
                 $pdo->prepare("UPDATE courriers SET statut='reponse_recue', relance_date='', updated_at=CURRENT_TIMESTAMP WHERE id=?")->execute([$id]);
+                if (function_exists('compl_courrier_received')) { compl_courrier_received($pdo, $id); $prev['recu_le_set'] = 1; } // 📮 la date de réponse, pour le ⏳ délai constaté (lib/complements.php)
                 if (function_exists('log_change')) { log_change($pdo, 'courrier', $id, 'update', 'Courrier : réponse reçue', $r, ['statut' => 'reponse_recue']); }
                 $prev += ['statut' => (string) $r['statut'], 'relance_date' => (string) $r['relance_date']]; $label = 'Réponse reçue';
                 break;
@@ -435,6 +438,9 @@ function semaine_mark(PDO $pdo, array $data): array
                 if (!function_exists('socface_verify')) { throw new RuntimeException('Les recensements SocFace ne sont pas installés.'); }
                 $r = socface_verify($pdo, ['census_id' => $id, 'verified' => 1]);
                 $prev['verified'] = (int) ($r['before'] ?? 0); $label = 'Vérifié sur l’image';
+                break;
+            case 'succ':
+                $prev['done'] = succ_semaine_done($pdo, $id, 1); $label = 'Fait';
                 break;
             case 'entraide':
                 $s = $pdo->prepare('SELECT status FROM help_requests WHERE id=?'); $s->execute([$id]); $r = $s->fetch();
@@ -490,6 +496,7 @@ function semaine_restore_real(PDO $pdo, string $sort, int $id, string $sub, arra
             $st = (string) ($p['statut'] ?? '');
             if ($st !== '' && function_exists('courrier_statuts') && array_key_exists($st, courrier_statuts())) { $pdo->prepare('UPDATE courriers SET statut=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$st, $id]); }
             if (array_key_exists('relance_date', $p) && ($d = $date($p['relance_date'])) !== null) { $pdo->prepare('UPDATE courriers SET relance_date=? WHERE id=?')->execute([$d, $id]); }
+            if (!empty($p['recu_le_set']) && function_exists('compl_has') && compl_has($pdo, 'courriers', 'recu_le')) { $pdo->prepare("UPDATE courriers SET recu_le='' WHERE id=?")->execute([$id]); } // ↶ : la date notée par « ✓ Réponse reçue » repart
             break;
         case 'visite':
             if (array_key_exists('done_at', $p) && ($d = $date($p['done_at'])) !== null) { save_archive_visit_done($pdo, ['visit_id' => $id, 'done_at' => substr($d, 0, 10)]); }
@@ -500,6 +507,9 @@ function semaine_restore_real(PDO $pdo, string $sort, int $id, string $sub, arra
             break;
         case 'socface':
             if (array_key_exists('verified', $p) && function_exists('socface_verify')) { socface_verify($pdo, ['census_id' => $id, 'verified' => (int) $p['verified'] ? 1 : 0]); }
+            break;
+        case 'succ':
+            if (array_key_exists('done', $p) && function_exists('succ_semaine_done')) { succ_semaine_done($pdo, $id, (int) $p['done']); }
             break;
         case 'entraide':
             $st = (string) ($p['status'] ?? '');

@@ -49,11 +49,14 @@
         const dashParams={people:selectedPeople.join(','),branch:branchName||undefined,sosa_root_id:sosaRootId()||undefined,person_seeds:seedPairs(['random_person','person_block','person_timeline'])||undefined,media_seeds:mediaSeedPairs||undefined,person_map_seeds:seedPairs(['random_person_map'])||undefined};
         const cacheKey=JSON.stringify([dashParams,settings.widgets.filter(w=>w.type==='person_quiz').map(w=>[w.id,w.config,w.limit])]);
         const cached=reuse==='page'?pageCacheGet(cacheKey):reuse&&dashboardCache?.key===cacheKey?dashboardCache:null;
-        const data=cached?cached.data:await api('dashboard',{seed:state.dashboardRandomSeed||Date.now(),...dashParams});
-        if(token!==state.workspaceToken||!isDashModule())return;
+        // 🚀 ce qui ne dépend pas des données du tableau de bord part en même temps qu'elles (quiz, saint du jour, bilan de
+        // recherche, widgets ajoutés par les autres fichiers) : les mêmes demandes qu'avant, sans s'attendre l'une l'autre
+        const extDashboard=window.LCNDA_EXT?.dashboard||{};const extData={};
+        const extReady=Promise.all([...new Set(settings.widgets.map(widget=>widget.type).filter(type=>extDashboard[type]))].map(async type=>{try{extData[type]=extDashboard[type].load?await extDashboard[type].load(settings.widgets.filter(widget=>widget.type===type)):null; /* les widgets de cette sorte (leurs réglages) : « Mon agenda » ne lit que les jours qu'il montre */}catch(_){extData[type]=null;}}));
+        const extraReady=cached&&cached.extra?Promise.resolve(cached.extra):Promise.all([settings.widgets.some(widget=>widget.type==='saint_day')?api('saint_of_day').catch(()=>null):null,settings.widgets.some(widget=>widget.type==='research_progress')?api('research_progress').catch(()=>null):null]);
         const quizData=cached?cached.quizData:{};
         const sosaIds=Object.keys(sosaMap()).filter(id=>Number(id)>0&&Number(sosaNumberFor(id))>0).join(',');
-        if(!cached)await Promise.all(settings.widgets.filter(widget=>widget.type==='person_quiz').map(async widget=>{
+        const quizReady=cached?null:Promise.all(settings.widgets.filter(widget=>widget.type==='person_quiz').map(async widget=>{
             const config=widget.config||{};
             const personMode=config.personMode==='specific'?'specific':'random';
             const eventTypeIds=(Array.isArray(config.quizEventTypeIds)?config.quizEventTypeIds:[]).map(Number).filter(Boolean).join(',');
@@ -69,6 +72,10 @@
                 quizData[widget.id]=result.quiz||null;
             }catch(_){quizData[widget.id]=null;}
         }));
+        quizReady?.catch(()=>{}); // une erreur reste lancée plus bas (await), sans « promesse rejetée non attrapée » si la suite s'arrête avant
+        const data=cached?cached.data:await api('dashboard',{seed:state.dashboardRandomSeed||Date.now(),...dashParams});
+        if(token!==state.workspaceToken||!isDashModule())return;
+        if(quizReady)await quizReady;
         if(token!==state.workspaceToken||!isDashModule())return;
         dashboardCache={key:cacheKey,data,quizData};
         const personBlockIds=[...new Set(settings.widgets.filter(widget=>['person_block','person_timeline'].includes(widget.type)).map(widget=>widget.config?.personMode==='specific'?Number(widget.config.personId):Number(data.widget_people?.[widget.id]?.id||data.random_person?.id)).filter(Boolean))];
@@ -76,7 +83,7 @@
         // « Chercher sur internet » : la personne choisie, ou la dernière fiche consultée
         const webSearchPersonId=widget=>widget.config?.personMode==='specific'?Number(widget.config.personId)||0:Number(dashboardRecentPeople()[0]?.id)||0;
         settings.widgets.filter(widget=>['web_search','family_objects_widget','family_memories_widget','lineage_widget'].includes(widget.type)).forEach(widget=>{const id=webSearchPersonId(widget);if(id&&!personBlockIds.includes(id))personBlockIds.push(id);});
-        const [saintData,progressData]=cached&&cached.extra?cached.extra:await Promise.all([settings.widgets.some(widget=>widget.type==='saint_day')?api('saint_of_day').catch(()=>null):null,settings.widgets.some(widget=>widget.type==='research_progress')?api('research_progress').catch(()=>null):null]);
+        const [saintData,progressData]=await extraReady;
         if(cached&&cached.people)Object.assign(personBlockDetails,cached.people);
         await Promise.all(personBlockIds.filter(id=>!(id in personBlockDetails)).map(async id=>{try{personBlockDetails[id]=await api('person',{id});}catch(_){personBlockDetails[id]=null;}}));
         pageCachePut(cacheKey,{data,quizData,extra:[saintData,progressData],people:{...personBlockDetails}});
@@ -147,8 +154,7 @@
             places:widget=>dashboardPlacesCard(String(index++).padStart(2,'0'),(data.top_places||[]).slice(0,limit(widget)),span(widget))
         };
         // Widgets ajoutés par assets/js/heritage.js : chacun charge ses données une fois
-        const extDashboard=window.LCNDA_EXT?.dashboard||{};const extData={};
-        await Promise.all([...new Set(settings.widgets.map(widget=>widget.type).filter(type=>extDashboard[type]))].map(async type=>{try{extData[type]=extDashboard[type].load?await extDashboard[type].load(settings.widgets.filter(widget=>widget.type===type)):null; /* les widgets de cette sorte (leurs réglages) : « Mon agenda » ne lit que les jours qu'il montre */}catch(_){extData[type]=null;}}));
+        await extReady;
         if(token!==state.workspaceToken||!isDashModule())return;
         Object.keys(extDashboard).forEach(type=>{blockRenderers[type]=widget=>extDashboard[type].render(String(index++).padStart(2,'0'),widget,span(widget),extData[type]);});
         const dress=(widget,html)=>widget.cwDef&&window.LCNDA_EXT?.dressWidget?window.LCNDA_EXT.dressWidget(customDefs[widget.cwDef],html):html;
@@ -504,7 +510,7 @@
     }
     function dashboardPlacesToCompleteCard(index,items,spanClass){
         const body=dashboardListRows(items,'Aucun lieu prioritaire à compléter.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml([item.name,item.subdivision].filter(Boolean).join(' · ')||'Lieu')}</strong><small>${escapeHtml([item.county,item.state,item.country].filter(Boolean).join(', ')||'Coordonnées ou pays à compléter')} · ${plural(Number(item.event_count||0),'évènement')}</small></div><button class="button small secondary" data-dashboard-list="places">Lieux</button></article>`);
-        return card(index,'Communes à compléter',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-list="places">Lieux</button>`);
+        return card(index,'Communes à compléter',items.length,body,spanClass,`<button class="button small" data-lap-open>📍 ${i18n('Placer…')}</button><button class="button small secondary" data-dashboard-list="places">Lieux</button>`); // 📍 Lieux à placer (heritage-lieux-a-placer.js)
     }
     function dashboardBranchesCard(index,items,spanClass){
         const body=dashboardListRows(items,'Aucune branche à prioriser.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml(item.branch||'Branche')}</strong><small>${plural(Number(item.person_count||0),'personne')} · ${plural(Number(item.source_count||0),'source')} · ${plural(Number(item.media_count||0),'média')}</small></div></article>`);

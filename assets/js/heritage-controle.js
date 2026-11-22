@@ -448,6 +448,7 @@
         ['📅 Dates', [['baptism_days', 'Baptême tardif (avant 1900)', '🟡 plus de', 'jours'], ['burial_days', 'Inhumation tardive (avant 1900)', '🟡 plus de', 'jours']]],
         ['📍 Lieux et 👥 Doublons', [['baptism_km', 'Baptême loin de la naissance', '🟠 au-delà de', 'km'], ['dup_min', 'Ressemblance des doublons', 'montrer à partir de', '%']]],
         ['🧾 Recensement SocFace', [['socface_years', 'Année de naissance lue par SocFace', '🟡 écart de plus de', 'ans']]],
+        ['🛡 Fiabilité', [['reliability_min', 'À revoir avant publication', 'note sous', 'sur 100']]], // plus-famille.js
     ];
     const label = k => SEUILS.flatMap(s => s[1]).find(r => r[0] === k)?.[1] || k;
     ext.maintenance.controle_seuils = async token => {

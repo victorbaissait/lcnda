@@ -304,12 +304,16 @@
         const o = spec.o || {}, src = rows(spec, 'rows', 2000).map(r => ({name: str(r.name, 120), cm: r.cm, shared: str(r.shared, 4000), pid: pid(r.pid)}));
         const lo = isNum(o.lo) ? num(o.lo) : 90, hi = isNum(o.hi) ? num(o.hi) : 400, max = clamp(Math.round(num(o.max) || 4), 1, 12);
         const Ld = P.leeds(src, {lo, hi, max});
+        if (o.tree && Ld.pool.length > 1) treeGroups(Ld, src.length, o, max); // 🌳 l'arbre de regroupement (lot B) : l'ordre des lignes, et les groupes s'il les donne
         if (!Ld.pool.length) return empty(W, fs, i18n('Ajoute des correspondances de {lo} à {hi} cM avec leurs correspondances en commun (ou « Depuis l’app »).', {lo: fmt(lo, 0), hi: fmt(hi, 0)}));
         const names = str(o.names, 400) ? str(o.names, 400).split(',').map(x => x.trim()).filter(Boolean) : GP;
         const cOf = k => color(rows(spec, 'colors', 12)[k]?.color, LEEDS_C[k % LEEDS_C.length]);
-        const order = Ld.order.slice(0, clamp(Math.round(num(o.maxRows) || 60), 5, 150)), n = order.length, byI = new Map(Ld.list.map(m => [m.i, m]));
-        const labW = Math.min(W * .42, Math.max(...order.map(i => textW(`${byI.get(i).name} ${fmt(byI.get(i).cm, 0)}`, fs * .8))) + 10);
-        const cell = clamp((W - labW - 4) / n, 3, 36), gridW = cell * n, top = o.colLabels !== false && cell >= fs * .7 ? Math.min(140, Math.max(...order.map(i => textW(byI.get(i).name, fs * .72))) + 8) : 6;
+        const order = (Ld.tree ? Ld.tree.order : Ld.order).slice(0, clamp(Math.round(num(o.maxRows) || 60), 5, 150)), n = order.length, byI0 = new Map(Ld.list.map(m => [m.i, m]));
+        // les noms cachés (pour montrer l'arbre sans dévoiler ses cousins) : « Correspondance 1, 2… »
+        const anon = !!o.anon, byI = anon ? new Map(order.map((i, k) => [i, {...byI0.get(i), name: i18n('Correspondance {n}', {n: k + 1}).replace('{n}', String(k + 1))}])) : byI0;
+        const tw = Ld.tree ? clamp(W * .16, 46, 170) : 0, Wm = W - tw;
+        const labW = Math.min(Wm * .42, Math.max(...order.map(i => textW(`${byI.get(i).name} ${fmt(byI.get(i).cm, 0)}`, fs * .8))) + 10);
+        const cell = clamp((Wm - labW - 4) / n, 3, 36), gridW = cell * n, top = o.colLabels !== false && cell >= fs * .7 ? Math.min(140, Math.max(...order.map(i => textW(byI.get(i).name, fs * .72))) + 8) : 6;
         let svg = '';
         if (top > 6) order.forEach((i, k) => { svg += T(labW + k * cell + cell / 2, top - 4, cut(byI.get(i).name, top - 8, fs * .72), {size: fs * .72, rotate: -60, fill: '#444'}); });
         order.forEach((i, r) => {
@@ -323,8 +327,48 @@
             });
         });
         let h = top + n * cell;
+        if (tw) svg = `${treeSvg(Ld.tree, order, top, cell, tw - 6, k => (k === undefined ? '#9aa3ad' : cOf(k)), Ld.groupOf)}<g transform="translate(${r1(tw)} 0)">${svg}</g>`;
         if (o.summary !== false) { svg += T(0, h + fs, cut(`${Ld.clusters.length} groupe${Ld.clusters.length > 1 ? 's' : ''} sur ${Ld.pool.length} correspondances de ${fmt(lo, 0)} à ${fmt(hi, 0)} cM${Ld.pool.length > Ld.clusters.flat().length ? ` · ${Ld.pool.length - Ld.clusters.flat().length} sans groupe` : ''}.`, W, fs * .85), {size: fs * .85, fill: '#555'}); h += fs * 1.8; }
         return {h: Math.ceil(h), svg, legend: Ld.clusters.map((c, k) => ({label: `${names[k] || i18n('Groupe {n}', {n: String(k + 1)})} (${c.length})`, color: cOf(k)})), desc: i18n('Méthode de Leeds : {n} groupes de couleur.', {n: Ld.clusters.length})};
+    }
+    /* ── 🌳 Dendrogramme (lot B) : l'arbre de regroupement des correspondances, à gauche de la matrice ──
+     * distance entre deux correspondances = 1 − (correspondances en commun partagées / toutes, chacune comptée avec elle-même), lien moyen. */
+    function dendro(ids, link) {
+        const n = ids.length, sets = ids.map(i => new Set([i, ...[...(link.get(i) || [])].filter(x => ids.includes(x))]));
+        const D = Array.from({length: n}, (_, a) => Array.from({length: n}, (_, b) => { if (a === b) return 0; let k = 0; sets[a].forEach(x => { if (sets[b].has(x)) k++; }); return 1 - k / (sets[a].size + sets[b].size - k); }));
+        const node = ids.map(i => ({leaf: i, h: 0, size: 1})), on = ids.map(() => true);
+        for (let step = 1; step < n; step++) {
+            let ba = -1, bb = -1, bd = Infinity;
+            for (let a = 0; a < n; a++) if (on[a]) for (let b = a + 1; b < n; b++) if (on[b] && D[a][b] < bd) { bd = D[a][b]; ba = a; bb = b; }
+            if (ba < 0) break;
+            const sa = node[ba].size, sb = node[bb].size;
+            for (let c = 0; c < n; c++) if (on[c] && c !== ba && c !== bb) D[ba][c] = D[c][ba] = (D[ba][c] * sa + D[bb][c] * sb) / (sa + sb); // lien moyen (Lance–Williams)
+            node[ba] = {l: node[ba], r: node[bb], h: bd, size: sa + sb}; on[bb] = false;
+        }
+        const root = node[on.indexOf(true)], order = [];
+        (function walk(x) { if (x.leaf !== undefined) order.push(x.leaf); else { walk(x.l); walk(x.r); } })(root);
+        return {root, order};
+    }
+    /** l'arbre posé sur Ld ; avec o.groupsBy = tree, les groupes de couleur sont ses grandes branches (au plus max) */
+    function treeGroups(Ld, total, o, max) {
+        Ld.tree = dendro(Ld.pool, Ld.link);
+        if (o.groupsBy !== 'tree') return;
+        let parts = [Ld.tree.root];
+        while (parts.filter(x => x.leaf === undefined).length < max) { const k = parts.reduce((b, x, i) => (x.leaf === undefined && (b < 0 || x.h > parts[b].h) ? i : b), -1); if (k < 0) break; const x = parts[k]; parts.splice(k, 1, x.l, x.r); }
+        const leaves = x => (x.leaf !== undefined ? [x.leaf] : [...leaves(x.l), ...leaves(x.r)]);
+        Ld.clusters = parts.map(leaves).filter(c => c.length > 1); Ld.groupOf = new Map(); Ld.clusters.forEach((c, k) => c.forEach(i => Ld.groupOf.set(i, k)));
+    }
+    /** le dessin de l'arbre : la racine à gauche, une feuille au milieu de chaque ligne de la matrice */
+    function treeSvg(tree, order, top, cell, w, cOf, groupOf) {
+        const yOf = new Map(order.map((i, k) => [i, top + k * cell + cell / 2])), hmax = Math.max(1e-9, tree.root.h), X = hh => 2 + (1 - hh / hmax) * (w - 2);
+        let s = '';
+        const draw = x => { if (x.leaf !== undefined) return yOf.has(x.leaf) ? {y: yOf.get(x.leaf), g: groupOf.get(x.leaf)} : null;
+            const a = draw(x.l), b = draw(x.r); if (!a && !b) return null; if (!a || !b) return a || b;
+            const xx = X(x.h), g = a.g !== undefined && a.g === b.g ? a.g : undefined, c = cOf(g);
+            s += `<path d="M${r1(X(x.l.h ?? 0))} ${r1(a.y)}H${r1(xx)}V${r1(b.y)}H${r1(X(x.r.h ?? 0))}" fill="none" stroke="${c}" stroke-width="1.4"/>`;
+            return {y: (a.y + b.y) / 2, g}; };
+        draw(tree.root);
+        return s;
     }
     const sampleLeeds = () => {
         const g = [['Paul R.', 'Marc R.', 'Lise R.', 'Hervé B.'], ['Anne C.', 'Yves C.', 'Rose D.'], ['Jean P.', 'Sylvie P.', 'Noël T.', 'Eva P.'], ['Louis G.', 'Agnès G.', 'Théo M.']];
@@ -454,6 +498,7 @@
     function hills(spec, W, fs) {
         const o = spec.o || {}, S = seriesOf(spec), list = tableRows(spec, 600);
         if (!list.length || !S.length) return empty(W, fs, 'Ajoute des lignes (années, décennies…) et une colonne de chiffres par colline.');
+        if (o.shape === 'horizon') return horizon(spec, W, fs, S, list);
         const n = list.length, labW = Math.min(W * .3, Math.max(...S.map(s => textW(s.name, fs * .85))) + 10), x0 = labW, x1 = W - 6;
         const rowH = clamp(num(o.rowHeight) || fs * 2.8, 10, 200), lap = clamp((isNum(o.overlap) ? num(o.overlap) : 140) / 100, 0, 4), top = rowH * (1 + lap) + 4;
         const same = o.scaleBy === 'same', gmax = Math.max(1e-9, ...S.flatMap((s, j) => list.map(x => val(x.r, j) ?? 0)));
@@ -476,6 +521,32 @@
         const bottom = top + (S.length - 1) * rowH;
         svg += xLabels(list.map(x => x.label), X, bottom + fs, fs, x1 - x0);
         return {h: Math.ceil(bottom + fs * 1.8), svg, legend: [], desc: i18n('Collines empilées : {s} séries sur {n} périodes.', {s: S.length, n}), ...(timePts(list, X) ? {time: {x0, y0: 0, w: x1 - x0, h: bottom, points: timePts(list, X)}} : {})};
+    }
+    /* ── 🌊 Graphique en horizon (lot B) : chaque série sur une bande basse, sa courbe repliée en 2 à 4 couches de plus en plus foncées ;
+     *    les chiffres négatifs repliés vers le haut en rouge ── */
+    function horizon(spec, W, fs, S, list) {
+        const o = spec.o || {}, n = list.length, nb = clamp(Math.round(num(o.bands) || 3), 2, 4), labW = Math.min(W * .3, Math.max(...S.map(s => textW(s.name, fs * .85))) + 10), x0 = labW, x1 = W - 6;
+        const rowH = clamp(num(o.rowHeight) || fs * 2.4, 10, 200), gap = clamp(rowH * .18, 2, 12), X = i => x0 + (n > 1 ? i / (n - 1) : .5) * (x1 - x0);
+        const one = o.colors === 'one', pos = color(o.oneColor, '#4e79a7'), neg = color(o.negColor, '#c62828'), same = o.scaleBy === 'same';
+        const gmax = Math.max(1e-9, ...S.flatMap((_, j) => list.map(x => Math.abs(val(x.r, j) ?? 0))));
+        let svg = '';
+        S.forEach((s, j) => {
+            const y0 = j * (rowH + gap), base = y0 + rowH, vals = list.map(x => (x.off ? 0 : val(x.r, j) ?? 0)), mx = same ? gmax : Math.max(1e-9, ...vals.map(Math.abs)), step = mx / nb;
+            const tone = one ? pos : s.color;
+            svg += `<rect x="${r1(x0)}" y="${r1(y0)}" width="${r1(x1 - x0)}" height="${r1(rowH)}" fill="currentColor" fill-opacity=".04"/>`;
+            for (const sign of [1, -1]) for (let k = 0; k < nb; k++) {
+                const h = v => clamp((sign * v - k * step) / step, 0, 1) * rowH; if (!vals.some(v => sign * v > k * step)) continue;
+                const c = mix('#ffffff', sign > 0 ? tone : neg, (k + 1) / nb * .85 + .15);
+                svg += `<path d="M${r1(X(0))} ${r1(base)}${vals.map((v, i) => `L${r1(X(i))} ${r1(base - h(v))}`).join('')}L${r1(X(n - 1))} ${r1(base)}Z" fill="${c}"/>`;
+            }
+            const peak = vals.reduce((b, v, i) => (Math.abs(v) > Math.abs(vals[b]) ? i : b), 0);
+            svg += `<rect x="${r1(x0)}" y="${r1(y0)}" width="${r1(x1 - x0)}" height="${r1(rowH)}" fill="none">${tip(i18n('{name} : de {a} à {b}, le plus en {peak} ({v})', {name: s.name, a: fmt(Math.min(...vals), 1), b: fmt(Math.max(...vals), 1), peak: list[peak]?.label || '', v: fmt(vals[peak], 1)}))}</rect>`
+                + T(labW - 6, y0 + rowH / 2, cut(s.name, labW - 8, fs * .85), {anchor: 'end', size: fs * .85, weight: 600});
+        });
+        const bottom = S.length * (rowH + gap) - gap;
+        svg += xLabels(list.map(x => x.label), X, bottom + fs, fs, x1 - x0);
+        const legend = [...Array.from({length: nb}, (_, k) => ({label: k === nb - 1 ? i18n('Le plus haut') : k === 0 ? i18n('Le plus bas') : '·', color: mix('#ffffff', pos, (k + 1) / nb * .85 + .15)})).filter(l => l.label !== '·'), ...(S.some((_, j) => list.some(x => (val(x.r, j) ?? 0) < 0)) ? [{label: i18n('Négatif (replié)'), color: neg}] : [])];
+        return {h: Math.ceil(bottom + fs * 1.8), svg, legend: one ? legend : [...S.map(x => ({label: x.name, color: x.color})), ...legend.filter(l => l.color === neg)], desc: i18n('Graphique en horizon : {s} séries sur {n} périodes.', {s: S.length, n}), ...(timePts(list, X) ? {time: {x0, y0: 0, w: x1 - x0, h: bottom, points: timePts(list, X)}} : {})};
     }
     const sampleHills = () => ({series: ['Martin', 'Durand', 'Garnier', 'Roux', 'Moreau'].map(name => ({name})), rows: ['1700', '1725', '1750', '1775', '1800', '1825', '1850', '1875', '1900', '1925', '1950'].map((label, i) => ({label, s0: String(Math.round(8 + 10 * Math.exp(-((i - 3) ** 2) / 6))), s1: String(Math.round(2 + 12 * Math.exp(-((i - 6) ** 2) / 4))), s2: String(Math.round(1 + 9 * Math.exp(-((i - 8) ** 2) / 3))), s3: String(Math.round(4 + 6 * Math.exp(-((i - 2) ** 2) / 5))), s4: String(Math.round(1 + 11 * Math.exp(-((i - 9) ** 2) / 2)))}))});
 
@@ -732,7 +803,8 @@
         dplleeds: {icon: '🧬', label: 'Matrice des correspondances ADN (méthode de Leeds)', group: 'ADN', render: leedsM, legend: 'bottom', fromApp: leedsApp,
             help: 'Les correspondances ADN qui se correspondent entre elles, rangées en groupes de couleur (souvent un par grand-parent).',
             grids: [{key: 'rows', label: 'Les correspondances', cols: [C('name', 'Nom'), C('cm', 'ADN partagé', 'number', {unit: 'cM'}), C('shared', 'Correspondances en commun (séparées par ;)')]}, {key: 'colors', label: 'Couleur de chaque groupe (facultatif)', max: 12, cols: [C('color', 'Couleur', 'color')]}],
-            options: [C('lo', 'De', 'number', {unit: 'cM', def: 90}), C('hi', 'À', 'number', {unit: 'cM', def: 400}), C('max', 'Groupes de couleur au plus', 'range', {min: 1, max: 12, def: 4}), C('names', 'Noms des groupes (séparés par des virgules)', 'text', {def: GP.join(', ')}), C('colLabels', 'Noms en haut des colonnes', 'check', {def: true}), C('maxRows', 'Correspondances au plus', 'range', {min: 5, max: 150, def: 60}), C('summary', 'Phrase de résumé', 'check', {def: true})],
+            options: [C('lo', 'De', 'number', {unit: 'cM', def: 90}), C('hi', 'À', 'number', {unit: 'cM', def: 400}), C('max', 'Groupes de couleur au plus', 'range', {min: 1, max: 12, def: 4}), C('names', 'Noms des groupes (séparés par des virgules)', 'text', {def: GP.join(', ')}), C('colLabels', 'Noms en haut des colonnes', 'check', {def: true}), C('maxRows', 'Correspondances au plus', 'range', {min: 5, max: 150, def: 60}), C('summary', 'Phrase de résumé', 'check', {def: true}),
+                C('tree', 'Arbre de regroupement à gauche (dendrogramme)', 'check'), C('groupsBy', 'Groupes de couleur', 'select', {choices: [['', 'Méthode de Leeds'], ['tree', 'Les branches de l’arbre']], when: s => !!s.o?.tree}), C('anon', 'Cacher les noms des correspondances', 'check')],
             sample: () => ({o: {title: 'Mes cousins ADN, par grand-parent'}, rows: sampleLeeds()})},
         dplwheel: {icon: '🎡', label: 'Roue de l’année (anniversaires et fêtes de la famille)', group: 'Frises', render: wheel, legend: 'bottom', fromApp: wheelApp,
             help: 'Les anniversaires, mariages, décès et fêtes des prénoms autour d’un cercle de douze mois.',
@@ -753,10 +825,12 @@
                 C('leftColor', 'Couleur à gauche', 'color', {def: '#e15759', when: s => s.o?.mode === 'one'}), C('rightColor', 'Couleur à droite', 'color', {def: '#4e79a7', when: s => s.o?.mode === 'one'}),
                 C('sort', 'Ordre', 'select', {choices: [['', 'Comme dans le tableau'], ['diff', 'Par écart'], ['total', 'Par total']]}), C('labels', 'Noms', 'select', {choices: [['', 'À gauche'], ['middle', 'Sur le trait du milieu']]}), C('values', 'Écrire les chiffres', 'check', {def: true}), C('rowH', 'Épaisseur des barres', 'range', {min: 6, max: 60, def: 19})],
             sample: () => ({o: {title: 'Décès et naissances dans la famille'}, series: [{name: 'Décès', color: '#5f6b7a'}, {name: 'Naissances', color: '#59a14f'}], rows: sampleDiv()})},
-        dplhills: {icon: '🏔', label: 'Collines empilées (une courbe par série, décalées)', group: 'Chiffres', render: hills, noLegend: true, fromApp: hillsApp, time: OFF_TIME,
+        dplhills: {icon: '🏔', label: 'Collines empilées (une courbe par série, décalées)', group: 'Chiffres', render: hills, legend: 'bottom', fromApp: hillsApp, time: OFF_TIME,
             help: 'Une colline par série (un nom de famille, un prénom, une commune…), l’une derrière l’autre, au fil du temps.',
             grids: [TABLE('Les chiffres (une ligne par période, une colonne par colline)', 'Période')],
-            options: [C('overlap', 'Chevauchement', 'range', {unit: '%', min: 0, max: 300, def: 140}), C('rowHeight', 'Écart entre les collines', 'range', {unit: 'px', min: 10, max: 120, def: 34}), C('scaleBy', 'Hauteur', 'select', {choices: [['', 'Chaque colline à sa hauteur'], ['same', 'Même échelle pour toutes']]}), C('smooth', 'Courbes douces', 'check', {def: true}),
+            options: [C('shape', 'Forme', 'select', {choices: [['', 'Collines'], ['horizon', 'Horizon (bandes repliées)']]}), C('bands', 'Nombre de couches', 'range', {min: 2, max: 4, def: 3, when: s => s.o?.shape === 'horizon'}),
+                C('negColor', 'Teinte des négatifs', 'color', {def: '#c62828', when: s => s.o?.shape === 'horizon'}),
+                C('overlap', 'Chevauchement', 'range', {unit: '%', min: 0, max: 300, def: 140}), C('rowHeight', 'Écart entre les collines', 'range', {unit: 'px', min: 10, max: 120, def: 34}), C('scaleBy', 'Hauteur', 'select', {choices: [['', 'Chaque colline à sa hauteur'], ['same', 'Même échelle pour toutes']]}), C('smooth', 'Courbes douces', 'check', {def: true}),
                 C('order', 'Ordre', 'select', {choices: [['', 'Comme dans le tableau'], ['reverse', 'À l’envers']]}), C('colors', 'Couleurs', 'select', {choices: [['', 'Une par série'], ['gradient', 'Un dégradé'], ['one', 'Une seule']]}), C('lowColor', 'Dégradé : première', 'color', {def: '#9ecae1', when: s => s.o?.colors === 'gradient'}), C('highColor', 'Dégradé : dernière', 'color', {def: '#08519c', when: s => s.o?.colors === 'gradient'}), C('oneColor', 'Couleur', 'color', {def: '#4e79a7', when: s => s.o?.colors === 'one'}),
                 C('opacity', 'Opacité', 'range', {unit: '%', min: 10, max: 100, def: 80}), C('line', 'Trait blanc autour', 'check', {def: true}), C('peaks', 'Écrire le sommet', 'check')],
             sample: () => ({o: {title: 'Les noms de famille au fil du temps'}, ...sampleHills()})},

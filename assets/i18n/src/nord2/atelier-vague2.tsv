@@ -1,0 +1,59 @@
+fr ¦ sk ¦ nb
+# 📜 Atelier de transcription, vague 2 « Guider »
+Les étapes : Lire, Corriger, Repérer, Ajouter à la généalogie ¦ Kroky: Prečítať, Opraviť, Nájsť, Pridať do genealógie ¦ Trinnene: Les, Rett, Finn, Legg til i slektstreet
+Lire l’image (« ✨ Lire ▾ ») ou écrire le texte, ligne à ligne ¦ Prečítať obrázok („✨ Prečítať ▾“) alebo napísať text, riadok po riadku ¦ Les bildet («✨ Les ▾») eller skriv teksten, linje for linje
+Relire et corriger : corrections proposées, mots douteux [?], aide à la lecture ¦ Skontrolovať a opraviť: navrhnuté opravy, neisté slová [?], pomoc s čítaním ¦ Gå gjennom og rett: foreslåtte rettelser, usikre ord [?], lesehjelp
+Ajouter les personnes et l’événement à la généalogie ¦ Pridať osoby a udalosť do genealógie ¦ Legg til personene og hendelsen i slektstreet
+Toute la page ou la zone choisie (▭) ; ou écris le texte toi-même, ligne à ligne. ¦ Celá strana alebo vybraná oblasť (▭); alebo napíš text sám, riadok po riadku. ¦ Hele siden eller det valgte området (▭); eller skriv teksten selv, linje for linje.
+=mot à revoir ¦ slovo na kontrolu|slová na kontrolu|slov na kontrolu ¦ ord å gå gjennom|ord å gå gjennom
+rien à revoir ¦ nič na kontrolu ¦ ingenting å gå gjennom
+=nom repéré ¦ nájdené meno|nájdené mená|nájdených mien ¦ funnet navn|funne navn
+{n} à relier ¦ {n} na prepojenie ¦ {n} å koble
+Tout est relié ¦ Všetko prepojené ¦ Alt koblet
+{n} × [?] ou [illisible] ¦ {n} × [?] alebo [nečitateľné] ¦ {n} × [?] eller [uleselig]
+=personne dans l’acte ¦ osoba v zázname|osoby v zázname|osôb v zázname ¦ person i akten|personer i akten
+Personne dans l’acte pour l’instant : « 🧭 Repérer » les trouve dans le texte ¦ Zatiaľ nikto v zázname: „🧭 Nájsť“ ich nájde v texte ¦ Ingen i akten ennå: «🧭 Finn» finner dem i teksten
+# — téléphone : trois onglets
+Image, texte ou personnes ¦ Obrázok, text alebo osoby ¦ Bilde, tekst eller personer
+# — 👁 relecture ligne à ligne en plein écran
+Le morceau d’image de la ligne ¦ Výrez obrázka pre riadok ¦ Bildeutsnittet for linjen
+Pas de zone pour cette ligne : dessine-la sur l’image (▭), elle restera reliée. ¦ Pre tento riadok nie je oblasť: nakresli ju na obrázok (▭), zostane prepojená. ¦ Ikke noe område for denne linjen: tegn det på bildet (▭), det forblir koblet.
+Ligne à relire ¦ Riadok na kontrolu ¦ Linje å gå gjennom
+Relue ¦ Skontrolované ¦ Gjennomgått
+Ligne d’avant ¦ Predchádzajúci riadok ¦ Forrige linje
+atelier|Ligne suivante ¦ Ďalší riadok ¦ Neste linje
+Entrée : la ligne est relue, ligne suivante · ⇧ Entrée : ligne d’avant · ↑ ↓ : changer de ligne sans la marquer · Échap : fermer ¦ Enter: riadok skontrolovaný, ďalší riadok · ⇧ Enter: predchádzajúci riadok · ↑ ↓: zmeniť riadok bez označenia · Esc: zavrieť ¦ Enter: linjen gjennomgått, neste linje · ⇧ Enter: forrige linje · ↑ ↓: bytt linje uten å merke den · Esc: lukk
+Ligne {n} sur {total} ¦ Riadok {n} z {total} ¦ Linje {n} av {total}
+=ligne relue ¦ riadok skontrolovaný|riadky skontrolované|riadkov skontrolovaných ¦ linje gjennomgått|linjer gjennomgått
+Toutes les lignes sont relues. ¦ Všetky riadky sú skontrolované. ¦ Alle linjene er gjennomgått.
+C’était la dernière ligne. ¦ To bol posledný riadok. ¦ Det var den siste linjen.
+Relire ligne à ligne ¦ Kontrolovať riadok po riadku ¦ Gå gjennom linje for linje
+Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Kontrolovať riadok po riadku na celej obrazovke: výrez obrázka nad každým riadkom ¦ Gå gjennom linje for linje i fullskjerm: bildeutsnittet over hver linje
+Relecture ligne à ligne en plein écran (conseillé) ¦ Kontrola riadok po riadku na celej obrazovke (odporúčané) ¦ Gjennomgang linje for linje i fullskjerm (anbefalt)
+# — 🕘 Versions, 🔍 Chercher / Remplacer, ⌨️ touches
+Chercher dans le texte ¦ Hľadať v texte ¦ Søk i teksten
+Chercher et remplacer ¦ Hľadať a nahradiť ¦ Søk og erstatt
+« {q} » → « {by} » : {n} ¦ „{q}“ → „{by}“: {n} ¦ «{q}» → «{by}»: {n}
+Avant « Remplacer » ¦ Pred „Nahradiť“ ¦ Før «Erstatt»
+Avant « Tout remplacer » ¦ Pred „Nahradiť všetko“ ¦ Før «Erstatt alle»
+Avant « Accepter les propositions sûres » ¦ Pred „Prijať isté návrhy“ ¦ Før «Godta de sikre forslagene»
+Avant la lecture mise dans le texte ¦ Pred vložením prečítaného do textu ¦ Før lesingen ble satt inn i teksten
+Résultat suivant, résultat d’avant ¦ Ďalší výsledok, predchádzajúci výsledok ¦ Neste treff, forrige treff
+Ligne suivante, ligne d’avant : l’image suit sa zone ¦ Ďalší riadok, predchádzajúci riadok: obrázok ide za jeho oblasťou ¦ Neste linje, forrige linje: bildet følger området
+Déplacer l’image, en restant appuyé ¦ Posunúť obrázok, pri podržaní ¦ Flytt bildet, hold inne
+Déplacer la zone choisie (⇧ : l’agrandir) ¦ Posunúť vybranú oblasť (⇧: zväčšiť ju) ¦ Flytt det valgte området (⇧: forstørr det)
+Supprimer la zone choisie ¦ Odstrániť vybranú oblasť ¦ Slett det valgte området
+Zoom avant, zoom arrière ¦ Priblížiť, oddialiť ¦ Zoom inn, zoom ut
+Cette liste des touches ¦ Tento zoznam klávesov ¦ Denne listen over taster
+# — avancement et abréviations au survol
+=mot douteux ¦ neisté slovo|neisté slová|neistých slov ¦ usikkert ord|usikre ord
+aucun mot douteux ¦ žiadne neisté slovo ¦ ingen usikre ord
+{n} / {total} lignes relues ¦ {n} / {total} riadkov skontrolovaných ¦ {n} / {total} linjer gjennomgått
+{n} / {total} lignes reliées ¦ {n} / {total} riadkov prepojených ¦ {n} / {total} linjer koblet
+Marquer comme finie ¦ Označiť ako hotovú ¦ Merk som ferdig
+Marquer comme relue ¦ Označiť ako skontrolovanú ¦ Merk som gjennomgått
+Ligne sans zone : dessine-la sur l’image (▭) ¦ Riadok bez oblasti: nakresli ju na obrázok (▭) ¦ Linje uten område: tegn det på bildet (▭)
+Ne plus souligner les abréviations ¦ Už nepodčiarkovať skratky ¦ Slutt å understreke forkortelser
+Souligner les abréviations connues ¦ Podčiarkovať známe skratky ¦ Understrek kjente forkortelser
+Abréviations connues soulignées, leur sens au survol (conseillé) ¦ Známe skratky podčiarknuté, ich význam po prejdení myšou (odporúčané) ¦ Kjente forkortelser understreket, betydningen når du holder over (anbefalt)
+Relues ¦ Skontrolované ¦ Gjennomgåtte

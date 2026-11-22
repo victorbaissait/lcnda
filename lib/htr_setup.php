@@ -282,6 +282,7 @@ function htr_read_start(PDO $pdo, array $data): array
             $info = $bin !== false ? @getimagesizefromstring($bin) : false;
             if (!$info || !in_array($info[2] ?? 0, [IMAGETYPE_JPEG, IMAGETYPE_PNG], true)) { throw new RuntimeException('Image améliorée illisible.'); }
             if ((int) $info[0] < 1 || (int) $info[1] < 1 || (int) $info[0] > 20000 || (int) $info[1] > 20000 || (int) $info[0] * (int) $info[1] > 120000000) { throw new RuntimeException('Image améliorée trop grande.'); }
+            if ($big = media_pixels_too_big((int) $info[0], (int) $info[1], $pdo)) { throw new RuntimeException(media_too_big_message($big)); } // 📎 la limite réglée, si elle est plus basse
             $img = 'page.' . ($info[2] === IMAGETYPE_PNG ? 'png' : 'jpg');
             file_put_contents($dir . '/' . $img, $bin); unset($bin);
         } else {
@@ -291,6 +292,7 @@ function htr_read_start(PDO $pdo, array $data): array
             if (!$root || !$src || !str_starts_with($src, $root . DIRECTORY_SEPARATOR) || !is_file($src)) { throw new RuntimeException('Fichier média introuvable.'); }
             $info = @getimagesize($src);
             if (!$info || !in_array($info[2] ?? 0, [IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_TIFF_II, IMAGETYPE_TIFF_MM, IMAGETYPE_WEBP, IMAGETYPE_BMP], true)) { throw new RuntimeException('Cette image ne peut pas être lue (format).'); }
+            if ($big = media_pixels_too_big((int) $info[0], (int) $info[1], $pdo)) { throw new RuntimeException(media_too_big_message($big)); } // 📎 lib/media_limits.php
             $img = 'page' . image_type_to_extension((int) $info[2]);
             if (!copy($src, $dir . '/' . $img)) { throw new RuntimeException('Copie de l’image impossible.'); }
         }
@@ -314,9 +316,28 @@ function htr_read_job(string $id): array
     $state = (string) ($r['state'] ?? 'running');
     if ($state === 'running' && time() - (int) ($r['updated'] ?? $job['created'] ?? time()) > 1800) { $state = 'error'; $r['error'] = 'La lecture a pris trop de temps (plus de 30 minutes) : essaie sur une zone plus petite.'; }
     $out = ['id' => $id, 'state' => $state, 'elapsed' => max(0, time() - (int) ($job['created'] ?? time())), 'model_file' => (string) ($job['model_file'] ?? '')];
-    if ($state === 'done') { $out += ['lines' => (array) ($r['lines'] ?? []), 'text' => (string) ($r['text'] ?? ''), 'engine' => (string) ($r['engine'] ?? ''), 'mode' => (string) ($r['mode'] ?? '')]; }
+    if ($state === 'done') { $out += htr_with_margin((array) ($r['lines'] ?? []), (array) ($r['margin_lines'] ?? [])) + ['engine' => (string) ($r['engine'] ?? ''), 'mode' => (string) ($r['mode'] ?? '')]; }
     if ($state === 'error') { $out['error'] = (string) ($r['error'] ?? 'La lecture n’a pas abouti.'); }
     return $out;
+}
+
+/**
+ * 📐 Le texte lu, puis les mentions écrites à 90° dans la marge (lues à part par scripts/htr_recognize.py, après rotation) :
+ * après le texte principal, une ligne de séparation et le titre « Mention en marge : », jamais mêlées aux lignes du texte.
+ * Les lignes ajoutées ont « kind » (sep, margin-title, margin) ; 'margin' = le nombre de lignes de la mention.
+ */
+function htr_with_margin(array $lines, array $margin): array
+{
+    $margin = array_values(array_filter($margin, static fn($l) => is_array($l) && trim((string) ($l['text'] ?? '')) !== ''));
+    $text = implode("\n", array_map(static fn($l) => (string) ($l['text'] ?? ''), $lines));
+    if (!$margin) { return ['lines' => $lines, 'text' => $text, 'margin' => 0]; }
+    $title = i18n_t('Mention en marge :');
+    $all = $lines;
+    if ($lines) { $all[] = ['text' => '———', 'bbox' => null, 'conf' => null, 'words' => [], 'kind' => 'sep']; }
+    $all[] = ['text' => $title, 'bbox' => null, 'conf' => null, 'words' => [], 'kind' => 'margin-title'];
+    foreach ($margin as $l) { $all[] = ['kind' => 'margin'] + $l; }
+    $mtext = implode("\n", array_map(static fn($l) => (string) $l['text'], $margin));
+    return ['lines' => $all, 'text' => ($text !== '' ? $text . "\n———\n" : '') . $title . "\n" . $mtext, 'margin' => count($margin)];
 }
 
 function htr_read_cancel(string $id): array

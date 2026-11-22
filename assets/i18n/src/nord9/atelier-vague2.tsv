@@ -1,0 +1,59 @@
+fr ¦ lb
+# 📜 Atelier de transcription, vague 2 « Guider »
+Les étapes : Lire, Corriger, Repérer, Ajouter à la généalogie ¦ D’Etappen: Liesen, Verbesseren, Erkennen, An d’Genealogie derbäisetzen
+Lire l’image (« ✨ Lire ▾ ») ou écrire le texte, ligne à ligne ¦ D’Bild liesen („✨ Liesen ▾“) oder den Text Zeil fir Zeil schreiwen
+Relire et corriger : corrections proposées, mots douteux [?], aide à la lecture ¦ Nokucken a verbesseren: proposéiert Korrekturen, onsécher Wierder [?], Lieshëllef
+Ajouter les personnes et l’événement à la généalogie ¦ D’Persounen an d’Evenement an d’Genealogie derbäisetzen
+Toute la page ou la zone choisie (▭) ; ou écris le texte toi-même, ligne à ligne. ¦ Déi ganz Säit oder de gewielte Beräich (▭); oder schreif den Text selwer, Zeil fir Zeil.
+=mot à revoir ¦ Wuert nozekucken|Wierder nozekucken
+rien à revoir ¦ näischt nozekucken
+=nom repéré ¦ erkannten Numm|erkannt Nimm
+{n} à relier ¦ {n} ze verlinken
+Tout est relié ¦ Alles verlinkt
+{n} × [?] ou [illisible] ¦ {n} × [?] oder [onliesbar]
+=personne dans l’acte ¦ Persoun am Akt|Persounen am Akt
+Personne dans l’acte pour l’instant : « 🧭 Repérer » les trouve dans le texte ¦ Nach keen am Akt: „🧭 Erkennen“ fënnt se am Text
+# — téléphone : trois onglets
+Image, texte ou personnes ¦ Bild, Text oder Persounen
+# — 👁 relecture ligne à ligne en plein écran
+Le morceau d’image de la ligne ¦ D’Bildstéck vun der Zeil
+Pas de zone pour cette ligne : dessine-la sur l’image (▭), elle restera reliée. ¦ Kee Beräich fir dës Zeil: zeechen en um Bild (▭), e bleift verlinkt.
+Ligne à relire ¦ Zeil fir nozekucken
+Relue ¦ Nogekuckt
+Ligne d’avant ¦ Zeil virdrun
+atelier|Ligne suivante ¦ Nächst Zeil
+Entrée : la ligne est relue, ligne suivante · ⇧ Entrée : ligne d’avant · ↑ ↓ : changer de ligne sans la marquer · Échap : fermer ¦ Enter: Zeil nogekuckt, nächst Zeil · ⇧ Enter: Zeil virdrun · ↑ ↓: Zeil wiesselen ouni se ze markéieren · Esc: zoumaachen
+Ligne {n} sur {total} ¦ Zeil {n} vun {total}
+=ligne relue ¦ Zeil nogekuckt|Zeilen nogekuckt
+Toutes les lignes sont relues. ¦ All d’Zeile sinn nogekuckt.
+C’était la dernière ligne. ¦ Dat war déi lescht Zeil.
+Relire ligne à ligne ¦ Zeil fir Zeil nokucken
+Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Zeil fir Zeil um ganze Bildschierm nokucken: d’Bildstéck iwwer all Zeil
+Relecture ligne à ligne en plein écran (conseillé) ¦ Zeil fir Zeil nokucken um ganze Bildschierm (recommandéiert)
+# — 🕘 Versions, 🔍 Chercher / Remplacer, ⌨️ touches
+Chercher dans le texte ¦ Am Text sichen
+Chercher et remplacer ¦ Sichen an ersetzen
+« {q} » → « {by} » : {n} ¦ „{q}“ → „{by}“: {n}
+Avant « Remplacer » ¦ Virun „Ersetzen“
+Avant « Tout remplacer » ¦ Virun „Alles ersetzen“
+Avant « Accepter les propositions sûres » ¦ Virun „Déi sécher Virschléi unhuelen“
+Avant la lecture mise dans le texte ¦ Ier d’Liesung an den Text koum
+Résultat suivant, résultat d’avant ¦ Nächst Resultat, Resultat virdrun
+Ligne suivante, ligne d’avant : l’image suit sa zone ¦ Nächst Zeil, Zeil virdrun: d’Bild follegt hirem Beräich
+Déplacer l’image, en restant appuyé ¦ D’Bild réckelen, gedréckt halen
+Déplacer la zone choisie (⇧ : l’agrandir) ¦ De gewielte Beräich réckelen (⇧: méi grouss maachen)
+Supprimer la zone choisie ¦ De gewielte Beräich läschen
+Zoom avant, zoom arrière ¦ Vergréisseren, verklengeren
+Cette liste des touches ¦ Dës Lëscht vun den Tasten
+# — avancement et abréviations au survol
+=mot douteux ¦ onsécher Wuert|onsécher Wierder
+aucun mot douteux ¦ keen onsécher Wuert
+{n} / {total} lignes relues ¦ {n} / {total} Zeile nogekuckt
+{n} / {total} lignes reliées ¦ {n} / {total} Zeile verlinkt
+Marquer comme finie ¦ Als fäerdeg markéieren
+Marquer comme relue ¦ Als nogekuckt markéieren
+Ligne sans zone : dessine-la sur l’image (▭) ¦ Zeil ouni Beräich: zeechen en um Bild (▭)
+Ne plus souligner les abréviations ¦ Ofkierzungen net méi ënnersträichen
+Souligner les abréviations connues ¦ Bekannt Ofkierzungen ënnersträichen
+Abréviations connues soulignées, leur sens au survol (conseillé) ¦ Bekannt Ofkierzungen ënnerstrach, hir Bedeitung beim Driwwerfueren (recommandéiert)
+Relues ¦ Nogekuckt

@@ -1,0 +1,179 @@
+fr ¦ lb
+# Zone « diagrammes-lot-c » : grille des recensements, schéma de preuve, arbre de mots (heritage-diagram-lot-c.js), zones des paroisses et carte en étoile (heritage-diagram-cartes.js), cercles d’une journée (heritage-cartes-outils.js)
+Hors de France ¦ Ausserhalb vu Frankräich
+Ajoute des personnes (nom, naissance, décès), puis leurs recensements (année, statut). ¦ Füüg Persounen derbäi (Numm, Gebuert, Doud), duerno hir Vollékszielungen (Joer, Status).
+Aucune année de recensement entre ces deux dates. ¦ Kee Zielungsjoer tëscht dësen zwee Datumen.
+Plus rien à chercher : tous les recensements sont trouvés ou sans objet. ¦ Näischt méi ze sichen: all Zielunge fonnt oder net zoutreffend.
+à chercher : {list} ¦ ze sichen: {list}
+non trouvés : {list} ¦ net fonnt: {list}
+Liste de travail des recensements : {n}. ¦ Aarbechtslëscht vun de Zielungen: {n}.
+Grille des recensements : {n}, {y} recensements, {d} sur {t} cherchés. ¦ Zielungsgitter: {n}, {y} Zielungen, {d} vun {t} gesicht.
+Les recensements de la famille {name} ¦ D’Vollékszielunge vun der Famill {name}
+Contre ¦ Dergéint
+Conflit ¦ Widdersproch
+Écris la question (Réglages), puis les indices : pour, contre, recherches, conflits. ¦ Schreif d’Fro (Astellungen), duerno d’Hiweiser: dofir, dergéint, Recherchen, Widderspréch.
+Indices contre ¦ Hiweiser dergéint
+Recherches et conflits ¦ Recherchen a Widderspréch
+Résolu : {note} ¦ Geléist: {note}
+À résoudre ¦ Ze léisen
+poids {n} sur 3 ¦ Gewiicht {n} vun 3
+Pas encore de conclusion ¦ Nach keng Conclusioun
+Schéma de preuve : {a} pour, {b} contre ; certitude : {c}. ¦ Beweisschema: {a} dofir, {b} dergéint; Gewëssheet: {c}.
+Antoine MAZAUD est-il le père de Jean MAZAUD (né vers 1818) ? ¦ Ass den Antoine MAZAUD de Papp vum Jean MAZAUD (gebuer ëm 1818)?
+Oui : Antoine MAZAUD est le père de Jean. ¦ Jo: den Antoine MAZAUD ass dem Jean säi Papp.
+Acte de mariage de Jean (1842) : « fils d’Antoine MAZAUD, cultivateur » ¦ Bestietnesakt vum Jean (1842): „Jong vum Antoine MAZAUD, Bauer“
+Registre paroissial, original ¦ Parrregister, Original
+Recensement 1836 : Jean, 18 ans, au foyer d’Antoine ¦ Zielung 1836: Jean, 18 Joer, am Stot vum Antoine
+Recensement 1836, original ¦ Zielung 1836, Original
+Antoine est parrain du premier fils de Jean ¦ Den Antoine ass Pätter vum éischte Jong vum Jean
+Baptême 1844 ¦ Daf 1844
+Un autre Jean MAZAUD, né en 1817 au village voisin ¦ En aneren Jean MAZAUD, gebuer 1817 am Nopeschduerf
+Acte de naissance de Jean : registre lacunaire 1815-1820 ¦ Gebuertsakt vum Jean: Register lückenhaft 1815-1820
+Âge au décès : 64 ans (né vers 1820) au lieu de 66 ¦ Alter beim Doud: 64 Joer (gebuer ëm 1820) amplaz 66
+Acte de décès 1884 ¦ Stierfakt 1884
+l’âge déclaré au décès est souvent approximatif ¦ dat ugi Alter beim Doud ass dacks ongeféier
+Écris le mot de départ (Réglages), par exemple « fils de » ou « veuve de ». ¦ Schreif d’Ufanksuewort (Astellungen), zum Beispill „fils de“ oder „veuve de“.
+Colle des transcriptions (une par ligne) ou prends-les « Depuis l’app ». ¦ Fëg Transkriptiounen an (eng pro Linn) oder huel se „Aus der App“.
+« {w} » n’est dans aucun de ces textes. ¦ „{w}“ steet an kengem vun dësen Texter.
+… {n} autres ¦ … {n} aner
+Trop de branches : baisse la profondeur ou le nombre de branches (Réglages). ¦ Ze vill Äscht: maach d’Déift oder d’Zuel vun den Äscht méi kleng (Astellungen).
+« {w} » : {n} fois ¦ „{w}“: {n} Mol
+Arbre de mots : « {w} » trouvé {n} fois dans {t}. ¦ Wuertbam: „{w}“ {n} Mol fonnt an {t}.
+Ce qui suit « {w} » dans les actes ¦ Wat an den Akten op „{w}“ follegt
+{n} lignes prises dans l’arbre : tu peux les corriger dans l’onglet Données. ¦ {n} Zeilen aus dem Bam geholl: du kanns se am Tab Donnéeë verbesseren.
+🗓️ Les recensements de mon arbre ¦ 🗓️ D’Vollékszielungen a mengem Bam
+Une ligne par personne, une case par recensement : ce qui est relevé sur les fiches (trouvé, non trouvé…), et « à chercher » pour le reste. Sans groupe choisi : tes ancêtres. ¦ Eng Zeil pro Persoun, eng Zell pro Zielung: wat op de Fichen steet (fonnt, net fonnt…), a „ze sichen“ fir de Rescht. Ouni gewielte Grupp: deng Virfahren.
+Du recensement de ¦ Vun der Zielung
+à celui de ¦ bis bei déi vun
+Les recensements de {n} ¦ D’Vollékszielunge vu(n) {n}
+Personne dans ce groupe ne vivait entre ces deux recensements (il faut au moins une date de naissance ou de décès). ¦ Keen an dësem Grupp huet tëscht dësen Zielunge gelieft (et brauch op d’mannst e Gebuerts- oder Stierfdatum).
+{n} sur {t} prises (les premières) : change « Au plus » pour en voir davantage. ¦ {n} vun {t} geholl (déi éischt): änner „Héchstens“ fir méi ze gesinn.
+⚖️ Un dossier de preuve ou une hypothèse ¦ ⚖️ E Beweisdossier oder eng Hypothees
+Choisis un dossier : sa question, ses indices pour et contre, ses recherches et ses conflits, sa conclusion. Une hypothèse à comparer donne une colonne par réponse possible. ¦ Wiel en Dossier: seng Fro, d’Hiweiser dofir an dergéint, d’Recherchen an d’Widderspréch, d’Conclusioun. Eng Hypothees fir ze vergläichen gëtt eng Kolonn pro méiglecher Äntwert.
+Le dossier ¦ Den Dossier
+Choisis d’abord un dossier. ¦ Wiel als éischt en Dossier.
+Schéma de preuve ¦ Beweisschema
+Ce dossier n’a encore aucune ligne : ajoute des indices dans le dossier, ou ici à la main. ¦ Dësen Dossier huet nach keng Zeilen: füüg Hiweiser am Dossier derbäi, oder hei mat der Hand.
+Prendre ce dossier ¦ Dësen Dossier huelen
+🌿 Les mots de mes transcriptions ¦ 🌿 D’Wierder vu menge Transkriptiounen
+Les transcriptions des actes (atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris. ¦ D’Transkriptioune vun den Akten (Transkriptiounsatelier) a vun de Medien: wat nom Ufanksuewort kënnt (oder virdrun). Nëmmen déi nëtzlech Saz-Stécker ginn geholl.
+Le mot de départ ¦ D’Ufanksuewort
+Ce qui suit ¦ Wat duerno kënnt
+Ce qui précède ¦ Wat virdru steet
+Commune (dans le lieu ou le titre de l’acte) ¦ Gemeng (an der Plaz oder am Titel vum Akt)
+Actes pris ¦ Geholl Akten
+Actes notariés ¦ Notariellen Akten
+Militaires ¦ Militäresch
+Lettres ¦ Bréiwer
+Transcriptions des médias ¦ Transkriptioune vun de Medien
+Écris le mot de départ (par exemple « fils de »). ¦ Schreif d’Ufanksuewort (zum Beispill „fils de“).
+Coche au moins une sorte d’acte. ¦ Kräiz op d’mannst eng Zort Akt un.
+Ce qui précède « {w} » dans les actes ¦ Wat an den Akten virun „{w}“ steet
+« {w} » n’est dans aucune transcription de ce choix ({n} lues). ¦ „{w}“ steet a kenger Transkriptioun vun dëser Auswiel ({n} gelies).
+« {w} » : {n} fois, dans {a}. ¦ „{w}“: {n} Mol, an {a}.
+Dossier sans question ¦ Dossier ouni Fro
+Aucun dossier pour ce groupe de personnes ¦ Keen Dossier fir dëse Grupp vu Persounen
+Ferme l’éditeur, puis clique sur la case pour ouvrir la fiche (bloc « Recensements »). ¦ Maach den Editeur zou, a klick dann op d’Zell fir d’Fiche opzemaachen (Block „Vollékszielungen“).
+Recensement {yr} : dans le bloc « Recensements » de la fiche. ¦ Zielung {yr}: am Block „Vollékszielungen“ vun der Fiche.
+Grille des recensements (personnes × années) ¦ Zielungsgitter (Persounen × Joeren)
+Ma recherche ¦ Meng Recherche
+Une ligne par personne, une colonne par recensement : ce qui est trouvé, pas trouvé, et ce qui reste à chercher. ¦ Eng Zeil pro Persoun, eng Kolonn pro Zielung: wat fonnt ass, net fonnt, a wat nach ze sichen ass.
+Les personnes (une ligne sans année : naissance, décès) et leurs recensements (une ligne par année) ¦ D’Persounen (eng Zeil ouni Joer: Gebuert, Doud) an hir Zielungen (eng Zeil pro Joer)
+Naissance (année) ¦ Gebuert (Joer)
+Décès (année) ¦ Doud (Joer)
+Recensement (année) ¦ Zielung (Joer)
+Note (lieu, adresse…) ¦ Notiz (Plaz, Adress…)
+Grille (une case par recensement) ¦ Gitter (eng Zell pro Zielung)
+Liste de travail à imprimer (ce qui reste à chercher) ¦ Aarbechtslëscht fir ze drécken (wat nach ze sichen ass)
+À celui de ¦ Bis bei déi vun
+Ou mes années (ex. 1846, 1851, 1872) ¦ Oder meng Joeren (z. B. 1846, 1851, 1872)
+Personnes montrées ¦ Gewise Persounen
+Seulement celles qui ont encore un recensement à chercher ¦ Nëmmen déi, déi nach eng Zielung ze sichen hunn
+Le plus à chercher d’abord ¦ Dat meescht ze sichen als éischt
+Par naissance ¦ No Gebuert
+Par nom ¦ Nom Numm
+Couleur « Trouvé » ¦ Faarf „Fonnt“
+Couleur « Non trouvé » ¦ Faarf „Net fonnt“
+Couleur « À chercher » ¦ Faarf „Ze sichen“
+Couleur « Hors de France » ¦ Faarf „Ausserhalb vu Frankräich“
+Couleur « Pas né / déjà décédé » ¦ Faarf „Net gebuer / scho gestuerwen“
+Écart entre les cases ¦ Ofstand tëscht den Zellen
+Signes dans les cases (✓ ✗ ?) ¦ Zeechen an den Zellen (✓ ✗ ?)
+Années de vie à côté du nom ¦ Liewensjoren nieft dem Numm
+Schéma de preuve (question, indices pour et contre, conclusion) ¦ Beweisschema (Fro, Hiweiser dofir an dergéint, Conclusioun)
+La question en haut, les indices pour et contre (avec leur poids et leur source), les recherches et les conflits, puis la conclusion et sa certitude. ¦ Uewen d’Fro, d’Hiweiser dofir an dergéint (mat Gewiicht a Quell), d’Recherchen an d’Widderspréch, duerno d’Conclusioun an hir Gewëssheet.
+Les lignes du dossier (pour, contre, recherche, conflit ; « réponse » pour une hypothèse à plusieurs réponses) ¦ D’Zeile vum Dossier (dofir, dergéint, Recherche, Widdersproch; „Äntwert“ fir eng Hypothees mat e puer Äntwerten)
+Indice (ou réponse) ¦ Hiweis (oder Äntwert)
+Poids (1 à 3) ¦ Gewiicht (1 bis 3)
+Pour la réponse… (hypothèse) ¦ Fir d’Äntwert… (Hypothees)
+Note (résolution d’un conflit) ¦ Notiz (Léisung vun engem Widdersproch)
+La conclusion ¦ D’Conclusioun
+Montrer les recherches et les conflits (ce qui reste à chercher) ¦ Recherchen a Widderspréch weisen (wat nach ze sichen ass)
+Couleur « confirme » ¦ Faarf „bestätegt“
+Couleur « contredit » ¦ Faarf „widdersprécht“
+Couleur des recherches ¦ Faarf vun de Recherchen
+Couleur des conflits ¦ Faarf vun de Widderspréch
+Couleur des réponses ¦ Faarf vun den Äntwerten
+Couleur de la question ¦ Faarf vun der Fro
+Arbre de mots des actes (ce qui suit « fils de »…) ¦ Wuertbam vun den Akten (wat no „fils de“ kënnt…)
+Un mot de départ à gauche ; à droite, les mots qui le suivent dans les actes, plus gros quand ils reviennent souvent. ¦ Lénks en Ufanksuewort; riets d’Wierder, déi an den Akten duerno kommen, méi grouss wa se dacks virkommen.
+Les textes (une transcription ou un bout de phrase par ligne) ¦ D’Texter (eng Transkriptioun oder e Saz-Stéck pro Zeil)
+Acte ou source ¦ Akt oder Quell
+Le mot de départ (ex. fils de, veuve de) ¦ D’Ufanksuewort (z. B. fils de, veuve de)
+Profondeur (mots) ¦ Déift (Wierder)
+Branches par mot ¦ Äscht pro Wuert
+Seulement les mots vus au moins ¦ Nëmme Wierder, déi op d’mannst esou dacks virkommen
+Le reste dans « … autres » ¦ De Rescht an „… aner“
+Écrire le nombre de fois ¦ D’Zuel vun de Mol schreiwen
+Sans tenir compte des capitales ni des accents ¦ Ouni op Groussbuschtawen an Akzenter ze kucken
+Seulement les actes de (lieu) ¦ Nëmmen Akten aus (Plaz)
+Couleur des mots ¦ Faarf vun de Wierder
+Couleur du mot de départ ¦ Faarf vum Ufanksuewort
+⭕ En une journée ¦ ⭕ An engem Dag
+Lieu de départ ¦ Ufanksplaz
+Montrer les lieux de la famille ¦ D’Plaze vun der Famill weisen
+Ce qu’on atteignait en une journée ¦ Wat een an engem Dag erreecht huet
+Choisis le lieu de départ ¦ Wiel d’Ufanksplaz
+Ce lieu n’a pas de position sur la carte : place-le d’abord. ¦ Dës Plaz huet keng Positioun op der Kaart: placéier se als éischt.
+Coche au moins un moyen de voyager ¦ Kräiz op d’mannst e Reesmëttel un
+Les fonds de carte ne sont pas chargés. ¦ D’Kaartegrondlagen sinn net gelueden.
+Je dessine les cercles… ¦ Ech zeechnen d’Kreeser…
+En {d} jours depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ An {d} Deeg vu(n) {from}, am Joer {year}: an der Fluchlinn ongeféier {list}.
+En une journée depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ An engem Dag vu(n) {from}, am Joer {year}: an der Fluchlinn ongeféier {list}.
+Rayon (vol d’oiseau) ¦ Radius (Fluchlinn)
+Lieux de la famille ¦ Plaze vun der Famill
+Le rayon tient compte du détour de la route (réglage « Vitesses et sources »). Un trait pointillé : ce moyen n’existait pas encore cette année-là. ¦ De Radius rechent mam Ëmwee vun der Strooss (Astellung „Vitesssen a Quellen“). Punkteliert: dëst Reesmëttel gouf et dat Joer nach net.
+Paroisses (zones autour des églises) ¦ Parren (Gebidder ronderëm d’Kierchen)
+⚠ Paroisses sans position : {list} — choisis-les dans la liste (onglet Données) ou écris « Nom 45.27, 1.77 » ¦ ⚠ Parren ouni Positioun: {list} — wiel se an der Lëscht (Tab Donnéeë) oder schreif „Numm 45.27, 1.77“
+Ajoute des paroisses (une ville de la liste, ou « Depuis l’app ») et leurs chiffres. ¦ Füüg Parren derbäi (eng Uertschaft aus der Lëscht, oder „Aus der App“) an hir Zuelen.
+Zones des paroisses : {n}. ¦ Gebidder vun de Parren: {n}.
+Un point à chaque église ¦ E Punkt bei all Kierch
+Limites des départements par-dessus les paroisses ¦ Departementsgrenzen iwwer de Parren
+Cadrer tout seul sur les paroisses ¦ Automatesch op d’Parren zouschneiden
+Liens montrés ¦ Gewise Verbindungen
+Ceux qui arrivent et ceux qui partent ¦ Déi, déi ukommen, an déi, déi fortginn
+Seulement ceux qui arrivent ¦ Nëmmen déi, déi ukommen
+Seulement ceux qui partent ¦ Nëmmen déi, déi fortginn
+Les liens de {name} ¦ D’Verbindunge vu(n) {name}
+bleu : conjoints venus ¦ blo: zougezunn Partner
+orange : enfants partis ¦ orange: fortgezunn Kanner
+rouge : émigrés ¦ rout: Auswanderer
+Lieux : {list} ¦ Plazen: {list}
+⛪ Au niveau « Paroisses » (Réglages → Niveau de détail) : une zone autour de chaque église, d’après les paroisses d’Ancien Régime de tes lieux ; un lieu sans paroisse compte pour lui-même. ¦ ⛪ Um Niveau „Parren“ (Astellungen → Detailniveau): e Gebitt ronderëm all Kierch, no den ale Parre vun denge Plazen; eng Plaz ouni Par zielt fir sech.
+✳️ Tous les liens d’un lieu (carte en étoile) ¦ ✳️ All Verbindunge vun enger Plaz (Stärekaart)
+Le village ¦ D’Duerf
+Conjoints venus s’y marier ¦ Partner, déi sech do bestuet hunn
+Enfants partis (nés ici, morts ou mariés ailleurs) ¦ Fortgezunn Kanner (hei gebuer, soss anzwousch gestuerwen oder bestuet)
+Émigrés (morts dans un autre pays) ¦ Auswanderer (an engem anere Land gestuerwen)
+Choisis d’abord le village. ¦ Wiel als éischt d’Duerf.
+Coche au moins une sorte de lien. ¦ Kräiz op d’mannst eng Zort Verbindung un.
+Aucun lien trouvé pour ce lieu (naissance, mariage ou décès ailleurs). ¦ Keng Verbindung fir dës Plaz fonnt (Gebuert, Bestietnes oder Doud soss anzwousch).
+{n} prises dans l’arbre ({m} lieux rattachés à une paroisse d’Ancien Régime, les autres comptent pour eux-mêmes). ¦ {n} aus dem Bam ({m} Plaze mat enger aler Par verbonnen, déi aner zielen fir sech).
+Aucun lieu avec des coordonnées pour ce choix : place d’abord tes lieux sur la carte. ¦ Keng Plaz mat Koordinate fir dës Auswiel: placéier als éischt deng Plazen op der Kaart.
+sa paroisse ¦ seng Par
+leur paroisse ¦ hir Par
+une paroisse ¦ eng Par
+Paroisse sans position : choisis sa commune dans la liste, ou écris « Nom 45.27, 1.77 ». ¦ Par ouni Positioun: wiel hir Gemeng an der Lëscht, oder schreif „Numm 45.27, 1.77“.
+Carte en étoile : seulement les liens de ce lieu (vide = tous les flux) ¦ Stärekaart: nëmmen d’Verbindunge vun dëser Plaz (eidel = all d’Stréim)
+niveau|paroisse ¦ Par
+=paroisse ¦ Par|Parren

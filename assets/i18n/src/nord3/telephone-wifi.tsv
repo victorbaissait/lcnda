@@ -1,0 +1,199 @@
+fr ¦ ro
+# 📱 la page du téléphone de terrain (assets/js/app-terrain.js)
+📶 relié ¦ 📶 conectat
+⏸ hors wifi ¦ ⏸ fără wifi
+Le mot de passe de la généalogie : vérifié par l’ordinateur, jamais gardé sur ce téléphone. ¦ Parola genealogiei: verificată de calculator, niciodată păstrată pe acest telefon.
+Le navigateur écrit « Non sécurisé » : c’est vrai, la porte du wifi n’a pas de HTTPS. N’envoie que sur le wifi de la maison, protégé par sa clé. ¦ Browserul scrie „Nesigur”: e adevărat, poarta wifi nu are HTTPS. Trimite doar pe wifiul de acasă, protejat cu cheia lui.
+Tes photos attendent dans cette page. ¦ Fotografiile tale așteaptă în această pagină.
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). ¦ Calculatorul nu răspunde (în așteptare, oprit sau poarta închisă).
+Choisir une personne ou une visite… ¦ Alege o persoană sau o vizită…
+Une ligne (facultatif) ¦ Un rând (opțional)
+Pas de wifi de la maison : les photos se prennent avec l’appareil photo du téléphone, puis « 🖼 Choisir » au retour. ¦ Fără wifiul de acasă: fă fotografiile cu camera telefonului, apoi „🖼 Alege” la întoarcere.
+Prendre une photo ¦ Fă o fotografie
+Choisir dans la galerie ¦ Alege din galerie
+📍 = la photo contient une position GPS (retirée à l’arrivée, réglage) ¦ 📍 = fotografia conține o poziție GPS (eliminată la sosire, setare)
+Tombe famille LACOMBE, allée 4 ¦ Mormântul familiei LACOMBE, aleea 4
+Envoyer : {n} ¦ Trimite: {n}
+Sans wifi, garde cette page ouverte : les photos attendent ici et partent toutes seules au retour. Pour une journée entière aux archives, prends plutôt la visite par fichier. ¦ Fără wifi, ține pagina deschisă: fotografiile așteaptă aici și pleacă singure la întoarcere. Pentru o zi întreagă la arhivă, folosește mai bine vizita prin fișier.
+Le téléphone ne sait pas si une photo a été rangée ni où : il ne lit rien de l’arbre. ¦ Telefonul nu știe dacă și unde a fost pusă o fotografie: nu citește nimic din arbore.
+Nom de la personne ou de la visite ¦ Numele persoanei sau al vizitei
+Seulement les personnes décédées, sans les fiches confidentielles. ¦ Doar persoanele decedate, fără fișele confidențiale.
+Choisis pour qui est cette photo. ¦ Alege pentru cine este fotografia.
+Verrouillée après 15 minutes sans geste : redonne le mot de passe. Tes photos attendent. ¦ Blocată după 15 minute fără activitate: dă din nou parola. Fotografiile tale așteaptă.
+Ce téléphone n’est plus autorisé sur l’ordinateur. ¦ Acest telefon nu mai este autorizat pe calculator.
+Envoyées dans 📥 À trier : {n} ¦ Trimise în 📥 De sortat: {n}
+Refusé par l’ordinateur ¦ Refuzat de calculator
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). En attente : {n} ; nouvel essai toutes les 30 secondes tant que la page est ouverte. ¦ Calculatorul nu răspunde (în așteptare, oprit sau poarta închisă). În așteptare: {n}; o nouă încercare la fiecare 30 de secunde cât timp pagina e deschisă.
+↻ Réessayer ¦ ↻ Reîncearcă
+Envoi en cours : {i} sur {n} ¦ Se trimite: {i} din {n}
+Garde la page ouverte. ¦ Ține pagina deschisă.
+En attente depuis {when} : {n} ¦ În așteptare din {when}: {n}
+Elles étaient gardées dans ce téléphone. ¦ Erau păstrate în acest telefon.
+Les envoyer ¦ Trimite-le
+Les oublier ¦ Uită-le
+Retirées de la boîte : {n} ¦ Scoase din cutie: {n}
+« {name} » n’est plus ouverte sur l’ordinateur : tes photos restent en attente ici. ¦ „{name}” nu mai este deschisă pe calculator: fotografiile tale așteaptă în continuare aici.
+Des photos étaient en attente, mais le téléphone a libéré la place. Retrouve-les dans ta galerie et « 🖼 Choisir ». ¦ Unele fotografii așteptau, dar telefonul a eliberat spațiul. Găsește-le în galerie și „🖼 Alege”.
+📱 Envoyer des photos à l’ordinateur principal ¦ 📱 Trimite fotografii la calculatorul principal
+# 📥 À trier, sur l'ordinateur (assets/js/app-a-trier.js)
+📥 À trier ¦ 📥 De sortat
+À trier ¦ De sortat
+Listes · Médias et documents ¦ Liste · Media și documente
+Les photos envoyées par un téléphone de terrain arrivent ici, hors de l’arbre. Relie chacune à ce qu’elle montre, ou supprime-la. ¦ Fotografiile trimise de un telefon de teren ajung aici, în afara arborelui. Leagă fiecare de ce arată sau șterge-o.
+Chercher… (texte, téléphone, personne) ¦ Caută… (text, telefon, persoană)
+🗑 Supprimées ¦ 🗑 Șterse
+Reliées ¦ Legate
+visite {name} ¦ vizita {name}
+pour {name} ¦ pentru {name}
+personne pas choisie ¦ nicio persoană aleasă
+📍 GPS gardé ¦ 📍 GPS păstrat
+📍 GPS retiré ¦ 📍 GPS eliminat
+🔗 reliée à {name} ¦ 🔗 legată de {name}
+effacée pour de bon le {date} ¦ ștearsă definitiv pe {date}
+🗄 Relier à la visite ¦ 🗄 Leagă de vizită
+🔗 Relier à {name} ¦ 🔗 Leagă de {name}
+Relier à… ¦ Leagă de…
+(sans texte) ¦ (fără text)
+Rien à trier : les photos du téléphone arriveront ici. ¦ Nimic de sortat: fotografiile de pe telefon vor ajunge aici.
+Mode consultation : la boîte se lit, mais rien ne se relie ni ne se supprime. ¦ Mod consultare: cutia se poate citi, dar nimic nu se leagă și nu se șterge.
+Cochées : {n} ¦ Bifate: {n}
+Décocher ¦ Debifează
+📍 Garder la position GPS ? ¦ 📍 Păstrezi poziția GPS?
+La photo contient une position GPS (utile pour situer une tombe). La garder pour la carte ? ¦ Fotografia conține o poziție GPS (utilă pentru a găsi un mormânt). O păstrezi pentru hartă?
+La retirer ¦ Elimin-o
+✓ Reliées à {name} : {n} ¦ ✓ Legate de {name}: {n}
+🪦 Une photo de tombe : ajouter aussi l’inhumation à {name} ? ¦ 🪦 O fotografie de mormânt: adaugi și înmormântarea la {name}?
+✓ Inhumation ajoutée à {name}. ¦ ✓ Înmormântare adăugată la {name}.
+Relier à un événement ¦ Leagă de un eveniment
+Relier à une source ¦ Leagă de o sursă
+✓ Supprimées : {n} ¦ ✓ Șterse: {n}
+✓ Supprimées : {n}. Gardées 30 jours dans « 🗑 Supprimées » (Filtrer ▾). ¦ ✓ Șterse: {n}. Păstrate 30 de zile în „🗑 Șterse” (Filtrează ▾).
+✎ Modifier le texte ¦ ✎ Modifică textul
+Texte enregistré ¦ Text salvat
+👤 Une personne… ¦ 👤 O persoană…
+📅 Un événement… (inhumation, mariage…) ¦ 📅 Un eveniment… (înmormântare, căsătorie…)
+📚 Une source… (l’acte, la cote) ¦ 📚 O sursă… (actul, cota)
+🗄 La visite d’archives proposée ¦ 🗄 Vizita la arhivă propusă
+🔍 Ouvrir en grand ¦ 🔍 Deschide mare
+⟲ Tourner ¦ ⟲ Rotește
+⤓ Exporter l’original ¦ ⤓ Exportă originalul
+Remise dans 📥 À trier. ¦ Pusă înapoi în 📥 De sortat.
+📥 Arrivées du téléphone : {n} ¦ 📥 Sosite de pe telefon: {n}
+📥 À trier : {n} ¦ 📥 De sortat: {n}
+# 🖧 Plusieurs ordinateurs → 📱 Téléphones de terrain (assets/js/app-reseau-local.js)
+téléphone de terrain ¦ telefon de teren
+Téléphone de terrain ¦ Telefon de teren
+📱 Téléphone de terrain ¦ 📱 Telefon de teren
+📱 Téléphones de terrain ¦ 📱 Telefoane de teren
+👁 Lecture seule ¦ 👁 Doar citire
+déposer · liste réduite ¦ depunere · listă redusă
+＋ Ajouter un téléphone de terrain ¦ ＋ Adaugă un telefon de teren
+Scanne ce QR code avec l’appareil photo du téléphone ¦ Scanează codul QR cu camera telefonului
+Le code d’invitation est déjà dans le QR code. Sur le téléphone : « Demander l’accès », puis compare le code à 6 chiffres ici. ¦ Codul de invitație e deja în codul QR. Pe telefon: „Cere accesul”, apoi compară aici codul de 6 cifre.
+Un 📱 téléphone de terrain ne voit pas l’arbre : il dépose seulement des photos dans 📥 À trier. ¦ Un 📱 telefon de teren nu vede arborele: doar depune fotografii în 📥 De sortat.
+⏻ Retirer tous les téléphones ¦ ⏻ Elimină toate telefoanele
+Les photos arrivent dans Listes → Médias et documents → 📥 À trier. ¦ Fotografiile ajung în Liste → Media și documente → 📥 De sortat.
+📥 Ouvrir À trier ¦ 📥 Deschide De sortat
+Plus aucun téléphone ne pourra rien envoyer. Leurs photos déjà déposées restent dans 📥 À trier (réglage). ¦ Niciun telefon nu va mai putea trimite nimic. Fotografiile deja depuse rămân în 📥 De sortat (setare).
+Téléphones retirés : {n} ¦ Telefoane eliminate: {n}
+Valeur refusée : réglage inchangé. ¦ Valoare refuzată: setare neschimbată.
+✓ « {name} » autorisé, 📱 téléphone de terrain. ¦ ✓ „{name}” autorizat, 📱 telefon de teren.
+Sorte d’appareil ¦ Tip de dispozitiv
+📱 Téléphone de terrain : déposer des photos et une ligne de texte dans 📥 À trier. Il ne voit pas l’arbre, ne modifie rien. Il devra aussi donner le mot de passe de la généalogie. ¦ 📱 Telefon de teren: depune fotografii și un rând de text în 📥 De sortat. Nu vede arborele, nu modifică nimic. Va trebui să dea și parola genealogiei.
+Ce que le téléphone voit ¦ Ce vede telefonul
+Pour choisir « Pour qui ? » ¦ Pentru a alege „Pentru cine?”
+visites d’archives et personnes décédées ¦ vizite la arhivă și persoane decedate
+visites d’archives seulement ¦ doar vizite la arhivă
+rien : tout se range sur l’ordinateur ¦ nimic: totul se sortează pe calculator
+Montrer aussi les vivants (nom seulement) ¦ Arată și persoanele în viață (doar numele)
+Montrer aussi les fiches confidentielles (nom seulement) ¦ Arată și fișele confidențiale (doar numele)
+« Pour qui ? » sur le téléphone ¦ „Pentru cine?” pe telefon
+obligatoire (plus lent sur place) ¦ obligatoriu (mai lent la fața locului)
+Une ligne de texte ¦ Un rând de text
+une pour tout l’envoi ¦ unul pentru toată trimiterea
+une par photo ¦ unul pe fotografie
+Les photos qui arrivent ¦ Fotografiile care sosesc
+Où arrivent les photos ¦ Unde ajung fotografiile
+dans 📥 À trier : rien n’entre dans l’arbre sans toi ¦ în 📥 De sortat: nimic nu intră în arbore fără tine
+reliées tout de suite à la personne choisie (visibles dans À trier, avec ↶ Annuler) ¦ legate imediat de persoana aleasă (vizibile în De sortat, cu ↶ Anulează)
+Position GPS de la photo ¦ Poziția GPS a fotografiei
+retirée à l’arrivée ¦ eliminată la sosire
+gardée à part, à décider en reliant ¦ păstrată separat, se decide la legare
+gardée (la carte peut la montrer) ¦ păstrată (harta o poate arăta)
+Taille maximale d’une photo ¦ Dimensiunea maximă a unei fotografii
+Photos par envoi ¦ Fotografii pe trimitere
+Photos dans la boîte À trier, au plus ¦ Fotografii în cutia De sortat, cel mult
+Garder l’original (décoché : réduite à 2000 points) ¦ Păstrează originalul (nebifat: redusă la 2000 de puncte)
+coché conseillé ¦ bifat recomandat
+décoché conseillé ¦ nebifat recomandat
+# 🖧 réglages des téléphones de terrain (suite), 📜 Qui a vu quoi, messages du serveur (lib/telephone_wifi.php, lib/reseau_local.php)
+gardée 30 jours dans « 🗑 Supprimées », puis effacée ¦ păstrată 30 de zile în „🗑 Șterse”, apoi ștearsă
+effacée tout de suite (après les 10 secondes de ↶ Annuler) ¦ ștearsă imediat (după cele 10 secunde de ↶ Anulează)
+Photo de tombe reliée ¦ Fotografie de mormânt legată
+proposer d’ajouter l’inhumation ¦ propune adăugarea înmormântării
+ne rien proposer ¦ nu propune nimic
+Pastille 📥 dans la barre du haut ¦ Insignă 📥 în bara de sus
+oui, avec le nombre ¦ da, cu numărul
+non (seulement dans Listes) ¦ nu (doar în Liste)
+À l’arrivée de photos ¦ La sosirea fotografiilor
+seulement la pastille ¦ doar insigna
+un petit message en bas de l’écran ¦ un mic mesaj în partea de jos a ecranului
+Sans wifi ¦ Fără wifi
+Hors du wifi de la maison ¦ În afara wifiului de acasă
+garder en attente dans la page, envoi tout seul au retour ¦ ține în așteptare în pagină, trimitere automată la întoarcere
+garder, mais demander avant d’envoyer ¦ păstrează, dar întreabă înainte de trimitere
+refuser de prendre des photos hors wifi ¦ nu permite fotografii în afara wifiului
+Après l’envoi ¦ După trimitere
+effacer les photos de la page ¦ șterge fotografiile din pagină
+garder les vignettes de la journée ¦ păstrează miniaturile zilei
+« ↶ Annuler » sur le téléphone ¦ „↶ Anulează” pe telefon
+tant que les photos ne sont pas rangées ¦ cât timp fotografiile nu sunt sortate
+pendant 10 secondes ¦ timp de 10 secunde
+Mot de passe de la généalogie sur le téléphone ¦ Parola genealogiei pe telefon
+demandé à l’ouverture, redemandé après 15 min sans geste ¦ cerută la deschidere, din nou după 15 min fără activitate
+demandé seulement pour voir la liste ; déposer avec le jeton seul ¦ cerută doar pentru listă; depunere doar cu tokenul
+Cet ordinateur en mode consultation ¦ Acest calculator în mod consultare
+le téléphone ne dépose plus ¦ telefonul nu mai depune
+le téléphone dépose encore ¦ telefonul depune în continuare
+Sorte proposée quand la demande vient d’un téléphone ¦ Tip propus când cererea vine de la un telefon
+Retirer un téléphone ¦ Eliminarea unui telefon
+ses photos déjà déposées restent à trier ¦ fotografiile deja depuse rămân de sortat
+elles sont supprimées aussi (30 jours dans « 🗑 Supprimées ») ¦ sunt șterse și ele (30 de zile în „🗑 Șterse”)
+📜 Registre ¦ 📜 Registru
+noter chaque dépôt, chaque fichier refusé et chaque liste vue ¦ notează fiecare depunere, fiecare fișier refuzat și fiecare listă văzută
+seulement les dépôts ¦ doar depunerile
+Photo déposée ¦ Fotografie depusă
+Fichier refusé ¦ Fișier refuzat
+Liste réduite vue ¦ Listă redusă văzută
+Photo reliée ¦ Fotografie legată
+pas une photo ¦ nu e fotografie
+trop grosse ¦ prea mare
+trop grande ¦ dimensiuni prea mari
+abîmée ¦ deteriorată
+trop de fichiers ¦ prea multe fișiere
+trop de photos ¦ prea multe fotografii
+trop gros en tout ¦ prea mare în total
+boîte pleine ¦ cutie plină
+personne refusée ¦ persoană refuzată
+réponses : {n} ¦ răspunsuri: {n}
+Photo trop grosse (plus de {n} Mo, la taille maximale réglée sur l’ordinateur). ¦ Fotografie prea mare (peste {n} MB, dimensiunea maximă setată pe calculator).
+Trop d’essais depuis ce téléphone : réessaie dans {n} min. ¦ Prea multe încercări de pe acest telefon: reîncearcă peste {n} min.
+Trop de photos dans cet envoi ({n} au plus). ¦ Prea multe fotografii în această trimitere (cel mult {n}).
+Photo du téléphone ¦ Fotografie de pe telefon
+Ce format de photo ne se lit pas sur cet ordinateur : choisis-la en JPEG. ¦ Acest format de fotografie nu se citește pe acest calculator: alege-o în JPEG.
+Ce n’est pas une photo : seules les photos JPEG, PNG, WEBP et AVIF sont acceptées. ¦ Nu este o fotografie: sunt acceptate doar fotografii JPEG, PNG, WEBP și AVIF.
+Image abîmée ou illisible. ¦ Imagine deteriorată sau ilizibilă.
+Image trop grande (plus de 50 millions de points) : refusée. ¦ Imagine prea mare (peste 50 de milioane de puncte): refuzată.
+Une seule photo à la fois. ¦ O singură fotografie odată.
+La photo n’est pas arrivée en entier : elle sera renvoyée. ¦ Fotografia nu a ajuns întreagă: va fi retrimisă.
+Personne ou visite inconnue. ¦ Persoană sau vizită necunoscută.
+📥 La boîte est pleine sur l’ordinateur : trie-la d’abord. ¦ 📥 Cutia de pe calculator e plină: sorteaz-o mai întâi.
+Cet envoi est trop gros en tout (200 Mo au plus) : envoie le reste ensuite. ¦ Această trimitere este prea mare în total (cel mult 200 MB): trimite restul după.
+La généalogie n’est pas prête sur l’ordinateur. ¦ Genealogia nu este pregătită pe calculator.
+L’ordinateur est en mode consultation : il ne reçoit pas de photo pour l’instant. Elles restent en attente ici. ¦ Calculatorul este în mod consultare: deocamdată nu primește fotografii. Ele așteaptă aici.
+Impossible de ranger la photo sur l’ordinateur (disque plein ?). ¦ Fotografia nu poate fi salvată pe calculator (disc plin?).
+Choisis à quoi relier. ¦ Alege de ce să legi.
+Introuvable. ¦ Negăsit.
+Cette fiche est verrouillée : rien n’y est relié. ¦ Această fișă este blocată: nu se leagă nimic de ea.
+Trop tard : cette photo a été effacée pour de bon. ¦ Prea târziu: această fotografie a fost ștearsă definitiv.
+Téléphone de terrain : il peut seulement déposer des photos dans 📥 À trier. ¦ Telefon de teren: poate doar depune fotografii în 📥 De sortat.

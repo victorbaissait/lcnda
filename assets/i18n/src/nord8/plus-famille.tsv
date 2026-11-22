@@ -1,0 +1,218 @@
+fr ¦ tr
+# Zone « plus-famille » : 💌 lettre de famille, 🛡 fiabilité par personne, 🖊 relecture d’une branche, 🌐 traduire un acte latin (assets/js/plus-famille*.js, lib/plus_famille.php)
+Fiabilité : {n} sur 100 ¦ Güvenilirlik: 100 üzerinden {n}
+🛡 Fiabilité ¦ 🛡 Güvenilirlik
+Calcul de la note… ¦ Puan hesaplanıyor…
+Comment la note est calculée ¦ Puan nasıl hesaplanır
+? Comment c’est calculé ¦ ? Nasıl hesaplanır
+en doute : {what} ¦ şüpheli: {what}
+date estimée : {what} ¦ tahmini tarih: {what}
+aucun fait noté (naissance, mariage, décès…) ¦ kayıtlı olgu yok (doğum, evlilik, ölüm…)
+sans source : {what} ¦ kaynaksız: {what}
+une source sur la fiche, mais sur aucun fait ¦ kartta bir kaynak var ama hiçbir olguda yok
+aucune source ¦ kaynak yok
+{who} : lien {lvl} ¦ {who}: bağ {lvl}
+pas de parents dans la base : cette part ne compte pas ¦ veritabanında ebeveyn yok: bu kısım sayılmaz
+ajouter une source à : {what} ¦ şuna kaynak ekle: {what}
+vérifier {what}, marqué « doute » ¦ {what} kontrol et, “şüpheli” işaretli
+confirmer le lien avec {name} (⚖️ dossier de preuve) ¦ {name} ile bağı doğrula (⚖️ kanıt dosyası)
+ajouter ses faits (naissance, mariage, décès) avec leur source ¦ olguları (doğum, evlilik, ölüm) kaynağıyla ekle
+sur 100 ¦ / 100
+À revoir avant publication ¦ Yayından önce gözden geçirilecek
+(vivant ou fiche confidentielle : ne part pas à la publication) ¦ (hayatta ya da gizli kart: yayınlanmaz)
+Seuil « à revoir » : {n} ¦ “Gözden geçir” eşiği: {n}
+Pour gagner des points : ¦ Puan kazanmak için:
+La note n’est pas le score de complétude (qui compte ce qui est rempli) : une fiche peut être bien remplie et peu sûre. ¦ Puan doluluk puanı değildir (o doldurulanı sayar): bir kart iyi doldurulmuş ama güvenilmez olabilir.
+Calcul impossible. ¦ Hesaplama yapılamadı.
+🛡 FIABILITÉ ¦ 🛡 GÜVENİLİRLİK
+Trois parts, sur 100 chacune, puis une moyenne : ¦ Her biri 100 üzerinden üç kısım, sonra ortalama:
+Ses faits (40 %) ¦ Olgular (%40)
+la fiabilité de chaque fait : certain 100, déduit 80, estimé 55, doute 15, non évalué 60 ; une date « vers… », « avant… » compte comme estimée. ¦ her olgunun güvenilirliği: kesin 100, çıkarım 80, tahmini 55, şüpheli 15, değerlendirilmemiş 60; “yaklaşık…”, “önce…” tarihi tahmini sayılır.
+Ses sources (35 %) ¦ Kaynaklar (%35)
+la part des faits qui ont une source citée ou un acte en image. ¦ alıntılanmış kaynağı ya da belge görüntüsü olan olguların oranı.
+Ses liens (25 %) ¦ Bağlar (%25)
+la solidité du lien avec chaque parent : prouvé 100, probable 75, supposé 45, sans source 20, réfuté 0. Sans parents dans la base, cette part ne compte pas. ¦ her ebeveynle bağın sağlamlığı: kanıtlı 100, olası 75, varsayılan 45, kaynaksız 20, çürütülmüş 0. Veritabanında ebeveyn yoksa bu kısım sayılmaz.
+Sous le seuil (50 au départ), la fiche est « à revoir avant publication ». Le seuil se règle dans Réglages → ⚙️ Seuils du contrôle. ¦ Eşiğin altında (başta 50) kart “yayından önce gözden geçirilecek” olur. Eşik Ayarlar → ⚙️ Denetim eşikleri bölümünden ayarlanır.
+Rien n’est changé dans ta base : la note est recalculée dès qu’un fait ou une source change. ¦ Veritabanında hiçbir şey değişmez: bir olgu ya da kaynak değişince puan yeniden hesaplanır.
+{day} : {first}, {age} ¦ {day}: {first}, {age}
+{day} : il y a {n} ans, {a} et {b} se mariaient ¦ {day}: {n} yıl önce {a} ile {b} evlendi
+{day} : il y a {n} ans naissait {name} ¦ {day}: {n} yıl önce {name} doğdu
+{what} dans l’arbre : {list} ¦ Ağaçta {what}: {list}
+Nouveau dans les médias : « {title} » ¦ Medyada yeni: “{title}”
+La lettre des {nm} ¦ {nm} ailesinin mektubu
+Bonjour à tous ! Voici les nouvelles de la famille ce mois-ci. ¦ Herkese merhaba! İşte bu ayın aile haberleri.
+Photo : {title} ¦ Fotoğraf: {title}
+Les anniversaires du mois ¦ Ayın yıldönümleri
+Pas d’anniversaire ce mois-ci. ¦ Bu ay yıldönümü yok.
+Les dernières découvertes ¦ Son keşifler
+Rien de nouveau ce mois-ci : à vous de m’envoyer vos souvenirs ! ¦ Bu ay yeni bir şey yok: sıra sizde, anılarınızı bana gönderin!
+L’ancêtre à l’honneur ¦ Öne çıkan ata
+Avec toute mon affection, ¦ Tüm sevgimle,
+Ce qu’on y met ¦ İçine neler girsin
+🖼 Changer ¦ 🖼 Değiştir
+Tout se retouche dans la lettre (clique sur un texte). Les personnes vivantes n’y figurent que par leur prénom et leur âge ; les fiches confidentielles jamais. ¦ Mektuptaki her şey düzenlenebilir (bir metne tıkla). Yaşayanlar yalnızca adı ve yaşıyla yer alır, gizli kartlar asla.
+Je remplis la lettre… ¦ Mektup dolduruluyor…
+Lettre refaite avec les nouveaux choix ¦ Mektup yeni seçimlerle yeniden hazırlandı
+LETTRE DE FAMILLE ¦ AİLE MEKTUBU
+La photo de la lettre ¦ Mektubun fotoğrafı
+Lettre de famille ¦ Aile mektubu
+La lettre du mois remplie toute seule : anniversaires, dernières découvertes, une photo, un ancêtre à l’honneur. Tout se retouche. ¦ Ayın mektubu kendiliğinden dolar: yıldönümleri, son keşifler, bir fotoğraf, öne çıkan bir ata. Her şey düzenlenebilir.
+Lettre gardée : « {title} » (Listes → Lettres de famille) ¦ Mektup saklandı: “{title}” (Listeler → Aile mektupları)
+💾 Garder ¦ 💾 Sakla
+Ranger la lettre dans Listes → Lettres de famille ¦ Mektubu Listeler → Aile mektupları içine koy
+PDF ¦ PDF
+par la fenêtre « Imprimer » (⤓ PDF) ¦ “Yazdır” penceresiyle (⤓ PDF)
+Image (PNG) ¦ Görsel (PNG)
+Ouvre ta messagerie avec la lettre déjà écrite : rien n’est envoyé par l’app ¦ E-postanı mektup yazılmış olarak açar: uygulama hiçbir şey göndermez
+📝 Retoucher ¦ 📝 Düzenle
+Ouvrir la lettre dans le traitement de texte ¦ Mektubu kelime işlemcide aç
+Chers cousins, chères cousines, ¦ Sevgili kuzenler,
+Ce que j’ai trouvé ce mois-ci… ¦ Bu ay bulduklarım…
+Si vous avez des photos, des lettres ou des souvenirs, je serais très heureux de les voir ! ¦ Fotoğraf, mektup ya da anılarınız varsa görmekten çok mutlu olurum!
+Je vous embrasse, ¦ Sevgiyle kucaklarım,
+📋 Voir dans Listes › Lettres de famille ¦ 📋 Listeler › Aile mektupları içinde gör
+remplie toute seule : anniversaires du mois, découvertes, photo, ancêtre ¦ kendiliğinden dolar: ayın yıldönümleri, keşifler, fotoğraf, ata
+Lettres de famille ¦ Aile mektupları
+💌 Lettres de famille ¦ 💌 Aile mektupları
+Les lettres du mois gardées depuis ✨ Trésors → « 💌 Lettre de famille ». À ne pas confondre avec les « ✉️ Lettres aux descendants », qui s’ouvrent plus tard. ¦ ✨ Hazineler → “💌 Aile mektubu” içinden saklanan aylık mektuplar. Daha sonra açılan “✉️ Torunlara mektuplar” ile karıştırma.
+💌 Nouvelle lettre ¦ 💌 Yeni mektup
+Chercher… (titre, mois) ¦ Ara… (başlık, ay)
+Supprimer la lettre ¦ Mektubu sil
+Aucune lettre gardée pour l’instant ¦ Henüz saklanan mektup yok
+Fais celle du mois dans ✨ Trésors → « 💌 Lettre de famille », puis « 💾 Garder ». ¦ Ayınkini ✨ Hazineler → “💌 Aile mektubu” içinde hazırla, sonra “💾 Sakla”.
+💌 Faire la lettre du mois ¦ 💌 Ayın mektubunu hazırla
+Lettre « {title} » supprimée ¦ “{title}” mektubu silindi
+« d’accord », dit {who}. ¦ “katılıyorum”, diyor {who}.
+« faux », dit {who}. ¦ “yanlış”, diyor {who}.
+Que faire de cette remarque ? ¦ Bu notla ne yapılsın?
+✓ Accepter (témoignage) ¦ ✓ Kabul et (tanıklık)
+✓ Accepter (note sur le fait, « doute ») ¦ ✓ Kabul et (olguya not, “şüpheli”)
+{what} par {who} : ajoutés comme témoignage si tu acceptes ¦ {who} tarafından {what}: kabul edersen tanıklık olarak eklenir
+Pour tous : ¦ Tümü için:
+Importer les remarques d’une relecture ¦ Bir okumanın notlarını içe aktar
+le fichier « remarques-….json » ¦ “remarques-….json” dosyası
+Le fichier que ton cousin t’a renvoyé avec « ⤓ Renvoyer mes remarques ». ¦ Kuzeninin “⤓ Notlarımı geri gönder” ile gönderdiği dosya.
+Ce fichier est trop gros pour un fichier de remarques. ¦ Bu dosya bir not dosyası için çok büyük.
+<b>{what}</b> de <b>{who}</b> sur « {title} » ({date}). Pour chaque fait : accepte, refuse ou garde pour plus tard ¦ <b>{who}</b> kişisinden “{title}” hakkında <b>{what}</b> ({date}). Her olgu için: kabul et, reddet ya da sonraya bırak
+Ces remarques ont <b>déjà été importées</b> ¦ Bu notlar <b>zaten içe aktarıldı</b>
+Aucune remarque dans ce fichier ¦ Bu dosyada not yok
+{what} sur des faits qui ne sont plus dans la base : mises de côté. ¦ Artık veritabanında olmayan olgular için {what}: bir kenara konuldu.
+⤒ Importer les remarques ¦ ⤒ Notları içe aktar
+{what} (relecture de {who}) ¦ {what} ({who} okuması)
+Remarques de {who} gardées avec la relecture. ¦ {who} notları okumayla birlikte saklandı.
+relu par {who} ¦ okuyan: {who}
+En attente des remarques ¦ Notlar bekleniyor
+{n} à ranger ¦ {n} düzenlenecek
+tout est rangé ¦ hepsi düzenlendi
+Envoyé, en attente des remarques ¦ Gönderildi, notlar bekleniyor
+Supprimer la relecture ¦ Okumayı sil
+Relectures de branche ¦ Dal okumaları
+＋ Demander une relecture… ¦ ＋ Okuma iste…
+Aucune relecture : « 📤 Partager avec la famille » avec la case « 🖊 Demander une relecture », ou fiche → ⋯ → « 🖊 Faire relire cette branche… ». ¦ Okuma yok: “📤 Aileyle paylaş” içinde “🖊 Okuma iste” kutusu ya da kart → ⋯ → “🖊 Bu dalı okut…”.
+Relecture « {title} » supprimée ¦ “{title}” okuması silindi
+Faire relire cette branche… ¦ Bu dalı okut…
+{who} pense que c’est faux : {c} ¦ {who} bunun yanlış olduğunu düşünüyor: {c}
+{who} est d’accord ¦ {who} katılıyor
+Remarque refusée ¦ Not reddedildi
+Remarque notée sur le fait ¦ Not olguya eklendi
+Témoignage ajouté ¦ Tanıklık eklendi
+« je pense que c’est faux » ¦ “bence yanlış”
+« d’accord » ¦ “katılıyorum”
+Corriger le fait ¦ Olguyu düzelt
+ouvre le fait ; la remarque reste jusqu’à « Noter » ou « Refuser » ¦ olguyu açar; not “Not al” ya da “Reddet” seçilene dek kalır
+Noter (note sur le fait, « doute ») ¦ Not al (olguya not, “şüpheli”)
+Accepter (témoignage) ¦ Kabul et (tanıklık)
+🖊 Remarque de relecture ¦ 🖊 Okuma notu
+l’année {y} ¦ {y} yılı
+Traduire ¦ Çevir
+Le mot à mot tout de suite, la traduction complète si le modèle de la lecture approfondie est installé ¦ Hemen kelime kelime, derin okuma modeli kuruluysa tam çeviri
+latin → français ¦ Latince → Fransızca
+Revenir au texte ¦ Metne dön
+Écris ou lis d’abord le texte de l’acte : la traduction part du texte transcrit. ¦ Önce belgenin metnini yaz ya da okut: çeviri yazıya geçirilmiş metinden yapılır.
+L’acte (latin, transcrit) ¦ Belge (Latince, yazıya geçirilmiş)
+vert : formule connue ¦ yeşil: bilinen kalıp
+bleu : mot du dictionnaire ¦ mavi: sözlük kelimesi
+pointillé : peu sûr ¦ noktalı: emin değil
+Niveau 1 · mot à mot sans installation ¦ Seviye 1 · kurulum gerekmeden kelime kelime
+Aucun mot reconnu. ¦ Tanınan kelime yok.
+Date : {d} ¦ Tarih: {d}
+Niveau 2 · traduction complète ¦ Seviye 2 · tam çeviri
+Je regarde si le modèle est installé… ¦ Modelin kurulu olup olmadığına bakılıyor…
+📋 Garder dans la transcription ¦ 📋 Transkripsiyonda sakla
+Copier la traduction ¦ Çeviriyi kopyala
+📝 Mise au propre ¦ 📝 Temiz kopya
+Le niveau 1 marche toujours, sans rien installer. Les noms, dates et rôles repérés partent ensuite, comme d’habitude, dans « Ce que l’app a trouvé ». ¦ Seviye 1 her zaman, kurulum gerekmeden çalışır. Bulunan adlar, tarihler ve roller sonra her zamanki gibi “Uygulamanın bulduğu” bölümüne gider.
+✓ Les deux lectures sont d’accord sur les noms, la date et les rôles. ¦ ✓ İki okuma adlar, tarih ve rollerde aynı.
+À vérifier : la traduction complète ne dit pas la même chose pour : {list} ¦ Kontrol edilecek: tam çeviri şunlarda farklı söylüyor: {list}
+Traduction copiée. ¦ Çeviri kopyalandı.
+Copie impossible dans ce navigateur. ¦ Bu tarayıcıda kopyalanamıyor.
+Traduction gardée dans la transcription (enregistre avec ⌘S) ¦ Çeviri transkripsiyonda saklandı (⌘S ile kaydet)
+Traduction en cours (le modèle tourne sur cet ordinateur)… ¦ Çeviriliyor (model bu bilgisayarda çalışıyor)…
+La traduction n’a pas abouti. ¦ Çeviri tamamlanamadı.
+La traduction gardée avec cette transcription. ¦ Bu transkripsiyonla saklanan çeviri.
+↻ Retraduire ¦ ↻ Yeniden çevir
+Le modèle de la lecture approfondie est installé : la traduction complète prend quelques dizaines de secondes. ¦ Derin okuma modeli kurulu: tam çeviri birkaç on saniye sürer.
+🌐 Traduire tout l’acte ¦ 🌐 Belgenin tamamını çevir
+La traduction complète utilise le modèle de la lecture approfondie (Ollama, ≈ 6 Go, rien ne part sur Internet). ¦ Tam çeviri derin okuma modelini kullanır (Ollama, ≈ 6 GB, internete hiçbir şey gitmez).
+Le niveau 1 marche toujours. ¦ Seviye 1 her zaman çalışır.
+Transcription d’acte ¦ Belge transkripsiyonu
+Traduction ¦ Çeviri
+Mots difficiles et abréviations ¦ Zor kelimeler ve kısaltmalar
+Les personnes de l’acte ¦ Belgedeki kişiler
+=fait certain ¦ kesin olgu|kesin olgu
+=fait déduit ¦ çıkarım olgu|çıkarım olgu
+=fait estimé ¦ tahmini olgu|tahmini olgu
+=fait en doute ¦ şüpheli olgu|şüpheli olgu
+=fait non évalué ¦ değerlendirilmemiş olgu|değerlendirilmemiş olgu
+=fait ¦ olgu|olgu
+=fiche à revoir ¦ gözden geçirilecek kart|gözden geçirilecek kart
+=fait confirmé ¦ doğrulanmış olgu|doğrulanmış olgu
+=remarque notée ¦ not alınan not|not alınan not
+=remarque pour plus tard ¦ sonraya kalan not|sonraya kalan not
+=relecture ¦ okuma|okuma
+Très sûr ¦ Çok güvenilir
+Assez sûr ¦ Oldukça güvenilir
+Peu sûr ¦ Güvenilmez
+prouvé ¦ kanıtlı
+probable ¦ olası
+réfuté ¦ çürütülmüş
+parent ¦ ebeveyn
+baptisé(e) ¦ vaftiz edilen
+note sous ¦ puan şunun altında:
+{a} sur {n} ont une source ¦ {n} olgudan {a} kaynaklı
+{a} sur {n} a une source ¦ {n} olgudan {a} kaynaklı
+{n} sont à revoir avant publication (note sous {min}). ¦ {n} yayından önce gözden geçirilmeli ({min} altı puan).
+{n} est à revoir avant publication (note sous {min}). ¦ {n} yayından önce gözden geçirilmeli ({min} altı puan).
+La fiabilité n’a pas pu être calculée. ¦ Güvenilirlik hesaplanamadı.
+Aucune fiche à revoir avant publication, bravo ! ¦ Yayından önce gözden geçirilecek kart yok, bravo!
+Pas encore de fiche à publier. ¦ Henüz yayınlanacak kart yok.
+{n} sous {min} sur 100 ¦ 100 üzerinden {min} altında {n}
+🛡 Fiches les moins fiables ¦ 🛡 En az güvenilir kartlar
+Listes → Personnes, filtrée sur « À revoir avant publication » ¦ Listeler → Kişiler, “Yayından önce gözden geçirilecek” filtresiyle
+Les voir ¦ Göster
+Les laisser de côté ¦ Dışarıda bırak
+Exporter quand même ¦ Yine de dışa aktar
+Transcription ¦ Transkripsiyon
+🖊 Relecture ¦ 🖊 Okuma
+🖊 Demander une relecture (le cousin peut cocher et commenter chaque fait) ¦ 🖊 Okuma iste (kuzen her olguyu işaretleyip yorumlayabilir)
+La copie montre alors « ✓ D’accord / ✗ Je pense que c’est faux » sur chaque fait, et « ⤓ Renvoyer mes remarques » : un petit fichier .json à importer dans Questions aux proches → « ⤒ Importer les réponses ». ¦ Kopya o zaman her olguda “✓ Katılıyorum / ✗ Bence yanlış” ve “⤓ Notlarımı geri gönder” gösterir: Yakınlara sorular → “⤒ Yanıtları içe aktar” ile alınacak küçük bir .json dosyası.
+Copie à relire prête : {name}. Le cousin te renverra ses remarques (un fichier .json) : Questions aux proches → « ⤒ Importer les réponses ». ¦ Okunacak kopya hazır: {name}. Kuzen notlarını geri gönderecek (.json dosyası): Yakınlara sorular → “⤒ Yanıtları içe aktar”.
+Donne un titre à la lettre. ¦ Mektuba bir başlık ver.
+Lettre introuvable. ¦ Mektup bulunamadı.
+Relecture introuvable. ¦ Okuma bulunamadı.
+Remarque introuvable. ¦ Not bulunamadı.
+Ce n’est pas un fichier de remarques de relecture. ¦ Bu bir okuma notu dosyası değil.
+Cette relecture n’est pas dans cette base (ou elle a été supprimée). ¦ Bu okuma bu veritabanında yok (ya da silinmiş).
+Ce fait n’existe plus. ¦ Bu olgu artık yok.
+Cette remarque est déjà rangée. ¦ Bu not zaten düzenlendi.
+Il n’y a pas encore de texte à traduire. ¦ Henüz çevrilecek metin yok.
+Le modèle de la lecture approfondie n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Derin okuma modeli henüz indirilmedi: “⤓ Derin okumayı kur”.
+Ces outils ne sont pas encore prêts : relance l’app. ¦ Bu araçlar henüz hazır değil: uygulamayı yeniden başlat.
+Cette demande de relecture n’existe plus. ¦ Bu okuma isteği artık yok.
+{who} confirme : {fact}. ¦ {who} doğruluyor: {fact}.
+Confirmé par {who} : {fact} ¦ {who} doğruladı: {fact}
+{who}, relecture « {title} », le {date} ¦ {who}, “{title}” okuması, {date}
+Relecture d’une branche ¦ Bir dalın okunması
+{who} pense que c’est faux. ¦ {who} bunun yanlış olduğunu düşünüyor.
+relecture « {title} », le {date} ¦ “{title}” okuması, {date}
+💬 Remarque de {who} ¦ 💬 {who} notu

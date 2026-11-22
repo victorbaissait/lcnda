@@ -1,0 +1,81 @@
+fr ¦ ru ¦ uk
+# Zone « trouve-plus » : « Ce que l’app a trouvé dans l’acte », plus riche (heritage-transcribe-trouve.js, lib/transcription_actes.php : 🔍 Repérer avec l’IA, ＋ Ajouter à une fiche)
+Événements et contexte ¦ События и контекст ¦ Події та контекст
+Naissance estimée ¦ Предполагаемое рождение ¦ Імовірне народження
+finit par une particule seule ¦ кончается одной частицей ¦ закінчується однією часткою
+c’est un métier ¦ это профессия ¦ це професія
+c’est un lieu ¦ это место ¦ це місце
+pas un nom ¦ не имя ¦ не ім’я
+proposer (conseillé) ¦ предлагать (рекомендуется) ¦ пропонувати (рекомендовано)
+vers {year} ¦ около {year} ¦ близько {year}
+de {name} ¦ {name} ¦ {name}
+(de la personne d’avant) ¦ (предыдущего человека) ¦ (попередньої особи)
+Nom non lu ¦ Имя не прочитано ¦ Ім’я не прочитано
+Proposé par l’IA locale : vérifie dans le texte ¦ Предложено локальным ИИ: проверь в тексте ¦ Запропоновано локальним ШІ: перевір у тексті
+IA ¦ ИИ ¦ ШІ
+Actions ¦ Действия ¦ Дії
+Ajouter à une fiche… ¦ Добавить в карточку… ¦ Додати до картки…
+aussi écrit : ¦ также написано: ¦ також написано:
+Le texte ne dit rien d’autre sur cette personne. ¦ Текст больше ничего не говорит об этом человеке. ¦ Текст більше нічого не каже про цю особу.
+Garder dans l’acte ¦ Оставить в акте ¦ Залишити в акті
+Aucune personne repérée. ¦ Никто не найден. ¦ Нікого не знайдено.
+Écartés : pas des noms ({n}) ¦ Отложено: не имена ({n}) ¦ Відкладено: не імена ({n})
+Lieu de ta base ¦ Место из твоей базы ¦ Місце з твоєї бази
+date de l’acte ¦ дата акта ¦ дата акта
+calendrier républicain ¦ республиканский календарь ¦ республіканський календар
+d’après le champ Date ¦ по полю «Дата» ¦ за полем «Дата»
+Créer dans « Le monde autour »… ¦ Создать в «Мире вокруг»… ¦ Створити у «Світі довкола»…
+mots : {x} ¦ слова: {x} ¦ слова: {x}
+Choisir cette sorte ¦ Выбрать этот вид ¦ Вибрати цей вид
+choisie ¦ выбран ¦ вибрано
+Proposée seulement : la sorte d’acte ne change que si tu la choisis. ¦ Только предложение: вид акта меняется, только если ты его выберешь. ¦ Лише пропозиція: вид акта змінюється, тільки якщо ти його вибереш.
+Pas d’indice dans le texte. ¦ В тексте нет подсказки. ¦ У тексті немає підказки.
+L’IA lit le texte… {n} s ¦ ИИ читает текст… {n} с ¦ ШІ читає текст… {n} с
+Propositions de l’IA ajoutées ({n}), marquées 🔍 IA : vérifie-les dans le texte. ¦ Предложения ИИ добавлены ({n}), помечены 🔍 ИИ: проверь их в тексте. ¦ Пропозиції ШІ додано ({n}), позначено 🔍 ШІ: перевір їх у тексті.
+Repérer avec l’IA ¦ Найти с ИИ ¦ Знайти з ШІ
+Seul le texte part au modèle, sur cet ordinateur. ¦ Модели отправляется только текст, на этом компьютере. ¦ Моделі надсилається лише текст, на цьому комп’ютері.
+Repéré dans le texte ¦ Найдено в тексте ¦ Знайдено в тексті
+Réglages du repérage ¦ Настройки поиска ¦ Налаштування пошуку
+Tout est proposé : garde, écarte ou ajoute à une fiche. Rien n’est écrit sans ton clic. ¦ Всё — только предложения: оставь, отложи или добавь в карточку. Ничего не записывается без твоего щелчка. ¦ Усе — лише пропозиції: залиш, відклади або додай до картки. Нічого не записується без твого клацання.
+Écarter ¦ Отложить ¦ Відкласти
+Élément écarté. ¦ Элемент отложен. ¦ Елемент відкладено.
+Naissance estimée vers {year} (âge dans l’acte) ¦ Предполагаемое рождение около {year} (возраст в акте) ¦ Імовірне народження близько {year} (вік в акті)
+{n} ans dans l’acte ¦ {n} лет в акте ¦ {n} років в акті
+Nommé dans l’acte : {name} ¦ Назван в акте: {name} ¦ Названо в акті: {name}
+Nommé dans l’acte ¦ Назван в акте ¦ Названо в акті
+Ajouter à une fiche ¦ Добавить в карточку ¦ Додати до картки
+Dans l’acte : ¦ В акте: ¦ В акті:
+Comme quoi ? ¦ Как что? ¦ Як що?
+vide si le texte ne la donne pas ¦ пусто, если текст её не даёт ¦ порожньо, якщо текст її не дає
+Relier à « {title} » du monde autour (sa date et son lieu) ¦ Связать с «{title}» из мира вокруг (дата и место) ¦ Пов’язати з «{title}» зі світу довкола (дата й місце)
+Voilà ce qui sera écrit ¦ Вот что будет записано ¦ Ось що буде записано
+Toujours avec sa source (ce document, la ligne) et la phrase en citation. « ↶ Annuler » défait l’ajout. ¦ Всегда с источником (этот документ, строка) и фразой в виде цитаты. «↶ Отменить» отменяет добавление. ¦ Завжди з джерелом (цей документ, рядок) і фразою як цитатою. «↶ Скасувати» скасовує додавання.
+Info ¦ Сведения ¦ Відомості
+✓ Ajouté à la fiche. ¦ ✓ Добавлено в карточку. ¦ ✓ Додано до картки.
+LE MONDE AUTOUR ¦ МИР ВОКРУГ ¦ СВІТ ДОВКОЛА
+Créer dans « Le monde autour » ¦ Создать в «Мире вокруг» ¦ Створити у «Світі довкола»
+Créer l’événement ¦ Создать событие ¦ Створити подію
+Le texte ne donne pas l’année : écris-la toi-même si tu la connais (l’app ne l’invente pas). ¦ Текст не даёт года: напиши его сам, если знаешь (приложение его не выдумывает). ¦ Текст не дає року: напиши його сам, якщо знаєш (застосунок його не вигадує).
+✓ Ajouté au monde autour. ¦ ✓ Добавлено в мир вокруг. ¦ ✓ Додано до світу довкола.
+Prête : la lecture approfondie est installée sur cet ordinateur. ¦ Готово: углублённое чтение установлено на этом компьютере. ¦ Готово: поглиблене читання встановлено на цьому комп’ютері.
+Pas prête : installe la lecture approfondie (Ollama) pour t’en servir. ¦ Не готово: установи углублённое чтение (Ollama), чтобы им пользоваться. ¦ Не готово: встанови поглиблене читання (Ollama), щоб ним користуватися.
+Rubriques montrées ¦ Показываемые разделы ¦ Показувані розділи
+Repérer avec l’IA quand elle est prête ¦ Искать с ИИ, когда он готов ¦ Шукати з ШІ, коли він готовий
+Nombres ¦ Числа ¦ Числа
+Registre militaire ¦ Военный реестр ¦ Військовий реєстр
+mot courant ¦ обычное слово ¦ звичайне слово
+lettres mal lues ¦ неверно прочитанные буквы ¦ неправильно прочитані літери
+L’IA a répondu autre chose que le JSON demandé : rien n’est repris. ¦ ИИ ответил не тем JSON, который был запрошен: ничего не берётся. ¦ ШІ відповів не тим JSON, який було запитано: нічого не береться.
+Texte trop long pour l’IA (20 000 signes au plus) : choisis un passage. ¦ Текст слишком длинный для ИИ (не больше 20 000 знаков): выбери отрывок. ¦ Текст задовгий для ШІ (не більше 20 000 знаків): вибери уривок.
+Choisis la fiche où ajouter cet élément. ¦ Выбери карточку, куда добавить этот элемент. ¦ Вибери картку, до якої додати цей елемент.
+Choisis comment ajouter cet élément. ¦ Выбери, как добавить этот элемент. ¦ Вибери, як додати цей елемент.
+Rien à ajouter : l’élément est vide. ¦ Нечего добавлять: элемент пуст. ¦ Нічого додавати: елемент порожній.
+réponse trop longue ¦ слишком длинный ответ ¦ задовга відповідь
+réponse vide ¦ пустой ответ ¦ порожня відповідь
+pas un objet JSON ¦ не объект JSON ¦ не об’єкт JSON
+clé inattendue ¦ неожиданный ключ ¦ неочікуваний ключ
+valeur qui n’est pas un texte ¦ значение, которое не текст ¦ значення, яке не є текстом
+liste attendue ¦ ожидался список ¦ очікувався список
+liste trop longue ¦ слишком длинный список ¦ задовгий список
+personne qui n’est pas un objet ¦ человек, который не объект ¦ особа, яка не є об’єктом
+champ de personne inattendu ¦ неожиданное поле человека ¦ неочікуване поле особи

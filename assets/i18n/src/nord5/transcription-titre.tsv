@@ -1,0 +1,24 @@
+fr ¦ hr ¦ sl
+À préciser ¦ Treba precizirati ¦ Treba določiti
+Lecture approfondie (IA sur cet ordinateur) ¦ Detaljno čitanje (UI na ovom računalu) ¦ Poglobljeno branje (UI na tem računalniku)
+En plus du moteur ci-dessus : un modèle « vision » ouvert (Qwen3-VL, licence Apache 2.0) qui lit toute la page, servi par Ollama sur cet ordinateur. Facultatif. Rien ne part sur Internet, sauf le téléchargement du modèle (3 à 6 Go, une seule fois). ¦ Uz pogon iznad: otvoreni „vizualni“ model (Qwen3-VL, licenca Apache 2.0) koji čita cijelu stranicu, pokreće ga Ollama na ovom računalu. Neobavezno. Ništa ne ide na internet osim preuzimanja modela (3 do 6 GB, jednom). ¦ Poleg zgornjega pogona: odprt »vizualni« model (Qwen3-VL, licenca Apache 2.0), ki prebere vso stran, poganja ga Ollama na tem računalniku. Neobvezno. Nič ne gre na internet razen prenosa modela (3 do 6 GB, enkrat).
+Ensuite, dans l’atelier de transcription : « 🔍 Essayer aussi la lecture approfondie » montre les deux lectures côte à côte, et tu gardes la meilleure. ¦ Zatim, u radionici za prijepis: „🔍 Isprobaj i detaljno čitanje“ prikazuje oba čitanja jedno uz drugo, a ti zadržiš bolje. ¦ Nato v delavnici za prepis: »🔍 Preizkusi tudi poglobljeno branje« pokaže obe branji drugo ob drugem, ti pa obdržiš boljše.
+Installer ou vérifier la lecture approfondie… ¦ Instaliraj ili provjeri detaljno čitanje… ¦ Namesti ali preveri poglobljeno branje…
+La lecture approfondie n’est pas encore chargée : réessaie dans un instant. ¦ Detaljno čitanje još nije učitano: pokušaj ponovno za trenutak. ¦ Poglobljeno branje še ni naloženo: poskusi znova čez trenutek.
+Pour lire un acte : ouvre son image dans l’atelier de transcription (« 📜 Atelier »), puis « ✨ Lire l’acte ». ¦ Za čitanje isprave: otvori njezinu sliku u radionici za prijepis („📜 Radionica“), zatim „✨ Pročitaj ispravu“. ¦ Za branje listine: odpri njeno sliko v delavnici za prepis (»📜 Delavnica«), nato »✨ Preberi listino«.
+Transcrire ¦ Prepiši ¦ Prepiši
+Ouvrir l’outil de transcription complet sur cette image ¦ Otvori cijeli alat za prijepis za ovu sliku ¦ Odpri celotno orodje za prepis za to sliko
+Le modèle a réfléchi sans écrire de transcription. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Model je razmišljao, ali nije napisao prijepis. Izreži manje područje (nekoliko redaka) ili isprobaj model 8B pa pokreni ponovno. ¦ Model je razmišljal, a ni napisal prepisa. Obreži manjše območje (nekaj vrstic) ali preizkusi model 8B in znova zaženi.
+Le modèle n’a rien lu sur cette image. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Model nije ništa pročitao na ovoj slici. Izreži manje područje (nekoliko redaka) ili isprobaj model 8B pa pokreni ponovno. ¦ Model na tej sliki ni prebral ničesar. Obreži manjše območje (nekaj vrstic) ali preizkusi model 8B in znova zaženi.
+La lecture a été arrêtée. ¦ Čitanje je zaustavljeno. ¦ Branje je bilo ustavljeno.
+Modèle : {m} · {n} s ¦ Model: {m} · {n} s ¦ Model: {m} · {n} s
+Ce document n’a pas d’image : l’Atelier de transcription a besoin d’une image. ¦ Ovaj dokument nema sliku: Radionica za prijepis treba sliku. ¦ Ta dokument nima slike: Delavnica za prepis potrebuje sliko.
+L’Atelier de transcription n’est pas encore chargé : réessaie dans un instant. ¦ Radionica za prijepis još nije učitana: pokušaj ponovno za trenutak. ¦ Delavnica za prepis še ni naložena: poskusi znova čez trenutek.
+L’Atelier de transcription n’a pas pu s’ouvrir : {x} ¦ Radionica za prijepis se nije mogla otvoriti: {x} ¦ Delavnica za prepis se ni mogla odpreti: {x}
+Lecture approfondie (IA) ¦ Detaljno čitanje (UI) ¦ Poglobljeno branje (UI)
+Impossible de suivre la lecture : {x} ¦ Nije moguće pratiti čitanje: {x} ¦ Branja ni mogoče spremljati: {x}
+Le programme de lecture n’a pas démarré. ¦ Program za čitanje nije se pokrenuo. ¦ Program za branje se ni zagnal.
+Acte de notoriété ¦ Akt o poznatosti ¦ Listina o notoričnosti
+Cadres ¦ Okviri ¦ Okvirji
+Opacité des cadres de couleur (0 = presque invisibles) ¦ Neprozirnost obojenih okvira (0 = gotovo nevidljivi) ¦ Prekrivnost barvnih okvirjev (0 = skoraj nevidni)
+Ce document n’a pas pu être relu : réessaie dans un instant. ¦ Dokument se nije mogao ponovno učitati: pokušaj za trenutak. ¦ Dokumenta ni bilo mogoče znova prebrati: poskusi čez trenutek.

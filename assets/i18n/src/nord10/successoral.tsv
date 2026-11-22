@@ -1,0 +1,975 @@
+fr ¦ sq ¦ mt
+# Zone « successoral » : ⚖️ généalogiste successoral, dossiers de succession, dévolution (heritage-successoral*.js, lib/successoral.php)
+Les dossiers de succession ne se montrent pas en mode consultation ni en mode simple. ¦ Dosjet e trashëgimisë nuk shfaqen në mënyrën e shikimit as në mënyrën e thjeshtë. ¦ Il-fajls tas-suċċessjoni ma jidhrux fil-modalità ta’ wiri u fil-modalità sempliċi.
+Successions ¦ Trashëgimi ¦ Suċċessjonijiet
+Listes · Recherche et organisation ¦ Lista · Kërkim dhe organizim ¦ Listi · Riċerka u organizzazzjoni
+Dossiers de succession ¦ Dosje trashëgimie ¦ Fajls tas-suċċessjoni
+Retrouver les héritiers d’une personne décédée, pour un notaire : un dossier par défunt. À ne pas confondre avec « 🏠 Héritages et successions » (les actes anciens des ancêtres). ¦ Gjetja e trashëgimtarëve të një personi të vdekur për një noter: një dosje për çdo të ndjerë. Të mos ngatërrohet me «🏠 Trashëgimi dhe pasuri të lëna» (aktet e vjetra të paraardhësve). ¦ Sib il-werrieta ta’ persuna mejta għal nutar: fajl wieħed għal kull mejjet. M’għandux jitħawwad ma’ «🏠 Wirtijiet u suċċessjonijiet» (l-atti qodma tal-antenati).
+＋ Ouvrir un dossier ¦ ＋ Hap një dosje ¦ ＋ Iftaħ fajl
+Lecture des dossiers… ¦ Po lexohen dosjet… ¦ Qed jinqraw il-fajls…
+Aucun dossier de succession pour l’instant ¦ Ende asnjë dosje trashëgimie ¦ Għad m’hemm l-ebda fajl tas-suċċessjoni
+Choisis la personne décédée : l’app part des fiches de la base pour trouver ses héritiers, selon le Code civil d’aujourd’hui. ¦ Zgjidh personin e vdekur: aplikacioni nis nga regjistrimet e bazës për të gjetur trashëgimtarët e tij sipas Kodit Civil francez të sotëm. ¦ Agħżel il-persuna mejta: l-app tibda mir-reġistrazzjonijiet tal-bażi biex issib il-werrieta tagħha skont il-Kodiċi Ċivili Franċiż tal-lum.
+Chercher… (ex. MAZAUD, 2026-014, ROUSSILHE) ¦ Kërko… (p.sh. MAZAUD, 2026-014, ROUSSILHE) ¦ Fittex… (eż. MAZAUD, 2026-014, ROUSSILHE)
+Prochaine échéance ¦ Afati i radhës ¦ L-iskadenza li jmiss
+A → Z ¦ A → Z ¦ A → Ż
+Dossier n° {n} ¦ Dosja nr. {n} ¦ Fajl nru {n}
+Prochaine échéance : {d} — {l} ¦ Afati i radhës: {d} — {l} ¦ L-iskadenza li jmiss: {d} — {l}
+Échéance passée ¦ Afati ka kaluar ¦ Skadenza għaddiet
+✎ Modifier ¦ ✎ Ndrysho ¦ ✎ Immodifika
+Aucun dossier ne correspond. ¦ Asnjë dosje nuk përputhet. ¦ L-ebda fajl ma jaqbel.
+Pas en mode consultation ni en mode simple. ¦ Jo në mënyrën e shikimit as në mënyrën e thjeshtë. ¦ Mhux fil-modalità ta’ wiri jew sempliċi.
+⚖️ DOSSIER DE SUCCESSION ¦ ⚖️ DOSJE TRASHËGIMIE ¦ ⚖️ FAJL TAS-SUĊĊESSJONI
+Ouvrir un dossier ¦ Hap një dosje ¦ Iftaħ fajl
+Ouvrir le dossier ¦ Hap dosjen ¦ Iftaħ il-fajl
+N° de dossier ¦ Nr. i dosjes ¦ Nru tal-fajl
+fait tout seul : 2026-014 ¦ automatikisht: 2026-014 ¦ awtomatiku: 2026-014
+reprise de la fiche ¦ marrë nga regjistrimi ¦ meħud mir-reġistrazzjoni
+Dernier domicile ¦ Vendbanimi i fundit ¦ L-aħħar domiċilju
+Notaire mandant (fiche ou nom) ¦ Noteri porositës (regjistrim ose emër) ¦ In-nutar li ta l-inkarigu (reġistrazzjoni jew isem)
+Réf. du notaire ¦ Ref. e noterit ¦ Ref. tan-nutar
+Ouvert le ¦ Hapur më ¦ Miftuħ fi
+Testament ¦ Testament ¦ Testment
+Aucun connu (le notaire interroge le fichier des dernières volontés) ¦ Asnjë i njohur (noteri pyet regjistrin e testamenteve) ¦ Ebda magħruf (in-nutar jiċċekkja r-reġistru tat-testmenti)
+Situation (notes) ¦ Gjendja (shënime) ¦ Sitwazzjoni (noti)
+🔒 Le dossier reste dans l’app : les héritiers vivants, leurs adresses et leurs parts ne sont dans aucun export. Aucun montant n’est noté. ¦ 🔒 Dosja mbetet në aplikacion: trashëgimtarët e gjallë, adresat dhe pjesët e tyre nuk janë në asnjë eksport. Asnjë shumë nuk shënohet. ¦ 🔒 Il-fajl jibqa’ fl-app: il-werrieta ħajjin, l-indirizzi u s-sehem tagħhom ma jidhru f’ebda esportazzjoni. L-ebda ammont ma jitniżżel.
+Choisis la personne décédée. ¦ Zgjidh personin e vdekur. ¦ Agħżel il-persuna mejta.
+Dossier enregistré ¦ Dosja u ruajt ¦ Fajl salvat
+Dossier supprimé ¦ Dosja u fshi ¦ Fajl imħassar
+Lecture du dossier… ¦ Po lexohet dosja… ¦ Qed jinqara l-fajl…
+← Tous les dossiers ¦ ← Të gjitha dosjet ¦ ← Il-fajls kollha
+Dossier n° {n} · {t} ¦ Dosja nr. {n} · {t} ¦ Fajl nru {n} · {t}
+Listes · Dossiers de succession ¦ Lista · Dosje trashëgimie ¦ Listi · Fajls tas-suċċessjoni
+↗ Fiche du défunt ¦ ↗ Regjistrimi i të ndjerit ¦ ↗ Ir-reġistrazzjoni tal-mejjet
+🗄 Archiver le dossier clos ¦ 🗄 Arkivo dosjen e mbyllur ¦ 🗄 Arkivja l-fajl magħluq
+Dossier archivé : les adresses des vivants ont été retirées, le journal reste. ¦ Dosja u arkivua: adresat e të gjallëve u hoqën, ditari mbetet. ¦ Fajl arkivjat: l-indirizzi tal-ħajjin tneħħew, ir-reġistru jibqa’.
+État du dossier ¦ Gjendja e dosjes ¦ Stat tal-fajl
+Le défunt n’est plus dans la base. ¦ I ndjeri nuk është më në bazë. ¦ Il-mejjet m’għadux fil-bażi.
+Pas de conjoint dans la base ¦ Asnjë bashkëshort në bazë ¦ L-ebda konjuġi fil-bażi
+A des descendants ¦ Ka pasardhës ¦ Għandu dixxendenti
+Sans descendant dans la base ¦ Asnjë pasardhës në bazë ¦ L-ebda dixxendent fil-bażi
+Le défunt ¦ I ndjeri ¦ Il-mejjet
+fiche n° {n} ¦ regjistrimi nr. {n} ¦ reġistrazzjoni nru {n}
+Le mandat ¦ Mandati ¦ L-inkarigu
+Droit actuel (décès après le 1er janvier 2007) ¦ E drejta në fuqi (vdekje pas 1 janarit 2007) ¦ Il-liġi attwali (mewt wara l-1 ta’ Jannar 2007)
+Échéances ¦ Afatet ¦ Skadenzi
+＋ Échéance ¦ ＋ Afat ¦ ＋ Skadenza
+Dans {n} j ¦ Pas {n} d ¦ Fi {n} jiem
+Aucune échéance. ¦ Asnjë afat. ¦ L-ebda skadenza.
+Aussi dans 🗓 Ma semaine de recherche. ¦ Edhe te 🗓 Java ime e kërkimit. ¦ Ukoll fi 🗓 Il-ġimgħa ta’ riċerka tiegħi.
+📑 Pièces ¦ 📑 Dokumentet ¦ 📑 Dokumenti
+🖨 Tableau pour le notaire ¦ 🖨 Tabela për noterin ¦ 🖨 Tabella għan-nutar
+de son chef ¦ në emër të vet ¦ bi dritt tiegħu
+représenté ¦ përfaqësuar ¦ rappreżentat
+sans descendance connue ¦ pa pasardhës të njohur ¦ l-ebda dixxendent magħruf
+degré plus éloigné ¦ shkallë më e largët ¦ grad aktar ’il bogħod
+pas de représentation ¦ pa përfaqësim ¦ l-ebda rappreżentazzjoni
+pas encore conçu ¦ ende i pazënë ¦ għadu ma tnissilx
+écarté ¦ i përjashtuar ¦ eskluż
+par représentation ¦ me përfaqësim ¦ b’rappreżentazzjoni
+de son chef, s’il vit ¦ në emër të vet, nëse jeton ¦ bi dritt tiegħu, jekk ħaj
+Retenu ¦ Thirrur ¦ Imsejjaħ
+Écarté par le conjoint ¦ Përjashtuar nga bashkëshorti ¦ Eskluż mill-konjuġi
+Écarté ¦ Përjashtuar ¦ Eskluż
+{name} : {share} (art. {art}). ¦ {name}: {share} (neni {art}). ¦ {name}: {share} (art. {art}).
+Ou, à son choix, l’usufruit de la totalité (art. 757) : les descendants ont alors la nue-propriété, dans les mêmes proportions. ¦ Ose, me zgjedhjen e tij, uzufrukti i të gjithës (neni 757): pasardhësit kanë atëherë pronësinë e zhveshur, në të njëjtat përpjesëtime. ¦ Jew, bl-għażla tiegħu, l-użufrutt tal-ħaġa kollha (art. 757): id-dixxendenti mbagħad ikollhom il-proprjetà nuda, fl-istess proporzjonijiet.
+Aucun conjoint dans la base. ¦ Asnjë bashkëshort në bazë. ¦ L-ebda konjuġi fil-bażi.
+S’il y avait un conjoint, l’app afficherait ici ses droits (art. 757 à 757-2) avant les ordres. ¦ Po të kishte bashkëshort, aplikacioni do t’i shfaqte këtu të drejtat (nenet 757 deri 757-2) para radhëve. ¦ Kieku kien hemm konjuġi, l-app turi hawn id-drittijiet tiegħu (art. 757 sa 757-2) qabel l-ordnijiet.
+{n}e ¦ {n}. ¦ {n}
+adresse ? ¦ adresa? ¦ indirizz?
+Statut retenu dans ce dossier ¦ Gjendja e mbajtur në këtë dosje ¦ Status miżmum f’dan il-fajl
+Autre hypothèse ¦ Hipotezë tjetër ¦ Ipoteżi oħra
+total {t} ¦ gjithsej {t} ¦ total {t}
+personne : il reste des branches à chercher. ¦ askush: mbeten degë për t’u kërkuar. ¦ ħadd: għad hemm fergħat x’jinstabu.
+Part en jeu : {s} ¦ Pjesa në lojë: {s} ¦ Sehem fil-logħba: {s}
+🔍 Chercher ¦ 🔍 Kërko ¦ 🔍 Fittex
+🌍 Héritier à l’étranger ¦ 🌍 Trashëgimtar jashtë vendit ¦ 🌍 Werriet barra l-pajjiż
+❔ Absent ou disparu ¦ ❔ I munguar ose i zhdukur ¦ ❔ Assenti jew nieqes
+📇 Compléter ¦ 📇 Plotëso ¦ 📇 Imla
+Type d’adoption ¦ Lloji i birësimit ¦ Tip ta’ adozzjoni
+Type d’adoption ? ¦ Lloji i birësimit? ¦ Tip ta’ adozzjoni?
+Plénière ¦ I plotë ¦ Sħiħa
+Marié ? ¦ I martuar? ¦ Miżżewweġ?
+Pas marié (PACS, union libre) ¦ I pamartuar (PACS, bashkëjetesë) ¦ Mhux miżżewweġ (PACS, koabitazzjoni)
+Divorcé ¦ I divorcuar ¦ Iddivorzjat
+Aucune branche à chercher d’après les fiches. ¦ Sipas regjistrimeve, asnjë degë për t’u kërkuar. ¦ Skont ir-reġistrazzjonijiet, l-ebda fergħa x’tinstab.
+{n}e degré ¦ shkalla {n} ¦ grad {n}
+Calcul indicatif, à faire vérifier par le notaire. Il suit le Code civil en vigueur (art. 731 et suivants), sans testament, sans donation, sans renonciation connue. Il ne tient pas compte du droit de retour légal (art. 738-2, 757-3), des biens à l’étranger ni d’un régime matrimonial. ¦ Llogaritje orientuese, që duhet ta verifikojë noteri. Ndjek Kodin Civil francez në fuqi (nenet 731 e në vijim), pa testament, pa dhurim, pa heqje dorë të njohur. Nuk merr parasysh të drejtën ligjore të kthimit (nenet 738-2, 757-3), pasuritë jashtë vendit dhe regjimin martesor. ¦ Kalkolu indikattiv, irid jivverifikah in-nutar. Isegwi l-Kodiċi Ċivili Franċiż fis-seħħ (art. 731 u ta’ wara), mingħajr testment, mingħajr donazzjoni, mingħajr rinunzja magħrufa. Ma jqisx id-dritt legali ta’ ritorn (art. 738-2, 757-3), il-beni barra l-pajjiż u r-reġim matrimonjali.
+Le conjoint survivant ¦ Bashkëshorti i mbijetuar ¦ Il-konjuġi superstiti
+Les ordres d’héritiers (art. 734) : le premier qui a quelqu’un prend tout ¦ Radhët e trashëgimtarëve (neni 734): e para ku ka dikë merr gjithçka ¦ L-ordnijiet tal-werrieta (art. 734): l-ewwel wieħed fejn hemm xi ħadd jieħu kollox
+Les héritiers trouvés ¦ Trashëgimtarët e gjetur ¦ Il-werrieta misjuba
+🗂 Tables des successions (AD)… ¦ 🗂 Regjistrat e trashëgimive (arkiva)… ¦ 🗂 Reġistri tas-suċċessjonijiet (arkivji)…
+Lien avec le défunt ¦ Lidhja me të ndjerin ¦ Rabta mal-mejjet
+Vient ¦ Vjen ¦ Jiġi
+Part ¦ Pjesa ¦ Sehem
+Statut retenu ¦ Gjendja e mbajtur ¦ Status miżmum
+↔ Faire glisser le tableau pour voir les parts. ¦ ↔ Rrëshqit tabelën për të parë pjesët. ¦ ↔ Iżżerżaq it-tabella biex tara s-sehem.
+Aucun héritier trouvé jusqu’au 6e degré : sans testament, la succession reviendrait à l’État (art. 539 et 768). Il reste sans doute des branches à chercher. ¦ Asnjë trashëgimtar deri në shkallën e 6-të: pa testament, trashëgimia do t’i kalonte shtetit (nenet 539 dhe 768). Ka gjasë të mbeten degë për t’u kërkuar. ¦ L-ebda werriet misjub sas-6 grad: mingħajr testment, il-wirt imur għand l-Istat (art. 539 u 768). Probabbilment għad hemm fergħat x’jinstabu.
+Les calculs restent tant que la branche n’est pas tranchée. ¦ Llogaritjet mbeten derisa dega të zgjidhet. ¦ Il-kalkoli jibqgħu sakemm il-fergħa tiġi deċiża.
+Les branches à chercher ¦ Degët për t’u kërkuar ¦ Fergħat x’jinstabu
+L’hypothèse retenue ¦ Hipoteza e mbajtur ¦ L-ipoteżi miżmuma
+Ex. : André MAZAUD décédé à Lyon en 1990 sans enfant (acte reçu le 5 déc.). ¦ P.sh.: André MAZAUD vdiq në Lion më 1990 pa fëmijë (akti u mor më 5 dhjetor). ¦ Eż.: André MAZAUD miet f’Lyon fl-1990 mingħajr tfal (att riċevut fil-5 ta’ Diċ.).
+Demandée avant « Remis au notaire » si un héritier reste inconnu. ¦ Kërkohet para «Dorëzuar noterit» nëse një trashëgimtar mbetet i panjohur. ¦ Mitlub qabel «Mgħoddi lin-nutar» jekk werriet jibqa’ mhux magħruf.
+Les degrés civils (art. 741-743) : on compte les générations jusqu’à l’ancêtre commun, puis on redescend ¦ Shkallët e farefisnisë (nenet 741-743): numërohen brezat deri te paraardhësi i përbashkët, pastaj zbritet ¦ Il-gradi ċivili (art. 741-743): jingħaddu l-ġenerazzjonijiet sal-antenat komuni, imbagħad wieħed jinżel
+LE DÉFUNT ¦ I NDJERI ¦ IL-MEJJET
+à retrouver ¦ për t’u gjetur ¦ biex jinstab
+sans descend. ¦ pa pasard. ¦ bla dixx.
+Héritier vivant, sa part ¦ Trashëgimtar i gjallë, pjesa e tij ¦ Werriet ħaj, is-sehem tiegħu
+Prédécédé, sa souche ¦ I vdekur më parë, trungu i tij ¦ Miet qabel, iz-zokk tiegħu
+Branche à chercher ¦ Degë për t’u kërkuar ¦ Fergħa x’tinstab
+Arbre de dévolution ¦ Pema e trashëgimisë ¦ Siġra tad-devoluzzjoni
+Le défunt au centre, chaque héritier avec sa part ¦ I ndjeri në qendër, çdo trashëgimtar me pjesën e vet ¦ Il-mejjet fiċ-ċentru, kull werriet bis-sehem tiegħu
+⤓ SVG ¦ ⤓ SVG ¦ ⤓ SVG
+↔ Faire glisser le dessin. ¦ ↔ Rrëshqit vizatimin. ¦ ↔ Iżżerżaq it-tpinġija.
+Clic sur une case : la fiche ; clic droit : « 🛡 Solidité de ce lien ». Le dessin suit les fiches. ¦ Klikim në kuti: regjistrimi; klikim i djathtë: «🛡 Qëndrueshmëria e kësaj lidhjeje». Vizatimi ndjek regjistrimet. ¦ Ikklikkja kaxxa: ir-reġistrazzjoni; klikk lemin: «🛡 Saħħa ta’ din ir-rabta». It-tpinġija ssegwi r-reġistrazzjonijiet.
+le {d} ¦ {d} ¦ {d}
+État de la pièce ¦ Gjendja e dokumentit ¦ Stat tad-dokument
+D’après la fiche ¦ Sipas regjistrimit ¦ Skont ir-reġistrazzjoni
+{n} en main ¦ {n} në dorë ¦ {n} f’idejk
+{n} demandés ¦ {n} të kërkuara ¦ {n} mitluba
+Par héritier ¦ Sipas trashëgimtarit ¦ Skont il-werriet
+Par acte ¦ Sipas aktit ¦ Skont l-att
+Ce qu’il faut prouver ¦ Çfarë duhet provuar ¦ X’għandu jiġi ppruvat
+↔ Faire glisser le tableau. ¦ ↔ Rrëshqit tabelën. ¦ ↔ Iżżerżaq it-tabella.
+Rangée dans le Registre de courriers, une demande d’acte met la pièce à « Demandé » ; l’acte attaché à la fiche la met à « En main ». ¦ E ruajtur në Regjistrin e letrave, një kërkesë akti e vendos dokumentin te «Kërkuar»; akti i bashkëngjitur regjistrimit te «Në dorë». ¦ Talba għal att issalvata fir-Reġistru tal-ittri tpoġġi d-dokument fuq «Mitlub»; l-att imqabbad mar-reġistrazzjoni jpoġġih fuq «F’idejk».
+Je suis mandaté(e) par {notary}, notaire, pour établir la dévolution de la succession de {name} (dossier {n}, réf. {ref}). ¦ Jam i/e autorizuar nga {notary}, noter, për të përcaktuar rendin e trashëgimisë së {name} (dosja {n}, ref. {ref}). ¦ Jien inkarigat minn {notary}, nutar, biex nistabbilixxi d-devoluzzjoni tas-suċċessjoni ta’ {name} (fajl {n}, ref. {ref}).
+À retrouver ¦ Për t’u gjetur ¦ Biex jinstab
+Adresse ? ¦ Adresa? ¦ Indirizz?
+Signé le ¦ Nënshkruar më ¦ Iffirmat fi
+À signer ¦ Për t’u nënshkruar ¦ Biex jiġi ffirmat
+✉️ Écrire ¦ ✉️ Shkruaj ¦ ✉️ Ikteb
+Contrat de révélation, réponses, signatures ¦ Kontratë zbulimi, përgjigje, nënshkrime ¦ Kuntratt ta’ żvelar, tweġibiet, firem
+📝 Contrat de révélation ¦ 📝 Kontratë zbulimi ¦ 📝 Kuntratt ta’ żvelar
+✉️ Lettre de premier contact ¦ ✉️ Letër kontakti të parë ¦ ✉️ Ittra tal-ewwel kuntatt
+Héritier ¦ Trashëgimtar ¦ Werriet
+Courrier ¦ Letër ¦ Ittra
+Contrat ¦ Kontratë ¦ Kuntratt
+📝 Le contrat ne nomme pas le défunt avant signature. Écris toi-même le pourcentage d’honoraires et la date limite. Rien n’est envoyé par l’app. ¦ 📝 Kontrata nuk e përmend të ndjerin para nënshkrimit. Përqindjen e honorarit dhe afatin shkruaji vetë. Aplikacioni nuk dërgon asgjë. ¦ 📝 Il-kuntratt ma jsemmix lill-mejjet qabel il-firma. Il-perċentwal tal-ħlas u d-data tal-iskadenza iktibhom int. L-app ma tibgħat xejn.
+Chaque courrier va dans le Registre de courriers, avec sa relance. ¦ Çdo letër shkon në Regjistrin e letrave, me kujtesën e saj. ¦ Kull ittra tmur fir-Reġistru tal-ittri, bit-tfakkira tagħha.
+↗ Registre de courriers ¦ ↗ Regjistri i letrave ¦ ↗ Reġistru tal-ittri
+Madame, Monsieur, ¦ E nderuar zonjë, i nderuar zotëri, ¦ Sinjura, Sinjur,
+Généalogiste successoral, je suis chargé(e) par une étude notariale de retrouver les héritiers d’une personne décédée. Mes recherches me laissent penser que vous pourriez faire partie de sa famille. ¦ si gjenealog trashëgimish, një zyrë noteriale më ka ngarkuar të gjej trashëgimtarët e një personi të vdekur. Kërkimet e mia më bëjnë të mendoj se mund të bëni pjesë në familjen e tij. ¦ bħala ġenealoġista tas-suċċessjonijiet, uffiċċju nutarili inkarigani nsib il-werrieta ta’ persuna mejta. Ir-riċerka tiegħi tagħmilni naħseb li tista’ tkun parti mill-familja tagħha.
+Pour le vérifier, pourriez-vous me confirmer votre date et votre lieu de naissance, ainsi que les noms de vos parents ? Vous pouvez me répondre par courrier, par téléphone ou par courriel. ¦ Për ta verifikuar, a mund të më konfirmoni datën dhe vendin e lindjes, si dhe emrat e prindërve tuaj? Mund të përgjigjeni me postë, telefon ose email. ¦ Biex nivverifika, tista’ tikkonfermali d-data u l-post tat-twelid tiegħek, kif ukoll l-ismijiet tal-ġenituri tiegħek? Tista’ twieġeb bil-posta, bit-telefon jew bl-email.
+Cette démarche ne vous engage à rien. ¦ Ky hap nuk ju detyron për asgjë. ¦ Dan il-pass ma jorbtok b’xejn.
+Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées. ¦ Me respekt, ¦ Dejjem tiegħek,
+CONTRAT DE RÉVÉLATION DE SUCCESSION ¦ KONTRATË PËR ZBULIMIN E TRASHËGIMISË ¦ KUNTRATT TA’ ŻVELAR TA’ SUĊĊESSJONI
+Entre {heir}, ci-après « l’héritier », et {sender}, généalogiste successoral. ¦ Ndërmjet {heir}, më poshtë «trashëgimtari», dhe {sender}, gjenealog trashëgimish. ¦ Bejn {heir}, minn hawn ’il quddiem «il-werriet», u {sender}, ġenealoġista tas-suċċessjonijiet.
+Le généalogiste a découvert une succession en cours dans laquelle l’héritier pourrait avoir des droits. Il s’engage à lui en révéler l’origine (le nom de la personne décédée, l’étude notariale chargée du règlement) dès la signature du présent contrat, et à réunir les actes qui prouvent sa qualité d’héritier. ¦ Gjenealogu ka zbuluar një trashëgimi në proces ku trashëgimtari mund të ketë të drejta. Ai merr përsipër t’i zbulojë origjinën e saj (emrin e të ndjerit, zyrën noteriale përgjegjëse) me nënshkrimin e kësaj kontrate dhe të mbledhë aktet që provojnë cilësinë e tij si trashëgimtar. ¦ Il-ġenealoġista skopra suċċessjoni għaddejja li fiha l-werriet jista’ jkollu drittijiet. Jintrabat li jiżvelalu l-oriġini tagħha (l-isem tal-mejjet, l-uffiċċju nutarili responsabbli) malli jiġi ffirmat dan il-kuntratt, u li jiġbor l-atti li jippruvaw il-kwalità tiegħu ta’ werriet.
+En contrepartie, l’héritier s’engage à verser au généalogiste des honoraires de ____ % (hors taxes) de l’actif net qui lui reviendra, payables seulement s’il reçoit effectivement une part de la succession. Les frais de recherche sont compris. ¦ Në këmbim, trashëgimtari merr përsipër t’i paguajë gjenealogut një honorar prej ____ % (pa taksa) të aktivit neto që do t’i takojë, i pagueshëm vetëm nëse merr realisht një pjesë të trashëgimisë. Shpenzimet e kërkimit janë të përfshira. ¦ Bi tpattija, il-werriet jintrabat li jħallas lill-ġenealoġista ħlas ta’ ____ % (mingħajr taxxi) tal-assi nett li jmiss lilu, pagabbli biss jekk effettivament jirċievi sehem mis-suċċessjoni. L-ispejjeż tar-riċerka huma inklużi.
+Cette proposition est valable jusqu’au ____________. ¦ Kjo ofertë është e vlefshme deri më ____________. ¦ Din l-offerta hija valida sa ____________.
+Fait en deux exemplaires, à ____________, le ____________. ¦ Hartuar në dy kopje, në ____________, më ____________. ¦ Magħmul f’żewġ kopji, f’____________, fi ____________.
+L’héritier (« Lu et approuvé », signature) — Le généalogiste ¦ Trashëgimtari («Lexuar dhe miratuar», nënshkrimi) — Gjenealogu ¦ Il-werriet («Moqri u approvat», firma) — Il-ġenealoġista
+Je me permets de revenir vers vous au sujet de mon courrier du {sent}, resté sans réponse. Une succession en cours pourrait vous concerner : pourriez-vous me contacter ? ¦ Po ju shkruaj sërish lidhur me letrën time të {sent}, e cila mbeti pa përgjigje. Një trashëgimi në proces mund t’ju përkasë: a mund të më kontaktoni? ¦ Qed nerġa’ nikteb dwar l-ittra tiegħi tal-{sent}, li baqgħet bla tweġiba. Suċċessjoni għaddejja tista’ tikkonċernak: tista’ tikkuntattjani?
+✉️ HÉRITIERS CONTACTÉS ¦ ✉️ TRASHËGIMTARË TË KONTAKTUAR ¦ ✉️ WERRIETA KKUNTATTJATI
+Relance ¦ Kujtesë ¦ Tfakkira
+📋 Ranger dans le Registre de courriers ¦ 📋 Ruaj në Regjistrin e letrave ¦ 📋 Issalva fir-Reġistru tal-ittri
+pas d’adresse dans le Répertoire des vivants ¦ asnjë adresë në Numëratorin e të gjallëve ¦ l-ebda indirizz fid-Direttorju tal-ħajjin
+Premier contact ¦ Kontakti i parë ¦ L-ewwel kuntatt
+Contrat de révélation ¦ Kontratë zbulimi ¦ Kuntratt ta’ żvelar
+Relance dans (jours) ¦ Kujtesë pas (ditësh) ¦ Tfakkira wara (jiem)
+Le nom du défunt n’est pas écrit : il est révélé après la signature. ¦ Emri i të ndjerit nuk shkruhet: zbulohet pas nënshkrimit. ¦ L-isem tal-mejjet mhuwiex miktub: jiġi żvelat wara l-firma.
+La lettre (tu peux la retoucher ; le nom de chaque héritier est mis tout seul) ¦ Letra (mund ta ndryshosh; emri i çdo trashëgimtari vendoset vetë) ¦ L-ittra (tista’ timmodifikaha; l-isem ta’ kull werriet jitqiegħed waħdu)
+📝 Traitement de texte ¦ 📝 Përpunues teksti ¦ 📝 Proċessur tal-kliem
+Coche au moins un héritier. ¦ Shëno të paktën një trashëgimtar. ¦ Immarka mill-inqas werriet wieħed.
+Courriers aux héritiers ¦ Letra për trashëgimtarët ¦ Ittri lill-werrieta
+Recherche d’héritiers ¦ Kërkim trashëgimtarësh ¦ Tiftix tal-werrieta
+Ton logiciel de courriel s’ouvre : relis la lettre et envoie-la toi-même. Rien n’est envoyé par l’app. ¦ Hapet programi yt i emailit: rilexoje letrën dhe dërgoje vetë. Aplikacioni nuk dërgon asgjë. ¦ Jinfetaħ il-programm tal-email tiegħek: erġa’ aqra l-ittra u ibgħatha int. L-app ma tibgħat xejn.
+Premier contact + contrat ¦ Kontakt i parë + kontratë ¦ L-ewwel kuntatt + kuntratt
+{n} rangés dans le Registre de courriers ¦ {n} të ruajtura në Regjistrin e letrave ¦ Issalvati fir-Reġistru tal-ittri: {n}
+N. ¦ L. ¦ T.
+D. ¦ V. ¦ M.
+M. ¦ M. ¦ Ż.
+Div. ¦ Div. ¦ Div.
+Ren. ¦ Heq. ¦ Rin.
+(à fournir) ¦ (për t’u sjellë) ¦ (biex jingħata)
+repr. {who} ¦ përf. {who} ¦ rappr. {who}
+existence à ce jour non établie ¦ ekzistenca ende e paprovuar ¦ eżistenza għadha mhux stabbilita
+TABLEAU GÉNÉALOGIQUE ¦ TABELË GJENEALOGJIKE ¦ TABELLA ĠENEALOĠIKA
+Succession de {name}, décédé(e) à {place} le {date} ¦ Trashëgimia e {name}, vdekur në {place} më {date} ¦ Suċċessjoni ta’ {name}, miet f’{place} fi {date}
+Dossier {n} · Réf. notaire {ref} ¦ Dosja {n} · Ref. e noterit {ref} ¦ Fajl {n} · Ref. tan-nutar {ref}
+Calcul établi d’après les actes cités, art. 731 et suiv. du Code civil, sous réserve de vérification par le notaire. N. = naissance, M. = mariage, D. = décès. ¦ Llogaritje sipas akteve të përmendura, nenet 731 e në vijim të Kodit Civil francez, me rezervën e verifikimit nga noteri. L. = lindje, M. = martesë, V. = vdekje. ¦ Kalkolu magħmul fuq l-atti msemmija, art. 731 u ta’ wara tal-Kodiċi Ċivili Franċiż, soġġett għall-verifika tan-nutar. T. = twelid, Ż. = żwieġ, M. = mewt.
+Communs à tous : {list}. ¦ Të përbashkëta për të gjithë: {list}. ¦ Komuni għal kulħadd: {list}.
+Hypothèse retenue : {h} ¦ Hipoteza e mbajtur: {h} ¦ Ipoteżi miżmuma: {h}
+à préciser ¦ për t’u saktësuar ¦ biex tiġi speċifikata
+Liste des pièces ¦ Lista e dokumenteve ¦ Lista tad-dokumenti
+Page {n} / 3 ¦ Faqja {n} / 3 ¦ Paġna {n} / 3
+Un PDF sobre, une source pour chaque lien ¦ Një PDF i thjeshtë, një burim për çdo lidhje ¦ PDF sempliċi, sors għal kull rabta
+📝 Ouvrir dans le traitement de texte ¦ 📝 Hape në përpunuesin e tekstit ¦ 📝 Iftaħ fil-proċessur tal-kliem
+Joindre les adresses des héritiers ¦ Bashkëngjit adresat e trashëgimtarëve ¦ Ehmeż l-indirizzi tal-werrieta
+Aucune photo ni note privée : les noms, les qualités, les parts et les sources. Pas d’adresse sauf si la case est cochée. ¦ Asnjë foto dhe asnjë shënim privat: emra, cilësi, pjesë dhe burime. Pa adresë, përveç nëse kutia është shënuar. ¦ L-ebda ritratt u l-ebda nota privata: ismijiet, kwalitajiet, sehem u sorsi. L-ebda indirizz ħlief jekk il-kaxxa hija mmarkata.
+Tableau généalogique — {n} ¦ Tabelë gjenealogjike — {n} ¦ Tabella ġenealoġika — {n}
+Tableau pour le notaire : PDF ou impression (3 pages) ¦ Tabela për noterin: PDF ose shtypje (3 faqe) ¦ Tabella għan-nutar: PDF jew stampar (3 paġni)
+Tableau pour le notaire : ouvert dans le traitement de texte ¦ Tabela për noterin: hapur në përpunuesin e tekstit ¦ Tabella għan-nutar: miftuħa fil-proċessur tal-kliem
+Tableau pour le notaire : copie rangée dans les médias ¦ Tabela për noterin: kopje e ruajtur në media ¦ Tabella għan-nutar: kopja salvata fil-midja
+🕓 Journal du dossier {n} ¦ 🕓 Ditari i dosjes {n} ¦ 🕓 Ir-reġistru tal-fajl {n}
+(on ne peut ni le modifier ni l’effacer) ¦ (nuk mund të ndryshohet as të fshihet) ¦ (ma jistax jinbidel jew jitħassar)
+⤓ Exporter le journal (CSV) ¦ ⤓ Eksporto ditarin (CSV) ¦ ⤓ Esporta r-reġistru (CSV)
+Les changements des fiches restent dans Réglages → Journal des modifications. ¦ Ndryshimet e regjistrimeve mbeten edhe te Cilësimet → Ditari i ndryshimeve. ¦ It-tibdiliet tar-reġistrazzjonijiet jibqgħu wkoll f’Settings → Reġistru tat-tibdiliet.
+Action ¦ Veprim ¦ Azzjoni
+Journal exporté (CSV) ¦ Ditari u eksportua (CSV) ¦ Reġistru esportat (CSV)
+Le temps passé, les frais, les honoraires des contrats ¦ Koha e shpenzuar, shpenzimet, honoraret e kontratave ¦ Il-ħin mgħoddi, l-ispejjeż, il-ħlasijiet tal-kuntratti
+＋ Temps ¦ ＋ Kohë ¦ ＋ Ħin
+＋ Frais ¦ ＋ Shpenzime ¦ ＋ Spejjeż
+＋ Honoraires d’un contrat ¦ ＋ Honorar i një kontrate ¦ ＋ Ħlas ta’ kuntratt
+🖨 Relevé ¦ 🖨 Pasqyrë ¦ 🖨 Rendikont
+{h} h {m} min passées ¦ {h} orë {m} min të shpenzuara ¦ {h} siegħa {m} min mgħoddija
+Frais : {s} ¦ Shpenzime: {s} ¦ Spejjeż: {s}
+{n} contrats ¦ Kontrata: {n} ¦ Kuntratti: {n}
+{h} h {m} min ¦ {h} orë {m} min ¦ {h} siegħa {m} min
+Rien de noté. ¦ Asgjë e shënuar. ¦ Xejn imniżżel.
+Aucun montant de succession n’est noté. ¦ Asnjë shumë e trashëgimisë nuk shënohet. ¦ L-ebda ammont tas-suċċessjoni ma jitniżżel.
+💶 TEMPS ET FRAIS ¦ 💶 KOHA DHE SHPENZIMET ¦ 💶 ĦIN U SPEJJEŻ
+Copie d’acte, déplacement… ¦ Kopje akti, udhëtim… ¦ Kopja ta’ att, vjaġġ…
+Recherches aux AD, appels… ¦ Kërkime në arkiva, telefonata… ¦ Riċerki fl-arkivji, telefonati…
+Contrat signé ¦ Kontrata u nënshkrua ¦ Kuntratt iffirmat
+Heures ¦ Orë ¦ Sigħat
+Minutes ¦ Minuta ¦ Minuti
+Montant (€) ¦ Shuma (€) ¦ Ammont (€)
+🌍 HÉRITIER À L’ÉTRANGER ¦ 🌍 TRASHËGIMTAR JASHTË VENDIT ¦ 🌍 WERRIET BARRA L-PAJJIŻ
+Chercher {name} hors de France ¦ Kërko {name} jashtë Francës ¦ Fittex lil {name} barra minn Franza
+Les services à interroger ¦ Shërbimet për t’u pyetur ¦ Is-servizzi li għandhom jiġu mistoqsija
+📮 Demander l’acte au Service central d’état civil ¦ 📮 Kërko aktin në Shërbimin qendror të gjendjes civile ¦ 📮 Itlob l-att mis-Servizz ċentrali tal-istat ċivili
+Langue de la lettre ¦ Gjuha e letrës ¦ Lingwa tal-ittra
+Destinataire ¦ Marrësi ¦ Destinatarju
+Registro civil de …, consulat de France à … ¦ Registro civil de …, konsullata e Francës në … ¦ Registro civil de …, konsulat ta’ Franza f’…
+La lettre (dans la langue du pays) ¦ Letra (në gjuhën e vendit) ¦ L-ittra (bil-lingwa tal-pajjiż)
+Lettre à l’étranger ¦ Letër jashtë vendit ¦ Ittra lejn barra
+Recherche d’un héritier à l’étranger : {name} ¦ Kërkim i një trashëgimtari jashtë vendit: {name} ¦ Tiftix ta’ werriet barra l-pajjiż: {name}
+Courrier rangé dans le Registre de courriers ¦ Letra u ruajt në Regjistrin e letrave ¦ Ittra salvata fir-Reġistru tal-ittri
+❔ ABSENTS ET DISPARUS ¦ ❔ TË MUNGUAR DHE TË ZHDUKUR ¦ ❔ ASSENTI U NIEQSA
+{name} : absent ou disparu ? ¦ {name}: i munguar apo i zhdukur? ¦ {name}: assenti jew nieqes?
+art. {a} ¦ neni {a} ¦ art. {a}
+Le calcul lit ce statut : un présumé absent est compté vivant, sa part est « réservée » ; un déclaré absent est compté comme mort avant. ¦ Llogaritja e lexon këtë gjendje: i supozuari i munguar llogaritet i gjallë, pjesa e tij «rezervohet»; i shpallur i munguar llogaritet si i vdekur më parë. ¦ Il-kalkolu jaqra dan l-istatus: assenti preżunt jitqies ħaj, is-sehem tiegħu «riżervat»; dikjarat assenti jitqies li miet qabel.
+Présumé absent ¦ I supozuar i munguar ¦ Preżunt assenti
+Déclaré absent ou jugement de décès ¦ Shpallur i munguar ose i vdekur ¦ Dikjarat assenti jew sentenza ta’ mewt
+{name} : statut retenu changé, dévolution recalculée ¦ {name}: gjendja e mbajtur u ndryshua, trashëgimia u rillogarit ¦ {name}: status miżmum inbidel, devoluzzjoni kkalkulata mill-ġdid
+Héritier à retrouver : {name}{born} — vivant ? décédé ? des enfants ? (dossier de succession {n}) ¦ Trashëgimtar për t’u gjetur: {name}{born} — i gjallë? i vdekur? fëmijë? (dosja e trashëgimisë {n}) ¦ Werriet biex jinstab: {name}{born} — ħaj? mejjet? tfal? (fajl tas-suċċessjoni {n})
+(né en {y}) ¦ (lindur më {y}) ¦ (imwieled fl-{y})
+Descendance de {name} (mort avant le défunt) : un enfant reconnu ou naturel ? (dossier de succession {n}) ¦ Pasardhësit e {name} (vdiq para të ndjerit): një fëmijë i njohur ose jashtëmartesor? (dosja e trashëgimisë {n}) ¦ Dixxendenti ta’ {name} (miet qabel il-mejjet): tifel rikonoxxut jew naturali? (fajl tas-suċċessjoni {n})
+Branche à chercher autour de {name} (dossier de succession {n}) ¦ Degë për t’u kërkuar rreth {name} (dosja e trashëgimisë {n}) ¦ Fergħa x’tinstab madwar {name} (fajl tas-suċċessjoni {n})
+Piste ouverte dans le Journal des recherches : {name} ¦ Gjurmë e hapur në Ditarin e kërkimeve: {name} ¦ Traċċa miftuħa fir-Reġistru tar-riċerki: {name}
+Piste ajoutée : Recherche → 🗓 Journal des recherches ¦ Gjurmë e shtuar: Kërkim → 🗓 Ditari i kërkimeve ¦ Traċċa miżjuda: Riċerka → 🗓 Reġistru tar-riċerki
+🗂 TABLES DES SUCCESSIONS DES AD ¦ 🗂 REGJISTRAT E TRASHËGIMIVE NË ARKIVA ¦ 🗂 REĠISTRI TAS-SUĊĊESSJONIJIET TAL-ARKIVJI
+Dépouiller les tables de successions et absences ¦ Shqyrto regjistrat e trashëgimive dhe mungesave ¦ Eżamina r-reġistri tas-suċċessjonijiet u l-assenzi
+Ajouter au suivi ¦ Shto në ndjekje ¦ Żid mas-segwitu
+Les tables de successions et absences et les mutations par décès (série Q des Archives départementales) donnent la date et le bureau de chaque succession. Coche les personnes à chercher : une ligne « à faire » chacune. ¦ Regjistrat e trashëgimive dhe mungesave dhe regjistrat e kalimeve për shkak vdekjeje (seria Q e arkivave departamentale) japin datën dhe zyrën e çdo trashëgimie. Shëno personat për t’u kërkuar: një rresht «për t’u bërë» secili. ¦ Ir-reġistri tas-suċċessjonijiet u l-assenzi u r-reġistri tat-trasferimenti minħabba mewt (serje Q tal-arkivji dipartimentali) jagħtu d-data u l-uffiċċju ta’ kull suċċessjoni. Immarka l-persuni li jridu jinstabu: linja «x’għandu jsir» għal kull waħda.
+Coche au moins une personne. ¦ Shëno të paktën një person. ¦ Immarka mill-inqas persuna waħda.
+Tables des successions et absences, mutations par décès (série Q) : {name}{d} ¦ Regjistrat e trashëgimive dhe mungesave, kalime për shkak vdekjeje (seria Q): {name}{d} ¦ Reġistri tas-suċċessjonijiet u l-assenzi, trasferimenti minħabba mewt (serje Q): {name}{d}
+Tables des successions : {n} à dépouiller ¦ Regjistrat e trashëgimive: {n} për t’u shqyrtuar ¦ Reġistri tas-suċċessjonijiet: {n} x’jiġu eżaminati
+{n} ajoutés aux dépouillements ¦ {n} të shtuara te shqyrtimet ¦ Miżjuda mal-eżamijiet: {n}
+État : {s} ¦ Gjendja: {s} ¦ Stat: {s}
+📋 LISTE DE CONTRÔLE ¦ 📋 LISTA E KONTROLLIT ¦ 📋 LISTA TA’ KONTROLL
+Avant « Remis au notaire » ¦ Para «Dorëzuar noterit» ¦ Qabel «Mgħoddi lin-nutar»
+Remis au notaire ¦ Dorëzuar noterit ¦ Mgħoddi lin-nutar
+Remettre quand même ¦ Dorëzo gjithsesi ¦ Għaddi xorta
+Tout n’est pas prêt : corrige d’abord, ou remets quand même (ce sera noté au journal). ¦ Jo gjithçka është gati: korrigjo së pari ose dorëzo gjithsesi (do të shënohet në ditar). ¦ Mhux kollox lest: ikkoreġi l-ewwel, jew għaddi xorta (jitniżżel fir-reġistru).
+Les adresses des vivants seront retirées du dossier et de ses courriers. Le journal reste. Continuer ? ¦ Adresat e të gjallëve do të hiqen nga dosja dhe letrat e saj. Ditari mbetet. Të vazhdohet? ¦ L-indirizzi tal-ħajjin jitneħħew mill-fajl u mill-ittri tiegħu. Ir-reġistru jibqa’. Tkompli?
+Archiver ¦ Arkivo ¦ Arkivja
+Dossier archivé. ¦ Dosja u arkivua. ¦ Fajl arkivjat.
+ÉCHÉANCE ¦ AFAT ¦ SKADENZA
+Remettre le tableau généalogique au notaire ¦ Dorëzo tabelën gjenealogjike te noteri ¦ Għaddi t-tabella ġenealoġika lin-nutar
+Remise au notaire ¦ Dorëzim te noteri ¦ Għoti lin-nutar
+Rendez-vous ¦ Takim ¦ Appuntament
+Échéance ajoutée ¦ Afati u shtua ¦ Skadenza miżjuda
+Échéance supprimée ¦ Afati u fshi ¦ Skadenza mħassra
+Répertoire des vivants : « ＋ Contact », puis relie la fiche de l’héritier. ¦ Numëratori i të gjallëve: «＋ Kontakt», pastaj lidh regjistrimin e trashëgimtarit. ¦ Direttorju tal-ħajjin: «＋ Kuntatt», imbagħad orbot ir-reġistrazzjoni tal-werriet.
+Relevé de temps et de frais — {n} ¦ Pasqyrë e kohës dhe shpenzimeve — {n} ¦ Rendikont tal-ħin u l-ispejjeż — {n}
+Arbre de dévolution — {n} ¦ Pema e trashëgimisë — {n} ¦ Siġra tad-devoluzzjoni — {n}
+Arbre de dévolution imprimé ¦ Pema e trashëgimisë u shtyp ¦ Siġra tad-devoluzzjoni stampata
+Hypothèse retenue enregistrée ¦ Hipoteza e mbajtur u ruajt ¦ Ipoteżi miżmuma salvata
+Échéance faite ¦ Afati u krye ¦ Skadenza magħmula
+Échéance à faire ¦ Afati për t’u kryer ¦ Skadenza x’issir
+Pièce : {s} ¦ Dokumenti: {s} ¦ Dokument: {s}
+Courrier mis à jour ¦ Letra u përditësua ¦ Ittra aġġornata
+Rechercher les héritiers… ¦ Kërko trashëgimtarët… ¦ Fittex il-werrieta…
+Pas en mode consultation. ¦ Jo në mënyrën e shikimit. ¦ Mhux fil-modalità ta’ wiri.
+Les dossiers n’ont pas pu être lus. ¦ Dosjet nuk mund të lexoheshin. ¦ Il-fajls ma setgħux jinqraw.
+Aucun dossier en cours. ¦ Asnjë dosje në punë. ¦ L-ebda fajl għaddej.
+Dossier {n} ¦ Dosja {n} ¦ Fajl {n}
+⚖️ Dossiers de succession ¦ ⚖️ Dosje trashëgimie ¦ ⚖️ Fajls tas-suċċessjoni
+Signé le {d} ¦ Nënshkruar më {d} ¦ Iffirmat fi {d}
+Dossier de succession ¦ Dosje trashëgimie ¦ Fajl tas-suċċessjoni
+Tous les courriers ¦ Të gjitha letrat ¦ L-ittri kollha
+l’héritier ¦ trashëgimtari ¦ il-werriet
+Branche paternelle : {who} ¦ Dega atërore: {who} ¦ Fergħa tal-missier: {who}
+Branche maternelle : {who} ¦ Dega amtare: {who} ¦ Fergħa tal-omm: {who}
+Tous les enfants sont communs : le conjoint choisit l’usufruit de tout, ou le quart en pleine propriété (art. 757). Le calcul montre le quart. ¦ Të gjithë fëmijët janë të përbashkët: bashkëshorti zgjedh uzufruktin e gjithçkaje ose një të katërtën në pronësi të plotë (neni 757). Llogaritja tregon të katërtën. ¦ It-tfal kollha huma komuni: il-konjuġi jagħżel l-użufrutt ta’ kollox jew kwart bi proprjetà sħiħa (art. 757). Il-kalkolu juri l-kwart.
+Un enfant au moins n’est pas commun aux deux époux : le conjoint reçoit le quart en pleine propriété (art. 757). ¦ Të paktën një fëmijë nuk është i përbashkët për të dy bashkëshortët: bashkëshorti merr një të katërtën në pronësi të plotë (neni 757). ¦ Mill-inqas wild wieħed mhuwiex komuni għaż-żewġ konjuġi: il-konjuġi jieħu kwart bi proprjetà sħiħa (art. 757).
+1er ordre : les enfants et, par représentation, les descendants d’un enfant prédécédé ou renonçant ; partage par souche (art. 735, 752, 753). ¦ Radha 1: fëmijët dhe, me përfaqësim, pasardhësit e një fëmije të vdekur më parë ose që ka hequr dorë; ndarje sipas trungjeve (nenet 735, 752, 753). ¦ L-ewwel ordni: it-tfal u, b’rappreżentazzjoni, id-dixxendenti ta’ wild li miet qabel jew li rrinunzja; qsim skont iz-zkuk (art. 735, 752, 753).
+Sans descendant, avec le père et la mère : la moitié au conjoint, un quart à chaque parent (art. 757-1). ¦ Pa pasardhës, me babanë dhe nënën: gjysma bashkëshortit, një e katërta secilit prind (neni 757-1). ¦ Mingħajr dixxendenti, mal-missier u l-omm: nofs lill-konjuġi, kwart lil kull ġenitur (art. 757-1).
+Sans descendant, avec un seul parent : trois quarts au conjoint, un quart au parent (art. 757-1). ¦ Pa pasardhës, me një prind: tri të katërtat bashkëshortit, një e katërta prindit (neni 757-1). ¦ Mingħajr dixxendenti, ma’ ġenitur wieħed: tliet kwarti lill-konjuġi, kwart lill-ġenitur (art. 757-1).
+Sans descendant ni père ni mère : le conjoint recueille toute la succession (art. 757-2). Les frères et sœurs peuvent avoir un droit de retour sur les biens de famille (art. 757-3) : à voir avec le notaire. ¦ Pa pasardhës, baba dhe nënë: bashkëshorti merr gjithë trashëgiminë (neni 757-2). Vëllezërit dhe motrat mund të kenë të drejtë kthimi mbi pasurinë familjare (neni 757-3): për t’u parë me noterin. ¦ Mingħajr dixxendenti, missier u omm: il-konjuġi jieħu s-suċċessjoni kollha (art. 757-2). L-aħwa jista’ jkollhom dritt ta’ ritorn fuq il-beni tal-familja (art. 757-3): ara man-nutar.
+Le père et la mère ont chacun un quart, les frères et sœurs (ou leurs descendants) la moitié (art. 738). ¦ Babai dhe nëna marrin secili një të katërtën, vëllezërit dhe motrat (ose pasardhësit e tyre) gjysmën (neni 738). ¦ Il-missier u l-omm jieħdu kwart kull wieħed, l-aħwa (jew id-dixxendenti tagħhom) nofs (art. 738).
+Le parent survivant a un quart, les frères et sœurs (ou leurs descendants) trois quarts (art. 738). ¦ Prindi i mbijetuar merr një të katërtën, vëllezërit dhe motrat (ose pasardhësit e tyre) tri të katërtat (neni 738). ¦ Il-ġenitur superstiti jieħu kwart, l-aħwa (jew id-dixxendenti tagħhom) tliet kwarti (art. 738).
+Père et mère décédés : les frères et sœurs ou leurs descendants prennent tout (art. 737). ¦ Babai dhe nëna të vdekur: vëllezërit dhe motrat ose pasardhësit e tyre marrin gjithçka (neni 737). ¦ Missier u omm mejtin: l-aħwa jew id-dixxendenti tagħhom jieħdu kollox (art. 737).
+Frères et sœurs germains, consanguins ou utérins : parts égales, par souche (art. 744, 752-2, 753 ; loi du 3 décembre 2001). ¦ Vëllezër e motra të plotë dhe gjysmëvëllezër e gjysmëmotra nga babai ose nëna: pjesë të barabarta, sipas trungjeve (nenet 744, 752-2, 753; ligji i 3 dhjetorit 2001). ¦ Aħwa sħaħ u nofs aħwa min-naħa tal-missier jew tal-omm: sehem ugwali, skont iz-zkuk (art. 744, 752-2, 753; liġi tat-3 ta’ Diċembru 2001).
+Sans descendant ni frère ni sœur : le père et la mère ont chacun la moitié (art. 736). ¦ Pa pasardhës dhe pa vëllezër e motra: babai dhe nëna marrin secili gjysmën (neni 736). ¦ Mingħajr dixxendenti u aħwa: il-missier u l-omm jieħdu nofs kull wieħed (art. 736).
+Un seul parent, sans frère ni sœur, mais des ascendants dans l’autre branche : moitié au parent, moitié à ces ascendants (art. 738-1). ¦ Vetëm një prind, pa vëllezër e motra, por me paraardhës në degën tjetër: gjysma prindit, gjysma këtyre paraardhësve (neni 738-1). ¦ Ġenitur wieħed biss, mingħajr aħwa, iżda b’axxendenti fil-fergħa l-oħra: nofs lill-ġenitur, nofs lil dawk l-axxendenti (art. 738-1).
+Le parent survivant, seul de son ordre, recueille la succession. ¦ Prindi i mbijetuar, i vetëm në radhën e tij, merr trashëgiminë. ¦ Il-ġenitur superstiti, waħdu fl-ordni tiegħu, jieħu s-suċċessjoni.
+3e ordre : moitié pour chaque branche ; dans chacune, l’ascendant le plus proche prend tout (art. 747-748). ¦ Radha 3: gjysma për çdo degë; në secilën paraardhësi më i afërt merr gjithçka (nenet 747-748). ¦ It-tielet ordni: nofs għal kull fergħa; f’kull waħda l-eqreb axxendent jieħu kollox (art. 747-748).
+3e ordre : une seule branche a encore un ascendant ; il recueille toute la succession, même les cousins de l’autre branche sont écartés (art. 748). ¦ Radha 3: vetëm një degë ka ende paraardhës; ai merr gjithë trashëgiminë, madje edhe kushërinjtë e degës tjetër përjashtohen (neni 748). ¦ It-tielet ordni: fergħa waħda biss għad għandha axxendent; dan jieħu s-suċċessjoni kollha, anke l-kuġini tal-fergħa l-oħra huma esklużi (art. 748).
+4e ordre : moitié pour chaque branche ; dans chacune, le collatéral le plus proche en degré prend tout, sans représentation (art. 749-750). ¦ Radha 4: gjysma për çdo degë; në secilën i afërmi anësor më i afërt në shkallë merr gjithçka, pa përfaqësim (nenet 749-750). ¦ Ir-raba’ ordni: nofs għal kull fergħa; f’kull waħda l-kollaterali l-eqreb fil-grad jieħu kollox, mingħajr rappreżentazzjoni (art. 749-750).
+4e ordre : personne dans une branche, l’autre branche recueille tout (art. 750). ¦ Radha 4: askush në një degë, dega tjetër merr gjithçka (neni 750). ¦ Ir-raba’ ordni: ħadd f’fergħa, il-fergħa l-oħra tieħu kollox (art. 750).
+Les collatéraux ne succèdent pas au-delà du 6e degré (art. 745). ¦ Të afërmit anësorë nuk trashëgojnë përtej shkallës së 6-të (neni 745). ¦ Il-kollaterali ma jirtux lil hinn mis-6 grad (art. 745).
+Le défunt n’est pas dans la base. ¦ I ndjeri nuk është në bazë. ¦ Il-mejjet mhuwiex fil-bażi.
+si {name} n’était pas marié avec le défunt (PACS ou union libre) ¦ nëse {name} nuk ishte i martuar me të ndjerin (PACS ose bashkëjetesë) ¦ jekk {name} ma kienx miżżewweġ lill-mejjet (PACS jew koabitazzjoni)
+si {name} est mort avant, représenté par ses descendants ¦ nëse {name} vdiq më parë, i përfaqësuar nga pasardhësit e tij ¦ jekk {name} miet qabel, rappreżentat mid-dixxendenti tiegħu
+si {name} est mort avant sans descendant ¦ nëse {name} vdiq më parë pa pasardhës ¦ jekk {name} miet qabel mingħajr dixxendenti
+Enfants et descendants, avec représentation ¦ Fëmijë dhe pasardhës, me përfaqësim ¦ Tfal u dixxendenti, b’rappreżentazzjoni
+Père et mère, frères et sœurs et leurs descendants (« parents privilégiés ») ¦ Babai dhe nëna, vëllezërit e motrat dhe pasardhësit e tyre («të afërm të privilegjuar») ¦ Missier u omm, aħwa u d-dixxendenti tagħhom («qraba privileġġjati»)
+Autres ascendants (grands-parents…), fente paternelle / maternelle ¦ Paraardhës të tjerë (gjyshërit…), ndarje atërore / amtare ¦ Axxendenti oħra (nanniet…), qsim min-naħa tal-missier / tal-omm
+Oncles, tantes, cousins… jusqu’au 6e degré (art. 745) ¦ Xhaxhallarë, tezet, kushërinj… deri në shkallën e 6-të (neni 745) ¦ Zijiet, zijiet nisa, kuġini… sas-6 grad (art. 745)
+Vivant au décès ? Mort avant ? Des enfants ? Sa réponse change la part des autres. ¦ I gjallë në vdekje? Vdiq më parë? Fëmijë? Përgjigjja ndryshon pjesët e të tjerëve. ¦ Ħaj fil-mewt? Miet qabel? Tfal? It-tweġiba tbiddel is-sehem tal-oħrajn.
+Mort avant le défunt, sans descendance connue : un enfant, même reconnu tard, changerait le partage. ¦ Vdiq para të ndjerit, pa pasardhës të njohur: një fëmijë, edhe i njohur vonë, do ta ndryshonte ndarjen. ¦ Miet qabel il-mejjet, l-ebda dixxendent magħruf: wild, anke rikonoxxut tard, ibiddel il-qsim.
+Aucun enfant du défunt dans la base : à vérifier (mentions en marge de l’acte de naissance, livret de famille). ¦ Asnjë fëmijë i të ndjerit në bazë: për t’u verifikuar (shënimet anësore të aktit të lindjes, libreza familjare). ¦ L-ebda wild tal-mejjet fil-bażi: irid jiġi vverifikat (noti marġinali fuq l-att tat-twelid, ktieb tal-familja).
+Les parents du défunt ne sont pas dans la base : sans eux, l’app ne trouve ni frères, ni sœurs, ni cousins. ¦ Prindërit e të ndjerit nuk janë në bazë: pa ta, aplikacioni nuk gjen as vëllezër e motra, as kushërinj. ¦ Il-ġenituri tal-mejjet mhumiex fil-bażi: mingħajrhom l-app ma ssibx aħwa jew kuġini.
+Un seul parent du défunt est dans la base : l’autre branche reste à chercher. ¦ Vetëm një prind i të ndjerit është në bazë: dega tjetër mbetet për t’u kërkuar. ¦ Ġenitur wieħed biss tal-mejjet hu fil-bażi: il-fergħa l-oħra għad trid tinstab.
+Adoption : plénière ou simple ? Une adoption plénière coupe les liens avec la famille d’origine. ¦ Birësim: i plotë apo i thjeshtë? Birësimi i plotë i këput lidhjet me familjen e origjinës. ¦ Adozzjoni: sħiħa jew sempliċi? Adozzjoni sħiħa taqta’ r-rabtiet mal-familja tal-oriġini.
+Couple sans mariage noté : seul un conjoint marié hérite sans testament (pas le partenaire de PACS ni le concubin). ¦ Çift pa martesë të shënuar: pa testament trashëgon vetëm bashkëshorti i martuar (jo partneri i PACS apo bashkëjetuesi). ¦ Koppja mingħajr żwieġ imniżżel: mingħajr testment jiret biss konjuġi miżżewweġ (mhux is-sieħeb tal-PACS jew il-koabitant).
+Un seul parent noté : relie sa fiche à son autre parent (frère germain ou demi-frère). ¦ Vetëm një prind i shënuar: lidhe regjistrimin me prindin tjetër (vëlla i plotë ose gjysmëvëlla). ¦ Ġenitur wieħed biss imniżżel: orbot ir-reġistrazzjoni mal-ġenitur l-ieħor (ħu sħiħ jew nofs ħu).
+Personne dans la branche paternelle jusqu’au 6e degré : oncles, tantes et cousins du père à chercher. ¦ Askush në degën atërore deri në shkallën e 6-të: duhen kërkuar xhaxhallarët, hallat dhe kushërinjtë e babait. ¦ Ħadd fil-fergħa tal-missier sas-6 grad: iz-zijiet u l-kuġini tal-missier iridu jinstabu.
+Personne dans la branche maternelle jusqu’au 6e degré : oncles, tantes et cousins de la mère à chercher. ¦ Askush në degën amtare deri në shkallën e 6-të: duhen kërkuar dajat, tezet dhe kushërinjtë e nënës. ¦ Ħadd fil-fergħa tal-omm sas-6 grad: iz-zijiet u l-kuġini tal-omm iridu jinstabu.
+Vivant, mais pas d’adresse dans le Répertoire des vivants. ¦ I gjallë, por pa adresë në Numëratorin e të gjallëve. ¦ Ħaj, iżda l-ebda indirizz fid-Direttorju tal-ħajjin.
+Mort après le défunt : sa part passe à ses propres héritiers (sa succession à lui). ¦ Vdiq pas të ndjerit: pjesa e tij u kalon trashëgimtarëve të tij (trashëgimia e tij vetjake). ¦ Miet wara l-mejjet: is-sehem tiegħu jgħaddi lill-werrieta tiegħu stess (is-suċċessjoni tiegħu stess).
+Présumé absent : sa part est réservée (art. 112 à 132). ¦ I supozuar i munguar: pjesa e tij është e rezervuar (nenet 112 deri 132). ¦ Preżunt assenti: is-sehem tiegħu huwa riżervat (art. 112 sa 132).
+Date du décès inconnue : l’app ne peut pas dire qui était mort avant ni quel droit s’applique. ¦ Data e vdekjes e panjohur: aplikacioni nuk mund të thotë kush vdiq më parë as cila e drejtë zbatohet. ¦ Data tal-mewt mhux magħrufa: l-app ma tistax tgħid min miet qabel u lanqas liema liġi tapplika.
+Décès du {date} : le droit de l’époque n’est pas celui d’aujourd’hui. Avant le 1er juillet 2002 (loi du 3 décembre 2001), le conjoint survivant avait surtout de l’usufruit, les enfants nés hors mariage n’avaient pas tous les mêmes droits et les frères et sœurs de lits différents se partageaient par lignes. Avant le 1er août 1972, les enfants naturels avaient des droits réduits. L’app calcule ici selon le droit actuel : le notaire applique le droit de la date. ¦ Vdekje më {date}: e drejta e asaj kohe nuk është e sotmja. Para 1 korrikut 2002 (ligji i 3 dhjetorit 2001), bashkëshorti i mbijetuar kishte kryesisht uzufrukt, fëmijët e lindur jashtë martese nuk kishin të gjithë të njëjtat të drejta dhe vëllezërit e motrat nga martesa të ndryshme ndanin sipas vijave. Para 1 gushtit 1972, fëmijët jashtëmartesorë kishin të drejta të kufizuara. Aplikacioni llogarit këtu sipas së drejtës në fuqi: noteri zbaton të drejtën e datës. ¦ Mewt fi {date}: il-liġi ta’ dak iż-żmien mhijiex dik tal-lum. Qabel l-1 ta’ Lulju 2002 (liġi tat-3 ta’ Diċembru 2001), il-konjuġi superstiti kellu l-aktar użufrutt, it-tfal imwielda barra ż-żwieġ ma kellhomx kollha l-istess drittijiet u l-aħwa minn żwiġijiet differenti kienu jaqsmu skont il-linji. Qabel l-1 ta’ Awwissu 1972, it-tfal naturali kellhom drittijiet imnaqqsa. L-app tikkalkula hawn skont il-liġi attwali: in-nutar japplika l-liġi tad-data.
+Décès avant le 1er janvier 2007 (loi du 23 juin 2006) : on ne pouvait pas représenter un héritier qui avait renoncé. ¦ Vdekje para 1 janarit 2007 (ligji i 23 qershorit 2006): një trashëgimtar që kishte hequr dorë nuk mund të përfaqësohej. ¦ Mewt qabel l-1 ta’ Jannar 2007 (liġi tat-23 ta’ Ġunju 2006): ma setax jiġi rappreżentat werriet li kien irrinunzja.
+Décès en 2002 sans date précise : avant ou après le 1er juillet 2002, le droit change. Précise la date. ¦ Vdekje më 2002 pa datë të saktë: para dhe pas 1 korrikut 2002 e drejta ndryshon. Saktëso datën. ¦ Mewt fl-2002 mingħajr data preċiża: qabel jew wara l-1 ta’ Lulju 2002, il-liġi tinbidel. Speċifika d-data.
+Divorce ¦ Divorc ¦ Divorzju
+La naissance de {name} ¦ Lindja e {name} ¦ It-twelid ta’ {name}
+Le décès de {name} ¦ Vdekja e {name} ¦ Il-mewt ta’ {name}
+Le mariage avec {name}, non dissous ¦ Martesa me {name}, e pazgjidhur ¦ Iż-żwieġ ma’ {name}, mhux xolt
+Le divorce d’avec {name} ¦ Divorci nga {name} ¦ Id-divorzju minn {name}
+Pas de conjoint survivant : décès de {name} ¦ Asnjë bashkëshort i mbijetuar: vdekja e {name} ¦ L-ebda konjuġi superstiti: il-mewt ta’ {name}
+{name} est mort avant ¦ {name} vdiq më parë ¦ {name} miet qabel
+Commun à tous ¦ E përbashkët për të gjithë ¦ Komuni għal kulħadd
+{name} a renoncé à la succession ¦ {name} hoqi dorë nga trashëgimia ¦ {name} irrinunzja għas-suċċessjoni
+{name} est mort avant (représenté) ¦ {name} vdiq më parë (i përfaqësuar) ¦ {name} miet qabel (rappreżentat)
+Son nom d’épouse ¦ Mbiemri i saj i martesës ¦ Il-kunjom tagħha miżżewġa
+{name} (pour l’écarter) ¦ {name} (për ta përjashtuar) ¦ {name} (biex jiġi eskluż)
+Mort avant le défunt, sans enfant ¦ Vdiq para të ndjerit, pa fëmijë ¦ Miet qabel il-mejjet, mingħajr tfal
+Chaque héritier a ses actes : il en manque pour {who}. ¦ Çdo trashëgimtar ka aktet e veta: mungojnë për {who}. ¦ Kull werriet għandu l-atti tiegħu: jonqsu għal {who}.
+Chaque héritier a ses actes. ¦ Çdo trashëgimtar ka aktet e veta. ¦ Kull werriet għandu l-atti tiegħu.
+Chaque prédécédé a son acte de décès : {n} manquent. ¦ Çdo i vdekur më parë ka aktin e vdekjes: mungojnë {n}. ¦ Kull min miet qabel għandu l-att tal-mewt: jonqsu {n}.
+Chaque prédécédé a son acte de décès. ¦ Çdo i vdekur më parë ka aktin e vdekjes. ¦ Kull min miet qabel għandu l-att tal-mewt.
+Les branches inconnues ont une explication. ¦ Degët e panjohura kanë një shpjegim. ¦ Il-fergħat mhux magħrufa għandhom spjegazzjoni.
+{n} héritiers ou branches restent « inconnus » sans explication. ¦ Trashëgimtarë ose degë «të panjohura» pa shpjegim: {n}. ¦ Werrieta jew fergħat «mhux magħrufa» mingħajr spjegazzjoni: {n}.
+Aucune branche « inconnue ». ¦ Asnjë degë «e panjohur». ¦ L-ebda fergħa «mhux magħrufa».
+L’hypothèse retenue est écrite. ¦ Hipoteza e mbajtur është shkruar. ¦ L-ipoteżi miżmuma hija miktuba.
+Plusieurs hypothèses : écris celle qui est retenue. ¦ Disa hipoteza: shkruaj cila mbahet. ¦ Diversi ipoteżijiet: ikteb liema tinżamm.
+Une seule hypothèse. ¦ Një hipotezë e vetme. ¦ Ipoteżi waħda biss.
+Les parts totalisent 1. ¦ Pjesët japin gjithsej 1. ¦ Is-sehem jgħodd 1 b’kollox.
+Les parts ne totalisent pas 1 : à revoir. ¦ Pjesët nuk japin 1: për t’u rishikuar. ¦ Is-sehem ma jgħoddx 1: irid jerġa’ jiġi rivedut.
+La date du décès demande l’avis du notaire (droit de l’époque ou date inconnue). ¦ Data e vdekjes kërkon mendimin e noterit (e drejta e kohës ose datë e panjohur). ¦ Id-data tal-mewt teħtieġ l-opinjoni tan-nutar (liġi taż-żmien jew data mhux magħrufa).
+{name} ajouté (statut inconnu) ¦ {name} u shtua (gjendje e panjohur) ¦ {name} miżjud (status mhux magħruf)
+{name} ajouté ({share}) ¦ {name} u shtua ({share}) ¦ {name} miżjud ({share})
+{name} : {from} → {to} ¦ {name}: {from} → {to} ¦ {name}: {from} → {to}
+{name} retiré ¦ {name} u hoq ¦ {name} imneħħi
+Ordre retenu : {from} → {to} ¦ Radha e mbajtur: {from} → {to} ¦ Ordni miżmum: {from} → {to}
+descendante à la {n}e génération ¦ pasardhëse në brezin e {n}-të ¦ dixxendenta fil-ġenerazzjoni {n}
+descendant à la {n}e génération ¦ pasardhës në brezin e {n}-të ¦ dixxendent fil-ġenerazzjoni {n}
+ascendante à la {n}e génération ¦ paraardhëse në brezin e {n}-të ¦ axxendenta fil-ġenerazzjoni {n}
+ascendant à la {n}e génération ¦ paraardhës në brezin e {n}-të ¦ axxendent fil-ġenerazzjoni {n}
+parente au {n}e degré ¦ e afërme në shkallën e {n}-të ¦ qariba fil-grad {n}
+parent au {n}e degré ¦ i afërm në shkallën e {n}-të ¦ qarib fil-grad {n}
+petit-fils ¦ nip ¦ neputi (tal-wild)
+petite-fille ¦ mbesë ¦ neputija (tal-wild)
+arrière-petit-fils ¦ stërnip ¦ iben tan-neputi
+arrière-petite-fille ¦ stërmbesë ¦ bint tan-neputi
+arrière-arrière-petit-fils ¦ stër-stërnip ¦ neputi tan-neputi
+arrière-arrière-petite-fille ¦ stër-stërmbesë ¦ neputija tan-neputi
+nièce ¦ mbesë (e vëllait ose motrës) ¦ neputija (tal-ħu jew oħt)
+petit-neveu ¦ nip i vëllait ose motrës ¦ neputi tal-ħu jew oħt
+petite-nièce ¦ mbesë e vëllait ose motrës ¦ neputija tal-ħu jew oħt
+arrière-petit-neveu ¦ stërnip i vëllait ose motrës ¦ dixxendent tat-tielet ġenerazzjoni tal-ħu jew oħt
+arrière-petite-nièce ¦ stërmbesë e vëllait ose motrës ¦ dixxendenta tat-tielet ġenerazzjoni tal-ħu jew oħt
+arrière-arrière-petit-neveu ¦ stër-stërnip i vëllait ose motrës ¦ dixxendent tar-raba’ ġenerazzjoni tal-ħu jew oħt
+arrière-arrière-petite-nièce ¦ stër-stërmbesë e vëllait ose motrës ¦ dixxendenta tar-raba’ ġenerazzjoni tal-ħu jew oħt
+cousin germain ¦ kushëri i parë ¦ kuġin
+cousine germaine ¦ kushërirë e parë ¦ kuġina
+fils de cousin germain ¦ djali i kushëririt ¦ iben ta’ kuġin
+fille de cousin germain ¦ vajza e kushëririt ¦ bint ta’ kuġin
+petit-fils de cousin germain ¦ nipi i kushëririt ¦ neputi ta’ kuġin
+petite-fille de cousin germain ¦ mbesa e kushëririt ¦ neputija ta’ kuġin
+grand-oncle ¦ vëlla i gjyshit ¦ ziju tal-ġenitur
+grand-tante ¦ motër e gjyshit ¦ zija tal-ġenitur
+cousin germain d’un parent ¦ kushëri i parë i një prindi ¦ kuġin ta’ ġenitur
+cousine germaine d’un parent ¦ kushërirë e parë e një prindi ¦ kuġina ta’ ġenitur
+cousin issu de germains ¦ kushëri i dytë ¦ kuġin tat-tieni grad
+cousine issue de germains ¦ kushërirë e dytë ¦ kuġina tat-tieni grad
+arrière-grand-oncle ¦ vëlla i stërgjyshit ¦ ziju tan-nannu
+arrière-grand-tante ¦ motër e stërgjyshit ¦ zija tan-nannu
+cousin germain d’un grand-parent ¦ kushëri i parë i një gjyshi ¦ kuġin ta’ nannu
+cousine germaine d’un grand-parent ¦ kushërirë e parë e një gjyshi ¦ kuġina ta’ nannu
+arrière-arrière-grand-oncle ¦ vëlla i stër-stërgjyshit ¦ ziju tal-bużnannu
+arrière-arrière-grand-tante ¦ motër e stër-stërgjyshit ¦ zija tal-bużnannu
+frère germain ¦ vëlla i plotë ¦ ħu sħiħ
+sœur germaine ¦ motër e plotë ¦ oħt sħiħa
+demi-frère (même père) ¦ gjysmëvëlla (i njëjti baba) ¦ nofs ħu (l-istess missier)
+demi-sœur (même père) ¦ gjysmëmotër (i njëjti baba) ¦ nofs oħt (l-istess missier)
+demi-frère (même mère) ¦ gjysmëvëlla (e njëjta nënë) ¦ nofs ħu (l-istess omm)
+demi-sœur (même mère) ¦ gjysmëmotër (e njëjta nënë) ¦ nofs oħt (l-istess omm)
+Père, mère, enfant ¦ Baba, nënë, fëmijë ¦ Missier, omm, wild
+Frère, sœur, grand-parent, petit-enfant ¦ Vëlla, motër, gjysh, nip ¦ Ħu, oħt, nannu, neputi
+Neveu, nièce, oncle, tante ¦ Nip, mbesë, xhaxha, teze ¦ Neputi, neputija, ziju, zija
+Cousin germain, petit-neveu, grand-oncle ¦ Kushëri i parë, nip i vëllait, vëlla i gjyshit ¦ Kuġin, neputi tal-ħu, ziju tal-ġenitur
+Enfant de cousin germain ¦ Fëmijë i kushëririt të parë ¦ Wild ta’ kuġin
+Cousin issu de germains (limite) ¦ Kushëri i dytë (kufi) ¦ Kuġin tat-tieni grad (limitu)
+Présomption d’absence : le juge des tutelles la constate quand une personne a cessé de paraître sans donner de nouvelles. Elle est réputée vivante ; sa part est réservée et gérée. ¦ Prezumimi i mungesës: gjykata e konstaton kur një person ka pushuar së shfaquri pa dhënë lajme. Konsiderohet i gjallë; pjesa e tij rezervohet dhe administrohet. ¦ Preżunzjoni ta’ assenza: il-qorti tikkonstataha meta persuna tieqaf tidher mingħajr ma tagħti aħbarijiet. Titqies ħajja; is-sehem tagħha huwa riżervat u amministrat.
+Déclaration d’absence : 10 ans après le jugement de présomption (ou 20 ans sans nouvelles), le tribunal judiciaire la déclare ; le jugement a les effets d’un décès. ¦ Shpallja e mungesës: 10 vjet pas vendimit të prezumimit (ose 20 vjet pa lajme), gjykata e shpall; vendimi ka pasojat e vdekjes. ¦ Dikjarazzjoni ta’ assenza: 10 snin wara s-sentenza ta’ preżunzjoni (jew 20 sena mingħajr aħbarijiet), il-qorti tiddikjaraha; is-sentenza għandha l-effetti ta’ mewt.
+Jugement déclaratif de décès : pour une disparition dans des circonstances qui mettent la vie en danger (naufrage, catastrophe), sans attendre. ¦ Vendim për shpalljen e vdekjes: për zhdukje në rrethana që rrezikojnë jetën (mbytje anijeje, katastrofë), pa pritur. ¦ Sentenza dikjaratorja ta’ mewt: għal għajbien f’ċirkostanzi ta’ periklu għall-ħajja (nawfraġju, diżastru), mingħajr stennija.
+Service central d’état civil (Nantes) : les actes des Français nés, mariés ou morts à l’étranger. ¦ Shërbimi qendror i gjendjes civile (Nantes): aktet e francezëve të lindur, të martuar ose të vdekur jashtë vendit. ¦ Servizz ċentrali tal-istat ċivili (Nantes): l-atti tal-Franċiżi mwielda, miżżewġa jew mejta barra l-pajjiż.
+Le consulat de France du pays : registres d’immatriculation, actes transcrits récents. ¦ Konsullata e Francës në vend: regjistrat konsullorë, akte të transkriptuara së fundi. ¦ Il-konsulat ta’ Franza fil-pajjiż: reġistri konsulari, atti traskritti reċentement.
+L’état civil du pays (mairie, registro civil, Standesamt…) : lettre dans la langue du pays. ¦ Gjendja civile e vendit (bashkia, registro civil, Standesamt…): letër në gjuhën e vendit. ¦ L-istat ċivili tal-pajjiż (kunsill lokali, registro civil, Standesamt…): ittra bil-lingwa tal-pajjiż.
+Archives nationales d’outre-mer (Aix-en-Provence) : colonies et Algérie avant 1962. ¦ Arkivat kombëtare të përtej detit (Aix-en-Provence): kolonitë dhe Algjeria para 1962. ¦ Arkivji nazzjonali barra l-baħar (Aix-en-Provence): kolonji u l-Alġerija qabel l-1962.
+Ouvert ¦ Hapur ¦ Miftuħ
+En recherche ¦ Në kërkim ¦ Qed jiġi mfittex
+Héritiers trouvés ¦ Trashëgimtarët u gjetën ¦ Werrieta misjuba
+Clos ¦ Mbyllur ¦ Magħluq
+📁 Dossier ¦ 📁 Dosja ¦ 📁 Fajl
+👥 Héritiers ¦ 👥 Trashëgimtarët ¦ 👥 Werrieta
+🌳 Arbre ¦ 🌳 Pema ¦ 🌳 Siġra
+✉️ Héritiers contactés ¦ ✉️ Trashëgimtarë të kontaktuar ¦ ✉️ Werrieta kkuntattjati
+🖨 Pour le notaire ¦ 🖨 Për noterin ¦ 🖨 Għan-nutar
+🕓 Journal ¦ 🕓 Ditari ¦ 🕓 Reġistru
+💶 Temps et frais ¦ 💶 Koha dhe shpenzimet ¦ 💶 Ħin u spejjeż
+Décédé après ¦ Vdiq më pas ¦ Miet wara
+Décédée après ¦ Vdiq më pas ¦ Mietet wara
+Renonce ¦ Heq dorë ¦ Jirrinunzja
+Indigne ¦ I padenjë ¦ Indenju
+Absent ¦ I munguar ¦ Assenti
+Absente ¦ E munguar ¦ Assenti
+Pas encore conçu ¦ Ende i pazënë ¦ Għadu ma tnissilx
+Pas encore conçue ¦ Ende e pazënë ¦ Għadha ma tnissilitx
+Comme sur la fiche ¦ Si në regjistrim ¦ Bħal fir-reġistrazzjoni
+Vivant au décès ¦ I gjallë në vdekje ¦ Ħaj fil-mewt
+Mort avant le défunt ¦ Vdiq para të ndjerit ¦ Miet qabel il-mejjet
+Mort après le défunt ¦ Vdiq pas të ndjerit ¦ Miet wara l-mejjet
+Renonce à la succession ¦ Heq dorë nga trashëgimia ¦ Jirrinunzja għas-suċċessjoni
+Déclaré absent ¦ Shpallur i munguar ¦ Dikjarat assenti
+Refuse ¦ Refuzon ¦ Jirrifjuta
+Rappellera ¦ Do të rimarrë në telefon ¦ Jerġa’ jċempel
+✓ En main ¦ ✓ Në dorë ¦ ✓ F’idejk
+📮 Demandé ¦ 📮 Kërkuar ¦ 📮 Mitlub
+✗ Manquant ¦ ✗ Mungon ¦ ✗ Nieqes
+Sans objet ¦ Nuk zbatohet ¦ Ma japplikax
+⏱ Temps ¦ ⏱ Kohë ¦ ⏱ Ħin
+🧾 Frais ¦ 🧾 Shpenzime ¦ 🧾 Spejjeż
+📝 Contrat ¦ 📝 Kontratë ¦ 📝 Kuntratt
+02 — HÉRITIERS ¦ 02 — TRASHËGIMTARËT ¦ 02 — WERRIETA
+Généalogiste successoral ¦ Gjenealog trashëgimish ¦ Ġenealoġista tas-suċċessjonijiet
+Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ Gjetja e trashëgimtarëve të një personi të vdekur për një noter. ¦ Sib il-werrieta ta’ persuna mejta għal nutar.
++ ⚖️ Successions (Dossiers · Héritiers à contacter · Courriers). Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Trashëgimi (Dosjet · Trashëgimtarë për t’u kontaktuar · Letrat). Ekrani i parë: «Hap një dosje». ¦ + ⚖️ Suċċessjonijiet (Fajls · Werrieta li jridu jiġu kkuntattjati · Ittri). L-ewwel skrin: «Iftaħ fajl».
+⚖️ Successions : dossiers, héritiers à contacter, courriers. ¦ ⚖️ Trashëgimi: dosjet, trashëgimtarë për t’u kontaktuar, letrat. ¦ ⚖️ Suċċessjonijiet: fajls, werrieta li jridu jiġu kkuntattjati, ittri.
+⚖️ Successions ¦ ⚖️ Trashëgimi ¦ ⚖️ Suċċessjonijiet
+Vivants ¦ Të gjallët ¦ Ħajjin
+Courriers ¦ Letrat ¦ Ittri
+Échéance le {date} ¦ Afat më {date} ¦ Skadenza fi {date}
+Pour quel héritier ? ¦ Për cilin trashëgimtar? ¦ Għal liema werriet?
+Lettre à un héritier ¦ Letër për një trashëgimtar ¦ Ittra lil werriet
+ne révèle pas le défunt avant signature ; honoraires et date limite à écrire ¦ nuk e zbulon të ndjerin para nënshkrimit; honorari dhe afati duhen shkruar ¦ ma jiżvelax il-mejjet qabel il-firma; il-ħlas u d-data tal-iskadenza jinkitbu
+premier contact, sans nommer le défunt ¦ kontakt i parë, pa përmendur të ndjerin ¦ l-ewwel kuntatt, mingħajr ma jissemma l-mejjet
+Il y a déjà un dossier pour cette personne. ¦ Për këtë person ka tashmë një dosje. ¦ Diġà hemm fajl għal din il-persuna.
+Date d’ouverture incorrecte. ¦ Datë hapjeje e pasaktë. ¦ Data tal-ftuħ żbaljata.
+Notaire introuvable. ¦ Noteri nuk u gjet. ¦ In-nutar ma nstabx.
+Passe d’abord par la liste de contrôle avant « Remis au notaire ». ¦ Kalo së pari listën e kontrollit para «Dorëzuar noterit». ¦ Għaddi l-ewwel mil-lista ta’ kontroll qabel «Mgħoddi lin-nutar».
+Ce dossier est archivé. ¦ Kjo dosje është arkivuar. ¦ Dan il-fajl huwa arkivjat.
+Valeur inconnue. ¦ Vlerë e panjohur. ¦ Valur mhux magħruf.
+Pièce inconnue. ¦ Dokument i panjohur. ¦ Dokument mhux magħruf.
+Choisis la date de l’échéance. ¦ Zgjidh datën e afatit. ¦ Agħżel id-data tal-iskadenza.
+Écris ce qu’il faut faire. ¦ Shkruaj çfarë duhet bërë. ¦ Ikteb x’għandu jsir.
+Échéance introuvable. ¦ Afati nuk u gjet. ¦ Skadenza ma nstabitx.
+Date incorrecte. ¦ Datë e pasaktë. ¦ Data żbaljata.
+Le pourcentage va de 0 à 100. ¦ Përqindja shkon nga 0 në 100. ¦ Il-perċentwal imur minn 0 sa 100.
+Combien de temps ? ¦ Sa kohë? ¦ Kemm żmien?
+Choisis l’héritier. ¦ Zgjidh trashëgimtarin. ¦ Agħżel il-werriet.
+Date de signature incorrecte. ¦ Datë nënshkrimi e pasaktë. ¦ Data tal-firma żbaljata.
+Seul un dossier clos peut être archivé. ¦ Vetëm një dosje e mbyllur mund të arkivohet. ¦ Fajl magħluq biss jista’ jiġi arkivjat.
+Mode consultation : les dossiers de succession ne se montrent pas. ¦ Mënyra e shikimit: dosjet e trashëgimisë nuk shfaqen. ¦ Modalità ta’ wiri: il-fajls tas-suċċessjoni ma jidhrux.
+Rien à noter. ¦ Asgjë për të shënuar. ¦ Xejn x’jitniżżel.
+Calcul manquant. ¦ Mungon llogaritja. ¦ Il-kalkolu nieqes.
+Dossiers ¦ Dosjet ¦ Fajls
+Héritiers à contacter ¦ Trashëgimtarë për t’u kontaktuar ¦ Werrieta li jridu jiġu kkuntattjati
+Que montrer ¦ Çfarë të shfaqet ¦ X’għandu jintwera
+Lecture des héritiers… ¦ Po lexohen trashëgimtarët… ¦ Qed jinqraw il-werrieta…
+Lecture des courriers… ¦ Po lexohen letrat… ¦ Qed jinqraw l-ittri…
+Voir toute la liste ↗ ¦ Shih gjithë listën ↗ ¦ Ara l-lista kollha ↗
+Aucun courrier ¦ Asnjë letër ¦ L-ebda ittra
+Courrier envoyé ¦ Letër e dërguar ¦ Ittra mibgħuta
+Réponse : {r} ¦ Përgjigje: {r} ¦ Tweġiba: {r}
+Courrier envoyé le {d} ¦ Letër e dërguar më {d} ¦ Ittra mibgħuta fi {d}
+Aucun héritier à contacter dans les dossiers en cours. ¦ Asnjë trashëgimtar për t’u kontaktuar në dosjet e hapura. ¦ L-ebda werriet x’jiġi kkuntattjat fil-fajls miftuħa.
+Les héritiers vivants (ou au statut inconnu) des dossiers ouverts viennent ici, avec leur adresse et l’état du contact. ¦ Këtu shfaqen trashëgimtarët e gjallë (ose me status të panjohur) të dosjeve të hapura, me adresën dhe gjendjen e kontaktit. ¦ Il-werrieta ħajjin (jew bi status mhux magħruf) tal-fajls miftuħa jidhru hawn, bl-indirizz tagħhom u l-istat tal-kuntatt.
+Chercher… (nom, dossier, ville) ¦ Kërko… (emër, dosje, vend) ¦ Fittex… (isem, fajl, post)
+Tous les dossiers ¦ Të gjitha dosjet ¦ Il-fajls kollha
+État du contact ¦ Gjendja e kontaktit ¦ Stat tal-kuntatt
+Par dossier ¦ Sipas dosjes ¦ Skont il-fajl
+À contacter d’abord ¦ Për t’u kontaktuar së pari ¦ L-ewwel dawk li jridu jiġu kkuntattjati
+Aucun héritier ne correspond. ¦ Asnjë trashëgimtar nuk përputhet. ¦ L-ebda werriet ma jaqbel.
+📇 Compléter l’adresse ¦ 📇 Plotëso adresën ¦ 📇 Imla l-indirizz
+adresse à trouver ¦ adresa për t’u gjetur ¦ indirizz x’jinstab
+Courriel ¦ Email ¦ Email
+Héritiers à contacter exportés (CSV) ¦ Trashëgimtarët për t’u kontaktuar u eksportuan (CSV) ¦ Werrieta li jridu jiġu kkuntattjati esportati (CSV)
+Héritier à l’étranger ¦ Trashëgimtar jashtë vendit ¦ Werriet barra l-pajjiż
+Demande d’acte ¦ Kërkesë për akt ¦ Talba għal att
+Aucun courrier de succession pour l’instant. ¦ Ende asnjë letër trashëgimie. ¦ Għad m’hemm l-ebda ittra tas-suċċessjoni.
+Les courriers écrits depuis un dossier (✉️ Héritiers contactés, 📑 Pièces) viennent ici. ¦ Këtu shfaqen letrat e shkruara nga një dosje (✉️ Trashëgimtarë të kontaktuar, 📑 Aktet). ¦ L-ittri miktuba minn fajl (✉️ Werrieta kkuntattjati, 📑 Dokumenti) jidhru hawn.
+Chercher… (destinataire, dossier) ¦ Kërko… (marrës, dosje) ¦ Fittex… (destinatarju, fajl)
+Aucun courrier ne correspond. ¦ Asnjë letër nuk përputhet. ¦ L-ebda ittra ma taqbel.
+📮 COURRIER DE SUCCESSION ¦ 📮 LETËR TRASHËGIMIE ¦ 📮 ITTRA TAS-SUĊĊESSJONI
+Dévolution ¦ Rendi i trashëgimisë ¦ Devoluzzjoni
+=héritier ¦ trashëgimtar|trashëgimtarë ¦ werriet|werrieta|werrieta|werriet|werriet
+=courrier ¦ letër|letra ¦ ittra|ittri|ittri|ittra|ittra
+=dépouillement ¦ shqyrtim|shqyrtime ¦ spoll|spolli|spolli|spoll|spoll
+=dossier en cours ¦ dosje në punë|dosje në punë ¦ fajl miftuħ|fajls miftuħa|fajls miftuħa|fajl miftuħ|fajl miftuħ
+=dossier de succession ¦ dosje trashëgimie|dosje trashëgimie ¦ fajl tas-suċċessjoni|fajls tas-suċċessjoni|fajls tas-suċċessjoni|fajl tas-suċċessjoni|fajl tas-suċċessjoni
+
+# ⚖️ Dossiers de succession : rangement, filtre ⚖️, rattachement, tableau de bord, garde-fous, widget, vue par dossier
+Dossiers de succession : filtre {what} (cliquer pour changer) ¦ Dosje trashëgimie: filtri {what} (kliko për ta ndryshuar) ¦ Fajls tas-suċċessjoni: filtru {what} (ikklikkja biex tibdel)
+Dossiers de succession : ne montrer qu’un ou plusieurs dossiers ¦ Dosje trashëgimie: shfaq vetëm një ose disa dosje ¦ Fajls tas-suċċessjoni: uri fajl wieħed jew aktar biss
+Plusieurs ¦ Disa ¦ Diversi
+⚖️ Ne montrer que ceux-ci ¦ ⚖️ Shfaq vetëm këto ¦ ⚖️ Uri dawn biss
+Aucun dossier dans cette généalogie. ¦ Asnjë dosje në këtë gjenealogji. ¦ L-ebda fajl f’din il-ġenealoġija.
+Dans une autre généalogie ¦ Në një gjenealogji tjetër ¦ F’ġenealoġija oħra
+Tous les dossiers… ¦ Të gjitha dosjet… ¦ Il-fajls kollha…
+Seulement le dossier {n} ¦ Vetëm dosja {n} ¦ Il-fajl {n} biss
+Seulement {what} : {list} ¦ Vetëm {what}: {list} ¦ {what} biss: {list}
+1 dossier · {state} ¦ 1 dosje · {state} ¦ fajl 1 · {state}
+⚖️ Dossier {n} ¦ ⚖️ Dosja {n} ¦ ⚖️ Fajl {n}
+Ce dossier est dans une autre généalogie ¦ Kjo dosje është në një gjenealogji tjetër ¦ Dan il-fajl jinsab f’ġenealoġija oħra
+Ouvrir « {name} » ¦ Hap «{name}» ¦ Iftaħ “{name}”
+Il est rangé dans « {name} ». Pour le montrer, l’app ouvre cette généalogie (tes réglages d’ici sont gardés) et y active le filtre ⚖️ {n}. ¦ Ruhet në «{name}». Për ta shfaqur, aplikacioni hap atë gjenealogji (cilësimet e tua këtu ruhen) dhe aktivizon atje filtrin ⚖️ {n}. ¦ Jinsab f’“{name}”. Biex juriha, l-app tiftaħ dik il-ġenealoġija (is-settings tiegħek hawn jinżammu) u tixgħel hemm il-filtru ⚖️ {n}.
+Tes nouveaux dossiers vont dans « {name} ». ¦ Dosjet e tua të reja shkojnë te «{name}». ¦ Il-fajls il-ġodda tiegħek imorru f’“{name}”.
+Ouvrir le dossier ici quand même ¦ Hape dosjen këtu gjithsesi ¦ Iftaħ il-fajl hawn xorta waħda
+Où ranger tes dossiers ? ¦ Ku t’i ruash dosjet e tua? ¦ Fejn għandhom jinżammu l-fajls tiegħek?
+conseillé ici ¦ rekomandohet këtu ¦ rakkomandat hawn
+Nom de la nouvelle généalogie ¦ Emri i gjenealogjisë së re ¦ L-isem tal-ġenealoġija l-ġdida
+⚖️ Dossier de succession ¦ ⚖️ Dosje trashëgimie ¦ ⚖️ Fajl tas-suċċessjoni
+Ta généalogie ouverte a {n} : la ranger à part évite de mélanger les héritiers de tes clients avec ta propre famille. Ce n’est qu’un conseil. ¦ Gjenealogjia jote e hapur ka {n}: ruajtja veçmas shmang përzierjen e trashëgimtarëve të klientëve me familjen tënde. Është vetëm këshillë. ¦ Il-ġenealoġija miftuħa tiegħek għandha {n}: iż-żamma separata tevita li l-werrieta tal-klijenti jitħalltu mal-familja tiegħek. Huwa biss parir.
+Tu pourras changer d’avis : Réglages → Apparence → 🧭 Usage de l’app → « ⚖️ Où ranger les dossiers ». Les dossiers déjà ouverts ne bougent pas tout seuls. ¦ Mund të ndërrosh mendje: Cilësimet → Pamja → 🧭 Përdorimi i aplikacionit → «⚖️ Ku ruhen dosjet». Dosjet e hapura nuk lëvizin vetë. ¦ Tista’ tibdel fehmtek: Settings → Dehra → 🧭 Użu tal-app → “⚖️ Fejn jinżammu l-fajls”. Il-fajls diġà miftuħa ma jiċċaqilqux waħedhom.
+Créer « ⚖️ Dossiers de succession » et ouvrir le dossier ¦ Krijo «⚖️ Dosje trashëgimie» dhe hap dosjen ¦ Oħloq “⚖️ Fajls tas-suċċessjoni” u iftaħ il-fajl
+Créer la généalogie et ouvrir le dossier ¦ Krijo gjenealogjinë dhe hap dosjen ¦ Oħloq il-ġenealoġija u iftaħ il-fajl
+Rangement des dossiers : {what} ¦ Ku shkojnë dosjet: {what} ¦ Fejn imorru l-fajls: {what}
+Généalogiste successoral : réglages des dossiers ¦ Gjenealog trashëgimish: cilësimet e dosjeve ¦ Ġenealoġista tas-suċċessjonijiet: settings tal-fajls
+Où ranger les dossiers ¦ Ku ruhen dosjet ¦ Fejn jinżammu l-fajls
+Les nouveaux dossiers vont… ¦ Dosjet e reja shkojnë… ¦ Il-fajls il-ġodda jmorru…
+Dans « {name} » ¦ Te «{name}» ¦ F’“{name}”
+Les dossiers et où ils sont ¦ Dosjet dhe ku janë ¦ Il-fajls u fejn jinsabu
+⇄ Déplacer… ¦ ⇄ Zhvendos… ¦ ⇄ Ċaqlaq…
+Aucun dossier pour l’instant. ¦ Ende asnjë dosje. ¦ L-ebda fajl s’issa.
+Réglages des dossiers ¦ Cilësimet e dosjeve ¦ Settings tal-fajls
+Arbre et graphiques filtrés par ⚖️ : les fiches hors dossier ¦ Pema dhe grafikët me filtrin ⚖️: kartelat jashtë dosjes ¦ Siġra u graffs iffiltrati b’⚖️: skedi barra l-fajl
+Archive d’un dossier clos : adresses des héritiers vivants ¦ Arkivi i një dosjeje të mbyllur: adresat e trashëgimtarëve të gjallë ¦ Arkivju ta’ fajl magħluq: indirizzi tal-werrieta ħajjin
+Déplacer un dossier dont une fiche est aussi dans ta famille ¦ Zhvendosja e një dosjeje me kartelë që është edhe në familjen tënde ¦ Iċċaqlaq fajl li skeda tiegħu tinsab ukoll fil-familja tiegħek
+« Sans dossier » dans la vue par dossier ¦ «Pa dosje» te pamja sipas dosjeve ¦ “Mingħajr fajl” fil-veduta skont il-fajl
+Avancement : un héritier qui refuse de signer ¦ Ecuria: trashëgimtar që refuzon të nënshkruajë ¦ Progress: werriet li jirrifjuta jiffirma
+compte comme « fait » (étape 5) ¦ llogaritet si «bërë» (hapi 5) ¦ jgħodd bħala “magħmul” (pass 5)
+Avancement : poids des 7 étapes ¦ Ecuria: pesha e 7 hapave ¦ Progress: piż tas-7 passi
+Réglage des dossiers enregistré : {what} ¦ Cilësimi i dosjeve u ruajt: {what} ¦ Setting tal-fajls issejvjat: {what}
+poids des 7 étapes ¦ pesha e 7 hapave ¦ piż tas-7 passi
+⇄ DÉPLACER UN DOSSIER ¦ ⇄ ZHVENDOS NJË DOSJE ¦ ⇄ ĊAQLAQ FAJL
+{n} → ? ¦ {n} → ? ¦ {n} → ?
+⇄ Déplacer ({what}) ¦ ⇄ Zhvendos ({what}) ¦ ⇄ Ċaqlaq ({what})
+Vers ¦ Drejt ¦ Lejn
+＋ Une nouvelle généalogie pour ce dossier ¦ ＋ Një gjenealogji e re për këtë dosje ¦ ＋ Ġenealoġija ġdida għal dan il-fajl
+Ce qui part : le dossier, son journal, ses pièces, ses courriers, ses échéances, et les fiches qui lui sont rattachées (défunt, héritiers, intermédiaires) avec leurs actes et médias. Une fiche aussi rattachée à un autre dossier ou à ta famille est copiée, pas déplacée. ¦ Çfarë largohet: dosja, ditari, dokumentet, letrat, afatet dhe kartelat e lidhura me të (i ndjeri, trashëgimtarët, ndërmjetësit) me aktet dhe mediat e tyre. Një kartelë e lidhur edhe me një dosje tjetër ose me familjen tënde kopjohet, nuk zhvendoset. ¦ X’jitlaq: il-fajl, ir-reġistru, id-dokumenti, l-ittri, l-iskadenzi u l-iskedi marbuta miegħu (il-mejjet, werrieta, intermedjarji) bl-atti u l-midja tagħhom. Skeda marbuta wkoll ma’ fajl ieħor jew mal-familja tiegħek tiġi kkupjata, mhux imċaqalqa.
+Déplacement refusé (réglage) : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Zhvendosja u refuzua (cilësim): këto kartela janë edhe në familjen tënde ose në një dosje tjetër: {names}. ¦ Ċaqlieq miċħud (setting): dawn l-iskedi jinsabu wkoll fil-familja tiegħek jew f’fajl ieħor: {names}.
+Copiées (elles restent aussi ici) : {names}. ¦ U kopjuan (mbeten edhe këtu): {names}. ¦ Ikkupjati (jibqgħu wkoll hawn): {names}.
+Une copie de sauvegarde des deux généalogies est faite avant. Le journal du dossier note « Déplacé de … vers … ». ¦ Më parë bëhet një kopje rezervë e të dy gjenealogjive. Ditari i dosjes shënon «U zhvendos nga … te …». ¦ L-ewwel issir kopja ta’ riżerva taż-żewġ ġenealoġiji. Ir-reġistru tal-fajl jikteb “Imċaqlaq minn … għal …”.
+Dossier {n} déplacé vers « {to} » ({what}) ¦ Dosja {n} u zhvendos te «{to}» ({what}) ¦ Fajl {n} imċaqlaq għal “{to}” ({what})
+⤓ Reprendre la fiche depuis Ma généalogie ¦ ⤓ Merr kartelën nga Gjenealogjia ime ¦ ⤓ Ħu l-iskeda minn Il-ġenealoġija tiegħi
+copie de la fiche, jusqu’aux grands-parents et tous leurs descendants connus, sans photos ¦ kopje e kartelës, deri te gjyshërit dhe të gjithë pasardhësit e tyre të njohur, pa foto ¦ kopja tal-iskeda, sal-nanniet u d-dixxendenti magħrufa kollha tagħhom, mingħajr ritratti
+⤓ REPRENDRE UNE FICHE ¦ ⤓ MERR NJË KARTELË ¦ ⤓ ĦU SKEDA
+Reprendre la fiche du défunt ¦ Merr kartelën e të ndjerit ¦ Ħu l-iskeda tal-mejjet
+Chercher la fiche ¦ Kërko kartelën ¦ Fittex l-iskeda
+Prénom, nom… ¦ Emri, mbiemri… ¦ Isem, kunjom…
+Copiées : la fiche, ses parents et grands-parents, tous leurs descendants connus et leurs conjoints, avec les dates et les lieux ; sans photos. Rien n’est changé dans l’autre généalogie. ¦ Kopjohen: kartela, prindërit dhe gjyshërit, të gjithë pasardhësit e njohur dhe bashkëshortët e tyre, me data dhe vende; pa foto. Asgjë nuk ndryshon në gjenealogjinë tjetër. ¦ Jiġu kkupjati: l-iskeda, il-ġenituri u n-nanniet, id-dixxendenti magħrufa kollha u l-konjuġi tagħhom, b’dati u postijiet; mingħajr ritratti. Xejn ma jinbidel fil-ġenealoġija l-oħra.
+{what} reprises de l’autre généalogie. ¦ {what} u morën nga gjenealogjia tjetër. ¦ {what} meħuda mill-ġenealoġija l-oħra.
+Dossiers… ¦ Dosjet… ¦ Fajls…
+{name} dans quels dossiers ? ¦ {name} në cilat dosje? ¦ {name} f’liema fajls?
+(calculé) ¦ (e llogaritur) ¦ (ikkalkulat)
+Rôles : défunt · héritier · intermédiaire · témoin · à vérifier. « Héritier » mis par le calcul s’affiche « (calculé) ». ¦ Rolet: i ndjeri · trashëgimtar · ndërmjetës · dëshmitar · për t’u kontrolluar. «Trashëgimtari» i vendosur nga llogaritja shfaq «(e llogaritur)». ¦ Rwoli: mejjet · werriet · intermedjarju · xhud · biex jiġi vverifikat. “Werriet” imqiegħed mill-kalkolu juri “(ikkalkulat)”.
+Dossiers de {name} enregistrés ¦ Dosjet e {name} u ruajtën ¦ Il-fajls ta’ {name} issejvjati
+Les dossiers de cette fiche ¦ Dosjet e kësaj kartele ¦ Il-fajls ta’ din l-iskeda
+hors du dossier {n} ¦ jashtë dosjes {n} ¦ barra l-fajl {n}
+＋ Rattacher ¦ ＋ Lidh ¦ ＋ Orbot
+Fiche rattachée au dossier {n} ¦ Kartela u lidh me dosjen {n} ¦ Skeda marbuta mal-fajl {n}
+Rattachée au dossier {n} : {who} ¦ U lidh me dosjen {n}: {who} ¦ Marbuta mal-fajl {n}: {who}
+Lecture des fiches du dossier… ¦ Po lexohen kartelat e dosjes… ¦ Qed jinqraw l-iskedi tal-fajl…
+Les fiches du dossier ¦ Kartelat e dosjes ¦ L-iskedi tal-fajl
+Rattacher ¦ Lidh ¦ Orbot
+Retirées à la main ({n}) : jamais remises toutes seules ¦ Hequr me dorë ({n}): nuk rikthehen kurrë vetë ¦ Imneħħija bl-idejn ({n}): qatt ma jitqiegħdu lura waħedhom
+Fiche à comparer : « {name}{year} » ressemble à une fiche déjà dans cette base. Jamais fusionnée toute seule. ¦ Kartelë për krahasim: «{name}{year}» i ngjan një kartele që është tashmë në këtë bazë. Nuk bashkohet kurrë vetë. ¦ Skeda biex titqabbel: “{name}{year}” tixbah skeda li diġà tinsab f’din il-bażi. Qatt ma tingħaqad waħedha.
+née {y} ¦ lindur {y} ¦ imwielda {y}
+Homonyme possible : « {name}{year} » existe aussi dans le dossier {n}. Jamais relié tout seul. ¦ Emërnjëjtë i mundshëm: «{name}{year}» ekziston edhe në dosjen {n}. Nuk lidhet kurrë vetë. ¦ Omonimu possibbli: “{name}{year}” jinsab ukoll fil-fajl {n}. Qatt ma jintrabat waħdu.
+⇆ Comparer ¦ ⇆ Krahaso ¦ ⇆ Qabbel
+C’est la même personne : rattacher aussi ¦ Është i njëjti person: lidhe edhe atë ¦ Hija l-istess persuna: orbotha wkoll
+Pas la même ¦ Nuk është i njëjti ¦ Mhux l-istess
+Fiche retirée du dossier {n} ¦ Kartela u hoq nga dosja {n} ¦ Skeda mneħħija mill-fajl {n}
+Fiche remise dans le dossier {n} ¦ Kartela u rikthye në dosjen {n} ¦ Skeda mqiegħda lura fil-fajl {n}
+Homonyme rattaché aussi au dossier {n} (à vérifier) ¦ Emërnjëjti u lidh edhe me dosjen {n} (për t’u kontrolluar) ¦ Omonimu marbut ukoll mal-fajl {n} (biex jiġi vverifikat)
+Noté : ce n’est pas la même personne ¦ U shënua: nuk është i njëjti person ¦ Innotat: mhux l-istess persuna
+Rôle : {r} ¦ Roli: {r} ¦ Rwol: {r}
+⚠️ illisible : {names} ¦ ⚠️ i palexueshëm: {names} ¦ ⚠️ ma jinqarax: {names}
+Chercher… (n°, défunt, notaire) ¦ Kërko… (nr., i ndjeri, noter) ¦ Fittex… (nru, mejjet, nutar)
+Toutes les généalogies ¦ Të gjitha gjenealogjitë ¦ Il-ġenealoġiji kollha
+Tous les notaires ¦ Të gjithë noterët ¦ In-nutara kollha
+Prochaine échéance (retards d’abord) ¦ Afati i ardhshëm (të vonuarat së pari) ¦ L-iskadenza li jmiss (dawk tard l-ewwel)
+Avancement le plus bas ¦ Ecuria më e ulët ¦ L-inqas progress
+{d} · passée ¦ {d} · ka kaluar ¦ {d} · skadut
+Trouvés : {n} ¦ Gjetur: {n} ¦ Misjuba: {n}
+À trouver : {n} ¦ Për t’u gjetur: {n} ¦ Biex jinstabu: {n}
+{h} h {m} ¦ {h} orë {m} ¦ {h} siegħa {m}
+Cocher le dossier {n} ¦ Shëno dosjen {n} ¦ Immarka l-fajl {n}
+Échéance : {d} ¦ Afati: {d} ¦ Skadenza: {d}
+Héritiers ¦ Trashëgimtarët ¦ Werrieta
+Avancement ¦ Ecuria ¦ Progress
+Cochés : {n} ¦ Të shënuara: {n} ¦ Immarkati: {n}
+Les dossiers cochés sont dans des généalogies différentes : choisis-en dans une seule. ¦ Dosjet e shënuara janë në gjenealogji të ndryshme: zgjidh vetëm nga një. ¦ Il-fajls immarkati jinsabu f’ġenealoġiji differenti: agħżel minn waħda biss.
+Dossiers exportés (CSV) ¦ Dosjet u eksportuan (CSV) ¦ Fajls esportati (CSV)
+⤒ Réimporter un dossier archivé… ¦ ⤒ Riimporto një dosje të arkivuar… ¦ ⤒ Erġa’ importa fajl arkivjat…
+⚠️ FUSION ¦ ⚠️ BASHKIM ¦ ⚠️ GĦAQDA
+Ces deux fiches sont dans des dossiers différents ¦ Këto dy kartela janë në dosje të ndryshme ¦ Dawn iż-żewġ skedi jinsabu f’fajls differenti
+Fusionner quand même ¦ Bashkoji gjithsesi ¦ Għaqqad xorta waħda
+{a} et {b}. Fusionner relie les deux successions et change les parts des deux dossiers. Vérifie avec des actes (naissance, parents) avant. ¦ {a} dhe {b}. Bashkimi lidh të dyja trashëgimitë dhe ndryshon pjesët në të dyja dosjet. Kontrollo më parë me akte (lindje, prindër). ¦ {a} u {b}. L-għaqda torbot iż-żewġ suċċessjonijiet u tibdel l-ishma fiż-żewġ fajls. Ivverifika l-ewwel bl-atti (twelid, ġenituri).
+⇆ Comparer d’abord ¦ ⇆ Krahaso së pari ¦ ⇆ Qabbel l-ewwel
+Si on fusionne : noté dans le journal des deux dossiers, et les deux sont recalculés. ¦ Nëse bashkohen: shënohet në ditarin e të dyja dosjeve dhe të dyja rillogariten. ¦ Jekk jingħaqdu: jinkiteb fir-reġistru taż-żewġ fajls, u t-tnejn jerġgħu jiġu kkalkulati.
+🗄 Archiver dans un fichier et retirer… ¦ 🗄 Arkivo në një skedar dhe hiq… ¦ 🗄 Arkivja f’fajl u neħħi…
+🗄 ARCHIVER LE DOSSIER {n} ¦ 🗄 ARKIVO DOSJEN {n} ¦ 🗄 ARKIVJA L-FAJL {n}
+Dans un fichier, puis retirer de la base ¦ Në një skedar, pastaj hiqe nga baza ¦ F’fajl, imbagħad neħħi mill-bażi
+⤓ Enregistrer le fichier puis retirer ¦ ⤓ Ruaj skedarin pastaj hiq ¦ ⤓ Issejvja l-fajl u mbagħad neħħi
+Le fichier {file} contient : le dossier, le journal, les pièces et leurs images, les courriers, l’arbre de dévolution (SVG), le tableau pour le notaire et les fiches rattachées ({n}). ¦ Skedari {file} përmban: dosjen, ditarin, dokumentet dhe imazhet e tyre, letrat, pemën e trashëgimisë (SVG), tabelën për noterin dhe kartelat e lidhura ({n}). ¦ Il-fajl {file} fih: il-fajl, ir-reġistru, id-dokumenti u l-immaġni tagħhom, l-ittri, is-siġra tas-suċċessjoni (SVG), it-tabella għan-nutar u l-iskedi marbuta ({n}).
+Garder les adresses des vivants dans le fichier ¦ Mbaj adresat e të gjallëve në skedar ¦ Żomm l-indirizzi tal-ħajjin fil-fajl
+utile si le notaire rouvre la succession ¦ e dobishme nëse noteri rihap trashëgiminë ¦ utli jekk in-nutar jerġa’ jiftaħ is-suċċessjoni
+Retirer les adresses ¦ Hiq adresat ¦ Neħħi l-indirizzi
+comme l’archivage actuel ¦ si arkivimi aktual ¦ bħall-arkivjar attwali
+Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base ({n}). Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste ({k}). Une sauvegarde est faite avant. ¦ Pastaj kartelat që shërbejnë vetëm për këtë dosje hiqen nga baza ({n}). Një kartelë e lidhur edhe me një dosje tjetër (ose me familjen tënde) mbetet ({k}). Më parë bëhet një kopje rezervë. ¦ Imbagħad l-iskedi li jservu biss lil dan il-fajl jitneħħew mill-bażi ({n}). Skeda marbuta wkoll ma’ fajl ieħor (jew mal-familja tiegħek) tibqa’ ({k}). L-ewwel issir kopja ta’ riżerva.
+Dossier {n} archivé dans « {file} » et retiré ({what}) ¦ Dosja {n} u arkivua te «{file}» dhe u hoq ({what}) ¦ Fajl {n} arkivjat f’“{file}” u mneħħi ({what})
+⤒ RÉIMPORTER ¦ ⤒ RIIMPORTO ¦ ⤒ ERĠA’ IMPORTA
+⤒ Réimporter le dossier ¦ ⤒ Riimporto dosjen ¦ ⤒ Erġa’ importa l-fajl
+Dossier {n} ({name}{closed}), {what}. ¦ Dosja {n} ({name}{closed}), {what}. ¦ Fajl {n} ({name}{closed}), {what}.
+clos le {d} ¦ mbyllur më {d} ¦ magħluq fl-{d}
+{what} ressemblent à des fiches déjà dans cette base ({names}) : elles seront proposées à la comparaison, jamais fusionnées seules. ¦ {what} u ngjajnë kartelave që janë tashmë në këtë bazë ({names}): do të propozohen për krahasim, kurrë nuk bashkohen vetë. ¦ {what} jixbhu skedi li diġà jinsabu f’din il-bażi ({names}): se jiġu proposti għat-tqabbil, qatt ma jingħaqdu waħedhom.
+Dossier {n} réimporté ({what}) ¦ Dosja {n} u riimportua ({what}) ¦ Fajl {n} reġa’ ġie importat ({what})
+Dossier {n} réimporté dans « {name} ». ¦ Dosja {n} u riimportua te «{name}». ¦ Fajl {n} reġa’ ġie importat f’“{name}”.
+⚖️ Mes dossiers de succession ¦ ⚖️ Dosjet e mia të trashëgimisë ¦ ⚖️ Il-fajls tas-suċċessjoni tiegħi
+Aucun dossier de succession. ¦ Asnjë dosje trashëgimie. ¦ L-ebda fajl tas-suċċessjoni.
+Étapes (7) ¦ Hapat (7) ¦ Passi (7)
+{step} : {done} sur {total} ¦ {step}: {done} nga {total} ¦ {step}: {done} minn {total}
+Quels dossiers ¦ Cilat dosje ¦ Liema fajls
+Le filtre ¦ Filtri ¦ Il-filtru
+Vue actuelle ¦ Pamja aktuale ¦ Veduta attwali
+Alt + ↑ / ↓ : changer l’ordre (rangement à la main) ¦ Alt + ↑ / ↓: ndrysho renditjen (me dorë) ¦ Alt + ↑ / ↓: ibdel l-ordni (bl-idejn)
+Sans dossier ¦ Pa dosje ¦ Mingħajr fajl
+Ranger les dossiers : ¦ Rendit dosjet: ¦ Ordna l-fajls:
+… cherche un nom pour voir les autres. ¦ … kërko një emër për të parë të tjerët. ¦ … fittex isem biex tara l-oħrajn.
+Ordre des dossiers changé ¦ Renditja e dosjeve u ndryshua ¦ L-ordni tal-fajls inbidel
+Dans cette généalogie ¦ Në këtë gjenealogji ¦ F’din il-ġenealoġija
+Le défunt et ses héritiers sont des fiches de ta famille. Simple, mais tout se mélange. ¦ I ndjeri dhe trashëgimtarët e tij janë kartela të familjes tënde. E thjeshtë, por gjithçka përzihet. ¦ Il-mejjet u l-werrieta tiegħu huma skedi tal-familja tiegħek. Sempliċi, iżda kollox jitħallat.
+Dans une généalogie à part pour tous mes dossiers ¦ Në një gjenealogji më vete për të gjitha dosjet e mia ¦ F’ġenealoġija separata għall-fajls kollha tiegħi
+Une base professionnelle « ⚖️ Dossiers de succession », créée dans 🌳 Mes généalogies. Tes dossiers y sont tous ensemble ; ta famille reste à part. ¦ Një bazë profesionale «⚖️ Dosje trashëgimie», e krijuar te 🌳 Gjenealogjitë e mia. Të gjitha dosjet e tua janë atje bashkë; familja jote mbetet veçmas. ¦ Bażi professjonali “⚖️ Fajls tas-suċċessjoni”, maħluqa f’🌳 Il-ġenealoġiji tiegħi. Il-fajls kollha tiegħek jinsabu hemm flimkien; il-familja tiegħek tibqa’ separata.
+Une généalogie par dossier ¦ Një gjenealogji për çdo dosje ¦ Ġenealoġija waħda għal kull fajl
+Chaque dossier a sa propre base (« ⚖️ 2026-014 MAZAUD »). Le plus étanche ; à réserver aux grosses successions. ¦ Çdo dosje ka bazën e vet («⚖️ 2026-014 MAZAUD»). Më e ndara; për trashëgimi të mëdha. ¦ Kull fajl għandu l-bażi tiegħu (“⚖️ 2026-014 MAZAUD”). L-aktar separat; għal suċċessjonijiet kbar.
+défunt ¦ i ndjeri ¦ mejjet
+intermédiaire ¦ ndërmjetës ¦ intermedjarju
+Un par dossier ¦ Një për dosje ¦ Wieħed għal kull fajl
+Un filtre ¦ Një filtër ¦ Filtru
+Compteurs ¦ Numëruesit ¦ Għaddadi
+à l’ouverture ¦ në hapje ¦ mal-ftuħ
+calcul ¦ llogaritje ¦ kalkolu
+à la main ¦ me dorë ¦ bl-idejn
+créée pendant le filtre ¦ krijuar gjatë filtrit ¦ maħluqa waqt il-filtru
+réimport ¦ riimport ¦ importazzjoni mill-ġdid
+homonyme ¦ emërnjëjtë ¦ omonimu
+déplacée ¦ zhvendosur ¦ imċaqalqa
+grisées, sans nom ¦ gri, pa emër ¦ griżi, mingħajr isem
+cachées ¦ të fshehura ¦ moħbija
+retirées du fichier ¦ hequr nga skedari ¦ imneħħija mill-fajl
+gardées dans le fichier ¦ mbajtur në skedar ¦ miżmuma fil-fajl
+copier la fiche ¦ kopjo kartelën ¦ ikkopja l-iskeda
+refuser le déplacement ¦ refuzo zhvendosjen ¦ irrifjuta ċ-ċaqliq
+replié ¦ e palosur ¦ magħluq
+Défunt et acte de décès ¦ I ndjeri dhe akti i vdekjes ¦ Mejjet u att tal-mewt
+Adresses ¦ Adresat ¦ Indirizzi
+Contrats signés ¦ Kontrata të nënshkruara ¦ Kuntratti ffirmati
+Déplacement refusé : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Zhvendosja u refuzua: këto kartela janë edhe në familjen tënde ose në një dosje tjetër: {names}. ¦ Ċaqlieq miċħud: dawn l-iskedi jinsabu wkoll fil-familja tiegħek jew f’fajl ieħor: {names}.
+Impossible d’enregistrer les réglages des dossiers. ¦ Cilësimet e dosjeve nuk mund të ruhen. ¦ Is-settings tal-fajls ma setgħux jiġu ssejvjati.
+Cette généalogie est encore vide. ¦ Kjo gjenealogji është ende bosh. ¦ Din il-ġenealoġija għadha vojta.
+Rôle inconnu. ¦ Rol i panjohur. ¦ Rwol mhux magħruf.
+Fiches inconnues. ¦ Kartela të panjohura. ¦ Skedi mhux magħrufa.
+Choisis une autre généalogie. ¦ Zgjidh një gjenealogji tjetër. ¦ Agħżel ġenealoġija oħra.
+Impossible de créer le fichier d’archive. ¦ Skedari i arkivit nuk mund të krijohet. ¦ Il-fajl tal-arkivju ma setax jinħoloq.
+Fichier introuvable. ¦ Skedari nuk u gjet. ¦ Il-fajl ma nstabx.
+Ce fichier n’est pas une archive de dossier de succession. ¦ Ky skedar nuk është arkiv i një dosjeje trashëgimie. ¦ Dan il-fajl mhuwiex arkivju ta’ fajl tas-suċċessjoni.
+Le fichier n’a pas été reçu. ¦ Skedari nuk u mor. ¦ Il-fajl ma waslx.
+Le défunt reste dans son dossier. ¦ I ndjeri mbetet në dosjen e tij. ¦ Il-mejjet jibqa’ fil-fajl tiegħu.
+🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Personat ¦ 🧑‍🤝‍🧑 Persuni
+Dossiers de succession (usage successoral seulement) ¦ Dosje trashëgimie (vetëm në përdorimin për trashëgimi) ¦ Fajls tas-suċċessjoni (għall-użu tas-suċċessjoni biss)
+# Zone « successoral » : 🔎 introuvable / 🔇 ne répond pas (état de contact d’un héritier, migration 92) ; 🔒 fiches confidentielles non comptées (réglage)
+Introuvable ¦ I pagjetshëm ¦ Ma jinstabx
+Ne répond pas ¦ Nuk përgjigjet ¦ Ma jwieġibx
+introuvable ¦ i pagjetshëm ¦ ma jinstabx
+ne répond pas ¦ nuk përgjigjet ¦ ma jwieġibx
+rien de noté ¦ asgjë e shënuar ¦ xejn innotat
+depuis le {d} ¦ që nga {d} ¦ mill-{d}
+Introuvable ou silencieux ¦ I pagjetshëm ose hesht ¦ Ma jinstabx jew sieket
+Introuvable depuis plus d’un an ¦ I pagjetshëm prej më shumë se një viti ¦ Ma jinstabx għal aktar minn sena
+{name} est introuvable depuis plus d’un an : la présomption d’absence (art. 112 et suivants) peut protéger sa part. ¦ {name} është i pagjetshëm prej më shumë se një viti: prezumimi i mungesës (nenet 112 e në vijim) mund ta mbrojë pjesën e tij. ¦ {name} ilu ma jinstab għal aktar minn sena: il-preżunzjoni ta’ assenza (art. 112 u li jsegwu) tista’ tipproteġi s-sehem tiegħu.
+{what} : les parts peuvent être fausses. ¦ {what}: pjesët mund të jenë të gabuara. ¦ {what}: l-ishma jistgħu jkunu ħżiena.
+=fiche confidentielle non comptée ¦ kartelë konfidenciale e pallogaritur|kartela konfidenciale të pallogaritura ¦ skeda kunfidenzjali mhux magħduda|skedi kunfidenzjali mhux magħduda|skedi kunfidenzjali mhux magħduda|skeda kunfidenzjali mhux magħduda|skeda kunfidenzjali mhux magħduda
+Changer ce réglage ¦ Ndrysho këtë cilësim ¦ Biddel dan is-setting
+Tous les héritiers ¦ Të gjithë trashëgimtarët ¦ Il-werrieta kollha
+🔎 Introuvable ou 🔇 ne répond pas : pas compté comme contacté dans l’avancement, et le calcul ne change pas. À ne pas confondre avec le statut « Présumé absent » (art. 112). ¦ 🔎 I pagjetshëm ose 🔇 nuk përgjigjet: nuk llogaritet si i kontaktuar në ecuri dhe llogaritja nuk ndryshon. Mos e ngatërro me gjendjen «I supozuar i munguar» (neni 112). ¦ 🔎 Ma jinstabx jew 🔇 ma jwieġibx: ma jingħaddx bħala kkuntattjat fil-progress, u l-kalkolu ma jinbidilx. M’għandux jitħawwad mal-istatus “Preżunt assenti” (art. 112).
+Contact de {name} : {state} ¦ Kontakti me {name}: {state} ¦ Kuntatt ma’ {name}: {state}
+Les fiches confidentielles comptent-elles comme héritiers ? ¦ A llogariten kartelat konfidenciale si trashëgimtarë? ¦ L-iskedi kunfidenzjali jgħoddu bħala werrieta?
+Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Jo: kartela konfidenciale hiqet nga llogaritja, sikur të mos ekzistonte; dosja e tregon. ¦ Le: skeda kunfidenzjali titneħħa mill-kalkolu, qisha ma teżistix; il-fajl jindika dan.
+Le défunt n’est pas un héritier à contacter. ¦ I ndjeri nuk është trashëgimtar për t’u kontaktuar. ¦ Il-mejjet mhuwiex werriet li jrid jiġi kkuntattjat.
+⚖️ Un doute sur la loi ? ¦ ⚖️ Një dyshim për ligjin? ¦ ⚖️ Dubju dwar il-liġi?
+⚖️ Un doute ? ¦ ⚖️ Një dyshim? ¦ ⚖️ Dubju?
+⚖️ UN DOUTE SUR LA LOI ? ¦ ⚖️ NJË DYSHIM PËR LIGJIN? ¦ ⚖️ DUBJU DWAR IL-LIĠI?
+Chercher sur un site officiel ¦ Kërko në një faqe zyrtare ¦ Fittex f’sit uffiċjali
+✍️ Noter dans le dossier ¦ ✍️ Shëno në dosje ¦ ✍️ Niżżel fil-fajl
+Ton problème, avec tes mots ¦ Problemi yt, me fjalët e tua ¦ Il-problema tiegħek, bi kliemek
+ex. un héritier refuse de répondre · délai pour renoncer à une succession ¦ p.sh. një trashëgimtar refuzon të përgjigjet · afati për të hequr dorë nga një trashëgimi ¦ eż. werriet jirrifjuta li jwieġeb · terminu biex tirrinunzja għal wirt
+N’écris pas de nom : la question part sur internet. ¦ Mos shkruaj emra: pyetja shkon në internet. ¦ Tiktibx ismijiet: il-mistoqsija tmur fuq l-internet.
+🏛 Chercher sur Service-public ¦ 🏛 Kërko në Service-public ¦ 🏛 Fittex fuq Service-public
+explique en français simple et donne le lien vers le bon article ¦ shpjegon në frëngjisht të thjeshtë dhe jep lidhjen për nenin e duhur ¦ jispjega bil-Franċiż sempliċi u jagħti l-link għall-artiklu t-tajjeb
+📜 Chercher sur Légifrance ¦ 📜 Kërko në Légifrance ¦ 📜 Fittex fuq Légifrance
+les articles des codes en vigueur ¦ nenet e kodeve në fuqi ¦ l-artikli tal-kodiċijiet fis-seħħ
+L’app ne choisit aucun article : ta question est envoyée telle quelle au site officiel, qui s’ouvre dans ton navigateur. ¦ Aplikacioni nuk zgjedh asnjë nen: pyetja jote dërgohet ashtu siç është te faqja zyrtare, që hapet në shfletuesin tënd. ¦ L-app ma tagħżel l-ebda artiklu: il-mistoqsija tiegħek tintbagħat kif inhi lis-sit uffiċjali, li jinfetaħ fil-browser tiegħek.
+✍️ Noter dans le dossier {n} ¦ ✍️ Shëno në dosjen {n} ¦ ✍️ Niżżel fil-fajl {n}
+Lien de l’article ou de la fiche (facultatif) ¦ Lidhja e nenit ose e faqes (opsionale) ¦ Link għall-artiklu jew għall-paġna (mhux obbligatorju)
+Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Vetëm një adresë https:// nga Légifrance, Service-public ose EUR-Lex. ¦ Indirizz https:// biss minn Légifrance, Service-public jew EUR-Lex.
+Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Lidhja u refuzua: vetëm një adresë https:// nga Légifrance, Service-public ose EUR-Lex. ¦ Link rifjutat: indirizz https:// biss minn Légifrance, Service-public jew EUR-Lex.
+Noté au journal du dossier {n}. ¦ U shënua në ditarin e dosjes {n}. ¦ Imniżżel fir-reġistru tal-fajl {n}.
+Écris d’abord ta question. ¦ Shkruaj fillimisht pyetjen tënde. ¦ Ikteb il-mistoqsija tiegħek l-ewwel.
+# ⚖️ Outils du successoral (⏱ 🔔 📋 🧾 📊 ✉️) et ＋ Ajouter un onglet (docs/design/onglets-et-successoral-outils.html)
+⏱ Compter le temps passé sur ce dossier ¦ ⏱ Numëro kohën e kaluar në këtë dosje ¦ ⏱ Għodd il-ħin li għaddejt fuq dan il-fajl
+{n} min ¦ {n} min ¦ {n} min
+⏸️ Pause ¦ ⏸️ Pauzë ¦ ⏸️ Pawża
+▶️ Reprendre ¦ ▶️ Vazhdo ¦ ▶️ Kompli
+⏹️ Arrêter et noter ¦ ⏹️ Ndalo dhe shëno ¦ ⏹️ Waqqaf u niżżel
+Moins d’une minute : rien à noter. ¦ Më pak se një minutë: asgjë për të shënuar. ¦ Inqas minn minuta: xejn x’tniżżel.
+Noter le temps passé ¦ Shëno kohën e kaluar ¦ Niżżel il-ħin li għaddejt
+Noter {t} ¦ Shëno {t} ¦ Niżżel {t}
+Proposé d’après les onglets ouverts ; à corriger si besoin. Date : {d}. ¦ Propozuar sipas skedave të hapura; korrigjoje nëse duhet. Data: {d}. ¦ Propost skont it-tabs miftuħa; ikkoreġi jekk hemm bżonn. Data: {d}.
+Minuit passé : une ligne par jour. ¦ Pas mesnate: një rresht në ditë. ¦ Wara nofsillejl: linja waħda kull jum.
+Jeter ce temps ¦ Hidhe këtë kohë ¦ Armi dan il-ħin
+Jeter ce temps ? ¦ Ta hedh këtë kohë? ¦ Narmi dan il-ħin?
+Jeter ¦ Hidhe ¦ Armi
+{t} d’affilée : c’est bien ça ? ¦ {t} pa ndërprerje: a është e saktë? ¦ {t} wara xulxin: hux hekk?
+Plus de 10 h d’affilée ¦ Mbi 10 orë pa ndërprerje ¦ Aktar minn 10 sigħat wara xulxin
+Noter quand même ¦ Shëno gjithsesi ¦ Niżżel xorta
+⏱ {t} notées dans le dossier {n} ¦ ⏱ {t} u shënuan në dosjen {n} ¦ ⏱ {t} imniżżla fil-fajl {n}
+Le chronomètre compte pour {n}. ¦ Kronometri numëron për {n}. ¦ Il-kronometru qed jgħodd għal {n}.
+⏹️ Noter et passer à {n} ¦ ⏹️ Shëno dhe kalo te {n} ¦ ⏹️ Niżżel u mur għal {n}
+Continuer sur {n} ¦ Vazhdo me {n} ¦ Kompli ma’ {n}
+Rien touché depuis 10 min : chronomètre en pause à {h}. ¦ Asgjë e prekur prej 10 min: kronometri në pauzë në {h}. ¦ Xejn ma ntmess għal 10 min: kronometru f’pawża fil-{h}.
+Compter aussi ces 10 min ¦ Numëro edhe këto 10 min ¦ Għodd ukoll dawn l-10 min
+⏱ {n} : {t} comptées avant la fermeture. ¦ ⏱ {n}: {t} u numëruan para mbylljes. ¦ ⏱ {n}: {t} magħduda qabel l-għeluq.
+Noter ¦ Shëno ¦ Niżżel
+Échéances du jour : {n} à faire (retards et aujourd’hui) ¦ Afatet e ditës: {n} për t’u bërë (të vonuara dhe sot) ¦ L-iskadenzi tal-jum: {n} x’tagħmel (tard u llum)
+🔔 Échéances du jour ¦ 🔔 Afatet e ditës ¦ 🔔 L-iskadenzi tal-jum
+⏰ Rappel ¦ ⏰ Kujtesë ¦ ⏰ Tfakkira
+prévu le {d} ¦ parashikuar më {d} ¦ previst fil-{d}
+✓ Fait ¦ ✓ U bë ¦ ✓ Magħmul
+⏭ Demain (ou lundi) ¦ ⏭ Nesër (ose të hënën) ¦ ⏭ Għada (jew it-Tnejn)
+↗ Ouvrir le dossier ¦ ↗ Hap dosjen ¦ ↗ Iftaħ il-fajl
+voir ▾ ¦ shiko ▾ ¦ uri ▾
+Rien pour aujourd’hui. ¦ Asgjë për sot. ¦ Xejn għal-lum.
+Prochaine : {d} ({n}) ¦ Tjetri: {d} ({n}) ¦ Li jmiss: {d} ({n})
+🔔 À faire · {d} ¦ 🔔 Për t’u bërë · {d} ¦ 🔔 X’tagħmel · {d}
+Cette généalogie ¦ Kjo gjenealogji ¦ Din il-ġenealoġija
+⚖️ {name} : impossible de lire les échéances ¦ ⚖️ {name}: afatet nuk mund të lexohen ¦ ⚖️ {name}: l-iskadenzi ma jistgħux jinqraw
+✓ fait · ⏭ demain / lundi · ↗ ouvre le dossier (change de généalogie si besoin) ¦ ✓ u bë · ⏭ nesër / e hënë · ↗ hap dosjen (ndërron gjenealogjinë nëse duhet) ¦ ✓ magħmul · ⏭ għada / it-Tnejn · ↗ jiftaħ il-fajl (ibiddel il-ġenealoġija jekk hemm bżonn)
+Ajouter mes rappels ¦ Shto kujtesat e mia ¦ Żid it-tfakkiriet tiegħi
+Bulle de l’ordinateur à l’ouverture de l’app ¦ Njoftim i kompjuterit kur hapet aplikacioni ¦ Notifika tal-kompjuter meta tinfetaħ l-app
+🗓 Ma semaine ¦ 🗓 Java ime ¦ 🗓 Il-ġimgħa tiegħi
+Reporté au {d} ¦ U shty për më {d} ¦ Pospost għall-{d}
+✓ Fait : {l} ¦ ✓ U bë: {l} ¦ ✓ Magħmul: {l}
+Reporté au {d} : {l} ¦ U shty për më {d}: {l} ¦ Pospost għall-{d}: {l}
+Points prêts : {n} sur {m} ¦ Pika gati: {n} nga {m} ¦ Punti lesti: {n} minn {m}
+À revoir : {n} ¦ Për t’u rishikuar: {n} ¦ Biex jiġu riveduti: {n}
+Manque : {n} ¦ Mungon: {n} ¦ Nieqes: {n}
+📋 AVANT DE REMETTRE ¦ 📋 PARA DORËZIMIT ¦ 📋 QABEL IT-TQASSIM LIN-NUTAR
+Avant de remettre · {n} ¦ Para dorëzimit · {n} ¦ Qabel it-tqassim · {n}
+Passer à « Remis au notaire » ¦ Kalo te «Dorëzuar noterit» ¦ Għaddi għal «Mogħti lin-nutar»
+Ça avertit, ça n’empêche pas : tu peux remettre quand même, ce sera noté au journal. ¦ Paralajmëron, nuk pengon: mund ta dorëzosh gjithsesi, do të shënohet në ditar. ¦ Iwissi, ma jwaqqafx: tista’ tagħti xorta, jitniżżel fil-ġurnal.
+🖨 Imprimer quand même ¦ 🖨 Shtyp gjithsesi ¦ 🖨 Ipprintja xorta
+Montant ¦ Shuma ¦ Ammont
+non signé ¦ e pafirmosur ¦ mhux iffirmat
+Commission ¦ Komision ¦ Kummissjoni
+Reste à l’héritier ¦ I mbetet trashëgimtarit ¦ Jibqa’ għall-werriet
+Arrondi au centime : chaque part est arrondie au centime inférieur, puis les centimes qui restent vont aux parts qui en ont perdu le plus. Le total tombe juste. ¦ Rrumbullakosur në cent: çdo pjesë rrumbullakoset poshtë në cent, pastaj centët e mbetur shkojnë te pjesët që humbën më shumë. Totali del i saktë. ¦ Imqarreb għaċ-ċenteżmu: kull sehem jitqarreb ’l isfel għaċ-ċenteżmu, imbagħad iċ-ċenteżmi li jifdal imorru għall-ishma li tilfu l-aktar. It-total joħroġ eżatt.
+Tape l’actif net en euros pour voir la part de chacun. ¦ Shkruaj aktivin neto në euro për të parë pjesën e secilit. ¦ Ikteb l-assi nett f’euro biex tara s-sehem ta’ kulħadd.
+Tape un montant en euros (ex. 187 450,00). ¦ Shkruaj një shumë në euro (p.sh. 187 450,00). ¦ Ikteb ammont f’euro (eż. 187 450,00).
+Plus d’un milliard d’euros : c’est bien ça ? ¦ Mbi një miliard euro: a është e saktë? ¦ Aktar minn biljun euro: hux hekk?
+Oui, calculer ¦ Po, llogarit ¦ Iva, ikkalkula
+Si le conjoint choisit l’usufruit de la totalité : pas de montant en euros (sa valeur dépend de son âge, c’est un barème fiscal) ; demande la valeur au notaire, pour lui et pour les nus-propriétaires. ¦ Nëse bashkëshorti zgjedh uzufruktin e gjithë trashëgimisë: asnjë shumë në euro (vlera varet nga mosha, është një tabelë tatimore); pyete noterin për vlerën, për të dhe për pronarët e zhveshur. ¦ Jekk il-konjuġi jagħżel l-użufrutt tal-kollox: l-ebda ammont f’euro (il-valur jiddependi mill-età, hija tabella tat-taxxa); staqsi lin-nutar għall-valur, għalih u għas-sidien nudi.
+Autre hypothèse, {h} ¦ Hipotezë tjetër, {h} ¦ Ipoteżi oħra, {h}
+📊 Part de chacun en euros ¦ 📊 Pjesa e secilit në euro ¦ 📊 Is-sehem ta’ kulħadd f’euro
+Fractions ¦ Thyesa ¦ Frazzjonijiet
+💶 En euros ¦ 💶 Në euro ¦ 💶 F’euro
+⤓ Copier le tableau ¦ ⤓ Kopjo tabelën ¦ ⤓ Ikkopja t-tabella
+Actif net à partager (tapé par toi) ¦ Aktivi neto për t’u ndarë (shkruar nga ti) ¦ Assi nett biex jinqasam (miktub minnek)
+D’après le notaire. Pas gardé : effacé quand tu fermes le dossier. ¦ Sipas noterit. Nuk ruhet: fshihet kur mbyll dosjen. ¦ Skont in-nutar. Ma jinżammx: jitħassar meta tagħlaq il-fajl.
+Hors droits de succession et frais : l’app ne calcule pas l’impôt. Ces montants sont un ordre d’idée, à faire vérifier par le notaire. ¦ Pa taksë trashëgimie dhe shpenzime: aplikacioni nuk llogarit taksën. Këto shuma janë një ide e përafërt, për t’u verifikuar nga noteri. ¦ Mingħajr taxxa tas-suċċessjoni u spejjeż: l-app ma tikkalkulax it-taxxa. Dawn l-ammonti huma idea, biex jivverifikahom in-nutar.
+Commission = le % écrit dans « ＋ Honoraires d’un contrat » × le montant, arrondie au centime le plus proche, sans TVA ajoutée ; reste = montant − commission. ¦ Komisioni = % i shkruar te «＋ Honorar i një kontrate» × shuma, rrumbullakosur në centin më të afërt, pa TVSH të shtuar; mbetet = shuma − komisioni. ¦ Kummissjoni = il-% miktub f’«＋ Ħlas ta’ kuntratt» × l-ammont, imqarreb għall-eqreb ċenteżmu, mingħajr VAT miżjud; jibqa’ = ammont − kummissjoni.
+Tableau copié. ¦ Tabela u kopjua. ¦ Tabella kkupjata.
+Parts en euros — {n} ¦ Pjesët në euro — {n} ¦ Ishma f’euro — {n}
+Parts en euros imprimées ¦ Pjesët në euro u shtypën ¦ Ishma f’euro pprintjati
+✉️ Courrier à plusieurs… ¦ ✉️ Letër për disa… ¦ ✉️ Ittra lil diversi…
+décoché ¦ i hequr ¦ mhux immarkat
+déjà écrit le {d} ({k}) ¦ shkruar tashmë më {d} ({k}) ¦ diġà miktub fil-{d} ({k})
+✉️ Courriers en série · {n} ¦ ✉️ Letra në seri · {n} ¦ ✉️ Ittri f’serje · {n}
+Les héritiers dont l’existence n’est pas établie ne sont pas dans la liste. Les décochés peuvent être cochés à la main (une lettre sans adresse est alors imprimée sans bloc adresse). ¦ Trashëgimtarët ekzistenca e të cilëve nuk është vërtetuar nuk janë në listë. Të hequrit mund të shënohen me dorë (një letër pa adresë shtypet atëherë pa bllok adrese). ¦ Il-werrieta li l-eżistenza tagħhom mhix stabbilita mhumiex fil-lista. Dawk mhux immarkati jistgħu jiġu mmarkati bl-idejn (ittra mingħajr indirizz tiġi pprintjata mingħajr blokk tal-indirizz).
+La lettre · clic sur un champ pour l’insérer ¦ Letra · kliko një fushë për ta futur ¦ L-ittra · ikklikkja fuq qasam biex iddaħħlu
+{envoyé_le} : la date du courrier précédent à cet héritier ; {date} : la date d’envoi de celui-ci. ¦ {envoyé_le}: data e letrës së mëparshme për këtë trashëgimtar; {date}: data e dërgimit të kësaj. ¦ {envoyé_le}: id-data tal-ittra preċedenti lil dan il-werriet; {date}: id-data meta tintbagħat din.
+Lettre précédente ¦ Letra e mëparshme ¦ Ittra preċedenti
+Lettre suivante ¦ Letra tjetër ¦ Ittra li jmiss
+✎ Retoucher cette lettre ¦ ✎ Ripunoje këtë letër ¦ ✎ Irtokka din l-ittra
+↺ Revenir au modèle ¦ ↺ Kthehu te modeli ¦ ↺ Lura għall-mudell
+＋ Enregistrer comme modèle ¦ ＋ Ruaje si model ¦ ＋ Issejvja bħala mudell
+Lettres prêtes : {n} sur {m} ¦ Letra gati: {n} nga {m} ¦ Ittri lesti: {n} minn {m}
+Champ inconnu : {f} (ligne {l}). Corrige-le avant de ranger les lettres. ¦ Fushë e panjohur: {f} (rreshti {l}). Korrigjoje para se të arkivosh letrat. ¦ Qasam mhux magħruf: {f} (linja {l}). Ikkoreġih qabel ma tarkivja l-ittri.
+🖨 Imprimer les {n} ¦ 🖨 Shtyp të {n} ¦ 🖨 Ipprintja l-{n}
+Lettre {i} / {n} · {name} ¦ Letra {i} / {n} · {name} ¦ Ittra {i} / {n} · {name}
+Champ vide : la ligne s’écrit sans le mot ¦ Fushë bosh: rreshti shkruhet pa fjalën ¦ Qasam vojt: il-linja tinkiteb mingħajr il-kelma
+✎ modifiée à la main ¦ ✎ ndryshuar me dorë ¦ ✎ mibdula bl-idejn
+Ton nom et ton adresse : Listes → Registre de courriers → ✉️ Lettres (expéditeur). ¦ Emri dhe adresa jote: Listat → Regjistri i letërkëmbimit → ✉️ Letrat (dërguesi). ¦ Ismek u l-indirizz tiegħek: Listi → Reġistru tal-korrispondenza → ✉️ Ittri (min jibgħat).
+Mes modèles (aucun pour l’instant) ¦ Modelet e mia (asnjë ende) ¦ Il-mudelli tiegħi (l-ebda wieħed s’issa)
+Remplacer ta lettre par ce modèle ? ¦ Ta zëvendësoj letrën tënde me këtë model? ¦ Nissostitwixxi l-ittra tiegħek b’dan il-mudell?
+Changer de modèle ¦ Ndrysho modelin ¦ Ibdel il-mudell
+Oublier les retouches de la lettre à {name} ? ¦ Të harroj ndryshimet e letrës për {name}? ¦ Ninsew ir-ritokki tal-ittra lil {name}?
+Revenir au modèle ¦ Kthehu te modeli ¦ Lura għall-mudell
+Modèle « {name} » enregistré (Mes modèles, communs à tous les dossiers de cette généalogie) ¦ Modeli «{name}» u ruajt (Modelet e mia, të përbashkëta për të gjitha dosjet e kësaj gjenealogjie) ¦ Mudell «{name}» issejvjat (Il-mudelli tiegħi, komuni għall-fajls kollha ta’ din il-ġenealoġija)
+Corrige d’abord le champ inconnu. ¦ Korrigjo fillimisht fushën e panjohur. ¦ L-ewwel ikkoreġi l-qasam mhux magħruf.
+Rangement : {n} sur {m} ¦ Arkivimi: {n} nga {m} ¦ Arkivjar: {n} minn {m}
+{n} rangés dans le Registre de courriers, relance le {d} ¦ {n} u arkivuan në Regjistrin e letërkëmbimit, kujtesë më {d} ¦ {n} arkivjati fir-Reġistru tal-korrispondenza, tfakkira fil-{d}
+en main, cote non notée ¦ në dorë, kodi i arkivit nuk është shënuar ¦ f’idejk, segnatura mhux imniżżla
+demandé le {d} ¦ kërkuar më {d} ¦ mitlub fil-{d}
+demandé ¦ kërkuar ¦ mitlub
+acte à fournir ¦ akt për t’u siguruar ¦ att li għandu jingħata
+(commun, voir {n}) ¦ (i përbashkët, shih {n}) ¦ (komuni, ara {n})
+CHAÎNE DE FILIATION ¦ ZINXHIRI I PREJARDHJES ¦ KATINA TAD-DIXXENDENZA
+Calcul établi d’après les actes cités, sous réserve de vérification par le notaire. ¦ Llogaritje sipas akteve të përmendura, me rezervën e verifikimit nga noteri. ¦ Kalkolu magħmul fuq l-atti msemmija, soġġett għall-verifika tan-nutar.
+Code civil, articles cités pour ce dossier : art. {list}. ¦ Kodi Civil, nenet e përmendura për këtë dosje: art. {list}. ¦ Kodiċi Ċivili, artikli msemmija għal dan il-fajl: art. {list}.
+N. = naissance, M. = mariage, D. = décès. ¦ L. = lindje, M. = martesë, V. = vdekje. ¦ T. = twelid, Ż. = żwieġ, M. = mewt.
+Page {n} / {t} ¦ Faqja {n} / {t} ¦ Paġna {n} / {t}
+Coche au moins une page. ¦ Shëno të paktën një faqe. ¦ Immarka mill-inqas paġna waħda.
+Tableau pour le notaire : PDF ({n} pages, avec chaîne par héritier) ¦ Tabela për noterin: PDF ({n} faqe, me zinxhirin e çdo trashëgimtari) ¦ Tabella għan-nutar: PDF ({n} paġni, bil-katina ta’ kull werriet)
+Tableau pour le notaire : PDF ({n} pages) ¦ Tabela për noterin: PDF ({n} faqe) ¦ Tabella għan-nutar: PDF ({n} paġni)
+sans adresses ¦ pa adresa ¦ mingħajr indirizzi
+📋 Avant de remettre ¦ 📋 Para dorëzimit ¦ 📋 Qabel it-tqassim lin-nutar
+ça avertit, ça n’empêche pas ¦ paralajmëron, nuk pengon ¦ iwissi, ma jwaqqafx
+Ce que contient le PDF ¦ Çfarë përmban PDF-ja ¦ X’fih il-PDF
+Compté par le chronomètre ¦ Numëruar nga kronometri ¦ Magħdud mill-kronometru
+Taux horaire pour le relevé (facultatif, pas gardé) ¦ Tarifa për orë për pasqyrën (fakultative, nuk ruhet) ¦ Rata kull siegħa għar-rapport (mhux obbligatorja, ma tinżammx)
+€ / h ¦ € / orë ¦ € / siegħa
+✎ Modifier la ligne ¦ ✎ Ndrysho rreshtin ¦ ✎ Ibdel il-linja
+Ligne modifiée ¦ Rreshti u ndryshua ¦ Linja mibdula
+Temps × taux horaire ({r} € / h) : {s} ¦ Koha × tarifa për orë ({r} € / orë): {s} ¦ Ħin × rata kull siegħa ({r} € / siegħa): {s}
+Ajouté depuis « ＋ Ajouter un onglet ». ¦ Shtuar nga «＋ Shto një skedë». ¦ Miżjud minn «＋ Żid tab».
+✓ Onglet « {name} » ajouté ¦ ✓ Skeda «{name}» u shtua ¦ ✓ It-tab «{name}» miżjud
+Onglet « {name} » caché ¦ Skeda «{name}» u fsheh ¦ It-tab «{name}» moħbi
+conseillé pour toi ¦ e këshilluar për ty ¦ rakkomandat għalik
+montré par ton usage ¦ e shfaqur nga përdorimi yt ¦ muri mill-użu tiegħek
+Conseillés pour toi ¦ Të këshilluara për ty ¦ Rakkomandati għalik
+Tout le reste ▾ ¦ Gjithçka tjetër ▾ ¦ Il-bqija kollu ▾
+Qu’est-ce que tu veux avoir sous la main ? ¦ Çfarë do të kesh në dorë? ¦ X’trid ikollok f’idejk?
+Ton usage : {u} ¦ Përdorimi yt: {u} ¦ L-użu tiegħek: {u}
+Chercher un onglet ¦ Kërko një skedë ¦ Fittex tab
+🔍 Chercher un onglet… (courrier, acte, agenda) ¦ 🔍 Kërko një skedë… (letër, akt, axhendë) ¦ 🔍 Fittex tab… (ittra, att, aġenda)
+Conseillés ({n}) ¦ Të këshilluara ({n}) ¦ Rakkomandati ({n})
+Déjà dans le menu ({n}) ¦ Tashmë në meny ({n}) ¦ Diġà fil-menu ({n})
+Aucun onglet ne correspond. ¦ Asnjë skedë nuk përputhet. ¦ L-ebda tab ma jaqbel.
+Une carte cochée = l’onglet est dans le menu. Cocher l’ajoute à la fin du menu ; décocher le cache (un raccourci est caché, pas effacé). ¦ Një kartë e shënuar = skeda është në meny. Shënimi e shton në fund të menysë; heqja e shënimit e fsheh (një shkurtore fshihet, nuk fshihet përgjithmonë). ¦ Karta mmarkata = it-tab jinsab fil-menu. L-immarkar iżidu fl-aħħar tal-menu; it-tneħħija tal-marka taħbih (shortcut jinħeba, ma jitħassarx).
+↗ Faire un onglet à moi (Éditeur d’onglets) ¦ ↗ Bëj një skedë timen (Redaktuesi i skedave) ¦ ↗ Agħmel tab tiegħi (Editur tat-tabs)
+MENU ¦ MENYJA ¦ MENU
+＋ Ajouter un onglet ¦ ＋ Shto një skedë ¦ ＋ Żid tab
+Ajouter un onglet ¦ Shto një skedë ¦ Żid tab
+＋ Ajouter un onglet… ¦ ＋ Shto një skedë… ¦ ＋ Żid tab…
+Montrer le ＋ au bout du menu ¦ Shfaq ＋ në fund të menysë ¦ Uri l-＋ fl-aħħar tal-menu
+Retirer ce raccourci du menu (un onglet de l’app ne se retire pas : il se cache) ¦ Hiqe këtë shkurtore nga menyja (një skedë e aplikacionit nuk hiqet: fshihet) ¦ Neħħi dan ix-shortcut mill-menu (tab tal-app ma jitneħħiex: jinħeba)
+Onglet « {name} » retiré du menu ¦ Skeda «{name}» u hoq nga menyja ¦ It-tab «{name}» imneħħi mill-menu
+Le ＋ est au bout du menu ¦ ＋ është në fund të menysë ¦ Il-＋ jinsab fl-aħħar tal-menu
+Le ＋ n’est plus au bout du menu ¦ ＋ nuk është më në fund të menysë ¦ Il-＋ m’għadux fl-aħħar tal-menu
+Recherches : {what} ¦ Kërkime: {what} ¦ Riċerki: {what}
+Recherches ¦ Kërkime ¦ Riċerki
+Acte de décès de {name} en main ¦ Akti i vdekjes së {name} në dorë ¦ Att tal-mewt ta’ {name} f’idejk
+Acte de décès de {name} pas en main ¦ Akti i vdekjes së {name} mungon ¦ Att tal-mewt ta’ {name} nieqes
+demandé, pas encore reçu ¦ kërkuar, ende i pamarrë ¦ mitlub, għadu ma waslx
+Arbre de dévolution complet ¦ Pema e trashëgimisë e plotë ¦ Is-siġra tad-devoluzzjoni kompluta
+Aucune branche à chercher. ¦ Asnjë degë për t’u kërkuar. ¦ L-ebda fergħa biex tfittex.
+Branches encore à chercher : {n} ¦ Degë ende për t’u kërkuar: {n} ¦ Friegħi li għad iridu jitfittxu: {n}
+Héritiers dont l’existence n’est pas établie : {n} ¦ Trashëgimtarë ekzistenca e të cilëve nuk është vërtetuar: {n} ¦ Werrieta li l-eżistenza tagħhom mhix stabbilita: {n}
+Liens prouvés par aucun acte : {n} ¦ Lidhje që nuk i vërteton asnjë akt: {n} ¦ Rabtiet li l-ebda att ma jipprova: {n}
+{what} (relie {who} au défunt) ¦ {what} (lidh {who} me të ndjerin) ¦ {what} (jorbot lil {who} mal-mejjet)
+Chaque lien est prouvé par un acte ¦ Çdo lidhje vërtetohet nga një akt ¦ Kull rabta hija ppruvata b’att
+Actes demandés, pas encore reçus : {n} ¦ Akte të kërkuara, ende të pamarra: {n} ¦ Atti mitluba, għadhom ma waslux: {n}
+{what} · demandé le {d} ¦ {what} · kërkuar më {d} ¦ {what} · mitlub fil-{d}
+(courrier n° {n}) ¦ (letra nr. {n}) ¦ (ittra nru {n})
+Adresses des héritiers vivants : {n} sur {m} ¦ Adresat e trashëgimtarëve të gjallë: {n} nga {m} ¦ Indirizzi tal-werrieta ħajjin: {n} minn {m}
+Aucun héritier vivant à joindre ¦ Asnjë trashëgimtar i gjallë për t’u kontaktuar ¦ L-ebda werriet ħaj biex jintlaħaq
+Contrats signés (ou refus noté) : {n} sur {m} ¦ Kontrata të firmosura (ose refuzim i shënuar): {n} nga {m} ¦ Kuntratti ffirmati (jew rifjut imniżżel): {n} minn {m}
+Aucun contrat à faire signer ¦ Asnjë kontratë për t’u firmosur ¦ L-ebda kuntratt biex jiġi ffirmat
+Contrats pas encore signés : {n} ¦ Kontrata ende të pafirmosura: {n} ¦ Kuntratti li għadhom mhux iffirmati: {n}
+{name} a répondu « oui », pas de date de signature ¦ {name} u përgjigj «po», pa datë firmosjeje ¦ {name} wieġeb «iva», mingħajr data tal-firma
+Héritiers introuvables ou silencieux : {n} ¦ Trashëgimtarë të pagjetshëm ose që nuk përgjigjen: {n} ¦ Werrieta li ma jinstabux jew ma jwieġbux: {n}
+Parts : le total fait bien 1 ¦ Pjesët: totali bën vërtet 1 ¦ Ishma: it-total verament jagħmel 1
+Les parts ne totalisent pas 1 : à revoir ¦ Pjesët nuk bëjnë 1: për t’u rishikuar ¦ L-ishma ma jagħmlux 1: biex jiġi rivedut
+Échéances en retard : {n} ¦ Afate të vonuara: {n} ¦ Skadenzi tard: {n}
+Aucune échéance en retard ¦ Asnjë afat i vonuar ¦ L-ebda skadenza tard
+Remis au notaire avec {miss} manque(s) et {warn} point(s) à revoir ({what}) ¦ Dorëzuar noterit, mungon: {miss}, për t’u rishikuar: {warn} ({what}) ¦ Mogħti lin-nutar, nieqes: {miss}, biex jiġu riveduti: {warn} ({what})
+Madame ¦ Zonjë ¦ Sinjura
+Monsieur ¦ Zotëri ¦ Sinjur
+Tes photos, actes, lettres de A à Z, rangés en dossiers. ¦ Fotot, aktet, letrat e tua nga A në Z, të renditura në dosje. ¦ Ir-ritratti, l-atti, l-ittri tiegħek minn A sa Ż, irranġati f’folders.
+Lettres à ouvrir plus tard, recettes, musée de famille. ¦ Letra për t’u hapur më vonë, receta, muze familjar. ¦ Ittri biex jinfetħu aktar tard, riċetti, mużew tal-familja.
+Fiches thématiques : un métier, une guerre, un village. ¦ Fletë tematike: një zanat, një luftë, një fshat. ¦ Skedi tematiċi: sengħa, gwerra, raħal.
+Tes correspondances ADN et leurs liens. ¦ Përputhjet e tua të ADN-së dhe lidhjet e tyre. ¦ It-tqabbil tad-DNA tiegħek u r-rabtiet tagħhom.
+Les œuvres d’un artiste, albums, expositions. ¦ Veprat e një artisti, albume, ekspozita. ¦ Ix-xogħlijiet ta’ artist, albums, wirjiet.
+Pedigree, portées. (Suivi des animaux : à part.) ¦ Prejardhja, pjelljet. (Ndjekja e kafshëve: veçmas.) ¦ Pedigree, boton. (Segwitu tal-annimali: għalih.)
+Baguage, puces, observations, trajets. ¦ Unazim, çipa, vëzhgime, shtigje. ¦ Ċrieki, ċipep, osservazzjonijiet, rotot.
+Dossiers de succession, pour un notaire. ¦ Dosje trashëgimie, për një noter. ¦ Fajls tas-suċċessjoni, għal nutar.
+Le Registre de courriers : demandes d’actes, relances, réponses. ¦ Regjistri i letërkëmbimit: kërkesa aktesh, kujtesa, përgjigje. ¦ Ir-Reġistru tal-korrispondenza: talbiet għal atti, tfakkiriet, tweġibiet.
+Listes → Archives et sources → Registre de courriers ¦ Listat → Arkiva dhe burime → Regjistri i letërkëmbimit ¦ Listi → Arkivji u sorsi → Reġistru tal-korrispondenza
+Tes actes recopiés, mot à mot. ¦ Aktet e tua të kopjuara, fjalë për fjalë. ¦ L-atti tiegħek ikkupjati, kelma b’kelma.
+Listes → Archives et sources ¦ Listat → Arkiva dhe burime ¦ Listi → Arkivji u sorsi
+Visites, rendez-vous, relances, à la semaine. ¦ Vizita, takime, kujtesa, javë pas jave. ¦ Żjarat, appuntamenti, tfakkiriet, ġimgħa b’ġimgħa.
+Listes → Recherche et organisation ¦ Listat → Kërkim dhe organizim ¦ Listi → Riċerka u organizzazzjoni
+Les choses à faire, avec leur date. ¦ Gjërat për t’u bërë, me datën e tyre. ¦ L-affarijiet x’tagħmel, bid-data tagħhom.
+Toutes les images, sons, vidéos en tableau. ¦ Të gjitha imazhet, tingujt, videot në një tabelë. ¦ L-immaġini, il-ħsejjes, il-vidjows kollha f’tabella.
+Listes → Médias et documents ¦ Listat → Media dhe dokumente ¦ Listi → Midja u dokumenti
+Questionnaires pour recueillir les souvenirs. ¦ Pyetësorë për të mbledhur kujtimet. ¦ Kwestjonarji biex tiġbor it-tifkiriet.
+Les maisons, pièce par pièce, et qui y a vécu. ¦ Shtëpitë, dhomë pas dhome, dhe kush ka jetuar aty. ¦ Id-djar, kamra b’kamra, u min għex fihom.
+Listes → Lieux et maisons ¦ Listat → Vende dhe shtëpi ¦ Listi → Postijiet u djar
+Adresses et contacts des cousins vivants. ¦ Adresat dhe kontaktet e kushërinjve të gjallë. ¦ Indirizzi u kuntatti tal-kuġini ħajjin.
+Listes → Personnes et familles ¦ Listat → Persona dhe familje ¦ Listi → Persuni u familji
+Les dépôts, leurs cotes, leurs horaires. ¦ Arkivat, kodet e tyre, oraret e tyre. ¦ L-arkivji, is-segnaturi tagħhom, il-ħinijiet tagħhom.
+Le planificateur : quoi consulter, où, quand. ¦ Planifikuesi: çfarë të shohësh, ku, kur. ¦ Il-pjanifikatur: x’tikkonsulta, fejn, meta.
+Qui a hérité de quoi d’après les actes anciens. ¦ Kush trashëgoi çfarë sipas akteve të vjetra. ¦ Min wiret x’hiex skont l-atti antiki.
+Les bons sites pour la personne ouverte. ¦ Faqet e duhura për personin e hapur. ¦ Is-siti t-tajba għall-persuna miftuħa.
+Recherche → Type de recherche ¦ Kërkim → Lloji i kërkimit ¦ Tfittxija → Tip ta’ tfittxija
+Trouver et fusionner les fiches en double. ¦ Gjej dhe bashko regjistrimet e dyfishta. ¦ Sib u għaqqad ir-rekords doppji.
+Réglages → Fusion de doublons ¦ Cilësimet → Bashkimi i dublikatave ¦ Issettjar → Għaqda tad-duplikati
+Dates impossibles, liens bizarres. ¦ Data të pamundura, lidhje të çuditshme. ¦ Dati impossibbli, rabtiet strambi.
+Réglages → Contrôle de la base ¦ Cilësimet → Kontrolli i bazës ¦ Issettjar → Kontroll tal-bażi
+Le nom étudié ¦ Mbiemri i studiuar ¦ Il-kunjom studjat
+Les porteurs d’un nom, ses variantes. ¦ Bartësit e një mbiemri, variantet e tij. ¦ Dawk li għandhom kunjom, il-varjanti tiegħu.
+Graphiques → statistique des noms ¦ Grafikët → statistika e mbiemrave ¦ Grafiċi → statistika tal-kunjomijiet
+L’entreprise ¦ Ndërmarrja ¦ L-intrapriża
+Employeurs, salariés, membres. ¦ Punëdhënës, punonjës, anëtarë. ¦ Impjegaturi, impjegati, membri.
+Listes → Employeurs ¦ Listat → Punëdhënësit ¦ Listi → Impjegaturi
+Des parties de l’app, cachées au départ ¦ Pjesë të aplikacionit, të fshehura në fillim ¦ Partijiet tal-app, moħbija fil-bidu
+Elles existent déjà : cocher les montre dans le menu. ¦ Ekzistojnë tashmë: shënimi i shfaq në meny. ¦ Diġà jeżistu: l-immarkar jurihom fil-menu.
+Un raccourci vers une liste ¦ Një shkurtore drejt një liste ¦ Shortcut għal lista
+Il devient un « onglet à soi » (Éditeur d’onglets). ¦ Bëhet «skedë e jotja» (Redaktuesi i skedave). ¦ Isir «tab tiegħek» (Editur tat-tabs).
+Un raccourci vers un outil ¦ Një shkurtore drejt një mjeti ¦ Shortcut għal għodda
+Chaîne par héritier ¦ Zinxhiri i çdo trashëgimtari ¦ Katina ta’ kull werriet
+✉️ Contactés ¦ ✉️ Të kontaktuar ¦ ✉️ Ikkuntattjati
+📇 Répertoire des vivants ¦ 📇 Regjistri i të gjallëve ¦ 📇 Direttorju tal-ħajjin
+Échéances du jour (usage successoral seulement) ¦ Afatet e ditës (vetëm përdorim trashëgimor) ¦ L-iskadenzi tal-jum (użu tas-suċċessjoni biss)
+Ce dossier est clos : rien ne s’y note. ¦ Kjo dosje është e mbyllur: asgjë nuk shënohet më në të. ¦ Dan il-fajl huwa magħluq: xejn ma jitniżżel fih.
+Donne un nom au modèle. ¦ Jepi një emër modelit. ¦ Agħti isem lill-mudell.
+Trop de lettres d’un coup (60 au plus). ¦ Shumë letra njëherësh (jo më shumë se 60). ¦ Wisq ittri f’daqqa (60 l-aktar).
+Échéances du jour ¦ Afatet e ditës ¦ L-iskadenzi tal-jum

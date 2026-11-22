@@ -1,0 +1,17 @@
+fr ¦ ru ¦ uk
+# ▤ La lecture approfondie, ligne par ligne : relier les lignes du texte à l’image (app-lignes-alignement.js, heritage-transcribe.js)
+Relier les lignes à l’image ¦ Связать строки с изображением ¦ Зв’язати рядки із зображенням
+Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis ¦ Связать каждую строку текста с её строкой на изображении (цветные зоны, щелчок строка ↔ зона): после углублённого чтения или для уже вставленного текста ¦ Зв’язати кожен рядок тексту з його рядком на зображенні (кольорові зони, клік рядок ↔ зона): після поглибленого читання або для вже вставленого тексту
+Relier les lignes à l’image (une zone par ligne, comme la lecture rapide) ¦ Связать строки с изображением (одна зона на строку, как при быстром чтении) ¦ Зв’язати рядки із зображенням (одна зона на рядок, як при швидкому читанні)
+Découpage de la page en lignes… ¦ Разбиение страницы на строки… ¦ Поділ сторінки на рядки…
+Découpage de la page en lignes (lecture rapide)… ¦ Разбиение страницы на строки (быстрое чтение)… ¦ Поділ сторінки на рядки (швидке читання)…
+Découpage simple de la page en lignes… ¦ Простое разбиение страницы на строки… ¦ Простий поділ сторінки на рядки…
+Le découpage en lignes n’est pas chargé. ¦ Разбиение на строки не загружено. ¦ Поділ на рядки не завантажено.
+Pas de ligne de texte à relier. ¦ Нет строки текста для связывания. ¦ Немає рядка тексту для зв’язування.
+Le texte a changé pendant le découpage : « ▤ Relier les lignes à l’image » pour recommencer. ¦ Текст изменился во время разбиения: «▤ Связать строки с изображением», чтобы начать заново. ¦ Текст змінився під час поділу: «▤ Зв’язати рядки із зображенням», щоб почати знову.
+Ligne reliée sans certitude : vérifie sur l’image ¦ Строка связана без уверенности: проверь её на изображении ¦ Рядок зв’язано без певності: перевір його на зображенні
+Lignes reliées à l’image : {x} ¦ Строки, связанные с изображением: {x} ¦ Рядки, зв’язані із зображенням: {x}
+à vérifier (❔) : {n} ¦ проверить (❔): {n} ¦ перевірити (❔): {n}
+sans zone : {n} ¦ без зоны: {n} ¦ без зони: {n}
+d’après la lecture rapide ¦ по быстрому чтению ¦ за швидким читанням
+d’après un découpage simple de l’image ¦ по простому разбиению изображения ¦ за простим поділом зображення

@@ -1,0 +1,220 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Transcription d’actes</title>
+<link rel="stylesheet" href="../../assets/css/app.css">
+<style>
+body{background:#f4f5f7;padding:28px;font-family:var(--font,Inter,system-ui,sans-serif);color:#111;margin:0}
+h1{font-size:22px;margin:0 0 4px}.sub{color:#555;margin:0 0 22px;font-size:14px;max-width:980px;line-height:1.5}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:26px 30px;max-width:1240px}
+.wide{grid-column:1 / -1}
+.case{background:#fff;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.25);padding:18px 20px 22px;min-width:0}
+.case>.tag{font:700 11px/1 system-ui;letter-spacing:.12em;color:#055dff;text-transform:uppercase}
+.case>h3{margin:6px 0 14px;font-size:17px}
+.note{font-size:12.5px;color:#555;margin-top:12px;line-height:1.5}
+.lab{display:block;font-weight:700;font-size:13px;margin:12px 0 6px}
+.btn{display:inline-flex;align-items:center;gap:6px;border:2px solid #111;background:#fff;font:700 13px system-ui;padding:7px 11px;cursor:pointer;box-shadow:3px 3px 0 rgba(5,93,255,.25)}
+.btn.blue{background:#055dff;border-color:#055dff;color:#fff}
+.btn.small{font-size:12px;padding:4px 8px;box-shadow:none}
+.btn.ghost{border-color:#c9ced8;box-shadow:none;color:#444}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.badge{font:700 11px/1 system-ui;border:1.5px solid #111;padding:3px 6px;white-space:nowrap;text-transform:uppercase;letter-spacing:.03em}
+.badge.ok{border-color:#1a7f37;color:#1a7f37}.badge.warn{border-color:#b08800;color:#7a5d00;background:#fff8d6}.badge.blue{border-color:#055dff;color:#055dff}.badge.red{border-color:#c62828;color:#c62828}
+.badge.sosa{background:#055dff;color:#fff;border-color:#055dff}
+/* choix du moteur */
+.engines{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.eng{border:2px solid #c9ced8;padding:11px 12px;cursor:pointer;background:#fff}
+.eng.on{border-color:#055dff;box-shadow:inset 0 0 0 2px #055dff;background:#f3f7ff}
+.eng b{display:block;font-size:14px;margin-bottom:4px}.eng small{color:#555;font-size:12px;line-height:1.4;display:block}
+.msg{border-left:4px solid #055dff;background:#eef4ff;padding:9px 12px;font-size:13px;margin-top:12px;line-height:1.45}
+.msg.warn{border-color:#d4a800;background:#fff8d6}.msg.ok{border-color:#1a7f37;background:#eaf6ee}
+/* image + lignes */
+.split{display:grid;grid-template-columns:1.05fr 1fr;gap:14px;align-items:start}
+.img{background:#e9e4d6;border:1.5px solid #b9b19a;height:300px;position:relative;overflow:hidden}
+.img .ln{position:absolute;left:4%;right:4%;height:20px;border-bottom:1px dashed rgba(90,70,30,.35);font:italic 13px Georgia,serif;color:#5a4a2c;white-space:nowrap;overflow:hidden;padding-left:4px}
+.img .ln.on{background:rgba(5,93,255,.14);outline:2px solid #055dff}
+.lines{font:14px/1.55 Georgia,serif;border:2px solid #111;padding:8px 10px;height:284px;overflow:auto}
+.lines div{padding:2px 4px;border-left:3px solid transparent}.lines div.on{background:#eaf1ff;border-left-color:#055dff}
+.lines .n{font:11px system-ui;color:#999;display:inline-block;width:20px}
+.unsure{background:#fff1a8;border-bottom:2px dotted #b08800}
+.ill{color:#999;font-style:italic}
+/* ce qu'on a trouvé */
+.found{border:2px solid #111}
+.f-head{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-bottom:2px solid #111;background:#fafbfc;flex-wrap:wrap;gap:8px}
+.f-sec{padding:4px 12px 10px;border-bottom:1px solid #e3e5ea}
+.f-sec h4{font:700 11px/1 system-ui;letter-spacing:.1em;text-transform:uppercase;color:#666;margin:12px 0 8px}
+.f-grid{display:grid;grid-template-columns:150px 1fr;gap:6px 12px;font-size:13.5px;align-items:center}
+.f-grid .k{color:#666}
+.input{border:1.5px solid #c9ced8;padding:5px 8px;font:inherit;font-size:13.5px;background:#fff;width:100%;box-sizing:border-box}
+.ok-line{font-size:12px;color:#1a7f37;margin-top:2px}
+.pers{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;padding:9px 0;border-top:1px solid #f0f1f4}
+.av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:700 13px system-ui;color:#fff}
+.av.m{background:#3c78d8}.av.f{background:#d9488f}.av.u{background:#8a8f99}
+.pers b{font-size:14.5px}.pers .meta{font-size:12.5px;color:#555;margin-top:2px}
+.role{font:700 11px system-ui;color:#055dff;background:#eaf1ff;padding:2px 6px;margin-right:6px}
+.match{font-size:12.5px;margin-top:5px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:7px;border:2px solid #111;background:#fff;padding:2px 5px 2px 3px;font-size:13px}
+.chip .av{width:22px;height:22px;font-size:9px}
+.seg{display:inline-flex;border:2px solid #111}.seg span{padding:5px 9px;font:700 12px system-ui;cursor:pointer;border-right:1.5px solid #111;background:#fff}.seg span:last-child{border-right:0}.seg span.on{background:#055dff;color:#fff}
+/* comparer */
+.cmp{width:100%;border-collapse:collapse;font-size:13.5px}
+.cmp th{font:700 11px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#666;text-align:left;padding:6px 8px;border-bottom:2px solid #111}
+.cmp td{padding:7px 8px;border-bottom:1px solid #eceef2;vertical-align:top}
+.cmp td.new{background:#eaf6ee}.cmp td.diff{background:#fff8d6}
+/* source */
+.src-card{display:flex;gap:12px;align-items:flex-start;border:2px solid #111;padding:10px 12px;background:#fff}
+.src-ico{font-size:24px}
+/* recap */
+.recap li{margin:5px 0;font-size:14px}.recap{padding-left:18px;margin:8px 0}
+.toast{display:inline-flex;align-items:center;gap:14px;background:#111;color:#fff;padding:10px 14px;font-size:13.5px;margin-top:14px;position:relative}
+.toast u{color:#9ec1ff;text-decoration:none;font-weight:700}
+.toast::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:62%;background:#055dff}
+.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px;border-top:1px solid #e3e5ea;padding-top:12px}
+.progress{height:8px;background:#e3e5ea;margin:8px 0 4px}.progress i{display:block;height:100%;width:64%;background:#055dff}
+@media (max-width:900px){.grid{grid-template-columns:1fr}.split{grid-template-columns:1fr}.engines{grid-template-columns:1fr}.f-grid{grid-template-columns:1fr}}
+</style></head><body>
+<h1>📜 Transcription d’actes — de la lecture jusqu’à la généalogie</h1>
+<p class="sub">Un acte de mariage (personnes <b>fictives</b>) suivi du début à la fin : on choisit comment le lire, on relit la transcription ligne par ligne, l’app dit <b>ce qu’elle a trouvé</b> dedans, propose pour chaque personne de <b>relier, comparer ou créer</b> la fiche, prépare <b>la source</b>, puis tout entre d’un seul clic, avec « ↶ Annuler ». Rien ne part sur Internet.</p>
+<div class="grid">
+
+<!-- A -->
+<div class="case"><span class="tag">A · Lire l’acte</span><h3>Trois façons de lire, la bonne proposée</h3>
+<div class="engines">
+  <div class="eng"><b>⌨ Texte tapé</b><small>Imprimé ou tapé à la machine (journaux, livrets). Rapide. Ne lit pas l’écriture à la main.</small></div>
+  <div class="eng on"><b>✍ Écriture à la main</b><small>Le modèle McCATMuS (École des chartes). Bon pour l’état civil du XVIIᵉ au XIXᵉ. Quelques secondes.</small></div>
+  <div class="eng"><b>🔍 Lecture approfondie</b><small>Un modèle « vision » qui tourne sur ton ordinateur. Lit mieux les écritures difficiles, plus lent. <span class="badge blue">facultatif</span></small></div>
+</div>
+<div class="msg warn">⚠️ <b>Cette image ressemble à une capture d’écran</b> (boutons et bords gris autour) : la lecture sera moins bonne. Télécharge l’image en grand sur le site des archives, ou <b>✂ recadre</b> sur le texte. <span class="row" style="margin-top:8px"><span class="btn small">✂ Recadrer sur le texte</span><span class="btn small ghost">Lire quand même</span></span></div>
+<div class="msg">🔎 <b>La lecture à la main a donné un texte peu sûr</b> (6 mots sur 10 douteux). Souvent à cause des bords de l’écran autour de l’acte, ou d’une écriture trop difficile pour ce modèle. <span class="row" style="margin-top:8px"><span class="btn small">✂ Recadrer et relire</span><span class="btn small blue">🔍 Essayer la lecture approfondie</span></span></div>
+<p class="note">L’app choisit la lecture selon l’image : si elle voit de l’écriture à la main, elle ne propose plus le « texte tapé ». La taille de l’image et la langue (français, latin…) sont vérifiées avant de lire.</p>
+</div>
+
+<!-- G -->
+<div class="case"><span class="tag">G · Lecture approfondie</span><h3>S’installe une fois, comme la lecture d’aujourd’hui</h3>
+<div class="f-grid">
+  <span class="k">Ce qu’il faut</span><span>Ollama (gratuit, open source) et un modèle vision ouvert, au choix :</span>
+  <span class="k">Modèle</span><span>◉ <b>Qwen3-VL 8B</b> — le meilleur, ≈ 6 Go<br>○ Qwen3-VL 4B — plus léger, ≈ 3 Go, pour un ordinateur modeste</span>
+  <span class="k">Mémoire</span><span>8 Go conseillés (16 Go pour le 8B) · téléchargé une seule fois</span>
+  <span class="k">Vitesse</span><span>≈ 20 à 60 s par page sur un ordinateur récent</span>
+  <span class="k">Confidentialité</span><span>rien ne quitte ton ordinateur ; l’app vérifie qu’Ollama ne répond que sur ton ordinateur</span>
+</div>
+<div class="progress"><i></i></div><div style="font-size:12.5px;color:#555">Téléchargement du modèle… 3,8 Go sur 6 Go</div>
+<div class="row" style="margin-top:12px"><span class="btn blue">⤓ Installer la lecture approfondie</span><span class="btn ghost">Plus tard</span></div>
+<p class="note">On compare les deux lectures sur <b>tes</b> actes : « 🔍 Essayer aussi la lecture approfondie » sur une page déjà lue montre les deux textes côte à côte, et on garde la meilleure.</p>
+</div>
+
+<!-- B -->
+<div class="case wide"><span class="tag">B · Relire</span><h3>L’image et le texte, ligne par ligne</h3>
+<div class="split">
+  <div class="img">
+    <div class="ln" style="top:14px">…conformément à la loi. Aucune opposition audit mariage…</div>
+    <div class="ln" style="top:44px">…ayant été signifiée, faisant droit à leur réquisition…</div>
+    <div class="ln on" style="top:74px">…avons déclaré au nom de la loi que Pierre Mazaud…</div>
+    <div class="ln" style="top:104px">…et Marie Lacombe sont unis par le mariage…</div>
+    <div class="ln" style="top:134px">…en présence de Joseph Brunet, cordonnier, âgé de…</div>
+    <div class="ln" style="top:164px">…vingt-trois ans, de François Vergne, charpentier…</div>
+    <div class="ln" style="top:194px">…demeurant en cette commune ; de Léonard Lacombe…</div>
+    <div class="ln" style="top:224px">…maçon, âgé de trente-trois ans, frère de l’épouse…</div>
+    <div class="ln" style="top:254px">…lesquels ont signé avec nous après lecture faite.</div>
+  </div>
+  <div class="lines">
+    <div><span class="n">1</span>conformément à la loi. Aucune opposition audit mariage ne nous</div>
+    <div><span class="n">2</span>ayant été signifiée, faisant droit à leur réquisition, après avoir fait</div>
+    <div class="on"><span class="n">3</span>…avons déclaré au nom de la loi que <span class="unsure">Pierre Mazaud</span> et</div>
+    <div><span class="n">4</span>Marie <span class="unsure">Lacombe</span> sont unis par le mariage ; de quoi nous</div>
+    <div><span class="n">5</span>avons dressé acte en présence de Joseph Brunet, cordonnier, âgé de</div>
+    <div><span class="n">6</span>vingt-trois ans, de François <span class="unsure">Vergne</span>, charpentier, âgé de vingt</div>
+    <div><span class="n">7</span>et un ans, demeurant en cette commune ; de Léonard Lacombe,</div>
+    <div><span class="n">8</span>maçon, âgé de trente-trois ans, frère de l’épouse <span class="ill">[illisible]</span></div>
+    <div><span class="n">9</span>lesquels ont signé avec nous après lecture faite.</div>
+  </div>
+</div>
+<p class="note">Cliquer une ligne du texte allume la même ligne sur l’image (et l’inverse). Les mots dont la lecture est peu sûre sont <span class="unsure">surlignés</span> : un clic propose d’autres lectures. « [illisible] », « [?] » et les abréviations comme aujourd’hui. Le texte se corrige directement ; « 🔍 Lire à nouveau cette ligne » relance seulement la ligne choisie.</p>
+</div>
+
+<!-- C -->
+<div class="case wide"><span class="tag">C · Ce que l’app a trouvé dans l’acte</span><h3>Tout est relevé, tout se corrige avant d’entrer</h3>
+<div class="found">
+  <div class="f-head"><span><b>💍 Acte de mariage</b> · <span class="badge warn">À relire</span> 3 mots peu sûrs</span><span class="row"><span class="btn small ghost">↺ Relever à nouveau</span><span class="btn small ghost">Sorte d’acte ▾</span></span></div>
+  <div class="f-sec"><h4>L’événement</h4>
+    <div class="f-grid">
+      <span class="k">Date</span><span><input class="input" value="12 février 1808"><div class="ok-line">✓ Compris : 12 février 1808</div></span>
+      <span class="k">Lieu</span><span><span class="chip">📍 <b>Saint-Amand-Montrond</b> <small>Cher (18)</small> ×</span></span>
+      <span class="k">Sorte</span><span>Mariage civil</span>
+    </div>
+  </div>
+  <div class="f-sec"><h4>Les personnes (6)</h4>
+    <div class="pers"><span class="av m">PM</span><div><span class="role">Époux</span><b>Pierre MAZAUD</b><div class="meta">tailleur · 27 ans → né vers 1781 · fils de Jean Mazaud et d’Anne Roux</div>
+      <div class="match">Fiche existante : <span class="chip"><span class="av m">PM</span><b>Pierre MAZAUD</b> <small>° vers 1780 Orval</small></span> <span class="badge ok">même personne probable</span></div></div>
+      <span class="seg"><span class="on">🔗 Relier</span><span>⇆ Comparer</span><span>＋ Créer</span><span>Ignorer</span></span></div>
+    <div class="pers"><span class="av f">ML</span><div><span class="role">Épouse</span><b>Marie LACOMBE</b><div class="meta">fileuse · 21 ans → née vers 1787 · fille de Léonard Lacombe (décédé) et de Jeanne Dupuy</div>
+      <div class="match">Deux fiches proches : <span class="chip"><span class="av f">ML</span><b>Marie LACOMBE</b> <small>1786–1850</small></span> <span class="chip"><span class="av f">ML</span><b>Marie LACOMBE</b> <small>° 1790</small></span> <span class="badge warn">à vérifier</span></div></div>
+      <span class="seg"><span>🔗 Relier</span><span class="on">⇆ Comparer</span><span>＋ Créer</span><span>Ignorer</span></span></div>
+    <div class="pers"><span class="av m">JM</span><div><span class="role">Père de l’époux</span><b>Jean MAZAUD</b><div class="meta">présent et consentant</div>
+      <div class="match">Aucune fiche : elle sera créée et reliée comme père de Pierre</div></div>
+      <span class="seg"><span>🔗 Relier</span><span>⇆ Comparer</span><span class="on">＋ Créer</span><span>Ignorer</span></span></div>
+    <div class="pers"><span class="av f">AR</span><div><span class="role">Mère de l’époux</span><b>Anne ROUX</b><div class="meta">présente et consentante</div>
+      <div class="match">Aucune fiche : elle sera créée et reliée comme mère de Pierre</div></div>
+      <span class="seg"><span>🔗 Relier</span><span>⇆ Comparer</span><span class="on">＋ Créer</span><span>Ignorer</span></span></div>
+    <div class="pers"><span class="av m">JB</span><div><span class="role">Témoin</span><b>Joseph BRUNET</b><div class="meta">cordonnier · 23 ans · demeurant à Saint-Amand</div>
+      <div class="match">Pas de fiche · ira dans les <b>☆ personnes secondaires</b> de l’acte (rôle « témoin »)</div></div>
+      <span class="seg"><span>🔗 Relier</span><span>⇆ Comparer</span><span>＋ Créer</span><span class="on">Témoin seul</span></span></div>
+    <div class="pers"><span class="av m">LL</span><div><span class="role">Témoin · frère de l’épouse</span><b>Léonard LACOMBE</b><div class="meta">maçon · 33 ans → né vers 1775</div>
+      <div class="match">Pas de fiche · le lien « frère de Marie » est noté</div></div>
+      <span class="seg"><span>🔗 Relier</span><span>⇆ Comparer</span><span class="on">＋ Créer</span><span>Témoin seul</span></span></div>
+  </div>
+  <div class="f-sec" style="border-bottom:0"><h4>Ce que l’acte ajoute aussi</h4>
+    <div class="f-grid">
+      <span class="k">Métiers</span><span>tailleur (Pierre) · fileuse (Marie) · cordonnier, charpentier, maçon (témoins)</span>
+      <span class="k">Décès</span><span>Léonard Lacombe père : décédé avant le 12 février 1808 <span class="badge blue">nouveau</span></span>
+      <span class="k">Signatures</span><span>l’époux et deux témoins ont signé ; l’épouse « ne sait signer »</span>
+    </div>
+  </div>
+</div>
+<p class="note">Les âges donnent une naissance estimée (« vers 1781 »), toujours marquée comme estimée. Chaque personne utilise le menu de choix habituel : on peut relier à une autre fiche que celle proposée. Les témoins sans fiche restent dans l’acte avec leur rôle (comme les personnes secondaires), sans créer de fiche inutile.</p>
+</div>
+
+<!-- D -->
+<div class="case"><span class="tag">D · Comparer / fusionner</span><h3>Marie LACOMBE : l’acte et la fiche côte à côte</h3>
+<table class="cmp"><thead><tr><th></th><th>Dans l’acte</th><th>Fiche · Marie LACOMBE 1786–1850</th></tr></thead><tbody>
+<tr><td>Naissance</td><td class="diff">vers 1787 (21 ans)</td><td>3 mars 1786, Orval</td></tr>
+<tr><td>Métier</td><td class="new">fileuse <label><input type="checkbox" checked> ajouter</label></td><td>—</td></tr>
+<tr><td>Père</td><td>Léonard Lacombe, décédé</td><td>Léonard LACOMBE ✓</td></tr>
+<tr><td>Mère</td><td>Jeanne Dupuy</td><td>Jeanne DUPUY ✓</td></tr>
+<tr><td>Mariage</td><td class="new">12 février 1808 avec Pierre Mazaud <label><input type="checkbox" checked> ajouter</label></td><td>—</td></tr>
+</tbody></table>
+<div class="msg ok">✓ Les parents sont les mêmes : c’est très probablement elle. La date de naissance de la fiche est gardée (elle est plus précise que l’âge de l’acte).</div>
+<div class="actions"><span class="btn ghost">Ce n’est pas elle</span><span class="btn blue">🔗 C’est elle : relier</span></div>
+</div>
+
+<!-- E -->
+<div class="case"><span class="tag">E · La source, toute prête</span><h3>Remplie toute seule d’après l’image et le site</h3>
+<div class="src-card"><span class="src-ico">📚</span><div style="flex:1">
+<b>Archives départementales du Cher — État civil de Saint-Amand-Montrond</b>
+<div class="f-grid" style="margin-top:8px">
+  <span class="k">Registre</span><span><input class="input" value="Naissances, mariages, décès 1807-1809"></span>
+  <span class="k">Cote</span><span><input class="input" value="3 E 1234"></span>
+  <span class="k">Vue</span><span><input class="input" value="139 / 268"></span>
+  <span class="k">Acte</span><span><input class="input" value="Mariage Mazaud – Lacombe, 12 février 1808"></span>
+  <span class="k">Lien</span><span style="font-size:12.5px;color:#055dff">↗ la vue sur le site des archives</span>
+  <span class="k">Image</span><span>🖼 rangée dans les médias, avec la transcription</span>
+</div></div></div>
+<div class="msg">ℹ️ Le registre et la vue viennent de la page des archives (titre « Saint-Amand-Montrond, 1807-1809, N, M, D », vue 139 / 268). Si la même source existe déjà, l’app la reprend au lieu d’en créer une deuxième.</div>
+<p class="note">Chaque fait ajouté (mariage, métiers, décès du père) est relié à cette source et à la vue précise : la solidité des liens parent-enfant passe à « prouvé » quand l’acte nomme les parents.</p>
+</div>
+
+<!-- F -->
+<div class="case wide"><span class="tag">F · Tout ajouter d’un coup</span><h3>Voilà ce qui va entrer dans ta généalogie</h3>
+<ul class="recap">
+  <li>🔗 <b>2 fiches complétées</b> : Pierre MAZAUD (métier), Marie LACOMBE (métier)</li>
+  <li>＋ <b>3 fiches créées</b> : Jean MAZAUD et Anne ROUX (parents de Pierre), Léonard LACOMBE (frère de Marie)</li>
+  <li>💍 <b>1 mariage</b> : Pierre MAZAUD et Marie LACOMBE, le 12 février 1808 à Saint-Amand-Montrond</li>
+  <li>✝ <b>1 décès</b> estimé : Léonard LACOMBE père, avant le 12 février 1808</li>
+  <li>☆ <b>1 témoin</b> gardé dans l’acte : Joseph BRUNET (cordonnier, 23 ans)</li>
+  <li>📚 <b>1 source</b> et 7 citations, avec l’image et la transcription</li>
+</ul>
+<div class="actions" style="justify-content:space-between"><span class="btn ghost">Garder seulement la transcription</span><span class="row"><span class="btn">Annuler</span><span class="btn blue">✓ Ajouter à la généalogie</span></span></div>
+<div class="toast">✓ Acte ajouté : 5 fiches, 1 mariage, 1 source <u>↶ Annuler</u></div>
+<p class="note">Rien n’est écrasé : une information différente de la fiche est proposée, jamais imposée. « ↶ Annuler » défait tout l’ajout d’un coup. L’acte transcrit reste dans « Transcriptions » et sur chaque fiche concernée (bloc Documents).</p>
+</div>
+
+</div>
+</body></html>

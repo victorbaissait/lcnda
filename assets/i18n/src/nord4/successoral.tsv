@@ -1,0 +1,975 @@
+fr ¦ fi ¦ hu
+# Zone « successoral » : ⚖️ généalogiste successoral, dossiers de succession, dévolution (heritage-successoral*.js, lib/successoral.php)
+Les dossiers de succession ne se montrent pas en mode consultation ni en mode simple. ¦ Perunkirjoituskansioita ei näytetä katselutilassa eikä yksinkertaisessa tilassa. ¦ A hagyatéki ügyek nem jelennek meg megtekintő módban és egyszerű módban.
+Successions ¦ Perinnöt ¦ Hagyatékok
+Listes · Recherche et organisation ¦ Luettelot · Tutkimus ja järjestäminen ¦ Listák · Kutatás és szervezés
+Dossiers de succession ¦ Perunkirjoituskansiot ¦ Hagyatéki ügyek
+Retrouver les héritiers d’une personne décédée, pour un notaire : un dossier par défunt. À ne pas confondre avec « 🏠 Héritages et successions » (les actes anciens des ancêtres). ¦ Vainajan perillisten etsiminen notaarille: yksi kansio vainajaa kohden. Ei pidä sekoittaa kohtaan ”🏠 Perinnöt ja kuolinpesät” (esivanhempien vanhat asiakirjat). ¦ Egy elhunyt örököseinek felkutatása közjegyző számára: elhunytanként egy ügy. Nem tévesztendő össze a „🏠 Örökségek és hagyatékok” listával (az ősök régi iratai).
+＋ Ouvrir un dossier ¦ ＋ Avaa kansio ¦ ＋ Ügy megnyitása
+Lecture des dossiers… ¦ Luetaan kansioita… ¦ Az ügyek beolvasása…
+Aucun dossier de succession pour l’instant ¦ Ei vielä perunkirjoituskansioita ¦ Még nincs hagyatéki ügy
+Choisis la personne décédée : l’app part des fiches de la base pour trouver ses héritiers, selon le Code civil d’aujourd’hui. ¦ Valitse vainaja: sovellus lähtee tietokannan henkilöistä ja etsii perilliset nykyisen Ranskan siviililain mukaan. ¦ Válaszd ki az elhunytat: az app az adatbázis személyeiből indul ki, és a mai francia Polgári Törvénykönyv szerint keresi meg az örököseit.
+Chercher… (ex. MAZAUD, 2026-014, ROUSSILHE) ¦ Hae… (esim. MAZAUD, 2026-014, ROUSSILHE) ¦ Keresés… (pl. MAZAUD, 2026-014, ROUSSILHE)
+Prochaine échéance ¦ Seuraava määräaika ¦ Következő határidő
+A → Z ¦ A → Ö ¦ A → Z
+Dossier n° {n} ¦ Kansio nro {n} ¦ {n}. sz. ügy
+Prochaine échéance : {d} — {l} ¦ Seuraava määräaika: {d} — {l} ¦ Következő határidő: {d} — {l}
+Échéance passée ¦ Määräaika umpeutunut ¦ Lejárt határidő
+✎ Modifier ¦ ✎ Muokkaa ¦ ✎ Szerkesztés
+Aucun dossier ne correspond. ¦ Mikään kansio ei vastaa hakua. ¦ Egy ügy sem felel meg.
+Pas en mode consultation ni en mode simple. ¦ Ei katselutilassa eikä yksinkertaisessa tilassa. ¦ Megtekintő és egyszerű módban nem.
+⚖️ DOSSIER DE SUCCESSION ¦ ⚖️ PERUNKIRJOITUSKANSIO ¦ ⚖️ HAGYATÉKI ÜGY
+Ouvrir un dossier ¦ Avaa kansio ¦ Ügy megnyitása
+Ouvrir le dossier ¦ Avaa kansio ¦ Az ügy megnyitása
+N° de dossier ¦ Kansion numero ¦ Ügyszám
+fait tout seul : 2026-014 ¦ automaattisesti: 2026-014 ¦ automatikus: 2026-014
+reprise de la fiche ¦ otettu henkilötiedoista ¦ a személy adataiból
+Dernier domicile ¦ Viimeinen asuinpaikka ¦ Utolsó lakóhely
+Notaire mandant (fiche ou nom) ¦ Toimeksiantava notaari (henkilö tai nimi) ¦ Megbízó közjegyző (személy vagy név)
+Réf. du notaire ¦ Notaarin viite ¦ A közjegyző hivatkozása
+Ouvert le ¦ Avattu ¦ Megnyitva
+Testament ¦ Testamentti ¦ Végrendelet
+Aucun connu (le notaire interroge le fichier des dernières volontés) ¦ Ei tiedossa (notaari tarkistaa testamenttirekisterin) ¦ Nem ismert (a közjegyző lekérdezi a végrendeleti nyilvántartást)
+Situation (notes) ¦ Tilanne (muistiinpanot) ¦ Helyzet (jegyzetek)
+🔒 Le dossier reste dans l’app : les héritiers vivants, leurs adresses et leurs parts ne sont dans aucun export. Aucun montant n’est noté. ¦ 🔒 Kansio pysyy sovelluksessa: elävät perilliset, heidän osoitteensa ja osuutensa eivät ole missään viennissä. Rahamääriä ei kirjata. ¦ 🔒 Az ügy az appban marad: az élő örökösök, címeik és részeik egyetlen exportban sem szerepelnek. Összeget nem rögzítünk.
+Choisis la personne décédée. ¦ Valitse vainaja. ¦ Válaszd ki az elhunytat.
+Dossier enregistré ¦ Kansio tallennettu ¦ Ügy mentve
+Dossier supprimé ¦ Kansio poistettu ¦ Ügy törölve
+Lecture du dossier… ¦ Luetaan kansiota… ¦ Az ügy beolvasása…
+← Tous les dossiers ¦ ← Kaikki kansiot ¦ ← Minden ügy
+Dossier n° {n} · {t} ¦ Kansio nro {n} · {t} ¦ {n}. sz. ügy · {t}
+Listes · Dossiers de succession ¦ Luettelot · Perunkirjoituskansiot ¦ Listák · Hagyatéki ügyek
+↗ Fiche du défunt ¦ ↗ Vainajan tiedot ¦ ↗ Az elhunyt adatlapja
+🗄 Archiver le dossier clos ¦ 🗄 Arkistoi suljettu kansio ¦ 🗄 A lezárt ügy archiválása
+Dossier archivé : les adresses des vivants ont été retirées, le journal reste. ¦ Kansio arkistoitu: elävien osoitteet poistettiin, loki säilyy. ¦ Ügy archiválva: az élők címei törölve, a napló megmarad.
+État du dossier ¦ Kansion tila ¦ Az ügy állapota
+Le défunt n’est plus dans la base. ¦ Vainaja ei ole enää tietokannassa. ¦ Az elhunyt már nincs az adatbázisban.
+Pas de conjoint dans la base ¦ Ei puolisoa tietokannassa ¦ Nincs házastárs az adatbázisban
+A des descendants ¦ On jälkeläisiä ¦ Vannak leszármazottai
+Sans descendant dans la base ¦ Ei jälkeläisiä tietokannassa ¦ Nincs leszármazott az adatbázisban
+Le défunt ¦ Vainaja ¦ Az elhunyt
+fiche n° {n} ¦ henkilö nro {n} ¦ {n}. sz. adatlap
+Le mandat ¦ Toimeksianto ¦ A megbízás
+Droit actuel (décès après le 1er janvier 2007) ¦ Voimassa oleva laki (kuolema 1.1.2007 jälkeen) ¦ Hatályos jog (halál 2007. január 1. után)
+Échéances ¦ Määräajat ¦ Határidők
+＋ Échéance ¦ ＋ Määräaika ¦ ＋ Határidő
+Dans {n} j ¦ {n} pv päästä ¦ {n} nap múlva
+Aucune échéance. ¦ Ei määräaikoja. ¦ Nincs határidő.
+Aussi dans 🗓 Ma semaine de recherche. ¦ Myös kohdassa 🗓 Tutkimusviikkoni. ¦ A 🗓 Kutatási hetem részben is.
+📑 Pièces ¦ 📑 Asiakirjat ¦ 📑 Iratok
+🖨 Tableau pour le notaire ¦ 🖨 Taulukko notaarille ¦ 🖨 Táblázat a közjegyzőnek
+de son chef ¦ omasta oikeudestaan ¦ saját jogán
+représenté ¦ edustettu ¦ képviselt
+sans descendance connue ¦ ei tunnettuja jälkeläisiä ¦ nincs ismert leszármazott
+degré plus éloigné ¦ kaukaisempi aste ¦ távolabbi fok
+pas de représentation ¦ ei sijaantuloa ¦ nincs képviselet
+pas encore conçu ¦ ei vielä siinnyt ¦ még nem fogant
+écarté ¦ suljettu pois ¦ kizárva
+par représentation ¦ sijaantulon kautta ¦ képviselet útján
+de son chef, s’il vit ¦ omasta oikeudestaan, jos elossa ¦ saját jogán, ha él
+Retenu ¦ Kutsuttu ¦ Behívott
+Écarté par le conjoint ¦ Puoliso sulkee pois ¦ A házastárs kizárja
+Écarté ¦ Suljettu pois ¦ Kizárva
+{name} : {share} (art. {art}). ¦ {name}: {share} (art. {art}). ¦ {name}: {share} ({art}. cikk).
+Ou, à son choix, l’usufruit de la totalité (art. 757) : les descendants ont alors la nue-propriété, dans les mêmes proportions. ¦ Tai valintansa mukaan käyttöoikeus koko omaisuuteen (art. 757): jälkeläisillä on tällöin omistusoikeus samoin osuuksin. ¦ Vagy választása szerint haszonélvezet az egészen (757. cikk): a leszármazottaké ekkor a csupasz tulajdon, ugyanilyen arányban.
+Aucun conjoint dans la base. ¦ Ei puolisoa tietokannassa. ¦ Nincs házastárs az adatbázisban.
+S’il y avait un conjoint, l’app afficherait ici ses droits (art. 757 à 757-2) avant les ordres. ¦ Jos puoliso olisi, sovellus näyttäisi tässä tämän oikeudet (art. 757–757-2) ennen perillisryhmiä. ¦ Ha lenne házastárs, az app itt mutatná a jogait (757–757-2. cikk) az örökösi rendek előtt.
+{n}e ¦ {n}. ¦ {n}.
+adresse ? ¦ osoite? ¦ cím?
+Statut retenu dans ce dossier ¦ Tässä kansiossa käytetty tila ¦ Az ügyben rögzített állapot
+Autre hypothèse ¦ Toinen olettama ¦ Másik feltevés
+total {t} ¦ yhteensä {t} ¦ összesen {t}
+personne : il reste des branches à chercher. ¦ ei ketään: haaroja on vielä etsittävä. ¦ senki: maradtak még keresendő ágak.
+Part en jeu : {s} ¦ Kyseessä oleva osuus: {s} ¦ Tét: {s}
+🔍 Chercher ¦ 🔍 Hae ¦ 🔍 Keresés
+🌍 Héritier à l’étranger ¦ 🌍 Perillinen ulkomailla ¦ 🌍 Örökös külföldön
+❔ Absent ou disparu ¦ ❔ Poissaoleva tai kadonnut ¦ ❔ Távollévő vagy eltűnt
+📇 Compléter ¦ 📇 Täydennä ¦ 📇 Kiegészítés
+Type d’adoption ¦ Adoption laji ¦ Az örökbefogadás fajtája
+Type d’adoption ? ¦ Adoption laji? ¦ Az örökbefogadás fajtája?
+Plénière ¦ Täysi ¦ Teljes
+Marié ? ¦ Naimisissa? ¦ Házas?
+Pas marié (PACS, union libre) ¦ Ei naimisissa (PACS, avoliitto) ¦ Nem házas (PACS, élettárs)
+Divorcé ¦ Eronnut ¦ Elvált
+Aucune branche à chercher d’après les fiches. ¦ Henkilötietojen mukaan ei etsittäviä haaroja. ¦ Az adatok szerint nincs keresendő ág.
+{n}e degré ¦ {n}. aste ¦ {n}. fok
+Calcul indicatif, à faire vérifier par le notaire. Il suit le Code civil en vigueur (art. 731 et suivants), sans testament, sans donation, sans renonciation connue. Il ne tient pas compte du droit de retour légal (art. 738-2, 757-3), des biens à l’étranger ni d’un régime matrimonial. ¦ Suuntaa antava laskelma, notaarin tarkistettava. Se noudattaa voimassa olevaa Ranskan siviililakia (art. 731 ja seuraavat), ilman testamenttia, lahjaa tai tunnettua perinnöstä luopumista. Siinä ei huomioida lakisääteistä palautusoikeutta (art. 738-2, 757-3), ulkomaista omaisuutta eikä aviovarallisuusjärjestelmää. ¦ Tájékoztató számítás, a közjegyzőnek ellenőriznie kell. A hatályos francia Polgári Törvénykönyvet követi (731. cikk és köv.), végrendelet, ajándékozás és ismert visszautasítás nélkül. Nem veszi figyelembe a törvényes visszaháramlási jogot (738-2., 757-3. cikk), a külföldi vagyont és a házassági vagyonjogot.
+Le conjoint survivant ¦ Leski ¦ A túlélő házastárs
+Les ordres d’héritiers (art. 734) : le premier qui a quelqu’un prend tout ¦ Perillisryhmät (art. 734): ensimmäinen ryhmä, jossa on joku, saa kaiken ¦ Az örökösi rendek (734. cikk): az első, amelyben van valaki, mindent visz
+Les héritiers trouvés ¦ Löydetyt perilliset ¦ A megtalált örökösök
+🗂 Tables des successions (AD)… ¦ 🗂 Perintörekisterit (arkistot)… ¦ 🗂 Hagyatéki jegyzékek (levéltárak)…
+Lien avec le défunt ¦ Sukulaisuus vainajaan ¦ Rokonság az elhunyttal
+Vient ¦ Perii ¦ Örököl
+Part ¦ Osuus ¦ Rész
+Statut retenu ¦ Käytetty tila ¦ Rögzített állapot
+↔ Faire glisser le tableau pour voir les parts. ¦ ↔ Vieritä taulukkoa nähdäksesi osuudet. ¦ ↔ Húzd a táblázatot a részek megtekintéséhez.
+Aucun héritier trouvé jusqu’au 6e degré : sans testament, la succession reviendrait à l’État (art. 539 et 768). Il reste sans doute des branches à chercher. ¦ Perillistä ei löytynyt 6. asteeseen asti: ilman testamenttia perintö menisi valtiolle (art. 539 ja 768). Haaroja on luultavasti vielä etsittävä. ¦ A 6. fokig nem található örökös: végrendelet nélkül a hagyaték az államra szállna (539. és 768. cikk). Valószínűleg maradtak keresendő ágak.
+Les calculs restent tant que la branche n’est pas tranchée. ¦ Laskelmat säilyvät, kunnes haara on ratkaistu. ¦ A számítások megmaradnak, amíg az ág el nem dől.
+Les branches à chercher ¦ Etsittävät haarat ¦ Keresendő ágak
+L’hypothèse retenue ¦ Valittu olettama ¦ A választott feltevés
+Ex. : André MAZAUD décédé à Lyon en 1990 sans enfant (acte reçu le 5 déc.). ¦ Esim.: André MAZAUD kuoli Lyonissa 1990 lapsettomana (asiakirja saatu 5. jouluk.). ¦ Pl.: André MAZAUD 1990-ben Lyonban gyermektelenül halt meg (irat beérkezett dec. 5-én).
+Demandée avant « Remis au notaire » si un héritier reste inconnu. ¦ Vaaditaan ennen tilaa ”Luovutettu notaarille”, jos perillinen jää tuntemattomaksi. ¦ Kötelező a „Közjegyzőnek átadva” előtt, ha egy örökös ismeretlen marad.
+Les degrés civils (art. 741-743) : on compte les générations jusqu’à l’ancêtre commun, puis on redescend ¦ Sukulaisuusasteet (art. 741-743): lasketaan sukupolvet yhteiseen esivanhempaan ja sitten takaisin alas ¦ A rokonsági fokok (741–743. cikk): a nemzedékeket a közös ősig számoljuk, aztán vissza lefelé
+LE DÉFUNT ¦ VAINAJA ¦ AZ ELHUNYT
+à retrouver ¦ etsittävä ¦ felkutatandó
+sans descend. ¦ ei jälk. ¦ nincs lesz.
+Héritier vivant, sa part ¦ Elävä perillinen, hänen osuutensa ¦ Élő örökös, a része
+Prédécédé, sa souche ¦ Ennen kuollut, hänen sukuhaaransa ¦ Előbb elhunyt, a törzse
+Branche à chercher ¦ Etsittävä haara ¦ Keresendő ág
+Arbre de dévolution ¦ Perimyspuu ¦ Öröklési fa
+Le défunt au centre, chaque héritier avec sa part ¦ Vainaja keskellä, jokainen perillinen osuuksineen ¦ Középen az elhunyt, minden örökös a részével
+⤓ SVG ¦ ⤓ SVG ¦ ⤓ SVG
+↔ Faire glisser le dessin. ¦ ↔ Vieritä piirrosta. ¦ ↔ Húzd a rajzot.
+Clic sur une case : la fiche ; clic droit : « 🛡 Solidité de ce lien ». Le dessin suit les fiches. ¦ Napsautus ruutuun: henkilö; oikea napsautus: ”🛡 Tämän yhteyden vahvuus”. Piirros seuraa henkilötietoja. ¦ Kattintás egy mezőre: az adatlap; jobb kattintás: „🛡 E kapcsolat erőssége”. A rajz követi az adatlapokat.
+le {d} ¦ {d} ¦ {d}
+État de la pièce ¦ Asiakirjan tila ¦ Az irat állapota
+D’après la fiche ¦ Henkilötietojen mukaan ¦ Az adatlap szerint
+{n} en main ¦ {n} hallussa ¦ {n} megvan
+{n} demandés ¦ {n} pyydetty ¦ {n} kérve
+Par héritier ¦ Perillisittäin ¦ Örökösönként
+Par acte ¦ Asiakirjoittain ¦ Iratonként
+Ce qu’il faut prouver ¦ Mitä on todistettava ¦ Amit bizonyítani kell
+↔ Faire glisser le tableau. ¦ ↔ Vieritä taulukkoa. ¦ ↔ Húzd a táblázatot.
+Rangée dans le Registre de courriers, une demande d’acte met la pièce à « Demandé » ; l’acte attaché à la fiche la met à « En main ». ¦ Kirjerekisteriin tallennettu asiakirjapyyntö asettaa asiakirjan tilaan ”Pyydetty”; henkilöön liitetty asiakirja tilaan ”Hallussa”. ¦ A Levélnyilvántartásba mentett iratkérés az iratot „Kérve” állapotba teszi; az adatlaphoz csatolt irat „Megvan” állapotba.
+Je suis mandaté(e) par {notary}, notaire, pour établir la dévolution de la succession de {name} (dossier {n}, réf. {ref}). ¦ Toimin notaari {notary}:n valtuuttamana selvittääkseni perimysjärjestyksen vainajan {name} kuolinpesässä (kansio {n}, viite {ref}). ¦ {notary} közjegyző megbízásából eljárva állapítom meg {name} hagyatékának öröklési rendjét ({n}. ügy, hiv. {ref}).
+À retrouver ¦ Etsittävä ¦ Felkutatandó
+Adresse ? ¦ Osoite? ¦ Cím?
+Signé le ¦ Allekirjoitettu ¦ Aláírva
+À signer ¦ Allekirjoitettava ¦ Aláírandó
+✉️ Écrire ¦ ✉️ Kirjoita ¦ ✉️ Írás
+Contrat de révélation, réponses, signatures ¦ Paljastamissopimus, vastaukset, allekirjoitukset ¦ Feltárási szerződés, válaszok, aláírások
+📝 Contrat de révélation ¦ 📝 Paljastamissopimus ¦ 📝 Feltárási szerződés
+✉️ Lettre de premier contact ¦ ✉️ Ensimmäisen yhteydenoton kirje ¦ ✉️ Első megkeresés levele
+Héritier ¦ Perillinen ¦ Örökös
+Courrier ¦ Kirje ¦ Levél
+Contrat ¦ Sopimus ¦ Szerződés
+📝 Le contrat ne nomme pas le défunt avant signature. Écris toi-même le pourcentage d’honoraires et la date limite. Rien n’est envoyé par l’app. ¦ 📝 Sopimus ei nimeä vainajaa ennen allekirjoitusta. Kirjoita palkkioprosentti ja määräpäivä itse. Sovellus ei lähetä mitään. ¦ 📝 A szerződés aláírás előtt nem nevezi meg az elhunytat. A díj százalékát és a határidőt magad írd be. Az app semmit sem küld el.
+Chaque courrier va dans le Registre de courriers, avec sa relance. ¦ Jokainen kirje menee Kirjerekisteriin muistutuksineen. ¦ Minden levél a Levélnyilvántartásba kerül az emlékeztetőjével.
+↗ Registre de courriers ¦ ↗ Kirjerekisteri ¦ ↗ Levélnyilvántartás
+Madame, Monsieur, ¦ Hyvä vastaanottaja, ¦ Tisztelt Hölgyem, Uram!
+Généalogiste successoral, je suis chargé(e) par une étude notariale de retrouver les héritiers d’une personne décédée. Mes recherches me laissent penser que vous pourriez faire partie de sa famille. ¦ Perintögenealogina notaaritoimisto on antanut minulle tehtäväksi etsiä erään vainajan perilliset. Tutkimukseni viittaavat siihen, että saatatte kuulua hänen sukuunsa. ¦ Örökléskutató genealógusként egy közjegyzői iroda megbízásából egy elhunyt személy örököseit keresem. Kutatásaim alapján Ön a családjához tartozhat.
+Pour le vérifier, pourriez-vous me confirmer votre date et votre lieu de naissance, ainsi que les noms de vos parents ? Vous pouvez me répondre par courrier, par téléphone ou par courriel. ¦ Voisitteko varmistusta varten ilmoittaa syntymäaikanne ja -paikkanne sekä vanhempienne nimet? Voitte vastata kirjeitse, puhelimitse tai sähköpostitse. ¦ Ennek ellenőrzéséhez megadná születési idejét és helyét, valamint szülei nevét? Válaszolhat levélben, telefonon vagy e-mailben.
+Cette démarche ne vous engage à rien. ¦ Tämä ei sido teitä mihinkään. ¦ Ez a lépés Önt semmire sem kötelezi.
+Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées. ¦ Ystävällisin terveisin ¦ Tisztelettel:
+CONTRAT DE RÉVÉLATION DE SUCCESSION ¦ SOPIMUS PERINNÖN PALJASTAMISESTA ¦ HAGYATÉK FELTÁRÁSÁRÓL SZÓLÓ SZERZŐDÉS
+Entre {heir}, ci-après « l’héritier », et {sender}, généalogiste successoral. ¦ Osapuolet: {heir}, jäljempänä ”perillinen”, ja {sender}, perintögenealogi. ¦ Létrejött {heir}, a továbbiakban „az örökös”, és {sender} örökléskutató genealógus között.
+Le généalogiste a découvert une succession en cours dans laquelle l’héritier pourrait avoir des droits. Il s’engage à lui en révéler l’origine (le nom de la personne décédée, l’étude notariale chargée du règlement) dès la signature du présent contrat, et à réunir les actes qui prouvent sa qualité d’héritier. ¦ Genealogi on löytänyt vireillä olevan kuolinpesän, jossa perillisellä voi olla oikeuksia. Hän sitoutuu paljastamaan sen alkuperän (vainajan nimi, asiaa hoitava notaaritoimisto) tämän sopimuksen allekirjoittamisen jälkeen ja kokoamaan asiakirjat, jotka todistavat perillisaseman. ¦ A genealógus felfedezett egy folyamatban lévő hagyatékot, amelyben az örökösnek jogai lehetnek. Vállalja, hogy e szerződés aláírásakor feltárja annak eredetét (az elhunyt nevét, az eljáró közjegyzői irodát), és összegyűjti az örökösi minőséget igazoló iratokat.
+En contrepartie, l’héritier s’engage à verser au généalogiste des honoraires de ____ % (hors taxes) de l’actif net qui lui reviendra, payables seulement s’il reçoit effectivement une part de la succession. Les frais de recherche sont compris. ¦ Vastineeksi perillinen sitoutuu maksamaan genealogille palkkion, joka on ____ % (veroton) hänelle tulevasta nettovarallisuudesta, ja vain jos hän todella saa osuuden perinnöstä. Tutkimuskulut sisältyvät. ¦ Ennek fejében az örökös vállalja, hogy a genealógusnak a neki jutó nettó vagyon ____ %-ának megfelelő díjat fizet (adó nélkül), kizárólag akkor, ha ténylegesen részesedik a hagyatékból. A kutatási költségeket a díj tartalmazza.
+Cette proposition est valable jusqu’au ____________. ¦ Tämä tarjous on voimassa ____________ asti. ¦ Ez az ajánlat ____________-ig érvényes.
+Fait en deux exemplaires, à ____________, le ____________. ¦ Laadittu kahtena kappaleena, ____________, ____________. ¦ Készült két példányban, ____________, ____________.
+L’héritier (« Lu et approuvé », signature) — Le généalogiste ¦ Perillinen (”Luettu ja hyväksytty”, allekirjoitus) — Genealogi ¦ Az örökös („Elolvastam és elfogadom”, aláírás) — A genealógus
+Je me permets de revenir vers vous au sujet de mon courrier du {sent}, resté sans réponse. Une succession en cours pourrait vous concerner : pourriez-vous me contacter ? ¦ Palaan kirjeeseeni {sent}, johon en ole saanut vastausta. Vireillä oleva kuolinpesä voi koskea teitä: voisitteko ottaa minuun yhteyttä? ¦ Visszatérek {sent} keltezésű levelemre, amelyre nem kaptam választ. Egy folyamatban lévő hagyaték érintheti Önt: felvenné velem a kapcsolatot?
+✉️ HÉRITIERS CONTACTÉS ¦ ✉️ YHTEYDEN SAANEET PERILLISET ¦ ✉️ MEGKERESETT ÖRÖKÖSÖK
+Relance ¦ Muistutus ¦ Emlékeztető
+📋 Ranger dans le Registre de courriers ¦ 📋 Tallenna Kirjerekisteriin ¦ 📋 Mentés a Levélnyilvántartásba
+pas d’adresse dans le Répertoire des vivants ¦ ei osoitetta Elävien hakemistossa ¦ nincs cím az Élők címjegyzékében
+Premier contact ¦ Ensimmäinen yhteydenotto ¦ Első megkeresés
+Contrat de révélation ¦ Paljastamissopimus ¦ Feltárási szerződés
+Relance dans (jours) ¦ Muistutus (päivää) ¦ Emlékeztető (nap múlva)
+Le nom du défunt n’est pas écrit : il est révélé après la signature. ¦ Vainajan nimeä ei kirjoiteta: se paljastetaan allekirjoituksen jälkeen. ¦ Az elhunyt neve nem szerepel: aláírás után derül ki.
+La lettre (tu peux la retoucher ; le nom de chaque héritier est mis tout seul) ¦ Kirje (voit muokata sitä; kunkin perillisen nimi lisätään automaattisesti) ¦ A levél (szerkesztheted; minden örökös neve magától bekerül)
+📝 Traitement de texte ¦ 📝 Tekstinkäsittely ¦ 📝 Szövegszerkesztő
+Coche au moins un héritier. ¦ Valitse vähintään yksi perillinen. ¦ Jelölj ki legalább egy örököst.
+Courriers aux héritiers ¦ Kirjeet perillisille ¦ Levelek az örökösöknek
+Recherche d’héritiers ¦ Perillisten etsintä ¦ Örökösök keresése
+Ton logiciel de courriel s’ouvre : relis la lettre et envoie-la toi-même. Rien n’est envoyé par l’app. ¦ Sähköpostiohjelmasi avautuu: lue kirje ja lähetä se itse. Sovellus ei lähetä mitään. ¦ Megnyílik a levelezőprogramod: olvasd át a levelet, és küldd el magad. Az app semmit sem küld el.
+Premier contact + contrat ¦ Ensimmäinen yhteydenotto + sopimus ¦ Első megkeresés + szerződés
+{n} rangés dans le Registre de courriers ¦ {n} tallennettu Kirjerekisteriin ¦ {n} mentve a Levélnyilvántartásba
+N. ¦ S. ¦ Sz.
+D. ¦ K. ¦ H.
+M. ¦ V. ¦ Házas.
+Div. ¦ Ero ¦ Vál.
+Ren. ¦ Luop. ¦ Lem.
+(à fournir) ¦ (toimitettava) ¦ (beszerzendő)
+repr. {who} ¦ edust. {who} ¦ képv. {who}
+existence à ce jour non établie ¦ olemassaoloa ei toistaiseksi todettu ¦ létezése eddig nem igazolt
+TABLEAU GÉNÉALOGIQUE ¦ SUKUTAULUKKO ¦ CSALÁDFA-TÁBLÁZAT
+Succession de {name}, décédé(e) à {place} le {date} ¦ Vainajan {name} kuolinpesä, kuollut {place} {date} ¦ {name} hagyatéka, elhunyt {place}, {date}
+Dossier {n} · Réf. notaire {ref} ¦ Kansio {n} · Notaarin viite {ref} ¦ {n}. ügy · Közjegyzői hiv. {ref}
+Calcul établi d’après les actes cités, art. 731 et suiv. du Code civil, sous réserve de vérification par le notaire. N. = naissance, M. = mariage, D. = décès. ¦ Laskelma mainittujen asiakirjojen perusteella, Ranskan siviililain art. 731 ja seuraavat, notaarin tarkistusta varauksin. S. = syntymä, V. = vihkiminen, K. = kuolema. ¦ Számítás a felsorolt iratok alapján, a francia Polgári Törvénykönyv 731. és köv. cikke szerint, a közjegyző ellenőrzésének fenntartásával. Sz. = születés, Házas. = házasság, H. = halál.
+Communs à tous : {list}. ¦ Yhteiset kaikille: {list}. ¦ Mindenkinél közös: {list}.
+Hypothèse retenue : {h} ¦ Valittu olettama: {h} ¦ Választott feltevés: {h}
+à préciser ¦ tarkennettava ¦ pontosítandó
+Liste des pièces ¦ Asiakirjaluettelo ¦ Iratjegyzék
+Page {n} / 3 ¦ Sivu {n} / 3 ¦ {n}. oldal / 3
+Un PDF sobre, une source pour chaque lien ¦ Pelkistetty PDF, lähde jokaiselle yhteydelle ¦ Egyszerű PDF, minden kapcsolathoz forrás
+📝 Ouvrir dans le traitement de texte ¦ 📝 Avaa tekstinkäsittelyssä ¦ 📝 Megnyitás a szövegszerkesztőben
+Joindre les adresses des héritiers ¦ Liitä perillisten osoitteet ¦ Az örökösök címének csatolása
+Aucune photo ni note privée : les noms, les qualités, les parts et les sources. Pas d’adresse sauf si la case est cochée. ¦ Ei kuvia eikä yksityisiä muistiinpanoja: nimet, asemat, osuudet ja lähteet. Osoitteet vain, jos ruutu on valittu. ¦ Nincs fénykép, nincs magánjegyzet: nevek, minőségek, részek és források. Cím csak bejelölés esetén.
+Tableau généalogique — {n} ¦ Sukutaulukko — {n} ¦ Családfa-táblázat — {n}
+Tableau pour le notaire : PDF ou impression (3 pages) ¦ Taulukko notaarille: PDF tai tuloste (3 sivua) ¦ Táblázat a közjegyzőnek: PDF vagy nyomtatás (3 oldal)
+Tableau pour le notaire : ouvert dans le traitement de texte ¦ Taulukko notaarille: avattu tekstinkäsittelyssä ¦ Táblázat a közjegyzőnek: megnyitva a szövegszerkesztőben
+Tableau pour le notaire : copie rangée dans les médias ¦ Taulukko notaarille: kopio tallennettu mediaan ¦ Táblázat a közjegyzőnek: másolat mentve a médiába
+🕓 Journal du dossier {n} ¦ 🕓 Kansion {n} loki ¦ 🕓 A(z) {n}. ügy naplója
+(on ne peut ni le modifier ni l’effacer) ¦ (sitä ei voi muuttaa eikä poistaa) ¦ (nem módosítható és nem törölhető)
+⤓ Exporter le journal (CSV) ¦ ⤓ Vie loki (CSV) ¦ ⤓ Napló exportálása (CSV)
+Les changements des fiches restent dans Réglages → Journal des modifications. ¦ Henkilötietojen muutokset näkyvät myös kohdassa Asetukset → Muutosloki. ¦ Az adatlapok változásai a Beállítások → Változásnapló részben is megmaradnak.
+Action ¦ Toiminto ¦ Művelet
+Journal exporté (CSV) ¦ Loki viety (CSV) ¦ Napló exportálva (CSV)
+Le temps passé, les frais, les honoraires des contrats ¦ Käytetty aika, kulut, sopimusten palkkiot ¦ Ráfordított idő, költségek, szerződéses díjak
+＋ Temps ¦ ＋ Aika ¦ ＋ Idő
+＋ Frais ¦ ＋ Kulut ¦ ＋ Költség
+＋ Honoraires d’un contrat ¦ ＋ Sopimuksen palkkio ¦ ＋ Szerződéses díj
+🖨 Relevé ¦ 🖨 Erittely ¦ 🖨 Kimutatás
+{h} h {m} min passées ¦ {h} t {m} min käytetty ¦ {h} óra {m} perc ráfordítva
+Frais : {s} ¦ Kulut: {s} ¦ Költségek: {s}
+{n} contrats ¦ Sopimuksia: {n} ¦ Szerződések: {n}
+{h} h {m} min ¦ {h} t {m} min ¦ {h} óra {m} perc
+Rien de noté. ¦ Ei kirjauksia. ¦ Nincs bejegyzés.
+Aucun montant de succession n’est noté. ¦ Perinnön rahamäärää ei kirjata. ¦ A hagyaték összegét nem rögzítjük.
+💶 TEMPS ET FRAIS ¦ 💶 AIKA JA KULUT ¦ 💶 IDŐ ÉS KÖLTSÉGEK
+Copie d’acte, déplacement… ¦ Asiakirjan kopio, matka… ¦ Iratmásolat, utazás…
+Recherches aux AD, appels… ¦ Arkistotutkimus, puhelut… ¦ Levéltári kutatás, hívások…
+Contrat signé ¦ Sopimus allekirjoitettu ¦ Szerződés aláírva
+Heures ¦ Tunnit ¦ Óra
+Minutes ¦ Minuutit ¦ Perc
+Montant (€) ¦ Summa (€) ¦ Összeg (€)
+🌍 HÉRITIER À L’ÉTRANGER ¦ 🌍 PERILLINEN ULKOMAILLA ¦ 🌍 ÖRÖKÖS KÜLFÖLDÖN
+Chercher {name} hors de France ¦ Etsi henkilöä {name} Ranskan ulkopuolelta ¦ {name} keresése Franciaországon kívül
+Les services à interroger ¦ Kysyttävät viranomaiset ¦ Megkeresendő hivatalok
+📮 Demander l’acte au Service central d’état civil ¦ 📮 Pyydä asiakirja keskusväestörekisteristä (Nantes) ¦ 📮 Irat kérése a Központi Anyakönyvi Szolgálattól
+Langue de la lettre ¦ Kirjeen kieli ¦ A levél nyelve
+Destinataire ¦ Vastaanottaja ¦ Címzett
+Registro civil de …, consulat de France à … ¦ Registro civil de …, Ranskan konsulaatti … ¦ Registro civil de …, francia konzulátus, …
+La lettre (dans la langue du pays) ¦ Kirje (maan kielellä) ¦ A levél (az ország nyelvén)
+Lettre à l’étranger ¦ Kirje ulkomaille ¦ Levél külföldre
+Recherche d’un héritier à l’étranger : {name} ¦ Perillisen etsintä ulkomailta: {name} ¦ Örökös keresése külföldön: {name}
+Courrier rangé dans le Registre de courriers ¦ Kirje tallennettu Kirjerekisteriin ¦ Levél mentve a Levélnyilvántartásba
+❔ ABSENTS ET DISPARUS ¦ ❔ POISSAOLEVAT JA KADONNEET ¦ ❔ TÁVOLLÉVŐK ÉS ELTŰNTEK
+{name} : absent ou disparu ? ¦ {name}: poissaoleva vai kadonnut? ¦ {name}: távollévő vagy eltűnt?
+art. {a} ¦ art. {a} ¦ {a}. cikk
+Le calcul lit ce statut : un présumé absent est compté vivant, sa part est « réservée » ; un déclaré absent est compté comme mort avant. ¦ Laskelma lukee tämän tilan: oletetusti poissaoleva lasketaan eläväksi, hänen osuutensa ”varataan”; poissaolevaksi julistettu lasketaan ennen kuolleeksi. ¦ A számítás figyelembe veszi ezt az állapotot: a vélelmezetten távollévő élőnek számít, része „fenntartott”; a távollévőnek nyilvánított előbb elhunytnak számít.
+Présumé absent ¦ Oletetusti poissaoleva ¦ Vélelmezetten távollévő
+Déclaré absent ou jugement de décès ¦ Julistettu poissaolevaksi tai kuolleeksi ¦ Távollévőnek vagy holttá nyilvánított
+{name} : statut retenu changé, dévolution recalculée ¦ {name}: käytetty tila muutettu, perimys laskettu uudelleen ¦ {name}: rögzített állapot módosítva, öröklés újraszámolva
+Héritier à retrouver : {name}{born} — vivant ? décédé ? des enfants ? (dossier de succession {n}) ¦ Etsittävä perillinen: {name}{born} — elossa? kuollut? lapsia? (perunkirjoituskansio {n}) ¦ Felkutatandó örökös: {name}{born} — él? meghalt? gyermekei? ({n}. hagyatéki ügy)
+(né en {y}) ¦ (synt. {y}) ¦ (szül. {y})
+Descendance de {name} (mort avant le défunt) : un enfant reconnu ou naturel ? (dossier de succession {n}) ¦ Henkilön {name} jälkeläiset (kuoli ennen vainajaa): tunnustettu tai avioliiton ulkopuolinen lapsi? (perunkirjoituskansio {n}) ¦ {name} leszármazottai (az örökhagyó előtt halt meg): elismert vagy házasságon kívüli gyermek? ({n}. hagyatéki ügy)
+Branche à chercher autour de {name} (dossier de succession {n}) ¦ Etsittävä haara henkilön {name} ympärillä (perunkirjoituskansio {n}) ¦ Keresendő ág {name} körül ({n}. hagyatéki ügy)
+Piste ouverte dans le Journal des recherches : {name} ¦ Johtolanka avattu Tutkimuslokiin: {name} ¦ Nyom megnyitva a Kutatási naplóban: {name}
+Piste ajoutée : Recherche → 🗓 Journal des recherches ¦ Johtolanka lisätty: Tutkimus → 🗓 Tutkimusloki ¦ Nyom hozzáadva: Kutatás → 🗓 Kutatási napló
+🗂 TABLES DES SUCCESSIONS DES AD ¦ 🗂 ARKISTOJEN PERINTÖREKISTERIT ¦ 🗂 A LEVÉLTÁRAK HAGYATÉKI JEGYZÉKEI
+Dépouiller les tables de successions et absences ¦ Käy läpi perintö- ja poissaolorekisterit ¦ A hagyatéki és távolléti jegyzékek feldolgozása
+Ajouter au suivi ¦ Lisää seurantaan ¦ Hozzáadás a követéshez
+Les tables de successions et absences et les mutations par décès (série Q des Archives départementales) donnent la date et le bureau de chaque succession. Coche les personnes à chercher : une ligne « à faire » chacune. ¦ Perintö- ja poissaolorekisterit sekä kuolemansaantojen rekisterit (departementtiarkistojen sarja Q) kertovat kunkin perinnön päivämäärän ja toimiston. Valitse etsittävät henkilöt: kullekin rivi ”tehtävä”. ¦ A hagyatéki és távolléti jegyzékek és a halál miatti vagyonátszállások nyilvántartásai (a megyei levéltárak Q sorozata) megadják minden hagyaték dátumát és hivatalát. Jelöld ki a keresendő személyeket: mindegyikhez egy „teendő” sor.
+Coche au moins une personne. ¦ Valitse vähintään yksi henkilö. ¦ Jelölj ki legalább egy személyt.
+Tables des successions et absences, mutations par décès (série Q) : {name}{d} ¦ Perintö- ja poissaolorekisterit, kuolemansaannot (sarja Q): {name}{d} ¦ Hagyatéki és távolléti jegyzékek, halál miatti átszállások (Q sorozat): {name}{d}
+Tables des successions : {n} à dépouiller ¦ Perintörekisterit: {n} läpikäytävää ¦ Hagyatéki jegyzékek: {n} feldolgozandó
+{n} ajoutés aux dépouillements ¦ {n} lisätty läpikäynteihin ¦ {n} hozzáadva a feldolgozásokhoz
+État : {s} ¦ Tila: {s} ¦ Állapot: {s}
+📋 LISTE DE CONTRÔLE ¦ 📋 TARKISTUSLISTA ¦ 📋 ELLENŐRZŐLISTA
+Avant « Remis au notaire » ¦ Ennen tilaa ”Luovutettu notaarille” ¦ A „Közjegyzőnek átadva” előtt
+Remis au notaire ¦ Luovutettu notaarille ¦ Közjegyzőnek átadva
+Remettre quand même ¦ Luovuta silti ¦ Átadás mégis
+Tout n’est pas prêt : corrige d’abord, ou remets quand même (ce sera noté au journal). ¦ Kaikki ei ole valmista: korjaa ensin tai luovuta silti (merkitään lokiin). ¦ Nincs minden kész: előbb javíts, vagy add át mégis (a napló rögzíti).
+Les adresses des vivants seront retirées du dossier et de ses courriers. Le journal reste. Continuer ? ¦ Elävien osoitteet poistetaan kansiosta ja sen kirjeistä. Loki säilyy. Jatketaanko? ¦ Az élők címei törlődnek az ügyből és leveleiből. A napló megmarad. Folytatod?
+Archiver ¦ Arkistoi ¦ Archiválás
+Dossier archivé. ¦ Kansio arkistoitu. ¦ Ügy archiválva.
+ÉCHÉANCE ¦ MÄÄRÄAIKA ¦ HATÁRIDŐ
+Remettre le tableau généalogique au notaire ¦ Luovuta sukutaulukko notaarille ¦ A családfa-táblázat átadása a közjegyzőnek
+Remise au notaire ¦ Luovutus notaarille ¦ Átadás a közjegyzőnek
+Rendez-vous ¦ Tapaaminen ¦ Találkozó
+Échéance ajoutée ¦ Määräaika lisätty ¦ Határidő hozzáadva
+Échéance supprimée ¦ Määräaika poistettu ¦ Határidő törölve
+Répertoire des vivants : « ＋ Contact », puis relie la fiche de l’héritier. ¦ Elävien hakemisto: ”＋ Yhteystieto”, yhdistä sitten perillisen henkilötiedot. ¦ Élők címjegyzéke: „＋ Kapcsolat”, majd kösd össze az örökös adatlapjával.
+Relevé de temps et de frais — {n} ¦ Aika- ja kuluerittely — {n} ¦ Idő- és költségkimutatás — {n}
+Arbre de dévolution — {n} ¦ Perimyspuu — {n} ¦ Öröklési fa — {n}
+Arbre de dévolution imprimé ¦ Perimyspuu tulostettu ¦ Öröklési fa kinyomtatva
+Hypothèse retenue enregistrée ¦ Valittu olettama tallennettu ¦ Választott feltevés mentve
+Échéance faite ¦ Määräaika tehty ¦ Határidő teljesítve
+Échéance à faire ¦ Määräaika tekemättä ¦ Teljesítendő határidő
+Pièce : {s} ¦ Asiakirja: {s} ¦ Irat: {s}
+Courrier mis à jour ¦ Kirje päivitetty ¦ Levél frissítve
+Rechercher les héritiers… ¦ Etsi perilliset… ¦ Örökösök keresése…
+Pas en mode consultation. ¦ Ei katselutilassa. ¦ Megtekintő módban nem.
+Les dossiers n’ont pas pu être lus. ¦ Kansioita ei voitu lukea. ¦ Az ügyeket nem sikerült beolvasni.
+Aucun dossier en cours. ¦ Ei keskeneräisiä kansioita. ¦ Nincs folyamatban lévő ügy.
+Dossier {n} ¦ Kansio {n} ¦ {n}. ügy
+⚖️ Dossiers de succession ¦ ⚖️ Perunkirjoituskansiot ¦ ⚖️ Hagyatéki ügyek
+Signé le {d} ¦ Allekirjoitettu {d} ¦ Aláírva: {d}
+Dossier de succession ¦ Perunkirjoituskansio ¦ Hagyatéki ügy
+Tous les courriers ¦ Kaikki kirjeet ¦ Minden levél
+l’héritier ¦ perillinen ¦ az örökös
+Branche paternelle : {who} ¦ Isän puoli: {who} ¦ Apai ág: {who}
+Branche maternelle : {who} ¦ Äidin puoli: {who} ¦ Anyai ág: {who}
+Tous les enfants sont communs : le conjoint choisit l’usufruit de tout, ou le quart en pleine propriété (art. 757). Le calcul montre le quart. ¦ Kaikki lapset ovat yhteisiä: puoliso valitsee käyttöoikeuden kaikkeen tai neljänneksen täydellä omistusoikeudella (art. 757). Laskelma näyttää neljänneksen. ¦ Minden gyermek közös: a házastárs választhat haszonélvezetet az egészen vagy egynegyedet tulajdonban (757. cikk). A számítás az egynegyedet mutatja.
+Un enfant au moins n’est pas commun aux deux époux : le conjoint reçoit le quart en pleine propriété (art. 757). ¦ Vähintään yksi lapsi ei ole puolisoiden yhteinen: puoliso saa neljänneksen täydellä omistusoikeudella (art. 757). ¦ Legalább egy gyermek nem közös: a házastárs egynegyedet kap tulajdonban (757. cikk).
+1er ordre : les enfants et, par représentation, les descendants d’un enfant prédécédé ou renonçant ; partage par souche (art. 735, 752, 753). ¦ 1. ryhmä: lapset ja sijaantulon kautta ennen kuolleen tai perinnöstä luopuneen lapsen jälkeläiset; jako sukuhaaroittain (art. 735, 752, 753). ¦ 1. rend: a gyermekek és képviselet útján az előbb elhunyt vagy visszautasító gyermek leszármazottai; osztás törzsenként (735., 752., 753. cikk).
+Sans descendant, avec le père et la mère : la moitié au conjoint, un quart à chaque parent (art. 757-1). ¦ Ei jälkeläisiä, isä ja äiti elossa: puolet puolisolle, neljännes kummallekin vanhemmalle (art. 757-1). ¦ Leszármazott nélkül, apával és anyával: fele a házastársnak, negyede-negyede a szülőknek (757-1. cikk).
+Sans descendant, avec un seul parent : trois quarts au conjoint, un quart au parent (art. 757-1). ¦ Ei jälkeläisiä, yksi vanhempi elossa: kolme neljännestä puolisolle, neljännes vanhemmalle (art. 757-1). ¦ Leszármazott nélkül, egy szülővel: háromnegyede a házastársnak, negyede a szülőnek (757-1. cikk).
+Sans descendant ni père ni mère : le conjoint recueille toute la succession (art. 757-2). Les frères et sœurs peuvent avoir un droit de retour sur les biens de famille (art. 757-3) : à voir avec le notaire. ¦ Ei jälkeläisiä eikä isää tai äitiä: puoliso saa koko perinnön (art. 757-2). Sisaruksilla voi olla palautusoikeus suvun omaisuuteen (art. 757-3): selvitettävä notaarin kanssa. ¦ Leszármazott, apa és anya nélkül: a házastárs kapja az egész hagyatékot (757-2. cikk). A testvéreknek visszaháramlási joguk lehet a családi vagyonra (757-3. cikk): a közjegyzővel tisztázandó.
+Le père et la mère ont chacun un quart, les frères et sœurs (ou leurs descendants) la moitié (art. 738). ¦ Isä ja äiti saavat kumpikin neljänneksen, sisarukset (tai heidän jälkeläisensä) puolet (art. 738). ¦ Az apa és az anya egy-egy negyedet kap, a testvérek (vagy leszármazottaik) a felét (738. cikk).
+Le parent survivant a un quart, les frères et sœurs (ou leurs descendants) trois quarts (art. 738). ¦ Elossa oleva vanhempi saa neljänneksen, sisarukset (tai heidän jälkeläisensä) kolme neljännestä (art. 738). ¦ A túlélő szülő negyedet kap, a testvérek (vagy leszármazottaik) háromnegyedet (738. cikk).
+Père et mère décédés : les frères et sœurs ou leurs descendants prennent tout (art. 737). ¦ Isä ja äiti kuolleet: sisarukset tai heidän jälkeläisensä saavat kaiken (art. 737). ¦ Apa és anya elhunyt: a testvérek vagy leszármazottaik kapnak mindent (737. cikk).
+Frères et sœurs germains, consanguins ou utérins : parts égales, par souche (art. 744, 752-2, 753 ; loi du 3 décembre 2001). ¦ Täyssisarukset sekä isän- tai äidinpuoleiset puolisisarukset: yhtä suuret osuudet sukuhaaroittain (art. 744, 752-2, 753; laki 3.12.2001). ¦ Édestestvérek és apai vagy anyai féltestvérek: egyenlő részek törzsenként (744., 752-2., 753. cikk; 2001. december 3-i törvény).
+Sans descendant ni frère ni sœur : le père et la mère ont chacun la moitié (art. 736). ¦ Ei jälkeläisiä eikä sisaruksia: isä ja äiti saavat kumpikin puolet (art. 736). ¦ Leszármazott és testvér nélkül: az apa és az anya fele-fele részt kap (736. cikk).
+Un seul parent, sans frère ni sœur, mais des ascendants dans l’autre branche : moitié au parent, moitié à ces ascendants (art. 738-1). ¦ Vain yksi vanhempi, ei sisaruksia, mutta esivanhempia toisella puolella: puolet vanhemmalle, puolet näille esivanhemmille (art. 738-1). ¦ Csak egy szülő, testvér nincs, de a másik ágon vannak felmenők: fele a szülőnek, fele e felmenőknek (738-1. cikk).
+Le parent survivant, seul de son ordre, recueille la succession. ¦ Elossa oleva vanhempi, ryhmänsä ainoa, saa perinnön. ¦ A túlélő szülő, rendjében egyedül, kapja a hagyatékot.
+3e ordre : moitié pour chaque branche ; dans chacune, l’ascendant le plus proche prend tout (art. 747-748). ¦ 3. ryhmä: puolet kummallekin puolelle; kummallakin lähin esivanhempi saa kaiken (art. 747-748). ¦ 3. rend: ágankénti fele; mindegyikben a legközelebbi felmenő visz mindent (747–748. cikk).
+3e ordre : une seule branche a encore un ascendant ; il recueille toute la succession, même les cousins de l’autre branche sont écartés (art. 748). ¦ 3. ryhmä: vain toisella puolella on vielä esivanhempi; hän saa koko perinnön, toisen puolen serkutkin suljetaan pois (art. 748). ¦ 3. rend: csak egy ágban van még felmenő; ő kapja az egész hagyatékot, a másik ág unokatestvérei is kizárva (748. cikk).
+4e ordre : moitié pour chaque branche ; dans chacune, le collatéral le plus proche en degré prend tout, sans représentation (art. 749-750). ¦ 4. ryhmä: puolet kummallekin puolelle; kummallakin asteeltaan lähin sivusukulainen saa kaiken, ilman sijaantuloa (art. 749-750). ¦ 4. rend: ágankénti fele; mindegyikben a fokban legközelebbi oldalrokon visz mindent, képviselet nélkül (749–750. cikk).
+4e ordre : personne dans une branche, l’autre branche recueille tout (art. 750). ¦ 4. ryhmä: toisella puolella ei ketään, toinen puoli saa kaiken (art. 750). ¦ 4. rend: egy ágban senki, a másik ág kap mindent (750. cikk).
+Les collatéraux ne succèdent pas au-delà du 6e degré (art. 745). ¦ Sivusukulaiset eivät peri 6. astetta kauempaa (art. 745). ¦ Az oldalrokonok a 6. fokon túl nem örökölnek (745. cikk).
+Le défunt n’est pas dans la base. ¦ Vainaja ei ole tietokannassa. ¦ Az elhunyt nincs az adatbázisban.
+si {name} n’était pas marié avec le défunt (PACS ou union libre) ¦ jos {name} ei ollut naimisissa vainajan kanssa (PACS tai avoliitto) ¦ ha {name} nem volt házas az elhunyttal (PACS vagy élettárs)
+si {name} est mort avant, représenté par ses descendants ¦ jos {name} kuoli ennen, jälkeläistensä edustamana ¦ ha {name} előbb halt meg, leszármazottai képviselik
+si {name} est mort avant sans descendant ¦ jos {name} kuoli ennen ilman jälkeläisiä ¦ ha {name} előbb halt meg leszármazott nélkül
+Enfants et descendants, avec représentation ¦ Lapset ja jälkeläiset, sijaantulo ¦ Gyermekek és leszármazottak, képviselettel
+Père et mère, frères et sœurs et leurs descendants (« parents privilégiés ») ¦ Isä ja äiti, sisarukset ja heidän jälkeläisensä (”etuoikeutetut sukulaiset”) ¦ Apa és anya, testvérek és leszármazottaik („kiváltságos rokonok”)
+Autres ascendants (grands-parents…), fente paternelle / maternelle ¦ Muut esivanhemmat (isovanhemmat…), jako isän ja äidin puoleen ¦ Más felmenők (nagyszülők…), apai / anyai megosztás
+Oncles, tantes, cousins… jusqu’au 6e degré (art. 745) ¦ Sedät, tädit, serkut… 6. asteeseen asti (art. 745) ¦ Nagybácsik, nagynénik, unokatestvérek… a 6. fokig (745. cikk)
+Vivant au décès ? Mort avant ? Des enfants ? Sa réponse change la part des autres. ¦ Elossa kuolinhetkellä? Kuoli ennen? Lapsia? Vastaus muuttaa muiden osuuksia. ¦ Élt a halálkor? Előbb halt meg? Gyermekei? A válasz a többiek részét is megváltoztatja.
+Mort avant le défunt, sans descendance connue : un enfant, même reconnu tard, changerait le partage. ¦ Kuoli ennen vainajaa, ei tunnettuja jälkeläisiä: lapsi, myöhään tunnustettukin, muuttaisi jaon. ¦ Az örökhagyó előtt halt meg, ismert leszármazott nélkül: egy, akár későn elismert gyermek megváltoztatná a felosztást.
+Aucun enfant du défunt dans la base : à vérifier (mentions en marge de l’acte de naissance, livret de famille). ¦ Vainajalla ei ole lapsia tietokannassa: tarkistettava (syntymäasiakirjan reunamerkinnät, perhekirja). ¦ Az elhunytnak nincs gyermeke az adatbázisban: ellenőrizendő (a születési anyakönyv széljegyzetei, családi könyv).
+Les parents du défunt ne sont pas dans la base : sans eux, l’app ne trouve ni frères, ni sœurs, ni cousins. ¦ Vainajan vanhemmat eivät ole tietokannassa: ilman heitä sovellus ei löydä sisaruksia eikä serkkuja. ¦ Az elhunyt szülei nincsenek az adatbázisban: nélkülük az app nem talál testvért és unokatestvért.
+Un seul parent du défunt est dans la base : l’autre branche reste à chercher. ¦ Vain yksi vainajan vanhemmista on tietokannassa: toinen puoli on vielä etsittävä. ¦ Az elhunytnak csak egy szülője van az adatbázisban: a másik ágat még keresni kell.
+Adoption : plénière ou simple ? Une adoption plénière coupe les liens avec la famille d’origine. ¦ Adoptio: täysi vai yksinkertainen? Täysi adoptio katkaisee siteet alkuperäiseen perheeseen. ¦ Örökbefogadás: teljes vagy egyszerű? A teljes örökbefogadás megszakítja a kapcsolatot a vér szerinti családdal.
+Couple sans mariage noté : seul un conjoint marié hérite sans testament (pas le partenaire de PACS ni le concubin). ¦ Pari ilman kirjattua avioliittoa: ilman testamenttia perii vain aviopuoliso (ei PACS-kumppani eikä avopuoliso). ¦ Pár rögzített házasság nélkül: végrendelet nélkül csak a házastárs örököl (a PACS-partner és az élettárs nem).
+Un seul parent noté : relie sa fiche à son autre parent (frère germain ou demi-frère). ¦ Vain yksi vanhempi kirjattu: yhdistä henkilö toiseen vanhempaan (täys- tai puolisisarus). ¦ Csak egy szülő rögzítve: kösd az adatlapot a másik szülőhöz (édes- vagy féltestvér).
+Personne dans la branche paternelle jusqu’au 6e degré : oncles, tantes et cousins du père à chercher. ¦ Isän puolella ei ketään 6. asteeseen asti: isän sedät, tädit ja serkut etsittävä. ¦ Az apai ágon a 6. fokig senki: az apa nagybátyjait, nagynénjeit és unokatestvéreit kell keresni.
+Personne dans la branche maternelle jusqu’au 6e degré : oncles, tantes et cousins de la mère à chercher. ¦ Äidin puolella ei ketään 6. asteeseen asti: äidin enot, tädit ja serkut etsittävä. ¦ Az anyai ágon a 6. fokig senki: az anya nagybátyjait, nagynénjeit és unokatestvéreit kell keresni.
+Vivant, mais pas d’adresse dans le Répertoire des vivants. ¦ Elossa, mutta ei osoitetta Elävien hakemistossa. ¦ Él, de nincs címe az Élők címjegyzékében.
+Mort après le défunt : sa part passe à ses propres héritiers (sa succession à lui). ¦ Kuoli vainajan jälkeen: osuus siirtyy hänen omille perillisilleen (hänen oma kuolinpesänsä). ¦ Az örökhagyó után halt meg: része a saját örököseire száll (a saját hagyatéka).
+Présumé absent : sa part est réservée (art. 112 à 132). ¦ Oletetusti poissaoleva: osuus varataan (art. 112–132). ¦ Vélelmezetten távollévő: része fenntartott (112–132. cikk).
+Date du décès inconnue : l’app ne peut pas dire qui était mort avant ni quel droit s’applique. ¦ Kuolinpäivä tuntematon: sovellus ei voi sanoa, kuka kuoli ensin, eikä mitä lakia sovelletaan. ¦ Ismeretlen halálozási dátum: az app nem tudja megmondani, ki halt meg előbb, és melyik jog érvényes.
+Décès du {date} : le droit de l’époque n’est pas celui d’aujourd’hui. Avant le 1er juillet 2002 (loi du 3 décembre 2001), le conjoint survivant avait surtout de l’usufruit, les enfants nés hors mariage n’avaient pas tous les mêmes droits et les frères et sœurs de lits différents se partageaient par lignes. Avant le 1er août 1972, les enfants naturels avaient des droits réduits. L’app calcule ici selon le droit actuel : le notaire applique le droit de la date. ¦ Kuolema {date}: silloinen laki ei ole nykyinen. Ennen 1.7.2002 (laki 3.12.2001) leskellä oli lähinnä käyttöoikeus, avioliiton ulkopuolella syntyneillä lapsilla ei ollut kaikilla samoja oikeuksia ja eri avioliitoista olevat sisarukset jakoivat linjoittain. Ennen 1.8.1972 avioliiton ulkopuolisilla lapsilla oli rajoitetut oikeudet. Sovellus laskee tässä nykyisen lain mukaan: notaari soveltaa päivämäärän lakia. ¦ Halál: {date}: az akkori jog nem a mai. 2002. július 1. előtt (2001. december 3-i törvény) a túlélő házastársnak főleg haszonélvezete volt, a házasságon kívül született gyermekeknek nem volt mind ugyanolyan joga, a különböző házasságból származó testvérek pedig ágak szerint osztoztak. 1972. augusztus 1. előtt a házasságon kívüli gyermekeknek korlátozott joguk volt. Az app itt a hatályos jog szerint számol: a közjegyző az időpont szerinti jogot alkalmazza.
+Décès avant le 1er janvier 2007 (loi du 23 juin 2006) : on ne pouvait pas représenter un héritier qui avait renoncé. ¦ Kuolema ennen 1.1.2007 (laki 23.6.2006): perinnöstä luopunutta perillistä ei voinut edustaa. ¦ Halál 2007. január 1. előtt (2006. június 23-i törvény): a visszautasító örököst nem lehetett képviselni.
+Décès en 2002 sans date précise : avant ou après le 1er juillet 2002, le droit change. Précise la date. ¦ Kuolema vuonna 2002 ilman tarkkaa päivää: ennen ja jälkeen 1.7.2002 laki muuttuu. Tarkenna päivämäärä. ¦ Halál 2002-ben pontos dátum nélkül: 2002. július 1. előtt és után más a jog. Add meg a dátumot.
+Divorce ¦ Avioero ¦ Válás
+La naissance de {name} ¦ Henkilön {name} syntymä ¦ {name} születése
+Le décès de {name} ¦ Henkilön {name} kuolema ¦ {name} halála
+Le mariage avec {name}, non dissous ¦ Avioliitto henkilön {name} kanssa, purkamaton ¦ Házasság {name} személlyel, fel nem bontva
+Le divorce d’avec {name} ¦ Avioero henkilöstä {name} ¦ Válás {name} személytől
+Pas de conjoint survivant : décès de {name} ¦ Ei leskeä: henkilön {name} kuolema ¦ Nincs túlélő házastárs: {name} halála
+{name} est mort avant ¦ {name} kuoli ennen ¦ {name} előbb meghalt
+Commun à tous ¦ Yhteiset kaikille ¦ Mindenkinél közös
+{name} a renoncé à la succession ¦ {name} luopui perinnöstä ¦ {name} visszautasította a hagyatékot
+{name} est mort avant (représenté) ¦ {name} kuoli ennen (edustettu) ¦ {name} előbb meghalt (képviselve)
+Son nom d’épouse ¦ Hänen avionimensä ¦ Házassági neve
+{name} (pour l’écarter) ¦ {name} (poissulkemista varten) ¦ {name} (a kizáráshoz)
+Mort avant le défunt, sans enfant ¦ Kuoli ennen vainajaa, lapseton ¦ Az örökhagyó előtt halt meg, gyermektelenül
+Chaque héritier a ses actes : il en manque pour {who}. ¦ Jokaisella perillisellä on asiakirjansa: puuttuu henkilöltä {who}. ¦ Minden örökösnek megvannak az iratai: hiányzik {who} esetében.
+Chaque héritier a ses actes. ¦ Jokaisella perillisellä on asiakirjansa. ¦ Minden örökösnek megvannak az iratai.
+Chaque prédécédé a son acte de décès : {n} manquent. ¦ Jokaisella ennen kuolleella on kuolinasiakirja: {n} puuttuu. ¦ Minden előbb elhunytnak megvan a halotti anyakönyvi kivonata: {n} hiányzik.
+Chaque prédécédé a son acte de décès. ¦ Jokaisella ennen kuolleella on kuolinasiakirja. ¦ Minden előbb elhunytnak megvan a halotti anyakönyvi kivonata.
+Les branches inconnues ont une explication. ¦ Tuntemattomille haaroille on selitys. ¦ Az ismeretlen ágakhoz van magyarázat.
+{n} héritiers ou branches restent « inconnus » sans explication. ¦ ”Tuntemattomia” perillisiä tai haaroja ilman selitystä: {n}. ¦ Magyarázat nélküli „ismeretlen” örökösök vagy ágak: {n}.
+Aucune branche « inconnue ». ¦ Ei ”tuntemattomia” haaroja. ¦ Nincs „ismeretlen” ág.
+L’hypothèse retenue est écrite. ¦ Valittu olettama on kirjattu. ¦ A választott feltevés le van írva.
+Plusieurs hypothèses : écris celle qui est retenue. ¦ Useita olettamia: kirjoita, mikä on valittu. ¦ Több feltevés: írd le, melyiket választod.
+Une seule hypothèse. ¦ Vain yksi olettama. ¦ Egyetlen feltevés.
+Les parts totalisent 1. ¦ Osuuksien summa on 1. ¦ A részek összege 1.
+Les parts ne totalisent pas 1 : à revoir. ¦ Osuuksien summa ei ole 1: tarkistettava. ¦ A részek összege nem 1: átnézendő.
+La date du décès demande l’avis du notaire (droit de l’époque ou date inconnue). ¦ Kuolinpäivä vaatii notaarin arvion (silloinen laki tai tuntematon päivä). ¦ A halálozási dátumhoz a közjegyző véleménye kell (akkori jog vagy ismeretlen dátum).
+{name} ajouté (statut inconnu) ¦ {name} lisätty (tila tuntematon) ¦ {name} hozzáadva (ismeretlen állapot)
+{name} ajouté ({share}) ¦ {name} lisätty ({share}) ¦ {name} hozzáadva ({share})
+{name} : {from} → {to} ¦ {name}: {from} → {to} ¦ {name}: {from} → {to}
+{name} retiré ¦ {name} poistettu ¦ {name} eltávolítva
+Ordre retenu : {from} → {to} ¦ Valittu ryhmä: {from} → {to} ¦ Választott rend: {from} → {to}
+descendante à la {n}e génération ¦ jälkeläinen {n}. polvessa ¦ leszármazott a(z) {n}. nemzedékben
+descendant à la {n}e génération ¦ jälkeläinen {n}. polvessa ¦ leszármazott a(z) {n}. nemzedékben
+ascendante à la {n}e génération ¦ esivanhempi {n}. polvessa ¦ felmenő a(z) {n}. nemzedékben
+ascendant à la {n}e génération ¦ esivanhempi {n}. polvessa ¦ felmenő a(z) {n}. nemzedékben
+parente au {n}e degré ¦ sukulainen {n}. asteessa ¦ rokon a(z) {n}. fokon
+parent au {n}e degré ¦ sukulainen {n}. asteessa ¦ rokon a(z) {n}. fokon
+petit-fils ¦ lapsenlapsi (poika) ¦ unoka (fiú)
+petite-fille ¦ lapsenlapsi (tyttö) ¦ unoka (lány)
+arrière-petit-fils ¦ lapsenlapsenlapsi (poika) ¦ dédunoka (fiú)
+arrière-petite-fille ¦ lapsenlapsenlapsi (tyttö) ¦ dédunoka (lány)
+arrière-arrière-petit-fils ¦ lapsenlapsenlapsenlapsi (poika) ¦ ükunoka (fiú)
+arrière-arrière-petite-fille ¦ lapsenlapsenlapsenlapsi (tyttö) ¦ ükunoka (lány)
+nièce ¦ sisarentytär / veljentytär ¦ unokahúg
+petit-neveu ¦ sisaruksen lapsenlapsi (poika) ¦ testvér unokája (fiú)
+petite-nièce ¦ sisaruksen lapsenlapsi (tyttö) ¦ testvér unokája (lány)
+arrière-petit-neveu ¦ sisaruksen lapsenlapsenlapsi (poika) ¦ testvér dédunokája (fiú)
+arrière-petite-nièce ¦ sisaruksen lapsenlapsenlapsi (tyttö) ¦ testvér dédunokája (lány)
+arrière-arrière-petit-neveu ¦ sisaruksen lapsenlapsenlapsenlapsi (poika) ¦ testvér ükunokája (fiú)
+arrière-arrière-petite-nièce ¦ sisaruksen lapsenlapsenlapsenlapsi (tyttö) ¦ testvér ükunokája (lány)
+cousin germain ¦ serkku ¦ első unokatestvér
+cousine germaine ¦ serkku ¦ első unokatestvér
+fils de cousin germain ¦ serkun poika ¦ unokatestvér fia
+fille de cousin germain ¦ serkun tytär ¦ unokatestvér lánya
+petit-fils de cousin germain ¦ serkun lapsenlapsi (poika) ¦ unokatestvér unokája (fiú)
+petite-fille de cousin germain ¦ serkun lapsenlapsi (tyttö) ¦ unokatestvér unokája (lány)
+grand-oncle ¦ isosetä / isoeno ¦ nagynagybácsi
+grand-tante ¦ isotäti ¦ nagynagynéni
+cousin germain d’un parent ¦ vanhemman serkku ¦ egy szülő unokatestvére
+cousine germaine d’un parent ¦ vanhemman serkku ¦ egy szülő unokatestvére
+cousin issu de germains ¦ pikkuserkku ¦ másodunokatestvér
+cousine issue de germains ¦ pikkuserkku ¦ másodunokatestvér
+arrière-grand-oncle ¦ isoisosetä ¦ dédnagybácsi
+arrière-grand-tante ¦ isoisotäti ¦ dédnagynéni
+cousin germain d’un grand-parent ¦ isovanhemman serkku ¦ egy nagyszülő unokatestvére
+cousine germaine d’un grand-parent ¦ isovanhemman serkku ¦ egy nagyszülő unokatestvére
+arrière-arrière-grand-oncle ¦ isoisoisosetä ¦ üknagybácsi
+arrière-arrière-grand-tante ¦ isoisoisotäti ¦ üknagynéni
+frère germain ¦ täysveli ¦ édestestvér (fiú)
+sœur germaine ¦ täyssisar ¦ édestestvér (lány)
+demi-frère (même père) ¦ velipuoli (sama isä) ¦ féltestvér (fiú, azonos apa)
+demi-sœur (même père) ¦ sisarpuoli (sama isä) ¦ féltestvér (lány, azonos apa)
+demi-frère (même mère) ¦ velipuoli (sama äiti) ¦ féltestvér (fiú, azonos anya)
+demi-sœur (même mère) ¦ sisarpuoli (sama äiti) ¦ féltestvér (lány, azonos anya)
+Père, mère, enfant ¦ Isä, äiti, lapsi ¦ Apa, anya, gyermek
+Frère, sœur, grand-parent, petit-enfant ¦ Veli, sisar, isovanhempi, lapsenlapsi ¦ Fivér, nővér, nagyszülő, unoka
+Neveu, nièce, oncle, tante ¦ Veljenpoika, sisarentytär, setä, täti ¦ Unokaöcs, unokahúg, nagybácsi, nagynéni
+Cousin germain, petit-neveu, grand-oncle ¦ Serkku, sisaruksen lapsenlapsi, isosetä ¦ Első unokatestvér, testvér unokája, nagynagybácsi
+Enfant de cousin germain ¦ Serkun lapsi ¦ Unokatestvér gyermeke
+Cousin issu de germains (limite) ¦ Pikkuserkku (raja) ¦ Másodunokatestvér (határ)
+Présomption d’absence : le juge des tutelles la constate quand une personne a cessé de paraître sans donner de nouvelles. Elle est réputée vivante ; sa part est réservée et gérée. ¦ Oletettu poissaolo: tuomioistuin toteaa sen, kun henkilö on lakannut näyttäytymästä antamatta tietoa itsestään. Häntä pidetään elossa olevana; hänen osuutensa varataan ja sitä hoidetaan. ¦ Vélelmezett távollét: a bíróság állapítja meg, ha valaki hír nélkül eltűnt. Élőnek tekintendő; része fenntartott és kezelt.
+Déclaration d’absence : 10 ans après le jugement de présomption (ou 20 ans sans nouvelles), le tribunal judiciaire la déclare ; le jugement a les effets d’un décès. ¦ Poissaolon julistaminen: 10 vuotta olettamapäätöksen jälkeen (tai 20 vuotta ilman tietoa) tuomioistuin julistaa sen; päätöksellä on kuoleman vaikutukset. ¦ Távollét kimondása: a vélelmet megállapító ítélet után 10 évvel (vagy 20 év hír nélkül) a bíróság kimondja; az ítélet a halál hatásával jár.
+Jugement déclaratif de décès : pour une disparition dans des circonstances qui mettent la vie en danger (naufrage, catastrophe), sans attendre. ¦ Kuolleeksi julistaminen: hengenvaarallisissa olosuhteissa tapahtuneessa katoamisessa (haaksirikko, onnettomuus), odottamatta. ¦ Holttá nyilvánító ítélet: életveszélyes körülmények közötti eltűnésnél (hajótörés, katasztrófa), várakozás nélkül.
+Service central d’état civil (Nantes) : les actes des Français nés, mariés ou morts à l’étranger. ¦ Keskusväestörekisteri (Nantes): ulkomailla syntyneiden, vihittyjen tai kuolleiden ranskalaisten asiakirjat. ¦ Központi Anyakönyvi Szolgálat (Nantes): a külföldön született, házasodott vagy elhunyt franciák iratai.
+Le consulat de France du pays : registres d’immatriculation, actes transcrits récents. ¦ Ranskan konsulaatti maassa: konsulaattirekisterit, äskettäin siirretyt asiakirjat. ¦ Az ország francia konzulátusa: konzuli nyilvántartások, nemrég átvezetett iratok.
+L’état civil du pays (mairie, registro civil, Standesamt…) : lettre dans la langue du pays. ¦ Maan väestörekisteri (kunta, registro civil, Standesamt…): kirje maan kielellä. ¦ Az ország anyakönyvi hivatala (polgármesteri hivatal, registro civil, Standesamt…): levél az ország nyelvén.
+Archives nationales d’outre-mer (Aix-en-Provence) : colonies et Algérie avant 1962. ¦ Kansalliset merentakaiset arkistot (Aix-en-Provence): siirtomaat ja Algeria ennen vuotta 1962. ¦ Nemzeti Tengerentúli Levéltár (Aix-en-Provence): gyarmatok és Algéria 1962 előtt.
+Ouvert ¦ Avattu ¦ Megnyitva
+En recherche ¦ Etsinnässä ¦ Kutatás alatt
+Héritiers trouvés ¦ Perilliset löydetty ¦ Örökösök megtalálva
+Clos ¦ Suljettu ¦ Lezárva
+📁 Dossier ¦ 📁 Kansio ¦ 📁 Ügy
+👥 Héritiers ¦ 👥 Perilliset ¦ 👥 Örökösök
+🌳 Arbre ¦ 🌳 Puu ¦ 🌳 Fa
+✉️ Héritiers contactés ¦ ✉️ Yhteyden saaneet perilliset ¦ ✉️ Megkeresett örökösök
+🖨 Pour le notaire ¦ 🖨 Notaarille ¦ 🖨 A közjegyzőnek
+🕓 Journal ¦ 🕓 Loki ¦ 🕓 Napló
+💶 Temps et frais ¦ 💶 Aika ja kulut ¦ 💶 Idő és költségek
+Décédé après ¦ Kuoli myöhemmin ¦ Később elhunyt
+Décédée après ¦ Kuoli myöhemmin ¦ Később elhunyt
+Renonce ¦ Luopuu ¦ Visszautasít
+Indigne ¦ Perintökelvoton ¦ Érdemtelen
+Absent ¦ Poissaoleva ¦ Távollévő
+Absente ¦ Poissaoleva ¦ Távollévő
+Pas encore conçu ¦ Ei vielä siinnyt ¦ Még nem fogant
+Pas encore conçue ¦ Ei vielä siinnyt ¦ Még nem fogant
+Comme sur la fiche ¦ Kuten henkilötiedoissa ¦ Az adatlap szerint
+Vivant au décès ¦ Elossa kuolinhetkellä ¦ Élt a halálkor
+Mort avant le défunt ¦ Kuoli ennen vainajaa ¦ Az örökhagyó előtt halt meg
+Mort après le défunt ¦ Kuoli vainajan jälkeen ¦ Az örökhagyó után halt meg
+Renonce à la succession ¦ Luopuu perinnöstä ¦ Visszautasítja a hagyatékot
+Déclaré absent ¦ Julistettu poissaolevaksi ¦ Távollévőnek nyilvánítva
+Refuse ¦ Kieltäytyy ¦ Elutasítja
+Rappellera ¦ Soittaa takaisin ¦ Visszahív
+✓ En main ¦ ✓ Hallussa ¦ ✓ Megvan
+📮 Demandé ¦ 📮 Pyydetty ¦ 📮 Kérve
+✗ Manquant ¦ ✗ Puuttuu ¦ ✗ Hiányzik
+Sans objet ¦ Ei koske ¦ Nem releváns
+⏱ Temps ¦ ⏱ Aika ¦ ⏱ Idő
+🧾 Frais ¦ 🧾 Kulut ¦ 🧾 Költségek
+📝 Contrat ¦ 📝 Sopimus ¦ 📝 Szerződés
+02 — HÉRITIERS ¦ 02 — PERILLISET ¦ 02 — ÖRÖKÖSÖK
+Généalogiste successoral ¦ Perintögenealogi ¦ Örökléskutató genealógus
+Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ Vainajan perillisten etsiminen notaarille. ¦ Egy elhunyt örököseinek felkutatása közjegyző számára.
++ ⚖️ Successions (Dossiers · Héritiers à contacter · Courriers). Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Perinnöt (Asiakirjat · Yhteyttä otettavat perilliset · Kirjeet). Ensimmäinen näkymä: ”Avaa asiakirja”. ¦ + ⚖️ Hagyatékok (Ügyiratok · Megkeresendő örökösök · Levelek). Első képernyő: „Ügyirat megnyitása”.
+⚖️ Successions : dossiers, héritiers à contacter, courriers. ¦ ⚖️ Perinnöt: asiakirjat, yhteyttä otettavat perilliset, kirjeet. ¦ ⚖️ Hagyatékok: ügyiratok, megkeresendő örökösök, levelek.
+⚖️ Successions ¦ ⚖️ Perinnöt ¦ ⚖️ Hagyatékok
+Vivants ¦ Elävät ¦ Élők
+Courriers ¦ Kirjeet ¦ Levelek
+Échéance le {date} ¦ Määräaika {date} ¦ Határidő: {date}
+Pour quel héritier ? ¦ Mille perilliselle? ¦ Melyik örökösnek?
+Lettre à un héritier ¦ Kirje perilliselle ¦ Levél egy örökösnek
+ne révèle pas le défunt avant signature ; honoraires et date limite à écrire ¦ ei paljasta vainajaa ennen allekirjoitusta; palkkio ja määräpäivä kirjoitettava ¦ aláírás előtt nem fedi fel az elhunytat; a díjat és a határidőt be kell írni
+premier contact, sans nommer le défunt ¦ ensimmäinen yhteydenotto, vainajaa nimeämättä ¦ első megkeresés, az elhunyt megnevezése nélkül
+Il y a déjà un dossier pour cette personne. ¦ Tälle henkilölle on jo kansio. ¦ Ehhez a személyhez már van ügy.
+Date d’ouverture incorrecte. ¦ Virheellinen avauspäivä. ¦ Hibás megnyitási dátum.
+Notaire introuvable. ¦ Notaaria ei löytynyt. ¦ A közjegyző nem található.
+Passe d’abord par la liste de contrôle avant « Remis au notaire ». ¦ Käy ensin tarkistuslista läpi ennen tilaa ”Luovutettu notaarille”. ¦ Előbb menj végig az ellenőrzőlistán a „Közjegyzőnek átadva” előtt.
+Ce dossier est archivé. ¦ Tämä kansio on arkistoitu. ¦ Ez az ügy archivált.
+Valeur inconnue. ¦ Tuntematon arvo. ¦ Ismeretlen érték.
+Pièce inconnue. ¦ Tuntematon asiakirja. ¦ Ismeretlen irat.
+Choisis la date de l’échéance. ¦ Valitse määräajan päivämäärä. ¦ Válaszd ki a határidő dátumát.
+Écris ce qu’il faut faire. ¦ Kirjoita, mitä on tehtävä. ¦ Írd le, mit kell tenni.
+Échéance introuvable. ¦ Määräaikaa ei löytynyt. ¦ A határidő nem található.
+Date incorrecte. ¦ Virheellinen päivämäärä. ¦ Hibás dátum.
+Le pourcentage va de 0 à 100. ¦ Prosentti on 0–100. ¦ A százalék 0 és 100 között van.
+Combien de temps ? ¦ Kuinka kauan? ¦ Mennyi ideig?
+Choisis l’héritier. ¦ Valitse perillinen. ¦ Válaszd ki az örököst.
+Date de signature incorrecte. ¦ Virheellinen allekirjoituspäivä. ¦ Hibás aláírási dátum.
+Seul un dossier clos peut être archivé. ¦ Vain suljetun kansion voi arkistoida. ¦ Csak lezárt ügy archiválható.
+Mode consultation : les dossiers de succession ne se montrent pas. ¦ Katselutila: perunkirjoituskansioita ei näytetä. ¦ Megtekintő mód: a hagyatéki ügyek nem jelennek meg.
+Rien à noter. ¦ Ei mitään kirjattavaa. ¦ Nincs mit rögzíteni.
+Calcul manquant. ¦ Laskelma puuttuu. ¦ Hiányzik a számítás.
+Dossiers ¦ Asiakirjat ¦ Ügyiratok
+Héritiers à contacter ¦ Yhteyttä otettavat perilliset ¦ Megkeresendő örökösök
+Que montrer ¦ Mitä näytetään ¦ Mit mutasson
+Lecture des héritiers… ¦ Luetaan perillisiä… ¦ Örökösök beolvasása…
+Lecture des courriers… ¦ Luetaan kirjeitä… ¦ Levelek beolvasása…
+Voir toute la liste ↗ ¦ Näytä koko lista ↗ ¦ A teljes lista ↗
+Aucun courrier ¦ Ei kirjettä ¦ Nincs levél
+Courrier envoyé ¦ Kirje lähetetty ¦ Levél elküldve
+Réponse : {r} ¦ Vastaus: {r} ¦ Válasz: {r}
+Courrier envoyé le {d} ¦ Kirje lähetetty {d} ¦ Levél elküldve: {d}
+Aucun héritier à contacter dans les dossiers en cours. ¦ Avoimissa asiakirjoissa ei ole perillisiä, joihin pitäisi ottaa yhteyttä. ¦ A folyamatban lévő ügyiratokban nincs megkeresendő örökös.
+Les héritiers vivants (ou au statut inconnu) des dossiers ouverts viennent ici, avec leur adresse et l’état du contact. ¦ Avoimien asiakirjojen elossa olevat perilliset (tai joiden tila on tuntematon) näkyvät tässä osoitteineen ja yhteydenoton tilanteineen. ¦ A nyitott ügyiratok élő (vagy ismeretlen állapotú) örökösei itt jelennek meg, címükkel és a kapcsolatfelvétel állásával.
+Chercher… (nom, dossier, ville) ¦ Hae… (nimi, asiakirja, paikkakunta) ¦ Keresés… (név, ügyirat, település)
+Tous les dossiers ¦ Kaikki asiakirjat ¦ Minden ügyirat
+État du contact ¦ Yhteydenoton tila ¦ Kapcsolatfelvétel állása
+Par dossier ¦ Asiakirjoittain ¦ Ügyirat szerint
+À contacter d’abord ¦ Ensin yhteyttä otettavat ¦ Előbb a megkeresendők
+Aucun héritier ne correspond. ¦ Yksikään perillinen ei vastaa hakua. ¦ Egyetlen örökös sem felel meg.
+📇 Compléter l’adresse ¦ 📇 Täydennä osoite ¦ 📇 Cím kiegészítése
+adresse à trouver ¦ osoite selvitettävä ¦ a cím még nincs meg
+Courriel ¦ Sähköposti ¦ E-mail
+Héritiers à contacter exportés (CSV) ¦ Yhteyttä otettavat perilliset viety (CSV) ¦ Megkeresendő örökösök exportálva (CSV)
+Héritier à l’étranger ¦ Perillinen ulkomailla ¦ Örökös külföldön
+Demande d’acte ¦ Asiakirjapyyntö ¦ Anyakönyvi kivonat kérése
+Aucun courrier de succession pour l’instant. ¦ Ei vielä perintökirjeitä. ¦ Még nincs hagyatéki levél.
+Les courriers écrits depuis un dossier (✉️ Héritiers contactés, 📑 Pièces) viennent ici. ¦ Asiakirjasta kirjoitetut kirjeet (✉️ Perillisiin otettu yhteyttä, 📑 Asiakirjat) näkyvät tässä. ¦ Az ügyiratból írt levelek (✉️ Megkeresett örökösök, 📑 Iratok) itt jelennek meg.
+Chercher… (destinataire, dossier) ¦ Hae… (vastaanottaja, asiakirja) ¦ Keresés… (címzett, ügyirat)
+Aucun courrier ne correspond. ¦ Yksikään kirje ei vastaa hakua. ¦ Egyetlen levél sem felel meg.
+📮 COURRIER DE SUCCESSION ¦ 📮 PERINTÖKIRJE ¦ 📮 HAGYATÉKI LEVÉL
+Dévolution ¦ Perimysjärjestys ¦ Öröklési rend
+=héritier ¦ perillinen|perillistä ¦ örökös|örökös
+=courrier ¦ kirje|kirjettä ¦ levél|levél
+=dépouillement ¦ läpikäynti|läpikäyntiä ¦ feldolgozás|feldolgozás
+=dossier en cours ¦ käynnissä oleva kansio|käynnissä olevaa kansiota ¦ folyamatban lévő ügy|folyamatban lévő ügy
+=dossier de succession ¦ perunkirjoituskansio|perunkirjoituskansiota ¦ hagyatéki ügy|hagyatéki ügy
+
+# ⚖️ Dossiers de succession : rangement, filtre ⚖️, rattachement, tableau de bord, garde-fous, widget, vue par dossier
+Dossiers de succession : filtre {what} (cliquer pour changer) ¦ Perunkirjoituskansiot: suodatin {what} (vaihda napsauttamalla) ¦ Hagyatéki ügyek: szűrő {what} (kattints a módosításhoz)
+Dossiers de succession : ne montrer qu’un ou plusieurs dossiers ¦ Perunkirjoituskansiot: näytä vain yksi tai useampi kansio ¦ Hagyatéki ügyek: csak egy vagy néhány ügy mutatása
+Plusieurs ¦ Useampi ¦ Több
+⚖️ Ne montrer que ceux-ci ¦ ⚖️ Näytä vain nämä ¦ ⚖️ Csak ezek mutatása
+Aucun dossier dans cette généalogie. ¦ Tässä sukupuussa ei ole kansioita. ¦ Ebben a családfában nincs ügy.
+Dans une autre généalogie ¦ Toisessa sukupuussa ¦ Egy másik családfában
+Tous les dossiers… ¦ Kaikki kansiot… ¦ Minden ügy…
+Seulement le dossier {n} ¦ Vain kansio {n} ¦ Csak a(z) {n} ügy
+Seulement {what} : {list} ¦ Vain {what}: {list} ¦ Csak {what}: {list}
+1 dossier · {state} ¦ 1 kansio · {state} ¦ 1 ügy · {state}
+⚖️ Dossier {n} ¦ ⚖️ Kansio {n} ¦ ⚖️ {n} ügy
+Ce dossier est dans une autre généalogie ¦ Tämä kansio on toisessa sukupuussa ¦ Ez az ügy egy másik családfában van
+Ouvrir « {name} » ¦ Avaa ”{name}” ¦ „{name}” megnyitása
+Il est rangé dans « {name} ». Pour le montrer, l’app ouvre cette généalogie (tes réglages d’ici sont gardés) et y active le filtre ⚖️ {n}. ¦ Se on tallessa sukupuussa ”{name}”. Näyttääkseen sen sovellus avaa tuon sukupuun (asetuksesi täällä säilyvät) ja ottaa siellä käyttöön suodattimen ⚖️ {n}. ¦ A(z) „{name}” családfában van. A megmutatásához az alkalmazás megnyitja azt a családfát (az itteni beállításaid megmaradnak), és ott bekapcsolja a ⚖️ {n} szűrőt.
+Tes nouveaux dossiers vont dans « {name} ». ¦ Uudet kansiosi menevät sukupuuhun ”{name}”. ¦ Az új ügyeid ide kerülnek: „{name}”.
+Ouvrir le dossier ici quand même ¦ Avaa kansio silti tähän ¦ Az ügy megnyitása mégis itt
+Où ranger tes dossiers ? ¦ Mihin kansiosi tallennetaan? ¦ Hová kerüljenek az ügyeid?
+conseillé ici ¦ suositeltu tähän ¦ itt ajánlott
+Nom de la nouvelle généalogie ¦ Uuden sukupuun nimi ¦ Az új családfa neve
+⚖️ Dossier de succession ¦ ⚖️ Perunkirjoituskansio ¦ ⚖️ Hagyatéki ügy
+Ta généalogie ouverte a {n} : la ranger à part évite de mélanger les héritiers de tes clients avec ta propre famille. Ce n’est qu’un conseil. ¦ Avoimessa sukupuussasi on {n}: erillään pitäminen estää asiakkaidesi perillisten sekoittumisen omaan sukuusi. Se on vain neuvo. ¦ A megnyitott családfádban {n} van: a külön tárolás miatt ügyfeleid örökösei nem keverednek a saját családoddal. Ez csak tanács.
+Tu pourras changer d’avis : Réglages → Apparence → 🧭 Usage de l’app → « ⚖️ Où ranger les dossiers ». Les dossiers déjà ouverts ne bougent pas tout seuls. ¦ Voit muuttaa mieltäsi: Asetukset → Ulkoasu → 🧭 Sovelluksen käyttö → ”⚖️ Mihin kansiot tallennetaan”. Jo avatut kansiot eivät siirry itsestään. ¦ Meggondolhatod magad: Beállítások → Megjelenés → 🧭 Az alkalmazás használata → „⚖️ Hová kerüljenek az ügyek”. A már megnyitott ügyek maguktól nem költöznek.
+Créer « ⚖️ Dossiers de succession » et ouvrir le dossier ¦ Luo ”⚖️ Perunkirjoituskansiot” ja avaa kansio ¦ „⚖️ Hagyatéki ügyek” létrehozása és az ügy megnyitása
+Créer la généalogie et ouvrir le dossier ¦ Luo sukupuu ja avaa kansio ¦ A családfa létrehozása és az ügy megnyitása
+Rangement des dossiers : {what} ¦ Kansioiden paikka: {what} ¦ Az ügyek helye: {what}
+Généalogiste successoral : réglages des dossiers ¦ Perintögenealogi: kansioiden asetukset ¦ Örökléskutató genealógus: az ügyek beállításai
+Où ranger les dossiers ¦ Mihin kansiot tallennetaan ¦ Hová kerüljenek az ügyek
+Les nouveaux dossiers vont… ¦ Uudet kansiot menevät… ¦ Az új ügyek ide kerülnek…
+Dans « {name} » ¦ Sukupuuhun ”{name}” ¦ Ide: „{name}”
+Les dossiers et où ils sont ¦ Kansiot ja niiden paikat ¦ Az ügyek és helyük
+⇄ Déplacer… ¦ ⇄ Siirrä… ¦ ⇄ Áthelyezés…
+Aucun dossier pour l’instant. ¦ Ei vielä kansioita. ¦ Még nincs ügy.
+Réglages des dossiers ¦ Kansioiden asetukset ¦ Az ügyek beállításai
+Arbre et graphiques filtrés par ⚖️ : les fiches hors dossier ¦ ⚖️-suodatettu puu ja kaaviot: kansion ulkopuoliset kortit ¦ ⚖️ szűrővel szűrt fa és diagramok: az ügyön kívüli adatlapok
+Archive d’un dossier clos : adresses des héritiers vivants ¦ Suljetun kansion arkisto: elävien perillisten osoitteet ¦ Lezárt ügy archívuma: élő örökösök címei
+Déplacer un dossier dont une fiche est aussi dans ta famille ¦ Kansion siirto, kun sen kortti on myös suvussasi ¦ Ügy áthelyezése, ha egy adatlapja a családodban is szerepel
+« Sans dossier » dans la vue par dossier ¦ ”Ei kansiota” kansioittaisessa näkymässä ¦ „Ügy nélkül” az ügyenkénti nézetben
+Avancement : un héritier qui refuse de signer ¦ Edistyminen: perillinen, joka kieltäytyy allekirjoittamasta ¦ Előrehaladás: aláírást megtagadó örökös
+compte comme « fait » (étape 5) ¦ lasketaan ”tehdyksi” (vaihe 5) ¦ „elvégzettnek” számít (5. lépés)
+Avancement : poids des 7 étapes ¦ Edistyminen: 7 vaiheen painot ¦ Előrehaladás: a 7 lépés súlya
+Réglage des dossiers enregistré : {what} ¦ Kansioiden asetus tallennettu: {what} ¦ Az ügyek beállítása mentve: {what}
+poids des 7 étapes ¦ 7 vaiheen painot ¦ a 7 lépés súlya
+⇄ DÉPLACER UN DOSSIER ¦ ⇄ SIIRRÄ KANSIO ¦ ⇄ ÜGY ÁTHELYEZÉSE
+{n} → ? ¦ {n} → ? ¦ {n} → ?
+⇄ Déplacer ({what}) ¦ ⇄ Siirrä ({what}) ¦ ⇄ Áthelyezés ({what})
+Vers ¦ Kohde ¦ Ide
+＋ Une nouvelle généalogie pour ce dossier ¦ ＋ Uusi sukupuu tälle kansiolle ¦ ＋ Új családfa ennek az ügynek
+Ce qui part : le dossier, son journal, ses pièces, ses courriers, ses échéances, et les fiches qui lui sont rattachées (défunt, héritiers, intermédiaires) avec leurs actes et médias. Une fiche aussi rattachée à un autre dossier ou à ta famille est copiée, pas déplacée. ¦ Mukaan lähtee: kansio, sen loki, asiakirjat, kirjeet, määräajat ja siihen liitetyt kortit (vainaja, perilliset, välihenkilöt) asiakirjoineen ja medioineen. Kortti, joka on liitetty myös toiseen kansioon tai sukuusi, kopioidaan eikä siirretä. ¦ Ami átkerül: az ügy, a naplója, iratai, levelei, határidői és a hozzá rendelt adatlapok (elhunyt, örökösök, közvetítők) irataikkal és médiáikkal. Egy másik ügyhöz vagy a családodhoz is rendelt adatlap másolódik, nem költözik.
+Déplacement refusé (réglage) : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Siirto estetty (asetus): nämä kortit ovat myös suvussasi tai toisessa kansiossa: {names}. ¦ Áthelyezés elutasítva (beállítás): ezek az adatlapok a családodban vagy egy másik ügyben is szerepelnek: {names}.
+Copiées (elles restent aussi ici) : {names}. ¦ Kopioitu (jäävät myös tänne): {names}. ¦ Másolva (itt is megmaradnak): {names}.
+Une copie de sauvegarde des deux généalogies est faite avant. Le journal du dossier note « Déplacé de … vers … ». ¦ Ensin tehdään varmuuskopio molemmista sukupuista. Kansion loki merkitsee ”Siirretty … → …”. ¦ Előbb mindkét családfáról biztonsági mentés készül. Az ügy naplója rögzíti: „Áthelyezve innen: … ide: …”.
+Dossier {n} déplacé vers « {to} » ({what}) ¦ Kansio {n} siirretty sukupuuhun ”{to}” ({what}) ¦ A(z) {n} ügy áthelyezve ide: „{to}” ({what})
+⤓ Reprendre la fiche depuis Ma généalogie ¦ ⤓ Ota kortti Sukupuustani ¦ ⤓ Adatlap átvétele a Családfámból
+copie de la fiche, jusqu’aux grands-parents et tous leurs descendants connus, sans photos ¦ kortin kopio isovanhempiin asti ja kaikki heidän tunnetut jälkeläisensä, ilman kuvia ¦ az adatlap másolata a nagyszülőkig és minden ismert leszármazottjukig, fényképek nélkül
+⤓ REPRENDRE UNE FICHE ¦ ⤓ OTA KORTTI ¦ ⤓ ADATLAP ÁTVÉTELE
+Reprendre la fiche du défunt ¦ Ota vainajan kortti ¦ Az elhunyt adatlapjának átvétele
+Chercher la fiche ¦ Etsi kortti ¦ Adatlap keresése
+Prénom, nom… ¦ Etunimi, sukunimi… ¦ Utónév, vezetéknév…
+Copiées : la fiche, ses parents et grands-parents, tous leurs descendants connus et leurs conjoints, avec les dates et les lieux ; sans photos. Rien n’est changé dans l’autre généalogie. ¦ Kopioidaan: kortti, vanhemmat ja isovanhemmat, kaikki tunnetut jälkeläiset ja heidän puolisonsa päivämäärineen ja paikkoineen; ilman kuvia. Toisessa sukupuussa ei muutu mitään. ¦ Másolva: az adatlap, a szülők és nagyszülők, minden ismert leszármazott és házastársaik, dátumokkal és helyekkel; fényképek nélkül. A másik családfában semmi sem változik.
+{what} reprises de l’autre généalogie. ¦ {what} otettu toisesta sukupuusta. ¦ {what} átvéve a másik családfából.
+Dossiers… ¦ Kansiot… ¦ Ügyek…
+{name} dans quels dossiers ? ¦ {name} missä kansioissa? ¦ {name} mely ügyekben?
+(calculé) ¦ (laskettu) ¦ (számított)
+Rôles : défunt · héritier · intermédiaire · témoin · à vérifier. « Héritier » mis par le calcul s’affiche « (calculé) ». ¦ Roolit: vainaja · perillinen · välihenkilö · todistaja · tarkistettava. Laskennan asettama ”perillinen” näkyy muodossa ”(laskettu)”. ¦ Szerepek: elhunyt · örökös · közvetítő · tanú · ellenőrizendő. A számítás által beállított „örökös” mellett „(számított)” áll.
+Dossiers de {name} enregistrés ¦ Henkilön {name} kansiot tallennettu ¦ {name} ügyei mentve
+Les dossiers de cette fiche ¦ Tämän kortin kansiot ¦ Ennek az adatlapnak az ügyei
+hors du dossier {n} ¦ kansion {n} ulkopuolella ¦ a(z) {n} ügyön kívül
+＋ Rattacher ¦ ＋ Liitä ¦ ＋ Hozzárendelés
+Fiche rattachée au dossier {n} ¦ Kortti liitetty kansioon {n} ¦ Adatlap hozzárendelve a(z) {n} ügyhöz
+Rattachée au dossier {n} : {who} ¦ Liitetty kansioon {n}: {who} ¦ Hozzárendelve a(z) {n} ügyhöz: {who}
+Lecture des fiches du dossier… ¦ Luetaan kansion kortteja… ¦ Az ügy adatlapjainak beolvasása…
+Les fiches du dossier ¦ Kansion kortit ¦ Az ügy adatlapjai
+Rattacher ¦ Liitä ¦ Hozzárendelés
+Retirées à la main ({n}) : jamais remises toutes seules ¦ Poistettu käsin ({n}): ei koskaan palauteta automaattisesti ¦ Kézzel eltávolítva ({n}): soha nem kerülnek vissza maguktól
+Fiche à comparer : « {name}{year} » ressemble à une fiche déjà dans cette base. Jamais fusionnée toute seule. ¦ Verrattava kortti: ”{name}{year}” muistuttaa korttia, joka on jo tässä tietokannassa. Ei koskaan yhdistetä automaattisesti. ¦ Összehasonlítandó adatlap: „{name}{year}” hasonlít egy már meglévő adatlapra. Soha nem vonódik össze magától.
+née {y} ¦ synt. {y} ¦ szül. {y}
+Homonyme possible : « {name}{year} » existe aussi dans le dossier {n}. Jamais relié tout seul. ¦ Mahdollinen kaima: ”{name}{year}” on myös kansiossa {n}. Ei koskaan liitetä automaattisesti. ¦ Lehetséges névrokon: „{name}{year}” a(z) {n} ügyben is szerepel. Soha nem kapcsolódik magától.
+⇆ Comparer ¦ ⇆ Vertaa ¦ ⇆ Összehasonlítás
+C’est la même personne : rattacher aussi ¦ Sama henkilö: liitä myös ¦ Ugyanaz a személy: hozzárendelés ehhez is
+Pas la même ¦ Ei sama ¦ Nem ugyanaz
+Fiche retirée du dossier {n} ¦ Kortti poistettu kansiosta {n} ¦ Adatlap eltávolítva a(z) {n} ügyből
+Fiche remise dans le dossier {n} ¦ Kortti palautettu kansioon {n} ¦ Adatlap visszatéve a(z) {n} ügybe
+Homonyme rattaché aussi au dossier {n} (à vérifier) ¦ Kaima liitetty myös kansioon {n} (tarkistettava) ¦ Névrokon a(z) {n} ügyhöz is hozzárendelve (ellenőrizendő)
+Noté : ce n’est pas la même personne ¦ Merkitty: ei sama henkilö ¦ Rögzítve: nem ugyanaz a személy
+Rôle : {r} ¦ Rooli: {r} ¦ Szerep: {r}
+⚠️ illisible : {names} ¦ ⚠️ lukukelvoton: {names} ¦ ⚠️ olvashatatlan: {names}
+Chercher… (n°, défunt, notaire) ¦ Hae… (nro, vainaja, notaari) ¦ Keresés… (sz., elhunyt, közjegyző)
+Toutes les généalogies ¦ Kaikki sukupuut ¦ Minden családfa
+Tous les notaires ¦ Kaikki notaarit ¦ Minden közjegyző
+Prochaine échéance (retards d’abord) ¦ Seuraava määräaika (myöhästyneet ensin) ¦ Következő határidő (késők elöl)
+Avancement le plus bas ¦ Pienin edistyminen ¦ Legkisebb előrehaladás
+{d} · passée ¦ {d} · umpeutunut ¦ {d} · lejárt
+Trouvés : {n} ¦ Löydetty: {n} ¦ Megtalálva: {n}
+À trouver : {n} ¦ Löydettävä: {n} ¦ Megtalálandó: {n}
+{h} h {m} ¦ {h} t {m} ¦ {h} ó {m}
+Cocher le dossier {n} ¦ Valitse kansio {n} ¦ A(z) {n} ügy kijelölése
+Échéance : {d} ¦ Määräaika: {d} ¦ Határidő: {d}
+Héritiers ¦ Perilliset ¦ Örökösök
+Avancement ¦ Edistyminen ¦ Előrehaladás
+Cochés : {n} ¦ Valittu: {n} ¦ Kijelölve: {n}
+Les dossiers cochés sont dans des généalogies différentes : choisis-en dans une seule. ¦ Valitut kansiot ovat eri sukupuissa: valitse vain yhdestä. ¦ A kijelölt ügyek különböző családfákban vannak: csak egyből válassz.
+Dossiers exportés (CSV) ¦ Kansiot viety (CSV) ¦ Ügyek exportálva (CSV)
+⤒ Réimporter un dossier archivé… ¦ ⤒ Tuo arkistoitu kansio uudelleen… ¦ ⤒ Archivált ügy újbóli importálása…
+⚠️ FUSION ¦ ⚠️ YHDISTÄMINEN ¦ ⚠️ ÖSSZEVONÁS
+Ces deux fiches sont dans des dossiers différents ¦ Nämä kaksi korttia ovat eri kansioissa ¦ Ez a két adatlap különböző ügyekben van
+Fusionner quand même ¦ Yhdistä silti ¦ Összevonás mégis
+{a} et {b}. Fusionner relie les deux successions et change les parts des deux dossiers. Vérifie avec des actes (naissance, parents) avant. ¦ {a} ja {b}. Yhdistäminen kytkee kaksi perintöä yhteen ja muuttaa osuudet molemmissa kansioissa. Tarkista ensin asiakirjoista (syntymä, vanhemmat). ¦ {a} és {b}. Az összevonás összeköti a két hagyatékot, és mindkét ügyben megváltoztatja a részeket. Előbb ellenőrizd iratokkal (születés, szülők).
+⇆ Comparer d’abord ¦ ⇆ Vertaa ensin ¦ ⇆ Előbb összehasonlítás
+Si on fusionne : noté dans le journal des deux dossiers, et les deux sont recalculés. ¦ Jos yhdistät: merkitään molempien kansioiden lokiin, ja molemmat lasketaan uudelleen. ¦ Összevonáskor: mindkét ügy naplójába bekerül, és mindkettő újraszámolódik.
+🗄 Archiver dans un fichier et retirer… ¦ 🗄 Arkistoi tiedostoon ja poista… ¦ 🗄 Archiválás fájlba és eltávolítás…
+🗄 ARCHIVER LE DOSSIER {n} ¦ 🗄 ARKISTOI KANSIO {n} ¦ 🗄 A(Z) {n} ÜGY ARCHIVÁLÁSA
+Dans un fichier, puis retirer de la base ¦ Tiedostoon ja sitten pois tietokannasta ¦ Fájlba, majd eltávolítás az adatbázisból
+⤓ Enregistrer le fichier puis retirer ¦ ⤓ Tallenna tiedosto ja poista sitten ¦ ⤓ Fájl mentése, majd eltávolítás
+Le fichier {file} contient : le dossier, le journal, les pièces et leurs images, les courriers, l’arbre de dévolution (SVG), le tableau pour le notaire et les fiches rattachées ({n}). ¦ Tiedosto {file} sisältää: kansion, lokin, asiakirjat kuvineen, kirjeet, perimysjärjestyksen puun (SVG), taulukon notaarille ja liitetyt kortit ({n}). ¦ A(z) {file} fájl tartalma: az ügy, a napló, az iratok és képeik, a levelek, az öröklési fa (SVG), a közjegyzőnek szóló táblázat és a hozzárendelt adatlapok ({n}).
+Garder les adresses des vivants dans le fichier ¦ Säilytä elävien osoitteet tiedostossa ¦ Az élők címeinek megtartása a fájlban
+utile si le notaire rouvre la succession ¦ hyödyllinen, jos notaari avaa perinnön uudelleen ¦ hasznos, ha a közjegyző újranyitja a hagyatékot
+Retirer les adresses ¦ Poista osoitteet ¦ Címek eltávolítása
+comme l’archivage actuel ¦ kuten nykyinen arkistointi ¦ mint a mostani archiválás
+Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base ({n}). Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste ({k}). Une sauvegarde est faite avant. ¦ Sen jälkeen vain tähän kansioon kuuluvat kortit poistetaan tietokannasta ({n}). Kortti, joka on liitetty myös toiseen kansioon (tai sukuusi), jää ({k}). Ensin tehdään varmuuskopio. ¦ Ezután a csak ehhez az ügyhöz tartozó adatlapok kikerülnek az adatbázisból ({n}). Egy másik ügyhöz (vagy a családodhoz) is rendelt adatlap marad ({k}). Előbb biztonsági mentés készül.
+Dossier {n} archivé dans « {file} » et retiré ({what}) ¦ Kansio {n} arkistoitu tiedostoon ”{file}” ja poistettu ({what}) ¦ A(z) {n} ügy archiválva ide: „{file}” és eltávolítva ({what})
+⤒ RÉIMPORTER ¦ ⤒ TUO UUDELLEEN ¦ ⤒ ÚJBÓLI IMPORTÁLÁS
+⤒ Réimporter le dossier ¦ ⤒ Tuo kansio uudelleen ¦ ⤒ Az ügy újbóli importálása
+Dossier {n} ({name}{closed}), {what}. ¦ Kansio {n} ({name}{closed}), {what}. ¦ {n} ügy ({name}{closed}), {what}.
+clos le {d} ¦ suljettu {d} ¦ lezárva: {d}
+{what} ressemblent à des fiches déjà dans cette base ({names}) : elles seront proposées à la comparaison, jamais fusionnées seules. ¦ {what} muistuttavat kortteja, jotka ovat jo tässä tietokannassa ({names}): ne tarjotaan vertailtaviksi, ei koskaan yhdistetä automaattisesti. ¦ {what} hasonlít már meglévő adatlapokra ({names}): összehasonlításra kerülnek, magától soha nem vonódnak össze.
+Dossier {n} réimporté ({what}) ¦ Kansio {n} tuotu uudelleen ({what}) ¦ A(z) {n} ügy újra importálva ({what})
+Dossier {n} réimporté dans « {name} ». ¦ Kansio {n} tuotu uudelleen sukupuuhun ”{name}”. ¦ A(z) {n} ügy újra importálva ide: „{name}”.
+⚖️ Mes dossiers de succession ¦ ⚖️ Omat perunkirjoituskansioni ¦ ⚖️ Hagyatéki ügyeim
+Aucun dossier de succession. ¦ Ei perunkirjoituskansioita. ¦ Nincs hagyatéki ügy.
+Étapes (7) ¦ Vaiheet (7) ¦ Lépések (7)
+{step} : {done} sur {total} ¦ {step}: {done}/{total} ¦ {step}: {done} / {total}
+Quels dossiers ¦ Mitkä kansiot ¦ Mely ügyek
+Le filtre ¦ Suodatin ¦ A szűrő
+Vue actuelle ¦ Nykyinen näkymä ¦ Jelenlegi nézet
+Alt + ↑ / ↓ : changer l’ordre (rangement à la main) ¦ Alt + ↑ / ↓: muuta järjestystä (käsin) ¦ Alt + ↑ / ↓: sorrend módosítása (kézi)
+Sans dossier ¦ Ei kansiota ¦ Ügy nélkül
+Ranger les dossiers : ¦ Järjestä kansiot: ¦ Ügyek rendezése:
+… cherche un nom pour voir les autres. ¦ … hae nimellä nähdäksesi muut. ¦ … keress egy nevet a többiek megtekintéséhez.
+Ordre des dossiers changé ¦ Kansioiden järjestys muutettu ¦ Az ügyek sorrendje módosítva
+Dans cette généalogie ¦ Tässä sukupuussa ¦ Ebben a családfában
+Le défunt et ses héritiers sont des fiches de ta famille. Simple, mais tout se mélange. ¦ Vainaja ja perilliset ovat sukusi kortteja. Yksinkertaista, mutta kaikki sekoittuu. ¦ Az elhunyt és örökösei a családod adatlapjai. Egyszerű, de minden összekeveredik.
+Dans une généalogie à part pour tous mes dossiers ¦ Erillisessä sukupuussa kaikille kansioilleni ¦ Külön családfában az összes ügyemnek
+Une base professionnelle « ⚖️ Dossiers de succession », créée dans 🌳 Mes généalogies. Tes dossiers y sont tous ensemble ; ta famille reste à part. ¦ Ammatillinen tietokanta ”⚖️ Perunkirjoituskansiot”, luotu kohdassa 🌳 Sukupuuni. Kaikki kansiosi ovat siellä yhdessä; sukusi pysyy erillään. ¦ Egy szakmai adatbázis, „⚖️ Hagyatéki ügyek”, a 🌳 Családfáim alatt létrehozva. Minden ügyed együtt van ott; a családod külön marad.
+Une généalogie par dossier ¦ Yksi sukupuu kansiota kohden ¦ Ügyenként egy családfa
+Chaque dossier a sa propre base (« ⚖️ 2026-014 MAZAUD »). Le plus étanche ; à réserver aux grosses successions. ¦ Jokaisella kansiolla on oma tietokanta (”⚖️ 2026-014 MAZAUD”). Tiivein erottelu; suurille perinnöille. ¦ Minden ügynek saját adatbázisa van („⚖️ 2026-014 MAZAUD”). A legjobban elkülönített; nagy hagyatékokhoz.
+défunt ¦ vainaja ¦ elhunyt
+intermédiaire ¦ välihenkilö ¦ közvetítő
+Un par dossier ¦ Yksi kansiota kohden ¦ Ügyenként egy
+Un filtre ¦ Suodatin ¦ Egy szűrő
+Compteurs ¦ Laskurit ¦ Számlálók
+à l’ouverture ¦ avattaessa ¦ megnyitáskor
+calcul ¦ laskenta ¦ számítás
+à la main ¦ käsin ¦ kézzel
+créée pendant le filtre ¦ luotu suodattimen aikana ¦ a szűrő alatt létrehozva
+réimport ¦ uudelleentuonti ¦ újraimportálás
+homonyme ¦ kaima ¦ névrokon
+déplacée ¦ siirretty ¦ áthelyezve
+grisées, sans nom ¦ harmaana, ilman nimeä ¦ szürkén, név nélkül
+cachées ¦ piilotettu ¦ elrejtve
+retirées du fichier ¦ poistettu tiedostosta ¦ eltávolítva a fájlból
+gardées dans le fichier ¦ säilytetty tiedostossa ¦ megtartva a fájlban
+copier la fiche ¦ kopioi kortti ¦ az adatlap másolása
+refuser le déplacement ¦ estä siirto ¦ az áthelyezés elutasítása
+replié ¦ koottu ¦ összecsukva
+Défunt et acte de décès ¦ Vainaja ja kuolinasiakirja ¦ Elhunyt és halotti anyakönyv
+Adresses ¦ Osoitteet ¦ Címek
+Contrats signés ¦ Allekirjoitetut sopimukset ¦ Aláírt szerződések
+Déplacement refusé : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Siirto estetty: nämä kortit ovat myös suvussasi tai toisessa kansiossa: {names}. ¦ Áthelyezés elutasítva: ezek az adatlapok a családodban vagy egy másik ügyben is szerepelnek: {names}.
+Impossible d’enregistrer les réglages des dossiers. ¦ Kansioiden asetuksia ei voitu tallentaa. ¦ Az ügyek beállításai nem menthetők.
+Cette généalogie est encore vide. ¦ Tämä sukupuu on vielä tyhjä. ¦ Ez a családfa még üres.
+Rôle inconnu. ¦ Tuntematon rooli. ¦ Ismeretlen szerep.
+Fiches inconnues. ¦ Tuntemattomat kortit. ¦ Ismeretlen adatlapok.
+Choisis une autre généalogie. ¦ Valitse toinen sukupuu. ¦ Válassz másik családfát.
+Impossible de créer le fichier d’archive. ¦ Arkistotiedostoa ei voitu luoda. ¦ Az archívumfájl nem hozható létre.
+Fichier introuvable. ¦ Tiedostoa ei löydy. ¦ A fájl nem található.
+Ce fichier n’est pas une archive de dossier de succession. ¦ Tämä tiedosto ei ole perunkirjoituskansion arkisto. ¦ Ez a fájl nem hagyatéki ügy archívuma.
+Le fichier n’a pas été reçu. ¦ Tiedostoa ei vastaanotettu. ¦ A fájl nem érkezett meg.
+Le défunt reste dans son dossier. ¦ Vainaja pysyy kansiossaan. ¦ Az elhunyt az ügyében marad.
+🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Henkilöt ¦ 🧑‍🤝‍🧑 Személyek
+Dossiers de succession (usage successoral seulement) ¦ Perunkirjoituskansiot (vain perintögenealogin käytössä) ¦ Hagyatéki ügyek (csak örökléskutató használatban)
+# Zone « successoral » : 🔎 introuvable / 🔇 ne répond pas (état de contact d’un héritier, migration 92) ; 🔒 fiches confidentielles non comptées (réglage)
+Introuvable ¦ Ei löydy ¦ Nem található
+Ne répond pas ¦ Ei vastaa ¦ Nem válaszol
+introuvable ¦ ei löydy ¦ nem található
+ne répond pas ¦ ei vastaa ¦ nem válaszol
+rien de noté ¦ ei merkintää ¦ nincs feljegyzés
+depuis le {d} ¦ {d} alkaen ¦ {d} óta
+Introuvable ou silencieux ¦ Ei löydy tai vaikenee ¦ Nem található vagy hallgat
+Introuvable depuis plus d’un an ¦ Ei löytynyt yli vuoteen ¦ Több mint egy éve nem található
+{name} est introuvable depuis plus d’un an : la présomption d’absence (art. 112 et suivants) peut protéger sa part. ¦ {name} ei ole löytynyt yli vuoteen: poissaolon olettama (art. 112 ja seur.) voi suojata hänen osuutensa. ¦ {name} több mint egy éve nem található: a távollét vélelme (112. cikk és köv.) védheti a részét.
+{what} : les parts peuvent être fausses. ¦ {what}: osuudet voivat olla väärin. ¦ {what}: a részek hibásak lehetnek.
+=fiche confidentielle non comptée ¦ luottamuksellinen kortti jätetty pois|luottamuksellista korttia jätetty pois ¦ bizalmas adatlap nincs beszámítva|bizalmas adatlap nincs beszámítva
+Changer ce réglage ¦ Muuta tätä asetusta ¦ A beállítás módosítása
+Tous les héritiers ¦ Kaikki perilliset ¦ Minden örökös
+🔎 Introuvable ou 🔇 ne répond pas : pas compté comme contacté dans l’avancement, et le calcul ne change pas. À ne pas confondre avec le statut « Présumé absent » (art. 112). ¦ 🔎 Ei löydy tai 🔇 ei vastaa: ei lasketa edistymisessä tavoitetuksi, eikä laskelma muutu. Älä sekoita tilaan ”Oletetusti poissaoleva” (art. 112). ¦ 🔎 Nem található vagy 🔇 nem válaszol: az előrehaladásban nem számít megkeresettnek, és a számítás nem változik. Ne keverd össze a „Vélelmezetten távollévő” állapottal (112. cikk).
+Contact de {name} : {state} ¦ Yhteys – {name}: {state} ¦ Kapcsolat – {name}: {state}
+Les fiches confidentielles comptent-elles comme héritiers ? ¦ Lasketaanko luottamukselliset kortit perillisiksi? ¦ Örökösnek számítanak a bizalmas adatlapok?
+Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Ei: luottamuksellinen kortti jätetään laskelmasta pois, kuin sitä ei olisi; kansio kertoo sen. ¦ Nem: a bizalmas adatlap kikerül a számításból, mintha nem létezne; az ügy jelzi ezt.
+Le défunt n’est pas un héritier à contacter. ¦ Vainaja ei ole perillinen, johon otetaan yhteyttä. ¦ Az elhunyt nem megkeresendő örökös.
+⚖️ Un doute sur la loi ? ¦ ⚖️ Epäselvyyttä laista? ¦ ⚖️ Jogi kétség?
+⚖️ Un doute ? ¦ ⚖️ Epäselvää? ¦ ⚖️ Kétség?
+⚖️ UN DOUTE SUR LA LOI ? ¦ ⚖️ EPÄSELVYYTTÄ LAISTA? ¦ ⚖️ JOGI KÉTSÉG?
+Chercher sur un site officiel ¦ Hae virallisesta sivustosta ¦ Keresés hivatalos oldalon
+✍️ Noter dans le dossier ¦ ✍️ Kirjaa kansioon ¦ ✍️ Feljegyzés az ügybe
+Ton problème, avec tes mots ¦ Ongelmasi omin sanoin ¦ A problémád, a saját szavaiddal
+ex. un héritier refuse de répondre · délai pour renoncer à une succession ¦ esim. perillinen kieltäytyy vastaamasta · määräaika perinnöstä luopumiseen ¦ pl. egy örökös nem hajlandó válaszolni · határidő az örökség visszautasítására
+N’écris pas de nom : la question part sur internet. ¦ Älä kirjoita nimiä: kysymys lähtee internetiin. ¦ Ne írj neveket: a kérdés kimegy az internetre.
+🏛 Chercher sur Service-public ¦ 🏛 Hae sivustolta Service-public ¦ 🏛 Keresés a Service-public oldalon
+explique en français simple et donne le lien vers le bon article ¦ selittää selkeällä ranskalla ja antaa linkin oikeaan pykälään ¦ egyszerű franciasággal elmagyarázza, és megadja a helyes cikk linkjét
+📜 Chercher sur Légifrance ¦ 📜 Hae sivustolta Légifrance ¦ 📜 Keresés a Légifrance oldalon
+les articles des codes en vigueur ¦ voimassa olevien lakikirjojen pykälät ¦ a hatályos törvénykönyvek cikkei
+L’app ne choisit aucun article : ta question est envoyée telle quelle au site officiel, qui s’ouvre dans ton navigateur. ¦ Sovellus ei valitse yhtään pykälää: kysymyksesi lähetetään sellaisenaan viralliselle sivustolle, joka avautuu selaimessasi. ¦ Az app nem választ cikket: a kérdésed változatlanul megy a hivatalos oldalra, amely a böngésződben nyílik meg.
+✍️ Noter dans le dossier {n} ¦ ✍️ Kirjaa kansioon {n} ¦ ✍️ Feljegyzés a(z) {n}. ügybe
+Lien de l’article ou de la fiche (facultatif) ¦ Linkki pykälään tai sivuun (valinnainen) ¦ A cikk vagy az oldal linkje (nem kötelező)
+Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Vain https://-osoite sivustoilta Légifrance, Service-public tai EUR-Lex. ¦ Csak https:// cím a Légifrance, a Service-public vagy az EUR-Lex oldaláról.
+Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Linkki hylätty: vain https://-osoite sivustoilta Légifrance, Service-public tai EUR-Lex. ¦ Link elutasítva: csak https:// cím a Légifrance, a Service-public vagy az EUR-Lex oldaláról.
+Noté au journal du dossier {n}. ¦ Kirjattu kansion {n} lokiin. ¦ Feljegyezve a(z) {n}. ügy naplójába.
+Écris d’abord ta question. ¦ Kirjoita ensin kysymyksesi. ¦ Előbb írd be a kérdésed.
+# ⚖️ Outils du successoral (⏱ 🔔 📋 🧾 📊 ✉️) et ＋ Ajouter un onglet (docs/design/onglets-et-successoral-outils.html)
+⏱ Compter le temps passé sur ce dossier ¦ ⏱ Laske tähän asiaan käytetty aika ¦ ⏱ Az ügyre fordított idő mérése
+{n} min ¦ {n} min ¦ {n} perc
+⏸️ Pause ¦ ⏸️ Tauko ¦ ⏸️ Szünet
+▶️ Reprendre ¦ ▶️ Jatka ¦ ▶️ Folytatás
+⏹️ Arrêter et noter ¦ ⏹️ Pysäytä ja kirjaa ¦ ⏹️ Leállítás és rögzítés
+Moins d’une minute : rien à noter. ¦ Alle minuutti: ei mitään kirjattavaa. ¦ Kevesebb mint egy perc: nincs mit rögzíteni.
+Noter le temps passé ¦ Kirjaa käytetty aika ¦ A ráfordított idő rögzítése
+Noter {t} ¦ Kirjaa {t} ¦ {t} rögzítése
+Proposé d’après les onglets ouverts ; à corriger si besoin. Date : {d}. ¦ Ehdotettu avattujen välilehtien perusteella; korjaa tarvittaessa. Päivämäärä: {d}. ¦ A megnyitott fülek alapján javasolva; szükség esetén javítsd. Dátum: {d}.
+Minuit passé : une ligne par jour. ¦ Keskiyön jälkeen: yksi rivi päivää kohden. ¦ Éjfél után: naponta egy sor.
+Jeter ce temps ¦ Hylkää tämä aika ¦ Idő elvetése
+Jeter ce temps ? ¦ Hylätäänkö tämä aika? ¦ Elveted ezt az időt?
+Jeter ¦ Hylkää ¦ Elvetés
+{t} d’affilée : c’est bien ça ? ¦ {t} yhteen menoon: pitääkö paikkansa? ¦ {t} egyhuzamban: így van?
+Plus de 10 h d’affilée ¦ Yli 10 h yhteen menoon ¦ Több mint 10 óra egyhuzamban
+Noter quand même ¦ Kirjaa silti ¦ Rögzítés mégis
+⏱ {t} notées dans le dossier {n} ¦ ⏱ {t} kirjattu asiaan {n} ¦ ⏱ {t} rögzítve a(z) {n} ügyben
+Le chronomètre compte pour {n}. ¦ Sekuntikello laskee asialle {n}. ¦ A stopper a(z) {n} ügynek mér.
+⏹️ Noter et passer à {n} ¦ ⏹️ Kirjaa ja siirry asiaan {n} ¦ ⏹️ Rögzítés és váltás erre: {n}
+Continuer sur {n} ¦ Jatka asiaa {n} ¦ Folytatás ezzel: {n}
+Rien touché depuis 10 min : chronomètre en pause à {h}. ¦ Mitään ei koskettu 10 minuuttiin: sekuntikello tauolla klo {h}. ¦ 10 perce semmihez sem nyúltál: a stopper szünetel {h} óta.
+Compter aussi ces 10 min ¦ Laske myös nämä 10 min ¦ Ezt a 10 percet is számold
+⏱ {n} : {t} comptées avant la fermeture. ¦ ⏱ {n}: {t} laskettu ennen sulkemista. ¦ ⏱ {n}: {t} mérve a bezárás előtt.
+Noter ¦ Kirjaa ¦ Rögzítés
+Échéances du jour : {n} à faire (retards et aujourd’hui) ¦ Päivän määräajat: {n} tehtävää (myöhässä ja tänään) ¦ A nap határidői: {n} teendő (lejárt és mai)
+🔔 Échéances du jour ¦ 🔔 Päivän määräajat ¦ 🔔 A nap határidői
+⏰ Rappel ¦ ⏰ Muistutus ¦ ⏰ Emlékeztető
+prévu le {d} ¦ suunniteltu {d} ¦ esedékes: {d}
+✓ Fait ¦ ✓ Tehty ¦ ✓ Kész
+⏭ Demain (ou lundi) ¦ ⏭ Huomenna (tai maanantaina) ¦ ⏭ Holnap (vagy hétfőn)
+↗ Ouvrir le dossier ¦ ↗ Avaa asia ¦ ↗ Az ügy megnyitása
+voir ▾ ¦ näytä ▾ ¦ mutasd ▾
+Rien pour aujourd’hui. ¦ Ei mitään tänään. ¦ Ma nincs semmi.
+Prochaine : {d} ({n}) ¦ Seuraava: {d} ({n}) ¦ Következő: {d} ({n})
+🔔 À faire · {d} ¦ 🔔 Tehtävää · {d} ¦ 🔔 Teendők · {d}
+Cette généalogie ¦ Tämä sukututkimus ¦ Ez a családfa
+⚖️ {name} : impossible de lire les échéances ¦ ⚖️ {name}: määräaikoja ei voi lukea ¦ ⚖️ {name}: a határidők nem olvashatók
+✓ fait · ⏭ demain / lundi · ↗ ouvre le dossier (change de généalogie si besoin) ¦ ✓ tehty · ⏭ huomenna / maanantaina · ↗ avaa asian (vaihtaa sukututkimusta tarvittaessa) ¦ ✓ kész · ⏭ holnap / hétfő · ↗ megnyitja az ügyet (szükség esetén családfát vált)
+Ajouter mes rappels ¦ Lisää muistutukseni ¦ Emlékeztetőim hozzáadása
+Bulle de l’ordinateur à l’ouverture de l’app ¦ Tietokoneen ilmoitus sovelluksen avautuessa ¦ A számítógép értesítése az alkalmazás megnyitásakor
+🗓 Ma semaine ¦ 🗓 Viikkoni ¦ 🗓 A hetem
+Reporté au {d} ¦ Siirretty päivälle {d} ¦ Elhalasztva: {d}
+✓ Fait : {l} ¦ ✓ Tehty: {l} ¦ ✓ Kész: {l}
+Reporté au {d} : {l} ¦ Siirretty päivälle {d}: {l} ¦ Elhalasztva: {d}: {l}
+Points prêts : {n} sur {m} ¦ Valmiit kohdat: {n}/{m} ¦ Kész pontok: {n} / {m}
+À revoir : {n} ¦ Tarkistettava: {n} ¦ Átnézendő: {n}
+Manque : {n} ¦ Puuttuu: {n} ¦ Hiányzik: {n}
+📋 AVANT DE REMETTRE ¦ 📋 ENNEN LUOVUTUSTA ¦ 📋 ÁTADÁS ELŐTT
+Avant de remettre · {n} ¦ Ennen luovutusta · {n} ¦ Átadás előtt · {n}
+Passer à « Remis au notaire » ¦ Vaihda tilaan ”Luovutettu notaarille” ¦ Váltás erre: „Átadva a közjegyzőnek”
+Ça avertit, ça n’empêche pas : tu peux remettre quand même, ce sera noté au journal. ¦ Se varoittaa, ei estä: voit luovuttaa silti, se kirjataan lokiin. ¦ Figyelmeztet, nem akadályoz: így is átadhatod, bekerül a naplóba.
+🖨 Imprimer quand même ¦ 🖨 Tulosta silti ¦ 🖨 Nyomtatás mégis
+Montant ¦ Summa ¦ Összeg
+non signé ¦ allekirjoittamaton ¦ nincs aláírva
+Commission ¦ Palkkio ¦ Jutalék
+Reste à l’héritier ¦ Jää perilliselle ¦ Az örökösnek marad
+Arrondi au centime : chaque part est arrondie au centime inférieur, puis les centimes qui restent vont aux parts qui en ont perdu le plus. Le total tombe juste. ¦ Pyöristetty senttiin: jokainen osuus pyöristetään alaspäin senttiin, ja jäljelle jäävät sentit menevät osuuksille, jotka menettivät eniten. Summa täsmää. ¦ Centre kerekítve: minden részt lefelé kerekítünk centre, a maradék centek azokhoz a részekhez kerülnek, amelyek a legtöbbet veszítették. Az összeg pontosan kijön.
+Tape l’actif net en euros pour voir la part de chacun. ¦ Kirjoita nettovarallisuus euroina nähdäksesi kunkin osuuden. ¦ Írd be a nettó vagyont euróban, hogy lásd mindenki részét.
+Tape un montant en euros (ex. 187 450,00). ¦ Kirjoita summa euroina (esim. 187 450,00). ¦ Írj be egy összeget euróban (pl. 187 450,00).
+Plus d’un milliard d’euros : c’est bien ça ? ¦ Yli miljardi euroa: pitääkö paikkansa? ¦ Több mint egymilliárd euró: így van?
+Oui, calculer ¦ Kyllä, laske ¦ Igen, számold ki
+Si le conjoint choisit l’usufruit de la totalité : pas de montant en euros (sa valeur dépend de son âge, c’est un barème fiscal) ; demande la valeur au notaire, pour lui et pour les nus-propriétaires. ¦ Jos puoliso valitsee koko pesän käyttöoikeuden: ei summaa euroina (sen arvo riippuu iästä, se on verotaulukko); kysy arvo notaarilta, puolisolle ja omistajille ilman käyttöoikeutta. ¦ Ha a házastárs a teljes hagyaték haszonélvezetét választja: nincs összeg euróban (értéke az életkortól függ, ez adótáblázat); kérdezd meg az értéket a közjegyzőtől, neki és a csupasz tulajdonosoknak.
+Autre hypothèse, {h} ¦ Toinen oletus, {h} ¦ Másik feltevés, {h}
+📊 Part de chacun en euros ¦ 📊 Kunkin osuus euroina ¦ 📊 Mindenki része euróban
+Fractions ¦ Murtoluvut ¦ Törtek
+💶 En euros ¦ 💶 Euroina ¦ 💶 Euróban
+⤓ Copier le tableau ¦ ⤓ Kopioi taulukko ¦ ⤓ A táblázat másolása
+Actif net à partager (tapé par toi) ¦ Jaettava nettovarallisuus (sinun kirjoittamasi) ¦ Felosztandó nettó vagyon (te írtad be)
+D’après le notaire. Pas gardé : effacé quand tu fermes le dossier. ¦ Notaarin mukaan. Ei tallenneta: poistetaan, kun suljet asian. ¦ A közjegyző szerint. Nem mentjük: törlődik, amikor bezárod az ügyet.
+Hors droits de succession et frais : l’app ne calcule pas l’impôt. Ces montants sont un ordre d’idée, à faire vérifier par le notaire. ¦ Ilman perintöveroa ja kuluja: sovellus ei laske veroa. Summat ovat suuntaa antavia, notaarin tarkistettavia. ¦ Örökösödési illeték és költségek nélkül: az alkalmazás nem számol adót. Ezek az összegek tájékoztató jellegűek, a közjegyzővel ellenőriztetendők.
+Commission = le % écrit dans « ＋ Honoraires d’un contrat » × le montant, arrondie au centime le plus proche, sans TVA ajoutée ; reste = montant − commission. ¦ Palkkio = kohtaan ”＋ Sopimuksen palkkio” kirjoitettu % × summa, pyöristettynä lähimpään senttiin, ilman lisättyä arvonlisäveroa; jää = summa − palkkio. ¦ Jutalék = a „＋ Szerződéses díj” mezőbe írt % × az összeg, a legközelebbi centre kerekítve, ÁFA hozzáadása nélkül; marad = összeg − jutalék.
+Tableau copié. ¦ Taulukko kopioitu. ¦ Táblázat másolva.
+Parts en euros — {n} ¦ Osuudet euroina — {n} ¦ Részek euróban — {n}
+Parts en euros imprimées ¦ Osuudet euroina tulostettu ¦ Részek euróban kinyomtatva
+✉️ Courrier à plusieurs… ¦ ✉️ Kirje usealle… ¦ ✉️ Levél több örökösnek…
+décoché ¦ valinta poistettu ¦ kijelölés törölve
+déjà écrit le {d} ({k}) ¦ kirjoitettu jo {d} ({k}) ¦ már írtunk: {d} ({k})
+✉️ Courriers en série · {n} ¦ ✉️ Joukkokirjeet · {n} ¦ ✉️ Körlevelek · {n}
+Les héritiers dont l’existence n’est pas établie ne sont pas dans la liste. Les décochés peuvent être cochés à la main (une lettre sans adresse est alors imprimée sans bloc adresse). ¦ Perillisiä, joiden olemassaoloa ei ole vahvistettu, ei ole luettelossa. Valitsemattomat voi valita käsin (osoitteeton kirje tulostetaan silloin ilman osoitelohkoa). ¦ Azok az örökösök, akiknek a létezése nem bizonyított, nincsenek a listán. A nem kijelölteket kézzel ki lehet jelölni (cím nélküli levél ekkor címblokk nélkül nyomtatódik).
+La lettre · clic sur un champ pour l’insérer ¦ Kirje · lisää kenttä napsauttamalla sitä ¦ A levél · kattints egy mezőre a beszúrásához
+{envoyé_le} : la date du courrier précédent à cet héritier ; {date} : la date d’envoi de celui-ci. ¦ {envoyé_le}: edellisen tälle perilliselle lähetetyn kirjeen päivä; {date}: tämän kirjeen lähetyspäivä. ¦ {envoyé_le}: az örökösnek küldött előző levél dátuma; {date}: ennek a levélnek a küldési dátuma.
+Lettre précédente ¦ Edellinen kirje ¦ Előző levél
+Lettre suivante ¦ Seuraava kirje ¦ Következő levél
+✎ Retoucher cette lettre ¦ ✎ Muokkaa tätä kirjettä ¦ ✎ A levél átírása
+↺ Revenir au modèle ¦ ↺ Takaisin malliin ¦ ↺ Vissza a sablonhoz
+＋ Enregistrer comme modèle ¦ ＋ Tallenna malliksi ¦ ＋ Mentés sablonként
+Lettres prêtes : {n} sur {m} ¦ Valmiit kirjeet: {n}/{m} ¦ Kész levelek: {n} / {m}
+Champ inconnu : {f} (ligne {l}). Corrige-le avant de ranger les lettres. ¦ Tuntematon kenttä: {f} (rivi {l}). Korjaa se ennen kuin arkistoit kirjeet. ¦ Ismeretlen mező: {f} ({l}. sor). Javítsd ki, mielőtt iktatod a leveleket.
+🖨 Imprimer les {n} ¦ 🖨 Tulosta {n} ¦ 🖨 A(z) {n} nyomtatása
+Lettre {i} / {n} · {name} ¦ Kirje {i} / {n} · {name} ¦ Levél {i} / {n} · {name}
+Champ vide : la ligne s’écrit sans le mot ¦ Tyhjä kenttä: rivi kirjoitetaan ilman sanaa ¦ Üres mező: a sor a szó nélkül íródik
+✎ modifiée à la main ¦ ✎ muokattu käsin ¦ ✎ kézzel módosítva
+Ton nom et ton adresse : Listes → Registre de courriers → ✉️ Lettres (expéditeur). ¦ Nimesi ja osoitteesi: Luettelot → Kirjeenvaihdon rekisteri → ✉️ Kirjeet (lähettäjä). ¦ A neved és a címed: Listák → Levelezési nyilvántartás → ✉️ Levelek (feladó).
+Mes modèles (aucun pour l’instant) ¦ Mallini (ei vielä yhtään) ¦ Sablonjaim (még nincs)
+Remplacer ta lettre par ce modèle ? ¦ Korvataanko kirjeesi tällä mallilla? ¦ Lecseréled a leveledet erre a sablonra?
+Changer de modèle ¦ Vaihda malli ¦ Sablon módosítása
+Oublier les retouches de la lettre à {name} ? ¦ Unohdetaanko muutokset kirjeeseen henkilölle {name}? ¦ Elveted a(z) {name} számára írt levél módosításait?
+Revenir au modèle ¦ Takaisin malliin ¦ Vissza a sablonhoz
+Modèle « {name} » enregistré (Mes modèles, communs à tous les dossiers de cette généalogie) ¦ Malli ”{name}” tallennettu (Mallini, yhteiset tämän sukututkimuksen kaikille asioille) ¦ „{name}” sablon mentve (Sablonjaim, a családfa minden ügyében közösek)
+Corrige d’abord le champ inconnu. ¦ Korjaa ensin tuntematon kenttä. ¦ Előbb javítsd az ismeretlen mezőt.
+Rangement : {n} sur {m} ¦ Arkistointi: {n}/{m} ¦ Iktatás: {n} / {m}
+{n} rangés dans le Registre de courriers, relance le {d} ¦ {n} arkistoitu Kirjeenvaihdon rekisteriin, muistutus {d} ¦ {n} iktatva a Levelezési nyilvántartásba, emlékeztető: {d}
+en main, cote non notée ¦ hallussa, signumia ei merkitty ¦ megvan, jelzet nincs feljegyezve
+demandé le {d} ¦ pyydetty {d} ¦ kérve: {d}
+demandé ¦ pyydetty ¦ kérve
+acte à fournir ¦ asiakirja hankittava ¦ pótolandó irat
+(commun, voir {n}) ¦ (yhteinen, ks. {n}) ¦ (közös, lásd {n})
+CHAÎNE DE FILIATION ¦ POLVEUTUMISKETJU ¦ LESZÁRMAZÁSI LÁNC
+Calcul établi d’après les actes cités, sous réserve de vérification par le notaire. ¦ Laskelma mainittujen asiakirjojen perusteella, notaarin tarkistusta varauksin. ¦ Számítás a felsorolt iratok alapján, a közjegyző ellenőrzésének fenntartásával.
+Code civil, articles cités pour ce dossier : art. {list}. ¦ Siviililaki, tässä asiassa mainitut artiklat: art. {list}. ¦ Polgári Törvénykönyv, az ügyhöz idézett cikkek: art. {list}.
+N. = naissance, M. = mariage, D. = décès. ¦ S. = syntymä, V. = vihkiminen, K. = kuolema. ¦ Sz. = születés, Házas. = házasság, H. = halál.
+Page {n} / {t} ¦ Sivu {n} / {t} ¦ {n}. oldal / {t}
+Coche au moins une page. ¦ Valitse vähintään yksi sivu. ¦ Jelölj ki legalább egy oldalt.
+Tableau pour le notaire : PDF ({n} pages, avec chaîne par héritier) ¦ Taulukko notaarille: PDF ({n} sivua, kunkin perillisen ketjun kanssa) ¦ Táblázat a közjegyzőnek: PDF ({n} oldal, minden örökös láncával)
+Tableau pour le notaire : PDF ({n} pages) ¦ Taulukko notaarille: PDF ({n} sivua) ¦ Táblázat a közjegyzőnek: PDF ({n} oldal)
+sans adresses ¦ ilman osoitteita ¦ címek nélkül
+📋 Avant de remettre ¦ 📋 Ennen luovutusta ¦ 📋 Átadás előtt
+ça avertit, ça n’empêche pas ¦ se varoittaa, ei estä ¦ figyelmeztet, nem akadályoz
+Ce que contient le PDF ¦ Mitä PDF sisältää ¦ Mit tartalmaz a PDF
+Compté par le chronomètre ¦ Sekuntikellon laskema ¦ A stopper mérte
+Taux horaire pour le relevé (facultatif, pas gardé) ¦ Tuntihinta erittelyyn (vapaaehtoinen, ei tallenneta) ¦ Óradíj a kimutatáshoz (nem kötelező, nem mentjük)
+€ / h ¦ € / h ¦ € / óra
+✎ Modifier la ligne ¦ ✎ Muokkaa riviä ¦ ✎ Sor módosítása
+Ligne modifiée ¦ Rivi muokattu ¦ Sor módosítva
+Temps × taux horaire ({r} € / h) : {s} ¦ Aika × tuntihinta ({r} € / h): {s} ¦ Idő × óradíj ({r} € / óra): {s}
+Ajouté depuis « ＋ Ajouter un onglet ». ¦ Lisätty kohdasta ”＋ Lisää välilehti”. ¦ Hozzáadva innen: „＋ Fül hozzáadása”.
+✓ Onglet « {name} » ajouté ¦ ✓ Välilehti ”{name}” lisätty ¦ ✓ „{name}” fül hozzáadva
+Onglet « {name} » caché ¦ Välilehti ”{name}” piilotettu ¦ „{name}” fül elrejtve
+conseillé pour toi ¦ suositeltu sinulle ¦ neked ajánlott
+montré par ton usage ¦ käyttötapasi näyttämä ¦ a használatod mutatja
+Conseillés pour toi ¦ Suositellut sinulle ¦ Neked ajánlott
+Tout le reste ▾ ¦ Kaikki muu ▾ ¦ Minden más ▾
+Qu’est-ce que tu veux avoir sous la main ? ¦ Mitä haluat pitää käden ulottuvilla? ¦ Mit szeretnél kéznél tartani?
+Ton usage : {u} ¦ Käyttötapasi: {u} ¦ A használatod: {u}
+Chercher un onglet ¦ Etsi välilehteä ¦ Fül keresése
+🔍 Chercher un onglet… (courrier, acte, agenda) ¦ 🔍 Etsi välilehteä… (kirje, asiakirja, kalenteri) ¦ 🔍 Fül keresése… (levél, irat, naptár)
+Conseillés ({n}) ¦ Suositellut ({n}) ¦ Ajánlott ({n})
+Déjà dans le menu ({n}) ¦ Jo valikossa ({n}) ¦ Már a menüben ({n})
+Aucun onglet ne correspond. ¦ Mikään välilehti ei vastaa. ¦ Egy fül sem felel meg.
+Une carte cochée = l’onglet est dans le menu. Cocher l’ajoute à la fin du menu ; décocher le cache (un raccourci est caché, pas effacé). ¦ Valittu kortti = välilehti on valikossa. Valitseminen lisää sen valikon loppuun; valinnan poistaminen piilottaa sen (pikakuvake piilotetaan, ei poisteta). ¦ Kijelölt kártya = a fül a menüben van. A kijelölés a menü végére teszi; a kijelölés törlése elrejti (a parancsikon elrejtődik, nem törlődik).
+↗ Faire un onglet à moi (Éditeur d’onglets) ¦ ↗ Tee oma välilehti (Välilehtieditori) ¦ ↗ Saját fül készítése (Lapszerkesztő)
+MENU ¦ VALIKKO ¦ MENÜ
+＋ Ajouter un onglet ¦ ＋ Lisää välilehti ¦ ＋ Fül hozzáadása
+Ajouter un onglet ¦ Lisää välilehti ¦ Fül hozzáadása
+＋ Ajouter un onglet… ¦ ＋ Lisää välilehti… ¦ ＋ Fül hozzáadása…
+Montrer le ＋ au bout du menu ¦ Näytä ＋ valikon lopussa ¦ A ＋ mutatása a menü végén
+Retirer ce raccourci du menu (un onglet de l’app ne se retire pas : il se cache) ¦ Poista tämä pikakuvake valikosta (sovelluksen välilehteä ei poisteta: se piilotetaan) ¦ A parancsikon eltávolítása a menüből (az alkalmazás füle nem távolítható el: elrejtődik)
+Onglet « {name} » retiré du menu ¦ Välilehti ”{name}” poistettu valikosta ¦ „{name}” fül eltávolítva a menüből
+Le ＋ est au bout du menu ¦ ＋ on valikon lopussa ¦ A ＋ a menü végén van
+Le ＋ n’est plus au bout du menu ¦ ＋ ei ole enää valikon lopussa ¦ A ＋ már nincs a menü végén
+Recherches : {what} ¦ Tutkimukset: {what} ¦ Kutatások: {what}
+Recherches ¦ Tutkimukset ¦ Kutatások
+Acte de décès de {name} en main ¦ Henkilön {name} kuolintodistus hallussa ¦ {name} halotti anyakönyvi kivonata megvan
+Acte de décès de {name} pas en main ¦ Henkilön {name} kuolintodistus puuttuu ¦ {name} halotti anyakönyvi kivonata hiányzik
+demandé, pas encore reçu ¦ pyydetty, ei vielä saatu ¦ kérve, még nem érkezett meg
+Arbre de dévolution complet ¦ Perimyspuu valmis ¦ Az öröklési fa teljes
+Aucune branche à chercher. ¦ Ei haaraa etsittävänä. ¦ Nincs keresendő ág.
+Branches encore à chercher : {n} ¦ Vielä etsittävät haarat: {n} ¦ Még keresendő ágak: {n}
+Héritiers dont l’existence n’est pas établie : {n} ¦ Perilliset, joiden olemassaoloa ei ole vahvistettu: {n} ¦ Örökösök, akiknek a létezése nem bizonyított: {n}
+Liens prouvés par aucun acte : {n} ¦ Siteet, joita mikään asiakirja ei todista: {n} ¦ Egyetlen irattal sem bizonyított kapcsolatok: {n}
+{what} (relie {who} au défunt) ¦ {what} (yhdistää {who} vainajaan) ¦ {what} (összeköti {who} személyt az elhunyttal)
+Chaque lien est prouvé par un acte ¦ Jokainen side on todistettu asiakirjalla ¦ Minden kapcsolatot irat bizonyít
+Actes demandés, pas encore reçus : {n} ¦ Pyydetyt, vielä saamatta olevat asiakirjat: {n} ¦ Kért, még meg nem érkezett iratok: {n}
+{what} · demandé le {d} ¦ {what} · pyydetty {d} ¦ {what} · kérve: {d}
+(courrier n° {n}) ¦ (kirje nro {n}) ¦ ({n}. sz. levél)
+Adresses des héritiers vivants : {n} sur {m} ¦ Elossa olevien perillisten osoitteet: {n}/{m} ¦ Élő örökösök címei: {n} / {m}
+Aucun héritier vivant à joindre ¦ Ei elossa olevaa perillistä tavoitettavana ¦ Nincs elérendő élő örökös
+Contrats signés (ou refus noté) : {n} sur {m} ¦ Allekirjoitetut sopimukset (tai kirjattu kieltäytyminen): {n}/{m} ¦ Aláírt szerződések (vagy feljegyzett elutasítás): {n} / {m}
+Aucun contrat à faire signer ¦ Ei sopimusta allekirjoitettavaksi ¦ Nincs aláíratandó szerződés
+Contrats pas encore signés : {n} ¦ Vielä allekirjoittamattomat sopimukset: {n} ¦ Még alá nem írt szerződések: {n}
+{name} a répondu « oui », pas de date de signature ¦ {name} vastasi ”kyllä”, ei allekirjoituspäivää ¦ {name} „igen”-nel válaszolt, aláírás dátuma nélkül
+Héritiers introuvables ou silencieux : {n} ¦ Tavoittamattomat tai vastaamattomat perilliset: {n} ¦ Fellelhetetlen vagy nem válaszoló örökösök: {n}
+Parts : le total fait bien 1 ¦ Osuudet: summa on tosiaan 1 ¦ Részek: az összeg valóban 1
+Les parts ne totalisent pas 1 : à revoir ¦ Osuudet eivät ole yhteensä 1: tarkistettava ¦ A részek összege nem 1: átnézendő
+Échéances en retard : {n} ¦ Myöhässä olevat määräajat: {n} ¦ Lejárt határidők: {n}
+Aucune échéance en retard ¦ Ei myöhässä olevia määräaikoja ¦ Nincs lejárt határidő
+Remis au notaire avec {miss} manque(s) et {warn} point(s) à revoir ({what}) ¦ Luovutettu notaarille, puuttuu: {miss}, tarkistettavia: {warn} ({what}) ¦ Átadva a közjegyzőnek, hiány: {miss}, átnézendő: {warn} ({what})
+Madame ¦ Rouva ¦ Asszonyom
+Monsieur ¦ Herra ¦ Uram
+Tes photos, actes, lettres de A à Z, rangés en dossiers. ¦ Valokuvasi, asiakirjasi, kirjeesi A:sta Ö:hön, järjestettynä kansioihin. ¦ A fényképeid, irataid, leveleid A-tól Z-ig, mappákba rendezve.
+Lettres à ouvrir plus tard, recettes, musée de famille. ¦ Myöhemmin avattavat kirjeet, reseptit, sukumuseo. ¦ Később felbontandó levelek, receptek, családi múzeum.
+Fiches thématiques : un métier, une guerre, un village. ¦ Teemakortit: ammatti, sota, kylä. ¦ Tematikus lapok: egy mesterség, egy háború, egy falu.
+Tes correspondances ADN et leurs liens. ¦ DNA-osumasi ja niiden siteet. ¦ DNS-egyezéseid és kapcsolataik.
+Les œuvres d’un artiste, albums, expositions. ¦ Taiteilijan teokset, albumit, näyttelyt. ¦ Egy művész alkotásai, albumok, kiállítások.
+Pedigree, portées. (Suivi des animaux : à part.) ¦ Sukutaulu, pentueet. (Eläinten seuranta: erikseen.) ¦ Törzskönyv, almok. (Állatkövetés: külön.)
+Baguage, puces, observations, trajets. ¦ Rengastus, sirut, havainnot, reitit. ¦ Gyűrűzés, chipek, megfigyelések, útvonalak.
+Dossiers de succession, pour un notaire. ¦ Perunkirjoitusasiat, notaarille. ¦ Hagyatéki ügyek, közjegyzőnek.
+Le Registre de courriers : demandes d’actes, relances, réponses. ¦ Kirjeenvaihdon rekisteri: asiakirjapyynnöt, muistutukset, vastaukset. ¦ A Levelezési nyilvántartás: iratkérések, emlékeztetők, válaszok.
+Listes → Archives et sources → Registre de courriers ¦ Luettelot → Arkistot ja lähteet → Kirjeenvaihdon rekisteri ¦ Listák → Levéltárak és források → Levelezési nyilvántartás
+Tes actes recopiés, mot à mot. ¦ Kopioimasi asiakirjat, sanasta sanaan. ¦ A lemásolt irataid, szóról szóra.
+Listes → Archives et sources ¦ Luettelot → Arkistot ja lähteet ¦ Listák → Levéltárak és források
+Visites, rendez-vous, relances, à la semaine. ¦ Käynnit, tapaamiset, muistutukset, viikoittain. ¦ Látogatások, találkozók, emlékeztetők, hétről hétre.
+Listes → Recherche et organisation ¦ Luettelot → Tutkimus ja järjestely ¦ Listák → Kutatás és szervezés
+Les choses à faire, avec leur date. ¦ Tehtävät asiat päivämäärineen. ¦ A teendők, dátummal.
+Toutes les images, sons, vidéos en tableau. ¦ Kaikki kuvat, äänet, videot taulukossa. ¦ Minden kép, hang, videó egy táblázatban.
+Listes → Médias et documents ¦ Luettelot → Media ja asiakirjat ¦ Listák → Média és dokumentumok
+Questionnaires pour recueillir les souvenirs. ¦ Kyselyt muistojen keräämiseen. ¦ Kérdőívek az emlékek gyűjtéséhez.
+Les maisons, pièce par pièce, et qui y a vécu. ¦ Talot huone huoneelta, ja keitä niissä asui. ¦ A házak, szobáról szobára, és kik laktak bennük.
+Listes → Lieux et maisons ¦ Luettelot → Paikat ja talot ¦ Listák → Helyek és házak
+Adresses et contacts des cousins vivants. ¦ Elossa olevien serkkujen osoitteet ja yhteystiedot. ¦ Élő unokatestvérek címei és elérhetőségei.
+Listes → Personnes et familles ¦ Luettelot → Henkilöt ja perheet ¦ Listák → Személyek és családok
+Les dépôts, leurs cotes, leurs horaires. ¦ Arkistot, niiden signumit, aukioloajat. ¦ A levéltárak, jelzeteik, nyitvatartásuk.
+Le planificateur : quoi consulter, où, quand. ¦ Suunnittelija: mitä tutkia, missä, milloin. ¦ A tervező: mit, hol, mikor nézz meg.
+Qui a hérité de quoi d’après les actes anciens. ¦ Kuka peri mitä vanhojen asiakirjojen mukaan. ¦ Ki mit örökölt a régi iratok szerint.
+Les bons sites pour la personne ouverte. ¦ Oikeat sivustot avatulle henkilölle. ¦ A megfelelő oldalak a megnyitott személyhez.
+Recherche → Type de recherche ¦ Haku → Haun tyyppi ¦ Keresés → Keresés típusa
+Trouver et fusionner les fiches en double. ¦ Etsi ja yhdistä kaksoiskappaleet. ¦ Kettős lapok keresése és összevonása.
+Réglages → Fusion de doublons ¦ Asetukset → Kaksoiskappaleiden yhdistäminen ¦ Beállítások → Ismétlődések összevonása
+Dates impossibles, liens bizarres. ¦ Mahdottomat päivämäärät, oudot siteet. ¦ Lehetetlen dátumok, furcsa kapcsolatok.
+Réglages → Contrôle de la base ¦ Asetukset → Tietokannan tarkistus ¦ Beállítások → Az adatbázis ellenőrzése
+Le nom étudié ¦ Tutkittu sukunimi ¦ A vizsgált név
+Les porteurs d’un nom, ses variantes. ¦ Sukunimen kantajat, sen muunnelmat. ¦ Egy név viselői, változatai.
+Graphiques → statistique des noms ¦ Kaaviot → sukunimitilasto ¦ Grafikonok → névstatisztika
+L’entreprise ¦ Yritys ¦ A vállalat
+Employeurs, salariés, membres. ¦ Työnantajat, työntekijät, jäsenet. ¦ Munkáltatók, alkalmazottak, tagok.
+Listes → Employeurs ¦ Luettelot → Työnantajat ¦ Listák → Munkáltatók
+Des parties de l’app, cachées au départ ¦ Sovelluksen osia, aluksi piilossa ¦ Az alkalmazás részei, kezdetben rejtve
+Elles existent déjà : cocher les montre dans le menu. ¦ Ne ovat jo olemassa: valitseminen näyttää ne valikossa. ¦ Már léteznek: a kijelölés megjeleníti őket a menüben.
+Un raccourci vers une liste ¦ Pikakuvake luetteloon ¦ Parancsikon egy listához
+Il devient un « onglet à soi » (Éditeur d’onglets). ¦ Siitä tulee ”oma välilehti” (Välilehtieditori). ¦ „Saját fül” lesz belőle (Lapszerkesztő).
+Un raccourci vers un outil ¦ Pikakuvake työkaluun ¦ Parancsikon egy eszközhöz
+Chaîne par héritier ¦ Kunkin perillisen ketju ¦ Minden örökös lánca
+✉️ Contactés ¦ ✉️ Yhteydenotetut ¦ ✉️ Megkeresettek
+📇 Répertoire des vivants ¦ 📇 Elävien luettelo ¦ 📇 Élők jegyzéke
+Échéances du jour (usage successoral seulement) ¦ Päivän määräajat (vain perintötutkimuskäyttö) ¦ A nap határidői (csak hagyatéki használat)
+Ce dossier est clos : rien ne s’y note. ¦ Tämä asia on suljettu: siihen ei kirjata mitään. ¦ Ez az ügy le van zárva: semmit sem lehet bele rögzíteni.
+Donne un nom au modèle. ¦ Anna mallille nimi. ¦ Adj nevet a sablonnak.
+Trop de lettres d’un coup (60 au plus). ¦ Liian monta kirjettä kerralla (enintään 60). ¦ Túl sok levél egyszerre (legfeljebb 60).
+Échéances du jour ¦ Päivän määräajat ¦ A nap határidői

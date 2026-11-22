@@ -1,0 +1,59 @@
+fr ¦ fi ¦ hu
+# 📜 Atelier de transcription, vague 2 « Guider »
+Les étapes : Lire, Corriger, Repérer, Ajouter à la généalogie ¦ Vaiheet: Lue, Korjaa, Tunnista, Lisää sukututkimukseen ¦ A lépések: Olvasás, Javítás, Felismerés, Hozzáadás a családfához
+Lire l’image (« ✨ Lire ▾ ») ou écrire le texte, ligne à ligne ¦ Lue kuva (”✨ Lue ▾”) tai kirjoita teksti rivi riviltä ¦ Olvasd be a képet („✨ Olvasás ▾”), vagy írd be a szöveget soronként
+Relire et corriger : corrections proposées, mots douteux [?], aide à la lecture ¦ Tarkista ja korjaa: ehdotetut korjaukset, epävarmat sanat [?], lukuapu ¦ Átnézés és javítás: javasolt javítások, kétes szavak [?], olvasási segéd
+Ajouter les personnes et l’événement à la généalogie ¦ Lisää henkilöt ja tapahtuma sukututkimukseen ¦ A személyek és az esemény hozzáadása a családfához
+Toute la page ou la zone choisie (▭) ; ou écris le texte toi-même, ligne à ligne. ¦ Koko sivu tai valittu alue (▭); tai kirjoita teksti itse rivi riviltä. ¦ Az egész oldal vagy a kijelölt terület (▭); vagy írd be magad a szöveget, soronként.
+=mot à revoir ¦ tarkistettava sana|tarkistettavaa sanaa ¦ átnézendő szó|átnézendő szó
+rien à revoir ¦ ei tarkistettavaa ¦ nincs mit átnézni
+=nom repéré ¦ tunnistettu nimi|tunnistettua nimeä ¦ felismert név|felismert név
+{n} à relier ¦ {n} linkitettävää ¦ {n} kapcsolandó
+Tout est relié ¦ Kaikki linkitetty ¦ Minden kapcsolva
+{n} × [?] ou [illisible] ¦ {n} × [?] tai [lukukelvoton] ¦ {n} × [?] vagy [olvashatatlan]
+=personne dans l’acte ¦ henkilö asiakirjassa|henkilöä asiakirjassa ¦ személy az iratban|személy az iratban
+Personne dans l’acte pour l’instant : « 🧭 Repérer » les trouve dans le texte ¦ Asiakirjassa ei vielä ketään: ”🧭 Tunnista” löytää heidät tekstistä ¦ Még senki sincs az iratban: a „🧭 Felismerés” megtalálja őket a szövegben
+# — téléphone : trois onglets
+Image, texte ou personnes ¦ Kuva, teksti tai henkilöt ¦ Kép, szöveg vagy személyek
+# — 👁 relecture ligne à ligne en plein écran
+Le morceau d’image de la ligne ¦ Rivin kuvan pala ¦ A sor képrészlete
+Pas de zone pour cette ligne : dessine-la sur l’image (▭), elle restera reliée. ¦ Tällä rivillä ei ole aluetta: piirrä se kuvaan (▭), se pysyy linkitettynä. ¦ Ennek a sornak nincs területe: rajzold meg a képen (▭), kapcsolva marad.
+Ligne à relire ¦ Tarkistettava rivi ¦ Átnézendő sor
+Relue ¦ Tarkistettu ¦ Átnézve
+Ligne d’avant ¦ Edellinen rivi ¦ Előző sor
+atelier|Ligne suivante ¦ Seuraava rivi ¦ Következő sor
+Entrée : la ligne est relue, ligne suivante · ⇧ Entrée : ligne d’avant · ↑ ↓ : changer de ligne sans la marquer · Échap : fermer ¦ Enter: rivi tarkistettu, seuraava rivi · ⇧ Enter: edellinen rivi · ↑ ↓: vaihda riviä merkitsemättä · Esc: sulje ¦ Enter: a sor átnézve, következő sor · ⇧ Enter: előző sor · ↑ ↓: sorváltás jelölés nélkül · Esc: bezárás
+Ligne {n} sur {total} ¦ Rivi {n}/{total} ¦ {n}. sor / {total}
+=ligne relue ¦ rivi tarkistettu|riviä tarkistettu ¦ sor átnézve|sor átnézve
+Toutes les lignes sont relues. ¦ Kaikki rivit on tarkistettu. ¦ Minden sor át van nézve.
+C’était la dernière ligne. ¦ Se oli viimeinen rivi. ¦ Ez volt az utolsó sor.
+Relire ligne à ligne ¦ Tarkista rivi riviltä ¦ Átnézés soronként
+Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Tarkista rivi riviltä koko näytöllä: kuvan pala jokaisen rivin yläpuolella ¦ Soronkénti átnézés teljes képernyőn: a képrészlet minden sor fölött
+Relecture ligne à ligne en plein écran (conseillé) ¦ Rivikohtainen tarkistus koko näytöllä (suositus) ¦ Soronkénti átnézés teljes képernyőn (ajánlott)
+# — 🕘 Versions, 🔍 Chercher / Remplacer, ⌨️ touches
+Chercher dans le texte ¦ Hae tekstistä ¦ Keresés a szövegben
+Chercher et remplacer ¦ Hae ja korvaa ¦ Keresés és csere
+« {q} » → « {by} » : {n} ¦ ”{q}” → ”{by}”: {n} ¦ „{q}” → „{by}”: {n}
+Avant « Remplacer » ¦ Ennen ”Korvaa” ¦ A „Csere” előtt
+Avant « Tout remplacer » ¦ Ennen ”Korvaa kaikki” ¦ Az „Összes cseréje” előtt
+Avant « Accepter les propositions sûres » ¦ Ennen ”Hyväksy varmat ehdotukset” ¦ A „Biztos javaslatok elfogadása” előtt
+Avant la lecture mise dans le texte ¦ Ennen kuin luettu lisättiin tekstiin ¦ Mielőtt a beolvasott szöveg a szövegbe került
+Résultat suivant, résultat d’avant ¦ Seuraava tulos, edellinen tulos ¦ Következő találat, előző találat
+Ligne suivante, ligne d’avant : l’image suit sa zone ¦ Seuraava rivi, edellinen rivi: kuva seuraa sen aluetta ¦ Következő sor, előző sor: a kép követi a területét
+Déplacer l’image, en restant appuyé ¦ Siirrä kuvaa pitämällä painettuna ¦ Kép mozgatása, lenyomva tartva
+Déplacer la zone choisie (⇧ : l’agrandir) ¦ Siirrä valittua aluetta (⇧: suurenna sitä) ¦ A kijelölt terület mozgatása (⇧: nagyítás)
+Supprimer la zone choisie ¦ Poista valittu alue ¦ A kijelölt terület törlése
+Zoom avant, zoom arrière ¦ Lähennä, loitonna ¦ Nagyítás, kicsinyítés
+Cette liste des touches ¦ Tämä näppäinluettelo ¦ Ez a billentyűlista
+# — avancement et abréviations au survol
+=mot douteux ¦ epävarma sana|epävarmaa sanaa ¦ kétes szó|kétes szó
+aucun mot douteux ¦ ei epävarmoja sanoja ¦ nincs kétes szó
+{n} / {total} lignes relues ¦ {n} / {total} riviä tarkistettu ¦ {n} / {total} sor átnézve
+{n} / {total} lignes reliées ¦ {n} / {total} riviä linkitetty ¦ {n} / {total} sor kapcsolva
+Marquer comme finie ¦ Merkitse valmiiksi ¦ Megjelölés késznek
+Marquer comme relue ¦ Merkitse tarkistetuksi ¦ Megjelölés átnézettként
+Ligne sans zone : dessine-la sur l’image (▭) ¦ Rivi ilman aluetta: piirrä se kuvaan (▭) ¦ Terület nélküli sor: rajzold meg a képen (▭)
+Ne plus souligner les abréviations ¦ Älä enää alleviivaa lyhenteitä ¦ Ne húzza alá többé a rövidítéseket
+Souligner les abréviations connues ¦ Alleviivaa tunnetut lyhenteet ¦ Ismert rövidítések aláhúzása
+Abréviations connues soulignées, leur sens au survol (conseillé) ¦ Tunnetut lyhenteet alleviivattuina, merkitys osoitettaessa (suositus) ¦ Ismert rövidítések aláhúzva, jelentésük rámutatáskor (ajánlott)
+Relues ¦ Tarkistetut ¦ Átnézettek

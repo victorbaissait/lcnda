@@ -1,0 +1,53 @@
+fr ¦ el ¦ bg
+# 🔎 Recherche « à la française » (lib/recherche_fr.php, assets/js/app-recherche-fr.js, Réglages → 🔎 Recherche)
+nom exact ¦ ακριβές όνομα ¦ точно име
+nom de mariage ({x}) ¦ όνομα γάμου ({x}) ¦ фамилия по съпруг ({x})
+autre nom noté ({x}) ¦ άλλο καταγεγραμμένο όνομα ({x}) ¦ друго записано име ({x})
+particule ignorée ({x}) ¦ το μόριο αγνοήθηκε ({x}) ¦ частицата е пропусната ({x})
+forme latine d’{p} ({x}) ¦ λατινική μορφή του {p} ({x}) ¦ латинска форма на {p} ({x})
+forme latine de {p} ({x}) ¦ λατινική μορφή του {p} ({x}) ¦ латинска форма на {p} ({x})
+abréviation d’{p} ({x}) ¦ συντομογραφία του {p} ({x}) ¦ съкращение на {p} ({x})
+abréviation de {p} ({x}) ¦ συντομογραφία του {p} ({x}) ¦ съкращение на {p} ({x})
+diminutif d’{p} ({x}) ¦ υποκοριστικό του {p} ({x}) ¦ умалително на {p} ({x})
+diminutif de {p} ({x}) ¦ υποκοριστικό του {p} ({x}) ¦ умалително на {p} ({x})
+prénom composé ({p}) ¦ σύνθετο όνομα ({p}) ¦ сложно име ({p})
+phonétique (proche de {x}) ¦ φωνητικά (κοντά στο {x}) ¦ по звучене (близко до {x})
+lieu ({x}) ¦ τόπος ({x}) ¦ място ({x})
+Saint, Sainte ou article écrits autrement ({x}) ¦ Saint, Sainte ή άρθρο γραμμένα αλλιώς ({x}) ¦ Saint, Sainte или член, написани другояче ({x})
+ancien nom ({x}) ¦ παλιό όνομα ({x}) ¦ предишно име ({x})
+commune fusionnée ({x} → {y}) ¦ συγχωνευμένη κοινότητα ({x} → {y}) ¦ слята община ({x} → {y})
+date « {d} » ({ev} {y}) ¦ ημερομηνία «{d}» ({ev} {y}) ¦ дата „{d}“ ({ev} {y})
+date « {d} » ¦ ημερομηνία «{d}» ¦ дата „{d}“
+sépulture ¦ ταφή ¦ погребение
+un événement ¦ ένα γεγονός ¦ събитие
+Trouvé par : {x} ¦ Βρέθηκε μέσω: {x} ¦ Намерено чрез: {x}
+Aucun « {q} » ; {n} proches : {names} ¦ Κανένα «{q}»· {n} παρόμοια: {names} ¦ Няма „{q}“; {n} близки: {names}
+Montre aussi les noms qui se prononcent pareil, même quand le nom exact existe. ¦ Δείχνει και τα ονόματα που ακούγονται ίδια, ακόμη κι όταν υπάρχει το ακριβές όνομα. ¦ Показва и имената, които звучат еднакво, дори когато точното име съществува.
+Toujours phonétique ¦ Πάντα φωνητικά ¦ Винаги по звучене
+forme française ¦ γαλλική μορφή ¦ френска форма
+forme latine ¦ λατινική μορφή ¦ латинска форма
+abréviation ¦ συντομογραφία ¦ съкращение
+diminutif ¦ υποκοριστικό ¦ умалително
+prénom composé ¦ σύνθετο όνομα ¦ сложно име
+prénom de référence : {p} ({k}) ¦ βασικό όνομα: {p} ({k}) ¦ основно име: {p} ({k})
+nom avec particule : {a} = {b} ¦ επώνυμο με μόριο: {a} = {b} ¦ фамилия с частица: {a} = {b}
+son : {s} ¦ ήχος: {s} ¦ звучене: {s}
+à partir de {y} ¦ από το {y} ¦ от {y}
+jusqu’à {y} ¦ έως το {y} ¦ до {y}
+Rien de reconnu. ¦ Δεν αναγνωρίστηκε τίποτα. ¦ Нищо не е разпознато.
+Réglages · Recherche ¦ Ρυθμίσεις · Αναζήτηση ¦ Настройки · Търсене
+La même recherche partout. Sous chaque résultat : pourquoi il a été trouvé. ¦ Η ίδια αναζήτηση παντού. Κάτω από κάθε αποτέλεσμα: γιατί βρέθηκε. ¦ Едно и също търсене навсякъде. Под всеки резултат: защо е намерен.
+Ce que la recherche essaie ¦ Τι δοκιμάζει η αναζήτηση ¦ Какво опитва търсенето
+Phonétique automatique ¦ Αυτόματη φωνητική αναζήτηση ¦ Автоматично търсене по звучене
+quand rien n’est trouvé, les noms qui se prononcent pareil ¦ όταν δεν βρίσκεται τίποτα, τα ονόματα που ακούγονται ίδια ¦ когато нищо не е намерено, имената, които звучат еднакво
+Formes latines des prénoms ¦ Λατινικές μορφές ονομάτων ¦ Латински форми на имената
+Petrus = Pierre, Joannes = Jean, avec leurs fins (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, με τις καταλήξεις τους (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, с окончанията им (-i, -o, -um, -ae)
+Abréviations et diminutifs des prénoms ¦ Συντομογραφίες και υποκοριστικά ονομάτων ¦ Съкращения и умалителни форми на имената
+Marge de « vers » (en années) ¦ Περιθώριο για το «περίπου» (σε χρόνια) ¦ Отклонение за „около“ (в години)
+Toujours : accents, majuscules, particules (d’Albert = Dalbert), St = Saint, communes fusionnées, dates en français et calendrier républicain. ¦ Πάντα: τόνοι, κεφαλαία, μόρια (d’Albert = Dalbert), St = Saint, συγχωνευμένες κοινότητες, ημερομηνίες στα γαλλικά και το δημοκρατικό ημερολόγιο. ¦ Винаги: ударения, главни букви, частици (d’Albert = Dalbert), St = Saint, слети общини, дати на френски и републиканският календар.
+Écris une recherche : l’app montre ce qu’elle comprend, sans rien chercher. ¦ Γράψε μια αναζήτηση: η εφαρμογή δείχνει τι καταλαβαίνει, χωρίς να ψάξει τίποτα. ¦ Напиши търсене: приложението показва какво разбира, без да търси нищо.
+ex. {x} ¦ π.χ. {x} ¦ напр. {x}
+Essayer une recherche ¦ Δοκίμασε μια αναζήτηση ¦ Опитай търсене
+🔎 Recherche ¦ 🔎 Αναζήτηση ¦ 🔎 Търсене
+nom proche à l’oreille ({a} / {b}) ¦ επώνυμο με παρόμοιο ήχο ({a} / {b}) ¦ фамилия с близко звучене ({a} / {b})
+même prénom, écrit autrement ({a} / {b}) ¦ ίδιο όνομα, γραμμένο αλλιώς ({a} / {b}) ¦ същото име, написано другояче ({a} / {b})

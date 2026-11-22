@@ -1,0 +1,53 @@
+fr ¦ fi ¦ hu
+# 🔎 Recherche « à la française » (lib/recherche_fr.php, assets/js/app-recherche-fr.js, Réglages → 🔎 Recherche)
+nom exact ¦ tarkka nimi ¦ pontos név
+nom de mariage ({x}) ¦ avionimi ({x}) ¦ házassági név ({x})
+autre nom noté ({x}) ¦ muu merkitty nimi ({x}) ¦ más feljegyzett név ({x})
+particule ignorée ({x}) ¦ etuliite ohitettu ({x}) ¦ névelőtag figyelmen kívül ({x})
+forme latine d’{p} ({x}) ¦ nimen {p} latinankielinen muoto ({x}) ¦ {p} latin alakja ({x})
+forme latine de {p} ({x}) ¦ nimen {p} latinankielinen muoto ({x}) ¦ {p} latin alakja ({x})
+abréviation d’{p} ({x}) ¦ nimen {p} lyhenne ({x}) ¦ {p} rövidítése ({x})
+abréviation de {p} ({x}) ¦ nimen {p} lyhenne ({x}) ¦ {p} rövidítése ({x})
+diminutif d’{p} ({x}) ¦ nimen {p} hellittelymuoto ({x}) ¦ {p} becézése ({x})
+diminutif de {p} ({x}) ¦ nimen {p} hellittelymuoto ({x}) ¦ {p} becézése ({x})
+prénom composé ({p}) ¦ kaksiosainen etunimi ({p}) ¦ összetett utónév ({p})
+phonétique (proche de {x}) ¦ äänteellisesti (lähellä nimeä {x}) ¦ hangzás szerint (hasonló: {x})
+lieu ({x}) ¦ paikka ({x}) ¦ hely ({x})
+Saint, Sainte ou article écrits autrement ({x}) ¦ Saint, Sainte tai artikkeli kirjoitettu toisin ({x}) ¦ Saint, Sainte vagy névelő másképp írva ({x})
+ancien nom ({x}) ¦ entinen nimi ({x}) ¦ régi név ({x})
+commune fusionnée ({x} → {y}) ¦ yhdistetty kunta ({x} → {y}) ¦ összevont település ({x} → {y})
+date « {d} » ({ev} {y}) ¦ päivämäärä ”{d}” ({ev} {y}) ¦ dátum „{d}” ({ev} {y})
+date « {d} » ¦ päivämäärä ”{d}” ¦ dátum „{d}”
+sépulture ¦ hautaus ¦ temetés
+un événement ¦ tapahtuma ¦ egy esemény
+Trouvé par : {x} ¦ Löytyi näin: {x} ¦ Így találta: {x}
+Aucun « {q} » ; {n} proches : {names} ¦ Ei ”{q}”; {n} samankaltaista: {names} ¦ Nincs „{q}”; {n} hasonló: {names}
+Montre aussi les noms qui se prononcent pareil, même quand le nom exact existe. ¦ Näyttää myös samalta kuulostavat nimet, vaikka tarkka nimi löytyisi. ¦ Az azonos hangzású neveket is mutatja, akkor is, ha a pontos név létezik.
+Toujours phonétique ¦ Aina äänteellisesti ¦ Mindig hangzás szerint
+forme française ¦ ranskankielinen muoto ¦ francia alak
+forme latine ¦ latinankielinen muoto ¦ latin alak
+abréviation ¦ lyhenne ¦ rövidítés
+diminutif ¦ hellittelymuoto ¦ becézés
+prénom composé ¦ kaksiosainen etunimi ¦ összetett utónév
+prénom de référence : {p} ({k}) ¦ perusetunimi: {p} ({k}) ¦ alap utónév: {p} ({k})
+nom avec particule : {a} = {b} ¦ nimi etuliitteineen: {a} = {b} ¦ név névelőtaggal: {a} = {b}
+son : {s} ¦ äänne: {s} ¦ hangzás: {s}
+à partir de {y} ¦ vuodesta {y} ¦ {y}-tól
+jusqu’à {y} ¦ vuoteen {y} asti ¦ {y}-ig
+Rien de reconnu. ¦ Mitään ei tunnistettu. ¦ Semmi sem ismerhető fel.
+Réglages · Recherche ¦ Asetukset · Haku ¦ Beállítások · Keresés
+La même recherche partout. Sous chaque résultat : pourquoi il a été trouvé. ¦ Sama haku kaikkialla. Jokaisen tuloksen alla: miksi se löytyi. ¦ Mindenhol ugyanaz a keresés. Minden találat alatt: miért találta meg.
+Ce que la recherche essaie ¦ Mitä haku kokeilee ¦ Amit a keresés kipróbál
+Phonétique automatique ¦ Automaattinen äänteellinen haku ¦ Automatikus hangzás szerinti keresés
+quand rien n’est trouvé, les noms qui se prononcent pareil ¦ kun mitään ei löydy, samalta kuulostavat nimet ¦ ha nincs találat, az azonos hangzású nevek
+Formes latines des prénoms ¦ Etunimien latinankieliset muodot ¦ Az utónevek latin alakjai
+Petrus = Pierre, Joannes = Jean, avec leurs fins (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, päätteineen (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, a végződéseikkel (-i, -o, -um, -ae)
+Abréviations et diminutifs des prénoms ¦ Etunimien lyhenteet ja hellittelymuodot ¦ Az utónevek rövidítései és becézései
+Marge de « vers » (en années) ¦ ”Noin”-sanan väljyys (vuosina) ¦ A „körülbelül” tűrése (években)
+Toujours : accents, majuscules, particules (d’Albert = Dalbert), St = Saint, communes fusionnées, dates en français et calendrier républicain. ¦ Aina: aksentit, isot kirjaimet, etuliitteet (d’Albert = Dalbert), St = Saint, yhdistetyt kunnat, ranskankieliset päivämäärät ja vallankumouskalenteri. ¦ Mindig: ékezetek, nagybetűk, névelőtagok (d’Albert = Dalbert), St = Saint, összevont települések, francia dátumok és a forradalmi naptár.
+Écris une recherche : l’app montre ce qu’elle comprend, sans rien chercher. ¦ Kirjoita haku: sovellus näyttää, mitä se ymmärtää, hakematta mitään. ¦ Írj be egy keresést: az app megmutatja, mit ért belőle, keresés nélkül.
+ex. {x} ¦ esim. {x} ¦ pl. {x}
+Essayer une recherche ¦ Kokeile hakua ¦ Keresés kipróbálása
+🔎 Recherche ¦ 🔎 Haku ¦ 🔎 Keresés
+nom proche à l’oreille ({a} / {b}) ¦ samalta kuulostava sukunimi ({a} / {b}) ¦ hasonló hangzású név ({a} / {b})
+même prénom, écrit autrement ({a} / {b}) ¦ sama etunimi, kirjoitettu toisin ({a} / {b}) ¦ ugyanaz az utónév, másképp írva ({a} / {b})

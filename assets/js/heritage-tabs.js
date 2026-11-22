@@ -40,6 +40,7 @@
             ['Statistiques (Graphiques)', app.orderedGraphStatsItems(true).map(([k, , l]) => ['stat:' + k, l])],
             ...((ext.customStatItems?.() || []).length ? [['Mes graphiques (Graphiques)', ext.customStatItems().map(([k, l]) => ['stat:' + k, l])]] : []),
             ['Réglages', app.defaultMaintenanceTabs.map(([k, , l]) => ['maint:' + k, l])],
+            ...(ext.ouChercher ? [['Recherche', [['search:ou_chercher', '🌍 Où chercher ?']]]] : []), // ＋ Ajouter un onglet (app-onglets-plus.js)
         ];
     }
     /* ─── Une commune choisie : sa fiche de village ou sa monographie, avec une organisation propre à cet endroit ─── */

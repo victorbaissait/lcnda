@@ -1,0 +1,53 @@
+fr ¦ vi ¦ id
+# 🔎 Recherche « à la française » (lib/recherche_fr.php, assets/js/app-recherche-fr.js, Réglages → 🔎 Recherche)
+nom exact ¦ đúng tên ¦ nama persis
+nom de mariage ({x}) ¦ họ sau khi kết hôn ({x}) ¦ nama setelah menikah ({x})
+autre nom noté ({x}) ¦ tên khác đã ghi ({x}) ¦ nama lain yang dicatat ({x})
+particule ignorée ({x}) ¦ bỏ qua tiểu từ ({x}) ¦ partikel diabaikan ({x})
+forme latine d’{p} ({x}) ¦ dạng Latinh của {p} ({x}) ¦ bentuk Latin dari {p} ({x})
+forme latine de {p} ({x}) ¦ dạng Latinh của {p} ({x}) ¦ bentuk Latin dari {p} ({x})
+abréviation d’{p} ({x}) ¦ viết tắt của {p} ({x}) ¦ singkatan dari {p} ({x})
+abréviation de {p} ({x}) ¦ viết tắt của {p} ({x}) ¦ singkatan dari {p} ({x})
+diminutif d’{p} ({x}) ¦ tên gọi thân mật của {p} ({x}) ¦ nama panggilan dari {p} ({x})
+diminutif de {p} ({x}) ¦ tên gọi thân mật của {p} ({x}) ¦ nama panggilan dari {p} ({x})
+prénom composé ({p}) ¦ tên ghép ({p}) ¦ nama depan majemuk ({p})
+phonétique (proche de {x}) ¦ theo âm (gần với {x}) ¦ fonetik (mirip {x})
+lieu ({x}) ¦ nơi ({x}) ¦ tempat ({x})
+Saint, Sainte ou article écrits autrement ({x}) ¦ Saint, Sainte hoặc mạo từ viết khác ({x}) ¦ Saint, Sainte, atau kata sandang ditulis berbeda ({x})
+ancien nom ({x}) ¦ tên cũ ({x}) ¦ nama lama ({x})
+commune fusionnée ({x} → {y}) ¦ xã đã sáp nhập ({x} → {y}) ¦ komune yang digabung ({x} → {y})
+date « {d} » ({ev} {y}) ¦ ngày “{d}” ({ev} {y}) ¦ tanggal “{d}” ({ev} {y})
+date « {d} » ¦ ngày “{d}” ¦ tanggal “{d}”
+sépulture ¦ mai táng ¦ pemakaman
+un événement ¦ một sự kiện ¦ sebuah peristiwa
+Trouvé par : {x} ¦ Tìm thấy nhờ: {x} ¦ Ditemukan lewat: {x}
+Aucun « {q} » ; {n} proches : {names} ¦ Không có “{q}”; {n} gần giống: {names} ¦ Tidak ada “{q}”; {n} mirip: {names}
+Montre aussi les noms qui se prononcent pareil, même quand le nom exact existe. ¦ Hiện cả những tên đọc giống nhau, kể cả khi có đúng tên. ¦ Juga menampilkan nama yang terdengar sama, meskipun nama persisnya ada.
+Toujours phonétique ¦ Luôn theo âm ¦ Selalu fonetik
+forme française ¦ dạng tiếng Pháp ¦ bentuk Prancis
+forme latine ¦ dạng Latinh ¦ bentuk Latin
+abréviation ¦ viết tắt ¦ singkatan
+diminutif ¦ tên gọi thân mật ¦ nama panggilan
+prénom composé ¦ tên ghép ¦ nama depan majemuk
+prénom de référence : {p} ({k}) ¦ tên gốc: {p} ({k}) ¦ nama depan acuan: {p} ({k})
+nom avec particule : {a} = {b} ¦ họ có tiểu từ: {a} = {b} ¦ nama dengan partikel: {a} = {b}
+son : {s} ¦ âm: {s} ¦ bunyi: {s}
+à partir de {y} ¦ từ {y} ¦ sejak {y}
+jusqu’à {y} ¦ đến {y} ¦ sampai {y}
+Rien de reconnu. ¦ Không nhận ra gì. ¦ Tidak ada yang dikenali.
+Réglages · Recherche ¦ Cài đặt · Tìm kiếm ¦ Pengaturan · Pencarian
+La même recherche partout. Sous chaque résultat : pourquoi il a été trouvé. ¦ Cùng một cách tìm ở mọi nơi. Dưới mỗi kết quả: vì sao tìm thấy. ¦ Pencarian yang sama di mana-mana. Di bawah setiap hasil: mengapa ditemukan.
+Ce que la recherche essaie ¦ Những gì tìm kiếm thử ¦ Yang dicoba pencarian
+Phonétique automatique ¦ Tìm theo âm tự động ¦ Fonetik otomatis
+quand rien n’est trouvé, les noms qui se prononcent pareil ¦ khi không tìm thấy gì, những tên đọc giống nhau ¦ jika tidak ada yang ditemukan, nama yang terdengar sama
+Formes latines des prénoms ¦ Dạng Latinh của tên ¦ Bentuk Latin nama depan
+Petrus = Pierre, Joannes = Jean, avec leurs fins (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, với các đuôi (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, dengan akhirannya (-i, -o, -um, -ae)
+Abréviations et diminutifs des prénoms ¦ Viết tắt và tên gọi thân mật ¦ Singkatan dan nama panggilan
+Marge de « vers » (en années) ¦ Biên độ cho “khoảng” (năm) ¦ Rentang untuk “sekitar” (dalam tahun)
+Toujours : accents, majuscules, particules (d’Albert = Dalbert), St = Saint, communes fusionnées, dates en français et calendrier républicain. ¦ Luôn luôn: dấu, chữ hoa, tiểu từ (d’Albert = Dalbert), St = Saint, xã đã sáp nhập, ngày viết bằng tiếng Pháp và lịch Cộng hòa. ¦ Selalu: aksen, huruf besar, partikel (d’Albert = Dalbert), St = Saint, komune yang digabung, tanggal berbahasa Prancis dan kalender Republik.
+Écris une recherche : l’app montre ce qu’elle comprend, sans rien chercher. ¦ Gõ một tìm kiếm: ứng dụng cho thấy nó hiểu gì, không tìm gì cả. ¦ Ketik pencarian: aplikasi menunjukkan apa yang dipahaminya dari tulisan kamu, tanpa mencari apa pun.
+ex. {x} ¦ vd. {x} ¦ mis. {x}
+Essayer une recherche ¦ Thử tìm kiếm ¦ Coba pencarian
+🔎 Recherche ¦ 🔎 Tìm kiếm ¦ 🔎 Pencarian
+nom proche à l’oreille ({a} / {b}) ¦ họ đọc gần giống ({a} / {b}) ¦ nama yang bunyinya mirip ({a} / {b})
+même prénom, écrit autrement ({a} / {b}) ¦ cùng tên, viết khác ({a} / {b}) ¦ nama depan sama, ditulis berbeda ({a} / {b})

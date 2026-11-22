@@ -1,0 +1,192 @@
+fr ¦ vi ¦ id
+# Zone « diagrammes-lot-a » : tableau de quartiers, variantes d’un nom, boucles d’implexe, double éventail, nœud papillon, réseau « toute la famille », barres croisées, cercles de parenté, dates incertaines, pyramide d’un recensement, tableau périodique (heritage-diagram-lot-a.js, lib/diagram_lot_a.php)
+(deviné) ¦ (đoán) ¦ (ditebak)
+1 (enfants) ¦ 1 (con) ¦ 1 (anak)
+1 (parents) ¦ 1 (cha mẹ) ¦ 1 (orang tua)
+16 quartiers ¦ 16 huy hiệu tổ tiên ¦ 16 lambang leluhur
+20 ans ¦ 20 năm ¦ 20 tahun
+32 quartiers ¦ 32 huy hiệu tổ tiên ¦ 32 lambang leluhur
+8 quartiers (arrière-grands-parents) ¦ 8 huy hiệu (cụ) ¦ 8 lambang (buyut)
+Actes comptés ¦ Văn bản được đếm ¦ Akta yang dihitung
+Ajoute les ancêtres (n° Sosa, nom) et leurs armoiries. ¦ Thêm tổ tiên (số Sosa, tên) và huy hiệu của họ. ¦ Tambahkan leluhur (no. Sosa, nama) dan lambang mereka.
+Ajoute les formes du nom : la forme, ses années, le nombre d’actes. ¦ Thêm các dạng của tên: dạng, năm, số văn bản. ¦ Tambahkan bentuk nama: bentuk, tahun, jumlah akta.
+Ajoute les personnes recensées : âge, sexe, année. ¦ Thêm người trong điều tra dân số: tuổi, giới tính, năm. ¦ Tambahkan orang dalam sensus: umur, jenis kelamin, tahun.
+Ancêtre à trouver ¦ Tổ tiên cần tìm ¦ Leluhur yang dicari
+Ancêtres pris dans ta base : {n} (armoiries : {k}). ¦ Tổ tiên lấy từ cơ sở dữ liệu: {n} (huy hiệu: {k}). ¦ Leluhur dari basis datamu: {n} (lambang: {k}).
+Arbre des variantes (formes du nom : {n}). ¦ Cây biến thể (dạng của tên: {n}). ¦ Pohon varian (bentuk nama: {n}).
+Arbre des variantes d’un nom ¦ Cây biến thể của một tên ¦ Pohon varian sebuah nama
+Armoiries (nom) ¦ Huy hiệu (tên) ¦ Lambang (nama)
+Au survol seulement ¦ Chỉ khi rê chuột ¦ Hanya saat diarahkan
+Aucun ancêtre connu à cette génération. ¦ Không có tổ tiên nào được biết ở thế hệ này. ¦ Tidak ada leluhur yang dikenal di generasi ini.
+Aucun lien entre les couples de ce groupe. ¦ Không có liên kết giữa các cặp trong nhóm này. ¦ Tidak ada hubungan antarpasangan di grup ini.
+Aucun recensement dans ta base ¦ Không có cuộc điều tra dân số nào ¦ Tidak ada sensus di basis datamu
+Aucun âge lisible dans ce recensement. ¦ Không có tuổi đọc được trong cuộc điều tra này. ¦ Tidak ada umur yang terbaca di sensus ini.
+Aucune forme trouvée pour ce nom. ¦ Không tìm thấy dạng nào của tên này. ¦ Tidak ada bentuk untuk nama ini.
+Avec au moins une source ¦ Có ít nhất một nguồn ¦ Dengan minimal satu sumber
+Axe des années ¦ Trục năm ¦ Sumbu tahun
+Barres croisées (UpSet) ¦ Thanh giao nhau (UpSet) ¦ Batang silang (UpSet)
+Barres croisées (ensembles : {n}, combinaisons montrées : {k}). ¦ Thanh giao nhau (tập hợp: {n}, tổ hợp hiển thị: {k}). ¦ Batang silang (himpunan: {n}, kombinasi ditampilkan: {k}).
+Blason absent ¦ Thiếu huy hiệu ¦ Lambang tidak ada
+Blasonnement en note (en bas) ¦ Mô tả huy hiệu ở chú thích (cuối) ¦ Deskripsi lambang di catatan (bawah)
+Boucles d’implexe (chemins : {n}), F = {f}. ¦ Vòng trùng tổ tiên (đường: {n}), F = {f}. ¦ Lingkaran implex (jalur: {n}), F = {f}.
+Boucles plus lointaines pas dessinées : {n} (comptées dans F). ¦ Vòng xa hơn không vẽ: {n} (đã tính vào F). ¦ Lingkaran lebih jauh tidak digambar: {n} (dihitung dalam F).
+Branche (paternelle, maternelle) ¦ Nhánh (nội, ngoại) ¦ Cabang (ayah, ibu)
+Branche maternelle ¦ Bên ngoại ¦ Cabang ibu
+Branche paternelle ¦ Bên nội ¦ Cabang ayah
+Branche « {name} » ¦ Nhánh “{name}” ¦ Cabang “{name}”
+Cases façon tableau périodique ¦ Ô như bảng tuần hoàn ¦ Kotak seperti tabel periodik
+Cases vides pour les ancêtres à trouver ¦ Ô trống cho tổ tiên cần tìm ¦ Kotak kosong untuk leluhur yang dicari
+Ce qu’on dessine ¦ Vẽ gì ¦ Yang digambar
+Cercles (2 à 4 ensembles) ¦ Vòng tròn (2 đến 4 tập) ¦ Lingkaran (2 sampai 4 himpunan)
+Cercles de parenté autour de {name} (personnes : {n}). ¦ Vòng họ hàng quanh {name} (người: {n}). ¦ Lingkaran kekerabatan di sekitar {name} (orang: {n}).
+Chemins trouvés : {n} (F = {f}). ¦ Đường tìm thấy: {n} (F = {f}). ¦ Jalur ditemukan: {n} (F = {f}).
+Chercher les boucles ¦ Tìm các vòng ¦ Cari lingkaran
+Chiffre (couleur, éventails) ¦ Số (màu, quạt) ¦ Angka (warna, kipas)
+Choisis de 2 à 8 ensembles (là : {n}). ¦ Chọn 2 đến 8 tập (hiện: {n}). ¦ Pilih 2 sampai 8 himpunan (sekarang: {n}).
+Choisis un groupe de noms ou écris un nom. ¦ Chọn nhóm tên hoặc gõ một tên. ¦ Pilih grup nama atau ketik nama.
+Choisis un recensement (commune et année). ¦ Chọn một cuộc điều tra (xã và năm). ¦ Pilih sensus (wilayah dan tahun).
+Choisis une personne (« Depuis l’app ») ou écris les boucles à la main. ¦ Chọn một người (“Từ ứng dụng”) hoặc tự ghi các vòng. ¦ Pilih seseorang (“Dari aplikasi”) atau tulis lingkarannya sendiri.
+Coefficient aussi en fraction ¦ Hệ số cả dạng phân số ¦ Koefisien juga dalam pecahan
+Coefficient de consanguinité de {name} : F = {f} ¦ Hệ số cận huyết của {name}: F = {f} ¦ Koefisien kekerabatan {name}: F = {f}
+Combinaisons montrées (les plus grandes) ¦ Tổ hợp hiển thị (lớn nhất) ¦ Kombinasi ditampilkan (terbesar)
+Combinaisons pas montrées : {n} ¦ Tổ hợp không hiển thị: {n} ¦ Kombinasi tidak ditampilkan: {n}
+Commune (titre) ¦ Xã (tiêu đề) ¦ Wilayah (judul)
+Comparer avec le recensement de ¦ So sánh với điều tra năm ¦ Bandingkan dengan sensus tahun
+Consanguinité de l’ancêtre ¦ Cận huyết của tổ tiên ¦ Kekerabatan leluhur
+Couleur de l’écu (sans image) ¦ Màu khiên (không có ảnh) ¦ Warna perisai (tanpa gambar)
+Couleur des parts ¦ Màu các phần ¦ Warna bagian
+Couleur du côté maternel ¦ Màu bên ngoại ¦ Warna pihak ibu
+Couleurs des branches ¦ Màu các nhánh ¦ Warna cabang
+Couple ¦ Cặp đôi ¦ Pasangan
+Critères de mauvaise forme. ¦ Tiêu chí sai định dạng. ¦ Kriteria tidak valid.
+Côté (paternel, maternel, branches) ¦ Bên (nội, ngoại, nhánh) ¦ Pihak (ayah, ibu, cabang)
+Côté maternel ¦ Bên ngoại ¦ Pihak ibu
+Côté paternel ¦ Bên nội ¦ Pihak ayah
+Date incertaine (fourchette) ¦ Ngày không chắc (khoảng) ¦ Tanggal tidak pasti (rentang)
+Date inconnue ¦ Không rõ ngày ¦ Tanggal tidak diketahui
+Dates sous le nom ¦ Ngày dưới tên ¦ Tanggal di bawah nama
+De la famille ¦ Trong gia đình ¦ Dari keluarga
+De la famille (oui) ¦ Trong gia đình (có) ¦ Dari keluarga (ya)
+De la mère vers l’ancêtre ¦ Từ mẹ đến tổ tiên ¦ Dari ibu ke leluhur
+Degrés montrés (jusqu’à) ¦ Bậc hiển thị (đến) ¦ Derajat ditampilkan (sampai)
+Dessin de la fourchette ¦ Cách vẽ khoảng ¦ Gambar rentang
+Deux éventails ¦ Hai quạt ¦ Dua kipas
+Deviner d’où vient chaque forme (date et ressemblance) ¦ Đoán nguồn gốc mỗi dạng (ngày và độ giống) ¦ Tebak asal setiap bentuk (tanggal dan kemiripan)
+Diagramme de Venn (2 à 8 ensembles) ¦ Biểu đồ Venn (2 đến 8 tập) ¦ Diagram Venn (2 sampai 8 himpunan)
+Diagramme de Venn : {names}. ¦ Biểu đồ Venn: {names}. ¦ Diagram Venn: {names}.
+Double éventail (ascendants : {up}, descendants : {down}). ¦ Quạt đôi (tổ tiên: {up}, hậu duệ: {down}). ¦ Kipas ganda (leluhur: {up}, keturunan: {down}).
+Du père vers l’ancêtre ¦ Từ cha đến tổ tiên ¦ Dari ayah ke leluhur
+Décédé ou inconnu ¦ Đã mất hoặc không rõ ¦ Meninggal atau tidak diketahui
+En accordéon (branches qu’on plie) ¦ Kiểu đàn xếp (nhánh gập được) ¦ Akordeon (cabang yang dilipat)
+En cercles (un cercle par degré) ¦ Theo vòng (mỗi bậc một vòng) ¦ Dalam lingkaran (satu per derajat)
+En vie ou non ¦ Còn sống hay không ¦ Hidup atau tidak
+En {year} (contour) ¦ Năm {year} (viền) ¦ Tahun {year} (garis tepi)
+Ensemble {x} ¦ Tập {x} ¦ Himpunan {x}
+Faire ressortir la famille ¦ Làm nổi bật gia đình ¦ Sorot keluarga
+Formes prises dans ta base : {n}. ¦ Dạng lấy từ cơ sở dữ liệu: {n}. ¦ Bentuk dari basis datamu: {n}.
+Groupe de noms ¦ Nhóm tên ¦ Grup nama
+Générations : {n} côté père, {m} côté mère ¦ Thế hệ: {n} bên cha, {m} bên mẹ ¦ Generasi: {n} dari ayah, {m} dari ibu
+Il faut de 2 à 8 ensembles. ¦ Cần từ 2 đến 8 tập. ¦ Perlu 2 sampai 8 himpunan.
+Image (media/…) ¦ Ảnh (media/…) ¦ Gambar (media/…)
+Initiales du prénom et du nom ¦ Chữ đầu của tên và họ ¦ Inisial nama depan dan belakang
+La branche ¦ Nhánh ¦ Cabang
+La personne étudiée ¦ Người được xem ¦ Orang yang diteliti
+Le calcul n’est pas prêt. ¦ Phép tính chưa sẵn sàng. ¦ Perhitungan belum siap.
+Le chemin entre deux personnes ¦ Đường giữa hai người ¦ Jalur antara dua orang
+Le nom (2 lettres) ¦ Họ (2 chữ cái) ¦ Nama belakang (2 huruf)
+Le plus proche seulement ¦ Chỉ gần nhất ¦ Hanya yang terdekat
+Le prénom (2 lettres) ¦ Tên (2 chữ cái) ¦ Nama depan (2 huruf)
+Le recensement de {place} ¦ Điều tra dân số tại {place} ¦ Sensus {place}
+Les 8, 16 ou 32 ancêtres d’une génération, chacun avec son blason ; un écu vide : armoiries à trouver. ¦ 8, 16 hoặc 32 tổ tiên của một thế hệ, mỗi người kèm huy hiệu; khiên trống: huy hiệu cần tìm. ¦ 8, 16, atau 32 leluhur satu generasi, masing-masing dengan lambangnya; perisai kosong: lambang belum ditemukan.
+Les boucles d’implexe (entre les deux parents) ¦ Vòng trùng tổ tiên (giữa cha và mẹ) ¦ Lingkaran implex (antara kedua orang tua)
+Les boucles d’implexe de {name} ¦ Vòng trùng tổ tiên của {name} ¦ Lingkaran implex {name}
+Les deux parents de cette personne ne sont pas connus. ¦ Chưa biết đủ cả cha lẫn mẹ của người này. ¦ Kedua orang tua orang ini belum diketahui.
+Les ensembles (2 à 8) : A, B, C… H ¦ Các tập (2 đến 8): A, B, C… H ¦ Himpunan (2 sampai 8): A, B, C… H
+Les formes du nom ¦ Các dạng của tên ¦ Bentuk-bentuk nama
+Les formes du nom {name} ¦ Các dạng của tên {name} ¦ Bentuk-bentuk nama {name}
+Les noms du groupe (ou écrits pareil) et leurs variantes notées, avec leurs années et le nombre d’actes. ¦ Các tên trong nhóm (hoặc viết giống) và biến thể đã ghi, kèm năm và số văn bản. ¦ Nama-nama grup (atau ditulis sama) dan varian yang dicatat, dengan tahun dan jumlah akta.
+Les quartiers de {name} ¦ Huy hiệu tổ tiên của {name} ¦ Lambang leluhur {name}
+Les seize quartiers de {name} ¦ Mười sáu huy hiệu tổ tiên của {name} ¦ Enam belas lambang leluhur {name}
+Liens pris dans l’app : {n}. ¦ Liên kết lấy từ ứng dụng: {n}. ¦ Hubungan dari aplikasi: {n}.
+Losange pour les dates exactes ¦ Hình thoi cho ngày chính xác ¦ Belah ketupat untuk tanggal pasti
+Montrer le calcul (½ puissance n) ¦ Hiện phép tính (½ mũ n) ¦ Tampilkan perhitungan (½ pangkat n)
+Montrer l’incertitude des dates ¦ Hiện độ không chắc của ngày ¦ Tampilkan ketidakpastian tanggal
+Naissances et décès (qui vivait en …) ¦ Sinh và mất (ai còn sống năm …) ¦ Kelahiran dan kematian (siapa hidup pada …)
+Nom inconnu ¦ Không rõ tên ¦ Nama tidak diketahui
+Nom sous l’écu ¦ Tên dưới khiên ¦ Nama di bawah perisai
+Nom trop long (80 lettres au plus). ¦ Tên quá dài (tối đa 80 chữ). ¦ Nama terlalu panjang (maksimal 80 huruf).
+Nombre d’actes sous la forme ¦ Số văn bản dưới dạng ¦ Jumlah akta di bawah bentuk
+Noms les plus portés ¦ Tên phổ biến nhất ¦ Nama paling umum
+N° Sosa ¦ Số Sosa ¦ No. Sosa
+N° Sosa (ascendants, éventails) ¦ Số Sosa (tổ tiên, quạt) ¦ No. Sosa (leluhur, kipas)
+Nœud papillon (père à gauche, mère à droite) ¦ Nơ bướm (cha bên trái, mẹ bên phải) ¦ Dasi kupu-kupu (ayah di kiri, ibu di kanan)
+Ordre des combinaisons ¦ Thứ tự tổ hợp ¦ Urutan kombinasi
+Ou un nom ¦ Hoặc một tên ¦ Atau sebuah nama
+Par nombre d’ensembles ¦ Theo số tập ¦ Menurut jumlah himpunan
+Parent (descendants, éventails) ¦ Cha/mẹ (hậu duệ, quạt) ¦ Orang tua (keturunan, kipas)
+Personne cachée ¦ Người bị ẩn ¦ Orang tersembunyi
+Personnes recensées : {n} ¦ Người trong điều tra: {n} ¦ Orang dalam sensus: {n}
+Personnes recensées : {n} en {y1}, {m} en {y2} ¦ Người trong điều tra: {n} năm {y1}, {m} năm {y2} ¦ Orang dalam sensus: {n} tahun {y1}, {m} tahun {y2}
+Personnes recensées prises dans ta base : {n}. ¦ Người trong điều tra lấy từ cơ sở dữ liệu: {n}. ¦ Orang sensus dari basis datamu: {n}.
+Portraits (arbre dessiné, nœud papillon) ¦ Chân dung (cây vẽ, nơ bướm) ¦ Potret (pohon gambar, dasi kupu-kupu)
+Pyramide du recensement de {year} (personnes : {n}). ¦ Tháp điều tra năm {year} (người: {n}). ¦ Piramida sensus {year} (orang: {n}).
+Ressortent : les personnes reliées à une fiche (ou au groupe choisi). ¦ Nổi bật: những người gắn với một hồ sơ (hoặc nhóm đã chọn). ¦ Disorot: orang yang terhubung ke sebuah profil (atau grup pilihan).
+Selon le nombre de descendants ¦ Theo số hậu duệ ¦ Menurut jumlah keturunan
+Selon le tableau ¦ Theo bảng ¦ Menurut tabel
+Ses ancêtres au-dessus (place Sosa), ses descendants au-dessous (sous leur parent) ; le chiffre : l’âge au décès. ¦ Tổ tiên ở trên (vị trí Sosa), hậu duệ ở dưới (dưới cha/mẹ); con số: tuổi khi mất. ¦ Leluhur di atas (posisi Sosa), keturunan di bawah (di bawah orang tuanya); angka: usia saat wafat.
+Ses ancêtres de la génération choisie (ordre Sosa) et les armoiries reliées à chacun (Listes → Armoiries). ¦ Tổ tiên của thế hệ đã chọn (thứ tự Sosa) và huy hiệu gắn với từng người (Danh sách → Huy hiệu). ¦ Leluhur generasi pilihan (urutan Sosa) dan lambang yang terhubung (Daftar → Lambang).
+Seulement l’ancêtre commun le plus proche ¦ Chỉ tổ tiên chung gần nhất ¦ Hanya leluhur bersama terdekat
+Sexe inconnu (pas dans la pyramide) : {n} ¦ Không rõ giới tính (ngoài tháp): {n} ¦ Jenis kelamin tak diketahui (di luar piramida): {n}
+Sosa {n} : ancêtre à trouver ¦ Sosa {n}: tổ tiên cần tìm ¦ Sosa {n}: leluhur yang dicari
+Source, note ¦ Nguồn, ghi chú ¦ Sumber, catatan
+Sources sous la forme ¦ Nguồn dưới dạng ¦ Sumber di bawah bentuk
+Tableau de quartiers (armoiries des ancêtres) ¦ Bảng huy hiệu tổ tiên ¦ Tabel lambang leluhur
+Tableau de quartiers ({n}), armoiries connues : {k}. ¦ Bảng huy hiệu ({n}), huy hiệu đã biết: {k}. ¦ Tabel lambang ({n}), lambang diketahui: {k}.
+Tableau périodique : ancêtres trouvés {found} / {total} ({pct} %). ¦ Bảng tuần hoàn: tổ tiên đã tìm {found} / {total} ({pct} %). ¦ Tabel periodik: leluhur ditemukan {found} / {total} ({pct} %).
+Taux de recherche (%) ¦ Tỉ lệ nghiên cứu (%) ¦ Tingkat penelitian (%)
+Tous les ancêtres répétés ¦ Tất cả tổ tiên lặp lại ¦ Semua leluhur berulang
+Tous les chemins du père et de la mère vers un même ancêtre (filiations biologiques) et le coefficient de consanguinité (méthode de Wright). ¦ Mọi đường từ cha và mẹ tới cùng một tổ tiên (quan hệ huyết thống) và hệ số cận huyết (phương pháp Wright). ¦ Semua jalur ayah dan ibu ke leluhur yang sama (garis biologis) dan koefisien kekerabatan (metode Wright).
+Toute la base (qui vivait en …) ¦ Toàn bộ cơ sở dữ liệu (ai còn sống năm …) ¦ Seluruh basis data (siapa hidup pada …)
+Toute la base (qui vivait l’année choisie) ou un recensement (les âges écrits ce jour-là). ¦ Toàn bộ cơ sở dữ liệu (ai còn sống năm đã chọn) hoặc một cuộc điều tra (tuổi ghi hôm đó). ¦ Seluruh basis data (siapa hidup pada tahun pilihan) atau sensus (umur yang dicatat hari itu).
+Toute la famille, un point par couple ¦ Cả gia đình, mỗi cặp một điểm ¦ Seluruh keluarga, satu titik per pasangan
+Trop de critères. ¦ Quá nhiều tiêu chí. ¦ Terlalu banyak kriteria.
+Trop d’ensembles. ¦ Quá nhiều tập. ¦ Terlalu banyak himpunan.
+Trouvé chez le notaire (successions, inventaires) ¦ Tìm thấy ở công chứng (thừa kế, kiểm kê) ¦ Ditemukan di notaris (warisan, inventaris)
+Trouvé dans les sources militaires (poilus) ¦ Tìm thấy trong nguồn quân sự (lính Thế chiến I) ¦ Ditemukan di sumber militer (tentara Perang Dunia I)
+Trouvé dans un recensement ¦ Tìm thấy trong điều tra dân số ¦ Ditemukan di sensus
+Un chiffre (colonne « Chiffre ») ¦ Một số (cột “Số”) ¦ Angka (kolom “Angka”)
+Un recensement (commune, année) ¦ Một cuộc điều tra (xã, năm) ¦ Sensus (wilayah, tahun)
+Un recensement (âges écrits) ¦ Một cuộc điều tra (tuổi đã ghi) ¦ Sensus (umur tercatat)
+Une par branche ¦ Mỗi nhánh một màu ¦ Satu per cabang
+Une par forme ¦ Mỗi dạng một màu ¦ Satu per bentuk
+Une seule source : couleur de l’ensemble ¦ Một nguồn duy nhất: màu của tập ¦ Satu sumber: warna himpunan
+Une source précise ¦ Một nguồn cụ thể ¦ Sumber tertentu
+Vérifie le groupe de personnes. ¦ Kiểm tra nhóm người. ¦ Periksa grup orang.
+actes : {n} ¦ văn bản: {n} ¦ akta: {n}
+vient de {name} ¦ bắt nguồn từ {name} ¦ berasal dari {name}
+{label} (famille) : {n} ¦ {label} (gia đình): {n} ¦ {label} (keluarga): {n}
+{names} (seulement) : {n} ¦ {names} (chỉ): {n} ¦ {names} (saja): {n}
+{name} : armoiries pas encore trouvées ¦ {name}: chưa tìm thấy huy hiệu ¦ {name}: lambang belum ditemukan
+{name} : {n} en tout ¦ {name}: tổng {n} ¦ {name}: total {n}
+{place}, {year} ¦ {place}, {year} ¦ {place}, {year}
+« vers » : plus ou moins ¦ “khoảng”: cộng trừ ¦ “sekitar”: plus minus
+Âge (recensement) ¦ Tuổi (điều tra) ¦ Umur (sensus)
+Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Ghi loại liên kết trên đường (tên con…) ¦ Tulis jenis hubungan di garis (nama anak…)
+Écrits s’il y a la place ¦ Ghi ra nếu đủ chỗ ¦ Ditulis jika ada tempat
+Écu vide ¦ Khiên trống ¦ Perisai kosong
+Épaisseur selon le nombre d’actes ¦ Độ dày theo số văn bản ¦ Ketebalan menurut jumlah akta
+— Aucun (le nom écrit à côté) — ¦ — Không (tên gõ bên cạnh) — ¦ — Tidak ada (nama yang diketik di samping) —
+— Rien — ¦ — Không — ¦ — Tidak ada —
+🌿 Les formes d’un nom de ma base ¦ 🌿 Các dạng của một tên trong cơ sở dữ liệu ¦ 🌿 Bentuk nama di basis dataku
+🔁 Entre les deux parents de… ¦ 🔁 Giữa cha và mẹ của… ¦ 🔁 Antara kedua orang tua…
+🔺 Les personnes de ma base ¦ 🔺 Những người trong cơ sở dữ liệu ¦ 🔺 Orang-orang di basis dataku
+🛡 Les quartiers d’une personne de ma base ¦ 🛡 Huy hiệu tổ tiên của một người trong cơ sở dữ liệu ¦ 🛡 Lambang leluhur seseorang di basis dataku
+Choisis de 2 à 8 ensembles : chaque zone compte les personnes de ces ensembles-là seulement. Dès 5 ensembles : barres croisées. ¦ Chọn 2 đến 8 tập: mỗi vùng chỉ đếm người thuộc đúng các tập đó. Từ 5 tập: thanh giao nhau. ¦ Pilih 2 sampai 8 himpunan: tiap zona hanya menghitung orang di himpunan itu. Mulai 5: batang silang.
+Les témoins, parrains et marraines des actes ; ou toute la famille, un point par couple, reliés par leurs enfants. ¦ Nhân chứng và người đỡ đầu trong văn bản; hoặc cả gia đình, mỗi cặp một điểm, nối bằng con cái. ¦ Saksi dan wali baptis di akta; atau seluruh keluarga, satu titik per pasangan, terhubung lewat anak-anaknya.
+Nom de l’enfant sur le trait ¦ Tên con trên đường ¦ Nama anak di garis
+Par nom de famille ¦ Theo họ ¦ Menurut nama keluarga
+Par siècle (du mariage) ¦ Theo thế kỷ (kết hôn) ¦ Menurut abad (pernikahan)
+Un point par couple ¦ Mỗi cặp một điểm ¦ Satu titik per pasangan
+Un point par personne ¦ Mỗi người một điểm ¦ Satu titik per orang
+🕸 Les liens de ma base ¦ 🕸 Các liên kết trong cơ sở dữ liệu ¦ 🕸 Hubungan di basis dataku
+Quartiers ¦ Huy hiệu tổ tiên ¦ Lambang leluhur

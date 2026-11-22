@@ -113,6 +113,43 @@ function export_full_backup(PDO $pdo, string $password = ''): never
     exit;
 }
 
+/**
+ * 🔐 Copie protégée d'une base (sans les médias) : un .zip au même format que la sauvegarde complète protégée (AES-256,
+ * seul le LISEZ-MOI en clair), qui se rouvre par « Importer un fichier » avec le mot de passe. Pour une généalogie verrouillée,
+ * c'est la seule copie qui quitte son dossier (lib/sauvegarde_auto.php : sa_protected_copy).
+ */
+function backup_protected_db_zip(string $dbPath, string $dest, string $password): void
+{
+    if ($password === '' || !defined('ZipArchive::EM_AES_256')) { throw new RuntimeException('Le chiffrement des sauvegardes n’est pas disponible sur cet ordinateur.'); }
+    $tmpDir = sys_get_temp_dir() . '/lcnda-protegee-' . bin2hex(random_bytes(6));
+    if (!@mkdir($tmpDir, 0700, true) && !is_dir($tmpDir)) { throw new RuntimeException('Impossible de créer le dossier temporaire de la sauvegarde.'); }
+    $copy = $tmpDir . '/genealogie.db';
+    $part = $dest . '.part';
+    try {
+        $src = new PDO('sqlite:' . $dbPath, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+        $src->exec('PRAGMA busy_timeout = 30000');
+        $src->exec('VACUUM main INTO ' . $src->quote($copy));
+        $version = (int) $src->query('PRAGMA user_version')->fetchColumn();
+        $src = null;
+        $zip = new ZipArchive();
+        if ($zip->open($part, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) { throw new RuntimeException('Impossible de créer l’archive.'); }
+        $zip->addFromString(BACKUP_MARKER, json_encode(['application' => 'LCNDA — Carnet numérique des ancêtres', 'created_at' => date(DATE_ATOM), 'schema_version' => $version, 'protected' => true, 'media_files' => 0], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        $zip->addFromString('LISEZ-MOI.txt', "Copie protégée d'une généalogie du Carnet numérique des ancêtres (LCNDA), sans les photos.\n\n"
+            . "Elle est chiffrée (AES-256) avec le mot de passe de cette généalogie. Pour la rouvrir : écran de démarrage de LCNDA, « Importer un fichier ».\n");
+        $zip->addFile($copy, 'genealogie.db');
+        for ($i = 0; $i < $zip->numFiles; $i++) {
+            if ((string) $zip->getNameIndex($i) === 'LISEZ-MOI.txt') { continue; }
+            if (!$zip->setEncryptionIndex($i, ZipArchive::EM_AES_256, $password)) { throw new RuntimeException('Chiffrement impossible.'); }
+        }
+        if (!$zip->close()) { throw new RuntimeException('Écriture de l’archive impossible.'); }
+        if (!@rename($part, $dest)) { throw new RuntimeException('Impossible de nommer la copie.'); }
+    } finally {
+        if (is_file($copy)) { @unlink($copy); }
+        if (is_file($part)) { @unlink($part); }
+        @rmdir($tmpDir);
+    }
+}
+
 /** Vrai si le fichier envoyé doit être ouvert comme base (et non importé dans la base actuelle). */
 function is_restore_upload(array $file): bool
 {
@@ -273,6 +310,18 @@ function restore_package_upload(array $file): never
             throw new RuntimeException('Impossible d’enregistrer le fichier reçu.');
         }
         $valid = validate_restore_database($incoming);
+        // 🔐 une base protégée par un mot de passe (ligne app_lock) d'une AUTRE protection que celle d'ici : ouverte seulement si
+        // la personne connaît ce mot de passe (celui d'une sauvegarde protégée l'est d'office). lib/verrou.php
+        if (function_exists('glock_db_row') && ($lockRow = glock_db_row($incoming))) {
+            $here = glock_info();
+            if (empty($here['locked']) || !hash_equals((string) $here['lock_id'], $lockRow['lock_id'])) {
+                $given = (string) ($file['password'] ?? ($_POST['password'] ?? ''));
+                if ($given === '' || !glock_verify($given, $lockRow['hash'])) {
+                    @unlink($incoming);
+                    json_response(['error' => 'Cette base est protégée par un mot de passe : donne-le pour l’ouvrir.', 'password_required' => true, 'wrong_password' => $given !== '', 'glock_base' => true], 401);
+                }
+            }
+        }
         $stats['persons'] = $valid['persons'];
 
         // Médias de la sauvegarde → MEDIA_DIR (jamais d'écrasement d'un fichier déjà présent)
@@ -303,7 +352,11 @@ function restore_package_upload(array $file): never
         foreach ([DB_PATH, DB_PATH . '-wal', DB_PATH . '-shm', DB_PATH . '-journal'] as $old) {
             if (is_file($old) && !unlink($old)) { throw new RuntimeException('Impossible de remplacer la base vide.'); }
         }
+        $glockBefore = function_exists('glock_info') ? glock_info() : ['locked' => false]; // 🔐 la généalogie d'ici est protégée : elle le reste
         if (!rename($incoming, DB_PATH)) { throw new RuntimeException('Impossible de mettre la base en place.'); }
+        if (!empty($glockBefore['locked']) && function_exists('glock_keep_after_restore')) {
+            $kp = new PDO('sqlite:' . DB_PATH, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); glock_keep_after_restore($kp, $glockBefore); $kp = null;
+        }
     } catch (Throwable $e) {
         if (is_file($incoming)) { @unlink($incoming); }
         foreach ($written as $path) { if (is_file($path)) { @unlink($path); } } // pas de médias orphelins si l'ouverture échoue
@@ -334,6 +387,8 @@ function local_import_file(array $payload): array
     if ($real === false || !is_readable($real)) {
         json_response(['error' => 'Fichier introuvable ou illisible.'], 422);
     }
+    // 🔐 jamais une base, un média ou une copie rangés dans les dossiers de l'app (une autre généalogie, peut-être protégée)
+    if (function_exists('glock_forbidden_dir') && glock_forbidden_dir($real)) { json_response(['error' => 'Ce fichier est rangé dans les dossiers de l’app : choisis un fichier ailleurs.'], 422); }
     $name = basename($real);
     $ext = strtolower(pathinfo($name, PATHINFO_EXTENSION));
     if (is_dir($real)) {

@@ -1,0 +1,71 @@
+fr ¦ sk ¦ nb
+# 🔎 Poser une question, suite (lib/question_plus.php, assets/js/heritage-questions-plus.js) : fautes, dates, « moi », négations, OU, renvois, ⌘K
+« {a} » lu « {b} » ¦ „{a}“ prečítané ako „{b}“ ¦ «{a}» lest som «{b}»
+vers {y} ({a}-{b}) ¦ okolo roku {y} ({a}-{b}) ¦ rundt {y} ({a}-{b})
+dans les années {y} ({a}-{b}) ¦ v rokoch {y} ({a}-{b}) ¦ på {y}-tallet ({a}-{b})
+« moi » = la personne de départ : {name} ¦ „ja“ = východisková osoba: {name} ¦ «meg» = startpersonen: {name}
+qui est : {name} ¦ kto je: {name} ¦ hvem er: {name}
+« {a} » compris comme {b} ¦ „{a}“ pochopené ako {b} ¦ «{a}» forstått som {b}
+dossiers de succession ¦ dedičské spisy ¦ arvesaker
+Aucun dossier de succession dans cette généalogie. ¦ V tejto genealógii nie je žiadny dedičský spis. ¦ Ingen arvesak i denne slektsforskningen.
+courriers sans réponse ¦ listy bez odpovede ¦ brev uten svar
+Courriers aux héritiers sans réponse : {n}. ¦ Listy dedičom bez odpovede: {n}. ¦ Brev til arvinger uten svar: {n}.
+Aucun courrier de dossier n’attend de réponse. ¦ Žiadny list zo spisu nečaká na odpoveď. ¦ Ingen brev i sakene venter på svar.
+échéances en retard ¦ zmeškané lehoty ¦ forsinkede frister
+Dossiers avec des échéances en retard : {n}. ¦ Spisy so zmeškanými lehotami: {n}. ¦ Saker med forsinkede frister: {n}.
+Aucun dossier n’a d’échéance en retard. ¦ Žiadny spis nemá zmeškanú lehotu. ¦ Ingen sak har en forsinket frist.
+défunt : {name} ¦ zosnulý: {name} ¦ avdøde: {name}
+Aucun dossier de succession pour {name}. ¦ Pre {name} nie je žiadny dedičský spis. ¦ Ingen arvesak for {name}.
+⚖️ Rechercher les héritiers… ¦ ⚖️ Hľadať dedičov… ¦ ⚖️ Søk etter arvingene…
+Pièces notées « manquante » : {n}. La liste complète (en main, demandées, à demander) est dans l’onglet Pièces du dossier. ¦ Doklady označené „chýba“: {n}. Úplný zoznam (v ruke, vyžiadané, na vyžiadanie) je na karte Doklady v spise. ¦ Dokumenter merket «mangler»: {n}. Hele listen (i hånden, bestilt, skal bestilles) står under fanen Dokumenter i saken.
+Aucune pièce notée « manquante ». La liste des pièces de chaque dossier est dans son onglet Pièces. ¦ Žiadny doklad nie je označený „chýba“. Zoznam každého spisu je na jeho karte Doklady. ¦ Ingen dokumenter er merket «mangler». Hver sak har listen under fanen Dokumenter.
+pièces manquantes ¦ chýbajúce doklady ¦ manglende dokumenter
+Héritiers introuvables ou qui ne répondent pas : {n}. ¦ Nedohľadateľní alebo neodpovedajúci dedičia: {n}. ¦ Arvinger som ikke finnes eller ikke svarer: {n}.
+Aucun héritier noté introuvable ou sans réponse. ¦ Žiadny dedič nie je označený ako nedohľadateľný alebo bez odpovede. ¦ Ingen arving er merket som ikke funnet eller uten svar.
+héritiers introuvables ¦ nedohľadateľní dedičia ¦ arvinger som ikke finnes
+De qui ? Écris par exemple « les héritiers de Jean Dupont ». ¦ Koho? Napíš napríklad „les héritiers de Jean Dupont“. ¦ Hvem sine? Skriv for eksempel «les héritiers de Jean Dupont».
+héritiers de {name} ¦ dedičia: {name} ¦ arvinger etter {name}
+Aucun dossier de succession pour {name}. Le dossier calcule les héritiers d’après l’arbre. ¦ Pre {name} nie je žiadny dedičský spis. Spis vypočíta dedičov podľa stromu. ¦ Ingen arvesak for {name}. Saken beregner arvingene ut fra treet.
+Dossier {d} : les héritiers n’ont pas encore été calculés. Ouvre le dossier pour faire le calcul. ¦ Spis {d}: dedičia ešte neboli vypočítaní. Otvor spis a urob výpočet. ¦ Sak {d}: arvingene er ikke beregnet ennå. Åpne saken for å beregne.
+Dossier {d} — héritiers d’après le dernier calcul enregistré : {n}. ¦ Spis {d} — dedičia podľa posledného uloženého výpočtu: {n}. ¦ Sak {d} — arvinger etter siste lagrede beregning: {n}.
+Branches encore à rechercher : {n}. ¦ Vetvy, ktoré treba ešte dohľadať: {n}. ¦ Greiner som fortsatt må undersøkes: {n}.
+Actes ou documents à chercher pour {name} : {n}. Les 3 premiers ci-dessous ; la liste complète, avec où chercher et dans quelle série, est dans « Que manque-t-il ? ». ¦ Záznamy alebo dokumenty na dohľadanie pre {name}: {n}. Prvé 3 nižšie; úplný zoznam s tým, kde a v akej sérii hľadať, je v „Čo chýba?“. ¦ Akter eller dokumenter å lete etter for {name}: {n}. De 3 første nedenfor; hele listen, med hvor og i hvilken serie man leter, står i «Hva mangler?».
+Rien de connu à chercher pour {name}. ¦ Pre {name} nie je nič známe na dohľadanie. ¦ Ingenting kjent å lete etter for {name}.
+actes à chercher ¦ záznamy na dohľadanie ¦ akter å lete etter
+où chercher ¦ kde hľadať ¦ hvor man leter
+« Où chercher ? » donne pour {name} les sites et les séries d’archives les plus utiles, et pourquoi. ¦ „Kde hľadať?“ ukáže pre {name} najužitočnejšie weby a archívne série a prečo. ¦ «Hvor skal jeg lete?» viser for {name} de mest nyttige nettstedene og arkivseriene, og hvorfor.
+« Où chercher ? » donne pour chaque personne les sites et les séries d’archives les plus utiles, et pourquoi. ¦ „Kde hľadať?“ ukáže pre každú osobu najužitočnejšie weby a archívne série a prečo. ¦ «Hvor skal jeg lete?» viser for hver person de mest nyttige nettstedene og arkivseriene, og hvorfor.
+doublons ¦ duplicity ¦ duplikater
+Le Contrôle de la base cherche les doublons probables (mêmes noms, mêmes dates, mêmes parents) et aide à les fusionner. ¦ Kontrola databázy hľadá pravdepodobné duplicity (rovnaké mená, dátumy, rodičia) a pomáha ich zlúčiť. ¦ Databasekontrollen leter etter sannsynlige duplikater (samme navn, datoer, foreldre) og hjelper deg å slå dem sammen.
+mort pendant la guerre, en âge de combattre ¦ zomrel počas vojny, v brannom veku ¦ døde under krigen, i stridsdyktig alder
+mort pendant la guerre ¦ zomrel počas vojny ¦ døde under krigen
+morts pendant {era} ¦ zomrelí počas: {era} ¦ døde under {era}
+morts à la guerre ¦ padlí vo vojne ¦ falne i krig
+Morts pendant {era} : {n}. ¦ Zomrelí počas: {era}: {n}. ¦ Døde under {era}: {n}.
+Notés « Mort pour la France » : {n}. Morts pendant une guerre, en âge de combattre ou soldats (à vérifier) : {m}. ¦ Označení „Mort pour la France“: {n}. Zomrelí počas vojny, v brannom veku alebo vojaci (overiť): {m}. ¦ Merket «Mort pour la France»: {n}. Døde under en krig, i stridsdyktig alder eller soldater (må sjekkes): {m}.
+Dont « Mort pour la France » : {n}. ¦ Z toho „Mort pour la France“: {n}. ¦ Herav «Mort pour la France»: {n}.
+Pour les soldats : Mémoire des hommes et les registres matricules. ¦ Pre vojakov: Mémoire des hommes a kmeňové listy. ¦ For soldater: Mémoire des hommes og rullene.
+sans date de décès ¦ bez dátumu úmrtia ¦ uten dødsdato
+sans date de naissance ¦ bez dátumu narodenia ¦ uten fødselsdato
+sans date de mariage ¦ bez dátumu sobáša ¦ uten vigselsdato
+sans parents connus ¦ bez známych rodičov ¦ uten kjente foreldre
+sans profession notée ¦ bez zapísaného povolania ¦ uten notert yrke
+qui ne sont pas des ancêtres ¦ ktorí nie sú predkami ¦ som ikke er aner
+pas {ev} à {place} ¦ nie „{ev}“ v {place} ¦ ikke «{ev}» i {place}
+vivants ou probablement vivants ¦ žijúci alebo pravdepodobne žijúci ¦ levende eller trolig levende
+pas à {place} ¦ nie v {place} ¦ ikke i {place}
+recherche de nom : « {x} » ¦ hľadanie mena: „{x}“ ¦ navnesøk: «{x}»
+orthographe proche ¦ podobný pravopis ¦ lignende stavemåte
+femmes ¦ ženy ¦ kvinner
+Réponse réunie : {a} {c} {b}. ¦ Spojená odpoveď: {a} {c} {b}. ¦ Samlet svar: {a} {c} {b}.
+Je n’ai pas tenu compte de : « {x} ». ¦ Nezohľadnil som: „{x}“. ¦ Jeg tok ikke hensyn til: «{x}».
+Plusieurs “{w}” : choisir… ¦ Viac „{w}“: vybrať… ¦ Flere «{w}»: velg…
+J’ai compris : {x} ¦ Pochopil som: {x} ¦ Jeg forsto: {x}
+Question en français ¦ Otázka vo francúzštine ¦ Spørsmål på fransk
+Poser la question : « {q} » ¦ Položiť otázku: „{q}“ ¦ Still spørsmålet: «{q}»
+Questions dans la recherche rapide (⌘K) ¦ Otázky v rýchlom hľadaní (⌘K) ¦ Spørsmål i hurtigsøket (⌘K)
+Répondre aux questions dans la recherche rapide ¦ Odpovedať na otázky v rýchlom hľadaní ¦ Svar på spørsmål i hurtigsøket
+« les enfants de Pierre Mazaud » : la réponse courte s’affiche dans la liste ; sinon seulement « Poser la question » ¦ „les enfants de Pierre Mazaud“: krátka odpoveď sa zobrazí v zozname; inak len „Položiť otázku“ ¦ «les enfants de Pierre Mazaud»: det korte svaret vises i listen; ellers bare «Still spørsmålet»
+Pour aller plus loin, pose la question avec le nom de la personne voulue. ¦ Ak chceš pokračovať, polož otázku s menom danej osoby. ¦ For å komme videre, still spørsmålet med navnet på personen du mener.
+« {a} » cherché d’abord ¦ „{a}“ hľadané najskôr ¦ «{a}» søkt først
+« {a} » = {name} ¦ „{a}“ = {name} ¦ «{a}» = {name}

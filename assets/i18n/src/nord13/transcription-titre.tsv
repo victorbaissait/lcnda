@@ -1,0 +1,24 @@
+fr ¦ el ¦ bg
+À préciser ¦ Προς διευκρίνιση ¦ За уточняване
+Lecture approfondie (IA sur cet ordinateur) ¦ Εις βάθος ανάγνωση (ΤΝ σε αυτόν τον υπολογιστή) ¦ Задълбочено четене (ИИ на този компютър)
+En plus du moteur ci-dessus : un modèle « vision » ouvert (Qwen3-VL, licence Apache 2.0) qui lit toute la page, servi par Ollama sur cet ordinateur. Facultatif. Rien ne part sur Internet, sauf le téléchargement du modèle (3 à 6 Go, une seule fois). ¦ Επιπλέον της μηχανής παραπάνω: ένα ανοιχτό μοντέλο «όρασης» (Qwen3-VL, άδεια Apache 2.0) που διαβάζει όλη τη σελίδα, μέσω του Ollama σε αυτόν τον υπολογιστή. Προαιρετικό. Τίποτα δεν πηγαίνει στο Διαδίκτυο, εκτός από τη λήψη του μοντέλου (3 έως 6 GB, μία φορά). ¦ Освен двигателя по-горе: отворен „зрителен“ модел (Qwen3-VL, лиценз Apache 2.0), който чете цялата страница, работи чрез Ollama на този компютър. По желание. Нищо не отива в интернет освен изтеглянето на модела (3 до 6 GB, веднъж).
+Ensuite, dans l’atelier de transcription : « 🔍 Essayer aussi la lecture approfondie » montre les deux lectures côte à côte, et tu gardes la meilleure. ¦ Έπειτα, στο εργαστήριο μεταγραφής: το «🔍 Δοκίμασε και την εις βάθος ανάγνωση» δείχνει τις δύο αναγνώσεις δίπλα δίπλα και κρατάς την καλύτερη. ¦ След това в работилницата за преписи: „🔍 Опитай и задълбоченото четене“ показва двете четения едно до друго и ти запазваш по-доброто.
+Installer ou vérifier la lecture approfondie… ¦ Εγκατάσταση ή έλεγχος της εις βάθος ανάγνωσης… ¦ Инсталирай или провери задълбоченото четене…
+La lecture approfondie n’est pas encore chargée : réessaie dans un instant. ¦ Η εις βάθος ανάγνωση δεν έχει φορτωθεί ακόμα: δοκίμασε ξανά σε λίγο. ¦ Задълбоченото четене още не е заредено: опитай отново след малко.
+Pour lire un acte : ouvre son image dans l’atelier de transcription (« 📜 Atelier »), puis « ✨ Lire l’acte ». ¦ Για να διαβάσεις μια πράξη: άνοιξε την εικόνα της στο εργαστήριο μεταγραφής («📜 Εργαστήριο»), μετά «✨ Ανάγνωση της πράξης». ¦ За да прочетеш акт: отвори изображението му в работилницата за преписи („📜 Работилница“), после „✨ Прочети акта“.
+Transcrire ¦ Μεταγραφή ¦ Препиши
+Ouvrir l’outil de transcription complet sur cette image ¦ Άνοιγμα του πλήρους εργαλείου μεταγραφής σε αυτήν την εικόνα ¦ Отвори пълния инструмент за преписи за това изображение
+Le modèle a réfléchi sans écrire de transcription. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Το μοντέλο σκέφτηκε χωρίς να γράψει μεταγραφή. Περίκοψε μια μικρότερη περιοχή (λίγες γραμμές) ή δοκίμασε το μοντέλο 8B και ξεκίνα ξανά. ¦ Моделът разсъждаваше, без да напише препис. Изрежи по-малка област (няколко реда) или опитай модела 8B, после пусни отново.
+Le modèle n’a rien lu sur cette image. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Το μοντέλο δεν διάβασε τίποτα σε αυτήν την εικόνα. Περίκοψε μια μικρότερη περιοχή (λίγες γραμμές) ή δοκίμασε το μοντέλο 8B και ξεκίνα ξανά. ¦ Моделът не прочете нищо на това изображение. Изрежи по-малка област (няколко реда) или опитай модела 8B, после пусни отново.
+La lecture a été arrêtée. ¦ Η ανάγνωση σταμάτησε. ¦ Четенето беше спряно.
+Modèle : {m} · {n} s ¦ Μοντέλο: {m} · {n} δ ¦ Модел: {m} · {n} с
+Ce document n’a pas d’image : l’Atelier de transcription a besoin d’une image. ¦ Αυτό το έγγραφο δεν έχει εικόνα: το Εργαστήριο μεταγραφής χρειάζεται εικόνα. ¦ Този документ няма изображение: Работилница за преписи се нуждае от изображение.
+L’Atelier de transcription n’est pas encore chargé : réessaie dans un instant. ¦ Το Εργαστήριο μεταγραφής δεν έχει φορτωθεί ακόμα: δοκίμασε ξανά σε λίγο. ¦ Работилница за преписи още не е заредена: опитай отново след малко.
+L’Atelier de transcription n’a pas pu s’ouvrir : {x} ¦ Το Εργαστήριο μεταγραφής δεν άνοιξε: {x} ¦ Работилница за преписи не можа да се отвори: {x}
+Lecture approfondie (IA) ¦ Εις βάθος ανάγνωση (ΤΝ) ¦ Задълбочено четене (ИИ)
+Impossible de suivre la lecture : {x} ¦ Δεν είναι δυνατή η παρακολούθηση της ανάγνωσης: {x} ¦ Четенето не може да се проследи: {x}
+Le programme de lecture n’a pas démarré. ¦ Το πρόγραμμα ανάγνωσης δεν ξεκίνησε. ¦ Програмата за четене не стартира.
+Acte de notoriété ¦ Πράξη συμβολαιογραφικής βεβαίωσης ¦ Акт за известност
+Cadres ¦ Πλαίσια ¦ Рамки
+Opacité des cadres de couleur (0 = presque invisibles) ¦ Αδιαφάνεια των χρωματιστών πλαισίων (0 = σχεδόν αόρατα) ¦ Плътност на цветните рамки (0 = почти невидими)
+Ce document n’a pas pu être relu : réessaie dans un instant. ¦ Δεν ήταν δυνατή η επαναφόρτωση αυτού του εγγράφου: δοκίμασε ξανά σε λίγο. ¦ Този документ не можа да се прочете отново: опитай след малко.

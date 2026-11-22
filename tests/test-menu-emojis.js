@@ -58,7 +58,13 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(tmp) });
         const nav = key => p.evaluate(k => { const b = document.querySelector(`.main-nav .nav-item[data-module="${k}"]:not(.nav-custom-tab)`) || document.querySelector(`.main-nav .nav-custom-tab[data-board="${k}"]`); return b ? b.textContent.replace(/^\d+/, '') : null; }, key);
         const stored = () => p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-menu-icons') || '{}'));
         // K2 : la liste s'enregistre toute seule quand on quitte la case (le bouton « Enregistrer » est caché)
-        const leave = async sel => { assert.equal(await p.isVisible('[data-order-save="menu-order"]'), false, 'K2 : plus de bouton « Enregistrer »'); await p.press(sel, 'Tab'); await p.waitForTimeout(500);
+        // l'enregistrement redessine la page après un aller-retour au serveur (lent sur une machine chargée) : on attend la page redessinée
+        // avant la case suivante — sinon Playwright remplit une case qui disparaît au milieu de son « fill » (un vrai clavier, lui, suit la case : app-editeurs.js)
+        const leave = async sel => { assert.equal(await p.isVisible('[data-order-save="menu-order"]'), false, 'K2 : plus de bouton « Enregistrer »');
+            await p.$eval(sel, e => { e.__essaiAvant = true; });
+            await p.press(sel, 'Tab');
+            await p.waitForFunction(s => !document.querySelector(s)?.__essaiAvant, sel, { timeout: 4000 }).catch(() => {}); // (pas de nouvelle page si rien n'a changé)
+            await p.waitForTimeout(300);
             // la page redessinée garde le curseur dans la case suivante (sinon ce qu'on tape après Tab part dans le vide)
             assert.ok(await p.evaluate(() => document.activeElement !== document.body && !!document.getElementById('workspace')?.contains(document.activeElement)), 'le curseur reste dans la page après l’enregistrement'); };
         await p.goto(base, { waitUntil: 'domcontentloaded' }); await ready();

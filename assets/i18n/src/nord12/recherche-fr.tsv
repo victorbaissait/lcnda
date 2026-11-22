@@ -1,0 +1,53 @@
+fr ¦ ru ¦ uk
+# 🔎 Recherche « à la française » (lib/recherche_fr.php, assets/js/app-recherche-fr.js, Réglages → 🔎 Recherche)
+nom exact ¦ точное имя ¦ точне ім’я
+nom de mariage ({x}) ¦ фамилия в браке ({x}) ¦ прізвище у шлюбі ({x})
+autre nom noté ({x}) ¦ другое записанное имя ({x}) ¦ інше записане ім’я ({x})
+particule ignorée ({x}) ¦ частица пропущена ({x}) ¦ частку пропущено ({x})
+forme latine d’{p} ({x}) ¦ латинская форма имени {p} ({x}) ¦ латинська форма імені {p} ({x})
+forme latine de {p} ({x}) ¦ латинская форма имени {p} ({x}) ¦ латинська форма імені {p} ({x})
+abréviation d’{p} ({x}) ¦ сокращение имени {p} ({x}) ¦ скорочення імені {p} ({x})
+abréviation de {p} ({x}) ¦ сокращение имени {p} ({x}) ¦ скорочення імені {p} ({x})
+diminutif d’{p} ({x}) ¦ уменьшительное от {p} ({x}) ¦ пестлива форма імені {p} ({x})
+diminutif de {p} ({x}) ¦ уменьшительное от {p} ({x}) ¦ пестлива форма імені {p} ({x})
+prénom composé ({p}) ¦ составное имя ({p}) ¦ складене ім’я ({p})
+phonétique (proche de {x}) ¦ по звучанию (похоже на {x}) ¦ за звучанням (схоже на {x})
+lieu ({x}) ¦ место ({x}) ¦ місце ({x})
+Saint, Sainte ou article écrits autrement ({x}) ¦ Saint, Sainte или артикль написаны иначе ({x}) ¦ Saint, Sainte або артикль написані інакше ({x})
+ancien nom ({x}) ¦ прежнее название ({x}) ¦ колишня назва ({x})
+commune fusionnée ({x} → {y}) ¦ объединённая коммуна ({x} → {y}) ¦ об’єднана комуна ({x} → {y})
+date « {d} » ({ev} {y}) ¦ дата «{d}» ({ev} {y}) ¦ дата «{d}» ({ev} {y})
+date « {d} » ¦ дата «{d}» ¦ дата «{d}»
+sépulture ¦ погребение ¦ поховання
+un événement ¦ событие ¦ подія
+Trouvé par : {x} ¦ Найдено по: {x} ¦ Знайдено за: {x}
+Aucun « {q} » ; {n} proches : {names} ¦ Нет «{q}»; {n} похожих: {names} ¦ Немає «{q}»; {n} схожих: {names}
+Montre aussi les noms qui se prononcent pareil, même quand le nom exact existe. ¦ Показывает и имена, которые звучат одинаково, даже если есть точное имя. ¦ Показує й імена, що звучать однаково, навіть коли є точне ім’я.
+Toujours phonétique ¦ Всегда по звучанию ¦ Завжди за звучанням
+forme française ¦ французская форма ¦ французька форма
+forme latine ¦ латинская форма ¦ латинська форма
+abréviation ¦ сокращение ¦ скорочення
+diminutif ¦ уменьшительное ¦ пестлива форма
+prénom composé ¦ составное имя ¦ складене ім’я
+prénom de référence : {p} ({k}) ¦ исходное имя: {p} ({k}) ¦ основне ім’я: {p} ({k})
+nom avec particule : {a} = {b} ¦ фамилия с частицей: {a} = {b} ¦ прізвище з часткою: {a} = {b}
+son : {s} ¦ звучание: {s} ¦ звучання: {s}
+à partir de {y} ¦ с {y} ¦ з {y}
+jusqu’à {y} ¦ до {y} ¦ до {y}
+Rien de reconnu. ¦ Ничего не распознано. ¦ Нічого не розпізнано.
+Réglages · Recherche ¦ Настройки · Поиск ¦ Налаштування · Пошук
+La même recherche partout. Sous chaque résultat : pourquoi il a été trouvé. ¦ Один и тот же поиск везде. Под каждым результатом: почему он найден. ¦ Той самий пошук скрізь. Під кожним результатом: чому його знайдено.
+Ce que la recherche essaie ¦ Что пробует поиск ¦ Що пробує пошук
+Phonétique automatique ¦ Автоматический поиск по звучанию ¦ Автоматичний пошук за звучанням
+quand rien n’est trouvé, les noms qui se prononcent pareil ¦ если ничего не найдено, имена, которые звучат одинаково ¦ якщо нічого не знайдено, імена, що звучать однаково
+Formes latines des prénoms ¦ Латинские формы имён ¦ Латинські форми імен
+Petrus = Pierre, Joannes = Jean, avec leurs fins (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, с их окончаниями (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, з їхніми закінченнями (-i, -o, -um, -ae)
+Abréviations et diminutifs des prénoms ¦ Сокращения и уменьшительные формы имён ¦ Скорочення й пестливі форми імен
+Marge de « vers » (en années) ¦ Запас для «около» (в годах) ¦ Запас для «близько» (у роках)
+Toujours : accents, majuscules, particules (d’Albert = Dalbert), St = Saint, communes fusionnées, dates en français et calendrier républicain. ¦ Всегда: диакритика, заглавные буквы, частицы (d’Albert = Dalbert), St = Saint, объединённые коммуны, даты по-французски и республиканский календарь. ¦ Завжди: діакритика, великі літери, частки (d’Albert = Dalbert), St = Saint, об’єднані комуни, дати французькою та республіканський календар.
+Écris une recherche : l’app montre ce qu’elle comprend, sans rien chercher. ¦ Напиши запрос: приложение покажет, что оно поняло, ничего не ища. ¦ Напиши запит: застосунок покаже, що він зрозумів, нічого не шукаючи.
+ex. {x} ¦ напр. {x} ¦ напр. {x}
+Essayer une recherche ¦ Попробовать поиск ¦ Спробувати пошук
+🔎 Recherche ¦ 🔎 Поиск ¦ 🔎 Пошук
+nom proche à l’oreille ({a} / {b}) ¦ фамилия, похожая по звучанию ({a} / {b}) ¦ прізвище, схоже за звучанням ({a} / {b})
+même prénom, écrit autrement ({a} / {b}) ¦ то же имя, написанное иначе ({a} / {b}) ¦ те саме ім’я, написане інакше ({a} / {b})

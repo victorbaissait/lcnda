@@ -1690,3 +1690,6 @@ Notaires ¦ Javni bilježnici ¦ Notarji
 {name} : {a} sur {n} enfants morts avant 1 an ({p} %) ¦ {name}: {a} od {n} djece umrlo prije 1. godine ({p} %) ¦ {name}: {a} od {n} otrok umrlo pred 1. letom ({p} %)
 {name} : {a} sur {n} morts avant 5 ans ({p} %) ¦ {name}: {a} od {n} umrlo prije 5. godine ({p} %) ¦ {name}: {a} od {n} umrlo pred 5. letom ({p} %)
 parrains : {a} sur {b} · marraines : {c} sur {d} ¦ kumovi: {a} od {b} · kume: {c} od {d} ¦ botri: {a} od {b} · botre: {c} od {d}
+Toute ma base ¦ Cijela moja baza ¦ Vsa moja baza
+Mes descendants ¦ Moji potomci ¦ Moji potomci
+Depuis 1900 ¦ Od 1900. ¦ Od leta 1900

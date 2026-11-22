@@ -1,0 +1,17 @@
+fr ¦ is
+# ▤ La lecture approfondie, ligne par ligne : relier les lignes du texte à l’image (app-lignes-alignement.js, heritage-transcribe.js)
+Relier les lignes à l’image ¦ Tengja línurnar við myndina
+Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis ¦ Tengja hverja línu textans við línu hennar á myndinni (lituð svæði, smellur lína ↔ svæði): eftir ítarlegan lestur, eða á texta sem þegar er kominn inn
+Relier les lignes à l’image (une zone par ligne, comme la lecture rapide) ¦ Tengja línurnar við myndina (eitt svæði á línu, eins og við hraðlestur)
+Découpage de la page en lignes… ¦ Síðunni skipt í línur…
+Découpage de la page en lignes (lecture rapide)… ¦ Síðunni skipt í línur (hraðlestur)…
+Découpage simple de la page en lignes… ¦ Einföld skipting síðunnar í línur…
+Le découpage en lignes n’est pas chargé. ¦ Skipting í línur er ekki hlaðin.
+Pas de ligne de texte à relier. ¦ Engin textalína til að tengja.
+Le texte a changé pendant le découpage : « ▤ Relier les lignes à l’image » pour recommencer. ¦ Textinn breyttist meðan á skiptingunni stóð: „▤ Tengja línurnar við myndina“ til að byrja aftur.
+Ligne reliée sans certitude : vérifie sur l’image ¦ Lína tengd án vissu: athugaðu hana á myndinni
+Lignes reliées à l’image : {x} ¦ Línur tengdar við myndina: {x}
+à vérifier (❔) : {n} ¦ til að athuga (❔): {n}
+sans zone : {n} ¦ án svæðis: {n}
+d’après la lecture rapide ¦ samkvæmt hraðlestri
+d’après un découpage simple de l’image ¦ samkvæmt einfaldri skiptingu myndarinnar

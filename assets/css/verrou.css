@@ -1,0 +1,68 @@
+/* LCNDA — 🔐 écran de verrou (lib/verrou_page.php) et 🔐 / 📜 dans l'app (assets/js/app-verrou.js) */
+:root { --gl-ink: #080808; --gl-paper: #fbfbfb; --gl-card: #fff; --gl-blue: #0066cc; --gl-muted: #555; --gl-line: #080808; --gl-red: #b3261e; --gl-green: #1e7a3a; }
+:root[data-theme="dark"] { --gl-ink: #f1f1f1; --gl-paper: #121212; --gl-card: #1d1d1d; --gl-blue: #6aa8ff; --gl-muted: #b5b5b5; --gl-line: #e8e8e8; --gl-red: #ff8a80; --gl-green: #7bd88f; }
+.gl-body { margin: 0; min-height: 100vh; background: var(--gl-paper); color: var(--gl-ink); font-family: Arial, Helvetica, sans-serif;
+    background-image: linear-gradient(rgba(0,102,204,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,102,204,.04) 1px, transparent 1px); background-size: 28px 28px; }
+.gl-screen { min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; box-sizing: border-box; }
+.gl-card { width: 100%; max-width: 460px; box-sizing: border-box; background: var(--gl-card); border: 2px solid var(--gl-line); box-shadow: 6px 6px 0 rgba(0,102,204,.25); padding: 32px 28px 24px; text-align: center; }
+.gl-ico { font-size: 54px; line-height: 1; margin-bottom: 10px; }
+.gl-title { margin: 0 0 6px; font-size: clamp(22px, 4.5vw, 30px); line-height: 1.15; letter-spacing: -.02em; overflow-wrap: anywhere; }
+.gl-lead { margin: 0 0 22px; color: var(--gl-muted); }
+.gl-form { display: grid; gap: 10px; text-align: left; }
+.gl-label { font-weight: 700; font-size: 14px; }
+.gl-input { width: 100%; box-sizing: border-box; font-size: 18px; padding: 11px 12px; border: 2px solid var(--gl-line); background: var(--gl-paper); color: var(--gl-ink); border-radius: 0; }
+.gl-input:focus { outline: 3px solid var(--gl-blue); outline-offset: 1px; }
+.gl-button { min-height: 46px; font-size: 17px; font-weight: 700; border: 2px solid var(--gl-line); background: var(--gl-blue); color: #fff; cursor: pointer; box-shadow: 4px 4px 0 rgba(5,93,255,.25); }
+:root[data-theme="dark"] .gl-button { color: #0b0b0b; }
+.gl-button:disabled { opacity: .55; cursor: wait; }
+.gl-msg { min-height: 1.3em; margin: 2px 0 0; font-size: 14px; }
+.gl-msg.is-error { color: var(--gl-red); font-weight: 700; }
+.gl-msg.is-ok { color: var(--gl-green); }
+.gl-links { margin: 18px 0 0; font-size: 14px; color: var(--gl-muted); display: flex; flex-wrap: wrap; gap: 6px 10px; justify-content: center; }
+.gl-link { background: none; border: 0; padding: 4px 0; color: var(--gl-blue); font: inherit; cursor: pointer; text-decoration: underline; }
+.gl-others, .gl-forgot { margin-top: 14px; text-align: left; font-size: 14px; line-height: 1.45; }
+.gl-forgot p { margin: 0 0 8px; }
+.gl-gen-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.gl-gen { width: 100%; text-align: left; padding: 9px 12px; border: 1.5px solid var(--gl-line); background: var(--gl-paper); color: var(--gl-ink); font: inherit; cursor: pointer; overflow-wrap: anywhere; }
+.gl-gen:hover { border-color: var(--gl-blue); }
+@media (max-width: 480px) { .gl-card { padding: 24px 16px 18px; box-shadow: 4px 4px 0 rgba(0,102,204,.25); } .gl-ico { font-size: 44px; } }
+
+/* ── dans l'app : 🔐 Réglages → Mot de passe de cette généalogie ── */
+.glk-page .glk-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.glk-form { display: grid; gap: 12px; }
+.glk-form label { display: grid; gap: 4px; font-weight: 700; }
+.glk-form input[type="password"] { font-size: 16px; padding: 9px 10px; }
+.glk-strength { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 400; }
+.glk-bar { flex: 1; height: 8px; background: rgba(127,127,127,.25); position: relative; max-width: 220px; }
+.glk-bar > i { position: absolute; inset: 0 auto 0 0; background: #c62828; width: 0; transition: width .2s; }
+.glk-bar[data-s="2"] > i { background: #ef8f00; } .glk-bar[data-s="3"] > i { background: #2e7d32; } .glk-bar[data-s="4"] > i { background: #1b5e20; }
+.glk-ack { display: flex !important; gap: 8px; align-items: flex-start; font-weight: 400 !important; }
+.glk-honest { border-left: 4px solid #ef8f00; padding: 10px 14px; background: rgba(239,143,0,.08); }
+.glk-honest p { margin: 0 0 8px; }
+.glk-honest p:last-child { margin-bottom: 0; }
+.glk-state { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.glk-mins { display: flex; flex-wrap: wrap; gap: 6px; }
+.glk-sub { border-top: 1px solid rgba(127,127,127,.3); padding-top: 12px; margin-top: 4px; }
+.glk-gen-btn { font-size: 14px; }
+@media (max-width: 760px) { .glk-page .glk-grid { grid-template-columns: 1fr; } }
+
+/* ── 📜 Qui a vu quoi ── */
+.b8-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.b8-table th, .b8-table td { text-align: left; padding: 7px 8px; border-bottom: 1px solid rgba(127,127,127,.25); vertical-align: top; }
+.b8-table th { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted, #666); }
+.b8-table td.b8-when { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.b8-table tr.is-fail td { color: #b3261e; }
+:root[data-theme="dark"] .b8-table tr.is-fail td { color: #ff8a80; }
+.b8-keep { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 12px; }
+.b8-ro { font-size: 13px; }
+@media (max-width: 640px) {
+    .b8-table thead { display: none; }
+    .b8-table, .b8-table tbody, .b8-table tr, .b8-table td { display: block; width: 100%; box-sizing: border-box; }
+    .b8-table tr { border: 1.5px solid rgba(127,127,127,.45); margin: 0 0 8px; padding: 6px 4px; }
+    .b8-table td { border: 0; padding: 2px 6px; }
+    .b8-table td.b8-when { font-weight: 700; }
+}
+.succ-jbtns { display: flex; flex-wrap: wrap; gap: 6px; }
+.glk-mins .glk-chip { display: inline-flex !important; align-items: center; gap: 6px; padding: 6px 12px; border: 1.5px solid currentColor; cursor: pointer; font-weight: 400 !important; margin-top: 6px; }
+.glk-mins .glk-chip:has(input:checked) { background: var(--blue, #0066cc); color: #fff; border-color: var(--blue, #0066cc); font-weight: 700 !important; }
+.glk-mins .glk-chip input { margin: 0; accent-color: #fff; }

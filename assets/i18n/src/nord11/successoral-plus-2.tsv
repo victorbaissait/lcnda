@@ -1,0 +1,635 @@
+fr ¦ vi ¦ id
+# Zone « successoral-plus-2 » : ⚖️ outils de plus du généalogiste successoral (heritage-successoral-plus2*.js, lib/successoral_plus2.php, lib/successoral_factures.php)
+Réglages de cet outil ¦ Cài đặt của công cụ này ¦ Pengaturan alat ini
+(conseillé) ¦ (khuyên dùng) ¦ (disarankan)
+Autre : ¦ Khác: ¦ Lainnya:
+Outils du dossier : réglages ¦ Công cụ hồ sơ: cài đặt ¦ Alat berkas: pengaturan
+Chaque choix se change ici ; l’option conseillée est celle du départ. ¦ Mỗi lựa chọn bạn đổi ở đây; lựa chọn khuyên dùng là mặc định. ¦ Setiap pilihan kamu ubah di sini; yang disarankan adalah bawaan.
+Réglage enregistré : {what} ¦ Đã lưu cài đặt: {what} ¦ Pengaturan disimpan: {what}
+Adresse refusée : https:// et {numero} sont obligatoires. ¦ Địa chỉ bị từ chối: bắt buộc có https:// và {numero}. ¦ Alamat ditolak: https:// dan {numero} wajib ada.
+Carte des héritiers (dossiers en cours) ¦ Bản đồ người thừa kế (hồ sơ đang làm) ¦ Peta ahli waris (berkas berjalan)
+Délai de réponse par organisme ¦ Thời gian trả lời theo cơ quan ¦ Waktu balasan per kantor
+🙈 Écran partagé ¦ 🙈 Màn hình chia sẻ ¦ 🙈 Layar bersama
+Fusionner avec un autre dossier… ¦ Gộp với hồ sơ khác… ¦ Gabungkan dengan berkas lain…
+Annuler la dernière fusion ¦ Hoàn tác lần gộp gần nhất ¦ Batalkan penggabungan terakhir
+nom de naissance ¦ họ khai sinh ¦ nama lahir
+prénom ¦ tên ¦ nama depan
+né(e) le {d} ¦ sinh {d} ¦ lahir {d}
+même mois ¦ cùng tháng ¦ bulan sama
+même année ¦ cùng năm ¦ tahun sama
+± 1 an ¦ ± 1 năm ¦ ± 1 tahun
+date inconnue ¦ không rõ ngày ¦ tanggal tidak diketahui
+date de naissance différente ¦ ngày sinh khác ¦ tanggal lahir lain
+même département ¦ cùng tỉnh (département) ¦ departemen sama
+lieu inconnu sur la fiche ¦ không rõ nơi trên thẻ ¦ tempat di kartu tidak diketahui
+lieu : {p} ¦ nơi: {p} ¦ tempat: {p}
+Le fichier des décès n’est pas dans l’app. ¦ Tệp người mất chưa có trong ứng dụng. ¦ Berkas kematian belum ada di aplikasi.
+⤒ Importer les décès ¦ ⤒ Nhập dữ liệu người mất ¦ ⤒ Impor data kematian
+L’import se fait une seule fois, depuis data.gouv.fr (environ 25 millions de lignes depuis 1970), ou par années choisies. ¦ Chỉ nhập một lần, từ data.gouv.fr (khoảng 25 triệu dòng từ năm 1970), hoặc theo các năm đã chọn. ¦ Impor dilakukan sekali, dari data.gouv.fr (sekitar 25 juta baris sejak 1970), atau untuk tahun yang dipilih.
+fichier importé : décès {a} → {b} ¦ tệp đã nhập: người mất {a} → {b} ¦ berkas diimpor: kematian {a} → {b}
+un décès plus ancien ne peut pas être trouvé ¦ không thể tìm thấy cái chết sớm hơn ¦ kematian lebih awal tidak dapat ditemukan
+plafonné à {n} ¦ giới hạn ở {n} ¦ dibatasi pada {n}
+acte n° {n} ¦ giấy tờ số {n} ¦ akta no. {n}
+avant le défunt : si c’est cette personne, ses enfants viennent à sa place (représentation). ¦ trước người để lại di sản: nếu đúng là người này, con của họ thừa kế thay (thế vị). ¦ sebelum pewaris: jika ini orangnya, anak-anaknya mewarisi menggantikannya (penggantian tempat).
+après le défunt : sa part passe à ses propres héritiers. ¦ sau người để lại di sản: phần của họ chuyển cho những người thừa kế của chính họ. ¦ setelah pewaris: bagiannya beralih ke ahli warisnya sendiri.
+Les Français nés à l’étranger ont leur acte au Service central d’état civil (Nantes). ¦ Người Pháp sinh ở nước ngoài có giấy tờ tại Cục hộ tịch trung ương (Nantes). ¦ Orang Prancis yang lahir di luar negeri memiliki aktanya di Kantor Pusat Catatan Sipil (Nantes).
+déjà confirmé ¦ đã xác nhận ¦ sudah dikonfirmasi
+C’est cette personne ¦ Đúng là người này ¦ Ini orangnya
+Pas la même personne ¦ Không phải cùng một người ¦ Bukan orang yang sama
+Nom de naissance inconnu : cherché sous {n}, pistes moins sûres ¦ Không rõ họ khai sinh: đã tìm theo {n}, các dấu vết kém chắc chắn hơn ¦ Nama lahir tidak diketahui: dicari sebagai {n}, jejak kurang pasti
+Deux personnes se ressemblent : demande l’acte avant de choisir ¦ Hai người giống nhau: hãy xin giấy tờ trước khi chọn ¦ Dua orang mirip: minta aktanya sebelum memilih
+rien trouvé dans le fichier ¦ không tìm thấy gì trong tệp ¦ tidak ada yang ditemukan di berkas
+« Rien trouvé » ne veut pas dire « vivant » (un décès à l’étranger manque souvent). ¦ “Không tìm thấy gì” không có nghĩa là “còn sống” (cái chết ở nước ngoài thường thiếu). ¦ “Tidak ada yang ditemukan” tidak berarti “masih hidup” (kematian di luar negeri sering tidak tercatat).
+Les héritiers « vivants » comparés au fichier des décès ¦ Người thừa kế “còn sống” được so với tệp người mất ¦ Ahli waris “hidup” dibandingkan dengan berkas kematian
+pistes à partir de {n} ¦ dấu vết từ {n} ¦ jejak mulai {n}
+Aucun héritier « vivant » à vérifier dans ce dossier. ¦ Không có người thừa kế “còn sống” nào cần kiểm tra trong hồ sơ này. ¦ Tidak ada ahli waris “hidup” yang perlu diperiksa di berkas ini.
+Comment c’est calculé ¦ Cách tính ¦ Cara menghitungnya
+Le nom de naissance, sans accents ni tirets ; jamais le nom d’épouse (l’INSEE donne le nom de naissance). ¦ Họ khai sinh, bỏ dấu và gạch nối; không bao giờ dùng họ sau khi kết hôn (INSEE giữ họ khai sinh). ¦ Nama lahir, tanpa aksen dan tanda hubung; tidak pernah nama setelah menikah (INSEE menyimpan nama lahir).
+Le premier prénom de la fiche parmi les prénoms INSEE ; Jean-Pierre = Jean Pierre. ¦ Tên đầu tiên trên thẻ trong các tên của INSEE; Jean-Pierre = Jean Pierre. ¦ Nama depan pertama di kartu di antara nama depan INSEE; Jean-Pierre = Jean Pierre.
+Jour exact 30 · même mois 20 · même année 12 · ± 1 an 6 ; sans date : plafond 70. ¦ Đúng ngày 30 · cùng tháng 20 · cùng năm 12 · ± 1 năm 6; không có ngày: tối đa 70. ¦ Hari tepat 30 · bulan sama 20 · tahun sama 12 · ± 1 tahun 6; tanpa tanggal: maksimal 70.
+La commune ; même département 10 ; né à l’étranger : le pays (plafond 80). ¦ Xã; cùng tỉnh 10; sinh ở nước ngoài: quốc gia (tối đa 80). ¦ Kota; departemen sama 10; lahir di luar negeri: negaranya (maksimal 80).
+Différent : la piste est écartée. ¦ Nếu không: dấu vết bị loại. ¦ Jika tidak: jejak ditolak.
+Pistes écartées ({n}) ¦ Dấu vết đã loại ({n}) ¦ Jejak yang ditolak ({n})
+Piste remise ¦ Đã khôi phục dấu vết ¦ Jejak dipulihkan
+« Pas la même personne » retenu : cette piste ne reviendra plus ¦ Đã ghi nhớ “Không phải cùng một người”: dấu vết này sẽ không quay lại ¦ “Bukan orang yang sama” diingat: jejak ini tidak akan kembali
+Sur la fiche de {n} : un décès le {d}, source « Fichier des personnes décédées (INSEE) », avec la date du relevé. ¦ Trên thẻ của {n}: mất {d}, nguồn “Tệp người đã mất (INSEE)”, kèm ngày kiểm tra. ¦ Di kartu {n}: kematian {d}, sumber “Berkas orang meninggal (INSEE)”, dengan tanggal pemeriksaan.
+Dans ce dossier : statut retenu « {s} » ; le calcul est refait. ¦ Trong hồ sơ này: giữ trạng thái “{s}”; phép tính được làm lại. ¦ Di berkas ini: status “{s}” dipertahankan; perhitungan diulang.
+Ce qui va changer ¦ Điều gì thay đổi ¦ Apa yang berubah
+{n} marqué(e) décédé(e) (INSEE). Calcul refait. ¦ {n} được đánh dấu đã mất (INSEE). Đã tính lại. ¦ {n} ditandai meninggal (INSEE). Perhitungan diulang.
+Vérifier les décès ¦ Kiểm tra người mất ¦ Periksa kematian
+Questionnaire… ¦ Bảng hỏi… ¦ Kuesioner…
+⚰️ INSEE : {n} piste(s) ¦ ⚰️ INSEE: {n} dấu vết ¦ ⚰️ INSEE: {n} jejak
+⚰️ vérifié le {d} ¦ ⚰️ đã kiểm tra {d} ¦ ⚰️ diperiksa {d}
+🕵️ Recherches ¦ 🕵️ Tìm kiếm ¦ 🕵️ Penelusuran
+📞 Noter un échange ¦ 📞 Ghi một lần liên hệ ¦ 📞 Catat kontak
+Ouvrir un dossier lié ¦ Mở hồ sơ liên kết ¦ Buka berkas tertaut
+Dossiers liés ¦ Hồ sơ liên kết ¦ Berkas tertaut
+Succession de {n} ¦ Di sản của {n} ¦ Warisan {n}
+dossier d’origine {n} ¦ hồ sơ gốc {n} ¦ berkas asal {n}
+Deux défunts, deux calculs : les successions restent distinctes. ¦ Hai người mất, hai phép tính: các di sản vẫn tách riêng. ¦ Dua almarhum, dua perhitungan: warisan tetap terpisah.
+Aucun héritier trouvé d’après les fiches. ¦ Không tìm thấy người thừa kế nào theo các thẻ. ¦ Tidak ada ahli waris ditemukan berdasarkan kartu.
+Échanges ¦ Liên hệ ¦ Kontak
+Noter un échange ¦ Ghi một lần liên hệ ¦ Catat kontak
+Les courriers du Registre ne sont pas recopiés ici : ils sont montrés en gris, en lecture. ¦ Thư trong sổ không được sao chép vào đây: chúng hiện màu xám, chỉ để đọc. ¦ Surat dari register tidak disalin ke sini: tampil abu-abu, hanya baca.
+Chercher… (personne, résumé) ¦ Tìm… (người, tóm tắt) ¦ Cari… (orang, ringkasan)
+du dossier fusionné ¦ từ hồ sơ đã gộp ¦ dari berkas yang digabung
+Registre de courriers, n° {n} ¦ Sổ thư từ, số {n} ¦ Register surat, no. {n}
+Aucun échange noté. ¦ Chưa ghi lần liên hệ nào. ¦ Belum ada kontak dicatat.
+✎ Corriger un échange ¦ ✎ Sửa lần liên hệ ¦ ✎ Perbaiki kontak
+＋ Noter un échange ¦ ＋ Ghi một lần liên hệ ¦ ＋ Catat kontak
+Avec (héritier, notaire, mairie…) ¦ Với ai (người thừa kế, công chứng viên, tòa thị chính…) ¦ Dengan siapa (ahli waris, notaris, balai kota…)
+Prochaine action ¦ Bước tiếp theo ¦ Langkah berikutnya
+Durée (minutes) ¦ Thời lượng (phút) ¦ Durasi (menit)
+⏱ Compter la durée dans 💶 Temps ¦ ⏱ Tính thời gian vào 💶 Thời gian ¦ ⏱ Hitung waktu ke 💶 Waktu
+C’est une recherche (va dans 🕵️ Recherches) ¦ Đây là một lần tìm kiếm (vào 🕵️ Tìm kiếm) ¦ Ini penelusuran (masuk ke 🕵️ Penelusuran)
+Avec une date, une échéance va dans le dossier et dans la 🔔 cloche (jamais le résumé). ¦ Khi có ngày, hạn sẽ vào hồ sơ và vào 🔔 chuông (không bao giờ là phần tóm tắt). ¦ Dengan tanggal, tenggatnya masuk ke berkas dan ke 🔔 lonceng (ringkasan tidak pernah).
+Échange corrigé (noté au 🕓 Journal) ¦ Đã sửa lần liên hệ (ghi vào 🕓 Nhật ký) ¦ Kontak diperbaiki (dicatat di 🕓 Jurnal)
+Échange noté ¦ Đã ghi lần liên hệ ¦ Kontak dicatat
+Trois fois « ne répond pas » de suite : noter 🔇 ne répond pas ? ¦ Ba lần liên tiếp “không trả lời”: ghi 🔇 không trả lời? ¦ Tiga kali berturut-turut “tidak menjawab”: catat 🔇 tidak menjawab?
+Recommandé ¦ Bảo đảm ¦ Tercatat
+Envoyé en recommandé ¦ Đã gửi bảo đảm ¦ Dikirim tercatat
+N° du recommandé ¦ Số thư bảo đảm ¦ No. surat tercatat
+Numéro inhabituel, gardé tel quel. ¦ Số bất thường, giữ nguyên. ¦ Nomor tidak biasa, dibiarkan apa adanya.
+AR reçu le ¦ Đã nhận báo phát ¦ Tanda terima sudah datang
+Relance si rien après (jours) ¦ Nhắc nếu không có gì sau (ngày) ¦ Pengingat jika tidak ada apa-apa setelah (hari)
+Réponse reçue le ¦ Đã có trả lời ¦ Balasan sudah datang
+Retour du courrier ¦ Thư bị trả lại ¦ Surat dikembalikan
+pli non distribué ¦ người nhận không đến lấy ¦ penerima tidak mengambil
+destinataire inconnu ¦ không rõ người nhận ¦ penerima tidak dikenal
+AR reçu aujourd’hui ¦ Báo phát hôm nay ¦ Tanda terima hari ini
+Suivre en ligne ¦ Theo dõi trực tuyến ¦ Lacak daring
+Copier le numéro ¦ Sao chép số ¦ Salin nomor
+L’app ne fait aucune requête : le lien ouvre la page de suivi dans ton navigateur ; tu notes toi-même la date de l’AR. ¦ Ứng dụng không gửi yêu cầu nào: liên kết mở trang theo dõi trong trình duyệt của bạn; ngày báo phát bạn tự ghi. ¦ Aplikasi tidak mengirim permintaan apa pun: tautan membuka halaman pelacakan di peramban kamu; tanggal tanda terima kamu catat sendiri.
+Tape d’abord le numéro. ¦ Hãy nhập số trước. ¦ Ketik nomornya dulu.
+Numéro copié ¦ Đã sao chép số ¦ Nomor disalin
+Courrier revenu : noter 🔎 introuvable pour cet héritier ? ¦ Thư bị trả lại: ghi 🔎 không tìm thấy cho người thừa kế này? ¦ Surat kembali: catat 🔎 tidak ditemukan untuk ahli waris ini?
+✓ AR {d} ¦ ✓ Báo phát {d} ¦ ✓ Tanda terima {d}
+revenu ¦ bị trả lại ¦ dikembalikan
+📮 sans AR · {n} j ¦ 📮 chưa có báo phát · {n} ng ¦ 📮 tanpa tanda terima · {n} h
+Recommandés ¦ Thư bảo đảm ¦ Surat tercatat
+Sans AR ¦ Chưa có báo phát ¦ Tanpa tanda terima
+{n} recommandés, {m} sans accusé ¦ {n} thư bảo đảm, {m} chưa có báo phát ¦ {n} tercatat, {m} tanpa tanda terima
+Importer des réponses… ¦ Nhập câu trả lời… ¦ Impor jawaban…
+Saisir un questionnaire papier ¦ Nhập bảng hỏi giấy ¦ Masukkan kuesioner kertas
+📮 Recommandé ¦ 📮 Bảo đảm ¦ 📮 Tercatat
+Questionnaires ¦ Bảng hỏi ¦ Kuesioner
+préparé le {d} ¦ đã chuẩn bị {d} ¦ disiapkan {d}
+réponses écrites le {d} ¦ đã nhập câu trả lời {d} ¦ jawaban dimasukkan {d}
+Questionnaire ¦ Bảng hỏi ¦ Kuesioner
+au sujet d’une succession ¦ liên quan đến một di sản ¦ mengenai suatu warisan
+Vous ¦ Quý vị ¦ Kamu
+Nom de naissance ¦ Họ khai sinh ¦ Nama lahir
+Conjoint(s) ¦ Vợ/chồng ¦ Pasangan
+Date du mariage (ou PACS) ¦ Ngày kết hôn (hoặc kết đôi dân sự) ¦ Tanggal menikah (atau kemitraan)
+Adresse, téléphone, courriel ¦ Địa chỉ, điện thoại, email ¦ Alamat, telepon, email
+Code postal ¦ Mã bưu chính ¦ Kode pos
+Autres membres de la famille connus ¦ Những người thân khác đã biết ¦ Anggota keluarga lain yang diketahui
+Frères, sœurs, cousins…, avec un moyen de les joindre ¦ Anh chị em, anh chị em họ…, kèm cách liên lạc ¦ Saudara laki-laki, saudara perempuan, sepupu…, dengan cara menghubungi mereka
+Documents que vous pouvez fournir ¦ Giấy tờ quý vị có thể cung cấp ¦ Dokumen yang bisa kamu berikan
+livret de famille ¦ sổ gia đình ¦ buku keluarga
+acte de naissance ¦ giấy khai sinh ¦ akta kelahiran
+acte de mariage ¦ giấy kết hôn ¦ akta perkawinan
+jugement ¦ bản án ¦ putusan pengadilan
+Vos réponses restent sur cet appareil tant que vous n’envoyez rien. ¦ Câu trả lời của quý vị ở lại trên thiết bị này cho đến khi quý vị gửi đi. ¦ Jawabanmu tetap di perangkat ini sampai kamu mengirim sesuatu.
+Enregistrer mes réponses ¦ Lưu câu trả lời của tôi ¦ Simpan jawabanku
+Un questionnaire à envoyer ¦ Bảng hỏi cần gửi ¦ Kuesioner untuk dikirim
+Fabriquer et ranger au Registre ¦ Tạo và lưu vào sổ ¦ Buat dan simpan di register
+Ce qu’on demande ¦ Chúng tôi hỏi gì ¦ Apa yang kami tanyakan
+Ta question ¦ Câu hỏi của bạn ¦ Pertanyaanmu
+Comment l’envoyer ¦ Gửi bằng cách nào ¦ Cara mengirimnya
+Ce qui est pré-rempli ¦ Phần nào được điền sẵn ¦ Apa yang sudah diisi
+Jamais le nom du défunt ni un montant : « au sujet d’une succession ». Le fichier s’ouvre d’un double-clic, sans internet ; l’héritier renvoie un petit fichier. ¦ Không bao giờ có tên người mất hay số tiền: “liên quan đến một di sản”. Tệp mở bằng nhấp đúp, không cần internet; người thừa kế gửi lại một tệp nhỏ. ¦ Tidak pernah ada nama almarhum atau jumlah uang: “mengenai suatu warisan”. Berkas dibuka dengan klik ganda, tanpa internet; ahli waris mengirim kembali berkas kecil.
+{n} prêts, rangés au Registre de courriers ¦ Đã chuẩn bị {n}, lưu vào sổ thư từ ¦ {n} disiapkan, disimpan di register surat
+Ce fichier ne vient pas d’un questionnaire de ce dossier. ¦ Tệp này không phải từ bảng hỏi của hồ sơ này. ¦ Berkas ini bukan dari kuesioner berkas ini.
+Revoir avant d’écrire ¦ Xem lại trước khi nhập ¦ Tinjau sebelum memasukkan
+Enfants (un par ligne : prénom, année) ¦ Con (mỗi dòng một người: tên, năm) ¦ Anak (satu per baris: nama, tahun)
+Documents promis ¦ Giấy tờ đã hứa ¦ Dokumen yang dijanjikan
+Réponses de {n} ¦ Câu trả lời của {n} ¦ Jawaban dari {n}
+Écrire les changements cochés ¦ Nhập các thay đổi đã đánh dấu ¦ Masukkan perubahan yang dicentang
+Une réponse a déjà été importée le {d} : compare avec celle-ci. ¦ Một câu trả lời đã được nhập {d}: hãy so sánh với câu này. ¦ Satu jawaban sudah diimpor {d}: bandingkan dengan yang ini.
+fichier vérifié ✓ (bon questionnaire, pas modifié) ¦ tệp đã kiểm tra ✓ (đúng bảng hỏi, không bị sửa) ¦ berkas diverifikasi ✓ (kuesioner yang benar, tidak diubah)
+Coche ce qui doit aller dans le dossier. Rien n’est écrit sans ta revue ; « source : déclaration de l’héritier » accompagne tout ce qui est écrit. ¦ Đánh dấu những gì đưa vào hồ sơ. Không có gì được nhập nếu bạn chưa xem lại; mọi thứ đã nhập đều mang “nguồn: lời khai của người thừa kế”. ¦ Centang yang masuk ke berkas. Tidak ada yang dimasukkan tanpa tinjauanmu; semua yang dimasukkan membawa “sumber: pernyataan ahli waris”.
+Dans la base ¦ Trong cơ sở dữ liệu ¦ Di basis data
+« Famille connue » va en note du dossier, jamais en fiches. Les enfants créent des fiches reliées à l’héritier. Les documents promis deviennent une échéance. ¦ “Gia đình đã biết” vào ghi chú hồ sơ, không bao giờ vào thẻ. Các con tạo thẻ liên kết với người thừa kế. Giấy tờ đã hứa trở thành một hạn. ¦ “Keluarga yang diketahui” masuk ke catatan berkas, tidak pernah ke kartu. Anak-anak membuat kartu yang tertaut ke ahli waris. Dokumen yang dijanjikan menjadi tenggat.
+{n} écrits. Calcul refait. ¦ Đã nhập {n}. Đã tính lại. ¦ {n} dimasukkan. Perhitungan diulang.
+passée ¦ đã qua ¦ lewat
+dans {n} j ¦ sau {n} ng ¦ dalam {n} h
+était le {d} ¦ là {d} ¦ tadinya {d}
+Une date importante ¦ Ngày quan trọng ¦ Tanggal penting
+Mes dates importantes ¦ Các ngày quan trọng của tôi ¦ Tanggal pentingku
+D’où vient cette date ¦ Ngày này từ đâu ¦ Dari mana tanggal ini
+Les dates que le notaire t’a données, rappelées à temps. ¦ Những ngày công chứng viên đưa cho bạn, được nhắc kịp lúc. ¦ Tanggal yang diberikan notaris kepadamu, diingatkan tepat waktu.
+L’app ne calcule aucun délai légal : elle ne connaît pas ta situation. ¦ Ứng dụng không tính bất kỳ thời hạn pháp lý nào: nó không biết tình huống của bạn. ¦ Aplikasi tidak menghitung tenggat hukum apa pun: ia tidak tahu situasimu.
+✎ Modifier la date ¦ ✎ Đổi ngày ¦ ✎ Ubah tanggal
+＋ Une date importante ¦ ＋ Một ngày quan trọng ¦ ＋ Tanggal penting
+D’où vient cette date (obligatoire) ¦ Ngày này từ đâu (bắt buộc) ¦ Dari mana tanggal ini (wajib)
+ex. : Me VIALLE, courriel du 4 nov. ¦ vd: Me VIALLE, email ngày 4/11 ¦ mis.: Me VIALLE, email 4/11
+Date déplacée : l’ancienne reste en dessous et la modification est notée au 🕓 Journal. ¦ Đã dời ngày: ngày cũ vẫn ở bên dưới và thay đổi được ghi vào 🕓 Nhật ký. ¦ Tanggal dipindah: yang lama tetap di bawah dan perubahan dicatat di 🕓 Jurnal.
+Date modifiée ¦ Đã đổi ngày ¦ Tanggal diubah
+Date importante ajoutée ¦ Đã thêm ngày quan trọng ¦ Tanggal penting ditambahkan
+🔗 {a} liens ne reposent que sur une pièce, {b} sur aucune. Ce n’est pas une erreur : c’est à vérifier avant la remise. ¦ 🔗 {a} mối liên hệ dựa trên một bằng chứng duy nhất, {b} không dựa trên bằng chứng nào. Đây không phải lỗi: cần kiểm tra trước khi giao. ¦ 🔗 {a} hubungan bertumpu pada satu bukti saja, {b} pada tidak ada. Ini bukan kesalahan: periksa sebelum penyerahan.
+🔗 Chaque lien repose sur assez de pièces. ¦ 🔗 Mỗi mối liên hệ đều có đủ bằng chứng. ¦ 🔗 Setiap hubungan bertumpu pada bukti yang cukup.
+Voir les liens ¦ Xem các mối liên hệ ¦ Lihat hubungan
+Une lettre par service ({n}) ¦ Mỗi cơ quan một thư ({n}) ¦ Satu surat per kantor ({n})
+délivrée le {d} ¦ cấp {d} ¦ diterbitkan {d}
+valable jusqu’au {d} ¦ hiệu lực đến {d} ¦ berlaku sampai {d}
+📅 Date de délivrance ¦ 📅 Ngày cấp ¦ 📅 Tanggal terbit
+Chaque maillon : combien de pièces le prouvent ¦ Mỗi mắt xích: bao nhiêu bằng chứng chứng minh ¦ Setiap mata rantai: berapa bukti yang menunjukkannya
+Héritier concerné ¦ Người thừa kế liên quan ¦ Ahli waris terkait
+dossier de preuve « prouvé » ¦ hồ sơ chứng cứ “đã chứng minh” ¦ berkas bukti “terbukti”
+1 pièce, jugée suffisante le {d} ¦ 1 bằng chứng, được coi là đủ {d} ¦ 1 bukti, dianggap cukup {d}
+Demander l’acte ¦ Xin giấy tờ ¦ Minta akta
+✓ Une pièce me suffit ici ¦ ✓ Ở đây một bằng chứng là đủ với tôi ¦ ✓ Di sini satu bukti cukup bagiku
+Une « pièce » = une source citée sur l’acte (deux copies du même acte comptent pour une) ; un dossier de preuve « prouvé » compte pour une de plus. ¦ “Bằng chứng” = nguồn được trích ở một sự kiện (hai bản sao của cùng một giấy tờ tính là một); hồ sơ chứng cứ “đã chứng minh” tính thêm một. ¦ “Bukti” = sumber yang dikutip pada suatu peristiwa (dua salinan akta yang sama dihitung satu); berkas bukti “terbukti” dihitung satu lagi.
+Noté au 🕓 Journal ¦ Đã ghi vào 🕓 Nhật ký ¦ Dicatat di 🕓 Jurnal
+Remise bloquée (réglage) ¦ Chặn giao hồ sơ (cài đặt) ¦ Penyerahan diblokir (pengaturan)
+Des liens ont trop peu de pièces : la remise est bloquée tant qu’ils ne sont pas complétés (ou « Une pièce me suffit ici »). ¦ Một số mối liên hệ có quá ít bằng chứng: việc giao bị chặn cho đến khi bổ sung (hoặc “Ở đây một bằng chứng là đủ với tôi”). ¦ Beberapa hubungan punya terlalu sedikit bukti: penyerahan diblokir sampai dilengkapi (atau “Di sini satu bukti cukup bagiku”).
+Pour une recherche, je vous serais reconnaissant(e) de m’adresser une copie des actes suivants : ¦ Vì nhu cầu tìm kiếm, tôi rất biết ơn nếu quý cơ quan gửi cho tôi bản sao các giấy tờ sau: ¦ Untuk keperluan penelusuran, saya akan berterima kasih jika Bapak/Ibu dapat mengirimkan salinan akta berikut:
+Les actes manquants, regroupés ¦ Giấy tờ còn thiếu, đã gom nhóm ¦ Akta yang kurang, dikelompokkan
+Une seule lettre par service au lieu d’une par acte : moins de timbres, moins de relances. Relis et corrige chaque lettre. ¦ Một thư cho mỗi cơ quan thay vì mỗi giấy tờ một thư: ít tem hơn, ít nhắc hơn. Hãy đọc và sửa từng thư. ¦ Satu surat per kantor, bukan satu per akta: lebih sedikit perangko, lebih sedikit pengingat. Baca dan perbaiki setiap surat.
+{n} rangées dans le Registre de courriers ¦ Đã lưu {n} vào sổ thư từ ¦ {n} disimpan di register surat
+Copie délivrée le ¦ Đã cấp bản sao ¦ Salinan diterbitkan
+Durée de validité demandée par ton notaire (mois) ¦ Thời hạn hiệu lực công chứng viên của bạn yêu cầu (tháng) ¦ Masa berlaku yang diminta notarismu (bulan)
+Aucune durée par défaut : c’est toi qui la tapes. La 🔔 cloche prévient avant qu’elle ne soit trop ancienne. ¦ Không có thời hạn mặc định: bạn tự nhập. 🔔 Chuông báo trước khi nó quá cũ. ¦ Tidak ada masa bawaan: kamu yang mengisinya. 🔔 Lonceng memberi tahu sebelum terlalu lama.
+Date de délivrance notée ¦ Đã ghi ngày cấp ¦ Tanggal terbit dicatat
+recherches négatives : {n} ¦ {n} lần tìm kiếm không kết quả ¦ {n} penelusuran tanpa hasil
+« Rien trouvé » est un résultat utile : il montre la diligence au notaire. ¦ “Không tìm thấy gì” là kết quả hữu ích: nó cho công chứng viên thấy sự kỹ lưỡng của bạn. ¦ “Tidak ada yang ditemukan” adalah hasil yang berguna: menunjukkan ketelitianmu kepada notaris.
+Aucune recherche notée pour cette personne. ¦ Chưa ghi lần tìm kiếm nào cho người này. ¦ Belum ada penelusuran dicatat untuk orang ini.
+Rien n’est recopié : les lignes viennent du 🗓 Journal des recherches, des ⚰️ vérifications INSEE et des 📞 échanges marqués « recherche ». ¦ Không có gì được sao chép: các dòng đến từ 🗓 Nhật ký nghiên cứu, từ ⚰️ kiểm tra INSEE và từ 📞 các lần liên hệ được đánh dấu “tìm kiếm”. ¦ Tidak ada yang disalin: baris berasal dari 🗓 Jurnal riset, dari ⚰️ pemeriksaan INSEE, dan dari 📞 kontak yang ditandai “penelusuran”.
+Noter une recherche ¦ Ghi một lần tìm kiếm ¦ Catat penelusuran
+Pour le notaire ¦ Cho công chứng viên ¦ Untuk notaris
+Recherches faites — {n} ¦ Các lần tìm kiếm đã thực hiện — {n} ¦ Penelusuran yang dilakukan — {n}
+＋ Noter une recherche ¦ ＋ Ghi một lần tìm kiếm ¦ ＋ Catat penelusuran
+Où (service, site, mairie…) ¦ Ở đâu (lưu trữ, trang web, tòa thị chính…) ¦ Di mana (arsip, situs, balai kota…)
+Ce qui a été trouvé ¦ Đã tìm thấy gì ¦ Apa yang ditemukan
+Écrit un dépouillement dans le 🗓 Journal des recherches (comme « Où chercher »). ¦ Ghi một phiếu đọc vào 🗓 Nhật ký nghiên cứu (như “Tìm ở đâu”). ¦ Mencatat kartu bacaan di 🗓 Jurnal riset (seperti “Di mana mencari”).
+Recherche notée ¦ Đã ghi lần tìm kiếm ¦ Penelusuran dicatat
+Carte des héritiers ¦ Bản đồ người thừa kế ¦ Peta ahli waris
+au numéro (BAN) ¦ đến số nhà (BAN) ¦ hingga nomor rumah (BAN)
+Hors carte ¦ Ngoài bản đồ ¦ Di luar peta
+à l’étranger ({c}) ¦ ở nước ngoài ({c}) ¦ di luar negeri ({c})
+commune pas placée ({c}) ¦ xã chưa định vị ({c}) ¦ kota belum ditempatkan ({c})
+adresse inconnue ¦ không rõ địa chỉ ¦ alamat tidak diketahui
+Où vivent les héritiers ¦ Người thừa kế sống ở đâu ¦ Di mana ahli waris tinggal
+Tous les dossiers en cours ¦ Mọi hồ sơ đang làm ¦ Semua berkas berjalan
+Aucune adresse d’héritier placée sur la carte. ¦ Chưa có địa chỉ người thừa kế nào trên bản đồ. ¦ Belum ada alamat ahli waris yang ditempatkan di peta.
+héritier (adresse connue, au niveau de la commune) ¦ người thừa kế (biết địa chỉ, ở cấp xã) ¦ ahli waris (alamat diketahui, tingkat kota)
+notaire connu de l’app ¦ công chứng viên ứng dụng biết ¦ notaris yang dikenal aplikasi
+Rien n’est envoyé en ligne. ¦ Không có gì được gửi lên mạng. ¦ Tidak ada yang dikirim daring.
+La BAN n’est pas encore téléchargée : position à la commune. ¦ Chưa tải BAN: vị trí ở cấp xã. ¦ BAN belum diunduh: posisi di tingkat kota.
+Image de la carte (sans noms) ¦ Ảnh bản đồ (không có tên) ¦ Gambar peta (tanpa nama)
+Par organisme, d’après le Registre ¦ Theo cơ quan, từ sổ ¦ Per kantor, dari register
+Organisme ¦ Cơ quan ¦ Kantor
+pas assez de courriers ¦ ít thư ¦ sedikit surat
+De l’envoi à la réponse reçue (demandes d’actes des dossiers). Aide à prévoir la remise et à relancer au bon moment. ¦ Từ lúc gửi đến khi nhận trả lời (yêu cầu giấy tờ của các hồ sơ). Giúp bạn lên kế hoạch giao và nhắc kịp lúc. ¦ Dari pengiriman sampai balasan diterima (permintaan akta dari berkas). Membantumu merencanakan penyerahan dan mengingatkan tepat waktu.
+Pas encore de réponse notée dans le Registre. ¦ Chưa có trả lời nào được ghi trong sổ. ¦ Belum ada balasan dicatat di register.
+Sa part passe dans sa propre succession : ouvrir un dossier lié pour {n} ? ¦ Phần của người này chuyển vào di sản của chính họ: mở hồ sơ liên kết cho {n}? ¦ Bagiannya beralih ke warisannya sendiri: buka berkas tertaut untuk {n}?
+🔗 Dossier lié ¦ 🔗 Hồ sơ liên kết ¦ 🔗 Berkas tertaut
+Ouvrir le dossier lié ¦ Mở một hồ sơ liên kết ¦ Buka berkas tertaut
+Dossier lié {n} ouvert ({what}) ¦ Đã mở hồ sơ liên kết {n} ({what}) ¦ Berkas tertaut {n} dibuka ({what})
+Aucun autre dossier en cours dans cette généalogie (d’abord ⇄ Déplacer s’il est dans une autre). ¦ Không có hồ sơ đang làm nào khác trong cây này (hãy ⇄ Chuyển trước nếu nó ở cây khác). ¦ Tidak ada berkas berjalan lain di pohon ini (⇄ Pindahkan dulu jika ada di pohon lain).
+Fusionner avec un autre dossier ¦ Gộp với hồ sơ khác ¦ Gabungkan dengan berkas lain
+Le dossier à réunir dans {n} ¦ Hồ sơ cần gộp với {n} ¦ Berkas yang digabung ke {n}
+Le numéro du dossier réuni n’est pas réutilisé. ↶ Annuler sépare à nouveau, comme avant. ¦ Số của hồ sơ đã gộp sẽ không được dùng lại. ↶ Hoàn tác tách chúng ra như trước. ¦ Nomor berkas yang digabung tidak akan dipakai lagi. ↶ Batalkan memisahkannya lagi seperti sebelumnya.
+Ce qui ¦ Cái gì ¦ Apa
+Ce qui se passe ¦ Điều gì xảy ra ¦ Apa yang terjadi
+{a} déjà communes, {b} ajoutées ¦ {a} chung, {b} được thêm ¦ {a} sama, {b} ditambahkan
+{d} en double gardée(s) une fois ¦ bản trùng giữ một lần: {d} ¦ duplikat disimpan sekali: {d}
+rattachés, chacun garde son dossier d’origine en étiquette ¦ được thêm, mỗi cái giữ hồ sơ gốc làm nhãn ¦ ditambahkan, masing-masing menyimpan berkas asalnya sebagai label
+rattachés ; les factures émises ne changent pas ¦ được thêm; hóa đơn đã phát hành không đổi ¦ ditambahkan; faktur yang diterbitkan tidak berubah
+mis bout à bout, chaque ligne marquée de son dossier ¦ nối tiếp nhau, mỗi dòng ghi hồ sơ của nó ¦ berurutan, setiap baris ditandai dengan berkasnya
+Deux notaires différents : lequel garder ? ¦ Hai công chứng viên khác nhau: giữ ai? ¦ Dua notaris berbeda: mana yang disimpan?
+Dossiers réunis ¦ Đã gộp hồ sơ ¦ Berkas digabung
+Copie à envoyer au notaire ¦ Bản sao cho công chứng viên ¦ Salinan untuk notaris
+Copie à envoyer au notaire… ¦ Bản sao cho công chứng viên… ¦ Salinan untuk notaris…
+Un fichier que le notaire ouvre d’un double-clic, sans rien pouvoir modifier, chiffré si tu le veux. ¦ Một tệp công chứng viên mở bằng nhấp đúp và không thể sửa gì, được mã hóa nếu bạn muốn. ¦ Berkas yang dibuka notaris dengan klik ganda dan tidak bisa ia ubah, dienkripsi jika kamu mau.
+Part aussi ¦ Cũng gửi kèm ¦ Ikut juga
+📞 échanges · 💶 fonds · ⚰️ vérifications INSEE · 🧾 copie des factures (le registre, lui, ne change pas) ¦ 📞 liên hệ · 💶 tiền · ⚰️ kiểm tra INSEE · 🧾 bản sao hóa đơn (bản thân sổ không đổi) ¦ 📞 kontak · 💶 dana · ⚰️ pemeriksaan INSEE · 🧾 salinan faktur (register itu sendiri tidak berubah)
+Mot de passe (obligatoire) ¦ Mật khẩu (bắt buộc) ¦ Kata sandi (wajib)
+🔐 Mot de passe ¦ 🔐 Mật khẩu ¦ 🔐 Kata sandi
+AES-256, comme les sauvegardes protégées. Oublié = archive perdue. Le réimport le demande. ¦ AES-256, như các bản sao lưu được bảo vệ. Quên = mất kho lưu trữ. Khi nhập lại sẽ hỏi mật khẩu. ¦ AES-256, seperti cadangan terlindungi. Lupa = arsip hilang. Impor ulang akan memintanya.
+Mot de passe trop court (8 caractères au moins). ¦ Mật khẩu quá ngắn (ít nhất 8 ký tự). ¦ Kata sandi terlalu pendek (minimal 8 karakter).
+Les deux mots de passe ne sont pas les mêmes. ¦ Hai mật khẩu không khớp. ¦ Kedua kata sandi tidak sama.
+Mot de passe de l’archive ¦ Mật khẩu kho lưu trữ ¦ Kata sandi arsip
+🙈 Écran partagé : noms, adresses et montants masqués ¦ 🙈 Màn hình chia sẻ: tên, địa chỉ và số tiền được ẩn ¦ 🙈 Layar bersama: nama, alamat, dan jumlah disembunyikan
+Échange mis à la corbeille ¦ Đã chuyển lần liên hệ vào thùng rác ¦ Kontak dipindahkan ke tempat sampah
+Fusion annulée : les deux dossiers sont séparés comme avant ¦ Đã hoàn tác gộp: hai hồ sơ tách riêng như trước ¦ Penggabungan dibatalkan: kedua berkas terpisah seperti sebelumnya
+Mon cabinet (factures) ¦ Văn phòng của tôi (hóa đơn) ¦ Kantorku (faktur)
+L’app ne connaît ni ton statut, ni ton régime de TVA, ni les mentions que ta facture doit porter : c’est toi qui les écris, avec ton comptable. L’app les recopie telles quelles. ¦ Ứng dụng không biết tư cách của bạn, chế độ thuế GTGT của bạn hay các thông tin hóa đơn của bạn phải có: bạn tự viết chúng cùng kế toán. Ứng dụng giữ nguyên chúng. ¦ Aplikasi tidak tahu statusmu, rezim PPN-mu, atau keterangan yang wajib ada di fakturmu: kamu yang menulisnya bersama akuntanmu. Aplikasi memakainya tanpa mengubah.
+Mentions à imprimer sur chaque facture (ton texte) ¦ Thông tin in trên mỗi hóa đơn (văn bản của bạn) ¦ Keterangan yang dicetak di setiap faktur (teksmu)
+vide : à écrire avec ton comptable ¦ trống: hãy viết cùng kế toán của bạn ¦ kosong: tulis bersama akuntanmu
+Champs obligatoires pour émettre une facture ¦ Trường bắt buộc để phát hành hóa đơn ¦ Kolom wajib untuk menerbitkan faktur
+Un champ que tu as déclaré obligatoire et laissé vide : la facture n’est pas émise. ¦ Một trường bạn đánh dấu bắt buộc mà để trống: hóa đơn không được phát hành. ¦ Kolom yang kamu tandai wajib dan dibiarkan kosong: faktur tidak diterbitkan.
+🏢 Mon cabinet ¦ 🏢 Văn phòng của tôi ¦ 🏢 Kantorku
+EXEMPLE NON JURIDIQUE — à faire écrire ou relire par ton conseil avant tout usage. ¦ VÍ DỤ KHÔNG CÓ GIÁ TRỊ PHÁP LÝ — trước khi dùng, hãy nhờ cố vấn của bạn soạn hoặc kiểm tra. ¦ CONTOH NONHUKUM — sebelum dipakai, minta penasihatmu menyusun atau memeriksanya.
+ton titre ¦ tiêu đề của bạn ¦ judulmu
+ton texte : écrit ou relu par ton conseil ¦ văn bản của bạn: do cố vấn của bạn soạn hoặc kiểm tra ¦ teksmu: disusun atau diperiksa oleh penasihatmu
+Mes modèles de contrat ¦ Mẫu hợp đồng của tôi ¦ Templat kontrakku
+Ton contrat, avec des champs que l’app remplit ¦ Hợp đồng của bạn, với các trường ứng dụng điền ¦ Kontrakmu, dengan kolom yang diisi aplikasi
+Enregistrer la version ¦ Lưu phiên bản ¦ Simpan versi
+L’app ne fournit aucun texte de contrat : c’est un acte qui t’engage et qui engage l’héritier, à faire écrire ou relire par ton conseil. L’app remplit des champs et garde l’historique de tes versions. ¦ Ứng dụng không cung cấp văn bản hợp đồng nào: đây là văn bản ràng buộc bạn và người thừa kế; hãy nhờ cố vấn của bạn soạn hoặc kiểm tra. Ứng dụng điền các trường và giữ lịch sử các phiên bản của bạn. ¦ Aplikasi tidak menyediakan teks kontrak apa pun: ini akta yang mengikatmu dan ahli waris; minta penasihatmu menyusun atau memeriksanya. Aplikasi mengisi kolom dan menyimpan riwayat versimu.
+＋ Nouveau modèle ¦ ＋ Mẫu mới ¦ ＋ Templat baru
+Mon contrat ¦ Hợp đồng của tôi ¦ Kontrakku
+Versions ¦ Phiên bản ¦ Versi
+Écris ou importe ton contrat ¦ Viết hoặc nhập hợp đồng của bạn ¦ Tulis atau impor kontrakmu
+Importer un .docx / .txt ¦ Nhập .docx / .txt ¦ Impor .docx / .txt
+Aperçu pour un héritier ¦ Xem trước cho người thừa kế ¦ Pratinjau untuk ahli waris
+{defunt} n’existe pas : le nom du défunt n’est jamais dans un courrier envoyé avant signature. {pourcentage} vient de 💶 « Honoraires d’un contrat ». ¦ {defunt} không tồn tại: tên người mất không bao giờ có trong thư gửi trước khi ký. {pourcentage} lấy từ 💶 “Thù lao trong hợp đồng”. ¦ {defunt} tidak ada: nama almarhum tidak pernah ada di surat yang dikirim sebelum tanda tangan. {pourcentage} berasal dari 💶 “Honorarium kontrak”.
+version {n} ¦ phiên bản {n} ¦ versi {n}
+Champ inconnu : {f} (ligne {l}). Corrige-le avant d’enregistrer. ¦ Trường không rõ: {f} (dòng {l}). Hãy sửa trước khi lưu. ¦ Kolom tidak dikenal: {f} (baris {l}). Perbaiki sebelum menyimpan.
+% à noter ¦ % cần nhập ¦ % untuk diisi
+Champ vide : {f} ¦ Trường trống: {f} ¦ Kolom kosong: {f}
+Version {n} enregistrée (Mes modèles) ¦ Đã lưu phiên bản {n} (Mẫu của tôi) ¦ Versi {n} disimpan (Templatku)
+Fonds par héritier ¦ Tiền theo người thừa kế ¦ Dana per ahli waris
+Aucun montant de succession : l’app ne connaît ni l’actif, ni le passif. On note seulement des mouvements réels que tu as vus passer. ¦ Không có số tiền di sản: ứng dụng không biết tài sản hay nợ. Bạn chỉ ghi các khoản thực tế đã thấy đi qua. ¦ Tanpa jumlah warisan: aplikasi tidak tahu aset maupun utang. Kamu hanya mencatat pergerakan nyata yang kamu lihat.
+Reçu du notaire ¦ Nhận từ công chứng viên ¦ Diterima dari notaris
+Frais refacturés ¦ Chi phí tính lại ¦ Biaya yang ditagihkan ulang
+Reversé ¦ Đã trả ¦ Dibayarkan
+Reste dû ¦ Còn phải trả ¦ Sisa dibayar
+pas de contrat ¦ không có hợp đồng ¦ tanpa kontrak
+reversé de trop : {s} ¦ trả thừa: {s} ¦ kelebihan bayar: {s}
+✓ soldé ¦ ✓ đã thanh toán xong ¦ ✓ lunas
+à reverser ¦ cần trả ¦ untuk dibayarkan
+Mouvements ¦ Các khoản ¦ Pergerakan
+＋ Noter un mouvement ¦ ＋ Ghi một khoản ¦ ＋ Catat pergerakan
+Commission = % du contrat × montant reçu. Reste dû = reçu − commission − frais − reversé. ¦ Hoa hồng = % hợp đồng × số tiền nhận. Còn lại = đã nhận − hoa hồng − chi phí − đã trả. ¦ Komisi = % kontrak × jumlah diterima. Sisa = diterima − komisi − biaya − dibayarkan.
+✎ Corriger un mouvement ¦ ✎ Sửa khoản ¦ ✎ Perbaiki pergerakan
+Commission proposée : {p} % de {r} = {c} (modifiable) ¦ Hoa hồng đề xuất: {p} % của {r} = {c} (có thể sửa) ¦ Komisi yang diusulkan: {p} % dari {r} = {c} (bisa diubah)
+virement, chèque… ¦ chuyển khoản, séc… ¦ transfer, cek…
+Versé à (représentant, si mineur ou sous tutelle) ¦ Đã trả (cho người đại diện nếu chưa thành niên hoặc được giám hộ) ¦ Dibayarkan (ke wakil jika di bawah umur atau di bawah perwalian)
+Montant incorrect. ¦ Số tiền không hợp lệ. ¦ Jumlah tidak valid.
+Mouvement corrigé ¦ Đã sửa khoản ¦ Pergerakan diperbaiki
+Mouvement noté ¦ Đã ghi khoản ¦ Pergerakan dicatat
+versé à {n} ¦ Đã trả {n} ¦ {n} dibayarkan
+Décompte — {n} ¦ Bảng quyết toán — {n} ¦ Laporan — {n}
+Aucun mouvement noté. ¦ Chưa ghi khoản nào. ¦ Belum ada pergerakan dicatat.
+Reste à reverser ¦ Còn phải trả ¦ Sisa untuk dibayarkan
+Noter un mouvement ¦ Ghi một khoản ¦ Catat pergerakan
+Décompte pour l’héritier ¦ Bảng quyết toán cho người thừa kế ¦ Laporan untuk ahli waris
+Facturer la commission ¦ Lập hóa đơn hoa hồng ¦ Tagihkan komisi
+Facture ¦ Hóa đơn ¦ Faktur
+Avoir ¦ Hóa đơn điều chỉnh giảm ¦ Nota kredit
+Devis ¦ Báo giá ¦ Penawaran
+N° de TVA ¦ Mã số thuế GTGT ¦ NPWP / No. PPN
+BROUILLON ¦ BẢN NHÁP ¦ DRAF
+ÉMIS ¦ ĐÃ PHÁT HÀNH ¦ DITERBITKAN
+ÉMISE ¦ ĐÃ PHÁT HÀNH ¦ DITERBITKAN
+Client ¦ Khách hàng ¦ Klien
+Total HT ¦ Tổng chưa thuế ¦ Total tanpa PPN
+TVA {r} % ¦ Thuế GTGT {r} % ¦ PPN {r} %
+Total TTC ¦ Tổng có thuế ¦ Total dengan PPN
+Commission du contrat de révélation ({p} % de la part reçue : {r}) ¦ Hoa hồng theo hợp đồng tiết lộ ({p} % phần đã nhận: {r}) ¦ Komisi menurut kontrak pengungkapan ({p} % dari bagian yang diterima: {r})
+Commission du contrat de révélation ({p} %) ¦ Hoa hồng theo hợp đồng tiết lộ ({p} %) ¦ Komisi menurut kontrak pengungkapan ({p} %)
+Temps passé ({h} h {m}) ¦ Thời gian đã dùng ({h} giờ {m}) ¦ Waktu terpakai ({h} j {m})
+Frais ¦ Chi phí ¦ Biaya
+🧾 DEVIS ¦ 🧾 BÁO GIÁ ¦ 🧾 PENAWARAN
+🧾 FACTURE ¦ 🧾 HÓA ĐƠN ¦ 🧾 FAKTUR
+{k} {n} ¦ {k} {n} ¦ {k} {n}
+Brouillon, pas encore numéroté ¦ Bản nháp, chưa có số ¦ Draf, belum bernomor
+Garder en brouillon ¦ Giữ làm bản nháp ¦ Simpan sebagai draf
+Ce que l’app ne fait pas : elle ne connaît ni ton statut, ni ton régime de TVA, ni les mentions que ta facture doit porter. C’est toi qui choisis le taux et qui écris les mentions (avec ton comptable). L’app numérote sans trou, interdit de modifier une facture émise, fait les additions et garde tout. ¦ Điều ứng dụng không làm: nó không biết tư cách của bạn, chế độ thuế GTGT hay các thông tin bắt buộc. Bạn chọn thuế suất và viết các thông tin (cùng kế toán). Ứng dụng đánh số không bỏ trống, cấm sửa hóa đơn đã phát hành, cộng tổng và lưu giữ mọi thứ. ¦ Yang tidak dilakukan aplikasi: tidak tahu statusmu, rezim PPN-mu, atau keterangan wajib. Tarifnya kamu pilih, keterangannya kamu tulis (bersama akuntanmu). Aplikasi memberi nomor tanpa celah, melarang mengubah faktur yang sudah diterbitkan, menjumlahkan, dan menyimpan semuanya.
+🏢 Mon cabinet : des champs obligatoires sont vides ({f}) : la facture ne pourra pas être émise. ¦ 🏢 Văn phòng của tôi: trường bắt buộc còn trống ({f}): không thể phát hành hóa đơn. ¦ 🏢 Kantorku: kolom wajib kosong ({f}): faktur tidak akan bisa diterbitkan.
+Adresse du client ¦ Địa chỉ khách hàng ¦ Alamat klien
+Prix HT ¦ Giá chưa thuế ¦ Harga tanpa PPN
+Taux de TVA (%) — choisi par toi ¦ Thuế suất GTGT (%) — do bạn chọn ¦ Tarif PPN (%) — pilihanmu
+ton taux ¦ thuế suất của bạn ¦ tarifmu
+Repris de ta dernière facture ; jamais deviné. ¦ Lấy từ hóa đơn gần nhất của bạn; không bao giờ đoán. ¦ Diambil dari faktur terakhirmu; tidak pernah ditebak.
+Aucun taux proposé : tape celui que t’a indiqué ton comptable. ¦ Không đề xuất thuế suất: hãy ghi thuế suất kế toán đã đưa bạn. ¦ Tidak ada tarif diusulkan: tulis yang diberikan akuntanmu.
+Émettre le devis n° {n} ¦ Phát hành báo giá số {n} ¦ Terbitkan penawaran no. {n}
+Émettre la facture n° {n} ¦ Phát hành hóa đơn số {n} ¦ Terbitkan faktur no. {n}
+Sur la facture ¦ Trên hóa đơn ¦ Di faktur
+à remplir ¦ cần điền ¦ untuk diisi
+⏱ Temps passé : non coché, compris dans la commission ¦ ⏱ Thời gian đã dùng: không đánh dấu, đã gồm trong hoa hồng ¦ ⏱ Waktu terpakai: tidak dicentang, sudah termasuk dalam komisi
+taux à choisir ¦ cần chọn thuế suất ¦ tarif perlu dipilih
+Émettre le devis {n} ? Il reste modifiable tant qu’il n’est pas accepté. ¦ Phát hành báo giá {n}? Vẫn có thể sửa khi chưa được chấp nhận. ¦ Terbitkan penawaran {n}? Masih bisa diubah selama belum diterima.
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. Émettre {n} ? ¦ Hóa đơn đã phát hành không thể sửa hay xóa nữa. Hóa đơn điều chỉnh giảm sẽ sửa nó. Phát hành {n}? ¦ Faktur yang sudah diterbitkan tidak bisa lagi diubah atau dihapus. Nota kredit memperbaikinya. Terbitkan {n}?
+Émettre ¦ Phát hành ¦ Terbitkan
+{n} émise ¦ Đã phát hành {n} ¦ {n} diterbitkan
+Brouillon gardé ¦ Đã giữ bản nháp ¦ Draf disimpan
+brouillon ¦ bản nháp ¦ draf
+émis ¦ đã phát hành ¦ diterbitkan
+avoir ¦ điều chỉnh giảm ¦ nota kredit
+✓ payée le {d} ¦ ✓ đã trả {d} ¦ ✓ dibayar {d}
+attendue ¦ đang chờ ¦ ditunggu
+Tout le cabinet ¦ Toàn văn phòng ¦ Seluruh kantor
+avec les mouvements de fonds ¦ kèm các khoản tiền ¦ dengan pergerakan dana
+CSV pour le comptable ¦ CSV cho kế toán ¦ CSV untuk akuntan
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. ¦ Hóa đơn đã phát hành không thể sửa hay xóa nữa. Hóa đơn điều chỉnh giảm sẽ sửa nó. ¦ Faktur yang sudah diterbitkan tidak bisa lagi diubah atau dihapus. Nota kredit memperbaikinya.
+Chercher… (n°, client, dossier) ¦ Tìm… (số, khách hàng, hồ sơ) ¦ Cari… (no., klien, berkas)
+TTC ¦ có thuế ¦ dengan PPN
+🧾 Faire un avoir ¦ 🧾 Phát hành hóa đơn điều chỉnh giảm ¦ 🧾 Terbitkan nota kredit
+Payée… ¦ Đã trả… ¦ Dibayar…
+Accepté ¦ Đã chấp nhận ¦ Diterima
+Transformer en facture ¦ Chuyển thành hóa đơn ¦ Ubah menjadi faktur
+Pas encore de facture. ¦ Chưa có hóa đơn nào. ¦ Belum ada faktur.
+Brouillon supprimé (aucun numéro consommé) ¦ Đã xóa bản nháp (không dùng số nào) ¦ Draf dihapus (tidak ada nomor terpakai)
+L’avoir reprend les lignes de la facture en négatif, avec son propre numéro. Il ne peut plus être modifié. ¦ Hóa đơn điều chỉnh giảm lấy lại các dòng của hóa đơn với dấu âm, với số riêng. Không thể sửa nữa. ¦ Nota kredit mengambil baris faktur dengan tanda minus, dengan nomornya sendiri. Tidak bisa diubah lagi.
+Payée ¦ Đã trả ¦ Dibayar
+Date (AAAA-MM-JJ) et moyen, ex. : 2026-11-20 virement ¦ Ngày (YYYY-MM-DD) và cách trả, vd: 2026-11-20 chuyển khoản ¦ Tanggal (TTTT-BB-HH) dan cara, mis.: 2026-11-20 transfer
+Paiement noté ¦ Đã ghi thanh toán ¦ Pembayaran dicatat
+Devis accepté ¦ Báo giá đã được chấp nhận ¦ Penawaran diterima
+Brouillon de facture prêt ¦ Bản nháp hóa đơn đã sẵn sàng ¦ Draf faktur siap
+Registre des factures ¦ Sổ hóa đơn ¦ Register faktur
+Factures du dossier ¦ Hóa đơn của hồ sơ ¦ Faktur berkas
+Devis et factures ¦ Báo giá và hóa đơn ¦ Penawaran dan faktur
+Faire un devis ¦ Tạo báo giá ¦ Buat penawaran
+Faire une facture ¦ Tạo hóa đơn ¦ Buat faktur
+Pas encore de facture pour ce dossier. ¦ Hồ sơ này chưa có hóa đơn. ¦ Belum ada faktur untuk berkas ini.
+HT ¦ chưa thuế ¦ tanpa PPN
+{n} base(s) verrouillée(s) non lue(s) ¦ {n} cơ sở dữ liệu bị khóa chưa đọc ¦ {n} basis data terkunci belum dibaca
+Dossiers ouverts ¦ Hồ sơ đang mở ¦ Berkas terbuka
+dont {n} clos ¦ trong đó {n} đã đóng ¦ di antaranya {n} ditutup
+Délai moyen (ouvert → remis) ¦ Thời gian trung bình (mở → giao) ¦ Durasi rata-rata (dibuka → diserahkan)
+sur {n} dossiers remis ¦ trên {n} hồ sơ đã giao ¦ dari {n} berkas yang diserahkan
+pas assez de dossiers pour une moyenne ¦ quá ít hồ sơ để tính trung bình ¦ terlalu sedikit berkas untuk rata-rata
+Contrats signés / refusés ¦ Hợp đồng đã ký / bị từ chối ¦ Kontrak ditandatangani / ditolak
+{p} % signés · {n} sans réponse ¦ {p} % đã ký · {n} chưa trả lời ¦ {p} % ditandatangani · {n} tanpa jawaban
+Facturé / encaissé ({k}) ¦ Đã lập hóa đơn / đã thu ({k}) ¦ Ditagihkan / tertagih ({k})
+encaissé {a} · reste {b} ¦ đã thu {a} · còn {b} ¦ {a} tertagih · {b} sisa
+Pas encore de facture : seuls le temps et les contrats sont comptés ¦ Chưa có hóa đơn: chỉ tính thời gian và hợp đồng ¦ Belum ada faktur: hanya waktu dan kontrak yang dihitung
+{n} en cours depuis {m} mois en moyenne ¦ {n} đang làm, trung bình {m} tháng ¦ {n} berjalan, rata-rata {m} bulan
+Temps passé par dossier (heures) ¦ Thời gian đã dùng cho mỗi hồ sơ (giờ) ¦ Waktu terpakai per berkas (jam)
+Aucun temps noté. ¦ Chưa ghi thời gian. ¦ Belum ada waktu dicatat.
+Voir en tableau ¦ Xem dạng bảng ¦ Lihat sebagai tabel
+Facturé et encaissé par trimestre ({k}) ¦ Đã lập hóa đơn và đã thu theo quý ({k}) ¦ Ditagihkan dan tertagih per kuartal ({k})
+Facturé ¦ Đã lập hóa đơn ¦ Ditagihkan
+Encaissé ¦ Đã thu ¦ Tertagih
+Aucun nom d’héritier dans cette vue : des numéros de dossier et des totaux. Rien n’est écrit. ¦ Không có tên người thừa kế trong chế độ xem này: số hồ sơ và tổng. Không ghi gì. ¦ Tidak ada nama ahli waris di tampilan ini: nomor berkas dan total. Tidak ada yang ditulis.
+Pour {n} ¦ Gửi {n} ¦ Untuk {n}
+le notaire ¦ công chứng viên ¦ notaris
+⤓ Fabriquer la copie ¦ ⤓ Tạo bản sao ¦ ⤓ Buat salinan
+Ce qui part ¦ Những gì được gửi ¦ Apa yang dikirim
+Tableau des héritiers et parts, arbre, chaîne de filiation (comme le PDF) ¦ Bảng người thừa kế và phần, cây, chuỗi quan hệ huyết thống (như bản PDF) ¦ Tabel ahli waris dan bagian, pohon, rantai keturunan (seperti PDF)
+📑 Pièces (images des actes) ¦ 📑 Bằng chứng (ảnh giấy tờ) ¦ 📑 Bukti (gambar akta)
+Adresses des héritiers ¦ Địa chỉ người thừa kế ¦ Alamat ahli waris
+🕵️ Joindre les recherches faites ¦ 🕵️ Đính kèm các lần tìm kiếm đã làm ¦ 🕵️ Lampirkan penelusuran yang dilakukan
+Journal, échanges, temps, factures ne partent jamais. ¦ Nhật ký, liên hệ, thời gian và hóa đơn không bao giờ được gửi. ¦ Jurnal, kontak, waktu, dan faktur tidak pernah dikirim.
+Protection ¦ Bảo vệ ¦ Perlindungan
+Le fichier est chiffré (AES-256) ; la page demande le mot de passe à l’ouverture. Donne-le au notaire par un autre moyen (téléphone, SMS). Oublié = fichier illisible, même pour toi (refais-en un). ¦ Tệp được mã hóa (AES-256); trang hỏi mật khẩu khi mở. Hãy đưa mật khẩu cho công chứng viên bằng đường khác (điện thoại, SMS). Quên = tệp không đọc được, kể cả với bạn (hãy tạo tệp mới). ¦ Berkas dienkripsi (AES-256); halaman meminta kata sandi saat dibuka. Berikan kepada notaris lewat jalur lain (telepon, SMS). Lupa = berkas tidak terbaca, juga bagimu (buat yang baru).
+Copie v{n} ; l’app garde la liste des copies faites, pas les fichiers. ¦ Bản sao v{n}; ứng dụng giữ danh sách các bản sao đã tạo, không giữ tệp. ¦ Salinan v{n}; aplikasi menyimpan daftar salinan yang dibuat, bukan berkasnya.
+Voilà ce qui part : {h} héritiers, {p} pièces, {a} adresse(s). ¦ Gửi: {h} người thừa kế, {p} bằng chứng, {a} địa chỉ. ¦ Dikirim: {h} ahli waris, {p} bukti, {a} alamat.
+Fiche confidentielle : {n} retirée (calcul inchangé). ¦ Thẻ bảo mật: đã bỏ qua {n} (phép tính không đổi). ¦ Kartu rahasia: {n} dilewati (perhitungan tidak berubah).
+une branche n’est pas tranchée ¦ một nhánh chưa được quyết định ¦ satu cabang belum diputuskan
+Fichier trop lourd pour un courriel (plus de 20 Mo). Continuer quand même ? ¦ Tệp quá lớn để gửi email (trên 20 MB). Vẫn tiếp tục? ¦ Berkas terlalu besar untuk email (lebih dari 20 MB). Tetap lanjutkan?
+🤝 Copie pour le notaire ¦ 🤝 Bản sao cho công chứng viên ¦ 🤝 Salinan untuk notaris
+Copie v{v} du {d}, calcul indicatif : à vérifier par l’étude. ¦ Bản sao v{v} ngày {d}, phép tính tham khảo: văn phòng công chứng cần kiểm tra. ¦ Salinan v{v} tanggal {d}, perhitungan indikatif: diperiksa oleh kantor notaris.
+{n} · {t} ¦ {n} · {t} ¦ {n} · {t}
+Copie protégée par un mot de passe. ¦ Bản sao được bảo vệ bằng mật khẩu. ¦ Salinan dilindungi kata sandi.
+Copie v{n} fabriquée ¦ Đã tạo bản sao v{n} ¦ Salinan v{n} dibuat
+Mouvement supprimé ¦ Đã xóa khoản ¦ Pergerakan dihapus
+⚰️ Décès d’un héritier ¦ ⚰️ Người thừa kế qua đời ¦ ⚰️ Kematian ahli waris
+Ce que « ✓ C’est lui » écrit : la fiche sert aussi aux autres dossiers. ¦ “✓ Đúng là người này” ghi gì: thẻ cũng dùng cho hồ sơ khác. ¦ Apa yang dicatat “✓ Ini orangnya”: kartu juga dipakai berkas lain.
+Le décès sur la fiche et le statut du dossier ¦ Ngày mất trên thẻ và trạng thái trong hồ sơ ¦ Kematian di kartu dan status di berkas
+Seulement le statut du dossier ¦ Chỉ trạng thái trong hồ sơ ¦ Hanya status di berkas
+Les pistes sont montrées à partir de ce score (sur 100). Plus haut : moins de bruit, risque d’en rater. ¦ Dấu vết hiện từ điểm này (trên 100). Cao hơn: ít nhiễu hơn, có thể bỏ sót. ¦ Jejak tampil mulai skor ini (dari 100). Lebih tinggi: lebih sedikit gangguan, risiko ada yang terlewat.
+Après chaque nouvel import du fichier INSEE : vérifier les dossiers en cours tout seul (jamais de changement sans ton clic). ¦ Sau mỗi lần nhập mới tệp INSEE: tự kiểm tra các hồ sơ đang làm (không bao giờ thay đổi khi bạn chưa nhấp). ¦ Setelah setiap impor baru berkas INSEE: periksa sendiri berkas berjalan (tidak pernah ada perubahan tanpa klikmu).
+Automatique, dans la cloche ¦ Tự động, trong chuông ¦ Otomatis, di lonceng
+Seulement à la main ¦ Chỉ thủ công ¦ Hanya manual
+📋 Questionnaire ¦ 📋 Bảng hỏi ¦ 📋 Kuesioner
+Ce que l’héritier te renvoie après avoir rempli le questionnaire. ¦ Những gì người thừa kế gửi lại sau khi điền. ¦ Apa yang dikirim kembali ahli waris setelah mengisi.
+Un petit fichier .json ¦ Một tệp .json nhỏ ¦ Berkas .json kecil
+La page .html remplie ¦ Trang .html đã điền ¦ Halaman .html yang sudah diisi
+Pré-rempli : son nom et sa naissance seulement, jamais le défunt ni un montant. ¦ Điền sẵn: chỉ tên và ngày sinh của người đó, không bao giờ có người mất hay số tiền. ¦ Sudah diisi: hanya nama dan kelahirannya, tidak pernah almarhum atau jumlah uang.
+Pré-rempli (ce qui le concerne) ¦ Điền sẵn (phần liên quan đến người đó) ¦ Sudah diisi (yang menyangkut dirinya)
+Tout vide ¦ Để trống hết ¦ Semua kosong
+📞 Échanges ¦ 📞 Liên hệ ¦ 📞 Kontak
+Où noter et relire les appels, courriels et visites. ¦ Nơi ghi và đọc các cuộc gọi, email và lần gặp. ¦ Tempat mencatat dan membaca telepon, email, dan kunjungan.
+Un onglet du dossier et un raccourci dans 👥 Héritiers ¦ Thẻ hồ sơ và lối tắt trong 👥 Người thừa kế ¦ Tab berkas dan pintasan di 👥 Ahli waris
+Seulement dans 👥 Héritiers ¦ Chỉ trong 👥 Người thừa kế ¦ Hanya di 👥 Ahli waris
+Les courriers du Registre dans la liste des échanges. ¦ Thư trong sổ trong danh sách liên hệ. ¦ Surat dari register di daftar kontak.
+Montrés en gris, en lecture ¦ Hiện màu xám, chỉ để đọc ¦ Tampil abu-abu, hanya baca
+Pas montrés ¦ Không hiện ¦ Tidak ditampilkan
+📮 Recommandés ¦ 📮 Thư bảo đảm ¦ 📮 Surat tercatat
+Relance quand l’accusé de réception n’est pas revenu (réglable aussi pour chaque courrier). ¦ Nhắc khi báo phát chưa quay về (có thể chỉnh cho từng thư). ¦ Pengingat saat tanda terima belum kembali (bisa diatur per surat).
+15 jours ¦ 15 ngày ¦ 15 hari
+8 jours ¦ 8 ngày ¦ 8 hari
+21 jours ¦ 21 ngày ¦ 21 hari
+L’app n’interroge jamais La Poste : le lien ouvre la page dans ton navigateur, tu notes toi-même l’AR. ¦ Ứng dụng không bao giờ hỏi La Poste: liên kết mở trang trong trình duyệt của bạn, báo phát bạn tự ghi. ¦ Aplikasi tidak pernah bertanya ke La Poste: tautan membuka halaman di perambanmu, tanda terima kamu catat sendiri.
+Lien vers la page de suivi ¦ Liên kết đến trang theo dõi ¦ Tautan ke halaman pelacakan
+Pas de lien (on copie le numéro) ¦ Không liên kết (số được sao chép) ¦ Tanpa tautan (nomor disalin)
+Adresse de la page de suivi, avec {numero} (https:// seulement). ¦ Địa chỉ trang theo dõi, có {numero} (chỉ https://). ¦ Alamat halaman pelacakan, dengan {numero} (hanya https://).
+🧾 Devis et factures ¦ 🧾 Báo giá và hóa đơn ¦ 🧾 Penawaran dan faktur
+Un seul registre pour le cabinet ¦ Một sổ duy nhất cho văn phòng ¦ Satu register untuk kantor
+Dans la généalogie des dossiers ¦ Trong cây của các hồ sơ ¦ Di pohon berkas
+F-2026-0042 (remis à 1 chaque année) ¦ F-2026-0042 (mỗi năm từ 1) ¦ F-2026-0042 (mulai 1 tiap tahun)
+Compteur unique (F-0042) ¦ Một bộ đếm duy nhất (F-0042) ¦ Satu penghitung (F-0042)
+La ligne « temps passé » proposée sur la facture. ¦ Dòng “thời gian đã dùng” được đề xuất trên hóa đơn. ¦ Baris “waktu terpakai” yang diusulkan di faktur.
+Temps décoché quand il y a une commission ¦ Không đánh dấu thời gian nếu có hoa hồng ¦ Waktu tidak dicentang jika ada komisi
+Temps toujours coché ¦ Luôn đánh dấu thời gian ¦ Waktu selalu dicentang
+Préfixe des factures. ¦ Tiền tố hóa đơn. ¦ Awalan faktur.
+Préfixe des avoirs. ¦ Tiền tố hóa đơn điều chỉnh giảm. ¦ Awalan nota kredit.
+Préfixe des devis. ¦ Tiền tố báo giá. ¦ Awalan penawaran.
+📈 Activité ¦ 📈 Hoạt động ¦ 📈 Aktivitas
+La période montrée en ouvrant le tableau de bord. ¦ Khoảng thời gian hiện khi mở bảng tổng quan. ¦ Periode yang tampil saat dasbor dibuka.
+L’année en cours ¦ Năm nay ¦ Tahun ini
+Les 12 derniers mois ¦ 12 tháng gần nhất ¦ 12 bulan terakhir
+Les montants facturés et encaissés. ¦ Số tiền đã lập hóa đơn và đã thu. ¦ Jumlah yang ditagihkan dan tertagih.
+Au choix (bouton) ¦ Tùy ý (công tắc) ¦ Sesuai keinginan (sakelar)
+La copie contient des actes et des noms de vivants. ¦ Bản sao chứa giấy tờ và tên người còn sống. ¦ Salinan berisi akta dan nama orang yang masih hidup.
+Mot de passe coché au départ ¦ Đánh dấu mật khẩu từ đầu ¦ Kata sandi dicentang sejak awal
+Décoché au départ ¦ Không đánh dấu từ đầu ¦ Tidak dicentang sejak awal
+Le notaire reçoit souvent les adresses à part. ¦ Công chứng viên thường nhận địa chỉ riêng. ¦ Notaris sering menerima alamat secara terpisah.
+Adresses décochées au départ ¦ Không đánh dấu địa chỉ từ đầu ¦ Alamat tidak dicentang sejak awal
+Cochées au départ ¦ Đánh dấu từ đầu ¦ Dicentang sejak awal
+🗺 Carte des héritiers ¦ 🗺 Bản đồ người thừa kế ¦ 🗺 Peta ahli waris
+Rien n’est envoyé en ligne : la commune vient de la base ; le numéro, seulement si la BAN du département est déjà dans l’app (🗺️ Plan des adresses). ¦ Không có gì được gửi lên mạng: xã lấy từ cơ sở dữ liệu; số nhà chỉ khi BAN của tỉnh đã có trong ứng dụng (🗺️ Bản đồ địa chỉ). ¦ Tidak ada yang dikirim daring: kota berasal dari basis data; nomor rumah hanya jika BAN departemen sudah ada di aplikasi (🗺️ Peta alamat).
+Le numéro de rue (BAN déjà téléchargée) ¦ Số nhà (đã tải BAN) ¦ Nomor rumah (BAN sudah diunduh)
+L’app n’a pas d’annuaire des notaires et n’en invente pas. ¦ Ứng dụng không có danh sách công chứng viên và không bịa ra ai. ¦ Aplikasi tidak punya daftar notaris dan tidak mengarang satu pun.
+Les notaires de tes dossiers et contacts ¦ Công chứng viên trong hồ sơ và danh bạ của bạn ¦ Notaris dari berkas dan kontakmu
+Pas de notaires ¦ Không có công chứng viên ¦ Tanpa notaris
+Le brouillon de contrat écrit par l’app. Un contrat t’engage : fais-le écrire ou relire par ton conseil. ¦ Bản nháp hợp đồng do ứng dụng soạn. Hợp đồng ràng buộc bạn: hãy nhờ cố vấn soạn hoặc kiểm tra. ¦ Draf kontrak yang disusun aplikasi. Kontrak mengikatmu: minta penasihatmu menyusun atau memeriksanya.
+Retiré : page vide avec les champs ¦ Bỏ đi: trang trống với các trường ¦ Dihapus: halaman kosong dengan kolom
+Gardé, marqué « exemple non juridique » ¦ Giữ lại, ghi “ví dụ không có giá trị pháp lý” ¦ Disimpan, ditandai “contoh nonhukum”
+Chaque contrat rangé retient la version utilisée. ¦ Mỗi hợp đồng đã lưu nhớ phiên bản đã dùng. ¦ Setiap kontrak yang disimpan mengingat versi yang dipakai.
+Toutes les versions gardées ¦ Giữ mọi phiên bản ¦ Semua versi disimpan
+Seulement la dernière ¦ Chỉ phiên bản cuối ¦ Hanya yang terakhir
+💶 Fonds ¦ 💶 Tiền ¦ 💶 Dana
+Commission = % du contrat × montant reçu. ¦ Hoa hồng = % hợp đồng × số tiền nhận. ¦ Komisi = % kontrak × jumlah diterima.
+Calculée puis modifiable ¦ Tính sẵn, rồi sửa được ¦ Dihitung, lalu bisa diubah
+Toujours tapée à la main ¦ Luôn nhập tay ¦ Selalu ditulis manual
+Le décompte à l’héritier. ¦ Bảng quyết toán cho người thừa kế. ¦ Laporan untuk ahli waris.
+Décompte imprimable ¦ Bảng quyết toán để in ¦ Laporan untuk dicetak
+Écran seulement ¦ Chỉ trên màn hình ¦ Hanya layar
+🔗 Double preuve ¦ 🔗 Bằng chứng kép ¦ 🔗 Bukti ganda
+Le seuil d’un lien solide. ¦ Ngưỡng của một mối liên hệ chắc chắn. ¦ Ambang hubungan yang kuat.
+Deux pièces par lien ¦ Hai bằng chứng mỗi mối liên hệ ¦ Dua bukti per hubungan
+Une seule (signaler seulement « aucune ») ¦ Chỉ một (chỉ báo “không có”) ¦ Hanya satu (hanya tandai “tidak ada”)
+Dans la liste « avant de remettre ». ¦ Trong danh sách “trước khi giao”. ¦ Di daftar “sebelum penyerahan”.
+« À revoir » (n’empêche rien) ¦ “Cần xem lại” (không chặn gì) ¦ “Perlu ditinjau” (tidak memblokir apa pun)
+Bloquant ¦ Chặn ¦ Memblokir
+🗓 Dates importantes ¦ 🗓 Ngày quan trọng ¦ 🗓 Tanggal penting
+Les rappels proposés pour une nouvelle date (réglables pour chaque date). L’app ne calcule aucun délai légal. ¦ Lời nhắc đề xuất cho một ngày mới (chỉnh được cho từng ngày). Ứng dụng không tính thời hạn pháp lý nào. ¦ Pengingat yang diusulkan untuk tanggal baru (bisa diatur per tanggal). Aplikasi tidak menghitung tenggat hukum apa pun.
+J−30, J−7, J−1 ¦ N−30, N−7, N−1 ¦ H−30, H−7, H−1
+J−7 seulement ¦ Chỉ N−7 ¦ Hanya H−7
+Où les voir dans 📁 Dossier. ¦ Bạn thấy chúng ở đâu trong 📁 Hồ sơ. ¦ Di mana kamu melihatnya di 📁 Berkas.
+Dans les échéances, avec un drapeau 🗓 ¦ Trong các hạn, với huy hiệu 🗓 ¦ Di tenggat, dengan lencana 🗓
+Un bloc à part ¦ Khối riêng ¦ Blok terpisah
+👥 Fusion de dossiers ¦ 👥 Gộp hồ sơ ¦ 👥 Penggabungan berkas
+Les successions restent distinctes : le calcul n’est jamais mélangé. ¦ Các di sản vẫn tách riêng: phép tính không bao giờ bị trộn. ¦ Warisan tetap terpisah: perhitungan tidak pernah dicampur.
+Deux défunts, deux calculs côte à côte ¦ Hai người mất, hai phép tính cạnh nhau ¦ Dua almarhum, dua perhitungan berdampingan
+Dossiers liés (recherches en commun) ¦ Hồ sơ liên kết (tìm kiếm chung) ¦ Berkas tertaut (penelusuran bersama)
+Combien de temps la fusion peut être annulée. ¦ Có thể hoàn tác gộp trong bao lâu. ¦ Berapa lama penggabungan bisa dibatalkan.
+↶ pendant 30 jours ¦ ↶ trong 30 ngày ¦ ↶ selama 30 hari
+↶ tant que rien n’a été ajouté ¦ ↶ khi chưa thêm gì ¦ ↶ selama belum ada yang ditambahkan
+Joindre les recherches faites au dossier du notaire. ¦ Đính kèm các lần tìm kiếm đã làm vào hồ sơ gửi công chứng viên. ¦ Lampirkan penelusuran yang dilakukan ke berkas untuk notaris.
+Coché au départ ¦ Đánh dấu từ đầu ¦ Dicentang sejak awal
+📦 Archive ¦ 📦 Lưu trữ ¦ 📦 Arsip
+Le mot de passe de l’archive de fin de dossier. Oublié = archive perdue. ¦ Mật khẩu lưu trữ khi kết thúc hồ sơ. Quên = mất kho lưu trữ. ¦ Kata sandi arsip di akhir berkas. Lupa = arsip hilang.
+Proposé, coché ¦ Đề xuất, đánh dấu ¦ Diusulkan, dicentang
+Pas proposé ¦ Không đề xuất ¦ Tidak diusulkan
+💡 Autres idées ¦ 💡 Thêm vài ý tưởng ¦ 💡 Ide lainnya
+🔗 Le dossier lié d’un héritier mort après le défunt. ¦ 🔗 Hồ sơ liên kết cho người thừa kế mất sau người để lại di sản. ¦ 🔗 Berkas tertaut untuk ahli waris yang meninggal setelah pewaris.
+Ses descendants rattachés ¦ Con cháu của người đó được gắn ¦ Keturunannya ditautkan
+📮 Une lettre par service : quels actes. ¦ 📮 Mỗi cơ quan một thư: những giấy tờ nào. ¦ 📮 Satu surat per kantor: akta mana.
+Manquants et déjà demandés ¦ Còn thiếu và đã xin ¦ Yang kurang dan yang sudah diminta
+⏳ Délai de réponse par organisme. ¦ ⏳ Thời gian trả lời theo cơ quan. ¦ ⏳ Waktu balasan per kantor.
+⏳ Nombre de courriers avant de donner un délai. ¦ ⏳ Số thư trước khi hiện thời gian. ¦ ⏳ Jumlah surat sebelum waktu ditampilkan.
+📅 La cloche prévient avant qu’une copie d’acte soit trop ancienne (durée tapée par toi pour chaque pièce). ¦ 📅 Chuông báo trước khi bản sao giấy tờ quá cũ (thời hạn bạn nhập cho từng bằng chứng). ¦ 📅 Lonceng memberi tahu sebelum salinan akta terlalu lama (masa berlakunya kamu isi per bukti).
+7 jours ¦ 7 ngày ¦ 7 hari
+🙈 Écran partagé : ce qui remplace les noms. ¦ 🙈 Màn hình chia sẻ: thay tên bằng gì. ¦ 🙈 Layar bersama: apa pengganti nama.
+Initiales ¦ Chữ cái đầu ¦ Inisial
+Numéros (Héritier 1, 2…) ¦ Số (Người thừa kế 1, 2…) ¦ Nomor (Ahli waris 1, 2…)
+🙈 Écran partagé : les montants. ¦ 🙈 Màn hình chia sẻ: số tiền. ¦ 🙈 Layar bersama: jumlah uang.
+Montants masqués ¦ Ẩn số tiền ¦ Jumlah disembunyikan
+Montants visibles ¦ Hiện số tiền ¦ Jumlah terlihat
+avec AR ¦ có báo phát ¦ dengan tanda terima
+sans AR ¦ không có báo phát ¦ tanpa tanda terima
+lettre suivie ¦ gửi có theo dõi ¦ kiriman terlacak
+pas en recommandé ¦ không bảo đảm ¦ tidak tercatat
+Son état civil ¦ Hộ tịch của người đó ¦ Status sipilnya
+nom de naissance, prénoms, date et lieu de naissance ¦ họ khai sinh, tên, ngày và nơi sinh ¦ nama lahir, nama depan, tanggal dan tempat lahir
+mariage, PACS, divorce, dates ¦ kết hôn, kết đôi dân sự, ly hôn, ngày tháng ¦ perkawinan, kemitraan, perceraian, tanggal
+prénoms, dates de naissance, décédés ? ¦ tên, ngày sinh, đã mất? ¦ nama, tanggal lahir, sudah meninggal?
+avec un moyen de les joindre ¦ kèm cách liên lạc ¦ dengan cara menghubungi mereka
+Documents qu’il peut fournir ¦ Giấy tờ người đó có thể cung cấp ¦ Dokumen yang bisa ia berikan
+livret de famille, actes, jugement… ¦ sổ gia đình, giấy tờ, bản án… ¦ buku keluarga, akta, putusan…
+Une question à toi ¦ Câu hỏi của bạn ¦ Pertanyaanmu
+💾 Fichier à remplir ¦ 💾 Tệp để điền ¦ 💾 Berkas untuk diisi
+🖨 Papier (PDF) ¦ 🖨 Giấy (PDF) ¦ 🖨 Kertas (PDF)
+Ce qui le concerne ¦ Phần liên quan đến người đó ¦ Yang menyangkut dirinya
+Famille connue ¦ Gia đình đã biết ¦ Keluarga yang diketahui
+Sa question ¦ Câu hỏi của người đó ¦ Pertanyaannya
+Reversé à l’héritier ¦ Đã trả cho người thừa kế ¦ Dibayarkan ke ahli waris
+SIRET ¦ SIRET ¦ SIRET
+Mentions ¦ Thông tin ¦ Keterangan
+Trimestre ¦ Quý ¦ Kuartal
+Personnes rattachées ¦ Thẻ được gắn ¦ Kartu tertaut
+Courriers, échanges, fonds ¦ Thư, liên hệ, tiền ¦ Surat, kontak, dana
+Temps et frais, échéances ¦ Thời gian và chi phí, hạn ¦ Waktu dan biaya, tenggat
+Questionnaire d’héritier fabriqué ¦ Đã tạo bảng hỏi cho người thừa kế ¦ Kuesioner ahli waris dibuat
+Réponses d’un questionnaire écrites ¦ Đã nhập câu trả lời bảng hỏi ¦ Jawaban kuesioner dimasukkan
+Copie du dossier pour le notaire ¦ Bản sao hồ sơ cho công chứng viên ¦ Salinan berkas untuk notaris
+Facture émise ou imprimée ¦ Hóa đơn đã phát hành hoặc in ¦ Faktur diterbitkan atau dicetak
+Registre des factures (CSV) ¦ Sổ hóa đơn (CSV) ¦ Register faktur (CSV)
+Décompte des fonds imprimé ¦ Đã in bảng quyết toán tiền ¦ Laporan dana dicetak
+Recherches faites (pour le notaire) ¦ Các lần tìm kiếm đã làm (cho công chứng viên) ¦ Penelusuran yang dilakukan (untuk notaris)
+Image de la carte des héritiers ¦ Ảnh bản đồ người thừa kế ¦ Gambar peta ahli waris
+Contrat imprimé ¦ Đã in hợp đồng ¦ Kontrak dicetak
+Dossiers fusionnés ¦ Đã gộp hồ sơ ¦ Berkas digabung
+chiffrée ¦ đã mã hóa ¦ dienkripsi
+sans mot de passe ¦ không mật khẩu ¦ tanpa kata sandi
+avec les adresses ¦ có địa chỉ ¦ dengan alamat
+sans adresse ¦ không địa chỉ ¦ tanpa alamat
+deux défunts ¦ hai người mất ¦ dua almarhum
+dossiers liés ¦ hồ sơ liên kết ¦ berkas tertaut
+Aucune lettre à ranger. ¦ Không có thư nào để lưu. ¦ Tidak ada surat untuk disimpan.
+Avec qui ? ¦ Với ai? ¦ Dengan siapa?
+Ce dossier est archivé : rouvre-le d’abord. ¦ Hồ sơ này đã lưu trữ: hãy mở lại trước. ¦ Berkas ini diarsipkan: buka kembali dulu.
+Ce fichier n’est pas un .docx. ¦ Tệp này không phải .docx. ¦ Berkas ini bukan .docx.
+Ce n’est pas un devis. ¦ Đây không phải báo giá. ¦ Ini bukan penawaran.
+Cette facture a déjà un avoir. ¦ Hóa đơn này đã có hóa đơn điều chỉnh giảm. ¦ Faktur ini sudah punya nota kredit.
+Choisis la date. ¦ Chọn một ngày. ¦ Pilih tanggal.
+Choisis toi-même le taux de TVA (avec ton comptable) avant d’émettre. ¦ Hãy tự chọn thuế suất GTGT (cùng kế toán) trước khi phát hành. ¦ Pilih sendiri tarif PPN (bersama akuntanmu) sebelum menerbitkan.
+Choisis un autre dossier. ¦ Chọn hồ sơ khác. ¦ Pilih berkas lain.
+Dossier clos ou archivé : rouvre-le d’abord. ¦ Hồ sơ đã đóng hoặc lưu trữ: hãy mở lại trước. ¦ Berkas ditutup atau diarsipkan: buka kembali dulu.
+Déjà émise. ¦ Đã phát hành. ¦ Sudah diterbitkan.
+Facture introuvable. ¦ Không tìm thấy hóa đơn. ¦ Faktur tidak ditemukan.
+La facture n’a aucune ligne. ¦ Hóa đơn không có dòng nào. ¦ Faktur tidak punya baris.
+La fusion date de plus de 30 jours : elle ne peut plus être annulée. ¦ Lần gộp đã quá 30 ngày: không thể hoàn tác nữa. ¦ Penggabungan lebih dari 30 hari: tidak bisa dibatalkan lagi.
+Le mot de passe est obligatoire (réglage). ¦ Bắt buộc có mật khẩu (cài đặt). ¦ Kata sandi wajib (pengaturan).
+Ligne INSEE introuvable. ¦ Không tìm thấy dòng INSEE. ¦ Baris INSEE tidak ditemukan.
+Ligne incorrecte : quantité ou prix. ¦ Dòng không hợp lệ: số lượng hoặc giá. ¦ Baris tidak valid: jumlah atau harga.
+Mouvement introuvable. ¦ Không tìm thấy khoản. ¦ Pergerakan tidak ditemukan.
+Numéro déjà pris : renuméroter le brouillon. ¦ Số đã được dùng: hãy đánh số lại bản nháp. ¦ Nomor sudah dipakai: beri nomor ulang draf.
+Où as-tu cherché ? ¦ Bạn đã tìm ở đâu? ¦ Di mana kamu mencari?
+Quelque chose a été ajouté depuis la fusion : elle ne peut plus être annulée. ¦ Đã có thứ được thêm từ khi gộp: không thể hoàn tác nữa. ¦ Ada yang ditambahkan sejak penggabungan: tidak bisa dibatalkan lagi.
+Seule une facture émise peut être payée. ¦ Chỉ hóa đơn đã phát hành mới được thanh toán. ¦ Hanya faktur yang sudah diterbitkan yang bisa dibayar.
+Taux de TVA incorrect (ex. : le taux que t’a indiqué ton comptable). ¦ Thuế suất GTGT không hợp lệ (vd: thuế suất kế toán đã đưa bạn). ¦ Tarif PPN tidak valid (mis.: tarif yang diberikan akuntanmu).
+Type d’événement « Décès » introuvable. ¦ Không tìm thấy loại sự kiện “Mất”. ¦ Jenis peristiwa “Kematian” tidak ditemukan.
+Un avoir corrige une facture émise. ¦ Hóa đơn điều chỉnh giảm sửa một hóa đơn đã phát hành. ¦ Nota kredit memperbaiki faktur yang sudah diterbitkan.
+Un devis accepté ne se modifie plus. ¦ Báo giá đã chấp nhận không còn sửa được. ¦ Penawaran yang sudah diterima tidak diubah lagi.
+« D’où vient cette date » est obligatoire. ¦ “Ngày này từ đâu” là bắt buộc. ¦ “Dari mana tanggal ini” wajib diisi.
+Échange introuvable. ¦ Không tìm thấy lần liên hệ. ¦ Kontak tidak ditemukan.
+💶 Un reversement reste en attente : archiver quand même ? ¦ 💶 Còn một khoản chi trả đang chờ: vẫn lưu trữ? ¦ 💶 Masih ada pembayaran yang menunggu: tetap arsipkan?
+🔐 Archive protégée : tape son mot de passe. ¦ 🔐 Kho lưu trữ được bảo vệ: hãy nhập mật khẩu. ¦ 🔐 Arsip terlindungi: ketik kata sandinya.
+🏢 Mon cabinet : un champ que tu as déclaré obligatoire est vide ({f}) : la facture n’est pas émise. ¦ 🏢 Văn phòng của tôi: một trường bạn đánh dấu bắt buộc còn trống ({f}): hóa đơn không được phát hành. ¦ 🏢 Kantorku: kolom yang kamu tandai wajib kosong ({f}): faktur tidak diterbitkan.
+J−{n} ¦ N−{n} ¦ H−{n}
+=descendant rattaché ¦ con cháu được gắn ¦ keturunan yang ditautkan
+=échange noté ¦ lần liên hệ đã ghi ¦ kontak tercatat
+# corrections : préfixes, émission datée du jour, INSEE, fiches verrouillées, registre partagé
+le même jour que le défunt, ou une date incomplète : l’ordre des décès n’est pas connu ; le statut reste « Inconnu », à vérifier sur les actes. ¦ cùng ngày với người đã mất, hoặc ngày không đầy đủ: không biết thứ tự các ca tử vong; trạng thái vẫn là “Không rõ”, cần kiểm tra trên giấy tờ. ¦ pada hari yang sama dengan pewaris, atau tanggal tidak lengkap: urutan kematian tidak diketahui; status tetap “Tidak diketahui”, periksa di akta.
+Sur la fiche de {n} : un décès en {d} (date incomplète dans le fichier), source « Fichier des personnes décédées (INSEE) », avec la date du relevé. ¦ Trên hồ sơ của {n}: một ca tử vong năm {d} (ngày không đầy đủ trong tệp), nguồn “Tệp người đã mất (INSEE)”, kèm ngày tra cứu. ¦ Pada data {n}: kematian pada {d} (tanggal tidak lengkap di berkas), sumber “Berkas orang yang meninggal (INSEE)”, dengan tanggal pembacaan.
+Ce préfixe est déjà celui des factures, des avoirs ou des devis : choisis-en un autre (les trois doivent être différents). ¦ Tiền tố này đã dùng cho hóa đơn, phiếu ghi có hoặc báo giá: hãy chọn tiền tố khác (cả ba phải khác nhau). ¦ Prefiks ini sudah dipakai untuk faktur, nota kredit, atau penawaran: pilih yang lain (ketiganya harus berbeda).
+Préfixe refusé : de 1 à 6 lettres ou chiffres, sans accent. ¦ Tiền tố bị từ chối: từ 1 đến 6 chữ cái hoặc chữ số, không dấu. ¦ Prefiks ditolak: 1 sampai 6 huruf atau angka, tanpa aksen.
+Un seul registre : numérotation continue même si les dossiers sont dans plusieurs généalogies. Passer de l’un à l’autre repartirait d’un autre compteur (numéros en double) : ce choix est bloqué dès la première facture émise. ¦ Một sổ duy nhất: đánh số liên tục kể cả khi hồ sơ nằm ở nhiều gia phả. Chuyển từ sổ này sang sổ kia sẽ bắt đầu lại từ bộ đếm khác (trùng số): lựa chọn này bị khóa ngay khi xuất hóa đơn đầu tiên. ¦ Satu register: penomoran berurutan meskipun berkas ada di beberapa silsilah. Berpindah akan memulai dari penghitung lain (nomor ganda): pilihan ini terkunci begitu faktur pertama diterbitkan.
+Le compteur ne recule jamais ; un brouillon effacé ne consomme pas de numéro. Bloqué dès la première facture émise. ¦ Bộ đếm không bao giờ lùi; bản nháp đã xóa không dùng số. Bị khóa ngay khi xuất hóa đơn đầu tiên. ¦ Penghitung tidak pernah mundur; draf yang dihapus tidak memakai nomor. Terkunci begitu faktur pertama diterbitkan.
+Une facture est déjà émise dans ce registre : le registre et la numérotation ne se changent plus (sinon, des numéros en double). ¦ Sổ này đã có hóa đơn được xuất: không thể đổi sổ và cách đánh số nữa (nếu không sẽ trùng số). ¦ Sudah ada faktur terbit di register ini: register dan penomoran tidak bisa diubah lagi (jika tidak, nomor ganda).
+La dernière pièce émise est datée après aujourd’hui : vérifie la date de l’ordinateur avant d’émettre. ¦ Chứng từ xuất gần nhất có ngày sau hôm nay: hãy kiểm tra ngày của máy tính trước khi xuất. ¦ Dokumen terakhir yang terbit bertanggal setelah hari ini: periksa tanggal komputer sebelum menerbitkan.
+Émettre le devis ¦ Xuất báo giá ¦ Terbitkan penawaran
+Émettre la facture ¦ Xuất hóa đơn ¦ Terbitkan faktur
+À l’émission, la pièce prend la date du jour et le prochain numéro du registre ; le numéro donné s’affiche une fois émise. ¦ Khi xuất, chứng từ lấy ngày hôm nay và số tiếp theo của sổ; số được cấp sẽ hiện sau khi xuất. ¦ Saat diterbitkan, dokumen mendapat tanggal hari ini dan nomor berikutnya dari register; nomor yang diberikan tampil setelah terbit.
+Émettre le devis ? Il prend la date du jour et le prochain numéro du registre ; il reste modifiable tant qu’il n’est pas accepté. ¦ Xuất báo giá? Báo giá lấy ngày hôm nay và số tiếp theo của sổ; vẫn sửa được cho đến khi được chấp nhận. ¦ Terbitkan penawaran? Penawaran mendapat tanggal hari ini dan nomor berikutnya dari register; masih bisa diubah selama belum diterima.
+Une facture émise ne peut plus être modifiée ni supprimée. Pour corriger : un avoir. Émettre la facture ? Elle prend la date du jour et le prochain numéro du registre. ¦ Hóa đơn đã xuất không thể sửa hay xóa nữa. Để sửa: lập phiếu ghi có. Xuất hóa đơn? Hóa đơn lấy ngày hôm nay và số tiếp theo của sổ. ¦ Faktur yang sudah terbit tidak bisa diubah atau dihapus lagi. Untuk koreksi: nota kredit. Terbitkan faktur? Faktur mendapat tanggal hari ini dan nomor berikutnya dari register.
+{n} émise le {d} ¦ Đã xuất {n} ngày {d} ¦ {n} terbit pada {d}
+Ce devis a déjà sa facture (brouillon ou émise) : ouvre-la dans le registre. ¦ Báo giá này đã có hóa đơn (nháp hoặc đã xuất): hãy mở trong sổ. ¦ Penawaran ini sudah punya faktur (draf atau terbit): buka di register.
+Fiche verrouillée : le décès n’est pas écrit. Déverrouille la fiche d’abord, ou choisis « Seulement le statut du dossier » dans les réglages. ¦ Hồ sơ bị khóa: không ghi ca tử vong. Hãy mở khóa hồ sơ trước, hoặc chọn “Chỉ trạng thái hồ sơ” trong cài đặt. ¦ Data terkunci: kematian tidak ditulis. Buka kunci data dulu, atau pilih “Hanya status berkas” di pengaturan.
+Fiche verrouillée : les réponses ne sont pas écrites sur la fiche. Déverrouille-la d’abord. ¦ Hồ sơ bị khóa: câu trả lời không được ghi vào hồ sơ. Hãy mở khóa trước. ¦ Data terkunci: jawaban tidak ditulis ke data. Buka kuncinya dulu.
+Fiche verrouillée : les réponses ne sont pas retirées. Déverrouille-la d’abord. ¦ Hồ sơ bị khóa: câu trả lời không được gỡ bỏ. Hãy mở khóa trước. ¦ Data terkunci: jawaban tidak dicabut. Buka kuncinya dulu.
+💶 Un reversement reste en attente, et un héritier a été trop payé (plus reversé que reçu) : archiver quand même ? ¦ 💶 Vẫn còn một khoản chi trả đang chờ, và một người thừa kế bị trả dư (trả nhiều hơn nhận): vẫn lưu trữ? ¦ 💶 Masih ada pembayaran tertunda, dan seorang ahli waris kelebihan dibayar (dibayar lebih dari yang diterima): tetap arsipkan?
+💶 Trop versé : un héritier a reçu plus que ce que le notaire a versé pour lui (reste négatif) : archiver quand même ? ¦ 💶 Trả dư: một người thừa kế đã nhận nhiều hơn số công chứng viên chuyển cho họ (số dư âm): vẫn lưu trữ? ¦ 💶 Kelebihan bayar: seorang ahli waris menerima lebih dari yang disetor notaris untuknya (sisa negatif): tetap arsipkan?
+Cette pièce appartient à une généalogie verrouillée par un mot de passe : ouvre-la d’abord. ¦ Chứng từ này thuộc một gia phả bị khóa bằng mật khẩu: hãy mở gia phả đó trước. ¦ Dokumen ini milik silsilah yang dikunci kata sandi: buka dulu silsilah itu.
+Cette généalogie est protégée par un mot de passe : l’archive doit être chiffrée. Choisis un mot de passe pour l’archive. ¦ Gia phả này được bảo vệ bằng mật khẩu: bản lưu trữ phải được mã hóa. Hãy chọn mật khẩu cho bản lưu trữ. ¦ Silsilah ini dilindungi kata sandi: arsip harus dienkripsi. Pilih kata sandi untuk arsip.
+Cette généalogie est protégée par un mot de passe : la copie pour le notaire doit être chiffrée (coche « Mot de passe »). ¦ Gia phả này được bảo vệ bằng mật khẩu: bản sao cho công chứng viên phải được mã hóa (đánh dấu “Mật khẩu”). ¦ Silsilah ini dilindungi kata sandi: salinan untuk notaris harus dienkripsi (centang “Kata sandi”).
+Cette généalogie est protégée par un mot de passe : ce qui en sort est toujours chiffré. ¦ Gia phả này được bảo vệ bằng mật khẩu: mọi thứ đưa ra ngoài luôn được mã hóa. ¦ Silsilah ini dilindungi kata sandi: apa pun yang keluar darinya selalu dienkripsi.
+Copie chiffrée · {n} ¦ Bản sao mã hóa · {n} ¦ Salinan terenkripsi · {n}
+Pièce introuvable. ¦ Không tìm thấy chứng từ. ¦ Dokumen tidak ditemukan.

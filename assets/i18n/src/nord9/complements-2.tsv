@@ -1,0 +1,186 @@
+fr ¦ lb
+# 🏛⚠️📋📱 Compléments aux outils existants (docs/design/complements-existants.html) : C tous les doutes, D visite aux archives, erreurs du serveur
+📋 Tous les doutes ¦ 📋 All d’Zweifelen
+Points à revoir ¦ Punkten ze iwwerpréiwen
+Chaque ligne est lue dans l’outil d’origine au moment où tu ouvres la liste, et « ↗ » t’y emmène pour décider. Rien n’est copié : corriger dans l’outil fait disparaître la ligne. ¦ All Zeil gëtt am urspréngleche Tool gelies, wann s du d’Lëscht opmaachs, an „↗“ bréngt dech dohin fir ze entscheeden. Näischt gëtt kopéiert: am Tool verbesseren léisst d’Zeil verschwannen.
+Je lis les outils… ¦ Ech liesen d’Tools…
+Chercher une personne, un lieu… ¦ Sich eng Persoun, eng Plaz…
+et ses ancêtres ¦ a seng Vorfahren
+Branche ¦ Branche
+paternelle (Sosa 2) ¦ vum Papp senger Säit (Sosa 2)
+maternelle (Sosa 3) ¦ vun der Mamm hirer Säit (Sosa 3)
+Vus ¦ Gesinn
+Pas encore vus ¦ Nach net gesinn
+Vus aussi ¦ Och gesinn
+Seulement les vus ¦ Nëmmen déi gesinn
+↗ Ouvrir dans l’outil ¦ ↗ Am Tool opmaachen
+👁 Ne plus marquer vu ¦ 👁 Net méi als gesinn markéieren
+👁 Marquer vu ¦ 👁 Als gesinn markéieren
+👤 Ouvrir la fiche de {name} ¦ 👤 Fiche opmaachen: {name}
+🔍 Seulement les doutes de cette personne ¦ 🔍 Nëmmen d’Zweifele vun dëser Persoun
+Aucun doute pour l’instant ¦ Fir de Moment keen Zweifel
+Les outils d’origine n’ont rien à vérifier : bravo ! ¦ Déi urspréngle Tools hunn näischt ze kontrolléieren: bravo!
+vu le {d} ¦ gesinn de {d}
+revenu : la chose a changé ¦ zréckkomm: eppes huet geännert
+👁 « {t} » n’est plus marqué vu. ¦ 👁 „{t}“ ass net méi als gesinn markéiert.
+👁 « {t} » marqué vu. ¦ 👁 „{t}“ als gesinn markéiert.
+impossible ¦ onméiglech
+impossibles ¦ onméiglech
+curieux ¦ komesch
+Le plus grave : {t} ¦ Dat Schlëmmst: {t}
+Doutes ¦ Zweifelen
+Hypothèse ouverte ¦ Oppen Hypothes
+↗ Contrôle ¦ ↗ Kontroll
+↗ Comparer ¦ ↗ Vergläichen
+Liens fragiles ¦ Fragil Verbindungen
+↗ Solidité ¦ ↗ Zouverlässegkeet
+Désaccord de preuve ¦ Widdersproch bei de Beweiser
+↗ Dossier de preuve ¦ ↗ Beweisdossier
+Lecture SocFace ¦ SocFace-Liesung
+↗ Image ¦ ↗ Bild
+Successoral ¦ Ierfschaft
+Naissance sans source ¦ Gebuert ouni Quell
+Baptême sans source ¦ Daf ouni Quell
+Mariage sans source ¦ Hochzäit ouni Quell
+Décès sans source ¦ Doud ouni Quell
+Inhumation sans source ¦ Begriefnes ouni Quell
+Événement sans source ¦ Evenement ouni Quell
+Lien parent-enfant supposé ¦ Vermuttene Lien Elteren–Kand
+Lien parent-enfant sans source ¦ Lien Elteren–Kand ouni Quell
+{a} réponses, {p} preuves ¦ Äntwerten: {a}, Beweiser: {p}
+Désaccord sans résolution ¦ Widdersproch ouni Léisung
+Homonyme dans un dossier de succession ¦ Homonym an engem Ierfschaftsdossier
+Personne vivante ¦ Lieweg Persoun
+« Sans source » ¦ „Ouni Quell“
+Seulement les ancêtres Sosa ¦ Nëmmen d’Sosa-Vorfahren
+Pas du tout ¦ Guer net
+Une ligne marquée vue ¦ Eng Zeil als gesinn markéiert
+Revient si la chose change ¦ Kënnt zréck, wann eppes ännert
+Ne revient jamais ¦ Kënnt ni zréck
+Les lignes vues ¦ D’Zeilen, déi gesi goufen
+Cachées par le filtre de départ « Pas encore vus » ¦ Verstoppt mam Startfilter „Nach net gesinn“
+Montrées en pâle ¦ Blass gewisen
+Pistes du successoral ¦ Spueren aus der Ierfschaft
+À part, dans les dossiers ¦ Separat, an den Dossieren
+Aussi dans cette liste ¦ Och an dëser Lëscht
+Le widget ¦ De Widget
+Les trois nombres et le plus grave ¦ Déi dräi Zuelen an dat Schlëmmst
+Les 5 premières lignes ¦ Déi éischt 5 Zeilen
+📱 Visite aux archives ¦ 📱 Besuch am Archiv
+🗄 Préparer une visite ¦ 🗄 E Besuch virbereeden
+Préparer une visite ¦ E Besuch virbereeden
+🗄 Créer la visite ¦ 🗄 De Besuch maachen
+Service ¦ Déngscht
+Pour quel dossier ? (facultatif) ¦ Fir wéi en Dossier? (fräiwëlleg)
+Ouvert : {h} ¦ Op: {h}
+Les horaires et l’adresse sont lus dans la fiche du service. ¦ D’Ëffnungszäiten an d’Adress ginn aus der Fiche vum Déngscht gelies.
+Les cotes à voir ¦ D’Archivnummeren ze kucken
+déjà en ligne : Où chercher ? ¦ schonn online: Wou sichen?
+({n} cochées sur {m}) ¦ ({n} vun {m} ugekräizt)
+Coche au moins une cote. ¦ Kräiz op d’mannst eng Archivnummer un.
+🗄 Visite créée : {n}. Elle est dans Listes → Visites d’archives. ¦ 🗄 Besuch gemaach: {n}. E steet an Lëschten → Archivbesuchen.
+⚖️ reliée à un dossier ¦ ⚖️ mat engem Dossier verbonnen
+📱 Emporter sur le téléphone ¦ 📱 Um Telefon mathuelen
+⤒ Rapporter les résultats ¦ ⤒ D’Resultater zréckbréngen
+⤒ Importer les photos du jour ¦ ⤒ D’Fotoe vum Dag importéieren
+Importer les photos du jour ¦ D’Fotoe vum Dag importéieren
+Visite aux archives · {what} ¦ Besuch am Archiv · {what}
+Marche sans réseau. Tout est gardé dans ce téléphone au fur et à mesure. ¦ Geet ouni Netz. Alles gëtt no an no an dësem Telefon gespäichert.
+Photo interdite ici : pas de bouton 📷. ¦ Fotoe verbueden hei: keen 📷-Knäppchen.
+＋ Une cote trouvée sur place, pas prévue au départ ¦ ＋ Eng Archivnummer, déi op der Plaz fonnt gouf, net virgesinn
+⤓ Enregistrer mes résultats ¦ ⤓ Meng Resultater späicheren
+📷 Photo ¦ 📷 Foto
+Retirer cette photo ¦ Dës Foto ewechhuelen
+Cote ajoutée sur place ¦ Archivnummer op der Plaz derbäigesat
+✓ Gardé dans ce téléphone à {time} ¦ ✓ An dësem Telefon gespäichert um {time}
+⚠️ Ce navigateur ne garde rien dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Dëse Browser späichert näischt op der Säit: späicher deng Resultater no all Archivnummer.
+⚠️ Ce téléphone ne garde pas les photos dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Dësen Telefon späichert d’Fotoen net op der Säit: späicher deng Resultater no all Archivnummer.
+⚠️ Ce fichier n’est pas une image. ¦ ⚠️ Dëse Fichier ass kee Bild.
+⚠️ Note au moins un résultat avant d’enregistrer. ¦ ⚠️ Notéier op d’mannst ee Resultat, ier s du späichers.
+✓ Fichier « {name} » enregistré : rapporte-le dans l’app (⤒ Rapporter les résultats). ¦ ✓ Fichier „{name}“ gespäichert: bréng en an d’App zréck (⤒ D’Resultater zréckbréngen).
+Des photos manquaient : elles ne sont pas dans le fichier. ¦ Et hu Fotoe gefeelt: se sinn net am Fichier.
+⤓ Enregistrer la page ¦ ⤓ D’Säit späicheren
+Ce qui part dans la page ¦ Wat op d’Säit kënnt
+Les cotes, l’acte cherché, la personne et ses années ¦ D’Archivnummeren, de gesichten Akt, d’Persoun an hir Joren
+Ce qu’on sait déjà (parents, conjoint, dates connues) pour reconnaître l’acte sur place ¦ Dat, wat ee scho weess (Elteren, Partner, bekannt Datumer), fir den Akt op der Plaz ze erkennen
+Les personnes vivantes ¦ Déi lieweg Persounen
+décoché : un vivant devient « Personne vivante » ¦ net ugekräizt: e Liewegen gëtt „Lieweg Persoun“
+Les fiches confidentielles : jamais ¦ Déi vertraulech Fichen: ni
+Photo interdite ici ¦ Fotoe verbueden hei
+cache le bouton 📷 dans la page ¦ verstoppt de 📷-Knäppchen op der Säit
+Un seul fichier .html : aucune requête, rien à installer. Mets-le sur le téléphone (câble, AirDrop, partage Android, courriel à toi-même) ; il marche en mode avion. ¦ Een eenzege .html-Fichier: keng Ufro, näischt ze installéieren. Maach en op den Telefon (Kabel, AirDrop, Android-Deelen, E-Mail un dech selwer); en geet am Fligermodus.
+📲 Montrer comment le mettre sur le téléphone ¦ 📲 Weisen, wéi en op den Telefon kënnt
+iPhone : l’aperçu de l’app Fichiers montre la page mais ne la fait pas marcher (pas de cases à cocher). Ouvre-la avec une app qui lit les pages .html, ou passe par la feuille imprimée et les photos (réglage). Android : Chrome ou Firefox l’ouvrent et la font marcher. ¦ iPhone: d’Virschau an der App Fichieren weist d’Säit, mee mécht se net lafen (keng Këschtercher). Maach se mat enger App op, déi .html-Säite liest, oder huel dat gedréckt Blat an d’Fotoen (Astellung). Android: Chrome oder Firefox maachen se op a loosse se lafen.
+📄 1 fichier, {n} Ko : mets-le sur ton téléphone. ¦ 📄 1 Fichier, {n} KB: maach en op däin Telefon.
+Résultats de la visite ¦ Resultater vum Besuch
+Ce fichier vient d’une autre visite : « {t} ». ¦ Dëse Fichier kënnt vun engem anere Besuch: „{t}“.
+cote retirée de la visite depuis ¦ Archivnummer zënterhier aus dem Besuch ewechgeholl
+ajoutée sur place : d’abord ajoutée à la visite ¦ op der Plaz derbäigesat: fir d’éischt dem Besuch derbäigesat
+dépouillement déjà relié ¦ Opschreiwung schonn verbonnen
+＋ dépouillement du Journal ({r}) ¦ ＋ Opschreiwung aus dem Journal ({r})
+{n} → médias « à trier » ¦ {n} → Medien „ze sortéieren“
+{n} → médias reliés à {who} ¦ {n} → Medien, verbonne mat {who}
+{n} → médias ¦ {n} → Medien
+📑 pièce du dossier : reçue ¦ 📑 Stéck vum Dossier: kritt
+✓ fichier vérifié ¦ ✓ Fichier iwwerpréift
+Rapporté du téléphone ¦ Vum Telefon zréckbruecht
+Ce que l’app fera ¦ Wat d’App mécht
+Ranger cette cote ¦ Dës Archivnummer ofleeën
+→ Reporter sur la fiche ¦ → Op d’Fiche iwwerdroen
+Aucune date ni aucun lieu n’est écrit sur une fiche : ce qui est trouvé reste un dépouillement avec sa photo ; c’est toi qui le reportes sur la fiche, comme aujourd’hui. ¦ Keen Datum a keng Plaz gëtt op eng Fiche geschriwwen: dat Fonnt bleift eng Opschreiwung mat senger Foto; du drees et selwer op d’Fiche, wéi haut.
+{n} rapportées, {m} ¦ zréckbruecht: {n}, {m}
+Ranger {n} et {m} ¦ {n} an {m} ofleeën
+→ Reporter sur la fiche : le dépouillement et ses photos y sont reliés. ¦ → Op d’Fiche iwwerdroen: d’Opschreiwung an hir Fotoe si mat hir verbonnen.
+✓ Visite rangée : {d}, {m}, {p}. ¦ ✓ Besuch ofgeluecht: {d}, {m}, {p}.
+{n} pièce(s) reçue(s) ¦ kritt Stécker: {n}
+Visite marquée « faite ». ¦ Besuch als „gemaach“ markéiert.
+Cette visite n’a pas encore de cote. ¦ Dëse Besuch huet nach keng Archivnummer.
+Rangées dans l’ordre des cotes d’après l’heure de prise de vue : corrige la cote d’une photo si besoin. ¦ An der Rei vun den Archivnummeren no der Zäit vun der Opnam: verbesser d’Archivnummer vun enger Foto, wann néideg.
+— ne pas ranger — ¦ — net ofleeën —
+{n} rangées dans les médias (« à trier »). ¦ {n} an de Medien ofgeluecht („ze sortéieren“).
+Parents : {names} ¦ Elteren: {names}
+Conjoint : {names} ¦ Partner: {names}
+Fiche confidentielle ¦ Vertraulech Fiche
+Ce fichier a déjà été rangé le {date} : rien n’est fait en double. ¦ Dëse Fichier gouf schonn de {date} ofgeluecht: näischt gëtt duebel gemaach.
+à trier ¦ ze sortéieren
+Trouvé à la visite : {where} ¦ Beim Besuch fonnt: {where}
+Comment emporter la visite ¦ Wéi de Besuch mathuelen
+Une page .html à ouvrir sur le téléphone ¦ Eng .html-Säit fir um Telefon opzemaachen
+La feuille imprimée et les photos du téléphone ¦ Dat gedréckt Blat an d’Fotoe vum Telefon
+Sans les vivants ¦ Ouni déi Lieweg
+Avec les vivants ¦ Mat deene Liewegen
+Réduites à 2000 px ¦ Op 2000 px reduzéiert
+Une naissance trouvée ¦ Eng fonnt Gebuert
+Reste un dépouillement, tu la reportes ¦ Bleift eng Opschreiwung, du drees se iwwer
+Proposer « → Reporter sur la fiche » dans la revue ¦ „→ Op d’Fiche iwwerdroen“ an der Iwwerpréiwung proposéieren
+Après le rangement ¦ Nom Ofleeën
+Visite marquée « faite » ¦ Besuch als „gemaach“ markéiert
+Aucune photo reçue. ¦ Keng Foto kritt.
+Ce fichier est trop gros pour les résultats d’une visite. ¦ Dëse Fichier ass ze grouss fir d’Resultater vun engem Besuch.
+Ce fichier n’est pas les résultats d’une visite (il faut le .zip enregistré sur le téléphone). ¦ Dëse Fichier sinn net d’Resultater vun engem Besuch (et brauch den um Telefon gespäicherten .zip).
+Ce fichier n’est pas les résultats d’une visite aux archives. ¦ Dëse Fichier sinn net d’Resultater vun engem Archivbesuch.
+Ce fichier vient d’une visite qui n’est pas dans cette généalogie. ¦ Dëse Fichier kënnt vun engem Besuch, deen net an dëser Genealogie ass.
+Cette visite a déjà été emportée : supprime-la dans le Planificateur si tu n’en veux plus. ¦ Dëse Besuch gouf scho matgeholl: läsch en am Planner, wann s du en net méi wëlls.
+Choisis la cote de chaque photo. ¦ Wiel d’Archivnummer vun all Foto.
+Coche au moins une cote à ranger. ¦ Kräiz op d’mannst eng Archivnummer fir ofzeleeën un.
+Fichier .zip illisible. ¦ Onliesbare .zip-Fichier.
+Fichier refusé : identifiant incorrect. ¦ Fichier refuséiert: falsch Identifikatioun.
+Fichier refusé : il a été modifié depuis le téléphone (somme de contrôle). ¦ Fichier refuséiert: e gouf nom Telefon geännert (Kontrollsumm).
+Fichier refusé : il contient des données inattendues. ¦ Fichier refuséiert: en huet onerwaart Donnéeën.
+Fichier refusé : il ne correspond pas à la page emportée (somme de contrôle). ¦ Fichier refuséiert: e passt net zu der matgeholler Säit (Kontrollsumm).
+Fichier refusé : la liste des cotes manque. ¦ Fichier refuséiert: d’Lëscht vun den Archivnummere feelt.
+Fichier refusé : la liste des photos est mal formée. ¦ Fichier refuséiert: d’Lëscht vun de Fotoen ass falsch.
+Fichier refusé : results.json est illisible. ¦ Fichier refuséiert: results.json ass onliesbar.
+Fichier refusé : results.json manque. ¦ Fichier refuséiert: results.json feelt.
+Fichier refusé : trop de fichiers dedans. ¦ Fichier refuséiert: ze vill Fichieren dran.
+Fichier refusé : un chemin sort du dossier. ¦ Fichier refuséiert: e Wee geet aus dem Dossier eraus.
+Fichier refusé : un résultat est inconnu. ¦ Fichier refuséiert: e Resultat ass onbekannt.
+Fichier refusé : un élément est trop gros. ¦ Fichier refuséiert: en Element ass ze grouss.
+Fichier refusé : une cote contient des données inattendues. ¦ Fichier refuséiert: eng Archivnummer huet onerwaart Donnéeën.
+Fichier refusé : une cote est mal formée. ¦ Fichier refuséiert: eng Archivnummer ass falsch.
+Fichier refusé : une photo annoncée manque. ¦ Fichier refuséiert: eng ugekënnegt Foto feelt.
+Fichier refusé : une photo n’est pas une image. ¦ Fichier refuséiert: eng Foto ass kee Bild.
+Impossible de ranger la photo dans les médias. ¦ D’Foto kann net an de Medien ofgeluecht ginn.
+Lecture des fichiers .zip impossible sur cet ordinateur. ¦ .zip-Fichieren kënnen op dësem Computer net gelies ginn.
+Trop de photos d’un coup (200 au plus). ¦ Ze vill Fotoen op eemol (maximal 200).
+Une photo est trop grosse ou n’a pas été reçue. ¦ Eng Foto ass ze grouss oder gouf net kritt.

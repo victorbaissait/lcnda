@@ -1690,3 +1690,6 @@ Notaires ¦ Notarai ¦ Notāri ¦ Notarid
 {name} : {a} sur {n} enfants morts avant 1 an ({p} %) ¦ {name}: iš {n} vaikų {a} mirė nesulaukę 1 metų ({p} %) ¦ {name}: no {n} bērniem {a} nomira pirms 1 gada vecuma ({p} %) ¦ {name}: {n} lapsest {a} suri enne 1 aasta vanust ({p} %)
 {name} : {a} sur {n} morts avant 5 ans ({p} %) ¦ {name}: iš {n} {a} mirė nesulaukę 5 metų ({p} %) ¦ {name}: no {n} {a} nomira pirms 5 gadu vecuma ({p} %) ¦ {name}: {n}-st {a} suri enne 5 aasta vanust ({p} %)
 parrains : {a} sur {b} · marraines : {c} sur {d} ¦ krikštatėviai: {a} iš {b} · krikštamotės: {c} iš {d} ¦ krusttēvi: {a} no {b} · krustmātes: {c} no {d} ¦ ristiisad: {a}/{b} · ristiemad: {c}/{d}
+Toute ma base ¦ Visa mano bazė ¦ Visa mana datubāze ¦ Kogu minu andmebaas
+Mes descendants ¦ Mano palikuonys ¦ Mani pēcteči ¦ Minu järeltulijad
+Depuis 1900 ¦ Nuo 1900 m. ¦ Kopš 1900. gada ¦ Alates 1900

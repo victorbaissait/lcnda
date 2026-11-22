@@ -1,0 +1,24 @@
+fr ¦ ru ¦ uk
+À préciser ¦ Уточнить ¦ Уточнити
+Lecture approfondie (IA sur cet ordinateur) ¦ Углублённое чтение (ИИ на этом компьютере) ¦ Поглиблене читання (ШІ на цьому комп’ютері)
+En plus du moteur ci-dessus : un modèle « vision » ouvert (Qwen3-VL, licence Apache 2.0) qui lit toute la page, servi par Ollama sur cet ordinateur. Facultatif. Rien ne part sur Internet, sauf le téléchargement du modèle (3 à 6 Go, une seule fois). ¦ В дополнение к движку выше: открытая «зрительная» модель (Qwen3-VL, лицензия Apache 2.0), которая читает всю страницу и работает через Ollama на этом компьютере. Необязательно. Ничего не уходит в Интернет, кроме загрузки модели (3–6 ГБ, один раз). ¦ На додачу до рушія вище: відкрита «зорова» модель (Qwen3-VL, ліцензія Apache 2.0), яка читає всю сторінку й працює через Ollama на цьому комп’ютері. Необов’язково. Нічого не йде в Інтернет, крім завантаження моделі (3–6 ГБ, один раз).
+Ensuite, dans l’atelier de transcription : « 🔍 Essayer aussi la lecture approfondie » montre les deux lectures côte à côte, et tu gardes la meilleure. ¦ Затем в мастерской расшифровки: «🔍 Попробовать и углублённое чтение» показывает оба прочтения рядом, и ты оставляешь лучшее. ¦ Потім у майстерні розшифрування: «🔍 Спробувати й поглиблене читання» показує обидва прочитання поруч, і ти залишаєш краще.
+Installer ou vérifier la lecture approfondie… ¦ Установить или проверить углублённое чтение… ¦ Установити або перевірити поглиблене читання…
+La lecture approfondie n’est pas encore chargée : réessaie dans un instant. ¦ Углублённое чтение ещё не загружено: попробуй снова через мгновение. ¦ Поглиблене читання ще не завантажено: спробуй знову за мить.
+Pour lire un acte : ouvre son image dans l’atelier de transcription (« 📜 Atelier »), puis « ✨ Lire l’acte ». ¦ Чтобы прочитать акт: открой его изображение в мастерской расшифровки («📜 Мастерская»), затем «✨ Прочитать акт». ¦ Щоб прочитати акт: відкрий його зображення в майстерні розшифрування («📜 Майстерня»), потім «✨ Прочитати акт».
+Transcrire ¦ Расшифровать ¦ Розшифрувати
+Ouvrir l’outil de transcription complet sur cette image ¦ Открыть полный инструмент расшифровки для этого изображения ¦ Відкрити повний інструмент розшифрування для цього зображення
+Le modèle a réfléchi sans écrire de transcription. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Модель размышляла, но не написала расшифровку. Обрежь область поменьше (несколько строк) или попробуй модель 8B, затем запусти снова. ¦ Модель міркувала, але не написала розшифрування. Обріж меншу ділянку (кілька рядків) або спробуй модель 8B, потім запусти знову.
+Le modèle n’a rien lu sur cette image. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Модель ничего не прочитала на этом изображении. Обрежь область поменьше (несколько строк) или попробуй модель 8B, затем запусти снова. ¦ Модель нічого не прочитала на цьому зображенні. Обріж меншу ділянку (кілька рядків) або спробуй модель 8B, потім запусти знову.
+La lecture a été arrêtée. ¦ Чтение было остановлено. ¦ Читання зупинено.
+Modèle : {m} · {n} s ¦ Модель: {m} · {n} с ¦ Модель: {m} · {n} с
+Ce document n’a pas d’image : l’Atelier de transcription a besoin d’une image. ¦ У этого документа нет изображения: Мастерская расшифровки нужно изображение. ¦ Цей документ не має зображення: Майстерня розшифрування потрібне зображення.
+L’Atelier de transcription n’est pas encore chargé : réessaie dans un instant. ¦ Мастерская расшифровки ещё не загружена: попробуй снова через мгновение. ¦ Майстерня розшифрування ще не завантажена: спробуй знову за мить.
+L’Atelier de transcription n’a pas pu s’ouvrir : {x} ¦ Мастерская расшифровки не удалось открыть: {x} ¦ Майстерня розшифрування не вдалося відкрити: {x}
+Lecture approfondie (IA) ¦ Углублённое чтение (ИИ) ¦ Поглиблене читання (ШІ)
+Impossible de suivre la lecture : {x} ¦ Не удаётся следить за чтением: {x} ¦ Не вдається стежити за читанням: {x}
+Le programme de lecture n’a pas démarré. ¦ Программа чтения не запустилась. ¦ Програма читання не запустилася.
+Acte de notoriété ¦ Акт о известности ¦ Акт про відомість
+Cadres ¦ Рамки ¦ Рамки
+Opacité des cadres de couleur (0 = presque invisibles) ¦ Непрозрачность цветных рамок (0 = почти невидимы) ¦ Непрозорість кольорових рамок (0 = майже невидимі)
+Ce document n’a pas pu être relu : réessaie dans un instant. ¦ Не удалось перечитать этот документ: попробуй снова через мгновение. ¦ Не вдалося перечитати цей документ: спробуй знову за мить.

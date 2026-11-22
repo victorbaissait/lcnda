@@ -1,0 +1,42 @@
+fr ¦ cs ¦ sv ¦ da
+# 📑 Atelier de transcription, vague 3 (3a) : un document en plusieurs pages (heritage-pages.js, heritage-transcribe.js, lib/media_pages.php)
+# — 1. relier des pages (page du document, visionneuse)
+Glisser pour changer l’ordre ¦ Přetáhni pro změnu pořadí ¦ Dra för att ändra ordningen ¦ Træk for at ændre rækkefølgen
+Voir cette page ¦ Zobrazit tuto stránku ¦ Visa den här sidan ¦ Se denne side
+Une seule page pour l’instant. Un recto et son verso, un acte sur plusieurs pages : relie les autres images, elles s’ouvriront ensemble. ¦ Zatím jen jedna stránka. Líc a rub, záznam na více stránkách: propoj další obrázky a otevřou se spolu. ¦ Bara en sida än så länge. En fram- och baksida, en handling på flera sidor: länka de andra bilderna så öppnas de tillsammans. ¦ Kun én side indtil videre. En for- og bagside, en optegnelse over flere sider: forbind de andre billeder, så åbnes de sammen.
+Relier une autre page… ¦ Propojit další stránku… ¦ Länka en sida till… ¦ Forbind en side mere…
+PAGES DU DOCUMENT ¦ STRÁNKY DOKUMENTU ¦ DOKUMENTETS SIDOR ¦ DOKUMENTETS SIDER
+Relier ces pages ¦ Propojit tyto stránky ¦ Länka de här sidorna ¦ Forbind disse sider
+Pages reliées : {n} ¦ Propojené stránky: {n} ¦ Länkade sidor: {n} ¦ Forbundne sider: {n}
+Page reliée ¦ Stránka propojena ¦ Sidan länkad ¦ Side forbundet
+Page renommée : « {x} » ¦ Stránka přejmenována: „{x}“ ¦ Sidan har bytt namn: ”{x}” ¦ Siden er omdøbt: »{x}«
+Autre nom… ¦ Jiný název… ¦ Annat namn… ¦ Andet navn…
+Par exemple : Plan, Feuillet 2, Suite ¦ Například: Plán, List 2, Pokračování ¦ Till exempel: Karta, Blad 2, Fortsättning ¦ For eksempel: Kort, Blad 2, Fortsættelse
+Ordre des pages changé ¦ Pořadí stránek změněno ¦ Sidordningen ändrad ¦ Siderækkefølgen ændret
+Retirer de l’ensemble ¦ Odebrat ze sady ¦ Ta bort ur samlingen ¦ Fjern fra samlingen
+La page reste dans les médias, seule (rien n’est supprimé) ¦ Stránka zůstane v médiích samostatně (nic se nemaže) ¦ Sidan blir kvar i medierna, för sig själv (inget raderas) ¦ Siden bliver i medierne, for sig selv (intet slettes)
+Recto ¦ Líc ¦ Framsida ¦ Forside
+Verso ¦ Rub ¦ Baksida ¦ Bagside
+Annexe ¦ Příloha ¦ Bilaga ¦ Bilag
+Une de ces pages est déjà dans un autre document : retire-la d’abord de celui-ci (une page n’appartient qu’à un seul ensemble). ¦ Jedna z těchto stránek už patří k jinému dokumentu: nejdřív ji odtamtud odeber (stránka patří jen do jedné sady). ¦ En av de här sidorna finns redan i ett annat dokument: ta bort den därifrån först (en sida hör bara till en samling). ¦ En af disse sider er allerede i et andet dokument: fjern den derfra først (en side hører kun til én samling).
+Une des pages n’est plus dans les médias : rien n’a été changé. ¦ Jedna ze stránek už v médiích není: nic se nezměnilo. ¦ En av sidorna finns inte längre bland medierna: inget har ändrats. ¦ En af siderne er ikke længere i medierne: intet er ændret.
+Trop de pages dans un même document (200 au plus). ¦ Příliš mnoho stránek v jednom dokumentu (nejvýš 200). ¦ För många sidor i ett dokument (högst 200). ¦ For mange sider i ét dokument (højst 200).
+# — 2. l’Atelier ouvre toutes les pages (onglets, un seul texte ou un texte par page, ✨ Lire)
+Plusieurs pages ¦ Více stránek ¦ Flera sidor ¦ Flere sider
+Sur la page affichée ¦ Na zobrazené stránce ¦ På sidan som visas ¦ På den viste side
+Sur toutes les pages ¦ Na všech stránkách ¦ På alla sidor ¦ På alle sider
+Un seul texte, coupé par « — page 2 — » ¦ Jeden text rozdělený „— stránka 2 —“ ¦ En enda text, delad med ”— sida 2 —” ¦ Én tekst, delt med »— side 2 —«
+Un seul texte, coupé par « — page 2 — » (conseillé) ¦ Jeden text rozdělený „— stránka 2 —“ (doporučeno) ¦ En enda text, delad med ”— sida 2 —” (rekommenderas) ¦ Én tekst, delt med »— side 2 —« (anbefales)
+Un texte par page ¦ Jeden text na stránku ¦ En text per sida ¦ Én tekst pr. side
+— page {n} — ¦ — stránka {n} — ¦ — sida {n} — ¦ — side {n} —
+Toutes les pages sont lues (à relire) ¦ Všechny stránky jsou přečtené (ke kontrole) ¦ Alla sidor är lästa (att granska) ¦ Alle sider er læst (skal tjekkes)
+Réglage gardé : il vaut pour les documents pas encore commencés ; celui-ci garde sa forme. ¦ Nastavení uloženo: platí pro dosud nezačaté dokumenty; tento si ponechá svou podobu. ¦ Inställningen sparad: den gäller dokument som inte påbörjats än; det här behåller sin form. ¦ Indstillingen er gemt: den gælder dokumenter, der ikke er påbegyndt endnu; dette beholder sin form.
+Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription. ¦ Tato stránka je součástí vícestránkového záznamu: její text se upravuje v Dílně přepisu. ¦ Den här sidan hör till en handling på flera sidor: texten ändras i Transkriptionsverkstaden. ¦ Denne side hører til en optegnelse på flere sider: teksten ændres i Transskriptionsværkstedet.
+# — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
+(page {n}, ligne {line}) ¦ (stránka {n}, řádek {line}) ¦ (sida {n}, rad {line}) ¦ (side {n}, linje {line})
+page {n}, ligne {line} ¦ stránka {n}, řádek {line} ¦ sida {n}, rad {line} ¦ side {n}, linje {line}
+# — 3a+ : « Ce que l’app a trouvé » sur toutes les pages (un texte par page), la lecture approfondie de toutes les pages
+« {name} » est sur une autre page : ouvre sa page pour le garder. ¦ „{name}“ je na jiné stránce: otevři její stránku, abys to ponechal. ¦ ”{name}” finns på en annan sida: öppna den sidan för att behålla personen. ¦ “{name}” står på en anden side: åbn den side for at beholde personen.
+Un texte par page : la lecture rapide et la lecture d’un imprimé se font page par page ; la lecture approfondie peut lire toutes les pages. ¦ Jeden text na stránku: rychlé čtení a čtení tisku jdou stránku po stránce; důkladné čtení umí přečíst všechny stránky. ¦ En text per sida: snabbläsning och läsning av tryckt text sker sida för sida; djupläsningen kan läsa alla sidor. ¦ Én tekst pr. side: hurtiglæsning og læsning af tryk sker side for side; den grundige læsning kan læse alle sider.
+Lecture approfondie : page {i} sur {n}… ¦ Důkladné čtení: stránka {i} z {n}… ¦ Djupläsning: sida {i} av {n}… ¦ Grundig læsning: side {i} af {n}…
+Lire toutes les pages avec ce modèle ({n}) ¦ Přečíst všechny stránky tímto modelem ({n}) ¦ Läs alla sidor med den här modellen ({n}) ¦ Læs alle sider med denne model ({n})

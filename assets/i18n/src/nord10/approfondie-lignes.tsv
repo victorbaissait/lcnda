@@ -1,0 +1,17 @@
+fr ¦ sq ¦ mt
+# ▤ La lecture approfondie, ligne par ligne : relier les lignes du texte à l’image (app-lignes-alignement.js, heritage-transcribe.js)
+Relier les lignes à l’image ¦ Lidh rreshtat me imazhin ¦ Orbot il-linji mal-istampa
+Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis ¦ Lidh çdo rresht të tekstit me rreshtin e tij në imazh (zona me ngjyra, kliko rresht ↔ zonë): pas leximit të thelluar ose në një tekst të vendosur tashmë ¦ Orbot kull linja tat-test mal-linja tagħha fl-istampa (żoni bil-kulur, ikklikkja linja ↔ żona): wara l-qari fil-fond, jew fuq test diġà mdaħħal
+Relier les lignes à l’image (une zone par ligne, comme la lecture rapide) ¦ Lidh rreshtat me imazhin (një zonë për rresht, si te leximi i shpejtë) ¦ Orbot il-linji mal-istampa (żona waħda għal kull linja, bħall-qari mgħaġġel)
+Découpage de la page en lignes… ¦ Faqja po ndahet në rreshta… ¦ Il-paġna qed tinqasam f’linji…
+Découpage de la page en lignes (lecture rapide)… ¦ Faqja po ndahet në rreshta (lexim i shpejtë)… ¦ Il-paġna qed tinqasam f’linji (qari mgħaġġel)…
+Découpage simple de la page en lignes… ¦ Ndarje e thjeshtë e faqes në rreshta… ¦ Qsim sempliċi tal-paġna f’linji…
+Le découpage en lignes n’est pas chargé. ¦ Ndarja në rreshta nuk është ngarkuar. ¦ Il-qsim f’linji mhux mgħobbi.
+Pas de ligne de texte à relier. ¦ Asnjë rresht teksti për t’u lidhur. ¦ L-ebda linja ta’ test x’torbot.
+Le texte a changé pendant le découpage : « ▤ Relier les lignes à l’image » pour recommencer. ¦ Teksti ndryshoi gjatë ndarjes: «▤ Lidh rreshtat me imazhin» për të filluar nga e para. ¦ It-test inbidel waqt il-qsim: “▤ Orbot il-linji mal-istampa” biex terġa’ tibda.
+Ligne reliée sans certitude : vérifie sur l’image ¦ Rresht i lidhur pa siguri: kontrolloje në imazh ¦ Linja marbuta mingħajr ċertezza: iċċekkjaha fuq l-istampa
+Lignes reliées à l’image : {x} ¦ Rreshtat e lidhur me imazhin: {x} ¦ Linji marbuta mal-istampa: {x}
+à vérifier (❔) : {n} ¦ për t’u kontrolluar (❔): {n} ¦ biex jiġu ċċekkjati (❔): {n}
+sans zone : {n} ¦ pa zonë: {n} ¦ mingħajr żona: {n}
+d’après la lecture rapide ¦ sipas leximit të shpejtë ¦ skont il-qari mgħaġġel
+d’après un découpage simple de l’image ¦ sipas një ndarjeje të thjeshtë të imazhit ¦ skont qsim sempliċi tal-istampa

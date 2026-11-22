@@ -1,0 +1,24 @@
+fr ¦ sk ¦ nb
+À préciser ¦ Upresniť ¦ Skal presiseres
+Lecture approfondie (IA sur cet ordinateur) ¦ Dôkladné čítanie (AI v tomto počítači) ¦ Grundig lesing (KI på denne datamaskinen)
+En plus du moteur ci-dessus : un modèle « vision » ouvert (Qwen3-VL, licence Apache 2.0) qui lit toute la page, servi par Ollama sur cet ordinateur. Facultatif. Rien ne part sur Internet, sauf le téléchargement du modèle (3 à 6 Go, une seule fois). ¦ Navyše k nástroju vyššie: otvorený „vizuálny“ model (Qwen3-VL, licencia Apache 2.0), ktorý číta celú stranu, spustený cez Ollamu v tomto počítači. Voliteľné. Nič neodchádza na internet okrem stiahnutia modelu (3 až 6 GB, raz). ¦ I tillegg til motoren over: en åpen «vision»-modell (Qwen3-VL, lisens Apache 2.0) som leser hele siden, kjørt av Ollama på denne datamaskinen. Valgfritt. Ingenting sendes på Internett unntatt nedlastingen av modellen (3 til 6 GB, én gang).
+Ensuite, dans l’atelier de transcription : « 🔍 Essayer aussi la lecture approfondie » montre les deux lectures côte à côte, et tu gardes la meilleure. ¦ Potom v dielni prepisu: „🔍 Skúsiť aj dôkladné čítanie“ ukáže obe čítania vedľa seba a ty si necháš to lepšie. ¦ Deretter, i transkripsjonsverkstedet: «🔍 Prøv også grundig lesing» viser begge lesingene side om side, og du beholder den beste.
+Installer ou vérifier la lecture approfondie… ¦ Nainštalovať alebo overiť dôkladné čítanie… ¦ Installer eller kontroller grundig lesing…
+La lecture approfondie n’est pas encore chargée : réessaie dans un instant. ¦ Dôkladné čítanie ešte nie je načítané: skús to o chvíľu znova. ¦ Grundig lesing er ikke lastet ennå: prøv igjen om et øyeblikk.
+Pour lire un acte : ouvre son image dans l’atelier de transcription (« 📜 Atelier »), puis « ✨ Lire l’acte ». ¦ Ak chceš prečítať záznam: otvor jeho obrázok v dielni prepisu („📜 Dielňa“), potom „✨ Prečítať záznam“. ¦ For å lese et dokument: åpne bildet i transkripsjonsverkstedet («📜 Verksted»), deretter «✨ Les dokumentet».
+Transcrire ¦ Prepísať ¦ Transkriber
+Ouvrir l’outil de transcription complet sur cette image ¦ Otvoriť úplný nástroj na prepis pre tento obrázok ¦ Åpne det fullstendige transkripsjonsverktøyet for dette bildet
+Le modèle a réfléchi sans écrire de transcription. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Model premýšľal, ale nenapísal žiadny prepis. Orež menšiu oblasť (pár riadkov) alebo skús model 8B a spusti to znova. ¦ Modellen tenkte uten å skrive en transkripsjon. Beskjær et mindre område (noen få linjer) eller prøv modellen 8B, og kjør igjen.
+Le modèle n’a rien lu sur cette image. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Model na tomto obrázku nič neprečítal. Orež menšiu oblasť (pár riadkov) alebo skús model 8B a spusti to znova. ¦ Modellen leste ingenting på dette bildet. Beskjær et mindre område (noen få linjer) eller prøv modellen 8B, og kjør igjen.
+La lecture a été arrêtée. ¦ Čítanie bolo zastavené. ¦ Lesingen ble stoppet.
+Modèle : {m} · {n} s ¦ Model: {m} · {n} s ¦ Modell: {m} · {n} s
+Ce document n’a pas d’image : l’Atelier de transcription a besoin d’une image. ¦ Tento dokument nemá obrázok: Dielňa prepisu potrebuje obrázok. ¦ Dette dokumentet har ikke noe bilde: Transkripsjonsverksted trenger et bilde.
+L’Atelier de transcription n’est pas encore chargé : réessaie dans un instant. ¦ Dielňa prepisu ešte nie je načítaná: skús to o chvíľu znova. ¦ Transkripsjonsverksted er ikke lastet ennå: prøv igjen om et øyeblikk.
+L’Atelier de transcription n’a pas pu s’ouvrir : {x} ¦ Dielňa prepisu sa nepodarilo otvoriť: {x} ¦ Transkripsjonsverksted kunne ikke åpnes: {x}
+Lecture approfondie (IA) ¦ Dôkladné čítanie (AI) ¦ Grundig lesing (KI)
+Impossible de suivre la lecture : {x} ¦ Čítanie nie je možné sledovať: {x} ¦ Kan ikke følge lesingen: {x}
+Le programme de lecture n’a pas démarré. ¦ Program na čítanie sa nespustil. ¦ Leseprogrammet startet ikke.
+Acte de notoriété ¦ Akt notoriety ¦ Notorietetsakt
+Cadres ¦ Rámčeky ¦ Rammer
+Opacité des cadres de couleur (0 = presque invisibles) ¦ Krytie farebných rámčekov (0 = takmer neviditeľné) ¦ Opasitet for de fargede rammene (0 = nesten usynlige)
+Ce document n’a pas pu être relu : réessaie dans un instant. ¦ Tento dokument sa nepodarilo znova načítať: skús to o chvíľu. ¦ Dokumentet kunne ikke leses på nytt: prøv igjen om et øyeblikk.

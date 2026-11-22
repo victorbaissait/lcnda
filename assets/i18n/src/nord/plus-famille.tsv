@@ -1,0 +1,218 @@
+fr ¦ cs ¦ sv ¦ da
+# Zone « plus-famille » : 💌 lettre de famille, 🛡 fiabilité par personne, 🖊 relecture d’une branche, 🌐 traduire un acte latin (assets/js/plus-famille*.js, lib/plus_famille.php)
+Fiabilité : {n} sur 100 ¦ Spolehlivost: {n} ze 100 ¦ Tillförlitlighet: {n} av 100 ¦ Pålidelighed: {n} ud af 100
+🛡 Fiabilité ¦ 🛡 Spolehlivost ¦ 🛡 Tillförlitlighet ¦ 🛡 Pålidelighed
+Calcul de la note… ¦ Výpočet hodnocení… ¦ Beräknar betyget… ¦ Beregner karakteren…
+Comment la note est calculée ¦ Jak se hodnocení počítá ¦ Hur betyget räknas ut ¦ Sådan beregnes karakteren
+? Comment c’est calculé ¦ ? Jak se to počítá ¦ ? Hur det räknas ¦ ? Sådan beregnes det
+en doute : {what} ¦ pochybné: {what} ¦ osäkert: {what} ¦ tvivlsomt: {what}
+date estimée : {what} ¦ odhadované datum: {what} ¦ uppskattat datum: {what} ¦ anslået dato: {what}
+aucun fait noté (naissance, mariage, décès…) ¦ žádný zapsaný fakt (narození, sňatek, úmrtí…) ¦ inga fakta noterade (födelse, vigsel, död…) ¦ ingen fakta noteret (fødsel, vielse, død…)
+sans source : {what} ¦ bez zdroje: {what} ¦ utan källa: {what} ¦ uden kilde: {what}
+une source sur la fiche, mais sur aucun fait ¦ zdroj na kartě, ale u žádného faktu ¦ en källa på kortet, men på inget faktum ¦ en kilde på kortet, men på ingen fakta
+aucune source ¦ žádný zdroj ¦ ingen källa ¦ ingen kilde
+{who} : lien {lvl} ¦ {who}: vazba {lvl} ¦ {who}: länk {lvl} ¦ {who}: forbindelse {lvl}
+pas de parents dans la base : cette part ne compte pas ¦ žádní rodiče v databázi: tato část se nepočítá ¦ inga föräldrar i databasen: denna del räknas inte ¦ ingen forældre i databasen: denne del tæller ikke
+ajouter une source à : {what} ¦ přidat zdroj k: {what} ¦ lägga till en källa till: {what} ¦ tilføje en kilde til: {what}
+vérifier {what}, marqué « doute » ¦ ověřit {what}, označeno „pochybné“ ¦ kontrollera {what}, markerat ”osäkert” ¦ kontrollere {what}, markeret “tvivl”
+confirmer le lien avec {name} (⚖️ dossier de preuve) ¦ potvrdit vazbu s {name} (⚖️ důkazní spis) ¦ bekräfta länken till {name} (⚖️ bevisakt) ¦ bekræfte forbindelsen til {name} (⚖️ bevismappe)
+ajouter ses faits (naissance, mariage, décès) avec leur source ¦ přidat fakta (narození, sňatek, úmrtí) se zdrojem ¦ lägga till fakta (födelse, vigsel, död) med källa ¦ tilføje fakta (fødsel, vielse, død) med kilde
+sur 100 ¦ ze 100 ¦ av 100 ¦ ud af 100
+À revoir avant publication ¦ Zkontrolovat před zveřejněním ¦ Granska före publicering ¦ Gennemse før offentliggørelse
+(vivant ou fiche confidentielle : ne part pas à la publication) ¦ (žijící nebo důvěrná karta: nezveřejňuje se) ¦ (levande eller konfidentiellt kort: publiceras inte) ¦ (levende eller fortroligt kort: offentliggøres ikke)
+Seuil « à revoir » : {n} ¦ Práh „zkontrolovat“: {n} ¦ Tröskel ”granska”: {n} ¦ Tærskel “gennemse”: {n}
+Pour gagner des points : ¦ Jak získat body: ¦ För att få fler poäng: ¦ For at få flere point:
+La note n’est pas le score de complétude (qui compte ce qui est rempli) : une fiche peut être bien remplie et peu sûre. ¦ Hodnocení není míra úplnosti (ta počítá, co je vyplněno): karta může být dobře vyplněná, a přesto nejistá. ¦ Betyget är inte fullständighetsgraden (som räknar det ifyllda): ett kort kan vara väl ifyllt men osäkert. ¦ Karakteren er ikke fuldstændighedsgraden (der tæller det udfyldte): et kort kan være godt udfyldt og alligevel usikkert.
+Calcul impossible. ¦ Výpočet nelze provést. ¦ Beräkningen går inte. ¦ Beregning umulig.
+🛡 FIABILITÉ ¦ 🛡 SPOLEHLIVOST ¦ 🛡 TILLFÖRLITLIGHET ¦ 🛡 PÅLIDELIGHED
+Trois parts, sur 100 chacune, puis une moyenne : ¦ Tři části, každá ze 100, pak průměr: ¦ Tre delar, var och en av 100, sedan ett medelvärde: ¦ Tre dele, hver ud af 100, derefter et gennemsnit:
+Ses faits (40 %) ¦ Fakta (40 %) ¦ Fakta (40 %) ¦ Fakta (40 %)
+la fiabilité de chaque fait : certain 100, déduit 80, estimé 55, doute 15, non évalué 60 ; une date « vers… », « avant… » compte comme estimée. ¦ spolehlivost každého faktu: jisté 100, odvozené 80, odhadnuté 55, pochybné 15, nehodnocené 60; datum „kolem…“, „před…“ se počítá jako odhad. ¦ tillförlitligheten för varje faktum: säkert 100, härlett 80, uppskattat 55, osäkert 15, ej bedömt 60; ett datum ”omkring…”, ”före…” räknas som uppskattat. ¦ pålideligheden af hver fakta: sikker 100, udledt 80, anslået 55, tvivl 15, ikke vurderet 60; en dato “omkring…”, “før…” tæller som anslået.
+Ses sources (35 %) ¦ Zdroje (35 %) ¦ Källor (35 %) ¦ Kilder (35 %)
+la part des faits qui ont une source citée ou un acte en image. ¦ podíl faktů s citovaným zdrojem nebo obrazem záznamu. ¦ andelen fakta med en citerad källa eller en bild av akten. ¦ andelen fakta med en citeret kilde eller et billede af akten.
+Ses liens (25 %) ¦ Vazby (25 %) ¦ Länkar (25 %) ¦ Forbindelser (25 %)
+la solidité du lien avec chaque parent : prouvé 100, probable 75, supposé 45, sans source 20, réfuté 0. Sans parents dans la base, cette part ne compte pas. ¦ pevnost vazby s každým rodičem: prokázaná 100, pravděpodobná 75, předpokládaná 45, bez zdroje 20, vyvrácená 0. Bez rodičů v databázi se tato část nepočítá. ¦ styrkan i länken till varje förälder: bevisad 100, trolig 75, antagen 45, utan källa 20, motbevisad 0. Utan föräldrar i databasen räknas delen inte. ¦ styrken af forbindelsen til hver forælder: bevist 100, sandsynlig 75, formodet 45, uden kilde 20, afvist 0. Uden forældre i databasen tæller delen ikke.
+Sous le seuil (50 au départ), la fiche est « à revoir avant publication ». Le seuil se règle dans Réglages → ⚙️ Seuils du contrôle. ¦ Pod prahem (na začátku 50) je karta „ke kontrole před zveřejněním“. Práh nastavíš v Nastavení → ⚙️ Prahy kontroly. ¦ Under tröskeln (50 från början) ska kortet ”granskas före publicering”. Tröskeln ställs in i Inställningar → ⚙️ Kontrollens trösklar. ¦ Under tærsklen (50 fra start) skal kortet “gennemses før offentliggørelse”. Tærsklen indstilles i Indstillinger → ⚙️ Kontrollens tærskler.
+Rien n’est changé dans ta base : la note est recalculée dès qu’un fait ou une source change. ¦ V tvé databázi se nic nemění: hodnocení se přepočítá, jakmile se změní fakt nebo zdroj. ¦ Inget ändras i din databas: betyget räknas om så fort ett faktum eller en källa ändras. ¦ Intet ændres i din database: karakteren genberegnes, så snart en fakta eller kilde ændres.
+{day} : {first}, {age} ¦ {day}: {first}, {age} ¦ {day}: {first}, {age} ¦ {day}: {first}, {age}
+{day} : il y a {n} ans, {a} et {b} se mariaient ¦ {day}: před {n} lety se vzali {a} a {b} ¦ {day}: för {n} år sedan gifte sig {a} och {b} ¦ {day}: for {n} år siden blev {a} og {b} gift
+{day} : il y a {n} ans naissait {name} ¦ {day}: před {n} lety se narodil(a) {name} ¦ {day}: för {n} år sedan föddes {name} ¦ {day}: for {n} år siden blev {name} født
+{what} dans l’arbre : {list} ¦ {what} ve stromu: {list} ¦ {what} i trädet: {list} ¦ {what} i træet: {list}
+Nouveau dans les médias : « {title} » ¦ Nové v médiích: „{title}“ ¦ Nytt i medierna: ”{title}” ¦ Nyt i medierne: “{title}”
+La lettre des {nm} ¦ Dopis rodiny {nm} ¦ Familjen {nm}s brev ¦ Familien {nm}s brev
+Bonjour à tous ! Voici les nouvelles de la famille ce mois-ci. ¦ Ahoj všem! Tady jsou rodinné novinky tohoto měsíce. ¦ Hej allihop! Här är familjens nyheter den här månaden. ¦ Hej alle sammen! Her er familiens nyheder denne måned.
+Photo : {title} ¦ Fotografie: {title} ¦ Foto: {title} ¦ Foto: {title}
+Les anniversaires du mois ¦ Výročí měsíce ¦ Månadens födelsedagar ¦ Månedens fødselsdage
+Pas d’anniversaire ce mois-ci. ¦ Tento měsíc žádné výročí. ¦ Ingen födelsedag den här månaden. ¦ Ingen fødselsdag denne måned.
+Les dernières découvertes ¦ Nejnovější objevy ¦ De senaste upptäckterna ¦ De seneste opdagelser
+Rien de nouveau ce mois-ci : à vous de m’envoyer vos souvenirs ! ¦ Tento měsíc nic nového: teď mi pošlete své vzpomínky vy! ¦ Inget nytt den här månaden: nu är det er tur att skicka era minnen! ¦ Intet nyt denne måned: nu er det jeres tur til at sende mig jeres minder!
+L’ancêtre à l’honneur ¦ Předek v centru pozornosti ¦ Månadens anfader ¦ Månedens stamfar
+Avec toute mon affection, ¦ S láskou, ¦ Med all min kärlek, ¦ Med al min kærlighed,
+Ce qu’on y met ¦ Co v něm bude ¦ Vad som ingår ¦ Hvad der kommer med
+🖼 Changer ¦ 🖼 Změnit ¦ 🖼 Byt ¦ 🖼 Skift
+Tout se retouche dans la lettre (clique sur un texte). Les personnes vivantes n’y figurent que par leur prénom et leur âge ; les fiches confidentielles jamais. ¦ Vše se upraví přímo v dopise (klikni na text). Žijící lidé jsou uvedeni jen křestním jménem a věkem, důvěrné karty nikdy. ¦ Allt kan ändras i brevet (klicka på en text). Levande personer visas bara med förnamn och ålder, konfidentiella kort aldrig. ¦ Alt kan rettes i brevet (klik på en tekst). Levende personer vises kun med fornavn og alder, fortrolige kort aldrig.
+Je remplis la lettre… ¦ Vyplňuji dopis… ¦ Fyller i brevet… ¦ Udfylder brevet…
+Lettre refaite avec les nouveaux choix ¦ Dopis znovu vytvořen s novou volbou ¦ Brevet gjort om med de nya valen ¦ Brevet lavet om med de nye valg
+LETTRE DE FAMILLE ¦ RODINNÝ DOPIS ¦ FAMILJEBREV ¦ FAMILIEBREV
+La photo de la lettre ¦ Fotografie dopisu ¦ Brevets foto ¦ Brevets foto
+Lettre de famille ¦ Rodinný dopis ¦ Familjebrev ¦ Familiebrev
+La lettre du mois remplie toute seule : anniversaires, dernières découvertes, une photo, un ancêtre à l’honneur. Tout se retouche. ¦ Dopis měsíce se vyplní sám: výročí, nejnovější objevy, fotografie, předek v centru pozornosti. Vše lze upravit. ¦ Månadens brev fylls i av sig självt: födelsedagar, senaste upptäckter, ett foto, en anfader i fokus. Allt kan ändras. ¦ Månedens brev udfylder sig selv: fødselsdage, seneste opdagelser, et foto, en stamfar i fokus. Alt kan rettes.
+Lettre gardée : « {title} » (Listes → Lettres de famille) ¦ Dopis uložen: „{title}“ (Seznamy → Rodinné dopisy) ¦ Brevet sparat: ”{title}” (Listor → Familjebrev) ¦ Brevet gemt: “{title}” (Lister → Familiebreve)
+💾 Garder ¦ 💾 Uložit ¦ 💾 Spara ¦ 💾 Gem
+Ranger la lettre dans Listes → Lettres de famille ¦ Uložit dopis do Seznamy → Rodinné dopisy ¦ Lägg brevet i Listor → Familjebrev ¦ Læg brevet i Lister → Familiebreve
+PDF ¦ PDF ¦ PDF ¦ PDF
+par la fenêtre « Imprimer » (⤓ PDF) ¦ přes okno „Tisk“ (⤓ PDF) ¦ via fönstret ”Skriv ut” (⤓ PDF) ¦ via vinduet “Udskriv” (⤓ PDF)
+Image (PNG) ¦ Obrázek (PNG) ¦ Bild (PNG) ¦ Billede (PNG)
+Ouvre ta messagerie avec la lettre déjà écrite : rien n’est envoyé par l’app ¦ Otevře poštu s hotovým dopisem: aplikace nic neodesílá ¦ Öppnar e-posten med brevet redan skrivet: appen skickar inget ¦ Åbner din mail med brevet allerede skrevet: appen sender intet
+📝 Retoucher ¦ 📝 Upravit ¦ 📝 Redigera ¦ 📝 Rediger
+Ouvrir la lettre dans le traitement de texte ¦ Otevřít dopis v textovém editoru ¦ Öppna brevet i ordbehandlaren ¦ Åbn brevet i tekstbehandlingen
+Chers cousins, chères cousines, ¦ Milí bratranci a sestřenice, ¦ Kära kusiner, ¦ Kære fætre og kusiner,
+Ce que j’ai trouvé ce mois-ci… ¦ Co jsem tento měsíc našel… ¦ Vad jag hittade den här månaden… ¦ Hvad jeg fandt denne måned…
+Si vous avez des photos, des lettres ou des souvenirs, je serais très heureux de les voir ! ¦ Máte-li fotografie, dopisy nebo vzpomínky, rád je uvidím! ¦ Har ni foton, brev eller minnen vill jag gärna se dem! ¦ Har I fotos, breve eller minder, vil jeg meget gerne se dem!
+Je vous embrasse, ¦ Objímám vás, ¦ Kramar, ¦ Kærlig hilsen,
+📋 Voir dans Listes › Lettres de famille ¦ 📋 Zobrazit v Seznamy › Rodinné dopisy ¦ 📋 Visa i Listor › Familjebrev ¦ 📋 Se i Lister › Familiebreve
+remplie toute seule : anniversaires du mois, découvertes, photo, ancêtre ¦ vyplní se sám: výročí měsíce, objevy, fotografie, předek ¦ fylls i själv: månadens födelsedagar, upptäckter, foto, anfader ¦ udfyldes af sig selv: månedens fødselsdage, opdagelser, foto, stamfar
+Lettres de famille ¦ Rodinné dopisy ¦ Familjebrev ¦ Familiebreve
+💌 Lettres de famille ¦ 💌 Rodinné dopisy ¦ 💌 Familjebrev ¦ 💌 Familiebreve
+Les lettres du mois gardées depuis ✨ Trésors → « 💌 Lettre de famille ». À ne pas confondre avec les « ✉️ Lettres aux descendants », qui s’ouvrent plus tard. ¦ Dopisy měsíce uložené z ✨ Poklady → „💌 Rodinný dopis“. Nezaměňovat s „✉️ Dopisy potomkům“, které se otevřou později. ¦ Månadsbrev sparade från ✨ Skatter → ”💌 Familjebrev”. Inte att förväxla med ”✉️ Brev till ättlingarna”, som öppnas senare. ¦ Månedens breve gemt fra ✨ Skatte → “💌 Familiebrev”. Må ikke forveksles med “✉️ Breve til efterkommerne”, der åbnes senere.
+💌 Nouvelle lettre ¦ 💌 Nový dopis ¦ 💌 Nytt brev ¦ 💌 Nyt brev
+Chercher… (titre, mois) ¦ Hledat… (název, měsíc) ¦ Sök… (titel, månad) ¦ Søg… (titel, måned)
+Supprimer la lettre ¦ Smazat dopis ¦ Radera brevet ¦ Slet brevet
+Aucune lettre gardée pour l’instant ¦ Zatím žádný uložený dopis ¦ Inga sparade brev ännu ¦ Ingen breve gemt endnu
+Fais celle du mois dans ✨ Trésors → « 💌 Lettre de famille », puis « 💾 Garder ». ¦ Vytvoř dopis měsíce v ✨ Poklady → „💌 Rodinný dopis“ a pak „💾 Uložit“. ¦ Gör månadens i ✨ Skatter → ”💌 Familjebrev”, sedan ”💾 Spara”. ¦ Lav månedens i ✨ Skatte → “💌 Familiebrev”, derefter “💾 Gem”.
+💌 Faire la lettre du mois ¦ 💌 Vytvořit dopis měsíce ¦ 💌 Gör månadens brev ¦ 💌 Lav månedens brev
+Lettre « {title} » supprimée ¦ Dopis „{title}“ smazán ¦ Brevet ”{title}” raderat ¦ Brevet “{title}” slettet
+« d’accord », dit {who}. ¦ „souhlasím“, říká {who}. ¦ ”håller med”, säger {who}. ¦ “enig”, siger {who}.
+« faux », dit {who}. ¦ „špatně“, říká {who}. ¦ ”fel”, säger {who}. ¦ “forkert”, siger {who}.
+Que faire de cette remarque ? ¦ Co s touto poznámkou? ¦ Vad ska göras med anmärkningen? ¦ Hvad skal der ske med bemærkningen?
+✓ Accepter (témoignage) ¦ ✓ Přijmout (svědectví) ¦ ✓ Godta (vittnesmål) ¦ ✓ Godkend (vidnesbyrd)
+✓ Accepter (note sur le fait, « doute ») ¦ ✓ Přijmout (poznámka k faktu, „pochybné“) ¦ ✓ Godta (anteckning på faktum, ”osäkert”) ¦ ✓ Godkend (note på fakta, “tvivl”)
+{what} par {who} : ajoutés comme témoignage si tu acceptes ¦ {what} od {who}: přidají se jako svědectví, pokud přijmeš ¦ {what} av {who}: läggs till som vittnesmål om du godtar ¦ {what} af {who}: tilføjes som vidnesbyrd, hvis du godkender
+Pour tous : ¦ Pro všechny: ¦ För alla: ¦ For alle:
+Importer les remarques d’une relecture ¦ Importovat poznámky z revize ¦ Importera anmärkningar från en granskning ¦ Importér bemærkninger fra en gennemlæsning
+le fichier « remarques-….json » ¦ soubor „remarques-….json“ ¦ filen ”remarques-….json” ¦ filen “remarques-….json”
+Le fichier que ton cousin t’a renvoyé avec « ⤓ Renvoyer mes remarques ». ¦ Soubor, který ti bratranec poslal tlačítkem „⤓ Poslat mé poznámky“. ¦ Filen som din kusin skickade tillbaka med ”⤓ Skicka tillbaka mina anmärkningar”. ¦ Filen, din fætter sendte tilbage med “⤓ Send mine bemærkninger tilbage”.
+Ce fichier est trop gros pour un fichier de remarques. ¦ Tento soubor je na soubor poznámek příliš velký. ¦ Filen är för stor för en anmärkningsfil. ¦ Filen er for stor til en bemærkningsfil.
+<b>{what}</b> de <b>{who}</b> sur « {title} » ({date}). Pour chaque fait : accepte, refuse ou garde pour plus tard ¦ <b>{what}</b> od <b>{who}</b> k „{title}“ ({date}). U každého faktu: přijmi, odmítni nebo nech na později ¦ <b>{what}</b> från <b>{who}</b> om ”{title}” ({date}). För varje faktum: godta, avvisa eller spara till senare ¦ <b>{what}</b> fra <b>{who}</b> om “{title}” ({date}). For hver fakta: godkend, afvis eller gem til senere
+Ces remarques ont <b>déjà été importées</b> ¦ Tyto poznámky <b>už byly importovány</b> ¦ Anmärkningarna har <b>redan importerats</b> ¦ Bemærkningerne er <b>allerede importeret</b>
+Aucune remarque dans ce fichier ¦ V tomto souboru nejsou žádné poznámky ¦ Inga anmärkningar i filen ¦ Ingen bemærkninger i filen
+{what} sur des faits qui ne sont plus dans la base : mises de côté. ¦ {what} k faktům, které už v databázi nejsou: odloženo. ¦ {what} om fakta som inte längre finns i databasen: lagda åt sidan. ¦ {what} om fakta, der ikke længere er i databasen: lagt til side.
+⤒ Importer les remarques ¦ ⤒ Importovat poznámky ¦ ⤒ Importera anmärkningarna ¦ ⤒ Importér bemærkningerne
+{what} (relecture de {who}) ¦ {what} (revize: {who}) ¦ {what} (granskning av {who}) ¦ {what} (gennemlæsning af {who})
+Remarques de {who} gardées avec la relecture. ¦ Poznámky od {who} uloženy s revizí. ¦ Anmärkningar från {who} sparade med granskningen. ¦ Bemærkninger fra {who} gemt med gennemlæsningen.
+relu par {who} ¦ zkontroloval(a): {who} ¦ granskad av {who} ¦ gennemlæst af {who}
+En attente des remarques ¦ Čeká se na poznámky ¦ Väntar på anmärkningarna ¦ Venter på bemærkningerne
+{n} à ranger ¦ {n} k vyřízení ¦ {n} att hantera ¦ {n} at håndtere
+tout est rangé ¦ vše vyřízeno ¦ allt är hanterat ¦ alt er håndteret
+Envoyé, en attente des remarques ¦ Odesláno, čeká se na poznámky ¦ Skickat, väntar på anmärkningarna ¦ Sendt, venter på bemærkningerne
+Supprimer la relecture ¦ Smazat revizi ¦ Radera granskningen ¦ Slet gennemlæsningen
+Relectures de branche ¦ Revize větví ¦ Granskningar av grenar ¦ Gennemlæsninger af grene
+＋ Demander une relecture… ¦ ＋ Požádat o revizi… ¦ ＋ Be om en granskning… ¦ ＋ Bed om en gennemlæsning…
+Aucune relecture : « 📤 Partager avec la famille » avec la case « 🖊 Demander une relecture », ou fiche → ⋯ → « 🖊 Faire relire cette branche… ». ¦ Žádná revize: „📤 Sdílet s rodinou“ se zaškrtnutím „🖊 Požádat o revizi“, nebo karta → ⋯ → „🖊 Nechat zkontrolovat tuto větev…“. ¦ Ingen granskning: ”📤 Dela med familjen” med rutan ”🖊 Be om en granskning”, eller kort → ⋯ → ”🖊 Låt granska den här grenen…”. ¦ Ingen gennemlæsning: “📤 Del med familien” med feltet “🖊 Bed om en gennemlæsning”, eller kort → ⋯ → “🖊 Få denne gren gennemlæst…”.
+Relecture « {title} » supprimée ¦ Revize „{title}“ smazána ¦ Granskningen ”{title}” raderad ¦ Gennemlæsningen “{title}” slettet
+Faire relire cette branche… ¦ Nechat zkontrolovat tuto větev… ¦ Låt granska den här grenen… ¦ Få denne gren gennemlæst…
+{who} pense que c’est faux : {c} ¦ {who} si myslí, že je to špatně: {c} ¦ {who} tror att det är fel: {c} ¦ {who} mener, at det er forkert: {c}
+{who} est d’accord ¦ {who} souhlasí ¦ {who} håller med ¦ {who} er enig
+Remarque refusée ¦ Poznámka odmítnuta ¦ Anmärkningen avvisad ¦ Bemærkningen afvist
+Remarque notée sur le fait ¦ Poznámka zapsána k faktu ¦ Anmärkningen noterad på faktumet ¦ Bemærkningen noteret på fakta
+Témoignage ajouté ¦ Svědectví přidáno ¦ Vittnesmål tillagt ¦ Vidnesbyrd tilføjet
+« je pense que c’est faux » ¦ „myslím, že je to špatně“ ¦ ”jag tror att det är fel” ¦ “jeg tror, det er forkert”
+« d’accord » ¦ „souhlasím“ ¦ ”håller med” ¦ “enig”
+Corriger le fait ¦ Opravit fakt ¦ Rätta faktumet ¦ Ret fakta
+ouvre le fait ; la remarque reste jusqu’à « Noter » ou « Refuser » ¦ otevře fakt; poznámka zůstane do „Zapsat“ nebo „Odmítnout“ ¦ öppnar faktumet; anmärkningen finns kvar tills ”Notera” eller ”Avvisa” ¦ åbner fakta; bemærkningen bliver, indtil “Notér” eller “Afvis”
+Noter (note sur le fait, « doute ») ¦ Zapsat (poznámka k faktu, „pochybné“) ¦ Notera (anteckning på faktum, ”osäkert”) ¦ Notér (note på fakta, “tvivl”)
+Accepter (témoignage) ¦ Přijmout (svědectví) ¦ Godta (vittnesmål) ¦ Godkend (vidnesbyrd)
+🖊 Remarque de relecture ¦ 🖊 Poznámka z revize ¦ 🖊 Anmärkning från granskning ¦ 🖊 Bemærkning fra gennemlæsning
+l’année {y} ¦ rok {y} ¦ året {y} ¦ året {y}
+Traduire ¦ Přeložit ¦ Översätt ¦ Oversæt
+Le mot à mot tout de suite, la traduction complète si le modèle de la lecture approfondie est installé ¦ Hned slovo od slova, celý překlad, pokud je nainstalován model hloubkového čtení ¦ Ord för ord direkt, hela översättningen om modellen för fördjupad läsning är installerad ¦ Ord for ord med det samme, hele oversættelsen hvis modellen til dybdelæsning er installeret
+latin → français ¦ latina → francouzština ¦ latin → franska ¦ latin → fransk
+Revenir au texte ¦ Zpět k textu ¦ Tillbaka till texten ¦ Tilbage til teksten
+Écris ou lis d’abord le texte de l’acte : la traduction part du texte transcrit. ¦ Nejdřív napiš nebo přečti text záznamu: překlad vychází z přepsaného textu. ¦ Skriv eller läs först aktens text: översättningen utgår från den transkriberade texten. ¦ Skriv eller læs først aktens tekst: oversættelsen tager udgangspunkt i den transskriberede tekst.
+L’acte (latin, transcrit) ¦ Záznam (latinsky, přepsaný) ¦ Akten (latin, transkriberad) ¦ Akten (latin, transskriberet)
+vert : formule connue ¦ zelená: známá formule ¦ grönt: känd formel ¦ grøn: kendt formel
+bleu : mot du dictionnaire ¦ modrá: slovo ze slovníku ¦ blått: ord i ordboken ¦ blå: ord fra ordbogen
+pointillé : peu sûr ¦ tečkovaně: nejisté ¦ prickat: osäkert ¦ prikket: usikkert
+Niveau 1 · mot à mot sans installation ¦ Úroveň 1 · slovo od slova bez instalace ¦ Nivå 1 · ord för ord utan installation ¦ Niveau 1 · ord for ord uden installation
+Aucun mot reconnu. ¦ Žádné slovo nerozpoznáno. ¦ Inga ord kändes igen. ¦ Ingen ord genkendt.
+Date : {d} ¦ Datum: {d} ¦ Datum: {d} ¦ Dato: {d}
+Niveau 2 · traduction complète ¦ Úroveň 2 · celý překlad ¦ Nivå 2 · fullständig översättning ¦ Niveau 2 · fuld oversættelse
+Je regarde si le modèle est installé… ¦ Zjišťuji, zda je model nainstalován… ¦ Kontrollerar om modellen är installerad… ¦ Ser efter, om modellen er installeret…
+📋 Garder dans la transcription ¦ 📋 Uložit do přepisu ¦ 📋 Spara i transkriptionen ¦ 📋 Gem i transskriptionen
+Copier la traduction ¦ Kopírovat překlad ¦ Kopiera översättningen ¦ Kopiér oversættelsen
+📝 Mise au propre ¦ 📝 Čistopis ¦ 📝 Renskrift ¦ 📝 Renskrift
+Le niveau 1 marche toujours, sans rien installer. Les noms, dates et rôles repérés partent ensuite, comme d’habitude, dans « Ce que l’app a trouvé ». ¦ Úroveň 1 funguje vždy, bez instalace. Nalezená jména, data a role pak jako obvykle jdou do „Co aplikace našla“. ¦ Nivå 1 fungerar alltid, utan installation. Hittade namn, datum och roller går sedan som vanligt till ”Vad appen hittade”. ¦ Niveau 1 virker altid, uden installation. Fundne navne, datoer og roller går derefter som sædvanlig til “Hvad appen fandt”.
+✓ Les deux lectures sont d’accord sur les noms, la date et les rôles. ¦ ✓ Obě čtení se shodují ve jménech, datu i rolích. ¦ ✓ Båda läsningarna stämmer överens om namn, datum och roller. ¦ ✓ Begge læsninger er enige om navne, dato og roller.
+À vérifier : la traduction complète ne dit pas la même chose pour : {list} ¦ Zkontrolovat: celý překlad říká něco jiného u: {list} ¦ Att kontrollera: den fullständiga översättningen säger något annat om: {list} ¦ At kontrollere: den fulde oversættelse siger noget andet om: {list}
+Traduction copiée. ¦ Překlad zkopírován. ¦ Översättningen kopierad. ¦ Oversættelsen kopieret.
+Copie impossible dans ce navigateur. ¦ V tomto prohlížeči nelze kopírovat. ¦ Kopiering går inte i den här webbläsaren. ¦ Kopiering er ikke mulig i denne browser.
+Traduction gardée dans la transcription (enregistre avec ⌘S) ¦ Překlad uložen do přepisu (ulož pomocí ⌘S) ¦ Översättningen sparad i transkriptionen (spara med ⌘S) ¦ Oversættelsen gemt i transskriptionen (gem med ⌘S)
+Traduction en cours (le modèle tourne sur cet ordinateur)… ¦ Překládá se (model běží na tomto počítači)… ¦ Översätter (modellen körs på den här datorn)… ¦ Oversætter (modellen kører på denne computer)…
+La traduction n’a pas abouti. ¦ Překlad se nepodařil. ¦ Översättningen lyckades inte. ¦ Oversættelsen lykkedes ikke.
+La traduction gardée avec cette transcription. ¦ Překlad uložený s tímto přepisem. ¦ Översättningen som sparats med transkriptionen. ¦ Oversættelsen gemt med denne transskription.
+↻ Retraduire ¦ ↻ Přeložit znovu ¦ ↻ Översätt igen ¦ ↻ Oversæt igen
+Le modèle de la lecture approfondie est installé : la traduction complète prend quelques dizaines de secondes. ¦ Model hloubkového čtení je nainstalován: celý překlad trvá několik desítek sekund. ¦ Modellen för fördjupad läsning är installerad: hela översättningen tar några tiotals sekunder. ¦ Modellen til dybdelæsning er installeret: hele oversættelsen tager nogle snese sekunder.
+🌐 Traduire tout l’acte ¦ 🌐 Přeložit celý záznam ¦ 🌐 Översätt hela akten ¦ 🌐 Oversæt hele akten
+La traduction complète utilise le modèle de la lecture approfondie (Ollama, ≈ 6 Go, rien ne part sur Internet). ¦ Celý překlad používá model hloubkového čtení (Ollama, ≈ 6 GB, nic neodchází na internet). ¦ Den fullständiga översättningen använder modellen för fördjupad läsning (Ollama, ≈ 6 GB, inget skickas ut på internet). ¦ Den fulde oversættelse bruger modellen til dybdelæsning (Ollama, ≈ 6 GB, intet sendes på internettet).
+Le niveau 1 marche toujours. ¦ Úroveň 1 funguje vždy. ¦ Nivå 1 fungerar alltid. ¦ Niveau 1 virker altid.
+Transcription d’acte ¦ Přepis záznamu ¦ Transkription av akt ¦ Transskription af akt
+Traduction ¦ Překlad ¦ Översättning ¦ Oversættelse
+Mots difficiles et abréviations ¦ Obtížná slova a zkratky ¦ Svåra ord och förkortningar ¦ Svære ord og forkortelser
+Les personnes de l’acte ¦ Osoby v záznamu ¦ Personerna i akten ¦ Personerne i akten
+=fait certain ¦ jistý fakt|jisté fakty|jistých faktů ¦ säkert faktum|säkra fakta ¦ sikker fakta|sikre fakta
+=fait déduit ¦ odvozený fakt|odvozené fakty|odvozených faktů ¦ härlett faktum|härledda fakta ¦ udledt fakta|udledte fakta
+=fait estimé ¦ odhadnutý fakt|odhadnuté fakty|odhadnutých faktů ¦ uppskattat faktum|uppskattade fakta ¦ anslået fakta|anslåede fakta
+=fait en doute ¦ pochybný fakt|pochybné fakty|pochybných faktů ¦ osäkert faktum|osäkra fakta ¦ tvivlsom fakta|tvivlsomme fakta
+=fait non évalué ¦ nehodnocený fakt|nehodnocené fakty|nehodnocených faktů ¦ ej bedömt faktum|ej bedömda fakta ¦ ikke vurderet fakta|ikke vurderede fakta
+=fait ¦ fakt|fakta|faktů ¦ faktum|fakta ¦ fakta|fakta
+=fiche à revoir ¦ karta ke kontrole|karty ke kontrole|karet ke kontrole ¦ kort att granska|kort att granska ¦ kort at gennemse|kort at gennemse
+=fait confirmé ¦ potvrzený fakt|potvrzené fakty|potvrzených faktů ¦ bekräftat faktum|bekräftade fakta ¦ bekræftet fakta|bekræftede fakta
+=remarque notée ¦ zapsaná poznámka|zapsané poznámky|zapsaných poznámek ¦ noterad anmärkning|noterade anmärkningar ¦ noteret bemærkning|noterede bemærkninger
+=remarque pour plus tard ¦ poznámka na později|poznámky na později|poznámek na později ¦ anmärkning till senare|anmärkningar till senare ¦ bemærkning til senere|bemærkninger til senere
+=relecture ¦ revize|revize|revizí ¦ granskning|granskningar ¦ gennemlæsning|gennemlæsninger
+Très sûr ¦ Velmi jisté ¦ Mycket säkert ¦ Meget sikkert
+Assez sûr ¦ Docela jisté ¦ Ganska säkert ¦ Ret sikkert
+Peu sûr ¦ Nejisté ¦ Osäkert ¦ Usikkert
+prouvé ¦ prokázaná ¦ bevisad ¦ bevist
+probable ¦ pravděpodobná ¦ trolig ¦ sandsynlig
+réfuté ¦ vyvrácená ¦ motbevisad ¦ afvist
+parent ¦ rodič ¦ förälder ¦ forælder
+baptisé(e) ¦ pokřtěný/á ¦ döpt ¦ døbt
+note sous ¦ hodnocení pod ¦ betyg under ¦ karakter under
+{a} sur {n} ont une source ¦ {a} z {n} má zdroj ¦ {a} av {n} har en källa ¦ {a} ud af {n} har en kilde
+{a} sur {n} a une source ¦ {a} z {n} má zdroj ¦ {a} av {n} har en källa ¦ {a} ud af {n} har en kilde
+{n} sont à revoir avant publication (note sous {min}). ¦ {n} — ke kontrole před zveřejněním (hodnocení pod {min}). ¦ {n} ska granskas före publicering (betyg under {min}). ¦ {n} skal gennemses før offentliggørelse (karakter under {min}).
+{n} est à revoir avant publication (note sous {min}). ¦ {n} — ke kontrole před zveřejněním (hodnocení pod {min}). ¦ {n} ska granskas före publicering (betyg under {min}). ¦ {n} skal gennemses før offentliggørelse (karakter under {min}).
+La fiabilité n’a pas pu être calculée. ¦ Spolehlivost nešlo spočítat. ¦ Tillförlitligheten kunde inte beräknas. ¦ Pålideligheden kunne ikke beregnes.
+Aucune fiche à revoir avant publication, bravo ! ¦ Žádná karta ke kontrole před zveřejněním, výborně! ¦ Inga kort att granska före publicering, bra jobbat! ¦ Ingen kort at gennemse før offentliggørelse, flot!
+Pas encore de fiche à publier. ¦ Zatím žádná karta ke zveřejnění. ¦ Inga kort att publicera ännu. ¦ Ingen kort at offentliggøre endnu.
+{n} sous {min} sur 100 ¦ {n} pod {min} ze 100 ¦ {n} under {min} av 100 ¦ {n} under {min} ud af 100
+🛡 Fiches les moins fiables ¦ 🛡 Nejméně spolehlivé karty ¦ 🛡 Minst tillförlitliga kort ¦ 🛡 Mindst pålidelige kort
+Listes → Personnes, filtrée sur « À revoir avant publication » ¦ Seznamy → Osoby, filtr „Zkontrolovat před zveřejněním“ ¦ Listor → Personer, filtrerad på ”Granska före publicering” ¦ Lister → Personer, filtreret på “Gennemse før offentliggørelse”
+Les voir ¦ Zobrazit je ¦ Visa dem ¦ Se dem
+Les laisser de côté ¦ Vynechat je ¦ Utelämna dem ¦ Udelad dem
+Exporter quand même ¦ Přesto exportovat ¦ Exportera ändå ¦ Eksportér alligevel
+Transcription ¦ Přepis ¦ Transkription ¦ Transskription
+🖊 Relecture ¦ 🖊 Revize ¦ 🖊 Granskning ¦ 🖊 Gennemlæsning
+🖊 Demander une relecture (le cousin peut cocher et commenter chaque fait) ¦ 🖊 Požádat o revizi (bratranec může každý fakt zaškrtnout a okomentovat) ¦ 🖊 Be om en granskning (kusinen kan bocka för och kommentera varje faktum) ¦ 🖊 Bed om en gennemlæsning (fætteren kan afkrydse og kommentere hver fakta)
+La copie montre alors « ✓ D’accord / ✗ Je pense que c’est faux » sur chaque fait, et « ⤓ Renvoyer mes remarques » : un petit fichier .json à importer dans Questions aux proches → « ⤒ Importer les réponses ». ¦ Kopie pak u každého faktu ukáže „✓ Souhlasím / ✗ Myslím, že je to špatně“ a „⤓ Poslat mé poznámky“: malý soubor .json k importu v Otázky blízkým → „⤒ Importovat odpovědi“. ¦ Kopian visar då ”✓ Håller med / ✗ Jag tror att det är fel” vid varje faktum och ”⤓ Skicka tillbaka mina anmärkningar”: en liten .json-fil att importera i Frågor till nära → ”⤒ Importera svaren”. ¦ Kopien viser så “✓ Enig / ✗ Jeg tror, det er forkert” ved hver fakta og “⤓ Send mine bemærkninger tilbage”: en lille .json-fil, der importeres i Spørgsmål til de nærmeste → “⤒ Importér svarene”.
+Copie à relire prête : {name}. Le cousin te renverra ses remarques (un fichier .json) : Questions aux proches → « ⤒ Importer les réponses ». ¦ Kopie ke kontrole připravena: {name}. Bratranec ti pošle poznámky (soubor .json): Otázky blízkým → „⤒ Importovat odpovědi“. ¦ Kopia att granska klar: {name}. Kusinen skickar tillbaka sina anmärkningar (en .json-fil): Frågor till nära → ”⤒ Importera svaren”. ¦ Kopi til gennemlæsning klar: {name}. Fætteren sender sine bemærkninger tilbage (en .json-fil): Spørgsmål til de nærmeste → “⤒ Importér svarene”.
+Donne un titre à la lettre. ¦ Dej dopisu název. ¦ Ge brevet en titel. ¦ Giv brevet en titel.
+Lettre introuvable. ¦ Dopis nenalezen. ¦ Brevet hittades inte. ¦ Brevet blev ikke fundet.
+Relecture introuvable. ¦ Revize nenalezena. ¦ Granskningen hittades inte. ¦ Gennemlæsningen blev ikke fundet.
+Remarque introuvable. ¦ Poznámka nenalezena. ¦ Anmärkningen hittades inte. ¦ Bemærkningen blev ikke fundet.
+Ce n’est pas un fichier de remarques de relecture. ¦ Toto není soubor poznámek z revize. ¦ Det här är ingen anmärkningsfil från en granskning. ¦ Dette er ikke en bemærkningsfil fra en gennemlæsning.
+Cette relecture n’est pas dans cette base (ou elle a été supprimée). ¦ Tato revize v databázi není (nebo byla smazána). ¦ Granskningen finns inte i den här databasen (eller har raderats). ¦ Gennemlæsningen er ikke i denne database (eller er slettet).
+Ce fait n’existe plus. ¦ Tento fakt už neexistuje. ¦ Faktumet finns inte längre. ¦ Denne fakta findes ikke længere.
+Cette remarque est déjà rangée. ¦ Tato poznámka je už vyřízená. ¦ Anmärkningen är redan hanterad. ¦ Bemærkningen er allerede håndteret.
+Il n’y a pas encore de texte à traduire. ¦ Zatím není co přeložit. ¦ Det finns ingen text att översätta ännu. ¦ Der er ingen tekst at oversætte endnu.
+Le modèle de la lecture approfondie n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Model hloubkového čtení ještě není stažen: „⤓ Nainstalovat hloubkové čtení“. ¦ Modellen för fördjupad läsning är inte nedladdad ännu: ”⤓ Installera fördjupad läsning”. ¦ Modellen til dybdelæsning er ikke hentet endnu: “⤓ Installér dybdelæsning”.
+Ces outils ne sont pas encore prêts : relance l’app. ¦ Tyto nástroje ještě nejsou připravené: restartuj aplikaci. ¦ Verktygen är inte klara ännu: starta om appen. ¦ Værktøjerne er ikke klar endnu: genstart appen.
+Cette demande de relecture n’existe plus. ¦ Tato žádost o revizi už neexistuje. ¦ Begäran om granskning finns inte längre. ¦ Anmodningen om gennemlæsning findes ikke længere.
+{who} confirme : {fact}. ¦ {who} potvrzuje: {fact}. ¦ {who} bekräftar: {fact}. ¦ {who} bekræfter: {fact}.
+Confirmé par {who} : {fact} ¦ Potvrdil(a) {who}: {fact} ¦ Bekräftat av {who}: {fact} ¦ Bekræftet af {who}: {fact}
+{who}, relecture « {title} », le {date} ¦ {who}, revize „{title}“, {date} ¦ {who}, granskning ”{title}”, {date} ¦ {who}, gennemlæsning “{title}”, {date}
+Relecture d’une branche ¦ Revize větve ¦ Granskning av en gren ¦ Gennemlæsning af en gren
+{who} pense que c’est faux. ¦ {who} si myslí, že je to špatně. ¦ {who} tror att det är fel. ¦ {who} mener, at det er forkert.
+relecture « {title} », le {date} ¦ revize „{title}“, {date} ¦ granskning ”{title}”, {date} ¦ gennemlæsning “{title}”, {date}
+💬 Remarque de {who} ¦ 💬 Poznámka od {who} ¦ 💬 Anmärkning från {who} ¦ 💬 Bemærkning fra {who}

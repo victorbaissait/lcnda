@@ -1,0 +1,186 @@
+fr ¦ cs ¦ sv ¦ da
+# 🏛⚠️📋📱 Compléments aux outils existants (docs/design/complements-existants.html) : C tous les doutes, D visite aux archives, erreurs du serveur
+📋 Tous les doutes ¦ 📋 Všechny pochybnosti ¦ 📋 Alla tvivel ¦ 📋 Al tvivl
+Points à revoir ¦ Body k revizi ¦ Punkter att se över ¦ Punkter at gennemgå
+Chaque ligne est lue dans l’outil d’origine au moment où tu ouvres la liste, et « ↗ » t’y emmène pour décider. Rien n’est copié : corriger dans l’outil fait disparaître la ligne. ¦ Každý řádek se čte v původním nástroji ve chvíli, kdy seznam otevřeš, a „↗“ tě tam vezme k rozhodnutí. Nic se nekopíruje: oprava v nástroji řádek odstraní. ¦ Varje rad läses i ursprungsverktyget när du öppnar listan, och ”↗” tar dig dit för att bestämma. Inget kopieras: rättar du i verktyget försvinner raden. ¦ Hver linje læses i det oprindelige værktøj, når du åbner listen, og »↗« fører dig derhen for at beslutte. Intet kopieres: retter du i værktøjet, forsvinder linjen.
+Je lis les outils… ¦ Čtu nástroje… ¦ Läser verktygen… ¦ Læser værktøjerne…
+Chercher une personne, un lieu… ¦ Hledej osobu, místo… ¦ Sök en person, en plats… ¦ Søg en person, et sted…
+et ses ancêtres ¦ a její předci ¦ och dess förfäder ¦ og vedkommendes aner
+Branche ¦ Větev ¦ Gren ¦ Gren
+paternelle (Sosa 2) ¦ otcovská (Sosa 2) ¦ fädernet (Sosa 2) ¦ fædrene (Sosa 2)
+maternelle (Sosa 3) ¦ mateřská (Sosa 3) ¦ mödernet (Sosa 3) ¦ mødrene (Sosa 3)
+Vus ¦ Viděné ¦ Sedda ¦ Sete
+Pas encore vus ¦ Ještě neviděné ¦ Inte sedda än ¦ Endnu ikke sete
+Vus aussi ¦ I viděné ¦ Även sedda ¦ Også sete
+Seulement les vus ¦ Jen viděné ¦ Bara sedda ¦ Kun sete
+↗ Ouvrir dans l’outil ¦ ↗ Otevřít v nástroji ¦ ↗ Öppna i verktyget ¦ ↗ Åbn i værktøjet
+👁 Ne plus marquer vu ¦ 👁 Zrušit označení „viděno“ ¦ 👁 Markera inte längre som sedd ¦ 👁 Markér ikke længere som set
+👁 Marquer vu ¦ 👁 Označit jako viděné ¦ 👁 Markera som sedd ¦ 👁 Markér som set
+👤 Ouvrir la fiche de {name} ¦ 👤 Otevřít kartu: {name} ¦ 👤 Öppna posten för {name} ¦ 👤 Åbn posten for {name}
+🔍 Seulement les doutes de cette personne ¦ 🔍 Jen pochybnosti této osoby ¦ 🔍 Bara den här personens tvivel ¦ 🔍 Kun denne persons tvivl
+Aucun doute pour l’instant ¦ Zatím žádná pochybnost ¦ Inga tvivel just nu ¦ Ingen tvivl lige nu
+Les outils d’origine n’ont rien à vérifier : bravo ! ¦ Původní nástroje nemají co kontrolovat: výborně! ¦ Ursprungsverktygen har inget att kontrollera: bra jobbat! ¦ De oprindelige værktøjer har intet at kontrollere: flot!
+vu le {d} ¦ viděno {d} ¦ sedd {d} ¦ set {d}
+revenu : la chose a changé ¦ vrátilo se: věc se změnila ¦ tillbaka: något har ändrats ¦ tilbage: noget har ændret sig
+👁 « {t} » n’est plus marqué vu. ¦ 👁 „{t}“ už není označeno jako viděné. ¦ 👁 ”{t}” är inte längre markerad som sedd. ¦ 👁 »{t}« er ikke længere markeret som set.
+👁 « {t} » marqué vu. ¦ 👁 „{t}“ označeno jako viděné. ¦ 👁 ”{t}” markerad som sedd. ¦ 👁 »{t}« markeret som set.
+impossible ¦ nemožné ¦ omöjligt ¦ umuligt
+impossibles ¦ nemožné ¦ omöjliga ¦ umulige
+curieux ¦ zvláštní ¦ udda ¦ mærkværdigt
+Le plus grave : {t} ¦ Nejvážnější: {t} ¦ Det allvarligaste: {t} ¦ Det alvorligste: {t}
+Doutes ¦ Pochybnosti ¦ Tvivel ¦ Tvivl
+Hypothèse ouverte ¦ Otevřená hypotéza ¦ Öppen hypotes ¦ Åben hypotese
+↗ Contrôle ¦ ↗ Kontrola ¦ ↗ Kontroll ¦ ↗ Kontrol
+↗ Comparer ¦ ↗ Porovnat ¦ ↗ Jämför ¦ ↗ Sammenlign
+Liens fragiles ¦ Křehká propojení ¦ Sköra länkar ¦ Skrøbelige forbindelser
+↗ Solidité ¦ ↗ Pevnost ¦ ↗ Hållfasthet ¦ ↗ Holdbarhed
+Désaccord de preuve ¦ Rozpor v důkazech ¦ Motsägelse i bevisen ¦ Modstrid i beviserne
+↗ Dossier de preuve ¦ ↗ Důkazní složka ¦ ↗ Bevismapp ¦ ↗ Bevismappe
+Lecture SocFace ¦ Čtení SocFace ¦ SocFace-läsning ¦ SocFace-læsning
+↗ Image ¦ ↗ Obrázek ¦ ↗ Bild ¦ ↗ Billede
+Successoral ¦ Dědictví ¦ Arvsutredning ¦ Arveforskning
+Naissance sans source ¦ Narození bez pramene ¦ Födelse utan källa ¦ Fødsel uden kilde
+Baptême sans source ¦ Křest bez pramene ¦ Dop utan källa ¦ Dåb uden kilde
+Mariage sans source ¦ Sňatek bez pramene ¦ Vigsel utan källa ¦ Vielse uden kilde
+Décès sans source ¦ Úmrtí bez pramene ¦ Död utan källa ¦ Død uden kilde
+Inhumation sans source ¦ Pohřeb bez pramene ¦ Begravning utan källa ¦ Begravelse uden kilde
+Événement sans source ¦ Událost bez pramene ¦ Händelse utan källa ¦ Begivenhed uden kilde
+Lien parent-enfant supposé ¦ Předpokládané spojení rodič–dítě ¦ Antagen förälder–barn-länk ¦ Formodet forælder-barn-forbindelse
+Lien parent-enfant sans source ¦ Spojení rodič–dítě bez pramene ¦ Förälder–barn-länk utan källa ¦ Forælder-barn-forbindelse uden kilde
+{a} réponses, {p} preuves ¦ odpovědi: {a}, důkazy: {p} ¦ {a} svar, {p} bevis ¦ {a} svar, {p} beviser
+Désaccord sans résolution ¦ Rozpor bez vyřešení ¦ Motsägelse utan lösning ¦ Modstrid uden løsning
+Homonyme dans un dossier de succession ¦ Shoda jmen ve spisu dědictví ¦ Namne i ett dödsboärende ¦ Navnebror i en dødsbosag
+Personne vivante ¦ Žijící osoba ¦ Levande person ¦ Levende person
+« Sans source » ¦ „Bez pramene“ ¦ ”Utan källa” ¦ »Uden kilde«
+Seulement les ancêtres Sosa ¦ Jen předci Sosa ¦ Bara Sosa-förfäderna ¦ Kun Sosa-anerne
+Pas du tout ¦ Vůbec ne ¦ Inte alls ¦ Slet ikke
+Une ligne marquée vue ¦ Řádek označený jako viděný ¦ En rad markerad som sedd ¦ En linje markeret som set
+Revient si la chose change ¦ Vrátí se, když se věc změní ¦ Kommer tillbaka om något ändras ¦ Kommer igen, hvis noget ændrer sig
+Ne revient jamais ¦ Nikdy se nevrátí ¦ Kommer aldrig tillbaka ¦ Kommer aldrig igen
+Les lignes vues ¦ Viděné řádky ¦ De sedda raderna ¦ De sete linjer
+Cachées par le filtre de départ « Pas encore vus » ¦ Skryté výchozím filtrem „Ještě neviděné“ ¦ Dolda av startfiltret ”Inte sedda än” ¦ Skjult af startfilteret »Endnu ikke sete«
+Montrées en pâle ¦ Zobrazené vybledle ¦ Visade bleka ¦ Vist blege
+Pistes du successoral ¦ Stopy dědictví ¦ Ledtrådar från arvsutredningen ¦ Spor fra arveforskningen
+À part, dans les dossiers ¦ Zvlášť, ve spisech ¦ För sig, i ärendena ¦ For sig, i sagerne
+Aussi dans cette liste ¦ I v tomto seznamu ¦ Även i den här listan ¦ Også i denne liste
+Le widget ¦ Widget ¦ Widgeten ¦ Widgetten
+Les trois nombres et le plus grave ¦ Tři čísla a to nejvážnější ¦ De tre talen och det allvarligaste ¦ De tre tal og det alvorligste
+Les 5 premières lignes ¦ Prvních 5 řádků ¦ De 5 första raderna ¦ De første 5 linjer
+📱 Visite aux archives ¦ 📱 Návštěva archivu ¦ 📱 Arkivbesök ¦ 📱 Arkivbesøg
+🗄 Préparer une visite ¦ 🗄 Připravit návštěvu ¦ 🗄 Förbered ett besök ¦ 🗄 Forbered et besøg
+Préparer une visite ¦ Připravit návštěvu ¦ Förbered ett besök ¦ Forbered et besøg
+🗄 Créer la visite ¦ 🗄 Vytvořit návštěvu ¦ 🗄 Skapa besöket ¦ 🗄 Opret besøget
+Service ¦ Archiv ¦ Arkiv ¦ Arkiv
+Pour quel dossier ? (facultatif) ¦ Pro který spis? (nepovinné) ¦ För vilket ärende? (valfritt) ¦ Til hvilken sag? (valgfrit)
+Ouvert : {h} ¦ Otevřeno: {h} ¦ Öppet: {h} ¦ Åbent: {h}
+Les horaires et l’adresse sont lus dans la fiche du service. ¦ Otevírací doba a adresa se čtou z karty archivu. ¦ Öppettider och adress läses i arkivets post. ¦ Åbningstider og adresse læses i arkivets post.
+Les cotes à voir ¦ Signatury k prohlédnutí ¦ Signa att se ¦ Signaturer at se
+déjà en ligne : Où chercher ? ¦ už online: Kde hledat? ¦ redan på nätet: Var ska jag söka? ¦ allerede online: Hvor skal jeg søge?
+({n} cochées sur {m}) ¦ (zaškrtnuto {n} z {m}) ¦ ({n} ikryssade av {m}) ¦ ({n} afkrydsede af {m})
+Coche au moins une cote. ¦ Zaškrtni aspoň jednu signaturu. ¦ Kryssa minst ett signum. ¦ Kryds mindst én signatur af.
+🗄 Visite créée : {n}. Elle est dans Listes → Visites d’archives. ¦ 🗄 Návštěva vytvořena: {n}. Je v Seznamy → Návštěvy archivů. ¦ 🗄 Besök skapat: {n}. Det finns i Listor → Arkivbesök. ¦ 🗄 Besøg oprettet: {n}. Det ligger i Lister → Arkivbesøg.
+⚖️ reliée à un dossier ¦ ⚖️ propojeno se spisem ¦ ⚖️ kopplat till ett ärende ¦ ⚖️ knyttet til en sag
+📱 Emporter sur le téléphone ¦ 📱 Vzít s sebou do telefonu ¦ 📱 Ta med på telefonen ¦ 📱 Tag med på telefonen
+⤒ Rapporter les résultats ¦ ⤒ Přenést výsledky ¦ ⤒ För tillbaka resultaten ¦ ⤒ Bring resultaterne tilbage
+⤒ Importer les photos du jour ¦ ⤒ Importovat fotky ze dne ¦ ⤒ Importera dagens foton ¦ ⤒ Importér dagens fotos
+Importer les photos du jour ¦ Importovat fotky ze dne ¦ Importera dagens foton ¦ Importér dagens fotos
+Visite aux archives · {what} ¦ Návštěva archivu · {what} ¦ Arkivbesök · {what} ¦ Arkivbesøg · {what}
+Marche sans réseau. Tout est gardé dans ce téléphone au fur et à mesure. ¦ Funguje bez sítě. Vše se průběžně ukládá v tomto telefonu. ¦ Fungerar utan nät. Allt sparas på den här telefonen efter hand. ¦ Virker uden net. Alt gemmes løbende på denne telefon.
+Photo interdite ici : pas de bouton 📷. ¦ Fotografování tu zakázáno: žádné tlačítko 📷. ¦ Fotografering förbjuden här: ingen 📷-knapp. ¦ Fotografering forbudt her: ingen 📷-knap.
+＋ Une cote trouvée sur place, pas prévue au départ ¦ ＋ Signatura nalezená na místě, předem neplánovaná ¦ ＋ Ett signum hittat på plats, inte planerat ¦ ＋ En signatur fundet på stedet, ikke planlagt
+⤓ Enregistrer mes résultats ¦ ⤓ Uložit mé výsledky ¦ ⤓ Spara mina resultat ¦ ⤓ Gem mine resultater
+📷 Photo ¦ 📷 Fotka ¦ 📷 Foto ¦ 📷 Foto
+Retirer cette photo ¦ Odebrat tuto fotku ¦ Ta bort det här fotot ¦ Fjern dette foto
+Cote ajoutée sur place ¦ Signatura přidaná na místě ¦ Signum tillagt på plats ¦ Signatur tilføjet på stedet
+✓ Gardé dans ce téléphone à {time} ¦ ✓ Uloženo v tomto telefonu v {time} ¦ ✓ Sparat på den här telefonen kl. {time} ¦ ✓ Gemt på denne telefon kl. {time}
+⚠️ Ce navigateur ne garde rien dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Tento prohlížeč nic v stránce neuchovává: ulož výsledky po každé signatuře. ¦ ⚠️ Den här webbläsaren sparar inget i sidan: spara dina resultat efter varje signum. ¦ ⚠️ Denne browser gemmer intet i siden: gem dine resultater efter hver signatur.
+⚠️ Ce téléphone ne garde pas les photos dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Tento telefon neuchovává fotky ve stránce: ulož výsledky po každé signatuře. ¦ ⚠️ Den här telefonen sparar inte fotona i sidan: spara dina resultat efter varje signum. ¦ ⚠️ Denne telefon gemmer ikke fotoene i siden: gem dine resultater efter hver signatur.
+⚠️ Ce fichier n’est pas une image. ¦ ⚠️ Tento soubor není obrázek. ¦ ⚠️ Den här filen är ingen bild. ¦ ⚠️ Denne fil er ikke et billede.
+⚠️ Note au moins un résultat avant d’enregistrer. ¦ ⚠️ Před uložením zapiš aspoň jeden výsledek. ¦ ⚠️ Anteckna minst ett resultat innan du sparar. ¦ ⚠️ Notér mindst ét resultat, før du gemmer.
+✓ Fichier « {name} » enregistré : rapporte-le dans l’app (⤒ Rapporter les résultats). ¦ ✓ Soubor „{name}“ uložen: přenes ho do aplikace (⤒ Přenést výsledky). ¦ ✓ Filen ”{name}” sparad: för tillbaka den till appen (⤒ För tillbaka resultaten). ¦ ✓ Filen »{name}« gemt: bring den tilbage til appen (⤒ Bring resultaterne tilbage).
+Des photos manquaient : elles ne sont pas dans le fichier. ¦ Některé fotky chyběly: v souboru nejsou. ¦ Några foton saknades: de finns inte i filen. ¦ Nogle fotos manglede: de er ikke i filen.
+⤓ Enregistrer la page ¦ ⤓ Uložit stránku ¦ ⤓ Spara sidan ¦ ⤓ Gem siden
+Ce qui part dans la page ¦ Co jde do stránky ¦ Vad som går in i sidan ¦ Hvad der kommer med i siden
+Les cotes, l’acte cherché, la personne et ses années ¦ Signatury, hledaný záznam, osoba a její roky ¦ Signa, posten som söks, personen och dess år ¦ Signaturerne, den søgte akt, personen og vedkommendes år
+Ce qu’on sait déjà (parents, conjoint, dates connues) pour reconnaître l’acte sur place ¦ Co už víme (rodiče, manžel, známá data), abys záznam na místě poznal ¦ Det som redan är känt (föräldrar, make/maka, kända datum) för att känna igen posten på plats ¦ Det, man allerede ved (forældre, ægtefælle, kendte datoer), for at genkende akten på stedet
+Les personnes vivantes ¦ Žijící osoby ¦ Levande personer ¦ Levende personer
+décoché : un vivant devient « Personne vivante » ¦ nezaškrtnuto: žijící se stane „Žijící osobou“ ¦ urkryssat: en levande blir ”Levande person” ¦ uden kryds: en levende bliver »Levende person«
+Les fiches confidentielles : jamais ¦ Důvěrné karty: nikdy ¦ Konfidentiella poster: aldrig ¦ Fortrolige poster: aldrig
+Photo interdite ici ¦ Fotografování tu zakázáno ¦ Fotografering förbjuden här ¦ Fotografering forbudt her
+cache le bouton 📷 dans la page ¦ skryje tlačítko 📷 ve stránce ¦ döljer 📷-knappen i sidan ¦ skjuler 📷-knappen i siden
+Un seul fichier .html : aucune requête, rien à installer. Mets-le sur le téléphone (câble, AirDrop, partage Android, courriel à toi-même) ; il marche en mode avion. ¦ Jediný soubor .html: žádný požadavek, nic k instalaci. Dej ho do telefonu (kabel, AirDrop, sdílení v Androidu, e-mail sobě); funguje i v režimu letadlo. ¦ En enda .html-fil: inga anrop, inget att installera. Lägg den på telefonen (kabel, AirDrop, Android-delning, mejl till dig själv); den fungerar i flygplansläge. ¦ Én enkelt .html-fil: ingen forespørgsler, intet at installere. Læg den på telefonen (kabel, AirDrop, Android-deling, mail til dig selv); den virker i flytilstand.
+📲 Montrer comment le mettre sur le téléphone ¦ 📲 Ukázat, jak ho dostat do telefonu ¦ 📲 Visa hur den läggs på telefonen ¦ 📲 Vis, hvordan den lægges på telefonen
+iPhone : l’aperçu de l’app Fichiers montre la page mais ne la fait pas marcher (pas de cases à cocher). Ouvre-la avec une app qui lit les pages .html, ou passe par la feuille imprimée et les photos (réglage). Android : Chrome ou Firefox l’ouvrent et la font marcher. ¦ iPhone: náhled v aplikaci Soubory stránku ukáže, ale nespustí ji (žádná zaškrtávací pole). Otevři ji aplikací, která čte stránky .html, nebo použij vytištěný list a fotky (nastavení). Android: Chrome nebo Firefox ji otevřou a spustí. ¦ iPhone: förhandsvisningen i appen Filer visar sidan men får den inte att fungera (inga kryssrutor). Öppna den med en app som läser .html-sidor, eller använd det utskrivna bladet och fotona (inställning). Android: Chrome eller Firefox öppnar den och får den att fungera. ¦ iPhone: forhåndsvisningen i appen Filer viser siden, men får den ikke til at virke (ingen afkrydsningsfelter). Åbn den med en app, der læser .html-sider, eller brug det udskrevne ark og fotoene (indstilling). Android: Chrome eller Firefox åbner den og får den til at virke.
+📄 1 fichier, {n} Ko : mets-le sur ton téléphone. ¦ 📄 1 soubor, {n} kB: dej ho do svého telefonu. ¦ 📄 1 fil, {n} kB: lägg den på din telefon. ¦ 📄 1 fil, {n} kB: læg den på din telefon.
+Résultats de la visite ¦ Výsledky návštěvy ¦ Besökets resultat ¦ Besøgets resultater
+Ce fichier vient d’une autre visite : « {t} ». ¦ Tento soubor je z jiné návštěvy: „{t}“. ¦ Den här filen kommer från ett annat besök: ”{t}”. ¦ Denne fil kommer fra et andet besøg: »{t}«.
+cote retirée de la visite depuis ¦ signatura mezitím z návštěvy odebrána ¦ signum borttaget från besöket sedan dess ¦ signatur fjernet fra besøget siden
+ajoutée sur place : d’abord ajoutée à la visite ¦ přidána na místě: nejdřív přidána k návštěvě ¦ tillagt på plats: läggs först till i besöket ¦ tilføjet på stedet: lægges først til besøget
+dépouillement déjà relié ¦ výpis už propojen ¦ registrering redan kopplad ¦ registrering allerede knyttet
+＋ dépouillement du Journal ({r}) ¦ ＋ výpis v Deníku ({r}) ¦ ＋ registrering i Loggen ({r}) ¦ ＋ registrering i Loggen ({r})
+{n} → médias « à trier » ¦ {n} → média „k roztřídění“ ¦ {n} → medier ”att sortera” ¦ {n} → medier »til sortering«
+{n} → médias reliés à {who} ¦ {n} → média propojená s: {who} ¦ {n} → medier kopplade till {who} ¦ {n} → medier knyttet til {who}
+{n} → médias ¦ {n} → média ¦ {n} → medier ¦ {n} → medier
+📑 pièce du dossier : reçue ¦ 📑 doklad spisu: přijat ¦ 📑 ärendets handling: mottagen ¦ 📑 sagens dokument: modtaget
+✓ fichier vérifié ¦ ✓ soubor zkontrolován ¦ ✓ filen kontrollerad ¦ ✓ fil kontrolleret
+Rapporté du téléphone ¦ Přeneseno z telefonu ¦ Fört tillbaka från telefonen ¦ Bragt tilbage fra telefonen
+Ce que l’app fera ¦ Co aplikace udělá ¦ Vad appen kommer att göra ¦ Hvad appen vil gøre
+Ranger cette cote ¦ Uložit tuto signaturu ¦ Spara det här signumet ¦ Gem denne signatur
+→ Reporter sur la fiche ¦ → Přenést do karty ¦ → För över till posten ¦ → Overfør til posten
+Aucune date ni aucun lieu n’est écrit sur une fiche : ce qui est trouvé reste un dépouillement avec sa photo ; c’est toi qui le reportes sur la fiche, comme aujourd’hui. ¦ Na kartu se nezapíše žádné datum ani místo: nález zůstává výpisem se svou fotkou; do karty ho přeneseš sám, jako dosud. ¦ Inget datum och ingen plats skrivs in i en post: fyndet förblir en registrering med sitt foto; du för över det själv till posten, som i dag. ¦ Ingen dato og intet sted skrives ind i en post: fundet forbliver en registrering med sit foto; du overfører det selv til posten, som i dag.
+{n} rapportées, {m} ¦ přeneseno: {n}, {m} ¦ {n} återförda, {m} ¦ {n} bragt tilbage, {m}
+Ranger {n} et {m} ¦ Uložit: {n} a {m} ¦ Spara {n} och {m} ¦ Gem {n} og {m}
+→ Reporter sur la fiche : le dépouillement et ses photos y sont reliés. ¦ → Přenést do karty: výpis a jeho fotky jsou s ní propojeny. ¦ → För över till posten: registreringen och dess foton är kopplade till den. ¦ → Overfør til posten: registreringen og dens fotos er knyttet til den.
+✓ Visite rangée : {d}, {m}, {p}. ¦ ✓ Návštěva uložena: {d}, {m}, {p}. ¦ ✓ Besöket sparat: {d}, {m}, {p}. ¦ ✓ Besøget gemt: {d}, {m}, {p}.
+{n} pièce(s) reçue(s) ¦ přijaté doklady: {n} ¦ {n} handling(ar) mottagna ¦ {n} dokument(er) modtaget
+Visite marquée « faite ». ¦ Návštěva označena jako „hotová“. ¦ Besöket markerat som ”gjort”. ¦ Besøget markeret som »udført«.
+Cette visite n’a pas encore de cote. ¦ Tato návštěva ještě nemá signaturu. ¦ Det här besöket har inget signum än. ¦ Dette besøg har endnu ingen signatur.
+Rangées dans l’ordre des cotes d’après l’heure de prise de vue : corrige la cote d’une photo si besoin. ¦ Seřazeno podle pořadí signatur podle času pořízení: v případě potřeby oprav signaturu fotky. ¦ Sorterade i signumens ordning efter tidpunkten för fotot: rätta ett fotos signum vid behov. ¦ Sorteret i signaturernes rækkefølge efter optagetidspunktet: ret et fotos signatur om nødvendigt.
+— ne pas ranger — ¦ — neukládat — ¦ — spara inte — ¦ — gem ikke —
+{n} rangées dans les médias (« à trier »). ¦ {n} uloženo v médiích („k roztřídění“). ¦ {n} sparade bland medierna (”att sortera”). ¦ {n} gemt blandt medierne (»til sortering«).
+Parents : {names} ¦ Rodiče: {names} ¦ Föräldrar: {names} ¦ Forældre: {names}
+Conjoint : {names} ¦ Manžel(ka): {names} ¦ Make/maka: {names} ¦ Ægtefælle: {names}
+Fiche confidentielle ¦ Důvěrná karta ¦ Konfidentiell post ¦ Fortrolig post
+Ce fichier a déjà été rangé le {date} : rien n’est fait en double. ¦ Tento soubor už byl uložen {date}: nic se nedělá dvakrát. ¦ Den här filen sparades redan {date}: inget görs två gånger. ¦ Denne fil blev allerede gemt {date}: intet gøres to gange.
+à trier ¦ k roztřídění ¦ att sortera ¦ til sortering
+Trouvé à la visite : {where} ¦ Nalezeno při návštěvě: {where} ¦ Hittat vid besöket: {where} ¦ Fundet ved besøget: {where}
+Comment emporter la visite ¦ Jak vzít návštěvu s sebou ¦ Hur besöket tas med ¦ Hvordan besøget tages med
+Une page .html à ouvrir sur le téléphone ¦ Stránka .html k otevření v telefonu ¦ En .html-sida att öppna på telefonen ¦ En .html-side at åbne på telefonen
+La feuille imprimée et les photos du téléphone ¦ Vytištěný list a fotky z telefonu ¦ Det utskrivna bladet och telefonens foton ¦ Det udskrevne ark og telefonens fotos
+Sans les vivants ¦ Bez žijících ¦ Utan de levande ¦ Uden de levende
+Avec les vivants ¦ Se žijícími ¦ Med de levande ¦ Med de levende
+Réduites à 2000 px ¦ Zmenšené na 2000 px ¦ Förminskade till 2000 px ¦ Formindsket til 2000 px
+Une naissance trouvée ¦ Nalezené narození ¦ En funnen födelse ¦ En fundet fødsel
+Reste un dépouillement, tu la reportes ¦ Zůstává výpisem, přeneseš ho sám ¦ Förblir en registrering, du för över den ¦ Forbliver en registrering, du overfører den
+Proposer « → Reporter sur la fiche » dans la revue ¦ Nabídnout „→ Přenést do karty“ při kontrole ¦ Föreslå ”→ För över till posten” vid granskningen ¦ Foreslå »→ Overfør til posten« ved gennemgangen
+Après le rangement ¦ Po uložení ¦ Efter sparandet ¦ Efter gemningen
+Visite marquée « faite » ¦ Návštěva označena jako „hotová“ ¦ Besöket markerat som ”gjort” ¦ Besøget markeret som »udført«
+Aucune photo reçue. ¦ Nebyla přijata žádná fotka. ¦ Inget foto mottaget. ¦ Intet foto modtaget.
+Ce fichier est trop gros pour les résultats d’une visite. ¦ Tento soubor je na výsledky návštěvy příliš velký. ¦ Den här filen är för stor för ett besöks resultat. ¦ Denne fil er for stor til resultaterne af et besøg.
+Ce fichier n’est pas les résultats d’une visite (il faut le .zip enregistré sur le téléphone). ¦ Tento soubor nejsou výsledky návštěvy (je potřeba .zip uložený v telefonu). ¦ Den här filen är inte ett besöks resultat (du behöver .zip-filen sparad på telefonen). ¦ Denne fil er ikke resultaterne af et besøg (du skal bruge .zip-filen gemt på telefonen).
+Ce fichier n’est pas les résultats d’une visite aux archives. ¦ Tento soubor nejsou výsledky návštěvy archivu. ¦ Den här filen är inte resultaten från ett arkivbesök. ¦ Denne fil er ikke resultaterne af et arkivbesøg.
+Ce fichier vient d’une visite qui n’est pas dans cette généalogie. ¦ Tento soubor je z návštěvy, která v této genealogii není. ¦ Den här filen kommer från ett besök som inte finns i den här genealogin. ¦ Denne fil kommer fra et besøg, der ikke er i denne slægtsdatabase.
+Cette visite a déjà été emportée : supprime-la dans le Planificateur si tu n’en veux plus. ¦ Tato návštěva už byla vzata s sebou: smaž ji v Plánovači, pokud ji už nechceš. ¦ Det här besöket har redan tagits med: ta bort det i Planeraren om du inte vill ha det längre. ¦ Dette besøg er allerede taget med: slet det i Planlæggeren, hvis du ikke vil have det mere.
+Choisis la cote de chaque photo. ¦ Vyber signaturu každé fotky. ¦ Välj signum för varje foto. ¦ Vælg signaturen for hvert foto.
+Coche au moins une cote à ranger. ¦ Zaškrtni aspoň jednu signaturu k uložení. ¦ Kryssa minst ett signum att spara. ¦ Kryds mindst én signatur af, der skal gemmes.
+Fichier .zip illisible. ¦ Nečitelný soubor .zip. ¦ Oläslig .zip-fil. ¦ Ulæselig .zip-fil.
+Fichier refusé : identifiant incorrect. ¦ Soubor odmítnut: nesprávný identifikátor. ¦ Filen nekad: fel identifierare. ¦ Filen afvist: forkert identifikator.
+Fichier refusé : il a été modifié depuis le téléphone (somme de contrôle). ¦ Soubor odmítnut: byl změněn po uložení v telefonu (kontrolní součet). ¦ Filen nekad: den har ändrats sedan telefonen (kontrollsumma). ¦ Filen afvist: den er ændret siden telefonen (kontrolsum).
+Fichier refusé : il contient des données inattendues. ¦ Soubor odmítnut: obsahuje neočekávaná data. ¦ Filen nekad: den innehåller oväntade data. ¦ Filen afvist: den indeholder uventede data.
+Fichier refusé : il ne correspond pas à la page emportée (somme de contrôle). ¦ Soubor odmítnut: neodpovídá vzaté stránce (kontrolní součet). ¦ Filen nekad: den stämmer inte med sidan som togs med (kontrollsumma). ¦ Filen afvist: den passer ikke til siden, der blev taget med (kontrolsum).
+Fichier refusé : la liste des cotes manque. ¦ Soubor odmítnut: chybí seznam signatur. ¦ Filen nekad: listan över signa saknas. ¦ Filen afvist: listen over signaturer mangler.
+Fichier refusé : la liste des photos est mal formée. ¦ Soubor odmítnut: seznam fotek je chybný. ¦ Filen nekad: fotolistan är felaktig. ¦ Filen afvist: fotolisten er forkert udformet.
+Fichier refusé : results.json est illisible. ¦ Soubor odmítnut: results.json je nečitelný. ¦ Filen nekad: results.json är oläslig. ¦ Filen afvist: results.json er ulæselig.
+Fichier refusé : results.json manque. ¦ Soubor odmítnut: chybí results.json. ¦ Filen nekad: results.json saknas. ¦ Filen afvist: results.json mangler.
+Fichier refusé : trop de fichiers dedans. ¦ Soubor odmítnut: příliš mnoho souborů uvnitř. ¦ Filen nekad: för många filer i den. ¦ Filen afvist: for mange filer i den.
+Fichier refusé : un chemin sort du dossier. ¦ Soubor odmítnut: cesta vede mimo složku. ¦ Filen nekad: en sökväg går utanför mappen. ¦ Filen afvist: en sti går uden for mappen.
+Fichier refusé : un résultat est inconnu. ¦ Soubor odmítnut: neznámý výsledek. ¦ Filen nekad: ett resultat är okänt. ¦ Filen afvist: et resultat er ukendt.
+Fichier refusé : un élément est trop gros. ¦ Soubor odmítnut: jedna položka je příliš velká. ¦ Filen nekad: en del är för stor. ¦ Filen afvist: et element er for stort.
+Fichier refusé : une cote contient des données inattendues. ¦ Soubor odmítnut: signatura obsahuje neočekávaná data. ¦ Filen nekad: ett signum innehåller oväntade data. ¦ Filen afvist: en signatur indeholder uventede data.
+Fichier refusé : une cote est mal formée. ¦ Soubor odmítnut: signatura je chybná. ¦ Filen nekad: ett signum är felaktigt. ¦ Filen afvist: en signatur er forkert udformet.
+Fichier refusé : une photo annoncée manque. ¦ Soubor odmítnut: ohlášená fotka chybí. ¦ Filen nekad: ett utlovat foto saknas. ¦ Filen afvist: et annonceret foto mangler.
+Fichier refusé : une photo n’est pas une image. ¦ Soubor odmítnut: fotka není obrázek. ¦ Filen nekad: ett foto är ingen bild. ¦ Filen afvist: et foto er ikke et billede.
+Impossible de ranger la photo dans les médias. ¦ Fotku nelze uložit do médií. ¦ Fotot kan inte sparas bland medierna. ¦ Fotoet kan ikke gemmes blandt medierne.
+Lecture des fichiers .zip impossible sur cet ordinateur. ¦ Na tomto počítači nelze číst soubory .zip. ¦ .zip-filer kan inte läsas på den här datorn. ¦ .zip-filer kan ikke læses på denne computer.
+Trop de photos d’un coup (200 au plus). ¦ Příliš mnoho fotek najednou (nejvýš 200). ¦ För många foton på en gång (högst 200). ¦ For mange fotos på én gang (højst 200).
+Une photo est trop grosse ou n’a pas été reçue. ¦ Fotka je příliš velká nebo nedorazila. ¦ Ett foto är för stort eller kom inte fram. ¦ Et foto er for stort eller kom ikke frem.

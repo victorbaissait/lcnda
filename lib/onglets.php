@@ -19,6 +19,7 @@ declare(strict_types=1);
  */
 
 const ONGLETS_MAX_DOCS = 20000;
+const ONGLETS_MAX_DOC_PEOPLE = 60; // noms par document dans la liste (la fiche les a tous)
 
 function onglets_kiosk(): bool { return function_exists('kiosk_state') && !empty(kiosk_state()['on']); }
 
@@ -71,7 +72,8 @@ function onglets_media_people(PDO $pdo, ?array $ids = null): array
     $s->execute($params);
     $out = [];
     foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $r) {
-        $out[(int) $r['media_id']][] = ['id' => (int) $r['pid'], 'name' => trim(((string) $r['first_name']) . ' ' . ((string) $r['last_name'])) ?: 'Personne sans nom', 'gender' => (string) $r['gender']];
+        $out[(int) $r['media_id']][] = ['id' => (int) $r['pid'], 'name' => trim(((string) $r['first_name']) . ' ' . ((string) $r['last_name'])) ?: 'Personne sans nom', 'gender' => (string) $r['gender'],
+            'last' => trim((string) $r['last_name']), 'first' => trim((string) $r['first_name'])];
     }
     return $out;
 }
@@ -112,7 +114,8 @@ function onglets_documents(PDO $pdo): array
             'date_text' => mb_substr((string) $r['date_text'], 0, 80), 'year' => onglets_year((string) $r['date_text']), 'cote' => mb_substr((string) $r['cote'], 0, 80),
             'subject' => (string) $r['subject'], 'corr' => (string) $r['corr'], 'has_tr' => (int) $r['has_tr'], 'created_at' => (string) $r['created_at'],
             'series' => mb_substr((string) $r['series'], 0, 120), 'links' => (int) $r['links'], 'place' => mb_substr($places[$id] ?? '', 0, 120),
-            'people' => array_slice(array_map(static fn($p) => ['id' => $p['id'], 'name' => $p['name']], $pp), 0, 4), 'people_count' => count($pp)];
+            // les noms montrés sous le titre et cherchés par « Chercher… » (bornés ; en consultation, sans vivants ni fiches confidentielles)
+            'people' => array_slice(array_map(static fn($p) => ['id' => $p['id'], 'name' => mb_substr($p['name'], 0, 80), 'last' => mb_substr($p['last'], 0, 60), 'first' => mb_substr($p['first'], 0, 60)], $pp), 0, ONGLETS_MAX_DOC_PEOPLE), 'people_count' => count($pp)];
     }, $rows);
     return ['documents' => $docs, 'total' => count($docs), 'more' => $more, 'readonly' => onglets_kiosk()];
 }
@@ -139,6 +142,19 @@ function onglets_document(PDO $pdo, int $id): array
         foreach ($people as &$p) { $p['birth'] = $life[$p['id']]['birth'] ?? null; $p['death'] = $life[$p['id']]['death'] ?? null; }
         unset($p);
     }
+    // 📄 un seul texte par document : les actes de l'Atelier de transcription sur cette image (titre, sorte, état, zones, personnes relevées)
+    $acts = function_exists('act_transcriptions_for_media') ? act_transcriptions_for_media($pdo, $id) : [];
+    $roles = []; $found = [];
+    foreach ($acts as $a) { foreach ($a['people'] as $q) { if ($q['person_id'] > 0) { $found[$q['person_id']] = true; if ($q['role'] !== '') { $roles[$q['person_id']] ??= $q['role']; } } } }
+    $known = array_flip(array_column($people, 'id'));
+    $more = array_values(array_diff(array_keys($found), array_keys($known))); // relevées dans l'Atelier, pas (encore) reliées au média
+    if ($more) {
+        $pp = $pdo->prepare('SELECT p.id, p.first_name, p.last_name, p.gender FROM persons p WHERE p.id IN (' . implode(',', array_fill(0, count($more), '?')) . ')' . onglets_hidden_people_sql($pdo, 'p'));
+        $pp->execute($more);
+        foreach ($pp->fetchAll(PDO::FETCH_ASSOC) as $r) { $people[] = ['id' => (int) $r['id'], 'name' => trim($r['first_name'] . ' ' . $r['last_name']) ?: 'Personne sans nom', 'gender' => (string) $r['gender'], 'last' => (string) $r['last_name'], 'first' => (string) $r['first_name'], 'found' => 1]; }
+    }
+    foreach ($people as &$p) { if (isset($roles[$p['id']])) { $p['role'] = mb_substr($roles[$p['id']], 0, 60); } }
+    unset($p);
     // à quoi il est rattaché (fiche, événement, recensement…)
     $links = [];
     $l = $pdo->prepare("SELECT ml.entity_type, ml.entity_id, COALESCE(et.label,'') AS ev_label, COALESCE(ev.date_text,'') AS ev_date, COALESCE(cr.year,'') AS cr_year,
@@ -171,7 +187,7 @@ function onglets_document(PDO $pdo, int $id): array
         'corr' => $str('correspondence_type', 60), 'correspondent' => $str('correspondent_name', 200), 'transcription' => mb_substr((string) ($m['transcription'] ?? ''), 0, 60000),
         'series' => $str('archive_series', 200), 'service' => mb_substr($service, 0, 200), 'created_at' => $str('created_at', 40), 'is_person_photo' => (int) ($m['is_person_photo'] ?? 0),
         'duration' => isset($m['duration_seconds']) && $m['duration_seconds'] !== null ? (float) $m['duration_seconds'] : null,
-        'people' => $people, 'links' => $links, 'places' => $places];
+        'people' => $people, 'links' => $links, 'places' => $places, 'acts' => $acts];
     return ['document' => $doc, 'readonly' => onglets_kiosk()];
 }
 

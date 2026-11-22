@@ -1,0 +1,35 @@
+fr ¦ hr ¦ sl
+# 🪄 Corrections proposées après « ✨ Lire l’acte » (app-htr-correction.js, heritage-transcribe.js, heritage-more.js)
+« {w} » ajouté au lexique ¦ „{w}” dodano u rječnik ¦ »{w}« dodano v slovar
+Garder tel quel ¦ Ostavi kako jest ¦ Pusti, kot je
+Ajouter au lexique ¦ Dodaj u rječnik ¦ Dodaj v slovar
+Ce mot ne sera plus souligné ¦ Ova riječ više neće biti podcrtana ¦ Ta beseda ne bo več podčrtana
+Proposer des corrections (conseillé) ¦ Predlaži ispravke (preporučeno) ¦ Predlagaj popravke (priporočeno)
+Prudent (conseillé) ¦ Oprezno (preporučeno) ¦ Previdno (priporočeno)
+Plus de propositions ¦ Više prijedloga ¦ Več predlogov
+Correction proposée : « {x} » — clique pour choisir ¦ Predložena ispravka: „{x}” — klikni za odabir ¦ Predlagani popravek: »{x}« — klikni za izbiro
+=correction proposée ¦ predložena ispravka|predložene ispravke|predloženih ispravaka ¦ predlagani popravek|predlagana popravka|predlagani popravki|predlaganih popravkov
+(soulignées en violet : clique un mot) ¦ (podcrtano ljubičasto: klikni riječ) ¦ (podčrtano vijolično: klikni besedo)
+Aucune correction à proposer ¦ Nema ispravaka za predložiti ¦ Ni popravkov za predlog
+Corrections proposées : non ¦ Predložene ispravke: ne ¦ Predlagani popravki: ne
+Accepter les {n} propositions sûres ¦ Prihvati sigurne prijedloge ({n}) ¦ Sprejmi zanesljive predloge ({n})
+Accepter la proposition sûre ¦ Prihvati siguran prijedlog ¦ Sprejmi zanesljiv predlog
+=proposition sûre acceptée ¦ prihvaćen siguran prijedlog|prihvaćena sigurna prijedloga|prihvaćenih sigurnih prijedloga ¦ sprejet zanesljiv predlog|sprejeta zanesljiva predloga|sprejeti zanesljivi predlogi|sprejetih zanesljivih predlogov
+« {w} » gardé tel quel ¦ „{w}” ostavljeno kako jest ¦ »{w}« puščeno, kot je
+Proposer des corrections pour les mots mal lus (un mot souligné : clique-le pour choisir) ¦ Predlaži ispravke krivo pročitanih riječi (podcrtana riječ: klikni je za odabir) ¦ Predlagaj popravke napačno prebranih besed (podčrtana beseda: klikni jo za izbiro)
+Corrections ¦ Ispravke ¦ Popravki
+Les corrections proposées ne sont pas chargées. ¦ Predložene ispravke nisu učitane. ¦ Predlagani popravki niso naloženi.
+Corrections proposées après la lecture ¦ Ispravke predložene nakon čitanja ¦ Popravki, predlagani po branju
+Après « ✨ Lire l’acte », les mots qui ressemblent à un mot connu (« décembe » → « décembre ») sont soulignés en violet : un clic, et tu choisis. Rien n’est changé sans toi. Le lexique : les mots des actes, ceux de « 📜 Aide à la lecture », et les noms, prénoms, lieux et métiers de ta base (sans les vivants ni les fiches confidentielles). ¦ Nakon „✨ Pročitaj ispravu” riječi slične poznatoj riječi („décembe” → „décembre”) podcrtane su ljubičasto: jedan klik i ti biraš. Bez tebe se ništa ne mijenja. Rječnik: riječi iz isprava, iz „📜 Pomoć pri čitanju” te prezimena, imena, mjesta i zanimanja iz tvoje baze (bez živih osoba i povjerljivih kartica). ¦ Po »✨ Preberi listino« so besede, podobne znani besedi (»décembe« → »décembre«), podčrtane vijolično: en klik in izbereš ti. Brez tebe se nič ne spremeni. Slovar: besede iz listin, iz »📜 Pomoč pri branju« ter priimki, imena, kraji in poklici iz tvoje baze (brez živih oseb in zaupnih kartic).
+Ton lexique personnel : {x}. ¦ Tvoj osobni rječnik: {x}. ¦ Tvoj osebni slovar: {x}.
+Vider le lexique personnel ¦ Isprazni osobni rječnik ¦ Izprazni osebni slovar
+Ton lexique personnel est vide : « Ajouter au lexique » dans le menu d’un mot souligné. ¦ Tvoj osobni rječnik je prazan: „Dodaj u rječnik” u izborniku podcrtane riječi. ¦ Tvoj osebni slovar je prazen: »Dodaj v slovar« v meniju podčrtane besede.
+Lexique personnel vidé ¦ Osobni rječnik ispražnjen ¦ Osebni slovar izpraznjen
+Il manque l’accent ¦ Nedostaje naglasak ¦ Manjka naglas
+« {x} » ressemble à « {y} » ¦ „{x}” nalikuje na „{y}” ¦ »{x}« je podobno »{y}«
+« {x} » collé au mot suivant ¦ „{x}” spojeno sa sljedećom riječi ¦ »{x}« zlepljeno z naslednjo besedo
+Deux mots collés ¦ Dvije spojene riječi ¦ Dve zlepljeni besedi
+Après « mil {x} », on attend « cent » ¦ Nakon „mil {x}” očekuje se „cent” ¦ Po »mil {x}« se pričakuje »cent«
+Dans une date en toutes lettres : « {x} » ¦ U datumu napisanom slovima: „{x}” ¦ V datumu, zapisanem z besedami: »{x}«
+Un mois, dans une date ¦ Mjesec, u datumu ¦ Mesec, v datumu
+À cet endroit : « {where} » (ligne {n}) ¦ Na ovom mjestu: „{where}” (redak {n}) ¦ Na tem mestu: »{where}« (vrstica {n})

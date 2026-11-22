@@ -1,0 +1,75 @@
+fr ¦ ru ¦ uk
+# 🌍 Où chercher ? — filtres par sorte de source (docs/design/ou-chercher-filtres.html)
+Ouvrir la page filtrée sur une sorte de source ¦ Открыть страницу с фильтром по виду источника ¦ Відкрити сторінку з фільтром за видом джерела
+Les autres sortes ¦ Другие виды ¦ Інші види
+Proposés ({n} sur {m}) ¦ Предложено ({n} из {m}) ¦ Запропоновано ({n} з {m})
+✓ Déjà cherchés ({n} sur {m}) ¦ ✓ Уже искали ({n} из {m}) ¦ ✓ Уже шукали ({n} з {m})
+Écartés ({n} sur {m}) ¦ Отброшено ({n} из {m}) ¦ Відкинуто ({n} з {m})
+Chercher un site… (ex. Gallica, matricule) ¦ Найти сайт… (напр. Gallica, послужной список) ¦ Знайти сайт… (напр. Gallica, послужний список)
+Sorte de source ¦ Вид источника ¦ Вид джерела
+Ses pays : {list} ¦ Страны: {list} ¦ Країни: {list}
+Ses pays ¦ Страны ¦ Країни
+Un seul : {country} ¦ Только одна: {country} ¦ Лише одна: {country}
+Pays : {country} ¦ Страна: {country} ¦ Країна: {country}
+Sites du monde entier seulement (FamilySearch, Geneanet…) ¦ Только международные сайты (FamilySearch, Geneanet…) ¦ Лише міжнародні сайти (FamilySearch, Geneanet…)
+🌍 Monde entier ¦ 🌍 Весь мир ¦ 🌍 Увесь світ
+Prix ¦ Цена ¦ Ціна
+Gratuites seulement · {n} ¦ Только бесплатные · {n} ¦ Лише безкоштовні · {n}
+💶 Gratuites seulement ¦ 💶 Только бесплатные ¦ 💶 Лише безкоштовні
+En français seulement ¦ Только на французском ¦ Лише французькою
+🇫🇷 En français ¦ 🇫🇷 На французском ¦ 🇫🇷 Французькою
+Les plus utiles ¦ Самые полезные ¦ Найкорисніші
+Gratuits d’abord ¦ Сначала бесплатные ¦ Спершу безкоштовні
+🔗 depuis sa fiche ¦ 🔗 из карточки ¦ 🔗 з картки
+Ce filtre vient de sa fiche : ton choix habituel n’est pas changé. ¦ Этот фильтр пришёл из карточки: твой обычный выбор не меняется. ¦ Цей фільтр прийшов із картки: твій звичний вибір не змінюється.
+Revenir à mon choix ¦ Вернуться к моему выбору ¦ Повернутися до мого вибору
+↗ Chercher quand même ¦ ↗ Всё равно искать ¦ ↗ Усе одно шукати
+de ces filtres ¦ с этими фильтрами ¦ з цими фільтрами
+Aucun site {sorts} pour ce pays ({country}) parmi les {n} sites que l’app connaît ¦ Нет сайтов {sorts} для этой страны ({country}) среди {n} сайтов, известных приложению ¦ Немає сайтів {sorts} для цієї країни ({country}) серед {n} сайтів, відомих застосунку
+Pour ses autres pays : {ok} proposés ; {out} écartés. ¦ Для других стран: предложено {ok}; отброшено {out}. ¦ Для інших країн: запропоновано {ok}; відкинуто {out}.
+Ses autres pays ({n}) ¦ Другие страны ({n}) ¦ Інші країни ({n})
+Voir les {n} sites écartés ¦ Показать {n} отброшенных сайтов ¦ Показати {n} відкинутих сайтів
+＋ Ajouter un site à moi ¦ ＋ Добавить свой сайт ¦ ＋ Додати свій сайт
+Aucun site {sorts} pour {name} ({life}) ¦ Нет сайтов {sorts} для {name} ({life}) ¦ Немає сайтів {sorts} для {name} ({life})
+Les {n} sites de cette sorte sont écartés : ¦ {n} сайтов этого вида отброшены: ¦ {n} сайтів цього виду відкинуто:
+Aucun site de cette sorte parmi ceux que l’app connaît. ¦ Среди известных приложению сайтов нет ни одного такого вида. ¦ Серед відомих застосунку сайтів немає жодного такого виду.
+Enlever {sort} ¦ Убрать {sort} ¦ Прибрати {sort}
+Aucun site écarté avec ces filtres. ¦ С этими фильтрами отброшенных сайтов нет. ¦ З цими фільтрами відкинутих сайтів немає.
+Sa vie ({life}) croise les années du site ({from}–{to}) ¦ Жизнь ({life}) пересекается с годами сайта ({from}–{to}) ¦ Життя ({life}) перетинається з роками сайту ({from}–{to})
+Actes (état civil, paroissiaux) ¦ Акты (гражданские, церковные) ¦ Акти (цивільні, церковні)
+Journaux ¦ Газеты ¦ Газети
+Militaire et guerres ¦ Армия и войны ¦ Армія та війни
+Recensements et annuaires ¦ Переписи и справочники ¦ Переписи й довідники
+Marins, colonies ¦ Моряки, колонии ¦ Моряки, колонії
+Marins et colonies ¦ Моряки и колонии ¦ Моряки та колонії
+Cimetières, décès ¦ Кладбища, смерти ¦ Цвинтарі, смерті
+Cimetières et décès ¦ Кладбища и смерти ¦ Цвинтарі та смерті
+Notaires, terres et justice ¦ Нотариусы, земля и суды ¦ Нотаріуси, земля й суди
+Métiers (élus, médecins, cheminots, photographes…) ¦ Профессии (выборные, врачи, железнодорожники, фотографы…) ¦ Професії (обрані, лікарі, залізничники, фотографи…)
+Arbres en ligne ¦ Деревья онлайн ¦ Дерева онлайн
+Bibliothèques ¦ Библиотеки ¦ Бібліотеки
+Bibliothèques et livres ¦ Библиотеки и книги ¦ Бібліотеки й книги
+Cartes et lieux ¦ Карты и места ¦ Карти й місця
+Déportation et répression ¦ Депортация и репрессии ¦ Депортації та репресії
+Guides ¦ Руководства ¦ Посібники
+Guides et modes d’emploi ¦ Руководства и инструкции ¦ Посібники та інструкції
+Moteurs ¦ Поисковики ¦ Пошуковики
+Moteurs et encyclopédies ¦ Поисковики и энциклопедии ¦ Пошуковики та енциклопедії
+Tout le militaire ¦ Всё военное ¦ Усе військове
+Tout pour un marin ¦ Всё для моряка ¦ Усе для моряка
+Tout sur l’émigration ¦ Всё об эмиграции ¦ Усе про еміграцію
+Tout sur son métier ¦ Всё о профессии ¦ Усе про професію
+Tout chez les notaires ¦ Всё у нотариусов ¦ Усе в нотаріусів
+⚓ Il était marin ? Le dire sur sa fiche ¦ ⚓ Он был моряком? Укажи в карточке ¦ ⚓ Він був моряком? Вкажи в картці
+🎖 Il était soldat ? Le dire sur sa fiche ¦ 🎖 Он был солдатом? Укажи в карточке ¦ 🎖 Він був солдатом? Вкажи в картці
+🚢 Il a émigré ? Le dire sur sa fiche ¦ 🚢 Он эмигрировал? Укажи в карточке ¦ 🚢 Він емігрував? Вкажи в картці
+💼 Son métier ? Le dire sur sa fiche ¦ 💼 Профессия? Укажи в карточке ¦ 💼 Професія? Вкажи в картці
+Pas de lieu dans ce pays ¦ Нет места в этой стране ¦ Немає місця в цій країні
+Hors de ses années ¦ Вне лет жизни ¦ Поза роками життя
+Seulement pour un autre cas (métier, profil) ¦ Только для другого случая (профессия, профиль) ¦ Лише для іншого випадку (професія, профіль)
+Pour l’autre sexe ¦ Для другого пола ¦ Для іншої статі
+Né hors de France ¦ Родился вне Франции ¦ Народився поза Францією
+Peu utile pour cette fiche ¦ Мало полезно для этой карточки ¦ Мало корисно для цієї картки
+Autres raisons ¦ Другие причины ¦ Інші причини
+officier (armée) ¦ офицер (армия) ¦ офіцер (армія)
+=payant caché ¦ платный скрыт|платных скрыто|платных скрыто ¦ платний приховано|платні приховано|платних приховано

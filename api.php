@@ -8,6 +8,8 @@ require_once __DIR__ . '/lib/echanges.php'; // ⤓ exports en plus : Pour Genean
 require_once __DIR__ . '/lib/import_autres.php'; // ⤒ RootsMagic (.rmtree, .rmgc) lu directement ; Family Tree Maker (.ftm) refusé avec une phrase claire
 require_once __DIR__ . '/lib/imports.php'; // ⤒ Gramps (.gramps, .gpkg), aperçu avant import, « ↶ Annuler » d'un import, fichiers ADN bruts refusés
 require_once __DIR__ . '/lib/wikidata.php'; // 🌐 identifiant Wikidata d'une fiche, « Compléter depuis Wikidata » à la demande (+ ↶ Annuler)
+require_once __DIR__ . '/lib/htr_correction.php'; // 🪄 corrections proposées après la lecture HTR : le lexique tiré de la base (sans vivants ni fiches confidentielles)
+require_once __DIR__ . '/lib/transcription_actes.php'; // 📜 Transcription d'actes : 🔍 lecture approfondie (Ollama, sur cet ordinateur), « Ce que l'app a trouvé » → la généalogie (+ ↶ Annuler)
 require_once __DIR__ . '/lib/imports_plus.php'; // ⤒ relevés Nimègue / cercles, tableau de personnes, références RIS / BibTeX ↔ sources, lieux KML / GeoJSON
 require __DIR__ . '/lib/backup.php';   // sauvegarde complète (base + médias), ouverture d'une base .db
 require_once __DIR__ . '/lib/picker.php'; // 🔍 menu de choix unique (assets/js/app-picker.js, docs/PICKER.md)
@@ -70,6 +72,9 @@ try {
     if (is_string($pageGenealogy) && $pageGenealogy !== (GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID)) {
         json_response(['error' => 'Une autre généalogie a été ouverte dans une autre fenêtre : recharge la page.', 'genealogy_changed' => true], 409);
     }
+    // 🔐 Généalogie protégée par un mot de passe (lib/verrou.php) : tant que la séance ne l'a pas ouverte, rien ne se lit ni ne
+    // s'écrit (sauf l'écran de verrou, la liste des noms des généalogies et en changer). Avant le mode consultation : le verrou passe avant.
+    glock_guard(is_string($action) ? $action : '', $isWrite, is_array($payload) ? $payload : []);
     if ($isWrite) {
         verify_csrf($payload);
     }
@@ -174,17 +179,38 @@ try {
             'diagrams' => ['diagrams' => []],
             'scan_inbox_status' => ['dir' => '', 'enabled' => false, 'move_imported' => true, 'reachable' => false, 'pending' => 0, 'recent' => [], 'can_convert' => false, 'total' => 0],
             'parish_map' => ['by_place' => [], 'by_insee' => []],
+            'compl' => ($_GET['op'] ?? '') === 'settings' ? ['settings' => []] : null, // 🧩 réglages des compléments : ceux de départ
             default => null,
         };
         if ($emptyRead !== null) json_response($emptyRead + ['ready' => false]);
     }
     $pdo = db();
+    if ($isWrite) { register_shutdown_function(static function () use ($pdo): void { rfr_mark_dirty($pdo); }); } // 🔎 la recherche revérifie ses noms (lib/recherche_fr.php)
+    // 🔐 poser, changer, retirer le mot de passe, son délai (lib/verrou.php) ; jamais en mode consultation (écriture refusée plus haut)
+    if ($isWrite && in_array($action, ['glock_set', 'glock_change', 'glock_remove', 'glock_minutes'], true)) {
+        try { json_response(glock_api_post((string) $action, is_array($payload) ? $payload : [])); }
+        catch (LcndaBadInput $e) { json_response(['error' => $e->getMessage()], 422); }
+    }
+    // 🔐 une généalogie protégée ne sort pas en clair : ni le .db, ni une copie dans un dossier choisi, ni le dossier partagé à deux ordinateurs
+    if (glock_info()['locked']) {
+        if ($action === 'export_sqlite' || $action === 'offsite_copy_now' || ($isWrite && in_array($action, ['sd_setup', 'sd_sync'], true))) { glock_refuse_plain_copy((string) $action); }
+        if ($isWrite && $action === 'backup_sqlite' && normalize_backup_dir(safe_text($payload['dir'] ?? '')) !== normalize_backup_dir('')) { glock_refuse_plain_copy('backup_sqlite'); }
+        if (!$isWrite && $action === 'export_full_backup') { glock_backup_password(''); }
+    }
+    // 📜 Qui a vu quoi : chaque téléchargement ou copie de la généalogie est noté (lib/verrou.php), puis le registre lui-même
+    if (is_string($action) && isset(ACCESS_LOG_EXPORTS[$action]) && !kiosk_state()['on']) {
+        $fmt = is_string($_GET['format'] ?? null) && preg_match('/^[a-z0-9_-]{1,20}$/i', $_GET['format']) ? '|' . $_GET['format'] : '';
+        access_log_add($pdo, 'export', 'genealogy', null, '', ACCESS_LOG_EXPORTS[$action] . $fmt);
+    }
+    if (in_array($action, ['access_log', 'access_log_csv', 'access_log_settings', 'access_note'], true)) {
+        access_log_dispatch($pdo, (string) $action, $isWrite, is_array($payload) ? $payload : []);
+    }
+    if ($action === 'bootstrap') { access_log_purge($pdo); } // 📜 les lignes plus vieilles que la durée réglée (une fois par jour)
     if (str_starts_with((string) $action, 'sd_')) { json_response(sd_dispatch($pdo, (string) $action, is_array($payload) ? $payload : [], $isWrite)); } // 🔄 deux ordinateurs
 
     // La structure de la base (tables, colonnes, types d’événements de base) est mise à jour une seule fois
     // par numéro de version dans lib/migrations.php, à l’ouverture de la base (db()).
     if (!$isWrite && $action === 'schema_status') {
-        prepare_world_reference(); // décompression + index des villes du monde, une fois (~20 s au premier lancement)
         json_response(['version' => (int) $pdo->query('PRAGMA user_version')->fetchColumn(), 'expected' => SCHEMA_VERSION]);
     }
     if ($isWrite && $action === 'backup_sqlite') {
@@ -261,13 +287,30 @@ try {
         require_once __DIR__ . '/lib/photomaps.php';
         photomaps_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if (in_array($action, ['inbox_list', 'inbox_count', 'inbox_file', 'inbox_settings', 'inbox_write'], true)) { // 📥 À trier : les photos du téléphone par le wifi (lib/telephone_wifi.php)
+        require_once __DIR__ . '/lib/telephone_wifi.php';
+        tw_inbox_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     if (in_array($action, ['qp_list', 'qp_get', 'qp_templates', 'qp_write'], true)) { // 💬 questions aux proches (lib/questions_proches.php)
         require_once __DIR__ . '/lib/questions_proches.php';
         qp_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if ($action === 'pfam' || $action === 'pfam_write') { // 💌 lettre de famille, 🛡 fiabilité, 🖊 relecture d'une branche, 🌐 traduire le latin (lib/plus_famille.php)
+        require_once __DIR__ . '/lib/plus_famille.php';
+        pfam_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     if (in_array($action, ['pa_list', 'pa_get', 'pa_faces', 'pa_write'], true)) { // 🔍 « Qui est sur cette photo ? » à plusieurs (lib/photo_ask.php)
         require_once __DIR__ . '/lib/photo_ask.php';
         pa_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
+    if (!$isWrite && ($action === 'compl' || $action === 'compl_export')) { // 🧩 études de notaire, homonymes, tous les doutes, visite aux archives (lib/complements.php)
+        compl_get($pdo, (string) $action);
+    }
+    if ($action === 'successoral' || $action === 'successoral_write') { // ⚖️ généalogiste successoral : dossiers de succession (lib/successoral.php)
+        successoral_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
+    if (in_array($action, ['ad_events', 'ad_person', 'ad_counts', 'ad_table', 'ad_write'], true)) { // 🏛 actes en ligne aux archives : les pastilles (lib/archives_dispo.php)
+        ad_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
     if (in_array($action, ['cl_context', 'cl_letter', 'cl_ids', 'cl_templates', 'cl_write'], true)) { // 📮 courriers tout prêts : « Demander l'acte » (lib/courriers_actes.php)
         require_once __DIR__ . '/lib/courriers_actes.php';
@@ -287,7 +330,11 @@ try {
     }
     if (!$isWrite && $action === 'dates_feter') { // 🎂 dates à fêter du tableau de bord (lib/dates_feter.php)
         require_once __DIR__ . '/lib/dates_feter.php';
-        json_response(dates_feter_data($pdo, $_GET));
+        // 🐘 gardé pour la journée tant que fiches, événements, lieux et familles ne changent pas (3 s à 200 000 fiches)
+        $dfQ = array_intersect_key($_GET, array_flip(['period', 'who', 'sosa', 'round', 'branch', 'kinds', 'today']));
+        ksort($dfQ);
+        json_response(calc_cached($pdo, 'dates_feter_' . substr(md5(json_encode(array_diff_key($dfQ, ['today' => 1]))), 0, 12), ['persons', 'events', 'event_types', 'families', 'family_children', 'places'],
+            [$dfQ, date('Y-m-d'), function_exists('kiosk_state') && !empty(kiosk_state()['on'])], static fn() => dates_feter_data($pdo, $_GET)));
     }
     if (!$isWrite && in_array($action, ['family_share_preview', 'family_share_export'], true)) { // 📤 partager avec la famille (lib/family_share.php)
         require_once __DIR__ . '/lib/family_share.php';
@@ -365,6 +412,9 @@ try {
     if (in_array($action, SO7_ACTIONS, true)) { // 🌍 Archives en ligne, 7e lot (lib/sources_ouvertes_7.php) : Europe, Justes, enfants assistés, monuments, cadastres — aucune requête vers les sites
         so7_dispatch($pdo, (string) $action, $isWrite, $payload);
     }
+    if ($action === 'media_limits' || ($isWrite && $action === 'save_media_limits')) { // 📎 taille des fichiers ajoutés (lib/media_limits.php)
+        try { json_response($isWrite ? ['ok' => true, 'result' => media_limits_save($pdo ?? db(), $payload)] : media_limits_for_page($pdo ?? db())); } catch (RuntimeException $e) { json_response(['error' => readable_error_message($e)], 422); }
+    }
     if ($isWrite && $action === 'htr_upload_model') {
         htr_upload_model($_FILES['file'] ?? null, safe_text($_POST['target'] ?? ''));
     }
@@ -381,6 +431,9 @@ try {
                 'htr_read_cancel' => htr_read_cancel(safe_text($payload['id'] ?? '')),
             }]);
         } catch (Throwable $e) { json_response(['error' => readable_error_message($e)], 422); }
+    }
+    if (in_array($action, TX_DEEP_ACTIONS, true)) { // 🔍 lecture approfondie (lib/transcription_actes.php) : rien n'est écrit dans la base
+        tx_deep_dispatch((string) $action, $isWrite, $payload);
     }
     if (!$isWrite && $action === 'htr_read_job') {
         try { json_response(htr_read_job(safe_text($_GET['id'] ?? ''))); } catch (Throwable $e) { json_response(['error' => readable_error_message($e)], 422); }
@@ -410,6 +463,7 @@ try {
 
     // Sauvegarde complète protégée : le mot de passe arrive en POST (jamais dans l'adresse)
     if ($isWrite && $action === 'export_full_backup') {
+        glock_backup_password(is_string($payload['password'] ?? null) ? $payload['password'] : ''); // 🔐 généalogie protégée : le même mot de passe, obligatoire
         export_full_backup($pdo, (string) ($payload['password'] ?? ''));
     }
     // 🏛 Frontières anciennes : télécharger une fois l'historique des communes de l'INSEE, le retirer, le remettre (lib/cartes_plus.php)
@@ -424,8 +478,13 @@ try {
         try { json_response(meteo_api_post((string) $action, $payload, $_GET)); }
         catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); }
     }
+    if ($isWrite && str_starts_with((string) $action, 'lieux_')) { require_once __DIR__ . '/lib/lieux_a_placer.php'; } // 📍 Lieux à placer (écritures dans handle_write)
     if ($isWrite && !in_array($action, $uploadActions, true)) {
         handle_write($pdo, $action, $payload);
+    }
+    // ⚖️ filtre des dossiers de succession (bouton ⚖️) : Personnes, recherche, listes et carte ne lisent que les fiches rattachées
+    if (!$isWrite && isset($_GET['succ_cases']) && function_exists('succ_shadow_filter') && (in_array($action, ['people', 'quick_search', 'map'], true) || ($action === 'list' && in_array((string) ($_GET['type'] ?? 'persons'), ['persons', 'events', 'places', 'media', 'sources'], true)))) {
+        succ_shadow_filter($pdo, succ_filter_cases());
     }
 
     match ($action) {
@@ -445,7 +504,9 @@ try {
         'heritage_overview' => json_response(heritage_overview($pdo)),
         'heritage_place_search' => json_response(['places' => heritage_place_search($pdo, safe_text($_GET['q'] ?? ''))]),
         'image_pick' => json_response(['media' => heritage_image_pick($pdo, mb_substr(safe_text($_GET['q'] ?? ''), 0, 100), (string) ($_GET['filter'] ?? ''))]),
-        'act_transcriptions_media' => json_response(['items' => act_transcriptions_for_media($pdo, safe_int($_GET['media_id'] ?? 0))]),
+        'act_transcriptions_media' => json_response(['items' => act_transcriptions_for_media($pdo, safe_int($_GET['media_id'] ?? 0)), 'text' => (static function () use ($pdo) { $s = $pdo->prepare('SELECT COALESCE(transcription,\'\') FROM media m WHERE m.id=?' . (function_exists('sealed_media_sql') ? sealed_media_sql($pdo) : '')); $s->execute([safe_int($_GET['media_id'] ?? 0)]); return (string) $s->fetchColumn(); })()]), // 📄 le texte du document (un seul)
+        'media_pages' => json_response(media_pages_of($pdo, safe_int($_GET['media_id'] ?? 0))),
+        'act_page_owner' => json_response(['id' => act_page_owner($pdo, safe_int($_GET['media_id'] ?? 0))]), // 📑 l'acte « un seul texte » dont l'image est une page // 📑 les pages d'un document (lib/media_pages.php)
         'heritage_media_search' => json_response(['media' => heritage_media_search($pdo, safe_text($_GET['q'] ?? ''))]),
         'voyages' => json_response(['voyages' => voyages_data($pdo, safe_int($_GET['person_id'] ?? 0))]),
         'placements' => json_response(['placements' => placements_data($pdo, safe_int($_GET['person_id'] ?? 0)), 'kinds' => PLACEMENT_KINDS]),
@@ -478,12 +539,14 @@ try {
         'village' => json_response(village_detail($pdo, safe_text($_GET['key'] ?? ''))),
         'village_wiki_population' => json_response(village_wiki_population($pdo, safe_text($_GET['key'] ?? ''), safe_text($_GET['title'] ?? ''))),
         'htr_setup_status' => json_response(htr_setup_status()),
+        'htr_lexicon' => json_response(htr_lexicon_data($pdo)), // 🪄 lib/htr_correction.php
         'my_lists' => json_response(['lists' => my_lists($pdo), 'event_types' => $pdo->query('SELECT id, label, gedcom_tag FROM event_types ORDER BY label COLLATE NOCASE')->fetchAll(), 'labels' => $pdo->query('SELECT id, name, color FROM labels ORDER BY name COLLATE NOCASE')->fetchAll(), 'columns' => my_list_columns(), 'sources' => my_list_source_labels()]),
         'my_list_rows' => json_response(my_list_rows($pdo, safe_int($_GET['id'] ?? 0))),
         'atelier_projects' => json_response(atelier_projects($pdo)),
         'media_av_list' => json_response(media_av_list($pdo, safe_text($_GET['kind'] ?? 'audio'))),
         'recueils' => json_response(recueils_list($pdo, safe_text($_GET['q'] ?? ''))),
-        'genea_calendar' => genea_calendar_stream($pdo, $_GET), // écrit au fur et à mesure (lib/calendars.php)
+        // 🐘 les anniversaires des prochains jours (widget, 2 s et 4 Mo à 200 000 fiches) : gardés pour la journée tant que la base ne change pas
+        'genea_calendar' => safe_int($_GET['anniv_days'] ?? 0) > 0 && !safe_int($_GET['person_id'] ?? 0) && !isset($_GET['succ_cases']) ? json_response(calc_cached($pdo, 'genea_anniv_' . safe_int($_GET['anniv_days'] ?? 0), ['persons', 'events', 'event_types', 'places', 'families'], [date('Y-m-d'), safe_int($_GET['anniv_days'] ?? 0), safe_int($_GET['person_id'] ?? 0)], static fn() => genea_calendar_events($pdo, $_GET))) : (safe_int($_GET['anniv_days'] ?? 0) > 0 ? genea_calendar_stream($pdo, $_GET) : calc_cached_response($pdo, 'genea_calendar_' . safe_int($_GET['person_id'] ?? 0), ['persons', 'events', 'event_types', 'places', 'families'], [safe_int($_GET['person_id'] ?? 0)], static fn() => genea_calendar_stream($pdo, $_GET))), // écrit au fur et à mesure (lib/calendars.php) ; 🐘 tout le calendrier gardé tant que la base ne change pas
         'my_agenda' => json_response(my_agenda($pdo)),
         'recueil' => json_response(recueil_detail($pdo, safe_int($_GET['id'] ?? 0))),
         'recueils_for' => json_response(['recueils' => recueils_for_entity($pdo, safe_text($_GET['type'] ?? ''), safe_text($_GET['key'] ?? ''))]),
@@ -499,9 +562,11 @@ try {
         'museum_pick' => json_response(['items' => museum_pick($pdo, (string) ($_GET['what'] ?? 'media'), mb_substr(safe_text($_GET['q'] ?? ''), 0, 100))]),
         'museum_export' => museum_export($pdo, safe_int($_GET['id'] ?? 0), (string) ($_GET['format'] ?? 'lcnda')),
         'media_versions' => json_response(['versions' => retouch_versions($pdo, safe_int($_GET['id'] ?? 0))]),
-        'recent_acts' => json_response(recent_acts_page($pdo, $_GET)),
+        // 🐘 les actes récents à demander (liste des courriers : 4 s à 200 000 fiches) : gardés pour la journée tant que la base ne change pas
+        'recent_acts' => json_response(isset($_GET['succ_cases']) || !function_exists('ad_config_path') ? recent_acts_page($pdo, $_GET) : calc_cached($pdo, 'recent_acts_' . substr(md5(json_encode([$_GET['all'] ?? null, $_GET['kind'] ?? null, $_GET['limit'] ?? null])), 0, 12), ['courriers', 'events', 'event_types', 'places', 'families', 'persons', 'media', 'media_links', 'source_links', 'archives_dispo_corr', 'surname_groups'], [date('Y-m-d'), $_GET['all'] ?? null, $_GET['kind'] ?? null, $_GET['limit'] ?? null, is_file(ad_config_path()) ? filemtime(ad_config_path()) . ':' . filesize(ad_config_path()) : '-'], static fn() => recent_acts_page($pdo, $_GET))),
         'act_request_letter' => json_response(act_request_letter($pdo, safe_int($_GET['event_id'] ?? 0), safe_text($_GET['requester'] ?? ''), safe_text($_GET['relation'] ?? ''))),
-        'historical_context' => json_response(historical_context($pdo)),
+        // 🐘 épidémies, guerres, hivers : toute la base (3,5 s et 29 Mo à 200 000 fiches), gardé déjà encodé tant que la base ne change pas
+        'historical_context' => json_response_encoded(calc_cached($pdo, 'historical_context', ['persons', 'events', 'event_types', 'places', 'surname_groups', 'families', 'media'], [], static function () use ($pdo): string { memory_for_persons($pdo, 3, 1024); return json_encode(historical_context($pdo), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR); })),
         'vault_status' => json_response(vault_status($pdo)),
         'vault_download' => vault_download($pdo, safe_int($_GET['id'] ?? 0)),
         'age_checks' => json_response(age_checks($pdo)),
@@ -568,7 +633,10 @@ try {
         'slideshow' => json_response(slideshow_get($pdo, safe_int($_GET['id'] ?? 0))),
         'act_transcriptions' => json_response(['items' => act_transcriptions_list($pdo)]),
         'act_transcriptions_page' => json_response(act_transcriptions_page($pdo, $_GET)), // Listes → Transcriptions d'actes (lecture seule, page par page)
+        'act_transcription_versions' => json_response(['items' => act_transcription_versions($pdo, safe_int($_GET['act_id'] ?? 0))]), // 🕘 Versions du texte d'un acte
+        'act_transcription_version' => json_response(act_transcription_version($pdo, safe_int($_GET['id'] ?? 0))),
         'act_transcription' => json_response(act_transcription_get($pdo, safe_int($_GET['id'] ?? 0))),
+        'act_people_details' => json_response(['people' => act_people_details($pdo, array_map('intval', explode(',', (string) ($_GET['ids'] ?? ''))))]), // 📜 ⇆ Comparer
         'vector_map_places' => json_response(vector_map_places($pdo, (float) ($_GET['n'] ?? 0), (float) ($_GET['s'] ?? 0), (float) ($_GET['w'] ?? 0), (float) ($_GET['e'] ?? 0))),
         'diagram_genea' => json_response(diagram_genea_data($pdo, $_GET)), // 📊 lib/diagram_genea.php
         'diagram_people' => json_response(diagram_people($pdo, array_map('intval', explode(',', (string) ($_GET['ids'] ?? ''))))),
@@ -576,11 +644,14 @@ try {
         'diagram_more' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_more.php'; json_response(diagram_more_data($pdo, $_GET)); })(), // 📊 arbre en frise, crises, fratrie, pyramide, accordéon, cousinages, matrice, patronymes, accord (lib/diagram_more.php)
         'diagram_cartes2' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_cartes2.php'; json_response(diagram_cartes2_data($pdo, $_GET)); })(), // 🗺️ carte en points, hexagones, carte qui raconte, prénoms transmis, causes de décès (lib/diagram_cartes2.php)
         'diagram_geo' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_cartes.php'; json_response(diagram_geo_data($pdo, $_GET)); })(), // 🗺️ diagrammes « Cartes » : lieux de l'arbre et leurs coordonnées (lib/diagram_cartes.php)
+        'diagram_lot_c' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_lot_c.php'; json_response(diagram_lot_c_data($pdo, $_GET)); })(), // 📊 grille des recensements, schéma de preuve, arbre de mots, paroisses, carte en étoile (lib/diagram_lot_c.php)
         'prenoms_transmis' => (static function () use ($pdo) { require_once __DIR__ . '/lib/prenoms_france.php'; json_response(prenoms_transmis($pdo, $_GET)); })(), // 👶 Transmission des prénoms (lib/prenoms_france.php)
         'famille_france' => (static function () use ($pdo) { require_once __DIR__ . '/lib/prenoms_france.php'; json_response(famille_france($pdo, $_GET)); })(), // 📊 Ta famille et l'histoire de France (moyennes sourcées : assets/data/moyennes-france.json)
         'diagram_vie' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_vie.php'; json_response(diagram_vie_data($pdo, $_GET)); })(), // 📊 D23–D38 : mortalité des enfants, fratries, saisons, veuvage, durée des mariages, âge des parents, conceptions, écart d'âge, loin du berceau, savoir signer, ce que tu as prouvé, registres consultés (lib/diagram_vie.php)
+        'diagram_lot_b' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_lot_b.php'; json_response(diagram_lot_b_data($pdo, $_GET)); })(), // 📊 lot B : personnes retenues (groupe + critères), couverture des sources par ancêtre, secteurs de métiers, bandes historiques (lib/diagram_lot_b.php)
         'diagram_famille' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_famille.php'; json_response(diagram_famille_data($pdo, $_GET)); })(), // 📊 D1–D8 : qui a connu qui, survie, métiers, rayon des mariages, implexe, mois, naissances, lieux de vie (lib/diagram_famille.php)
         'diagram_plus' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_plus.php'; json_response(diagram_plus_data($pdo, $_GET)); })(), // 📊 douze de plus : chemin de parenté, centre de gravité, générations, complétude, ahnentafel, roue de l'année, chiffres (lib/diagram_plus.php)
+        'diagram_lot_a' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_lot_a.php'; json_response(diagram_lot_a_data($pdo, $_GET)); })(), // 📊 lot A : quartiers, variantes d'un nom, toute la famille, implexe, recensements, croisement des sources (lib/diagram_lot_a.php)
         'diagram_adn_numbers' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_adn_chiffres.php'; json_response(diagram_adn_numbers($pdo, $_GET)); })(), // 📊 diagrammes ADN et Chiffres (mobilité, mois, âges moyens) : lib/diagram_adn_chiffres.php
         'diagram_app_count' => (static function () use ($pdo) { require_once __DIR__ . '/lib/diagram_appcount.php'; json_response(diagram_app_count($pdo, $_GET)); })(), // 📊 « Depuis l'app → Graphique » : compter dans ma base, avec les options communes (lib/diagram_appcount.php, lib/diagram_options.php)
         'person_names' => json_response(person_names($pdo)),
@@ -675,14 +746,19 @@ try {
         'frontieres_remote' => (static function () { require_once __DIR__ . '/lib/cartes_plus.php'; try { json_response(cp_front_remote()); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🏛 adresses et tailles annoncées
         'frontieres_communes' => (static function () { require_once __DIR__ . '/lib/cartes_plus.php'; json_response(cp_front_communes($_GET)); })(), // 🏛 communes disparues d'un cadre de la carte
         'cartes_plus' => (static function () use ($pdo) { require_once __DIR__ . '/lib/cartes_plus.php'; try { json_response(cp_data($pdo, $_GET)); } catch (RuntimeException $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🗺️ cartes des patronymes, ADN, recherches, chaleur (lib/cartes_plus.php)
+        'lieux_a_placer' => (static function () use ($pdo) { require_once __DIR__ . '/lib/lieux_a_placer.php'; json_response(lap_list($pdo, $_GET)); })(), // 📍 Lieux à placer : ce que l'app propose (rien n'est placé)
+        'cartes_plus2' => (static function () use ($pdo) { require_once __DIR__ . '/lib/cartes_plus2.php'; try { json_response(cp2_data($pdo, $_GET)); } catch (RuntimeException $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🗺️ vague 2 : métiers, lignées en miroir, aire de vie, parrains et témoins, crises (lib/cartes_plus2.php)
         'quick_search' => json_response(quick_search_data($pdo, safe_text($_GET['q'] ?? ''))),
+        'rfr_parse' => json_response(rfr_api_parse($pdo, mb_substr(safe_text($_GET['q'] ?? ''), 0, 200))), // 🔎 ce que la recherche comprend d'un texte (lib/recherche_fr.php)
         'implexe' => json_response(implexe_data($pdo, safe_int($_GET['id'] ?? 0) ?: (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 LIMIT 1')->fetchColumn())),
         'online_registers' => json_response(online_registers($pdo, (string) ($_GET['code'] ?? ''), trim((string) ($_GET['name'] ?? '')))),
         'person_labels' => json_response(['people' => person_labels($pdo, (string) ($_GET['ids'] ?? ''))]),
         'census_member_memberships' => census_member_memberships_data($pdo, safe_int($_GET['person_id'] ?? 0)),
         'tree' => tree_data($pdo, safe_int($_GET['id'] ?? 0)),
         'kinship' => kinship_data($pdo, safe_int($_GET['from'] ?? 0), safe_int($_GET['to'] ?? 0)),
-        'map' => map_data($pdo),
+        // 🐘 la carte de toute la base (2 s à 200 000 fiches) : gardée tant que la base ne change pas, pour les réglages
+        // sans filtre de personne (sorte, limite, lieu précis) ; jamais avec le filtre des dossiers de succession
+        'map' => !isset($_GET['succ_cases']) && !array_diff(array_keys($_GET), ['action', 'tag', 'limit', 'location_mode', 'surname_mode']) ? calc_cached_response($pdo, 'map_' . substr(md5(json_encode([$_GET['tag'] ?? '', $_GET['limit'] ?? '', $_GET['location_mode'] ?? '', $_GET['surname_mode'] ?? ''])), 0, 12), ['persons', 'events', 'event_types', 'families', 'places', 'surname_groups', 'census_records', 'census_members'], [$_GET['tag'] ?? '', $_GET['limit'] ?? '', $_GET['location_mode'] ?? '', $_GET['surname_mode'] ?? ''], static fn() => map_data($pdo)) : map_data($pdo),
         'list' => list_data($pdo),
         'graph_stats' => graph_stats_data($pdo),
         'graph_distribution' => graph_distribution_data($pdo),
@@ -769,73 +845,87 @@ try {
             }
         }
     }
-    json_response(['error' => readable_error_message($e)], $e instanceof LcndaBadInput ? 422 : 500);
+    $out = ['error' => readable_error_message($e)];
+    // app de bureau, au lancement (electron/php-server.js, prepareDatabase) : la vraie raison (base abîmée, occupée, en lecture
+    // seule…), que electron/main.js dit simplement ; le message ci-dessus parle d'un enregistrement, ce n'en est pas un
+    if (isset($action) && $action === 'schema_status') { $out['detail'] = $e->getMessage(); }
+    // base tenue par un autre programme dès l'ouverture (db()) : l'app de bureau le dit tout de suite (electron/main.js)
+    if ($e instanceof LcndaDbBusy) {
+        $out['busy'] = true;
+        if (isset($action) && $action === 'schema_status' && $e->getPrevious()) { $out['detail'] = $e->getPrevious()->getMessage(); }
+    }
+    json_response($out, $e instanceof LcndaBadInput ? 422 : ($e instanceof LcndaDbBusy ? 503 : 500));
 }
 
 function bootstrap_data(PDO $pdo): never
 {
-    $stats = [];
-    foreach (['persons' => 'personnes', 'families' => 'familles', 'events' => 'événements', 'media' => 'médias'] as $table => $label) {
-        $stats[$label] = (int) $pdo->query("SELECT count(*) FROM {$table}" . ($table === 'persons' ? " WHERE kind<>'animal'" : ''))->fetchColumn();
-    }
-    $stats['animaux'] = (int) $pdo->query("SELECT count(*) FROM persons WHERE kind='animal'")->fetchColumn();
-    $start = $pdo->query("SELECT id FROM persons ORDER BY is_start DESC, id LIMIT 1")->fetchColumn();
-    $types = $pdo->query('SELECT t.id,t.scope,t.slug,t.label,t.gedcom_tag,t.icon,t.color,t.is_custom,t.is_artistic,t.custom_fields,count(e.id) AS usage_count FROM event_types t LEFT JOIN events e ON e.event_type_id=t.id WHERE t.is_active=1 GROUP BY t.id ORDER BY t.label COLLATE NOCASE,t.scope')->fetchAll();
     $views = $pdo->query('SELECT * FROM saved_views ORDER BY module,sort_order,id')->fetchAll();
     $viewLabels = labels_for_entities($pdo, 'view', array_map(static fn($view)=>(int)$view['id'], $views));
     foreach ($views as &$view) $view['config'] = json_decode($view['config_json'], true) ?: [];
     foreach ($views as &$view) $view['labels'] = $viewLabels[(int)$view['id']] ?? [];
     unset($view);
-    $occupations = $pdo->query("
-        SELECT TRIM(val) AS name, COUNT(DISTINCT person_id) AS person_count
-        FROM (
-            SELECT p.id AS person_id, p.occupation AS val
-            FROM persons p WHERE p.occupation IS NOT NULL AND TRIM(p.occupation)!=''
-            UNION ALL
-            SELECT e.person_id, COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),'')) AS val
-            FROM events e JOIN event_types t ON t.id=e.event_type_id
-            WHERE e.person_id IS NOT NULL AND t.gedcom_tag='OCCU'
-              AND COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),'')) IS NOT NULL
-            UNION ALL
-            SELECT cm.person_id, cm.occupation AS val
-            FROM census_members cm WHERE cm.person_id IS NOT NULL AND cm.occupation IS NOT NULL AND TRIM(cm.occupation)!=''
-        ) src
-        WHERE TRIM(val)!=''
-        GROUP BY LOWER(TRIM(val))
-        ORDER BY person_count DESC, LOWER(TRIM(val)) COLLATE NOCASE
-    ")->fetchAll();
-    $mapTags = $pdo->query("
-        SELECT t.gedcom_tag, t.label, count(e.id) AS cnt
-        FROM events e
-        JOIN event_types t ON t.id=e.event_type_id
-        JOIN places pl ON pl.id=e.place_id
-        WHERE pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL
-          AND pl.name IS NOT NULL AND trim(pl.name)<>''
-          AND lower(trim(pl.name)) NOT IN ('lieu sans nom','sans lieu','lieu inconnu','inconnu','unknown','pays inconnu')
-          AND NOT (pl.county IS NULL AND pl.state IS NULL AND lower(trim(pl.name))=lower(trim(pl.country)))
-          AND t.gedcom_tag IS NOT NULL AND t.gedcom_tag<>''
-        GROUP BY t.gedcom_tag, t.label
-        ORDER BY cnt DESC, t.label COLLATE NOCASE
-    ")->fetchAll();
-    // Ajouter CENS si des recensements géocodés existent (census_records n'est pas dans events)
-    $censusCnt = (int)$pdo->query("
-        SELECT count(*) FROM census_records cr
-        JOIN places pl ON pl.id=cr.place_id
-        WHERE pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL
-          AND pl.name IS NOT NULL AND trim(pl.name)<>''
-    ")->fetchColumn();
-    if($censusCnt>0 && !in_array('CENS',array_column($mapTags,'gedcom_tag'),true)){
-        $mapTags[] = ['gedcom_tag'=>'CENS','label'=>'Recensement','cnt'=>$censusCnt];
-    }
-    $surnames = $pdo->query("
-        SELECT last_name AS name, count(*) AS person_count
-        FROM persons
-        WHERE last_name IS NOT NULL AND trim(last_name)<>''
-          AND lower(trim(last_name)) NOT IN ('inconnu','unknown')
-          AND last_name NOT GLOB '[?X]*'
-        GROUP BY last_name COLLATE NOCASE
-        ORDER BY person_count DESC, last_name COLLATE NOCASE
-    ")->fetchAll();
+    // 🐘 les comptes et les listes tirés de toute la base (sortes d'événements, métiers, noms, lieux de la carte) : 1,5 s à
+    // 200 000 fiches à chaque ouverture ; gardés tant que les tables lues ne changent pas (lib/calc_cache.php)
+    [$stats, $start, $types, $occupations, $mapTags, $surnames] = calc_cached($pdo, 'bootstrap_lists', ['persons', 'families', 'events', 'media', 'event_types', 'places', 'census_members', 'census_records'], [], static function () use ($pdo): array {
+        $stats = [];
+        foreach (['persons' => 'personnes', 'families' => 'familles', 'events' => 'événements', 'media' => 'médias'] as $table => $label) {
+            $stats[$label] = (int) $pdo->query("SELECT count(*) FROM {$table}" . ($table === 'persons' ? " WHERE kind<>'animal'" : ''))->fetchColumn();
+        }
+        $stats['animaux'] = (int) $pdo->query("SELECT count(*) FROM persons WHERE kind='animal'")->fetchColumn();
+        $start = $pdo->query("SELECT id FROM persons ORDER BY is_start DESC, id LIMIT 1")->fetchColumn();
+        $types = $pdo->query('SELECT t.id,t.scope,t.slug,t.label,t.gedcom_tag,t.icon,t.color,t.is_custom,t.is_artistic,t.custom_fields,count(e.id) AS usage_count FROM event_types t LEFT JOIN events e ON e.event_type_id=t.id WHERE t.is_active=1 GROUP BY t.id ORDER BY t.label COLLATE NOCASE,t.scope')->fetchAll();
+        $occupations = $pdo->query("
+            SELECT TRIM(val) AS name, COUNT(DISTINCT person_id) AS person_count
+            FROM (
+                SELECT p.id AS person_id, p.occupation AS val
+                FROM persons p WHERE p.occupation IS NOT NULL AND TRIM(p.occupation)!=''
+                UNION ALL
+                SELECT e.person_id, COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),'')) AS val
+                FROM events e JOIN event_types t ON t.id=e.event_type_id
+                WHERE e.person_id IS NOT NULL AND t.gedcom_tag='OCCU'
+                  AND COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),'')) IS NOT NULL
+                UNION ALL
+                SELECT cm.person_id, cm.occupation AS val
+                FROM census_members cm WHERE cm.person_id IS NOT NULL AND cm.occupation IS NOT NULL AND TRIM(cm.occupation)!=''
+            ) src
+            WHERE TRIM(val)!=''
+            GROUP BY LOWER(TRIM(val))
+            ORDER BY person_count DESC, LOWER(TRIM(val)) COLLATE NOCASE
+        ")->fetchAll();
+        $mapTags = $pdo->query("
+            SELECT t.gedcom_tag, t.label, count(e.id) AS cnt
+            FROM events e
+            JOIN event_types t ON t.id=e.event_type_id
+            JOIN places pl ON pl.id=e.place_id
+            WHERE pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL
+              AND pl.name IS NOT NULL AND trim(pl.name)<>''
+              AND lower(trim(pl.name)) NOT IN ('lieu sans nom','sans lieu','lieu inconnu','inconnu','unknown','pays inconnu')
+              AND NOT (pl.county IS NULL AND pl.state IS NULL AND lower(trim(pl.name))=lower(trim(pl.country)))
+              AND t.gedcom_tag IS NOT NULL AND t.gedcom_tag<>''
+            GROUP BY t.gedcom_tag, t.label
+            ORDER BY cnt DESC, t.label COLLATE NOCASE
+        ")->fetchAll();
+        // Ajouter CENS si des recensements géocodés existent (census_records n'est pas dans events)
+        $censusCnt = (int)$pdo->query("
+            SELECT count(*) FROM census_records cr
+            JOIN places pl ON pl.id=cr.place_id
+            WHERE pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL
+              AND pl.name IS NOT NULL AND trim(pl.name)<>''
+        ")->fetchColumn();
+        if($censusCnt>0 && !in_array('CENS',array_column($mapTags,'gedcom_tag'),true)){
+            $mapTags[] = ['gedcom_tag'=>'CENS','label'=>'Recensement','cnt'=>$censusCnt];
+        }
+        $surnames = $pdo->query("
+            SELECT last_name AS name, count(*) AS person_count
+            FROM persons
+            WHERE last_name IS NOT NULL AND trim(last_name)<>''
+              AND lower(trim(last_name)) NOT IN ('inconnu','unknown')
+              AND last_name NOT GLOB '[?X]*'
+            GROUP BY last_name COLLATE NOCASE
+            ORDER BY person_count DESC, last_name COLLATE NOCASE
+        ")->fetchAll();
+        return [$stats, $start, $types, $occupations, $mapTags, $surnames];
+    });
     json_response([
         'csrf' => csrf_token(),
         'stats' => $stats,
@@ -1018,18 +1108,30 @@ function person_select(): string
  * le premier acte de chaque sorte dans l'ordre des événements), mais en trois lectures au lieu de douze sous-requêtes par fiche —
  * l'export GEDCOM d'une base de 100 000 personnes y passait plusieurs secondes.
  */
-function person_select_rows(PDO $pdo): array
+function person_select_rows(PDO $pdo, ?array $ids = null, bool $light = false): array
 {
+    // $ids : seulement ces fiches (par paquets : l'export d'une très grosse base ne garde plus toutes les fiches entières en
+    // mémoire) ; $light : seulement ce que les règles de partage lisent (id, sexe, statut, confidentielle, années de
+    // naissance, de décès, de mariage), les mêmes valeurs
+    $in = $ids === null ? '' : implode(',', array_map('intval', $ids) ?: [0]);
     $first = []; // [person_id][clé] => [date_text, year] (le premier acte, par numéro d'événement)
     $kinds = ['BIRT' => 'birth', 'DEAT' => 'death', 'BURI' => 'buri', 'CHR' => 'bapt', 'BAPM' => 'bapt'];
-    foreach ($pdo->query("SELECT e.person_id, t.gedcom_tag, e.date_text, e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id IS NOT NULL AND t.gedcom_tag IN ('BIRT','DEAT','BURI','CHR','BAPM') ORDER BY e.id") as $e) {
-        $first[(int) $e['person_id']][$kinds[$e['gedcom_tag']]] ??= [$e['date_text'], $e['year']];
+    foreach ($pdo->query("SELECT e.person_id, t.gedcom_tag, e.date_text, e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id IS NOT NULL AND t.gedcom_tag IN ('BIRT','DEAT','BURI','CHR','BAPM')" . ($in !== '' ? " AND e.person_id IN ($in)" : '') . " ORDER BY e.id") as $e) {
+        if ($light && $e['gedcom_tag'] !== 'BIRT' && $e['gedcom_tag'] !== 'DEAT') { continue; }
+        $first[(int) $e['person_id']][$kinds[$e['gedcom_tag']]] ??= $light ? [null, $e['year']] : [$e['date_text'], $e['year']];
     }
-    foreach ($pdo->query("SELECT f.partner1_id, f.partner2_id, e.date_text, e.year FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN families f ON f.id=e.family_id WHERE t.gedcom_tag IN ('MARR','MRCI','MRRE') ORDER BY e.id") as $e) {
-        foreach (array_unique([(int) $e['partner1_id'], (int) $e['partner2_id']]) as $pid) { if ($pid) { $first[$pid]['marr'] ??= [$e['date_text'], $e['year']]; } }
+    foreach ($pdo->query("SELECT f.partner1_id, f.partner2_id, e.date_text, e.year FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN families f ON f.id=e.family_id WHERE t.gedcom_tag IN ('MARR','MRCI','MRRE')" . ($in !== '' ? " AND (f.partner1_id IN ($in) OR f.partner2_id IN ($in))" : '') . " ORDER BY e.id") as $e) {
+        foreach (array_unique([(int) $e['partner1_id'], (int) $e['partner2_id']]) as $pid) { if ($pid) { $first[$pid]['marr'] ??= $light ? [null, $e['year']] : [$e['date_text'], $e['year']]; } }
     }
     $rows = [];
-    foreach ($pdo->query("SELECT p.*, g.name AS surname_group, (SELECT COALESCE(NULLIF(m.thumbnail,''),m.filename) FROM media m WHERE m.id=p.portrait_media_id) AS portrait FROM persons p LEFT JOIN surname_groups g ON g.id=p.surname_group_id ORDER BY p.id") as $r) {
+    if ($light) {
+        foreach ($pdo->query('SELECT id, gender, living_status, is_private FROM persons' . ($in !== '' ? " WHERE id IN ($in)" : '') . ' ORDER BY id') as $r) {
+            $f = $first[(int) $r['id']] ?? [];
+            $rows[] = $r + ['birth_year' => $f['birth'][1] ?? null, 'death_year' => $f['death'][1] ?? null, 'marr_year' => $f['marr'][1] ?? null];
+        }
+        return $rows;
+    }
+    foreach ($pdo->query("SELECT p.*, g.name AS surname_group, (SELECT COALESCE(NULLIF(m.thumbnail,''),m.filename) FROM media m WHERE m.id=p.portrait_media_id) AS portrait FROM persons p LEFT JOIN surname_groups g ON g.id=p.surname_group_id" . ($in !== '' ? " WHERE p.id IN ($in)" : '') . " ORDER BY p.id") as $r) {
         $portrait = $r['portrait']; unset($r['portrait']);
         $f = $first[(int) $r['id']] ?? [];
         foreach (['birth', 'death', 'marr', 'buri', 'bapt'] as $k) { $r[$k . '_date'] = $f[$k][0] ?? null; $r[$k . '_year'] = $f[$k][1] ?? null; }
@@ -1791,6 +1893,12 @@ function dashboard_data(PDO $pdo): never
     $total = max(1, $stats['persons']);
     $coverageCount = function(string $sql) use ($pdo): int { return (int)$pdo->query($sql)->fetchColumn(); };
     $coverageRow = fn(int $value): array => ['count'=>$value, 'percent'=>round($value * 100 / $total, 1)];
+    $coverage = calc_cached($pdo, 'dash_coverage', ['persons', 'events', 'event_types', 'families', 'media_links', 'source_links'], [], static fn() => array_map($coverageCount, [
+        "SELECT count(DISTINCT p.id) FROM persons p JOIN events e ON e.person_id=p.id JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='BIRT'",
+        "SELECT count(DISTINCT p.id) FROM persons p JOIN events e ON e.person_id=p.id JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='DEAT'",
+        "SELECT count(DISTINCT p.id) FROM persons p WHERE EXISTS(SELECT 1 FROM media_links ml WHERE ml.entity_type='person' AND ml.entity_id=p.id) OR EXISTS(SELECT 1 FROM media_links ml WHERE ml.entity_type='event' AND ml.entity_id IN (SELECT id FROM events WHERE person_id=p.id UNION ALL SELECT fe.id FROM families ff JOIN events fe ON fe.family_id=ff.id WHERE ff.partner1_id=p.id OR ff.partner2_id=p.id))",
+        "SELECT count(DISTINCT p.id) FROM persons p WHERE EXISTS(SELECT 1 FROM source_links sl WHERE sl.entity_type='person' AND sl.entity_id=p.id) OR EXISTS(SELECT 1 FROM source_links sl WHERE sl.entity_type='event' AND sl.entity_id IN (SELECT id FROM events WHERE person_id=p.id UNION ALL SELECT fe.id FROM families ff JOIN events fe ON fe.family_id=ff.id WHERE ff.partner1_id=p.id OR ff.partner2_id=p.id))",
+    ]));
     $workReminders = (int)$pdo->query("SELECT count(*) FROM investigation_items WHERE reminder_mode<>'none' AND reminder_due_at<>'' AND reminder_done=0 AND reminder_due_at<=date('now','+30 days')")->fetchColumn()
         + (int)$pdo->query("SELECT count(*) FROM standalone_reminders WHERE reminder_due_at<>'' AND reminder_done=0 AND reminder_due_at<=date('now','+30 days')")->fetchColumn();
     // ✅ Contrôle de la base (lib/controle.php) : le même nombre que la page et le widget (toutes sortes, sans les exceptions ; gardé en cache)
@@ -1802,7 +1910,8 @@ function dashboard_data(PDO $pdo): never
         'open_battues' => (int)$pdo->query("SELECT count(*) FROM battues WHERE status<>'closed'")->fetchColumn(),
         'restorable_deletions' => count(recent_restore_candidate_ids($pdo, 15)),
     ];
-    $topPlaces = $pdo->query("SELECT pl.name,COALESCE(pl.subdivision,'') AS subdivision,COALESCE(pl.county,'') AS county,COALESCE(pl.state,'') AS state,pl.country,count(e.id) AS event_count FROM places pl JOIN events e ON e.place_id=pl.id GROUP BY pl.id ORDER BY event_count DESC,pl.name LIMIT 30")->fetchAll();
+    // 🐘 les blocs les plus lourds sur une très grosse base (lib/calc_cache.php) : gardés tant que les tables lues ne changent pas
+    $topPlaces = calc_cached($pdo, 'dash_top_places', ['places', 'events'], [], static fn() => $pdo->query("SELECT pl.name,COALESCE(pl.subdivision,'') AS subdivision,COALESCE(pl.county,'') AS county,COALESCE(pl.state,'') AS state,pl.country,count(e.id) AS event_count FROM places pl JOIN events e ON e.place_id=pl.id GROUP BY pl.id ORDER BY event_count DESC,pl.name LIMIT 30")->fetchAll());
     foreach($topPlaces as &$place){
         $place['name'] = trim(implode(', ', array_filter([$place['name'] ?? '', $place['subdivision'] ?? '', $place['county'] ?? '', $place['state'] ?? '', $place['country'] ?? ''])));
     }
@@ -1841,7 +1950,7 @@ function dashboard_data(PDO $pdo): never
         'media_to_identify' => dashboard_media_to_identify($pdo),
         'signatures_to_compare' => dashboard_signatures_to_compare($pdo),
         'places_to_complete' => dashboard_places_to_complete($pdo),
-        'branches_less_documented' => dashboard_branches_less_documented($pdo),
+        'branches_less_documented' => calc_cached($pdo, 'dash_branches_less_documented', ['persons', 'surname_groups', 'events', 'families', 'source_links', 'media_links'], [], static fn() => dashboard_branches_less_documented($pdo)),
         'couples_without_marriage' => dashboard_couples_without_marriage($pdo),
         'children_missing_parents' => dashboard_children_missing_parents($pdo),
         'consistency_issues' => [], // ✅ le widget lit controle_summary (heritage-controle.js)
@@ -1854,17 +1963,17 @@ function dashboard_data(PDO $pdo): never
         'daily_research' => dashboard_daily_research($pdo),
         'reread_items' => dashboard_reread_items($pdo),
         'sosa_progress' => dashboard_sosa_progress($pdo, $sosaRootId),
-        'duplicates' => dashboard_duplicate_groups($pdo),
+        'duplicates' => calc_cached($pdo, 'dash_duplicates', ['persons', 'events', 'event_types'], [], static fn() => dashboard_duplicate_groups($pdo)),
         'labels_overview' => dashboard_labels_overview($pdo),
-        'map_overview' => dashboard_map_overview($pdo),
+        'map_overview' => calc_cached($pdo, 'dash_map_overview', ['events', 'places'], [], static fn() => dashboard_map_overview($pdo)),
         'branch_map' => dashboard_branch_map($pdo, $dashboardBranch),
         'random_person_map' => dashboard_random_person_map($pdo),
         'coverage' => [
             'total' => $stats['persons'],
-            'birth' => $coverageRow($coverageCount("SELECT count(DISTINCT p.id) FROM persons p JOIN events e ON e.person_id=p.id JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='BIRT'")),
-            'death' => $coverageRow($coverageCount("SELECT count(DISTINCT p.id) FROM persons p JOIN events e ON e.person_id=p.id JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='DEAT'")),
-            'media' => $coverageRow($coverageCount("SELECT count(DISTINCT p.id) FROM persons p WHERE EXISTS(SELECT 1 FROM media_links ml WHERE ml.entity_type='person' AND ml.entity_id=p.id) OR EXISTS(SELECT 1 FROM media_links ml WHERE ml.entity_type='event' AND ml.entity_id IN (SELECT id FROM events WHERE person_id=p.id UNION ALL SELECT fe.id FROM families ff JOIN events fe ON fe.family_id=ff.id WHERE ff.partner1_id=p.id OR ff.partner2_id=p.id))")),
-            'sources' => $coverageRow($coverageCount("SELECT count(DISTINCT p.id) FROM persons p WHERE EXISTS(SELECT 1 FROM source_links sl WHERE sl.entity_type='person' AND sl.entity_id=p.id) OR EXISTS(SELECT 1 FROM source_links sl WHERE sl.entity_type='event' AND sl.entity_id IN (SELECT id FROM events WHERE person_id=p.id UNION ALL SELECT fe.id FROM families ff JOIN events fe ON fe.family_id=ff.id WHERE ff.partner1_id=p.id OR ff.partner2_id=p.id))")),
+            'birth' => $coverageRow($coverage[0]),
+            'death' => $coverageRow($coverage[1]),
+            'media' => $coverageRow($coverage[2]),
+            'sources' => $coverageRow($coverage[3]),
         ],
         'top_places' => $topPlaces,
     ]);
@@ -2005,27 +2114,27 @@ function people_list(PDO $pdo): never
     $group = safe_int($_GET['group'] ?? 0);
     $offset = max(0, safe_int($_GET['offset'] ?? 0));
     $limit = min(250, max(20, safe_int($_GET['limit'] ?? 120)));
-    if ($phonetic && $search !== '') {
-        json_response(['people' => phonetic_people($pdo, $search, $group, $offset, $limit, (string) ($_GET['kind'] ?? '')), 'offset' => $offset, 'limit' => $limit, 'phonetic' => true]);
+    $kind = (string) ($_GET['kind'] ?? '');
+    if ($search !== '') {
+        // 🔎 recherche « à la française » (lib/recherche_fr.php) : nom de la fiche, autres noms, particules, prénoms latins et
+        // abrégés, phonétique en repli (ou toujours, interrupteur « Toujours phonétique »), dates tapées en français
+        $res = rfr_person_ids($pdo, $search, ['offset' => $offset, 'limit' => $limit, 'phonetic' => $phonetic, 'kind' => in_array($kind, ['animal', 'human'], true) ? $kind : '',
+            'where' => $group ? 'p.surname_group_id=:rgroup' : '', 'params' => $group ? [':rgroup' => $group] : []]);
+        $rows = [];
+        if ($res['ids']) {
+            $why = rfr_why_of($pdo, $res);
+            $byId = [];
+            foreach ($pdo->query(person_select() . ' WHERE p.id IN (' . implode(',', $res['ids']) . ')')->fetchAll() as $r) { $byId[(int) $r['id']] = $r; }
+            foreach ($res['ids'] as $id) { if (isset($byId[$id])) { $rows[] = $byId[$id] + ['why' => $why[$id] ?? [], 'tier' => $res['tiers'][$id] ?? 0]; } }
+        }
+        json_response(['people' => $rows, 'offset' => $offset, 'limit' => $limit, 'phonetic' => $res['phonetic'], 'fallback' => $res['fallback'], 'total' => $res['total']]);
     }
     $where = [];
     $params = [];
-    if ($search !== '') {
-        $tokens = preg_split('/\s+/u', $search, -1, PREG_SPLIT_NO_EMPTY) ?: [];
-        foreach (array_slice($tokens,0,6) as $index=>$token) {
-            $key=':q'.$index;
-            $foldKey=':f'.$index; // même mot sans accents ni tirets (« helene » trouve Hélène, « jean-baptiste » Jean Baptiste)
-            $looseKey=':l'.$index;
-            $where[] = "(p.first_name LIKE {$key} COLLATE NOCASE OR p.middle_name LIKE {$key} COLLATE NOCASE OR p.last_name LIKE {$key} COLLATE NOCASE OR trim(p.first_name||' '||p.middle_name||' '||p.last_name) LIKE {$key} COLLATE NOCASE OR trim(p.first_name||' '||p.last_name) LIKE {$key} COLLATE NOCASE OR g.name LIKE {$key} COLLATE NOCASE OR EXISTS(SELECT 1 FROM name_variants nv WHERE nv.person_id=p.id AND (nv.first_name LIKE {$key} COLLATE NOCASE OR nv.middle_name LIKE {$key} COLLATE NOCASE OR nv.last_name LIKE {$key} COLLATE NOCASE)) OR ({$foldKey}!='%%' AND (".fold_like_sql("(COALESCE(p.first_name,'')||' '||COALESCE(p.middle_name,'')||' '||COALESCE(p.last_name,'')||' '||COALESCE(g.name,''))",$key,$foldKey,$looseKey)." OR EXISTS(SELECT 1 FROM name_variants nv2 WHERE nv2.person_id=p.id AND ".fold_like_sql("(COALESCE(nv2.first_name,'')||' '||COALESCE(nv2.middle_name,'')||' '||COALESCE(nv2.last_name,''))",$key,$foldKey,$looseKey)."))))";
-            $params[$key] = '%' . $token . '%';
-            [, $params[$foldKey], $params[$looseKey]] = fold_like_params($token);
-        }
-    }
     if ($group) {
         $where[] = 'p.surname_group_id=:group';
         $params[':group'] = $group;
     }
-    $kind = (string) ($_GET['kind'] ?? '');
     if ($kind === 'animal') { $where[] = "p.kind='animal'"; } elseif ($kind === 'human') { $where[] = "p.kind<>'animal'"; }
     $sql = person_select() . ($where ? ' WHERE ' . implode(' AND ', $where) : '') . " ORDER BY CASE WHEN trim(COALESCE(p.last_name,''))='' THEN 1 WHEN p.last_name GLOB '[?X]*' OR lower(p.last_name)='inconnu' THEN 2 ELSE 0 END,".fold_sort_sql('p.last_name').",".fold_sort_sql('p.first_name').",p.id LIMIT :limit OFFSET :offset";
     $stmt = $pdo->prepare($sql);
@@ -2036,111 +2145,10 @@ function people_list(PDO $pdo): never
     json_response(['people' => $stmt->fetchAll(), 'offset' => $offset, 'limit' => $limit]);
 }
 
+/** Clé phonétique française d'un nom : le moteur commun (rfr_phon, lib/recherche_fr.php). Gardée pour les anciens appels. */
 function phonetic_key(string $value): string
 {
-    $value = mb_strtolower(ascii_fold($value));
-    $value = preg_replace('/[^a-z]/', '', $value) ?? '';
-    $value = str_replace('ph', 'f', $value);
-    $value = strtr($value, ['c'=>'k','q'=>'k','y'=>'i']);
-    $value = preg_replace('/(eau|au)/', 'o', $value) ?? $value;
-    $value = preg_replace('/(ai|ay|ei|ey)/', 'e', $value) ?? $value;
-    $value = preg_replace('/h/', '', $value) ?? $value;
-    $value = preg_replace('/(.)\1+/', '$1', $value) ?? $value;
-    return trim($value);
-}
-
-// Soundex adapté au français : regroupe les consonnes de sonorité proche (b/f/p/v, c/g/j/k/q/s/x/z, d/t, l, m/n, r)
-// après être passé par phonetic_key (qui a déjà neutralisé ph/eau/ai/h/lettres doublées…), afin de
-// rattraper les erreurs de transcription d'actes anciens (lettre mal lue, voyelle différente, etc.)
-// que la comparaison par distance de Levenshtein de phonetic_people() peut manquer.
-function soundex_fr(string $value): string
-{
-    $key = phonetic_key($value);
-    if ($key === '') return '';
-    static $codes = [
-        'b'=>'1','f'=>'1','p'=>'1','v'=>'1',
-        'k'=>'2','g'=>'2','j'=>'2','s'=>'2','x'=>'2','z'=>'2',
-        'd'=>'3','t'=>'3',
-        'l'=>'4',
-        'm'=>'5','n'=>'5',
-        'r'=>'6',
-    ];
-    $chars = str_split($key);
-    $first = $chars[0];
-    $result = strtoupper($first);
-    $prevCode = $codes[$first] ?? '';
-    $len = count($chars);
-    for ($i = 1; $i < $len && strlen($result) < 4; $i++) {
-        $ch = $chars[$i];
-        $code = $codes[$ch] ?? '';
-        if ($code !== '' && $code !== $prevCode) {
-            $result .= $code;
-        }
-        $prevCode = $code;
-    }
-    return str_pad(substr($result, 0, 4), 4, '0');
-}
-
-function phonetic_people(PDO $pdo, string $search, int $group, int $offset, int $limit, string $kind = ''): array
-{
-    $tokens = array_values(array_filter(array_map('phonetic_key', preg_split('/\s+/u', $search, -1, PREG_SPLIT_NO_EMPTY) ?: [])));
-    if (!$tokens) return [];
-    $tokenSoundex = array_map('soundex_fr', $tokens);
-    $kc = $kind === 'animal' ? "p.kind='animal'" : ($kind === 'human' ? "p.kind<>'animal'" : '');
-    // 1er passage léger (noms seulement, chaque nom calculé une fois) ; la fiche complète seulement pour la page montrée.
-    // Avant : toutes les fiches avec leurs dates (person_select) — plusieurs secondes sur une très grosse base.
-    $sql = "SELECT p.id, p.first_name, p.middle_name, p.last_name, g.name AS surname_group FROM persons p LEFT JOIN surname_groups g ON g.id=p.surname_group_id" . ($group || $kc ? ' WHERE ' . implode(' AND ', array_filter([$group ? 'p.surname_group_id=:group' : '', $kc])) : '') . " ORDER BY CASE WHEN trim(COALESCE(p.last_name,''))='' THEN 1 WHEN p.last_name GLOB '[?X]*' OR lower(p.last_name)='inconnu' THEN 2 ELSE 0 END,p.last_name COLLATE NOCASE,p.first_name COLLATE NOCASE";
-    $stmt = $pdo->prepare($sql);
-    if ($group) $stmt->bindValue(':group', $group, PDO::PARAM_INT);
-    $stmt->execute();
-    $matches = [];
-    $keyMemo = []; $sxMemo = [];
-    $pk = static function (string $v) use (&$keyMemo): string { return $keyMemo[$v] ??= phonetic_key($v); };
-    $sx = static function (string $v) use (&$sxMemo): string { return $sxMemo[$v] ??= soundex_fr($v); };
-    foreach ($stmt as $person) {
-        $haystack = [
-            $pk((string)($person['first_name'] ?? '')),
-            $pk((string)($person['middle_name'] ?? '')),
-            $pk((string)($person['last_name'] ?? '')),
-            $pk((string)($person['surname_group'] ?? '')),
-            $pk(trim(($person['first_name'] ?? '').' '.($person['middle_name'] ?? '').' '.($person['last_name'] ?? ''))),
-            $pk(trim(($person['first_name'] ?? '').' '.($person['last_name'] ?? ''))),
-        ];
-        // Codes Soundex français pré-calculés une fois par nom, en parallèle du haystack phonétique ci-dessus.
-        $haystackSoundex = array_map($sx, $haystack);
-        $ok = true;
-        foreach ($tokens as $tokenIndex => $token) {
-            $found = false;
-            $tokenCode = $tokenSoundex[$tokenIndex] ?? '';
-            foreach ($haystack as $hIndex => $value) {
-                $sameStart = mb_substr($value, 0, 2) === mb_substr($token, 0, 2);
-                $maxDistance = mb_strlen($token) <= 6 ? 1 : 2;
-                $valueLen = mb_strlen($value);
-                if ($value !== '' && (str_contains($value, $token) || ($valueLen >= 3 && str_contains($token, $value)) || ($sameStart && $valueLen >= 3 && levenshtein($value, $token) <= $maxDistance))) {
-                    $found = true;
-                    break;
-                }
-                // Rattrapage Soundex français : mêmes consonnes structurantes malgré des voyelles ou une
-                // orthographe très différentes (utile pour les transcriptions approximatives d'actes anciens).
-                if ($value !== '' && $tokenCode !== '' && $tokenCode === ($haystackSoundex[$hIndex] ?? '')) {
-                    $found = true;
-                    break;
-                }
-            }
-            if (!$found) {
-                $ok = false;
-                break;
-            }
-        }
-        if ($ok) $matches[] = (int) $person['id'];
-        if (count($matches) >= $offset + $limit) break;
-    }
-    $stmt->closeCursor();
-    $ids = array_slice($matches, $offset, $limit);
-    if (!$ids) return [];
-    $rows = [];
-    foreach ($pdo->query(person_select() . ' WHERE p.id IN (' . implode(',', $ids) . ')')->fetchAll() as $r) { $rows[(int) $r['id']] = $r; }
-    return array_values(array_filter(array_map(static fn(int $id) => $rows[$id] ?? null, $ids)));
+    return rfr_phon($value);
 }
 
 function sosa_parent_ids(PDO $pdo, int $childId): array
@@ -2740,6 +2748,7 @@ function tree_data(PDO $pdo, int $id): never
         // en option : les lieux de naissance et de décès (arbre décoratif)
         if(($_GET['places']??'')==='1'&&$people){$pm=implode(',',array_fill(0,count($people),'?'));$ps=$pdo->prepare("SELECT e.person_id,t.gedcom_tag,pl.name FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN places pl ON pl.id=e.place_id WHERE e.person_id IN ($pm) AND t.gedcom_tag IN ('BIRT','DEAT','CHR','BAPM','BURI') ORDER BY e.id");$ps->execute(array_keys($people));foreach($ps->fetchAll() as $r){$pid=(int)$r['person_id'];$k=in_array($r['gedcom_tag'],['BIRT','CHR','BAPM'],true)?'birth_place':'death_place';if(isset($people[$pid])&&empty($people[$pid][$k]))$people[$pid][$k]=(string)$r['name'];}}
     }
+    if(function_exists('succ_tree_mask'))succ_tree_mask($pdo,$people); // ⚖️ filtre des dossiers : les fiches hors dossier, sans nom (grisées ou cachées)
     $seen=[];$tree=tree_node_from_maps($id,$depth,$people,$relations,$seen);
     if($mode==='descendants')attach_tree_partners($tree,$partners,$people);
     json_response(['mode'=>$mode,'depth'=>$depth,'nodeCount'=>count($seen),'tree'=>$tree]);
@@ -3080,6 +3089,14 @@ function departmental_archives_count(string $like): int
 function list_data(PDO $pdo): never
 {
     $type = $_GET['type'] ?? 'persons';
+    // 🐘 Métiers : « Voir les N suivantes ↓ » d'un métier (les premières viennent avec la liste) : les personnes suivantes, dans le même ordre
+    if ($type === 'occupations' && isset($_GET['occ_name'])) {
+        $name = mb_substr(scalar_text($_GET['occ_name']), 0, 500);
+        $from = max(0, safe_int($_GET['offset'] ?? 0));
+        // l'ordre de tout le métier, gardé tant que fiches, événements et recensements ne changent pas : les clics suivants sont immédiats
+        $ids = calc_cached($pdo, 'occ_people_' . md5($name), ['persons', 'events', 'event_types', 'census_members'], [$name], static fn() => occupation_people_ids($pdo, [$name])[strtolower(trim($name))] ?? []);
+        json_response(['name' => $name, 'offset' => $from, 'total' => count($ids), 'people' => occupation_people_details($pdo, array_slice($ids, $from, occupation_list_step()))]);
+    }
     $q = safe_text($_GET['q'] ?? '');
     $like = '%' . $q . '%';
     $offset = max(0, safe_int($_GET['offset'] ?? 0));
@@ -3116,6 +3133,12 @@ function list_data(PDO $pdo): never
     $listKind = safe_text($_GET['kind'] ?? 'human');
     if ($listKind === 'animal') { $genderCond .= " AND p.kind='animal'"; }
     elseif ($listKind !== 'all') { $genderCond .= " AND COALESCE(p.kind,'human')<>'animal'"; }
+    // 🛡 « À revoir avant publication » : note de fiabilité sous le seuil (lib/plus_famille.php) ; liste « persons » seulement
+    if (($_GET['reliability'] ?? '') === 'review' && $type === 'persons') {
+        require_once __DIR__ . '/lib/plus_famille.php';
+        $relIds = array_keys(pfam_rel_review_ids($pdo));
+        $genderCond .= $relIds ? ' AND p.id IN (' . implode(',', array_map('intval', $relIds)) . ')' : ' AND 0';
+    }
     $labelId = safe_int($_GET['label_id'] ?? 0);
     if ($labelId) {
         $genderCond .= " AND EXISTS(SELECT 1 FROM label_links ll WHERE ll.entity_type='person' AND ll.entity_id=p.id AND ll.label_id=?)";
@@ -3139,7 +3162,9 @@ function list_data(PDO $pdo): never
     $mediaDateTo = safe_text($_GET['date_to'] ?? '');
     $courrierFilter = safe_text($_GET['courrier_filter'] ?? '');
     if (!in_array($courrierFilter, ['', 'fait_utilise', 'fait_non_utilise', 'fait_tous', 'tous'], true)) $courrierFilter = '';
-    $data = match ($type) {
+    // 🔎 Personnes, Événements, Lieux : recherche « à la française » (lib/recherche_fr.php), avec « Trouvé par » (why) sur chaque ligne
+    $rfrList = ($q !== '' && in_array($type === '' ? 'persons' : $type, ['persons', 'events', 'places'], true)) ? rfr_list_rows($pdo, $type === '' ? 'persons' : $type, $q, $fetchLimit, $offset, $genderCond, $genderParams) : null;
+    $data = $rfrList !== null ? $rfrList['rows'] : match ($type) {
         'events' => (function () use ($pdo, $like, $fetchLimit, $offset) { $s=$pdo->prepare("SELECT e.id,e.date_text,e.year,t.label AS type,COALESCE(p.id,f1.id,f2.id) AS person_id,CASE WHEN p.id IS NOT NULL THEN trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) ELSE trim(trim(COALESCE(f1.first_name,'')||' '||COALESCE(f1.last_name,''))||CASE WHEN f1.id IS NOT NULL AND f2.id IS NOT NULL THEN ' et ' ELSE '' END||trim(COALESCE(f2.first_name,'')||' '||COALESCE(f2.last_name,''))) END AS person,f1.id AS partner1_id,f2.id AS partner2_id,trim(pl.name || CASE WHEN COALESCE(pl.subdivision,'')<>'' THEN ', '||pl.subdivision ELSE '' END) AS place FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN families fa ON fa.id=e.family_id LEFT JOIN persons f1 ON f1.id=fa.partner1_id LEFT JOIN persons f2 ON f2.id=fa.partner2_id LEFT JOIN places pl ON pl.id=e.place_id WHERE " . list_event_search_sql() . " ORDER BY COALESCE(e.year,9999),e.sort_date,e.id LIMIT {$fetchLimit} OFFSET {$offset}"); $s->execute(list_event_search_params($like)); return $s->fetchAll(); })(),
         'places' => (function () use ($pdo, $like, $fetchLimit, $offset) { $s=$pdo->prepare("SELECT pl.*,(SELECT count(*) FROM events e WHERE e.place_id=pl.id) AS event_count FROM places pl WHERE " . list_place_where_sql($pdo) . " ORDER BY event_count DESC," . fold_sort_sql('pl.name') . "," . fold_sort_sql("COALESCE(pl.subdivision,'')") . ",pl.id LIMIT {$fetchLimit} OFFSET {$offset}"); $s->execute(list_place_search_params($like)); return $s->fetchAll(); })(),
         'media' => media_list_rows($pdo, $like, $fetchLimit, $offset, safe_text($_GET['scope'] ?? ''), safe_int($_GET['person_id'] ?? 0), $mediaCity, $mediaDateFrom, $mediaDateTo),
@@ -3161,10 +3186,15 @@ function list_data(PDO $pdo): never
     $hasMore = count($data) > $limit;
     if ($hasMore) $data = array_slice($data, 0, $limit);
     if ($type === 'labels') $data = labels_attach_linked($pdo, $data);
+    if ($type === 'persons' && $data) { // 🛡 la note de fiabilité (colonne « 🛡 Fiabilité » de ⚙️ Colonnes)
+        require_once __DIR__ . '/lib/plus_famille.php';
+        try { $relRun = pfam_rel_run($pdo); foreach ($data as &$relRow) { $relRow['reliability'] = $relRun['scores'][(int) $relRow['id']][0] ?? null; } unset($relRow); } catch (Throwable $_) {}
+    }
     if ($type === 'occupations') $data = occupation_attach_people($pdo, $data, 'occupation');
     if ($type === 'employers') { $mentions = employer_block_mentions($pdo); foreach ($data as &$er) { $er['people'] = employer_people($pdo, (string) $er['id'], $mentions); $er['person_count'] = count($er['people']); } unset($er); }
-    $remainingCount = $hasMore ? max(1, count_list_remaining($pdo,$type,$like,$offset + count($data),$genderCond,$genderParams,safe_text($_GET['scope'] ?? ''),safe_int($_GET['person_id'] ?? 0),$reminderMode,$mediaCity,$mediaDateFrom,$mediaDateTo,$sosaRootId,$sosaSort,$sosaMissing,$sosaImpossible,$reminderCategory,$dabovilleSort,$courrierFilter)) : 0;
+    $remainingCount = $hasMore && $rfrList !== null ? max(1, $rfrList['total'] - $offset - count($data)) : ($hasMore ? max(1, count_list_remaining($pdo,$type,$like,$offset + count($data),$genderCond,$genderParams,safe_text($_GET['scope'] ?? ''),safe_int($_GET['person_id'] ?? 0),$reminderMode,$mediaCity,$mediaDateFrom,$mediaDateTo,$sosaRootId,$sosaSort,$sosaMissing,$sosaImpossible,$reminderCategory,$dabovilleSort,$courrierFilter)) : 0);
     $extra = $type === 'reminders' ? ['reminder_summary' => reminder_summary($pdo, $like, $reminderMode, $reminderCategory), 'reminder_categories' => standalone_reminder_categories()] : ($type === 'research_budget' ? ['research_budget_summary' => research_budget_summary($pdo, $like)] : ($type === 'courriers' ? ['courrier_summary' => courrier_summary($pdo, $like), 'courrier_organismes' => courrier_organismes(), 'courrier_statuts' => courrier_statuts()] : []));
+    if ($rfrList !== null && $rfrList['fallback']) { $extra['fallback'] = $rfrList['fallback']; }
     json_response(array_merge(['type' => $type, 'rows' => $data, 'offset'=>$offset, 'limit'=>$limit, 'hasMore'=>$hasMore, 'remainingCount'=>$remainingCount, 'gender'=>implode(',', $genders), 'kind'=>$listKind, 'reminder_mode'=>$reminderMode, 'reminder_category'=>$reminderCategory, 'city'=>$mediaCity, 'date_from'=>$mediaDateFrom, 'date_to'=>$mediaDateTo, 'sosa_root_id'=>$sosaRootId, 'sosa_sort'=>$sosaSort, 'sosa_missing'=>$sosaMissing ? 1 : 0, 'sosa_impossible'=>$sosaImpossible ? 1 : 0, 'daboville_sort'=>$dabovilleSort, 'courrier_filter'=>$courrierFilter], $extra));
 }
 
@@ -3777,37 +3807,88 @@ function employer_list_rows(PDO $pdo,string $like,int $limit=500,int $offset=0):
     return $stmt->fetchAll();
 }
 
+/** 🐘 Métiers : combien de personnes chaque métier montre d'abord (assets/js/app-listes.js : OCC_STEP) ; les suivantes à la demande */
+function occupation_list_step(): int { return 24; }
+
+/** Les personnes de chaque métier (clé : LOWER(TRIM(nom))), dédupliquées, dans l'ordre de la liste (nom, prénom) : les identifiants seuls */
+function occupation_people_ids(PDO $pdo, array $names): array
+{
+    if (!$names) { return []; }
+    $marks = implode(',', array_fill(0, count($names), '?'));
+    // la même requête que la liste complète d'avant, sans les dates (même parcours, donc même ordre, homonymes compris)
+    $stmt = $pdo->prepare("
+        SELECT LOWER(TRIM(val)) AS group_key, p.id
+        FROM (
+            SELECT p2.id AS pid, p2.occupation AS val FROM persons p2
+            WHERE p2.occupation IS NOT NULL AND TRIM(p2.occupation)!='' AND TRIM(p2.occupation) IN ($marks)
+            UNION
+            SELECT e.person_id AS pid, COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),''),t.label) AS val
+            FROM events e JOIN event_types t ON t.id=e.event_type_id
+            WHERE e.person_id IS NOT NULL
+              AND (t.gedcom_tag='OCCU' OR LOWER(t.label) LIKE '%profes%' OR LOWER(t.label) LIKE '%m%tier%' OR LOWER(t.label) LIKE '%activit%')
+              AND COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),''),NULLIF(t.label,'')) IN ($marks)
+            UNION
+            SELECT cm.person_id AS pid, cm.occupation AS val
+            FROM census_members cm
+            WHERE cm.person_id IS NOT NULL AND cm.occupation IS NOT NULL AND TRIM(cm.occupation)!='' AND TRIM(cm.occupation) IN ($marks)
+        ) src
+        JOIN persons p ON p.id=src.pid
+        ORDER BY p.last_name COLLATE NOCASE, p.first_name COLLATE NOCASE");
+    $stmt->execute(array_merge($names, $names, $names));
+    $out = [];
+    foreach ($stmt->fetchAll(PDO::FETCH_NUM) as [$key, $id]) { $out[$key][(int) $id] = true; }
+    return array_map('array_keys', $out);
+}
+
+/** Ces personnes (dans cet ordre) comme la liste les montre : nom, sexe, naissance, décès, étiquettes */
+function occupation_people_details(PDO $pdo, array $ids): array
+{
+    if (!$ids) { return []; }
+    $rows = [];
+    foreach (array_chunk($ids, 5000) as $chunk) {
+        $s = $pdo->prepare("SELECT p.id, p.first_name, p.last_name, p.gender, p.living_status,
+            (SELECT e.date_text FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BIRT' ORDER BY e.id LIMIT 1) AS birth_date,
+            (SELECT e.year    FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BIRT' ORDER BY e.id LIMIT 1) AS birth_year,
+            (SELECT e.date_text FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='DEAT' ORDER BY e.id LIMIT 1) AS death_date,
+            (SELECT e.year    FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='DEAT' ORDER BY e.id LIMIT 1) AS death_year
+            FROM persons p WHERE p.id IN (" . implode(',', array_fill(0, count($chunk), '?')) . ')');
+        $s->execute($chunk);
+        foreach ($s->fetchAll() as $r) { $rows[(int) $r['id']] = $r; }
+    }
+    $labels = [];
+    foreach (array_chunk(array_keys($rows), 5000) as $chunk) {
+        $l = $pdo->prepare("SELECT ll.entity_id AS person_id,l.id,l.name,l.color FROM label_links ll JOIN labels l ON l.id=ll.label_id
+            WHERE ll.entity_type='person' AND ll.entity_id IN (" . implode(',', array_fill(0, count($chunk), '?')) . ') ORDER BY l.name COLLATE NOCASE');
+        $l->execute($chunk);
+        foreach ($l->fetchAll() as $lr) { $labels[(int) $lr['person_id']][] = ['id' => (int) $lr['id'], 'name' => $lr['name'], 'color' => $lr['color']]; }
+    }
+    $out = [];
+    foreach ($ids as $id) { if (isset($rows[$id])) { $out[] = $rows[$id] + ['labels' => $labels[$id] ?? []]; } }
+    return $out;
+}
+
 function occupation_attach_people(PDO $pdo,array $rows,string $field): array
 {
     if(!$rows) return $rows;
     $names=array_map(fn($r)=>$r['name'],$rows);
     $marks=implode(',',array_fill(0,count($names),'?'));
     if($field==='occupation'){
-        // Chercher les personnes via les 3 sources, dédupliquées par person_id
-        $stmt=$pdo->prepare("
-            SELECT LOWER(TRIM(val)) AS group_key, p.id, p.first_name, p.last_name, p.gender, p.living_status,
-                (SELECT e.date_text FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BIRT' ORDER BY e.id LIMIT 1) AS birth_date,
-                (SELECT e.year    FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BIRT' ORDER BY e.id LIMIT 1) AS birth_year,
-                (SELECT e.date_text FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='DEAT' ORDER BY e.id LIMIT 1) AS death_date,
-                (SELECT e.year    FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='DEAT' ORDER BY e.id LIMIT 1) AS death_year
-            FROM (
-                SELECT p2.id AS pid, p2.occupation AS val FROM persons p2
-                WHERE p2.occupation IS NOT NULL AND TRIM(p2.occupation)!='' AND TRIM(p2.occupation) IN ($marks)
-                UNION
-                SELECT e.person_id AS pid, COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),''),t.label) AS val
-                FROM events e JOIN event_types t ON t.id=e.event_type_id
-                WHERE e.person_id IS NOT NULL
-                  AND (t.gedcom_tag='OCCU' OR LOWER(t.label) LIKE '%profes%' OR LOWER(t.label) LIKE '%m%tier%' OR LOWER(t.label) LIKE '%activit%')
-                  AND COALESCE(NULLIF(TRIM(e.title),''),NULLIF(TRIM(e.description),''),NULLIF(t.label,'')) IN ($marks)
-                UNION
-                SELECT cm.person_id AS pid, cm.occupation AS val
-                FROM census_members cm
-                WHERE cm.person_id IS NOT NULL AND cm.occupation IS NOT NULL AND TRIM(cm.occupation)!='' AND TRIM(cm.occupation) IN ($marks)
-            ) src
-            JOIN persons p ON p.id=src.pid
-            ORDER BY p.last_name COLLATE NOCASE, p.first_name COLLATE NOCASE");
-        $stmt->execute(array_merge($names,$names,$names));
-    } else {
+        // 🐘 chaque métier n'emporte plus toutes ses personnes (200 000 fiches : 30 Mo) : les occupation_list_step() premières et leur nombre
+        // (people_total) ; les suivantes viennent à la demande (list_data, occ_name). Mêmes personnes, même ordre, mêmes valeurs.
+        $ids = occupation_people_ids($pdo, $names);
+        $first = [];
+        foreach ($rows as $row) { $first[strtolower(trim($row['name']))] = array_slice($ids[strtolower(trim($row['name']))] ?? [], 0, occupation_list_step()); }
+        $details = []; foreach (occupation_people_details($pdo, array_values(array_unique(array_merge(...array_values($first ?: [[]]))))) as $d) { $details[(int) $d['id']] = $d; }
+        foreach ($rows as &$row) {
+            $key = strtolower(trim($row['name']));
+            $row['people'] = array_values(array_filter(array_map(static fn($id) => $details[$id] ?? null, $first[$key] ?? [])));
+            $row['people_total'] = count($ids[$key] ?? []);
+        }
+        unset($row);
+        return $rows;
+    }
+    // employeurs (recensements) : toutes leurs personnes
+    {
         $stmt=$pdo->prepare("SELECT LOWER(TRIM(cm.employer)) AS group_key,
             COALESCE(p.id,0) AS id,
             COALESCE(p.first_name,cm.display_name) AS first_name,
@@ -3836,14 +3917,18 @@ function occupation_attach_people(PDO $pdo,array $rows,string $field): array
     $labelsByPerson=[];
     if($allPersonIds){
         $allPersonIds=array_values(array_unique($allPersonIds));
-        $lmarks=implode(',',array_fill(0,count($allPersonIds),'?'));
-        $lstmt=$pdo->prepare("SELECT ll.entity_id AS person_id,l.id,l.name,l.color
-            FROM label_links ll JOIN labels l ON l.id=ll.label_id
-            WHERE ll.entity_type='person' AND ll.entity_id IN ($lmarks)
-            ORDER BY l.name COLLATE NOCASE");
-        $lstmt->execute($allPersonIds);
-        foreach($lstmt->fetchAll() as $lr){
-            $labelsByPerson[(int)$lr['person_id']][]=['id'=>(int)$lr['id'],'name'=>$lr['name'],'color'=>$lr['color']];
+        // 🐘 par paquets : un métier porté par des dizaines de milliers de fiches dépassait la limite de SQLite (32 766 « ? ») ;
+        // chaque fiche est dans un seul paquet, ses étiquettes restent dans l'ordre de leur nom
+        foreach(array_chunk($allPersonIds,5000) as $idChunk){
+            $lmarks=implode(',',array_fill(0,count($idChunk),'?'));
+            $lstmt=$pdo->prepare("SELECT ll.entity_id AS person_id,l.id,l.name,l.color
+                FROM label_links ll JOIN labels l ON l.id=ll.label_id
+                WHERE ll.entity_type='person' AND ll.entity_id IN ($lmarks)
+                ORDER BY l.name COLLATE NOCASE");
+            $lstmt->execute($idChunk);
+            foreach($lstmt->fetchAll() as $lr){
+                $labelsByPerson[(int)$lr['person_id']][]=['id'=>(int)$lr['id'],'name'=>$lr['name'],'color'=>$lr['color']];
+            }
         }
     }
     foreach($rows as &$row){
@@ -5030,7 +5115,8 @@ function transcription_search_data(PDO $pdo): never
     $q = safe_text($_GET['q'] ?? '');
     if ($q === '') json_response(['query' => '', 'media' => []]);
     $like = '%' . $q . '%';
-    $stmt = $pdo->prepare("SELECT m.id,m.title,m.description,m.media_type,m.filename,m.thumbnail,m.transcription,m.date_text,m.date_calendar,m.document_reference,m.document_title,m.document_url,m.document_pages,m.postcard_group,m.postcard_side,m.is_person_photo,m.media_subject_type,m.correspondence_type,m.correspondent_name,m.correspondent_json,m.correspondence_reply_to_media_id,m.created_at,
+    act_transcriptions_ensure($pdo); // 📄 un seul texte par document : le texte de l'Atelier est dans m.transcription ; ici aussi son titre, son lieu, sa cote, ses personnes
+    $stmt = $pdo->prepare("SELECT m.id,m.title,m.description,m.media_type,m.filename,m.thumbnail,m.transcription,(SELECT count(*) FROM act_transcriptions ta WHERE ta.media_id=m.id) AS act_count,m.date_text,m.date_calendar,m.document_reference,m.document_title,m.document_url,m.document_pages,m.postcard_group,m.postcard_side,m.is_person_photo,m.media_subject_type,m.correspondence_type,m.correspondent_name,m.correspondent_json,m.correspondence_reply_to_media_id,m.created_at,
         count(ml.id) AS link_count,
         group_concat(DISTINCT CASE
             WHEN ml.entity_type='person' THEN 'Fiche individuelle'
@@ -5046,11 +5132,11 @@ function transcription_search_data(PDO $pdo): never
         LEFT JOIN events ev ON ml.entity_type='event' AND ev.id=ml.entity_id
         LEFT JOIN event_types et ON et.id=ev.event_type_id
         LEFT JOIN census_records cr ON ml.entity_type='census' AND cr.id=ml.entity_id
-        WHERE m.transcription LIKE ? COLLATE NOCASE" . (function_exists('audio_studio_ready') && audio_studio_ready($pdo) ? " OR m.id IN (SELECT media_id FROM audio_transcripts WHERE text LIKE ? COLLATE NOCASE)" : '') . " -- 🎚️ aussi la transcription des sons (Studio son)
+        WHERE (m.transcription LIKE ? COLLATE NOCASE OR m.id IN (SELECT media_id FROM act_transcriptions WHERE (title || ' ' || place || ' ' || source || ' ' || date_text || ' ' || COALESCE(json_extract(data_json, '$.people'), '')) LIKE ? COLLATE NOCASE))" . (function_exists('audio_studio_ready') && audio_studio_ready($pdo) ? " OR m.id IN (SELECT media_id FROM audio_transcripts WHERE text LIKE ? COLLATE NOCASE)" : '') . " -- 🎚️ aussi la transcription des sons (Studio son)
         GROUP BY m.id
         ORDER BY COALESCE(m.date_text,''), m.id DESC
         LIMIT 500");
-    $stmt->execute(function_exists('audio_studio_ready') && audio_studio_ready($pdo) ? [$like, $like] : [$like]);
+    $stmt->execute(function_exists('audio_studio_ready') && audio_studio_ready($pdo) ? [$like, $like, $like] : [$like, $like]);
     $rows = $stmt->fetchAll();
     if (!$rows) json_response(['query' => $q, 'media' => []]);
 
@@ -6052,8 +6138,9 @@ function genealogies_list_data(): array
 {
     $reg = genealogies_registry();
     $size = static fn(string $dir) => is_file($dir . '/genealogy.sqlite') ? (int) filesize($dir . '/genealogy.sqlite') : 0;
-    $list = [['id' => '', 'name' => $reg['main_name'], 'main' => true, 'active' => GENEALOGY_ID === '', 'size' => $size(SHARED_DATA_DIR)]];
-    foreach ($reg['list'] as $g) { $list[] = ['id' => $g['id'], 'name' => $g['name'], 'main' => false, 'active' => GENEALOGY_ID === $g['id'], 'size' => $size(genealogy_dir($g['id'])), 'created_at' => $g['created_at']]
+    // 🔐 locked : la généalogie a un mot de passe (lib/verrou.php ; seul son fichier verrou ou sa ligne app_lock est regardé)
+    $list = [['id' => '', 'name' => $reg['main_name'], 'main' => true, 'active' => GENEALOGY_ID === '', 'size' => $size(SHARED_DATA_DIR), 'locked' => glock_genealogy_locked('')]];
+    foreach ($reg['list'] as $g) { $list[] = ['id' => $g['id'], 'name' => $g['name'], 'main' => false, 'active' => GENEALOGY_ID === $g['id'], 'size' => $size(genealogy_dir($g['id'])), 'created_at' => $g['created_at'], 'locked' => glock_genealogy_locked($g['id'])]
         // 🧪 base d'exemple : d'où l'on vient, et si cette généalogie-là a déjà des données (« Revenir à ma généalogie ») ou est encore vide (« Repartir d'une base vide »)
         + (!empty($g['example']) ? ['example' => true, 'from' => $g['from'] ?? '', 'from_ready' => premier_db_ready(premier_genealogy_db_path((string) ($g['from'] ?? '')))] : []); }
     return ['active' => GENEALOGY_ID, 'genealogies' => $list];
@@ -6090,6 +6177,8 @@ function genealogy_action(string $action, array $data): array
         return ['ok' => true, 'id' => $new, 'active' => $reg['active']];
     }
     if (!$known || ($id !== '' && !genealogy_id_ok($id))) { throw new RuntimeException('Généalogie introuvable.'); }
+    // 🔐 renommer ou mettre de côté une AUTRE généalogie protégée par un mot de passe : refusé (ouvre-la d'abord)
+    if (in_array($action, ['genealogy_rename', 'genealogy_remove'], true) && $id !== GENEALOGY_ID && glock_genealogy_locked($id)) { throw new LcndaBadInput('Cette généalogie est verrouillée par un mot de passe : ouvre-la d’abord.'); }
     if ($action === 'genealogy_switch') {
         $reg['active'] = $id; genealogies_registry_save($reg);
         return ['ok' => true, 'active' => $id];
@@ -7070,6 +7159,7 @@ function backup_files(string $dir): array
 function backup_sqlite_status(PDO $pdo, string $dir, int $maxFiles = 10): never
 {
     $path = normalize_backup_dir($dir);
+    glock_refuse_dir($path, true); // 🔐 ne liste jamais les copies d'une autre généalogie
     $exists = is_dir($path);
     $writable = $exists && is_writable($path);
     $files = $exists ? backup_files($path) : [];
@@ -7089,6 +7179,7 @@ function backup_sqlite_status(PDO $pdo, string $dir, int $maxFiles = 10): never
 function backup_sqlite(PDO $pdo, array $data): never
 {
     $dir = normalize_backup_dir(safe_text($data['dir'] ?? ''));
+    glock_refuse_dir($dir, true); // 🔐 jamais le dossier interne d'une autre généalogie (lib/verrou.php)
     $maxFiles = max(2, min(50, safe_int($data['max_files'] ?? 10, 10)));
     $mode = safe_text($data['mode'] ?? 'manual');
     if (!in_array($mode, ['manual', 'auto'], true)) {
@@ -7506,11 +7597,13 @@ function import_package(PDO $pdo, ?array $file): never
     $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
     $existingPersons = (int) $pdo->query('SELECT count(*) FROM persons')->fetchColumn();
     @set_time_limit(0); // un gros paquet (photos) peut dépasser les 300 s par défaut
-    memory_at_least(4096); // un GEDCOM de 100 000 personnes est lu en entier : ≈ 2 Go (au-delà du réglage habituel de 1 Go)
+    // un GEDCOM est lu en entier : 🐘 environ 16 fois sa taille en mémoire (200 000 fiches, 128 Mo : 2 Go) ; au moins 4 Go, 8 Go au plus
+    memory_at_least((int) min(8192, max(4096, ceil((float) @filesize((string) $file['tmp_name']) / 1048576 * 20))));
 
     $receipt = import_receipt_begin($pdo); // ce que l'import ajoute : pour « ↶ Annuler » (lib/imports.php)
     $pdo->beginTransaction();
     try {
+        calc_gen_suspend($pdo); // 🐘 pas de déclencheur par ligne pendant l'import (lib/calc_cache.php) ; remis avant la fin
         if ($ext === 'gramps' || $ext === 'gpkg') {
             // Gramps : XML (gzippé) ou paquet tar.gz avec ses médias ; traduit en GEDCOM puis importé comme lui (lib/imports.php)
             $stats = gramps_import_into_db($pdo, $file['tmp_name'], $ext === 'gpkg');
@@ -7526,12 +7619,16 @@ function import_package(PDO $pdo, ?array $file): never
         } else {
             throw new RuntimeException("Format non supporté pour l'import direct : .{$ext}");
         }
+        calc_gen_resume($pdo);
         $pdo->commit();
     } catch (Throwable $e) {
         if ($pdo->inTransaction()) { $pdo->rollBack(); }
         throw $e;
     }
     $pdo->exec('ANALYZE');
+    // 🐘 les clés des noms de la recherche « à la française » (lib/recherche_fr.php) calculées pendant l'import, et non à la
+    // première recherche qui suit (200 000 fiches importées : 10 s d'attente dans la liste des personnes)
+    if (function_exists('rfr_refresh')) { try { rfr_refresh($pdo, true); } catch (Throwable) {} }
     $undo = '';
     try { $undo = import_receipt_save($pdo, 'tree', $receipt, ['label' => (string) $file['name']]); } catch (Throwable) {}
     if (!empty($file['pending'])) { @unlink($file['tmp_name']); @unlink($file['tmp_name'] . '.json'); }
@@ -7548,21 +7645,42 @@ function import_package(PDO $pdo, ?array $file): never
 
 // ── Parseur GEDCOM générique (arbre level/tag/value) ──
 
+/**
+ * 🐘 Un nœud du GEDCOM lu : un stdClass (les fonctions qui le lisent l'attendent), mais avec ses cinq propriétés déclarées,
+ * rangées dans l'objet même au lieu d'une table de propriétés : trois fois moins de mémoire par ligne (un GEDCOM de
+ * 500 000 fiches, 9 millions de lignes, dépassait 4 Go). Mêmes propriétés, même ordre, mêmes valeurs ; d'autres peuvent
+ * toujours être ajoutées comme sur un stdClass.
+ */
+class GedNode extends stdClass
+{
+    public $level;
+    public $xref;
+    public $tag;
+    public $value;
+    public $children;
+}
+
 function gedimport_parse(string $text): array
 {
-    $lines = preg_split('/\r\n|\r|\n/', $text) ?: [];
     $root = [];
     $stack = [];
-    foreach ($lines as $raw) {
-        $raw = rtrim($raw, "\r\n"); // jamais les espaces de fin : une ligne CONC coupée juste avant une espace la garderait collée
+    $tags = []; $vals = []; // une seule copie de chaque balise (NAME, DATE, PLAC…) et de chaque valeur courte
+    // les lignes une à une (plus de tableau de toutes les lignes) : strtok rend les suites de caractères entre deux fins de
+    // ligne (\r, \n), c'est-à-dire exactement les lignes non vides du découpage d'avant (les lignes vides étaient sautées)
+    for ($raw = strtok($text, "\r\n"); $raw !== false; $raw = strtok("\r\n")) {
+        // jamais les espaces de fin : une ligne CONC coupée juste avant une espace la garderait collée
         if (trim($raw) === '') { continue; }
         if (!preg_match('/^(\d+)\s(@[^@]+@\s)?([A-Za-z0-9_]+)\s?(.*)$/', $raw, $m)) { continue; }
         $level = (int) $m[1];
-        $node = new stdClass();
+        $node = new GedNode();
         $node->level = $level;
         $node->xref = $m[2] !== '' ? trim($m[2], "@ ") : null;
-        $node->tag = strtoupper($m[3]);
-        $node->value = $m[4];
+        $tg = strtoupper($m[3]);
+        $node->tag = $tags[$tg] ??= $tg;
+        // une valeur courte qui revient (lieu, date, prénom, « Y ») : une seule copie en mémoire ; « s » devant la clé, pour qu'un
+        // texte comme « 1850 » reste une clé de texte
+        $v = $m[4];
+        if (strlen($v) <= 48) { $node->value = $vals['s' . $v] ??= $v; if (count($vals) > 2000000) { $vals = []; } } else { $node->value = $v; }
         $node->children = [];
         if ($level === 0) {
             $root[] = $node;
@@ -8848,7 +8966,12 @@ function duplicate_candidates(PDO $pdo): never
         foreach($st['alerts'] as $a){
             if(($a['check']??'')!=='duplicate'||count($a['people']??[])<2)continue;
             [$x,$y]=$a['people'];$px=$st['people'][$x]??null;$py=$st['people'][$y]??null;if(!$px||!$py)continue;
-            if($needle!==''&&!str_contains($fold($px['first_name'].' '.$px['last_name'].' '.$py['first_name'].' '.$py['last_name']),$needle))continue;
+            // 🔎 « Chercher » des Doublons : la recherche « à la française » sur l'une ou l'autre fiche (lib/recherche_fr.php)
+            if($needle!==''&&!str_contains($fold($px['first_name'].' '.$px['last_name'].' '.$py['first_name'].' '.$py['last_name']),$needle)){
+                $rp??=rfr_parse_query($q,rfr_settings($pdo));$rs??=rfr_settings($pdo);
+                $hit=false;foreach([$px,$py] as $pp){if(rfr_explain($rp,[['src'=>0,'first'=>$pp['first_name'],'last'=>$pp['last_name']]],$rs,true)['ok']){$hit=true;break;}}
+                if(!$hit)continue;
+            }
             $out[]=['id1'=>$x,'id2'=>$y,'first1'=>$px['first_name'],'last1'=>$px['last_name'],'first2'=>$py['first_name'],'last2'=>$py['last_name'],'birth1'=>$px['birth_year'],'birth2'=>$py['birth_year'],'death1'=>$px['death_year'],'death2'=>$py['death_year'],'score'=>(int)($a['score']??0),'score_max'=>100];
         }
         usort($out,static fn($m,$n)=>[$n['score'],mb_strtolower((string)$m['last1']),mb_strtolower((string)$m['first1'])]<=>[$m['score'],mb_strtolower((string)$n['last1']),mb_strtolower((string)$n['first1'])]);
@@ -9827,6 +9950,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_battue_commune_status' => save_battue_commune_status($pdo,$data),
             'dismiss_issue' => dismiss_issue($pdo,$data),
             'semaine_mark' => semaine_mark($pdo,$data), // 🗓 Ma semaine : ✓ fait, ⏭ reporter, ↶ Annuler (lib/semaine.php)
+            'compl_write' => compl_write($pdo,$data), // 🧩 🏛 études de notaire, ⚠️ homonymes, 📋 doutes, 📱 visite aux archives (lib/complements.php)
             'ou_chercher_piste' => ouc_make_lead($pdo,$data), // 🌍 Où chercher ? : « ＋ En faire une piste » (lib/ou_chercher.php)
             'mur_save' => ouc_wall_save($pdo,$data), // 🧩 Murs de brique : 🧱 Je bloque ici, statut, note
             'mur_restore' => ouc_wall_restore($pdo,$data), // 🧩 Murs de brique : ↶ Annuler
@@ -9997,7 +10121,18 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'rename_slideshow' => rename_slideshow($pdo,$data),
             'delete_act_transcription' => delete_act_transcription($pdo,$data),
             'rename_act_transcription' => rename_act_transcription($pdo,$data),
+            'save_act_transcription_version' => save_act_transcription_version($pdo,$data), // 🕘 Versions du texte d'un acte
+            'delete_act_transcription_version' => delete_act_transcription_version($pdo,$data),
+            'restore_act_transcription_version' => restore_act_transcription_version($pdo,$data),
+            'rename_act_transcription_version' => rename_act_transcription_version($pdo,$data),
+            'media_pages_save' => media_pages_save($pdo,$data), // 📑 relier, nommer, ranger, retirer des pages d'un document (et ↶ Annuler)
+            'act_link_person' => act_link_person($pdo,$data), // 👤 « Relier » un nom relevé dans l'Atelier (fiche → 📜 Actes et transcriptions)
             'act_match_people' => act_transcription_match_people($pdo, is_array($data['names'] ?? null) ? $data['names'] : []),
+            'act_import_check' => act_import_check($pdo,$data), // 📜 Ce que l'app a trouvé : fiches ressemblantes (lib/transcription_actes.php)
+            'act_import_apply' => act_import_apply($pdo,$data), // 📜 ✓ Ajouter à la généalogie, d'un coup
+            'act_import_undo' => act_import_undo($pdo,$data), // 📜 ↶ Annuler cet ajout
+            'act_trouve_match' => act_trouve_match($pdo,$data), // 🧭 Ce que l'app a trouvé : fiches, lieux et « Monde autour » qui ressemblent (rien n'est écrit)
+            'act_item_add' => act_item_add($pdo,$data), // 🧭 ＋ Ajouter à une fiche : un élément de l'acte, avec sa source (↶ Annuler : act_import_undo)
             'delete_vector_doc' => delete_vector_doc($pdo,$data),
             'delete_diagram' => delete_diagram($pdo,$data),
             'link_diagram' => link_diagram($pdo,$data),
@@ -10086,6 +10221,9 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'apply_variants' => apply_variants($pdo,$data),
             'undo_harmonize' => undo_harmonize($pdo,$data),
             'fix_place' => fix_place($pdo,$data),
+            'lieux_place' => lap_place($pdo,$data), // 📍 Lieux à placer : un lieu ou un lot (lib/lieux_a_placer.php)
+            'lieux_undo' => lap_undo($pdo,$data), // 📍 ↶ Annuler : les anciennes valeurs
+            'lieux_online' => lap_online($pdo,$data), // 📍 🌐 seulement sur demande, lieu par lieu : le nom du lieu seul
             'save_resistance' => save_resistance($pdo,$data),
             'clear_resistance' => clear_resistance($pdo,$data),
             'save_voter_cards' => save_voter_cards($pdo,$data),
@@ -11265,6 +11403,7 @@ function merge_people(PDO $pdo,array $data): array
     }
     $pdo->prepare("INSERT INTO name_variants(person_id,type,first_name,middle_name,last_name,source_note,position) VALUES(?,'merged',?,?,?,'Nom conservé avant fusion de la fiche #{$source}',(SELECT COALESCE(max(position),0)+1 FROM name_variants WHERE person_id=?))")->execute([$target,$b['first_name']??'',$b['middle_name']??'',$b['last_name']??'',$target]);
     merge_person_references($pdo,$target,$source);
+    if(function_exists('succ_after_merge'))succ_after_merge($pdo,$target,$source); // ⚖️ les dossiers de succession des deux fiches (rattachements, journal des deux)
     if(function_exists('periodical_links_person'))periodical_links_person($pdo,$source,$target);
     if(function_exists('diagram_links_person'))diagram_links_person($pdo,$source,$target);
     if(function_exists('dna_links_person'))dna_links_person($pdo,$source,$target);
@@ -11821,11 +11960,13 @@ function save_courrier(PDO $pdo,array $data): array
         if (!$old) throw new RuntimeException('Courrier introuvable.');
         $pdo->prepare('UPDATE courriers SET organisme=?,destinataire=?,objet=?,date_envoi=?,statut=?,relance_delai_jours=?,relance_date=?,fait=?,fait_type=?,notes=?,copy_order_json=?,updated_at=CURRENT_TIMESTAMP WHERE id=?')
             ->execute([$organisme,$destinataire,$objet,$dateEnvoi,$statut,$delai,$relanceDate,$fait,$faitType,$notes,$copyOrderJson,$id]);
+        if (function_exists('compl_courrier_store')) compl_courrier_store($pdo, $id, $statut === 'reponse_recue' ? $data : ['recu_le' => ''] + array_intersect_key($data, ['archive_service_id' => 1]), (string) ($old['statut'] ?? '')); // 📮 « Réponse reçue le » (lib/complements.php)
         log_change($pdo,'courrier',$id,'update','Courrier modifié : '.$destinataire.' — '.$objet,$old,['id'=>$id,'organisme'=>$organisme,'destinataire'=>$destinataire,'objet'=>$objet,'date_envoi'=>$dateEnvoi,'statut'=>$statut,'relance_delai_jours'=>$delai,'relance_date'=>$relanceDate,'fait'=>$fait,'fait_type'=>$faitType,'notes'=>$notes,'copy_order_json'=>$copyOrderJson]);
     } else {
         $pdo->prepare('INSERT INTO courriers(organisme,destinataire,objet,date_envoi,statut,relance_delai_jours,relance_date,fait,fait_type,notes,copy_order_json) VALUES(?,?,?,?,?,?,?,?,?,?,?)')
             ->execute([$organisme,$destinataire,$objet,$dateEnvoi,$statut,$delai,$relanceDate,$fait,$faitType,$notes,$copyOrderJson]);
         $id = (int)$pdo->lastInsertId();
+        if (function_exists('compl_courrier_store')) compl_courrier_store($pdo, $id, $statut === 'reponse_recue' ? $data : array_intersect_key($data, ['archive_service_id' => 1]), ''); // 📮 lib/complements.php
         log_change($pdo,'courrier',$id,'create','Courrier ajouté : '.$destinataire.' — '.$objet,null,['id'=>$id,'organisme'=>$organisme,'destinataire'=>$destinataire,'objet'=>$objet,'date_envoi'=>$dateEnvoi,'statut'=>$statut,'relance_delai_jours'=>$delai,'relance_date'=>$relanceDate,'fait'=>$fait,'fait_type'=>$faitType,'notes'=>$notes,'copy_order_json'=>$copyOrderJson]);
     }
     return ['id'=>$id];
@@ -13118,6 +13259,7 @@ function save_media(PDO $pdo,array $data): array
     $mediaSubjectType=safe_text($data['media_subject_type']??$before['media_subject_type']??'');
     if(!in_array($mediaSubjectType,['','grave_photo','war_memorial_photo','voter_card','id_card','driving_permit'],true))$mediaSubjectType='';
     $transcription=(string)($data['transcription']??$before['transcription']);
+    if($transcription!==(string)$before['transcription'])$transcription=media_doc_text_accept($pdo,$mediaId,$transcription,(string)$before['transcription']); // 📄 un seul texte : l'acte de l'Atelier suit
     $correspondenceType=safe_text($data['correspondence_type']??$before['correspondence_type']??'');
     if (!in_array($correspondenceType, ['', 'lettre', 'carte_postale', 'telegramme', 'carte_voeux', 'faire_part', 'autre'], true) && !preg_match('/^custom:.{1,80}$/u',$correspondenceType)) $correspondenceType = '';
     $replyTo=safe_int($data['correspondence_reply_to_media_id']??$before['correspondence_reply_to_media_id']??0);
@@ -13199,7 +13341,7 @@ function save_media_transcription(PDO $pdo,array $data): array
 {
     $mediaId=safe_int($data['media_id']??0);if(!$mediaId)throw new RuntimeException('Média manquant');
     $stmt=$pdo->prepare('SELECT transcription,title FROM media WHERE id=?');$stmt->execute([$mediaId]);$before=$stmt->fetch();if(!$before)throw new RuntimeException('Média introuvable');
-    $transcription=(string)($data['transcription']??'');$pdo->prepare('UPDATE media SET transcription=? WHERE id=?')->execute([$transcription,$mediaId]);
+    $transcription=media_doc_text_accept($pdo,$mediaId,(string)($data['transcription']??''),(string)$before['transcription'],true);$pdo->prepare('UPDATE media SET transcription=? WHERE id=?')->execute([$transcription,$mediaId]); // 📄 un seul texte : l'acte de l'Atelier suit
     log_change($pdo,'media',$mediaId,'transcription','Transcription du média « '.($before['title']?:'#'.$mediaId).' » modifiée',['transcription'=>$before['transcription']],['transcription'=>$transcription]);return ['id'=>$mediaId,'transcription'=>$transcription];
 }
 
@@ -13330,6 +13472,7 @@ function htr_recognize_media(PDO $pdo,array $data): array
         if ($written !== $len) throw new RuntimeException('Image améliorée : écriture impossible.');
         $imagePath = $tempImage;
     }
+    media_image_guard($imagePath, $pdo); // 📎 une image immense n'est pas décodée par le lecteur (lib/media_limits.php)
     try {
         $modelId = safe_text($data['model'] ?? 'fr-actes') ?: 'fr-actes';
         $language = safe_text($data['language'] ?? '');

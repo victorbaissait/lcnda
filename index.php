@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 require __DIR__ . '/lib/bootstrap.php';
+// 🔐 généalogie protégée par un mot de passe et séance pas encore ouverte : l'écran de verrou seul, rien de la base (lib/verrou_page.php)
+if (glock_request_blocked()) { require __DIR__ . '/lib/verrou_page.php'; exit; }
 require_once __DIR__ . '/lib/premier.php';
 require_once __DIR__ . '/lib/i18n.php'; // 🌐 langue de l'app (cookie lcnda_lang ; assets/js/app-i18n.js)
 // Le fichier peut exister sans contenir de généalogie : une simple analyse de
@@ -24,9 +26,10 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=285">
+    <link rel="stylesheet" href="assets/css/app.css?v=286">
     <link rel="stylesheet" href="assets/css/picker.css?v=7">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=267">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=274">
+    <link rel="stylesheet" href="assets/css/transcription-actes.css?v=6">
     <link rel="stylesheet" href="assets/css/heritage-diagram-genea.css?v=1">
     <link rel="stylesheet" href="assets/css/heritage-diagram-cartes.css?v=2">
     <link rel="stylesheet" href="assets/css/heritage-diagram-more.css?v=1">
@@ -39,11 +42,12 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/tresors.css?v=14">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=30">
-    <link rel="stylesheet" href="assets/css/ui.css?v=21">
+    <link rel="stylesheet" href="assets/css/ui.css?v=23">
     <link rel="stylesheet" href="assets/css/saisies.css?v=4">
     <link rel="stylesheet" href="assets/css/board-shapelib.css?v=1">
     <link rel="stylesheet" href="assets/css/artist.css?v=5">
-    <link rel="stylesheet" href="assets/css/onglets.css?v=1">
+    <link rel="stylesheet" href="assets/css/onglets.css?v=3">
+    <link rel="stylesheet" href="assets/css/onglets-plus.css?v=2">
     <link rel="stylesheet" href="assets/css/scene.css?v=1">
     <link rel="stylesheet" href="assets/css/oeuvres.css?v=2">
     <link rel="stylesheet" href="assets/css/profils.css?v=5">
@@ -61,7 +65,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/graphs.css?v=1">
     <link rel="stylesheet" href="assets/css/apparence.css?v=7">
     <link rel="stylesheet" href="assets/css/sections.css?v=3">
-    <link rel="stylesheet" href="assets/css/transcribe.css?v=6">
+    <link rel="stylesheet" href="assets/css/transcribe.css?v=17">
     <link rel="stylesheet" href="assets/css/photomaps.css?v=9">
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=3">
     <link rel="stylesheet" href="assets/css/meteo.css?v=2">
@@ -71,6 +75,11 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/photo-courriers.css?v=2">
     <link rel="stylesheet" href="assets/css/sante.css?v=1">
     <link rel="stylesheet" href="assets/css/cousinade.css?v=1">
+    <link rel="stylesheet" href="assets/css/successoral.css?v=8">
+    <link rel="stylesheet" href="assets/css/successoral-plus2.css?v=1">
+    <link rel="stylesheet" href="assets/css/complements.css?v=1">
+    <link rel="stylesheet" href="assets/css/verrou.css?v=1">
+    <link rel="stylesheet" href="assets/css/reseau-local.css?v=3">
     <link rel="stylesheet" href="assets/css/indicateurs.css?v=2">
     <link rel="stylesheet" href="assets/css/mode-simple.css?v=7">
     <link rel="stylesheet" href="assets/css/formats.css?v=1">
@@ -78,7 +87,9 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/socface.css?v=4">
     <link rel="stylesheet" href="assets/css/archives-en-ligne.css?v=1">
     <link rel="stylesheet" href="assets/css/semaine.css?v=3">
-    <link rel="stylesheet" href="assets/css/ou-chercher.css?v=1">
+    <link rel="stylesheet" href="assets/css/ou-chercher.css?v=2">
+    <link rel="stylesheet" href="assets/css/archives-dispo.css?v=1">
+    <link rel="stylesheet" href="assets/css/recherche-fr.css?v=2">
     <link rel="stylesheet" href="assets/css/preuve.css?v=1">
     <link rel="stylesheet" href="assets/css/calculette.css?v=1">
     <link rel="stylesheet" href="assets/css/lecture-autrefois.css?v=2">
@@ -86,16 +97,19 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/visite.css?v=1">
     <link rel="stylesheet" href="assets/css/cadastre.css?v=1">
     <link rel="stylesheet" href="assets/css/successions.css?v=1">
+    <link rel="stylesheet" href="assets/css/plus-famille.css?v=1">
     <link rel="stylesheet" href="assets/css/cartes-outils.css?v=1">
     <link rel="stylesheet" href="assets/css/cartes-perso.css?v=1">
+    <link rel="stylesheet" href="assets/css/cartes-nouvelles.css?v=2">
     <link rel="stylesheet" href="assets/css/traitement-texte.css?v=5">
     <link rel="stylesheet" href="assets/css/site-web.css?v=17">
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
     <link rel="stylesheet" href="assets/css/versions.css?v=1">
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
-    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=15" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=15" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=36" id="lc-frame-css" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=38" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=13">
+    <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
     <script>/* 🎨 Designs au choix (app-designs.js) : le style choisi est posé avant le premier dessin, sans clignotement */
     (function(){try{var c=JSON.parse(localStorage.getItem('lcnda-designs-ui-v2')||'null');if(!c||typeof c!=='object'||!c.a)return;var r=document.documentElement,k;
     for(k in c.a)if(/^data-lc-[a-z]+$/.test(k)&&/^[a-z0-9-]{1,20}$/.test(String(c.a[k])))r.setAttribute(k,c.a[k]);
@@ -115,6 +129,7 @@ header('X-Content-Type-Options: nosniff');
             <button class="nav-item" data-module="suivi"><span>02</span>🐾 Suivi des animaux</button>
             <button class="nav-item" data-module="documents"><span>02</span>📄 Documents</button>
             <button class="nav-item" data-module="catalogue"><span>02</span>🎨 Catalogue raisonné</button>
+            <button class="nav-item" data-module="successoral"><span>02</span>⚖️ Successions</button>
             <button class="nav-item" data-module="graphiques"><span>03</span>Graphiques</button>
             <button class="nav-item" data-module="carte"><span>04</span>Carte</button>
             <button class="nav-item" data-module="listes"><span>05</span>Listes</button>
@@ -133,6 +148,8 @@ header('X-Content-Type-Options: nosniff');
             <button type="button" class="screen-tool" id="kiosk-toggle" title="Mode consultation : la famille peut tout parcourir sans rien modifier" aria-label="Mode consultation"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></button>
             <button type="button" class="screen-tool ms-entry" id="mode-simple-open" hidden title="Mode simple : montrer l’arbre à quelqu’un qui n’est pas à l’aise avec l’ordinateur (gros boutons, rien à modifier)" aria-label="Mode simple"><span aria-hidden="true">🧓</span><span class="ms-entry-t">Mode simple</span></button>
             <button type="button" class="screen-tool" id="report-problem-open" data-report-problem title="Signaler un bug : décris ce qui ne marche pas, un rapport technique sans ta généalogie est préparé" aria-label="Signaler un bug"><span aria-hidden="true">🐞</span></button>
+            <button type="button" class="screen-tool succ-bell-btn" id="succ-bell-open" hidden title="Échéances du jour" aria-label="Échéances du jour" aria-haspopup="dialog" aria-expanded="false"><span aria-hidden="true">🔔</span><span class="succ-bell-n" data-succ-bell-n hidden></span></button>
+            <button type="button" class="screen-tool succ-filter-btn" id="succ-filter-open" hidden title="Dossiers de succession : ne montrer qu’un ou plusieurs dossiers" aria-label="Dossiers de succession" aria-haspopup="true"><span aria-hidden="true">⚖️</span><span data-succ-flabel hidden></span></button>
             <button type="button" class="screen-tool genealogy-switch" id="genealogy-switch" title="Mes généalogies : changer, en créer une autre" aria-label="Mes généalogies"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5v4M5 16.5V14h14v2.5M12 11.5V14"/></svg><span data-gen-name hidden></span></button>
             <span class="status-dot"></span>
             <span id="database-status">Base locale</span>
@@ -1160,14 +1177,20 @@ header('X-Content-Type-Options: nosniff');
 <script>window.LCNDA_FIRST_HASH=location.hash;</script>
 <script src="assets/js/app-journal.js?v=2"></script>
 <?= i18n_page_script() ?>
-<script src="assets/js/app-i18n.js?v=32"></script>
-<script>window.LCNDA_GENEALOGY = <?= json_encode(GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID) ?>;window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
+<script src="assets/js/app-i18n.js?v=84"></script>
+<script>window.LCNDA_GENEALOGY = <?= json_encode(GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID) ?>;window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_GLOCK = <?= json_encode(['on' => glock_info()['locked'], 'minutes' => glock_info()['minutes']]) ?>;window.LCNDA_GUEST = <?= json_encode(lan_device() ? ['name' => lan_device()['name']] : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;window.LCNDA_GRAPHS = <?php require_once __DIR__ . '/lib/graphs.php'; echo json_encode($ready ? graphs_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_INVALID_UTF8_SUBSTITUTE); ?>;</script>
 <script src="assets/js/app-fond.js?v=9" defer></script>
 <script src="assets/js/app-accord.js?v=1" defer></script>
-<script src="assets/js/app.js?v=556" defer></script>
+<script>window.LCNDA_RFR_DATA = <?= json_encode(json_decode((string) @file_get_contents(__DIR__ . '/assets/data/recherche-fr.json'), true) ?: new stdClass(), JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
+<script src="assets/js/app-recherche-fr.js?v=1" defer></script>
+<script>window.LCNDA_MEDIA_LIMITS = <?= json_encode($ready ? media_limits_for_page() : null) ?>;</script>
+<script src="assets/js/app.js?v=572" defer></script>
+<script src="assets/js/app-media-limits.js?v=1" defer></script>
+<script src="assets/js/app-verrou.js?v=6" defer></script>
+<script src="assets/js/app-reseau-local.js?v=3" defer></script>
 <script src="assets/js/app-indicateurs.js?v=2" defer></script>
-<script src="assets/js/app-picker.js?v=27" defer></script>
-<script src="assets/js/app-media-picker.js?v=4" defer></script>
+<script src="assets/js/app-picker.js?v=29" defer></script>
+<script src="assets/js/app-media-picker.js?v=5" defer></script>
 <script src="assets/js/app-piece-archives.js?v=10" defer></script>
 <script src="assets/js/app-puzzle.js?v=9" defer></script>
 <script src="assets/js/app-labyrinthe-core.js?v=1" defer></script>
@@ -1198,11 +1221,11 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-comparaison.js?v=8" defer></script>
 <script src="assets/js/app-carte.js?v=14" defer></script>
 <script src="assets/js/app-enquetes.js?v=12" defer></script>
-<script src="assets/js/app-tableau-de-bord.js?v=21" defer></script>
+<script src="assets/js/app-tableau-de-bord.js?v=23" defer></script>
 <script src="assets/js/app-harmony.js?v=10" defer></script>
-<script src="assets/js/app-ui.js?v=31" defer></script>
+<script src="assets/js/app-ui.js?v=32" defer></script>
 <script src="assets/js/app-tableur-engine.js?v=11" defer></script>
-<script src="assets/js/app-aide-lecture.js?v=3" defer></script>
+<script src="assets/js/app-aide-lecture.js?v=4" defer></script>
 <!-- aide-langues : une langue = un fichier (assets/js/aide-langues/README-format.md) -->
 <script src="assets/js/aide-langues/la.js?v=1" defer></script>
 <script src="assets/js/aide-langues/grc.js?v=1" defer></script>
@@ -1237,7 +1260,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-autrefois-engine.js?v=1" defer></script>
 <script src="assets/js/app-calculette-engine.js?v=2" defer></script>
 <script src="assets/js/app-texte-engine.js?v=2" defer></script>
-<script src="assets/js/app-texte-formats.js?v=4" defer></script>
+<script src="assets/js/app-texte-formats.js?v=5" defer></script>
 <script src="assets/js/app-lot-engine.js?v=3" defer></script>
 <script src="assets/js/app-photos-meta.js?v=1" defer></script>
 <script src="assets/js/app-saisies.js?v=2" defer></script>
@@ -1247,32 +1270,32 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-mots.js?v=2" defer></script>
 <script src="assets/js/app-portraits.js?v=4" defer></script>
 <script src="assets/js/app-colonne.js?v=9" defer></script>
-<script src="assets/js/app-tips.js?v=2" defer></script>
+<script src="assets/js/app-tips.js?v=3" defer></script>
 <script src="assets/js/app-actions.js?v=10" defer></script>
-<script src="assets/js/app-editeurs.js?v=3" defer></script>
+<script src="assets/js/app-editeurs.js?v=4" defer></script>
 <script src="assets/js/app-versions.js?v=4" defer></script>
 <script src="assets/js/app-formats.js?v=1" defer></script>
-<script src="assets/js/app-pages.js?v=12" defer></script>
-<script src="assets/js/app-access.js?v=18" defer></script>
+<script src="assets/js/app-pages.js?v=14" defer></script>
+<script src="assets/js/app-access.js?v=19" defer></script>
 <script src="assets/js/app-mode-simple.js?v=16" defer></script>
 <script src="assets/js/app-sidegroups.js?v=13" defer></script>
 <script src="assets/js/app-reordonner.js?v=3" defer></script>
-<script src="assets/js/app-listes.js?v=53" defer></script>
-<script src="assets/js/app-maintenance.js?v=56" defer></script>
-<script src="assets/js/app-recherche.js?v=31" defer></script>
+<script src="assets/js/app-listes.js?v=60" defer></script>
+<script src="assets/js/app-maintenance.js?v=62" defer></script>
+<script src="assets/js/app-recherche.js?v=32" defer></script>
 <script src="assets/js/app-graphiques.js?v=25" defer></script>
 <script src="assets/js/app-side-folders.js?v=3" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
-<script src="assets/js/heritage.js?v=43" defer></script>
-<script src="assets/js/heritage-tools.js?v=21" defer></script>
-<script src="assets/js/heritage-sauvegarde.js?v=3" defer></script>
+<script src="assets/js/heritage.js?v=44" defer></script>
+<script src="assets/js/heritage-tools.js?v=22" defer></script>
+<script src="assets/js/heritage-sauvegarde.js?v=5" defer></script>
 <script src="assets/js/heritage-alphabets-data.js?v=2" defer></script>
 <script src="assets/js/heritage-alphabets.js?v=4" defer></script>
 <script src="assets/js/heritage-calendar-more.js?v=6" defer></script>
 <script src="assets/js/heritage-lecture-autrefois.js?v=5" defer></script>
-<script src="assets/js/heritage-links.js?v=23" defer></script>
-<script src="assets/js/heritage-more.js?v=342" defer></script>
-<script src="assets/js/heritage-controle.js?v=8" defer></script>
+<script src="assets/js/heritage-links.js?v=24" defer></script>
+<script src="assets/js/heritage-more.js?v=389" defer></script>
+<script src="assets/js/heritage-controle.js?v=9" defer></script>
 <script src="assets/js/heritage-records.js?v=12" defer></script>
 <script src="assets/js/heritage-research.js?v=40" defer></script>
 <script src="assets/js/heritage-av.js?v=20" defer></script>
@@ -1282,25 +1305,26 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-decennales.js?v=4" defer></script>
 <script src="assets/js/heritage-addrmap.js?v=14" defer></script>
 <script src="assets/js/heritage-audio-engine.js?v=4" defer></script>
-<script src="assets/js/heritage-studio-av.js?v=77" defer></script>
+<script src="assets/js/heritage-studio-av.js?v=79" defer></script>
 <script src="assets/js/heritage-montage-plus.js?v=7" defer></script>
 <script src="assets/js/heritage-audio-quick.js?v=6" defer></script>
 <script src="assets/js/heritage-audio-studio.js?v=6" defer></script>
 <script src="assets/js/heritage-audio-multi.js?v=3" defer></script>
-<script src="assets/js/heritage-calendars.js?v=21" defer></script>
+<script src="assets/js/heritage-calendars.js?v=22" defer></script>
 <script src="assets/js/heritage-assemble.js?v=11" defer></script>
-<script src="assets/js/heritage-columns.js?v=8" defer></script>
+<script src="assets/js/heritage-columns.js?v=9" defer></script>
 <script src="assets/js/heritage-atelier-widgets.js?v=8" defer></script>
 <script src="assets/js/heritage-voters.js?v=11" defer></script>
 <script src="assets/js/heritage-widgets.js?v=54" defer></script>
-<script src="assets/js/heritage-shortcuts.js?v=15" defer></script>
-<script src="assets/js/heritage-tabs.js?v=14" defer></script>
+<script src="assets/js/heritage-shortcuts.js?v=17" defer></script>
+<script src="assets/js/heritage-tabs.js?v=15" defer></script>
+<script src="assets/js/app-onglets-plus.js?v=5" defer></script>
 <script src="assets/js/heritage-suggestions.js?v=3" defer></script>
 <script src="assets/js/heritage-employers.js?v=9" defer></script>
 <script src="assets/js/heritage-book.js?v=10" defer></script>
 <script src="assets/js/heritage-layout-facts.js?v=4" defer></script>
 <script src="assets/js/heritage-qr.js?v=1" defer></script>
-<script src="assets/js/heritage-layout.js?v=63" defer></script>
+<script src="assets/js/heritage-layout.js?v=64" defer></script>
 <script src="assets/js/heritage-layout-pdfa.js?v=2" defer></script>
 <script src="assets/js/heritage-layout-livret.js?v=4" defer></script>
 <script src="assets/js/heritage-edittools.js?v=26" defer></script>
@@ -1313,7 +1337,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-boards.js?v=53" defer></script>
 <script src="assets/js/heritage-dnd.js?v=12" defer></script>
 <script src="assets/js/heritage-retouch-rotation.js?v=2" defer></script>
-<script src="assets/js/heritage-studio.js?v=114" defer></script>
+<script src="assets/js/heritage-studio.js?v=115" defer></script>
 <script src="assets/js/heritage-retouch-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-retouch-fluidite.js?v=3" defer></script>
 <script src="assets/js/heritage-retouch-gomme.js?v=3" defer></script>
@@ -1336,21 +1360,21 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-tresors-voyages.js?v=3" defer></script>
 <script src="assets/js/heritage-tresors-widgets.js?v=5" defer></script>
 <script src="assets/js/heritage-tresors-listes.js?v=6" defer></script>
-<script src="assets/js/heritage-retouch-simple.js?v=15" defer></script>
+<script src="assets/js/heritage-retouch-simple.js?v=16" defer></script>
 <script src="assets/js/heritage-fiches.js?v=26" defer></script>
-<script src="assets/js/heritage-genealogies.js?v=5" defer></script>
+<script src="assets/js/heritage-genealogies.js?v=7" defer></script>
 <script src="assets/js/heritage-periodicals.js?v=17" defer></script>
-<script src="assets/js/heritage-diagrams-render.js?v=10" defer></script>
-<script src="assets/js/heritage-diagrams.js?v=33" defer></script>
+<script src="assets/js/heritage-diagrams-render.js?v=11" defer></script>
+<script src="assets/js/heritage-diagrams.js?v=36" defer></script>
 <script src="assets/js/heritage-diagram-options.js?v=6" defer></script>
-<script src="assets/js/heritage-diagram-genea.js?v=8" defer></script>
-<script src="assets/js/heritage-vector.js?v=39" defer></script>
+<script src="assets/js/heritage-diagram-genea.js?v=9" defer></script>
+<script src="assets/js/heritage-vector.js?v=40" defer></script>
 <script src="assets/js/heritage-vector-plus.js?v=3" defer></script>
 <script src="assets/js/heritage-vector-map.js?v=20" defer></script>
-<script src="assets/js/heritage-vector-tree.js?v=14" defer></script>
+<script src="assets/js/heritage-vector-tree.js?v=15" defer></script>
 <script src="assets/js/heritage-vector-cards.js?v=12" defer></script>
 <script src="assets/js/heritage-vector-seal.js?v=10" defer></script>
-<script src="assets/js/heritage-research-gaps.js?v=8" defer></script>
+<script src="assets/js/heritage-research-gaps.js?v=9" defer></script>
 <script src="assets/js/app-lecture-auto.js?v=3" defer></script>
 <script src="assets/js/app-socface-core.js?v=3" defer></script>
 <script src="assets/js/heritage-socface.js?v=8" defer></script>
@@ -1368,18 +1392,20 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-sources-ouvertes-6.js?v=3" defer></script>
 <script src="assets/js/app-sources-ouvertes-7-core.js?v=3" defer></script>
 <script src="assets/js/heritage-sources-ouvertes-7.js?v=3" defer></script>
-<script src="assets/js/app-archives-en-ligne-core.js?v=1" defer></script>
+<script src="assets/js/app-sources-ouvertes-8-core.js?v=1" defer></script>
+<script src="assets/js/app-archives-en-ligne-core.js?v=2" defer></script>
 <script src="assets/js/heritage-archives-en-ligne.js?v=2" defer></script>
 <script src="assets/js/heritage-journal.js?v=4" defer></script>
-<script src="assets/js/heritage-semaine.js?v=4" defer></script>
-<script src="assets/js/app-ou-chercher-core.js?v=2" defer></script>
-<script src="assets/js/heritage-ou-chercher.js?v=2" defer></script>
-<script src="assets/js/heritage-preuve.js?v=3" defer></script>
+<script src="assets/js/heritage-semaine.js?v=5" defer></script>
+<script src="assets/js/app-ou-chercher-core.js?v=4" defer></script>
+<script src="assets/js/app-ou-chercher-sortes.js?v=1" defer></script>
+<script src="assets/js/heritage-ou-chercher.js?v=3" defer></script>
+<script src="assets/js/heritage-preuve.js?v=4" defer></script>
 <script src="assets/js/heritage-biographie.js?v=4" defer></script>
 <script src="assets/js/heritage-journee.js?v=1" defer></script>
 <script src="assets/js/heritage-monde.js?v=3" defer></script>
-<script src="assets/js/heritage-metiers-anciens.js?v=2" defer></script>
-<script src="assets/js/heritage-archive-services.js?v=3" defer></script>
+<script src="assets/js/heritage-metiers-anciens.js?v=3" defer></script>
+<script src="assets/js/heritage-archive-services.js?v=4" defer></script>
 <script src="assets/js/heritage-citations.js?v=2" defer></script>
 <script src="assets/js/heritage-hypotheses.js?v=3" defer></script>
 <script src="assets/js/heritage-faces.js?v=11" defer></script>
@@ -1390,19 +1416,23 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-diagram-kinds.js?v=16" defer></script>
 <script src="assets/js/heritage-graphs.js?v=7" defer></script>
 <script src="assets/js/heritage-diagram-chiffres.js?v=6" defer></script>
-<script src="assets/js/heritage-diagram-cartes.js?v=10" defer></script>
-<script src="assets/js/heritage-diagram-more.js?v=5" defer></script>
-<script src="assets/js/heritage-diagram-famille.js?v=5" defer></script>
-<script src="assets/js/heritage-diagram-vie.js?v=3" defer></script>
+<script src="assets/js/heritage-diagram-cartes.js?v=11" defer></script>
+<script src="assets/js/heritage-diagram-more.js?v=7" defer></script>
+<script src="assets/js/heritage-diagram-famille.js?v=6" defer></script>
+<script src="assets/js/heritage-diagram-vie.js?v=4" defer></script>
 <script src="assets/js/heritage-diagram-adn-chiffres.js?v=9" defer></script>
 <script src="assets/js/heritage-diagram-cartes2.js?v=7" defer></script>
 <script src="assets/js/heritage-prenoms-france.js?v=5" defer></script>
-<script src="assets/js/heritage-diagram-cartes-plus.js?v=3" defer></script>
-<script src="assets/js/heritage-diagram-graphique.js?v=3" defer></script>
-<script src="assets/js/heritage-diagram-nouveaux.js?v=5" defer></script>
-<script src="assets/js/app-diagram-plus-core.js?v=1" defer></script>
-<script src="assets/js/heritage-diagram-plus.js?v=3" defer></script>
+<script src="assets/js/heritage-diagram-cartes-plus.js?v=4" defer></script>
+<script src="assets/js/heritage-diagram-cartes-plus2.js?v=6" defer></script><!-- 🗺️ vague 2 : métiers, lignées, aire de vie, parrains, crises -->
+<script src="assets/js/heritage-diagram-graphique.js?v=12" defer></script>
+<script src="assets/js/heritage-diagram-nouveaux.js?v=6" defer></script>
+<script src="assets/js/heritage-diagram-lot-c.js?v=2" defer></script>
+<script src="assets/js/app-diagram-plus-core.js?v=2" defer></script>
+<script src="assets/js/heritage-diagram-plus.js?v=4" defer></script>
+<script src="assets/js/heritage-diagram-lot-b.js?v=1" defer></script>
 <script src="assets/js/heritage-diagram-perso.js?v=4" defer></script>
+<script src="assets/js/heritage-diagram-lot-a.js?v=2" defer></script>
 <script src="assets/js/heritage-artist.js?v=19" defer></script>
 <script src="assets/js/heritage-artist-fields.js?v=12" defer></script>
 <script src="assets/js/heritage-artist-panel.js?v=15" defer></script>
@@ -1436,15 +1466,32 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-sante.js?v=2" defer></script>
 <script src="assets/js/app-cousinade-core.js?v=1" defer></script>
 <script src="assets/js/heritage-cousinade.js?v=4" defer></script>
+<script src="assets/js/heritage-successoral-core.js?v=5" defer></script>
+<script src="assets/js/heritage-successoral-outils-core.js?v=2" defer></script>
+<script src="assets/js/heritage-successoral-plus2-core.js?v=3" defer></script>
+<script src="assets/js/heritage-successoral.js?v=12" defer></script>
+<script src="assets/js/heritage-successoral-dossiers.js?v=7" defer></script>
+<script src="assets/js/heritage-successoral-outils.js?v=1" defer></script>
+<script src="assets/js/heritage-successoral-plus2.js?v=6" defer></script>
+<script src="assets/js/heritage-successoral-plus2b.js?v=3" defer></script>
+<script src="assets/js/heritage-complements-core.js?v=1" defer></script>
+<script src="assets/js/heritage-complements.js?v=1" defer></script>
+<script src="assets/js/heritage-complements-2.js?v=2" defer></script>
 <script src="assets/js/heritage-blocs-school.js?v=3" defer></script>
 <script src="assets/js/heritage-creations.js?v=5" defer></script>
-<script src="assets/js/heritage-onglets-documents.js?v=2" defer></script>
+<script src="assets/js/heritage-onglets-documents.js?v=12" defer></script>
 <script src="assets/js/heritage-onglets-catalogue.js?v=2" defer></script>
-<script src="assets/js/heritage-transcribe-view.js?v=8" defer></script>
-<script src="assets/js/heritage-transcribe.js?v=29" defer></script>
+<script src="assets/js/heritage-transcribe-view.js?v=11" defer></script>
+<script src="assets/js/heritage-transcribe-acte-core.js?v=3" defer></script>
+<script src="assets/js/heritage-transcribe-acte.js?v=9" defer></script>
+<script src="assets/js/heritage-transcribe-trouve.js?v=4" defer></script>
+<script src="assets/js/heritage-transcribe-relecture.js?v=5" defer></script>
+<script src="assets/js/heritage-pages.js?v=3" defer></script>
+<script src="assets/js/heritage-transcribe-pages.js?v=1" defer></script>
+<script src="assets/js/heritage-transcribe.js?v=53" defer></script>
 <script src="assets/js/heritage-photomaps-time.js?v=2" defer></script>
 <script src="assets/js/heritage-photomaps.js?v=15" defer></script>
-<script src="assets/js/heritage-transcribe-list.js?v=4" defer></script>
+<script src="assets/js/heritage-transcribe-list.js?v=6" defer></script>
 <script src="assets/js/heritage-slideshow.js?v=23" defer></script>
 <script src="assets/js/heritage-keynote.js?v=27" defer></script>
 <script src="assets/js/heritage-tableur.js?v=14" defer></script>
@@ -1456,11 +1503,11 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-traitement-texte.js?v=9" defer></script>
 <script src="assets/js/heritage-traitement-texte-cmd.js?v=4" defer></script>
 <script src="assets/js/heritage-traitement-texte-outils.js?v=5" defer></script>
-<script src="assets/js/heritage-traitement-texte-fichiers.js?v=7" defer></script>
+<script src="assets/js/heritage-traitement-texte-fichiers.js?v=8" defer></script>
 <script src="assets/js/heritage-traitement-texte-fusion.js?v=3" defer></script>
 <script src="assets/js/heritage-traitement-texte-relecture.js?v=2" defer></script>
 <script src="assets/js/heritage-traitement-texte-onglets.js?v=5" defer></script>
-<script src="assets/js/heritage-site-web-code.js?v=5" defer></script>
+<script src="assets/js/heritage-site-web-code.js?v=6" defer></script>
 <script src="assets/js/heritage-site-web-compat.js?v=2" defer></script>
 <script src="assets/js/heritage-site-web-html-ref.js?v=1" defer></script>
 <script src="assets/js/heritage-site-web-cssjs-ref.js?v=1" defer></script>
@@ -1476,9 +1523,10 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-cadastre.js?v=3" defer></script>
 <script src="assets/js/heritage-successions.js?v=2" defer></script>
 <script src="assets/js/app-cartes-outils-core.js?v=1" defer></script>
-<script src="assets/js/heritage-cartes-outils.js?v=3" defer></script>
+<script src="assets/js/heritage-cartes-outils.js?v=4" defer></script>
 <script src="assets/js/app-cartes-perso-core.js?v=1" defer></script><!-- 🗺 Mes cartes : calculs (aussi pour Node) -->
 <script src="assets/js/heritage-cartes-perso.js?v=3" defer></script><!-- 🗺 Mes cartes (Carte) -->
+<script src="assets/js/heritage-lieux-a-placer.js?v=1" defer></script><!-- 📍 Lieux à placer (Carte, tableau de bord, Listes → Lieux) -->
 <script src="assets/js/app-metiers-carte-core.js?v=1" defer></script><!-- 🧬 🗺 noyau commun (aussi pour Node) -->
 <script src="assets/js/heritage-metiers-arbre.js?v=2" defer></script><!-- 🧬 Arbre des métiers (Graphiques) -->
 <script src="assets/js/heritage-carte-vie.js?v=2" defer></script><!-- 🗺 Carte de la vie d’une personne -->
@@ -1496,10 +1544,13 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-press-ads.js?v=11" defer></script>
 <script src="assets/js/museum-viewer.js?v=10" defer></script>
 <script src="assets/js/heritage-museum.js?v=18" defer></script>
-<script src="assets/js/heritage-questions.js?v=3" defer></script>
+<script src="assets/js/heritage-questions.js?v=4" defer></script>
 <script src="assets/js/heritage-photo-ask.js?v=3" defer></script>
-<script src="assets/js/heritage-courriers-actes.js?v=2" defer></script>
-<script src="assets/js/heritage-postcards.js?v=4" defer></script>
+<script src="assets/js/heritage-courriers-actes.js?v=4" defer></script>
+<script src="assets/js/heritage-archives-dispo.js?v=1" defer></script>
+<script src="assets/js/heritage-recherche-fr.js?v=1" defer></script>
+<script src="assets/js/heritage-questions-plus.js?v=1" defer></script>
+<script src="assets/js/heritage-postcards.js?v=5" defer></script>
 <script src="assets/js/heritage-place-photos.js?v=2" defer></script>
 <script src="assets/js/heritage-dates-feter.js?v=3" defer></script>
 <script src="assets/js/heritage-meteo.js?v=7" defer></script>
@@ -1507,17 +1558,24 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-suivi.js?v=11" defer></script>
 <script src="assets/js/heritage-suivi-fiche.js?v=7" defer></script>
 <script src="assets/js/heritage-suivi-partage.js?v=2" defer></script>
-<script src="assets/js/heritage-partage.js?v=2" defer></script>
-<script src="assets/js/heritage-echanges.js?v=3" defer></script>
+<script src="assets/js/heritage-partage.js?v=3" defer></script>
+<script src="assets/js/heritage-echanges.js?v=4" defer></script>
+<script src="assets/js/plus-famille.js?v=1" defer></script>
+<script src="assets/js/plus-famille-lettre.js?v=1" defer></script>
+<script src="assets/js/plus-famille-relecture.js?v=1" defer></script>
+<script src="assets/js/plus-famille-latin.js?v=2" defer></script>
 <script src="assets/js/heritage-wikidata.js?v=2" defer></script>
 <script src="assets/js/app-imports-plus-core.js?v=2" defer></script>
 <script src="assets/js/heritage-imports-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-photos-import.js?v=2" defer></script>
-<script src="assets/js/app-apparence.js?v=24" defer></script>
-<script src="assets/js/app-designs.js?v=24" defer></script>
+<script src="assets/js/app-apparence.js?v=27" defer></script>
+<script src="assets/js/app-designs.js?v=25" defer></script>
 <script src="assets/js/app-sections.js?v=10" defer></script>
-<script src="assets/js/app-premier.js?v=4" defer></script>
+<script src="assets/js/app-premier.js?v=7" defer></script>
 <script src="assets/js/app-visite.js?v=2" defer></script>
+<script src="assets/js/app-a-trier.js?v=1" defer></script>
+<script src="assets/js/app-htr-correction.js?v=2" defer></script>
+<script src="assets/js/app-lignes-alignement.js?v=2" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

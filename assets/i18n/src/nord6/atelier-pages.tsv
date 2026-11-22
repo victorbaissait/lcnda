@@ -1,0 +1,42 @@
+fr ¦ lt ¦ lv ¦ et
+# 📑 Atelier de transcription, vague 3 (3a) : un document en plusieurs pages (heritage-pages.js, heritage-transcribe.js, lib/media_pages.php)
+# — 1. relier des pages (page du document, visionneuse)
+Glisser pour changer l’ordre ¦ Vilk, kad pakeistum tvarką ¦ Velc, lai mainītu secību ¦ Lohista, et järjekorda muuta
+Voir cette page ¦ Žiūrėti šį puslapį ¦ Skatīt šo lapu ¦ Vaata seda lehte
+Une seule page pour l’instant. Un recto et son verso, un acte sur plusieurs pages : relie les autres images, elles s’ouvriront ensemble. ¦ Kol kas tik vienas puslapis. Priekinė ir galinė pusė, įrašas per kelis puslapius: susiek kitus vaizdus ir jie atsidarys kartu. ¦ Pagaidām tikai viena lapa. Priekšpuse un aizmugure, ieraksts vairākās lapās: sasaisti pārējos attēlus, un tie atvērsies kopā. ¦ Praegu ainult üks leht. Esi- ja tagakülg, mitmeleheline akt: seo teised pildid ja need avanevad koos.
+Relier une autre page… ¦ Susieti kitą puslapį… ¦ Sasaistīt vēl vienu lapu… ¦ Seo veel üks leht…
+PAGES DU DOCUMENT ¦ DOKUMENTO PUSLAPIAI ¦ DOKUMENTA LAPAS ¦ DOKUMENDI LEHED
+Relier ces pages ¦ Susieti šiuos puslapius ¦ Sasaistīt šīs lapas ¦ Seo need lehed
+Pages reliées : {n} ¦ Susieti puslapiai: {n} ¦ Sasaistītās lapas: {n} ¦ Seotud lehed: {n}
+Page reliée ¦ Puslapis susietas ¦ Lapa sasaistīta ¦ Leht seotud
+Page renommée : « {x} » ¦ Puslapis pervadintas: „{x}“ ¦ Lapa pārdēvēta: “{x}” ¦ Leht ümber nimetatud: „{x}“
+Autre nom… ¦ Kitas pavadinimas… ¦ Cits nosaukums… ¦ Muu nimi…
+Par exemple : Plan, Feuillet 2, Suite ¦ Pavyzdžiui: Planas, 2 lapas, Tęsinys ¦ Piemēram: Plāns, 2. lapa, Turpinājums ¦ Näiteks: Plaan, Leht 2, Järg
+Ordre des pages changé ¦ Puslapių tvarka pakeista ¦ Lapu secība mainīta ¦ Lehtede järjekord muudetud
+Retirer de l’ensemble ¦ Pašalinti iš rinkinio ¦ Izņemt no kopas ¦ Eemalda kogumist
+La page reste dans les médias, seule (rien n’est supprimé) ¦ Puslapis lieka medijoje atskirai (niekas neištrinama) ¦ Lapa paliek multivides failos atsevišķi (nekas netiek dzēsts) ¦ Leht jääb meediasse eraldi (midagi ei kustutata)
+Recto ¦ Priekinė pusė ¦ Priekšpuse ¦ Esikülg
+Verso ¦ Galinė pusė ¦ Aizmugure ¦ Tagakülg
+Annexe ¦ Priedas ¦ Pielikums ¦ Lisa
+Une de ces pages est déjà dans un autre document : retire-la d’abord de celui-ci (une page n’appartient qu’à un seul ensemble). ¦ Vienas iš šių puslapių jau yra kitame dokumente: pirmiausia pašalink jį iš ten (puslapis priklauso tik vienam rinkiniui). ¦ Viena no šīm lapām jau ir citā dokumentā: vispirms izņem to no turienes (lapa pieder tikai vienai kopai). ¦ Üks neist lehtedest on juba teises dokumendis: eemalda see sealt kõigepealt (leht kuulub ainult ühte kogumisse).
+Une des pages n’est plus dans les médias : rien n’a été changé. ¦ Vieno iš puslapių nebėra medijoje: niekas nepakeista. ¦ Vienas no lapām vairs nav multivides failos: nekas netika mainīts. ¦ Üht lehte pole enam meedias: midagi ei muudetud.
+Trop de pages dans un même document (200 au plus). ¦ Per daug puslapių viename dokumente (daugiausia 200). ¦ Pārāk daudz lapu vienā dokumentā (ne vairāk kā 200). ¦ Liiga palju lehti ühes dokumendis (kuni 200).
+# — 2. l’Atelier ouvre toutes les pages (onglets, un seul texte ou un texte par page, ✨ Lire)
+Plusieurs pages ¦ Keli puslapiai ¦ Vairākas lapas ¦ Mitu lehte
+Sur la page affichée ¦ Rodomame puslapyje ¦ Parādītajā lapā ¦ Kuvatud lehel
+Sur toutes les pages ¦ Visuose puslapiuose ¦ Visās lapās ¦ Kõigil lehtedel
+Un seul texte, coupé par « — page 2 — » ¦ Vienas tekstas, padalytas žymomis „— puslapis 2 —“ ¦ Viens teksts, sadalīts ar “— lapa 2 —” ¦ Üks tekst, jaotatud märgiga „— lehekülg 2 —“
+Un seul texte, coupé par « — page 2 — » (conseillé) ¦ Vienas tekstas, padalytas žymomis „— puslapis 2 —“ (rekomenduojama) ¦ Viens teksts, sadalīts ar “— lapa 2 —” (ieteicams) ¦ Üks tekst, jaotatud märgiga „— lehekülg 2 —“ (soovitatav)
+Un texte par page ¦ Po vieną tekstą puslapiui ¦ Viens teksts katrai lapai ¦ Üks tekst lehe kohta
+— page {n} — ¦ — puslapis {n} — ¦ — lapa {n} — ¦ — lehekülg {n} —
+Toutes les pages sont lues (à relire) ¦ Visi puslapiai perskaityti (reikia patikrinti) ¦ Visas lapas ir nolasītas (jāpārbauda) ¦ Kõik lehed on loetud (vaata üle)
+Réglage gardé : il vaut pour les documents pas encore commencés ; celui-ci garde sa forme. ¦ Nustatymas išsaugotas: jis galioja dar nepradėtiems dokumentams; šis išlaiko savo formą. ¦ Iestatījums saglabāts: tas attiecas uz vēl nesāktiem dokumentiem; šis saglabā savu formu. ¦ Seade jäi alles: see kehtib veel alustamata dokumentidele; see säilitab oma kuju.
+Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription. ¦ Šis puslapis yra kelių puslapių įrašo dalis: jo tekstas keičiamas Transkripcijos dirbtuvėse. ¦ Šī lapa ir daļa no vairāku lapu ieraksta: tās teksts tiek mainīts Pārrakstīšanas darbnīcā. ¦ See leht on mitmelehelise akti osa: selle teksti muudad Ümberkirjutuse töökojas.
+# — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
+(page {n}, ligne {line}) ¦ ({n} puslapis, {line} eilutė) ¦ ({n}. lapa, {line}. rinda) ¦ (lehekülg {n}, rida {line})
+page {n}, ligne {line} ¦ {n} puslapis, {line} eilutė ¦ {n}. lapa, {line}. rinda ¦ lehekülg {n}, rida {line}
+# — 3a+ : « Ce que l’app a trouvé » sur toutes les pages (un texte par page), la lecture approfondie de toutes les pages
+« {name} » est sur une autre page : ouvre sa page pour le garder. ¦ „{name}“ yra kitame puslapyje: atidaryk tą puslapį, kad tai išsaugotum. ¦ “{name}” ir citā lapā: atver to lapu, lai to paturētu. ¦ „{name}” on teisel lehel: ava see leht, et see alles jätta.
+Un texte par page : la lecture rapide et la lecture d’un imprimé se font page par page ; la lecture approfondie peut lire toutes les pages. ¦ Vienas tekstas puslapiui: greitas skaitymas ir spausdinto teksto skaitymas vyksta puslapis po puslapio; išsamus skaitymas gali perskaityti visus puslapius. ¦ Viens teksts katrai lapai: ātrā lasīšana un iespieduma lasīšana notiek lapu pa lapai; padziļinātā lasīšana var izlasīt visas lapas. ¦ Üks tekst lehe kohta: kiirlugemine ja trükiteksti lugemine käivad leht lehe haaval; põhjalik lugemine oskab lugeda kõiki lehti.
+Lecture approfondie : page {i} sur {n}… ¦ Išsamus skaitymas: puslapis {i} iš {n}… ¦ Padziļinātā lasīšana: lapa {i} no {n}… ¦ Põhjalik lugemine: leht {i}/{n}…
+Lire toutes les pages avec ce modèle ({n}) ¦ Perskaityti visus puslapius šiuo modeliu ({n}) ¦ Izlasīt visas lapas ar šo modeli ({n}) ¦ Loe kõik lehed selle mudeliga ({n})

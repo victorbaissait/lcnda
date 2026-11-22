@@ -97,7 +97,9 @@
             rel: {countries: ['fr'], base: 1.6, missing: ['birth', 'death', 'marriage', 'parents', 'father', 'mother'], why: c => {
                 const at = d.place ? `${d.place} (${d.name})` : d.name;
                 if (c.missing.has('birth')) return c.by ? i18n('Naissance inconnue : les registres de {place}, en ligne, autour de {year}', {place: at, year: c.by}) : i18n('Naissance inconnue : les registres de {place}, en ligne', {place: at});
-                if (c.missing.has('parents') || c.missing.has('father') || c.missing.has('mother')) return i18n(c.tags.has('MARR') ? 'Parents inconnus : son acte de mariage à {place} donne le nom de ses parents' : 'Parents inconnus : son acte de naissance à {place} donne le nom de ses parents', {place: at});
+                // P8 : l'acte qui va avec l'événement de ce département (un décès à Bourges : son acte de décès)
+                const kind = ['DEAT', 'BURI', 'CREM'].includes(d.tag) ? 'death' : d.tag === 'MARR' || (!['BIRT', 'CHR', 'BAPM'].includes(d.tag) && c.tags.has('MARR')) ? 'marriage' : 'birth';
+                if (c.missing.has('parents') || c.missing.has('father') || c.missing.has('mother')) return i18n(kind === 'death' ? 'Parents inconnus : son acte de décès à {place} donne souvent le nom de ses parents' : kind === 'marriage' ? 'Parents inconnus : son acte de mariage à {place} donne le nom de ses parents' : 'Parents inconnus : son acte de naissance à {place} donne le nom de ses parents', {place: at});
                 if (c.missing.has('death')) return i18n('Décès inconnu : les registres de {place}', {place: at});
                 return i18n(c.female ? 'Elle a vécu à {place} : l’état civil et les registres paroissiaux en ligne' : 'Il a vécu à {place} : l’état civil et les registres paroissiaux en ligne', {place: at});
             }}}));
@@ -145,13 +147,13 @@
 
     /* ═════════════════════ l'affichage d'une proposition ═════════════════════ */
     const PAID_BADGE = {paid: ['Payant', 'red'], partly: ['En partie payant', 'yellow'], library: ['Gratuit en bibliothèque', 'blue']};
-    function rowHtml(x, {compact = false} = {}) {
+    function rowHtml(x, {compact = false, extra = ''} = {}) {
         const s = x.site, pb = PAID_BADGE[x.paid], prev = x.searched;
         const res = prev ? (prev.status === 'review' ? RESULT.review : RESULT[prev.result] || ['Cherché', 'grey']) : null;
         return `<li class="ouc-row${prev && prev.status !== 'review' ? ' is-done' : ''}" data-ouc-key="${esc(s.key)}">
             <span class="ouc-ico" aria-hidden="true">${esc(s.icon || (prev ? '✓' : '🌐'))}</span>
             <div class="ouc-main"><div class="ouc-name"><b>${esc(s.label)}</b>${pb ? ' ' + badge(pb[0], pb[1]) : ''}${res ? ` ${badge(res[0], res[1])} <small class="muted">${when(prev.date)}</small>` : ''}</div>
-                <div class="ouc-why">${esc(x.reasons[0] || '')}</div>${!compact && x.reasons.length > 1 ? `<div class="ouc-why2">${x.reasons.slice(1).map(esc).join(' · ')}</div>` : ''}</div>
+                <div class="ouc-why">${esc(x.reasons[0] || '')}</div>${!compact && x.reasons.length > 1 ? `<div class="ouc-why2">${x.reasons.slice(1).map(esc).join(' · ')}</div>` : ''}${extra}</div>
             <div class="ouc-acts"><a class="button small${prev && prev.status !== 'review' ? ' secondary' : ''}" href="${esc(s.href)}" target="_blank" rel="noopener noreferrer" data-ouc-go title="S’ouvre dans ton navigateur, avec son nom déjà rempli">↗ Chercher</a>${prev && prev.status !== 'review' ? '' : `<button type="button" class="button small secondary" data-ouc-done title="Noter dans le Journal des recherches ce que ça a donné">✓ Déjà cherché</button>`}<button type="button" class="icon-button small" data-ouc-more title="Plus d’actions" aria-label="Plus d’actions">⋯</button></div></li>`;
     }
     function listHtml(rows, opts = {}) { return rows.length ? `<ul class="ouc-list">${rows.map(x => rowHtml(x, opts)).join('')}</ul>` : ''; }
@@ -226,7 +228,18 @@
     }
 
     /* ═════════════════════ 1. Le bloc de la fiche ═════════════════════ */
-    const BLOCK_N = 5;
+    const BLOCK_N = 5, SHORT_N = 5;
+    const SO = () => window.LCNDA_OUC_SORTES;
+    const sortName = (s, long = false) => `${s.icon} ${i18n(long ? s.label : s.short)}`;
+    /** les raccourcis de la fiche (maquette, écran 5) : « 🎖 Tout le militaire (8) », la sorte de son profil d'abord */
+    function shortcutsHtml(res, pid) {
+        if (!SO()) return '';
+        const all = SO().shortcuts(res.ctx, res.list), top = all.slice(0, SHORT_N), rest = all.slice(SHORT_N);
+        if (!top.length) return '';
+        return `<div class="ouc-shortcuts" role="group" aria-label="${esc(i18n('Ouvrir la page filtrée sur une sorte de source'))}">${top.map(s => `<button type="button" class="ouc-chip${s.profile ? ' is-profile' : ''}" data-ouc-short="${esc(s.id)}" data-ouc-pid="${pid}">${esc(s.profile ? `${s.icon} ${i18n(SHORT_ALL[s.id] || s.short)}` : sortName(s))} <small>${s.n}</small></button>`).join('')}${rest.length ? `<button type="button" class="ouc-chip is-more" data-ouc-short-more="${pid}" title="${esc(i18n('Les autres sortes'))}" aria-label="${esc(i18n('Les autres sortes'))}">⋯</button>` : ''}</div>`;
+    }
+    /** le libellé d'un raccourci de profil : « Tout le militaire » */
+    const SHORT_ALL = {militaire: 'Tout le militaire', marins: 'Tout pour un marin', emigration: 'Tout sur l’émigration', metiers: 'Tout sur son métier', notaires: 'Tout chez les notaires'};
     ext.personBlocks = ext.personBlocks || {};
     ext.personBlocks.ou_chercher = (index, detail) => {
         const p = detail?.person; if (!p?.id || p.kind === 'animal' || !C()) return '';
@@ -246,7 +259,7 @@
             const top = view.res.list.slice(0, BLOCK_N);
             const n = view.res.list.length, done = view.res.searched.length;
             box.innerHTML = `<p class="ouc-intro">${i18n('Les sites les plus utiles pour {name}, d’après ses lieux, ses dates et ce qui manque. Chaque site s’ouvre dans ton navigateur, son nom déjà rempli.', {name: esc(view.res.ctx.name)})}</p>
-                ${freeToggle()}${top.length ? listHtml(top, {compact: true}) : A().empty('Aucun site à proposer pour cette fiche.', {icon: '🌍', hint: 'Ajoute un lieu ou une date : les propositions s’affinent.'})}
+                ${shortcutsHtml(view.res, pid)}${freeToggle()}${top.length ? listHtml(top, {compact: true}) : A().empty('Aucun site à proposer pour cette fiche.', {icon: '🌍', hint: 'Ajoute un lieu ou une date : les propositions s’affinent.'})}
                 <p class="ouc-foot">${n > BLOCK_N ? `<button type="button" class="link-button" data-ouc-page="${pid}">${i18n('Voir les {n} autres propositions ↓', {n: n - BLOCK_N})}</button>` : ''}${done ? ` <span class="muted">· ✓ ${plural(done, 'site déjà cherché', 'sites déjà cherchés')}</span>` : ''}${view.res.hidden ? ` <span class="muted">· ${plural(view.res.hidden, 'site payant caché', 'sites payants cachés')}</span>` : ''}</p>`;
         };
         // le bloc grandit une fois rempli : si on est plus bas dans la fiche (adresse #personnes/1/documents…), rien ne bouge à l'écran
@@ -265,12 +278,23 @@
         setFreeOnly(e.target.checked);
         VIEWS.forEach((v, k) => { if (v.redraw && v.data) v.redraw(); else VIEWS.delete(k); });
     });
+    // un raccourci de la fiche : la page, filtrée sur cette sorte (sans toucher au choix retenu)
+    document.addEventListener('click', e => {
+        const b = e.target.closest?.('[data-ouc-short]');
+        if (b) { e.preventDefault(); openPerson(Number(b.dataset.oucPid) || 0, 'ou_chercher', {cats: [b.dataset.oucShort]}); return; }
+        const m = e.target.closest?.('[data-ouc-short-more]'); if (!m) return;
+        e.preventDefault();
+        const pid = Number(m.dataset.oucShortMore), view = viewOf(m); if (!view?.res || !SO()) return;
+        UI().menuAt?.(m, SO().shortcuts(view.res.ctx, view.res.list).slice(SHORT_N).map(s => ({icon: s.icon, label: `${i18n(s.short)} (${s.n})`, run: () => openPerson(pid, 'ou_chercher', {cats: [s.id]})})), {title: i18n('Les autres sortes')});
+    });
 
     /* ═════════════════════ 2. La page (Recherche → 🌍 Où chercher ?) ═════════════════════ */
     const S = () => A().state;
-    function openPerson(pid, kind = 'ou_chercher') {
+    /** opts.cats : ouvrir la page filtrée sur ces sortes (raccourci de la fiche ; le choix retenu n'est pas écrasé) */
+    function openPerson(pid, kind = 'ou_chercher', opts = {}) {
         const st = S(); if (pid) st.oucPerson = Number(pid);
         st.researchKind = kind;
+        st.oucFrom = opts.cats?.length ? {pid: Number(pid) || 0, cats: opts.cats.map(String)} : null;
         if (kind === 'murs' && pid) st.oucOpenWall = Number(pid); // la page des murs l'ouvre une fois dessinée
         A().persistUiState?.();
         A().setModule('recherche');
@@ -279,6 +303,15 @@
         const b = e.target.closest?.('[data-ouc-page]'); if (!b) return;
         e.preventDefault(); openPerson(Number(b.dataset.oucPage) || 0);
     });
+    const LB_KEY = 'recherche:ou_chercher';
+    /** l'état des filtres : celui retenu par la barre H10 (pour toutes les personnes) */
+    function savedFilters() {
+        const s = UI().listBarState?.(LB_KEY) || {};
+        const f = s.f || {};
+        return {q: String(s.q || ''), cats: Array.isArray(f.cats) ? f.cats.map(String) : [], country: String(f.country || 'ses'), fr: !!f.fr, sort: String(s.sort || 'useful')};
+    }
+    /** les écartés d'une sorte, en mots (écran 3a) */
+    const PROFILE_ASK = {marins: ['sailor', '⚓ Il était marin ? Le dire sur sa fiche'], militaire: ['soldier', '🎖 Il était soldat ? Le dire sur sa fiche'], emigration: ['emigrant', '🚢 Il a émigré ? Le dire sur sa fiche'], metiers: ['', '💼 Son métier ? Le dire sur sa fiche']};
     async function page(token, kind) {
         if (kind === 'murs') return wallsPage(token);
         const ws = document.getElementById('workspace'); const st = S();
@@ -290,29 +323,124 @@
             <div class="ouc-who"><span class="pk-lab">Pour qui ?</span>${A().pickerField ? A().pickerField({name: 'ouc_person', kind: 'person', value: pid || null}) : ''}</div>
             <div data-ouc-body>${pid ? (UI().spinner ? UI().spinner('Je cherche les bons sites…') : '…') : A().emptyState({icon: '🌍', text: 'Choisis une personne', hint: 'Ses lieux, ses dates et ce qui manque décident des sites proposés.'})}</div></section>`;
         ws.querySelector('[data-ouc-to-walls]').addEventListener('click', () => openPerson(0, 'murs'));
-        ws.querySelector('.ouc-who').addEventListener('picker-change', e => { const v = Number(e.detail?.value) || 0; if (v) { st.oucPerson = v; A().persistUiState?.(); load(v); } });
+        ws.querySelector('.ouc-who').addEventListener('picker-change', e => { const v = Number(e.detail?.value) || 0; if (v) { st.oucPerson = v; view.fromFiche = null; view.f = savedFilters(); A().persistUiState?.(); load(v); } });
         const body = ws.querySelector('[data-ouc-body]');
-        const view = {pid, data: null, res: null, tab: 'todo', shown: 15};
+        const from = st.oucFrom && (!st.oucFrom.pid || st.oucFrom.pid === pid) ? st.oucFrom : null;
+        st.oucFrom = null;
+        const view = {pid, data: null, res: null, tab: 'todo', shown: 15, rare: false, fromFiche: from ? {cats: from.cats} : null, f: savedFilters()};
+        if (view.fromFiche) view.f = {...view.f, cats: view.fromFiche.cats};
         VIEWS.set(id, view);
+        const filtersActive = f => !!(f.cats.length || (f.country && f.country !== 'ses') || f.fr || f.q);
         view.redraw = () => {
             if (!body.isConnected) { VIEWS.delete(id); return; }
             const res = view.res = suggest(view.data);
-            const ctx = res.ctx, todo = res.list, done = res.searched;
-            const facts = [ctx.by ? `${C().lifeText(ctx)}` : '', ...[...ctx.countries.keys()].map(c => C().COUNTRY_NAME[c] || c), ...ctx.depts.map(d => d.name), ...[...ctx.profiles].filter(k => C().PROFILES[k]).map(k => `${C().PROFILES[k][0]} ${C().PROFILES[k][1]}`), ...[...ctx.missing].map(m => `❓ ${C().MISSING[m]}`)].filter(Boolean);
-            const tabs = [['todo', i18n('Proposés ({n})', {n: todo.length})], ['done', i18n('✓ Déjà cherchés ({n})', {n: done.length})], ['out', i18n('Écartés ({n})', {n: res.out.length})]];
-            const rows = view.tab === 'done' ? done : view.tab === 'out' ? [] : todo;
-            body.innerHTML = `<div class="ouc-facts" aria-label="Ce qui compte pour choisir">${facts.map(f => `<span class="ouc-fact">${esc(f)}</span>`).join('')}</div>
-                <div class="ouc-bar"><div class="ui-filters" role="tablist">${tabs.map(([k, l]) => `<button type="button" class="${view.tab === k ? 'is-active' : ''}" data-ouc-tab="${k}">${esc(l)}</button>`).join('')}</div>${freeToggle()}
+            const ctx = res.ctx, f = view.f, So = SO();
+            const facts = [ctx.by ? `${C().lifeText(ctx)}` : '', ...[...ctx.countries.keys()].map(c => i18n(C().COUNTRY_NAME[c] || c)), ...ctx.depts.map(d => d.name), ...[...ctx.profiles].filter(k => C().PROFILES[k]).map(k => `${C().PROFILES[k][0]} ${i18n(C().PROFILES[k][1])}`), ...[...ctx.missing].map(m => `❓ ${i18n(C().MISSING[m])}`)].filter(Boolean);
+            const outRows = res.out.map(o => ({...o, site: o.site}));
+            const tabRows = {todo: res.list, done: res.searched, out: outRows};
+            const keepF = rows => (So ? So.applyFilters(rows, f) : rows);
+            const shownBy = {todo: keepF(res.list), done: keepF(res.searched), out: keepF(outRows)};
+            const active = filtersActive(f);
+            const TAB_L = {todo: [i18n('Proposés ({n})', {n: tabRows.todo.length}), i18n('Proposés ({n} sur {m})', {n: shownBy.todo.length, m: tabRows.todo.length}), i18n('Proposés ({n})', {n: shownBy.todo.length})],
+                done: [i18n('✓ Déjà cherchés ({n})', {n: tabRows.done.length}), i18n('✓ Déjà cherchés ({n} sur {m})', {n: shownBy.done.length, m: tabRows.done.length}), i18n('✓ Déjà cherchés ({n})', {n: shownBy.done.length})],
+                out: [i18n('Écartés ({n})', {n: tabRows.out.length}), i18n('Écartés ({n} sur {m})', {n: shownBy.out.length, m: tabRows.out.length}), i18n('Écartés ({n})', {n: shownBy.out.length})]};
+            const tabs = ['todo', 'done', 'out'].map(k => [k, TAB_L[k][active ? 1 : 0], TAB_L[k][2]]);
+            const n = So ? So.counts(tabRows[view.tab], f) : {};
+            // la barre H10 : 🔍 Chercher · Filtrer ▾ (Sorte · Pays · Prix · Langue) · Trier
+            const countries = [...ctx.countries.keys()];
+            const nCountry = c => (So ? So.applyFilters(tabRows[view.tab], {...f, country: c}).length : 0);
+            const bar = UI().listBar({key: LB_KEY, remember: view.fromFiche ? false : 'given', search: {placeholder: i18n('Chercher un site… (ex. Gallica, matricule)'), value: f.q},
+                filters: [
+                    {id: 'cats', label: i18n('Sorte de source'), type: 'check', options: (So?.SORTS || []).map(s => [s.id, sortName(s, true), sortName(s), n[s.id] || 0]), value: f.cats},
+                    {id: 'country', label: i18n('Pays'), type: 'radio', dflt: 'ses', value: f.country, options: [['ses', countries.length ? i18n('Ses pays : {list}', {list: countries.map(c => i18n(C().COUNTRY_NAME[c] || c)).join(', ')}) : i18n('Ses pays'), '', shownBy[view.tab].length],
+                        ...countries.map(c => [c, i18n('Un seul : {country}', {country: i18n(C().COUNTRY_NAME[c] || c)}), i18n('Pays : {country}', {country: i18n(C().COUNTRY_NAME[c] || c)}), nCountry(c)]),
+                        ['monde', i18n('Sites du monde entier seulement (FamilySearch, Geneanet…)'), i18n('🌍 Monde entier'), nCountry('monde')]]},
+                    {id: 'free', label: i18n('Prix'), type: 'check', text: res.hidden ? i18n('Gratuites seulement · {n}', {n: plural(res.hidden, 'payant caché', 'payants cachés')}) : i18n('Gratuites seulement'), chipLabel: i18n('💶 Gratuites seulement'), value: freeOnly()},
+                    {id: 'fr', label: i18n('Langue'), type: 'check', text: i18n('En français seulement'), chipLabel: i18n('🇫🇷 En français'), value: f.fr},
+                ],
+                sort: {options: [['useful', i18n('Les plus utiles')], ['az', i18n('A → Z')], ['free', i18n('Gratuits d’abord')]], value: f.sort},
+                onChange: state => {
+                    const ff = state.filters;
+                    if (!!ff.free !== freeOnly()) setFreeOnly(!!ff.free);
+                    view.f = {q: state.q, cats: (ff.cats || []).map(String), country: String(ff.country || 'ses'), fr: !!ff.fr, sort: state.sort || 'useful'};
+                    view.shown = 15; view.redraw();
+                }});
+            bar.classList.add('ouc-listbar');
+            const rows = So ? So.sortRows(shownBy[view.tab], f.sort) : shownBy[view.tab];
+            // la rangée de pastilles toujours visibles (même état que « Filtrer ▾ »), ordre fixe, une sorte à 0 en pointillé à la fin
+            const sorts = So ? So.SORTS.filter(s => !s.rare || view.rare || f.cats.includes(s.id)) : [];
+            const chip = s => `<button type="button" class="ouc-chip${f.cats.includes(s.id) ? ' is-on' : ''}${n[s.id] ? '' : ' is-zero'}" data-ouc-sort="${esc(s.id)}" aria-pressed="${f.cats.includes(s.id)}" title="${esc(sortName(s, true))}">${esc(sortName(s))} <small>${n[s.id] || 0}</small></button>`;
+            const rareN = So ? So.SORTS.filter(s => s.rare && !sorts.includes(s)).length : 0;
+            const chipsHtml = So ? `<div class="ouc-sorts" role="group" aria-label="${esc(i18n('Sorte de source'))}"><span class="ouc-sorts-lab">${esc(i18n('Sorte'))}</span>${[...sorts.filter(s => n[s.id]), ...sorts.filter(s => !n[s.id])].map(chip).join('')}${rareN ? `<button type="button" class="ouc-chip is-more" data-ouc-rare aria-expanded="false">＋${rareN} ▾</button>` : view.rare ? `<button type="button" class="ouc-chip is-more" data-ouc-rare aria-expanded="true">−</button>` : ''}</div>` : '';
+            const fromHtml = view.fromFiche ? `<p class="ouc-from"><span class="ui-badge is-blue">${esc(i18n('🔗 depuis sa fiche'))}</span> ${esc(i18n('Ce filtre vient de sa fiche : ton choix habituel n’est pas changé.'))} <button type="button" class="link-button" data-ouc-from-off>${esc(i18n('Revenir à mon choix'))}</button></p>` : '';
+            const catsLine = x => (So ? `<div class="ouc-cats">${So.catsOf(x.site).map(c => `<span>${esc(sortName(So.SORT[c] || So.OTHER))}</span>`).join('')}</div>` : '');
+            let list;
+            if (view.tab === 'out') list = rows.length ? outHtml(rows) : emptyHtml();
+            else if (rows.length) {
+                list = `<ul class="ouc-list">${rows.slice(0, view.shown).map(x => rowHtml(x, {extra: catsLine(x)})).join('')}</ul>` + (rows.length > view.shown ? `<button type="button" class="ui-more" data-ouc-more-rows>${rows.length - view.shown === 1 ? i18n('Voir le suivant ↓') : i18n('Voir les {n} suivants ↓', {n: Math.min(15, rows.length - view.shown)})}</button>` : '');
+            } else list = emptyHtml();
+            function outHtml(l) {
+                return (So ? So.outGroups(l) : [{label: '', rows: l}]).map(g => `<section class="ouc-outg"><h4>${esc(i18n(g.label))} · ${g.rows.length}</h4><ul class="ouc-out">${g.rows.slice(0, 200).map(o => `<li><b>${esc(o.site.label)}</b> <span class="muted">— ${esc(o.why)}</span>${So ? ` ${So.catsOf(o.site).map(c => `<small class="ouc-cat">${esc((So.SORT[c] || So.OTHER).icon)}</small>`).join('')}` : ''}${g.id === 'low' && o.site.href ? ` <a class="link-button" href="${esc(o.site.href)}" target="_blank" rel="noopener noreferrer">${esc(i18n('↗ Chercher quand même'))}</a>` : ''}</li>`).join('')}</ul></section>`).join('');
+            }
+            function emptyHtml() {
+                if (view.tab === 'done') return A().empty('Rien n’a encore été noté pour cette personne.', {icon: '✓', hint: 'Après une recherche, « ✓ Déjà cherché » la note dans le Journal des recherches.'});
+                if (view.tab === 'out' && !active) return A().empty('Aucun site écarté.', {icon: '🌍'});
+                if (!active || !So) return A().empty('Aucun site à proposer.', {icon: '🌍', hint: res.hidden ? i18n('{n} : décoche « Gratuites seulement ».', {n: plural(res.hidden, 'site payant est caché', 'sites payants sont cachés')}) : 'Ajoute un lieu ou une date sur la fiche.'});
+                const sel = f.cats.map(c => So.SORT[c]).filter(Boolean), selTxt = sel.map(s => sortName(s, true)).join(' · ') || i18n('de ces filtres');
+                const icon = sel[0]?.icon || '🔍';
+                const everywhere = [...res.list, ...res.searched, ...outRows];
+                const inRegistry = So.applyFilters(everywhere, f).length;
+                const actions = [];
+                let text = '', hint = '';
+                if (view.tab === 'todo' && f.country && f.country !== 'ses' && !inRegistry) {
+                    // 3b : aucun site connu de cette sorte dans ce pays
+                    const other = {...f, country: 'ses'}, nOk = So.applyFilters(res.list, other).length, nOut = So.applyFilters(outRows, other).length;
+                    text = i18n('Aucun site {sorts} pour ce pays ({country}) parmi les {n} sites que l’app connaît', {sorts: selTxt, country: i18n(C().COUNTRY_NAME[f.country] || (f.country === 'monde' ? 'Monde entier' : f.country)), n: everywhere.length + res.hidden});
+                    hint = i18n('Pour ses autres pays : {ok} proposés ; {out} écartés.', {ok: nOk, out: nOut});
+                    actions.push(`<button type="button" class="button small" data-ouc-country="ses">${esc(i18n('Ses autres pays ({n})', {n: nOk}))}</button>`);
+                    if (nOut) actions.push(`<button type="button" class="button small secondary" data-ouc-see-out data-ouc-country-out="ses">${esc(i18n('Voir les {n} sites écartés', {n: nOut}))}</button>`);
+                    actions.push(`<button type="button" class="button small secondary" data-ouc-add-site>${esc(i18n('＋ Ajouter un site à moi'))}</button>`);
+                } else if (view.tab === 'todo') {
+                    // 3a : tous les sites de cette sorte sont écartés pour lui : pourquoi, et quoi faire
+                    const outs = So.applyFilters(outRows, f);
+                    text = i18n('Aucun site {sorts} pour {name} ({life})', {sorts: selTxt, name: ctx.name, life: C().lifeText(ctx) || '?'});
+                    if (outs.length) {
+                        hint = `${esc(i18n('Les {n} sites de cette sorte sont écartés :', {n: outs.length}))}<ul class="ouc-why-list">${So.outGroups(outs).map(g => `<li><b>${g.rows.length}</b> · ${esc(i18n(g.label))} <span class="muted">(${esc(g.rows[0].why)})</span></li>`).join('')}</ul>`;
+                        actions.push(`<button type="button" class="button small" data-ouc-see-out>${esc(i18n('Voir les {n} sites écartés', {n: outs.length}))}</button>`);
+                    } else if (!inRegistry) hint = esc(i18n('Aucun site de cette sorte parmi ceux que l’app connaît.'));
+                    sel.forEach(s => { const ask = PROFILE_ASK[s.id]; if (ask && !(ask[0] && ctx.profiles.has(ask[0]))) actions.push(`<button type="button" class="button small secondary" data-ouc-open-person="${view.pid}">${esc(i18n(ask[1]))}</button>`); });
+                    sel.forEach(s => actions.push(`<button type="button" class="button small secondary" data-ouc-sort-off="${esc(s.id)}">${esc(i18n('Enlever {sort}', {sort: sortName(s)}))}</button>`));
+                    if (!sel.length) actions.push(`<button type="button" class="button small secondary" data-ouc-clear>${esc(i18n('Tout effacer'))}</button>`);
+                    return `<div class="ouc-empty" role="status"><div class="ouc-empty-ico" aria-hidden="true">${esc(icon)}</div><p><b>${esc(text)}</b></p>${hint ? `<div class="muted">${hint}</div>` : ''}<p class="ouc-empty-act">${actions.join('')}</p></div>`;
+                } else {
+                    text = i18n('Aucun site écarté avec ces filtres.');
+                    actions.push(`<button type="button" class="button small secondary" data-ouc-clear>${esc(i18n('Tout effacer'))}</button>`);
+                }
+                return `<div class="ouc-empty" role="status"><div class="ouc-empty-ico" aria-hidden="true">${esc(icon)}</div><p><b>${esc(text)}</b></p>${hint ? `<p class="muted">${esc(hint)}</p>` : ''}<p class="ouc-empty-act">${actions.join('')}</p></div>`;
+            }
+            body.innerHTML = `<div class="ouc-facts" aria-label="Ce qui compte pour choisir">${facts.map(x => `<span class="ouc-fact">${esc(x)}</span>`).join('')}</div>
+                <div data-ouc-bar-slot></div>${chipsHtml}${fromHtml}
+                <div class="ouc-bar"><div class="ui-filters" role="tablist">${tabs.map(([k, l, short]) => `<button type="button" role="tab" aria-selected="${view.tab === k}" class="${view.tab === k ? 'is-active' : ''}" data-ouc-tab="${k}"><span class="ouc-tab-long">${esc(l)}</span><span class="ouc-tab-short">${esc(short)}</span></button>`).join('')}</div>
                 <button type="button" class="button small secondary" data-ouc-open-person="${view.pid}">↗ Fiche</button><button type="button" class="button small secondary" data-ouc-wall-toggle>${view.data.raw.wall?.manual ? '🧱 Ne plus bloquer ici' : '🧱 Je bloque ici'}</button></div>
-                ${view.tab === 'out' ? (res.out.length ? `<ul class="ouc-out">${res.out.slice(0, 200).map(o => `<li><b>${esc(o.site.label)}</b> <span class="muted">— ${esc(o.why)}</span></li>`).join('')}</ul>` : A().empty('Aucun site écarté.', {icon: '🌍'}))
-                    : rows.length ? listHtml(rows.slice(0, view.shown)) + (rows.length > view.shown ? `<button type="button" class="ui-more" data-ouc-more-rows>${rows.length - view.shown === 1 ? i18n('Voir le suivant ↓') : i18n('Voir les {n} suivants ↓', {n: Math.min(15, rows.length - view.shown)})}</button>` : '')
-                    : view.tab === 'done' ? A().empty('Rien n’a encore été noté pour cette personne.', {icon: '✓', hint: 'Après une recherche, « ✓ Déjà cherché » la note dans le Journal des recherches.'})
-                    : A().empty('Aucun site à proposer.', {icon: '🌍', hint: res.hidden ? i18n('{n} : décoche « Gratuites seulement ».', {n: plural(res.hidden, 'site payant est caché', 'sites payants sont cachés')}) : 'Ajoute un lieu ou une date sur la fiche.'})}
-                ${view.tab === 'todo' && res.hidden ? `<p class="ui-hint">${i18n('{n} par « Gratuites seulement ».', {n: plural(res.hidden, 'site payant caché', 'sites payants cachés')})}</p>` : ''}
+                ${list}
+                ${view.tab === 'todo' && res.hidden && !f.cats.length ? `<p class="ui-hint">${i18n('{n} par « Gratuites seulement ».', {n: plural(res.hidden, 'site payant caché', 'sites payants cachés')})}</p>` : ''}
                 ${view.data.raw.leads?.length ? `<details class="ouc-leads"><summary>📌 ${plural(view.data.raw.leads.length, 'piste d’enquête', 'pistes d’enquête')}</summary><ul>${view.data.raw.leads.slice(0, 20).map(l => `<li>${esc(l.title)} <small class="muted">· ${esc(l.investigation)}</small> <button type="button" class="link-button" data-ouc-inv="${l.investigation_id}">↗ Ouvrir</button></li>`).join('')}</ul></details>` : ''}`;
+            body.querySelector('[data-ouc-bar-slot]').replaceWith(bar);
+            view.bar = bar;
+            ext.ouChercher?.afterRedraw?.forEach(fn => { try { fn(view, body); } catch (_) {} });
         };
+        const setCats = cats => { view.f = {...view.f, cats}; if (view.fromFiche || !view.bar) { view.shown = 15; view.redraw(); } else view.bar.setFilter('cats', cats); };
         body.addEventListener('click', async e => {
             const tb = e.target.closest('[data-ouc-tab]'); if (tb) { view.tab = tb.dataset.oucTab; view.shown = 15; view.redraw(); return; }
+            const so = e.target.closest('[data-ouc-sort]'); if (so) { const k = so.dataset.oucSort, c = view.f.cats; setCats(c.includes(k) ? c.filter(x => x !== k) : [...c, k]); return; }
+            if (e.target.closest('[data-ouc-rare]')) { view.rare = !view.rare; view.redraw(); return; }
+            const off = e.target.closest('[data-ouc-sort-off]'); if (off) { setCats(view.f.cats.filter(x => x !== off.dataset.oucSortOff)); return; }
+            if (e.target.closest('[data-ouc-from-off]')) { view.fromFiche = null; view.f = savedFilters(); view.redraw(); return; }
+            if (e.target.closest('[data-ouc-clear]')) { if (view.bar && !view.fromFiche) view.bar.clear(true); else { view.f = {...view.f, cats: [], country: 'ses', fr: false, q: ''}; view.redraw(); } return; }
+            const cty = e.target.closest('[data-ouc-country], [data-ouc-country-out]');
+            if (cty) { const v = cty.dataset.oucCountry || cty.dataset.oucCountryOut; if (cty.hasAttribute('data-ouc-see-out')) view.tab = 'out'; view.f = {...view.f, country: v}; if (view.bar && !view.fromFiche) view.bar.setFilter('country', v); else view.redraw(); return; }
+            if (e.target.closest('[data-ouc-see-out]')) { view.tab = 'out'; view.shown = 15; view.redraw(); return; }
+            if (e.target.closest('[data-ouc-add-site]')) { Object.assign(S(), {module: S().module, maintenanceTab: 'design_sheets'}); await A().setModule('maintenance'); setTimeout(() => document.querySelector('#web-search-config')?.scrollIntoView({block: 'start'}), 300); return; }
             if (e.target.closest('[data-ouc-more-rows]')) { view.shown += 15; view.redraw(); return; }
             const op = e.target.closest('[data-ouc-open-person]'); if (op) { S().currentPersonId = view.pid; A().setModule('personnes'); return; }
             const inv = e.target.closest('[data-ouc-inv]'); if (inv) { Object.assign(S(), {currentInvestigationId: Number(inv.dataset.oucInv), enquetesTab: 'enquetes'}); A().setModule('enquetes'); return; }
@@ -518,6 +646,13 @@
     ext.personMoreItems = ext.personMoreItems || [];
     const humanOf = detail => { const p = detail?.person; return p?.id && p.kind !== 'animal' ? p : null; };
     ext.personMoreItems.push(detail => { const p = humanOf(detail); return p ? {icon: '🌍', label: 'Où chercher ?', run: () => openPerson(Number(p.id))} : null; });
+    // et ses raccourcis (les 3 premiers du bloc, écran 5b) quand le bloc les a déjà calculés
+    [0, 1, 2].forEach(i => ext.personMoreItems.push(detail => {
+        const p = humanOf(detail); if (!p || !SO()) return null;
+        const v = [...VIEWS.values()].find(x => x.pid === Number(p.id) && x.res && !x.bar); if (!v) return null;
+        const s = SO().shortcuts(v.res.ctx, v.res.list)[i]; if (!s) return null;
+        return {icon: '🌍', label: `› ${s.icon} ${i18n(s.short)} (${s.n})`, run: () => openPerson(Number(p.id), 'ou_chercher', {cats: [s.id]})};
+    }));
     ext.personMoreItems.push(detail => {
         const p = humanOf(detail); if (!p) return null;
         const manual = !!(cache.get(Number(p.id))?.raw?.wall?.manual);
@@ -526,5 +661,5 @@
             await toggleManual(Number(p.id), A().personName?.(p) || p.first_name || '', on); cache.delete(Number(p.id)); }};
     });
 
-    ext.ouChercher = {page, openPerson, openWall, allSites, suggest, loadPerson, lots, freeOnly, setFreeOnly, widgetBody, loadWalls};
+    ext.ouChercher = {afterRedraw: ext.ouChercher?.afterRedraw || [], page, openPerson, openWall, allSites, suggest, loadPerson, lots, freeOnly, setFreeOnly, widgetBody, loadWalls};
 })();

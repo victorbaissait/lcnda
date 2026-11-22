@@ -152,7 +152,7 @@ function tresor_tree(PDO $pdo): array
     // pour que le navigateur n'ait pas à deviner (un enfant sans date d'une personne née en 1950 est aussi retiré)
     if (function_exists('person_select')) {
         require_once __DIR__ . '/gedcom.php';
-        try { foreach (gedcom_share_hidden($pdo, tresor_share_rows($pdo), $pdo->query('SELECT id, partner1_id, partner2_id FROM families')->fetchAll()) as $hid => $_) { if (isset($people[(int) $hid])) { $people[(int) $hid]['sh'] = true; } } }
+        try { foreach (tresor_share_hidden_all($pdo) as $hid => $_) { if (isset($people[(int) $hid])) { $people[(int) $hid]['sh'] = true; } } }
         catch (Throwable $e) { foreach ($people as $id => $_) { $people[$id]['sh'] = true; } } // dans le doute, rien ne part
     }
     if ($kiosk) { // consultation : aussi les vivants probables (même règle que le partage), et leurs événements
@@ -170,6 +170,20 @@ function tresor_tree(PDO $pdo): array
         $events = array_values(array_filter($events, static fn($e) => !isset($hiddenFam[(int) ($e['f'] ?? 0)])));
     }
     return ['people' => array_values($people), 'families' => array_values($families), 'places' => (object) $places, 'events' => $events];
+}
+
+/**
+ * La règle de l'export « Pour partager » sur toute la base (vivants déclarés ou probables, fiches confidentielles) :
+ * gedcom_share_hidden(tresor_share_rows(), familles) [id => 'living'|'private']. 🐘 1,5 s à 200 000 fiches, demandé par
+ * plusieurs écrans (fiche, Trésors, fiabilité) : gardé tant que fiches, événements et familles ne changent pas (l'année
+ * compte : « moins de 100 ans ») ; une erreur n'est jamais gardée.
+ */
+function tresor_share_hidden_all(PDO $pdo): array
+{
+    if (!function_exists('gedcom_share_hidden')) { require_once __DIR__ . '/gedcom.php'; }
+    $run = static fn() => gedcom_share_hidden($pdo, tresor_share_rows($pdo), $pdo->query('SELECT id, partner1_id, partner2_id FROM families')->fetchAll());
+    if (!function_exists('calc_cached')) { return $run(); }
+    return calc_cached($pdo, 'share_hidden', ['persons', 'events', 'event_types', 'families', 'family_children'], [date('Y'), $_GET['death_cutoff_year'] ?? ''], $run);
 }
 
 /** En consultation : les personnes à ne jamais montrer (vivants déclarés ou probables, fiches confidentielles) [id => true] ; [] sinon */
@@ -209,7 +223,7 @@ function tresor_hidden_people(PDO $pdo): array
     foreach ($pdo->query("SELECT id FROM persons WHERE COALESCE(living_status,'')='living'" . ($hasPriv ? ' OR COALESCE(is_private,0)=1' : '')) as $r) { $memo[(int) $r['id']] = true; }
     try {
         if (!function_exists('gedcom_share_hidden')) { require_once __DIR__ . '/gedcom.php'; }
-        foreach (gedcom_share_hidden($pdo, tresor_share_rows($pdo), $pdo->query('SELECT id, partner1_id, partner2_id FROM families')->fetchAll()) as $h => $_) { $memo[(int) $h] = true; }
+        foreach (tresor_share_hidden_all($pdo) as $h => $_) { $memo[(int) $h] = true; }
     } catch (Throwable $e) { foreach ($pdo->query('SELECT id FROM persons') as $r) { $memo[(int) $r['id']] = true; } } // dans le doute, personne
     return $memo;
 }
@@ -321,7 +335,14 @@ function tresors_dispatch(PDO $pdo, string $action, bool $isWrite, array $payloa
             $hid = tresor_hidden_people($pdo);
             json_response(['items' => array_values(array_filter(tresors_list($pdo, $kind, safe_int($_GET['person_id'] ?? 0)), static fn($it) => !isset($hid[(int) ($it['person_id'] ?? 0)])))]);
         }
-        if (!$isWrite && $action === 'tresor_tree') { json_response(tresor_tree($pdo)); }
+        if (!$isWrite && $action === 'tresor_tree') {
+            // 🐘 l'arbre entier (200 000 fiches : 7 s, 130 Mo) : gardé déjà encodé tant que les tables lues ne changent pas ;
+            // le mode consultation, l'année (« vivant probable » : moins de 100 ans) et les modules chargés comptent
+            $kioskOn = function_exists('kiosk_state') && !empty(kiosk_state()['on']);
+            json_response_encoded(calc_cached($pdo, 'tresor_tree' . ($kioskOn ? '_kiosk' : ''), ['persons', 'media', 'places', 'families', 'family_children', 'events', 'event_types', 'so_imports', 'items'],
+                [$kioskOn, date('Y'), $_GET['death_cutoff_year'] ?? '', function_exists('so2_respect_ids'), function_exists('so3_respect_ids'), function_exists('so7_respect_ids'), function_exists('person_select')],
+                static function () use ($pdo): string { if (function_exists('memory_for_persons')) { memory_for_persons($pdo, 5.5, 1024); } return json_encode(tresor_tree($pdo), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR); }));
+        }
         if (!$isWrite && $action === 'tresor_media') { // les médias joints (lettres, souvenirs) : nom de fichier et sorte, pour les lire sur place
             $ids = array_slice(array_values(array_filter(array_map('intval', explode(',', (string) ($_GET['ids'] ?? ''))))), 0, 200); if (!$ids) { json_response(['media' => []]); }
             $st = $pdo->prepare('SELECT m.id, m.title, m.media_type, m.filename, m.thumbnail FROM media m WHERE m.id IN (' . implode(',', array_fill(0, count($ids), '?')) . ')' . sealed_media_sql($pdo)); $st->execute($ids);

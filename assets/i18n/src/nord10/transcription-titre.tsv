@@ -1,0 +1,24 @@
+fr ¦ sq ¦ mt
+À préciser ¦ Për t’u saktësuar ¦ Għad irid jiġi speċifikat
+Lecture approfondie (IA sur cet ordinateur) ¦ Lexim i thelluar (IA në këtë kompjuter) ¦ Qari fil-fond (IA fuq dan il-kompjuter)
+En plus du moteur ci-dessus : un modèle « vision » ouvert (Qwen3-VL, licence Apache 2.0) qui lit toute la page, servi par Ollama sur cet ordinateur. Facultatif. Rien ne part sur Internet, sauf le téléchargement du modèle (3 à 6 Go, une seule fois). ¦ Përveç motorit më sipër: një model «vizioni» i hapur (Qwen3-VL, licencë Apache 2.0) që lexon gjithë faqen, i shërbyer nga Ollama në këtë kompjuter. Opsionale. Asgjë nuk shkon në internet, përveç shkarkimit të modelit (3 deri në 6 GB, një herë). ¦ Minbarra l-magna ta’ hawn fuq: mudell “viżjoni” miftuħ (Qwen3-VL, liċenzja Apache 2.0) li jaqra l-paġna kollha, imħaddem minn Ollama fuq dan il-kompjuter. Fakultattiv. Xejn ma jmur fuq l-Internet ħlief it-tniżżil tal-mudell (3 sa 6 GB, darba).
+Ensuite, dans l’atelier de transcription : « 🔍 Essayer aussi la lecture approfondie » montre les deux lectures côte à côte, et tu gardes la meilleure. ¦ Pastaj, në punishten e transkriptimit: «🔍 Provo edhe leximin e thelluar» i tregon të dy leximet krah për krah dhe ti mban më të mirin. ¦ Imbagħad, fil-laboratorju tat-traskrizzjoni: “🔍 Ipprova wkoll il-qari fil-fond” juri ż-żewġ qarjiet ħdejn xulxin, u żżomm l-aħjar wieħed.
+Installer ou vérifier la lecture approfondie… ¦ Instalo ose kontrollo leximin e thelluar… ¦ Installa jew iċċekkja l-qari fil-fond…
+La lecture approfondie n’est pas encore chargée : réessaie dans un instant. ¦ Leximi i thelluar ende nuk është ngarkuar: provo sërish pas pak. ¦ Il-qari fil-fond għadu mhux mgħobbi: erġa’ pprova ftit wara.
+Pour lire un acte : ouvre son image dans l’atelier de transcription (« 📜 Atelier »), puis « ✨ Lire l’acte ». ¦ Për të lexuar një akt: hap imazhin e tij në punishten e transkriptimit («📜 Punishtja»), pastaj «✨ Lexo aktin». ¦ Biex taqra att: iftaħ l-immaġni tiegħu fil-laboratorju tat-traskrizzjoni (“📜 Laboratorju”), imbagħad “✨ Aqra l-att”.
+Transcrire ¦ Transkripto ¦ Ittraskrivi
+Ouvrir l’outil de transcription complet sur cette image ¦ Hap mjetin e plotë të transkriptimit për këtë imazh ¦ Iftaħ l-għodda sħiħa tat-traskrizzjoni għal din l-immaġni
+Le modèle a réfléchi sans écrire de transcription. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Modeli mendoi pa shkruar një transkriptim. Pri një zonë më të vogël (disa rreshta) ose provo modelin 8B, pastaj nise sërish. ¦ Il-mudell ħaseb mingħajr ma kiteb traskrizzjoni. Aqta’ żona iżgħar (ftit linji) jew ipprova l-mudell 8B, imbagħad erġa’ ibda.
+Le modèle n’a rien lu sur cette image. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Modeli nuk lexoi asgjë në këtë imazh. Pri një zonë më të vogël (disa rreshta) ose provo modelin 8B, pastaj nise sërish. ¦ Il-mudell ma qara xejn f’din l-immaġni. Aqta’ żona iżgħar (ftit linji) jew ipprova l-mudell 8B, imbagħad erġa’ ibda.
+La lecture a été arrêtée. ¦ Leximi u ndal. ¦ Il-qari twaqqaf.
+Modèle : {m} · {n} s ¦ Modeli: {m} · {n} s ¦ Mudell: {m} · {n} s
+Ce document n’a pas d’image : l’Atelier de transcription a besoin d’une image. ¦ Ky dokument nuk ka imazh: Punishtja e transkriptimit ka nevojë për një imazh. ¦ Dan id-dokument m’għandux immaġni: il-Laboratorju tat-traskrizzjoni jeħtieġ immaġni.
+L’Atelier de transcription n’est pas encore chargé : réessaie dans un instant. ¦ Punishtja e transkriptimit ende nuk është ngarkuar: provo sërish pas pak. ¦ Il-Laboratorju tat-traskrizzjoni għadu mhux mgħobbi: erġa’ pprova ftit wara.
+L’Atelier de transcription n’a pas pu s’ouvrir : {x} ¦ Punishtja e transkriptimit nuk u hap dot: {x} ¦ Il-Laboratorju tat-traskrizzjoni ma setax jinfetaħ: {x}
+Lecture approfondie (IA) ¦ Lexim i thelluar (IA) ¦ Qari fil-fond (IA)
+Impossible de suivre la lecture : {x} ¦ Leximi nuk mund të ndiqet: {x} ¦ Ma jistax jiġi segwit il-qari: {x}
+Le programme de lecture n’a pas démarré. ¦ Programi i leximit nuk u nis. ¦ Il-programm tal-qari ma bediex.
+Acte de notoriété ¦ Akt i notorietetit ¦ Att ta’ notorjetà
+Cadres ¦ Kornizat ¦ Kwadri
+Opacité des cadres de couleur (0 = presque invisibles) ¦ Opaciteti i kornizave me ngjyrë (0 = pothuajse të padukshme) ¦ Opaċità tal-kwadri bil-kulur (0 = kważi inviżibbli)
+Ce document n’a pas pu être relu : réessaie dans un instant. ¦ Ky dokument nuk u rilexua dot: provo sërish pas pak. ¦ Dan id-dokument ma setax jerġa’ jinqara: erġa’ pprova ftit wara.

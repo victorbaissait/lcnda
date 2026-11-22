@@ -1,0 +1,17 @@
+fr ¦ cs ¦ sv ¦ da
+# ▤ La lecture approfondie, ligne par ligne : relier les lignes du texte à l’image (app-lignes-alignement.js, heritage-transcribe.js)
+Relier les lignes à l’image ¦ Propojit řádky s obrázkem ¦ Koppla raderna till bilden ¦ Forbind linjerne med billedet
+Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis ¦ Propojit každý řádek textu s jeho řádkem na obrázku (barevné oblasti, klik řádek ↔ oblast): po důkladném čtení nebo u již vloženého textu ¦ Koppla varje rad i texten till dess rad på bilden (färgade områden, klick rad ↔ område): efter den grundliga läsningen, eller på en text som redan finns ¦ Forbind hver linje i teksten med dens linje på billedet (farvede områder, klik linje ↔ område): efter den grundige læsning eller på en tekst, der allerede er sat ind
+Relier les lignes à l’image (une zone par ligne, comme la lecture rapide) ¦ Propojit řádky s obrázkem (jedna oblast na řádek, jako při rychlém čtení) ¦ Koppla raderna till bilden (ett område per rad, som vid snabbläsningen) ¦ Forbind linjerne med billedet (ét område pr. linje, som ved den hurtige læsning)
+Découpage de la page en lignes… ¦ Rozdělování stránky na řádky… ¦ Delar upp sidan i rader… ¦ Deler siden op i linjer…
+Découpage de la page en lignes (lecture rapide)… ¦ Rozdělování stránky na řádky (rychlé čtení)… ¦ Delar upp sidan i rader (snabbläsning)… ¦ Deler siden op i linjer (hurtig læsning)…
+Découpage simple de la page en lignes… ¦ Jednoduché rozdělení stránky na řádky… ¦ Enkel uppdelning av sidan i rader… ¦ Enkel opdeling af siden i linjer…
+Le découpage en lignes n’est pas chargé. ¦ Rozdělení na řádky není načteno. ¦ Uppdelningen i rader är inte inläst. ¦ Opdelingen i linjer er ikke indlæst.
+Pas de ligne de texte à relier. ¦ Žádný řádek textu k propojení. ¦ Ingen textrad att koppla. ¦ Ingen tekstlinje at forbinde.
+Le texte a changé pendant le découpage : « ▤ Relier les lignes à l’image » pour recommencer. ¦ Text se během rozdělování změnil: „▤ Propojit řádky s obrázkem“ pro nový začátek. ¦ Texten ändrades under uppdelningen: ”▤ Koppla raderna till bilden” för att börja om. ¦ Teksten ændrede sig under opdelingen: »▤ Forbind linjerne med billedet« for at begynde forfra.
+Ligne reliée sans certitude : vérifie sur l’image ¦ Řádek propojen bez jistoty: zkontroluj ho na obrázku ¦ Rad kopplad utan säkerhet: kontrollera den på bilden ¦ Linje forbundet uden sikkerhed: tjek den på billedet
+Lignes reliées à l’image : {x} ¦ Řádky propojené s obrázkem: {x} ¦ Rader kopplade till bilden: {x} ¦ Linjer forbundet med billedet: {x}
+à vérifier (❔) : {n} ¦ ke kontrole (❔): {n} ¦ att kontrollera (❔): {n} ¦ skal tjekkes (❔): {n}
+sans zone : {n} ¦ bez oblasti: {n} ¦ utan område: {n} ¦ uden område: {n}
+d’après la lecture rapide ¦ podle rychlého čtení ¦ enligt snabbläsningen ¦ ud fra den hurtige læsning
+d’après un découpage simple de l’image ¦ podle jednoduchého rozdělení obrázku ¦ enligt en enkel uppdelning av bilden ¦ ud fra en enkel opdeling af billedet

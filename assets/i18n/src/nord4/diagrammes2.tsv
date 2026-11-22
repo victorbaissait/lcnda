@@ -1690,3 +1690,6 @@ Notaires ¦ Notaarit ¦ Közjegyzők
 {name} : {a} sur {n} enfants morts avant 1 an ({p} %) ¦ {name}: {a}/{n} lasta kuoli alle 1-vuotiaana ({p} %) ¦ {name}: {n} gyerekből {a} halt meg 1 éves kora előtt ({p} %)
 {name} : {a} sur {n} morts avant 5 ans ({p} %) ¦ {name}: {a}/{n} kuoli alle 5-vuotiaana ({p} %) ¦ {name}: {n}-ből {a} halt meg 5 éves kora előtt ({p} %)
 parrains : {a} sur {b} · marraines : {c} sur {d} ¦ kummisedät: {a}/{b} · kummitädit: {c}/{d} ¦ keresztapák: {b}-ből {a} · keresztanyák: {d}-ből {c}
+Toute ma base ¦ Koko tietokantani ¦ A teljes adatbázisom
+Mes descendants ¦ Jälkeläiseni ¦ Leszármazottaim
+Depuis 1900 ¦ Vuodesta 1900 ¦ 1900 óta

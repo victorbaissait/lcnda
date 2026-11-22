@@ -1,0 +1,186 @@
+fr ¦ vi ¦ id
+# 🏛⚠️📋📱 Compléments aux outils existants (docs/design/complements-existants.html) : C tous les doutes, D visite aux archives, erreurs du serveur
+📋 Tous les doutes ¦ 📋 Mọi nghi vấn ¦ 📋 Semua keraguan
+Points à revoir ¦ Điểm cần xem lại ¦ Hal yang perlu ditinjau
+Chaque ligne est lue dans l’outil d’origine au moment où tu ouvres la liste, et « ↗ » t’y emmène pour décider. Rien n’est copié : corriger dans l’outil fait disparaître la ligne. ¦ Mỗi dòng được đọc từ công cụ gốc lúc bạn mở danh sách, và “↗” đưa bạn đến đó để quyết định. Không có gì được sao chép: sửa trong công cụ sẽ làm dòng biến mất. ¦ Setiap baris dibaca dari alat asalnya saat kamu membuka daftar, dan “↗” membawamu ke sana untuk memutuskan. Tidak ada yang disalin: memperbaiki di alat membuat baris hilang.
+Je lis les outils… ¦ Đang đọc các công cụ… ¦ Sedang membaca alat…
+Chercher une personne, un lieu… ¦ Tìm một người, một nơi… ¦ Cari orang, tempat…
+et ses ancêtres ¦ và tổ tiên của người đó ¦ dan leluhurnya
+Branche ¦ Nhánh ¦ Cabang
+paternelle (Sosa 2) ¦ bên nội (Sosa 2) ¦ pihak ayah (Sosa 2)
+maternelle (Sosa 3) ¦ bên ngoại (Sosa 3) ¦ pihak ibu (Sosa 3)
+Vus ¦ Đã xem ¦ Sudah dilihat
+Pas encore vus ¦ Chưa xem ¦ Belum dilihat
+Vus aussi ¦ Cả đã xem ¦ Termasuk yang dilihat
+Seulement les vus ¦ Chỉ đã xem ¦ Hanya yang dilihat
+↗ Ouvrir dans l’outil ¦ ↗ Mở trong công cụ ¦ ↗ Buka di alat
+👁 Ne plus marquer vu ¦ 👁 Bỏ đánh dấu đã xem ¦ 👁 Hapus tanda dilihat
+👁 Marquer vu ¦ 👁 Đánh dấu đã xem ¦ 👁 Tandai dilihat
+👤 Ouvrir la fiche de {name} ¦ 👤 Mở thẻ của {name} ¦ 👤 Buka kartu {name}
+🔍 Seulement les doutes de cette personne ¦ 🔍 Chỉ nghi vấn của người này ¦ 🔍 Hanya keraguan orang ini
+Aucun doute pour l’instant ¦ Hiện chưa có nghi vấn ¦ Belum ada keraguan
+Les outils d’origine n’ont rien à vérifier : bravo ! ¦ Các công cụ gốc không có gì cần kiểm tra: tuyệt vời! ¦ Alat asalnya tidak punya apa pun untuk diperiksa: hebat!
+vu le {d} ¦ đã xem ngày {d} ¦ dilihat {d}
+revenu : la chose a changé ¦ quay lại: có điều đã thay đổi ¦ muncul lagi: ada yang berubah
+👁 « {t} » n’est plus marqué vu. ¦ 👁 “{t}” không còn được đánh dấu đã xem. ¦ 👁 “{t}” tidak lagi ditandai dilihat.
+👁 « {t} » marqué vu. ¦ 👁 “{t}” đã đánh dấu đã xem. ¦ 👁 “{t}” ditandai dilihat.
+impossible ¦ bất khả ¦ mustahil
+impossibles ¦ bất khả ¦ mustahil
+curieux ¦ lạ ¦ janggal
+Le plus grave : {t} ¦ Nghiêm trọng nhất: {t} ¦ Paling serius: {t}
+Doutes ¦ Nghi vấn ¦ Keraguan
+Hypothèse ouverte ¦ Giả thuyết đang mở ¦ Hipotesis terbuka
+↗ Contrôle ¦ ↗ Kiểm tra ¦ ↗ Pemeriksaan
+↗ Comparer ¦ ↗ So sánh ¦ ↗ Bandingkan
+Liens fragiles ¦ Liên kết yếu ¦ Tautan rapuh
+↗ Solidité ¦ ↗ Độ vững ¦ ↗ Kekuatan
+Désaccord de preuve ¦ Bất đồng chứng cứ ¦ Bukti tidak sepakat
+↗ Dossier de preuve ¦ ↗ Hồ sơ chứng cứ ¦ ↗ Berkas bukti
+Lecture SocFace ¦ Bản đọc SocFace ¦ Bacaan SocFace
+↗ Image ¦ ↗ Hình ảnh ¦ ↗ Gambar
+Successoral ¦ Thừa kế ¦ Waris
+Naissance sans source ¦ Sinh không có nguồn ¦ Kelahiran tanpa sumber
+Baptême sans source ¦ Rửa tội không có nguồn ¦ Pembaptisan tanpa sumber
+Mariage sans source ¦ Kết hôn không có nguồn ¦ Pernikahan tanpa sumber
+Décès sans source ¦ Mất không có nguồn ¦ Kematian tanpa sumber
+Inhumation sans source ¦ Chôn cất không có nguồn ¦ Pemakaman tanpa sumber
+Événement sans source ¦ Sự kiện không có nguồn ¦ Peristiwa tanpa sumber
+Lien parent-enfant supposé ¦ Liên kết cha mẹ–con giả định ¦ Tautan orang tua–anak yang diduga
+Lien parent-enfant sans source ¦ Liên kết cha mẹ–con không có nguồn ¦ Tautan orang tua–anak tanpa sumber
+{a} réponses, {p} preuves ¦ {a} phản hồi, {p} chứng cứ ¦ {a} balasan, {p} bukti
+Désaccord sans résolution ¦ Bất đồng chưa giải quyết ¦ Ketidaksepakatan belum terselesaikan
+Homonyme dans un dossier de succession ¦ Người trùng tên trong một hồ sơ thừa kế ¦ Nama kembar di berkas waris
+Personne vivante ¦ Người còn sống ¦ Orang yang masih hidup
+« Sans source » ¦ “Không có nguồn” ¦ “Tanpa sumber”
+Seulement les ancêtres Sosa ¦ Chỉ tổ tiên Sosa ¦ Hanya leluhur Sosa
+Pas du tout ¦ Hoàn toàn không ¦ Sama sekali tidak
+Une ligne marquée vue ¦ Một dòng đã đánh dấu đã xem ¦ Baris yang ditandai dilihat
+Revient si la chose change ¦ Quay lại nếu có điều thay đổi ¦ Muncul lagi bila ada yang berubah
+Ne revient jamais ¦ Không bao giờ quay lại ¦ Tidak pernah muncul lagi
+Les lignes vues ¦ Các dòng đã xem ¦ Baris yang sudah dilihat
+Cachées par le filtre de départ « Pas encore vus » ¦ Ẩn bởi bộ lọc ban đầu “Chưa xem” ¦ Disembunyikan filter awal “Belum dilihat”
+Montrées en pâle ¦ Hiện mờ ¦ Ditampilkan pucat
+Pistes du successoral ¦ Manh mối thừa kế ¦ Petunjuk waris
+À part, dans les dossiers ¦ Riêng, trong các hồ sơ ¦ Terpisah, di berkas
+Aussi dans cette liste ¦ Cả trong danh sách này ¦ Juga di daftar ini
+Le widget ¦ Tiện ích ¦ Widget
+Les trois nombres et le plus grave ¦ Ba con số và điều nghiêm trọng nhất ¦ Tiga angka dan yang paling serius
+Les 5 premières lignes ¦ 5 dòng đầu ¦ 5 baris pertama
+📱 Visite aux archives ¦ 📱 Chuyến đi lưu trữ ¦ 📱 Kunjungan ke arsip
+🗄 Préparer une visite ¦ 🗄 Chuẩn bị chuyến đi ¦ 🗄 Siapkan kunjungan
+Préparer une visite ¦ Chuẩn bị chuyến đi ¦ Siapkan kunjungan
+🗄 Créer la visite ¦ 🗄 Tạo chuyến đi ¦ 🗄 Buat kunjungan
+Service ¦ Cơ quan ¦ Layanan
+Pour quel dossier ? (facultatif) ¦ Cho hồ sơ nào? (không bắt buộc) ¦ Untuk berkas mana? (opsional)
+Ouvert : {h} ¦ Mở cửa: {h} ¦ Buka: {h}
+Les horaires et l’adresse sont lus dans la fiche du service. ¦ Giờ mở cửa và địa chỉ được đọc từ thẻ của cơ quan. ¦ Jam buka dan alamat dibaca dari kartu layanan.
+Les cotes à voir ¦ Các ký hiệu lưu trữ cần xem ¦ Nomor arsip yang akan dilihat
+déjà en ligne : Où chercher ? ¦ đã có trực tuyến: Tìm ở đâu? ¦ sudah daring: Di mana mencari?
+({n} cochées sur {m}) ¦ (đã đánh dấu {n} trên {m}) ¦ ({n} dicentang dari {m})
+Coche au moins une cote. ¦ Hãy đánh dấu ít nhất một ký hiệu lưu trữ. ¦ Centang setidaknya satu nomor arsip.
+🗄 Visite créée : {n}. Elle est dans Listes → Visites d’archives. ¦ 🗄 Đã tạo chuyến đi: {n}. Nó nằm trong Danh sách → Chuyến đi lưu trữ. ¦ 🗄 Kunjungan dibuat: {n}. Ada di Daftar → Kunjungan arsip.
+⚖️ reliée à un dossier ¦ ⚖️ liên kết với một hồ sơ ¦ ⚖️ terhubung ke berkas
+📱 Emporter sur le téléphone ¦ 📱 Mang theo trên điện thoại ¦ 📱 Bawa di ponsel
+⤒ Rapporter les résultats ¦ ⤒ Mang kết quả về ¦ ⤒ Bawa pulang hasilnya
+⤒ Importer les photos du jour ¦ ⤒ Nhập ảnh trong ngày ¦ ⤒ Impor foto hari ini
+Importer les photos du jour ¦ Nhập ảnh trong ngày ¦ Impor foto hari ini
+Visite aux archives · {what} ¦ Chuyến đi lưu trữ · {what} ¦ Kunjungan ke arsip · {what}
+Marche sans réseau. Tout est gardé dans ce téléphone au fur et à mesure. ¦ Hoạt động không cần mạng. Mọi thứ được lưu dần trong điện thoại này. ¦ Berjalan tanpa jaringan. Semuanya disimpan di ponsel ini seiring jalan.
+Photo interdite ici : pas de bouton 📷. ¦ Cấm chụp ảnh ở đây: không có nút 📷. ¦ Dilarang memotret di sini: tidak ada tombol 📷.
+＋ Une cote trouvée sur place, pas prévue au départ ¦ ＋ Một ký hiệu lưu trữ tìm thấy tại chỗ, không dự tính trước ¦ ＋ Nomor arsip yang ditemukan di tempat, tidak direncanakan
+⤓ Enregistrer mes résultats ¦ ⤓ Lưu kết quả của tôi ¦ ⤓ Simpan hasilku
+📷 Photo ¦ 📷 Ảnh ¦ 📷 Foto
+Retirer cette photo ¦ Gỡ ảnh này ¦ Hapus foto ini
+Cote ajoutée sur place ¦ Ký hiệu lưu trữ thêm tại chỗ ¦ Nomor arsip ditambahkan di tempat
+✓ Gardé dans ce téléphone à {time} ¦ ✓ Đã lưu trong điện thoại này lúc {time} ¦ ✓ Disimpan di ponsel ini pukul {time}
+⚠️ Ce navigateur ne garde rien dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Trình duyệt này không lưu gì trong trang: hãy lưu kết quả sau mỗi ký hiệu lưu trữ. ¦ ⚠️ Peramban ini tidak menyimpan apa pun di halaman: simpan hasilmu setelah setiap nomor arsip.
+⚠️ Ce téléphone ne garde pas les photos dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Điện thoại này không lưu ảnh trong trang: hãy lưu kết quả sau mỗi ký hiệu lưu trữ. ¦ ⚠️ Ponsel ini tidak menyimpan foto di halaman: simpan hasilmu setelah setiap nomor arsip.
+⚠️ Ce fichier n’est pas une image. ¦ ⚠️ Tệp này không phải là ảnh. ¦ ⚠️ File ini bukan gambar.
+⚠️ Note au moins un résultat avant d’enregistrer. ¦ ⚠️ Hãy ghi ít nhất một kết quả trước khi lưu. ¦ ⚠️ Catat setidaknya satu hasil sebelum menyimpan.
+✓ Fichier « {name} » enregistré : rapporte-le dans l’app (⤒ Rapporter les résultats). ¦ ✓ Đã lưu tệp “{name}”: hãy mang nó vào ứng dụng (⤒ Mang kết quả về). ¦ ✓ File “{name}” disimpan: bawa ke aplikasi (⤒ Bawa pulang hasilnya).
+Des photos manquaient : elles ne sont pas dans le fichier. ¦ Thiếu một số ảnh: chúng không có trong tệp. ¦ Ada foto yang hilang: tidak ada di file.
+⤓ Enregistrer la page ¦ ⤓ Lưu trang ¦ ⤓ Simpan halaman
+Ce qui part dans la page ¦ Những gì có trong trang ¦ Apa yang masuk ke halaman
+Les cotes, l’acte cherché, la personne et ses années ¦ Các ký hiệu lưu trữ, văn bản cần tìm, người và các năm của họ ¦ Nomor arsip, akta yang dicari, orangnya dan tahun-tahunnya
+Ce qu’on sait déjà (parents, conjoint, dates connues) pour reconnaître l’acte sur place ¦ Những gì đã biết (cha mẹ, vợ chồng, ngày đã biết) để nhận ra văn bản tại chỗ ¦ Yang sudah diketahui (orang tua, pasangan, tanggal yang diketahui) untuk mengenali akta di tempat
+Les personnes vivantes ¦ Người còn sống ¦ Orang yang masih hidup
+décoché : un vivant devient « Personne vivante » ¦ bỏ đánh dấu: người còn sống thành “Người còn sống” ¦ tidak dicentang: orang hidup menjadi “Orang yang masih hidup”
+Les fiches confidentielles : jamais ¦ Các thẻ bảo mật: không bao giờ ¦ Kartu rahasia: tidak pernah
+Photo interdite ici ¦ Cấm chụp ảnh ở đây ¦ Dilarang memotret di sini
+cache le bouton 📷 dans la page ¦ ẩn nút 📷 trong trang ¦ menyembunyikan tombol 📷 di halaman
+Un seul fichier .html : aucune requête, rien à installer. Mets-le sur le téléphone (câble, AirDrop, partage Android, courriel à toi-même) ; il marche en mode avion. ¦ Chỉ một tệp .html: không có yêu cầu mạng, không cần cài đặt. Hãy chép vào điện thoại (cáp, AirDrop, chia sẻ Android, email cho chính bạn); nó chạy ở chế độ máy bay. ¦ Satu file .html: tanpa permintaan jaringan, tidak perlu memasang apa pun. Taruh di ponsel (kabel, AirDrop, berbagi Android, surel ke dirimu sendiri); ia berjalan dalam mode pesawat.
+📲 Montrer comment le mettre sur le téléphone ¦ 📲 Chỉ cách chép vào điện thoại ¦ 📲 Tunjukkan cara menaruhnya di ponsel
+iPhone : l’aperçu de l’app Fichiers montre la page mais ne la fait pas marcher (pas de cases à cocher). Ouvre-la avec une app qui lit les pages .html, ou passe par la feuille imprimée et les photos (réglage). Android : Chrome ou Firefox l’ouvrent et la font marcher. ¦ iPhone: bản xem trước của ứng dụng Tệp hiện trang nhưng không cho nó chạy (không có ô đánh dấu). Hãy mở bằng một ứng dụng đọc trang .html, hoặc dùng tờ in và ảnh (cài đặt). Android: Chrome hoặc Firefox mở và cho nó chạy. ¦ iPhone: pratinjau aplikasi File menampilkan halaman tetapi tidak menjalankannya (tidak ada kotak centang). Buka dengan aplikasi yang membaca halaman .html, atau pakai lembar cetak dan foto (pengaturan). Android: Chrome atau Firefox membukanya dan menjalankannya.
+📄 1 fichier, {n} Ko : mets-le sur ton téléphone. ¦ 📄 1 tệp, {n} KB: hãy chép vào điện thoại của bạn. ¦ 📄 1 file, {n} KB: taruh di ponselmu.
+Résultats de la visite ¦ Kết quả chuyến đi ¦ Hasil kunjungan
+Ce fichier vient d’une autre visite : « {t} ». ¦ Tệp này đến từ một chuyến đi khác: “{t}”. ¦ File ini berasal dari kunjungan lain: “{t}”.
+cote retirée de la visite depuis ¦ ký hiệu đã bị gỡ khỏi chuyến đi từ đó ¦ nomor arsip sudah dihapus dari kunjungan sejak itu
+ajoutée sur place : d’abord ajoutée à la visite ¦ thêm tại chỗ: trước tiên được thêm vào chuyến đi ¦ ditambahkan di tempat: lebih dulu ditambahkan ke kunjungan
+dépouillement déjà relié ¦ bản trích lục đã liên kết ¦ transkripsi sudah terhubung
+＋ dépouillement du Journal ({r}) ¦ ＋ bản trích lục trong Nhật ký ({r}) ¦ ＋ transkripsi dari Log ({r})
+{n} → médias « à trier » ¦ {n} → tư liệu “cần sắp xếp” ¦ {n} → media “untuk dipilah”
+{n} → médias reliés à {who} ¦ {n} → tư liệu liên kết với {who} ¦ {n} → media terhubung ke {who}
+{n} → médias ¦ {n} → tư liệu ¦ {n} → media
+📑 pièce du dossier : reçue ¦ 📑 giấy tờ của hồ sơ: đã nhận ¦ 📑 dokumen berkas: diterima
+✓ fichier vérifié ¦ ✓ tệp đã kiểm tra ¦ ✓ file diperiksa
+Rapporté du téléphone ¦ Mang về từ điện thoại ¦ Dibawa dari ponsel
+Ce que l’app fera ¦ Ứng dụng sẽ làm gì ¦ Yang akan dilakukan aplikasi
+Ranger cette cote ¦ Cất ký hiệu này ¦ Simpan nomor arsip ini
+→ Reporter sur la fiche ¦ → Chuyển sang thẻ ¦ → Pindahkan ke kartu
+Aucune date ni aucun lieu n’est écrit sur une fiche : ce qui est trouvé reste un dépouillement avec sa photo ; c’est toi qui le reportes sur la fiche, comme aujourd’hui. ¦ Không ngày tháng hay nơi chốn nào được ghi lên thẻ: điều tìm được vẫn là một bản trích lục kèm ảnh; chính bạn chuyển nó sang thẻ, như hiện nay. ¦ Tidak ada tanggal atau tempat yang ditulis di kartu: temuan tetap berupa transkripsi dengan fotonya; kamu sendiri yang memindahkannya ke kartu, seperti sekarang.
+{n} rapportées, {m} ¦ mang về: {n}, {m} ¦ dibawa: {n}, {m}
+Ranger {n} et {m} ¦ Cất {n} và {m} ¦ Simpan {n} dan {m}
+→ Reporter sur la fiche : le dépouillement et ses photos y sont reliés. ¦ → Chuyển sang thẻ: bản trích lục và ảnh của nó đã được liên kết vào thẻ. ¦ → Pindahkan ke kartu: transkripsi dan fotonya terhubung ke kartu itu.
+✓ Visite rangée : {d}, {m}, {p}. ¦ ✓ Đã cất chuyến đi: {d}, {m}, {p}. ¦ ✓ Kunjungan disimpan: {d}, {m}, {p}.
+{n} pièce(s) reçue(s) ¦ {n} giấy tờ đã nhận ¦ {n} dokumen diterima
+Visite marquée « faite ». ¦ Chuyến đi đã đánh dấu “đã làm”. ¦ Kunjungan ditandai “selesai”.
+Cette visite n’a pas encore de cote. ¦ Chuyến đi này chưa có ký hiệu lưu trữ. ¦ Kunjungan ini belum punya nomor arsip.
+Rangées dans l’ordre des cotes d’après l’heure de prise de vue : corrige la cote d’une photo si besoin. ¦ Xếp theo thứ tự ký hiệu dựa trên giờ chụp: sửa ký hiệu của một ảnh nếu cần. ¦ Diurutkan menurut nomor arsip berdasarkan jam pemotretan: perbaiki nomor arsip sebuah foto bila perlu.
+— ne pas ranger — ¦ — không cất — ¦ — jangan simpan —
+{n} rangées dans les médias (« à trier »). ¦ {n} đã cất vào tư liệu (“cần sắp xếp”). ¦ {n} disimpan di media (“untuk dipilah”).
+Parents : {names} ¦ Cha mẹ: {names} ¦ Orang tua: {names}
+Conjoint : {names} ¦ Vợ/chồng: {names} ¦ Pasangan: {names}
+Fiche confidentielle ¦ Thẻ bảo mật ¦ Kartu rahasia
+Ce fichier a déjà été rangé le {date} : rien n’est fait en double. ¦ Tệp này đã được cất ngày {date}: không làm gì hai lần. ¦ File ini sudah disimpan pada {date}: tidak ada yang dilakukan dua kali.
+à trier ¦ cần sắp xếp ¦ untuk dipilah
+Trouvé à la visite : {where} ¦ Tìm thấy trong chuyến đi: {where} ¦ Ditemukan saat kunjungan: {where}
+Comment emporter la visite ¦ Cách mang chuyến đi theo ¦ Cara membawa kunjungan
+Une page .html à ouvrir sur le téléphone ¦ Một trang .html để mở trên điện thoại ¦ Halaman .html untuk dibuka di ponsel
+La feuille imprimée et les photos du téléphone ¦ Tờ in và ảnh trên điện thoại ¦ Lembar cetak dan foto dari ponsel
+Sans les vivants ¦ Không có người còn sống ¦ Tanpa orang hidup
+Avec les vivants ¦ Có người còn sống ¦ Dengan orang hidup
+Réduites à 2000 px ¦ Thu nhỏ còn 2000 px ¦ Diperkecil ke 2000 px
+Une naissance trouvée ¦ Một bản khai sinh tìm được ¦ Kelahiran yang ditemukan
+Reste un dépouillement, tu la reportes ¦ Vẫn là bản trích lục, bạn tự chuyển sang ¦ Tetap transkripsi, kamu yang memindahkannya
+Proposer « → Reporter sur la fiche » dans la revue ¦ Đề xuất “→ Chuyển sang thẻ” trong phần xem lại ¦ Tawarkan “→ Pindahkan ke kartu” saat peninjauan
+Après le rangement ¦ Sau khi cất ¦ Setelah disimpan
+Visite marquée « faite » ¦ Chuyến đi đánh dấu “đã làm” ¦ Kunjungan ditandai “selesai”
+Aucune photo reçue. ¦ Không nhận được ảnh nào. ¦ Tidak ada foto yang diterima.
+Ce fichier est trop gros pour les résultats d’une visite. ¦ Tệp này quá lớn đối với kết quả của một chuyến đi. ¦ File ini terlalu besar untuk hasil kunjungan.
+Ce fichier n’est pas les résultats d’une visite (il faut le .zip enregistré sur le téléphone). ¦ Tệp này không phải kết quả của một chuyến đi (cần tệp .zip đã lưu trên điện thoại). ¦ File ini bukan hasil kunjungan (perlu file .zip yang disimpan di ponsel).
+Ce fichier n’est pas les résultats d’une visite aux archives. ¦ Tệp này không phải kết quả của một chuyến đi lưu trữ. ¦ File ini bukan hasil kunjungan ke arsip.
+Ce fichier vient d’une visite qui n’est pas dans cette généalogie. ¦ Tệp này đến từ một chuyến đi không có trong gia phả này. ¦ File ini berasal dari kunjungan yang tidak ada di silsilah ini.
+Cette visite a déjà été emportée : supprime-la dans le Planificateur si tu n’en veux plus. ¦ Chuyến đi này đã được mang đi: hãy xóa nó trong Trình lập kế hoạch nếu bạn không cần nữa. ¦ Kunjungan ini sudah dibawa: hapus di Perencana kalau kamu tidak menginginkannya lagi.
+Choisis la cote de chaque photo. ¦ Hãy chọn ký hiệu lưu trữ cho từng ảnh. ¦ Pilih nomor arsip setiap foto.
+Coche au moins une cote à ranger. ¦ Hãy đánh dấu ít nhất một ký hiệu cần cất. ¦ Centang setidaknya satu nomor arsip untuk disimpan.
+Fichier .zip illisible. ¦ Tệp .zip không đọc được. ¦ File .zip tidak terbaca.
+Fichier refusé : identifiant incorrect. ¦ Tệp bị từ chối: mã định danh không đúng. ¦ File ditolak: pengenal tidak benar.
+Fichier refusé : il a été modifié depuis le téléphone (somme de contrôle). ¦ Tệp bị từ chối: đã bị sửa sau khi rời điện thoại (tổng kiểm). ¦ File ditolak: sudah diubah setelah dari ponsel (checksum).
+Fichier refusé : il contient des données inattendues. ¦ Tệp bị từ chối: chứa dữ liệu không mong đợi. ¦ File ditolak: berisi data yang tidak diharapkan.
+Fichier refusé : il ne correspond pas à la page emportée (somme de contrôle). ¦ Tệp bị từ chối: không khớp với trang đã mang đi (tổng kiểm). ¦ File ditolak: tidak cocok dengan halaman yang dibawa (checksum).
+Fichier refusé : la liste des cotes manque. ¦ Tệp bị từ chối: thiếu danh sách ký hiệu lưu trữ. ¦ File ditolak: daftar nomor arsip tidak ada.
+Fichier refusé : la liste des photos est mal formée. ¦ Tệp bị từ chối: danh sách ảnh sai định dạng. ¦ File ditolak: daftar foto tidak berbentuk benar.
+Fichier refusé : results.json est illisible. ¦ Tệp bị từ chối: results.json không đọc được. ¦ File ditolak: results.json tidak terbaca.
+Fichier refusé : results.json manque. ¦ Tệp bị từ chối: thiếu results.json. ¦ File ditolak: results.json tidak ada.
+Fichier refusé : trop de fichiers dedans. ¦ Tệp bị từ chối: có quá nhiều tệp bên trong. ¦ File ditolak: terlalu banyak file di dalamnya.
+Fichier refusé : un chemin sort du dossier. ¦ Tệp bị từ chối: một đường dẫn đi ra ngoài thư mục. ¦ File ditolak: ada jalur yang keluar dari folder.
+Fichier refusé : un résultat est inconnu. ¦ Tệp bị từ chối: một kết quả không xác định. ¦ File ditolak: ada hasil yang tidak dikenal.
+Fichier refusé : un élément est trop gros. ¦ Tệp bị từ chối: một phần tử quá lớn. ¦ File ditolak: ada elemen yang terlalu besar.
+Fichier refusé : une cote contient des données inattendues. ¦ Tệp bị từ chối: một ký hiệu chứa dữ liệu không mong đợi. ¦ File ditolak: ada nomor arsip berisi data yang tidak diharapkan.
+Fichier refusé : une cote est mal formée. ¦ Tệp bị từ chối: một ký hiệu sai định dạng. ¦ File ditolak: ada nomor arsip yang tidak berbentuk benar.
+Fichier refusé : une photo annoncée manque. ¦ Tệp bị từ chối: thiếu một ảnh đã khai báo. ¦ File ditolak: ada foto yang disebut tetapi tidak ada.
+Fichier refusé : une photo n’est pas une image. ¦ Tệp bị từ chối: một ảnh không phải là ảnh. ¦ File ditolak: ada foto yang bukan gambar.
+Impossible de ranger la photo dans les médias. ¦ Không thể cất ảnh vào tư liệu. ¦ Foto tidak dapat disimpan di media.
+Lecture des fichiers .zip impossible sur cet ordinateur. ¦ Không thể đọc tệp .zip trên máy tính này. ¦ File .zip tidak dapat dibaca di komputer ini.
+Trop de photos d’un coup (200 au plus). ¦ Quá nhiều ảnh một lúc (tối đa 200). ¦ Terlalu banyak foto sekaligus (paling banyak 200).
+Une photo est trop grosse ou n’a pas été reçue. ¦ Một ảnh quá lớn hoặc chưa nhận được. ¦ Sebuah foto terlalu besar atau tidak diterima.

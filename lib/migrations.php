@@ -7,15 +7,23 @@ declare(strict_types=1);
  * Le numéro de structure est rangé dans la base elle-même (PRAGMA user_version). À l'ouverture :
  *  - base à jour : rien à faire (une seule lecture, aucune vérification de colonnes à chaque requête) ;
  *  - base plus ancienne : un seul processus à la fois (verrou), copie de sécurité complète (VACUUM INTO)
- *    dans backups/, puis chaque migration manquante dans l'ordre, et le numéro est mis à jour après chacune ;
+ *    dans backups/, puis chaque migration manquante dans l'ordre. Chacune se fait dans UNE transaction SQLite, avec
+ *    son numéro (user_version) et sa ligne app_migrations : si l'ordinateur s'éteint ou si elle plante au milieu, la
+ *    base reste entière à la structure d'avant (aucune table à moitié faite) et la migration repart au lancement suivant ;
  *  - base plus récente que l'application : refus (ne jamais toucher une base qu'on ne connaît pas).
  *
  * POUR CHANGER LA STRUCTURE : ajouter une fonction schema_vN() et l'inscrire dans migration_steps(),
  * puis augmenter SCHEMA_VERSION. Ne jamais modifier une migration déjà publiée. Ne plus ajouter de
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
+ *
+ * DANS UNE MIGRATION : elle tourne déjà dans une transaction. Pas de VACUUM (impossible en transaction), pas de
+ * PRAGMA journal_mode (réglé dans db(), avant), PRAGMA foreign_keys sans effet (restent comme db() les a mis : ON).
+ * Pour un morceau qu'on veut pouvoir annuler seul : migration_tx_begin / _commit / _rollback (point de reprise
+ * SAVEPOINT), jamais $pdo->beginTransaction() directement (« already an active transaction »). Une fonction d'un
+ * autre fichier appelée ici doit faire « $own = !$pdo->inTransaction() » avant d'ouvrir la sienne.
  */
 
-const SCHEMA_VERSION = 88;
+const SCHEMA_VERSION = 104;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -109,19 +117,41 @@ function migration_steps(): array
         86 => 'schema_v86',
         87 => 'schema_v87',
         88 => 'schema_v88',
+        89 => 'schema_v89',
+        90 => 'schema_v90',
+        91 => 'schema_v91',
+        92 => 'schema_v92',
+        93 => 'schema_v93',
+        94 => 'schema_v94',
+        95 => 'schema_v95',
+        96 => 'schema_v96',
+        97 => 'schema_v97',
+        98 => 'schema_v98',
+        99 => 'schema_v99',
+        100 => 'schema_v100',
+        101 => 'schema_v101',
+        102 => 'schema_v102',
+        103 => 'schema_v103',
+        104 => 'schema_v104',
     ];
 }
 
-function migrate_database(PDO $pdo, string $dbPath): void
+/**
+ * @param array<int, callable(PDO): void>|null $steps pour les essais seulement (tests/test-migrations.js) : d'autres
+ *        marches que migration_steps() ; la dernière donne alors le numéro visé.
+ */
+function migrate_database(PDO $pdo, string $dbPath, ?array $steps = null): void
 {
+    $steps ??= migration_steps();
+    $latest = $steps ? max(array_keys($steps)) : SCHEMA_VERSION;
     $version = (int) $pdo->query('PRAGMA user_version')->fetchColumn();
-    if ($version === SCHEMA_VERSION) {
+    if ($version === $latest) {
         return;
     }
-    if ($version > SCHEMA_VERSION) {
+    if ($version > $latest) {
         throw new RuntimeException(
             "Cette base a été créée ou mise à jour par une version plus récente de l'application "
-            . "(structure n°{$version} ; cette version connaît jusqu'au n°" . SCHEMA_VERSION . "). "
+            . "(structure n°{$version} ; cette version connaît jusqu'au n°" . $latest . "). "
             . "Mets l'application à jour avant de l'ouvrir. La base n'a pas été modifiée."
         );
     }
@@ -135,31 +165,44 @@ function migrate_database(PDO $pdo, string $dbPath): void
     flock($lock, LOCK_EX);
     try {
         $version = (int) $pdo->query('PRAGMA user_version')->fetchColumn();
-        if ($version >= SCHEMA_VERSION) {
+        if ($version >= $latest) {
             return;
         }
         // La mise à jour doit aller au bout même si la fenêtre se ferme ou recharge pendant ce temps.
         ignore_user_abort(true);
         @set_time_limit(3600);
         $started = microtime(true);
+        // Copie de sécurité AVANT toute transaction : VACUUM INTO ne peut pas tourner dans une transaction.
         $backup = migration_backup($pdo, $dbPath, $version);
-        foreach (migration_steps() as $target => $step) {
+        if ($pdo->inTransaction()) {
+            throw new RuntimeException('mise à jour de la base demandée pendant une transaction');
+        }
+        foreach ($steps as $target => $step) {
             if ($target <= $version) {
                 continue;
             }
+            // Une marche = une transaction : la structure, son numéro et sa ligne app_migrations arrivent ensemble
+            // ou pas du tout (coupure de courant, plantage, disque plein…).
+            $pdo->beginTransaction();
             try {
                 if ($target === 9) { migration_v9_recover($pdo); }
                 $step($pdo);
+                $pdo->exec('PRAGMA user_version = ' . (int) $target);
+                $pdo->exec('CREATE TABLE IF NOT EXISTS app_migrations (name TEXT PRIMARY KEY, applied_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)');
+                $pdo->prepare('INSERT OR REPLACE INTO app_migrations(name) VALUES(?)')->execute(['schema_v' . $target]);
+                $pdo->commit();
             } catch (Throwable $e) {
+                if ($pdo->inTransaction()) {
+                    try { $pdo->rollBack(); } catch (Throwable $_) { /* SQLite a déjà tout annulé (disque plein…) */ }
+                }
                 throw new RuntimeException(
                     "La mise à jour de la base (structure n°{$target}) a échoué : " . $e->getMessage()
-                    . ($backup ? " — Copie de sécurité faite juste avant : backups/" . basename($backup) : ''),
+                    . " — La base est restée à la structure n°{$version}, sans changement à moitié fait."
+                    . ($backup ? ' Copie de sécurité faite juste avant : backups/' . basename($backup) : ''),
                     0,
                     $e
                 );
             }
-            $pdo->exec('PRAGMA user_version = ' . (int) $target);
-            $pdo->prepare('INSERT OR REPLACE INTO app_migrations(name) VALUES(?)')->execute(['schema_v' . $target]);
             $version = $target;
         }
         error_log(sprintf(
@@ -171,6 +214,45 @@ function migrate_database(PDO $pdo, string $dbPath): void
         flock($lock, LOCK_UN);
         fclose($lock);
     }
+}
+
+/**
+ * Morceau d'une migration qu'on veut pouvoir annuler seul (ex. reconstruire une table, et garder l'ancienne si ça
+ * échoue). Déjà dans la transaction de la marche : point de reprise SAVEPOINT ; sinon, transaction ordinaire.
+ * @return string jeton à rendre à migration_tx_commit / migration_tx_rollback
+ */
+function migration_tx_begin(PDO $pdo): string
+{
+    static $n = 0;
+    if (!$pdo->inTransaction()) {
+        $pdo->beginTransaction();
+        return '';
+    }
+    $name = 'lcnda_mig_' . (++$n);
+    $pdo->exec('SAVEPOINT ' . $name);
+    return $name;
+}
+
+function migration_tx_commit(PDO $pdo, ?string &$tx): void
+{
+    if ($tx === null) { return; }
+    $token = $tx;
+    $tx = null;
+    if ($token === '') { $pdo->commit(); } else { $pdo->exec('RELEASE ' . $token); }
+}
+
+/** Sans effet si le morceau n'avait pas commencé ($tx encore null) ou est déjà validé. */
+function migration_tx_rollback(PDO $pdo, ?string &$tx): void
+{
+    if ($tx === null) { return; }
+    $token = $tx;
+    $tx = null;
+    if ($token === '') {
+        if ($pdo->inTransaction()) { $pdo->rollBack(); }
+        return;
+    }
+    $pdo->exec('ROLLBACK TO ' . $token);
+    $pdo->exec('RELEASE ' . $token);
 }
 
 /**
@@ -263,6 +345,7 @@ function event_type_catalog(): array
         ['person', 'incineration', 'Incinération', 'CREM', 'diamond', '#0066cc'],
         ['person', 'obseques', 'Obsèques', 'FUNE', 'diamond', '#0066cc'],
         ['person', 'profession', 'Profession', 'OCCU', 'tool', '#0066cc'],
+        ['person', 'acte-notoriete', 'Acte de notoriété', 'EVEN', 'diamond', '#0066cc'],
         ['person', 'lieu-de-residence', 'Lieu de résidence', 'RESI', 'house', '#cc4700'],
         ['person', 'domicile', 'Domicile', '', 'house', '#cc8100'],
         ['person', 'recensement', 'Recensement', 'CENS', 'diamond', '#0066cc'],
@@ -1059,15 +1142,15 @@ function schema_v1_api_part(PDO $pdo): void
     if (!$legacyEventCollectionsApplied->fetchColumn()) {
         $legacyEvents = $pdo->query("SELECT entity_id FROM media_links WHERE entity_type='event' AND collection_key='' GROUP BY entity_id HAVING count(*) > 1")->fetchAll(PDO::FETCH_COLUMN);
         $assignLegacyCollection = $pdo->prepare("UPDATE media_links SET collection_key=?, collection_label=? WHERE entity_type='event' AND entity_id=? AND collection_key=''");
-        $pdo->beginTransaction();
+        $tx = migration_tx_begin($pdo);
         try {
             foreach ($legacyEvents as $legacyEventId) {
                 $assignLegacyCollection->execute(['event-'.(int)$legacyEventId.'-legacy', 'Documents de l’événement', (int)$legacyEventId]);
             }
             $pdo->prepare("INSERT INTO app_migrations(name) VALUES(?)")->execute(['event_media_collections_v1']);
-            $pdo->commit();
+            migration_tx_commit($pdo, $tx);
         } catch (Throwable $e) {
-            if ($pdo->inTransaction()) $pdo->rollBack();
+            migration_tx_rollback($pdo, $tx);
             throw $e;
         }
     }
@@ -1232,7 +1315,7 @@ function schema_v1_api_part(PDO $pdo): void
         $mlDdl = $pdo->query("SELECT sql FROM sqlite_master WHERE type='table' AND name='media_links'")->fetchColumn();
         if ($mlDdl !== false && str_contains((string)$mlDdl, "'census'") && !str_contains((string)$mlDdl, "'military'")) {
             $pdo->exec("PRAGMA foreign_keys=OFF");
-            $pdo->beginTransaction();
+            $tx = migration_tx_begin($pdo);
             $pdo->exec("CREATE TABLE IF NOT EXISTS media_links_new (
                 id        INTEGER PRIMARY KEY AUTOINCREMENT,
                 source_id INTEGER,
@@ -1250,15 +1333,15 @@ function schema_v1_api_part(PDO $pdo): void
             }
             $pdo->exec("DROP TABLE media_links");
             $pdo->exec("ALTER TABLE media_links_new RENAME TO media_links");
-            $pdo->commit();
+            migration_tx_commit($pdo, $tx);
             $pdo->exec("PRAGMA foreign_keys=ON");
         }
-    } catch (Throwable $_) { if ($pdo->inTransaction()) $pdo->rollBack(); }
+    } catch (Throwable $_) { migration_tx_rollback($pdo, $tx); }
     try {
         $mlDdl = $pdo->query("SELECT sql FROM sqlite_master WHERE type='table' AND name='media_links'")->fetchColumn();
         if ($mlDdl !== false && !str_contains((string)$mlDdl, "'battue_item'")) {
             $pdo->exec("PRAGMA foreign_keys=OFF");
-            $pdo->beginTransaction();
+            $tx = migration_tx_begin($pdo);
             $mlCols = array_column($pdo->query("PRAGMA table_info(media_links)")->fetchAll(PDO::FETCH_ASSOC), 'name');
             $pdo->exec("CREATE TABLE media_links_new (
                 id        INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -1275,10 +1358,10 @@ function schema_v1_api_part(PDO $pdo): void
             $pdo->exec("INSERT INTO media_links_new($colList) SELECT $colList FROM media_links");
             $pdo->exec("DROP TABLE media_links");
             $pdo->exec("ALTER TABLE media_links_new RENAME TO media_links");
-            $pdo->commit();
+            migration_tx_commit($pdo, $tx);
             $pdo->exec("PRAGMA foreign_keys=ON");
         }
-    } catch (Throwable $_) { if ($pdo->inTransaction()) $pdo->rollBack(); }
+    } catch (Throwable $_) { migration_tx_rollback($pdo, $tx); }
     // Additive migration: module Cimetière — une sépulture peut accueillir plusieurs personnes
     // (tombe familiale), et reste consultable même si elle n'existe plus (grave_exists=0).
     $pdo->exec("CREATE TABLE IF NOT EXISTS graves (
@@ -1320,7 +1403,7 @@ function schema_v1_api_part(PDO $pdo): void
         $mlDdl = $pdo->query("SELECT sql FROM sqlite_master WHERE type='table' AND name='media_links'")->fetchColumn();
         if ($mlDdl !== false && !str_contains((string)$mlDdl, "'grave'")) {
             $pdo->exec("PRAGMA foreign_keys=OFF");
-            $pdo->beginTransaction();
+            $tx = migration_tx_begin($pdo);
             $mlCols = array_column($pdo->query("PRAGMA table_info(media_links)")->fetchAll(PDO::FETCH_ASSOC), 'name');
             $pdo->exec("CREATE TABLE media_links_new (
                 id        INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -1337,10 +1420,10 @@ function schema_v1_api_part(PDO $pdo): void
             $pdo->exec("INSERT INTO media_links_new($colList) SELECT $colList FROM media_links");
             $pdo->exec("DROP TABLE media_links");
             $pdo->exec("ALTER TABLE media_links_new RENAME TO media_links");
-            $pdo->commit();
+            migration_tx_commit($pdo, $tx);
             $pdo->exec("PRAGMA foreign_keys=ON");
         }
-    } catch (Throwable $_) { if ($pdo->inTransaction()) $pdo->rollBack(); }
+    } catch (Throwable $_) { migration_tx_rollback($pdo, $tx); }
 
     // Seed des types d'événements généalogiques de base : évite une base neuve vide si la DB est supprimée.
     $defaultEventTypes = [
@@ -2571,4 +2654,173 @@ function schema_v88(PDO $pdo): void
 {
     if (!function_exists('preuve_schema')) { require_once __DIR__ . '/preuve.php'; }
     preuve_schema($pdo);
+}
+
+/** 89 : 💌 Lettres de famille gardées (family_letters : mois, titre, ce qu'on y met, texte modifié ; supprimée = deleted_at),
+ *  🖊 relectures d'une branche par un cousin (family_reviews : envoi, jeton, réponses ; family_review_items : une remarque
+ *  par fait, « d'accord » ou « faux », décision ✓ / ✕ et ce qu'elle a créé pour « ↶ Annuler ») ; la 🛡 fiabilité par
+ *  personne est calculée à la lecture (lib/plus_famille.php). */
+function schema_v89(PDO $pdo): void
+{
+    if (!function_exists('pfam_schema')) { require_once __DIR__ . '/plus_famille.php'; }
+    pfam_schema($pdo);
+}
+
+/** 90 : ⚖️ Généalogiste successoral — les dossiers de succession (succ_cases : défunt, notaire mandant, n° et réf., état,
+ *  statuts établis à la main, hypothèse retenue), échéances (succ_deadlines), pièces justificatives (succ_pieces), journal
+ *  horodaté qu'on ne peut ni modifier ni effacer (succ_journal), temps et frais (succ_fees) ; courriers.succ_case_id,
+ *  succ_kind, reponse, signe_le (lib/successoral.php). La dévolution est calculée à la lecture. */
+function schema_v90(PDO $pdo): void
+{
+    if (!function_exists('successoral_schema')) { require_once __DIR__ . '/successoral.php'; }
+    successoral_schema($pdo);
+}
+
+/** ⚖️ Dossiers de succession : les fiches rattachées à chaque dossier (rôle), les homonymes écartés, l'avancement gardé */
+function schema_v91(PDO $pdo): void
+{
+    if (!function_exists('succ_dossiers_schema')) { require_once __DIR__ . '/successoral_dossiers.php'; }
+    succ_dossiers_schema($pdo);
+}
+
+/** 92 : ⚖️ Dossiers de succession — l'état de contact d'un héritier dans un dossier (« absent » au sens pratique, à ne pas
+ *  confondre avec la présomption d'absence) : succ_case_persons.contact_state ('' | 'introuvable' | 'silence') et
+ *  contact_state_at (date du dernier changement). */
+function schema_v92(PDO $pdo): void
+{
+    if (!function_exists('succ_contact_schema')) { require_once __DIR__ . '/successoral_dossiers.php'; }
+    succ_contact_schema($pdo);
+}
+
+/** 93 : ⚖️ Outils du successoral — les modèles de courriers à soi (succ_templates, dans la généalogie des dossiers) et
+ * d'où vient une ligne de temps (succ_fees.source = « chrono » : comptée par le ⏱ chronomètre). lib/successoral_outils.php */
+function schema_v93(PDO $pdo): void
+{
+    if (!function_exists('succ_outils_schema')) { require_once __DIR__ . '/successoral.php'; }
+    if (!(bool) $pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='succ_fees'")->fetchColumn() && function_exists('successoral_schema')) { successoral_schema($pdo); }
+    succ_outils_schema($pdo);
+}
+
+/** 94 : 🔐 mot de passe d'une généalogie (app_lock : une ligne, l'empreinte seulement, jamais le mot de passe) et 📜 registre
+ * « Qui a vu quoi » (access_log : jamais modifié ; seules les lignes plus vieilles que la durée réglée partent). lib/verrou.php */
+function schema_v94(PDO $pdo): void
+{
+    if (!function_exists('glock_schema')) { require_once __DIR__ . '/verrou.php'; }
+    glock_schema($pdo);
+}
+
+/** 95 : 🏛 Actes en ligne aux archives — les corrections de la personne (archives_dispo_corr : ✓ trouvé en ligne, ✗ pas en
+ *  ligne, ＋ limite notée avec son adresse ; pour tout le département ou seulement une commune, avec l'acte et la date).
+ *  La table des limites elle-même est livrée dans config/archives-en-ligne.json (lib/archives_dispo.php). */
+function schema_v95(PDO $pdo): void
+{
+    if (!function_exists('ad_schema')) { require_once __DIR__ . '/archives_dispo.php'; }
+    ad_schema($pdo);
+}
+
+/**
+ * Structure n°96 : 🔎 recherche « à la française » (lib/recherche_fr.php) : rfr_names, une ligne par nom (fiche, variantes)
+ * avec ses clés précalculées (mots repliés, nom collé et sans particules, phonétique, prénoms de référence) ; remplie ici
+ * pour toute la base, puis tenue à jour par signature à chaque recherche (pas de déclencheur : bootstrap.php les retire).
+ */
+function schema_v96(PDO $pdo): void
+{
+    if (!function_exists('rfr_schema')) { require_once __DIR__ . '/recherche_fr.php'; }
+    rfr_schema($pdo);
+    rfr_refresh($pdo, true);
+}
+
+/** 97 : ⚖️ successoral, quinze outils de plus (lib/successoral_plus2.php) : ⚰️ vérifications INSEE (succ_insee_checks), 📞 échanges
+ * (succ_calls), 💶 fonds par héritier (succ_funds), 📋 questionnaires (succ_questionnaires), 📝 versions de tes modèles
+ * (succ_template_versions), 🧾 registre des factures quand il est dans la généalogie (succ_invoices, lignes, compteurs) ;
+ * colonnes : 📮 recommandés, réponse reçue le et version du modèle sur courriers, 🗓 dates importantes sur succ_deadlines,
+ * 👥 fusion (succ_cases.merged_into, origin_case_id), 📅 date de délivrance et validité sur succ_pieces. */
+function schema_v97(PDO $pdo): void
+{
+    if (!function_exists('succ_p2_schema')) { require_once __DIR__ . '/successoral.php'; }
+    succ_p2_schema($pdo);
+}
+
+/** 98 : 🧩 compléter quatre outils existants (lib/complements.php) : 🏛 les notaires et clercs d'une étude (archive_service_people),
+ *  succ_cases.notary_service_id / notary_people_id (l'étude et le notaire chargé d'un dossier ; notary_text, le nom tapé, reste),
+ *  courriers.archive_service_id et recu_le (la date de réponse, pour le délai constaté), 📱 archive_visit_plans.succ_case_id,
+ *  export_uid, export_sum, imported_at, photos_off, import_json et archive_visit_items.person_id, act_kind (visite aux archives). */
+function schema_v98(PDO $pdo): void
+{
+    if (!function_exists('compl_schema')) { require_once __DIR__ . '/complements.php'; }
+    compl_schema($pdo);
+}
+
+/** 99 : 🖧 plusieurs ordinateurs (lib/reseau_local.php, electron/lan-gate.js) : 📜 « Qui a vu quoi » note l'appareil réel
+ * (access_log.device : vide pour l'ordinateur principal, sinon le nom de l'appareil invité). La liste des appareils et leurs
+ * jetons (hachés) ne sont pas dans la généalogie : dossier de données de l'ordinateur, reseau-local/appareils.json. */
+function schema_v99(PDO $pdo): void
+{
+    if (!function_exists('access_log_schema')) { require_once __DIR__ . '/verrou.php'; }
+    access_log_schema($pdo);
+    if (!(bool) $pdo->query("SELECT count(*) FROM pragma_table_info('access_log') WHERE name='device'")->fetchColumn()) {
+        $pdo->exec("ALTER TABLE access_log ADD COLUMN device TEXT NOT NULL DEFAULT ''");
+    }
+}
+
+/**
+ * Structure n°100 (chantier « très grosses bases » ; si un autre chantier voulait aussi le n°100, le sien prend le n°101) :
+ * la table des jetons data_gen et ses déclencheurs (lib/calc_cache.php). Les calculs lourds du tableau de bord (actes en
+ * ligne aux archives, dates à fêter…) sont gardés tant que les tables qu'ils lisent ne changent pas. Sans risque si on la
+ * rejoue (CREATE … IF NOT EXISTS).
+ */
+function schema_v100(PDO $pdo): void
+{
+    if (!function_exists('calc_gen_install')) { require_once __DIR__ . '/calc_cache.php'; }
+    calc_gen_install($pdo);
+}
+
+/**
+ * Structure n°101 : 📱 le téléphone par le wifi (lib/telephone_wifi.php, maquette docs/design/telephone-wifi.html) : la boîte
+ * « 📥 À trier » (phone_inbox), où arrivent les photos déposées par un téléphone de terrain, hors de l'arbre tant qu'on ne les
+ * relie pas. Les fichiers eux-mêmes sont dans le dossier de données (a-trier/), jamais servis tels quels. Sans risque si on
+ * la rejoue (CREATE … IF NOT EXISTS).
+ */
+function schema_v101(PDO $pdo): void
+{
+    if (!function_exists('tw_schema')) { require_once __DIR__ . '/telephone_wifi.php'; }
+    tw_schema($pdo);
+}
+
+/**
+ * Structure n°102 : 📄 un seul texte par document (maquette docs/design/dossier-et-transcriptions.html, B1). Quand un document
+ * avait la case de la visionneuse (media.transcription) et une transcription de l'Atelier (act_transcriptions) qui différaient,
+ * les deux sont gardés l'un sous l'autre dans l'acte (le texte de l'Atelier d'abord, puis celui de la visionneuse), et la copie du
+ * média devient le texte des actes. Rien n'est effacé ni écrasé. Sans risque si on la rejoue (lib/transcriptions.php,
+ * act_doc_text_merge_all : rien à faire une fois la copie à jour). Aucune table si l'Atelier n'a jamais servi.
+ */
+function schema_v102(PDO $pdo): void
+{
+    if (!function_exists('act_doc_text_merge_all')) { require_once __DIR__ . '/transcriptions.php'; }
+    act_doc_text_merge_all($pdo);
+}
+
+/**
+ * Structure n°103 : le type d'événement « Acte de notoriété » (personne) — l'acte dressé devant un notaire ou un juge, par témoins,
+ * qui remplace un acte de naissance introuvable ou établit la liste des héritiers. Ajouté seulement s'il n'existe pas (même libellé
+ * ou même slug) : rien n'est modifié ; rejouable.
+ */
+function schema_v103(PDO $pdo): void
+{
+    $has = $pdo->prepare("SELECT id FROM event_types WHERE scope='person' AND (slug='acte-notoriete' OR label='Acte de notoriété' COLLATE NOCASE) LIMIT 1");
+    $has->execute();
+    if ($has->fetchColumn()) { return; }
+    $pdo->prepare("INSERT INTO event_types(scope,slug,label,gedcom_tag,icon,color,is_custom,is_active,is_artistic,custom_fields) VALUES('person','acte-notoriete','Acte de notoriété','EVEN','diamond','#0066cc',0,1,0,'')")->execute();
+}
+
+/**
+ * Structure n°104 : 📑 un document en plusieurs pages (Atelier de transcription, vague 3 ; lib/media_pages.php). La table
+ * media_pages relie des médias en un ensemble ordonné (recto / verso, page 1…N, annexe, nom libre) ; une page n'appartient qu'à
+ * un ensemble. Ajoutée seulement : aucune donnée n'est changée (les cartes postales gardent postcard_group / postcard_side).
+ * Rejouable (CREATE … IF NOT EXISTS).
+ */
+function schema_v104(PDO $pdo): void
+{
+    if (!function_exists('media_pages_install')) { require_once __DIR__ . '/media_pages.php'; }
+    media_pages_install($pdo);
 }

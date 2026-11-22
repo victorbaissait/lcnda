@@ -1,0 +1,145 @@
+fr ¦ sq ¦ mt
+# Zone « transcription-actes » : recadrage, lecture approfondie (Ollama), « Ce que l’app a trouvé » (heritage-transcribe-acte.js, lib/transcription_actes.php)
+LECTURE AUTOMATIQUE ¦ LEXIM AUTOMATIK ¦ QARI AWTOMATIKU
+Recadrer sur le texte ? ¦ Ta presësh te teksti? ¦ Taqta’ fuq it-test?
+Recadrer sur le texte ¦ Prit te teksti ¦ Aqta’ fuq it-test
+Lire quand même ¦ Lexo gjithsesi ¦ Aqra xorta waħda
+Cette image ressemble à une capture d’écran ¦ Kjo figurë duket si pamje ekrani ¦ Din l-immaġni tidher qisha screenshot
+(boutons et bords gris autour) : la lecture sera moins bonne. Télécharge l’image en grand sur le site des archives, ou recadre sur le texte. ¦ (butona dhe skaje gri përreth): leximi do të jetë më i dobët. Shkarko figurën të madhe nga faqja e arkivit, ose prite te teksti. ¦ (buttuni u truf griżi madwarha): il-qari jkun agħar. Niżżel l-immaġni kbira mis-sit tal-arkivji, jew aqta’ fuq it-test.
+La zone qui sera lue ¦ Zona që do të lexohet ¦ Iż-żona li se tinqara
+Le cadre bleu montre la zone qui sera lue. Pour choisir toi-même, dessine une zone (▭) puis « ✨ Lire cette zone ». ¦ Korniza blu tregon zonën që do të lexohet. Për ta zgjedhur vetë, vizato një zonë (▭) pastaj «✨ Lexo këtë zonë». ¦ Il-qafas blu juri ż-żona li se tinqara. Biex tagħżel int, iddisinja żona (▭) imbagħad “✨ Aqra din iż-żona”.
+La lecture à la main a donné un texte peu sûr ¦ Leximi i dorëshkrimit dha një tekst të pasigurt ¦ Il-qari tal-kitba bl-idejn ta test mhux ċert
+({x} % de mots douteux). Souvent à cause des bords de l’écran autour de l’acte, ou d’une écriture trop difficile pour ce modèle. ¦ ({x} % fjalë të dyshimta). Shpesh për shkak të skajeve të ekranit rreth aktit, ose të një shkrimi tepër të vështirë për këtë model. ¦ ({x} % kliem dubjużi). Spiss minħabba t-truf tal-iskrin madwar l-att, jew kitba wisq diffiċli għal dan il-mudell.
+Recadrer et relire ¦ Prit dhe rilexo ¦ Aqta’ u erġa’ aqra
+Essayer la lecture approfondie ¦ Provo leximin e thelluar ¦ Ipprova l-qari fil-fond
+LECTURE APPROFONDIE ¦ LEXIM I THELLUAR ¦ QARI FIL-FOND
+Lecture approfondie ¦ Lexim i thelluar ¦ Qari fil-fond
+Ce qu’il faut ¦ Çfarë duhet ¦ X’għandek bżonn
+Ollama (gratuit, open source) et un modèle vision ouvert, au choix : ¦ Ollama (falas, me burim të hapur) dhe një model vizioni i hapur, sipas zgjedhjes: ¦ Ollama (b’xejn, open source) u mudell tal-viżjoni miftuħ, kif tagħżel:
+le meilleur, ≈ {x} Go ¦ më i miri, ≈ {x} GB ¦ l-aħjar, ≈ {x} GB
+plus léger, ≈ {x} Go, pour un ordinateur modeste ¦ më i lehtë, ≈ {x} GB, për një kompjuter modest ¦ eħfef, ≈ {x} GB, għal kompjuter modest
+déjà téléchargé ¦ tashmë i shkarkuar ¦ diġà mniżżel
+8 Go conseillés (16 Go pour le 8B) · téléchargé une seule fois ¦ rekomandohen 8 GB (16 GB për 8B) · shkarkohet vetëm një herë ¦ 8 GB rakkomandati (16 GB għall-8B) · jitniżżel darba biss
+≈ 20 à 60 s par page sur un ordinateur récent ¦ ≈ 20 deri në 60 s për faqe në një kompjuter të ri ¦ ≈ 20 sa 60 s għal kull paġna fuq kompjuter riċenti
+Confidentialité ¦ Privatësia ¦ Privatezza
+rien ne quitte ton ordinateur ; l’app vérifie qu’Ollama ne répond que sur ton ordinateur ¦ asgjë nuk largohet nga kompjuteri yt; aplikacioni kontrollon që Ollama të përgjigjet vetëm në kompjuterin tënd ¦ xejn ma joħroġ mill-kompjuter tiegħek; l-app tivverifika li Ollama iwieġeb biss fuq il-kompjuter tiegħek
+Recherche d’Ollama sur cet ordinateur… ¦ Po kërkohet Ollama në këtë kompjuter… ¦ Qed infittex Ollama fuq dan il-kompjuter…
+L’adresse d’Ollama n’est pas sur cet ordinateur : la lecture approfondie est refusée. ¦ Adresa e Ollama nuk është në këtë kompjuter: leximi i thelluar refuzohet. ¦ L-indirizz ta’ Ollama mhuwiex fuq dan il-kompjuter: il-qari fil-fond huwa miċħud.
+Ollama n’est pas encore sur cet ordinateur. ¦ Ollama nuk është ende në këtë kompjuter. ¦ Ollama għadu mhux fuq dan il-kompjuter.
+Installe-le une fois depuis son site (gratuit), lance-le, puis « ↻ Vérifier à nouveau ». ¦ Instaloje një herë nga faqja e tij (falas), nise, pastaj «↻ Kontrollo sërish». ¦ Installah darba mis-sit tiegħu (b’xejn), ħaddmu, imbagħad “↻ Iċċekkja mill-ġdid”.
+Ollama est installé mais ne tourne pas. ¦ Ollama është instaluar, por nuk po punon. ¦ Ollama huwa installat iżda mhux qed jaħdem.
+Lance l’application Ollama, puis « ↻ Vérifier à nouveau ». ¦ Nis aplikacionin Ollama, pastaj «↻ Kontrollo sërish». ¦ Ħaddem l-app Ollama, imbagħad “↻ Iċċekkja mill-ġdid”.
+Prêt : la lecture se fait sur cet ordinateur, sans Internet. ¦ Gati: leximi bëhet në këtë kompjuter, pa internet. ¦ Lest: il-qari jsir fuq dan il-kompjuter, mingħajr Internet.
+Télécharger Ollama (ollama.com) ¦ Shkarko Ollama (ollama.com) ¦ Niżżel Ollama (ollama.com)
+Installer la lecture approfondie ¦ Instalo leximin e thelluar ¦ Installa l-qari fil-fond
+Lire l’acte avec ce modèle ¦ Lexo aktin me këtë model ¦ Aqra l-att b’dan il-mudell
+Vérifier à nouveau ¦ Kontrollo sërish ¦ Iċċekkja mill-ġdid
+« 🔍 Essayer aussi la lecture approfondie » sur une page déjà lue montre les deux textes côte à côte, et on garde la meilleure. Relis toujours : un modèle peut se tromper sur les noms. ¦ «🔍 Provo edhe leximin e thelluar» në një faqe të lexuar tashmë tregon të dy tekstet krah për krah dhe mban më të mirin. Rishiko gjithmonë: një model mund të gabojë emrat. ¦ “🔍 Ipprova wkoll il-qari fil-fond” fuq paġna diġà moqrija juri ż-żewġ testi ħdejn xulxin, u żżomm l-aħjar wieħed. Dejjem irrevedi: mudell jista’ jiżbalja l-ismijiet.
+Téléchargement du modèle… {done} sur {total} ¦ Po shkarkohet modeli… {done} nga {total} ¦ Qed jitniżżel il-mudell… {done} minn {total}
+Téléchargement du modèle… ¦ Po shkarkohet modeli… ¦ Qed jitniżżel il-mudell…
+Lecture approfondie… {n} s ¦ Lexim i thelluar… {n} s ¦ Qari fil-fond… {n} s
+La lecture approfondie n’a pas abouti. ¦ Leximi i thelluar nuk pati sukses. ¦ Il-qari fil-fond ma rnexxiex.
+Les deux lectures côte à côte ¦ Dy leximet krah për krah ¦ Iż-żewġ qarijiet ħdejn xulxin
+Le texte lu ¦ Teksti i lexuar ¦ It-test moqri
+Écriture à la main ¦ Shkrim dore ¦ Kitba bl-idejn
+Garder celle-ci ¦ Mbaje këtë ¦ Żomm dan
+Mettre dans le texte ¦ Vendose në tekst ¦ Poġġi fit-test
+La lecture approfondie est installée. ¦ Leximi i thelluar u instalua. ¦ Il-qari fil-fond huwa installat.
+Défunte ¦ E ndjera ¦ Il-mejta
+Conjointe ¦ Bashkëshortja ¦ Il-mara
+Autre personne ¦ Person tjetër ¦ Persuna oħra
+{n} ans → née vers {year} ¦ {n} vjeç → lindur rreth {year} ¦ {n} sena → twieldet madwar {year}
+{n} ans → né vers {year} ¦ {n} vjeç → lindur rreth {year} ¦ {n} sena → twieled madwar {year}
+Aucune personne trouvée dans le texte : relis-le, puis « 🧭 Repérer ». ¦ Asnjë person nuk u gjet në tekst: rishikoje, pastaj «🧭 Dallo». ¦ L-ebda persuna ma nstabet fit-test: aqrah mill-ġdid, imbagħad “🧭 Sib”.
+TRANSCRIPTION ¦ TRANSKRIPTIM ¦ TRASKRIZZJONI
+Ce que l’app a trouvé dans l’acte ¦ Çfarë gjeti aplikacioni në akt ¦ X’sabet l-app fl-att
+Ajouter à la généalogie ¦ Shto në gjenealogji ¦ Żid mal-ġenealoġija
+Garder seulement la transcription ¦ Mbaj vetëm transkriptimin ¦ Żomm it-traskrizzjoni biss
+demeurant à {place} ¦ banues në {place} ¦ residenti f’{place}
+fille de {a} et de {b} ¦ bija e {a} dhe e {b} ¦ bint {a} u {b}
+fils de {a} et de {b} ¦ bir i {a} dhe i {b} ¦ iben {a} u {b}
+fille de {a} ¦ bija e {a} ¦ bint {a}
+fils de {a} ¦ bir i {a} ¦ iben {a}
+sœur de {name} ¦ motra e {name} ¦ oħt {name}
+frère de {name} ¦ vëllai i {name} ¦ ħu {name}
+parent de {name} ¦ i afërm i {name} ¦ qarib ta’ {name}
+conjoint décédé de {name} ¦ bashkëshorti i ndjerë i {name} ¦ il-konjuġi mejjet ta’ {name}
+conjoint de {name} ¦ bashkëshorti i {name} ¦ il-konjuġi ta’ {name}
+décédée avant l’acte ¦ vdekur para aktit ¦ mietet qabel l-att
+décédé avant l’acte ¦ vdekur para aktit ¦ miet qabel l-att
+Relier à cette fiche ¦ Lidhe me këtë skedë ¦ Orbot ma’ din l-iskeda
+Reliée à : ¦ E lidhur me: ¦ Marbuta ma’:
+Fiches proches : ¦ Skeda të ngjashme: ¦ Skedi simili:
+Fiche existante : ¦ Skedë ekzistuese: ¦ Skeda eżistenti:
+même personne probable ¦ ndoshta i njëjti person ¦ probabbilment l-istess persuna
+Pas de fiche · restera dans l’acte avec son rôle, sans créer de fiche ¦ Pa skedë · do të mbetet në akt me rolin e vet, pa krijuar skedë ¦ L-ebda skeda · jibqa’ fl-att bir-rwol tiegħu, mingħajr ma tinħoloq skeda
+Aucune fiche : elle sera créée et reliée comme mère de {name} ¦ Asnjë skedë: do të krijohet dhe lidhet si nëna e {name} ¦ L-ebda skeda: se tinħoloq u tintrabat bħala omm {name}
+Aucune fiche : elle sera créée et reliée comme père de {name} ¦ Asnjë skedë: do të krijohet dhe lidhet si babai i {name} ¦ L-ebda skeda: se tinħoloq u tintrabat bħala missier {name}
+Aucune fiche : elle sera créée ¦ Asnjë skedë: do të krijohet ¦ L-ebda skeda: se tinħoloq
+Témoin seul ¦ Vetëm dëshmitar ¦ Xhud biss
+Que faire de cette personne ¦ Çfarë të bëhet me këtë person ¦ X’għandu jsir b’din il-persuna
+Décès estimé avant l’acte ¦ Vdekje e vlerësuar para aktit ¦ Mewt stmata qabel l-att
+Gardés dans l’acte, sans fiche ¦ Mbajtur në akt, pa skedë ¦ Miżmuma fl-att, mingħajr skeda
+La source ¦ Burimi ¦ Is-sors
+déjà dans ta base, reprise ¦ tashmë në bazën tënde, ripërdorur ¦ diġà fid-database tiegħek, użata mill-ġdid
+Relever à nouveau ¦ Nxirr sërish ¦ Erġa’ oħroġ
+Compris : {date} ¦ Kuptuar: {date} ¦ Mifhum: {date}
+Les personnes ({n}) ¦ Personat ({n}) ¦ Il-persuni ({n})
+Ce que l’acte ajoute aussi ¦ Çfarë shton gjithashtu akti ¦ X’iżid ukoll l-att
+Naissance estimée d’après l’âge (marquée « estimée ») ¦ Lindje e vlerësuar nga mosha (shënuar «e vlerësuar») ¦ Twelid stmat mill-età (immarkat “stmat”)
+Décès d’avant l’acte (« feu », « veuve de ») ¦ Vdekje para aktit («i ndjeri», «e veja e») ¦ Imwiet qabel l-att (“il-mejjet”, “armla ta’”)
+Domiciles ¦ Vendbanime ¦ Residenzi
+La source, toute prête ¦ Burimi, gati ¦ Is-sors, lesta
+La même source est déjà dans ta base : elle est reprise au lieu d’en créer une deuxième. ¦ I njëjti burim është tashmë në bazën tënde: ripërdoret në vend që të krijohet një i dytë. ¦ L-istess sors diġà jinsab fid-database tiegħek: jerġa’ jintuża minflok ma jinħoloq ieħor.
+Remplie d’après le champ Source, le nom du fichier et le texte lu autour de l’image. Vérifie avant d’ajouter. ¦ Plotësuar sipas fushës Burimi, emrit të skedarit dhe tekstit të lexuar rreth figurës. Kontrollo para se ta shtosh. ¦ Mimlija skont il-qasam Sors, l-isem tal-fajl u t-test moqri madwar l-immaġni. Iċċekkja qabel iżżid.
+Remplie d’après le champ Source et le nom du fichier. Vérifie avant d’ajouter. ¦ Plotësuar sipas fushës Burimi dhe emrit të skedarit. Kontrollo para se ta shtosh. ¦ Mimlija skont il-qasam Sors u l-isem tal-fajl. Iċċekkja qabel iżżid.
+Voilà ce qui va entrer dans ta généalogie ¦ Ja çfarë do të hyjë në gjenealogjinë tënde ¦ Dan huwa dak li se jidħol fil-ġenealoġija tiegħek
+Rien n’est écrasé : une information différente de la fiche est proposée, jamais imposée. « ↶ Annuler » défait tout l’ajout d’un coup. ¦ Asgjë nuk mbishkruhet: një informacion i ndryshëm nga skeda propozohet, kurrë nuk imponohet. «↶ Zhbëj» e zhbën gjithë shtimin njëherësh. ¦ Xejn ma jinkiteb fuqu: informazzjoni differenti mill-iskeda tiġi proposta, qatt imposta. “↶ Neħħi” iħassar iż-żieda kollha f’daqqa.
+C’est elle : relier ¦ Është ajo: lidh ¦ Hija hi: orbot
+C’est lui : relier ¦ Është ai: lidh ¦ Huwa hu: orbot
+Ce n’est pas elle ¦ Nuk është ajo ¦ Mhijiex hi
+Ce n’est pas lui ¦ Nuk është ai ¦ Mhuwiex hu
+ajouter ¦ shto ¦ żid
+{name} : l’acte et la fiche côte à côte ¦ {name}: akti dhe skeda krah për krah ¦ {name}: l-att u l-iskeda ħdejn xulxin
+Dans l’acte ¦ Në akt ¦ Fl-att
+Fiche · {name} ¦ Skedë · {name} ¦ Skeda · {name}
+vers {year} ({n} ans) ¦ rreth {year} ({n} vjeç) ¦ madwar {year} ({n} sena)
+{date} avec {name} ¦ {date} me {name} ¦ {date} ma’ {name}
+avant le {date} ¦ para {date} ¦ qabel {date}
+Les parents sont les mêmes : c’est très probablement elle. ¦ Prindërit janë të njëjtët: ka shumë të ngjarë të jetë ajo. ¦ Il-ġenituri huma l-istess: probabbilment hija hi.
+Les parents sont les mêmes : c’est très probablement lui. ¦ Prindërit janë të njëjtët: ka shumë të ngjarë të jetë ai. ¦ Il-ġenituri huma l-istess: probabbilment huwa hu.
+Les parents ne sont pas les mêmes : vérifie avant de relier. ¦ Prindërit nuk janë të njëjtët: kontrollo para se t’i lidhësh. ¦ Il-ġenituri mhumiex l-istess: iċċekkja qabel torbot.
+La date de naissance de la fiche est gardée (elle est plus précise que l’âge de l’acte). ¦ Data e lindjes në skedë ruhet (është më e saktë se mosha në akt). ¦ Id-data tat-twelid tal-iskeda tinżamm (hija iktar preċiża mill-età fl-att).
+✓ Acte ajouté : {what} ¦ ✓ Akti u shtua: {what} ¦ ✓ Att miżjud: {what}
+Déjà d’autres parents, lien non fait : {names} ¦ Ka tashmë prindër të tjerë, lidhja nuk u bë: {names} ¦ Diġà għandu ġenituri oħra, ebda rabta: {names}
+Un modèle « vision » ouvert qui tourne sur ton ordinateur (Ollama) : lit mieux les écritures difficiles, plus lent ¦ Një model «vizioni» i hapur që punon në kompjuterin tënd (Ollama): lexon më mirë shkrimet e vështira, më i ngadaltë ¦ Mudell “viżjoni” miftuħ li jaħdem fuq il-kompjuter tiegħek (Ollama): jaqra aħjar kitba diffiċli, iktar bil-mod
+L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches ¦ Ngjarja, personat dhe lidhjet e tyre, burimi: lidh, krahaso ose krijo skedat ¦ L-avveniment, il-persuni u r-rabtiet tagħhom, is-sors: orbot, qabbel jew oħloq l-iskedi
+Ce que l’app a trouvé… ¦ Çfarë gjeti aplikacioni… ¦ X’sabet l-app…
+La lecture approfondie n’est pas chargée. ¦ Leximi i thelluar nuk është ngarkuar. ¦ Il-qari fil-fond mhuwiex mgħobbi.
+Lecture du texte autour de l’acte… ¦ Po lexohet teksti rreth aktit… ¦ Qed jinqara t-test madwar l-att…
+Le texte est vide : lis ou écris d’abord l’acte. ¦ Teksti është bosh: lexo ose shkruaj fillimisht aktin. ¦ It-test huwa vojt: l-ewwel aqra jew ikteb l-att.
+Personnes gardées dans la transcription, sans créer de fiche. ¦ Personat u mbajtën në transkriptim, pa krijuar skeda. ¦ Il-persuni nżammu fit-traskrizzjoni, mingħajr ma nħolqu skedi.
+Père du défunt ¦ Babai i të ndjerit ¦ Missier il-mejjet
+Mère du défunt ¦ Nëna e të ndjerit ¦ Omm il-mejjet
+Déclarant ¦ Deklaruesi ¦ Dikjarant
+Acte de mariage ¦ Akt martese ¦ Att taż-żwieġ
+Acte de baptême ¦ Akt pagëzimi ¦ Att tal-magħmudija
+Acte de naissance ¦ Akt lindjeje ¦ Att tat-twelid
+Acte de sépulture ¦ Akt varrimi ¦ Att tad-difna
+Registre ¦ Regjistër ¦ Reġistru
+Vue ¦ Pamje ¦ Immaġni
+Vues en tout ¦ Pamje gjithsej ¦ Immaġni b’kollox
+La lecture approfondie ne parle qu’à Ollama sur cet ordinateur (127.0.0.1) : adresse refusée. ¦ Leximi i thelluar flet vetëm me Ollama në këtë kompjuter (127.0.0.1): adresa u refuzua. ¦ Il-qari fil-fond jitkellem biss ma’ Ollama fuq dan il-kompjuter (127.0.0.1): indirizz miċħud.
+Modèle de lecture approfondie inconnu. ¦ Model i panjohur leximi të thelluar. ¦ Mudell tal-qari fil-fond mhux magħruf.
+La lecture approfondie a besoin de l’extension cURL de PHP. ¦ Leximi i thelluar ka nevojë për shtesën cURL të PHP. ¦ Il-qari fil-fond jeħtieġ l-estensjoni cURL ta’ PHP.
+Ollama ne répond pas sur cet ordinateur : installe-le (ollama.com), lance-le, puis réessaie. ¦ Ollama nuk përgjigjet në këtë kompjuter: instaloje (ollama.com), nise, pastaj provo sërish. ¦ Ollama ma jwieġibx fuq dan il-kompjuter: installah (ollama.com), ħaddmu, imbagħad erġa’ ipprova.
+Image manquante. ¦ Mungon figura. ¦ L-immaġni nieqsa.
+Image trop lourde. ¦ Figura është tepër e rëndë. ¦ L-immaġni tqila wisq.
+Image trop grande. ¦ Figura është tepër e madhe. ¦ L-immaġni kbira wisq.
+Ce modèle n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Ky model nuk është shkarkuar ende: «⤓ Instalo leximin e thelluar». ¦ Dan il-mudell għadu mhux imniżżel: “⤓ Installa l-qari fil-fond”.
+Une fiche à relier n’existe plus : choisis-en une autre. ¦ Një skedë për t’u lidhur nuk ekziston më: zgjidh një tjetër. ¦ Skeda li trid torbot ma teżistix aktar: agħżel oħra.
+Une personne à créer n’a ni prénom ni nom. ¦ Një person për t’u krijuar nuk ka as emër as mbiemër. ¦ Persuna li trid toħloq m’għandhiex la isem u lanqas kunjom.
+Trop de personnes dans un seul acte. ¦ Tepër persona në një akt të vetëm. ¦ Wisq persuni f’att wieħed.
+Annulation impossible : ce n’est pas l’ajout d’un acte. ¦ Zhbërja e pamundur: ky nuk është shtimi i një akti. ¦ Ma jistax jitneħħa: din mhijiex iż-żieda ta’ att.
+Le téléchargement du modèle n’a pas abouti. ¦ Shkarkimi i modelit nuk pati sukses. ¦ It-tniżżil tal-mudell ma rnexxiex.
+La lecture approfondie a pris trop de temps. ¦ Leximi i thelluar zgjati shumë. ¦ Il-qari fil-fond dam wisq.

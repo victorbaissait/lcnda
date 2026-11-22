@@ -5,6 +5,7 @@
  */
 (() => {
     'use strict';
+    const i18n = (s, v) => (window.LCNDA_I18N ? window.LCNDA_I18N.t(s, v) : String(s).replace(/\{(\w+)\}/g, (_, k) => (v && k in v ? v[k] : `{${k}}`))); // 🌐 docs/I18N.md
     const esc = v => String(v ?? '').replace(/[&<>'"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'}[c]));
     const toast = (msg, type) => window.LCNDA_APP?.toast ? window.LCNDA_APP.toast(msg, type) : alert(msg);
     // Confirmation au style de l'app ; confirm() du navigateur seulement si l'app n'est pas chargée
@@ -34,13 +35,14 @@
 
     async function dialog() {
         let data; try { data = await call('genealogies'); } catch (e) { return toast(e.message, 'error'); }
+        try { await window.LCNDA_EXT?.succGenealogyMarks?.(data.genealogies); } catch (_) {} // ⚖️ « N dossiers en cours » (usage successoral)
         document.getElementById('h-gen-dialog')?.remove();
         const dl = document.createElement('dialog'); dl.className = 'modal h-modal h-gen-dialog'; dl.id = 'h-gen-dialog';
         dl.innerHTML = `<div class="modal-head"><div><span class="eyebrow">MES GÉNÉALOGIES</span><h2>Changer de généalogie</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
             <p class="muted">Chaque généalogie est complètement séparée : ses personnes, ses photos et documents, ses réglages, ses sauvegardes.</p>
             <ol class="h-gen-list">${data.genealogies.map(g => `<li class="${g.active ? 'is-active' : ''}" data-id="${esc(g.id)}">
-                <span class="h-gen-ic">${g.example ? '🧪' : '🌳'}</span><div><strong>${esc(g.name)}</strong><small>${g.main ? 'principale · ' : ''}${size(g.size)}${g.active ? ' · ouverte' : ''}</small></div>
-                <span class="h-gen-acts">${g.active ? '<b class="h-gen-on">✓ Ouverte</b>' : '<button type="button" class="button small" data-open>Ouvrir</button>'}<button type="button" class="icon-button" data-ren title="Renommer">✎</button>${!g.main && !g.active ? '<button type="button" class="icon-button danger" data-aside title="Mettre de côté (le dossier est gardé, rien n’est effacé)">🗑</button>' : ''}</span></li>`).join('')}</ol>
+                <span class="h-gen-ic">${g.locked ? '🔐' : g.example ? '🧪' : g.succ ? '⚖️' : '🌳'}</span><div><strong>${esc(g.name)}</strong><small>${g.main ? 'principale · ' : ''}${size(g.size)}${g.active ? ' · ouverte' : ''}${g.locked ? ' · ' + esc(i18n('protégée par un mot de passe')) : ''}${g.succ ? ' · ' + esc(g.succ) : ''}</small></div>
+                <span class="h-gen-acts">${g.active ? '<b class="h-gen-on">✓ Ouverte</b>' : '<button type="button" class="button small" data-open>Ouvrir</button>'}${g.active && !document.body.classList.contains('is-kiosk') ? `<button type="button" class="icon-button" data-glk title="${esc(i18n('Mot de passe de cette généalogie'))}" aria-label="${esc(i18n('Mot de passe de cette généalogie'))}">🔐</button>` : ''}<button type="button" class="icon-button" data-ren title="Renommer">✎</button>${!g.main && !g.active ? '<button type="button" class="icon-button danger" data-aside title="Mettre de côté (le dossier est gardé, rien n’est effacé)">🗑</button>' : ''}</span></li>`).join('')}</ol>
             <form class="h-gen-new" data-new><label>Nouvelle généalogie<input name="name" maxlength="80" placeholder="Famille de mon conjoint, une étude de village…" required></label><button type="submit" class="button">＋ Créer et ouvrir</button></form>
             <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-x>Fermer</button></div>`;
         document.body.appendChild(dl);
@@ -49,6 +51,7 @@
         dl.addEventListener('click', async e => {
             const li = e.target.closest('[data-id]'); if (!li) return;
             const id = li.dataset.id, g = data.genealogies.find(x => x.id === id);
+            if (e.target.closest('[data-glk]')) { dl.close(); return window.LCNDA_EXT?.openGlockSettings?.(); } // 🔐 app-verrou.js
             if (e.target.closest('[data-open]')) { e.target.disabled = true; e.target.textContent = 'Ouverture…'; return open(id); }
             if (e.target.closest('[data-ren]')) {
                 const name = window.LCNDA_APP?.askText ? await window.LCNDA_APP.askText({title: 'Renommer la généalogie', message: 'Nouveau nom :', value: g.name, okLabel: 'Renommer'}) : prompt('Nouveau nom :', g.name);
@@ -96,4 +99,5 @@
     const start = () => { refreshButton(); installBlock(); };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
     (window.LCNDA_EXT = window.LCNDA_EXT || {}).openGenealogies = dialog;
+    window.LCNDA_EXT.switchGenealogy = open; // ⚖️ ouvrir la généalogie d'un dossier de succession (heritage-successoral-dossiers.js)
 })();

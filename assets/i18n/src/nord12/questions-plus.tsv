@@ -1,0 +1,71 @@
+fr ¦ ru ¦ uk
+# 🔎 Poser une question, suite (lib/question_plus.php, assets/js/heritage-questions-plus.js) : fautes, dates, « moi », négations, OU, renvois, ⌘K
+« {a} » lu « {b} » ¦ «{a}» прочитано как «{b}» ¦ «{a}» прочитано як «{b}»
+vers {y} ({a}-{b}) ¦ около {y} г. ({a}-{b}) ¦ близько {y} р. ({a}-{b})
+dans les années {y} ({a}-{b}) ¦ в {y}-х годах ({a}-{b}) ¦ у {y}-х роках ({a}-{b})
+« moi » = la personne de départ : {name} ¦ «я» = исходный человек: {name} ¦ «я» = вихідна особа: {name}
+qui est : {name} ¦ кто это: {name} ¦ хто це: {name}
+« {a} » compris comme {b} ¦ «{a}» понято как {b} ¦ «{a}» зрозуміло як {b}
+dossiers de succession ¦ наследственные дела ¦ спадкові справи
+Aucun dossier de succession dans cette généalogie. ¦ В этой генеалогии нет наследственных дел. ¦ У цій генеалогії немає спадкових справ.
+courriers sans réponse ¦ письма без ответа ¦ листи без відповіді
+Courriers aux héritiers sans réponse : {n}. ¦ Письма наследникам без ответа: {n}. ¦ Листи спадкоємцям без відповіді: {n}.
+Aucun courrier de dossier n’attend de réponse. ¦ Ни одно письмо по делам не ждёт ответа. ¦ Жоден лист у справах не чекає на відповідь.
+échéances en retard ¦ просроченные сроки ¦ прострочені терміни
+Dossiers avec des échéances en retard : {n}. ¦ Дела с просроченными сроками: {n}. ¦ Справи з простроченими термінами: {n}.
+Aucun dossier n’a d’échéance en retard. ¦ Ни в одном деле нет просроченных сроков. ¦ У жодній справі немає прострочених термінів.
+défunt : {name} ¦ умерший: {name} ¦ померлий: {name}
+Aucun dossier de succession pour {name}. ¦ Нет наследственного дела для {name}. ¦ Немає спадкової справи для {name}.
+⚖️ Rechercher les héritiers… ¦ ⚖️ Найти наследников… ¦ ⚖️ Знайти спадкоємців…
+Pièces notées « manquante » : {n}. La liste complète (en main, demandées, à demander) est dans l’onglet Pièces du dossier. ¦ Документы с пометкой «нет»: {n}. Полный список (на руках, запрошены, запросить) — на вкладке «Документы» дела. ¦ Документи з позначкою «немає»: {n}. Повний список (на руках, запитані, запитати) — на вкладці «Документи» справи.
+Aucune pièce notée « manquante ». La liste des pièces de chaque dossier est dans son onglet Pièces. ¦ Нет документов с пометкой «нет». Список по каждому делу — на его вкладке «Документы». ¦ Немає документів з позначкою «немає». Список для кожної справи — на її вкладці «Документи».
+pièces manquantes ¦ недостающие документы ¦ відсутні документи
+Héritiers introuvables ou qui ne répondent pas : {n}. ¦ Ненайденные или не отвечающие наследники: {n}. ¦ Спадкоємці, яких не знайдено або які не відповідають: {n}.
+Aucun héritier noté introuvable ou sans réponse. ¦ Нет наследников с пометкой «не найден» или «не отвечает». ¦ Немає спадкоємців з позначкою «не знайдено» чи «не відповідає».
+héritiers introuvables ¦ ненайденные наследники ¦ незнайдені спадкоємці
+De qui ? Écris par exemple « les héritiers de Jean Dupont ». ¦ Чьи? Напиши, например, «les héritiers de Jean Dupont». ¦ Чиї? Напиши, наприклад, «les héritiers de Jean Dupont».
+héritiers de {name} ¦ наследники: {name} ¦ спадкоємці: {name}
+Aucun dossier de succession pour {name}. Le dossier calcule les héritiers d’après l’arbre. ¦ Нет наследственного дела для {name}. Дело определяет наследников по древу. ¦ Немає спадкової справи для {name}. Справа визначає спадкоємців за деревом.
+Dossier {d} : les héritiers n’ont pas encore été calculés. Ouvre le dossier pour faire le calcul. ¦ Дело {d}: наследники ещё не определены. Открой дело, чтобы сделать расчёт. ¦ Справа {d}: спадкоємців ще не визначено. Відкрий справу, щоб зробити розрахунок.
+Dossier {d} — héritiers d’après le dernier calcul enregistré : {n}. ¦ Дело {d} — наследники по последнему сохранённому расчёту: {n}. ¦ Справа {d} — спадкоємці за останнім збереженим розрахунком: {n}.
+Branches encore à rechercher : {n}. ¦ Ветви, которые ещё нужно найти: {n}. ¦ Гілки, які ще треба дослідити: {n}.
+Actes ou documents à chercher pour {name} : {n}. Les 3 premiers ci-dessous ; la liste complète, avec où chercher et dans quelle série, est dans « Que manque-t-il ? ». ¦ Акты или документы, которые нужно найти для {name}: {n}. Первые 3 ниже; полный список, где и в какой серии искать, — в «Чего не хватает?». ¦ Акти чи документи, які треба знайти для {name}: {n}. Перші 3 нижче; повний список, де і в якій серії шукати, — у «Чого бракує?».
+Rien de connu à chercher pour {name}. ¦ Для {name} нечего искать. ¦ Для {name} нічого шукати.
+actes à chercher ¦ акты для поиска ¦ акти для пошуку
+où chercher ¦ где искать ¦ де шукати
+« Où chercher ? » donne pour {name} les sites et les séries d’archives les plus utiles, et pourquoi. ¦ «Где искать?» показывает для {name} самые полезные сайты и архивные серии и объясняет почему. ¦ «Де шукати?» показує для {name} найкорисніші сайти й архівні серії та пояснює чому.
+« Où chercher ? » donne pour chaque personne les sites et les séries d’archives les plus utiles, et pourquoi. ¦ «Где искать?» показывает для каждого человека самые полезные сайты и архивные серии и объясняет почему. ¦ «Де шукати?» показує для кожної особи найкорисніші сайти й архівні серії та пояснює чому.
+doublons ¦ дубликаты ¦ дублікати
+Le Contrôle de la base cherche les doublons probables (mêmes noms, mêmes dates, mêmes parents) et aide à les fusionner. ¦ Проверка базы ищет вероятные дубликаты (те же имена, даты, родители) и помогает их объединить. ¦ Перевірка бази шукає ймовірні дублікати (ті самі імена, дати, батьки) і допомагає їх об’єднати.
+mort pendant la guerre, en âge de combattre ¦ умер во время войны, в призывном возрасте ¦ помер під час війни, у призовному віці
+mort pendant la guerre ¦ умер во время войны ¦ помер під час війни
+morts pendant {era} ¦ умершие в период: {era} ¦ померлі в період: {era}
+morts à la guerre ¦ погибшие на войне ¦ загиблі на війні
+Morts pendant {era} : {n}. ¦ Умерли в период «{era}»: {n}. ¦ Померли в період «{era}»: {n}.
+Notés « Mort pour la France » : {n}. Morts pendant une guerre, en âge de combattre ou soldats (à vérifier) : {m}. ¦ С пометкой «Mort pour la France»: {n}. Умерли во время войны, в призывном возрасте или солдаты (проверить): {m}. ¦ З позначкою «Mort pour la France»: {n}. Померли під час війни, у призовному віці або солдати (перевірити): {m}.
+Dont « Mort pour la France » : {n}. ¦ Из них «Mort pour la France»: {n}. ¦ З них «Mort pour la France»: {n}.
+Pour les soldats : Mémoire des hommes et les registres matricules. ¦ Для солдат: Mémoire des hommes и послужные списки. ¦ Для солдатів: Mémoire des hommes і послужні списки.
+sans date de décès ¦ без даты смерти ¦ без дати смерті
+sans date de naissance ¦ без даты рождения ¦ без дати народження
+sans date de mariage ¦ без даты брака ¦ без дати шлюбу
+sans parents connus ¦ без известных родителей ¦ без відомих батьків
+sans profession notée ¦ без указанной профессии ¦ без зазначеної професії
+qui ne sont pas des ancêtres ¦ не являющиеся предками ¦ які не є предками
+pas {ev} à {place} ¦ не «{ev}» в {place} ¦ не «{ev}» у {place}
+vivants ou probablement vivants ¦ живые или, вероятно, живые ¦ живі або, ймовірно, живі
+pas à {place} ¦ не в {place} ¦ не в {place}
+recherche de nom : « {x} » ¦ поиск по имени: «{x}» ¦ пошук за ім’ям: «{x}»
+orthographe proche ¦ похожее написание ¦ схоже написання
+femmes ¦ женщины ¦ жінки
+Réponse réunie : {a} {c} {b}. ¦ Объединённый ответ: {a} {c} {b}. ¦ Об’єднана відповідь: {a} {c} {b}.
+Je n’ai pas tenu compte de : « {x} ». ¦ Я не учёл: «{x}». ¦ Я не врахував: «{x}».
+Plusieurs “{w}” : choisir… ¦ Несколько «{w}»: выбрать… ¦ Кілька «{w}»: вибрати…
+J’ai compris : {x} ¦ Я понял: {x} ¦ Я зрозумів: {x}
+Question en français ¦ Вопрос на французском ¦ Питання французькою
+Poser la question : « {q} » ¦ Задать вопрос: «{q}» ¦ Поставити питання: «{q}»
+Questions dans la recherche rapide (⌘K) ¦ Вопросы в быстром поиске (⌘K) ¦ Питання у швидкому пошуку (⌘K)
+Répondre aux questions dans la recherche rapide ¦ Отвечать на вопросы в быстром поиске ¦ Відповідати на питання у швидкому пошуку
+« les enfants de Pierre Mazaud » : la réponse courte s’affiche dans la liste ; sinon seulement « Poser la question » ¦ «les enfants de Pierre Mazaud»: короткий ответ появляется в списке; иначе только «Задать вопрос» ¦ «les enfants de Pierre Mazaud»: коротка відповідь з’являється у списку; інакше лише «Поставити питання»
+Pour aller plus loin, pose la question avec le nom de la personne voulue. ¦ Чтобы продолжить, задай вопрос с именем нужного человека. ¦ Щоб продовжити, постав запитання з іменем потрібної людини.
+« {a} » cherché d’abord ¦ сначала найдено «{a}» ¦ спершу знайдено «{a}»
+« {a} » = {name} ¦ «{a}» = {name} ¦ «{a}» = {name}

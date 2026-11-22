@@ -1,0 +1,53 @@
+fr ¦ cs ¦ sv ¦ da
+# 🔎 Recherche « à la française » (lib/recherche_fr.php, assets/js/app-recherche-fr.js, Réglages → 🔎 Recherche)
+nom exact ¦ přesné jméno ¦ exakt namn ¦ nøjagtigt navn
+nom de mariage ({x}) ¦ příjmení po sňatku ({x}) ¦ namn som gift ({x}) ¦ gift navn ({x})
+autre nom noté ({x}) ¦ jiné zapsané jméno ({x}) ¦ annat antecknat namn ({x}) ¦ andet noteret navn ({x})
+particule ignorée ({x}) ¦ přízvisko vynecháno ({x}) ¦ partikel ignorerad ({x}) ¦ partikel ignoreret ({x})
+forme latine d’{p} ({x}) ¦ latinská podoba jména {p} ({x}) ¦ latinsk form av {p} ({x}) ¦ latinsk form af {p} ({x})
+forme latine de {p} ({x}) ¦ latinská podoba jména {p} ({x}) ¦ latinsk form av {p} ({x}) ¦ latinsk form af {p} ({x})
+abréviation d’{p} ({x}) ¦ zkratka jména {p} ({x}) ¦ förkortning av {p} ({x}) ¦ forkortelse af {p} ({x})
+abréviation de {p} ({x}) ¦ zkratka jména {p} ({x}) ¦ förkortning av {p} ({x}) ¦ forkortelse af {p} ({x})
+diminutif d’{p} ({x}) ¦ zdrobnělina jména {p} ({x}) ¦ smeknamn för {p} ({x}) ¦ kælenavn for {p} ({x})
+diminutif de {p} ({x}) ¦ zdrobnělina jména {p} ({x}) ¦ smeknamn för {p} ({x}) ¦ kælenavn for {p} ({x})
+prénom composé ({p}) ¦ složené křestní jméno ({p}) ¦ sammansatt förnamn ({p}) ¦ sammensat fornavn ({p})
+phonétique (proche de {x}) ¦ foneticky (podobné {x}) ¦ fonetiskt (likt {x}) ¦ fonetisk (ligner {x})
+lieu ({x}) ¦ místo ({x}) ¦ plats ({x}) ¦ sted ({x})
+Saint, Sainte ou article écrits autrement ({x}) ¦ Saint, Sainte nebo člen zapsané jinak ({x}) ¦ Saint, Sainte eller artikel skrivna annorlunda ({x}) ¦ Saint, Sainte eller kendeord skrevet anderledes ({x})
+ancien nom ({x}) ¦ dřívější název ({x}) ¦ tidigare namn ({x}) ¦ tidligere navn ({x})
+commune fusionnée ({x} → {y}) ¦ sloučená obec ({x} → {y}) ¦ sammanslagen kommun ({x} → {y}) ¦ sammenlagt kommune ({x} → {y})
+date « {d} » ({ev} {y}) ¦ datum „{d}“ ({ev} {y}) ¦ datum ”{d}” ({ev} {y}) ¦ dato »{d}« ({ev} {y})
+date « {d} » ¦ datum „{d}“ ¦ datum ”{d}” ¦ dato »{d}«
+sépulture ¦ pohřeb ¦ begravning ¦ begravelse
+un événement ¦ událost ¦ en händelse ¦ en begivenhed
+Trouvé par : {x} ¦ Nalezeno podle: {x} ¦ Hittad genom: {x} ¦ Fundet via: {x}
+Aucun « {q} » ; {n} proches : {names} ¦ Žádné „{q}“; {n} podobné: {names} ¦ Inget ”{q}”; {n} liknande: {names} ¦ Ingen »{q}«; {n} lignende: {names}
+Montre aussi les noms qui se prononcent pareil, même quand le nom exact existe. ¦ Ukáže i jména, která znějí stejně, i když přesné jméno existuje. ¦ Visar också namn som låter likadant, även när det exakta namnet finns. ¦ Viser også navne, der lyder ens, selv når det nøjagtige navn findes.
+Toujours phonétique ¦ Vždy foneticky ¦ Alltid fonetiskt ¦ Altid fonetisk
+forme française ¦ francouzská podoba ¦ fransk form ¦ fransk form
+forme latine ¦ latinská podoba ¦ latinsk form ¦ latinsk form
+abréviation ¦ zkratka ¦ förkortning ¦ forkortelse
+diminutif ¦ zdrobnělina ¦ smeknamn ¦ kælenavn
+prénom composé ¦ složené křestní jméno ¦ sammansatt förnamn ¦ sammensat fornavn
+prénom de référence : {p} ({k}) ¦ výchozí křestní jméno: {p} ({k}) ¦ referensförnamn: {p} ({k}) ¦ referencefornavn: {p} ({k})
+nom avec particule : {a} = {b} ¦ jméno s přízviskem: {a} = {b} ¦ namn med partikel: {a} = {b} ¦ navn med partikel: {a} = {b}
+son : {s} ¦ zvuk: {s} ¦ ljud: {s} ¦ lyd: {s}
+à partir de {y} ¦ od {y} ¦ från {y} ¦ fra {y}
+jusqu’à {y} ¦ do {y} ¦ till {y} ¦ til {y}
+Rien de reconnu. ¦ Nic nerozpoznáno. ¦ Inget kändes igen. ¦ Intet genkendt.
+Réglages · Recherche ¦ Nastavení · Hledání ¦ Inställningar · Sökning ¦ Indstillinger · Søgning
+La même recherche partout. Sous chaque résultat : pourquoi il a été trouvé. ¦ Všude stejné hledání. Pod každým výsledkem: proč byl nalezen. ¦ Samma sökning överallt. Under varje resultat: varför det hittades. ¦ Den samme søgning overalt. Under hvert resultat: hvorfor det blev fundet.
+Ce que la recherche essaie ¦ Co hledání zkouší ¦ Vad sökningen försöker ¦ Hvad søgningen prøver
+Phonétique automatique ¦ Automatická fonetika ¦ Automatisk fonetik ¦ Automatisk fonetik
+quand rien n’est trouvé, les noms qui se prononcent pareil ¦ když se nic nenajde, jména, která znějí stejně ¦ när inget hittas, namn som låter likadant ¦ når intet findes, navne der lyder ens
+Formes latines des prénoms ¦ Latinské podoby křestních jmen ¦ Latinska former av förnamn ¦ Latinske former af fornavne
+Petrus = Pierre, Joannes = Jean, avec leurs fins (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, s jejich koncovkami (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, med sina ändelser (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, med deres endelser (-i, -o, -um, -ae)
+Abréviations et diminutifs des prénoms ¦ Zkratky a zdrobněliny křestních jmen ¦ Förkortningar och smeknamn för förnamn ¦ Forkortelser og kælenavne for fornavne
+Marge de « vers » (en années) ¦ Rozpětí pro „kolem“ (v letech) ¦ Marginal för ”omkring” (i år) ¦ Margen for »omkring« (i år)
+Toujours : accents, majuscules, particules (d’Albert = Dalbert), St = Saint, communes fusionnées, dates en français et calendrier républicain. ¦ Vždy: diakritika, velká písmena, přízviska (d’Albert = Dalbert), St = Saint, sloučené obce, data ve francouzštině a revoluční kalendář. ¦ Alltid: accenter, versaler, partiklar (d’Albert = Dalbert), St = Saint, sammanslagna kommuner, datum på franska och revolutionskalendern. ¦ Altid: accenter, store bogstaver, partikler (d’Albert = Dalbert), St = Saint, sammenlagte kommuner, datoer på fransk og revolutionskalenderen.
+Écris une recherche : l’app montre ce qu’elle comprend, sans rien chercher. ¦ Napiš hledání: aplikace ukáže, čemu rozumí, aniž by cokoli hledala. ¦ Skriv en sökning: appen visar vad den förstår, utan att söka något. ¦ Skriv en søgning: appen viser, hvad den forstår, uden at søge efter noget.
+ex. {x} ¦ např. {x} ¦ t.ex. {x} ¦ f.eks. {x}
+Essayer une recherche ¦ Vyzkoušet hledání ¦ Prova en sökning ¦ Prøv en søgning
+🔎 Recherche ¦ 🔎 Hledání ¦ 🔎 Sökning ¦ 🔎 Søgning
+nom proche à l’oreille ({a} / {b}) ¦ podobně znějící příjmení ({a} / {b}) ¦ namn som låter likt ({a} / {b}) ¦ navn der lyder ens ({a} / {b})
+même prénom, écrit autrement ({a} / {b}) ¦ stejné křestní jméno, zapsané jinak ({a} / {b}) ¦ samma förnamn, skrivet annorlunda ({a} / {b}) ¦ samme fornavn, skrevet anderledes ({a} / {b})

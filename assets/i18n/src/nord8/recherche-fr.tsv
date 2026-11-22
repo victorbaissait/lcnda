@@ -1,0 +1,53 @@
+fr ¦ tr
+# 🔎 Recherche « à la française » (lib/recherche_fr.php, assets/js/app-recherche-fr.js, Réglages → 🔎 Recherche)
+nom exact ¦ tam ad
+nom de mariage ({x}) ¦ evlilik soyadı ({x})
+autre nom noté ({x}) ¦ kaydedilmiş başka ad ({x})
+particule ignorée ({x}) ¦ ek yok sayıldı ({x})
+forme latine d’{p} ({x}) ¦ {p} adının Latince biçimi ({x})
+forme latine de {p} ({x}) ¦ {p} adının Latince biçimi ({x})
+abréviation d’{p} ({x}) ¦ {p} adının kısaltması ({x})
+abréviation de {p} ({x}) ¦ {p} adının kısaltması ({x})
+diminutif d’{p} ({x}) ¦ {p} adının sevgi biçimi ({x})
+diminutif de {p} ({x}) ¦ {p} adının sevgi biçimi ({x})
+prénom composé ({p}) ¦ bileşik ad ({p})
+phonétique (proche de {x}) ¦ sesçe ({x} adına yakın)
+lieu ({x}) ¦ yer ({x})
+Saint, Sainte ou article écrits autrement ({x}) ¦ Saint, Sainte ya da tanımlık farklı yazılmış ({x})
+ancien nom ({x}) ¦ eski ad ({x})
+commune fusionnée ({x} → {y}) ¦ birleştirilmiş belediye ({x} → {y})
+date « {d} » ({ev} {y}) ¦ tarih “{d}” ({ev} {y})
+date « {d} » ¦ tarih “{d}”
+sépulture ¦ defin
+un événement ¦ bir olay
+Trouvé par : {x} ¦ Bulunma nedeni: {x}
+Aucun « {q} » ; {n} proches : {names} ¦ “{q}” yok; {n} yakın: {names}
+Montre aussi les noms qui se prononcent pareil, même quand le nom exact existe. ¦ Tam ad olsa bile aynı okunan adları da gösterir.
+Toujours phonétique ¦ Her zaman sesçe
+forme française ¦ Fransızca biçim
+forme latine ¦ Latince biçim
+abréviation ¦ kısaltma
+diminutif ¦ sevgi biçimi
+prénom composé ¦ bileşik ad
+prénom de référence : {p} ({k}) ¦ temel ad: {p} ({k})
+nom avec particule : {a} = {b} ¦ ekli soyadı: {a} = {b}
+son : {s} ¦ ses: {s}
+à partir de {y} ¦ {y} yılından itibaren
+jusqu’à {y} ¦ {y} yılına kadar
+Rien de reconnu. ¦ Hiçbir şey tanınmadı.
+Réglages · Recherche ¦ Ayarlar · Arama
+La même recherche partout. Sous chaque résultat : pourquoi il a été trouvé. ¦ Her yerde aynı arama. Her sonucun altında: neden bulunduğu.
+Ce que la recherche essaie ¦ Aramanın denedikleri
+Phonétique automatique ¦ Otomatik sesçe arama
+quand rien n’est trouvé, les noms qui se prononcent pareil ¦ hiçbir şey bulunamazsa aynı okunan adlar
+Formes latines des prénoms ¦ Adların Latince biçimleri
+Petrus = Pierre, Joannes = Jean, avec leurs fins (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, ekleriyle (-i, -o, -um, -ae)
+Abréviations et diminutifs des prénoms ¦ Adların kısaltmaları ve sevgi biçimleri
+Marge de « vers » (en années) ¦ “Yaklaşık” payı (yıl olarak)
+Toujours : accents, majuscules, particules (d’Albert = Dalbert), St = Saint, communes fusionnées, dates en français et calendrier républicain. ¦ Her zaman: aksanlar, büyük harfler, ekler (d’Albert = Dalbert), St = Saint, birleştirilmiş belediyeler, Fransızca tarihler ve Cumhuriyet takvimi.
+Écris une recherche : l’app montre ce qu’elle comprend, sans rien chercher. ¦ Bir arama yaz: uygulama hiçbir şey aramadan neyi anladığını gösterir.
+ex. {x} ¦ örn. {x}
+Essayer une recherche ¦ Bir arama dene
+🔎 Recherche ¦ 🔎 Arama
+nom proche à l’oreille ({a} / {b}) ¦ sesçe yakın soyadı ({a} / {b})
+même prénom, écrit autrement ({a} / {b}) ¦ aynı ad, farklı yazılmış ({a} / {b})

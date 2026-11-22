@@ -1,0 +1,975 @@
+fr ¦ cs ¦ sv ¦ da
+# Zone « successoral » : ⚖️ généalogiste successoral, dossiers de succession, dévolution (heritage-successoral*.js, lib/successoral.php)
+Les dossiers de succession ne se montrent pas en mode consultation ni en mode simple. ¦ Dědické spisy se v režimu prohlížení ani v jednoduchém režimu nezobrazují. ¦ Dödsboärenden visas inte i visningsläge eller enkelt läge. ¦ Dødsbosager vises ikke i visningstilstand eller enkel tilstand.
+Successions ¦ Dědictví ¦ Dödsbon ¦ Dødsboer
+Listes · Recherche et organisation ¦ Seznamy · Výzkum a organizace ¦ Listor · Forskning och organisation ¦ Lister · Forskning og organisering
+Dossiers de succession ¦ Dědické spisy ¦ Dödsboärenden ¦ Dødsbosager
+Retrouver les héritiers d’une personne décédée, pour un notaire : un dossier par défunt. À ne pas confondre avec « 🏠 Héritages et successions » (les actes anciens des ancêtres). ¦ Najít dědice zemřelé osoby pro notáře: jeden spis na zemřelého. Nezaměňovat s „🏠 Dědictví a pozůstalosti“ (staré listiny předků). ¦ Hitta arvingarna till en avliden person åt en notarie: ett ärende per avliden. Inte att förväxla med ”🏠 Arv och dödsbon” (förfädernas gamla handlingar). ¦ Find arvingerne til en afdød person for en notar: én sag pr. afdød. Ikke at forveksle med »🏠 Arv og dødsboer« (forfædrenes gamle dokumenter).
+＋ Ouvrir un dossier ¦ ＋ Otevřít spis ¦ ＋ Öppna ett ärende ¦ ＋ Åbn en sag
+Lecture des dossiers… ¦ Načítání spisů… ¦ Läser ärendena… ¦ Læser sagerne…
+Aucun dossier de succession pour l’instant ¦ Zatím žádný dědický spis ¦ Inget dödsboärende ännu ¦ Endnu ingen dødsbosag
+Choisis la personne décédée : l’app part des fiches de la base pour trouver ses héritiers, selon le Code civil d’aujourd’hui. ¦ Vyber zemřelou osobu: aplikace vychází ze záznamů v databázi a hledá její dědice podle dnešního francouzského občanského zákoníku. ¦ Välj den avlidna personen: appen utgår från posterna i databasen för att hitta arvingarna enligt dagens franska civillag. ¦ Vælg den afdøde: appen går ud fra posterne i databasen for at finde arvingerne efter den nuværende franske civillov.
+Chercher… (ex. MAZAUD, 2026-014, ROUSSILHE) ¦ Hledat… (např. MAZAUD, 2026-014, ROUSSILHE) ¦ Sök… (t.ex. MAZAUD, 2026-014, ROUSSILHE) ¦ Søg… (f.eks. MAZAUD, 2026-014, ROUSSILHE)
+Prochaine échéance ¦ Nejbližší lhůta ¦ Nästa frist ¦ Næste frist
+A → Z ¦ A → Z ¦ A → Ö ¦ A → Å
+Dossier n° {n} ¦ Spis č. {n} ¦ Ärende nr {n} ¦ Sag nr. {n}
+Prochaine échéance : {d} — {l} ¦ Nejbližší lhůta: {d} — {l} ¦ Nästa frist: {d} — {l} ¦ Næste frist: {d} — {l}
+Échéance passée ¦ Lhůta uplynula ¦ Fristen har gått ut ¦ Fristen er overskredet
+✎ Modifier ¦ ✎ Upravit ¦ ✎ Ändra ¦ ✎ Ret
+Aucun dossier ne correspond. ¦ Žádný spis neodpovídá. ¦ Inget ärende matchar. ¦ Ingen sag passer.
+Pas en mode consultation ni en mode simple. ¦ Ne v režimu prohlížení ani v jednoduchém režimu. ¦ Inte i visningsläge eller enkelt läge. ¦ Ikke i visningstilstand eller enkel tilstand.
+⚖️ DOSSIER DE SUCCESSION ¦ ⚖️ DĚDICKÝ SPIS ¦ ⚖️ DÖDSBOÄRENDE ¦ ⚖️ DØDSBOSAG
+Ouvrir un dossier ¦ Otevřít spis ¦ Öppna ett ärende ¦ Åbn en sag
+Ouvrir le dossier ¦ Otevřít spis ¦ Öppna ärendet ¦ Åbn sagen
+N° de dossier ¦ Č. spisu ¦ Ärendenummer ¦ Sagsnummer
+fait tout seul : 2026-014 ¦ automaticky: 2026-014 ¦ automatiskt: 2026-014 ¦ automatisk: 2026-014
+reprise de la fiche ¦ převzato ze záznamu ¦ hämtat från posten ¦ hentet fra posten
+Dernier domicile ¦ Poslední bydliště ¦ Senaste bostad ¦ Sidste bopæl
+Notaire mandant (fiche ou nom) ¦ Pověřující notář (záznam nebo jméno) ¦ Uppdragsgivande notarie (post eller namn) ¦ Opdragsgivende notar (post eller navn)
+Réf. du notaire ¦ Zn. notáře ¦ Notariens ref. ¦ Notarens ref.
+Ouvert le ¦ Otevřeno dne ¦ Öppnat den ¦ Åbnet den
+Testament ¦ Závěť ¦ Testamente ¦ Testamente
+Aucun connu (le notaire interroge le fichier des dernières volontés) ¦ Žádná známá (notář nahlíží do rejstříku závětí) ¦ Inget känt (notarien kontrollerar testamentsregistret) ¦ Intet kendt (notaren tjekker testamentsregistret)
+Situation (notes) ¦ Situace (poznámky) ¦ Situation (anteckningar) ¦ Situation (noter)
+🔒 Le dossier reste dans l’app : les héritiers vivants, leurs adresses et leurs parts ne sont dans aucun export. Aucun montant n’est noté. ¦ 🔒 Spis zůstává v aplikaci: žijící dědici, jejich adresy a podíly nejsou v žádném exportu. Žádná částka se nezapisuje. ¦ 🔒 Ärendet stannar i appen: levande arvingar, deras adresser och andelar finns inte i någon export. Inget belopp noteras. ¦ 🔒 Sagen bliver i appen: levende arvinger, deres adresser og andele er ikke i nogen eksport. Intet beløb noteres.
+Choisis la personne décédée. ¦ Vyber zemřelou osobu. ¦ Välj den avlidna personen. ¦ Vælg den afdøde.
+Dossier enregistré ¦ Spis uložen ¦ Ärendet sparat ¦ Sag gemt
+Dossier supprimé ¦ Spis smazán ¦ Ärendet borttaget ¦ Sag slettet
+Lecture du dossier… ¦ Načítání spisu… ¦ Läser ärendet… ¦ Læser sagen…
+← Tous les dossiers ¦ ← Všechny spisy ¦ ← Alla ärenden ¦ ← Alle sager
+Dossier n° {n} · {t} ¦ Spis č. {n} · {t} ¦ Ärende nr {n} · {t} ¦ Sag nr. {n} · {t}
+Listes · Dossiers de succession ¦ Seznamy · Dědické spisy ¦ Listor · Dödsboärenden ¦ Lister · Dødsbosager
+↗ Fiche du défunt ¦ ↗ Záznam zemřelého ¦ ↗ Den avlidnes post ¦ ↗ Den afdødes post
+🗄 Archiver le dossier clos ¦ 🗄 Archivovat uzavřený spis ¦ 🗄 Arkivera det avslutade ärendet ¦ 🗄 Arkivér den afsluttede sag
+Dossier archivé : les adresses des vivants ont été retirées, le journal reste. ¦ Spis archivován: adresy žijících byly odstraněny, deník zůstává. ¦ Ärendet arkiverat: de levandes adresser har tagits bort, loggen finns kvar. ¦ Sag arkiveret: de levendes adresser er fjernet, loggen bliver.
+État du dossier ¦ Stav spisu ¦ Ärendets status ¦ Sagens status
+Le défunt n’est plus dans la base. ¦ Zemřelý už v databázi není. ¦ Den avlidne finns inte längre i databasen. ¦ Den afdøde er ikke længere i databasen.
+Pas de conjoint dans la base ¦ V databázi není manžel ¦ Ingen make/maka i databasen ¦ Ingen ægtefælle i databasen
+A des descendants ¦ Má potomky ¦ Har ättlingar ¦ Har efterkommere
+Sans descendant dans la base ¦ V databázi nejsou potomci ¦ Inga ättlingar i databasen ¦ Ingen efterkommere i databasen
+Le défunt ¦ Zemřelý ¦ Den avlidne ¦ Den afdøde
+fiche n° {n} ¦ záznam č. {n} ¦ post nr {n} ¦ post nr. {n}
+Le mandat ¦ Pověření ¦ Uppdraget ¦ Opdraget
+Droit actuel (décès après le 1er janvier 2007) ¦ Současné právo (úmrtí po 1. lednu 2007) ¦ Gällande rätt (dödsfall efter 1 januari 2007) ¦ Gældende ret (dødsfald efter 1. januar 2007)
+Échéances ¦ Lhůty ¦ Frister ¦ Frister
+＋ Échéance ¦ ＋ Lhůta ¦ ＋ Frist ¦ ＋ Frist
+Dans {n} j ¦ Za {n} d ¦ Om {n} d ¦ Om {n} d
+Aucune échéance. ¦ Žádná lhůta. ¦ Ingen frist. ¦ Ingen frist.
+Aussi dans 🗓 Ma semaine de recherche. ¦ Také v 🗓 Můj týden výzkumu. ¦ Även i 🗓 Min forskningsvecka. ¦ Også i 🗓 Min forskningsuge.
+📑 Pièces ¦ 📑 Doklady ¦ 📑 Handlingar ¦ 📑 Dokumenter
+🖨 Tableau pour le notaire ¦ 🖨 Tabulka pro notáře ¦ 🖨 Tablå för notarien ¦ 🖨 Oversigt til notaren
+de son chef ¦ vlastním právem ¦ i egen rätt ¦ i egen ret
+représenté ¦ zastoupen ¦ företrädd ¦ repræsenteret
+sans descendance connue ¦ bez známých potomků ¦ inga kända ättlingar ¦ ingen kendte efterkommere
+degré plus éloigné ¦ vzdálenější stupeň ¦ avlägsnare grad ¦ fjernere grad
+pas de représentation ¦ bez zastoupení ¦ ingen istadarätt ¦ ingen repræsentation
+pas encore conçu ¦ ještě nepočatý ¦ ännu inte avlad ¦ endnu ikke undfanget
+écarté ¦ vyloučen ¦ utesluten ¦ udelukket
+par représentation ¦ zastoupením ¦ genom istadarätt ¦ ved repræsentation
+de son chef, s’il vit ¦ vlastním právem, pokud žije ¦ i egen rätt, om i livet ¦ i egen ret, hvis i live
+Retenu ¦ Povolán ¦ Kallad ¦ Kaldet
+Écarté par le conjoint ¦ Vyloučen manželem ¦ Utesluten av maken ¦ Udelukket af ægtefællen
+Écarté ¦ Vyloučen ¦ Utesluten ¦ Udelukket
+{name} : {share} (art. {art}). ¦ {name}: {share} (čl. {art}). ¦ {name}: {share} (art. {art}). ¦ {name}: {share} (art. {art}).
+Ou, à son choix, l’usufruit de la totalité (art. 757) : les descendants ont alors la nue-propriété, dans les mêmes proportions. ¦ Nebo podle volby požívací právo k celku (čl. 757): potomci pak mají holé vlastnictví ve stejném poměru. ¦ Eller, efter eget val, nyttjanderätt till allt (art. 757): ättlingarna har då den nakna äganderätten i samma proportioner. ¦ Eller, efter eget valg, brugsret til det hele (art. 757): efterkommerne har så ejendomsretten i samme forhold.
+Aucun conjoint dans la base. ¦ V databázi není žádný manžel. ¦ Ingen make/maka i databasen. ¦ Ingen ægtefælle i databasen.
+S’il y avait un conjoint, l’app afficherait ici ses droits (art. 757 à 757-2) avant les ordres. ¦ Kdyby existoval manžel, aplikace by zde ukázala jeho práva (čl. 757 až 757-2) před třídami. ¦ Om det fanns en make skulle appen visa rättigheterna här (art. 757 till 757-2) före arvsklasserna. ¦ Var der en ægtefælle, ville appen vise rettighederne her (art. 757 til 757-2) før arveklasserne.
+{n}e ¦ {n}. ¦ {n}:e ¦ {n}.
+adresse ? ¦ adresa? ¦ adress? ¦ adresse?
+Statut retenu dans ce dossier ¦ Stav přijatý v tomto spisu ¦ Status som gäller i detta ärende ¦ Status fastholdt i denne sag
+Autre hypothèse ¦ Jiná hypotéza ¦ Annan hypotes ¦ Anden hypotese
+total {t} ¦ celkem {t} ¦ totalt {t} ¦ i alt {t}
+personne : il reste des branches à chercher. ¦ nikdo: zbývají větve k hledání. ¦ ingen: grenar återstår att söka. ¦ ingen: der er grene tilbage at søge.
+Part en jeu : {s} ¦ Podíl ve hře: {s} ¦ Andel som står på spel: {s} ¦ Andel på spil: {s}
+🔍 Chercher ¦ 🔍 Hledat ¦ 🔍 Sök ¦ 🔍 Søg
+🌍 Héritier à l’étranger ¦ 🌍 Dědic v zahraničí ¦ 🌍 Arvinge utomlands ¦ 🌍 Arving i udlandet
+❔ Absent ou disparu ¦ ❔ Nepřítomný nebo nezvěstný ¦ ❔ Frånvarande eller försvunnen ¦ ❔ Fraværende eller forsvundet
+📇 Compléter ¦ 📇 Doplnit ¦ 📇 Komplettera ¦ 📇 Udfyld
+Type d’adoption ¦ Druh osvojení ¦ Typ av adoption ¦ Type adoption
+Type d’adoption ? ¦ Druh osvojení? ¦ Typ av adoption? ¦ Type adoption?
+Plénière ¦ Úplné ¦ Fullständig ¦ Fuld
+Marié ? ¦ Ženatý / vdaná? ¦ Gift? ¦ Gift?
+Pas marié (PACS, union libre) ¦ Nesezdaní (PACS, druh/družka) ¦ Inte gift (PACS, sambo) ¦ Ikke gift (PACS, samlevende)
+Divorcé ¦ Rozvedený ¦ Skild ¦ Skilt
+Aucune branche à chercher d’après les fiches. ¦ Podle záznamů není co hledat. ¦ Enligt posterna finns ingen gren att söka. ¦ Ifølge posterne er der ingen gren at søge.
+{n}e degré ¦ {n}. stupeň ¦ {n}:e graden ¦ {n}. grad
+Calcul indicatif, à faire vérifier par le notaire. Il suit le Code civil en vigueur (art. 731 et suivants), sans testament, sans donation, sans renonciation connue. Il ne tient pas compte du droit de retour légal (art. 738-2, 757-3), des biens à l’étranger ni d’un régime matrimonial. ¦ Orientační výpočet, ověří notář. Řídí se platným francouzským občanským zákoníkem (čl. 731 a násl.), bez závěti, bez daru, bez známého odmítnutí. Nezohledňuje zákonné právo návratu (čl. 738-2, 757-3), majetek v zahraničí ani majetkový režim manželů. ¦ Vägledande beräkning, ska kontrolleras av notarien. Den följer gällande fransk civillag (art. 731 och följande), utan testamente, utan gåva, utan känt arvsavstående. Den tar inte hänsyn till lagstadgad återgångsrätt (art. 738-2, 757-3), tillgångar utomlands eller makarnas egendomsordning. ¦ Vejledende beregning, skal kontrolleres af notaren. Den følger den gældende franske civillov (art. 731 ff.), uden testamente, uden gave, uden kendt arveafkald. Den tager ikke højde for den lovbestemte tilbagefaldsret (art. 738-2, 757-3), aktiver i udlandet eller formueordning.
+Le conjoint survivant ¦ Pozůstalý manžel ¦ Efterlevande make/maka ¦ Den efterlevende ægtefælle
+Les ordres d’héritiers (art. 734) : le premier qui a quelqu’un prend tout ¦ Dědické třídy (čl. 734): první, ve které někdo je, dostane vše ¦ Arvsklasserna (art. 734): den första som har någon får allt ¦ Arveklasserne (art. 734): den første, hvor der er nogen, får det hele
+Les héritiers trouvés ¦ Nalezení dědici ¦ Funna arvingar ¦ Fundne arvinger
+🗂 Tables des successions (AD)… ¦ 🗂 Soupisy dědictví (archivy)… ¦ 🗂 Bouppteckningsregister (arkiv)… ¦ 🗂 Dødsboregistre (arkiver)…
+Lien avec le défunt ¦ Vztah k zemřelému ¦ Släktskap med den avlidne ¦ Slægtskab med den afdøde
+Vient ¦ Dědí ¦ Ärver ¦ Arver
+Part ¦ Podíl ¦ Andel ¦ Andel
+Statut retenu ¦ Přijatý stav ¦ Gällande status ¦ Fastholdt status
+↔ Faire glisser le tableau pour voir les parts. ¦ ↔ Posuň tabulku a uvidíš podíly. ¦ ↔ Dra i tabellen för att se andelarna. ¦ ↔ Træk i tabellen for at se andelene.
+Aucun héritier trouvé jusqu’au 6e degré : sans testament, la succession reviendrait à l’État (art. 539 et 768). Il reste sans doute des branches à chercher. ¦ Do 6. stupně nebyl nalezen žádný dědic: bez závěti by dědictví připadlo státu (čl. 539 a 768). Pravděpodobně zbývají větve k hledání. ¦ Ingen arvinge hittad upp till 6:e graden: utan testamente skulle arvet tillfalla staten (art. 539 och 768). Sannolikt återstår grenar att söka. ¦ Ingen arving fundet op til 6. grad: uden testamente ville boet tilfalde staten (art. 539 og 768). Der er sikkert grene tilbage at søge.
+Les calculs restent tant que la branche n’est pas tranchée. ¦ Výpočty zůstávají, dokud větev není rozhodnuta. ¦ Beräkningarna finns kvar tills grenen är avgjord. ¦ Beregningerne bliver, indtil grenen er afgjort.
+Les branches à chercher ¦ Větve k hledání ¦ Grenar att söka ¦ Grene at søge
+L’hypothèse retenue ¦ Přijatá hypotéza ¦ Vald hypotes ¦ Den valgte hypotese
+Ex. : André MAZAUD décédé à Lyon en 1990 sans enfant (acte reçu le 5 déc.). ¦ Např.: André MAZAUD zemřel v Lyonu v roce 1990 bez dětí (listina přijata 5. pros.). ¦ T.ex.: André MAZAUD död i Lyon 1990 utan barn (handling mottagen 5 dec.). ¦ F.eks.: André MAZAUD død i Lyon i 1990 uden børn (dokument modtaget 5. dec.).
+Demandée avant « Remis au notaire » si un héritier reste inconnu. ¦ Vyžadováno před „Předáno notáři“, pokud dědic zůstává neznámý. ¦ Krävs före ”Överlämnat till notarien” om en arvinge förblir okänd. ¦ Kræves før »Afleveret til notaren«, hvis en arving forbliver ukendt.
+Les degrés civils (art. 741-743) : on compte les générations jusqu’à l’ancêtre commun, puis on redescend ¦ Stupně příbuzenství (čl. 741-743): počítají se generace ke společnému předkovi a pak zpět dolů ¦ Släktskapsgrader (art. 741-743): räkna generationerna upp till den gemensamma förfadern, sedan ned igen ¦ Slægtskabsgrader (art. 741-743): tæl generationerne op til den fælles forfader og så ned igen
+LE DÉFUNT ¦ ZEMŘELÝ ¦ DEN AVLIDNE ¦ DEN AFDØDE
+à retrouver ¦ k nalezení ¦ att hitta ¦ skal findes
+sans descend. ¦ bez potom. ¦ utan ättl. ¦ uden eftk.
+Héritier vivant, sa part ¦ Žijící dědic, jeho podíl ¦ Levande arvinge, dennes andel ¦ Levende arving, dennes andel
+Prédécédé, sa souche ¦ Zemřel dříve, jeho kmen ¦ Avliden tidigare, dennes stam ¦ Død før, dennes stamme
+Branche à chercher ¦ Větev k hledání ¦ Gren att söka ¦ Gren at søge
+Arbre de dévolution ¦ Strom dědické posloupnosti ¦ Arvsträd ¦ Arvefølgetræ
+Le défunt au centre, chaque héritier avec sa part ¦ Zemřelý uprostřed, každý dědic se svým podílem ¦ Den avlidne i mitten, varje arvinge med sin andel ¦ Den afdøde i midten, hver arving med sin andel
+⤓ SVG ¦ ⤓ SVG ¦ ⤓ SVG ¦ ⤓ SVG
+↔ Faire glisser le dessin. ¦ ↔ Posuň kresbu. ¦ ↔ Dra i teckningen. ¦ ↔ Træk i tegningen.
+Clic sur une case : la fiche ; clic droit : « 🛡 Solidité de ce lien ». Le dessin suit les fiches. ¦ Klepnutí na pole: záznam; pravé tlačítko: „🛡 Síla tohoto vztahu“. Kresba sleduje záznamy. ¦ Klick på en ruta: posten; högerklick: ”🛡 Styrka i denna länk”. Teckningen följer posterna. ¦ Klik på en boks: posten; højreklik: »🛡 Styrken af denne forbindelse«. Tegningen følger posterne.
+le {d} ¦ dne {d} ¦ den {d} ¦ den {d}
+État de la pièce ¦ Stav dokladu ¦ Handlingens status ¦ Dokumentets status
+D’après la fiche ¦ Podle záznamu ¦ Enligt posten ¦ Ifølge posten
+{n} en main ¦ {n} v ruce ¦ {n} i handen ¦ {n} i hånden
+{n} demandés ¦ {n} vyžádáno ¦ {n} begärda ¦ {n} bestilt
+Par héritier ¦ Podle dědice ¦ Per arvinge ¦ Pr. arving
+Par acte ¦ Podle listiny ¦ Per handling ¦ Pr. dokument
+Ce qu’il faut prouver ¦ Co je třeba prokázat ¦ Det som ska bevisas ¦ Det, der skal bevises
+↔ Faire glisser le tableau. ¦ ↔ Posuň tabulku. ¦ ↔ Dra i tabellen. ¦ ↔ Træk i tabellen.
+Rangée dans le Registre de courriers, une demande d’acte met la pièce à « Demandé » ; l’acte attaché à la fiche la met à « En main ». ¦ Žádost o listinu uložená v Knize korespondence nastaví doklad na „Vyžádáno“; listina připojená k záznamu na „V ruce“. ¦ Sparad i Brevregistret sätter en begäran om handling posten till ”Begärd”; handlingen kopplad till posten sätter den till ”I handen”. ¦ Gemt i Brevregistret sætter en dokumentbestilling dokumentet til »Bestilt«; dokumentet knyttet til posten sætter det til »I hånden«.
+Je suis mandaté(e) par {notary}, notaire, pour établir la dévolution de la succession de {name} (dossier {n}, réf. {ref}). ¦ Jsem pověřen/a notářem {notary} ke zjištění dědické posloupnosti po {name} (spis {n}, zn. {ref}). ¦ Jag har fått i uppdrag av {notary}, notarie, att fastställa arvsordningen i dödsboet efter {name} (ärende {n}, ref. {ref}). ¦ Jeg er bemyndiget af {notary}, notar, til at fastslå arvefølgen i boet efter {name} (sag {n}, ref. {ref}).
+À retrouver ¦ K nalezení ¦ Att hitta ¦ Skal findes
+Adresse ? ¦ Adresa? ¦ Adress? ¦ Adresse?
+Signé le ¦ Podepsáno dne ¦ Undertecknat den ¦ Underskrevet den
+À signer ¦ K podpisu ¦ Att underteckna ¦ Skal underskrives
+✉️ Écrire ¦ ✉️ Napsat ¦ ✉️ Skriv ¦ ✉️ Skriv
+Contrat de révélation, réponses, signatures ¦ Smlouva o odhalení, odpovědi, podpisy ¦ Avslöjandeavtal, svar, underskrifter ¦ Afsløringsaftale, svar, underskrifter
+📝 Contrat de révélation ¦ 📝 Smlouva o odhalení ¦ 📝 Avslöjandeavtal ¦ 📝 Afsløringsaftale
+✉️ Lettre de premier contact ¦ ✉️ Dopis k prvnímu kontaktu ¦ ✉️ Brev för första kontakt ¦ ✉️ Brev til første kontakt
+Héritier ¦ Dědic ¦ Arvinge ¦ Arving
+Courrier ¦ Dopis ¦ Brev ¦ Brev
+Contrat ¦ Smlouva ¦ Avtal ¦ Aftale
+📝 Le contrat ne nomme pas le défunt avant signature. Écris toi-même le pourcentage d’honoraires et la date limite. Rien n’est envoyé par l’app. ¦ 📝 Smlouva před podpisem nejmenuje zemřelého. Procento odměny a lhůtu napiš sám. Aplikace nic neodesílá. ¦ 📝 Avtalet namnger inte den avlidne före underskrift. Skriv själv arvodesprocenten och sista datum. Appen skickar ingenting. ¦ 📝 Aftalen nævner ikke den afdøde før underskrift. Skriv selv honorarprocenten og fristen. Appen sender intet.
+Chaque courrier va dans le Registre de courriers, avec sa relance. ¦ Každý dopis jde do Knihy korespondence i s připomínkou. ¦ Varje brev hamnar i Brevregistret, med sin påminnelse. ¦ Hvert brev kommer i Brevregistret med sin påmindelse.
+↗ Registre de courriers ¦ ↗ Kniha korespondence ¦ ↗ Brevregister ¦ ↗ Brevregister
+Madame, Monsieur, ¦ Vážená paní, vážený pane, ¦ Bästa fru, bäste herr, ¦ Kære frue, kære hr.,
+Généalogiste successoral, je suis chargé(e) par une étude notariale de retrouver les héritiers d’une personne décédée. Mes recherches me laissent penser que vous pourriez faire partie de sa famille. ¦ jako dědický genealog jsem byl/a notářskou kanceláří pověřen/a nalézt dědice zemřelé osoby. Moje bádání naznačuje, že byste mohl/a patřit do její rodiny. ¦ Som arvsgenealog har jag fått i uppdrag av en notariebyrå att hitta arvingarna till en avliden person. Min forskning tyder på att du kan tillhöra dennes släkt. ¦ Som arvegenealog er jeg af et notarkontor blevet bedt om at finde arvingerne efter en afdød person. Min forskning tyder på, at De kan tilhøre vedkommendes familie.
+Pour le vérifier, pourriez-vous me confirmer votre date et votre lieu de naissance, ainsi que les noms de vos parents ? Vous pouvez me répondre par courrier, par téléphone ou par courriel. ¦ Mohl/a byste mi pro ověření sdělit datum a místo svého narození a jména svých rodičů? Odpovědět můžete poštou, telefonem nebo e-mailem. ¦ Kan du, för att kontrollera detta, bekräfta ditt födelsedatum och din födelseort samt dina föräldrars namn? Du kan svara per brev, telefon eller e-post. ¦ Kan De, for at bekræfte det, oplyse Deres fødselsdato og -sted samt Deres forældres navne? De kan svare pr. brev, telefon eller e-mail.
+Cette démarche ne vous engage à rien. ¦ Tento krok vás k ničemu nezavazuje. ¦ Detta förpliktar dig inte till något. ¦ Dette forpligter Dem ikke til noget.
+Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées. ¦ S pozdravem ¦ Med vänlig hälsning ¦ Med venlig hilsen
+CONTRAT DE RÉVÉLATION DE SUCCESSION ¦ SMLOUVA O ODHALENÍ DĚDICTVÍ ¦ AVTAL OM AVSLÖJANDE AV DÖDSBO ¦ AFTALE OM AFSLØRING AF ET DØDSBO
+Entre {heir}, ci-après « l’héritier », et {sender}, généalogiste successoral. ¦ Mezi {heir}, dále jen „dědic“, a {sender}, dědickým genealogem. ¦ Mellan {heir}, nedan ”arvingen”, och {sender}, arvsgenealog. ¦ Mellem {heir}, herefter »arvingen«, og {sender}, arvegenealog.
+Le généalogiste a découvert une succession en cours dans laquelle l’héritier pourrait avoir des droits. Il s’engage à lui en révéler l’origine (le nom de la personne décédée, l’étude notariale chargée du règlement) dès la signature du présent contrat, et à réunir les actes qui prouvent sa qualité d’héritier. ¦ Genealog objevil probíhající dědictví, na které může mít dědic nárok. Zavazuje se mu po podpisu této smlouvy odhalit jeho původ (jméno zemřelého, příslušnou notářskou kancelář) a shromáždit listiny prokazující jeho postavení dědice. ¦ Genealogen har upptäckt ett pågående dödsbo där arvingen kan ha rättigheter. Genealogen åtar sig att avslöja dess ursprung (den avlidnes namn, ansvarig notariebyrå) när detta avtal undertecknas och att samla de handlingar som visar arvingens ställning. ¦ Genealogen har opdaget et verserende dødsbo, hvor arvingen kan have rettigheder. Genealogen forpligter sig til at afsløre dets oprindelse (den afdødes navn, det ansvarlige notarkontor) ved underskrift af denne aftale og til at samle de dokumenter, der beviser arvingens stilling.
+En contrepartie, l’héritier s’engage à verser au généalogiste des honoraires de ____ % (hors taxes) de l’actif net qui lui reviendra, payables seulement s’il reçoit effectivement une part de la succession. Les frais de recherche sont compris. ¦ Dědic se na oplátku zavazuje zaplatit genealogovi odměnu ve výši ____ % (bez daně) z čistého majetku, který mu připadne, splatnou jen tehdy, obdrží-li skutečně podíl na dědictví. Náklady pátrání jsou zahrnuty. ¦ Som motprestation åtar sig arvingen att betala genealogen ett arvode på ____ % (exkl. skatt) av den nettotillgång som tillfaller arvingen, endast om arvingen faktiskt får en andel av dödsboet. Forskningskostnaderna ingår. ¦ Til gengæld forpligter arvingen sig til at betale genealogen et honorar på ____ % (ekskl. moms) af det nettobeløb, der tilfalder arvingen, kun hvis arvingen faktisk får en andel af boet. Forskningsudgifterne er inkluderet.
+Cette proposition est valable jusqu’au ____________. ¦ Tato nabídka platí do ____________. ¦ Detta erbjudande gäller till ____________. ¦ Dette tilbud gælder til ____________.
+Fait en deux exemplaires, à ____________, le ____________. ¦ Vyhotoveno ve dvou exemplářích v ____________ dne ____________. ¦ Upprättat i två exemplar, i ____________, den ____________. ¦ Udfærdiget i to eksemplarer, i ____________, den ____________.
+L’héritier (« Lu et approuvé », signature) — Le généalogiste ¦ Dědic („Přečteno a schváleno“, podpis) — Genealog ¦ Arvingen (”Läst och godkänt”, underskrift) — Genealogen ¦ Arvingen (»Læst og godkendt«, underskrift) — Genealogen
+Je me permets de revenir vers vous au sujet de mon courrier du {sent}, resté sans réponse. Une succession en cours pourrait vous concerner : pourriez-vous me contacter ? ¦ Dovoluji si vrátit se k mému dopisu ze dne {sent}, který zůstal bez odpovědi. Probíhající dědictví se vás může týkat: mohl/a byste mě kontaktovat? ¦ Jag återkommer angående mitt brev av den {sent}, som förblivit obesvarat. Ett pågående dödsbo kan beröra dig: kan du kontakta mig? ¦ Jeg vender tilbage til mit brev af {sent}, som ikke er besvaret. Et verserende dødsbo kan vedrøre Dem: vil De kontakte mig?
+✉️ HÉRITIERS CONTACTÉS ¦ ✉️ KONTAKTOVANÍ DĚDICI ¦ ✉️ KONTAKTADE ARVINGAR ¦ ✉️ KONTAKTEDE ARVINGER
+Relance ¦ Připomínka ¦ Påminnelse ¦ Påmindelse
+📋 Ranger dans le Registre de courriers ¦ 📋 Uložit do Knihy korespondence ¦ 📋 Spara i Brevregistret ¦ 📋 Gem i Brevregistret
+pas d’adresse dans le Répertoire des vivants ¦ žádná adresa v Adresáři žijících ¦ ingen adress i Katalogen över levande ¦ ingen adresse i Kartoteket over levende
+Premier contact ¦ První kontakt ¦ Första kontakt ¦ Første kontakt
+Contrat de révélation ¦ Smlouva o odhalení ¦ Avslöjandeavtal ¦ Afsløringsaftale
+Relance dans (jours) ¦ Připomínka za (dny) ¦ Påminnelse om (dagar) ¦ Påmindelse om (dage)
+Le nom du défunt n’est pas écrit : il est révélé après la signature. ¦ Jméno zemřelého tam není: odhalí se po podpisu. ¦ Den avlidnes namn står inte där: det avslöjas efter underskrift. ¦ Den afdødes navn står der ikke: det afsløres efter underskrift.
+La lettre (tu peux la retoucher ; le nom de chaque héritier est mis tout seul) ¦ Dopis (můžeš ho upravit; jméno každého dědice se doplní samo) ¦ Brevet (du kan ändra det; varje arvinges namn fylls i automatiskt) ¦ Brevet (du kan rette det; hver arvings navn indsættes automatisk)
+📝 Traitement de texte ¦ 📝 Textový editor ¦ 📝 Ordbehandlare ¦ 📝 Tekstbehandling
+Coche au moins un héritier. ¦ Zaškrtni aspoň jednoho dědice. ¦ Kryssa i minst en arvinge. ¦ Markér mindst én arving.
+Courriers aux héritiers ¦ Dopisy dědicům ¦ Brev till arvingarna ¦ Breve til arvingerne
+Recherche d’héritiers ¦ Pátrání po dědicích ¦ Sökande efter arvingar ¦ Søgning efter arvinger
+Ton logiciel de courriel s’ouvre : relis la lettre et envoie-la toi-même. Rien n’est envoyé par l’app. ¦ Otevře se tvůj e-mailový program: dopis si přečti a odešli ho sám. Aplikace nic neodesílá. ¦ Ditt e-postprogram öppnas: läs brevet och skicka det själv. Appen skickar ingenting. ¦ Dit e-mailprogram åbner: læs brevet og send det selv. Appen sender intet.
+Premier contact + contrat ¦ První kontakt + smlouva ¦ Första kontakt + avtal ¦ Første kontakt + aftale
+{n} rangés dans le Registre de courriers ¦ {n} uloženo do Knihy korespondence ¦ {n} sparade i Brevregistret ¦ {n} gemt i Brevregistret
+N. ¦ Nar. ¦ F. ¦ F.
+D. ¦ Úm. ¦ D. ¦ D.
+M. ¦ Sň. ¦ V. ¦ V.
+Div. ¦ Rozv. ¦ Sk. ¦ Sk.
+Ren. ¦ Odm. ¦ Avst. ¦ Afk.
+(à fournir) ¦ (doložit) ¦ (ska lämnas) ¦ (skal fremskaffes)
+repr. {who} ¦ zast. {who} ¦ företr. {who} ¦ rep. {who}
+existence à ce jour non établie ¦ existence dosud neprokázána ¦ existens hittills ej fastställd ¦ eksistens endnu ikke fastslået
+TABLEAU GÉNÉALOGIQUE ¦ GENEALOGICKÁ TABULKA ¦ GENEALOGISK TABLÅ ¦ GENEALOGISK OVERSIGT
+Succession de {name}, décédé(e) à {place} le {date} ¦ Dědictví po {name}, zemřelém/é v {place} dne {date} ¦ Dödsbo efter {name}, död i {place} den {date} ¦ Dødsbo efter {name}, død i {place} den {date}
+Dossier {n} · Réf. notaire {ref} ¦ Spis {n} · Zn. notáře {ref} ¦ Ärende {n} · Notariens ref. {ref} ¦ Sag {n} · Notarens ref. {ref}
+Calcul établi d’après les actes cités, art. 731 et suiv. du Code civil, sous réserve de vérification par le notaire. N. = naissance, M. = mariage, D. = décès. ¦ Výpočet podle uvedených listin, čl. 731 a násl. francouzského občanského zákoníku, s výhradou ověření notářem. Nar. = narození, Sň. = sňatek, Úm. = úmrtí. ¦ Beräkning utifrån de anförda handlingarna, art. 731 ff. i franska civillagen, med förbehåll för notariens kontroll. F. = född, V. = vigsel, D. = död. ¦ Beregning ud fra de anførte dokumenter, art. 731 ff. i den franske civillov, med forbehold for notarens kontrol. F. = fødsel, V. = vielse, D. = død.
+Communs à tous : {list}. ¦ Společné pro všechny: {list}. ¦ Gemensamt för alla: {list}. ¦ Fælles for alle: {list}.
+Hypothèse retenue : {h} ¦ Přijatá hypotéza: {h} ¦ Vald hypotes: {h} ¦ Valgt hypotese: {h}
+à préciser ¦ upřesnit ¦ att precisera ¦ skal præciseres
+Liste des pièces ¦ Seznam dokladů ¦ Förteckning över handlingar ¦ Liste over dokumenter
+Page {n} / 3 ¦ Strana {n} / 3 ¦ Sida {n} / 3 ¦ Side {n} / 3
+Un PDF sobre, une source pour chaque lien ¦ Střídmé PDF, zdroj pro každý vztah ¦ En enkel PDF, en källa för varje länk ¦ En enkel PDF, en kilde for hver forbindelse
+📝 Ouvrir dans le traitement de texte ¦ 📝 Otevřít v textovém editoru ¦ 📝 Öppna i ordbehandlaren ¦ 📝 Åbn i tekstbehandlingen
+Joindre les adresses des héritiers ¦ Připojit adresy dědiců ¦ Bifoga arvingarnas adresser ¦ Vedlæg arvingernes adresser
+Aucune photo ni note privée : les noms, les qualités, les parts et les sources. Pas d’adresse sauf si la case est cochée. ¦ Žádné fotografie ani soukromé poznámky: jména, postavení, podíly a zdroje. Adresy jen při zaškrtnutí. ¦ Inga foton eller privata anteckningar: namn, egenskaper, andelar och källor. Inga adresser om rutan inte är ikryssad. ¦ Ingen fotos eller private noter: navne, egenskaber, andele og kilder. Ingen adresser, medmindre feltet er markeret.
+Tableau généalogique — {n} ¦ Genealogická tabulka — {n} ¦ Genealogisk tablå — {n} ¦ Genealogisk oversigt — {n}
+Tableau pour le notaire : PDF ou impression (3 pages) ¦ Tabulka pro notáře: PDF nebo tisk (3 strany) ¦ Tablå för notarien: PDF eller utskrift (3 sidor) ¦ Oversigt til notaren: PDF eller udskrift (3 sider)
+Tableau pour le notaire : ouvert dans le traitement de texte ¦ Tabulka pro notáře: otevřena v textovém editoru ¦ Tablå för notarien: öppnad i ordbehandlaren ¦ Oversigt til notaren: åbnet i tekstbehandlingen
+Tableau pour le notaire : copie rangée dans les médias ¦ Tabulka pro notáře: kopie uložena v médiích ¦ Tablå för notarien: kopia sparad i medierna ¦ Oversigt til notaren: kopi gemt i medierne
+🕓 Journal du dossier {n} ¦ 🕓 Deník spisu {n} ¦ 🕓 Logg för ärende {n} ¦ 🕓 Log for sag {n}
+(on ne peut ni le modifier ni l’effacer) ¦ (nelze ho upravit ani smazat) ¦ (den kan varken ändras eller raderas) ¦ (den kan hverken ændres eller slettes)
+⤓ Exporter le journal (CSV) ¦ ⤓ Exportovat deník (CSV) ¦ ⤓ Exportera loggen (CSV) ¦ ⤓ Eksportér loggen (CSV)
+Les changements des fiches restent dans Réglages → Journal des modifications. ¦ Změny záznamů zůstávají také v Nastavení → Deník změn. ¦ Ändringar i posterna finns också i Inställningar → Ändringslogg. ¦ Ændringer i posterne findes også i Indstillinger → Ændringslog.
+Action ¦ Akce ¦ Åtgärd ¦ Handling
+Journal exporté (CSV) ¦ Deník exportován (CSV) ¦ Loggen exporterad (CSV) ¦ Log eksporteret (CSV)
+Le temps passé, les frais, les honoraires des contrats ¦ Strávený čas, výdaje, odměny ze smluv ¦ Tid, kostnader, arvoden enligt avtal ¦ Brugt tid, udgifter, honorarer fra aftaler
+＋ Temps ¦ ＋ Čas ¦ ＋ Tid ¦ ＋ Tid
+＋ Frais ¦ ＋ Výdaje ¦ ＋ Kostnader ¦ ＋ Udgifter
+＋ Honoraires d’un contrat ¦ ＋ Odměna ze smlouvy ¦ ＋ Arvode enligt avtal ¦ ＋ Honorar fra en aftale
+🖨 Relevé ¦ 🖨 Výpis ¦ 🖨 Sammanställning ¦ 🖨 Opgørelse
+{h} h {m} min passées ¦ Stráveno {h} h {m} min ¦ {h} h {m} min nedlagda ¦ {h} t {m} min brugt
+Frais : {s} ¦ Výdaje: {s} ¦ Kostnader: {s} ¦ Udgifter: {s}
+{n} contrats ¦ Smlouvy: {n} ¦ {n} avtal ¦ {n} aftaler
+{h} h {m} min ¦ {h} h {m} min ¦ {h} h {m} min ¦ {h} t {m} min
+Rien de noté. ¦ Nic nezapsáno. ¦ Inget noterat. ¦ Intet noteret.
+Aucun montant de succession n’est noté. ¦ Žádná částka dědictví se nezapisuje. ¦ Inget belopp för dödsboet noteras. ¦ Intet beløb for boet noteres.
+💶 TEMPS ET FRAIS ¦ 💶 ČAS A VÝDAJE ¦ 💶 TID OCH KOSTNADER ¦ 💶 TID OG UDGIFTER
+Copie d’acte, déplacement… ¦ Kopie listiny, cesta… ¦ Kopia av handling, resa… ¦ Kopi af dokument, rejse…
+Recherches aux AD, appels… ¦ Bádání v archivu, telefonáty… ¦ Forskning i arkiv, samtal… ¦ Søgning i arkiver, opkald…
+Contrat signé ¦ Smlouva podepsána ¦ Avtal undertecknat ¦ Aftale underskrevet
+Heures ¦ Hodiny ¦ Timmar ¦ Timer
+Minutes ¦ Minuty ¦ Minuter ¦ Minutter
+Montant (€) ¦ Částka (€) ¦ Belopp (€) ¦ Beløb (€)
+🌍 HÉRITIER À L’ÉTRANGER ¦ 🌍 DĚDIC V ZAHRANIČÍ ¦ 🌍 ARVINGE UTOMLANDS ¦ 🌍 ARVING I UDLANDET
+Chercher {name} hors de France ¦ Hledat {name} mimo Francii ¦ Sök {name} utanför Frankrike ¦ Søg {name} uden for Frankrig
+Les services à interroger ¦ Úřady k dotazu ¦ Myndigheter att fråga ¦ Myndigheder at spørge
+📮 Demander l’acte au Service central d’état civil ¦ 📮 Vyžádat listinu u Ústřední matriky ¦ 📮 Begär handlingen från centrala folkbokföringen i Nantes ¦ 📮 Bestil dokumentet hos den centrale civilstandsmyndighed
+Langue de la lettre ¦ Jazyk dopisu ¦ Brevets språk ¦ Brevets sprog
+Destinataire ¦ Adresát ¦ Mottagare ¦ Modtager
+Registro civil de …, consulat de France à … ¦ Registro civil de …, francouzský konzulát v … ¦ Registro civil de …, Frankrikes konsulat i … ¦ Registro civil de …, Frankrigs konsulat i …
+La lettre (dans la langue du pays) ¦ Dopis (v jazyce země) ¦ Brevet (på landets språk) ¦ Brevet (på landets sprog)
+Lettre à l’étranger ¦ Dopis do zahraničí ¦ Brev till utlandet ¦ Brev til udlandet
+Recherche d’un héritier à l’étranger : {name} ¦ Pátrání po dědici v zahraničí: {name} ¦ Sökande efter en arvinge utomlands: {name} ¦ Søgning efter en arving i udlandet: {name}
+Courrier rangé dans le Registre de courriers ¦ Dopis uložen do Knihy korespondence ¦ Brevet sparat i Brevregistret ¦ Brev gemt i Brevregistret
+❔ ABSENTS ET DISPARUS ¦ ❔ NEPŘÍTOMNÍ A NEZVĚSTNÍ ¦ ❔ FRÅNVARANDE OCH FÖRSVUNNA ¦ ❔ FRAVÆRENDE OG FORSVUNDNE
+{name} : absent ou disparu ? ¦ {name}: nepřítomný, nebo nezvěstný? ¦ {name}: frånvarande eller försvunnen? ¦ {name}: fraværende eller forsvundet?
+art. {a} ¦ čl. {a} ¦ art. {a} ¦ art. {a}
+Le calcul lit ce statut : un présumé absent est compté vivant, sa part est « réservée » ; un déclaré absent est compté comme mort avant. ¦ Výpočet tento stav čte: domněle nepřítomný se počítá jako žijící, jeho podíl je „vyhrazen“; prohlášený za nepřítomného se počítá jako dříve zemřelý. ¦ Beräkningen läser denna status: en förmodat frånvarande räknas som levande, andelen ”reserveras”; en förklarat frånvarande räknas som avliden tidigare. ¦ Beregningen læser denne status: en formodet fraværende tæller som levende, andelen »reserveres«; en erklæret fraværende tæller som død før.
+Présumé absent ¦ Domněle nepřítomný ¦ Förmodat frånvarande ¦ Formodet fraværende
+Déclaré absent ou jugement de décès ¦ Prohlášen za nepřítomného nebo za mrtvého ¦ Förklarad frånvarande eller dödförklarad ¦ Erklæret fraværende eller dødsdom
+{name} : statut retenu changé, dévolution recalculée ¦ {name}: přijatý stav změněn, posloupnost přepočtena ¦ {name}: gällande status ändrad, arvsordningen omräknad ¦ {name}: fastholdt status ændret, arvefølge genberegnet
+Héritier à retrouver : {name}{born} — vivant ? décédé ? des enfants ? (dossier de succession {n}) ¦ Dědic k nalezení: {name}{born} — žije? zemřel? děti? (dědický spis {n}) ¦ Arvinge att hitta: {name}{born} — levande? död? barn? (dödsboärende {n}) ¦ Arving der skal findes: {name}{born} — i live? død? børn? (dødsbosag {n})
+(né en {y}) ¦ (nar. {y}) ¦ (född {y}) ¦ (født {y})
+Descendance de {name} (mort avant le défunt) : un enfant reconnu ou naturel ? (dossier de succession {n}) ¦ Potomci {name} (zemřel před zůstavitelem): uznané nebo nemanželské dítě? (dědický spis {n}) ¦ Ättlingar till {name} (död före den avlidne): ett erkänt eller utomäktenskapligt barn? (dödsboärende {n}) ¦ Efterkommere af {name} (død før den afdøde): et anerkendt barn eller barn uden for ægteskab? (dødsbosag {n})
+Branche à chercher autour de {name} (dossier de succession {n}) ¦ Větev k hledání kolem {name} (dědický spis {n}) ¦ Gren att söka kring {name} (dödsboärende {n}) ¦ Gren at søge omkring {name} (dødsbosag {n})
+Piste ouverte dans le Journal des recherches : {name} ¦ Stopa otevřena v Deníku výzkumu: {name} ¦ Spår öppnat i Forskningsloggen: {name} ¦ Spor åbnet i Forskningsloggen: {name}
+Piste ajoutée : Recherche → 🗓 Journal des recherches ¦ Stopa přidána: Výzkum → 🗓 Deník výzkumu ¦ Spår tillagt: Forskning → 🗓 Forskningslogg ¦ Spor tilføjet: Forskning → 🗓 Forskningslog
+🗂 TABLES DES SUCCESSIONS DES AD ¦ 🗂 SOUPISY DĚDICTVÍ V ARCHIVECH ¦ 🗂 ARKIVENS BOUPPTECKNINGSREGISTER ¦ 🗂 ARKIVERNES DØDSBOREGISTRE
+Dépouiller les tables de successions et absences ¦ Projít soupisy dědictví a nepřítomností ¦ Gå igenom registren över dödsbon och frånvaro ¦ Gennemgå registrene over dødsboer og fravær
+Ajouter au suivi ¦ Přidat ke sledování ¦ Lägg till i uppföljningen ¦ Føj til opfølgningen
+Les tables de successions et absences et les mutations par décès (série Q des Archives départementales) donnent la date et le bureau de chaque succession. Coche les personnes à chercher : une ligne « à faire » chacune. ¦ Soupisy dědictví a nepřítomností a rejstříky převodů pro případ smrti (série Q departementních archivů) uvádějí datum a úřad každého dědictví. Zaškrtni osoby k hledání: pro každou řádek „udělat“. ¦ Registren över dödsbon och frånvaro och registren över överlåtelser vid dödsfall (serie Q i departementsarkiven) anger datum och kontor för varje dödsbo. Kryssa i personerna att söka: en rad ”att göra” var. ¦ Registrene over dødsboer og fravær og over overdragelser ved død (serie Q i departementsarkiverne) angiver dato og kontor for hvert dødsbo. Markér de personer, der skal søges: én linje »at gøre« for hver.
+Coche au moins une personne. ¦ Zaškrtni aspoň jednu osobu. ¦ Kryssa i minst en person. ¦ Markér mindst én person.
+Tables des successions et absences, mutations par décès (série Q) : {name}{d} ¦ Soupisy dědictví a nepřítomností, převody pro případ smrti (série Q): {name}{d} ¦ Register över dödsbon och frånvaro, överlåtelser vid dödsfall (serie Q): {name}{d} ¦ Registre over dødsboer og fravær, overdragelser ved død (serie Q): {name}{d}
+Tables des successions : {n} à dépouiller ¦ Soupisy dědictví: {n} k projití ¦ Bouppteckningsregister: {n} att gå igenom ¦ Dødsboregistre: {n} at gennemgå
+{n} ajoutés aux dépouillements ¦ Přidáno k excerpcím: {n} ¦ {n} tillagda till genomgångarna ¦ {n} føjet til gennemgangene
+État : {s} ¦ Stav: {s} ¦ Status: {s} ¦ Status: {s}
+📋 LISTE DE CONTRÔLE ¦ 📋 KONTROLNÍ SEZNAM ¦ 📋 KONTROLLISTA ¦ 📋 TJEKLISTE
+Avant « Remis au notaire » ¦ Před „Předáno notáři“ ¦ Före ”Överlämnat till notarien” ¦ Før »Afleveret til notaren«
+Remis au notaire ¦ Předáno notáři ¦ Överlämnat till notarien ¦ Afleveret til notaren
+Remettre quand même ¦ Přesto předat ¦ Överlämna ändå ¦ Aflevér alligevel
+Tout n’est pas prêt : corrige d’abord, ou remets quand même (ce sera noté au journal). ¦ Ne vše je hotové: nejdřív oprav, nebo přesto předej (zapíše se do deníku). ¦ Allt är inte klart: rätta först, eller överlämna ändå (det noteras i loggen). ¦ Ikke alt er klar: ret først, eller aflevér alligevel (det noteres i loggen).
+Les adresses des vivants seront retirées du dossier et de ses courriers. Le journal reste. Continuer ? ¦ Adresy žijících budou odstraněny ze spisu a jeho dopisů. Deník zůstává. Pokračovat? ¦ De levandes adresser tas bort från ärendet och dess brev. Loggen finns kvar. Fortsätta? ¦ De levendes adresser fjernes fra sagen og dens breve. Loggen bliver. Fortsæt?
+Archiver ¦ Archivovat ¦ Arkivera ¦ Arkivér
+Dossier archivé. ¦ Spis archivován. ¦ Ärendet arkiverat. ¦ Sag arkiveret.
+ÉCHÉANCE ¦ LHŮTA ¦ FRIST ¦ FRIST
+Remettre le tableau généalogique au notaire ¦ Předat genealogickou tabulku notáři ¦ Lämna den genealogiska tablån till notarien ¦ Aflevér den genealogiske oversigt til notaren
+Remise au notaire ¦ Předání notáři ¦ Överlämnande till notarien ¦ Aflevering til notaren
+Rendez-vous ¦ Schůzka ¦ Möte ¦ Møde
+Échéance ajoutée ¦ Lhůta přidána ¦ Frist tillagd ¦ Frist tilføjet
+Échéance supprimée ¦ Lhůta smazána ¦ Frist borttagen ¦ Frist slettet
+Répertoire des vivants : « ＋ Contact », puis relie la fiche de l’héritier. ¦ Adresář žijících: „＋ Kontakt“ a pak propoj záznam dědice. ¦ Katalogen över levande: ”＋ Kontakt”, koppla sedan arvingens post. ¦ Kartoteket over levende: »＋ Kontakt«, og knyt så arvingens post.
+Relevé de temps et de frais — {n} ¦ Výpis času a výdajů — {n} ¦ Sammanställning av tid och kostnader — {n} ¦ Opgørelse af tid og udgifter — {n}
+Arbre de dévolution — {n} ¦ Strom dědické posloupnosti — {n} ¦ Arvsträd — {n} ¦ Arvefølgetræ — {n}
+Arbre de dévolution imprimé ¦ Strom dědické posloupnosti vytištěn ¦ Arvsträd utskrivet ¦ Arvefølgetræ udskrevet
+Hypothèse retenue enregistrée ¦ Přijatá hypotéza uložena ¦ Vald hypotes sparad ¦ Valgt hypotese gemt
+Échéance faite ¦ Lhůta splněna ¦ Frist klar ¦ Frist udført
+Échéance à faire ¦ Lhůta ke splnění ¦ Frist att göra ¦ Frist at udføre
+Pièce : {s} ¦ Doklad: {s} ¦ Handling: {s} ¦ Dokument: {s}
+Courrier mis à jour ¦ Dopis aktualizován ¦ Brev uppdaterat ¦ Brev opdateret
+Rechercher les héritiers… ¦ Hledat dědice… ¦ Sök arvingarna… ¦ Søg arvingerne…
+Pas en mode consultation. ¦ Ne v režimu prohlížení. ¦ Inte i visningsläge. ¦ Ikke i visningstilstand.
+Les dossiers n’ont pas pu être lus. ¦ Spisy se nepodařilo načíst. ¦ Ärendena kunde inte läsas. ¦ Sagerne kunne ikke læses.
+Aucun dossier en cours. ¦ Žádný rozpracovaný spis. ¦ Inget pågående ärende. ¦ Ingen igangværende sag.
+Dossier {n} ¦ Spis {n} ¦ Ärende {n} ¦ Sag {n}
+⚖️ Dossiers de succession ¦ ⚖️ Dědické spisy ¦ ⚖️ Dödsboärenden ¦ ⚖️ Dødsbosager
+Signé le {d} ¦ Podepsáno {d} ¦ Undertecknat {d} ¦ Underskrevet {d}
+Dossier de succession ¦ Dědický spis ¦ Dödsboärende ¦ Dødsbosag
+Tous les courriers ¦ Všechny dopisy ¦ Alla brev ¦ Alle breve
+l’héritier ¦ dědic ¦ arvingen ¦ arvingen
+Branche paternelle : {who} ¦ Otcovská větev: {who} ¦ Fädernet: {who} ¦ Fædrene gren: {who}
+Branche maternelle : {who} ¦ Mateřská větev: {who} ¦ Mödernet: {who} ¦ Mødrene gren: {who}
+Tous les enfants sont communs : le conjoint choisit l’usufruit de tout, ou le quart en pleine propriété (art. 757). Le calcul montre le quart. ¦ Všechny děti jsou společné: manžel volí požívací právo ke všemu, nebo čtvrtinu ve vlastnictví (čl. 757). Výpočet ukazuje čtvrtinu. ¦ Alla barn är gemensamma: maken väljer nyttjanderätt till allt eller en fjärdedel med full äganderätt (art. 757). Beräkningen visar fjärdedelen. ¦ Alle børn er fælles: ægtefællen vælger brugsret til det hele eller en fjerdedel med fuld ejendomsret (art. 757). Beregningen viser fjerdedelen.
+Un enfant au moins n’est pas commun aux deux époux : le conjoint reçoit le quart en pleine propriété (art. 757). ¦ Aspoň jedno dítě není společné oběma manželům: manžel dostane čtvrtinu ve vlastnictví (čl. 757). ¦ Minst ett barn är inte gemensamt för makarna: maken får en fjärdedel med full äganderätt (art. 757). ¦ Mindst ét barn er ikke fælles for ægtefællerne: ægtefællen får en fjerdedel med fuld ejendomsret (art. 757).
+1er ordre : les enfants et, par représentation, les descendants d’un enfant prédécédé ou renonçant ; partage par souche (art. 735, 752, 753). ¦ 1. třída: děti a zastoupením potomci dříve zemřelého nebo odmítajícího dítěte; dělení podle kmenů (čl. 735, 752, 753). ¦ 1:a arvsklassen: barnen och, genom istadarätt, ättlingarna till ett tidigare avlidet eller avstående barn; fördelning per stam (art. 735, 752, 753). ¦ 1. arveklasse: børnene og, ved repræsentation, efterkommerne af et tidligere afdødt eller afkaldende barn; deling pr. stamme (art. 735, 752, 753).
+Sans descendant, avec le père et la mère : la moitié au conjoint, un quart à chaque parent (art. 757-1). ¦ Bez potomků, s otcem a matkou: polovina manželovi, čtvrtina každému z rodičů (čl. 757-1). ¦ Utan ättlingar, med far och mor: hälften till maken, en fjärdedel till var förälder (art. 757-1). ¦ Uden efterkommere, med far og mor: halvdelen til ægtefællen, en fjerdedel til hver forælder (art. 757-1).
+Sans descendant, avec un seul parent : trois quarts au conjoint, un quart au parent (art. 757-1). ¦ Bez potomků, s jedním rodičem: tři čtvrtiny manželovi, čtvrtina rodiči (čl. 757-1). ¦ Utan ättlingar, med en förälder: tre fjärdedelar till maken, en fjärdedel till föräldern (art. 757-1). ¦ Uden efterkommere, med én forælder: tre fjerdedele til ægtefællen, en fjerdedel til forælderen (art. 757-1).
+Sans descendant ni père ni mère : le conjoint recueille toute la succession (art. 757-2). Les frères et sœurs peuvent avoir un droit de retour sur les biens de famille (art. 757-3) : à voir avec le notaire. ¦ Bez potomků, otce i matky: manžel dostane celé dědictví (čl. 757-2). Sourozenci mohou mít právo návratu k rodinnému majetku (čl. 757-3): probrat s notářem. ¦ Utan ättlingar, far eller mor: maken får hela arvet (art. 757-2). Syskon kan ha återgångsrätt till familjeegendom (art. 757-3): kontrollera med notarien. ¦ Uden efterkommere, far eller mor: ægtefællen får hele boet (art. 757-2). Søskende kan have tilbagefaldsret til familiegods (art. 757-3): skal ses med notaren.
+Le père et la mère ont chacun un quart, les frères et sœurs (ou leurs descendants) la moitié (art. 738). ¦ Otec a matka mají každý čtvrtinu, sourozenci (nebo jejich potomci) polovinu (čl. 738). ¦ Far och mor får var sin fjärdedel, syskonen (eller deras ättlingar) hälften (art. 738). ¦ Far og mor får hver en fjerdedel, søskende (eller deres efterkommere) halvdelen (art. 738).
+Le parent survivant a un quart, les frères et sœurs (ou leurs descendants) trois quarts (art. 738). ¦ Žijící rodič má čtvrtinu, sourozenci (nebo jejich potomci) tři čtvrtiny (čl. 738). ¦ Den efterlevande föräldern får en fjärdedel, syskonen (eller deras ättlingar) tre fjärdedelar (art. 738). ¦ Den efterlevende forælder får en fjerdedel, søskende (eller deres efterkommere) tre fjerdedele (art. 738).
+Père et mère décédés : les frères et sœurs ou leurs descendants prennent tout (art. 737). ¦ Otec i matka zemřeli: sourozenci nebo jejich potomci dostanou vše (čl. 737). ¦ Far och mor döda: syskonen eller deras ättlingar får allt (art. 737). ¦ Far og mor døde: søskende eller deres efterkommere får det hele (art. 737).
+Frères et sœurs germains, consanguins ou utérins : parts égales, par souche (art. 744, 752-2, 753 ; loi du 3 décembre 2001). ¦ Plnorodí i polorodí sourozenci po otci nebo po matce: stejné podíly podle kmenů (čl. 744, 752-2, 753; zákon z 3. prosince 2001). ¦ Helsyskon och halvsyskon på fars- eller morssidan: lika andelar, per stam (art. 744, 752-2, 753; lag av den 3 december 2001). ¦ Helsøskende og halvsøskende på fædrene eller mødrene side: lige andele, pr. stamme (art. 744, 752-2, 753; lov af 3. december 2001).
+Sans descendant ni frère ni sœur : le père et la mère ont chacun la moitié (art. 736). ¦ Bez potomků a sourozenců: otec a matka mají každý polovinu (čl. 736). ¦ Utan ättlingar och syskon: far och mor får hälften var (art. 736). ¦ Uden efterkommere og søskende: far og mor får hver halvdelen (art. 736).
+Un seul parent, sans frère ni sœur, mais des ascendants dans l’autre branche : moitié au parent, moitié à ces ascendants (art. 738-1). ¦ Jen jeden rodič, bez sourozenců, ale předkové v druhé větvi: polovina rodiči, polovina těmto předkům (čl. 738-1). ¦ En förälder, inga syskon, men förfäder i den andra grenen: hälften till föräldern, hälften till dessa förfäder (art. 738-1). ¦ Kun én forælder, ingen søskende, men forfædre i den anden gren: halvdelen til forælderen, halvdelen til disse forfædre (art. 738-1).
+Le parent survivant, seul de son ordre, recueille la succession. ¦ Žijící rodič, jediný ve své třídě, dostane dědictví. ¦ Den efterlevande föräldern, ensam i sin klass, får arvet. ¦ Den efterlevende forælder, alene i sin klasse, får boet.
+3e ordre : moitié pour chaque branche ; dans chacune, l’ascendant le plus proche prend tout (art. 747-748). ¦ 3. třída: polovina každé větvi; v každé dostane vše nejbližší předek (čl. 747-748). ¦ 3:e arvsklassen: hälften till varje gren; i varje får den närmaste förfadern allt (art. 747-748). ¦ 3. arveklasse: halvdelen til hver gren; i hver får den nærmeste forfader det hele (art. 747-748).
+3e ordre : une seule branche a encore un ascendant ; il recueille toute la succession, même les cousins de l’autre branche sont écartés (art. 748). ¦ 3. třída: jen jedna větev má ještě předka; ten dostane celé dědictví, i bratranci druhé větve jsou vyloučeni (čl. 748). ¦ 3:e arvsklassen: bara en gren har ännu en förfader; denne får hela arvet, även kusinerna i den andra grenen utesluts (art. 748). ¦ 3. arveklasse: kun én gren har stadig en forfader; denne får hele boet, selv fætre og kusiner i den anden gren er udelukket (art. 748).
+4e ordre : moitié pour chaque branche ; dans chacune, le collatéral le plus proche en degré prend tout, sans représentation (art. 749-750). ¦ 4. třída: polovina každé větvi; v každé dostane vše stupněm nejbližší pobočný příbuzný, bez zastoupení (čl. 749-750). ¦ 4:e arvsklassen: hälften till varje gren; i varje får den gradnärmaste sidosläktingen allt, utan istadarätt (art. 749-750). ¦ 4. arveklasse: halvdelen til hver gren; i hver får den gradsnærmeste sidebeslægtede det hele, uden repræsentation (art. 749-750).
+4e ordre : personne dans une branche, l’autre branche recueille tout (art. 750). ¦ 4. třída: v jedné větvi nikdo, druhá větev dostane vše (čl. 750). ¦ 4:e arvsklassen: ingen i en gren, den andra grenen får allt (art. 750). ¦ 4. arveklasse: ingen i en gren, den anden gren får det hele (art. 750).
+Les collatéraux ne succèdent pas au-delà du 6e degré (art. 745). ¦ Poboční příbuzní nedědí za 6. stupněm (čl. 745). ¦ Sidosläktingar ärver inte bortom 6:e graden (art. 745). ¦ Sidebeslægtede arver ikke ud over 6. grad (art. 745).
+Le défunt n’est pas dans la base. ¦ Zemřelý není v databázi. ¦ Den avlidne finns inte i databasen. ¦ Den afdøde er ikke i databasen.
+si {name} n’était pas marié avec le défunt (PACS ou union libre) ¦ pokud {name} nebyl se zemřelým sezdán (PACS nebo druh/družka) ¦ om {name} inte var gift med den avlidne (PACS eller sambo) ¦ hvis {name} ikke var gift med den afdøde (PACS eller samlevende)
+si {name} est mort avant, représenté par ses descendants ¦ pokud {name} zemřel dříve, zastoupený svými potomky ¦ om {name} dog tidigare, företrädd av sina ättlingar ¦ hvis {name} døde før, repræsenteret af sine efterkommere
+si {name} est mort avant sans descendant ¦ pokud {name} zemřel dříve bez potomků ¦ om {name} dog tidigare utan ättlingar ¦ hvis {name} døde før uden efterkommere
+Enfants et descendants, avec représentation ¦ Děti a potomci, se zastoupením ¦ Barn och ättlingar, med istadarätt ¦ Børn og efterkommere, med repræsentation
+Père et mère, frères et sœurs et leurs descendants (« parents privilégiés ») ¦ Otec a matka, sourozenci a jejich potomci („privilegovaní příbuzní“) ¦ Far och mor, syskon och deras ättlingar (”privilegierade släktingar”) ¦ Far og mor, søskende og deres efterkommere (»privilegerede slægtninge«)
+Autres ascendants (grands-parents…), fente paternelle / maternelle ¦ Ostatní předkové (prarodiče…), otcovské / mateřské dělení ¦ Andra förfäder (far- och morföräldrar…), delning fäderne / möderne ¦ Andre forfædre (bedsteforældre…), fædrene / mødrene deling
+Oncles, tantes, cousins… jusqu’au 6e degré (art. 745) ¦ Strýcové, tety, bratranci… do 6. stupně (čl. 745) ¦ Farbröder, mostrar, kusiner… upp till 6:e graden (art. 745) ¦ Onkler, tanter, fætre og kusiner… op til 6. grad (art. 745)
+Vivant au décès ? Mort avant ? Des enfants ? Sa réponse change la part des autres. ¦ Žil v době úmrtí? Zemřel dříve? Děti? Odpověď mění podíly ostatních. ¦ I livet vid dödsfallet? Död tidigare? Barn? Svaret ändrar de andras andelar. ¦ I live ved dødsfaldet? Død før? Børn? Svaret ændrer de andres andele.
+Mort avant le défunt, sans descendance connue : un enfant, même reconnu tard, changerait le partage. ¦ Zemřel před zůstavitelem, bez známých potomků: dítě, i pozdě uznané, by změnilo dělení. ¦ Död före den avlidne, inga kända ättlingar: ett barn, även sent erkänt, skulle ändra fördelningen. ¦ Død før den afdøde, ingen kendte efterkommere: et barn, selv anerkendt sent, ville ændre delingen.
+Aucun enfant du défunt dans la base : à vérifier (mentions en marge de l’acte de naissance, livret de famille). ¦ V databázi není žádné dítě zemřelého: ověřit (poznámky v rodném listu, rodinná knížka). ¦ Inget barn till den avlidne i databasen: kontrollera (randanteckningar i födelseakten, familjebok). ¦ Intet barn af den afdøde i databasen: skal tjekkes (randbemærkninger på fødselsattesten, familiebog).
+Les parents du défunt ne sont pas dans la base : sans eux, l’app ne trouve ni frères, ni sœurs, ni cousins. ¦ Rodiče zemřelého nejsou v databázi: bez nich aplikace nenajde sourozence ani bratrance. ¦ Den avlidnes föräldrar finns inte i databasen: utan dem hittar appen varken syskon eller kusiner. ¦ Den afdødes forældre er ikke i databasen: uden dem finder appen hverken søskende eller fætre.
+Un seul parent du défunt est dans la base : l’autre branche reste à chercher. ¦ V databázi je jen jeden rodič zemřelého: druhou větev je třeba hledat. ¦ Bara en förälder till den avlidne finns i databasen: den andra grenen återstår att söka. ¦ Kun én forælder til den afdøde er i databasen: den anden gren mangler at blive søgt.
+Adoption : plénière ou simple ? Une adoption plénière coupe les liens avec la famille d’origine. ¦ Osvojení: úplné, nebo prosté? Úplné osvojení přetíná vazby s původní rodinou. ¦ Adoption: fullständig eller enkel? En fullständig adoption bryter banden till ursprungsfamiljen. ¦ Adoption: fuld eller simpel? En fuld adoption bryder båndene til den oprindelige familie.
+Couple sans mariage noté : seul un conjoint marié hérite sans testament (pas le partenaire de PACS ni le concubin). ¦ Pár bez zapsaného sňatku: bez závěti dědí jen sezdaný manžel (ne partner PACS ani druh). ¦ Par utan noterat äktenskap: bara en gift make ärver utan testamente (inte PACS-partner eller sambo). ¦ Par uden noteret ægteskab: kun en gift ægtefælle arver uden testamente (ikke PACS-partneren eller samleveren).
+Un seul parent noté : relie sa fiche à son autre parent (frère germain ou demi-frère). ¦ Zapsán jen jeden rodič: propoj záznam s druhým rodičem (plnorodý nebo polorodý sourozenec). ¦ Bara en förälder noterad: koppla posten till den andra föräldern (helsyskon eller halvsyskon). ¦ Kun én forælder noteret: knyt posten til den anden forælder (helsøskende eller halvsøskende).
+Personne dans la branche paternelle jusqu’au 6e degré : oncles, tantes et cousins du père à chercher. ¦ V otcovské větvi do 6. stupně nikdo: hledat strýce, tety a bratrance otce. ¦ Ingen i fädernet upp till 6:e graden: faderns farbröder, fastrar och kusiner att söka. ¦ Ingen i den fædrene gren op til 6. grad: farens onkler, tanter og fætre skal søges.
+Personne dans la branche maternelle jusqu’au 6e degré : oncles, tantes et cousins de la mère à chercher. ¦ V mateřské větvi do 6. stupně nikdo: hledat strýce, tety a bratrance matky. ¦ Ingen i mödernet upp till 6:e graden: moderns morbröder, mostrar och kusiner att söka. ¦ Ingen i den mødrene gren op til 6. grad: morens onkler, tanter og fætre skal søges.
+Vivant, mais pas d’adresse dans le Répertoire des vivants. ¦ Žije, ale bez adresy v Adresáři žijících. ¦ I livet, men ingen adress i Katalogen över levande. ¦ I live, men ingen adresse i Kartoteket over levende.
+Mort après le défunt : sa part passe à ses propres héritiers (sa succession à lui). ¦ Zemřel po zůstaviteli: jeho podíl přechází na jeho vlastní dědice (jeho vlastní dědictví). ¦ Död efter den avlidne: andelen går till dennes egna arvingar (dennes eget dödsbo). ¦ Død efter den afdøde: andelen går til vedkommendes egne arvinger (vedkommendes eget bo).
+Présumé absent : sa part est réservée (art. 112 à 132). ¦ Domněle nepřítomný: jeho podíl je vyhrazen (čl. 112 až 132). ¦ Förmodat frånvarande: andelen reserveras (art. 112 till 132). ¦ Formodet fraværende: andelen reserveres (art. 112 til 132).
+Date du décès inconnue : l’app ne peut pas dire qui était mort avant ni quel droit s’applique. ¦ Datum úmrtí neznámé: aplikace nemůže říct, kdo zemřel dříve, ani jaké právo platí. ¦ Dödsdatum okänt: appen kan inte säga vem som dog först eller vilken rätt som gäller. ¦ Dødsdato ukendt: appen kan ikke sige, hvem der døde først, eller hvilken ret der gælder.
+Décès du {date} : le droit de l’époque n’est pas celui d’aujourd’hui. Avant le 1er juillet 2002 (loi du 3 décembre 2001), le conjoint survivant avait surtout de l’usufruit, les enfants nés hors mariage n’avaient pas tous les mêmes droits et les frères et sœurs de lits différents se partageaient par lignes. Avant le 1er août 1972, les enfants naturels avaient des droits réduits. L’app calcule ici selon le droit actuel : le notaire applique le droit de la date. ¦ Úmrtí dne {date}: tehdejší právo není dnešní. Před 1. červencem 2002 (zákon z 3. prosince 2001) měl pozůstalý manžel hlavně požívací právo, děti narozené mimo manželství neměly všechny stejná práva a sourozenci z různých manželství dělili podle linií. Před 1. srpnem 1972 měly nemanželské děti omezená práva. Aplikace zde počítá podle současného práva: notář uplatní právo platné k datu. ¦ Dödsfall den {date}: dåtidens rätt är inte dagens. Före den 1 juli 2002 (lag av den 3 december 2001) hade efterlevande make främst nyttjanderätt, utomäktenskapliga barn hade inte alla samma rättigheter och syskon från olika äktenskap delade per linje. Före den 1 augusti 1972 hade utomäktenskapliga barn begränsade rättigheter. Appen räknar här enligt gällande rätt: notarien tillämpar rätten vid datumet. ¦ Dødsfald den {date}: datidens ret er ikke nutidens. Før 1. juli 2002 (lov af 3. december 2001) havde den efterlevende ægtefælle mest brugsret, børn født uden for ægteskab havde ikke alle samme rettigheder, og søskende fra forskellige ægteskaber delte efter linjer. Før 1. august 1972 havde børn uden for ægteskab begrænsede rettigheder. Appen regner her efter gældende ret: notaren anvender retten på datoen.
+Décès avant le 1er janvier 2007 (loi du 23 juin 2006) : on ne pouvait pas représenter un héritier qui avait renoncé. ¦ Úmrtí před 1. lednem 2007 (zákon z 23. června 2006): dědice, který odmítl, nebylo možné zastoupit. ¦ Dödsfall före den 1 januari 2007 (lag av den 23 juni 2006): en arvinge som avstått kunde inte företrädas. ¦ Dødsfald før 1. januar 2007 (lov af 23. juni 2006): en arving, der havde givet afkald, kunne ikke repræsenteres.
+Décès en 2002 sans date précise : avant ou après le 1er juillet 2002, le droit change. Précise la date. ¦ Úmrtí v roce 2002 bez přesného data: před 1. červencem 2002 a po něm se právo liší. Upřesni datum. ¦ Dödsfall 2002 utan exakt datum: före eller efter den 1 juli 2002 ändras rätten. Ange datumet. ¦ Dødsfald i 2002 uden præcis dato: før eller efter 1. juli 2002 ændres retten. Angiv datoen.
+Divorce ¦ Rozvod ¦ Skilsmässa ¦ Skilsmisse
+La naissance de {name} ¦ Narození {name} ¦ Födelsen av {name} ¦ Fødslen af {name}
+Le décès de {name} ¦ Úmrtí {name} ¦ Dödsfallet för {name} ¦ Dødsfaldet for {name}
+Le mariage avec {name}, non dissous ¦ Manželství s {name}, nerozvedené ¦ Äktenskapet med {name}, inte upplöst ¦ Ægteskabet med {name}, ikke opløst
+Le divorce d’avec {name} ¦ Rozvod s {name} ¦ Skilsmässan från {name} ¦ Skilsmissen fra {name}
+Pas de conjoint survivant : décès de {name} ¦ Žádný pozůstalý manžel: úmrtí {name} ¦ Ingen efterlevande make: dödsfall för {name} ¦ Ingen efterlevende ægtefælle: dødsfald for {name}
+{name} est mort avant ¦ {name} zemřel dříve ¦ {name} dog tidigare ¦ {name} døde før
+Commun à tous ¦ Společné pro všechny ¦ Gemensamt för alla ¦ Fælles for alle
+{name} a renoncé à la succession ¦ {name} dědictví odmítl ¦ {name} avstod från arvet ¦ {name} gav afkald på arven
+{name} est mort avant (représenté) ¦ {name} zemřel dříve (zastoupen) ¦ {name} dog tidigare (företrädd) ¦ {name} døde før (repræsenteret)
+Son nom d’épouse ¦ Její příjmení po sňatku ¦ Hennes gifta namn ¦ Hendes navn som gift
+{name} (pour l’écarter) ¦ {name} (k vyloučení) ¦ {name} (för att utesluta) ¦ {name} (for at udelukke)
+Mort avant le défunt, sans enfant ¦ Zemřel před zůstavitelem, bez dětí ¦ Död före den avlidne, utan barn ¦ Død før den afdøde, uden børn
+Chaque héritier a ses actes : il en manque pour {who}. ¦ Každý dědic má své listiny: chybí pro {who}. ¦ Varje arvinge har sina handlingar: det saknas för {who}. ¦ Hver arving har sine dokumenter: der mangler for {who}.
+Chaque héritier a ses actes. ¦ Každý dědic má své listiny. ¦ Varje arvinge har sina handlingar. ¦ Hver arving har sine dokumenter.
+Chaque prédécédé a son acte de décès : {n} manquent. ¦ Každý dříve zemřelý má úmrtní list: chybí {n}. ¦ Varje tidigare avliden har sin dödsakt: {n} saknas. ¦ Hver tidligere afdød har sin dødsattest: {n} mangler.
+Chaque prédécédé a son acte de décès. ¦ Každý dříve zemřelý má úmrtní list. ¦ Varje tidigare avliden har sin dödsakt. ¦ Hver tidligere afdød har sin dødsattest.
+Les branches inconnues ont une explication. ¦ Neznámé větve mají vysvětlení. ¦ De okända grenarna har en förklaring. ¦ De ukendte grene har en forklaring.
+{n} héritiers ou branches restent « inconnus » sans explication. ¦ Dědiců nebo větví „neznámých“ bez vysvětlení: {n}. ¦ {n} arvingar eller grenar förblir ”okända” utan förklaring. ¦ {n} arvinger eller grene forbliver »ukendte« uden forklaring.
+Aucune branche « inconnue ». ¦ Žádná „neznámá“ větev. ¦ Ingen ”okänd” gren. ¦ Ingen »ukendt« gren.
+L’hypothèse retenue est écrite. ¦ Přijatá hypotéza je zapsaná. ¦ Den valda hypotesen är nedskriven. ¦ Den valgte hypotese er skrevet ned.
+Plusieurs hypothèses : écris celle qui est retenue. ¦ Více hypotéz: napiš, která platí. ¦ Flera hypoteser: skriv vilken som gäller. ¦ Flere hypoteser: skriv hvilken der gælder.
+Une seule hypothèse. ¦ Jediná hypotéza. ¦ En enda hypotes. ¦ Én hypotese.
+Les parts totalisent 1. ¦ Podíly dávají dohromady 1. ¦ Andelarna summerar till 1. ¦ Andelene giver tilsammen 1.
+Les parts ne totalisent pas 1 : à revoir. ¦ Podíly nedávají 1: k přezkoumání. ¦ Andelarna summerar inte till 1: kontrollera. ¦ Andelene giver ikke 1: skal gennemgås.
+La date du décès demande l’avis du notaire (droit de l’époque ou date inconnue). ¦ Datum úmrtí vyžaduje názor notáře (tehdejší právo nebo neznámé datum). ¦ Dödsdatumet kräver notariens bedömning (dåtidens rätt eller okänt datum). ¦ Dødsdatoen kræver notarens vurdering (datidens ret eller ukendt dato).
+{name} ajouté (statut inconnu) ¦ {name} přidán (stav neznámý) ¦ {name} tillagd (status okänd) ¦ {name} tilføjet (status ukendt)
+{name} ajouté ({share}) ¦ {name} přidán ({share}) ¦ {name} tillagd ({share}) ¦ {name} tilføjet ({share})
+{name} : {from} → {to} ¦ {name}: {from} → {to} ¦ {name}: {from} → {to} ¦ {name}: {from} → {to}
+{name} retiré ¦ {name} odebrán ¦ {name} borttagen ¦ {name} fjernet
+Ordre retenu : {from} → {to} ¦ Přijatá třída: {from} → {to} ¦ Gällande arvsklass: {from} → {to} ¦ Fastholdt arveklasse: {from} → {to}
+descendante à la {n}e génération ¦ potomkyně v {n}. generaci ¦ ättling i {n}:e generationen ¦ efterkommer i {n}. generation
+descendant à la {n}e génération ¦ potomek v {n}. generaci ¦ ättling i {n}:e generationen ¦ efterkommer i {n}. generation
+ascendante à la {n}e génération ¦ předkyně v {n}. generaci ¦ förfader i {n}:e generationen ¦ forfader i {n}. generation
+ascendant à la {n}e génération ¦ předek v {n}. generaci ¦ förfader i {n}:e generationen ¦ forfader i {n}. generation
+parente au {n}e degré ¦ příbuzná v {n}. stupni ¦ släkting i {n}:e graden ¦ slægtning i {n}. grad
+parent au {n}e degré ¦ příbuzný v {n}. stupni ¦ släkting i {n}:e graden ¦ slægtning i {n}. grad
+petit-fils ¦ vnuk ¦ sonson / dotterson ¦ barnebarn (dreng)
+petite-fille ¦ vnučka ¦ sondotter / dotterdotter ¦ barnebarn (pige)
+arrière-petit-fils ¦ pravnuk ¦ barnbarnsbarn (pojke) ¦ oldebarn (dreng)
+arrière-petite-fille ¦ pravnučka ¦ barnbarnsbarn (flicka) ¦ oldebarn (pige)
+arrière-arrière-petit-fils ¦ prapravnuk ¦ barnbarnsbarnsbarn (pojke) ¦ tipoldebarn (dreng)
+arrière-arrière-petite-fille ¦ prapravnučka ¦ barnbarnsbarnsbarn (flicka) ¦ tipoldebarn (pige)
+nièce ¦ neteř ¦ brorsdotter / systerdotter ¦ niece
+petit-neveu ¦ prasynovec ¦ syskonbarnbarn (pojke) ¦ grandnevø
+petite-nièce ¦ praneteř ¦ syskonbarnbarn (flicka) ¦ grandniece
+arrière-petit-neveu ¦ praprasynovec ¦ syskonbarnbarnsbarn (pojke) ¦ oldenevø
+arrière-petite-nièce ¦ prapraneteř ¦ syskonbarnbarnsbarn (flicka) ¦ oldeniece
+arrière-arrière-petit-neveu ¦ prapraprasynovec ¦ syskonbarnbarnsbarnsbarn (pojke) ¦ tipoldenevø
+arrière-arrière-petite-nièce ¦ praprapraneteř ¦ syskonbarnbarnsbarnsbarn (flicka) ¦ tipoldeniece
+cousin germain ¦ bratranec ¦ kusin ¦ fætter
+cousine germaine ¦ sestřenice ¦ kusin ¦ kusine
+fils de cousin germain ¦ syn bratrance ¦ son till en kusin ¦ søn af en fætter
+fille de cousin germain ¦ dcera bratrance ¦ dotter till en kusin ¦ datter af en fætter
+petit-fils de cousin germain ¦ vnuk bratrance ¦ sonson till en kusin ¦ sønnesøn af en fætter
+petite-fille de cousin germain ¦ vnučka bratrance ¦ sondotter till en kusin ¦ sønnedatter af en fætter
+grand-oncle ¦ prastrýc ¦ gammelfarbror ¦ grandonkel
+grand-tante ¦ prateta ¦ gammelfaster ¦ grandtante
+cousin germain d’un parent ¦ bratranec rodiče ¦ kusin till en förälder ¦ fætter til en forælder
+cousine germaine d’un parent ¦ sestřenice rodiče ¦ kusin till en förälder ¦ kusine til en forælder
+cousin issu de germains ¦ bratranec z druhého kolena ¦ syssling ¦ halvfætter
+cousine issue de germains ¦ sestřenice z druhého kolena ¦ syssling ¦ halvkusine
+arrière-grand-oncle ¦ praprastrýc ¦ gammelgammelfarbror ¦ oldeonkel
+arrière-grand-tante ¦ praprateta ¦ gammelgammelfaster ¦ oldetante
+cousin germain d’un grand-parent ¦ bratranec prarodiče ¦ kusin till en far- eller morförälder ¦ fætter til en bedsteforælder
+cousine germaine d’un grand-parent ¦ sestřenice prarodiče ¦ kusin till en far- eller morförälder ¦ kusine til en bedsteforælder
+arrière-arrière-grand-oncle ¦ prapraprastrýc ¦ gammelgammelgammelfarbror ¦ tipoldeonkel
+arrière-arrière-grand-tante ¦ prapraprateta ¦ gammelgammelgammelfaster ¦ tipoldetante
+frère germain ¦ vlastní bratr ¦ helbror ¦ helbror
+sœur germaine ¦ vlastní sestra ¦ helsyster ¦ helsøster
+demi-frère (même père) ¦ nevlastní bratr (stejný otec) ¦ halvbror (samma far) ¦ halvbror (samme far)
+demi-sœur (même père) ¦ nevlastní sestra (stejný otec) ¦ halvsyster (samma far) ¦ halvsøster (samme far)
+demi-frère (même mère) ¦ nevlastní bratr (stejná matka) ¦ halvbror (samma mor) ¦ halvbror (samme mor)
+demi-sœur (même mère) ¦ nevlastní sestra (stejná matka) ¦ halvsyster (samma mor) ¦ halvsøster (samme mor)
+Père, mère, enfant ¦ Otec, matka, dítě ¦ Far, mor, barn ¦ Far, mor, barn
+Frère, sœur, grand-parent, petit-enfant ¦ Bratr, sestra, prarodič, vnouče ¦ Bror, syster, far- eller morförälder, barnbarn ¦ Bror, søster, bedsteforælder, barnebarn
+Neveu, nièce, oncle, tante ¦ Synovec, neteř, strýc, teta ¦ Brorson, systerdotter, farbror, moster ¦ Nevø, niece, onkel, tante
+Cousin germain, petit-neveu, grand-oncle ¦ Bratranec, prasynovec, prastrýc ¦ Kusin, syskonbarnbarn, gammelfarbror ¦ Fætter, grandnevø, grandonkel
+Enfant de cousin germain ¦ Dítě bratrance ¦ Kusinbarn ¦ Barn af en fætter
+Cousin issu de germains (limite) ¦ Bratranec z druhého kolena (hranice) ¦ Syssling (gräns) ¦ Halvfætter (grænse)
+Présomption d’absence : le juge des tutelles la constate quand une personne a cessé de paraître sans donner de nouvelles. Elle est réputée vivante ; sa part est réservée et gérée. ¦ Domnělá nepřítomnost: soud ji určí, když se osoba přestala objevovat a nedává zprávy. Považuje se za žijící; její podíl je vyhrazen a spravován. ¦ Förmodad frånvaro: domstolen fastställer den när en person har slutat synas utan att höra av sig. Personen anses vara i livet; andelen reserveras och förvaltas. ¦ Formodet fravær: retten fastslår det, når en person er holdt op med at vise sig uden at give lyd fra sig. Personen anses for levende; andelen reserveres og forvaltes.
+Déclaration d’absence : 10 ans après le jugement de présomption (ou 20 ans sans nouvelles), le tribunal judiciaire la déclare ; le jugement a les effets d’un décès. ¦ Prohlášení nepřítomnosti: 10 let po rozsudku o domněnce (nebo 20 let bez zpráv) ji soud vysloví; rozsudek má účinky úmrtí. ¦ Förklarad frånvaro: 10 år efter domen om förmodan (eller 20 år utan livstecken) förklarar domstolen den; domen har samma verkan som ett dödsfall. ¦ Erklæring om fravær: 10 år efter dommen om formodning (eller 20 år uden livstegn) erklærer retten det; dommen har samme virkning som et dødsfald.
+Jugement déclaratif de décès : pour une disparition dans des circonstances qui mettent la vie en danger (naufrage, catastrophe), sans attendre. ¦ Rozsudek o prohlášení za mrtvého: při zmizení za okolností ohrožujících život (ztroskotání, katastrofa), bez čekání. ¦ Dödförklaring: vid försvinnande under livsfarliga omständigheter (skeppsbrott, katastrof), utan väntetid. ¦ Dødsdom: ved forsvinden under livstruende omstændigheder (forlis, katastrofe), uden at vente.
+Service central d’état civil (Nantes) : les actes des Français nés, mariés ou morts à l’étranger. ¦ Ústřední matrika (Nantes): listiny Francouzů narozených, oddaných nebo zemřelých v zahraničí. ¦ Centrala folkbokföringen i Nantes: handlingar för fransmän födda, vigda eller döda utomlands. ¦ Den centrale civilstandsmyndighed (Nantes): dokumenter for franskmænd født, gift eller døde i udlandet.
+Le consulat de France du pays : registres d’immatriculation, actes transcrits récents. ¦ Francouzský konzulát v dané zemi: konzulární registry, nedávno přepsané listiny. ¦ Frankrikes konsulat i landet: konsulära register, nyligen överförda handlingar. ¦ Frankrigs konsulat i landet: konsulære registre, nyligt overførte dokumenter.
+L’état civil du pays (mairie, registro civil, Standesamt…) : lettre dans la langue du pays. ¦ Matrika dané země (radnice, registro civil, Standesamt…): dopis v jazyce země. ¦ Landets folkbokföring (kommunen, registro civil, Standesamt…): brev på landets språk. ¦ Landets civilstandsmyndighed (rådhus, registro civil, Standesamt…): brev på landets sprog.
+Archives nationales d’outre-mer (Aix-en-Provence) : colonies et Algérie avant 1962. ¦ Národní zámořské archivy (Aix-en-Provence): kolonie a Alžírsko před rokem 1962. ¦ Nationella utomeuropeiska arkiven (Aix-en-Provence): kolonier och Algeriet före 1962. ¦ De nationale oversøiske arkiver (Aix-en-Provence): kolonier og Algeriet før 1962.
+Ouvert ¦ Otevřen ¦ Öppnat ¦ Åbnet
+En recherche ¦ V pátrání ¦ Under sökning ¦ Under søgning
+Héritiers trouvés ¦ Dědici nalezeni ¦ Arvingar funna ¦ Arvinger fundet
+Clos ¦ Uzavřen ¦ Avslutat ¦ Afsluttet
+📁 Dossier ¦ 📁 Spis ¦ 📁 Ärende ¦ 📁 Sag
+👥 Héritiers ¦ 👥 Dědici ¦ 👥 Arvingar ¦ 👥 Arvinger
+🌳 Arbre ¦ 🌳 Strom ¦ 🌳 Träd ¦ 🌳 Træ
+✉️ Héritiers contactés ¦ ✉️ Kontaktovaní dědici ¦ ✉️ Kontaktade arvingar ¦ ✉️ Kontaktede arvinger
+🖨 Pour le notaire ¦ 🖨 Pro notáře ¦ 🖨 För notarien ¦ 🖨 Til notaren
+🕓 Journal ¦ 🕓 Deník ¦ 🕓 Logg ¦ 🕓 Log
+💶 Temps et frais ¦ 💶 Čas a výdaje ¦ 💶 Tid och kostnader ¦ 💶 Tid og udgifter
+Décédé après ¦ Zemřel později ¦ Död efteråt ¦ Død efter
+Décédée après ¦ Zemřela později ¦ Död efteråt ¦ Død efter
+Renonce ¦ Odmítá ¦ Avstår ¦ Giver afkald
+Indigne ¦ Nezpůsobilý ¦ Arvsovärdig ¦ Arveuværdig
+Absent ¦ Nepřítomný ¦ Frånvarande ¦ Fraværende
+Absente ¦ Nepřítomná ¦ Frånvarande ¦ Fraværende
+Pas encore conçu ¦ Ještě nepočatý ¦ Ännu inte avlad ¦ Endnu ikke undfanget
+Pas encore conçue ¦ Ještě nepočatá ¦ Ännu inte avlad ¦ Endnu ikke undfanget
+Comme sur la fiche ¦ Jako v záznamu ¦ Som i posten ¦ Som i posten
+Vivant au décès ¦ Žil v době úmrtí ¦ I livet vid dödsfallet ¦ I live ved dødsfaldet
+Mort avant le défunt ¦ Zemřel před zůstavitelem ¦ Död före den avlidne ¦ Død før den afdøde
+Mort après le défunt ¦ Zemřel po zůstaviteli ¦ Död efter den avlidne ¦ Død efter den afdøde
+Renonce à la succession ¦ Odmítá dědictví ¦ Avstår från arvet ¦ Giver afkald på arven
+Déclaré absent ¦ Prohlášen za nepřítomného ¦ Förklarad frånvarande ¦ Erklæret fraværende
+Refuse ¦ Odmítá ¦ Avböjer ¦ Afslår
+Rappellera ¦ Zavolá zpět ¦ Ringer tillbaka ¦ Ringer tilbage
+✓ En main ¦ ✓ V ruce ¦ ✓ I handen ¦ ✓ I hånden
+📮 Demandé ¦ 📮 Vyžádáno ¦ 📮 Begärd ¦ 📮 Bestilt
+✗ Manquant ¦ ✗ Chybí ¦ ✗ Saknas ¦ ✗ Mangler
+Sans objet ¦ Netýká se ¦ Ej tillämpligt ¦ Ikke relevant
+⏱ Temps ¦ ⏱ Čas ¦ ⏱ Tid ¦ ⏱ Tid
+🧾 Frais ¦ 🧾 Výdaje ¦ 🧾 Kostnader ¦ 🧾 Udgifter
+📝 Contrat ¦ 📝 Smlouva ¦ 📝 Avtal ¦ 📝 Aftale
+02 — HÉRITIERS ¦ 02 — DĚDICI ¦ 02 — ARVINGAR ¦ 02 — ARVINGER
+Généalogiste successoral ¦ Dědický genealog ¦ Arvsgenealog ¦ Arvegenealog
+Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ Najít dědice zemřelé osoby pro notáře. ¦ Hitta arvingarna till en avliden person åt en notarie. ¦ Find arvingerne til en afdød person for en notar.
++ ⚖️ Successions (Dossiers · Héritiers à contacter · Courriers). Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Dědictví (Spisy · Dědicové ke kontaktování · Dopisy). První obrazovka: „Otevřít spis“. ¦ + ⚖️ Dödsbon (Akter · Arvingar att kontakta · Brev). Första skärmen: ”Öppna en akt”. ¦ + ⚖️ Dødsboer (Sager · Arvinger at kontakte · Breve). Første skærm: ”Åbn en sag”.
+⚖️ Successions : dossiers, héritiers à contacter, courriers. ¦ ⚖️ Dědictví: spisy, dědicové ke kontaktování, dopisy. ¦ ⚖️ Dödsbon: akter, arvingar att kontakta, brev. ¦ ⚖️ Dødsboer: sager, arvinger at kontakte, breve.
+⚖️ Successions ¦ ⚖️ Dědictví ¦ ⚖️ Dödsbon ¦ ⚖️ Dødsboer
+Vivants ¦ Žijící ¦ Levande ¦ Levende
+Courriers ¦ Dopisy ¦ Brev ¦ Breve
+Échéance le {date} ¦ Lhůta {date} ¦ Frist den {date} ¦ Frist den {date}
+Pour quel héritier ? ¦ Pro kterého dědice? ¦ För vilken arvinge? ¦ Til hvilken arving?
+Lettre à un héritier ¦ Dopis dědici ¦ Brev till en arvinge ¦ Brev til en arving
+ne révèle pas le défunt avant signature ; honoraires et date limite à écrire ¦ neodhaluje zemřelého před podpisem; odměnu a lhůtu doplnit ¦ avslöjar inte den avlidne före underskrift; arvode och sista datum fylls i ¦ afslører ikke den afdøde før underskrift; honorar og frist udfyldes
+premier contact, sans nommer le défunt ¦ první kontakt, bez jména zemřelého ¦ första kontakt, utan att nämna den avlidne ¦ første kontakt, uden at nævne den afdøde
+Il y a déjà un dossier pour cette personne. ¦ Pro tuto osobu už spis existuje. ¦ Det finns redan ett ärende för denna person. ¦ Der findes allerede en sag for denne person.
+Date d’ouverture incorrecte. ¦ Nesprávné datum otevření. ¦ Felaktigt öppningsdatum. ¦ Forkert åbningsdato.
+Notaire introuvable. ¦ Notář nenalezen. ¦ Notarien hittades inte. ¦ Notaren blev ikke fundet.
+Passe d’abord par la liste de contrôle avant « Remis au notaire ». ¦ Nejdřív projdi kontrolní seznam před „Předáno notáři“. ¦ Gå först igenom kontrollistan före ”Överlämnat till notarien”. ¦ Gå først tjeklisten igennem før »Afleveret til notaren«.
+Ce dossier est archivé. ¦ Tento spis je archivován. ¦ Detta ärende är arkiverat. ¦ Denne sag er arkiveret.
+Valeur inconnue. ¦ Neznámá hodnota. ¦ Okänt värde. ¦ Ukendt værdi.
+Pièce inconnue. ¦ Neznámý doklad. ¦ Okänd handling. ¦ Ukendt dokument.
+Choisis la date de l’échéance. ¦ Vyber datum lhůty. ¦ Välj fristens datum. ¦ Vælg fristens dato.
+Écris ce qu’il faut faire. ¦ Napiš, co je třeba udělat. ¦ Skriv vad som ska göras. ¦ Skriv, hvad der skal gøres.
+Échéance introuvable. ¦ Lhůta nenalezena. ¦ Fristen hittades inte. ¦ Fristen blev ikke fundet.
+Date incorrecte. ¦ Nesprávné datum. ¦ Felaktigt datum. ¦ Forkert dato.
+Le pourcentage va de 0 à 100. ¦ Procento je od 0 do 100. ¦ Procentsatsen går från 0 till 100. ¦ Procenten går fra 0 til 100.
+Combien de temps ? ¦ Jak dlouho? ¦ Hur länge? ¦ Hvor længe?
+Choisis l’héritier. ¦ Vyber dědice. ¦ Välj arvingen. ¦ Vælg arvingen.
+Date de signature incorrecte. ¦ Nesprávné datum podpisu. ¦ Felaktigt underskriftsdatum. ¦ Forkert underskriftsdato.
+Seul un dossier clos peut être archivé. ¦ Archivovat lze jen uzavřený spis. ¦ Bara ett avslutat ärende kan arkiveras. ¦ Kun en afsluttet sag kan arkiveres.
+Mode consultation : les dossiers de succession ne se montrent pas. ¦ Režim prohlížení: dědické spisy se nezobrazují. ¦ Visningsläge: dödsboärenden visas inte. ¦ Visningstilstand: dødsbosager vises ikke.
+Rien à noter. ¦ Nic k zapsání. ¦ Inget att notera. ¦ Intet at notere.
+Calcul manquant. ¦ Chybí výpočet. ¦ Beräkning saknas. ¦ Beregning mangler.
+Dossiers ¦ Spisy ¦ Akter ¦ Sager
+Héritiers à contacter ¦ Dědicové ke kontaktování ¦ Arvingar att kontakta ¦ Arvinger at kontakte
+Que montrer ¦ Co zobrazit ¦ Vad visas ¦ Hvad vises
+Lecture des héritiers… ¦ Načítání dědiců… ¦ Läser arvingarna… ¦ Læser arvingerne…
+Lecture des courriers… ¦ Načítání dopisů… ¦ Läser breven… ¦ Læser brevene…
+Voir toute la liste ↗ ¦ Zobrazit celý seznam ↗ ¦ Se hela listan ↗ ¦ Se hele listen ↗
+Aucun courrier ¦ Žádný dopis ¦ Inget brev ¦ Intet brev
+Courrier envoyé ¦ Dopis odeslán ¦ Brev skickat ¦ Brev sendt
+Réponse : {r} ¦ Odpověď: {r} ¦ Svar: {r} ¦ Svar: {r}
+Courrier envoyé le {d} ¦ Dopis odeslán {d} ¦ Brev skickat {d} ¦ Brev sendt {d}
+Aucun héritier à contacter dans les dossiers en cours. ¦ V rozpracovaných spisech není žádný dědic ke kontaktování. ¦ Ingen arvinge att kontakta i de pågående akterna. ¦ Ingen arvinger at kontakte i de igangværende sager.
+Les héritiers vivants (ou au statut inconnu) des dossiers ouverts viennent ici, avec leur adresse et l’état du contact. ¦ Sem patří žijící dědicové (nebo s neznámým stavem) z otevřených spisů, s adresou a stavem kontaktu. ¦ Levande arvingar (eller med okänd status) i de öppna akterna visas här, med adress och kontaktläge. ¦ Levende arvinger (eller med ukendt status) i de åbne sager vises her, med adresse og kontaktstatus.
+Chercher… (nom, dossier, ville) ¦ Hledat… (jméno, spis, obec) ¦ Sök… (namn, akt, ort) ¦ Søg… (navn, sag, by)
+Tous les dossiers ¦ Všechny spisy ¦ Alla akter ¦ Alle sager
+État du contact ¦ Stav kontaktu ¦ Kontaktläge ¦ Kontaktstatus
+Par dossier ¦ Podle spisu ¦ Per akt ¦ Efter sag
+À contacter d’abord ¦ Nejdřív ke kontaktování ¦ Att kontakta först ¦ Skal kontaktes først
+Aucun héritier ne correspond. ¦ Žádný dědic neodpovídá. ¦ Ingen arvinge matchar. ¦ Ingen arving passer.
+📇 Compléter l’adresse ¦ 📇 Doplnit adresu ¦ 📇 Komplettera adressen ¦ 📇 Udfyld adressen
+adresse à trouver ¦ adresu je třeba najít ¦ adress saknas ¦ adresse skal findes
+Courriel ¦ E-mail ¦ E-post ¦ E-mail
+Héritiers à contacter exportés (CSV) ¦ Dědicové ke kontaktování exportováni (CSV) ¦ Arvingar att kontakta exporterade (CSV) ¦ Arvinger at kontakte eksporteret (CSV)
+Héritier à l’étranger ¦ Dědic v zahraničí ¦ Arvinge utomlands ¦ Arving i udlandet
+Demande d’acte ¦ Žádost o matriční doklad ¦ Begäran om handling ¦ Anmodning om attest
+Aucun courrier de succession pour l’instant. ¦ Zatím žádný dědický dopis. ¦ Inga dödsbobrev ännu. ¦ Endnu ingen dødsbobreve.
+Les courriers écrits depuis un dossier (✉️ Héritiers contactés, 📑 Pièces) viennent ici. ¦ Sem patří dopisy napsané ze spisu (✉️ Kontaktovaní dědicové, 📑 Doklady). ¦ Brev skrivna från en akt (✉️ Kontaktade arvingar, 📑 Handlingar) visas här. ¦ Breve skrevet fra en sag (✉️ Kontaktede arvinger, 📑 Dokumenter) vises her.
+Chercher… (destinataire, dossier) ¦ Hledat… (adresát, spis) ¦ Sök… (mottagare, akt) ¦ Søg… (modtager, sag)
+Aucun courrier ne correspond. ¦ Žádný dopis neodpovídá. ¦ Inget brev matchar. ¦ Intet brev passer.
+📮 COURRIER DE SUCCESSION ¦ 📮 DĚDICKÝ DOPIS ¦ 📮 DÖDSBOBREV ¦ 📮 DØDSBOBREV
+Dévolution ¦ Dědická posloupnost ¦ Arvsordning ¦ Arvefølge
+=héritier ¦ dědic|dědicové|dědiců ¦ arvinge|arvingar ¦ arving|arvinger
+=courrier ¦ dopis|dopisy|dopisů ¦ brev|brev ¦ brev|breve
+=dépouillement ¦ excerpce|excerpce|excerpcí ¦ genomgång|genomgångar ¦ gennemgang|gennemgange
+=dossier en cours ¦ rozpracovaná složka|rozpracované složky|rozpracovaných složek ¦ pågående ärende|pågående ärenden ¦ igangværende sag|igangværende sager
+=dossier de succession ¦ dědická složka|dědické složky|dědických složek ¦ dödsboärende|dödsboärenden ¦ dødsbosag|dødsbosager
+
+# ⚖️ Dossiers de succession : rangement, filtre ⚖️, rattachement, tableau de bord, garde-fous, widget, vue par dossier
+Dossiers de succession : filtre {what} (cliquer pour changer) ¦ Dědické spisy: filtr {what} (kliknutím změníš) ¦ Dödsboärenden: filter {what} (klicka för att ändra) ¦ Dødsbosager: filter {what} (klik for at ændre)
+Dossiers de succession : ne montrer qu’un ou plusieurs dossiers ¦ Dědické spisy: zobrazit jen jeden nebo několik spisů ¦ Dödsboärenden: visa bara ett eller flera ärenden ¦ Dødsbosager: vis kun én eller flere sager
+Plusieurs ¦ Několik ¦ Flera ¦ Flere
+⚖️ Ne montrer que ceux-ci ¦ ⚖️ Zobrazit jen tyto ¦ ⚖️ Visa bara dessa ¦ ⚖️ Vis kun disse
+Aucun dossier dans cette généalogie. ¦ V tomto rodokmenu není žádný spis. ¦ Inget ärende i det här släktträdet. ¦ Ingen sag i dette slægtstræ.
+Dans une autre généalogie ¦ V jiném rodokmenu ¦ I ett annat släktträd ¦ I et andet slægtstræ
+Tous les dossiers… ¦ Všechny spisy… ¦ Alla ärenden… ¦ Alle sager…
+Seulement le dossier {n} ¦ Jen spis {n} ¦ Bara ärende {n} ¦ Kun sag {n}
+Seulement {what} : {list} ¦ Jen {what}: {list} ¦ Bara {what}: {list} ¦ Kun {what}: {list}
+1 dossier · {state} ¦ 1 spis · {state} ¦ 1 ärende · {state} ¦ 1 sag · {state}
+⚖️ Dossier {n} ¦ ⚖️ Spis {n} ¦ ⚖️ Ärende {n} ¦ ⚖️ Sag {n}
+Ce dossier est dans une autre généalogie ¦ Tento spis je v jiném rodokmenu ¦ Det här ärendet finns i ett annat släktträd ¦ Denne sag ligger i et andet slægtstræ
+Ouvrir « {name} » ¦ Otevřít „{name}“ ¦ Öppna ”{name}” ¦ Åbn »{name}«
+Il est rangé dans « {name} ». Pour le montrer, l’app ouvre cette généalogie (tes réglages d’ici sont gardés) et y active le filtre ⚖️ {n}. ¦ Je uložen v „{name}“. Aby ho aplikace ukázala, otevře tento rodokmen (tvá nastavení zde zůstanou) a zapne v něm filtr ⚖️ {n}. ¦ Den ligger i ”{name}”. För att visa den öppnar appen det släktträdet (dina inställningar här behålls) och slår på filtret ⚖️ {n} där. ¦ Den ligger i »{name}«. For at vise den åbner appen dette slægtstræ (dine indstillinger her bevares) og slår filteret ⚖️ {n} til der.
+Tes nouveaux dossiers vont dans « {name} ». ¦ Tvé nové spisy jdou do „{name}“. ¦ Dina nya ärenden hamnar i ”{name}”. ¦ Dine nye sager kommer i »{name}«.
+Ouvrir le dossier ici quand même ¦ Přesto otevřít spis zde ¦ Öppna ärendet här ändå ¦ Åbn sagen her alligevel
+Où ranger tes dossiers ? ¦ Kam ukládat tvé spisy? ¦ Var ska dina ärenden ligga? ¦ Hvor skal dine sager ligge?
+conseillé ici ¦ doporučeno zde ¦ rekommenderas här ¦ anbefales her
+Nom de la nouvelle généalogie ¦ Název nového rodokmenu ¦ Namn på det nya släktträdet ¦ Navn på det nye slægtstræ
+⚖️ Dossier de succession ¦ ⚖️ Dědický spis ¦ ⚖️ Dödsboärende ¦ ⚖️ Dødsbosag
+Ta généalogie ouverte a {n} : la ranger à part évite de mélanger les héritiers de tes clients avec ta propre famille. Ce n’est qu’un conseil. ¦ Tvůj otevřený rodokmen má {n}: oddělené uložení zabrání smíchání dědiců tvých klientů s tvou vlastní rodinou. Je to jen rada. ¦ Ditt öppna släktträd har {n}: att hålla dem separat undviker att blanda dina klienters arvingar med din egen familj. Det är bara ett råd. ¦ Dit åbne slægtstræ har {n}: at holde dem adskilt undgår at blande dine klienters arvinger med din egen familie. Det er kun et råd.
+Tu pourras changer d’avis : Réglages → Apparence → 🧭 Usage de l’app → « ⚖️ Où ranger les dossiers ». Les dossiers déjà ouverts ne bougent pas tout seuls. ¦ Můžeš si to rozmyslet: Nastavení → Vzhled → 🧭 Použití aplikace → „⚖️ Kam ukládat spisy“. Již otevřené spisy se samy nepřesunou. ¦ Du kan ändra dig: Inställningar → Utseende → 🧭 Användning av appen → ”⚖️ Var ärendena ska ligga”. Ärenden som redan är öppnade flyttas inte av sig själva. ¦ Du kan skifte mening: Indstillinger → Udseende → 🧭 Brug af appen → »⚖️ Hvor sagerne skal ligge«. Sager, der allerede er åbnet, flytter sig ikke af sig selv.
+Créer « ⚖️ Dossiers de succession » et ouvrir le dossier ¦ Vytvořit „⚖️ Dědické spisy“ a otevřít spis ¦ Skapa ”⚖️ Dödsboärenden” och öppna ärendet ¦ Opret »⚖️ Dødsbosager« og åbn sagen
+Créer la généalogie et ouvrir le dossier ¦ Vytvořit rodokmen a otevřít spis ¦ Skapa släktträdet och öppna ärendet ¦ Opret slægtstræet og åbn sagen
+Rangement des dossiers : {what} ¦ Ukládání spisů: {what} ¦ Var ärendena hamnar: {what} ¦ Hvor sagerne kommer: {what}
+Généalogiste successoral : réglages des dossiers ¦ Dědický genealog: nastavení spisů ¦ Arvsgenealog: inställningar för ärendena ¦ Arvegenealog: indstillinger for sagerne
+Où ranger les dossiers ¦ Kam ukládat spisy ¦ Var ärendena ska ligga ¦ Hvor sagerne skal ligge
+Les nouveaux dossiers vont… ¦ Nové spisy jdou… ¦ Nya ärenden hamnar… ¦ Nye sager kommer…
+Dans « {name} » ¦ Do „{name}“ ¦ I ”{name}” ¦ I »{name}«
+Les dossiers et où ils sont ¦ Spisy a kde jsou ¦ Ärendena och var de finns ¦ Sagerne og hvor de ligger
+⇄ Déplacer… ¦ ⇄ Přesunout… ¦ ⇄ Flytta… ¦ ⇄ Flyt…
+Aucun dossier pour l’instant. ¦ Zatím žádný spis. ¦ Inget ärende ännu. ¦ Ingen sag endnu.
+Réglages des dossiers ¦ Nastavení spisů ¦ Inställningar för ärendena ¦ Indstillinger for sagerne
+Arbre et graphiques filtrés par ⚖️ : les fiches hors dossier ¦ Strom a grafy s filtrem ⚖️: karty mimo spis ¦ Träd och diagram filtrerade med ⚖️: poster utanför ärendet ¦ Træ og diagrammer filtreret med ⚖️: poster uden for sagen
+Archive d’un dossier clos : adresses des héritiers vivants ¦ Archiv uzavřeného spisu: adresy žijících dědiců ¦ Arkiv för ett stängt ärende: adresser till levande arvingar ¦ Arkiv for en lukket sag: adresser på levende arvinger
+Déplacer un dossier dont une fiche est aussi dans ta famille ¦ Přesun spisu, jehož karta je i ve tvé rodině ¦ Flytta ett ärende vars post också finns i din familj ¦ Flytte en sag, hvis post også er i din familie
+« Sans dossier » dans la vue par dossier ¦ „Bez spisu“ v zobrazení podle spisů ¦ ”Utan ärende” i visningen per ärende ¦ »Uden sag« i visningen pr. sag
+Avancement : un héritier qui refuse de signer ¦ Postup: dědic, který odmítá podepsat ¦ Framsteg: en arvinge som vägrar skriva under ¦ Fremskridt: en arving, der nægter at skrive under
+compte comme « fait » (étape 5) ¦ počítá se jako „hotovo“ (krok 5) ¦ räknas som ”klar” (steg 5) ¦ tæller som »gjort« (trin 5)
+Avancement : poids des 7 étapes ¦ Postup: váha 7 kroků ¦ Framsteg: vikt för de 7 stegen ¦ Fremskridt: vægt for de 7 trin
+Réglage des dossiers enregistré : {what} ¦ Nastavení spisů uloženo: {what} ¦ Inställning för ärendena sparad: {what} ¦ Indstilling for sagerne gemt: {what}
+poids des 7 étapes ¦ váha 7 kroků ¦ vikt för de 7 stegen ¦ vægt for de 7 trin
+⇄ DÉPLACER UN DOSSIER ¦ ⇄ PŘESUNOUT SPIS ¦ ⇄ FLYTTA ETT ÄRENDE ¦ ⇄ FLYT EN SAG
+{n} → ? ¦ {n} → ? ¦ {n} → ? ¦ {n} → ?
+⇄ Déplacer ({what}) ¦ ⇄ Přesunout ({what}) ¦ ⇄ Flytta ({what}) ¦ ⇄ Flyt ({what})
+Vers ¦ Kam ¦ Till ¦ Til
+＋ Une nouvelle généalogie pour ce dossier ¦ ＋ Nový rodokmen pro tento spis ¦ ＋ Ett nytt släktträd för det här ärendet ¦ ＋ Et nyt slægtstræ til denne sag
+Ce qui part : le dossier, son journal, ses pièces, ses courriers, ses échéances, et les fiches qui lui sont rattachées (défunt, héritiers, intermédiaires) avec leurs actes et médias. Une fiche aussi rattachée à un autre dossier ou à ta famille est copiée, pas déplacée. ¦ Co odchází: spis, jeho deník, doklady, dopisy, lhůty a karty k němu připojené (zůstavitel, dědicové, prostředníci) s jejich záznamy a médii. Karta připojená i k jinému spisu nebo k tvé rodině se zkopíruje, nepřesune. ¦ Det som flyttas: ärendet, dess logg, handlingar, brev, frister och posterna kopplade till det (den avlidne, arvingar, mellanled) med deras handlingar och media. En post som också är kopplad till ett annat ärende eller till din familj kopieras, flyttas inte. ¦ Det, der flyttes: sagen, dens log, bilag, breve, frister og de tilknyttede poster (afdøde, arvinger, mellemled) med deres akter og medier. En post, der også er knyttet til en anden sag eller til din familie, kopieres, flyttes ikke.
+Déplacement refusé (réglage) : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Přesun odmítnut (nastavení): tyto karty jsou i ve tvé rodině nebo v jiném spisu: {names}. ¦ Flytt nekad (inställning): dessa poster finns också i din familj eller i ett annat ärende: {names}. ¦ Flytning afvist (indstilling): disse poster er også i din familie eller i en anden sag: {names}.
+Copiées (elles restent aussi ici) : {names}. ¦ Zkopírováno (zůstává i zde): {names}. ¦ Kopierade (de stannar också här): {names}. ¦ Kopieret (de bliver også her): {names}.
+Une copie de sauvegarde des deux généalogies est faite avant. Le journal du dossier note « Déplacé de … vers … ». ¦ Předtem se udělá záloha obou rodokmenů. Deník spisu zapíše „Přesunuto z … do …“. ¦ Först görs en säkerhetskopia av båda släktträden. Ärendets logg noterar ”Flyttad från … till …”. ¦ Først tages en sikkerhedskopi af begge slægtstræer. Sagens log noterer »Flyttet fra … til …«.
+Dossier {n} déplacé vers « {to} » ({what}) ¦ Spis {n} přesunut do „{to}“ ({what}) ¦ Ärende {n} flyttat till ”{to}” ({what}) ¦ Sag {n} flyttet til »{to}« ({what})
+⤓ Reprendre la fiche depuis Ma généalogie ¦ ⤓ Převzít kartu z Mého rodokmenu ¦ ⤓ Hämta posten från Mitt släktträd ¦ ⤓ Hent posten fra Mit slægtstræ
+copie de la fiche, jusqu’aux grands-parents et tous leurs descendants connus, sans photos ¦ kopie karty až po prarodiče a všechny jejich známé potomky, bez fotografií ¦ kopia av posten, upp till far- och morföräldrar och alla deras kända ättlingar, utan foton ¦ kopi af posten, op til bedsteforældrene og alle deres kendte efterkommere, uden fotos
+⤓ REPRENDRE UNE FICHE ¦ ⤓ PŘEVZÍT KARTU ¦ ⤓ HÄMTA EN POST ¦ ⤓ HENT EN POST
+Reprendre la fiche du défunt ¦ Převzít kartu zůstavitele ¦ Hämta den avlidnes post ¦ Hent afdødes post
+Chercher la fiche ¦ Hledat kartu ¦ Sök posten ¦ Søg posten
+Prénom, nom… ¦ Jméno, příjmení… ¦ Förnamn, efternamn… ¦ Fornavn, efternavn…
+Copiées : la fiche, ses parents et grands-parents, tous leurs descendants connus et leurs conjoints, avec les dates et les lieux ; sans photos. Rien n’est changé dans l’autre généalogie. ¦ Zkopírováno: karta, její rodiče a prarodiče, všichni jejich známí potomci a jejich manželé, s daty a místy; bez fotografií. V druhém rodokmenu se nic nemění. ¦ Kopieras: posten, föräldrar och far- och morföräldrar, alla kända ättlingar och deras makar, med datum och platser; utan foton. Inget ändras i det andra släktträdet. ¦ Kopieres: posten, forældre og bedsteforældre, alle kendte efterkommere og deres ægtefæller, med datoer og steder; uden fotos. Intet ændres i det andet slægtstræ.
+{what} reprises de l’autre généalogie. ¦ {what} převzato z druhého rodokmenu. ¦ {what} hämtade från det andra släktträdet. ¦ {what} hentet fra det andet slægtstræ.
+Dossiers… ¦ Spisy… ¦ Ärenden… ¦ Sager…
+{name} dans quels dossiers ? ¦ {name} ve kterých spisech? ¦ {name} i vilka ärenden? ¦ {name} i hvilke sager?
+(calculé) ¦ (vypočteno) ¦ (beräknad) ¦ (beregnet)
+Rôles : défunt · héritier · intermédiaire · témoin · à vérifier. « Héritier » mis par le calcul s’affiche « (calculé) ». ¦ Role: zůstavitel · dědic · prostředník · svědek · ke kontrole. „Dědic“ nastavený výpočtem má „(vypočteno)“. ¦ Roller: avliden · arvinge · mellanled · vittne · att kontrollera. ”Arvinge” satt av beräkningen visas ”(beräknad)”. ¦ Roller: afdød · arving · mellemled · vidne · skal tjekkes. »Arving« sat af beregningen vises »(beregnet)«.
+Dossiers de {name} enregistrés ¦ Spisy {name} uloženy ¦ Ärenden för {name} sparade ¦ Sager for {name} gemt
+Les dossiers de cette fiche ¦ Spisy této karty ¦ Den här postens ärenden ¦ Denne posts sager
+hors du dossier {n} ¦ mimo spis {n} ¦ utanför ärende {n} ¦ uden for sag {n}
+＋ Rattacher ¦ ＋ Připojit ¦ ＋ Koppla ¦ ＋ Tilknyt
+Fiche rattachée au dossier {n} ¦ Karta připojena ke spisu {n} ¦ Post kopplad till ärende {n} ¦ Post knyttet til sag {n}
+Rattachée au dossier {n} : {who} ¦ Připojeno ke spisu {n}: {who} ¦ Kopplad till ärende {n}: {who} ¦ Knyttet til sag {n}: {who}
+Lecture des fiches du dossier… ¦ Načítání karet spisu… ¦ Läser ärendets poster… ¦ Læser sagens poster…
+Les fiches du dossier ¦ Karty spisu ¦ Ärendets poster ¦ Sagens poster
+Rattacher ¦ Připojit ¦ Koppla ¦ Tilknyt
+Retirées à la main ({n}) : jamais remises toutes seules ¦ Odebrané ručně ({n}): nikdy se samy nevrátí ¦ Borttagna för hand ({n}): läggs aldrig tillbaka automatiskt ¦ Fjernet manuelt ({n}): sættes aldrig tilbage automatisk
+Fiche à comparer : « {name}{year} » ressemble à une fiche déjà dans cette base. Jamais fusionnée toute seule. ¦ Karta k porovnání: „{name}{year}“ se podobá kartě, která už v databázi je. Nikdy se nesloučí sama. ¦ Post att jämföra: ”{name}{year}” liknar en post som redan finns i databasen. Slås aldrig ihop automatiskt. ¦ Post at sammenligne: »{name}{year}« ligner en post, der allerede er i databasen. Flettes aldrig automatisk.
+née {y} ¦ nar. {y} ¦ född {y} ¦ født {y}
+Homonyme possible : « {name}{year} » existe aussi dans le dossier {n}. Jamais relié tout seul. ¦ Možná shoda jmen: „{name}{year}“ je i ve spisu {n}. Nikdy se nepropojí sama. ¦ Möjlig namne: ”{name}{year}” finns också i ärende {n}. Kopplas aldrig automatiskt. ¦ Mulig navnebror: »{name}{year}« findes også i sag {n}. Tilknyttes aldrig automatisk.
+⇆ Comparer ¦ ⇆ Porovnat ¦ ⇆ Jämför ¦ ⇆ Sammenlign
+C’est la même personne : rattacher aussi ¦ Je to stejná osoba: připojit také ¦ Det är samma person: koppla också ¦ Det er den samme person: tilknyt også
+Pas la même ¦ Není to stejná ¦ Inte samma ¦ Ikke den samme
+Fiche retirée du dossier {n} ¦ Karta odebrána ze spisu {n} ¦ Post borttagen från ärende {n} ¦ Post fjernet fra sag {n}
+Fiche remise dans le dossier {n} ¦ Karta vrácena do spisu {n} ¦ Post tillbaka i ärende {n} ¦ Post sat tilbage i sag {n}
+Homonyme rattaché aussi au dossier {n} (à vérifier) ¦ Shoda jmen připojena i ke spisu {n} (ke kontrole) ¦ Namne kopplad också till ärende {n} (att kontrollera) ¦ Navnebror også knyttet til sag {n} (skal tjekkes)
+Noté : ce n’est pas la même personne ¦ Zapsáno: není to stejná osoba ¦ Noterat: inte samma person ¦ Noteret: ikke den samme person
+Rôle : {r} ¦ Role: {r} ¦ Roll: {r} ¦ Rolle: {r}
+⚠️ illisible : {names} ¦ ⚠️ nečitelné: {names} ¦ ⚠️ oläsbar: {names} ¦ ⚠️ ulæselig: {names}
+Chercher… (n°, défunt, notaire) ¦ Hledat… (č., zůstavitel, notář) ¦ Sök… (nr, avliden, notarie) ¦ Søg… (nr., afdød, notar)
+Toutes les généalogies ¦ Všechny rodokmeny ¦ Alla släktträd ¦ Alle slægtstræer
+Tous les notaires ¦ Všichni notáři ¦ Alla notarier ¦ Alle notarer
+Prochaine échéance (retards d’abord) ¦ Nejbližší lhůta (nejprve zpoždění) ¦ Nästa frist (försenade först) ¦ Næste frist (forsinkede først)
+Avancement le plus bas ¦ Nejnižší postup ¦ Lägsta framsteg ¦ Laveste fremskridt
+{d} · passée ¦ {d} · uplynula ¦ {d} · passerad ¦ {d} · overskredet
+Trouvés : {n} ¦ Nalezeno: {n} ¦ Hittade: {n} ¦ Fundet: {n}
+À trouver : {n} ¦ K nalezení: {n} ¦ Att hitta: {n} ¦ Skal findes: {n}
+{h} h {m} ¦ {h} h {m} ¦ {h} h {m} ¦ {h} t {m}
+Cocher le dossier {n} ¦ Zaškrtnout spis {n} ¦ Markera ärende {n} ¦ Markér sag {n}
+Échéance : {d} ¦ Lhůta: {d} ¦ Frist: {d} ¦ Frist: {d}
+Héritiers ¦ Dědicové ¦ Arvingar ¦ Arvinger
+Avancement ¦ Postup ¦ Framsteg ¦ Fremskridt
+Cochés : {n} ¦ Zaškrtnuto: {n} ¦ Markerade: {n} ¦ Markeret: {n}
+Les dossiers cochés sont dans des généalogies différentes : choisis-en dans une seule. ¦ Zaškrtnuté spisy jsou v různých rodokmenech: vyber je jen z jednoho. ¦ De markerade ärendena finns i olika släktträd: välj bara från ett. ¦ De markerede sager ligger i forskellige slægtstræer: vælg kun fra ét.
+Dossiers exportés (CSV) ¦ Spisy exportovány (CSV) ¦ Ärenden exporterade (CSV) ¦ Sager eksporteret (CSV)
+⤒ Réimporter un dossier archivé… ¦ ⤒ Znovu importovat archivovaný spis… ¦ ⤒ Importera ett arkiverat ärende igen… ¦ ⤒ Genimportér en arkiveret sag…
+⚠️ FUSION ¦ ⚠️ SLOUČENÍ ¦ ⚠️ SAMMANSLAGNING ¦ ⚠️ FLETNING
+Ces deux fiches sont dans des dossiers différents ¦ Tyto dvě karty jsou v různých spisech ¦ De här två posterna finns i olika ärenden ¦ Disse to poster er i forskellige sager
+Fusionner quand même ¦ Přesto sloučit ¦ Slå ihop ändå ¦ Flet alligevel
+{a} et {b}. Fusionner relie les deux successions et change les parts des deux dossiers. Vérifie avec des actes (naissance, parents) avant. ¦ {a} a {b}. Sloučení propojí oba dědické případy a změní podíly v obou spisech. Nejdřív to ověř v matrikách (narození, rodiče). ¦ {a} och {b}. Sammanslagning knyter ihop de två dödsbona och ändrar andelarna i båda ärendena. Kontrollera först med handlingar (födelse, föräldrar). ¦ {a} og {b}. Fletning forbinder de to dødsboer og ændrer andelene i begge sager. Tjek først med kirkebøger (fødsel, forældre).
+⇆ Comparer d’abord ¦ ⇆ Nejdřív porovnat ¦ ⇆ Jämför först ¦ ⇆ Sammenlign først
+Si on fusionne : noté dans le journal des deux dossiers, et les deux sont recalculés. ¦ Po sloučení: zapsáno v deníku obou spisů a oba se přepočítají. ¦ Vid sammanslagning: noteras i båda ärendenas logg, och båda räknas om. ¦ Ved fletning: noteres i begge sagers log, og begge genberegnes.
+🗄 Archiver dans un fichier et retirer… ¦ 🗄 Archivovat do souboru a odebrat… ¦ 🗄 Arkivera i en fil och ta bort… ¦ 🗄 Arkivér i en fil og fjern…
+🗄 ARCHIVER LE DOSSIER {n} ¦ 🗄 ARCHIVOVAT SPIS {n} ¦ 🗄 ARKIVERA ÄRENDE {n} ¦ 🗄 ARKIVÉR SAG {n}
+Dans un fichier, puis retirer de la base ¦ Do souboru, pak odebrat z databáze ¦ Till en fil, sedan ta bort ur databasen ¦ Til en fil, derefter fjern fra databasen
+⤓ Enregistrer le fichier puis retirer ¦ ⤓ Uložit soubor a pak odebrat ¦ ⤓ Spara filen och ta sedan bort ¦ ⤓ Gem filen og fjern derefter
+Le fichier {file} contient : le dossier, le journal, les pièces et leurs images, les courriers, l’arbre de dévolution (SVG), le tableau pour le notaire et les fiches rattachées ({n}). ¦ Soubor {file} obsahuje: spis, deník, doklady a jejich obrázky, dopisy, strom dědické posloupnosti (SVG), tabulku pro notáře a připojené karty ({n}). ¦ Filen {file} innehåller: ärendet, loggen, handlingarna och deras bilder, breven, arvsträdet (SVG), tabellen för notarien och de kopplade posterna ({n}). ¦ Filen {file} indeholder: sagen, loggen, bilagene og deres billeder, brevene, arvetræet (SVG), tabellen til notaren og de tilknyttede poster ({n}).
+Garder les adresses des vivants dans le fichier ¦ Ponechat adresy žijících v souboru ¦ Behåll de levandes adresser i filen ¦ Behold de levendes adresser i filen
+utile si le notaire rouvre la succession ¦ užitečné, pokud notář dědictví znovu otevře ¦ bra om notarien öppnar dödsboet igen ¦ nyttigt, hvis notaren genåbner dødsboet
+Retirer les adresses ¦ Odebrat adresy ¦ Ta bort adresserna ¦ Fjern adresserne
+comme l’archivage actuel ¦ jako dosavadní archivace ¦ som den nuvarande arkiveringen ¦ som den nuværende arkivering
+Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base ({n}). Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste ({k}). Une sauvegarde est faite avant. ¦ Potom se karty, které slouží jen tomuto spisu, odeberou z databáze ({n}). Karta připojená i k jinému spisu (nebo k tvé rodině) zůstane ({k}). Předtem se udělá záloha. ¦ Sedan tas poster som bara hör till det här ärendet bort ur databasen ({n}). En post som också är kopplad till ett annat ärende (eller till din familj) stannar ({k}). Först görs en säkerhetskopia. ¦ Derefter fjernes de poster, der kun hører til denne sag, fra databasen ({n}). En post, der også er knyttet til en anden sag (eller din familie), bliver ({k}). Først tages en sikkerhedskopi.
+Dossier {n} archivé dans « {file} » et retiré ({what}) ¦ Spis {n} archivován do „{file}“ a odebrán ({what}) ¦ Ärende {n} arkiverat i ”{file}” och borttaget ({what}) ¦ Sag {n} arkiveret i »{file}« og fjernet ({what})
+⤒ RÉIMPORTER ¦ ⤒ ZNOVU IMPORTOVAT ¦ ⤒ IMPORTERA IGEN ¦ ⤒ GENIMPORTÉR
+⤒ Réimporter le dossier ¦ ⤒ Znovu importovat spis ¦ ⤒ Importera ärendet igen ¦ ⤒ Genimportér sagen
+Dossier {n} ({name}{closed}), {what}. ¦ Spis {n} ({name}{closed}), {what}. ¦ Ärende {n} ({name}{closed}), {what}. ¦ Sag {n} ({name}{closed}), {what}.
+clos le {d} ¦ uzavřen {d} ¦ stängd {d} ¦ lukket {d}
+{what} ressemblent à des fiches déjà dans cette base ({names}) : elles seront proposées à la comparaison, jamais fusionnées seules. ¦ {what} se podobá kartám, které už v databázi jsou ({names}): budou nabídnuty k porovnání, nikdy se nesloučí samy. ¦ {what} liknar poster som redan finns i databasen ({names}): de föreslås för jämförelse, slås aldrig ihop automatiskt. ¦ {what} ligner poster, der allerede er i databasen ({names}): de foreslås til sammenligning, flettes aldrig automatisk.
+Dossier {n} réimporté ({what}) ¦ Spis {n} znovu importován ({what}) ¦ Ärende {n} importerat igen ({what}) ¦ Sag {n} genimporteret ({what})
+Dossier {n} réimporté dans « {name} ». ¦ Spis {n} znovu importován do „{name}“. ¦ Ärende {n} importerat igen i ”{name}”. ¦ Sag {n} genimporteret i »{name}«.
+⚖️ Mes dossiers de succession ¦ ⚖️ Moje dědické spisy ¦ ⚖️ Mina dödsboärenden ¦ ⚖️ Mine dødsbosager
+Aucun dossier de succession. ¦ Žádný dědický spis. ¦ Inget dödsboärende. ¦ Ingen dødsbosag.
+Étapes (7) ¦ Kroky (7) ¦ Steg (7) ¦ Trin (7)
+{step} : {done} sur {total} ¦ {step}: {done} z {total} ¦ {step}: {done} av {total} ¦ {step}: {done} af {total}
+Quels dossiers ¦ Které spisy ¦ Vilka ärenden ¦ Hvilke sager
+Le filtre ¦ Filtr ¦ Filtret ¦ Filteret
+Vue actuelle ¦ Současné zobrazení ¦ Nuvarande vy ¦ Nuværende visning
+Alt + ↑ / ↓ : changer l’ordre (rangement à la main) ¦ Alt + ↑ / ↓: změnit pořadí (ručně) ¦ Alt + ↑ / ↓: ändra ordningen (för hand) ¦ Alt + ↑ / ↓: skift rækkefølgen (manuelt)
+Sans dossier ¦ Bez spisu ¦ Utan ärende ¦ Uden sag
+Ranger les dossiers : ¦ Řadit spisy: ¦ Ordna ärendena: ¦ Ordn sagerne:
+… cherche un nom pour voir les autres. ¦ … vyhledej jméno a uvidíš ostatní. ¦ … sök ett namn för att se de andra. ¦ … søg et navn for at se de andre.
+Ordre des dossiers changé ¦ Pořadí spisů změněno ¦ Ordningen på ärendena ändrad ¦ Sagernes rækkefølge ændret
+Dans cette généalogie ¦ V tomto rodokmenu ¦ I det här släktträdet ¦ I dette slægtstræ
+Le défunt et ses héritiers sont des fiches de ta famille. Simple, mais tout se mélange. ¦ Zůstavitel a jeho dědicové jsou karty tvé rodiny. Jednoduché, ale všechno se smíchá. ¦ Den avlidne och arvingarna är poster i din familj. Enkelt, men allt blandas. ¦ Afdøde og arvingerne er poster i din familie. Enkelt, men alt blandes.
+Dans une généalogie à part pour tous mes dossiers ¦ V samostatném rodokmenu pro všechny mé spisy ¦ I ett separat släktträd för alla mina ärenden ¦ I et separat slægtstræ til alle mine sager
+Une base professionnelle « ⚖️ Dossiers de succession », créée dans 🌳 Mes généalogies. Tes dossiers y sont tous ensemble ; ta famille reste à part. ¦ Profesní databáze „⚖️ Dědické spisy“, vytvořená v 🌳 Mé rodokmeny. Tvé spisy jsou tam všechny pohromadě; tvá rodina zůstane stranou. ¦ En yrkesdatabas ”⚖️ Dödsboärenden”, skapad i 🌳 Mina släktträd. Alla dina ärenden finns där tillsammans; din familj hålls separat. ¦ En professionel database »⚖️ Dødsbosager«, oprettet i 🌳 Mine slægtstræer. Alle dine sager ligger der samlet; din familie holdes adskilt.
+Une généalogie par dossier ¦ Jeden rodokmen na spis ¦ Ett släktträd per ärende ¦ Ét slægtstræ pr. sag
+Chaque dossier a sa propre base (« ⚖️ 2026-014 MAZAUD »). Le plus étanche ; à réserver aux grosses successions. ¦ Každý spis má vlastní databázi („⚖️ 2026-014 MAZAUD“). Nejlépe oddělené; pro velká dědictví. ¦ Varje ärende har sin egen databas (”⚖️ 2026-014 MAZAUD”). Mest avskilt; för stora dödsbon. ¦ Hver sag har sin egen database (»⚖️ 2026-014 MAZAUD«). Mest adskilt; til store dødsboer.
+défunt ¦ zůstavitel ¦ avliden ¦ afdød
+intermédiaire ¦ prostředník ¦ mellanled ¦ mellemled
+Un par dossier ¦ Jeden na spis ¦ Ett per ärende ¦ Én pr. sag
+Un filtre ¦ Filtr ¦ Ett filter ¦ Et filter
+Compteurs ¦ Počítadla ¦ Räknare ¦ Tællere
+à l’ouverture ¦ při otevření ¦ vid öppning ¦ ved åbning
+calcul ¦ výpočet ¦ beräkning ¦ beregning
+à la main ¦ ručně ¦ för hand ¦ manuelt
+créée pendant le filtre ¦ vytvořena během filtru ¦ skapad under filtret ¦ oprettet under filteret
+réimport ¦ nový import ¦ återimport ¦ genimport
+homonyme ¦ shoda jmen ¦ namne ¦ navnebror
+déplacée ¦ přesunuta ¦ flyttad ¦ flyttet
+grisées, sans nom ¦ šedé, bez jména ¦ grå, utan namn ¦ grå, uden navn
+cachées ¦ skryté ¦ dolda ¦ skjulte
+retirées du fichier ¦ odebrány ze souboru ¦ borttagna ur filen ¦ fjernet fra filen
+gardées dans le fichier ¦ ponechány v souboru ¦ behållna i filen ¦ beholdt i filen
+copier la fiche ¦ zkopírovat kartu ¦ kopiera posten ¦ kopiér posten
+refuser le déplacement ¦ odmítnout přesun ¦ neka flytten ¦ afvis flytningen
+replié ¦ sbaleno ¦ hopfällt ¦ foldet sammen
+Défunt et acte de décès ¦ Zůstavitel a úmrtní zápis ¦ Avliden och dödsbevis ¦ Afdød og dødsattest
+Adresses ¦ Adresy ¦ Adresser ¦ Adresser
+Contrats signés ¦ Podepsané smlouvy ¦ Underskrivna avtal ¦ Underskrevne aftaler
+Déplacement refusé : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Přesun odmítnut: tyto karty jsou i ve tvé rodině nebo v jiném spisu: {names}. ¦ Flytt nekad: dessa poster finns också i din familj eller i ett annat ärende: {names}. ¦ Flytning afvist: disse poster er også i din familie eller i en anden sag: {names}.
+Impossible d’enregistrer les réglages des dossiers. ¦ Nastavení spisů nelze uložit. ¦ Det gick inte att spara inställningarna för ärendena. ¦ Indstillingerne for sagerne kunne ikke gemmes.
+Cette généalogie est encore vide. ¦ Tento rodokmen je zatím prázdný. ¦ Det här släktträdet är fortfarande tomt. ¦ Dette slægtstræ er stadig tomt.
+Rôle inconnu. ¦ Neznámá role. ¦ Okänd roll. ¦ Ukendt rolle.
+Fiches inconnues. ¦ Neznámé karty. ¦ Okända poster. ¦ Ukendte poster.
+Choisis une autre généalogie. ¦ Vyber jiný rodokmen. ¦ Välj ett annat släktträd. ¦ Vælg et andet slægtstræ.
+Impossible de créer le fichier d’archive. ¦ Archivní soubor nelze vytvořit. ¦ Det gick inte att skapa arkivfilen. ¦ Arkivfilen kunne ikke oprettes.
+Fichier introuvable. ¦ Soubor nenalezen. ¦ Filen hittades inte. ¦ Filen blev ikke fundet.
+Ce fichier n’est pas une archive de dossier de succession. ¦ Tento soubor není archivem dědického spisu. ¦ Den här filen är inte ett arkiv för ett dödsboärende. ¦ Denne fil er ikke et arkiv for en dødsbosag.
+Le fichier n’a pas été reçu. ¦ Soubor nedorazil. ¦ Filen togs inte emot. ¦ Filen blev ikke modtaget.
+Le défunt reste dans son dossier. ¦ Zůstavitel zůstává ve svém spisu. ¦ Den avlidne stannar i sitt ärende. ¦ Afdøde bliver i sin sag.
+🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Osoby ¦ 🧑‍🤝‍🧑 Personer ¦ 🧑‍🤝‍🧑 Personer
+Dossiers de succession (usage successoral seulement) ¦ Dědické spisy (jen při použití dědického genealoga) ¦ Dödsboärenden (bara vid användning som arvsgenealog) ¦ Dødsbosager (kun ved brug som arvegenealog)
+# Zone « successoral » : 🔎 introuvable / 🔇 ne répond pas (état de contact d’un héritier, migration 92) ; 🔒 fiches confidentielles non comptées (réglage)
+Introuvable ¦ Nedohledatelný ¦ Går inte att hitta ¦ Kan ikke findes
+Ne répond pas ¦ Neodpovídá ¦ Svarar inte ¦ Svarer ikke
+introuvable ¦ nedohledatelný ¦ går inte att hitta ¦ kan ikke findes
+ne répond pas ¦ neodpovídá ¦ svarar inte ¦ svarer ikke
+rien de noté ¦ nic nezaznamenáno ¦ inget noterat ¦ intet noteret
+depuis le {d} ¦ od {d} ¦ sedan {d} ¦ siden {d}
+Introuvable ou silencieux ¦ Nedohledatelný nebo mlčí ¦ Går inte att hitta eller tyst ¦ Kan ikke findes eller tavs
+Introuvable depuis plus d’un an ¦ Nedohledatelný déle než rok ¦ Inte hittad på över ett år ¦ Ikke fundet i over et år
+{name} est introuvable depuis plus d’un an : la présomption d’absence (art. 112 et suivants) peut protéger sa part. ¦ {name}: nedohledatelný déle než rok. Domněnka nepřítomnosti (čl. 112 a násl.) může ochránit jeho podíl. ¦ {name} har inte gått att hitta på över ett år: en presumtion om frånvaro (art. 112 ff.) kan skydda andelen. ¦ {name} har ikke kunnet findes i over et år: en formodning om fravær (art. 112 ff.) kan beskytte andelen.
+{what} : les parts peuvent être fausses. ¦ {what}: podíly mohou být chybné. ¦ {what}: andelarna kan vara fel. ¦ {what}: andelene kan være forkerte.
+=fiche confidentielle non comptée ¦ důvěrná karta nezapočítána|důvěrné karty nezapočítány|důvěrných karet nezapočítáno ¦ konfidentiell post inte räknad|konfidentiella poster inte räknade ¦ fortrolig post ikke talt med|fortrolige poster ikke talt med
+Changer ce réglage ¦ Změnit toto nastavení ¦ Ändra den här inställningen ¦ Skift denne indstilling
+Tous les héritiers ¦ Všichni dědicové ¦ Alla arvingar ¦ Alle arvinger
+🔎 Introuvable ou 🔇 ne répond pas : pas compté comme contacté dans l’avancement, et le calcul ne change pas. À ne pas confondre avec le statut « Présumé absent » (art. 112). ¦ 🔎 Nedohledatelný nebo 🔇 neodpovídá: v postupu se nepočítá jako kontaktovaný a výpočet se nemění. Nezaměňuj se stavem „Domněle nepřítomný“ (čl. 112). ¦ 🔎 Går inte att hitta eller 🔇 svarar inte: räknas inte som kontaktad i framstegen, och beräkningen ändras inte. Inte att förväxla med statusen ”Förmodat frånvarande” (art. 112). ¦ 🔎 Kan ikke findes eller 🔇 svarer ikke: tæller ikke som kontaktet i fremskridtet, og beregningen ændres ikke. Må ikke forveksles med status »Formodet fraværende« (art. 112).
+Contact de {name} : {state} ¦ Kontakt – {name}: {state} ¦ Kontakt med {name}: {state} ¦ Kontakt med {name}: {state}
+Les fiches confidentielles comptent-elles comme héritiers ? ¦ Počítají se důvěrné karty jako dědicové? ¦ Räknas konfidentiella poster som arvingar? ¦ Tæller fortrolige poster som arvinger?
+Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Ne: důvěrná karta se z výpočtu vyřadí, jako by neexistovala; spis na to upozorní. ¦ Nej: en konfidentiell post tas bort ur beräkningen, som om den inte fanns; ärendet visar det. ¦ Nej: en fortrolig post tages ud af beregningen, som om den ikke fandtes; sagen viser det.
+Le défunt n’est pas un héritier à contacter. ¦ Zesnulý není dědic ke kontaktování. ¦ Den avlidne är ingen arvinge att kontakta. ¦ Afdøde er ikke en arving, der skal kontaktes.
+⚖️ Un doute sur la loi ? ¦ ⚖️ Pochybnost o zákonu? ¦ ⚖️ Osäker på lagen? ¦ ⚖️ I tvivl om loven?
+⚖️ Un doute ? ¦ ⚖️ Pochybnost? ¦ ⚖️ Osäker? ¦ ⚖️ I tvivl?
+⚖️ UN DOUTE SUR LA LOI ? ¦ ⚖️ POCHYBNOST O ZÁKONU? ¦ ⚖️ OSÄKER PÅ LAGEN? ¦ ⚖️ I TVIVL OM LOVEN?
+Chercher sur un site officiel ¦ Hledat na oficiálním webu ¦ Sök på en officiell webbplats ¦ Søg på et officielt websted
+✍️ Noter dans le dossier ¦ ✍️ Zapsat do spisu ¦ ✍️ Anteckna i ärendet ¦ ✍️ Notér i sagen
+Ton problème, avec tes mots ¦ Tvůj problém, tvými slovy ¦ Ditt problem, med dina egna ord ¦ Dit problem, med dine egne ord
+ex. un héritier refuse de répondre · délai pour renoncer à une succession ¦ např. dědic odmítá odpovědět · lhůta k odmítnutí dědictví ¦ t.ex. en arvinge vägrar svara · frist för att avstå från ett arv ¦ f.eks. en arving nægter at svare · frist for at give afkald på en arv
+N’écris pas de nom : la question part sur internet. ¦ Nepiš žádná jména: otázka odchází na internet. ¦ Skriv inga namn: frågan skickas ut på internet. ¦ Skriv ingen navne: spørgsmålet sendes ud på internettet.
+🏛 Chercher sur Service-public ¦ 🏛 Hledat na Service-public ¦ 🏛 Sök på Service-public ¦ 🏛 Søg på Service-public
+explique en français simple et donne le lien vers le bon article ¦ vysvětlí to jednoduchou francouzštinou a dá odkaz na správný článek ¦ förklarar på enkel franska och länkar till rätt artikel ¦ forklarer på enkelt fransk og linker til den rigtige artikel
+📜 Chercher sur Légifrance ¦ 📜 Hledat na Légifrance ¦ 📜 Sök på Légifrance ¦ 📜 Søg på Légifrance
+les articles des codes en vigueur ¦ články platných zákoníků ¦ artiklarna i gällande lagböcker ¦ artiklerne i de gældende lovbøger
+L’app ne choisit aucun article : ta question est envoyée telle quelle au site officiel, qui s’ouvre dans ton navigateur. ¦ Aplikace nevybírá žádný článek: tvoje otázka se pošle beze změny na oficiální web, který se otevře v tvém prohlížeči. ¦ Appen väljer ingen artikel: din fråga skickas oförändrad till den officiella webbplatsen, som öppnas i din webbläsare. ¦ Appen vælger ingen artikel: dit spørgsmål sendes uændret til det officielle websted, som åbner i din browser.
+✍️ Noter dans le dossier {n} ¦ ✍️ Zapsat do spisu {n} ¦ ✍️ Anteckna i ärende {n} ¦ ✍️ Notér i sag {n}
+Lien de l’article ou de la fiche (facultatif) ¦ Odkaz na článek nebo stránku (nepovinné) ¦ Länk till artikeln eller sidan (valfritt) ¦ Link til artiklen eller siden (valgfrit)
+Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Jen adresa https:// z Légifrance, Service-public nebo EUR-Lex. ¦ Bara en https://-adress från Légifrance, Service-public eller EUR-Lex. ¦ Kun en https://-adresse fra Légifrance, Service-public eller EUR-Lex.
+Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Odkaz odmítnut: jen adresa https:// z Légifrance, Service-public nebo EUR-Lex. ¦ Länken nekades: bara en https://-adress från Légifrance, Service-public eller EUR-Lex. ¦ Link afvist: kun en https://-adresse fra Légifrance, Service-public eller EUR-Lex.
+Noté au journal du dossier {n}. ¦ Zapsáno do deníku spisu {n}. ¦ Antecknat i loggen för ärende {n}. ¦ Noteret i loggen for sag {n}.
+Écris d’abord ta question. ¦ Nejdřív napiš svou otázku. ¦ Skriv din fråga först. ¦ Skriv dit spørgsmål først.
+# ⚖️ Outils du successoral (⏱ 🔔 📋 🧾 📊 ✉️) et ＋ Ajouter un onglet (docs/design/onglets-et-successoral-outils.html)
+⏱ Compter le temps passé sur ce dossier ¦ ⏱ Počítat čas strávený na tomto spisu ¦ ⏱ Räkna tiden för det här ärendet ¦ ⏱ Tæl tiden brugt på denne sag
+{n} min ¦ {n} min ¦ {n} min ¦ {n} min
+⏸️ Pause ¦ ⏸️ Pauza ¦ ⏸️ Paus ¦ ⏸️ Pause
+▶️ Reprendre ¦ ▶️ Pokračovat ¦ ▶️ Fortsätt ¦ ▶️ Fortsæt
+⏹️ Arrêter et noter ¦ ⏹️ Zastavit a zapsat ¦ ⏹️ Stoppa och anteckna ¦ ⏹️ Stop og notér
+Moins d’une minute : rien à noter. ¦ Méně než minuta: nic k zapsání. ¦ Mindre än en minut: inget att anteckna. ¦ Under et minut: intet at notere.
+Noter le temps passé ¦ Zapsat strávený čas ¦ Anteckna tiden ¦ Notér den brugte tid
+Noter {t} ¦ Zapsat {t} ¦ Anteckna {t} ¦ Notér {t}
+Proposé d’après les onglets ouverts ; à corriger si besoin. Date : {d}. ¦ Navrženo podle otevřených záložek; v případě potřeby oprav. Datum: {d}. ¦ Föreslaget utifrån de öppnade flikarna; rätta vid behov. Datum: {d}. ¦ Foreslået ud fra de åbne faner; ret til om nødvendigt. Dato: {d}.
+Minuit passé : une ligne par jour. ¦ Po půlnoci: jeden řádek na den. ¦ Efter midnatt: en rad per dag. ¦ Efter midnat: én linje pr. dag.
+Jeter ce temps ¦ Zahodit tento čas ¦ Släng den här tiden ¦ Kassér denne tid
+Jeter ce temps ? ¦ Zahodit tento čas? ¦ Släng den här tiden? ¦ Kassér denne tid?
+Jeter ¦ Zahodit ¦ Släng ¦ Kassér
+{t} d’affilée : c’est bien ça ? ¦ {t} v kuse: je to správně? ¦ {t} i sträck: stämmer det? ¦ {t} i træk: passer det?
+Plus de 10 h d’affilée ¦ Víc než 10 h v kuse ¦ Mer än 10 h i sträck ¦ Over 10 t i træk
+Noter quand même ¦ Přesto zapsat ¦ Anteckna ändå ¦ Notér alligevel
+⏱ {t} notées dans le dossier {n} ¦ ⏱ {t} zapsáno do spisu {n} ¦ ⏱ {t} antecknade i ärende {n} ¦ ⏱ {t} noteret i sag {n}
+Le chronomètre compte pour {n}. ¦ Stopky počítají pro {n}. ¦ Tidtagaruret räknar för {n}. ¦ Stopuret tæller for {n}.
+⏹️ Noter et passer à {n} ¦ ⏹️ Zapsat a přejít na {n} ¦ ⏹️ Anteckna och gå till {n} ¦ ⏹️ Notér og skift til {n}
+Continuer sur {n} ¦ Pokračovat se {n} ¦ Fortsätt med {n} ¦ Fortsæt med {n}
+Rien touché depuis 10 min : chronomètre en pause à {h}. ¦ 10 min se ničeho nedotkl: stopky pozastaveny v {h}. ¦ Inget rört på 10 min: tidtagaruret pausat kl. {h}. ¦ Intet rørt i 10 min: stopuret sat på pause kl. {h}.
+Compter aussi ces 10 min ¦ Započítat i těchto 10 min ¦ Räkna även de här 10 min ¦ Tæl også disse 10 min
+⏱ {n} : {t} comptées avant la fermeture. ¦ ⏱ {n}: {t} napočítáno před zavřením. ¦ ⏱ {n}: {t} räknade före stängningen. ¦ ⏱ {n}: {t} talt før lukningen.
+Noter ¦ Zapsat ¦ Anteckna ¦ Notér
+Échéances du jour : {n} à faire (retards et aujourd’hui) ¦ Dnešní lhůty: {n} k vyřízení (zpožděné a dnešní) ¦ Dagens tidsfrister: {n} att göra (försenade och i dag) ¦ Dagens frister: {n} at gøre (forsinkede og i dag)
+🔔 Échéances du jour ¦ 🔔 Dnešní lhůty ¦ 🔔 Dagens tidsfrister ¦ 🔔 Dagens frister
+⏰ Rappel ¦ ⏰ Připomínka ¦ ⏰ Påminnelse ¦ ⏰ Påmindelse
+prévu le {d} ¦ plánováno na {d} ¦ planerad {d} ¦ planlagt {d}
+✓ Fait ¦ ✓ Hotovo ¦ ✓ Klart ¦ ✓ Udført
+⏭ Demain (ou lundi) ¦ ⏭ Zítra (nebo v pondělí) ¦ ⏭ I morgon (eller måndag) ¦ ⏭ I morgen (eller mandag)
+↗ Ouvrir le dossier ¦ ↗ Otevřít spis ¦ ↗ Öppna ärendet ¦ ↗ Åbn sagen
+voir ▾ ¦ zobrazit ▾ ¦ visa ▾ ¦ vis ▾
+Rien pour aujourd’hui. ¦ Na dnešek nic. ¦ Inget för i dag. ¦ Intet for i dag.
+Prochaine : {d} ({n}) ¦ Příští: {d} ({n}) ¦ Nästa: {d} ({n}) ¦ Næste: {d} ({n})
+🔔 À faire · {d} ¦ 🔔 K vyřízení · {d} ¦ 🔔 Att göra · {d} ¦ 🔔 At gøre · {d}
+Cette généalogie ¦ Tato genealogie ¦ Den här släktforskningen ¦ Denne slægtsforskning
+⚖️ {name} : impossible de lire les échéances ¦ ⚖️ {name}: lhůty nelze přečíst ¦ ⚖️ {name}: tidsfristerna kan inte läsas ¦ ⚖️ {name}: fristerne kan ikke læses
+✓ fait · ⏭ demain / lundi · ↗ ouvre le dossier (change de généalogie si besoin) ¦ ✓ hotovo · ⏭ zítra / pondělí · ↗ otevře spis (v případě potřeby přepne genealogii) ¦ ✓ klart · ⏭ i morgon / måndag · ↗ öppnar ärendet (byter släktforskning vid behov) ¦ ✓ udført · ⏭ i morgen / mandag · ↗ åbner sagen (skifter slægtsforskning om nødvendigt)
+Ajouter mes rappels ¦ Přidat moje připomínky ¦ Lägg till mina påminnelser ¦ Tilføj mine påmindelser
+Bulle de l’ordinateur à l’ouverture de l’app ¦ Upozornění počítače při otevření aplikace ¦ Avisering från datorn när appen öppnas ¦ Besked fra computeren når appen åbner
+🗓 Ma semaine ¦ 🗓 Můj týden ¦ 🗓 Min vecka ¦ 🗓 Min uge
+Reporté au {d} ¦ Odloženo na {d} ¦ Uppskjutet till {d} ¦ Udsat til {d}
+✓ Fait : {l} ¦ ✓ Hotovo: {l} ¦ ✓ Klart: {l} ¦ ✓ Udført: {l}
+Reporté au {d} : {l} ¦ Odloženo na {d}: {l} ¦ Uppskjutet till {d}: {l} ¦ Udsat til {d}: {l}
+Points prêts : {n} sur {m} ¦ Hotové body: {n} z {m} ¦ Punkter klara: {n} av {m} ¦ Punkter klar: {n} af {m}
+À revoir : {n} ¦ K revizi: {n} ¦ Att se över: {n} ¦ Skal ses igen: {n}
+Manque : {n} ¦ Chybí: {n} ¦ Saknas: {n} ¦ Mangler: {n}
+📋 AVANT DE REMETTRE ¦ 📋 PŘED PŘEDÁNÍM ¦ 📋 FÖRE ÖVERLÄMNANDET ¦ 📋 FØR OVERDRAGELSEN
+Avant de remettre · {n} ¦ Před předáním · {n} ¦ Före överlämnandet · {n} ¦ Før overdragelsen · {n}
+Passer à « Remis au notaire » ¦ Přepnout na „Předáno notáři“ ¦ Byt till ”Överlämnat till notarien” ¦ Skift til »Overdraget til notaren«
+Ça avertit, ça n’empêche pas : tu peux remettre quand même, ce sera noté au journal. ¦ Varuje, nebrání: můžeš přesto předat, zapíše se to do deníku. ¦ Det varnar, det hindrar inte: du kan överlämna ändå, det antecknas i loggen. ¦ Den advarer, den forhindrer ikke: du kan overdrage alligevel, det noteres i loggen.
+🖨 Imprimer quand même ¦ 🖨 Přesto vytisknout ¦ 🖨 Skriv ut ändå ¦ 🖨 Udskriv alligevel
+Montant ¦ Částka ¦ Belopp ¦ Beløb
+non signé ¦ nepodepsáno ¦ ej undertecknat ¦ ikke underskrevet
+Commission ¦ Provize ¦ Provision ¦ Provision
+Reste à l’héritier ¦ Zůstává dědici ¦ Kvar till arvingen ¦ Tilbage til arvingen
+Arrondi au centime : chaque part est arrondie au centime inférieur, puis les centimes qui restent vont aux parts qui en ont perdu le plus. Le total tombe juste. ¦ Zaokrouhleno na cent: každý podíl se zaokrouhlí dolů na cent, zbývající centy jdou podílům, které ztratily nejvíc. Součet přesně sedí. ¦ Avrundat till hela cent: varje andel avrundas nedåt till cent, sedan går de återstående centen till de andelar som förlorat mest. Summan blir exakt. ¦ Afrundet til øre: hver andel rundes ned til øre, og de resterende øre går til de andele, der har tabt mest. Summen går præcis op.
+Tape l’actif net en euros pour voir la part de chacun. ¦ Napiš čistá aktiva v eurech a uvidíš podíl každého. ¦ Skriv nettotillgångarna i euro för att se var och ens andel. ¦ Skriv nettoformuen i euro for at se hver enkelts andel.
+Tape un montant en euros (ex. 187 450,00). ¦ Napiš částku v eurech (např. 187 450,00). ¦ Skriv ett belopp i euro (t.ex. 187 450,00). ¦ Skriv et beløb i euro (f.eks. 187 450,00).
+Plus d’un milliard d’euros : c’est bien ça ? ¦ Víc než miliarda eur: je to správně? ¦ Mer än en miljard euro: stämmer det? ¦ Over en milliard euro: passer det?
+Oui, calculer ¦ Ano, spočítat ¦ Ja, räkna ¦ Ja, beregn
+Si le conjoint choisit l’usufruit de la totalité : pas de montant en euros (sa valeur dépend de son âge, c’est un barème fiscal) ; demande la valeur au notaire, pour lui et pour les nus-propriétaires. ¦ Pokud si manžel zvolí požívací právo k celku: žádná částka v eurech (jeho hodnota závisí na věku, je to daňová tabulka); zeptej se notáře na hodnotu, pro něj i pro holé vlastníky. ¦ Om maken väljer nyttjanderätt till hela kvarlåtenskapen: inget belopp i euro (värdet beror på åldern, det är en skattetabell); fråga notarien om värdet, för maken och för de nakna ägarna. ¦ Hvis ægtefællen vælger brugsretten til det hele: intet beløb i euro (værdien afhænger af alderen, det er en skattetabel); spørg notaren om værdien, for ægtefællen og for ejerne uden brugsret.
+Autre hypothèse, {h} ¦ Jiná hypotéza, {h} ¦ Annan hypotes, {h} ¦ Anden hypotese, {h}
+📊 Part de chacun en euros ¦ 📊 Podíl každého v eurech ¦ 📊 Var och ens andel i euro ¦ 📊 Hver enkelts andel i euro
+Fractions ¦ Zlomky ¦ Bråk ¦ Brøker
+💶 En euros ¦ 💶 V eurech ¦ 💶 I euro ¦ 💶 I euro
+⤓ Copier le tableau ¦ ⤓ Kopírovat tabulku ¦ ⤓ Kopiera tabellen ¦ ⤓ Kopiér tabellen
+Actif net à partager (tapé par toi) ¦ Čistá aktiva k rozdělení (zadaná tebou) ¦ Nettotillgångar att dela (inskrivna av dig) ¦ Nettoformue der skal deles (skrevet af dig)
+D’après le notaire. Pas gardé : effacé quand tu fermes le dossier. ¦ Podle notáře. Neukládá se: smaže se, když zavřeš spis. ¦ Enligt notarien. Sparas inte: raderas när du stänger ärendet. ¦ Ifølge notaren. Gemmes ikke: slettes, når du lukker sagen.
+Hors droits de succession et frais : l’app ne calcule pas l’impôt. Ces montants sont un ordre d’idée, à faire vérifier par le notaire. ¦ Bez dědické daně a nákladů: aplikace daň nepočítá. Tyto částky jsou orientační, ať je ověří notář. ¦ Utan arvsskatt och kostnader: appen beräknar inte skatten. Beloppen är ungefärliga och ska kontrolleras av notarien. ¦ Uden arveafgift og omkostninger: appen beregner ikke skatten. Beløbene er et skøn, som notaren skal kontrollere.
+Commission = le % écrit dans « ＋ Honoraires d’un contrat » × le montant, arrondie au centime le plus proche, sans TVA ajoutée ; reste = montant − commission. ¦ Provize = % zapsané v „＋ Odměna ze smlouvy“ × částka, zaokrouhlená na nejbližší cent, bez přidané DPH; zůstává = částka − provize. ¦ Provision = det % som står i ”＋ Arvode enligt avtal” × beloppet, avrundat till närmaste cent, utan tillagd moms; kvar = belopp − provision. ¦ Provision = den % der står i »＋ Honorar fra en aftale« × beløbet, afrundet til nærmeste øre, uden tillagt moms; tilbage = beløb − provision.
+Tableau copié. ¦ Tabulka zkopírována. ¦ Tabellen kopierad. ¦ Tabellen kopieret.
+Parts en euros — {n} ¦ Podíly v eurech — {n} ¦ Andelar i euro — {n} ¦ Andele i euro — {n}
+Parts en euros imprimées ¦ Podíly v eurech vytištěny ¦ Andelar i euro utskrivna ¦ Andele i euro udskrevet
+✉️ Courrier à plusieurs… ¦ ✉️ Dopis více dědicům… ¦ ✉️ Brev till flera… ¦ ✉️ Brev til flere…
+décoché ¦ nezaškrtnuto ¦ avmarkerad ¦ fravalgt
+déjà écrit le {d} ({k}) ¦ už psáno {d} ({k}) ¦ redan skrivet {d} ({k}) ¦ allerede skrevet {d} ({k})
+✉️ Courriers en série · {n} ¦ ✉️ Hromadné dopisy · {n} ¦ ✉️ Massbrev · {n} ¦ ✉️ Brevfletning · {n}
+Les héritiers dont l’existence n’est pas établie ne sont pas dans la liste. Les décochés peuvent être cochés à la main (une lettre sans adresse est alors imprimée sans bloc adresse). ¦ Dědicové, jejichž existence není prokázána, v seznamu nejsou. Nezaškrtnuté lze zaškrtnout ručně (dopis bez adresy se pak vytiskne bez bloku adresy). ¦ Arvingar vars existens inte är fastställd finns inte i listan. Avmarkerade kan markeras för hand (ett brev utan adress skrivs då ut utan adressblock). ¦ Arvinger, hvis eksistens ikke er fastslået, er ikke på listen. Fravalgte kan vælges i hånden (et brev uden adresse udskrives så uden adresseblok).
+La lettre · clic sur un champ pour l’insérer ¦ Dopis · kliknutím na pole ho vložíš ¦ Brevet · klicka på ett fält för att infoga det ¦ Brevet · klik på et felt for at indsætte det
+{envoyé_le} : la date du courrier précédent à cet héritier ; {date} : la date d’envoi de celui-ci. ¦ {envoyé_le}: datum předchozího dopisu tomuto dědici; {date}: datum odeslání tohoto. ¦ {envoyé_le}: datumet för det förra brevet till den här arvingen; {date}: datumet då det här skickas. ¦ {envoyé_le}: datoen for det forrige brev til denne arving; {date}: datoen, hvor dette sendes.
+Lettre précédente ¦ Předchozí dopis ¦ Föregående brev ¦ Forrige brev
+Lettre suivante ¦ Další dopis ¦ Nästa brev ¦ Næste brev
+✎ Retoucher cette lettre ¦ ✎ Upravit tento dopis ¦ ✎ Redigera det här brevet ¦ ✎ Ret dette brev
+↺ Revenir au modèle ¦ ↺ Zpět na šablonu ¦ ↺ Tillbaka till mallen ¦ ↺ Tilbage til skabelonen
+＋ Enregistrer comme modèle ¦ ＋ Uložit jako šablonu ¦ ＋ Spara som mall ¦ ＋ Gem som skabelon
+Lettres prêtes : {n} sur {m} ¦ Hotové dopisy: {n} z {m} ¦ Brev klara: {n} av {m} ¦ Breve klar: {n} af {m}
+Champ inconnu : {f} (ligne {l}). Corrige-le avant de ranger les lettres. ¦ Neznámé pole: {f} (řádek {l}). Oprav ho, než dopisy založíš. ¦ Okänt fält: {f} (rad {l}). Rätta det innan du lägger in breven. ¦ Ukendt felt: {f} (linje {l}). Ret det, før du lægger brevene ind.
+🖨 Imprimer les {n} ¦ 🖨 Vytisknout {n} ¦ 🖨 Skriv ut de {n} ¦ 🖨 Udskriv de {n}
+Lettre {i} / {n} · {name} ¦ Dopis {i} / {n} · {name} ¦ Brev {i} / {n} · {name} ¦ Brev {i} / {n} · {name}
+Champ vide : la ligne s’écrit sans le mot ¦ Prázdné pole: řádek se napíše bez toho slova ¦ Tomt fält: raden skrivs utan ordet ¦ Tomt felt: linjen skrives uden ordet
+✎ modifiée à la main ¦ ✎ upraveno ručně ¦ ✎ ändrat för hand ¦ ✎ ændret i hånden
+Ton nom et ton adresse : Listes → Registre de courriers → ✉️ Lettres (expéditeur). ¦ Tvé jméno a adresa: Seznamy → Evidence korespondence → ✉️ Dopisy (odesílatel). ¦ Ditt namn och din adress: Listor → Brevregister → ✉️ Brev (avsändare). ¦ Dit navn og din adresse: Lister → Brevregister → ✉️ Breve (afsender).
+Mes modèles (aucun pour l’instant) ¦ Moje šablony (zatím žádná) ¦ Mina mallar (inga ännu) ¦ Mine skabeloner (ingen endnu)
+Remplacer ta lettre par ce modèle ? ¦ Nahradit tvůj dopis touto šablonou? ¦ Ersätta ditt brev med den här mallen? ¦ Erstat dit brev med denne skabelon?
+Changer de modèle ¦ Změnit šablonu ¦ Byt mall ¦ Skift skabelon
+Oublier les retouches de la lettre à {name} ? ¦ Zapomenout úpravy dopisu pro {name}? ¦ Glömma ändringarna i brevet till {name}? ¦ Glem ændringerne i brevet til {name}?
+Revenir au modèle ¦ Zpět na šablonu ¦ Tillbaka till mallen ¦ Tilbage til skabelonen
+Modèle « {name} » enregistré (Mes modèles, communs à tous les dossiers de cette généalogie) ¦ Šablona „{name}“ uložena (Moje šablony, společné pro všechny spisy této genealogie) ¦ Mallen ”{name}” sparad (Mina mallar, gemensamma för alla ärenden i den här släktforskningen) ¦ Skabelonen »{name}« gemt (Mine skabeloner, fælles for alle sager i denne slægtsforskning)
+Corrige d’abord le champ inconnu. ¦ Nejdřív oprav neznámé pole. ¦ Rätta först det okända fältet. ¦ Ret først det ukendte felt.
+Rangement : {n} sur {m} ¦ Zakládání: {n} z {m} ¦ Inläggning: {n} av {m} ¦ Indlægning: {n} af {m}
+{n} rangés dans le Registre de courriers, relance le {d} ¦ {n} založeno v Evidenci korespondence, urgence {d} ¦ {n} inlagda i Brevregistret, påminnelse {d} ¦ {n} lagt i Brevregistret, rykker {d}
+en main, cote non notée ¦ v ruce, signatura nezapsána ¦ i handen, signum inte antecknat ¦ i hånden, signatur ikke noteret
+demandé le {d} ¦ vyžádáno {d} ¦ begärt {d} ¦ bestilt {d}
+demandé ¦ vyžádáno ¦ begärt ¦ bestilt
+acte à fournir ¦ listinu je třeba dodat ¦ handling ska lämnas ¦ dokument skal skaffes
+(commun, voir {n}) ¦ (společné, viz {n}) ¦ (gemensam, se {n}) ¦ (fælles, se {n})
+CHAÎNE DE FILIATION ¦ ŘETĚZ PŮVODU ¦ HÄRSTAMNINGSKEDJA ¦ AFSTAMNINGSKÆDE
+Calcul établi d’après les actes cités, sous réserve de vérification par le notaire. ¦ Výpočet podle uvedených listin, s výhradou ověření notářem. ¦ Beräkning utifrån de anförda handlingarna, med förbehåll för notariens kontroll. ¦ Beregning ud fra de anførte dokumenter, med forbehold for notarens kontrol.
+Code civil, articles cités pour ce dossier : art. {list}. ¦ Občanský zákoník, články uvedené pro tento spis: art. {list}. ¦ Civillagen, artiklar anförda för det här ärendet: art. {list}. ¦ Civilloven, artikler anført for denne sag: art. {list}.
+N. = naissance, M. = mariage, D. = décès. ¦ Nar. = narození, Sň. = sňatek, Úm. = úmrtí. ¦ F. = född, V. = vigsel, D. = död. ¦ F. = fødsel, V. = vielse, D. = død.
+Page {n} / {t} ¦ Strana {n} / {t} ¦ Sida {n} / {t} ¦ Side {n} / {t}
+Coche au moins une page. ¦ Zaškrtni aspoň jednu stranu. ¦ Markera minst en sida. ¦ Markér mindst én side.
+Tableau pour le notaire : PDF ({n} pages, avec chaîne par héritier) ¦ Tabulka pro notáře: PDF ({n} stran, s řetězem každého dědice) ¦ Tabell för notarien: PDF ({n} sidor, med kedjan för varje arvinge) ¦ Tabel til notaren: PDF ({n} sider, med kæden for hver arving)
+Tableau pour le notaire : PDF ({n} pages) ¦ Tabulka pro notáře: PDF ({n} stran) ¦ Tabell för notarien: PDF ({n} sidor) ¦ Tabel til notaren: PDF ({n} sider)
+sans adresses ¦ bez adres ¦ utan adresser ¦ uden adresser
+📋 Avant de remettre ¦ 📋 Před předáním ¦ 📋 Före överlämnandet ¦ 📋 Før overdragelsen
+ça avertit, ça n’empêche pas ¦ varuje, nebrání ¦ det varnar, det hindrar inte ¦ den advarer, den forhindrer ikke
+Ce que contient le PDF ¦ Co obsahuje PDF ¦ Vad PDF:en innehåller ¦ Hvad PDF’en indeholder
+Compté par le chronomètre ¦ Napočítáno stopkami ¦ Räknat av tidtagaruret ¦ Talt af stopuret
+Taux horaire pour le relevé (facultatif, pas gardé) ¦ Hodinová sazba pro výkaz (nepovinné, neukládá se) ¦ Timpris för sammanställningen (valfritt, sparas inte) ¦ Timepris til opgørelsen (valgfri, gemmes ikke)
+€ / h ¦ € / h ¦ € / h ¦ € / t
+✎ Modifier la ligne ¦ ✎ Upravit řádek ¦ ✎ Ändra raden ¦ ✎ Ret linjen
+Ligne modifiée ¦ Řádek upraven ¦ Raden ändrad ¦ Linjen rettet
+Temps × taux horaire ({r} € / h) : {s} ¦ Čas × hodinová sazba ({r} € / h): {s} ¦ Tid × timpris ({r} € / h): {s} ¦ Tid × timepris ({r} € / t): {s}
+Ajouté depuis « ＋ Ajouter un onglet ». ¦ Přidáno přes „＋ Přidat záložku“. ¦ Tillagd via ”＋ Lägg till en flik”. ¦ Tilføjet via »＋ Tilføj en fane«.
+✓ Onglet « {name} » ajouté ¦ ✓ Záložka „{name}“ přidána ¦ ✓ Fliken ”{name}” tillagd ¦ ✓ Fanen »{name}« tilføjet
+Onglet « {name} » caché ¦ Záložka „{name}“ skryta ¦ Fliken ”{name}” dold ¦ Fanen »{name}« skjult
+conseillé pour toi ¦ doporučeno pro tebe ¦ rekommenderad för dig ¦ anbefalet til dig
+montré par ton usage ¦ zobrazeno tvým použitím ¦ visad av din användning ¦ vist af din brug
+Conseillés pour toi ¦ Doporučeno pro tebe ¦ Rekommenderade för dig ¦ Anbefalet til dig
+Tout le reste ▾ ¦ Všechno ostatní ▾ ¦ Allt annat ▾ ¦ Alt det andet ▾
+Qu’est-ce que tu veux avoir sous la main ? ¦ Co chceš mít po ruce? ¦ Vad vill du ha nära till hands? ¦ Hvad vil du have ved hånden?
+Ton usage : {u} ¦ Tvé použití: {u} ¦ Din användning: {u} ¦ Din brug: {u}
+Chercher un onglet ¦ Hledat záložku ¦ Sök en flik ¦ Søg efter en fane
+🔍 Chercher un onglet… (courrier, acte, agenda) ¦ 🔍 Hledat záložku… (dopis, listina, kalendář) ¦ 🔍 Sök en flik… (brev, handling, kalender) ¦ 🔍 Søg efter en fane… (brev, dokument, kalender)
+Conseillés ({n}) ¦ Doporučené ({n}) ¦ Rekommenderade ({n}) ¦ Anbefalede ({n})
+Déjà dans le menu ({n}) ¦ Už v nabídce ({n}) ¦ Redan i menyn ({n}) ¦ Allerede i menuen ({n})
+Aucun onglet ne correspond. ¦ Žádná záložka neodpovídá. ¦ Ingen flik matchar. ¦ Ingen fane passer.
+Une carte cochée = l’onglet est dans le menu. Cocher l’ajoute à la fin du menu ; décocher le cache (un raccourci est caché, pas effacé). ¦ Zaškrtnutá karta = záložka je v nabídce. Zaškrtnutí ji přidá na konec nabídky; odškrtnutí ji skryje (zkratka se skryje, nesmaže). ¦ Ett markerat kort = fliken finns i menyn. Att markera lägger till den sist i menyn; att avmarkera döljer den (en genväg döljs, raderas inte). ¦ Et markeret kort = fanen er i menuen. At markere tilføjer den sidst i menuen; at fravælge skjuler den (en genvej skjules, slettes ikke).
+↗ Faire un onglet à moi (Éditeur d’onglets) ¦ ↗ Udělat vlastní záložku (Editor záložek) ¦ ↗ Gör en egen flik (Flikredigerare) ¦ ↗ Lav min egen fane (Faneeditor)
+MENU ¦ NABÍDKA ¦ MENY ¦ MENU
+＋ Ajouter un onglet ¦ ＋ Přidat záložku ¦ ＋ Lägg till en flik ¦ ＋ Tilføj en fane
+Ajouter un onglet ¦ Přidat záložku ¦ Lägg till en flik ¦ Tilføj en fane
+＋ Ajouter un onglet… ¦ ＋ Přidat záložku… ¦ ＋ Lägg till en flik… ¦ ＋ Tilføj en fane…
+Montrer le ＋ au bout du menu ¦ Zobrazit ＋ na konci nabídky ¦ Visa ＋ sist i menyn ¦ Vis ＋ sidst i menuen
+Retirer ce raccourci du menu (un onglet de l’app ne se retire pas : il se cache) ¦ Odebrat tuto zkratku z nabídky (záložka aplikace se neodebírá: skryje se) ¦ Ta bort den här genvägen från menyn (en flik i appen tas inte bort: den döljs) ¦ Fjern denne genvej fra menuen (en fane i appen fjernes ikke: den skjules)
+Onglet « {name} » retiré du menu ¦ Záložka „{name}“ odebrána z nabídky ¦ Fliken ”{name}” borttagen från menyn ¦ Fanen »{name}« fjernet fra menuen
+Le ＋ est au bout du menu ¦ ＋ je na konci nabídky ¦ ＋ finns sist i menyn ¦ ＋ er sidst i menuen
+Le ＋ n’est plus au bout du menu ¦ ＋ už není na konci nabídky ¦ ＋ finns inte längre sist i menyn ¦ ＋ er ikke længere sidst i menuen
+Recherches : {what} ¦ Pátrání: {what} ¦ Efterforskningar: {what} ¦ Undersøgelser: {what}
+Recherches ¦ Pátrání ¦ Efterforskningar ¦ Undersøgelser
+Acte de décès de {name} en main ¦ Úmrtní list {name} v ruce ¦ Dödsbevis för {name} i handen ¦ Dødsattest for {name} i hånden
+Acte de décès de {name} pas en main ¦ Úmrtní list {name} chybí ¦ Dödsbevis för {name} saknas ¦ Dødsattest for {name} mangler
+demandé, pas encore reçu ¦ vyžádáno, zatím nedošlo ¦ begärt, inte mottaget än ¦ bestilt, ikke modtaget endnu
+Arbre de dévolution complet ¦ Strom dědické posloupnosti úplný ¦ Arvsföljdsträdet komplett ¦ Arvefølgetræet fuldstændigt
+Aucune branche à chercher. ¦ Žádná větev k hledání. ¦ Ingen gren att söka. ¦ Ingen gren at søge.
+Branches encore à chercher : {n} ¦ Větve, které je třeba ještě hledat: {n} ¦ Grenar kvar att söka: {n} ¦ Grene der stadig skal søges: {n}
+Héritiers dont l’existence n’est pas établie : {n} ¦ Dědicové, jejichž existence není prokázána: {n} ¦ Arvingar vars existens inte är fastställd: {n} ¦ Arvinger, hvis eksistens ikke er fastslået: {n}
+Liens prouvés par aucun acte : {n} ¦ Vazby nedoložené žádnou listinou: {n} ¦ Band som ingen handling bevisar: {n} ¦ Bånd som intet dokument beviser: {n}
+{what} (relie {who} au défunt) ¦ {what} (spojuje {who} se zesnulým) ¦ {what} (förbinder {who} med den avlidne) ¦ {what} (forbinder {who} med afdøde)
+Chaque lien est prouvé par un acte ¦ Každá vazba je doložena listinou ¦ Varje band bevisas av en handling ¦ Hvert bånd er bevist af et dokument
+Actes demandés, pas encore reçus : {n} ¦ Vyžádané listiny, zatím nedošlé: {n} ¦ Begärda handlingar, inte mottagna än: {n} ¦ Bestilte dokumenter, ikke modtaget endnu: {n}
+{what} · demandé le {d} ¦ {what} · vyžádáno {d} ¦ {what} · begärt {d} ¦ {what} · bestilt {d}
+(courrier n° {n}) ¦ (dopis č. {n}) ¦ (brev nr {n}) ¦ (brev nr. {n})
+Adresses des héritiers vivants : {n} sur {m} ¦ Adresy žijících dědiců: {n} z {m} ¦ Adresser till levande arvingar: {n} av {m} ¦ Adresser på levende arvinger: {n} af {m}
+Aucun héritier vivant à joindre ¦ Žádný žijící dědic ke kontaktu ¦ Ingen levande arvinge att nå ¦ Ingen levende arving at nå
+Contrats signés (ou refus noté) : {n} sur {m} ¦ Podepsané smlouvy (nebo zapsané odmítnutí): {n} z {m} ¦ Avtal undertecknade (eller avslag antecknat): {n} av {m} ¦ Aftaler underskrevet (eller afslag noteret): {n} af {m}
+Aucun contrat à faire signer ¦ Žádná smlouva k podpisu ¦ Inget avtal att få undertecknat ¦ Ingen aftale at få underskrevet
+Contrats pas encore signés : {n} ¦ Dosud nepodepsané smlouvy: {n} ¦ Avtal ännu inte undertecknade: {n} ¦ Aftaler endnu ikke underskrevet: {n}
+{name} a répondu « oui », pas de date de signature ¦ {name} odpověděl(a) „ano“, bez data podpisu ¦ {name} svarade ”ja”, inget datum för underskrift ¦ {name} svarede »ja«, ingen dato for underskrift
+Héritiers introuvables ou silencieux : {n} ¦ Nedohledatelní nebo neodpovídající dědicové: {n} ¦ Arvingar som inte går att hitta eller inte svarar: {n} ¦ Arvinger der ikke kan findes eller ikke svarer: {n}
+Parts : le total fait bien 1 ¦ Podíly: součet je opravdu 1 ¦ Andelar: summan blir verkligen 1 ¦ Andele: summen er netop 1
+Les parts ne totalisent pas 1 : à revoir ¦ Podíly nedávají 1: k revizi ¦ Andelarna blir inte 1: se över ¦ Andelene giver ikke 1: skal ses igen
+Échéances en retard : {n} ¦ Zpožděné lhůty: {n} ¦ Försenade tidsfrister: {n} ¦ Forsinkede frister: {n}
+Aucune échéance en retard ¦ Žádná zpožděná lhůta ¦ Ingen försenad tidsfrist ¦ Ingen forsinket frist
+Remis au notaire avec {miss} manque(s) et {warn} point(s) à revoir ({what}) ¦ Předáno notáři, chybí: {miss}, k revizi: {warn} ({what}) ¦ Överlämnat till notarien med saknade: {miss} och att se över: {warn} ({what}) ¦ Overdraget til notaren med mangler: {miss} og punkter at se igen: {warn} ({what})
+Madame ¦ Paní ¦ Fru ¦ Fru
+Monsieur ¦ Pan ¦ Herr ¦ Hr.
+Tes photos, actes, lettres de A à Z, rangés en dossiers. ¦ Tvé fotky, listiny, dopisy od A do Z, roztříděné do složek. ¦ Dina foton, handlingar, brev från A till Ö, ordnade i mappar. ¦ Dine fotos, dokumenter, breve fra A til Å, ordnet i mapper.
+Lettres à ouvrir plus tard, recettes, musée de famille. ¦ Dopisy k otevření později, recepty, rodinné muzeum. ¦ Brev att öppna senare, recept, familjemuseum. ¦ Breve til at åbne senere, opskrifter, familiemuseum.
+Fiches thématiques : un métier, une guerre, un village. ¦ Tematické karty: řemeslo, válka, vesnice. ¦ Temablad: ett yrke, ett krig, en by. ¦ Temakort: et erhverv, en krig, en landsby.
+Tes correspondances ADN et leurs liens. ¦ Tvé shody DNA a jejich vazby. ¦ Dina DNA-matchningar och deras band. ¦ Dine DNA-match og deres bånd.
+Les œuvres d’un artiste, albums, expositions. ¦ Díla umělce, alba, výstavy. ¦ En konstnärs verk, album, utställningar. ¦ En kunstners værker, album, udstillinger.
+Pedigree, portées. (Suivi des animaux : à part.) ¦ Rodokmen, vrhy. (Sledování zvířat: zvlášť.) ¦ Stamtavla, kullar. (Uppföljning av djur: separat.) ¦ Stamtavle, kuld. (Opfølgning af dyr: for sig.)
+Baguage, puces, observations, trajets. ¦ Kroužkování, čipy, pozorování, trasy. ¦ Ringmärkning, chip, observationer, färdvägar. ¦ Ringmærkning, chips, observationer, ruter.
+Dossiers de succession, pour un notaire. ¦ Dědické spisy, pro notáře. ¦ Arvsärenden, för en notarie. ¦ Dødsbosager, til en notar.
+Le Registre de courriers : demandes d’actes, relances, réponses. ¦ Evidence korespondence: žádosti o listiny, urgence, odpovědi. ¦ Brevregistret: begäran om handlingar, påminnelser, svar. ¦ Brevregistret: anmodninger om dokumenter, rykkere, svar.
+Listes → Archives et sources → Registre de courriers ¦ Seznamy → Archivy a prameny → Evidence korespondence ¦ Listor → Arkiv och källor → Brevregister ¦ Lister → Arkiver og kilder → Brevregister
+Tes actes recopiés, mot à mot. ¦ Tvé opsané listiny, slovo od slova. ¦ Dina avskrivna handlingar, ord för ord. ¦ Dine afskrevne dokumenter, ord for ord.
+Listes → Archives et sources ¦ Seznamy → Archivy a prameny ¦ Listor → Arkiv och källor ¦ Lister → Arkiver og kilder
+Visites, rendez-vous, relances, à la semaine. ¦ Návštěvy, schůzky, urgence, po týdnech. ¦ Besök, möten, påminnelser, vecka för vecka. ¦ Besøg, aftaler, rykkere, uge for uge.
+Listes → Recherche et organisation ¦ Seznamy → Výzkum a organizace ¦ Listor → Forskning och organisation ¦ Lister → Forskning og organisering
+Les choses à faire, avec leur date. ¦ Věci k vyřízení, s datem. ¦ Saker att göra, med datum. ¦ Ting der skal gøres, med dato.
+Toutes les images, sons, vidéos en tableau. ¦ Všechny obrázky, zvuky, videa v tabulce. ¦ Alla bilder, ljud, videor i en tabell. ¦ Alle billeder, lyde, videoer i en tabel.
+Listes → Médias et documents ¦ Seznamy → Média a dokumenty ¦ Listor → Media och dokument ¦ Lister → Medier og dokumenter
+Questionnaires pour recueillir les souvenirs. ¦ Dotazníky ke sběru vzpomínek. ¦ Frågeformulär för att samla minnen. ¦ Spørgeskemaer til at samle minder.
+Les maisons, pièce par pièce, et qui y a vécu. ¦ Domy, místnost po místnosti, a kdo v nich žil. ¦ Husen, rum för rum, och vem som bodde där. ¦ Husene, rum for rum, og hvem der boede der.
+Listes → Lieux et maisons ¦ Seznamy → Místa a domy ¦ Listor → Platser och hus ¦ Lister → Steder og huse
+Adresses et contacts des cousins vivants. ¦ Adresy a kontakty žijících bratranců a sestřenic. ¦ Adresser och kontakter till levande kusiner. ¦ Adresser og kontakter til levende fætre og kusiner.
+Listes → Personnes et familles ¦ Seznamy → Osoby a rodiny ¦ Listor → Personer och familjer ¦ Lister → Personer og familier
+Les dépôts, leurs cotes, leurs horaires. ¦ Archivy, jejich signatury, otevírací doby. ¦ Arkiven, deras signum, deras öppettider. ¦ Arkiverne, deres signaturer, deres åbningstider.
+Le planificateur : quoi consulter, où, quand. ¦ Plánovač: co prohlédnout, kde, kdy. ¦ Planeraren: vad som ska ses, var, när. ¦ Planlæggeren: hvad der skal ses, hvor, hvornår.
+Qui a hérité de quoi d’après les actes anciens. ¦ Kdo co zdědil podle starých listin. ¦ Vem som ärvde vad enligt gamla handlingar. ¦ Hvem der arvede hvad ifølge gamle dokumenter.
+Les bons sites pour la personne ouverte. ¦ Správné weby pro otevřenou osobu. ¦ Rätt webbplatser för den öppna personen. ¦ De rette websteder for den åbne person.
+Recherche → Type de recherche ¦ Hledání → Druh hledání ¦ Sök → Typ av sökning ¦ Søgning → Søgetype
+Trouver et fusionner les fiches en double. ¦ Najít a sloučit zdvojené záznamy. ¦ Hitta och slå ihop dubbletter. ¦ Find og flet dubletter.
+Réglages → Fusion de doublons ¦ Nastavení → Slučování duplicit ¦ Inställningar → Sammanslagning av dubbletter ¦ Indstillinger → Fletning af dubletter
+Dates impossibles, liens bizarres. ¦ Nemožná data, podivné vazby. ¦ Omöjliga datum, konstiga band. ¦ Umulige datoer, mærkelige bånd.
+Réglages → Contrôle de la base ¦ Nastavení → Kontrola databáze ¦ Inställningar → Kontroll av databasen ¦ Indstillinger → Kontrol af databasen
+Le nom étudié ¦ Zkoumané příjmení ¦ Det studerade namnet ¦ Det undersøgte navn
+Les porteurs d’un nom, ses variantes. ¦ Nositelé příjmení, jeho varianty. ¦ Bärarna av ett namn, dess varianter. ¦ Bærerne af et navn, dets varianter.
+Graphiques → statistique des noms ¦ Grafy → statistika příjmení ¦ Diagram → namnstatistik ¦ Diagrammer → navnestatistik
+L’entreprise ¦ Podnik ¦ Företaget ¦ Virksomheden
+Employeurs, salariés, membres. ¦ Zaměstnavatelé, zaměstnanci, členové. ¦ Arbetsgivare, anställda, medlemmar. ¦ Arbejdsgivere, ansatte, medlemmer.
+Listes → Employeurs ¦ Seznamy → Zaměstnavatelé ¦ Listor → Arbetsgivare ¦ Lister → Arbejdsgivere
+Des parties de l’app, cachées au départ ¦ Části aplikace, na začátku skryté ¦ Delar av appen, dolda från början ¦ Dele af appen, skjult i starten
+Elles existent déjà : cocher les montre dans le menu. ¦ Už existují: zaškrtnutí je zobrazí v nabídce. ¦ De finns redan: att markera visar dem i menyn. ¦ De findes allerede: at markere viser dem i menuen.
+Un raccourci vers une liste ¦ Zkratka k seznamu ¦ En genväg till en lista ¦ En genvej til en liste
+Il devient un « onglet à soi » (Éditeur d’onglets). ¦ Stane se „vlastní záložkou“ (Editor záložek). ¦ Den blir en ”egen flik” (Flikredigerare). ¦ Den bliver en »egen fane« (Faneeditor).
+Un raccourci vers un outil ¦ Zkratka k nástroji ¦ En genväg till ett verktyg ¦ En genvej til et værktøj
+Chaîne par héritier ¦ Řetěz každého dědice ¦ Kedja för varje arvinge ¦ Kæde for hver arving
+✉️ Contactés ¦ ✉️ Kontaktovaní ¦ ✉️ Kontaktade ¦ ✉️ Kontaktede
+📇 Répertoire des vivants ¦ 📇 Adresář žijících ¦ 📇 Register över levande ¦ 📇 Register over levende
+Échéances du jour (usage successoral seulement) ¦ Dnešní lhůty (jen použití pro dědická řízení) ¦ Dagens tidsfrister (endast användning för arvsutredning) ¦ Dagens frister (kun brug til arveudredning)
+Ce dossier est clos : rien ne s’y note. ¦ Tento spis je uzavřený: nic se do něj nezapisuje. ¦ Det här ärendet är avslutat: inget antecknas i det. ¦ Denne sag er lukket: der noteres intet i den.
+Donne un nom au modèle. ¦ Pojmenuj šablonu. ¦ Ge mallen ett namn. ¦ Giv skabelonen et navn.
+Trop de lettres d’un coup (60 au plus). ¦ Příliš mnoho dopisů najednou (nejvýš 60). ¦ För många brev på en gång (högst 60). ¦ For mange breve på én gang (højst 60).
+Échéances du jour ¦ Dnešní lhůty ¦ Dagens tidsfrister ¦ Dagens frister

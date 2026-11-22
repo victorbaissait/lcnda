@@ -6,6 +6,8 @@ declare(strict_types=1);
  * ses médias et les fichiers de développement ne quittent jamais ce dossier.
  */
 require __DIR__ . '/lib/bootstrap.php';
+// 🔐 généalogie verrouillée (lib/verrou.php) : l'archive ne contient pas les données, mais rien ne se fait sans la séance ouverte
+if (glock_request_blocked()) { http_response_code(423); header('Content-Type: text/plain; charset=utf-8'); exit('Généalogie verrouillée.'); }
 
 if (!class_exists('ZipArchive')) {
     http_response_code(500);

@@ -1,0 +1,975 @@
+fr ¦ ro
+# Zone « successoral » : ⚖️ généalogiste successoral, dossiers de succession, dévolution (heritage-successoral*.js, lib/successoral.php)
+Les dossiers de succession ne se montrent pas en mode consultation ni en mode simple. ¦ Dosarele de succesiune nu sunt afișate în modul consultare sau în modul simplu.
+Successions ¦ Succesiuni
+Listes · Recherche et organisation ¦ Liste · Cercetare și organizare
+Dossiers de succession ¦ Dosare de succesiune
+Retrouver les héritiers d’une personne décédée, pour un notaire : un dossier par défunt. À ne pas confondre avec « 🏠 Héritages et successions » (les actes anciens des ancêtres). ¦ Găsirea moștenitorilor unei persoane decedate, pentru un notar: un dosar pentru fiecare defunct. A nu se confunda cu „🏠 Moșteniri și succesiuni” (actele vechi ale strămoșilor).
+＋ Ouvrir un dossier ¦ ＋ Deschide un dosar
+Lecture des dossiers… ¦ Se citesc dosarele…
+Aucun dossier de succession pour l’instant ¦ Încă niciun dosar de succesiune
+Choisis la personne décédée : l’app part des fiches de la base pour trouver ses héritiers, selon le Code civil d’aujourd’hui. ¦ Alege persoana decedată: aplicația pornește de la fișele din bază pentru a-i găsi moștenitorii, după Codul civil francez actual.
+Chercher… (ex. MAZAUD, 2026-014, ROUSSILHE) ¦ Caută… (ex. MAZAUD, 2026-014, ROUSSILHE)
+Prochaine échéance ¦ Următorul termen
+A → Z ¦ A → Z
+Dossier n° {n} ¦ Dosarul nr. {n}
+Prochaine échéance : {d} — {l} ¦ Următorul termen: {d} — {l}
+Échéance passée ¦ Termen depășit
+✎ Modifier ¦ ✎ Modifică
+Aucun dossier ne correspond. ¦ Niciun dosar nu corespunde.
+Pas en mode consultation ni en mode simple. ¦ Nu în modul consultare sau în modul simplu.
+⚖️ DOSSIER DE SUCCESSION ¦ ⚖️ DOSAR DE SUCCESIUNE
+Ouvrir un dossier ¦ Deschide un dosar
+Ouvrir le dossier ¦ Deschide dosarul
+N° de dossier ¦ Nr. dosar
+fait tout seul : 2026-014 ¦ automat: 2026-014
+reprise de la fiche ¦ preluată din fișă
+Dernier domicile ¦ Ultimul domiciliu
+Notaire mandant (fiche ou nom) ¦ Notarul mandant (fișă sau nume)
+Réf. du notaire ¦ Ref. notarului
+Ouvert le ¦ Deschis la
+Testament ¦ Testament
+Aucun connu (le notaire interroge le fichier des dernières volontés) ¦ Niciunul cunoscut (notarul consultă registrul testamentelor)
+Situation (notes) ¦ Situație (note)
+🔒 Le dossier reste dans l’app : les héritiers vivants, leurs adresses et leurs parts ne sont dans aucun export. Aucun montant n’est noté. ¦ 🔒 Dosarul rămâne în aplicație: moștenitorii în viață, adresele și cotele lor nu apar în niciun export. Nu se notează nicio sumă.
+Choisis la personne décédée. ¦ Alege persoana decedată.
+Dossier enregistré ¦ Dosar salvat
+Dossier supprimé ¦ Dosar șters
+Lecture du dossier… ¦ Se citește dosarul…
+← Tous les dossiers ¦ ← Toate dosarele
+Dossier n° {n} · {t} ¦ Dosarul nr. {n} · {t}
+Listes · Dossiers de succession ¦ Liste · Dosare de succesiune
+↗ Fiche du défunt ¦ ↗ Fișa defunctului
+🗄 Archiver le dossier clos ¦ 🗄 Arhivează dosarul închis
+Dossier archivé : les adresses des vivants ont été retirées, le journal reste. ¦ Dosar arhivat: adresele celor în viață au fost șterse, jurnalul rămâne.
+État du dossier ¦ Starea dosarului
+Le défunt n’est plus dans la base. ¦ Defunctul nu mai este în bază.
+Pas de conjoint dans la base ¦ Niciun soț în bază
+A des descendants ¦ Are descendenți
+Sans descendant dans la base ¦ Niciun descendent în bază
+Le défunt ¦ Defunctul
+fiche n° {n} ¦ fișa nr. {n}
+Le mandat ¦ Mandatul
+Droit actuel (décès après le 1er janvier 2007) ¦ Dreptul actual (deces după 1 ianuarie 2007)
+Échéances ¦ Termene
+＋ Échéance ¦ ＋ Termen
+Dans {n} j ¦ În {n} z
+Aucune échéance. ¦ Niciun termen.
+Aussi dans 🗓 Ma semaine de recherche. ¦ Și în 🗓 Săptămâna mea de cercetare.
+📑 Pièces ¦ 📑 Acte doveditoare
+🖨 Tableau pour le notaire ¦ 🖨 Tabel pentru notar
+de son chef ¦ în nume propriu
+représenté ¦ reprezentat
+sans descendance connue ¦ fără descendenți cunoscuți
+degré plus éloigné ¦ grad mai îndepărtat
+pas de représentation ¦ fără reprezentare
+pas encore conçu ¦ încă neconceput
+écarté ¦ înlăturat
+par représentation ¦ prin reprezentare
+de son chef, s’il vit ¦ în nume propriu, dacă trăiește
+Retenu ¦ Chemat
+Écarté par le conjoint ¦ Înlăturat de soț
+Écarté ¦ Înlăturat
+{name} : {share} (art. {art}). ¦ {name}: {share} (art. {art}).
+Ou, à son choix, l’usufruit de la totalité (art. 757) : les descendants ont alors la nue-propriété, dans les mêmes proportions. ¦ Sau, la alegere, uzufructul întregii moșteniri (art. 757): descendenții au atunci nuda proprietate, în aceleași proporții.
+Aucun conjoint dans la base. ¦ Niciun soț în bază.
+S’il y avait un conjoint, l’app afficherait ici ses droits (art. 757 à 757-2) avant les ordres. ¦ Dacă ar exista un soț, aplicația i-ar arăta aici drepturile (art. 757 la 757-2) înaintea claselor.
+{n}e ¦ {n}
+adresse ? ¦ adresă?
+Statut retenu dans ce dossier ¦ Starea reținută în acest dosar
+Autre hypothèse ¦ Altă ipoteză
+total {t} ¦ total {t}
+personne : il reste des branches à chercher. ¦ nimeni: mai sunt ramuri de căutat.
+Part en jeu : {s} ¦ Cota în joc: {s}
+🔍 Chercher ¦ 🔍 Caută
+🌍 Héritier à l’étranger ¦ 🌍 Moștenitor în străinătate
+❔ Absent ou disparu ¦ ❔ Absent sau dispărut
+📇 Compléter ¦ 📇 Completează
+Type d’adoption ¦ Tipul adopției
+Type d’adoption ? ¦ Tipul adopției?
+Plénière ¦ Deplină
+Marié ? ¦ Căsătorit?
+Pas marié (PACS, union libre) ¦ Necăsătorit (PACS, concubinaj)
+Divorcé ¦ Divorțat
+Aucune branche à chercher d’après les fiches. ¦ După fișe, nicio ramură de căutat.
+{n}e degré ¦ gradul {n}
+Calcul indicatif, à faire vérifier par le notaire. Il suit le Code civil en vigueur (art. 731 et suivants), sans testament, sans donation, sans renonciation connue. Il ne tient pas compte du droit de retour légal (art. 738-2, 757-3), des biens à l’étranger ni d’un régime matrimonial. ¦ Calcul orientativ, de verificat de notar. Urmează Codul civil francez în vigoare (art. 731 și următoarele), fără testament, fără donație, fără renunțare cunoscută. Nu ține seama de dreptul legal de întoarcere (art. 738-2, 757-3), de bunurile din străinătate sau de regimul matrimonial.
+Le conjoint survivant ¦ Soțul supraviețuitor
+Les ordres d’héritiers (art. 734) : le premier qui a quelqu’un prend tout ¦ Clasele de moștenitori (art. 734): prima în care există cineva ia totul
+Les héritiers trouvés ¦ Moștenitorii găsiți
+🗂 Tables des successions (AD)… ¦ 🗂 Registrele succesiunilor (arhive)…
+Lien avec le défunt ¦ Legătura cu defunctul
+Vient ¦ Vine
+Part ¦ Cotă
+Statut retenu ¦ Starea reținută
+↔ Faire glisser le tableau pour voir les parts. ¦ ↔ Glisează tabelul pentru a vedea cotele.
+Aucun héritier trouvé jusqu’au 6e degré : sans testament, la succession reviendrait à l’État (art. 539 et 768). Il reste sans doute des branches à chercher. ¦ Niciun moștenitor găsit până la gradul 6: fără testament, moștenirea ar reveni statului (art. 539 și 768). Probabil mai sunt ramuri de căutat.
+Les calculs restent tant que la branche n’est pas tranchée. ¦ Calculele rămân cât timp ramura nu este lămurită.
+Les branches à chercher ¦ Ramurile de căutat
+L’hypothèse retenue ¦ Ipoteza reținută
+Ex. : André MAZAUD décédé à Lyon en 1990 sans enfant (acte reçu le 5 déc.). ¦ Ex.: André MAZAUD decedat la Lyon în 1990 fără copii (act primit la 5 dec.).
+Demandée avant « Remis au notaire » si un héritier reste inconnu. ¦ Cerută înainte de „Predat notarului” dacă un moștenitor rămâne necunoscut.
+Les degrés civils (art. 741-743) : on compte les générations jusqu’à l’ancêtre commun, puis on redescend ¦ Gradele de rudenie (art. 741-743): se numără generațiile până la strămoșul comun, apoi se coboară
+LE DÉFUNT ¦ DEFUNCTUL
+à retrouver ¦ de găsit
+sans descend. ¦ fără desc.
+Héritier vivant, sa part ¦ Moștenitor în viață, cota sa
+Prédécédé, sa souche ¦ Predecedat, tulpina sa
+Branche à chercher ¦ Ramură de căutat
+Arbre de dévolution ¦ Arborele devoluțiunii
+Le défunt au centre, chaque héritier avec sa part ¦ Defunctul în centru, fiecare moștenitor cu cota sa
+⤓ SVG ¦ ⤓ SVG
+↔ Faire glisser le dessin. ¦ ↔ Glisează desenul.
+Clic sur une case : la fiche ; clic droit : « 🛡 Solidité de ce lien ». Le dessin suit les fiches. ¦ Clic pe o casetă: fișa; clic dreapta: „🛡 Soliditatea acestei legături”. Desenul urmează fișele.
+le {d} ¦ la {d}
+État de la pièce ¦ Starea actului
+D’après la fiche ¦ După fișă
+{n} en main ¦ {n} în mână
+{n} demandés ¦ {n} cerute
+Par héritier ¦ Pe moștenitor
+Par acte ¦ Pe act
+Ce qu’il faut prouver ¦ Ce trebuie dovedit
+↔ Faire glisser le tableau. ¦ ↔ Glisează tabelul.
+Rangée dans le Registre de courriers, une demande d’acte met la pièce à « Demandé » ; l’acte attaché à la fiche la met à « En main ». ¦ Salvată în Registrul de corespondență, o cerere de act trece actul la „Cerut”; actul atașat fișei îl trece la „În mână”.
+Je suis mandaté(e) par {notary}, notaire, pour établir la dévolution de la succession de {name} (dossier {n}, réf. {ref}). ¦ Sunt mandatat(ă) de {notary}, notar, să stabilesc devoluțiunea succesiunii lui {name} (dosar {n}, ref. {ref}).
+À retrouver ¦ De găsit
+Adresse ? ¦ Adresă?
+Signé le ¦ Semnat la
+À signer ¦ De semnat
+✉️ Écrire ¦ ✉️ Scrie
+Contrat de révélation, réponses, signatures ¦ Contract de revelare, răspunsuri, semnături
+📝 Contrat de révélation ¦ 📝 Contract de revelare
+✉️ Lettre de premier contact ¦ ✉️ Scrisoare de prim contact
+Héritier ¦ Moștenitor
+Courrier ¦ Scrisoare
+Contrat ¦ Contract
+📝 Le contrat ne nomme pas le défunt avant signature. Écris toi-même le pourcentage d’honoraires et la date limite. Rien n’est envoyé par l’app. ¦ 📝 Contractul nu numește defunctul înainte de semnare. Scrie tu procentul onorariului și data limită. Aplicația nu trimite nimic.
+Chaque courrier va dans le Registre de courriers, avec sa relance. ¦ Fiecare scrisoare merge în Registrul de corespondență, cu reamintirea ei.
+↗ Registre de courriers ¦ ↗ Registrul de corespondență
+Madame, Monsieur, ¦ Stimată doamnă, stimate domn,
+Généalogiste successoral, je suis chargé(e) par une étude notariale de retrouver les héritiers d’une personne décédée. Mes recherches me laissent penser que vous pourriez faire partie de sa famille. ¦ În calitate de genealogist succesoral, am fost însărcinat(ă) de un birou notarial să găsesc moștenitorii unei persoane decedate. Cercetările mele mă fac să cred că ați putea face parte din familia sa.
+Pour le vérifier, pourriez-vous me confirmer votre date et votre lieu de naissance, ainsi que les noms de vos parents ? Vous pouvez me répondre par courrier, par téléphone ou par courriel. ¦ Pentru a verifica, ați putea să-mi confirmați data și locul nașterii, precum și numele părinților dumneavoastră? Puteți răspunde prin poștă, telefon sau e-mail.
+Cette démarche ne vous engage à rien. ¦ Acest demers nu vă obligă la nimic.
+Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées. ¦ Cu stimă,
+CONTRAT DE RÉVÉLATION DE SUCCESSION ¦ CONTRACT DE REVELARE A SUCCESIUNII
+Entre {heir}, ci-après « l’héritier », et {sender}, généalogiste successoral. ¦ Între {heir}, numit în continuare „moștenitorul”, și {sender}, genealogist succesoral.
+Le généalogiste a découvert une succession en cours dans laquelle l’héritier pourrait avoir des droits. Il s’engage à lui en révéler l’origine (le nom de la personne décédée, l’étude notariale chargée du règlement) dès la signature du présent contrat, et à réunir les actes qui prouvent sa qualité d’héritier. ¦ Genealogistul a descoperit o succesiune în curs în care moștenitorul ar putea avea drepturi. Se angajează să-i dezvăluie originea ei (numele persoanei decedate, biroul notarial însărcinat) la semnarea prezentului contract și să reunească actele care dovedesc calitatea sa de moștenitor.
+En contrepartie, l’héritier s’engage à verser au généalogiste des honoraires de ____ % (hors taxes) de l’actif net qui lui reviendra, payables seulement s’il reçoit effectivement une part de la succession. Les frais de recherche sont compris. ¦ În schimb, moștenitorul se angajează să plătească genealogistului un onorariu de ____ % (fără taxe) din activul net ce îi va reveni, datorat numai dacă primește efectiv o cotă din succesiune. Cheltuielile de cercetare sunt incluse.
+Cette proposition est valable jusqu’au ____________. ¦ Această propunere este valabilă până la ____________.
+Fait en deux exemplaires, à ____________, le ____________. ¦ Încheiat în două exemplare, la ____________, la data de ____________.
+L’héritier (« Lu et approuvé », signature) — Le généalogiste ¦ Moștenitorul („Citit și aprobat”, semnătură) — Genealogistul
+Je me permets de revenir vers vous au sujet de mon courrier du {sent}, resté sans réponse. Une succession en cours pourrait vous concerner : pourriez-vous me contacter ? ¦ Revin la scrisoarea mea din {sent}, rămasă fără răspuns. O succesiune în curs v-ar putea privi: m-ați putea contacta?
+✉️ HÉRITIERS CONTACTÉS ¦ ✉️ MOȘTENITORI CONTACTAȚI
+Relance ¦ Reamintire
+📋 Ranger dans le Registre de courriers ¦ 📋 Salvează în Registrul de corespondență
+pas d’adresse dans le Répertoire des vivants ¦ nicio adresă în Agenda celor în viață
+Premier contact ¦ Prim contact
+Contrat de révélation ¦ Contract de revelare
+Relance dans (jours) ¦ Reamintire peste (zile)
+Le nom du défunt n’est pas écrit : il est révélé après la signature. ¦ Numele defunctului nu este scris: este dezvăluit după semnare.
+La lettre (tu peux la retoucher ; le nom de chaque héritier est mis tout seul) ¦ Scrisoarea (o poți retușa; numele fiecărui moștenitor se pune singur)
+📝 Traitement de texte ¦ 📝 Procesor de text
+Coche au moins un héritier. ¦ Bifează cel puțin un moștenitor.
+Courriers aux héritiers ¦ Scrisori către moștenitori
+Recherche d’héritiers ¦ Căutare de moștenitori
+Ton logiciel de courriel s’ouvre : relis la lettre et envoie-la toi-même. Rien n’est envoyé par l’app. ¦ Se deschide programul de e-mail: recitește scrisoarea și trimite-o tu. Aplicația nu trimite nimic.
+Premier contact + contrat ¦ Prim contact + contract
+{n} rangés dans le Registre de courriers ¦ {n} salvate în Registrul de corespondență
+N. ¦ N.
+D. ¦ D.
+M. ¦ C.
+Div. ¦ Div.
+Ren. ¦ Ren.
+(à fournir) ¦ (de furnizat)
+repr. {who} ¦ repr. {who}
+existence à ce jour non établie ¦ existență nestabilită până azi
+TABLEAU GÉNÉALOGIQUE ¦ TABEL GENEALOGIC
+Succession de {name}, décédé(e) à {place} le {date} ¦ Succesiunea lui {name}, decedat(ă) la {place} la {date}
+Dossier {n} · Réf. notaire {ref} ¦ Dosarul {n} · Ref. notar {ref}
+Calcul établi d’après les actes cités, art. 731 et suiv. du Code civil, sous réserve de vérification par le notaire. N. = naissance, M. = mariage, D. = décès. ¦ Calcul făcut după actele citate, art. 731 și urm. din Codul civil francez, sub rezerva verificării de către notar. N. = naștere, C. = căsătorie, D. = deces.
+Communs à tous : {list}. ¦ Comune tuturor: {list}.
+Hypothèse retenue : {h} ¦ Ipoteza reținută: {h}
+à préciser ¦ de precizat
+Liste des pièces ¦ Lista actelor
+Page {n} / 3 ¦ Pagina {n} / 3
+Un PDF sobre, une source pour chaque lien ¦ Un PDF sobru, o sursă pentru fiecare legătură
+📝 Ouvrir dans le traitement de texte ¦ 📝 Deschide în procesorul de text
+Joindre les adresses des héritiers ¦ Atașează adresele moștenitorilor
+Aucune photo ni note privée : les noms, les qualités, les parts et les sources. Pas d’adresse sauf si la case est cochée. ¦ Nicio fotografie, nicio notă privată: nume, calități, cote și surse. Nicio adresă dacă nu este bifată căsuța.
+Tableau généalogique — {n} ¦ Tabel genealogic — {n}
+Tableau pour le notaire : PDF ou impression (3 pages) ¦ Tabel pentru notar: PDF sau tipărire (3 pagini)
+Tableau pour le notaire : ouvert dans le traitement de texte ¦ Tabel pentru notar: deschis în procesorul de text
+Tableau pour le notaire : copie rangée dans les médias ¦ Tabel pentru notar: copie salvată în media
+🕓 Journal du dossier {n} ¦ 🕓 Jurnalul dosarului {n}
+(on ne peut ni le modifier ni l’effacer) ¦ (nu poate fi modificat sau șters)
+⤓ Exporter le journal (CSV) ¦ ⤓ Exportă jurnalul (CSV)
+Les changements des fiches restent dans Réglages → Journal des modifications. ¦ Modificările fișelor rămân și în Setări → Jurnalul modificărilor.
+Action ¦ Acțiune
+Journal exporté (CSV) ¦ Jurnal exportat (CSV)
+Le temps passé, les frais, les honoraires des contrats ¦ Timpul petrecut, cheltuielile, onorariile contractelor
+＋ Temps ¦ ＋ Timp
+＋ Frais ¦ ＋ Cheltuieli
+＋ Honoraires d’un contrat ¦ ＋ Onorariul unui contract
+🖨 Relevé ¦ 🖨 Situație
+{h} h {m} min passées ¦ {h} h {m} min petrecute
+Frais : {s} ¦ Cheltuieli: {s}
+{n} contrats ¦ Contracte: {n}
+{h} h {m} min ¦ {h} h {m} min
+Rien de noté. ¦ Nimic notat.
+Aucun montant de succession n’est noté. ¦ Nu se notează nicio sumă a succesiunii.
+💶 TEMPS ET FRAIS ¦ 💶 TIMP ȘI CHELTUIELI
+Copie d’acte, déplacement… ¦ Copie de act, deplasare…
+Recherches aux AD, appels… ¦ Cercetări în arhive, apeluri…
+Contrat signé ¦ Contract semnat
+Heures ¦ Ore
+Minutes ¦ Minute
+Montant (€) ¦ Sumă (€)
+🌍 HÉRITIER À L’ÉTRANGER ¦ 🌍 MOȘTENITOR ÎN STRĂINĂTATE
+Chercher {name} hors de France ¦ Caută-l pe {name} în afara Franței
+Les services à interroger ¦ Serviciile de întrebat
+📮 Demander l’acte au Service central d’état civil ¦ 📮 Cere actul de la Serviciul central de stare civilă
+Langue de la lettre ¦ Limba scrisorii
+Destinataire ¦ Destinatar
+Registro civil de …, consulat de France à … ¦ Registro civil de …, consulatul Franței la …
+La lettre (dans la langue du pays) ¦ Scrisoarea (în limba țării)
+Lettre à l’étranger ¦ Scrisoare în străinătate
+Recherche d’un héritier à l’étranger : {name} ¦ Căutarea unui moștenitor în străinătate: {name}
+Courrier rangé dans le Registre de courriers ¦ Scrisoare salvată în Registrul de corespondență
+❔ ABSENTS ET DISPARUS ¦ ❔ ABSENȚI ȘI DISPĂRUȚI
+{name} : absent ou disparu ? ¦ {name}: absent sau dispărut?
+art. {a} ¦ art. {a}
+Le calcul lit ce statut : un présumé absent est compté vivant, sa part est « réservée » ; un déclaré absent est compté comme mort avant. ¦ Calculul citește această stare: un prezumat absent este socotit în viață, cota sa este „rezervată”; un declarat absent este socotit decedat înainte.
+Présumé absent ¦ Prezumat absent
+Déclaré absent ou jugement de décès ¦ Declarat absent sau hotărâre declarativă de deces
+{name} : statut retenu changé, dévolution recalculée ¦ {name}: starea reținută schimbată, devoluțiune recalculată
+Héritier à retrouver : {name}{born} — vivant ? décédé ? des enfants ? (dossier de succession {n}) ¦ Moștenitor de găsit: {name}{born} — în viață? decedat? copii? (dosar de succesiune {n})
+(né en {y}) ¦ (născut în {y})
+Descendance de {name} (mort avant le défunt) : un enfant reconnu ou naturel ? (dossier de succession {n}) ¦ Descendenții lui {name} (decedat înaintea defunctului): un copil recunoscut sau din afara căsătoriei? (dosar de succesiune {n})
+Branche à chercher autour de {name} (dossier de succession {n}) ¦ Ramură de căutat în jurul lui {name} (dosar de succesiune {n})
+Piste ouverte dans le Journal des recherches : {name} ¦ Pistă deschisă în Jurnalul cercetărilor: {name}
+Piste ajoutée : Recherche → 🗓 Journal des recherches ¦ Pistă adăugată: Cercetare → 🗓 Jurnalul cercetărilor
+🗂 TABLES DES SUCCESSIONS DES AD ¦ 🗂 REGISTRELE SUCCESIUNILOR DIN ARHIVE
+Dépouiller les tables de successions et absences ¦ Parcurge registrele succesiunilor și absențelor
+Ajouter au suivi ¦ Adaugă la urmărire
+Les tables de successions et absences et les mutations par décès (série Q des Archives départementales) donnent la date et le bureau de chaque succession. Coche les personnes à chercher : une ligne « à faire » chacune. ¦ Registrele succesiunilor și absențelor și registrele transmisiunilor prin deces (seria Q a arhivelor departamentale) dau data și biroul fiecărei succesiuni. Bifează persoanele de căutat: câte un rând „de făcut” pentru fiecare.
+Coche au moins une personne. ¦ Bifează cel puțin o persoană.
+Tables des successions et absences, mutations par décès (série Q) : {name}{d} ¦ Registrele succesiunilor și absențelor, transmisiuni prin deces (seria Q): {name}{d}
+Tables des successions : {n} à dépouiller ¦ Registrele succesiunilor: {n} de parcurs
+{n} ajoutés aux dépouillements ¦ {n} adăugate la extrase
+État : {s} ¦ Stare: {s}
+📋 LISTE DE CONTRÔLE ¦ 📋 LISTĂ DE VERIFICARE
+Avant « Remis au notaire » ¦ Înainte de „Predat notarului”
+Remis au notaire ¦ Predat notarului
+Remettre quand même ¦ Predă oricum
+Tout n’est pas prêt : corrige d’abord, ou remets quand même (ce sera noté au journal). ¦ Nu totul e gata: corectează mai întâi sau predă oricum (se va nota în jurnal).
+Les adresses des vivants seront retirées du dossier et de ses courriers. Le journal reste. Continuer ? ¦ Adresele celor în viață vor fi șterse din dosar și din scrisorile sale. Jurnalul rămâne. Continui?
+Archiver ¦ Arhivează
+Dossier archivé. ¦ Dosar arhivat.
+ÉCHÉANCE ¦ TERMEN
+Remettre le tableau généalogique au notaire ¦ Predă tabelul genealogic notarului
+Remise au notaire ¦ Predare către notar
+Rendez-vous ¦ Întâlnire
+Échéance ajoutée ¦ Termen adăugat
+Échéance supprimée ¦ Termen șters
+Répertoire des vivants : « ＋ Contact », puis relie la fiche de l’héritier. ¦ Agenda celor în viață: „＋ Contact”, apoi leagă fișa moștenitorului.
+Relevé de temps et de frais — {n} ¦ Situația timpului și cheltuielilor — {n}
+Arbre de dévolution — {n} ¦ Arborele devoluțiunii — {n}
+Arbre de dévolution imprimé ¦ Arborele devoluțiunii tipărit
+Hypothèse retenue enregistrée ¦ Ipoteza reținută salvată
+Échéance faite ¦ Termen îndeplinit
+Échéance à faire ¦ Termen de îndeplinit
+Pièce : {s} ¦ Act: {s}
+Courrier mis à jour ¦ Scrisoare actualizată
+Rechercher les héritiers… ¦ Caută moștenitorii…
+Pas en mode consultation. ¦ Nu în modul consultare.
+Les dossiers n’ont pas pu être lus. ¦ Dosarele nu au putut fi citite.
+Aucun dossier en cours. ¦ Niciun dosar în lucru.
+Dossier {n} ¦ Dosarul {n}
+⚖️ Dossiers de succession ¦ ⚖️ Dosare de succesiune
+Signé le {d} ¦ Semnat la {d}
+Dossier de succession ¦ Dosar de succesiune
+Tous les courriers ¦ Toate scrisorile
+l’héritier ¦ moștenitorul
+Branche paternelle : {who} ¦ Ramura paternă: {who}
+Branche maternelle : {who} ¦ Ramura maternă: {who}
+Tous les enfants sont communs : le conjoint choisit l’usufruit de tout, ou le quart en pleine propriété (art. 757). Le calcul montre le quart. ¦ Toți copiii sunt comuni: soțul alege uzufructul întregului sau un sfert în deplină proprietate (art. 757). Calculul arată sfertul.
+Un enfant au moins n’est pas commun aux deux époux : le conjoint reçoit le quart en pleine propriété (art. 757). ¦ Cel puțin un copil nu este comun ambilor soți: soțul primește un sfert în deplină proprietate (art. 757).
+1er ordre : les enfants et, par représentation, les descendants d’un enfant prédécédé ou renonçant ; partage par souche (art. 735, 752, 753). ¦ Clasa 1: copiii și, prin reprezentare, descendenții unui copil predecedat sau renunțător; împărțire pe tulpini (art. 735, 752, 753).
+Sans descendant, avec le père et la mère : la moitié au conjoint, un quart à chaque parent (art. 757-1). ¦ Fără descendenți, cu tatăl și mama: jumătate soțului, un sfert fiecărui părinte (art. 757-1).
+Sans descendant, avec un seul parent : trois quarts au conjoint, un quart au parent (art. 757-1). ¦ Fără descendenți, cu un singur părinte: trei sferturi soțului, un sfert părintelui (art. 757-1).
+Sans descendant ni père ni mère : le conjoint recueille toute la succession (art. 757-2). Les frères et sœurs peuvent avoir un droit de retour sur les biens de famille (art. 757-3) : à voir avec le notaire. ¦ Fără descendenți, tată sau mamă: soțul culege toată succesiunea (art. 757-2). Frații pot avea un drept de întoarcere asupra bunurilor de familie (art. 757-3): de văzut cu notarul.
+Le père et la mère ont chacun un quart, les frères et sœurs (ou leurs descendants) la moitié (art. 738). ¦ Tatăl și mama au fiecare un sfert, frații (sau descendenții lor) jumătate (art. 738).
+Le parent survivant a un quart, les frères et sœurs (ou leurs descendants) trois quarts (art. 738). ¦ Părintele supraviețuitor are un sfert, frații (sau descendenții lor) trei sferturi (art. 738).
+Père et mère décédés : les frères et sœurs ou leurs descendants prennent tout (art. 737). ¦ Tatăl și mama decedați: frații sau descendenții lor iau totul (art. 737).
+Frères et sœurs germains, consanguins ou utérins : parts égales, par souche (art. 744, 752-2, 753 ; loi du 3 décembre 2001). ¦ Frați buni, consangvini sau uterini: cote egale, pe tulpini (art. 744, 752-2, 753; legea din 3 decembrie 2001).
+Sans descendant ni frère ni sœur : le père et la mère ont chacun la moitié (art. 736). ¦ Fără descendenți și frați: tatăl și mama au fiecare jumătate (art. 736).
+Un seul parent, sans frère ni sœur, mais des ascendants dans l’autre branche : moitié au parent, moitié à ces ascendants (art. 738-1). ¦ Un singur părinte, fără frați, dar cu ascendenți în cealaltă ramură: jumătate părintelui, jumătate acestor ascendenți (art. 738-1).
+Le parent survivant, seul de son ordre, recueille la succession. ¦ Părintele supraviețuitor, singur în clasa sa, culege succesiunea.
+3e ordre : moitié pour chaque branche ; dans chacune, l’ascendant le plus proche prend tout (art. 747-748). ¦ Clasa 3: jumătate pentru fiecare ramură; în fiecare, ascendentul cel mai apropiat ia totul (art. 747-748).
+3e ordre : une seule branche a encore un ascendant ; il recueille toute la succession, même les cousins de l’autre branche sont écartés (art. 748). ¦ Clasa 3: doar o ramură mai are un ascendent; acesta culege toată succesiunea, chiar și verii celeilalte ramuri sunt înlăturați (art. 748).
+4e ordre : moitié pour chaque branche ; dans chacune, le collatéral le plus proche en degré prend tout, sans représentation (art. 749-750). ¦ Clasa 4: jumătate pentru fiecare ramură; în fiecare, colateralul cel mai apropiat în grad ia totul, fără reprezentare (art. 749-750).
+4e ordre : personne dans une branche, l’autre branche recueille tout (art. 750). ¦ Clasa 4: nimeni într-o ramură, cealaltă ramură culege totul (art. 750).
+Les collatéraux ne succèdent pas au-delà du 6e degré (art. 745). ¦ Colateralii nu moștenesc dincolo de gradul 6 (art. 745).
+Le défunt n’est pas dans la base. ¦ Defunctul nu este în bază.
+si {name} n’était pas marié avec le défunt (PACS ou union libre) ¦ dacă {name} nu era căsătorit cu defunctul (PACS sau concubinaj)
+si {name} est mort avant, représenté par ses descendants ¦ dacă {name} a murit înainte, reprezentat de descendenții săi
+si {name} est mort avant sans descendant ¦ dacă {name} a murit înainte fără descendenți
+Enfants et descendants, avec représentation ¦ Copii și descendenți, cu reprezentare
+Père et mère, frères et sœurs et leurs descendants (« parents privilégiés ») ¦ Tată și mamă, frați și descendenții lor („rude privilegiate”)
+Autres ascendants (grands-parents…), fente paternelle / maternelle ¦ Alți ascendenți (bunici…), împărțire paternă / maternă
+Oncles, tantes, cousins… jusqu’au 6e degré (art. 745) ¦ Unchi, mătuși, veri… până la gradul 6 (art. 745)
+Vivant au décès ? Mort avant ? Des enfants ? Sa réponse change la part des autres. ¦ În viață la deces? Mort înainte? Copii? Răspunsul schimbă cotele celorlalți.
+Mort avant le défunt, sans descendance connue : un enfant, même reconnu tard, changerait le partage. ¦ Mort înaintea defunctului, fără descendenți cunoscuți: un copil, chiar recunoscut târziu, ar schimba împărțirea.
+Aucun enfant du défunt dans la base : à vérifier (mentions en marge de l’acte de naissance, livret de famille). ¦ Niciun copil al defunctului în bază: de verificat (mențiuni pe marginea actului de naștere, livret de familie).
+Les parents du défunt ne sont pas dans la base : sans eux, l’app ne trouve ni frères, ni sœurs, ni cousins. ¦ Părinții defunctului nu sunt în bază: fără ei, aplicația nu găsește nici frați, nici veri.
+Un seul parent du défunt est dans la base : l’autre branche reste à chercher. ¦ Un singur părinte al defunctului este în bază: cealaltă ramură rămâne de căutat.
+Adoption : plénière ou simple ? Une adoption plénière coupe les liens avec la famille d’origine. ¦ Adopție: deplină sau simplă? O adopție deplină rupe legăturile cu familia de origine.
+Couple sans mariage noté : seul un conjoint marié hérite sans testament (pas le partenaire de PACS ni le concubin). ¦ Cuplu fără căsătorie notată: doar un soț căsătorit moștenește fără testament (nu partenerul de PACS sau concubinul).
+Un seul parent noté : relie sa fiche à son autre parent (frère germain ou demi-frère). ¦ Un singur părinte notat: leagă fișa de celălalt părinte (frate bun sau vitreg).
+Personne dans la branche paternelle jusqu’au 6e degré : oncles, tantes et cousins du père à chercher. ¦ Nimeni în ramura paternă până la gradul 6: unchii, mătușile și verii tatălui de căutat.
+Personne dans la branche maternelle jusqu’au 6e degré : oncles, tantes et cousins de la mère à chercher. ¦ Nimeni în ramura maternă până la gradul 6: unchii, mătușile și verii mamei de căutat.
+Vivant, mais pas d’adresse dans le Répertoire des vivants. ¦ În viață, dar fără adresă în Agenda celor în viață.
+Mort après le défunt : sa part passe à ses propres héritiers (sa succession à lui). ¦ Mort după defunct: cota sa trece la propriii moștenitori (propria sa succesiune).
+Présumé absent : sa part est réservée (art. 112 à 132). ¦ Prezumat absent: cota sa este rezervată (art. 112 la 132).
+Date du décès inconnue : l’app ne peut pas dire qui était mort avant ni quel droit s’applique. ¦ Data decesului necunoscută: aplicația nu poate spune cine a murit înainte, nici ce drept se aplică.
+Décès du {date} : le droit de l’époque n’est pas celui d’aujourd’hui. Avant le 1er juillet 2002 (loi du 3 décembre 2001), le conjoint survivant avait surtout de l’usufruit, les enfants nés hors mariage n’avaient pas tous les mêmes droits et les frères et sœurs de lits différents se partageaient par lignes. Avant le 1er août 1972, les enfants naturels avaient des droits réduits. L’app calcule ici selon le droit actuel : le notaire applique le droit de la date. ¦ Deces la {date}: dreptul de atunci nu este cel de azi. Înainte de 1 iulie 2002 (legea din 3 decembrie 2001), soțul supraviețuitor avea mai ales uzufruct, copiii născuți în afara căsătoriei nu aveau toți aceleași drepturi, iar frații din căsătorii diferite împărțeau pe linii. Înainte de 1 august 1972, copiii naturali aveau drepturi reduse. Aplicația calculează aici după dreptul actual: notarul aplică dreptul de la data respectivă.
+Décès avant le 1er janvier 2007 (loi du 23 juin 2006) : on ne pouvait pas représenter un héritier qui avait renoncé. ¦ Deces înainte de 1 ianuarie 2007 (legea din 23 iunie 2006): nu se putea reprezenta un moștenitor care renunțase.
+Décès en 2002 sans date précise : avant ou après le 1er juillet 2002, le droit change. Précise la date. ¦ Deces în 2002 fără dată precisă: înainte sau după 1 iulie 2002, dreptul se schimbă. Precizează data.
+Divorce ¦ Divorț
+La naissance de {name} ¦ Nașterea lui {name}
+Le décès de {name} ¦ Decesul lui {name}
+Le mariage avec {name}, non dissous ¦ Căsătoria cu {name}, nedesfăcută
+Le divorce d’avec {name} ¦ Divorțul de {name}
+Pas de conjoint survivant : décès de {name} ¦ Niciun soț supraviețuitor: decesul lui {name}
+{name} est mort avant ¦ {name} a murit înainte
+Commun à tous ¦ Comun tuturor
+{name} a renoncé à la succession ¦ {name} a renunțat la succesiune
+{name} est mort avant (représenté) ¦ {name} a murit înainte (reprezentat)
+Son nom d’épouse ¦ Numele ei de căsătorie
+{name} (pour l’écarter) ¦ {name} (pentru a-l înlătura)
+Mort avant le défunt, sans enfant ¦ Mort înaintea defunctului, fără copii
+Chaque héritier a ses actes : il en manque pour {who}. ¦ Fiecare moștenitor are actele sale: lipsesc pentru {who}.
+Chaque héritier a ses actes. ¦ Fiecare moștenitor are actele sale.
+Chaque prédécédé a son acte de décès : {n} manquent. ¦ Fiecare predecedat are actul de deces: lipsesc {n}.
+Chaque prédécédé a son acte de décès. ¦ Fiecare predecedat are actul de deces.
+Les branches inconnues ont une explication. ¦ Ramurile necunoscute au o explicație.
+{n} héritiers ou branches restent « inconnus » sans explication. ¦ Moștenitori sau ramuri „necunoscute” fără explicație: {n}.
+Aucune branche « inconnue ». ¦ Nicio ramură „necunoscută”.
+L’hypothèse retenue est écrite. ¦ Ipoteza reținută este scrisă.
+Plusieurs hypothèses : écris celle qui est retenue. ¦ Mai multe ipoteze: scrie care este reținută.
+Une seule hypothèse. ¦ O singură ipoteză.
+Les parts totalisent 1. ¦ Cotele însumează 1.
+Les parts ne totalisent pas 1 : à revoir. ¦ Cotele nu însumează 1: de revăzut.
+La date du décès demande l’avis du notaire (droit de l’époque ou date inconnue). ¦ Data decesului cere părerea notarului (dreptul de atunci sau dată necunoscută).
+{name} ajouté (statut inconnu) ¦ {name} adăugat (stare necunoscută)
+{name} ajouté ({share}) ¦ {name} adăugat ({share})
+{name} : {from} → {to} ¦ {name}: {from} → {to}
+{name} retiré ¦ {name} scos
+Ordre retenu : {from} → {to} ¦ Clasa reținută: {from} → {to}
+descendante à la {n}e génération ¦ descendentă din generația {n}
+descendant à la {n}e génération ¦ descendent din generația {n}
+ascendante à la {n}e génération ¦ ascendentă din generația {n}
+ascendant à la {n}e génération ¦ ascendent din generația {n}
+parente au {n}e degré ¦ rudă de gradul {n}
+parent au {n}e degré ¦ rudă de gradul {n}
+petit-fils ¦ nepot (de bunic)
+petite-fille ¦ nepoată (de bunic)
+arrière-petit-fils ¦ strănepot
+arrière-petite-fille ¦ strănepoată
+arrière-arrière-petit-fils ¦ răstrănepot
+arrière-arrière-petite-fille ¦ răstrănepoată
+nièce ¦ nepoată (de frate)
+petit-neveu ¦ nepot de gradul doi (de frate)
+petite-nièce ¦ nepoată de gradul doi (de frate)
+arrière-petit-neveu ¦ strănepot de frate
+arrière-petite-nièce ¦ strănepoată de frate
+arrière-arrière-petit-neveu ¦ răstrănepot de frate
+arrière-arrière-petite-nièce ¦ răstrănepoată de frate
+cousin germain ¦ văr primar
+cousine germaine ¦ verișoară primară
+fils de cousin germain ¦ fiul unui văr primar
+fille de cousin germain ¦ fiica unui văr primar
+petit-fils de cousin germain ¦ nepotul unui văr primar
+petite-fille de cousin germain ¦ nepoata unui văr primar
+grand-oncle ¦ unchi mare
+grand-tante ¦ mătușă mare
+cousin germain d’un parent ¦ văr primar al unui părinte
+cousine germaine d’un parent ¦ verișoară primară a unui părinte
+cousin issu de germains ¦ văr de gradul doi
+cousine issue de germains ¦ verișoară de gradul doi
+arrière-grand-oncle ¦ străunchi
+arrière-grand-tante ¦ strămătușă
+cousin germain d’un grand-parent ¦ văr primar al unui bunic
+cousine germaine d’un grand-parent ¦ verișoară primară a unui bunic
+arrière-arrière-grand-oncle ¦ răsstrăunchi
+arrière-arrière-grand-tante ¦ răsstrămătușă
+frère germain ¦ frate bun
+sœur germaine ¦ soră bună
+demi-frère (même père) ¦ frate vitreg (același tată)
+demi-sœur (même père) ¦ soră vitregă (același tată)
+demi-frère (même mère) ¦ frate vitreg (aceeași mamă)
+demi-sœur (même mère) ¦ soră vitregă (aceeași mamă)
+Père, mère, enfant ¦ Tată, mamă, copil
+Frère, sœur, grand-parent, petit-enfant ¦ Frate, soră, bunic, nepot
+Neveu, nièce, oncle, tante ¦ Nepot, nepoată, unchi, mătușă
+Cousin germain, petit-neveu, grand-oncle ¦ Văr primar, nepot de frate de gradul doi, unchi mare
+Enfant de cousin germain ¦ Copil de văr primar
+Cousin issu de germains (limite) ¦ Văr de gradul doi (limită)
+Présomption d’absence : le juge des tutelles la constate quand une personne a cessé de paraître sans donner de nouvelles. Elle est réputée vivante ; sa part est réservée et gérée. ¦ Prezumția de absență: judecătorul o constată când o persoană nu mai apare fără să dea vești. Este considerată în viață; cota ei este rezervată și administrată.
+Déclaration d’absence : 10 ans après le jugement de présomption (ou 20 ans sans nouvelles), le tribunal judiciaire la déclare ; le jugement a les effets d’un décès. ¦ Declararea absenței: la 10 ani de la hotărârea de prezumție (sau 20 de ani fără vești), tribunalul o declară; hotărârea are efectele unui deces.
+Jugement déclaratif de décès : pour une disparition dans des circonstances qui mettent la vie en danger (naufrage, catastrophe), sans attendre. ¦ Hotărâre declarativă de deces: pentru o dispariție în împrejurări care pun viața în pericol (naufragiu, catastrofă), fără așteptare.
+Service central d’état civil (Nantes) : les actes des Français nés, mariés ou morts à l’étranger. ¦ Serviciul central de stare civilă (Nantes): actele francezilor născuți, căsătoriți sau decedați în străinătate.
+Le consulat de France du pays : registres d’immatriculation, actes transcrits récents. ¦ Consulatul Franței din țara respectivă: registre de înmatriculare, acte transcrise recent.
+L’état civil du pays (mairie, registro civil, Standesamt…) : lettre dans la langue du pays. ¦ Starea civilă a țării (primărie, registro civil, Standesamt…): scrisoare în limba țării.
+Archives nationales d’outre-mer (Aix-en-Provence) : colonies et Algérie avant 1962. ¦ Arhivele naționale de peste mări (Aix-en-Provence): colonii și Algeria înainte de 1962.
+Ouvert ¦ Deschis
+En recherche ¦ În căutare
+Héritiers trouvés ¦ Moștenitori găsiți
+Clos ¦ Închis
+📁 Dossier ¦ 📁 Dosar
+👥 Héritiers ¦ 👥 Moștenitori
+🌳 Arbre ¦ 🌳 Arbore
+✉️ Héritiers contactés ¦ ✉️ Moștenitori contactați
+🖨 Pour le notaire ¦ 🖨 Pentru notar
+🕓 Journal ¦ 🕓 Jurnal
+💶 Temps et frais ¦ 💶 Timp și cheltuieli
+Décédé après ¦ Decedat după
+Décédée après ¦ Decedată după
+Renonce ¦ Renunță
+Indigne ¦ Nedemn
+Absent ¦ Absent
+Absente ¦ Absentă
+Pas encore conçu ¦ Încă neconceput
+Pas encore conçue ¦ Încă neconcepută
+Comme sur la fiche ¦ Ca în fișă
+Vivant au décès ¦ În viață la deces
+Mort avant le défunt ¦ Mort înaintea defunctului
+Mort après le défunt ¦ Mort după defunct
+Renonce à la succession ¦ Renunță la succesiune
+Déclaré absent ¦ Declarat absent
+Refuse ¦ Refuză
+Rappellera ¦ Va suna înapoi
+✓ En main ¦ ✓ În mână
+📮 Demandé ¦ 📮 Cerut
+✗ Manquant ¦ ✗ Lipsă
+Sans objet ¦ Nu este cazul
+⏱ Temps ¦ ⏱ Timp
+🧾 Frais ¦ 🧾 Cheltuieli
+📝 Contrat ¦ 📝 Contract
+02 — HÉRITIERS ¦ 02 — MOȘTENITORI
+Généalogiste successoral ¦ Genealogist succesoral
+Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ Găsirea moștenitorilor unei persoane decedate, pentru un notar.
++ ⚖️ Successions (Dossiers · Héritiers à contacter · Courriers). Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Succesiuni (Dosare · Moștenitori de contactat · Scrisori). Primul ecran: „Deschide un dosar”.
+⚖️ Successions : dossiers, héritiers à contacter, courriers. ¦ ⚖️ Succesiuni: dosare, moștenitori de contactat, scrisori.
+⚖️ Successions ¦ ⚖️ Succesiuni
+Vivants ¦ În viață
+Courriers ¦ Scrisori
+Échéance le {date} ¦ Termen la {date}
+Pour quel héritier ? ¦ Pentru ce moștenitor?
+Lettre à un héritier ¦ Scrisoare către un moștenitor
+ne révèle pas le défunt avant signature ; honoraires et date limite à écrire ¦ nu dezvăluie defunctul înainte de semnare; onorariu și dată limită de completat
+premier contact, sans nommer le défunt ¦ prim contact, fără a numi defunctul
+Il y a déjà un dossier pour cette personne. ¦ Există deja un dosar pentru această persoană.
+Date d’ouverture incorrecte. ¦ Dată de deschidere incorectă.
+Notaire introuvable. ¦ Notarul nu a fost găsit.
+Passe d’abord par la liste de contrôle avant « Remis au notaire ». ¦ Treci mai întâi prin lista de verificare înainte de „Predat notarului”.
+Ce dossier est archivé. ¦ Acest dosar este arhivat.
+Valeur inconnue. ¦ Valoare necunoscută.
+Pièce inconnue. ¦ Act necunoscut.
+Choisis la date de l’échéance. ¦ Alege data termenului.
+Écris ce qu’il faut faire. ¦ Scrie ce trebuie făcut.
+Échéance introuvable. ¦ Termenul nu a fost găsit.
+Date incorrecte. ¦ Dată incorectă.
+Le pourcentage va de 0 à 100. ¦ Procentul este între 0 și 100.
+Combien de temps ? ¦ Cât timp?
+Choisis l’héritier. ¦ Alege moștenitorul.
+Date de signature incorrecte. ¦ Dată de semnare incorectă.
+Seul un dossier clos peut être archivé. ¦ Doar un dosar închis poate fi arhivat.
+Mode consultation : les dossiers de succession ne se montrent pas. ¦ Mod consultare: dosarele de succesiune nu sunt afișate.
+Rien à noter. ¦ Nimic de notat.
+Calcul manquant. ¦ Calcul lipsă.
+Dossiers ¦ Dosare
+Héritiers à contacter ¦ Moștenitori de contactat
+Que montrer ¦ Ce se afișează
+Lecture des héritiers… ¦ Se citesc moștenitorii…
+Lecture des courriers… ¦ Se citesc scrisorile…
+Voir toute la liste ↗ ¦ Vezi toată lista ↗
+Aucun courrier ¦ Nicio scrisoare
+Courrier envoyé ¦ Scrisoare trimisă
+Réponse : {r} ¦ Răspuns: {r}
+Courrier envoyé le {d} ¦ Scrisoare trimisă pe {d}
+Aucun héritier à contacter dans les dossiers en cours. ¦ Niciun moștenitor de contactat în dosarele în curs.
+Les héritiers vivants (ou au statut inconnu) des dossiers ouverts viennent ici, avec leur adresse et l’état du contact. ¦ Moștenitorii în viață (sau cu statut necunoscut) din dosarele deschise apar aici, cu adresa și stadiul contactului.
+Chercher… (nom, dossier, ville) ¦ Caută… (nume, dosar, localitate)
+Tous les dossiers ¦ Toate dosarele
+État du contact ¦ Stadiul contactului
+Par dossier ¦ După dosar
+À contacter d’abord ¦ De contactat întâi
+Aucun héritier ne correspond. ¦ Niciun moștenitor nu corespunde.
+📇 Compléter l’adresse ¦ 📇 Completează adresa
+adresse à trouver ¦ adresă de găsit
+Courriel ¦ E-mail
+Héritiers à contacter exportés (CSV) ¦ Moștenitori de contactat exportați (CSV)
+Héritier à l’étranger ¦ Moștenitor în străinătate
+Demande d’acte ¦ Cerere de act
+Aucun courrier de succession pour l’instant. ¦ Încă nicio scrisoare de succesiune.
+Les courriers écrits depuis un dossier (✉️ Héritiers contactés, 📑 Pièces) viennent ici. ¦ Scrisorile scrise dintr-un dosar (✉️ Moștenitori contactați, 📑 Acte) apar aici.
+Chercher… (destinataire, dossier) ¦ Caută… (destinatar, dosar)
+Aucun courrier ne correspond. ¦ Nicio scrisoare nu corespunde.
+📮 COURRIER DE SUCCESSION ¦ 📮 SCRISOARE DE SUCCESIUNE
+Dévolution ¦ Devoluțiune
+=héritier ¦ moștenitor|moștenitori|de moștenitori
+=courrier ¦ scrisoare|scrisori|de scrisori
+=dépouillement ¦ extras|extrase|de extrase
+=dossier en cours ¦ dosar în lucru|dosare în lucru|de dosare în lucru
+=dossier de succession ¦ dosar de succesiune|dosare de succesiune|de dosare de succesiune
+
+# ⚖️ Dossiers de succession : rangement, filtre ⚖️, rattachement, tableau de bord, garde-fous, widget, vue par dossier
+Dossiers de succession : filtre {what} (cliquer pour changer) ¦ Dosare de succesiune: filtru {what} (clic pentru a schimba)
+Dossiers de succession : ne montrer qu’un ou plusieurs dossiers ¦ Dosare de succesiune: arată doar unul sau mai multe dosare
+Plusieurs ¦ Mai multe
+⚖️ Ne montrer que ceux-ci ¦ ⚖️ Arată doar acestea
+Aucun dossier dans cette généalogie. ¦ Niciun dosar în această genealogie.
+Dans une autre généalogie ¦ Într-o altă genealogie
+Tous les dossiers… ¦ Toate dosarele…
+Seulement le dossier {n} ¦ Doar dosarul {n}
+Seulement {what} : {list} ¦ Doar {what}: {list}
+1 dossier · {state} ¦ 1 dosar · {state}
+⚖️ Dossier {n} ¦ ⚖️ Dosarul {n}
+Ce dossier est dans une autre généalogie ¦ Acest dosar este într-o altă genealogie
+Ouvrir « {name} » ¦ Deschide „{name}”
+Il est rangé dans « {name} ». Pour le montrer, l’app ouvre cette généalogie (tes réglages d’ici sont gardés) et y active le filtre ⚖️ {n}. ¦ Este păstrat în „{name}”. Pentru a-l arăta, aplicația deschide acea genealogie (setările tale de aici se păstrează) și activează acolo filtrul ⚖️ {n}.
+Tes nouveaux dossiers vont dans « {name} ». ¦ Dosarele tale noi merg în „{name}”.
+Ouvrir le dossier ici quand même ¦ Deschide totuși dosarul aici
+Où ranger tes dossiers ? ¦ Unde îți păstrezi dosarele?
+conseillé ici ¦ recomandat aici
+Nom de la nouvelle généalogie ¦ Numele noii genealogii
+⚖️ Dossier de succession ¦ ⚖️ Dosar de succesiune
+Ta généalogie ouverte a {n} : la ranger à part évite de mélanger les héritiers de tes clients avec ta propre famille. Ce n’est qu’un conseil. ¦ Genealogia ta deschisă are {n}: păstrarea separată evită amestecarea moștenitorilor clienților tăi cu propria ta familie. E doar un sfat.
+Tu pourras changer d’avis : Réglages → Apparence → 🧭 Usage de l’app → « ⚖️ Où ranger les dossiers ». Les dossiers déjà ouverts ne bougent pas tout seuls. ¦ Poți să te răzgândești: Setări → Aspect → 🧭 Utilizarea aplicației → „⚖️ Unde se păstrează dosarele”. Dosarele deja deschise nu se mută singure.
+Créer « ⚖️ Dossiers de succession » et ouvrir le dossier ¦ Creează „⚖️ Dosare de succesiune” și deschide dosarul
+Créer la généalogie et ouvrir le dossier ¦ Creează genealogia și deschide dosarul
+Rangement des dossiers : {what} ¦ Unde merg dosarele: {what}
+Généalogiste successoral : réglages des dossiers ¦ Genealogist succesoral: setările dosarelor
+Où ranger les dossiers ¦ Unde se păstrează dosarele
+Les nouveaux dossiers vont… ¦ Dosarele noi merg…
+Dans « {name} » ¦ În „{name}”
+Les dossiers et où ils sont ¦ Dosarele și unde sunt
+⇄ Déplacer… ¦ ⇄ Mută…
+Aucun dossier pour l’instant. ¦ Încă niciun dosar.
+Réglages des dossiers ¦ Setările dosarelor
+Arbre et graphiques filtrés par ⚖️ : les fiches hors dossier ¦ Arbore și grafice filtrate cu ⚖️: fișele din afara dosarului
+Archive d’un dossier clos : adresses des héritiers vivants ¦ Arhiva unui dosar închis: adresele moștenitorilor în viață
+Déplacer un dossier dont une fiche est aussi dans ta famille ¦ Mutarea unui dosar cu o fișă care e și în familia ta
+« Sans dossier » dans la vue par dossier ¦ „Fără dosar” în vizualizarea pe dosare
+Avancement : un héritier qui refuse de signer ¦ Progres: un moștenitor care refuză să semneze
+compte comme « fait » (étape 5) ¦ contează ca „făcut” (pasul 5)
+Avancement : poids des 7 étapes ¦ Progres: ponderea celor 7 pași
+Réglage des dossiers enregistré : {what} ¦ Setare a dosarelor salvată: {what}
+poids des 7 étapes ¦ ponderea celor 7 pași
+⇄ DÉPLACER UN DOSSIER ¦ ⇄ MUTĂ UN DOSAR
+{n} → ? ¦ {n} → ?
+⇄ Déplacer ({what}) ¦ ⇄ Mută ({what})
+Vers ¦ Către
+＋ Une nouvelle généalogie pour ce dossier ¦ ＋ O genealogie nouă pentru acest dosar
+Ce qui part : le dossier, son journal, ses pièces, ses courriers, ses échéances, et les fiches qui lui sont rattachées (défunt, héritiers, intermédiaires) avec leurs actes et médias. Une fiche aussi rattachée à un autre dossier ou à ta famille est copiée, pas déplacée. ¦ Ce pleacă: dosarul, jurnalul, actele, scrisorile, termenele și fișele legate de el (defunct, moștenitori, intermediari) cu actele și fișierele media. O fișă legată și de alt dosar sau de familia ta este copiată, nu mutată.
+Déplacement refusé (réglage) : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Mutare refuzată (setare): aceste fișe sunt și în familia ta sau în alt dosar: {names}.
+Copiées (elles restent aussi ici) : {names}. ¦ Copiate (rămân și aici): {names}.
+Une copie de sauvegarde des deux généalogies est faite avant. Le journal du dossier note « Déplacé de … vers … ». ¦ Mai întâi se face o copie de siguranță a ambelor genealogii. Jurnalul dosarului notează „Mutat din … în …”.
+Dossier {n} déplacé vers « {to} » ({what}) ¦ Dosarul {n} mutat în „{to}” ({what})
+⤓ Reprendre la fiche depuis Ma généalogie ¦ ⤓ Preia fișa din Genealogia mea
+copie de la fiche, jusqu’aux grands-parents et tous leurs descendants connus, sans photos ¦ copie a fișei, până la bunici și toți descendenții lor cunoscuți, fără fotografii
+⤓ REPRENDRE UNE FICHE ¦ ⤓ PREIA O FIȘĂ
+Reprendre la fiche du défunt ¦ Preia fișa defunctului
+Chercher la fiche ¦ Caută fișa
+Prénom, nom… ¦ Prenume, nume…
+Copiées : la fiche, ses parents et grands-parents, tous leurs descendants connus et leurs conjoints, avec les dates et les lieux ; sans photos. Rien n’est changé dans l’autre généalogie. ¦ Copiate: fișa, părinții și bunicii, toți descendenții lor cunoscuți și soții lor, cu date și locuri; fără fotografii. Nimic nu se schimbă în cealaltă genealogie.
+{what} reprises de l’autre généalogie. ¦ {what} preluate din cealaltă genealogie.
+Dossiers… ¦ Dosare…
+{name} dans quels dossiers ? ¦ {name} în ce dosare?
+(calculé) ¦ (calculat)
+Rôles : défunt · héritier · intermédiaire · témoin · à vérifier. « Héritier » mis par le calcul s’affiche « (calculé) ». ¦ Roluri: defunct · moștenitor · intermediar · martor · de verificat. „Moștenitor” pus de calcul apare „(calculat)”.
+Dossiers de {name} enregistrés ¦ Dosarele lui {name} salvate
+Les dossiers de cette fiche ¦ Dosarele acestei fișe
+hors du dossier {n} ¦ în afara dosarului {n}
+＋ Rattacher ¦ ＋ Leagă
+Fiche rattachée au dossier {n} ¦ Fișă legată de dosarul {n}
+Rattachée au dossier {n} : {who} ¦ Legată de dosarul {n}: {who}
+Lecture des fiches du dossier… ¦ Se citesc fișele dosarului…
+Les fiches du dossier ¦ Fișele dosarului
+Rattacher ¦ Leagă
+Retirées à la main ({n}) : jamais remises toutes seules ¦ Scoase manual ({n}): nu se mai pun la loc singure
+Fiche à comparer : « {name}{year} » ressemble à une fiche déjà dans cette base. Jamais fusionnée toute seule. ¦ Fișă de comparat: „{name}{year}” seamănă cu o fișă deja în această bază. Nu se unește niciodată singură.
+née {y} ¦ născută {y}
+Homonyme possible : « {name}{year} » existe aussi dans le dossier {n}. Jamais relié tout seul. ¦ Posibil omonim: „{name}{year}” există și în dosarul {n}. Nu se leagă niciodată singur.
+⇆ Comparer ¦ ⇆ Compară
+C’est la même personne : rattacher aussi ¦ E aceeași persoană: leag-o și pe ea
+Pas la même ¦ Nu e aceeași
+Fiche retirée du dossier {n} ¦ Fișă scoasă din dosarul {n}
+Fiche remise dans le dossier {n} ¦ Fișă pusă la loc în dosarul {n}
+Homonyme rattaché aussi au dossier {n} (à vérifier) ¦ Omonim legat și de dosarul {n} (de verificat)
+Noté : ce n’est pas la même personne ¦ Notat: nu e aceeași persoană
+Rôle : {r} ¦ Rol: {r}
+⚠️ illisible : {names} ¦ ⚠️ ilizibil: {names}
+Chercher… (n°, défunt, notaire) ¦ Caută… (nr., defunct, notar)
+Toutes les généalogies ¦ Toate genealogiile
+Tous les notaires ¦ Toți notarii
+Prochaine échéance (retards d’abord) ¦ Termenul următor (întârzierile întâi)
+Avancement le plus bas ¦ Cel mai mic progres
+{d} · passée ¦ {d} · depășit
+Trouvés : {n} ¦ Găsiți: {n}
+À trouver : {n} ¦ De găsit: {n}
+{h} h {m} ¦ {h} h {m}
+Cocher le dossier {n} ¦ Bifează dosarul {n}
+Échéance : {d} ¦ Termen: {d}
+Héritiers ¦ Moștenitori
+Avancement ¦ Progres
+Cochés : {n} ¦ Bifate: {n}
+Les dossiers cochés sont dans des généalogies différentes : choisis-en dans une seule. ¦ Dosarele bifate sunt în genealogii diferite: alege doar dintr-una.
+Dossiers exportés (CSV) ¦ Dosare exportate (CSV)
+⤒ Réimporter un dossier archivé… ¦ ⤒ Reimportă un dosar arhivat…
+⚠️ FUSION ¦ ⚠️ UNIRE
+Ces deux fiches sont dans des dossiers différents ¦ Aceste două fișe sunt în dosare diferite
+Fusionner quand même ¦ Unește totuși
+{a} et {b}. Fusionner relie les deux successions et change les parts des deux dossiers. Vérifie avec des actes (naissance, parents) avant. ¦ {a} și {b}. Unirea leagă cele două succesiuni și schimbă cotele în ambele dosare. Verifică întâi cu acte (naștere, părinți).
+⇆ Comparer d’abord ¦ ⇆ Compară întâi
+Si on fusionne : noté dans le journal des deux dossiers, et les deux sont recalculés. ¦ Dacă unești: se notează în jurnalul ambelor dosare și ambele sunt recalculate.
+🗄 Archiver dans un fichier et retirer… ¦ 🗄 Arhivează într-un fișier și scoate…
+🗄 ARCHIVER LE DOSSIER {n} ¦ 🗄 ARHIVEAZĂ DOSARUL {n}
+Dans un fichier, puis retirer de la base ¦ Într-un fișier, apoi scoate din bază
+⤓ Enregistrer le fichier puis retirer ¦ ⤓ Salvează fișierul și apoi scoate
+Le fichier {file} contient : le dossier, le journal, les pièces et leurs images, les courriers, l’arbre de dévolution (SVG), le tableau pour le notaire et les fiches rattachées ({n}). ¦ Fișierul {file} conține: dosarul, jurnalul, actele și imaginile lor, scrisorile, arborele devoluțiunii (SVG), tabelul pentru notar și fișele legate ({n}).
+Garder les adresses des vivants dans le fichier ¦ Păstrează adresele celor în viață în fișier
+utile si le notaire rouvre la succession ¦ util dacă notarul redeschide succesiunea
+Retirer les adresses ¦ Scoate adresele
+comme l’archivage actuel ¦ ca arhivarea actuală
+Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base ({n}). Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste ({k}). Une sauvegarde est faite avant. ¦ Apoi fișele care servesc doar acestui dosar sunt scoase din bază ({n}). O fișă legată și de alt dosar (sau de familia ta) rămâne ({k}). Mai întâi se face o copie de siguranță.
+Dossier {n} archivé dans « {file} » et retiré ({what}) ¦ Dosarul {n} arhivat în „{file}” și scos ({what})
+⤒ RÉIMPORTER ¦ ⤒ REIMPORTĂ
+⤒ Réimporter le dossier ¦ ⤒ Reimportă dosarul
+Dossier {n} ({name}{closed}), {what}. ¦ Dosarul {n} ({name}{closed}), {what}.
+clos le {d} ¦ închis la {d}
+{what} ressemblent à des fiches déjà dans cette base ({names}) : elles seront proposées à la comparaison, jamais fusionnées seules. ¦ {what} seamănă cu fișe deja în această bază ({names}): vor fi propuse spre comparare, niciodată unite singure.
+Dossier {n} réimporté ({what}) ¦ Dosarul {n} reimportat ({what})
+Dossier {n} réimporté dans « {name} ». ¦ Dosarul {n} reimportat în „{name}”.
+⚖️ Mes dossiers de succession ¦ ⚖️ Dosarele mele de succesiune
+Aucun dossier de succession. ¦ Niciun dosar de succesiune.
+Étapes (7) ¦ Pași (7)
+{step} : {done} sur {total} ¦ {step}: {done} din {total}
+Quels dossiers ¦ Ce dosare
+Le filtre ¦ Filtrul
+Vue actuelle ¦ Vizualizarea actuală
+Alt + ↑ / ↓ : changer l’ordre (rangement à la main) ¦ Alt + ↑ / ↓: schimbă ordinea (manual)
+Sans dossier ¦ Fără dosar
+Ranger les dossiers : ¦ Ordonează dosarele:
+… cherche un nom pour voir les autres. ¦ … caută un nume ca să vezi restul.
+Ordre des dossiers changé ¦ Ordinea dosarelor schimbată
+Dans cette généalogie ¦ În această genealogie
+Le défunt et ses héritiers sont des fiches de ta famille. Simple, mais tout se mélange. ¦ Defunctul și moștenitorii lui sunt fișe din familia ta. Simplu, dar totul se amestecă.
+Dans une généalogie à part pour tous mes dossiers ¦ Într-o genealogie separată pentru toate dosarele mele
+Une base professionnelle « ⚖️ Dossiers de succession », créée dans 🌳 Mes généalogies. Tes dossiers y sont tous ensemble ; ta famille reste à part. ¦ O bază profesională „⚖️ Dosare de succesiune”, creată în 🌳 Genealogiile mele. Toate dosarele tale sunt acolo împreună; familia ta rămâne separat.
+Une généalogie par dossier ¦ O genealogie pe dosar
+Chaque dossier a sa propre base (« ⚖️ 2026-014 MAZAUD »). Le plus étanche ; à réserver aux grosses successions. ¦ Fiecare dosar are propria bază („⚖️ 2026-014 MAZAUD”). Cel mai etanș; pentru succesiunile mari.
+défunt ¦ defunct
+intermédiaire ¦ intermediar
+Un par dossier ¦ Unul pe dosar
+Un filtre ¦ Un filtru
+Compteurs ¦ Contoare
+à l’ouverture ¦ la deschidere
+calcul ¦ calcul
+à la main ¦ manual
+créée pendant le filtre ¦ creată în timpul filtrului
+réimport ¦ reimport
+homonyme ¦ omonim
+déplacée ¦ mutată
+grisées, sans nom ¦ gri, fără nume
+cachées ¦ ascunse
+retirées du fichier ¦ scoase din fișier
+gardées dans le fichier ¦ păstrate în fișier
+copier la fiche ¦ copiază fișa
+refuser le déplacement ¦ refuză mutarea
+replié ¦ restrâns
+Défunt et acte de décès ¦ Defunct și act de deces
+Adresses ¦ Adrese
+Contrats signés ¦ Contracte semnate
+Déplacement refusé : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Mutare refuzată: aceste fișe sunt și în familia ta sau în alt dosar: {names}.
+Impossible d’enregistrer les réglages des dossiers. ¦ Nu se pot salva setările dosarelor.
+Cette généalogie est encore vide. ¦ Această genealogie este încă goală.
+Rôle inconnu. ¦ Rol necunoscut.
+Fiches inconnues. ¦ Fișe necunoscute.
+Choisis une autre généalogie. ¦ Alege o altă genealogie.
+Impossible de créer le fichier d’archive. ¦ Nu se poate crea fișierul de arhivă.
+Fichier introuvable. ¦ Fișier negăsit.
+Ce fichier n’est pas une archive de dossier de succession. ¦ Acest fișier nu este o arhivă de dosar de succesiune.
+Le fichier n’a pas été reçu. ¦ Fișierul nu a fost primit.
+Le défunt reste dans son dossier. ¦ Defunctul rămâne în dosarul său.
+🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Persoane
+Dossiers de succession (usage successoral seulement) ¦ Dosare de succesiune (doar la utilizarea succesorală)
+# Zone « successoral » : 🔎 introuvable / 🔇 ne répond pas (état de contact d’un héritier, migration 92) ; 🔒 fiches confidentielles non comptées (réglage)
+Introuvable ¦ De negăsit
+Ne répond pas ¦ Nu răspunde
+introuvable ¦ de negăsit
+ne répond pas ¦ nu răspunde
+rien de noté ¦ nimic notat
+depuis le {d} ¦ din {d}
+Introuvable ou silencieux ¦ De negăsit sau tăcut
+Introuvable depuis plus d’un an ¦ De negăsit de peste un an
+{name} est introuvable depuis plus d’un an : la présomption d’absence (art. 112 et suivants) peut protéger sa part. ¦ {name} este de negăsit de peste un an: prezumția de absență (art. 112 și urm.) îi poate proteja cota.
+{what} : les parts peuvent être fausses. ¦ {what}: cotele pot fi greșite.
+=fiche confidentielle non comptée ¦ fișă confidențială neluată în calcul|fișe confidențiale neluate în calcul|de fișe confidențiale neluate în calcul
+Changer ce réglage ¦ Schimbă această setare
+Tous les héritiers ¦ Toți moștenitorii
+🔎 Introuvable ou 🔇 ne répond pas : pas compté comme contacté dans l’avancement, et le calcul ne change pas. À ne pas confondre avec le statut « Présumé absent » (art. 112). ¦ 🔎 De negăsit sau 🔇 nu răspunde: nu contează ca contactat în progres, iar calculul nu se schimbă. A nu se confunda cu statutul „Prezumat absent” (art. 112).
+Contact de {name} : {state} ¦ Contact cu {name}: {state}
+Les fiches confidentielles comptent-elles comme héritiers ? ¦ Fișele confidențiale contează ca moștenitori?
+Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Nu: o fișă confidențială este scoasă din calcul, ca și cum n-ar exista; dosarul o semnalează.
+Le défunt n’est pas un héritier à contacter. ¦ Defunctul nu este un moștenitor de contactat.
+⚖️ Un doute sur la loi ? ¦ ⚖️ Un dubiu despre lege?
+⚖️ Un doute ? ¦ ⚖️ Un dubiu?
+⚖️ UN DOUTE SUR LA LOI ? ¦ ⚖️ UN DUBIU DESPRE LEGE?
+Chercher sur un site officiel ¦ Caută pe un site oficial
+✍️ Noter dans le dossier ¦ ✍️ Notează în dosar
+Ton problème, avec tes mots ¦ Problema ta, cu cuvintele tale
+ex. un héritier refuse de répondre · délai pour renoncer à une succession ¦ ex. un moștenitor refuză să răspundă · termenul pentru a renunța la o moștenire
+N’écris pas de nom : la question part sur internet. ¦ Nu scrie nume: întrebarea pleacă pe internet.
+🏛 Chercher sur Service-public ¦ 🏛 Caută pe Service-public
+explique en français simple et donne le lien vers le bon article ¦ explică în franceză simplă și dă linkul spre articolul potrivit
+📜 Chercher sur Légifrance ¦ 📜 Caută pe Légifrance
+les articles des codes en vigueur ¦ articolele codurilor în vigoare
+L’app ne choisit aucun article : ta question est envoyée telle quelle au site officiel, qui s’ouvre dans ton navigateur. ¦ Aplicația nu alege niciun articol: întrebarea ta e trimisă exact așa site-ului oficial, care se deschide în browserul tău.
+✍️ Noter dans le dossier {n} ¦ ✍️ Notează în dosarul {n}
+Lien de l’article ou de la fiche (facultatif) ¦ Linkul articolului sau al paginii (opțional)
+Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Doar o adresă https:// de pe Légifrance, Service-public sau EUR-Lex.
+Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Link refuzat: doar o adresă https:// de pe Légifrance, Service-public sau EUR-Lex.
+Noté au journal du dossier {n}. ¦ Notat în jurnalul dosarului {n}.
+Écris d’abord ta question. ¦ Scrie mai întâi întrebarea.
+# ⚖️ Outils du successoral (⏱ 🔔 📋 🧾 📊 ✉️) et ＋ Ajouter un onglet (docs/design/onglets-et-successoral-outils.html)
+⏱ Compter le temps passé sur ce dossier ¦ ⏱ Numără timpul petrecut cu acest dosar
+{n} min ¦ {n} min
+⏸️ Pause ¦ ⏸️ Pauză
+▶️ Reprendre ¦ ▶️ Reia
+⏹️ Arrêter et noter ¦ ⏹️ Oprește și notează
+Moins d’une minute : rien à noter. ¦ Mai puțin de un minut: nimic de notat.
+Noter le temps passé ¦ Notează timpul petrecut
+Noter {t} ¦ Notează {t}
+Proposé d’après les onglets ouverts ; à corriger si besoin. Date : {d}. ¦ Propus după filele deschise; corectează dacă e nevoie. Data: {d}.
+Minuit passé : une ligne par jour. ¦ După miezul nopții: un rând pe zi.
+Jeter ce temps ¦ Aruncă acest timp
+Jeter ce temps ? ¦ Arunci acest timp?
+Jeter ¦ Aruncă
+{t} d’affilée : c’est bien ça ? ¦ {t} fără pauză: e corect?
+Plus de 10 h d’affilée ¦ Peste 10 h fără pauză
+Noter quand même ¦ Notează totuși
+⏱ {t} notées dans le dossier {n} ¦ ⏱ {t} notate în dosarul {n}
+Le chronomètre compte pour {n}. ¦ Cronometrul numără pentru {n}.
+⏹️ Noter et passer à {n} ¦ ⏹️ Notează și treci la {n}
+Continuer sur {n} ¦ Continuă cu {n}
+Rien touché depuis 10 min : chronomètre en pause à {h}. ¦ Nimic atins de 10 min: cronometrul în pauză la {h}.
+Compter aussi ces 10 min ¦ Numără și aceste 10 min
+⏱ {n} : {t} comptées avant la fermeture. ¦ ⏱ {n}: {t} numărate înainte de închidere.
+Noter ¦ Notează
+Échéances du jour : {n} à faire (retards et aujourd’hui) ¦ Termenele zilei: {n} de făcut (întârzieri și azi)
+🔔 Échéances du jour ¦ 🔔 Termenele zilei
+⏰ Rappel ¦ ⏰ Memento
+prévu le {d} ¦ prevăzut pe {d}
+✓ Fait ¦ ✓ Făcut
+⏭ Demain (ou lundi) ¦ ⏭ Mâine (sau luni)
+↗ Ouvrir le dossier ¦ ↗ Deschide dosarul
+voir ▾ ¦ vezi ▾
+Rien pour aujourd’hui. ¦ Nimic pentru azi.
+Prochaine : {d} ({n}) ¦ Următorul: {d} ({n})
+🔔 À faire · {d} ¦ 🔔 De făcut · {d}
+Cette généalogie ¦ Această genealogie
+⚖️ {name} : impossible de lire les échéances ¦ ⚖️ {name}: termenele nu pot fi citite
+✓ fait · ⏭ demain / lundi · ↗ ouvre le dossier (change de généalogie si besoin) ¦ ✓ făcut · ⏭ mâine / luni · ↗ deschide dosarul (schimbă genealogia dacă e nevoie)
+Ajouter mes rappels ¦ Adaugă mementourile mele
+Bulle de l’ordinateur à l’ouverture de l’app ¦ Notificare a calculatorului la deschiderea aplicației
+🗓 Ma semaine ¦ 🗓 Săptămâna mea
+Reporté au {d} ¦ Amânat pe {d}
+✓ Fait : {l} ¦ ✓ Făcut: {l}
+Reporté au {d} : {l} ¦ Amânat pe {d}: {l}
+Points prêts : {n} sur {m} ¦ Puncte gata: {n} din {m}
+À revoir : {n} ¦ De revăzut: {n}
+Manque : {n} ¦ Lipsește: {n}
+📋 AVANT DE REMETTRE ¦ 📋 ÎNAINTE DE PREDARE
+Avant de remettre · {n} ¦ Înainte de predare · {n}
+Passer à « Remis au notaire » ¦ Treci la „Predat notarului”
+Ça avertit, ça n’empêche pas : tu peux remettre quand même, ce sera noté au journal. ¦ Avertizează, nu împiedică: poți preda totuși, va fi notat în jurnal.
+🖨 Imprimer quand même ¦ 🖨 Tipărește totuși
+Montant ¦ Sumă
+non signé ¦ nesemnat
+Commission ¦ Comision
+Reste à l’héritier ¦ Rămâne moștenitorului
+Arrondi au centime : chaque part est arrondie au centime inférieur, puis les centimes qui restent vont aux parts qui en ont perdu le plus. Le total tombe juste. ¦ Rotunjit la cent: fiecare cotă e rotunjită în jos la cent, apoi cenții rămași merg la cotele care au pierdut cel mai mult. Totalul iese exact.
+Tape l’actif net en euros pour voir la part de chacun. ¦ Scrie activul net în euro ca să vezi partea fiecăruia.
+Tape un montant en euros (ex. 187 450,00). ¦ Scrie o sumă în euro (ex. 187 450,00).
+Plus d’un milliard d’euros : c’est bien ça ? ¦ Peste un miliard de euro: e corect?
+Oui, calculer ¦ Da, calculează
+Si le conjoint choisit l’usufruit de la totalité : pas de montant en euros (sa valeur dépend de son âge, c’est un barème fiscal) ; demande la valeur au notaire, pour lui et pour les nus-propriétaires. ¦ Dacă soțul alege uzufructul totalității: nicio sumă în euro (valoarea depinde de vârstă, e un barem fiscal); cere valoarea notarului, pentru el și pentru nudii proprietari.
+Autre hypothèse, {h} ¦ Altă ipoteză, {h}
+📊 Part de chacun en euros ¦ 📊 Partea fiecăruia în euro
+Fractions ¦ Fracții
+💶 En euros ¦ 💶 În euro
+⤓ Copier le tableau ¦ ⤓ Copiază tabelul
+Actif net à partager (tapé par toi) ¦ Activ net de împărțit (scris de tine)
+D’après le notaire. Pas gardé : effacé quand tu fermes le dossier. ¦ După notar. Nu se păstrează: se șterge când închizi dosarul.
+Hors droits de succession et frais : l’app ne calcule pas l’impôt. Ces montants sont un ordre d’idée, à faire vérifier par le notaire. ¦ Fără taxe de succesiune și cheltuieli: aplicația nu calculează impozitul. Aceste sume sunt orientative, de verificat de notar.
+Commission = le % écrit dans « ＋ Honoraires d’un contrat » × le montant, arrondie au centime le plus proche, sans TVA ajoutée ; reste = montant − commission. ¦ Comision = procentul scris în „＋ Onorariul unui contract” × suma, rotunjit la cel mai apropiat cent, fără TVA adăugat; rămâne = sumă − comision.
+Tableau copié. ¦ Tabel copiat.
+Parts en euros — {n} ¦ Cote în euro — {n}
+Parts en euros imprimées ¦ Cote în euro tipărite
+✉️ Courrier à plusieurs… ¦ ✉️ Scrisoare către mai mulți…
+décoché ¦ debifat
+déjà écrit le {d} ({k}) ¦ deja scris pe {d} ({k})
+✉️ Courriers en série · {n} ¦ ✉️ Scrisori în serie · {n}
+Les héritiers dont l’existence n’est pas établie ne sont pas dans la liste. Les décochés peuvent être cochés à la main (une lettre sans adresse est alors imprimée sans bloc adresse). ¦ Moștenitorii a căror existență nu e stabilită nu sunt în listă. Cei debifați pot fi bifați de mână (o scrisoare fără adresă se tipărește atunci fără bloc de adresă).
+La lettre · clic sur un champ pour l’insérer ¦ Scrisoarea · clic pe un câmp ca să-l inserezi
+{envoyé_le} : la date du courrier précédent à cet héritier ; {date} : la date d’envoi de celui-ci. ¦ {envoyé_le}: data scrisorii anterioare către acest moștenitor; {date}: data trimiterii acesteia.
+Lettre précédente ¦ Scrisoarea anterioară
+Lettre suivante ¦ Scrisoarea următoare
+✎ Retoucher cette lettre ¦ ✎ Retușează această scrisoare
+↺ Revenir au modèle ¦ ↺ Înapoi la model
+＋ Enregistrer comme modèle ¦ ＋ Salvează ca model
+Lettres prêtes : {n} sur {m} ¦ Scrisori gata: {n} din {m}
+Champ inconnu : {f} (ligne {l}). Corrige-le avant de ranger les lettres. ¦ Câmp necunoscut: {f} (rândul {l}). Corectează-l înainte de a îndosaria scrisorile.
+🖨 Imprimer les {n} ¦ 🖨 Tipărește cele {n}
+Lettre {i} / {n} · {name} ¦ Scrisoarea {i} / {n} · {name}
+Champ vide : la ligne s’écrit sans le mot ¦ Câmp gol: rândul se scrie fără cuvânt
+✎ modifiée à la main ¦ ✎ modificată de mână
+Ton nom et ton adresse : Listes → Registre de courriers → ✉️ Lettres (expéditeur). ¦ Numele și adresa ta: Liste → Registrul corespondenței → ✉️ Scrisori (expeditor).
+Mes modèles (aucun pour l’instant) ¦ Modelele mele (niciunul deocamdată)
+Remplacer ta lettre par ce modèle ? ¦ Înlocuiești scrisoarea ta cu acest model?
+Changer de modèle ¦ Schimbă modelul
+Oublier les retouches de la lettre à {name} ? ¦ Uiți retușurile scrisorii către {name}?
+Revenir au modèle ¦ Înapoi la model
+Modèle « {name} » enregistré (Mes modèles, communs à tous les dossiers de cette généalogie) ¦ Modelul „{name}” salvat (Modelele mele, comune tuturor dosarelor din această genealogie)
+Corrige d’abord le champ inconnu. ¦ Corectează mai întâi câmpul necunoscut.
+Rangement : {n} sur {m} ¦ Îndosariere: {n} din {m}
+{n} rangés dans le Registre de courriers, relance le {d} ¦ {n} îndosariate în Registrul corespondenței, revenire pe {d}
+en main, cote non notée ¦ în mână, cotă nenotată
+demandé le {d} ¦ cerut pe {d}
+demandé ¦ cerut
+acte à fournir ¦ act de furnizat
+(commun, voir {n}) ¦ (comun, vezi {n})
+CHAÎNE DE FILIATION ¦ LANȚ DE FILIAȚIE
+Calcul établi d’après les actes cités, sous réserve de vérification par le notaire. ¦ Calcul făcut după actele citate, sub rezerva verificării de către notar.
+Code civil, articles cités pour ce dossier : art. {list}. ¦ Codul civil, articole citate pentru acest dosar: art. {list}.
+N. = naissance, M. = mariage, D. = décès. ¦ N. = naștere, C. = căsătorie, D. = deces.
+Page {n} / {t} ¦ Pagina {n} / {t}
+Coche au moins une page. ¦ Bifează cel puțin o pagină.
+Tableau pour le notaire : PDF ({n} pages, avec chaîne par héritier) ¦ Tabel pentru notar: PDF ({n} pagini, cu lanțul fiecărui moștenitor)
+Tableau pour le notaire : PDF ({n} pages) ¦ Tabel pentru notar: PDF ({n} pagini)
+sans adresses ¦ fără adrese
+📋 Avant de remettre ¦ 📋 Înainte de predare
+ça avertit, ça n’empêche pas ¦ avertizează, nu împiedică
+Ce que contient le PDF ¦ Ce conține PDF-ul
+Compté par le chronomètre ¦ Numărat de cronometru
+Taux horaire pour le relevé (facultatif, pas gardé) ¦ Tarif orar pentru situație (opțional, nu se păstrează)
+€ / h ¦ € / h
+✎ Modifier la ligne ¦ ✎ Modifică rândul
+Ligne modifiée ¦ Rând modificat
+Temps × taux horaire ({r} € / h) : {s} ¦ Timp × tarif orar ({r} € / h): {s}
+Ajouté depuis « ＋ Ajouter un onglet ». ¦ Adăugat din „＋ Adaugă o filă”.
+✓ Onglet « {name} » ajouté ¦ ✓ Fila „{name}” adăugată
+Onglet « {name} » caché ¦ Fila „{name}” ascunsă
+conseillé pour toi ¦ recomandat pentru tine
+montré par ton usage ¦ arătat de utilizarea ta
+Conseillés pour toi ¦ Recomandate pentru tine
+Tout le reste ▾ ¦ Tot restul ▾
+Qu’est-ce que tu veux avoir sous la main ? ¦ Ce vrei să ai la îndemână?
+Ton usage : {u} ¦ Utilizarea ta: {u}
+Chercher un onglet ¦ Caută o filă
+🔍 Chercher un onglet… (courrier, acte, agenda) ¦ 🔍 Caută o filă… (scrisoare, act, agendă)
+Conseillés ({n}) ¦ Recomandate ({n})
+Déjà dans le menu ({n}) ¦ Deja în meniu ({n})
+Aucun onglet ne correspond. ¦ Nicio filă nu corespunde.
+Une carte cochée = l’onglet est dans le menu. Cocher l’ajoute à la fin du menu ; décocher le cache (un raccourci est caché, pas effacé). ¦ O fișă bifată = fila e în meniu. Bifarea o adaugă la sfârșitul meniului; debifarea o ascunde (o scurtătură e ascunsă, nu ștearsă).
+↗ Faire un onglet à moi (Éditeur d’onglets) ¦ ↗ Fă o filă a mea (Editor de file)
+MENU ¦ MENIU
+＋ Ajouter un onglet ¦ ＋ Adaugă o filă
+Ajouter un onglet ¦ Adaugă o filă
+＋ Ajouter un onglet… ¦ ＋ Adaugă o filă…
+Montrer le ＋ au bout du menu ¦ Arată ＋ la sfârșitul meniului
+Retirer ce raccourci du menu (un onglet de l’app ne se retire pas : il se cache) ¦ Scoate această scurtătură din meniu (o filă a aplicației nu se scoate: se ascunde)
+Onglet « {name} » retiré du menu ¦ Fila „{name}” scoasă din meniu
+Le ＋ est au bout du menu ¦ ＋ e la sfârșitul meniului
+Le ＋ n’est plus au bout du menu ¦ ＋ nu mai e la sfârșitul meniului
+Recherches : {what} ¦ Cercetări: {what}
+Recherches ¦ Cercetări
+Acte de décès de {name} en main ¦ Act de deces al lui {name} în mână
+Acte de décès de {name} pas en main ¦ Actul de deces al lui {name} lipsește
+demandé, pas encore reçu ¦ cerut, încă neprimit
+Arbre de dévolution complet ¦ Arborele devoluțiunii complet
+Aucune branche à chercher. ¦ Nicio ramură de căutat.
+Branches encore à chercher : {n} ¦ Ramuri încă de căutat: {n}
+Héritiers dont l’existence n’est pas établie : {n} ¦ Moștenitori a căror existență nu e stabilită: {n}
+Liens prouvés par aucun acte : {n} ¦ Legături nedovedite de niciun act: {n}
+{what} (relie {who} au défunt) ¦ {what} (leagă {who} de defunct)
+Chaque lien est prouvé par un acte ¦ Fiecare legătură e dovedită de un act
+Actes demandés, pas encore reçus : {n} ¦ Acte cerute, încă neprimite: {n}
+{what} · demandé le {d} ¦ {what} · cerut pe {d}
+(courrier n° {n}) ¦ (scrisoarea nr. {n})
+Adresses des héritiers vivants : {n} sur {m} ¦ Adresele moștenitorilor în viață: {n} din {m}
+Aucun héritier vivant à joindre ¦ Niciun moștenitor în viață de contactat
+Contrats signés (ou refus noté) : {n} sur {m} ¦ Contracte semnate (sau refuz notat): {n} din {m}
+Aucun contrat à faire signer ¦ Niciun contract de semnat
+Contrats pas encore signés : {n} ¦ Contracte încă nesemnate: {n}
+{name} a répondu « oui », pas de date de signature ¦ {name} a răspuns „da”, fără dată de semnare
+Héritiers introuvables ou silencieux : {n} ¦ Moștenitori de negăsit sau care nu răspund: {n}
+Parts : le total fait bien 1 ¦ Cote: totalul face într-adevăr 1
+Les parts ne totalisent pas 1 : à revoir ¦ Cotele nu fac 1: de revăzut
+Échéances en retard : {n} ¦ Termene întârziate: {n}
+Aucune échéance en retard ¦ Niciun termen întârziat
+Remis au notaire avec {miss} manque(s) et {warn} point(s) à revoir ({what}) ¦ Predat notarului cu lipsuri: {miss} și puncte de revăzut: {warn} ({what})
+Madame ¦ Doamnă
+Monsieur ¦ Domnule
+Tes photos, actes, lettres de A à Z, rangés en dossiers. ¦ Fotografiile, actele, scrisorile tale de la A la Z, ordonate în dosare.
+Lettres à ouvrir plus tard, recettes, musée de famille. ¦ Scrisori de deschis mai târziu, rețete, muzeu de familie.
+Fiches thématiques : un métier, une guerre, un village. ¦ Fișe tematice: o meserie, un război, un sat.
+Tes correspondances ADN et leurs liens. ¦ Potrivirile tale ADN și legăturile lor.
+Les œuvres d’un artiste, albums, expositions. ¦ Operele unui artist, albume, expoziții.
+Pedigree, portées. (Suivi des animaux : à part.) ¦ Pedigree, fătări. (Urmărirea animalelor: separat.)
+Baguage, puces, observations, trajets. ¦ Inelare, cipuri, observații, trasee.
+Dossiers de succession, pour un notaire. ¦ Dosare de succesiune, pentru un notar.
+Le Registre de courriers : demandes d’actes, relances, réponses. ¦ Registrul corespondenței: cereri de acte, reveniri, răspunsuri.
+Listes → Archives et sources → Registre de courriers ¦ Liste → Arhive și surse → Registrul corespondenței
+Tes actes recopiés, mot à mot. ¦ Actele tale transcrise, cuvânt cu cuvânt.
+Listes → Archives et sources ¦ Liste → Arhive și surse
+Visites, rendez-vous, relances, à la semaine. ¦ Vizite, întâlniri, reveniri, pe săptămână.
+Listes → Recherche et organisation ¦ Liste → Cercetare și organizare
+Les choses à faire, avec leur date. ¦ Lucrurile de făcut, cu data lor.
+Toutes les images, sons, vidéos en tableau. ¦ Toate imaginile, sunetele, videoclipurile într-un tabel.
+Listes → Médias et documents ¦ Liste → Media și documente
+Questionnaires pour recueillir les souvenirs. ¦ Chestionare pentru a strânge amintirile.
+Les maisons, pièce par pièce, et qui y a vécu. ¦ Casele, cameră cu cameră, și cine a locuit în ele.
+Listes → Lieux et maisons ¦ Liste → Locuri și case
+Adresses et contacts des cousins vivants. ¦ Adrese și contacte ale verilor în viață.
+Listes → Personnes et familles ¦ Liste → Persoane și familii
+Les dépôts, leurs cotes, leurs horaires. ¦ Arhivele, cotele lor, programul lor.
+Le planificateur : quoi consulter, où, quand. ¦ Planificatorul: ce să consulți, unde, când.
+Qui a hérité de quoi d’après les actes anciens. ¦ Cine a moștenit ce după actele vechi.
+Les bons sites pour la personne ouverte. ¦ Site-urile potrivite pentru persoana deschisă.
+Recherche → Type de recherche ¦ Căutare → Tipul căutării
+Trouver et fusionner les fiches en double. ¦ Găsește și unește fișele duble.
+Réglages → Fusion de doublons ¦ Setări → Unirea duplicatelor
+Dates impossibles, liens bizarres. ¦ Date imposibile, legături ciudate.
+Réglages → Contrôle de la base ¦ Setări → Controlul bazei
+Le nom étudié ¦ Numele studiat
+Les porteurs d’un nom, ses variantes. ¦ Purtătorii unui nume, variantele lui.
+Graphiques → statistique des noms ¦ Grafice → statistica numelor
+L’entreprise ¦ Întreprinderea
+Employeurs, salariés, membres. ¦ Angajatori, salariați, membri.
+Listes → Employeurs ¦ Liste → Angajatori
+Des parties de l’app, cachées au départ ¦ Părți ale aplicației, ascunse la început
+Elles existent déjà : cocher les montre dans le menu. ¦ Există deja: bifarea le arată în meniu.
+Un raccourci vers une liste ¦ O scurtătură către o listă
+Il devient un « onglet à soi » (Éditeur d’onglets). ¦ Devine o „filă a ta” (Editor de file).
+Un raccourci vers un outil ¦ O scurtătură către un instrument
+Chaîne par héritier ¦ Lanțul fiecărui moștenitor
+✉️ Contactés ¦ ✉️ Contactați
+📇 Répertoire des vivants ¦ 📇 Registrul celor în viață
+Échéances du jour (usage successoral seulement) ¦ Termenele zilei (doar utilizare succesorală)
+Ce dossier est clos : rien ne s’y note. ¦ Acest dosar e închis: nu se mai notează nimic în el.
+Donne un nom au modèle. ¦ Dă un nume modelului.
+Trop de lettres d’un coup (60 au plus). ¦ Prea multe scrisori deodată (cel mult 60).
+Échéances du jour ¦ Termenele zilei

@@ -1614,3 +1614,37 @@ Lien à consolider : {child}, le fils de {parent} ¦ Tenging sem þarf að styrk
 Lien à consolider : {child}, la fille de {parent} ¦ Tenging sem þarf að styrkja: {child}, dóttir {parent}
 Lien à consolider : {child}, l’enfant de {parent} ¦ Tenging sem þarf að styrkja: {child}, barn {parent}
 cherche l’acte de naissance ou de baptême qui le nomme ¦ leitaðu að fæðingar- eða skírnarskjalinu sem nefnir viðkomandi
+# ═════ Poser une question : mariage et enfants (lib/question_famille.php) ═════
+mariées ¦ giftar
+mariés ¦ giftir
+jamais mariées ¦ aldrei giftar
+jamais mariés ¦ aldrei giftir
+=au moins {n} mariages ¦ að minnsta kosti {n} hjónaband|að minnsta kosti {n} hjónabönd
+mariées à {n} ans ¦ giftar {n} ára
+mariés à {n} ans ¦ giftir {n} ára
+mariées entre {a} et {b} ans ¦ giftar {a}–{b} ára
+mariés entre {a} et {b} ans ¦ giftir {a}–{b} ára
+mariées après {n} ans ¦ giftar eftir {n} ára aldur
+mariés après {n} ans ¦ giftir eftir {n} ára aldur
+mariées avant {n} ans ¦ giftar fyrir {n} ára aldur
+mariés avant {n} ans ¦ giftir fyrir {n} ára aldur
+sans enfant ¦ barnlaus
+avec des enfants ¦ með börn
+entre {a} et {b} enfants ¦ {a}–{b} börn
+=exactement {n} enfants ¦ nákvæmlega {n} barn|nákvæmlega {n} börn
+=au moins {n} enfants ¦ að minnsta kosti {n} barn|að minnsta kosti {n} börn
+=au plus {n} enfants ¦ í mesta lagi {n} barn|í mesta lagi {n} börn
+exactement 1 enfant ¦ nákvæmlega 1 barn
+au plus 1 enfant ¦ í mesta lagi 1 barn
+nées avant {y} ¦ fæddar fyrir {y}
+nés avant {y} ¦ fæddir fyrir {y}
+nées après {y} ¦ fæddar eftir {y}
+nés après {y} ¦ fæddir eftir {y}
+nées en {y} ¦ fæddar {y}
+nés en {y} ¦ fæddir {y}
+nées au {n}e siècle ¦ fæddar á {n}. öld
+nés au {n}e siècle ¦ fæddir á {n}. öld
+1 fiche sans date n’a pas pu être vérifiée pour l’âge au mariage (année de naissance ou de mariage inconnue). ¦ Ekki tókst að athuga 1 færslu án dagsetningar fyrir aldur við giftingu (fæðingar- eða giftingarár óþekkt).
+={n} fiches sans date n’ont pas pu être vérifiées pour l’âge au mariage (année de naissance ou de mariage inconnue). ¦ Færslur án dagsetningar sem ekki tókst að athuga fyrir aldur við giftingu: {n} (fæðingar- eða giftingarár óþekkt).|Færslur án dagsetningar sem ekki tókst að athuga fyrir aldur við giftingu: {n} (fæðingar- eða giftingarár óþekkt).
+« Jeunes » n’est pas assez précis pour un âge : écris par exemple « mariées avant 20 ans ». ¦ „Jeunes“ (ungar) er ekki nógu nákvæmt fyrir aldur: skrifaðu til dæmis „mariées avant 20 ans“.
+Venue d’une question : les critères de mariage et d’enfants sont gardés. ¦ Úr spurningu: skilyrðin um hjónaband og börn haldast.

@@ -1,0 +1,179 @@
+fr ¦ vi ¦ id
+# Zone « diagrammes-lot-c » : grille des recensements, schéma de preuve, arbre de mots (heritage-diagram-lot-c.js), zones des paroisses et carte en étoile (heritage-diagram-cartes.js), cercles d’une journée (heritage-cartes-outils.js)
+Hors de France ¦ Ngoài nước Pháp ¦ Di luar Prancis
+Ajoute des personnes (nom, naissance, décès), puis leurs recensements (année, statut). ¦ Thêm người (tên, sinh, mất), rồi các cuộc điều tra dân số của họ (năm, trạng thái). ¦ Tambahkan orang (nama, kelahiran, kematian), lalu sensus mereka (tahun, status).
+Aucune année de recensement entre ces deux dates. ¦ Không có năm điều tra nào giữa hai ngày này. ¦ Tidak ada tahun sensus di antara kedua tanggal ini.
+Plus rien à chercher : tous les recensements sont trouvés ou sans objet. ¦ Không còn gì để tìm: mọi cuộc điều tra đã tìm thấy hoặc không áp dụng. ¦ Tidak ada lagi yang dicari: semua sensus ditemukan atau tidak berlaku.
+à chercher : {list} ¦ cần tìm: {list} ¦ perlu dicari: {list}
+non trouvés : {list} ¦ không tìm thấy: {list} ¦ tidak ditemukan: {list}
+Liste de travail des recensements : {n}. ¦ Danh sách việc điều tra dân số: {n}. ¦ Daftar kerja sensus: {n}.
+Grille des recensements : {n}, {y} recensements, {d} sur {t} cherchés. ¦ Lưới điều tra dân số: {n}, {y} cuộc điều tra, đã tìm {d}/{t}. ¦ Kisi-kisi sensus: {n}, {y} sensus, {d} dari {t} dicari.
+Les recensements de la famille {name} ¦ Các cuộc điều tra dân số của gia đình {name} ¦ Sensus keluarga {name}
+Contre ¦ Phản đối ¦ Menentang
+Conflit ¦ Mâu thuẫn ¦ Konflik
+Écris la question (Réglages), puis les indices : pour, contre, recherches, conflits. ¦ Viết câu hỏi (Cài đặt), rồi các manh mối: ủng hộ, phản đối, tìm kiếm, mâu thuẫn. ¦ Tulis pertanyaan (Pengaturan), lalu petunjuk: mendukung, menentang, pencarian, konflik.
+Indices contre ¦ Manh mối phản đối ¦ Petunjuk menentang
+Recherches et conflits ¦ Tìm kiếm và mâu thuẫn ¦ Pencarian dan konflik
+Résolu : {note} ¦ Đã giải quyết: {note} ¦ Terselesaikan: {note}
+À résoudre ¦ Cần giải quyết ¦ Perlu diselesaikan
+poids {n} sur 3 ¦ trọng số {n}/3 ¦ bobot {n} dari 3
+Pas encore de conclusion ¦ Chưa có kết luận ¦ Belum ada kesimpulan
+Schéma de preuve : {a} pour, {b} contre ; certitude : {c}. ¦ Sơ đồ chứng cứ: {a} ủng hộ, {b} phản đối; độ chắc chắn: {c}. ¦ Skema bukti: {a} mendukung, {b} menentang; kepastian: {c}.
+Antoine MAZAUD est-il le père de Jean MAZAUD (né vers 1818) ? ¦ Antoine MAZAUD có phải là cha của Jean MAZAUD (sinh khoảng 1818)? ¦ Apakah Antoine MAZAUD ayah dari Jean MAZAUD (lahir sekitar 1818)?
+Oui : Antoine MAZAUD est le père de Jean. ¦ Đúng: Antoine MAZAUD là cha của Jean. ¦ Ya: Antoine MAZAUD adalah ayah Jean.
+Acte de mariage de Jean (1842) : « fils d’Antoine MAZAUD, cultivateur » ¦ Hồ sơ kết hôn của Jean (1842): «con trai của Antoine MAZAUD, nông dân» ¦ Akta nikah Jean (1842): «putra Antoine MAZAUD, petani»
+Registre paroissial, original ¦ Sổ giáo xứ, bản gốc ¦ Buku paroki, asli
+Recensement 1836 : Jean, 18 ans, au foyer d’Antoine ¦ Điều tra 1836: Jean, 18 tuổi, trong hộ của Antoine ¦ Sensus 1836: Jean, 18 tahun, di rumah tangga Antoine
+Recensement 1836, original ¦ Điều tra 1836, bản gốc ¦ Sensus 1836, asli
+Antoine est parrain du premier fils de Jean ¦ Antoine là cha đỡ đầu của con trai đầu lòng của Jean ¦ Antoine adalah bapak baptis putra pertama Jean
+Baptême 1844 ¦ Rửa tội 1844 ¦ Baptis 1844
+Un autre Jean MAZAUD, né en 1817 au village voisin ¦ Một Jean MAZAUD khác, sinh 1817 ở làng bên ¦ Jean MAZAUD lain, lahir 1817 di desa sebelah
+Acte de naissance de Jean : registre lacunaire 1815-1820 ¦ Giấy khai sinh của Jean: sổ bị thiếu 1815-1820 ¦ Akta kelahiran Jean: register tidak lengkap 1815-1820
+Âge au décès : 64 ans (né vers 1820) au lieu de 66 ¦ Tuổi khi mất: 64 (sinh khoảng 1820) thay vì 66 ¦ Usia saat meninggal: 64 tahun (lahir sekitar 1820), bukan 66
+Acte de décès 1884 ¦ Giấy chứng tử 1884 ¦ Akta kematian 1884
+l’âge déclaré au décès est souvent approximatif ¦ tuổi khai khi mất thường chỉ ước chừng ¦ usia yang dilaporkan saat meninggal sering kali perkiraan
+Écris le mot de départ (Réglages), par exemple « fils de » ou « veuve de ». ¦ Viết từ khởi đầu (Cài đặt), ví dụ «fils de» hoặc «veuve de». ¦ Tulis kata awal (Pengaturan), misalnya «fils de» atau «veuve de».
+Colle des transcriptions (une par ligne) ou prends-les « Depuis l’app ». ¦ Dán các bản chép (mỗi dòng một bản) hoặc lấy «Từ ứng dụng». ¦ Tempel transkripsi (satu per baris) atau ambil «Dari aplikasi».
+« {w} » n’est dans aucun de ces textes. ¦ «{w}» không có trong văn bản nào. ¦ «{w}» tidak ada di teks mana pun.
+… {n} autres ¦ … {n} từ khác ¦ … {n} lainnya
+Trop de branches : baisse la profondeur ou le nombre de branches (Réglages). ¦ Quá nhiều nhánh: giảm độ sâu hoặc số nhánh (Cài đặt). ¦ Terlalu banyak cabang: kurangi kedalaman atau jumlah cabang (Pengaturan).
+« {w} » : {n} fois ¦ «{w}»: {n} lần ¦ «{w}»: {n} kali
+Arbre de mots : « {w} » trouvé {n} fois dans {t}. ¦ Cây từ: «{w}» tìm thấy {n} lần trong {t}. ¦ Pohon kata: «{w}» ditemukan {n} kali dalam {t}.
+Ce qui suit « {w} » dans les actes ¦ Những gì theo sau «{w}» trong các văn bản ¦ Yang mengikuti «{w}» dalam akta
+{n} lignes prises dans l’arbre : tu peux les corriger dans l’onglet Données. ¦ Đã lấy {n} dòng từ cây: bạn có thể sửa trong thẻ Dữ liệu. ¦ {n} baris diambil dari pohon: kamu bisa memperbaikinya di tab Data.
+🗓️ Les recensements de mon arbre ¦ 🗓️ Các cuộc điều tra dân số trong cây của tôi ¦ 🗓️ Sensus di pohon saya
+Une ligne par personne, une case par recensement : ce qui est relevé sur les fiches (trouvé, non trouvé…), et « à chercher » pour le reste. Sans groupe choisi : tes ancêtres. ¦ Mỗi người một dòng, mỗi cuộc điều tra một ô: những gì ghi trên hồ sơ (đã tìm thấy, không tìm thấy…), còn lại là «cần tìm». Không chọn nhóm: tổ tiên của bạn. ¦ Satu baris per orang, satu kotak per sensus: yang tercatat di kartu (ditemukan, tidak ditemukan…), sisanya «perlu dicari». Tanpa kelompok: leluhurmu.
+Du recensement de ¦ Từ cuộc điều tra năm ¦ Dari sensus
+à celui de ¦ đến năm ¦ sampai sensus
+Les recensements de {n} ¦ Điều tra dân số của {n} ¦ Sensus {n}
+Personne dans ce groupe ne vivait entre ces deux recensements (il faut au moins une date de naissance ou de décès). ¦ Không ai trong nhóm này sống giữa hai cuộc điều tra (cần ít nhất ngày sinh hoặc ngày mất). ¦ Tak seorang pun dalam kelompok ini hidup di antara kedua sensus (perlu setidaknya tanggal lahir atau wafat).
+{n} sur {t} prises (les premières) : change « Au plus » pour en voir davantage. ¦ Đã lấy {n}/{t} (những người đầu): đổi «Tối đa» để xem thêm. ¦ {n} dari {t} diambil (yang pertama): ubah «Paling banyak» untuk melihat lebih banyak.
+⚖️ Un dossier de preuve ou une hypothèse ¦ ⚖️ Một hồ sơ chứng cứ hoặc một giả thuyết ¦ ⚖️ Berkas bukti atau hipotesis
+Choisis un dossier : sa question, ses indices pour et contre, ses recherches et ses conflits, sa conclusion. Une hypothèse à comparer donne une colonne par réponse possible. ¦ Chọn một hồ sơ: câu hỏi, manh mối ủng hộ và phản đối, các tìm kiếm và mâu thuẫn, kết luận. Một giả thuyết cần so sánh cho mỗi câu trả lời có thể một cột. ¦ Pilih berkas: pertanyaannya, petunjuk mendukung dan menentang, pencarian dan konflik, kesimpulannya. Hipotesis untuk dibandingkan memberi satu kolom per jawaban yang mungkin.
+Le dossier ¦ Hồ sơ ¦ Berkas
+Choisis d’abord un dossier. ¦ Hãy chọn hồ sơ trước. ¦ Pilih berkas dulu.
+Schéma de preuve ¦ Sơ đồ chứng cứ ¦ Skema bukti
+Ce dossier n’a encore aucune ligne : ajoute des indices dans le dossier, ou ici à la main. ¦ Hồ sơ này chưa có dòng nào: thêm manh mối trong hồ sơ hoặc nhập tay tại đây. ¦ Berkas ini belum punya baris: tambahkan petunjuk di berkas atau di sini secara manual.
+Prendre ce dossier ¦ Lấy hồ sơ này ¦ Ambil berkas ini
+🌿 Les mots de mes transcriptions ¦ 🌿 Các từ trong bản chép của tôi ¦ 🌿 Kata-kata dalam transkripsiku
+Les transcriptions des actes (atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris. ¦ Bản chép văn bản (xưởng chép) và phương tiện: những gì theo sau (hoặc đứng trước) từ khởi đầu. Chỉ lấy các đoạn câu hữu ích. ¦ Transkripsi akta (bengkel transkripsi) dan media: yang mengikuti (atau mendahului) kata awal. Hanya potongan kalimat yang berguna yang diambil.
+Le mot de départ ¦ Từ khởi đầu ¦ Kata awal
+Ce qui suit ¦ Những gì theo sau ¦ Yang mengikuti
+Ce qui précède ¦ Những gì đứng trước ¦ Yang mendahului
+Commune (dans le lieu ou le titre de l’acte) ¦ Xã/thị trấn (trong địa điểm hoặc tiêu đề văn bản) ¦ Kota/desa (di tempat atau judul akta)
+Actes pris ¦ Văn bản được lấy ¦ Akta yang diambil
+Actes notariés ¦ Văn bản công chứng ¦ Akta notaris
+Militaires ¦ Quân sự ¦ Militer
+Lettres ¦ Thư từ ¦ Surat
+Transcriptions des médias ¦ Bản chép của phương tiện ¦ Transkripsi media
+Écris le mot de départ (par exemple « fils de »). ¦ Viết từ khởi đầu (ví dụ «fils de»). ¦ Tulis kata awal (misalnya «fils de»).
+Coche au moins une sorte d’acte. ¦ Đánh dấu ít nhất một loại văn bản. ¦ Centang setidaknya satu jenis akta.
+Ce qui précède « {w} » dans les actes ¦ Những gì đứng trước «{w}» trong các văn bản ¦ Yang mendahului «{w}» dalam akta
+« {w} » n’est dans aucune transcription de ce choix ({n} lues). ¦ «{w}» không có trong bản chép nào của lựa chọn này (đã đọc {n}). ¦ «{w}» tidak ada di transkripsi mana pun dalam pilihan ini ({n} dibaca).
+« {w} » : {n} fois, dans {a}. ¦ «{w}»: {n} lần, trong {a}. ¦ «{w}»: {n} kali, dalam {a}.
+Dossier sans question ¦ Hồ sơ không có câu hỏi ¦ Berkas tanpa pertanyaan
+Aucun dossier pour ce groupe de personnes ¦ Không có hồ sơ cho nhóm người này ¦ Tidak ada berkas untuk kelompok orang ini
+Ferme l’éditeur, puis clique sur la case pour ouvrir la fiche (bloc « Recensements »). ¦ Đóng trình chỉnh sửa, rồi bấm vào ô để mở hồ sơ (khối «Điều tra dân số»). ¦ Tutup editor, lalu klik kotak untuk membuka kartu (blok «Sensus»).
+Recensement {yr} : dans le bloc « Recensements » de la fiche. ¦ Điều tra {yr}: trong khối «Điều tra dân số» của hồ sơ. ¦ Sensus {yr}: di blok «Sensus» pada kartu.
+Grille des recensements (personnes × années) ¦ Lưới điều tra dân số (người × năm) ¦ Kisi-kisi sensus (orang × tahun)
+Ma recherche ¦ Nghiên cứu của tôi ¦ Penelitianku
+Une ligne par personne, une colonne par recensement : ce qui est trouvé, pas trouvé, et ce qui reste à chercher. ¦ Mỗi người một dòng, mỗi cuộc điều tra một cột: đã tìm thấy, không tìm thấy và còn phải tìm. ¦ Satu baris per orang, satu kolom per sensus: yang ditemukan, tidak ditemukan, dan yang masih perlu dicari.
+Les personnes (une ligne sans année : naissance, décès) et leurs recensements (une ligne par année) ¦ Các người (dòng không có năm: sinh, mất) và các cuộc điều tra (mỗi năm một dòng) ¦ Orang-orang (baris tanpa tahun: lahir, wafat) dan sensus mereka (satu baris per tahun)
+Naissance (année) ¦ Sinh (năm) ¦ Lahir (tahun)
+Décès (année) ¦ Mất (năm) ¦ Wafat (tahun)
+Recensement (année) ¦ Điều tra (năm) ¦ Sensus (tahun)
+Note (lieu, adresse…) ¦ Ghi chú (nơi, địa chỉ…) ¦ Catatan (tempat, alamat…)
+Grille (une case par recensement) ¦ Lưới (mỗi cuộc điều tra một ô) ¦ Kisi-kisi (satu kotak per sensus)
+Liste de travail à imprimer (ce qui reste à chercher) ¦ Danh sách việc để in (những gì còn phải tìm) ¦ Daftar kerja untuk dicetak (yang masih perlu dicari)
+À celui de ¦ Đến năm ¦ Sampai sensus
+Ou mes années (ex. 1846, 1851, 1872) ¦ Hoặc các năm của tôi (vd. 1846, 1851, 1872) ¦ Atau tahun pilihanku (mis. 1846, 1851, 1872)
+Personnes montrées ¦ Người được hiển thị ¦ Orang yang ditampilkan
+Seulement celles qui ont encore un recensement à chercher ¦ Chỉ những người còn cuộc điều tra cần tìm ¦ Hanya yang masih punya sensus untuk dicari
+Le plus à chercher d’abord ¦ Nhiều việc cần tìm nhất trước ¦ Paling banyak dicari dulu
+Par naissance ¦ Theo năm sinh ¦ Menurut kelahiran
+Par nom ¦ Theo tên ¦ Menurut nama
+Couleur « Trouvé » ¦ Màu «Đã tìm thấy» ¦ Warna «Ditemukan»
+Couleur « Non trouvé » ¦ Màu «Không tìm thấy» ¦ Warna «Tidak ditemukan»
+Couleur « À chercher » ¦ Màu «Cần tìm» ¦ Warna «Perlu dicari»
+Couleur « Hors de France » ¦ Màu «Ngoài nước Pháp» ¦ Warna «Di luar Prancis»
+Couleur « Pas né / déjà décédé » ¦ Màu «Chưa sinh / đã mất» ¦ Warna «Belum lahir / sudah wafat»
+Écart entre les cases ¦ Khoảng cách giữa các ô ¦ Jarak antarkotak
+Signes dans les cases (✓ ✗ ?) ¦ Ký hiệu trong ô (✓ ✗ ?) ¦ Tanda di kotak (✓ ✗ ?)
+Années de vie à côté du nom ¦ Năm sinh–mất cạnh tên ¦ Tahun hidup di samping nama
+Schéma de preuve (question, indices pour et contre, conclusion) ¦ Sơ đồ chứng cứ (câu hỏi, manh mối ủng hộ và phản đối, kết luận) ¦ Skema bukti (pertanyaan, petunjuk mendukung dan menentang, kesimpulan)
+La question en haut, les indices pour et contre (avec leur poids et leur source), les recherches et les conflits, puis la conclusion et sa certitude. ¦ Câu hỏi ở trên, manh mối ủng hộ và phản đối (với trọng số và nguồn), các tìm kiếm và mâu thuẫn, rồi kết luận và độ chắc chắn. ¦ Pertanyaan di atas, petunjuk mendukung dan menentang (dengan bobot dan sumbernya), pencarian dan konflik, lalu kesimpulan dan kepastiannya.
+Les lignes du dossier (pour, contre, recherche, conflit ; « réponse » pour une hypothèse à plusieurs réponses) ¦ Các dòng của hồ sơ (ủng hộ, phản đối, tìm kiếm, mâu thuẫn; «câu trả lời» cho giả thuyết có nhiều câu trả lời) ¦ Baris berkas (mendukung, menentang, pencarian, konflik; «jawaban» untuk hipotesis dengan beberapa jawaban)
+Indice (ou réponse) ¦ Manh mối (hoặc câu trả lời) ¦ Petunjuk (atau jawaban)
+Poids (1 à 3) ¦ Trọng số (1 đến 3) ¦ Bobot (1 sampai 3)
+Pour la réponse… (hypothèse) ¦ Cho câu trả lời… (giả thuyết) ¦ Untuk jawaban… (hipotesis)
+Note (résolution d’un conflit) ¦ Ghi chú (cách giải quyết mâu thuẫn) ¦ Catatan (penyelesaian konflik)
+La conclusion ¦ Kết luận ¦ Kesimpulan
+Montrer les recherches et les conflits (ce qui reste à chercher) ¦ Hiện các tìm kiếm và mâu thuẫn (những gì còn phải tìm) ¦ Tampilkan pencarian dan konflik (yang masih perlu dicari)
+Couleur « confirme » ¦ Màu «xác nhận» ¦ Warna «menguatkan»
+Couleur « contredit » ¦ Màu «mâu thuẫn» ¦ Warna «membantah»
+Couleur des recherches ¦ Màu của tìm kiếm ¦ Warna pencarian
+Couleur des conflits ¦ Màu của mâu thuẫn ¦ Warna konflik
+Couleur des réponses ¦ Màu của câu trả lời ¦ Warna jawaban
+Couleur de la question ¦ Màu của câu hỏi ¦ Warna pertanyaan
+Arbre de mots des actes (ce qui suit « fils de »…) ¦ Cây từ của văn bản (những gì theo sau «fils de»…) ¦ Pohon kata akta (yang mengikuti «fils de»…)
+Un mot de départ à gauche ; à droite, les mots qui le suivent dans les actes, plus gros quand ils reviennent souvent. ¦ Một từ khởi đầu ở bên trái; bên phải là các từ theo sau trong văn bản, to hơn khi xuất hiện thường xuyên. ¦ Kata awal di kiri; di kanan, kata-kata yang mengikutinya dalam akta, lebih besar bila sering muncul.
+Les textes (une transcription ou un bout de phrase par ligne) ¦ Các văn bản (mỗi dòng một bản chép hoặc đoạn câu) ¦ Teks (satu transkripsi atau potongan kalimat per baris)
+Acte ou source ¦ Văn bản hoặc nguồn ¦ Akta atau sumber
+Le mot de départ (ex. fils de, veuve de) ¦ Từ khởi đầu (vd. fils de, veuve de) ¦ Kata awal (mis. fils de, veuve de)
+Profondeur (mots) ¦ Độ sâu (từ) ¦ Kedalaman (kata)
+Branches par mot ¦ Số nhánh mỗi từ ¦ Cabang per kata
+Seulement les mots vus au moins ¦ Chỉ các từ xuất hiện ít nhất ¦ Hanya kata yang muncul setidaknya
+Le reste dans « … autres » ¦ Phần còn lại trong «… từ khác» ¦ Sisanya dalam «… lainnya»
+Écrire le nombre de fois ¦ Ghi số lần xuất hiện ¦ Tulis jumlah kemunculan
+Sans tenir compte des capitales ni des accents ¦ Không phân biệt chữ hoa và dấu ¦ Tanpa memperhatikan huruf besar dan aksen
+Seulement les actes de (lieu) ¦ Chỉ văn bản ở (nơi) ¦ Hanya akta dari (tempat)
+Couleur des mots ¦ Màu chữ ¦ Warna kata
+Couleur du mot de départ ¦ Màu của từ khởi đầu ¦ Warna kata awal
+⭕ En une journée ¦ ⭕ Trong một ngày ¦ ⭕ Dalam sehari
+Lieu de départ ¦ Nơi xuất phát ¦ Tempat berangkat
+Montrer les lieux de la famille ¦ Hiện các nơi của gia đình ¦ Tampilkan tempat keluarga
+Ce qu’on atteignait en une journée ¦ Nơi có thể đến trong một ngày ¦ Yang bisa dicapai dalam sehari
+Choisis le lieu de départ ¦ Chọn nơi xuất phát ¦ Pilih tempat berangkat
+Ce lieu n’a pas de position sur la carte : place-le d’abord. ¦ Nơi này chưa có vị trí trên bản đồ: hãy đặt nó trước. ¦ Tempat ini belum punya posisi di peta: tempatkan dulu.
+Coche au moins un moyen de voyager ¦ Đánh dấu ít nhất một phương tiện ¦ Centang setidaknya satu cara bepergian
+Les fonds de carte ne sont pas chargés. ¦ Bản đồ nền chưa được tải. ¦ Peta dasar belum dimuat.
+Je dessine les cercles… ¦ Đang vẽ các vòng tròn… ¦ Sedang menggambar lingkaran…
+En {d} jours depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ Trong {d} ngày từ {from}, năm {year}: theo đường chim bay khoảng {list}. ¦ Dalam {d} hari dari {from}, tahun {year}: garis lurus sekitar {list}.
+En une journée depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ Trong một ngày từ {from}, năm {year}: theo đường chim bay khoảng {list}. ¦ Dalam sehari dari {from}, tahun {year}: garis lurus sekitar {list}.
+Rayon (vol d’oiseau) ¦ Bán kính (đường chim bay) ¦ Radius (garis lurus)
+Lieux de la famille ¦ Các nơi của gia đình ¦ Tempat keluarga
+Le rayon tient compte du détour de la route (réglage « Vitesses et sources »). Un trait pointillé : ce moyen n’existait pas encore cette année-là. ¦ Bán kính đã tính đến đường vòng (cài đặt «Tốc độ và nguồn»). Nét chấm: phương tiện này chưa có vào năm đó. ¦ Radius memperhitungkan jalan yang berkelok (pengaturan «Kecepatan dan sumber»). Garis putus-putus: cara ini belum ada pada tahun itu.
+Paroisses (zones autour des églises) ¦ Giáo xứ (vùng quanh nhà thờ) ¦ Paroki (wilayah di sekitar gereja)
+⚠ Paroisses sans position : {list} — choisis-les dans la liste (onglet Données) ou écris « Nom 45.27, 1.77 » ¦ ⚠ Giáo xứ chưa có vị trí: {list} — chọn trong danh sách (thẻ Dữ liệu) hoặc viết «Tên 45.27, 1.77» ¦ ⚠ Paroki tanpa posisi: {list} — pilih dari daftar (tab Data) atau tulis «Nama 45.27, 1.77»
+Ajoute des paroisses (une ville de la liste, ou « Depuis l’app ») et leurs chiffres. ¦ Thêm giáo xứ (một nơi trong danh sách hoặc «Từ ứng dụng») và số liệu. ¦ Tambahkan paroki (tempat dari daftar atau «Dari aplikasi») dan angkanya.
+Zones des paroisses : {n}. ¦ Vùng giáo xứ: {n}. ¦ Wilayah paroki: {n}.
+Un point à chaque église ¦ Một chấm ở mỗi nhà thờ ¦ Titik di setiap gereja
+Limites des départements par-dessus les paroisses ¦ Ranh giới tỉnh vẽ đè lên giáo xứ ¦ Batas departemen di atas paroki
+Cadrer tout seul sur les paroisses ¦ Tự khung vào các giáo xứ ¦ Bingkai otomatis ke paroki
+Liens montrés ¦ Liên kết được hiển thị ¦ Hubungan yang ditampilkan
+Ceux qui arrivent et ceux qui partent ¦ Người đến và người đi ¦ Yang datang dan yang pergi
+Seulement ceux qui arrivent ¦ Chỉ người đến ¦ Hanya yang datang
+Seulement ceux qui partent ¦ Chỉ người đi ¦ Hanya yang pergi
+Les liens de {name} ¦ Các liên kết của {name} ¦ Hubungan {name}
+bleu : conjoints venus ¦ xanh dương: vợ/chồng đến ¦ biru: pasangan yang datang
+orange : enfants partis ¦ cam: con cái đã đi ¦ oranye: anak yang pergi
+rouge : émigrés ¦ đỏ: người di cư ¦ merah: emigran
+Lieux : {list} ¦ Địa điểm: {list} ¦ Tempat: {list}
+⛪ Au niveau « Paroisses » (Réglages → Niveau de détail) : une zone autour de chaque église, d’après les paroisses d’Ancien Régime de tes lieux ; un lieu sans paroisse compte pour lui-même. ¦ ⛪ Ở mức «Giáo xứ» (Cài đặt → Mức chi tiết): một vùng quanh mỗi nhà thờ, theo các giáo xứ cũ của các nơi; nơi không có giáo xứ tự tính riêng. ¦ ⛪ Pada tingkat «Paroki» (Pengaturan → Tingkat detail): wilayah di sekitar setiap gereja, menurut paroki lama tempat-tempatmu; tempat tanpa paroki dihitung sendiri.
+✳️ Tous les liens d’un lieu (carte en étoile) ¦ ✳️ Mọi liên kết của một nơi (bản đồ hình sao) ¦ ✳️ Semua hubungan sebuah tempat (peta bintang)
+Le village ¦ Làng ¦ Desa
+Conjoints venus s’y marier ¦ Vợ/chồng đến đó kết hôn ¦ Pasangan yang datang menikah di sana
+Enfants partis (nés ici, morts ou mariés ailleurs) ¦ Con cái đã đi (sinh ở đây, mất hoặc kết hôn nơi khác) ¦ Anak yang pergi (lahir di sini, wafat atau menikah di tempat lain)
+Émigrés (morts dans un autre pays) ¦ Người di cư (mất ở nước khác) ¦ Emigran (wafat di negara lain)
+Choisis d’abord le village. ¦ Hãy chọn làng trước. ¦ Pilih desa dulu.
+Coche au moins une sorte de lien. ¦ Đánh dấu ít nhất một loại liên kết. ¦ Centang setidaknya satu jenis hubungan.
+Aucun lien trouvé pour ce lieu (naissance, mariage ou décès ailleurs). ¦ Không tìm thấy liên kết nào cho nơi này (sinh, kết hôn hoặc mất ở nơi khác). ¦ Tidak ditemukan hubungan untuk tempat ini (kelahiran, pernikahan, atau kematian di tempat lain).
+{n} prises dans l’arbre ({m} lieux rattachés à une paroisse d’Ancien Régime, les autres comptent pour eux-mêmes). ¦ Đã lấy từ cây: {n} ({m} nơi gắn với giáo xứ cũ, các nơi khác tự tính riêng). ¦ Diambil dari pohon: {n} ({m} tempat terkait paroki lama, yang lain dihitung sendiri).
+Aucun lieu avec des coordonnées pour ce choix : place d’abord tes lieux sur la carte. ¦ Không có nơi nào có tọa độ cho lựa chọn này: hãy đặt các nơi lên bản đồ trước. ¦ Tidak ada tempat berkoordinat untuk pilihan ini: tempatkan dulu tempat-tempatmu di peta.
+sa paroisse ¦ giáo xứ của nó ¦ parokinya
+leur paroisse ¦ giáo xứ của chúng ¦ paroki mereka
+une paroisse ¦ một giáo xứ ¦ sebuah paroki
+Paroisse sans position : choisis sa commune dans la liste, ou écris « Nom 45.27, 1.77 ». ¦ Giáo xứ chưa có vị trí: chọn xã của nó trong danh sách hoặc viết «Tên 45.27, 1.77». ¦ Paroki tanpa posisi: pilih kotanya dari daftar atau tulis «Nama 45.27, 1.77».
+Carte en étoile : seulement les liens de ce lieu (vide = tous les flux) ¦ Bản đồ hình sao: chỉ các liên kết của nơi này (trống = mọi luồng) ¦ Peta bintang: hanya hubungan tempat ini (kosong = semua arus)
+niveau|paroisse ¦ giáo xứ ¦ paroki
+=paroisse ¦ giáo xứ ¦ paroki

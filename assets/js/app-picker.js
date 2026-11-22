@@ -120,7 +120,7 @@
     function rowHtml(it, q, idx, on) {
         const s = sosaOf(it), title = mark(it.title, q), titleHit = title.includes('<mark>'); // la ligne grise n'est surlignée que si le nom ne l'est pas
         const badge = s ? `<span class="pk-badge sosa">Sosa ${s}</span>` : it.badge ? `<span class="pk-badge2${it.badge_style === 'blue' ? ' blue' : ''}">${esc(it.badge)}</span>` : '';
-        return `<div class="pk-item pk-row${on ? ' on' : ''}" role="option" data-row="${idx}" aria-selected="${on ? 'true' : 'false'}">${sym(it)}<div class="pk-txt"><div class="pk-name">${title}</div>${it.meta ? `<div class="pk-meta">${titleHit ? esc(it.meta) : mark(it.meta, q, 3)}</div>` : ''}</div>${badge}</div>`;
+        return `<div class="pk-item pk-row${on ? ' on' : ''}" role="option" data-row="${idx}" aria-selected="${on ? 'true' : 'false'}">${sym(it)}<div class="pk-txt"><div class="pk-name">${title}</div>${it.meta ? `<div class="pk-meta">${titleHit ? esc(it.meta) : mark(it.meta, q, 3)}</div>` : ''}${window.LCNDA_RFR?.whyHtml?.(it.why, 'rfr-why pk-why') || ''}</div>${badge}</div>`;
     }
     /** Pastille d'une chose choisie (seule : avec « ↗ Fiche » ; dans une liste : petite). */
     function chipHtml(it, i, small) {
@@ -169,7 +169,7 @@
             allowCreate: o.allowCreate === undefined ? 'auto' : !!o.allowCreate, roles: o.roles ? {main: o.roles.main !== false, roleList: roleListOf(o.roles), zones: o.roles.zones && typeof o.roles.zones === 'object' ? o.roles.zones : null} : null,
             animals: o.animals === false ? 0 : o.animals === 'only' ? 2 : 1, label: o.label || '', // 'only' : seulement les animaux
             noName: o.hiddenName === false || o.name === '', inline: !!o.inline,
-            filter: {person_id: Number(f.person_id) || 0, media_type: ['image', 'audio', 'video', 'document'].includes(f.media_type) ? f.media_type : '', art_kind: String(f.art_kind || '').replace(/[^a-z0-9_,]/g, ''), art_person: Number(f.art_person) || 0}};
+            filter: {person_id: Number(f.person_id) || 0, media_type: ['image', 'audio', 'video', 'document'].includes(f.media_type) ? f.media_type : '', art_kind: String(f.art_kind || '').replace(/[^a-z0-9_,]/g, ''), art_person: Number(f.art_person) || 0, as_kind: String(f.as_kind || '').replace(/[^a-z]/g, '')}};
         const c = makeCtrl(opts, o.value);
         return `<div class="pk${opts.roles ? ' pk-roles' : ''}${opts.inline ? ' pk-inline' : ''}" data-picker="${esc(opts.kind)}" data-pk-opts="${esc(JSON.stringify(opts))}" data-pk-value="${esc(JSON.stringify(stateOut(c)))}">${innerHtml(c)}</div>`;
     }
@@ -310,6 +310,7 @@
         if (f.art_kind) extra.art_kind = f.art_kind;
         if (f.art_person) extra.art_person = f.art_person;
         if (f.graph_kinds) extra.graph_kinds = f.graph_kinds;
+        if (f.as_kind) extra.as_kind = f.as_kind; // 🏛 services d'archives d'une sorte : « notary » = les études de notaire (lib/etudes_notaire.php)
         return {kind, q, animals: c.opts.animals === 0 || c.opts.animals === 2 ? c.opts.animals : 1, ...extra};
     }
     async function run(c, s, more = false) {
@@ -375,7 +376,9 @@
         st.flat = [...flat.map(it => ({item: it})), ...acts];
         if (st.active >= st.flat.length) st.active = Math.max(0, st.flat.length - 1);
         let idx = 0, body = '';
-        const showGroups = st.kind === 'place' || st.kind.includes(',');
+        const showGroups = st.kind === 'place' || st.kind.includes(',') || st.groups.filter(g => g.items.length).length > 1; // 🏛 études, puis « Déjà tapé dans d'autres dossiers »
+        const fb = flat.length ? st.groups.find(g => g.fallback)?.fallback : null; // 🔎 « Aucun « Dupond » ; 3 personnes proches : … » (app-recherche-fr.js)
+        if (fb) body += window.LCNDA_RFR?.fallbackHtml?.(fb) || '';
         st.groups.forEach(g => {
             if (!g.items.length) return;
             if (showGroups) body += `<div class="pk-grp${g.key === 'fr' || g.key === 'world' ? ' gray' : ''}">${esc(g.label)}</div>`;

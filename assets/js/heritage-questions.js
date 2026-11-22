@@ -433,6 +433,8 @@
                     body = {file: await f.text()};
                     // 🔍 un fichier « Qui est sur cette photo ? » : il va dans sa propre fenêtre d'import (heritage-photo-ask.js)
                     if (ext.photoAsk?.isReplyText(body.file)) { document.querySelectorAll('dialog.k-import[open]').forEach(d => d.close()); ext.photoAsk.importAnswers({files: [f], after}); return {count: 0, ok: false}; }
+                    // 🖊 un fichier de relecture d'une branche (plus-famille-relecture.js) : sa propre fenêtre, ✓ / ✕ par fait
+                    if (ext.familyReview?.isReplyText(body.file)) { document.querySelectorAll('dialog.k-import[open]').forEach(d => d.close()); ext.familyReview.importAnswers({files: [f], after}); return {count: 0, ok: false}; }
                 }
                 const r = await write('analyze', body);
                 const n = r.answers.length;

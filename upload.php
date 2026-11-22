@@ -8,6 +8,7 @@ try {
     // Plusieurs généalogies : une fenêtre restée sur une autre généalogie n'envoie pas ses fichiers dans celle-ci (même règle qu'api.php)
     $pageGenealogy = $_SERVER['HTTP_X_GENEALOGY'] ?? null;
     if (is_string($pageGenealogy) && $pageGenealogy !== (GENEALOGY_ID === '' ? 'main' : GENEALOGY_ID)) json_response(['error'=>'Une autre généalogie a été ouverte dans une autre fenêtre : recharge la page.','genealogy_changed'=>true],409);
+    glock_guard('upload', true, $_POST); // 🔐 généalogie verrouillée : rien n'entre (lib/verrou.php)
     verify_csrf($_POST);
     kiosk_guard('upload', true);
     $personId=safe_int($_POST['person_id']??0);$eventId=safe_int($_POST['event_id']??0);$censusId=safe_int($_POST['census_id']??0);$investigationId=safe_int($_POST['investigation_id']??0);$battueItemId=safe_int($_POST['battue_item_id']??0);$archiveDigestId=safe_int($_POST['archive_digest_id']??0);$archiveDigestPageNumber=safe_text($_POST['archive_digest_page_number']??'');$title=safe_text($_POST['title']??'');
@@ -82,9 +83,12 @@ try {
             $mediaType=$mime==='application/pdf'?'pdf':(str_starts_with($mime,'audio/')?'audio':(str_starts_with($mime,'video/')?'video':'image'));
             if($mediaType==='video'&&($_POST['audio_only']??'')==='1')$mediaType='audio'; // un mémo vocal enregistré (WebM sans image)
             if($isPostcard&&$mediaType!=='image')throw new RuntimeException('Une carte postale recto/verso doit contenir uniquement deux images.');
+            // 📎 la taille la plus grande se règle (Réglages → Fichiers des médias, lib/media_limits.php) : 100 Mo conseillés pour une image ou un document, 250 Mo pour un son ou une vidéo
             $isAudioVideo=str_starts_with($mime,'audio/')||str_starts_with($mime,'video/');
-            $limitMb=$isAudioVideo?250:25;
-            if($size>$limitMb*1024*1024)throw new RuntimeException("{$name} dépasse {$limitMb} Mo");
+            $limitMb=media_limits($pdo)[$isAudioVideo?'av_mb':'image_mb'];
+            if($size>$limitMb*1024*1024)throw new RuntimeException($isAudioVideo?i18n_t('{name} dépasse {n} Mo, la taille la plus grande réglée pour un son ou une vidéo (Réglages → Fichiers des médias).',['name'=>$name,'n'=>$limitMb]):i18n_t('{name} dépasse {n} Mo, la taille la plus grande réglée pour une image ou un document (Réglages → Fichiers des médias).',['name'=>$name,'n'=>$limitMb]));
+            // une image immense est gardée ; seuls les outils qui la décodent (vignettes, Mieux voir, lecture, retouche) ne la traiteront pas
+            if($mediaType==='image'&&($big=media_image_too_big($tmp,$pdo)))$bigNotices[$name]=media_too_big_message($big);
             $stored=bin2hex(random_bytes(16)).'.'.$allowed[$mime];$destination=MEDIA_DIR.'/'.$stored;if(!move_uploaded_file($tmp,$destination))throw new RuntimeException("Impossible de copier {$name}");$movedFiles[]=$destination;
             $postcardSide=$isPostcard?($i===0?'recto':'verso'):(($isGroupedUpload&&$count>1)?'image '.($i+1):'');
             $mediaTitle=$title!==''?($count>1?"{$title} — ".($postcardSide?:pathinfo($name,PATHINFO_FILENAME)):$title):pathinfo($name,PATHINFO_FILENAME);if($postcardSide&&stripos($mediaTitle,$postcardSide)===false)$mediaTitle.=' — '.$postcardSide;
@@ -104,6 +108,6 @@ try {
         else if($battueItemId)log_change($pdo,'battue_item',$battueItemId,'upload',count($created).' média(s) ajouté(s)');
         else if($archiveDigestId)log_change($pdo,'archive_digest',$archiveDigestId,'upload',count($created).' média(s) ajouté(s)');
         else log_change($pdo,'person',$personId,'upload',count($created).' média(s) ajouté(s)');
-        $pdo->commit();json_response(['ok'=>true,'media'=>$created]);
+        $pdo->commit();json_response(['ok'=>true,'media'=>$created]+(!empty($bigNotices)?['notice'=>implode("\n",array_map(fn($n,$m)=>"{$n} : {$m}",array_keys($bigNotices),$bigNotices))]:[]));
     }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();foreach($movedFiles??[] as $f)@unlink($f);throw $e;} // envoi refusé : les fichiers déjà copiés repartent
 }catch(Throwable $e){json_response(['error'=>$e->getMessage()],422);}

@@ -74,6 +74,69 @@ const t = async (name, fn) => { try { await fn(); console.log('✓', name); } ca
         assert.ok(C.rank([{key: 'x', label: 'X', country: 'Italie'}], soldier).out.length === 1, 'champ « country » d’un lot lu tel quel');
         assert.equal(C.canonCountry('Torino, Piemonte, ITALIA'), 'it'); assert.equal(C.canonCountry('États-Unis'), 'us'); assert.equal(C.canonCountry('International'), '*');
     });
+    /* le lot 8 (sites gratuits) et les morts des guerres : jamais pour quelqu'un mort hors guerre */
+    const S8 = require('../assets/js/app-sources-ouvertes-8-core.js');
+    const all8 = [...reg, ...S(Object.keys(C.RULES).filter(k => !reg.some(x => x.key === k) && !k.startsWith('so8_'))), ...S8.SITES.map(s => ({key: `so8_${s.key}`, label: s.label, country: s.country, years: s.years, paid: s.paid}))];
+    const warKeys = Object.keys(C.RULES).filter(k => Array.isArray(C.RULES[k].diedIn));
+    const life = (country, by, dy, extra = {}) => C.context({person: {gender: extra.gender || 'male', birth_year: by}, events: [{tag: 'BIRT', year: by, place: extra.place || 'X', country}, ...(dy ? [{tag: 'DEAT', year: dy, place: extra.place || 'X', country}] : [])], profiles: extra.profiles || [], missing: extra.missing || []});
+    await t('lot 8 : chaque site a une règle, une adresse https et un libellé ; pas de doublon de clé avec les autres lots', () => {
+        for (const s of S8.SITES) {
+            assert.ok(C.RULES[`so8_${s.key}`], `${s.key} : règle dans RULES`);
+            assert.match(S8.url(s.key, {last: 'Dupont'}), /^https:\/\/[^\s<>"'`]+$/, s.key);
+            assert.ok(s.label && s.icon && s.group && S8.GROUPS.some(g => g.id === s.group), s.key);
+            assert.ok(!s.paid || s.paid === 'partiel', `${s.key} : gratuit ou en partie seulement`);
+        }
+        assert.ok(S8.SITES.length >= 30);
+        const others = fs.readdirSync(path.join(appRoot, 'assets/js')).filter(f => /^app-sources-ouvertes(-\d)?-core\.js$/.test(f) && !f.includes('-8-'));
+        const host = u => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (_) { return ''; } };
+        for (const f of others) {
+            const src = fs.readFileSync(path.join(appRoot, 'assets/js', f), 'utf8');
+            for (const s of S8.SITES) { const h = host(s.home); if (s.key === 'geneawiki_releves') continue; assert.ok(!src.includes(`'https://${h}`) && !src.includes(`'https://www.${h}`), `${h} est déjà un site de ${f}`); }
+        }
+        assert.equal(S8.copyText('cwgc', {last: 'Smith', first: 'John Henry'}), 'SMITH John'); assert.equal(S8.copyText('saaga', {place: 'Tartu, Estonie'}), 'Tartu');
+        assert.equal(S8.url('freereg', {last: 'Smith'}, {freereg: 'https://ex.org/?n={nom}'}), 'https://ex.org/?n=Smith', 'adresse à soi');
+        assert.equal(S8.url('freereg', {last: 'x'}, {freereg: 'javascript:alert(1)'}), 'https://www.freereg.org.uk/', 'adresse dangereuse ignorée');
+        assert.equal(S8.paidBadge('geneabank').text, 'En partie payant'); assert.equal(S8.paidBadge('cwgc'), null);
+    });
+    await t('morts des guerres : né en 1843 et mort en 1913 → aucun ; mort en 1916 → les morts de 14-18', () => {
+        assert.ok(warKeys.length >= 15, warKeys.join(','));
+        const old = C.rank(all8, life('France', 1843, 1913));
+        const bad = old.list.filter(x => warKeys.includes(x.site.key)).map(x => x.site.key);
+        assert.deepEqual(bad, [], 'mort en 1913 : aucun site de morts de guerre');
+        assert.ok(old.out.some(o => o.site.key === 'so4_morts_1870' && /mort en 1913, pas pendant une guerre/.test(o.why)), old.out.map(o => `${o.site.key}:${o.why}`).join(' | '));
+        const poilu = C.rank(all8, life('France', 1890, 1916));
+        assert.ok(poilu.list.some(x => x.site.key === 'so_mdh_mpf1418'), poilu.list.map(x => x.site.key).join(','));
+        // ailleurs aussi : un Anglais, un Allemand, un Italien morts hors guerre → aucun ; morts en 1916 → leur registre
+        for (const [country, key] of [['England', 'so8_cwgc'], ['Deutschland', 'so8_volksbund'], ['Italia', 'so8_caduti_gg'], ['Belgique', 'so8_wardead_be'], ['Canada', 'so8_cvwm']]) {
+            const r1913 = C.rank(all8, life(country, 1880, 1913));
+            assert.deepEqual(r1913.list.filter(x => warKeys.includes(x.site.key)).map(x => x.site.key), [], `${country} mort en 1913`);
+            assert.ok(r1913.out.some(o => o.site.key === key), `${country} : ${key} écarté`);
+            const r1916 = C.rank(all8, life(country, 1890, 1916));
+            const hit = r1916.list.find(x => x.site.key === key);
+            assert.ok(hit, `${country} mort en 1916 : ${key}`); assert.match(hit.reasons[0], /Mort en 1916 : son nom est peut-être dans ce registre des morts de la guerre/);
+        }
+        // morte en 1980 : jamais un registre de morts de guerre ; décès inconnu : proposé (« s'il est mort à la guerre »)
+        const f = C.rank(all8, life('England', 1900, 1980, {gender: 'female'}));
+        assert.ok(f.out.some(o => o.site.key === 'so8_cwgc' && /morte en 1980, pas pendant une guerre/.test(o.why)));
+        const unknown = C.rank(all8, life('Deutschland', 1890, 0)).list.find(x => x.site.key === 'so8_volksbund');
+        assert.ok(unknown && /s’il est mort à la guerre/.test(unknown.reasons[0]));
+    });
+    await t('lot 8 : les bons sites pour le bon pays', () => {
+        const keys = c => C.rank(all8, c).list.map(x => x.site.key);
+        const nl = keys(life('Nederland', 1850, 1920, {missing: ['parents']}));
+        assert.ok(nl.includes('so8_archieven_nl') && nl.includes('so8_wiewaswie'), nl.join(','));
+        const ie = keys(life('Ireland', 1860, 1925)); assert.ok(ie.includes('so8_census_ie') && ie.includes('so8_nli_registers'), ie.join(','));
+        const ee = keys(life('Eesti', 1850, 1910, {missing: ['birth']})); assert.ok(ee.includes('so8_saaga'), ee.join(','));
+        const pl = keys(life('Polska', 1850, 1910)); assert.ok(pl.includes('so8_szukajwarchiwach') && pl.includes('so8_poznan_project'), pl.join(','));
+        const lu = C.rank(all8, life('Luxembourg', 1870, 1930)).list.find(x => x.site.key === 'so8_eluxemburgensia');
+        assert.ok(lu && /journaux anciens au Luxembourg/.test(lu.reasons[0]), lu && lu.reasons.join(' | '));
+        const fr = C.rank(all8, life('France', 1850, 1910, {missing: ['parents']}));
+        assert.ok(fr.list.some(x => x.site.key === 'so8_geneabank' && x.paid === 'partly'), 'Geneabank : proposé, marqué en partie payant');
+        assert.ok(!fr.list.some(x => /^so8_(cwgc|freereg|saaga|census_ie|archieven_nl|cemla)$/.test(x.site.key)), 'un Français : pas les registres des autres pays');
+        const ar = C.rank(all8, C.context({person: {gender: 'male', birth_year: 1880}, events: [{tag: 'BIRT', year: 1880, place: 'Genova', country: 'Italia'}, {tag: 'IMMI', year: 1905, place: 'Buenos Aires', country: 'Argentina'}], profiles: ['emigrant']}));
+        assert.ok(ar.list.some(x => x.site.key === 'so8_cemla'), 'émigré en Argentine : CEMLA');
+        assert.ok(!C.rank(all8, life('France', 1890, 1960)).list.some(x => x.site.key === 'so8_joodsmonument' || x.site.key === 'so8_gedenkbuch' || x.site.key === 'so8_cgj'), 'rien sur la Shoah sans raison');
+    });
 
     /* ═════ 2. le serveur ═════ */
     const phpPath = findPhp([devBundledPhp()]);
@@ -243,11 +306,12 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env: envFor(dir), maxBuffer: 1 <
                     await p.locator('#toast-region button', { hasText: 'Annuler' }).first().click();
                     await p.waitForSelector(`.ouc-page .ouc-list [data-ouc-key="${key}"]`, { timeout: 10000 });
                     assert.equal(php(`echo (int) $pdo->query("SELECT count(*) FROM archive_digest_entries WHERE template_key='ouc:${key}'")->fetchColumn();`), '0');
-                    // « Gratuites seulement » : le même réglage que les lots
+                    // « Gratuites seulement » : le même réglage que les lots (sur la page, dans « Filtrer ▾ » → Prix, barre H10)
                     const before = await p.evaluate(() => window.LCNDA_EXT.ouChercher.freeOnly());
-                    await p.locator('.ouc-page [data-ouc-free]').evaluate(i => { i.checked = !i.checked; i.dispatchEvent(new Event('change', {bubbles: true})); });
+                    await p.locator('.ouc-page .ouc-listbar').evaluate((b, v) => b.setFilter('free', v), !before);
                     assert.equal(await p.evaluate(() => window.LCNDA_EXT.ouChercher.freeOnly()), !before);
-                    await p.locator('.ouc-page [data-ouc-free]').evaluate(i => { i.checked = !i.checked; i.dispatchEvent(new Event('change', {bubbles: true})); });
+                    await p.waitForSelector('.ouc-page .ouc-listbar');
+                    await p.locator('.ouc-page .ouc-listbar').evaluate((b, v) => b.setFilter('free', v), before);
                     // les murs de brique : H10, fenêtre, statut Résolu → 🎉
                     await p.evaluate(() => window.LCNDA_EXT.ouChercher.openPerson(0, 'murs'));
                     await p.waitForSelector('.ouc-walls .ui-listbar', { timeout: 20000 });

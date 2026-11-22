@@ -1,0 +1,61 @@
+/* LCNDA — 🗺️ Cartes en plus, vague 2 (assets/js/heritage-diagram-cartes-plus2.js) et 📍 Lieux à placer
+ * (assets/js/heritage-lieux-a-placer.js). Maquette : docs/design/cartes-nouvelles.html. Couleurs : variables de l'app
+ * (--ink, --card-bg, --line-color, --muted, --blue-bright, --blue-soft) : le mode sombre suit tout seul. */
+
+/* ── « Depuis l'app » des cinq cartes ── */
+.cq-app .cq-pick { display: grid; gap: 4px; margin: 6px 0; }
+.cq-app .cq-hint { font-size: 12px; margin: 4px 0 0; }
+.cq-app .cq-checks { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 4px 0 8px; }
+.cq-app fieldset { border: 1.5px solid var(--line-color); padding: 6px 10px; margin: 6px 0; min-width: 0; }
+.cq-miss { cursor: pointer; }
+.cq-miss:hover text, .cq-miss:focus text { text-decoration: underline; }
+[data-dg-preview] .cq-pt, [data-dg-preview] .cq-link, [data-dg-preview] .cq-area { cursor: pointer; }
+.cq-detail { display: grid; gap: 8px; min-width: 0; }
+.cq-detail table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.cq-detail th, .cq-detail td { text-align: left; padding: 5px 6px; border-bottom: 1px solid var(--line-color); vertical-align: top; }
+.cq-detail .cq-scroll { overflow-x: auto; max-width: 100%; }
+.cq-detail .cq-careful { border-left: 4px solid #d4a800; background: rgba(212, 168, 0, .12); padding: 8px 10px; font-size: 13px; }
+.cq-detail ul { margin: 0; padding-left: 18px; }
+
+/* ── 📍 Lieux à placer : le panneau ── */
+.lap-dlg { width: min(var(--modal-s, 540px), 100vw); max-width: 100vw; max-height: 92vh; padding: 0; border: 2px solid var(--ink); background: var(--card-bg); color: var(--ink); overflow: auto; }
+.lap-dlg.is-side { position: fixed; inset: 64px 12px auto auto; margin: 0; z-index: 60; box-shadow: 6px 6px 0 rgba(0, 0, 0, .14); max-height: calc(100vh - 80px); }
+.lap-dlg::backdrop { background: rgba(0, 0, 0, .25); }
+.lap-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; flex-wrap: wrap; padding: 10px 12px; border-bottom: 2px solid var(--ink); position: sticky; top: 0; background: inherit; z-index: 1; }
+.lap-head h3 { margin: 2px 0 0; font-size: 17px; }
+.lap-head small { color: var(--muted); font-weight: 400; }
+.lap-acts { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.lap-bar, .lap-chips, .lap-sum, .lap-only { padding: 0 12px; }
+.lap-bar { padding-top: 10px; }
+.lap-chips { display: flex; flex-wrap: wrap; gap: 4px; margin: 8px 0 0; }
+.lap-chip { border: 1.5px solid var(--line-color); background: transparent; color: inherit; padding: 3px 8px; font-size: 12.5px; cursor: pointer; }
+.lap-chip.is-on { background: var(--blue-bright); border-color: var(--blue-bright); color: #fff; }
+.lap-sum { font-size: 12.5px; margin: 6px 0; }
+.lap-list { display: grid; gap: 8px; padding: 0 12px 12px; min-width: 0; }
+.lap-item { border: 1.5px solid var(--line-color); padding: 8px 10px; min-width: 0; }
+.lap-item:focus { outline: 2px solid var(--blue-bright); outline-offset: 1px; }
+.lap-item header { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; }
+.lap-item .lap-ev { margin-left: auto; color: var(--muted); }
+.lap-why { font-size: 12.5px; margin: 4px 0; overflow-wrap: anywhere; }
+.lap-far { color: #c62828; font-size: 12.5px; margin: 4px 0; font-weight: 700; }
+.lap-btns { display: flex; flex-wrap: wrap; gap: 4px; }
+.lap-btns .button { max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+.lap-btns .button.is-far { border-color: #c62828; color: #c62828; background: transparent; }
+.lap-badge { font: 700 11px/1.2 system-ui, sans-serif; border: 1.5px solid currentColor; padding: 1px 5px; }
+.lap-badge.is-green { color: #1a7f37; } .lap-badge.is-yellow { color: #8a6a00; } .lap-badge.is-red { color: #c62828; } .lap-badge.is-blue { color: #055dff; } .lap-badge.is-violet { color: #6929c4; }
+.lap-scroll { overflow-x: auto; max-width: 100%; }
+.lap-tab { width: 100%; min-width: 620px; border-collapse: collapse; font-size: 13px; }
+.lap-tab th, .lap-tab td { padding: 5px 6px; border-bottom: 1px solid var(--line-color); text-align: left; vertical-align: top; }
+.lap-tab .num { text-align: right; white-space: nowrap; }
+.lap-tab tr.is-far td { color: #c62828; }
+.lap-rv-acts { display: flex; flex-wrap: wrap; gap: 6px; }
+.lap-set fieldset { border: 1.5px solid var(--line-color); margin: 0 0 8px; padding: 6px 10px; min-width: 0; }
+.lap-set legend { font-weight: 700; }
+.lap-rec { font: 800 10px system-ui, sans-serif; text-transform: uppercase; color: #fff; background: #1a7f37; padding: 1px 5px; margin-left: 4px; }
+.lap-pin { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 4; }
+#map-stage.is-lap-pick { cursor: crosshair; }
+@media (max-width: 760px) {
+    .lap-dlg, .lap-dlg.is-side { inset: 0; width: 100vw; max-height: 100vh; height: 100vh; border-width: 0; }
+}
+:root[data-theme="dark"] .lap-far, :root[data-theme="dark"] .lap-tab tr.is-far td, :root[data-theme="dark"] .lap-btns .button.is-far { color: #ff8a80; border-color: #ff8a80; }
+:root[data-theme="dark"] .lap-badge.is-green { color: #6fd08c; } :root[data-theme="dark"] .lap-badge.is-yellow { color: #f0d276; } :root[data-theme="dark"] .lap-badge.is-red { color: #ff8a80; } :root[data-theme="dark"] .lap-badge.is-blue { color: #8fb4ff; } :root[data-theme="dark"] .lap-badge.is-violet { color: #c9a8ff; }

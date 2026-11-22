@@ -1,0 +1,131 @@
+fr ¦ lb
+# Zone « verrou » : 🔐 mot de passe d’une généalogie et 📜 « Qui a vu quoi » (assets/js/app-verrou*.js, lib/verrou.php, lib/verrou_page.php)
+1 h ¦ 1 Std.
+12 mois ¦ 12 Méint
+15 min ¦ 15 Min.
+3 ans ¦ 3 Joer
+3 mois ¦ 3 Méint
+5 min ¦ 5 Min.
+6 mois ¦ 6 Méint
+Archive du dossier (.zip) ¦ Archiv vum Dossier (.zip)
+Attention : le verrou n’empêche pas de lire le fichier si quelqu’un le copie (il n’est pas chiffré). Pour ça, chiffre le disque de ton ordinateur (FileVault sur Mac, BitLocker sous Windows). ¦ Opgepasst: de Spär verhënnert net, datt een de Fichier liest, wann en en kopéiert (en ass net verschlësselt). Dofir verschlëssel d'Disk vun dengem Computer (FileVault um Mac, BitLocker ënner Windows).
+Autre format ¦ Anert Format
+Base .db ¦ Datebank .db
+Bloc ¦ Block
+Ce mot de passe contient des caractères illisibles. ¦ Dëst Passwuert enthält onliesbar Zeechen.
+Ce mot de passe empêche d’ouvrir cette généalogie dans l’app, ici et après chaque délai sans rien toucher. ¦ Dëst Passwuert verhënnert, datt dës Genealogie an der App opgemaach gëtt, hei an no all Zäit ouni Aktivitéit.
+Ce que ce mot de passe protège vraiment ¦ Wat dëst Passwuert wierklech schützt
+Cette généalogie a déjà un mot de passe : change-le plutôt. ¦ Dës Genealogie huet schonn e Passwuert: änner et léiwer.
+Cette généalogie est maintenant protégée par un mot de passe. ¦ Dës Genealogie ass elo mat engem Passwuert geschützt.
+Cette généalogie est protégée : sa sauvegarde l’est aussi, avec le même mot de passe. ¦ Dës Genealogie ass geschützt: hire Backup och, mat deemselwechte Passwuert.
+Cette généalogie est protégée par un mot de passe : dans le dossier choisi, elle n’est jamais copiée en clair. Une copie chiffrée (AES-256, même mot de passe) y est faite quand tu l’ouvres avec son mot de passe ; dans le dossier de l’app, les copies restent comme la base. ¦ Dës Genealogie ass mat engem Passwuert geschützt: am gewielten Dossier gëtt se ni onverschlësselt kopéiert. Eng verschlësselt Kopie (AES-256, datselwecht Passwuert) gëtt do gemaach, wann s de se mat hirem Passwuert opmaachs; am Dossier vun der App bleiwen d'Kopien ewéi d'Datebank.
+Cette généalogie est protégée par un mot de passe : ses sauvegardes le sont aussi. Utilise « Sauvegarde complète protégée » avec le même mot de passe. ¦ Dës Genealogie ass mat engem Passwuert geschützt: hir Backups och. Benotz „Geschützte komplette Backup“ mat deemselwechte Passwuert.
+Cette généalogie est verrouillée : donne son mot de passe pour l’ouvrir. ¦ Dës Genealogie ass gespaart: gëff hiert Passwuert an, fir se opzemaachen.
+Cette généalogie est verrouillée par un mot de passe : ouvre-la d’abord. ¦ Dës Genealogie ass mat engem Passwuert gespaart: maach se fir d'éischt op.
+Cette généalogie n’a pas de mot de passe. ¦ Dës Genealogie huet kee Passwuert.
+Changer le délai ¦ Zäit änneren
+Changer le mot de passe ¦ Passwuert änneren
+Changer, ou retirer ¦ Änneren oder ewechhuelen
+Coche la case : sans ce mot de passe, tu ne pourras plus ouvrir cette généalogie dans l’app. ¦ Kräiz d'Këscht un: ouni dëst Passwuert kanns de dës Genealogie net méi an der App opmaachen.
+Courriers en série ¦ Seriebréiwer
+Dossier déplacé vers une autre généalogie ¦ Dossier an eng aner Genealogie geréckelt
+Dossier ou objet ¦ Dossier oder Objet
+Dossier, poste, action… ¦ Dossier, Computer, Aktioun…
+Durée changée. Lignes plus anciennes effacées : {n} ¦ Dauer geännert. Méi al Zeilen geläscht: {n}
+Durée de conservation changée ¦ Opbewaarungsdauer geännert
+Durée inconnue. ¦ Onbekannt Dauer.
+Délai de reverrouillage changé ¦ Zäit bis zur neier Spär geännert
+Délai de reverrouillage inconnu. ¦ Onbekannt Zäit bis zur neier Spär.
+Elle est protégée par un mot de passe. ¦ Si ass mat engem Passwuert geschützt.
+Export ¦ Export
+Exports ¦ Exporter
+Force : {s} ¦ Stäerkt: {s}
+Généalogie ouverte avec le mot de passe ¦ Genealogie mam Passwuert opgemaach
+Il n’y a pas d’autre généalogie. ¦ Et gëtt keng aner Genealogie.
+Impossible de retirer le verrou (dossier des données en lecture seule ?). ¦ D'Spär kann net ewechgeholl ginn (Datendossier nëmme liesbar?).
+Impossible de vérifier le mot de passe (dossier des données en lecture seule ?). ¦ D'Passwuert kann net gepréift ginn (Datendossier nëmme liesbar?).
+Impossible d’enregistrer le verrou (dossier des données en lecture seule ?). ¦ D'Spär kann net gespäichert ginn (Datendossier nëmme liesbar?).
+Impossible d’ouvrir cette généalogie. ¦ Dës Genealogie kann net opgemaach ginn.
+Impression ou PDF ¦ Drock oder PDF
+Impressions ¦ Drécker
+Journal du dossier (CSV) ¦ Journal vum Dossier (CSV)
+J’ai compris : sans ce mot de passe, je ne pourrai plus ouvrir cette généalogie dans l’app. ¦ Ech hunn et verstanen: ouni dëst Passwuert kann ech dës Genealogie net méi an der App opmaachen.
+Le mot de passe est trop long (1024 caractères au plus). ¦ D'Passwuert ass ze laang (héchstens 1024 Zeechen).
+Le serveur de l’app ne répond pas. Réessaie. ¦ De Server vun der App äntwert net. Prouf nach eng Kéier.
+Le verrou n’empêche pas de lire le fichier si quelqu’un le copie : il n’est pas chiffré. Pour ça, chiffre le disque de ton ordinateur : FileVault sur Mac (Réglages Système → Confidentialité et sécurité), BitLocker sous Windows (Paramètres → Confidentialité et sécurité → Chiffrement de l’appareil). ¦ D'Spär verhënnert net, datt een de Fichier liest, wann en en kopéiert: en ass net verschlësselt. Dofir verschlëssel d'Disk vun dengem Computer: FileVault um Mac (Systemastellungen → Dateschutz & Sécherheet), BitLocker ënner Windows (Astellungen → Dateschutz a Sécherheet → Apparatverschlësselung).
+Lecture seule : rien ne se modifie ; seule cette durée fait disparaître les lignes plus vieilles (et c’est noté). ¦ Nëmme liesen: näischt gëtt geännert; nëmmen dës Dauer léisst méi al Zeilen verschwannen (an dat gëtt notéiert).
+Lecture seule. Tous les dossiers : Réglages → 📜 Qui a vu quoi. ¦ Nëmme liesen. All Dossieren: Astellungen → 📜 Wien huet wat gesinn.
+Les deux mots de passe ne sont pas pareils. ¦ Déi zwee Passwierder sinn net gläich.
+Les ouvertures de dossier, les impressions, les exports, les courriers en série et chaque essai du mot de passe, notés par l’app sur ce poste ({machine}). ¦ Opgemaachen Dossieren, Drécker, Exporter, Seriebréiwer an all Passwuertversuch, vun der App op dësem Computer notéiert ({machine}).
+Les sauvegardes de cette généalogie sont toujours protégées par ce mot de passe (AES-256) : aucune copie ne sort en clair de son dossier. ¦ D'Backups vun dëser Genealogie sinn ëmmer mat dësem Passwuert geschützt (AES-256): keng Kopie verléisst hiren Dossier onverschlësselt.
+Lettres rangées : {n} ¦ Ofgeluechte Bréiwer: {n}
+Lettres retirées (↶ Annuler) : {n} ¦ Zréckgezunne Bréiwer (↶ Réckgängeg): {n}
+Lignes : {n} sur {t} ¦ Zeilen: {n} vu(n) {t}
+Lignes anciennes effacées ¦ Al Zeilen geläscht
+Lignes effacées : {n} (gardées : {m}) ¦ Geläscht Zeilen: {n} (opbewaart: {m})
+Mode consultation : le registre ne se lit pas. ¦ Liesmodus: de Register kann net gelies ginn.
+Mot de passe changé ¦ Passwuert geännert
+Mot de passe changé. Les autres fenêtres ouvertes devront le redemander. ¦ Passwuert geännert. Aner oppe Fënstere mussen et nees froen.
+Mot de passe de cette généalogie ¦ Passwuert vun dëser Genealogie
+Mot de passe oublié : il n’y a pas de porte dérobée. Sans lui, cette généalogie ne peut plus être ouverte dans l’app. ¦ Passwuert vergiess: et gëtt keng Hannerdier. Ouni et kann dës Genealogie net méi an der App opgemaach ginn.
+Mot de passe oublié ? ¦ Passwuert vergiess?
+Mot de passe posé ¦ Passwuert gesat
+Mot de passe refusé ¦ Passwuert refuséiert
+Mot de passe retiré ¦ Passwuert ewechgeholl
+Musée de famille ¦ Familljemusée
+Ouvertures ¦ Opmaachen
+Ouverture… ¦ Gëtt opgemaach…
+Ouvrir une autre généalogie ¦ Eng aner Genealogie opmaachen
+Paquet du travail à deux ¦ Pak vun der Aarbecht zu zwee
+Partage avec la famille ¦ Mat der Famill deelen
+Patiente {n} s ¦ Waart {n} s
+Patiente {n} s avant de réessayer. ¦ Waart {n} s, ier s de et nees probéiers.
+Poste ¦ Computer
+Pour une généalogie protégée, tape son mot de passe : la sauvegarde est chiffrée avec lui (AES-256). ¦ Fir eng geschützt Genealogie tipp hiert Passwuert: de Backup gëtt domat verschlësselt (AES-256).
+Protéger ¦ Schützen
+Protéger cette généalogie ¦ Dës Genealogie schützen
+Protégée ¦ Geschützt
+Qui a vu ce dossier ¦ Wien dësen Dossier gesinn huet
+Qui a vu le dossier {n} ¦ Wien den Dossier {n} gesinn huet
+Qui a vu quoi ¦ Wien huet wat gesinn
+Registre « Qui a vu quoi » (CSV) ¦ Register „Wien huet wat gesinn“ (CSV)
+Retirer le mot de passe ¦ Passwuert ewechhuelen
+Retirer le mot de passe de « {name} » ? Elle s’ouvrira sans rien demander, et ses sauvegardes ne seront plus forcément protégées. ¦ D'Passwuert vu(n) „{name}“ ewechhuelen? Si mécht dann op, ouni eppes ze froen, an hir Backups sinn net méi onbedéngt geschützt.
+Reverrouillée (délai passé ou app relancée) ¦ Nees gespaart (Zäit ofgelaf oder App nei gestart)
+Sans ce mot de passe, cette généalogie ne peut plus être ouverte dans l’app : il n’existe pas de porte dérobée, et personne ne peut le retrouver pour toi. ¦ Ouni dëst Passwuert kann dës Genealogie net méi an der App opgemaach ginn: et gëtt keng Hannerdier, a keen kann et fir dech erëmfannen.
+Sauvegarde complète ¦ Komplette Backup
+Se verrouille après {m} sans rien toucher, à la fermeture de l’app et quand on change de généalogie. ¦ Spärt sech no {m} ouni Aktivitéit, beim Zoumaache vun der App a beim Wiessele vun der Genealogie.
+Site web ¦ Websäit
+Site web publié ¦ Websäit verëffentlecht
+Tableau de bord des dossiers (CSV) · dossiers : {n} ¦ Iwwersiicht vun den Dossieren (CSV) · Dossieren: {n}
+Tableau, arbre ou parts imprimés ¦ Tabell, Stammbam oder Undeeler gedréckt
+Tape d’abord le mot de passe actuel. ¦ Tipp fir d'éischt dat aktuellt Passwuert.
+Tape le mot de passe. ¦ Tipp d'Passwuert.
+Tout le registre ¦ De ganze Register
+Un verrou à l’ouverture de « {name} », sur cet ordinateur et sur les autres. ¦ Eng Spär beim Opmaache vu(n) „{name}“, op dësem Computer an op deenen aneren.
+Verrouiller après ¦ Spären no
+Verrouiller maintenant ¦ Elo spären
+Verrouiller maintenant (généalogie protégée par un mot de passe) ¦ Elo spären (Genealogie mat Passwuert geschützt)
+Verrouillée : {names} (ouvre-la avec son mot de passe pour voir ses dossiers) ¦ Gespaart: {names} (maach se mat hirem Passwuert op, fir hir Dossieren ze gesinn)
+Verrouillée à la main ¦ Mat der Hand gespaart
+après {m} ¦ no {m}
+pour changer le délai ¦ fir d'Zäit z'änneren
+pour changer le mot de passe ¦ fir d'Passwuert z'änneren
+pour retirer le mot de passe ¦ fir d'Passwuert ewechzehuelen
+pour une sauvegarde protégée ¦ fir e geschützte Backup
+protégée par un mot de passe ¦ mat engem Passwuert geschützt
+sans rien toucher ¦ ouni Aktivitéit
+très bon ¦ ganz gutt
+« {name} » est verrouillée ¦ „{name}“ ass gespaart
+📜 Qui a vu quoi ¦ 📜 Wien huet wat gesinn
+🔐 Généalogie verrouillée ¦ 🔐 Genealogie gespaart
+🔐 Mot de passe de cette généalogie ¦ 🔐 Passwuert vun dëser Genealogie
+faible ¦ schwaach
+moyen ¦ mëttel
+bon ¦ gutt
+pour ouvrir la généalogie ¦ fir d’Genealogie opzemaachen
+Ce dossier appartient à l’app (données, médias ou sauvegardes d’une généalogie) : choisis un autre dossier. ¦ Dësen Dossier gehéiert der App (Donnéeën, Medien oder Backups vun enger Genealogie): wiel en aneren Dossier.
+Ce fichier est rangé dans les dossiers de l’app : choisis un fichier ailleurs. ¦ Dëse Fichier läit an den Dossiere vun der App: wiel e Fichier soss anzwousch.
+Cette copie est rangée dans les dossiers d’une autre généalogie : elle ne peut pas être remise ici. ¦ Dës Kopie läit an den Dossiere vun enger anerer Genealogie: si kann hei net zréckgesat ginn.
+Cette copie vient d’une généalogie protégée par un mot de passe : ouvre-la pour la restaurer. ¦ Dës Kopie kënnt vun enger Genealogie, déi mat engem Passwuert geschützt ass: maach se op, fir d'Kopie zréckzesetzen.
+Cette base est protégée par un mot de passe : donne-le pour l’ouvrir. ¦ Dës Datebank ass mat engem Passwuert geschützt: gëff et an, fir se opzemaachen.

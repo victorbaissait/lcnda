@@ -1,0 +1,186 @@
+fr ¦ lt ¦ lv ¦ et
+# 🏛⚠️📋📱 Compléments aux outils existants (docs/design/complements-existants.html) : C tous les doutes, D visite aux archives, erreurs du serveur
+📋 Tous les doutes ¦ 📋 Visos abejonės ¦ 📋 Visas šaubas ¦ 📋 Kõik kahtlused
+Points à revoir ¦ Peržiūrėtini dalykai ¦ Pārskatāmie punkti ¦ Ülevaatamist vajavad kohad
+Chaque ligne est lue dans l’outil d’origine au moment où tu ouvres la liste, et « ↗ » t’y emmène pour décider. Rien n’est copié : corriger dans l’outil fait disparaître la ligne. ¦ Kiekviena eilutė perskaitoma iš pradinio įrankio, kai atidarai sąrašą, o „↗“ nuveda tave ten nuspręsti. Niekas nenukopijuojama: pataisius įrankyje eilutė dingsta. ¦ Katra rinda tiek nolasīta no sākotnējā rīka, kad atver sarakstu, un “↗” aizved tevi tur izlemt. Nekas netiek kopēts: labojums rīkā rindu noņem. ¦ Iga rida loetakse algsest tööriistast loendi avamisel ja „↗” viib sind sinna otsustama. Midagi ei kopeerita: parandus tööriistas eemaldab rea.
+Je lis les outils… ¦ Skaitau įrankius… ¦ Lasu rīkus… ¦ Loen tööriistu…
+Chercher une personne, un lieu… ¦ Ieškok asmens, vietos… ¦ Meklē personu, vietu… ¦ Otsi inimest, kohta…
+et ses ancêtres ¦ ir jo protėviai ¦ un viņa senči ¦ ja tema esivanemad
+Branche ¦ Šaka ¦ Atzars ¦ Haru
+paternelle (Sosa 2) ¦ tėvo pusė (Sosa 2) ¦ tēva puse (Sosa 2) ¦ isapoolne (Sosa 2)
+maternelle (Sosa 3) ¦ motinos pusė (Sosa 3) ¦ mātes puse (Sosa 3) ¦ emapoolne (Sosa 3)
+Vus ¦ Matyti ¦ Redzētie ¦ Nähtud
+Pas encore vus ¦ Dar nematyti ¦ Vēl neredzētie ¦ Veel nägemata
+Vus aussi ¦ Ir matyti ¦ Arī redzētie ¦ Ka nähtud
+Seulement les vus ¦ Tik matyti ¦ Tikai redzētie ¦ Ainult nähtud
+↗ Ouvrir dans l’outil ¦ ↗ Atidaryti įrankyje ¦ ↗ Atvērt rīkā ¦ ↗ Ava tööriistas
+👁 Ne plus marquer vu ¦ 👁 Nuimti žymą „matyta“ ¦ 👁 Noņemt atzīmi “redzēts” ¦ 👁 Eemalda märge „nähtud”
+👁 Marquer vu ¦ 👁 Pažymėti kaip matytą ¦ 👁 Atzīmēt kā redzētu ¦ 👁 Märgi nähtuks
+👤 Ouvrir la fiche de {name} ¦ 👤 Atidaryti kortelę: {name} ¦ 👤 Atvērt kartīti: {name} ¦ 👤 Ava kaart: {name}
+🔍 Seulement les doutes de cette personne ¦ 🔍 Tik šio asmens abejonės ¦ 🔍 Tikai šīs personas šaubas ¦ 🔍 Ainult selle inimese kahtlused
+Aucun doute pour l’instant ¦ Kol kas abejonių nėra ¦ Pagaidām šaubu nav ¦ Praegu kahtlusi pole
+Les outils d’origine n’ont rien à vérifier : bravo ! ¦ Pradiniuose įrankiuose nėra ką tikrinti: puiku! ¦ Sākotnējos rīkos nav ko pārbaudīt: lieliski! ¦ Algsetes tööriistades pole midagi kontrollida: tubli!
+vu le {d} ¦ matyta {d} ¦ redzēts {d} ¦ nähtud {d}
+revenu : la chose a changé ¦ grįžo: kažkas pasikeitė ¦ atgriezies: kaut kas mainījies ¦ naasnud: midagi muutus
+👁 « {t} » n’est plus marqué vu. ¦ 👁 „{t}“ nebepažymėta kaip matyta. ¦ 👁 “{t}” vairs nav atzīmēts kā redzēts. ¦ 👁 „{t}” pole enam nähtuks märgitud.
+👁 « {t} » marqué vu. ¦ 👁 „{t}“ pažymėta kaip matyta. ¦ 👁 “{t}” atzīmēts kā redzēts. ¦ 👁 „{t}” märgitud nähtuks.
+impossible ¦ neįmanoma ¦ neiespējami ¦ võimatu
+impossibles ¦ neįmanomi ¦ neiespējami ¦ võimatud
+curieux ¦ keista ¦ dīvaini ¦ kummaline
+Le plus grave : {t} ¦ Rimčiausia: {t} ¦ Nopietnākais: {t} ¦ Kõige tõsisem: {t}
+Doutes ¦ Abejonės ¦ Šaubas ¦ Kahtlused
+Hypothèse ouverte ¦ Atvira hipotezė ¦ Atvērta hipotēze ¦ Avatud hüpotees
+↗ Contrôle ¦ ↗ Patikra ¦ ↗ Pārbaude ¦ ↗ Kontroll
+↗ Comparer ¦ ↗ Palyginti ¦ ↗ Salīdzināt ¦ ↗ Võrdle
+Liens fragiles ¦ Trapūs ryšiai ¦ Trausli saiknes ¦ Haprad seosed
+↗ Solidité ¦ ↗ Patikimumas ¦ ↗ Drošums ¦ ↗ Kindlus
+Désaccord de preuve ¦ Įrodymų nesutapimas ¦ Pierādījumu nesaskaņa ¦ Tõendite lahknevus
+↗ Dossier de preuve ¦ ↗ Įrodymų byla ¦ ↗ Pierādījumu lieta ¦ ↗ Tõendite toimik
+Lecture SocFace ¦ SocFace skaitymas ¦ SocFace lasījums ¦ SocFace’i lugemine
+↗ Image ¦ ↗ Vaizdas ¦ ↗ Attēls ¦ ↗ Pilt
+Successoral ¦ Paveldėjimas ¦ Mantošana ¦ Pärimine
+Naissance sans source ¦ Gimimas be šaltinio ¦ Dzimšana bez avota ¦ Sünd allikata
+Baptême sans source ¦ Krikštas be šaltinio ¦ Kristības bez avota ¦ Ristimine allikata
+Mariage sans source ¦ Santuoka be šaltinio ¦ Laulība bez avota ¦ Abielu allikata
+Décès sans source ¦ Mirtis be šaltinio ¦ Nāve bez avota ¦ Surm allikata
+Inhumation sans source ¦ Laidojimas be šaltinio ¦ Apbedīšana bez avota ¦ Matmine allikata
+Événement sans source ¦ Įvykis be šaltinio ¦ Notikums bez avota ¦ Sündmus allikata
+Lien parent-enfant supposé ¦ Spėjamas tėvų ir vaiko ryšys ¦ Pieņemta vecāka–bērna saikne ¦ Oletatav vanema ja lapse seos
+Lien parent-enfant sans source ¦ Tėvų ir vaiko ryšys be šaltinio ¦ Vecāka–bērna saikne bez avota ¦ Vanema ja lapse seos allikata
+{a} réponses, {p} preuves ¦ atsakymai: {a}, įrodymai: {p} ¦ atbildes: {a}, pierādījumi: {p} ¦ vastuseid: {a}, tõendeid: {p}
+Désaccord sans résolution ¦ Neišspręstas nesutapimas ¦ Neatrisināta nesaskaņa ¦ Lahendamata lahknevus
+Homonyme dans un dossier de succession ¦ Bendrapavardis paveldėjimo byloje ¦ Vārdabrālis mantojuma lietā ¦ Nimekaim pärimistoimikus
+Personne vivante ¦ Gyvas asmuo ¦ Dzīva persona ¦ Elav inimene
+« Sans source » ¦ „Be šaltinio“ ¦ “Bez avota” ¦ „Allikata”
+Seulement les ancêtres Sosa ¦ Tik Sosa protėviai ¦ Tikai Sosa senči ¦ Ainult Sosa esivanemad
+Pas du tout ¦ Visai ne ¦ Nemaz ¦ Üldse mitte
+Une ligne marquée vue ¦ Eilutė, pažymėta kaip matyta ¦ Rinda, atzīmēta kā redzēta ¦ Nähtuks märgitud rida
+Revient si la chose change ¦ Grįžta, jei kas pasikeičia ¦ Atgriežas, ja kaut kas mainās ¦ Naaseb, kui midagi muutub
+Ne revient jamais ¦ Niekada negrįžta ¦ Nekad neatgriežas ¦ Ei naase kunagi
+Les lignes vues ¦ Matytos eilutės ¦ Redzētās rindas ¦ Nähtud read
+Cachées par le filtre de départ « Pas encore vus » ¦ Paslėptos pradiniu filtru „Dar nematyti“ ¦ Paslēptas ar sākuma filtru “Vēl neredzētie” ¦ Peidetud algfiltriga „Veel nägemata”
+Montrées en pâle ¦ Rodomos blyškiai ¦ Rādītas bāli ¦ Näidatud kahvatult
+Pistes du successoral ¦ Paveldėjimo užuominos ¦ Mantojuma pavedieni ¦ Pärimise vihjed
+À part, dans les dossiers ¦ Atskirai, bylose ¦ Atsevišķi, lietās ¦ Eraldi, toimikutes
+Aussi dans cette liste ¦ Ir šiame sąraše ¦ Arī šajā sarakstā ¦ Ka selles loendis
+Le widget ¦ Valdiklis ¦ Logrīks ¦ Vidin
+Les trois nombres et le plus grave ¦ Trys skaičiai ir rimčiausia ¦ Trīs skaitļi un nopietnākais ¦ Kolm arvu ja kõige tõsisem
+Les 5 premières lignes ¦ Pirmos 5 eilutės ¦ Pirmās 5 rindas ¦ Esimesed 5 rida
+📱 Visite aux archives ¦ 📱 Apsilankymas archyve ¦ 📱 Arhīva apmeklējums ¦ 📱 Arhiivikülastus
+🗄 Préparer une visite ¦ 🗄 Paruošti apsilankymą ¦ 🗄 Sagatavot apmeklējumu ¦ 🗄 Valmista külastus ette
+Préparer une visite ¦ Paruošti apsilankymą ¦ Sagatavot apmeklējumu ¦ Valmista külastus ette
+🗄 Créer la visite ¦ 🗄 Sukurti apsilankymą ¦ 🗄 Izveidot apmeklējumu ¦ 🗄 Loo külastus
+Service ¦ Tarnyba ¦ Dienests ¦ Teenus
+Pour quel dossier ? (facultatif) ¦ Kuriai bylai? (neprivaloma) ¦ Kurai lietai? (nav obligāti) ¦ Millise toimiku jaoks? (valikuline)
+Ouvert : {h} ¦ Atidaryta: {h} ¦ Atvērts: {h} ¦ Avatud: {h}
+Les horaires et l’adresse sont lus dans la fiche du service. ¦ Darbo laikas ir adresas perskaitomi iš tarnybos kortelės. ¦ Darba laiks un adrese tiek nolasīti no dienesta kartītes. ¦ Lahtiolekuajad ja aadress loetakse teenuse kaardilt.
+Les cotes à voir ¦ Peržiūrėtini šifrai ¦ Skatāmie šifri ¦ Vaadatavad säilikutähised
+déjà en ligne : Où chercher ? ¦ jau internete: Kur ieškoti? ¦ jau tiešsaistē: Kur meklēt? ¦ juba võrgus: Kust otsida?
+({n} cochées sur {m}) ¦ (pažymėta {n} iš {m}) ¦ (atzīmēti {n} no {m}) ¦ ({n} märgitud {m}-st)
+Coche au moins une cote. ¦ Pažymėk bent vieną šifrą. ¦ Atzīmē vismaz vienu šifru. ¦ Märgi vähemalt üks säilikutähis.
+🗄 Visite créée : {n}. Elle est dans Listes → Visites d’archives. ¦ 🗄 Apsilankymas sukurtas: {n}. Jis yra Sąrašai → Apsilankymai archyvuose. ¦ 🗄 Apmeklējums izveidots: {n}. Tas ir sadaļā Saraksti → Arhīvu apmeklējumi. ¦ 🗄 Külastus loodud: {n}. See on jaotises Loendid → Arhiivikülastused.
+⚖️ reliée à un dossier ¦ ⚖️ susietas su byla ¦ ⚖️ saistīts ar lietu ¦ ⚖️ seotud toimikuga
+📱 Emporter sur le téléphone ¦ 📱 Pasiimti telefone ¦ 📱 Paņemt līdzi telefonā ¦ 📱 Võta telefoniga kaasa
+⤒ Rapporter les résultats ¦ ⤒ Parsinešti rezultatus ¦ ⤒ Atnest rezultātus ¦ ⤒ Too tulemused tagasi
+⤒ Importer les photos du jour ¦ ⤒ Importuoti dienos nuotraukas ¦ ⤒ Importēt dienas fotoattēlus ¦ ⤒ Impordi päeva fotod
+Importer les photos du jour ¦ Importuoti dienos nuotraukas ¦ Importēt dienas fotoattēlus ¦ Impordi päeva fotod
+Visite aux archives · {what} ¦ Apsilankymas archyve · {what} ¦ Arhīva apmeklējums · {what} ¦ Arhiivikülastus · {what}
+Marche sans réseau. Tout est gardé dans ce téléphone au fur et à mesure. ¦ Veikia be tinklo. Viskas iškart saugoma šiame telefone. ¦ Darbojas bez tīkla. Viss uzreiz tiek saglabāts šajā telefonā. ¦ Töötab võrguta. Kõik hoitakse jooksvalt selles telefonis.
+Photo interdite ici : pas de bouton 📷. ¦ Čia fotografuoti draudžiama: nėra mygtuko 📷. ¦ Šeit fotografēt aizliegts: nav pogas 📷. ¦ Siin on pildistamine keelatud: 📷-nuppu pole.
+＋ Une cote trouvée sur place, pas prévue au départ ¦ ＋ Vietoje rastas šifras, kuris nebuvo numatytas ¦ ＋ Uz vietas atrasts šifrs, kas nebija plānots ¦ ＋ Kohapeal leitud säilikutähis, mida polnud plaanis
+⤓ Enregistrer mes résultats ¦ ⤓ Įrašyti mano rezultatus ¦ ⤓ Saglabāt manus rezultātus ¦ ⤓ Salvesta minu tulemused
+📷 Photo ¦ 📷 Nuotrauka ¦ 📷 Foto ¦ 📷 Foto
+Retirer cette photo ¦ Pašalinti šią nuotrauką ¦ Noņemt šo foto ¦ Eemalda see foto
+Cote ajoutée sur place ¦ Vietoje pridėtas šifras ¦ Uz vietas pievienots šifrs ¦ Kohapeal lisatud säilikutähis
+✓ Gardé dans ce téléphone à {time} ¦ ✓ Išsaugota šiame telefone {time} ¦ ✓ Saglabāts šajā telefonā {time} ¦ ✓ Hoitud selles telefonis kell {time}
+⚠️ Ce navigateur ne garde rien dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Ši naršyklė puslapyje nieko nesaugo: įrašyk rezultatus po kiekvieno šifro. ¦ ⚠️ Šī pārlūkprogramma lapā neko nesaglabā: saglabā rezultātus pēc katra šifra. ¦ ⚠️ See brauser ei hoia lehel midagi: salvesta tulemused pärast iga säilikutähist.
+⚠️ Ce téléphone ne garde pas les photos dans la page : enregistre tes résultats après chaque cote. ¦ ⚠️ Šis telefonas puslapyje nesaugo nuotraukų: įrašyk rezultatus po kiekvieno šifro. ¦ ⚠️ Šis telefons lapā nesaglabā fotoattēlus: saglabā rezultātus pēc katra šifra. ¦ ⚠️ See telefon ei hoia lehel fotosid: salvesta tulemused pärast iga säilikutähist.
+⚠️ Ce fichier n’est pas une image. ¦ ⚠️ Šis failas nėra vaizdas. ¦ ⚠️ Šis fails nav attēls. ¦ ⚠️ See fail pole pilt.
+⚠️ Note au moins un résultat avant d’enregistrer. ¦ ⚠️ Prieš įrašydamas pažymėk bent vieną rezultatą. ¦ ⚠️ Pirms saglabāšanas atzīmē vismaz vienu rezultātu. ¦ ⚠️ Märgi enne salvestamist vähemalt üks tulemus.
+✓ Fichier « {name} » enregistré : rapporte-le dans l’app (⤒ Rapporter les résultats). ¦ ✓ Failas „{name}“ įrašytas: parsinešk jį į programą (⤒ Parsinešti rezultatus). ¦ ✓ Fails “{name}” saglabāts: atnes to lietotnē (⤒ Atnest rezultātus). ¦ ✓ Fail „{name}” salvestatud: too see rakendusse tagasi (⤒ Too tulemused tagasi).
+Des photos manquaient : elles ne sont pas dans le fichier. ¦ Trūko kai kurių nuotraukų: jų nėra faile. ¦ Dažu fotoattēlu trūka: to nav failā. ¦ Mõned fotod puudusid: neid pole failis.
+⤓ Enregistrer la page ¦ ⤓ Įrašyti puslapį ¦ ⤓ Saglabāt lapu ¦ ⤓ Salvesta leht
+Ce qui part dans la page ¦ Kas patenka į puslapį ¦ Kas nonāk lapā ¦ Mis lehele läheb
+Les cotes, l’acte cherché, la personne et ses années ¦ Šifrai, ieškomas įrašas, asmuo ir jo metai ¦ Šifri, meklētais ieraksts, persona un viņas gadi ¦ Säilikutähised, otsitav akt, inimene ja tema aastad
+Ce qu’on sait déjà (parents, conjoint, dates connues) pour reconnaître l’acte sur place ¦ Tai, kas jau žinoma (tėvai, sutuoktinis, žinomos datos), kad atpažintum įrašą vietoje ¦ Tas, kas jau zināms (vecāki, laulātais, zināmie datumi), lai ierakstu atpazītu uz vietas ¦ See, mis on juba teada (vanemad, abikaasa, teadaolevad kuupäevad), et akt kohapeal ära tunda
+Les personnes vivantes ¦ Gyvi asmenys ¦ Dzīvas personas ¦ Elavad inimesed
+décoché : un vivant devient « Personne vivante » ¦ nepažymėta: gyvas asmuo tampa „Gyvas asmuo“ ¦ neatzīmēts: dzīvs cilvēks kļūst par “Dzīva persona” ¦ märkimata: elavast saab „Elav inimene”
+Les fiches confidentielles : jamais ¦ Konfidencialios kortelės: niekada ¦ Konfidenciālas kartītes: nekad ¦ Konfidentsiaalsed kaardid: mitte kunagi
+Photo interdite ici ¦ Čia fotografuoti draudžiama ¦ Šeit fotografēt aizliegts ¦ Siin on pildistamine keelatud
+cache le bouton 📷 dans la page ¦ paslepia mygtuką 📷 puslapyje ¦ paslēpj pogu 📷 lapā ¦ peidab lehel 📷-nupu
+Un seul fichier .html : aucune requête, rien à installer. Mets-le sur le téléphone (câble, AirDrop, partage Android, courriel à toi-même) ; il marche en mode avion. ¦ Vienas .html failas: jokių užklausų, nieko diegti. Perkelk jį į telefoną (laidu, AirDrop, Android bendrinimu, el. laišku sau); veikia lėktuvo režimu. ¦ Viens .html fails: nekādu pieprasījumu, nekas nav jāinstalē. Ieliec to telefonā (ar vadu, AirDrop, Android kopīgošanu, e-pastu sev); tas darbojas lidmašīnas režīmā. ¦ Üks .html-fail: päringuid pole, midagi pole vaja paigaldada. Pane see telefoni (kaabel, AirDrop, Androidi jagamine, e-kiri endale); see töötab lennurežiimis.
+📲 Montrer comment le mettre sur le téléphone ¦ 📲 Parodyti, kaip perkelti į telefoną ¦ 📲 Parādīt, kā to ielikt telefonā ¦ 📲 Näita, kuidas see telefoni panna
+iPhone : l’aperçu de l’app Fichiers montre la page mais ne la fait pas marcher (pas de cases à cocher). Ouvre-la avec une app qui lit les pages .html, ou passe par la feuille imprimée et les photos (réglage). Android : Chrome ou Firefox l’ouvrent et la font marcher. ¦ iPhone: programos „Failai“ peržiūra rodo puslapį, bet jo nepaleidžia (nėra žymimųjų langelių). Atidaryk jį programa, kuri skaito .html puslapius, arba naudok atspausdintą lapą ir nuotraukas (nustatymas). Android: Chrome ar Firefox jį atidaro ir paleidžia. ¦ iPhone: lietotnes Faili priekšskatījums rāda lapu, bet to nedarbina (nav izvēles rūtiņu). Atver to ar lietotni, kas lasa .html lapas, vai izmanto izdrukāto lapu un fotoattēlus (iestatījums). Android: Chrome vai Firefox to atver un darbina. ¦ iPhone: rakenduse Failid eelvaade näitab lehte, kuid ei pane seda tööle (märkeruute pole). Ava see rakendusega, mis loeb .html-lehti, või kasuta prinditud lehte ja fotosid (seade). Android: Chrome või Firefox avab selle ja paneb tööle.
+📄 1 fichier, {n} Ko : mets-le sur ton téléphone. ¦ 📄 1 failas, {n} KB: perkelk jį į savo telefoną. ¦ 📄 1 fails, {n} KB: ieliec to savā telefonā. ¦ 📄 1 fail, {n} kB: pane see oma telefoni.
+Résultats de la visite ¦ Apsilankymo rezultatai ¦ Apmeklējuma rezultāti ¦ Külastuse tulemused
+Ce fichier vient d’une autre visite : « {t} ». ¦ Šis failas iš kito apsilankymo: „{t}“. ¦ Šis fails ir no cita apmeklējuma: “{t}”. ¦ See fail on teiselt külastuselt: „{t}”.
+cote retirée de la visite depuis ¦ šifras nuo tada pašalintas iš apsilankymo ¦ šifrs kopš tā laika izņemts no apmeklējuma ¦ säilikutähis on vahepeal külastuselt eemaldatud
+ajoutée sur place : d’abord ajoutée à la visite ¦ pridėta vietoje: pirmiausia įtraukta į apsilankymą ¦ pievienots uz vietas: vispirms pievienots apmeklējumam ¦ lisatud kohapeal: esmalt lisatakse külastusele
+dépouillement déjà relié ¦ aprašas jau susietas ¦ apraksts jau saistīts ¦ läbitöötamine juba seotud
+＋ dépouillement du Journal ({r}) ¦ ＋ aprašas iš Žurnalo ({r}) ¦ ＋ apraksts no Žurnāla ({r}) ¦ ＋ läbitöötamine Logist ({r})
+{n} → médias « à trier » ¦ {n} → medija „rūšiuoti“ ¦ {n} → mediji “jāsakārto” ¦ {n} → meedia „sorteerimiseks”
+{n} → médias reliés à {who} ¦ {n} → medija susieta su {who} ¦ {n} → mediji saistīti ar {who} ¦ {n} → meedia seotud: {who}
+{n} → médias ¦ {n} → medija ¦ {n} → mediji ¦ {n} → meedia
+📑 pièce du dossier : reçue ¦ 📑 bylos dokumentas: gautas ¦ 📑 lietas dokuments: saņemts ¦ 📑 toimiku dokument: saadud
+✓ fichier vérifié ¦ ✓ failas patikrintas ¦ ✓ fails pārbaudīts ¦ ✓ fail kontrollitud
+Rapporté du téléphone ¦ Parsinešta iš telefono ¦ Atnests no telefona ¦ Telefonist tagasi toodud
+Ce que l’app fera ¦ Ką padarys programa ¦ Ko darīs lietotne ¦ Mida rakendus teeb
+Ranger cette cote ¦ Sutvarkyti šį šifrą ¦ Sakārtot šo šifru ¦ Pane see säilikutähis paika
+→ Reporter sur la fiche ¦ → Perkelti į kortelę ¦ → Pārnest uz kartīti ¦ → Kanna kaardile
+Aucune date ni aucun lieu n’est écrit sur une fiche : ce qui est trouvé reste un dépouillement avec sa photo ; c’est toi qui le reportes sur la fiche, comme aujourd’hui. ¦ Į kortelę neįrašoma nei data, nei vieta: rasta lieka aprašu su nuotrauka; tu pats perkeli į kortelę, kaip ir dabar. ¦ Kartītē netiek ierakstīts ne datums, ne vieta: atrastais paliek apraksts ar savu foto; tu pats to pārnes uz kartīti, kā šodien. ¦ Kaardile ei kirjutata kuupäeva ega kohta: leitu jääb läbitöötamiseks koos fotoga; sina kannad selle kaardile, nagu praegu.
+{n} rapportées, {m} ¦ parsinešta: {n}, {m} ¦ atnesti: {n}, {m} ¦ tagasi toodud: {n}, {m}
+Ranger {n} et {m} ¦ Sutvarkyti {n} ir {m} ¦ Sakārtot {n} un {m} ¦ Pane paika {n} ja {m}
+→ Reporter sur la fiche : le dépouillement et ses photos y sont reliés. ¦ → Perkelti į kortelę: aprašas ir jo nuotraukos su ja susieti. ¦ → Pārnest uz kartīti: apraksts un tā foto ir saistīti ar to. ¦ → Kanna kaardile: läbitöötamine ja selle fotod on sellega seotud.
+✓ Visite rangée : {d}, {m}, {p}. ¦ ✓ Apsilankymas sutvarkytas: {d}, {m}, {p}. ¦ ✓ Apmeklējums sakārtots: {d}, {m}, {p}. ¦ ✓ Külastus paigas: {d}, {m}, {p}.
+{n} pièce(s) reçue(s) ¦ gauti dokumentai: {n} ¦ saņemtie dokumenti: {n} ¦ saadud dokumente: {n}
+Visite marquée « faite ». ¦ Apsilankymas pažymėtas „atliktu“. ¦ Apmeklējums atzīmēts kā “veikts”. ¦ Külastus märgitud „tehtuks”.
+Cette visite n’a pas encore de cote. ¦ Šis apsilankymas dar neturi šifro. ¦ Šim apmeklējumam vēl nav šifra. ¦ Sellel külastusel pole veel säilikutähist.
+Rangées dans l’ordre des cotes d’après l’heure de prise de vue : corrige la cote d’une photo si besoin. ¦ Sudėliota šifrų tvarka pagal fotografavimo laiką: jei reikia, pataisyk nuotraukos šifrą. ¦ Sakārtots šifru secībā pēc uzņemšanas laika: ja vajag, izlabo foto šifru. ¦ Järjestatud säilikutähiste järgi pildistamisaja põhjal: paranda vajadusel foto säilikutähist.
+— ne pas ranger — ¦ — nesaugoti — ¦ — nesakārtot — ¦ — ära pane paika —
+{n} rangées dans les médias (« à trier »). ¦ {n} sutvarkyta medijoje („rūšiuoti“). ¦ {n} sakārtoti medijos (“jāsakārto”). ¦ {n} pandud meediasse („sorteerimiseks”).
+Parents : {names} ¦ Tėvai: {names} ¦ Vecāki: {names} ¦ Vanemad: {names}
+Conjoint : {names} ¦ Sutuoktinis: {names} ¦ Laulātais: {names} ¦ Abikaasa: {names}
+Fiche confidentielle ¦ Konfidenciali kortelė ¦ Konfidenciāla kartīte ¦ Konfidentsiaalne kaart
+Ce fichier a déjà été rangé le {date} : rien n’est fait en double. ¦ Šis failas jau sutvarkytas {date}: niekas nedaroma dukart. ¦ Šis fails jau sakārtots {date}: nekas netiek darīts divreiz. ¦ See fail on juba paika pandud {date}: midagi ei tehta kaks korda.
+à trier ¦ rūšiuoti ¦ jāsakārto ¦ sorteerimiseks
+Trouvé à la visite : {where} ¦ Rasta apsilankyme: {where} ¦ Atrasts apmeklējumā: {where} ¦ Leitud külastusel: {where}
+Comment emporter la visite ¦ Kaip pasiimti apsilankymą ¦ Kā paņemt līdzi apmeklējumu ¦ Kuidas külastus kaasa võtta
+Une page .html à ouvrir sur le téléphone ¦ .html puslapis, atidaromas telefone ¦ .html lapa, ko atvērt telefonā ¦ Telefonis avatav .html-leht
+La feuille imprimée et les photos du téléphone ¦ Atspausdintas lapas ir telefono nuotraukos ¦ Izdrukātā lapa un telefona fotoattēli ¦ Prinditud leht ja telefoni fotod
+Sans les vivants ¦ Be gyvųjų ¦ Bez dzīvajiem ¦ Ilma elavateta
+Avec les vivants ¦ Su gyvaisiais ¦ Ar dzīvajiem ¦ Koos elavatega
+Réduites à 2000 px ¦ Sumažintos iki 2000 px ¦ Samazināti līdz 2000 px ¦ Vähendatud 2000 px-ni
+Une naissance trouvée ¦ Rastas gimimas ¦ Atrasta dzimšana ¦ Leitud sünd
+Reste un dépouillement, tu la reportes ¦ Lieka aprašu, tu perkeli ¦ Paliek apraksts, tu to pārnes ¦ Jääb läbitöötamiseks, sina kannad üle
+Proposer « → Reporter sur la fiche » dans la revue ¦ Siūlyti „→ Perkelti į kortelę“ peržiūroje ¦ Piedāvāt “→ Pārnest uz kartīti” pārskatā ¦ Paku ülevaatusel „→ Kanna kaardile”
+Après le rangement ¦ Po sutvarkymo ¦ Pēc sakārtošanas ¦ Pärast paikapanekut
+Visite marquée « faite » ¦ Apsilankymas pažymėtas „atliktu“ ¦ Apmeklējums atzīmēts kā “veikts” ¦ Külastus märgitud „tehtuks”
+Aucune photo reçue. ¦ Negauta jokios nuotraukos. ¦ Nav saņemts neviens foto. ¦ Ühtegi fotot ei saadud.
+Ce fichier est trop gros pour les résultats d’une visite. ¦ Šis failas per didelis apsilankymo rezultatams. ¦ Šis fails ir pārāk liels apmeklējuma rezultātiem. ¦ See fail on külastuse tulemuste jaoks liiga suur.
+Ce fichier n’est pas les résultats d’une visite (il faut le .zip enregistré sur le téléphone). ¦ Šis failas nėra apsilankymo rezultatai (reikia telefone įrašyto .zip). ¦ Šis fails nav apmeklējuma rezultāti (vajag telefonā saglabāto .zip). ¦ See fail pole külastuse tulemused (vaja on telefoni salvestatud .zip-faili).
+Ce fichier n’est pas les résultats d’une visite aux archives. ¦ Šis failas nėra apsilankymo archyve rezultatai. ¦ Šis fails nav arhīva apmeklējuma rezultāti. ¦ See fail pole arhiivikülastuse tulemused.
+Ce fichier vient d’une visite qui n’est pas dans cette généalogie. ¦ Šis failas iš apsilankymo, kurio nėra šioje genealogijoje. ¦ Šis fails ir no apmeklējuma, kura nav šajā ģenealoģijā. ¦ See fail on külastuselt, mida selles sugupuus pole.
+Cette visite a déjà été emportée : supprime-la dans le Planificateur si tu n’en veux plus. ¦ Šis apsilankymas jau pasiimtas: ištrink jį Planuoklyje, jei jo nebenori. ¦ Šis apmeklējums jau paņemts līdzi: izdzēs to Plānotājā, ja to vairs nevēlies. ¦ See külastus on juba kaasa võetud: kustuta see Planeerijas, kui sa seda enam ei soovi.
+Choisis la cote de chaque photo. ¦ Pasirink kiekvienos nuotraukos šifrą. ¦ Izvēlies katra foto šifru. ¦ Vali iga foto säilikutähis.
+Coche au moins une cote à ranger. ¦ Pažymėk bent vieną šifrą sutvarkyti. ¦ Atzīmē vismaz vienu sakārtojamu šifru. ¦ Märgi vähemalt üks paikapandav säilikutähis.
+Fichier .zip illisible. ¦ Neperskaitomas .zip failas. ¦ Nelasāms .zip fails. ¦ Loetamatu .zip-fail.
+Fichier refusé : identifiant incorrect. ¦ Failas atmestas: neteisingas identifikatorius. ¦ Fails noraidīts: nepareizs identifikators. ¦ Fail tagasi lükatud: vale tunnus.
+Fichier refusé : il a été modifié depuis le téléphone (somme de contrôle). ¦ Failas atmestas: jis pakeistas po telefono (kontrolinė suma). ¦ Fails noraidīts: tas mainīts pēc telefona (kontrolsumma). ¦ Fail tagasi lükatud: seda on pärast telefoni muudetud (kontrollsumma).
+Fichier refusé : il contient des données inattendues. ¦ Failas atmestas: jame netikėti duomenys. ¦ Fails noraidīts: tajā ir negaidīti dati. ¦ Fail tagasi lükatud: see sisaldab ootamatuid andmeid.
+Fichier refusé : il ne correspond pas à la page emportée (somme de contrôle). ¦ Failas atmestas: jis neatitinka pasiimto puslapio (kontrolinė suma). ¦ Fails noraidīts: tas neatbilst paņemtajai lapai (kontrolsumma). ¦ Fail tagasi lükatud: see ei vasta kaasa võetud lehele (kontrollsumma).
+Fichier refusé : la liste des cotes manque. ¦ Failas atmestas: trūksta šifrų sąrašo. ¦ Fails noraidīts: trūkst šifru saraksta. ¦ Fail tagasi lükatud: säilikutähiste loend puudub.
+Fichier refusé : la liste des photos est mal formée. ¦ Failas atmestas: nuotraukų sąrašas netaisyklingas. ¦ Fails noraidīts: fotoattēlu saraksts ir nepareizs. ¦ Fail tagasi lükatud: fotode loend on vigane.
+Fichier refusé : results.json est illisible. ¦ Failas atmestas: results.json neperskaitomas. ¦ Fails noraidīts: results.json nav lasāms. ¦ Fail tagasi lükatud: results.json on loetamatu.
+Fichier refusé : results.json manque. ¦ Failas atmestas: trūksta results.json. ¦ Fails noraidīts: trūkst results.json. ¦ Fail tagasi lükatud: results.json puudub.
+Fichier refusé : trop de fichiers dedans. ¦ Failas atmestas: per daug failų viduje. ¦ Fails noraidīts: tajā ir pārāk daudz failu. ¦ Fail tagasi lükatud: sees on liiga palju faile.
+Fichier refusé : un chemin sort du dossier. ¦ Failas atmestas: kelias išeina už aplanko. ¦ Fails noraidīts: ceļš iziet ārpus mapes. ¦ Fail tagasi lükatud: tee läheb kaustast välja.
+Fichier refusé : un résultat est inconnu. ¦ Failas atmestas: nežinomas rezultatas. ¦ Fails noraidīts: nezināms rezultāts. ¦ Fail tagasi lükatud: tundmatu tulemus.
+Fichier refusé : un élément est trop gros. ¦ Failas atmestas: elementas per didelis. ¦ Fails noraidīts: elements ir pārāk liels. ¦ Fail tagasi lükatud: element on liiga suur.
+Fichier refusé : une cote contient des données inattendues. ¦ Failas atmestas: šifre netikėti duomenys. ¦ Fails noraidīts: šifrā ir negaidīti dati. ¦ Fail tagasi lükatud: säilikutähis sisaldab ootamatuid andmeid.
+Fichier refusé : une cote est mal formée. ¦ Failas atmestas: šifras netaisyklingas. ¦ Fails noraidīts: šifrs ir nepareizs. ¦ Fail tagasi lükatud: säilikutähis on vigane.
+Fichier refusé : une photo annoncée manque. ¦ Failas atmestas: trūksta nurodytos nuotraukos. ¦ Fails noraidīts: trūkst pieteikta foto. ¦ Fail tagasi lükatud: teatatud foto puudub.
+Fichier refusé : une photo n’est pas une image. ¦ Failas atmestas: nuotrauka nėra vaizdas. ¦ Fails noraidīts: foto nav attēls. ¦ Fail tagasi lükatud: foto pole pilt.
+Impossible de ranger la photo dans les médias. ¦ Nuotraukos nepavyksta sutvarkyti medijoje. ¦ Foto nevar sakārtot medijos. ¦ Fotot ei saa meediasse paigutada.
+Lecture des fichiers .zip impossible sur cet ordinateur. ¦ Šiame kompiuteryje negalima skaityti .zip failų. ¦ Šajā datorā nevar lasīt .zip failus. ¦ Selles arvutis ei saa .zip-faile lugeda.
+Trop de photos d’un coup (200 au plus). ¦ Per daug nuotraukų iš karto (ne daugiau kaip 200). ¦ Pārāk daudz fotoattēlu uzreiz (ne vairāk kā 200). ¦ Liiga palju fotosid korraga (kuni 200).
+Une photo est trop grosse ou n’a pas été reçue. ¦ Nuotrauka per didelė arba negauta. ¦ Foto ir pārāk liels vai nav saņemts. ¦ Foto on liiga suur või seda ei saadud.

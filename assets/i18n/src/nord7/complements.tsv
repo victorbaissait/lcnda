@@ -1,0 +1,166 @@
+fr ¦ is
+# 🏛⚠️📋📱 Compléments aux outils existants (docs/design/complements-existants.html) : A études de notaire, B homonymes
+Le serveur ne répond pas. ¦ Þjónninn svarar ekki.
+⚙️ Réglages de cet outil ¦ ⚙️ Stillingar þessa tóls
+Enlève un filtre, ou cherche autrement. ¦ Fjarlægðu síu eða leitaðu á annan hátt.
+Listes · Archives et sources ¦ Listar · Skjalasöfn og heimildir
+=étude ¦ skrifstofa|skrifstofur
+{n} j ¦ {n} d.
+sur {n} réponses ¦ af {n} svörum
+pas assez de réponses ¦ of fá svör
+{n} sur {m} nécessaires ¦ {n} af {m} nauðsynlegum
+clerc : {name} ¦ fulltrúi: {name}
+Études de notaire ¦ Lögbókandaskrifstofur
+🏛 Études de notaire ¦ 🏛 Lögbókandaskrifstofur
+Étude de notaire ¦ Lögbókandaskrifstofa
+Une étude est un service d’archives de la sorte « Étude de notaire » : ses notaires et clercs, ses dossiers, ses courriers. ¦ Skrifstofa er skjalaþjónusta af tegundinni „Lögbókandaskrifstofa“: lögbókendur hennar og fulltrúar, mál hennar, bréf hennar.
+＋ Nouvelle étude ¦ ＋ Ný skrifstofa
+🧩 Regrouper et créer leurs fiches… ¦ 🧩 Flokka og búa til spjöld þeirra…
+Chercher une étude, un notaire, une ville… ¦ Leitaðu að skrifstofu, lögbókanda, bæ…
+Département : {d} ¦ Umdæmi: {d}
+Répond le plus vite ¦ Svarar fljótast
+Le plus de dossiers ¦ Flest mál
+Aucune étude de notaire pour l’instant ¦ Engin lögbókandaskrifstofa enn
+Une étude est un service d’archives de la sorte « Étude de notaire » : crée-la ici, ou regroupe les notaires tapés à la main dans tes dossiers. ¦ Skrifstofa er skjalaþjónusta af tegundinni „Lögbókandaskrifstofa“: búðu hana til hér eða flokkaðu lögbókendur sem slegnir voru inn í málunum þínum.
+Aucun notaire noté ¦ Enginn lögbókandi skráður
+{a} en cours · {b} clos ¦ {a} í vinnslu · {b} lokið
+{n} en attente ¦ {n} í bið
+Appeler ¦ Hringja
+fiche de personne n° {n} ¦ persónuspjald nr. {n}
+nom seulement ¦ aðeins nafn
+ligne directe {tel} ¦ beint númer {tel}
+ancien depuis le {d} ¦ fyrrverandi frá {d}
+Aucun notaire ni clerc noté. ¦ Enginn lögbókandi né fulltrúi skráður.
+Notaires et clercs ¦ Lögbókendur og fulltrúar
+lus dans les dossiers, rien n’est recopié ¦ lesið úr málunum, ekkert er afritað
+réf. du notaire {ref} ¦ tilvísun lögbókanda {ref}
+Aucun dossier relié à cette étude. ¦ Ekkert mál tengt þessari skrifstofu.
+reçue le {d} ¦ móttekið {d}
+{n} j · d’habitude {m} j ¦ {n} d. · venjulega {m} d.
+en attente · {n} j ¦ í bið · {n} d.
+✓ Réponse reçue ¦ ✓ Svar móttekið
+⏳ Délai de réponse constaté : {days} j en moyenne (de {min} à {max} j). Réponses comptées : {n}, celles de ce registre dont la date est notée. C’est ce que tu as observé, rien d’autre : ce n’est ni un délai légal, ni une promesse de l’étude. ¦ ⏳ Athugaður svartími: {days} d. að meðaltali (frá {min} til {max} d.). Talin svör: {n}, svör þessarar skrár með skráða dagsetningu. Þetta er aðeins það sem þú hefur séð: hvorki lögbundinn frestur né loforð skrifstofunnar.
+⏳ Délai de réponse constaté : {days} j en médiane (de {min} à {max} j). Réponses comptées : {n}, celles de ce registre dont la date est notée. C’est ce que tu as observé, rien d’autre : ce n’est ni un délai légal, ni une promesse de l’étude. ¦ ⏳ Athugaður svartími: miðgildi {days} d. (frá {min} til {max} d.). Talin svör: {n}, svör þessarar skrár með skráða dagsetningu. Þetta er aðeins það sem þú hefur séð: hvorki lögbundinn frestur né loforð skrifstofunnar.
+⏳ Pas assez de réponses datées pour un délai constaté ({n} sur {m} nécessaires). ¦ ⏳ Of fá dagsett svör fyrir athugaðan tíma ({n} af {m} nauðsynlegum).
+Ses courriers ¦ Bréf hennar
+＋ Courrier à l’étude ¦ ＋ Bréf til skrifstofunnar
+＋ {n} courriers plus anciens · tout voir dans le Registre ¦ ＋ {n} eldri bréf · sjáðu öll í Skránni
+Aucun courrier relié à cette étude. ¦ Ekkert bréf tengt þessari skrifstofu.
+« {name} » retiré de l’étude ¦ „{name}“ fjarlægður af skrifstofunni
+Réponse reçue le {d} ¦ Svar móttekið {d}
+Courrier remis en attente ¦ Bréf aftur í bið
+Vide : le courrier repasse « en attente ». ¦ Autt: bréfið fer aftur „í bið“.
+Ajouter un notaire ou un clerc ¦ Bæta við lögbókanda eða fulltrúa
+Fiche de personne (facultatif) ¦ Persónuspjald (valfrjálst)
+Jusqu’à (ancien) ¦ Til (fyrrverandi)
+Un notaire qui change d’étude reste nommé dans ses anciens dossiers : mets une date de fin, il passe « ancien ». ¦ Lögbókandi sem skiptir um skrifstofu er áfram nefndur í gömlu málunum sínum: settu lokadagsetningu og hann verður „fyrrverandi“.
+Donne le nom du notaire ou du clerc. ¦ Gefðu upp nafn lögbókandans eða fulltrúans.
+Courrier à l’étude ¦ Bréf til skrifstofunnar
+état des recherches ¦ staða rannsóknar
+Courrier rangé au Registre ¦ Bréf sett í Skrána
+Une étude, ou un nom gardé en texte… ¦ Skrifstofa, eða nafn geymt sem texti…
+Choisis l’étude ; le nom tapé dans le champ du notaire reste dans le dossier. ¦ Veldu skrifstofuna; nafnið í reit lögbókandans helst í málinu.
+nom gardé en texte, sans fiche d’étude ¦ nafn geymt sem texti, án skrifstofuspjalds
+texte ¦ texti
+Notaire chargé du dossier ¦ Lögbókandi sem sér um málið
+ancien ¦ fyrrverandi
+Choisi parmi les notaires de l’étude, ou laissé vide. ¦ Valinn úr lögbókendum skrifstofunnar eða skilinn eftir auður.
+✓ Notaire du dossier : {who}. Ligne au 🕓 Journal du dossier. ¦ ✓ Lögbókandi málsins: {who}. Lína í 🕓 Annál málsins.
+même nom « {n} » ¦ sama nafn „{n}“
+même ville ¦ sami bær
+même ville que le défunt ¦ sami bær og hins látna
+initiale {i} ¦ upphafsstafur {i}
+une seule étude de ce nom ¦ aðeins ein skrifstofa með þessu nafni
+Autre étude ¦ Önnur skrifstofa
+Laisser en texte ¦ Halda sem texta
+{n} noms tapés à la main · rien n’est changé avant « Appliquer ». ¦ {n} innslegin nöfn · engu er breytt fyrr en „Nota“.
+existe ¦ er til
+plusieurs études possibles ¦ nokkrar mögulegar skrifstofur
+Sans proposition ¦ Engin tillaga
+＋ Créer une étude ¦ ＋ Búa til skrifstofu
+Courriers qui ressemblent à une étude ¦ Bréf sem líkjast skrifstofu
+pour le délai constaté ¦ fyrir athugaðan tíma
+Les rapprochements ne regardent que le nom de famille (sans « Me », « Maître », « SCP », « Étude », accents) et la ville quand elle est écrite. Deux études du même nom dans deux villes ne sont jamais réunies. Le nom tapé reste dans chaque dossier. ¦ Samanburðurinn skoðar aðeins eftirnafnið (án „Me“, „Maître“, „SCP“, „Étude“, kommna) og bæinn þegar hann er skrifaður. Tvær skrifstofur með sama nafni í tveimur bæjum eru aldrei sameinaðar. Innslegna nafnið helst í hverju máli.
+Notaires tapés à la main ¦ Innslegnir lögbókendur
+Aucun notaire tapé à la main sans fiche. ¦ Enginn innsleginn lögbókandi án spjalds.
+Appliquer à {n} noms ({m} dossiers) ¦ Nota á {n} nöfn ({m} mál)
+✓ {n} dossiers reliés à leur étude. Le nom tapé est gardé dans chaque dossier. ¦ ✓ {n} mál tengd skrifstofu sinni. Innslegna nafnið er geymt í hverju máli.
+{n} notaires tapés à la main dans tes dossiers n’ont pas encore de fiche. ¦ {n} innslegnir lögbókendur í málunum þínum hafa ekki enn spjald.
+{n} notaire tapé à la main dans tes dossiers n’a pas encore de fiche. ¦ {n} innsleginn lögbókandi í málunum þínum hefur ekki enn spjald.
+{cases} · pas encore de fiche ¦ {cases} · ekkert spjald enn
+Déjà tapé dans d’autres dossiers ¦ Þegar sleginn inn í öðrum málum
+{n} dossiers en cours ¦ {n} mál í vinnslu
+{n} dossier en cours ¦ {n} mál í vinnslu
+Étude de notaire introuvable. ¦ Lögbókandaskrifstofa fannst ekki.
+Ce notaire n’est pas de cette étude. ¦ Þessi lögbókandi er ekki frá þessari skrifstofu.
+Ce dossier n’est pas relié à cette étude. ¦ Þetta mál er ekki tengt þessari skrifstofu.
+Date de réponse incorrecte. ¦ Röng svardagsetning.
+Où ranger les études ¦ Hvar á að geyma skrifstofur
+Dans 🏛 Services d’archives, sorte « Étude de notaire » ¦ Í 🏛 Skjalaþjónustur, tegund „Lögbókandaskrifstofa“
+Une liste « Études de notaire » à part ¦ Sér listi „Lögbókandaskrifstofur“
+Délai constaté ¦ Athugaður tími
+Moyenne, avec le plus court et le plus long ¦ Meðaltal, með stysta og lengsta
+Médiane (moins sensible à une réponse très lente) ¦ Miðgildi (minna næmt fyrir mjög hægu svari)
+Ne pas l’afficher ¦ Ekki sýna
+Nombre de réponses avant d’afficher un délai ¦ Fjöldi svara áður en tími birtist
+Les courriers comptés ¦ Talin bréf
+Ceux des 3 dernières années ¦ Þau frá síðustu 3 árum
+Ce que propose le menu de choix ¦ Það sem valmyndin býður
+Les études, puis les noms déjà tapés ¦ Skrifstofurnar, svo þegar innslegin nöfn
+Les études seulement ¦ Aðeins skrifstofurnar
+Le notaire chargé du dossier ¦ Lögbókandinn sem sér um málið
+Un notaire de l’étude, facultatif ¦ Lögbókandi skrifstofunnar, valfrjálst
+Seulement l’étude ¦ Aðeins skrifstofan
+Les propositions de regroupement ¦ Tillögur um flokkun
+Cochées quand le nom et la ville concordent ¦ Hakaðar þegar nafn og bær passa
+Toutes décochées ¦ Allar óhakaðar
+Le bandeau « notaires sans fiche » ¦ Borðinn „lögbókendur án spjalds“
+Montré dans la liste des études ¦ Sýndur í lista skrifstofanna
+Jamais (on passe par ⋯) ¦ Aldrei (í gegnum ⋯)
+⚠️ Homonymes ¦ ⚠️ Alnafnar
+fiche n° {n} (confidentielle) ¦ spjald nr. {n} (trúnaðarmál)
+naissance : date inconnue ¦ fæðing: dagsetning óþekkt
+même année de naissance ¦ sama fæðingarár
+naissance à {n} an(s) près ¦ fæðing innan {n} ára
+même commune ¦ sama sveitarfélag
+Nom, prénom ¦ Eftirnafn, fornafn
+inconnus ¦ óþekktir
+arbre seulement · ajouté le {d} ¦ aðeins tré · bætt við {d}
+arbre seulement ¦ aðeins tré
+Critère ¦ Viðmið
+Celui du dossier ¦ Sá í málinu
+L’autre fiche ¦ Hitt spjaldið
+↗ Ouvrir la fiche n° {n} ¦ ↗ Opna spjald nr. {n}
+👥 Peut-être les mêmes : ouvrir la fusion ¦ 👥 Kannski sá sami: opna sameiningu
+Une autre fiche porte le même nom ¦ Annað spjald ber sama nafn
+pas dans ce dossier. ¦ ekki í þessu máli.
+Celui à qui tu écris : {who}. ¦ Sá sem þú skrifar: {who}.
+enfant de {p} ¦ barn {p}
+{n} héritiers sur {m} ont un homonyme dans la base ¦ {n} af {m} erfingjum eiga alnafna í grunninum
+Voir les détails ¦ Sjá nánar
+Envoyer quand même aux {n} ¦ Senda samt til allra {n}
+✓ Retenu : {a} ({y1}) et {b} ({y2}) sont deux personnes. L’alerte ne reviendra plus pour eux deux. ¦ ✓ Munað: {a} ({y1}) og {b} ({y2}) eru tvær manneskjur. Viðvörunin kemur ekki aftur fyrir þau.
+née à {place} en {y} ¦ fædd í {place} árið {y}
+né à {place} en {y} ¦ fæddur í {place} árið {y}
+née à {place}, date inconnue ¦ fædd í {place}, dagsetning óþekkt
+né à {place}, date inconnue ¦ fæddur í {place}, dagsetning óþekkt
+✓ C’est lui ¦ ✓ Þetta er hann
+✓ C’est bien lui que je contacte ¦ ✓ Það er einmitt hann sem ég hef samband við
+👁 Voir ¦ 👁 Skoða
+👁 Voir l’autre ¦ 👁 Skoða hinn
+Ce n’est pas la même personne ¦ Þetta er ekki sama manneskjan
+Noté au 🕓 Journal : homonyme vu, destinataire confirmé. L’alerte reviendra au prochain contact. ¦ Skráð í 🕓 Annál: alnafni séður, viðtakandi staðfestur. Viðvörunin kemur aftur við næsta samband.
+Noté au 🕓 Journal : homonyme vu, destinataire confirmé. L’alerte ne reviendra plus dans ce dossier. ¦ Skráð í 🕓 Annál: alnafni séður, viðtakandi staðfestur. Viðvörunin kemur ekki aftur í þessu máli.
+Écart d’années de naissance ¦ Munur á fæðingarárum
+2 ans ¦ 2 ár
+Même département, ou lieu inconnu ¦ Sama umdæmi, eða óþekktur staður
+Même commune seulement ¦ Aðeins sama sveitarfélag
+Peu importe le lieu ¦ Staðurinn skiptir ekki máli
+Quand l’afficher ¦ Hvenær á að sýna
+À chaque courrier, appel et questionnaire ¦ Við hvert bréf, símtal og spurningalista
+Au premier contact d’un héritier seulement ¦ Aðeins við fyrsta samband við erfingja
+Après « ✓ C’est bien lui » ¦ Eftir „✓ Það er einmitt hann sem ég hef samband við“
+L’alerte revient au prochain contact ¦ Viðvörunin kemur aftur við næsta samband
+Elle ne revient plus dans ce dossier ¦ Hún kemur ekki aftur í þessu máli
+Où chercher l’homonyme ¦ Hvar á að leita að alnafna
+Seulement les autres dossiers ¦ Aðeins í hinum málunum

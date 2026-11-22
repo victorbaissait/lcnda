@@ -1,0 +1,192 @@
+fr ¦ sq ¦ mt
+# Zone « diagrammes-lot-a » : tableau de quartiers, variantes d’un nom, boucles d’implexe, double éventail, nœud papillon, réseau « toute la famille », barres croisées, cercles de parenté, dates incertaines, pyramide d’un recensement, tableau périodique (heritage-diagram-lot-a.js, lib/diagram_lot_a.php)
+(deviné) ¦ (e hamendësuar) ¦ (maħsub)
+1 (enfants) ¦ 1 (fëmijët) ¦ 1 (tfal)
+1 (parents) ¦ 1 (prindërit) ¦ 1 (ġenituri)
+16 quartiers ¦ 16 stema stërgjyshore ¦ 16-il kwart
+20 ans ¦ 20 vjet ¦ 20 sena
+32 quartiers ¦ 32 stema stërgjyshore ¦ 32 kwart
+8 quartiers (arrière-grands-parents) ¦ 8 stema (stërgjyshërit) ¦ 8 kwart (bużnanniet)
+Actes comptés ¦ Aktet e numëruara ¦ Atti magħduda
+Ajoute les ancêtres (n° Sosa, nom) et leurs armoiries. ¦ Shto paraardhësit (nr. Sosa, emri) dhe stemat e tyre. ¦ Żid l-antenati (nru Sosa, isem) u l-armi tagħhom.
+Ajoute les formes du nom : la forme, ses années, le nombre d’actes. ¦ Shto format e emrit: forma, vitet, numri i akteve. ¦ Żid il-forom tal-isem: il-forma, is-snin, in-numru ta’ atti.
+Ajoute les personnes recensées : âge, sexe, année. ¦ Shto personat e regjistruar: mosha, gjinia, viti. ¦ Żid il-persuni fiċ-ċensiment: età, sess, sena.
+Ancêtre à trouver ¦ Paraardhës për t’u gjetur ¦ Antenat li għad irid jinstab
+Ancêtres pris dans ta base : {n} (armoiries : {k}). ¦ Paraardhës nga baza jote: {n} (stema: {k}). ¦ Antenati meħuda mid-database tiegħek: {n} (armi: {k}).
+Arbre des variantes (formes du nom : {n}). ¦ Pema e varianteve (format e emrit: {n}). ¦ Siġra tal-varjanti (forom tal-isem: {n}).
+Arbre des variantes d’un nom ¦ Pema e varianteve të një emri ¦ Siġra tal-varjanti ta’ isem
+Armoiries (nom) ¦ Stema (emri) ¦ Arma (isem)
+Au survol seulement ¦ Vetëm kur kalon miu ¦ Biss meta tgħaddi l-maws
+Aucun ancêtre connu à cette génération. ¦ Asnjë paraardhës i njohur në këtë brez. ¦ L-ebda antenat magħruf f’din il-ġenerazzjoni.
+Aucun lien entre les couples de ce groupe. ¦ Asnjë lidhje midis çifteve të këtij grupi. ¦ L-ebda rabta bejn il-koppji ta’ dan il-grupp.
+Aucun recensement dans ta base ¦ Asnjë regjistrim në bazën tënde ¦ L-ebda ċensiment fid-database tiegħek
+Aucun âge lisible dans ce recensement. ¦ Asnjë moshë e lexueshme në këtë regjistrim. ¦ L-ebda età li tinqara f’dan iċ-ċensiment.
+Aucune forme trouvée pour ce nom. ¦ Asnjë formë e gjetur për këtë emër. ¦ L-ebda forma ma nstabet għal dan l-isem.
+Avec au moins une source ¦ Me të paktën një burim ¦ B’mill-inqas sors wieħed
+Axe des années ¦ Boshti i viteve ¦ Assi tas-snin
+Barres croisées (UpSet) ¦ Shtylla të kryqëzuara (UpSet) ¦ Vireg imsallba (UpSet)
+Barres croisées (ensembles : {n}, combinaisons montrées : {k}). ¦ Shtylla të kryqëzuara (bashkësi: {n}, kombinime të shfaqura: {k}). ¦ Vireg imsallba (settijiet: {n}, kombinazzjonijiet murija: {k}).
+Blason absent ¦ Stema mungon ¦ Arma nieqsa
+Blasonnement en note (en bas) ¦ Përshkrimi i stemës në shënim (poshtë) ¦ Deskrizzjoni tal-arma f’nota (isfel)
+Boucles d’implexe (chemins : {n}), F = {f}. ¦ Laqet e implekseve (shtigje: {n}), F = {f}. ¦ Ċrieki tal-implex (mogħdijiet: {n}), F = {f}.
+Boucles plus lointaines pas dessinées : {n} (comptées dans F). ¦ Laqe më të largëta të pavizatuara: {n} (të llogaritura në F). ¦ Ċrieki aktar ’il bogħod mhux imfassla: {n} (magħduda f’F).
+Branche (paternelle, maternelle) ¦ Dega (atërore, amtare) ¦ Fergħa (missier, omm)
+Branche maternelle ¦ Dega amtare ¦ Il-fergħa tal-omm
+Branche paternelle ¦ Dega atërore ¦ Il-fergħa tal-missier
+Branche « {name} » ¦ Dega «{name}» ¦ Il-fergħa “{name}”
+Cases façon tableau périodique ¦ Kuti si tabela periodike ¦ Kaxxi bħat-tabella perjodika
+Cases vides pour les ancêtres à trouver ¦ Kuti bosh për paraardhësit e pagjetur ¦ Kaxxi vojta għall-antenati li għad iridu jinstabu
+Ce qu’on dessine ¦ Çfarë vizatohet ¦ X’jitfassal
+Cercles (2 à 4 ensembles) ¦ Rrathë (2 deri 4 bashkësi) ¦ Ċrieki (2 sa 4 settijiet)
+Cercles de parenté autour de {name} (personnes : {n}). ¦ Rrathët e farefisnisë rreth {name} (persona: {n}). ¦ Ċrieki tal-qrubija madwar {name} (persuni: {n}).
+Chemins trouvés : {n} (F = {f}). ¦ Shtigje të gjetura: {n} (F = {f}). ¦ Mogħdijiet misjuba: {n} (F = {f}).
+Chercher les boucles ¦ Kërko laqet ¦ Fittex iċ-ċrieki
+Chiffre (couleur, éventails) ¦ Numër (ngjyrë, freska) ¦ Numru (kulur, mrewħa)
+Choisis de 2 à 8 ensembles (là : {n}). ¦ Zgjidh 2 deri 8 bashkësi (tani: {n}). ¦ Agħżel minn 2 sa 8 settijiet (issa: {n}).
+Choisis un groupe de noms ou écris un nom. ¦ Zgjidh një grup emrash ose shkruaj një emër. ¦ Agħżel grupp ta’ ismijiet jew ikteb isem.
+Choisis un recensement (commune et année). ¦ Zgjidh një regjistrim (komuna dhe viti). ¦ Agħżel ċensiment (lokalità u sena).
+Choisis une personne (« Depuis l’app ») ou écris les boucles à la main. ¦ Zgjidh një person («Nga aplikacioni») ose shkruaj laqet me dorë. ¦ Agħżel persuna (“Mill-app”) jew ikteb iċ-ċrieki bl-idejn.
+Coefficient aussi en fraction ¦ Koeficienti edhe si thyesë ¦ Koeffiċjent anke bħala frazzjoni
+Coefficient de consanguinité de {name} : F = {f} ¦ Koeficienti i gjakësisë së {name}: F = {f} ¦ Koeffiċjent ta’ konsangwinità ta’ {name}: F = {f}
+Combinaisons montrées (les plus grandes) ¦ Kombinimet e shfaqura (më të mëdhatë) ¦ Kombinazzjonijiet murija (l-akbar)
+Combinaisons pas montrées : {n} ¦ Kombinime të pashfaqura: {n} ¦ Kombinazzjonijiet mhux murija: {n}
+Commune (titre) ¦ Komuna (titull) ¦ Lokalità (titlu)
+Comparer avec le recensement de ¦ Krahaso me regjistrimin e ¦ Qabbel maċ-ċensiment tas-sena
+Consanguinité de l’ancêtre ¦ Gjakësia e paraardhësit ¦ Konsangwinità tal-antenat
+Couleur de l’écu (sans image) ¦ Ngjyra e mburojës (pa figurë) ¦ Kulur tat-tarka (mingħajr stampa)
+Couleur des parts ¦ Ngjyra e pjesëve ¦ Kulur tal-partijiet
+Couleur du côté maternel ¦ Ngjyra e anës amtare ¦ Kulur tan-naħa tal-omm
+Couleurs des branches ¦ Ngjyrat e degëve ¦ Kuluri tal-friegħi
+Couple ¦ Çift ¦ Koppja
+Critères de mauvaise forme. ¦ Kritere të gabuara. ¦ Kriterji ħżiena.
+Côté (paternel, maternel, branches) ¦ Ana (atërore, amtare, degë) ¦ Naħa (missier, omm, friegħi)
+Côté maternel ¦ Ana amtare ¦ Naħa tal-omm
+Côté paternel ¦ Ana atërore ¦ Naħa tal-missier
+Date incertaine (fourchette) ¦ Datë e pasigurt (interval) ¦ Data inċerta (firxa)
+Date inconnue ¦ Datë e panjohur ¦ Data mhux magħrufa
+Dates sous le nom ¦ Datat nën emër ¦ Dati taħt l-isem
+De la famille ¦ Nga familja ¦ Mill-familja
+De la famille (oui) ¦ Nga familja (po) ¦ Mill-familja (iva)
+De la mère vers l’ancêtre ¦ Nga nëna te paraardhësi ¦ Mill-omm sal-antenat
+Degrés montrés (jusqu’à) ¦ Shkallët e shfaqura (deri) ¦ Gradi murija (sa)
+Dessin de la fourchette ¦ Vizatimi i intervalit ¦ Disinn tal-firxa
+Deux éventails ¦ Dy freska ¦ Żewġ imrewħa
+Deviner d’où vient chaque forme (date et ressemblance) ¦ Hamendëso nga vjen çdo formë (data dhe ngjashmëria) ¦ Aqta’ minn fejn ġejja kull forma (data u xebh)
+Diagramme de Venn (2 à 8 ensembles) ¦ Diagrama e Venit (2 deri 8 bashkësi) ¦ Dijagramma ta’ Venn (2 sa 8 settijiet)
+Diagramme de Venn : {names}. ¦ Diagrama e Venit: {names}. ¦ Dijagramma ta’ Venn: {names}.
+Double éventail (ascendants : {up}, descendants : {down}). ¦ Freskë e dyfishtë (paraardhës: {up}, pasardhës: {down}). ¦ Mrewħa doppja (antenati: {up}, dixxendenti: {down}).
+Du père vers l’ancêtre ¦ Nga babai te paraardhësi ¦ Mill-missier sal-antenat
+Décédé ou inconnu ¦ I vdekur ose i panjohur ¦ Mejjet jew mhux magħruf
+En accordéon (branches qu’on plie) ¦ Fizarmonikë (degë që palosen) ¦ Akkordjin (friegħi li jintwew)
+En cercles (un cercle par degré) ¦ Në rrathë (një rreth për shkallë) ¦ F’ċrieki (ċirku għal kull grad)
+En vie ou non ¦ Gjallë apo jo ¦ Ħaj jew le
+En {year} (contour) ¦ Në {year} (kontur) ¦ Fl-{year} (kontorn)
+Ensemble {x} ¦ Bashkësia {x} ¦ Sett {x}
+Faire ressortir la famille ¦ Thekso familjen ¦ Enfasizza l-familja
+Formes prises dans ta base : {n}. ¦ Forma nga baza jote: {n}. ¦ Forom mid-database tiegħek: {n}.
+Groupe de noms ¦ Grup emrash ¦ Grupp ta’ ismijiet
+Générations : {n} côté père, {m} côté mère ¦ Breza: {n} nga babai, {m} nga nëna ¦ Ġenerazzjonijiet: {n} min-naħa tal-missier, {m} tal-omm
+Il faut de 2 à 8 ensembles. ¦ Duhen 2 deri 8 bashkësi. ¦ Hemm bżonn minn 2 sa 8 settijiet.
+Image (media/…) ¦ Figurë (media/…) ¦ Stampa (media/…)
+Initiales du prénom et du nom ¦ Inicialet e emrit dhe mbiemrit ¦ Inizjali tal-isem u l-kunjom
+La branche ¦ Dega ¦ Il-fergħa
+La personne étudiée ¦ Personi që studiohet ¦ Il-persuna studjata
+Le calcul n’est pas prêt. ¦ Llogaritja nuk është gati. ¦ Il-kalkolu mhux lest.
+Le chemin entre deux personnes ¦ Shtegu midis dy personave ¦ Il-mogħdija bejn żewġ persuni
+Le nom (2 lettres) ¦ Mbiemri (2 shkronja) ¦ Il-kunjom (2 ittri)
+Le plus proche seulement ¦ Vetëm më i afërti ¦ L-eqreb biss
+Le prénom (2 lettres) ¦ Emri (2 shkronja) ¦ L-isem (2 ittri)
+Le recensement de {place} ¦ Regjistrimi i {place} ¦ Iċ-ċensiment ta’ {place}
+Les 8, 16 ou 32 ancêtres d’une génération, chacun avec son blason ; un écu vide : armoiries à trouver. ¦ 8, 16 ose 32 paraardhësit e një brezi, secili me stemën e tij; mburojë bosh: stemë për t’u gjetur. ¦ It-8, 16 jew 32 antenat ta’ ġenerazzjoni, kull wieħed bl-arma tiegħu; tarka vojta: arma li għad trid tinstab.
+Les boucles d’implexe (entre les deux parents) ¦ Laqet e implekseve (midis prindërve) ¦ Ċrieki tal-implex (bejn il-ġenituri)
+Les boucles d’implexe de {name} ¦ Laqet e implekseve të {name} ¦ Iċ-ċrieki tal-implex ta’ {name}
+Les deux parents de cette personne ne sont pas connus. ¦ Të dy prindërit e këtij personi nuk njihen. ¦ Iż-żewġ ġenituri ta’ din il-persuna mhumiex magħrufa.
+Les ensembles (2 à 8) : A, B, C… H ¦ Bashkësitë (2 deri 8): A, B, C… H ¦ Is-settijiet (2 sa 8): A, B, C… H
+Les formes du nom ¦ Format e emrit ¦ Il-forom tal-isem
+Les formes du nom {name} ¦ Format e emrit {name} ¦ Il-forom tal-isem {name}
+Les noms du groupe (ou écrits pareil) et leurs variantes notées, avec leurs années et le nombre d’actes. ¦ Emrat e grupit (ose të shkruar njësoj) dhe variantet e shënuara, me vitet dhe numrin e akteve. ¦ L-ismijiet tal-grupp (jew miktuba l-istess) u l-varjanti tagħhom, bis-snin u n-numru ta’ atti.
+Les quartiers de {name} ¦ Stemat stërgjyshore të {name} ¦ Il-kwarti ta’ {name}
+Les seize quartiers de {name} ¦ Gjashtëmbëdhjetë stemat e {name} ¦ Is-sittax-il kwart ta’ {name}
+Liens pris dans l’app : {n}. ¦ Lidhje nga aplikacioni: {n}. ¦ Rabtiet mill-app: {n}.
+Losange pour les dates exactes ¦ Romb për datat e sakta ¦ Rombu għad-dati eżatti
+Montrer le calcul (½ puissance n) ¦ Shfaq llogaritjen (½ në fuqinë n) ¦ Uri l-kalkolu (½ għall-qawwa n)
+Montrer l’incertitude des dates ¦ Shfaq pasigurinë e datave ¦ Uri l-inċertezza tad-dati
+Naissances et décès (qui vivait en …) ¦ Lindje dhe vdekje (kush jetonte në …) ¦ Twelid u mwiet (min kien ħaj fil-…)
+Nom inconnu ¦ Emër i panjohur ¦ Isem mhux magħruf
+Nom sous l’écu ¦ Emri nën mburojë ¦ Isem taħt it-tarka
+Nom trop long (80 lettres au plus). ¦ Emër shumë i gjatë (jo më shumë se 80 shkronja). ¦ Isem twil wisq (80 ittra l-aktar).
+Nombre d’actes sous la forme ¦ Numri i akteve nën formë ¦ Numru ta’ atti taħt il-forma
+Noms les plus portés ¦ Emrat më të përhapur ¦ L-ismijiet l-aktar komuni
+N° Sosa ¦ Nr. Sosa ¦ Nru Sosa
+N° Sosa (ascendants, éventails) ¦ Nr. Sosa (paraardhës, freska) ¦ Nru Sosa (antenati, mrewħa)
+Nœud papillon (père à gauche, mère à droite) ¦ Papion (babai majtas, nëna djathtas) ¦ Bow tie (missier fuq ix-xellug, omm fuq il-lemin)
+Ordre des combinaisons ¦ Renditja e kombinimeve ¦ Ordni tal-kombinazzjonijiet
+Ou un nom ¦ Ose një emër ¦ Jew isem
+Par nombre d’ensembles ¦ Sipas numrit të bashkësive ¦ Skont l-għadd ta’ settijiet
+Parent (descendants, éventails) ¦ Prind (pasardhës, freska) ¦ Ġenitur (dixxendenti, mrewħa)
+Personne cachée ¦ Person i fshehur ¦ Persuna moħbija
+Personnes recensées : {n} ¦ Persona të regjistruar: {n} ¦ Persuni fiċ-ċensiment: {n}
+Personnes recensées : {n} en {y1}, {m} en {y2} ¦ Persona të regjistruar: {n} në {y1}, {m} në {y2} ¦ Persuni fiċ-ċensiment: {n} fl-{y1}, {m} fl-{y2}
+Personnes recensées prises dans ta base : {n}. ¦ Persona të regjistruar nga baza jote: {n}. ¦ Persuni taċ-ċensiment mid-database tiegħek: {n}.
+Portraits (arbre dessiné, nœud papillon) ¦ Portrete (pemë e vizatuar, papion) ¦ Ritratti (siġra mfassla, bow tie)
+Pyramide du recensement de {year} (personnes : {n}). ¦ Piramida e regjistrimit të {year} (persona: {n}). ¦ Piramida taċ-ċensiment tal-{year} (persuni: {n}).
+Ressortent : les personnes reliées à une fiche (ou au groupe choisi). ¦ Theksohen: personat e lidhur me një kartelë (ose me grupin e zgjedhur). ¦ Enfasizzati: il-persuni marbuta ma’ fajl (jew mal-grupp magħżul).
+Selon le nombre de descendants ¦ Sipas numrit të pasardhësve ¦ Skont l-għadd ta’ dixxendenti
+Selon le tableau ¦ Sipas tabelës ¦ Skont it-tabella
+Ses ancêtres au-dessus (place Sosa), ses descendants au-dessous (sous leur parent) ; le chiffre : l’âge au décès. ¦ Paraardhësit lart (vendi Sosa), pasardhësit poshtë (nën prindin); numri: mosha në vdekje. ¦ L-antenati fuq (post Sosa), id-dixxendenti isfel (taħt il-ġenitur); in-numru: l-età fil-mewt.
+Ses ancêtres de la génération choisie (ordre Sosa) et les armoiries reliées à chacun (Listes → Armoiries). ¦ Paraardhësit e brezit të zgjedhur (renditja Sosa) dhe stemat e lidhura me secilin (Lista → Stema). ¦ L-antenati tal-ġenerazzjoni magħżula (ordni Sosa) u l-armi marbuta ma’ kull wieħed (Listi → Armi).
+Seulement l’ancêtre commun le plus proche ¦ Vetëm paraardhësi i përbashkët më i afërt ¦ L-eqreb antenat komuni biss
+Sexe inconnu (pas dans la pyramide) : {n} ¦ Gjini e panjohur (jashtë piramidës): {n} ¦ Sess mhux magħruf (barra mill-piramida): {n}
+Sosa {n} : ancêtre à trouver ¦ Sosa {n}: paraardhës për t’u gjetur ¦ Sosa {n}: antenat li għad irid jinstab
+Source, note ¦ Burim, shënim ¦ Sors, nota
+Sources sous la forme ¦ Burimet nën formë ¦ Sorsi taħt il-forma
+Tableau de quartiers (armoiries des ancêtres) ¦ Tabela e stemave stërgjyshore ¦ Tabella tal-kwarti (armi tal-antenati)
+Tableau de quartiers ({n}), armoiries connues : {k}. ¦ Tabela e stemave ({n}), stema të njohura: {k}. ¦ Tabella tal-kwarti ({n}), armi magħrufa: {k}.
+Tableau périodique : ancêtres trouvés {found} / {total} ({pct} %). ¦ Tabela periodike: paraardhës të gjetur {found} / {total} ({pct} %). ¦ Tabella perjodika: antenati misjuba {found} / {total} ({pct} %).
+Taux de recherche (%) ¦ Shkalla e kërkimit (%) ¦ Rata ta’ riċerka (%)
+Tous les ancêtres répétés ¦ Të gjithë paraardhësit e përsëritur ¦ L-antenati ripetuti kollha
+Tous les chemins du père et de la mère vers un même ancêtre (filiations biologiques) et le coefficient de consanguinité (méthode de Wright). ¦ Të gjitha shtigjet e babait dhe nënës drejt të njëjtit paraardhës (prejardhje biologjike) dhe koeficienti i gjakësisë (metoda e Wright-it). ¦ Il-mogħdijiet kollha tal-missier u tal-omm lejn l-istess antenat (dixxendenza bijoloġika) u l-koeffiċjent ta’ konsangwinità (metodu ta’ Wright).
+Toute la base (qui vivait en …) ¦ E gjithë baza (kush jetonte në …) ¦ Id-database kollha (min kien ħaj fil-…)
+Toute la base (qui vivait l’année choisie) ou un recensement (les âges écrits ce jour-là). ¦ E gjithë baza (kush jetonte në vitin e zgjedhur) ose një regjistrim (moshat e shkruara atë ditë). ¦ Id-database kollha (min kien ħaj fis-sena magħżula) jew ċensiment (l-etajiet miktuba dakinhar).
+Toute la famille, un point par couple ¦ E gjithë familja, një pikë për çift ¦ Il-familja kollha, tikka għal kull koppja
+Trop de critères. ¦ Shumë kritere. ¦ Wisq kriterji.
+Trop d’ensembles. ¦ Shumë bashkësi. ¦ Wisq settijiet.
+Trouvé chez le notaire (successions, inventaires) ¦ Gjetur te noteri (trashëgimi, inventarë) ¦ Misjub għand in-nutar (wirt, inventarji)
+Trouvé dans les sources militaires (poilus) ¦ Gjetur në burimet ushtarake (ushtarë të Luftës së Parë) ¦ Misjub fis-sorsi militari (suldati tal-Ewwel Gwerra)
+Trouvé dans un recensement ¦ Gjetur në një regjistrim ¦ Misjub f’ċensiment
+Un chiffre (colonne « Chiffre ») ¦ Një numër (kolona «Numër») ¦ Numru (kolonna “Numru”)
+Un recensement (commune, année) ¦ Një regjistrim (komuna, viti) ¦ Ċensiment (lokalità, sena)
+Un recensement (âges écrits) ¦ Një regjistrim (moshat e shkruara) ¦ Ċensiment (etajiet miktuba)
+Une par branche ¦ Një për degë ¦ Waħda għal kull fergħa
+Une par forme ¦ Një për formë ¦ Waħda għal kull forma
+Une seule source : couleur de l’ensemble ¦ Një burim i vetëm: ngjyra e bashkësisë ¦ Sors wieħed: kulur tas-sett
+Une source précise ¦ Një burim i caktuar ¦ Sors speċifiku
+Vérifie le groupe de personnes. ¦ Kontrollo grupin e personave. ¦ Iċċekkja l-grupp ta’ persuni.
+actes : {n} ¦ akte: {n} ¦ atti: {n}
+vient de {name} ¦ vjen nga {name} ¦ ġej minn {name}
+{label} (famille) : {n} ¦ {label} (familja): {n} ¦ {label} (familja): {n}
+{names} (seulement) : {n} ¦ {names} (vetëm): {n} ¦ {names} (biss): {n}
+{name} : armoiries pas encore trouvées ¦ {name}: stema ende e pagjetur ¦ {name}: l-arma għadha ma nstabitx
+{name} : {n} en tout ¦ {name}: {n} gjithsej ¦ {name}: {n} b’kollox
+{place}, {year} ¦ {place}, {year} ¦ {place}, {year}
+« vers » : plus ou moins ¦ «rreth»: plus minus ¦ “madwar”: bejn wieħed u ieħor
+Âge (recensement) ¦ Mosha (regjistrim) ¦ Età (ċensiment)
+Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Shkruaj llojin e lidhjes mbi vijë (emri i fëmijës…) ¦ Ikteb it-tip ta’ rabta fuq il-linja (isem it-tifel…)
+Écrits s’il y a la place ¦ Të shkruar nëse ka vend ¦ Miktuba jekk hemm spazju
+Écu vide ¦ Mburojë bosh ¦ Tarka vojta
+Épaisseur selon le nombre d’actes ¦ Trashësia sipas numrit të akteve ¦ Ħxuna skont in-numru ta’ atti
+— Aucun (le nom écrit à côté) — ¦ — Asnjë (emri i shkruar anash) — ¦ — L-ebda wieħed (l-isem miktub ħdejh) —
+— Rien — ¦ — Asgjë — ¦ — Xejn —
+🌿 Les formes d’un nom de ma base ¦ 🌿 Format e një emri nga baza ime ¦ 🌿 Il-forom ta’ isem mid-database tiegħi
+🔁 Entre les deux parents de… ¦ 🔁 Midis dy prindërve të… ¦ 🔁 Bejn iż-żewġ ġenituri ta’…
+🔺 Les personnes de ma base ¦ 🔺 Personat e bazës sime ¦ 🔺 Il-persuni fid-database tiegħi
+🛡 Les quartiers d’une personne de ma base ¦ 🛡 Stemat stërgjyshore të një personi të bazës sime ¦ 🛡 Il-kwarti ta’ persuna mid-database tiegħi
+Choisis de 2 à 8 ensembles : chaque zone compte les personnes de ces ensembles-là seulement. Dès 5 ensembles : barres croisées. ¦ Zgjidh 2 deri 8 bashkësi: çdo zonë numëron vetëm personat e atyre bashkësive. Nga 5: shtylla të kryqëzuara. ¦ Agħżel minn 2 sa 8 settijiet: kull żona tgħodd biss il-persuni ta’ dawk is-settijiet. Minn 5: vireg imsallba.
+Les témoins, parrains et marraines des actes ; ou toute la famille, un point par couple, reliés par leurs enfants. ¦ Dëshmitarët dhe kumbarët e akteve; ose gjithë familja, një pikë për çift, të lidhur nga fëmijët. ¦ Ix-xhieda u l-parrini tal-atti; jew il-familja kollha, tikka għal kull koppja, marbuta bit-tfal.
+Nom de l’enfant sur le trait ¦ Emri i fëmijës mbi vijë ¦ Isem it-tifel fuq il-linja
+Par nom de famille ¦ Sipas mbiemrit ¦ Skont il-kunjom
+Par siècle (du mariage) ¦ Sipas shekullit (të martesës) ¦ Skont is-seklu (taż-żwieġ)
+Un point par couple ¦ Një pikë për çift ¦ Tikka għal kull koppja
+Un point par personne ¦ Një pikë për person ¦ Tikka għal kull persuna
+🕸 Les liens de ma base ¦ 🕸 Lidhjet e bazës sime ¦ 🕸 Ir-rabtiet fid-database tiegħi
+Quartiers ¦ Stema stërgjyshore ¦ Kwarti

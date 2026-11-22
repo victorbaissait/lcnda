@@ -1,0 +1,192 @@
+fr ¦ tr
+# Zone « diagrammes-lot-a » : tableau de quartiers, variantes d’un nom, boucles d’implexe, double éventail, nœud papillon, réseau « toute la famille », barres croisées, cercles de parenté, dates incertaines, pyramide d’un recensement, tableau périodique (heritage-diagram-lot-a.js, lib/diagram_lot_a.php)
+(deviné) ¦ (tahmin)
+1 (enfants) ¦ 1 (çocuklar)
+1 (parents) ¦ 1 (ebeveynler)
+16 quartiers ¦ 16 ata arması
+20 ans ¦ 20 yıl
+32 quartiers ¦ 32 ata arması
+8 quartiers (arrière-grands-parents) ¦ 8 ata arması (büyük dedeler ve nineler)
+Actes comptés ¦ Sayılan kayıtlar
+Ajoute les ancêtres (n° Sosa, nom) et leurs armoiries. ¦ Ataları (Sosa no., ad) ve armalarını ekle.
+Ajoute les formes du nom : la forme, ses années, le nombre d’actes. ¦ Adın biçimlerini ekle: biçim, yılları, kayıt sayısı.
+Ajoute les personnes recensées : âge, sexe, année. ¦ Sayımdaki kişileri ekle: yaş, cinsiyet, yıl.
+Ancêtre à trouver ¦ Bulunacak ata
+Ancêtres pris dans ta base : {n} (armoiries : {k}). ¦ Veritabanından alınan atalar: {n} (armalar: {k}).
+Arbre des variantes (formes du nom : {n}). ¦ Varyant ağacı (ad biçimleri: {n}).
+Arbre des variantes d’un nom ¦ Bir adın varyant ağacı
+Armoiries (nom) ¦ Arma (ad)
+Au survol seulement ¦ Yalnızca üzerine gelince
+Aucun ancêtre connu à cette génération. ¦ Bu kuşakta bilinen ata yok.
+Aucun lien entre les couples de ce groupe. ¦ Bu gruptaki çiftler arasında bağ yok.
+Aucun recensement dans ta base ¦ Veritabanında nüfus sayımı yok
+Aucun âge lisible dans ce recensement. ¦ Bu sayımda okunabilir yaş yok.
+Aucune forme trouvée pour ce nom. ¦ Bu ad için biçim bulunamadı.
+Avec au moins une source ¦ En az bir kaynakla
+Axe des années ¦ Yıl ekseni
+Barres croisées (UpSet) ¦ Çapraz çubuklar (UpSet)
+Barres croisées (ensembles : {n}, combinaisons montrées : {k}). ¦ Çapraz çubuklar (kümeler: {n}, gösterilen birleşimler: {k}).
+Blason absent ¦ Arma yok
+Blasonnement en note (en bas) ¦ Arma tanımı notta (altta)
+Boucles d’implexe (chemins : {n}), F = {f}. ¦ Ata kaybı döngüleri (yollar: {n}), F = {f}.
+Boucles plus lointaines pas dessinées : {n} (comptées dans F). ¦ Çizilmeyen uzak döngüler: {n} (F’ye dahil).
+Branche (paternelle, maternelle) ¦ Kol (baba, anne)
+Branche maternelle ¦ Anne tarafı
+Branche paternelle ¦ Baba tarafı
+Branche « {name} » ¦ “{name}” kolu
+Cases façon tableau périodique ¦ Periyodik tablo gibi kutular
+Cases vides pour les ancêtres à trouver ¦ Bulunacak atalar için boş kutular
+Ce qu’on dessine ¦ Ne çizilir
+Cercles (2 à 4 ensembles) ¦ Daireler (2–4 küme)
+Cercles de parenté autour de {name} (personnes : {n}). ¦ {name} çevresinde akrabalık daireleri (kişiler: {n}).
+Chemins trouvés : {n} (F = {f}). ¦ Bulunan yollar: {n} (F = {f}).
+Chercher les boucles ¦ Döngüleri ara
+Chiffre (couleur, éventails) ¦ Sayı (renk, yelpazeler)
+Choisis de 2 à 8 ensembles (là : {n}). ¦ 2 ile 8 küme seç (şu an: {n}).
+Choisis un groupe de noms ou écris un nom. ¦ Bir ad grubu seç ya da bir ad yaz.
+Choisis un recensement (commune et année). ¦ Bir sayım seç (belde ve yıl).
+Choisis une personne (« Depuis l’app ») ou écris les boucles à la main. ¦ Bir kişi seç (“Uygulamadan”) ya da döngüleri elle yaz.
+Coefficient aussi en fraction ¦ Katsayı kesir olarak da
+Coefficient de consanguinité de {name} : F = {f} ¦ {name} akraba evliliği katsayısı: F = {f}
+Combinaisons montrées (les plus grandes) ¦ Gösterilen birleşimler (en büyükler)
+Combinaisons pas montrées : {n} ¦ Gösterilmeyen birleşimler: {n}
+Commune (titre) ¦ Belde (başlık)
+Comparer avec le recensement de ¦ Şu sayımla karşılaştır
+Consanguinité de l’ancêtre ¦ Atanın akrabalığı
+Couleur de l’écu (sans image) ¦ Kalkan rengi (resimsiz)
+Couleur des parts ¦ Parçaların rengi
+Couleur du côté maternel ¦ Anne tarafının rengi
+Couleurs des branches ¦ Kolların renkleri
+Couple ¦ Çift
+Critères de mauvaise forme. ¦ Hatalı ölçütler.
+Côté (paternel, maternel, branches) ¦ Taraf (baba, anne, kollar)
+Côté maternel ¦ Anne tarafı
+Côté paternel ¦ Baba tarafı
+Date incertaine (fourchette) ¦ Belirsiz tarih (aralık)
+Date inconnue ¦ Bilinmeyen tarih
+Dates sous le nom ¦ Adın altında tarihler
+De la famille ¦ Aileden
+De la famille (oui) ¦ Aileden (evet)
+De la mère vers l’ancêtre ¦ Anneden ataya
+Degrés montrés (jusqu’à) ¦ Gösterilen dereceler (en çok)
+Dessin de la fourchette ¦ Aralığın çizimi
+Deux éventails ¦ İki yelpaze
+Deviner d’où vient chaque forme (date et ressemblance) ¦ Her biçimin kökenini tahmin et (tarih ve benzerlik)
+Diagramme de Venn (2 à 8 ensembles) ¦ Venn şeması (2–8 küme)
+Diagramme de Venn : {names}. ¦ Venn şeması: {names}.
+Double éventail (ascendants : {up}, descendants : {down}). ¦ Çift yelpaze (atalar: {up}, torunlar: {down}).
+Du père vers l’ancêtre ¦ Babadan ataya
+Décédé ou inconnu ¦ Ölmüş ya da bilinmiyor
+En accordéon (branches qu’on plie) ¦ Akordeon (katlanan kollar)
+En cercles (un cercle par degré) ¦ Dairelerle (her derece için bir daire)
+En vie ou non ¦ Yaşıyor ya da değil
+En {year} (contour) ¦ {year} yılında (dış çizgi)
+Ensemble {x} ¦ Küme {x}
+Faire ressortir la famille ¦ Aileyi öne çıkar
+Formes prises dans ta base : {n}. ¦ Veritabanından alınan biçimler: {n}.
+Groupe de noms ¦ Ad grubu
+Générations : {n} côté père, {m} côté mère ¦ Kuşaklar: baba tarafı {n}, anne tarafı {m}
+Il faut de 2 à 8 ensembles. ¦ 2 ile 8 küme gerekir.
+Image (media/…) ¦ Resim (media/…)
+Initiales du prénom et du nom ¦ Ad ve soyadın baş harfleri
+La branche ¦ Kol
+La personne étudiée ¦ İncelenen kişi
+Le calcul n’est pas prêt. ¦ Hesaplama hazır değil.
+Le chemin entre deux personnes ¦ İki kişi arasındaki yol
+Le nom (2 lettres) ¦ Soyadı (2 harf)
+Le plus proche seulement ¦ Yalnızca en yakını
+Le prénom (2 lettres) ¦ Ad (2 harf)
+Le recensement de {place} ¦ {place} nüfus sayımı
+Les 8, 16 ou 32 ancêtres d’une génération, chacun avec son blason ; un écu vide : armoiries à trouver. ¦ Bir kuşağın 8, 16 ya da 32 atası, her biri armasıyla; boş kalkan: bulunacak arma.
+Les boucles d’implexe (entre les deux parents) ¦ Ata kaybı döngüleri (iki ebeveyn arasında)
+Les boucles d’implexe de {name} ¦ {name} ata kaybı döngüleri
+Les deux parents de cette personne ne sont pas connus. ¦ Bu kişinin iki ebeveyni de bilinmiyor.
+Les ensembles (2 à 8) : A, B, C… H ¦ Kümeler (2–8): A, B, C… H
+Les formes du nom ¦ Adın biçimleri
+Les formes du nom {name} ¦ {name} adının biçimleri
+Les noms du groupe (ou écrits pareil) et leurs variantes notées, avec leurs années et le nombre d’actes. ¦ Gruptaki adlar (ya da aynı yazılanlar) ve kayıtlı varyantları, yılları ve kayıt sayısıyla.
+Les quartiers de {name} ¦ {name} ata armaları
+Les seize quartiers de {name} ¦ {name} on altı ata arması
+Liens pris dans l’app : {n}. ¦ Uygulamadan alınan bağlar: {n}.
+Losange pour les dates exactes ¦ Kesin tarihler için baklava
+Montrer le calcul (½ puissance n) ¦ Hesaplamayı göster (½ üssü n)
+Montrer l’incertitude des dates ¦ Tarih belirsizliğini göster
+Naissances et décès (qui vivait en …) ¦ Doğumlar ve ölümler (… yılında kim yaşıyordu)
+Nom inconnu ¦ Bilinmeyen ad
+Nom sous l’écu ¦ Kalkanın altında ad
+Nom trop long (80 lettres au plus). ¦ Ad çok uzun (en çok 80 harf).
+Nombre d’actes sous la forme ¦ Biçimin altında kayıt sayısı
+Noms les plus portés ¦ En yaygın adlar
+N° Sosa ¦ Sosa no.
+N° Sosa (ascendants, éventails) ¦ Sosa no. (atalar, yelpazeler)
+Nœud papillon (père à gauche, mère à droite) ¦ Papyon (baba solda, anne sağda)
+Ordre des combinaisons ¦ Birleşimlerin sırası
+Ou un nom ¦ Ya da bir ad
+Par nombre d’ensembles ¦ Küme sayısına göre
+Parent (descendants, éventails) ¦ Ebeveyn (torunlar, yelpazeler)
+Personne cachée ¦ Gizli kişi
+Personnes recensées : {n} ¦ Sayımdaki kişiler: {n}
+Personnes recensées : {n} en {y1}, {m} en {y2} ¦ Sayımdaki kişiler: {y1} yılında {n}, {y2} yılında {m}
+Personnes recensées prises dans ta base : {n}. ¦ Veritabanından alınan sayım kişileri: {n}.
+Portraits (arbre dessiné, nœud papillon) ¦ Portreler (çizili ağaç, papyon)
+Pyramide du recensement de {year} (personnes : {n}). ¦ {year} sayımının piramidi (kişiler: {n}).
+Ressortent : les personnes reliées à une fiche (ou au groupe choisi). ¦ Öne çıkanlar: bir kayda (ya da seçilen gruba) bağlı kişiler.
+Selon le nombre de descendants ¦ Torun sayısına göre
+Selon le tableau ¦ Tabloya göre
+Ses ancêtres au-dessus (place Sosa), ses descendants au-dessous (sous leur parent) ; le chiffre : l’âge au décès. ¦ Atalar üstte (Sosa yeri), torunlar altta (ebeveynlerinin altında); sayı: ölüm yaşı.
+Ses ancêtres de la génération choisie (ordre Sosa) et les armoiries reliées à chacun (Listes → Armoiries). ¦ Seçilen kuşağın ataları (Sosa sırası) ve her birine bağlı armalar (Listeler → Armalar).
+Seulement l’ancêtre commun le plus proche ¦ Yalnızca en yakın ortak ata
+Sexe inconnu (pas dans la pyramide) : {n} ¦ Cinsiyeti bilinmeyen (piramit dışında): {n}
+Sosa {n} : ancêtre à trouver ¦ Sosa {n}: bulunacak ata
+Source, note ¦ Kaynak, not
+Sources sous la forme ¦ Biçimin altında kaynaklar
+Tableau de quartiers (armoiries des ancêtres) ¦ Ata armaları tablosu
+Tableau de quartiers ({n}), armoiries connues : {k}. ¦ Arma tablosu ({n}), bilinen armalar: {k}.
+Tableau périodique : ancêtres trouvés {found} / {total} ({pct} %). ¦ Periyodik tablo: bulunan atalar {found} / {total} ({pct} %).
+Taux de recherche (%) ¦ Araştırma oranı (%)
+Tous les ancêtres répétés ¦ Tüm yinelenen atalar
+Tous les chemins du père et de la mère vers un même ancêtre (filiations biologiques) et le coefficient de consanguinité (méthode de Wright). ¦ Babadan ve anneden aynı ataya giden tüm yollar (biyolojik soy) ve akrabalık katsayısı (Wright yöntemi).
+Toute la base (qui vivait en …) ¦ Tüm veritabanı (… yılında kim yaşıyordu)
+Toute la base (qui vivait l’année choisie) ou un recensement (les âges écrits ce jour-là). ¦ Tüm veritabanı (seçilen yılda kim yaşıyordu) ya da bir sayım (o gün yazılan yaşlar).
+Toute la famille, un point par couple ¦ Tüm aile, her çift için bir nokta
+Trop de critères. ¦ Çok fazla ölçüt.
+Trop d’ensembles. ¦ Çok fazla küme.
+Trouvé chez le notaire (successions, inventaires) ¦ Noterde bulundu (miraslar, envanterler)
+Trouvé dans les sources militaires (poilus) ¦ Askerî kaynaklarda bulundu (Birinci Dünya Savaşı askerleri)
+Trouvé dans un recensement ¦ Bir sayımda bulundu
+Un chiffre (colonne « Chiffre ») ¦ Bir sayı (“Sayı” sütunu)
+Un recensement (commune, année) ¦ Bir sayım (belde, yıl)
+Un recensement (âges écrits) ¦ Bir sayım (yazılı yaşlar)
+Une par branche ¦ Her kol için bir
+Une par forme ¦ Her biçim için bir
+Une seule source : couleur de l’ensemble ¦ Tek kaynak: kümenin rengi
+Une source précise ¦ Belirli bir kaynak
+Vérifie le groupe de personnes. ¦ Kişi grubunu denetle.
+actes : {n} ¦ kayıtlar: {n}
+vient de {name} ¦ {name} biçiminden gelir
+{label} (famille) : {n} ¦ {label} (aile): {n}
+{names} (seulement) : {n} ¦ {names} (yalnızca): {n}
+{name} : armoiries pas encore trouvées ¦ {name}: arma henüz bulunmadı
+{name} : {n} en tout ¦ {name}: toplam {n}
+{place}, {year} ¦ {place}, {year}
+« vers » : plus ou moins ¦ “yaklaşık”: artı eksi
+Âge (recensement) ¦ Yaş (sayım)
+Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Bağın türünü çizginin üstüne yaz (çocuğun adı…)
+Écrits s’il y a la place ¦ Yer varsa yazılı
+Écu vide ¦ Boş kalkan
+Épaisseur selon le nombre d’actes ¦ Kayıt sayısına göre kalınlık
+— Aucun (le nom écrit à côté) — ¦ — Hiçbiri (yanına yazılan ad) —
+— Rien — ¦ — Hiçbir şey —
+🌿 Les formes d’un nom de ma base ¦ 🌿 Veritabanımdaki bir adın biçimleri
+🔁 Entre les deux parents de… ¦ 🔁 İki ebeveyn arasında…
+🔺 Les personnes de ma base ¦ 🔺 Veritabanımdaki kişiler
+🛡 Les quartiers d’une personne de ma base ¦ 🛡 Veritabanımdaki bir kişinin ata armaları
+Choisis de 2 à 8 ensembles : chaque zone compte les personnes de ces ensembles-là seulement. Dès 5 ensembles : barres croisées. ¦ 2–8 küme seç: her bölge yalnızca o kümelerdeki kişileri sayar. 5 kümeden itibaren: çapraz çubuklar.
+Les témoins, parrains et marraines des actes ; ou toute la famille, un point par couple, reliés par leurs enfants. ¦ Kayıtlardaki tanıklar ve vaftiz anne-babaları; ya da tüm aile, her çift bir nokta, çocuklarıyla bağlı.
+Nom de l’enfant sur le trait ¦ Çizgide çocuğun adı
+Par nom de famille ¦ Soyadına göre
+Par siècle (du mariage) ¦ Yüzyıla göre (evliliğin)
+Un point par couple ¦ Her çift için bir nokta
+Un point par personne ¦ Her kişi için bir nokta
+🕸 Les liens de ma base ¦ 🕸 Veritabanımdaki bağlar
+Quartiers ¦ Ata armaları

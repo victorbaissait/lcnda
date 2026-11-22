@@ -1,0 +1,179 @@
+fr ¦ hr ¦ sl
+# Zone « diagrammes-lot-c » : grille des recensements, schéma de preuve, arbre de mots (heritage-diagram-lot-c.js), zones des paroisses et carte en étoile (heritage-diagram-cartes.js), cercles d’une journée (heritage-cartes-outils.js)
+Hors de France ¦ Izvan Francuske ¦ Zunaj Francije
+Ajoute des personnes (nom, naissance, décès), puis leurs recensements (année, statut). ¦ Dodaj osobe (ime, rođenje, smrt), zatim njihove popise (godina, status). ¦ Dodaj osebe (ime, rojstvo, smrt), nato njihove popise (leto, stanje).
+Aucune année de recensement entre ces deux dates. ¦ Nema godine popisa između ovih datuma. ¦ Med tema datumoma ni leta popisa.
+Plus rien à chercher : tous les recensements sont trouvés ou sans objet. ¦ Nema više što tražiti: svi popisi pronađeni ili nisu primjenjivi. ¦ Ničesar več za iskanje: vsi popisi najdeni ali brez pomena.
+à chercher : {list} ¦ za tražiti: {list} ¦ za iskanje: {list}
+non trouvés : {list} ¦ nije pronađeno: {list} ¦ ni najdeno: {list}
+Liste de travail des recensements : {n}. ¦ Radni popis popisa: {n}. ¦ Delovni seznam popisov: {n}.
+Grille des recensements : {n}, {y} recensements, {d} sur {t} cherchés. ¦ Mreža popisa: {n}, {y} popisa, {d} od {t} pretraženo. ¦ Mreža popisov: {n}, {y} popisov, {d} od {t} preiskanih.
+Les recensements de la famille {name} ¦ Popisi obitelji {name} ¦ Popisi družine {name}
+Contre ¦ Protiv ¦ Proti
+Conflit ¦ Sukob ¦ Nasprotje
+Écris la question (Réglages), puis les indices : pour, contre, recherches, conflits. ¦ Napiši pitanje (Postavke), zatim tragove: za, protiv, istraživanja, sukobi. ¦ Napiši vprašanje (Nastavitve), nato namige: za, proti, iskanja, nasprotja.
+Indices contre ¦ Tragovi protiv ¦ Namigi proti
+Recherches et conflits ¦ Istraživanja i sukobi ¦ Iskanja in nasprotja
+Résolu : {note} ¦ Riješeno: {note} ¦ Rešeno: {note}
+À résoudre ¦ Za riješiti ¦ Za rešiti
+poids {n} sur 3 ¦ težina {n} od 3 ¦ teža {n} od 3
+Pas encore de conclusion ¦ Još nema zaključka ¦ Še brez sklepa
+Schéma de preuve : {a} pour, {b} contre ; certitude : {c}. ¦ Shema dokaza: {a} za, {b} protiv; sigurnost: {c}. ¦ Shema dokaza: {a} za, {b} proti; gotovost: {c}.
+Antoine MAZAUD est-il le père de Jean MAZAUD (né vers 1818) ? ¦ Je li Antoine MAZAUD otac Jeana MAZAUDA (rođen oko 1818.)? ¦ Ali je Antoine MAZAUD oče Jeana MAZAUDA (rojen okoli 1818)?
+Oui : Antoine MAZAUD est le père de Jean. ¦ Da: Antoine MAZAUD je Jeanov otac. ¦ Da: Antoine MAZAUD je Jeanov oče.
+Acte de mariage de Jean (1842) : « fils d’Antoine MAZAUD, cultivateur » ¦ Jeanov vjenčani zapis (1842.): „sin Antoinea MAZAUDA, ratara” ¦ Jeanov poročni zapis (1842): »sin Antoina MAZAUDA, kmeta«
+Registre paroissial, original ¦ Župna matica, izvornik ¦ Župnijska matična knjiga, izvirnik
+Recensement 1836 : Jean, 18 ans, au foyer d’Antoine ¦ Popis 1836.: Jean, 18 godina, u Antoineovu kućanstvu ¦ Popis 1836: Jean, 18 let, v Antoinovem gospodinjstvu
+Recensement 1836, original ¦ Popis 1836., izvornik ¦ Popis 1836, izvirnik
+Antoine est parrain du premier fils de Jean ¦ Antoine je kum Jeanova prvog sina ¦ Antoine je boter Jeanovega prvega sina
+Baptême 1844 ¦ Krštenje 1844. ¦ Krst 1844
+Un autre Jean MAZAUD, né en 1817 au village voisin ¦ Drugi Jean MAZAUD, rođen 1817. u susjednom selu ¦ Drug Jean MAZAUD, rojen 1817 v sosednji vasi
+Acte de naissance de Jean : registre lacunaire 1815-1820 ¦ Jeanov rodni zapis: matica nepotpuna 1815.-1820. ¦ Jeanov rojstni zapis: knjiga nepopolna 1815-1820
+Âge au décès : 64 ans (né vers 1820) au lieu de 66 ¦ Dob pri smrti: 64 godine (rođen oko 1820.) umjesto 66 ¦ Starost ob smrti: 64 let (rojen okoli 1820) namesto 66
+Acte de décès 1884 ¦ Smrtni zapis 1884. ¦ Mrliški zapis 1884
+l’âge déclaré au décès est souvent approximatif ¦ dob prijavljen pri smrti često je približan ¦ starost, navedena ob smrti, je pogosto približna
+Écris le mot de départ (Réglages), par exemple « fils de » ou « veuve de ». ¦ Napiši početnu riječ (Postavke), na primjer „fils de” ili „veuve de”. ¦ Napiši začetno besedo (Nastavitve), na primer »fils de« ali »veuve de«.
+Colle des transcriptions (une par ligne) ou prends-les « Depuis l’app ». ¦ Zalijepi transkripcije (jednu po retku) ili ih uzmi „Iz aplikacije”. ¦ Prilepi prepise (enega na vrstico) ali jih vzemi »Iz aplikacije«.
+« {w} » n’est dans aucun de ces textes. ¦ „{w}” nije ni u jednom od ovih tekstova. ¦ »{w}« ni v nobenem od teh besedil.
+… {n} autres ¦ … još {n} ¦ … še {n}
+Trop de branches : baisse la profondeur ou le nombre de branches (Réglages). ¦ Previše grana: smanji dubinu ili broj grana (Postavke). ¦ Preveč vej: zmanjšaj globino ali število vej (Nastavitve).
+« {w} » : {n} fois ¦ „{w}”: {n} puta ¦ »{w}«: {n}-krat
+Arbre de mots : « {w} » trouvé {n} fois dans {t}. ¦ Stablo riječi: „{w}” pronađeno {n} puta u {t}. ¦ Drevo besed: »{w}« najdeno {n}-krat v {t}.
+Ce qui suit « {w} » dans les actes ¦ Što slijedi nakon „{w}” u zapisima ¦ Kaj sledi »{w}« v zapisih
+{n} lignes prises dans l’arbre : tu peux les corriger dans l’onglet Données. ¦ {n} redaka uzeto iz stabla: možeš ih ispraviti na kartici Podaci. ¦ {n} vrstic iz drevesa: popraviš jih lahko na zavihku Podatki.
+🗓️ Les recensements de mon arbre ¦ 🗓️ Popisi u mom stablu ¦ 🗓️ Popisi v mojem drevesu
+Une ligne par personne, une case par recensement : ce qui est relevé sur les fiches (trouvé, non trouvé…), et « à chercher » pour le reste. Sans groupe choisi : tes ancêtres. ¦ Jedan redak po osobi, jedno polje po popisu: što je zabilježeno na karticama (pronađeno, nije pronađeno…), a za ostalo „za tražiti”. Bez odabrane skupine: tvoji preci. ¦ Ena vrstica na osebo, eno polje na popis: kar je zapisano na karticah (najdeno, ni najdeno…), drugo »za iskanje«. Brez izbrane skupine: tvoji predniki.
+Du recensement de ¦ Od popisa ¦ Od popisa
+à celui de ¦ do popisa ¦ do popisa
+Les recensements de {n} ¦ Popisi: {n} ¦ Popisi: {n}
+Personne dans ce groupe ne vivait entre ces deux recensements (il faut au moins une date de naissance ou de décès). ¦ Nitko iz ove skupine nije živio između ovih popisa (treba barem datum rođenja ili smrti). ¦ Nihče iz skupine ni živel med tema popisoma (potreben je vsaj datum rojstva ali smrti).
+{n} sur {t} prises (les premières) : change « Au plus » pour en voir davantage. ¦ Uzeto {n} od {t} (prve): promijeni „Najviše” da vidiš više. ¦ Vzetih {n} od {t} (prve): spremeni »Največ« za več.
+⚖️ Un dossier de preuve ou une hypothèse ¦ ⚖️ Dosje dokaza ili hipoteza ¦ ⚖️ Dokazna mapa ali hipoteza
+Choisis un dossier : sa question, ses indices pour et contre, ses recherches et ses conflits, sa conclusion. Une hypothèse à comparer donne une colonne par réponse possible. ¦ Odaberi dosje: pitanje, tragove za i protiv, istraživanja i sukobe, zaključak. Hipoteza za usporedbu daje jedan stupac po mogućem odgovoru. ¦ Izberi mapo: vprašanje, namige za in proti, iskanja in nasprotja, sklep. Hipoteza za primerjavo da en stolpec za vsak možen odgovor.
+Le dossier ¦ Dosje ¦ Mapa
+Choisis d’abord un dossier. ¦ Najprije odaberi dosje. ¦ Najprej izberi mapo.
+Schéma de preuve ¦ Shema dokaza ¦ Shema dokaza
+Ce dossier n’a encore aucune ligne : ajoute des indices dans le dossier, ou ici à la main. ¦ Dosje još nema redaka: dodaj tragove u dosje ili ovdje ručno. ¦ Mapa še nima vrstic: dodaj namige v mapo ali tukaj ročno.
+Prendre ce dossier ¦ Uzmi ovaj dosje ¦ Vzemi to mapo
+🌿 Les mots de mes transcriptions ¦ 🌿 Riječi iz mojih transkripcija ¦ 🌿 Besede iz mojih prepisov
+Les transcriptions des actes (atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris. ¦ Transkripcije zapisa (radionica transkripcije) i medija: što slijedi (ili prethodi) početnoj riječi. Uzimaju se samo korisni dijelovi rečenica. ¦ Prepisi zapisov (delavnica prepisov) in medijev: kar sledi začetni besedi (ali ji predhodi). Vzamejo se le koristni deli stavkov.
+Le mot de départ ¦ Početna riječ ¦ Začetna beseda
+Ce qui suit ¦ Što slijedi ¦ Kaj sledi
+Ce qui précède ¦ Što prethodi ¦ Kaj je pred tem
+Commune (dans le lieu ou le titre de l’acte) ¦ Općina (u mjestu ili naslovu zapisa) ¦ Občina (v kraju ali naslovu zapisa)
+Actes pris ¦ Uzeti zapisi ¦ Upoštevani zapisi
+Actes notariés ¦ Javnobilježnički akti ¦ Notarske listine
+Militaires ¦ Vojni ¦ Vojaški
+Lettres ¦ Pisma ¦ Pisma
+Transcriptions des médias ¦ Transkripcije medija ¦ Prepisi medijev
+Écris le mot de départ (par exemple « fils de »). ¦ Napiši početnu riječ (na primjer „fils de”). ¦ Napiši začetno besedo (na primer »fils de«).
+Coche au moins une sorte d’acte. ¦ Označi barem jednu vrstu zapisa. ¦ Označi vsaj eno vrsto zapisa.
+Ce qui précède « {w} » dans les actes ¦ Što prethodi „{w}” u zapisima ¦ Kaj je pred »{w}« v zapisih
+« {w} » n’est dans aucune transcription de ce choix ({n} lues). ¦ „{w}” nije ni u jednoj transkripciji ovog izbora (pročitano: {n}). ¦ »{w}« ni v nobenem prepisu te izbire (prebranih: {n}).
+« {w} » : {n} fois, dans {a}. ¦ „{w}”: {n} puta, u: {a}. ¦ »{w}«: {n}-krat, v: {a}.
+Dossier sans question ¦ Dosje bez pitanja ¦ Mapa brez vprašanja
+Aucun dossier pour ce groupe de personnes ¦ Nema dosjea za ovu skupinu osoba ¦ Za to skupino oseb ni nobene mape
+Ferme l’éditeur, puis clique sur la case pour ouvrir la fiche (bloc « Recensements »). ¦ Zatvori uređivač, zatim klikni polje da otvoriš karticu (blok „Popisi”). ¦ Zapri urejevalnik, nato klikni polje, da odpreš kartico (blok »Popisi«).
+Recensement {yr} : dans le bloc « Recensements » de la fiche. ¦ Popis {yr}.: u bloku „Popisi” na kartici. ¦ Popis {yr}: v bloku »Popisi« na kartici.
+Grille des recensements (personnes × années) ¦ Mreža popisa (osobe × godine) ¦ Mreža popisov (osebe × leta)
+Ma recherche ¦ Moje istraživanje ¦ Moje raziskovanje
+Une ligne par personne, une colonne par recensement : ce qui est trouvé, pas trouvé, et ce qui reste à chercher. ¦ Jedan redak po osobi, jedan stupac po popisu: što je pronađeno, što nije i što još treba tražiti. ¦ Ena vrstica na osebo, en stolpec na popis: kar je najdeno, kar ni, in kar je še treba iskati.
+Les personnes (une ligne sans année : naissance, décès) et leurs recensements (une ligne par année) ¦ Osobe (redak bez godine: rođenje, smrt) i njihovi popisi (jedan redak po godini) ¦ Osebe (vrstica brez leta: rojstvo, smrt) in njihovi popisi (ena vrstica na leto)
+Naissance (année) ¦ Rođenje (godina) ¦ Rojstvo (leto)
+Décès (année) ¦ Smrt (godina) ¦ Smrt (leto)
+Recensement (année) ¦ Popis (godina) ¦ Popis (leto)
+Note (lieu, adresse…) ¦ Bilješka (mjesto, adresa…) ¦ Opomba (kraj, naslov…)
+Grille (une case par recensement) ¦ Mreža (jedno polje po popisu) ¦ Mreža (eno polje na popis)
+Liste de travail à imprimer (ce qui reste à chercher) ¦ Radni popis za ispis (što još treba tražiti) ¦ Delovni seznam za tisk (kar je še treba iskati)
+À celui de ¦ Do popisa ¦ Do popisa
+Ou mes années (ex. 1846, 1851, 1872) ¦ Ili moje godine (npr. 1846, 1851, 1872) ¦ Ali moja leta (npr. 1846, 1851, 1872)
+Personnes montrées ¦ Prikazane osobe ¦ Prikazane osebe
+Seulement celles qui ont encore un recensement à chercher ¦ Samo one kojima još treba tražiti popis ¦ Samo tiste, ki imajo še popis za iskanje
+Le plus à chercher d’abord ¦ Najviše za tražiti prvo ¦ Največ za iskanje najprej
+Par naissance ¦ Po rođenju ¦ Po rojstvu
+Par nom ¦ Po imenu ¦ Po imenu
+Couleur « Trouvé » ¦ Boja „Pronađeno” ¦ Barva »Najdeno«
+Couleur « Non trouvé » ¦ Boja „Nije pronađeno” ¦ Barva »Ni najdeno«
+Couleur « À chercher » ¦ Boja „Za tražiti” ¦ Barva »Za iskanje«
+Couleur « Hors de France » ¦ Boja „Izvan Francuske” ¦ Barva »Zunaj Francije«
+Couleur « Pas né / déjà décédé » ¦ Boja „Nije rođen / već umro” ¦ Barva »Ni rojen / že umrl«
+Écart entre les cases ¦ Razmak između polja ¦ Razmik med polji
+Signes dans les cases (✓ ✗ ?) ¦ Znakovi u poljima (✓ ✗ ?) ¦ Znaki v poljih (✓ ✗ ?)
+Années de vie à côté du nom ¦ Godine života pokraj imena ¦ Leta življenja ob imenu
+Schéma de preuve (question, indices pour et contre, conclusion) ¦ Shema dokaza (pitanje, tragovi za i protiv, zaključak) ¦ Shema dokaza (vprašanje, namigi za in proti, sklep)
+La question en haut, les indices pour et contre (avec leur poids et leur source), les recherches et les conflits, puis la conclusion et sa certitude. ¦ Gore pitanje, tragovi za i protiv (s težinom i izvorom), istraživanja i sukobi, zatim zaključak i njegova sigurnost. ¦ Zgoraj vprašanje, namigi za in proti (s težo in virom), iskanja in nasprotja, nato sklep in njegova gotovost.
+Les lignes du dossier (pour, contre, recherche, conflit ; « réponse » pour une hypothèse à plusieurs réponses) ¦ Redci dosjea (za, protiv, istraživanje, sukob; „odgovor” za hipotezu s više odgovora) ¦ Vrstice mape (za, proti, iskanje, nasprotje; »odgovor« za hipotezo z več odgovori)
+Indice (ou réponse) ¦ Trag (ili odgovor) ¦ Namig (ali odgovor)
+Poids (1 à 3) ¦ Težina (1 do 3) ¦ Teža (1 do 3)
+Pour la réponse… (hypothèse) ¦ Za odgovor… (hipoteza) ¦ Za odgovor… (hipoteza)
+Note (résolution d’un conflit) ¦ Bilješka (rješenje sukoba) ¦ Opomba (rešitev nasprotja)
+La conclusion ¦ Zaključak ¦ Sklep
+Montrer les recherches et les conflits (ce qui reste à chercher) ¦ Prikaži istraživanja i sukobe (što još treba tražiti) ¦ Pokaži iskanja in nasprotja (kar je še treba iskati)
+Couleur « confirme » ¦ Boja „potvrđuje” ¦ Barva »potrjuje«
+Couleur « contredit » ¦ Boja „proturječi” ¦ Barva »nasprotuje«
+Couleur des recherches ¦ Boja istraživanja ¦ Barva iskanj
+Couleur des conflits ¦ Boja sukoba ¦ Barva nasprotij
+Couleur des réponses ¦ Boja odgovora ¦ Barva odgovorov
+Couleur de la question ¦ Boja pitanja ¦ Barva vprašanja
+Arbre de mots des actes (ce qui suit « fils de »…) ¦ Stablo riječi iz zapisa (što slijedi nakon „fils de”…) ¦ Drevo besed iz zapisov (kaj sledi »fils de«…)
+Un mot de départ à gauche ; à droite, les mots qui le suivent dans les actes, plus gros quand ils reviennent souvent. ¦ Početna riječ lijevo; desno riječi koje je slijede u zapisima, veće kad se često ponavljaju. ¦ Začetna beseda levo; desno besede, ki ji sledijo v zapisih, večje, ko se pogosto ponavljajo.
+Les textes (une transcription ou un bout de phrase par ligne) ¦ Tekstovi (jedna transkripcija ili dio rečenice po retku) ¦ Besedila (en prepis ali del stavka na vrstico)
+Acte ou source ¦ Zapis ili izvor ¦ Zapis ali vir
+Le mot de départ (ex. fils de, veuve de) ¦ Početna riječ (npr. fils de, veuve de) ¦ Začetna beseda (npr. fils de, veuve de)
+Profondeur (mots) ¦ Dubina (riječi) ¦ Globina (besede)
+Branches par mot ¦ Grana po riječi ¦ Vej na besedo
+Seulement les mots vus au moins ¦ Samo riječi viđene barem ¦ Samo besede, videne vsaj
+Le reste dans « … autres » ¦ Ostatak u „… još” ¦ Preostalo v »… še«
+Écrire le nombre de fois ¦ Piši broj ponavljanja ¦ Piši število ponovitev
+Sans tenir compte des capitales ni des accents ¦ Bez obzira na velika slova i naglaske ¦ Ne glede na velike črke in naglase
+Seulement les actes de (lieu) ¦ Samo zapisi iz (mjesto) ¦ Samo zapisi iz (kraj)
+Couleur des mots ¦ Boja riječi ¦ Barva besed
+Couleur du mot de départ ¦ Boja početne riječi ¦ Barva začetne besede
+⭕ En une journée ¦ ⭕ U jednom danu ¦ ⭕ V enem dnevu
+Lieu de départ ¦ Polazno mjesto ¦ Izhodiščni kraj
+Montrer les lieux de la famille ¦ Prikaži mjesta obitelji ¦ Pokaži kraje družine
+Ce qu’on atteignait en une journée ¦ Dokle se stizalo u jednom danu ¦ Kam se je prišlo v enem dnevu
+Choisis le lieu de départ ¦ Odaberi polazno mjesto ¦ Izberi izhodiščni kraj
+Ce lieu n’a pas de position sur la carte : place-le d’abord. ¦ Ovo mjesto nema položaj na karti: najprije ga postavi. ¦ Ta kraj nima položaja na zemljevidu: najprej ga postavi.
+Coche au moins un moyen de voyager ¦ Označi barem jedno prijevozno sredstvo ¦ Označi vsaj en način potovanja
+Les fonds de carte ne sont pas chargés. ¦ Podloge karte nisu učitane. ¦ Podlage zemljevida niso naložene.
+Je dessine les cercles… ¦ Crtam krugove… ¦ Rišem kroge…
+En {d} jours depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ Za {d} dana iz {from}, {year}.: zračnom linijom oko {list}. ¦ V {d} dneh iz {from}, leta {year}: zračno približno {list}.
+En une journée depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ Za jedan dan iz {from}, {year}.: zračnom linijom oko {list}. ¦ V enem dnevu iz {from}, leta {year}: zračno približno {list}.
+Rayon (vol d’oiseau) ¦ Polumjer (zračnom linijom) ¦ Polmer (zračno)
+Lieux de la famille ¦ Mjesta obitelji ¦ Kraji družine
+Le rayon tient compte du détour de la route (réglage « Vitesses et sources »). Un trait pointillé : ce moyen n’existait pas encore cette année-là. ¦ Polumjer uzima u obzir zaobilaženje ceste (postavka „Brzine i izvori”). Točkasta crta: to prijevozno sredstvo te godine još nije postojalo. ¦ Polmer upošteva ovinek ceste (nastavitev »Hitrosti in viri«). Pikčasta črta: ta način takrat še ni obstajal.
+Paroisses (zones autour des églises) ¦ Župe (područja oko crkava) ¦ Župnije (območja okoli cerkva)
+⚠ Paroisses sans position : {list} — choisis-les dans la liste (onglet Données) ou écris « Nom 45.27, 1.77 » ¦ ⚠ Župe bez položaja: {list} — odaberi ih s popisa (kartica Podaci) ili napiši „Naziv 45.27, 1.77” ¦ ⚠ Župnije brez položaja: {list} — izberi jih s seznama (zavihek Podatki) ali napiši »Ime 45.27, 1.77«
+Ajoute des paroisses (une ville de la liste, ou « Depuis l’app ») et leurs chiffres. ¦ Dodaj župe (mjesto s popisa ili „Iz aplikacije”) i njihove brojke. ¦ Dodaj župnije (kraj s seznama ali »Iz aplikacije«) in njihove številke.
+Zones des paroisses : {n}. ¦ Područja župa: {n}. ¦ Območja župnij: {n}.
+Un point à chaque église ¦ Točka kod svake crkve ¦ Pika pri vsaki cerkvi
+Limites des départements par-dessus les paroisses ¦ Granice departmana preko župa ¦ Meje departmajev nad župnijami
+Cadrer tout seul sur les paroisses ¦ Automatski uokviri na župe ¦ Samodejno izreži na župnije
+Liens montrés ¦ Prikazane veze ¦ Prikazane povezave
+Ceux qui arrivent et ceux qui partent ¦ Oni koji dolaze i oni koji odlaze ¦ Tisti, ki pridejo, in tisti, ki odidejo
+Seulement ceux qui arrivent ¦ Samo oni koji dolaze ¦ Samo tisti, ki pridejo
+Seulement ceux qui partent ¦ Samo oni koji odlaze ¦ Samo tisti, ki odidejo
+Les liens de {name} ¦ Veze: {name} ¦ Povezave: {name}
+bleu : conjoints venus ¦ plavo: pridošli supružnici ¦ modro: prišli zakonci
+orange : enfants partis ¦ narančasto: djeca koja su otišla ¦ oranžno: otroci, ki so odšli
+rouge : émigrés ¦ crveno: iseljenici ¦ rdeče: izseljenci
+Lieux : {list} ¦ Mjesta: {list} ¦ Kraji: {list}
+⛪ Au niveau « Paroisses » (Réglages → Niveau de détail) : une zone autour de chaque église, d’après les paroisses d’Ancien Régime de tes lieux ; un lieu sans paroisse compte pour lui-même. ¦ ⛪ Na razini „Župe” (Postavke → Razina detalja): područje oko svake crkve, prema starim župama tvojih mjesta; mjesto bez župe broji se samo. ¦ ⛪ Na ravni »Župnije« (Nastavitve → Raven podrobnosti): območje okoli vsake cerkve po starih župnijah tvojih krajev; kraj brez župnije šteje zase.
+✳️ Tous les liens d’un lieu (carte en étoile) ¦ ✳️ Sve veze jednog mjesta (zvjezdasta karta) ¦ ✳️ Vse povezave kraja (zvezdni zemljevid)
+Le village ¦ Selo ¦ Vas
+Conjoints venus s’y marier ¦ Supružnici koji su se ondje došli vjenčati ¦ Zakonca, ki sta se tja prišla poročit
+Enfants partis (nés ici, morts ou mariés ailleurs) ¦ Djeca koja su otišla (rođena ovdje, umrla ili vjenčana drugdje) ¦ Otroci, ki so odšli (rojeni tu, umrli ali poročeni drugje)
+Émigrés (morts dans un autre pays) ¦ Iseljenici (umrli u drugoj zemlji) ¦ Izseljenci (umrli v drugi državi)
+Choisis d’abord le village. ¦ Najprije odaberi selo. ¦ Najprej izberi vas.
+Coche au moins une sorte de lien. ¦ Označi barem jednu vrstu veze. ¦ Označi vsaj eno vrsto povezave.
+Aucun lien trouvé pour ce lieu (naissance, mariage ou décès ailleurs). ¦ Za ovo mjesto nije pronađena nijedna veza (rođenje, vjenčanje ili smrt drugdje). ¦ Za ta kraj ni najdene povezave (rojstvo, poroka ali smrt drugje).
+{n} prises dans l’arbre ({m} lieux rattachés à une paroisse d’Ancien Régime, les autres comptent pour eux-mêmes). ¦ Iz stabla: {n} ({m} mjesta vezano uz staru župu, ostala se broje sama). ¦ Iz drevesa: {n} ({m} krajev povezanih s staro župnijo, drugi štejejo zase).
+Aucun lieu avec des coordonnées pour ce choix : place d’abord tes lieux sur la carte. ¦ Nema mjesta s koordinatama za ovaj izbor: najprije postavi svoja mjesta na kartu. ¦ Za to izbiro ni krajev s koordinatami: najprej postavi svoje kraje na zemljevid.
+sa paroisse ¦ njegova župa ¦ njegova župnija
+leur paroisse ¦ njihova župa ¦ njihova župnija
+une paroisse ¦ župu ¦ župnijo
+Paroisse sans position : choisis sa commune dans la liste, ou écris « Nom 45.27, 1.77 ». ¦ Župa bez položaja: odaberi njezinu općinu s popisa ili napiši „Naziv 45.27, 1.77”. ¦ Župnija brez položaja: izberi njeno občino s seznama ali napiši »Ime 45.27, 1.77«.
+Carte en étoile : seulement les liens de ce lieu (vide = tous les flux) ¦ Zvjezdasta karta: samo veze ovog mjesta (prazno = svi tokovi) ¦ Zvezdni zemljevid: samo povezave tega kraja (prazno = vsi tokovi)
+niveau|paroisse ¦ župa ¦ župnija
+=paroisse ¦ župa|župe|župa ¦ župnija|župniji|župnije|župnij

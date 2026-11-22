@@ -21,6 +21,8 @@ function cal_parse_date(string $text): ?array
 {
     $t = mb_strtolower(trim($text));
     if ($t === '') { return null; }
+    // le cas courant (« 3 juillet 1832 », « 1er mars 1790 ») lu d'un coup : même résultat que plus bas, sans les autres essais
+    if (preg_match('/^(\d{1,2})(?:er)? ([a-zéûè]+) (\d{3,4})$/u', $t, $m) && ($mo = CAL_MONTHS[$m[2]] ?? null) && checkdate($mo, (int) $m[1], (int) $m[3])) { return [(int) $m[3], $mo, (int) $m[1], false]; }
     $approx = (bool) preg_match('/\b(vers|env\.?|environ|abt|about|est|cal|circa|ca\.?|avant|apr[eè]s|bef|aft|entre|bet|probablement|\?)\b|~|\?/u', $t);
     $t = trim(preg_replace('/^(le|vers|env\.?|environ|abt|about|est|cal|circa|ca\.?|avant|après|apres|bef|aft|entre|bet|probablement|from|de|du)\s+/u', '', $t));
     if (preg_match('/(\d{4})-(\d{2})-(\d{2})/', $t, $m) && checkdate((int) $m[2], (int) $m[3], (int) $m[1])) { return [(int) $m[1], (int) $m[2], (int) $m[3], $approx]; }
@@ -54,24 +56,37 @@ function genea_calendar_events(PDO $pdo, array $q = [], ?array $onlyDays = null,
         $where .= ' AND (e.person_id=? OR e.family_id IN (SELECT id FROM families WHERE partner1_id=? OR partner2_id=?))';
         array_push($args, $person, $person, $person);
     }
-    if ($onlyTags) {
-        $where .= ' AND upper(t.gedcom_tag) IN (' . implode(',', array_fill(0, count($onlyTags), '?')) . ')';
-        array_push($args, ...array_map('strtoupper', $onlyTags));
+    // Sortes, lieux et couples lus à part, une fois (quelques milliers de lignes) : la grande requête ne fait plus de jointure (grosse base)
+    $types = [];
+    foreach ($pdo->query('SELECT id, label, gedcom_tag, color FROM event_types') as $t) {
+        $tag = strtoupper((string) $t['gedcom_tag']);
+        $types[(int) $t['id']] = ['type' => (string) $t['label'], 'tag' => $tag, 'color' => (string) $t['color'], 'group' => cal_event_group($tag, (string) $t['label'])];
     }
-    $s = $pdo->prepare("SELECT e.id, e.person_id, e.family_id, e.place_id, e.date_text, e.date_calendar, e.date_converted, e.year, e.title,
-            t.label AS type_label, t.gedcom_tag AS tag, t.color AS type_color, pl.name AS place, pl.county AS county, pl.state AS region, pl.country AS country,
-            f.partner1_id, f.partner2_id
-        FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id LEFT JOIN families f ON f.id=e.family_id
-        $where ORDER BY e.year, e.id");
+    if ($onlyTags) {
+        $want = array_flip(array_map('strtoupper', $onlyTags));
+        $typeIds = array_keys(array_filter($types, static fn(array $t): bool => isset($want[$t['tag']])));
+        if (!$typeIds) { return ['events' => [], 'undated' => 0]; }
+        $where .= ' AND e.event_type_id IN (' . implode(",", $typeIds) . ')';
+    }
+    $places = [];
+    foreach ($pdo->query('SELECT id, name, county, state, country FROM places') as $pl) {
+        $places[(int) $pl['id']] = ['place' => (string) ($pl['name'] ?? ''), 'county' => (string) ($pl['county'] ?? ''), 'region' => (string) ($pl['state'] ?? ''), 'country' => (string) ($pl['country'] ?? '')];
+    }
+    $noPlace = ['place' => '', 'county' => '', 'region' => '', 'country' => ''];
+    $couples = [];
+    foreach ($pdo->query('SELECT id, partner1_id, partner2_id FROM families') as $f) { $couples[(int) $f['id']] = [(int) $f['partner1_id'], (int) $f['partner2_id']]; }
+    $s = $pdo->prepare("SELECT e.id, e.person_id, e.family_id, e.place_id, e.event_type_id, e.date_text, e.date_calendar, e.date_converted, e.year, e.title
+        FROM events e $where ORDER BY COALESCE(e.year, 9999), e.sort_date, e.id"); // l'ordre de l'index idx_events_list_order : pas de tri à part
     $s->execute($args);
-    $groups = [];
-    $event = static function (array $r, array $d, array $names) use (&$groups): array {
+    $event = static function (array $r, array $d, array $names) use ($types, $places, $noPlace, $couples): array {
         $who = [];
-        foreach (['person_id', 'partner1_id', 'partner2_id'] as $k) { $pid = (int) ($r[$k] ?? 0); if ($pid && isset($names[$pid])) { $who[] = ['id' => $pid, 'name' => $names[$pid]['name'], 'gender' => $names[$pid]['gender']]; } }
-        $tag = strtoupper((string) $r['tag']);
+        $fam = $couples[(int) $r['family_id']] ?? [0, 0];
+        foreach ([(int) $r['person_id'], $fam[0], $fam[1]] as $pid) { if ($pid && isset($names[$pid])) { $who[] = ['id' => $pid, 'name' => $names[$pid]['name'], 'gender' => $names[$pid]['gender']]; } }
+        $t = $types[(int) $r['event_type_id']];
+        $pid = (int) $r['place_id'];
         return ['id' => (int) $r['id'], 'y' => $d[0], 'm' => $d[1], 'd' => $d[2], 'approx' => $d[3], 'text' => (string) $r['date_text'], 'calendar' => (string) $r['date_calendar'],
-            'type' => (string) $r['type_label'], 'tag' => $tag, 'color' => (string) $r['type_color'], 'group' => $groups[$tag . '|' . $r['type_label']] ??= cal_event_group($tag, (string) $r['type_label']),
-            'title' => (string) $r['title'], 'place_id' => (int) ($r['place_id'] ?? 0), 'place' => (string) ($r['place'] ?? ''), 'county' => (string) ($r['county'] ?? ''), 'region' => (string) ($r['region'] ?? ''), 'country' => (string) ($r['country'] ?? ''), 'who' => $who];
+            'type' => $t['type'], 'tag' => $t['tag'], 'color' => $t['color'], 'group' => $t['group'],
+            'title' => (string) $r['title'], 'place_id' => $pid] + ($places[$pid] ?? $noPlace) + ['who' => $who];
     };
     $nameRow = static fn(array $p): array => ['name' => trim($p['first_name'] . ' ' . $p['last_name']) ?: 'Sans nom', 'gender' => $p['gender']];
     if ($emit !== null) { // tout le calendrier, envoyé au fur et à mesure (genea_calendar_stream) : rien n'est gardé en mémoire
@@ -79,6 +94,7 @@ function genea_calendar_events(PDO $pdo, array $q = [], ?array $onlyDays = null,
         foreach ($pdo->query('SELECT id, first_name, last_name, gender FROM persons') as $p) { $names[(int) $p['id']] = $nameRow($p); }
         $undated = 0;
         foreach ($s as $r) {
+            if (!isset($types[(int) $r['event_type_id']])) { continue; }
             $d = ($r['date_calendar'] ?? 'gregorian') !== 'gregorian' && trim((string) $r['date_converted']) !== '' ? cal_parse_date((string) $r['date_converted']) : null;
             $d ??= cal_parse_date((string) $r['date_text']);
             if (!$d && $r['year']) { $d = [(int) $r['year'], null, null, true]; }
@@ -91,16 +107,17 @@ function genea_calendar_events(PDO $pdo, array $q = [], ?array $onlyDays = null,
     // lu ligne à ligne : la date est lue tout de suite, et une ligne écartée n'est pas gardée
     $rows = []; $ids = []; $undated = 0;
     foreach ($s as $r) {
+        if (!isset($types[(int) $r['event_type_id']])) { continue; }
         // Une date d'un autre calendrier (julien, républicain…) a souvent sa conversion grégorienne : c'est elle qui place l'événement
         $d = ($r['date_calendar'] ?? 'gregorian') !== 'gregorian' && trim((string) $r['date_converted']) !== '' ? cal_parse_date((string) $r['date_converted']) : null;
         $d ??= cal_parse_date((string) $r['date_text']);
         if (!$d && $r['year']) { $d = [(int) $r['year'], null, null, true]; }
         if (!$d || $d[0] < 1 || $d[0] > 9999) { $undated++; continue; }
         if ($onlyDays !== null && ($d[3] || !$d[1] || !$d[2] || !isset($onlyDays[$d[1] * 100 + $d[2]]))) { continue; }
-        unset($r['date_converted'], $r['family_id']);
+        unset($r['date_converted']);
         $r['_d'] = $d;
         $rows[] = $r;
-        foreach (['person_id', 'partner1_id', 'partner2_id'] as $k) { if ($r[$k]) { $ids[(int) $r[$k]] = true; } }
+        foreach ([(int) $r['person_id'], ...($couples[(int) $r['family_id']] ?? [])] as $pid) { if ($pid) { $ids[$pid] = true; } }
     }
     $names = [];
     if ($ids) {
@@ -115,7 +132,12 @@ function genea_calendar_events(PDO $pdo, array $q = [], ?array $onlyDays = null,
     return ['events' => $out, 'undated' => $undated];
 }
 
-/** GET genea_calendar : la réponse écrite au fur et à mesure (300 000 événements = plus de 100 Mo de JSON : jamais tout en mémoire). */
+/**
+ * GET genea_calendar : la réponse écrite au fur et à mesure (300 000 événements : jamais tout en mémoire).
+ * 🐘 Format serré ("compact": 1) : les sortes, les lieux et les personnes une seule fois ; chaque événement en tableau
+ * [id, année, mois, jour, approximatif, texte, calendrier, n° de sorte, titre, lieu, [personnes]]. L'écran
+ * (assets/js/heritage-calendars.js, geneaExpand) refait exactement les mêmes objets qu'avant (200 000 fiches : 205 Mo → 42 Mo).
+ */
 function genea_calendar_stream(PDO $pdo, array $q): never
 {
     if (safe_int($q['anniv_days'] ?? 0) > 0) { json_response(genea_calendar_events($pdo, $q)); }
@@ -123,13 +145,21 @@ function genea_calendar_stream(PDO $pdo, array $q): never
     header('Content-Type: application/json; charset=utf-8');
     header('Cache-Control: no-store, private');
     header('X-Content-Type-Options: nosniff');
-    $first = true; $buf = '{"events":[';
-    $res = genea_calendar_events($pdo, $q, null, [], static function (array $e) use (&$first, &$buf): void {
-        $buf .= ($first ? '' : ',') . json_encode($e, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE);
+    $J = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE;
+    $types = []; $places = []; $people = [];
+    $first = true; $buf = '{"compact":1,"events":[';
+    $res = genea_calendar_events($pdo, $q, null, [], static function (array $e) use (&$first, &$buf, &$types, &$places, &$people, $J): void {
+        $tk = json_encode([$e['type'], $e['tag'], $e['color'], $e['group']], $J);
+        $ti = $types[$tk] ??= count($types);
+        $pid = (int) $e['place_id'];
+        if ($pid && !isset($places[$pid])) { $places[$pid] = [$e['place'], $e['county'], $e['region'], $e['country']]; }
+        $who = [];
+        foreach ($e['who'] as $w) { $who[] = (int) $w['id']; $people[(int) $w['id']] ??= [$w['name'], $w['gender']]; }
+        $buf .= ($first ? '' : ',') . json_encode([$e['id'], $e['y'], $e['m'], $e['d'], $e['approx'] ? 1 : 0, $e['text'], $e['calendar'], $ti, $e['title'], $pid, $who], $J);
         $first = false;
         if (strlen($buf) > 262144) { echo $buf; $buf = ''; }
     });
-    echo $buf, '],"undated":', (int) $res['undated'], '}';
+    echo $buf, '],"types":[', implode(',', array_keys($types)), '],"places":', json_encode($places ?: new stdClass(), $J), ',"people":', json_encode($people ?: new stdClass(), $J), ',"undated":', (int) $res['undated'], '}';
     exit;
 }
 

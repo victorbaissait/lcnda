@@ -1,0 +1,55 @@
+/* LCNDA — 🖧 Plusieurs ordinateurs : la page des Réglages (assets/js/app-reseau-local.js) et « Demander l'accès »
+ * (assets/js/app-reseau-appairage.js, servie par electron/lan-gate.js). */
+.rl-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px); gap: 18px; align-items: start; }
+@media (max-width: 900px) { .rl-grid { grid-template-columns: minmax(0, 1fr); } }
+.rl-open-cb { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; } /* K16 : une case à cocher, pas d’interrupteur */
+.rl-open { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px 18px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line, #ddd); }
+.rl-open .ui-hint { grid-column: 1 / -1; margin: 0; }
+.rl-addr, .rl-inv { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; grid-column: 1; }
+.rl-addr .muted, .rl-inv .muted { flex: 1 0 100%; font-size: 13px; }
+.rl-qr { grid-column: 2; grid-row: 1 / span 2; }
+.rl-qr svg { display: block; width: 132px; height: 132px; background: #fff; }
+.rl-url, .rl-code { font: 700 20px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
+.rl-code { letter-spacing: .08em; }
+.rl-six { font: 700 22px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; }
+.rl-six-big { font-size: 34px; }
+.rl-req { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; padding: 10px 0; border-top: 1px solid var(--line, #ddd); }
+.rl-req:first-of-type { border-top: 0; }
+.rl-rec { font-size: 11px; opacity: .8; }
+.rl-choice { margin-top: 12px; }
+.rl-settings summary { cursor: pointer; }
+.rl-honest { font-size: 14px; line-height: 1.5; padding: 14px 16px; border-radius: 10px; background: var(--paper-2, rgba(0, 0, 0, .04)); }
+.rl-honest p { margin: 0 0 8px; }
+.rl-warn .page-actions { margin: 6px 0 12px; }
+.rl-dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 14px; margin: 0 0 12px; }
+.rl-dl dt { font-weight: 600; } .rl-dl dd { margin: 0; overflow-wrap: anywhere; }
+.rl-pill { font-weight: 700; }
+@media (max-width: 520px) { .rl-open { grid-template-columns: minmax(0, 1fr); } .rl-qr { grid-column: 1; grid-row: auto; } }
+
+/* ── « Demander l'accès » (un appareil inconnu : la page seule, sans l'app) ── */
+.lan-pair-body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 16px; box-sizing: border-box; background: #f4f4f2; color: #222; font: 16px/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif; }
+@media (prefers-color-scheme: dark) { .lan-pair-body { background: #1b1c1e; color: #eee; } .lan-card { background: #26272a !important; } .lan-form input { background: #1b1c1e; color: #eee; border-color: #555; } }
+.lan-pair { width: 100%; max-width: 440px; }
+.lan-card { background: #fff; border-radius: 14px; padding: 24px 22px; box-shadow: 0 4px 24px rgba(0, 0, 0, .08); }
+.lan-ico { font-size: 34px; }
+.lan-card h1 { font-size: 22px; margin: 6px 0 8px; }
+.lan-lead { margin: 0 0 16px; }
+.lan-form { display: grid; gap: 12px; }
+.lan-form label { display: grid; gap: 4px; font-weight: 600; }
+.lan-form label small { font-weight: 400; opacity: .75; }
+.lan-form input { font: inherit; padding: 10px 12px; border: 1.5px solid #bbb; border-radius: 8px; min-width: 0; }
+.lan-button { font: 600 16px/1 system-ui, sans-serif; padding: 12px 16px; border: 0; border-radius: 8px; background: #0066cc; color: #fff; cursor: pointer; }
+.lan-button:disabled { opacity: .6; }
+.lan-six { font: 700 40px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-align: center; margin: 10px 0; }
+.lan-hint { font-size: 14px; opacity: .8; }
+.lan-msg { min-height: 1.4em; margin: 0; }
+.lan-msg.is-error { color: #b3261e; }
+@media (prefers-color-scheme: dark) { .lan-msg.is-error { color: #ff8a80; } }
+
+/* 📱 téléphones de terrain (app-reseau-local.js) */
+.rl-phone { margin-top: 12px; padding: 12px; border: 1px dashed var(--line, #d0d7de); border-radius: 10px; }
+.rl-phone .rl-url { display: block; overflow-wrap: anywhere; margin: 4px 0 8px; }
+.rl-tw .rl-twg { margin: 10px 0 4px; }
+.rl-tw .rl-twg h4 { margin: 12px 0 6px; font-size: 14px; text-transform: uppercase; letter-spacing: .03em; color: var(--muted, #5f6b76); }
+.rl-tw .rl-num { display: grid; gap: 4px; max-width: 340px; margin: 8px 0; }
+.rl-tw .rl-num input { max-width: 140px; }

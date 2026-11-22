@@ -1,0 +1,374 @@
+fr ¦ lt ¦ lv ¦ et
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Vietos, kurias reikia padėti ¦ Vietas, ko novietot ¦ Paigutamata kohad
+Lieux à placer… ¦ Vietos, kurias reikia padėti… ¦ Vietas, ko novietot… ¦ Paigutamata kohad…
+Placer… ¦ Padėti… ¦ Novietot… ¦ Paiguta…
+Les placer ¦ Padėti jas ¦ Novietot tās ¦ Paiguta need
+Rien n’est pris tant que tu ne cliques pas. ¦ Niekas nepaimama, kol nepaspaudi. ¦ Nekas netiek ņemts, kamēr tu neuzklikšķini. ¦ Midagi ei võeta enne, kui klõpsad.
+Revoir et placer en lot… ¦ Peržiūrėti ir padėti kartu… ¦ Pārskatīt un novietot kopā… ¦ Vaata üle ja paiguta korraga…
+Seulement les lieux de cette carte ({n}). ¦ Tik šio žemėlapio vietos ({n}). ¦ Tikai šīs kartes vietas ({n}). ¦ Ainult selle kaardi kohad ({n}).
+Voir tous les lieux à placer ¦ Rodyti visas vietas, kurias reikia padėti ¦ Rādīt visas vietas, ko novietot ¦ Näita kõiki paigutamata kohti
+Lecture des lieux… ¦ Skaitomos vietos… ¦ Nolasa vietas… ¦ Kohtade lugemine…
+Chercher un lieu… ¦ Ieškoti vietos… ¦ Meklēt vietu… ¦ Otsi kohta…
+De A à Z ¦ Nuo A iki Ž ¦ No A līdz Z ¦ A-st Ü-ni
+Le plus loin du reste ¦ Toliausiai nuo kitų ¦ Vistālāk no pārējām ¦ Ülejäänust kõige kaugemal
+{a} · {b} concernés ¦ {a} · susiję: {b} ¦ {a} · skarti: {b} ¦ {a} · puudutab: {b}
+Aucun lieu pour ce choix. ¦ Šiam pasirinkimui vietų nėra. ¦ Šai izvēlei nav vietu. ¦ Selle valiku jaoks kohti pole.
+Tous les lieux de ta base ont une position. ¦ Visos tavo bazės vietos turi padėtį. ¦ Visām tavas datubāzes vietām ir atrašanās vieta. ¦ Kõigil sinu andmebaasi kohtadel on asukoht.
+à {km} km du reste ¦ {km} km nuo kitų ¦ {km} km no pārējām ¦ ülejäänust {km} km
+Placer ici ¦ Padėti čia ¦ Novietot šeit ¦ Paiguta siia
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ {km} km nuo kitų šių įvykių vietų: patikrink prieš padėdamas. ¦ {km} km no citām šo notikumu vietām: pārbaudi pirms novietošanas. ¦ Nende sündmuste teistest kohtadest {km} km: kontrolli enne paigutamist.
+Placer les {n} ensemble ¦ Padėti visas {n} kartu ¦ Novietot visas {n} kopā ¦ Paiguta need {n} koos
+Pas un lieu ¦ Ne vieta ¦ Nav vieta ¦ Pole koht
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ Pirmos 300; ieškok pavadinimo, kad pamatytum kitas. ¦ Pirmās 300; meklē nosaukumu, lai redzētu pārējās. ¦ Esimesed 300; otsi nime, et näha teisi.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ Padėta: {a} ({b}) · jos matomos visuose žemėlapiuose ¦ Novietotas: {a} ({b}) · tās redzamas visās kartēs ¦ Paigutatud: {a} ({b}) · need on näha kõigil kaartidel
+{name} placé ({n}) · {where} ¦ {name} padėta ({n}) · {where} ¦ {name} novietota ({n}) · {where} ¦ {name} paigutatud ({n}) · {where}
+{name} placé ({a}, {b}) ¦ {name} padėta ({a}, {b}) ¦ {name} novietota ({a}, {b}) ¦ {name} paigutatud ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ „{name}“ atidėta (ne vieta) ¦ “{name}” atlikta malā (nav vieta) ¦ „{name}“ kõrvale pandud (pole koht)
+« {name} » remis dans la liste ¦ „{name}“ grąžinta į sąrašą ¦ “{name}” atgriezta sarakstā ¦ „{name}“ tagasi loendis
+LOIN DU RESTE ¦ TOLI NUO KITŲ ¦ TĀLU NO PĀRĒJĀM ¦ ÜLEJÄÄNUST KAUGEL
+Placer « {name} » si loin ? ¦ Padėti „{name}“ taip toli? ¦ Novietot “{name}” tik tālu? ¦ Paigutada „{name}“ nii kaugele?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ „{where}“ yra {km} km nuo kitų šių įvykių vietų. Dažnai tai bendravardė vieta. ¦ “{where}” ir {km} km no citām šo notikumu vietām. Bieži tā ir vārdabiedre. ¦ „{where}“ asub nende sündmuste teistest kohtadest {km} km kaugusel. Tihti on see samanimeline koht.
+Placer quand même ¦ Vis tiek padėti ¦ Tomēr novietot ¦ Paiguta siiski
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Spustelėk žemėlapyje ten, kur yra „{name}“ (Esc – atsisakyti). ¦ Uzklikšķini kartē vietā, kur ir “{name}” (Esc – atteikties). ¦ Klõpsa kaardil kohta, kus on „{name}“ (Esc – loobu).
+{name} placé à la main (position approchée) ¦ {name} padėta ranka (apytikslė padėtis) ¦ {name} novietota ar roku (aptuvena atrašanās vieta) ¦ {name} käsitsi paigutatud (ligikaudne asukoht)
+Pas de réseau : rien n’a été envoyé. ¦ Nėra tinklo: nieko neišsiųsta. ¦ Nav tīkla: nekas netika nosūtīts. ¦ Võrku pole: midagi ei saadetud.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Internetinė paslauga nieko nerado pagal „{name}“. ¦ Tiešsaistes pakalpojums neatrada neko par “{name}”. ¦ Veebiteenus ei leidnud „{name}“ kohta midagi.
+{n} de plus pour « {name} » : à toi de choisir. ¦ Dar {n} vietai „{name}“: rinkis pats. ¦ Vēl {n} vietai “{name}”: izvēlies pats. ¦ Veel {n} kohale „{name}“: vali ise.
+EN LIGNE ¦ INTERNETE ¦ TIEŠSAISTĒ ¦ VEEBIS
+En ligne… ¦ Internete… ¦ Tiešsaistē… ¦ Veebis…
+Chercher « {name} » en ligne ? ¦ Ieškoti „{name}“ internete? ¦ Meklēt “{name}” tiešsaistē? ¦ Otsida „{name}“ veebist?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ IGN adresų paieškos paslaugai (Géoplateforme) siunčiamas tik vietos pavadinimas „{name}“. Jokio asmens vardo, jokios datos. ¦ IGN adrešu meklēšanas pakalpojumam (Géoplateforme) tiek nosūtīts tikai vietas nosaukums “{name}”. Ne personu vārdi, ne datumi. ¦ IGN-i aadressiotsingule (Géoplateforme) saadetakse ainult koha nimi „{name}“. Mitte ühtki isiku nime ega kuupäeva.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Atsakymas – dar vienas pasiūlymas sąraše; rinkis jį arba ne. Be interneto: „Nėra tinklo: nieko neišsiųsta“. ¦ Atbilde ir vēl viens ieteikums sarakstā; izvēlies to vai ne. Bez interneta: “Nav tīkla: nekas netika nosūtīts”. ¦ Vastus on loendis veel üks ettepanek; vali see või mitte. Ilma internetita: „Võrku pole: midagi ei saadetud“.
+Ne plus me demander pour cette séance ¦ Šios sesijos metu daugiau neklausti ¦ Šajā sesijā vairs nejautāt ¦ Ära selle seansi ajal enam küsi
+Lieu tapé ¦ Įrašyta vieta ¦ Ierakstītā vieta ¦ Sisestatud koht
+Pourquoi ¦ Kodėl ¦ Kāpēc ¦ Miks
+Distance au reste ¦ Atstumas iki kitų ¦ Attālums līdz pārējām ¦ Kaugus ülejäänust
+Év. ¦ Įv. ¦ Not. ¦ Sünd.
+{n} km ¦ {n} km ¦ {n} km ¦ {n} km
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ „Nieko nerasta“ peržiūroje nėra. Vieta, esanti toliau nei {km} km nuo kitų, niekada nepažymima savaime. ¦ “Nekas nav atrasts” nav pārskatā. Vieta, kas atrodas vairāk nekā {km} km no pārējām, nekad netiek atzīmēta pati. ¦ „Midagi ei leitud“ ei ole ülevaatuses. Kohta, mis on ülejäänust kaugemal kui {km} km, ei märgita kunagi ise.
+Seulement les sûrs ¦ Tik tikros ¦ Tikai drošās ¦ Ainult kindlad
+Seulement les « sûrs » ¦ Tik „tikros“ ¦ Tikai “drošās” ¦ Ainult „kindlad“
+Revoir avant de placer ¦ Peržiūrėti prieš padedant ¦ Pārskatīt pirms novietošanas ¦ Vaata üle enne paigutamist
+Placer les cochés ¦ Padėti pažymėtas ¦ Novietot atzīmētās ¦ Paiguta märgitud
+Coche au moins un lieu. ¦ Pažymėk bent vieną vietą. ¦ Atzīmē vismaz vienu vietu. ¦ Märgi vähemalt üks koht.
+Placer les {n} cochés ¦ Padėti pažymėtas ({n}) ¦ Novietot atzīmētās ({n}) ¦ Paiguta märgitud ({n})
+Réglages des lieux à placer enregistrés ¦ Vietų padėjimo nustatymai įrašyti ¦ Vietu novietošanas iestatījumi saglabāti ¦ Paigutamata kohtade seaded salvestatud
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Vietos be padėties, sugrupuotos pagal tikėtiną savivaldybę: padėk jas vienu spustelėjimu ¦ Vietas bez atrašanās vietas, sagrupētas pēc iespējamās pašvaldības: novieto tās ar vienu klikšķi ¦ Asukohata kohad, rühmitatud tõenäolise valla järgi: paiguta need ühe klõpsuga
+Cochés au départ dans la revue ¦ Peržiūroje iš anksto pažymėtos ¦ Pārskatā jau sākumā atzīmētās ¦ Ülevaatuses algselt märgitud
+Les sûrs et les probables ¦ Tikros ir tikėtinos ¦ Drošās un iespējamās ¦ Kindlad ja tõenäolised
+Un lieu-dit ¦ Vietovė ¦ Vietvārds ¦ Paik
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ Vietovėje, jei ji žinoma, kitaip savivaldybės centre pažymint „apytiksliai“ ¦ Vietvārdā, ja tas zināms, citādi pašvaldības centrā ar atzīmi “aptuveni” ¦ Paika, kui see on teada, muidu valla keskele märkega „ligikaudne“
+Toujours au centre de la commune ¦ Visada savivaldybės centre ¦ Vienmēr pašvaldības centrā ¦ Alati valla keskele
+Ne pas le placer ¦ Nepadėti ¦ Nenovietot ¦ Ära paiguta
+Plusieurs communes du même nom ¦ Kelios to paties pavadinimo savivaldybės ¦ Vairākas pašvaldības ar vienādu nosaukumu ¦ Mitu samanimelist valda
+Proposer la plus proche des autres lieux, jamais cochée ¦ Siūlyti artimiausią kitoms vietoms, niekada nepažymėtą ¦ Ieteikt tuvāko citām vietām, nekad neatzīmētu ¦ Paku teistele kohtadele lähim, mitte kunagi märgituna
+Aussi les fautes proches, proposées seulement ¦ Ir artimos klaidos, tik kaip pasiūlymai ¦ Arī tuvas kļūdas, tikai kā ieteikumi ¦ Ka lähedased kirjavead, ainult ettepanekuna
+Le nom exact seulement ¦ Tik tikslus pavadinimas ¦ Tikai precīzs nosaukums ¦ Ainult täpne nimi
+Ce qui est repris ¦ Kas perkeliama ¦ Kas tiek pārņemts ¦ Mis üle võetakse
+Position, code INSEE et département ¦ Padėtis, INSEE kodas ir departamentas ¦ Atrašanās vieta, INSEE kods un departaments ¦ Asukoht, INSEE kood ja departemang
+La position seulement ¦ Tik padėtis ¦ Tikai atrašanās vieta ¦ Ainult asukoht
+Jamais : le bouton est caché ¦ Niekada: mygtukas paslėptas ¦ Nekad: poga ir paslēpta ¦ Mitte kunagi: nupp on peidus
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Vienas mygtukas „🌐 Internete…“ kiekvienai vietai, kaskart su pranešimu (niekada kartu, niekada savaime) ¦ Viena poga “🌐 Tiešsaistē…” katrai vietai, katru reizi ar ziņu (nekad kopā, nekad pati) ¦ Üks nupp „🌐 Veebis…“ koha kohta, iga kord teatega (mitte kunagi korraga, mitte kunagi ise)
+Alerte « loin du reste » ¦ Įspėjimas „toli nuo kitų“ ¦ Brīdinājums “tālu no pārējām” ¦ Hoiatus „ülejäänust kaugel“
+À partir de 200 km ¦ Nuo 200 km ¦ No 200 km ¦ Alates 200 km
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ Tas pats pavadinimas ir tas pats departamentas kaip savivaldybių sąraše: tik viena savivaldybė „{name}“. Perkeliamas centras, INSEE kodas ir departamentas. ¦ Tāds pats nosaukums un tas pats departaments kā pašvaldību sarakstā: tikai viena pašvaldība “{name}”. Tiek pārņemts centrs, INSEE kods un departaments. ¦ Sama nimi ja sama departemang nagu valdade loendis: ainult üks vald „{name}“. Üle võetakse keskpunkt, INSEE kood ja departemang.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ Tik viena savivaldybė „{name}“ Prancūzijoje, bet departamentas neparašytas. ¦ Tikai viena pašvaldība “{name}” Francijā, bet departaments nav uzrakstīts. ¦ Ainult üks vald „{name}“ Prantsusmaal, kuid departemangu pole kirjas.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ Prancūzijoje šio pavadinimo savivaldybių: {n}. Siūlomos artimiausios kitoms šių įvykių vietoms, niekada nepažymimos savaime. ¦ Francijā ir {n} pašvaldības ar šo nosaukumu. Tiek ieteiktas tuvākās citām šo notikumu vietām, nekad neatzīmētas pašas. ¦ Prantsusmaal on {n} selle nimega valda. Pakutakse nende sündmuste teistele kohtadele lähimaid, mitte kunagi ise märgituna.
+{n} communes de ce nom en France : choisis la bonne. ¦ Prancūzijoje šio pavadinimo savivaldybių: {n}. Pasirink tinkamą. ¦ Francijā ir {n} pašvaldības ar šo nosaukumu: izvēlies pareizo. ¦ Prantsusmaal on {n} selle nimega valda: vali õige.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Vietovė žinoma sąraše (GeoNames) {name} savivaldybėje. ¦ Vietvārds zināms sarakstā (GeoNames) pašvaldībā {name}. ¦ Paik on loendis (GeoNames) teada, vallas {name}.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Vietovė sąraše nežinoma: {name} centre, pažymint „apytikslė padėtis“. ¦ Vietvārds sarakstā nav zināms: {name} centrā ar atzīmi “aptuvena atrašanās vieta”. ¦ Paik on loendis tundmatu: valla {name} keskele märkega „ligikaudne asukoht“.
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Tai ne šiandieninė savivaldybė; INSEE istorija (🏛 Senosios ribos) sako: {year} m. prijungta prie {to}. ¦ Nav mūsdienu pašvaldība; INSEE vēsture (🏛 Senās robežas) saka: {year}. gadā pievienota {to}. ¦ Pole tänapäeva vald; INSEE ajalugu (🏛 Vanad piirid) ütleb: liidetud {year} vallaga {to}.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Pasaulio miestas, pateikiamas su programa, atrinktas pagal parašytą šalį ({country}). ¦ Pasaules pilsēta, kas iekļauta lietotnē, izvēlēta pēc uzrakstītās valsts ({country}). ¦ Rakendusega kaasas olev maailma linn, valitud kirjutatud riigi järgi ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Nerasta tarp šiai šaliai pateiktų pasaulio miestų ({country}). ¦ Nav atrasts starp šai valstij iekļautajām pasaules pilsētām ({country}). ¦ Selle riigi kaasas olevate maailma linnade seast ei leitud ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Tokio pavadinimo savivaldybės nėra. Siūloma panaši rašyba. Internete nieko neieškoma. ¦ Pašvaldības ar šo nosaukumu nav. Ieteikta līdzīga rakstība. Tiešsaistē nekas netiek meklēts. ¦ Selle nimega valda pole. Pakutakse sarnast kirjapilti. Veebist ei otsita midagi.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Tokio pavadinimo savivaldybės nėra. Internete nieko neieškoma. ¦ Pašvaldības ar šo nosaukumu nav. Tiešsaistē nekas netiek meklēts. ¦ Selle nimega valda pole. Veebist ei otsita midagi.
+le plus proche ¦ artimiausia ¦ tuvākā ¦ lähim
+sûr ¦ tikra ¦ droša ¦ kindel
+=proposition ¦ pasiūlymas|pasiūlymai|pasiūlymų ¦ ieteikumu|ieteikums|ieteikumi ¦ ettepanek|ettepanekut
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ Kiekviename meniu pirmas pasirinkimas yra rekomenduojamas: jis nustatytas iš pradžių. ¦ Katrā izvēlnē pirmā izvēle ir ieteicamā: tā ir iestatīta no sākuma. ¦ Igas menüüs on esimene valik soovitatud: see on algusest peale määratud.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ Profesijos žemėlapyje (pagal sektorių, šimtmetis po šimtmečio) ¦ Arodi kartē (pa nozarēm, gadsimtu pēc gadsimta) ¦ Ametid kaardil (valdkonniti, sajand sajandi järel)
+Les métiers notés (un par ligne) ¦ Užrašytos profesijos (viena eilutėje) ¦ Pierakstītie arodi (viens katrā rindā) ¦ Märgitud ametid (üks rea kohta)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Vieta („Tulle“, „Tulle 45.27, 1.77“) ¦ Vieta (“Tulle”, “Tulle 45.27, 1.77”) ¦ Koht („Tulle“, „Tulle 45.27, 1.77“)
+Classer par ¦ Klasifikuoti pagal ¦ Klasificēt pēc ¦ Liigita
+Famille de métiers du dictionnaire (18) ¦ Žodyno profesijų šeima (18) ¦ Vārdnīcas arodu saime (18) ¦ Sõnaraamatu ametipere (18)
+Un seul métier et ses variantes ¦ Viena profesija ir jos variantai ¦ Viens arods un tā varianti ¦ Üks amet ja selle variandid
+Un métier et ses variantes ¦ Profesija ir jos variantai ¦ Arods un tā varianti ¦ Amet ja selle variandid
+Mes couleurs à moi par métier ¦ Mano spalvos kiekvienai profesijai ¦ Manas krāsas katram arodam ¦ Minu värvid ameti kaupa
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Mano spalvos („tisserand=#aa3300; meunier=#3355aa“) ¦ Manas krāsas (“tisserand=#aa3300; meunier=#3355aa”) ¦ Minu värvid („tisserand=#aa3300; meunier=#3355aa“)
+Camembert par commune ¦ Skritulinė diagrama savivaldybei ¦ Sektoru diagramma katrai pašvaldībai ¦ Sektordiagramm valla kohta
+Un rond de la couleur du plus fréquent ¦ Skritulys dažniausio spalva ¦ Aplis biežākā krāsā ¦ Ring kõige sagedama värvi
+Siècle par siècle ¦ Šimtmetis po šimtmečio ¦ Gadsimtu pēc gadsimta ¦ Sajand sajandi järel
+Un petit dessin par siècle ¦ Mažas žemėlapis kiekvienam šimtmečiui ¦ Neliela karte katram gadsimtam ¦ Väike kaart sajandi kohta
+Tout ensemble ¦ Viskas kartu ¦ Viss kopā ¦ Kõik koos
+Où placer le métier ¦ Kur padėti profesiją ¦ Kur novietot arodu ¦ Kuhu amet paigutada
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Akto vieta, kitaip gyvenamoji vieta, kitaip gimimas ¦ Akta vieta, citādi dzīvesvieta, citādi dzimšana ¦ Akti koht, muidu elukoht, muidu sünd
+Lieu de l’acte seulement ¦ Tik akto vieta ¦ Tikai akta vieta ¦ Ainult akti koht
+Plusieurs métiers ¦ Kelios profesijos ¦ Vairāki arodi ¦ Mitu ametit
+Chacun à sa date ¦ Kiekviena savo data ¦ Katrs savā datumā ¦ Igaüks oma kuupäeval
+Le principal seulement ¦ Tik pagrindinė ¦ Tikai galvenais ¦ Ainult peamine
+Montrés ¦ Rodomi ¦ Rādīti ¦ Näidatud
+Cachés ¦ Paslėpti ¦ Paslēpti ¦ Peidetud
+Les plus grands ¦ Didžiausios ¦ Lielākās ¦ Suurimad
++ {n} secteurs vides ¦ + tuščių sektorių: {n} ¦ + tukšas nozares: {n} ¦ + {n} tühja valdkonda
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Profesijų žemėlapis: {n}, mažas žemėlapis kiekvienam šimtmečiui. ¦ Arodu karte: {n}, neliela karte katram gadsimtam. ¦ Ametite kaart: {n}, väike kaart sajandi kohta.
+Carte des métiers : {a}, {b} ({when}). ¦ Profesijų žemėlapis: {a}, {b} ({when}). ¦ Arodu karte: {a}, {b} ({when}). ¦ Ametite kaart: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Profesijų žemėlapis: {a}, {b}. ¦ Arodu karte: {a}, {b}. ¦ Ametite kaart: {a}, {b}.
+Carte des métiers : {n}. ¦ Profesijų žemėlapis: {n}. ¦ Arodu karte: {n}. ¦ Ametite kaart: {n}.
+Clic : les métiers de ce lieu ¦ Spustelėk: šios vietos profesijos ¦ Klikšķis: šīs vietas arodi ¦ Klõpsa: selle koha ametid
+Aucun métier noté au {when}. ¦ Laikotarpiu {when} profesijų neužrašyta. ¦ Periodā {when} nav pierakstītu arodu. ¦ Ajal {when} pole ühtki ametit märgitud.
+Aucun métier pour ce choix. ¦ Šiam pasirinkimui profesijų nėra. ¦ Šai izvēlei nav arodu. ¦ Selle valiku jaoks ameteid pole.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Paimk profesijas iš savo genealogijos („Iš programos“). ¦ Ņem arodus no savas ģenealoģijas (“No lietotnes”). ¦ Võta ametid oma sugupuust („Rakendusest“).
+LES MÉTIERS SUR LA CARTE ¦ PROFESIJOS ŽEMĖLAPYJE ¦ ARODI KARTĒ ¦ AMETID KAARDIL
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ Spustelėjus profesiją atsiveria jos kortelė (🛠️ Senosios profesijos). ¦ Klikšķis uz aroda atver tā karti (🛠️ Senie arodi). ¦ Klõps ametil avab selle kaardi (🛠️ Vanad ametid).
+Les métiers de ta généalogie ¦ Profesijos tavo genealogijoje ¦ Arodi tavā ģenealoģijā ¦ Ametid sinu sugupuus
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Užrašytos profesijos (profesija, surašymas, kortelė), suskirstytos kaip Profesijų medyje. Niekada gyvas asmuo ar konfidenciali kortelė. ¦ Pierakstītie arodi (profesija, tautas skaitīšana, kartīte), klasificēti kā Arodu kokā. Nekad dzīva persona vai konfidenciāla kartīte. ¦ Märgitud ametid (amet, rahvaloendus, kaart), liigitatud nagu Ametipuus. Mitte kunagi elav inimene ega konfidentsiaalne kaart.
+Hommes et femmes ¦ Vyrai ir moterys ¦ Vīrieši un sievietes ¦ Mehed ja naised
+Les femmes ¦ Moterys ¦ Sievietes ¦ Naised
+Toutes les époques ¦ Visi laikotarpiai ¦ Visi laikmeti ¦ Kõik ajastud
+Aucun métier ¦ Profesijų nėra ¦ Nav arodu ¦ Ameteid pole
+Aucun métier avec un lieu pour ce choix. ¦ Šiam pasirinkimui profesijų su vieta nėra. ¦ Šai izvēlei nav arodu ar vietu. ¦ Selle valiku jaoks kohaga ameteid pole.
+Où on était {trade} ¦ Kur buvo {trade} ¦ Kur bija {trade} ¦ Kus oldi {trade}
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ Užrašyta: {a} · suskirstyta: {b} · „❔ kita“ suskirstyti: {c} ¦ Pierakstīti: {a} · klasificēti: {b} · “❔ cits” klasificējami: {c} ¦ Märgitud: {a} · liigitatud: {b} · „❔ muu“ liigitada: {c}
+Mes ancêtres seulement ¦ Tik mano protėviai ¦ Tikai mani senči ¦ Ainult minu esivanemad
+Par famille de métiers du dictionnaire (18) ¦ Pagal žodyno profesijų šeimą (18) ¦ Pēc vārdnīcas arodu saimes (18) ¦ Sõnaraamatu ametipere järgi (18)
+Par grand secteur (12) ¦ Pagal pagrindinį sektorių (12) ¦ Pēc galvenās nozares (12) ¦ Põhivaldkonna järgi (12)
+employé ¦ tarnautojas ¦ kalpotājs ¦ ametnik
+ménagère ¦ namų šeimininkė ¦ mājsaimniece ¦ koduperenaine
+Où on l’exerçait ¦ Kur ja vertėsi ¦ Kur to strādāja ¦ Kus seda tehti
+# 👫 Les deux lignées en miroir (partie 1)
+Les deux lignées en miroir (côté père, côté mère) ¦ Dvi giminės linijos veidrodiškai (tėvo pusė, motinos pusė) ¦ Abas dzimtas līnijas spoguļattēlā (tēva puse, mātes puse) ¦ Kaks liini peegelpildis (isa pool, ema pool)
+Les événements des deux côtés (un par ligne) ¦ Abiejų pusių įvykiai (vienas eilutėje) ¦ Abu pušu notikumi (viens katrā rindā) ¦ Mõlema poole sündmused (üks rea kohta)
+Ancêtre des deux côtés ¦ Abiejų pusių protėvis ¦ Sencis abās pusēs ¦ Esivanem mõlemal poolel
+Aucun ancêtre connu : {who} ¦ Nėra žinomų protėvių: {who} ¦ Nav zināmu senču: {who} ¦ Teadaolevaid esivanemaid pole: {who}
+Bleu / orange (lisibles aussi par les daltoniens) ¦ Mėlyna / oranžinė (įskaitoma ir daltonikams) ¦ Zils / oranžs (salasāms arī daltoniķiem) ¦ Sinine / oranž (loetav ka värvipimedatele)
+Compté des deux côtés, couleur mélangée ¦ Skaičiuojamas abiejose pusėse, maišyta spalva ¦ Skaitīts abās pusēs, jaukta krāsa ¦ Loetakse mõlemal poolel, segavärv
+Seulement du côté du chemin le plus court ¦ Tik trumpiausio kelio pusėje ¦ Tikai īsākā ceļa pusē ¦ Ainult lühima tee poolel
+Couleur du premier côté ¦ Pirmos pusės spalva ¦ Pirmās puses krāsa ¦ Esimese poole värv
+Couleur du deuxième côté ¦ Antrosios pusės spalva ¦ Otrās puses krāsa ¦ Teise poole värv
+Côté père / côté mère ¦ Tėvo pusė / motinos pusė ¦ Tēva puse / mātes puse ¦ Isa pool / ema pool
+Côté père / côté mère, avant la Révolution ¦ Tėvo / motinos pusė, iki revoliucijos ¦ Tēva / mātes puse, pirms revolūcijas ¦ Isa / ema pool, enne revolutsiooni
+Mes quatre grands-parents (4 couleurs) ¦ Mano keturi seneliai (4 spalvos) ¦ Mani četri vecvecāki (4 krāsas) ¦ Minu neli vanavanemat (4 värvi)
+Deux personnes au choix ¦ Du pasirinkti asmenys ¦ Divas izvēlētas personas ¦ Kaks valitud isikut
+Deux noms de famille ¦ Dvi pavardės ¦ Divi uzvārdi ¦ Kaks perekonnanime
+Deux groupes de Mes listes ¦ Dvi grupės iš Mano sąrašų ¦ Divas grupas no Maniem sarakstiem ¦ Kaks rühma Minu loenditest
+Premier nom ¦ Pirmoji pavardė ¦ Pirmais uzvārds ¦ Esimene nimi
+Deuxième nom ¦ Antroji pavardė ¦ Otrais uzvārds ¦ Teine nimi
+Première liste ¦ Pirmasis sąrašas ¦ Pirmais saraksts ¦ Esimene loend
+Deuxième liste ¦ Antrasis sąrašas ¦ Otrais saraksts ¦ Teine loend
+Deux lignées de ta généalogie ¦ Dvi tavo genealogijos linijos ¦ Divas tavas ģenealoģijas līnijas ¦ Kaks liini sinu sugupuust
+Côté père et côté mère de la personne de départ (ou quatre grands-parents, deux personnes, deux noms, deux listes). Jamais un vivant ni une fiche confidentielle : une personne de départ vivante n’est jamais un point. ¦ Pradinio asmens tėvo ir motinos pusė (arba keturi seneliai, du asmenys, dvi pavardės, du sąrašai). Niekada gyvas asmuo ar konfidenciali kortelė: gyvas pradinis asmuo niekada nėra taškas. ¦ Sākuma personas tēva un mātes puse (vai četri vecvecāki, divas personas, divi vārdi, divi saraksti). Nekad dzīva persona vai konfidenciāla kartīte: dzīva sākuma persona nekad nav punkts. ¦ Lähteisiku isa ja ema pool (või neli vanavanemat, kaks isikut, kaks nime, kaks loendit). Mitte kunagi elav inimene ega konfidentsiaalne kaart: elav lähteisik ei ole kunagi punkt.
+Glisser (un trait à déplacer) ¦ Slinkti (perkeliama linija) ¦ Bīdīt (pārvietojama līnija) ¦ Lohista (liigutatav joon)
+LES DEUX LIGNÉES ¦ DVI LINIJOS ¦ DIVAS LĪNIJAS ¦ KAKS LIINI
+Le mariage des parents (💍) ¦ Tėvų santuoka (💍) ¦ Vecāku laulības (💍) ¦ Vanemate pulm (💍)
+Les deux lignées ¦ Abi linijos ¦ Abas līnijas ¦ Mõlemad liinid
+Les deux lignées : {a}, {b} où elles se rencontrent. ¦ Abi linijos: {a}; susitinka: {b}. ¦ Abas līnijas: {a}; satiekas: {b}. ¦ Mõlemad liinid: {a}; kohtuvad: {b}.
+Les deux lignées : {n}. ¦ Abi linijos: {n}. ¦ Abas līnijas: {n}. ¦ Mõlemad liinid: {n}.
+Les deux lignées de la famille {name} ¦ Dvi {name} šeimos linijos ¦ Dzimtas {name} divas līnijas ¦ Perekonna {name} kaks liini
+Les deux lignées de {name} ¦ Dvi linijos: {name} ¦ Divas līnijas: {name} ¦ Kaks liini: {name}
+Les quatre grands-parents de la famille {name} ¦ Keturi {name} šeimos seneliai ¦ Dzimtas {name} četri vecvecāki ¦ Perekonna {name} neli vanavanemat
+Les quatre grands-parents de {name} ¦ Keturi seneliai: {name} ¦ Četri vecvecāki: {name} ¦ Neli vanavanemat: {name}
+Lister sous la carte où elles se rencontrent ¦ Po žemėlapiu išvardyti, kur jos susitinka ¦ Zem kartes uzskaitīt, kur tās satiekas ¦ Loetle kaardi all, kus need kohtuvad
+Combien de lignes ¦ Kiek eilučių ¦ Cik rindu ¦ Mitu rida
+Montré ¦ Rodomas ¦ Rādīts ¦ Näidatud
+Même commune ¦ Ta pati savivaldybė ¦ Tā pati pašvaldība ¦ Sama vald
+Même commune à la même époque ¦ Ta pati savivaldybė tuo pačiu metu ¦ Tā pati pašvaldība tajā pašā laikā ¦ Sama vald samal ajal
+À moins de quelques km ¦ Mažiau nei keli km ¦ Dažu km attālumā ¦ Mõne km kaugusel
+À la même époque : à plus ou moins ¦ Tuo pačiu metu: plius minus ¦ Tajā pašā laikā: plus mīnus ¦ Samal ajal: pluss-miinus
+Où elles se rencontrent ¦ Kur jos susitinka ¦ Kur tās satiekas ¦ Kus need kohtuvad
+Par 25 ans ¦ Kas 25 metus ¦ Pa 25 gadiem ¦ 25 aasta kaupa
+Position du trait ¦ Linijos padėtis ¦ Līnijas novietojums ¦ Joone asend
+Prends les deux lignées de ta personne de départ (« Depuis l’app »). ¦ Paimk abi savo pradinio asmens linijas („Iš programos“). ¦ Ņem abas savas sākuma personas līnijas (“No lietotnes”). ¦ Võta oma lähteisiku mõlemad liinid („Rakendusest“).
+Selon le nombre d’événements ¦ Pagal įvykių skaičių ¦ Pēc notikumu skaita ¦ Sündmuste arvu järgi
+Ses deux lignées sur la carte ¦ Abi jo linijos žemėlapyje ¦ Abas personas līnijas kartē ¦ Tema kaks liini kaardil
+Seulement la période ¦ Tik laikotarpis ¦ Tikai periods ¦ Ainult periood
+Superposées ¦ Viena ant kitos ¦ Pārklātas ¦ Kattuvad
+Tout jusqu’à cette date ¦ Viskas iki šios datos ¦ Viss līdz šim datumam ¦ Kõik selle kuupäevani
+jamais à la même époque ¦ niekada tuo pačiu metu ¦ nekad tajā pašā laikā ¦ mitte kunagi samal ajal
+mariage de {a} et {b} ¦ santuoka: {a} ir {b} ¦ laulības: {a} un {b} ¦ pulm: {a} ja {b}
+{a} et {b}, à {km} km ¦ {a} ir {b}, {km} km atstumu ¦ {a} un {b}, {km} km attālumā ¦ {a} ja {b}, {km} km kaugusel
+3e groupe ¦ 3-ioji grupė ¦ 3. grupa ¦ 3. rühm
+4e groupe ¦ 4-oji grupė ¦ 4. grupa ¦ 4. rühm
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Gyvenimo erdvė, karta po kartos ¦ Dzīves telpa, paaudzi pēc paaudzes ¦ Eluala põlvkond põlvkonna järel
+L’aire de vie de tes ancêtres ¦ Tavo protėvių gyvenimo erdvė ¦ Tavu senču dzīves telpa ¦ Sinu esivanemate eluala
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Kiekvienai kartai – zona, kurioje yra dauguma jų gimimų, santuokų ir mirčių. Tie patys atstumai kaip 🧭 Toli nuo lopšio. Niekada gyvas asmuo ar konfidenciali kortelė. ¦ Katrai paaudzei – zona, kurā ir lielākā daļa viņu dzimšanu, laulību un nāves. Tie paši attālumi kā 🧭 Tālu no šūpuļa. Nekad dzīva persona vai konfidenciāla kartīte. ¦ Iga põlvkonna kohta ala, kus on enamik nende sünde, abielusid ja surmasid. Samad kaugused nagu 🧭 Hällist kaugel. Mitte kunagi elav inimene ega konfidentsiaalne kaart.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Paimk savo pradinio asmens protėvius („Iš programos“). ¦ Ņem savas sākuma personas senčus (“No lietotnes”). ¦ Võta oma lähteisiku esivanemad („Rakendusest“).
+Génération d’ancêtres ¦ Protėvių karta ¦ Senču paaudze ¦ Esivanemate põlvkond
+Siècle (toute la base) ¦ Šimtmetis (visa bazė) ¦ Gadsimts (visa datubāze) ¦ Sajand (kogu andmebaas)
+Une vie (les étapes d’une personne) ¦ Vienas gyvenimas (vieno asmens etapai) ¦ Viena dzīve (vienas personas posmi) ¦ Üks elu (ühe inimese etapid)
+Avec les résidences et recensements ¦ Su gyvenamosiomis vietomis ir surašymais ¦ Ar dzīvesvietām un tautas skaitīšanām ¦ Koos elukohtade ja rahvaloendustega
+Du clair (anciens) au foncé (récents) ¦ Nuo šviesios (seniausi) iki tamsios (naujausi) ¦ No gaišas (senākie) līdz tumšai (jaunākie) ¦ Heledast (vanimad) tumedani (uusimad)
+Bleu / orange pour père / mère ¦ Mėlyna / oranžinė tėvui / motinai ¦ Zils / oranžs tēvam / mātei ¦ Sinine / oranž isale / emale
+L’inverse ¦ Atvirkščiai ¦ Otrādi ¦ Vastupidi
+50 % (le cœur) ¦ 50 % (branduolys) ¦ 50 % (kodols) ¦ 50% (tuum)
+Part des événements ¦ Įvykių dalis ¦ Notikumu daļa ¦ Sündmuste osa
+Part gardée ¦ Išlaikyta dalis ¦ Saglabātā daļa ¦ Hoitud osa
+Cercle (facile à comparer) ¦ Apskritimas (lengva palyginti) ¦ Aplis (viegli salīdzināt) ¦ Ring (lihtne võrrelda)
+Enveloppe (le contour au plus juste) ¦ Apvalkalas (glausčiausias kontūras) ¦ Apvalks (ciešākā kontūra) ¦ Kest (kõige tihedam piirjoon)
+Personne (l’aire d’une vie) ¦ Asmuo (vieno gyvenimo erdvė) ¦ Persona (vienas dzīves telpa) ¦ Isik (ühe elu ala)
+Le milieu des événements ¦ Įvykių vidurys ¦ Notikumu vidus ¦ Sündmuste keskkoht
+Le lieu de naissance de la personne de départ ¦ Pradinio asmens gimimo vieta ¦ Sākuma personas dzimšanas vieta ¦ Lähteisiku sünnikoht
+Le berceau des plus anciens ¦ Seniausiųjų lopšys ¦ Senāko šūpulis ¦ Vanimate häll
+Toutes les aires superposées ¦ Visos erdvės viena ant kitos ¦ Visas telpas pārklātas ¦ Kõik alad kattuvad
+Une par case ¦ Po vieną langelyje ¦ Pa vienai katrā lauciņā ¦ Üks kasti kohta
+Une à la fois avec ▶ ¦ Po vieną su ▶ ¦ Pa vienai ar ▶ ¦ Ükshaaval ▶ abil
+Minimum pour tracer une aire ¦ Mažiausiai erdvei nubrėžti ¦ Minimums telpas zīmēšanai ¦ Miinimum ala joonistamiseks
+5 événements ¦ 5 įvykiai ¦ 5 notikumi ¦ 5 sündmust
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Į erdves (toli išvykęs protėvis lieka už erdvės ribų) ¦ Uz telpām (tālu aizceļojis sencis paliek ārpus telpas) ¦ Aladele (kaugele läinud esivanem jääb alast välja)
+Cadrer sur tout ¦ Įrėminti viską ¦ Ietvert visu ¦ Raamista kõik
+Le tableau sous la carte ¦ Lentelė po žemėlapiu ¦ Tabula zem kartes ¦ Tabel kaardi all
+Gén. {g} · ses parents ¦ {g} k. · tėvai ¦ {g}. paaudze · vecāki ¦ Põlv. {g} · vanemad
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Spustelėk: vietos ir esančios už erdvės ¦ Klikšķis: vietas un tās ārpus telpas ¦ Klõpsa: kohad ja need, mis on alast väljas
+Hors de l’aire ¦ Už erdvės ribų ¦ Ārpus telpas ¦ Alast väljas
+Rayon ({p} %) ¦ Spindulys ({p} %) ¦ Rādiuss ({p} %) ¦ Raadius ({p}%)
+trop peu ¦ per mažai ¦ par maz ¦ liiga vähe
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Gyvenimo erdvė: {n}, spindulys nuo {a} km iki {b} km. ¦ Dzīves telpa: {n}, rādiuss no {a} km līdz {b} km. ¦ Eluala: {n}, raadius {a}–{b} km.
+Aire de vie : pas assez d’événements. ¦ Gyvenimo erdvė: per mažai įvykių. ¦ Dzīves telpa: nepietiek notikumu. ¦ Eluala: sündmusi pole piisavalt.
+Aire de vie : {n}. ¦ Gyvenimo erdvė: {n}. ¦ Dzīves telpa: {n}. ¦ Eluala: {n}.
+L’AIRE DE VIE ¦ GYVENIMO ERDVĖ ¦ DZĪVES TELPA ¦ ELUALA
+L’aire de vie de la famille, siècle par siècle ¦ Šeimos gyvenimo erdvė, šimtmetis po šimtmečio ¦ Dzimtas dzīves telpa, gadsimtu pēc gadsimta ¦ Perekonna eluala sajand sajandi järel
+L’aire de vie des ancêtres de {name} ¦ Protėvių gyvenimo erdvė: {name} ¦ Senču dzīves telpa: {name} ¦ Esivanemate eluala: {name}
+L’aire d’une vie : {name} ¦ Vieno gyvenimo erdvė: {name} ¦ Vienas dzīves telpa: {name} ¦ Ühe elu ala: {name}
+la famille {name} ¦ {name} šeima ¦ dzimta {name} ¦ perekond {name}
+Voir l’aire de vie sur la carte ¦ Rodyti gyvenimo erdvę žemėlapyje ¦ Rādīt dzīves telpu kartē ¦ Näita eluala kaardil
+Centre ¦ Centras ¦ Centrs ¦ Keskpunkt
+Côté père et côté mère (deux couleurs) ¦ Tėvo ir motinos pusė (dvi spalvos) ¦ Tēva un mātes puse (divas krāsas) ¦ Isa ja ema pool (kaks värvi)
+Mes ancêtres, 8 générations ¦ Mano protėviai, 8 kartos ¦ Mani senči, 8 paaudzes ¦ Minu esivanemad, 8 põlvkonda
+Toute ma base, siècle par siècle ¦ Visa mano bazė, šimtmetis po šimtmečio ¦ Visa mana datubāze, gadsimtu pēc gadsimta ¦ Kogu minu andmebaas sajand sajandi järel
+=aire ¦ erdvė|erdvės|erdvių ¦ telpu|telpa|telpas ¦ ala|ala
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Krikštatėviai ir liudytojai žemėlapyje ¦ Krustvecāki un liecinieki kartē ¦ Ristivanemad ja tunnistajad kaardil
+Les liens (un par ligne) ¦ Ryšiai (vienas eilutėje) ¦ Saites (viena katrā rindā) ¦ Seosed (üks rea kohta)
+D’où vient le témoin ¦ Iš kur kilęs liudytojas ¦ No kurienes nāk liecinieks ¦ Kust tunnistaja pärit on
+D’où vient le parrain ¦ Iš kur kilęs krikštatėvis ¦ No kurienes nāk krustvecāks ¦ Kust ristiisa pärit on
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ Kas parašyta akte, kitaip gyvenamoji vieta tą dieną, kitaip gimimas ¦ Kas rakstīts aktā, citādi dzīvesvieta tajā datumā, citādi dzimšana ¦ Mis on aktis kirjas, muidu elukoht sel kuupäeval, muidu sünd
+Seulement ce qui est écrit dans l’acte ¦ Tik tai, kas parašyta akte ¦ Tikai tas, kas rakstīts aktā ¦ Ainult see, mis on aktis kirjas
+Seulement sa naissance ¦ Tik gimimas ¦ Tikai dzimšana ¦ Ainult sünd
+Nombre de liens ¦ Ryšių skaičius ¦ Saišu skaits ¦ Seoste arv
+Nombre de personnes différentes ¦ Skirtingų asmenų skaičius ¦ Dažādu personu skaits ¦ Erinevate isikute arv
+Liens dans le même village ¦ Ryšiai tame pačiame kaime ¦ Saites tajā pašā ciemā ¦ Seosed samas külas
+Anneau autour du point ¦ Žiedas aplink tašką ¦ Gredzens ap punktu ¦ Rõngas punkti ümber
+Un chiffre seulement ¦ Tik skaičius ¦ Tikai skaitlis ¦ Ainult arv
+Rôles montrés ¦ Rodomi vaidmenys ¦ Rādītās lomas ¦ Näidatud rollid
+Parrain, marraine, témoin ¦ Krikštatėvis, krikštamotė, liudytojas ¦ Krusttēvs, krustmāte, liecinieks ¦ Ristiisa, ristiema, tunnistaja
+Tous sauf curé et officier ¦ Visi, išskyrus kunigą ir pareigūną ¦ Visi, izņemot priesteri un ierēdni ¦ Kõik peale preestri ja ametniku
+Traits montrés ¦ Rodomos linijos ¦ Rādītās līnijas ¦ Näidatud jooned
+À partir de 1 lien ¦ Nuo 1 ryšio ¦ No 1 saites ¦ Alates 1 seosest
+À partir de 2 ¦ Nuo 2 ¦ No 2 ¦ Alates 2
+À partir de 3 ¦ Nuo 3 ¦ No 3 ¦ Alates 3
+Les 30 plus forts seulement ¦ Tik 30 stipriausių ¦ Tikai 30 spēcīgākās ¦ Ainult 30 tugevaimat
+Par rôle ¦ Pagal vaidmenį ¦ Pēc lomas ¦ Rolli järgi
+Par branche (bleu père, orange mère) ¦ Pagal šaką (mėlyna tėvas, oranžinė motina) ¦ Pēc atzara (zils tēvs, oranžs māte) ¦ Haru järgi (sinine isa, oranž ema)
+Flèche du village du parrain vers celui de l’acte ¦ Rodyklė nuo krikštatėvio kaimo iki akto kaimo ¦ Bultiņa no krustvecāka ciema uz akta ciemu ¦ Nool ristivanema külast akti külla
+La phrase sous la carte ¦ Sakinys po žemėlapiu ¦ Teikums zem kartes ¦ Lause kaardi all
+Clic : les liens derrière ce trait ¦ Spustelėk: ryšiai už šios linijos ¦ Klikšķis: saites aiz šīs līnijas ¦ Klõpsa: selle joone taga olevad seosed
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: {p} % ryšių yra iš paties kaimo; kiti daugiausia iš: {others}. ¦ {place}: {p} % saišu ir no paša ciema; pārējās nāk galvenokārt no: {others}. ¦ {place}: {p}% seostest on samast külast; ülejäänud tulevad peamiselt: {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Skaičiuota pagal: {a} su žinomu kaimu; be vietos, nenubraižyta: {b}. ¦ Aprēķināts pēc: {a} ar zināmu ciemu; bez vietas, nav uzzīmētas: {b}. ¦ Arvutatud: {a} teadaoleva külaga; kohata, joonistamata: {b}.
+Parrains et témoins : {a} entre {b}. ¦ Krikštatėviai ir liudytojai: {a} tarp {b}. ¦ Krustvecāki un liecinieki: {a} starp {b}. ¦ Ristivanemad ja tunnistajad: {a}, kohti {b}.
+Parrains et témoins : {n}. ¦ Krikštatėviai ir liudytojai: {n}. ¦ Krustvecāki un liecinieki: {n}. ¦ Ristivanemad ja tunnistajad: {n}.
+Filleul ou époux ¦ Krikštasūnis ar sutuoktinis ¦ Krustbērns vai laulātais ¦ Ristilaps või abikaasa
+{n} autres · triés par date ¦ Dar {n} · pagal datą ¦ Vēl {n} · pēc datuma ¦ Veel {n} · kuupäeva järgi
+Ouvrir dans le Réseau ¦ Atverti Tinkle ¦ Atvērt Tīklā ¦ Ava Võrgustikus
+PARRAINS ET TÉMOINS ¦ KRIKŠTATĖVIAI IR LIUDYTOJAI ¦ KRUSTVECĀKI UN LIECINIEKI ¦ RISTIVANEMAD JA TUNNISTAJAD
+Parrains et marraines ¦ Krikštatėviai ir krikštamotės ¦ Krusttēvi un krustmātes ¦ Ristiisad ja ristiemad
+Parrains, marraines et témoins ¦ Krikštatėviai ir liudytojai ¦ Krustvecāki un liecinieki ¦ Ristivanemad ja tunnistajad
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Paimk krikštatėvius ir liudytojus iš savo genealogijos („Iš programos“). ¦ Ņem krustvecākus un lieciniekus no savas ģenealoģijas (“No lietotnes”). ¦ Võta ristivanemad ja tunnistajad oma sugupuust („Rakendusest“).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ 🕸 Ryšių tinklo ryšiai žemėlapyje: akto kaimas ir tas, iš kurio kilęs liudytojas. Gyvi liudytojai niekada neskaičiuojami. ¦ 🕸 Attiecību tīkla saites kartē: akta ciems un tas, no kura nāk liecinieks. Dzīvi liecinieki nekad netiek skaitīti. ¦ 🕸 Suhete võrgustiku seosed kaardil: akti küla ja see, kust tunnistaja pärit on. Elavaid tunnistajaid ei loeta kunagi.
+Aucun lien avec un lieu pour ce choix. ¦ Šiam pasirinkimui ryšių su vieta nėra. ¦ Šai izvēlei nav saišu ar vietu. ¦ Selle valiku jaoks kohaga seoseid pole.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Šiam pasirinkimui ryšių nėra (vaidmenys, laikotarpis, vietos). ¦ Šai izvēlei nav saišu (lomas, periods, vietas). ¦ Selle valiku jaoks seoseid pole (rollid, periood, kohad).
+Curé, officier ¦ Kunigas, pareigūnas ¦ Priesteris, ierēdnis ¦ Preester, ametnik
+curé ¦ kunigas ¦ priesteris ¦ preester
+Curé ¦ Kunigas ¦ Priesteris ¦ Preester
+tuteur ¦ globėjas ¦ aizbildnis ¦ eestkostja
+Voisin ¦ Kaimynas ¦ Kaimiņš ¦ Naaber
+Officier ¦ Pareigūnas ¦ Ierēdnis ¦ Ametnik
+bapt. ¦ krikšt. ¦ krist. ¦ rist.
+naiss. ¦ gim. ¦ dzim. ¦ sünd
+mar. ¦ sant. ¦ lauln. ¦ abiel.
+inh. ¦ laid. ¦ apbed. ¦ matus
+# ⚰️ Crises et épidémies (partie 3) — et les départs « Graphique » de 🕸
+Crises et épidémies (les années où les décès montent) ¦ Krizės ir epidemijos (metai, kai mirčių padaugėja) ¦ Krīzes un epidēmijas (gadi, kad pieaug nāves gadījumi) ¦ Kriisid ja epideemiad (aastad, mil surmad kasvavad)
+Les décès (un par ligne) ¦ Mirtys (viena eilutėje) ¦ Nāves gadījumi (viens katrā rindā) ¦ Surmad (üks rea kohta)
+Cause notée ¦ Užrašyta priežastis ¦ Pierakstītais cēlonis ¦ Märgitud põhjus
+Choléra de 1832 ¦ 1832 m. cholera ¦ 1832. gada holēra ¦ 1832. aasta koolera
+Clic : les personnes, et ce qui se passait à la même époque ¦ Spustelėk: asmenys ir kas vyko tuo pačiu metu ¦ Klikšķis: personas un tas, kas notika tajā pašā laikā ¦ Klõpsa: isikud ja mis samal ajal toimus
+Comptés avec tout le monde ¦ Skaičiuojami su visais ¦ Skaitīti kopā ar visiem ¦ Loetakse kõigiga koos
+À part ¦ Atskirai ¦ Atsevišķi ¦ Eraldi
+À part (moins de 10 ans) ¦ Atskirai (jaunesni nei 10 metų) ¦ Atsevišķi (jaunāki par 10 gadiem) ¦ Eraldi (alla 10 aasta)
+Pas comptés ¦ Neskaičiuojami ¦ Netiek skaitīti ¦ Ei loeta
+Mes ancêtres et leurs familles ¦ Mano protėviai ir jų šeimos ¦ Mani senči un viņu ģimenes ¦ Minu esivanemad ja nende pered
+Les enfants à part (moins de 10 ans) ¦ Vaikai atskirai (jaunesni nei 10 metų) ¦ Bērni atsevišķi (jaunāki par 10 gadiem) ¦ Lapsed eraldi (alla 10 aasta)
+Les décès de ta généalogie ¦ Mirtys tavo genealogijoje ¦ Nāves gadījumi tavā ģenealoģijā ¦ Surmad sinu sugupuus
+Les décès placés et datés (le décès, sinon l’inhumation ; chaque personne une seule fois), et les crises du 🌍 Monde autour avec tes événements locaux. Jamais un vivant ni une fiche confidentielle. ¦ Padėtos ir datuotos mirtys (mirtis, kitaip laidojimas; kiekvienas asmuo tik kartą) ir 🌍 Pasaulio aplink krizės su tavo vietos įvykiais. Niekada gyvas asmuo ar konfidenciali kortelė. ¦ Novietotie un datētie nāves gadījumi (nāve, citādi apbedīšana; katra persona tikai vienreiz) un 🌍 Pasaules apkārt krīzes ar taviem vietējiem notikumiem. Nekad dzīva persona vai konfidenciāla kartīte. ¦ Paigutatud ja dateeritud surmad (surm, muidu matus; iga isik ainult korra) ning 🌍 Maailm ümberringi kriisid koos sinu kohalike sündmustega. Mitte kunagi elav inimene ega konfidentsiaalne kaart.
+Aucun décès daté avec un lieu pour ce choix. ¦ Šiam pasirinkimui datuotų mirčių su vieta nėra. ¦ Šai izvēlei nav datētu nāves gadījumu ar vietu. ¦ Selle valiku jaoks kohaga dateeritud surmasid pole.
+Décès sans année ou sans lieu, comptés à part : {n} ¦ Mirtys be metų ar vietos, skaičiuojamos atskirai: {n} ¦ Nāves gadījumi bez gada vai vietas, skaitīti atsevišķi: {n} ¦ Aasta või kohata surmad, eraldi loetud: {n}
+Minimum de décès dans l’année ¦ Mažiausias mirčių skaičius per metus ¦ Minimālais nāves gadījumu skaits gadā ¦ Surmade miinimum aastas
+Décès au moins ¦ Mirčių mažiausiai ¦ Nāves gadījumu vismaz ¦ Surmasid vähemalt
+2,5 fois l’habitude ¦ 2,5 karto daugiau nei įprasta ¦ 2,5 reizes vairāk nekā parasti ¦ 2,5 korda tavalisest rohkem
+2 fois ¦ 2 kartus ¦ 2 reizes ¦ 2 korda
+3 fois ¦ 3 kartus ¦ 3 reizes ¦ 3 korda
+4 fois ¦ 4 kartus ¦ 4 reizes ¦ 4 korda
+Fois l’habitude ¦ Kartų daugiau nei įprasta ¦ Reizes vairāk nekā parasti ¦ Korda tavalisest
+Fenêtre de l’habitude ¦ Įprasto lygio langas ¦ Parastā līmeņa logs ¦ Tavalise taseme aken
+5 ans avant et 5 ans après ¦ 5 metai prieš ir 5 metai po ¦ 5 gadi pirms un 5 gadi pēc ¦ 5 aastat enne ja 5 aastat pärast
+10 et 10 ¦ 10 ir 10 ¦ 10 un 10 ¦ 10 ja 10
+Seulement les 10 ans avant ¦ Tik 10 metų prieš ¦ Tikai 10 gadi pirms ¦ Ainult 10 aastat enne
+L’habitude se calcule par ¦ Įprastas lygis skaičiuojamas pagal ¦ Parastais līmenis tiek aprēķināts ar ¦ Tavaline tase arvutatakse
+La moyenne ¦ Vidurkis ¦ Vidējais ¦ Keskmine
+La médiane (moins dérangée par une autre crise toute proche) ¦ Mediana (mažiau iškreipta kitos artimos krizės) ¦ Mediāna (mazāk traucē cita tuva krīze) ¦ Mediaan (teine lähedane kriis segab vähem)
+La commune, les petites regroupées avec leurs voisines ¦ Savivaldybė, mažos sugrupuotos su kaimynėmis ¦ Pašvaldība, mazās sagrupētas ar kaimiņiem ¦ Vald, väikesed koos naabritega
+Toujours la commune ¦ Visada savivaldybė ¦ Vienmēr pašvaldība ¦ Alati vald
+Le département ¦ Departamentas ¦ Departaments ¦ Departemang
+Petit village : nombre de décès sur toute la période, moins de ¦ Mažas kaimas: mirčių per visą laikotarpį mažiau nei ¦ Mazs ciems: nāves gadījumu skaits visā periodā mazāks par ¦ Väike küla: surmade arv kogu perioodi jooksul alla
+Enfant : moins de ¦ Vaikas: mažiau nei ¦ Bērns: mazāk par ¦ Laps: alla
+Repères proposés ¦ Siūlomi atskaitos taškai ¦ Ieteiktie atskaites punkti ¦ Pakutud pidepunktid
+Les crises du 🌍 Monde autour qui couvrent la commune, et mes événements ¦ 🌍 Pasaulio aplink krizės, apimančios savivaldybę, ir mano įvykiai ¦ 🌍 Pasaules apkārt krīzes, kas attiecas uz pašvaldību, un mani notikumi ¦ 🌍 Maailm ümberringi kriisid, mis valda puudutavad, ja minu sündmused
+Toutes les crises de l’année ¦ Visos metų krizės ¦ Visas gada krīzes ¦ Kõik aasta kriisid
+Pas du temps ¦ Laiko žingsnis ¦ Laika solis ¦ Ajasamm
+Pas assez de décès placés : moins de ¦ Per mažai padėtų mirčių: mažiau nei ¦ Par maz novietotu nāves gadījumu: mazāk par ¦ Liiga vähe paigutatud surmasid: alla
+Pas assez de décès placés pour repérer des crises. ¦ Per mažai padėtų mirčių krizėms pastebėti. ¦ Par maz novietotu nāves gadījumu, lai atrastu krīzes. ¦ Liiga vähe paigutatud surmasid kriiside leidmiseks.
+Prends les décès de ta généalogie (« Depuis l’app »). ¦ Paimk mirtis iš savo genealogijos („Iš programos“). ¦ Ņem nāves gadījumus no savas ģenealoģijas (“No lietotnes”). ¦ Võta surmad oma sugupuust („Rakendusest“).
+LES ANNÉES DE CRISE ¦ KRIZĖS METAI ¦ KRĪZES GADI ¦ KRIISIAASTAD
+Les années de crise de la famille ¦ Šeimos krizės metai ¦ Dzimtas krīzes gadi ¦ Perekonna kriisiaastad
+Les années de crise sur la carte ¦ Krizės metai žemėlapyje ¦ Krīzes gadi kartē ¦ Kriisiaastad kaardil
+Les années de crise : {n}, sur {d}. ¦ Krizės metai: {n}, iš {d}. ¦ Krīzes gadi: {n}, no {d}. ¦ Kriisiaastad: {n}, kokku {d}.
+Les années de crise : {n}. ¦ Krizės metai: {n}. ¦ Krīzes gadi: {n}. ¦ Kriisiaastad: {n}.
+Les années à voir · {n} ¦ Metai, kuriuos verta peržiūrėti · {n} ¦ Gadi, ko apskatīt · {n} ¦ Vaatamist väärivad aastad · {n}
+=année à voir ¦ verti peržiūrėti metai|verti peržiūrėti metai|vertų peržiūrėti metų ¦ gadu, ko apskatīt|gads, ko apskatīt|gadi, ko apskatīt ¦ vaatamist vääriv aasta|vaatamist väärivat aastat
+Habitude ¦ Įprastai ¦ Parasti ¦ Tavaliselt
+À la même époque (repère) ¦ Tuo pačiu metu (atskaitos taškas) ¦ Tajā pašā laikā (atskaites punkts) ¦ Samal ajal (pidepunkt)
+À la même époque : {what} — un repère, pas une explication. ¦ Tuo pačiu metu: {what} – atskaitos taškas, ne paaiškinimas. ¦ Tajā pašā laikā: {what} — atskaites punkts, nevis skaidrojums. ¦ Samal ajal: {what} – pidepunkt, mitte seletus.
+Rien de connu dans cette région à cette date. ¦ Šiame regione tuo metu nieko nežinoma. ¦ Šajā reģionā šajā laikā nekas nav zināms. ¦ Selles piirkonnas sel ajal midagi teada pole.
+rien de connu dans cette région à cette date ¦ šiame regione tuo metu nieko nežinoma ¦ šajā reģionā šajā laikā nekas nav zināms ¦ selles piirkonnas sel ajal midagi teada pole
+cause notée : « {c} » ¦ užrašyta priežastis: „{c}“ ¦ pierakstītais cēlonis: “{c}” ¦ märgitud põhjus: „{c}“
+d’habitude {u} par an ¦ paprastai {u} per metus ¦ parasti {u} gadā ¦ tavaliselt {u} aastas
+plus de ×5 ¦ daugiau nei ×5 ¦ vairāk nekā ×5 ¦ üle ×5
+×2,5 à 3 ¦ ×2,5–3 ¦ ×2,5–3 ¦ ×2,5–3
+×3 à 5 ¦ ×3–5 ¦ ×3–5 ¦ ×3–5
+{name} + {n} voisines ¦ {name} + kaimynės: {n} ¦ {name} + kaimiņi: {n} ¦ {name} + {n} naabrit
++ {n} autres ¦ + dar {n} ¦ + vēl {n} ¦ + veel {n}
+Écrire la commune et l’année près des ronds ¦ Rašyti savivaldybę ir metus šalia skritulių ¦ Rakstīt pašvaldību un gadu blakus apļiem ¦ Kirjuta vald ja aasta ringide kõrvale
+À lire avec prudence : l’app compare des nombres de décès, elle ne sait pas pourquoi ils montent. Le repère est ce qui se passait à la même époque : une piste à vérifier dans les actes (cause notée, âge, mois). Sur de petits nombres, le hasard suffit parfois. ¦ Skaityk atsargiai: programa lygina mirčių skaičius, ji nežino, kodėl jie didėja. Atskaitos taškas – tai, kas vyko tuo pačiu metu: pėdsakas, kurį reikia patikrinti aktuose (užrašyta priežastis, amžius, mėnuo). Esant mažiems skaičiams kartais pakanka atsitiktinumo. ¦ Lasi uzmanīgi: lietotne salīdzina nāves gadījumu skaitu, tā nezina, kāpēc tas pieaug. Atskaites punkts ir tas, kas notika tajā pašā laikā: pavediens, kas jāpārbauda aktos (pierakstītais cēlonis, vecums, mēnesis). Pie maziem skaitļiem dažreiz pietiek ar nejaušību. ¦ Loe ettevaatlikult: rakendus võrdleb surmade arvu, ta ei tea, miks need kasvavad. Pidepunkt on see, mis samal ajal toimus: jälg, mida tuleb aktidest kontrollida (märgitud põhjus, vanus, kuu). Väikeste arvude puhul piisab mõnikord juhusest.
+Autour de mes ancêtres ¦ Aplink mano protėvius ¦ Ap maniem senčiem ¦ Minu esivanemate ümber
+Parrains et marraines des baptêmes ¦ Krikštatėviai per krikštynas ¦ Krustvecāki kristībās ¦ Ristivanemad ristimistel
+Témoins des mariages ¦ Santuokų liudytojai ¦ Laulību liecinieki ¦ Pulmatunnistajad
+Tous les liens (parrains, témoins, déclarants…) ¦ Visi ryšiai (krikštatėviai, liudytojai, pranešėjai…) ¦ Visas saites (krustvecāki, liecinieki, ziņotāji…) ¦ Kõik seosed (ristivanemad, tunnistajad, teatajad…)
+années à voir ¦ metai, kuriuos verta peržiūrėti ¦ gadi, ko apskatīt ¦ vaatamist väärivad aastad
+année à voir ¦ verti peržiūrėti metai ¦ gads, ko apskatīt ¦ vaatamist vääriv aasta
+Ce qu’on prend ¦ Ką imame ¦ Ko ņemam ¦ Mida võtame
+Tout : vu, en partie, à chercher ¦ Viskas: matyta, iš dalies, ieškotina ¦ Viss: redzēts, daļēji, meklējams ¦ Kõik: nähtud, osaliselt, otsida
+Seulement ce qui reste à faire ¦ Tik tai, kas liko padaryti ¦ Tikai tas, kas vēl jādara ¦ Ainult see, mis on veel teha
+Seulement ce qui a été vu ¦ Tik tai, kas matyta ¦ Tikai tas, kas redzēts ¦ Ainult see, mida on nähtud
+Sans le nom des correspondances ¦ Be atitikmenų vardų ¦ Bez sakritību vārdiem ¦ Vastete nimedeta
+Avec le nom des correspondances (pas pour un export partagé) ¦ Su atitikmenų vardais (ne bendrinamam eksportui) ¦ Ar sakritību vārdiem (ne koplietojamam eksportam) ¦ Vastete nimedega (mitte jagatava ekspordi jaoks)
+Naissances par an, une bougie par décennie ¦ Gimimai per metus, viena žvakė dešimtmečiui ¦ Dzimšanas gadā, viena svece desmitgadē ¦ Sünnid aastas, üks küünal kümnendi kohta
+Décès par an, une bougie par décennie (les années de crise en haut des mèches) ¦ Mirtys per metus, viena žvakė dešimtmečiui (krizių metai dagčių viršuje) ¦ Nāves gadā, viena svece desmitgadē (krīžu gadi dakts augšā) ¦ Surmad aastas, üks küünal kümnendi kohta (kriisiaastad tahtide tipus)
+Mariages par an, une bougie par décennie ¦ Santuokos per metus, viena žvakė dešimtmečiui ¦ Laulības gadā, viena svece desmitgadē ¦ Abielud aastas, üks küünal kümnendi kohta
+Pas assez d’années datées pour ce choix. ¦ Šiam pasirinkimui nepakanka datuotų metų. ¦ Šai izvēlei nav pietiekami daudz datētu gadu. ¦ Selle valiku jaoks pole piisavalt dateeritud aastaid.
+Naissances par an, décennie par décennie ¦ Gimimai per metus, dešimtmetis po dešimtmečio ¦ Dzimšanas gadā, desmitgadi pa desmitgadei ¦ Sünnid aastas, kümnend kümnendi haaval
+Décès par an, décennie par décennie ¦ Mirtys per metus, dešimtmetis po dešimtmečio ¦ Nāves gadā, desmitgadi pa desmitgadei ¦ Surmad aastas, kümnend kümnendi haaval
+Mariages par an, décennie par décennie ¦ Santuokos per metus, dešimtmetis po dešimtmečio ¦ Laulības gadā, desmitgadi pa desmitgadei ¦ Abielud aastas, kümnend kümnendi haaval
+par an ¦ per metus ¦ gadā ¦ aastas
+Chaque bougie : la 1re et la dernière année de la décennie, l’année la plus basse et la plus haute ¦ Kiekviena žvakė: pirmieji ir paskutiniai dešimtmečio metai, žemiausi ir aukščiausi metai ¦ Katra svece: desmitgades pirmais un pēdējais gads, zemākais un augstākais gads ¦ Iga küünal: kümnendi esimene ja viimane aasta, madalaim ja kõrgeim aasta

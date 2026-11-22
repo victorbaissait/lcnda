@@ -259,7 +259,7 @@
         n = clamp(n, 2, 5);
         const paths = list.map(p => ({jobs: p.jobs.slice(0, n).map(j => j || unknown), v: p.v})).filter(p => p.v > 0 && p.jobs.filter(j => j !== unknown).length >= 1);
         const tot = new Map(); paths.forEach(p => p.jobs.forEach(j => tot.set(j, (tot.get(j) || 0) + p.v)));
-        const top = clamp(Math.round(num(o.top) || 7), 2, 20), other = 'Autres métiers';
+        const top = clamp(Math.round(num(o.top) || 7), 2, 20), other = o.mode === 'ages' ? i18n('Autres') : 'Autres métiers';
         const keep = new Set([...tot.entries()].filter(([j]) => j !== unknown).sort((a, b) => b[1] - a[1]).slice(0, top).map(([j]) => j));
         let ps = paths.map(p => ({jobs: p.jobs.map(j => (j === unknown ? unknown : keep.has(j) ? j : other)), v: p.v}));
         if (o.hideUnknown) ps = ps.filter(p => !p.jobs.includes(unknown));
@@ -267,7 +267,7 @@
         return {n, paths: ps, order, unknown, other};
     }
     function occflow(spec, W, fs) {
-        const o = spec.o || {}, {n, paths, order, unknown, other} = occPaths(spec);
+        const o = spec.o || {}, {n, paths, order, unknown, other} = occPaths(spec), word = o.mode === 'ages' ? 'personne' : 'lignée'; // lot B : les mêmes personnes à plusieurs âges
         if (!paths.length) return empty(W, fs, 'Ajoute des lignées : le métier de l’ancêtre, puis de son fils, de son petit-fils… et combien de fois.');
         const cmap = catColors(spec), colJob = j => cmap.get(fold(j)) || (j === unknown ? '#c4c9d0' : j === other ? '#9aa3ad' : pick(spec, order.indexOf(j)));
         const names = str(o.colNames) ? str(o.colNames, 300).split(',').map(s => s.trim()).filter(Boolean) : COLNAMES.slice(5 - n);
@@ -291,25 +291,25 @@
                 const keptJob = f.a === f.b && f.a !== unknown && f.a !== other;
                 if (f.a !== unknown && f.b !== unknown) { all += f.v; if (f.a === f.b) same += f.v; }
                 const c = o.colorBy === 'kept' ? (keptJob ? '#2e7d32' : '#b8bec7') : colJob(f.a);
-                svg += `<path d="M${r2(x0)} ${r2(ya)}C${r2(xm)} ${r2(ya)} ${r2(xm)} ${r2(yb)} ${r2(x1)} ${r2(yb)}L${r2(x1)} ${r2(yb + h)}C${r2(xm)} ${r2(yb + h)} ${r2(xm)} ${r2(ya + h)} ${r2(x0)} ${r2(ya + h)}Z" fill="${c}" fill-opacity="${o.colorBy === 'kept' && keptJob ? .6 : .38}" data-dfa-flow="">${tip(`${names[i] || i18n('Gén. {g}', {g: String(i + 1)})} ${f.a.toLowerCase()} → ${(names[i + 1] || i18n('Gén. {g}', {g: String(i + 2)})).toLowerCase()} ${f.b.toLowerCase()} : ${plural(f.v, 'lignée')}`)}</path>`;
+                svg += `<path d="M${r2(x0)} ${r2(ya)}C${r2(xm)} ${r2(ya)} ${r2(xm)} ${r2(yb)} ${r2(x1)} ${r2(yb)}L${r2(x1)} ${r2(yb + h)}C${r2(xm)} ${r2(yb + h)} ${r2(xm)} ${r2(ya + h)} ${r2(x0)} ${r2(ya + h)}Z" fill="${c}" fill-opacity="${o.colorBy === 'kept' && keptJob ? .6 : .38}" data-dfa-flow="">${tip(`${names[i] || i18n('Gén. {g}', {g: String(i + 1)})} ${f.a.toLowerCase()} → ${(names[i + 1] || i18n('Gén. {g}', {g: String(i + 2)})).toLowerCase()} ${f.b.toLowerCase()} : ${plural(f.v, word)}`)}</path>`;
             }
             kept.push(all ? same / all : null);
         }
         for (let i = 0; i < n; i++) {
             pos[i].forEach((p, j) => {
                 const c = colJob(j), x = colX(i), share = totals[i] ? 100 * col[i].get(j) / totals[i] : 0;
-                svg += `<rect x="${r2(x)}" y="${r2(p.y)}" width="${r2(nodeW)}" height="${r2(Math.max(1, p.h))}" fill="${c}" data-dfa-node="">${tip(`${names[i] || 'Gén. ' + (i + 1)} : ${j} — ${plural(col[i].get(j), 'lignée')} (${fmt(share, 0)} %)`)}</rect>`;
+                svg += `<rect x="${r2(x)}" y="${r2(p.y)}" width="${r2(nodeW)}" height="${r2(Math.max(1, p.h))}" fill="${c}" data-dfa-node="">${tip(`${names[i] || 'Gén. ' + (i + 1)} : ${j} — ${plural(col[i].get(j), word)} (${fmt(share, 0)} %)`)}</rect>`;
                 if (p.h >= fs * .75 && o.labels !== false) {
-                    const room = i === n - 1 ? colX(i) - colX(i - 1) - nodeW - 6 : colX(i + 1 <= n - 1 ? i + 1 : i) - x - nodeW - 6, lab = `${j}${o.values !== false ? ` ${fmt(col[i].get(j), 0)}` : ''}`;
+                    const room = i === n - 1 ? colX(i) - colX(i - 1) - nodeW - 6 : colX(i + 1 <= n - 1 ? i + 1 : i) - x - nodeW - 6, lab = `${j}${o.values !== false ? ` ${o.pct ? fmt(share, 0) + ' %' : fmt(col[i].get(j), 0)}` : ''}`;
                     svg += i === n - 1 ? T(x - 4, p.y + p.h / 2, cut(lab, room * .9, fs * .8), {size: fs * .8, anchor: 'end', halo: '#ffffff'}) : T(x + nodeW + 4, p.y + p.h / 2, cut(lab, room * .55, fs * .8), {size: fs * .8, halo: '#ffffff'});
                 }
             });
         }
         const keptTxt = kept.map((v, i) => (v === null ? '' : `${names[i + 1] || i18n('gén. {g}', {g: String(i + 2)})} : ${fmt(v * 100, 0)} %`)).filter(Boolean);
         let h = H;
-        if (keptTxt.length && o.summary !== false) { wrap(i18n('Même métier que la génération d’avant — {list}', {list: keptTxt.join(' · ')}), W - 4, fs * .85).forEach(l => { svg += T(0, h + fs * .8, l, {size: fs * .85, fill: '#555'}); h += fs * 1.3; }); h += fs * .3; }
+        if (keptTxt.length && o.summary !== false) { wrap(i18n(o.mode === 'ages' ? 'Le même qu’à l’âge d’avant — {list}' : 'Même métier que la génération d’avant — {list}', {list: keptTxt.join(' · ')}), W - 4, fs * .85).forEach(l => { svg += T(0, h + fs * .8, l, {size: fs * .85, fill: '#555'}); h += fs * 1.3; }); h += fs * .3; }
         const legend = o.colorBy === 'kept' ? [{label: 'Même métier que le père', color: '#2e7d32'}, {label: 'Métier différent', color: '#b8bec7'}] : order.slice(0, 18).map(j => ({label: j, color: colJob(j)}));
-        return {h, svg, legend, desc: i18n('Métiers sur {n} générations : {l}.', {n, l: plural(paths.reduce((a, p) => a + p.v, 0), 'lignée')})};
+        return {h, svg, legend, desc: o.mode === 'ages' ? i18n('Les mêmes personnes à {n} âges : {l}.', {n, l: plural(paths.reduce((a, p) => a + p.v, 0), 'personne')}) : i18n('Métiers sur {n} générations : {l}.', {n, l: plural(paths.reduce((a, p) => a + p.v, 0), 'lignée')})};
     }
     function sampleOcc() {
         const J = ['Laboureur', 'Journalier', 'Tisserand', 'Meunier', 'Marchand', 'Ouvrier', 'Employé'], out = []; let s = 11; const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647;
@@ -524,40 +524,56 @@
     }
 
     /* ═════════ D8 🏘️ Frise des lieux de vie ═════════ */
+    // 💍 trajectoires de vie (lot B) : l'état civil de chaque morceau de vie (clé ou texte libre), ses couleurs par défaut
+    const LIFE_STATES = {single: ['Célibataire', '#9ecae1'], married: ['Marié(e)', '#4e79a7'], remarried: ['Remarié(e)', '#59a14f'], widowed: ['Veuf ou veuve', '#e15759'], divorced: ['Divorcé(e)', '#b07aa1']};
+    const stateOf = v => { const t = fold(v); if (!t) return ''; const k = Object.keys(LIFE_STATES).find(x => x === t) || (/^celib/.test(t) ? 'single' : /^remari/.test(t) ? 'remarried' : /^mari|^epou/.test(t) ? 'married' : /^veu/.test(t) ? 'widowed' : /^divor/.test(t) ? 'divorced' : '');
+        return k ? i18n(LIFE_STATES[k][0]) : str(v, 60); };
+    const stateColor = lab => { const e = Object.values(LIFE_STATES).find(([l]) => i18n(l) === lab); return e ? e[1] : ''; };
     function placestrip(spec, W, fs) {
         const o = spec.o || {}, level = o.level || 'place';
         const people = new Map();
+        const unknownOf = {status: i18n('État civil inconnu'), job: i18n('Métier inconnu'), country: 'Pays inconnu'}[level] || 'Lieu inconnu';
         rows(spec, 'rows', 5000).forEach((r, i) => {
             const name = str(r.person, 120), a = when(r.start); if (!name || a === null) return;
             const key = (pid(r.pid) || '') + '|' + fold(name);
-            if (!people.has(key)) people.set(key, {name, pid: pid(r.pid), segs: [], i});
-            const place = level === 'county' ? str(r.county, 60) || str(r.place, 60) : level === 'country' ? str(r.country, 60) || 'Pays inconnu' : str(r.place, 60);
-            people.get(key).segs.push({a, b: when(r.end), place: place || 'Lieu inconnu', full: [str(r.place, 60), str(r.county, 60), str(r.country, 60)].filter(Boolean).join(', '), what: str(r.what, 120)});
+            if (!people.has(key)) people.set(key, {name, pid: pid(r.pid), segs: [], i, birth: null});
+            const pp = people.get(key), bb = when(r.birth); if (bb !== null && pp.birth === null) pp.birth = bb;
+            const place = level === 'county' ? str(r.county, 60) || str(r.place, 60) : level === 'country' ? str(r.country, 60) || 'Pays inconnu' : level === 'status' ? stateOf(r.status) : level === 'job' ? str(r.job, 60) : str(r.place, 60);
+            pp.segs.push({a, b: when(r.end), place: place || unknownOf, full: [level === 'status' ? stateOf(r.status) : level === 'job' ? str(r.job, 60) : '', str(r.place, 60), str(r.county, 60), str(r.country, 60)].filter(Boolean).join(', '), what: str(r.what, 120)});
         });
         let list = [...people.values()];
         if (!list.length) return empty(W, fs, 'Ajoute des lieux : la personne, le lieu, le début et la fin (années ou dates).');
-        list.forEach(p => { p.segs.sort((x, y) => x.a - y.a); p.segs.forEach((s, i) => { if (s.b === null || s.b < s.a) { const nx = p.segs[i + 1]; s.open = !nx; s.b = nx ? nx.a : s.a + 1; } }); p.a = p.segs[0].a; });
-        if (o.sort === 'birth') list.sort((x, y) => x.a - y.a);
+        list.forEach(p => { p.segs.sort((x, y) => x.a - y.a); p.segs.forEach((s, i) => { if (s.b === null || s.b < s.a) { const nx = p.segs[i + 1]; s.open = !nx; s.b = nx ? nx.a : s.a + 1; } }); p.a = p.segs[0].a; p.z = p.segs[p.segs.length - 1].b; if (p.birth === null) p.birth = p.a; });
+        // l'axe des âges (lot B) : chaque bande part de la naissance de la personne
+        const ages = o.axis === 'age';
+        if (ages) list.forEach(p => p.segs.forEach(s => { s.ya = s.a; s.yb = s.b; s.a -= p.birth; s.b -= p.birth; }));
+        if (o.sort === 'birth') list.sort((x, y) => x.a - y.a || x.birth - y.birth);
+        else if (o.sort === 'life') list.sort((x, y) => (y.z - y.a) - (x.z - x.a));
+        else if (o.sort === 'state50') { const at = p => { const t = ages ? 50 : p.birth + 50, sg = p.segs.find(s => t >= s.a && t < s.b); return sg ? sg.place : '~'; }; list.sort((x, y) => at(x).localeCompare(at(y), 'fr') || x.birth - y.birth); }
         list = list.slice(0, 80);
         const tot = new Map(); list.forEach(p => p.segs.forEach(s => tot.set(s.place, (tot.get(s.place) || 0) + (s.b - s.a))));
         const top = clamp(Math.round(num(o.top) || 14), 2, 40), keep = new Set([...tot.entries()].sort((a, b) => b[1] - a[1]).slice(0, top).map(([k]) => k)), cmap = catColors(spec);
-        const order = [...keep], colOf = pl => cmap.get(fold(pl)) || (keep.has(pl) ? pick(spec, order.indexOf(pl)) : '#c4c9d0');
-        const from = num(o.from) || Math.floor(Math.min(...list.map(p => p.a)) / 10) * 10, to = num(o.to) || Math.ceil(Math.max(...list.flatMap(p => p.segs.map(s => s.b)), from + 10) / 10) * 10;
+        const order = [...keep], colOf = pl => cmap.get(fold(pl)) || (level === 'status' && stateColor(pl)) || (pl === unknownOf ? '#c4c9d0' : keep.has(pl) ? pick(spec, order.indexOf(pl)) : '#c4c9d0');
+        const from = num(o.from) || (ages ? 0 : Math.floor(Math.min(...list.map(p => p.a)) / 10) * 10), to = num(o.to) || Math.ceil(Math.max(...list.flatMap(p => p.segs.map(s => s.b)), from + 10) / 10) * 10;
         const labW = Math.min(W * .3, Math.max(...list.map(p => textW(p.name, fs * .85))) + 10), pw = Math.max(60, W - labW - 8);
         const X = v => labW + (clamp(v, from, to) - from) / Math.max(1e-6, to - from) * pw;
         const bh = clamp(num(o.barH) || fs * 1.7, 6, 60), gap = bh * .3, H0 = list.length * (bh + gap);
         let svg = yearAxis(from, to, X, 0, H0, fs, pw);
+        if (ages) svg += T(W - 2, H0 + fs * 1.9, i18n('âge (années)'), {size: fs * .75, anchor: 'end', op: .7});
         list.forEach((p, li) => {
             const y = li * (bh + gap);
             svg += `<g${PID(p.pid)}>${tip(p.name)}${T(labW - 6, y + bh / 2, cut(p.name, labW - 8, fs * .85), {size: fs * .85, anchor: 'end'})}</g>`;
             p.segs.forEach(s => {
                 const x0 = X(s.a), x1 = X(s.b), c = colOf(s.place), w = Math.max(1.5, x1 - x0);
-                svg += `<rect x="${r2(x0)}" y="${r2(y)}" width="${r2(w)}" height="${r2(bh)}" fill="${c}"${s.open ? ' fill-opacity=".45" stroke-dasharray="3 2"' : ''} stroke="#fff" stroke-width=".8"${PID(p.pid)} data-dfa-seg="">${tip(`${p.name} : ${s.full || s.place} · ${Math.floor(s.a)} – ${s.open ? '?' : Math.floor(s.b)}${s.what ? ` (${s.what})` : ''}`)}</rect>`;
+                const span = ages ? `${i18n('{n} ans', {n: Math.floor(s.a)})} – ${s.open ? '?' : i18n('{n} ans', {n: Math.floor(s.b)})} (${Math.floor(s.ya)} – ${s.open ? '?' : Math.floor(s.yb)})` : `${Math.floor(s.a)} – ${s.open ? '?' : Math.floor(s.b)}`;
+                svg += `<rect x="${r2(x0)}" y="${r2(y)}" width="${r2(w)}" height="${r2(bh)}" fill="${c}"${s.open ? ' fill-opacity=".45" stroke-dasharray="3 2"' : ''} stroke="#fff" stroke-width=".8"${PID(p.pid)} data-dfa-seg="">${tip(`${p.name} : ${s.full || s.place} · ${span}${s.what ? ` (${s.what})` : ''}`)}</rect>`;
                 if (o.labels !== false && w > fs * 2.5 && bh >= fs * .9) svg += T(x0 + 3, y + bh / 2, cut(s.place, w - 5, fs * .72), {size: fs * .72, fill: contrast(c)});
             });
         });
-        const legend = [...order.slice(0, 24).map(pl => ({label: pl, color: colOf(pl)})), ...(tot.size > keep.size ? [{label: 'Autres lieux', color: '#c4c9d0'}] : [])];
-        return {h: H0 + fs * 2, svg, legend, desc: i18n('Lieux de vie de {n} : {l}.', {n: plural(list.length, 'personne'), l: plural(tot.size, 'lieu', 'lieux')})};
+        const other = {status: i18n('Autres états'), job: i18n('Autres métiers')}[level] || 'Autres lieux';
+        const legend = [...order.slice(0, 24).map(pl => ({label: pl, color: colOf(pl)})), ...(tot.size > keep.size ? [{label: other, color: '#c4c9d0'}] : [])];
+        const desc = level === 'status' ? i18n('Trajectoires de vie de {n}.', {n: plural(list.length, 'personne')}) : level === 'job' ? i18n('Métiers au fil de la vie de {n}.', {n: plural(list.length, 'personne')}) : i18n('Lieux de vie de {n} : {l}.', {n: plural(list.length, 'personne'), l: plural(tot.size, 'lieu', 'lieux')});
+        return {h: H0 + fs * (ages ? 2.6 : 2), svg, legend, desc};
     }
     const samplePlaces = () => [
         ['Jean MARTIN', 'Vitré', '1792', '1815'], ['Jean MARTIN', 'Rennes', '1815', '1842'], ['Jean MARTIN', 'Vitré', '1842', '1868'],
@@ -578,6 +594,12 @@
     const SCOPE = (def = '') => `<label>Personnes comptées${sel('scope', [['', 'Toute ma base'], ['anc', 'Les ancêtres de la personne de départ'], ['desc', 'Les descendants de la personne de départ']], def)}</label>`;
     function bindApp(pane, run) {
         const btn = pane.querySelector('[data-dfa-go]'), msg = pane.querySelector('[data-dfa-msg]'); if (!btn) return;
+        // lot B : les critères (« ＋ Critère ») des sources calculées dans l'arbre, montrés seulement quand ils servent
+        // le bloc n'existe que quand il sert (un seul bloc d'options visible, celui-ci après le bloc commun)
+        const showCrit = () => { const d = pane.querySelector('[data-dfa-crit]'); if (!d) return; const m = val(pane, 'mode'), src = val(pane, 'source'), on = m === 'group' || src === 'ages'; d.hidden = !on;
+            if (on && !d.firstElementChild && ext.diagramLotB) { d.innerHTML = ext.diagramLotB.critHtml(d.dataset.dfaCrit || 'falieux', {pop: d.dataset.dfaCrit !== 'fametiers'}); ext.diagramLotB.critBind(d); }
+            if (!on) d.innerHTML = ''; if (on) btn.before(d); pane.querySelectorAll('[data-dfa-ages]').forEach(x => { x.hidden = src !== 'ages'; }); pane.querySelectorAll('[data-dfa-lines]').forEach(x => { x.hidden = src === 'ages'; }); };
+        pane.addEventListener('change', e => { if (e.target.matches('[data-dfa="mode"], [data-dfa="source"]')) showCrit(); }); showCrit();
         btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.innerHTML = window.LCNDA_UI.spinner('Lecture de ta généalogie…', {inline: true});
             try { const t = await run(); A().toast?.(t || 'Données prises dans ta base.'); if (msg?.isConnected) msg.textContent = ''; } catch (e) { if (msg) msg.textContent = '⚠️ ' + (e.message || e); } finally { btn.disabled = false; } });
     }
@@ -605,12 +627,14 @@
         }),
     };
     const occApp = {
-        html: () => box('🔀 Les métiers de ma base', 'Chaque lignée (père, grand-père… ou parents) donne un chemin de métiers ; le métier vient de la fiche ou du premier événement « Profession ».', `<label>Lignées${sel('chain', [['male', 'Père → fils (lignées d’hommes)'], ['parent', 'Parents → enfants (pères et mères)']], 'male')}</label><label>Générations${GENS('gens', 4, 3, 5)}</label>${SCOPE()}${rootField()}`),
+        html: () => box('🔀 Les métiers de ma base', 'Chaque lignée (père, grand-père… ou parents) donne un chemin de métiers ; le métier vient de la fiche ou du premier événement « Profession ».', `<label>${esc(i18n('Les colonnes'))}${sel('source', [['', i18n('Les générations (lignées)')], ['ages', i18n('Les mêmes personnes à plusieurs âges (20, 40, 60 ans…)')]])}</label><span data-dfa-lines><label>Lignées${sel('chain', [['male', 'Père → fils (lignées d’hommes)'], ['parent', 'Parents → enfants (pères et mères)']], 'male')}</label><label>Générations${GENS('gens', 4, 3, 5)}</label></span>`
+            + `<span data-dfa-ages hidden><label>${esc(i18n('Ce qu’on suit'))}${sel('track', [['status', i18n('L’état civil')], ['place', i18n('La commune')], ['job', i18n('Le métier')]], 'status')}</label><label>${esc(i18n('Âges des colonnes'))}${sel('ages', [['20,40,60', '20, 40, 60'], ['20,30,40,50,60', '20, 30, 40, 50, 60'], ['25,50,75', '25, 50, 75'], ['15,30,45,60,75', '15, 30, 45, 60, 75']].map(([k, l]) => [k, i18n('{a} ans', {a: l})]), '20,40,60')}</label></span>${SCOPE()}${rootField()}<div data-dfa-crit="fametiers" hidden></div>`),
         bind: (pane, io) => bindApp(pane, async () => {
+            if (val(pane, 'source') === 'ages') return agesFlow(pane, io);
             const r = await getF({what: 'occflow', chain: val(pane, 'chain'), gens: val(pane, 'gens'), scope: val(pane, 'scope'), root: rootOf(pane)});
             if (!r.rows?.length) throw new Error(r.with_job ? 'Aucune lignée avec au moins deux métiers connus.' : 'Aucun métier dans ta base (fiche ou événement « Profession »).');
             const n = r.gens, s = io.spec(); s.rows = r.rows.map(x => { const o = {value: String(x.value)}; for (let i = 1; i <= 5; i++) o['g' + i] = i <= n ? x['g' + i] || '' : ''; return o; });
-            s.o = {...s.o, colNames: r.chain === 'male' ? COLNAMES.slice(5 - n).join(', ') : ['Trisaïeuls', 'Arrière-grands-parents', 'Grands-parents', 'Parents', 'Enfants'].map(x => i18n(x)).slice(5 - n).join(', ')};
+            s.o = {...s.o, mode: '', colNames: r.chain === 'male' ? COLNAMES.slice(5 - n).join(', ') : ['Trisaïeuls', 'Arrière-grands-parents', 'Grands-parents', 'Parents', 'Enfants'].map(x => i18n(x)).slice(5 - n).join(', ')};
             titleIf(s, K.fametiers.sample(), r.chain === 'male' ? 'Métiers de père en fils' : 'Métiers de parents à enfants'); io.apply(s);
             return i18n('{n} lignées prises dans ta base.', {n: r.paths});
         }),
@@ -659,10 +683,11 @@
         }),
     };
     const placesApp = {
-        html: () => box('🏘️ Les lieux de vie de ma base', 'Pour chaque personne, ses lieux dans l’ordre du temps : naissance, baptême, domiciles, recensements, mariage, métier, décès… Une couleur par commune.', `<label>Quelles personnes${sel('mode', [['anc', 'La personne de départ et ses ancêtres'], ['family', 'Ses parents, elle et ses enfants'], ['ids', 'Les personnes que je choisis']], 'anc')}</label>${rootField()}<label>Générations d’ancêtres${GENS('gens', 3, 1, 6)}</label><span class="pk-lab">Personnes (pour « que je choisis »)</span>${PK('dfa_ids', {multiple: true})}`),
+        html: () => box('🏘️ Les lieux de vie de ma base', 'Pour chaque personne, ses lieux dans l’ordre du temps : naissance, baptême, domiciles, recensements, mariage, métier, décès… Une couleur par commune.', `<label>${esc(i18n('Ce qu’on suit'))}${sel('track', [['', 'Les lieux de vie'], ['status', 'L’état civil (célibataire, marié, veuf…) : trajectoires de vie'], ['job', 'Les métiers']].map(([k, l]) => [k, i18n(l)]))}</label><label>Quelles personnes${sel('mode', [['anc', 'La personne de départ et ses ancêtres'], ['family', 'Ses parents, elle et ses enfants'], ['ids', 'Les personnes que je choisis'], ['group', i18n('Un groupe de personnes (critères)')]], 'anc')}</label>${rootField()}<label>Générations d’ancêtres${GENS('gens', 3, 1, 6)}</label><span class="pk-lab">Personnes (pour « que je choisis »)</span>${PK('dfa_ids', {multiple: true})}<div data-dfa-crit="falieux" hidden></div>`),
         bind: (pane, io) => bindApp(pane, async () => {
-            const mode = val(pane, 'mode'), ids = String(pane.querySelector('[name="dfa_ids"]')?.value || '').split(',').map(Number).filter(x => x > 0);
+            const mode = val(pane, 'mode'), ids = String(pane.querySelector('[name="dfa_ids"]')?.value || '').split(',').map(Number).filter(x => x > 0), track = val(pane, 'track');
             if (mode === 'ids' && !ids.length) throw new Error('Choisis au moins une personne dans le menu.');
+            if (track || mode === 'group') return lifeTracks(pane, io, {mode, ids, track: track || 'place'});
             const r = await getF({what: 'places', mode: mode === 'family' ? 'family' : 'anc', ids: mode === 'ids' ? ids.join(',') : '', root: rootOf(pane), gens: val(pane, 'gens')});
             if (!r.rows?.length) throw new Error('Aucun événement avec un lieu pour ces personnes.');
             const s = io.spec(); s.rows = r.rows.map(x => ({person: x.person, place: x.place, start: x.start, end: x.end, county: x.county, country: x.country, what: x.what, pid: x.pid}));
@@ -670,6 +695,37 @@
             return i18n('{n} personnes et {l} lieux pris dans ta base.', {n: r.people, l: r.rows.length});
         }),
     };
+
+    /** 🔀 diagramme alluvial (lot B) : les mêmes personnes à plusieurs âges ; le groupe vient du bloc commun, les critères du nôtre */
+    async function agesFlow(pane, io) {
+        const LB = ext.diagramLotB; if (!LB) throw new Error('Données inconnues.');
+        const ages = val(pane, 'ages').split(',').map(Number).filter(a => a > 0 && a < 120).slice(0, 5), track = val(pane, 'track') || 'status';
+        const [tr, ids] = await Promise.all([LB.tree(), LB.critIds(pane)]);
+        const rows2 = LB.agesPaths(tr, tr.people.filter(p => !ids || ids.has(p.id)), ages, track);
+        if (!rows2.length) throw new Error(i18n('Rien trouvé dans l’arbre pour ce choix.'));
+        const s = io.spec(); s.rows = rows2; if (track === 'status') s.cats = Object.values(LB.STATUS).map(([l, c]) => ({value: i18n(l), color: c})); s.o = {...(s.o || {}), colNames: ages.map(a => i18n('À {n} ans', {n: a})).join(', '), mode: 'ages', unknown: i18n('Inconnu'), hideUnknown: false};
+        titleIf(s, K.fametiers.sample(), {status: i18n('L’état civil des mêmes personnes à {a} ans', {a: ages.join(', ')}), place: i18n('Où vivaient les mêmes personnes à {a} ans', {a: ages.join(', ')}), job: i18n('Le métier des mêmes personnes à {a} ans', {a: ages.join(', ')})}[track]); io.apply(s);
+        return i18n('{n} prises dans ta base.', {n: plural(rows2.reduce((a, r) => a + Number(r.value), 0), 'personne')});
+    }
+    /** 💍 trajectoires de vie, métiers, lieux pour un groupe (lot B) : calculés dans l'arbre léger (heritage-diagram-lot-b.js) */
+    async function lifeTracks(pane, io, {mode, ids, track}) {
+        const LB = ext.diagramLotB; if (!LB) throw new Error('Données inconnues.');
+        const [tr, group] = await Promise.all([LB.tree(), mode === 'group' ? LB.critIds(pane.querySelector('[data-dfa-crit]')) : null]), root = rootOf(pane);
+        let who = [];
+        if (mode === 'group') who = tr.people.filter(p => !group || group.has(p.id)).filter(p => LB.birth(p) !== null).sort((a, b) => LB.birth(a) - LB.birth(b));
+        else if (mode === 'ids') who = ids.map(id => tr.byId.get(id)).filter(Boolean);
+        else if (mode === 'family') { const p = tr.byId.get(root); who = p ? [tr.byId.get(p.father), tr.byId.get(p.mother), p, ...(tr.kids.get(p.id) || []).map(k => tr.byId.get(k))].filter(Boolean) : []; }
+        else { const g = Number(val(pane, 'gens')) || 3, all = [...LB.walk(tr, root, true, g)]; who = all.map(id => tr.byId.get(id)).filter(Boolean); }
+        who = [...new Map(who.map(p => [p.id, p])).values()].slice(0, 80);
+        const r1 = v => String(Math.round(v * 10) / 10), out = [];
+        who.forEach(p => { const b = LB.birth(p); if (b === null) return;
+            const segs = track === 'status' ? LB.statusSegs(tr, p) : track === 'job' ? LB.jobSegs(tr, p) : LB.placeSegs(tr, p);
+            segs.forEach(sg => out.push({person: LB.nm(p), place: sg.place || '', status: sg.state || '', job: sg.job || '', start: r1(sg.a), end: sg.b === null ? '' : r1(sg.b), county: '', country: '', what: '', birth: r1(b), pid: p.id})); });
+        if (!out.length) throw new Error(i18n('Rien trouvé dans l’arbre pour ce choix.'));
+        const s = io.spec(); s.rows = out; s.o = {...(s.o || {}), level: track, ...(track === 'status' ? {axis: s.o?.axis || 'age'} : {})};
+        titleIf(s, K.falieux.sample(), track === 'status' ? i18n('Trajectoires de vie') : track === 'job' ? i18n('Les métiers au fil de la vie') : i18n('Les lieux de vie de la famille')); io.apply(s);
+        return i18n('{n} prises dans ta base.', {n: plural(new Set(out.map(r => r.pid)).size, 'personne')});
+    }
 
     /* ═════════ Les types ═════════ */
     const CATS = (label = 'Couleurs choisies (facultatif)', what = 'Valeur') => ({key: 'cats', label, cols: [C('value', what), C('color', 'Couleur', 'color')]});
@@ -692,7 +748,7 @@
             help: 'Les métiers d’une génération à l’autre : chaque bande suit des lignées, du trisaïeul au fils.',
             grids: [{key: 'rows', label: 'Les lignées (métier à chaque génération, du plus ancien au plus jeune)', cols: [C('g1', 'Génération 1'), C('g2', 'Génération 2'), C('g3', 'Génération 3'), C('g4', 'Génération 4'), C('g5', 'Génération 5'), C('value', 'Combien de lignées', 'number')]}, CATS('Couleur de chaque métier (facultatif)', 'Métier')],
             options: [C('top', 'Métiers montrés (les autres : « Autres métiers »)', 'range', {min: 2, max: 20, def: 7}), C('colorBy', 'Couleur des bandes', 'select', {choices: [['', 'Le métier de départ'], ['kept', 'Vert si le métier est gardé']]}), C('hideUnknown', 'Cacher les métiers inconnus', 'check'),
-                C('colNames', 'Noms des colonnes (séparés par des virgules)'), C('labels', 'Noms des métiers', 'check', {def: true}), C('values', 'Nombres à côté des noms', 'check', {def: true}), C('summary', 'Phrase « même métier que la génération d’avant »', 'check', {def: true}),
+                C('colNames', 'Noms des colonnes (séparés par des virgules)'), C('labels', 'Noms des métiers', 'check', {def: true}), C('values', 'Nombres à côté des noms', 'check', {def: true}), C('pct', 'En % de la colonne (au lieu des nombres)', 'check'), C('summary', 'Phrase « même métier que la génération d’avant »', 'check', {def: true}),
                 C('nodeW', 'Largeur des colonnes', 'range', {min: 4, max: 40, def: 14}), C('gap', 'Espace entre les métiers', 'range', {min: 0, max: 30, def: 8}), C('unknown', 'Nom des métiers inconnus', 'text', {def: 'Inconnu'}), H_OPT],
             sample: () => ({o: {title: i18n('Métiers de père en fils'), colNames: 'Arrière-grand-père, Grand-père, Père, Fils'}, rows: sampleOcc()})},
         famariages: {icon: '💍', label: 'Rayon des mariages (distance entre les villages des époux)', group: 'Généalogie', render: radius, legend: 'bottom', fromApp: radiusApp,
@@ -723,9 +779,11 @@
             sample: () => ({o: {title: i18n('Les naissances de quatre mères de la famille')}, rows: sampleSpacing()})},
         falieux: {icon: '🏘️', label: 'Frise des lieux de vie (une bande par personne)', group: 'Frises', render: placestrip, legend: 'bottom', fromApp: placesApp,
             help: 'Une bande par personne, colorée selon la commune (ou le département, le pays) où elle vivait à chaque époque.',
-            grids: [{key: 'rows', label: 'Les lieux (une ligne par lieu et par période)', cols: [C('person', 'Personne'), C('place', 'Commune'), C('start', 'De (année ou date)'), C('end', 'À'), C('county', 'Département'), C('country', 'Pays'), C('what', 'Pourquoi (naissance, recensement…)')]}, CATS('Couleur de chaque lieu (facultatif)', 'Lieu')],
-            options: [C('level', 'Une couleur par', 'select', {choices: [['place', 'Commune'], ['county', 'Département'], ['country', 'Pays']], def: 'place'}), C('top', 'Lieux en couleur (les autres en gris)', 'range', {min: 2, max: 40, def: 14}), C('labels', 'Nom du lieu dans la bande', 'check', {def: true}),
-                C('sort', 'Ordre', 'select', {choices: [['', 'Comme dans le tableau'], ['birth', 'Par date de début']]}), C('barH', 'Épaisseur des bandes', 'range', {min: 6, max: 40, def: 20}), C('from', 'Début (année, vide = auto)', 'number'), C('to', 'Fin (année, vide = auto)', 'number')],
+            grids: [{key: 'rows', label: 'Les lieux (une ligne par lieu et par période)', cols: [C('person', 'Personne'), C('place', 'Commune'), C('start', 'De (année ou date)'), C('end', 'À'), C('county', 'Département'), C('country', 'Pays'), C('what', 'Pourquoi (naissance, recensement…)'),
+                C('status', 'État civil', 'select', {choices: [['', '—'], ...Object.entries(LIFE_STATES).map(([k, [l]]) => [k, l])]}), C('job', 'Métier'), C('birth', 'Naissance (pour l’axe des âges)')]}, CATS('Couleur de chaque lieu (facultatif)', 'Lieu')],
+            options: [C('level', 'Une couleur par', 'select', {choices: [['place', 'Commune'], ['county', 'Département'], ['country', 'Pays'], ['status', 'État civil (trajectoires de vie)'], ['job', 'Métier']], def: 'place'}),
+                C('axis', 'Axe', 'select', {choices: [['', 'Les années'], ['age', 'L’âge']]}), C('top', 'Lieux en couleur (les autres en gris)', 'range', {min: 2, max: 40, def: 14}), C('labels', 'Nom du lieu dans la bande', 'check', {def: true}),
+                C('sort', 'Ordre', 'select', {choices: [['', 'Comme dans le tableau'], ['birth', 'Par date de début'], ['life', 'Par durée de vie'], ['state50', 'Par état à 50 ans']]}), C('barH', 'Épaisseur des bandes', 'range', {min: 6, max: 40, def: 20}), C('from', 'Début (année ou âge, vide = auto)', 'number'), C('to', 'Fin (année ou âge, vide = auto)', 'number')],
             sample: () => ({o: {title: i18n('Où vivait la famille Martin')}, rows: samplePlaces()})},
     };
     for (const [k, kind] of Object.entries(NEW)) { if (!K[k]) K[k] = kind; }

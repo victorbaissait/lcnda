@@ -45,7 +45,12 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
     try {
         await page.goto(base); await page.waitForFunction(() => window.LCNDA_APP?.state?.bootstrap);
         await page.evaluate(() => { location.hash = '#maintenance'; }); await page.waitForTimeout(1200);
-        const go = async k => { await page.locator(`[data-side-value="${k}"]`).first().click(); await page.waitForTimeout(1200); };
+        // la page est redessinée après un aller-retour au serveur : on attend la nouvelle (machine chargée), puis son découpage en onglets (refait à 0 et 400 ms)
+        const go = async k => {
+            await page.evaluate(() => { const pg = document.querySelector('#workspace > .page'); if (pg) pg.dataset.essaiAvant = '1'; });
+            await page.locator(`[data-side-value="${k}"]`).first().click();
+            await page.waitForFunction(k => window.LCNDA_APP.state.maintenanceTab === k && document.querySelector('#workspace > .page:not([data-essai-avant])'), k, {timeout: 20000});
+            await page.waitForTimeout(1200); };
         // ce qui se voit sur la page : cadres (par leur titre) et champs du formulaire (par leur nom)
         const seen = () => page.evaluate(() => { const pg = document.querySelector('#workspace > .page'), v = el => !!(el.offsetWidth || el.offsetHeight), out = [];
             const name = el => (el.querySelector(':scope > header h3, :scope > header h2, :scope > h3, h3, summary, legend')?.textContent || '').trim().replace(/\s*\?$/, ''); // le « ? » d'aide arrive parfois un peu après
@@ -97,8 +102,9 @@ $p = null; require 'lib/bootstrap.php'; db(); echo 'ok';`], {cwd: root, encoding
             const s = await seen(); assert.ok(has(s, /Messages après une action/)); assert.ok(has(s, /Forme des boutons/)); assert.ok(!has(s, /Mes thèmes/));
         });
         await t('Langue, dates et lecteur : un réglage changé ici est enregistré', async () => {
-            await go('look_theme'); const s = await seen(); // la langue, le calendrier et le lecteur : dans Thème et couleurs, après « Nom affiché »
-            const fs = s.filter(x => x.startsWith('f:')); assert.deepEqual(fs.slice(fs.indexOf('f:ownerLast'), fs.indexOf('f:ownerLast') + 4), ['f:ownerLast', 'f:interfaceLanguage', 'f:defaultCalendar', 'f:avSkipSeconds']);
+            await go('look_theme'); const s = await seen(); // dans Thème et couleurs : 🌐 la langue tout en haut ; le calendrier et le lecteur après « Nom affiché »
+            const fs = s.filter(x => x.startsWith('f:')); assert.equal(fs[0], 'f:interfaceLanguage', 'la langue en premier');
+            assert.deepEqual(fs.slice(fs.indexOf('f:ownerLast'), fs.indexOf('f:ownerLast') + 3), ['f:ownerLast', 'f:defaultCalendar', 'f:avSkipSeconds']);
             const v = await page.evaluate(() => { const sel = document.querySelector('select[name="defaultCalendar"]'); return [...sel.options].map(o => o.value).find(x => x !== sel.value); });
             await page.selectOption('select[name="defaultCalendar"]', v); await page.waitForTimeout(900);
             assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('genealogie-design') || '{}').defaultCalendar), v);

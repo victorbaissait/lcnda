@@ -1,0 +1,71 @@
+fr ¦ ro
+# 🔎 Poser une question, suite (lib/question_plus.php, assets/js/heritage-questions-plus.js) : fautes, dates, « moi », négations, OU, renvois, ⌘K
+« {a} » lu « {b} » ¦ „{a}” citit ca „{b}”
+vers {y} ({a}-{b}) ¦ în jurul anului {y} ({a}-{b})
+dans les années {y} ({a}-{b}) ¦ în anii {y} ({a}-{b})
+« moi » = la personne de départ : {name} ¦ „eu” = persoana de pornire: {name}
+qui est : {name} ¦ cine este: {name}
+« {a} » compris comme {b} ¦ „{a}” înțeles ca {b}
+dossiers de succession ¦ dosare de succesiune
+Aucun dossier de succession dans cette généalogie. ¦ Niciun dosar de succesiune în această genealogie.
+courriers sans réponse ¦ scrisori fără răspuns
+Courriers aux héritiers sans réponse : {n}. ¦ Scrisori către moștenitori fără răspuns: {n}.
+Aucun courrier de dossier n’attend de réponse. ¦ Nicio scrisoare din dosare nu așteaptă răspuns.
+échéances en retard ¦ termene depășite
+Dossiers avec des échéances en retard : {n}. ¦ Dosare cu termene depășite: {n}.
+Aucun dossier n’a d’échéance en retard. ¦ Niciun dosar nu are termene depășite.
+défunt : {name} ¦ defunct: {name}
+Aucun dossier de succession pour {name}. ¦ Niciun dosar de succesiune pentru {name}.
+⚖️ Rechercher les héritiers… ¦ ⚖️ Caută moștenitorii…
+Pièces notées « manquante » : {n}. La liste complète (en main, demandées, à demander) est dans l’onglet Pièces du dossier. ¦ Acte marcate „lipsă”: {n}. Lista completă (în mână, cerute, de cerut) este în fila Acte a dosarului.
+Aucune pièce notée « manquante ». La liste des pièces de chaque dossier est dans son onglet Pièces. ¦ Niciun act marcat „lipsă”. Lista fiecărui dosar este în fila sa Acte.
+pièces manquantes ¦ acte lipsă
+Héritiers introuvables ou qui ne répondent pas : {n}. ¦ Moștenitori de negăsit sau care nu răspund: {n}.
+Aucun héritier noté introuvable ou sans réponse. ¦ Niciun moștenitor marcat de negăsit sau fără răspuns.
+héritiers introuvables ¦ moștenitori de negăsit
+De qui ? Écris par exemple « les héritiers de Jean Dupont ». ¦ Ai cui? Scrie de exemplu „les héritiers de Jean Dupont”.
+héritiers de {name} ¦ moștenitorii lui {name}
+Aucun dossier de succession pour {name}. Le dossier calcule les héritiers d’après l’arbre. ¦ Niciun dosar de succesiune pentru {name}. Dosarul calculează moștenitorii pe baza arborelui.
+Dossier {d} : les héritiers n’ont pas encore été calculés. Ouvre le dossier pour faire le calcul. ¦ Dosarul {d}: moștenitorii nu au fost încă calculați. Deschide dosarul pentru calcul.
+Dossier {d} — héritiers d’après le dernier calcul enregistré : {n}. ¦ Dosarul {d} — moștenitori după ultimul calcul salvat: {n}.
+Branches encore à rechercher : {n}. ¦ Ramuri încă de cercetat: {n}.
+Actes ou documents à chercher pour {name} : {n}. Les 3 premiers ci-dessous ; la liste complète, avec où chercher et dans quelle série, est dans « Que manque-t-il ? ». ¦ Acte sau documente de căutat pentru {name}: {n}. Primele 3 mai jos; lista completă, cu unde și în ce serie să cauți, este în „Ce lipsește?”.
+Rien de connu à chercher pour {name}. ¦ Nimic cunoscut de căutat pentru {name}.
+actes à chercher ¦ acte de căutat
+où chercher ¦ unde să cauți
+« Où chercher ? » donne pour {name} les sites et les séries d’archives les plus utiles, et pourquoi. ¦ „Unde să cauți?” arată pentru {name} site-urile și seriile de arhivă cele mai utile, și de ce.
+« Où chercher ? » donne pour chaque personne les sites et les séries d’archives les plus utiles, et pourquoi. ¦ „Unde să cauți?” arată pentru fiecare persoană site-urile și seriile de arhivă cele mai utile, și de ce.
+doublons ¦ dubluri
+Le Contrôle de la base cherche les doublons probables (mêmes noms, mêmes dates, mêmes parents) et aide à les fusionner. ¦ Verificarea bazei caută dublurile probabile (aceleași nume, date, părinți) și te ajută să le unești.
+mort pendant la guerre, en âge de combattre ¦ mort în timpul războiului, la vârsta de luptă
+mort pendant la guerre ¦ mort în timpul războiului
+morts pendant {era} ¦ morți în timpul: {era}
+morts à la guerre ¦ căzuți în război
+Morts pendant {era} : {n}. ¦ Morți în timpul: {era}: {n}.
+Notés « Mort pour la France » : {n}. Morts pendant une guerre, en âge de combattre ou soldats (à vérifier) : {m}. ¦ Marcați „Mort pour la France”: {n}. Morți în timpul unui război, la vârsta de luptă sau soldați (de verificat): {m}.
+Dont « Mort pour la France » : {n}. ¦ Dintre care „Mort pour la France”: {n}.
+Pour les soldats : Mémoire des hommes et les registres matricules. ¦ Pentru soldați: Mémoire des hommes și registrele matricole.
+sans date de décès ¦ fără dată de deces
+sans date de naissance ¦ fără dată de naștere
+sans date de mariage ¦ fără dată de căsătorie
+sans parents connus ¦ fără părinți cunoscuți
+sans profession notée ¦ fără profesie notată
+qui ne sont pas des ancêtres ¦ care nu sunt strămoși
+pas {ev} à {place} ¦ nu „{ev}” în {place}
+vivants ou probablement vivants ¦ în viață sau probabil în viață
+pas à {place} ¦ nu în {place}
+recherche de nom : « {x} » ¦ căutare de nume: „{x}”
+orthographe proche ¦ ortografie apropiată
+femmes ¦ femei
+Réponse réunie : {a} {c} {b}. ¦ Răspuns combinat: {a} {c} {b}.
+Je n’ai pas tenu compte de : « {x} ». ¦ Nu am ținut cont de: „{x}”.
+Plusieurs “{w}” : choisir… ¦ Mai mulți „{w}”: alege…
+J’ai compris : {x} ¦ Am înțeles: {x}
+Question en français ¦ Întrebare în franceză
+Poser la question : « {q} » ¦ Pune întrebarea: „{q}”
+Questions dans la recherche rapide (⌘K) ¦ Întrebări în căutarea rapidă (⌘K)
+Répondre aux questions dans la recherche rapide ¦ Răspunde la întrebări în căutarea rapidă
+« les enfants de Pierre Mazaud » : la réponse courte s’affiche dans la liste ; sinon seulement « Poser la question » ¦ „les enfants de Pierre Mazaud”: răspunsul scurt apare în listă; altfel doar „Pune întrebarea”
+Pour aller plus loin, pose la question avec le nom de la personne voulue. ¦ Ca să mergi mai departe, pune întrebarea cu numele persoanei dorite.
+« {a} » cherché d’abord ¦ „{a}” căutat mai întâi
+« {a} » = {name} ¦ „{a}” = {name}

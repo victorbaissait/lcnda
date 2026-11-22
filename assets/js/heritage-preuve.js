@@ -113,7 +113,7 @@
             const open = by('conflict').filter(i => !i.resolution).length;
             box.innerHTML = `<div class="pv-top">
                 <div class="pv-people">${person(c.person)}${c.related ? `<span class="pv-arrow" aria-hidden="true">${c.subject === 'parent' ? '← enfant de' : c.subject === 'couple' ? '∞' : c.subject === 'identity' ? '= ?' : '·'}</span>${person(c.related)}` : ''}${c.event ? `<span class="pv-ev">📅 ${esc(c.event.label)}${c.event.date_text ? ' · ' + esc(c.event.date_text) : ''}${c.event.place ? ' · ' + esc(c.event.place) : ''}</span>` : ''}</div>
-                <span class="pv-tools"><button type="button" class="button small secondary" data-pv-print>🖨 Imprimer</button><button type="button" class="button small secondary" data-pv-doc title="Un document du traitement de texte, déjà rempli">📝 Dans le traitement de texte</button></span></div>
+                <span class="pv-tools"><button type="button" class="button small secondary" data-pv-print>🖨 Imprimer</button>${ext.openDiagramEditor && ext.diagramRender?.KINDS?.proofmap ? `<button type="button" class="button small secondary" data-pv-schema>📐 ${esc(i18n('Schéma de preuve'))}</button>` : ''}<button type="button" class="button small secondary" data-pv-doc title="Un document du traitement de texte, déjà rempli">📝 Dans le traitement de texte</button></span></div>
               <label class="pv-q"><span class="pk-lab">La question</span><textarea data-pv-question rows="2" maxlength="500" ${ro ? 'readonly' : ''}>${esc(c.question)}</textarea></label>
               <div class="pv-cert"><span class="pk-lab">Niveau de certitude</span><div class="segmented pv-cert-seg" role="radiogroup" aria-label="Niveau de certitude">${Object.entries(CERT).map(([k, v]) => `<button type="button" class="${c.certainty === k ? 'is-active' : ''}" data-pv-cert="${k}" aria-pressed="${c.certainty === k}" title="${esc(CERT_HELP[k])}" ${ro ? 'disabled' : ''}>${v[2]} ${esc(v[0])}</button>`).join('')}</div>
                 <p class="ui-hint">${certBadge(c.certainty)} ${esc(CERT_HELP[c.certainty] || '')}${c.subject === 'parent' && c.link ? ` · ${i18n('🛡 solidité du lien :')} ${solBadge(c.link.level)}${c.certainty === 'tocheck' ? ' ' + i18n('(calculée : le dossier comptera dès qu’il aura une conclusion)') : ''}` : ''}</p></div>
@@ -156,6 +156,7 @@
                 await reload(); return;
             }
             if (b.dataset.pvPrint !== undefined) return printCase(view.c);
+            if (b.dataset.pvSchema !== undefined) return schemaOf(view.c);
             if (b.dataset.pvDoc !== undefined) return textDoc(view.c);
             if (b.dataset.pvJournal !== undefined) { dlg.close(); if (ext.journal?.open) ext.journal.open(); else { S().researchKind = 'journal'; A().setModule('recherche'); } return; }
             if (b.dataset.pvPerson) { dlg.close(); A().openPersonById ? A().openPersonById(Number(b.dataset.pvPerson)) : (S().currentPersonId = Number(b.dataset.pvPerson), A().setModule('personnes')); }
@@ -219,6 +220,17 @@
             ${ch.conflicts !== false ? `<h2>⚡ Désaccords entre les sources</h2>${list('conflict', 'Aucun désaccord.')}` : ''}
             <h2>✍ Conclusion</h2>${c.conclusion ? c.conclusion.split(/\n{2,}/).map(p => `<p>${esc(p).replace(/\n/g, '<br>')}</p>`).join('') : '<p><i>Pas encore écrite.</i></p>'}
             ${ch.guide ? `<h2>💡 Comment raisonner</h2><p>${esc(GUIDE_INTRO)}</p><ol>${GUIDE.map(([, t, d]) => `<li><b>${esc(t)}</b> — ${esc(d)}</li>`).join('')}</ol>` : ''}`;
+    }
+    /** 📐 le dossier dessiné en schéma de preuve (type « proofmap » de heritage-diagram-lot-c.js), dans Mes diagrammes */
+    async function schemaOf(c) {
+        const K = ext.diagramRender?.KINDS?.proofmap; if (!K || !ext.openDiagramEditor || !c) return;
+        try {
+            const r = await A().api('diagram_lot_c', {what: 'proof', id: c.id});
+            let base = {}; try { base = K.sample() || {}; } catch (_) {}
+            const spec = {...base, kind: 'proofmap', rows: r.rows || [], o: {...(base.o || {}), question: r.question || c.question || '', conclusion: r.conclusion || '', certainty: r.certainty || 'tocheck', title: String(r.question || c.question || '').slice(0, 90) || i18n('Schéma de preuve')}};
+            document.querySelectorAll('dialog[open]').forEach(x => { try { x.close(); } catch (_) {} });
+            await ext.openDiagramEditor(null, {spec, name: spec.o.title});
+        } catch (e) { toast(e.message || String(e), 'error'); }
     }
     function printCase(c) {
         if (!UI().openPrintDialog) return toast('L’impression n’est pas disponible.', 'error');

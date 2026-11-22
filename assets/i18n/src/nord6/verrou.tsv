@@ -1,0 +1,131 @@
+fr ¦ lt ¦ lv ¦ et
+# Zone « verrou » : 🔐 mot de passe d’une généalogie et 📜 « Qui a vu quoi » (assets/js/app-verrou*.js, lib/verrou.php, lib/verrou_page.php)
+1 h ¦ 1 val. ¦ 1 h ¦ 1 t
+12 mois ¦ 12 mėn. ¦ 12 mēneši ¦ 12 kuud
+15 min ¦ 15 min ¦ 15 min ¦ 15 min
+3 ans ¦ 3 m. ¦ 3 gadi ¦ 3 aastat
+3 mois ¦ 3 mėn. ¦ 3 mēneši ¦ 3 kuud
+5 min ¦ 5 min ¦ 5 min ¦ 5 min
+6 mois ¦ 6 mėn. ¦ 6 mēneši ¦ 6 kuud
+Archive du dossier (.zip) ¦ Bylos archyvas (.zip) ¦ Lietas arhīvs (.zip) ¦ Toimiku arhiiv (.zip)
+Attention : le verrou n’empêche pas de lire le fichier si quelqu’un le copie (il n’est pas chiffré). Pour ça, chiffre le disque de ton ordinateur (FileVault sur Mac, BitLocker sous Windows). ¦ Dėmesio: užraktas netrukdo perskaityti failo, jei kas nors jį nukopijuoja (jis nešifruotas). Tam užšifruok savo kompiuterio diską (FileVault „Mac“, BitLocker „Windows“). ¦ Uzmanību: slēdzene netraucē izlasīt failu, ja kāds to nokopē (tas nav šifrēts). Lai to novērstu, šifrē sava datora disku (FileVault Mac datorā, BitLocker Windows sistēmā). ¦ Tähelepanu: lukk ei takista faili lugemist, kui keegi selle kopeerib (see pole krüpteeritud). Selleks krüpteeri oma arvuti ketas (FileVault Macis, BitLocker Windowsis).
+Autre format ¦ Kitas formatas ¦ Cits formāts ¦ Muu vorming
+Base .db ¦ Duomenų bazė .db ¦ Datubāze .db ¦ Andmebaas .db
+Bloc ¦ Blokas ¦ Bloks ¦ Plokk
+Ce mot de passe contient des caractères illisibles. ¦ Šiame slaptažodyje yra neįskaitomų simbolių. ¦ Šajā parolē ir nesalasāmas rakstzīmes. ¦ See parool sisaldab loetamatuid märke.
+Ce mot de passe empêche d’ouvrir cette généalogie dans l’app, ici et après chaque délai sans rien toucher. ¦ Šis slaptažodis neleidžia atidaryti šios genealogijos programėlėje, čia ir po kiekvieno neveiklumo laikotarpio. ¦ Šī parole neļauj atvērt šo ģenealoģiju lietotnē, šeit un pēc katra bezdarbības perioda. ¦ See parool takistab selle sugupuu avamist rakenduses, siin ja pärast iga tegevuseta perioodi.
+Ce que ce mot de passe protège vraiment ¦ Ką šis slaptažodis iš tikrųjų saugo ¦ Ko šī parole patiesībā aizsargā ¦ Mida see parool tegelikult kaitseb
+Cette généalogie a déjà un mot de passe : change-le plutôt. ¦ Ši genealogija jau turi slaptažodį: verčiau jį pakeisk. ¦ Šai ģenealoģijai jau ir parole: labāk nomaini to. ¦ Sellel sugupuul on juba parool: muuda seda pigem.
+Cette généalogie est maintenant protégée par un mot de passe. ¦ Ši genealogija dabar apsaugota slaptažodžiu. ¦ Šī ģenealoģija tagad ir aizsargāta ar paroli. ¦ See sugupuu on nüüd parooliga kaitstud.
+Cette généalogie est protégée : sa sauvegarde l’est aussi, avec le même mot de passe. ¦ Ši genealogija apsaugota: jos atsarginė kopija taip pat, tuo pačiu slaptažodžiu. ¦ Šī ģenealoģija ir aizsargāta: arī tās rezerves kopija, ar to pašu paroli. ¦ See sugupuu on kaitstud: ka selle varukoopia, sama parooliga.
+Cette généalogie est protégée par un mot de passe : dans le dossier choisi, elle n’est jamais copiée en clair. Une copie chiffrée (AES-256, même mot de passe) y est faite quand tu l’ouvres avec son mot de passe ; dans le dossier de l’app, les copies restent comme la base. ¦ Ši genealogija apsaugota slaptažodžiu: į pasirinktą aplanką ji niekada nekopijuojama nešifruota. Šifruota kopija (AES-256, tas pats slaptažodis) ten padaroma, kai ją atidarai jos slaptažodžiu; programėlės aplanke kopijos lieka kaip duomenų bazė. ¦ Šī ģenealoģija ir aizsargāta ar paroli: izvēlētajā mapē tā nekad netiek kopēta nešifrēta. Šifrēta kopija (AES-256, tā pati parole) tur tiek izveidota, kad tu to atver ar tās paroli; lietotnes mapē kopijas paliek kā datubāze. ¦ See sugupuu on parooliga kaitstud: valitud kausta ei kopeerita seda kunagi krüpteerimata. Krüpteeritud koopia (AES-256, sama parool) tehakse sinna, kui avad selle tema parooliga; rakenduse kaustas jäävad koopiad nagu andmebaas.
+Cette généalogie est protégée par un mot de passe : ses sauvegardes le sont aussi. Utilise « Sauvegarde complète protégée » avec le même mot de passe. ¦ Ši genealogija apsaugota slaptažodžiu: jos atsarginės kopijos taip pat. Naudok „Apsaugotą visą atsarginę kopiją“ su tuo pačiu slaptažodžiu. ¦ Šī ģenealoģija ir aizsargāta ar paroli: arī tās rezerves kopijas. Izmanto “Aizsargātu pilnu rezerves kopiju” ar to pašu paroli. ¦ See sugupuu on parooliga kaitstud: ka selle varukoopiad. Kasuta „Kaitstud täielikku varukoopiat” sama parooliga.
+Cette généalogie est verrouillée : donne son mot de passe pour l’ouvrir. ¦ Ši genealogija užrakinta: įvesk jos slaptažodį, kad ją atidarytum. ¦ Šī ģenealoģija ir bloķēta: ievadi tās paroli, lai to atvērtu. ¦ See sugupuu on lukus: sisesta selle parool, et see avada.
+Cette généalogie est verrouillée par un mot de passe : ouvre-la d’abord. ¦ Ši genealogija užrakinta slaptažodžiu: pirmiausia ją atidaryk. ¦ Šī ģenealoģija ir bloķēta ar paroli: vispirms atver to. ¦ See sugupuu on parooliga lukus: ava see kõigepealt.
+Cette généalogie n’a pas de mot de passe. ¦ Ši genealogija neturi slaptažodžio. ¦ Šai ģenealoģijai nav paroles. ¦ Sellel sugupuul pole parooli.
+Changer le délai ¦ Keisti laiką ¦ Mainīt laiku ¦ Muuda aega
+Changer le mot de passe ¦ Keisti slaptažodį ¦ Mainīt paroli ¦ Muuda parooli
+Changer, ou retirer ¦ Keisti arba pašalinti ¦ Mainīt vai noņemt ¦ Muuda või eemalda
+Coche la case : sans ce mot de passe, tu ne pourras plus ouvrir cette généalogie dans l’app. ¦ Pažymėk langelį: be šio slaptažodžio nebegalėsi atidaryti šios genealogijos programėlėje. ¦ Atzīmē rūtiņu: bez šīs paroles tu vairs nevarēsi atvērt šo ģenealoģiju lietotnē. ¦ Märgi kast: ilma selle paroolita ei saa sa seda sugupuud rakenduses enam avada.
+Courriers en série ¦ Serijiniai laiškai ¦ Sērijveida vēstules ¦ Kirjakoosted
+Dossier déplacé vers une autre généalogie ¦ Byla perkelta į kitą genealogiją ¦ Lieta pārvietota uz citu ģenealoģiju ¦ Toimik teisaldatud teise sugupuusse
+Dossier ou objet ¦ Byla arba objektas ¦ Lieta vai objekts ¦ Toimik või objekt
+Dossier, poste, action… ¦ Byla, kompiuteris, veiksmas… ¦ Lieta, dators, darbība… ¦ Toimik, arvuti, toiming…
+Durée changée. Lignes plus anciennes effacées : {n} ¦ Laikotarpis pakeistas. Ištrinta senesnių eilučių: {n} ¦ Periods mainīts. Dzēstas vecākas rindas: {n} ¦ Periood muudetud. Kustutatud vanemaid ridu: {n}
+Durée de conservation changée ¦ Saugojimo laikotarpis pakeistas ¦ Glabāšanas periods mainīts ¦ Säilitusaeg muudetud
+Durée inconnue. ¦ Nežinomas laikotarpis. ¦ Nezināms periods. ¦ Tundmatu periood.
+Délai de reverrouillage changé ¦ Laikas iki pakartotinio užrakinimo pakeistas ¦ Laiks līdz atkārtotai bloķēšanai mainīts ¦ Uuesti lukustamise aeg muudetud
+Délai de reverrouillage inconnu. ¦ Nežinomas laikas iki pakartotinio užrakinimo. ¦ Nezināms laiks līdz atkārtotai bloķēšanai. ¦ Tundmatu uuesti lukustamise aeg.
+Elle est protégée par un mot de passe. ¦ Ji apsaugota slaptažodžiu. ¦ Tā ir aizsargāta ar paroli. ¦ See on parooliga kaitstud.
+Export ¦ Eksportas ¦ Eksports ¦ Eksport
+Exports ¦ Eksportai ¦ Eksporti ¦ Ekspordid
+Force : {s} ¦ Stiprumas: {s} ¦ Stiprums: {s} ¦ Tugevus: {s}
+Généalogie ouverte avec le mot de passe ¦ Genealogija atidaryta slaptažodžiu ¦ Ģenealoģija atvērta ar paroli ¦ Sugupuu avatud parooliga
+Il n’y a pas d’autre généalogie. ¦ Kitos genealogijos nėra. ¦ Citas ģenealoģijas nav. ¦ Teist sugupuud pole.
+Impossible de retirer le verrou (dossier des données en lecture seule ?). ¦ Neįmanoma pašalinti užrakto (duomenų aplankas tik skaitomas?). ¦ Nevar noņemt slēdzeni (datu mape tikai lasāma?). ¦ Lukku ei saa eemaldada (andmekaust kirjutuskaitstud?).
+Impossible de vérifier le mot de passe (dossier des données en lecture seule ?). ¦ Neįmanoma patikrinti slaptažodžio (duomenų aplankas tik skaitomas?). ¦ Nevar pārbaudīt paroli (datu mape tikai lasāma?). ¦ Parooli ei saa kontrollida (andmekaust kirjutuskaitstud?).
+Impossible d’enregistrer le verrou (dossier des données en lecture seule ?). ¦ Neįmanoma įrašyti užrakto (duomenų aplankas tik skaitomas?). ¦ Nevar saglabāt slēdzeni (datu mape tikai lasāma?). ¦ Lukku ei saa salvestada (andmekaust kirjutuskaitstud?).
+Impossible d’ouvrir cette généalogie. ¦ Neįmanoma atidaryti šios genealogijos. ¦ Nevar atvērt šo ģenealoģiju. ¦ Seda sugupuud ei saa avada.
+Impression ou PDF ¦ Spausdinimas arba PDF ¦ Drukāšana vai PDF ¦ Printimine või PDF
+Impressions ¦ Spaudiniai ¦ Izdrukas ¦ Väljatrükid
+Journal du dossier (CSV) ¦ Bylos žurnalas (CSV) ¦ Lietas žurnāls (CSV) ¦ Toimiku logi (CSV)
+J’ai compris : sans ce mot de passe, je ne pourrai plus ouvrir cette généalogie dans l’app. ¦ Supratau: be šio slaptažodžio nebegalėsiu atidaryti šios genealogijos programėlėje. ¦ Saprotu: bez šīs paroles es vairs nevarēšu atvērt šo ģenealoģiju lietotnē. ¦ Saan aru: ilma selle paroolita ei saa ma seda sugupuud rakenduses enam avada.
+Le mot de passe est trop long (1024 caractères au plus). ¦ Slaptažodis per ilgas (daugiausia 1024 simboliai). ¦ Parole ir pārāk gara (ne vairāk kā 1024 rakstzīmes). ¦ Parool on liiga pikk (kuni 1024 märki).
+Le serveur de l’app ne répond pas. Réessaie. ¦ Programėlės serveris neatsako. Bandyk dar kartą. ¦ Lietotnes serveris neatbild. Mēģini vēlreiz. ¦ Rakenduse server ei vasta. Proovi uuesti.
+Le verrou n’empêche pas de lire le fichier si quelqu’un le copie : il n’est pas chiffré. Pour ça, chiffre le disque de ton ordinateur : FileVault sur Mac (Réglages Système → Confidentialité et sécurité), BitLocker sous Windows (Paramètres → Confidentialité et sécurité → Chiffrement de l’appareil). ¦ Užraktas netrukdo perskaityti failo, jei kas nors jį nukopijuoja: jis nešifruotas. Tam užšifruok savo kompiuterio diską: FileVault „Mac“ (Sistemos nustatymai → Privatumas ir sauga), BitLocker „Windows“ (Parametrai → Privatumas ir sauga → Įrenginio šifravimas). ¦ Slēdzene netraucē izlasīt failu, ja kāds to nokopē: tas nav šifrēts. Lai to novērstu, šifrē sava datora disku: FileVault Mac datorā (Sistēmas iestatījumi → Privātums un drošība), BitLocker Windows sistēmā (Iestatījumi → Konfidencialitāte un drošība → Ierīces šifrēšana). ¦ Lukk ei takista faili lugemist, kui keegi selle kopeerib: see pole krüpteeritud. Selleks krüpteeri oma arvuti ketas: FileVault Macis (Süsteemiseaded → Privaatsus ja turvalisus), BitLocker Windowsis (Sätted → Privaatsus ja turve → Seadme krüptimine).
+Lecture seule : rien ne se modifie ; seule cette durée fait disparaître les lignes plus vieilles (et c’est noté). ¦ Tik skaityti: niekas nekeičiama; tik šis laikotarpis panaikina senesnes eilutes (ir tai užrašoma). ¦ Tikai lasīšanai: nekas netiek mainīts; tikai šis periods liek pazust vecākām rindām (un tas tiek atzīmēts). ¦ Ainult lugemiseks: midagi ei muudeta; ainult see periood paneb vanemad read kaduma (ja see märgitakse üles).
+Lecture seule. Tous les dossiers : Réglages → 📜 Qui a vu quoi. ¦ Tik skaityti. Visos bylos: Nustatymai → 📜 Kas ką matė. ¦ Tikai lasīšanai. Visas lietas: Iestatījumi → 📜 Kas ko redzēja. ¦ Ainult lugemiseks. Kõik toimikud: Seaded → 📜 Kes mida nägi.
+Les deux mots de passe ne sont pas pareils. ¦ Abu slaptažodžiai nesutampa. ¦ Abas paroles nav vienādas. ¦ Kaks parooli pole ühesugused.
+Les ouvertures de dossier, les impressions, les exports, les courriers en série et chaque essai du mot de passe, notés par l’app sur ce poste ({machine}). ¦ Bylų atidarymai, spaudiniai, eksportai, serijiniai laiškai ir kiekvienas slaptažodžio bandymas, programėlės užrašyti šiame kompiuteryje ({machine}). ¦ Lietu atvēršana, izdrukas, eksporti, sērijveida vēstules un katrs paroles mēģinājums, ko lietotne atzīmējusi šajā datorā ({machine}). ¦ Toimikute avamised, väljatrükid, ekspordid, kirjakoosted ja iga paroolikatse, mille rakendus selles arvutis üles märkis ({machine}).
+Les sauvegardes de cette généalogie sont toujours protégées par ce mot de passe (AES-256) : aucune copie ne sort en clair de son dossier. ¦ Šios genealogijos atsarginės kopijos visada apsaugotos šiuo slaptažodžiu (AES-256): jokia kopija neišeina iš jos aplanko nešifruota. ¦ Šīs ģenealoģijas rezerves kopijas vienmēr ir aizsargātas ar šo paroli (AES-256): neviena kopija neiziet no tās mapes nešifrēta. ¦ Selle sugupuu varukoopiad on alati selle parooliga kaitstud (AES-256): ükski koopia ei lahku tema kaustast krüpteerimata.
+Lettres rangées : {n} ¦ Įdėti laiškai: {n} ¦ Iekārtotās vēstules: {n} ¦ Arhiveeritud kirjad: {n}
+Lettres retirées (↶ Annuler) : {n} ¦ Atšaukti laiškai (↶ Atšaukti): {n} ¦ Atsauktās vēstules (↶ Atsaukt): {n} ¦ Tagasi võetud kirjad (↶ Võta tagasi): {n}
+Lignes : {n} sur {t} ¦ Eilutės: {n} iš {t} ¦ Rindas: {n} no {t} ¦ Read: {n} / {t}
+Lignes anciennes effacées ¦ Senos eilutės ištrintos ¦ Vecās rindas dzēstas ¦ Vanad read kustutatud
+Lignes effacées : {n} (gardées : {m}) ¦ Ištrintos eilutės: {n} (saugoma: {m}) ¦ Dzēstās rindas: {n} (glabā: {m}) ¦ Kustutatud read: {n} (säilitus: {m})
+Mode consultation : le registre ne se lit pas. ¦ Peržiūros režimas: žurnalo skaityti negalima. ¦ Skatīšanās režīms: žurnālu nevar lasīt. ¦ Vaatamisrežiim: logi ei saa lugeda.
+Mot de passe changé ¦ Slaptažodis pakeistas ¦ Parole mainīta ¦ Parool muudetud
+Mot de passe changé. Les autres fenêtres ouvertes devront le redemander. ¦ Slaptažodis pakeistas. Kiti atidaryti langai turės jo paprašyti iš naujo. ¦ Parole mainīta. Citiem atvērtiem logiem tā būs jāprasa vēlreiz. ¦ Parool muudetud. Teised avatud aknad peavad seda uuesti küsima.
+Mot de passe de cette généalogie ¦ Šios genealogijos slaptažodis ¦ Šīs ģenealoģijas parole ¦ Selle sugupuu parool
+Mot de passe oublié : il n’y a pas de porte dérobée. Sans lui, cette généalogie ne peut plus être ouverte dans l’app. ¦ Pamirštas slaptažodis: atsarginių durų nėra. Be jo šios genealogijos programėlėje nebeįmanoma atidaryti. ¦ Aizmirsta parole: sētas durvju nav. Bez tās šo ģenealoģiju lietotnē vairs nevar atvērt. ¦ Unustatud parool: tagaust pole. Ilma selleta ei saa seda sugupuud rakenduses enam avada.
+Mot de passe oublié ? ¦ Pamiršai slaptažodį? ¦ Aizmirsi paroli? ¦ Unustasid parooli?
+Mot de passe posé ¦ Slaptažodis nustatytas ¦ Parole iestatīta ¦ Parool määratud
+Mot de passe refusé ¦ Slaptažodis atmestas ¦ Parole noraidīta ¦ Parool tagasi lükatud
+Mot de passe retiré ¦ Slaptažodis pašalintas ¦ Parole noņemta ¦ Parool eemaldatud
+Musée de famille ¦ Šeimos muziejus ¦ Ģimenes muzejs ¦ Suguvõsa muuseum
+Ouvertures ¦ Atidarymai ¦ Atvēršanas ¦ Avamised
+Ouverture… ¦ Atidaroma… ¦ Atver… ¦ Avamine…
+Ouvrir une autre généalogie ¦ Atidaryti kitą genealogiją ¦ Atvērt citu ģenealoģiju ¦ Ava teine sugupuu
+Paquet du travail à deux ¦ Darbo dviese paketas ¦ Divatā darba pakete ¦ Kahekesi töö pakett
+Partage avec la famille ¦ Dalijimasis su šeima ¦ Kopīgošana ar ģimeni ¦ Jagamine perega
+Patiente {n} s ¦ Palauk {n} s ¦ Pagaidi {n} s ¦ Oota {n} s
+Patiente {n} s avant de réessayer. ¦ Palauk {n} s prieš bandydamas dar kartą. ¦ Pagaidi {n} s, pirms mēģini vēlreiz. ¦ Oota {n} s, enne kui uuesti proovid.
+Poste ¦ Kompiuteris ¦ Dators ¦ Arvuti
+Pour une généalogie protégée, tape son mot de passe : la sauvegarde est chiffrée avec lui (AES-256). ¦ Apsaugotai genealogijai įvesk jos slaptažodį: kopija juo užšifruojama (AES-256). ¦ Aizsargātai ģenealoģijai ieraksti tās paroli: kopija tiek ar to šifrēta (AES-256). ¦ Kaitstud sugupuu puhul sisesta selle parool: varukoopia krüpteeritakse sellega (AES-256).
+Protéger ¦ Apsaugoti ¦ Aizsargāt ¦ Kaitse
+Protéger cette généalogie ¦ Apsaugoti šią genealogiją ¦ Aizsargāt šo ģenealoģiju ¦ Kaitse seda sugupuud
+Protégée ¦ Apsaugota ¦ Aizsargāta ¦ Kaitstud
+Qui a vu ce dossier ¦ Kas matė šią bylą ¦ Kas redzēja šo lietu ¦ Kes nägi seda toimikut
+Qui a vu le dossier {n} ¦ Kas matė bylą {n} ¦ Kas redzēja lietu {n} ¦ Kes nägi toimikut {n}
+Qui a vu quoi ¦ Kas ką matė ¦ Kas ko redzēja ¦ Kes mida nägi
+Registre « Qui a vu quoi » (CSV) ¦ Žurnalas „Kas ką matė“ (CSV) ¦ Žurnāls “Kas ko redzēja” (CSV) ¦ Logi „Kes mida nägi” (CSV)
+Retirer le mot de passe ¦ Pašalinti slaptažodį ¦ Noņemt paroli ¦ Eemalda parool
+Retirer le mot de passe de « {name} » ? Elle s’ouvrira sans rien demander, et ses sauvegardes ne seront plus forcément protégées. ¦ Pašalinti genealogijos „{name}“ slaptažodį? Ji atsidarys nieko neklausdama, o jos atsarginės kopijos nebūtinai bus apsaugotos. ¦ Noņemt ģenealoģijas “{name}” paroli? Tā atvērsies neko nejautājot, un tās rezerves kopijas vairs nebūs obligāti aizsargātas. ¦ Kas eemaldada sugupuu „{name}” parool? See avaneb ilma midagi küsimata ja selle varukoopiad ei pruugi enam olla kaitstud.
+Reverrouillée (délai passé ou app relancée) ¦ Vėl užrakinta (baigėsi laikas arba programėlė paleista iš naujo) ¦ Atkal bloķēta (laiks beidzies vai lietotne restartēta) ¦ Uuesti lukus (aeg möödus või rakendus käivitati uuesti)
+Sans ce mot de passe, cette généalogie ne peut plus être ouverte dans l’app : il n’existe pas de porte dérobée, et personne ne peut le retrouver pour toi. ¦ Be šio slaptažodžio šios genealogijos programėlėje nebeįmanoma atidaryti: atsarginių durų nėra ir niekas negali jo surasti už tave. ¦ Bez šīs paroles šo ģenealoģiju lietotnē vairs nevar atvērt: sētas durvju nav, un neviens to nevar atgūt tavā vietā. ¦ Ilma selle paroolita ei saa seda sugupuud rakenduses enam avada: tagaust pole ja keegi ei saa seda sinu eest leida.
+Sauvegarde complète ¦ Visa atsarginė kopija ¦ Pilna rezerves kopija ¦ Täielik varukoopia
+Se verrouille après {m} sans rien toucher, à la fermeture de l’app et quand on change de généalogie. ¦ Užsirakina po {m} neveiklumo, uždarant programėlę ir keičiant genealogiją. ¦ Bloķējas pēc {m} bezdarbības, aizverot lietotni un mainot ģenealoģiju. ¦ Lukustub pärast {m} tegevusetust, rakenduse sulgemisel ja sugupuu vahetamisel.
+Site web ¦ Svetainė ¦ Tīmekļa vietne ¦ Veebisait
+Site web publié ¦ Svetainė paskelbta ¦ Tīmekļa vietne publicēta ¦ Veebisait avaldatud
+Tableau de bord des dossiers (CSV) · dossiers : {n} ¦ Bylų suvestinė (CSV) · bylos: {n} ¦ Lietu pārskats (CSV) · lietas: {n} ¦ Toimikute ülevaade (CSV) · toimikuid: {n}
+Tableau, arbre ou parts imprimés ¦ Atspausdinta lentelė, medis arba dalys ¦ Izdrukāta tabula, koks vai daļas ¦ Tabel, puu või osad prinditud
+Tape d’abord le mot de passe actuel. ¦ Pirmiausia įvesk dabartinį slaptažodį. ¦ Vispirms ieraksti pašreizējo paroli. ¦ Sisesta kõigepealt praegune parool.
+Tape le mot de passe. ¦ Įvesk slaptažodį. ¦ Ieraksti paroli. ¦ Sisesta parool.
+Tout le registre ¦ Visas žurnalas ¦ Viss žurnāls ¦ Kogu logi
+Un verrou à l’ouverture de « {name} », sur cet ordinateur et sur les autres. ¦ Užraktas atidarant „{name}“, šiame kompiuteryje ir kituose. ¦ Slēdzene, atverot “{name}”, šajā datorā un citos. ¦ Lukk „{name}” avamisel, selles arvutis ja teistes.
+Verrouiller après ¦ Užrakinti po ¦ Bloķēt pēc ¦ Lukusta pärast
+Verrouiller maintenant ¦ Užrakinti dabar ¦ Bloķēt tagad ¦ Lukusta kohe
+Verrouiller maintenant (généalogie protégée par un mot de passe) ¦ Užrakinti dabar (slaptažodžiu apsaugota genealogija) ¦ Bloķēt tagad (ar paroli aizsargāta ģenealoģija) ¦ Lukusta kohe (parooliga kaitstud sugupuu)
+Verrouillée : {names} (ouvre-la avec son mot de passe pour voir ses dossiers) ¦ Užrakinta: {names} (atidaryk ją slaptažodžiu, kad matytum jos bylas) ¦ Bloķēta: {names} (atver to ar paroli, lai redzētu tās lietas) ¦ Lukus: {names} (ava see parooliga, et näha selle toimikuid)
+Verrouillée à la main ¦ Užrakinta rankiniu būdu ¦ Bloķēta manuāli ¦ Käsitsi lukustatud
+après {m} ¦ po {m} ¦ pēc {m} ¦ pärast {m}
+pour changer le délai ¦ laikui pakeisti ¦ laika maiņai ¦ aja muutmiseks
+pour changer le mot de passe ¦ slaptažodžiui pakeisti ¦ paroles maiņai ¦ parooli muutmiseks
+pour retirer le mot de passe ¦ slaptažodžiui pašalinti ¦ paroles noņemšanai ¦ parooli eemaldamiseks
+pour une sauvegarde protégée ¦ apsaugotai kopijai ¦ aizsargātai kopijai ¦ kaitstud varukoopia jaoks
+protégée par un mot de passe ¦ apsaugota slaptažodžiu ¦ aizsargāta ar paroli ¦ parooliga kaitstud
+sans rien toucher ¦ neveikiant ¦ bezdarbības ¦ tegevuseta
+très bon ¦ labai geras ¦ ļoti labs ¦ väga hea
+« {name} » est verrouillée ¦ „{name}“ užrakinta ¦ “{name}” ir bloķēta ¦ „{name}” on lukus
+📜 Qui a vu quoi ¦ 📜 Kas ką matė ¦ 📜 Kas ko redzēja ¦ 📜 Kes mida nägi
+🔐 Généalogie verrouillée ¦ 🔐 Genealogija užrakinta ¦ 🔐 Ģenealoģija bloķēta ¦ 🔐 Sugupuu lukus
+🔐 Mot de passe de cette généalogie ¦ 🔐 Šios genealogijos slaptažodis ¦ 🔐 Šīs ģenealoģijas parole ¦ 🔐 Selle sugupuu parool
+faible ¦ silpnas ¦ vājš ¦ nõrk
+moyen ¦ vidutinis ¦ vidējs ¦ keskmine
+bon ¦ geras ¦ labs ¦ hea
+pour ouvrir la généalogie ¦ genealogijai atidaryti ¦ ģenealoģijas atvēršanai ¦ sugupuu avamiseks
+Ce dossier appartient à l’app (données, médias ou sauvegardes d’une généalogie) : choisis un autre dossier. ¦ Šis aplankas priklauso programėlei (genealogijos duomenys, medija ar kopijos): pasirink kitą aplanką. ¦ Šī mape pieder lietotnei (ģenealoģijas dati, mediji vai kopijas): izvēlies citu mapi. ¦ See kaust kuulub rakendusele (sugupuu andmed, meedia või varukoopiad): vali teine kaust.
+Ce fichier est rangé dans les dossiers de l’app : choisis un fichier ailleurs. ¦ Šis failas yra programėlės aplankuose: pasirink failą kitur. ¦ Šis fails atrodas lietotnes mapēs: izvēlies failu citur. ¦ See fail on rakenduse kaustades: vali fail mujalt.
+Cette copie est rangée dans les dossiers d’une autre généalogie : elle ne peut pas être remise ici. ¦ Ši kopija yra kitos genealogijos aplankuose: jos čia atkurti negalima. ¦ Šī kopija atrodas citas ģenealoģijas mapēs: to nevar atjaunot šeit. ¦ See koopia on teise sugupuu kaustades: seda ei saa siia taastada.
+Cette copie vient d’une généalogie protégée par un mot de passe : ouvre-la pour la restaurer. ¦ Ši kopija yra iš slaptažodžiu apsaugotos genealogijos: atidaryk ją, kad atkurtum. ¦ Šī kopija ir no ar paroli aizsargātas ģenealoģijas: atver to, lai atjaunotu. ¦ See koopia pärineb parooliga kaitstud sugupuust: ava see, et koopia taastada.
+Cette base est protégée par un mot de passe : donne-le pour l’ouvrir. ¦ Ši duomenų bazė apsaugota slaptažodžiu: įvesk jį, kad atidarytum. ¦ Šī datubāze ir aizsargāta ar paroli: ievadi to, lai atvērtu. ¦ See andmebaas on parooliga kaitstud: sisesta parool, et see avada.

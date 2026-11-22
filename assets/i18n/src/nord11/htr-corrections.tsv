@@ -1,0 +1,35 @@
+fr ¦ vi ¦ id
+# 🪄 Corrections proposées après « ✨ Lire l’acte » (app-htr-correction.js, heritage-transcribe.js, heritage-more.js)
+« {w} » ajouté au lexique ¦ Đã thêm “{w}” vào từ vựng ¦ “{w}” ditambahkan ke leksikon
+Garder tel quel ¦ Giữ nguyên ¦ Biarkan apa adanya
+Ajouter au lexique ¦ Thêm vào từ vựng ¦ Tambahkan ke leksikon
+Ce mot ne sera plus souligné ¦ Từ này sẽ không còn được gạch dưới ¦ Kata ini tidak akan digarisbawahi lagi
+Proposer des corrections (conseillé) ¦ Đề xuất sửa (khuyên dùng) ¦ Usulkan koreksi (disarankan)
+Prudent (conseillé) ¦ Thận trọng (khuyên dùng) ¦ Hati-hati (disarankan)
+Plus de propositions ¦ Nhiều đề xuất hơn ¦ Lebih banyak usulan
+Correction proposée : « {x} » — clique pour choisir ¦ Đề xuất sửa: “{x}” — bấm để chọn ¦ Koreksi yang diusulkan: “{x}” — klik untuk memilih
+=correction proposée ¦ đề xuất sửa ¦ koreksi yang diusulkan
+(soulignées en violet : clique un mot) ¦ (gạch dưới màu tím: bấm vào một từ) ¦ (digarisbawahi ungu: klik sebuah kata)
+Aucune correction à proposer ¦ Không có gì để đề xuất sửa ¦ Tidak ada koreksi untuk diusulkan
+Corrections proposées : non ¦ Đề xuất sửa: tắt ¦ Koreksi yang diusulkan: tidak
+Accepter les {n} propositions sûres ¦ Chấp nhận {n} đề xuất chắc chắn ¦ Terima {n} usulan yang pasti
+Accepter la proposition sûre ¦ Chấp nhận đề xuất chắc chắn ¦ Terima usulan yang pasti
+=proposition sûre acceptée ¦ đề xuất chắc chắn đã chấp nhận ¦ usulan pasti diterima
+« {w} » gardé tel quel ¦ Đã giữ nguyên “{w}” ¦ “{w}” dibiarkan apa adanya
+Proposer des corrections pour les mots mal lus (un mot souligné : clique-le pour choisir) ¦ Đề xuất sửa các từ đọc sai (một từ được gạch dưới: bấm vào để chọn) ¦ Usulkan koreksi untuk kata yang salah terbaca (kata yang digarisbawahi: klik untuk memilih)
+Corrections ¦ Sửa lỗi ¦ Koreksi
+Les corrections proposées ne sont pas chargées. ¦ Chưa tải các đề xuất sửa. ¦ Koreksi yang diusulkan belum dimuat.
+Corrections proposées après la lecture ¦ Đề xuất sửa sau khi đọc ¦ Koreksi yang diusulkan setelah pembacaan
+Après « ✨ Lire l’acte », les mots qui ressemblent à un mot connu (« décembe » → « décembre ») sont soulignés en violet : un clic, et tu choisis. Rien n’est changé sans toi. Le lexique : les mots des actes, ceux de « 📜 Aide à la lecture », et les noms, prénoms, lieux et métiers de ta base (sans les vivants ni les fiches confidentielles). ¦ Sau “✨ Đọc giấy tờ”, các từ giống một từ đã biết (“décembe” → “décembre”) được gạch dưới màu tím: bấm một lần và bạn tự chọn. Không gì thay đổi nếu bạn không muốn. Từ vựng: các từ trong giấy tờ, các từ của “📜 Hỗ trợ đọc”, cùng họ, tên, nơi chốn và nghề nghiệp trong cơ sở dữ liệu của bạn (không có người còn sống và hồ sơ bảo mật). ¦ Setelah “✨ Baca akta”, kata yang mirip kata yang dikenal (“décembe” → “décembre”) digarisbawahi ungu: satu klik, dan kamu yang memilih. Tidak ada yang berubah tanpa kamu. Leksikonnya: kata-kata dalam akta, kata-kata dari “📜 Bantuan membaca”, serta nama keluarga, nama depan, tempat, dan pekerjaan di basis datamu (tanpa orang yang masih hidup dan catatan rahasia).
+Ton lexique personnel : {x}. ¦ Từ vựng riêng của bạn: {x}. ¦ Leksikon pribadimu: {x}.
+Vider le lexique personnel ¦ Xóa hết từ vựng riêng ¦ Kosongkan leksikon pribadi
+Ton lexique personnel est vide : « Ajouter au lexique » dans le menu d’un mot souligné. ¦ Từ vựng riêng của bạn đang trống: “Thêm vào từ vựng” trong menu của một từ được gạch dưới. ¦ Leksikon pribadimu kosong: “Tambahkan ke leksikon” di menu sebuah kata yang digarisbawahi.
+Lexique personnel vidé ¦ Đã xóa hết từ vựng riêng ¦ Leksikon pribadi dikosongkan
+Il manque l’accent ¦ Thiếu dấu ¦ Aksennya kurang
+« {x} » ressemble à « {y} » ¦ “{x}” giống “{y}” ¦ “{x}” mirip “{y}”
+« {x} » collé au mot suivant ¦ “{x}” dính vào từ sau ¦ “{x}” menempel pada kata berikutnya
+Deux mots collés ¦ Hai từ viết dính ¦ Dua kata menempel
+Après « mil {x} », on attend « cent » ¦ Sau “mil {x}” thường là “cent” ¦ Setelah “mil {x}”, yang diharapkan “cent”
+Dans une date en toutes lettres : « {x} » ¦ Trong ngày tháng viết bằng chữ: “{x}” ¦ Dalam tanggal yang ditulis dengan huruf: “{x}”
+Un mois, dans une date ¦ Một tháng, trong ngày tháng ¦ Sebuah bulan, dalam tanggal
+À cet endroit : « {where} » (ligne {n}) ¦ Tại chỗ này: “{where}” (dòng {n}) ¦ Di tempat ini: “{where}” (baris {n})

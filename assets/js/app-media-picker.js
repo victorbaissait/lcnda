@@ -50,6 +50,7 @@
         const kind = /^audio\//.test(file.type) ? 'audio' : /^video\//.test(file.type) ? 'video' : /^image\//.test(file.type) ? 'image' : '';
         if (!kind) throw new Error(i18n('« {name} » n’est ni une image, ni un son, ni une vidéo.', {name: file.name || i18n('Ce fichier')}));
         if (!types.includes(kind)) throw new Error(i18n(`Ici, il faut ${types.includes('image') ? 'une image' : types.includes('audio') ? 'un son' : 'une vidéo'}.`));
+        const tooHeavy = A()?.mediaLimits?.fileError(file, kind); if (tooHeavy) throw new Error(tooHeavy); // 📎 Réglages → Fichiers des médias (app-media-limits.js)
         const csrf = A().state?.csrf || '', title = String(file.name || '').replace(/\.[^.]+$/, '') || (kind === 'image' ? i18n('Image collée') : i18n('Fichier importé'));
         const fd = new FormData(); fd.append('file', file, file.name || `image-${Date.now()}.png`); fd.append('kind', kind); fd.append('title', title); fd.append('csrf', csrf);
         if (kind !== 'image') { const d = await avDuration(file); if (d) fd.append('duration', String(d)); }

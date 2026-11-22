@@ -422,7 +422,7 @@ function qp_photo_data(array $media): ?string
     if (!$info || !in_array($info[2], [IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_GIF, IMAGETYPE_WEBP], true)) { return null; }
     [$w, $h] = $info;
     $max = 1100;
-    if (function_exists('imagecreatefromstring') && ($w > $max || $h > $max || $size > 450 * 1024)) {
+    if (function_exists('imagecreatefromstring') && ($w > $max || $h > $max || $size > 450 * 1024) && !media_pixels_too_big((int) $w, (int) $h)) { // 📎 une image immense n'est pas décodée (lib/media_limits.php)
         $src = @imagecreatefromstring((string) file_get_contents($real));
         if ($src) {
             $k = min(1, $max / max(1, $w, $h));

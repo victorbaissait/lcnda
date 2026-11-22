@@ -1,0 +1,75 @@
+fr ¦ ro
+# 🌍 Où chercher ? — filtres par sorte de source (docs/design/ou-chercher-filtres.html)
+Ouvrir la page filtrée sur une sorte de source ¦ Deschide pagina filtrată pe un tip de sursă
+Les autres sortes ¦ Celelalte tipuri
+Proposés ({n} sur {m}) ¦ Propuse ({n} din {m})
+✓ Déjà cherchés ({n} sur {m}) ¦ ✓ Deja căutate ({n} din {m})
+Écartés ({n} sur {m}) ¦ Excluse ({n} din {m})
+Chercher un site… (ex. Gallica, matricule) ¦ Caută un site… (ex. Gallica, registru matricol)
+Sorte de source ¦ Tip de sursă
+Ses pays : {list} ¦ Țările: {list}
+Ses pays ¦ Țările
+Un seul : {country} ¦ Doar una: {country}
+Pays : {country} ¦ Țara: {country}
+Sites du monde entier seulement (FamilySearch, Geneanet…) ¦ Doar site-uri din toată lumea (FamilySearch, Geneanet…)
+🌍 Monde entier ¦ 🌍 Toată lumea
+Prix ¦ Preț
+Gratuites seulement · {n} ¦ Doar gratuite · {n}
+💶 Gratuites seulement ¦ 💶 Doar gratuite
+En français seulement ¦ Doar în franceză
+🇫🇷 En français ¦ 🇫🇷 În franceză
+Les plus utiles ¦ Cele mai utile
+Gratuits d’abord ¦ Întâi cele gratuite
+🔗 depuis sa fiche ¦ 🔗 din fișa sa
+Ce filtre vient de sa fiche : ton choix habituel n’est pas changé. ¦ Filtrul vine din fișa sa: alegerea ta obișnuită nu se schimbă.
+Revenir à mon choix ¦ Înapoi la alegerea mea
+↗ Chercher quand même ¦ ↗ Caută totuși
+de ces filtres ¦ cu aceste filtre
+Aucun site {sorts} pour ce pays ({country}) parmi les {n} sites que l’app connaît ¦ Niciun site {sorts} pentru această țară ({country}) dintre cele {n} site-uri cunoscute de aplicație
+Pour ses autres pays : {ok} proposés ; {out} écartés. ¦ Pentru celelalte țări: {ok} propuse; {out} excluse.
+Ses autres pays ({n}) ¦ Celelalte țări ({n})
+Voir les {n} sites écartés ¦ Vezi cele {n} site-uri excluse
+＋ Ajouter un site à moi ¦ ＋ Adaugă un site al meu
+Aucun site {sorts} pour {name} ({life}) ¦ Niciun site {sorts} pentru {name} ({life})
+Les {n} sites de cette sorte sont écartés : ¦ Cele {n} site-uri de acest tip sunt excluse:
+Aucun site de cette sorte parmi ceux que l’app connaît. ¦ Niciun site de acest tip printre cele cunoscute de aplicație.
+Enlever {sort} ¦ Elimină {sort}
+Aucun site écarté avec ces filtres. ¦ Niciun site exclus cu aceste filtre.
+Sa vie ({life}) croise les années du site ({from}–{to}) ¦ Viața ({life}) se intersectează cu anii site-ului ({from}–{to})
+Actes (état civil, paroissiaux) ¦ Acte (stare civilă, parohiale)
+Journaux ¦ Ziare
+Militaire et guerres ¦ Militar și războaie
+Recensements et annuaires ¦ Recensăminte și anuare
+Marins, colonies ¦ Marinari, colonii
+Marins et colonies ¦ Marinari și colonii
+Cimetières, décès ¦ Cimitire, decese
+Cimetières et décès ¦ Cimitire și decese
+Notaires, terres et justice ¦ Notari, pământ și justiție
+Métiers (élus, médecins, cheminots, photographes…) ¦ Meserii (aleși, medici, feroviari, fotografi…)
+Arbres en ligne ¦ Arbori online
+Bibliothèques ¦ Biblioteci
+Bibliothèques et livres ¦ Biblioteci și cărți
+Cartes et lieux ¦ Hărți și locuri
+Déportation et répression ¦ Deportare și represiune
+Guides ¦ Ghiduri
+Guides et modes d’emploi ¦ Ghiduri și instrucțiuni
+Moteurs ¦ Motoare
+Moteurs et encyclopédies ¦ Motoare și enciclopedii
+Tout le militaire ¦ Tot ce e militar
+Tout pour un marin ¦ Totul pentru un marinar
+Tout sur l’émigration ¦ Totul despre emigrare
+Tout sur son métier ¦ Totul despre meseria sa
+Tout chez les notaires ¦ Totul la notari
+⚓ Il était marin ? Le dire sur sa fiche ¦ ⚓ Era marinar? Scrie-l pe fișa sa
+🎖 Il était soldat ? Le dire sur sa fiche ¦ 🎖 Era soldat? Scrie-l pe fișa sa
+🚢 Il a émigré ? Le dire sur sa fiche ¦ 🚢 A emigrat? Scrie-l pe fișa sa
+💼 Son métier ? Le dire sur sa fiche ¦ 💼 Meseria? Scrie-o pe fișa sa
+Pas de lieu dans ce pays ¦ Niciun loc în această țară
+Hors de ses années ¦ În afara anilor săi
+Seulement pour un autre cas (métier, profil) ¦ Doar pentru alt caz (meserie, profil)
+Pour l’autre sexe ¦ Pentru celălalt sex
+Né hors de France ¦ Născut în afara Franței
+Peu utile pour cette fiche ¦ Puțin util pentru această fișă
+Autres raisons ¦ Alte motive
+officier (armée) ¦ ofițer (armată)
+=payant caché ¦ plătit ascuns|plătite ascunse|de plătite ascunse

@@ -1,0 +1,114 @@
+fr ¦ hr ¦ sl
+# Zone « reseau » : 🖧 plusieurs ordinateurs de la maison
+conseillé ¦ preporučeno ¦ priporočeno
+connecté maintenant ¦ sada povezano ¦ zdaj povezano
+jamais venu ¦ nikad povezano ¦ še nikoli povezano
+Plusieurs ordinateurs ¦ Više računala ¦ Več računalnikov
+Ouvrir cette généalogie aux autres ordinateurs de la maison, par le wifi, jamais par internet. ¦ Otvori ovo rodoslovlje ostalim računalima u kući, preko wifija, nikad preko interneta. ¦ Odpri to rodoslovje drugim računalnikom v hiši, prek wifija, nikoli prek interneta.
+Ce réglage ne se change que sur l’ordinateur principal : cet appareil est un appareil invité, en lecture seule. ¦ Ova se postavka mijenja samo na glavnom računalu: ovaj je uređaj gostujući uređaj, samo za čitanje. ¦ Ta nastavitev se spreminja samo na glavnem računalniku: ta naprava je naprava gosta, samo za branje.
+Seulement dans l’app de bureau LCNDA, sur l’ordinateur qui garde la généalogie. ¦ Samo u desktop aplikaciji LCNDA, na računalu koje čuva rodoslovlje. ¦ Samo v namizni aplikaciji LCNDA, na računalniku, ki hrani rodoslovje.
+⏻ Tout couper maintenant ¦ ⏻ Sve odmah prekini ¦ ⏻ Takoj prekini vse
+↻ Nouveau code ¦ ↻ Novi kod ¦ ↻ Nova koda
+Ouvrir « {name} » aux autres ordinateurs de la maison ¦ Otvori „{name}” ostalim računalima u kući ¦ Odpri »{name}« drugim računalnikom v hiši
+Ouvert depuis {time}. Se coupe si cet ordinateur se met en veille, change de réseau ou ferme l’app. ¦ Otvoreno od {time}. Prekida se ako ovo računalo ode u stanje mirovanja, promijeni mrežu ili zatvori aplikaciju. ¦ Odprto od {time}. Prekine se, če gre ta računalnik v stanje pripravljenosti, zamenja omrežje ali zapre aplikacijo.
+Coupé : l’app ne répond qu’à cet ordinateur (comme aujourd’hui). ¦ Isključeno: aplikacija odgovara samo ovom računalu (kao danas). ¦ Izklopljeno: aplikacija odgovarja samo temu računalniku (kot danes).
+Avant d’ouvrir : cette généalogie n’a pas de mot de passe. Il en faut un pour l’ouvrir au réseau. ¦ Prije otvaranja: ovo rodoslovlje nema lozinku. Potrebna je da bi se otvorilo u mreži. ¦ Pred odpiranjem: to rodoslovje nima gesla. Potrebno je, da ga lahko odpreš v omrežju.
+🔐 En mettre un ¦ 🔐 Postavi lozinku ¦ 🔐 Nastavi geslo
+Cet ordinateur n’est relié à aucun réseau de la maison (adresse privée introuvable) : branche le wifi, puis réessaie. ¦ Ovo računalo nije spojeno ni na jednu kućnu mrežu (privatna adresa nije pronađena): uključi wifi pa pokušaj ponovno. ¦ Ta računalnik ni povezan z nobenim domačim omrežjem (zasebnega naslova ni mogoče najti): vklopi wifi in poskusi znova.
+5 codes d’invitation faux : plus aucune demande jusqu’à {time}. ¦ 5 pogrešnih kodova pozivnice: nema više zahtjeva do {time}. ¦ 5 napačnih kod povabila: nobene zahteve več do {time}.
+5 demandes refusées : plus aucune demande jusqu’à {time}. ¦ 5 odbijenih zahtjeva: nema više zahtjeva do {time}. ¦ 5 zavrnjenih zahtev: nobene zahteve več do {time}.
+Le réseau a changé : tout a été coupé. ¦ Mreža se promijenila: sve je prekinuto. ¦ Omrežje se je spremenilo: vse je bilo prekinjeno.
+Adresse à taper sur l’autre ordinateur ¦ Adresa koju upisuješ na drugom računalu ¦ Naslov, ki ga vpišeš na drugem računalniku
+Code d’invitation (valable 10 min, une seule fois) ¦ Kod pozivnice (vrijedi 10 min, samo jednom) ¦ Koda povabila (velja 10 min, samo enkrat)
+Sur l’autre ordinateur : ouvre un navigateur (Chrome, Firefox, Safari, Edge), tape cette adresse, puis le code. Ensuite, c’est toi qui acceptes ici, en comparant le code à 6 chiffres affiché des deux côtés. ¦ Na drugom računalu: otvori preglednik (Chrome, Firefox, Safari, Edge), upiši ovu adresu, a zatim kod. Nakon toga ti prihvaćaš ovdje, uspoređujući šesteroznamenkasti kod prikazan na obje strane. ¦ Na drugem računalniku: odpri brskalnik (Chrome, Firefox, Safari, Edge), vpiši ta naslov in nato kodo. Potem ti sprejmeš tukaj, tako da primerjaš šestmestno kodo, prikazano na obeh straneh.
+Demandes d’accès ¦ Zahtjevi za pristup ¦ Zahteve za dostop
+✓ Autoriser ¦ ✓ Dopusti ¦ ✓ Dovoli
+Appareils autorisés ¦ Dopušteni uređaji ¦ Dovoljene naprave
+Tous les appareils invités sont en lecture seule : ils regardent la généalogie, rien ne peut être modifié depuis eux. ¦ Svi gostujući uređaji su samo za čitanje: gledaju rodoslovlje, s njih se ništa ne može promijeniti. ¦ Vse naprave gostov so samo za branje: gledajo rodoslovje, z njih ni mogoče ničesar spremeniti.
+Ce qu’il faut savoir ¦ Što treba znati ¦ Kaj je treba vedeti
+🧱 La première fois, Windows (« Autoriser LCNDA sur les réseaux privés ? ») ou macOS (« Accepter les connexions entrantes ? ») pose la question : réponds oui, et sous Windows seulement pour les réseaux privés. ¦ 🧱 Prvi put Windows („Dopustiti LCNDA na privatnim mrežama?”) ili macOS („Prihvatiti dolazne veze?”) postavlja pitanje: odgovori da, a u Windowsu samo za privatne mreže. ¦ 🧱 Prvič Windows (»Dovoliti LCNDA v zasebnih omrežjih?«) ali macOS (»Sprejeti dohodne povezave?«) postavi vprašanje: odgovori da, v Windows pa samo za zasebna omrežja.
+📶 Dans cette version, ce qui passe dans le wifi n’est pas chiffré : n’ouvre que sur le wifi de la maison, protégé par sa clé, jamais sur un wifi d’hôtel, de gare ou de médiathèque. ¦ 📶 U ovoj verziji ono što ide preko wifija nije šifrirano: otvaraj samo na kućnom wifiju zaštićenom ključem, nikad na wifiju hotela, kolodvora ili knjižnice. ¦ 📶 V tej različici to, kar gre prek wifija, ni šifrirano: odpiraj samo na domačem wifiju, zaščitenem s ključem, nikoli na wifiju hotela, postaje ali knjižnice.
+🖥 Cet ordinateur doit rester allumé, avec LCNDA ouvert : s’il dort ou que tu fermes l’app, les autres ne voient plus rien. ¦ 🖥 Ovo računalo mora ostati uključeno, s otvorenim LCNDA: ako spava ili zatvoriš aplikaciju, ostali više ništa ne vide. ¦ 🖥 Ta računalnik mora ostati prižgan, z odprtim LCNDA: če spi ali zapreš aplikacijo, drugi ne vidijo ničesar več.
+autorisé le {date} ¦ dopušteno {date} ¦ dovoljeno {date}
+lecture seule ¦ samo za čitanje ¦ samo za branje
+jusqu’au {date} ¦ do {date} ¦ do {date}
+pour cette fois seulement ¦ samo ovaj put ¦ samo tokrat
+Pas vu depuis plus de 30 jours : le retirer ? ¦ Nije viđen više od 30 dana: ukloniti ga? ¦ Ni bila videna več kot 30 dni: jo odstranim?
+Aucun appareil autorisé pour l’instant. ¦ Zasad nema dopuštenih uređaja. ¦ Zaenkrat ni dovoljenih naprav.
+Aucun appareil ne correspond. ¦ Nijedan uređaj ne odgovara. ¦ Nobena naprava se ne ujema.
+Appareils : {n} · connectés : {c} ¦ Uređaji: {n} · povezani: {c} ¦ Naprave: {n} · povezane: {c}
+Chercher un appareil… ¦ Traži uređaj… ¦ Išči napravo…
+La porte du wifi n’a pas pu s’ouvrir (pare-feu, ou adresse déjà prise). Réessaie dans un instant. ¦ Vrata wifija nisu se mogla otvoriti (vatrozid ili je adresa već zauzeta). Pokušaj ponovno za trenutak. ¦ Vrat wifija ni bilo mogoče odpreti (požarni zid ali naslov je že zaseden). Poskusi znova čez trenutek.
+Cette demande n’existe plus (refusée, ou plus de 2 minutes sans réponse). ¦ Ovaj zahtjev više ne postoji (odbijen ili više od 2 minute bez odgovora). ¦ Ta zahteva ne obstaja več (zavrnjena ali več kot 2 minuti brez odgovora).
+Trop tard pour annuler : autorise l’appareil de nouveau. ¦ Prekasno za poništavanje: ponovno dopusti uređaj. ¦ Prepozno za razveljavitev: znova dovoli napravo.
+🖧 Ouvert aux ordinateurs de la maison. ¦ 🖧 Otvoreno računalima u kući. ¦ 🖧 Odprto za računalnike v hiši.
+🖧 Coupé : l’app ne répond plus qu’à cet ordinateur. ¦ 🖧 Isključeno: aplikacija sada odgovara samo ovom računalu. ¦ 🖧 Izklopljeno: aplikacija zdaj odgovarja samo temu računalniku.
+Adresse copiée ¦ Adresa kopirana ¦ Naslov kopiran
+✓ « {name} » retiré : il ne peut plus se connecter. ¦ ✓ „{name}” uklonjen: više se ne može povezati. ¦ ✓ »{name}« odstranjena: ne more se več povezati.
+« {name} » peut de nouveau se connecter. ¦ „{name}” se ponovno može povezati. ¦ »{name}« se lahko spet poveže.
+Réglage enregistré ¦ Postavka spremljena ¦ Nastavitev shranjena
+Demande refusée. ¦ Zahtjev odbijen. ¦ Zahteva zavrnjena.
+✓ « {name} » autorisé, en lecture seule. ¦ ✓ „{name}” dopušten, samo za čitanje. ¦ ✓ »{name}« dovoljena, samo za branje.
+Demande d’accès ¦ Zahtjev za pristup ¦ Zahteva za dostop
+Un appareil veut ouvrir « {name} » ¦ Uređaj želi otvoriti „{name}” ¦ Naprava želi odpreti »{name}«
+Nom donné ¦ Navedeno ime ¦ Navedeno ime
+(il peut être faux : compare le code) ¦ (može biti lažno: usporedi kod) ¦ (lahko je lažno: primerjaj kodo)
+Code affiché ¦ Prikazani kod ¦ Prikazana koda
+Regarde l’écran de l’appareil : il doit montrer le même code. Sinon, refuse. ¦ Pogledaj zaslon uređaja: mora prikazivati isti kod. Ako ne, odbij. ¦ Poglej zaslon naprave: prikazovati mora isto kodo. Sicer zavrni.
+Ce qu’il pourra faire : 👁 lecture seule (rien ne peut être modifié depuis cet appareil). Il devra aussi donner le mot de passe de la généalogie. ¦ Što će moći raditi: 👁 samo čitanje (s ovog se uređaja ništa ne može promijeniti). Morat će upisati i lozinku rodoslovlja. ¦ Kaj bo lahko počela: 👁 samo branje (s te naprave ni mogoče ničesar spremeniti). Vpisati bo morala tudi geslo rodoslovja.
+Sans réponse en 2 minutes, la demande disparaît toute seule (refusée). ¦ Bez odgovora za 2 minute zahtjev sam nestaje (odbijen). ¦ Brez odgovora v 2 minutah zahteva sama izgine (zavrnjena).
+✓ Autoriser « {name} » ¦ ✓ Dopusti „{name}” ¦ ✓ Dovoli »{name}«
+Ouvert aux ordinateurs de la maison · appareils connectés : {n} ¦ Otvoreno računalima u kući · povezani uređaji: {n} ¦ Odprto za računalnike v hiši · povezane naprave: {n}
+🖧 Rouvrir sur ce réseau ¦ 🖧 Ponovno otvori na ovoj mreži ¦ 🖧 Znova odpri v tem omrežju
+Autre ordinateur ¦ Drugo računalo ¦ Drug računalnik
+Se connecter ¦ Poveži se ¦ Poveži se
+Se connecter à l’ordinateur principal ¦ Poveži se s glavnim računalom ¦ Poveži se z glavnim računalnikom
+Cet appareil n’est pas encore autorisé. Demande l’accès : c’est sur l’ordinateur principal qu’on l’accepte. ¦ Ovaj uređaj još nije dopušten. Zatraži pristup: prihvaća se na glavnom računalu. ¦ Ta naprava še ni dovoljena. Zaprosi za dostop: sprejme se na glavnem računalniku.
+Nom de cet appareil ¦ Ime ovog uređaja ¦ Ime te naprave
+Code d’invitation ¦ Kod pozivnice ¦ Koda povabila
+(affiché sur l’ordinateur principal) ¦ (prikazan na glavnom računalu) ¦ (prikazana na glavnem računalniku)
+Demander l’accès ¦ Zatraži pristup ¦ Zaprosi za dostop
+Donne un nom à cet appareil. ¦ Daj ime ovom uređaju. ¦ Daj ime tej napravi.
+L’ordinateur principal ne répond pas (en veille, éteint, ou porte coupée). ¦ Glavno računalo ne odgovara (u mirovanju, isključeno ili su vrata zatvorena). ¦ Glavni računalnik se ne odziva (v pripravljenosti, izklopljen ali so vrata zaprta).
+Code d’invitation faux ou périmé. Demande le code affiché sur l’ordinateur principal. ¦ Kod pozivnice je pogrešan ili istekao. Zatraži kod prikazan na glavnom računalu. ¦ Koda povabila je napačna ali potekla. Prosi za kodo, prikazano na glavnem računalniku.
+Trop d’essais : réessaie dans {n} min. ¦ Previše pokušaja: pokušaj ponovno za {n} min. ¦ Preveč poskusov: poskusi znova čez {n} min.
+Une demande de cet appareil attend déjà sa réponse. ¦ Zahtjev s ovog uređaja već čeka odgovor. ¦ Zahteva s te naprave že čaka na odgovor.
+Trop de demandes en même temps : réessaie dans un instant. ¦ Previše zahtjeva odjednom: pokušaj ponovno za trenutak. ¦ Preveč zahtev hkrati: poskusi znova čez trenutek.
+Va sur l’ordinateur principal et vérifie qu’il affiche ce code : ¦ Idi do glavnog računala i provjeri prikazuje li ovaj kod: ¦ Pojdi do glavnega računalnika in preveri, ali prikazuje to kodo:
+Ouverture de la généalogie… Elle demande ensuite son mot de passe : il est vérifié par l’ordinateur principal, jamais gardé ici. ¦ Otvaranje rodoslovlja… Zatim traži svoju lozinku: provjerava je glavno računalo, nikad se ne čuva ovdje. ¦ Odpiranje rodoslovja… Nato zahteva svoje geslo: preveri ga glavni računalnik, tukaj se nikoli ne hrani.
+La demande a expiré (2 minutes sans réponse). Recommence. ¦ Zahtjev je istekao (2 minute bez odgovora). Počni ispočetka. ¦ Zahteva je potekla (2 minuti brez odgovora). Začni znova.
+<strong>Appareil invité « {name} »</strong> : lecture seule. La généalogie reste sur l’ordinateur principal ; rien ne peut être modifié depuis cet appareil. ¦ <strong>Gostujući uređaj „{name}”</strong>: samo za čitanje. Rodoslovlje ostaje na glavnom računalu; s ovog se uređaja ništa ne može promijeniti. ¦ <strong>Naprava gosta »{name}«</strong>: samo za branje. Rodoslovje ostane na glavnem računalniku; s te naprave ni mogoče ničesar spremeniti.
+Appareil ¦ Uređaj ¦ Naprava
+Il faut un mot de passe ¦ Potrebna je lozinka ¦ Potrebno je geslo
+Cette généalogie n’a pas de mot de passe : elle ne s’ouvre pas sur un autre appareil. Sur l’ordinateur principal : Réglages → 🔐 Mot de passe de cette généalogie. ¦ Ovo rodoslovlje nema lozinku: ne otvara se na drugom uređaju. Na glavnom računalu: Postavke → 🔐 Lozinka ovog rodoslovlja. ¦ To rodoslovje nima gesla: na drugi napravi se ne odpre. Na glavnem računalniku: Nastavitve → 🔐 Geslo tega rodoslovja.
+Appareil invité « {name} » : lecture seule. ¦ Gostujući uređaj „{name}”: samo za čitanje. ¦ Naprava gosta »{name}«: samo za branje.
+Au prochain lancement de l’app ¦ Pri sljedećem pokretanju aplikacije ¦ Ob naslednjem zagonu aplikacije
+reste coupé, il faut le rouvrir ¦ ostaje isključeno, treba ga ponovno otvoriti ¦ ostane izklopljeno, treba ga znova odpreti
+se rouvre tout seul ¦ samo se ponovno otvara ¦ se samo znova odpre
+Après une mise en veille ¦ Nakon mirovanja ¦ Po stanju pripravljenosti
+se rouvre au réveil si l’app est restée ouverte ¦ ponovno se otvara pri buđenju ako je aplikacija ostala otvorena ¦ se ob prebujanju znova odpre, če je aplikacija ostala odprta
+reste coupé ¦ ostaje isključeno ¦ ostane izklopljeno
+Mot de passe de la généalogie ¦ Lozinka rodoslovlja ¦ Geslo rodoslovja
+obligatoire pour ouvrir au réseau ¦ obavezna za otvaranje u mreži ¦ obvezno za odpiranje v omrežju
+facultatif (déconseillé) ¦ neobavezna (ne preporučuje se) ¦ neobvezno (odsvetovano)
+demandé en plus du code à 6 chiffres ¦ traži se uz šesteroznamenkasti kod ¦ zahtevana poleg šestmestne kode
+seulement le code à 6 chiffres ¦ samo šesteroznamenkasti kod ¦ samo šestmestna koda
+Durée d’un accès ¦ Trajanje pristupa ¦ Trajanje dostopa
+jusqu’à ce que tu le retires ¦ dok ga ne ukloniš ¦ dokler je ne odstraniš
+Empêcher la veille tant qu’un appareil est connecté ¦ Spriječi mirovanje dok je uređaj povezan ¦ Prepreči stanje pripravljenosti, dokler je naprava povezana
+oui (cet ordinateur ne s’endort plus) ¦ da (ovo računalo više ne zaspi) ¦ da (ta računalnik ne zaspi več)
+Si cet ordinateur change de réseau ¦ Ako ovo računalo promijeni mrežu ¦ Če ta računalnik zamenja omrežje
+tout couper ¦ sve prekini ¦ prekini vse
+tout couper, puis demander s’il faut rouvrir ¦ sve prekini pa pitaj treba li ponovno otvoriti ¦ prekini vse, nato vprašaj, ali je treba znova odpreti
+Appareil pas vu depuis 30 jours ¦ Uređaj nije viđen 30 dana ¦ Naprava, ki je ni bilo 30 dni
+proposer de le retirer ¦ predloži uklanjanje ¦ predlagaj odstranitev
+Ouvert au réseau de la maison ¦ Otvoreno kućnoj mreži ¦ Odprto za domače omrežje
+Fermé au réseau de la maison ¦ Zatvoreno za kućnu mrežu ¦ Zaprto za domače omrežje
+Appareil autorisé ¦ Uređaj dopušten ¦ Naprava dovoljena
+Demande d’accès refusée ¦ Zahtjev za pristup odbijen ¦ Zahteva za dostop zavrnjena
+Appareil retiré ¦ Uređaj uklonjen ¦ Naprava odstranjena
+Connexion en lecture seule ¦ Veza samo za čitanje ¦ Povezava samo za branje
+en quittant l’app ¦ pri izlasku iz aplikacije ¦ ob zapiranju aplikacije
+mise en veille ¦ mirovanje ¦ stanje pripravljenosti
+le réseau a changé ¦ mreža se promijenila ¦ omrežje se je spremenilo
+Appareil invité : lecture seule. Cela ne se fait que sur l’ordinateur principal. ¦ Gostujući uređaj: samo za čitanje. To se radi samo na glavnom računalu. ¦ Naprava gosta: samo za branje. To se naredi samo na glavnem računalniku.

@@ -1,0 +1,53 @@
+fr ¦ hr ¦ sl
+# 🔎 Recherche « à la française » (lib/recherche_fr.php, assets/js/app-recherche-fr.js, Réglages → 🔎 Recherche)
+nom exact ¦ točno ime ¦ natančno ime
+nom de mariage ({x}) ¦ prezime po udaji ({x}) ¦ priimek po poroki ({x})
+autre nom noté ({x}) ¦ drugo zabilježeno ime ({x}) ¦ drugo zapisano ime ({x})
+particule ignorée ({x}) ¦ čestica zanemarena ({x}) ¦ členek prezrt ({x})
+forme latine d’{p} ({x}) ¦ latinski oblik imena {p} ({x}) ¦ latinska oblika imena {p} ({x})
+forme latine de {p} ({x}) ¦ latinski oblik imena {p} ({x}) ¦ latinska oblika imena {p} ({x})
+abréviation d’{p} ({x}) ¦ kratica imena {p} ({x}) ¦ okrajšava imena {p} ({x})
+abréviation de {p} ({x}) ¦ kratica imena {p} ({x}) ¦ okrajšava imena {p} ({x})
+diminutif d’{p} ({x}) ¦ umanjenica imena {p} ({x}) ¦ manjšalnica imena {p} ({x})
+diminutif de {p} ({x}) ¦ umanjenica imena {p} ({x}) ¦ manjšalnica imena {p} ({x})
+prénom composé ({p}) ¦ složeno ime ({p}) ¦ sestavljeno ime ({p})
+phonétique (proche de {x}) ¦ fonetski (slično {x}) ¦ fonetično (podobno {x})
+lieu ({x}) ¦ mjesto ({x}) ¦ kraj ({x})
+Saint, Sainte ou article écrits autrement ({x}) ¦ Saint, Sainte ili član napisani drukčije ({x}) ¦ Saint, Sainte ali člen zapisani drugače ({x})
+ancien nom ({x}) ¦ stari naziv ({x}) ¦ nekdanje ime ({x})
+commune fusionnée ({x} → {y}) ¦ spojena općina ({x} → {y}) ¦ združena občina ({x} → {y})
+date « {d} » ({ev} {y}) ¦ datum „{d}” ({ev} {y}) ¦ datum »{d}« ({ev} {y})
+date « {d} » ¦ datum „{d}” ¦ datum »{d}«
+sépulture ¦ ukop ¦ pokop
+un événement ¦ događaj ¦ dogodek
+Trouvé par : {x} ¦ Pronađeno po: {x} ¦ Najdeno po: {x}
+Aucun « {q} » ; {n} proches : {names} ¦ Nema „{q}”; {n} sličnih: {names} ¦ Ni »{q}«; {n} podobnih: {names}
+Montre aussi les noms qui se prononcent pareil, même quand le nom exact existe. ¦ Prikazuje i imena koja zvuče isto, čak i kad točno ime postoji. ¦ Pokaže tudi imena, ki zvenijo enako, tudi ko natančno ime obstaja.
+Toujours phonétique ¦ Uvijek fonetski ¦ Vedno fonetično
+forme française ¦ francuski oblik ¦ francoska oblika
+forme latine ¦ latinski oblik ¦ latinska oblika
+abréviation ¦ kratica ¦ okrajšava
+diminutif ¦ umanjenica ¦ manjšalnica
+prénom composé ¦ složeno ime ¦ sestavljeno ime
+prénom de référence : {p} ({k}) ¦ osnovno ime: {p} ({k}) ¦ osnovno ime: {p} ({k})
+nom avec particule : {a} = {b} ¦ prezime s česticom: {a} = {b} ¦ ime s členkom: {a} = {b}
+son : {s} ¦ zvuk: {s} ¦ zven: {s}
+à partir de {y} ¦ od {y} ¦ od {y}
+jusqu’à {y} ¦ do {y} ¦ do {y}
+Rien de reconnu. ¦ Ništa nije prepoznato. ¦ Nič ni prepoznano.
+Réglages · Recherche ¦ Postavke · Pretraživanje ¦ Nastavitve · Iskanje
+La même recherche partout. Sous chaque résultat : pourquoi il a été trouvé. ¦ Isto pretraživanje posvuda. Ispod svakog rezultata: zašto je pronađen. ¦ Povsod isto iskanje. Pod vsakim zadetkom: zakaj je bil najden.
+Ce que la recherche essaie ¦ Što pretraživanje pokušava ¦ Kaj iskanje poskusi
+Phonétique automatique ¦ Automatska fonetika ¦ Samodejna fonetika
+quand rien n’est trouvé, les noms qui se prononcent pareil ¦ kad se ništa ne pronađe, imena koja zvuče isto ¦ ko ni najdeno nič, imena, ki zvenijo enako
+Formes latines des prénoms ¦ Latinski oblici imena ¦ Latinske oblike imen
+Petrus = Pierre, Joannes = Jean, avec leurs fins (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, s nastavcima (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, s končnicami (-i, -o, -um, -ae)
+Abréviations et diminutifs des prénoms ¦ Kratice i umanjenice imena ¦ Okrajšave in manjšalnice imen
+Marge de « vers » (en années) ¦ Raspon za „oko” (u godinama) ¦ Razpon za »okoli« (v letih)
+Toujours : accents, majuscules, particules (d’Albert = Dalbert), St = Saint, communes fusionnées, dates en français et calendrier républicain. ¦ Uvijek: naglasci, velika slova, čestice (d’Albert = Dalbert), St = Saint, spojene općine, datumi na francuskom i republikanski kalendar. ¦ Vedno: naglasi, velike črke, členki (d’Albert = Dalbert), St = Saint, združene občine, datumi v francoščini in republikanski koledar.
+Écris une recherche : l’app montre ce qu’elle comprend, sans rien chercher. ¦ Upiši pretraživanje: aplikacija pokazuje što razumije, bez pretraživanja. ¦ Vpiši iskanje: aplikacija pokaže, kaj razume, brez iskanja.
+ex. {x} ¦ npr. {x} ¦ npr. {x}
+Essayer une recherche ¦ Isprobaj pretraživanje ¦ Preizkusi iskanje
+🔎 Recherche ¦ 🔎 Pretraživanje ¦ 🔎 Iskanje
+nom proche à l’oreille ({a} / {b}) ¦ prezime sličnog zvuka ({a} / {b}) ¦ priimek podobnega zvena ({a} / {b})
+même prénom, écrit autrement ({a} / {b}) ¦ isto ime, napisano drukčije ({a} / {b}) ¦ isto ime, zapisano drugače ({a} / {b})

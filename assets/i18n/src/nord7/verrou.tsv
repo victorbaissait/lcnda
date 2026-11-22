@@ -1,0 +1,131 @@
+fr ¦ is
+# Zone « verrou » : 🔐 mot de passe d’une généalogie et 📜 « Qui a vu quoi » (assets/js/app-verrou*.js, lib/verrou.php, lib/verrou_page.php)
+1 h ¦ 1 klst.
+12 mois ¦ 12 mánuðir
+15 min ¦ 15 mín.
+3 ans ¦ 3 ár
+3 mois ¦ 3 mánuðir
+5 min ¦ 5 mín.
+6 mois ¦ 6 mánuðir
+Archive du dossier (.zip) ¦ Skjalasafn málsins (.zip)
+Attention : le verrou n’empêche pas de lire le fichier si quelqu’un le copie (il n’est pas chiffré). Pour ça, chiffre le disque de ton ordinateur (FileVault sur Mac, BitLocker sous Windows). ¦ Athugaðu: lásinn kemur ekki í veg fyrir að skráin sé lesin ef einhver afritar hana (hún er ekki dulkóðuð). Dulkóðaðu til þess disk tölvunnar (FileVault á Mac, BitLocker í Windows).
+Autre format ¦ Annað snið
+Base .db ¦ Gagnagrunnur .db
+Bloc ¦ Kubbur
+Ce mot de passe contient des caractères illisibles. ¦ Þetta lykilorð inniheldur ólæsileg tákn.
+Ce mot de passe empêche d’ouvrir cette généalogie dans l’app, ici et après chaque délai sans rien toucher. ¦ Þetta lykilorð kemur í veg fyrir að ættfræðin sé opnuð í forritinu, hér og eftir hvert tímabil án virkni.
+Ce que ce mot de passe protège vraiment ¦ Það sem þetta lykilorð verndar í raun
+Cette généalogie a déjà un mot de passe : change-le plutôt. ¦ Þessi ættfræði er þegar með lykilorð: breyttu því frekar.
+Cette généalogie est maintenant protégée par un mot de passe. ¦ Þessi ættfræði er nú varin með lykilorði.
+Cette généalogie est protégée : sa sauvegarde l’est aussi, avec le même mot de passe. ¦ Þessi ættfræði er varin: afrit hennar líka, með sama lykilorði.
+Cette généalogie est protégée par un mot de passe : dans le dossier choisi, elle n’est jamais copiée en clair. Une copie chiffrée (AES-256, même mot de passe) y est faite quand tu l’ouvres avec son mot de passe ; dans le dossier de l’app, les copies restent comme la base. ¦ Þessi ættfræði er varin með lykilorði: hún er aldrei afrituð ódulkóðuð í valda möppu. Dulkóðað afrit (AES-256, sama lykilorð) er gert þar þegar þú opnar hana með lykilorðinu; í möppu forritsins eru afritin eins og gagnagrunnurinn.
+Cette généalogie est protégée par un mot de passe : ses sauvegardes le sont aussi. Utilise « Sauvegarde complète protégée » avec le même mot de passe. ¦ Þessi ættfræði er varin með lykilorði: afrit hennar líka. Notaðu „Varið heildarafrit“ með sama lykilorði.
+Cette généalogie est verrouillée : donne son mot de passe pour l’ouvrir. ¦ Þessi ættfræði er læst: sláðu inn lykilorðið til að opna hana.
+Cette généalogie est verrouillée par un mot de passe : ouvre-la d’abord. ¦ Þessi ættfræði er læst með lykilorði: opnaðu hana fyrst.
+Cette généalogie n’a pas de mot de passe. ¦ Þessi ættfræði er ekki með lykilorð.
+Changer le délai ¦ Breyta tímanum
+Changer le mot de passe ¦ Breyta lykilorðinu
+Changer, ou retirer ¦ Breyta eða fjarlægja
+Coche la case : sans ce mot de passe, tu ne pourras plus ouvrir cette généalogie dans l’app. ¦ Hakaðu í reitinn: án þessa lykilorðs geturðu ekki lengur opnað þessa ættfræði í forritinu.
+Courriers en série ¦ Fjöldabréf
+Dossier déplacé vers une autre généalogie ¦ Mál flutt í aðra ættfræði
+Dossier ou objet ¦ Mál eða hlutur
+Dossier, poste, action… ¦ Mál, tölva, aðgerð…
+Durée changée. Lignes plus anciennes effacées : {n} ¦ Tíma breytt. Eldri línum eytt: {n}
+Durée de conservation changée ¦ Geymslutíma breytt
+Durée inconnue. ¦ Óþekktur tími.
+Délai de reverrouillage changé ¦ Tíma að endurlæsingu breytt
+Délai de reverrouillage inconnu. ¦ Óþekktur tími að endurlæsingu.
+Elle est protégée par un mot de passe. ¦ Hún er varin með lykilorði.
+Export ¦ Útflutningur
+Exports ¦ Útflutningar
+Force : {s} ¦ Styrkur: {s}
+Généalogie ouverte avec le mot de passe ¦ Ættfræði opnuð með lykilorðinu
+Il n’y a pas d’autre généalogie. ¦ Engin önnur ættfræði er til.
+Impossible de retirer le verrou (dossier des données en lecture seule ?). ¦ Ekki tókst að fjarlægja lásinn (gagnamappa skrifvarin?).
+Impossible de vérifier le mot de passe (dossier des données en lecture seule ?). ¦ Ekki tókst að athuga lykilorðið (gagnamappa skrifvarin?).
+Impossible d’enregistrer le verrou (dossier des données en lecture seule ?). ¦ Ekki tókst að vista lásinn (gagnamappa skrifvarin?).
+Impossible d’ouvrir cette généalogie. ¦ Ekki tókst að opna þessa ættfræði.
+Impression ou PDF ¦ Prentun eða PDF
+Impressions ¦ Prentanir
+Journal du dossier (CSV) ¦ Dagbók málsins (CSV)
+J’ai compris : sans ce mot de passe, je ne pourrai plus ouvrir cette généalogie dans l’app. ¦ Ég skil: án þessa lykilorðs get ég ekki lengur opnað þessa ættfræði í forritinu.
+Le mot de passe est trop long (1024 caractères au plus). ¦ Lykilorðið er of langt (1024 stafir hið mesta).
+Le serveur de l’app ne répond pas. Réessaie. ¦ Þjónn forritsins svarar ekki. Reyndu aftur.
+Le verrou n’empêche pas de lire le fichier si quelqu’un le copie : il n’est pas chiffré. Pour ça, chiffre le disque de ton ordinateur : FileVault sur Mac (Réglages Système → Confidentialité et sécurité), BitLocker sous Windows (Paramètres → Confidentialité et sécurité → Chiffrement de l’appareil). ¦ Lásinn kemur ekki í veg fyrir að skráin sé lesin ef einhver afritar hana: hún er ekki dulkóðuð. Dulkóðaðu til þess disk tölvunnar: FileVault á Mac (Kerfisstillingar → Persónuvernd og öryggi), BitLocker í Windows (Stillingar → Persónuvernd og öryggi → Dulkóðun tækis).
+Lecture seule : rien ne se modifie ; seule cette durée fait disparaître les lignes plus vieilles (et c’est noté). ¦ Aðeins lesið: engu er breytt; aðeins þessi tími lætur eldri línur hverfa (og það er skráð).
+Lecture seule. Tous les dossiers : Réglages → 📜 Qui a vu quoi. ¦ Aðeins lesið. Öll mál: Stillingar → 📜 Hver sá hvað.
+Les deux mots de passe ne sont pas pareils. ¦ Lykilorðin tvö eru ekki eins.
+Les ouvertures de dossier, les impressions, les exports, les courriers en série et chaque essai du mot de passe, notés par l’app sur ce poste ({machine}). ¦ Opnanir mála, prentanir, útflutningar, fjöldabréf og hver tilraun með lykilorð, skráð af forritinu á þessari tölvu ({machine}).
+Les sauvegardes de cette généalogie sont toujours protégées par ce mot de passe (AES-256) : aucune copie ne sort en clair de son dossier. ¦ Afrit þessarar ættfræði eru alltaf varin með þessu lykilorði (AES-256): ekkert afrit fer ódulkóðað úr möppu hennar.
+Lettres rangées : {n} ¦ Skráð bréf: {n}
+Lettres retirées (↶ Annuler) : {n} ¦ Fjarlægð bréf (↶ Afturkalla): {n}
+Lignes : {n} sur {t} ¦ Línur: {n} af {t}
+Lignes anciennes effacées ¦ Gömlum línum eytt
+Lignes effacées : {n} (gardées : {m}) ¦ Eyddar línur: {n} (geymt: {m})
+Mode consultation : le registre ne se lit pas. ¦ Skoðunarhamur: ekki er hægt að lesa skrána.
+Mot de passe changé ¦ Lykilorði breytt
+Mot de passe changé. Les autres fenêtres ouvertes devront le redemander. ¦ Lykilorði breytt. Aðrir opnir gluggar þurfa að biðja um það aftur.
+Mot de passe de cette généalogie ¦ Lykilorð þessarar ættfræði
+Mot de passe oublié : il n’y a pas de porte dérobée. Sans lui, cette généalogie ne peut plus être ouverte dans l’app. ¦ Gleymt lykilorð: það er engin bakdyraleið. Án þess er ekki lengur hægt að opna þessa ættfræði í forritinu.
+Mot de passe oublié ? ¦ Gleymdirðu lykilorðinu?
+Mot de passe posé ¦ Lykilorð sett
+Mot de passe refusé ¦ Lykilorði hafnað
+Mot de passe retiré ¦ Lykilorð fjarlægt
+Musée de famille ¦ Fjölskyldusafn
+Ouvertures ¦ Opnanir
+Ouverture… ¦ Opnar…
+Ouvrir une autre généalogie ¦ Opna aðra ættfræði
+Paquet du travail à deux ¦ Pakki samvinnu tveggja
+Partage avec la famille ¦ Deiling með fjölskyldunni
+Patiente {n} s ¦ Bíddu í {n} sek.
+Patiente {n} s avant de réessayer. ¦ Bíddu í {n} sek. áður en þú reynir aftur.
+Poste ¦ Tölva
+Pour une généalogie protégée, tape son mot de passe : la sauvegarde est chiffrée avec lui (AES-256). ¦ Fyrir varða ættfræði skaltu slá inn lykilorð hennar: afritið er dulkóðað með því (AES-256).
+Protéger ¦ Verja
+Protéger cette généalogie ¦ Verja þessa ættfræði
+Protégée ¦ Varin
+Qui a vu ce dossier ¦ Hver sá þetta mál
+Qui a vu le dossier {n} ¦ Hver sá mál {n}
+Qui a vu quoi ¦ Hver sá hvað
+Registre « Qui a vu quoi » (CSV) ¦ Skráin „Hver sá hvað“ (CSV)
+Retirer le mot de passe ¦ Fjarlægja lykilorðið
+Retirer le mot de passe de « {name} » ? Elle s’ouvrira sans rien demander, et ses sauvegardes ne seront plus forcément protégées. ¦ Fjarlægja lykilorð „{name}“? Hún opnast án þess að spyrja og afrit hennar verða ekki endilega varin lengur.
+Reverrouillée (délai passé ou app relancée) ¦ Læst aftur (tíminn liðinn eða forritið endurræst)
+Sans ce mot de passe, cette généalogie ne peut plus être ouverte dans l’app : il n’existe pas de porte dérobée, et personne ne peut le retrouver pour toi. ¦ Án þessa lykilorðs er ekki lengur hægt að opna þessa ættfræði í forritinu: það er engin bakdyraleið og enginn getur endurheimt það fyrir þig.
+Sauvegarde complète ¦ Heildarafrit
+Se verrouille après {m} sans rien toucher, à la fermeture de l’app et quand on change de généalogie. ¦ Læsist eftir {m} án virkni, þegar forritinu er lokað og þegar skipt er um ættfræði.
+Site web ¦ Vefsíða
+Site web publié ¦ Vefsíða birt
+Tableau de bord des dossiers (CSV) · dossiers : {n} ¦ Yfirlit mála (CSV) · mál: {n}
+Tableau, arbre ou parts imprimés ¦ Tafla, tré eða hlutar prentuð
+Tape d’abord le mot de passe actuel. ¦ Sláðu fyrst inn núverandi lykilorð.
+Tape le mot de passe. ¦ Sláðu inn lykilorðið.
+Tout le registre ¦ Öll skráin
+Un verrou à l’ouverture de « {name} », sur cet ordinateur et sur les autres. ¦ Lás þegar „{name}“ er opnuð, á þessari tölvu og hinum.
+Verrouiller après ¦ Læsa eftir
+Verrouiller maintenant ¦ Læsa núna
+Verrouiller maintenant (généalogie protégée par un mot de passe) ¦ Læsa núna (ættfræði varin með lykilorði)
+Verrouillée : {names} (ouvre-la avec son mot de passe pour voir ses dossiers) ¦ Læst: {names} (opnaðu hana með lykilorðinu til að sjá málin)
+Verrouillée à la main ¦ Læst handvirkt
+après {m} ¦ eftir {m}
+pour changer le délai ¦ til að breyta tímanum
+pour changer le mot de passe ¦ til að breyta lykilorðinu
+pour retirer le mot de passe ¦ til að fjarlægja lykilorðið
+pour une sauvegarde protégée ¦ fyrir varið afrit
+protégée par un mot de passe ¦ varin með lykilorði
+sans rien toucher ¦ án virkni
+très bon ¦ mjög gott
+« {name} » est verrouillée ¦ „{name}“ er læst
+📜 Qui a vu quoi ¦ 📜 Hver sá hvað
+🔐 Généalogie verrouillée ¦ 🔐 Ættfræði læst
+🔐 Mot de passe de cette généalogie ¦ 🔐 Lykilorð þessarar ættfræði
+faible ¦ veikt
+moyen ¦ miðlungs
+bon ¦ gott
+pour ouvrir la généalogie ¦ til að opna ættfræðina
+Ce dossier appartient à l’app (données, médias ou sauvegardes d’une généalogie) : choisis un autre dossier. ¦ Þessi mappa tilheyrir forritinu (gögn, miðlar eða afrit ættfræði): veldu aðra möppu.
+Ce fichier est rangé dans les dossiers de l’app : choisis un fichier ailleurs. ¦ Þessi skrá er í möppum forritsins: veldu skrá annars staðar.
+Cette copie est rangée dans les dossiers d’une autre généalogie : elle ne peut pas être remise ici. ¦ Þetta afrit er í möppum annarrar ættfræði: ekki er hægt að endurheimta það hér.
+Cette copie vient d’une généalogie protégée par un mot de passe : ouvre-la pour la restaurer. ¦ Þetta afrit kemur úr ættfræði sem er varin með lykilorði: opnaðu hana til að endurheimta það.
+Cette base est protégée par un mot de passe : donne-le pour l’ouvrir. ¦ Þessi gagnagrunnur er varinn með lykilorði: sláðu það inn til að opna hann.

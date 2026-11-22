@@ -1,0 +1,374 @@
+fr ¦ sq ¦ mt
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Vende për t’u vendosur ¦ Postijiet li jridu jitqiegħdu
+Lieux à placer… ¦ Vende për t’u vendosur… ¦ Postijiet li jridu jitqiegħdu…
+Placer… ¦ Vendos… ¦ Poġġi…
+Les placer ¦ Vendosi ¦ Poġġihom
+Rien n’est pris tant que tu ne cliques pas. ¦ Nuk merret asgjë derisa të klikosh. ¦ Xejn ma jittieħed sakemm ma tikklikkjax.
+Revoir et placer en lot… ¦ Rishiko dhe vendos në grup… ¦ Irrevedi u poġġi f’daqqa…
+Seulement les lieux de cette carte ({n}). ¦ Vetëm vendet e kësaj harte ({n}). ¦ Biss il-postijiet ta’ din il-mappa ({n}).
+Voir tous les lieux à placer ¦ Shih të gjitha vendet për t’u vendosur ¦ Ara l-postijiet kollha li jridu jitqiegħdu
+Lecture des lieux… ¦ Po lexohen vendet… ¦ Qed jinqraw il-postijiet…
+Chercher un lieu… ¦ Kërko një vend… ¦ Fittex post…
+De A à Z ¦ Nga A te Zh ¦ Minn A sa Ż
+Le plus loin du reste ¦ Më larg nga të tjerët ¦ L-iktar ’il bogħod mill-bqija
+{a} · {b} concernés ¦ {a} · {b} të prekura ¦ {a} · {b} affettwati
+Aucun lieu pour ce choix. ¦ Asnjë vend për këtë zgjedhje. ¦ L-ebda post għal din l-għażla.
+Tous les lieux de ta base ont une position. ¦ Të gjitha vendet në bazën tënde kanë një pozicion. ¦ Il-postijiet kollha fid-database tiegħek għandhom pożizzjoni.
+à {km} km du reste ¦ {km} km nga të tjerët ¦ {km} km mill-bqija
+Placer ici ¦ Vendose këtu ¦ Poġġi hawn
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ {km} km nga vendet e tjera të këtyre ngjarjeve: kontrollo para se ta vendosësh. ¦ {km} km mill-postijiet l-oħra ta’ dawn l-avvenimenti: iċċekkja qabel ma tpoġġi.
+Placer les {n} ensemble ¦ Vendosi të {n} bashkë ¦ Poġġi l-{n} flimkien
+Pas un lieu ¦ Nuk është vend ¦ Mhux post
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ 300 të parat; kërko një emër për të parë të tjerat. ¦ L-ewwel 300; fittex isem biex tara l-oħrajn.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ {a} u vendosën ({b}) · shfaqen në të gjitha hartat ¦ {a} tqiegħdu ({b}) · jidhru fuq il-mapep kollha
+{name} placé ({n}) · {where} ¦ {name} u vendos ({n}) · {where} ¦ {name} tqiegħed ({n}) · {where}
+{name} placé ({a}, {b}) ¦ {name} u vendos ({a}, {b}) ¦ {name} tqiegħed ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ «{name}» u la mënjanë (nuk është vend) ¦ “{name}” imwarrab (mhux post)
+« {name} » remis dans la liste ¦ «{name}» u kthye në listë ¦ “{name}” reġa’ fil-lista
+LOIN DU RESTE ¦ LARG NGA TË TJERËT ¦ ’IL BOGĦOD MILL-BQIJA
+Placer « {name} » si loin ? ¦ Ta vendosësh «{name}» kaq larg? ¦ Tpoġġi “{name}” daqshekk ’il bogħod?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ «{where}» është {km} km nga vendet e tjera të këtyre ngjarjeve. Shpesh është një emërnjëjtë. ¦ “{where}” jinsab {km} km mill-postijiet l-oħra ta’ dawn l-avvenimenti. Spiss ikun post bl-istess isem.
+Placer quand même ¦ Vendose gjithsesi ¦ Poġġi xorta
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Kliko në hartë te vendi i «{name}» (Esc për ta lënë). ¦ Ikklikkja fuq il-mappa fejn hemm “{name}” (Esc biex tħalli).
+{name} placé à la main (position approchée) ¦ {name} u vendos me dorë (pozicion i përafërt) ¦ {name} tqiegħed bl-idejn (pożizzjoni approssimattiva)
+Pas de réseau : rien n’a été envoyé. ¦ Pa rrjet: nuk u dërgua asgjë. ¦ M’hemmx netwerk: xejn ma ntbagħat.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Shërbimi në internet nuk gjeti asgjë për «{name}». ¦ Is-servizz online ma sab xejn għal “{name}”.
+{n} de plus pour « {name} » : à toi de choisir. ¦ Edhe {n} për «{name}»: zgjidh ti. ¦ {n} oħra għal “{name}”: int tagħżel.
+EN LIGNE ¦ NË INTERNET ¦ ONLINE
+En ligne… ¦ Në internet… ¦ Online…
+Chercher « {name} » en ligne ? ¦ Ta kërkosh «{name}» në internet? ¦ Tfittex “{name}” online?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ Te shërbimi i kërkimit të adresave të IGN (Géoplateforme) dërgohet vetëm emri i vendit «{name}». Asnjë emër personi, asnjë datë. ¦ Lis-servizz tat-tfittxija tal-indirizzi tal-IGN (Géoplateforme) jintbagħat biss l-isem tal-post “{name}”. L-ebda isem ta’ persuna, l-ebda data.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Përgjigjja është edhe një propozim në listë; e zgjedh ose jo. Pa internet: «Pa rrjet: nuk u dërgua asgjë». ¦ It-tweġiba hija proposta oħra fil-lista; tagħżilha jew le. Mingħajr internet: “M’hemmx netwerk: xejn ma ntbagħat”.
+Ne plus me demander pour cette séance ¦ Mos më pyet më gjatë këtij sesioni ¦ Terġax tistaqsini f’din is-sessjoni
+Lieu tapé ¦ Vendi i shkruar ¦ Post miktub
+Pourquoi ¦ Pse ¦ Għaliex
+Distance au reste ¦ Largësia nga të tjerët ¦ Distanza mill-bqija
+Év. ¦ Ngj. ¦ Avv.
+{n} km ¦ {n} km ¦ {n} km
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ «Asgjë nuk u gjet» nuk janë në rishikim. Një vend më larg se {km} km nga të tjerët nuk shënohet kurrë vetë. ¦ Il-“xejn ma nstab” mhumiex fir-reviżjoni. Post aktar minn {km} km mill-bqija qatt ma jiġi mmarkat waħdu.
+Seulement les sûrs ¦ Vetëm të sigurtat ¦ Biss dawk żguri
+Seulement les « sûrs » ¦ Vetëm «të sigurtat» ¦ Biss dawk “żguri”
+Revoir avant de placer ¦ Rishiko para vendosjes ¦ Irrevedi qabel tpoġġi
+Placer les cochés ¦ Vendos të shënuarat ¦ Poġġi dawk immarkati
+Coche au moins un lieu. ¦ Shëno të paktën një vend. ¦ Immarka mill-inqas post wieħed.
+Placer les {n} cochés ¦ Vendos të {n} të shënuarat ¦ Poġġi l-{n} immarkati
+Réglages des lieux à placer enregistrés ¦ Cilësimet e vendeve për t’u vendosur u ruajtën ¦ L-issettjar tal-postijiet li jridu jitqiegħdu ġie ssejvjat
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Vendet pa pozicion, të grupuara sipas komunës së mundshme: vendosi me një klikim ¦ Il-postijiet mingħajr pożizzjoni, miġbura skont il-komun probabbli: poġġihom bi klikk waħda
+Cochés au départ dans la revue ¦ Të shënuara që në fillim në rishikim ¦ Immarkati mill-bidu fir-reviżjoni
+Les sûrs et les probables ¦ Të sigurtat dhe të mundshmet ¦ Dawk żguri u dawk probabbli
+Un lieu-dit ¦ Një lokalitet ¦ Lokalità
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ Te lokaliteti nëse dihet, përndryshe në qendër të komunës, i shënuar «i përafërt» ¦ Fil-lokalità jekk magħrufa, inkella fiċ-ċentru tal-komun immarkat “approssimattiv”
+Toujours au centre de la commune ¦ Gjithmonë në qendër të komunës ¦ Dejjem fiċ-ċentru tal-komun
+Ne pas le placer ¦ Mos e vendos ¦ Tpoġġihx
+Plusieurs communes du même nom ¦ Disa komuna me të njëjtin emër ¦ Diversi komuni bl-istess isem
+Proposer la plus proche des autres lieux, jamais cochée ¦ Propozo më të afërtin me vendet e tjera, kurrë të shënuar ¦ Ipproponi l-eqreb wieħed lejn il-postijiet l-oħra, qatt immarkat
+Aussi les fautes proches, proposées seulement ¦ Edhe gabimet e afërta, vetëm si propozim ¦ Anke żbalji qrib, proposti biss
+Le nom exact seulement ¦ Vetëm emri i saktë ¦ L-isem eżatt biss
+Ce qui est repris ¦ Çfarë merret ¦ X’jittieħed
+Position, code INSEE et département ¦ Pozicioni, kodi INSEE dhe departamenti ¦ Pożizzjoni, kodiċi INSEE u dipartiment
+La position seulement ¦ Vetëm pozicioni ¦ Il-pożizzjoni biss
+Jamais : le bouton est caché ¦ Kurrë: butoni është i fshehur ¦ Qatt: il-buttuna hija moħbija
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Një buton «🌐 Në internet…» për çdo vend, me mesazhin çdo herë (kurrë në grup, kurrë vetë) ¦ Buttuna waħda “🌐 Online…” għal kull post, bil-messaġġ kull darba (qatt f’daqqa, qatt waħedha)
+Alerte « loin du reste » ¦ Sinjalizim «larg nga të tjerët» ¦ Twissija “’il bogħod mill-bqija”
+À partir de 200 km ¦ Nga 200 km ¦ Minn 200 km
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ I njëjti emër dhe i njëjti departament si në regjistrin e komunave: vetëm një komunë «{name}». Merren qendra, kodi INSEE dhe departamenti. ¦ L-istess isem u l-istess dipartiment bħal fir-reġistru tal-komuni: komun wieħed biss “{name}”. Jittieħdu ċ-ċentru, il-kodiċi INSEE u d-dipartiment.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ Vetëm një komunë «{name}» në Francë, por pa departament të shkruar. ¦ Komun wieħed biss “{name}” fi Franza, iżda l-ebda dipartiment miktub.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ {n} komuna me këtë emër në Francë. Propozohen më të afërtat me vendet e tjera të këtyre ngjarjeve, kurrë të shënuara vetë. ¦ {n} komuni b’dan l-isem fi Franza. Jiġu proposti l-eqreb lejn il-postijiet l-oħra ta’ dawn l-avvenimenti, qatt immarkati waħedhom.
+{n} communes de ce nom en France : choisis la bonne. ¦ {n} komuna me këtë emër në Francë: zgjidh të duhurën. ¦ {n} komuni b’dan l-isem fi Franza: agħżel it-tajjeb.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Lokalitet i njohur në regjistër (GeoNames) në komunën {name}. ¦ Lokalità magħrufa fir-reġistru (GeoNames) fil-komun ta’ {name}.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Lokaliteti nuk njihet në regjistër: në qendër të {name}, i shënuar «pozicion i përafërt». ¦ Lokalità mhux magħrufa fir-reġistru: fiċ-ċentru ta’ {name}, immarkata “pożizzjoni approssimattiva”.
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Nuk është komunë e sotme; historiku INSEE (🏛 Kufij të vjetër) thotë: u bashkua me {to} në {year}. ¦ Mhux komun tal-lum; l-istorja tal-INSEE (🏛 Fruntieri antiki) tgħid: ingħaqad ma’ {to} fl-{year}.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Qytet i botës që vjen me aplikacionin, i zgjedhur sipas shtetit të shkruar ({country}). ¦ Belt tad-dinja li tiġi mal-app, magħżula skont il-pajjiż miktub ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Nuk u gjet mes qyteteve të botës që vijnë për këtë shtet ({country}). ¦ Ma nstabx fost il-bliet tad-dinja li jiġu għal dan il-pajjiż ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Asnjë komunë me këtë emër. Propozohet një shkrim i afërt. Nuk kërkohet asgjë në internet. ¦ L-ebda komun b’dan l-isem. Tiġi proposta ortografija qrib. Xejn ma jiġi mfittex online.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Asnjë komunë me këtë emër. Nuk kërkohet asgjë në internet. ¦ L-ebda komun b’dan l-isem. Xejn ma jiġi mfittex online.
+le plus proche ¦ më i afërti ¦ l-eqreb
+sûr ¦ i sigurt ¦ żgur
+=proposition ¦ propozim|propozime ¦ proposta|proposti|proposti|proposti|proposti
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ Në çdo menu, zgjedhja e parë është ajo e këshilluar: është e caktuar që në fillim. ¦ F’kull menu, l-ewwel għażla hija dik rakkomandata: hija ssettjata mill-bidu.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ Zanatet në hartë (sipas sektorit, shekull pas shekulli) ¦ Is-snajja’ fuq il-mappa (skont is-settur, seklu wara seklu)
+Les métiers notés (un par ligne) ¦ Zanatet e shënuara (një për rresht) ¦ Is-snajja’ mniżżla (waħda għal kull linja)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Vendi («Tulle», «Tulle 45.27, 1.77») ¦ Post (“Tulle”, “Tulle 45.27, 1.77”)
+Classer par ¦ Klasifiko sipas ¦ Ikklassifika skont
+Famille de métiers du dictionnaire (18) ¦ Familja e zanateve nga fjalori (18) ¦ Familja ta’ snajja’ mid-dizzjunarju (18)
+Un seul métier et ses variantes ¦ Vetëm një zanat dhe variantet e tij ¦ Sengħa waħda u l-varjanti tagħha
+Un métier et ses variantes ¦ Një zanat dhe variantet e tij ¦ Sengħa u l-varjanti tagħha
+Mes couleurs à moi par métier ¦ Ngjyrat e mia për çdo zanat ¦ Il-kuluri tiegħi għal kull sengħa
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Ngjyrat e mia («tisserand=#aa3300; meunier=#3355aa») ¦ Il-kuluri tiegħi (“tisserand=#aa3300; meunier=#3355aa”)
+Camembert par commune ¦ Grafik me pite për komunë ¦ Grafika tat-torta għal kull komun
+Un rond de la couleur du plus fréquent ¦ Një rreth me ngjyrën e më të shpeshtit ¦ Ċirku bil-kulur tal-iktar frekwenti
+Siècle par siècle ¦ Shekull pas shekulli ¦ Seklu wara seklu
+Un petit dessin par siècle ¦ Një hartë e vogël për çdo shekull ¦ Mappa żgħira għal kull seklu
+Tout ensemble ¦ Të gjitha bashkë ¦ Kollox flimkien
+Où placer le métier ¦ Ku vendoset zanati ¦ Fejn titqiegħed is-sengħa
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Vendi i aktit, përndryshe banimi, përndryshe lindja ¦ Il-post tal-att, inkella r-residenza, inkella t-twelid
+Lieu de l’acte seulement ¦ Vetëm vendi i aktit ¦ Il-post tal-att biss
+Plusieurs métiers ¦ Disa zanate ¦ Diversi snajja’
+Chacun à sa date ¦ Secili në datën e vet ¦ Kull waħda fid-data tagħha
+Le principal seulement ¦ Vetëm kryesori ¦ Il-prinċipali biss
+Montrés ¦ Të shfaqur ¦ Murija
+Cachés ¦ Të fshehur ¦ Moħbija
+Les plus grands ¦ Më të mëdhatë ¦ L-akbar
++ {n} secteurs vides ¦ + {n} sektorë bosh ¦ + {n} setturi vojta
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Harta e zanateve: {n}, një hartë e vogël për çdo shekull. ¦ Mappa tas-snajja’: {n}, mappa żgħira għal kull seklu.
+Carte des métiers : {a}, {b} ({when}). ¦ Harta e zanateve: {a}, {b} ({when}). ¦ Mappa tas-snajja’: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Harta e zanateve: {a}, {b}. ¦ Mappa tas-snajja’: {a}, {b}.
+Carte des métiers : {n}. ¦ Harta e zanateve: {n}. ¦ Mappa tas-snajja’: {n}.
+Clic : les métiers de ce lieu ¦ Kliko: zanatet e këtij vendi ¦ Ikklikkja: is-snajja’ ta’ dan il-post
+Aucun métier noté au {when}. ¦ Asnjë zanat i shënuar në {when}. ¦ L-ebda sengħa mniżżla fil-{when}.
+Aucun métier pour ce choix. ¦ Asnjë zanat për këtë zgjedhje. ¦ L-ebda sengħa għal din l-għażla.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Merr zanatet nga gjenealogjia jote («Nga aplikacioni»). ¦ Ħu s-snajja’ mill-ġenealoġija tiegħek (“Mill-app”).
+LES MÉTIERS SUR LA CARTE ¦ ZANATET NË HARTË ¦ IS-SNAJJA’ FUQ IL-MAPPA
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ Një klikim mbi një zanat hap skedën e tij (🛠️ Zanate të vjetra). ¦ Klikk fuq sengħa jiftaħ l-iskeda tagħha (🛠️ Snajja’ antiki).
+Les métiers de ta généalogie ¦ Zanatet në gjenealogjinë tënde ¦ Is-snajja’ fil-ġenealoġija tiegħek
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Zanatet e shënuara (profesion, regjistrim, skedë), të klasifikuara si te Pema e zanateve. Kurrë një i gjallë ose një skedë konfidenciale. ¦ Is-snajja’ mniżżla (professjoni, ċensiment, skeda), ikklassifikati bħal fis-Siġra tas-snajja’. Qatt persuna ħajja jew skeda kunfidenzjali.
+Hommes et femmes ¦ Burra dhe gra ¦ Irġiel u nisa
+Les femmes ¦ Gratë ¦ In-nisa
+Toutes les époques ¦ Të gjitha epokat ¦ L-epoki kollha
+Aucun métier ¦ Asnjë zanat ¦ L-ebda sengħa
+Aucun métier avec un lieu pour ce choix. ¦ Asnjë zanat me vend për këtë zgjedhje. ¦ L-ebda sengħa b’post għal din l-għażla.
+Où on était {trade} ¦ Ku ishin {trade} ¦ Fejn kienu {trade}
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ {a} të shënuara · {b} të klasifikuara · {c} «❔ tjetër» për t’u klasifikuar ¦ {a} mniżżla · {b} ikklassifikati · {c} “❔ oħra” biex jiġu kklassifikati
+Mes ancêtres seulement ¦ Vetëm paraardhësit e mi ¦ L-antenati tiegħi biss
+Par famille de métiers du dictionnaire (18) ¦ Sipas familjes së zanateve nga fjalori (18) ¦ Skont il-familja ta’ snajja’ mid-dizzjunarju (18)
+Par grand secteur (12) ¦ Sipas sektorit kryesor (12) ¦ Skont is-settur ewlieni (12)
+employé ¦ nëpunës ¦ impjegat
+ménagère ¦ shtëpiake ¦ mara tad-dar
+Où on l’exerçait ¦ Ku ushtrohej ¦ Fejn kienet issir
+# 👫 Les deux lignées en miroir (partie 1)
+Les deux lignées en miroir (côté père, côté mère) ¦ Dy linjat në pasqyrë (ana e babait, ana e nënës) ¦ Iż-żewġ nisel f’mera (in-naħa tal-missier, in-naħa tal-omm)
+Les événements des deux côtés (un par ligne) ¦ Ngjarjet e të dyja anëve (një për rresht) ¦ L-avvenimenti taż-żewġ naħat (wieħed għal kull linja)
+Ancêtre des deux côtés ¦ Paraardhës nga të dyja anët ¦ Antenat miż-żewġ naħat
+Aucun ancêtre connu : {who} ¦ Asnjë paraardhës i njohur: {who} ¦ L-ebda antenat magħruf: {who}
+Bleu / orange (lisibles aussi par les daltoniens) ¦ Blu / portokalli (të lexueshme edhe për daltonikët) ¦ Blu / oranġjo (jinqraw anke minn min hu għama għall-kuluri)
+Compté des deux côtés, couleur mélangée ¦ Numërohet nga të dyja anët, ngjyrë e përzier ¦ Jingħadd fiż-żewġ naħat, kulur imħallat
+Seulement du côté du chemin le plus court ¦ Vetëm nga ana e rrugës më të shkurtër ¦ Biss min-naħa tal-iqsar triq
+Couleur du premier côté ¦ Ngjyra e anës së parë ¦ Kulur tal-ewwel naħa
+Couleur du deuxième côté ¦ Ngjyra e anës së dytë ¦ Kulur tat-tieni naħa
+Côté père / côté mère ¦ Ana e babait / ana e nënës ¦ In-naħa tal-missier / in-naħa tal-omm
+Côté père / côté mère, avant la Révolution ¦ Ana e babait / e nënës, para Revolucionit ¦ In-naħa tal-missier / tal-omm, qabel ir-Rivoluzzjoni
+Mes quatre grands-parents (4 couleurs) ¦ Katër gjyshërit e mi (4 ngjyra) ¦ L-erba’ nanniet tiegħi (4 kuluri)
+Deux personnes au choix ¦ Dy persona sipas zgjedhjes ¦ Żewġ persuni tal-għażla tiegħek
+Deux noms de famille ¦ Dy mbiemra ¦ Żewġ kunjomijiet
+Deux groupes de Mes listes ¦ Dy grupe nga Listat e mia ¦ Żewġ gruppi mil-Listi tiegħi
+Premier nom ¦ Mbiemri i parë ¦ L-ewwel kunjom
+Deuxième nom ¦ Mbiemri i dytë ¦ It-tieni kunjom
+Première liste ¦ Lista e parë ¦ L-ewwel lista
+Deuxième liste ¦ Lista e dytë ¦ It-tieni lista
+Deux lignées de ta généalogie ¦ Dy linja të gjenealogjisë sate ¦ Żewġ nisel mill-ġenealoġija tiegħek
+Côté père et côté mère de la personne de départ (ou quatre grands-parents, deux personnes, deux noms, deux listes). Jamais un vivant ni une fiche confidentielle : une personne de départ vivante n’est jamais un point. ¦ Ana e babait dhe ana e nënës së personit fillestar (ose katër gjyshër, dy persona, dy emra, dy lista). Kurrë një i gjallë ose një skedë konfidenciale: një person fillestar i gjallë nuk është kurrë pikë. ¦ In-naħa tal-missier u tal-omm tal-persuna tal-bidu (jew erba’ nanniet, żewġ persuni, żewġ ismijiet, żewġ listi). Qatt persuna ħajja jew skeda kunfidenzjali: persuna tal-bidu ħajja qatt ma tkun tikka.
+Glisser (un trait à déplacer) ¦ Rrëshqit (një vijë për ta lëvizur) ¦ Iżżerżaq (linja li tiċċaqlaq)
+LES DEUX LIGNÉES ¦ DY LINJAT ¦ IŻ-ŻEWĠ NISEL
+Le mariage des parents (💍) ¦ Martesa e prindërve (💍) ¦ Iż-żwieġ tal-ġenituri (💍)
+Les deux lignées ¦ Të dyja linjat ¦ Iż-żewġ nisel
+Les deux lignées : {a}, {b} où elles se rencontrent. ¦ Të dyja linjat: {a}, {b} ku takohen. ¦ Iż-żewġ nisel: {a}, {b} fejn jiltaqgħu.
+Les deux lignées : {n}. ¦ Të dyja linjat: {n}. ¦ Iż-żewġ nisel: {n}.
+Les deux lignées de la famille {name} ¦ Dy linjat e familjes {name} ¦ Iż-żewġ nisel tal-familja {name}
+Les deux lignées de {name} ¦ Dy linjat e {name} ¦ Iż-żewġ nisel ta’ {name}
+Les quatre grands-parents de la famille {name} ¦ Katër gjyshërit e familjes {name} ¦ L-erba’ nanniet tal-familja {name}
+Les quatre grands-parents de {name} ¦ Katër gjyshërit e {name} ¦ L-erba’ nanniet ta’ {name}
+Lister sous la carte où elles se rencontrent ¦ Listo nën hartë ku takohen ¦ Elenka taħt il-mappa fejn jiltaqgħu
+Combien de lignes ¦ Sa rreshta ¦ Kemm linji
+Montré ¦ I shfaqur ¦ Muri
+Même commune ¦ E njëjta komunë ¦ L-istess komun
+Même commune à la même époque ¦ E njëjta komunë në të njëjtën kohë ¦ L-istess komun fl-istess żmien
+À moins de quelques km ¦ Brenda pak km ¦ Inqas minn ftit km
+À la même époque : à plus ou moins ¦ Në të njëjtën kohë: plus minus ¦ Fl-istess żmien: plus jew minus
+Où elles se rencontrent ¦ Ku takohen ¦ Fejn jiltaqgħu
+Par 25 ans ¦ Çdo 25 vjet ¦ Kull 25 sena
+Position du trait ¦ Pozicioni i vijës ¦ Pożizzjoni tal-linja
+Prends les deux lignées de ta personne de départ (« Depuis l’app »). ¦ Merr të dyja linjat e personit tënd fillestar («Nga aplikacioni»). ¦ Ħu ż-żewġ nisel tal-persuna tal-bidu tiegħek (“Mill-app”).
+Selon le nombre d’événements ¦ Sipas numrit të ngjarjeve ¦ Skont l-għadd ta’ avvenimenti
+Ses deux lignées sur la carte ¦ Dy linjat e tij në hartë ¦ Iż-żewġ nisel tagħha fuq il-mappa
+Seulement la période ¦ Vetëm periudha ¦ Il-perjodu biss
+Superposées ¦ Të mbivendosura ¦ Waħda fuq l-oħra
+Tout jusqu’à cette date ¦ Gjithçka deri në këtë datë ¦ Kollox sa din id-data
+jamais à la même époque ¦ kurrë në të njëjtën kohë ¦ qatt fl-istess żmien
+mariage de {a} et {b} ¦ martesa e {a} me {b} ¦ iż-żwieġ ta’ {a} u {b}
+{a} et {b}, à {km} km ¦ {a} dhe {b}, {km} km larg ¦ {a} u {b}, {km} km ’il bogħod
+3e groupe ¦ Grupi i 3-të ¦ It-3 grupp
+4e groupe ¦ Grupi i 4-t ¦ Ir-4 grupp
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Hapësira e jetës, brez pas brezi ¦ Iż-żona tal-ħajja, ġenerazzjoni wara ġenerazzjoni
+L’aire de vie de tes ancêtres ¦ Hapësira e jetës së paraardhësve të tu ¦ Iż-żona tal-ħajja tal-antenati tiegħek
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Për çdo brez, zona që mban pjesën më të madhe të lindjeve, martesave dhe vdekjeve të tyre. Të njëjtat largësi si 🧭 Larg djepit. Kurrë një i gjallë ose një skedë konfidenciale. ¦ Għal kull ġenerazzjoni, iż-żona li fiha l-biċċa l-kbira tat-twelid, iż-żwiġijiet u l-imwiet tagħhom. L-istess distanzi bħal 🧭 ’Il bogħod mill-benniena. Qatt persuna ħajja jew skeda kunfidenzjali.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Merr paraardhësit e personit tënd fillestar («Nga aplikacioni»). ¦ Ħu l-antenati tal-persuna tal-bidu tiegħek (“Mill-app”).
+Génération d’ancêtres ¦ Brez paraardhësish ¦ Ġenerazzjoni ta’ antenati
+Siècle (toute la base) ¦ Shekull (gjithë baza) ¦ Seklu (id-database kollha)
+Une vie (les étapes d’une personne) ¦ Një jetë (etapat e një personi) ¦ Ħajja waħda (l-istadji ta’ persuna)
+Avec les résidences et recensements ¦ Me vendbanimet dhe regjistrimet ¦ Bir-residenzi u ċ-ċensimenti
+Du clair (anciens) au foncé (récents) ¦ Nga e çelura (të vjetrit) te e errëta (të rinjtë) ¦ Mill-ċar (l-eqdem) għall-skur (l-aktar riċenti)
+Bleu / orange pour père / mère ¦ Blu / portokalli për babain / nënën ¦ Blu / oranġjo għall-missier / l-omm
+L’inverse ¦ E kundërta ¦ Bil-maqlub
+50 % (le cœur) ¦ 50 % (thelbi) ¦ 50 % (il-qalba)
+Part des événements ¦ Pjesa e ngjarjeve ¦ Sehem tal-avvenimenti
+Part gardée ¦ Pjesa e mbajtur ¦ Sehem miżmum
+Cercle (facile à comparer) ¦ Rreth (i lehtë për t’u krahasuar) ¦ Ċirku (faċli biex tqabbel)
+Enveloppe (le contour au plus juste) ¦ Mbështjellësja (konturi më i ngushtë) ¦ Envelopp (l-iktar kontorn issikkat)
+Personne (l’aire d’une vie) ¦ Person (hapësira e një jete) ¦ Persuna (iż-żona ta’ ħajja waħda)
+Le milieu des événements ¦ Mesi i ngjarjeve ¦ Nofs l-avvenimenti
+Le lieu de naissance de la personne de départ ¦ Vendlindja e personit fillestar ¦ Il-post tat-twelid tal-persuna tal-bidu
+Le berceau des plus anciens ¦ Djepi i më të vjetërve ¦ Il-benniena tal-eqdem
+Toutes les aires superposées ¦ Të gjitha hapësirat të mbivendosura ¦ Iż-żoni kollha waħda fuq l-oħra
+Une par case ¦ Një për kuti ¦ Waħda għal kull kaxxa
+Une à la fois avec ▶ ¦ Një nga një me ▶ ¦ Waħda waħda b’▶
+Minimum pour tracer une aire ¦ Minimumi për të vizatuar një hapësirë ¦ Minimu biex titpinġa żona
+5 événements ¦ 5 ngjarje ¦ 5 avvenimenti
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Te hapësirat (një paraardhës i shkuar larg mbetet jashtë) ¦ Fuq iż-żoni (antenat li mar ’il bogħod jibqa’ barra)
+Cadrer sur tout ¦ Kuadro gjithçka ¦ Inkwadra kollox
+Le tableau sous la carte ¦ Tabela nën hartë ¦ It-tabella taħt il-mappa
+Gén. {g} · ses parents ¦ Brezi {g} · prindërit ¦ Ġen. {g} · il-ġenituri
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Kliko: vendet dhe ato jashtë hapësirës ¦ Ikklikkja: il-postijiet u dawk barra ż-żona
+Hors de l’aire ¦ Jashtë hapësirës ¦ Barra ż-żona
+Rayon ({p} %) ¦ Rrezja ({p} %) ¦ Raġġ ({p} %)
+trop peu ¦ shumë pak ¦ ftit wisq
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Hapësira e jetës: {n}, rreze nga {a} km deri në {b} km. ¦ Żona tal-ħajja: {n}, raġġ minn {a} km sa {b} km.
+Aire de vie : pas assez d’événements. ¦ Hapësira e jetës: nuk ka mjaft ngjarje. ¦ Żona tal-ħajja: m’hemmx biżżejjed avvenimenti.
+Aire de vie : {n}. ¦ Hapësira e jetës: {n}. ¦ Żona tal-ħajja: {n}.
+L’AIRE DE VIE ¦ HAPËSIRA E JETËS ¦ IŻ-ŻONA TAL-ĦAJJA
+L’aire de vie de la famille, siècle par siècle ¦ Hapësira e jetës së familjes, shekull pas shekulli ¦ Iż-żona tal-ħajja tal-familja, seklu wara seklu
+L’aire de vie des ancêtres de {name} ¦ Hapësira e jetës së paraardhësve të {name} ¦ Iż-żona tal-ħajja tal-antenati ta’ {name}
+L’aire d’une vie : {name} ¦ Hapësira e një jete: {name} ¦ Iż-żona ta’ ħajja: {name}
+la famille {name} ¦ familja {name} ¦ il-familja {name}
+Voir l’aire de vie sur la carte ¦ Shih hapësirën e jetës në hartë ¦ Ara ż-żona tal-ħajja fuq il-mappa
+Centre ¦ Qendra ¦ Ċentru
+Côté père et côté mère (deux couleurs) ¦ Ana e babait dhe e nënës (dy ngjyra) ¦ In-naħa tal-missier u tal-omm (żewġ kuluri)
+Mes ancêtres, 8 générations ¦ Paraardhësit e mi, 8 breza ¦ L-antenati tiegħi, 8 ġenerazzjonijiet
+Toute ma base, siècle par siècle ¦ Gjithë baza ime, shekull pas shekulli ¦ Id-database kollha tiegħi, seklu wara seklu
+=aire ¦ hapësirë|hapësira ¦ żona|żoni|żoni|żoni|żoni
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Kumbarët dhe dëshmitarët në hartë ¦ Parrini, madrini u xhieda fuq il-mappa
+Les liens (un par ligne) ¦ Lidhjet (një për rresht) ¦ Ir-rabtiet (waħda għal kull linja)
+D’où vient le témoin ¦ Nga vjen dëshmitari ¦ Minn fejn ġej ix-xhud
+D’où vient le parrain ¦ Nga vjen kumbari ¦ Minn fejn ġej il-parrinu
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ Ajo që shkruhet në akt, përndryshe banimi në atë datë, përndryshe lindja ¦ Dak li hemm miktub fl-att, inkella r-residenza f’dik id-data, inkella t-twelid
+Seulement ce qui est écrit dans l’acte ¦ Vetëm ajo që shkruhet në akt ¦ Biss dak li hemm miktub fl-att
+Seulement sa naissance ¦ Vetëm lindja ¦ It-twelid biss
+Nombre de liens ¦ Numri i lidhjeve ¦ Għadd ta’ rabtiet
+Nombre de personnes différentes ¦ Numri i personave të ndryshëm ¦ Għadd ta’ persuni differenti
+Liens dans le même village ¦ Lidhje në të njëjtin fshat ¦ Rabtiet fl-istess raħal
+Anneau autour du point ¦ Unazë rreth pikës ¦ Ċirku madwar it-tikka
+Un chiffre seulement ¦ Vetëm një numër ¦ Numru biss
+Rôles montrés ¦ Rolet e shfaqura ¦ Rwoli murija
+Parrain, marraine, témoin ¦ Kumbar, kumbarë, dëshmitar ¦ Parrinu, madrina, xhud
+Tous sauf curé et officier ¦ Të gjithë përveç priftit dhe nëpunësit ¦ Kollha ħlief il-kappillan u l-uffiċjal
+Traits montrés ¦ Vijat e shfaqura ¦ Linji murija
+À partir de 1 lien ¦ Nga 1 lidhje ¦ Minn rabta waħda
+À partir de 2 ¦ Nga 2 ¦ Minn 2
+À partir de 3 ¦ Nga 3 ¦ Minn 3
+Les 30 plus forts seulement ¦ Vetëm 30 më të fortat ¦ It-30 l-iktar b’saħħithom biss
+Par rôle ¦ Sipas rolit ¦ Skont ir-rwol
+Par branche (bleu père, orange mère) ¦ Sipas degës (blu babai, portokalli nëna) ¦ Skont il-fergħa (blu missier, oranġjo omm)
+Flèche du village du parrain vers celui de l’acte ¦ Shigjetë nga fshati i kumbarit te ai i aktit ¦ Vleġġa mir-raħal tal-parrinu għal dak tal-att
+La phrase sous la carte ¦ Fjalia nën hartë ¦ Is-sentenza taħt il-mappa
+Clic : les liens derrière ce trait ¦ Kliko: lidhjet pas kësaj vije ¦ Ikklikkja: ir-rabtiet wara din il-linja
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: {p} % e lidhjeve janë nga vetë fshati; të tjerat vijnë kryesisht nga {others}. ¦ {place}: {p} % tar-rabtiet huma mir-raħal stess; l-oħrajn ġejjin l-aktar minn {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Llogaritur mbi {a} me fshat të njohur; {b} pa vend nuk vizatohen. ¦ Ikkalkulat fuq {a} b’raħal magħruf; {b} mingħajr post ma jitpinġewx.
+Parrains et témoins : {a} entre {b}. ¦ Kumbarë dhe dëshmitarë: {a} midis {b}. ¦ Parrini u xhieda: {a} bejn {b}.
+Parrains et témoins : {n}. ¦ Kumbarë dhe dëshmitarë: {n}. ¦ Parrini u xhieda: {n}.
+Filleul ou époux ¦ Famullë ose bashkëshort ¦ Filjozz jew konjuġi
+{n} autres · triés par date ¦ Edhe {n} · sipas datës ¦ {n} oħra · skont id-data
+Ouvrir dans le Réseau ¦ Hap në Rrjet ¦ Iftaħ fin-Netwerk
+PARRAINS ET TÉMOINS ¦ KUMBARË DHE DËSHMITARË ¦ PARRINI U XHIEDA
+Parrains et marraines ¦ Kumbarë dhe kumbara ¦ Parrini u madrini
+Parrains, marraines et témoins ¦ Kumbarë, kumbara dhe dëshmitarë ¦ Parrini, madrini u xhieda
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Merr kumbarët dhe dëshmitarët nga gjenealogjia jote («Nga aplikacioni»). ¦ Ħu l-parrini, il-madrini u x-xhieda mill-ġenealoġija tiegħek (“Mill-app”).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ Lidhjet e 🕸 Rrjetit të marrëdhënieve, në hartë: fshati i aktit dhe ai nga vjen dëshmitari. Dëshmitarët e gjallë nuk numërohen kurrë. ¦ Ir-rabtiet tan-🕸 Netwerk tar-relazzjonijiet, fuq il-mappa: ir-raħal tal-att u dak minn fejn ġej ix-xhud. Xhieda ħajjin qatt ma jingħaddu.
+Aucun lien avec un lieu pour ce choix. ¦ Asnjë lidhje me vend për këtë zgjedhje. ¦ L-ebda rabta b’post għal din l-għażla.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Asnjë lidhje për këtë zgjedhje (role, periudhë, vende). ¦ L-ebda rabta għal din l-għażla (rwoli, perjodu, postijiet).
+Curé, officier ¦ Prift, nëpunës ¦ Kappillan, uffiċjal
+curé ¦ prift ¦ kappillan
+Curé ¦ Prift ¦ Kappillan
+tuteur ¦ kujdestar ¦ tutur
+Voisin ¦ Fqinj ¦ Ġar
+Officier ¦ Nëpunës ¦ Uffiċjal
+bapt. ¦ pagëz. ¦ magħm.
+naiss. ¦ lindje ¦ twel.
+mar. ¦ mart. ¦ żwieġ
+inh. ¦ varrim ¦ difna
+# ⚰️ Crises et épidémies (partie 3) — et les départs « Graphique » de 🕸
+Crises et épidémies (les années où les décès montent) ¦ Kriza dhe epidemi (vitet kur rriten vdekjet) ¦ Kriżijiet u epidemiji (is-snin meta l-imwiet jiżdiedu)
+Les décès (un par ligne) ¦ Vdekjet (një për rresht) ¦ L-imwiet (wieħed għal kull linja)
+Cause notée ¦ Shkaku i shënuar ¦ Kawża mniżżla
+Choléra de 1832 ¦ Kolera e vitit 1832 ¦ Il-kolera tal-1832
+Clic : les personnes, et ce qui se passait à la même époque ¦ Kliko: personat dhe çfarë ndodhte në të njëjtën kohë ¦ Ikklikkja: il-persuni, u x’kien qed jiġri fl-istess żmien
+Comptés avec tout le monde ¦ Numërohen me të gjithë ¦ Jingħaddu ma’ kulħadd
+À part ¦ Veçmas ¦ Separatament
+À part (moins de 10 ans) ¦ Veçmas (nën 10 vjeç) ¦ Separatament (taħt l-10 snin)
+Pas comptés ¦ Nuk numërohen ¦ Ma jingħaddux
+Mes ancêtres et leurs familles ¦ Paraardhësit e mi dhe familjet e tyre ¦ L-antenati tiegħi u l-familji tagħhom
+Les enfants à part (moins de 10 ans) ¦ Fëmijët veçmas (nën 10 vjeç) ¦ It-tfal separatament (taħt l-10 snin)
+Les décès de ta généalogie ¦ Vdekjet në gjenealogjinë tënde ¦ L-imwiet fil-ġenealoġija tiegħek
+Les décès placés et datés (le décès, sinon l’inhumation ; chaque personne une seule fois), et les crises du 🌍 Monde autour avec tes événements locaux. Jamais un vivant ni une fiche confidentielle. ¦ Vdekjet e vendosura dhe të datuara (vdekja, përndryshe varrimi; çdo person vetëm një herë) dhe krizat e 🌍 Botës përreth me ngjarjet e tua vendore. Kurrë një i gjallë ose një skedë konfidenciale. ¦ L-imwiet imqiegħda u datati (il-mewt, inkella d-difna; kull persuna darba biss), u l-kriżijiet tad-🌍 Dinja ta’ madwar mal-avvenimenti lokali tiegħek. Qatt persuna ħajja jew skeda kunfidenzjali.
+Aucun décès daté avec un lieu pour ce choix. ¦ Asnjë vdekje e datuar me vend për këtë zgjedhje. ¦ L-ebda mewt datata b’post għal din l-għażla.
+Décès sans année ou sans lieu, comptés à part : {n} ¦ Vdekje pa vit ose pa vend, numëruar veçmas: {n} ¦ Imwiet mingħajr sena jew post, magħduda separatament: {n}
+Minimum de décès dans l’année ¦ Minimumi i vdekjeve në vit ¦ Minimu ta’ mwiet fis-sena
+Décès au moins ¦ Vdekje të paktën ¦ Imwiet mill-inqas
+2,5 fois l’habitude ¦ 2,5 herë sa zakonisht ¦ 2,5 darbiet is-soltu
+2 fois ¦ 2 herë ¦ 2 darbiet
+3 fois ¦ 3 herë ¦ 3 darbiet
+4 fois ¦ 4 herë ¦ 4 darbiet
+Fois l’habitude ¦ Herë sa zakonisht ¦ Darbiet is-soltu
+Fenêtre de l’habitude ¦ Dritarja e nivelit të zakonshëm ¦ Tieqa tal-livell tas-soltu
+5 ans avant et 5 ans après ¦ 5 vjet para dhe 5 vjet pas ¦ 5 snin qabel u 5 snin wara
+10 et 10 ¦ 10 dhe 10 ¦ 10 u 10
+Seulement les 10 ans avant ¦ Vetëm 10 vitet para ¦ L-10 snin ta’ qabel biss
+L’habitude se calcule par ¦ Niveli i zakonshëm llogaritet me ¦ Il-livell tas-soltu jiġi kkalkulat bil-
+La moyenne ¦ Mesatarja ¦ Il-medja
+La médiane (moins dérangée par une autre crise toute proche) ¦ Mediana (më pak e ndikuar nga një krizë tjetër e afërt) ¦ Il-medjan (inqas imfixkel minn kriżi oħra qrib)
+La commune, les petites regroupées avec leurs voisines ¦ Komuna, të voglat të grupuara me fqinjët ¦ Il-komun, iż-żgħar miġbura mal-ġirien tagħhom
+Toujours la commune ¦ Gjithmonë komuna ¦ Dejjem il-komun
+Le département ¦ Departamenti ¦ Id-dipartiment
+Petit village : nombre de décès sur toute la période, moins de ¦ Fshat i vogël: numri i vdekjeve gjatë gjithë periudhës, më pak se ¦ Raħal żgħir: għadd ta’ mwiet matul il-perjodu kollu, inqas minn
+Enfant : moins de ¦ Fëmijë: nën ¦ Tifel: taħt
+Repères proposés ¦ Pika referimi të propozuara ¦ Punti ta’ referenza proposti
+Les crises du 🌍 Monde autour qui couvrent la commune, et mes événements ¦ Krizat e 🌍 Botës përreth që mbulojnë komunën, dhe ngjarjet e mia ¦ Il-kriżijiet tad-🌍 Dinja ta’ madwar li jkopru l-komun, u l-avvenimenti tiegħi
+Toutes les crises de l’année ¦ Të gjitha krizat e vitit ¦ Il-kriżijiet kollha tas-sena
+Pas du temps ¦ Hapi i kohës ¦ Pass taż-żmien
+Pas assez de décès placés : moins de ¦ Pak vdekje të vendosura: më pak se ¦ Mhux biżżejjed imwiet imqiegħda: inqas minn
+Pas assez de décès placés pour repérer des crises. ¦ Pak vdekje të vendosura për të dalluar kriza. ¦ M’hemmx biżżejjed imwiet imqiegħda biex jinstabu kriżijiet.
+Prends les décès de ta généalogie (« Depuis l’app »). ¦ Merr vdekjet nga gjenealogjia jote («Nga aplikacioni»). ¦ Ħu l-imwiet mill-ġenealoġija tiegħek (“Mill-app”).
+LES ANNÉES DE CRISE ¦ VITET E KRIZËS ¦ IS-SNIN TAL-KRIŻI
+Les années de crise de la famille ¦ Vitet e krizës së familjes ¦ Is-snin tal-kriżi tal-familja
+Les années de crise sur la carte ¦ Vitet e krizës në hartë ¦ Is-snin tal-kriżi fuq il-mappa
+Les années de crise : {n}, sur {d}. ¦ Vitet e krizës: {n}, nga {d}. ¦ Snin tal-kriżi: {n}, minn {d}.
+Les années de crise : {n}. ¦ Vitet e krizës: {n}. ¦ Snin tal-kriżi: {n}.
+Les années à voir · {n} ¦ Vitet për t’u parë · {n} ¦ Is-snin li għandek tara · {n}
+=année à voir ¦ vit për t’u parë|vite për t’u parë ¦ sena x’tara|sentejn x’tara|snin x’tara|snin x’tara|snin x’tara
+Habitude ¦ Zakonisht ¦ Is-soltu
+À la même époque (repère) ¦ Në të njëjtën kohë (pikë referimi) ¦ Fl-istess żmien (punt ta’ referenza)
+À la même époque : {what} — un repère, pas une explication. ¦ Në të njëjtën kohë: {what} — një pikë referimi, jo një shpjegim. ¦ Fl-istess żmien: {what} — punt ta’ referenza, mhux spjegazzjoni.
+Rien de connu dans cette région à cette date. ¦ Asgjë e njohur në këtë krahinë në këtë datë. ¦ Xejn magħruf f’dan ir-reġjun f’din id-data.
+rien de connu dans cette région à cette date ¦ asgjë e njohur në këtë krahinë në këtë datë ¦ xejn magħruf f’dan ir-reġjun f’din id-data
+cause notée : « {c} » ¦ shkaku i shënuar: «{c}» ¦ kawża mniżżla: “{c}”
+d’habitude {u} par an ¦ zakonisht {u} në vit ¦ is-soltu {u} fis-sena
+plus de ×5 ¦ më shumë se ×5 ¦ aktar minn ×5
+×2,5 à 3 ¦ ×2,5 deri në 3 ¦ ×2,5 sa 3
+×3 à 5 ¦ ×3 deri në 5 ¦ ×3 sa 5
+{name} + {n} voisines ¦ {name} + {n} fqinje ¦ {name} + {n} ġirien
++ {n} autres ¦ + edhe {n} ¦ + {n} oħra
+Écrire la commune et l’année près des ronds ¦ Shkruaj komunën dhe vitin pranë rrathëve ¦ Ikteb il-komun u s-sena ħdejn iċ-ċrieki
+À lire avec prudence : l’app compare des nombres de décès, elle ne sait pas pourquoi ils montent. Le repère est ce qui se passait à la même époque : une piste à vérifier dans les actes (cause notée, âge, mois). Sur de petits nombres, le hasard suffit parfois. ¦ Lexoje me kujdes: aplikacioni krahason numra vdekjesh, nuk e di pse rriten. Pika e referimit është ajo që ndodhte në të njëjtën kohë: një gjurmë për t’u verifikuar në akte (shkaku i shënuar, mosha, muaji). Me numra të vegjël ndonjëherë mjafton rastësia. ¦ Aqra b’attenzjoni: l-app tqabbel numri ta’ mwiet, ma tafx għaliex jiżdiedu. Il-punt ta’ referenza huwa dak li kien qed jiġri fl-istess żmien: traċċa li trid tiċċekkja fl-atti (kawża mniżżla, età, xahar). B’numri żgħar, xi drabi biżżejjed iċ-ċans.
+Autour de mes ancêtres ¦ Rreth paraardhësve të mi ¦ Madwar l-antenati tiegħi
+Parrains et marraines des baptêmes ¦ Kumbarët dhe kumbarat e pagëzimeve ¦ Parrini u madrini tal-magħmudijiet
+Témoins des mariages ¦ Dëshmitarët e martesave ¦ Xhieda taż-żwiġijiet
+Tous les liens (parrains, témoins, déclarants…) ¦ Të gjitha lidhjet (kumbarë, dëshmitarë, deklarues…) ¦ Ir-rabtiet kollha (parrini, xhieda, dikjaranti…)
+années à voir ¦ vite për t’u parë ¦ snin x’tara
+année à voir ¦ vit për t’u parë ¦ sena x’tara
+Ce qu’on prend ¦ Çfarë merret ¦ X’jittieħed
+Tout : vu, en partie, à chercher ¦ Gjithçka: parë, pjesërisht, për t’u kërkuar ¦ Kollox: muri, parzjalment, biex jinstab
+Seulement ce qui reste à faire ¦ Vetëm ajo që mbetet për t’u bërë ¦ Biss dak li fadal x’isir
+Seulement ce qui a été vu ¦ Vetëm ajo që është parë ¦ Biss dak li ntwera
+Sans le nom des correspondances ¦ Pa emrat e përputhjeve ¦ Mingħajr l-ismijiet tal-qbiel
+Avec le nom des correspondances (pas pour un export partagé) ¦ Me emrat e përputhjeve (jo për një eksport të ndarë) ¦ Bl-ismijiet tal-qbiel (mhux għal esportazzjoni maqsuma)
+Naissances par an, une bougie par décennie ¦ Lindje në vit, një qiri për dekadë ¦ Twelid fis-sena, xemgħa waħda għal kull għaxar snin
+Décès par an, une bougie par décennie (les années de crise en haut des mèches) ¦ Vdekje në vit, një qiri për dekadë (vitet e krizës në majë të fitileve) ¦ Imwiet fis-sena, xemgħa waħda għal kull għaxar snin (is-snin ta’ kriżi fil-quċċata tal-mieċeb)
+Mariages par an, une bougie par décennie ¦ Martesa në vit, një qiri për dekadë ¦ Żwiġijiet fis-sena, xemgħa waħda għal kull għaxar snin
+Pas assez d’années datées pour ce choix. ¦ Nuk ka mjaft vite me datë për këtë zgjedhje. ¦ M’hemmx biżżejjed snin datati għal din l-għażla.
+Naissances par an, décennie par décennie ¦ Lindje në vit, dekadë pas dekade ¦ Twelid fis-sena, għaxar snin wara għaxar snin
+Décès par an, décennie par décennie ¦ Vdekje në vit, dekadë pas dekade ¦ Imwiet fis-sena, għaxar snin wara għaxar snin
+Mariages par an, décennie par décennie ¦ Martesa në vit, dekadë pas dekade ¦ Żwiġijiet fis-sena, għaxar snin wara għaxar snin
+par an ¦ në vit ¦ fis-sena
+Chaque bougie : la 1re et la dernière année de la décennie, l’année la plus basse et la plus haute ¦ Çdo qiri: viti i parë dhe i fundit i dekadës, viti më i ulët dhe më i lartë ¦ Kull xemgħa: l-ewwel u l-aħħar sena tal-għaxar snin, l-iktar sena baxxa u l-iktar għolja

@@ -1,0 +1,199 @@
+fr ¦ lb
+# 📱 la page du téléphone de terrain (assets/js/app-terrain.js)
+📶 relié ¦ 📶 verbonnen
+⏸ hors wifi ¦ ⏸ ouni WLAN
+Le mot de passe de la généalogie : vérifié par l’ordinateur, jamais gardé sur ce téléphone. ¦ D’Passwuert vun der Genealogie: vum Computer kontrolléiert, ni op dësem Telefon gespäichert.
+Le navigateur écrit « Non sécurisé » : c’est vrai, la porte du wifi n’a pas de HTTPS. N’envoie que sur le wifi de la maison, protégé par sa clé. ¦ De Browser schreift „Net sécher“: dat stëmmt, d’WLAN-Dier huet keen HTTPS. Schéck nëmmen iwwer d’WLAN doheem, dat mat sengem Schlëssel geschützt ass.
+Tes photos attendent dans cette page. ¦ Deng Fotoe waarden op dëser Säit.
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). ¦ De Computer äntwert net (am Schlofmodus, ausgeschalt oder d’Dier zou).
+Choisir une personne ou une visite… ¦ Eng Persoun oder e Besuch wielen…
+Une ligne (facultatif) ¦ Eng Zeil (fakultativ)
+Pas de wifi de la maison : les photos se prennent avec l’appareil photo du téléphone, puis « 🖼 Choisir » au retour. ¦ Keen WLAN vun doheem: maach d’Fotoe mat der Kamera vum Telefon, duerno „🖼 Wielen“ wann s de zréck bass.
+Prendre une photo ¦ Foto maachen
+Choisir dans la galerie ¦ Aus der Galerie wielen
+📍 = la photo contient une position GPS (retirée à l’arrivée, réglage) ¦ 📍 = d’Foto huet eng GPS-Positioun (beim Ukomme ewechgeholl, Astellung)
+Tombe famille LACOMBE, allée 4 ¦ Graf vun der Famill LACOMBE, Allée 4
+Envoyer : {n} ¦ Schécken: {n}
+Sans wifi, garde cette page ouverte : les photos attendent ici et partent toutes seules au retour. Pour une journée entière aux archives, prends plutôt la visite par fichier. ¦ Ouni WLAN, looss dës Säit op: d’Fotoe waarden hei a ginn eleng fort, wann s de zréck bass. Fir e ganzen Dag am Archiv, huel léiwer de Besuch per Fichier.
+Le téléphone ne sait pas si une photo a été rangée ni où : il ne lit rien de l’arbre. ¦ Den Telefon weess net, ob oder wou eng Foto agesoert gouf: e liest näischt vum Bam.
+Nom de la personne ou de la visite ¦ Numm vun der Persoun oder vum Besuch
+Seulement les personnes décédées, sans les fiches confidentielles. ¦ Nëmme verstuerwe Persounen, ouni vertraulech Fichen.
+Choisis pour qui est cette photo. ¦ Wiel, fir wien dës Foto ass.
+Verrouillée après 15 minutes sans geste : redonne le mot de passe. Tes photos attendent. ¦ No 15 Minutten ouni Aktivitéit gespaart: gëff d’Passwuert nach eng Kéier an. Deng Fotoe waarden.
+Ce téléphone n’est plus autorisé sur l’ordinateur. ¦ Dësen Telefon ass um Computer net méi erlaabt.
+Envoyées dans 📥 À trier : {n} ¦ Geschéckt an 📥 Ze sortéieren: {n}
+Refusé par l’ordinateur ¦ Vum Computer refuséiert
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). En attente : {n} ; nouvel essai toutes les 30 secondes tant que la page est ouverte. ¦ De Computer äntwert net (am Schlofmodus, ausgeschalt oder d’Dier zou). Waarden: {n}; neie Versuch all 30 Sekonnen, soulaang d’Säit op ass.
+↻ Réessayer ¦ ↻ Nach eng Kéier probéieren
+Envoi en cours : {i} sur {n} ¦ Gëtt geschéckt: {i} vu {n}
+Garde la page ouverte. ¦ Looss d’Säit op.
+En attente depuis {when} : {n} ¦ Waarden zënter {when}: {n}
+Elles étaient gardées dans ce téléphone. ¦ Si goufen op dësem Telefon gehal.
+Les envoyer ¦ Se schécken
+Les oublier ¦ Se vergiessen
+Retirées de la boîte : {n} ¦ Aus der Këscht ewechgeholl: {n}
+« {name} » n’est plus ouverte sur l’ordinateur : tes photos restent en attente ici. ¦ „{name}“ ass um Computer net méi op: deng Fotoe waarden weider hei.
+Des photos étaient en attente, mais le téléphone a libéré la place. Retrouve-les dans ta galerie et « 🖼 Choisir ». ¦ Et waren Fotoe waarden, mä den Telefon huet d’Plaz fräigemaach. Fann se an denger Galerie an „🖼 Wielen“.
+📱 Envoyer des photos à l’ordinateur principal ¦ 📱 Fotoen un den Haaptcomputer schécken
+# 📥 À trier, sur l'ordinateur (assets/js/app-a-trier.js)
+📥 À trier ¦ 📥 Ze sortéieren
+À trier ¦ Ze sortéieren
+Listes · Médias et documents ¦ Lëschten · Medien an Dokumenter
+Les photos envoyées par un téléphone de terrain arrivent ici, hors de l’arbre. Relie chacune à ce qu’elle montre, ou supprime-la. ¦ D’Fotoen, déi en Terrain-Telefon schéckt, kommen hei un, baussent dem Bam. Verbann all Foto mat deem, wat se weist, oder läsch se.
+Chercher… (texte, téléphone, personne) ¦ Sichen… (Text, Telefon, Persoun)
+🗑 Supprimées ¦ 🗑 Geläscht
+Reliées ¦ Verbonnen
+visite {name} ¦ Besuch {name}
+pour {name} ¦ fir {name}
+personne pas choisie ¦ keng Persoun gewielt
+📍 GPS gardé ¦ 📍 GPS behalen
+📍 GPS retiré ¦ 📍 GPS ewechgeholl
+🔗 reliée à {name} ¦ 🔗 verbonne mat {name}
+effacée pour de bon le {date} ¦ endgülteg geläscht den {date}
+🗄 Relier à la visite ¦ 🗄 Mam Besuch verbannen
+🔗 Relier à {name} ¦ 🔗 Mat {name} verbannen
+Relier à… ¦ Verbanne mat…
+(sans texte) ¦ (ouni Text)
+Rien à trier : les photos du téléphone arriveront ici. ¦ Näischt ze sortéieren: d’Fotoe vum Telefon kommen hei un.
+Mode consultation : la boîte se lit, mais rien ne se relie ni ne se supprime. ¦ Consultatiounsmodus: d’Këscht ka gelies ginn, mä näischt gëtt verbonnen oder geläscht.
+Cochées : {n} ¦ Ugekräizt: {n}
+Décocher ¦ Ofkräizen
+📍 Garder la position GPS ? ¦ 📍 GPS-Positioun behalen?
+La photo contient une position GPS (utile pour situer une tombe). La garder pour la carte ? ¦ D’Foto huet eng GPS-Positioun (nëtzlech fir e Graf ze fannen). Fir d’Kaart behalen?
+La retirer ¦ Ewechhuelen
+✓ Reliées à {name} : {n} ¦ ✓ Mat {name} verbonnen: {n}
+🪦 Une photo de tombe : ajouter aussi l’inhumation à {name} ? ¦ 🪦 Eng Foto vun engem Graf: och d’Begriefnes bei {name} derbäisetzen?
+✓ Inhumation ajoutée à {name}. ¦ ✓ Begriefnes bei {name} derbäigesat.
+Relier à un événement ¦ Mat engem Evenement verbannen
+Relier à une source ¦ Mat enger Quell verbannen
+✓ Supprimées : {n} ¦ ✓ Geläscht: {n}
+✓ Supprimées : {n}. Gardées 30 jours dans « 🗑 Supprimées » (Filtrer ▾). ¦ ✓ Geläscht: {n}. 30 Deeg an „🗑 Geläscht“ gehal (Filteren ▾).
+✎ Modifier le texte ¦ ✎ Text änneren
+Texte enregistré ¦ Text gespäichert
+👤 Une personne… ¦ 👤 Eng Persoun…
+📅 Un événement… (inhumation, mariage…) ¦ 📅 En Evenement… (Begriefnes, Hochzäit…)
+📚 Une source… (l’acte, la cote) ¦ 📚 Eng Quell… (den Akt, d’Signatur)
+🗄 La visite d’archives proposée ¦ 🗄 De proposéierte Besuch am Archiv
+🔍 Ouvrir en grand ¦ 🔍 Grouss opmaachen
+⟲ Tourner ¦ ⟲ Dréinen
+⤓ Exporter l’original ¦ ⤓ Original exportéieren
+Remise dans 📥 À trier. ¦ Zréck an 📥 Ze sortéieren.
+📥 Arrivées du téléphone : {n} ¦ 📥 Vum Telefon ukomm: {n}
+📥 À trier : {n} ¦ 📥 Ze sortéieren: {n}
+# 🖧 Plusieurs ordinateurs → 📱 Téléphones de terrain (assets/js/app-reseau-local.js)
+téléphone de terrain ¦ Terrain-Telefon
+Téléphone de terrain ¦ Terrain-Telefon
+📱 Téléphone de terrain ¦ 📱 Terrain-Telefon
+📱 Téléphones de terrain ¦ 📱 Terrain-Telefonen
+👁 Lecture seule ¦ 👁 Nëmme liesen
+déposer · liste réduite ¦ ofginn · verkierzt Lëscht
+＋ Ajouter un téléphone de terrain ¦ ＋ Terrain-Telefon derbäisetzen
+Scanne ce QR code avec l’appareil photo du téléphone ¦ Scann dëse QR-Code mat der Kamera vum Telefon
+Le code d’invitation est déjà dans le QR code. Sur le téléphone : « Demander l’accès », puis compare le code à 6 chiffres ici. ¦ Den Invitatiounscode ass schonn am QR-Code. Um Telefon: „Zougang ufroen“, dann hei de 6-stellege Code vergläichen.
+Un 📱 téléphone de terrain ne voit pas l’arbre : il dépose seulement des photos dans 📥 À trier. ¦ En 📱 Terrain-Telefon gesäit de Bam net: e leet just Fotoen an 📥 Ze sortéieren of.
+⏻ Retirer tous les téléphones ¦ ⏻ All Telefonen ewechhuelen
+Les photos arrivent dans Listes → Médias et documents → 📥 À trier. ¦ D’Fotoe kommen an Lëschten → Medien an Dokumenter → 📥 Ze sortéieren un.
+📥 Ouvrir À trier ¦ 📥 Ze sortéieren opmaachen
+Plus aucun téléphone ne pourra rien envoyer. Leurs photos déjà déposées restent dans 📥 À trier (réglage). ¦ Keen Telefon kann nach eppes schécken. Hir Fotoen, déi schonn ofginn sinn, bleiwen an 📥 Ze sortéieren (Astellung).
+Téléphones retirés : {n} ¦ Ewechgeholl Telefonen: {n}
+Valeur refusée : réglage inchangé. ¦ Wäert refuséiert: Astellung onverännert.
+✓ « {name} » autorisé, 📱 téléphone de terrain. ¦ ✓ „{name}“ erlaabt, 📱 Terrain-Telefon.
+Sorte d’appareil ¦ Zort vun Apparat
+📱 Téléphone de terrain : déposer des photos et une ligne de texte dans 📥 À trier. Il ne voit pas l’arbre, ne modifie rien. Il devra aussi donner le mot de passe de la généalogie. ¦ 📱 Terrain-Telefon: Fotoen an eng Zeil Text an 📥 Ze sortéieren ofginn. E gesäit de Bam net an ännert näischt. E muss och d’Passwuert vun der Genealogie aginn.
+Ce que le téléphone voit ¦ Wat den Telefon gesäit
+Pour choisir « Pour qui ? » ¦ Fir „Fir wien?“ ze wielen
+visites d’archives et personnes décédées ¦ Besuchen am Archiv a verstuerwe Persounen
+visites d’archives seulement ¦ nëmme Besuchen am Archiv
+rien : tout se range sur l’ordinateur ¦ näischt: alles gëtt um Computer agesoert
+Montrer aussi les vivants (nom seulement) ¦ Och déi Lieweg weisen (nëmmen den Numm)
+Montrer aussi les fiches confidentielles (nom seulement) ¦ Och vertraulech Fiche weisen (nëmmen den Numm)
+« Pour qui ? » sur le téléphone ¦ „Fir wien?“ um Telefon
+obligatoire (plus lent sur place) ¦ obligatoresch (op der Plaz méi lues)
+Une ligne de texte ¦ Eng Zeil Text
+une pour tout l’envoi ¦ eng fir déi ganz Sendung
+une par photo ¦ eng pro Foto
+Les photos qui arrivent ¦ D’Fotoen, déi ukommen
+Où arrivent les photos ¦ Wou d’Fotoen ukommen
+dans 📥 À trier : rien n’entre dans l’arbre sans toi ¦ an 📥 Ze sortéieren: ouni dech kënnt näischt an de Bam
+reliées tout de suite à la personne choisie (visibles dans À trier, avec ↶ Annuler) ¦ direkt mat der gewielter Persoun verbonnen (ze gesinn an Ze sortéieren, mat ↶ Réckgängeg)
+Position GPS de la photo ¦ GPS-Positioun vun der Foto
+retirée à l’arrivée ¦ beim Ukomme ewechgeholl
+gardée à part, à décider en reliant ¦ apart gehal, beim Verbanne decidéieren
+gardée (la carte peut la montrer) ¦ behalen (d’Kaart ka se weisen)
+Taille maximale d’une photo ¦ Maximal Gréisst vun enger Foto
+Photos par envoi ¦ Fotoe pro Sendung
+Photos dans la boîte À trier, au plus ¦ Fotoen an der Këscht Ze sortéieren, héchstens
+Garder l’original (décoché : réduite à 2000 points) ¦ Original behalen (net ugekräizt: op 2000 Punkte reduzéiert)
+coché conseillé ¦ ugekräizt recommandéiert
+décoché conseillé ¦ net ugekräizt recommandéiert
+# 🖧 réglages des téléphones de terrain (suite), 📜 Qui a vu quoi, messages du serveur (lib/telephone_wifi.php, lib/reseau_local.php)
+gardée 30 jours dans « 🗑 Supprimées », puis effacée ¦ 30 Deeg an „🗑 Geläscht“ gehal, duerno geläscht
+effacée tout de suite (après les 10 secondes de ↶ Annuler) ¦ direkt geläscht (no den 10 Sekonne vu ↶ Réckgängeg)
+Photo de tombe reliée ¦ Verbonne Foto vun engem Graf
+proposer d’ajouter l’inhumation ¦ proposéieren, d’Begriefnes derbäizesetzen
+ne rien proposer ¦ näischt proposéieren
+Pastille 📥 dans la barre du haut ¦ Plakett 📥 an der ieweschter Leescht
+oui, avec le nombre ¦ jo, mat der Zuel
+non (seulement dans Listes) ¦ nee (nëmmen a Lëschten)
+À l’arrivée de photos ¦ Wann Fotoen ukommen
+seulement la pastille ¦ nëmmen d’Plakett
+un petit message en bas de l’écran ¦ e klenge Message ënnen um Schierm
+Sans wifi ¦ Ouni WLAN
+Hors du wifi de la maison ¦ Baussent dem WLAN doheem
+garder en attente dans la page, envoi tout seul au retour ¦ op der Säit waarde loossen, eleng schécken bei der Retour
+garder, mais demander avant d’envoyer ¦ behalen, awer virum Schécke froen
+refuser de prendre des photos hors wifi ¦ keng Fotoen ausserhalb vum WLAN erlaben
+Après l’envoi ¦ Nom Schécken
+effacer les photos de la page ¦ d’Fotoen vun der Säit läschen
+garder les vignettes de la journée ¦ d’Miniaturen vum Dag behalen
+« ↶ Annuler » sur le téléphone ¦ „↶ Réckgängeg“ um Telefon
+tant que les photos ne sont pas rangées ¦ soulaang d’Fotoen net agesoert sinn
+pendant 10 secondes ¦ 10 Sekonne laang
+Mot de passe de la généalogie sur le téléphone ¦ Passwuert vun der Genealogie um Telefon
+demandé à l’ouverture, redemandé après 15 min sans geste ¦ beim Opmaache gefrot, nees no 15 Min. ouni Aktivitéit
+demandé seulement pour voir la liste ; déposer avec le jeton seul ¦ nëmme fir d’Lëscht gefrot; ofginn mam Token eleng
+Cet ordinateur en mode consultation ¦ Dëse Computer am Consultatiounsmodus
+le téléphone ne dépose plus ¦ den Telefon gëtt näischt méi of
+le téléphone dépose encore ¦ den Telefon gëtt nach of
+Sorte proposée quand la demande vient d’un téléphone ¦ Zort, déi proposéiert gëtt, wann d’Ufro vun engem Telefon kënnt
+Retirer un téléphone ¦ En Telefon ewechhuelen
+ses photos déjà déposées restent à trier ¦ seng Fotoen, déi schonn ofginn sinn, bleiwen ze sortéieren
+elles sont supprimées aussi (30 jours dans « 🗑 Supprimées ») ¦ se ginn och geläscht (30 Deeg an „🗑 Geläscht“)
+📜 Registre ¦ 📜 Register
+noter chaque dépôt, chaque fichier refusé et chaque liste vue ¦ all Ofgab, all refuséierte Fichier an all gesi Lëscht notéieren
+seulement les dépôts ¦ nëmmen d’Ofgaben
+Photo déposée ¦ Foto ofginn
+Fichier refusé ¦ Fichier refuséiert
+Liste réduite vue ¦ Verkierzt Lëscht gekuckt
+Photo reliée ¦ Foto verbonnen
+pas une photo ¦ keng Foto
+trop grosse ¦ ze grouss
+trop grande ¦ ze vill Punkten
+abîmée ¦ beschiedegt
+trop de fichiers ¦ ze vill Fichieren
+trop de photos ¦ ze vill Fotoen
+trop gros en tout ¦ am Ganzen ze grouss
+boîte pleine ¦ Këscht voll
+personne refusée ¦ Persoun refuséiert
+réponses : {n} ¦ Äntwerten: {n}
+Photo trop grosse (plus de {n} Mo, la taille maximale réglée sur l’ordinateur). ¦ Foto ze grouss (iwwer {n} MB, déi maximal Gréisst, déi um Computer agestallt ass).
+Trop d’essais depuis ce téléphone : réessaie dans {n} min. ¦ Ze vill Versich vun dësem Telefon: probéier an {n} Min. nach eng Kéier.
+Trop de photos dans cet envoi ({n} au plus). ¦ Ze vill Fotoen an dëser Sendung (héchstens {n}).
+Photo du téléphone ¦ Foto vum Telefon
+Ce format de photo ne se lit pas sur cet ordinateur : choisis-la en JPEG. ¦ Dëst Fotoformat kann op dësem Computer net gelies ginn: wiel et als JPEG.
+Ce n’est pas une photo : seules les photos JPEG, PNG, WEBP et AVIF sont acceptées. ¦ Dat ass keng Foto: nëmme JPEG-, PNG-, WEBP- an AVIF-Fotoen ginn ugeholl.
+Image abîmée ou illisible. ¦ Bild beschiedegt oder net liesbar.
+Image trop grande (plus de 50 millions de points) : refusée. ¦ Bild ze grouss (iwwer 50 Millioune Punkten): refuséiert.
+Une seule photo à la fois. ¦ Nëmmen eng Foto op eemol.
+La photo n’est pas arrivée en entier : elle sera renvoyée. ¦ D’Foto ass net ganz ukomm: se gëtt nach eng Kéier geschéckt.
+Personne ou visite inconnue. ¦ Onbekannt Persoun oder onbekannte Besuch.
+📥 La boîte est pleine sur l’ordinateur : trie-la d’abord. ¦ 📥 D’Këscht um Computer ass voll: sortéier se éischt.
+Cet envoi est trop gros en tout (200 Mo au plus) : envoie le reste ensuite. ¦ Dës Sendung ass am Ganzen ze grouss (héchstens 200 MB): schéck de Rescht duerno.
+La généalogie n’est pas prête sur l’ordinateur. ¦ D’Genealogie ass um Computer net prett.
+L’ordinateur est en mode consultation : il ne reçoit pas de photo pour l’instant. Elles restent en attente ici. ¦ De Computer ass am Consultatiounsmodus: e kritt fir de Moment keng Fotoen. Si waarden hei.
+Impossible de ranger la photo sur l’ordinateur (disque plein ?). ¦ D’Foto kann net um Computer gespäichert ginn (Disk voll?).
+Choisis à quoi relier. ¦ Wiel, mat wat verbonne gëtt.
+Introuvable. ¦ Net fonnt.
+Cette fiche est verrouillée : rien n’y est relié. ¦ Dës Fiche ass gespaart: näischt gëtt drun verbonnen.
+Trop tard : cette photo a été effacée pour de bon. ¦ Ze spéit: dës Foto gouf endgülteg geläscht.
+Téléphone de terrain : il peut seulement déposer des photos dans 📥 À trier. ¦ Terrain-Telefon: e kann nëmme Fotoen an 📥 Ze sortéieren ofginn.

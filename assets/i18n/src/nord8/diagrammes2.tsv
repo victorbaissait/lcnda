@@ -1690,3 +1690,6 @@ Notaires ¦ Noterler
 {name} : {a} sur {n} enfants morts avant 1 an ({p} %) ¦ {name}: {n} çocuktan {a} tanesi 1 yaşından önce öldü (%{p})
 {name} : {a} sur {n} morts avant 5 ans ({p} %) ¦ {name}: {n} kişiden {a} tanesi 5 yaşından önce öldü (%{p})
 parrains : {a} sur {b} · marraines : {c} sur {d} ¦ vaftiz babaları: {b} kişiden {a} · vaftiz anneleri: {d} kişiden {c}
+Toute ma base ¦ Tüm veritabanım
+Mes descendants ¦ Soyumdan gelenler
+Depuis 1900 ¦ 1900’den beri

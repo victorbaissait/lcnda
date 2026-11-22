@@ -414,8 +414,9 @@ const SEED = `0 HEAD
                     await page.waitForFunction(() => /Ajouté depuis Wikidata/.test(document.body.textContent), null, { timeout: 15000 });
                     assert.equal(count('events'), ev0, 'rien n’est remplacé'); assert.equal(one(`SELECT occupation FROM persons WHERE id=${paul}`).occupation, 'écrivain');
                     assert.equal(one(`SELECT count(*) AS n FROM notes WHERE entity_type='person' AND entity_id=${paul} AND title='Wikidata Q42' AND body LIKE '%fr.wikipedia.org%'`).n, 1);
-                    await page.click('.ui-toast button:has-text("Annuler")');
-                    await page.waitForFunction(() => /retirés|Annulé/.test(document.body.textContent), null, { timeout: 15000 });
+                    // le « ↶ Annuler » du message de Wikidata (d'autres messages des étapes d'avant, « Réglage changé »…, peuvent être encore là)
+                    await page.locator('.ui-toast', { hasText: 'Ajouté depuis Wikidata' }).locator('button:has-text("Annuler")').click();
+                    await page.waitForFunction(() => [...document.querySelectorAll('.ui-toast')].some(x => /Ajouts de Wikidata retirés/.test(x.textContent)), null, { timeout: 15000 });
                     assert.equal(one(`SELECT occupation FROM persons WHERE id=${paul}`).occupation, '');
                     assert.equal(one(`SELECT count(*) AS n FROM notes WHERE entity_type='person' AND entity_id=${paul} AND title='Wikidata Q42'`).n, 0);
                 });

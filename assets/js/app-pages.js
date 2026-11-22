@@ -177,7 +177,10 @@
     const harmonizeNow = () => { const ws = document.getElementById('workspace'); const head = ws?.querySelector('.page-header'); if (head && !head.closest('dialog')) UI.harmonizePageHeader(head); };
     const watchWs = () => {
         const ws = document.getElementById('workspace'); if (!ws) return setTimeout(watchWs, 400);
-        new MutationObserver(() => { clearTimeout(phTimer); phTimer = setTimeout(harmonizeNow, 20); }).observe(ws, {childList: true, subtree: true, characterData: false});
+        // 20 ms après le dernier changement ; mais une page qui bouge sans arrêt (Réglages › Apparence : cadres posés en plusieurs fois) est rangée au plus tard après 150 ms
+        let phSince = 0;
+        const phRun = () => { phSince = 0; harmonizeNow(); };
+        new MutationObserver(() => { const now = performance.now(); phSince ||= now; clearTimeout(phTimer); if (now - phSince > 150) phRun(); else phTimer = setTimeout(phRun, 20); }).observe(ws, {childList: true, subtree: true, characterData: false});
         harmonizeNow();
     };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', watchWs); else watchWs();
@@ -186,7 +189,7 @@
      * Une seule écoute sur #workspace dans les Réglages : après chaque changement fait dans la page (case, menu, curseur, glisser, bouton),
      * on lit les réglages gardés sur cet ordinateur ; s’ils ont changé : « ✓ Enregistré » à droite du titre + « ↶ Annuler » (H7).
      * Une page qui garde un brouillon (Réglages des tableaux, des animaux, Montage…, ADN) donne sa fonction save() avec UI.autoSave. */
-    const VOLATILE = /^(lcnda-listbar:|lcnda-sort:|lcnda-view:|lcnda-journal-erreurs)|ui-sections|reglages-ouverts|last-route|-ui-v\d|ui-state|recent|-tab$|-open$|warned|dashboard-recent|-groups$|toolbar-sets/;
+    const VOLATILE = /^(lcnda-listbar:|lcnda-sort:|lcnda-view:|lcnda-journal-erreurs)|ui-sections|reglages-ouverts|last-route|-ui-v\d|ui-state|recent|-tab$|-open$|warned|dashboard-recent|-groups$|toolbar-sets|succ-chrono-act/; // succ-chrono-act : l’heure du dernier geste (chronomètre du successoral), pas un réglage
     const snap = () => { const o = {}; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && !VOLATILE.test(k)) o[k] = localStorage.getItem(k); } } catch (_) {} return o; };
     const write = v => Object.entries(v).forEach(([k, x]) => { try { if (x == null) localStorage.removeItem(k); else localStorage.setItem(k, x); } catch (_) {} });
     let page = {token: -1, base: null, save: null, redraw: null, label: '', timer: 0};

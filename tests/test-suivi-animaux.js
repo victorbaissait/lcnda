@@ -593,7 +593,9 @@ echo json_encode(['v' => (int) $pdo->query('PRAGMA user_version')->fetchColumn()
                     });
                     await t('S17–S18 : santé (cause, poids) depuis la fiche, frise et courbe', async () => {
                         await p.evaluate(i => window.LCNDA_EXT.suivi.openPet(i, 'health'), ids.akela);
-                        await p.waitForSelector('[data-sv-h-new]'); await p.click('.sv-health-head [data-sv-h-new]');
+                        // la fiche d'Akela remplace celle de Minette (ouverte juste avant) : on l'attend, sinon « ＋ » ouvrirait la santé de Minette
+                        await p.waitForFunction(i => window.LCNDA_EXT.suivi.ficheCtx?.id === i && document.querySelector('.sv-health-head [data-sv-h-new]'), ids.akela, { timeout: 8000 });
+                        await p.click('.sv-health-head [data-sv-h-new]');
                         await p.waitForSelector('dialog[open] [data-seg="cause"]'); await p.waitForTimeout(300);
                         await p.fill('dialog[open] input[name="date"]', '15/10/2026');
                         assert.equal(await p.inputValue('dialog[open] input[name="date"]'), '15/10/2026');

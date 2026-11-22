@@ -1,0 +1,179 @@
+fr ¦ ru ¦ uk
+# Zone « diagrammes-lot-c » : grille des recensements, schéma de preuve, arbre de mots (heritage-diagram-lot-c.js), zones des paroisses et carte en étoile (heritage-diagram-cartes.js), cercles d’une journée (heritage-cartes-outils.js)
+Hors de France ¦ Вне Франции ¦ Поза Францією
+Ajoute des personnes (nom, naissance, décès), puis leurs recensements (année, statut). ¦ Добавь людей (имя, рождение, смерть), затем их переписи (год, статус). ¦ Додай людей (ім’я, народження, смерть), потім їхні переписи (рік, статус).
+Aucune année de recensement entre ces deux dates. ¦ Между этими датами нет года переписи. ¦ Між цими датами немає року перепису.
+Plus rien à chercher : tous les recensements sont trouvés ou sans objet. ¦ Больше нечего искать: все переписи найдены или не нужны. ¦ Більше нічого шукати: усі переписи знайдено або не потрібні.
+à chercher : {list} ¦ искать: {list} ¦ шукати: {list}
+non trouvés : {list} ¦ не найдены: {list} ¦ не знайдено: {list}
+Liste de travail des recensements : {n}. ¦ Рабочий список переписей: {n}. ¦ Робочий список переписів: {n}.
+Grille des recensements : {n}, {y} recensements, {d} sur {t} cherchés. ¦ Сетка переписей: {n}, переписей: {y}, проверено {d} из {t}. ¦ Сітка переписів: {n}, переписів: {y}, перевірено {d} з {t}.
+Les recensements de la famille {name} ¦ Переписи семьи {name} ¦ Переписи родини {name}
+Contre ¦ Против ¦ Проти
+Conflit ¦ Противоречие ¦ Суперечність
+Écris la question (Réglages), puis les indices : pour, contre, recherches, conflits. ¦ Напиши вопрос (Настройки), затем улики: за, против, поиски, противоречия. ¦ Напиши питання (Налаштування), потім докази: за, проти, пошуки, суперечності.
+Indices contre ¦ Улики против ¦ Докази проти
+Recherches et conflits ¦ Поиски и противоречия ¦ Пошуки й суперечності
+Résolu : {note} ¦ Решено: {note} ¦ Розв’язано: {note}
+À résoudre ¦ Решить ¦ Розв’язати
+poids {n} sur 3 ¦ вес {n} из 3 ¦ вага {n} з 3
+Pas encore de conclusion ¦ Пока без вывода ¦ Поки без висновку
+Schéma de preuve : {a} pour, {b} contre ; certitude : {c}. ¦ Схема доказательства: за — {a}, против — {b}; уверенность: {c}. ¦ Схема доказу: за — {a}, проти — {b}; певність: {c}.
+Antoine MAZAUD est-il le père de Jean MAZAUD (né vers 1818) ? ¦ Антуан МАЗО — отец Жана МАЗО (род. около 1818)? ¦ Чи Антуан МАЗО — батько Жана МАЗО (нар. близько 1818)?
+Oui : Antoine MAZAUD est le père de Jean. ¦ Да: Антуан МАЗО — отец Жана. ¦ Так: Антуан МАЗО — батько Жана.
+Acte de mariage de Jean (1842) : « fils d’Antoine MAZAUD, cultivateur » ¦ Запись о браке Жана (1842): «сын Антуана МАЗО, земледельца» ¦ Запис про шлюб Жана (1842): «син Антуана МАЗО, хлібороба»
+Registre paroissial, original ¦ Приходская книга, оригинал ¦ Парафіяльна книга, оригінал
+Recensement 1836 : Jean, 18 ans, au foyer d’Antoine ¦ Перепись 1836: Жан, 18 лет, в хозяйстве Антуана ¦ Перепис 1836: Жан, 18 років, у господарстві Антуана
+Recensement 1836, original ¦ Перепись 1836, оригинал ¦ Перепис 1836, оригінал
+Antoine est parrain du premier fils de Jean ¦ Антуан — крёстный первого сына Жана ¦ Антуан — хрещений батько першого сина Жана
+Baptême 1844 ¦ Крещение 1844 ¦ Хрещення 1844
+Un autre Jean MAZAUD, né en 1817 au village voisin ¦ Другой Жан МАЗО, род. в 1817 в соседней деревне ¦ Інший Жан МАЗО, нар. 1817 у сусідньому селі
+Acte de naissance de Jean : registre lacunaire 1815-1820 ¦ Запись о рождении Жана: книга с пробелами 1815-1820 ¦ Запис про народження Жана: книга з прогалинами 1815-1820
+Âge au décès : 64 ans (né vers 1820) au lieu de 66 ¦ Возраст при смерти: 64 года (род. около 1820) вместо 66 ¦ Вік на момент смерті: 64 роки (нар. близько 1820) замість 66
+Acte de décès 1884 ¦ Запись о смерти 1884 ¦ Запис про смерть 1884
+l’âge déclaré au décès est souvent approximatif ¦ возраст, указанный при смерти, часто приблизителен ¦ вік, зазначений при смерті, часто приблизний
+Écris le mot de départ (Réglages), par exemple « fils de » ou « veuve de ». ¦ Напиши исходное слово (Настройки), например «fils de» или «veuve de». ¦ Напиши початкове слово (Налаштування), наприклад «fils de» або «veuve de».
+Colle des transcriptions (une par ligne) ou prends-les « Depuis l’app ». ¦ Вставь расшифровки (по одной в строке) или возьми их «Из приложения». ¦ Встав розшифровки (по одній у рядку) або візьми їх «З застосунку».
+« {w} » n’est dans aucun de ces textes. ¦ «{w}» нет ни в одном из этих текстов. ¦ «{w}» немає в жодному з цих текстів.
+… {n} autres ¦ … ещё {n} ¦ … ще {n}
+Trop de branches : baisse la profondeur ou le nombre de branches (Réglages). ¦ Слишком много ветвей: уменьши глубину или число ветвей (Настройки). ¦ Забагато гілок: зменш глибину або кількість гілок (Налаштування).
+« {w} » : {n} fois ¦ «{w}»: {n} раз ¦ «{w}»: {n} раз
+Arbre de mots : « {w} » trouvé {n} fois dans {t}. ¦ Дерево слов: «{w}» найдено {n} раз в: {t}. ¦ Дерево слів: «{w}» знайдено {n} раз у: {t}.
+Ce qui suit « {w} » dans les actes ¦ Что идёт после «{w}» в актах ¦ Що йде після «{w}» в актах
+{n} lignes prises dans l’arbre : tu peux les corriger dans l’onglet Données. ¦ Строк взято из древа: {n}; их можно исправить во вкладке «Данные». ¦ Рядків узято з дерева: {n}; їх можна виправити на вкладці «Дані».
+🗓️ Les recensements de mon arbre ¦ 🗓️ Переписи в моём древе ¦ 🗓️ Переписи в моєму дереві
+Une ligne par personne, une case par recensement : ce qui est relevé sur les fiches (trouvé, non trouvé…), et « à chercher » pour le reste. Sans groupe choisi : tes ancêtres. ¦ Одна строка на человека, одна клетка на перепись: что отмечено в карточках (найдено, не найдено…), остальное — «искать». Без выбранной группы — твои предки. ¦ Один рядок на людину, одна клітинка на перепис: що зазначено в картках (знайдено, не знайдено…), решта — «шукати». Без вибраної групи — твої предки.
+Du recensement de ¦ С переписи ¦ Від перепису
+à celui de ¦ до переписи ¦ до перепису
+Les recensements de {n} ¦ Переписи: {n} ¦ Переписи: {n}
+Personne dans ce groupe ne vivait entre ces deux recensements (il faut au moins une date de naissance ou de décès). ¦ Никто из группы не жил между этими переписями (нужна хотя бы дата рождения или смерти). ¦ Ніхто з групи не жив між цими переписами (потрібна хоча б дата народження або смерті).
+{n} sur {t} prises (les premières) : change « Au plus » pour en voir davantage. ¦ Взято {n} из {t} (первые): измени «Не больше», чтобы увидеть больше. ¦ Узято {n} з {t} (перші): зміни «Не більше», щоб побачити більше.
+⚖️ Un dossier de preuve ou une hypothèse ¦ ⚖️ Досье доказательств или гипотеза ¦ ⚖️ Справа доказів або гіпотеза
+Choisis un dossier : sa question, ses indices pour et contre, ses recherches et ses conflits, sa conclusion. Une hypothèse à comparer donne une colonne par réponse possible. ¦ Выбери досье: вопрос, улики за и против, поиски и противоречия, вывод. Гипотеза для сравнения даёт по столбцу на каждый возможный ответ. ¦ Вибери справу: питання, докази за і проти, пошуки й суперечності, висновок. Гіпотеза для порівняння дає по стовпцю на кожну можливу відповідь.
+Le dossier ¦ Досье ¦ Справа
+Choisis d’abord un dossier. ¦ Сначала выбери досье. ¦ Спершу вибери справу.
+Schéma de preuve ¦ Схема доказательства ¦ Схема доказу
+Ce dossier n’a encore aucune ligne : ajoute des indices dans le dossier, ou ici à la main. ¦ В досье пока нет строк: добавь улики в досье или здесь вручную. ¦ У справі ще немає рядків: додай докази у справі або тут вручну.
+Prendre ce dossier ¦ Взять это досье ¦ Узяти цю справу
+🌿 Les mots de mes transcriptions ¦ 🌿 Слова моих расшифровок ¦ 🌿 Слова моїх розшифровок
+Les transcriptions des actes (atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris. ¦ Расшифровки актов (мастерская расшифровки) и медиа: что идёт после исходного слова (или перед ним). Берутся только полезные куски фраз. ¦ Розшифровки актів (майстерня розшифровки) і медіа: що йде після початкового слова (або перед ним). Беруться лише корисні шматки речень.
+Le mot de départ ¦ Исходное слово ¦ Початкове слово
+Ce qui suit ¦ Что идёт после ¦ Що йде після
+Ce qui précède ¦ Что идёт перед ¦ Що йде перед
+Commune (dans le lieu ou le titre de l’acte) ¦ Населённый пункт (в месте или названии акта) ¦ Населений пункт (у місці або назві акта)
+Actes pris ¦ Учитываемые акты ¦ Враховані акти
+Actes notariés ¦ Нотариальные акты ¦ Нотаріальні акти
+Militaires ¦ Военные ¦ Військові
+Lettres ¦ Письма ¦ Листи
+Transcriptions des médias ¦ Расшифровки медиа ¦ Розшифровки медіа
+Écris le mot de départ (par exemple « fils de »). ¦ Напиши исходное слово (например «fils de»). ¦ Напиши початкове слово (наприклад «fils de»).
+Coche au moins une sorte d’acte. ¦ Отметь хотя бы один вид актов. ¦ Познач хоча б один вид актів.
+Ce qui précède « {w} » dans les actes ¦ Что идёт перед «{w}» в актах ¦ Що йде перед «{w}» в актах
+« {w} » n’est dans aucune transcription de ce choix ({n} lues). ¦ «{w}» нет ни в одной расшифровке этого выбора (прочитано: {n}). ¦ «{w}» немає в жодній розшифровці цього вибору (прочитано: {n}).
+« {w} » : {n} fois, dans {a}. ¦ «{w}»: {n} раз, в: {a}. ¦ «{w}»: {n} раз, у: {a}.
+Dossier sans question ¦ Досье без вопроса ¦ Справа без питання
+Aucun dossier pour ce groupe de personnes ¦ Нет досье для этой группы людей ¦ Немає справ для цієї групи людей
+Ferme l’éditeur, puis clique sur la case pour ouvrir la fiche (bloc « Recensements »). ¦ Закрой редактор, затем нажми на клетку, чтобы открыть карточку (блок «Переписи»). ¦ Закрий редактор, потім натисни клітинку, щоб відкрити картку (блок «Переписи»).
+Recensement {yr} : dans le bloc « Recensements » de la fiche. ¦ Перепись {yr}: в блоке «Переписи» карточки. ¦ Перепис {yr}: у блоці «Переписи» картки.
+Grille des recensements (personnes × années) ¦ Сетка переписей (люди × годы) ¦ Сітка переписів (люди × роки)
+Ma recherche ¦ Мои поиски ¦ Мої пошуки
+Une ligne par personne, une colonne par recensement : ce qui est trouvé, pas trouvé, et ce qui reste à chercher. ¦ Строка на человека, столбец на перепись: что найдено, что нет и что ещё искать. ¦ Рядок на людину, стовпець на перепис: що знайдено, що ні і що ще шукати.
+Les personnes (une ligne sans année : naissance, décès) et leurs recensements (une ligne par année) ¦ Люди (строка без года: рождение, смерть) и их переписи (строка на год) ¦ Люди (рядок без року: народження, смерть) і їхні переписи (рядок на рік)
+Naissance (année) ¦ Рождение (год) ¦ Народження (рік)
+Décès (année) ¦ Смерть (год) ¦ Смерть (рік)
+Recensement (année) ¦ Перепись (год) ¦ Перепис (рік)
+Note (lieu, adresse…) ¦ Примечание (место, адрес…) ¦ Примітка (місце, адреса…)
+Grille (une case par recensement) ¦ Сетка (клетка на перепись) ¦ Сітка (клітинка на перепис)
+Liste de travail à imprimer (ce qui reste à chercher) ¦ Рабочий список для печати (что ещё искать) ¦ Робочий список для друку (що ще шукати)
+À celui de ¦ До переписи ¦ До перепису
+Ou mes années (ex. 1846, 1851, 1872) ¦ Или мои годы (напр. 1846, 1851, 1872) ¦ Або мої роки (напр. 1846, 1851, 1872)
+Personnes montrées ¦ Показанные люди ¦ Показані люди
+Seulement celles qui ont encore un recensement à chercher ¦ Только те, у кого ещё есть перепись для поиска ¦ Лише ті, у кого ще є перепис для пошуку
+Le plus à chercher d’abord ¦ Больше всего искать — первыми ¦ Найбільше шукати — першими
+Par naissance ¦ По рождению ¦ За народженням
+Par nom ¦ По имени ¦ За ім’ям
+Couleur « Trouvé » ¦ Цвет «Найдено» ¦ Колір «Знайдено»
+Couleur « Non trouvé » ¦ Цвет «Не найдено» ¦ Колір «Не знайдено»
+Couleur « À chercher » ¦ Цвет «Искать» ¦ Колір «Шукати»
+Couleur « Hors de France » ¦ Цвет «Вне Франции» ¦ Колір «Поза Францією»
+Couleur « Pas né / déjà décédé » ¦ Цвет «Не родился / уже умер» ¦ Колір «Не народився / вже помер»
+Écart entre les cases ¦ Промежуток между клетками ¦ Проміжок між клітинками
+Signes dans les cases (✓ ✗ ?) ¦ Значки в клетках (✓ ✗ ?) ¦ Знаки в клітинках (✓ ✗ ?)
+Années de vie à côté du nom ¦ Годы жизни рядом с именем ¦ Роки життя поруч з ім’ям
+Schéma de preuve (question, indices pour et contre, conclusion) ¦ Схема доказательства (вопрос, улики за и против, вывод) ¦ Схема доказу (питання, докази за і проти, висновок)
+La question en haut, les indices pour et contre (avec leur poids et leur source), les recherches et les conflits, puis la conclusion et sa certitude. ¦ Вверху вопрос, улики за и против (с весом и источником), поиски и противоречия, затем вывод и его уверенность. ¦ Угорі питання, докази за і проти (з вагою та джерелом), пошуки й суперечності, потім висновок і його певність.
+Les lignes du dossier (pour, contre, recherche, conflit ; « réponse » pour une hypothèse à plusieurs réponses) ¦ Строки досье (за, против, поиск, противоречие; «ответ» для гипотезы с несколькими ответами) ¦ Рядки справи (за, проти, пошук, суперечність; «відповідь» для гіпотези з кількома відповідями)
+Indice (ou réponse) ¦ Улика (или ответ) ¦ Доказ (або відповідь)
+Poids (1 à 3) ¦ Вес (от 1 до 3) ¦ Вага (від 1 до 3)
+Pour la réponse… (hypothèse) ¦ Для ответа… (гипотеза) ¦ Для відповіді… (гіпотеза)
+Note (résolution d’un conflit) ¦ Примечание (разрешение противоречия) ¦ Примітка (розв’язання суперечності)
+La conclusion ¦ Вывод ¦ Висновок
+Montrer les recherches et les conflits (ce qui reste à chercher) ¦ Показывать поиски и противоречия (что ещё искать) ¦ Показувати пошуки й суперечності (що ще шукати)
+Couleur « confirme » ¦ Цвет «подтверждает» ¦ Колір «підтверджує»
+Couleur « contredit » ¦ Цвет «противоречит» ¦ Колір «суперечить»
+Couleur des recherches ¦ Цвет поисков ¦ Колір пошуків
+Couleur des conflits ¦ Цвет противоречий ¦ Колір суперечностей
+Couleur des réponses ¦ Цвет ответов ¦ Колір відповідей
+Couleur de la question ¦ Цвет вопроса ¦ Колір питання
+Arbre de mots des actes (ce qui suit « fils de »…) ¦ Дерево слов актов (что идёт после «fils de»…) ¦ Дерево слів актів (що йде після «fils de»…)
+Un mot de départ à gauche ; à droite, les mots qui le suivent dans les actes, plus gros quand ils reviennent souvent. ¦ Исходное слово слева; справа — слова, которые идут за ним в актах, крупнее, если встречаются часто. ¦ Початкове слово ліворуч; праворуч — слова, що йдуть за ним в актах, більші, якщо трапляються часто.
+Les textes (une transcription ou un bout de phrase par ligne) ¦ Тексты (одна расшифровка или кусок фразы в строке) ¦ Тексти (одна розшифровка або шматок речення в рядку)
+Acte ou source ¦ Акт или источник ¦ Акт або джерело
+Le mot de départ (ex. fils de, veuve de) ¦ Исходное слово (напр. fils de, veuve de) ¦ Початкове слово (напр. fils de, veuve de)
+Profondeur (mots) ¦ Глубина (слов) ¦ Глибина (слів)
+Branches par mot ¦ Ветвей на слово ¦ Гілок на слово
+Seulement les mots vus au moins ¦ Только слова, встреченные не менее ¦ Лише слова, що трапилися щонайменше
+Le reste dans « … autres » ¦ Остальное в «… ещё» ¦ Решта в «… ще»
+Écrire le nombre de fois ¦ Писать число раз ¦ Писати кількість разів
+Sans tenir compte des capitales ni des accents ¦ Без учёта заглавных букв и диакритики ¦ Без урахування великих літер і діакритики
+Seulement les actes de (lieu) ¦ Только акты из (место) ¦ Лише акти з (місце)
+Couleur des mots ¦ Цвет слов ¦ Колір слів
+Couleur du mot de départ ¦ Цвет исходного слова ¦ Колір початкового слова
+⭕ En une journée ¦ ⭕ За один день ¦ ⭕ За один день
+Lieu de départ ¦ Место отправления ¦ Місце відправлення
+Montrer les lieux de la famille ¦ Показать места семьи ¦ Показати місця родини
+Ce qu’on atteignait en une journée ¦ Куда можно было добраться за день ¦ Куди можна було дістатися за день
+Choisis le lieu de départ ¦ Выбери место отправления ¦ Вибери місце відправлення
+Ce lieu n’a pas de position sur la carte : place-le d’abord. ¦ У этого места нет положения на карте: сначала размести его. ¦ Це місце не має позиції на мапі: спершу розмісти його.
+Coche au moins un moyen de voyager ¦ Отметь хотя бы один способ передвижения ¦ Познач хоча б один спосіб подорожі
+Les fonds de carte ne sont pas chargés. ¦ Основы карт не загружены. ¦ Основи мап не завантажено.
+Je dessine les cercles… ¦ Рисую круги… ¦ Малюю кола…
+En {d} jours depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ За {d} дн. из {from}, в {year}: по прямой около {list}. ¦ За {d} дн. з {from}, у {year}: по прямій близько {list}.
+En une journée depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ За день из {from}, в {year}: по прямой около {list}. ¦ За день з {from}, у {year}: по прямій близько {list}.
+Rayon (vol d’oiseau) ¦ Радиус (по прямой) ¦ Радіус (по прямій)
+Lieux de la famille ¦ Места семьи ¦ Місця родини
+Le rayon tient compte du détour de la route (réglage « Vitesses et sources »). Un trait pointillé : ce moyen n’existait pas encore cette année-là. ¦ Радиус учитывает петли дороги (настройка «Скорости и источники»). Пунктир: этого способа в тот год ещё не было. ¦ Радіус враховує петляння дороги (налаштування «Швидкості та джерела»). Пунктир: цього способу того року ще не було.
+Paroisses (zones autour des églises) ¦ Приходы (зоны вокруг церквей) ¦ Парафії (зони навколо церков)
+⚠ Paroisses sans position : {list} — choisis-les dans la liste (onglet Données) ou écris « Nom 45.27, 1.77 » ¦ ⚠ Приходы без положения: {list} — выбери их в списке (вкладка «Данные») или напиши «Название 45.27, 1.77» ¦ ⚠ Парафії без позиції: {list} — вибери їх у списку (вкладка «Дані») або напиши «Назва 45.27, 1.77»
+Ajoute des paroisses (une ville de la liste, ou « Depuis l’app ») et leurs chiffres. ¦ Добавь приходы (населённый пункт из списка или «Из приложения») и их числа. ¦ Додай парафії (населений пункт зі списку або «З застосунку») та їхні числа.
+Zones des paroisses : {n}. ¦ Зоны приходов: {n}. ¦ Зони парафій: {n}.
+Un point à chaque église ¦ Точка у каждой церкви ¦ Точка біля кожної церкви
+Limites des départements par-dessus les paroisses ¦ Границы департаментов поверх приходов ¦ Межі департаментів поверх парафій
+Cadrer tout seul sur les paroisses ¦ Сам кадрировать по приходам ¦ Самостійно кадрувати за парафіями
+Liens montrés ¦ Показанные связи ¦ Показані зв’язки
+Ceux qui arrivent et ceux qui partent ¦ Прибывающие и уезжающие ¦ Ті, що прибувають, і ті, що виїжджають
+Seulement ceux qui arrivent ¦ Только прибывающие ¦ Лише ті, що прибувають
+Seulement ceux qui partent ¦ Только уезжающие ¦ Лише ті, що виїжджають
+Les liens de {name} ¦ Связи: {name} ¦ Зв’язки: {name}
+bleu : conjoints venus ¦ синий: приехавшие супруги ¦ синій: подружжя, що приїхали
+orange : enfants partis ¦ оранжевый: уехавшие дети ¦ помаранчевий: діти, що виїхали
+rouge : émigrés ¦ красный: эмигранты ¦ червоний: емігранти
+Lieux : {list} ¦ Места: {list} ¦ Місця: {list}
+⛪ Au niveau « Paroisses » (Réglages → Niveau de détail) : une zone autour de chaque église, d’après les paroisses d’Ancien Régime de tes lieux ; un lieu sans paroisse compte pour lui-même. ¦ ⛪ На уровне «Приходы» (Настройки → Уровень детализации): зона вокруг каждой церкви по старым приходам твоих мест; место без прихода считается само по себе. ¦ ⛪ На рівні «Парафії» (Налаштування → Рівень деталізації): зона навколо кожної церкви за старими парафіями твоїх місць; місце без парафії рахується окремо.
+✳️ Tous les liens d’un lieu (carte en étoile) ¦ ✳️ Все связи места (звёздная карта) ¦ ✳️ Усі зв’язки місця (зіркова мапа)
+Le village ¦ Деревня ¦ Село
+Conjoints venus s’y marier ¦ Супруги, приехавшие туда венчаться ¦ Подружжя, що приїхали туди одружитися
+Enfants partis (nés ici, morts ou mariés ailleurs) ¦ Уехавшие дети (родились здесь, умерли или венчались в другом месте) ¦ Діти, що виїхали (народжені тут, померли чи одружилися деінде)
+Émigrés (morts dans un autre pays) ¦ Эмигранты (умерли в другой стране) ¦ Емігранти (померли в іншій країні)
+Choisis d’abord le village. ¦ Сначала выбери деревню. ¦ Спершу вибери село.
+Coche au moins une sorte de lien. ¦ Отметь хотя бы один вид связей. ¦ Познач хоча б один вид зв’язків.
+Aucun lien trouvé pour ce lieu (naissance, mariage ou décès ailleurs). ¦ Для этого места связей не найдено (рождение, брак или смерть в другом месте). ¦ Для цього місця зв’язків не знайдено (народження, шлюб чи смерть деінде).
+{n} prises dans l’arbre ({m} lieux rattachés à une paroisse d’Ancien Régime, les autres comptent pour eux-mêmes). ¦ Из древа: {n} ({m} мест привязаны к старому приходу, остальные считаются сами). ¦ З дерева: {n} ({m} місць прив’язано до старої парафії, решта рахується окремо).
+Aucun lieu avec des coordonnées pour ce choix : place d’abord tes lieux sur la carte. ¦ Для этого выбора нет мест с координатами: сначала размести свои места на карте. ¦ Для цього вибору немає місць із координатами: спершу розмісти свої місця на мапі.
+sa paroisse ¦ его приход ¦ його парафія
+leur paroisse ¦ их приход ¦ їхня парафія
+une paroisse ¦ приход ¦ парафію
+Paroisse sans position : choisis sa commune dans la liste, ou écris « Nom 45.27, 1.77 ». ¦ Приход без положения: выбери его населённый пункт в списке или напиши «Название 45.27, 1.77». ¦ Парафія без позиції: вибери її населений пункт у списку або напиши «Назва 45.27, 1.77».
+Carte en étoile : seulement les liens de ce lieu (vide = tous les flux) ¦ Звёздная карта: только связи этого места (пусто = все потоки) ¦ Зіркова мапа: лише зв’язки цього місця (порожньо = усі потоки)
+niveau|paroisse ¦ приход ¦ парафія
+=paroisse ¦ приход|прихода|приходов ¦ парафія|парафії|парафій

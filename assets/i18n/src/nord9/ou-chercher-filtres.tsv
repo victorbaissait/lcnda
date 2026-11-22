@@ -1,0 +1,75 @@
+fr ¦ lb
+# 🌍 Où chercher ? — filtres par sorte de source (docs/design/ou-chercher-filtres.html)
+Ouvrir la page filtrée sur une sorte de source ¦ D’Säit no enger Zort Quell gefiltert opmaachen
+Les autres sortes ¦ Déi aner Zorten
+Proposés ({n} sur {m}) ¦ Proposéiert ({n} vu(n) {m})
+✓ Déjà cherchés ({n} sur {m}) ¦ ✓ Scho gesicht ({n} vu(n) {m})
+Écartés ({n} sur {m}) ¦ Ausgeschloss ({n} vu(n) {m})
+Chercher un site… (ex. Gallica, matricule) ¦ E Site sichen… (z. B. Gallica, Matrikel)
+Sorte de source ¦ Zort Quell
+Ses pays : {list} ¦ D’Länner: {list}
+Ses pays ¦ D’Länner
+Un seul : {country} ¦ Nëmmen eent: {country}
+Pays : {country} ¦ Land: {country}
+Sites du monde entier seulement (FamilySearch, Geneanet…) ¦ Nëmmen weltwäit Siten (FamilySearch, Geneanet…)
+🌍 Monde entier ¦ 🌍 Ganz Welt
+Prix ¦ Präis
+Gratuites seulement · {n} ¦ Nëmme gratis · {n}
+💶 Gratuites seulement ¦ 💶 Nëmme gratis
+En français seulement ¦ Nëmmen op Franséisch
+🇫🇷 En français ¦ 🇫🇷 Op Franséisch
+Les plus utiles ¦ Déi nëtzlechst
+Gratuits d’abord ¦ Gratis als éischt
+🔗 depuis sa fiche ¦ 🔗 vu senger Fiche
+Ce filtre vient de sa fiche : ton choix habituel n’est pas changé. ¦ Dëse Filter kënnt vu senger Fiche: deng gewinnt Wiel bleift.
+Revenir à mon choix ¦ Zréck op meng Wiel
+↗ Chercher quand même ¦ ↗ Trotzdem sichen
+de ces filtres ¦ mat dëse Filteren
+Aucun site {sorts} pour ce pays ({country}) parmi les {n} sites que l’app connaît ¦ Keng Site {sorts} fir dëst Land ({country}) ënner den {n} Siten, déi d’App kennt
+Pour ses autres pays : {ok} proposés ; {out} écartés. ¦ Fir déi aner Länner: {ok} proposéiert; {out} ausgeschloss.
+Ses autres pays ({n}) ¦ Déi aner Länner ({n})
+Voir les {n} sites écartés ¦ Déi {n} ausgeschlossen Siten ukucken
+＋ Ajouter un site à moi ¦ ＋ Eegen Site derbäisetzen
+Aucun site {sorts} pour {name} ({life}) ¦ Keng Site {sorts} fir {name} ({life})
+Les {n} sites de cette sorte sont écartés : ¦ Déi {n} Siten vun dëser Zort sinn ausgeschloss:
+Aucun site de cette sorte parmi ceux que l’app connaît. ¦ Keng Site vun dëser Zort ënner deenen, déi d’App kennt.
+Enlever {sort} ¦ {sort} ewechhuelen
+Aucun site écarté avec ces filtres. ¦ Keng ausgeschlossen Site mat dëse Filteren.
+Sa vie ({life}) croise les années du site ({from}–{to}) ¦ D’Liewen ({life}) iwwerschneit d’Jore vum Site ({from}–{to})
+Actes (état civil, paroissiaux) ¦ Akten (Zivilstand, Parregëster)
+Journaux ¦ Zeitungen
+Militaire et guerres ¦ Militär a Kricher
+Recensements et annuaires ¦ Vollekszielungen an Adressbicher
+Marins, colonies ¦ Seeleit, Kolonien
+Marins et colonies ¦ Seeleit a Kolonien
+Cimetières, décès ¦ Kierfechter, Doudesfäll
+Cimetières et décès ¦ Kierfechter an Doudesfäll
+Notaires, terres et justice ¦ Notären, Land a Justiz
+Métiers (élus, médecins, cheminots, photographes…) ¦ Beruffer (Gewielten, Dokteren, Eisebunner, Fotografen…)
+Arbres en ligne ¦ Stammbeem online
+Bibliothèques ¦ Bibliothéiken
+Bibliothèques et livres ¦ Bibliothéiken a Bicher
+Cartes et lieux ¦ Kaarten a Plazen
+Déportation et répression ¦ Deportatioun a Repressioun
+Guides ¦ Guiden
+Guides et modes d’emploi ¦ Guiden an Uleedungen
+Moteurs ¦ Sichmaschinnen
+Moteurs et encyclopédies ¦ Sichmaschinnen an Enzyklopedien
+Tout le militaire ¦ Alles Militäresch
+Tout pour un marin ¦ Alles fir e Seemann
+Tout sur l’émigration ¦ Alles iwwer d’Auswanderung
+Tout sur son métier ¦ Alles iwwer säi Beruff
+Tout chez les notaires ¦ Alles bei den Notären
+⚓ Il était marin ? Le dire sur sa fiche ¦ ⚓ War hie Seemann? Op senger Fiche uginn
+🎖 Il était soldat ? Le dire sur sa fiche ¦ 🎖 War hien Zaldot? Op senger Fiche uginn
+🚢 Il a émigré ? Le dire sur sa fiche ¦ 🚢 Ass hien ausgewandert? Op senger Fiche uginn
+💼 Son métier ? Le dire sur sa fiche ¦ 💼 Säi Beruff? Op senger Fiche uginn
+Pas de lieu dans ce pays ¦ Keng Plaz an dësem Land
+Hors de ses années ¦ Baussent senge Joren
+Seulement pour un autre cas (métier, profil) ¦ Nëmme fir en anere Fall (Beruff, Profil)
+Pour l’autre sexe ¦ Fir dat anert Geschlecht
+Né hors de France ¦ Baussent Frankräich gebuer
+Peu utile pour cette fiche ¦ Wéineg nëtzlech fir dës Fiche
+Autres raisons ¦ Aner Grënn
+officier (armée) ¦ Offizéier (Arméi)
+=payant caché ¦ bezuelt verstoppt|bezuelt verstoppt

@@ -1,0 +1,192 @@
+fr ¦ fi ¦ hu
+# Zone « diagrammes-lot-a » : tableau de quartiers, variantes d’un nom, boucles d’implexe, double éventail, nœud papillon, réseau « toute la famille », barres croisées, cercles de parenté, dates incertaines, pyramide d’un recensement, tableau périodique (heritage-diagram-lot-a.js, lib/diagram_lot_a.php)
+(deviné) ¦ (arvattu) ¦ (kikövetkeztetett)
+1 (enfants) ¦ 1 (lapset) ¦ 1 (gyermekek)
+1 (parents) ¦ 1 (vanhemmat) ¦ 1 (szülők)
+16 quartiers ¦ 16 esivanhempien vaakunaa ¦ 16 ősi címer
+20 ans ¦ 20 vuotta ¦ 20 év
+32 quartiers ¦ 32 esivanhempien vaakunaa ¦ 32 ősi címer
+8 quartiers (arrière-grands-parents) ¦ 8 vaakunaa (isovanhempien vanhemmat) ¦ 8 ősi címer (dédszülők)
+Actes comptés ¦ Lasketut asiakirjat ¦ Számolt iratok
+Ajoute les ancêtres (n° Sosa, nom) et leurs armoiries. ¦ Lisää esivanhemmat (Sosa-nro, nimi) ja heidän vaakunansa. ¦ Add meg az ősöket (Sosa-szám, név) és címerüket.
+Ajoute les formes du nom : la forme, ses années, le nombre d’actes. ¦ Lisää nimen muodot: muoto, vuodet, asiakirjojen määrä. ¦ Add meg a név alakjait: az alak, évei, az iratok száma.
+Ajoute les personnes recensées : âge, sexe, année. ¦ Lisää väestönlaskennan henkilöt: ikä, sukupuoli, vuosi. ¦ Add meg az összeírt személyeket: kor, nem, év.
+Ancêtre à trouver ¦ Löydettävä esivanhempi ¦ Megtalálandó ős
+Ancêtres pris dans ta base : {n} (armoiries : {k}). ¦ Esivanhempia tietokannastasi: {n} (vaakunoita: {k}). ¦ Ősök az adatbázisodból: {n} (címerek: {k}).
+Arbre des variantes (formes du nom : {n}). ¦ Muunnelmien puu (nimen muotoja: {n}). ¦ Változatok fája (névalakok: {n}).
+Arbre des variantes d’un nom ¦ Nimen muunnelmien puu ¦ Egy név változatainak fája
+Armoiries (nom) ¦ Vaakuna (nimi) ¦ Címer (név)
+Au survol seulement ¦ Vain osoitettaessa ¦ Csak rámutatáskor
+Aucun ancêtre connu à cette génération. ¦ Tässä sukupolvessa ei ole tunnettua esivanhempaa. ¦ Ebben a nemzedékben nincs ismert ős.
+Aucun lien entre les couples de ce groupe. ¦ Tämän ryhmän parien välillä ei ole yhteyksiä. ¦ Nincs kapcsolat a csoport párjai között.
+Aucun recensement dans ta base ¦ Tietokannassasi ei ole väestönlaskentoja ¦ Nincs összeírás az adatbázisodban
+Aucun âge lisible dans ce recensement. ¦ Tässä väestönlaskennassa ei ole luettavia ikiä. ¦ Ebben az összeírásban nincs olvasható életkor.
+Aucune forme trouvée pour ce nom. ¦ Tälle nimelle ei löytynyt muotoja. ¦ Ehhez a névhez nem található alak.
+Avec au moins une source ¦ Vähintään yksi lähde ¦ Legalább egy forrással
+Axe des années ¦ Vuosiakseli ¦ Évtengely
+Barres croisées (UpSet) ¦ Ristikkäiset pylväät (UpSet) ¦ Keresztezett oszlopok (UpSet)
+Barres croisées (ensembles : {n}, combinaisons montrées : {k}). ¦ Ristikkäiset pylväät (joukot: {n}, näytetyt yhdistelmät: {k}). ¦ Keresztezett oszlopok (halmazok: {n}, mutatott kombinációk: {k}).
+Blason absent ¦ Puuttuva vaakuna ¦ Hiányzó címer
+Blasonnement en note (en bas) ¦ Vaakunaselitys alaviitteenä ¦ Címerleírás jegyzetben (alul)
+Boucles d’implexe (chemins : {n}), F = {f}. ¦ Esivanhempien kadon silmukat (polut: {n}), F = {f}. ¦ Őscsökkenés hurkai (utak: {n}), F = {f}.
+Boucles plus lointaines pas dessinées : {n} (comptées dans F). ¦ Kauempia silmukoita piirtämättä: {n} (laskettu F:ään). ¦ Távolabbi hurkok nincsenek rajzolva: {n} (F-be beszámítva).
+Branche (paternelle, maternelle) ¦ Haara (isän, äidin) ¦ Ág (apai, anyai)
+Branche maternelle ¦ Äidin haara ¦ Anyai ág
+Branche paternelle ¦ Isän haara ¦ Apai ág
+Branche « {name} » ¦ Haara ”{name}” ¦ „{name}” ág
+Cases façon tableau périodique ¦ Ruudut kuin jaksollinen järjestelmä ¦ Cellák a periódusos rendszer módjára
+Cases vides pour les ancêtres à trouver ¦ Tyhjät ruudut löytämättömille esivanhemmille ¦ Üres cellák a megtalálandó ősöknek
+Ce qu’on dessine ¦ Mitä piirretään ¦ Mit rajzolunk
+Cercles (2 à 4 ensembles) ¦ Ympyrät (2–4 joukkoa) ¦ Körök (2–4 halmaz)
+Cercles de parenté autour de {name} (personnes : {n}). ¦ Sukulaisuuspiirit henkilön {name} ympärillä (henkilöt: {n}). ¦ Rokonsági körök {name} körül (személyek: {n}).
+Chemins trouvés : {n} (F = {f}). ¦ Löydetyt polut: {n} (F = {f}). ¦ Talált utak: {n} (F = {f}).
+Chercher les boucles ¦ Etsi silmukat ¦ Hurkok keresése
+Chiffre (couleur, éventails) ¦ Luku (väri, viuhkat) ¦ Szám (szín, legyezők)
+Choisis de 2 à 8 ensembles (là : {n}). ¦ Valitse 2–8 joukkoa (nyt: {n}). ¦ Válassz 2–8 halmazt (most: {n}).
+Choisis un groupe de noms ou écris un nom. ¦ Valitse nimiryhmä tai kirjoita nimi. ¦ Válassz névcsoportot, vagy írj be egy nevet.
+Choisis un recensement (commune et année). ¦ Valitse väestönlaskenta (kunta ja vuosi). ¦ Válassz összeírást (település és év).
+Choisis une personne (« Depuis l’app ») ou écris les boucles à la main. ¦ Valitse henkilö (”Sovelluksesta”) tai kirjoita silmukat käsin. ¦ Válassz személyt („Az alkalmazásból”), vagy írd be kézzel a hurkokat.
+Coefficient aussi en fraction ¦ Kerroin myös murtolukuna ¦ Együttható törtként is
+Coefficient de consanguinité de {name} : F = {f} ¦ Sukusiitoskerroin, {name}: F = {f} ¦ {name} beltenyészeti együtthatója: F = {f}
+Combinaisons montrées (les plus grandes) ¦ Näytetyt yhdistelmät (suurimmat) ¦ Mutatott kombinációk (a legnagyobbak)
+Combinaisons pas montrées : {n} ¦ Näyttämättömät yhdistelmät: {n} ¦ Nem mutatott kombinációk: {n}
+Commune (titre) ¦ Kunta (otsikko) ¦ Település (cím)
+Comparer avec le recensement de ¦ Vertaa väestönlaskentaan vuodelta ¦ Összevetés ezzel az összeírással
+Consanguinité de l’ancêtre ¦ Esivanhemman sukusiitos ¦ Az ős beltenyészete
+Couleur de l’écu (sans image) ¦ Kilven väri (ilman kuvaa) ¦ Pajzs színe (kép nélkül)
+Couleur des parts ¦ Osien väri ¦ A részek színe
+Couleur du côté maternel ¦ Äidin puolen väri ¦ Anyai oldal színe
+Couleurs des branches ¦ Haarojen värit ¦ Ágak színei
+Couple ¦ Pari ¦ Pár
+Critères de mauvaise forme. ¦ Virheelliset ehdot. ¦ Hibás feltételek.
+Côté (paternel, maternel, branches) ¦ Puoli (isän, äidin, haarat) ¦ Oldal (apai, anyai, ágak)
+Côté maternel ¦ Äidin puoli ¦ Anyai oldal
+Côté paternel ¦ Isän puoli ¦ Apai oldal
+Date incertaine (fourchette) ¦ Epävarma päivämäärä (väli) ¦ Bizonytalan dátum (sáv)
+Date inconnue ¦ Tuntematon päivämäärä ¦ Ismeretlen dátum
+Dates sous le nom ¦ Päivämäärät nimen alla ¦ Dátumok a név alatt
+De la famille ¦ Suvusta ¦ A családból
+De la famille (oui) ¦ Suvusta (kyllä) ¦ A családból (igen)
+De la mère vers l’ancêtre ¦ Äidistä esivanhempaan ¦ Az anyától az ősig
+Degrés montrés (jusqu’à) ¦ Näytetyt asteet (enintään) ¦ Mutatott fokok (eddig)
+Dessin de la fourchette ¦ Välin piirto ¦ A sáv rajza
+Deux éventails ¦ Kaksi viuhkaa ¦ Két legyező
+Deviner d’où vient chaque forme (date et ressemblance) ¦ Arvaa kunkin muodon alkuperä (päivä ja samankaltaisuus) ¦ Minden alak eredetének kitalálása (dátum és hasonlóság)
+Diagramme de Venn (2 à 8 ensembles) ¦ Venn-kaavio (2–8 joukkoa) ¦ Venn-diagram (2–8 halmaz)
+Diagramme de Venn : {names}. ¦ Venn-kaavio: {names}. ¦ Venn-diagram: {names}.
+Double éventail (ascendants : {up}, descendants : {down}). ¦ Kaksoisviuhka (esivanhemmat: {up}, jälkeläiset: {down}). ¦ Kettős legyező (ősök: {up}, leszármazottak: {down}).
+Du père vers l’ancêtre ¦ Isästä esivanhempaan ¦ Az apától az ősig
+Décédé ou inconnu ¦ Kuollut tai tuntematon ¦ Elhunyt vagy ismeretlen
+En accordéon (branches qu’on plie) ¦ Haitari (taitettavat haarat) ¦ Harmonika (összecsukható ágak)
+En cercles (un cercle par degré) ¦ Ympyröinä (yksi ympyrä astetta kohti) ¦ Körökben (fokonként egy kör)
+En vie ou non ¦ Elossa vai ei ¦ Élő vagy sem
+En {year} (contour) ¦ Vuonna {year} (ääriviiva) ¦ {year}-ban (körvonal)
+Ensemble {x} ¦ Joukko {x} ¦ {x} halmaz
+Faire ressortir la famille ¦ Korosta suku ¦ A család kiemelése
+Formes prises dans ta base : {n}. ¦ Muotoja tietokannastasi: {n}. ¦ Alakok az adatbázisodból: {n}.
+Groupe de noms ¦ Nimiryhmä ¦ Névcsoport
+Générations : {n} côté père, {m} côté mère ¦ Sukupolvet: {n} isän puolella, {m} äidin ¦ Nemzedékek: {n} apai, {m} anyai oldalon
+Il faut de 2 à 8 ensembles. ¦ Tarvitaan 2–8 joukkoa. ¦ 2–8 halmaz kell.
+Image (media/…) ¦ Kuva (media/…) ¦ Kép (media/…)
+Initiales du prénom et du nom ¦ Etu- ja sukunimen alkukirjaimet ¦ Utó- és keresztnév kezdőbetűi
+La branche ¦ Haara ¦ Az ág
+La personne étudiée ¦ Tutkittava henkilö ¦ A vizsgált személy
+Le calcul n’est pas prêt. ¦ Laskenta ei ole valmis. ¦ A számítás nincs kész.
+Le chemin entre deux personnes ¦ Polku kahden henkilön välillä ¦ Út két személy között
+Le nom (2 lettres) ¦ Sukunimi (2 kirjainta) ¦ Vezetéknév (2 betű)
+Le plus proche seulement ¦ Vain lähin ¦ Csak a legközelebbi
+Le prénom (2 lettres) ¦ Etunimi (2 kirjainta) ¦ Utónév (2 betű)
+Le recensement de {place} ¦ Väestönlaskenta: {place} ¦ {place} összeírása
+Les 8, 16 ou 32 ancêtres d’une génération, chacun avec son blason ; un écu vide : armoiries à trouver. ¦ Sukupolven 8, 16 tai 32 esivanhempaa vaakunoineen; tyhjä kilpi: vaakuna löytämättä. ¦ Egy nemzedék 8, 16 vagy 32 őse a címerével; üres pajzs: megtalálandó címer.
+Les boucles d’implexe (entre les deux parents) ¦ Esivanhempien kadon silmukat (vanhempien välillä) ¦ Őscsökkenés hurkai (a két szülő között)
+Les boucles d’implexe de {name} ¦ Esivanhempien kadon silmukat: {name} ¦ {name} őscsökkenési hurkai
+Les deux parents de cette personne ne sont pas connus. ¦ Henkilön kumpaakaan vanhempaa ei tunneta. ¦ A személy két szülője nem ismert.
+Les ensembles (2 à 8) : A, B, C… H ¦ Joukot (2–8): A, B, C… H ¦ A halmazok (2–8): A, B, C… H
+Les formes du nom ¦ Nimen muodot ¦ A név alakjai
+Les formes du nom {name} ¦ Nimen {name} muodot ¦ A(z) {name} név alakjai
+Les noms du groupe (ou écrits pareil) et leurs variantes notées, avec leurs années et le nombre d’actes. ¦ Ryhmän nimet (tai samoin kirjoitetut) ja kirjatut muunnelmat vuosineen ja asiakirjamäärineen. ¦ A csoport nevei (vagy az azonosan írtak) és feljegyzett változataik évekkel és iratszámmal.
+Les quartiers de {name} ¦ Esivanhempien vaakunat: {name} ¦ {name} ősi címerei
+Les seize quartiers de {name} ¦ Kuusitoista esivanhempien vaakunaa: {name} ¦ {name} tizenhat ősi címere
+Liens pris dans l’app : {n}. ¦ Yhteyksiä sovelluksesta: {n}. ¦ Kapcsolatok az alkalmazásból: {n}.
+Losange pour les dates exactes ¦ Vinoneliö tarkoille päivämäärille ¦ Rombusz a pontos dátumokhoz
+Montrer le calcul (½ puissance n) ¦ Näytä laskelma (½ potenssiin n) ¦ A számítás mutatása (½ az n-ediken)
+Montrer l’incertitude des dates ¦ Näytä päivämäärien epävarmuus ¦ A dátumok bizonytalanságának mutatása
+Naissances et décès (qui vivait en …) ¦ Syntymät ja kuolemat (kuka eli vuonna …) ¦ Születések és halálozások (ki élt …-ban)
+Nom inconnu ¦ Tuntematon nimi ¦ Ismeretlen név
+Nom sous l’écu ¦ Nimi kilven alla ¦ Név a pajzs alatt
+Nom trop long (80 lettres au plus). ¦ Liian pitkä nimi (enintään 80 kirjainta). ¦ Túl hosszú név (legfeljebb 80 betű).
+Nombre d’actes sous la forme ¦ Asiakirjojen määrä muodon alla ¦ Iratok száma az alak alatt
+Noms les plus portés ¦ Yleisimmät nimet ¦ Leggyakoribb nevek
+N° Sosa ¦ Sosa-nro ¦ Sosa-szám
+N° Sosa (ascendants, éventails) ¦ Sosa-nro (esivanhemmat, viuhkat) ¦ Sosa-szám (ősök, legyezők)
+Nœud papillon (père à gauche, mère à droite) ¦ Rusetti (isä vasemmalla, äiti oikealla) ¦ Csokornyakkendő (apa balra, anya jobbra)
+Ordre des combinaisons ¦ Yhdistelmien järjestys ¦ Kombinációk sorrendje
+Ou un nom ¦ Tai nimi ¦ Vagy egy név
+Par nombre d’ensembles ¦ Joukkojen määrän mukaan ¦ Halmazok száma szerint
+Parent (descendants, éventails) ¦ Vanhempi (jälkeläiset, viuhkat) ¦ Szülő (leszármazottak, legyezők)
+Personne cachée ¦ Piilotettu henkilö ¦ Rejtett személy
+Personnes recensées : {n} ¦ Laskennan henkilöt: {n} ¦ Összeírt személyek: {n}
+Personnes recensées : {n} en {y1}, {m} en {y2} ¦ Laskennan henkilöt: {n} vuonna {y1}, {m} vuonna {y2} ¦ Összeírt személyek: {y1}: {n}, {y2}: {m}
+Personnes recensées prises dans ta base : {n}. ¦ Laskennan henkilöitä tietokannastasi: {n}. ¦ Összeírt személyek az adatbázisodból: {n}.
+Portraits (arbre dessiné, nœud papillon) ¦ Muotokuvat (piirretty puu, rusetti) ¦ Portrék (rajzolt fa, csokornyakkendő)
+Pyramide du recensement de {year} (personnes : {n}). ¦ Vuoden {year} väestönlaskennan pyramidi (henkilöt: {n}). ¦ A {year}. évi összeírás korfája (személyek: {n}).
+Ressortent : les personnes reliées à une fiche (ou au groupe choisi). ¦ Korostettuina: korttiin (tai valittuun ryhmään) liitetyt henkilöt. ¦ Kiemelve: adatlaphoz (vagy a választott csoporthoz) kötött személyek.
+Selon le nombre de descendants ¦ Jälkeläisten määrän mukaan ¦ A leszármazottak száma szerint
+Selon le tableau ¦ Taulukon mukaan ¦ A táblázat szerint
+Ses ancêtres au-dessus (place Sosa), ses descendants au-dessous (sous leur parent) ; le chiffre : l’âge au décès. ¦ Esivanhemmat ylhäällä (Sosa-paikka), jälkeläiset alhaalla (vanhempansa alla); luku: kuolinikä. ¦ Ősök fent (Sosa-hely), leszármazottak lent (szülőjük alatt); a szám: halálozási kor.
+Ses ancêtres de la génération choisie (ordre Sosa) et les armoiries reliées à chacun (Listes → Armoiries). ¦ Valitun sukupolven esivanhemmat (Sosa-järjestys) ja kuhunkin liitetyt vaakunat (Luettelot → Vaakunat). ¦ A választott nemzedék ősei (Sosa-sorrend) és a hozzájuk kötött címerek (Listák → Címerek).
+Seulement l’ancêtre commun le plus proche ¦ Vain lähin yhteinen esivanhempi ¦ Csak a legközelebbi közös ős
+Sexe inconnu (pas dans la pyramide) : {n} ¦ Tuntematon sukupuoli (ei pyramidissa): {n} ¦ Ismeretlen nem (nincs a korfán): {n}
+Sosa {n} : ancêtre à trouver ¦ Sosa {n}: löydettävä esivanhempi ¦ Sosa {n}: megtalálandó ős
+Source, note ¦ Lähde, huomautus ¦ Forrás, jegyzet
+Sources sous la forme ¦ Lähteet muodon alla ¦ Források az alak alatt
+Tableau de quartiers (armoiries des ancêtres) ¦ Esivanhempien vaakunataulu ¦ Ősi címertábla (az ősök címerei)
+Tableau de quartiers ({n}), armoiries connues : {k}. ¦ Vaakunataulu ({n}), tunnetut vaakunat: {k}. ¦ Ősi címertábla ({n}), ismert címerek: {k}.
+Tableau périodique : ancêtres trouvés {found} / {total} ({pct} %). ¦ Jaksollinen järjestelmä: löydetyt esivanhemmat {found} / {total} ({pct} %). ¦ Periódusos rendszer: megtalált ősök {found} / {total} ({pct} %).
+Taux de recherche (%) ¦ Tutkimusaste (%) ¦ Kutatottság (%)
+Tous les ancêtres répétés ¦ Kaikki toistuvat esivanhemmat ¦ Minden ismétlődő ős
+Tous les chemins du père et de la mère vers un même ancêtre (filiations biologiques) et le coefficient de consanguinité (méthode de Wright). ¦ Kaikki isän ja äidin polut samaan esivanhempaan (biologinen polveutuminen) ja sukusiitoskerroin (Wrightin menetelmä). ¦ Az apa és az anya minden útja ugyanahhoz az őshöz (vér szerinti leszármazás) és a beltenyészeti együttható (Wright-módszer).
+Toute la base (qui vivait en …) ¦ Koko tietokanta (kuka eli vuonna …) ¦ A teljes adatbázis (ki élt …-ban)
+Toute la base (qui vivait l’année choisie) ou un recensement (les âges écrits ce jour-là). ¦ Koko tietokanta (kuka eli valittuna vuonna) tai väestönlaskenta (sinä päivänä kirjatut iät). ¦ A teljes adatbázis (ki élt a választott évben) vagy egy összeírás (az aznap leírt életkorok).
+Toute la famille, un point par couple ¦ Koko suku, yksi piste paria kohti ¦ Az egész család, páronként egy pont
+Trop de critères. ¦ Liian monta ehtoa. ¦ Túl sok feltétel.
+Trop d’ensembles. ¦ Liian monta joukkoa. ¦ Túl sok halmaz.
+Trouvé chez le notaire (successions, inventaires) ¦ Löytyi notaarilta (perinnöt, perukirjat) ¦ Közjegyzőnél található (hagyatékok, leltárak)
+Trouvé dans les sources militaires (poilus) ¦ Löytyi sotilaslähteistä (ensimmäisen maailmansodan sotilaat) ¦ Katonai forrásokban található (első világháborús katonák)
+Trouvé dans un recensement ¦ Löytyi väestönlaskennasta ¦ Összeírásban található
+Un chiffre (colonne « Chiffre ») ¦ Luku (sarake ”Luku”) ¦ Egy szám („Szám” oszlop)
+Un recensement (commune, année) ¦ Väestönlaskenta (kunta, vuosi) ¦ Egy összeírás (település, év)
+Un recensement (âges écrits) ¦ Väestönlaskenta (kirjatut iät) ¦ Egy összeírás (leírt életkorok)
+Une par branche ¦ Yksi haaraa kohti ¦ Áganként egy
+Une par forme ¦ Yksi muotoa kohti ¦ Alakonként egy
+Une seule source : couleur de l’ensemble ¦ Yksi lähde: joukon väri ¦ Egyetlen forrás: a halmaz színe
+Une source précise ¦ Tietty lähde ¦ Egy adott forrás
+Vérifie le groupe de personnes. ¦ Tarkista henkilöryhmä. ¦ Ellenőrizd a személyek csoportját.
+actes : {n} ¦ asiakirjat: {n} ¦ iratok: {n}
+vient de {name} ¦ juontaa muodosta {name} ¦ ebből ered: {name}
+{label} (famille) : {n} ¦ {label} (suku): {n} ¦ {label} (család): {n}
+{names} (seulement) : {n} ¦ {names} (vain): {n} ¦ {names} (csak): {n}
+{name} : armoiries pas encore trouvées ¦ {name}: vaakunaa ei vielä löydetty ¦ {name}: a címer még nincs meg
+{name} : {n} en tout ¦ {name}: yhteensä {n} ¦ {name}: összesen {n}
+{place}, {year} ¦ {place}, {year} ¦ {place}, {year}
+« vers » : plus ou moins ¦ ”noin”: plus miinus ¦ „körülbelül”: plusz-mínusz
+Âge (recensement) ¦ Ikä (väestönlaskenta) ¦ Kor (összeírás)
+Écrire la sorte du lien sur le trait (nom de l’enfant…) ¦ Kirjoita yhteyden laji viivalle (lapsen nimi…) ¦ A kapcsolat fajtája a vonalon (a gyermek neve…)
+Écrits s’il y a la place ¦ Kirjoitettuina, jos tilaa on ¦ Kiírva, ha van hely
+Écu vide ¦ Tyhjä kilpi ¦ Üres pajzs
+Épaisseur selon le nombre d’actes ¦ Paksuus asiakirjojen määrän mukaan ¦ Vastagság az iratok száma szerint
+— Aucun (le nom écrit à côté) — ¦ — Ei mitään (vieressä kirjoitettu nimi) — ¦ — Nincs (a mellé írt név) —
+— Rien — ¦ — Ei mitään — ¦ — Semmi —
+🌿 Les formes d’un nom de ma base ¦ 🌿 Nimen muodot tietokannassani ¦ 🌿 Egy név alakjai az adatbázisomból
+🔁 Entre les deux parents de… ¦ 🔁 Vanhempien välillä… ¦ 🔁 A két szülő között…
+🔺 Les personnes de ma base ¦ 🔺 Tietokantani henkilöt ¦ 🔺 Az adatbázisom személyei
+🛡 Les quartiers d’une personne de ma base ¦ 🛡 Henkilön esivanhempien vaakunat ¦ 🛡 Egy személy ősi címerei az adatbázisomból
+Choisis de 2 à 8 ensembles : chaque zone compte les personnes de ces ensembles-là seulement. Dès 5 ensembles : barres croisées. ¦ Valitse 2–8 joukkoa: kukin alue laskee vain näiden joukkojen henkilöt. 5 joukosta alkaen: ristikkäiset pylväät. ¦ Válassz 2–8 halmazt: minden zóna csak azoknak a halmazoknak a személyeit számolja. 5-től: keresztezett oszlopok.
+Les témoins, parrains et marraines des actes ; ou toute la famille, un point par couple, reliés par leurs enfants. ¦ Asiakirjojen todistajat ja kummit; tai koko suku, piste paria kohti, lasten yhdistäminä. ¦ Az iratok tanúi és keresztszülei; vagy az egész család, páronként egy pont, gyermekeik által összekötve.
+Nom de l’enfant sur le trait ¦ Lapsen nimi viivalla ¦ A gyermek neve a vonalon
+Par nom de famille ¦ Sukunimen mukaan ¦ Vezetéknév szerint
+Par siècle (du mariage) ¦ Vuosisadan mukaan (avioliiton) ¦ Évszázad szerint (a házasságé)
+Un point par couple ¦ Yksi piste paria kohti ¦ Páronként egy pont
+Un point par personne ¦ Yksi piste henkilöä kohti ¦ Személyenként egy pont
+🕸 Les liens de ma base ¦ 🕸 Tietokantani yhteydet ¦ 🕸 Az adatbázisom kapcsolatai
+Quartiers ¦ Esivanhempien vaakunat ¦ Ősi címerek

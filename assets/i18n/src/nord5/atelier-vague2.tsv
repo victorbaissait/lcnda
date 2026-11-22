@@ -1,0 +1,59 @@
+fr ¦ hr ¦ sl
+# 📜 Atelier de transcription, vague 2 « Guider »
+Les étapes : Lire, Corriger, Repérer, Ajouter à la généalogie ¦ Koraci: Pročitaj, Ispravi, Pronađi, Dodaj u rodoslovlje ¦ Koraki: Preberi, Popravi, Poišči, Dodaj v rodoslovje
+Lire l’image (« ✨ Lire ▾ ») ou écrire le texte, ligne à ligne ¦ Pročitaj sliku („✨ Pročitaj ▾”) ili napiši tekst, redak po redak ¦ Preberi sliko (»✨ Preberi ▾«) ali napiši besedilo, vrstico za vrstico
+Relire et corriger : corrections proposées, mots douteux [?], aide à la lecture ¦ Provjeri i ispravi: predložene ispravke, dvojbene riječi [?], pomoć pri čitanju ¦ Preglej in popravi: predlagani popravki, dvomljive besede [?], pomoč pri branju
+Ajouter les personnes et l’événement à la généalogie ¦ Dodaj osobe i događaj u rodoslovlje ¦ Dodaj osebe in dogodek v rodoslovje
+Toute la page ou la zone choisie (▭) ; ou écris le texte toi-même, ligne à ligne. ¦ Cijela stranica ili odabrano područje (▭); ili sam napiši tekst, redak po redak. ¦ Cela stran ali izbrano območje (▭); ali sam napiši besedilo, vrstico za vrstico.
+=mot à revoir ¦ riječ za provjeru|riječi za provjeru|riječi za provjeru ¦ beseda za pregled|besedi za pregled|besede za pregled|besed za pregled
+rien à revoir ¦ ništa za provjeru ¦ nič za pregled
+=nom repéré ¦ pronađeno ime|pronađena imena|pronađenih imena ¦ najdeno ime|najdeni imeni|najdena imena|najdenih imen
+{n} à relier ¦ {n} za povezivanje ¦ {n} za povezavo
+Tout est relié ¦ Sve povezano ¦ Vse povezano
+{n} × [?] ou [illisible] ¦ {n} × [?] ili [nečitljivo] ¦ {n} × [?] ali [nečitljivo]
+=personne dans l’acte ¦ osoba u zapisu|osobe u zapisu|osoba u zapisu ¦ oseba v zapisu|osebi v zapisu|osebe v zapisu|oseb v zapisu
+Personne dans l’acte pour l’instant : « 🧭 Repérer » les trouve dans le texte ¦ Zasad nikoga u zapisu: „🧭 Pronađi” ih pronalazi u tekstu ¦ Zaenkrat nikogar v zapisu: »🧭 Poišči« jih najde v besedilu
+# — téléphone : trois onglets
+Image, texte ou personnes ¦ Slika, tekst ili osobe ¦ Slika, besedilo ali osebe
+# — 👁 relecture ligne à ligne en plein écran
+Le morceau d’image de la ligne ¦ Isječak slike za redak ¦ Izrez slike za vrstico
+Pas de zone pour cette ligne : dessine-la sur l’image (▭), elle restera reliée. ¦ Za ovaj redak nema područja: nacrtaj ga na slici (▭), ostat će povezano. ¦ Za to vrstico ni območja: nariši ga na sliko (▭), ostalo bo povezano.
+Ligne à relire ¦ Redak za provjeru ¦ Vrstica za pregled
+Relue ¦ Provjereno ¦ Pregledano
+Ligne d’avant ¦ Prethodni redak ¦ Prejšnja vrstica
+atelier|Ligne suivante ¦ Sljedeći redak ¦ Naslednja vrstica
+Entrée : la ligne est relue, ligne suivante · ⇧ Entrée : ligne d’avant · ↑ ↓ : changer de ligne sans la marquer · Échap : fermer ¦ Enter: redak provjeren, sljedeći redak · ⇧ Enter: prethodni redak · ↑ ↓: promijeni redak bez označavanja · Esc: zatvori ¦ Enter: vrstica pregledana, naslednja vrstica · ⇧ Enter: prejšnja vrstica · ↑ ↓: zamenjaj vrstico brez označevanja · Esc: zapri
+Ligne {n} sur {total} ¦ Redak {n} od {total} ¦ Vrstica {n} od {total}
+=ligne relue ¦ redak provjeren|retka provjerena|redaka provjereno ¦ vrstica pregledana|vrstici pregledani|vrstice pregledane|vrstic pregledanih
+Toutes les lignes sont relues. ¦ Svi su retci provjereni. ¦ Vse vrstice so pregledane.
+C’était la dernière ligne. ¦ To je bio posljednji redak. ¦ To je bila zadnja vrstica.
+Relire ligne à ligne ¦ Provjeri redak po redak ¦ Preglej vrstico za vrstico
+Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Provjeri redak po redak preko cijelog zaslona: isječak slike iznad svakog retka ¦ Preglej vrstico za vrstico v celozaslonskem načinu: izrez slike nad vsako vrstico
+Relecture ligne à ligne en plein écran (conseillé) ¦ Provjera redak po redak preko cijelog zaslona (preporučeno) ¦ Pregled vrstico za vrstico v celozaslonskem načinu (priporočeno)
+# — 🕘 Versions, 🔍 Chercher / Remplacer, ⌨️ touches
+Chercher dans le texte ¦ Traži u tekstu ¦ Išči v besedilu
+Chercher et remplacer ¦ Traži i zamijeni ¦ Išči in zamenjaj
+« {q} » → « {by} » : {n} ¦ „{q}” → „{by}”: {n} ¦ »{q}« → »{by}«: {n}
+Avant « Remplacer » ¦ Prije „Zamijeni” ¦ Pred »Zamenjaj«
+Avant « Tout remplacer » ¦ Prije „Zamijeni sve” ¦ Pred »Zamenjaj vse«
+Avant « Accepter les propositions sûres » ¦ Prije „Prihvati sigurne prijedloge” ¦ Pred »Sprejmi zanesljive predloge«
+Avant la lecture mise dans le texte ¦ Prije nego što je pročitano stavljeno u tekst ¦ Preden je bilo prebrano vstavljeno v besedilo
+Résultat suivant, résultat d’avant ¦ Sljedeći rezultat, prethodni rezultat ¦ Naslednji zadetek, prejšnji zadetek
+Ligne suivante, ligne d’avant : l’image suit sa zone ¦ Sljedeći redak, prethodni redak: slika prati njegovo područje ¦ Naslednja vrstica, prejšnja vrstica: slika sledi njenemu območju
+Déplacer l’image, en restant appuyé ¦ Pomakni sliku, držeći pritisnuto ¦ Premakni sliko, ob držanju
+Déplacer la zone choisie (⇧ : l’agrandir) ¦ Pomakni odabrano područje (⇧: povećaj ga) ¦ Premakni izbrano območje (⇧: povečaj ga)
+Supprimer la zone choisie ¦ Izbriši odabrano područje ¦ Izbriši izbrano območje
+Zoom avant, zoom arrière ¦ Povećaj, smanji ¦ Povečaj, pomanjšaj
+Cette liste des touches ¦ Ovaj popis tipki ¦ Ta seznam tipk
+# — avancement et abréviations au survol
+=mot douteux ¦ dvojbena riječ|dvojbene riječi|dvojbenih riječi ¦ dvomljiva beseda|dvomljivi besedi|dvomljive besede|dvomljivih besed
+aucun mot douteux ¦ nema dvojbenih riječi ¦ nobene dvomljive besede
+{n} / {total} lignes relues ¦ {n} / {total} redaka provjereno ¦ {n} / {total} vrstic pregledanih
+{n} / {total} lignes reliées ¦ {n} / {total} redaka povezano ¦ {n} / {total} vrstic povezanih
+Marquer comme finie ¦ Označi kao završenu ¦ Označi kot končano
+Marquer comme relue ¦ Označi kao provjerenu ¦ Označi kot pregledano
+Ligne sans zone : dessine-la sur l’image (▭) ¦ Redak bez područja: nacrtaj ga na slici (▭) ¦ Vrstica brez območja: nariši ga na sliko (▭)
+Ne plus souligner les abréviations ¦ Ne podcrtavaj više kratice ¦ Ne podčrtuj več okrajšav
+Souligner les abréviations connues ¦ Podcrtaj poznate kratice ¦ Podčrtaj znane okrajšave
+Abréviations connues soulignées, leur sens au survol (conseillé) ¦ Poznate kratice podcrtane, njihovo značenje pri prelasku mišem (preporučeno) ¦ Znane okrajšave podčrtane, njihov pomen ob prehodu z miško (priporočeno)
+Relues ¦ Provjerene ¦ Pregledane

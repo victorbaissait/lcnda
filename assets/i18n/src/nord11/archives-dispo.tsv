@@ -1,0 +1,130 @@
+fr ¦ vi ¦ id
+# 🏛 Actes en ligne aux archives (docs/design/archives-en-ligne.html)
+Mairie de {commune} ¦ Tòa thị chính {commune} ¦ Balai kota {commune}
+Archives départementales ({dept}) ¦ Archives départementales ({dept}) ¦ Arsip departemen ({dept})
+🔒 Réservé jusqu’en {year} ¦ 🔒 Hạn chế đến năm {year} ¦ 🔒 Terbatas sampai {year}
+déjà lié à une source ¦ đã liên kết với một nguồn ¦ sudah ditautkan ke sumber
+Pourquoi cette pastille ? ¦ Vì sao có nhãn này? ¦ Kenapa label ini?
+✓ lié ¦ ✓ đã liên kết ¦ ✓ tertaut
+Règle : code du patrimoine, art. L213-2 ({legi}) ; qui peut demander avant : décret 2017-890, art. 30 ({decret}). ¦ Quy tắc: Bộ luật di sản Pháp, điều L213-2 ({legi}); ai có thể yêu cầu sớm hơn: nghị định 2017-890, điều 30 ({decret}). ¦ Aturan: kode warisan budaya Prancis, pasal L213-2 ({legi}); siapa yang boleh meminta lebih awal: dekret 2017-890, pasal 30 ({decret}).
+Une limite vérifiée pour ce département et ce type d’acte couvre la date. ¦ Một giới hạn đã kiểm chứng cho tỉnh này và loại giấy tờ này bao gồm ngày đó. ¦ Batas yang sudah diperiksa untuk departemen ini dan jenis akta ini mencakup tanggal tersebut.
+D’après une source secondaire ({source}) : à confirmer sur la page officielle des archives. ¦ Theo một nguồn thứ cấp ({source}): cần xác nhận trên trang chính thức của kho lưu trữ. ¦ Menurut sumber sekunder ({source}): perlu dikonfirmasi di halaman resmi arsip.
+Peut-être en ligne (d’après {source}, à confirmer) : année lue dans un extrait de recherche, pas encore confirmée. ¦ Có thể đã trực tuyến (theo {source}, cần xác nhận): năm đọc được trong một đoạn kết quả tìm kiếm, chưa xác nhận. ¦ Mungkin daring (menurut {source}, perlu dikonfirmasi): tahun dibaca dari cuplikan pencarian, belum dikonfirmasi.
+la table ¦ bảng ¦ tabel
+Date approximative : la fourchette {from}–{to} chevauche la limite ({until}). ¦ Ngày ước chừng: khoảng {from}–{to} chồng lên giới hạn ({until}). ¦ Tanggal perkiraan: rentang {from}–{to} tumpang tindih dengan batas ({until}).
+La date est à 2 ans de la limite ({until}) : le registre est peut-être en ligne depuis. ¦ Ngày này cách giới hạn ({until}) 2 năm: sổ có thể đã được đưa lên mạng từ đó. ¦ Tanggalnya 2 tahun dari batas ({until}): registernya mungkin sudah daring sejak itu.
+Acte de plus de 100 ans, mais la limite de ce département n’est pas encore vérifiée : jamais « en ligne » sans source. ¦ Giấy tờ hơn 100 năm, nhưng giới hạn của tỉnh này chưa được kiểm chứng: không bao giờ “trực tuyến” khi không có nguồn. ¦ Akta lebih dari 100 tahun, tetapi batas departemen ini belum diperiksa: tidak pernah “daring” tanpa sumber.
+Trop récent pour être en ligne : la limite de ce département est {until}. ¦ Quá gần đây để có trên mạng: giới hạn của tỉnh này là {until}. ¦ Terlalu baru untuk daring: batas departemen ini adalah {until}.
+Trop récent pour être en ligne (et la limite de ce département n’est pas encore vérifiée). ¦ Quá gần đây để có trên mạng (và giới hạn của tỉnh này chưa được kiểm chứng). ¦ Terlalu baru untuk daring (dan batas departemen ini belum diperiksa).
+L’état civil parisien d’avant 1860 a brûlé en 1871 : chercher dans l’état civil reconstitué (Archives de Paris). ¦ Hộ tịch Paris trước năm 1860 đã cháy năm 1871: hãy tìm trong hộ tịch được phục dựng (Archives de Paris). ¦ Catatan sipil Paris sebelum 1860 terbakar pada 1871: cari di catatan sipil yang direkonstruksi (Archives de Paris).
+Après 1792, un baptême ou une sépulture n’est pas dans l’état civil : il faut le demander aux archives diocésaines. ¦ Sau năm 1792, rửa tội hay mai táng không có trong hộ tịch: phải hỏi kho lưu trữ giáo phận. ¦ Setelah 1792, pembaptisan atau pemakaman tidak ada di catatan sipil: mintalah ke arsip keuskupan.
+Les registres paroissiaux en ligne de ce département commencent en {from}. ¦ Sổ giáo xứ trực tuyến của tỉnh này bắt đầu từ năm {from}. ¦ Register paroki daring departemen ini dimulai tahun {from}.
+Ancienne colonie : l’état civil est aux Archives nationales d’outre-mer (Aix-en-Provence). ¦ Thuộc địa cũ: hộ tịch nằm ở Lưu trữ quốc gia hải ngoại (Aix-en-Provence). ¦ Bekas koloni: catatan sipil ada di Arsip Nasional Seberang Laut (Aix-en-Provence).
+Hors de France : la table ne couvre que les départements français. Pour un Français né, marié ou mort à l’étranger : le Service central d’état civil (Nantes). ¦ Ngoài nước Pháp: bảng chỉ bao gồm các tỉnh của Pháp. Với người Pháp sinh, kết hôn hay mất ở nước ngoài: Sở hộ tịch trung ương (Nantes). ¦ Di luar Prancis: tabel hanya mencakup departemen Prancis. Untuk warga Prancis yang lahir, menikah, atau meninggal di luar negeri: Layanan pusat catatan sipil (Nantes).
+Pas de date : impossible de la comparer avec la limite. ¦ Không có ngày: không thể so với giới hạn. ¦ Tanpa tanggal: tidak bisa dibandingkan dengan batas.
+Pas de lieu : on ne sait pas à quelles archives s’adresser. ¦ Không có nơi: không biết nên hỏi kho lưu trữ nào. ¦ Tanpa tempat: tidak tahu harus ke arsip mana.
+Le département du lieu n’est pas connu : choisis la commune dans la liste des lieux, le code arrive tout seul. ¦ Chưa biết tỉnh của địa điểm: hãy chọn xã trong danh sách địa điểm, mã sẽ tự có. ¦ Departemen tempat ini tidak diketahui: pilih komune di daftar tempat, kodenya akan muncul sendiri.
+Lieu : {place} → {dept} ({code}). ¦ Địa điểm: {place} → {dept} ({code}). ¦ Tempat: {place} → {dept} ({code}).
+Limite des {acts} ({dept}) : en ligne jusqu’en {until} ¦ Giới hạn cho {acts} ({dept}): trực tuyến đến năm {until} ¦ Batas untuk {acts} ({dept}): daring sampai {until}
+la page qui le dit ↗ ¦ trang nói điều đó ↗ ¦ halaman yang menyebutkannya ↗
+vérifié le {date} ¦ kiểm tra ngày {date} ¦ diperiksa pada {date}
+source secondaire ¦ nguồn thứ cấp ¦ sumber sekunder
+année lue dans un extrait de recherche, pas encore confirmée ¦ năm đọc được trong đoạn kết quả tìm kiếm, chưa xác nhận ¦ tahun dibaca dari cuplikan pencarian, belum dikonfirmasi
+corrigé par toi ¦ do bạn sửa ¦ dikoreksi olehmu
+Limite des {acts} ({dept}) : pas encore vérifiée. ¦ Giới hạn cho {acts} ({dept}): chưa kiểm chứng. ¦ Batas untuk {acts} ({dept}): belum diperiksa.
+75 ans : acte de {date} → communicable à tous le {open}. Ce jour-là, la pastille devient « 📮 À demander » toute seule. ¦ 75 năm: giấy tờ ngày {date} → công khai cho mọi người vào {open}. Hôm đó nhãn tự chuyển thành “📮 Cần yêu cầu”. ¦ 75 tahun: akta {date} → terbuka untuk semua pada {open}. Pada hari itu label otomatis menjadi “📮 Perlu diminta”.
+75 ans passés : l’acte est communicable à tous depuis le {open}. ¦ Đã quá 75 năm: giấy tờ công khai cho mọi người từ {open}. ¦ Lebih dari 75 tahun: akta terbuka untuk semua sejak {open}.
+Un acte de décès est communicable à tous, tout de suite. ¦ Giấy khai tử công khai cho mọi người ngay lập tức. ¦ Akta kematian langsung terbuka untuk semua.
+À qui demander : ¦ Hỏi ai: ¦ Minta ke siapa:
+L’app ne va pas voir sur le site des archives : elle ouvre la page, c’est toi qui regardes. ¦ Ứng dụng không tự xem trang của kho lưu trữ: nó mở trang, bạn là người xem. ¦ Aplikasi tidak memeriksa situs arsip: aplikasi membuka halamannya, kamu yang melihat.
+🏛 Ouvrir les archives ({dept}) ¦ 🏛 Mở kho lưu trữ ({dept}) ¦ 🏛 Buka arsip ({dept})
+📮 Préparer la lettre ({who}) ¦ 📮 Soạn thư ({who}) ¦ 📮 Siapkan surat ({who})
+✓ Je l’ai trouvé en ligne ¦ ✓ Tôi đã tìm thấy trên mạng ¦ ✓ Aku menemukannya daring
+✗ Pas en ligne ¦ ✗ Không có trên mạng ¦ ✗ Tidak daring
+🗂 Voir la table des limites ¦ 🗂 Xem bảng giới hạn ¦ 🗂 Lihat tabel batas
+🏛 ARCHIVES EN LIGNE ¦ 🏛 LƯU TRỮ TRỰC TUYẾN ¦ 🏛 ARSIP DARING
+{act} : pourquoi cette pastille ? ¦ {act}: vì sao có nhãn này? ¦ {act}: kenapa label ini?
+La page officielle disait {until} le {date}. ¦ Trang chính thức ghi {until} vào ngày {date}. ¦ Halaman resmi menyebut {until} pada {date}.
+Rouvrir la page ↗ ¦ Mở lại trang ↗ ¦ Buka lagi halamannya ↗
+✓ Trouvé en ligne ¦ ✓ Đã tìm thấy trên mạng ¦ ✓ Ditemukan daring
+Adresse de l’image de l’acte (facultatif, conseillé) ¦ Địa chỉ ảnh của giấy tờ (không bắt buộc, nên có) ¦ Alamat gambar akta (opsional, disarankan)
+Vue, page ou cote (facultatif) ¦ Ảnh, trang hoặc ký hiệu (không bắt buộc) ¦ Gambar, halaman, atau nomor arsip (opsional)
+ex. vue 143 ¦ vd. ảnh 143 ¦ mis. gambar 143
+Ajouter comme source de cet acte ¦ Thêm làm nguồn của giấy tờ này ¦ Tambahkan sebagai sumber akta ini
+Ta correction vaut pour… ¦ Chỉnh sửa của bạn áp dụng cho… ¦ Koreksimu berlaku untuk…
+Tout le département : les {acts} ({dept}) sont en ligne au moins jusqu’en {year} ¦ Cả tỉnh: {acts} ({dept}) có trên mạng ít nhất đến năm {year} ¦ Seluruh departemen: {acts} ({dept}) daring setidaknya sampai {year}
+Seulement cette commune ({commune}) ¦ Chỉ xã này ({commune}) ¦ Hanya komune ini ({commune})
+Cette adresse ne commence pas par https:// ¦ Địa chỉ này không bắt đầu bằng https:// ¦ Alamat ini tidak diawali https://
+✓ Noté : {acts} ({dept}) en ligne au moins jusqu’en {year} ¦ ✓ Đã ghi: {acts} ({dept}) trực tuyến ít nhất đến năm {year} ¦ ✓ Dicatat: {acts} ({dept}) daring setidaknya sampai {year}
+Pourquoi ? ¦ Vì sao? ¦ Kenapa?
+Le registre de cette année n’est pas en ligne ¦ Sổ của năm đó không có trên mạng ¦ Register tahun itu tidak daring
+La limite des {acts} ({dept}) passe avant {year} chez toi. ¦ Với bạn, giới hạn cho {acts} ({dept}) lùi về trước năm {year}. ¦ Bagimu, batas untuk {acts} ({dept}) bergeser ke sebelum {year}.
+Seulement cette commune manque ¦ Chỉ thiếu xã này ¦ Hanya komune ini yang tidak ada
+Exception pour {commune}, la limite du département ne bouge pas. ¦ Ngoại lệ cho {commune}; giới hạn của tỉnh không đổi. ¦ Pengecualian untuk {commune}; batas departemen tidak berubah.
+Je n’ai pas trouvé l’acte dans le registre ¦ Tôi không tìm thấy giấy tờ trong sổ ¦ Aku tidak menemukan aktanya di register
+La limite ne bouge pas ; c’est noté (« cherché, pas trouvé »). ¦ Giới hạn không đổi; được ghi lại (“đã tìm, không thấy”). ¦ Batas tidak berubah; dicatat (“dicari, tidak ditemukan”).
+Noté : cherché, pas trouvé dans le registre ¦ Đã ghi: đã tìm, không thấy trong sổ ¦ Dicatat: dicari, tidak ditemukan di register
+✗ Noté : pas en ligne ({place}) ¦ ✗ Đã ghi: không có trên mạng ({place}) ¦ ✗ Dicatat: tidak daring ({place})
+Où montrer les pastilles ¦ Hiện nhãn ở đâu ¦ Di mana label ditampilkan
+🗂 Archives en ligne par département ¦ 🗂 Lưu trữ trực tuyến theo tỉnh ¦ 🗂 Arsip daring per departemen
+Table livrée avec l’app (vérifiée le {date}), complétée par tes corrections. Une ligne sans source n’existe pas : le département est alors « à vérifier ». ¦ Bảng đi kèm ứng dụng (kiểm tra ngày {date}), bổ sung bằng các chỉnh sửa của bạn. Không có dòng nào thiếu nguồn: khi đó tỉnh là “cần kiểm tra”. ¦ Tabel yang disertakan aplikasi (diperiksa pada {date}), dilengkapi koreksimu. Baris tanpa sumber tidak ada: departemen itu lalu “perlu diperiksa”.
+La table des limites n’est pas encore livrée avec cette version : tout est « à vérifier », sauf ce que tu notes toi-même. ¦ Bảng giới hạn chưa đi kèm phiên bản này: mọi thứ đều “cần kiểm tra”, trừ những gì bạn tự ghi. ¦ Tabel batas belum disertakan di versi ini: semuanya “perlu diperiksa”, kecuali yang kamu catat sendiri.
+🔎 Département… ¦ 🔎 Tỉnh… ¦ 🔎 Departemen…
+En ligne jusqu’à ¦ Trực tuyến đến ¦ Daring sampai
+Page officielle qui le dit ¦ Trang chính thức nói điều đó ¦ Halaman resmi yang menyebutkannya
+Vérifié le ¦ Kiểm tra ngày ¦ Diperiksa pada
+tous ¦ tất cả ¦ semua
+＋ Noter la limite ¦ ＋ Ghi giới hạn ¦ ＋ Catat batas
+depuis {y} ¦ từ năm {y} ¦ sejak {y}
+à confirmer ¦ cần xác nhận ¦ perlu dikonfirmasi
+moi ¦ tôi ¦ aku
+Retirer ma correction ¦ Gỡ chỉnh sửa của tôi ¦ Hapus koreksiku
+Aucun département ne correspond. ¦ Không tỉnh nào khớp. ¦ Tidak ada departemen yang cocok.
+Correction retirée : la ligne livrée avec l’app revient. ¦ Đã gỡ chỉnh sửa: dòng đi kèm ứng dụng quay lại. ¦ Koreksi dihapus: baris bawaan aplikasi kembali berlaku.
+En ligne jusqu’à l’année ¦ Trực tuyến đến năm ¦ Daring sampai tahun
+ex. 1925 ¦ vd. 1925 ¦ mis. 1925
+Adresse de la page qui le dit (obligatoire) ¦ Địa chỉ trang nói điều đó (bắt buộc) ¦ Alamat halaman yang menyebutkannya (wajib)
+Sans adresse, on ne peut pas enregistrer : c’est ce qui évite les limites inventées. ¦ Không có địa chỉ thì không lưu được: nhờ vậy tránh được giới hạn bịa đặt. ¦ Tanpa alamat tidak bisa disimpan: itulah yang mencegah batas karangan.
+Une année entre 1500 et aujourd’hui. ¦ Một năm từ 1500 đến nay. ¦ Tahun antara 1500 dan hari ini.
+L’adresse de la page qui le dit est obligatoire. ¦ Bắt buộc phải có địa chỉ trang nói điều đó. ¦ Alamat halaman yang menyebutkannya wajib diisi.
+＋ Limite notée : {dept}, {year} ¦ ＋ Đã ghi giới hạn: {dept}, {year} ¦ ＋ Batas dicatat: {dept}, {year}
+En ligne aux archives : à télécharger, pas à demander ¦ Có trên mạng tại kho lưu trữ: tải về, không cần yêu cầu ¦ Daring di arsip: untuk diunduh, bukan diminta
+🏛 Ouvrir ¦ 🏛 Mở ¦ 🏛 Buka
+Réservé jusqu’en {year} : à demander par l’héritier lui-même, ou extrait sans filiation ¦ Hạn chế đến năm {year}: người thừa kế phải tự yêu cầu, hoặc trích lục không ghi cha mẹ ¦ Terbatas sampai {year}: ahli waris sendiri yang harus meminta, atau kutipan tanpa orang tua
+À demander : {who} ¦ Cần yêu cầu: {who} ¦ Perlu diminta: {who}
+📮 Lettre ¦ 📮 Thư ¦ 📮 Surat
+🏛 Archives ¦ 🏛 Lưu trữ ¦ 🏛 Arsip
+Commence par les tables décennales. ¦ Hãy bắt đầu bằng mục lục mười năm. ¦ Mulailah dari indeks sepuluh tahunan.
+Ses actes aux archives ¦ Giấy tờ tại kho lưu trữ ¦ Akta-aktanya di arsip
+Les actes n’ont pas pu être lus. ¦ Không đọc được các giấy tờ. ¦ Akta tidak dapat dibaca.
+{n} de ta base sont en ligne et pas encore liés à une source. ¦ {n} trong cơ sở dữ liệu của bạn có trên mạng và chưa liên kết với nguồn. ¦ {n} di basismu daring dan belum ditautkan ke sumber.
+Aussi : {maybe} peut-être en ligne · {ask} à demander · {verify} à vérifier ¦ Ngoài ra: {maybe} có thể trực tuyến · {ask} cần yêu cầu · {verify} cần kiểm tra ¦ Juga: {maybe} mungkin daring · {ask} perlu diminta · {verify} perlu diperiksa
+La table des limites n’est pas encore livrée : aucun acte ne peut être « en ligne » sans source. ¦ Bảng giới hạn chưa được cung cấp: không giấy tờ nào có thể “trực tuyến” khi không có nguồn. ¦ Tabel batas belum disertakan: tidak ada akta yang bisa “daring” tanpa sumber.
+Actes en ligne à aller voir ¦ Giấy tờ trực tuyến cần xem ¦ Akta daring untuk dilihat
+La pastille 🏛 dit, pour chaque acte, s’il est en ligne aux archives (d’après une limite vérifiée du département), à demander (et à qui), ou réservé. Un acte en ligne sort de cette liste. ¦ Nhãn 🏛 cho biết với mỗi giấy tờ: có trên mạng tại kho lưu trữ (theo giới hạn đã kiểm chứng của tỉnh), cần yêu cầu (và hỏi ai), hay bị hạn chế. Giấy tờ đã có trên mạng sẽ ra khỏi danh sách này. ¦ Label 🏛 menyebutkan untuk setiap akta apakah akta itu daring di arsip (menurut batas departemen yang sudah diperiksa), perlu diminta (dan ke siapa), atau terbatas. Akta yang daring keluar dari daftar ini.
+Actes ¦ Giấy tờ ¦ Akta
+Arbres ¦ Cây gia phả ¦ Pohon keluarga
+Peut-être en ligne ¦ Có thể trực tuyến ¦ Mungkin daring
+Réservé ¦ Hạn chế ¦ Terbatas
+Archives nationales d’outre-mer (Aix-en-Provence) ¦ Lưu trữ quốc gia hải ngoại (Aix-en-Provence) ¦ Arsip Nasional Seberang Laut (Aix-en-Provence)
+Notaire ou Archives départementales (série E) ¦ Công chứng viên hoặc Archives départementales (loạt E) ¦ Notaris atau Arsip departemen (seri E)
+Service historique de la Défense (Vincennes, Caen) ¦ Sở lịch sử Quốc phòng (Vincennes, Caen) ¦ Layanan Sejarah Pertahanan (Vincennes, Caen)
+baptêmes ¦ rửa tội ¦ pembaptisan
+sépultures ¦ mai táng ¦ pemakaman
+tables décennales ¦ mục lục mười năm ¦ indeks sepuluh tahunan
+registres paroissiaux ¦ sổ giáo xứ ¦ register paroki
+Pastilles sur les fiches ¦ Nhãn trên hồ sơ ¦ Label di profil
+à côté de chaque naissance, baptême, mariage, décès, sépulture ¦ bên cạnh mỗi lần sinh, rửa tội, kết hôn, mất, mai táng ¦ di samping setiap kelahiran, pembaptisan, pernikahan, kematian, pemakaman
+Pastilles dans la Chronologie ¦ Nhãn trong Dòng thời gian ¦ Label di Kronologi
+Colonne « 🏛 Archives » dans la liste des Événements ¦ Cột “🏛 Lưu trữ” trong danh sách Sự kiện ¦ Kolom “🏛 Arsip” di daftar Peristiwa
+Cacher la pastille quand l’acte est déjà lié ¦ Ẩn nhãn khi giấy tờ đã được liên kết ¦ Sembunyikan label jika akta sudah ditautkan
+sinon : petite « 🟢 ✓ lié » ¦ nếu không: nhãn nhỏ “🟢 ✓ đã liên kết” ¦ jika tidak: kecil “🟢 ✓ tertaut”
+Widget « 🏛 Actes en ligne à aller voir » : ancêtres directs seulement ¦ Tiện ích “🏛 Giấy tờ trực tuyến cần xem”: chỉ tổ tiên trực hệ ¦ Widget “🏛 Akta daring untuk dilihat”: hanya leluhur langsung
+Vérifiés ¦ Đã kiểm chứng ¦ Terverifikasi
+Corrigés par moi ¦ Do tôi sửa ¦ Dikoreksi olehku
+Actes en ligne aux archives ¦ Giấy tờ trực tuyến tại kho lưu trữ ¦ Akta daring di arsip
+Une pastille sur chaque naissance, baptême, mariage, décès et sépulture : en ligne, à demander (et à qui), réservé, à vérifier. Jamais « en ligne » sans une limite sourcée. ¦ Một nhãn trên mỗi lần sinh, rửa tội, kết hôn, mất và mai táng: trực tuyến, cần yêu cầu (và hỏi ai), hạn chế, cần kiểm tra. Không bao giờ “trực tuyến” khi giới hạn không có nguồn. ¦ Label pada setiap kelahiran, pembaptisan, pernikahan, kematian, dan pemakaman: daring, perlu diminta (dan ke siapa), terbatas, perlu diperiksa. Tidak pernah “daring” tanpa batas yang bersumber.
+Correction introuvable. ¦ Không tìm thấy chỉnh sửa. ¦ Koreksi tidak ditemukan.
+Type d’acte inconnu. ¦ Loại giấy tờ không rõ. ¦ Jenis akta tidak dikenal.
+Année incorrecte. ¦ Năm không đúng. ¦ Tahun tidak valid.
+Cet acte n’a pas de département ou de date : précise d’abord le lieu et la date. ¦ Giấy tờ này không có tỉnh hoặc ngày: hãy ghi rõ nơi và ngày trước. ¦ Akta ini tidak punya departemen atau tanggal: tentukan dulu tempat dan tanggalnya.

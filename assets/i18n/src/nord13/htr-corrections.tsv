@@ -1,0 +1,35 @@
+fr ¦ el ¦ bg
+# 🪄 Corrections proposées après « ✨ Lire l’acte » (app-htr-correction.js, heritage-transcribe.js, heritage-more.js)
+« {w} » ajouté au lexique ¦ Το «{w}» προστέθηκε στο λεξικό ¦ „{w}“ е добавено в речника
+Garder tel quel ¦ Άφησέ το όπως είναι ¦ Остави както е
+Ajouter au lexique ¦ Προσθήκη στο λεξικό ¦ Добави в речника
+Ce mot ne sera plus souligné ¦ Αυτή η λέξη δεν θα υπογραμμίζεται πια ¦ Тази дума вече няма да се подчертава
+Proposer des corrections (conseillé) ¦ Πρόταση διορθώσεων (συνιστάται) ¦ Предлагай поправки (препоръчва се)
+Prudent (conseillé) ¦ Προσεκτικά (συνιστάται) ¦ Внимателно (препоръчва се)
+Plus de propositions ¦ Περισσότερες προτάσεις ¦ Повече предложения
+Correction proposée : « {x} » — clique pour choisir ¦ Προτεινόμενη διόρθωση: «{x}» — κάνε κλικ για να διαλέξεις ¦ Предложена поправка: „{x}“ — щракни, за да избереш
+=correction proposée ¦ προτεινόμενη διόρθωση|προτεινόμενες διορθώσεις ¦ предложена поправка|предложени поправки
+(soulignées en violet : clique un mot) ¦ (υπογραμμισμένες με μοβ: κάνε κλικ σε μια λέξη) ¦ (подчертани с лилаво: щракни върху дума)
+Aucune correction à proposer ¦ Καμία διόρθωση για πρόταση ¦ Няма какво да се предложи
+Corrections proposées : non ¦ Προτεινόμενες διορθώσεις: όχι ¦ Предлагани поправки: не
+Accepter les {n} propositions sûres ¦ Αποδοχή των {n} σίγουρων προτάσεων ¦ Приеми {n}-те сигурни предложения
+Accepter la proposition sûre ¦ Αποδοχή της σίγουρης πρότασης ¦ Приеми сигурното предложение
+=proposition sûre acceptée ¦ σίγουρη πρόταση έγινε δεκτή|σίγουρες προτάσεις έγιναν δεκτές ¦ прието сигурно предложение|приети сигурни предложения
+« {w} » gardé tel quel ¦ Το «{w}» έμεινε όπως είναι ¦ „{w}“ е оставено както е
+Proposer des corrections pour les mots mal lus (un mot souligné : clique-le pour choisir) ¦ Πρόταση διορθώσεων για λέξεις που διαβάστηκαν λάθος (υπογραμμισμένη λέξη: κάνε κλικ για να διαλέξεις) ¦ Предлагай поправки за грешно прочетени думи (подчертана дума: щракни я, за да избереш)
+Corrections ¦ Διορθώσεις ¦ Поправки
+Les corrections proposées ne sont pas chargées. ¦ Οι προτεινόμενες διορθώσεις δεν έχουν φορτωθεί. ¦ Предлаганите поправки не са заредени.
+Corrections proposées après la lecture ¦ Διορθώσεις που προτείνονται μετά την ανάγνωση ¦ Поправки, предлагани след четенето
+Après « ✨ Lire l’acte », les mots qui ressemblent à un mot connu (« décembe » → « décembre ») sont soulignés en violet : un clic, et tu choisis. Rien n’est changé sans toi. Le lexique : les mots des actes, ceux de « 📜 Aide à la lecture », et les noms, prénoms, lieux et métiers de ta base (sans les vivants ni les fiches confidentielles). ¦ Μετά την «✨ Ανάγνωση της πράξης», οι λέξεις που μοιάζουν με γνωστή λέξη («décembe» → «décembre») υπογραμμίζονται με μοβ: ένα κλικ και διαλέγεις εσύ. Τίποτα δεν αλλάζει χωρίς εσένα. Το λεξικό: οι λέξεις των πράξεων, οι λέξεις της «📜 Βοήθεια ανάγνωσης», και τα επώνυμα, ονόματα, τόποι και επαγγέλματα της βάσης σου (χωρίς τους ζωντανούς και τις εμπιστευτικές καρτέλες). ¦ След „✨ Прочети акта“ думите, които приличат на позната дума („décembe“ → „décembre“), се подчертават с лилаво: едно щракване и избираш ти. Без теб нищо не се променя. Речникът: думите от актовете, думите от „📜 Помощ при четене“ и фамилиите, имената, местата и занаятите от твоята база (без живите хора и поверителните картони).
+Ton lexique personnel : {x}. ¦ Το προσωπικό σου λεξικό: {x}. ¦ Твоят личен речник: {x}.
+Vider le lexique personnel ¦ Άδειασμα του προσωπικού λεξικού ¦ Изпразни личния речник
+Ton lexique personnel est vide : « Ajouter au lexique » dans le menu d’un mot souligné. ¦ Το προσωπικό σου λεξικό είναι άδειο: «Προσθήκη στο λεξικό» στο μενού μιας υπογραμμισμένης λέξης. ¦ Твоят личен речник е празен: „Добави в речника“ в менюто на подчертана дума.
+Lexique personnel vidé ¦ Το προσωπικό λεξικό άδειασε ¦ Личният речник е изпразнен
+Il manque l’accent ¦ Λείπει ο τόνος ¦ Липсва ударение
+« {x} » ressemble à « {y} » ¦ Το «{x}» μοιάζει με «{y}» ¦ „{x}“ прилича на „{y}“
+« {x} » collé au mot suivant ¦ Το «{x}» είναι κολλημένο με την επόμενη λέξη ¦ „{x}“ е слято със следващата дума
+Deux mots collés ¦ Δύο κολλημένες λέξεις ¦ Две слети думи
+Après « mil {x} », on attend « cent » ¦ Μετά το «mil {x}» αναμένεται «cent» ¦ След „mil {x}“ се очаква „cent“
+Dans une date en toutes lettres : « {x} » ¦ Σε ημερομηνία γραμμένη ολογράφως: «{x}» ¦ В дата, написана с думи: „{x}“
+Un mois, dans une date ¦ Ένας μήνας, σε ημερομηνία ¦ Месец, в дата
+À cet endroit : « {where} » (ligne {n}) ¦ Σε αυτό το σημείο: «{where}» (γραμμή {n}) ¦ На това място: „{where}“ (ред {n})

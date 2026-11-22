@@ -1614,3 +1614,37 @@ Impossible de lancer le service HTR local. ¦ Miestnu službu HTR nie je možné
 Cette image n’est pas rattachée à la personne ¦ Tento obrázok nie je prepojený s osobou ¦ Dette bildet er ikke koblet til personen
 Ordre des médias manquant ¦ Chýba poradie médií ¦ Rekkefølgen på mediene mangler
 Type de média invalide. ¦ Neplatný typ média. ¦ Ugyldig medietype.
+# ═════ Poser une question : mariage et enfants (lib/question_famille.php) ═════
+mariées ¦ vydaté ¦ gift
+mariés ¦ zosobášení ¦ gift
+jamais mariées ¦ nikdy nevydaté ¦ aldri gift
+jamais mariés ¦ nikdy nezosobášení ¦ aldri gift
+=au moins {n} mariages ¦ aspoň {n} sobáš|aspoň {n} sobáše|aspoň {n} sobášov ¦ minst {n} ekteskap|minst {n} ekteskap
+mariées à {n} ans ¦ vydaté vo veku {n} rokov ¦ gift i en alder av {n} år
+mariés à {n} ans ¦ zosobášení vo veku {n} rokov ¦ gift i en alder av {n} år
+mariées entre {a} et {b} ans ¦ vydaté vo veku {a} až {b} rokov ¦ gift i en alder av {a}–{b} år
+mariés entre {a} et {b} ans ¦ zosobášení vo veku {a} až {b} rokov ¦ gift i en alder av {a}–{b} år
+mariées après {n} ans ¦ vydaté vo veku nad {n} rokov ¦ gift etter fylte {n} år
+mariés après {n} ans ¦ zosobášení vo veku nad {n} rokov ¦ gift etter fylte {n} år
+mariées avant {n} ans ¦ vydaté vo veku pod {n} rokov ¦ gift før fylte {n} år
+mariés avant {n} ans ¦ zosobášení vo veku pod {n} rokov ¦ gift før fylte {n} år
+sans enfant ¦ bez detí ¦ uten barn
+avec des enfants ¦ s deťmi ¦ med barn
+entre {a} et {b} enfants ¦ počet detí: {a}–{b} ¦ mellom {a} og {b} barn
+=exactement {n} enfants ¦ presne {n} dieťa|presne {n} deti|presne {n} detí ¦ nøyaktig {n} barn|nøyaktig {n} barn
+=au moins {n} enfants ¦ aspoň {n} dieťa|aspoň {n} deti|aspoň {n} detí ¦ minst {n} barn|minst {n} barn
+=au plus {n} enfants ¦ najviac {n} dieťa|najviac {n} deti|najviac {n} detí ¦ høyst {n} barn|høyst {n} barn
+exactement 1 enfant ¦ presne 1 dieťa ¦ nøyaktig 1 barn
+au plus 1 enfant ¦ najviac 1 dieťa ¦ høyst 1 barn
+nées avant {y} ¦ narodené pred {y} ¦ født før {y}
+nés avant {y} ¦ narodení pred {y} ¦ født før {y}
+nées après {y} ¦ narodené po {y} ¦ født etter {y}
+nés après {y} ¦ narodení po {y} ¦ født etter {y}
+nées en {y} ¦ narodené v roku {y} ¦ født i {y}
+nés en {y} ¦ narodení v roku {y} ¦ født i {y}
+nées au {n}e siècle ¦ narodené v {n}. storočí ¦ født i det {n}. århundre
+nés au {n}e siècle ¦ narodení v {n}. storočí ¦ født i det {n}. århundre
+1 fiche sans date n’a pas pu être vérifiée pour l’âge au mariage (année de naissance ou de mariage inconnue). ¦ 1 záznam bez dátumu sa nedal overiť podľa veku pri sobáši (neznámy rok narodenia alebo sobáša). ¦ 1 oppføring uten dato kunne ikke kontrolleres for alderen ved giftermålet (fødsels- eller vielsesår ukjent).
+={n} fiches sans date n’ont pas pu être vérifiées pour l’âge au mariage (année de naissance ou de mariage inconnue). ¦ Záznamy bez dátumu, ktoré sa nedali overiť podľa veku pri sobáši: {n} (neznámy rok narodenia alebo sobáša).|Záznamy bez dátumu, ktoré sa nedali overiť podľa veku pri sobáši: {n} (neznámy rok narodenia alebo sobáša).|Záznamy bez dátumu, ktoré sa nedali overiť podľa veku pri sobáši: {n} (neznámy rok narodenia alebo sobáša). ¦ {n} oppføring uten dato kunne ikke kontrolleres for alderen ved giftermålet (fødsels- eller vielsesår ukjent).|{n} oppføringer uten dato kunne ikke kontrolleres for alderen ved giftermålet (fødsels- eller vielsesår ukjent).
+« Jeunes » n’est pas assez précis pour un âge : écris par exemple « mariées avant 20 ans ». ¦ „Jeunes“ (mladé) nie je pre vek dosť presné: napíš napríklad „mariées avant 20 ans“. ¦ «Jeunes» (unge) er ikke presist nok for en alder: skriv for eksempel «mariées avant 20 ans».
+Venue d’une question : les critères de mariage et d’enfants sont gardés. ¦ Z otázky: kritériá sobáša a detí zostávajú zachované. ¦ Fra et spørsmål: kriteriene for ekteskap og barn beholdes.

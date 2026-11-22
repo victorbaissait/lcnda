@@ -1,0 +1,114 @@
+fr ¦ ru ¦ uk
+# Zone « reseau » : 🖧 plusieurs ordinateurs de la maison
+conseillé ¦ рекомендуется ¦ рекомендовано
+connecté maintenant ¦ подключено сейчас ¦ підключено зараз
+jamais venu ¦ ни разу не подключалось ¦ жодного разу не підключалося
+Plusieurs ordinateurs ¦ Несколько компьютеров ¦ Кілька комп’ютерів
+Ouvrir cette généalogie aux autres ordinateurs de la maison, par le wifi, jamais par internet. ¦ Открыть эту генеалогию для других компьютеров дома — по wifi, никогда через интернет. ¦ Відкрити цю генеалогію для інших комп’ютерів удома — через wifi, ніколи через інтернет.
+Ce réglage ne se change que sur l’ordinateur principal : cet appareil est un appareil invité, en lecture seule. ¦ Эта настройка меняется только на главном компьютере: это устройство — гостевое, только для чтения. ¦ Це налаштування змінюється лише на головному комп’ютері: цей пристрій — гостьовий, лише для читання.
+Seulement dans l’app de bureau LCNDA, sur l’ordinateur qui garde la généalogie. ¦ Только в настольном приложении LCNDA, на компьютере, где хранится генеалогия. ¦ Лише в настільному застосунку LCNDA, на комп’ютері, де зберігається генеалогія.
+⏻ Tout couper maintenant ¦ ⏻ Отключить всё сейчас ¦ ⏻ Вимкнути все зараз
+↻ Nouveau code ¦ ↻ Новый код ¦ ↻ Новий код
+Ouvrir « {name} » aux autres ordinateurs de la maison ¦ Открыть «{name}» для других компьютеров дома ¦ Відкрити «{name}» для інших комп’ютерів удома
+Ouvert depuis {time}. Se coupe si cet ordinateur se met en veille, change de réseau ou ferme l’app. ¦ Открыто с {time}. Отключается, если этот компьютер уходит в сон, меняет сеть или закрывает приложение. ¦ Відкрито з {time}. Вимикається, якщо цей комп’ютер переходить у сон, змінює мережу або закриває застосунок.
+Coupé : l’app ne répond qu’à cet ordinateur (comme aujourd’hui). ¦ Отключено: приложение отвечает только этому компьютеру (как сейчас). ¦ Вимкнено: застосунок відповідає лише цьому комп’ютеру (як зараз).
+Avant d’ouvrir : cette généalogie n’a pas de mot de passe. Il en faut un pour l’ouvrir au réseau. ¦ Перед открытием: у этой генеалогии нет пароля. Он нужен, чтобы открыть её в сети. ¦ Перед відкриттям: ця генеалогія не має пароля. Він потрібен, щоб відкрити її в мережі.
+🔐 En mettre un ¦ 🔐 Задать пароль ¦ 🔐 Задати пароль
+Cet ordinateur n’est relié à aucun réseau de la maison (adresse privée introuvable) : branche le wifi, puis réessaie. ¦ Этот компьютер не подключён ни к одной домашней сети (частный адрес не найден): включи wifi и попробуй ещё раз. ¦ Цей комп’ютер не підключений до жодної домашньої мережі (приватну адресу не знайдено): увімкни wifi і спробуй ще раз.
+5 codes d’invitation faux : plus aucune demande jusqu’à {time}. ¦ 5 неверных кодов приглашения: больше никаких запросов до {time}. ¦ 5 хибних кодів запрошення: більше жодних запитів до {time}.
+5 demandes refusées : plus aucune demande jusqu’à {time}. ¦ 5 запросов отклонено: больше никаких запросов до {time}. ¦ 5 запитів відхилено: більше жодних запитів до {time}.
+Le réseau a changé : tout a été coupé. ¦ Сеть изменилась: всё отключено. ¦ Мережа змінилася: усе вимкнено.
+Adresse à taper sur l’autre ordinateur ¦ Адрес, который нужно ввести на другом компьютере ¦ Адреса, яку треба ввести на іншому комп’ютері
+Code d’invitation (valable 10 min, une seule fois) ¦ Код приглашения (действует 10 мин, только один раз) ¦ Код запрошення (діє 10 хв, лише один раз)
+Sur l’autre ordinateur : ouvre un navigateur (Chrome, Firefox, Safari, Edge), tape cette adresse, puis le code. Ensuite, c’est toi qui acceptes ici, en comparant le code à 6 chiffres affiché des deux côtés. ¦ На другом компьютере: открой браузер (Chrome, Firefox, Safari, Edge), введи этот адрес, затем код. Потом ты сам принимаешь здесь, сравнив 6-значный код, показанный на обеих сторонах. ¦ На іншому комп’ютері: відкрий браузер (Chrome, Firefox, Safari, Edge), введи цю адресу, потім код. Потім ти сам приймаєш тут, порівнявши 6-значний код, показаний з обох боків.
+Demandes d’accès ¦ Запросы доступа ¦ Запити на доступ
+✓ Autoriser ¦ ✓ Разрешить ¦ ✓ Дозволити
+Appareils autorisés ¦ Разрешённые устройства ¦ Дозволені пристрої
+Tous les appareils invités sont en lecture seule : ils regardent la généalogie, rien ne peut être modifié depuis eux. ¦ Все гостевые устройства только для чтения: они смотрят генеалогию, с них ничего нельзя изменить. ¦ Усі гостьові пристрої лише для читання: вони переглядають генеалогію, з них нічого не можна змінити.
+Ce qu’il faut savoir ¦ Что нужно знать ¦ Що треба знати
+🧱 La première fois, Windows (« Autoriser LCNDA sur les réseaux privés ? ») ou macOS (« Accepter les connexions entrantes ? ») pose la question : réponds oui, et sous Windows seulement pour les réseaux privés. ¦ 🧱 В первый раз Windows («Разрешить LCNDA в частных сетях?») или macOS («Принимать входящие подключения?») задаст вопрос: ответь «да», а в Windows — только для частных сетей. ¦ 🧱 Першого разу Windows («Дозволити LCNDA у приватних мережах?») або macOS («Приймати вхідні з’єднання?») поставить запитання: відповідай «так», а у Windows — лише для приватних мереж.
+📶 Dans cette version, ce qui passe dans le wifi n’est pas chiffré : n’ouvre que sur le wifi de la maison, protégé par sa clé, jamais sur un wifi d’hôtel, de gare ou de médiathèque. ¦ 📶 В этой версии то, что идёт по wifi, не шифруется: открывай только в домашнем wifi, защищённом ключом, никогда в wifi гостиницы, вокзала или библиотеки. ¦ 📶 У цій версії те, що йде через wifi, не шифрується: відкривай лише в домашньому wifi, захищеному ключем, ніколи в wifi готелю, вокзалу чи бібліотеки.
+🖥 Cet ordinateur doit rester allumé, avec LCNDA ouvert : s’il dort ou que tu fermes l’app, les autres ne voient plus rien. ¦ 🖥 Этот компьютер должен оставаться включённым, с открытым LCNDA: если он спит или ты закрываешь приложение, остальные больше ничего не видят. ¦ 🖥 Цей комп’ютер має залишатися увімкненим, з відкритим LCNDA: якщо він спить або ти закриваєш застосунок, інші більше нічого не бачать.
+autorisé le {date} ¦ разрешено {date} ¦ дозволено {date}
+lecture seule ¦ только чтение ¦ лише читання
+jusqu’au {date} ¦ до {date} ¦ до {date}
+pour cette fois seulement ¦ только на этот раз ¦ лише цього разу
+Pas vu depuis plus de 30 jours : le retirer ? ¦ Не появлялось больше 30 дней: убрать? ¦ Не з’являвся понад 30 днів: прибрати?
+Aucun appareil autorisé pour l’instant. ¦ Пока нет разрешённых устройств. ¦ Поки немає дозволених пристроїв.
+Aucun appareil ne correspond. ¦ Ни одно устройство не подходит. ¦ Жоден пристрій не підходить.
+Appareils : {n} · connectés : {c} ¦ Устройства: {n} · подключены: {c} ¦ Пристрої: {n} · підключені: {c}
+Chercher un appareil… ¦ Найти устройство… ¦ Знайти пристрій…
+La porte du wifi n’a pas pu s’ouvrir (pare-feu, ou adresse déjà prise). Réessaie dans un instant. ¦ Не удалось открыть дверь wifi (брандмауэр или адрес уже занят). Попробуй ещё раз через мгновение. ¦ Не вдалося відчинити двері wifi (брандмауер або адреса вже зайнята). Спробуй ще раз за мить.
+Cette demande n’existe plus (refusée, ou plus de 2 minutes sans réponse). ¦ Этого запроса больше нет (отклонён или больше 2 минут без ответа). ¦ Цього запиту більше немає (відхилено або понад 2 хвилини без відповіді).
+Trop tard pour annuler : autorise l’appareil de nouveau. ¦ Слишком поздно для отмены: разреши устройство заново. ¦ Запізно для скасування: дозволь пристрій знову.
+🖧 Ouvert aux ordinateurs de la maison. ¦ 🖧 Открыто для компьютеров дома. ¦ 🖧 Відкрито для комп’ютерів удома.
+🖧 Coupé : l’app ne répond plus qu’à cet ordinateur. ¦ 🖧 Отключено: приложение теперь отвечает только этому компьютеру. ¦ 🖧 Вимкнено: застосунок тепер відповідає лише цьому комп’ютеру.
+Adresse copiée ¦ Адрес скопирован ¦ Адресу скопійовано
+✓ « {name} » retiré : il ne peut plus se connecter. ¦ ✓ «{name}» убрано: оно больше не может подключиться. ¦ ✓ «{name}» прибрано: він більше не може підключитися.
+« {name} » peut de nouveau se connecter. ¦ «{name}» снова может подключаться. ¦ «{name}» знову може підключатися.
+Réglage enregistré ¦ Настройка сохранена ¦ Налаштування збережено
+Demande refusée. ¦ Запрос отклонён. ¦ Запит відхилено.
+✓ « {name} » autorisé, en lecture seule. ¦ ✓ «{name}» разрешено, только для чтения. ¦ ✓ «{name}» дозволено, лише для читання.
+Demande d’accès ¦ Запрос доступа ¦ Запит на доступ
+Un appareil veut ouvrir « {name} » ¦ Устройство хочет открыть «{name}» ¦ Пристрій хоче відкрити «{name}»
+Nom donné ¦ Указанное имя ¦ Указана назва
+(il peut être faux : compare le code) ¦ (оно может быть ложным: сравни код) ¦ (вона може бути хибною: порівняй код)
+Code affiché ¦ Показанный код ¦ Показаний код
+Regarde l’écran de l’appareil : il doit montrer le même code. Sinon, refuse. ¦ Посмотри на экран устройства: на нём должен быть тот же код. Иначе откажи. ¦ Подивися на екран пристрою: на ньому має бути той самий код. Інакше відмов.
+Ce qu’il pourra faire : 👁 lecture seule (rien ne peut être modifié depuis cet appareil). Il devra aussi donner le mot de passe de la généalogie. ¦ Что оно сможет делать: 👁 только чтение (с этого устройства ничего нельзя изменить). Ему также нужно будет ввести пароль генеалогии. ¦ Що він зможе робити: 👁 лише читання (з цього пристрою нічого не можна змінити). Йому також треба буде ввести пароль генеалогії.
+Sans réponse en 2 minutes, la demande disparaît toute seule (refusée). ¦ Без ответа за 2 минуты запрос исчезает сам (отклонён). ¦ Без відповіді за 2 хвилини запит зникає сам (відхилено).
+✓ Autoriser « {name} » ¦ ✓ Разрешить «{name}» ¦ ✓ Дозволити «{name}»
+Ouvert aux ordinateurs de la maison · appareils connectés : {n} ¦ Открыто для компьютеров дома · подключённых устройств: {n} ¦ Відкрито для комп’ютерів удома · підключених пристроїв: {n}
+🖧 Rouvrir sur ce réseau ¦ 🖧 Снова открыть в этой сети ¦ 🖧 Знову відкрити в цій мережі
+Autre ordinateur ¦ Другой компьютер ¦ Інший комп’ютер
+Se connecter ¦ Подключиться ¦ Підключитися
+Se connecter à l’ordinateur principal ¦ Подключиться к главному компьютеру ¦ Підключитися до головного комп’ютера
+Cet appareil n’est pas encore autorisé. Demande l’accès : c’est sur l’ordinateur principal qu’on l’accepte. ¦ Это устройство ещё не разрешено. Запроси доступ: его принимают на главном компьютере. ¦ Цей пристрій ще не дозволено. Попроси доступ: його приймають на головному комп’ютері.
+Nom de cet appareil ¦ Название этого устройства ¦ Назва цього пристрою
+Code d’invitation ¦ Код приглашения ¦ Код запрошення
+(affiché sur l’ordinateur principal) ¦ (показан на главном компьютере) ¦ (показаний на головному комп’ютері)
+Demander l’accès ¦ Запросить доступ ¦ Попросити доступ
+Donne un nom à cet appareil. ¦ Дай название этому устройству. ¦ Дай назву цьому пристрою.
+L’ordinateur principal ne répond pas (en veille, éteint, ou porte coupée). ¦ Главный компьютер не отвечает (спит, выключен или дверь закрыта). ¦ Головний комп’ютер не відповідає (спить, вимкнений або двері зачинені).
+Code d’invitation faux ou périmé. Demande le code affiché sur l’ordinateur principal. ¦ Код приглашения неверен или устарел. Спроси код, показанный на главном компьютере. ¦ Код запрошення хибний або застарів. Запитай код, показаний на головному комп’ютері.
+Trop d’essais : réessaie dans {n} min. ¦ Слишком много попыток: попробуй снова через {n} мин. ¦ Забагато спроб: спробуй знову за {n} хв.
+Une demande de cet appareil attend déjà sa réponse. ¦ Запрос с этого устройства уже ждёт ответа. ¦ Запит із цього пристрою вже чекає на відповідь.
+Trop de demandes en même temps : réessaie dans un instant. ¦ Слишком много запросов одновременно: попробуй ещё раз через мгновение. ¦ Забагато запитів одночасно: спробуй ще раз за мить.
+Va sur l’ordinateur principal et vérifie qu’il affiche ce code : ¦ Подойди к главному компьютеру и проверь, что он показывает этот код: ¦ Підійди до головного комп’ютера й перевір, що він показує цей код:
+Ouverture de la généalogie… Elle demande ensuite son mot de passe : il est vérifié par l’ordinateur principal, jamais gardé ici. ¦ Открываем генеалогию… Затем она спросит пароль: его проверяет главный компьютер, здесь он никогда не хранится. ¦ Відкриваємо генеалогію… Потім вона запитає пароль: його перевіряє головний комп’ютер, тут він ніколи не зберігається.
+La demande a expiré (2 minutes sans réponse). Recommence. ¦ Срок запроса истёк (2 минуты без ответа). Начни заново. ¦ Термін запиту минув (2 хвилини без відповіді). Почни знову.
+<strong>Appareil invité « {name} »</strong> : lecture seule. La généalogie reste sur l’ordinateur principal ; rien ne peut être modifié depuis cet appareil. ¦ <strong>Гостевое устройство «{name}»</strong>: только чтение. Генеалогия остаётся на главном компьютере; с этого устройства ничего нельзя изменить. ¦ <strong>Гостьовий пристрій «{name}»</strong>: лише читання. Генеалогія залишається на головному комп’ютері; з цього пристрою нічого не можна змінити.
+Appareil ¦ Устройство ¦ Пристрій
+Il faut un mot de passe ¦ Нужен пароль ¦ Потрібен пароль
+Cette généalogie n’a pas de mot de passe : elle ne s’ouvre pas sur un autre appareil. Sur l’ordinateur principal : Réglages → 🔐 Mot de passe de cette généalogie. ¦ У этой генеалогии нет пароля: на другом устройстве она не открывается. На главном компьютере: Настройки → 🔐 Пароль этой генеалогии. ¦ Ця генеалогія не має пароля: на іншому пристрої вона не відкривається. На головному комп’ютері: Налаштування → 🔐 Пароль цієї генеалогії.
+Appareil invité « {name} » : lecture seule. ¦ Гостевое устройство «{name}»: только чтение. ¦ Гостьовий пристрій «{name}»: лише читання.
+Au prochain lancement de l’app ¦ При следующем запуске приложения ¦ Під час наступного запуску застосунку
+reste coupé, il faut le rouvrir ¦ остаётся отключённым, нужно открыть снова ¦ залишається вимкненим, треба відкрити знову
+se rouvre tout seul ¦ открывается снова само ¦ відкривається знову сам
+Après une mise en veille ¦ После сна ¦ Після сну
+se rouvre au réveil si l’app est restée ouverte ¦ открывается снова при пробуждении, если приложение осталось открытым ¦ відкривається знову після пробудження, якщо застосунок лишився відкритим
+reste coupé ¦ остаётся отключённым ¦ залишається вимкненим
+Mot de passe de la généalogie ¦ Пароль генеалогии ¦ Пароль генеалогії
+obligatoire pour ouvrir au réseau ¦ обязателен, чтобы открыть в сети ¦ обов’язковий, щоб відкрити в мережі
+facultatif (déconseillé) ¦ необязателен (не рекомендуется) ¦ необов’язковий (не рекомендовано)
+demandé en plus du code à 6 chiffres ¦ запрашивается в дополнение к 6-значному коду ¦ запитується на додачу до 6-значного коду
+seulement le code à 6 chiffres ¦ только 6-значный код ¦ лише 6-значний код
+Durée d’un accès ¦ Срок доступа ¦ Термін доступу
+jusqu’à ce que tu le retires ¦ пока ты его не уберёшь ¦ доки ти його не прибереш
+Empêcher la veille tant qu’un appareil est connecté ¦ Не давать уснуть, пока подключено устройство ¦ Не давати заснути, поки підключено пристрій
+oui (cet ordinateur ne s’endort plus) ¦ да (этот компьютер больше не засыпает) ¦ так (цей комп’ютер більше не засинає)
+Si cet ordinateur change de réseau ¦ Если этот компьютер меняет сеть ¦ Якщо цей комп’ютер змінює мережу
+tout couper ¦ отключить всё ¦ вимкнути все
+tout couper, puis demander s’il faut rouvrir ¦ отключить всё, затем спросить, открыть ли снова ¦ вимкнути все, потім запитати, чи відкрити знову
+Appareil pas vu depuis 30 jours ¦ Устройство не появлялось 30 дней ¦ Пристрій не з’являвся 30 днів
+proposer de le retirer ¦ предложить убрать его ¦ запропонувати прибрати його
+Ouvert au réseau de la maison ¦ Открыто для домашней сети ¦ Відкрито для домашньої мережі
+Fermé au réseau de la maison ¦ Закрыто для домашней сети ¦ Закрито для домашньої мережі
+Appareil autorisé ¦ Устройство разрешено ¦ Пристрій дозволено
+Demande d’accès refusée ¦ Запрос доступа отклонён ¦ Запит на доступ відхилено
+Appareil retiré ¦ Устройство убрано ¦ Пристрій прибрано
+Connexion en lecture seule ¦ Подключение только для чтения ¦ Підключення лише для читання
+en quittant l’app ¦ при выходе из приложения ¦ під час виходу із застосунку
+mise en veille ¦ сон ¦ сон
+le réseau a changé ¦ сеть изменилась ¦ мережа змінилася
+Appareil invité : lecture seule. Cela ne se fait que sur l’ordinateur principal. ¦ Гостевое устройство: только чтение. Это делается только на главном компьютере. ¦ Гостьовий пристрій: лише читання. Це робиться лише на головному комп’ютері.

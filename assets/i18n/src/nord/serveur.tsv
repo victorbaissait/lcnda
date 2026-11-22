@@ -1614,3 +1614,37 @@ Lien à consolider : {child}, le fils de {parent} ¦ Propojení k posílení: {c
 Lien à consolider : {child}, la fille de {parent} ¦ Propojení k posílení: {child}, dcera {parent} ¦ Koppling att stärka: {child}, dotter till {parent} ¦ Forbindelse, der skal styrkes: {child}, datter af {parent}
 Lien à consolider : {child}, l’enfant de {parent} ¦ Propojení k posílení: {child}, dítě {parent} ¦ Koppling att stärka: {child}, barn till {parent} ¦ Forbindelse, der skal styrkes: {child}, barn af {parent}
 cherche l’acte de naissance ou de baptême qui le nomme ¦ hledej záznam o narození nebo křtu, který ho/ji jmenuje ¦ sök efter födelse- eller dophandlingen som nämner personen ¦ søg efter fødsels- eller dåbsattesten, der nævner personen
+# ═════ Poser une question : mariage et enfants (lib/question_famille.php) ═════
+mariées ¦ vdané ¦ gifta ¦ gift
+mariés ¦ sezdaní ¦ gifta ¦ gift
+jamais mariées ¦ nikdy neprovdané ¦ aldrig gifta ¦ aldrig gift
+jamais mariés ¦ nikdy nesezdaní ¦ aldrig gifta ¦ aldrig gift
+=au moins {n} mariages ¦ alespoň {n} sňatek|alespoň {n} sňatky|alespoň {n} sňatků ¦ minst {n} äktenskap|minst {n} äktenskap ¦ mindst {n} ægteskab|mindst {n} ægteskaber
+mariées à {n} ans ¦ vdané ve věku {n} let ¦ gifta vid {n} års ålder ¦ gift som {n}-årig
+mariés à {n} ans ¦ sezdaní ve věku {n} let ¦ gifta vid {n} års ålder ¦ gift som {n}-årig
+mariées entre {a} et {b} ans ¦ vdané ve věku {a} až {b} let ¦ gifta vid {a}–{b} års ålder ¦ gift som {a}–{b}-årig
+mariés entre {a} et {b} ans ¦ sezdaní ve věku {a} až {b} let ¦ gifta vid {a}–{b} års ålder ¦ gift som {a}–{b}-årig
+mariées après {n} ans ¦ vdané ve věku nad {n} let ¦ gifta efter {n} års ålder ¦ gift som over {n}-årig
+mariés après {n} ans ¦ sezdaní ve věku nad {n} let ¦ gifta efter {n} års ålder ¦ gift som over {n}-årig
+mariées avant {n} ans ¦ vdané ve věku pod {n} let ¦ gifta före {n} års ålder ¦ gift som under {n}-årig
+mariés avant {n} ans ¦ sezdaní ve věku pod {n} let ¦ gifta före {n} års ålder ¦ gift som under {n}-årig
+sans enfant ¦ bez dětí ¦ utan barn ¦ uden børn
+avec des enfants ¦ s dětmi ¦ med barn ¦ med børn
+entre {a} et {b} enfants ¦ počet dětí: {a}–{b} ¦ mellan {a} och {b} barn ¦ mellem {a} og {b} børn
+=exactement {n} enfants ¦ přesně {n} dítě|přesně {n} děti|přesně {n} dětí ¦ exakt {n} barn|exakt {n} barn ¦ præcis {n} barn|præcis {n} børn
+=au moins {n} enfants ¦ alespoň {n} dítě|alespoň {n} děti|alespoň {n} dětí ¦ minst {n} barn|minst {n} barn ¦ mindst {n} barn|mindst {n} børn
+=au plus {n} enfants ¦ nejvýše {n} dítě|nejvýše {n} děti|nejvýše {n} dětí ¦ högst {n} barn|högst {n} barn ¦ højst {n} barn|højst {n} børn
+exactement 1 enfant ¦ přesně 1 dítě ¦ exakt 1 barn ¦ præcis 1 barn
+au plus 1 enfant ¦ nejvýše 1 dítě ¦ högst 1 barn ¦ højst 1 barn
+nées avant {y} ¦ narozené před {y} ¦ födda före {y} ¦ født før {y}
+nés avant {y} ¦ narození před {y} ¦ födda före {y} ¦ født før {y}
+nées après {y} ¦ narozené po {y} ¦ födda efter {y} ¦ født efter {y}
+nés après {y} ¦ narození po {y} ¦ födda efter {y} ¦ født efter {y}
+nées en {y} ¦ narozené v roce {y} ¦ födda {y} ¦ født i {y}
+nés en {y} ¦ narození v roce {y} ¦ födda {y} ¦ født i {y}
+nées au {n}e siècle ¦ narozené v {n}. století ¦ födda under {n}:e århundradet ¦ født i det {n}. århundrede
+nés au {n}e siècle ¦ narození v {n}. století ¦ födda under {n}:e århundradet ¦ født i det {n}. århundrede
+1 fiche sans date n’a pas pu être vérifiée pour l’âge au mariage (année de naissance ou de mariage inconnue). ¦ 1 záznam bez data nešlo ověřit podle věku při sňatku (neznámý rok narození nebo sňatku). ¦ 1 post utan datum kunde inte kontrolleras för åldern vid giftermålet (födelse- eller vigselår okänt). ¦ 1 post uden dato kunne ikke kontrolleres for alderen ved vielsen (fødsels- eller vielsesår ukendt).
+={n} fiches sans date n’ont pas pu être vérifiées pour l’âge au mariage (année de naissance ou de mariage inconnue). ¦ Záznamy bez data, které nešlo ověřit podle věku při sňatku: {n} (neznámý rok narození nebo sňatku).|Záznamy bez data, které nešlo ověřit podle věku při sňatku: {n} (neznámý rok narození nebo sňatku).|Záznamy bez data, které nešlo ověřit podle věku při sňatku: {n} (neznámý rok narození nebo sňatku). ¦ {n} post utan datum kunde inte kontrolleras för åldern vid giftermålet (födelse- eller vigselår okänt).|{n} poster utan datum kunde inte kontrolleras för åldern vid giftermålet (födelse- eller vigselår okänt). ¦ {n} post uden dato kunne ikke kontrolleres for alderen ved vielsen (fødsels- eller vielsesår ukendt).|{n} poster uden dato kunne ikke kontrolleres for alderen ved vielsen (fødsels- eller vielsesår ukendt).
+« Jeunes » n’est pas assez précis pour un âge : écris par exemple « mariées avant 20 ans ». ¦ „Jeunes“ (mladé) není pro věk dost přesné: napiš například „mariées avant 20 ans“. ¦ ”Jeunes” (unga) är inte tillräckligt exakt för en ålder: skriv till exempel ”mariées avant 20 ans”. ¦ »Jeunes« (unge) er ikke præcist nok til en alder: skriv for eksempel »mariées avant 20 ans«.
+Venue d’une question : les critères de mariage et d’enfants sont gardés. ¦ Z otázky: kritéria sňatku a dětí zůstávají zachována. ¦ Från en fråga: villkoren för giftermål och barn behålls. ¦ Fra et spørgsmål: kriterierne for ægteskab og børn bevares.

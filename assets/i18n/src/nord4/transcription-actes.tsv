@@ -1,0 +1,145 @@
+fr ¦ fi ¦ hu
+# Zone « transcription-actes » : recadrage, lecture approfondie (Ollama), « Ce que l’app a trouvé » (heritage-transcribe-acte.js, lib/transcription_actes.php)
+LECTURE AUTOMATIQUE ¦ AUTOMAATTINEN LUKU ¦ AUTOMATIKUS OLVASÁS
+Recadrer sur le texte ? ¦ Rajataanko tekstiin? ¦ Körbevágod a szövegre?
+Recadrer sur le texte ¦ Rajaa tekstiin ¦ Körbevágás a szövegre
+Lire quand même ¦ Lue silti ¦ Olvasás így is
+Cette image ressemble à une capture d’écran ¦ Kuva näyttää kuvakaappaukselta ¦ Ez a kép képernyőképnek tűnik
+(boutons et bords gris autour) : la lecture sera moins bonne. Télécharge l’image en grand sur le site des archives, ou recadre sur le texte. ¦ (painikkeita ja harmaita reunoja ympärillä): luku onnistuu huonommin. Lataa kuva isona arkiston sivustolta tai rajaa se tekstiin. ¦ (gombok és szürke szélek körülötte): az olvasás rosszabb lesz. Töltsd le a képet nagy méretben a levéltár oldaláról, vagy vágd körbe a szövegre.
+La zone qui sera lue ¦ Luettava alue ¦ A beolvasandó terület
+Le cadre bleu montre la zone qui sera lue. Pour choisir toi-même, dessine une zone (▭) puis « ✨ Lire cette zone ». ¦ Sininen kehys näyttää luettavan alueen. Valitaksesi itse piirrä alue (▭) ja sitten ”✨ Lue tämä alue”. ¦ A kék keret mutatja a beolvasandó területet. Ha magad választanál, rajzolj egy területet (▭), majd „✨ Ennek a területnek az olvasása”.
+La lecture à la main a donné un texte peu sûr ¦ Käsialan luku antoi epävarman tekstin ¦ A kézírás olvasása bizonytalan szöveget adott
+({x} % de mots douteux). Souvent à cause des bords de l’écran autour de l’acte, ou d’une écriture trop difficile pour ce modèle. ¦ ({x} % epävarmoja sanoja). Usein asiakirjan ympärillä olevien näytön reunojen tai tälle mallille liian vaikean käsialan takia. ¦ ({x} % kétes szó). Gyakran az irat körüli képernyőszélek miatt, vagy mert az írás túl nehéz ennek a modellnek.
+Recadrer et relire ¦ Rajaa ja lue uudelleen ¦ Körbevágás és újraolvasás
+Essayer la lecture approfondie ¦ Kokeile perusteellista lukua ¦ Alapos olvasás kipróbálása
+LECTURE APPROFONDIE ¦ PERUSTEELLINEN LUKU ¦ ALAPOS OLVASÁS
+Lecture approfondie ¦ Perusteellinen luku ¦ Alapos olvasás
+Ce qu’il faut ¦ Mitä tarvitaan ¦ Ami kell
+Ollama (gratuit, open source) et un modèle vision ouvert, au choix : ¦ Ollama (ilmainen, avointa lähdekoodia) ja avoin näkömalli valintasi mukaan: ¦ Ollama (ingyenes, nyílt forráskódú) és egy választható nyílt látómodell:
+le meilleur, ≈ {x} Go ¦ paras, ≈ {x} Gt ¦ a legjobb, ≈ {x} GB
+plus léger, ≈ {x} Go, pour un ordinateur modeste ¦ kevyempi, ≈ {x} Gt, vaatimattomalle tietokoneelle ¦ könnyebb, ≈ {x} GB, szerényebb számítógéphez
+déjà téléchargé ¦ jo ladattu ¦ már letöltve
+8 Go conseillés (16 Go pour le 8B) · téléchargé une seule fois ¦ suositus 8 Gt (16 Gt 8B:lle) · ladataan vain kerran ¦ 8 GB ajánlott (a 8B-hez 16 GB) · csak egyszer kell letölteni
+≈ 20 à 60 s par page sur un ordinateur récent ¦ ≈ 20–60 s sivua kohden uudehkolla tietokoneella ¦ ≈ oldalanként 20–60 mp egy újabb számítógépen
+Confidentialité ¦ Yksityisyys ¦ Adatvédelem
+rien ne quitte ton ordinateur ; l’app vérifie qu’Ollama ne répond que sur ton ordinateur ¦ mikään ei lähde tietokoneeltasi; sovellus tarkistaa, että Ollama vastaa vain sinun tietokoneellasi ¦ semmi sem hagyja el a gépedet; az app ellenőrzi, hogy az Ollama csak a te gépeden válaszol
+Recherche d’Ollama sur cet ordinateur… ¦ Etsitään Ollamaa tältä tietokoneelta… ¦ Ollama keresése ezen a gépen…
+L’adresse d’Ollama n’est pas sur cet ordinateur : la lecture approfondie est refusée. ¦ Ollaman osoite ei ole tällä tietokoneella: perusteellinen luku estetään. ¦ Az Ollama címe nem ezen a gépen van: az alapos olvasás tiltva.
+Ollama n’est pas encore sur cet ordinateur. ¦ Ollamaa ei ole vielä tällä tietokoneella. ¦ Az Ollama még nincs ezen a gépen.
+Installe-le une fois depuis son site (gratuit), lance-le, puis « ↻ Vérifier à nouveau ». ¦ Asenna se kerran sen sivustolta (ilmainen), käynnistä se ja sitten ”↻ Tarkista uudelleen”. ¦ Telepítsd egyszer a honlapjáról (ingyenes), indítsd el, majd „↻ Újra ellenőrzés”.
+Ollama est installé mais ne tourne pas. ¦ Ollama on asennettu, mutta se ei ole käynnissä. ¦ Az Ollama telepítve van, de nem fut.
+Lance l’application Ollama, puis « ↻ Vérifier à nouveau ». ¦ Käynnistä Ollama-sovellus ja sitten ”↻ Tarkista uudelleen”. ¦ Indítsd el az Ollama alkalmazást, majd „↻ Újra ellenőrzés”.
+Prêt : la lecture se fait sur cet ordinateur, sans Internet. ¦ Valmis: luku tehdään tällä tietokoneella ilman internetiä. ¦ Kész: az olvasás ezen a gépen történik, internet nélkül.
+Télécharger Ollama (ollama.com) ¦ Lataa Ollama (ollama.com) ¦ Ollama letöltése (ollama.com)
+Installer la lecture approfondie ¦ Asenna perusteellinen luku ¦ Alapos olvasás telepítése
+Lire l’acte avec ce modèle ¦ Lue asiakirja tällä mallilla ¦ Az irat olvasása ezzel a modellel
+Vérifier à nouveau ¦ Tarkista uudelleen ¦ Újra ellenőrzés
+« 🔍 Essayer aussi la lecture approfondie » sur une page déjà lue montre les deux textes côte à côte, et on garde la meilleure. Relis toujours : un modèle peut se tromper sur les noms. ¦ ”🔍 Kokeile myös perusteellista lukua” jo luetulla sivulla näyttää molemmat tekstit rinnakkain, ja pidät paremman. Tarkista aina: malli voi erehtyä nimissä. ¦ A „🔍 Alapos olvasás kipróbálása is” egy már beolvasott oldalon egymás mellett mutatja a két szöveget, és a jobbat tartod meg. Mindig nézd át: egy modell tévedhet a neveknél.
+Téléchargement du modèle… {done} sur {total} ¦ Ladataan mallia… {done} / {total} ¦ Modell letöltése… {done} / {total}
+Téléchargement du modèle… ¦ Ladataan mallia… ¦ Modell letöltése…
+Lecture approfondie… {n} s ¦ Perusteellinen luku… {n} s ¦ Alapos olvasás… {n} mp
+La lecture approfondie n’a pas abouti. ¦ Perusteellinen luku ei onnistunut. ¦ Az alapos olvasás nem sikerült.
+Les deux lectures côte à côte ¦ Molemmat luennat rinnakkain ¦ A két olvasat egymás mellett
+Le texte lu ¦ Luettu teksti ¦ A beolvasott szöveg
+Écriture à la main ¦ Käsiala ¦ Kézírás
+Garder celle-ci ¦ Pidä tämä ¦ Ezt tartom meg
+Mettre dans le texte ¦ Lisää tekstiin ¦ Beillesztés a szövegbe
+La lecture approfondie est installée. ¦ Perusteellinen luku on asennettu. ¦ Az alapos olvasás telepítve.
+Défunte ¦ Vainaja (nainen) ¦ Elhunyt (nő)
+Conjointe ¦ Puoliso (nainen) ¦ Házastárs (nő)
+Autre personne ¦ Muu henkilö ¦ Más személy
+{n} ans → née vers {year} ¦ {n} v. → syntynyt noin {year} ¦ {n} éves → kb. {year}-ben született
+{n} ans → né vers {year} ¦ {n} v. → syntynyt noin {year} ¦ {n} éves → kb. {year}-ben született
+Aucune personne trouvée dans le texte : relis-le, puis « 🧭 Repérer ». ¦ Tekstistä ei löytynyt henkilöitä: tarkista se ja sitten ”🧭 Tunnista”. ¦ Nem találtam személyt a szövegben: nézd át, majd „🧭 Felismerés”.
+TRANSCRIPTION ¦ LITTEROINTI ¦ ÁTÍRÁS
+Ce que l’app a trouvé dans l’acte ¦ Mitä sovellus löysi asiakirjasta ¦ Amit az app talált az iratban
+Ajouter à la généalogie ¦ Lisää sukututkimukseen ¦ Hozzáadás a családfához
+Garder seulement la transcription ¦ Säilytä vain litterointi ¦ Csak az átírás megtartása
+demeurant à {place} ¦ asuinpaikka {place} ¦ lakhely: {place}
+fille de {a} et de {b} ¦ tytär, vanhemmat {a} ja {b} ¦ {a} és {b} lánya
+fils de {a} et de {b} ¦ poika, vanhemmat {a} ja {b} ¦ {a} és {b} fia
+fille de {a} ¦ tytär, vanhempi {a} ¦ {a} lánya
+fils de {a} ¦ poika, vanhempi {a} ¦ {a} fia
+sœur de {name} ¦ sisar: {name} ¦ {name} nővére/húga
+frère de {name} ¦ veli: {name} ¦ {name} bátyja/öccse
+parent de {name} ¦ sukulainen: {name} ¦ {name} rokona
+conjoint décédé de {name} ¦ edesmennyt puoliso: {name} ¦ {name} elhunyt házastársa
+conjoint de {name} ¦ puoliso: {name} ¦ {name} házastársa
+décédée avant l’acte ¦ kuollut ennen asiakirjaa ¦ az irat előtt elhunyt
+décédé avant l’acte ¦ kuollut ennen asiakirjaa ¦ az irat előtt elhunyt
+Relier à cette fiche ¦ Yhdistä tähän henkilöön ¦ Összekapcsolás ezzel az adatlappal
+Reliée à : ¦ Yhdistetty: ¦ Összekapcsolva:
+Fiches proches : ¦ Samankaltaiset henkilöt: ¦ Hasonló adatlapok:
+Fiche existante : ¦ Olemassa oleva henkilö: ¦ Meglévő adatlap:
+même personne probable ¦ todennäköisesti sama henkilö ¦ valószínűleg ugyanaz a személy
+Pas de fiche · restera dans l’acte avec son rôle, sans créer de fiche ¦ Ei henkilöä · jää asiakirjaan roolinsa kanssa luomatta henkilöä ¦ Nincs adatlap · szerepével az iratban marad, adatlap létrehozása nélkül
+Aucune fiche : elle sera créée et reliée comme mère de {name} ¦ Ei henkilöä: luodaan ja yhdistetään äidiksi henkilölle {name} ¦ Nincs adatlap: létrejön, és {name} anyjaként kapcsolódik
+Aucune fiche : elle sera créée et reliée comme père de {name} ¦ Ei henkilöä: luodaan ja yhdistetään isäksi henkilölle {name} ¦ Nincs adatlap: létrejön, és {name} apjaként kapcsolódik
+Aucune fiche : elle sera créée ¦ Ei henkilöä: se luodaan ¦ Nincs adatlap: létrejön
+Témoin seul ¦ Vain todistaja ¦ Csak tanú
+Que faire de cette personne ¦ Mitä tehdään tälle henkilölle ¦ Mi legyen ezzel a személlyel
+Décès estimé avant l’acte ¦ Kuolema arvioitu ennen asiakirjaa ¦ Halál becsülten az irat előtt
+Gardés dans l’acte, sans fiche ¦ Säilytetään asiakirjassa ilman henkilöä ¦ Az iratban maradnak, adatlap nélkül
+La source ¦ Lähde ¦ A forrás
+déjà dans ta base, reprise ¦ jo tietokannassasi, käytetään uudelleen ¦ már az adatbázisodban, újrahasználva
+Relever à nouveau ¦ Poimi uudelleen ¦ Újrafeldolgozás
+Compris : {date} ¦ Tulkittu: {date} ¦ Értelmezve: {date}
+Les personnes ({n}) ¦ Henkilöt ({n}) ¦ A személyek ({n})
+Ce que l’acte ajoute aussi ¦ Mitä asiakirja lisää myös ¦ Amit az irat még hozzáad
+Naissance estimée d’après l’âge (marquée « estimée ») ¦ Syntymä arvioitu iän perusteella (merkitty ”arvio”) ¦ Születés az életkorból becsülve („becsült” jelöléssel)
+Décès d’avant l’acte (« feu », « veuve de ») ¦ Kuolemat ennen asiakirjaa (”vainaja”, ”leski”) ¦ Az irat előtti halálesetek („néhai”, „özvegye”)
+Domiciles ¦ Asuinpaikat ¦ Lakhelyek
+La source, toute prête ¦ Lähde valmiina ¦ A forrás, készen
+La même source est déjà dans ta base : elle est reprise au lieu d’en créer une deuxième. ¦ Sama lähde on jo tietokannassasi: sitä käytetään uudelleen toisen luomisen sijaan. ¦ Ugyanez a forrás már az adatbázisodban van: újrahasználjuk, nem hozunk létre másodikat.
+Remplie d’après le champ Source, le nom du fichier et le texte lu autour de l’image. Vérifie avant d’ajouter. ¦ Täytetty Lähde-kentän, tiedostonimen ja kuvan ympäriltä luetun tekstin perusteella. Tarkista ennen lisäämistä. ¦ A Forrás mező, a fájlnév és a kép körül olvasott szöveg alapján kitöltve. Hozzáadás előtt ellenőrizd.
+Remplie d’après le champ Source et le nom du fichier. Vérifie avant d’ajouter. ¦ Täytetty Lähde-kentän ja tiedostonimen perusteella. Tarkista ennen lisäämistä. ¦ A Forrás mező és a fájlnév alapján kitöltve. Hozzáadás előtt ellenőrizd.
+Voilà ce qui va entrer dans ta généalogie ¦ Tämä tulee sukututkimukseesi ¦ Ez kerül be a családfádba
+Rien n’est écrasé : une information différente de la fiche est proposée, jamais imposée. « ↶ Annuler » défait tout l’ajout d’un coup. ¦ Mitään ei korvata: henkilöstä poikkeava tieto ehdotetaan, ei pakoteta. ”↶ Kumoa” peruu koko lisäyksen kerralla. ¦ Semmi sem íródik felül: az adatlaptól eltérő adatot javasoljuk, sosem erőltetjük. A „↶ Visszavonás” egyszerre visszavonja az egész hozzáadást.
+C’est elle : relier ¦ Se on hän: yhdistä ¦ Ő az: összekapcsolás
+C’est lui : relier ¦ Se on hän: yhdistä ¦ Ő az: összekapcsolás
+Ce n’est pas elle ¦ Se ei ole hän ¦ Nem ő az
+Ce n’est pas lui ¦ Se ei ole hän ¦ Nem ő az
+ajouter ¦ lisää ¦ hozzáadás
+{name} : l’acte et la fiche côte à côte ¦ {name}: asiakirja ja henkilötiedot rinnakkain ¦ {name}: az irat és az adatlap egymás mellett
+Dans l’acte ¦ Asiakirjassa ¦ Az iratban
+Fiche · {name} ¦ Henkilö · {name} ¦ Adatlap · {name}
+vers {year} ({n} ans) ¦ noin {year} ({n} v.) ¦ kb. {year} ({n} éves)
+{date} avec {name} ¦ {date}, puoliso {name} ¦ {date}, {name}
+avant le {date} ¦ ennen {date} ¦ {date} előtt
+Les parents sont les mêmes : c’est très probablement elle. ¦ Vanhemmat ovat samat: hyvin todennäköisesti hän. ¦ A szülők ugyanazok: nagy valószínűséggel ő az.
+Les parents sont les mêmes : c’est très probablement lui. ¦ Vanhemmat ovat samat: hyvin todennäköisesti hän. ¦ A szülők ugyanazok: nagy valószínűséggel ő az.
+Les parents ne sont pas les mêmes : vérifie avant de relier. ¦ Vanhemmat eivät ole samat: tarkista ennen yhdistämistä. ¦ A szülők nem ugyanazok: ellenőrizd az összekapcsolás előtt.
+La date de naissance de la fiche est gardée (elle est plus précise que l’âge de l’acte). ¦ Henkilön syntymäaika säilytetään (se on tarkempi kuin asiakirjan ikä). ¦ Az adatlap születési dátuma marad (pontosabb, mint az irat szerinti életkor).
+✓ Acte ajouté : {what} ¦ ✓ Asiakirja lisätty: {what} ¦ ✓ Irat hozzáadva: {what}
+Déjà d’autres parents, lien non fait : {names} ¦ On jo muut vanhemmat, yhteyttä ei tehty: {names} ¦ Már vannak más szülei, nincs összekapcsolás: {names}
+Un modèle « vision » ouvert qui tourne sur ton ordinateur (Ollama) : lit mieux les écritures difficiles, plus lent ¦ Avoin ”näkömalli”, joka toimii tietokoneellasi (Ollama): lukee vaikeat käsialat paremmin, hitaampi ¦ Nyílt „látó” modell a gépeden (Ollama): jobban olvassa a nehéz írást, lassabb
+L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches ¦ Tapahtuma, henkilöt ja heidän suhteensa, lähde: yhdistä, vertaa tai luo henkilöt ¦ Az esemény, a személyek és kapcsolataik, a forrás: adatlapok összekapcsolása, összevetése vagy létrehozása
+Ce que l’app a trouvé… ¦ Mitä sovellus löysi… ¦ Amit az app talált…
+La lecture approfondie n’est pas chargée. ¦ Perusteellista lukua ei ole ladattu. ¦ Az alapos olvasás nincs betöltve.
+Lecture du texte autour de l’acte… ¦ Luetaan asiakirjan ympärillä olevaa tekstiä… ¦ Az irat körüli szöveg olvasása…
+Le texte est vide : lis ou écris d’abord l’acte. ¦ Teksti on tyhjä: lue tai kirjoita ensin asiakirja. ¦ A szöveg üres: előbb olvasd be vagy írd be az iratot.
+Personnes gardées dans la transcription, sans créer de fiche. ¦ Henkilöt säilytetään litteroinnissa luomatta henkilöitä. ¦ A személyek az átírásban maradnak, adatlap létrehozása nélkül.
+Père du défunt ¦ Vainajan isä ¦ Az elhunyt apja
+Mère du défunt ¦ Vainajan äiti ¦ Az elhunyt anyja
+Déclarant ¦ Ilmoittaja ¦ Bejelentő
+Acte de mariage ¦ Vihkiasiakirja ¦ Házassági anyakönyvi bejegyzés
+Acte de baptême ¦ Kasteasiakirja ¦ Keresztelési bejegyzés
+Acte de naissance ¦ Syntymäasiakirja ¦ Születési anyakönyvi bejegyzés
+Acte de sépulture ¦ Hautausasiakirja ¦ Temetési bejegyzés
+Registre ¦ Kirja ¦ Anyakönyv
+Vue ¦ Kuva ¦ Kép
+Vues en tout ¦ Kuvia yhteensä ¦ Képek összesen
+La lecture approfondie ne parle qu’à Ollama sur cet ordinateur (127.0.0.1) : adresse refusée. ¦ Perusteellinen luku käyttää vain tämän tietokoneen Ollamaa (127.0.0.1): osoite hylätty. ¦ Az alapos olvasás csak az ezen a gépen futó Ollamával beszél (127.0.0.1): a cím elutasítva.
+Modèle de lecture approfondie inconnu. ¦ Tuntematon perusteellisen luvun malli. ¦ Ismeretlen alapos olvasási modell.
+La lecture approfondie a besoin de l’extension cURL de PHP. ¦ Perusteellinen luku tarvitsee PHP:n cURL-laajennuksen. ¦ Az alapos olvasáshoz a PHP cURL bővítménye kell.
+Ollama ne répond pas sur cet ordinateur : installe-le (ollama.com), lance-le, puis réessaie. ¦ Ollama ei vastaa tällä tietokoneella: asenna se (ollama.com), käynnistä ja yritä uudelleen. ¦ Az Ollama nem válaszol ezen a gépen: telepítsd (ollama.com), indítsd el, majd próbáld újra.
+Image manquante. ¦ Kuva puuttuu. ¦ Hiányzik a kép.
+Image trop lourde. ¦ Kuvatiedosto on liian suuri. ¦ A kép túl nagy fájl.
+Image trop grande. ¦ Kuva on liian suuri. ¦ A kép túl nagy.
+Ce modèle n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Tätä mallia ei ole vielä ladattu: ”⤓ Asenna perusteellinen luku”. ¦ Ez a modell még nincs letöltve: „⤓ Alapos olvasás telepítése”.
+Une fiche à relier n’existe plus : choisis-en une autre. ¦ Yhdistettävää henkilöä ei enää ole: valitse toinen. ¦ Egy összekapcsolandó adatlap már nem létezik: válassz másikat.
+Une personne à créer n’a ni prénom ni nom. ¦ Luotavalla henkilöllä ei ole etu- eikä sukunimeä. ¦ Egy létrehozandó személynek nincs se utó-, se vezetékneve.
+Trop de personnes dans un seul acte. ¦ Liian monta henkilöä yhdessä asiakirjassa. ¦ Túl sok személy egyetlen iratban.
+Annulation impossible : ce n’est pas l’ajout d’un acte. ¦ Ei voi kumota: tämä ei ole asiakirjan lisäys. ¦ Nem vonható vissza: ez nem egy irat hozzáadása.
+Le téléchargement du modèle n’a pas abouti. ¦ Mallin lataus ei onnistunut. ¦ A modell letöltése nem sikerült.
+La lecture approfondie a pris trop de temps. ¦ Perusteellinen luku kesti liian kauan. ¦ Az alapos olvasás túl sokáig tartott.

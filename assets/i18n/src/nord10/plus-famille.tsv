@@ -1,0 +1,218 @@
+fr ¦ sq ¦ mt
+# Zone « plus-famille » : 💌 lettre de famille, 🛡 fiabilité par personne, 🖊 relecture d’une branche, 🌐 traduire un acte latin (assets/js/plus-famille*.js, lib/plus_famille.php)
+Fiabilité : {n} sur 100 ¦ Besueshmëria: {n} nga 100 ¦ Affidabbiltà: {n} minn 100
+🛡 Fiabilité ¦ 🛡 Besueshmëria ¦ 🛡 Affidabbiltà
+Calcul de la note… ¦ Po llogaritet nota… ¦ Qed jinħadem il-punteġġ…
+Comment la note est calculée ¦ Si llogaritet nota ¦ Kif jinħadem il-punteġġ
+? Comment c’est calculé ¦ ? Si llogaritet ¦ ? Kif jinħadem
+en doute : {what} ¦ i dyshimtë: {what} ¦ dubjuż: {what}
+date estimée : {what} ¦ datë e përafërt: {what} ¦ data stmata: {what}
+aucun fait noté (naissance, mariage, décès…) ¦ asnjë fakt i shënuar (lindje, martesë, vdekje…) ¦ l-ebda fatt imniżżel (twelid, żwieġ, mewt…)
+sans source : {what} ¦ pa burim: {what} ¦ mingħajr sors: {what}
+une source sur la fiche, mais sur aucun fait ¦ një burim në skedë, por në asnjë fakt ¦ sors fuq il-kartuna, iżda fuq l-ebda fatt
+aucune source ¦ asnjë burim ¦ l-ebda sors
+{who} : lien {lvl} ¦ {who}: lidhje {lvl} ¦ {who}: rabta {lvl}
+pas de parents dans la base : cette part ne compte pas ¦ pa prindër në bazë: kjo pjesë nuk llogaritet ¦ l-ebda ġenituri fid-database: din il-parti ma tgħoddx
+ajouter une source à : {what} ¦ shto një burim te: {what} ¦ żid sors ma’: {what}
+vérifier {what}, marqué « doute » ¦ verifiko {what}, shënuar «i dyshimtë» ¦ ivverifika {what}, immarkat “dubju”
+confirmer le lien avec {name} (⚖️ dossier de preuve) ¦ konfirmo lidhjen me {name} (⚖️ dosje provash) ¦ ikkonferma r-rabta ma’ {name} (⚖️ fajl tal-provi)
+ajouter ses faits (naissance, mariage, décès) avec leur source ¦ shto faktet (lindje, martesë, vdekje) me burimin ¦ żid il-fatti (twelid, żwieġ, mewt) bis-sors tagħhom
+sur 100 ¦ nga 100 ¦ minn 100
+À revoir avant publication ¦ Për t’u rishikuar para publikimit ¦ Trid tiġi riveduta qabel il-pubblikazzjoni
+(vivant ou fiche confidentielle : ne part pas à la publication) ¦ (gjallë ose skedë konfidenciale: nuk publikohet) ¦ (ħaj jew kartuna kunfidenzjali: ma tiġix ippubblikata)
+Seuil « à revoir » : {n} ¦ Pragu «për t’u rishikuar»: {n} ¦ Limitu “trid tiġi riveduta”: {n}
+Pour gagner des points : ¦ Për të fituar pikë: ¦ Biex tikseb punti:
+La note n’est pas le score de complétude (qui compte ce qui est rempli) : une fiche peut être bien remplie et peu sûre. ¦ Nota nuk është shkalla e plotësimit (ajo numëron çfarë është plotësuar): një skedë mund të jetë e plotë dhe e pasigurt. ¦ Il-punteġġ mhuwiex dak tal-kompletezza (li jgħodd x’hemm mimli): kartuna tista’ tkun mimlija sew u xorta mhux affidabbli.
+Calcul impossible. ¦ Llogaritja e pamundur. ¦ Il-kalkolu mhux possibbli.
+🛡 FIABILITÉ ¦ 🛡 BESUESHMËRIA ¦ 🛡 AFFIDABBILTÀ
+Trois parts, sur 100 chacune, puis une moyenne : ¦ Tri pjesë, secila nga 100, pastaj mesatarja: ¦ Tliet partijiet, kull waħda minn 100, imbagħad medja:
+Ses faits (40 %) ¦ Faktet (40 %) ¦ Il-fatti (40%)
+la fiabilité de chaque fait : certain 100, déduit 80, estimé 55, doute 15, non évalué 60 ; une date « vers… », « avant… » compte comme estimée. ¦ besueshmëria e çdo fakti: i sigurt 100, i nxjerrë 80, i përafërt 55, i dyshimtë 15, i pavlerësuar 60; një datë «rreth…», «para…» llogaritet e përafërt. ¦ l-affidabbiltà ta’ kull fatt: ċert 100, dedott 80, stmat 55, dubju 15, mhux evalwat 60; data “madwar…”, “qabel…” titqies stmata.
+Ses sources (35 %) ¦ Burimet (35 %) ¦ Is-sorsi (35%)
+la part des faits qui ont une source citée ou un acte en image. ¦ pjesa e fakteve që kanë burim të cituar ose akt në imazh. ¦ is-sehem tal-fatti li għandhom sors ikkwotat jew att f’immaġni.
+Ses liens (25 %) ¦ Lidhjet (25 %) ¦ Ir-rabtiet (25%)
+la solidité du lien avec chaque parent : prouvé 100, probable 75, supposé 45, sans source 20, réfuté 0. Sans parents dans la base, cette part ne compte pas. ¦ forca e lidhjes me çdo prind: e provuar 100, e mundshme 75, e supozuar 45, pa burim 20, e hedhur poshtë 0. Pa prindër në bazë, kjo pjesë nuk llogaritet. ¦ is-saħħa tar-rabta ma’ kull ġenitur: ippruvata 100, probabbli 75, preżunta 45, mingħajr sors 20, miċħuda 0. Mingħajr ġenituri fid-database din il-parti ma tgħoddx.
+Sous le seuil (50 au départ), la fiche est « à revoir avant publication ». Le seuil se règle dans Réglages → ⚙️ Seuils du contrôle. ¦ Nën prag (50 në fillim) skeda është «për t’u rishikuar para publikimit». Pragu rregullohet te Cilësimet → ⚙️ Pragjet e kontrollit. ¦ Taħt il-limitu (50 fil-bidu) il-kartuna “trid tiġi riveduta qabel il-pubblikazzjoni”. Il-limitu jiġi aġġustat f’Settings → ⚙️ Limiti tal-kontroll.
+Rien n’est changé dans ta base : la note est recalculée dès qu’un fait ou une source change. ¦ Asgjë nuk ndryshon në bazën tënde: nota rillogaritet sapo ndryshon një fakt ose burim. ¦ Xejn ma jinbidel fid-database tiegħek: il-punteġġ jerġa’ jinħadem malli jinbidel fatt jew sors.
+{day} : {first}, {age} ¦ {day}: {first}, {age} ¦ {day}: {first}, {age}
+{day} : il y a {n} ans, {a} et {b} se mariaient ¦ {day}: {n} vjet më parë u martuan {a} dhe {b} ¦ {day}: {n} sena ilu, {a} u {b} iżżewġu
+{day} : il y a {n} ans naissait {name} ¦ {day}: {n} vjet më parë lindi {name} ¦ {day}: {n} sena ilu twieled/twieldet {name}
+{what} dans l’arbre : {list} ¦ {what} në pemë: {list} ¦ {what} fis-siġra: {list}
+Nouveau dans les médias : « {title} » ¦ E re te mediat: «{title}» ¦ Ġdid fil-midja: “{title}”
+La lettre des {nm} ¦ Letra e familjes {nm} ¦ L-ittra tal-familja {nm}
+Bonjour à tous ! Voici les nouvelles de la famille ce mois-ci. ¦ Përshëndetje të gjithëve! Ja lajmet e familjes këtë muaj. ¦ Saħħa lil kulħadd! Hawn huma l-aħbarijiet tal-familja ta’ dan ix-xahar.
+Photo : {title} ¦ Foto: {title} ¦ Ritratt: {title}
+Les anniversaires du mois ¦ Përvjetorët e muajit ¦ L-anniversarji tax-xahar
+Pas d’anniversaire ce mois-ci. ¦ Asnjë përvjetor këtë muaj. ¦ L-ebda anniversarju dan ix-xahar.
+Les dernières découvertes ¦ Zbulimet e fundit ¦ L-aħħar skoperti
+Rien de nouveau ce mois-ci : à vous de m’envoyer vos souvenirs ! ¦ Asgjë e re këtë muaj: tani ma dërgoni ju kujtimet tuaja! ¦ Xejn ġdid dan ix-xahar: issa jmiss lilkom tibagħtuli t-tifkiriet tagħkom!
+L’ancêtre à l’honneur ¦ Paraardhësi në qendër të vëmendjes ¦ L-antenat fid-dawl
+Avec toute mon affection, ¦ Me gjithë dashurinë, ¦ B’kull imħabba,
+Ce qu’on y met ¦ Çfarë përfshin ¦ X’se jkun fiha
+🖼 Changer ¦ 🖼 Ndrysho ¦ 🖼 Ibdel
+Tout se retouche dans la lettre (clique sur un texte). Les personnes vivantes n’y figurent que par leur prénom et leur âge ; les fiches confidentielles jamais. ¦ Gjithçka ndryshohet në letër (kliko mbi një tekst). Të gjallët shfaqen vetëm me emër dhe moshë, skedat konfidenciale kurrë. ¦ Kollox jinbidel fl-ittra (ikklikkja fuq test). Il-ħajjin jidhru biss bl-isem u l-età; il-kartuni kunfidenzjali qatt.
+Je remplis la lettre… ¦ Po plotësoj letrën… ¦ Qed nimla l-ittra…
+Lettre refaite avec les nouveaux choix ¦ Letra u ribë me zgjedhjet e reja ¦ L-ittra saret mill-ġdid bl-għażliet il-ġodda
+LETTRE DE FAMILLE ¦ LETËR FAMILJARE ¦ ITTRA TAL-FAMILJA
+La photo de la lettre ¦ Fotografia e letrës ¦ Ir-ritratt tal-ittra
+Lettre de famille ¦ Letër familjare ¦ Ittra tal-familja
+La lettre du mois remplie toute seule : anniversaires, dernières découvertes, une photo, un ancêtre à l’honneur. Tout se retouche. ¦ Letra e muajit plotësohet vetë: përvjetorë, zbulimet e fundit, një foto, një paraardhës në qendër. Gjithçka ndryshohet. ¦ L-ittra tax-xahar timtela waħedha: anniversarji, l-aħħar skoperti, ritratt, antenat fid-dawl. Kollox jinbidel.
+Lettre gardée : « {title} » (Listes → Lettres de famille) ¦ Letra u ruajt: «{title}» (Listat → Letrat familjare) ¦ L-ittra nżammet: “{title}” (Listi → Ittri tal-familja)
+💾 Garder ¦ 💾 Ruaj ¦ 💾 Żomm
+Ranger la lettre dans Listes → Lettres de famille ¦ Vendose letrën te Listat → Letrat familjare ¦ Poġġi l-ittra f’Listi → Ittri tal-familja
+PDF ¦ PDF ¦ PDF
+par la fenêtre « Imprimer » (⤓ PDF) ¦ nga dritarja «Printo» (⤓ PDF) ¦ mit-tieqa “Ipprintja” (⤓ PDF)
+Image (PNG) ¦ Imazh (PNG) ¦ Immaġni (PNG)
+Ouvre ta messagerie avec la lettre déjà écrite : rien n’est envoyé par l’app ¦ Hap postën me letrën të shkruar: aplikacioni nuk dërgon asgjë ¦ Jiftaħ l-email bl-ittra diġà miktuba: l-app ma tibgħat xejn
+📝 Retoucher ¦ 📝 Ndrysho ¦ 📝 Editja
+Ouvrir la lettre dans le traitement de texte ¦ Hape letrën në përpunuesin e tekstit ¦ Iftaħ l-ittra fil-word processor
+Chers cousins, chères cousines, ¦ Të dashur kushërinj e kushërira, ¦ Għeżież kuġini u kuġini,
+Ce que j’ai trouvé ce mois-ci… ¦ Çfarë gjeta këtë muaj… ¦ X’sibt dan ix-xahar…
+Si vous avez des photos, des lettres ou des souvenirs, je serais très heureux de les voir ! ¦ Nëse keni foto, letra ose kujtime, do të gëzohesha shumë t’i shihja! ¦ Jekk għandkom ritratti, ittri jew tifkiriet, inkun ferħan ħafna narahom!
+Je vous embrasse, ¦ Ju përqafoj, ¦ Ħafna bews,
+📋 Voir dans Listes › Lettres de famille ¦ 📋 Shih te Listat › Letrat familjare ¦ 📋 Ara f’Listi › Ittri tal-familja
+remplie toute seule : anniversaires du mois, découvertes, photo, ancêtre ¦ plotësohet vetë: përvjetorët e muajit, zbulime, foto, paraardhës ¦ timtela waħedha: anniversarji tax-xahar, skoperti, ritratt, antenat
+Lettres de famille ¦ Letrat familjare ¦ Ittri tal-familja
+💌 Lettres de famille ¦ 💌 Letrat familjare ¦ 💌 Ittri tal-familja
+Les lettres du mois gardées depuis ✨ Trésors → « 💌 Lettre de famille ». À ne pas confondre avec les « ✉️ Lettres aux descendants », qui s’ouvrent plus tard. ¦ Letrat e muajit të ruajtura nga ✨ Thesaret → «💌 Letër familjare». Mos i ngatërro me «✉️ Letrat për pasardhësit», që hapen më vonë. ¦ L-ittri tax-xahar miżmuma minn ✨ Teżori → “💌 Ittra tal-familja”. M’għandhomx jitħawdu mal-“✉️ Ittri lid-dixxendenti”, li jinfetħu aktar tard.
+💌 Nouvelle lettre ¦ 💌 Letër e re ¦ 💌 Ittra ġdida
+Chercher… (titre, mois) ¦ Kërko… (titull, muaj) ¦ Fittex… (titlu, xahar)
+Supprimer la lettre ¦ Fshi letrën ¦ Ħassar l-ittra
+Aucune lettre gardée pour l’instant ¦ Asnjë letër e ruajtur ende ¦ L-ebda ittra miżmuma s’issa
+Fais celle du mois dans ✨ Trésors → « 💌 Lettre de famille », puis « 💾 Garder ». ¦ Bëje atë të muajit te ✨ Thesaret → «💌 Letër familjare», pastaj «💾 Ruaj». ¦ Agħmel dik tax-xahar f’✨ Teżori → “💌 Ittra tal-familja”, imbagħad “💾 Żomm”.
+💌 Faire la lettre du mois ¦ 💌 Bëj letrën e muajit ¦ 💌 Agħmel l-ittra tax-xahar
+Lettre « {title} » supprimée ¦ Letra «{title}» u fshi ¦ L-ittra “{title}” tħassret
+« d’accord », dit {who}. ¦ «dakord», thotë {who}. ¦ “naqbel”, jgħid {who}.
+« faux », dit {who}. ¦ «gabim», thotë {who}. ¦ “ħażin”, jgħid {who}.
+Que faire de cette remarque ? ¦ Çfarë të bëjmë me këtë vërejtje? ¦ X’għandu jsir b’din ir-rimarka?
+✓ Accepter (témoignage) ¦ ✓ Prano (dëshmi) ¦ ✓ Aċċetta (xhieda)
+✓ Accepter (note sur le fait, « doute ») ¦ ✓ Prano (shënim te fakti, «i dyshimtë») ¦ ✓ Aċċetta (nota fuq il-fatt, “dubju”)
+{what} par {who} : ajoutés comme témoignage si tu acceptes ¦ {what} nga {who}: shtohen si dëshmi nëse pranon ¦ {what} minn {who}: jiżdiedu bħala xhieda jekk taċċetta
+Pour tous : ¦ Për të gjitha: ¦ Għal kollha:
+Importer les remarques d’une relecture ¦ Importo vërejtjet e një rishikimi ¦ Importa r-rimarki ta’ reviżjoni
+le fichier « remarques-….json » ¦ skedari «remarques-….json» ¦ il-fajl “remarques-….json”
+Le fichier que ton cousin t’a renvoyé avec « ⤓ Renvoyer mes remarques ». ¦ Skedari që të ktheu kushëriri me «⤓ Ktheji vërejtjet e mia». ¦ Il-fajl li bagħtlek lura l-kuġin tiegħek b’“⤓ Ibgħat lura r-rimarki tiegħi”.
+Ce fichier est trop gros pour un fichier de remarques. ¦ Skedari është shumë i madh për një skedar vërejtjesh. ¦ Dan il-fajl huwa kbir wisq għal fajl ta’ rimarki.
+<b>{what}</b> de <b>{who}</b> sur « {title} » ({date}). Pour chaque fait : accepte, refuse ou garde pour plus tard ¦ <b>{what}</b> nga <b>{who}</b> për «{title}» ({date}). Për çdo fakt: prano, refuzo ose lëre për më vonë ¦ <b>{what}</b> minn <b>{who}</b> dwar “{title}” ({date}). Għal kull fatt: aċċetta, irrifjuta jew żomm għal aktar tard
+Ces remarques ont <b>déjà été importées</b> ¦ Këto vërejtje <b>janë importuar tashmë</b> ¦ Dawn ir-rimarki <b>diġà ġew importati</b>
+Aucune remarque dans ce fichier ¦ Asnjë vërejtje në këtë skedar ¦ L-ebda rimarka f’dan il-fajl
+{what} sur des faits qui ne sont plus dans la base : mises de côté. ¦ {what} për fakte që nuk janë më në bazë: lënë mënjanë. ¦ {what} fuq fatti li m’għadhomx fid-database: imwarrba.
+⤒ Importer les remarques ¦ ⤒ Importo vërejtjet ¦ ⤒ Importa r-rimarki
+{what} (relecture de {who}) ¦ {what} (rishikim nga {who}) ¦ {what} (reviżjoni ta’ {who})
+Remarques de {who} gardées avec la relecture. ¦ Vërejtjet e {who} u ruajtën me rishikimin. ¦ Ir-rimarki ta’ {who} miżmuma mar-reviżjoni.
+relu par {who} ¦ rishikuar nga {who} ¦ rivedut minn {who}
+En attente des remarques ¦ Në pritje të vërejtjeve ¦ Qed jistenna r-rimarki
+{n} à ranger ¦ {n} për t’u renditur ¦ {n} biex jiġu rranġati
+tout est rangé ¦ gjithçka e renditur ¦ kollox irranġat
+Envoyé, en attente des remarques ¦ Dërguar, në pritje të vërejtjeve ¦ Mibgħut, qed jistenna r-rimarki
+Supprimer la relecture ¦ Fshi rishikimin ¦ Ħassar ir-reviżjoni
+Relectures de branche ¦ Rishikime degësh ¦ Reviżjonijiet tal-fergħat
+＋ Demander une relecture… ¦ ＋ Kërko një rishikim… ¦ ＋ Itlob reviżjoni…
+Aucune relecture : « 📤 Partager avec la famille » avec la case « 🖊 Demander une relecture », ou fiche → ⋯ → « 🖊 Faire relire cette branche… ». ¦ Asnjë rishikim: «📤 Ndaj me familjen» me kutinë «🖊 Kërko një rishikim», ose skeda → ⋯ → «🖊 Jepe për rishikim këtë degë…». ¦ L-ebda reviżjoni: “📤 Aqsam mal-familja” bil-kaxxa “🖊 Itlob reviżjoni”, jew kartuna → ⋯ → “🖊 Agħti din il-fergħa għar-reviżjoni…”.
+Relecture « {title} » supprimée ¦ Rishikimi «{title}» u fshi ¦ Ir-reviżjoni “{title}” tħassret
+Faire relire cette branche… ¦ Jepe për rishikim këtë degë… ¦ Agħti din il-fergħa għar-reviżjoni…
+{who} pense que c’est faux : {c} ¦ {who} mendon se është gabim: {c} ¦ {who} jaħseb li hu ħażin: {c}
+{who} est d’accord ¦ {who} është dakord ¦ {who} jaqbel
+Remarque refusée ¦ Vërejtja u refuzua ¦ Rimarka miċħuda
+Remarque notée sur le fait ¦ Vërejtja u shënua te fakti ¦ Rimarka mniżżla fuq il-fatt
+Témoignage ajouté ¦ Dëshmia u shtua ¦ Xhieda miżjuda
+« je pense que c’est faux » ¦ «mendoj se është gabim» ¦ “naħseb li hu ħażin”
+« d’accord » ¦ «dakord» ¦ “naqbel”
+Corriger le fait ¦ Korrigjo faktin ¦ Ikkoreġi l-fatt
+ouvre le fait ; la remarque reste jusqu’à « Noter » ou « Refuser » ¦ hap faktin; vërejtja mbetet deri te «Shëno» ose «Refuzo» ¦ jiftaħ il-fatt; ir-rimarka tibqa’ sa “Niżżel” jew “Irrifjuta”
+Noter (note sur le fait, « doute ») ¦ Shëno (shënim te fakti, «i dyshimtë») ¦ Niżżel (nota fuq il-fatt, “dubju”)
+Accepter (témoignage) ¦ Prano (dëshmi) ¦ Aċċetta (xhieda)
+🖊 Remarque de relecture ¦ 🖊 Vërejtje rishikimi ¦ 🖊 Rimarka tar-reviżjoni
+l’année {y} ¦ viti {y} ¦ is-sena {y}
+Traduire ¦ Përkthe ¦ Ittraduċi
+Le mot à mot tout de suite, la traduction complète si le modèle de la lecture approfondie est installé ¦ Menjëherë fjalë për fjalë, përkthimi i plotë nëse është instaluar modeli i leximit të thelluar ¦ Kelma b’kelma minnufih, it-traduzzjoni sħiħa jekk il-mudell tal-qari approfondit huwa installat
+latin → français ¦ latinisht → frëngjisht ¦ Latin → Franċiż
+Revenir au texte ¦ Kthehu te teksti ¦ Lura għat-test
+Écris ou lis d’abord le texte de l’acte : la traduction part du texte transcrit. ¦ Shkruaj ose lexo fillimisht tekstin e aktit: përkthimi nis nga teksti i transkriptuar. ¦ L-ewwel ikteb jew aqra t-test tal-att: it-traduzzjoni tibda mit-test traskritt.
+L’acte (latin, transcrit) ¦ Akti (latinisht, i transkriptuar) ¦ L-att (Latin, traskritt)
+vert : formule connue ¦ jeshile: formulë e njohur ¦ aħdar: formula magħrufa
+bleu : mot du dictionnaire ¦ blu: fjalë fjalori ¦ blu: kelma mid-dizzjunarju
+pointillé : peu sûr ¦ me pika: i pasigurt ¦ bit-tikek: mhux ċert
+Niveau 1 · mot à mot sans installation ¦ Niveli 1 · fjalë për fjalë pa instalim ¦ Livell 1 · kelma b’kelma mingħajr installazzjoni
+Aucun mot reconnu. ¦ Asnjë fjalë e njohur. ¦ L-ebda kelma ma ntgħarfet.
+Date : {d} ¦ Data: {d} ¦ Data: {d}
+Niveau 2 · traduction complète ¦ Niveli 2 · përkthim i plotë ¦ Livell 2 · traduzzjoni sħiħa
+Je regarde si le modèle est installé… ¦ Po shikoj nëse modeli është i instaluar… ¦ Qed niċċekkja jekk il-mudell huwiex installat…
+📋 Garder dans la transcription ¦ 📋 Ruaje në transkriptim ¦ 📋 Żomm fit-traskrizzjoni
+Copier la traduction ¦ Kopjo përkthimin ¦ Ikkopja t-traduzzjoni
+📝 Mise au propre ¦ 📝 Kopje e pastër ¦ 📝 Kopja nadifa
+Le niveau 1 marche toujours, sans rien installer. Les noms, dates et rôles repérés partent ensuite, comme d’habitude, dans « Ce que l’app a trouvé ». ¦ Niveli 1 funksionon gjithmonë, pa instalim. Emrat, datat dhe rolet e gjetura shkojnë pastaj si zakonisht te «Çfarë gjeti aplikacioni». ¦ Il-livell 1 dejjem jaħdem, mingħajr installazzjoni. L-ismijiet, id-dati u r-rwoli misjuba mbagħad imorru, bħas-soltu, f’“X’sabet l-app”.
+✓ Les deux lectures sont d’accord sur les noms, la date et les rôles. ¦ ✓ Të dy leximet përputhen në emra, datë dhe role. ¦ ✓ Iż-żewġ qari jaqblu fuq l-ismijiet, id-data u r-rwoli.
+À vérifier : la traduction complète ne dit pas la même chose pour : {list} ¦ Për t’u kontrolluar: përkthimi i plotë thotë ndryshe për: {list} ¦ Biex tiċċekkja: it-traduzzjoni sħiħa tgħid xi ħaġa oħra għal: {list}
+Traduction copiée. ¦ Përkthimi u kopjua. ¦ It-traduzzjoni ġiet ikkupjata.
+Copie impossible dans ce navigateur. ¦ Kopjimi i pamundur në këtë shfletues. ¦ L-ikkupjar mhux possibbli f’dan il-browser.
+Traduction gardée dans la transcription (enregistre avec ⌘S) ¦ Përkthimi u ruajt në transkriptim (ruaj me ⌘S) ¦ It-traduzzjoni nżammet fit-traskrizzjoni (issejvja b’⌘S)
+Traduction en cours (le modèle tourne sur cet ordinateur)… ¦ Po përkthehet (modeli punon në këtë kompjuter)… ¦ Qed tiġi tradotta (il-mudell jaħdem fuq dan il-kompjuter)…
+La traduction n’a pas abouti. ¦ Përkthimi nuk u realizua. ¦ It-traduzzjoni ma rnexxietx.
+La traduction gardée avec cette transcription. ¦ Përkthimi i ruajtur me këtë transkriptim. ¦ It-traduzzjoni miżmuma ma’ din it-traskrizzjoni.
+↻ Retraduire ¦ ↻ Përkthe sërish ¦ ↻ Erġa’ ittraduċi
+Le modèle de la lecture approfondie est installé : la traduction complète prend quelques dizaines de secondes. ¦ Modeli i leximit të thelluar është instaluar: përkthimi i plotë zgjat disa dhjetëra sekonda. ¦ Il-mudell tal-qari approfondit huwa installat: it-traduzzjoni sħiħa tieħu ftit għexieren ta’ sekondi.
+🌐 Traduire tout l’acte ¦ 🌐 Përkthe gjithë aktin ¦ 🌐 Ittraduċi l-att kollu
+La traduction complète utilise le modèle de la lecture approfondie (Ollama, ≈ 6 Go, rien ne part sur Internet). ¦ Përkthimi i plotë përdor modelin e leximit të thelluar (Ollama, ≈ 6 GB, asgjë nuk shkon në internet). ¦ It-traduzzjoni sħiħa tuża l-mudell tal-qari approfondit (Ollama, ≈ 6 GB, xejn ma jmur fuq l-Internet).
+Le niveau 1 marche toujours. ¦ Niveli 1 funksionon gjithmonë. ¦ Il-livell 1 dejjem jaħdem.
+Transcription d’acte ¦ Transkriptim i aktit ¦ Traskrizzjoni tal-att
+Traduction ¦ Përkthim ¦ Traduzzjoni
+Mots difficiles et abréviations ¦ Fjalë të vështira dhe shkurtime ¦ Kliem diffiċli u abbrevjazzjonijiet
+Les personnes de l’acte ¦ Personat e aktit ¦ In-nies tal-att
+=fait certain ¦ fakt i sigurt|fakte të sigurta ¦ fatt ċert|fatti ċerti|fatti ċerti|fatt ċert|fatt ċert
+=fait déduit ¦ fakt i nxjerrë|fakte të nxjerra ¦ fatt dedott|fatti dedotti|fatti dedotti|fatt dedott|fatt dedott
+=fait estimé ¦ fakt i përafërt|fakte të përafërta ¦ fatt stmat|fatti stmati|fatti stmati|fatt stmat|fatt stmat
+=fait en doute ¦ fakt i dyshimtë|fakte të dyshimta ¦ fatt dubjuż|fatti dubjużi|fatti dubjużi|fatt dubjuż|fatt dubjuż
+=fait non évalué ¦ fakt i pavlerësuar|fakte të pavlerësuara ¦ fatt mhux evalwat|fatti mhux evalwati|fatti mhux evalwati|fatt mhux evalwat|fatt mhux evalwat
+=fait ¦ fakt|fakte ¦ fatt|fatti|fatti|fatt|fatt
+=fiche à revoir ¦ skedë për rishikim|skeda për rishikim ¦ kartuna biex tiġi riveduta|kartuni biex jiġu riveduti|kartuni biex jiġu riveduti|kartuna biex tiġi riveduta|kartuna biex tiġi riveduta
+=fait confirmé ¦ fakt i konfirmuar|fakte të konfirmuara ¦ fatt ikkonfermat|fatti kkonfermati|fatti kkonfermati|fatt ikkonfermat|fatt ikkonfermat
+=remarque notée ¦ vërejtje e shënuar|vërejtje të shënuara ¦ rimarka mniżżla|rimarki mniżżla|rimarki mniżżla|rimarka mniżżla|rimarka mniżżla
+=remarque pour plus tard ¦ vërejtje për më vonë|vërejtje për më vonë ¦ rimarka għal aktar tard|rimarki għal aktar tard|rimarki għal aktar tard|rimarka għal aktar tard|rimarka għal aktar tard
+=relecture ¦ rishikim|rishikime ¦ reviżjoni|reviżjonijiet|reviżjonijiet|reviżjoni|reviżjoni
+Très sûr ¦ Shumë i sigurt ¦ Affidabbli ħafna
+Assez sûr ¦ Mjaft i sigurt ¦ Pjuttost affidabbli
+Peu sûr ¦ I pasigurt ¦ Mhux affidabbli
+prouvé ¦ e provuar ¦ ippruvata
+probable ¦ e mundshme ¦ probabbli
+réfuté ¦ e hedhur poshtë ¦ miċħuda
+parent ¦ prind ¦ ġenitur
+baptisé(e) ¦ i/e pagëzuar ¦ mgħammed/a
+note sous ¦ nota nën ¦ punteġġ taħt
+{a} sur {n} ont une source ¦ {a} nga {n} kanë burim ¦ {a} minn {n} għandhom sors
+{a} sur {n} a une source ¦ {a} nga {n} ka burim ¦ {a} minn {n} għandu sors
+{n} sont à revoir avant publication (note sous {min}). ¦ {n} janë për t’u rishikuar para publikimit (nota nën {min}). ¦ {n} iridu jiġu riveduti qabel il-pubblikazzjoni (punteġġ taħt {min}).
+{n} est à revoir avant publication (note sous {min}). ¦ {n} është për t’u rishikuar para publikimit (nota nën {min}). ¦ {n} trid tiġi riveduta qabel il-pubblikazzjoni (punteġġ taħt {min}).
+La fiabilité n’a pas pu être calculée. ¦ Besueshmëria nuk u llogarit dot. ¦ L-affidabbiltà ma setgħetx tinħadem.
+Aucune fiche à revoir avant publication, bravo ! ¦ Asnjë skedë për t’u rishikuar para publikimit, bravo! ¦ L-ebda kartuna biex tiġi riveduta qabel il-pubblikazzjoni, brava!
+Pas encore de fiche à publier. ¦ Ende asnjë skedë për t’u publikuar. ¦ Għad m’hemmx kartuni biex jiġu ppubblikati.
+{n} sous {min} sur 100 ¦ {n} nën {min} nga 100 ¦ {n} taħt {min} minn 100
+🛡 Fiches les moins fiables ¦ 🛡 Skedat më pak të besueshme ¦ 🛡 L-inqas kartuni affidabbli
+Listes → Personnes, filtrée sur « À revoir avant publication » ¦ Listat → Personat, filtruar sipas «Për t’u rishikuar para publikimit» ¦ Listi → Persuni, iffiltrata fuq “Trid tiġi riveduta qabel il-pubblikazzjoni”
+Les voir ¦ Shihi ¦ Arahom
+Les laisser de côté ¦ Lëri jashtë ¦ Ħallihom barra
+Exporter quand même ¦ Eksporto gjithsesi ¦ Esporta xorta
+Transcription ¦ Transkriptim ¦ Traskrizzjoni
+🖊 Relecture ¦ 🖊 Rishikim ¦ 🖊 Reviżjoni
+🖊 Demander une relecture (le cousin peut cocher et commenter chaque fait) ¦ 🖊 Kërko një rishikim (kushëriri mund të shënojë dhe komentojë çdo fakt) ¦ 🖊 Itlob reviżjoni (il-kuġin jista’ jimmarka u jikkummenta kull fatt)
+La copie montre alors « ✓ D’accord / ✗ Je pense que c’est faux » sur chaque fait, et « ⤓ Renvoyer mes remarques » : un petit fichier .json à importer dans Questions aux proches → « ⤒ Importer les réponses ». ¦ Kopja tregon atëherë te çdo fakt «✓ Dakord / ✗ Mendoj se është gabim» dhe «⤓ Ktheji vërejtjet e mia»: një skedar i vogël .json për t’u importuar te Pyetje për të afërmit → «⤒ Importo përgjigjet». ¦ Il-kopja mbagħad turi “✓ Naqbel / ✗ Naħseb li hu ħażin” fuq kull fatt, u “⤓ Ibgħat lura r-rimarki tiegħi”: fajl .json żgħir li jiġi importat f’Mistoqsijiet lill-qraba → “⤒ Importa t-tweġibiet”.
+Copie à relire prête : {name}. Le cousin te renverra ses remarques (un fichier .json) : Questions aux proches → « ⤒ Importer les réponses ». ¦ Kopja për rishikim është gati: {name}. Kushëriri do të të kthejë vërejtjet (skedar .json): Pyetje për të afërmit → «⤒ Importo përgjigjet». ¦ Kopja għar-reviżjoni lesta: {name}. Il-kuġin jibagħtlek lura r-rimarki (fajl .json): Mistoqsijiet lill-qraba → “⤒ Importa t-tweġibiet”.
+Donne un titre à la lettre. ¦ Jepi letrës një titull. ¦ Agħti titlu lill-ittra.
+Lettre introuvable. ¦ Letra nuk u gjet. ¦ L-ittra ma nstabitx.
+Relecture introuvable. ¦ Rishikimi nuk u gjet. ¦ Ir-reviżjoni ma nstabitx.
+Remarque introuvable. ¦ Vërejtja nuk u gjet. ¦ Ir-rimarka ma nstabitx.
+Ce n’est pas un fichier de remarques de relecture. ¦ Ky nuk është skedar vërejtjesh rishikimi. ¦ Dan mhuwiex fajl ta’ rimarki tar-reviżjoni.
+Cette relecture n’est pas dans cette base (ou elle a été supprimée). ¦ Ky rishikim nuk është në këtë bazë (ose është fshirë). ¦ Din ir-reviżjoni mhijiex f’din id-database (jew tħassret).
+Ce fait n’existe plus. ¦ Ky fakt nuk ekziston më. ¦ Dan il-fatt m’għadux jeżisti.
+Cette remarque est déjà rangée. ¦ Kjo vërejtje është renditur tashmë. ¦ Din ir-rimarka diġà rranġata.
+Il n’y a pas encore de texte à traduire. ¦ Ende nuk ka tekst për t’u përkthyer. ¦ Għad m’hemmx test x’tittraduċi.
+Le modèle de la lecture approfondie n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Modeli i leximit të thelluar nuk është shkarkuar ende: «⤓ Instalo leximin e thelluar». ¦ Il-mudell tal-qari approfondit għadu ma tniżżilx: “⤓ Installa l-qari approfondit”.
+Ces outils ne sont pas encore prêts : relance l’app. ¦ Këto mjete nuk janë ende gati: rinise aplikacionin. ¦ Dawn l-għodod għadhom mhumiex lesti: erġa’ ibda l-app.
+Cette demande de relecture n’existe plus. ¦ Kjo kërkesë për rishikim nuk ekziston më. ¦ Din it-talba għal reviżjoni m’għadhiex teżisti.
+{who} confirme : {fact}. ¦ {who} konfirmon: {fact}. ¦ {who} jikkonferma: {fact}.
+Confirmé par {who} : {fact} ¦ Konfirmuar nga {who}: {fact} ¦ Ikkonfermat minn {who}: {fact}
+{who}, relecture « {title} », le {date} ¦ {who}, rishikimi «{title}», më {date} ¦ {who}, reviżjoni “{title}”, fl-{date}
+Relecture d’une branche ¦ Rishikim i një dege ¦ Reviżjoni ta’ fergħa
+{who} pense que c’est faux. ¦ {who} mendon se është gabim. ¦ {who} jaħseb li hu ħażin.
+relecture « {title} », le {date} ¦ rishikimi «{title}», më {date} ¦ reviżjoni “{title}”, fl-{date}
+💬 Remarque de {who} ¦ 💬 Vërejtje nga {who} ¦ 💬 Rimarka minn {who}

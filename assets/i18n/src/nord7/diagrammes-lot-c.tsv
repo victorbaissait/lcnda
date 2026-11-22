@@ -1,0 +1,179 @@
+fr ¦ is
+# Zone « diagrammes-lot-c » : grille des recensements, schéma de preuve, arbre de mots (heritage-diagram-lot-c.js), zones des paroisses et carte en étoile (heritage-diagram-cartes.js), cercles d’une journée (heritage-cartes-outils.js)
+Hors de France ¦ Utan Frakklands
+Ajoute des personnes (nom, naissance, décès), puis leurs recensements (année, statut). ¦ Bættu við fólki (nafn, fæðing, andlát) og síðan manntölum þess (ár, staða).
+Aucune année de recensement entre ces deux dates. ¦ Ekkert manntalsár milli þessara dagsetninga.
+Plus rien à chercher : tous les recensements sont trouvés ou sans objet. ¦ Ekkert eftir að leita: öll manntöl fundin eða eiga ekki við.
+à chercher : {list} ¦ að leita: {list}
+non trouvés : {list} ¦ fannst ekki: {list}
+Liste de travail des recensements : {n}. ¦ Verkefnalisti manntala: {n}.
+Grille des recensements : {n}, {y} recensements, {d} sur {t} cherchés. ¦ Manntalstafla: {n}, {y} manntöl, {d} af {t} leituð.
+Les recensements de la famille {name} ¦ Manntöl fjölskyldunnar {name}
+Contre ¦ Á móti
+Conflit ¦ Ósamræmi
+Écris la question (Réglages), puis les indices : pour, contre, recherches, conflits. ¦ Skrifaðu spurninguna (Stillingar) og síðan vísbendingarnar: með, á móti, leitir, ósamræmi.
+Indices contre ¦ Vísbendingar á móti
+Recherches et conflits ¦ Leitir og ósamræmi
+Résolu : {note} ¦ Leyst: {note}
+À résoudre ¦ Óleyst
+poids {n} sur 3 ¦ vægi {n} af 3
+Pas encore de conclusion ¦ Engin niðurstaða enn
+Schéma de preuve : {a} pour, {b} contre ; certitude : {c}. ¦ Sönnunarmynd: {a} með, {b} á móti; vissa: {c}.
+Antoine MAZAUD est-il le père de Jean MAZAUD (né vers 1818) ? ¦ Er Antoine MAZAUD faðir Jean MAZAUD (fæddur um 1818)?
+Oui : Antoine MAZAUD est le père de Jean. ¦ Já: Antoine MAZAUD er faðir Jean.
+Acte de mariage de Jean (1842) : « fils d’Antoine MAZAUD, cultivateur » ¦ Hjúskaparskrá Jean (1842): „sonur Antoine MAZAUD, bónda“
+Registre paroissial, original ¦ Prestsþjónustubók, frumrit
+Recensement 1836 : Jean, 18 ans, au foyer d’Antoine ¦ Manntal 1836: Jean, 18 ára, á heimili Antoine
+Recensement 1836, original ¦ Manntal 1836, frumrit
+Antoine est parrain du premier fils de Jean ¦ Antoine er guðfaðir fyrsta sonar Jean
+Baptême 1844 ¦ Skírn 1844
+Un autre Jean MAZAUD, né en 1817 au village voisin ¦ Annar Jean MAZAUD, fæddur 1817 í næsta þorpi
+Acte de naissance de Jean : registre lacunaire 1815-1820 ¦ Fæðingarskrá Jean: bók vantar 1815-1820
+Âge au décès : 64 ans (né vers 1820) au lieu de 66 ¦ Aldur við andlát: 64 ára (fæddur um 1820) í stað 66
+Acte de décès 1884 ¦ Dánarskrá 1884
+l’âge déclaré au décès est souvent approximatif ¦ aldur sem gefinn er við andlát er oft áætlaður
+Écris le mot de départ (Réglages), par exemple « fils de » ou « veuve de ». ¦ Skrifaðu upphafsorðið (Stillingar), til dæmis „fils de“ eða „veuve de“.
+Colle des transcriptions (une par ligne) ou prends-les « Depuis l’app ». ¦ Límdu inn uppskriftir (eina í línu) eða sæktu þær „Úr forritinu“.
+« {w} » n’est dans aucun de ces textes. ¦ „{w}“ er ekki í neinum þessara texta.
+… {n} autres ¦ … {n} önnur
+Trop de branches : baisse la profondeur ou le nombre de branches (Réglages). ¦ Of margar greinar: minnkaðu dýpt eða fjölda greina (Stillingar).
+« {w} » : {n} fois ¦ „{w}“: {n} sinnum
+Arbre de mots : « {w} » trouvé {n} fois dans {t}. ¦ Orðatré: „{w}“ fannst {n} sinnum í {t}.
+Ce qui suit « {w} » dans les actes ¦ Það sem fylgir „{w}“ í skjölunum
+{n} lignes prises dans l’arbre : tu peux les corriger dans l’onglet Données. ¦ {n} línur sóttar í tréð: þú getur leiðrétt þær í flipanum Gögn.
+🗓️ Les recensements de mon arbre ¦ 🗓️ Manntölin í trénu mínu
+Une ligne par personne, une case par recensement : ce qui est relevé sur les fiches (trouvé, non trouvé…), et « à chercher » pour le reste. Sans groupe choisi : tes ancêtres. ¦ Ein lína á mann, einn reitur á manntal: það sem skráð er á spjöldin (fundið, ekki fundið…) og „að leita“ fyrir hitt. Án valins hóps: forfeður þínir.
+Du recensement de ¦ Frá manntalinu
+à celui de ¦ til manntalsins
+Les recensements de {n} ¦ Manntöl: {n}
+Personne dans ce groupe ne vivait entre ces deux recensements (il faut au moins une date de naissance ou de décès). ¦ Enginn í hópnum lifði milli þessara manntala (a.m.k. fæðingar- eða dánardagur þarf).
+{n} sur {t} prises (les premières) : change « Au plus » pour en voir davantage. ¦ {n} af {t} sóttar (þær fyrstu): breyttu „Mest“ til að sjá fleiri.
+⚖️ Un dossier de preuve ou une hypothèse ¦ ⚖️ Sönnunarmappa eða tilgáta
+Choisis un dossier : sa question, ses indices pour et contre, ses recherches et ses conflits, sa conclusion. Une hypothèse à comparer donne une colonne par réponse possible. ¦ Veldu möppu: spurninguna, vísbendingar með og á móti, leitir og ósamræmi, niðurstöðuna. Tilgáta til samanburðar gefur einn dálk á hvert mögulegt svar.
+Le dossier ¦ Mappan
+Choisis d’abord un dossier. ¦ Veldu fyrst möppu.
+Schéma de preuve ¦ Sönnunarmynd
+Ce dossier n’a encore aucune ligne : ajoute des indices dans le dossier, ou ici à la main. ¦ Mappan hefur engar línur enn: bættu vísbendingum í möppuna eða hér handvirkt.
+Prendre ce dossier ¦ Sækja þessa möppu
+🌿 Les mots de mes transcriptions ¦ 🌿 Orðin í uppskriftunum mínum
+Les transcriptions des actes (atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris. ¦ Uppskriftir skjala (uppskriftarsmiðja) og miðla: það sem fylgir (eða fer á undan) upphafsorðinu. Aðeins gagnlegir setningarbútar eru teknir.
+Le mot de départ ¦ Upphafsorðið
+Ce qui suit ¦ Það sem fylgir
+Ce qui précède ¦ Það sem fer á undan
+Commune (dans le lieu ou le titre de l’acte) ¦ Sveitarfélag (í staðnum eða titli skjalsins)
+Actes pris ¦ Skjöl sem tekin eru
+Actes notariés ¦ Þinglýst skjöl
+Militaires ¦ Hernaðarleg
+Lettres ¦ Bréf
+Transcriptions des médias ¦ Uppskriftir miðla
+Écris le mot de départ (par exemple « fils de »). ¦ Skrifaðu upphafsorðið (til dæmis „fils de“).
+Coche au moins une sorte d’acte. ¦ Hakaðu við að minnsta kosti eina tegund skjala.
+Ce qui précède « {w} » dans les actes ¦ Það sem fer á undan „{w}“ í skjölunum
+« {w} » n’est dans aucune transcription de ce choix ({n} lues). ¦ „{w}“ er ekki í neinni uppskrift þessa vals ({n} lesnar).
+« {w} » : {n} fois, dans {a}. ¦ „{w}“: {n} sinnum, í {a}.
+Dossier sans question ¦ Mappa án spurningar
+Aucun dossier pour ce groupe de personnes ¦ Engin mappa fyrir þennan hóp
+Ferme l’éditeur, puis clique sur la case pour ouvrir la fiche (bloc « Recensements »). ¦ Lokaðu ritlinum og smelltu svo á reitinn til að opna spjaldið (hluti „Manntöl“).
+Recensement {yr} : dans le bloc « Recensements » de la fiche. ¦ Manntal {yr}: í hlutanum „Manntöl“ á spjaldinu.
+Grille des recensements (personnes × années) ¦ Manntalstafla (fólk × ár)
+Ma recherche ¦ Rannsókn mín
+Une ligne par personne, une colonne par recensement : ce qui est trouvé, pas trouvé, et ce qui reste à chercher. ¦ Ein lína á mann, einn dálkur á manntal: hvað er fundið, ekki fundið og hvað á eftir að leita.
+Les personnes (une ligne sans année : naissance, décès) et leurs recensements (une ligne par année) ¦ Fólkið (lína án árs: fæðing, andlát) og manntöl þess (ein lína á ár)
+Naissance (année) ¦ Fæðing (ár)
+Décès (année) ¦ Andlát (ár)
+Recensement (année) ¦ Manntal (ár)
+Note (lieu, adresse…) ¦ Athugasemd (staður, heimilisfang…)
+Grille (une case par recensement) ¦ Tafla (einn reitur á manntal)
+Liste de travail à imprimer (ce qui reste à chercher) ¦ Verkefnalisti til prentunar (það sem á eftir að leita)
+À celui de ¦ Til manntalsins
+Ou mes années (ex. 1846, 1851, 1872) ¦ Eða mín ár (t.d. 1846, 1851, 1872)
+Personnes montrées ¦ Fólk sem er sýnt
+Seulement celles qui ont encore un recensement à chercher ¦ Aðeins þau sem enn á eftir að leita manntals
+Le plus à chercher d’abord ¦ Mest að leita fyrst
+Par naissance ¦ Eftir fæðingu
+Par nom ¦ Eftir nafni
+Couleur « Trouvé » ¦ Litur „Fundið“
+Couleur « Non trouvé » ¦ Litur „Fannst ekki“
+Couleur « À chercher » ¦ Litur „Að leita“
+Couleur « Hors de France » ¦ Litur „Utan Frakklands“
+Couleur « Pas né / déjà décédé » ¦ Litur „Ófæddur / þegar látinn“
+Écart entre les cases ¦ Bil milli reita
+Signes dans les cases (✓ ✗ ?) ¦ Tákn í reitunum (✓ ✗ ?)
+Années de vie à côté du nom ¦ Æviár við hlið nafnsins
+Schéma de preuve (question, indices pour et contre, conclusion) ¦ Sönnunarmynd (spurning, vísbendingar með og á móti, niðurstaða)
+La question en haut, les indices pour et contre (avec leur poids et leur source), les recherches et les conflits, puis la conclusion et sa certitude. ¦ Spurningin efst, vísbendingar með og á móti (með vægi og heimild), leitir og ósamræmi, síðan niðurstaðan og vissa hennar.
+Les lignes du dossier (pour, contre, recherche, conflit ; « réponse » pour une hypothèse à plusieurs réponses) ¦ Línur möppunnar (með, á móti, leit, ósamræmi; „svar“ fyrir tilgátu með mörgum svörum)
+Indice (ou réponse) ¦ Vísbending (eða svar)
+Poids (1 à 3) ¦ Vægi (1 til 3)
+Pour la réponse… (hypothèse) ¦ Fyrir svarið… (tilgáta)
+Note (résolution d’un conflit) ¦ Athugasemd (lausn ósamræmis)
+La conclusion ¦ Niðurstaðan
+Montrer les recherches et les conflits (ce qui reste à chercher) ¦ Sýna leitir og ósamræmi (það sem á eftir að leita)
+Couleur « confirme » ¦ Litur „staðfestir“
+Couleur « contredit » ¦ Litur „stangast á“
+Couleur des recherches ¦ Litur leita
+Couleur des conflits ¦ Litur ósamræmis
+Couleur des réponses ¦ Litur svara
+Couleur de la question ¦ Litur spurningarinnar
+Arbre de mots des actes (ce qui suit « fils de »…) ¦ Orðatré skjala (það sem fylgir „fils de“…)
+Un mot de départ à gauche ; à droite, les mots qui le suivent dans les actes, plus gros quand ils reviennent souvent. ¦ Upphafsorð til vinstri; til hægri orðin sem fylgja því í skjölunum, stærri þegar þau koma oft fyrir.
+Les textes (une transcription ou un bout de phrase par ligne) ¦ Textarnir (ein uppskrift eða setningarbútur í línu)
+Acte ou source ¦ Skjal eða heimild
+Le mot de départ (ex. fils de, veuve de) ¦ Upphafsorðið (t.d. fils de, veuve de)
+Profondeur (mots) ¦ Dýpt (orð)
+Branches par mot ¦ Greinar á orð
+Seulement les mots vus au moins ¦ Aðeins orð sem sjást minnst
+Le reste dans « … autres » ¦ Restin í „… önnur“
+Écrire le nombre de fois ¦ Skrifa fjölda skipta
+Sans tenir compte des capitales ni des accents ¦ Án tillits til hástafa og kommna
+Seulement les actes de (lieu) ¦ Aðeins skjöl frá (staður)
+Couleur des mots ¦ Litur orðanna
+Couleur du mot de départ ¦ Litur upphafsorðsins
+⭕ En une journée ¦ ⭕ Á einum degi
+Lieu de départ ¦ Upphafsstaður
+Montrer les lieux de la famille ¦ Sýna staði fjölskyldunnar
+Ce qu’on atteignait en une journée ¦ Hvert komst á einum degi
+Choisis le lieu de départ ¦ Veldu upphafsstað
+Ce lieu n’a pas de position sur la carte : place-le d’abord. ¦ Þessi staður hefur enga staðsetningu á kortinu: settu hann fyrst.
+Coche au moins un moyen de voyager ¦ Hakaðu við að minnsta kosti einn ferðamáta
+Les fonds de carte ne sont pas chargés. ¦ Grunnkortin eru ekki hlaðin.
+Je dessine les cercles… ¦ Teikna hringina…
+En {d} jours depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ Á {d} dögum frá {from}, árið {year}: í beinni loftlínu um {list}.
+En une journée depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ Á einum degi frá {from}, árið {year}: í beinni loftlínu um {list}.
+Rayon (vol d’oiseau) ¦ Radíus (loftlína)
+Lieux de la famille ¦ Staðir fjölskyldunnar
+Le rayon tient compte du détour de la route (réglage « Vitesses et sources »). Un trait pointillé : ce moyen n’existait pas encore cette année-là. ¦ Radíusinn tekur tillit til krókaleiðar vegarins (stillingin „Hraði og heimildir“). Punktalína: þessi ferðamáti var ekki til það ár.
+Paroisses (zones autour des églises) ¦ Sóknir (svæði kringum kirkjurnar)
+⚠ Paroisses sans position : {list} — choisis-les dans la liste (onglet Données) ou écris « Nom 45.27, 1.77 » ¦ ⚠ Sóknir án staðsetningar: {list} — veldu þær af listanum (flipinn Gögn) eða skrifaðu „Nafn 45.27, 1.77“
+Ajoute des paroisses (une ville de la liste, ou « Depuis l’app ») et leurs chiffres. ¦ Bættu við sóknum (stað af listanum eða „Úr forritinu“) og tölum þeirra.
+Zones des paroisses : {n}. ¦ Sóknasvæði: {n}.
+Un point à chaque église ¦ Punktur við hverja kirkju
+Limites des départements par-dessus les paroisses ¦ Sýslumörk ofan á sóknunum
+Cadrer tout seul sur les paroisses ¦ Laga sjálfkrafa að sóknunum
+Liens montrés ¦ Tengsl sem eru sýnd
+Ceux qui arrivent et ceux qui partent ¦ Þeir sem koma og þeir sem fara
+Seulement ceux qui arrivent ¦ Aðeins þeir sem koma
+Seulement ceux qui partent ¦ Aðeins þeir sem fara
+Les liens de {name} ¦ Tengsl {name}
+bleu : conjoints venus ¦ blátt: aðfluttir makar
+orange : enfants partis ¦ appelsínugult: brottflutt börn
+rouge : émigrés ¦ rautt: útflytjendur
+Lieux : {list} ¦ Staðir: {list}
+⛪ Au niveau « Paroisses » (Réglages → Niveau de détail) : une zone autour de chaque église, d’après les paroisses d’Ancien Régime de tes lieux ; un lieu sans paroisse compte pour lui-même. ¦ ⛪ Á stiginu „Sóknir“ (Stillingar → Nákvæmni): svæði kringum hverja kirkju eftir gömlum sóknum staðanna þinna; staður án sóknar telst sér.
+✳️ Tous les liens d’un lieu (carte en étoile) ¦ ✳️ Öll tengsl staðar (stjörnukort)
+Le village ¦ Þorpið
+Conjoints venus s’y marier ¦ Makar sem komu þangað til að giftast
+Enfants partis (nés ici, morts ou mariés ailleurs) ¦ Brottflutt börn (fædd hér, látin eða gift annars staðar)
+Émigrés (morts dans un autre pays) ¦ Útflytjendur (létust í öðru landi)
+Choisis d’abord le village. ¦ Veldu fyrst þorpið.
+Coche au moins une sorte de lien. ¦ Hakaðu við að minnsta kosti eina tegund tengsla.
+Aucun lien trouvé pour ce lieu (naissance, mariage ou décès ailleurs). ¦ Engin tengsl fundust fyrir þennan stað (fæðing, hjónaband eða andlát annars staðar).
+{n} prises dans l’arbre ({m} lieux rattachés à une paroisse d’Ancien Régime, les autres comptent pour eux-mêmes). ¦ Úr trénu: {n} ({m} staðir tengdir gamalli sókn, hinir teljast sér).
+Aucun lieu avec des coordonnées pour ce choix : place d’abord tes lieux sur la carte. ¦ Enginn staður með hnit fyrir þetta val: settu fyrst staðina þína á kortið.
+sa paroisse ¦ sókn þess
+leur paroisse ¦ sókn þeirra
+une paroisse ¦ sókn
+Paroisse sans position : choisis sa commune dans la liste, ou écris « Nom 45.27, 1.77 ». ¦ Sókn án staðsetningar: veldu sveitarfélag hennar af listanum eða skrifaðu „Nafn 45.27, 1.77“.
+Carte en étoile : seulement les liens de ce lieu (vide = tous les flux) ¦ Stjörnukort: aðeins tengsl þessa staðar (autt = öll flæði)
+niveau|paroisse ¦ sókn
+=paroisse ¦ sókn|sóknir

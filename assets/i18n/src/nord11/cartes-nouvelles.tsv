@@ -1,0 +1,374 @@
+fr ¦ vi ¦ id
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Địa điểm cần đặt ¦ Tempat yang perlu ditempatkan
+Lieux à placer… ¦ Địa điểm cần đặt… ¦ Tempat yang perlu ditempatkan…
+Placer… ¦ Đặt… ¦ Tempatkan…
+Les placer ¦ Đặt chúng ¦ Tempatkan
+Rien n’est pris tant que tu ne cliques pas. ¦ Không lấy gì cho đến khi bạn bấm. ¦ Tidak ada yang diambil sampai kamu mengeklik.
+Revoir et placer en lot… ¦ Xem lại và đặt hàng loạt… ¦ Tinjau dan tempatkan sekaligus…
+Seulement les lieux de cette carte ({n}). ¦ Chỉ các địa điểm của bản đồ này ({n}). ¦ Hanya tempat dari peta ini ({n}).
+Voir tous les lieux à placer ¦ Xem tất cả địa điểm cần đặt ¦ Lihat semua tempat yang perlu ditempatkan
+Lecture des lieux… ¦ Đang đọc các địa điểm… ¦ Membaca tempat…
+Chercher un lieu… ¦ Tìm một địa điểm… ¦ Cari tempat…
+De A à Z ¦ Từ A đến Z ¦ A sampai Z
+Le plus loin du reste ¦ Xa phần còn lại nhất ¦ Paling jauh dari yang lain
+{a} · {b} concernés ¦ {a} · {b} liên quan ¦ {a} · {b} terkait
+Aucun lieu pour ce choix. ¦ Không có địa điểm nào cho lựa chọn này. ¦ Tidak ada tempat untuk pilihan ini.
+Tous les lieux de ta base ont une position. ¦ Mọi địa điểm trong cơ sở dữ liệu của bạn đều có vị trí. ¦ Semua tempat di basis data kamu sudah punya posisi.
+à {km} km du reste ¦ cách phần còn lại {km} km ¦ {km} km dari yang lain
+Placer ici ¦ Đặt tại đây ¦ Tempatkan di sini
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ Cách {km} km so với các địa điểm khác của những sự kiện này: hãy kiểm tra trước khi đặt. ¦ {km} km dari tempat lain peristiwa ini: periksa sebelum menempatkan.
+Placer les {n} ensemble ¦ Đặt {n} địa điểm cùng nhau ¦ Tempatkan {n} sekaligus
+Pas un lieu ¦ Không phải địa điểm ¦ Bukan tempat
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ 300 mục đầu; hãy tìm một tên để xem phần còn lại. ¦ 300 pertama; cari nama untuk melihat yang lain.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ Đã đặt {a} ({b}) · chúng hiện trên mọi bản đồ ¦ {a} ditempatkan ({b}) · muncul di semua peta
+{name} placé ({n}) · {where} ¦ Đã đặt {name} ({n}) · {where} ¦ {name} ditempatkan ({n}) · {where}
+{name} placé ({a}, {b}) ¦ Đã đặt {name} ({a}, {b}) ¦ {name} ditempatkan ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ Đã gác lại “{name}” (không phải địa điểm) ¦ “{name}” disisihkan (bukan tempat)
+« {name} » remis dans la liste ¦ Đã đưa “{name}” trở lại danh sách ¦ “{name}” dikembalikan ke daftar
+LOIN DU RESTE ¦ XA PHẦN CÒN LẠI ¦ JAUH DARI YANG LAIN
+Placer « {name} » si loin ? ¦ Đặt “{name}” xa như vậy sao? ¦ Tempatkan “{name}” sejauh itu?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ “{where}” cách các địa điểm khác của những sự kiện này {km} km. Thường đó là nơi trùng tên. ¦ “{where}” berjarak {km} km dari tempat lain peristiwa ini. Sering kali itu tempat yang namanya sama.
+Placer quand même ¦ Vẫn đặt ¦ Tetap tempatkan
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Bấm lên bản đồ tại vị trí của “{name}” (Esc để bỏ qua). ¦ Klik di peta pada letak “{name}” (Esc untuk membatalkan).
+{name} placé à la main (position approchée) ¦ Đã đặt {name} bằng tay (vị trí gần đúng) ¦ {name} ditempatkan manual (posisi perkiraan)
+Pas de réseau : rien n’a été envoyé. ¦ Không có mạng: chưa gửi gì cả. ¦ Tidak ada jaringan: tidak ada yang dikirim.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Dịch vụ trực tuyến không tìm thấy gì cho “{name}”. ¦ Layanan daring tidak menemukan apa pun untuk “{name}”.
+{n} de plus pour « {name} » : à toi de choisir. ¦ Thêm {n} cho “{name}”: bạn tự chọn. ¦ {n} lagi untuk “{name}”: kamu yang memilih.
+EN LIGNE ¦ TRỰC TUYẾN ¦ DARING
+En ligne… ¦ Trực tuyến… ¦ Daring…
+Chercher « {name} » en ligne ? ¦ Tìm “{name}” trực tuyến? ¦ Cari “{name}” secara daring?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ Chỉ tên địa điểm “{name}” được gửi đến dịch vụ tìm địa chỉ của IGN (Géoplateforme). Không có tên người, không có ngày tháng. ¦ Hanya nama tempat “{name}” yang dikirim ke layanan pencarian alamat IGN (Géoplateforme). Tanpa nama orang, tanpa tanggal.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Câu trả lời là thêm một đề xuất trong danh sách; bạn chọn hay không tùy ý. Không có mạng: “Không có mạng: chưa gửi gì cả”. ¦ Jawabannya menjadi satu usulan lagi di daftar; kamu memilihnya atau tidak. Tanpa internet: “Tidak ada jaringan: tidak ada yang dikirim”.
+Ne plus me demander pour cette séance ¦ Đừng hỏi lại trong phiên này ¦ Jangan tanya lagi selama sesi ini
+Lieu tapé ¦ Địa điểm đã gõ ¦ Tempat yang diketik
+Pourquoi ¦ Vì sao ¦ Mengapa
+Distance au reste ¦ Khoảng cách đến phần còn lại ¦ Jarak ke yang lain
+Év. ¦ Sự kiện ¦ Peristiwa
+{n} km ¦ {n} km ¦ {n} km
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ Các mục “không tìm thấy” không có trong phần xem lại. Địa điểm cách phần còn lại hơn {km} km không bao giờ tự được đánh dấu. ¦ Yang “tidak ditemukan” tidak ada dalam tinjauan. Tempat yang lebih dari {km} km dari yang lain tidak pernah dicentang otomatis.
+Seulement les sûrs ¦ Chỉ những mục chắc chắn ¦ Hanya yang pasti
+Seulement les « sûrs » ¦ Chỉ những mục “chắc chắn” ¦ Hanya yang “pasti”
+Revoir avant de placer ¦ Xem lại trước khi đặt ¦ Tinjau sebelum menempatkan
+Placer les cochés ¦ Đặt các mục đã chọn ¦ Tempatkan yang dicentang
+Coche au moins un lieu. ¦ Hãy chọn ít nhất một địa điểm. ¦ Centang setidaknya satu tempat.
+Placer les {n} cochés ¦ Đặt {n} mục đã chọn ¦ Tempatkan {n} yang dicentang
+Réglages des lieux à placer enregistrés ¦ Đã lưu cài đặt địa điểm cần đặt ¦ Pengaturan tempat yang perlu ditempatkan tersimpan
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Các địa điểm chưa có vị trí, nhóm theo xã có khả năng: đặt chúng chỉ với một lần bấm ¦ Tempat tanpa posisi, dikelompokkan menurut kota yang mungkin: tempatkan dengan satu klik
+Cochés au départ dans la revue ¦ Được chọn sẵn khi xem lại ¦ Dicentang sejak awal dalam tinjauan
+Les sûrs et les probables ¦ Mục chắc chắn và mục có khả năng ¦ Yang pasti dan yang mungkin
+Un lieu-dit ¦ Một địa danh nhỏ ¦ Sebuah dusun
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ Tại địa danh nếu đã biết, nếu không thì ở trung tâm xã, đánh dấu “gần đúng” ¦ Di dusun jika diketahui, jika tidak di pusat kotanya dengan tanda “perkiraan”
+Toujours au centre de la commune ¦ Luôn ở trung tâm xã ¦ Selalu di pusat kota
+Ne pas le placer ¦ Không đặt ¦ Jangan ditempatkan
+Plusieurs communes du même nom ¦ Nhiều xã cùng tên ¦ Beberapa kota dengan nama sama
+Proposer la plus proche des autres lieux, jamais cochée ¦ Đề xuất xã gần các địa điểm khác nhất, không bao giờ chọn sẵn ¦ Usulkan yang terdekat dengan tempat lain, tidak pernah dicentang
+Aussi les fautes proches, proposées seulement ¦ Cả lỗi chính tả gần giống, chỉ đề xuất ¦ Juga salah eja yang mirip, hanya diusulkan
+Le nom exact seulement ¦ Chỉ đúng tên chính xác ¦ Hanya nama yang persis
+Ce qui est repris ¦ Những gì được lấy ¦ Yang diambil
+Position, code INSEE et département ¦ Vị trí, mã INSEE và tỉnh ¦ Posisi, kode INSEE, dan departemen
+La position seulement ¦ Chỉ vị trí ¦ Hanya posisi
+Jamais : le bouton est caché ¦ Không bao giờ: nút bị ẩn ¦ Tidak pernah: tombol disembunyikan
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Mỗi địa điểm một nút “🌐 Trực tuyến…”, lần nào cũng có thông báo (không bao giờ hàng loạt, không bao giờ tự động) ¦ Satu tombol “🌐 Daring…” per tempat, dengan pesan setiap kali (tidak pernah sekaligus, tidak pernah otomatis)
+Alerte « loin du reste » ¦ Cảnh báo “xa phần còn lại” ¦ Peringatan “jauh dari yang lain”
+À partir de 200 km ¦ Từ 200 km ¦ Mulai 200 km
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ Cùng tên và cùng tỉnh như trong danh mục các xã: chỉ có một xã “{name}”. Lấy trung tâm, mã INSEE và tỉnh. ¦ Nama dan departemen sama seperti di daftar kota: hanya satu kota “{name}”. Pusat, kode INSEE, dan departemen diambil.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ Chỉ có một xã “{name}” ở Pháp, nhưng không ghi tỉnh. ¦ Hanya satu kota “{name}” di Prancis, tetapi tanpa departemen yang ditulis.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ Có {n} xã mang tên này ở Pháp. Đề xuất các xã gần những địa điểm khác của sự kiện này nhất, không bao giờ tự chọn sẵn. ¦ Ada {n} kota dengan nama ini di Prancis. Yang terdekat dengan tempat lain peristiwa ini diusulkan, tidak pernah dicentang otomatis.
+{n} communes de ce nom en France : choisis la bonne. ¦ Có {n} xã mang tên này ở Pháp: hãy chọn đúng xã. ¦ Ada {n} kota dengan nama ini di Prancis: pilih yang benar.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Địa danh có trong danh mục (GeoNames) thuộc xã {name}. ¦ Dusun dikenal di daftar (GeoNames) di kota {name}.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Địa danh không có trong danh mục: đặt ở trung tâm {name}, đánh dấu “vị trí gần đúng”. ¦ Dusun tidak dikenal di daftar: di pusat {name}, ditandai “posisi perkiraan”.
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Không phải xã ngày nay; lịch sử INSEE (🏛 Biên giới xưa) ghi: sáp nhập vào {to} năm {year}. ¦ Bukan kota saat ini; riwayat INSEE (🏛 Batas lama) menyebut: digabung ke {to} pada {year}.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Thành phố thế giới đi kèm ứng dụng, chọn theo quốc gia đã ghi ({country}). ¦ Kota dunia bawaan aplikasi, dipilih berdasarkan negara yang ditulis ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Không tìm thấy trong các thành phố thế giới đi kèm cho quốc gia này ({country}). ¦ Tidak ditemukan di antara kota dunia bawaan untuk negara ini ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Không có xã nào tên này. Đề xuất một cách viết gần giống. Không tìm gì trực tuyến. ¦ Tidak ada kota dengan nama ini. Diusulkan ejaan yang mirip. Tidak ada yang dicari secara daring.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Không có xã nào tên này. Không tìm gì trực tuyến. ¦ Tidak ada kota dengan nama ini. Tidak ada yang dicari secara daring.
+le plus proche ¦ gần nhất ¦ yang terdekat
+sûr ¦ chắc chắn ¦ pasti
+=proposition ¦ đề xuất ¦ usulan
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ Trong mỗi menu, lựa chọn đầu tiên là lựa chọn được khuyên dùng: nó được đặt sẵn từ đầu. ¦ Di setiap menu, pilihan pertama adalah yang disarankan: sudah diatur sejak awal.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ Nghề nghiệp trên bản đồ (theo ngành, từng thế kỷ) ¦ Pekerjaan di peta (per sektor, abad demi abad)
+Les métiers notés (un par ligne) ¦ Các nghề đã ghi (mỗi dòng một nghề) ¦ Pekerjaan yang dicatat (satu per baris)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Địa điểm (“Tulle”, “Tulle 45.27, 1.77”) ¦ Tempat (“Tulle”, “Tulle 45.27, 1.77”)
+Classer par ¦ Phân loại theo ¦ Klasifikasi menurut
+Famille de métiers du dictionnaire (18) ¦ Nhóm nghề trong từ điển (18) ¦ Keluarga pekerjaan dari kamus (18)
+Un seul métier et ses variantes ¦ Một nghề duy nhất và các biến thể ¦ Satu pekerjaan dan variannya
+Un métier et ses variantes ¦ Một nghề và các biến thể ¦ Satu pekerjaan dan variannya
+Mes couleurs à moi par métier ¦ Màu riêng của tôi cho từng nghề ¦ Warna saya sendiri per pekerjaan
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Màu của tôi (“tisserand=#aa3300; meunier=#3355aa”) ¦ Warna saya (“tisserand=#aa3300; meunier=#3355aa”)
+Camembert par commune ¦ Biểu đồ tròn theo xã ¦ Diagram lingkaran per kota
+Un rond de la couleur du plus fréquent ¦ Một chấm tròn theo màu của nghề phổ biến nhất ¦ Satu lingkaran berwarna yang paling sering
+Siècle par siècle ¦ Từng thế kỷ ¦ Abad demi abad
+Un petit dessin par siècle ¦ Một bản đồ nhỏ cho mỗi thế kỷ ¦ Satu peta kecil per abad
+Tout ensemble ¦ Tất cả cùng lúc ¦ Semua sekaligus
+Où placer le métier ¦ Đặt nghề ở đâu ¦ Di mana pekerjaan ditempatkan
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Nơi của văn bản, nếu không thì nơi ở, nếu không thì nơi sinh ¦ Tempat akta, jika tidak tempat tinggal, jika tidak kelahiran
+Lieu de l’acte seulement ¦ Chỉ nơi của văn bản ¦ Hanya tempat akta
+Plusieurs métiers ¦ Nhiều nghề ¦ Beberapa pekerjaan
+Chacun à sa date ¦ Mỗi nghề theo ngày của nó ¦ Masing-masing pada tanggalnya
+Le principal seulement ¦ Chỉ nghề chính ¦ Hanya yang utama
+Montrés ¦ Hiển thị ¦ Ditampilkan
+Cachés ¦ Ẩn ¦ Disembunyikan
+Les plus grands ¦ Những nơi lớn nhất ¦ Yang terbesar
++ {n} secteurs vides ¦ + {n} ngành trống ¦ + {n} sektor kosong
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Bản đồ nghề nghiệp: {n}, mỗi thế kỷ một bản đồ nhỏ. ¦ Peta pekerjaan: {n}, satu peta kecil per abad.
+Carte des métiers : {a}, {b} ({when}). ¦ Bản đồ nghề nghiệp: {a}, {b} ({when}). ¦ Peta pekerjaan: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Bản đồ nghề nghiệp: {a}, {b}. ¦ Peta pekerjaan: {a}, {b}.
+Carte des métiers : {n}. ¦ Bản đồ nghề nghiệp: {n}. ¦ Peta pekerjaan: {n}.
+Clic : les métiers de ce lieu ¦ Bấm: các nghề tại nơi này ¦ Klik: pekerjaan di tempat ini
+Aucun métier noté au {when}. ¦ Không có nghề nào được ghi trong {when}. ¦ Tidak ada pekerjaan tercatat pada {when}.
+Aucun métier pour ce choix. ¦ Không có nghề nào cho lựa chọn này. ¦ Tidak ada pekerjaan untuk pilihan ini.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Lấy các nghề từ gia phả của bạn (“Từ ứng dụng”). ¦ Ambil pekerjaan dari silsilah kamu (“Dari aplikasi”).
+LES MÉTIERS SUR LA CARTE ¦ NGHỀ NGHIỆP TRÊN BẢN ĐỒ ¦ PEKERJAAN DI PETA
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ Bấm vào một nghề để mở phiếu của nghề đó (🛠️ Nghề xưa). ¦ Klik pada pekerjaan membuka lembarnya (🛠️ Pekerjaan lama).
+Les métiers de ta généalogie ¦ Các nghề trong gia phả của bạn ¦ Pekerjaan dalam silsilah kamu
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Các nghề đã ghi (nghề, điều tra dân số, phiếu), phân loại như trong Cây nghề nghiệp. Không bao giờ có người còn sống hay phiếu bảo mật. ¦ Pekerjaan yang dicatat (profesi, sensus, lembar), diklasifikasi seperti di Pohon pekerjaan. Tidak pernah orang yang masih hidup atau lembar rahasia.
+Hommes et femmes ¦ Nam và nữ ¦ Laki-laki dan perempuan
+Les femmes ¦ Phụ nữ ¦ Perempuan
+Toutes les époques ¦ Mọi thời kỳ ¦ Semua masa
+Aucun métier ¦ Không có nghề nào ¦ Tidak ada pekerjaan
+Aucun métier avec un lieu pour ce choix. ¦ Không có nghề nào có địa điểm cho lựa chọn này. ¦ Tidak ada pekerjaan dengan tempat untuk pilihan ini.
+Où on était {trade} ¦ Nơi có người làm {trade} ¦ Tempat orang menjadi {trade}
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ Đã ghi {a} · đã phân loại {b} · {c} “❔ khác” cần phân loại ¦ {a} dicatat · {b} diklasifikasi · {c} “❔ lainnya” perlu diklasifikasi
+Mes ancêtres seulement ¦ Chỉ tổ tiên của tôi ¦ Hanya leluhur saya
+Par famille de métiers du dictionnaire (18) ¦ Theo nhóm nghề trong từ điển (18) ¦ Menurut keluarga pekerjaan dari kamus (18)
+Par grand secteur (12) ¦ Theo ngành lớn (12) ¦ Menurut sektor utama (12)
+employé ¦ nhân viên ¦ pegawai
+ménagère ¦ nội trợ ¦ ibu rumah tangga
+Où on l’exerçait ¦ Nơi người ta làm nghề này ¦ Tempat pekerjaan ini dijalankan
+# 👫 Les deux lignées en miroir (partie 1)
+Les deux lignées en miroir (côté père, côté mère) ¦ Hai dòng họ đối xứng (bên nội, bên ngoại) ¦ Dua garis keturunan bercermin (pihak ayah, pihak ibu)
+Les événements des deux côtés (un par ligne) ¦ Sự kiện của hai bên (mỗi dòng một sự kiện) ¦ Peristiwa kedua pihak (satu per baris)
+Ancêtre des deux côtés ¦ Tổ tiên của cả hai bên ¦ Leluhur dari kedua pihak
+Aucun ancêtre connu : {who} ¦ Không có tổ tiên nào được biết: {who} ¦ Tidak ada leluhur yang diketahui: {who}
+Bleu / orange (lisibles aussi par les daltoniens) ¦ Xanh dương / cam (người mù màu cũng đọc được) ¦ Biru / oranye (terbaca juga oleh penderita buta warna)
+Compté des deux côtés, couleur mélangée ¦ Tính cho cả hai bên, màu pha trộn ¦ Dihitung di kedua pihak, warna campuran
+Seulement du côté du chemin le plus court ¦ Chỉ ở bên có đường ngắn nhất ¦ Hanya di pihak jalur terpendek
+Couleur du premier côté ¦ Màu của bên thứ nhất ¦ Warna pihak pertama
+Couleur du deuxième côté ¦ Màu của bên thứ hai ¦ Warna pihak kedua
+Côté père / côté mère ¦ Bên nội / bên ngoại ¦ Pihak ayah / pihak ibu
+Côté père / côté mère, avant la Révolution ¦ Bên nội / bên ngoại, trước Cách mạng ¦ Pihak ayah / ibu, sebelum Revolusi
+Mes quatre grands-parents (4 couleurs) ¦ Bốn ông bà của tôi (4 màu) ¦ Empat kakek-nenek saya (4 warna)
+Deux personnes au choix ¦ Hai người tùy chọn ¦ Dua orang pilihan
+Deux noms de famille ¦ Hai họ ¦ Dua nama keluarga
+Deux groupes de Mes listes ¦ Hai nhóm trong Danh sách của tôi ¦ Dua kelompok dari Daftar saya
+Premier nom ¦ Họ thứ nhất ¦ Nama pertama
+Deuxième nom ¦ Họ thứ hai ¦ Nama kedua
+Première liste ¦ Danh sách thứ nhất ¦ Daftar pertama
+Deuxième liste ¦ Danh sách thứ hai ¦ Daftar kedua
+Deux lignées de ta généalogie ¦ Hai dòng trong gia phả của bạn ¦ Dua garis dari silsilah kamu
+Côté père et côté mère de la personne de départ (ou quatre grands-parents, deux personnes, deux noms, deux listes). Jamais un vivant ni une fiche confidentielle : une personne de départ vivante n’est jamais un point. ¦ Bên nội và bên ngoại của người khởi đầu (hoặc bốn ông bà, hai người, hai họ, hai danh sách). Không bao giờ có người còn sống hay phiếu bảo mật: người khởi đầu còn sống không bao giờ là một điểm. ¦ Pihak ayah dan pihak ibu dari orang awal (atau empat kakek-nenek, dua orang, dua nama, dua daftar). Tidak pernah orang yang masih hidup atau lembar rahasia: orang awal yang masih hidup tidak pernah menjadi titik.
+Glisser (un trait à déplacer) ¦ Kéo (một vạch để di chuyển) ¦ Geser (garis yang bisa dipindah)
+LES DEUX LIGNÉES ¦ HAI DÒNG HỌ ¦ DUA GARIS KETURUNAN
+Le mariage des parents (💍) ¦ Đám cưới của cha mẹ (💍) ¦ Pernikahan orang tua (💍)
+Les deux lignées ¦ Cả hai dòng họ ¦ Kedua garis
+Les deux lignées : {a}, {b} où elles se rencontrent. ¦ Cả hai dòng họ: {a}, {b} nơi chúng gặp nhau. ¦ Kedua garis: {a}, {b} tempat bertemu.
+Les deux lignées : {n}. ¦ Cả hai dòng họ: {n}. ¦ Kedua garis: {n}.
+Les deux lignées de la famille {name} ¦ Hai dòng họ của gia đình {name} ¦ Dua garis keluarga {name}
+Les deux lignées de {name} ¦ Hai dòng họ của {name} ¦ Dua garis {name}
+Les quatre grands-parents de la famille {name} ¦ Bốn ông bà của gia đình {name} ¦ Empat kakek-nenek keluarga {name}
+Les quatre grands-parents de {name} ¦ Bốn ông bà của {name} ¦ Empat kakek-nenek {name}
+Lister sous la carte où elles se rencontrent ¦ Liệt kê dưới bản đồ nơi chúng gặp nhau ¦ Daftar di bawah peta tempat bertemu
+Combien de lignes ¦ Bao nhiêu dòng ¦ Berapa baris
+Montré ¦ Hiển thị ¦ Ditampilkan
+Même commune ¦ Cùng một xã ¦ Kota yang sama
+Même commune à la même époque ¦ Cùng một xã, cùng thời kỳ ¦ Kota yang sama pada masa yang sama
+À moins de quelques km ¦ Trong vòng vài km ¦ Dalam beberapa km
+À la même époque : à plus ou moins ¦ Cùng thời kỳ: chênh lệch ¦ Pada masa yang sama: plus minus
+Où elles se rencontrent ¦ Nơi chúng gặp nhau ¦ Tempat mereka bertemu
+Par 25 ans ¦ Mỗi 25 năm ¦ Per 25 tahun
+Position du trait ¦ Vị trí vạch ¦ Posisi garis
+Prends les deux lignées de ta personne de départ (« Depuis l’app »). ¦ Lấy cả hai dòng họ của người khởi đầu (“Từ ứng dụng”). ¦ Ambil kedua garis dari orang awal kamu (“Dari aplikasi”).
+Selon le nombre d’événements ¦ Theo số sự kiện ¦ Menurut jumlah peristiwa
+Ses deux lignées sur la carte ¦ Hai dòng họ của người này trên bản đồ ¦ Dua garisnya di peta
+Seulement la période ¦ Chỉ khoảng thời gian đó ¦ Hanya periode itu
+Superposées ¦ Chồng lên nhau ¦ Ditumpuk
+Tout jusqu’à cette date ¦ Mọi thứ đến ngày này ¦ Semua sampai tanggal ini
+jamais à la même époque ¦ không bao giờ cùng thời kỳ ¦ tidak pernah pada masa yang sama
+mariage de {a} et {b} ¦ đám cưới của {a} và {b} ¦ pernikahan {a} dan {b}
+{a} et {b}, à {km} km ¦ {a} và {b}, cách nhau {km} km ¦ {a} dan {b}, berjarak {km} km
+3e groupe ¦ Nhóm 3 ¦ Kelompok ke-3
+4e groupe ¦ Nhóm 4 ¦ Kelompok ke-4
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Vùng sống, từng thế hệ ¦ Wilayah hidup, generasi demi generasi
+L’aire de vie de tes ancêtres ¦ Vùng sống của tổ tiên bạn ¦ Wilayah hidup leluhur kamu
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Với mỗi thế hệ, vùng chứa phần lớn các lần sinh, kết hôn và qua đời của họ. Cùng khoảng cách như 🧭 Xa nơi chôn nhau. Không bao giờ có người còn sống hay phiếu bảo mật. ¦ Untuk setiap generasi, zona yang memuat sebagian besar kelahiran, pernikahan, dan kematian mereka. Jarak yang sama dengan 🧭 Jauh dari buaian. Tidak pernah orang yang masih hidup atau lembar rahasia.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Lấy tổ tiên của người khởi đầu (“Từ ứng dụng”). ¦ Ambil leluhur dari orang awal kamu (“Dari aplikasi”).
+Génération d’ancêtres ¦ Thế hệ tổ tiên ¦ Generasi leluhur
+Siècle (toute la base) ¦ Thế kỷ (toàn bộ cơ sở dữ liệu) ¦ Abad (seluruh basis data)
+Une vie (les étapes d’une personne) ¦ Một cuộc đời (các chặng của một người) ¦ Satu kehidupan (tahap-tahap satu orang)
+Avec les résidences et recensements ¦ Kèm nơi ở và điều tra dân số ¦ Dengan tempat tinggal dan sensus
+Du clair (anciens) au foncé (récents) ¦ Từ nhạt (xưa nhất) đến đậm (gần nhất) ¦ Dari terang (terlama) ke gelap (terbaru)
+Bleu / orange pour père / mère ¦ Xanh dương / cam cho bên nội / bên ngoại ¦ Biru / oranye untuk ayah / ibu
+L’inverse ¦ Ngược lại ¦ Kebalikannya
+50 % (le cœur) ¦ 50 % (phần lõi) ¦ 50 % (inti)
+Part des événements ¦ Tỷ lệ sự kiện ¦ Bagian peristiwa
+Part gardée ¦ Tỷ lệ giữ lại ¦ Bagian yang disimpan
+Cercle (facile à comparer) ¦ Hình tròn (dễ so sánh) ¦ Lingkaran (mudah dibandingkan)
+Enveloppe (le contour au plus juste) ¦ Bao lồi (đường bao sát nhất) ¦ Selubung (garis luar paling rapat)
+Personne (l’aire d’une vie) ¦ Người (vùng của một đời) ¦ Orang (wilayah satu kehidupan)
+Le milieu des événements ¦ Điểm giữa các sự kiện ¦ Titik tengah peristiwa
+Le lieu de naissance de la personne de départ ¦ Nơi sinh của người khởi đầu ¦ Tempat lahir orang awal
+Le berceau des plus anciens ¦ Nơi chôn nhau của những người xưa nhất ¦ Buaian yang tertua
+Toutes les aires superposées ¦ Mọi vùng chồng lên nhau ¦ Semua wilayah ditumpuk
+Une par case ¦ Mỗi ô một vùng ¦ Satu per kotak
+Une à la fois avec ▶ ¦ Lần lượt từng vùng với ▶ ¦ Satu per satu dengan ▶
+Minimum pour tracer une aire ¦ Tối thiểu để vẽ một vùng ¦ Minimum untuk menggambar wilayah
+5 événements ¦ 5 sự kiện ¦ 5 peristiwa
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Theo các vùng (tổ tiên đi xa vẫn ở ngoài vùng) ¦ Pada wilayah (leluhur yang pergi jauh tetap di luar)
+Cadrer sur tout ¦ Khung toàn bộ ¦ Bingkai semuanya
+Le tableau sous la carte ¦ Bảng dưới bản đồ ¦ Tabel di bawah peta
+Gén. {g} · ses parents ¦ Thế hệ {g} · cha mẹ ¦ Gen. {g} · orang tua
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Bấm: các địa điểm và những nơi ngoài vùng ¦ Klik: tempat-tempatnya dan yang di luar wilayah
+Hors de l’aire ¦ Ngoài vùng ¦ Di luar wilayah
+Rayon ({p} %) ¦ Bán kính ({p} %) ¦ Jari-jari ({p} %)
+trop peu ¦ quá ít ¦ terlalu sedikit
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Vùng sống: {n}, bán kính từ {a} km đến {b} km. ¦ Wilayah hidup: {n}, jari-jari dari {a} km sampai {b} km.
+Aire de vie : pas assez d’événements. ¦ Vùng sống: không đủ sự kiện. ¦ Wilayah hidup: peristiwa tidak cukup.
+Aire de vie : {n}. ¦ Vùng sống: {n}. ¦ Wilayah hidup: {n}.
+L’AIRE DE VIE ¦ VÙNG SỐNG ¦ WILAYAH HIDUP
+L’aire de vie de la famille, siècle par siècle ¦ Vùng sống của gia đình, từng thế kỷ ¦ Wilayah hidup keluarga, abad demi abad
+L’aire de vie des ancêtres de {name} ¦ Vùng sống của tổ tiên {name} ¦ Wilayah hidup leluhur {name}
+L’aire d’une vie : {name} ¦ Vùng của một đời người: {name} ¦ Wilayah satu kehidupan: {name}
+la famille {name} ¦ gia đình {name} ¦ keluarga {name}
+Voir l’aire de vie sur la carte ¦ Xem vùng sống trên bản đồ ¦ Lihat wilayah hidup di peta
+Centre ¦ Tâm ¦ Pusat
+Côté père et côté mère (deux couleurs) ¦ Bên nội và bên ngoại (hai màu) ¦ Pihak ayah dan ibu (dua warna)
+Mes ancêtres, 8 générations ¦ Tổ tiên của tôi, 8 thế hệ ¦ Leluhur saya, 8 generasi
+Toute ma base, siècle par siècle ¦ Toàn bộ cơ sở dữ liệu của tôi, từng thế kỷ ¦ Seluruh basis data saya, abad demi abad
+=aire ¦ vùng ¦ wilayah
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Người đỡ đầu và nhân chứng trên bản đồ ¦ Wali baptis dan saksi di peta
+Les liens (un par ligne) ¦ Các liên kết (mỗi dòng một liên kết) ¦ Hubungan (satu per baris)
+D’où vient le témoin ¦ Nhân chứng đến từ đâu ¦ Asal saksi
+D’où vient le parrain ¦ Người đỡ đầu đến từ đâu ¦ Asal wali baptis
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ Điều ghi trong văn bản, nếu không thì nơi ở vào ngày đó, nếu không thì nơi sinh ¦ Yang tertulis di akta, jika tidak tempat tinggal pada tanggal itu, jika tidak kelahiran
+Seulement ce qui est écrit dans l’acte ¦ Chỉ điều ghi trong văn bản ¦ Hanya yang tertulis di akta
+Seulement sa naissance ¦ Chỉ nơi sinh ¦ Hanya kelahiran
+Nombre de liens ¦ Số liên kết ¦ Jumlah hubungan
+Nombre de personnes différentes ¦ Số người khác nhau ¦ Jumlah orang berbeda
+Liens dans le même village ¦ Liên kết trong cùng làng ¦ Hubungan di desa yang sama
+Anneau autour du point ¦ Vòng quanh điểm ¦ Cincin di sekitar titik
+Un chiffre seulement ¦ Chỉ một con số ¦ Hanya angka
+Rôles montrés ¦ Vai trò hiển thị ¦ Peran yang ditampilkan
+Parrain, marraine, témoin ¦ Cha đỡ đầu, mẹ đỡ đầu, nhân chứng ¦ Ayah baptis, ibu baptis, saksi
+Tous sauf curé et officier ¦ Tất cả trừ linh mục và viên chức ¦ Semua kecuali pastor dan petugas
+Traits montrés ¦ Các đường hiển thị ¦ Garis yang ditampilkan
+À partir de 1 lien ¦ Từ 1 liên kết ¦ Mulai 1 hubungan
+À partir de 2 ¦ Từ 2 ¦ Mulai 2
+À partir de 3 ¦ Từ 3 ¦ Mulai 3
+Les 30 plus forts seulement ¦ Chỉ 30 liên kết mạnh nhất ¦ Hanya 30 yang terkuat
+Par rôle ¦ Theo vai trò ¦ Menurut peran
+Par branche (bleu père, orange mère) ¦ Theo nhánh (xanh dương bên nội, cam bên ngoại) ¦ Menurut cabang (biru ayah, oranye ibu)
+Flèche du village du parrain vers celui de l’acte ¦ Mũi tên từ làng người đỡ đầu đến làng của văn bản ¦ Panah dari desa wali baptis ke desa akta
+La phrase sous la carte ¦ Câu dưới bản đồ ¦ Kalimat di bawah peta
+Clic : les liens derrière ce trait ¦ Bấm: các liên kết sau đường này ¦ Klik: hubungan di balik garis ini
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: {p} % liên kết là từ chính làng này; số còn lại chủ yếu đến từ {others}. ¦ {place}: {p} % hubungan berasal dari desa itu sendiri; sisanya terutama dari {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Tính trên {a} có làng đã biết; {b} không có địa điểm thì không vẽ. ¦ Dihitung dari {a} yang desanya diketahui; {b} tanpa tempat tidak digambar.
+Parrains et témoins : {a} entre {b}. ¦ Người đỡ đầu và nhân chứng: {a} giữa {b}. ¦ Wali baptis dan saksi: {a} antara {b}.
+Parrains et témoins : {n}. ¦ Người đỡ đầu và nhân chứng: {n}. ¦ Wali baptis dan saksi: {n}.
+Filleul ou époux ¦ Con đỡ đầu hoặc vợ chồng ¦ Anak baptis atau pasangan
+{n} autres · triés par date ¦ Thêm {n} · theo ngày ¦ {n} lainnya · menurut tanggal
+Ouvrir dans le Réseau ¦ Mở trong Mạng lưới ¦ Buka di Jaringan
+PARRAINS ET TÉMOINS ¦ NGƯỜI ĐỠ ĐẦU VÀ NHÂN CHỨNG ¦ WALI BAPTIS DAN SAKSI
+Parrains et marraines ¦ Cha mẹ đỡ đầu ¦ Ayah dan ibu baptis
+Parrains, marraines et témoins ¦ Người đỡ đầu và nhân chứng ¦ Wali baptis dan saksi
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Lấy người đỡ đầu và nhân chứng từ gia phả của bạn (“Từ ứng dụng”). ¦ Ambil wali baptis dan saksi dari silsilah kamu (“Dari aplikasi”).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ Các liên kết của 🕸 Mạng lưới quan hệ, trên bản đồ: làng của văn bản và làng nhân chứng đến từ đó. Nhân chứng còn sống không bao giờ được tính. ¦ Hubungan dari 🕸 Jaringan relasi, di peta: desa akta dan desa asal saksi. Saksi yang masih hidup tidak pernah dihitung.
+Aucun lien avec un lieu pour ce choix. ¦ Không có liên kết nào có địa điểm cho lựa chọn này. ¦ Tidak ada hubungan dengan tempat untuk pilihan ini.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Không có liên kết nào cho lựa chọn này (vai trò, thời kỳ, địa điểm). ¦ Tidak ada hubungan untuk pilihan ini (peran, periode, tempat).
+Curé, officier ¦ Linh mục, viên chức ¦ Pastor, petugas
+curé ¦ linh mục ¦ pastor
+Curé ¦ Linh mục ¦ Pastor
+tuteur ¦ người giám hộ ¦ wali
+Voisin ¦ Hàng xóm ¦ Tetangga
+Officier ¦ Viên chức ¦ Petugas
+bapt. ¦ rửa tội ¦ baptis
+naiss. ¦ sinh ¦ lahir
+mar. ¦ cưới ¦ nikah
+inh. ¦ chôn ¦ makam
+# ⚰️ Crises et épidémies (partie 3) — et les départs « Graphique » de 🕸
+Crises et épidémies (les années où les décès montent) ¦ Khủng hoảng và dịch bệnh (những năm số người chết tăng) ¦ Krisis dan wabah (tahun-tahun ketika kematian naik)
+Les décès (un par ligne) ¦ Các ca tử vong (mỗi dòng một ca) ¦ Kematian (satu per baris)
+Cause notée ¦ Nguyên nhân đã ghi ¦ Penyebab tercatat
+Choléra de 1832 ¦ Dịch tả năm 1832 ¦ Kolera 1832
+Clic : les personnes, et ce qui se passait à la même époque ¦ Bấm: những người này, và điều gì xảy ra cùng thời kỳ ¦ Klik: orang-orangnya, dan apa yang terjadi pada masa yang sama
+Comptés avec tout le monde ¦ Tính chung với mọi người ¦ Dihitung bersama semua
+À part ¦ Riêng ¦ Terpisah
+À part (moins de 10 ans) ¦ Riêng (dưới 10 tuổi) ¦ Terpisah (di bawah 10 tahun)
+Pas comptés ¦ Không tính ¦ Tidak dihitung
+Mes ancêtres et leurs familles ¦ Tổ tiên của tôi và gia đình họ ¦ Leluhur saya dan keluarga mereka
+Les enfants à part (moins de 10 ans) ¦ Trẻ em riêng (dưới 10 tuổi) ¦ Anak-anak terpisah (di bawah 10 tahun)
+Les décès de ta généalogie ¦ Các ca tử vong trong gia phả của bạn ¦ Kematian dalam silsilah kamu
+Les décès placés et datés (le décès, sinon l’inhumation ; chaque personne une seule fois), et les crises du 🌍 Monde autour avec tes événements locaux. Jamais un vivant ni une fiche confidentielle. ¦ Các ca tử vong đã đặt và có ngày (ngày mất, nếu không thì ngày chôn; mỗi người chỉ một lần), và các khủng hoảng trong 🌍 Thế giới quanh ta cùng sự kiện địa phương của bạn. Không bao giờ có người còn sống hay phiếu bảo mật. ¦ Kematian yang ditempatkan dan bertanggal (kematian, jika tidak pemakaman; setiap orang hanya sekali), dan krisis dari 🌍 Dunia sekitar dengan peristiwa lokal kamu. Tidak pernah orang yang masih hidup atau lembar rahasia.
+Aucun décès daté avec un lieu pour ce choix. ¦ Không có ca tử vong có ngày và địa điểm cho lựa chọn này. ¦ Tidak ada kematian bertanggal dengan tempat untuk pilihan ini.
+Décès sans année ou sans lieu, comptés à part : {n} ¦ Ca tử vong không có năm hoặc địa điểm, tính riêng: {n} ¦ Kematian tanpa tahun atau tempat, dihitung terpisah: {n}
+Minimum de décès dans l’année ¦ Số ca tử vong tối thiểu trong năm ¦ Minimum kematian dalam setahun
+Décès au moins ¦ Số ca tử vong tối thiểu ¦ Kematian paling sedikit
+2,5 fois l’habitude ¦ Gấp 2,5 lần mức thường ¦ 2,5 kali biasanya
+2 fois ¦ Gấp 2 lần ¦ 2 kali
+3 fois ¦ Gấp 3 lần ¦ 3 kali
+4 fois ¦ Gấp 4 lần ¦ 4 kali
+Fois l’habitude ¦ Số lần so với mức thường ¦ Kali biasanya
+Fenêtre de l’habitude ¦ Khoảng tính mức thường ¦ Jendela tingkat biasa
+5 ans avant et 5 ans après ¦ 5 năm trước và 5 năm sau ¦ 5 tahun sebelum dan 5 tahun sesudah
+10 et 10 ¦ 10 và 10 ¦ 10 dan 10
+Seulement les 10 ans avant ¦ Chỉ 10 năm trước ¦ Hanya 10 tahun sebelumnya
+L’habitude se calcule par ¦ Mức thường được tính bằng ¦ Tingkat biasa dihitung dengan
+La moyenne ¦ Trung bình ¦ Rata-rata
+La médiane (moins dérangée par une autre crise toute proche) ¦ Trung vị (ít bị ảnh hưởng bởi một khủng hoảng gần đó) ¦ Median (kurang terganggu oleh krisis lain yang dekat)
+La commune, les petites regroupées avec leurs voisines ¦ Xã, các xã nhỏ gộp với xã lân cận ¦ Kota, yang kecil digabung dengan tetangganya
+Toujours la commune ¦ Luôn là xã ¦ Selalu kota
+Le département ¦ Tỉnh ¦ Departemen
+Petit village : nombre de décès sur toute la période, moins de ¦ Làng nhỏ: số ca tử vong trong cả thời kỳ, ít hơn ¦ Desa kecil: jumlah kematian sepanjang periode, kurang dari
+Enfant : moins de ¦ Trẻ em: dưới ¦ Anak: di bawah
+Repères proposés ¦ Mốc tham chiếu được đề xuất ¦ Titik acuan yang diusulkan
+Les crises du 🌍 Monde autour qui couvrent la commune, et mes événements ¦ Các khủng hoảng trong 🌍 Thế giới quanh ta bao trùm xã này, và các sự kiện của tôi ¦ Krisis dari 🌍 Dunia sekitar yang mencakup kota itu, dan peristiwa saya
+Toutes les crises de l’année ¦ Mọi khủng hoảng trong năm ¦ Semua krisis tahun itu
+Pas du temps ¦ Bước thời gian ¦ Langkah waktu
+Pas assez de décès placés : moins de ¦ Không đủ ca tử vong đã đặt: ít hơn ¦ Kematian yang ditempatkan tidak cukup: kurang dari
+Pas assez de décès placés pour repérer des crises. ¦ Không đủ ca tử vong đã đặt để nhận ra khủng hoảng. ¦ Kematian yang ditempatkan tidak cukup untuk mengenali krisis.
+Prends les décès de ta généalogie (« Depuis l’app »). ¦ Lấy các ca tử vong từ gia phả của bạn (“Từ ứng dụng”). ¦ Ambil kematian dari silsilah kamu (“Dari aplikasi”).
+LES ANNÉES DE CRISE ¦ NHỮNG NĂM KHỦNG HOẢNG ¦ TAHUN-TAHUN KRISIS
+Les années de crise de la famille ¦ Những năm khủng hoảng của gia đình ¦ Tahun-tahun krisis keluarga
+Les années de crise sur la carte ¦ Những năm khủng hoảng trên bản đồ ¦ Tahun-tahun krisis di peta
+Les années de crise : {n}, sur {d}. ¦ Năm khủng hoảng: {n}, trên {d}. ¦ Tahun krisis: {n}, dari {d}.
+Les années de crise : {n}. ¦ Năm khủng hoảng: {n}. ¦ Tahun krisis: {n}.
+Les années à voir · {n} ¦ Những năm cần xem · {n} ¦ Tahun-tahun untuk dilihat · {n}
+=année à voir ¦ năm cần xem ¦ tahun untuk dilihat
+Habitude ¦ Mức thường ¦ Biasanya
+À la même époque (repère) ¦ Cùng thời kỳ (mốc tham chiếu) ¦ Pada masa yang sama (titik acuan)
+À la même époque : {what} — un repère, pas une explication. ¦ Cùng thời kỳ: {what} — một mốc tham chiếu, không phải lời giải thích. ¦ Pada masa yang sama: {what} — titik acuan, bukan penjelasan.
+Rien de connu dans cette région à cette date. ¦ Không biết gì về vùng này vào thời điểm đó. ¦ Tidak ada yang diketahui di wilayah ini pada tanggal itu.
+rien de connu dans cette région à cette date ¦ không biết gì về vùng này vào thời điểm đó ¦ tidak ada yang diketahui di wilayah ini pada tanggal itu
+cause notée : « {c} » ¦ nguyên nhân đã ghi: “{c}” ¦ penyebab tercatat: “{c}”
+d’habitude {u} par an ¦ thường {u} mỗi năm ¦ biasanya {u} per tahun
+plus de ×5 ¦ hơn ×5 ¦ lebih dari ×5
+×2,5 à 3 ¦ ×2,5 đến 3 ¦ ×2,5 sampai 3
+×3 à 5 ¦ ×3 đến 5 ¦ ×3 sampai 5
+{name} + {n} voisines ¦ {name} + {n} xã lân cận ¦ {name} + {n} tetangga
++ {n} autres ¦ + thêm {n} ¦ + {n} lainnya
+Écrire la commune et l’année près des ronds ¦ Ghi xã và năm cạnh các chấm tròn ¦ Tulis kota dan tahun di samping lingkaran
+À lire avec prudence : l’app compare des nombres de décès, elle ne sait pas pourquoi ils montent. Le repère est ce qui se passait à la même époque : une piste à vérifier dans les actes (cause notée, âge, mois). Sur de petits nombres, le hasard suffit parfois. ¦ Hãy đọc thận trọng: ứng dụng so sánh số ca tử vong, nó không biết vì sao chúng tăng. Mốc tham chiếu là điều xảy ra cùng thời kỳ: một manh mối cần kiểm tra trong văn bản (nguyên nhân đã ghi, tuổi, tháng). Với số nhỏ, đôi khi chỉ do ngẫu nhiên. ¦ Baca dengan hati-hati: aplikasi membandingkan jumlah kematian, ia tidak tahu mengapa naik. Titik acuan adalah apa yang terjadi pada masa yang sama: petunjuk untuk diperiksa di akta (penyebab tercatat, usia, bulan). Pada angka kecil, kadang kebetulan saja sudah cukup.
+Autour de mes ancêtres ¦ Quanh tổ tiên của tôi ¦ Di sekitar leluhur saya
+Parrains et marraines des baptêmes ¦ Người đỡ đầu trong lễ rửa tội ¦ Wali baptis pada pembaptisan
+Témoins des mariages ¦ Nhân chứng đám cưới ¦ Saksi pernikahan
+Tous les liens (parrains, témoins, déclarants…) ¦ Mọi liên kết (người đỡ đầu, nhân chứng, người khai…) ¦ Semua hubungan (wali baptis, saksi, pelapor…)
+années à voir ¦ năm cần xem ¦ tahun untuk dilihat
+année à voir ¦ năm cần xem ¦ tahun untuk dilihat
+Ce qu’on prend ¦ Lấy những gì ¦ Apa yang diambil
+Tout : vu, en partie, à chercher ¦ Tất cả: đã xem, một phần, cần tìm ¦ Semua: sudah dilihat, sebagian, perlu dicari
+Seulement ce qui reste à faire ¦ Chỉ những gì còn phải làm ¦ Hanya yang masih harus dikerjakan
+Seulement ce qui a été vu ¦ Chỉ những gì đã xem ¦ Hanya yang sudah dilihat
+Sans le nom des correspondances ¦ Không có tên người trùng khớp ¦ Tanpa nama kecocokan
+Avec le nom des correspondances (pas pour un export partagé) ¦ Có tên người trùng khớp (không dùng cho bản xuất chia sẻ) ¦ Dengan nama kecocokan (bukan untuk ekspor yang dibagikan)
+Naissances par an, une bougie par décennie ¦ Số ca sinh mỗi năm, một nến cho mỗi thập kỷ ¦ Kelahiran per tahun, satu lilin per dekade
+Décès par an, une bougie par décennie (les années de crise en haut des mèches) ¦ Số ca tử vong mỗi năm, một nến cho mỗi thập kỷ (những năm khủng hoảng ở đỉnh bấc) ¦ Kematian per tahun, satu lilin per dekade (tahun krisis di ujung sumbu)
+Mariages par an, une bougie par décennie ¦ Số cuộc hôn nhân mỗi năm, một nến cho mỗi thập kỷ ¦ Pernikahan per tahun, satu lilin per dekade
+Pas assez d’années datées pour ce choix. ¦ Không đủ năm có ngày tháng cho lựa chọn này. ¦ Tidak cukup tahun bertanggal untuk pilihan ini.
+Naissances par an, décennie par décennie ¦ Số ca sinh mỗi năm, theo từng thập kỷ ¦ Kelahiran per tahun, dekade demi dekade
+Décès par an, décennie par décennie ¦ Số ca tử vong mỗi năm, theo từng thập kỷ ¦ Kematian per tahun, dekade demi dekade
+Mariages par an, décennie par décennie ¦ Số cuộc hôn nhân mỗi năm, theo từng thập kỷ ¦ Pernikahan per tahun, dekade demi dekade
+par an ¦ mỗi năm ¦ per tahun
+Chaque bougie : la 1re et la dernière année de la décennie, l’année la plus basse et la plus haute ¦ Mỗi nến: năm đầu và năm cuối của thập kỷ, năm thấp nhất và năm cao nhất ¦ Setiap lilin: tahun pertama dan terakhir dekade, tahun terendah dan tertinggi

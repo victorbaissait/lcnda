@@ -31,6 +31,15 @@ function gaps_norm(string $s): string
 /** le service d'archives d'un lieu : un département français (par son code, son nom, ou « (19) » dans le nom), sinon le pays */
 function gaps_archive_of(array $place): array
 {
+    // 🐘 une fonction pure, appelée pour chaque acte (466 000 sur une base de 200 000 fiches, mais 20 000 lieux) : gardée par lieu
+    static $memo = [];
+    $mk = (string) ($place['name'] ?? '') . "\x1f" . (string) ($place['county'] ?? '') . "\x1f" . (string) ($place['country'] ?? '') . "\x1f" . (string) ($place['admin2_code'] ?? '');
+    if (isset($memo[$mk])) { return $memo[$mk]; }
+    if (count($memo) > 50000) { $memo = []; }
+    return $memo[$mk] = gaps_archive_of_raw($place);
+}
+function gaps_archive_of_raw(array $place): array
+{
     $deps = gaps_departments();
     $country = trim((string) ($place['country'] ?? ''));
     $french = $country === '' || preg_match('/^(france|fr|fra)$/i', $country);

@@ -1,0 +1,35 @@
+fr ¦ cs ¦ sv ¦ da
+# 🪄 Corrections proposées après « ✨ Lire l’acte » (app-htr-correction.js, heritage-transcribe.js, heritage-more.js)
+« {w} » ajouté au lexique ¦ „{w}“ přidáno do slovníku ¦ ”{w}” har lagts till i ordlistan ¦ »{w}« er føjet til ordlisten
+Garder tel quel ¦ Nechat beze změny ¦ Behåll som det är ¦ Behold som det er
+Ajouter au lexique ¦ Přidat do slovníku ¦ Lägg till i ordlistan ¦ Føj til ordlisten
+Ce mot ne sera plus souligné ¦ Toto slovo už nebude podtržené ¦ Det här ordet stryks inte längre under ¦ Dette ord bliver ikke længere understreget
+Proposer des corrections (conseillé) ¦ Navrhovat opravy (doporučeno) ¦ Föreslå rättelser (rekommenderas) ¦ Foreslå rettelser (anbefales)
+Prudent (conseillé) ¦ Opatrně (doporučeno) ¦ Försiktigt (rekommenderas) ¦ Forsigtigt (anbefales)
+Plus de propositions ¦ Více návrhů ¦ Fler förslag ¦ Flere forslag
+Correction proposée : « {x} » — clique pour choisir ¦ Navržená oprava: „{x}“ — klikni a vyber ¦ Föreslagen rättelse: ”{x}” — klicka för att välja ¦ Foreslået rettelse: »{x}« — klik for at vælge
+=correction proposée ¦ navržená oprava|navržené opravy|navržených oprav ¦ föreslagen rättelse|föreslagna rättelser ¦ foreslået rettelse|foreslåede rettelser
+(soulignées en violet : clique un mot) ¦ (podtržené fialově: klikni na slovo) ¦ (understrukna i lila: klicka på ett ord) ¦ (understreget med lilla: klik på et ord)
+Aucune correction à proposer ¦ Žádná oprava k navržení ¦ Ingen rättelse att föreslå ¦ Ingen rettelse at foreslå
+Corrections proposées : non ¦ Navrhované opravy: ne ¦ Föreslagna rättelser: av ¦ Foreslåede rettelser: fra
+Accepter les {n} propositions sûres ¦ Přijmout jisté návrhy ({n}) ¦ Godta de {n} säkra förslagen ¦ Godkend de {n} sikre forslag
+Accepter la proposition sûre ¦ Přijmout jistý návrh ¦ Godta det säkra förslaget ¦ Godkend det sikre forslag
+=proposition sûre acceptée ¦ přijatý jistý návrh|přijaté jisté návrhy|přijatých jistých návrhů ¦ säkert förslag godtaget|säkra förslag godtagna ¦ sikkert forslag godkendt|sikre forslag godkendt
+« {w} » gardé tel quel ¦ „{w}“ ponecháno beze změny ¦ ”{w}” behölls som det är ¦ »{w}« beholdt som det er
+Proposer des corrections pour les mots mal lus (un mot souligné : clique-le pour choisir) ¦ Navrhovat opravy špatně přečtených slov (podtržené slovo: klikni na ně a vyber) ¦ Föreslå rättelser för feltolkade ord (ett understruket ord: klicka på det för att välja) ¦ Foreslå rettelser til fejllæste ord (et understreget ord: klik på det for at vælge)
+Corrections ¦ Opravy ¦ Rättelser ¦ Rettelser
+Les corrections proposées ne sont pas chargées. ¦ Navrhované opravy nejsou načtené. ¦ De föreslagna rättelserna är inte inlästa. ¦ De foreslåede rettelser er ikke indlæst.
+Corrections proposées après la lecture ¦ Opravy navržené po přečtení ¦ Rättelser som föreslås efter läsningen ¦ Rettelser foreslået efter læsningen
+Après « ✨ Lire l’acte », les mots qui ressemblent à un mot connu (« décembe » → « décembre ») sont soulignés en violet : un clic, et tu choisis. Rien n’est changé sans toi. Le lexique : les mots des actes, ceux de « 📜 Aide à la lecture », et les noms, prénoms, lieux et métiers de ta base (sans les vivants ni les fiches confidentielles). ¦ Po „✨ Přečíst záznam“ jsou slova podobná známému slovu („décembe“ → „décembre“) podtržena fialově: jedno kliknutí a vybereš si. Bez tebe se nic nezmění. Slovník: slova ze záznamů, z „📜 Pomoc se čtením“ a příjmení, jména, místa a povolání z tvé databáze (bez žijících osob a důvěrných karet). ¦ Efter ”✨ Läs handlingen” stryks ord som liknar ett känt ord (”décembe” → ”décembre”) under i lila: ett klick och du väljer. Inget ändras utan dig. Ordlistan: orden i handlingarna, orden i ”📜 Läshjälp” och efternamn, förnamn, platser och yrken i din databas (utan levande personer och konfidentiella poster). ¦ Efter »✨ Læs dokumentet« bliver ord, der ligner et kendt ord (»décembe« → »décembre«), understreget med lilla: ét klik, og du vælger. Intet ændres uden dig. Ordlisten: ordene i dokumenterne, ordene i »📜 Læsehjælp« og efternavne, fornavne, steder og erhverv i din database (uden levende personer og fortrolige poster).
+Ton lexique personnel : {x}. ¦ Tvůj vlastní slovník: {x}. ¦ Din egen ordlista: {x}. ¦ Din egen ordliste: {x}.
+Vider le lexique personnel ¦ Vyprázdnit vlastní slovník ¦ Töm din egen ordlista ¦ Tøm din egen ordliste
+Ton lexique personnel est vide : « Ajouter au lexique » dans le menu d’un mot souligné. ¦ Tvůj vlastní slovník je prázdný: „Přidat do slovníku“ v nabídce podtrženého slova. ¦ Din egen ordlista är tom: ”Lägg till i ordlistan” i menyn för ett understruket ord. ¦ Din egen ordliste er tom: »Føj til ordlisten« i menuen for et understreget ord.
+Lexique personnel vidé ¦ Vlastní slovník vyprázdněn ¦ Egen ordlista tömd ¦ Egen ordliste tømt
+Il manque l’accent ¦ Chybí diakritika ¦ Accenten saknas ¦ Accenten mangler
+« {x} » ressemble à « {y} » ¦ „{x}“ se podobá „{y}“ ¦ ”{x}” liknar ”{y}” ¦ »{x}« ligner »{y}«
+« {x} » collé au mot suivant ¦ „{x}“ přilepené k dalšímu slovu ¦ ”{x}” hopskrivet med nästa ord ¦ »{x}« skrevet sammen med næste ord
+Deux mots collés ¦ Dvě slepená slova ¦ Två hopskrivna ord ¦ To ord skrevet sammen
+Après « mil {x} », on attend « cent » ¦ Po „mil {x}“ se čeká „cent“ ¦ Efter ”mil {x}” väntas ”cent” ¦ Efter »mil {x}« forventes »cent«
+Dans une date en toutes lettres : « {x} » ¦ V datu psaném slovy: „{x}“ ¦ I ett datum skrivet med bokstäver: ”{x}” ¦ I en dato skrevet med bogstaver: »{x}«
+Un mois, dans une date ¦ Měsíc v datu ¦ En månad, i ett datum ¦ En måned, i en dato
+À cet endroit : « {where} » (ligne {n}) ¦ Na tomto místě: „{where}“ (řádek {n}) ¦ På det här stället: ”{where}” (rad {n}) ¦ På dette sted: »{where}« (linje {n})

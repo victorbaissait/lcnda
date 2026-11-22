@@ -1,0 +1,24 @@
+fr ¦ ro
+À préciser ¦ De precizat
+Lecture approfondie (IA sur cet ordinateur) ¦ Citire aprofundată (IA pe acest computer)
+En plus du moteur ci-dessus : un modèle « vision » ouvert (Qwen3-VL, licence Apache 2.0) qui lit toute la page, servi par Ollama sur cet ordinateur. Facultatif. Rien ne part sur Internet, sauf le téléchargement du modèle (3 à 6 Go, une seule fois). ¦ Pe lângă motorul de mai sus: un model „vizual” deschis (Qwen3-VL, licență Apache 2.0) care citește toată pagina, rulat de Ollama pe acest computer. Opțional. Nimic nu pleacă pe Internet, în afară de descărcarea modelului (3–6 GB, o singură dată).
+Ensuite, dans l’atelier de transcription : « 🔍 Essayer aussi la lecture approfondie » montre les deux lectures côte à côte, et tu gardes la meilleure. ¦ Apoi, în atelierul de transcriere: „🔍 Încearcă și citirea aprofundată” arată cele două citiri una lângă alta, iar tu o păstrezi pe cea mai bună.
+Installer ou vérifier la lecture approfondie… ¦ Instalează sau verifică citirea aprofundată…
+La lecture approfondie n’est pas encore chargée : réessaie dans un instant. ¦ Citirea aprofundată nu este încă încărcată: încearcă din nou într-o clipă.
+Pour lire un acte : ouvre son image dans l’atelier de transcription (« 📜 Atelier »), puis « ✨ Lire l’acte ». ¦ Pentru a citi un act: deschide imaginea lui în atelierul de transcriere („📜 Atelier”), apoi „✨ Citește actul”.
+Transcrire ¦ Transcrie
+Ouvrir l’outil de transcription complet sur cette image ¦ Deschide instrumentul complet de transcriere pentru această imagine
+Le modèle a réfléchi sans écrire de transcription. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Modelul a reflectat fără să scrie o transcriere. Decupează o zonă mai mică (câteva rânduri) sau încearcă modelul 8B, apoi relansează.
+Le modèle n’a rien lu sur cette image. Recadre une zone plus petite (quelques lignes) ou essaie le modèle 8B, puis relance. ¦ Modelul nu a citit nimic pe această imagine. Decupează o zonă mai mică (câteva rânduri) sau încearcă modelul 8B, apoi relansează.
+La lecture a été arrêtée. ¦ Citirea a fost oprită.
+Modèle : {m} · {n} s ¦ Model: {m} · {n} s
+Ce document n’a pas d’image : l’Atelier de transcription a besoin d’une image. ¦ Acest document nu are imagine: Atelierul de transcriere are nevoie de o imagine.
+L’Atelier de transcription n’est pas encore chargé : réessaie dans un instant. ¦ Atelierul de transcriere nu este încă încărcat: încearcă din nou într-o clipă.
+L’Atelier de transcription n’a pas pu s’ouvrir : {x} ¦ Atelierul de transcriere nu s-a putut deschide: {x}
+Lecture approfondie (IA) ¦ Citire aprofundată (IA)
+Impossible de suivre la lecture : {x} ¦ Citirea nu poate fi urmărită: {x}
+Le programme de lecture n’a pas démarré. ¦ Programul de citire nu a pornit.
+Acte de notoriété ¦ Act de notorietate
+Cadres ¦ Chenare
+Opacité des cadres de couleur (0 = presque invisibles) ¦ Opacitatea chenarelor colorate (0 = aproape invizibile)
+Ce document n’a pas pu être relu : réessaie dans un instant. ¦ Documentul nu a putut fi recitit: încearcă din nou într-o clipă.

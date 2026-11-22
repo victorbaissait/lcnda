@@ -453,7 +453,12 @@
         const nextSame = () => { const v = ta.value; let s = ta.selectionStart, e2 = ta.selectionEnd; if (s === e2) { while (s > 0 && /[\w$-]/.test(v[s - 1])) s--; while (e2 < v.length && /[\w$-]/.test(v[e2])) e2++; if (s === e2) return; api.reveal(s, e2); return; }
             const w = v.slice(s, e2); let i = v.indexOf(w, e2); if (i < 0) i = v.indexOf(w); if (i >= 0) { api.reveal(i, i + w.length); say(i <= s ? i18n('Retour au début.') : ''); } };
         const say = t => { if (!t) return; posEl.dataset.msg = t; status(); clearTimeout(say.t); say.t = setTimeout(() => { delete posEl.dataset.msg; status(); }, 1800); };
-        const showKeys = () => { const h = `<div class="swc-keys" role="dialog" aria-label="Raccourcis du code"><b>⌨ Raccourcis</b><dl>${KEYS_HELP.map(([k, l]) => `<dt>${esc(k)}</dt><dd>${esc(i18n(l))}</dd>`).join('')}</dl><small>${i18n('Sur PC et Linux : Ctrl au lieu de ⌘, Alt au lieu de ⌥.')}</small></div>`; const old = el.querySelector('.swc-keys'); if (old) { old.remove(); return; } el.insertAdjacentHTML('beforeend', h); setTimeout(() => document.addEventListener('pointerdown', function off(ev) { if (!ev.target.closest('.swc-keys')) { el.querySelector('.swc-keys')?.remove(); document.removeEventListener('pointerdown', off, true); } }, true), 0); };
+        let keysOff = null;
+        const showKeys = () => { const h = `<div class="swc-keys" role="dialog" aria-label="Raccourcis du code"><b>⌨ Raccourcis</b><dl>${KEYS_HELP.map(([k, l]) => `<dt>${esc(k)}</dt><dd>${esc(i18n(l))}</dd>`).join('')}</dl><small>${i18n('Sur PC et Linux : Ctrl au lieu de ⌘, Alt au lieu de ⌥.')}</small></div>`; const old = el.querySelector('.swc-keys'); if (old) { old.remove(); keysOff?.(); return; } el.insertAdjacentHTML('beforeend', h);
+            // un clic ailleurs ferme : écouté tout de suite (on est dans le clic qui l'ouvre, son « pointerdown » est passé), sinon un clic rapide, sur une machine chargée, ne fermait rien
+            const off = ev => { if (ev.target.closest?.('.swc-keys, [data-swc-act="keys"]')) return; /* le bouton ⌨ lui-même : son clic referme */ el.querySelector('.swc-keys')?.remove(); keysOff(); };
+            keysOff = () => { document.removeEventListener('pointerdown', off, true); keysOff = null; };
+            document.addEventListener('pointerdown', off, true); };
         /* ── barre du bas : position, sélection, jumelle, vérification ── */
         let lintT = 0, lintList = [];
         const status = () => { const v = ta.value, s = ta.selectionStart, e2 = ta.selectionEnd, line = v.slice(0, s).split('\n').length, col = s - v.lastIndexOf('\n', s - 1);

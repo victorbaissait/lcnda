@@ -1,0 +1,145 @@
+fr ¦ ru ¦ uk
+# Zone « transcription-actes » : recadrage, lecture approfondie (Ollama), « Ce que l’app a trouvé » (heritage-transcribe-acte.js, lib/transcription_actes.php)
+LECTURE AUTOMATIQUE ¦ АВТОМАТИЧЕСКОЕ ЧТЕНИЕ ¦ АВТОМАТИЧНЕ ЧИТАННЯ
+Recadrer sur le texte ? ¦ Обрезать по тексту? ¦ Обрізати за текстом?
+Recadrer sur le texte ¦ Обрезать по тексту ¦ Обрізати за текстом
+Lire quand même ¦ Всё равно прочитать ¦ Однаково прочитати
+Cette image ressemble à une capture d’écran ¦ Это изображение похоже на снимок экрана ¦ Це зображення схоже на знімок екрана
+(boutons et bords gris autour) : la lecture sera moins bonne. Télécharge l’image en grand sur le site des archives, ou recadre sur le texte. ¦ (кнопки и серые края вокруг): чтение будет хуже. Скачай изображение в большом размере с сайта архива или обрежь его по тексту. ¦ (кнопки й сірі краї навколо): читання буде гіршим. Завантаж зображення великого розміру з сайту архіву або обріж його за текстом.
+La zone qui sera lue ¦ Область, которая будет прочитана ¦ Область, яку буде прочитано
+Le cadre bleu montre la zone qui sera lue. Pour choisir toi-même, dessine une zone (▭) puis « ✨ Lire cette zone ». ¦ Синяя рамка показывает область, которая будет прочитана. Чтобы выбрать самому, нарисуй область (▭), затем «✨ Прочитать эту область». ¦ Синя рамка показує область, яку буде прочитано. Щоб вибрати самому, намалюй область (▭), потім «✨ Прочитати цю область».
+La lecture à la main a donné un texte peu sûr ¦ Чтение рукописи дало ненадёжный текст ¦ Читання рукопису дало ненадійний текст
+({x} % de mots douteux). Souvent à cause des bords de l’écran autour de l’acte, ou d’une écriture trop difficile pour ce modèle. ¦ ({x} % сомнительных слов). Часто из-за краёв экрана вокруг записи или слишком трудного для этой модели почерка. ¦ ({x} % сумнівних слів). Часто через краї екрана навколо запису або почерк, надто складний для цієї моделі.
+Recadrer et relire ¦ Обрезать и перечитать ¦ Обрізати й перечитати
+Essayer la lecture approfondie ¦ Попробовать углублённое чтение ¦ Спробувати поглиблене читання
+LECTURE APPROFONDIE ¦ УГЛУБЛЁННОЕ ЧТЕНИЕ ¦ ПОГЛИБЛЕНЕ ЧИТАННЯ
+Lecture approfondie ¦ Углублённое чтение ¦ Поглиблене читання
+Ce qu’il faut ¦ Что нужно ¦ Що потрібно
+Ollama (gratuit, open source) et un modèle vision ouvert, au choix : ¦ Ollama (бесплатно, открытый код) и открытая визуальная модель на выбор: ¦ Ollama (безкоштовно, відкритий код) і відкрита візуальна модель на вибір:
+le meilleur, ≈ {x} Go ¦ лучшая, ≈ {x} ГБ ¦ найкраща, ≈ {x} ГБ
+plus léger, ≈ {x} Go, pour un ordinateur modeste ¦ легче, ≈ {x} ГБ, для скромного компьютера ¦ легша, ≈ {x} ГБ, для скромного комп’ютера
+déjà téléchargé ¦ уже скачана ¦ уже завантажено
+8 Go conseillés (16 Go pour le 8B) · téléchargé une seule fois ¦ рекомендуется 8 ГБ (16 ГБ для 8B) · скачивается один раз ¦ рекомендовано 8 ГБ (16 ГБ для 8B) · завантажується один раз
+≈ 20 à 60 s par page sur un ordinateur récent ¦ ≈ 20–60 с на страницу на современном компьютере ¦ ≈ 20–60 с на сторінку на сучасному комп’ютері
+Confidentialité ¦ Конфиденциальность ¦ Конфіденційність
+rien ne quitte ton ordinateur ; l’app vérifie qu’Ollama ne répond que sur ton ordinateur ¦ ничего не покидает твой компьютер; приложение проверяет, что Ollama отвечает только на твоём компьютере ¦ ніщо не залишає твій комп’ютер; застосунок перевіряє, що Ollama відповідає лише на твоєму комп’ютері
+Recherche d’Ollama sur cet ordinateur… ¦ Поиск Ollama на этом компьютере… ¦ Пошук Ollama на цьому комп’ютері…
+L’adresse d’Ollama n’est pas sur cet ordinateur : la lecture approfondie est refusée. ¦ Адрес Ollama не на этом компьютере: углублённое чтение запрещено. ¦ Адреса Ollama не на цьому комп’ютері: поглиблене читання заборонено.
+Ollama n’est pas encore sur cet ordinateur. ¦ Ollama ещё нет на этом компьютере. ¦ Ollama ще немає на цьому комп’ютері.
+Installe-le une fois depuis son site (gratuit), lance-le, puis « ↻ Vérifier à nouveau ». ¦ Установи его один раз с его сайта (бесплатно), запусти, затем «↻ Проверить снова». ¦ Встанови його один раз з його сайту (безкоштовно), запусти, потім «↻ Перевірити знову».
+Ollama est installé mais ne tourne pas. ¦ Ollama установлена, но не запущена. ¦ Ollama встановлено, але не запущено.
+Lance l’application Ollama, puis « ↻ Vérifier à nouveau ». ¦ Запусти приложение Ollama, затем «↻ Проверить снова». ¦ Запусти застосунок Ollama, потім «↻ Перевірити знову».
+Prêt : la lecture se fait sur cet ordinateur, sans Internet. ¦ Готово: чтение выполняется на этом компьютере, без Интернета. ¦ Готово: читання відбувається на цьому комп’ютері, без Інтернету.
+Télécharger Ollama (ollama.com) ¦ Скачать Ollama (ollama.com) ¦ Завантажити Ollama (ollama.com)
+Installer la lecture approfondie ¦ Установить углублённое чтение ¦ Встановити поглиблене читання
+Lire l’acte avec ce modèle ¦ Прочитать запись этой моделью ¦ Прочитати запис цією моделлю
+Vérifier à nouveau ¦ Проверить снова ¦ Перевірити знову
+« 🔍 Essayer aussi la lecture approfondie » sur une page déjà lue montre les deux textes côte à côte, et on garde la meilleure. Relis toujours : un modèle peut se tromper sur les noms. ¦ «🔍 Попробовать и углублённое чтение» на уже прочитанной странице показывает оба текста рядом, и ты оставляешь лучший. Всегда перечитывай: модель может ошибиться в именах. ¦ «🔍 Спробувати й поглиблене читання» на вже прочитаній сторінці показує обидва тексти поруч, і ти залишаєш кращий. Завжди перечитуй: модель може помилитися в іменах.
+Téléchargement du modèle… {done} sur {total} ¦ Загрузка модели… {done} из {total} ¦ Завантаження моделі… {done} з {total}
+Téléchargement du modèle… ¦ Загрузка модели… ¦ Завантаження моделі…
+Lecture approfondie… {n} s ¦ Углублённое чтение… {n} с ¦ Поглиблене читання… {n} с
+La lecture approfondie n’a pas abouti. ¦ Углублённое чтение не удалось. ¦ Поглиблене читання не вдалося.
+Les deux lectures côte à côte ¦ Оба прочтения рядом ¦ Обидва прочитання поруч
+Le texte lu ¦ Прочитанный текст ¦ Прочитаний текст
+Écriture à la main ¦ Рукописный текст ¦ Рукописний текст
+Garder celle-ci ¦ Оставить этот ¦ Залишити цей
+Mettre dans le texte ¦ Вставить в текст ¦ Вставити в текст
+La lecture approfondie est installée. ¦ Углублённое чтение установлено. ¦ Поглиблене читання встановлено.
+Défunte ¦ Умершая ¦ Померла
+Conjointe ¦ Супруга ¦ Дружина
+Autre personne ¦ Другое лицо ¦ Інша особа
+{n} ans → née vers {year} ¦ {n} лет → родилась около {year} ¦ {n} р. → народилася близько {year}
+{n} ans → né vers {year} ¦ {n} лет → родился около {year} ¦ {n} р. → народився близько {year}
+Aucune personne trouvée dans le texte : relis-le, puis « 🧭 Repérer ». ¦ В тексте не найдено ни одного человека: перечитай его, затем «🧭 Найти». ¦ У тексті не знайдено жодної особи: перечитай його, потім «🧭 Знайти».
+TRANSCRIPTION ¦ РАСШИФРОВКА ¦ ТРАНСКРИПЦІЯ
+Ce que l’app a trouvé dans l’acte ¦ Что приложение нашло в записи ¦ Що застосунок знайшов у записі
+Ajouter à la généalogie ¦ Добавить в генеалогию ¦ Додати до генеалогії
+Garder seulement la transcription ¦ Оставить только расшифровку ¦ Залишити лише транскрипцію
+demeurant à {place} ¦ проживающий в {place} ¦ мешкає в {place}
+fille de {a} et de {b} ¦ дочь {a} и {b} ¦ донька {a} і {b}
+fils de {a} et de {b} ¦ сын {a} и {b} ¦ син {a} і {b}
+fille de {a} ¦ дочь {a} ¦ донька {a}
+fils de {a} ¦ сын {a} ¦ син {a}
+sœur de {name} ¦ сестра: {name} ¦ сестра: {name}
+frère de {name} ¦ брат: {name} ¦ брат: {name}
+parent de {name} ¦ родственник: {name} ¦ родич: {name}
+conjoint décédé de {name} ¦ покойный супруг: {name} ¦ покійний чоловік: {name}
+conjoint de {name} ¦ супруг: {name} ¦ чоловік: {name}
+décédée avant l’acte ¦ умерла до записи ¦ померла до запису
+décédé avant l’acte ¦ умер до записи ¦ помер до запису
+Relier à cette fiche ¦ Связать с этой карточкой ¦ Пов’язати з цією карткою
+Reliée à : ¦ Связано с: ¦ Пов’язано з:
+Fiches proches : ¦ Похожие карточки: ¦ Схожі картки:
+Fiche existante : ¦ Существующая карточка: ¦ Наявна картка:
+même personne probable ¦ вероятно, тот же человек ¦ імовірно, та сама особа
+Pas de fiche · restera dans l’acte avec son rôle, sans créer de fiche ¦ Нет карточки · останется в записи со своей ролью, без создания карточки ¦ Немає картки · залишиться в записі зі своєю роллю, без створення картки
+Aucune fiche : elle sera créée et reliée comme mère de {name} ¦ Карточки нет: она будет создана и связана как мать: {name} ¦ Картки немає: її буде створено й пов’язано як матір: {name}
+Aucune fiche : elle sera créée et reliée comme père de {name} ¦ Карточки нет: она будет создана и связана как отец: {name} ¦ Картки немає: її буде створено й пов’язано як батька: {name}
+Aucune fiche : elle sera créée ¦ Карточки нет: она будет создана ¦ Картки немає: її буде створено
+Témoin seul ¦ Только свидетель ¦ Лише свідок
+Que faire de cette personne ¦ Что сделать с этим человеком ¦ Що зробити з цією особою
+Décès estimé avant l’acte ¦ Смерть предположительно до записи ¦ Смерть орієнтовно до запису
+Gardés dans l’acte, sans fiche ¦ Оставлены в записи, без карточки ¦ Залишені в записі, без картки
+La source ¦ Источник ¦ Джерело
+déjà dans ta base, reprise ¦ уже в твоей базе, используется повторно ¦ уже в твоїй базі, використано повторно
+Relever à nouveau ¦ Извлечь заново ¦ Витягти знову
+Compris : {date} ¦ Понято: {date} ¦ Зрозуміло: {date}
+Les personnes ({n}) ¦ Люди ({n}) ¦ Особи ({n})
+Ce que l’acte ajoute aussi ¦ Что ещё добавляет запись ¦ Що ще додає запис
+Naissance estimée d’après l’âge (marquée « estimée ») ¦ Рождение по возрасту (отмечено «оценка») ¦ Народження за віком (позначено «оцінка»)
+Décès d’avant l’acte (« feu », « veuve de ») ¦ Смерти до записи («покойный», «вдова») ¦ Смерті до запису («покійний», «вдова»)
+Domiciles ¦ Места жительства ¦ Місця проживання
+La source, toute prête ¦ Источник, уже готов ¦ Джерело, уже готове
+La même source est déjà dans ta base : elle est reprise au lieu d’en créer une deuxième. ¦ Тот же источник уже есть в твоей базе: он используется повторно, второй не создаётся. ¦ Те саме джерело вже є в твоїй базі: воно використовується повторно, друге не створюється.
+Remplie d’après le champ Source, le nom du fichier et le texte lu autour de l’image. Vérifie avant d’ajouter. ¦ Заполнено по полю «Источник», имени файла и тексту, прочитанному вокруг изображения. Проверь перед добавлением. ¦ Заповнено за полем «Джерело», назвою файлу й текстом, прочитаним навколо зображення. Перевір перед додаванням.
+Remplie d’après le champ Source et le nom du fichier. Vérifie avant d’ajouter. ¦ Заполнено по полю «Источник» и имени файла. Проверь перед добавлением. ¦ Заповнено за полем «Джерело» й назвою файлу. Перевір перед додаванням.
+Voilà ce qui va entrer dans ta généalogie ¦ Вот что войдёт в твою генеалогию ¦ Ось що потрапить до твоєї генеалогії
+Rien n’est écrasé : une information différente de la fiche est proposée, jamais imposée. « ↶ Annuler » défait tout l’ajout d’un coup. ¦ Ничего не перезаписывается: сведения, отличные от карточки, предлагаются, а не навязываются. «↶ Отменить» отменяет всё добавление сразу. ¦ Нічого не перезаписується: відомості, що відрізняються від картки, пропонуються, а не нав’язуються. «↶ Скасувати» скасовує все додавання одразу.
+C’est elle : relier ¦ Это она: связать ¦ Це вона: пов’язати
+C’est lui : relier ¦ Это он: связать ¦ Це він: пов’язати
+Ce n’est pas elle ¦ Это не она ¦ Це не вона
+Ce n’est pas lui ¦ Это не он ¦ Це не він
+ajouter ¦ добавить ¦ додати
+{name} : l’acte et la fiche côte à côte ¦ {name}: запись и карточка рядом ¦ {name}: запис і картка поруч
+Dans l’acte ¦ В записи ¦ У записі
+Fiche · {name} ¦ Карточка · {name} ¦ Картка · {name}
+vers {year} ({n} ans) ¦ около {year} ({n} лет) ¦ близько {year} ({n} р.)
+{date} avec {name} ¦ {date} с: {name} ¦ {date} з: {name}
+avant le {date} ¦ до {date} ¦ до {date}
+Les parents sont les mêmes : c’est très probablement elle. ¦ Родители те же: очень вероятно, это она. ¦ Батьки ті самі: дуже ймовірно, це вона.
+Les parents sont les mêmes : c’est très probablement lui. ¦ Родители те же: очень вероятно, это он. ¦ Батьки ті самі: дуже ймовірно, це він.
+Les parents ne sont pas les mêmes : vérifie avant de relier. ¦ Родители не совпадают: проверь, прежде чем связывать. ¦ Батьки не збігаються: перевір, перш ніж пов’язувати.
+La date de naissance de la fiche est gardée (elle est plus précise que l’âge de l’acte). ¦ Дата рождения в карточке сохраняется (она точнее возраста в записи). ¦ Дата народження в картці зберігається (вона точніша за вік у записі).
+✓ Acte ajouté : {what} ¦ ✓ Запись добавлена: {what} ¦ ✓ Запис додано: {what}
+Déjà d’autres parents, lien non fait : {names} ¦ Уже есть другие родители, связь не создана: {names} ¦ Уже є інші батьки, зв’язок не створено: {names}
+Un modèle « vision » ouvert qui tourne sur ton ordinateur (Ollama) : lit mieux les écritures difficiles, plus lent ¦ Открытая «визуальная» модель на твоём компьютере (Ollama): лучше читает трудный почерк, медленнее ¦ Відкрита «візуальна» модель на твоєму комп’ютері (Ollama): краще читає складний почерк, повільніше
+L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches ¦ Событие, люди и их связи, источник: связать, сравнить или создать карточки ¦ Подія, особи та їхні зв’язки, джерело: пов’язати, порівняти чи створити картки
+Ce que l’app a trouvé… ¦ Что нашло приложение… ¦ Що знайшов застосунок…
+La lecture approfondie n’est pas chargée. ¦ Углублённое чтение не загружено. ¦ Поглиблене читання не завантажено.
+Lecture du texte autour de l’acte… ¦ Чтение текста вокруг записи… ¦ Читання тексту навколо запису…
+Le texte est vide : lis ou écris d’abord l’acte. ¦ Текст пуст: сначала прочитай или напечатай запись. ¦ Текст порожній: спочатку прочитай або надрукуй запис.
+Personnes gardées dans la transcription, sans créer de fiche. ¦ Люди оставлены в расшифровке, без создания карточек. ¦ Особи залишено в транскрипції, без створення карток.
+Père du défunt ¦ Отец умершего ¦ Батько померлого
+Mère du défunt ¦ Мать умершего ¦ Мати померлого
+Déclarant ¦ Заявитель ¦ Заявник
+Acte de mariage ¦ Запись о браке ¦ Запис про шлюб
+Acte de baptême ¦ Запись о крещении ¦ Запис про хрещення
+Acte de naissance ¦ Запись о рождении ¦ Запис про народження
+Acte de sépulture ¦ Запись о погребении ¦ Запис про поховання
+Registre ¦ Книга ¦ Книга
+Vue ¦ Кадр ¦ Кадр
+Vues en tout ¦ Всего кадров ¦ Усього кадрів
+La lecture approfondie ne parle qu’à Ollama sur cet ordinateur (127.0.0.1) : adresse refusée. ¦ Углублённое чтение работает только с Ollama на этом компьютере (127.0.0.1): адрес отклонён. ¦ Поглиблене читання працює лише з Ollama на цьому комп’ютері (127.0.0.1): адресу відхилено.
+Modèle de lecture approfondie inconnu. ¦ Неизвестная модель углублённого чтения. ¦ Невідома модель поглибленого читання.
+La lecture approfondie a besoin de l’extension cURL de PHP. ¦ Для углублённого чтения нужно расширение PHP cURL. ¦ Для поглибленого читання потрібне розширення PHP cURL.
+Ollama ne répond pas sur cet ordinateur : installe-le (ollama.com), lance-le, puis réessaie. ¦ Ollama не отвечает на этом компьютере: установи её (ollama.com), запусти и попробуй снова. ¦ Ollama не відповідає на цьому комп’ютері: встанови її (ollama.com), запусти й спробуй знову.
+Image manquante. ¦ Нет изображения. ¦ Немає зображення.
+Image trop lourde. ¦ Изображение слишком тяжёлое. ¦ Зображення завелике за обсягом.
+Image trop grande. ¦ Изображение слишком большое. ¦ Зображення завелике.
+Ce modèle n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Эта модель ещё не скачана: «⤓ Установить углублённое чтение». ¦ Цю модель ще не завантажено: «⤓ Встановити поглиблене читання».
+Une fiche à relier n’existe plus : choisis-en une autre. ¦ Карточка для связи больше не существует: выбери другую. ¦ Картки для зв’язку вже немає: вибери іншу.
+Une personne à créer n’a ni prénom ni nom. ¦ У создаваемого человека нет ни имени, ни фамилии. ¦ Особа для створення не має ні імені, ні прізвища.
+Trop de personnes dans un seul acte. ¦ Слишком много людей в одной записи. ¦ Забагато осіб в одному записі.
+Annulation impossible : ce n’est pas l’ajout d’un acte. ¦ Отмена невозможна: это не добавление записи. ¦ Скасування неможливе: це не додавання запису.
+Le téléchargement du modèle n’a pas abouti. ¦ Загрузка модели не удалась. ¦ Завантаження моделі не вдалося.
+La lecture approfondie a pris trop de temps. ¦ Углублённое чтение заняло слишком много времени. ¦ Поглиблене читання тривало надто довго.

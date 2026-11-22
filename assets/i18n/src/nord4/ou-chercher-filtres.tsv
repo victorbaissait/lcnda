@@ -1,0 +1,75 @@
+fr ¦ fi ¦ hu
+# 🌍 Où chercher ? — filtres par sorte de source (docs/design/ou-chercher-filtres.html)
+Ouvrir la page filtrée sur une sorte de source ¦ Avaa sivu suodatettuna yhteen lähdetyyppiin ¦ Oldal megnyitása egy forrásfajtára szűrve
+Les autres sortes ¦ Muut tyypit ¦ A többi fajta
+Proposés ({n} sur {m}) ¦ Ehdotetut ({n}/{m}) ¦ Javasolt ({n}/{m})
+✓ Déjà cherchés ({n} sur {m}) ¦ ✓ Jo haetut ({n}/{m}) ¦ ✓ Már átnézve ({n}/{m})
+Écartés ({n} sur {m}) ¦ Poissuljetut ({n}/{m}) ¦ Kizárva ({n}/{m})
+Chercher un site… (ex. Gallica, matricule) ¦ Hae sivustoa… (esim. Gallica, kantakortti) ¦ Oldal keresése… (pl. Gallica, törzslap)
+Sorte de source ¦ Lähteen tyyppi ¦ Forrásfajta
+Ses pays : {list} ¦ Maat: {list} ¦ Országai: {list}
+Ses pays ¦ Maat ¦ Országai
+Un seul : {country} ¦ Vain yksi: {country} ¦ Csak egy: {country}
+Pays : {country} ¦ Maa: {country} ¦ Ország: {country}
+Sites du monde entier seulement (FamilySearch, Geneanet…) ¦ Vain maailmanlaajuiset sivustot (FamilySearch, Geneanet…) ¦ Csak világméretű oldalak (FamilySearch, Geneanet…)
+🌍 Monde entier ¦ 🌍 Koko maailma ¦ 🌍 Egész világ
+Prix ¦ Hinta ¦ Ár
+Gratuites seulement · {n} ¦ Vain ilmaiset · {n} ¦ Csak ingyenesek · {n}
+💶 Gratuites seulement ¦ 💶 Vain ilmaiset ¦ 💶 Csak ingyenesek
+En français seulement ¦ Vain ranskaksi ¦ Csak franciául
+🇫🇷 En français ¦ 🇫🇷 Ranskaksi ¦ 🇫🇷 Franciául
+Les plus utiles ¦ Hyödyllisimmät ¦ A leghasznosabbak
+Gratuits d’abord ¦ Ilmaiset ensin ¦ Előbb az ingyenesek
+🔗 depuis sa fiche ¦ 🔗 tiedoista ¦ 🔗 az adatlapjáról
+Ce filtre vient de sa fiche : ton choix habituel n’est pas changé. ¦ Suodatin tulee tiedoista: tavallinen valintasi ei muutu. ¦ Ez a szűrő az adatlapról jön: a szokásos választásod nem változik.
+Revenir à mon choix ¦ Takaisin omaan valintaan ¦ Vissza a saját választásomhoz
+↗ Chercher quand même ¦ ↗ Hae silti ¦ ↗ Keresés mégis
+de ces filtres ¦ näillä suodattimilla ¦ ezekkel a szűrőkkel
+Aucun site {sorts} pour ce pays ({country}) parmi les {n} sites que l’app connaît ¦ Ei yhtään sivustoa {sorts} tälle maalle ({country}) sovelluksen tuntemista {n} sivustosta ¦ Nincs {sorts} oldal ehhez az országhoz ({country}) az app által ismert {n} oldal között
+Pour ses autres pays : {ok} proposés ; {out} écartés. ¦ Muille maille: {ok} ehdotettu; {out} poissuljettu. ¦ A többi országra: {ok} javasolt; {out} kizárva.
+Ses autres pays ({n}) ¦ Muut maat ({n}) ¦ A többi ország ({n})
+Voir les {n} sites écartés ¦ Näytä {n} poissuljettua sivustoa ¦ A(z) {n} kizárt oldal megtekintése
+＋ Ajouter un site à moi ¦ ＋ Lisää oma sivusto ¦ ＋ Saját oldal hozzáadása
+Aucun site {sorts} pour {name} ({life}) ¦ Ei sivustoa {sorts} henkilölle {name} ({life}) ¦ Nincs {sorts} oldal ehhez: {name} ({life})
+Les {n} sites de cette sorte sont écartés : ¦ Tämän tyypin {n} sivustoa on poissuljettu: ¦ Az ilyen fajtájú {n} oldal ki van zárva:
+Aucun site de cette sorte parmi ceux que l’app connaît. ¦ Sovelluksen tuntemista sivustoista mikään ei ole tätä tyyppiä. ¦ Az app által ismert oldalak között nincs ilyen fajtájú.
+Enlever {sort} ¦ Poista {sort} ¦ {sort} eltávolítása
+Aucun site écarté avec ces filtres. ¦ Ei poissuljettuja sivustoja näillä suodattimilla. ¦ Ezekkel a szűrőkkel nincs kizárt oldal.
+Sa vie ({life}) croise les années du site ({from}–{to}) ¦ Elämä ({life}) osuu osittain sivuston vuosiin ({from}–{to}) ¦ Az élete ({life}) részben egybeesik az oldal éveivel ({from}–{to})
+Actes (état civil, paroissiaux) ¦ Asiakirjat (väestö-, kirkonkirjat) ¦ Iratok (állami, egyházi anyakönyv)
+Journaux ¦ Sanomalehdet ¦ Újságok
+Militaire et guerres ¦ Sotilaat ja sodat ¦ Katonaság és háborúk
+Recensements et annuaires ¦ Väestönlaskennat ja osoitekirjat ¦ Népszámlálások és címjegyzékek
+Marins, colonies ¦ Merimiehet, siirtomaat ¦ Tengerészek, gyarmatok
+Marins et colonies ¦ Merimiehet ja siirtomaat ¦ Tengerészek és gyarmatok
+Cimetières, décès ¦ Hautausmaat, kuolemat ¦ Temetők, halálesetek
+Cimetières et décès ¦ Hautausmaat ja kuolemat ¦ Temetők és halálesetek
+Notaires, terres et justice ¦ Notaarit, maa ja oikeus ¦ Közjegyzők, föld és igazságszolgáltatás
+Métiers (élus, médecins, cheminots, photographes…) ¦ Ammatit (luottamushenkilöt, lääkärit, rautatieläiset, valokuvaajat…) ¦ Foglalkozások (választott tisztségviselők, orvosok, vasutasok, fényképészek…)
+Arbres en ligne ¦ Sukupuut verkossa ¦ Online családfák
+Bibliothèques ¦ Kirjastot ¦ Könyvtárak
+Bibliothèques et livres ¦ Kirjastot ja kirjat ¦ Könyvtárak és könyvek
+Cartes et lieux ¦ Kartat ja paikat ¦ Térképek és helyek
+Déportation et répression ¦ Karkotukset ja vainot ¦ Deportálás és elnyomás
+Guides ¦ Oppaat ¦ Útmutatók
+Guides et modes d’emploi ¦ Oppaat ja käyttöohjeet ¦ Útmutatók és leírások
+Moteurs ¦ Hakukoneet ¦ Keresők
+Moteurs et encyclopédies ¦ Hakukoneet ja tietosanakirjat ¦ Keresők és enciklopédiák
+Tout le militaire ¦ Kaikki sotilaallinen ¦ Minden katonai
+Tout pour un marin ¦ Kaikki merimiehelle ¦ Minden tengerésznek
+Tout sur l’émigration ¦ Kaikki maastamuutosta ¦ Minden a kivándorlásról
+Tout sur son métier ¦ Kaikki ammatista ¦ Minden a foglalkozásáról
+Tout chez les notaires ¦ Kaikki notaareilta ¦ Minden a közjegyzőknél
+⚓ Il était marin ? Le dire sur sa fiche ¦ ⚓ Oliko hän merimies? Kerro se tiedoissa ¦ ⚓ Tengerész volt? Írd be az adatlapjára
+🎖 Il était soldat ? Le dire sur sa fiche ¦ 🎖 Oliko hän sotilas? Kerro se tiedoissa ¦ 🎖 Katona volt? Írd be az adatlapjára
+🚢 Il a émigré ? Le dire sur sa fiche ¦ 🚢 Muuttiko hän maasta? Kerro se tiedoissa ¦ 🚢 Kivándorolt? Írd be az adatlapjára
+💼 Son métier ? Le dire sur sa fiche ¦ 💼 Ammatti? Kerro se tiedoissa ¦ 💼 A foglalkozása? Írd be az adatlapjára
+Pas de lieu dans ce pays ¦ Ei paikkaa tässä maassa ¦ Nincs hely ebben az országban
+Hors de ses années ¦ Elinvuosien ulkopuolella ¦ Az élete évein kívül
+Seulement pour un autre cas (métier, profil) ¦ Vain toiseen tapaukseen (ammatti, profiili) ¦ Csak más esetre (foglalkozás, profil)
+Pour l’autre sexe ¦ Toiselle sukupuolelle ¦ A másik nemnek
+Né hors de France ¦ Syntynyt Ranskan ulkopuolella ¦ Franciaországon kívül született
+Peu utile pour cette fiche ¦ Vähän hyödyllinen näille tiedoille ¦ Kevéssé hasznos ehhez az adatlaphoz
+Autres raisons ¦ Muut syyt ¦ Egyéb okok
+officier (armée) ¦ upseeri (armeija) ¦ tiszt (hadsereg)
+=payant caché ¦ maksullinen piilotettu|maksullista piilotettu ¦ fizetős rejtve|fizetős rejtve

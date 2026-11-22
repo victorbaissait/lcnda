@@ -1,0 +1,199 @@
+fr ¦ hr ¦ sl
+# 📱 la page du téléphone de terrain (assets/js/app-terrain.js)
+📶 relié ¦ 📶 povezano ¦ 📶 povezano
+⏸ hors wifi ¦ ⏸ bez wifija ¦ ⏸ brez wifija
+Le mot de passe de la généalogie : vérifié par l’ordinateur, jamais gardé sur ce téléphone. ¦ Lozinka rodoslovlja: provjerava je računalo, nikad se ne čuva na ovom telefonu. ¦ Geslo rodoslovja: preveri ga računalnik, nikoli se ne shrani v ta telefon.
+Le navigateur écrit « Non sécurisé » : c’est vrai, la porte du wifi n’a pas de HTTPS. N’envoie que sur le wifi de la maison, protégé par sa clé. ¦ Preglednik piše „Nije sigurno”: to je istina, vrata wifija nemaju HTTPS. Šalji samo preko kućnog wifija zaštićenog ključem. ¦ Brskalnik piše »Ni varno«: res je, vrata wifija nimajo HTTPS. Pošiljaj samo prek domačega wifija, zaščitenega s ključem.
+Tes photos attendent dans cette page. ¦ Tvoje fotografije čekaju na ovoj stranici. ¦ Tvoje fotografije čakajo na tej strani.
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). ¦ Računalo ne odgovara (u stanju mirovanja, ugašeno ili zatvorena vrata). ¦ Računalnik se ne odziva (spi, je ugasnjen ali so vrata zaprta).
+Choisir une personne ou une visite… ¦ Odaberi osobu ili posjet… ¦ Izberi osebo ali obisk…
+Une ligne (facultatif) ¦ Jedan redak (neobavezno) ¦ Ena vrstica (neobvezno)
+Pas de wifi de la maison : les photos se prennent avec l’appareil photo du téléphone, puis « 🖼 Choisir » au retour. ¦ Nema kućnog wifija: fotografiraj kamerom telefona, a po povratku „🖼 Odaberi”. ¦ Ni domačega wifija: fotografiraj s kamero telefona, ob vrnitvi pa »🖼 Izberi«.
+Prendre une photo ¦ Snimi fotografiju ¦ Fotografiraj
+Choisir dans la galerie ¦ Odaberi iz galerije ¦ Izberi iz galerije
+📍 = la photo contient une position GPS (retirée à l’arrivée, réglage) ¦ 📍 = fotografija sadrži GPS položaj (uklanja se po dolasku, postavka) ¦ 📍 = fotografija vsebuje položaj GPS (odstranjen ob prihodu, nastavitev)
+Tombe famille LACOMBE, allée 4 ¦ Grob obitelji LACOMBE, staza 4 ¦ Grob družine LACOMBE, pot 4
+Envoyer : {n} ¦ Pošalji: {n} ¦ Pošlji: {n}
+Sans wifi, garde cette page ouverte : les photos attendent ici et partent toutes seules au retour. Pour une journée entière aux archives, prends plutôt la visite par fichier. ¦ Bez wifija ostavi ovu stranicu otvorenu: fotografije čekaju ovdje i same odlaze po povratku. Za cijeli dan u arhivu radije uzmi posjet putem datoteke. ¦ Brez wifija pusti to stran odprto: fotografije čakajo tukaj in se ob vrnitvi pošljejo same. Za cel dan v arhivu raje uporabi obisk z datoteko.
+Le téléphone ne sait pas si une photo a été rangée ni où : il ne lit rien de l’arbre. ¦ Telefon ne zna je li fotografija razvrstana ni gdje: ne čita ništa iz stabla. ¦ Telefon ne ve, ali je bila fotografija razvrščena in kam: iz drevesa ne bere ničesar.
+Nom de la personne ou de la visite ¦ Ime osobe ili posjeta ¦ Ime osebe ali obiska
+Seulement les personnes décédées, sans les fiches confidentielles. ¦ Samo preminule osobe, bez povjerljivih zapisa. ¦ Samo umrle osebe, brez zaupnih zapisov.
+Choisis pour qui est cette photo. ¦ Odaberi za koga je ova fotografija. ¦ Izberi, za koga je ta fotografija.
+Verrouillée après 15 minutes sans geste : redonne le mot de passe. Tes photos attendent. ¦ Zaključano nakon 15 minuta bez aktivnosti: ponovno upiši lozinku. Tvoje fotografije čekaju. ¦ Zaklenjeno po 15 minutah brez dejavnosti: znova vnesi geslo. Tvoje fotografije čakajo.
+Ce téléphone n’est plus autorisé sur l’ordinateur. ¦ Ovaj telefon više nije dopušten na računalu. ¦ Ta telefon na računalniku ni več dovoljen.
+Envoyées dans 📥 À trier : {n} ¦ Poslano u 📥 Za razvrstavanje: {n} ¦ Poslano v 📥 Za razvrščanje: {n}
+Refusé par l’ordinateur ¦ Odbijeno na računalu ¦ Računalnik je zavrnil
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). En attente : {n} ; nouvel essai toutes les 30 secondes tant que la page est ouverte. ¦ Računalo ne odgovara (u stanju mirovanja, ugašeno ili zatvorena vrata). Na čekanju: {n}; novi pokušaj svakih 30 sekundi dok je stranica otvorena. ¦ Računalnik se ne odziva (spi, je ugasnjen ali so vrata zaprta). Čaka: {n}; nov poskus vsakih 30 sekund, dokler je stran odprta.
+↻ Réessayer ¦ ↻ Pokušaj ponovno ¦ ↻ Poskusi znova
+Envoi en cours : {i} sur {n} ¦ Slanje: {i} od {n} ¦ Pošiljanje: {i} od {n}
+Garde la page ouverte. ¦ Ostavi stranicu otvorenom. ¦ Pusti stran odprto.
+En attente depuis {when} : {n} ¦ Na čekanju od {when}: {n} ¦ Čaka od {when}: {n}
+Elles étaient gardées dans ce téléphone. ¦ Bile su spremljene u ovom telefonu. ¦ Bile so shranjene v tem telefonu.
+Les envoyer ¦ Pošalji ih ¦ Pošlji jih
+Les oublier ¦ Zaboravi ih ¦ Pozabi jih
+Retirées de la boîte : {n} ¦ Uklonjeno iz pretinca: {n} ¦ Odstranjeno iz predala: {n}
+« {name} » n’est plus ouverte sur l’ordinateur : tes photos restent en attente ici. ¦ „{name}” više nije otvoreno na računalu: tvoje fotografije i dalje čekaju ovdje. ¦ »{name}« ni več odprto na računalniku: tvoje fotografije še naprej čakajo tukaj.
+Des photos étaient en attente, mais le téléphone a libéré la place. Retrouve-les dans ta galerie et « 🖼 Choisir ». ¦ Fotografije su čekale, ali je telefon oslobodio prostor. Pronađi ih u galeriji i „🖼 Odaberi”. ¦ Fotografije so čakale, a je telefon sprostil prostor. Poišči jih v galeriji in »🖼 Izberi«.
+📱 Envoyer des photos à l’ordinateur principal ¦ 📱 Pošalji fotografije na glavno računalo ¦ 📱 Pošlji fotografije na glavni računalnik
+# 📥 À trier, sur l'ordinateur (assets/js/app-a-trier.js)
+📥 À trier ¦ 📥 Za razvrstavanje ¦ 📥 Za razvrščanje
+À trier ¦ Za razvrstavanje ¦ Za razvrščanje
+Listes · Médias et documents ¦ Popisi · Mediji i dokumenti ¦ Seznami · Mediji in dokumenti
+Les photos envoyées par un téléphone de terrain arrivent ici, hors de l’arbre. Relie chacune à ce qu’elle montre, ou supprime-la. ¦ Fotografije koje pošalje terenski telefon stižu ovamo, izvan stabla. Poveži svaku s onim što prikazuje ili je izbriši. ¦ Fotografije, ki jih pošlje terenski telefon, pridejo sem, zunaj drevesa. Vsako poveži s tem, kar prikazuje, ali jo izbriši.
+Chercher… (texte, téléphone, personne) ¦ Traži… (tekst, telefon, osoba) ¦ Išči… (besedilo, telefon, oseba)
+🗑 Supprimées ¦ 🗑 Izbrisane ¦ 🗑 Izbrisane
+Reliées ¦ Povezane ¦ Povezane
+visite {name} ¦ posjet {name} ¦ obisk {name}
+pour {name} ¦ za {name} ¦ za {name}
+personne pas choisie ¦ osoba nije odabrana ¦ oseba ni izbrana
+📍 GPS gardé ¦ 📍 GPS zadržan ¦ 📍 GPS ohranjen
+📍 GPS retiré ¦ 📍 GPS uklonjen ¦ 📍 GPS odstranjen
+🔗 reliée à {name} ¦ 🔗 povezano s: {name} ¦ 🔗 povezano z: {name}
+effacée pour de bon le {date} ¦ trajno brisanje {date} ¦ dokončno izbrisana {date}
+🗄 Relier à la visite ¦ 🗄 Poveži s posjetom ¦ 🗄 Poveži z obiskom
+🔗 Relier à {name} ¦ 🔗 Poveži s: {name} ¦ 🔗 Poveži z: {name}
+Relier à… ¦ Poveži s… ¦ Poveži z…
+(sans texte) ¦ (bez teksta) ¦ (brez besedila)
+Rien à trier : les photos du téléphone arriveront ici. ¦ Ništa za razvrstavanje: fotografije s telefona stići će ovamo. ¦ Nič za razvrščanje: fotografije s telefona bodo prišle sem.
+Mode consultation : la boîte se lit, mais rien ne se relie ni ne se supprime. ¦ Način pregleda: pretinac se čita, ali se ništa ne povezuje niti briše. ¦ Način ogleda: predal se bere, a nič se ne poveže ali izbriše.
+Cochées : {n} ¦ Označeno: {n} ¦ Označeno: {n}
+Décocher ¦ Odznači ¦ Odznači
+📍 Garder la position GPS ? ¦ 📍 Zadržati GPS položaj? ¦ 📍 Ohraniti položaj GPS?
+La photo contient une position GPS (utile pour situer une tombe). La garder pour la carte ? ¦ Fotografija sadrži GPS položaj (koristan za pronalazak groba). Zadržati ga za kartu? ¦ Fotografija vsebuje položaj GPS (koristen za iskanje groba). Ga ohraniti za zemljevid?
+La retirer ¦ Ukloni ga ¦ Odstrani ga
+✓ Reliées à {name} : {n} ¦ ✓ Povezano s: {name}: {n} ¦ ✓ Povezano z: {name}: {n}
+🪦 Une photo de tombe : ajouter aussi l’inhumation à {name} ? ¦ 🪦 Fotografija groba: dodati i pokop za: {name}? ¦ 🪦 Fotografija groba: dodam tudi pokop za: {name}?
+✓ Inhumation ajoutée à {name}. ¦ ✓ Pokop dodan: {name}. ¦ ✓ Pokop dodan: {name}.
+Relier à un événement ¦ Poveži s događajem ¦ Poveži z dogodkom
+Relier à une source ¦ Poveži s izvorom ¦ Poveži z virom
+✓ Supprimées : {n} ¦ ✓ Izbrisano: {n} ¦ ✓ Izbrisano: {n}
+✓ Supprimées : {n}. Gardées 30 jours dans « 🗑 Supprimées » (Filtrer ▾). ¦ ✓ Izbrisano: {n}. Čuvaju se 30 dana u „🗑 Izbrisane” (Filtriraj ▾). ¦ ✓ Izbrisano: {n}. Hranjeno 30 dni v »🗑 Izbrisane« (Filtriraj ▾).
+✎ Modifier le texte ¦ ✎ Uredi tekst ¦ ✎ Uredi besedilo
+Texte enregistré ¦ Tekst spremljen ¦ Besedilo shranjeno
+👤 Une personne… ¦ 👤 Osoba… ¦ 👤 Oseba…
+📅 Un événement… (inhumation, mariage…) ¦ 📅 Događaj… (pokop, vjenčanje…) ¦ 📅 Dogodek… (pokop, poroka…)
+📚 Une source… (l’acte, la cote) ¦ 📚 Izvor… (isprava, signatura) ¦ 📚 Vir… (listina, signatura)
+🗄 La visite d’archives proposée ¦ 🗄 Predloženi posjet arhivu ¦ 🗄 Predlagani obisk arhiva
+🔍 Ouvrir en grand ¦ 🔍 Otvori u velikom ¦ 🔍 Odpri v velikem
+⟲ Tourner ¦ ⟲ Zakreni ¦ ⟲ Zavrti
+⤓ Exporter l’original ¦ ⤓ Izvezi izvornik ¦ ⤓ Izvozi izvirnik
+Remise dans 📥 À trier. ¦ Vraćeno u 📥 Za razvrstavanje. ¦ Vrnjeno v 📥 Za razvrščanje.
+📥 Arrivées du téléphone : {n} ¦ 📥 Stiglo s telefona: {n} ¦ 📥 Prispelo s telefona: {n}
+📥 À trier : {n} ¦ 📥 Za razvrstavanje: {n} ¦ 📥 Za razvrščanje: {n}
+# 🖧 Plusieurs ordinateurs → 📱 Téléphones de terrain (assets/js/app-reseau-local.js)
+téléphone de terrain ¦ terenski telefon ¦ terenski telefon
+Téléphone de terrain ¦ Terenski telefon ¦ Terenski telefon
+📱 Téléphone de terrain ¦ 📱 Terenski telefon ¦ 📱 Terenski telefon
+📱 Téléphones de terrain ¦ 📱 Terenski telefoni ¦ 📱 Terenski telefoni
+👁 Lecture seule ¦ 👁 Samo čitanje ¦ 👁 Samo branje
+déposer · liste réduite ¦ odlaganje · skraćeni popis ¦ oddajanje · skrajšan seznam
+＋ Ajouter un téléphone de terrain ¦ ＋ Dodaj terenski telefon ¦ ＋ Dodaj terenski telefon
+Scanne ce QR code avec l’appareil photo du téléphone ¦ Skeniraj ovaj QR kod kamerom telefona ¦ Skeniraj to kodo QR s kamero telefona
+Le code d’invitation est déjà dans le QR code. Sur le téléphone : « Demander l’accès », puis compare le code à 6 chiffres ici. ¦ Kod pozivnice već je u QR kodu. Na telefonu: „Zatraži pristup”, zatim ovdje usporedi šesteroznamenkasti kod. ¦ Koda povabila je že v kodi QR. Na telefonu: »Zaprosi za dostop«, nato tukaj primerjaj 6-mestno kodo.
+Un 📱 téléphone de terrain ne voit pas l’arbre : il dépose seulement des photos dans 📥 À trier. ¦ 📱 Terenski telefon ne vidi stablo: samo odlaže fotografije u 📥 Za razvrstavanje. ¦ 📱 Terenski telefon ne vidi drevesa: le odlaga fotografije v 📥 Za razvrščanje.
+⏻ Retirer tous les téléphones ¦ ⏻ Ukloni sve telefone ¦ ⏻ Odstrani vse telefone
+Les photos arrivent dans Listes → Médias et documents → 📥 À trier. ¦ Fotografije stižu u Popisi → Mediji i dokumenti → 📥 Za razvrstavanje. ¦ Fotografije pridejo v Seznami → Mediji in dokumenti → 📥 Za razvrščanje.
+📥 Ouvrir À trier ¦ 📥 Otvori Za razvrstavanje ¦ 📥 Odpri Za razvrščanje
+Plus aucun téléphone ne pourra rien envoyer. Leurs photos déjà déposées restent dans 📥 À trier (réglage). ¦ Nijedan telefon više neće moći ništa poslati. Njihove već odložene fotografije ostaju u 📥 Za razvrstavanje (postavka). ¦ Noben telefon ne bo mogel več ničesar poslati. Njihove že oddane fotografije ostanejo v 📥 Za razvrščanje (nastavitev).
+Téléphones retirés : {n} ¦ Uklonjeni telefoni: {n} ¦ Odstranjeni telefoni: {n}
+Valeur refusée : réglage inchangé. ¦ Vrijednost odbijena: postavka nepromijenjena. ¦ Vrednost zavrnjena: nastavitev nespremenjena.
+✓ « {name} » autorisé, 📱 téléphone de terrain. ¦ ✓ „{name}” dopušten, 📱 terenski telefon. ¦ ✓ »{name}« dovoljen, 📱 terenski telefon.
+Sorte d’appareil ¦ Vrsta uređaja ¦ Vrsta naprave
+📱 Téléphone de terrain : déposer des photos et une ligne de texte dans 📥 À trier. Il ne voit pas l’arbre, ne modifie rien. Il devra aussi donner le mot de passe de la généalogie. ¦ 📱 Terenski telefon: odlaže fotografije i redak teksta u 📥 Za razvrstavanje. Ne vidi stablo, ništa ne mijenja. Morat će upisati i lozinku rodoslovlja. ¦ 📱 Terenski telefon: oddaja fotografije in vrstico besedila v 📥 Za razvrščanje. Ne vidi drevesa, ničesar ne spreminja. Vnesti bo moral tudi geslo rodoslovja.
+Ce que le téléphone voit ¦ Što telefon vidi ¦ Kaj vidi telefon
+Pour choisir « Pour qui ? » ¦ Za odabir „Za koga?” ¦ Za izbiro »Za koga?«
+visites d’archives et personnes décédées ¦ posjeti arhivu i preminule osobe ¦ obiski arhiva in umrle osebe
+visites d’archives seulement ¦ samo posjeti arhivu ¦ samo obiski arhiva
+rien : tout se range sur l’ordinateur ¦ ništa: sve se razvrstava na računalu ¦ nič: vse se razvrsti na računalniku
+Montrer aussi les vivants (nom seulement) ¦ Prikaži i žive (samo ime) ¦ Prikaži tudi žive (samo ime)
+Montrer aussi les fiches confidentielles (nom seulement) ¦ Prikaži i povjerljive zapise (samo ime) ¦ Prikaži tudi zaupne zapise (samo ime)
+« Pour qui ? » sur le téléphone ¦ „Za koga?” na telefonu ¦ »Za koga?« na telefonu
+obligatoire (plus lent sur place) ¦ obavezno (sporije na licu mjesta) ¦ obvezno (na kraju samem počasneje)
+Une ligne de texte ¦ Redak teksta ¦ Vrstica besedila
+une pour tout l’envoi ¦ jedan za cijelo slanje ¦ ena za celotno pošiljanje
+une par photo ¦ jedan po fotografiji ¦ ena na fotografijo
+Les photos qui arrivent ¦ Fotografije koje stižu ¦ Prihajajoče fotografije
+Où arrivent les photos ¦ Kamo stižu fotografije ¦ Kam pridejo fotografije
+dans 📥 À trier : rien n’entre dans l’arbre sans toi ¦ u 📥 Za razvrstavanje: ništa ne ulazi u stablo bez tebe ¦ v 📥 Za razvrščanje: nič ne pride v drevo brez tebe
+reliées tout de suite à la personne choisie (visibles dans À trier, avec ↶ Annuler) ¦ odmah povezane s odabranom osobom (vidljive u Za razvrstavanje, uz ↶ Poništi) ¦ takoj povezane z izbrano osebo (vidne v Za razvrščanje, z ↶ Razveljavi)
+Position GPS de la photo ¦ GPS položaj fotografije ¦ Položaj GPS fotografije
+retirée à l’arrivée ¦ uklanja se po dolasku ¦ odstranjen ob prihodu
+gardée à part, à décider en reliant ¦ čuva se zasebno, odlučuje se pri povezivanju ¦ shranjen posebej, odločiš ob povezovanju
+gardée (la carte peut la montrer) ¦ zadržana (karta je može prikazati) ¦ ohranjen (zemljevid ga lahko prikaže)
+Taille maximale d’une photo ¦ Najveća veličina fotografije ¦ Največja velikost fotografije
+Photos par envoi ¦ Fotografija po slanju ¦ Fotografij na pošiljanje
+Photos dans la boîte À trier, au plus ¦ Fotografija u pretincu Za razvrstavanje, najviše ¦ Fotografij v predalu Za razvrščanje, največ
+Garder l’original (décoché : réduite à 2000 points) ¦ Zadrži izvornik (bez oznake: smanjena na 2000 točaka) ¦ Ohrani izvirnik (neoznačeno: pomanjšana na 2000 točk)
+coché conseillé ¦ označeno preporučeno ¦ označeno priporočeno
+décoché conseillé ¦ bez oznake preporučeno ¦ neoznačeno priporočeno
+# 🖧 réglages des téléphones de terrain (suite), 📜 Qui a vu quoi, messages du serveur (lib/telephone_wifi.php, lib/reseau_local.php)
+gardée 30 jours dans « 🗑 Supprimées », puis effacée ¦ čuva se 30 dana u „🗑 Izbrisane”, zatim se briše ¦ hranjena 30 dni v »🗑 Izbrisane«, nato izbrisana
+effacée tout de suite (après les 10 secondes de ↶ Annuler) ¦ briše se odmah (nakon 10 sekundi za ↶ Poništi) ¦ izbrisana takoj (po 10 sekundah za ↶ Razveljavi)
+Photo de tombe reliée ¦ Povezana fotografija groba ¦ Povezana fotografija groba
+proposer d’ajouter l’inhumation ¦ predloži dodavanje pokopa ¦ predlagaj dodajanje pokopa
+ne rien proposer ¦ ništa ne predlagati ¦ ničesar ne predlagaj
+Pastille 📥 dans la barre du haut ¦ Značka 📥 u gornjoj traci ¦ Značka 📥 v zgornji vrstici
+oui, avec le nombre ¦ da, s brojem ¦ da, s številom
+non (seulement dans Listes) ¦ ne (samo u Popisima) ¦ ne (samo v Seznamih)
+À l’arrivée de photos ¦ Kad stignu fotografije ¦ Ko pridejo fotografije
+seulement la pastille ¦ samo značka ¦ samo značka
+un petit message en bas de l’écran ¦ kratka poruka na dnu zaslona ¦ kratko sporočilo na dnu zaslona
+Sans wifi ¦ Bez wifija ¦ Brez wifija
+Hors du wifi de la maison ¦ Izvan kućnog wifija ¦ Zunaj domačega wifija
+garder en attente dans la page, envoi tout seul au retour ¦ čekaju na stranici, slanje samo po povratku ¦ čakajo na strani, pošiljanje samodejno ob vrnitvi
+garder, mais demander avant d’envoyer ¦ zadrži, ali pitaj prije slanja ¦ ohrani, a vprašaj pred pošiljanjem
+refuser de prendre des photos hors wifi ¦ ne dopuštati fotografiranje izvan wifija ¦ ne dovoli fotografiranja zunaj wifija
+Après l’envoi ¦ Nakon slanja ¦ Po pošiljanju
+effacer les photos de la page ¦ obrisati fotografije sa stranice ¦ izbrisati fotografije s strani
+garder les vignettes de la journée ¦ zadržati sličice dana ¦ ohraniti sličice dneva
+« ↶ Annuler » sur le téléphone ¦ „↶ Poništi” na telefonu ¦ »↶ Razveljavi« na telefonu
+tant que les photos ne sont pas rangées ¦ dok fotografije nisu razvrstane ¦ dokler fotografije niso razvrščene
+pendant 10 secondes ¦ 10 sekundi ¦ 10 sekund
+Mot de passe de la généalogie sur le téléphone ¦ Lozinka rodoslovlja na telefonu ¦ Geslo rodoslovja na telefonu
+demandé à l’ouverture, redemandé après 15 min sans geste ¦ traži se pri otvaranju, ponovno nakon 15 min bez aktivnosti ¦ zahtevano ob odpiranju, znova po 15 min brez dejavnosti
+demandé seulement pour voir la liste ; déposer avec le jeton seul ¦ traži se samo za popis; odlaganje samo s tokenom ¦ zahtevano samo za seznam; oddajanje samo z žetonom
+Cet ordinateur en mode consultation ¦ Ovo računalo u načinu pregleda ¦ Ta računalnik v načinu ogleda
+le téléphone ne dépose plus ¦ telefon više ne odlaže ¦ telefon ne oddaja več
+le téléphone dépose encore ¦ telefon i dalje odlaže ¦ telefon še vedno oddaja
+Sorte proposée quand la demande vient d’un téléphone ¦ Predložena vrsta kad zahtjev dođe s telefona ¦ Predlagana vrsta, ko zahteva pride s telefona
+Retirer un téléphone ¦ Uklanjanje telefona ¦ Odstranitev telefona
+ses photos déjà déposées restent à trier ¦ njegove već odložene fotografije ostaju za razvrstavanje ¦ njegove že oddane fotografije ostanejo za razvrščanje
+elles sont supprimées aussi (30 jours dans « 🗑 Supprimées ») ¦ i one se brišu (30 dana u „🗑 Izbrisane”) ¦ tudi te se izbrišejo (30 dni v »🗑 Izbrisane«)
+📜 Registre ¦ 📜 Zapisnik ¦ 📜 Dnevnik
+noter chaque dépôt, chaque fichier refusé et chaque liste vue ¦ bilježiti svako odlaganje, svaku odbijenu datoteku i svaki viđeni popis ¦ zapisati vsako oddajo, vsako zavrnjeno datoteko in vsak ogledan seznam
+seulement les dépôts ¦ samo odlaganja ¦ samo oddaje
+Photo déposée ¦ Fotografija odložena ¦ Fotografija oddana
+Fichier refusé ¦ Datoteka odbijena ¦ Datoteka zavrnjena
+Liste réduite vue ¦ Skraćeni popis pregledan ¦ Skrajšan seznam ogledan
+Photo reliée ¦ Fotografija povezana ¦ Fotografija povezana
+pas une photo ¦ nije fotografija ¦ ni fotografija
+trop grosse ¦ prevelika ¦ prevelika
+trop grande ¦ prevelike dimenzije ¦ prevelike mere
+abîmée ¦ oštećena ¦ poškodovana
+trop de fichiers ¦ previše datoteka ¦ preveč datotek
+trop de photos ¦ previše fotografija ¦ preveč fotografij
+trop gros en tout ¦ ukupno preveliko ¦ skupno preveliko
+boîte pleine ¦ pretinac pun ¦ predal poln
+personne refusée ¦ osoba odbijena ¦ oseba zavrnjena
+réponses : {n} ¦ odgovori: {n} ¦ odgovori: {n}
+Photo trop grosse (plus de {n} Mo, la taille maximale réglée sur l’ordinateur). ¦ Fotografija je prevelika (više od {n} MB, najveća veličina postavljena na računalu). ¦ Fotografija je prevelika (več kot {n} MB, največja velikost, nastavljena na računalniku).
+Trop d’essais depuis ce téléphone : réessaie dans {n} min. ¦ Previše pokušaja s ovog telefona: pokušaj ponovno za {n} min. ¦ Preveč poskusov s tega telefona: poskusi znova čez {n} min.
+Trop de photos dans cet envoi ({n} au plus). ¦ Previše fotografija u ovom slanju (najviše {n}). ¦ Preveč fotografij v tem pošiljanju (največ {n}).
+Photo du téléphone ¦ Fotografija s telefona ¦ Fotografija s telefona
+Ce format de photo ne se lit pas sur cet ordinateur : choisis-la en JPEG. ¦ Ovaj format fotografije ne čita se na ovom računalu: odaberi je u JPEG-u. ¦ Te oblike fotografije ta računalnik ne prebere: izberi jo v JPEG.
+Ce n’est pas une photo : seules les photos JPEG, PNG, WEBP et AVIF sont acceptées. ¦ To nije fotografija: prihvaćaju se samo fotografije JPEG, PNG, WEBP i AVIF. ¦ To ni fotografija: sprejemamo samo fotografije JPEG, PNG, WEBP in AVIF.
+Image abîmée ou illisible. ¦ Slika je oštećena ili nečitljiva. ¦ Slika je poškodovana ali neberljiva.
+Image trop grande (plus de 50 millions de points) : refusée. ¦ Slika je prevelika (više od 50 milijuna točaka): odbijena. ¦ Slika je prevelika (več kot 50 milijonov točk): zavrnjena.
+Une seule photo à la fois. ¦ Samo jedna fotografija odjednom. ¦ Samo ena fotografija naenkrat.
+La photo n’est pas arrivée en entier : elle sera renvoyée. ¦ Fotografija nije stigla cijela: ponovno će se poslati. ¦ Fotografija ni prispela cela: poslana bo znova.
+Personne ou visite inconnue. ¦ Nepoznata osoba ili posjet. ¦ Neznana oseba ali obisk.
+📥 La boîte est pleine sur l’ordinateur : trie-la d’abord. ¦ 📥 Pretinac na računalu je pun: prvo ga razvrstaj. ¦ 📥 Predal na računalniku je poln: najprej ga razvrsti.
+Cet envoi est trop gros en tout (200 Mo au plus) : envoie le reste ensuite. ¦ Ovo slanje je ukupno preveliko (najviše 200 MB): ostatak pošalji poslije. ¦ To pošiljanje je skupno preveliko (največ 200 MB): preostanek pošlji pozneje.
+La généalogie n’est pas prête sur l’ordinateur. ¦ Rodoslovlje nije spremno na računalu. ¦ Rodoslovje na računalniku ni pripravljeno.
+L’ordinateur est en mode consultation : il ne reçoit pas de photo pour l’instant. Elles restent en attente ici. ¦ Računalo je u načinu pregleda: zasad ne prima fotografije. Čekaju ovdje. ¦ Računalnik je v načinu ogleda: zaenkrat ne sprejema fotografij. Čakajo tukaj.
+Impossible de ranger la photo sur l’ordinateur (disque plein ?). ¦ Fotografiju nije moguće spremiti na računalo (pun disk?). ¦ Fotografije ni mogoče shraniti na računalnik (poln disk?).
+Choisis à quoi relier. ¦ Odaberi s čime povezati. ¦ Izberi, s čim povezati.
+Introuvable. ¦ Nije pronađeno. ¦ Ni najdeno.
+Cette fiche est verrouillée : rien n’y est relié. ¦ Ovaj zapis je zaključan: ništa se ne povezuje s njim. ¦ Ta zapis je zaklenjen: nanj se nič ne poveže.
+Trop tard : cette photo a été effacée pour de bon. ¦ Prekasno: ova je fotografija trajno izbrisana. ¦ Prepozno: ta fotografija je bila dokončno izbrisana.
+Téléphone de terrain : il peut seulement déposer des photos dans 📥 À trier. ¦ Terenski telefon: može samo odlagati fotografije u 📥 Za razvrstavanje. ¦ Terenski telefon: lahko samo oddaja fotografije v 📥 Za razvrščanje.

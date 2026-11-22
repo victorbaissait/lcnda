@@ -1,0 +1,75 @@
+fr ¦ sk ¦ nb
+# 🌍 Où chercher ? — filtres par sorte de source (docs/design/ou-chercher-filtres.html)
+Ouvrir la page filtrée sur une sorte de source ¦ Otvoriť stránku filtrovanú podľa druhu zdroja ¦ Åpne siden filtrert på én slags kilde
+Les autres sortes ¦ Ostatné druhy ¦ De andre typene
+Proposés ({n} sur {m}) ¦ Navrhnuté ({n} z {m}) ¦ Foreslåtte ({n} av {m})
+✓ Déjà cherchés ({n} sur {m}) ¦ ✓ Už prehľadané ({n} z {m}) ¦ ✓ Allerede søkt ({n} av {m})
+Écartés ({n} sur {m}) ¦ Vyradené ({n} z {m}) ¦ Valgt bort ({n} av {m})
+Chercher un site… (ex. Gallica, matricule) ¦ Hľadať web… (napr. Gallica, kmeňový list) ¦ Søk etter et nettsted… (f.eks. Gallica, rulle)
+Sorte de source ¦ Druh zdroja ¦ Type kilde
+Ses pays : {list} ¦ Krajiny: {list} ¦ Landene: {list}
+Ses pays ¦ Krajiny ¦ Landene
+Un seul : {country} ¦ Len jedna: {country} ¦ Bare ett: {country}
+Pays : {country} ¦ Krajina: {country} ¦ Land: {country}
+Sites du monde entier seulement (FamilySearch, Geneanet…) ¦ Len celosvetové weby (FamilySearch, Geneanet…) ¦ Bare verdensomspennende nettsteder (FamilySearch, Geneanet…)
+🌍 Monde entier ¦ 🌍 Celý svet ¦ 🌍 Hele verden
+Prix ¦ Cena ¦ Pris
+Gratuites seulement · {n} ¦ Len zadarmo · {n} ¦ Bare gratis · {n}
+💶 Gratuites seulement ¦ 💶 Len zadarmo ¦ 💶 Bare gratis
+En français seulement ¦ Len vo francúzštine ¦ Bare på fransk
+🇫🇷 En français ¦ 🇫🇷 Po francúzsky ¦ 🇫🇷 På fransk
+Les plus utiles ¦ Najužitočnejšie ¦ Mest nyttige
+Gratuits d’abord ¦ Najprv zadarmo ¦ Gratis først
+🔗 depuis sa fiche ¦ 🔗 z karty ¦ 🔗 fra profilen
+Ce filtre vient de sa fiche : ton choix habituel n’est pas changé. ¦ Tento filter pochádza z karty: tvoja obvyklá voľba sa nemení. ¦ Filteret kommer fra profilen: det vanlige valget ditt endres ikke.
+Revenir à mon choix ¦ Späť na moju voľbu ¦ Tilbake til mitt valg
+↗ Chercher quand même ¦ ↗ Napriek tomu hľadať ¦ ↗ Søk likevel
+de ces filtres ¦ s týmito filtrami ¦ med disse filtrene
+Aucun site {sorts} pour ce pays ({country}) parmi les {n} sites que l’app connaît ¦ Žiadny web {sorts} pre túto krajinu ({country}) medzi {n} webmi, ktoré aplikácia pozná ¦ Ingen nettsteder {sorts} for dette landet ({country}) blant de {n} nettstedene appen kjenner
+Pour ses autres pays : {ok} proposés ; {out} écartés. ¦ Pre ostatné krajiny: navrhnutých {ok}; vyradených {out}. ¦ For de andre landene: {ok} foreslått; {out} valgt bort.
+Ses autres pays ({n}) ¦ Ostatné krajiny ({n}) ¦ De andre landene ({n})
+Voir les {n} sites écartés ¦ Zobraziť {n} vyradených webov ¦ Se de {n} bortvalgte nettstedene
+＋ Ajouter un site à moi ¦ ＋ Pridať vlastný web ¦ ＋ Legg til et eget nettsted
+Aucun site {sorts} pour {name} ({life}) ¦ Žiadny web {sorts} pre {name} ({life}) ¦ Ingen nettsteder {sorts} for {name} ({life})
+Les {n} sites de cette sorte sont écartés : ¦ {n} webov tohto druhu je vyradených: ¦ De {n} nettstedene av denne typen er valgt bort:
+Aucun site de cette sorte parmi ceux que l’app connaît. ¦ Medzi webmi, ktoré aplikácia pozná, nie je žiadny tohto druhu. ¦ Ingen nettsteder av denne typen blant dem appen kjenner.
+Enlever {sort} ¦ Odobrať {sort} ¦ Fjern {sort}
+Aucun site écarté avec ces filtres. ¦ S týmito filtrami nie je žiadny vyradený web. ¦ Ingen bortvalgte nettsteder med disse filtrene.
+Sa vie ({life}) croise les années du site ({from}–{to}) ¦ Život ({life}) sa prekrýva s rokmi webu ({from}–{to}) ¦ Livet ({life}) overlapper nettstedets år ({from}–{to})
+Actes (état civil, paroissiaux) ¦ Záznamy (civilné, farské) ¦ Akter (sivile, kirkebøker)
+Journaux ¦ Noviny ¦ Aviser
+Militaire et guerres ¦ Armáda a vojny ¦ Militært og kriger
+Recensements et annuaires ¦ Sčítania ľudu a adresáre ¦ Folketellinger og adressebøker
+Marins, colonies ¦ Námorníci, kolónie ¦ Sjøfolk, kolonier
+Marins et colonies ¦ Námorníci a kolónie ¦ Sjøfolk og kolonier
+Cimetières, décès ¦ Cintoríny, úmrtia ¦ Kirkegårder, dødsfall
+Cimetières et décès ¦ Cintoríny a úmrtia ¦ Kirkegårder og dødsfall
+Notaires, terres et justice ¦ Notári, pôda a súdy ¦ Notarer, jord og rettsvesen
+Métiers (élus, médecins, cheminots, photographes…) ¦ Povolania (volení zástupcovia, lekári, železničiari, fotografi…) ¦ Yrker (folkevalgte, leger, jernbanefolk, fotografer…)
+Arbres en ligne ¦ Rodokmene online ¦ Slektstrær på nett
+Bibliothèques ¦ Knižnice ¦ Biblioteker
+Bibliothèques et livres ¦ Knižnice a knihy ¦ Biblioteker og bøker
+Cartes et lieux ¦ Mapy a miesta ¦ Kart og steder
+Déportation et répression ¦ Deportácie a represie ¦ Deportasjon og forfølgelse
+Guides ¦ Sprievodcovia ¦ Veiledninger
+Guides et modes d’emploi ¦ Sprievodcovia a návody ¦ Veiledninger og bruksanvisninger
+Moteurs ¦ Vyhľadávače ¦ Søkemotorer
+Moteurs et encyclopédies ¦ Vyhľadávače a encyklopédie ¦ Søkemotorer og leksikon
+Tout le militaire ¦ Všetko vojenské ¦ Alt militært
+Tout pour un marin ¦ Všetko pre námorníka ¦ Alt for en sjømann
+Tout sur l’émigration ¦ Všetko o vysťahovalectve ¦ Alt om utvandring
+Tout sur son métier ¦ Všetko o povolaní ¦ Alt om yrket
+Tout chez les notaires ¦ Všetko u notárov ¦ Alt hos notarene
+⚓ Il était marin ? Le dire sur sa fiche ¦ ⚓ Bol námorník? Uveď to na karte ¦ ⚓ Var han sjømann? Skriv det på profilen
+🎖 Il était soldat ? Le dire sur sa fiche ¦ 🎖 Bol vojak? Uveď to na karte ¦ 🎖 Var han soldat? Skriv det på profilen
+🚢 Il a émigré ? Le dire sur sa fiche ¦ 🚢 Vysťahoval sa? Uveď to na karte ¦ 🚢 Utvandret han? Skriv det på profilen
+💼 Son métier ? Le dire sur sa fiche ¦ 💼 Povolanie? Uveď ho na karte ¦ 💼 Yrket? Skriv det på profilen
+Pas de lieu dans ce pays ¦ Žiadne miesto v tejto krajine ¦ Ingen steder i landet
+Hors de ses années ¦ Mimo rokov života ¦ Utenfor levetiden
+Seulement pour un autre cas (métier, profil) ¦ Len pre iný prípad (povolanie, profil) ¦ Bare for et annet tilfelle (yrke, profil)
+Pour l’autre sexe ¦ Pre druhé pohlavie ¦ For det andre kjønnet
+Né hors de France ¦ Narodený mimo Francúzska ¦ Født utenfor Frankrike
+Peu utile pour cette fiche ¦ Pre túto kartu málo užitočné ¦ Lite nyttig for profilen
+Autres raisons ¦ Iné dôvody ¦ Andre grunner
+officier (armée) ¦ dôstojník (armáda) ¦ offiser (hæren)
+=payant caché ¦ platený skrytý|platené skryté|platených skrytých ¦ betalt skjult|betalte skjult

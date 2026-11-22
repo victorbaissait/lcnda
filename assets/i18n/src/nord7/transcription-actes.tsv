@@ -1,0 +1,145 @@
+fr ¦ is
+# Zone « transcription-actes » : recadrage, lecture approfondie (Ollama), « Ce que l’app a trouvé » (heritage-transcribe-acte.js, lib/transcription_actes.php)
+LECTURE AUTOMATIQUE ¦ SJÁLFVIRKUR LESTUR
+Recadrer sur le texte ? ¦ Skera að textanum?
+Recadrer sur le texte ¦ Skera að textanum
+Lire quand même ¦ Lesa samt
+Cette image ressemble à une capture d’écran ¦ Þessi mynd lítur út eins og skjámynd
+(boutons et bords gris autour) : la lecture sera moins bonne. Télécharge l’image en grand sur le site des archives, ou recadre sur le texte. ¦ (hnappar og gráar brúnir í kring): lesturinn verður verri. Sæktu myndina í fullri stærð af vef skjalasafnsins, eða skerðu að textanum.
+La zone qui sera lue ¦ Svæðið sem verður lesið
+Le cadre bleu montre la zone qui sera lue. Pour choisir toi-même, dessine une zone (▭) puis « ✨ Lire cette zone ». ¦ Blái ramminn sýnir svæðið sem verður lesið. Til að velja sjálf(ur) skaltu teikna svæði (▭) og síðan „✨ Lesa þetta svæði“.
+La lecture à la main a donné un texte peu sûr ¦ Lestur handskriftar gaf óöruggan texta
+({x} % de mots douteux). Souvent à cause des bords de l’écran autour de l’acte, ou d’une écriture trop difficile pour ce modèle. ¦ ({x} % vafasöm orð). Oft vegna skjábrúna í kringum færsluna, eða skriftar sem er of erfið fyrir þetta líkan.
+Recadrer et relire ¦ Skera og lesa aftur
+Essayer la lecture approfondie ¦ Prófa ítarlegan lestur
+LECTURE APPROFONDIE ¦ ÍTARLEGUR LESTUR
+Lecture approfondie ¦ Ítarlegur lestur
+Ce qu’il faut ¦ Það sem þarf
+Ollama (gratuit, open source) et un modèle vision ouvert, au choix : ¦ Ollama (ókeypis, opinn hugbúnaður) og opið myndlíkan að eigin vali:
+le meilleur, ≈ {x} Go ¦ best, ≈ {x} GB
+plus léger, ≈ {x} Go, pour un ordinateur modeste ¦ léttara, ≈ {x} GB, fyrir hógværari tölvu
+déjà téléchargé ¦ þegar sótt
+8 Go conseillés (16 Go pour le 8B) · téléchargé une seule fois ¦ 8 GB ráðlögð (16 GB fyrir 8B) · sótt aðeins einu sinni
+≈ 20 à 60 s par page sur un ordinateur récent ¦ ≈ 20 til 60 s á síðu á nýlegri tölvu
+Confidentialité ¦ Persónuvernd
+rien ne quitte ton ordinateur ; l’app vérifie qu’Ollama ne répond que sur ton ordinateur ¦ ekkert fer út úr tölvunni þinni; forritið athugar að Ollama svari aðeins á tölvunni þinni
+Recherche d’Ollama sur cet ordinateur… ¦ Leita að Ollama á þessari tölvu…
+L’adresse d’Ollama n’est pas sur cet ordinateur : la lecture approfondie est refusée. ¦ Vistfang Ollama er ekki á þessari tölvu: ítarlegum lestri er hafnað.
+Ollama n’est pas encore sur cet ordinateur. ¦ Ollama er ekki enn á þessari tölvu.
+Installe-le une fois depuis son site (gratuit), lance-le, puis « ↻ Vérifier à nouveau ». ¦ Settu það upp einu sinni af vefsíðu þess (ókeypis), ræstu það og síðan „↻ Athuga aftur“.
+Ollama est installé mais ne tourne pas. ¦ Ollama er uppsett en keyrir ekki.
+Lance l’application Ollama, puis « ↻ Vérifier à nouveau ». ¦ Ræstu Ollama-forritið og síðan „↻ Athuga aftur“.
+Prêt : la lecture se fait sur cet ordinateur, sans Internet. ¦ Tilbúið: lesturinn fer fram á þessari tölvu, án netsins.
+Télécharger Ollama (ollama.com) ¦ Sækja Ollama (ollama.com)
+Installer la lecture approfondie ¦ Setja upp ítarlegan lestur
+Lire l’acte avec ce modèle ¦ Lesa færsluna með þessu líkani
+Vérifier à nouveau ¦ Athuga aftur
+« 🔍 Essayer aussi la lecture approfondie » sur une page déjà lue montre les deux textes côte à côte, et on garde la meilleure. Relis toujours : un modèle peut se tromper sur les noms. ¦ „🔍 Prófa líka ítarlegan lestur“ á síðu sem þegar hefur verið lesin sýnir báða textana hlið við hlið og þú heldur þeim betri. Lestu alltaf yfir: líkan getur ruglast á nöfnum.
+Téléchargement du modèle… {done} sur {total} ¦ Sæki líkanið… {done} af {total}
+Téléchargement du modèle… ¦ Sæki líkanið…
+Lecture approfondie… {n} s ¦ Ítarlegur lestur… {n} s
+La lecture approfondie n’a pas abouti. ¦ Ítarlegur lestur tókst ekki.
+Les deux lectures côte à côte ¦ Báðir lestrar hlið við hlið
+Le texte lu ¦ Lesni textinn
+Écriture à la main ¦ Handskrift
+Garder celle-ci ¦ Halda þessum
+Mettre dans le texte ¦ Setja í textann
+La lecture approfondie est installée. ¦ Ítarlegur lestur er uppsettur.
+Défunte ¦ Hin látna
+Conjointe ¦ Maki (kona)
+Autre personne ¦ Annar einstaklingur
+{n} ans → née vers {year} ¦ {n} ára → fædd um {year}
+{n} ans → né vers {year} ¦ {n} ára → fæddur um {year}
+Aucune personne trouvée dans le texte : relis-le, puis « 🧭 Repérer ». ¦ Enginn einstaklingur fannst í textanum: lestu hann yfir og síðan „🧭 Greina“.
+TRANSCRIPTION ¦ UPPSKRIFT
+Ce que l’app a trouvé dans l’acte ¦ Það sem forritið fann í færslunni
+Ajouter à la généalogie ¦ Bæta við ættfræðina
+Garder seulement la transcription ¦ Halda aðeins uppskriftinni
+demeurant à {place} ¦ búsett í {place}
+fille de {a} et de {b} ¦ dóttir {a} og {b}
+fils de {a} et de {b} ¦ sonur {a} og {b}
+fille de {a} ¦ dóttir {a}
+fils de {a} ¦ sonur {a}
+sœur de {name} ¦ systir {name}
+frère de {name} ¦ bróðir {name}
+parent de {name} ¦ ættingi {name}
+conjoint décédé de {name} ¦ látinn maki {name}
+conjoint de {name} ¦ maki {name}
+décédée avant l’acte ¦ lést fyrir færsluna
+décédé avant l’acte ¦ lést fyrir færsluna
+Relier à cette fiche ¦ Tengja við þessa færslu
+Reliée à : ¦ Tengt við:
+Fiches proches : ¦ Svipaðar færslur:
+Fiche existante : ¦ Fyrirliggjandi færsla:
+même personne probable ¦ líklega sami einstaklingur
+Pas de fiche · restera dans l’acte avec son rôle, sans créer de fiche ¦ Engin færsla · verður áfram í skjalinu með hlutverk sitt, án þess að búa til færslu
+Aucune fiche : elle sera créée et reliée comme mère de {name} ¦ Engin færsla: hún verður búin til og tengd sem móðir {name}
+Aucune fiche : elle sera créée et reliée comme père de {name} ¦ Engin færsla: hún verður búin til og tengd sem faðir {name}
+Aucune fiche : elle sera créée ¦ Engin færsla: hún verður búin til
+Témoin seul ¦ Aðeins vottur
+Que faire de cette personne ¦ Hvað á að gera við þennan einstakling
+Décès estimé avant l’acte ¦ Andlát áætlað fyrir færsluna
+Gardés dans l’acte, sans fiche ¦ Haldið í skjalinu, án færslu
+La source ¦ Heimildin
+déjà dans ta base, reprise ¦ þegar í gagnagrunninum þínum, endurnýtt
+Relever à nouveau ¦ Draga út aftur
+Compris : {date} ¦ Skilið: {date}
+Les personnes ({n}) ¦ Einstaklingarnir ({n})
+Ce que l’acte ajoute aussi ¦ Það sem færslan bætir líka við
+Naissance estimée d’après l’âge (marquée « estimée ») ¦ Fæðing áætluð út frá aldri (merkt „áætlað“)
+Décès d’avant l’acte (« feu », « veuve de ») ¦ Andlát fyrir færsluna („sálugi“, „ekkja“)
+Domiciles ¦ Búsetur
+La source, toute prête ¦ Heimildin, tilbúin
+La même source est déjà dans ta base : elle est reprise au lieu d’en créer une deuxième. ¦ Sama heimild er þegar í gagnagrunninum þínum: hún er endurnýtt í stað þess að búa til aðra.
+Remplie d’après le champ Source, le nom du fichier et le texte lu autour de l’image. Vérifie avant d’ajouter. ¦ Fyllt út eftir reitnum Heimild, skráarheitinu og textanum sem var lesinn í kringum myndina. Athugaðu áður en þú bætir við.
+Remplie d’après le champ Source et le nom du fichier. Vérifie avant d’ajouter. ¦ Fyllt út eftir reitnum Heimild og skráarheitinu. Athugaðu áður en þú bætir við.
+Voilà ce qui va entrer dans ta généalogie ¦ Þetta fer inn í ættfræðina þína
+Rien n’est écrasé : une information différente de la fiche est proposée, jamais imposée. « ↶ Annuler » défait tout l’ajout d’un coup. ¦ Ekkert er skrifað yfir: upplýsingar sem eru frábrugðnar færslunni eru lagðar til, aldrei þvingaðar. „↶ Afturkalla“ afturkallar alla viðbótina í einu.
+C’est elle : relier ¦ Þetta er hún: tengja
+C’est lui : relier ¦ Þetta er hann: tengja
+Ce n’est pas elle ¦ Þetta er ekki hún
+Ce n’est pas lui ¦ Þetta er ekki hann
+ajouter ¦ bæta við
+{name} : l’acte et la fiche côte à côte ¦ {name}: skjalið og færslan hlið við hlið
+Dans l’acte ¦ Í skjalinu
+Fiche · {name} ¦ Færsla · {name}
+vers {year} ({n} ans) ¦ um {year} ({n} ára)
+{date} avec {name} ¦ {date} með {name}
+avant le {date} ¦ fyrir {date}
+Les parents sont les mêmes : c’est très probablement elle. ¦ Foreldrarnir eru þeir sömu: þetta er mjög líklega hún.
+Les parents sont les mêmes : c’est très probablement lui. ¦ Foreldrarnir eru þeir sömu: þetta er mjög líklega hann.
+Les parents ne sont pas les mêmes : vérifie avant de relier. ¦ Foreldrarnir eru ekki þeir sömu: athugaðu áður en þú tengir.
+La date de naissance de la fiche est gardée (elle est plus précise que l’âge de l’acte). ¦ Fæðingardagur færslunnar er haldinn (hann er nákvæmari en aldurinn í skjalinu).
+✓ Acte ajouté : {what} ¦ ✓ Skjali bætt við: {what}
+Déjà d’autres parents, lien non fait : {names} ¦ Hefur þegar aðra foreldra, engin tenging: {names}
+Un modèle « vision » ouvert qui tourne sur ton ordinateur (Ollama) : lit mieux les écritures difficiles, plus lent ¦ Opið „mynd“-líkan sem keyrir á tölvunni þinni (Ollama): les erfiða skrift betur, hægara
+L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches ¦ Atburðurinn, einstaklingarnir og tengsl þeirra, heimildin: tengja, bera saman eða búa til færslur
+Ce que l’app a trouvé… ¦ Það sem forritið fann…
+La lecture approfondie n’est pas chargée. ¦ Ítarlegur lestur er ekki hlaðinn.
+Lecture du texte autour de l’acte… ¦ Les textann í kringum skjalið…
+Le texte est vide : lis ou écris d’abord l’acte. ¦ Textinn er tómur: lestu eða skrifaðu fyrst skjalið.
+Personnes gardées dans la transcription, sans créer de fiche. ¦ Einstaklingum haldið í uppskriftinni, án þess að búa til færslur.
+Père du défunt ¦ Faðir hins látna
+Mère du défunt ¦ Móðir hins látna
+Déclarant ¦ Tilkynnandi
+Acte de mariage ¦ Hjónavígsluskrá
+Acte de baptême ¦ Skírnarskrá
+Acte de naissance ¦ Fæðingarskrá
+Acte de sépulture ¦ Greftrunarskrá
+Registre ¦ Bók
+Vue ¦ Mynd
+Vues en tout ¦ Myndir alls
+La lecture approfondie ne parle qu’à Ollama sur cet ordinateur (127.0.0.1) : adresse refusée. ¦ Ítarlegur lestur talar aðeins við Ollama á þessari tölvu (127.0.0.1): vistfangi hafnað.
+Modèle de lecture approfondie inconnu. ¦ Óþekkt líkan fyrir ítarlegan lestur.
+La lecture approfondie a besoin de l’extension cURL de PHP. ¦ Ítarlegur lestur þarf cURL-viðbót PHP.
+Ollama ne répond pas sur cet ordinateur : installe-le (ollama.com), lance-le, puis réessaie. ¦ Ollama svarar ekki á þessari tölvu: settu það upp (ollama.com), ræstu það og reyndu aftur.
+Image manquante. ¦ Mynd vantar.
+Image trop lourde. ¦ Myndin er of þung.
+Image trop grande. ¦ Myndin er of stór.
+Ce modèle n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Þetta líkan hefur ekki enn verið sótt: „⤓ Setja upp ítarlegan lestur“.
+Une fiche à relier n’existe plus : choisis-en une autre. ¦ Færsla sem á að tengja er ekki lengur til: veldu aðra.
+Une personne à créer n’a ni prénom ni nom. ¦ Einstaklingur sem á að búa til hefur hvorki fornafn né eftirnafn.
+Trop de personnes dans un seul acte. ¦ Of margir einstaklingar í einu skjali.
+Annulation impossible : ce n’est pas l’ajout d’un acte. ¦ Ekki hægt að afturkalla: þetta er ekki viðbót skjals.
+Le téléchargement du modèle n’a pas abouti. ¦ Niðurhal líkansins tókst ekki.
+La lecture approfondie a pris trop de temps. ¦ Ítarlegur lestur tók of langan tíma.

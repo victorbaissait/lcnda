@@ -168,18 +168,30 @@
     // sinon, après Tab, ce qu'on tape part dans le vide
     const FOCUSABLE = 'input, select, textarea, button, [tabindex]';
     const keepFocus = () => {
-        const old = document.activeElement, ws = document.getElementById('workspace');
+        const ws = document.getElementById('workspace'); let old = document.activeElement;
         if (!old || !ws?.contains(old) || old === ws) return;
         const all = () => [...ws.querySelectorAll(FOCUSABLE)];
         const sig = el => el.tagName + [...el.attributes].filter(a => /^(data-|name$|type$|id$)/.test(a.name)).map(a => `${a.name}=${a.value}`).sort().join('|');
-        const want = sig(old), idx = all().filter(e => sig(e) === want).indexOf(old), t0 = performance.now(), atSave = old.value;
+        const isText = el => 'value' in el && !/^(checkbox|radio)$/.test(el.type || '');
+        // l'ancienne page, vue au moment de l'enregistrement : place de chaque case (signature + rang) et ce qu'elle contenait
+        const place = new Map(), atSave = new Map(), seen = {};
+        for (const el of all()) { const s = sig(el); seen[s] = (seen[s] || 0) + 1; place.set(el, [s, seen[s] - 1]); if (isText(el)) atSave.set(el, el.value); }
+        // la page peut mettre du temps à se redessiner (aller-retour au serveur) : on suit la case où l'on est passé entre-temps (Tab, clic)
+        const follow = e => { if (place.has(e.target)) old = e.target; };
+        document.addEventListener('focusin', follow, true);
+        const twin = el => { const [s, i] = place.get(el) || []; return s == null ? null : all().filter(e => sig(e) === s)[i] || null; };
+        const t0 = performance.now();
         const look = () => {
-            if (old.isConnected) { if (performance.now() - t0 < 3000) requestAnimationFrame(look); return; }
+            if (old.isConnected) { if (performance.now() - t0 < 10000) requestAnimationFrame(look); else document.removeEventListener('focusin', follow, true); return; }
+            document.removeEventListener('focusin', follow, true);
+            // ce qu'on a tapé dans l'ancienne page après l'enregistrement passe dans la nouvelle (puis s'enregistre à son tour)
+            for (const [o, v] of atSave) {
+                if (o.value === v) continue; const el = twin(o); if (!el || !isText(el) || el.value === o.value) continue;
+                el.value = o.value; el.dispatchEvent(new Event('input', {bubbles: true})); el.dispatchEvent(new Event('change', {bubbles: true}));
+            }
             const a = document.activeElement; if (a && a !== document.body && a !== document.documentElement) return; // on a cliqué ailleurs
-            const el = all().filter(e => sig(e) === want)[Math.max(0, idx)]; if (!el) return;
-            const typed = 'value' in old && 'value' in el && !/^(checkbox|radio)$/.test(old.type || '') && old.value !== atSave && old.value !== el.value ? old.value : null; // tapé après l'enregistrement
+            const el = twin(old); if (!el) return;
             el.focus({preventScroll: true});
-            if (typed != null) { el.value = typed; el.dispatchEvent(new Event('input', {bubbles: true})); el.dispatchEvent(new Event('change', {bubbles: true})); }
             try { if (typeof old.selectionStart === 'number' && typeof el.setSelectionRange === 'function') el.setSelectionRange(old.selectionStart, old.selectionEnd); } catch (_) { /* case sans sélection */ }
         };
         requestAnimationFrame(look);

@@ -478,13 +478,17 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
     $line(2, 'FORM', $geneanet ? 'Town, Area code, County, Region, Country' : GEDCOM_PLACE_FORM);
 
     $includeNotes = export_option_enabled('include_notes', true);
+    $includeTr = $sink !== null ? !empty($sink['transcriptions'] ?? true) : export_option_enabled('include_transcriptions', true); // 📄 « Transcriptions des documents » (cochée)
     $includeSources = export_option_enabled('include_sources', true);
     $includeMedia = export_option_enabled('include_media', true);
 
-    $allPersons = function_exists('person_select_rows') ? person_select_rows($pdo) : $pdo->query(person_select() . ' ORDER BY p.id')->fetchAll();
-    $families = $pdo->query('SELECT * FROM families ORDER BY id')->fetchAll();
     // une très grosse base (100 000 fiches, 300 000 événements) dépasse le réglage habituel de 1 Go : un peu de marge pour l'export
-    if (function_exists('memory_at_least')) { memory_at_least(2048); }
+    if (function_exists('memory_for_persons')) { memory_for_persons($pdo, 3); } elseif (function_exists('memory_at_least')) { memory_at_least(2048); }
+    // 🐘 seulement ce que les règles de partage et de tri lisent, pour toutes les fiches ; les fiches entières sont lues par
+    // paquets de 2 000 au moment de les écrire (500 000 fiches entières : plus de 2 Go de mémoire, export en erreur)
+    $chunked = function_exists('person_select_rows');
+    $allPersons = $chunked ? person_select_rows($pdo, null, true) : $pdo->query(person_select() . ' ORDER BY p.id')->fetchAll();
+    $families = $pdo->query('SELECT * FROM families ORDER BY id')->fetchAll();
     @set_time_limit(600);
     // Une seule branche (ascendants d'une personne, ou descendants d'un couple) au lieu de toute la base
     $branch = gedcom_branch_ids($pdo);
@@ -506,6 +510,12 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
     $persons = $share ? $allPersons : array_values(array_filter($allPersons, 'export_person_allowed'));
     // living=drop : les vivants et les fiches confidentielles sont retirés du fichier (au lieu d'y rester anonymes)
     if ($share && $hidden && ($_GET['living'] ?? '') === 'drop') { $persons = array_values(array_filter($persons, static fn($p) => !isset($hidden[(int) $p['id']]))); }
+    // 🛡 « Les laisser de côté » : les fiches à revoir avant publication (note de fiabilité sous le seuil) ne partent pas (lib/plus_famille.php)
+    if ($share && ($_GET['rel_skip'] ?? '') === '1') {
+        if (!function_exists('pfam_rel_review_ids')) { require_once __DIR__ . '/plus_famille.php'; }
+        $relSkip = pfam_rel_review_ids($pdo);
+        if ($relSkip) { $persons = array_values(array_filter($persons, static fn($p) => !isset($relSkip[(int) $p['id']]))); }
+    }
     $visible = array_fill_keys(array_map(static fn($p) => (int) $p['id'], $persons), true);
     $genderById = [];
     foreach ($allPersons as $gp) { $genderById[(int) $gp['id']] = (string) ($gp['gender'] ?? 'unknown'); }
@@ -518,20 +528,34 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
         $childrenByFamily[(int) $c['family_id']][(int) $c['child_id']] = $c;
         $famcByChild[(int) $c['child_id']][(int) $c['family_id']] = $c;
     }
-    // seulement les colonnes que le fichier écrit (avant : e.* — une quarantaine de colonnes × 300 000 événements en mémoire)
-    $events = $pdo->query("SELECT e.id,e.scope,e.person_id,e.family_id,e.title,e.date_text,e.date_calendar,e.year,e.address,e.agency,e.cause,e.description,t.gedcom_tag,t.label AS type_label,pl.name AS place_name,pl.subdivision,pl.county,pl.state,pl.country,pl.latitude,pl.longitude,pl.admin4_code
-        FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id
-        ORDER BY COALESCE(e.sort_date,''),COALESCE(e.year,9999),e.id");
     $hiddenFamily = [];
     foreach ($families as $f) { if (isset($hidden[(int) ($f['partner1_id'] ?? 0)]) || isset($hidden[(int) ($f['partner2_id'] ?? 0)])) { $hiddenFamily[(int) $f['id']] = true; } }
-    $eventsByPerson = []; $eventsByFamily = []; $hiddenEvent = []; $eventOwner = [];
-    foreach ($events as $e) {
-        $pidE = (int) ($e['person_id'] ?? 0); $fidE = (int) ($e['family_id'] ?? 0);
-        $eventOwner[(int) $e['id']] = [$pidE, $fidE];
-        if (($pidE && isset($hidden[$pidE])) || ($fidE && isset($hiddenFamily[$fidE]))) { $hiddenEvent[(int) $e['id']] = true; continue; }
-        if (($e['scope'] ?? '') === 'person' && $pidE > 0 && isset($visible[$pidE])) { $eventsByPerson[$pidE][] = $e; }
-        if (($e['scope'] ?? '') === 'family' && $fidE > 0) { $eventsByFamily[$fidE][] = $e; }
+    // 🐘 Les événements ne sont plus tous gardés en mémoire (200 000 fiches = 700 000 événements : plus de 2 Go, export en
+    // erreur) : seulement à qui appartient chaque événement (deux nombres), puis leurs colonnes lues par paquets de fiches /
+    // de familles au moment de les écrire (même ordre qu'avant pour chaque fiche : date, année, numéro).
+    $hiddenEvent = []; $eventPerson = []; $eventFamily = [];
+    foreach ($pdo->query('SELECT id, person_id, family_id FROM events', PDO::FETCH_NUM) as [$eidE, $pidE, $fidE]) {
+        $eidE = (int) $eidE; $pidE = (int) $pidE; $fidE = (int) $fidE;
+        if ($pidE) { $eventPerson[$eidE] = $pidE; }
+        if ($fidE) { $eventFamily[$eidE] = $fidE; }
+        if (($pidE && isset($hidden[$pidE])) || ($fidE && isset($hiddenFamily[$fidE]))) { $hiddenEvent[$eidE] = true; }
     }
+    // seulement les colonnes que le fichier écrit (avant : e.* — une quarantaine de colonnes × 300 000 événements en mémoire)
+    $eventSql = "SELECT e.id,e.scope,e.person_id,e.family_id,e.title,e.date_text,e.date_calendar,e.year,e.address,e.agency,e.cause,e.description,t.gedcom_tag,t.label AS type_label,pl.name AS place_name,pl.subdivision,pl.county,pl.state,pl.country,pl.latitude,pl.longitude,pl.admin4_code
+        FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id";
+    /** les événements « person » (ou « family ») des fiches $ids, groupés, comme l'ancienne lecture de toute la table */
+    $eventsOf = static function (string $scope, array $ids) use ($pdo, $eventSql, $hidden, $hiddenFamily, $visible): array {
+        $by = [];
+        if (!$ids) { return $by; }
+        $col = $scope === 'person' ? 'e.person_id' : 'e.family_id';
+        foreach ($pdo->query($eventSql . " WHERE {$col} IN (" . implode(',', array_map('intval', $ids)) . ") ORDER BY COALESCE(e.sort_date,''),COALESCE(e.year,9999),e.id") as $e) {
+            $pidE = (int) ($e['person_id'] ?? 0); $fidE = (int) ($e['family_id'] ?? 0);
+            if (($pidE && isset($hidden[$pidE])) || ($fidE && isset($hiddenFamily[$fidE]))) { continue; }
+            if ($scope === 'person' && ($e['scope'] ?? '') === 'person' && $pidE > 0 && isset($visible[$pidE])) { $by[$pidE][] = $e; }
+            if ($scope === 'family' && ($e['scope'] ?? '') === 'family' && $fidE > 0) { $by[$fidE][] = $e; }
+        }
+        return $by;
+    };
     // Cible d'une note, d'une citation ou d'un média appartenant à une personne masquée : jamais exportée
     $secret = static fn(string $type, int $id): bool => ($type === 'person' && isset($hidden[$id])) || ($type === 'event' && isset($hiddenEvent[$id])) || ($type === 'family' && isset($hiddenFamily[$id]));
     $notesByTarget = [];
@@ -566,10 +590,10 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
         // Seulement les médias d'une fiche, d'une famille, d'un événement ou d'une source qui part dans le fichier
         // (pas ceux des vivants exclus, ni ceux d'une autre branche)
         $keptFam = []; foreach ($families as $f) { if (!isset($hiddenFamily[(int) $f['id']])) { $keptFam[(int) $f['id']] = true; } }
-        $exported = static function (string $type, int $id) use ($visible, $keptFam, $eventOwner, $sources, $hidden): bool {
+        $exported = static function (string $type, int $id) use ($visible, $keptFam, $eventPerson, $eventFamily, $sources, $hidden): bool {
             if ($type === 'person') { return isset($visible[$id]) && !isset($hidden[$id]); }
             if ($type === 'family') { return isset($keptFam[$id]); }
-            if ($type === 'event') { [$p, $f] = $eventOwner[$id] ?? [0, 0]; return ($p && isset($visible[$p]) && !isset($hidden[$p])) || ($f && isset($keptFam[$f])); }
+            if ($type === 'event') { $p = $eventPerson[$id] ?? 0; $f = $eventFamily[$id] ?? 0; return ($p && isset($visible[$p]) && !isset($hidden[$p])) || ($f && isset($keptFam[$f])); }
             if ($type === 'source') { return isset($sources[$id]); }
             return false;
         };
@@ -670,8 +694,18 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
     };
 
     $healthRows = $sink === null && !$geneanet && export_option_enabled('health', false) && function_exists('sante_gedcom_rows') ? sante_gedcom_rows($pdo) : []; // 🩺 jamais sans la case
-    foreach ($persons as $p) {
+    unset($eventPerson, $eventFamily, $exported);
+    $eventsByPerson = []; $chunkEnd = -1;
+    foreach ($persons as $pi => $p) {
         $pid = (int) $p['id'];
+        if ($pi > $chunkEnd) { // les événements (et les fiches entières) des 2 000 fiches suivantes
+            $chunkIds = array_map(static fn($x) => (int) $x['id'], array_slice($persons, $pi, 2000));
+            $chunkEnd = $pi + count($chunkIds) - 1;
+            $eventsByPerson = $eventsOf('person', array_values(array_filter($chunkIds, static fn($x) => !isset($hidden[$x]))));
+            $fullRows = [];
+            if ($chunked) { foreach (person_select_rows($pdo, $chunkIds) as $fr) { $fullRows[(int) $fr['id']] = $fr; } }
+        }
+        if ($chunked) { $p = $fullRows[$pid] ?? $p; }
         $line(0, '@I' . $pid . '@', 'INDI');
         if (isset($hidden[$pid])) {
             $line(1, 'NAME', $hidden[$pid] === 'private' ? 'Fiche /confidentielle/' : 'Personne /vivante/');
@@ -738,8 +772,14 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
         $writeLabels(1, 'person:' . $pid);
     }
 
-    foreach ($families as $f) {
+    $eventsByPerson = []; $eventsByFamily = []; $chunkEnd = -1;
+    foreach ($families as $fi => $f) {
         $fid = (int) $f['id'];
+        if ($fi > $chunkEnd) { // les événements des 2 000 familles suivantes
+            $chunkIds = array_map(static fn($x) => (int) $x['id'], array_slice($families, $fi, 2000));
+            $chunkEnd = $fi + count($chunkIds) - 1;
+            $eventsByFamily = $eventsOf('family', $chunkIds);
+        }
         $people = array_filter([(int) ($f['partner1_id'] ?? 0), (int) ($f['partner2_id'] ?? 0), ...array_keys($childrenByFamily[$fid] ?? [])], static fn($id) => isset($visible[$id]));
         if (!$people) { continue; }
         $line(0, '@F' . $fid . '@', 'FAM');
@@ -793,6 +833,8 @@ function export_gedcom(PDO $pdo, ?array &$sink = null): void
         $line(1, 'TITL', (string) ($m['title'] ?: ($m['document_title'] ?: 'Média')));
         if (trim((string) ($m['date_text'] ?? '')) !== '') { $line(1, 'DATE', gedcom_date_from_text((string) $m['date_text'])); }
         if ($includeNotes && trim((string) ($m['description'] ?? '')) !== '') { $text(1, 'NOTE', (string) $m['description']); }
+        // 📄 un seul texte par document (celui de l'Atelier de transcription) : il part dans le média, lu par les autres logiciels
+        if ($includeTr && trim((string) ($m['transcription'] ?? '')) !== '') { $text(1, 'NOTE', (string) $m['transcription']); }
         $writeNotes(1, 'media:' . $id);
     }
     $line(0, 'TRLR');

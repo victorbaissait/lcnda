@@ -1,0 +1,374 @@
+fr ¦ fi ¦ hu
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Sijoitettavat paikat ¦ Elhelyezendő helyek
+Lieux à placer… ¦ Sijoitettavat paikat… ¦ Elhelyezendő helyek…
+Placer… ¦ Sijoita… ¦ Elhelyezés…
+Les placer ¦ Sijoita ne ¦ Elhelyezésük
+Rien n’est pris tant que tu ne cliques pas. ¦ Mitään ei haeta ennen kuin napsautat. ¦ Semmi sem kerül be, amíg nem kattintasz.
+Revoir et placer en lot… ¦ Tarkista ja sijoita kerralla… ¦ Átnézés és csoportos elhelyezés…
+Seulement les lieux de cette carte ({n}). ¦ Vain tämän kartan paikat ({n}). ¦ Csak ennek a térképnek a helyei ({n}).
+Voir tous les lieux à placer ¦ Näytä kaikki sijoitettavat paikat ¦ Az összes elhelyezendő hely
+Lecture des lieux… ¦ Luetaan paikkoja… ¦ Helyek beolvasása…
+Chercher un lieu… ¦ Etsi paikkaa… ¦ Hely keresése…
+De A à Z ¦ A–Ö ¦ A-tól Z-ig
+Le plus loin du reste ¦ Kauimpana muista ¦ A többitől legtávolabb
+{a} · {b} concernés ¦ {a} · {b} koskee ¦ {a} · {b} érintett
+Aucun lieu pour ce choix. ¦ Ei paikkoja tälle valinnalle. ¦ Nincs hely ehhez a választáshoz.
+Tous les lieux de ta base ont une position. ¦ Kaikilla tietokantasi paikoilla on sijainti. ¦ Az adatbázisod minden helyének van helye a térképen.
+à {km} km du reste ¦ {km} km muista ¦ {km} km-re a többitől
+Placer ici ¦ Sijoita tähän ¦ Ide helyezés
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ {km} km näiden tapahtumien muista paikoista: tarkista ennen sijoittamista. ¦ {km} km-re ezeknek az eseményeknek a többi helyétől: ellenőrizd elhelyezés előtt.
+Placer les {n} ensemble ¦ Sijoita nämä {n} yhdessä ¦ A(z) {n} együttes elhelyezése
+Pas un lieu ¦ Ei paikka ¦ Nem hely
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ Ensimmäiset 300; hae nimeä nähdäksesi muut. ¦ Az első 300; keress rá egy névre a többiért.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ {a} sijoitettu ({b}) · ne näkyvät kaikilla kartoilla ¦ {a} elhelyezve ({b}) · minden térképen megjelennek
+{name} placé ({n}) · {where} ¦ {name} sijoitettu ({n}) · {where} ¦ {name} elhelyezve ({n}) · {where}
+{name} placé ({a}, {b}) ¦ {name} sijoitettu ({a}, {b}) ¦ {name} elhelyezve ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ ”{name}” sivuun (ei paikka) ¦ „{name}” félretéve (nem hely)
+« {name} » remis dans la liste ¦ ”{name}” palautettu luetteloon ¦ „{name}” visszakerült a listába
+LOIN DU RESTE ¦ KAUKANA MUISTA ¦ MESSZE A TÖBBITŐL
+Placer « {name} » si loin ? ¦ Sijoitetaanko ”{name}” näin kauas? ¦ Ilyen messzire helyezed „{name}” helyet?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ ”{where}” on {km} km näiden tapahtumien muista paikoista. Se on usein samanniminen paikka. ¦ „{where}” {km} km-re van ezeknek az eseményeknek a többi helyétől. Gyakran csak azonos nevű hely.
+Placer quand même ¦ Sijoita silti ¦ Elhelyezés mégis
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Napsauta karttaa kohdassa ”{name}” (Esc jättää). ¦ Kattints a térképen oda, ahol „{name}” van (Esc: kilépés).
+{name} placé à la main (position approchée) ¦ {name} sijoitettu käsin (likimääräinen sijainti) ¦ {name} kézzel elhelyezve (hozzávetőleges hely)
+Pas de réseau : rien n’a été envoyé. ¦ Ei verkkoa: mitään ei lähetetty. ¦ Nincs hálózat: semmi sem lett elküldve.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Verkkopalvelu ei löytänyt mitään haulla ”{name}”. ¦ Az online szolgáltatás semmit sem talált erre: „{name}”.
+{n} de plus pour « {name} » : à toi de choisir. ¦ {n} lisää kohteelle ”{name}”: sinä valitset. ¦ Még {n} ehhez: „{name}” – te döntesz.
+EN LIGNE ¦ VERKOSSA ¦ ONLINE
+En ligne… ¦ Verkossa… ¦ Online…
+Chercher « {name} » en ligne ? ¦ Haetaanko ”{name}” verkosta? ¦ Online keresés erre: „{name}”?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ Vain paikan nimi ”{name}” lähetetään IGN:n osoitehakupalveluun (Géoplateforme). Ei henkilöiden nimiä, ei päivämääriä. ¦ Csak a hely neve („{name}”) megy el az IGN címkereső szolgáltatásához (Géoplateforme). Személynév és dátum nem.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Vastaus on yksi ehdotus lisää luettelossa; valitset sen tai et. Ilman internetiä: ”Ei verkkoa: mitään ei lähetetty”. ¦ A válasz egy újabb javaslat a listában; választhatod vagy sem. Internet nélkül: „Nincs hálózat: semmi sem lett elküldve”.
+Ne plus me demander pour cette séance ¦ Älä kysy uudelleen tämän istunnon aikana ¦ Ebben a munkamenetben ne kérdezzen újra
+Lieu tapé ¦ Kirjoitettu paikka ¦ Begépelt hely
+Pourquoi ¦ Miksi ¦ Miért
+Distance au reste ¦ Etäisyys muihin ¦ Távolság a többitől
+Év. ¦ Tap. ¦ Esem.
+{n} km ¦ {n} km ¦ {n} km
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ ”Ei löytynyt” -kohdat eivät ole tarkistuksessa. Yli {km} km muista olevaa paikkaa ei koskaan valita itsestään. ¦ A „nincs találat” tételek nincsenek az átnézésben. A többitől {km} km-nél messzebbi hely sosem jelölődik be magától.
+Seulement les sûrs ¦ Vain varmat ¦ Csak a biztosak
+Seulement les « sûrs » ¦ Vain ”varmat” ¦ Csak a „biztosak”
+Revoir avant de placer ¦ Tarkista ennen sijoittamista ¦ Átnézés elhelyezés előtt
+Placer les cochés ¦ Sijoita valitut ¦ A bejelöltek elhelyezése
+Coche au moins un lieu. ¦ Valitse vähintään yksi paikka. ¦ Jelölj be legalább egy helyet.
+Placer les {n} cochés ¦ Sijoita valitut ({n}) ¦ A(z) {n} bejelölt elhelyezése
+Réglages des lieux à placer enregistrés ¦ Sijoitettavien paikkojen asetukset tallennettu ¦ Az elhelyezendő helyek beállításai mentve
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Paikat ilman sijaintia todennäköisen kunnan mukaan ryhmiteltyinä: sijoita ne yhdellä napsautuksella ¦ Hely nélküli helyek valószínű település szerint csoportosítva: egy kattintással elhelyezheted őket
+Cochés au départ dans la revue ¦ Valmiiksi valitut tarkistuksessa ¦ Az átnézésben eleve bejelöltek
+Les sûrs et les probables ¦ Varmat ja todennäköiset ¦ A biztosak és a valószínűek
+Un lieu-dit ¦ Kylä tai talo ¦ Dűlő vagy tanya
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ Kylän tai talon kohdalle, jos se tunnetaan, muuten kunnan keskelle merkittynä ”likimääräinen” ¦ A dűlőhöz, ha ismert, egyébként a település közepére „hozzávetőleges” jelöléssel
+Toujours au centre de la commune ¦ Aina kunnan keskelle ¦ Mindig a település közepére
+Ne pas le placer ¦ Älä sijoita ¦ Ne helyezd el
+Plusieurs communes du même nom ¦ Useita samannimisiä kuntia ¦ Több azonos nevű település
+Proposer la plus proche des autres lieux, jamais cochée ¦ Ehdota muita paikkoja lähintä, ei koskaan valittuna ¦ A többi helyhez legközelebbit javasolja, sosem bejelölve
+Aussi les fautes proches, proposées seulement ¦ Myös lähellä olevat kirjoitusvirheet, vain ehdotuksina ¦ A közeli elírások is, csak javaslatként
+Le nom exact seulement ¦ Vain tarkka nimi ¦ Csak a pontos név
+Ce qui est repris ¦ Mitä otetaan ¦ Mi kerül át
+Position, code INSEE et département ¦ Sijainti, INSEE-koodi ja departementti ¦ Hely, INSEE-kód és megye
+La position seulement ¦ Vain sijainti ¦ Csak a hely
+Jamais : le bouton est caché ¦ Ei koskaan: painike on piilossa ¦ Soha: a gomb rejtve van
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Yksi ”🌐 Verkossa…” -painike paikkaa kohden, viestin kanssa joka kerta (ei koskaan kerralla, ei koskaan itsestään) ¦ Helyenként egy „🌐 Online…” gomb, mindig az üzenettel (soha nem csoportosan, soha nem magától)
+Alerte « loin du reste » ¦ Varoitus ”kaukana muista” ¦ „Messze a többitől” figyelmeztetés
+À partir de 200 km ¦ 200 km:stä alkaen ¦ 200 km-től
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ Sama nimi ja sama departementti kuin kuntaluettelossa: vain yksi kunta ”{name}”. Keskipiste, INSEE-koodi ja departementti otetaan. ¦ Ugyanaz a név és ugyanaz a megye, mint a településjegyzékben: egyetlen „{name}” település. A közepe, az INSEE-kód és a megye átkerül.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ Vain yksi kunta ”{name}” Ranskassa, mutta departementtia ei ole kirjoitettu. ¦ Egyetlen „{name}” település Franciaországban, de megye nincs megadva.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ {n} tämännimistä kuntaa Ranskassa. Ehdotetaan näiden tapahtumien muita paikkoja lähimpiä, ei koskaan valittuina itsestään. ¦ {n} ilyen nevű település Franciaországban. Az események többi helyéhez legközelebbieket javasolja, sosem jelöli be magától.
+{n} communes de ce nom en France : choisis la bonne. ¦ {n} tämännimistä kuntaa Ranskassa: valitse oikea. ¦ {n} ilyen nevű település Franciaországban: válaszd ki a jót.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Kylä tai talo löytyy luettelosta (GeoNames) kunnassa {name}. ¦ A dűlő ismert a jegyzékben (GeoNames), {name} településen.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Kylää tai taloa ei löydy luettelosta: keskelle kuntaa {name}, merkittynä ”likimääräinen sijainti”. ¦ A dűlő ismeretlen a jegyzékben: {name} közepére, „hozzávetőleges hely” jelöléssel.
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Ei nykyinen kunta; INSEE-historia (🏛 Vanhat rajat) sanoo: yhdistetty kuntaan {to} vuonna {year}. ¦ Nem mai település; az INSEE-történet (🏛 Régi határok) szerint: {year}-ben {to} településhez csatolták.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Sovelluksen mukana tuleva maailman kaupunki, ratkaistu kirjoitetun maan mukaan ({country}). ¦ Az alkalmazással szállított világváros, a megadott ország alapján ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Ei löytynyt tämän maan mukana tulevista maailman kaupungeista ({country}). ¦ Nem található az ország szállított világvárosai között ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Tämännimistä kuntaa ei ole. Ehdotetaan läheistä kirjoitusasua. Verkosta ei haeta mitään. ¦ Nincs ilyen nevű település. Hasonló írásmódot javasol. Online semmit sem keres.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Tämännimistä kuntaa ei ole. Verkosta ei haeta mitään. ¦ Nincs ilyen nevű település. Online semmit sem keres.
+le plus proche ¦ lähin ¦ a legközelebbi
+sûr ¦ varma ¦ biztos
+=proposition ¦ ehdotus|ehdotusta ¦ javaslat|javaslat
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ Jokaisessa valikossa ensimmäinen vaihtoehto on suositeltu: se on valittuna alusta asti. ¦ Minden menüben az első lehetőség az ajánlott: ez van beállítva kezdetben.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ Ammatit kartalla (aloittain, vuosisata kerrallaan) ¦ Foglalkozások a térképen (ágazatonként, évszázadonként)
+Les métiers notés (un par ligne) ¦ Merkityt ammatit (yksi riviä kohti) ¦ Feljegyzett foglalkozások (soronként egy)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Paikka (”Tulle”, ”Tulle 45.27, 1.77”) ¦ Hely („Tulle”, „Tulle 45.27, 1.77”)
+Classer par ¦ Luokittele ¦ Csoportosítás
+Famille de métiers du dictionnaire (18) ¦ Sanakirjan ammattiryhmä (18) ¦ Foglalkozáscsalád a szótárból (18)
+Un seul métier et ses variantes ¦ Yksi ammatti ja sen muunnelmat ¦ Egyetlen foglalkozás és változatai
+Un métier et ses variantes ¦ Ammatti ja sen muunnelmat ¦ Egy foglalkozás és változatai
+Mes couleurs à moi par métier ¦ Omat värini ammateittain ¦ Saját színeim foglalkozásonként
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Värini (”tisserand=#aa3300; meunier=#3355aa”) ¦ Színeim („tisserand=#aa3300; meunier=#3355aa”)
+Camembert par commune ¦ Piirakka kunnittain ¦ Kördiagram településenként
+Un rond de la couleur du plus fréquent ¦ Ympyrä yleisimmän värillä ¦ Kör a leggyakoribb színével
+Siècle par siècle ¦ Vuosisata kerrallaan ¦ Évszázadonként
+Un petit dessin par siècle ¦ Pieni kartta vuosisataa kohti ¦ Évszázadonként egy kis térkép
+Tout ensemble ¦ Kaikki yhdessä ¦ Mind együtt
+Où placer le métier ¦ Mihin ammatti sijoitetaan ¦ Hová kerüljön a foglalkozás
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Asiakirjan paikka, muuten asuinpaikka, muuten syntymä ¦ Az irat helye, különben a lakóhely, különben a születés
+Lieu de l’acte seulement ¦ Vain asiakirjan paikka ¦ Csak az irat helye
+Plusieurs métiers ¦ Useita ammatteja ¦ Több foglalkozás
+Chacun à sa date ¦ Kukin omana ajankohtanaan ¦ Mindegyik a maga dátumánál
+Le principal seulement ¦ Vain pääammatti ¦ Csak a fő foglalkozás
+Montrés ¦ Näytetään ¦ Látható
+Cachés ¦ Piilotettu ¦ Rejtve
+Les plus grands ¦ Suurimmat ¦ A legnagyobbak
++ {n} secteurs vides ¦ + {n} tyhjää alaa ¦ + {n} üres ágazat
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Ammattikartta: {n}, pieni kartta vuosisataa kohti. ¦ Foglalkozástérkép: {n}, évszázadonként egy kis térkép.
+Carte des métiers : {a}, {b} ({when}). ¦ Ammattikartta: {a}, {b} ({when}). ¦ Foglalkozástérkép: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Ammattikartta: {a}, {b}. ¦ Foglalkozástérkép: {a}, {b}.
+Carte des métiers : {n}. ¦ Ammattikartta: {n}. ¦ Foglalkozástérkép: {n}.
+Clic : les métiers de ce lieu ¦ Napsauta: tämän paikan ammatit ¦ Kattintás: e hely foglalkozásai
+Aucun métier noté au {when}. ¦ Ei ammatteja merkitty ajalle {when}. ¦ Nincs feljegyzett foglalkozás: {when}.
+Aucun métier pour ce choix. ¦ Ei ammatteja tälle valinnalle. ¦ Nincs foglalkozás ehhez a választáshoz.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Ota ammatit sukututkimuksestasi (”Sovelluksesta”). ¦ Vedd át a foglalkozásokat a családfádból („Az alkalmazásból”).
+LES MÉTIERS SUR LA CARTE ¦ AMMATIT KARTALLA ¦ FOGLALKOZÁSOK A TÉRKÉPEN
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ Ammatin napsautus avaa sen kortin (🛠️ Vanhat ammatit). ¦ Egy foglalkozásra kattintva megnyílik a lapja (🛠️ Régi foglalkozások).
+Les métiers de ta généalogie ¦ Sukututkimuksesi ammatit ¦ A családfád foglalkozásai
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Merkityt ammatit (ammatti, väenlaskenta, kortti) luokiteltuina kuten Ammattipuussa. Ei koskaan elävää henkilöä eikä luottamuksellista korttia. ¦ A feljegyzett foglalkozások (foglalkozás, népszámlálás, adatlap), a Foglalkozásfa szerint csoportosítva. Soha élő személy vagy bizalmas adatlap.
+Hommes et femmes ¦ Miehet ja naiset ¦ Férfiak és nők
+Les femmes ¦ Naiset ¦ A nők
+Toutes les époques ¦ Kaikki aikakaudet ¦ Minden korszak
+Aucun métier ¦ Ei ammatteja ¦ Nincs foglalkozás
+Aucun métier avec un lieu pour ce choix. ¦ Ei paikallisia ammatteja tälle valinnalle. ¦ Nincs hellyel rendelkező foglalkozás ehhez a választáshoz.
+Où on était {trade} ¦ Missä oltiin {trade} ¦ Hol voltak {trade}
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ {a} merkitty · {b} luokiteltu · {c} ”❔ muu” luokiteltavana ¦ {a} feljegyezve · {b} besorolva · {c} „❔ egyéb” besorolandó
+Mes ancêtres seulement ¦ Vain esivanhempani ¦ Csak az őseim
+Par famille de métiers du dictionnaire (18) ¦ Sanakirjan ammattiryhmittäin (18) ¦ Szótári foglalkozáscsaládonként (18)
+Par grand secteur (12) ¦ Pääaloittain (12) ¦ Fő ágazatonként (12)
+employé ¦ toimihenkilö ¦ alkalmazott
+ménagère ¦ kotiäiti ¦ háztartásbeli
+Où on l’exerçait ¦ Missä sitä harjoitettiin ¦ Hol űzték
+# 👫 Les deux lignées en miroir (partie 1)
+Les deux lignées en miroir (côté père, côté mère) ¦ Kaksi sukulinjaa rinnakkain (isän puoli, äidin puoli) ¦ A két ág tükrösen (apai oldal, anyai oldal)
+Les événements des deux côtés (un par ligne) ¦ Molempien puolten tapahtumat (yksi riviä kohti) ¦ A két oldal eseményei (soronként egy)
+Ancêtre des deux côtés ¦ Esivanhempi molemmilla puolilla ¦ Ős mindkét oldalon
+Aucun ancêtre connu : {who} ¦ Ei tunnettuja esivanhempia: {who} ¦ Nincs ismert ős: {who}
+Bleu / orange (lisibles aussi par les daltoniens) ¦ Sininen / oranssi (luettavissa myös värisokeille) ¦ Kék / narancs (színtévesztők számára is olvasható)
+Compté des deux côtés, couleur mélangée ¦ Lasketaan molemmille puolille, sekoitettu väri ¦ Mindkét oldalon számolva, kevert színnel
+Seulement du côté du chemin le plus court ¦ Vain lyhimmän polun puolella ¦ Csak a legrövidebb út oldalán
+Couleur du premier côté ¦ Ensimmäisen puolen väri ¦ Az első oldal színe
+Couleur du deuxième côté ¦ Toisen puolen väri ¦ A második oldal színe
+Côté père / côté mère ¦ Isän puoli / äidin puoli ¦ Apai oldal / anyai oldal
+Côté père / côté mère, avant la Révolution ¦ Isän / äidin puoli, ennen vallankumousta ¦ Apai / anyai oldal, a forradalom előtt
+Mes quatre grands-parents (4 couleurs) ¦ Neljä isovanhempaani (4 väriä) ¦ A négy nagyszülőm (4 szín)
+Deux personnes au choix ¦ Kaksi valittua henkilöä ¦ Két választott személy
+Deux noms de famille ¦ Kaksi sukunimeä ¦ Két családnév
+Deux groupes de Mes listes ¦ Kaksi ryhmää Omista luetteloista ¦ Két csoport a Saját listákból
+Premier nom ¦ Ensimmäinen nimi ¦ Első név
+Deuxième nom ¦ Toinen nimi ¦ Második név
+Première liste ¦ Ensimmäinen luettelo ¦ Első lista
+Deuxième liste ¦ Toinen luettelo ¦ Második lista
+Deux lignées de ta généalogie ¦ Kaksi sukulinjaa sukututkimuksestasi ¦ A családfád két ága
+Côté père et côté mère de la personne de départ (ou quatre grands-parents, deux personnes, deux noms, deux listes). Jamais un vivant ni une fiche confidentielle : une personne de départ vivante n’est jamais un point. ¦ Lähtöhenkilön isän ja äidin puoli (tai neljä isovanhempaa, kaksi henkilöä, kaksi nimeä, kaksi luetteloa). Ei koskaan elävää henkilöä eikä luottamuksellista korttia: elävä lähtöhenkilö ei ole koskaan piste. ¦ A kiinduló személy apai és anyai oldala (vagy négy nagyszülő, két személy, két név, két lista). Soha élő személy vagy bizalmas adatlap: élő kiinduló személy sosem lesz pont.
+Glisser (un trait à déplacer) ¦ Liu’uta (siirrettävä viiva) ¦ Húzás (mozgatható vonal)
+LES DEUX LIGNÉES ¦ KAKSI SUKULINJAA ¦ A KÉT ÁG
+Le mariage des parents (💍) ¦ Vanhempien häät (💍) ¦ A szülők esküvője (💍)
+Les deux lignées ¦ Molemmat sukulinjat ¦ Mindkét ág
+Les deux lignées : {a}, {b} où elles se rencontrent. ¦ Molemmat sukulinjat: {a}, {b}, joissa ne kohtaavat. ¦ Mindkét ág: {a}, {b}, ahol találkoznak.
+Les deux lignées : {n}. ¦ Molemmat sukulinjat: {n}. ¦ Mindkét ág: {n}.
+Les deux lignées de la famille {name} ¦ Suvun {name} kaksi sukulinjaa ¦ A {name} család két ága
+Les deux lignées de {name} ¦ Kaksi sukulinjaa: {name} ¦ {name} két ága
+Les quatre grands-parents de la famille {name} ¦ Suvun {name} neljä isovanhempaa ¦ A {name} család négy nagyszülője
+Les quatre grands-parents de {name} ¦ Neljä isovanhempaa: {name} ¦ {name} négy nagyszülője
+Lister sous la carte où elles se rencontrent ¦ Luettele kartan alle, missä ne kohtaavat ¦ A térkép alatt felsorolja, hol találkoznak
+Combien de lignes ¦ Montako riviä ¦ Hány sor
+Montré ¦ Näytetään ¦ Látható
+Même commune ¦ Sama kunta ¦ Ugyanaz a település
+Même commune à la même époque ¦ Sama kunta samaan aikaan ¦ Ugyanaz a település ugyanabban az időben
+À moins de quelques km ¦ Muutaman km:n päässä ¦ Néhány km-en belül
+À la même époque : à plus ou moins ¦ Samaan aikaan: plus miinus ¦ Ugyanabban az időben: plusz-mínusz
+Où elles se rencontrent ¦ Missä ne kohtaavat ¦ Hol találkoznak
+Par 25 ans ¦ 25 vuoden välein ¦ 25 évenként
+Position du trait ¦ Viivan sijainti ¦ A vonal helyzete
+Prends les deux lignées de ta personne de départ (« Depuis l’app »). ¦ Ota lähtöhenkilösi molemmat sukulinjat (”Sovelluksesta”). ¦ Vedd át a kiinduló személyed mindkét ágát („Az alkalmazásból”).
+Selon le nombre d’événements ¦ Tapahtumien määrän mukaan ¦ Az események száma szerint
+Ses deux lignées sur la carte ¦ Henkilön kaksi sukulinjaa kartalla ¦ A két ága a térképen
+Seulement la période ¦ Vain ajanjakso ¦ Csak az időszak
+Superposées ¦ Päällekkäin ¦ Egymásra rakva
+Tout jusqu’à cette date ¦ Kaikki tähän päivään asti ¦ Minden eddig a dátumig
+jamais à la même époque ¦ ei koskaan samaan aikaan ¦ soha nem ugyanabban az időben
+mariage de {a} et {b} ¦ {a} ja {b} vihittiin ¦ {a} és {b} esküvője
+{a} et {b}, à {km} km ¦ {a} ja {b}, {km} km:n päässä ¦ {a} és {b}, {km} km-re
+3e groupe ¦ 3. ryhmä ¦ 3. csoport
+4e groupe ¦ 4. ryhmä ¦ 4. csoport
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Elinalue sukupolvi kerrallaan ¦ Az élettér nemzedékről nemzedékre
+L’aire de vie de tes ancêtres ¦ Esivanhempiesi elinalue ¦ Őseid élettere
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Jokaiselle sukupolvelle alue, jolla on suurin osa sen syntymistä, avioliitoista ja kuolemista. Samat etäisyydet kuin 🧭 Kaukana kehdosta. Ei koskaan elävää henkilöä eikä luottamuksellista korttia. ¦ Minden nemzedékre az a terület, ahol születéseik, házasságaik és haláluk zöme történt. Ugyanazok a távolságok, mint a 🧭 Messze a bölcsőtől lapon. Soha élő személy vagy bizalmas adatlap.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Ota lähtöhenkilösi esivanhemmat (”Sovelluksesta”). ¦ Vedd át a kiinduló személyed őseit („Az alkalmazásból”).
+Génération d’ancêtres ¦ Esivanhempien sukupolvi ¦ Ősök nemzedéke
+Siècle (toute la base) ¦ Vuosisata (koko tietokanta) ¦ Évszázad (az egész adatbázis)
+Une vie (les étapes d’une personne) ¦ Yksi elämä (henkilön vaiheet) ¦ Egy élet (egy személy állomásai)
+Avec les résidences et recensements ¦ Asuinpaikkojen ja väenlaskentojen kanssa ¦ A lakóhelyekkel és népszámlálásokkal
+Du clair (anciens) au foncé (récents) ¦ Vaaleasta (vanhimmat) tummaan (uusimmat) ¦ A világostól (legrégebbiek) a sötétig (legújabbak)
+Bleu / orange pour père / mère ¦ Sininen / oranssi isälle / äidille ¦ Kék / narancs az apai / anyai oldalnak
+L’inverse ¦ Päinvastoin ¦ Fordítva
+50 % (le cœur) ¦ 50 % (ydin) ¦ 50% (a mag)
+Part des événements ¦ Tapahtumien osuus ¦ Az események aránya
+Part gardée ¦ Säilytetty osuus ¦ Megtartott arány
+Cercle (facile à comparer) ¦ Ympyrä (helppo verrata) ¦ Kör (könnyen összehasonlítható)
+Enveloppe (le contour au plus juste) ¦ Verho (tiukin ääriviiva) ¦ Burok (a legszorosabb körvonal)
+Personne (l’aire d’une vie) ¦ Henkilö (yhden elämän alue) ¦ Személy (egy élet tere)
+Le milieu des événements ¦ Tapahtumien keskikohta ¦ Az események közepe
+Le lieu de naissance de la personne de départ ¦ Lähtöhenkilön syntymäpaikka ¦ A kiinduló személy születési helye
+Le berceau des plus anciens ¦ Vanhimpien kehto ¦ A legrégebbiek bölcsője
+Toutes les aires superposées ¦ Kaikki alueet päällekkäin ¦ Minden tér egymásra rakva
+Une par case ¦ Yksi ruutua kohti ¦ Mezőnként egy
+Une à la fois avec ▶ ¦ Yksi kerrallaan ▶:llä ¦ Egyenként a ▶ gombbal
+Minimum pour tracer une aire ¦ Vähimmäismäärä alueen piirtämiseen ¦ Minimum egy tér megrajzolásához
+5 événements ¦ 5 tapahtumaa ¦ 5 esemény
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Alueisiin (kauas lähtenyt esivanhempi jää alueen ulkopuolelle) ¦ A terekre (a messzire költözött ős a téren kívül marad)
+Cadrer sur tout ¦ Rajaa kaikki ¦ Mindent a képre
+Le tableau sous la carte ¦ Taulukko kartan alla ¦ A táblázat a térkép alatt
+Gén. {g} · ses parents ¦ Sp. {g} · vanhemmat ¦ {g}. nemz. · a szülők
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Napsauta: paikat ja alueen ulkopuoliset ¦ Kattintás: a helyek és a téren kívüliek
+Hors de l’aire ¦ Alueen ulkopuolella ¦ A téren kívül
+Rayon ({p} %) ¦ Säde ({p} %) ¦ Sugár ({p}%)
+trop peu ¦ liian vähän ¦ túl kevés
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Elinalue: {n}, säde {a}–{b} km. ¦ Élettér: {n}, sugár {a} km-től {b} km-ig.
+Aire de vie : pas assez d’événements. ¦ Elinalue: liian vähän tapahtumia. ¦ Élettér: nincs elég esemény.
+Aire de vie : {n}. ¦ Elinalue: {n}. ¦ Élettér: {n}.
+L’AIRE DE VIE ¦ ELINALUE ¦ AZ ÉLETTÉR
+L’aire de vie de la famille, siècle par siècle ¦ Suvun elinalue vuosisata kerrallaan ¦ A család élettere évszázadonként
+L’aire de vie des ancêtres de {name} ¦ Esivanhempien elinalue: {name} ¦ {name} őseinek élettere
+L’aire d’une vie : {name} ¦ Yhden elämän alue: {name} ¦ Egy élet tere: {name}
+la famille {name} ¦ suku {name} ¦ a {name} család
+Voir l’aire de vie sur la carte ¦ Näytä elinalue kartalla ¦ Az élettér a térképen
+Centre ¦ Keskipiste ¦ Középpont
+Côté père et côté mère (deux couleurs) ¦ Isän ja äidin puoli (kaksi väriä) ¦ Apai és anyai oldal (két szín)
+Mes ancêtres, 8 générations ¦ Esivanhempani, 8 sukupolvea ¦ Őseim, 8 nemzedék
+Toute ma base, siècle par siècle ¦ Koko tietokantani vuosisata kerrallaan ¦ Az egész adatbázisom évszázadonként
+=aire ¦ alue|aluetta ¦ terület|terület
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Kummit ja todistajat kartalla ¦ Keresztszülők és tanúk a térképen
+Les liens (un par ligne) ¦ Siteet (yksi riviä kohti) ¦ A kapcsolatok (soronként egy)
+D’où vient le témoin ¦ Mistä todistaja tulee ¦ Honnan jön a tanú
+D’où vient le parrain ¦ Mistä kummi tulee ¦ Honnan jön a keresztszülő
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ Asiakirjaan kirjoitettu, muuten asuinpaikka sinä päivänä, muuten syntymä ¦ Ami az iratban áll, különben a lakóhely az adott időben, különben a születés
+Seulement ce qui est écrit dans l’acte ¦ Vain asiakirjaan kirjoitettu ¦ Csak ami az iratban áll
+Seulement sa naissance ¦ Vain syntymä ¦ Csak a születés
+Nombre de liens ¦ Siteiden määrä ¦ A kapcsolatok száma
+Nombre de personnes différentes ¦ Eri henkilöiden määrä ¦ A különböző személyek száma
+Liens dans le même village ¦ Siteet samassa kylässä ¦ Kapcsolatok ugyanabban a faluban
+Anneau autour du point ¦ Rengas pisteen ympärillä ¦ Gyűrű a pont körül
+Un chiffre seulement ¦ Vain luku ¦ Csak egy szám
+Rôles montrés ¦ Näytetyt roolit ¦ Látható szerepek
+Parrain, marraine, témoin ¦ Kummisetä, kummitäti, todistaja ¦ Keresztapa, keresztanya, tanú
+Tous sauf curé et officier ¦ Kaikki paitsi pappi ja virkailija ¦ Mindenki, kivéve a pap és az anyakönyvvezető
+Traits montrés ¦ Näytetyt viivat ¦ Látható vonalak
+À partir de 1 lien ¦ 1 siteestä alkaen ¦ 1 kapcsolattól
+À partir de 2 ¦ 2:sta alkaen ¦ 2-től
+À partir de 3 ¦ 3:sta alkaen ¦ 3-tól
+Les 30 plus forts seulement ¦ Vain 30 vahvinta ¦ Csak a 30 legerősebb
+Par rôle ¦ Rooleittain ¦ Szerepenként
+Par branche (bleu père, orange mère) ¦ Haaroittain (sininen isä, oranssi äiti) ¦ Ágak szerint (kék apa, narancs anya)
+Flèche du village du parrain vers celui de l’acte ¦ Nuoli kummin kylästä asiakirjan kylään ¦ Nyíl a keresztszülő falujától az irat falujáig
+La phrase sous la carte ¦ Lause kartan alla ¦ A mondat a térkép alatt
+Clic : les liens derrière ce trait ¦ Napsauta: tämän viivan takana olevat siteet ¦ Kattintás: a vonal mögötti kapcsolatok
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: {p} % siteistä on kylästä itsestään; muut tulevat enimmäkseen täältä: {others}. ¦ {place}: a kapcsolatok {p}%-a magából a faluból való; a többi főleg innen: {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Laskettu: {a}, joiden kylä tunnetaan; ilman paikkaa, ei piirretty: {b}. ¦ Számítás alapja: {a} ismert faluval; hely nélküli, nem rajzolt: {b}.
+Parrains et témoins : {a} entre {b}. ¦ Kummit ja todistajat: {a}, paikkoja {b}. ¦ Keresztszülők és tanúk: {a}, {b} között.
+Parrains et témoins : {n}. ¦ Kummit ja todistajat: {n}. ¦ Keresztszülők és tanúk: {n}.
+Filleul ou époux ¦ Kummilapsi tai puoliso ¦ Keresztgyermek vagy házastárs
+{n} autres · triés par date ¦ {n} muuta · päivämäärän mukaan ¦ Még {n} · dátum szerint
+Ouvrir dans le Réseau ¦ Avaa Verkostossa ¦ Megnyitás a Hálózatban
+PARRAINS ET TÉMOINS ¦ KUMMIT JA TODISTAJAT ¦ KERESZTSZÜLŐK ÉS TANÚK
+Parrains et marraines ¦ Kummisedät ja -tädit ¦ Keresztapák és keresztanyák
+Parrains, marraines et témoins ¦ Kummit ja todistajat ¦ Keresztszülők és tanúk
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Ota kummit ja todistajat sukututkimuksestasi (”Sovelluksesta”). ¦ Vedd át a keresztszülőket és tanúkat a családfádból („Az alkalmazásból”).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ 🕸 Suhdeverkoston siteet kartalla: asiakirjan kylä ja todistajan kotikylä. Eläviä todistajia ei koskaan lasketa. ¦ A 🕸 Kapcsolati háló kapcsolatai a térképen: az irat faluja és az, ahonnan a tanú jön. Élő tanúkat soha nem számol.
+Aucun lien avec un lieu pour ce choix. ¦ Ei paikallisia siteitä tälle valinnalle. ¦ Nincs hellyel rendelkező kapcsolat ehhez a választáshoz.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Ei siteitä tälle valinnalle (roolit, ajanjakso, paikat). ¦ Nincs kapcsolat ehhez a választáshoz (szerepek, időszak, helyek).
+Curé, officier ¦ Pappi, virkailija ¦ Pap, anyakönyvvezető
+curé ¦ pappi ¦ pap
+Curé ¦ Pappi ¦ Pap
+tuteur ¦ holhooja ¦ gyám
+Voisin ¦ Naapuri ¦ Szomszéd
+Officier ¦ Virkailija ¦ Anyakönyvvezető
+bapt. ¦ kaste ¦ kereszt.
+naiss. ¦ synt. ¦ szül.
+mar. ¦ vihk. ¦ házas.
+inh. ¦ haud. ¦ temet.
+# ⚰️ Crises et épidémies (partie 3) — et les départs « Graphique » de 🕸
+Crises et épidémies (les années où les décès montent) ¦ Kriisit ja epidemiat (vuodet, jolloin kuolemat lisääntyvät) ¦ Válságok és járványok (az évek, amikor megugrik a halálozás)
+Les décès (un par ligne) ¦ Kuolemat (yksi riviä kohti) ¦ A halálozások (soronként egy)
+Cause notée ¦ Merkitty syy ¦ Feljegyzett ok
+Choléra de 1832 ¦ Vuoden 1832 kolera ¦ Az 1832-es kolera
+Clic : les personnes, et ce qui se passait à la même époque ¦ Napsauta: henkilöt ja mitä samaan aikaan tapahtui ¦ Kattintás: a személyek és ami ugyanakkor történt
+Comptés avec tout le monde ¦ Lasketaan muiden mukana ¦ Mindenkivel együtt számolva
+À part ¦ Erikseen ¦ Külön
+À part (moins de 10 ans) ¦ Erikseen (alle 10-vuotiaat) ¦ Külön (10 év alattiak)
+Pas comptés ¦ Ei lasketa ¦ Nem számolva
+Mes ancêtres et leurs familles ¦ Esivanhempani ja heidän perheensä ¦ Őseim és családjaik
+Les enfants à part (moins de 10 ans) ¦ Lapset erikseen (alle 10-vuotiaat) ¦ A gyerekek külön (10 év alattiak)
+Les décès de ta généalogie ¦ Sukututkimuksesi kuolemat ¦ A családfád halálozásai
+Les décès placés et datés (le décès, sinon l’inhumation ; chaque personne une seule fois), et les crises du 🌍 Monde autour avec tes événements locaux. Jamais un vivant ni une fiche confidentielle. ¦ Sijoitetut ja päivätyt kuolemat (kuolema, muuten hautaus; jokainen henkilö vain kerran) sekä 🌍 Maailma ympärillä -kriisit paikallisine tapahtumineen. Ei koskaan elävää henkilöä eikä luottamuksellista korttia. ¦ Az elhelyezett és keltezett halálozások (a halál, különben a temetés; mindenki csak egyszer), és a 🌍 Körülötte a világ válságai a helyi eseményeiddel. Soha élő személy vagy bizalmas adatlap.
+Aucun décès daté avec un lieu pour ce choix. ¦ Ei päivättyjä kuolemia paikkoineen tälle valinnalle. ¦ Nincs keltezett, hellyel rendelkező halálozás ehhez a választáshoz.
+Décès sans année ou sans lieu, comptés à part : {n} ¦ Kuolemat ilman vuotta tai paikkaa, laskettu erikseen: {n} ¦ Év vagy hely nélküli halálozások, külön számolva: {n}
+Minimum de décès dans l’année ¦ Kuolemien vähimmäismäärä vuodessa ¦ Legalább ennyi halálozás az évben
+Décès au moins ¦ Kuolemia vähintään ¦ Halálozás legalább
+2,5 fois l’habitude ¦ 2,5-kertaisesti tavallinen ¦ A szokásos 2,5-szerese
+2 fois ¦ 2-kertaisesti ¦ 2-szeres
+3 fois ¦ 3-kertaisesti ¦ 3-szoros
+4 fois ¦ 4-kertaisesti ¦ 4-szeres
+Fois l’habitude ¦ Kertaa tavallinen ¦ A szokásos hányszorosa
+Fenêtre de l’habitude ¦ Tavallisen tason ikkuna ¦ A szokásos szint ablaka
+5 ans avant et 5 ans après ¦ 5 vuotta ennen ja 5 vuotta jälkeen ¦ 5 évvel előtte és 5 évvel utána
+10 et 10 ¦ 10 ja 10 ¦ 10 és 10
+Seulement les 10 ans avant ¦ Vain 10 edeltävää vuotta ¦ Csak az előtte lévő 10 év
+L’habitude se calcule par ¦ Tavallinen taso lasketaan ¦ A szokásos szint számítása
+La moyenne ¦ Keskiarvo ¦ Az átlag
+La médiane (moins dérangée par une autre crise toute proche) ¦ Mediaani (vähemmän toisen läheisen kriisin häiritsemä) ¦ A medián (kevésbé zavarja egy közeli másik válság)
+La commune, les petites regroupées avec leurs voisines ¦ Kunta, pienet ryhmiteltyinä naapuriensa kanssa ¦ A település, a kicsik a szomszédaikkal összevonva
+Toujours la commune ¦ Aina kunta ¦ Mindig a település
+Le département ¦ Departementti ¦ A megye
+Petit village : nombre de décès sur toute la période, moins de ¦ Pieni kylä: kuolemia koko ajanjaksolla alle ¦ Kis falu: az egész időszak halálozásai kevesebb mint
+Enfant : moins de ¦ Lapsi: alle ¦ Gyermek: kevesebb mint
+Repères proposés ¦ Ehdotetut vertailukohdat ¦ Javasolt viszonyítási pontok
+Les crises du 🌍 Monde autour qui couvrent la commune, et mes événements ¦ 🌍 Maailma ympärillä -kriisit, jotka koskevat kuntaa, ja omat tapahtumani ¦ A 🌍 Körülötte a világ települést érintő válságai és a saját eseményeim
+Toutes les crises de l’année ¦ Kaikki vuoden kriisit ¦ Az év összes válsága
+Pas du temps ¦ Aika-askel ¦ Időlépés
+Pas assez de décès placés : moins de ¦ Liian vähän sijoitettuja kuolemia: alle ¦ Túl kevés elhelyezett halálozás: kevesebb mint
+Pas assez de décès placés pour repérer des crises. ¦ Liian vähän sijoitettuja kuolemia kriisien löytämiseen. ¦ Túl kevés elhelyezett halálozás a válságok felismeréséhez.
+Prends les décès de ta généalogie (« Depuis l’app »). ¦ Ota kuolemat sukututkimuksestasi (”Sovelluksesta”). ¦ Vedd át a halálozásokat a családfádból („Az alkalmazásból”).
+LES ANNÉES DE CRISE ¦ KRIISIVUODET ¦ A VÁLSÁGÉVEK
+Les années de crise de la famille ¦ Suvun kriisivuodet ¦ A család válságévei
+Les années de crise sur la carte ¦ Kriisivuodet kartalla ¦ A válságévek a térképen
+Les années de crise : {n}, sur {d}. ¦ Kriisivuodet: {n}, yhteensä {d}. ¦ Válságévek: {n}, összesen {d}.
+Les années de crise : {n}. ¦ Kriisivuodet: {n}. ¦ Válságévek: {n}.
+Les années à voir · {n} ¦ Tarkasteltavat vuodet · {n} ¦ Megnézendő évek · {n}
+=année à voir ¦ tarkasteltava vuosi|tarkasteltavaa vuotta ¦ megnézendő év|megnézendő év
+Habitude ¦ Tavallisesti ¦ Szokásos
+À la même époque (repère) ¦ Samaan aikaan (vertailukohta) ¦ Ugyanabban az időben (viszonyítási pont)
+À la même époque : {what} — un repère, pas une explication. ¦ Samaan aikaan: {what} – vertailukohta, ei selitys. ¦ Ugyanabban az időben: {what} – viszonyítási pont, nem magyarázat.
+Rien de connu dans cette région à cette date. ¦ Tällä alueella ei tiedetä mitään tältä ajalta. ¦ Erről a vidékről ebből az időből semmi sem ismert.
+rien de connu dans cette région à cette date ¦ tällä alueella ei tiedetä mitään tältä ajalta ¦ erről a vidékről ebből az időből semmi sem ismert
+cause notée : « {c} » ¦ merkitty syy: ”{c}” ¦ feljegyzett ok: „{c}”
+d’habitude {u} par an ¦ tavallisesti {u} vuodessa ¦ általában évi {u}
+plus de ×5 ¦ yli ×5 ¦ több mint ×5
+×2,5 à 3 ¦ ×2,5–3 ¦ ×2,5–3
+×3 à 5 ¦ ×3–5 ¦ ×3–5
+{name} + {n} voisines ¦ {name} + {n} naapuria ¦ {name} + {n} szomszéd
++ {n} autres ¦ + {n} muuta ¦ + még {n}
+Écrire la commune et l’année près des ronds ¦ Kirjoita kunta ja vuosi ympyröiden viereen ¦ Település és év a körök mellé
+À lire avec prudence : l’app compare des nombres de décès, elle ne sait pas pourquoi ils montent. Le repère est ce qui se passait à la même époque : une piste à vérifier dans les actes (cause notée, âge, mois). Sur de petits nombres, le hasard suffit parfois. ¦ Lue varoen: sovellus vertaa kuolemien määriä, se ei tiedä, miksi ne kasvavat. Vertailukohta on se, mitä samaan aikaan tapahtui: johtolanka, joka kannattaa tarkistaa asiakirjoista (merkitty syy, ikä, kuukausi). Pienillä luvuilla sattuma riittää joskus. ¦ Óvatosan olvasd: az alkalmazás halálozási számokat hasonlít össze, nem tudja, miért nőnek. A viszonyítási pont az, ami ugyanakkor történt: egy nyom, amit az iratokban kell ellenőrizni (feljegyzett ok, életkor, hónap). Kis számoknál néha a véletlen is elég.
+Autour de mes ancêtres ¦ Esivanhempieni ympärillä ¦ Az őseim körül
+Parrains et marraines des baptêmes ¦ Kastetilaisuuksien kummit ¦ Keresztszülők a keresztelőkön
+Témoins des mariages ¦ Häiden todistajat ¦ Esküvői tanúk
+Tous les liens (parrains, témoins, déclarants…) ¦ Kaikki siteet (kummit, todistajat, ilmoittajat…) ¦ Minden kapcsolat (keresztszülők, tanúk, bejelentők…)
+années à voir ¦ tarkasteltavaa vuotta ¦ megnézendő év
+année à voir ¦ tarkasteltava vuosi ¦ megnézendő év
+Ce qu’on prend ¦ Mitä otetaan ¦ Mit veszünk
+Tout : vu, en partie, à chercher ¦ Kaikki: nähty, osittain, etsittävä ¦ Minden: látott, részben, keresendő
+Seulement ce qui reste à faire ¦ Vain se, mikä on vielä tekemättä ¦ Csak ami még hátravan
+Seulement ce qui a été vu ¦ Vain se, mikä on nähty ¦ Csak ami már megvolt
+Sans le nom des correspondances ¦ Ilman osumien nimiä ¦ Az egyezések neve nélkül
+Avec le nom des correspondances (pas pour un export partagé) ¦ Osumien nimien kanssa (ei jaettavaan vientiin) ¦ Az egyezések nevével (nem megosztott exporthoz)
+Naissances par an, une bougie par décennie ¦ Syntymät vuodessa, yksi kynttilä vuosikymmentä kohden ¦ Születések évente, évtizedenként egy gyertya
+Décès par an, une bougie par décennie (les années de crise en haut des mèches) ¦ Kuolemat vuodessa, yksi kynttilä vuosikymmentä kohden (kriisivuodet sydänten huipulla) ¦ Halálozások évente, évtizedenként egy gyertya (a válságévek a kanócok tetején)
+Mariages par an, une bougie par décennie ¦ Avioliitot vuodessa, yksi kynttilä vuosikymmentä kohden ¦ Házasságkötések évente, évtizedenként egy gyertya
+Pas assez d’années datées pour ce choix. ¦ Tähän valintaan ei ole tarpeeksi päivättyjä vuosia. ¦ Ehhez a választáshoz nincs elég keltezett év.
+Naissances par an, décennie par décennie ¦ Syntymät vuodessa, vuosikymmen kerrallaan ¦ Születések évente, évtizedről évtizedre
+Décès par an, décennie par décennie ¦ Kuolemat vuodessa, vuosikymmen kerrallaan ¦ Halálozások évente, évtizedről évtizedre
+Mariages par an, décennie par décennie ¦ Avioliitot vuodessa, vuosikymmen kerrallaan ¦ Házasságkötések évente, évtizedről évtizedre
+par an ¦ vuodessa ¦ évente
+Chaque bougie : la 1re et la dernière année de la décennie, l’année la plus basse et la plus haute ¦ Jokainen kynttilä: vuosikymmenen ensimmäinen ja viimeinen vuosi, alin ja korkein vuosi ¦ Minden gyertya: az évtized első és utolsó éve, a legalacsonyabb és a legmagasabb év

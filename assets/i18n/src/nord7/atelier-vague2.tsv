@@ -1,0 +1,59 @@
+fr ¦ is
+# 📜 Atelier de transcription, vague 2 « Guider »
+Les étapes : Lire, Corriger, Repérer, Ajouter à la généalogie ¦ Skrefin: Lesa, Laga, Greina, Bæta við ættfræðina
+Lire l’image (« ✨ Lire ▾ ») ou écrire le texte, ligne à ligne ¦ Lestu myndina („✨ Lesa ▾“) eða skrifaðu textann, línu fyrir línu
+Relire et corriger : corrections proposées, mots douteux [?], aide à la lecture ¦ Yfirfara og laga: tillögur að leiðréttingum, vafasöm orð [?], lestrarhjálp
+Ajouter les personnes et l’événement à la généalogie ¦ Bæta einstaklingunum og atburðinum við ættfræðina
+Toute la page ou la zone choisie (▭) ; ou écris le texte toi-même, ligne à ligne. ¦ Öll síðan eða valið svæði (▭); eða skrifaðu textann sjálf(ur), línu fyrir línu.
+=mot à revoir ¦ orð til að yfirfara|orð til að yfirfara
+rien à revoir ¦ ekkert að yfirfara
+=nom repéré ¦ greint nafn|greind nöfn
+{n} à relier ¦ {n} ótengd
+Tout est relié ¦ Allt tengt
+{n} × [?] ou [illisible] ¦ {n} × [?] eða [ólæsilegt]
+=personne dans l’acte ¦ einstaklingur í færslunni|einstaklingar í færslunni
+Personne dans l’acte pour l’instant : « 🧭 Repérer » les trouve dans le texte ¦ Enginn í færslunni enn: „🧭 Greina“ finnur þá í textanum
+# — téléphone : trois onglets
+Image, texte ou personnes ¦ Mynd, texti eða einstaklingar
+# — 👁 relecture ligne à ligne en plein écran
+Le morceau d’image de la ligne ¦ Myndbútur línunnar
+Pas de zone pour cette ligne : dessine-la sur l’image (▭), elle restera reliée. ¦ Ekkert svæði fyrir þessa línu: teiknaðu það á myndina (▭), það helst tengt.
+Ligne à relire ¦ Lína til að yfirfara
+Relue ¦ Yfirfarið
+Ligne d’avant ¦ Fyrri lína
+atelier|Ligne suivante ¦ Næsta lína
+Entrée : la ligne est relue, ligne suivante · ⇧ Entrée : ligne d’avant · ↑ ↓ : changer de ligne sans la marquer · Échap : fermer ¦ Enter: línan yfirfarin, næsta lína · ⇧ Enter: fyrri lína · ↑ ↓: skipta um línu án þess að merkja hana · Esc: loka
+Ligne {n} sur {total} ¦ Lína {n} af {total}
+=ligne relue ¦ lína yfirfarin|línur yfirfarnar
+Toutes les lignes sont relues. ¦ Allar línur eru yfirfarnar.
+C’était la dernière ligne. ¦ Þetta var síðasta línan.
+Relire ligne à ligne ¦ Yfirfara línu fyrir línu
+Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Yfirfara línu fyrir línu á öllum skjánum: myndbúturinn fyrir ofan hverja línu
+Relecture ligne à ligne en plein écran (conseillé) ¦ Yfirferð línu fyrir línu á öllum skjánum (mælt með)
+# — 🕘 Versions, 🔍 Chercher / Remplacer, ⌨️ touches
+Chercher dans le texte ¦ Leita í textanum
+Chercher et remplacer ¦ Leita og skipta út
+« {q} » → « {by} » : {n} ¦ „{q}“ → „{by}“: {n}
+Avant « Remplacer » ¦ Fyrir „Skipta út“
+Avant « Tout remplacer » ¦ Fyrir „Skipta öllu út“
+Avant « Accepter les propositions sûres » ¦ Fyrir „Samþykkja öruggar tillögur“
+Avant la lecture mise dans le texte ¦ Áður en lesturinn var settur í textann
+Résultat suivant, résultat d’avant ¦ Næsta niðurstaða, fyrri niðurstaða
+Ligne suivante, ligne d’avant : l’image suit sa zone ¦ Næsta lína, fyrri lína: myndin fylgir svæði hennar
+Déplacer l’image, en restant appuyé ¦ Færa myndina, haldið niðri
+Déplacer la zone choisie (⇧ : l’agrandir) ¦ Færa valið svæði (⇧: stækka það)
+Supprimer la zone choisie ¦ Eyða völdu svæði
+Zoom avant, zoom arrière ¦ Auka aðdrátt, minnka aðdrátt
+Cette liste des touches ¦ Þessi listi yfir lykla
+# — avancement et abréviations au survol
+=mot douteux ¦ vafasamt orð|vafasöm orð
+aucun mot douteux ¦ ekkert vafasamt orð
+{n} / {total} lignes relues ¦ {n} / {total} línur yfirfarnar
+{n} / {total} lignes reliées ¦ {n} / {total} línur tengdar
+Marquer comme finie ¦ Merkja sem lokið
+Marquer comme relue ¦ Merkja sem yfirfarið
+Ligne sans zone : dessine-la sur l’image (▭) ¦ Lína án svæðis: teiknaðu það á myndina (▭)
+Ne plus souligner les abréviations ¦ Hætta að undirstrika skammstafanir
+Souligner les abréviations connues ¦ Undirstrika þekktar skammstafanir
+Abréviations connues soulignées, leur sens au survol (conseillé) ¦ Þekktar skammstafanir undirstrikaðar, merking þeirra þegar bendill fer yfir (mælt með)
+Relues ¦ Yfirfarnar

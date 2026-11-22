@@ -40,8 +40,9 @@
 
     /* ═════════ ⏳ Sablier : ascendants (générations −1, −2…) au-dessus, descendants (+1, +2…) au-dessous ═════════ */
     function hourglass(spec, W, fs) {
-        const o = spec.o || {}, list = rowsOf(spec, 'rows', 600).map(r => ({name: str(r.name, 80), gen: Math.round(clamp(num(r.gen), -8, 8)), dates: str(r.dates, 40), note: str(r.note, 120)})).filter(r => r.name);
+        const o = spec.o || {}, list = rowsOf(spec, 'rows', 600).map(r => ({name: str(r.name, 80), gen: Math.round(clamp(num(r.gen), -8, 8)), dates: str(r.dates, 40), note: str(r.note, 120), sosa: Math.floor(num(r.sosa)), parent: str(r.parent, 80), value: str(r.value, 40)})).filter(r => r.name);
         if (!list.some(r => r.gen === 0)) return empty(W, fs, 'Ajoute la personne du milieu (génération 0), puis ses ascendants (−1, −2…) et ses descendants (1, 2…).');
+        if (o.shape === 'fans') return doubleFan(spec, list, W, fs);
         const gens = [...new Set(list.map(r => r.gen))].sort((a, b) => a - b), rowH = clamp(num(o.rowHeight) || fs * 3.4, fs * 2.2, 140), gap = clamp(num(o.gap) || fs * 1.6, 6, 100);
         const top = clamp(num(o.top), 0, 40) || 4, cUp = color(o.upColor, '#4e79a7'), cDown = color(o.downColor, '#59a14f'), cMid = color(o.midColor, '#e15759');
         let svg = '', y = top; const pos = new Map(), lw = o.genLabels !== false && W > 420 ? fs * 6.2 : 0, AW = W - lw; // la place des noms de générations, à gauche
@@ -61,10 +62,55 @@
         const up = list.filter(r => r.gen < 0).length, down = list.filter(r => r.gen > 0).length;
         return {h: Math.max(num(o.height) || 0, y - gap + 4), svg, legend: [{label: 'Ascendants', color: cUp}, {label: 'La personne', color: cMid}, {label: 'Descendants', color: cDown}], desc: `Sablier : ${up} ascendant${up > 1 ? 's' : ''} au-dessus, ${down} descendant${down > 1 ? 's' : ''} au-dessous.`};
     }
+    /** ⏳ la forme « deux éventails » : les ascendants en demi-cercle au-dessus (place = n° Sosa), les descendants en demi-cercle au-dessous */
+    function doubleFan(spec, list, W, fs) {
+        const o = spec.o || {}, me = list.find(r => r.gen === 0), up = list.filter(r => r.gen < 0), down = list.filter(r => r.gen > 0);
+        const G1 = clamp(Math.max(0, ...up.map(r => -r.gen)), 0, 8), G2 = clamp(Math.max(0, ...down.map(r => r.gen)), 0, 8), G = Math.max(1, G1, G2);
+        // les ascendants : à leur place Sosa (2 = père, 3 = mère, 4…7 grands-parents) ; sans numéro, la première place libre
+        const slot = new Map();
+        for (let g = 1; g <= G1; g++) { const row = up.filter(r => -r.gen === g), lo = 2 ** g, hi = 2 ** (g + 1);
+            row.forEach(r => { if (r.sosa >= lo && r.sosa < hi && !slot.has(r.sosa)) slot.set(r.sosa, r); else r.free = true; });
+            row.filter(r => r.free).forEach(r => { for (let s0 = lo; s0 < hi; s0++) if (!slot.has(s0)) { slot.set(s0, r); break; } }); }
+        // les descendants : chacun sous son parent (colonne « Parent », sinon le dernier de la génération d'avant)
+        const kids = new Map([[me, []]]);
+        for (let g = 1; g <= G2; g++) { const prev = g === 1 ? [me] : down.filter(r => r.gen === g - 1);
+            down.filter(r => r.gen === g).forEach((r, i, row) => { const at = list.indexOf(r); const p = (r.parent && prev.find(q => q.name.toLowerCase() === r.parent.toLowerCase())) || [...prev].filter(q => list.indexOf(q) < at).pop() || prev[0]; if (!p) return; if (!kids.has(p)) kids.set(p, []); kids.get(p).push(r); kids.set(r, kids.get(r) || []); void row; }); }
+        const weight = r => 1 + (kids.get(r) || []).reduce((a, k) => a + weight(k), 0);
+        const gap = fs * .8, maxR = Math.max(60, Math.min(W / 2 - 6, num(o.height) > 200 ? (num(o.height) - gap) / 2 : W * .45)), r0 = clamp(maxR * .16, fs * 2.6, maxR * .3), ring = (maxR - r0) / G;
+        const upR = r0 + G1 * ring, dnR = r0 + G2 * ring, cx = W / 2, cy = Math.max(upR, r0) + 4;
+        const cUp = color(o.upColor, '#4e79a7'), cMat = color(o.matColor, '#b07aa1'), cDown = color(o.downColor, '#59a14f'), cMid = color(o.midColor, '#e15759'), by = o.fanColor || 'side';
+        const vals = list.map(r => r.value).filter(x => x !== '' && Number.isFinite(Number(String(x).replace(',', '.')))).map(x => Number(String(x).replace(',', '.'))), vlo = Math.min(...vals), vhi = Math.max(...vals);
+        const lowC = color(o.lowColor, '#fde0c5'), highC = color(o.highColor, '#b3261e');
+        const tint = (c, g) => mixC(c, '#ffffff', clamp((g - 1) * .13, 0, .6));
+        const fill = (r, side, g, branch) => { if (by === 'value') { const x = Number(String(r?.value ?? '').replace(',', '.')); return r && r.value !== '' && Number.isFinite(x) && vals.length ? mixC(lowC, highC, vhi > vlo ? (x - vlo) / (vhi - vlo) : 1) : '#d5d9df'; }
+            if (by === 'gen') return tint(side === 'down' ? cDown : cUp, g); return side === 'down' ? tint(pick(spec, branch + 4), g) : tint(side === 'pat' ? cUp : cMat, g); };
+        const label = (a0, a1, rA, rB, r, f) => { const am = (a0 + a1) / 2, rm = (rA + rB) / 2, arcL = rm * (a1 - a0), depth = rB - rA, [x, y] = P(cx, cy, rm, am);
+            let deg = am * 180 / Math.PI, rot, room, size; if (arcL > depth * 1.15) { rot = deg + 90; room = arcL * .9; size = Math.min(fs * .8, depth * .36); } else { rot = deg; room = depth * .9; size = Math.min(fs * .78, arcL * .5); }
+            rot = ((rot % 360) + 360) % 360; if (rot > 90 && rot < 270) rot -= 180; if (size < 5) return '';
+            const t = cut(r.name, room, size); if (!t) return '';
+            return `<text x="${r2(x)}" y="${r2(y)}" font-size="${r2(size)}" text-anchor="middle" dominant-baseline="middle" font-weight="600" fill="${contrast(f)}" transform="rotate(${r2(rot)} ${r2(x)} ${r2(y)})">${esc(t)}</text>`; };
+        let svg = '';
+        const part = (a0, a1, rA, rB, r, f, dashed) => `<g>${r ? tip(`${r.name}${r.dates ? ' · ' + r.dates : ''}${r.value ? ' · ' + r.value : ''}${r.note ? ' — ' + r.note : ''}`) : tip(i18n('Ancêtre à trouver'))}<path d="${arc(cx, cy, rA, rB, a0, a1)}" fill="${f}" stroke="#ffffff" stroke-width="1"${dashed ? ' fill-opacity=".25" stroke-dasharray="3 2"' : ''}/>${r ? label(a0, a1, rA, rB, r, f) : ''}</g>`;
+        // en haut : de π (à gauche, côté paternel) à 2π (à droite, côté maternel)
+        for (let g = 1; g <= G1; g++) { const n = 2 ** g, rA = r0 + (g - 1) * ring, rB = rA + ring - 1;
+            for (let i = 0; i < n; i++) { const s0 = n + i, r = slot.get(s0), a0 = Math.PI + Math.PI * i / n, a1 = a0 + Math.PI / n, side = i < n / 2 ? 'pat' : 'mat';
+                if (r) svg += part(a0, a1, rA, rB, r, fill(r, side, g));
+                else if (o.emptyCells !== false && (g === 1 || slot.has(s0 >> 1))) svg += part(a0, a1, rA, rB, null, '#c9ced6', true); } }
+        // en bas : de 0 à π (sens des aiguilles d'une montre, de droite à gauche en passant par le bas) ; parts égales ou selon les descendants
+        const placeKids = (p, a0, a1, g, branch) => { const ks = kids.get(p) || []; if (!ks.length || g > G2) return; const tot = ks.reduce((a, k) => a + (o.fanSize === 'equal' ? 1 : weight(k)), 0); let a = a0;
+            ks.forEach((k, i) => { const w = (a1 - a0) * (o.fanSize === 'equal' ? 1 : weight(k)) / tot, b = g === 1 ? i : branch, rA = r0 + (g - 1) * ring;
+                svg += part(Math.PI - (a + w), Math.PI - a, rA, rA + ring - 1, k, fill(k, 'down', g, b)); placeKids(k, a, a + w, g + 1, b); a += w; }); };
+        placeKids(me, 0, Math.PI, 1, 0);
+        svg += `<g>${tip(`${me.name}${me.dates ? ' · ' + me.dates : ''}`)}<circle cx="${r2(cx)}" cy="${r2(cy)}" r="${r2(r0 - 1)}" fill="${cMid}"/>${T(cx, cy - (me.dates ? fs * .45 : 0), cut(me.name, r0 * 1.8, fs * .9), {size: fs * .9, anchor: 'middle', weight: 800, fill: contrast(cMid)})}${me.dates ? T(cx, cy + fs * .6, cut(me.dates, r0 * 1.7, fs * .7), {size: fs * .7, anchor: 'middle', fill: contrast(cMid), op: .85}) : ''}</g>`;
+        const legend = by === 'value' ? (vals.length ? [{label: fmt(vlo), color: lowC}, {label: fmt(vhi), color: highC}] : []) : by === 'gen' ? [{label: 'Ascendants', color: cUp}, {label: 'La personne', color: cMid}, {label: 'Descendants', color: cDown}]
+            : [{label: 'Côté paternel', color: cUp}, {label: 'Côté maternel', color: cMat}, {label: 'La personne', color: cMid}];
+        return {h: Math.max(num(o.height) || 0, cy + Math.max(dnR, r0) + 6), svg, legend, desc: i18n('Double éventail (ascendants : {up}, descendants : {down}).', {up: up.length, down: down.length})};
+    }
+    const mixC = (c1, c2, t) => { const a = rgb(c1), b = rgb(c2); if (!a || !b) return c1; return '#' + a.map((v, i) => clamp(Math.round(v + (b[i] - v) * clamp(t, 0, 1)), 0, 255).toString(16).padStart(2, '0')).join(''); };
     const sampleHour = () => ({o: {title: i18n('Le sablier de {name}', {name: 'Joseph Borie'})}, rows: [
         ['Antoine Borie', -2, '1820-1881'], ['Marie Lacoste', -2, '1824-1890'], ['Pierre Faure', -2, '1818-1870'], ['Jeanne Roux', -2, '1822-1899'],
         ['Jean Borie', -1, '1851-1919'], ['Louise Faure', -1, '1855-1932'], ['Joseph Borie', 0, '1890-1964'],
-        ['Odette Borie', 1, '1921-2010'], ['Henri Borie', 1, '1924-1944'], ['René Borie', 1, '1927-1999'], ['Claire', 2, '1950'], ['Paul', 2, '1953'], ['Anne', 2, '1956'], ['Luc', 2, '1958'], ['Marc', 2, '1961']].map(([name, gen, dates]) => ({name, gen, dates}))});
+        ['Odette Borie', 1, '1921-2010'], ['Henri Borie', 1, '1924-1944'], ['René Borie', 1, '1927-1999'], ['Claire', 2, '1950', 'Odette Borie'], ['Paul', 2, '1953', 'Odette Borie'], ['Anne', 2, '1956', 'René Borie'], ['Luc', 2, '1958', 'René Borie'], ['Marc', 2, '1961', 'René Borie']].map(([name, gen, dates, parent]) => ({name, gen, dates, ...(parent ? {parent} : {})}))});
 
     /* ═════════ 📅 Gantt : une ligne par tâche, de son début à sa fin, avec son avancement ═════════ */
     function gantt(spec, W, fs) {
@@ -203,7 +249,7 @@
         return {html: () => `<div class="h-dg-app n6-app"><h4>${esc(title)}</h4><p class="muted">${esc(intro)}</p>${person && APP()?.pickerField ? `<span class="pk-lab">La personne</span>${APP().pickerField({name: 'n6_root', kind: 'person', animals: false, value: Number(APP().state?.bootstrap?.startPersonId) || null})}` : ''}${fields}
                 <button type="button" class="button small" data-n6-go>Prendre dans mon arbre</button><p class="muted" data-n6-msg aria-live="polite"></p></div>`,
             bind: (pane, io) => { const btn = pane.querySelector('[data-n6-go]'), msg = pane.querySelector('[data-n6-msg]'); if (!btn) return;
-                btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.innerHTML = window.LCNDA_UI.spinner(i18n('Lecture de ta généalogie…'), {inline: true});
+                btn.addEventListener('click', async () => { btn.disabled = true; if (msg) msg.innerHTML = window.LCNDA_UI.spinner('Lecture de ta généalogie…', {inline: true});
                     try { const tr = await tree6(), r = run(pane, tr); if (!r.rows.length) throw new Error(i18n('Rien trouvé dans l’arbre pour ce choix.'));
                         const s = io.spec(); s.rows = r.rows.slice(0, 400); s.o = {...s.o, ...r.o}; io.apply(s); if (msg) msg.textContent = ''; APP().toast?.(i18n('{n} lignes prises dans l’arbre.', {n: r.rows.length > 400 ? 400 : r.rows.length})); }
                     catch (e) { if (msg) msg.textContent = '⚠️ ' + (e.message || e); } finally { btn.disabled = false; } }); }};
@@ -211,11 +257,17 @@
     const N_OPTS = [[8, '8'], [10, '10'], [15, '15'], [20, '20']];
     const ranked = (pane, tr) => { const by = BYS.find(b => b[0] === v6(pane, 'by')) || BYS[0], n = Number(v6(pane, 'n')) || 10; return {by, list: count6(tr.people, p => by[2](p, tr)).slice(0, n)}; };
     const FROM6 = {
-        hourglass: app6('⏳ Le sablier de quelqu’un de mon arbre', 'Ses ancêtres au-dessus, ses descendants au-dessous, avec leurs dates.',
-            sel6('up', 'Générations au-dessus', [[1, '1 (parents)'], [2, '2'], [3, '3'], [4, '4'], [5, '5']], 2) + sel6('down', 'Générations au-dessous', [[1, '1 (enfants)'], [2, '2'], [3, '3'], [4, '4']], 2),
+        hourglass: app6('⏳ Le sablier de quelqu’un de mon arbre', 'Ses ancêtres au-dessus (place Sosa), ses descendants au-dessous (sous leur parent) ; le chiffre : l’âge au décès.',
+            sel6('up', 'Générations au-dessus', [[1, '1 (parents)'], [2, '2'], [3, '3'], [4, '4'], [5, '5'], [6, '6']], 2) + sel6('down', 'Générations au-dessous', [[1, '1 (enfants)'], [2, '2'], [3, '3'], [4, '4'], [5, '5']], 2) + sel6('shape', 'Forme', [['', 'Cases'], ['fans', 'Deux éventails']], ''),
             (pane, tr) => { const p = root6(pane, tr); if (!p) return {rows: []};
-                const rows = [...anc6(tr, p, Number(v6(pane, 'up')) || 2).map(x => ({name: nm(x.p), gen: -x.gen, dates: life(x.p)})), {name: nm(p), gen: 0, dates: life(p)}, ...desc6(tr, p, Number(v6(pane, 'down')) || 2).map(x => ({name: nm(x.p), gen: x.gen, dates: life(x.p)}))];
-                return {rows, o: {title: i18n('Le sablier de {name}', {name: nm(p)})}}; }),
+                const age = q => (q.by && q.dy && q.dy >= q.by ? String(q.dy - q.by) : '');
+                // les ascendants avec leur numéro Sosa (père = 2 s, mère = 2 s + 1), chacun à sa première place
+                const up = [], seen = new Set([p.id]); let cur = [[p.id, 1]]; const G1 = Number(v6(pane, 'up')) || 2;
+                for (let g = 1; g <= G1 && cur.length; g++) { const nx = []; cur.forEach(([id, s0]) => { const q = tr.byId.get(id); [[q?.father, 2 * s0], [q?.mother, 2 * s0 + 1]].forEach(([a, s1]) => { if (!a || seen.has(a) || !tr.byId.get(a)) return; seen.add(a); const x = tr.byId.get(a); up.push({name: nm(x), gen: -g, dates: life(x), sosa: s1, value: age(x)}); nx.push([a, s1]); }); }); cur = nx; }
+                const down = [], seenD = new Set([p.id]); let curD = [p]; const G2 = Number(v6(pane, 'down')) || 2;
+                for (let g = 1; g <= G2 && curD.length; g++) { const nx = []; curD.forEach(par => (tr.kids.get(par.id) || []).forEach(k => { if (seenD.has(k) || !tr.byId.get(k)) return; seenD.add(k); const x = tr.byId.get(k); down.push({name: nm(x), gen: g, dates: life(x), parent: nm(par), value: age(x)}); nx.push(x); })); curD = nx; }
+                const shape = v6(pane, 'shape');
+                return {rows: [...up, {name: nm(p), gen: 0, dates: life(p), value: age(p)}, ...down], o: {title: i18n('Le sablier de {name}', {name: nm(p)}), ...(shape ? {shape} : {})}}; }),
         gantt: app6('📅 Les vies côte à côte', 'Une barre par personne, de sa naissance à son décès (ou à aujourd’hui).',
             sel6('who', 'Qui', [['anc', 'Ses ancêtres directs'], ['fam', 'Sa famille proche (parents, frères et sœurs, enfants)'], ['desc', 'Ses descendants']], 'anc') + sel6('gens', 'Générations', [[2, '2'], [3, '3'], [4, '4'], [5, '5']], 3),
             (pane, tr) => { const p = root6(pane, tr); if (!p) return {rows: []}; const who = v6(pane, 'who'), g = Number(v6(pane, 'gens')) || 3, now = new Date().getFullYear();
@@ -250,10 +302,13 @@
     const KINDS = {
         hourglass: {icon: '⏳', label: 'Sablier (ascendants et descendants d’une personne)', group: 'Généalogie', render: hourglass, noLegend: false, legend: 'bottom',
             help: 'Une personne au milieu ; ses parents, grands-parents… au-dessus ; ses enfants, petits-enfants… au-dessous.',
-            grids: [{key: 'rows', label: 'Les personnes (génération : 0 = la personne, −1 = parents, 1 = enfants…)', cols: [C('name', 'Nom'), C('gen', 'Génération', 'number'), C('dates', 'Dates'), C('note', 'Note')]}],
-            options: [C('upColor', 'Couleur des ascendants', 'color', {def: '#4e79a7'}), C('midColor', 'Couleur de la personne', 'color', {def: '#e15759'}), C('downColor', 'Couleur des descendants', 'color', {def: '#59a14f'}),
-                C('rowHeight', 'Hauteur d’une case', 'range', {unit: 'px', min: 24, max: 120, def: 46}), C('gap', 'Écart entre générations', 'range', {unit: 'px', min: 6, max: 80, def: 22}), C('radius', 'Coins arrondis', 'range', {unit: 'px', min: 0, max: 30, def: 6}),
-                C('links', 'Traits vers la personne', 'check', {def: true}), C('genLabels', 'Nom des générations à gauche', 'check', {def: true})],
+            grids: [{key: 'rows', label: 'Les personnes (génération : 0 = la personne, −1 = parents, 1 = enfants…)', cols: [C('name', 'Nom'), C('gen', 'Génération', 'number'), C('dates', 'Dates'), C('note', 'Note'), C('sosa', 'N° Sosa (ascendants, éventails)', 'number'), C('parent', 'Parent (descendants, éventails)'), C('value', 'Chiffre (couleur, éventails)')]}],
+            options: [C('shape', 'Forme', 'select', {choices: [['', 'Cases'], ['fans', 'Deux éventails']]}), C('upColor', 'Couleur des ascendants', 'color', {def: '#4e79a7'}), C('matColor', 'Couleur du côté maternel', 'color', {def: '#b07aa1', when: s => s.o?.shape === 'fans' && (s.o?.fanColor || 'side') === 'side'}), C('midColor', 'Couleur de la personne', 'color', {def: '#e15759'}), C('downColor', 'Couleur des descendants', 'color', {def: '#59a14f'}),
+                C('fanSize', 'Taille des parts', 'select', {choices: [['', 'Selon le nombre de descendants'], ['equal', 'Égale']], when: s => s.o?.shape === 'fans'}), C('fanColor', 'Couleur des parts', 'select', {choices: [['', 'Côté (paternel, maternel, branches)'], ['gen', 'Génération'], ['value', 'Un chiffre (colonne « Chiffre »)']], when: s => s.o?.shape === 'fans'}),
+                C('lowColor', 'Couleur des petits chiffres', 'color', {def: '#fde0c5', when: s => s.o?.shape === 'fans' && s.o?.fanColor === 'value'}), C('highColor', 'Couleur des grands chiffres', 'color', {def: '#b3261e', when: s => s.o?.shape === 'fans' && s.o?.fanColor === 'value'}),
+                C('emptyCells', 'Cases vides pour les ancêtres à trouver', 'check', {def: true, when: s => s.o?.shape === 'fans'}), PALETTE,
+                C('rowHeight', 'Hauteur d’une case', 'range', {unit: 'px', min: 24, max: 120, def: 46, when: s => s.o?.shape !== 'fans'}), C('gap', 'Écart entre générations', 'range', {unit: 'px', min: 6, max: 80, def: 22, when: s => s.o?.shape !== 'fans'}), C('radius', 'Coins arrondis', 'range', {unit: 'px', min: 0, max: 30, def: 6, when: s => s.o?.shape !== 'fans'}),
+                C('links', 'Traits vers la personne', 'check', {def: true, when: s => s.o?.shape !== 'fans'}), C('genLabels', 'Nom des générations à gauche', 'check', {def: true, when: s => s.o?.shape !== 'fans'}), H_OPT],
             sample: sampleHour},
         gantt: {icon: '📅', label: 'Diagramme de Gantt (tâches, chantiers de recherche)', group: 'Frises', render: gantt, legend: 'bottom',
             help: 'Une ligne par tâche, de sa date de début à sa date de fin, avec ce qui est déjà fait.',

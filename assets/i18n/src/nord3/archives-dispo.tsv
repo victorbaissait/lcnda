@@ -1,0 +1,130 @@
+fr ¦ ro
+# 🏛 Actes en ligne aux archives (docs/design/archives-en-ligne.html)
+Mairie de {commune} ¦ Primăria {commune}
+Archives départementales ({dept}) ¦ Archives départementales ({dept})
+🔒 Réservé jusqu’en {year} ¦ 🔒 Rezervat până în {year}
+déjà lié à une source ¦ deja legat de o sursă
+Pourquoi cette pastille ? ¦ De ce această etichetă?
+✓ lié ¦ ✓ legat
+Règle : code du patrimoine, art. L213-2 ({legi}) ; qui peut demander avant : décret 2017-890, art. 30 ({decret}). ¦ Regulă: codul patrimoniului, art. L213-2 ({legi}); cine poate cere mai devreme: decretul 2017-890, art. 30 ({decret}).
+Une limite vérifiée pour ce département et ce type d’acte couvre la date. ¦ O limită verificată pentru acest departament și acest tip de act acoperă data.
+D’après une source secondaire ({source}) : à confirmer sur la page officielle des archives. ¦ După o sursă secundară ({source}): de confirmat pe pagina oficială a arhivelor.
+Peut-être en ligne (d’après {source}, à confirmer) : année lue dans un extrait de recherche, pas encore confirmée. ¦ Poate online (după {source}, de confirmat): an citit într-un fragment de căutare, încă neconfirmat.
+la table ¦ tabelul
+Date approximative : la fourchette {from}–{to} chevauche la limite ({until}). ¦ Dată aproximativă: intervalul {from}–{to} se suprapune cu limita ({until}).
+La date est à 2 ans de la limite ({until}) : le registre est peut-être en ligne depuis. ¦ Data este la 2 ani de limită ({until}): registrul poate a fost pus online între timp.
+Acte de plus de 100 ans, mais la limite de ce département n’est pas encore vérifiée : jamais « en ligne » sans source. ¦ Act de peste 100 de ani, dar limita acestui departament nu e încă verificată: niciodată „online” fără sursă.
+Trop récent pour être en ligne : la limite de ce département est {until}. ¦ Prea recent pentru a fi online: limita acestui departament este {until}.
+Trop récent pour être en ligne (et la limite de ce département n’est pas encore vérifiée). ¦ Prea recent pentru a fi online (iar limita acestui departament nu e încă verificată).
+L’état civil parisien d’avant 1860 a brûlé en 1871 : chercher dans l’état civil reconstitué (Archives de Paris). ¦ Starea civilă pariziană de dinainte de 1860 a ars în 1871: caută în starea civilă reconstituită (Archives de Paris).
+Après 1792, un baptême ou une sépulture n’est pas dans l’état civil : il faut le demander aux archives diocésaines. ¦ După 1792, un botez sau o înmormântare nu e în starea civilă: trebuie cerut arhivelor diecezane.
+Les registres paroissiaux en ligne de ce département commencent en {from}. ¦ Registrele parohiale online ale acestui departament încep în {from}.
+Ancienne colonie : l’état civil est aux Archives nationales d’outre-mer (Aix-en-Provence). ¦ Fostă colonie: starea civilă e la Arhivele naționale de peste mări (Aix-en-Provence).
+Hors de France : la table ne couvre que les départements français. Pour un Français né, marié ou mort à l’étranger : le Service central d’état civil (Nantes). ¦ În afara Franței: tabelul acoperă doar departamentele franceze. Pentru un francez născut, căsătorit sau decedat în străinătate: Serviciul central de stare civilă (Nantes).
+Pas de date : impossible de la comparer avec la limite. ¦ Fără dată: nu poate fi comparată cu limita.
+Pas de lieu : on ne sait pas à quelles archives s’adresser. ¦ Fără loc: nu se știe căror arhive să te adresezi.
+Le département du lieu n’est pas connu : choisis la commune dans la liste des lieux, le code arrive tout seul. ¦ Departamentul locului nu e cunoscut: alege comuna din lista de locuri și codul vine singur.
+Lieu : {place} → {dept} ({code}). ¦ Loc: {place} → {dept} ({code}).
+Limite des {acts} ({dept}) : en ligne jusqu’en {until} ¦ Limita pentru {acts} ({dept}): online până în {until}
+la page qui le dit ↗ ¦ pagina care o spune ↗
+vérifié le {date} ¦ verificat la {date}
+source secondaire ¦ sursă secundară
+année lue dans un extrait de recherche, pas encore confirmée ¦ an citit într-un fragment de căutare, încă neconfirmat
+corrigé par toi ¦ corectat de tine
+Limite des {acts} ({dept}) : pas encore vérifiée. ¦ Limita pentru {acts} ({dept}): încă neverificată.
+75 ans : acte de {date} → communicable à tous le {open}. Ce jour-là, la pastille devient « 📮 À demander » toute seule. ¦ 75 de ani: act din {date} → accesibil tuturor la {open}. În acea zi eticheta devine singură „📮 De cerut”.
+75 ans passés : l’acte est communicable à tous depuis le {open}. ¦ Peste 75 de ani: actul e accesibil tuturor din {open}.
+Un acte de décès est communicable à tous, tout de suite. ¦ Un act de deces e accesibil tuturor imediat.
+À qui demander : ¦ Cui să ceri:
+L’app ne va pas voir sur le site des archives : elle ouvre la page, c’est toi qui regardes. ¦ Aplicația nu verifică site-ul arhivelor: deschide pagina, iar tu te uiți.
+🏛 Ouvrir les archives ({dept}) ¦ 🏛 Deschide arhivele ({dept})
+📮 Préparer la lettre ({who}) ¦ 📮 Pregătește scrisoarea ({who})
+✓ Je l’ai trouvé en ligne ¦ ✓ L-am găsit online
+✗ Pas en ligne ¦ ✗ Nu e online
+🗂 Voir la table des limites ¦ 🗂 Vezi tabelul limitelor
+🏛 ARCHIVES EN LIGNE ¦ 🏛 ARHIVE ONLINE
+{act} : pourquoi cette pastille ? ¦ {act}: de ce această etichetă?
+La page officielle disait {until} le {date}. ¦ Pagina oficială indica {until} la {date}.
+Rouvrir la page ↗ ¦ Redeschide pagina ↗
+✓ Trouvé en ligne ¦ ✓ Găsit online
+Adresse de l’image de l’acte (facultatif, conseillé) ¦ Adresa imaginii actului (opțional, recomandat)
+Vue, page ou cote (facultatif) ¦ Imagine, pagină sau cotă (opțional)
+ex. vue 143 ¦ ex. imaginea 143
+Ajouter comme source de cet acte ¦ Adaugă ca sursă a acestui act
+Ta correction vaut pour… ¦ Corectura ta se aplică pentru…
+Tout le département : les {acts} ({dept}) sont en ligne au moins jusqu’en {year} ¦ Tot departamentul: {acts} ({dept}) sunt online cel puțin până în {year}
+Seulement cette commune ({commune}) ¦ Doar această comună ({commune})
+Cette adresse ne commence pas par https:// ¦ Această adresă nu începe cu https://
+✓ Noté : {acts} ({dept}) en ligne au moins jusqu’en {year} ¦ ✓ Notat: {acts} ({dept}) online cel puțin până în {year}
+Pourquoi ? ¦ De ce?
+Le registre de cette année n’est pas en ligne ¦ Registrul din acel an nu e online
+La limite des {acts} ({dept}) passe avant {year} chez toi. ¦ La tine, limita pentru {acts} ({dept}) trece înainte de {year}.
+Seulement cette commune manque ¦ Lipsește doar această comună
+Exception pour {commune}, la limite du département ne bouge pas. ¦ Excepție pentru {commune}; limita departamentului nu se schimbă.
+Je n’ai pas trouvé l’acte dans le registre ¦ Nu am găsit actul în registru
+La limite ne bouge pas ; c’est noté (« cherché, pas trouvé »). ¦ Limita nu se schimbă; se notează („căutat, negăsit”).
+Noté : cherché, pas trouvé dans le registre ¦ Notat: căutat, negăsit în registru
+✗ Noté : pas en ligne ({place}) ¦ ✗ Notat: nu e online ({place})
+Où montrer les pastilles ¦ Unde să apară etichetele
+🗂 Archives en ligne par département ¦ 🗂 Arhive online pe departamente
+Table livrée avec l’app (vérifiée le {date}), complétée par tes corrections. Une ligne sans source n’existe pas : le département est alors « à vérifier ». ¦ Tabel livrat cu aplicația (verificat la {date}), completat cu corecturile tale. O linie fără sursă nu există: departamentul e atunci „de verificat”.
+La table des limites n’est pas encore livrée avec cette version : tout est « à vérifier », sauf ce que tu notes toi-même. ¦ Tabelul limitelor nu e încă livrat cu această versiune: totul e „de verificat”, în afară de ce notezi tu.
+🔎 Département… ¦ 🔎 Departament…
+En ligne jusqu’à ¦ Online până la
+Page officielle qui le dit ¦ Pagina oficială care o spune
+Vérifié le ¦ Verificat la
+tous ¦ toate
+＋ Noter la limite ¦ ＋ Notează limita
+depuis {y} ¦ din {y}
+à confirmer ¦ de confirmat
+moi ¦ eu
+Retirer ma correction ¦ Elimină corectura mea
+Aucun département ne correspond. ¦ Niciun departament nu corespunde.
+Correction retirée : la ligne livrée avec l’app revient. ¦ Corectură eliminată: revine linia livrată cu aplicația.
+En ligne jusqu’à l’année ¦ Online până în anul
+ex. 1925 ¦ ex. 1925
+Adresse de la page qui le dit (obligatoire) ¦ Adresa paginii care o spune (obligatoriu)
+Sans adresse, on ne peut pas enregistrer : c’est ce qui évite les limites inventées. ¦ Fără adresă nu se poate salva: așa se evită limitele inventate.
+Une année entre 1500 et aujourd’hui. ¦ Un an între 1500 și astăzi.
+L’adresse de la page qui le dit est obligatoire. ¦ Adresa paginii care o spune este obligatorie.
+＋ Limite notée : {dept}, {year} ¦ ＋ Limită notată: {dept}, {year}
+En ligne aux archives : à télécharger, pas à demander ¦ Online la arhive: de descărcat, nu de cerut
+🏛 Ouvrir ¦ 🏛 Deschide
+Réservé jusqu’en {year} : à demander par l’héritier lui-même, ou extrait sans filiation ¦ Rezervat până în {year}: să-l ceară moștenitorul însuși, sau extras fără filiație
+À demander : {who} ¦ De cerut: {who}
+📮 Lettre ¦ 📮 Scrisoare
+🏛 Archives ¦ 🏛 Arhive
+Commence par les tables décennales. ¦ Începe cu tabelele decenale.
+Ses actes aux archives ¦ Actele în arhive
+Les actes n’ont pas pu être lus. ¦ Actele nu au putut fi citite.
+{n} de ta base sont en ligne et pas encore liés à une source. ¦ {n} din baza ta sunt online și încă nelegate de o sursă.
+Aussi : {maybe} peut-être en ligne · {ask} à demander · {verify} à vérifier ¦ De asemenea: {maybe} poate online · {ask} de cerut · {verify} de verificat
+La table des limites n’est pas encore livrée : aucun acte ne peut être « en ligne » sans source. ¦ Tabelul limitelor nu e încă livrat: niciun act nu poate fi „online” fără sursă.
+Actes en ligne à aller voir ¦ Acte online de văzut
+La pastille 🏛 dit, pour chaque acte, s’il est en ligne aux archives (d’après une limite vérifiée du département), à demander (et à qui), ou réservé. Un acte en ligne sort de cette liste. ¦ Eticheta 🏛 spune, pentru fiecare act, dacă e online la arhive (după o limită verificată a departamentului), de cerut (și cui) sau rezervat. Un act online iese din această listă.
+Actes ¦ Acte
+Arbres ¦ Arbori
+Peut-être en ligne ¦ Poate online
+Réservé ¦ Rezervat
+Archives nationales d’outre-mer (Aix-en-Provence) ¦ Arhivele naționale de peste mări (Aix-en-Provence)
+Notaire ou Archives départementales (série E) ¦ Notar sau Archives départementales (seria E)
+Service historique de la Défense (Vincennes, Caen) ¦ Serviciul istoric al Apărării (Vincennes, Caen)
+baptêmes ¦ botezuri
+sépultures ¦ înmormântări
+tables décennales ¦ tabele decenale
+registres paroissiaux ¦ registre parohiale
+Pastilles sur les fiches ¦ Etichete pe fișe
+à côté de chaque naissance, baptême, mariage, décès, sépulture ¦ lângă fiecare naștere, botez, căsătorie, deces, înmormântare
+Pastilles dans la Chronologie ¦ Etichete în Cronologie
+Colonne « 🏛 Archives » dans la liste des Événements ¦ Coloana „🏛 Arhive” în lista Evenimente
+Cacher la pastille quand l’acte est déjà lié ¦ Ascunde eticheta când actul e deja legat
+sinon : petite « 🟢 ✓ lié » ¦ altfel: mică „🟢 ✓ legat”
+Widget « 🏛 Actes en ligne à aller voir » : ancêtres directs seulement ¦ Widgetul „🏛 Acte online de văzut”: doar strămoși direcți
+Vérifiés ¦ Verificate
+Corrigés par moi ¦ Corectate de mine
+Actes en ligne aux archives ¦ Acte online la arhive
+Une pastille sur chaque naissance, baptême, mariage, décès et sépulture : en ligne, à demander (et à qui), réservé, à vérifier. Jamais « en ligne » sans une limite sourcée. ¦ O etichetă pe fiecare naștere, botez, căsătorie, deces și înmormântare: online, de cerut (și cui), rezervat, de verificat. Niciodată „online” fără o limită cu sursă.
+Correction introuvable. ¦ Corectura nu a fost găsită.
+Type d’acte inconnu. ¦ Tip de act necunoscut.
+Année incorrecte. ¦ An incorect.
+Cet acte n’a pas de département ou de date : précise d’abord le lieu et la date. ¦ Actul nu are departament sau dată: precizează întâi locul și data.

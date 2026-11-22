@@ -1,0 +1,17 @@
+fr ¦ sk ¦ nb
+# ▤ La lecture approfondie, ligne par ligne : relier les lignes du texte à l’image (app-lignes-alignement.js, heritage-transcribe.js)
+Relier les lignes à l’image ¦ Prepojiť riadky s obrázkom ¦ Koble linjene til bildet
+Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis ¦ Prepojiť každý riadok textu s jeho riadkom na obrázku (farebné oblasti, klik riadok ↔ oblasť): po dôkladnom čítaní alebo pri už vloženom texte ¦ Koble hver linje i teksten til sin linje på bildet (fargede områder, klikk linje ↔ område): etter den grundige lesingen, eller på en tekst som allerede er satt inn
+Relier les lignes à l’image (une zone par ligne, comme la lecture rapide) ¦ Prepojiť riadky s obrázkom (jedna oblasť na riadok, ako pri rýchlom čítaní) ¦ Koble linjene til bildet (ett område per linje, som ved hurtiglesingen)
+Découpage de la page en lignes… ¦ Rozdeľovanie stránky na riadky… ¦ Deler siden opp i linjer…
+Découpage de la page en lignes (lecture rapide)… ¦ Rozdeľovanie stránky na riadky (rýchle čítanie)… ¦ Deler siden opp i linjer (hurtiglesing)…
+Découpage simple de la page en lignes… ¦ Jednoduché rozdelenie stránky na riadky… ¦ Enkel oppdeling av siden i linjer…
+Le découpage en lignes n’est pas chargé. ¦ Rozdelenie na riadky nie je načítané. ¦ Oppdelingen i linjer er ikke lastet inn.
+Pas de ligne de texte à relier. ¦ Žiadny riadok textu na prepojenie. ¦ Ingen tekstlinje å koble.
+Le texte a changé pendant le découpage : « ▤ Relier les lignes à l’image » pour recommencer. ¦ Text sa počas rozdeľovania zmenil: „▤ Prepojiť riadky s obrázkom“ pre nový začiatok. ¦ Teksten endret seg under oppdelingen: «▤ Koble linjene til bildet» for å begynne på nytt.
+Ligne reliée sans certitude : vérifie sur l’image ¦ Riadok prepojený bez istoty: skontroluj ho na obrázku ¦ Linje koblet uten sikkerhet: sjekk den på bildet
+Lignes reliées à l’image : {x} ¦ Riadky prepojené s obrázkom: {x} ¦ Linjer koblet til bildet: {x}
+à vérifier (❔) : {n} ¦ na kontrolu (❔): {n} ¦ må sjekkes (❔): {n}
+sans zone : {n} ¦ bez oblasti: {n} ¦ uten område: {n}
+d’après la lecture rapide ¦ podľa rýchleho čítania ¦ ut fra hurtiglesingen
+d’après un découpage simple de l’image ¦ podľa jednoduchého rozdelenia obrázka ¦ ut fra en enkel oppdeling av bildet

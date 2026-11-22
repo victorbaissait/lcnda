@@ -1,0 +1,179 @@
+fr ¦ lt ¦ lv ¦ et
+# Zone « diagrammes-lot-c » : grille des recensements, schéma de preuve, arbre de mots (heritage-diagram-lot-c.js), zones des paroisses et carte en étoile (heritage-diagram-cartes.js), cercles d’une journée (heritage-cartes-outils.js)
+Hors de France ¦ Už Prancūzijos ribų ¦ Ārpus Francijas ¦ Väljaspool Prantsusmaad
+Ajoute des personnes (nom, naissance, décès), puis leurs recensements (année, statut). ¦ Pridėk asmenis (vardas, gimimas, mirtis), tada jų surašymus (metai, būsena). ¦ Pievieno personas (vārds, dzimšana, nāve), tad viņu tautas skaitīšanas (gads, statuss). ¦ Lisa isikud (nimi, sünd, surm), siis nende rahvaloendused (aasta, olek).
+Aucune année de recensement entre ces deux dates. ¦ Tarp šių datų nėra surašymo metų. ¦ Starp šiem datumiem nav skaitīšanas gada. ¦ Nende kuupäevade vahel pole loendusaastat.
+Plus rien à chercher : tous les recensements sont trouvés ou sans objet. ¦ Nebėra ko ieškoti: visi surašymai rasti arba netaikomi. ¦ Vairs nav ko meklēt: visas skaitīšanas atrastas vai neattiecas. ¦ Pole enam midagi otsida: kõik loendused leitud või ei kehti.
+à chercher : {list} ¦ ieškoti: {list} ¦ jāmeklē: {list} ¦ otsida: {list}
+non trouvés : {list} ¦ nerasta: {list} ¦ nav atrasts: {list} ¦ ei leitud: {list}
+Liste de travail des recensements : {n}. ¦ Surašymų darbo sąrašas: {n}. ¦ Skaitīšanu darba saraksts: {n}. ¦ Loenduste töönimekiri: {n}.
+Grille des recensements : {n}, {y} recensements, {d} sur {t} cherchés. ¦ Surašymų tinklelis: {n}, {y} surašymai, {d} iš {t} ieškota. ¦ Skaitīšanu režģis: {n}, {y} skaitīšanas, {d} no {t} meklētas. ¦ Loenduste ruudustik: {n}, {y} loendust, {d}/{t} otsitud.
+Les recensements de la famille {name} ¦ Šeimos {name} surašymai ¦ Ģimenes {name} tautas skaitīšanas ¦ Perekonna {name} rahvaloendused
+Contre ¦ Prieš ¦ Pret ¦ Vastu
+Conflit ¦ Prieštara ¦ Pretruna ¦ Vastuolu
+Écris la question (Réglages), puis les indices : pour, contre, recherches, conflits. ¦ Įrašyk klausimą (Nustatymai), tada įrodymus: už, prieš, paieškos, prieštaros. ¦ Uzraksti jautājumu (Iestatījumi), tad pierādījumus: par, pret, meklējumi, pretrunas. ¦ Kirjuta küsimus (Seaded), siis vihjed: poolt, vastu, otsingud, vastuolud.
+Indices contre ¦ Įrodymai prieš ¦ Pierādījumi pret ¦ Vihjed vastu
+Recherches et conflits ¦ Paieškos ir prieštaros ¦ Meklējumi un pretrunas ¦ Otsingud ja vastuolud
+Résolu : {note} ¦ Išspręsta: {note} ¦ Atrisināts: {note} ¦ Lahendatud: {note}
+À résoudre ¦ Reikia išspręsti ¦ Jāatrisina ¦ Lahendada
+poids {n} sur 3 ¦ svoris {n} iš 3 ¦ svars {n} no 3 ¦ kaal {n}/3
+Pas encore de conclusion ¦ Išvados dar nėra ¦ Secinājuma vēl nav ¦ Järeldust veel pole
+Schéma de preuve : {a} pour, {b} contre ; certitude : {c}. ¦ Įrodymo schema: {a} už, {b} prieš; tikrumas: {c}. ¦ Pierādījumu shēma: {a} par, {b} pret; pārliecība: {c}. ¦ Tõendi skeem: {a} poolt, {b} vastu; kindlus: {c}.
+Antoine MAZAUD est-il le père de Jean MAZAUD (né vers 1818) ? ¦ Ar Antoine MAZAUD yra Jeano MAZAUD (gim. apie 1818) tėvas? ¦ Vai Antoine MAZAUD ir Jean MAZAUD (dz. ap. 1818) tēvs? ¦ Kas Antoine MAZAUD on Jean MAZAUD (sünd. u 1818) isa?
+Oui : Antoine MAZAUD est le père de Jean. ¦ Taip: Antoine MAZAUD yra Jeano tėvas. ¦ Jā: Antoine MAZAUD ir Jean tēvs. ¦ Jah: Antoine MAZAUD on Jeani isa.
+Acte de mariage de Jean (1842) : « fils d’Antoine MAZAUD, cultivateur » ¦ Jeano santuokos įrašas (1842): „Antoine’o MAZAUD, ūkininko, sūnus“ ¦ Jean laulības ieraksts (1842): “Antuāna MAZAUD, zemkopja, dēls” ¦ Jeani abielukanne (1842): „Antoine MAZAUD’, põlluharija, poeg”
+Registre paroissial, original ¦ Parapijos knyga, originalas ¦ Draudzes grāmata, oriģināls ¦ Kirikuraamat, originaal
+Recensement 1836 : Jean, 18 ans, au foyer d’Antoine ¦ 1836 m. surašymas: Jeanas, 18 m., Antoine’o namų ūkyje ¦ 1836. g. skaitīšana: Žans, 18 g., Antuāna mājsaimniecībā ¦ 1836. a loendus: Jean, 18 a, Antoine’i leibkonnas
+Recensement 1836, original ¦ 1836 m. surašymas, originalas ¦ 1836. g. skaitīšana, oriģināls ¦ 1836. a loendus, originaal
+Antoine est parrain du premier fils de Jean ¦ Antoine yra Jeano pirmojo sūnaus krikštatėvis ¦ Antuāns ir Žana pirmā dēla krusttēvs ¦ Antoine on Jeani esimese poja ristiisa
+Baptême 1844 ¦ Krikštas 1844 ¦ Kristības 1844 ¦ Ristimine 1844
+Un autre Jean MAZAUD, né en 1817 au village voisin ¦ Kitas Jeanas MAZAUD, gim. 1817 kaimyniniame kaime ¦ Cits Žans MAZAUD, dz. 1817 kaimiņu ciemā ¦ Teine Jean MAZAUD, sünd. 1817 naaberkülas
+Acte de naissance de Jean : registre lacunaire 1815-1820 ¦ Jeano gimimo įrašas: knyga neišlikusi 1815-1820 ¦ Žana dzimšanas ieraksts: grāmata nepilnīga 1815-1820 ¦ Jeani sünnikanne: raamat puudulik 1815-1820
+Âge au décès : 64 ans (né vers 1820) au lieu de 66 ¦ Amžius mirties metu: 64 m. (gim. apie 1820), o ne 66 ¦ Vecums nāves brīdī: 64 g. (dz. ap. 1820), nevis 66 ¦ Vanus surmal: 64 a (sünd. u 1820) 66 asemel
+Acte de décès 1884 ¦ Mirties įrašas 1884 ¦ Miršanas ieraksts 1884 ¦ Surmakanne 1884
+l’âge déclaré au décès est souvent approximatif ¦ mirties metu nurodytas amžius dažnai apytikslis ¦ nāves brīdī norādītais vecums bieži ir aptuvens ¦ surmal teatatud vanus on sageli ligikaudne
+Écris le mot de départ (Réglages), par exemple « fils de » ou « veuve de ». ¦ Įrašyk pradinį žodį (Nustatymai), pavyzdžiui, „fils de“ arba „veuve de“. ¦ Uzraksti sākuma vārdu (Iestatījumi), piemēram, “fils de” vai “veuve de”. ¦ Kirjuta lähtesõna (Seaded), näiteks „fils de” või „veuve de”.
+Colle des transcriptions (une par ligne) ou prends-les « Depuis l’app ». ¦ Įklijuok nuorašus (po vieną eilutėje) arba paimk juos „Iš programėlės“. ¦ Ielīmē atšifrējumus (pa vienam rindā) vai ņem tos “No lietotnes”. ¦ Kleebi ärakirjad (üks rea kohta) või võta need „Rakendusest”.
+« {w} » n’est dans aucun de ces textes. ¦ „{w}“ nėra nė viename iš šių tekstų. ¦ “{w}” nav nevienā no šiem tekstiem. ¦ „{w}” pole üheski neist tekstidest.
+… {n} autres ¦ … dar {n} ¦ … vēl {n} ¦ … veel {n}
+Trop de branches : baisse la profondeur ou le nombre de branches (Réglages). ¦ Per daug šakų: sumažink gylį arba šakų skaičių (Nustatymai). ¦ Pārāk daudz zaru: samazini dziļumu vai zaru skaitu (Iestatījumi). ¦ Liiga palju harusid: vähenda sügavust või harude arvu (Seaded).
+« {w} » : {n} fois ¦ „{w}“: {n} kartų ¦ “{w}”: {n} reizes ¦ „{w}”: {n} korda
+Arbre de mots : « {w} » trouvé {n} fois dans {t}. ¦ Žodžių medis: „{w}“ rasta {n} kartų, {t}. ¦ Vārdu koks: “{w}” atrasts {n} reizes, {t}. ¦ Sõnapuu: „{w}” leitud {n} korda, {t}.
+Ce qui suit « {w} » dans les actes ¦ Kas eina po „{w}“ įrašuose ¦ Kas seko pēc “{w}” ierakstos ¦ Mis järgneb sõnale „{w}” kannetes
+{n} lignes prises dans l’arbre : tu peux les corriger dans l’onglet Données. ¦ Iš medžio paimta eilučių: {n}; jas gali pataisyti skirtuke Duomenys. ¦ No koka paņemtas rindas: {n}; tās vari labot cilnē Dati. ¦ Puust võetud {n} rida: saad neid parandada vahekaardil Andmed.
+🗓️ Les recensements de mon arbre ¦ 🗓️ Mano medžio surašymai ¦ 🗓️ Mana koka tautas skaitīšanas ¦ 🗓️ Minu puu rahvaloendused
+Une ligne par personne, une case par recensement : ce qui est relevé sur les fiches (trouvé, non trouvé…), et « à chercher » pour le reste. Sans groupe choisi : tes ancêtres. ¦ Viena eilutė asmeniui, vienas langelis surašymui: kas pažymėta kortelėse (rasta, nerasta…), o kita „ieškoti“. Nepasirinkus grupės: tavo protėviai. ¦ Viena rinda katrai personai, viena šūna katrai skaitīšanai: kas atzīmēts kartītēs (atrasts, nav atrasts…), pārējais “jāmeklē”. Bez izvēlētas grupas: tavi senči. ¦ Üks rida isiku kohta, üks lahter loenduse kohta: mis on isikukaartidele märgitud (leitud, ei leitud…), ülejäänu „otsida”. Rühma valimata: sinu esivanemad.
+Du recensement de ¦ Nuo surašymo ¦ No skaitīšanas ¦ Loendusest
+à celui de ¦ iki surašymo ¦ līdz skaitīšanai ¦ loenduseni
+Les recensements de {n} ¦ Surašymai: {n} ¦ Tautas skaitīšanas: {n} ¦ Rahvaloendused: {n}
+Personne dans ce groupe ne vivait entre ces deux recensements (il faut au moins une date de naissance ou de décès). ¦ Niekas iš grupės negyveno tarp šių surašymų (reikia bent gimimo ar mirties datos). ¦ Neviens no grupas nedzīvoja starp šīm skaitīšanām (vajag vismaz dzimšanas vai nāves datumu). ¦ Keegi rühmast ei elanud nende loenduste vahel (vaja vähemalt sünni- või surmakuupäeva).
+{n} sur {t} prises (les premières) : change « Au plus » pour en voir davantage. ¦ Paimta {n} iš {t} (pirmieji): pakeisk „Daugiausia“, kad matytum daugiau. ¦ Paņemtas {n} no {t} (pirmās): maini “Ne vairāk kā”, lai redzētu vairāk. ¦ Võetud {n}/{t} (esimesed): muuda „Kõige rohkem”, et näha rohkem.
+⚖️ Un dossier de preuve ou une hypothèse ¦ ⚖️ Įrodymų byla arba hipotezė ¦ ⚖️ Pierādījumu lieta vai hipotēze ¦ ⚖️ Tõendi toimik või hüpotees
+Choisis un dossier : sa question, ses indices pour et contre, ses recherches et ses conflits, sa conclusion. Une hypothèse à comparer donne une colonne par réponse possible. ¦ Pasirink bylą: jos klausimą, įrodymus už ir prieš, paieškas ir prieštaras, išvadą. Lyginama hipotezė suteikia po stulpelį kiekvienam galimam atsakymui. ¦ Izvēlies lietu: tās jautājumu, pierādījumus par un pret, meklējumus un pretrunas, secinājumu. Salīdzināmai hipotēzei ir pa kolonnai katrai iespējamai atbildei. ¦ Vali toimik: selle küsimus, vihjed poolt ja vastu, otsingud ja vastuolud, järeldus. Võrreldav hüpotees annab veeru iga võimaliku vastuse kohta.
+Le dossier ¦ Byla ¦ Lieta ¦ Toimik
+Choisis d’abord un dossier. ¦ Pirmiausia pasirink bylą. ¦ Vispirms izvēlies lietu. ¦ Vali kõigepealt toimik.
+Schéma de preuve ¦ Įrodymo schema ¦ Pierādījumu shēma ¦ Tõendi skeem
+Ce dossier n’a encore aucune ligne : ajoute des indices dans le dossier, ou ici à la main. ¦ Byloje dar nėra eilučių: pridėk įrodymų byloje arba čia ranka. ¦ Lietā vēl nav rindu: pievieno pierādījumus lietā vai šeit ar roku. ¦ Toimikus pole veel ridu: lisa vihjeid toimikusse või siia käsitsi.
+Prendre ce dossier ¦ Paimti šią bylą ¦ Ņemt šo lietu ¦ Võta see toimik
+🌿 Les mots de mes transcriptions ¦ 🌿 Mano nuorašų žodžiai ¦ 🌿 Manu atšifrējumu vārdi ¦ 🌿 Minu ärakirjade sõnad
+Les transcriptions des actes (atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris. ¦ Įrašų (nuorašų dirbtuvė) ir medijų nuorašai: kas eina po pradinio žodžio (arba prieš jį). Imami tik naudingi sakinių gabalai. ¦ Ierakstu (atšifrēšanas darbnīca) un mediju atšifrējumi: kas seko pēc sākuma vārda (vai pirms tā). Tiek ņemti tikai noderīgie teikumu gabali. ¦ Kannete (ärakirjatöökoda) ja meedia ärakirjad: mis järgneb lähtesõnale (või eelneb sellele). Võetakse ainult kasulikud lauseosad.
+Le mot de départ ¦ Pradinis žodis ¦ Sākuma vārds ¦ Lähtesõna
+Ce qui suit ¦ Kas eina po ¦ Kas seko ¦ Mis järgneb
+Ce qui précède ¦ Kas eina prieš ¦ Kas ir pirms ¦ Mis eelneb
+Commune (dans le lieu ou le titre de l’acte) ¦ Gyvenvietė (vietoje ar įrašo pavadinime) ¦ Pašvaldība (vietā vai ieraksta nosaukumā) ¦ Vald (kohas või kande pealkirjas)
+Actes pris ¦ Imami įrašai ¦ Ņemtie ieraksti ¦ Võetud kanded
+Actes notariés ¦ Notariniai aktai ¦ Notariālie akti ¦ Notariaalsed aktid
+Militaires ¦ Kariniai ¦ Militārie ¦ Sõjaväelised
+Lettres ¦ Laiškai ¦ Vēstules ¦ Kirjad
+Transcriptions des médias ¦ Medijų nuorašai ¦ Mediju atšifrējumi ¦ Meedia ärakirjad
+Écris le mot de départ (par exemple « fils de »). ¦ Įrašyk pradinį žodį (pavyzdžiui, „fils de“). ¦ Uzraksti sākuma vārdu (piemēram, “fils de”). ¦ Kirjuta lähtesõna (näiteks „fils de”).
+Coche au moins une sorte d’acte. ¦ Pažymėk bent vieną įrašų rūšį. ¦ Atzīmē vismaz vienu ierakstu veidu. ¦ Märgi vähemalt üks kandeliik.
+Ce qui précède « {w} » dans les actes ¦ Kas eina prieš „{w}“ įrašuose ¦ Kas ir pirms “{w}” ierakstos ¦ Mis eelneb sõnale „{w}” kannetes
+« {w} » n’est dans aucune transcription de ce choix ({n} lues). ¦ „{w}“ nėra nė viename šio pasirinkimo nuoraše (perskaityta: {n}). ¦ “{w}” nav nevienā šīs izvēles atšifrējumā (izlasīti: {n}). ¦ „{w}” pole üheski selle valiku ärakirjas (loetud {n}).
+« {w} » : {n} fois, dans {a}. ¦ „{w}“: {n} kartų, {a}. ¦ “{w}”: {n} reizes, {a}. ¦ „{w}”: {n} korda, {a}.
+Dossier sans question ¦ Byla be klausimo ¦ Lieta bez jautājuma ¦ Küsimuseta toimik
+Aucun dossier pour ce groupe de personnes ¦ Šiai asmenų grupei bylų nėra ¦ Šai personu grupai nav lietu ¦ Selle isikute rühma jaoks pole toimikut
+Ferme l’éditeur, puis clique sur la case pour ouvrir la fiche (bloc « Recensements »). ¦ Uždaryk redaktorių ir spustelėk langelį, kad atidarytum kortelę (blokas „Surašymai“). ¦ Aizver redaktoru, tad noklikšķini uz šūnas, lai atvērtu kartīti (bloks “Tautas skaitīšanas”). ¦ Sulge redaktor, siis klõpsa lahtrit, et avada isikukaart (plokk „Rahvaloendused”).
+Recensement {yr} : dans le bloc « Recensements » de la fiche. ¦ {yr} m. surašymas: kortelės bloke „Surašymai“. ¦ {yr}. g. skaitīšana: kartītes blokā “Tautas skaitīšanas”. ¦ {yr}. a loendus: isikukaardi plokis „Rahvaloendused”.
+Grille des recensements (personnes × années) ¦ Surašymų tinklelis (asmenys × metai) ¦ Skaitīšanu režģis (personas × gadi) ¦ Loenduste ruudustik (isikud × aastad)
+Ma recherche ¦ Mano tyrimai ¦ Mana izpēte ¦ Minu uurimistöö
+Une ligne par personne, une colonne par recensement : ce qui est trouvé, pas trouvé, et ce qui reste à chercher. ¦ Viena eilutė asmeniui, vienas stulpelis surašymui: kas rasta, kas nerasta ir ko dar ieškoti. ¦ Viena rinda personai, viena kolonna skaitīšanai: kas atrasts, kas nav un kas vēl jāmeklē. ¦ Üks rida isiku ja üks veerg loenduse kohta: mis on leitud, mis mitte ja mida veel otsida.
+Les personnes (une ligne sans année : naissance, décès) et leurs recensements (une ligne par année) ¦ Asmenys (eilutė be metų: gimimas, mirtis) ir jų surašymai (po eilutę metams) ¦ Personas (rinda bez gada: dzimšana, nāve) un viņu skaitīšanas (pa rindai gadā) ¦ Isikud (aastata rida: sünd, surm) ja nende loendused (üks rida aasta kohta)
+Naissance (année) ¦ Gimimas (metai) ¦ Dzimšana (gads) ¦ Sünd (aasta)
+Décès (année) ¦ Mirtis (metai) ¦ Nāve (gads) ¦ Surm (aasta)
+Recensement (année) ¦ Surašymas (metai) ¦ Skaitīšana (gads) ¦ Loendus (aasta)
+Note (lieu, adresse…) ¦ Pastaba (vieta, adresas…) ¦ Piezīme (vieta, adrese…) ¦ Märkus (koht, aadress…)
+Grille (une case par recensement) ¦ Tinklelis (vienas langelis surašymui) ¦ Režģis (viena šūna skaitīšanai) ¦ Ruudustik (üks lahter loenduse kohta)
+Liste de travail à imprimer (ce qui reste à chercher) ¦ Spausdinamas darbo sąrašas (ko dar ieškoti) ¦ Drukājams darba saraksts (kas vēl jāmeklē) ¦ Prinditav töönimekiri (mida veel otsida)
+À celui de ¦ Iki surašymo ¦ Līdz skaitīšanai ¦ Loenduseni
+Ou mes années (ex. 1846, 1851, 1872) ¦ Arba mano metai (pvz., 1846, 1851, 1872) ¦ Vai mani gadi (piem., 1846, 1851, 1872) ¦ Või minu aastad (nt 1846, 1851, 1872)
+Personnes montrées ¦ Rodomi asmenys ¦ Rādītās personas ¦ Näidatud isikud
+Seulement celles qui ont encore un recensement à chercher ¦ Tik tie, kuriems dar liko ieškoti surašymo ¦ Tikai tās, kurām vēl jāmeklē skaitīšana ¦ Ainult need, kellel on veel loendust otsida
+Le plus à chercher d’abord ¦ Daugiausia ieškotinų pirmiau ¦ Visvairāk meklējamo vispirms ¦ Kõige rohkem otsitavat enne
+Par naissance ¦ Pagal gimimą ¦ Pēc dzimšanas ¦ Sünni järgi
+Par nom ¦ Pagal vardą ¦ Pēc vārda ¦ Nime järgi
+Couleur « Trouvé » ¦ Spalva „Rasta“ ¦ Krāsa “Atrasts” ¦ Värv „Leitud”
+Couleur « Non trouvé » ¦ Spalva „Nerasta“ ¦ Krāsa “Nav atrasts” ¦ Värv „Ei leitud”
+Couleur « À chercher » ¦ Spalva „Ieškoti“ ¦ Krāsa “Jāmeklē” ¦ Värv „Otsida”
+Couleur « Hors de France » ¦ Spalva „Už Prancūzijos“ ¦ Krāsa “Ārpus Francijas” ¦ Värv „Väljaspool Prantsusmaad”
+Couleur « Pas né / déjà décédé » ¦ Spalva „Negimęs / jau miręs“ ¦ Krāsa “Nav dzimis / jau miris” ¦ Värv „Pole sündinud / juba surnud”
+Écart entre les cases ¦ Tarpas tarp langelių ¦ Atstarpe starp šūnām ¦ Lahtrite vahe
+Signes dans les cases (✓ ✗ ?) ¦ Ženklai langeliuose (✓ ✗ ?) ¦ Zīmes šūnās (✓ ✗ ?) ¦ Märgid lahtrites (✓ ✗ ?)
+Années de vie à côté du nom ¦ Gyvenimo metai šalia vardo ¦ Dzīves gadi blakus vārdam ¦ Eluaastad nime kõrval
+Schéma de preuve (question, indices pour et contre, conclusion) ¦ Įrodymo schema (klausimas, įrodymai už ir prieš, išvada) ¦ Pierādījumu shēma (jautājums, pierādījumi par un pret, secinājums) ¦ Tõendi skeem (küsimus, vihjed poolt ja vastu, järeldus)
+La question en haut, les indices pour et contre (avec leur poids et leur source), les recherches et les conflits, puis la conclusion et sa certitude. ¦ Viršuje klausimas, įrodymai už ir prieš (su svoriu ir šaltiniu), paieškos ir prieštaros, tada išvada ir jos tikrumas. ¦ Augšā jautājums, pierādījumi par un pret (ar svaru un avotu), meklējumi un pretrunas, tad secinājums un tā pārliecība. ¦ Üleval küsimus, vihjed poolt ja vastu (kaalu ja allikaga), otsingud ja vastuolud, siis järeldus ja selle kindlus.
+Les lignes du dossier (pour, contre, recherche, conflit ; « réponse » pour une hypothèse à plusieurs réponses) ¦ Bylos eilutės (už, prieš, paieška, prieštara; „atsakymas“ hipotezei su keliais atsakymais) ¦ Lietas rindas (par, pret, meklējums, pretruna; “atbilde” hipotēzei ar vairākām atbildēm) ¦ Toimiku read (poolt, vastu, otsing, vastuolu; „vastus” mitme vastusega hüpoteesi jaoks)
+Indice (ou réponse) ¦ Įrodymas (arba atsakymas) ¦ Pierādījums (vai atbilde) ¦ Vihje (või vastus)
+Poids (1 à 3) ¦ Svoris (1–3) ¦ Svars (1–3) ¦ Kaal (1–3)
+Pour la réponse… (hypothèse) ¦ Atsakymui… (hipotezė) ¦ Atbildei… (hipotēze) ¦ Vastusele… (hüpotees)
+Note (résolution d’un conflit) ¦ Pastaba (prieštaros sprendimas) ¦ Piezīme (pretrunas atrisinājums) ¦ Märkus (vastuolu lahendus)
+La conclusion ¦ Išvada ¦ Secinājums ¦ Järeldus
+Montrer les recherches et les conflits (ce qui reste à chercher) ¦ Rodyti paieškas ir prieštaras (ko dar ieškoti) ¦ Rādīt meklējumus un pretrunas (kas vēl jāmeklē) ¦ Näita otsinguid ja vastuolusid (mida veel otsida)
+Couleur « confirme » ¦ Spalva „patvirtina“ ¦ Krāsa “apstiprina” ¦ Värv „kinnitab”
+Couleur « contredit » ¦ Spalva „prieštarauja“ ¦ Krāsa “norunā” ¦ Värv „vastandub”
+Couleur des recherches ¦ Paieškų spalva ¦ Meklējumu krāsa ¦ Otsingute värv
+Couleur des conflits ¦ Prieštarų spalva ¦ Pretrunu krāsa ¦ Vastuolude värv
+Couleur des réponses ¦ Atsakymų spalva ¦ Atbilžu krāsa ¦ Vastuste värv
+Couleur de la question ¦ Klausimo spalva ¦ Jautājuma krāsa ¦ Küsimuse värv
+Arbre de mots des actes (ce qui suit « fils de »…) ¦ Įrašų žodžių medis (kas eina po „fils de“…) ¦ Ierakstu vārdu koks (kas seko pēc “fils de”…) ¦ Kannete sõnapuu (mis järgneb sõnale „fils de”…)
+Un mot de départ à gauche ; à droite, les mots qui le suivent dans les actes, plus gros quand ils reviennent souvent. ¦ Pradinis žodis kairėje; dešinėje žodžiai, einantys po jo įrašuose, didesni, kai kartojasi dažnai. ¦ Sākuma vārds pa kreisi; pa labi vārdi, kas seko ierakstos, lielāki, ja atkārtojas bieži. ¦ Lähtesõna vasakul; paremal sõnad, mis sellele kannetes järgnevad, suuremad, kui korduvad sageli.
+Les textes (une transcription ou un bout de phrase par ligne) ¦ Tekstai (po vieną nuorašą ar sakinio dalį eilutėje) ¦ Teksti (pa vienam atšifrējumam vai teikuma daļai rindā) ¦ Tekstid (üks ärakiri või lauseosa rea kohta)
+Acte ou source ¦ Įrašas ar šaltinis ¦ Ieraksts vai avots ¦ Kanne või allikas
+Le mot de départ (ex. fils de, veuve de) ¦ Pradinis žodis (pvz., fils de, veuve de) ¦ Sākuma vārds (piem., fils de, veuve de) ¦ Lähtesõna (nt fils de, veuve de)
+Profondeur (mots) ¦ Gylis (žodžiai) ¦ Dziļums (vārdi) ¦ Sügavus (sõnad)
+Branches par mot ¦ Šakų žodžiui ¦ Zari vienam vārdam ¦ Harusid sõna kohta
+Seulement les mots vus au moins ¦ Tik žodžiai, matyti bent ¦ Tikai vārdi, kas redzēti vismaz ¦ Ainult sõnad, mida nähtud vähemalt
+Le reste dans « … autres » ¦ Kiti į „… dar“ ¦ Pārējais zem “… vēl” ¦ Ülejäänu „… veel” alla
+Écrire le nombre de fois ¦ Rašyti kartų skaičių ¦ Rakstīt reižu skaitu ¦ Kirjuta korduste arv
+Sans tenir compte des capitales ni des accents ¦ Neatsižvelgiant į didžiąsias raides ir diakritikus ¦ Neņemot vērā lielos burtus un diakritiskās zīmes ¦ Suurtähti ja aktsente arvestamata
+Seulement les actes de (lieu) ¦ Tik įrašai iš (vieta) ¦ Tikai ieraksti no (vieta) ¦ Ainult kanded kohast
+Couleur des mots ¦ Žodžių spalva ¦ Vārdu krāsa ¦ Sõnade värv
+Couleur du mot de départ ¦ Pradinio žodžio spalva ¦ Sākuma vārda krāsa ¦ Lähtesõna värv
+⭕ En une journée ¦ ⭕ Per vieną dieną ¦ ⭕ Vienā dienā ¦ ⭕ Ühe päevaga
+Lieu de départ ¦ Išvykimo vieta ¦ Izbraukšanas vieta ¦ Lähtekoht
+Montrer les lieux de la famille ¦ Rodyti šeimos vietas ¦ Rādīt ģimenes vietas ¦ Näita perekonna kohti
+Ce qu’on atteignait en une journée ¦ Kur buvo galima nukeliauti per dieną ¦ Kur varēja nokļūt vienā dienā ¦ Kuhu jõudis ühe päevaga
+Choisis le lieu de départ ¦ Pasirink išvykimo vietą ¦ Izvēlies izbraukšanas vietu ¦ Vali lähtekoht
+Ce lieu n’a pas de position sur la carte : place-le d’abord. ¦ Ši vieta neturi padėties žemėlapyje: pirmiausia ją pažymėk. ¦ Šai vietai nav pozīcijas kartē: vispirms to novieto. ¦ Sellel kohal pole kaardil asukohta: paiguta see esmalt.
+Coche au moins un moyen de voyager ¦ Pažymėk bent vieną keliavimo būdą ¦ Atzīmē vismaz vienu ceļošanas veidu ¦ Märgi vähemalt üks reisimisviis
+Les fonds de carte ne sont pas chargés. ¦ Žemėlapių pagrindai neįkelti. ¦ Pamatkartes nav ielādētas. ¦ Aluskaardid pole laaditud.
+Je dessine les cercles… ¦ Piešiu apskritimus… ¦ Zīmēju apļus… ¦ Joonistan ringe…
+En {d} jours depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ Per {d} d. iš {from}, {year} m.: tiesiai apie {list}. ¦ {d} dienās no {from}, {year}. g.: taisnā līnijā ap {list}. ¦ {d} päevaga kohast {from}, aastal {year}: linnulennult umbes {list}.
+En une journée depuis {from}, en {year} : à vol d’oiseau, environ {list}. ¦ Per dieną iš {from}, {year} m.: tiesiai apie {list}. ¦ Vienā dienā no {from}, {year}. g.: taisnā līnijā ap {list}. ¦ Ühe päevaga kohast {from}, aastal {year}: linnulennult umbes {list}.
+Rayon (vol d’oiseau) ¦ Spindulys (tiesiai) ¦ Rādiuss (taisnā līnijā) ¦ Raadius (linnulennult)
+Lieux de la famille ¦ Šeimos vietos ¦ Ģimenes vietas ¦ Perekonna kohad
+Le rayon tient compte du détour de la route (réglage « Vitesses et sources »). Un trait pointillé : ce moyen n’existait pas encore cette année-là. ¦ Spindulys įvertina kelio vingius (nustatymas „Greičiai ir šaltiniai“). Taškinė linija: tais metais šio būdo dar nebuvo. ¦ Rādiuss ņem vērā ceļa līkumus (iestatījums “Ātrumi un avoti”). Punktēta līnija: šī veida tajā gadā vēl nebija. ¦ Raadius arvestab tee kõrvalekallet (seade „Kiirused ja allikad”). Punktiirjoon: seda viisi sel aastal veel polnud.
+Paroisses (zones autour des églises) ¦ Parapijos (sritys aplink bažnyčias) ¦ Draudzes (apgabali ap baznīcām) ¦ Kihelkonnad (alad kirikute ümber)
+⚠ Paroisses sans position : {list} — choisis-les dans la liste (onglet Données) ou écris « Nom 45.27, 1.77 » ¦ ⚠ Parapijos be padėties: {list} — pasirink jas sąraše (skirtukas Duomenys) arba rašyk „Pavadinimas 45.27, 1.77“ ¦ ⚠ Draudzes bez pozīcijas: {list} — izvēlies tās sarakstā (cilne Dati) vai raksti “Nosaukums 45.27, 1.77” ¦ ⚠ Asukohata kihelkonnad: {list} — vali need loendist (vahekaart Andmed) või kirjuta „Nimi 45.27, 1.77”
+Ajoute des paroisses (une ville de la liste, ou « Depuis l’app ») et leurs chiffres. ¦ Pridėk parapijų (gyvenvietę iš sąrašo arba „Iš programėlės“) ir jų skaičius. ¦ Pievieno draudzes (vietu no saraksta vai “No lietotnes”) un to skaitļus. ¦ Lisa kihelkondi (koht loendist või „Rakendusest”) ja nende arvud.
+Zones des paroisses : {n}. ¦ Parapijų sritys: {n}. ¦ Draudžu apgabali: {n}. ¦ Kihelkondade alad: {n}.
+Un point à chaque église ¦ Taškas prie kiekvienos bažnyčios ¦ Punkts pie katras baznīcas ¦ Täpp iga kiriku juures
+Limites des départements par-dessus les paroisses ¦ Departamentų ribos virš parapijų ¦ Departamentu robežas virs draudzēm ¦ Departemangude piirid kihelkondade peal
+Cadrer tout seul sur les paroisses ¦ Automatiškai apkarpyti pagal parapijas ¦ Automātiski kadrēt uz draudzēm ¦ Kärbi automaatselt kihelkondadele
+Liens montrés ¦ Rodomi ryšiai ¦ Rādītās saites ¦ Näidatud seosed
+Ceux qui arrivent et ceux qui partent ¦ Atvykstantys ir išvykstantys ¦ Ienākošie un aizejošie ¦ Saabujad ja lahkujad
+Seulement ceux qui arrivent ¦ Tik atvykstantys ¦ Tikai ienākošie ¦ Ainult saabujad
+Seulement ceux qui partent ¦ Tik išvykstantys ¦ Tikai aizejošie ¦ Ainult lahkujad
+Les liens de {name} ¦ Ryšiai: {name} ¦ Saites: {name} ¦ Koha {name} seosed
+bleu : conjoints venus ¦ mėlyna: atvykę sutuoktiniai ¦ zils: ieradušies laulātie ¦ sinine: saabunud abikaasad
+orange : enfants partis ¦ oranžinė: išvykę vaikai ¦ oranžs: aizgājušie bērni ¦ oranž: lahkunud lapsed
+rouge : émigrés ¦ raudona: emigrantai ¦ sarkans: emigranti ¦ punane: väljarändajad
+Lieux : {list} ¦ Vietos: {list} ¦ Vietas: {list} ¦ Kohad: {list}
+⛪ Au niveau « Paroisses » (Réglages → Niveau de détail) : une zone autour de chaque église, d’après les paroisses d’Ancien Régime de tes lieux ; un lieu sans paroisse compte pour lui-même. ¦ ⛪ Lygmenyje „Parapijos“ (Nustatymai → Detalumo lygis): sritis aplink kiekvieną bažnyčią pagal senąsias tavo vietų parapijas; vieta be parapijos skaičiuojama atskirai. ¦ ⛪ Līmenī “Draudzes” (Iestatījumi → Detalizācijas līmenis): apgabals ap katru baznīcu pēc tavu vietu senajām draudzēm; vieta bez draudzes skaitās pati par sevi. ¦ ⛪ Tasemel „Kihelkonnad” (Seaded → Täpsusaste): ala iga kiriku ümber sinu kohtade vanade kihelkondade järgi; kihelkonnata koht loeb end ise.
+✳️ Tous les liens d’un lieu (carte en étoile) ¦ ✳️ Visi vietos ryšiai (žvaigždinis žemėlapis) ¦ ✳️ Visas vietas saites (zvaigžņu karte) ¦ ✳️ Koha kõik seosed (tähtkaart)
+Le village ¦ Kaimas ¦ Ciems ¦ Küla
+Conjoints venus s’y marier ¦ Sutuoktiniai, atvykę ten tuoktis ¦ Laulātie, kas ieradās tur precēties ¦ Abikaasad, kes tulid sinna abielluma
+Enfants partis (nés ici, morts ou mariés ailleurs) ¦ Išvykę vaikai (gimę čia, mirę ar susituokę kitur) ¦ Aizgājušie bērni (dzimuši šeit, miruši vai precējušies citur) ¦ Lahkunud lapsed (sündinud siin, surnud või abiellunud mujal)
+Émigrés (morts dans un autre pays) ¦ Emigrantai (mirę kitoje šalyje) ¦ Emigranti (miruši citā valstī) ¦ Väljarändajad (surnud teises riigis)
+Choisis d’abord le village. ¦ Pirmiausia pasirink kaimą. ¦ Vispirms izvēlies ciemu. ¦ Vali kõigepealt küla.
+Coche au moins une sorte de lien. ¦ Pažymėk bent vieną ryšio rūšį. ¦ Atzīmē vismaz vienu saišu veidu. ¦ Märgi vähemalt üks seose liik.
+Aucun lien trouvé pour ce lieu (naissance, mariage ou décès ailleurs). ¦ Šiai vietai ryšių nerasta (gimimas, santuoka ar mirtis kitur). ¦ Šai vietai saišu nav (dzimšana, laulība vai nāve citur). ¦ Selle koha kohta seoseid ei leitud (sünd, abielu või surm mujal).
+{n} prises dans l’arbre ({m} lieux rattachés à une paroisse d’Ancien Régime, les autres comptent pour eux-mêmes). ¦ Iš medžio: {n} ({m} vietos priskirtos senajai parapijai, kitos skaičiuojamos atskirai). ¦ No koka: {n} ({m} vietas piesaistītas senai draudzei, pārējās skaitās pašas). ¦ Puust: {n} ({m} kohta seotud vana kihelkonnaga, teised loevad end ise).
+Aucun lieu avec des coordonnées pour ce choix : place d’abord tes lieux sur la carte. ¦ Šiam pasirinkimui nėra vietų su koordinatėmis: pirmiausia pažymėk vietas žemėlapyje. ¦ Šai izvēlei nav vietu ar koordinātām: vispirms novieto savas vietas kartē. ¦ Selle valiku jaoks pole koordinaatidega kohti: paiguta esmalt oma kohad kaardile.
+sa paroisse ¦ jos parapija ¦ tās draudze ¦ selle kihelkond
+leur paroisse ¦ jų parapija ¦ to draudze ¦ nende kihelkond
+une paroisse ¦ parapiją ¦ draudzi ¦ kihelkond
+Paroisse sans position : choisis sa commune dans la liste, ou écris « Nom 45.27, 1.77 ». ¦ Parapija be padėties: pasirink jos gyvenvietę sąraše arba rašyk „Pavadinimas 45.27, 1.77“. ¦ Draudze bez pozīcijas: izvēlies tās pašvaldību sarakstā vai raksti “Nosaukums 45.27, 1.77”. ¦ Asukohata kihelkond: vali selle vald loendist või kirjuta „Nimi 45.27, 1.77”.
+Carte en étoile : seulement les liens de ce lieu (vide = tous les flux) ¦ Žvaigždinis žemėlapis: tik šios vietos ryšiai (tuščia = visi srautai) ¦ Zvaigžņu karte: tikai šīs vietas saites (tukšs = visas plūsmas) ¦ Tähtkaart: ainult selle koha seosed (tühi = kõik vood)
+niveau|paroisse ¦ parapija ¦ draudze ¦ kihelkond
+=paroisse ¦ parapija|parapijos|parapijų ¦ draudzes|draudze|draudzes ¦ kihelkond|kihelkonda

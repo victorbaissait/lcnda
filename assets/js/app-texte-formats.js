@@ -1155,7 +1155,7 @@
         const ext = String(name || '').toLowerCase().split('.').pop(), zip = u8[0] === 0x50 && u8[1] === 0x4b;
         if (zip) { const z = await S().unzip(buf); if (z.has('word/document.xml')) return {kind: 'docx', ...(await fromDocx(buf))}; if (z.has('content.xml')) return {kind: 'odt', ...(await fromOdt(buf))}; throw new Error(tr('ce fichier zip n’est ni un document Word (.docx) ni un document LibreOffice (.odt)')); }
         if (u8[0] === 0xd0 && u8[1] === 0xcf) throw new Error(tr('les anciens fichiers Word (.doc) ne se lisent pas : ouvre-le dans Word ou LibreOffice et enregistre-le en .docx'));
-        if (ext === 'pdf' || ext === 'doc' || String.fromCharCode(...u8.slice(0, 1024)).includes('%PDF-')) throw new Error(ext === 'doc' ? tr('les anciens fichiers Word (.doc) ne se lisent pas : ouvre-le dans Word ou LibreOffice et enregistre-le en .docx') : tr('un PDF ne se transforme pas en texte modifiable ici : ouvre la Transcription d’actes pour le recopier'));
+        if (ext === 'pdf' || ext === 'doc' || String.fromCharCode(...u8.slice(0, 1024)).includes('%PDF-')) throw new Error(ext === 'doc' ? tr('les anciens fichiers Word (.doc) ne se lisent pas : ouvre-le dans Word ou LibreOffice et enregistre-le en .docx') : tr('un PDF ne se transforme pas en texte modifiable ici : ouvre l’Atelier de transcription pour le recopier'));
         if (u8[0] === 0x25 && u8[1] === 0x50 && u8[2] === 0x44 && u8[3] === 0x46) throw new Error(tr('un PDF ne se transforme pas en texte modifiable ici : ouvre la Transcription d’actes pour le recopier'));
         const dec = S().decodeBytes(u8), text = dec.text;
         if (/^\s*\{\\rtf/.test(text) || ext === 'rtf') return {kind: 'rtf', ...fromRtf(text), encoding: dec.encoding};

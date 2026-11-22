@@ -7,14 +7,15 @@
  *   npm run start:local     données = dossiers data/ et media/ du projet (pour tester avec tes copies)
  *   GENEALOGY_DATA_DIR=… GENEALOGY_MEDIA_DIR=… npm start     dossiers de ton choix
  */
-const { app, BrowserWindow, Menu, Notification, dialog, ipcMain, net, session, shell } = require('electron');
+const { app, BrowserWindow, Menu, Notification, dialog, ipcMain, net, powerMonitor, powerSaveBlocker, session, shell } = require('electron');
 const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
-const { PhpServer, findPhp, checkPhp, devBundledPhp, SECRET_HEADER } = require('./php-server');
+const { PhpServer, findPhp, checkPhpAsync, devBundledPhp, SECRET_HEADER } = require('./php-server');
 const desk = require('./desk-widgets'); // 🪟 widgets sur le bureau
 const browsers = require('./browsers'); // 🌐 ouvrir l'aperçu d'un site dans un navigateur précis
 const updates = require('./updates'); // 🔄 mises à jour (dernière version publiée sur GitHub)
+const { LanGate } = require('./lan-gate'); // 🖧 plusieurs ordinateurs : la porte du wifi (coupée au départ)
 
 const APP_TITLE = 'Carnet numérique des ancêtres';
 app.setName(APP_TITLE);
@@ -40,6 +41,7 @@ let startHidden = process.argv.includes('--widgets') && !selfTestFile;
 let server = null;
 let win = null;
 let quitting = false;
+let preparing = null; // mise à jour de la base en cours (prepareDatabase) : quitter attend qu'elle soit finie
 
 function paths() {
   const userData = app.getPath('userData');
@@ -53,18 +55,83 @@ function paths() {
   };
 }
 
+/** Un réglage illisible (coupure de courant pendant l'écriture, fichier rempli de zéros, « null »…) = aucun réglage : jamais d'erreur. */
 function readConfig(file) {
-  try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return {}; }
+  try { const v = JSON.parse(fs.readFileSync(file, 'utf8')); return v && typeof v === 'object' && !Array.isArray(v) ? v : {}; } catch { return {}; }
 }
+/** Écrit d'abord à côté puis remplace : une coupure pendant l'écriture ne laisse pas un config.json à moitié écrit. */
 function writeConfig(file, config) {
-  try { fs.mkdirSync(path.dirname(file), { recursive: true }); fs.writeFileSync(file, JSON.stringify(config, null, 2)); } catch { /* ignore */ }
+  try {
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    const tmp = `${file}.${process.pid}.tmp`;
+    fs.writeFileSync(tmp, JSON.stringify(config, null, 2));
+    try { fs.renameSync(tmp, file); } catch { fs.writeFileSync(file, JSON.stringify(config, null, 2)); fs.rmSync(tmp, { force: true }); } // Windows : fichier tenu par l'antivirus
+  } catch { /* disque plein, dossier en lecture seule : le réglage n'est pas gardé, sans plus */ }
+}
+/** Le port gardé d'un lancement à l'autre : un nombre entre 1024 et 65535, sinon aucun (un autre est choisi). */
+function cleanPort(v) { return Number.isInteger(v) && v >= 1024 && v <= 65535 ? v : 0; }
+
+/**
+ * Journal du lancement : les mêmes lignes « [app] » que php-server.js, dans logs/php.log (Fichier → Afficher le journal
+ * technique). Écrit aussi quand PHP n'a pas encore démarré (PHP introuvable, dossier impossible à créer…).
+ */
+function appLog(text) {
+  const line = String(text);
+  if (server && server._log) { server._logLine(line); return; }
+  try { const f = paths().logFile; fs.mkdirSync(path.dirname(f), { recursive: true }); fs.appendFileSync(f, `[${new Date().toISOString()}] [app] ${line}\n`); } catch { /* journal impossible à écrire */ }
 }
 
-async function fatal(title, message) {
-  dialog.showErrorBox(title, message);
+/** Essais seulement (jamais dans l'app installée) : la boîte d'erreur est écrite dans ce fichier au lieu d'être affichée. */
+const TEST_FATAL_FILE = !app.isPackaged ? process.env.LCNDA_TEST_FATAL_FILE || '' : '';
+let fatalShown = false;
+/**
+ * Arrêt sur une erreur : une boîte claire (titre, quoi faire, où est le journal), PHP arrêté, l'app quitte. Une seule
+ * boîte même si plusieurs PHP échouent ensemble ; aucune si l'utilisateur a déjà fermé la fenêtre pendant le démarrage.
+ * @param {{action?: {label: string, run: () => any}}} [opts] un bouton de plus (ex. installer le composant Microsoft)
+ */
+async function fatal(title, message, opts = {}) {
+  if (fatalShown) return;
+  fatalShown = true;
+  const userQuit = quitting;
   quitting = true;
+  const logFile = paths().logFile;
+  const text = String(message || '') + (String(message || '').includes(logFile) ? '' : '\n\nJournal technique : ' + logFile);
+  appLog(`ERREUR au lancement « ${title} » : ${String(message || '').replace(/\s*\n+\s*/g, ' ')}`);
+  console.error(`[lancement] ERREUR « ${title} » : ${message}`);
+  try {
+    if (TEST_FATAL_FILE) fs.writeFileSync(TEST_FATAL_FILE, JSON.stringify({ title, message: text, action: opts.action ? opts.action.label : '' }));
+    else if (!userQuit) {
+      if (!app.isReady()) dialog.showErrorBox(title, text);
+      else {
+        const buttons = ['Quitter', 'Afficher le journal', ...(opts.action ? [opts.action.label] : [])];
+        const { response } = await dialog.showMessageBox({ type: 'error', title, message: title, detail: text, buttons, defaultId: opts.action ? 2 : 0, cancelId: 0, noLink: true });
+        if (response === 1) shell.showItemInFolder(logFile);
+        if (response === 2 && opts.action) await opts.action.run();
+      }
+    }
+  } catch { /* boîte impossible : on quitte quand même */ }
   try { if (server) await server.stop(); } catch { /* ignore */ }
   app.exit(1);
+}
+
+/**
+ * Filet de sécurité : une erreur que rien n'a attrapée pendant le démarrage ne doit jamais laisser l'écran « Démarrage en
+ * cours… » pour toujours. Après le démarrage, elle est seulement notée dans le journal.
+ */
+let booted = false;
+function onStrayError(kind, err) {
+  const msg = (err && err.stack) || String(err);
+  console.error(`[lancement] ${kind} : ${msg}`);
+  appLog(`${kind} : ${msg}`);
+  if (!booted) fatal('Démarrage impossible', 'Erreur inattendue au démarrage : ' + ((err && err.message) || String(err)) + '\n\nRelance l’application. Si cela recommence, envoie le journal technique (menu Aide → Signaler un problème).');
+}
+process.on('unhandledRejection', (reason) => onStrayError('promesse rejetée non attrapée', reason));
+process.on('uncaughtException', (err) => onStrayError('erreur non attrapée', err));
+
+/** Texte de l'écran « Démarrage en cours… » (electron/loading.html) tant qu'il est affiché. */
+function setLoadingStatus(text) {
+  if (!win || win.isDestroyed() || !/^file:/.test(win.webContents.getURL() || 'file:')) return;
+  win.webContents.executeJavaScript(`(() => { const p = document.querySelector('p'); if (p) p.textContent = ${JSON.stringify(text)}; })()`).catch(() => {});
 }
 
 /**
@@ -213,6 +280,13 @@ function createWindow() {
   });
   win.once('ready-to-show', () => { if (!startHidden) win.show(); });
   win.on('closed', () => { win = null; });
+  // La page a planté (mémoire, pilote graphique) : noté dans le journal et rechargée une fois, au lieu d'une fenêtre blanche
+  let reloads = 0;
+  win.webContents.on('render-process-gone', (_event, details) => {
+    appLog(`la page s'est arrêtée (${details.reason}, code ${details.exitCode})`);
+    if (quitting || !server || details.reason === 'clean-exit' || reloads++ >= 2 || !win || win.isDestroyed()) return;
+    win.webContents.reload();
+  });
   // Si PHP est prêt avant que cette page ait fini de s'afficher, l'application la remplace aussitôt : ce
   // chargement interrompu (code -3, ERR_ABORTED) est normal, on ne le signale pas comme une erreur.
   win.loadFile(path.join(__dirname, 'loading.html')).catch(() => {});
@@ -245,7 +319,8 @@ async function checkReminders() {
   try { app.setBadgeCount(enabled ? Number(data.count) || 0 : 0); } catch { /* système sans badge (Windows) */ }
   if (!enabled || !Notification.isSupported()) return;
   const file = path.join(p.userData, 'reminders-notified.json');
-  const notified = new Set(readConfig(file).keys || []);
+  const kept = readConfig(file).keys;
+  const notified = new Set(Array.isArray(kept) ? kept.filter((k) => typeof k === 'string') : []);
   const fresh = (data.due || []).filter((d) => !notified.has(d.key));
   if (!fresh.length) return;
   const first = fresh[0];
@@ -259,6 +334,93 @@ async function checkReminders() {
   writeConfig(file, { keys: [...notified].slice(-500) });
 }
 ipcMain.on('lcnda:refresh-reminders', (event) => { if (fromApp(event)) checkReminders(); });
+
+/**
+ * 🖧 Plusieurs ordinateurs (electron/lan-gate.js ; maquette docs/design/plusieurs-ordinateurs.html) : la porte du wifi, coupée
+ * au départ. Seule la grande fenêtre de cet ordinateur (fromApp) l'ouvre, la ferme, accepte ou refuse un appareil, le
+ * retire ; les appareils invités n'ont pas ce pont (ils passent par un navigateur). Coupée à la mise en veille (powerMonitor)
+ * et en quittant ; rouverte au réveil si le réglage le dit et que le réseau n'a pas changé.
+ */
+let gate = null;
+let lanBlocker = null;
+let lanResume = false;
+function lanEmit(type, data = {}) { if (win && !win.isDestroyed()) win.webContents.send('lcnda:reseau', { type, ...data }); }
+/** 📜 un geste de la porte au registre « Qui a vu quoi » (second secret : seul ce processus peut l'écrire) */
+function lanNote(kind, o = {}) {
+  if (!server) return;
+  const q = new URLSearchParams({ action: 'lan_note', kind, label: String(o.label || ''), what: String(o.what || ''), device: String(o.device || ''), ...(o.dev ? { dev: String(o.dev) } : {}) });
+  server.request('/api.php?' + q.toString(), { timeout: 15000, headers: { 'x-carnet-local': server.localSecret } }).catch(() => {});
+}
+/** La généalogie ouverte a-t-elle un mot de passe ? (réglage conseillé : obligatoire pour l'ouvrir au réseau) */
+async function lanPasswordOk() {
+  try { const r = await server.request('/api.php?action=glock_state', { timeout: 15000 }); return !!JSON.parse(r.body.toString()).locked; } catch { return false; }
+}
+async function lanOpen() {
+  if (!gate) return { ok: false, error: 'off' };
+  const r = await gate.open({ passwordOk: await lanPasswordOk() });
+  if (r.ok) lanNote('lan_open', { label: gate.address ? gate.address.ip : '' });
+  return r;
+}
+function lanBlockerUpdate() {
+  const want = !!(gate && gate.isOn && gate.settings.preventSleep === 'oui' && gate.connectedCount() > 0);
+  if (want && lanBlocker === null) lanBlocker = powerSaveBlocker.start('prevent-app-suspension');
+  if (!want && lanBlocker !== null) { try { powerSaveBlocker.stop(lanBlocker); } catch { /* ignore */ } lanBlocker = null; }
+}
+function setupLan(p) {
+  gate = new LanGate({ server, dataDir: p.dataDir, appRoot: APP_ROOT, packaged: app.isPackaged });
+  gate.on('request', (r) => {
+    lanEmit('request', r);
+    if (win && !win.isDestroyed()) {
+      try { win.flashFrame(true); } catch { /* ignore */ }
+      if (!win.isFocused() && Notification.isSupported()) { const n = new Notification({ title: '🖧 LCNDA', body: `${r.name} · ${r.code.slice(0, 3)} ${r.code.slice(3)}` }); n.on('click', () => showMain()); n.show(); }
+    }
+  });
+  gate.on('change', () => { lanEmit('change'); lanBlockerUpdate(); });
+  gate.on('request-gone', (r) => lanEmit('request-gone', r));
+  gate.on('paused', (r) => lanEmit('paused', r));
+  gate.on('network-changed', (r) => lanEmit('network-changed', r));
+  gate.on('device-added', (d) => lanNote('lan_ok', { label: d.name }));
+  gate.on('request-refused', (d) => lanNote('lan_refuse', { label: d.name }));
+  gate.on('device-removed', (d) => lanNote('lan_remove', { label: d.name, ...(d.kind === 'terrain' ? { dev: d.id, what: 'terrain' } : {}) })); // 📱 ses photos : réglage « Retirer un téléphone »
+  gate.on('device-added', (d) => { if (d.kind === 'terrain') lanEmit('change'); });
+  gate.on('terrain-deposit', (d) => lanEmit('deposit', { name: d.name })); // 📥 À trier : la pastille se met à jour
+  gate.on('device-connect', (d) => lanNote('lan_connect', { device: d.name }));
+  gate.on('close', ({ reason }) => { lanNote('lan_close', { what: reason }); lanBlockerUpdate(); });
+  // gate.sleep() regarde gate.isOn (et non gate.on, la méthode d'EventEmitter, toujours « vraie ») : avant, chaque mise en veille
+  // faisait croire que la porte était ouverte, et le réveil l'OUVRAIT au réseau alors qu'elle était coupée.
+  powerMonitor.on('suspend', async () => {
+    try { if (gate && (await gate.sleep())) lanResume = true; } catch (err) { appLog('porte du wifi (veille) : ' + err.message); }
+  });
+  powerMonitor.on('resume', async () => {
+    try {
+      if (!gate) return;
+      const again = gate.shouldReopenAfterWake(lanResume);
+      lanResume = false;
+      if (again) { const r = await lanOpen(); if (!r.ok) lanEmit('reopen-failed', r); }
+      else if (gate.state.wasOpen && !gate.isOn) { gate.state.wasOpen = false; gate._saveState(); lanEmit('change'); }
+    } catch (err) { appLog('porte du wifi (réveil) : ' + err.message); }
+  });
+  // au lancement : reste coupé (conseillé), ou se rouvre si le réglage le dit
+  if (gate.state.wasOpen && gate.settings.relaunch === 'rouvre') lanOpen().catch((err) => appLog('porte du wifi (ouverture au lancement) : ' + err.message));
+  else if (gate.state.wasOpen) { gate.state.wasOpen = false; gate._saveState(); }
+}
+ipcMain.handle('lcnda:reseau', async (event, cmd, arg) => {
+  if (!fromApp(event) || !gate) return { ok: false, error: 'Refusé' };
+  const id = String((arg && arg.id) || '');
+  switch (String(cmd || '')) {
+    case 'status': return gate.status();
+    case 'open': return lanOpen();
+    case 'close': await gate.close('main'); return { ok: true };
+    case 'invite': return gate.newInvite();
+    case 'accept': return gate.accept(id, ['lecture', 'terrain'].includes(arg && arg.kind) ? arg.kind : undefined);
+    case 'refuse': return gate.refuse(id);
+    case 'remove': return gate.remove(id);
+    case 'undo-remove': return gate.undoRemove(id);
+    case 'remove-phones': return gate.removeKind('terrain'); // ⏻ Retirer tous les téléphones
+    case 'settings': return { ok: true, settings: gate.setSettings(arg && typeof arg === 'object' ? arg : {}) };
+    default: return { ok: false, error: 'Refusé' };
+  }
+});
 
 /**
  * 🪟 Widgets sur le bureau (Tableau de bord → 🪟) : petites fenêtres sans cadre, en lecture seule, qui montrent une page
@@ -600,51 +762,92 @@ function watchSitePreview(webContents, origin) {
   });
 }
 
+/** Le composant Microsoft livré avec l'application (installateur Windows) : resources/vc_redist.x64.exe */
+function vcRedistFile() {
+  const f = app.isPackaged ? path.join(process.resourcesPath, 'vc_redist.x64.exe') : '';
+  return f && fs.existsSync(f) ? f : '';
+}
+
 async function boot() {
   const p = paths();
+  const t0 = Date.now();
+  const lap = {}; // chronomètre du lancement, écrit dans le journal
   buildMenu(p);
   createWindow();
+  appLog(`lancement de LCNDA ${app.getVersion()} (${process.platform}-${process.arch}${app.runningUnderARM64Translation ? ', Rosetta' : ''}, Electron ${process.versions.electron}${app.isPackaged ? '' : ', développement'}) ; données : ${p.dataDir}`);
 
   const phpPath = findPhp(BUNDLED_PHP);
   if (!phpPath) {
     return fatal('PHP est introuvable',
-      'L’application a besoin de PHP.\n\nEn développement : npm run fetch:php\n' +
-      'Ou indique son chemin avec la variable GENEALOGY_PHP.');
+      (app.isPackaged
+        ? 'Un fichier de l’application manque (PHP, livré avec elle) : il a peut-être été mis en quarantaine par l’antivirus.\n\n'
+          + 'Rends-le depuis la quarantaine de l’antivirus, ou réinstalle l’application, puis relance.\n\nFichier attendu : ' + BUNDLED_PHP[0]
+        : 'L’application a besoin de PHP.\n\nEn développement : npm run fetch:php\nOu indique son chemin avec la variable GENEALOGY_PHP.'));
   }
-  const check = checkPhp(phpPath);
+  // Premier lancement : l'antivirus (Windows Defender…) ou macOS examine le PHP livré, parfois une minute : on le dit.
+  const slowCheck = setTimeout(() => setLoadingStatus('Premier lancement : l’ordinateur vérifie les fichiers de l’application (antivirus, macOS). Cela peut prendre une minute…'), 6000);
+  const testTimeouts = !app.isPackaged && process.env.LCNDA_TEST_PHP_TIMEOUTS ? process.env.LCNDA_TEST_PHP_TIMEOUTS.split(',').map(Number).filter((n) => n > 0) : null;
+  let check;
+  try { check = await checkPhpAsync(phpPath, testTimeouts ? { timeouts: testTimeouts } : {}); } finally { clearTimeout(slowCheck); }
+  lap.php = Date.now() - t0;
+  if (!check.ok && check.slow) {
+    // PHP n'a pas répondu à temps : ce n'est pas un PHP « qui ne convient pas » (antivirus ou macOS qui l'examine)
+    return fatal('Démarrage trop lent', check.error);
+  }
   if (!check.ok) {
+    const vc = check.vcRuntime && vcRedistFile();
     return fatal('PHP incomplet',
-      `Le PHP trouvé (${phpPath}) ne convient pas.\n\n` +
-      (check.error ? check.error : 'Extensions manquantes : ' + check.missing.join(', ')));
+      check.error ? check.error
+        : `Le PHP trouvé (${phpPath}) ne convient pas : extensions manquantes : ${check.missing.join(', ')}.`
+          + (app.isPackaged ? '\n\nRéinstalle l’application.' : '\n\nEn développement : npm run fetch:php'),
+      vc ? { action: { label: 'Installer le composant Microsoft', run: () => shell.openPath(vc) } } : {});
   }
+  setLoadingStatus('Démarrage en cours…');
 
   const config = readConfig(p.configFile);
+  const testReady = !app.isPackaged ? Number(process.env.LCNDA_TEST_READY_MS) || 0 : 0;
   server = new PhpServer({
     phpPath, appRoot: APP_ROOT, dataDir: p.dataDir, mediaDir: p.mediaDir, sessionDir: p.sessionDir,
-    logFile: p.logFile, preferredPort: config.port,
+    logFile: p.logFile, preferredPort: cleanPort(config.port), packaged: app.isPackaged,
+    pidFile: path.join(p.userData, 'php-en-cours.json'), // PHP restés d'un lancement interrompu (plantage, coupure) : arrêtés au suivant
+    cacheAssets: app.isPackaged || process.env.CARNET_CACHE_ASSETS === '1', // fichiers versionnés (?v=) gardés par la fenêtre
+    ...(testReady ? { readyTimeoutMs: testReady } : {}),
     workers: Number(process.env.CARNET_PHP_WORKERS) || 0,
     // Plusieurs PHP derrière un relais (php -S ne traite qu'une requête à la fois) : l'interface reste réactive
     // pendant une sauvegarde ou un export, et une page s'ouvre plus vite (mesuré : 994 → 659 ms).
     // CARNET_PHP_POOL=1 pour revenir à un seul PHP.
     pool: Number(process.env.CARNET_PHP_POOL) || 4,
   });
-  server.on('error', (err) => fatal('PHP ne démarre pas', err.message + '\n\nJournal : ' + p.logFile));
-  server.on('fatal', (err) => fatal('Le serveur de l’application s’est arrêté', err.message + '\n\nJournal : ' + p.logFile));
+  server.on('error', (err) => fatal('PHP ne démarre pas', explainSpawnError(err, phpPath)));
+  server.on('fatal', (err) => fatal('Le serveur de l’application s’est arrêté', err.message + '\n\nRelance l’application.'));
 
   try {
     await server.start();
   } catch (err) {
-    return fatal('Démarrage impossible', err.message + '\n\nJournal : ' + p.logFile);
+    if (err.code === 'LCNDA_DIR') return fatal('Dossier des données inutilisable', err.message);
+    if (err.code === 'ETIMEDOUT') return fatal('Démarrage trop lent', err.message);
+    return fatal('Démarrage impossible', err.message);
   }
+  lap.server = Date.now() - t0;
   // Le même port d'un lancement à l'autre = la même « origine » web : le navigateur intégré conserve ainsi
   // les préférences d'affichage que l'interface range dans son localStorage.
   if (config.port !== server.port) writeConfig(p.configFile, { ...config, port: server.port });
+  if (!selfTestFile) {
+    // 🖧 la porte du wifi : rien n'écoute sur le réseau tant qu'on ne l'ouvre pas. Une panne ici (fichier illisible…) ne doit
+    // pas empêcher d'ouvrir la généalogie : la porte reste simplement indisponible.
+    try { setupLan(p); } catch (err) { gate = null; appLog('porte du wifi indisponible : ' + err.message); }
+  }
 
   // Chaque requête de la fenêtre porte le secret ; router.php refuse tout le reste.
   session.defaultSession.webRequest.onBeforeSendHeaders({ urls: [server.origin + '/*'] }, (details, callback) => {
     details.requestHeaders[SECRET_HEADER] = server.secret;
     callback({ requestHeaders: details.requestHeaders });
   });
+  // Nouvelle version de l'app : les fichiers gardés par la fenêtre (cache) sont oubliés, au cas où un fichier aurait changé
+  // sans changer de numéro (?v=). Une fois par version, pendant que PHP prépare la base.
+  const cacheKey = app.getVersion() + (app.isPackaged ? '' : '-dev');
+  const cacheCleared = config.cacheVersion === cacheKey ? Promise.resolve()
+    : session.defaultSession.clearCache().catch(() => {}).then(() => writeConfig(p.configFile, { ...readConfig(p.configFile), cacheVersion: cacheKey }));
   // Permissions : l'application n'obtient que ce dont elle se sert (micro et caméra pour enregistrer et dicter,
   // notifications, presse-papiers pour coller une image, plein écran, souris capturée pendant la visite de la maison,
   // liste des polices de l'ordinateur pour la fenêtre « Toutes les polices » : 'local-fonts', API queryLocalFonts),
@@ -663,39 +866,92 @@ async function boot() {
   if (win) lockNavigation(win.webContents, server.origin);
 
   // Mise à jour éventuelle de la structure de la base, avant d'afficher l'interface.
-  const slow = setTimeout(() => {
-    if (win) win.webContents.executeJavaScript(
-      "document.querySelector('p').textContent='Mise à jour de la base de données… (une copie de sécurité est faite d’abord)'",
-    ).catch(() => {});
-  }, 1500);
+  const slow = setTimeout(() => setLoadingStatus('Préparation de la base de données… Après une mise à jour de l’application, une copie de sécurité est faite d’abord : cela peut prendre une minute. Ne ferme pas l’application.'), 1500);
+  const verySlow = setTimeout(() => setLoadingStatus('La base de données met du temps à s’ouvrir : une mise à jour est en cours, ou elle est occupée par un autre programme (synchronisation OneDrive, Dropbox, iCloud…). Ne ferme pas l’application.'), 25000);
   let prepared;
   try {
-    prepared = await server.prepareDatabase();
+    // la langue choisie dans l'app (cookie lcnda_lang, assets/js/app-i18n.js) : le message « base occupée » arrive traduit
+    let lang = '';
+    try { lang = ((await session.defaultSession.cookies.get({ name: 'lcnda_lang' }))[0] || {}).value || ''; } catch { /* pas de cookie : français */ }
+    preparing = server.prepareDatabase({ lang });
+    prepared = await preparing;
   } catch (err) {
     prepared = { ok: false, error: err.message };
   } finally {
-    clearTimeout(slow);
+    clearTimeout(slow); clearTimeout(verySlow);
+    preparing = null;
+  }
+  if (!prepared.ok && prepared.busy) {
+    // base tenue par un autre programme (lib/bootstrap.php, db()) : message traduit par PHP, en 5 s environ
+    return fatal('La base de données n’a pas pu être ouverte', prepared.error + (prepared.detail ? `\n\n(${prepared.detail})` : ''),
+      { action: { label: 'Ouvrir le dossier des données', run: () => shell.openPath(p.dataDir) } });
   }
   if (!prepared.ok) {
-    return fatal('La base de données n’a pas pu être ouverte', prepared.error + '\n\nJournal : ' + p.logFile);
+    return fatal('La base de données n’a pas pu être ouverte', explainDbError(prepared.error, prepared.detail)
+      + '\n\nSi une mise à jour de la base a échoué, une copie de sécurité faite juste avant est dans le dossier backups des données.',
+      { action: { label: 'Ouvrir le dossier des données', run: () => shell.openPath(p.dataDir) } });
   }
+  lap.base = Date.now() - t0;
+  await cacheCleared;
 
-  if (win) {
-    await win.loadURL(server.origin + (selfTestFile && process.env.CARNET_SELFTEST_PATH ? process.env.CARNET_SELFTEST_PATH : '/'));
+  if (win && !win.isDestroyed()) {
+    const url = server.origin + (selfTestFile && process.env.CARNET_SELFTEST_PATH ? process.env.CARNET_SELFTEST_PATH : '/');
+    for (let attempt = 1; ; attempt++) {
+      try { await win.loadURL(url); break; } catch (err) {
+        if (!win || win.isDestroyed() || quitting) return;
+        // ERR_ABORTED (-3) : la page a elle-même changé d'adresse pendant son chargement ; elle est bien là
+        if (err.code === 'ERR_ABORTED' || err.errno === -3) break;
+        appLog(`la page ne s'est pas chargée (${err.code || err.message}), essai ${attempt}`);
+        if (attempt >= 2) return fatal('L’interface ne s’affiche pas', 'La page de l’application ne s’est pas chargée (' + (err.code || err.message) + ').\n\nRelance l’application.');
+        await new Promise((r) => setTimeout(r, 1000));
+      }
+    }
+    lap.page = Date.now() - t0;
     if (selfTestFile) await selfTest(selfTestFile);
   }
+  booted = true;
+  appLog(`lancement : PHP vérifié en ${lap.php} ms, ${server.poolSize} PHP prêts à ${lap.server} ms, base prête à ${lap.base} ms, page chargée à ${lap.page ?? '—'} ms`
+    + ` (${Math.round(process.uptime() * 1000)} ms depuis l'ouverture du programme)${prepared.noDatabase ? ' ; pas encore de généalogie' : ''}`);
   // 🪟 les widgets laissés sur le bureau la dernière fois ; Mac : ouvert au démarrage de la session = les widgets seulement
   if (!selfTestFile && !prepared.noDatabase) {
     try { if (process.platform === 'darwin' && app.getLoginItemSettings().wasOpenedAtLogin && readConfig(p.configFile).deskAutostart) startHidden = true; } catch { /* ignore */ }
     let opened = 0;
-    for (const [kind, c] of Object.entries(deskConfig())) { if (c && c.open && desk.KINDS[kind] && openDeskWidget(kind, c)) opened++; }
+    for (const [kind, c] of Object.entries(deskConfig())) { try { if (c && c.open && desk.KINDS[kind] && openDeskWidget(kind, c)) opened++; } catch (err) { appLog(`widget ${kind} : ${err.message}`); } }
     if (startHidden && !opened) showMain(); // rien à montrer : la grande fenêtre
   } else if (startHidden) showMain();
   if (!selfTestFile && !prepared.noDatabase) {
-    setTimeout(() => checkReminders(), 8000);
-    reminderTimer = setInterval(() => checkReminders(), 15 * 60 * 1000);
+    setTimeout(() => checkReminders().catch((err) => appLog('rappels : ' + err.message)), 8000);
+    reminderTimer = setInterval(() => checkReminders().catch((err) => appLog('rappels : ' + err.message)), 15 * 60 * 1000);
   }
-  if (!selfTestFile) ensureWorldPlaces(p, phpPath);
+  if (!selfTestFile) {
+    // 🌍 villes du monde : décompressées et indexées une fois (~20 s), dans un PHP à part et en priorité basse, l'interface
+    // déjà affichée (avant : pendant « Démarrage en cours… »)
+    setTimeout(() => { if (server && !quitting) server.prepareWorldInBackground(); }, 3000);
+    ensureWorldPlaces(p, phpPath);
+  }
+}
+
+/** Les erreurs de SQLite les plus courantes à l'ouverture, dites simplement (le message d'origine reste à la suite). */
+function explainDbError(message, detail = '') {
+  const m = String(detail || message || '');
+  const tip = /database is locked|database table is locked|SQLITE_BUSY/i.test(m)
+    ? 'La base est occupée par un autre programme : une autre copie de l’application, ou un outil de synchronisation (OneDrive, Dropbox, iCloud…) qui la recopie. Ferme-le, attends un peu, puis relance.'
+    : /readonly|read-only|lecture seule/i.test(m)
+      ? 'Le fichier de la base est en lecture seule : vérifie les droits du dossier des données (ou qu’il n’est pas sur un disque protégé en écriture).'
+      : /disk I\/O error|unable to open database|SQLITE_CANTOPEN|SQLITE_IOERR/i.test(m)
+        ? 'Le fichier de la base ne peut pas être lu ou écrit : disque plein ou débranché, droits du dossier, ou dossier synchronisé (OneDrive…) qui le bloque.'
+        : /malformed|not a database|SQLITE_CORRUPT|SQLITE_NOTADB/i.test(m)
+          ? 'Le fichier de la base est abîmé. Tes copies de sauvegarde sont dans le dossier backups des données : mets de côté le fichier abîmé (renomme-le), relance l’application, puis importe une copie depuis l’écran d’accueil.'
+          : /disk is full|SQLITE_FULL|No space left/i.test(m) ? 'Le disque est plein : libère de la place, puis relance l’application.' : '';
+  return tip ? `${tip}\n\n(${m})` : String(message || '') + (detail && detail !== message ? `\n\n(${detail})` : '');
+}
+
+/** Message compréhensible quand le programme PHP ne peut même pas être lancé (antivirus, droits, fichier disparu). */
+function explainSpawnError(err, phpPath) {
+  const code = err && err.code;
+  if (code === 'ENOENT') return `Le programme PHP de l’application a disparu (${phpPath}) : l’antivirus l’a peut-être mis en quarantaine.\n\nRends-le depuis la quarantaine de l’antivirus, ou réinstalle l’application.`;
+  if (code === 'EACCES' || code === 'EPERM') return `L’ordinateur refuse de lancer le programme PHP de l’application (${phpPath}) : droits d’exécution, antivirus, ou dossier qui interdit les programmes.\n\nRéinstalle l’application dans le dossier proposé, ou autorise-la dans l’antivirus.`;
+  return 'PHP ne démarre pas : ' + ((err && err.message) || err);
 }
 
 /**
@@ -759,17 +1015,22 @@ async function selfTest(outFile) {
 if (!app.requestSingleInstanceLock()) {
   app.quit(); // une seule fenêtre à la fois : deux instances se disputeraient la même base
 } else {
-  app.on('second-instance', () => { if (win && !win.isDestroyed()) { startHidden = false; if (win.isMinimized()) win.restore(); win.show(); win.focus(); } else showMain(); });
+  app.on('second-instance', () => { if (quitting) return; if (win && !win.isDestroyed()) { startHidden = false; if (win.isMinimized()) win.restore(); win.show(); win.focus(); } else showMain(); });
   app.on('activate', () => { if (server && (!win || win.isDestroyed() || !win.isVisible())) showMain(); }); // Mac : clic sur l'icône du Dock
-  app.whenReady().then(boot);
+  app.whenReady().then(boot).catch((err) => onStrayError('erreur au démarrage', err));
   app.on('window-all-closed', () => app.quit());
   app.on('will-quit', () => { if (worldFetch) { try { worldFetch.kill(); fs.rmSync(worldFetch.marker, { force: true }); } catch (_) {} } }); // repris au prochain lancement
   app.on('before-quit', (event) => {
-    if (quitting || !server) return;
+    if (quitting || !server) { quitting = true; return; } // fermé pendant le démarrage : pas de boîte d'erreur ensuite
     event.preventDefault();
     quitting = true;
+    appLog('fermeture de l’application');
+    // fenêtre fermée pendant la mise à jour de la base : on la laisse finir (arrêter PHP au milieu la laisserait à moitié faite)
+    const prep = preparing ? (appLog('fermeture : on attend la fin de la mise à jour de la base'), preparing.catch(() => {})) : Promise.resolve();
     clearInterval(reminderTimer);
     try { app.setBadgeCount(0); } catch { /* ignore */ }
-    server.closeBackup().finally(() => server.stop().finally(() => app.quit())); // 🗓 sauvegarde « à la fermeture » si elle est réglée
+    // 🖧 la porte du wifi se ferme d'abord (plus personne ne voit rien), puis 🗓 sauvegarde « à la fermeture » si elle est réglée
+    prep.then(() => (gate ? gate.close('quit', { keepWasOpen: true }) : Promise.resolve())).catch(() => {})
+      .finally(() => server.closeBackup().finally(() => server.stop().finally(() => app.quit())));
   });
 }

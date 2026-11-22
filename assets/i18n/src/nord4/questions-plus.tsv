@@ -1,0 +1,71 @@
+fr ¦ fi ¦ hu
+# 🔎 Poser une question, suite (lib/question_plus.php, assets/js/heritage-questions-plus.js) : fautes, dates, « moi », négations, OU, renvois, ⌘K
+« {a} » lu « {b} » ¦ ”{a}” luettu muodossa ”{b}” ¦ „{a}” így olvasva: „{b}”
+vers {y} ({a}-{b}) ¦ noin {y} ({a}-{b}) ¦ {y} körül ({a}-{b})
+dans les années {y} ({a}-{b}) ¦ {y}-luvulla ({a}-{b}) ¦ az {y}-as években ({a}-{b})
+« moi » = la personne de départ : {name} ¦ ”minä” = lähtöhenkilö: {name} ¦ „én” = a kiinduló személy: {name}
+qui est : {name} ¦ kuka on: {name} ¦ ki ő: {name}
+« {a} » compris comme {b} ¦ ”{a}” tulkittu: {b} ¦ „{a}” így értve: {b}
+dossiers de succession ¦ perintäasiat ¦ hagyatéki ügyek
+Aucun dossier de succession dans cette généalogie. ¦ Tässä sukututkimuksessa ei ole perintäasioita. ¦ Ebben a családfában nincs hagyatéki ügy.
+courriers sans réponse ¦ vastaamattomat kirjeet ¦ megválaszolatlan levelek
+Courriers aux héritiers sans réponse : {n}. ¦ Perillisille lähetetyt vastaamattomat kirjeet: {n}. ¦ Örökösöknek küldött megválaszolatlan levelek: {n}.
+Aucun courrier de dossier n’attend de réponse. ¦ Mikään asian kirje ei odota vastausta. ¦ Egyetlen ügyhöz tartozó levél sem vár válaszra.
+échéances en retard ¦ myöhässä olevat määräajat ¦ lejárt határidők
+Dossiers avec des échéances en retard : {n}. ¦ Asiat, joissa on myöhässä olevia määräaikoja: {n}. ¦ Lejárt határidős ügyek: {n}.
+Aucun dossier n’a d’échéance en retard. ¦ Missään asiassa ei ole myöhässä olevaa määräaikaa. ¦ Egyik ügynek sincs lejárt határideje.
+défunt : {name} ¦ vainaja: {name} ¦ elhunyt: {name}
+Aucun dossier de succession pour {name}. ¦ Ei perintäasiaa henkilölle {name}. ¦ Nincs hagyatéki ügy: {name}.
+⚖️ Rechercher les héritiers… ¦ ⚖️ Etsi perilliset… ¦ ⚖️ Örökösök keresése…
+Pièces notées « manquante » : {n}. La liste complète (en main, demandées, à demander) est dans l’onglet Pièces du dossier. ¦ ”Puuttuu”-merkityt asiakirjat: {n}. Koko luettelo (hallussa, pyydetyt, pyydettävät) on asian Asiakirjat-välilehdellä. ¦ „Hiányzik” jelölésű iratok: {n}. A teljes lista (megvan, kérve, kérendő) az ügy Iratok lapján van.
+Aucune pièce notée « manquante ». La liste des pièces de chaque dossier est dans son onglet Pièces. ¦ Yhtään asiakirjaa ei ole merkitty ”puuttuu”. Kunkin asian luettelo on sen Asiakirjat-välilehdellä. ¦ Egy irat sincs „hiányzik” jelöléssel. Minden ügy listája az Iratok lapján van.
+pièces manquantes ¦ puuttuvat asiakirjat ¦ hiányzó iratok
+Héritiers introuvables ou qui ne répondent pas : {n}. ¦ Perilliset, joita ei löydy tai jotka eivät vastaa: {n}. ¦ Fellelhetetlen vagy nem válaszoló örökösök: {n}.
+Aucun héritier noté introuvable ou sans réponse. ¦ Yhtään perillistä ei ole merkitty löytymättömäksi tai vastaamattomaksi. ¦ Egy örökös sincs fellelhetetlennek vagy válasz nélkülinek jelölve.
+héritiers introuvables ¦ löytymättömät perilliset ¦ fellelhetetlen örökösök
+De qui ? Écris par exemple « les héritiers de Jean Dupont ». ¦ Kenen? Kirjoita esimerkiksi ”les héritiers de Jean Dupont”. ¦ Kinek az örökösei? Írd például: „les héritiers de Jean Dupont”.
+héritiers de {name} ¦ perilliset: {name} ¦ örökösök: {name}
+Aucun dossier de succession pour {name}. Le dossier calcule les héritiers d’après l’arbre. ¦ Ei perintäasiaa henkilölle {name}. Asia laskee perilliset sukupuusta. ¦ Nincs hagyatéki ügy: {name}. Az ügy a családfa alapján számolja ki az örökösöket.
+Dossier {d} : les héritiers n’ont pas encore été calculés. Ouvre le dossier pour faire le calcul. ¦ Asia {d}: perillisiä ei ole vielä laskettu. Avaa asia ja tee laskenta. ¦ {d} ügy: az örökösök még nincsenek kiszámolva. Nyisd meg az ügyet a számításhoz.
+Dossier {d} — héritiers d’après le dernier calcul enregistré : {n}. ¦ Asia {d} — perilliset viimeksi tallennetun laskennan mukaan: {n}. ¦ {d} ügy — örökösök az utolsó mentett számítás szerint: {n}.
+Branches encore à rechercher : {n}. ¦ Vielä tutkittavat haarat: {n}. ¦ Még kutatandó ágak: {n}.
+Actes ou documents à chercher pour {name} : {n}. Les 3 premiers ci-dessous ; la liste complète, avec où chercher et dans quelle série, est dans « Que manque-t-il ? ». ¦ Etsittävät asiakirjat henkilölle {name}: {n}. Ensimmäiset 3 alla; koko luettelo, jossa on mistä ja mistä sarjasta etsiä, on kohdassa ”Mitä puuttuu?”. ¦ Keresendő iratok vagy dokumentumok – {name}: {n}. Az első 3 alább; a teljes lista, hogy hol és melyik sorozatban keress, a „Mi hiányzik?” részben van.
+Rien de connu à chercher pour {name}. ¦ Ei mitään tunnettua etsittävää henkilölle {name}. ¦ Nincs ismert keresnivaló: {name}.
+actes à chercher ¦ etsittävät asiakirjat ¦ keresendő iratok
+où chercher ¦ mistä etsiä ¦ hol keress
+« Où chercher ? » donne pour {name} les sites et les séries d’archives les plus utiles, et pourquoi. ¦ ”Mistä etsiä?” näyttää henkilölle {name} hyödyllisimmät sivustot ja arkistosarjat sekä syyn. ¦ A „Hol keress?” megmutatja: {name} – a leghasznosabb oldalakat és levéltári sorozatokat, és hogy miért.
+« Où chercher ? » donne pour chaque personne les sites et les séries d’archives les plus utiles, et pourquoi. ¦ ”Mistä etsiä?” näyttää jokaiselle henkilölle hyödyllisimmät sivustot ja arkistosarjat sekä syyn. ¦ A „Hol keress?” minden személyhez megmutatja a leghasznosabb oldalakat és levéltári sorozatokat, és hogy miért.
+doublons ¦ kaksoiskappaleet ¦ ismétlődések
+Le Contrôle de la base cherche les doublons probables (mêmes noms, mêmes dates, mêmes parents) et aide à les fusionner. ¦ Tietokannan tarkistus etsii todennäköiset kaksoiskappaleet (samat nimet, päivät, vanhemmat) ja auttaa yhdistämään ne. ¦ Az adatbázis-ellenőrzés megkeresi a valószínű ismétlődéseket (azonos nevek, dátumok, szülők), és segít összevonni őket.
+mort pendant la guerre, en âge de combattre ¦ kuoli sodan aikana, taisteluiässä ¦ a háború alatt halt meg, hadköteles korban
+mort pendant la guerre ¦ kuoli sodan aikana ¦ a háború alatt halt meg
+morts pendant {era} ¦ kuolleet: {era} ¦ meghaltak: {era}
+morts à la guerre ¦ sodassa kuolleet ¦ háborúban elesettek
+Morts pendant {era} : {n}. ¦ Kuolleet ({era}): {n}. ¦ Meghaltak ({era}): {n}.
+Notés « Mort pour la France » : {n}. Morts pendant une guerre, en âge de combattre ou soldats (à vérifier) : {m}. ¦ Merkitty ”Mort pour la France”: {n}. Sodan aikana kuolleet, taisteluiässä tai sotilaat (tarkistettava): {m}. ¦ „Mort pour la France” jelöléssel: {n}. Háború alatt elhunytak, hadköteles korban vagy katonák (ellenőrizendő): {m}.
+Dont « Mort pour la France » : {n}. ¦ Joista ”Mort pour la France”: {n}. ¦ Ebből „Mort pour la France”: {n}.
+Pour les soldats : Mémoire des hommes et les registres matricules. ¦ Sotilaille: Mémoire des hommes ja kantakirjat. ¦ Katonákhoz: Mémoire des hommes és a törzskönyvek.
+sans date de décès ¦ ilman kuolinpäivää ¦ halálozási dátum nélkül
+sans date de naissance ¦ ilman syntymäpäivää ¦ születési dátum nélkül
+sans date de mariage ¦ ilman vihkipäivää ¦ házasságkötési dátum nélkül
+sans parents connus ¦ ilman tunnettuja vanhempia ¦ ismert szülők nélkül
+sans profession notée ¦ ilman kirjattua ammattia ¦ feljegyzett foglalkozás nélkül
+qui ne sont pas des ancêtres ¦ jotka eivät ole esivanhempia ¦ akik nem felmenők
+pas {ev} à {place} ¦ ei ”{ev}” paikassa {place} ¦ nem „{ev}” itt: {place}
+vivants ou probablement vivants ¦ elossa tai todennäköisesti elossa ¦ élők vagy valószínűleg élők
+pas à {place} ¦ ei paikassa {place} ¦ nem itt: {place}
+recherche de nom : « {x} » ¦ nimihaku: ”{x}” ¦ névkeresés: „{x}”
+orthographe proche ¦ samankaltainen kirjoitusasu ¦ hasonló írásmód
+femmes ¦ naiset ¦ nők
+Réponse réunie : {a} {c} {b}. ¦ Yhdistetty vastaus: {a} {c} {b}. ¦ Összevont válasz: {a} {c} {b}.
+Je n’ai pas tenu compte de : « {x} ». ¦ En ottanut huomioon: ”{x}”. ¦ Nem vettem figyelembe: „{x}”.
+Plusieurs “{w}” : choisir… ¦ Useita ”{w}”: valitse… ¦ Több „{w}”: válassz…
+J’ai compris : {x} ¦ Ymmärsin: {x} ¦ Így értettem: {x}
+Question en français ¦ Kysymys ranskaksi ¦ Kérdés franciául
+Poser la question : « {q} » ¦ Kysy: ”{q}” ¦ Kérdés feltevése: „{q}”
+Questions dans la recherche rapide (⌘K) ¦ Kysymykset pikahaussa (⌘K) ¦ Kérdések a gyorskeresőben (⌘K)
+Répondre aux questions dans la recherche rapide ¦ Vastaa kysymyksiin pikahaussa ¦ Kérdések megválaszolása a gyorskeresőben
+« les enfants de Pierre Mazaud » : la réponse courte s’affiche dans la liste ; sinon seulement « Poser la question » ¦ ”les enfants de Pierre Mazaud”: lyhyt vastaus näkyy luettelossa; muuten vain ”Kysy” ¦ „les enfants de Pierre Mazaud”: a rövid válasz megjelenik a listában; különben csak „Kérdés feltevése”
+Pour aller plus loin, pose la question avec le nom de la personne voulue. ¦ Jatkaaksesi kysy kysymys sen henkilön nimellä, jota tarkoitat. ¦ A folytatáshoz tedd fel a kérdést a keresett személy nevével.
+« {a} » cherché d’abord ¦ ”{a}” haettu ensin ¦ „{a}” először megkeresve
+« {a} » = {name} ¦ ”{a}” = {name} ¦ „{a}” = {name}

@@ -1,0 +1,42 @@
+fr ¦ sq ¦ mt
+# 📑 Atelier de transcription, vague 3 (3a) : un document en plusieurs pages (heritage-pages.js, heritage-transcribe.js, lib/media_pages.php)
+# — 1. relier des pages (page du document, visionneuse)
+Glisser pour changer l’ordre ¦ Tërhiq për të ndryshuar renditjen ¦ Kaxkar biex tibdel l-ordni
+Voir cette page ¦ Shiko këtë faqe ¦ Ara din il-paġna
+Une seule page pour l’instant. Un recto et son verso, un acte sur plusieurs pages : relie les autres images, elles s’ouvriront ensemble. ¦ Vetëm një faqe për tani. Një ballinë dhe pjesa e pasme, një akt në disa faqe: lidh imazhet e tjera dhe do të hapen bashkë. ¦ Paġna waħda biss għalissa. Quddiem u wara, att fuq diversi paġni: orbot l-immaġini l-oħra u jinfetħu flimkien.
+Relier une autre page… ¦ Lidh një faqe tjetër… ¦ Orbot paġna oħra…
+PAGES DU DOCUMENT ¦ FAQET E DOKUMENTIT ¦ IL-PAĠNI TAD-DOKUMENT
+Relier ces pages ¦ Lidh këto faqe ¦ Orbot dawn il-paġni
+Pages reliées : {n} ¦ Faqe të lidhura: {n} ¦ Paġni marbuta: {n}
+Page reliée ¦ Faqja u lidh ¦ Paġna marbuta
+Page renommée : « {x} » ¦ Faqja u riemërtua: «{x}» ¦ Paġna msemmija mill-ġdid: “{x}”
+Autre nom… ¦ Emër tjetër… ¦ Isem ieħor…
+Par exemple : Plan, Feuillet 2, Suite ¦ Për shembull: Plani, Fleta 2, Vazhdimi ¦ Pereżempju: Pjanta, Folju 2, Kontinwazzjoni
+Ordre des pages changé ¦ Renditja e faqeve u ndryshua ¦ L-ordni tal-paġni nbidel
+Retirer de l’ensemble ¦ Hiq nga grupi ¦ Neħħi mis-sett
+La page reste dans les médias, seule (rien n’est supprimé) ¦ Faqja mbetet më vete te mediat (nuk fshihet asgjë) ¦ Il-paġna tibqa’ fil-midja, waħedha (xejn ma jitħassar)
+Recto ¦ Ballina ¦ Quddiem
+Verso ¦ Pjesa e pasme ¦ Wara
+Annexe ¦ Shtojcë ¦ Anness
+Une de ces pages est déjà dans un autre document : retire-la d’abord de celui-ci (une page n’appartient qu’à un seul ensemble). ¦ Një nga këto faqe është tashmë në një dokument tjetër: hiqe fillimisht prej andej (një faqe i përket vetëm një grupi). ¦ Waħda minn dawn il-paġni diġà tinsab f’dokument ieħor: l-ewwel neħħiha minn hemm (paġna tappartjeni għal sett wieħed biss).
+Une des pages n’est plus dans les médias : rien n’a été changé. ¦ Një nga faqet nuk është më te mediat: nuk u ndryshua asgjë. ¦ Waħda mill-paġni m’għadhiex fil-midja: xejn ma nbidel.
+Trop de pages dans un même document (200 au plus). ¦ Shumë faqe në një dokument (jo më shumë se 200). ¦ Wisq paġni f’dokument wieħed (200 l-aktar).
+# — 2. l’Atelier ouvre toutes les pages (onglets, un seul texte ou un texte par page, ✨ Lire)
+Plusieurs pages ¦ Disa faqe ¦ Diversi paġni
+Sur la page affichée ¦ Në faqen e shfaqur ¦ Fuq il-paġna murija
+Sur toutes les pages ¦ Në të gjitha faqet ¦ Fuq il-paġni kollha
+Un seul texte, coupé par « — page 2 — » ¦ Një tekst i vetëm, i ndarë me «— faqja 2 —» ¦ Test wieħed, maqsum b’“— paġna 2 —”
+Un seul texte, coupé par « — page 2 — » (conseillé) ¦ Një tekst i vetëm, i ndarë me «— faqja 2 —» (e këshilluar) ¦ Test wieħed, maqsum b’“— paġna 2 —” (rakkomandat)
+Un texte par page ¦ Një tekst për faqe ¦ Test wieħed għal kull paġna
+— page {n} — ¦ — faqja {n} — ¦ — paġna {n} —
+Toutes les pages sont lues (à relire) ¦ Të gjitha faqet u lexuan (për t’u rishikuar) ¦ Il-paġni kollha nqraw (biex jiġu ċċekkjati)
+Réglage gardé : il vaut pour les documents pas encore commencés ; celui-ci garde sa forme. ¦ Rregullimi u ruajt: vlen për dokumentet që s’kanë nisur ende; ky e mban formën e vet. ¦ Is-settings inżammu: japplikaw għad-dokumenti li għadhom ma bdewx; dan iżomm il-forma tiegħu.
+Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription. ¦ Kjo faqe është pjesë e një akti me disa faqe: teksti i saj ndryshohet te Punishtja e transkriptimit. ¦ Din il-paġna hija parti minn att fuq diversi paġni: it-test tagħha jinbidel fil-Laboratorju tat-traskrizzjoni.
+# — 3. « Ce que l’app a trouvé » sur toutes les pages : la page et la ligne de chaque information
+(page {n}, ligne {line}) ¦ (faqja {n}, rreshti {line}) ¦ (paġna {n}, linja {line})
+page {n}, ligne {line} ¦ faqja {n}, rreshti {line} ¦ paġna {n}, linja {line}
+# — 3a+ : « Ce que l’app a trouvé » sur toutes les pages (un texte par page), la lecture approfondie de toutes les pages
+« {name} » est sur une autre page : ouvre sa page pour le garder. ¦ “{name}” është në një faqe tjetër: hap faqen e tij për ta mbajtur. ¦ “{name}” jinsab f’paġna oħra: iftaħ il-paġna tiegħu biex iżżommu.
+Un texte par page : la lecture rapide et la lecture d’un imprimé se font page par page ; la lecture approfondie peut lire toutes les pages. ¦ Një tekst për faqe: leximi i shpejtë dhe leximi i shtypit bëhen faqe pas faqeje; leximi i thelluar mund të lexojë të gjitha faqet. ¦ Test wieħed għal kull paġna: il-qari mgħaġġel u l-qari ta’ test stampat isiru paġna b’paġna; il-qari profond jista’ jaqra l-paġni kollha.
+Lecture approfondie : page {i} sur {n}… ¦ Lexim i thelluar: faqja {i} nga {n}… ¦ Qari profond: paġna {i} minn {n}…
+Lire toutes les pages avec ce modèle ({n}) ¦ Lexo të gjitha faqet me këtë model ({n}) ¦ Aqra l-paġni kollha b’dan il-mudell ({n})

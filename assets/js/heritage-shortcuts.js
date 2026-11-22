@@ -83,7 +83,7 @@
         ['visages', '🙂', 'Visages (reconnaissance)', () => ext.openFaces?.()],
         ['musee', '🏛️', 'Musée de famille', () => ext.openMuseum?.()],
         ['calculette', '🧮', 'Calculette (simple, scientifique, courbes)', () => ext.calculator?.open()],
-        ['transcription', '📜', 'Transcription d’actes', () => ext.openActTranscriber?.({})],
+        ['transcription', '📜', 'Atelier de transcription', () => ext.openActTranscriber?.({})],
         ['puzzle', '🧩', 'Jeux et puzzle', () => A().setModule('jeu')],
         ['battues', '🧭', 'Battues', enq('battue')],
         ['atelier', '📚', 'Atelier de recherche', enq('atelier')],
@@ -335,26 +335,27 @@
         return [...create, ...rows];
     }
     const markText = (text, q) => { const P = PK(); return P?.markText ? P.markText(text, q) : esc(text); };
-    function chooseTargets({title = 'Ajouter des raccourcis', eyebrow = 'RACCOURCIS'} = {}) {
+    /** only (facultatif) : ne montrer que les écrans et outils qui passent ce filtre (ligne → vrai), sans les autres onglets de la fenêtre (＋ Ajouter un onglet → « Une autre liste… ») */
+    function chooseTargets({title = 'Ajouter des raccourcis', eyebrow = 'RACCOURCIS', only = null, intro = '', submitLabel = 'Ajouter'} = {}) {
         if (!ext.openDialog || !PK()?.pickerField) { toast('La fenêtre n’est pas encore prête. Réessaie dans un instant.', 'error'); return Promise.resolve(null); }
         return new Promise(resolve => {
-            let done = false, tab = 'base', q = '', cat = catalog(), projLoaded = false, act = -1;
+            let done = false, tab = only ? 'screens' : 'base', q = '', cat = only ? catalog().filter(only) : catalog(), projLoaded = false, act = -1;
             const picks = {base: [], screens: new Map(), web: []};
             const total = () => picks.base.length + picks.screens.size + picks.web.length;
             const finish = v => { if (done) return; done = true; resolve(v); };
-            const body = `<div class="segmented h-sc-tabs" role="tablist">${[['base', '🔎 Dans ta base'], ['create', '＋ Créer…'], ['screens', '🧭 Écrans et outils'], ['web', '🌐 Site web']].map(([k, l], i) => `<button type="button" role="tab" class="${i ? '' : 'is-active'}" data-sc-tab="${k}" aria-selected="${i ? 'false' : 'true'}">${l}</button>`).join('')}</div>
-                <section class="h-sc-pane" data-sc-pane="base"><p class="muted">Une personne, un lieu, une fiche, une enquête, un projet, un tableau, un livre, un média, un diagramme, une maison… Les filtres en haut de la liste rangent par sorte (Tab passe de l’un à l’autre). Pour commencer une <b>nouvelle</b> chose (maison, montage, livre, dessin, classeur…) : onglet « ＋ Créer… ».</p>
-                    <span class="pk-lab">Chercher dans ta base</span>${PK().pickerField({name: '', hiddenName: false, kind: MIXED, multiple: true, inline: true, allowCreate: false, placeholder: 'Une personne, un lieu, une enquête… (2 lettres suffisent)'})}</section>
-                <section class="h-sc-pane" data-sc-pane="screens" hidden><div data-sc-qslot></div><div class="h-sc-cat" data-sc-cat role="listbox" aria-multiselectable="true"></div></section>
+            const body = `<div class="segmented h-sc-tabs" role="tablist"${only ? ' hidden' : ''}>${[['base', '🔎 Dans ta base'], ['create', '＋ Créer…'], ['screens', '🧭 Écrans et outils'], ['web', '🌐 Site web']].map(([k, l], i) => `<button type="button" role="tab" class="${i ? '' : 'is-active'}" data-sc-tab="${k}" aria-selected="${i ? 'false' : 'true'}">${l}</button>`).join('')}</div>
+                <section class="h-sc-pane" data-sc-pane="base"${only ? ' hidden' : ''}>${only ? '' : `<p class="muted">Une personne, un lieu, une fiche, une enquête, un projet, un tableau, un livre, un média, un diagramme, une maison… Les filtres en haut de la liste rangent par sorte (Tab passe de l’un à l’autre). Pour commencer une <b>nouvelle</b> chose (maison, montage, livre, dessin, classeur…) : onglet « ＋ Créer… ».</p>
+                    <span class="pk-lab">Chercher dans ta base</span>${PK().pickerField({name: '', hiddenName: false, kind: MIXED, multiple: true, inline: true, allowCreate: false, placeholder: 'Une personne, un lieu, une enquête… (2 lettres suffisent)'})}`}</section>
+                <section class="h-sc-pane" data-sc-pane="screens"${only ? '' : ' hidden'}>${intro ? `<p class="muted">${esc(intro)}</p>` : ''}<div data-sc-qslot></div><div class="h-sc-cat" data-sc-cat role="listbox" aria-multiselectable="true"></div></section>
                 <section class="h-sc-pane" data-sc-pane="web" hidden><div class="form-grid"><label class="span-2">Adresse du site<input data-sc-url type="url" inputmode="url" maxlength="500" placeholder="https://www.geneanet.org/" autocomplete="off" spellcheck="false"></label>
                     <label class="span-2">Nom du raccourci <small>(facultatif)</small><input data-sc-urlname maxlength="80" placeholder="Geneanet"></label></div><div data-sc-urlmsg></div>
                     <p><button type="button" class="button small" data-sc-urladd>＋ Ajouter ce site</button></p><ul class="h-sc-webpicked" data-sc-webpicked></ul></section>
                 <p class="h-sc-count" data-sc-count aria-live="polite">Aucun raccourci choisi pour l’instant.</p>`;
-            const dlg = ext.openDialog({eyebrow, title, wide: true, submitLabel: 'Ajouter', body,
+            const dlg = ext.openDialog({eyebrow, title, wide: true, submitLabel, body,
                 onOpen: dg => {
                     dg.classList.add('h-sc-dlg');
                     const $ = s => dg.querySelector(s);
-                    const count = () => { const n = total(), sub = dg.querySelector('[type=submit]'); $('[data-sc-count]').textContent = n ? `${plural(n, 'raccourci choisi', 'raccourcis choisis')} : ${[...picks.base.map(i => i.title), ...[...picks.screens.values()].map(r => r.label), ...picks.web.map(w => w.label || host(webUrl(w.target)))].slice(0, 6).join(', ')}${n > 6 ? '…' : ''}` : 'Aucun raccourci choisi pour l’instant.'; if (sub) { sub.textContent = n ? `Ajouter (${n})` : 'Ajouter'; sub.disabled = !n; } };
+                    const count = () => { const n = total(), sub = dg.querySelector('[type=submit]'); $('[data-sc-count]').textContent = n ? `${plural(n, 'raccourci choisi', 'raccourcis choisis')} : ${[...picks.base.map(i => i.title), ...[...picks.screens.values()].map(r => r.label), ...picks.web.map(w => w.label || host(webUrl(w.target)))].slice(0, 6).join(', ')}${n > 6 ? '…' : ''}` : 'Aucun raccourci choisi pour l’instant.'; if (sub) { sub.textContent = n ? `${submitLabel} (${n})` : submitLabel; sub.disabled = !n; } };
                     count();
                     dg.addEventListener('picker-change', e => { if (!e.target.closest('[data-sc-pane="base"]')) return; picks.base = (e.detail.items || (e.detail.item ? [e.detail.item] : [])).filter(i => i && !i.free && (i.id || i.uid)); count(); });
                     const setTab = k => { tab = k; dg.querySelectorAll('[data-sc-tab]').forEach(b => { const on = b.dataset.scTab === k; b.classList.toggle('is-active', on); b.setAttribute('aria-selected', on ? 'true' : 'false'); }); dg.querySelectorAll('[data-sc-pane]').forEach(p => { p.hidden = p.dataset.scPane !== (k === 'create' ? 'screens' : k); });
@@ -378,7 +379,7 @@
                     $('[data-sc-cat]').addEventListener('click', e => { const r = e.target.closest('[data-sc-i]'); if (r) { e.preventDefault(); toggleAct(Number(r.dataset.scI)); } });
                     $('[data-sc-cat]').addEventListener('keydown', e => { if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); moveAct(e.key === 'ArrowDown' ? 1 : -1); $('[data-sc-cat] .is-act')?.focus(); } });
                     async function loadProjects() {
-                        if (projLoaded) return; projLoaded = true;
+                        if (projLoaded || only) return; projLoaded = true;
                         const tools = editTools(); if (!tools.length) return;
                         const res = await Promise.all(tools.map(async t => ({t, rows: await projRows(t.key).catch(() => null)})));
                         if (done) return;
@@ -402,7 +403,7 @@
                     [$('[data-sc-url]'), $('[data-sc-urlname]')].forEach(i => i.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); addWeb(); } }));
                     $('[data-sc-webpicked]').addEventListener('click', e => { const b = e.target.closest('[data-sc-webdel]'); if (b) { picks.web.splice(Number(b.dataset.scWebdel), 1); paintWeb(); count(); } });
                     dg.addEventListener('close', () => finish(null));
-                    setTimeout(() => $('[data-sc-pane="base"] .pk-input')?.focus(), 30);
+                    if (only) setTab('screens'); else setTimeout(() => $('[data-sc-pane="base"] .pk-input')?.focus(), 30);
                 },
                 onSubmit: f => {
                     const out = [

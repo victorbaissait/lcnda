@@ -32,8 +32,10 @@ if ($sim !== '' && $sim !== '0') {
         foreach (explode(' ', $t) as $k => $word) { $ww = max(3, (int) round($w * .85 * mb_strlen($word) / mb_strlen($t))); $words[] = ['t' => $word, 'c' => $c[$k] ?? .9, 'bbox' => [$x, $y0, $x + $ww, $y1]]; $x += $ww + 4; }
         $lines[] = ['text' => $t, 'bbox' => [(int) round($w * .05), $y0, (int) round($w * .95), $y1], 'conf' => round(array_sum($c) / count($c), 3), 'words' => $words];
     }
+    // GENEALOGY_HTR_SIMULATE=vertical : une mention écrite à 90° dans la marge, déjà lue à part (comme scripts/htr_recognize.py)
+    $margin = $sim === 'vertical' ? [['text' => 'Mariée à Lucien Bernadou', 'bbox' => [(int) round($w * .955), (int) round($h * .1), (int) round($w * .99), (int) round($h * .7)], 'conf' => .91, 'words' => [['t' => 'Mariée', 'c' => .93], ['t' => 'à', 'c' => .97], ['t' => 'Lucien', 'c' => .9], ['t' => 'Bernadou', 'c' => .84]], 'rotated' => 90]] : [];
     $cleanup();
-    $write(['state' => 'done', 'lines' => $lines, 'text' => implode("\n", array_column($lines, 'text')), 'engine' => 'simulé', 'mode' => 'lines', 'model' => (string) ($job['model_file'] ?? '')]);
+    $write(['state' => 'done', 'lines' => $lines, 'margin_lines' => $margin, 'text' => implode("\n", array_column($lines, 'text')), 'engine' => 'simulé', 'mode' => 'lines', 'model' => (string) ($job['model_file'] ?? '')]);
     exit(0);
 }
 $cmd = [(string) $job['python'], $appRoot . '/scripts/htr_recognize.py', '--lines', '--image', $image, '--model', (string) $job['model'], '--language', (string) ($job['language'] ?? '')];
@@ -57,13 +59,19 @@ if (!is_array($r) || !empty($r['error']) || !isset($r['lines'])) {
     $write(['state' => 'error', 'error' => $msg !== '' ? $msg : 'La lecture n’a rien donné.']);
     exit(1);
 }
-// bornes : 2 000 lignes, 1 000 caractères par ligne
-$lines = [];
-foreach (array_slice((array) $r['lines'], 0, 2000) as $l) {
-    if (!is_array($l)) { continue; }
-    $box = is_array($l['bbox'] ?? null) && count($l['bbox']) === 4 ? array_map('intval', array_values($l['bbox'])) : null;
-    $words = [];
-    foreach (array_slice((array) ($l['words'] ?? []), 0, 300) as $w) { if (is_array($w)) { $words[] = ['t' => mb_substr((string) ($w['t'] ?? ''), 0, 120), 'c' => is_numeric($w['c'] ?? null) ? round((float) $w['c'], 3) : null]; } }
-    $lines[] = ['text' => mb_substr((string) ($l['text'] ?? ''), 0, 1000), 'bbox' => $box, 'conf' => is_numeric($l['conf'] ?? null) ? round((float) $l['conf'], 3) : null, 'words' => $words];
-}
-$write(['state' => 'done', 'lines' => $lines, 'text' => implode("\n", array_column($lines, 'text')), 'engine' => 'kraken', 'mode' => (string) ($r['mode'] ?? ''), 'model' => (string) ($job['model_file'] ?? '')]);
+// bornes : 2 000 lignes, 1 000 caractères par ligne ; les mentions verticales de la marge (lues après rotation) à part : 200 lignes
+$clean = static function (array $list, int $max): array {
+    $out = [];
+    foreach (array_slice($list, 0, $max) as $l) {
+        if (!is_array($l)) { continue; }
+        $box = is_array($l['bbox'] ?? null) && count($l['bbox']) === 4 ? array_map('intval', array_values($l['bbox'])) : null;
+        $words = [];
+        foreach (array_slice((array) ($l['words'] ?? []), 0, 300) as $w) { if (is_array($w)) { $words[] = ['t' => mb_substr((string) ($w['t'] ?? ''), 0, 120), 'c' => is_numeric($w['c'] ?? null) ? round((float) $w['c'], 3) : null]; } }
+        $out[] = ['text' => mb_substr((string) ($l['text'] ?? ''), 0, 1000), 'bbox' => $box, 'conf' => is_numeric($l['conf'] ?? null) ? round((float) $l['conf'], 3) : null, 'words' => $words]
+            + (in_array($l['rotated'] ?? null, [90, -90], true) ? ['rotated' => (int) $l['rotated']] : []);
+    }
+    return $out;
+};
+$lines = $clean((array) $r['lines'], 2000);
+$margin = $clean((array) ($r['margin_lines'] ?? []), 200);
+$write(['state' => 'done', 'lines' => $lines, 'margin_lines' => $margin, 'text' => implode("\n", array_column($lines, 'text')), 'engine' => 'kraken', 'mode' => (string) ($r['mode'] ?? ''), 'model' => (string) ($job['model_file'] ?? '')]);

@@ -1,0 +1,59 @@
+fr ¦ lt ¦ lv ¦ et
+# 📜 Atelier de transcription, vague 2 « Guider »
+Les étapes : Lire, Corriger, Repérer, Ajouter à la généalogie ¦ Žingsniai: Nuskaityti, Taisyti, Atpažinti, Pridėti į genealogiją ¦ Soļi: Nolasīt, Labot, Atrast, Pievienot ģenealoģijai ¦ Sammud: Loe, Paranda, Leia, Lisa sugupuusse
+Lire l’image (« ✨ Lire ▾ ») ou écrire le texte, ligne à ligne ¦ Nuskaityk vaizdą („✨ Nuskaityti ▾“) arba rašyk tekstą eilutė po eilutės ¦ Nolasi attēlu (“✨ Nolasīt ▾”) vai raksti tekstu rindu pa rindai ¦ Loe pilti („✨ Loe ▾“) või kirjuta tekst rida-realt
+Relire et corriger : corrections proposées, mots douteux [?], aide à la lecture ¦ Peržiūrėk ir taisyk: siūlomi pataisymai, abejotini žodžiai [?], pagalba skaitant ¦ Pārskati un labo: ieteiktie labojumi, šaubīgi vārdi [?], palīdzība lasīšanā ¦ Vaata üle ja paranda: soovitatud parandused, kahtlased sõnad [?], lugemisabi
+Ajouter les personnes et l’événement à la généalogie ¦ Pridėti asmenis ir įvykį į genealogiją ¦ Pievienot personas un notikumu ģenealoģijai ¦ Lisa isikud ja sündmus sugupuusse
+Toute la page ou la zone choisie (▭) ; ou écris le texte toi-même, ligne à ligne. ¦ Visas puslapis arba pasirinkta sritis (▭); arba parašyk tekstą pats, eilutė po eilutės. ¦ Visa lapa vai izvēlētais apgabals (▭); vai raksti tekstu pats, rindu pa rindai. ¦ Kogu lehekülg või valitud ala (▭); või kirjuta tekst ise, rida-realt.
+=mot à revoir ¦ žodis peržiūrėti|žodžiai peržiūrėti|žodžių peržiūrėti ¦ vārdu pārskatīt|vārds pārskatīt|vārdi pārskatīt ¦ sõna üle vaadata|sõna üle vaadata
+rien à revoir ¦ nėra ką peržiūrėti ¦ nav ko pārskatīt ¦ pole midagi üle vaadata
+=nom repéré ¦ atpažintas vardas|atpažinti vardai|atpažintų vardų ¦ atrastu vārdu|atrasts vārds|atrasti vārdi ¦ leitud nimi|leitud nime
+{n} à relier ¦ {n} susieti ¦ {n} jāsasaista ¦ {n} sidumata
+Tout est relié ¦ Viskas susieta ¦ Viss sasaistīts ¦ Kõik seotud
+{n} × [?] ou [illisible] ¦ {n} × [?] arba [neįskaitoma] ¦ {n} × [?] vai [nesalasāms] ¦ {n} × [?] või [loetamatu]
+=personne dans l’acte ¦ asmuo įraše|asmenys įraše|asmenų įraše ¦ personu ierakstā|persona ierakstā|personas ierakstā ¦ isik kirjes|isikut kirjes
+Personne dans l’acte pour l’instant : « 🧭 Repérer » les trouve dans le texte ¦ Kol kas įraše nieko nėra: „🧭 Atpažinti“ juos randa tekste ¦ Ierakstā pagaidām neviena: “🧭 Atrast” tos atrod tekstā ¦ Kirjes pole veel kedagi: „🧭 Leia“ leiab nad tekstist
+# — téléphone : trois onglets
+Image, texte ou personnes ¦ Vaizdas, tekstas ar asmenys ¦ Attēls, teksts vai personas ¦ Pilt, tekst või isikud
+# — 👁 relecture ligne à ligne en plein écran
+Le morceau d’image de la ligne ¦ Eilutės vaizdo dalis ¦ Rindas attēla gabals ¦ Rea pildilõik
+Pas de zone pour cette ligne : dessine-la sur l’image (▭), elle restera reliée. ¦ Šiai eilutei nėra srities: nubrėžk ją vaizde (▭), ji liks susieta. ¦ Šai rindai nav apgabala: uzzīmē to attēlā (▭), tas paliks sasaistīts. ¦ Sellel real pole ala: joonista see pildile (▭), see jääb seotuks.
+Ligne à relire ¦ Peržiūrima eilutė ¦ Pārskatāmā rinda ¦ Ülevaadatav rida
+Relue ¦ Peržiūrėta ¦ Pārskatīts ¦ Üle vaadatud
+Ligne d’avant ¦ Ankstesnė eilutė ¦ Iepriekšējā rinda ¦ Eelmine rida
+atelier|Ligne suivante ¦ Kita eilutė ¦ Nākamā rinda ¦ Järgmine rida
+Entrée : la ligne est relue, ligne suivante · ⇧ Entrée : ligne d’avant · ↑ ↓ : changer de ligne sans la marquer · Échap : fermer ¦ Enter: eilutė peržiūrėta, kita eilutė · ⇧ Enter: ankstesnė eilutė · ↑ ↓: keisti eilutę jos nepažymint · Esc: uždaryti ¦ Enter: rinda pārskatīta, nākamā rinda · ⇧ Enter: iepriekšējā rinda · ↑ ↓: mainīt rindu, to neatzīmējot · Esc: aizvērt ¦ Enter: rida üle vaadatud, järgmine rida · ⇧ Enter: eelmine rida · ↑ ↓: vaheta rida seda märkimata · Esc: sulge
+Ligne {n} sur {total} ¦ Eilutė {n} iš {total} ¦ Rinda {n} no {total} ¦ Rida {n}/{total}
+=ligne relue ¦ eilutė peržiūrėta|eilutės peržiūrėtos|eilučių peržiūrėta ¦ rindu pārskatīts|rinda pārskatīta|rindas pārskatītas ¦ rida üle vaadatud|rida üle vaadatud
+Toutes les lignes sont relues. ¦ Visos eilutės peržiūrėtos. ¦ Visas rindas ir pārskatītas. ¦ Kõik read on üle vaadatud.
+C’était la dernière ligne. ¦ Tai buvo paskutinė eilutė. ¦ Tā bija pēdējā rinda. ¦ See oli viimane rida.
+Relire ligne à ligne ¦ Peržiūrėti eilutė po eilutės ¦ Pārskatīt rindu pa rindai ¦ Vaata üle rida-realt
+Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Peržiūrėti eilutė po eilutės visame ekrane: vaizdo dalis virš kiekvienos eilutės ¦ Pārskatīt rindu pa rindai pilnekrānā: attēla gabals virs katras rindas ¦ Vaata üle rida-realt täisekraanil: pildilõik iga rea kohal
+Relecture ligne à ligne en plein écran (conseillé) ¦ Peržiūra eilutė po eilutės visame ekrane (rekomenduojama) ¦ Pārskatīšana rindu pa rindai pilnekrānā (ieteicams) ¦ Rida-realt ülevaatus täisekraanil (soovitatav)
+# — 🕘 Versions, 🔍 Chercher / Remplacer, ⌨️ touches
+Chercher dans le texte ¦ Ieškoti tekste ¦ Meklēt tekstā ¦ Otsi tekstist
+Chercher et remplacer ¦ Ieškoti ir pakeisti ¦ Meklēt un aizstāt ¦ Otsi ja asenda
+« {q} » → « {by} » : {n} ¦ „{q}“ → „{by}“: {n} ¦ “{q}” → “{by}”: {n} ¦ „{q}“ → „{by}“: {n}
+Avant « Remplacer » ¦ Prieš „Pakeisti“ ¦ Pirms “Aizstāt” ¦ Enne „Asenda“
+Avant « Tout remplacer » ¦ Prieš „Pakeisti viską“ ¦ Pirms “Aizstāt visu” ¦ Enne „Asenda kõik“
+Avant « Accepter les propositions sûres » ¦ Prieš „Priimti tikrus pasiūlymus“ ¦ Pirms “Pieņemt drošos ieteikumus” ¦ Enne „Võta kindlad soovitused vastu“
+Avant la lecture mise dans le texte ¦ Prieš įdedant nuskaitytą tekstą ¦ Pirms nolasītais tika ielikts tekstā ¦ Enne loetu lisamist teksti
+Résultat suivant, résultat d’avant ¦ Kitas rezultatas, ankstesnis rezultatas ¦ Nākamais rezultāts, iepriekšējais rezultāts ¦ Järgmine tulemus, eelmine tulemus
+Ligne suivante, ligne d’avant : l’image suit sa zone ¦ Kita eilutė, ankstesnė eilutė: vaizdas seka jos sritį ¦ Nākamā rinda, iepriekšējā rinda: attēls seko tās apgabalam ¦ Järgmine rida, eelmine rida: pilt järgib selle ala
+Déplacer l’image, en restant appuyé ¦ Perkelti vaizdą, laikant nuspaustą ¦ Pārvietot attēlu, turot nospiestu ¦ Liiguta pilti, all hoides
+Déplacer la zone choisie (⇧ : l’agrandir) ¦ Perkelti pasirinktą sritį (⇧: padidinti) ¦ Pārvietot izvēlēto apgabalu (⇧: palielināt to) ¦ Liiguta valitud ala (⇧: suurenda seda)
+Supprimer la zone choisie ¦ Ištrinti pasirinktą sritį ¦ Dzēst izvēlēto apgabalu ¦ Kustuta valitud ala
+Zoom avant, zoom arrière ¦ Priartinti, nutolinti ¦ Tuvināt, tālināt ¦ Suurenda, vähenda
+Cette liste des touches ¦ Šis klavišų sąrašas ¦ Šis taustiņu saraksts ¦ See klahvide loend
+# — avancement et abréviations au survol
+=mot douteux ¦ abejotinas žodis|abejotini žodžiai|abejotinų žodžių ¦ šaubīgu vārdu|šaubīgs vārds|šaubīgi vārdi ¦ kahtlane sõna|kahtlast sõna
+aucun mot douteux ¦ nėra abejotinų žodžių ¦ nav šaubīgu vārdu ¦ kahtlasi sõnu pole
+{n} / {total} lignes relues ¦ {n} / {total} eilučių peržiūrėta ¦ {n} / {total} rindas pārskatītas ¦ {n} / {total} rida üle vaadatud
+{n} / {total} lignes reliées ¦ {n} / {total} eilučių susieta ¦ {n} / {total} rindas sasaistītas ¦ {n} / {total} rida seotud
+Marquer comme finie ¦ Pažymėti kaip baigtą ¦ Atzīmēt kā pabeigtu ¦ Märgi valmis
+Marquer comme relue ¦ Pažymėti kaip peržiūrėtą ¦ Atzīmēt kā pārskatītu ¦ Märgi üle vaadatuks
+Ligne sans zone : dessine-la sur l’image (▭) ¦ Eilutė be srities: nubrėžk ją vaizde (▭) ¦ Rinda bez apgabala: uzzīmē to attēlā (▭) ¦ Rida ilma alata: joonista see pildile (▭)
+Ne plus souligner les abréviations ¦ Nebepabraukti santrumpų ¦ Vairs nepasvītrot saīsinājumus ¦ Ära enam lühendeid alla kriipsuta
+Souligner les abréviations connues ¦ Pabraukti žinomas santrumpas ¦ Pasvītrot zināmos saīsinājumus ¦ Kriipsuta tuntud lühendid alla
+Abréviations connues soulignées, leur sens au survol (conseillé) ¦ Žinomos santrumpos pabrauktos, jų reikšmė užvedus pelę (rekomenduojama) ¦ Zināmie saīsinājumi pasvītroti, to nozīme, uzvirzot peli (ieteicams) ¦ Tuntud lühendid alla kriipsutatud, nende tähendus hiirega osutades (soovitatav)
+Relues ¦ Peržiūrėtos ¦ Pārskatītās ¦ Üle vaadatud

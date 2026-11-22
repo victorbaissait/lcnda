@@ -1,0 +1,374 @@
+fr ¦ tr
+# 📍 Lieux à placer (docs/design/cartes-nouvelles.html, partie 6 ; assets/js/heritage-lieux-a-placer.js)
+Lieux à placer ¦ Yerleştirilecek yerler
+Lieux à placer… ¦ Yerleştirilecek yerler…
+Placer… ¦ Yerleştir…
+Les placer ¦ Onları yerleştir
+Rien n’est pris tant que tu ne cliques pas. ¦ Sen tıklamadıkça hiçbir şey alınmaz.
+Revoir et placer en lot… ¦ Gözden geçir ve toplu yerleştir…
+Seulement les lieux de cette carte ({n}). ¦ Yalnızca bu haritanın yerleri ({n}).
+Voir tous les lieux à placer ¦ Yerleştirilecek tüm yerleri gör
+Lecture des lieux… ¦ Yerler okunuyor…
+Chercher un lieu… ¦ Bir yer ara…
+De A à Z ¦ A’dan Z’ye
+Le plus loin du reste ¦ Diğerlerinden en uzak
+{a} · {b} concernés ¦ {a} · {b} etkilenen
+Aucun lieu pour ce choix. ¦ Bu seçim için yer yok.
+Tous les lieux de ta base ont une position. ¦ Veritabanındaki tüm yerlerin bir konumu var.
+à {km} km du reste ¦ diğerlerinden {km} km
+Placer ici ¦ Buraya yerleştir
+À {km} km des autres lieux de ces événements : vérifie avant de placer. ¦ Bu olayların diğer yerlerinden {km} km uzakta: yerleştirmeden önce kontrol et.
+Placer les {n} ensemble ¦ {n} tanesini birlikte yerleştir
+Pas un lieu ¦ Yer değil
+Les 300 premiers ; cherche un nom pour voir les autres. ¦ İlk 300; diğerlerini görmek için bir ad ara.
+{a} placés ({b}) · ils apparaissent sur toutes les cartes ¦ {a} yerleştirildi ({b}) · tüm haritalarda görünürler
+{name} placé ({n}) · {where} ¦ {name} yerleştirildi ({n}) · {where}
+{name} placé ({a}, {b}) ¦ {name} yerleştirildi ({a}, {b})
+« {name} » mis de côté (pas un lieu) ¦ “{name}” bir kenara kondu (yer değil)
+« {name} » remis dans la liste ¦ “{name}” listeye geri kondu
+LOIN DU RESTE ¦ DİĞERLERİNDEN UZAK
+Placer « {name} » si loin ? ¦ “{name}” bu kadar uzağa mı yerleştirilsin?
+« {where} » est à {km} km des autres lieux de ces événements. C’est souvent un homonyme. ¦ “{where}”, bu olayların diğer yerlerinden {km} km uzakta. Çoğu zaman adaştır.
+Placer quand même ¦ Yine de yerleştir
+Clique sur la carte à l’endroit de « {name} » (Échap pour laisser). ¦ Haritada “{name}” yerine tıkla (bırakmak için Esc).
+{name} placé à la main (position approchée) ¦ {name} elle yerleştirildi (yaklaşık konum)
+Pas de réseau : rien n’a été envoyé. ¦ Ağ yok: hiçbir şey gönderilmedi.
+Le service en ligne n’a rien trouvé pour « {name} ». ¦ Çevrim içi hizmet “{name}” için bir şey bulamadı.
+{n} de plus pour « {name} » : à toi de choisir. ¦ “{name}” için {n} daha: seçim senin.
+EN LIGNE ¦ ÇEVRİM İÇİ
+En ligne… ¦ Çevrim içi…
+Chercher « {name} » en ligne ? ¦ “{name}” çevrim içi aransın mı?
+Seul le nom du lieu « {name} » est envoyé au service de recherche d’adresses de l’IGN (Géoplateforme). Aucun nom de personne, aucune date. ¦ IGN adres arama hizmetine (Géoplateforme) yalnızca “{name}” yer adı gönderilir. Kişi adı yok, tarih yok.
+La réponse est une proposition de plus dans la liste ; tu la choisis ou non. Sans internet : « Pas de réseau : rien n’a été envoyé ». ¦ Yanıt listedeki bir öneri daha olur; seçersin ya da seçmezsin. İnternet yoksa: “Ağ yok: hiçbir şey gönderilmedi”.
+Ne plus me demander pour cette séance ¦ Bu oturumda bir daha sorma
+Lieu tapé ¦ Yazılan yer
+Pourquoi ¦ Neden
+Distance au reste ¦ Diğerlerine uzaklık
+Év. ¦ Olay
+{n} km ¦ {n} km
+Les « rien trouvé » ne sont pas dans la revue. Un lieu à plus de {km} km du reste n’est jamais coché tout seul. ¦ “Hiçbir şey bulunamadı” olanlar gözden geçirmede yok. Diğerlerinden {km} km’den uzak bir yer asla kendiliğinden işaretlenmez.
+Seulement les sûrs ¦ Yalnızca kesin olanlar
+Seulement les « sûrs » ¦ Yalnızca “kesin” olanlar
+Revoir avant de placer ¦ Yerleştirmeden önce gözden geçir
+Placer les cochés ¦ İşaretlileri yerleştir
+Coche au moins un lieu. ¦ En az bir yer işaretle.
+Placer les {n} cochés ¦ İşaretli {n} yeri yerleştir
+Réglages des lieux à placer enregistrés ¦ Yerleştirilecek yer ayarları kaydedildi
+Les lieux sans position, regroupés par commune probable : les placer en un clic ¦ Konumu olmayan yerler, olası belediyeye göre gruplu: tek tıkla yerleştir
+Cochés au départ dans la revue ¦ Gözden geçirmede baştan işaretli
+Les sûrs et les probables ¦ Kesin ve olası olanlar
+Un lieu-dit ¦ Mevki
+Au lieu-dit s’il est connu, sinon au centre de sa commune marqué « approché » ¦ Biliniyorsa mevkiye, yoksa belediyenin ortasına “yaklaşık” olarak
+Toujours au centre de la commune ¦ Her zaman belediyenin ortasına
+Ne pas le placer ¦ Yerleştirme
+Plusieurs communes du même nom ¦ Aynı adı taşıyan birden çok belediye
+Proposer la plus proche des autres lieux, jamais cochée ¦ Diğer yerlere en yakın olanı öner, asla işaretleme
+Aussi les fautes proches, proposées seulement ¦ Yakın yazım hataları da, yalnızca öneri olarak
+Le nom exact seulement ¦ Yalnızca tam ad
+Ce qui est repris ¦ Neyin alındığı
+Position, code INSEE et département ¦ Konum, INSEE kodu ve departman
+La position seulement ¦ Yalnızca konum
+Jamais : le bouton est caché ¦ Asla: düğme gizli
+Un bouton « 🌐 En ligne… » par lieu, avec le message à chaque fois (jamais en lot, jamais toute seule) ¦ Yer başına bir “🌐 Çevrim içi…” düğmesi, her seferinde mesajla (asla toplu, asla kendiliğinden)
+Alerte « loin du reste » ¦ “Diğerlerinden uzak” uyarısı
+À partir de 200 km ¦ 200 km’den itibaren
+Même nom et même département que dans le référentiel des communes : une seule commune « {name} ». Centre de la commune, code INSEE et département repris. ¦ Belediye listesindekiyle aynı ad ve aynı departman: tek bir “{name}” belediyesi. Merkezi, INSEE kodu ve departmanı alınır.
+Une seule commune « {name} » en France, mais pas de département écrit. ¦ Fransa’da tek bir “{name}” belediyesi var ama departman yazılmamış.
+{n} communes de ce nom en France. Les plus proches des autres lieux de ces événements sont proposées, jamais cochées toutes seules. ¦ Fransa’da bu adda {n} belediye var. Bu olayların diğer yerlerine en yakın olanlar önerilir, asla kendiliğinden işaretlenmez.
+{n} communes de ce nom en France : choisis la bonne. ¦ Fransa’da bu adda {n} belediye var: doğru olanı seç.
+Lieu-dit connu dans le référentiel (GeoNames) dans la commune de {name}. ¦ Mevki listede (GeoNames) biliniyor, {name} belediyesinde.
+Lieu-dit inconnu du référentiel : au centre de {name}, marqué « position approchée ». ¦ Mevki listede bilinmiyor: {name} merkezine, “yaklaşık konum” olarak.
+Pas une commune d’aujourd’hui ; l’historique INSEE (🏛 Frontières anciennes) dit : réunie à {to} en {year}. ¦ Bugünkü bir belediye değil; INSEE geçmişi (🏛 Eski sınırlar) diyor ki: {year} yılında {to} ile birleşti.
+Ville du monde livrée avec l’app, départagée par le pays écrit ({country}). ¦ Uygulamayla gelen dünya şehri, yazılan ülkeye göre seçildi ({country}).
+Pas trouvé parmi les villes du monde livrées pour ce pays ({country}). ¦ Bu ülke için gelen dünya şehirleri arasında bulunamadı ({country}).
+Pas de commune à ce nom. Orthographe proche proposée. Rien n’est cherché en ligne. ¦ Bu adda belediye yok. Benzer bir yazım önerildi. Çevrim içi hiçbir şey aranmaz.
+Pas de commune à ce nom. Rien n’est cherché en ligne. ¦ Bu adda belediye yok. Çevrim içi hiçbir şey aranmaz.
+le plus proche ¦ en yakını
+sûr ¦ kesin
+=proposition ¦ öneri|öneri
+# 🔨 Les métiers sur la carte (partie 4) et le socle des cartes de la vague 2
+Dans chaque menu, le premier choix est celui conseillé : il est réglé au départ. ¦ Her menüde ilk seçenek önerilendir: başta o ayarlıdır.
+Les métiers sur la carte (par secteur, siècle par siècle) ¦ Haritada meslekler (sektöre göre, yüzyıl yüzyıl)
+Les métiers notés (un par ligne) ¦ Not edilen meslekler (satır başına bir)
+Lieu (« Tulle », « Tulle 45.27, 1.77 ») ¦ Yer (“Tulle”, “Tulle 45.27, 1.77”)
+Classer par ¦ Sınıflandırma
+Famille de métiers du dictionnaire (18) ¦ Sözlükteki meslek ailesi (18)
+Un seul métier et ses variantes ¦ Tek bir meslek ve çeşitleri
+Un métier et ses variantes ¦ Bir meslek ve çeşitleri
+Mes couleurs à moi par métier ¦ Mesleğe göre kendi renklerim
+Mes couleurs (« tisserand=#aa3300 ; meunier=#3355aa ») ¦ Renklerim (“tisserand=#aa3300; meunier=#3355aa”)
+Camembert par commune ¦ Belediye başına pasta grafik
+Un rond de la couleur du plus fréquent ¦ En sık olanın renginde bir daire
+Siècle par siècle ¦ Yüzyıl yüzyıl
+Un petit dessin par siècle ¦ Her yüzyıl için küçük bir harita
+Tout ensemble ¦ Hepsi bir arada
+Où placer le métier ¦ Mesleğin yerleştirileceği yer
+Lieu de l’acte, sinon résidence, sinon naissance ¦ Kaydın yeri, yoksa ikamet, yoksa doğum
+Lieu de l’acte seulement ¦ Yalnızca kaydın yeri
+Plusieurs métiers ¦ Birden çok meslek
+Chacun à sa date ¦ Her biri kendi tarihinde
+Le principal seulement ¦ Yalnızca ana meslek
+Montrés ¦ Gösterilir
+Cachés ¦ Gizli
+Les plus grands ¦ En büyükler
++ {n} secteurs vides ¦ + {n} boş sektör
+Carte des métiers : {n}, un petit dessin par siècle. ¦ Meslek haritası: {n}, her yüzyıl için küçük bir harita.
+Carte des métiers : {a}, {b} ({when}). ¦ Meslek haritası: {a}, {b} ({when}).
+Carte des métiers : {a}, {b}. ¦ Meslek haritası: {a}, {b}.
+Carte des métiers : {n}. ¦ Meslek haritası: {n}.
+Clic : les métiers de ce lieu ¦ Tıkla: bu yerin meslekleri
+Aucun métier noté au {when}. ¦ {when} için not edilmiş meslek yok.
+Aucun métier pour ce choix. ¦ Bu seçim için meslek yok.
+Prends les métiers de ta généalogie (« Depuis l’app »). ¦ Meslekleri soy ağacından al (“Uygulamadan”).
+LES MÉTIERS SUR LA CARTE ¦ HARİTADA MESLEKLER
+Un clic sur un métier ouvre sa fiche (🛠️ Métiers anciens). ¦ Bir mesleğe tıklamak kartını açar (🛠️ Eski meslekler).
+Les métiers de ta généalogie ¦ Soy ağacındaki meslekler
+Les métiers notés (profession, recensement, fiche), classés comme dans l’Arbre des métiers. Jamais un vivant ni une fiche confidentielle. ¦ Not edilen meslekler (meslek, nüfus sayımı, kart), Meslek ağacındaki gibi sınıflandırılır. Asla yaşayan biri ya da gizli bir kart yok.
+Hommes et femmes ¦ Erkekler ve kadınlar
+Les femmes ¦ Kadınlar
+Toutes les époques ¦ Tüm dönemler
+Aucun métier ¦ Meslek yok
+Aucun métier avec un lieu pour ce choix. ¦ Bu seçim için yeri olan meslek yok.
+Où on était {trade} ¦ {trade} olunan yerler
+{a} notés · {b} classés · {c} « ❔ autre » à classer ¦ {a} not edildi · {b} sınıflandı · {c} “❔ diğer” sınıflandırılacak
+Mes ancêtres seulement ¦ Yalnızca atalarım
+Par famille de métiers du dictionnaire (18) ¦ Sözlükteki meslek ailesine göre (18)
+Par grand secteur (12) ¦ Ana sektöre göre (12)
+employé ¦ memur
+ménagère ¦ ev hanımı
+Où on l’exerçait ¦ Nerede yapılıyordu
+# 👫 Les deux lignées en miroir (partie 1)
+Les deux lignées en miroir (côté père, côté mère) ¦ Ayna gibi iki soy hattı (baba tarafı, anne tarafı)
+Les événements des deux côtés (un par ligne) ¦ İki tarafın olayları (satır başına bir)
+Ancêtre des deux côtés ¦ İki taraftan da ata
+Aucun ancêtre connu : {who} ¦ Bilinen ata yok: {who}
+Bleu / orange (lisibles aussi par les daltoniens) ¦ Mavi / turuncu (renk körleri için de okunur)
+Compté des deux côtés, couleur mélangée ¦ İki tarafta da sayılır, karışık renk
+Seulement du côté du chemin le plus court ¦ Yalnızca en kısa yolun tarafında
+Couleur du premier côté ¦ Birinci tarafın rengi
+Couleur du deuxième côté ¦ İkinci tarafın rengi
+Côté père / côté mère ¦ Baba tarafı / anne tarafı
+Côté père / côté mère, avant la Révolution ¦ Baba / anne tarafı, Devrim’den önce
+Mes quatre grands-parents (4 couleurs) ¦ Dört büyükanne ve büyükbabam (4 renk)
+Deux personnes au choix ¦ Seçtiğin iki kişi
+Deux noms de famille ¦ İki soyadı
+Deux groupes de Mes listes ¦ Listelerim’den iki grup
+Premier nom ¦ Birinci ad
+Deuxième nom ¦ İkinci ad
+Première liste ¦ Birinci liste
+Deuxième liste ¦ İkinci liste
+Deux lignées de ta généalogie ¦ Soy ağacından iki hat
+Côté père et côté mère de la personne de départ (ou quatre grands-parents, deux personnes, deux noms, deux listes). Jamais un vivant ni une fiche confidentielle : une personne de départ vivante n’est jamais un point. ¦ Başlangıç kişisinin baba ve anne tarafı (ya da dört büyükanne ve büyükbaba, iki kişi, iki ad, iki liste). Asla yaşayan biri ya da gizli bir kart yok: yaşayan başlangıç kişisi asla bir nokta olmaz.
+Glisser (un trait à déplacer) ¦ Kaydır (taşınacak bir çizgi)
+LES DEUX LIGNÉES ¦ İKİ HAT
+Le mariage des parents (💍) ¦ Anne babanın düğünü (💍)
+Les deux lignées ¦ Her iki hat
+Les deux lignées : {a}, {b} où elles se rencontrent. ¦ Her iki hat: {a}, buluştukları yer: {b}.
+Les deux lignées : {n}. ¦ Her iki hat: {n}.
+Les deux lignées de la famille {name} ¦ {name} ailesinin iki hattı
+Les deux lignées de {name} ¦ {name} – iki hat
+Les quatre grands-parents de la famille {name} ¦ {name} ailesinin dört büyükanne ve büyükbabası
+Les quatre grands-parents de {name} ¦ {name} – dört büyükanne ve büyükbaba
+Lister sous la carte où elles se rencontrent ¦ Buluştukları yerleri haritanın altında listele
+Combien de lignes ¦ Kaç satır
+Montré ¦ Gösterilir
+Même commune ¦ Aynı belediye
+Même commune à la même époque ¦ Aynı belediye, aynı dönemde
+À moins de quelques km ¦ Birkaç km içinde
+À la même époque : à plus ou moins ¦ Aynı dönemde: artı eksi
+Où elles se rencontrent ¦ Nerede buluşuyorlar
+Par 25 ans ¦ 25’er yıl
+Position du trait ¦ Çizginin konumu
+Prends les deux lignées de ta personne de départ (« Depuis l’app »). ¦ Başlangıç kişinin iki hattını al (“Uygulamadan”).
+Selon le nombre d’événements ¦ Olay sayısına göre
+Ses deux lignées sur la carte ¦ Haritada iki hattı
+Seulement la période ¦ Yalnızca dönem
+Superposées ¦ Üst üste
+Tout jusqu’à cette date ¦ Bu tarihe kadar her şey
+jamais à la même époque ¦ asla aynı dönemde değil
+mariage de {a} et {b} ¦ {a} ile {b} düğünü
+{a} et {b}, à {km} km ¦ {a} ve {b}, {km} km arayla
+3e groupe ¦ 3. grup
+4e groupe ¦ 4. grup
+# ⭕ L'aire de vie (partie 5)
+L’aire de vie, génération par génération ¦ Kuşaktan kuşağa yaşam alanı
+L’aire de vie de tes ancêtres ¦ Atalarının yaşam alanı
+Pour chaque génération, la zone qui tient l’essentiel de leurs naissances, mariages et décès. Mêmes distances que 🧭 Loin du berceau. Jamais un vivant ni une fiche confidentielle. ¦ Her kuşak için doğumlarının, evliliklerinin ve ölümlerinin çoğunu içeren alan. 🧭 Beşikten uzak ile aynı mesafeler. Asla yaşayan biri ya da gizli bir kart yok.
+Prends les ancêtres de ta personne de départ (« Depuis l’app »). ¦ Başlangıç kişinin atalarını al (“Uygulamadan”).
+Génération d’ancêtres ¦ Ata kuşağı
+Siècle (toute la base) ¦ Yüzyıl (tüm veritabanı)
+Une vie (les étapes d’une personne) ¦ Bir hayat (bir kişinin aşamaları)
+Avec les résidences et recensements ¦ İkametler ve nüfus sayımlarıyla
+Du clair (anciens) au foncé (récents) ¦ Açıktan (eskiler) koyuya (yeniler)
+Bleu / orange pour père / mère ¦ Baba / anne için mavi / turuncu
+L’inverse ¦ Tersi
+50 % (le cœur) ¦ %50 (çekirdek)
+Part des événements ¦ Olayların payı
+Part gardée ¦ Tutulan pay
+Cercle (facile à comparer) ¦ Daire (karşılaştırması kolay)
+Enveloppe (le contour au plus juste) ¦ Zarf (en sıkı kontur)
+Personne (l’aire d’une vie) ¦ Kişi (bir hayatın alanı)
+Le milieu des événements ¦ Olayların ortası
+Le lieu de naissance de la personne de départ ¦ Başlangıç kişisinin doğum yeri
+Le berceau des plus anciens ¦ En eskilerin beşiği
+Toutes les aires superposées ¦ Tüm alanlar üst üste
+Une par case ¦ Kutu başına bir
+Une à la fois avec ▶ ¦ ▶ ile teker teker
+Minimum pour tracer une aire ¦ Bir alan çizmek için en az
+5 événements ¦ 5 olay
+Sur les aires (un ancêtre parti au loin reste hors de l’aire) ¦ Alanlara (uzağa gitmiş bir ata alanın dışında kalır)
+Cadrer sur tout ¦ Hepsini çerçevele
+Le tableau sous la carte ¦ Haritanın altındaki tablo
+Gén. {g} · ses parents ¦ {g}. kuşak · ebeveynler
+Clic : ses lieux, et ceux qui sont hors de l’aire ¦ Tıkla: yerleri ve alanın dışındakiler
+Hors de l’aire ¦ Alanın dışında
+Rayon ({p} %) ¦ Yarıçap (%{p})
+trop peu ¦ çok az
+Aire de vie : {n}, de {a} km à {b} km de rayon. ¦ Yaşam alanı: {n}, yarıçap {a} km ile {b} km arası.
+Aire de vie : pas assez d’événements. ¦ Yaşam alanı: yeterli olay yok.
+Aire de vie : {n}. ¦ Yaşam alanı: {n}.
+L’AIRE DE VIE ¦ YAŞAM ALANI
+L’aire de vie de la famille, siècle par siècle ¦ Yüzyıl yüzyıl ailenin yaşam alanı
+L’aire de vie des ancêtres de {name} ¦ {name} – ataların yaşam alanı
+L’aire d’une vie : {name} ¦ Bir hayatın alanı: {name}
+la famille {name} ¦ {name} ailesi
+Voir l’aire de vie sur la carte ¦ Yaşam alanını haritada gör
+Centre ¦ Merkez
+Côté père et côté mère (deux couleurs) ¦ Baba ve anne tarafı (iki renk)
+Mes ancêtres, 8 générations ¦ Atalarım, 8 kuşak
+Toute ma base, siècle par siècle ¦ Tüm veritabanım, yüzyıl yüzyıl
+=aire ¦ alan|alan
+# 🕸 Parrains, marraines et témoins sur la carte (partie 2)
+Parrains, marraines et témoins sur la carte ¦ Haritada vaftiz ebeveynleri ve tanıklar
+Les liens (un par ligne) ¦ Bağlar (satır başına bir)
+D’où vient le témoin ¦ Tanığın nereden geldiği
+D’où vient le parrain ¦ Vaftiz babasının nereden geldiği
+Ce qui est écrit dans l’acte, sinon sa résidence à la date, sinon sa naissance ¦ Kayıtta yazan, yoksa o tarihteki ikameti, yoksa doğumu
+Seulement ce qui est écrit dans l’acte ¦ Yalnızca kayıtta yazan
+Seulement sa naissance ¦ Yalnızca doğumu
+Nombre de liens ¦ Bağ sayısı
+Nombre de personnes différentes ¦ Farklı kişi sayısı
+Liens dans le même village ¦ Aynı köydeki bağlar
+Anneau autour du point ¦ Noktanın çevresinde halka
+Un chiffre seulement ¦ Yalnızca bir sayı
+Rôles montrés ¦ Gösterilen roller
+Parrain, marraine, témoin ¦ Vaftiz babası, vaftiz annesi, tanık
+Tous sauf curé et officier ¦ Rahip ve memur dışında hepsi
+Traits montrés ¦ Gösterilen çizgiler
+À partir de 1 lien ¦ 1 bağdan itibaren
+À partir de 2 ¦ 2’den itibaren
+À partir de 3 ¦ 3’ten itibaren
+Les 30 plus forts seulement ¦ Yalnızca en güçlü 30
+Par rôle ¦ Role göre
+Par branche (bleu père, orange mère) ¦ Dala göre (mavi baba, turuncu anne)
+Flèche du village du parrain vers celui de l’acte ¦ Vaftiz ebeveyninin köyünden kaydın köyüne ok
+La phrase sous la carte ¦ Haritanın altındaki cümle
+Clic : les liens derrière ce trait ¦ Tıkla: bu çizginin ardındaki bağlar
+{place} : {p} % des liens sont du village même ; les autres viennent surtout de {others}. ¦ {place}: bağların %{p}’i köyün kendisinden; diğerleri çoğunlukla şuradan geliyor: {others}.
+Calculé sur {a} dont le village est connu ; {b} sans lieu ne sont pas dessinés. ¦ Köyü bilinen {a} üzerinden hesaplandı; yeri olmayan {b} çizilmez.
+Parrains et témoins : {a} entre {b}. ¦ Vaftiz ebeveynleri ve tanıklar: {b} arasında {a}.
+Parrains et témoins : {n}. ¦ Vaftiz ebeveynleri ve tanıklar: {n}.
+Filleul ou époux ¦ Vaftiz çocuğu ya da eş
+{n} autres · triés par date ¦ {n} tane daha · tarihe göre
+Ouvrir dans le Réseau ¦ Ağda aç
+PARRAINS ET TÉMOINS ¦ VAFTİZ EBEVEYNLERİ VE TANIKLAR
+Parrains et marraines ¦ Vaftiz babaları ve anneleri
+Parrains, marraines et témoins ¦ Vaftiz ebeveynleri ve tanıklar
+Prends les parrains, marraines et témoins de ta généalogie (« Depuis l’app »). ¦ Vaftiz ebeveynlerini ve tanıkları soy ağacından al (“Uygulamadan”).
+Les liens du 🕸 Réseau de relations, sur la carte : le village de l’acte et celui d’où vient le témoin. Les témoins vivants ne sont jamais comptés. ¦ 🕸 İlişki ağındaki bağlar haritada: kaydın köyü ve tanığın geldiği köy. Yaşayan tanıklar asla sayılmaz.
+Aucun lien avec un lieu pour ce choix. ¦ Bu seçim için yeri olan bağ yok.
+Aucun lien pour ce choix (rôles, période, lieux). ¦ Bu seçim için bağ yok (roller, dönem, yerler).
+Curé, officier ¦ Rahip, memur
+curé ¦ rahip
+Curé ¦ Rahip
+tuteur ¦ vasi
+Voisin ¦ Komşu
+Officier ¦ Memur
+bapt. ¦ vaftiz
+naiss. ¦ doğum
+mar. ¦ evlilik
+inh. ¦ defin
+# ⚰️ Crises et épidémies (partie 3) — et les départs « Graphique » de 🕸
+Crises et épidémies (les années où les décès montent) ¦ Krizler ve salgınlar (ölümlerin arttığı yıllar)
+Les décès (un par ligne) ¦ Ölümler (satır başına bir)
+Cause notée ¦ Not edilen neden
+Choléra de 1832 ¦ 1832 kolerası
+Clic : les personnes, et ce qui se passait à la même époque ¦ Tıkla: kişiler ve aynı dönemde olanlar
+Comptés avec tout le monde ¦ Herkesle birlikte sayılır
+À part ¦ Ayrı
+À part (moins de 10 ans) ¦ Ayrı (10 yaşından küçük)
+Pas comptés ¦ Sayılmaz
+Mes ancêtres et leurs familles ¦ Atalarım ve aileleri
+Les enfants à part (moins de 10 ans) ¦ Çocuklar ayrı (10 yaşından küçük)
+Les décès de ta généalogie ¦ Soy ağacındaki ölümler
+Les décès placés et datés (le décès, sinon l’inhumation ; chaque personne une seule fois), et les crises du 🌍 Monde autour avec tes événements locaux. Jamais un vivant ni une fiche confidentielle. ¦ Yerleştirilmiş ve tarihli ölümler (ölüm, yoksa defin; her kişi yalnızca bir kez) ve 🌍 Çevredeki dünya krizleri yerel olaylarınla birlikte. Asla yaşayan biri ya da gizli bir kart yok.
+Aucun décès daté avec un lieu pour ce choix. ¦ Bu seçim için yeri olan tarihli ölüm yok.
+Décès sans année ou sans lieu, comptés à part : {n} ¦ Yılı ya da yeri olmayan ölümler, ayrı sayıldı: {n}
+Minimum de décès dans l’année ¦ Yıl içinde en az ölüm
+Décès au moins ¦ En az ölüm
+2,5 fois l’habitude ¦ Olağanın 2,5 katı
+2 fois ¦ 2 kat
+3 fois ¦ 3 kat
+4 fois ¦ 4 kat
+Fois l’habitude ¦ Olağanın katı
+Fenêtre de l’habitude ¦ Olağan düzeyin penceresi
+5 ans avant et 5 ans après ¦ 5 yıl önce ve 5 yıl sonra
+10 et 10 ¦ 10 ve 10
+Seulement les 10 ans avant ¦ Yalnızca önceki 10 yıl
+L’habitude se calcule par ¦ Olağan düzey şununla hesaplanır
+La moyenne ¦ Ortalama
+La médiane (moins dérangée par une autre crise toute proche) ¦ Medyan (yakındaki başka bir krizden daha az etkilenir)
+La commune, les petites regroupées avec leurs voisines ¦ Belediye, küçükler komşularıyla gruplanır
+Toujours la commune ¦ Her zaman belediye
+Le département ¦ Departman
+Petit village : nombre de décès sur toute la période, moins de ¦ Küçük köy: tüm dönemdeki ölüm sayısı şundan az
+Enfant : moins de ¦ Çocuk: şundan küçük
+Repères proposés ¦ Önerilen dayanak noktaları
+Les crises du 🌍 Monde autour qui couvrent la commune, et mes événements ¦ 🌍 Çevredeki dünya krizlerinden belediyeyi kapsayanlar ve olaylarım
+Toutes les crises de l’année ¦ Yılın tüm krizleri
+Pas du temps ¦ Zaman adımı
+Pas assez de décès placés : moins de ¦ Yeterince yerleştirilmiş ölüm yok: şundan az
+Pas assez de décès placés pour repérer des crises. ¦ Krizleri saptamak için yeterince yerleştirilmiş ölüm yok.
+Prends les décès de ta généalogie (« Depuis l’app »). ¦ Ölümleri soy ağacından al (“Uygulamadan”).
+LES ANNÉES DE CRISE ¦ KRİZ YILLARI
+Les années de crise de la famille ¦ Ailenin kriz yılları
+Les années de crise sur la carte ¦ Haritada kriz yılları
+Les années de crise : {n}, sur {d}. ¦ Kriz yılları: {n}, toplam {d}.
+Les années de crise : {n}. ¦ Kriz yılları: {n}.
+Les années à voir · {n} ¦ Bakılacak yıllar · {n}
+=année à voir ¦ bakılacak yıl|bakılacak yıl
+Habitude ¦ Olağan
+À la même époque (repère) ¦ Aynı dönemde (dayanak)
+À la même époque : {what} — un repère, pas une explication. ¦ Aynı dönemde: {what} — bir dayanak, bir açıklama değil.
+Rien de connu dans cette région à cette date. ¦ Bu bölgede bu tarihte bilinen bir şey yok.
+rien de connu dans cette région à cette date ¦ bu bölgede bu tarihte bilinen bir şey yok
+cause notée : « {c} » ¦ not edilen neden: “{c}”
+d’habitude {u} par an ¦ olağanda yılda {u}
+plus de ×5 ¦ ×5’ten fazla
+×2,5 à 3 ¦ ×2,5 ile 3
+×3 à 5 ¦ ×3 ile 5
+{name} + {n} voisines ¦ {name} + {n} komşu
++ {n} autres ¦ + {n} tane daha
+Écrire la commune et l’année près des ronds ¦ Belediyeyi ve yılı dairelerin yanına yaz
+À lire avec prudence : l’app compare des nombres de décès, elle ne sait pas pourquoi ils montent. Le repère est ce qui se passait à la même époque : une piste à vérifier dans les actes (cause notée, âge, mois). Sur de petits nombres, le hasard suffit parfois. ¦ Dikkatle oku: uygulama ölüm sayılarını karşılaştırır, neden arttıklarını bilmez. Dayanak, aynı dönemde olanlardır: kayıtlarda doğrulanacak bir iz (not edilen neden, yaş, ay). Küçük sayılarda bazen tesadüf yeter.
+Autour de mes ancêtres ¦ Atalarımın çevresinde
+Parrains et marraines des baptêmes ¦ Vaftizlerdeki vaftiz ebeveynleri
+Témoins des mariages ¦ Nikâh tanıkları
+Tous les liens (parrains, témoins, déclarants…) ¦ Tüm bağlar (vaftiz ebeveynleri, tanıklar, bildirenler…)
+années à voir ¦ bakılacak yıl
+année à voir ¦ bakılacak yıl
+Ce qu’on prend ¦ Ne alınır
+Tout : vu, en partie, à chercher ¦ Hepsi: görülen, kısmen, aranacak
+Seulement ce qui reste à faire ¦ Yalnızca yapılacak olanlar
+Seulement ce qui a été vu ¦ Yalnızca görülenler
+Sans le nom des correspondances ¦ Eşleşmelerin adı olmadan
+Avec le nom des correspondances (pas pour un export partagé) ¦ Eşleşmelerin adıyla (paylaşılan bir dışa aktarım için değil)
+Naissances par an, une bougie par décennie ¦ Yılda doğumlar, her on yıl için bir mum
+Décès par an, une bougie par décennie (les années de crise en haut des mèches) ¦ Yılda ölümler, her on yıl için bir mum (kriz yılları fitillerin tepesinde)
+Mariages par an, une bougie par décennie ¦ Yılda evlilikler, her on yıl için bir mum
+Pas assez d’années datées pour ce choix. ¦ Bu seçim için yeterli tarihli yıl yok.
+Naissances par an, décennie par décennie ¦ Yılda doğumlar, on yıl on yıl
+Décès par an, décennie par décennie ¦ Yılda ölümler, on yıl on yıl
+Mariages par an, décennie par décennie ¦ Yılda evlilikler, on yıl on yıl
+par an ¦ yılda
+Chaque bougie : la 1re et la dernière année de la décennie, l’année la plus basse et la plus haute ¦ Her mum: on yılın ilk ve son yılı, en düşük ve en yüksek yıl

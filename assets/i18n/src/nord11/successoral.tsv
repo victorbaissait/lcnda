@@ -1,0 +1,975 @@
+fr ¦ vi ¦ id
+# Zone « successoral » : ⚖️ généalogiste successoral, dossiers de succession, dévolution (heritage-successoral*.js, lib/successoral.php)
+Les dossiers de succession ne se montrent pas en mode consultation ni en mode simple. ¦ Hồ sơ thừa kế không hiển thị ở chế độ trình chiếu và chế độ đơn giản. ¦ Berkas warisan tidak ditampilkan dalam mode presentasi dan mode sederhana.
+Successions ¦ Thừa kế ¦ Warisan
+Listes · Recherche et organisation ¦ Danh sách · Tìm kiếm và tổ chức ¦ Daftar · Penelusuran dan pengaturan
+Dossiers de succession ¦ Hồ sơ thừa kế ¦ Berkas warisan
+Retrouver les héritiers d’une personne décédée, pour un notaire : un dossier par défunt. À ne pas confondre avec « 🏠 Héritages et successions » (les actes anciens des ancêtres). ¦ Tìm những người thừa kế của một người đã mất cho công chứng viên: mỗi người đã mất một hồ sơ. Đừng nhầm với «🏠 Di sản và thừa kế» (các văn bản cũ của tổ tiên). ¦ Menemukan ahli waris seseorang yang telah meninggal untuk notaris: satu berkas per pewaris. Jangan dikacaukan dengan «🏠 Harta peninggalan dan warisan» (akta-akta lama leluhur).
+＋ Ouvrir un dossier ¦ ＋ Mở hồ sơ ¦ ＋ Buka berkas
+Lecture des dossiers… ¦ Đang đọc các hồ sơ… ¦ Membaca berkas…
+Aucun dossier de succession pour l’instant ¦ Chưa có hồ sơ thừa kế nào ¦ Belum ada berkas warisan
+Choisis la personne décédée : l’app part des fiches de la base pour trouver ses héritiers, selon le Code civil d’aujourd’hui. ¦ Chọn người đã mất: ứng dụng dựa vào các hồ sơ trong cơ sở dữ liệu để tìm những người thừa kế theo Bộ luật Dân sự Pháp hiện hành. ¦ Pilih pewaris: aplikasi berangkat dari catatan di basis data untuk menemukan ahli warisnya menurut Kode Sipil Prancis yang berlaku saat ini.
+Chercher… (ex. MAZAUD, 2026-014, ROUSSILHE) ¦ Tìm… (vd: MAZAUD, 2026-014, ROUSSILHE) ¦ Cari… (mis. MAZAUD, 2026-014, ROUSSILHE)
+Prochaine échéance ¦ Hạn chót gần nhất ¦ Tenggat terdekat
+A → Z ¦ A → Z ¦ A → Z
+Dossier n° {n} ¦ Hồ sơ số {n} ¦ Berkas no. {n}
+Prochaine échéance : {d} — {l} ¦ Hạn chót gần nhất: {d} — {l} ¦ Tenggat terdekat: {d} — {l}
+Échéance passée ¦ Đã quá hạn ¦ Tenggat terlewati
+✎ Modifier ¦ ✎ Sửa ¦ ✎ Ubah
+Aucun dossier ne correspond. ¦ Không có hồ sơ nào phù hợp. ¦ Tidak ada berkas yang cocok.
+Pas en mode consultation ni en mode simple. ¦ Không có ở chế độ trình chiếu hoặc đơn giản. ¦ Tidak tersedia dalam mode presentasi atau sederhana.
+⚖️ DOSSIER DE SUCCESSION ¦ ⚖️ HỒ SƠ THỪA KẾ ¦ ⚖️ BERKAS WARISAN
+Ouvrir un dossier ¦ Mở một hồ sơ ¦ Buka berkas
+Ouvrir le dossier ¦ Mở hồ sơ ¦ Buka berkas
+N° de dossier ¦ Số hồ sơ ¦ No. berkas
+fait tout seul : 2026-014 ¦ tự động: 2026-014 ¦ otomatis: 2026-014
+reprise de la fiche ¦ lấy từ hồ sơ cá nhân ¦ diambil dari catatan
+Dernier domicile ¦ Nơi cư trú cuối cùng ¦ Domisili terakhir
+Notaire mandant (fiche ou nom) ¦ Công chứng viên ủy thác (hồ sơ hoặc tên) ¦ Notaris pemberi tugas (catatan atau nama)
+Réf. du notaire ¦ Số tham chiếu của công chứng viên ¦ Ref. notaris
+Ouvert le ¦ Mở ngày ¦ Dibuka pada
+Testament ¦ Di chúc ¦ Wasiat
+Aucun connu (le notaire interroge le fichier des dernières volontés) ¦ Không biết có (công chứng viên tra cứu sổ đăng ký di chúc) ¦ Tidak diketahui (notaris memeriksa daftar wasiat)
+Situation (notes) ¦ Tình hình (ghi chú) ¦ Situasi (catatan)
+🔒 Le dossier reste dans l’app : les héritiers vivants, leurs adresses et leurs parts ne sont dans aucun export. Aucun montant n’est noté. ¦ 🔒 Hồ sơ ở lại trong ứng dụng: những người thừa kế còn sống, địa chỉ và phần của họ không xuất hiện trong bất kỳ bản xuất nào. Không ghi bất kỳ số tiền nào. ¦ 🔒 Berkas tetap di dalam aplikasi: ahli waris yang masih hidup, alamat dan bagian mereka tidak muncul di ekspor mana pun. Tidak ada jumlah uang yang dicatat.
+Choisis la personne décédée. ¦ Chọn người đã mất. ¦ Pilih pewaris.
+Dossier enregistré ¦ Đã lưu hồ sơ ¦ Berkas disimpan
+Dossier supprimé ¦ Đã xóa hồ sơ ¦ Berkas dihapus
+Lecture du dossier… ¦ Đang đọc hồ sơ… ¦ Membaca berkas…
+← Tous les dossiers ¦ ← Tất cả hồ sơ ¦ ← Semua berkas
+Dossier n° {n} · {t} ¦ Hồ sơ số {n} · {t} ¦ Berkas no. {n} · {t}
+Listes · Dossiers de succession ¦ Danh sách · Hồ sơ thừa kế ¦ Daftar · Berkas warisan
+↗ Fiche du défunt ¦ ↗ Hồ sơ cá nhân của người đã mất ¦ ↗ Catatan pewaris
+🗄 Archiver le dossier clos ¦ 🗄 Lưu trữ hồ sơ đã đóng ¦ 🗄 Arsipkan berkas yang ditutup
+Dossier archivé : les adresses des vivants ont été retirées, le journal reste. ¦ Đã lưu trữ hồ sơ: địa chỉ người còn sống đã bị xóa, nhật ký được giữ lại. ¦ Berkas diarsipkan: alamat orang yang masih hidup dihapus, jurnal tetap ada.
+État du dossier ¦ Trạng thái hồ sơ ¦ Status berkas
+Le défunt n’est plus dans la base. ¦ Người đã mất không còn trong cơ sở dữ liệu. ¦ Pewaris tidak lagi ada di basis data.
+Pas de conjoint dans la base ¦ Không có người phối ngẫu trong cơ sở dữ liệu ¦ Tidak ada pasangan di basis data
+A des descendants ¦ Có con cháu ¦ Memiliki keturunan
+Sans descendant dans la base ¦ Không có con cháu trong cơ sở dữ liệu ¦ Tidak ada keturunan di basis data
+Le défunt ¦ Người đã mất ¦ Pewaris
+fiche n° {n} ¦ hồ sơ số {n} ¦ catatan no. {n}
+Le mandat ¦ Ủy thác ¦ Penugasan
+Droit actuel (décès après le 1er janvier 2007) ¦ Luật hiện hành (mất sau ngày 1/1/2007) ¦ Hukum saat ini (meninggal setelah 1 Januari 2007)
+Échéances ¦ Hạn chót ¦ Tenggat
+＋ Échéance ¦ ＋ Hạn chót ¦ ＋ Tenggat
+Dans {n} j ¦ Trong {n} ngày ¦ Dalam {n} hari
+Aucune échéance. ¦ Không có hạn chót. ¦ Tidak ada tenggat.
+Aussi dans 🗓 Ma semaine de recherche. ¦ Cũng có trong 🗓 Tuần tìm kiếm của tôi. ¦ Juga ada di 🗓 Minggu penelusuran saya.
+📑 Pièces ¦ 📑 Giấy tờ ¦ 📑 Dokumen
+🖨 Tableau pour le notaire ¦ 🖨 Bảng cho công chứng viên ¦ 🖨 Tabel untuk notaris
+de son chef ¦ tự mình ¦ atas haknya sendiri
+représenté ¦ được đại diện ¦ diwakili
+sans descendance connue ¦ không có con cháu được biết ¦ tidak ada keturunan yang diketahui
+degré plus éloigné ¦ bậc xa hơn ¦ derajat lebih jauh
+pas de représentation ¦ không có đại diện ¦ tanpa penggantian tempat
+pas encore conçu ¦ chưa thụ thai ¦ belum dikandung
+écarté ¦ bị loại ¦ dikecualikan
+par représentation ¦ theo đại diện ¦ melalui penggantian tempat
+de son chef, s’il vit ¦ tự mình, nếu còn sống ¦ atas haknya sendiri, jika masih hidup
+Retenu ¦ Được hưởng ¦ Berhak
+Écarté par le conjoint ¦ Bị loại bởi người phối ngẫu ¦ Dikecualikan oleh pasangan
+Écarté ¦ Bị loại ¦ Dikecualikan
+{name} : {share} (art. {art}). ¦ {name}: {share} (điều {art}). ¦ {name}: {share} (pasal {art}).
+Ou, à son choix, l’usufruit de la totalité (art. 757) : les descendants ont alors la nue-propriété, dans les mêmes proportions. ¦ Hoặc, tùy người đó chọn, quyền hưởng dụng toàn bộ (điều 757): khi đó con cháu có quyền sở hữu không trọn vẹn (hư quyền), theo cùng tỷ lệ. ¦ Atau, atas pilihannya, hak pakai hasil atas seluruh harta (pasal 757): keturunan kemudian memperoleh hak milik telanjang, dengan proporsi yang sama.
+Aucun conjoint dans la base. ¦ Không có người phối ngẫu trong cơ sở dữ liệu. ¦ Tidak ada pasangan di basis data.
+S’il y avait un conjoint, l’app afficherait ici ses droits (art. 757 à 757-2) avant les ordres. ¦ Nếu có người phối ngẫu, ứng dụng sẽ hiển thị ở đây các quyền của người đó (điều 757 đến 757-2) trước các hàng thừa kế. ¦ Jika ada pasangan, aplikasi akan menampilkan haknya di sini (pasal 757 hingga 757-2) sebelum golongan ahli waris.
+{n}e ¦ {n} ¦ {n}
+adresse ? ¦ địa chỉ? ¦ alamat?
+Statut retenu dans ce dossier ¦ Tình trạng được giữ trong hồ sơ này ¦ Status yang dipilih dalam berkas ini
+Autre hypothèse ¦ Giả thuyết khác ¦ Hipotesis lain
+total {t} ¦ tổng {t} ¦ total {t}
+personne : il reste des branches à chercher. ¦ không ai: vẫn còn nhánh cần tìm. ¦ tidak ada: masih ada cabang yang harus ditemukan.
+Part en jeu : {s} ¦ Phần có thể nhận: {s} ¦ Bagian yang dipertaruhkan: {s}
+🔍 Chercher ¦ 🔍 Tìm ¦ 🔍 Cari
+🌍 Héritier à l’étranger ¦ 🌍 Người thừa kế ở nước ngoài ¦ 🌍 Ahli waris di luar negeri
+❔ Absent ou disparu ¦ ❔ Vắng mặt hoặc mất tích ¦ ❔ Tidak hadir atau hilang
+📇 Compléter ¦ 📇 Điền ¦ 📇 Isi
+Type d’adoption ¦ Loại nhận nuôi ¦ Jenis adopsi
+Type d’adoption ? ¦ Loại nhận nuôi? ¦ Jenis adopsi?
+Plénière ¦ Trọn vẹn ¦ Penuh
+Marié ? ¦ Đã kết hôn? ¦ Menikah?
+Pas marié (PACS, union libre) ¦ Không kết hôn (PACS, sống chung) ¦ Tidak menikah (PACS, hidup bersama)
+Divorcé ¦ Đã ly hôn ¦ Bercerai
+Aucune branche à chercher d’après les fiches. ¦ Theo các hồ sơ, không còn nhánh nào cần tìm. ¦ Menurut catatan, tidak ada cabang yang harus ditemukan.
+{n}e degré ¦ bậc {n} ¦ derajat {n}
+Calcul indicatif, à faire vérifier par le notaire. Il suit le Code civil en vigueur (art. 731 et suivants), sans testament, sans donation, sans renonciation connue. Il ne tient pas compte du droit de retour légal (art. 738-2, 757-3), des biens à l’étranger ni d’un régime matrimonial. ¦ Tính toán mang tính tham khảo, cần được công chứng viên kiểm tra. Theo Bộ luật Dân sự Pháp hiện hành (điều 731 trở đi), không có di chúc, không có tặng cho, không có từ chối được biết. Không tính quyền hồi tố luật định (điều 738-2, 757-3), tài sản ở nước ngoài và chế độ tài sản vợ chồng. ¦ Perhitungan bersifat indikatif, harus diperiksa notaris. Mengikuti Kode Sipil Prancis yang berlaku (pasal 731 dst.), tanpa wasiat, tanpa hibah, tanpa penolakan yang diketahui. Tidak memperhitungkan hak pengembalian menurut hukum (pasal 738-2, 757-3), harta di luar negeri, dan rezim harta perkawinan.
+Le conjoint survivant ¦ Người phối ngẫu còn sống ¦ Pasangan yang masih hidup
+Les ordres d’héritiers (art. 734) : le premier qui a quelqu’un prend tout ¦ Các hàng thừa kế (điều 734): hàng đầu tiên có người thừa kế sẽ hưởng toàn bộ ¦ Golongan ahli waris (pasal 734): golongan pertama yang ada orangnya mengambil semuanya
+Les héritiers trouvés ¦ Những người thừa kế đã tìm thấy ¦ Ahli waris yang ditemukan
+🗂 Tables des successions (AD)… ¦ 🗂 Sổ đăng ký thừa kế (lưu trữ)… ¦ 🗂 Register warisan (arsip)…
+Lien avec le défunt ¦ Quan hệ với người đã mất ¦ Hubungan dengan pewaris
+Vient ¦ Hưởng ¦ Mewaris
+Part ¦ Phần ¦ Bagian
+Statut retenu ¦ Tình trạng được giữ ¦ Status yang dipilih
+↔ Faire glisser le tableau pour voir les parts. ¦ ↔ Cuộn bảng để xem phần. ¦ ↔ Geser tabel untuk melihat bagian.
+Aucun héritier trouvé jusqu’au 6e degré : sans testament, la succession reviendrait à l’État (art. 539 et 768). Il reste sans doute des branches à chercher. ¦ Không tìm thấy người thừa kế nào đến bậc 6: không có di chúc, di sản thuộc về Nhà nước (điều 539 và 768). Có lẽ vẫn còn nhánh cần tìm. ¦ Tidak ditemukan ahli waris hingga derajat ke-6: tanpa wasiat, warisan jatuh kepada Negara (pasal 539 dan 768). Mungkin masih ada cabang yang harus ditemukan.
+Les calculs restent tant que la branche n’est pas tranchée. ¦ Các phép tính được giữ lại cho đến khi nhánh được xác định. ¦ Perhitungan dipertahankan sampai cabang itu ditentukan.
+Les branches à chercher ¦ Các nhánh cần tìm ¦ Cabang yang harus ditemukan
+L’hypothèse retenue ¦ Giả thuyết được chọn ¦ Hipotesis yang dipilih
+Ex. : André MAZAUD décédé à Lyon en 1990 sans enfant (acte reçu le 5 déc.). ¦ Vd: André MAZAUD mất tại Lyon năm 1990, không con (đã nhận giấy tờ ngày 5/12). ¦ Mis.: André MAZAUD meninggal di Lyon tahun 1990 tanpa anak (akta diterima 5 Des.).
+Demandée avant « Remis au notaire » si un héritier reste inconnu. ¦ Bắt buộc trước «Đã chuyển cho công chứng viên» nếu còn người thừa kế chưa xác định. ¦ Wajib sebelum «Diserahkan ke notaris» jika ada ahli waris yang belum diketahui.
+Les degrés civils (art. 741-743) : on compte les générations jusqu’à l’ancêtre commun, puis on redescend ¦ Bậc thân thuộc dân sự (điều 741-743): đếm các thế hệ lên đến tổ tiên chung, rồi đi xuống ¦ Derajat sipil (pasal 741-743): hitung generasi hingga leluhur bersama, lalu turun
+LE DÉFUNT ¦ NGƯỜI ĐÃ MẤT ¦ PEWARIS
+à retrouver ¦ cần tìm ¦ harus ditemukan
+sans descend. ¦ không con cháu ¦ tanpa ket.
+Héritier vivant, sa part ¦ Người thừa kế còn sống, phần của họ ¦ Ahli waris hidup, bagiannya
+Prédécédé, sa souche ¦ Mất trước, chi của họ ¦ Meninggal lebih dahulu, pancangnya
+Branche à chercher ¦ Nhánh cần tìm ¦ Cabang yang harus ditemukan
+Arbre de dévolution ¦ Cây phân chia di sản ¦ Pohon pewarisan
+Le défunt au centre, chaque héritier avec sa part ¦ Người đã mất ở giữa, mỗi người thừa kế với phần của mình ¦ Pewaris di tengah, setiap ahli waris dengan bagiannya
+⤓ SVG ¦ ⤓ SVG ¦ ⤓ SVG
+↔ Faire glisser le dessin. ¦ ↔ Cuộn hình vẽ. ¦ ↔ Geser gambar.
+Clic sur une case : la fiche ; clic droit : « 🛡 Solidité de ce lien ». Le dessin suit les fiches. ¦ Nhấp vào một ô: hồ sơ cá nhân; nhấp chuột phải: «🛡 Độ tin cậy của mối liên hệ này». Hình vẽ theo các hồ sơ. ¦ Klik kotak: catatannya; klik kanan: «🛡 Keandalan hubungan ini». Gambar mengikuti catatan.
+le {d} ¦ {d} ¦ {d}
+État de la pièce ¦ Trạng thái giấy tờ ¦ Status dokumen
+D’après la fiche ¦ Theo hồ sơ ¦ Per catatan
+{n} en main ¦ {n} đã có ¦ {n} sudah ada
+{n} demandés ¦ {n} đã yêu cầu ¦ {n} diminta
+Par héritier ¦ Theo người thừa kế ¦ Per ahli waris
+Par acte ¦ Theo giấy tờ ¦ Per akta
+Ce qu’il faut prouver ¦ Điều cần chứng minh ¦ Yang harus dibuktikan
+↔ Faire glisser le tableau. ¦ ↔ Cuộn bảng. ¦ ↔ Geser tabel.
+Rangée dans le Registre de courriers, une demande d’acte met la pièce à « Demandé » ; l’acte attaché à la fiche la met à « En main ». ¦ Một yêu cầu cấp giấy tờ lưu trong Sổ thư từ đặt giấy tờ sang «Đã yêu cầu»; giấy tờ được gắn vào hồ sơ đặt nó sang «Đã có». ¦ Permintaan akta yang disimpan di Daftar surat menjadikan dokumen «Diminta»; akta yang dilampirkan ke catatan menjadikannya «Sudah ada».
+Je suis mandaté(e) par {notary}, notaire, pour établir la dévolution de la succession de {name} (dossier {n}, réf. {ref}). ¦ Tôi được {notary}, công chứng viên, ủy thác xác lập việc phân chia di sản thừa kế của {name} (hồ sơ {n}, tham chiếu {ref}). ¦ Saya ditugaskan oleh {notary}, notaris, untuk menetapkan pewarisan atas harta peninggalan {name} (berkas {n}, ref. {ref}).
+À retrouver ¦ Cần tìm ¦ Harus ditemukan
+Adresse ? ¦ Địa chỉ? ¦ Alamat?
+Signé le ¦ Đã ký ngày ¦ Ditandatangani pada
+À signer ¦ Cần ký ¦ Harus ditandatangani
+✉️ Écrire ¦ ✉️ Soạn thư ¦ ✉️ Tulis
+Contrat de révélation, réponses, signatures ¦ Hợp đồng tiết lộ, trả lời, chữ ký ¦ Kontrak pengungkapan, jawaban, tanda tangan
+📝 Contrat de révélation ¦ 📝 Hợp đồng tiết lộ ¦ 📝 Kontrak pengungkapan
+✉️ Lettre de premier contact ¦ ✉️ Thư liên hệ đầu tiên ¦ ✉️ Surat kontak pertama
+Héritier ¦ Người thừa kế ¦ Ahli waris
+Courrier ¦ Thư ¦ Surat
+Contrat ¦ Hợp đồng ¦ Kontrak
+📝 Le contrat ne nomme pas le défunt avant signature. Écris toi-même le pourcentage d’honoraires et la date limite. Rien n’est envoyé par l’app. ¦ 📝 Hợp đồng không nêu tên người đã mất trước khi ký. Tỷ lệ thù lao và ngày hết hạn do bạn điền. Ứng dụng không gửi gì cả. ¦ 📝 Kontrak tidak menyebut nama pewaris sebelum ditandatangani. Persentase honorarium dan tanggal berlaku kamu isi sendiri. Aplikasi tidak mengirim apa pun.
+Chaque courrier va dans le Registre de courriers, avec sa relance. ¦ Mỗi thư được lưu vào Sổ thư từ, kèm lời nhắc. ¦ Setiap surat masuk ke Daftar surat, dengan pengingatnya.
+↗ Registre de courriers ¦ ↗ Sổ thư từ ¦ ↗ Daftar surat
+Madame, Monsieur, ¦ Kính gửi Ông/Bà, ¦ Dengan hormat,
+Généalogiste successoral, je suis chargé(e) par une étude notariale de retrouver les héritiers d’une personne décédée. Mes recherches me laissent penser que vous pourriez faire partie de sa famille. ¦ là nhà phả hệ học về thừa kế, tôi được một văn phòng công chứng ủy thác tìm những người thừa kế của một người đã mất. Kết quả tìm kiếm cho thấy Ông/Bà có thể thuộc gia đình của người này. ¦ sebagai genealog warisan, saya ditugaskan oleh sebuah kantor notaris untuk menemukan ahli waris seseorang yang telah meninggal. Penelusuran saya menunjukkan bahwa Bapak/Ibu mungkin termasuk keluarganya.
+Pour le vérifier, pourriez-vous me confirmer votre date et votre lieu de naissance, ainsi que les noms de vos parents ? Vous pouvez me répondre par courrier, par téléphone ou par courriel. ¦ Để kiểm tra, Ông/Bà vui lòng xác nhận ngày và nơi sinh, cũng như họ tên cha mẹ của mình? Ông/Bà có thể trả lời qua thư, điện thoại hoặc email. ¦ Untuk memastikannya, dapatkah Bapak/Ibu mengonfirmasi tanggal dan tempat lahir Bapak/Ibu, serta nama orang tua Bapak/Ibu? Bapak/Ibu dapat membalas melalui pos, telepon, atau email.
+Cette démarche ne vous engage à rien. ¦ Việc này không ràng buộc Ông/Bà điều gì. ¦ Langkah ini tidak mengikat Bapak/Ibu.
+Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées. ¦ Trân trọng, ¦ Hormat saya,
+CONTRAT DE RÉVÉLATION DE SUCCESSION ¦ HỢP ĐỒNG TIẾT LỘ THỪA KẾ ¦ KONTRAK PENGUNGKAPAN WARISAN
+Entre {heir}, ci-après « l’héritier », et {sender}, généalogiste successoral. ¦ Giữa {heir}, dưới đây gọi là «người thừa kế», và {sender}, nhà phả hệ học về thừa kế. ¦ Antara {heir}, selanjutnya disebut «ahli waris», dan {sender}, genealog warisan.
+Le généalogiste a découvert une succession en cours dans laquelle l’héritier pourrait avoir des droits. Il s’engage à lui en révéler l’origine (le nom de la personne décédée, l’étude notariale chargée du règlement) dès la signature du présent contrat, et à réunir les actes qui prouvent sa qualité d’héritier. ¦ Nhà phả hệ học đã phát hiện một vụ thừa kế đang mở mà người thừa kế có thể có quyền. Nhà phả hệ học cam kết tiết lộ nguồn gốc của nó (tên người đã mất, văn phòng công chứng phụ trách) ngay khi hợp đồng này được ký, và thu thập các giấy tờ chứng minh tư cách người thừa kế. ¦ Genealog telah menemukan warisan yang sedang terbuka di mana ahli waris mungkin memiliki hak. Ia berjanji untuk mengungkapkan asal-usulnya (nama pewaris, kantor notaris yang menangani) segera setelah kontrak ini ditandatangani, dan untuk mengumpulkan akta-akta yang membuktikan kedudukannya sebagai ahli waris.
+En contrepartie, l’héritier s’engage à verser au généalogiste des honoraires de ____ % (hors taxes) de l’actif net qui lui reviendra, payables seulement s’il reçoit effectivement une part de la succession. Les frais de recherche sont compris. ¦ Đổi lại, người thừa kế cam kết trả cho nhà phả hệ học thù lao ____ % (chưa thuế) trên phần tài sản ròng thuộc về mình, chỉ phải trả nếu thực sự nhận được một phần di sản. Chi phí tìm kiếm đã bao gồm. ¦ Sebagai imbalan, ahli waris berjanji membayar genealog honorarium sebesar ____ % (belum termasuk pajak) dari harta bersih yang menjadi bagiannya, yang hanya terutang jika ia benar-benar menerima bagian dari warisan. Biaya penelusuran sudah termasuk.
+Cette proposition est valable jusqu’au ____________. ¦ Đề nghị này có hiệu lực đến ____________. ¦ Penawaran ini berlaku hingga ____________.
+Fait en deux exemplaires, à ____________, le ____________. ¦ Lập thành hai bản, tại ____________, ngày ____________. ¦ Dibuat dalam dua rangkap, di ____________, pada ____________.
+L’héritier (« Lu et approuvé », signature) — Le généalogiste ¦ Người thừa kế («Đã đọc và chấp thuận», chữ ký) — Nhà phả hệ học ¦ Ahli waris («Telah dibaca dan disetujui», tanda tangan) — Genealog
+Je me permets de revenir vers vous au sujet de mon courrier du {sent}, resté sans réponse. Une succession en cours pourrait vous concerner : pourriez-vous me contacter ? ¦ Tôi xin nhắc lại thư ngày {sent} của tôi, vẫn chưa được hồi âm. Một vụ thừa kế đang mở có thể liên quan đến Ông/Bà: Ông/Bà có thể liên hệ với tôi không? ¦ Saya kembali menindaklanjuti surat saya tertanggal {sent}, yang belum dijawab. Sebuah warisan yang sedang terbuka mungkin menyangkut Bapak/Ibu: dapatkah Bapak/Ibu menghubungi saya?
+✉️ HÉRITIERS CONTACTÉS ¦ ✉️ NGƯỜI THỪA KẾ ĐÃ LIÊN HỆ ¦ ✉️ AHLI WARIS YANG DIHUBUNGI
+Relance ¦ Nhắc lại ¦ Pengingat
+📋 Ranger dans le Registre de courriers ¦ 📋 Lưu vào Sổ thư từ ¦ 📋 Simpan di Daftar surat
+pas d’adresse dans le Répertoire des vivants ¦ không có địa chỉ trong Danh bạ người còn sống ¦ tidak ada alamat di Buku alamat orang hidup
+Premier contact ¦ Liên hệ đầu tiên ¦ Kontak pertama
+Contrat de révélation ¦ Hợp đồng tiết lộ ¦ Kontrak pengungkapan
+Relance dans (jours) ¦ Nhắc lại sau (ngày) ¦ Ingatkan setelah (hari)
+Le nom du défunt n’est pas écrit : il est révélé après la signature. ¦ Tên người đã mất không được ghi: sẽ tiết lộ sau khi ký. ¦ Nama pewaris tidak ditulis: diungkapkan setelah penandatanganan.
+La lettre (tu peux la retoucher ; le nom de chaque héritier est mis tout seul) ¦ Thư (có thể sửa; tên từng người thừa kế được điền tự động) ¦ Surat (dapat diubah; nama setiap ahli waris diisi otomatis)
+📝 Traitement de texte ¦ 📝 Trình soạn thảo văn bản ¦ 📝 Pengolah kata
+Coche au moins un héritier. ¦ Hãy đánh dấu ít nhất một người thừa kế. ¦ Centang setidaknya satu ahli waris.
+Courriers aux héritiers ¦ Thư gửi người thừa kế ¦ Surat kepada ahli waris
+Recherche d’héritiers ¦ Tìm người thừa kế ¦ Penelusuran ahli waris
+Ton logiciel de courriel s’ouvre : relis la lettre et envoie-la toi-même. Rien n’est envoyé par l’app. ¦ Chương trình email của bạn sẽ mở: hãy đọc lại thư và tự gửi. Ứng dụng không gửi gì cả. ¦ Program email kamu akan terbuka: baca kembali surat itu dan kirim sendiri. Aplikasi tidak mengirim apa pun.
+Premier contact + contrat ¦ Liên hệ đầu tiên + hợp đồng ¦ Kontak pertama + kontrak
+{n} rangés dans le Registre de courriers ¦ Đã lưu vào Sổ thư từ: {n} ¦ Disimpan di Daftar surat: {n}
+N. ¦ S. ¦ L.
+D. ¦ M. ¦ W.
+M. ¦ KH. ¦ N.
+Div. ¦ LH. ¦ Cer.
+Ren. ¦ TC. ¦ Tol.
+(à fournir) ¦ (cần điền) ¦ (harus diisi)
+repr. {who} ¦ đại diện {who} ¦ wakil {who}
+existence à ce jour non établie ¦ chưa xác lập sự tồn tại ¦ keberadaan belum dipastikan
+TABLEAU GÉNÉALOGIQUE ¦ BẢNG PHẢ HỆ ¦ TABEL GENEALOGIS
+Succession de {name}, décédé(e) à {place} le {date} ¦ Thừa kế của {name}, mất tại {place} ngày {date} ¦ Warisan {name}, meninggal di {place} pada {date}
+Dossier {n} · Réf. notaire {ref} ¦ Hồ sơ {n} · Tham chiếu công chứng {ref} ¦ Berkas {n} · Ref. notaris {ref}
+Calcul établi d’après les actes cités, art. 731 et suiv. du Code civil, sous réserve de vérification par le notaire. N. = naissance, M. = mariage, D. = décès. ¦ Tính toán dựa trên các giấy tờ đã nêu, điều 731 trở đi Bộ luật Dân sự Pháp, chờ công chứng viên kiểm tra. S. = sinh, KH. = kết hôn, M. = mất. ¦ Perhitungan berdasarkan akta yang disebut, pasal 731 dst. Kode Sipil Prancis, dengan syarat diperiksa notaris. L. = lahir, N. = nikah, W. = wafat.
+Communs à tous : {list}. ¦ Chung cho tất cả: {list}. ¦ Sama untuk semua: {list}.
+Hypothèse retenue : {h} ¦ Giả thuyết được chọn: {h} ¦ Hipotesis yang dipilih: {h}
+à préciser ¦ cần nêu rõ ¦ harus diperinci
+Liste des pièces ¦ Danh mục giấy tờ ¦ Daftar dokumen
+Page {n} / 3 ¦ Trang {n} / 3 ¦ Halaman {n} / 3
+Un PDF sobre, une source pour chaque lien ¦ PDF đơn giản, nguồn cho từng mối liên hệ ¦ PDF sederhana, sumber untuk setiap hubungan
+📝 Ouvrir dans le traitement de texte ¦ 📝 Mở trong trình soạn thảo văn bản ¦ 📝 Buka di pengolah kata
+Joindre les adresses des héritiers ¦ Kèm địa chỉ của người thừa kế ¦ Lampirkan alamat ahli waris
+Aucune photo ni note privée : les noms, les qualités, les parts et les sources. Pas d’adresse sauf si la case est cochée. ¦ Không ảnh, không ghi chú riêng: tên, tư cách, phần và nguồn. Không địa chỉ trừ khi ô được đánh dấu. ¦ Tanpa foto dan tanpa catatan pribadi: nama, kedudukan, bagian dan sumber. Tanpa alamat kecuali kotak dicentang.
+Tableau généalogique — {n} ¦ Bảng phả hệ — {n} ¦ Tabel genealogis — {n}
+Tableau pour le notaire : PDF ou impression (3 pages) ¦ Bảng cho công chứng viên: PDF hoặc in (3 trang) ¦ Tabel untuk notaris: PDF atau cetak (3 halaman)
+Tableau pour le notaire : ouvert dans le traitement de texte ¦ Bảng cho công chứng viên: mở trong trình soạn thảo văn bản ¦ Tabel untuk notaris: dibuka di pengolah kata
+Tableau pour le notaire : copie rangée dans les médias ¦ Bảng cho công chứng viên: bản sao lưu trong media ¦ Tabel untuk notaris: salinan disimpan di media
+🕓 Journal du dossier {n} ¦ 🕓 Nhật ký hồ sơ {n} ¦ 🕓 Jurnal berkas {n}
+(on ne peut ni le modifier ni l’effacer) ¦ (không thể sửa hay xóa) ¦ (tidak dapat diubah atau dihapus)
+⤓ Exporter le journal (CSV) ¦ ⤓ Xuất nhật ký (CSV) ¦ ⤓ Ekspor jurnal (CSV)
+Les changements des fiches restent dans Réglages → Journal des modifications. ¦ Các thay đổi hồ sơ cá nhân cũng được giữ trong Cài đặt → Nhật ký thay đổi. ¦ Perubahan catatan juga tetap tercatat di Pengaturan → Jurnal perubahan.
+Action ¦ Hành động ¦ Tindakan
+Journal exporté (CSV) ¦ Đã xuất nhật ký (CSV) ¦ Jurnal diekspor (CSV)
+Le temps passé, les frais, les honoraires des contrats ¦ Thời gian bỏ ra, chi phí, thù lao hợp đồng ¦ Waktu yang digunakan, biaya, honorarium kontrak
+＋ Temps ¦ ＋ Thời gian ¦ ＋ Waktu
+＋ Frais ¦ ＋ Chi phí ¦ ＋ Biaya
+＋ Honoraires d’un contrat ¦ ＋ Thù lao hợp đồng ¦ ＋ Honorarium kontrak
+🖨 Relevé ¦ 🖨 Báo cáo ¦ 🖨 Laporan
+{h} h {m} min passées ¦ Đã bỏ ra {h} giờ {m} phút ¦ {h} jam {m} mnt digunakan
+Frais : {s} ¦ Chi phí: {s} ¦ Biaya: {s}
+{n} contrats ¦ Hợp đồng: {n} ¦ Kontrak: {n}
+{h} h {m} min ¦ {h} giờ {m} phút ¦ {h} jam {m} mnt
+Rien de noté. ¦ Chưa ghi gì. ¦ Belum ada yang dicatat.
+Aucun montant de succession n’est noté. ¦ Không ghi bất kỳ số tiền thừa kế nào. ¦ Tidak ada jumlah warisan yang dicatat.
+💶 TEMPS ET FRAIS ¦ 💶 THỜI GIAN VÀ CHI PHÍ ¦ 💶 WAKTU DAN BIAYA
+Copie d’acte, déplacement… ¦ Bản sao giấy tờ, đi lại… ¦ Salinan akta, perjalanan…
+Recherches aux AD, appels… ¦ Tìm kiếm lưu trữ, gọi điện… ¦ Penelusuran arsip, telepon…
+Contrat signé ¦ Hợp đồng đã ký ¦ Kontrak ditandatangani
+Heures ¦ Giờ ¦ Jam
+Minutes ¦ Phút ¦ Menit
+Montant (€) ¦ Số tiền (€) ¦ Jumlah (€)
+🌍 HÉRITIER À L’ÉTRANGER ¦ 🌍 NGƯỜI THỪA KẾ Ở NƯỚC NGOÀI ¦ 🌍 AHLI WARIS DI LUAR NEGERI
+Chercher {name} hors de France ¦ Tìm {name} ở ngoài nước Pháp ¦ Mencari {name} di luar Prancis
+Les services à interroger ¦ Các cơ quan cần hỏi ¦ Layanan yang perlu ditanyai
+📮 Demander l’acte au Service central d’état civil ¦ 📮 Yêu cầu giấy tờ từ Cơ quan hộ tịch trung ương ¦ 📮 Minta akta ke Dinas pusat catatan sipil
+Langue de la lettre ¦ Ngôn ngữ của thư ¦ Bahasa surat
+Destinataire ¦ Người nhận ¦ Penerima
+Registro civil de …, consulat de France à … ¦ Registro civil de …, lãnh sự quán Pháp tại … ¦ Registro civil de …, konsulat Prancis di …
+La lettre (dans la langue du pays) ¦ Thư (bằng ngôn ngữ của nước đó) ¦ Surat (dalam bahasa negara itu)
+Lettre à l’étranger ¦ Thư ra nước ngoài ¦ Surat ke luar negeri
+Recherche d’un héritier à l’étranger : {name} ¦ Tìm người thừa kế ở nước ngoài: {name} ¦ Penelusuran ahli waris di luar negeri: {name}
+Courrier rangé dans le Registre de courriers ¦ Đã lưu thư vào Sổ thư từ ¦ Surat disimpan di Daftar surat
+❔ ABSENTS ET DISPARUS ¦ ❔ VẮNG MẶT VÀ MẤT TÍCH ¦ ❔ TIDAK HADIR DAN HILANG
+{name} : absent ou disparu ? ¦ {name}: vắng mặt hay mất tích? ¦ {name}: tidak hadir atau hilang?
+art. {a} ¦ điều {a} ¦ pasal {a}
+Le calcul lit ce statut : un présumé absent est compté vivant, sa part est « réservée » ; un déclaré absent est compté comme mort avant. ¦ Phép tính đọc tình trạng này: người bị suy đoán vắng mặt được coi là còn sống, phần của họ được «giữ lại»; người bị tuyên bố vắng mặt được coi là đã mất trước. ¦ Perhitungan membaca status ini: orang yang diduga tidak hadir dianggap masih hidup, bagiannya «disisihkan»; orang yang dinyatakan tidak hadir dianggap meninggal lebih dahulu.
+Présumé absent ¦ Bị suy đoán vắng mặt ¦ Diduga tidak hadir
+Déclaré absent ou jugement de décès ¦ Bị tuyên bố vắng mặt hoặc có bản án tuyên bố chết ¦ Dinyatakan tidak hadir atau putusan kematian
+{name} : statut retenu changé, dévolution recalculée ¦ {name}: tình trạng được giữ đã thay đổi, đã tính lại việc phân chia ¦ {name}: status yang dipilih berubah, pewarisan dihitung ulang
+Héritier à retrouver : {name}{born} — vivant ? décédé ? des enfants ? (dossier de succession {n}) ¦ Người thừa kế cần tìm: {name}{born} — còn sống? đã mất? có con? (hồ sơ thừa kế {n}) ¦ Ahli waris yang harus ditemukan: {name}{born} — hidup? meninggal? anak? (berkas warisan {n})
+(né en {y}) ¦ (sinh năm {y}) ¦ (lahir {y})
+Descendance de {name} (mort avant le défunt) : un enfant reconnu ou naturel ? (dossier de succession {n}) ¦ Con cháu của {name} (mất trước người đã mất): con được công nhận hoặc con ngoài giá thú? (hồ sơ thừa kế {n}) ¦ Keturunan {name} (meninggal sebelum pewaris): anak yang diakui atau anak luar kawin? (berkas warisan {n})
+Branche à chercher autour de {name} (dossier de succession {n}) ¦ Nhánh cần tìm quanh {name} (hồ sơ thừa kế {n}) ¦ Cabang yang harus ditemukan di sekitar {name} (berkas warisan {n})
+Piste ouverte dans le Journal des recherches : {name} ¦ Đã mở hướng tìm trong Sổ tìm kiếm: {name} ¦ Jejak dibuka di Daftar penelusuran: {name}
+Piste ajoutée : Recherche → 🗓 Journal des recherches ¦ Đã thêm hướng tìm: Tìm kiếm → 🗓 Sổ tìm kiếm ¦ Jejak ditambahkan: Penelusuran → 🗓 Daftar penelusuran
+🗂 TABLES DES SUCCESSIONS DES AD ¦ 🗂 SỔ ĐĂNG KÝ THỪA KẾ TRONG LƯU TRỮ ¦ 🗂 REGISTER WARISAN DI ARSIP
+Dépouiller les tables de successions et absences ¦ Tra cứu sổ thừa kế và vắng mặt ¦ Periksa register warisan dan ketidakhadiran
+Ajouter au suivi ¦ Thêm vào theo dõi ¦ Tambahkan ke tindak lanjut
+Les tables de successions et absences et les mutations par décès (série Q des Archives départementales) donnent la date et le bureau de chaque succession. Coche les personnes à chercher : une ligne « à faire » chacune. ¦ Sổ thừa kế và vắng mặt cùng sổ chuyển dịch do chết (loạt Q của lưu trữ tỉnh) cho biết ngày và văn phòng của từng vụ thừa kế. Hãy đánh dấu những người cần tìm: mỗi người một dòng «việc cần làm». ¦ Register warisan dan ketidakhadiran serta register peralihan karena kematian (seri Q arsip departemen) memberikan tanggal dan kantor setiap warisan. Centang orang yang harus ditemukan: satu baris «yang harus dilakukan» untuk masing-masing.
+Coche au moins une personne. ¦ Hãy đánh dấu ít nhất một người. ¦ Centang setidaknya satu orang.
+Tables des successions et absences, mutations par décès (série Q) : {name}{d} ¦ Sổ thừa kế và vắng mặt, chuyển dịch do chết (loạt Q): {name}{d} ¦ Register warisan dan ketidakhadiran, peralihan karena kematian (seri Q): {name}{d}
+Tables des successions : {n} à dépouiller ¦ Sổ thừa kế: {n} cần tra cứu ¦ Register warisan: {n} untuk diperiksa
+{n} ajoutés aux dépouillements ¦ Đã thêm vào danh sách tra cứu: {n} ¦ Ditambahkan ke pemeriksaan: {n}
+État : {s} ¦ Trạng thái: {s} ¦ Status: {s}
+📋 LISTE DE CONTRÔLE ¦ 📋 DANH SÁCH KIỂM TRA ¦ 📋 DAFTAR PERIKSA
+Avant « Remis au notaire » ¦ Trước «Đã chuyển cho công chứng viên» ¦ Sebelum «Diserahkan ke notaris»
+Remis au notaire ¦ Đã chuyển cho công chứng viên ¦ Diserahkan ke notaris
+Remettre quand même ¦ Vẫn chuyển ¦ Tetap serahkan
+Tout n’est pas prêt : corrige d’abord, ou remets quand même (ce sera noté au journal). ¦ Chưa xong hết: hãy sửa trước, hoặc vẫn chuyển (sẽ ghi vào nhật ký). ¦ Belum semuanya siap: perbaiki dulu, atau tetap serahkan (dicatat di jurnal).
+Les adresses des vivants seront retirées du dossier et de ses courriers. Le journal reste. Continuer ? ¦ Địa chỉ người còn sống sẽ bị xóa khỏi hồ sơ và các thư của nó. Nhật ký được giữ lại. Tiếp tục? ¦ Alamat orang yang masih hidup akan dihapus dari berkas dan surat-suratnya. Jurnal tetap ada. Lanjutkan?
+Archiver ¦ Lưu trữ ¦ Arsipkan
+Dossier archivé. ¦ Đã lưu trữ hồ sơ. ¦ Berkas diarsipkan.
+ÉCHÉANCE ¦ HẠN CHÓT ¦ TENGGAT
+Remettre le tableau généalogique au notaire ¦ Chuyển bảng phả hệ cho công chứng viên ¦ Serahkan tabel genealogis ke notaris
+Remise au notaire ¦ Giao cho công chứng viên ¦ Penyerahan ke notaris
+Rendez-vous ¦ Cuộc hẹn ¦ Janji temu
+Échéance ajoutée ¦ Đã thêm hạn chót ¦ Tenggat ditambahkan
+Échéance supprimée ¦ Đã xóa hạn chót ¦ Tenggat dihapus
+Répertoire des vivants : « ＋ Contact », puis relie la fiche de l’héritier. ¦ Danh bạ người còn sống: «＋ Liên hệ», rồi liên kết hồ sơ của người thừa kế. ¦ Buku alamat orang hidup: «＋ Kontak», lalu tautkan catatan ahli waris.
+Relevé de temps et de frais — {n} ¦ Báo cáo thời gian và chi phí — {n} ¦ Laporan waktu dan biaya — {n}
+Arbre de dévolution — {n} ¦ Cây phân chia di sản — {n} ¦ Pohon pewarisan — {n}
+Arbre de dévolution imprimé ¦ Đã in cây phân chia di sản ¦ Pohon pewarisan dicetak
+Hypothèse retenue enregistrée ¦ Đã lưu giả thuyết được chọn ¦ Hipotesis yang dipilih disimpan
+Échéance faite ¦ Hạn chót đã xong ¦ Tenggat selesai
+Échéance à faire ¦ Hạn chót cần làm ¦ Tenggat yang harus dikerjakan
+Pièce : {s} ¦ Giấy tờ: {s} ¦ Dokumen: {s}
+Courrier mis à jour ¦ Đã cập nhật thư ¦ Surat diperbarui
+Rechercher les héritiers… ¦ Tìm người thừa kế… ¦ Mencari ahli waris…
+Pas en mode consultation. ¦ Không có ở chế độ trình chiếu. ¦ Tidak tersedia dalam mode presentasi.
+Les dossiers n’ont pas pu être lus. ¦ Không thể đọc các hồ sơ. ¦ Berkas tidak dapat dibaca.
+Aucun dossier en cours. ¦ Không có hồ sơ đang mở. ¦ Tidak ada berkas yang sedang berjalan.
+Dossier {n} ¦ Hồ sơ {n} ¦ Berkas {n}
+⚖️ Dossiers de succession ¦ ⚖️ Hồ sơ thừa kế ¦ ⚖️ Berkas warisan
+Signé le {d} ¦ Đã ký ngày {d} ¦ Ditandatangani pada {d}
+Dossier de succession ¦ Hồ sơ thừa kế ¦ Berkas warisan
+Tous les courriers ¦ Tất cả thư từ ¦ Semua surat
+l’héritier ¦ người thừa kế ¦ ahli waris
+Branche paternelle : {who} ¦ Nhánh nội: {who} ¦ Cabang ayah: {who}
+Branche maternelle : {who} ¦ Nhánh ngoại: {who} ¦ Cabang ibu: {who}
+Tous les enfants sont communs : le conjoint choisit l’usufruit de tout, ou le quart en pleine propriété (art. 757). Le calcul montre le quart. ¦ Tất cả các con là con chung: người phối ngẫu chọn quyền hưởng dụng toàn bộ hoặc một phần tư sở hữu trọn vẹn (điều 757). Phép tính hiển thị một phần tư. ¦ Semua anak adalah anak bersama: pasangan memilih hak pakai hasil atas seluruh harta atau seperempat hak milik penuh (pasal 757). Perhitungan menampilkan seperempat.
+Un enfant au moins n’est pas commun aux deux époux : le conjoint reçoit le quart en pleine propriété (art. 757). ¦ Ít nhất một người con không phải con chung của hai vợ chồng: người phối ngẫu nhận một phần tư sở hữu trọn vẹn (điều 757). ¦ Setidaknya satu anak bukan anak bersama kedua pasangan: pasangan mengambil seperempat hak milik penuh (pasal 757).
+1er ordre : les enfants et, par représentation, les descendants d’un enfant prédécédé ou renonçant ; partage par souche (art. 735, 752, 753). ¦ Hàng thứ nhất: các con và, theo đại diện, con cháu của người con đã mất trước hoặc đã từ chối; chia theo chi (điều 735, 752, 753). ¦ Golongan pertama: anak-anak dan, melalui penggantian tempat, keturunan anak yang meninggal lebih dahulu atau menolak; dibagi per pancang (pasal 735, 752, 753).
+Sans descendant, avec le père et la mère : la moitié au conjoint, un quart à chaque parent (art. 757-1). ¦ Không có con cháu, có cha và mẹ: một nửa cho người phối ngẫu, một phần tư cho mỗi người cha mẹ (điều 757-1). ¦ Tanpa keturunan, dengan ayah dan ibu: setengah untuk pasangan, seperempat untuk masing-masing orang tua (pasal 757-1).
+Sans descendant, avec un seul parent : trois quarts au conjoint, un quart au parent (art. 757-1). ¦ Không có con cháu, có một người cha hoặc mẹ: ba phần tư cho người phối ngẫu, một phần tư cho cha hoặc mẹ (điều 757-1). ¦ Tanpa keturunan, dengan satu orang tua: tiga perempat untuk pasangan, seperempat untuk orang tua itu (pasal 757-1).
+Sans descendant ni père ni mère : le conjoint recueille toute la succession (art. 757-2). Les frères et sœurs peuvent avoir un droit de retour sur les biens de famille (art. 757-3) : à voir avec le notaire. ¦ Không có con cháu, không cha không mẹ: người phối ngẫu hưởng toàn bộ di sản (điều 757-2). Anh chị em có thể có quyền hồi tố đối với tài sản gia đình (điều 757-3): cần xem với công chứng viên. ¦ Tanpa keturunan, ayah, dan ibu: pasangan mengambil seluruh warisan (pasal 757-2). Saudara mungkin memiliki hak pengembalian atas harta keluarga (pasal 757-3): bicarakan dengan notaris.
+Le père et la mère ont chacun un quart, les frères et sœurs (ou leurs descendants) la moitié (art. 738). ¦ Cha và mẹ mỗi người hưởng một phần tư, anh chị em (hoặc con cháu của họ) hưởng một nửa (điều 738). ¦ Ayah dan ibu masing-masing mengambil seperempat, saudara (atau keturunannya) setengah (pasal 738).
+Le parent survivant a un quart, les frères et sœurs (ou leurs descendants) trois quarts (art. 738). ¦ Người cha hoặc mẹ còn sống hưởng một phần tư, anh chị em (hoặc con cháu của họ) hưởng ba phần tư (điều 738). ¦ Orang tua yang masih hidup mengambil seperempat, saudara (atau keturunannya) tiga perempat (pasal 738).
+Père et mère décédés : les frères et sœurs ou leurs descendants prennent tout (art. 737). ¦ Cha và mẹ đã mất: anh chị em hoặc con cháu của họ hưởng toàn bộ (điều 737). ¦ Ayah dan ibu telah meninggal: saudara atau keturunannya mengambil semuanya (pasal 737).
+Frères et sœurs germains, consanguins ou utérins : parts égales, par souche (art. 744, 752-2, 753 ; loi du 3 décembre 2001). ¦ Anh chị em ruột và anh chị em cùng cha khác mẹ hoặc cùng mẹ khác cha: phần bằng nhau, theo chi (điều 744, 752-2, 753; luật ngày 3/12/2001). ¦ Saudara kandung dan saudara seayah atau seibu: bagian yang sama, per pancang (pasal 744, 752-2, 753; undang-undang 3 Desember 2001).
+Sans descendant ni frère ni sœur : le père et la mère ont chacun la moitié (art. 736). ¦ Không có con cháu và anh chị em: cha và mẹ mỗi người hưởng một nửa (điều 736). ¦ Tanpa keturunan dan saudara: ayah dan ibu masing-masing mengambil setengah (pasal 736).
+Un seul parent, sans frère ni sœur, mais des ascendants dans l’autre branche : moitié au parent, moitié à ces ascendants (art. 738-1). ¦ Chỉ một người cha hoặc mẹ, không có anh chị em, nhưng có người thuộc hàng trên ở nhánh kia: một nửa cho cha hoặc mẹ, một nửa cho những người đó (điều 738-1). ¦ Hanya satu orang tua, tanpa saudara, tetapi ada leluhur di cabang lain: setengah untuk orang tua itu, setengah untuk leluhur tersebut (pasal 738-1).
+Le parent survivant, seul de son ordre, recueille la succession. ¦ Người cha hoặc mẹ còn sống, là người duy nhất trong hàng của mình, hưởng toàn bộ di sản. ¦ Orang tua yang masih hidup, satu-satunya dalam golongannya, mengambil seluruh warisan.
+3e ordre : moitié pour chaque branche ; dans chacune, l’ascendant le plus proche prend tout (art. 747-748). ¦ Hàng thứ ba: mỗi nhánh một nửa; trong mỗi nhánh, người thuộc hàng trên gần nhất hưởng toàn bộ (điều 747-748). ¦ Golongan ketiga: setengah untuk setiap cabang; di masing-masing, leluhur terdekat mengambil semuanya (pasal 747-748).
+3e ordre : une seule branche a encore un ascendant ; il recueille toute la succession, même les cousins de l’autre branche sont écartés (art. 748). ¦ Hàng thứ ba: chỉ một nhánh còn người thuộc hàng trên; người đó hưởng toàn bộ di sản, cả anh chị em họ của nhánh kia cũng bị loại (điều 748). ¦ Golongan ketiga: hanya satu cabang yang masih memiliki leluhur; ia mengambil seluruh warisan, bahkan sepupu dari cabang lain dikecualikan (pasal 748).
+4e ordre : moitié pour chaque branche ; dans chacune, le collatéral le plus proche en degré prend tout, sans représentation (art. 749-750). ¦ Hàng thứ tư: mỗi nhánh một nửa; trong mỗi nhánh, người thân bàng hệ gần bậc nhất hưởng toàn bộ, không có đại diện (điều 749-750). ¦ Golongan keempat: setengah untuk setiap cabang; di masing-masing, kerabat menyamping dengan derajat terdekat mengambil semuanya, tanpa penggantian tempat (pasal 749-750).
+4e ordre : personne dans une branche, l’autre branche recueille tout (art. 750). ¦ Hàng thứ tư: không có ai ở một nhánh, nhánh kia hưởng toàn bộ (điều 750). ¦ Golongan keempat: tidak ada siapa pun di satu cabang, cabang lain mengambil semuanya (pasal 750).
+Les collatéraux ne succèdent pas au-delà du 6e degré (art. 745). ¦ Người thân bàng hệ không thừa kế quá bậc 6 (điều 745). ¦ Kerabat menyamping tidak mewaris lebih dari derajat ke-6 (pasal 745).
+Le défunt n’est pas dans la base. ¦ Người đã mất không có trong cơ sở dữ liệu. ¦ Pewaris tidak ada di basis data.
+si {name} n’était pas marié avec le défunt (PACS ou union libre) ¦ nếu {name} không kết hôn với người đã mất (PACS hoặc sống chung) ¦ jika {name} tidak menikah dengan pewaris (PACS atau hidup bersama)
+si {name} est mort avant, représenté par ses descendants ¦ nếu {name} đã mất trước, được đại diện bởi con cháu của mình ¦ jika {name} meninggal lebih dahulu, diwakili oleh keturunannya
+si {name} est mort avant sans descendant ¦ nếu {name} đã mất trước mà không có con cháu ¦ jika {name} meninggal lebih dahulu tanpa keturunan
+Enfants et descendants, avec représentation ¦ Con và con cháu, theo đại diện ¦ Anak dan keturunan, melalui penggantian tempat
+Père et mère, frères et sœurs et leurs descendants (« parents privilégiés ») ¦ Cha và mẹ, anh chị em và con cháu của họ («người thân ưu tiên») ¦ Ayah dan ibu, saudara dan keturunannya («kerabat istimewa»)
+Autres ascendants (grands-parents…), fente paternelle / maternelle ¦ Những người thuộc hàng trên khác (ông bà…), chia theo nhánh nội / ngoại ¦ Leluhur lain (kakek-nenek…), dibagi antara cabang ayah / ibu
+Oncles, tantes, cousins… jusqu’au 6e degré (art. 745) ¦ Chú bác, cô dì, anh chị em họ… đến bậc 6 (điều 745) ¦ Paman, bibi, sepupu… hingga derajat ke-6 (pasal 745)
+Vivant au décès ? Mort avant ? Des enfants ? Sa réponse change la part des autres. ¦ Còn sống vào lúc chết? Mất trước? Có con? Câu trả lời thay đổi phần của những người khác. ¦ Hidup pada saat kematian? Meninggal lebih dahulu? Punya anak? Jawabannya mengubah bagian yang lain.
+Mort avant le défunt, sans descendance connue : un enfant, même reconnu tard, changerait le partage. ¦ Mất trước người đã mất, không có con cháu được biết: một người con, kể cả được công nhận muộn, sẽ thay đổi việc phân chia. ¦ Meninggal sebelum pewaris, tanpa keturunan yang diketahui: seorang anak, meskipun diakui belakangan, mengubah pembagian.
+Aucun enfant du défunt dans la base : à vérifier (mentions en marge de l’acte de naissance, livret de famille). ¦ Không có con của người đã mất trong cơ sở dữ liệu: cần kiểm tra (ghi chú bên lề giấy khai sinh, sổ gia đình). ¦ Tidak ada anak pewaris di basis data: harus diperiksa (catatan pinggir akta kelahiran, buku keluarga).
+Les parents du défunt ne sont pas dans la base : sans eux, l’app ne trouve ni frères, ni sœurs, ni cousins. ¦ Cha mẹ của người đã mất không có trong cơ sở dữ liệu: thiếu họ, ứng dụng không tìm được anh chị em hay anh chị em họ. ¦ Orang tua pewaris tidak ada di basis data: tanpa mereka aplikasi tidak menemukan saudara maupun sepupu.
+Un seul parent du défunt est dans la base : l’autre branche reste à chercher. ¦ Chỉ một người cha hoặc mẹ của người đã mất có trong cơ sở dữ liệu: nhánh kia còn cần tìm. ¦ Hanya satu orang tua pewaris yang ada di basis data: cabang lain masih harus ditemukan.
+Adoption : plénière ou simple ? Une adoption plénière coupe les liens avec la famille d’origine. ¦ Nhận nuôi: trọn vẹn hay đơn giản? Nhận nuôi trọn vẹn cắt đứt quan hệ với gia đình gốc. ¦ Adopsi: penuh atau sederhana? Adopsi penuh memutus hubungan dengan keluarga asal.
+Couple sans mariage noté : seul un conjoint marié hérite sans testament (pas le partenaire de PACS ni le concubin). ¦ Cặp đôi không có hôn nhân được ghi: không có di chúc thì chỉ người phối ngẫu đã kết hôn được thừa kế (không phải người ký PACS hay người sống chung). ¦ Pasangan tanpa perkawinan tercatat: tanpa wasiat hanya pasangan yang menikah yang mewaris (bukan mitra PACS atau pasangan hidup bersama).
+Un seul parent noté : relie sa fiche à son autre parent (frère germain ou demi-frère). ¦ Chỉ có một người cha hoặc mẹ được ghi: hãy liên kết hồ sơ với người kia (anh chị em ruột hay cùng cha/mẹ). ¦ Hanya satu orang tua yang tercatat: tautkan catatan ke orang tua lainnya (saudara kandung atau saudara tiri).
+Personne dans la branche paternelle jusqu’au 6e degré : oncles, tantes et cousins du père à chercher. ¦ Không có ai ở nhánh nội đến bậc 6: cần tìm chú bác và anh chị em họ bên nội. ¦ Tidak ada siapa pun di cabang ayah hingga derajat ke-6: paman dan sepupu dari pihak ayah harus ditemukan.
+Personne dans la branche maternelle jusqu’au 6e degré : oncles, tantes et cousins de la mère à chercher. ¦ Không có ai ở nhánh ngoại đến bậc 6: cần tìm cậu dì và anh chị em họ bên ngoại. ¦ Tidak ada siapa pun di cabang ibu hingga derajat ke-6: paman dan sepupu dari pihak ibu harus ditemukan.
+Vivant, mais pas d’adresse dans le Répertoire des vivants. ¦ Còn sống, nhưng không có địa chỉ trong Danh bạ người còn sống. ¦ Masih hidup, tetapi tidak ada alamat di Buku alamat orang hidup.
+Mort après le défunt : sa part passe à ses propres héritiers (sa succession à lui). ¦ Mất sau người đã mất: phần của họ chuyển cho những người thừa kế của chính họ (vụ thừa kế riêng của họ). ¦ Meninggal setelah pewaris: bagiannya beralih kepada ahli warisnya sendiri (warisannya sendiri).
+Présumé absent : sa part est réservée (art. 112 à 132). ¦ Bị suy đoán vắng mặt: phần của họ được giữ lại (điều 112 đến 132). ¦ Diduga tidak hadir: bagiannya disisihkan (pasal 112 hingga 132).
+Date du décès inconnue : l’app ne peut pas dire qui était mort avant ni quel droit s’applique. ¦ Không rõ ngày mất: ứng dụng không thể biết ai mất trước, cũng như luật nào được áp dụng. ¦ Tanggal kematian tidak diketahui: aplikasi tidak dapat menentukan siapa yang meninggal lebih dahulu, maupun hukum mana yang berlaku.
+Décès du {date} : le droit de l’époque n’est pas celui d’aujourd’hui. Avant le 1er juillet 2002 (loi du 3 décembre 2001), le conjoint survivant avait surtout de l’usufruit, les enfants nés hors mariage n’avaient pas tous les mêmes droits et les frères et sœurs de lits différents se partageaient par lignes. Avant le 1er août 1972, les enfants naturels avaient des droits réduits. L’app calcule ici selon le droit actuel : le notaire applique le droit de la date. ¦ Mất ngày {date}: luật thời đó không phải luật hiện nay. Trước ngày 1/7/2002 (luật ngày 3/12/2001), người phối ngẫu còn sống chủ yếu chỉ có quyền hưởng dụng, con ngoài giá thú không có quyền như nhau và anh chị em từ các cuộc hôn nhân khác nhau chia theo dòng. Trước ngày 1/8/1972, con ngoài giá thú có quyền bị giảm. Ứng dụng ở đây tính theo luật hiện hành: công chứng viên áp dụng luật vào thời điểm đó. ¦ Meninggal pada {date}: hukum pada masa itu bukan hukum saat ini. Sebelum 1 Juli 2002 (undang-undang 3 Desember 2001), pasangan yang masih hidup terutama memiliki hak pakai hasil, anak yang lahir di luar perkawinan tidak semuanya memiliki hak yang sama, dan saudara dari perkawinan berbeda membagi menurut garis. Sebelum 1 Agustus 1972, anak luar kawin memiliki hak yang dikurangi. Aplikasi di sini menghitung menurut hukum saat ini: notaris menerapkan hukum pada tanggal tersebut.
+Décès avant le 1er janvier 2007 (loi du 23 juin 2006) : on ne pouvait pas représenter un héritier qui avait renoncé. ¦ Mất trước ngày 1/1/2007 (luật ngày 23/6/2006): người thừa kế đã từ chối không thể được đại diện. ¦ Meninggal sebelum 1 Januari 2007 (undang-undang 23 Juni 2006): ahli waris yang menolak tidak dapat digantikan tempatnya.
+Décès en 2002 sans date précise : avant ou après le 1er juillet 2002, le droit change. Précise la date. ¦ Mất năm 2002 không rõ ngày cụ thể: trước hay sau ngày 1/7/2002 luật khác nhau. Hãy ghi rõ ngày. ¦ Meninggal tahun 2002 tanpa tanggal pasti: sebelum atau sesudah 1 Juli 2002 hukumnya berbeda. Sebutkan tanggalnya.
+Divorce ¦ Ly hôn ¦ Perceraian
+La naissance de {name} ¦ Giấy khai sinh của {name} ¦ Kelahiran {name}
+Le décès de {name} ¦ Giấy chứng tử của {name} ¦ Kematian {name}
+Le mariage avec {name}, non dissous ¦ Hôn nhân với {name}, chưa giải thể ¦ Perkawinan dengan {name}, tidak dibubarkan
+Le divorce d’avec {name} ¦ Ly hôn với {name} ¦ Perceraian dari {name}
+Pas de conjoint survivant : décès de {name} ¦ Không có người phối ngẫu còn sống: cái chết của {name} ¦ Tidak ada pasangan yang masih hidup: kematian {name}
+{name} est mort avant ¦ {name} đã mất trước ¦ {name} meninggal lebih dahulu
+Commun à tous ¦ Chung cho tất cả ¦ Sama untuk semua
+{name} a renoncé à la succession ¦ {name} đã từ chối thừa kế ¦ {name} menolak warisan
+{name} est mort avant (représenté) ¦ {name} đã mất trước (được đại diện) ¦ {name} meninggal lebih dahulu (diwakili)
+Son nom d’épouse ¦ Họ sau khi kết hôn ¦ Nama setelah menikah
+{name} (pour l’écarter) ¦ {name} (cần loại trừ) ¦ {name} (harus dikecualikan)
+Mort avant le défunt, sans enfant ¦ Mất trước người đã mất, không có con ¦ Meninggal sebelum pewaris, tanpa anak
+Chaque héritier a ses actes : il en manque pour {who}. ¦ Mỗi người thừa kế có giấy tờ của mình: còn thiếu cho {who}. ¦ Setiap ahli waris memiliki aktanya: masih kurang untuk {who}.
+Chaque héritier a ses actes. ¦ Mỗi người thừa kế có giấy tờ của mình. ¦ Setiap ahli waris memiliki aktanya.
+Chaque prédécédé a son acte de décès : {n} manquent. ¦ Mỗi người mất trước có giấy chứng tử: còn thiếu {n}. ¦ Setiap orang yang meninggal lebih dahulu memiliki akta kematian: kurang {n}.
+Chaque prédécédé a son acte de décès. ¦ Mỗi người mất trước có giấy chứng tử. ¦ Setiap orang yang meninggal lebih dahulu memiliki akta kematian.
+Les branches inconnues ont une explication. ¦ Các nhánh chưa rõ đều có giải thích. ¦ Cabang yang tidak diketahui memiliki penjelasan.
+{n} héritiers ou branches restent « inconnus » sans explication. ¦ Người thừa kế hoặc nhánh «chưa rõ» không có giải thích: {n}. ¦ Ahli waris atau cabang «tidak diketahui» tanpa penjelasan: {n}.
+Aucune branche « inconnue ». ¦ Không có nhánh «chưa rõ». ¦ Tidak ada cabang «tidak diketahui».
+L’hypothèse retenue est écrite. ¦ Giả thuyết được chọn đã được ghi. ¦ Hipotesis yang dipilih telah ditulis.
+Plusieurs hypothèses : écris celle qui est retenue. ¦ Nhiều giả thuyết: hãy ghi giả thuyết được chọn. ¦ Beberapa hipotesis: tuliskan yang dipilih.
+Une seule hypothèse. ¦ Chỉ có một giả thuyết. ¦ Hanya satu hipotesis.
+Les parts totalisent 1. ¦ Tổng các phần bằng 1. ¦ Jumlah bagian sama dengan 1.
+Les parts ne totalisent pas 1 : à revoir. ¦ Tổng các phần không bằng 1: cần xem lại. ¦ Jumlah bagian tidak sama dengan 1: harus ditinjau ulang.
+La date du décès demande l’avis du notaire (droit de l’époque ou date inconnue). ¦ Ngày mất cần ý kiến công chứng viên (luật thời đó hoặc không rõ ngày). ¦ Tanggal kematian memerlukan pendapat notaris (hukum masa itu atau tanggal tidak diketahui).
+{name} ajouté (statut inconnu) ¦ Đã thêm {name} (tình trạng chưa rõ) ¦ {name} ditambahkan (status tidak diketahui)
+{name} ajouté ({share}) ¦ Đã thêm {name} ({share}) ¦ {name} ditambahkan ({share})
+{name} : {from} → {to} ¦ {name}: {from} → {to} ¦ {name}: {from} → {to}
+{name} retiré ¦ Đã bỏ {name} ¦ {name} dihapus
+Ordre retenu : {from} → {to} ¦ Hàng được giữ: {from} → {to} ¦ Golongan yang dipilih: {from} → {to}
+descendante à la {n}e génération ¦ con cháu (nữ) đời thứ {n} ¦ keturunan perempuan generasi ke-{n}
+descendant à la {n}e génération ¦ con cháu đời thứ {n} ¦ keturunan generasi ke-{n}
+ascendante à la {n}e génération ¦ tổ tiên (nữ) đời thứ {n} ¦ leluhur perempuan generasi ke-{n}
+ascendant à la {n}e génération ¦ tổ tiên đời thứ {n} ¦ leluhur generasi ke-{n}
+parente au {n}e degré ¦ họ hàng (nữ) bậc {n} ¦ kerabat perempuan derajat ke-{n}
+parent au {n}e degré ¦ họ hàng bậc {n} ¦ kerabat derajat ke-{n}
+petit-fils ¦ cháu trai (con của con) ¦ cucu laki-laki
+petite-fille ¦ cháu gái (con của con) ¦ cucu perempuan
+arrière-petit-fils ¦ chắt trai ¦ cicit laki-laki
+arrière-petite-fille ¦ chắt gái ¦ cicit perempuan
+arrière-arrière-petit-fils ¦ chút trai ¦ canggah laki-laki
+arrière-arrière-petite-fille ¦ chút gái ¦ canggah perempuan
+nièce ¦ cháu gái (con anh chị em) ¦ keponakan perempuan
+petit-neveu ¦ cháu trai (cháu của anh chị em) ¦ cucu laki-laki dari saudara
+petite-nièce ¦ cháu gái (cháu của anh chị em) ¦ cucu perempuan dari saudara
+arrière-petit-neveu ¦ chắt trai của anh chị em ¦ cicit laki-laki dari saudara
+arrière-petite-nièce ¦ chắt gái của anh chị em ¦ cicit perempuan dari saudara
+arrière-arrière-petit-neveu ¦ chút trai của anh chị em ¦ canggah laki-laki dari saudara
+arrière-arrière-petite-nièce ¦ chút gái của anh chị em ¦ canggah perempuan dari saudara
+cousin germain ¦ anh/em họ (nam) ¦ sepupu laki-laki
+cousine germaine ¦ chị/em họ (nữ) ¦ sepupu perempuan
+fils de cousin germain ¦ con trai của anh chị em họ ¦ anak laki-laki sepupu
+fille de cousin germain ¦ con gái của anh chị em họ ¦ anak perempuan sepupu
+petit-fils de cousin germain ¦ cháu trai của anh chị em họ ¦ cucu laki-laki sepupu
+petite-fille de cousin germain ¦ cháu gái của anh chị em họ ¦ cucu perempuan sepupu
+grand-oncle ¦ ông chú/bác (anh em của ông bà) ¦ kakek paman (saudara kakek/nenek)
+grand-tante ¦ bà cô/dì (chị em của ông bà) ¦ nenek bibi (saudari kakek/nenek)
+cousin germain d’un parent ¦ anh em họ của cha mẹ (nam) ¦ sepupu laki-laki orang tua
+cousine germaine d’un parent ¦ chị em họ của cha mẹ (nữ) ¦ sepupu perempuan orang tua
+cousin issu de germains ¦ anh em họ đời thứ hai (nam) ¦ sepupu dua kali laki-laki
+cousine issue de germains ¦ chị em họ đời thứ hai (nữ) ¦ sepupu dua kali perempuan
+arrière-grand-oncle ¦ anh em của cụ (nam) ¦ saudara laki-laki buyut
+arrière-grand-tante ¦ chị em của cụ (nữ) ¦ saudara perempuan buyut
+cousin germain d’un grand-parent ¦ anh em họ của ông bà (nam) ¦ sepupu laki-laki kakek/nenek
+cousine germaine d’un grand-parent ¦ chị em họ của ông bà (nữ) ¦ sepupu perempuan kakek/nenek
+arrière-arrière-grand-oncle ¦ anh em của kỵ (nam) ¦ saudara laki-laki canggah
+arrière-arrière-grand-tante ¦ chị em của kỵ (nữ) ¦ saudara perempuan canggah
+frère germain ¦ anh/em trai ruột ¦ saudara laki-laki kandung
+sœur germaine ¦ chị/em gái ruột ¦ saudara perempuan kandung
+demi-frère (même père) ¦ anh/em trai cùng cha khác mẹ ¦ saudara laki-laki seayah
+demi-sœur (même père) ¦ chị/em gái cùng cha khác mẹ ¦ saudara perempuan seayah
+demi-frère (même mère) ¦ anh/em trai cùng mẹ khác cha ¦ saudara laki-laki seibu
+demi-sœur (même mère) ¦ chị/em gái cùng mẹ khác cha ¦ saudara perempuan seibu
+Père, mère, enfant ¦ Cha, mẹ, con ¦ Ayah, ibu, anak
+Frère, sœur, grand-parent, petit-enfant ¦ Anh chị em, ông bà, cháu ¦ Saudara, kakek-nenek, cucu
+Neveu, nièce, oncle, tante ¦ Cháu (con anh chị em), chú bác, cô dì ¦ Keponakan, paman, bibi
+Cousin germain, petit-neveu, grand-oncle ¦ Anh chị em họ, cháu của anh chị em, ông chú bà cô ¦ Sepupu, cucu saudara, kakek paman
+Enfant de cousin germain ¦ Con của anh chị em họ ¦ Anak sepupu
+Cousin issu de germains (limite) ¦ Anh chị em họ đời thứ hai (giới hạn) ¦ Sepupu dua kali (batas)
+Présomption d’absence : le juge des tutelles la constate quand une personne a cessé de paraître sans donner de nouvelles. Elle est réputée vivante ; sa part est réservée et gérée. ¦ Suy đoán vắng mặt: tòa án xác nhận khi một người không còn xuất hiện mà không có tin tức. Người đó được coi là còn sống; phần của họ được giữ lại và quản lý. ¦ Dugaan ketidakhadiran: hakim menetapkannya ketika seseorang tidak lagi muncul tanpa kabar. Ia dianggap masih hidup; bagiannya disisihkan dan dikelola.
+Déclaration d’absence : 10 ans après le jugement de présomption (ou 20 ans sans nouvelles), le tribunal judiciaire la déclare ; le jugement a les effets d’un décès. ¦ Tuyên bố vắng mặt: 10 năm sau bản án suy đoán (hoặc 20 năm không có tin tức), tòa án tuyên bố; bản án có hiệu lực như cái chết. ¦ Pernyataan ketidakhadiran: 10 tahun setelah putusan dugaan (atau 20 tahun tanpa kabar), pengadilan menyatakannya; putusan itu berakibat seperti kematian.
+Jugement déclaratif de décès : pour une disparition dans des circonstances qui mettent la vie en danger (naufrage, catastrophe), sans attendre. ¦ Bản án tuyên bố chết: khi mất tích trong hoàn cảnh nguy hiểm đến tính mạng (đắm tàu, thảm họa), không cần chờ đợi. ¦ Putusan pernyataan kematian: untuk hilangnya seseorang dalam keadaan yang membahayakan nyawa (kapal karam, bencana), tanpa menunggu.
+Service central d’état civil (Nantes) : les actes des Français nés, mariés ou morts à l’étranger. ¦ Cơ quan hộ tịch trung ương (Nantes): giấy tờ của người Pháp sinh, kết hôn hoặc mất ở nước ngoài. ¦ Dinas pusat catatan sipil (Nantes): akta warga Prancis yang lahir, menikah, atau meninggal di luar negeri.
+Le consulat de France du pays : registres d’immatriculation, actes transcrits récents. ¦ Lãnh sự quán Pháp tại nước đó: sổ lãnh sự, giấy tờ được ghi chép gần đây. ¦ Konsulat Prancis di negara itu: register konsuler, akta yang baru dicatatkan.
+L’état civil du pays (mairie, registro civil, Standesamt…) : lettre dans la langue du pays. ¦ Cơ quan hộ tịch của nước đó (chính quyền địa phương, registro civil, Standesamt…): thư bằng ngôn ngữ của nước đó. ¦ Catatan sipil negara itu (pemerintah setempat, registro civil, Standesamt…): surat dalam bahasa negara itu.
+Archives nationales d’outre-mer (Aix-en-Provence) : colonies et Algérie avant 1962. ¦ Lưu trữ quốc gia hải ngoại (Aix-en-Provence): các thuộc địa và Algérie trước năm 1962. ¦ Arsip nasional seberang laut (Aix-en-Provence): koloni dan Aljazair sebelum 1962.
+Ouvert ¦ Đã mở ¦ Dibuka
+En recherche ¦ Đang tìm ¦ Sedang ditelusuri
+Héritiers trouvés ¦ Đã tìm thấy người thừa kế ¦ Ahli waris ditemukan
+Clos ¦ Đã đóng ¦ Ditutup
+📁 Dossier ¦ 📁 Hồ sơ ¦ 📁 Berkas
+👥 Héritiers ¦ 👥 Người thừa kế ¦ 👥 Ahli waris
+🌳 Arbre ¦ 🌳 Cây ¦ 🌳 Pohon
+✉️ Héritiers contactés ¦ ✉️ Người thừa kế đã liên hệ ¦ ✉️ Ahli waris dihubungi
+🖨 Pour le notaire ¦ 🖨 Cho công chứng viên ¦ 🖨 Untuk notaris
+🕓 Journal ¦ 🕓 Nhật ký ¦ 🕓 Jurnal
+💶 Temps et frais ¦ 💶 Thời gian và chi phí ¦ 💶 Waktu dan biaya
+Décédé après ¦ Mất sau ¦ Meninggal kemudian
+Décédée après ¦ Mất sau ¦ Meninggal kemudian
+Renonce ¦ Từ chối thừa kế ¦ Menolak
+Indigne ¦ Không xứng đáng ¦ Tidak layak
+Absent ¦ Vắng mặt ¦ Tidak hadir
+Absente ¦ Vắng mặt ¦ Tidak hadir
+Pas encore conçu ¦ Chưa thụ thai ¦ Belum dikandung
+Pas encore conçue ¦ Chưa thụ thai ¦ Belum dikandung
+Comme sur la fiche ¦ Như trong hồ sơ ¦ Sesuai catatan
+Vivant au décès ¦ Còn sống vào lúc chết ¦ Hidup pada saat kematian
+Mort avant le défunt ¦ Mất trước người đã mất ¦ Meninggal sebelum pewaris
+Mort après le défunt ¦ Mất sau người đã mất ¦ Meninggal setelah pewaris
+Renonce à la succession ¦ Từ chối thừa kế ¦ Menolak warisan
+Déclaré absent ¦ Bị tuyên bố vắng mặt ¦ Dinyatakan tidak hadir
+Refuse ¦ Từ chối ¦ Menolak
+Rappellera ¦ Sẽ gọi lại ¦ Akan menelepon kembali
+✓ En main ¦ ✓ Đã có ¦ ✓ Sudah ada
+📮 Demandé ¦ 📮 Đã yêu cầu ¦ 📮 Diminta
+✗ Manquant ¦ ✗ Thiếu ¦ ✗ Kurang
+Sans objet ¦ Không áp dụng ¦ Tidak berlaku
+⏱ Temps ¦ ⏱ Thời gian ¦ ⏱ Waktu
+🧾 Frais ¦ 🧾 Chi phí ¦ 🧾 Biaya
+📝 Contrat ¦ 📝 Hợp đồng ¦ 📝 Kontrak
+02 — HÉRITIERS ¦ 02 — NGƯỜI THỪA KẾ ¦ 02 — AHLI WARIS
+Généalogiste successoral ¦ Nhà phả hệ học về thừa kế ¦ Genealog warisan
+Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ Tìm những người thừa kế của một người đã mất cho công chứng viên. ¦ Menemukan ahli waris seseorang yang telah meninggal untuk notaris.
++ ⚖️ Successions (Dossiers · Héritiers à contacter · Courriers). Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Thừa kế (Hồ sơ · Người thừa kế cần liên hệ · Thư từ). Màn hình đầu tiên: «Mở hồ sơ». ¦ + ⚖️ Warisan (Berkas · Ahli waris yang perlu dihubungi · Surat). Layar pertama: «Buka berkas».
+⚖️ Successions : dossiers, héritiers à contacter, courriers. ¦ ⚖️ Thừa kế: hồ sơ, người thừa kế cần liên hệ, thư từ. ¦ ⚖️ Warisan: berkas, ahli waris yang perlu dihubungi, surat.
+⚖️ Successions ¦ ⚖️ Thừa kế ¦ ⚖️ Warisan
+Vivants ¦ Người còn sống ¦ Orang hidup
+Courriers ¦ Thư từ ¦ Surat
+Échéance le {date} ¦ Hạn chót ngày {date} ¦ Tenggat pada {date}
+Pour quel héritier ? ¦ Cho người thừa kế nào? ¦ Untuk ahli waris mana?
+Lettre à un héritier ¦ Thư gửi người thừa kế ¦ Surat kepada ahli waris
+ne révèle pas le défunt avant signature ; honoraires et date limite à écrire ¦ không tiết lộ người đã mất trước khi ký; thù lao và ngày hết hạn cần điền ¦ tidak mengungkapkan pewaris sebelum penandatanganan; honorarium dan tanggal berlaku harus diisi
+premier contact, sans nommer le défunt ¦ liên hệ đầu tiên, không nêu tên người đã mất ¦ kontak pertama, tanpa menyebut nama pewaris
+Il y a déjà un dossier pour cette personne. ¦ Đã có hồ sơ cho người này. ¦ Sudah ada berkas untuk orang ini.
+Date d’ouverture incorrecte. ¦ Ngày mở không hợp lệ. ¦ Tanggal pembukaan tidak valid.
+Notaire introuvable. ¦ Không tìm thấy công chứng viên. ¦ Notaris tidak ditemukan.
+Passe d’abord par la liste de contrôle avant « Remis au notaire ». ¦ Hãy hoàn thành danh sách kiểm tra trước «Đã chuyển cho công chứng viên». ¦ Selesaikan daftar periksa dulu sebelum «Diserahkan ke notaris».
+Ce dossier est archivé. ¦ Hồ sơ này đã được lưu trữ. ¦ Berkas ini sudah diarsipkan.
+Valeur inconnue. ¦ Giá trị không xác định. ¦ Nilai tidak dikenal.
+Pièce inconnue. ¦ Giấy tờ không xác định. ¦ Dokumen tidak dikenal.
+Choisis la date de l’échéance. ¦ Chọn ngày hạn chót. ¦ Pilih tanggal tenggat.
+Écris ce qu’il faut faire. ¦ Ghi việc cần làm. ¦ Tuliskan yang harus dilakukan.
+Échéance introuvable. ¦ Không tìm thấy hạn chót. ¦ Tenggat tidak ditemukan.
+Date incorrecte. ¦ Ngày không hợp lệ. ¦ Tanggal tidak valid.
+Le pourcentage va de 0 à 100. ¦ Tỷ lệ phải từ 0 đến 100. ¦ Persentase dari 0 hingga 100.
+Combien de temps ? ¦ Bao lâu? ¦ Berapa lama?
+Choisis l’héritier. ¦ Chọn người thừa kế. ¦ Pilih ahli waris.
+Date de signature incorrecte. ¦ Ngày ký không hợp lệ. ¦ Tanggal tanda tangan tidak valid.
+Seul un dossier clos peut être archivé. ¦ Chỉ có thể lưu trữ hồ sơ đã đóng. ¦ Hanya berkas yang ditutup yang dapat diarsipkan.
+Mode consultation : les dossiers de succession ne se montrent pas. ¦ Chế độ trình chiếu: hồ sơ thừa kế bị ẩn. ¦ Mode presentasi: berkas warisan disembunyikan.
+Rien à noter. ¦ Không có gì để ghi. ¦ Tidak ada yang dicatat.
+Calcul manquant. ¦ Thiếu phép tính. ¦ Perhitungan tidak ada.
+Dossiers ¦ Hồ sơ ¦ Berkas
+Héritiers à contacter ¦ Người thừa kế cần liên hệ ¦ Ahli waris yang perlu dihubungi
+Que montrer ¦ Hiển thị gì ¦ Yang ditampilkan
+Lecture des héritiers… ¦ Đang đọc người thừa kế… ¦ Membaca ahli waris…
+Lecture des courriers… ¦ Đang đọc thư từ… ¦ Membaca surat…
+Voir toute la liste ↗ ¦ Xem toàn bộ danh sách ↗ ¦ Lihat seluruh daftar ↗
+Aucun courrier ¦ Chưa có thư ¦ Belum ada surat
+Courrier envoyé ¦ Đã gửi thư ¦ Surat terkirim
+Réponse : {r} ¦ Trả lời: {r} ¦ Jawaban: {r}
+Courrier envoyé le {d} ¦ Đã gửi thư ngày {d} ¦ Surat terkirim pada {d}
+Aucun héritier à contacter dans les dossiers en cours. ¦ Không có người thừa kế cần liên hệ trong các hồ sơ đang mở. ¦ Tidak ada ahli waris yang perlu dihubungi dalam berkas yang sedang berjalan.
+Les héritiers vivants (ou au statut inconnu) des dossiers ouverts viennent ici, avec leur adresse et l’état du contact. ¦ Những người thừa kế còn sống (hoặc chưa rõ tình trạng) của các hồ sơ đang mở hiện ở đây, kèm địa chỉ và tình trạng liên hệ. ¦ Ahli waris yang masih hidup (atau statusnya belum diketahui) dari berkas yang terbuka muncul di sini, dengan alamat dan status kontaknya.
+Chercher… (nom, dossier, ville) ¦ Tìm… (tên, hồ sơ, nơi ở) ¦ Cari… (nama, berkas, kota)
+Tous les dossiers ¦ Tất cả hồ sơ ¦ Semua berkas
+État du contact ¦ Tình trạng liên hệ ¦ Status kontak
+Par dossier ¦ Theo hồ sơ ¦ Per berkas
+À contacter d’abord ¦ Cần liên hệ trước ¦ Yang perlu dihubungi dulu
+Aucun héritier ne correspond. ¦ Không có người thừa kế nào phù hợp. ¦ Tidak ada ahli waris yang cocok.
+📇 Compléter l’adresse ¦ 📇 Bổ sung địa chỉ ¦ 📇 Lengkapi alamat
+adresse à trouver ¦ cần tìm địa chỉ ¦ alamat harus dicari
+Courriel ¦ Email ¦ Email
+Héritiers à contacter exportés (CSV) ¦ Đã xuất người thừa kế cần liên hệ (CSV) ¦ Ahli waris yang perlu dihubungi diekspor (CSV)
+Héritier à l’étranger ¦ Người thừa kế ở nước ngoài ¦ Ahli waris di luar negeri
+Demande d’acte ¦ Yêu cầu cấp giấy tờ ¦ Permintaan akta
+Aucun courrier de succession pour l’instant. ¦ Chưa có thư thừa kế nào. ¦ Belum ada surat warisan.
+Les courriers écrits depuis un dossier (✉️ Héritiers contactés, 📑 Pièces) viennent ici. ¦ Thư viết từ một hồ sơ (✉️ Người thừa kế đã liên hệ, 📑 Giấy tờ) hiện ở đây. ¦ Surat yang ditulis dari sebuah berkas (✉️ Ahli waris yang dihubungi, 📑 Dokumen) muncul di sini.
+Chercher… (destinataire, dossier) ¦ Tìm… (người nhận, hồ sơ) ¦ Cari… (penerima, berkas)
+Aucun courrier ne correspond. ¦ Không có thư nào phù hợp. ¦ Tidak ada surat yang cocok.
+📮 COURRIER DE SUCCESSION ¦ 📮 THƯ THỪA KẾ ¦ 📮 SURAT WARISAN
+Dévolution ¦ Thứ tự thừa kế ¦ Urutan pewarisan
+=héritier ¦ người thừa kế ¦ ahli waris
+=courrier ¦ thư ¦ surat
+=dépouillement ¦ lượt rà soát ¦ penelusuran
+=dossier en cours ¦ hồ sơ đang mở ¦ berkas berjalan
+=dossier de succession ¦ hồ sơ thừa kế ¦ berkas warisan
+
+# ⚖️ Dossiers de succession : rangement, filtre ⚖️, rattachement, tableau de bord, garde-fous, widget, vue par dossier
+Dossiers de succession : filtre {what} (cliquer pour changer) ¦ Hồ sơ thừa kế: bộ lọc {what} (bấm để đổi) ¦ Berkas warisan: filter {what} (klik untuk mengubah)
+Dossiers de succession : ne montrer qu’un ou plusieurs dossiers ¦ Hồ sơ thừa kế: chỉ hiện một hoặc vài hồ sơ ¦ Berkas warisan: tampilkan hanya satu atau beberapa berkas
+Plusieurs ¦ Nhiều hồ sơ ¦ Beberapa
+⚖️ Ne montrer que ceux-ci ¦ ⚖️ Chỉ hiện những hồ sơ này ¦ ⚖️ Tampilkan hanya ini
+Aucun dossier dans cette généalogie. ¦ Không có hồ sơ nào trong gia phả này. ¦ Tidak ada berkas di silsilah ini.
+Dans une autre généalogie ¦ Trong một gia phả khác ¦ Di silsilah lain
+Tous les dossiers… ¦ Tất cả hồ sơ… ¦ Semua berkas…
+Seulement le dossier {n} ¦ Chỉ hồ sơ {n} ¦ Hanya berkas {n}
+Seulement {what} : {list} ¦ Chỉ {what}: {list} ¦ Hanya {what}: {list}
+1 dossier · {state} ¦ 1 hồ sơ · {state} ¦ 1 berkas · {state}
+⚖️ Dossier {n} ¦ ⚖️ Hồ sơ {n} ¦ ⚖️ Berkas {n}
+Ce dossier est dans une autre généalogie ¦ Hồ sơ này nằm trong một gia phả khác ¦ Berkas ini ada di silsilah lain
+Ouvrir « {name} » ¦ Mở “{name}” ¦ Buka “{name}”
+Il est rangé dans « {name} ». Pour le montrer, l’app ouvre cette généalogie (tes réglages d’ici sont gardés) et y active le filtre ⚖️ {n}. ¦ Hồ sơ được cất trong “{name}”. Để hiện nó, ứng dụng mở gia phả đó (cài đặt của bạn ở đây được giữ) và bật bộ lọc ⚖️ {n} ở đó. ¦ Berkas ini disimpan di “{name}”. Untuk menampilkannya, aplikasi membuka silsilah itu (pengaturanmu di sini tetap tersimpan) dan menyalakan filter ⚖️ {n} di sana.
+Tes nouveaux dossiers vont dans « {name} ». ¦ Hồ sơ mới của bạn sẽ vào “{name}”. ¦ Berkas barumu masuk ke “{name}”.
+Ouvrir le dossier ici quand même ¦ Vẫn mở hồ sơ ở đây ¦ Tetap buka berkas di sini
+Où ranger tes dossiers ? ¦ Cất hồ sơ của bạn ở đâu? ¦ Di mana menyimpan berkasmu?
+conseillé ici ¦ nên dùng ở đây ¦ disarankan di sini
+Nom de la nouvelle généalogie ¦ Tên gia phả mới ¦ Nama silsilah baru
+⚖️ Dossier de succession ¦ ⚖️ Hồ sơ thừa kế ¦ ⚖️ Berkas warisan
+Ta généalogie ouverte a {n} : la ranger à part évite de mélanger les héritiers de tes clients avec ta propre famille. Ce n’est qu’un conseil. ¦ Gia phả đang mở của bạn có {n}: cất riêng giúp không lẫn người thừa kế của khách hàng với gia đình bạn. Đây chỉ là lời khuyên. ¦ Silsilah yang terbuka punya {n}: menyimpannya terpisah mencegah ahli waris klienmu bercampur dengan keluargamu sendiri. Ini hanya saran.
+Tu pourras changer d’avis : Réglages → Apparence → 🧭 Usage de l’app → « ⚖️ Où ranger les dossiers ». Les dossiers déjà ouverts ne bougent pas tout seuls. ¦ Bạn có thể đổi ý: Cài đặt → Giao diện → 🧭 Cách dùng ứng dụng → “⚖️ Cất hồ sơ ở đâu”. Hồ sơ đã mở không tự di chuyển. ¦ Kamu bisa berubah pikiran: Pengaturan → Tampilan → 🧭 Penggunaan aplikasi → “⚖️ Tempat menyimpan berkas”. Berkas yang sudah dibuka tidak pindah sendiri.
+Créer « ⚖️ Dossiers de succession » et ouvrir le dossier ¦ Tạo “⚖️ Hồ sơ thừa kế” và mở hồ sơ ¦ Buat “⚖️ Berkas warisan” dan buka berkas
+Créer la généalogie et ouvrir le dossier ¦ Tạo gia phả và mở hồ sơ ¦ Buat silsilah dan buka berkas
+Rangement des dossiers : {what} ¦ Nơi cất hồ sơ: {what} ¦ Tempat berkas: {what}
+Généalogiste successoral : réglages des dossiers ¦ Nhà phả hệ học về thừa kế: cài đặt hồ sơ ¦ Genealog warisan: pengaturan berkas
+Où ranger les dossiers ¦ Cất hồ sơ ở đâu ¦ Tempat menyimpan berkas
+Les nouveaux dossiers vont… ¦ Hồ sơ mới vào… ¦ Berkas baru masuk ke…
+Dans « {name} » ¦ Vào “{name}” ¦ Di “{name}”
+Les dossiers et où ils sont ¦ Các hồ sơ và nơi cất ¦ Berkas dan lokasinya
+⇄ Déplacer… ¦ ⇄ Di chuyển… ¦ ⇄ Pindahkan…
+Aucun dossier pour l’instant. ¦ Chưa có hồ sơ nào. ¦ Belum ada berkas.
+Réglages des dossiers ¦ Cài đặt hồ sơ ¦ Pengaturan berkas
+Arbre et graphiques filtrés par ⚖️ : les fiches hors dossier ¦ Cây và biểu đồ lọc theo ⚖️: các hồ sơ người ngoài hồ sơ thừa kế ¦ Pohon dan grafik dengan filter ⚖️: profil di luar berkas
+Archive d’un dossier clos : adresses des héritiers vivants ¦ Lưu trữ hồ sơ đã đóng: địa chỉ người thừa kế còn sống ¦ Arsip berkas yang ditutup: alamat ahli waris yang masih hidup
+Déplacer un dossier dont une fiche est aussi dans ta famille ¦ Di chuyển hồ sơ có một người cũng thuộc gia đình bạn ¦ Memindahkan berkas yang profilnya juga ada di keluargamu
+« Sans dossier » dans la vue par dossier ¦ “Không thuộc hồ sơ” trong cách xem theo hồ sơ ¦ “Tanpa berkas” dalam tampilan per berkas
+Avancement : un héritier qui refuse de signer ¦ Tiến độ: người thừa kế từ chối ký ¦ Kemajuan: ahli waris yang menolak menandatangani
+compte comme « fait » (étape 5) ¦ tính là “đã xong” (bước 5) ¦ dihitung “selesai” (langkah 5)
+Avancement : poids des 7 étapes ¦ Tiến độ: trọng số của 7 bước ¦ Kemajuan: bobot 7 langkah
+Réglage des dossiers enregistré : {what} ¦ Đã lưu cài đặt hồ sơ: {what} ¦ Pengaturan berkas disimpan: {what}
+poids des 7 étapes ¦ trọng số của 7 bước ¦ bobot 7 langkah
+⇄ DÉPLACER UN DOSSIER ¦ ⇄ DI CHUYỂN HỒ SƠ ¦ ⇄ PINDAHKAN BERKAS
+{n} → ? ¦ {n} → ? ¦ {n} → ?
+⇄ Déplacer ({what}) ¦ ⇄ Di chuyển ({what}) ¦ ⇄ Pindahkan ({what})
+Vers ¦ Đến ¦ Ke
+＋ Une nouvelle généalogie pour ce dossier ¦ ＋ Một gia phả mới cho hồ sơ này ¦ ＋ Silsilah baru untuk berkas ini
+Ce qui part : le dossier, son journal, ses pièces, ses courriers, ses échéances, et les fiches qui lui sont rattachées (défunt, héritiers, intermédiaires) avec leurs actes et médias. Une fiche aussi rattachée à un autre dossier ou à ta famille est copiée, pas déplacée. ¦ Những gì được chuyển: hồ sơ, nhật ký, giấy tờ, thư từ, thời hạn và những người gắn với hồ sơ (người mất, người thừa kế, người trung gian) cùng giấy tờ và tệp đa phương tiện. Người cũng gắn với hồ sơ khác hay với gia đình bạn sẽ được sao chép, không di chuyển. ¦ Yang dipindahkan: berkas, jurnalnya, dokumen, surat, tenggat, dan profil yang terkait (pewaris, ahli waris, perantara) beserta akta dan medianya. Profil yang juga terkait berkas lain atau keluargamu disalin, bukan dipindahkan.
+Déplacement refusé (réglage) : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Từ chối di chuyển (cài đặt): những người này cũng thuộc gia đình bạn hoặc hồ sơ khác: {names}. ¦ Pemindahan ditolak (pengaturan): profil ini juga ada di keluargamu atau di berkas lain: {names}.
+Copiées (elles restent aussi ici) : {names}. ¦ Đã sao chép (vẫn ở lại đây): {names}. ¦ Disalin (tetap ada juga di sini): {names}.
+Une copie de sauvegarde des deux généalogies est faite avant. Le journal du dossier note « Déplacé de … vers … ». ¦ Trước tiên sẽ sao lưu cả hai gia phả. Nhật ký hồ sơ ghi “Đã chuyển từ … sang …”. ¦ Lebih dulu dibuat cadangan kedua silsilah. Jurnal berkas mencatat “Dipindahkan dari … ke …”.
+Dossier {n} déplacé vers « {to} » ({what}) ¦ Đã chuyển hồ sơ {n} sang “{to}” ({what}) ¦ Berkas {n} dipindahkan ke “{to}” ({what})
+⤓ Reprendre la fiche depuis Ma généalogie ¦ ⤓ Lấy hồ sơ người từ Gia phả của tôi ¦ ⤓ Ambil profil dari Silsilah saya
+copie de la fiche, jusqu’aux grands-parents et tous leurs descendants connus, sans photos ¦ bản sao hồ sơ người, lên đến ông bà và mọi con cháu đã biết của họ, không có ảnh ¦ salinan profil, sampai kakek-nenek dan semua keturunan mereka yang diketahui, tanpa foto
+⤓ REPRENDRE UNE FICHE ¦ ⤓ LẤY HỒ SƠ NGƯỜI ¦ ⤓ AMBIL PROFIL
+Reprendre la fiche du défunt ¦ Lấy hồ sơ của người đã mất ¦ Ambil profil pewaris
+Chercher la fiche ¦ Tìm hồ sơ người ¦ Cari profil
+Prénom, nom… ¦ Tên, họ… ¦ Nama depan, nama belakang…
+Copiées : la fiche, ses parents et grands-parents, tous leurs descendants connus et leurs conjoints, avec les dates et les lieux ; sans photos. Rien n’est changé dans l’autre généalogie. ¦ Được sao chép: hồ sơ người, cha mẹ và ông bà, mọi con cháu đã biết và vợ chồng của họ, kèm ngày tháng và nơi chốn; không có ảnh. Gia phả kia không thay đổi gì. ¦ Disalin: profil, orang tua dan kakek-nenek, semua keturunan yang diketahui dan pasangan mereka, dengan tanggal dan tempat; tanpa foto. Tidak ada yang berubah di silsilah lain.
+{what} reprises de l’autre généalogie. ¦ {what} lấy từ gia phả kia. ¦ {what} diambil dari silsilah lain.
+Dossiers… ¦ Hồ sơ… ¦ Berkas…
+{name} dans quels dossiers ? ¦ {name} thuộc những hồ sơ nào? ¦ {name} di berkas mana saja?
+(calculé) ¦ (tính toán) ¦ (dihitung)
+Rôles : défunt · héritier · intermédiaire · témoin · à vérifier. « Héritier » mis par le calcul s’affiche « (calculé) ». ¦ Vai trò: người mất · người thừa kế · người trung gian · người làm chứng · cần kiểm tra. “Người thừa kế” do phép tính đặt sẽ hiện “(tính toán)”. ¦ Peran: pewaris · ahli waris · perantara · saksi · perlu dicek. “Ahli waris” yang ditetapkan perhitungan tampil “(dihitung)”.
+Dossiers de {name} enregistrés ¦ Đã lưu hồ sơ của {name} ¦ Berkas {name} disimpan
+Les dossiers de cette fiche ¦ Các hồ sơ của người này ¦ Berkas profil ini
+hors du dossier {n} ¦ ngoài hồ sơ {n} ¦ di luar berkas {n}
+＋ Rattacher ¦ ＋ Gắn vào ¦ ＋ Kaitkan
+Fiche rattachée au dossier {n} ¦ Đã gắn người vào hồ sơ {n} ¦ Profil dikaitkan ke berkas {n}
+Rattachée au dossier {n} : {who} ¦ Đã gắn vào hồ sơ {n}: {who} ¦ Dikaitkan ke berkas {n}: {who}
+Lecture des fiches du dossier… ¦ Đang đọc những người trong hồ sơ… ¦ Membaca profil berkas…
+Les fiches du dossier ¦ Những người trong hồ sơ ¦ Profil berkas
+Rattacher ¦ Gắn vào ¦ Kaitkan
+Retirées à la main ({n}) : jamais remises toutes seules ¦ Đã gỡ bằng tay ({n}): không bao giờ tự gắn lại ¦ Dilepas manual ({n}): tidak pernah dikembalikan otomatis
+Fiche à comparer : « {name}{year} » ressemble à une fiche déjà dans cette base. Jamais fusionnée toute seule. ¦ Cần so sánh: “{name}{year}” giống một hồ sơ người đã có trong cơ sở dữ liệu này. Không bao giờ tự gộp. ¦ Profil untuk dibandingkan: “{name}{year}” mirip profil yang sudah ada di basis data ini. Tidak pernah digabung otomatis.
+née {y} ¦ sinh {y} ¦ lahir {y}
+Homonyme possible : « {name}{year} » existe aussi dans le dossier {n}. Jamais relié tout seul. ¦ Có thể trùng tên: “{name}{year}” cũng có trong hồ sơ {n}. Không bao giờ tự gắn. ¦ Kemungkinan senama: “{name}{year}” juga ada di berkas {n}. Tidak pernah dikaitkan otomatis.
+⇆ Comparer ¦ ⇆ So sánh ¦ ⇆ Bandingkan
+C’est la même personne : rattacher aussi ¦ Là cùng một người: gắn luôn ¦ Orang yang sama: kaitkan juga
+Pas la même ¦ Không phải cùng người ¦ Bukan orang yang sama
+Fiche retirée du dossier {n} ¦ Đã gỡ người khỏi hồ sơ {n} ¦ Profil dilepas dari berkas {n}
+Fiche remise dans le dossier {n} ¦ Đã gắn lại người vào hồ sơ {n} ¦ Profil dikembalikan ke berkas {n}
+Homonyme rattaché aussi au dossier {n} (à vérifier) ¦ Người trùng tên cũng được gắn vào hồ sơ {n} (cần kiểm tra) ¦ Senama juga dikaitkan ke berkas {n} (perlu dicek)
+Noté : ce n’est pas la même personne ¦ Đã ghi: không phải cùng một người ¦ Dicatat: bukan orang yang sama
+Rôle : {r} ¦ Vai trò: {r} ¦ Peran: {r}
+⚠️ illisible : {names} ¦ ⚠️ không đọc được: {names} ¦ ⚠️ tidak terbaca: {names}
+Chercher… (n°, défunt, notaire) ¦ Tìm… (số, người mất, công chứng viên) ¦ Cari… (no., pewaris, notaris)
+Toutes les généalogies ¦ Tất cả gia phả ¦ Semua silsilah
+Tous les notaires ¦ Tất cả công chứng viên ¦ Semua notaris
+Prochaine échéance (retards d’abord) ¦ Thời hạn kế tiếp (trễ hạn trước) ¦ Tenggat berikutnya (yang terlambat dulu)
+Avancement le plus bas ¦ Tiến độ thấp nhất ¦ Kemajuan terendah
+{d} · passée ¦ {d} · đã quá hạn ¦ {d} · lewat
+Trouvés : {n} ¦ Đã tìm thấy: {n} ¦ Ditemukan: {n}
+À trouver : {n} ¦ Cần tìm: {n} ¦ Perlu dicari: {n}
+{h} h {m} ¦ {h} giờ {m} ¦ {h} jam {m}
+Cocher le dossier {n} ¦ Đánh dấu hồ sơ {n} ¦ Centang berkas {n}
+Échéance : {d} ¦ Thời hạn: {d} ¦ Tenggat: {d}
+Héritiers ¦ Người thừa kế ¦ Ahli waris
+Avancement ¦ Tiến độ ¦ Kemajuan
+Cochés : {n} ¦ Đã đánh dấu: {n} ¦ Dicentang: {n}
+Les dossiers cochés sont dans des généalogies différentes : choisis-en dans une seule. ¦ Các hồ sơ đã đánh dấu thuộc những gia phả khác nhau: chỉ chọn trong một gia phả. ¦ Berkas yang dicentang ada di silsilah yang berbeda: pilih dari satu saja.
+Dossiers exportés (CSV) ¦ Đã xuất hồ sơ (CSV) ¦ Berkas diekspor (CSV)
+⤒ Réimporter un dossier archivé… ¦ ⤒ Nhập lại một hồ sơ đã lưu trữ… ¦ ⤒ Impor ulang berkas yang diarsipkan…
+⚠️ FUSION ¦ ⚠️ GỘP ¦ ⚠️ PENGGABUNGAN
+Ces deux fiches sont dans des dossiers différents ¦ Hai hồ sơ người này thuộc những hồ sơ thừa kế khác nhau ¦ Dua profil ini ada di berkas yang berbeda
+Fusionner quand même ¦ Vẫn gộp ¦ Tetap gabungkan
+{a} et {b}. Fusionner relie les deux successions et change les parts des deux dossiers. Vérifie avec des actes (naissance, parents) avant. ¦ {a} và {b}. Gộp sẽ nối hai vụ thừa kế và đổi phần chia ở cả hai hồ sơ. Hãy kiểm tra trước bằng giấy tờ (khai sinh, cha mẹ). ¦ {a} dan {b}. Penggabungan menghubungkan kedua warisan dan mengubah bagian di kedua berkas. Periksa dulu dengan akta (kelahiran, orang tua).
+⇆ Comparer d’abord ¦ ⇆ So sánh trước ¦ ⇆ Bandingkan dulu
+Si on fusionne : noté dans le journal des deux dossiers, et les deux sont recalculés. ¦ Nếu gộp: ghi vào nhật ký của cả hai hồ sơ, và cả hai được tính lại. ¦ Jika digabung: dicatat di jurnal kedua berkas, dan keduanya dihitung ulang.
+🗄 Archiver dans un fichier et retirer… ¦ 🗄 Lưu trữ vào tệp và gỡ khỏi cơ sở dữ liệu… ¦ 🗄 Arsipkan ke sebuah file lalu hapus…
+🗄 ARCHIVER LE DOSSIER {n} ¦ 🗄 LƯU TRỮ HỒ SƠ {n} ¦ 🗄 ARSIPKAN BERKAS {n}
+Dans un fichier, puis retirer de la base ¦ Vào một tệp, rồi gỡ khỏi cơ sở dữ liệu ¦ Ke sebuah file, lalu hapus dari basis data
+⤓ Enregistrer le fichier puis retirer ¦ ⤓ Lưu tệp rồi gỡ ¦ ⤓ Simpan file lalu hapus
+Le fichier {file} contient : le dossier, le journal, les pièces et leurs images, les courriers, l’arbre de dévolution (SVG), le tableau pour le notaire et les fiches rattachées ({n}). ¦ Tệp {file} gồm: hồ sơ, nhật ký, giấy tờ và hình ảnh, thư từ, cây thừa kế (SVG), bảng cho công chứng viên và những người đã gắn ({n}). ¦ File {file} berisi: berkas, jurnal, dokumen dan gambarnya, surat, pohon pewarisan (SVG), tabel untuk notaris, dan profil terkait ({n}).
+Garder les adresses des vivants dans le fichier ¦ Giữ địa chỉ người còn sống trong tệp ¦ Simpan alamat orang yang masih hidup di file
+utile si le notaire rouvre la succession ¦ hữu ích nếu công chứng viên mở lại vụ thừa kế ¦ berguna jika notaris membuka kembali warisan
+Retirer les adresses ¦ Gỡ địa chỉ ¦ Hapus alamat
+comme l’archivage actuel ¦ như cách lưu trữ hiện nay ¦ seperti pengarsipan saat ini
+Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base ({n}). Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste ({k}). Une sauvegarde est faite avant. ¦ Sau đó, những người chỉ dùng cho hồ sơ này được gỡ khỏi cơ sở dữ liệu ({n}). Người cũng gắn với hồ sơ khác (hoặc gia đình bạn) được giữ lại ({k}). Trước tiên sẽ sao lưu. ¦ Lalu profil yang hanya dipakai berkas ini dihapus dari basis data ({n}). Profil yang juga terkait berkas lain (atau keluargamu) tetap ada ({k}). Lebih dulu dibuat cadangan.
+Dossier {n} archivé dans « {file} » et retiré ({what}) ¦ Đã lưu trữ hồ sơ {n} vào “{file}” và gỡ ({what}) ¦ Berkas {n} diarsipkan ke “{file}” dan dihapus ({what})
+⤒ RÉIMPORTER ¦ ⤒ NHẬP LẠI ¦ ⤒ IMPOR ULANG
+⤒ Réimporter le dossier ¦ ⤒ Nhập lại hồ sơ ¦ ⤒ Impor ulang berkas
+Dossier {n} ({name}{closed}), {what}. ¦ Hồ sơ {n} ({name}{closed}), {what}. ¦ Berkas {n} ({name}{closed}), {what}.
+clos le {d} ¦ đóng ngày {d} ¦ ditutup {d}
+{what} ressemblent à des fiches déjà dans cette base ({names}) : elles seront proposées à la comparaison, jamais fusionnées seules. ¦ {what} giống những người đã có trong cơ sở dữ liệu này ({names}): sẽ được đề nghị so sánh, không bao giờ tự gộp. ¦ {what} mirip profil yang sudah ada di basis data ini ({names}): akan diusulkan untuk dibandingkan, tidak pernah digabung otomatis.
+Dossier {n} réimporté ({what}) ¦ Đã nhập lại hồ sơ {n} ({what}) ¦ Berkas {n} diimpor ulang ({what})
+Dossier {n} réimporté dans « {name} ». ¦ Đã nhập lại hồ sơ {n} vào “{name}”. ¦ Berkas {n} diimpor ulang ke “{name}”.
+⚖️ Mes dossiers de succession ¦ ⚖️ Hồ sơ thừa kế của tôi ¦ ⚖️ Berkas warisan saya
+Aucun dossier de succession. ¦ Không có hồ sơ thừa kế. ¦ Tidak ada berkas warisan.
+Étapes (7) ¦ Các bước (7) ¦ Langkah (7)
+{step} : {done} sur {total} ¦ {step}: {done}/{total} ¦ {step}: {done} dari {total}
+Quels dossiers ¦ Những hồ sơ nào ¦ Berkas mana
+Le filtre ¦ Bộ lọc ¦ Filternya
+Vue actuelle ¦ Cách xem hiện tại ¦ Tampilan saat ini
+Alt + ↑ / ↓ : changer l’ordre (rangement à la main) ¦ Alt + ↑ / ↓: đổi thứ tự (bằng tay) ¦ Alt + ↑ / ↓: ubah urutan (manual)
+Sans dossier ¦ Không thuộc hồ sơ ¦ Tanpa berkas
+Ranger les dossiers : ¦ Xếp hồ sơ: ¦ Urutkan berkas:
+… cherche un nom pour voir les autres. ¦ … tìm một cái tên để xem những người khác. ¦ … cari nama untuk melihat yang lain.
+Ordre des dossiers changé ¦ Đã đổi thứ tự hồ sơ ¦ Urutan berkas diubah
+Dans cette généalogie ¦ Trong gia phả này ¦ Di silsilah ini
+Le défunt et ses héritiers sont des fiches de ta famille. Simple, mais tout se mélange. ¦ Người mất và người thừa kế là những người trong gia đình bạn. Đơn giản nhưng mọi thứ lẫn vào nhau. ¦ Pewaris dan ahli warisnya adalah profil keluargamu. Sederhana, tapi semuanya bercampur.
+Dans une généalogie à part pour tous mes dossiers ¦ Trong một gia phả riêng cho mọi hồ sơ của tôi ¦ Di silsilah terpisah untuk semua berkas saya
+Une base professionnelle « ⚖️ Dossiers de succession », créée dans 🌳 Mes généalogies. Tes dossiers y sont tous ensemble ; ta famille reste à part. ¦ Một cơ sở dữ liệu nghề nghiệp “⚖️ Hồ sơ thừa kế”, tạo trong 🌳 Gia phả của tôi. Mọi hồ sơ của bạn ở chung đó; gia đình bạn ở riêng. ¦ Basis data profesional “⚖️ Berkas warisan”, dibuat di 🌳 Silsilah saya. Semua berkasmu ada di sana bersama; keluargamu tetap terpisah.
+Une généalogie par dossier ¦ Một gia phả cho mỗi hồ sơ ¦ Satu silsilah per berkas
+Chaque dossier a sa propre base (« ⚖️ 2026-014 MAZAUD »). Le plus étanche ; à réserver aux grosses successions. ¦ Mỗi hồ sơ có cơ sở dữ liệu riêng (“⚖️ 2026-014 MAZAUD”). Kín nhất; dành cho các vụ thừa kế lớn. ¦ Setiap berkas punya basis datanya sendiri (“⚖️ 2026-014 MAZAUD”). Paling terpisah; untuk warisan besar.
+défunt ¦ người mất ¦ pewaris
+intermédiaire ¦ người trung gian ¦ perantara
+Un par dossier ¦ Mỗi hồ sơ một gia phả ¦ Satu per berkas
+Un filtre ¦ Một bộ lọc ¦ Sebuah filter
+Compteurs ¦ Bộ đếm ¦ Penghitung
+à l’ouverture ¦ khi mở ¦ saat dibuka
+calcul ¦ tính toán ¦ perhitungan
+à la main ¦ bằng tay ¦ manual
+créée pendant le filtre ¦ tạo trong lúc lọc ¦ dibuat selama filter
+réimport ¦ nhập lại ¦ impor ulang
+homonyme ¦ trùng tên ¦ senama
+déplacée ¦ đã di chuyển ¦ dipindahkan
+grisées, sans nom ¦ màu xám, không tên ¦ abu-abu, tanpa nama
+cachées ¦ ẩn ¦ disembunyikan
+retirées du fichier ¦ bỏ khỏi tệp ¦ dihapus dari file
+gardées dans le fichier ¦ giữ trong tệp ¦ disimpan di file
+copier la fiche ¦ sao chép hồ sơ người ¦ salin profil
+refuser le déplacement ¦ từ chối di chuyển ¦ tolak pemindahan
+replié ¦ thu gọn ¦ diciutkan
+Défunt et acte de décès ¦ Người mất và giấy chứng tử ¦ Pewaris dan akta kematian
+Adresses ¦ Địa chỉ ¦ Alamat
+Contrats signés ¦ Hợp đồng đã ký ¦ Kontrak yang ditandatangani
+Déplacement refusé : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Từ chối di chuyển: những người này cũng thuộc gia đình bạn hoặc hồ sơ khác: {names}. ¦ Pemindahan ditolak: profil ini juga ada di keluargamu atau di berkas lain: {names}.
+Impossible d’enregistrer les réglages des dossiers. ¦ Không lưu được cài đặt hồ sơ. ¦ Pengaturan berkas tidak dapat disimpan.
+Cette généalogie est encore vide. ¦ Gia phả này vẫn còn trống. ¦ Silsilah ini masih kosong.
+Rôle inconnu. ¦ Vai trò không rõ. ¦ Peran tidak dikenal.
+Fiches inconnues. ¦ Hồ sơ người không rõ. ¦ Profil tidak dikenal.
+Choisis une autre généalogie. ¦ Hãy chọn gia phả khác. ¦ Pilih silsilah lain.
+Impossible de créer le fichier d’archive. ¦ Không tạo được tệp lưu trữ. ¦ File arsip tidak dapat dibuat.
+Fichier introuvable. ¦ Không tìm thấy tệp. ¦ File tidak ditemukan.
+Ce fichier n’est pas une archive de dossier de succession. ¦ Tệp này không phải tệp lưu trữ hồ sơ thừa kế. ¦ File ini bukan arsip berkas warisan.
+Le fichier n’a pas été reçu. ¦ Chưa nhận được tệp. ¦ File tidak diterima.
+Le défunt reste dans son dossier. ¦ Người mất vẫn ở trong hồ sơ của mình. ¦ Pewaris tetap di berkasnya.
+🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Mọi người ¦ 🧑‍🤝‍🧑 Orang
+Dossiers de succession (usage successoral seulement) ¦ Hồ sơ thừa kế (chỉ khi dùng cho thừa kế) ¦ Berkas warisan (hanya untuk penggunaan warisan)
+# Zone « successoral » : 🔎 introuvable / 🔇 ne répond pas (état de contact d’un héritier, migration 92) ; 🔒 fiches confidentielles non comptées (réglage)
+Introuvable ¦ Không tìm thấy ¦ Tidak ditemukan
+Ne répond pas ¦ Không trả lời ¦ Tidak menjawab
+introuvable ¦ không tìm thấy ¦ tidak ditemukan
+ne répond pas ¦ không trả lời ¦ tidak menjawab
+rien de noté ¦ chưa ghi gì ¦ belum ada catatan
+depuis le {d} ¦ từ {d} ¦ sejak {d}
+Introuvable ou silencieux ¦ Không tìm thấy hoặc im lặng ¦ Tidak ditemukan atau diam
+Introuvable depuis plus d’un an ¦ Không tìm thấy hơn một năm ¦ Tidak ditemukan lebih dari setahun
+{name} est introuvable depuis plus d’un an : la présomption d’absence (art. 112 et suivants) peut protéger sa part. ¦ {name} không tìm thấy đã hơn một năm: suy đoán vắng mặt (điều 112 và tiếp theo) có thể bảo vệ phần của họ. ¦ {name} tidak ditemukan lebih dari setahun: praduga ketidakhadiran (pasal 112 dst.) dapat melindungi bagiannya.
+{what} : les parts peuvent être fausses. ¦ {what}: các phần có thể sai. ¦ {what}: bagian bisa salah.
+=fiche confidentielle non comptée ¦ hồ sơ bảo mật không được tính ¦ profil rahasia tidak dihitung
+Changer ce réglage ¦ Đổi cài đặt này ¦ Ubah pengaturan ini
+Tous les héritiers ¦ Tất cả người thừa kế ¦ Semua ahli waris
+🔎 Introuvable ou 🔇 ne répond pas : pas compté comme contacté dans l’avancement, et le calcul ne change pas. À ne pas confondre avec le statut « Présumé absent » (art. 112). ¦ 🔎 Không tìm thấy hoặc 🔇 không trả lời: không được tính là đã liên hệ trong tiến độ, và phép tính không đổi. Đừng nhầm với trạng thái “Bị suy đoán vắng mặt” (điều 112). ¦ 🔎 Tidak ditemukan atau 🔇 tidak menjawab: tidak dihitung sebagai sudah dihubungi dalam kemajuan, dan perhitungan tidak berubah. Jangan kamu kacaukan dengan status “Diduga tidak hadir” (pasal 112).
+Contact de {name} : {state} ¦ Liên hệ với {name}: {state} ¦ Kontak dengan {name}: {state}
+Les fiches confidentielles comptent-elles comme héritiers ? ¦ Hồ sơ bảo mật có được tính là người thừa kế không? ¦ Apakah profil rahasia dihitung sebagai ahli waris?
+Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Không: hồ sơ bảo mật bị loại khỏi phép tính, như thể không tồn tại; hồ sơ vụ việc sẽ báo điều đó. ¦ Tidak: profil rahasia dikeluarkan dari perhitungan, seolah tidak ada; berkas menandainya.
+Le défunt n’est pas un héritier à contacter. ¦ Người đã mất không phải là người thừa kế cần liên hệ. ¦ Almarhum bukan ahli waris yang perlu dihubungi.
+⚖️ Un doute sur la loi ? ¦ ⚖️ Phân vân về luật? ¦ ⚖️ Ragu soal hukum?
+⚖️ Un doute ? ¦ ⚖️ Phân vân? ¦ ⚖️ Ragu?
+⚖️ UN DOUTE SUR LA LOI ? ¦ ⚖️ PHÂN VÂN VỀ LUẬT? ¦ ⚖️ RAGU SOAL HUKUM?
+Chercher sur un site officiel ¦ Tìm trên một trang chính thức ¦ Cari di situs resmi
+✍️ Noter dans le dossier ¦ ✍️ Ghi vào hồ sơ ¦ ✍️ Catat di berkas
+Ton problème, avec tes mots ¦ Vấn đề của bạn, bằng lời của bạn ¦ Masalahmu, dengan kata-katamu sendiri
+ex. un héritier refuse de répondre · délai pour renoncer à une succession ¦ vd. một người thừa kế từ chối trả lời · thời hạn từ chối nhận di sản ¦ mis. seorang ahli waris menolak menjawab · batas waktu untuk menolak warisan
+N’écris pas de nom : la question part sur internet. ¦ Đừng viết tên: câu hỏi sẽ được gửi lên internet. ¦ Jangan tulis nama: pertanyaanmu dikirim ke internet.
+🏛 Chercher sur Service-public ¦ 🏛 Tìm trên Service-public ¦ 🏛 Cari di Service-public
+explique en français simple et donne le lien vers le bon article ¦ giải thích bằng tiếng Pháp đơn giản và đưa liên kết đến đúng điều luật ¦ menjelaskan dalam bahasa Prancis sederhana dan memberi tautan ke pasal yang tepat
+📜 Chercher sur Légifrance ¦ 📜 Tìm trên Légifrance ¦ 📜 Cari di Légifrance
+les articles des codes en vigueur ¦ các điều của các bộ luật đang có hiệu lực ¦ pasal-pasal dari kitab undang-undang yang berlaku
+L’app ne choisit aucun article : ta question est envoyée telle quelle au site officiel, qui s’ouvre dans ton navigateur. ¦ Ứng dụng không chọn điều luật nào: câu hỏi của bạn được gửi nguyên văn đến trang chính thức, mở trong trình duyệt của bạn. ¦ Aplikasi tidak memilih pasal apa pun: pertanyaanmu dikirim apa adanya ke situs resmi, yang terbuka di peramban kamu.
+✍️ Noter dans le dossier {n} ¦ ✍️ Ghi vào hồ sơ {n} ¦ ✍️ Catat di berkas {n}
+Lien de l’article ou de la fiche (facultatif) ¦ Liên kết đến điều luật hoặc trang (không bắt buộc) ¦ Tautan ke pasal atau halaman (opsional)
+Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Chỉ địa chỉ https:// của Légifrance, Service-public hoặc EUR-Lex. ¦ Hanya alamat https:// dari Légifrance, Service-public, atau EUR-Lex.
+Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Liên kết bị từ chối: chỉ địa chỉ https:// của Légifrance, Service-public hoặc EUR-Lex. ¦ Tautan ditolak: hanya alamat https:// dari Légifrance, Service-public, atau EUR-Lex.
+Noté au journal du dossier {n}. ¦ Đã ghi vào nhật ký hồ sơ {n}. ¦ Dicatat di jurnal berkas {n}.
+Écris d’abord ta question. ¦ Hãy viết câu hỏi trước. ¦ Tulis dulu pertanyaanmu.
+# ⚖️ Outils du successoral (⏱ 🔔 📋 🧾 📊 ✉️) et ＋ Ajouter un onglet (docs/design/onglets-et-successoral-outils.html)
+⏱ Compter le temps passé sur ce dossier ¦ ⏱ Đếm thời gian dành cho hồ sơ này ¦ ⏱ Hitung waktu untuk berkas ini
+{n} min ¦ {n} phút ¦ {n} mnt
+⏸️ Pause ¦ ⏸️ Tạm dừng ¦ ⏸️ Jeda
+▶️ Reprendre ¦ ▶️ Tiếp tục ¦ ▶️ Lanjutkan
+⏹️ Arrêter et noter ¦ ⏹️ Dừng và ghi lại ¦ ⏹️ Hentikan dan catat
+Moins d’une minute : rien à noter. ¦ Chưa tới một phút: không có gì để ghi. ¦ Kurang dari semenit: tidak ada yang dicatat.
+Noter le temps passé ¦ Ghi lại thời gian đã dành ¦ Catat waktu yang dipakai
+Noter {t} ¦ Ghi {t} ¦ Catat {t}
+Proposé d’après les onglets ouverts ; à corriger si besoin. Date : {d}. ¦ Đề xuất theo các thẻ đã mở; sửa lại nếu cần. Ngày: {d}. ¦ Diusulkan dari tab yang kamu buka; perbaiki bila perlu. Tanggal: {d}.
+Minuit passé : une ligne par jour. ¦ Qua nửa đêm: mỗi ngày một dòng. ¦ Lewat tengah malam: satu baris per hari.
+Jeter ce temps ¦ Bỏ thời gian này ¦ Buang waktu ini
+Jeter ce temps ? ¦ Bỏ thời gian này? ¦ Buang waktu ini?
+Jeter ¦ Bỏ ¦ Buang
+{t} d’affilée : c’est bien ça ? ¦ {t} liền một mạch: đúng không? ¦ {t} berturut-turut: benar?
+Plus de 10 h d’affilée ¦ Hơn 10 giờ liền một mạch ¦ Lebih dari 10 jam berturut-turut
+Noter quand même ¦ Vẫn ghi ¦ Tetap catat
+⏱ {t} notées dans le dossier {n} ¦ ⏱ Đã ghi {t} vào hồ sơ {n} ¦ ⏱ {t} dicatat di berkas {n}
+Le chronomètre compte pour {n}. ¦ Đồng hồ bấm giờ đang đếm cho {n}. ¦ Stopwatch menghitung untuk {n}.
+⏹️ Noter et passer à {n} ¦ ⏹️ Ghi lại và chuyển sang {n} ¦ ⏹️ Catat dan pindah ke {n}
+Continuer sur {n} ¦ Tiếp tục với {n} ¦ Lanjut dengan {n}
+Rien touché depuis 10 min : chronomètre en pause à {h}. ¦ Không chạm vào gì trong 10 phút: đồng hồ bấm giờ tạm dừng lúc {h}. ¦ Tidak ada yang disentuh selama 10 mnt: stopwatch dijeda pukul {h}.
+Compter aussi ces 10 min ¦ Đếm cả 10 phút này ¦ Hitung juga 10 mnt ini
+⏱ {n} : {t} comptées avant la fermeture. ¦ ⏱ {n}: đã đếm {t} trước khi đóng. ¦ ⏱ {n}: {t} dihitung sebelum aplikasi ditutup.
+Noter ¦ Ghi lại ¦ Catat
+Échéances du jour : {n} à faire (retards et aujourd’hui) ¦ Hạn trong ngày: {n} việc cần làm (trễ và hôm nay) ¦ Tenggat hari ini: {n} yang harus dikerjakan (terlambat dan hari ini)
+🔔 Échéances du jour ¦ 🔔 Hạn trong ngày ¦ 🔔 Tenggat hari ini
+⏰ Rappel ¦ ⏰ Nhắc việc ¦ ⏰ Pengingat
+prévu le {d} ¦ dự kiến ngày {d} ¦ direncanakan {d}
+✓ Fait ¦ ✓ Đã xong ¦ ✓ Selesai
+⏭ Demain (ou lundi) ¦ ⏭ Ngày mai (hoặc thứ Hai) ¦ ⏭ Besok (atau Senin)
+↗ Ouvrir le dossier ¦ ↗ Mở hồ sơ ¦ ↗ Buka berkas
+voir ▾ ¦ xem ▾ ¦ lihat ▾
+Rien pour aujourd’hui. ¦ Hôm nay không có gì. ¦ Tidak ada untuk hari ini.
+Prochaine : {d} ({n}) ¦ Tiếp theo: {d} ({n}) ¦ Berikutnya: {d} ({n})
+🔔 À faire · {d} ¦ 🔔 Cần làm · {d} ¦ 🔔 Harus dikerjakan · {d}
+Cette généalogie ¦ Gia phả này ¦ Silsilah ini
+⚖️ {name} : impossible de lire les échéances ¦ ⚖️ {name}: không đọc được các hạn ¦ ⚖️ {name}: tenggat tidak dapat dibaca
+✓ fait · ⏭ demain / lundi · ↗ ouvre le dossier (change de généalogie si besoin) ¦ ✓ xong · ⏭ ngày mai / thứ Hai · ↗ mở hồ sơ (đổi gia phả nếu cần) ¦ ✓ selesai · ⏭ besok / Senin · ↗ membuka berkas (berganti silsilah bila perlu)
+Ajouter mes rappels ¦ Thêm nhắc việc của tôi ¦ Tambahkan pengingatku
+Bulle de l’ordinateur à l’ouverture de l’app ¦ Thông báo của máy tính khi mở ứng dụng ¦ Notifikasi komputer saat aplikasi dibuka
+🗓 Ma semaine ¦ 🗓 Tuần của tôi ¦ 🗓 Mingguku
+Reporté au {d} ¦ Đã hoãn đến {d} ¦ Ditunda ke {d}
+✓ Fait : {l} ¦ ✓ Đã xong: {l} ¦ ✓ Selesai: {l}
+Reporté au {d} : {l} ¦ Đã hoãn đến {d}: {l} ¦ Ditunda ke {d}: {l}
+Points prêts : {n} sur {m} ¦ Mục đã sẵn sàng: {n} / {m} ¦ Poin siap: {n} dari {m}
+À revoir : {n} ¦ Cần xem lại: {n} ¦ Perlu dicek: {n}
+Manque : {n} ¦ Còn thiếu: {n} ¦ Kurang: {n}
+📋 AVANT DE REMETTRE ¦ 📋 TRƯỚC KHI GIAO ¦ 📋 SEBELUM MENYERAHKAN
+Avant de remettre · {n} ¦ Trước khi giao · {n} ¦ Sebelum menyerahkan · {n}
+Passer à « Remis au notaire » ¦ Chuyển sang «Đã giao công chứng viên» ¦ Ubah ke «Diserahkan ke notaris»
+Ça avertit, ça n’empêche pas : tu peux remettre quand même, ce sera noté au journal. ¦ Chỉ cảnh báo, không ngăn cản: bạn vẫn có thể giao, việc này sẽ được ghi vào nhật ký. ¦ Hanya memperingatkan, tidak menghalangi: kamu tetap bisa menyerahkan, dan itu dicatat di jurnal.
+🖨 Imprimer quand même ¦ 🖨 Vẫn in ¦ 🖨 Tetap cetak
+Montant ¦ Số tiền ¦ Jumlah
+non signé ¦ chưa ký ¦ belum ditandatangani
+Commission ¦ Hoa hồng ¦ Komisi
+Reste à l’héritier ¦ Còn lại cho người thừa kế ¦ Sisa untuk ahli waris
+Arrondi au centime : chaque part est arrondie au centime inférieur, puis les centimes qui restent vont aux parts qui en ont perdu le plus. Le total tombe juste. ¦ Làm tròn đến xu: mỗi phần được làm tròn xuống đến xu, rồi số xu còn lại chia cho các phần bị mất nhiều nhất. Tổng khớp chính xác. ¦ Dibulatkan ke sen: setiap bagian dibulatkan ke bawah ke sen, lalu sen yang tersisa diberikan ke bagian yang paling banyak kehilangan. Totalnya pas.
+Tape l’actif net en euros pour voir la part de chacun. ¦ Nhập tài sản ròng bằng euro để xem phần của mỗi người. ¦ Ketik aset bersih dalam euro untuk melihat bagian setiap orang.
+Tape un montant en euros (ex. 187 450,00). ¦ Nhập một số tiền bằng euro (vd. 187 450,00). ¦ Ketik jumlah dalam euro (mis. 187 450,00).
+Plus d’un milliard d’euros : c’est bien ça ? ¦ Hơn một tỷ euro: đúng không? ¦ Lebih dari satu miliar euro: benar?
+Oui, calculer ¦ Đúng, tính ¦ Ya, hitung
+Si le conjoint choisit l’usufruit de la totalité : pas de montant en euros (sa valeur dépend de son âge, c’est un barème fiscal) ; demande la valeur au notaire, pour lui et pour les nus-propriétaires. ¦ Nếu người phối ngẫu chọn quyền hưởng dụng toàn bộ: không có số tiền bằng euro (giá trị tùy theo tuổi, đó là một bảng thuế); hãy hỏi công chứng viên giá trị, cho người đó và cho những người có quyền sở hữu không kèm hưởng dụng. ¦ Jika pasangan memilih hak pakai hasil atas seluruh warisan: tidak ada jumlah dalam euro (nilainya bergantung pada usia, itu tabel pajak); tanyakan nilainya ke notaris, untuk pasangan dan untuk pemilik tanpa hak pakai.
+Autre hypothèse, {h} ¦ Giả thuyết khác, {h} ¦ Hipotesis lain, {h}
+📊 Part de chacun en euros ¦ 📊 Phần của mỗi người bằng euro ¦ 📊 Bagian setiap orang dalam euro
+Fractions ¦ Phân số ¦ Pecahan
+💶 En euros ¦ 💶 Bằng euro ¦ 💶 Dalam euro
+⤓ Copier le tableau ¦ ⤓ Sao chép bảng ¦ ⤓ Salin tabel
+Actif net à partager (tapé par toi) ¦ Tài sản ròng cần chia (do bạn nhập) ¦ Aset bersih yang dibagi (diketik olehmu)
+D’après le notaire. Pas gardé : effacé quand tu fermes le dossier. ¦ Theo công chứng viên. Không lưu: bị xóa khi bạn đóng hồ sơ. ¦ Menurut notaris. Tidak disimpan: dihapus saat kamu menutup berkas.
+Hors droits de succession et frais : l’app ne calcule pas l’impôt. Ces montants sont un ordre d’idée, à faire vérifier par le notaire. ¦ Không gồm thuế thừa kế và chi phí: ứng dụng không tính thuế. Các số tiền này chỉ để tham khảo, cần công chứng viên kiểm tra. ¦ Tanpa pajak warisan dan biaya: aplikasi tidak menghitung pajak. Jumlah ini hanya gambaran, harus diperiksa notaris.
+Commission = le % écrit dans « ＋ Honoraires d’un contrat » × le montant, arrondie au centime le plus proche, sans TVA ajoutée ; reste = montant − commission. ¦ Hoa hồng = % ghi trong «＋ Thù lao hợp đồng» × số tiền, làm tròn đến xu gần nhất, không cộng thêm VAT; còn lại = số tiền − hoa hồng. ¦ Komisi = % yang ditulis di «＋ Honorarium kontrak» × jumlah, dibulatkan ke sen terdekat, tanpa tambahan PPN; sisa = jumlah − komisi.
+Tableau copié. ¦ Đã sao chép bảng. ¦ Tabel disalin.
+Parts en euros — {n} ¦ Các phần bằng euro — {n} ¦ Bagian dalam euro — {n}
+Parts en euros imprimées ¦ Đã in các phần bằng euro ¦ Bagian dalam euro dicetak
+✉️ Courrier à plusieurs… ¦ ✉️ Thư gửi nhiều người… ¦ ✉️ Surat ke beberapa orang…
+décoché ¦ đã bỏ chọn ¦ tidak dicentang
+déjà écrit le {d} ({k}) ¦ đã viết ngày {d} ({k}) ¦ sudah ditulis {d} ({k})
+✉️ Courriers en série · {n} ¦ ✉️ Thư hàng loạt · {n} ¦ ✉️ Surat massal · {n}
+Les héritiers dont l’existence n’est pas établie ne sont pas dans la liste. Les décochés peuvent être cochés à la main (une lettre sans adresse est alors imprimée sans bloc adresse). ¦ Những người thừa kế chưa xác lập được sự tồn tại không có trong danh sách. Người bị bỏ chọn có thể được chọn bằng tay (khi đó thư không địa chỉ được in không có khối địa chỉ). ¦ Ahli waris yang keberadaannya belum dipastikan tidak ada di daftar. Yang tidak dicentang bisa dicentang manual (surat tanpa alamat lalu dicetak tanpa blok alamat).
+La lettre · clic sur un champ pour l’insérer ¦ Thư · bấm vào một trường để chèn ¦ Surat · klik sebuah kolom untuk menyisipkannya
+{envoyé_le} : la date du courrier précédent à cet héritier ; {date} : la date d’envoi de celui-ci. ¦ {envoyé_le}: ngày của thư trước gửi người thừa kế này; {date}: ngày gửi thư này. ¦ {envoyé_le}: tanggal surat sebelumnya ke ahli waris ini; {date}: tanggal surat ini dikirim.
+Lettre précédente ¦ Thư trước ¦ Surat sebelumnya
+Lettre suivante ¦ Thư sau ¦ Surat berikutnya
+✎ Retoucher cette lettre ¦ ✎ Sửa thư này ¦ ✎ Ubah surat ini
+↺ Revenir au modèle ¦ ↺ Quay lại mẫu ¦ ↺ Kembali ke templat
+＋ Enregistrer comme modèle ¦ ＋ Lưu làm mẫu ¦ ＋ Simpan sebagai templat
+Lettres prêtes : {n} sur {m} ¦ Thư đã sẵn sàng: {n} / {m} ¦ Surat siap: {n} dari {m}
+Champ inconnu : {f} (ligne {l}). Corrige-le avant de ranger les lettres. ¦ Trường không xác định: {f} (dòng {l}). Hãy sửa trước khi lưu thư. ¦ Kolom tidak dikenal: {f} (baris {l}). Perbaiki sebelum mengarsipkan surat.
+🖨 Imprimer les {n} ¦ 🖨 In {n} thư ¦ 🖨 Cetak {n} surat
+Lettre {i} / {n} · {name} ¦ Thư {i} / {n} · {name} ¦ Surat {i} / {n} · {name}
+Champ vide : la ligne s’écrit sans le mot ¦ Trường trống: dòng được viết không có từ đó ¦ Kolom kosong: baris ditulis tanpa kata itu
+✎ modifiée à la main ¦ ✎ đã sửa bằng tay ¦ ✎ diubah manual
+Ton nom et ton adresse : Listes → Registre de courriers → ✉️ Lettres (expéditeur). ¦ Tên và địa chỉ của bạn: Danh sách → Sổ thư từ → ✉️ Thư (người gửi). ¦ Nama dan alamatmu: Daftar → Register surat → ✉️ Surat (pengirim).
+Mes modèles (aucun pour l’instant) ¦ Mẫu của tôi (chưa có) ¦ Templatku (belum ada)
+Remplacer ta lettre par ce modèle ? ¦ Thay thư của bạn bằng mẫu này? ¦ Ganti suratmu dengan templat ini?
+Changer de modèle ¦ Đổi mẫu ¦ Ganti templat
+Oublier les retouches de la lettre à {name} ? ¦ Bỏ các chỉnh sửa của thư gửi {name}? ¦ Lupakan perubahan surat untuk {name}?
+Revenir au modèle ¦ Quay lại mẫu ¦ Kembali ke templat
+Modèle « {name} » enregistré (Mes modèles, communs à tous les dossiers de cette généalogie) ¦ Đã lưu mẫu «{name}» (Mẫu của tôi, dùng chung cho mọi hồ sơ của gia phả này) ¦ Templat «{name}» disimpan (Templatku, dipakai bersama semua berkas di silsilah ini)
+Corrige d’abord le champ inconnu. ¦ Hãy sửa trường không xác định trước. ¦ Perbaiki dulu kolom yang tidak dikenal.
+Rangement : {n} sur {m} ¦ Đang lưu: {n} / {m} ¦ Mengarsipkan: {n} dari {m}
+{n} rangés dans le Registre de courriers, relance le {d} ¦ Đã lưu {n} vào Sổ thư từ, nhắc lại ngày {d} ¦ {n} diarsipkan di Register surat, pengingat {d}
+en main, cote non notée ¦ đã có, chưa ghi ký hiệu lưu trữ ¦ ada di tangan, kode arsip belum dicatat
+demandé le {d} ¦ đã xin ngày {d} ¦ diminta {d}
+demandé ¦ đã xin ¦ diminta
+acte à fournir ¦ cần cung cấp giấy tờ ¦ akta harus disediakan
+(commun, voir {n}) ¦ (chung, xem {n}) ¦ (bersama, lihat {n})
+CHAÎNE DE FILIATION ¦ CHUỖI HUYẾT THỐNG ¦ RANTAI KETURUNAN
+Calcul établi d’après les actes cités, sous réserve de vérification par le notaire. ¦ Tính toán dựa trên các giấy tờ đã nêu, chờ công chứng viên kiểm tra. ¦ Perhitungan berdasarkan akta yang disebut, dengan syarat diperiksa notaris.
+Code civil, articles cités pour ce dossier : art. {list}. ¦ Bộ luật Dân sự, các điều được nêu cho hồ sơ này: art. {list}. ¦ Kode Sipil, pasal yang disebut untuk berkas ini: art. {list}.
+N. = naissance, M. = mariage, D. = décès. ¦ S. = sinh, KH. = kết hôn, M. = mất. ¦ L. = lahir, N. = nikah, W. = wafat.
+Page {n} / {t} ¦ Trang {n} / {t} ¦ Halaman {n} / {t}
+Coche au moins une page. ¦ Hãy chọn ít nhất một trang. ¦ Centang setidaknya satu halaman.
+Tableau pour le notaire : PDF ({n} pages, avec chaîne par héritier) ¦ Bảng cho công chứng viên: PDF ({n} trang, có chuỗi của từng người thừa kế) ¦ Tabel untuk notaris: PDF ({n} halaman, dengan rantai setiap ahli waris)
+Tableau pour le notaire : PDF ({n} pages) ¦ Bảng cho công chứng viên: PDF ({n} trang) ¦ Tabel untuk notaris: PDF ({n} halaman)
+sans adresses ¦ không có địa chỉ ¦ tanpa alamat
+📋 Avant de remettre ¦ 📋 Trước khi giao ¦ 📋 Sebelum menyerahkan
+ça avertit, ça n’empêche pas ¦ chỉ cảnh báo, không ngăn cản ¦ hanya memperingatkan, tidak menghalangi
+Ce que contient le PDF ¦ PDF gồm những gì ¦ Isi PDF
+Compté par le chronomètre ¦ Do đồng hồ bấm giờ đếm ¦ Dihitung oleh stopwatch
+Taux horaire pour le relevé (facultatif, pas gardé) ¦ Đơn giá theo giờ cho bảng kê (tùy chọn, không lưu) ¦ Tarif per jam untuk rekap (opsional, tidak disimpan)
+€ / h ¦ € / giờ ¦ € / jam
+✎ Modifier la ligne ¦ ✎ Sửa dòng ¦ ✎ Ubah baris
+Ligne modifiée ¦ Đã sửa dòng ¦ Baris diubah
+Temps × taux horaire ({r} € / h) : {s} ¦ Thời gian × đơn giá theo giờ ({r} € / giờ): {s} ¦ Waktu × tarif per jam ({r} € / jam): {s}
+Ajouté depuis « ＋ Ajouter un onglet ». ¦ Được thêm từ «＋ Thêm thẻ». ¦ Ditambahkan dari «＋ Tambah tab».
+✓ Onglet « {name} » ajouté ¦ ✓ Đã thêm thẻ «{name}» ¦ ✓ Tab «{name}» ditambahkan
+Onglet « {name} » caché ¦ Đã ẩn thẻ «{name}» ¦ Tab «{name}» disembunyikan
+conseillé pour toi ¦ gợi ý cho bạn ¦ disarankan untukmu
+montré par ton usage ¦ hiện theo cách dùng của bạn ¦ ditampilkan oleh penggunaanmu
+Conseillés pour toi ¦ Gợi ý cho bạn ¦ Disarankan untukmu
+Tout le reste ▾ ¦ Mọi thứ khác ▾ ¦ Semua yang lain ▾
+Qu’est-ce que tu veux avoir sous la main ? ¦ Bạn muốn có gì trong tầm tay? ¦ Apa yang ingin kamu punya di dekatmu?
+Ton usage : {u} ¦ Cách dùng của bạn: {u} ¦ Penggunaanmu: {u}
+Chercher un onglet ¦ Tìm thẻ ¦ Cari tab
+🔍 Chercher un onglet… (courrier, acte, agenda) ¦ 🔍 Tìm thẻ… (thư, giấy tờ, lịch) ¦ 🔍 Cari tab… (surat, akta, agenda)
+Conseillés ({n}) ¦ Gợi ý ({n}) ¦ Disarankan ({n})
+Déjà dans le menu ({n}) ¦ Đã có trong menu ({n}) ¦ Sudah di menu ({n})
+Aucun onglet ne correspond. ¦ Không có thẻ nào khớp. ¦ Tidak ada tab yang cocok.
+Une carte cochée = l’onglet est dans le menu. Cocher l’ajoute à la fin du menu ; décocher le cache (un raccourci est caché, pas effacé). ¦ Thẻ được chọn = thẻ đó có trong menu. Chọn sẽ thêm vào cuối menu; bỏ chọn sẽ ẩn đi (lối tắt bị ẩn, không bị xóa). ¦ Kartu yang dicentang = tab ada di menu. Mencentang menambahkannya di akhir menu; menghapus centang menyembunyikannya (pintasan disembunyikan, tidak dihapus).
+↗ Faire un onglet à moi (Éditeur d’onglets) ¦ ↗ Tạo thẻ của riêng tôi (Trình chỉnh sửa thẻ) ¦ ↗ Buat tab milikku (Editor tab)
+MENU ¦ MENU ¦ MENU
+＋ Ajouter un onglet ¦ ＋ Thêm thẻ ¦ ＋ Tambah tab
+Ajouter un onglet ¦ Thêm thẻ ¦ Tambah tab
+＋ Ajouter un onglet… ¦ ＋ Thêm thẻ… ¦ ＋ Tambah tab…
+Montrer le ＋ au bout du menu ¦ Hiện ＋ ở cuối menu ¦ Tampilkan ＋ di akhir menu
+Retirer ce raccourci du menu (un onglet de l’app ne se retire pas : il se cache) ¦ Gỡ lối tắt này khỏi menu (thẻ của ứng dụng không bị gỡ: chỉ bị ẩn) ¦ Hapus pintasan ini dari menu (tab aplikasi tidak dihapus: hanya disembunyikan)
+Onglet « {name} » retiré du menu ¦ Đã gỡ thẻ «{name}» khỏi menu ¦ Tab «{name}» dihapus dari menu
+Le ＋ est au bout du menu ¦ ＋ ở cuối menu ¦ ＋ ada di akhir menu
+Le ＋ n’est plus au bout du menu ¦ ＋ không còn ở cuối menu ¦ ＋ tidak lagi di akhir menu
+Recherches : {what} ¦ Tìm kiếm: {what} ¦ Penelusuran: {what}
+Recherches ¦ Tìm kiếm ¦ Penelusuran
+Acte de décès de {name} en main ¦ Đã có giấy chứng tử của {name} ¦ Akta kematian {name} sudah ada
+Acte de décès de {name} pas en main ¦ Thiếu giấy chứng tử của {name} ¦ Akta kematian {name} belum ada
+demandé, pas encore reçu ¦ đã xin, chưa nhận được ¦ diminta, belum diterima
+Arbre de dévolution complet ¦ Cây thừa kế đầy đủ ¦ Pohon pewarisan lengkap
+Aucune branche à chercher. ¦ Không còn nhánh nào cần tìm. ¦ Tidak ada cabang yang perlu dicari.
+Branches encore à chercher : {n} ¦ Nhánh còn cần tìm: {n} ¦ Cabang yang masih perlu dicari: {n}
+Héritiers dont l’existence n’est pas établie : {n} ¦ Người thừa kế chưa xác lập được sự tồn tại: {n} ¦ Ahli waris yang keberadaannya belum dipastikan: {n}
+Liens prouvés par aucun acte : {n} ¦ Mối liên hệ chưa có giấy tờ chứng minh: {n} ¦ Hubungan yang tidak dibuktikan akta apa pun: {n}
+{what} (relie {who} au défunt) ¦ {what} (nối {who} với người đã mất) ¦ {what} (menghubungkan {who} dengan almarhum)
+Chaque lien est prouvé par un acte ¦ Mỗi mối liên hệ đều có giấy tờ chứng minh ¦ Setiap hubungan dibuktikan oleh akta
+Actes demandés, pas encore reçus : {n} ¦ Giấy tờ đã xin, chưa nhận được: {n} ¦ Akta yang diminta, belum diterima: {n}
+{what} · demandé le {d} ¦ {what} · đã xin ngày {d} ¦ {what} · diminta {d}
+(courrier n° {n}) ¦ (thư số {n}) ¦ (surat no. {n})
+Adresses des héritiers vivants : {n} sur {m} ¦ Địa chỉ của người thừa kế còn sống: {n} / {m} ¦ Alamat ahli waris yang masih hidup: {n} dari {m}
+Aucun héritier vivant à joindre ¦ Không có người thừa kế còn sống nào cần liên hệ ¦ Tidak ada ahli waris hidup yang perlu dihubungi
+Contrats signés (ou refus noté) : {n} sur {m} ¦ Hợp đồng đã ký (hoặc đã ghi từ chối): {n} / {m} ¦ Kontrak ditandatangani (atau penolakan dicatat): {n} dari {m}
+Aucun contrat à faire signer ¦ Không có hợp đồng nào cần ký ¦ Tidak ada kontrak yang perlu ditandatangani
+Contrats pas encore signés : {n} ¦ Hợp đồng chưa ký: {n} ¦ Kontrak yang belum ditandatangani: {n}
+{name} a répondu « oui », pas de date de signature ¦ {name} đã trả lời «có», chưa có ngày ký ¦ {name} menjawab «ya», belum ada tanggal tanda tangan
+Héritiers introuvables ou silencieux : {n} ¦ Người thừa kế không tìm được hoặc không trả lời: {n} ¦ Ahli waris yang tidak ditemukan atau tidak menjawab: {n}
+Parts : le total fait bien 1 ¦ Các phần: tổng đúng bằng 1 ¦ Bagian: totalnya memang 1
+Les parts ne totalisent pas 1 : à revoir ¦ Các phần không cộng thành 1: cần xem lại ¦ Bagian tidak berjumlah 1: perlu dicek
+Échéances en retard : {n} ¦ Hạn bị trễ: {n} ¦ Tenggat terlambat: {n}
+Aucune échéance en retard ¦ Không có hạn nào bị trễ ¦ Tidak ada tenggat yang terlambat
+Remis au notaire avec {miss} manque(s) et {warn} point(s) à revoir ({what}) ¦ Đã giao công chứng viên, còn thiếu: {miss}, cần xem lại: {warn} ({what}) ¦ Diserahkan ke notaris, kurang: {miss}, perlu dicek: {warn} ({what})
+Madame ¦ Bà ¦ Ibu
+Monsieur ¦ Ông ¦ Bapak
+Tes photos, actes, lettres de A à Z, rangés en dossiers. ¦ Ảnh, giấy tờ, thư của bạn từ A đến Z, xếp vào thư mục. ¦ Foto, akta, suratmu dari A sampai Z, ditata dalam map.
+Lettres à ouvrir plus tard, recettes, musée de famille. ¦ Thư để mở sau, công thức nấu ăn, bảo tàng gia đình. ¦ Surat untuk dibuka nanti, resep, museum keluarga.
+Fiches thématiques : un métier, une guerre, un village. ¦ Thẻ chủ đề: một nghề, một cuộc chiến, một ngôi làng. ¦ Kartu tematik: sebuah profesi, sebuah perang, sebuah desa.
+Tes correspondances ADN et leurs liens. ¦ Các kết quả trùng khớp ADN và mối liên hệ của chúng. ¦ Kecocokan DNA-mu dan hubungannya.
+Les œuvres d’un artiste, albums, expositions. ¦ Tác phẩm của một nghệ sĩ, album, triển lãm. ¦ Karya seorang seniman, album, pameran.
+Pedigree, portées. (Suivi des animaux : à part.) ¦ Phả hệ, lứa đẻ. (Theo dõi động vật: riêng.) ¦ Silsilah hewan, perindukan. (Pemantauan hewan: terpisah.)
+Baguage, puces, observations, trajets. ¦ Đeo vòng, chip, quan sát, hành trình. ¦ Cincin penanda, cip, pengamatan, rute.
+Dossiers de succession, pour un notaire. ¦ Hồ sơ thừa kế, cho công chứng viên. ¦ Berkas warisan, untuk notaris.
+Le Registre de courriers : demandes d’actes, relances, réponses. ¦ Sổ thư từ: xin giấy tờ, nhắc lại, trả lời. ¦ Register surat: permintaan akta, pengingat, jawaban.
+Listes → Archives et sources → Registre de courriers ¦ Danh sách → Lưu trữ và nguồn → Sổ thư từ ¦ Daftar → Arsip dan sumber → Register surat
+Tes actes recopiés, mot à mot. ¦ Giấy tờ bạn đã chép lại, từng chữ một. ¦ Akta yang kamu salin, kata demi kata.
+Listes → Archives et sources ¦ Danh sách → Lưu trữ và nguồn ¦ Daftar → Arsip dan sumber
+Visites, rendez-vous, relances, à la semaine. ¦ Chuyến thăm, cuộc hẹn, nhắc lại, theo tuần. ¦ Kunjungan, janji temu, pengingat, per minggu.
+Listes → Recherche et organisation ¦ Danh sách → Nghiên cứu và tổ chức ¦ Daftar → Penelitian dan pengorganisasian
+Les choses à faire, avec leur date. ¦ Những việc cần làm, kèm ngày. ¦ Hal yang harus dikerjakan, beserta tanggalnya.
+Toutes les images, sons, vidéos en tableau. ¦ Tất cả hình ảnh, âm thanh, video trong một bảng. ¦ Semua gambar, suara, video dalam tabel.
+Listes → Médias et documents ¦ Danh sách → Phương tiện và tài liệu ¦ Daftar → Media dan dokumen
+Questionnaires pour recueillir les souvenirs. ¦ Bảng hỏi để thu thập kỷ niệm. ¦ Kuesioner untuk mengumpulkan kenangan.
+Les maisons, pièce par pièce, et qui y a vécu. ¦ Những ngôi nhà, từng phòng một, và ai đã sống ở đó. ¦ Rumah-rumah, ruang demi ruang, dan siapa yang tinggal di sana.
+Listes → Lieux et maisons ¦ Danh sách → Địa điểm và nhà ¦ Daftar → Tempat dan rumah
+Adresses et contacts des cousins vivants. ¦ Địa chỉ và liên lạc của các anh chị em họ còn sống. ¦ Alamat dan kontak sepupu yang masih hidup.
+Listes → Personnes et familles ¦ Danh sách → Người và gia đình ¦ Daftar → Orang dan keluarga
+Les dépôts, leurs cotes, leurs horaires. ¦ Các kho lưu trữ, ký hiệu, giờ mở cửa. ¦ Tempat arsip, kode arsipnya, jam bukanya.
+Le planificateur : quoi consulter, où, quand. ¦ Trình lập kế hoạch: xem gì, ở đâu, khi nào. ¦ Perencana: apa yang dilihat, di mana, kapan.
+Qui a hérité de quoi d’après les actes anciens. ¦ Ai được thừa kế gì theo giấy tờ cũ. ¦ Siapa mewarisi apa menurut akta lama.
+Les bons sites pour la personne ouverte. ¦ Các trang web phù hợp cho người đang mở. ¦ Situs yang tepat untuk orang yang sedang dibuka.
+Recherche → Type de recherche ¦ Tìm kiếm → Loại tìm kiếm ¦ Pencarian → Jenis pencarian
+Trouver et fusionner les fiches en double. ¦ Tìm và gộp các hồ sơ trùng. ¦ Temukan dan gabungkan catatan ganda.
+Réglages → Fusion de doublons ¦ Cài đặt → Gộp bản trùng ¦ Pengaturan → Penggabungan duplikat
+Dates impossibles, liens bizarres. ¦ Ngày không thể có, mối liên hệ lạ. ¦ Tanggal mustahil, hubungan aneh.
+Réglages → Contrôle de la base ¦ Cài đặt → Kiểm tra cơ sở dữ liệu ¦ Pengaturan → Pemeriksaan basis data
+Le nom étudié ¦ Họ đang nghiên cứu ¦ Nama keluarga yang diteliti
+Les porteurs d’un nom, ses variantes. ¦ Những người mang họ, các biến thể. ¦ Penyandang nama keluarga, variannya.
+Graphiques → statistique des noms ¦ Biểu đồ → thống kê họ ¦ Grafik → statistik nama keluarga
+L’entreprise ¦ Doanh nghiệp ¦ Perusahaan
+Employeurs, salariés, membres. ¦ Chủ lao động, nhân viên, thành viên. ¦ Pemberi kerja, karyawan, anggota.
+Listes → Employeurs ¦ Danh sách → Chủ lao động ¦ Daftar → Pemberi kerja
+Des parties de l’app, cachées au départ ¦ Các phần của ứng dụng, ban đầu bị ẩn ¦ Bagian aplikasi, tersembunyi di awal
+Elles existent déjà : cocher les montre dans le menu. ¦ Chúng đã có sẵn: chọn để hiện chúng trong menu. ¦ Sudah ada: mencentangnya menampilkannya di menu.
+Un raccourci vers une liste ¦ Lối tắt tới một danh sách ¦ Pintasan ke sebuah daftar
+Il devient un « onglet à soi » (Éditeur d’onglets). ¦ Nó thành «thẻ của riêng bạn» (Trình chỉnh sửa thẻ). ¦ Menjadi «tab milikmu» (Editor tab).
+Un raccourci vers un outil ¦ Lối tắt tới một công cụ ¦ Pintasan ke sebuah alat
+Chaîne par héritier ¦ Chuỗi của từng người thừa kế ¦ Rantai setiap ahli waris
+✉️ Contactés ¦ ✉️ Đã liên hệ ¦ ✉️ Dihubungi
+📇 Répertoire des vivants ¦ 📇 Danh bạ người còn sống ¦ 📇 Direktori orang yang masih hidup
+Échéances du jour (usage successoral seulement) ¦ Hạn trong ngày (chỉ cho cách dùng thừa kế) ¦ Tenggat hari ini (hanya penggunaan pewarisan)
+Ce dossier est clos : rien ne s’y note. ¦ Hồ sơ này đã đóng: không ghi gì thêm vào đó. ¦ Berkas ini sudah ditutup: tidak ada yang dicatat lagi di dalamnya.
+Donne un nom au modèle. ¦ Hãy đặt tên cho mẫu. ¦ Beri nama templat itu.
+Trop de lettres d’un coup (60 au plus). ¦ Quá nhiều thư cùng lúc (tối đa 60). ¦ Terlalu banyak surat sekaligus (paling banyak 60).
+Échéances du jour ¦ Hạn trong ngày ¦ Tenggat hari ini

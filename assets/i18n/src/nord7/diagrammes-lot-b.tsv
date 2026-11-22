@@ -1,0 +1,233 @@
+fr ¦ is
+# Zone « diagrammes-lot-b » : diagramme de Lexis, ternaire, chandeliers, courbe avec marge, horizon, dendrogramme, durée des générations, couverture des sources, trajectoires de vie, alluvial (heritage-diagram-lot-b.js et réglages de heritage-diagram-plus/vie/famille.js, heritage-diagrams-render.js)
+=vie ¦ líf|líf
+=période ¦ tímabil|tímabil
+Célibataire ¦ Ógift(ur)
+Marié(e) ¦ Gift(ur)
+Remarié(e) ¦ Gift(ur) aftur
+Veuf ou veuve ¦ Ekkill eða ekkja
+Divorcé(e) ¦ Fráskilin(n)
+Décédé(e) ¦ Látin(n)
+État civil inconnu ¦ Hjúskaparstaða óþekkt
+Métier inconnu ¦ Starf óþekkt
+Pays inconnu ¦ Land óþekkt
+Autres états ¦ Önnur staða
+Sexe inconnu ¦ Kyn óþekkt
+Départ (autre commune) ¦ Brottflutningur (annað sveitarfélag)
+Ajoute des personnes : le nom, la naissance et le décès (années ou dates). ¦ Bættu við fólki: nafni, fæðingu og andláti (ár eða dagsetningar).
+Diagramme de Lexis : {n}, de {a} à {b}. ¦ Lexis-graf: {n}, frá {a} til {b}.
+Choléra ¦ Kólera
+Guerre de 1870 ¦ Stríðið 1870
+Grande Guerre ¦ Fyrri heimsstyrjöldin
+📐 Les vies de ma base ¦ 📐 Lífin í gagnagrunninum mínum
+Chaque vie devient une diagonale, de la naissance (âge 0) au décès ; les mariages, les naissances des enfants et les départs posés dessus. ¦ Hvert líf verður að hornalínu, frá fæðingu (aldur 0) til andláts; á henni hjónabönd, fæðingar barna og brottflutningar.
+Combien de vies au plus ¦ Mest hversu mörg líf
+Une par nom de famille ¦ Einn á hvert ættarnafn
+Naissances des enfants ¦ Fæðingar barnanna
+Départs (première commune autre que celle de naissance) ¦ Brottflutningar (fyrsta sveitarfélag utan fæðingarstaðar)
+Bandes historiques (guerres, épidémies) ¦ Sögulegir borðar (stríð, farsóttir)
+Personne avec une date de naissance dans ce groupe. ¦ Enginn í þessum hópi er með fæðingardag.
+Diagramme de Lexis ¦ Lexis-graf
+Diagramme de Lexis (âge × année : une vie = une diagonale) ¦ Lexis-graf (aldur × ár: eitt líf = ein hornalína)
+Les années en bas, les âges à gauche : chaque vie monte en diagonale de sa naissance à son décès ; les mariages, les enfants, les départs et les grandes crises s’y lisent d’un coup d’œil. ¦ Árin neðst, aldurinn til vinstri: hvert líf rís á ská frá fæðingu til dauða; hjónabönd, börn, brottflutningar og stórar kreppur sjást í hendingu.
+Les vies ¦ Lífin
+Les vies de la famille {name} ¦ Líf {name}-fjölskyldunnar
+Personne (même nom que ci-dessus) ¦ Manneskja (sama nafn og að ofan)
+Les marques (sur la vie de la personne) ¦ Merkingar (á lífi manneskjunnar)
+Bandes historiques ¦ Sögulegir borðar
+Groupe (couleur) ¦ Hópur (litur)
+Couleur de chaque groupe (facultatif) ¦ Litur hvers hóps (valfrjálst)
+Âge au plus ¦ Aldur mest
+Couleur des vies ¦ Litur lífanna
+Homme / femme ¦ Karl / kona
+Montrer les marques ¦ Sýna merkingar
+Taille des marques ¦ Stærð merkinga
+Nom des bandes ¦ Heiti borða
+Diagonales des générations ¦ Hornalínur kynslóða
+Nom au bout de chaque vie ¦ Nafn við enda hvers lífs
+Épaisseur des vies ¦ Þykkt lífanna
+Ajoute des points : un nom et ses trois parts (des nombres ou des %). ¦ Bættu við punktum: nafni og þremur hlutum þess (tölur eða %).
+Part A ¦ Hluti A
+Part B ¦ Hluti B
+Part C ¦ Hluti C
+Diagramme ternaire : {n} ({a}, {b}, {c}). ¦ Þríhyrningsgraf: {n} ({a}, {b}, {c}).
+Agriculture ¦ Landbúnaður
+Artisanat et industrie ¦ Handverk og iðnaður
+Commerce et services ¦ Verslun og þjónusta
+Agriculture et forêt ¦ Landbúnaður og skógrækt
+Artisanat ¦ Handverk
+Industrie, mines ¦ Iðnaður, námur
+Transports et mer ¦ Samgöngur og sjór
+Services, domestiques ¦ Þjónusta, hjú
+Armée et police ¦ Her og lögregla
+Clergé ¦ Prestastétt
+Professions libérales, école, administration ¦ Sérfræðistörf, skóli, stjórnsýsla
+Rentiers, rangs et statuts ¦ Lífeyrisþegar, stéttir og staða
+Au foyer, sans profession ¦ Heima, án starfs
+Autre métier ¦ Annað starf
+Tous les autres métiers ¦ Öll önnur störf
+🔺 Les métiers de ma base ¦ 🔺 Störfin í gagnagrunninum mínum
+Les métiers (fiche, événements « Profession », recensements) rangés en grands secteurs ; un point par commune de naissance, par décennie ou par famille, placé selon ses trois parts. ¦ Störf (spjald, atburðir „Starf“, manntöl) flokkuð í stóra geira; einn punktur á fæðingarstað, áratug eða fjölskyldu, staðsettur eftir þremur hlutum sínum.
+Un point par ¦ Einn punktur á
+Décennie de naissance (reliées dans le temps) ¦ Fæðingaráratugur (tengdir í tíma)
+Combien de points au plus ¦ Mest hversu margir punktar
+Part du haut ¦ Efri hluti
+Part de gauche ¦ Vinstri hluti
+Part de droite ¦ Hægri hluti
+« Tous les autres métiers » ne peut servir qu’une fois. ¦ „Öll önnur störf“ má aðeins nota einu sinni.
+Décennies ¦ Áratugir
+Aucun métier connu pour ces personnes. ¦ Ekkert þekkt starf fyrir þetta fólk.
+Les métiers de ma base, en trois parts ¦ Störfin í gagnagrunninum mínum í þremur hlutum
+Les métiers de trois villages, siècle par siècle ¦ Störf þriggja þorpa, öld fyrir öld
+Diagramme ternaire (trois parts qui font 100 %) ¦ Þríhyrningsgraf (þrír hlutar sem gera 100%)
+Parts ¦ Hlutar
+Un triangle : chaque point a trois parts (par exemple agriculture, artisanat, commerce) ; plus il est près d’un coin, plus cette part est grande. ¦ Þríhyrningur: hver punktur hefur þrjá hluta (t.d. landbúnað, handverk, verslun); því nær horni, því stærri er sá hluti.
+Les points (trois parts chacun) ¦ Punktarnir (þrír hlutar hver)
+Groupe (couleur, points reliés) ¦ Hópur (litur, tengdir punktar)
+Ordre (année…) ¦ Röð (ár…)
+Nom de la part du haut ¦ Heiti efri hluta
+Nom de la part de gauche ¦ Heiti vinstri hluta
+Nom de la part de droite ¦ Heiti hægri hluta
+Couleur du haut ¦ Litur efst
+Couleur de gauche ¦ Litur til vinstri
+Couleur de droite ¦ Litur til hægri
+Tous les 10 % ¦ Á 10% fresti
+Tous les 20 % ¦ Á 20% fresti
+Sans grille ¦ Án hnitanets
+Une par point ¦ Einn á hvern punkt
+Selon le total ¦ Eftir heildinni
+Relier les points d’un groupe dans l’ordre ¦ Tengja punkta hóps í röð
+Noms des points ¦ Heiti punkta
+Ajoute des périodes : la date, le prix d’ouverture, de clôture, le plus bas et le plus haut. ¦ Bættu við tímabilum: dagsetningu, opnunar-, lokunar-, lægsta og hæsta verði.
+ouverture ¦ opnun
+clôture ¦ lokun
+plus bas ¦ lægst
+plus haut ¦ hæst
+Hausse (clôture plus haute) ¦ Hækkun (hærri lokun)
+Baisse (clôture plus basse) ¦ Lækkun (lægri lokun)
+Moyenne mobile sur {n} périodes ¦ Hlaupandi meðaltal yfir {n} tímabil
+Chandeliers : {n}, de {a} à {b} ({p} %). ¦ Kerti: {n}, frá {a} til {b} ({p}%).
+Prix du setier de blé au marché de {name} ¦ Verð á tunnu af hveiti á markaðnum í {name}
+Disette ¦ Hallæri
+Guerre des farines ¦ Mjölstríðið
+Chandeliers (prix du blé, mercuriales) ¦ Kerti (hveitiverð, markaðsverð)
+Pour chaque période : le prix au début (ouverture), à la fin (clôture), le plus bas et le plus haut. Vert si le prix monte, rouge s’il baisse ; les années de disette en bandes. ¦ Fyrir hvert tímabil: verðið í upphafi (opnun), í lokin (lokun), lægsta og hæsta. Grænt ef verðið hækkar, rautt ef það lækkar; hallærisár sem borðar.
+Les périodes (date, ouverture, clôture, plus bas, plus haut) ¦ Tímabilin (dagsetning, opnun, lokun, lægst, hæst)
+Date ou période ¦ Dagsetning eða tímabil
+Plus bas ¦ Lægst
+Plus haut ¦ Hæst
+Les années à part (disette, guerre…) ¦ Sérstök ár (hallæri, stríð…)
+Autre unité (écrite) ¦ Önnur eining (skrifuð)
+livres ¦ livrur
+sols ¦ sols
+deniers ¦ deniers
+Couleur de la hausse ¦ Litur hækkunar
+Couleur de la baisse ¦ Litur lækkunar
+Hausse en creux (bougie vide) ¦ Hækkun hol (tómt kerti)
+Moyenne mobile (périodes, 0 = non) ¦ Hlaupandi meðaltal (tímabil, 0 = ekkert)
+Couleur de la moyenne ¦ Litur meðaltals
+Années à part en bandes ¦ Sérstök ár sem borðar
+Largeur des bougies ¦ Breidd kerta
+Âge au premier mariage ¦ Aldur við fyrsta hjónaband
+Âge au premier enfant ¦ Aldur við fyrsta barn
+± un écart-type ¦ ± eitt staðalfrávik
+intervalle à 95 % ¦ 95% bil
+mes ancêtres ¦ forfeður mínir
+📏 Moyenne et marge : {x} ¦ 📏 Meðaltal og vikmörk: {x}
+Pas assez de personnes datées (au moins 3 par période). ¦ Of fáir með dagsetningu (minnst 3 á tímabil).
+Basse ¦ Lág
+Haute ¦ Há
+{x} : moyenne et marge ¦ {x}: meðaltal og vikmörk
+Marge : un écart-type de part et d’autre, par quart de siècle de naissance ¦ Vikmörk: eitt staðalfrávik til hvorrar handar, eftir aldarfjórðungi fæðingar
+Marge : intervalle de confiance à 95 % de la moyenne, par quart de siècle de naissance ¦ Vikmörk: 95% öryggisbil meðaltals, eftir aldarfjórðungi fæðingar
+Marge (basse – haute) ¦ Vikmörk (lág – há)
+Marge (±) ¦ Vikmörk (±)
+Fourchette (marge autour de la courbe) ¦ Bil (vikmörk um ferilinn)
+Deux colonnes : basse et haute ¦ Tveir dálkar: lág og há
+Une colonne ± écart ¦ Einn dálkur ± frávik
+Colonne basse (n°) ¦ Lágur dálkur (nr.)
+Colonne haute (n°) ¦ Hár dálkur (nr.)
+Colonne de l’écart (n°) ¦ Dálkur fráviks (nr.)
+Autour de la colonne (n°) ¦ Umhverfis dálk (nr.)
+Opacité de la marge ¦ Ógegnsæi vikmarka
+Couleur de la marge ¦ Litur vikmarka
+Axe : minimum ¦ Ás: lágmark
+Axe : maximum ¦ Ás: hámark
+(axe de droite) ¦ (hægri ás)
+Clôture ¦ Lokun
+{name} : de {a} à {b}, le plus en {peak} ({v}) ¦ {name}: frá {a} til {b}, mest {peak} ({v})
+Le plus bas ¦ Lægst
+Le plus haut ¦ Hæst
+Négatif (replié) ¦ Neikvætt (brotið)
+Graphique en horizon : {s} séries sur {n} périodes. ¦ Sjóndeildarrit: {s} raðir yfir {n} tímabil.
+Horizon (bandes repliées) ¦ Sjóndeildarhringur (brotnir borðar)
+Collines ¦ Hæðir
+Nombre de couches ¦ Fjöldi laga
+Teinte des négatifs ¦ Litblær neikvæðra
+Chevauchement ¦ Skörun
+Courbes douces ¦ Mjúkir ferlar
+Trait blanc autour ¦ Hvít útlína
+Arbre de regroupement à gauche (dendrogramme) ¦ Klasatré til vinstri (dendrógram)
+Groupes de couleur ¦ Litahópar
+Les branches de l’arbre ¦ Greinar trésins
+Cacher les noms des correspondances ¦ Fela nöfn samsvarana
+Durée des générations ¦ Lengd kynslóða
+Durée des générations — {name} ¦ Lengd kynslóða — {name}
+Lignée paternelle : une génération = {n} ans en moyenne ¦ Föðurlína: ein kynslóð = {n} ár að meðaltali
+Lignée maternelle : une génération = {n} ans en moyenne ¦ Móðurlína: ein kynslóð = {n} ár að meðaltali
+moyenne {n} ans ¦ meðaltal {n} ár
+Toutes les naissances du groupe ¦ Allar fæðingar í hópnum
+Seulement la lignée paternelle directe (père du père…) ¦ Aðeins bein föðurlína (faðir föðurins…)
+Seulement la lignée maternelle directe (mère de la mère…) ¦ Aðeins bein móðurlína (móðir móðurinnar…)
+Les deux lignées directes ¦ Báðar beinu línurnar
+La personne dont on suit les lignées ¦ Manneskjan sem línurnar eru raktar frá
+Aucune génération datée dans cette lignée (il faut la naissance de l’enfant et celle du parent). ¦ Engin dagsett kynslóð í þessari línu (fæðing barns og foreldris þarf).
+Génération (lignée) ¦ Kynslóð (lína)
+Paternelle ¦ Föður
+Maternelle ¦ Móður
+Relier les points d’une lignée ¦ Tengja punkta línu
+Ligne de repère ¦ Viðmiðunarlína
+Les générations (lignées) ¦ Kynslóðir (línur)
+Pas attendu ¦ Ekki vænst
+Manquant ¦ Vantar
+Ajoute des ancêtres : le numéro Sosa, le nom et, pour chaque acte, sourcé, sans source ou manquant. ¦ Bættu við forfeðrum: Sosa-númeri, nafni og fyrir hverja færslu: með heimild, án heimildar eða vantar.
+Une ligne par ancêtre ¦ Ein lína á hvern forföður
+Une ligne par ancêtre (+ recensements, notaire, militaire) ¦ Ein lína á hvern forföður (+ manntöl, lögbókandi, her)
+Fiches militaires ¦ Herskrár
+Colonnes en plus ¦ Aukadálkar
+Recensement, notaire, militaire ¦ Manntal, lögbókandi, her
+Recensement seulement ¦ Aðeins manntal
+Les trous d’abord ¦ Eyður fyrst
+Par numéro Sosa ¦ Eftir Sosa-númeri
+Ancêtres au plus ¦ Forfeður mest
+Axe ¦ Ás
+Ce qu’on suit ¦ Það sem fylgst er með
+L’état civil ¦ Hjúskaparstaða
+L’état civil (célibataire, marié, veuf…) : trajectoires de vie ¦ Hjúskaparstaða (ógift, gift, ekkja…): lífsferlar
+La commune ¦ Sveitarfélagið
+Les lieux de vie ¦ Búsetustaðir
+Un groupe de personnes (critères) ¦ Hópur fólks (skilyrði)
+Trajectoires de vie ¦ Lífsferlar
+Trajectoires de vie de {n}. ¦ Lífsferlar: {n}.
+Métiers au fil de la vie de {n}. ¦ Störf yfir ævina: {n}.
+Les métiers au fil de la vie ¦ Störfin yfir ævina
+Les mêmes personnes à plusieurs âges (20, 40, 60 ans…) ¦ Sama fólkið á nokkrum aldri (20, 40, 60…)
+Âges des colonnes ¦ Aldur dálkanna
+{a} ans ¦ {a} ár
+À {n} ans ¦ {n} ára
+L’état civil des mêmes personnes à {a} ans ¦ Hjúskaparstaða sama fólks {a} ára
+Où vivaient les mêmes personnes à {a} ans ¦ Hvar sama fólk bjó {a} ára
+Le métier des mêmes personnes à {a} ans ¦ Starf sama fólks {a} ára
+Le même qu’à l’âge d’avant — {list} ¦ Það sama og á aldrinum á undan — {list}
+Les mêmes personnes à {n} âges : {l}. ¦ Sama fólkið á {n} aldursstigum: {l}.
+En % de la colonne (au lieu des nombres) ¦ Sem % af dálki (í stað talna)
+État civil (trajectoires de vie) ¦ Hjúskaparstaða (lífsferlar)
+Naissance (pour l’axe des âges) ¦ Fæðing (fyrir aldursás)
+Début (année ou âge, vide = auto) ¦ Upphaf (ár eða aldur, autt = sjálfvirkt)
+Fin (année ou âge, vide = auto) ¦ Endir (ár eða aldur, autt = sjálfvirkt)
+Par durée de vie ¦ Eftir ævilengd
+Par état à 50 ans ¦ Eftir stöðu 50 ára
+âge (années) ¦ aldur (ár)
+Vérifie le groupe de personnes et la période. ¦ Athugaðu hópinn og tímabilið.
+{n} pris dans ta base. ¦ {n} tekið úr gagnagrunninum þínum.
+{n} prises dans ta base. ¦ {n} tekið úr gagnagrunninum þínum.

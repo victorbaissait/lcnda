@@ -7,6 +7,7 @@
  *    que la question « Quel lien ? » (lib/question_more.php) ;
  *  - kinSentence(étapes, sexes, noms) : « Jean est le cousin germain de l’épouse de Paul » ;
  *  - kinAll(graphe, a, b) : tous les liens de sang (implexe : doubles cousins…), un par ancêtre commun le plus proche ;
+ *  - inbreeding(graphe, id) : les boucles d'implexe entre les deux parents et le coefficient de consanguinité (Wright) ; fraction([n]) ;
  *  - completeness(numéros Sosa, générations) : ancêtres connus par génération (2^n possibles) ;
  *  - gravity(points) : le centre de gravité de chaque génération (moyenne sur la sphère) et l'écart moyen en km ;
  *  - leeds(correspondances, {lo, hi, max}) : la méthode de Leeds (groupes de couleur des grands-parents) et l'ordre de la matrice ;
@@ -189,6 +190,47 @@
         return list;
     }
 
+    /**
+     * 🔁 Boucles d'implexe et coefficient de consanguinité (Wright, comme pour les animaux : heritage-pets.js) :
+     * F = Σ (½)^(n1 + n2 + 1) × (1 + F_A) sur les ancêtres communs au père et à la mère, chaque chemin ne passant
+     * qu'une fois par chaque personne (sauf l'ancêtre commun). → {F, father, mother, loops: [{anc, up: [ids du père vers
+     * l'ancêtre, sans lui], down: [ids de la mère vers l'ancêtre], n1, n2, fa, c}], byAnc: {id: part}} ; le plus proche d'abord.
+     */
+    function inbreeding(graph, id, {maxDepth = 16, maxPaths = 4000} = {}) {
+        const G = graph && graph.nodes instanceof Map ? graph : normGraph(graph);
+        id = ID(id); const me = G.nodes.get(id), out = {F: 0, father: 0, mother: 0, loops: [], byAnc: {}};
+        if (!me) return out;
+        const par = x => (G.nodes.get(x)?.p || []).filter(p => G.nodes.has(p));
+        const ps = par(id); if (ps.length < 2) return out;
+        const [fa, mo] = G.nodes.get(ps[1])?.s === 'h' && G.nodes.get(ps[0])?.s !== 'h' ? [ps[1], ps[0]] : ps;
+        out.father = fa; out.mother = mo;
+        const memo = new Map(), busy = new Set();
+        /** chemins d'une personne vers tous ses ancêtres : [ancêtre, [personnes traversées, l'ancêtre exclu]] */
+        const paths = start => { const res = []; const walk = (x, chain, depth) => { if (res.length >= maxPaths || depth > maxDepth) return; res.push([x, chain]); const c2 = [...chain, x]; for (const p of par(x)) if (!c2.includes(p)) walk(p, c2, depth + 1); }; walk(start, [], 0); return res; };
+        const fOf = x => { // le coefficient d'un ancêtre lui-même (récursif, protégé contre les boucles)
+            if (memo.has(x)) return memo.get(x); if (busy.has(x)) return 0; busy.add(x);
+            const pp = par(x); let f = 0;
+            if (pp.length >= 2) { const A1 = paths(pp[0]), A2 = paths(pp[1]); for (const [a1, c1] of A1) for (const [a2, c2] of A2) { if (a1 !== a2 || c1.some(q => c2.includes(q))) continue; f += Math.pow(.5, c1.length + c2.length + 1) * (1 + fOf(a1)); } }
+            busy.delete(x); memo.set(x, f); return f;
+        };
+        const PF = paths(fa), PM = paths(mo);
+        for (const [a1, c1] of PF) for (const [a2, c2] of PM) {
+            if (a1 !== a2 || c1.some(q => c2.includes(q))) continue;
+            const f = fOf(a1), c = Math.pow(.5, c1.length + c2.length + 1) * (1 + f);
+            out.loops.push({anc: a1, up: c1, down: c2, n1: c1.length, n2: c2.length, fa: f, c});
+        }
+        out.loops.sort((p, q) => (p.n1 + p.n2) - (q.n1 + q.n2) || q.c - p.c);
+        out.loops.forEach(l => { out.F += l.c; out.byAnc[l.anc] = (out.byAnc[l.anc] || 0) + l.c; });
+        return out;
+    }
+    /** ½ puissance n additionnés → la fraction exacte (« 5/128 ») si le dénominateur reste raisonnable */
+    function fraction(parts) {
+        const ks = (Array.isArray(parts) ? parts : []).map(k => Math.round(Number(k))).filter(k => k >= 0 && k <= 40); if (!ks.length) return {num: 0, den: 1, text: '0'};
+        const big = Math.max(...ks); let num = 0; ks.forEach(k => { num += 2 ** (big - k); }); let den = 2 ** big;
+        while (num % 2 === 0 && den > 1) { num /= 2; den /= 2; }
+        return {num, den, text: den === 1 ? String(num) : `${num}/${den}`};
+    }
+
     /* ═════ Complétude ═════ */
     /** numéros Sosa connus → [{gen, theo, found, pct}] ; génération 1 = la personne (Sosa 1) */
     function completeness(sosas, gens = 10) {
@@ -285,7 +327,7 @@
         return CUM[m - 1] + d - 1;
     }
 
-    const api = {normGraph, kinPath, kinWord, kinWords, kinSentence, kinAll, stepLabel, segments, completeness, gravity, km, leeds, aliveByYear, dayOfYear, art, de};
+    const api = {normGraph, kinPath, kinWord, kinWords, kinSentence, kinAll, inbreeding, fraction, stepLabel, segments, completeness, gravity, km, leeds, aliveByYear, dayOfYear, art, de};
     root.LCNDA_DIAGPLUS = api;
     if (typeof module === 'object' && module.exports) module.exports = api;
 })(typeof window !== 'undefined' ? window : globalThis);

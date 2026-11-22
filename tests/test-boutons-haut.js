@@ -31,6 +31,7 @@ const KEY = 'genealogie-topbar-buttons';
         assert.ok(read('assets/js/heritage-studio.js').includes(`'${KEY}'`), '💾 Réglages enregistrés : l’Apparence');
         const ap = read('assets/js/app-apparence.js');
         for (const id of ['#side-panel-open', '#new-window-open', '#kiosk-toggle', '#mode-simple-open', '#calculette-open', '#report-problem-open', '#genealogy-switch']) assert.ok(ap.includes(`'${id}'`), id + ' dans la liste');
+        assert.ok(ap.includes(`'#succ-bell-open'`) && read('index.php').includes('id="succ-bell-open" hidden'), '🔔 Échéances du jour : dans la liste, caché hors usage successoral (heritage-successoral-outils.js)');
     });
     await t('« Réglages » à l’écran, module interne « maintenance » gardé', () => {
         const idx = read('index.php');

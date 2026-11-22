@@ -1171,6 +1171,20 @@
         tp.insertAdjacentHTML('afterend', '<section class="person-block-config lc-a6-host" id="lc-a6-host"><header><span class="eyebrow">BOUTONS</span><h3>Forme des boutons</h3><p>Les boutons secondaires de toute l’app (Annuler, Modifier, ＋ Ajouter…) ; le bouton principal reste plein, à la couleur principale.</p></header><div data-a6-host></div></section>');
         ext.designsA6Frame(document.querySelector('#lc-a6-host [data-a6-host]'));
     });
+    // K16 : les interrupteurs, montrés comme interrupteurs (conseillé, la règle de l'app) ou comme cases à cocher (réglage), juste après « Forme des boutons »
+    const TOGGLES_KEY = 'genealogie-toggles';
+    const togglesMode = () => { try { return localStorage.getItem(TOGGLES_KEY) === 'check' ? 'check' : 'switch'; } catch (_) { return 'switch'; } };
+    const applyToggles = () => { if (togglesMode() === 'check') document.documentElement.dataset.toggles = 'check'; else delete document.documentElement.dataset.toggles; };
+    applyToggles();
+    ext.afterDesign.push(() => {
+        const st = A().state; if (!['design', 'look_msgs'].includes(st?.maintenanceTab)) return;
+        const at = document.getElementById('lc-a6-host') || document.querySelector('#workspace .toast-prefs'); if (!at || document.getElementById('lc-k16-host')) return;
+        const t = (k, v) => (window.LCNDA_I18N?.t ? window.LCNDA_I18N.t(k, v) : k), mode = togglesMode();
+        at.insertAdjacentHTML('afterend', `<section class="person-block-config lc-k16-host" id="lc-k16-host"><header><span class="eyebrow">${esc(t('INTERRUPTEURS'))}</span><h3>${esc(t('Réglages qui agissent tout de suite'))}</h3><p>${esc(t('Ils sont montrés comme des interrupteurs ; tu peux préférer des cases à cocher partout. Rien d’autre ne change.'))}</p></header>
+            <div class="lc-k16-opts" role="radiogroup" aria-label="${esc(t('Forme des interrupteurs'))}">${[['switch', t('Interrupteurs (conseillé)')], ['check', t('Cases à cocher')]].map(([v, l]) => `<label class="checkbox-line"><input type="radio" name="lc_k16" value="${v}" ${mode === v ? 'checked' : ''}> ${esc(l)}</label>`).join('')}</div>
+            <p class="lc-k16-demo"><label class="ui-toggle"><input type="checkbox" checked><i></i>${esc(t('Exemple : afficher les zones sur la photo'))}</label></p></section>`);
+        document.querySelectorAll('#lc-k16-host [name="lc_k16"]').forEach(r => r.addEventListener('change', () => { try { if (r.value === 'check') localStorage.setItem(TOGGLES_KEY, 'check'); else localStorage.removeItem(TOGGLES_KEY); } catch (_) {} applyToggles(); }));
+    });
     // A8 Listes : dans « Menus, colonne et listes » (onglet Listes), dans les deux présentations des Réglages
     ext.afterDesign.push(() => {
         const st = A().state; if (!['design', 'nav_menus'].includes(st?.maintenanceTab) || document.getElementById('lc-a8-host')) return;

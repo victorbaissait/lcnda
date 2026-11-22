@@ -1,0 +1,199 @@
+fr ¦ fi ¦ hu
+# 📱 la page du téléphone de terrain (assets/js/app-terrain.js)
+📶 relié ¦ 📶 yhdistetty ¦ 📶 csatlakozva
+⏸ hors wifi ¦ ⏸ ei wifiä ¦ ⏸ nincs wifi
+Le mot de passe de la généalogie : vérifié par l’ordinateur, jamais gardé sur ce téléphone. ¦ Sukupuun salasana: tietokone tarkistaa sen, sitä ei koskaan tallenneta tähän puhelimeen. ¦ A családfa jelszava: a számítógép ellenőrzi, sosem marad ezen a telefonon.
+Le navigateur écrit « Non sécurisé » : c’est vrai, la porte du wifi n’a pas de HTTPS. N’envoie que sur le wifi de la maison, protégé par sa clé. ¦ Selain sanoo ”Ei suojattu”: se pitää paikkansa, wifi-ovella ei ole HTTPS:ää. Lähetä vain kodin wifissä, joka on suojattu avaimella. ¦ A böngésző azt írja: „Nem biztonságos”: ez igaz, a wifi-kapunak nincs HTTPS-e. Csak az otthoni, kulccsal védett wifin küldj.
+Tes photos attendent dans cette page. ¦ Kuvasi odottavat tällä sivulla. ¦ A fotóid ezen az oldalon várnak.
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). ¦ Tietokone ei vastaa (lepotilassa, sammutettu tai ovi kiinni). ¦ A számítógép nem válaszol (alvó mód, kikapcsolva vagy zárt kapu).
+Choisir une personne ou une visite… ¦ Valitse henkilö tai käynti… ¦ Válassz személyt vagy látogatást…
+Une ligne (facultatif) ¦ Yksi rivi (valinnainen) ¦ Egy sor (nem kötelező)
+Pas de wifi de la maison : les photos se prennent avec l’appareil photo du téléphone, puis « 🖼 Choisir » au retour. ¦ Ei kodin wifiä: ota kuvat puhelimen kameralla ja sitten ”🖼 Valitse” palattuasi. ¦ Nincs otthoni wifi: a telefon kamerájával fényképezz, majd hazaérve „🖼 Kiválasztás”.
+Prendre une photo ¦ Ota kuva ¦ Fénykép készítése
+Choisir dans la galerie ¦ Valitse galleriasta ¦ Választás a galériából
+📍 = la photo contient une position GPS (retirée à l’arrivée, réglage) ¦ 📍 = kuvassa on GPS-sijainti (poistetaan saapuessa, asetus) ¦ 📍 = a fotó GPS-pozíciót tartalmaz (érkezéskor eltávolítva, beállítás)
+Tombe famille LACOMBE, allée 4 ¦ LACOMBEn suvun hauta, käytävä 4 ¦ A LACOMBE család sírja, 4. sor
+Envoyer : {n} ¦ Lähetä: {n} ¦ Küldés: {n}
+Sans wifi, garde cette page ouverte : les photos attendent ici et partent toutes seules au retour. Pour une journée entière aux archives, prends plutôt la visite par fichier. ¦ Ilman wifiä pidä tämä sivu auki: kuvat odottavat täällä ja lähtevät itsestään, kun palaat. Koko päiväksi arkistoon ota mieluummin käynti tiedostona. ¦ Wifi nélkül tartsd nyitva ezt az oldalt: a fotók itt várnak, és hazaérve maguktól elmennek. Egy egész levéltári naphoz inkább a fájlos látogatást használd.
+Le téléphone ne sait pas si une photo a été rangée ni où : il ne lit rien de l’arbre. ¦ Puhelin ei tiedä, onko kuva järjestetty tai minne: se ei lue puusta mitään. ¦ A telefon nem tudja, hogy egy fotót elraktak-e, és hová: semmit sem olvas a családfából.
+Nom de la personne ou de la visite ¦ Henkilön tai käynnin nimi ¦ A személy vagy a látogatás neve
+Seulement les personnes décédées, sans les fiches confidentielles. ¦ Vain kuolleet henkilöt, ilman luottamuksellisia kortteja. ¦ Csak elhunyt személyek, bizalmas adatlapok nélkül.
+Choisis pour qui est cette photo. ¦ Valitse, kenelle kuva on. ¦ Válaszd ki, kié ez a fotó.
+Verrouillée après 15 minutes sans geste : redonne le mot de passe. Tes photos attendent. ¦ Lukittu 15 minuutin toimettomuuden jälkeen: anna salasana uudelleen. Kuvasi odottavat. ¦ 15 perc tétlenség után zárolva: add meg újra a jelszót. A fotóid várnak.
+Ce téléphone n’est plus autorisé sur l’ordinateur. ¦ Tällä puhelimella ei ole enää lupaa tietokoneelle. ¦ Ez a telefon már nincs engedélyezve a számítógépen.
+Envoyées dans 📥 À trier : {n} ¦ Lähetetty kohteeseen 📥 Lajiteltavat: {n} ¦ Elküldve ide: 📥 Rendezendő: {n}
+Refusé par l’ordinateur ¦ Tietokone hylkäsi ¦ A számítógép elutasította
+L’ordinateur ne répond pas (en veille, éteint ou porte fermée). En attente : {n} ; nouvel essai toutes les 30 secondes tant que la page est ouverte. ¦ Tietokone ei vastaa (lepotilassa, sammutettu tai ovi kiinni). Odottaa: {n}; uusi yritys 30 sekunnin välein niin kauan kuin sivu on auki. ¦ A számítógép nem válaszol (alvó mód, kikapcsolva vagy zárt kapu). Várakozik: {n}; új próbálkozás 30 másodpercenként, amíg az oldal nyitva van.
+↻ Réessayer ¦ ↻ Yritä uudelleen ¦ ↻ Újra
+Envoi en cours : {i} sur {n} ¦ Lähetetään: {i}/{n} ¦ Küldés: {i} / {n}
+Garde la page ouverte. ¦ Pidä sivu auki. ¦ Hagyd nyitva az oldalt.
+En attente depuis {when} : {n} ¦ Odottanut {when} lähtien: {n} ¦ Várakozik {when} óta: {n}
+Elles étaient gardées dans ce téléphone. ¦ Ne säilytettiin tässä puhelimessa. ¦ Ezen a telefonon voltak tárolva.
+Les envoyer ¦ Lähetä ne ¦ Elküldés
+Les oublier ¦ Unohda ne ¦ Elvetés
+Retirées de la boîte : {n} ¦ Poistettu laatikosta: {n} ¦ Kivéve a dobozból: {n}
+« {name} » n’est plus ouverte sur l’ordinateur : tes photos restent en attente ici. ¦ ”{name}” ei ole enää auki tietokoneella: kuvasi odottavat edelleen täällä. ¦ „{name}” már nincs megnyitva a számítógépen: a fotóid itt várnak tovább.
+Des photos étaient en attente, mais le téléphone a libéré la place. Retrouve-les dans ta galerie et « 🖼 Choisir ». ¦ Kuvia odotti, mutta puhelin vapautti tilan. Etsi ne galleriasta ja ”🖼 Valitse”. ¦ Fotók vártak, de a telefon felszabadította a helyet. Keresd meg őket a galériában, és „🖼 Kiválasztás”.
+📱 Envoyer des photos à l’ordinateur principal ¦ 📱 Lähetä kuvia päätietokoneelle ¦ 📱 Fotók küldése a fő számítógépre
+# 📥 À trier, sur l'ordinateur (assets/js/app-a-trier.js)
+📥 À trier ¦ 📥 Lajiteltavat ¦ 📥 Rendezendő
+À trier ¦ Lajiteltavat ¦ Rendezendő
+Listes · Médias et documents ¦ Luettelot · Media ja asiakirjat ¦ Listák · Média és dokumentumok
+Les photos envoyées par un téléphone de terrain arrivent ici, hors de l’arbre. Relie chacune à ce qu’elle montre, ou supprime-la. ¦ Maastopuhelimen lähettämät kuvat saapuvat tänne, puun ulkopuolelle. Liitä kukin siihen, mitä se näyttää, tai poista se. ¦ A terepi telefonról küldött fotók ide érkeznek, a családfán kívülre. Kapcsold mindegyiket ahhoz, amit mutat, vagy töröld.
+Chercher… (texte, téléphone, personne) ¦ Hae… (teksti, puhelin, henkilö) ¦ Keresés… (szöveg, telefon, személy)
+🗑 Supprimées ¦ 🗑 Poistetut ¦ 🗑 Töröltek
+Reliées ¦ Liitetyt ¦ Kapcsolt
+visite {name} ¦ käynti {name} ¦ látogatás: {name}
+pour {name} ¦ kohteelle {name} ¦ neki: {name}
+personne pas choisie ¦ henkilöä ei valittu ¦ nincs kiválasztott személy
+📍 GPS gardé ¦ 📍 GPS säilytetty ¦ 📍 GPS megtartva
+📍 GPS retiré ¦ 📍 GPS poistettu ¦ 📍 GPS eltávolítva
+🔗 reliée à {name} ¦ 🔗 liitetty: {name} ¦ 🔗 kapcsolva: {name}
+effacée pour de bon le {date} ¦ poistetaan lopullisesti {date} ¦ végleg törlődik: {date}
+🗄 Relier à la visite ¦ 🗄 Liitä käyntiin ¦ 🗄 Kapcsolás a látogatáshoz
+🔗 Relier à {name} ¦ 🔗 Liitä: {name} ¦ 🔗 Kapcsolás: {name}
+Relier à… ¦ Liitä… ¦ Kapcsolás…
+(sans texte) ¦ (ei tekstiä) ¦ (szöveg nélkül)
+Rien à trier : les photos du téléphone arriveront ici. ¦ Ei lajiteltavaa: puhelimen kuvat saapuvat tänne. ¦ Nincs mit rendezni: a telefon fotói ide érkeznek majd.
+Mode consultation : la boîte se lit, mais rien ne se relie ni ne se supprime. ¦ Selaustila: laatikkoa voi lukea, mutta mitään ei voi liittää eikä poistaa. ¦ Megtekintő mód: a doboz olvasható, de semmi sem kapcsolható és nem törölhető.
+Cochées : {n} ¦ Valittu: {n} ¦ Bejelölve: {n}
+Décocher ¦ Poista valinta ¦ Kijelölés törlése
+📍 Garder la position GPS ? ¦ 📍 Säilytetäänkö GPS-sijainti? ¦ 📍 Megtartod a GPS-pozíciót?
+La photo contient une position GPS (utile pour situer une tombe). La garder pour la carte ? ¦ Kuvassa on GPS-sijainti (hyödyllinen haudan löytämiseksi). Säilytetäänkö se karttaa varten? ¦ A fotó GPS-pozíciót tartalmaz (hasznos egy sír megtalálásához). Megtartod a térképhez?
+La retirer ¦ Poista se ¦ Eltávolítás
+✓ Reliées à {name} : {n} ¦ ✓ Liitetty kohteeseen {name}: {n} ¦ ✓ Kapcsolva ehhez: {name}: {n}
+🪦 Une photo de tombe : ajouter aussi l’inhumation à {name} ? ¦ 🪦 Hautakuva: lisätäänkö myös hautaus kohteelle {name}? ¦ 🪦 Sírfotó: hozzáadod a temetést is ehhez: {name}?
+✓ Inhumation ajoutée à {name}. ¦ ✓ Hautaus lisätty: {name}. ¦ ✓ Temetés hozzáadva: {name}.
+Relier à un événement ¦ Liitä tapahtumaan ¦ Kapcsolás eseményhez
+Relier à une source ¦ Liitä lähteeseen ¦ Kapcsolás forráshoz
+✓ Supprimées : {n} ¦ ✓ Poistettu: {n} ¦ ✓ Törölve: {n}
+✓ Supprimées : {n}. Gardées 30 jours dans « 🗑 Supprimées » (Filtrer ▾). ¦ ✓ Poistettu: {n}. Säilytetään 30 päivää kohteessa ”🗑 Poistetut” (Suodata ▾). ¦ ✓ Törölve: {n}. 30 napig megmaradnak itt: „🗑 Töröltek” (Szűrés ▾).
+✎ Modifier le texte ¦ ✎ Muokkaa tekstiä ¦ ✎ Szöveg szerkesztése
+Texte enregistré ¦ Teksti tallennettu ¦ Szöveg mentve
+👤 Une personne… ¦ 👤 Henkilö… ¦ 👤 Egy személy…
+📅 Un événement… (inhumation, mariage…) ¦ 📅 Tapahtuma… (hautaus, vihkiminen…) ¦ 📅 Egy esemény… (temetés, házasság…)
+📚 Une source… (l’acte, la cote) ¦ 📚 Lähde… (asiakirja, signum) ¦ 📚 Egy forrás… (az okirat, a jelzet)
+🗄 La visite d’archives proposée ¦ 🗄 Ehdotettu arkistokäynti ¦ 🗄 A javasolt levéltári látogatás
+🔍 Ouvrir en grand ¦ 🔍 Avaa suurena ¦ 🔍 Megnyitás nagyban
+⟲ Tourner ¦ ⟲ Kierrä ¦ ⟲ Forgatás
+⤓ Exporter l’original ¦ ⤓ Vie alkuperäinen ¦ ⤓ Eredeti exportálása
+Remise dans 📥 À trier. ¦ Palautettu kohteeseen 📥 Lajiteltavat. ¦ Visszatéve ide: 📥 Rendezendő.
+📥 Arrivées du téléphone : {n} ¦ 📥 Saapunut puhelimesta: {n} ¦ 📥 Érkezett a telefonról: {n}
+📥 À trier : {n} ¦ 📥 Lajiteltavat: {n} ¦ 📥 Rendezendő: {n}
+# 🖧 Plusieurs ordinateurs → 📱 Téléphones de terrain (assets/js/app-reseau-local.js)
+téléphone de terrain ¦ maastopuhelin ¦ terepi telefon
+Téléphone de terrain ¦ Maastopuhelin ¦ Terepi telefon
+📱 Téléphone de terrain ¦ 📱 Maastopuhelin ¦ 📱 Terepi telefon
+📱 Téléphones de terrain ¦ 📱 Maastopuhelimet ¦ 📱 Terepi telefonok
+👁 Lecture seule ¦ 👁 Vain luku ¦ 👁 Csak olvasás
+déposer · liste réduite ¦ jättää · suppea luettelo ¦ lerakás · szűkített lista
+＋ Ajouter un téléphone de terrain ¦ ＋ Lisää maastopuhelin ¦ ＋ Terepi telefon hozzáadása
+Scanne ce QR code avec l’appareil photo du téléphone ¦ Skannaa tämä QR-koodi puhelimen kameralla ¦ Olvasd be ezt a QR-kódot a telefon kamerájával
+Le code d’invitation est déjà dans le QR code. Sur le téléphone : « Demander l’accès », puis compare le code à 6 chiffres ici. ¦ Kutsukoodi on jo QR-koodissa. Puhelimessa: ”Pyydä pääsyä”, vertaa sitten 6-numeroista koodia tässä. ¦ A meghívókód már benne van a QR-kódban. A telefonon: „Hozzáférés kérése”, majd itt hasonlítsd össze a 6 jegyű kódot.
+Un 📱 téléphone de terrain ne voit pas l’arbre : il dépose seulement des photos dans 📥 À trier. ¦ 📱 Maastopuhelin ei näe puuta: se vain jättää kuvia kohteeseen 📥 Lajiteltavat. ¦ A 📱 terepi telefon nem látja a családfát: csak fotókat tesz ide: 📥 Rendezendő.
+⏻ Retirer tous les téléphones ¦ ⏻ Poista kaikki puhelimet ¦ ⏻ Minden telefon eltávolítása
+Les photos arrivent dans Listes → Médias et documents → 📥 À trier. ¦ Kuvat saapuvat kohteeseen Luettelot → Media ja asiakirjat → 📥 Lajiteltavat. ¦ A fotók ide érkeznek: Listák → Média és dokumentumok → 📥 Rendezendő.
+📥 Ouvrir À trier ¦ 📥 Avaa Lajiteltavat ¦ 📥 Rendezendő megnyitása
+Plus aucun téléphone ne pourra rien envoyer. Leurs photos déjà déposées restent dans 📥 À trier (réglage). ¦ Mikään puhelin ei voi enää lähettää mitään. Jo jätetyt kuvat jäävät kohteeseen 📥 Lajiteltavat (asetus). ¦ Egyetlen telefon sem küldhet többé semmit. A már letett fotóik itt maradnak: 📥 Rendezendő (beállítás).
+Téléphones retirés : {n} ¦ Poistetut puhelimet: {n} ¦ Eltávolított telefonok: {n}
+Valeur refusée : réglage inchangé. ¦ Arvo hylättiin: asetus ennallaan. ¦ Elutasított érték: a beállítás változatlan.
+✓ « {name} » autorisé, 📱 téléphone de terrain. ¦ ✓ ”{name}” sallittu, 📱 maastopuhelin. ¦ ✓ „{name}” engedélyezve, 📱 terepi telefon.
+Sorte d’appareil ¦ Laitteen tyyppi ¦ Eszköz fajtája
+📱 Téléphone de terrain : déposer des photos et une ligne de texte dans 📥 À trier. Il ne voit pas l’arbre, ne modifie rien. Il devra aussi donner le mot de passe de la généalogie. ¦ 📱 Maastopuhelin: jättää kuvia ja tekstirivin kohteeseen 📥 Lajiteltavat. Se ei näe puuta eikä muuta mitään. Sen on myös annettava sukupuun salasana. ¦ 📱 Terepi telefon: fotók és egy sor szöveg letétele ide: 📥 Rendezendő. Nem látja a családfát, semmit sem módosít. A családfa jelszavát is meg kell adnia.
+Ce que le téléphone voit ¦ Mitä puhelin näkee ¦ Amit a telefon lát
+Pour choisir « Pour qui ? » ¦ ”Kenelle?”-valintaan ¦ A „Kinek?” kiválasztásához
+visites d’archives et personnes décédées ¦ arkistokäynnit ja kuolleet henkilöt ¦ levéltári látogatások és elhunyt személyek
+visites d’archives seulement ¦ vain arkistokäynnit ¦ csak levéltári látogatások
+rien : tout se range sur l’ordinateur ¦ ei mitään: kaikki järjestetään tietokoneella ¦ semmi: minden a számítógépen rendeződik
+Montrer aussi les vivants (nom seulement) ¦ Näytä myös elävät (vain nimi) ¦ Az élők megjelenítése is (csak a név)
+Montrer aussi les fiches confidentielles (nom seulement) ¦ Näytä myös luottamukselliset kortit (vain nimi) ¦ A bizalmas adatlapok megjelenítése is (csak a név)
+« Pour qui ? » sur le téléphone ¦ ”Kenelle?” puhelimessa ¦ „Kinek?” a telefonon
+obligatoire (plus lent sur place) ¦ pakollinen (hitaampi paikan päällä) ¦ kötelező (helyben lassabb)
+Une ligne de texte ¦ Tekstirivi ¦ Egy sor szöveg
+une pour tout l’envoi ¦ yksi koko lähetykselle ¦ egy az egész küldéshez
+une par photo ¦ yksi kuvaa kohden ¦ egy fotónként
+Les photos qui arrivent ¦ Saapuvat kuvat ¦ Az érkező fotók
+Où arrivent les photos ¦ Minne kuvat saapuvat ¦ Hová érkeznek a fotók
+dans 📥 À trier : rien n’entre dans l’arbre sans toi ¦ kohteeseen 📥 Lajiteltavat: mitään ei tule puuhun ilman sinua ¦ ide: 📥 Rendezendő: nélküled semmi sem kerül a családfába
+reliées tout de suite à la personne choisie (visibles dans À trier, avec ↶ Annuler) ¦ liitetään heti valittuun henkilöön (näkyvät kohteessa Lajiteltavat, ↶ Kumoa käytettävissä) ¦ azonnal a kiválasztott személyhez kapcsolva (látható a Rendezendőben, ↶ Visszavonással)
+Position GPS de la photo ¦ Kuvan GPS-sijainti ¦ A fotó GPS-pozíciója
+retirée à l’arrivée ¦ poistetaan saapuessa ¦ érkezéskor eltávolítva
+gardée à part, à décider en reliant ¦ säilytetään erikseen, päätetään liitettäessä ¦ külön megőrizve, kapcsoláskor döntesz
+gardée (la carte peut la montrer) ¦ säilytetään (kartta voi näyttää sen) ¦ megtartva (a térkép megmutathatja)
+Taille maximale d’une photo ¦ Kuvan enimmäiskoko ¦ Egy fotó legnagyobb mérete
+Photos par envoi ¦ Kuvia lähetystä kohden ¦ Fotó küldésenként
+Photos dans la boîte À trier, au plus ¦ Kuvia Lajiteltavat-laatikossa enintään ¦ Fotók a Rendezendő dobozban, legfeljebb
+Garder l’original (décoché : réduite à 2000 points) ¦ Säilytä alkuperäinen (ei valittu: pienennetään 2000 pisteeseen) ¦ Az eredeti megtartása (bejelöletlenül: 2000 képpontra kicsinyítve)
+coché conseillé ¦ valittu suositeltu ¦ bejelölve ajánlott
+décoché conseillé ¦ ei valittu suositeltu ¦ bejelöletlenül ajánlott
+# 🖧 réglages des téléphones de terrain (suite), 📜 Qui a vu quoi, messages du serveur (lib/telephone_wifi.php, lib/reseau_local.php)
+gardée 30 jours dans « 🗑 Supprimées », puis effacée ¦ säilytetään 30 päivää kohteessa ”🗑 Poistetut”, sitten poistetaan ¦ 30 napig a „🗑 Töröltek” között, aztán végleg törlődik
+effacée tout de suite (après les 10 secondes de ↶ Annuler) ¦ poistetaan heti (↶ Kumoa -toiminnon 10 sekunnin jälkeen) ¦ azonnal törlődik (a ↶ Visszavonás 10 másodperce után)
+Photo de tombe reliée ¦ Liitetty hautakuva ¦ Kapcsolt sírfotó
+proposer d’ajouter l’inhumation ¦ ehdota hautauksen lisäämistä ¦ felajánlja a temetés hozzáadását
+ne rien proposer ¦ älä ehdota mitään ¦ ne ajánljon semmit
+Pastille 📥 dans la barre du haut ¦ 📥-merkki yläpalkissa ¦ 📥 jelvény a felső sávban
+oui, avec le nombre ¦ kyllä, määrän kanssa ¦ igen, a számmal
+non (seulement dans Listes) ¦ ei (vain Luetteloissa) ¦ nem (csak a Listákban)
+À l’arrivée de photos ¦ Kun kuvia saapuu ¦ Fotók érkezésekor
+seulement la pastille ¦ vain merkki ¦ csak a jelvény
+un petit message en bas de l’écran ¦ pieni viesti näytön alareunassa ¦ egy kis üzenet a képernyő alján
+Sans wifi ¦ Ilman wifiä ¦ Wifi nélkül
+Hors du wifi de la maison ¦ Kodin wifin ulkopuolella ¦ Az otthoni wifin kívül
+garder en attente dans la page, envoi tout seul au retour ¦ pidä odottamassa sivulla, lähetys itsestään palattua ¦ várakozás az oldalon, automatikus küldés hazaérve
+garder, mais demander avant d’envoyer ¦ säilytä, mutta kysy ennen lähettämistä ¦ megtartás, de küldés előtt kérdez
+refuser de prendre des photos hors wifi ¦ ei kuvia wifin ulkopuolella ¦ wifin kívül nem enged fényképezni
+Après l’envoi ¦ Lähettämisen jälkeen ¦ Küldés után
+effacer les photos de la page ¦ poista kuvat sivulta ¦ a fotók törlése az oldalról
+garder les vignettes de la journée ¦ säilytä päivän pikkukuvat ¦ a nap bélyegképeinek megtartása
+« ↶ Annuler » sur le téléphone ¦ ”↶ Kumoa” puhelimessa ¦ „↶ Visszavonás” a telefonon
+tant que les photos ne sont pas rangées ¦ kunhan kuvia ei ole järjestetty ¦ amíg a fotók nincsenek elrendezve
+pendant 10 secondes ¦ 10 sekunnin ajan ¦ 10 másodpercig
+Mot de passe de la généalogie sur le téléphone ¦ Sukupuun salasana puhelimessa ¦ A családfa jelszava a telefonon
+demandé à l’ouverture, redemandé après 15 min sans geste ¦ kysytään avattaessa ja uudelleen 15 min toimettomuuden jälkeen ¦ megnyitáskor kéri, 15 perc tétlenség után újra
+demandé seulement pour voir la liste ; déposer avec le jeton seul ¦ kysytään vain luetteloa varten; jättäminen pelkällä tunnisteella ¦ csak a listához kéri; lerakás csak a tokennel
+Cet ordinateur en mode consultation ¦ Tämä tietokone selaustilassa ¦ Ez a számítógép megtekintő módban
+le téléphone ne dépose plus ¦ puhelin ei enää jätä kuvia ¦ a telefon nem tesz le semmit
+le téléphone dépose encore ¦ puhelin jättää edelleen kuvia ¦ a telefon továbbra is letesz
+Sorte proposée quand la demande vient d’un téléphone ¦ Ehdotettu tyyppi, kun pyyntö tulee puhelimesta ¦ Javasolt fajta, ha a kérés telefonról jön
+Retirer un téléphone ¦ Puhelimen poistaminen ¦ Telefon eltávolítása
+ses photos déjà déposées restent à trier ¦ sen jo jättämät kuvat jäävät lajiteltaviksi ¦ a már letett fotói rendezésre várnak
+elles sont supprimées aussi (30 jours dans « 🗑 Supprimées ») ¦ ne poistetaan myös (30 päivää kohteessa ”🗑 Poistetut”) ¦ azok is törlődnek (30 napig a „🗑 Töröltek” között)
+📜 Registre ¦ 📜 Loki ¦ 📜 Napló
+noter chaque dépôt, chaque fichier refusé et chaque liste vue ¦ kirjaa jokainen jättö, hylätty tiedosto ja katsottu luettelo ¦ minden lerakás, elutasított fájl és megnézett lista naplózása
+seulement les dépôts ¦ vain jätöt ¦ csak a lerakások
+Photo déposée ¦ Kuva jätetty ¦ Fotó letéve
+Fichier refusé ¦ Tiedosto hylätty ¦ Fájl elutasítva
+Liste réduite vue ¦ Suppea luettelo katsottu ¦ Szűkített lista megtekintve
+Photo reliée ¦ Kuva liitetty ¦ Fotó kapcsolva
+pas une photo ¦ ei kuva ¦ nem fotó
+trop grosse ¦ liian suuri ¦ túl nagy
+trop grande ¦ liian suuret mitat ¦ túl nagy méretű
+abîmée ¦ vioittunut ¦ sérült
+trop de fichiers ¦ liikaa tiedostoja ¦ túl sok fájl
+trop de photos ¦ liikaa kuvia ¦ túl sok fotó
+trop gros en tout ¦ liian suuri yhteensä ¦ összesen túl nagy
+boîte pleine ¦ laatikko täynnä ¦ doboz megtelt
+personne refusée ¦ henkilö hylätty ¦ személy elutasítva
+réponses : {n} ¦ vastauksia: {n} ¦ válaszok: {n}
+Photo trop grosse (plus de {n} Mo, la taille maximale réglée sur l’ordinateur). ¦ Kuva on liian suuri (yli {n} Mt, tietokoneella asetettu enimmäiskoko). ¦ Túl nagy fotó (több mint {n} MB, a számítógépen beállított legnagyobb méret).
+Trop d’essais depuis ce téléphone : réessaie dans {n} min. ¦ Liian monta yritystä tästä puhelimesta: yritä uudelleen {n} min kuluttua. ¦ Túl sok próbálkozás erről a telefonról: próbáld újra {n} perc múlva.
+Trop de photos dans cet envoi ({n} au plus). ¦ Liikaa kuvia tässä lähetyksessä (enintään {n}). ¦ Túl sok fotó ebben a küldésben (legfeljebb {n}).
+Photo du téléphone ¦ Kuva puhelimesta ¦ Fotó a telefonról
+Ce format de photo ne se lit pas sur cet ordinateur : choisis-la en JPEG. ¦ Tätä kuvamuotoa ei voi lukea tällä tietokoneella: valitse kuva JPEG-muodossa. ¦ Ez a fotóformátum nem olvasható ezen a számítógépen: válaszd JPEG-ként.
+Ce n’est pas une photo : seules les photos JPEG, PNG, WEBP et AVIF sont acceptées. ¦ Tämä ei ole kuva: vain JPEG-, PNG-, WEBP- ja AVIF-kuvat hyväksytään. ¦ Ez nem fotó: csak JPEG, PNG, WEBP és AVIF fotókat fogadunk el.
+Image abîmée ou illisible. ¦ Kuva on vioittunut tai lukukelvoton. ¦ Sérült vagy olvashatatlan kép.
+Image trop grande (plus de 50 millions de points) : refusée. ¦ Kuva on liian suuri (yli 50 miljoonaa pistettä): hylätty. ¦ Túl nagy kép (több mint 50 millió képpont): elutasítva.
+Une seule photo à la fois. ¦ Vain yksi kuva kerrallaan. ¦ Egyszerre csak egy fotó.
+La photo n’est pas arrivée en entier : elle sera renvoyée. ¦ Kuva ei saapunut kokonaan: se lähetetään uudelleen. ¦ A fotó nem érkezett meg egészben: újra elküldjük.
+Personne ou visite inconnue. ¦ Tuntematon henkilö tai käynti. ¦ Ismeretlen személy vagy látogatás.
+📥 La boîte est pleine sur l’ordinateur : trie-la d’abord. ¦ 📥 Tietokoneen laatikko on täynnä: lajittele se ensin. ¦ 📥 A doboz megtelt a számítógépen: előbb rendezd el.
+Cet envoi est trop gros en tout (200 Mo au plus) : envoie le reste ensuite. ¦ Tämä lähetys on yhteensä liian suuri (enintään 200 Mt): lähetä loput myöhemmin. ¦ Ez a küldés összesen túl nagy (legfeljebb 200 MB): a többit utána küldd.
+La généalogie n’est pas prête sur l’ordinateur. ¦ Sukupuu ei ole valmis tietokoneella. ¦ A családfa nincs kész a számítógépen.
+L’ordinateur est en mode consultation : il ne reçoit pas de photo pour l’instant. Elles restent en attente ici. ¦ Tietokone on selaustilassa: se ei nyt vastaanota kuvia. Ne odottavat täällä. ¦ A számítógép megtekintő módban van: most nem fogad fotót. Itt várnak.
+Impossible de ranger la photo sur l’ordinateur (disque plein ?). ¦ Kuvaa ei voi tallentaa tietokoneelle (levy täynnä?). ¦ A fotó nem menthető a számítógépre (megtelt a lemez?).
+Choisis à quoi relier. ¦ Valitse, mihin liitetään. ¦ Válaszd ki, mihez kapcsolod.
+Introuvable. ¦ Ei löytynyt. ¦ Nem található.
+Cette fiche est verrouillée : rien n’y est relié. ¦ Tämä kortti on lukittu: siihen ei liitetä mitään. ¦ Ez az adatlap zárolva van: semmi sem kapcsolódik hozzá.
+Trop tard : cette photo a été effacée pour de bon. ¦ Liian myöhäistä: tämä kuva on poistettu lopullisesti. ¦ Túl késő: ezt a fotót véglegesen törölték.
+Téléphone de terrain : il peut seulement déposer des photos dans 📥 À trier. ¦ Maastopuhelin: se voi vain jättää kuvia kohteeseen 📥 Lajiteltavat. ¦ Terepi telefon: csak fotókat tehet ide: 📥 Rendezendő.

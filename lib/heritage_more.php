@@ -26,14 +26,26 @@ function recent_acts(PDO $pdo, int $onlyEventId = 0, ?array $page = null, ?int &
     $now = (int) date('Y');
     // un seul acte (la lettre à la mairie) : seulement lui, pas les 100 000 actes d'une très grosse base
     $one = $onlyEventId > 0 ? ' AND e.id=' . $onlyEventId : '';
-    $rows = $pdo->query("SELECT e.id, e.date_text, e.year, e.person_id, e.family_id, t.gedcom_tag, t.label, pl.name AS place, pl.county, pl.country, pl.admin4_code,
+    $rows = $pdo->query("SELECT e.id, e.date_text, e.year, e.person_id, e.family_id, t.gedcom_tag, t.label, pl.name AS place, pl.county, pl.country, pl.admin4_code, COALESCE(pl.admin2_code,'') AS admin2_code,
             (SELECT count(*) FROM media_links ml WHERE ml.entity_type='event' AND ml.entity_id=e.id) AS media_count,
             (SELECT count(*) FROM source_links sl WHERE sl.entity_type='event' AND sl.entity_id=e.id) AS source_count,
             (SELECT c.id FROM courriers c WHERE c.event_id=e.id ORDER BY c.id DESC LIMIT 1) AS courrier_id,
             (SELECT c.statut FROM courriers c WHERE c.event_id=e.id ORDER BY c.id DESC LIMIT 1) AS courrier_statut
         FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id
-        WHERE t.gedcom_tag IN ('BIRT','MARR','DEAT') AND e.year IS NOT NULL AND e.year > " . ($now - 100) . " AND e.year <= {$now}{$one}
+        WHERE t.gedcom_tag IN ('BIRT','MARR','DEAT') AND e.year IS NOT NULL AND e.year > " . ($now - 130) . " AND e.year <= {$now}{$one}
         ORDER BY e.year DESC")->fetchAll();
+    // 🏛 la pastille « dispo aux archives » (lib/archives_dispo.php) remplace l'ancien « en ligne vers année + 100 » deviné :
+    // un acte 🟢 en ligne n'est plus « à demander » (il va dans le widget « Actes en ligne à aller voir ») ; un acte de plus
+    // de 100 ans reste dans la liste seulement si la table dit qu'il n'est pas en ligne
+    $arch = [];
+    foreach ($rows as $k => $r) {
+        $st = function_exists('ad_status') ? ad_status($pdo, ['id' => $r['id'], 'tag' => $r['gedcom_tag'], 'date_text' => $r['date_text'], 'year' => $r['year'], 'place' => (string) $r['place'], 'county' => (string) $r['county'], 'country' => (string) $r['country'], 'admin2_code' => (string) $r['admin2_code'],
+            'linked' => ((int) $r['media_count'] + (int) $r['source_count']) > 0]) : null;
+        $old = (int) $r['year'] <= $now - 100;
+        if (!$onlyEventId && (($old && ($st['status'] ?? '') !== 'ask') || (($st['status'] ?? '') === 'online' && $page !== null && !$page['all']))) { unset($rows[$k]); continue; }
+        $arch[(int) $r['id']] = $st;
+    }
+    $rows = array_values($rows);
     // les couples : lus en une fois (avant : deux requêtes par mariage)
     $fams = [];
     $famIds = array_values(array_unique(array_filter(array_map(static fn($r) => (int) $r['family_id'], $rows))));
@@ -74,7 +86,7 @@ function recent_acts(PDO $pdo, int $onlyEventId = 0, ?array $page = null, ?int &
         $out[] = [
             'event_id' => (int) $r['id'], 'kind' => ACT_KINDS[$tag], 'tag' => $tag, 'date_text' => $r['date_text'] ?: (string) $r['year'], 'year' => (int) $r['year'],
             'place' => $r['place'], 'county' => $r['county'], 'people' => $who, 'has_copy' => ((int) $r['media_count'] + (int) $r['source_count']) > 0,
-            'open_at' => $openAt, 'public' => $public, 'online_from' => ((int) $r['year']) + 100,
+            'open_at' => $openAt, 'public' => $public, 'archives' => $arch[(int) $r['id']] ?? null,
             'courrier_id' => $r['courrier_id'] ? (int) $r['courrier_id'] : null, 'courrier_statut' => $r['courrier_statut'],
         ];
     }

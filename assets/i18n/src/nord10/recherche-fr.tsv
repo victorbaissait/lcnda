@@ -1,0 +1,53 @@
+fr ¦ sq ¦ mt
+# 🔎 Recherche « à la française » (lib/recherche_fr.php, assets/js/app-recherche-fr.js, Réglages → 🔎 Recherche)
+nom exact ¦ emër i saktë ¦ isem eżatt
+nom de mariage ({x}) ¦ mbiemër i martesës ({x}) ¦ kunjom taż-żwieġ ({x})
+autre nom noté ({x}) ¦ emër tjetër i shënuar ({x}) ¦ isem ieħor imniżżel ({x})
+particule ignorée ({x}) ¦ pjesëz e shpërfillur ({x}) ¦ partiċella injorata ({x})
+forme latine d’{p} ({x}) ¦ trajta latine e {p} ({x}) ¦ forma Latina ta’ {p} ({x})
+forme latine de {p} ({x}) ¦ trajta latine e {p} ({x}) ¦ forma Latina ta’ {p} ({x})
+abréviation d’{p} ({x}) ¦ shkurtim i {p} ({x}) ¦ qosor ta’ {p} ({x})
+abréviation de {p} ({x}) ¦ shkurtim i {p} ({x}) ¦ qosor ta’ {p} ({x})
+diminutif d’{p} ({x}) ¦ zvogëlim i {p} ({x}) ¦ żgħir ta’ {p} ({x})
+diminutif de {p} ({x}) ¦ zvogëlim i {p} ({x}) ¦ żgħir ta’ {p} ({x})
+prénom composé ({p}) ¦ emër i përbërë ({p}) ¦ isem kompost ({p})
+phonétique (proche de {x}) ¦ fonetikisht (i ngjashëm me {x}) ¦ fonetiku (qrib {x})
+lieu ({x}) ¦ vend ({x}) ¦ post ({x})
+Saint, Sainte ou article écrits autrement ({x}) ¦ Saint, Sainte ose nyje të shkruara ndryshe ({x}) ¦ Saint, Sainte jew artiklu miktuba b’mod ieħor ({x})
+ancien nom ({x}) ¦ emër i vjetër ({x}) ¦ isem antik ({x})
+commune fusionnée ({x} → {y}) ¦ komunë e bashkuar ({x} → {y}) ¦ komun magħqud ({x} → {y})
+date « {d} » ({ev} {y}) ¦ data «{d}» ({ev} {y}) ¦ data “{d}” ({ev} {y})
+date « {d} » ¦ data «{d}» ¦ data “{d}”
+sépulture ¦ varrim ¦ difna
+un événement ¦ një ngjarje ¦ avveniment
+Trouvé par : {x} ¦ Gjetur nga: {x} ¦ Instab permezz ta’: {x}
+Aucun « {q} » ; {n} proches : {names} ¦ Asnjë «{q}»; {n} të ngjashëm: {names} ¦ L-ebda “{q}”; {n} qrib: {names}
+Montre aussi les noms qui se prononcent pareil, même quand le nom exact existe. ¦ Shfaq edhe emrat që tingëllojnë njësoj, edhe kur emri i saktë ekziston. ¦ Juri wkoll l-ismijiet li jinstemgħu l-istess, anke meta l-isem eżatt jeżisti.
+Toujours phonétique ¦ Gjithmonë fonetikisht ¦ Dejjem fonetiku
+forme française ¦ trajtë frënge ¦ forma Franċiża
+forme latine ¦ trajtë latine ¦ forma Latina
+abréviation ¦ shkurtim ¦ qosor
+diminutif ¦ zvogëlim ¦ żgħir
+prénom composé ¦ emër i përbërë ¦ isem kompost
+prénom de référence : {p} ({k}) ¦ emri bazë: {p} ({k}) ¦ isem bażi: {p} ({k})
+nom avec particule : {a} = {b} ¦ mbiemër me pjesëz: {a} = {b} ¦ kunjom b’partiċella: {a} = {b}
+son : {s} ¦ tingull: {s} ¦ ħoss: {s}
+à partir de {y} ¦ nga {y} ¦ minn {y}
+jusqu’à {y} ¦ deri në {y} ¦ sa {y}
+Rien de reconnu. ¦ Asgjë e njohur. ¦ Xejn magħruf.
+Réglages · Recherche ¦ Cilësimet · Kërkimi ¦ Settings · Tfittxija
+La même recherche partout. Sous chaque résultat : pourquoi il a été trouvé. ¦ I njëjti kërkim kudo. Nën çdo rezultat: pse u gjet. ¦ L-istess tfittxija kullimkien. Taħt kull riżultat: għaliex instab.
+Ce que la recherche essaie ¦ Çfarë provon kërkimi ¦ X’tipprova t-tfittxija
+Phonétique automatique ¦ Fonetikë automatike ¦ Fonetika awtomatika
+quand rien n’est trouvé, les noms qui se prononcent pareil ¦ kur nuk gjendet asgjë, emrat që tingëllojnë njësoj ¦ meta ma jinstab xejn, l-ismijiet li jinstemgħu l-istess
+Formes latines des prénoms ¦ Trajtat latine të emrave ¦ Forom Latini tal-ismijiet
+Petrus = Pierre, Joannes = Jean, avec leurs fins (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, me mbaresat e tyre (-i, -o, -um, -ae) ¦ Petrus = Pierre, Joannes = Jean, bit-tmiem tagħhom (-i, -o, -um, -ae)
+Abréviations et diminutifs des prénoms ¦ Shkurtimet dhe zvogëlimet e emrave ¦ Qosor u żgħar tal-ismijiet
+Marge de « vers » (en années) ¦ Hapësira për «rreth» (në vite) ¦ Marġni għal “madwar” (fi snin)
+Toujours : accents, majuscules, particules (d’Albert = Dalbert), St = Saint, communes fusionnées, dates en français et calendrier républicain. ¦ Gjithmonë: theksat, shkronjat e mëdha, pjesëzat (d’Albert = Dalbert), St = Saint, komunat e bashkuara, datat në frëngjisht dhe kalendari republikan. ¦ Dejjem: aċċenti, ittri kbar, partiċelli (d’Albert = Dalbert), St = Saint, komuni magħquda, dati bil-Franċiż u l-kalendarju repubblikan.
+Écris une recherche : l’app montre ce qu’elle comprend, sans rien chercher. ¦ Shkruaj një kërkim: aplikacioni tregon çfarë kupton, pa kërkuar asgjë. ¦ Ikteb tfittxija: l-app turi x’tifhem, mingħajr ma tfittex xejn.
+ex. {x} ¦ p.sh. {x} ¦ eż. {x}
+Essayer une recherche ¦ Provo një kërkim ¦ Ipprova tfittxija
+🔎 Recherche ¦ 🔎 Kërkimi ¦ 🔎 Tfittxija
+nom proche à l’oreille ({a} / {b}) ¦ mbiemër që tingëllon i ngjashëm ({a} / {b}) ¦ kunjom li jinstema’ qrib ({a} / {b})
+même prénom, écrit autrement ({a} / {b}) ¦ i njëjti emër, i shkruar ndryshe ({a} / {b}) ¦ l-istess isem, miktub b’mod ieħor ({a} / {b})

@@ -43,6 +43,8 @@ function kiosk_path(): string { return DATA_DIR . '/consultation.json'; }
 
 function kiosk_state(): array
 {
+    // 🖧 un appareil invité (lib/reseau_local.php) : lecture seule, avec les mêmes règles que le mode consultation (kiosk_blocks)
+    if (function_exists('lan_device') && ($dev = lan_device())) { return ['on' => true, 'since' => '', 'guest' => (string) $dev['name']]; }
     $raw = is_file(kiosk_path()) ? json_decode((string) file_get_contents(kiosk_path()), true) : null;
     return is_array($raw) && !empty($raw['hash']) ? ['on' => true, 'since' => (string) ($raw['since'] ?? '')] : ['on' => false, 'since' => ''];
 }
@@ -68,7 +70,7 @@ function kiosk_blocks(string $action, bool $isWrite): bool
 {
     // backup_sqlite : seulement la sauvegarde automatique dans le dossier de l'app (vérifié dans api.php)
     $allowedWrites = ['kiosk_exit', 'save_settings', 'backup_sqlite', 'offsite_copy_now', 'museum_sign']; // le livre d'or du musée se signe aussi en consultation
-    $blockedReads = ['export_csv', 'export_csv_global', 'export_gedcom', 'export_plus', 'export_json', 'export_sqlite', 'export_full_backup', 'export_research_report', 'export_family_book', 'sync_export', 'vault_download', 'museum_export', 'export_my_list', 'export_custom_block_def', 'family_share_preview', 'family_share_export', 'website_export', 'desk_widget_file'];
+    $blockedReads = ['export_csv', 'export_csv_global', 'export_gedcom', 'export_plus', 'export_json', 'export_sqlite', 'export_full_backup', 'export_research_report', 'export_family_book', 'sync_export', 'vault_download', 'museum_export', 'export_my_list', 'export_custom_block_def', 'family_share_preview', 'family_share_export', 'website_export', 'desk_widget_file', 'compl_export'];
     return ($isWrite && !in_array($action, $allowedWrites, true)) || (!$isWrite && in_array($action, $blockedReads, true)) || in_array($action, ['switch_database', 'delete_database', 'clone_database'], true);
 }
 
@@ -142,6 +144,7 @@ function scan_inbox_status(PDO $pdo): array
 {
     $s = scan_inbox_settings($pdo);
     $dir = offsite_expand((string) $s['dir']);
+    if ($dir !== '' && function_exists('glock_forbidden_dir') && glock_forbidden_dir($dir)) { $dir = ''; } // 🔐 réglage d'avant : ignoré
     $recent = $pdo->query('SELECT s.filename, s.imported_at, m.id AS media_id, m.title, m.filename AS media_file, m.media_type FROM scan_inbox_files s LEFT JOIN media m ON m.id=s.media_id ORDER BY s.imported_at DESC LIMIT 12')->fetchAll();
     return $s + ['dir' => $dir, 'reachable' => $dir !== '' && is_dir($dir), 'pending' => count(scan_inbox_pending($pdo, $dir)), 'recent' => $recent,
         'can_convert' => scan_inbox_converter() !== null, 'total' => (int) $pdo->query('SELECT count(*) FROM scan_inbox_files')->fetchColumn()];
@@ -151,6 +154,7 @@ function save_scan_inbox_settings(PDO $pdo, array $data): array
 {
     $dir = offsite_expand(safe_text($data['dir'] ?? ''));
     if ($dir !== '' && !is_dir($dir)) { throw new RuntimeException("Dossier introuvable : {$dir}"); }
+    if ($dir !== '' && function_exists('glock_refuse_dir')) { glock_refuse_dir($dir); } // 🔐 jamais les médias ou données d'une généalogie
     ht_save_setting($pdo, 'lcnda-scan-inbox', ['dir' => $dir, 'enabled' => !empty($data['enabled']) && $dir !== '', 'move_imported' => !empty($data['move_imported'])]);
     return scan_inbox_status($pdo);
 }
@@ -170,6 +174,7 @@ function scan_inbox_run(PDO $pdo): never
     $s = scan_inbox_settings($pdo);
     $dir = offsite_expand((string) $s['dir']);
     if ($dir === '' || !is_dir($dir)) { json_response(['ok' => false, 'imported' => [], 'error' => $dir === '' ? 'Aucun dossier choisi.' : "Dossier introuvable : {$dir}"]); }
+    if (function_exists('glock_forbidden_dir') && glock_forbidden_dir($dir)) { json_response(['ok' => false, 'imported' => [], 'error' => 'Ce dossier appartient à l’app (données, médias ou sauvegardes d’une généalogie) : choisis un autre dossier.'], 422); }
     if (!is_dir(MEDIA_DIR)) { @mkdir(MEDIA_DIR, 0775, true); }
     $imported = []; $skipped = [];
     foreach (array_slice(scan_inbox_pending($pdo, $dir), 0, 50) as $f) {

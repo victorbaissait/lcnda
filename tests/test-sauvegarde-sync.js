@@ -33,7 +33,7 @@ const x = (db, sql) => php(`$d=new PDO('sqlite:'.$argv[1]);$d->exec('PRAGMA busy
 
 async function startServer(dataDir, machine) {
   fs.mkdirSync(path.join(dataDir, 'media'), { recursive: true });
-  process.env.GENEALOGY_MACHINE_NAME = machine;
+  process.env.GENEALOGY_MACHINE_NAME = machine; process.env.GENEALOGY_TEST = '1'; // nom imposé : seulement en essai (lib/verrou.php)
   const s = new PhpServer({ phpPath, appRoot, pool: 1, dataDir, mediaDir: path.join(dataDir, 'media'), sessionDir: path.join(dataDir, 'sessions'), logFile: path.join(dataDir, 'php.log') });
   s.on('error', () => {});
   await s.start();

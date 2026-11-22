@@ -1,0 +1,71 @@
+fr ¦ sq ¦ mt
+# 🔎 Poser une question, suite (lib/question_plus.php, assets/js/heritage-questions-plus.js) : fautes, dates, « moi », négations, OU, renvois, ⌘K
+« {a} » lu « {b} » ¦ «{a}» u lexua si «{b}» ¦ “{a}” moqri bħala “{b}”
+vers {y} ({a}-{b}) ¦ rreth {y} ({a}-{b}) ¦ madwar is-sena {y} ({a}-{b})
+dans les années {y} ({a}-{b}) ¦ në vitet {y} ({a}-{b}) ¦ fis-snin {y} ({a}-{b})
+« moi » = la personne de départ : {name} ¦ «unë» = personi fillestar: {name} ¦ “jien” = il-persuna tal-bidu: {name}
+qui est : {name} ¦ kush është: {name} ¦ min hu: {name}
+« {a} » compris comme {b} ¦ «{a}» kuptuar si {b} ¦ “{a}” mifhum bħala {b}
+dossiers de succession ¦ dosjet e trashëgimisë ¦ fajls tas-suċċessjoni
+Aucun dossier de succession dans cette généalogie. ¦ Asnjë dosje trashëgimie në këtë gjenealogji. ¦ L-ebda fajl tas-suċċessjoni f’din il-ġenealoġija.
+courriers sans réponse ¦ letra pa përgjigje ¦ ittri mingħajr tweġiba
+Courriers aux héritiers sans réponse : {n}. ¦ Letra trashëgimtarëve pa përgjigje: {n}. ¦ Ittri lill-werrieta mingħajr tweġiba: {n}.
+Aucun courrier de dossier n’attend de réponse. ¦ Asnjë letër dosjeje nuk pret përgjigje. ¦ L-ebda ittra tal-fajl ma qed tistenna tweġiba.
+échéances en retard ¦ afate të vonuara ¦ skadenzi tard
+Dossiers avec des échéances en retard : {n}. ¦ Dosje me afate të vonuara: {n}. ¦ Fajls b’skadenzi tard: {n}.
+Aucun dossier n’a d’échéance en retard. ¦ Asnjë dosje nuk ka afat të vonuar. ¦ L-ebda fajl m’għandu skadenza tard.
+défunt : {name} ¦ i ndjeri: {name} ¦ il-mejjet: {name}
+Aucun dossier de succession pour {name}. ¦ Asnjë dosje trashëgimie për {name}. ¦ L-ebda fajl tas-suċċessjoni għal {name}.
+⚖️ Rechercher les héritiers… ¦ ⚖️ Kërko trashëgimtarët… ¦ ⚖️ Fittex il-werrieta…
+Pièces notées « manquante » : {n}. La liste complète (en main, demandées, à demander) est dans l’onglet Pièces du dossier. ¦ Dokumente të shënuara «mungon»: {n}. Lista e plotë (në dorë, të kërkuara, për t’u kërkuar) është te skeda Dokumentet e dosjes. ¦ Dokumenti mmarkati “nieqes”: {n}. Il-lista sħiħa (f’idejk, mitluba, li għandhom jintalbu) hija fit-tab Dokumenti tal-fajl.
+Aucune pièce notée « manquante ». La liste des pièces de chaque dossier est dans son onglet Pièces. ¦ Asnjë dokument i shënuar «mungon». Lista e çdo dosjeje është te skeda e saj Dokumentet. ¦ L-ebda dokument mhu mmarkat “nieqes”. Il-lista ta’ kull fajl hija fit-tab Dokumenti tiegħu.
+pièces manquantes ¦ dokumente që mungojnë ¦ dokumenti neqsin
+Héritiers introuvables ou qui ne répondent pas : {n}. ¦ Trashëgimtarë të pagjetur ose që nuk përgjigjen: {n}. ¦ Werrieta li ma jinstabux jew ma jwieġbux: {n}.
+Aucun héritier noté introuvable ou sans réponse. ¦ Asnjë trashëgimtar i shënuar i pagjetur ose pa përgjigje. ¦ L-ebda werriet mhu mmarkat li ma nstabx jew bla tweġiba.
+héritiers introuvables ¦ trashëgimtarë të pagjetur ¦ werrieta li ma nstabux
+De qui ? Écris par exemple « les héritiers de Jean Dupont ». ¦ Të kujt? Shkruaj për shembull «les héritiers de Jean Dupont». ¦ Ta’ min? Ikteb pereżempju “les héritiers de Jean Dupont”.
+héritiers de {name} ¦ trashëgimtarët e {name} ¦ werrieta ta’ {name}
+Aucun dossier de succession pour {name}. Le dossier calcule les héritiers d’après l’arbre. ¦ Asnjë dosje trashëgimie për {name}. Dosja i llogarit trashëgimtarët sipas pemës. ¦ L-ebda fajl tas-suċċessjoni għal {name}. Il-fajl jikkalkula l-werrieta mis-siġra.
+Dossier {d} : les héritiers n’ont pas encore été calculés. Ouvre le dossier pour faire le calcul. ¦ Dosja {d}: trashëgimtarët ende nuk janë llogaritur. Hap dosjen për llogaritjen. ¦ Fajl {d}: il-werrieta għadhom ma ġewx ikkalkulati. Iftaħ il-fajl biex tikkalkula.
+Dossier {d} — héritiers d’après le dernier calcul enregistré : {n}. ¦ Dosja {d} — trashëgimtarët sipas llogaritjes së fundit të ruajtur: {n}. ¦ Fajl {d} — werrieta skont l-aħħar kalkolu salvat: {n}.
+Branches encore à rechercher : {n}. ¦ Degë ende për t’u kërkuar: {n}. ¦ Friegħi li għad iridu jiġu mfittxija: {n}.
+Actes ou documents à chercher pour {name} : {n}. Les 3 premiers ci-dessous ; la liste complète, avec où chercher et dans quelle série, est dans « Que manque-t-il ? ». ¦ Akte ose dokumente për t’u kërkuar për {name}: {n}. 3 të parat më poshtë; lista e plotë, me ku dhe në cilën seri të kërkosh, është te «Çfarë mungon?». ¦ Atti jew dokumenti li jridu jiġu mfittxija għal {name}: {n}. L-ewwel 3 hawn taħt; il-lista sħiħa, b’fejn u f’liema serje tfittex, hija f’“X’jonqos?”.
+Rien de connu à chercher pour {name}. ¦ Asgjë e njohur për t’u kërkuar për {name}. ¦ Xejn magħruf x’tfittex għal {name}.
+actes à chercher ¦ akte për t’u kërkuar ¦ atti li jridu jiġu mfittxija
+où chercher ¦ ku të kërkosh ¦ fejn tfittex
+« Où chercher ? » donne pour {name} les sites et les séries d’archives les plus utiles, et pourquoi. ¦ «Ku të kërkosh?» jep për {name} faqet dhe seritë arkivore më të dobishme, dhe pse. ¦ “Fejn tfittex?” jagħti għal {name} l-aktar siti u serji tal-arkivji utli, u għaliex.
+« Où chercher ? » donne pour chaque personne les sites et les séries d’archives les plus utiles, et pourquoi. ¦ «Ku të kërkosh?» jep për çdo person faqet dhe seritë arkivore më të dobishme, dhe pse. ¦ “Fejn tfittex?” jagħti għal kull persuna l-aktar siti u serji tal-arkivji utli, u għaliex.
+doublons ¦ dublikata ¦ duplikati
+Le Contrôle de la base cherche les doublons probables (mêmes noms, mêmes dates, mêmes parents) et aide à les fusionner. ¦ Kontrolli i bazës kërkon dublikatat e mundshme (emra, data, prindër të njëjtë) dhe ndihmon t’i bashkosh. ¦ Il-Kontroll tal-bażi jfittex duplikati probabbli (l-istess ismijiet, dati, ġenituri) u jgħinek tgħaqqadhom.
+mort pendant la guerre, en âge de combattre ¦ vdiq gjatë luftës, në moshë luftimi ¦ miet waqt il-gwerra, f’età tal-ġlied
+mort pendant la guerre ¦ vdiq gjatë luftës ¦ miet waqt il-gwerra
+morts pendant {era} ¦ të vdekur gjatë: {era} ¦ mietu waqt: {era}
+morts à la guerre ¦ të rënë në luftë ¦ mejtin fil-gwerra
+Morts pendant {era} : {n}. ¦ Të vdekur gjatë: {era}: {n}. ¦ Mietu waqt: {era}: {n}.
+Notés « Mort pour la France » : {n}. Morts pendant une guerre, en âge de combattre ou soldats (à vérifier) : {m}. ¦ Të shënuar «Mort pour la France»: {n}. Të vdekur gjatë një lufte, në moshë luftimi ose ushtarë (për t’u verifikuar): {m}. ¦ Immarkati “Mort pour la France”: {n}. Mietu waqt gwerra, f’età tal-ġlied jew suldati (biex jiġu vverifikati): {m}.
+Dont « Mort pour la France » : {n}. ¦ Prej tyre «Mort pour la France»: {n}. ¦ Minnhom “Mort pour la France”: {n}.
+Pour les soldats : Mémoire des hommes et les registres matricules. ¦ Për ushtarët: Mémoire des hommes dhe regjistrat e matrikulës. ¦ Għas-suldati: Mémoire des hommes u r-reġistri militari.
+sans date de décès ¦ pa datë vdekjeje ¦ mingħajr data tal-mewt
+sans date de naissance ¦ pa datë lindjeje ¦ mingħajr data tat-twelid
+sans date de mariage ¦ pa datë martese ¦ mingħajr data taż-żwieġ
+sans parents connus ¦ pa prindër të njohur ¦ mingħajr ġenituri magħrufa
+sans profession notée ¦ pa profesion të shënuar ¦ mingħajr professjoni mniżżla
+qui ne sont pas des ancêtres ¦ që nuk janë paraardhës ¦ li mhumiex antenati
+pas {ev} à {place} ¦ jo «{ev}» në {place} ¦ mhux “{ev}” f’{place}
+vivants ou probablement vivants ¦ të gjallë ose ndoshta të gjallë ¦ ħajjin jew probabbilment ħajjin
+pas à {place} ¦ jo në {place} ¦ mhux f’{place}
+recherche de nom : « {x} » ¦ kërkim emri: «{x}» ¦ tfittxija ta’ isem: “{x}”
+orthographe proche ¦ drejtshkrim i ngjashëm ¦ ortografija simili
+femmes ¦ gra ¦ nisa
+Réponse réunie : {a} {c} {b}. ¦ Përgjigje e bashkuar: {a} {c} {b}. ¦ Tweġiba magħquda: {a} {c} {b}.
+Je n’ai pas tenu compte de : « {x} ». ¦ Nuk e mora parasysh: «{x}». ¦ Ma qisitx: “{x}”.
+Plusieurs “{w}” : choisir… ¦ Disa «{w}»: zgjidh… ¦ Diversi “{w}”: agħżel…
+J’ai compris : {x} ¦ Kuptova: {x} ¦ Fhimt: {x}
+Question en français ¦ Pyetje në frëngjisht ¦ Mistoqsija bil-Franċiż
+Poser la question : « {q} » ¦ Bëj pyetjen: «{q}» ¦ Staqsi l-mistoqsija: “{q}”
+Questions dans la recherche rapide (⌘K) ¦ Pyetje në kërkimin e shpejtë (⌘K) ¦ Mistoqsijiet fit-tfittxija rapida (⌘K)
+Répondre aux questions dans la recherche rapide ¦ Përgjigju pyetjeve në kërkimin e shpejtë ¦ Wieġeb mistoqsijiet fit-tfittxija rapida
+« les enfants de Pierre Mazaud » : la réponse courte s’affiche dans la liste ; sinon seulement « Poser la question » ¦ «les enfants de Pierre Mazaud»: përgjigjja e shkurtër shfaqet në listë; përndryshe vetëm «Bëj pyetjen» ¦ “les enfants de Pierre Mazaud”: it-tweġiba qasira tidher fil-lista; inkella biss “Staqsi l-mistoqsija”
+Pour aller plus loin, pose la question avec le nom de la personne voulue. ¦ Për të vazhduar, bëje pyetjen me emrin e personit që kërkon. ¦ Biex tkompli, agħmel il-mistoqsija bl-isem tal-persuna li trid.
+« {a} » cherché d’abord ¦ «{a}» kërkuar së pari ¦ “{a}” imfittex l-ewwel
+« {a} » = {name} ¦ «{a}» = {name} ¦ “{a}” = {name}

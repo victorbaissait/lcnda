@@ -1,0 +1,145 @@
+fr ¦ lb
+# Zone « transcription-actes » : recadrage, lecture approfondie (Ollama), « Ce que l’app a trouvé » (heritage-transcribe-acte.js, lib/transcription_actes.php)
+LECTURE AUTOMATIQUE ¦ AUTOMATESCH LIESEN
+Recadrer sur le texte ? ¦ Op den Text zouschneiden?
+Recadrer sur le texte ¦ Op den Text zouschneiden
+Lire quand même ¦ Trotzdeem liesen
+Cette image ressemble à une capture d’écran ¦ Dëst Bild gesäit aus wéi e Screenshot
+(boutons et bords gris autour) : la lecture sera moins bonne. Télécharge l’image en grand sur le site des archives, ou recadre sur le texte. ¦ (Knäppercher a gro Kanten ronderëm): d’Liesen gëtt méi schlecht. Lued d’Bild a grousser Gréisst vum Site vum Archiv erof, oder schneid et op den Text zou.
+La zone qui sera lue ¦ De Beräich, dee gelies gëtt
+Le cadre bleu montre la zone qui sera lue. Pour choisir toi-même, dessine une zone (▭) puis « ✨ Lire cette zone ». ¦ De bloe Kader weist de Beräich, dee gelies gëtt. Fir selwer ze wielen, zeechen e Beräich (▭) an dann „✨ Dëse Beräich liesen“.
+La lecture à la main a donné un texte peu sûr ¦ D’Liese vun der Handschrëft huet en onsécheren Text ginn
+({x} % de mots douteux). Souvent à cause des bords de l’écran autour de l’acte, ou d’une écriture trop difficile pour ce modèle. ¦ ({x} % zweifelhaft Wierder). Dacks wéinst de Bildschiermkanten ronderëm den Akt, oder enger Schrëft, déi ze schwéier fir dëse Modell ass.
+Recadrer et relire ¦ Zouschneiden an nach eng Kéier liesen
+Essayer la lecture approfondie ¦ Grëndlecht Liesen probéieren
+LECTURE APPROFONDIE ¦ GRËNDLECHT LIESEN
+Lecture approfondie ¦ Grëndlecht Liesen
+Ce qu’il faut ¦ Wat et brauch
+Ollama (gratuit, open source) et un modèle vision ouvert, au choix : ¦ Ollama (gratis, Open Source) an en oppent Visiounsmodell no Wiel:
+le meilleur, ≈ {x} Go ¦ dee beschten, ≈ {x} GB
+plus léger, ≈ {x} Go, pour un ordinateur modeste ¦ méi liicht, ≈ {x} GB, fir e méi bescheidene Computer
+déjà téléchargé ¦ scho erofgelueden
+8 Go conseillés (16 Go pour le 8B) · téléchargé une seule fois ¦ 8 GB recommandéiert (16 GB fir den 8B) · just eemol erofgelueden
+≈ 20 à 60 s par page sur un ordinateur récent ¦ ≈ 20 bis 60 s pro Säit op engem neie Computer
+Confidentialité ¦ Dateschutz
+rien ne quitte ton ordinateur ; l’app vérifie qu’Ollama ne répond que sur ton ordinateur ¦ näischt verléisst däi Computer; d’App kontrolléiert, datt Ollama just op dengem Computer äntwert
+Recherche d’Ollama sur cet ordinateur… ¦ Ollama gëtt op dësem Computer gesicht…
+L’adresse d’Ollama n’est pas sur cet ordinateur : la lecture approfondie est refusée. ¦ D’Adress vun Ollama ass net op dësem Computer: d’grëndlecht Liesen gëtt refuséiert.
+Ollama n’est pas encore sur cet ordinateur. ¦ Ollama ass nach net op dësem Computer.
+Installe-le une fois depuis son site (gratuit), lance-le, puis « ↻ Vérifier à nouveau ». ¦ Installéier et eemol vu sengem Site (gratis), start et an dann „↻ Nach eng Kéier kontrolléieren“.
+Ollama est installé mais ne tourne pas. ¦ Ollama ass installéiert, leeft awer net.
+Lance l’application Ollama, puis « ↻ Vérifier à nouveau ». ¦ Start d’App Ollama an dann „↻ Nach eng Kéier kontrolléieren“.
+Prêt : la lecture se fait sur cet ordinateur, sans Internet. ¦ Prett: d’Liesen geschitt op dësem Computer, ouni Internet.
+Télécharger Ollama (ollama.com) ¦ Ollama eroflueden (ollama.com)
+Installer la lecture approfondie ¦ Grëndlecht Liesen installéieren
+Lire l’acte avec ce modèle ¦ Den Akt mat dësem Modell liesen
+Vérifier à nouveau ¦ Nach eng Kéier kontrolléieren
+« 🔍 Essayer aussi la lecture approfondie » sur une page déjà lue montre les deux textes côte à côte, et on garde la meilleure. Relis toujours : un modèle peut se tromper sur les noms. ¦ „🔍 Och grëndlecht Liesen probéieren“ op enger schonn geliesener Säit weist béid Texter niewentenee, an s du behäls dee bessere. Ëmmer nolies: e Modell ka sech bei Nimm iren.
+Téléchargement du modèle… {done} sur {total} ¦ De Modell gëtt erofgelueden… {done} vun {total}
+Téléchargement du modèle… ¦ De Modell gëtt erofgelueden…
+Lecture approfondie… {n} s ¦ Grëndlecht Liesen… {n} s
+La lecture approfondie n’a pas abouti. ¦ D’grëndlecht Liesen huet net geklappt.
+Les deux lectures côte à côte ¦ Béid Liesungen niewentenee
+Le texte lu ¦ De geliesenen Text
+Écriture à la main ¦ Handschrëft
+Garder celle-ci ¦ Dës behalen
+Mettre dans le texte ¦ An den Text setzen
+La lecture approfondie est installée. ¦ D’grëndlecht Liesen ass installéiert.
+Défunte ¦ Verstuerwen (Fra)
+Conjointe ¦ Ehefra
+Autre personne ¦ Aner Persoun
+{n} ans → née vers {year} ¦ {n} Joer → gebuer ëm {year}
+{n} ans → né vers {year} ¦ {n} Joer → gebuer ëm {year}
+Aucune personne trouvée dans le texte : relis-le, puis « 🧭 Repérer ». ¦ Keng Persoun am Text fonnt: lies en no an dann „🧭 Erkennen“.
+TRANSCRIPTION ¦ TRANSKRIPTIOUN
+Ce que l’app a trouvé dans l’acte ¦ Wat d’App am Akt fonnt huet
+Ajouter à la généalogie ¦ An d’Genealogie derbäisetzen
+Garder seulement la transcription ¦ Just d’Transkriptioun behalen
+demeurant à {place} ¦ wunnhaft zu {place}
+fille de {a} et de {b} ¦ Duechter vun {a} a vun {b}
+fils de {a} et de {b} ¦ Jong vun {a} a vun {b}
+fille de {a} ¦ Duechter vun {a}
+fils de {a} ¦ Jong vun {a}
+sœur de {name} ¦ Schwëster vun {name}
+frère de {name} ¦ Brudder vun {name}
+parent de {name} ¦ Famill vun {name}
+conjoint décédé de {name} ¦ verstuerwene Partner vun {name}
+conjoint de {name} ¦ Partner vun {name}
+décédée avant l’acte ¦ virum Akt gestuerwen
+décédé avant l’acte ¦ virum Akt gestuerwen
+Relier à cette fiche ¦ Mat dëser Fiche verbannen
+Reliée à : ¦ Verbonne mat:
+Fiches proches : ¦ Ähnlech Fichen:
+Fiche existante : ¦ Bestoend Fiche:
+même personne probable ¦ wahrscheinlech déi selwecht Persoun
+Pas de fiche · restera dans l’acte avec son rôle, sans créer de fiche ¦ Keng Fiche · bleift mat senger Roll am Akt, ouni eng Fiche unzeleeën
+Aucune fiche : elle sera créée et reliée comme mère de {name} ¦ Keng Fiche: si gëtt ugeluecht a mat {name} als Mamm verbonnen
+Aucune fiche : elle sera créée et reliée comme père de {name} ¦ Keng Fiche: si gëtt ugeluecht a mat {name} als Papp verbonnen
+Aucune fiche : elle sera créée ¦ Keng Fiche: si gëtt ugeluecht
+Témoin seul ¦ Just Zeien
+Que faire de cette personne ¦ Wat mat dëser Persoun maachen
+Décès estimé avant l’acte ¦ Doud geschat virum Akt
+Gardés dans l’acte, sans fiche ¦ Am Akt behalen, ouni Fiche
+La source ¦ D’Quell
+déjà dans ta base, reprise ¦ schonn an denger Datebank, nees benotzt
+Relever à nouveau ¦ Nach eng Kéier erausliesen
+Compris : {date} ¦ Verstanen: {date}
+Les personnes ({n}) ¦ D’Persounen ({n})
+Ce que l’acte ajoute aussi ¦ Wat den Akt nach derbäisetzt
+Naissance estimée d’après l’âge (marquée « estimée ») ¦ Gebuert no dem Alter geschat (als „geschat“ markéiert)
+Décès d’avant l’acte (« feu », « veuve de ») ¦ Doudesfäll virum Akt („verstuerwen“, „Witfra vun“)
+Domiciles ¦ Wunnuerter
+La source, toute prête ¦ D’Quell, prett
+La même source est déjà dans ta base : elle est reprise au lieu d’en créer une deuxième. ¦ Déi selwecht Quell ass schonn an denger Datebank: si gëtt nees benotzt, amplaz eng zweet unzeleeën.
+Remplie d’après le champ Source, le nom du fichier et le texte lu autour de l’image. Vérifie avant d’ajouter. ¦ Ausgefëllt no dem Feld Quell, dem Dateinumm an dem Text ronderëm d’Bild. Kontrolléier ier s du derbäisetz.
+Remplie d’après le champ Source et le nom du fichier. Vérifie avant d’ajouter. ¦ Ausgefëllt no dem Feld Quell an dem Dateinumm. Kontrolléier ier s du derbäisetz.
+Voilà ce qui va entrer dans ta généalogie ¦ Dat hei kënnt an deng Genealogie
+Rien n’est écrasé : une information différente de la fiche est proposée, jamais imposée. « ↶ Annuler » défait tout l’ajout d’un coup. ¦ Näischt gëtt iwwerschriwwen: eng Informatioun, déi vun der Fiche ofwäicht, gëtt proposéiert, ni opgezwongen. „↶ Réckgängeg“ mécht dat ganzt Derbäisetzen op eemol réckgängeg.
+C’est elle : relier ¦ Dat ass si: verbannen
+C’est lui : relier ¦ Dat ass hien: verbannen
+Ce n’est pas elle ¦ Dat ass net si
+Ce n’est pas lui ¦ Dat ass net hien
+ajouter ¦ derbäisetzen
+{name} : l’acte et la fiche côte à côte ¦ {name}: den Akt an d’Fiche niewentenee
+Dans l’acte ¦ Am Akt
+Fiche · {name} ¦ Fiche · {name}
+vers {year} ({n} ans) ¦ ëm {year} ({n} Joer)
+{date} avec {name} ¦ {date} mat {name}
+avant le {date} ¦ virum {date}
+Les parents sont les mêmes : c’est très probablement elle. ¦ D’Elteren sinn déi selwecht: et ass ganz wahrscheinlech si.
+Les parents sont les mêmes : c’est très probablement lui. ¦ D’Elteren sinn déi selwecht: et ass ganz wahrscheinlech hien.
+Les parents ne sont pas les mêmes : vérifie avant de relier. ¦ D’Elteren sinn net déi selwecht: kontrolléier ier s du verbënns.
+La date de naissance de la fiche est gardée (elle est plus précise que l’âge de l’acte). ¦ De Gebuertsdatum vun der Fiche bleift (en ass méi genau wéi d’Alter am Akt).
+✓ Acte ajouté : {what} ¦ ✓ Akt derbäigesat: {what}
+Déjà d’autres parents, lien non fait : {names} ¦ Huet schonn aner Elteren, keng Verbindung: {names}
+Un modèle « vision » ouvert qui tourne sur ton ordinateur (Ollama) : lit mieux les écritures difficiles, plus lent ¦ En oppent „Visiouns“-Modell op dengem Computer (Ollama): liest schwéier Schrëften besser, méi lues
+L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches ¦ D’Evenement, d’Persounen an hir Bezéiungen, d’Quell: Fichen verbannen, vergläichen oder uleeën
+Ce que l’app a trouvé… ¦ Wat d’App fonnt huet…
+La lecture approfondie n’est pas chargée. ¦ D’grëndlecht Liesen ass net gelueden.
+Lecture du texte autour de l’acte… ¦ Den Text ronderëm den Akt gëtt gelies…
+Le texte est vide : lis ou écris d’abord l’acte. ¦ Den Text ass eidel: lies oder schreif fir d’éischt den Akt.
+Personnes gardées dans la transcription, sans créer de fiche. ¦ D’Persounen bleiwen an der Transkriptioun, ouni Fichen unzeleeën.
+Père du défunt ¦ Papp vum Verstuerwenen
+Mère du défunt ¦ Mamm vum Verstuerwenen
+Déclarant ¦ Deklarant
+Acte de mariage ¦ Hochzäitsakt
+Acte de baptême ¦ Daafakt
+Acte de naissance ¦ Gebuertsakt
+Acte de sépulture ¦ Begriefnesakt
+Registre ¦ Register
+Vue ¦ Bild
+Vues en tout ¦ Biller am Ganzen
+La lecture approfondie ne parle qu’à Ollama sur cet ordinateur (127.0.0.1) : adresse refusée. ¦ D’grëndlecht Liesen schwätzt just mat Ollama op dësem Computer (127.0.0.1): Adress refuséiert.
+Modèle de lecture approfondie inconnu. ¦ Onbekannte Modell fir grëndlecht Liesen.
+La lecture approfondie a besoin de l’extension cURL de PHP. ¦ D’grëndlecht Liesen brauch d’cURL-Erweiderung vu PHP.
+Ollama ne répond pas sur cet ordinateur : installe-le (ollama.com), lance-le, puis réessaie. ¦ Ollama äntwert net op dësem Computer: installéier et (ollama.com), start et a probéier nach eng Kéier.
+Image manquante. ¦ D’Bild feelt.
+Image trop lourde. ¦ D’Bild ass ze schwéier.
+Image trop grande. ¦ D’Bild ass ze grouss.
+Ce modèle n’est pas encore téléchargé : « ⤓ Installer la lecture approfondie ». ¦ Dëse Modell ass nach net erofgelueden: „⤓ Grëndlecht Liesen installéieren“.
+Une fiche à relier n’existe plus : choisis-en une autre. ¦ Eng Fiche fir ze verbannen gëtt et net méi: wiel eng aner.
+Une personne à créer n’a ni prénom ni nom. ¦ Eng Persoun fir unzeleeën huet weder Virnumm nach Numm.
+Trop de personnes dans un seul acte. ¦ Ze vill Persounen an engem eenzegen Akt.
+Annulation impossible : ce n’est pas l’ajout d’un acte. ¦ Réckgängeg net méiglech: dat ass keen derbäigesaten Akt.
+Le téléchargement du modèle n’a pas abouti. ¦ D’Eroflueden vum Modell huet net geklappt.
+La lecture approfondie a pris trop de temps. ¦ D’grëndlecht Liesen huet ze laang gedauert.

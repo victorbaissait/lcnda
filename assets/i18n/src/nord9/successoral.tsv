@@ -1,0 +1,975 @@
+fr ¦ lb
+# Zone « successoral » : ⚖️ généalogiste successoral, dossiers de succession, dévolution (heritage-successoral*.js, lib/successoral.php)
+Les dossiers de succession ne se montrent pas en mode consultation ni en mode simple. ¦ Ierfschaftsdossiere ginn am Kuckmodus an am einfache Modus net gewisen.
+Successions ¦ Ierfschaften
+Listes · Recherche et organisation ¦ Lëschten · Fuerschung an Organisatioun
+Dossiers de succession ¦ Ierfschaftsdossiere
+Retrouver les héritiers d’une personne décédée, pour un notaire : un dossier par défunt. À ne pas confondre avec « 🏠 Héritages et successions » (les actes anciens des ancêtres). ¦ D’Ierwen vun enger verstuerwener Persoun fir en Notaire fannen: een Dossier pro Verstuerwenen. Net ze verwiessele mat „🏠 Ierfschaften an Nolossenschaften“ (al Akte vun de Viirfahren).
+＋ Ouvrir un dossier ¦ ＋ Dossier opmaachen
+Lecture des dossiers… ¦ D’Dossiere gi gelies…
+Aucun dossier de succession pour l’instant ¦ Nach keen Ierfschaftsdossier
+Choisis la personne décédée : l’app part des fiches de la base pour trouver ses héritiers, selon le Code civil d’aujourd’hui. ¦ Wiel déi verstuerwe Persoun: d’App geet vun den Aträg an der Datebank aus fir hir Ierwen no dem haitege franséische Code civil ze fannen.
+Chercher… (ex. MAZAUD, 2026-014, ROUSSILHE) ¦ Sichen… (z. B. MAZAUD, 2026-014, ROUSSILHE)
+Prochaine échéance ¦ Nächst Frist
+A → Z ¦ A → Z
+Dossier n° {n} ¦ Dossier Nr. {n}
+Prochaine échéance : {d} — {l} ¦ Nächst Frist: {d} — {l}
+Échéance passée ¦ Frist ofgelaf
+✎ Modifier ¦ ✎ Änneren
+Aucun dossier ne correspond. ¦ Keen Dossier passt.
+Pas en mode consultation ni en mode simple. ¦ Net am Kuckmodus an net am einfache Modus.
+⚖️ DOSSIER DE SUCCESSION ¦ ⚖️ IERFSCHAFTSDOSSIER
+Ouvrir un dossier ¦ Dossier opmaachen
+Ouvrir le dossier ¦ Den Dossier opmaachen
+N° de dossier ¦ Dossiersnummer
+fait tout seul : 2026-014 ¦ automatesch: 2026-014
+reprise de la fiche ¦ aus dem Agrag iwwerholl
+Dernier domicile ¦ Leschte Wunnsëtz
+Notaire mandant (fiche ou nom) ¦ Opdraggebenden Notaire (Agrag oder Numm)
+Réf. du notaire ¦ Referenz vum Notaire
+Ouvert le ¦ Opgemaach den
+Testament ¦ Testament
+Aucun connu (le notaire interroge le fichier des dernières volontés) ¦ Keen bekannt (den Notaire kuckt am Testamentsregister no)
+Situation (notes) ¦ Situatioun (Notizen)
+🔒 Le dossier reste dans l’app : les héritiers vivants, leurs adresses et leurs parts ne sont dans aucun export. Aucun montant n’est noté. ¦ 🔒 Den Dossier bleift an der App: déi lieweg Ierwen, hir Adressen an Undeeler sinn an kengem Export. Et gëtt kee Betrag notéiert.
+Choisis la personne décédée. ¦ Wiel déi verstuerwe Persoun.
+Dossier enregistré ¦ Dossier gespäichert
+Dossier supprimé ¦ Dossier geläscht
+Lecture du dossier… ¦ Den Dossier gëtt gelies…
+← Tous les dossiers ¦ ← All d’Dossieren
+Dossier n° {n} · {t} ¦ Dossier Nr. {n} · {t}
+Listes · Dossiers de succession ¦ Lëschten · Ierfschaftsdossiere
+↗ Fiche du défunt ¦ ↗ Agrag vum Verstuerwenen
+🗄 Archiver le dossier clos ¦ 🗄 Ofgeschlossenen Dossier archivéieren
+Dossier archivé : les adresses des vivants ont été retirées, le journal reste. ¦ Dossier archivéiert: d’Adresse vun de Liewegen ewechgeholl, de Journal bleift.
+État du dossier ¦ Stand vum Dossier
+Le défunt n’est plus dans la base. ¦ De Verstuerwenen ass net méi an der Datebank.
+Pas de conjoint dans la base ¦ Keen Ehepartner an der Datebank
+A des descendants ¦ Huet Nokommen
+Sans descendant dans la base ¦ Keng Nokommen an der Datebank
+Le défunt ¦ De Verstuerwenen
+fiche n° {n} ¦ Agrag Nr. {n}
+Le mandat ¦ Den Optrag
+Droit actuel (décès après le 1er janvier 2007) ¦ Aktuellt Recht (Doud nom 1. Januar 2007)
+Échéances ¦ Fristen
+＋ Échéance ¦ ＋ Frist
+Dans {n} j ¦ An {n} D.
+Aucune échéance. ¦ Keng Frist.
+Aussi dans 🗓 Ma semaine de recherche. ¦ Och an 🗓 Meng Fuerschungswoch.
+📑 Pièces ¦ 📑 Dokumenter
+🖨 Tableau pour le notaire ¦ 🖨 Tabell fir den Notaire
+de son chef ¦ aus eegenem Recht
+représenté ¦ vertrueden
+sans descendance connue ¦ keng bekannt Nokommen
+degré plus éloigné ¦ méi wäite Grad
+pas de représentation ¦ keng Vertriedung
+pas encore conçu ¦ nach net gezeegt
+écarté ¦ ausgeschloss
+par représentation ¦ duerch Vertriedung
+de son chef, s’il vit ¦ aus eegenem Recht, wann nach lieweg
+Retenu ¦ Beruff
+Écarté par le conjoint ¦ Duerch den Ehepartner ausgeschloss
+Écarté ¦ Ausgeschloss
+{name} : {share} (art. {art}). ¦ {name}: {share} (Art. {art}).
+Ou, à son choix, l’usufruit de la totalité (art. 757) : les descendants ont alors la nue-propriété, dans les mêmes proportions. ¦ Oder no Wiel den Nossbrauch vum Ganzen (Art. 757): d’Nokomme kréien dann d’Bloussbesëtz an deene selwechte Proportiounen.
+Aucun conjoint dans la base. ¦ Keen Ehepartner an der Datebank.
+S’il y avait un conjoint, l’app afficherait ici ses droits (art. 757 à 757-2) avant les ordres. ¦ Wann et en Ehepartner géif ginn, géif d’App hei seng Rechter weisen (Art. 757 bis 757-2) virun den Uerdnungen.
+{n}e ¦ {n}.
+adresse ? ¦ Adress?
+Statut retenu dans ce dossier ¦ Statut an dësem Dossier
+Autre hypothèse ¦ Aner Hypothees
+total {t} ¦ am Ganzen {t}
+personne : il reste des branches à chercher. ¦ keen: et bleiwe Branchen ze sichen.
+Part en jeu : {s} ¦ Undeel um Spill: {s}
+🔍 Chercher ¦ 🔍 Sichen
+🌍 Héritier à l’étranger ¦ 🌍 Ierw am Ausland
+❔ Absent ou disparu ¦ ❔ Ofwiesend oder verschwonnen
+📇 Compléter ¦ 📇 Ergänzen
+Type d’adoption ¦ Aart vun Adoptioun
+Type d’adoption ? ¦ Aart vun Adoptioun?
+Plénière ¦ Voll
+Marié ? ¦ Bestuet?
+Pas marié (PACS, union libre) ¦ Net bestuet (PACS, Zesummeliewen)
+Divorcé ¦ Gescheet
+Aucune branche à chercher d’après les fiches. ¦ Laut den Aträg ass keng Branche ze sichen.
+{n}e degré ¦ {n}. Grad
+Calcul indicatif, à faire vérifier par le notaire. Il suit le Code civil en vigueur (art. 731 et suivants), sans testament, sans donation, sans renonciation connue. Il ne tient pas compte du droit de retour légal (art. 738-2, 757-3), des biens à l’étranger ni d’un régime matrimonial. ¦ Indikativ Rechnung, vum Notaire ze iwwerpréiwen. Si follegt dem geltende franséische Code civil (Art. 731 a follgend), ouni Testament, ouni Schenkung, ouni bekannten Verzicht. Si berécksiichtegt dat gesetzlecht Récklafrecht (Art. 738-2, 757-3), Gidder am Ausland an de Gidderstand net.
+Le conjoint survivant ¦ Den iwwerliewenden Ehepartner
+Les ordres d’héritiers (art. 734) : le premier qui a quelqu’un prend tout ¦ D’Ierfuerdnungen (Art. 734): déi éischt, an där een ass, kritt alles
+Les héritiers trouvés ¦ Déi fonnten Ierwen
+🗂 Tables des successions (AD)… ¦ 🗂 Ierfschaftslëschten (Archiven)…
+Lien avec le défunt ¦ Verwandtschaft mam Verstuerwenen
+Vient ¦ Kënnt
+Part ¦ Undeel
+Statut retenu ¦ Statut
+↔ Faire glisser le tableau pour voir les parts. ¦ ↔ Tabell réckelen, fir d’Undeeler ze gesinn.
+Aucun héritier trouvé jusqu’au 6e degré : sans testament, la succession reviendrait à l’État (art. 539 et 768). Il reste sans doute des branches à chercher. ¦ Bis zum 6. Grad keen Ierw fonnt: ouni Testament géif d’Ierfschaft un de Staat goen (Art. 539 an 768). Et bleiwe wuel nach Branchen ze sichen.
+Les calculs restent tant que la branche n’est pas tranchée. ¦ D’Rechnunge bleiwen, bis d’Branche gekläert ass.
+Les branches à chercher ¦ Branchen ze sichen
+L’hypothèse retenue ¦ Gewielten Hypothees
+Ex. : André MAZAUD décédé à Lyon en 1990 sans enfant (acte reçu le 5 déc.). ¦ Z. B.: André MAZAUD 1990 zu Lyon ouni Kanner gestuerwen (Akt den 5. Dez. kritt).
+Demandée avant « Remis au notaire » si un héritier reste inconnu. ¦ Gefrot virun „Dem Notaire iwwerginn“, wann en Ierw onbekannt bleift.
+Les degrés civils (art. 741-743) : on compte les générations jusqu’à l’ancêtre commun, puis on redescend ¦ Verwandtschaftsgraden (Art. 741-743): Generatioune bis zum gemeinsame Virfahr zielen, dann erëm erof
+LE DÉFUNT ¦ DE VERSTUERWENEN
+à retrouver ¦ ze fannen
+sans descend. ¦ ouni Nok.
+Héritier vivant, sa part ¦ Liewegen Ierw, säin Undeel
+Prédécédé, sa souche ¦ Virdru gestuerwen, säi Stamm
+Branche à chercher ¦ Branche ze sichen
+Arbre de dévolution ¦ Ierffolleg-Bam
+Le défunt au centre, chaque héritier avec sa part ¦ De Verstuerwenen an der Mëtt, all Ierw mat sengem Undeel
+⤓ SVG ¦ ⤓ SVG
+↔ Faire glisser le dessin. ¦ ↔ Zeechnung réckelen.
+Clic sur une case : la fiche ; clic droit : « 🛡 Solidité de ce lien ». Le dessin suit les fiches. ¦ Klick op eng Këscht: den Agrag; Rietsklick: „🛡 Stäerkt vun dëser Verbindung“. D’Zeechnung follegt den Aträg.
+le {d} ¦ {d}
+État de la pièce ¦ Stand vum Dokument
+D’après la fiche ¦ Laut Agrag
+{n} en main ¦ {n} an der Hand
+{n} demandés ¦ {n} ugefrot
+Par héritier ¦ No Ierw
+Par acte ¦ No Akt
+Ce qu’il faut prouver ¦ Wat bewise muss ginn
+↔ Faire glisser le tableau. ¦ ↔ Tabell réckelen.
+Rangée dans le Registre de courriers, une demande d’acte met la pièce à « Demandé » ; l’acte attaché à la fiche la met à « En main ». ¦ Am Bréifregister gespäichert setzt eng Aktenufro d’Dokument op „Ugefrot“; den Akt um Agrag setzt et op „An der Hand“.
+Je suis mandaté(e) par {notary}, notaire, pour établir la dévolution de la succession de {name} (dossier {n}, réf. {ref}). ¦ Ech sinn vum {notary}, Notaire, beoptraagt, d’Ierffolleg am Nolooss vu(n) {name} festzestellen (Dossier {n}, Ref. {ref}).
+À retrouver ¦ Ze fannen
+Adresse ? ¦ Adress?
+Signé le ¦ Ënnerschriwwen den
+À signer ¦ Z’ënnerschreiwen
+✉️ Écrire ¦ ✉️ Schreiwen
+Contrat de révélation, réponses, signatures ¦ Offenleeungskontrakt, Äntwerten, Ënnerschrëften
+📝 Contrat de révélation ¦ 📝 Offenleeungskontrakt
+✉️ Lettre de premier contact ¦ ✉️ Bréif fir den éischte Kontakt
+Héritier ¦ Ierw
+Courrier ¦ Bréif
+Contrat ¦ Kontrakt
+📝 Le contrat ne nomme pas le défunt avant signature. Écris toi-même le pourcentage d’honoraires et la date limite. Rien n’est envoyé par l’app. ¦ 📝 De Kontrakt nennt de Verstuerwenen net virun der Ënnerschrëft. De Prozentsaz vum Honorar an d’Frist schreifs du selwer. D’App schéckt näischt.
+Chaque courrier va dans le Registre de courriers, avec sa relance. ¦ All Bréif kënnt an de Bréifregister, mat senger Erënnerung.
+↗ Registre de courriers ¦ ↗ Bréifregister
+Madame, Monsieur, ¦ Sehr geéiert Madame, sehr geéierten Här,
+Généalogiste successoral, je suis chargé(e) par une étude notariale de retrouver les héritiers d’une personne décédée. Mes recherches me laissent penser que vous pourriez faire partie de sa famille. ¦ als Ierwesicher sinn ech vun enger Notairesstudie beoptraagt, d’Ierwe vun enger verstuerwener Persoun ze fannen. Meng Recherchen deiten drop hin, datt Dir zu hirer Famill gehéiere kéint.
+Pour le vérifier, pourriez-vous me confirmer votre date et votre lieu de naissance, ainsi que les noms de vos parents ? Vous pouvez me répondre par courrier, par téléphone ou par courriel. ¦ Kéint Dir mir, fir dat ze kontrolléieren, Äre Gebuertsdatum a -plaz an d’Nimm vun Ären Elteren confirméieren? Dir kënnt per Bréif, Telefon oder E-Mail äntweren.
+Cette démarche ne vous engage à rien. ¦ Dëse Schrëtt verflicht Iech zu näischt.
+Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées. ¦ Mat beschte Gréiss
+CONTRAT DE RÉVÉLATION DE SUCCESSION ¦ KONTRAKT FIR D’OFFENLEEUNG VUN ENGER IERFSCHAFT
+Entre {heir}, ci-après « l’héritier », et {sender}, généalogiste successoral. ¦ Tëscht {heir}, hei duerno „den Ierw“, an {sender}, Ierwesicher.
+Le généalogiste a découvert une succession en cours dans laquelle l’héritier pourrait avoir des droits. Il s’engage à lui en révéler l’origine (le nom de la personne décédée, l’étude notariale chargée du règlement) dès la signature du présent contrat, et à réunir les actes qui prouvent sa qualité d’héritier. ¦ Den Ierwesicher huet eng lafend Ierfschaft entdeckt, an där den Ierw Rechter kéint hunn. Hie verflicht sech, hir Hierkonft (Numm vum Verstuerwenen, zoustänneg Notairesstudie) bei der Ënnerschrëft vun dësem Kontrakt opzedecken an d’Akten ze sammelen, déi d’Ierwestellung beweisen.
+En contrepartie, l’héritier s’engage à verser au généalogiste des honoraires de ____ % (hors taxes) de l’actif net qui lui reviendra, payables seulement s’il reçoit effectivement une part de la succession. Les frais de recherche sont compris. ¦ Dofir verflicht sech den Ierw, dem Ierwesicher en Honorar vu ____ % (ouni Steieren) vum Nettovermögen ze bezuelen, dat him zoufält, nëmme wann hien tatsächlech en Undeel vun der Ierfschaft kritt. D’Recherchekäschte sinn abegraff.
+Cette proposition est valable jusqu’au ____________. ¦ Dës Offer ass gëlteg bis den ____________.
+Fait en deux exemplaires, à ____________, le ____________. ¦ An zwee Exemplaren, zu ____________, den ____________.
+L’héritier (« Lu et approuvé », signature) — Le généalogiste ¦ Den Ierw („Gelies an ugeholl“, Ënnerschrëft) — Den Ierwesicher
+Je me permets de revenir vers vous au sujet de mon courrier du {sent}, resté sans réponse. Une succession en cours pourrait vous concerner : pourriez-vous me contacter ? ¦ Ech kommen op mäi Bréif vum {sent} zréck, deen ouni Äntwert bliwwen ass. Eng lafend Ierfschaft kéint Iech betreffen: kéint Dir Iech bei mir mellen?
+✉️ HÉRITIERS CONTACTÉS ¦ ✉️ KONTAKTÉIERT IERWEN
+Relance ¦ Erënnerung
+📋 Ranger dans le Registre de courriers ¦ 📋 Am Bréifregister späicheren
+pas d’adresse dans le Répertoire des vivants ¦ keng Adress am Verzeechnes vun de Liewegen
+Premier contact ¦ Éischte Kontakt
+Contrat de révélation ¦ Offenleeungskontrakt
+Relance dans (jours) ¦ Erënnerung an (Deeg)
+Le nom du défunt n’est pas écrit : il est révélé après la signature. ¦ Den Numm vum Verstuerwenen steet net dran: e gëtt no der Ënnerschrëft opgedeckt.
+La lettre (tu peux la retoucher ; le nom de chaque héritier est mis tout seul) ¦ De Bréif (du kanns en änneren; den Numm vun all Ierw gëtt automatesch agesat)
+📝 Traitement de texte ¦ 📝 Textveraarbechtung
+Coche au moins un héritier. ¦ Kräiz mindestens een Ierw un.
+Courriers aux héritiers ¦ Bréiwer un d’Ierwen
+Recherche d’héritiers ¦ Sich no Ierwen
+Ton logiciel de courriel s’ouvre : relis la lettre et envoie-la toi-même. Rien n’est envoyé par l’app. ¦ Däin E-Mail-Programm geet op: lies de Bréif nach eng Kéier a schéck e selwer. D’App schéckt näischt.
+Premier contact + contrat ¦ Éischte Kontakt + Kontrakt
+{n} rangés dans le Registre de courriers ¦ {n} am Bréifregister gespäichert
+N. ¦ G.
+D. ¦ D.
+M. ¦ B.
+Div. ¦ Sch.
+Ren. ¦ Verz.
+(à fournir) ¦ (nozereechen)
+repr. {who} ¦ vertr. {who}
+existence à ce jour non établie ¦ Existenz bis elo net festgestallt
+TABLEAU GÉNÉALOGIQUE ¦ STAMMTABELL
+Succession de {name}, décédé(e) à {place} le {date} ¦ Ierfschaft vu(n) {name}, gestuerwen zu {place} den {date}
+Dossier {n} · Réf. notaire {ref} ¦ Dossier {n} · Ref. Notaire {ref}
+Calcul établi d’après les actes cités, art. 731 et suiv. du Code civil, sous réserve de vérification par le notaire. N. = naissance, M. = mariage, D. = décès. ¦ Rechnung no den uginnten Akten, Art. 731 a follgend vum franséische Code civil, ënner Viirbehalt vun der Iwwerpréiwung duerch den Notaire. G. = Gebuert, B. = Bestietnes, D. = Doud.
+Communs à tous : {list}. ¦ Gemeinsam fir all: {list}.
+Hypothèse retenue : {h} ¦ Gewielten Hypothees: {h}
+à préciser ¦ ze präziséieren
+Liste des pièces ¦ Lëscht vun den Dokumenter
+Page {n} / 3 ¦ Säit {n} / 3
+Un PDF sobre, une source pour chaque lien ¦ En einfachen PDF, eng Quell fir all Verbindung
+📝 Ouvrir dans le traitement de texte ¦ 📝 An der Textveraarbechtung opmaachen
+Joindre les adresses des héritiers ¦ Adresse vun den Ierwe bäileeën
+Aucune photo ni note privée : les noms, les qualités, les parts et les sources. Pas d’adresse sauf si la case est cochée. ¦ Keng Fotoen a keng privat Notizen: Nimm, Qualitéiten, Undeeler a Quellen. Keng Adress, ausser d’Këscht ass ugekräizt.
+Tableau généalogique — {n} ¦ Stammtabell — {n}
+Tableau pour le notaire : PDF ou impression (3 pages) ¦ Tabell fir den Notaire: PDF oder Drock (3 Säiten)
+Tableau pour le notaire : ouvert dans le traitement de texte ¦ Tabell fir den Notaire: an der Textveraarbechtung opgemaach
+Tableau pour le notaire : copie rangée dans les médias ¦ Tabell fir den Notaire: Kopie an de Medie gespäichert
+🕓 Journal du dossier {n} ¦ 🕓 Journal vum Dossier {n}
+(on ne peut ni le modifier ni l’effacer) ¦ (e kann net geännert a net geläscht ginn)
+⤓ Exporter le journal (CSV) ¦ ⤓ Journal exportéieren (CSV)
+Les changements des fiches restent dans Réglages → Journal des modifications. ¦ D’Ännerunge vun den Aträg bleiwen och an Astellungen → Ännerungsjournal.
+Action ¦ Aktioun
+Journal exporté (CSV) ¦ Journal exportéiert (CSV)
+Le temps passé, les frais, les honoraires des contrats ¦ Opgewannen Zäit, Käschten, Honoraren aus de Kontrakter
+＋ Temps ¦ ＋ Zäit
+＋ Frais ¦ ＋ Käschten
+＋ Honoraires d’un contrat ¦ ＋ Honorar vun engem Kontrakt
+🖨 Relevé ¦ 🖨 Opstellung
+{h} h {m} min passées ¦ {h} St. {m} Min. opgewannt
+Frais : {s} ¦ Käschten: {s}
+{n} contrats ¦ Kontrakter: {n}
+{h} h {m} min ¦ {h} St. {m} Min.
+Rien de noté. ¦ Näischt notéiert.
+Aucun montant de succession n’est noté. ¦ Et gëtt kee Betrag vun der Ierfschaft notéiert.
+💶 TEMPS ET FRAIS ¦ 💶 ZÄIT A KÄSCHTEN
+Copie d’acte, déplacement… ¦ Kopie vun engem Akt, Rees…
+Recherches aux AD, appels… ¦ Recherchen an den Archiven, Uriff…
+Contrat signé ¦ Kontrakt ënnerschriwwen
+Heures ¦ Stonnen
+Minutes ¦ Minutten
+Montant (€) ¦ Betrag (€)
+🌍 HÉRITIER À L’ÉTRANGER ¦ 🌍 IERW AM AUSLAND
+Chercher {name} hors de France ¦ {name} ausserhalb vu Frankräich sichen
+Les services à interroger ¦ Servicer, déi een ufroe kann
+📮 Demander l’acte au Service central d’état civil ¦ 📮 Den Akt beim Zentrale Zivilstandsservice ufroen
+Langue de la lettre ¦ Sprooch vum Bréif
+Destinataire ¦ Empfänger
+Registro civil de …, consulat de France à … ¦ Registro civil de …, franséischt Konsulat zu …
+La lettre (dans la langue du pays) ¦ De Bréif (an der Sprooch vum Land)
+Lettre à l’étranger ¦ Bréif an d’Ausland
+Recherche d’un héritier à l’étranger : {name} ¦ Sich no engem Ierw am Ausland: {name}
+Courrier rangé dans le Registre de courriers ¦ Bréif am Bréifregister gespäichert
+❔ ABSENTS ET DISPARUS ¦ ❔ OFWIESEND A VERSCHWONNEN
+{name} : absent ou disparu ? ¦ {name}: ofwiesend oder verschwonnen?
+art. {a} ¦ Art. {a}
+Le calcul lit ce statut : un présumé absent est compté vivant, sa part est « réservée » ; un déclaré absent est compté comme mort avant. ¦ D’Rechnung liest dëse Statut: e vermutlech Ofwiesenden zielt als lieweg, säin Undeel gëtt „reservéiert“; e fir ofwiesend Erkläerten zielt als virdru gestuerwen.
+Présumé absent ¦ Vermutlech ofwiesend
+Déclaré absent ou jugement de décès ¦ Fir ofwiesend erkläert oder Doudeserklärung
+{name} : statut retenu changé, dévolution recalculée ¦ {name}: Statut geännert, Ierffolleg nei gerechent
+Héritier à retrouver : {name}{born} — vivant ? décédé ? des enfants ? (dossier de succession {n}) ¦ Ierw ze fannen: {name}{born} — lieweg? gestuerwen? Kanner? (Ierfschaftsdossier {n})
+(né en {y}) ¦ (gebuer {y})
+Descendance de {name} (mort avant le défunt) : un enfant reconnu ou naturel ? (dossier de succession {n}) ¦ Nokomme vu(n) {name} (virum Verstuerwene gestuerwen): en unerkannt oder ausserbestuet Kand? (Ierfschaftsdossier {n})
+Branche à chercher autour de {name} (dossier de succession {n}) ¦ Branche ronderëm {name} ze sichen (Ierfschaftsdossier {n})
+Piste ouverte dans le Journal des recherches : {name} ¦ Spuer am Fuerschungsjournal opgemaach: {name}
+Piste ajoutée : Recherche → 🗓 Journal des recherches ¦ Spuer bäigesat: Fuerschung → 🗓 Fuerschungsjournal
+🗂 TABLES DES SUCCESSIONS DES AD ¦ 🗂 IERFSCHAFTSLËSCHTE VUN DEN ARCHIVEN
+Dépouiller les tables de successions et absences ¦ D’Lëschte vun Ierfschaften an Ofwiesenheeten duerchgoen
+Ajouter au suivi ¦ An de Suivi setzen
+Les tables de successions et absences et les mutations par décès (série Q des Archives départementales) donnent la date et le bureau de chaque succession. Coche les personnes à chercher : une ligne « à faire » chacune. ¦ D’Lëschte vun Ierfschaften an Ofwiesenheeten an d’Registere vun den Iwwergäng duerch Doud (Serie Q vun den Departementsarchiven) ginn Datum a Büro vun all Ierfschaft un. Kräiz d’Persounen un, déi gesicht ginn: all eng Zeil „ze maachen“.
+Coche au moins une personne. ¦ Kräiz mindestens eng Persoun un.
+Tables des successions et absences, mutations par décès (série Q) : {name}{d} ¦ Lëschte vun Ierfschaften an Ofwiesenheeten, Iwwergäng duerch Doud (Serie Q): {name}{d}
+Tables des successions : {n} à dépouiller ¦ Ierfschaftslëschten: {n} duerchzegoen
+{n} ajoutés aux dépouillements ¦ {n} bei d’Auswäertunge gesat
+État : {s} ¦ Stand: {s}
+📋 LISTE DE CONTRÔLE ¦ 📋 KONTROLLLËSCHT
+Avant « Remis au notaire » ¦ Virun „Dem Notaire iwwerginn“
+Remis au notaire ¦ Dem Notaire iwwerginn
+Remettre quand même ¦ Trotzdeem iwwerginn
+Tout n’est pas prêt : corrige d’abord, ou remets quand même (ce sera noté au journal). ¦ Net alles ass prett: éischt verbesseren oder trotzdeem iwwerginn (et gëtt am Journal notéiert).
+Les adresses des vivants seront retirées du dossier et de ses courriers. Le journal reste. Continuer ? ¦ D’Adresse vun de Liewege ginn aus dem Dossier a senge Bréiwer ewechgeholl. De Journal bleift. Weidermaachen?
+Archiver ¦ Archivéieren
+Dossier archivé. ¦ Dossier archivéiert.
+ÉCHÉANCE ¦ FRIST
+Remettre le tableau généalogique au notaire ¦ D’Stammtabell dem Notaire iwwerginn
+Remise au notaire ¦ Iwwergab un den Notaire
+Rendez-vous ¦ Rendez-vous
+Échéance ajoutée ¦ Frist bäigesat
+Échéance supprimée ¦ Frist geläscht
+Répertoire des vivants : « ＋ Contact », puis relie la fiche de l’héritier. ¦ Verzeechnes vun de Liewegen: „＋ Kontakt“, dann den Agrag vum Ierw verbannen.
+Relevé de temps et de frais — {n} ¦ Opstellung vun Zäit a Käschten — {n}
+Arbre de dévolution — {n} ¦ Ierffolleg-Bam — {n}
+Arbre de dévolution imprimé ¦ Ierffolleg-Bam gedréckt
+Hypothèse retenue enregistrée ¦ Gewielten Hypothees gespäichert
+Échéance faite ¦ Frist erleedegt
+Échéance à faire ¦ Frist ze erleedegen
+Pièce : {s} ¦ Dokument: {s}
+Courrier mis à jour ¦ Bréif aktualiséiert
+Rechercher les héritiers… ¦ D’Ierwe sichen…
+Pas en mode consultation. ¦ Net am Kuckmodus.
+Les dossiers n’ont pas pu être lus. ¦ D’Dossiere konnten net gelies ginn.
+Aucun dossier en cours. ¦ Keen Dossier am Gaang.
+Dossier {n} ¦ Dossier {n}
+⚖️ Dossiers de succession ¦ ⚖️ Ierfschaftsdossiere
+Signé le {d} ¦ Ënnerschriwwen {d}
+Dossier de succession ¦ Ierfschaftsdossier
+Tous les courriers ¦ All d’Bréiwer
+l’héritier ¦ den Ierw
+Branche paternelle : {who} ¦ Pappesäit: {who}
+Branche maternelle : {who} ¦ Mammesäit: {who}
+Tous les enfants sont communs : le conjoint choisit l’usufruit de tout, ou le quart en pleine propriété (art. 757). Le calcul montre le quart. ¦ All d’Kanner si gemeinsam: den Ehepartner wielt den Nossbrauch vu allem oder e Véierel als Volleegentum (Art. 757). D’Rechnung weist de Véierel.
+Un enfant au moins n’est pas commun aux deux époux : le conjoint reçoit le quart en pleine propriété (art. 757). ¦ Op d’mannst ee Kand ass net gemeinsam: den Ehepartner kritt e Véierel als Volleegentum (Art. 757).
+1er ordre : les enfants et, par représentation, les descendants d’un enfant prédécédé ou renonçant ; partage par souche (art. 735, 752, 753). ¦ 1. Uerdnung: d’Kanner an, duerch Vertriedung, d’Nokomme vun engem virdru gestuerwenen oder verzichtende Kand; Deelung no Stämm (Art. 735, 752, 753).
+Sans descendant, avec le père et la mère : la moitié au conjoint, un quart à chaque parent (art. 757-1). ¦ Ouni Nokommen, mam Papp an der Mamm: d’Halschent un den Ehepartner, e Véierel un all Elterendeel (Art. 757-1).
+Sans descendant, avec un seul parent : trois quarts au conjoint, un quart au parent (art. 757-1). ¦ Ouni Nokommen, mat engem Elterendeel: dräi Véierel un den Ehepartner, e Véierel un den Elterendeel (Art. 757-1).
+Sans descendant ni père ni mère : le conjoint recueille toute la succession (art. 757-2). Les frères et sœurs peuvent avoir un droit de retour sur les biens de famille (art. 757-3) : à voir avec le notaire. ¦ Ouni Nokommen, Papp a Mamm: den Ehepartner kritt déi ganz Ierfschaft (Art. 757-2). Geschwëster kënnen e Récklafrecht op Familljegidder hunn (Art. 757-3): mam Notaire ze kucken.
+Le père et la mère ont chacun un quart, les frères et sœurs (ou leurs descendants) la moitié (art. 738). ¦ Papp a Mamm kréien all e Véierel, d’Geschwëster (oder hir Nokommen) d’Halschent (Art. 738).
+Le parent survivant a un quart, les frères et sœurs (ou leurs descendants) trois quarts (art. 738). ¦ Den iwwerliewenden Elterendeel kritt e Véierel, d’Geschwëster (oder hir Nokommen) dräi Véierel (Art. 738).
+Père et mère décédés : les frères et sœurs ou leurs descendants prennent tout (art. 737). ¦ Papp a Mamm gestuerwen: d’Geschwëster oder hir Nokomme kréien alles (Art. 737).
+Frères et sœurs germains, consanguins ou utérins : parts égales, par souche (art. 744, 752-2, 753 ; loi du 3 décembre 2001). ¦ Vollgeschwëster an Hallefgeschwëster vu Papps- oder Mammssäit: gläich Undeeler, no Stämm (Art. 744, 752-2, 753; Gesetz vum 3. Dezember 2001).
+Sans descendant ni frère ni sœur : le père et la mère ont chacun la moitié (art. 736). ¦ Ouni Nokommen a Geschwëster: Papp a Mamm kréien all d’Halschent (Art. 736).
+Un seul parent, sans frère ni sœur, mais des ascendants dans l’autre branche : moitié au parent, moitié à ces ascendants (art. 738-1). ¦ Nëmmen een Elterendeel, keng Geschwëster, awer Viirfahren an der anerer Branche: d’Halschent un den Elterendeel, d’Halschent un déi Viirfahren (Art. 738-1).
+Le parent survivant, seul de son ordre, recueille la succession. ¦ Den iwwerliewenden Elterendeel, eleng a senger Uerdnung, kritt d’Ierfschaft.
+3e ordre : moitié pour chaque branche ; dans chacune, l’ascendant le plus proche prend tout (art. 747-748). ¦ 3. Uerdnung: d’Halschent fir all Branche; an all kritt de nooste Virfahr alles (Art. 747-748).
+3e ordre : une seule branche a encore un ascendant ; il recueille toute la succession, même les cousins de l’autre branche sont écartés (art. 748). ¦ 3. Uerdnung: nëmmen eng Branche huet nach e Virfahr; deen kritt déi ganz Ierfschaft, souguer d’Koséngen vun der anerer Branche sinn ausgeschloss (Art. 748).
+4e ordre : moitié pour chaque branche ; dans chacune, le collatéral le plus proche en degré prend tout, sans représentation (art. 749-750). ¦ 4. Uerdnung: d’Halschent fir all Branche; an all kritt de Säitverwandten, deen dem Grad no am nooste ass, alles, ouni Vertriedung (Art. 749-750).
+4e ordre : personne dans une branche, l’autre branche recueille tout (art. 750). ¦ 4. Uerdnung: keen an enger Branche, déi aner Branche kritt alles (Art. 750).
+Les collatéraux ne succèdent pas au-delà du 6e degré (art. 745). ¦ Säitverwandter ierwen net iwwer de 6. Grad eraus (Art. 745).
+Le défunt n’est pas dans la base. ¦ De Verstuerwenen ass net an der Datebank.
+si {name} n’était pas marié avec le défunt (PACS ou union libre) ¦ wann {name} net mam Verstuerwene bestuet war (PACS oder Zesummeliewen)
+si {name} est mort avant, représenté par ses descendants ¦ wann {name} virdru gestuerwen ass, vertruede vu senge Nokommen
+si {name} est mort avant sans descendant ¦ wann {name} virdru ouni Nokomme gestuerwen ass
+Enfants et descendants, avec représentation ¦ Kanner an Nokommen, mat Vertriedung
+Père et mère, frères et sœurs et leurs descendants (« parents privilégiés ») ¦ Papp a Mamm, Geschwëster an hir Nokommen („privilegéiert Verwandter“)
+Autres ascendants (grands-parents…), fente paternelle / maternelle ¦ Aner Viirfahren (Grousselteren…), Deelung Pappe- / Mammesäit
+Oncles, tantes, cousins… jusqu’au 6e degré (art. 745) ¦ Monnen, Tatten, Koséngen… bis zum 6. Grad (Art. 745)
+Vivant au décès ? Mort avant ? Des enfants ? Sa réponse change la part des autres. ¦ Lieweg beim Doud? Virdru gestuerwen? Kanner? D’Äntwert ännert d’Undeeler vun deenen aneren.
+Mort avant le défunt, sans descendance connue : un enfant, même reconnu tard, changerait le partage. ¦ Virum Verstuerwene gestuerwen, keng bekannt Nokommen: e Kand, och spéit unerkannt, géif d’Deelung änneren.
+Aucun enfant du défunt dans la base : à vérifier (mentions en marge de l’acte de naissance, livret de famille). ¦ Kee Kand vum Verstuerwenen an der Datebank: ze kontrolléieren (Randvermierker um Gebuertsakt, Familljebuch).
+Les parents du défunt ne sont pas dans la base : sans eux, l’app ne trouve ni frères, ni sœurs, ni cousins. ¦ D’Eltere vum Verstuerwenen sinn net an der Datebank: ouni si fënnt d’App weder Geschwëster nach Koséngen.
+Un seul parent du défunt est dans la base : l’autre branche reste à chercher. ¦ Nëmmen een Elterendeel vum Verstuerwenen ass an der Datebank: déi aner Branche muss nach gesicht ginn.
+Adoption : plénière ou simple ? Une adoption plénière coupe les liens avec la famille d’origine. ¦ Adoptioun: voll oder einfach? Eng voll Adoptioun brécht d’Bänn mat der Hierkonftsfamill.
+Couple sans mariage noté : seul un conjoint marié hérite sans testament (pas le partenaire de PACS ni le concubin). ¦ Koppel ouni notéiert Bestietnes: ouni Testament ierft nëmmen de bestuete Partner (net de PACS-Partner oder Liewenspartner).
+Un seul parent noté : relie sa fiche à son autre parent (frère germain ou demi-frère). ¦ Nëmmen een Elterendeel notéiert: den Agrag mam aneren Elterendeel verbannen (Voll- oder Hallefgeschwëster).
+Personne dans la branche paternelle jusqu’au 6e degré : oncles, tantes et cousins du père à chercher. ¦ Keen an der Pappebranche bis zum 6. Grad: Monnen, Tatten a Koséngen vum Papp ze sichen.
+Personne dans la branche maternelle jusqu’au 6e degré : oncles, tantes et cousins de la mère à chercher. ¦ Keen an der Mammebranche bis zum 6. Grad: Monnen, Tatten a Koséngen vun der Mamm ze sichen.
+Vivant, mais pas d’adresse dans le Répertoire des vivants. ¦ Lieweg, awer keng Adress am Verzeechnes vun de Liewegen.
+Mort après le défunt : sa part passe à ses propres héritiers (sa succession à lui). ¦ Nom Verstuerwene gestuerwen: säin Undeel geet un seng eege Ierwen (säin eegene Nolooss).
+Présumé absent : sa part est réservée (art. 112 à 132). ¦ Vermutlech ofwiesend: den Undeel gëtt reservéiert (Art. 112 bis 132).
+Date du décès inconnue : l’app ne peut pas dire qui était mort avant ni quel droit s’applique. ¦ Doudesdatum onbekannt: d’App kann net soen, wien als éischt gestuerwen ass an och net, wéi e Recht gëllt.
+Décès du {date} : le droit de l’époque n’est pas celui d’aujourd’hui. Avant le 1er juillet 2002 (loi du 3 décembre 2001), le conjoint survivant avait surtout de l’usufruit, les enfants nés hors mariage n’avaient pas tous les mêmes droits et les frères et sœurs de lits différents se partageaient par lignes. Avant le 1er août 1972, les enfants naturels avaient des droits réduits. L’app calcule ici selon le droit actuel : le notaire applique le droit de la date. ¦ Doud den {date}: d’Recht vun deemools ass net dat vun haut. Virum 1. Juli 2002 (Gesetz vum 3. Dezember 2001) hat den iwwerliewenden Ehepartner virun allem den Nossbrauch, ausserbestuet Kanner haten net all déi selwecht Rechter an d’Geschwëster aus verschiddene Bestietnesser hunn no Linne gedeelt. Virum 1. August 1972 haten ausserbestuet Kanner reduzéiert Rechter. D’App rechent hei no dem aktuelle Recht: den Notaire applizéiert d’Recht vum Datum.
+Décès avant le 1er janvier 2007 (loi du 23 juin 2006) : on ne pouvait pas représenter un héritier qui avait renoncé. ¦ Doud virum 1. Januar 2007 (Gesetz vum 23. Juni 2006): en Ierw, deen ofgesot hat, konnt net vertruede ginn.
+Décès en 2002 sans date précise : avant ou après le 1er juillet 2002, le droit change. Précise la date. ¦ Doud am Joer 2002 ouni genaue Datum: virun an nom 1. Juli 2002 ännert d’Recht. Gëff den Datum un.
+Divorce ¦ Scheedung
+La naissance de {name} ¦ D’Gebuert vu(n) {name}
+Le décès de {name} ¦ Den Doud vu(n) {name}
+Le mariage avec {name}, non dissous ¦ D’Bestietnes mat {name}, net opgeléist
+Le divorce d’avec {name} ¦ D’Scheedung vu(n) {name}
+Pas de conjoint survivant : décès de {name} ¦ Keen iwwerliewenden Ehepartner: Doud vu(n) {name}
+{name} est mort avant ¦ {name} ass virdru gestuerwen
+Commun à tous ¦ Gemeinsam fir all
+{name} a renoncé à la succession ¦ {name} huet op d’Ierfschaft verzicht
+{name} est mort avant (représenté) ¦ {name} ass virdru gestuerwen (vertrueden)
+Son nom d’épouse ¦ Hire bestuete Numm
+{name} (pour l’écarter) ¦ {name} (fir auszeschléissen)
+Mort avant le défunt, sans enfant ¦ Virum Verstuerwene gestuerwen, ouni Kanner
+Chaque héritier a ses actes : il en manque pour {who}. ¦ All Ierw huet seng Akten: et feelen der fir {who}.
+Chaque héritier a ses actes. ¦ All Ierw huet seng Akten.
+Chaque prédécédé a son acte de décès : {n} manquent. ¦ All virdru Gestuerwenen huet säin Doudesakt: {n} feelen.
+Chaque prédécédé a son acte de décès. ¦ All virdru Gestuerwenen huet säin Doudesakt.
+Les branches inconnues ont une explication. ¦ Déi onbekannte Branchen hunn eng Erklärung.
+{n} héritiers ou branches restent « inconnus » sans explication. ¦ {n} Ierwen oder Branche bleiwen „onbekannt“ ouni Erklärung.
+Aucune branche « inconnue ». ¦ Keng „onbekannt“ Branche.
+L’hypothèse retenue est écrite. ¦ Déi gewielten Hypothees ass opgeschriwwen.
+Plusieurs hypothèses : écris celle qui est retenue. ¦ Méi Hypothesen: schreif op, wéi eng gewielt ass.
+Une seule hypothèse. ¦ Eng eenzeg Hypothees.
+Les parts totalisent 1. ¦ D’Undeeler ginn zesummen 1.
+Les parts ne totalisent pas 1 : à revoir. ¦ D’Undeeler ginn net 1: ze iwwerpréiwen.
+La date du décès demande l’avis du notaire (droit de l’époque ou date inconnue). ¦ Den Doudesdatum brauch d’Meenung vum Notaire (Recht vun deemools oder onbekannten Datum).
+{name} ajouté (statut inconnu) ¦ {name} bäigesat (Statut onbekannt)
+{name} ajouté ({share}) ¦ {name} bäigesat ({share})
+{name} : {from} → {to} ¦ {name}: {from} → {to}
+{name} retiré ¦ {name} ewechgeholl
+Ordre retenu : {from} → {to} ¦ Gewielten Uerdnung: {from} → {to}
+descendante à la {n}e génération ¦ Nokomm an der {n}. Generatioun
+descendant à la {n}e génération ¦ Nokomm an der {n}. Generatioun
+ascendante à la {n}e génération ¦ Virfahrin an der {n}. Generatioun
+ascendant à la {n}e génération ¦ Virfahr an der {n}. Generatioun
+parente au {n}e degré ¦ Verwandt am {n}. Grad
+parent au {n}e degré ¦ Verwandten am {n}. Grad
+petit-fils ¦ Enkel
+petite-fille ¦ Enkelin
+arrière-petit-fils ¦ Urenkel
+arrière-petite-fille ¦ Urenkelin
+arrière-arrière-petit-fils ¦ Ururenkel
+arrière-arrière-petite-fille ¦ Ururenkelin
+nièce ¦ Niess
+petit-neveu ¦ Grousssneveu
+petite-nièce ¦ Groussniess
+arrière-petit-neveu ¦ Urgroussneveu
+arrière-petite-nièce ¦ Urgroussniess
+arrière-arrière-petit-neveu ¦ Ururgroussneveu
+arrière-arrière-petite-nièce ¦ Ururgroussniess
+cousin germain ¦ Kousin
+cousine germaine ¦ Kusinn
+fils de cousin germain ¦ Jong vun engem Kousin
+fille de cousin germain ¦ Duechter vun engem Kousin
+petit-fils de cousin germain ¦ Enkel vun engem Kousin
+petite-fille de cousin germain ¦ Enkelin vun engem Kousin
+grand-oncle ¦ Grousmonni
+grand-tante ¦ Groustatta
+cousin germain d’un parent ¦ Kousin vun engem Elterendeel
+cousine germaine d’un parent ¦ Kusinn vun engem Elterendeel
+cousin issu de germains ¦ Kousin zweete Grads
+cousine issue de germains ¦ Kusinn zweete Grads
+arrière-grand-oncle ¦ Urgrousmonni
+arrière-grand-tante ¦ Urgroustatta
+cousin germain d’un grand-parent ¦ Kousin vun engem Grousselterendeel
+cousine germaine d’un grand-parent ¦ Kusinn vun engem Grousselterendeel
+arrière-arrière-grand-oncle ¦ Ururgrousmonni
+arrière-arrière-grand-tante ¦ Ururgroustatta
+frère germain ¦ Vollbrudder
+sœur germaine ¦ Vollschwëster
+demi-frère (même père) ¦ Hallefbrudder (selwechte Papp)
+demi-sœur (même père) ¦ Hallefschwëster (selwechte Papp)
+demi-frère (même mère) ¦ Hallefbrudder (selwecht Mamm)
+demi-sœur (même mère) ¦ Hallefschwëster (selwecht Mamm)
+Père, mère, enfant ¦ Papp, Mamm, Kand
+Frère, sœur, grand-parent, petit-enfant ¦ Brudder, Schwëster, Grousselterendeel, Enkelkand
+Neveu, nièce, oncle, tante ¦ Neveu, Niess, Monni, Tatta
+Cousin germain, petit-neveu, grand-oncle ¦ Kousin, Grousssneveu, Grousmonni
+Enfant de cousin germain ¦ Kand vun engem Kousin
+Cousin issu de germains (limite) ¦ Kousin zweete Grads (Grenz)
+Présomption d’absence : le juge des tutelles la constate quand une personne a cessé de paraître sans donner de nouvelles. Elle est réputée vivante ; sa part est réservée et gérée. ¦ Vermutung vun Ofwiesenheet: d’Geriicht stellt se fest, wann eng Persoun ouni Noriicht net méi opdaucht. Si gëllt als lieweg; hiren Undeel gëtt reservéiert a verwalt.
+Déclaration d’absence : 10 ans après le jugement de présomption (ou 20 ans sans nouvelles), le tribunal judiciaire la déclare ; le jugement a les effets d’un décès. ¦ Erklärung vun der Ofwiesenheet: 10 Joer nom Uerteel iwwer d’Vermutung (oder 20 Joer ouni Noriicht) erkläert d’Geriicht se; d’Uerteel huet d’Effekter vun engem Doud.
+Jugement déclaratif de décès : pour une disparition dans des circonstances qui mettent la vie en danger (naufrage, catastrophe), sans attendre. ¦ Doudeserklärung: bei engem Verschwanne ënner liewensgeféierlechen Ëmstänn (Schëffbroch, Katastroph), ouni ze waarden.
+Service central d’état civil (Nantes) : les actes des Français nés, mariés ou morts à l’étranger. ¦ Zentrale Zivilstandsservice (Nantes): d’Akte vu Fransousen, déi am Ausland gebuer, bestuet oder gestuerwe sinn.
+Le consulat de France du pays : registres d’immatriculation, actes transcrits récents. ¦ Dat franséischt Konsulat am Land: konsularesch Registeren, rezent iwwerdroen Akten.
+L’état civil du pays (mairie, registro civil, Standesamt…) : lettre dans la langue du pays. ¦ Den Zivilstand vum Land (Gemeng, registro civil, Standesamt…): Bréif an der Sprooch vum Land.
+Archives nationales d’outre-mer (Aix-en-Provence) : colonies et Algérie avant 1962. ¦ National Iwwerséi-Archiven (Aix-en-Provence): Kolonien an Algerien virun 1962.
+Ouvert ¦ Opgemaach
+En recherche ¦ Op der Sich
+Héritiers trouvés ¦ Ierwe fonnt
+Clos ¦ Ofgeschloss
+📁 Dossier ¦ 📁 Dossier
+👥 Héritiers ¦ 👥 Ierwen
+🌳 Arbre ¦ 🌳 Bam
+✉️ Héritiers contactés ¦ ✉️ Kontaktéiert Ierwen
+🖨 Pour le notaire ¦ 🖨 Fir den Notaire
+🕓 Journal ¦ 🕓 Journal
+💶 Temps et frais ¦ 💶 Zäit a Käschten
+Décédé après ¦ Duerno gestuerwen
+Décédée après ¦ Duerno gestuerwen
+Renonce ¦ Verzicht
+Indigne ¦ Onwierdeg
+Absent ¦ Ofwiesend
+Absente ¦ Ofwiesend
+Pas encore conçu ¦ Nach net gezeegt
+Pas encore conçue ¦ Nach net gezeegt
+Comme sur la fiche ¦ Wéi am Agrag
+Vivant au décès ¦ Lieweg beim Doud
+Mort avant le défunt ¦ Virum Verstuerwene gestuerwen
+Mort après le défunt ¦ Nom Verstuerwene gestuerwen
+Renonce à la succession ¦ Verzicht op d’Ierfschaft
+Déclaré absent ¦ Fir ofwiesend erkläert
+Refuse ¦ Refuséiert
+Rappellera ¦ Rifft zréck
+✓ En main ¦ ✓ An der Hand
+📮 Demandé ¦ 📮 Ugefrot
+✗ Manquant ¦ ✗ Feelt
+Sans objet ¦ Net zoutreffend
+⏱ Temps ¦ ⏱ Zäit
+🧾 Frais ¦ 🧾 Käschten
+📝 Contrat ¦ 📝 Kontrakt
+02 — HÉRITIERS ¦ 02 — IERWEN
+Généalogiste successoral ¦ Ierwesicher
+Retrouver les héritiers d’une personne décédée, pour un notaire. ¦ D’Ierwe vun enger verstuerwener Persoun fir en Notaire fannen.
++ ⚖️ Successions (Dossiers · Héritiers à contacter · Courriers). Premier écran : « Ouvrir un dossier ». ¦ + ⚖️ Ierfschaften (Dossieren · Ierwen ze kontaktéieren · Bréiwer). Éischten Ecran: „En Dossier opmaachen“.
+⚖️ Successions : dossiers, héritiers à contacter, courriers. ¦ ⚖️ Ierfschaften: Dossieren, Ierwen ze kontaktéieren, Bréiwer.
+⚖️ Successions ¦ ⚖️ Ierfschaften
+Vivants ¦ Lieweg
+Courriers ¦ Bréiwer
+Échéance le {date} ¦ Frist den {date}
+Pour quel héritier ? ¦ Fir wéi een Ierw?
+Lettre à un héritier ¦ Bréif un en Ierw
+ne révèle pas le défunt avant signature ; honoraires et date limite à écrire ¦ deckt de Verstuerwenen net virun der Ënnerschrëft op; Honorar a Frist anzedroen
+premier contact, sans nommer le défunt ¦ éischte Kontakt, ouni de Verstuerwenen ze nennen
+Il y a déjà un dossier pour cette personne. ¦ Fir dës Persoun gëtt et schonn en Dossier.
+Date d’ouverture incorrecte. ¦ Falschen Ouvertursdatum.
+Notaire introuvable. ¦ Notaire net fonnt.
+Passe d’abord par la liste de contrôle avant « Remis au notaire ». ¦ Gëff fir d’éischt duerch d’Kontrolllëscht virun „Dem Notaire iwwerginn“.
+Ce dossier est archivé. ¦ Dësen Dossier ass archivéiert.
+Valeur inconnue. ¦ Onbekannte Wäert.
+Pièce inconnue. ¦ Onbekannt Dokument.
+Choisis la date de l’échéance. ¦ Wiel den Datum vun der Frist.
+Écris ce qu’il faut faire. ¦ Schreif op, wat ze maachen ass.
+Échéance introuvable. ¦ Frist net fonnt.
+Date incorrecte. ¦ Falschen Datum.
+Le pourcentage va de 0 à 100. ¦ De Prozentsaz geet vun 0 bis 100.
+Combien de temps ? ¦ Wéi laang?
+Choisis l’héritier. ¦ Wiel den Ierw.
+Date de signature incorrecte. ¦ Falschen Ënnerschrëftsdatum.
+Seul un dossier clos peut être archivé. ¦ Nëmmen en ofgeschlossenen Dossier kann archivéiert ginn.
+Mode consultation : les dossiers de succession ne se montrent pas. ¦ Kuckmodus: Ierfschaftsdossiere ginn net gewisen.
+Rien à noter. ¦ Näischt ze notéieren.
+Calcul manquant. ¦ Rechnung feelt.
+Dossiers ¦ Dossieren
+Héritiers à contacter ¦ Ierwen ze kontaktéieren
+Que montrer ¦ Wat weisen
+Lecture des héritiers… ¦ D’Ierwe ginn gelies…
+Lecture des courriers… ¦ D’Bréiwer ginn gelies…
+Voir toute la liste ↗ ¦ Déi ganz Lëscht gesinn ↗
+Aucun courrier ¦ Kee Bréif
+Courrier envoyé ¦ Bréif geschéckt
+Réponse : {r} ¦ Äntwert: {r}
+Courrier envoyé le {d} ¦ Bréif geschéckt den {d}
+Aucun héritier à contacter dans les dossiers en cours. ¦ Keen Ierf ze kontaktéieren an de lafende Dossieren.
+Les héritiers vivants (ou au statut inconnu) des dossiers ouverts viennent ici, avec leur adresse et l’état du contact. ¦ Déi lieweg Ierwen (oder mat onbekanntem Status) vun den oppenen Dossiere stinn hei, mat hirer Adress an dem Stand vum Kontakt.
+Chercher… (nom, dossier, ville) ¦ Sichen… (Numm, Dossier, Uertschaft)
+Tous les dossiers ¦ All d’Dossieren
+État du contact ¦ Stand vum Kontakt
+Par dossier ¦ No Dossier
+À contacter d’abord ¦ Fir d’éischt ze kontaktéieren
+Aucun héritier ne correspond. ¦ Keen Ierf passt.
+📇 Compléter l’adresse ¦ 📇 Adress ergänzen
+adresse à trouver ¦ Adress ze fannen
+Courriel ¦ E-Mail
+Héritiers à contacter exportés (CSV) ¦ Ierwen ze kontaktéieren exportéiert (CSV)
+Héritier à l’étranger ¦ Ierf am Ausland
+Demande d’acte ¦ Ufro vun engem Akt
+Aucun courrier de succession pour l’instant. ¦ Nach keng Ierfschaftsbréiwer.
+Les courriers écrits depuis un dossier (✉️ Héritiers contactés, 📑 Pièces) viennent ici. ¦ Bréiwer, déi aus engem Dossier geschriwwe goufen (✉️ Kontaktéiert Ierwen, 📑 Dokumenter), stinn hei.
+Chercher… (destinataire, dossier) ¦ Sichen… (Empfänger, Dossier)
+Aucun courrier ne correspond. ¦ Kee Bréif passt.
+📮 COURRIER DE SUCCESSION ¦ 📮 IERFSCHAFTSBRÉIF
+Dévolution ¦ Ierffolleg
+=héritier ¦ Ierwen|Ierwen
+=courrier ¦ Bréif|Bréiwer
+=dépouillement ¦ Auswäertung|Auswäertungen
+=dossier en cours ¦ lafende Dossier|lafend Dossieren
+=dossier de succession ¦ Ierfschaftsdossier|Ierfschaftsdossieren
+
+# ⚖️ Dossiers de succession : rangement, filtre ⚖️, rattachement, tableau de bord, garde-fous, widget, vue par dossier
+Dossiers de succession : filtre {what} (cliquer pour changer) ¦ Ierfschaftsdossiere: Filter {what} (klick fir z’änneren)
+Dossiers de succession : ne montrer qu’un ou plusieurs dossiers ¦ Ierfschaftsdossiere: nëmmen een oder e puer Dossiere weisen
+Plusieurs ¦ E puer
+⚖️ Ne montrer que ceux-ci ¦ ⚖️ Nëmmen déi weisen
+Aucun dossier dans cette généalogie. ¦ Keen Dossier an dëser Genealogie.
+Dans une autre généalogie ¦ An enger anerer Genealogie
+Tous les dossiers… ¦ All d’Dossiere…
+Seulement le dossier {n} ¦ Nëmmen den Dossier {n}
+Seulement {what} : {list} ¦ Nëmmen {what}: {list}
+1 dossier · {state} ¦ 1 Dossier · {state}
+⚖️ Dossier {n} ¦ ⚖️ Dossier {n}
+Ce dossier est dans une autre généalogie ¦ Dësen Dossier ass an enger anerer Genealogie
+Ouvrir « {name} » ¦ „{name}“ opmaachen
+Il est rangé dans « {name} ». Pour le montrer, l’app ouvre cette généalogie (tes réglages d’ici sont gardés) et y active le filtre ⚖️ {n}. ¦ E läit an „{name}“. Fir en ze weisen, mécht d’App déi Genealogie op (deng Astellungen hei bleiwen) an aktivéiert do de Filter ⚖️ {n}.
+Tes nouveaux dossiers vont dans « {name} ». ¦ Deng nei Dossiere kommen an „{name}“.
+Ouvrir le dossier ici quand même ¦ Den Dossier trotzdeem hei opmaachen
+Où ranger tes dossiers ? ¦ Wou solle deng Dossiere leien?
+conseillé ici ¦ hei ugeroden
+Nom de la nouvelle généalogie ¦ Numm vun der neier Genealogie
+⚖️ Dossier de succession ¦ ⚖️ Ierfschaftsdossier
+Ta généalogie ouverte a {n} : la ranger à part évite de mélanger les héritiers de tes clients avec ta propre famille. Ce n’est qu’un conseil. ¦ Deng opgemaach Genealogie huet {n}: se separat ze halen, vermeit, datt d’Ierwe vun dene Clienten sech mat denger eegener Famill vermëschen. Et ass nëmmen e Rot.
+Tu pourras changer d’avis : Réglages → Apparence → 🧭 Usage de l’app → « ⚖️ Où ranger les dossiers ». Les dossiers déjà ouverts ne bougent pas tout seuls. ¦ Du kanns et der nach anescht iwwerleeën: Astellungen → Ausgesinn → 🧭 Notzung vun der App → „⚖️ Wou d’Dossiere leien“. Dossieren, déi schonn op sinn, réckelen net vum selwen.
+Créer « ⚖️ Dossiers de succession » et ouvrir le dossier ¦ „⚖️ Ierfschaftsdossiere“ uleeën an den Dossier opmaachen
+Créer la généalogie et ouvrir le dossier ¦ D’Genealogie uleeën an den Dossier opmaachen
+Rangement des dossiers : {what} ¦ Wou d’Dossiere kommen: {what}
+Généalogiste successoral : réglages des dossiers ¦ Ierwesicher: Astellunge vun den Dossieren
+Où ranger les dossiers ¦ Wou d’Dossiere leien
+Les nouveaux dossiers vont… ¦ Nei Dossiere kommen…
+Dans « {name} » ¦ An „{name}“
+Les dossiers et où ils sont ¦ D’Dossieren a wou se sinn
+⇄ Déplacer… ¦ ⇄ Réckelen…
+Aucun dossier pour l’instant. ¦ Nach keen Dossier.
+Réglages des dossiers ¦ Astellunge vun den Dossieren
+Arbre et graphiques filtrés par ⚖️ : les fiches hors dossier ¦ Bam a Grafike mam Filter ⚖️: Fiche baussent dem Dossier
+Archive d’un dossier clos : adresses des héritiers vivants ¦ Archiv vun engem zouene Dossier: Adressen vun de liewegen Ierwen
+Déplacer un dossier dont une fiche est aussi dans ta famille ¦ En Dossier réckelen, vun deem eng Fiche och an denger Famill ass
+« Sans dossier » dans la vue par dossier ¦ „Ouni Dossier“ an der Usiicht no Dossier
+Avancement : un héritier qui refuse de signer ¦ Fortschrëtt: en Ierw, deen d’Ënnerschrëft refuséiert
+compte comme « fait » (étape 5) ¦ zielt als „gemaach“ (Schrëtt 5)
+Avancement : poids des 7 étapes ¦ Fortschrëtt: Gewiicht vun de 7 Schrëtt
+Réglage des dossiers enregistré : {what} ¦ Astellung vun den Dossieren gespäichert: {what}
+poids des 7 étapes ¦ Gewiicht vun de 7 Schrëtt
+⇄ DÉPLACER UN DOSSIER ¦ ⇄ EN DOSSIER RÉCKELEN
+{n} → ? ¦ {n} → ?
+⇄ Déplacer ({what}) ¦ ⇄ Réckelen ({what})
+Vers ¦ No
+＋ Une nouvelle généalogie pour ce dossier ¦ ＋ Eng nei Genealogie fir dësen Dossier
+Ce qui part : le dossier, son journal, ses pièces, ses courriers, ses échéances, et les fiches qui lui sont rattachées (défunt, héritiers, intermédiaires) avec leurs actes et médias. Une fiche aussi rattachée à un autre dossier ou à ta famille est copiée, pas déplacée. ¦ Wat matgeet: den Dossier, säi Journal, seng Pièce, seng Bréiwer, seng Fristen an d’Fichen, déi drun hänken (Verstuerwenen, Ierwen, Zwëschenglieder) mat hiren Akten a Medien. Eng Fiche, déi och un en aneren Dossier oder un deng Famill hänkt, gëtt kopéiert, net geréckelt.
+Déplacement refusé (réglage) : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Réckele refuséiert (Astellung): dës Fiche sinn och an denger Famill oder an engem aneren Dossier: {names}.
+Copiées (elles restent aussi ici) : {names}. ¦ Kopéiert (si bleiwen och hei): {names}.
+Une copie de sauvegarde des deux généalogies est faite avant. Le journal du dossier note « Déplacé de … vers … ». ¦ Virdrun gëtt eng Sécherheetskopie vu béide Genealogië gemaach. De Journal vum Dossier notéiert „Geréckelt vun … op …“.
+Dossier {n} déplacé vers « {to} » ({what}) ¦ Dossier {n} op „{to}“ geréckelt ({what})
+⤓ Reprendre la fiche depuis Ma généalogie ¦ ⤓ D’Fiche aus Menger Genealogie iwwerhuelen
+copie de la fiche, jusqu’aux grands-parents et tous leurs descendants connus, sans photos ¦ Kopie vun der Fiche bis bei d’Grousselteren an all hir bekannt Nokommen, ouni Fotoen
+⤓ REPRENDRE UNE FICHE ¦ ⤓ ENG FICHE IWWERHUELEN
+Reprendre la fiche du défunt ¦ D’Fiche vum Verstuerwenen iwwerhuelen
+Chercher la fiche ¦ D’Fiche sichen
+Prénom, nom… ¦ Virnumm, Numm…
+Copiées : la fiche, ses parents et grands-parents, tous leurs descendants connus et leurs conjoints, avec les dates et les lieux ; sans photos. Rien n’est changé dans l’autre généalogie. ¦ Kopéiert ginn: d’Fiche, hir Elteren a Grousselteren, all bekannt Nokommen an hir Partner, mat Datumen a Plazen; ouni Fotoen. An der anerer Genealogie ännert sech näischt.
+{what} reprises de l’autre généalogie. ¦ {what} aus der anerer Genealogie iwwerholl.
+Dossiers… ¦ Dossieren…
+{name} dans quels dossiers ? ¦ {name} a wéi engen Dossieren?
+(calculé) ¦ (berechent)
+Rôles : défunt · héritier · intermédiaire · témoin · à vérifier. « Héritier » mis par le calcul s’affiche « (calculé) ». ¦ Rollen: Verstuerwenen · Ierw · Zwëschenglidd · Zeien · ze kontrolléieren. En „Ierw“, deen d’Berechnung gesat huet, weist „(berechent)“.
+Dossiers de {name} enregistrés ¦ Dossiere vum {name} gespäichert
+Les dossiers de cette fiche ¦ D’Dossiere vun dëser Fiche
+hors du dossier {n} ¦ baussent dem Dossier {n}
+＋ Rattacher ¦ ＋ Zouuerdnen
+Fiche rattachée au dossier {n} ¦ Fiche dem Dossier {n} zougeuerdnet
+Rattachée au dossier {n} : {who} ¦ Dem Dossier {n} zougeuerdnet: {who}
+Lecture des fiches du dossier… ¦ D’Fiche vum Dossier gi gelies…
+Les fiches du dossier ¦ D’Fiche vum Dossier
+Rattacher ¦ Zouuerdnen
+Retirées à la main ({n}) : jamais remises toutes seules ¦ Mat der Hand ewechgeholl ({n}): ni vum selwe erëm drugesat
+Fiche à comparer : « {name}{year} » ressemble à une fiche déjà dans cette base. Jamais fusionnée toute seule. ¦ Fiche fir ze vergläichen: „{name}{year}“ gläicht enger Fiche, déi schonn an dëser Datebank ass. Ni vum selwe fusionéiert.
+née {y} ¦ gebuer {y}
+Homonyme possible : « {name}{year} » existe aussi dans le dossier {n}. Jamais relié tout seul. ¦ Méiglechen Nummébrudder: „{name}{year}“ gëtt et och am Dossier {n}. Ni vum selwe verbonnen.
+⇆ Comparer ¦ ⇆ Vergläichen
+C’est la même personne : rattacher aussi ¦ Et ass déiselwecht Persoun: och zouuerdnen
+Pas la même ¦ Net déiselwecht
+Fiche retirée du dossier {n} ¦ Fiche aus dem Dossier {n} ewechgeholl
+Fiche remise dans le dossier {n} ¦ Fiche erëm an den Dossier {n} gesat
+Homonyme rattaché aussi au dossier {n} (à vérifier) ¦ Nummébrudder och dem Dossier {n} zougeuerdnet (ze kontrolléieren)
+Noté : ce n’est pas la même personne ¦ Notéiert: net déiselwecht Persoun
+Rôle : {r} ¦ Roll: {r}
+⚠️ illisible : {names} ¦ ⚠️ net liesbar: {names}
+Chercher… (n°, défunt, notaire) ¦ Sichen… (Nr., Verstuerwenen, Notaire)
+Toutes les généalogies ¦ All d’Genealogien
+Tous les notaires ¦ All d’Notairen
+Prochaine échéance (retards d’abord) ¦ Nächst Frist (Retarden als éischt)
+Avancement le plus bas ¦ Klengste Fortschrëtt
+{d} · passée ¦ {d} · ofgelaf
+Trouvés : {n} ¦ Fonnt: {n}
+À trouver : {n} ¦ Ze fannen: {n}
+{h} h {m} ¦ {h} St. {m}
+Cocher le dossier {n} ¦ Den Dossier {n} ukräizen
+Échéance : {d} ¦ Frist: {d}
+Héritiers ¦ Ierwen
+Avancement ¦ Fortschrëtt
+Cochés : {n} ¦ Ugekräizt: {n}
+Les dossiers cochés sont dans des généalogies différentes : choisis-en dans une seule. ¦ Déi ugekräizt Dossiere sinn a verschiddene Genealogien: wiel se nëmmen aus enger.
+Dossiers exportés (CSV) ¦ Dossieren exportéiert (CSV)
+⤒ Réimporter un dossier archivé… ¦ ⤒ En archivéierten Dossier nees importéieren…
+⚠️ FUSION ¦ ⚠️ FUSIOUN
+Ces deux fiches sont dans des dossiers différents ¦ Dës zwou Fiche sinn a verschiddenen Dossieren
+Fusionner quand même ¦ Trotzdeem fusionéieren
+{a} et {b}. Fusionner relie les deux successions et change les parts des deux dossiers. Vérifie avec des actes (naissance, parents) avant. ¦ {a} an {b}. D’Fusioun verbënnt déi zwou Ierfschaften an ännert d’Undeeler an deenen zwee Dossieren. Kontrolléier et virdrun mat Akten (Gebuert, Elteren).
+⇆ Comparer d’abord ¦ ⇆ Fir d’éischt vergläichen
+Si on fusionne : noté dans le journal des deux dossiers, et les deux sont recalculés. ¦ Bei enger Fusioun: am Journal vu béiden Dossieren notéiert, a béid ginn nei berechent.
+🗄 Archiver dans un fichier et retirer… ¦ 🗄 An eng Datei archivéieren an ewechhuelen…
+🗄 ARCHIVER LE DOSSIER {n} ¦ 🗄 DEN DOSSIER {n} ARCHIVÉIEREN
+Dans un fichier, puis retirer de la base ¦ An eng Datei, dann aus der Datebank ewechhuelen
+⤓ Enregistrer le fichier puis retirer ¦ ⤓ D’Datei späicheren an dann ewechhuelen
+Le fichier {file} contient : le dossier, le journal, les pièces et leurs images, les courriers, l’arbre de dévolution (SVG), le tableau pour le notaire et les fiches rattachées ({n}). ¦ D’Datei {file} enthält: den Dossier, de Journal, d’Pièce mat hire Biller, d’Bréiwer, den Ierffollegbam (SVG), d’Tabell fir den Notaire an déi zougeuerdent Fichen ({n}).
+Garder les adresses des vivants dans le fichier ¦ D’Adresse vun de Liewegen an der Datei halen
+utile si le notaire rouvre la succession ¦ nëtzlech, wann den Notaire d’Ierfschaft nees opmécht
+Retirer les adresses ¦ D’Adressen ewechhuelen
+comme l’archivage actuel ¦ wéi dat aktuellt Archivéieren
+Ensuite, les fiches qui ne servent qu’à ce dossier sont retirées de la base ({n}). Une fiche aussi rattachée à un autre dossier (ou à ta famille) reste ({k}). Une sauvegarde est faite avant. ¦ Dono ginn d’Fichen, déi nëmmen dësem Dossier déngen, aus der Datebank ewechgeholl ({n}). Eng Fiche, déi och un en aneren Dossier (oder deng Famill) hänkt, bleift ({k}). Virdrun gëtt eng Sécherheetskopie gemaach.
+Dossier {n} archivé dans « {file} » et retiré ({what}) ¦ Dossier {n} an „{file}“ archivéiert an ewechgeholl ({what})
+⤒ RÉIMPORTER ¦ ⤒ NEES IMPORTÉIEREN
+⤒ Réimporter le dossier ¦ ⤒ Den Dossier nees importéieren
+Dossier {n} ({name}{closed}), {what}. ¦ Dossier {n} ({name}{closed}), {what}.
+clos le {d} ¦ zougemaach den {d}
+{what} ressemblent à des fiches déjà dans cette base ({names}) : elles seront proposées à la comparaison, jamais fusionnées seules. ¦ {what} gläichen Fichen, déi schonn an dëser Datebank sinn ({names}): si ginn zum Vergläichen ugebueden, ni vum selwe fusionéiert.
+Dossier {n} réimporté ({what}) ¦ Dossier {n} nees importéiert ({what})
+Dossier {n} réimporté dans « {name} ». ¦ Dossier {n} nees an „{name}“ importéiert.
+⚖️ Mes dossiers de succession ¦ ⚖️ Meng Ierfschaftsdossieren
+Aucun dossier de succession. ¦ Keen Ierfschaftsdossier.
+Étapes (7) ¦ Schrëtt (7)
+{step} : {done} sur {total} ¦ {step}: {done} vun {total}
+Quels dossiers ¦ Wéi eng Dossieren
+Le filtre ¦ De Filter
+Vue actuelle ¦ Aktuell Usiicht
+Alt + ↑ / ↓ : changer l’ordre (rangement à la main) ¦ Alt + ↑ / ↓: d’Reiefolleg änneren (mat der Hand)
+Sans dossier ¦ Ouni Dossier
+Ranger les dossiers : ¦ D’Dossieren uerdnen:
+… cherche un nom pour voir les autres. ¦ … sich en Numm, fir déi aner ze gesinn.
+Ordre des dossiers changé ¦ Reiefolleg vun den Dossieren geännert
+Dans cette généalogie ¦ An dëser Genealogie
+Le défunt et ses héritiers sont des fiches de ta famille. Simple, mais tout se mélange. ¦ De Verstuerwenen a seng Ierwe sinn Fiche vun denger Famill. Einfach, mee alles vermëscht sech.
+Dans une généalogie à part pour tous mes dossiers ¦ An enger separater Genealogie fir all meng Dossieren
+Une base professionnelle « ⚖️ Dossiers de succession », créée dans 🌳 Mes généalogies. Tes dossiers y sont tous ensemble ; ta famille reste à part. ¦ Eng beruflech Datebank „⚖️ Ierfschaftsdossiere“, ugeluecht an 🌳 Meng Genealogien. All deng Dossiere sinn do zesummen; deng Famill bleift separat.
+Une généalogie par dossier ¦ Eng Genealogie pro Dossier
+Chaque dossier a sa propre base (« ⚖️ 2026-014 MAZAUD »). Le plus étanche ; à réserver aux grosses successions. ¦ All Dossier huet seng eege Datebank („⚖️ 2026-014 MAZAUD“). Am dichtsten; fir grouss Ierfschaften.
+défunt ¦ Verstuerwenen
+intermédiaire ¦ Zwëschenglidd
+Un par dossier ¦ Eng pro Dossier
+Un filtre ¦ E Filter
+Compteurs ¦ Zieler
+à l’ouverture ¦ beim Opmaachen
+calcul ¦ Berechnung
+à la main ¦ mat der Hand
+créée pendant le filtre ¦ während dem Filter ugeluecht
+réimport ¦ nees importéiert
+homonyme ¦ Nummébrudder
+déplacée ¦ geréckelt
+grisées, sans nom ¦ gro, ouni Numm
+cachées ¦ verstoppt
+retirées du fichier ¦ aus der Datei ewechgeholl
+gardées dans le fichier ¦ an der Datei behalen
+copier la fiche ¦ d’Fiche kopéieren
+refuser le déplacement ¦ d’Réckele refuséieren
+replié ¦ zougeklappt
+Défunt et acte de décès ¦ Verstuerwenen an Doudesakt
+Adresses ¦ Adressen
+Contrats signés ¦ Ënnerschriwwe Kontrakter
+Déplacement refusé : ces fiches sont aussi dans ta famille ou dans un autre dossier : {names}. ¦ Réckele refuséiert: dës Fiche sinn och an denger Famill oder an engem aneren Dossier: {names}.
+Impossible d’enregistrer les réglages des dossiers. ¦ D’Astellunge vun den Dossiere konnten net gespäichert ginn.
+Cette généalogie est encore vide. ¦ Dës Genealogie ass nach eidel.
+Rôle inconnu. ¦ Onbekannt Roll.
+Fiches inconnues. ¦ Onbekannt Fichen.
+Choisis une autre généalogie. ¦ Wiel eng aner Genealogie.
+Impossible de créer le fichier d’archive. ¦ D’Archivdatei konnt net ugeluecht ginn.
+Fichier introuvable. ¦ Datei net fonnt.
+Ce fichier n’est pas une archive de dossier de succession. ¦ Dës Datei ass keen Archiv vun engem Ierfschaftsdossier.
+Le fichier n’a pas été reçu. ¦ D’Datei ass net ukomm.
+Le défunt reste dans son dossier. ¦ De Verstuerwene bleift a sengem Dossier.
+🧑‍🤝‍🧑 Personnes ¦ 🧑‍🤝‍🧑 Persounen
+Dossiers de succession (usage successoral seulement) ¦ Ierfschaftsdossieren (nëmme bei der Notzung als Ierwesicher)
+# Zone « successoral » : 🔎 introuvable / 🔇 ne répond pas (état de contact d’un héritier, migration 92) ; 🔒 fiches confidentielles non comptées (réglage)
+Introuvable ¦ Net ze fannen
+Ne répond pas ¦ Äntwert net
+introuvable ¦ net ze fannen
+ne répond pas ¦ äntwert net
+rien de noté ¦ näischt notéiert
+depuis le {d} ¦ zënter dem {d}
+Introuvable ou silencieux ¦ Net ze fannen oder schweigt
+Introuvable depuis plus d’un an ¦ Zënter méi wéi engem Joer net ze fannen
+{name} est introuvable depuis plus d’un an : la présomption d’absence (art. 112 et suivants) peut protéger sa part. ¦ {name} ass zënter méi wéi engem Joer net ze fannen: d’Vermutung vun Ofwiesenheet (Art. 112 ff.) kann den Undeel schützen.
+{what} : les parts peuvent être fausses. ¦ {what}: d’Undeeler kënne falsch sinn.
+=fiche confidentielle non comptée ¦ vertraulech Fiche net gezielt|vertraulech Fichen net gezielt
+Changer ce réglage ¦ Dës Astellung änneren
+Tous les héritiers ¦ All d’Ierwen
+🔎 Introuvable ou 🔇 ne répond pas : pas compté comme contacté dans l’avancement, et le calcul ne change pas. À ne pas confondre avec le statut « Présumé absent » (art. 112). ¦ 🔎 Net ze fannen oder 🔇 äntwert net: zielt am Fortschrëtt net als kontaktéiert, an d’Berechnung ännert sech net. Net ze verwiessele mam Status „Vermutlech ofwiesend“ (Art. 112).
+Contact de {name} : {state} ¦ Kontakt mat {name}: {state}
+Les fiches confidentielles comptent-elles comme héritiers ? ¦ Zielen vertraulech Fichen als Ierwen?
+Non : une fiche confidentielle est retirée du calcul, comme si elle n’existait pas ; le dossier le signale. ¦ Nee: eng vertraulech Fiche gëtt aus der Berechnung geholl, wéi wann et se net géif ginn; den Dossier weist dat.
+Le défunt n’est pas un héritier à contacter. ¦ De Verstuerwenen ass keen Ierw fir ze kontaktéieren.
+⚖️ Un doute sur la loi ? ¦ ⚖️ En Zweiwel iwwer d’Gesetz?
+⚖️ Un doute ? ¦ ⚖️ En Zweiwel?
+⚖️ UN DOUTE SUR LA LOI ? ¦ ⚖️ EN ZWEIWEL IWWER D’GESETZ?
+Chercher sur un site officiel ¦ Op engem offiziellen Site sichen
+✍️ Noter dans le dossier ¦ ✍️ Am Dossier notéieren
+Ton problème, avec tes mots ¦ Däi Problem, mat dengen eegene Wierder
+ex. un héritier refuse de répondre · délai pour renoncer à une succession ¦ z. B. en Ierwe refuséiert ze äntweren · Delai fir op eng Ierfschaft ze verzichten
+N’écris pas de nom : la question part sur internet. ¦ Schreif keng Nimm: d’Fro geet op den Internet.
+🏛 Chercher sur Service-public ¦ 🏛 Op Service-public sichen
+explique en français simple et donne le lien vers le bon article ¦ erkläert an einfachem Franséisch a gëtt de Link op de richtegen Artikel
+📜 Chercher sur Légifrance ¦ 📜 Op Légifrance sichen
+les articles des codes en vigueur ¦ d’Artikele vun de gëltege Gesetzbicher
+L’app ne choisit aucun article : ta question est envoyée telle quelle au site officiel, qui s’ouvre dans ton navigateur. ¦ D’App wielt keen Artikel: Deng Fro gëtt esou wéi s’ass un den offizielle Site geschéckt, deen sech an dengem Browser opmécht.
+✍️ Noter dans le dossier {n} ¦ ✍️ Am Dossier {n} notéieren
+Lien de l’article ou de la fiche (facultatif) ¦ Link op den Artikel oder d’Säit (fakultativ)
+Seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Nëmmen eng https://-Adress vu Légifrance, Service-public oder EUR-Lex.
+Lien refusé : seulement une adresse https:// de Légifrance, Service-public ou EUR-Lex. ¦ Link refuséiert: nëmmen eng https://-Adress vu Légifrance, Service-public oder EUR-Lex.
+Noté au journal du dossier {n}. ¦ Am Journal vum Dossier {n} notéiert.
+Écris d’abord ta question. ¦ Schreif fir d’éischt deng Fro.
+# ⚖️ Outils du successoral (⏱ 🔔 📋 🧾 📊 ✉️) et ＋ Ajouter un onglet (docs/design/onglets-et-successoral-outils.html)
+⏱ Compter le temps passé sur ce dossier ¦ ⏱ D’Zäit fir dësen Dossier zielen
+{n} min ¦ {n} Min.
+⏸️ Pause ¦ ⏸️ Paus
+▶️ Reprendre ¦ ▶️ Weidermaachen
+⏹️ Arrêter et noter ¦ ⏹️ Stoppen an notéieren
+Moins d’une minute : rien à noter. ¦ Manner wéi eng Minutt: näischt ze notéieren.
+Noter le temps passé ¦ D’Zäit notéieren
+Noter {t} ¦ {t} notéieren
+Proposé d’après les onglets ouverts ; à corriger si besoin. Date : {d}. ¦ Proposéiert no den opgemaachten Reiteren; wann néideg verbesseren. Datum: {d}.
+Minuit passé : une ligne par jour. ¦ No Mëtternuecht: eng Zeil pro Dag.
+Jeter ce temps ¦ Dës Zäit verwerfen
+Jeter ce temps ? ¦ Dës Zäit verwerfen?
+Jeter ¦ Verwerfen
+{t} d’affilée : c’est bien ça ? ¦ {t} um Stéck: stëmmt dat?
+Plus de 10 h d’affilée ¦ Méi wéi 10 St. um Stéck
+Noter quand même ¦ Trotzdeem notéieren
+⏱ {t} notées dans le dossier {n} ¦ ⏱ {t} am Dossier {n} notéiert
+Le chronomètre compte pour {n}. ¦ D’Stoppauer zielt fir {n}.
+⏹️ Noter et passer à {n} ¦ ⏹️ Notéieren an op {n} wiesselen
+Continuer sur {n} ¦ Mat {n} weidermaachen
+Rien touché depuis 10 min : chronomètre en pause à {h}. ¦ Zënter 10 Min. näischt ugeréiert: Stoppauer ëm {h} gestoppt.
+Compter aussi ces 10 min ¦ Dës 10 Min. och zielen
+⏱ {n} : {t} comptées avant la fermeture. ¦ ⏱ {n}: {t} virum Zoumaachen gezielt.
+Noter ¦ Notéieren
+Échéances du jour : {n} à faire (retards et aujourd’hui) ¦ Delaie vum Dag: {n} ze maachen (iwwerfälleg an haut)
+🔔 Échéances du jour ¦ 🔔 Delaie vum Dag
+⏰ Rappel ¦ ⏰ Erënnerung
+prévu le {d} ¦ geplangt den {d}
+✓ Fait ¦ ✓ Gemaach
+⏭ Demain (ou lundi) ¦ ⏭ Muer (oder e Méindeg)
+↗ Ouvrir le dossier ¦ ↗ Dossier opmaachen
+voir ▾ ¦ weisen ▾
+Rien pour aujourd’hui. ¦ Näischt fir haut.
+Prochaine : {d} ({n}) ¦ Nächst: {d} ({n})
+🔔 À faire · {d} ¦ 🔔 Ze maachen · {d}
+Cette généalogie ¦ Dës Genealogie
+⚖️ {name} : impossible de lire les échéances ¦ ⚖️ {name}: d’Delaie kënnen net gelies ginn
+✓ fait · ⏭ demain / lundi · ↗ ouvre le dossier (change de généalogie si besoin) ¦ ✓ gemaach · ⏭ muer / Méindeg · ↗ mécht den Dossier op (wiesselt wann néideg d’Genealogie)
+Ajouter mes rappels ¦ Meng Erënnerungen derbäisetzen
+Bulle de l’ordinateur à l’ouverture de l’app ¦ Notifikatioun vum Computer beim Opmaache vun der App
+🗓 Ma semaine ¦ 🗓 Meng Woch
+Reporté au {d} ¦ Verluecht op den {d}
+✓ Fait : {l} ¦ ✓ Gemaach: {l}
+Reporté au {d} : {l} ¦ Verluecht op den {d}: {l}
+Points prêts : {n} sur {m} ¦ Punkte prett: {n} vun {m}
+À revoir : {n} ¦ Ze kontrolléieren: {n}
+Manque : {n} ¦ Feelt: {n}
+📋 AVANT DE REMETTRE ¦ 📋 VIR DER IWWERGAB
+Avant de remettre · {n} ¦ Vir der Iwwergab · {n}
+Passer à « Remis au notaire » ¦ Op „Dem Notaire iwwerginn“ setzen
+Ça avertit, ça n’empêche pas : tu peux remettre quand même, ce sera noté au journal. ¦ Et warnt, et verhënnert näischt: du kanns trotzdeem iwwerginn, et gëtt am Journal notéiert.
+🖨 Imprimer quand même ¦ 🖨 Trotzdeem drécken
+Montant ¦ Betrag
+non signé ¦ net ënnerschriwwen
+Commission ¦ Kommissioun
+Reste à l’héritier ¦ Bleift dem Ierwen
+Arrondi au centime : chaque part est arrondie au centime inférieur, puis les centimes qui restent vont aux parts qui en ont perdu le plus. Le total tombe juste. ¦ Op de Cent ofgerënnt: all Deel gëtt op de Cent erofgerënnt, déi iwwreg Cente ginn un d’Deeler, déi am meeschte verluer hunn. D’Zomm stëmmt genee.
+Tape l’actif net en euros pour voir la part de chacun. ¦ Tipp dat nett Verméigen an Euro an, fir den Deel vun all Persoun ze gesinn.
+Tape un montant en euros (ex. 187 450,00). ¦ Tipp e Betrag an Euro an (z. B. 187 450,00).
+Plus d’un milliard d’euros : c’est bien ça ? ¦ Méi wéi eng Milliard Euro: stëmmt dat?
+Oui, calculer ¦ Jo, rechnen
+Si le conjoint choisit l’usufruit de la totalité : pas de montant en euros (sa valeur dépend de son âge, c’est un barème fiscal) ; demande la valeur au notaire, pour lui et pour les nus-propriétaires. ¦ Wiel de Bestuet den Notzen vum ganze Bierf: kee Betrag an Euro (säi Wäert hänkt vum Alter of, et ass eng Steiertabell); fro den Notaire no dem Wäert, fir hien a fir d’Proprietairë ouni Notzen.
+Autre hypothèse, {h} ¦ Aner Hypothes, {h}
+📊 Part de chacun en euros ¦ 📊 Deel vun all Persoun an Euro
+Fractions ¦ Brécher
+💶 En euros ¦ 💶 An Euro
+⤓ Copier le tableau ¦ ⤓ Tabell kopéieren
+Actif net à partager (tapé par toi) ¦ Nett Verméigen ze deelen (vun dir agetippt)
+D’après le notaire. Pas gardé : effacé quand tu fermes le dossier. ¦ Laut Notaire. Net gespäichert: geläscht, wann s du den Dossier zoumaachs.
+Hors droits de succession et frais : l’app ne calcule pas l’impôt. Ces montants sont un ordre d’idée, à faire vérifier par le notaire. ¦ Ouni Ierfschaftssteier a Käschten: d’App rechent keng Steier. Dës Beträg sinn eng Iddi, vum Notaire ze kontrolléieren.
+Commission = le % écrit dans « ＋ Honoraires d’un contrat » × le montant, arrondie au centime le plus proche, sans TVA ajoutée ; reste = montant − commission. ¦ Kommissioun = de % aus „＋ Honorar vun engem Kontrakt“ × Betrag, op den noosten Cent gerënnt, ouni derbäigesaten TVA; bleift = Betrag − Kommissioun.
+Tableau copié. ¦ Tabell kopéiert.
+Parts en euros — {n} ¦ Deeler an Euro — {n}
+Parts en euros imprimées ¦ Deeler an Euro gedréckt
+✉️ Courrier à plusieurs… ¦ ✉️ Bréif u méi Leit…
+décoché ¦ ofgewielt
+déjà écrit le {d} ({k}) ¦ schonn de {d} geschriwwen ({k})
+✉️ Courriers en série · {n} ¦ ✉️ Serienbréiwer · {n}
+Les héritiers dont l’existence n’est pas établie ne sont pas dans la liste. Les décochés peuvent être cochés à la main (une lettre sans adresse est alors imprimée sans bloc adresse). ¦ Ierwen, där hir Existenz net etabléiert ass, sti net op der Lëscht. Ofgewielter kënne mat der Hand ugekräizt ginn (e Bréif ouni Adress gëtt dann ouni Adressblock gedréckt).
+La lettre · clic sur un champ pour l’insérer ¦ De Bréif · klick op e Feld, fir et anzesetzen
+{envoyé_le} : la date du courrier précédent à cet héritier ; {date} : la date d’envoi de celui-ci. ¦ {envoyé_le}: den Datum vum leschte Bréif un dësen Ierwen; {date}: den Datum, wou dëse fortgeschéckt gëtt.
+Lettre précédente ¦ Virege Bréif
+Lettre suivante ¦ Nächste Bréif
+✎ Retoucher cette lettre ¦ ✎ Dëse Bréif iwwerschaffen
+↺ Revenir au modèle ¦ ↺ Zréck op d’Virlag
+＋ Enregistrer comme modèle ¦ ＋ Als Virlag späicheren
+Lettres prêtes : {n} sur {m} ¦ Bréiwer prett: {n} vun {m}
+Champ inconnu : {f} (ligne {l}). Corrige-le avant de ranger les lettres. ¦ Onbekannt Feld: {f} (Zeil {l}). Verbesser et, ier s du d’Bréiwer ofleeës.
+🖨 Imprimer les {n} ¦ 🖨 Déi {n} drécken
+Lettre {i} / {n} · {name} ¦ Bréif {i} / {n} · {name}
+Champ vide : la ligne s’écrit sans le mot ¦ Eidelt Feld: d’Zeil gëtt ouni dat Wuert geschriwwen
+✎ modifiée à la main ¦ ✎ mat der Hand geännert
+Ton nom et ton adresse : Listes → Registre de courriers → ✉️ Lettres (expéditeur). ¦ Däin Numm an deng Adress: Lëschten → Register vun de Bréiwer → ✉️ Bréiwer (Ofsender).
+Mes modèles (aucun pour l’instant) ¦ Meng Virlagen (nach keng)
+Remplacer ta lettre par ce modèle ? ¦ Däi Bréif duerch dës Virlag ersetzen?
+Changer de modèle ¦ Virlag wiesselen
+Oublier les retouches de la lettre à {name} ? ¦ D’Ännerunge vum Bréif un {name} vergiessen?
+Revenir au modèle ¦ Zréck op d’Virlag
+Modèle « {name} » enregistré (Mes modèles, communs à tous les dossiers de cette généalogie) ¦ Virlag „{name}“ gespäichert (Meng Virlagen, gemeinsam fir all d’Dossiere vun dëser Genealogie)
+Corrige d’abord le champ inconnu. ¦ Verbesser fir d’éischt dat onbekannt Feld.
+Rangement : {n} sur {m} ¦ Ofleeën: {n} vun {m}
+{n} rangés dans le Registre de courriers, relance le {d} ¦ {n} am Register vun de Bréiwer ofgeluecht, Erënnerung den {d}
+en main, cote non notée ¦ an der Hand, Cote net notéiert
+demandé le {d} ¦ ugefrot den {d}
+demandé ¦ ugefrot
+acte à fournir ¦ Akt ze liwweren
+(commun, voir {n}) ¦ (gemeinsam, kuck {n})
+CHAÎNE DE FILIATION ¦ ABSTAMMUNGSKETT
+Calcul établi d’après les actes cités, sous réserve de vérification par le notaire. ¦ Rechnung no den uginnten Akten, ënner Viirbehalt vun der Iwwerpréiwung duerch den Notaire.
+Code civil, articles cités pour ce dossier : art. {list}. ¦ Code civil, fir dësen Dossier uginnten Artikelen: art. {list}.
+N. = naissance, M. = mariage, D. = décès. ¦ G. = Gebuert, B. = Bestietnes, D. = Doud.
+Page {n} / {t} ¦ Säit {n} / {t}
+Coche au moins une page. ¦ Kräiz op d’mannst eng Säit un.
+Tableau pour le notaire : PDF ({n} pages, avec chaîne par héritier) ¦ Tabell fir den Notaire: PDF ({n} Säiten, mat der Kett vun all Ierwen)
+Tableau pour le notaire : PDF ({n} pages) ¦ Tabell fir den Notaire: PDF ({n} Säiten)
+sans adresses ¦ ouni Adressen
+📋 Avant de remettre ¦ 📋 Vir der Iwwergab
+ça avertit, ça n’empêche pas ¦ et warnt, et verhënnert näischt
+Ce que contient le PDF ¦ Wat am PDF ass
+Compté par le chronomètre ¦ Vun der Stoppauer gezielt
+Taux horaire pour le relevé (facultatif, pas gardé) ¦ Stonnesaz fir d’Opstellung (fräiwëlleg, net gespäichert)
+€ / h ¦ € / St.
+✎ Modifier la ligne ¦ ✎ Zeil änneren
+Ligne modifiée ¦ Zeil geännert
+Temps × taux horaire ({r} € / h) : {s} ¦ Zäit × Stonnesaz ({r} € / St.): {s}
+Ajouté depuis « ＋ Ajouter un onglet ». ¦ Iwwer „＋ Reiter derbäisetzen“ derbäigesat.
+✓ Onglet « {name} » ajouté ¦ ✓ Reiter „{name}“ derbäigesat
+Onglet « {name} » caché ¦ Reiter „{name}“ verstoppt
+conseillé pour toi ¦ fir dech recommandéiert
+montré par ton usage ¦ duerch däi Gebrauch gewisen
+Conseillés pour toi ¦ Fir dech recommandéiert
+Tout le reste ▾ ¦ Alles anescht ▾
+Qu’est-ce que tu veux avoir sous la main ? ¦ Wat wëlls du bei der Hand hunn?
+Ton usage : {u} ¦ Däi Gebrauch: {u}
+Chercher un onglet ¦ E Reiter sichen
+🔍 Chercher un onglet… (courrier, acte, agenda) ¦ 🔍 E Reiter sichen… (Bréif, Akt, Agenda)
+Conseillés ({n}) ¦ Recommandéiert ({n})
+Déjà dans le menu ({n}) ¦ Schonn am Menü ({n})
+Aucun onglet ne correspond. ¦ Kee Reiter passt.
+Une carte cochée = l’onglet est dans le menu. Cocher l’ajoute à la fin du menu ; décocher le cache (un raccourci est caché, pas effacé). ¦ Eng ugekräizte Kaart = de Reiter ass am Menü. Ukräizen setzt en um Enn vum Menü derbäi; ofwielen verstoppt en (eng Ofkierzung gëtt verstoppt, net geläscht).
+↗ Faire un onglet à moi (Éditeur d’onglets) ¦ ↗ Mäin eegene Reiter maachen (Editeur fir Reiteren)
+MENU ¦ MENÜ
+＋ Ajouter un onglet ¦ ＋ Reiter derbäisetzen
+Ajouter un onglet ¦ Reiter derbäisetzen
+＋ Ajouter un onglet… ¦ ＋ Reiter derbäisetzen…
+Montrer le ＋ au bout du menu ¦ Den ＋ um Enn vum Menü weisen
+Retirer ce raccourci du menu (un onglet de l’app ne se retire pas : il se cache) ¦ Dës Ofkierzung aus dem Menü huelen (e Reiter vun der App gëtt net ewechgeholl: e gëtt verstoppt)
+Onglet « {name} » retiré du menu ¦ Reiter „{name}“ aus dem Menü geholl
+Le ＋ est au bout du menu ¦ Den ＋ ass um Enn vum Menü
+Le ＋ n’est plus au bout du menu ¦ Den ＋ ass net méi um Enn vum Menü
+Recherches : {what} ¦ Recherchen: {what}
+Recherches ¦ Recherchen
+Acte de décès de {name} en main ¦ Doudesakt vum {name} an der Hand
+Acte de décès de {name} pas en main ¦ Doudesakt vum {name} feelt
+demandé, pas encore reçu ¦ ugefrot, nach net kritt
+Arbre de dévolution complet ¦ Ierffollegebam komplett
+Aucune branche à chercher. ¦ Keen Zweig ze sichen.
+Branches encore à chercher : {n} ¦ Zweige nach ze sichen: {n}
+Héritiers dont l’existence n’est pas établie : {n} ¦ Ierwen, där hir Existenz net etabléiert ass: {n}
+Liens prouvés par aucun acte : {n} ¦ Bänn, déi duerch keen Akt beluecht sinn: {n}
+{what} (relie {who} au défunt) ¦ {what} (verbënnt {who} mam Verstuerwenen)
+Chaque lien est prouvé par un acte ¦ All Band ass duerch en Akt beluecht
+Actes demandés, pas encore reçus : {n} ¦ Ugefroten, nach net kritt Akten: {n}
+{what} · demandé le {d} ¦ {what} · ugefrot den {d}
+(courrier n° {n}) ¦ (Bréif Nr. {n})
+Adresses des héritiers vivants : {n} sur {m} ¦ Adresse vun de liewegen Ierwen: {n} vun {m}
+Aucun héritier vivant à joindre ¦ Kee liewegen Ierf ze erreechen
+Contrats signés (ou refus noté) : {n} sur {m} ¦ Kontrakter ënnerschriwwen (oder Refus notéiert): {n} vun {m}
+Aucun contrat à faire signer ¦ Kee Kontrakt ze ënnerschreiwen
+Contrats pas encore signés : {n} ¦ Kontrakter nach net ënnerschriwwen: {n}
+{name} a répondu « oui », pas de date de signature ¦ {name} huet „jo“ geäntwert, keen Datum vun der Ënnerschrëft
+Héritiers introuvables ou silencieux : {n} ¦ Ierwen, déi net ze fanne sinn oder net äntweren: {n}
+Parts : le total fait bien 1 ¦ Deeler: d’Zomm ass wierklech 1
+Les parts ne totalisent pas 1 : à revoir ¦ D’Deeler maachen net 1: ze kontrolléieren
+Échéances en retard : {n} ¦ Iwwerfälleg Delaien: {n}
+Aucune échéance en retard ¦ Keen iwwerfällegen Delai
+Remis au notaire avec {miss} manque(s) et {warn} point(s) à revoir ({what}) ¦ Dem Notaire iwwerginn, feelt: {miss}, ze kontrolléieren: {warn} ({what})
+Madame ¦ Madame
+Monsieur ¦ Här
+Tes photos, actes, lettres de A à Z, rangés en dossiers. ¦ Deng Fotoen, Akten, Bréiwer vun A bis Z, an Ordner gesat.
+Lettres à ouvrir plus tard, recettes, musée de famille. ¦ Bréiwer fir méi spéit opzemaachen, Rezepter, Familljemusée.
+Fiches thématiques : un métier, une guerre, un village. ¦ Theemekaarten: e Beruff, e Krich, en Duerf.
+Tes correspondances ADN et leurs liens. ¦ Deng ADN-Treffer an hir Bänn.
+Les œuvres d’un artiste, albums, expositions. ¦ D’Wierker vun engem Kënschtler, Alben, Ausstellungen.
+Pedigree, portées. (Suivi des animaux : à part.) ¦ Stammbam, Wëerf. (Déierebeobachtung: apart.)
+Baguage, puces, observations, trajets. ¦ Beréngung, Chippen, Beobachtungen, Weeër.
+Dossiers de succession, pour un notaire. ¦ Ierfschaftsdossieren, fir en Notaire.
+Le Registre de courriers : demandes d’actes, relances, réponses. ¦ De Register vun de Bréiwer: Aktufroen, Erënnerungen, Äntwerten.
+Listes → Archives et sources → Registre de courriers ¦ Lëschten → Archiver a Quellen → Register vun de Bréiwer
+Tes actes recopiés, mot à mot. ¦ Deng ofgeschriwwen Akten, Wuert fir Wuert.
+Listes → Archives et sources ¦ Lëschten → Archiver a Quellen
+Visites, rendez-vous, relances, à la semaine. ¦ Visitten, Rendez-vousen, Erënnerungen, Woch fir Woch.
+Listes → Recherche et organisation ¦ Lëschten → Recherche an Organisatioun
+Les choses à faire, avec leur date. ¦ D’Saachen ze maachen, mat hirem Datum.
+Toutes les images, sons, vidéos en tableau. ¦ All Biller, Téin, Videoen an enger Tabell.
+Listes → Médias et documents ¦ Lëschten → Medien an Dokumenter
+Questionnaires pour recueillir les souvenirs. ¦ Questionnairen, fir Erënnerungen ze sammelen.
+Les maisons, pièce par pièce, et qui y a vécu. ¦ D’Haiser, Zëmmer fir Zëmmer, a wien do gewunnt huet.
+Listes → Lieux et maisons ¦ Lëschten → Plazen an Haiser
+Adresses et contacts des cousins vivants. ¦ Adressen a Kontakter vu liewege Koséngen.
+Listes → Personnes et familles ¦ Lëschten → Persounen a Famillen
+Les dépôts, leurs cotes, leurs horaires. ¦ D’Archiven, hir Cotten, hir Ëffnungszäiten.
+Le planificateur : quoi consulter, où, quand. ¦ De Planer: wat kucken, wou, wéini.
+Qui a hérité de quoi d’après les actes anciens. ¦ Wien wat no alen Akte geierft huet.
+Les bons sites pour la personne ouverte. ¦ Déi richteg Websäite fir déi opgemaachte Persoun.
+Recherche → Type de recherche ¦ Sich → Zort vu Sich
+Trouver et fusionner les fiches en double. ¦ Duebel Fichen fannen a fusionéieren.
+Réglages → Fusion de doublons ¦ Astellungen → Fusioun vun Duebelen
+Dates impossibles, liens bizarres. ¦ Onméiglech Datumer, komesch Bänn.
+Réglages → Contrôle de la base ¦ Astellungen → Kontroll vun der Datebank
+Le nom étudié ¦ Den ënnersichten Numm
+Les porteurs d’un nom, ses variantes. ¦ D’Leit mat engem Numm, seng Varianten.
+Graphiques → statistique des noms ¦ Grafiken → Nummestatistik
+L’entreprise ¦ D’Entreprise
+Employeurs, salariés, membres. ¦ Patronen, Salariéen, Memberen.
+Listes → Employeurs ¦ Lëschten → Patronen
+Des parties de l’app, cachées au départ ¦ Deeler vun der App, am Ufank verstoppt
+Elles existent déjà : cocher les montre dans le menu. ¦ Si gëtt et schonn: ukräizen weist se am Menü.
+Un raccourci vers une liste ¦ Eng Ofkierzung op eng Lëscht
+Il devient un « onglet à soi » (Éditeur d’onglets). ¦ Si gëtt en „eegene Reiter“ (Editeur fir Reiteren).
+Un raccourci vers un outil ¦ Eng Ofkierzung op en Tool
+Chaîne par héritier ¦ Kett vun all Ierwen
+✉️ Contactés ¦ ✉️ Kontaktéiert
+📇 Répertoire des vivants ¦ 📇 Verzeechnes vun de Liewegen
+Échéances du jour (usage successoral seulement) ¦ Delaie vum Dag (nëmme Gebrauch fir Ierfschaftsrecherchen)
+Ce dossier est clos : rien ne s’y note. ¦ Dësen Dossier ass zou: do gëtt näischt méi notéiert.
+Donne un nom au modèle. ¦ Gëff der Virlag en Numm.
+Trop de lettres d’un coup (60 au plus). ¦ Ze vill Bréiwer op eemol (héchstens 60).
+Échéances du jour ¦ Delaie vum Dag

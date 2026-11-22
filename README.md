@@ -60,6 +60,7 @@ Ces composants gardent leur propre licence :
 | [static-php-cli](https://github.com/crazywhalecc/static-php-cli) | PHP embarqué pour macOS et Linux | MIT (bibliothèques incluses sous leurs licences) |
 | [SQLite](https://sqlite.org) | base de données | domaine public |
 | [three.js](https://threejs.org) r162 | graphiques en 3D | MIT |
+| [an-array-of-french-words](https://github.com/words/an-array-of-french-words) 2.0.0 (© 2016 Zeke Sikelianos, d'après la liste de mots de Letterpress) | dictionnaire général du français des corrections proposées : un mot juste n'est jamais remplacé (`assets/dico/fr-mots.txt.gz`, fabriqué par `scripts/build-dico-fr.js`, licence recopiée dans le fichier) | MIT |
 | [GeoNames](https://www.geonames.org) (FR.zip, cities1000) | communes, lieux-dits et villes du monde (`data/reference/`) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 | Contours des communes (IGN Admin Express, via [france-geojson](https://github.com/gregoiredavid/france-geojson)) | battues, cartes (`data/reference/geo-fr`) | [Licence Ouverte 2.0](https://www.etalab.gouv.fr/licence-ouverte-open-licence/) |
 | Communes de Belgique 2025 (IGN-NGI, via [ODWB](https://www.odwb.be/)) | battues (`data/reference/geo-be`) | Licence ouverte IGN-NGI (mention de la source) |
