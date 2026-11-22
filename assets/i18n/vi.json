@@ -1123,6 +1123,7 @@
  "{n} → médias": "{n} → tư liệu",
  "{n} → médias « à trier »": "{n} → tư liệu “cần sắp xếp”",
  "{n} → médias reliés à {who}": "{n} → tư liệu liên kết với {who}",
+ "{n} × [?] ou [illisible]": "{n} × [?] hoặc [không đọc được]",
  "{n} à « Mes sites »": "{n} vào “Trang của tôi”",
  "{n} à {z} (âge moyen sur {p} ; la carte montre des années, pas un nombre).": "{n} ở {z} (tuổi trung bình trên {p}; bản đồ hiển thị số năm, không phải số lượng).",
  "{n} à {z}.": "{n} ở {z}.",
@@ -1135,6 +1136,7 @@
  "{n} à inviter": "{n} cần mời",
  "{n} à l’album.": "{n} vào album.",
  "{n} à ranger": "{n} cần xử lý",
+ "{n} à relier": "{n} cần liên kết",
  "{n} à télécharger ({size} en tout). Continuer ?": "{n} cần tải về (tổng cộng {size}). Tiếp tục?",
  "{n} à toi": "{n} của bạn",
  "{n} à vérifier": "{n} cần kiểm tra",
@@ -8016,6 +8018,7 @@
  "Ajouter les événements historiques de l’époque": "Thêm các sự kiện lịch sử của thời đó",
  "Ajouter les lieux": "Thêm các địa điểm",
  "Ajouter les personnes d’une liste": "Thêm những người trong một danh sách",
+ "Ajouter les personnes et l’événement à la généalogie": "Thêm những người và sự kiện vào phả hệ",
  "Ajouter les questions cochées": "Thêm các câu hỏi đã đánh dấu",
  "Ajouter mes rappels": "Thêm nhắc việc của tôi",
  "Ajouter ou lier une photo de la sépulture": "Thêm hoặc liên kết ảnh ngôi mộ",
@@ -30349,6 +30352,7 @@
  "Les étages": "Các tầng",
  "Les étages : gérer, ajouter, dupliquer, supprimer": "Các tầng: quản lý, thêm, nhân bản, xoá",
  "Les étapes": "Các chặng",
+ "Les étapes : Lire, Corriger, Repérer, Ajouter à la généalogie": "Các bước: Đọc, Sửa lỗi, Nhận diện, Thêm vào phả hệ",
  "Les étapes (dans l’ordre)": "Các bước (theo thứ tự)",
  "Les étapes ajoutées ne seront pas enregistrées.": "Các chặng đã thêm sẽ không được lưu.",
  "les étapes animées": "các chặng động",
@@ -31807,6 +31811,7 @@
  "Lire l’écriture à la main (rapide)": "Đọc chữ viết tay (nhanh)",
  "Lire l’écriture à la main dans cette zone seulement": "Chỉ đọc chữ viết tay trong vùng này",
  "Lire l’histoire dès qu’on ouvre une fiche": "Đọc câu chuyện ngay khi mở hồ sơ",
+ "Lire l’image (« ✨ Lire ▾ ») ou écrire le texte, ligne à ligne": "Đọc hình ảnh (“✨ Đọc ▾”) hoặc gõ văn bản, từng dòng một",
  "Lire la gazette": "Đọc bản tin",
  "Lire la mise en garde complète et les textes officiels →": "Đọc toàn bộ lưu ý và các văn bản chính thức →",
  "Lire la page": "Đọc trang",
@@ -33891,6 +33896,9 @@
  "mot": {
   "other": "từ"
  },
+ "mot à revoir": {
+  "other": "từ cần xem lại"
+ },
  "Mot ancien": "Từ cổ",
  "mot courant": "từ thông thường",
  "Mot d’accueil": "Lời chào",
@@ -34800,6 +34808,9 @@
  "Nom relevé": "Họ đã ghi chép",
  "Nom relevé seulement": "Chỉ tên đã ghi",
  "Nom relié à la fiche : {name}": "Đã liên kết tên với phiếu: {name}",
+ "nom repéré": {
+  "other": "tên đã nhận diện"
+ },
  "nom seulement": "chỉ có tên",
  "Nom seulement": "Chỉ có tên",
  "Nom sous l’écu": "Tên dưới khiên",
@@ -37535,6 +37546,10 @@
  },
  "Personne d’autre noté dans ses expéditions.": "Không có ai khác được ghi trong các cuộc thám hiểm của người ấy.",
  "Personne dans ce groupe ne vivait entre ces deux recensements (il faut au moins une date de naissance ou de décès).": "Không ai trong nhóm này sống giữa hai cuộc điều tra (cần ít nhất ngày sinh hoặc ngày mất).",
+ "personne dans l’acte": {
+  "other": "người trong văn bản"
+ },
+ "Personne dans l’acte pour l’instant : « 🧭 Repérer » les trouve dans le texte": "Chưa có ai trong văn bản: “🧭 Nhận diện” sẽ tìm họ trong văn bản",
  "Personne dans l’arbre n’avait cet âge pendant cette période.": "Không ai trong cây ở độ tuổi đó trong thời kỳ này.",
  "Personne dans la branche maternelle jusqu’au 6e degré : oncles, tantes et cousins de la mère à chercher.": "Không có ai ở nhánh ngoại đến bậc 6: cần tìm cậu dì và anh chị em họ bên ngoại.",
  "Personne dans la branche paternelle jusqu’au 6e degré : oncles, tantes et cousins du père à chercher.": "Không có ai ở nhánh nội đến bậc 6: cần tìm chú bác và anh chị em họ bên nội.",
@@ -41098,6 +41113,7 @@
  "Relire →": "Đọc lại →",
  "Relire avec ce modèle": "Đọc lại bằng mô hình này",
  "Relire depuis la base": "Đọc lại từ cơ sở dữ liệu",
+ "Relire et corriger : corrections proposées, mots douteux [?], aide à la lecture": "Đọc lại và sửa: các đề xuất sửa, từ đáng ngờ [?], hỗ trợ đọc",
  "Relire le contour et la surface dans le cadastre d’aujourd’hui": "Đọc lại đường viền và diện tích trong địa chính ngày nay",
  "Relire les blocs de la généalogie": "Đọc lại các khối của gia phả",
  "reliure d’art": "đóng sách mỹ thuật",
@@ -42019,6 +42035,7 @@
  "Rien à rétablir": "Không có gì để làm lại",
  "Rien à rétablir.": "Không có gì để làm lại.",
  "Rien à retirer.": "Không có gì để bỏ.",
+ "rien à revoir": "không có gì cần xem lại",
  "Rien à signaler : portes, fenêtres, escaliers et pièces sont cohérents.": "Không có gì đáng chú ý: cửa ra vào, cửa sổ, cầu thang và phòng đều hợp lý.",
  "Rien à signaler.": "Không có gì đáng chú ý.",
  "Rien à supprimer.": "Không có gì để xoá.",
@@ -45615,6 +45632,7 @@
  "Tout est proposé : garde, écarte ou ajoute à une fiche. Rien n’est écrit sans ton clic.": "Mọi thứ chỉ là đề xuất: giữ, gạt ra hoặc thêm vào hồ sơ. Không gì được ghi nếu bạn không bấm.",
  "tout est ramassé : file à la sortie 🏁": "đã nhặt hết: chạy ra lối ra 🏁",
  "tout est rangé": "đã xử lý hết",
+ "Tout est relié": "Đã liên kết hết",
  "Tout est sur la table en 10 colonnes (de 1 à 8 cartes, puis 8 et 8) ; on descend en alternant rouge et noir, une carte à la fois.": "Mọi lá ở trên bàn trong 10 cột (từ 1 đến 8 lá, rồi 8 và 8); xếp giảm dần xen kẽ đỏ đen, mỗi lần một lá.",
  "Tout est visible ; on descend dans la même teinte (rouge sur rouge, noir sur noir), on déplace les suites d’une même couleur de carte, une colonne vide prend n’importe quelle carte.": "Mọi lá đều thấy; xếp giảm dần cùng màu (đỏ trên đỏ, đen trên đen), di chuyển dây cùng chất, cột trống nhận bất kỳ lá nào.",
  "Tout est visible dès le départ : la réflexion compte plus que la chance.": "Mọi lá đều thấy ngay từ đầu: suy nghĩ quan trọng hơn may mắn.",
@@ -45717,6 +45735,7 @@
  "toute la maison": "cả ngôi nhà",
  "Toute la maison": "Cả ngôi nhà",
  "Toute la page": "Cả trang",
+ "Toute la page ou la zone choisie (▭) ; ou écris le texte toi-même, ligne à ligne.": "Cả trang hoặc vùng đã chọn (▭); hoặc bạn tự gõ văn bản, từng dòng một.",
  "Toute la photo": "Toàn bộ ảnh",
  "Toute la photo (double-clic)": "Toàn bộ ảnh (bấm đúp)",
  "toute la série": "cả bộ phim",

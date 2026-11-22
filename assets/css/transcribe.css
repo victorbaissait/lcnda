@@ -134,3 +134,34 @@
 .h-pacts-foot{margin-top:8px}
 /* écran étroit : « 🎚️ Mieux voir » part du bord gauche de la barre et tient dans sa largeur (sinon il sort de l’écran à droite) */
 @media (max-width:640px){.h-tx-betterw{position:static}.h-tx-better{left:8px;right:8px;width:auto}}
+/* ─── vague 2 « Guider » : la frise « Lire → Corriger → Repérer → Ajouter », « ✓ Ajouter à la généalogie… » toujours en bas ─── */
+.h-tx-flow{background:#fff;border-bottom:1px solid #e3e3e8;flex:none}
+.h-tx-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid #e3e3e8}
+.h-tx-step{display:flex;align-items:center;gap:6px;min-width:0;padding:5px 8px 4px;border:0;border-right:1px solid #e3e3e8;border-bottom:3px solid transparent;background:none;cursor:pointer;font:inherit;color:inherit;text-align:left}
+.h-tx-step:last-child{border-right:0}
+.h-tx-step i{font:800 11px/1 system-ui,sans-serif;width:20px;height:20px;border:2px solid #8e8e93;border-radius:50%;display:inline-grid;place-items:center;flex:none;font-style:normal;color:#6e6e73}
+.h-tx-step>span{display:grid;min-width:0}
+.h-tx-step b{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.h-tx-step small{font-size:11px;color:#6e6e73;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.h-tx-step.is-done i{background:#1a7f37;border-color:#1a7f37;color:#fff}
+.h-tx-step.is-cur i{background:#1473e6;border-color:#1473e6;color:#fff}
+.h-tx-step:hover{background:#f5f8ff}
+.h-tx-step.is-active{background:#eef4ff;border-bottom-color:#1473e6}
+.h-tx-step.is-active b{font-weight:800}
+.h-tx-step:focus-visible{outline:2px solid #1473e6;outline-offset:-2px}
+.h-tx-flow .h-tx-stepbody{border-bottom:0;min-height:36px}
+.h-tx-pane{display:inline-flex;align-items:center;gap:4px;flex-wrap:wrap;min-width:0}
+.h-tx-pane[hidden],.h-tx-stepnext[hidden]{display:none}
+.h-tx-panehint{font-size:12px;min-width:0}
+.h-tx-tools .h-tx-stepnext{font-weight:600}
+.h-tx-addbar{flex:none;display:flex;align-items:center;justify-content:space-between;gap:6px 10px;flex-wrap:wrap;padding:6px 10px;border-top:2px solid #1473e6;background:#eef4ff;font-size:12.5px}
+.h-tx-addinfo{min-width:0;flex:1 1 180px}
+:root[data-theme="dark"] .h-tx-flow,:root[data-theme="dark"] .h-tx-steps{background-color:#24272c;border-color:#3a3f46}
+:root[data-theme="dark"] .h-tx-step{border-right-color:#3a3f46}
+:root[data-theme="dark"] .h-tx-step i{border-color:#8e9299;color:#c7c9cd}
+:root[data-theme="dark"] .h-tx-step small{color:#a1a1a6}
+:root[data-theme="dark"] .h-tx-step.is-done i{background:#2f9e54;border-color:#2f9e54;color:#fff}
+:root[data-theme="dark"] .h-tx-step.is-cur i{background:#1473e6;border-color:#1473e6;color:#fff}
+:root[data-theme="dark"] .h-tx-step:hover{background:#2c3036}
+:root[data-theme="dark"] .h-tx-step.is-active{background:#18233a;border-bottom-color:#5b93ff}
+:root[data-theme="dark"] .h-tx-addbar{background:#18233a;border-top-color:#5b93ff}

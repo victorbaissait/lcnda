@@ -1123,6 +1123,7 @@
  "{n} → médias": "{n} → media",
  "{n} → médias « à trier »": "{n} → media “untuk dipilah”",
  "{n} → médias reliés à {who}": "{n} → media terhubung ke {who}",
+ "{n} × [?] ou [illisible]": "{n} × [?] atau [tak terbaca]",
  "{n} à « Mes sites »": "{n} ke “Situsku”",
  "{n} à {z} (âge moyen sur {p} ; la carte montre des années, pas un nombre).": "{n} di {z} (usia rata-rata dari {p}; peta menampilkan tahun, bukan jumlah).",
  "{n} à {z}.": "{n} di {z}.",
@@ -1135,6 +1136,7 @@
  "{n} à inviter": "{n} untuk diundang",
  "{n} à l’album.": "{n} ke album.",
  "{n} à ranger": "{n} perlu dirapikan",
+ "{n} à relier": "{n} untuk ditautkan",
  "{n} à télécharger ({size} en tout). Continuer ?": "{n} untuk diunduh (total {size}). Lanjutkan?",
  "{n} à toi": "{n} milikmu",
  "{n} à vérifier": "{n} perlu dicek",
@@ -8016,6 +8018,7 @@
  "Ajouter les événements historiques de l’époque": "Tambahkan peristiwa sejarah pada masanya",
  "Ajouter les lieux": "Tambah tempat",
  "Ajouter les personnes d’une liste": "Tambahkan orang dari sebuah daftar",
+ "Ajouter les personnes et l’événement à la généalogie": "Tambahkan orang-orang dan peristiwanya ke silsilah",
  "Ajouter les questions cochées": "Tambah pertanyaan yang dicentang",
  "Ajouter mes rappels": "Tambahkan pengingatku",
  "Ajouter ou lier une photo de la sépulture": "Tambah atau hubungkan foto makam",
@@ -30349,6 +30352,7 @@
  "Les étages": "Lantai-lantai",
  "Les étages : gérer, ajouter, dupliquer, supprimer": "Lantai: kelola, tambah, duplikat, hapus",
  "Les étapes": "Tahap-tahap",
+ "Les étapes : Lire, Corriger, Repérer, Ajouter à la généalogie": "Langkah-langkah: Baca, Koreksi, Kenali, Tambahkan ke silsilah",
  "Les étapes (dans l’ordre)": "Langkah-langkah (berurutan)",
  "Les étapes ajoutées ne seront pas enregistrées.": "Persinggahan yang ditambahkan tidak akan disimpan.",
  "les étapes animées": "tahap beranimasi",
@@ -31807,6 +31811,7 @@
  "Lire l’écriture à la main (rapide)": "Baca tulisan tangan (cepat)",
  "Lire l’écriture à la main dans cette zone seulement": "Baca tulisan tangan di area ini saja",
  "Lire l’histoire dès qu’on ouvre une fiche": "Bacakan kisah begitu profil dibuka",
+ "Lire l’image (« ✨ Lire ▾ ») ou écrire le texte, ligne à ligne": "Baca gambar (“✨ Baca ▾”) atau tulis teksnya, baris demi baris",
  "Lire la gazette": "Baca warta",
  "Lire la mise en garde complète et les textes officiels →": "Baca peringatan lengkap dan teks resmi →",
  "Lire la page": "Baca halaman",
@@ -33891,6 +33896,9 @@
  "mot": {
   "other": "kata"
  },
+ "mot à revoir": {
+  "other": "kata untuk diperiksa"
+ },
  "Mot ancien": "Kata kuno",
  "mot courant": "kata umum",
  "Mot d’accueil": "Pesan sambutan",
@@ -34800,6 +34808,9 @@
  "Nom relevé": "Nama keluarga yang dicatat",
  "Nom relevé seulement": "Hanya nama yang dicatat",
  "Nom relié à la fiche : {name}": "Nama dihubungkan ke kartu: {name}",
+ "nom repéré": {
+  "other": "nama dikenali"
+ },
  "nom seulement": "hanya nama",
  "Nom seulement": "Hanya nama",
  "Nom sous l’écu": "Nama di bawah perisai",
@@ -37535,6 +37546,10 @@
  },
  "Personne d’autre noté dans ses expéditions.": "Tidak ada orang lain yang dicatat dalam ekspedisinya.",
  "Personne dans ce groupe ne vivait entre ces deux recensements (il faut au moins une date de naissance ou de décès).": "Tak seorang pun dalam kelompok ini hidup di antara kedua sensus (perlu setidaknya tanggal lahir atau wafat).",
+ "personne dans l’acte": {
+  "other": "orang dalam akta"
+ },
+ "Personne dans l’acte pour l’instant : « 🧭 Repérer » les trouve dans le texte": "Belum ada orang dalam akta: “🧭 Kenali” menemukan mereka di teks",
  "Personne dans l’arbre n’avait cet âge pendant cette période.": "Tidak ada orang di pohon yang berumur segitu pada periode ini.",
  "Personne dans la branche maternelle jusqu’au 6e degré : oncles, tantes et cousins de la mère à chercher.": "Tidak ada siapa pun di cabang ibu hingga derajat ke-6: paman dan sepupu dari pihak ibu harus ditemukan.",
  "Personne dans la branche paternelle jusqu’au 6e degré : oncles, tantes et cousins du père à chercher.": "Tidak ada siapa pun di cabang ayah hingga derajat ke-6: paman dan sepupu dari pihak ayah harus ditemukan.",
@@ -41098,6 +41113,7 @@
  "Relire →": "Periksa ulang →",
  "Relire avec ce modèle": "Baca ulang dengan model ini",
  "Relire depuis la base": "Baca ulang dari basis data",
+ "Relire et corriger : corrections proposées, mots douteux [?], aide à la lecture": "Periksa dan koreksi: usulan koreksi, kata yang meragukan [?], bantuan membaca",
  "Relire le contour et la surface dans le cadastre d’aujourd’hui": "Baca ulang batas dan luas di kadaster masa kini",
  "Relire les blocs de la généalogie": "Muat ulang blok silsilah",
  "reliure d’art": "penjilidan seni",
@@ -42019,6 +42035,7 @@
  "Rien à rétablir": "Tidak ada yang bisa diulangi",
  "Rien à rétablir.": "Tidak ada yang bisa diulangi.",
  "Rien à retirer.": "Tidak ada yang perlu dihapus.",
+ "rien à revoir": "tidak ada yang perlu diperiksa",
  "Rien à signaler : portes, fenêtres, escaliers et pièces sont cohérents.": "Tidak ada masalah: pintu, jendela, tangga dan ruangan semuanya konsisten.",
  "Rien à signaler.": "Tidak ada masalah.",
  "Rien à supprimer.": "Tidak ada yang dihapus.",
@@ -45615,6 +45632,7 @@
  "Tout est proposé : garde, écarte ou ajoute à une fiche. Rien n’est écrit sans ton clic.": "Semuanya hanya usulan: simpan, sisihkan, atau tambahkan ke data. Tidak ada yang ditulis tanpa klikmu.",
  "tout est ramassé : file à la sortie 🏁": "semua terkumpul: cepat ke pintu keluar 🏁",
  "tout est rangé": "semua sudah rapi",
+ "Tout est relié": "Semua tertaut",
  "Tout est sur la table en 10 colonnes (de 1 à 8 cartes, puis 8 et 8) ; on descend en alternant rouge et noir, une carte à la fois.": "Semua ada di meja dalam 10 kolom (1 sampai 8 kartu, lalu 8 dan 8); susun menurun berselang merah-hitam, satu per satu.",
  "Tout est visible ; on descend dans la même teinte (rouge sur rouge, noir sur noir), on déplace les suites d’une même couleur de carte, une colonne vide prend n’importe quelle carte.": "Semua terlihat; susun menurun dengan warna sama (merah di atas merah, hitam di atas hitam), pindahkan deret berjenis sama, kolom kosong menerima kartu apa pun.",
  "Tout est visible dès le départ : la réflexion compte plus que la chance.": "Semua terlihat sejak awal: berpikir lebih penting daripada keberuntungan.",
@@ -45717,6 +45735,7 @@
  "toute la maison": "seluruh rumah",
  "Toute la maison": "Seluruh rumah",
  "Toute la page": "Seluruh halaman",
+ "Toute la page ou la zone choisie (▭) ; ou écris le texte toi-même, ligne à ligne.": "Seluruh halaman atau area yang dipilih (▭); atau ketik sendiri teksnya, baris demi baris.",
  "Toute la photo": "Seluruh foto",
  "Toute la photo (double-clic)": "Seluruh foto (klik ganda)",
  "toute la série": "seluruh serial",

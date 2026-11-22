@@ -3418,6 +3418,23 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root[data-theme="dark"].lc-frame .h-txb-seg button.is-active, :root[data-theme="dark"] .h-txb-seg button.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
 :root.lc-frame .h-pacts-list li, :root .h-pacts-list li:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid var(--line,#e3e5ea)}
 :root.lc-frame .h-pacts-img, :root .h-pacts-img:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line,#ccc)}
+:root.lc-frame .h-tx-flow, :root .h-tx-flow:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #e3e3e8}
+:root.lc-frame .h-tx-steps, :root .h-tx-steps:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #e3e3e8}
+:root.lc-frame .h-tx-step, :root .h-tx-step:is([data-lc-lines], [data-lc-lines] *) {border:0;border-right:1px solid #e3e3e8;border-bottom:3px solid transparent}
+:root.lc-frame .h-tx-step:last-child, :root .h-tx-step:last-child:is([data-lc-lines], [data-lc-lines] *) {border-right:0}
+:root.lc-frame .h-tx-step i, :root .h-tx-step i:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #8e8e93}
+:root.lc-frame .h-tx-step.is-done i, :root .h-tx-step.is-done i:is([data-lc-lines], [data-lc-lines] *) {border-color:#1a7f37}
+:root.lc-frame .h-tx-step.is-cur i, :root .h-tx-step.is-cur i:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
+:root.lc-frame .h-tx-step.is-active, :root .h-tx-step.is-active:is([data-lc-lines], [data-lc-lines] *) {border-bottom-color:#1473e6}
+:root.lc-frame .h-tx-flow .h-tx-stepbody, :root .h-tx-flow .h-tx-stepbody:is([data-lc-lines], [data-lc-lines] *) {border-bottom:0}
+:root.lc-frame .h-tx-addbar, :root .h-tx-addbar:is([data-lc-lines], [data-lc-lines] *) {border-top:2px solid #1473e6}
+:root[data-theme="dark"].lc-frame .h-tx-flow, :root[data-theme="dark"] .h-tx-flow:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-tx-steps, :root[data-theme="dark"] .h-tx-steps:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .h-tx-step, :root[data-theme="dark"] .h-tx-step:is([data-lc-lines], [data-lc-lines] *) {border-right-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .h-tx-step i, :root[data-theme="dark"] .h-tx-step i:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .h-tx-step.is-done i, :root[data-theme="dark"] .h-tx-step.is-done i:is([data-lc-lines], [data-lc-lines] *) {border-color:#2f9e54}
+:root[data-theme="dark"].lc-frame .h-tx-step.is-cur i, :root[data-theme="dark"] .h-tx-step.is-cur i:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
+:root[data-theme="dark"].lc-frame .h-tx-step.is-active, :root[data-theme="dark"] .h-tx-step.is-active:is([data-lc-lines], [data-lc-lines] *) {border-bottom-color:#5b93ff}
+:root[data-theme="dark"].lc-frame .h-tx-addbar, :root[data-theme="dark"] .h-tx-addbar:is([data-lc-lines], [data-lc-lines] *) {border-top-color:#5b93ff}
 /* photomaps.css */
 :root.lc-frame .pm-filter, :root .pm-filter:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .pm-chip, :root .pm-chip:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}
 :root.lc-frame .pm-filter.is-active, :root .pm-filter.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}

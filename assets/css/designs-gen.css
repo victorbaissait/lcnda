@@ -5495,6 +5495,11 @@
 :root[data-lc-density] .h-pacts-list li{padding:calc(8px * var(--lc-sp)) calc(2px * var(--lc-sp))}
 :root[data-lc-density] .h-pacts-acts{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .h-pacts-foot{margin-top:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-step{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-step{padding:calc(5px * var(--lc-sp)) calc(8px * var(--lc-sp)) calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-pane{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-addbar{gap:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-addbar{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 /* photomaps.css */
 :root[data-lc-density] .pm-carte{padding:calc(18px * var(--lc-sp)) calc(22px * var(--lc-sp)) calc(28px * var(--lc-sp))}
 :root[data-lc-density] .pm-screen{gap:calc(10px * var(--lc-sp))}

@@ -30,6 +30,9 @@
         sepulture: 'L’an [année], le [jour] du mois de [mois], a été inhumé dans le cimetière de cette paroisse le corps de [prénom et nom], [âgé / âgée] d’environ [âge] ans, [décédé / décédée] le [date], [époux / veuve de …]. Présents : [témoins].\n[signatures]',
         notarial: 'Par-devant [nom], notaire royal / public à [lieu], soussigné, et en présence des témoins ci-après nommés, furent présents [parties]…\n[objet de l’acte]\nFait et passé à [lieu], le [date], en présence de [témoins].\n[signatures]',
     };
+    /* la frise du panneau de droite (maquette atelier-transcription-idees.html, P3 ; décision 3) : [clé, nom, ce qu'on y fait] */
+    const STEPS = [['read', 'Lire', 'Lire l’image (« ✨ Lire ▾ ») ou écrire le texte, ligne à ligne'], ['fix', 'Corriger', 'Relire et corriger : corrections proposées, mots douteux [?], aide à la lecture'],
+        ['find', 'Repérer', 'Repérer les noms, dates, lieux et métiers'], ['add', 'Ajouter', 'Ajouter les personnes et l’événement à la généalogie']];
     const USE_KEY = 'genealogie-transcribe-useenh';
     const useEnh = () => { try { return localStorage.getItem(USE_KEY) !== '0'; } catch (_) { return true; } };
     const SPECIAL = ['ſ', 'œ', 'Œ', 'æ', 'ç', 'é', 'è', 'ê', 'ë', 'à', 'â', 'î', 'ï', 'ô', 'ù', 'û', 'ÿ', '&', '«', '»', '…', '†', '°', '[', ']', '[?]', '[illisible]', '/'];
@@ -214,6 +217,7 @@
         if (ctx.id) { try { const r = await api('act_transcription', {id: ctx.id}); t = {...t, ...r, data: {...t.data, ...(r.data || {})}}; t.data.view = TV.viewOf(r.data?.view); if (!['todo', 'doing', 'done'].includes(t.data.status)) t.data.status = String(t.body || '').trim() ? 'doing' : 'todo'; } catch (e) { return toast(e.message, 'error'); } }
         else if (ctx.mediaId) { t.media_id = Number(ctx.mediaId); t.filename = ctx.filename || ''; t.title = fileLikeTitle(ctx.title, ctx.filename) ? '' : (ctx.title || ''); t.body = ctx.text || ''; if (KINDS.some(k => k[0] === ctx.kind)) t.kind = ctx.kind; } // kind : ex. « lettre » pour le dos d'une carte postale
         let dirty = false, tool = 'pan', fitMode = 'page', fitOn = true, zoom = 1, panX = 0, panY = 0, selZone = null, found = [], imgW = 0, imgH = 0, matchCache = new Map();
+        let flowView = '', flowCur = '', flowT = 0, fixCount = null, fixCountFor = ''; // la frise (plus bas)
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-tx-dlg';
         dlg.innerHTML = `<div class="h-tx">
             <header class="h-tx-top"><span class="h-tx-logo">📜</span><nav class="h-tx-menus" data-tx-menus></nav><span class="ui-topbar-hist h-tx-hist"><button type="button" class="icon-button small" data-tx-hist="undo" title="${esc(i18n('Annuler'))}" data-shortcut="⌘Z" disabled>↶</button><button type="button" class="icon-button small" data-tx-hist="redo" title="${esc(i18n('Rétablir'))}" data-shortcut="⇧⌘Z" disabled>↷</button></span><input data-tx="title" class="h-tx-title" maxlength="200" placeholder="${esc(i18n('Titre de l’acte (ex. Baptême de Jean Martin, 1790)'))}" value="${esc(t.title)}">
@@ -230,14 +234,19 @@
                     <div class="h-tx-zonebar" data-tx-zonebar hidden></div>
                 </section>
                 <section class="h-tx-right">
-                    <div class="h-tx-tools"><span class="h-tx-readw"><button type="button" class="h-tx-readbtn" data-tx-cmd="readmenu" aria-haspopup="true" aria-expanded="false" title="${esc(i18n('Lire le texte de l’image : écriture à la main, texte imprimé, ou lecture approfondie par l’IA'))}">✨ ${esc(i18n('Lire', {ctx: 'atelier'}))} ▾</button>${readPanelHtml()}</span><span class="h-tx-htrrun" data-tx-htrrun hidden>${window.LCNDA_UI.spinner('', {inline: true})}<button type="button" class="button small secondary" data-tx-cmd="htrstop" title="${esc(i18n('Arrêter la lecture'))}">■ ${i18n('Arrêter')}</button></span>
-                        <button type="button" data-tx-cmd="template" title="${esc(i18n('Un modèle d’acte à compléter'))}">🧩 ${i18n('Modèle')}</button><button type="button" data-tx-cmd="aide" title="${esc(i18n('Le latin des registres, les abréviations, les anciennes lettres (ſ, ꝑ…) et des exercices : choisis d’abord un mot dans le texte pour le chercher'))}">📖 ${i18n('Aide à la lecture')}</button><button type="button" data-tx-cmd="fix" title="${esc(i18n('Proposer des corrections pour les mots mal lus (un mot souligné : clique-le pour choisir)'))}">🪄 ${i18n('Corrections')}</button><button type="button" data-tx-cmd="detect" title="${esc(i18n('Repérer les noms, dates, lieux et métiers'))}" data-help="${esc(i18n('Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.'))}">🧭 ${i18n('Repérer')}</button><span class="spacer"></span>
-                        <span class="h-tx-extra"><button type="button" data-tx-cmd="found" title="${esc(i18n('L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches'))}">✓ ${i18n('Ajouter à la généalogie')}…</button><button type="button" data-tx-cmd="copy">📋 ${i18n('Copier le texte')}</button></span></div>
+                    <div class="h-tx-flow" data-tx-flow><div class="h-tx-steps" role="tablist" aria-label="${esc(i18n('Les étapes : Lire, Corriger, Repérer, Ajouter à la généalogie'))}" data-tx-steps>${STEPS.map(([k, label, help], i) => `<button type="button" role="tab" class="h-tx-step" data-tx-step="${k}" aria-selected="false" aria-controls="h-tx-pane-${k}" title="${esc(i18n(help))}"><i aria-hidden="true">${i + 1}</i><span><b>${esc(k === 'read' ? i18n('Lire', {ctx: 'atelier'}) : i18n(label))}</b><small data-tx-steprest="${k}"></small></span></button>`).join('')}</div>
+                    <div class="h-tx-tools h-tx-stepbody" data-tx-stepbody><span class="h-tx-readw"><button type="button" class="h-tx-readbtn" data-tx-cmd="readmenu" aria-haspopup="true" aria-expanded="false" title="${esc(i18n('Lire le texte de l’image : écriture à la main, texte imprimé, ou lecture approfondie par l’IA'))}">✨ ${esc(i18n('Lire', {ctx: 'atelier'}))} ▾</button>${readPanelHtml()}</span><span class="h-tx-htrrun" data-tx-htrrun hidden>${window.LCNDA_UI.spinner('', {inline: true})}<button type="button" class="button small secondary" data-tx-cmd="htrstop" title="${esc(i18n('Arrêter la lecture'))}">■ ${i18n('Arrêter')}</button></span>
+                        <span class="h-tx-pane" role="tabpanel" id="h-tx-pane-read" data-tx-pane="read"><button type="button" data-tx-cmd="template" title="${esc(i18n('Un modèle d’acte à compléter'))}">🧩 ${i18n('Modèle')}</button><small class="muted h-tx-panehint">${esc(i18n('Toute la page ou la zone choisie (▭) ; ou écris le texte toi-même, ligne à ligne.'))}</small></span>
+                        <span class="h-tx-pane" role="tabpanel" id="h-tx-pane-fix" data-tx-pane="fix" hidden><button type="button" data-tx-cmd="fix" title="${esc(i18n('Proposer des corrections pour les mots mal lus (un mot souligné : clique-le pour choisir)'))}">🪄 ${i18n('Corrections')}</button><button type="button" data-tx-cmd="aide" title="${esc(i18n('Le latin des registres, les abréviations, les anciennes lettres (ſ, ꝑ…) et des exercices : choisis d’abord un mot dans le texte pour le chercher'))}">📖 ${i18n('Aide à la lecture')}</button><small class="muted h-tx-panehint" data-tx-fixinfo></small></span>
+                        <span class="h-tx-pane" role="tabpanel" id="h-tx-pane-find" data-tx-pane="find" hidden><button type="button" data-tx-cmd="detect" title="${esc(i18n('Repérer les noms, dates, lieux et métiers'))}" data-help="${esc(i18n('Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.'))}">🧭 ${i18n('Repérer')}</button><small class="muted h-tx-panehint" data-tx-findinfo></small></span>
+                        <span class="h-tx-pane" role="tabpanel" id="h-tx-pane-add" data-tx-pane="add" hidden><button type="button" data-tx-cmd="found" title="${esc(i18n('L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches'))}">✓ ${i18n('Ajouter à la généalogie')}…</button><small class="muted h-tx-panehint">${esc(i18n("L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches"))}</small></span>
+                        <span class="spacer"></span><button type="button" class="h-tx-stepnext" data-tx-stepnext title="${esc(i18n('Étape suivante'))}">${esc(i18n('Étape suivante'))} ›</button></div></div>
                     <div class="h-tx-chars">${SPECIAL.map(c => `<button type="button" data-tx-char="${esc(c)}" title="${esc(i18n('Insérer {c}', {c: esc(c)}))}">${esc(c)}</button>`).join('')}</div>
                     <div class="h-tx-editor${TV.lineNos() ? ' has-ln' : ''}" data-tx-editor><div class="h-tx-mirror" data-tx-mirror aria-hidden="true"></div><textarea data-tx-body spellcheck="false" placeholder="${esc(i18n('La transcription, ligne à ligne comme sur l’acte. Choisis un passage, puis dessine sa zone sur l’image (▭ Zone) : les deux restent liés.'))}">${esc(t.body)}</textarea></div>
                     <div class="h-tx-fixbar" data-tx-fixbar hidden></div>
                     <p class="h-tx-docnote" data-tx-docnote hidden>📄 ${esc(i18n('Ce texte est celui du document : il se voit dans la visionneuse, la page du document et la fiche des personnes reliées.'))}</p>
                     <div class="h-tx-found" data-tx-found></div>
+                    <div class="h-tx-addbar" data-tx-addbar><span class="h-tx-addinfo" data-tx-addinfo></span><span class="h-tx-extra"><button type="button" class="button small secondary" data-tx-cmd="copy">📋 ${i18n("Copier le texte")}</button><button type="button" class="button small" data-tx-cmd="found" title="${esc(i18n('L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches'))}">✓ ${i18n('Ajouter à la généalogie')}…</button></span></div>
                 </section>
             </div></div>`;
         document.body.appendChild(dlg); ext.fullInit?.(dlg, 'transcribe', true); dlg.showModal();
@@ -427,7 +436,7 @@
             h += fixSeg(text, pos, text.length);
             if (TV.lineNos()) { let n = 1; h = `<span class="h-tx-ln" data-n="1"></span>${h.replace(/\n/g, () => `\n<span class="h-tx-ln" data-n="${++n}"></span>`)}`; } // le numéro au début de chaque ligne, dans la marge
             mirror.innerHTML = h + '\n';
-            mirror.scrollTop = area.scrollTop;
+            mirror.scrollTop = area.scrollTop; flowSoon();
         }
         function paintZoneBar() {
             const bar = $('[data-tx-zonebar]'), z = t.data.zones.find(q => q.id === selZone); bar.hidden = !z; if (!z) return;
@@ -565,7 +574,43 @@
                 filename: t.filename, title: $('[data-tx="title"]').value, mediaId: t.media_id, transcriptionId: t.id, people: t.data.people, keep: (f, pid) => keep({label: f.label, role: f.role, s: f.s, e: f.e}, pid),
                 setDate: v => { if (!v) return; t.date_text = v; $('[data-tx="date_text"]').value = v; touch(); }, setPlace: v => { if (!v) return; t.place = v; $('[data-tx="place"]').value = v; touch(); },
                 setKind: k => { const sel = $('[data-tx="kind"]'); if (!sel || ![...sel.options].some(o => o.value === k)) return; sel.value = k; sel.dispatchEvent(new Event('change', {bubbles: true})); }});
+            flowSoon(60);
         }
+        /* ─── la frise « Lire → Corriger → Repérer → Ajouter » (P3) : l'étape en cours, ce qui reste à faire à chacune ─── */
+        const plural = (n, one, many) => (A().plural ? A().plural(n, one, many) : `${n} ${n > 1 ? many || one + 's' : one}`);
+        const markCount = text => (String(text).match(/\[\?\]|\[illisible\]/g) || []).length;
+        /** les corrections qu'on proposerait (rien n'est souligné tant qu'on n'a pas cliqué « 🪄 Corrections ») : pour « N mots à revoir » */
+        async function countFixes() {
+            const text = area.value, key = `${fixOn()}|${fixLevel()}|${text}`; if (key === fixCountFor) return;
+            if (!fixOn() || !window.LCNDA_HTRFIX || !text.trim()) { fixCount = 0; fixCountFor = key; return; }
+            try { const lex = await fixLexicon($('[data-tx-lang]').value, $('[data-tx="place"]').value); if (!lex || !dlg.isConnected || area.value !== text) return; fixCount = window.LCNDA_HTRFIX.propose(text, lex, {level: fixLevel(), keep: txKept}).length; fixCountFor = key; } catch (_) { fixCount = 0; }
+        }
+        function flowState() {
+            const text = area.value, has = !!text.trim(), lines = text.split('\n').filter(l => l.trim()).length;
+            const fixes = txFixOn ? txFix.length : (fixCount ?? 0), marks = markCount(text), toFix = fixes + marks;
+            const people = t.data.people, toLink = people.filter(p => !p.person_id).length, names = found.filter(f => f.type === 'person' && !people.some(p => p.s < f.e && f.s < p.e)).length;
+            const st = {read: {done: has, rest: has ? plural(lines, 'ligne') : i18n('À faire')},
+                fix: {done: has && !toFix && (txFixOn || fixCount !== null), rest: !has ? '' : toFix ? plural(toFix, 'mot à revoir', 'mots à revoir') : i18n('rien à revoir'), fixes, marks, toFix},
+                find: {done: people.length > 0, rest: people.length ? plural(people.length, 'personne') : names ? plural(names, 'nom repéré', 'noms repérés') : has ? i18n('À faire') : '', names},
+                add: {done: people.length > 0 && !toLink, rest: people.length ? (toLink ? i18n('{n} à relier', {n: toLink}) : i18n('Tout est relié')) : '', toLink, people: people.length}};
+            st.cur = STEPS.map(s => s[0]).find(k => !st[k].done) || 'add';
+            return st;
+        }
+        function paintFlow() {
+            if (!dlg.isConnected) return;
+            const st = flowState(); if (st.cur !== flowCur) { flowCur = st.cur; flowView = ''; } // une étape faite : la frise passe d'elle-même à la suivante
+            const view = flowView || st.cur; dlg.dataset.txFlow = st.cur; dlg.dataset.txFlowView = view;
+            dlg.querySelectorAll('[data-tx-step]').forEach((b, i) => { const k = b.dataset.txStep, s = st[k], on = k === view;
+                b.classList.toggle('is-done', s.done); b.classList.toggle('is-cur', k === st.cur); b.classList.toggle('is-active', on); b.setAttribute('aria-selected', String(on)); b.tabIndex = on ? 0 : -1;
+                b.querySelector('i').textContent = s.done ? '✓' : String(i + 1); b.querySelector('[data-tx-steprest]').textContent = s.rest; });
+            dlg.querySelectorAll('[data-tx-pane]').forEach(p => { p.hidden = p.dataset.txPane !== view; });
+            const nx = $('[data-tx-stepnext]'); if (nx) nx.hidden = view === 'add';
+            const fi = $('[data-tx-fixinfo]'); if (fi) fi.textContent = [st.fix.fixes ? plural(st.fix.fixes, 'correction proposée', 'corrections proposées') : '', st.fix.marks ? i18n('{n} × [?] ou [illisible]', {n: st.fix.marks}) : '', st.fix.toFix || !area.value.trim() ? '' : i18n('rien à revoir')].filter(Boolean).join(' · ');
+            const fd = $('[data-tx-findinfo]'); if (fd) fd.textContent = found.length ? i18n(found.length > 1 ? '{n} éléments repérés' : '{n} élément repéré', {n: found.length}) : '';
+            const ai = $('[data-tx-addinfo]'); if (ai) ai.textContent = st.add.people ? `👥 ${plural(st.add.people, 'personne dans l’acte', 'personnes dans l’acte')} · ${st.add.toLink ? i18n('{n} à relier', {n: st.add.toLink}) : i18n('Tout est relié')}` : `👥 ${i18n('Personne dans l’acte pour l’instant : « 🧭 Repérer » les trouve dans le texte')}`;
+        }
+        function flowSoon(ms = 350) { clearTimeout(flowT); flowT = setTimeout(() => { flowT = 0; paintFlow(); countFixes().then(paintFlow); }, ms); }
+        const showStep = k => { flowView = k; paintFlow(); dlg.querySelector(`[data-tx-step="${k}"]`)?.focus({preventScroll: true}); };
         let lastExtract = null, lastUnsure = 0, lastRich = null;
         async function runDetect() {
             found = detect(area.value);
@@ -971,6 +1016,8 @@
             const ch = e.target.closest('[data-tx-char]'); if (ch) { const s = area.selectionStart, en = area.selectionEnd, c = ch.dataset.txChar; area.setRangeText(c, s, en, 'end'); area.dispatchEvent(new Event('input')); area.focus(); return; }
             if (e.target.closest('[data-tx-zlink]')) { const z = t.data.zones.find(q => q.id === selZone), s = area.selectionStart, en = area.selectionEnd; if (!z) return; if (en <= s) return toast(i18n('Choisis d’abord un passage dans le texte.'), 'error'); snap(); z.s = s; z.e = en; touch(); drawZones(); return; }
             if (e.target.closest('[data-tx-zdel]')) return deleteZone();
+            const stp = e.target.closest('[data-tx-step]'); if (stp) return showStep(stp.dataset.txStep);
+            if (e.target.closest('[data-tx-stepnext]')) { const ks = STEPS.map(s => s[0]), i = ks.indexOf(flowView || flowCur); return showStep(ks[Math.min(ks.length - 1, i + 1)]); }
             const c = e.target.closest('[data-tx-cmd]'); if (!c) return; c.closest('details')?.removeAttribute('open');
             const k = c.dataset.txCmd;
             if (k === 'readmenu') { toggleRead(); return; }
@@ -1059,6 +1106,7 @@
             if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); save(); return; }
             if (e.key === 'Escape' && e.target.closest?.('[data-tx-panel]')) { e.preventDefault(); e.stopPropagation(); togglePanel(false); $('[data-tx-cmd="better"]')?.focus(); return; }
             if (e.key === 'Escape' && $('[data-tx-readpanel]') && !$('[data-tx-readpanel]').hidden) { e.preventDefault(); e.stopPropagation(); toggleRead(false); $('[data-tx-cmd="readmenu"]')?.focus(); return; }
+            if (e.target.closest?.('[data-tx-steps]') && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { e.preventDefault(); e.stopPropagation(); const ks = STEPS.map(s => s[0]), i = ks.indexOf(e.target.closest('[data-tx-step]')?.dataset.txStep); showStep(ks[(i + (e.key === 'ArrowRight' ? 1 : ks.length - 1)) % ks.length]); return; } // C5 : les flèches d'un onglet à l'autre
             if (e.target.closest?.('input, textarea, select')) return;
             if (e.target.closest?.('button, [contenteditable="true"]') && (e.key === ' ' || e.key === 'Enter')) return;
             const mod = e.metaKey || e.ctrlKey, k = e.key.toLowerCase();
