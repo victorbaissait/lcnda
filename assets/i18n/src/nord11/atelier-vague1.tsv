@@ -1,0 +1,69 @@
+fr ¦ vi ¦ id
+# 📜 Atelier de transcription, vague 1 « Ranger » (barre courte, ✨ Lire ▾, numéros de ligne, symboles, nom unique)
+Langue du texte : sert à la lecture automatique, et « 📖 Aide à la lecture » s’ouvre sur cette langue ¦ Ngôn ngữ của văn bản: dùng cho việc đọc tự động, và “📖 Hỗ trợ đọc” mở bằng ngôn ngữ này ¦ Bahasa teks: dipakai untuk pembacaan otomatis, dan “📖 Bantuan membaca” terbuka dalam bahasa ini
+Paroisse, commune ¦ Giáo xứ, xã ¦ Paroki, desa
+Loupe ¦ Kính lúp ¦ Kaca pembesar
+Lire le texte de l’image : écriture à la main, texte imprimé, ou lecture approfondie par l’IA ¦ Đọc chữ trong ảnh: chữ viết tay, chữ in, hoặc đọc chuyên sâu bằng AI ¦ Baca teks gambar: tulisan tangan, teks cetak, atau pembacaan mendalam dengan AI
+Zoom : {now}. Clic : {next} (puis {then}, {last}) ¦ Thu phóng: {now}. Bấm: {next} (rồi {then}, {last}) ¦ Zoom: {now}. Klik: {next} (lalu {then}, {last})
+Note (mot illisible, signature…) ¦ Ghi chú (chữ không đọc được, chữ ký…) ¦ Catatan (kata tak terbaca, tanda tangan…)
+La personne reste dans l’acte, sans fiche reliée ¦ Người này vẫn ở trong giấy tờ, không gắn với hồ sơ nào ¦ Orang ini tetap di akta, tanpa catatan yang ditautkan
+Relier… ¦ Liên kết… ¦ Tautkan…
+Retirer de l’acte ¦ Bỏ khỏi giấy tờ ¦ Keluarkan dari akta
+Mots connus ({lang}) ¦ Từ đã biết ({lang}) ¦ Kata yang dikenal ({lang})
+Ouvrir dans 📖 Aide à la lecture ¦ Mở trong 📖 Hỗ trợ đọc ¦ Buka di 📖 Bantuan membaca
+Image puis texte ¦ Ảnh rồi đến chữ ¦ Gambar lalu teks
+Texte seul ¦ Chỉ chữ ¦ Teks saja
+Recette « {name} » posée sur l’image ¦ Đã áp dụng công thức “{name}” cho ảnh ¦ Resep “{name}” diterapkan pada gambar
+L’image est déjà comme au départ ¦ Ảnh đã như lúc đầu ¦ Gambar sudah seperti semula
+Image remise comme au départ ¦ Đã đưa ảnh về như lúc đầu ¦ Gambar dikembalikan seperti semula
+Mots : {n} ¦ Số từ: {n} ¦ Kata: {n}
+À installer ¦ Cần cài đặt ¦ Perlu dipasang
+Lire l’écriture à la main (rapide) ¦ Đọc chữ viết tay (nhanh) ¦ Baca tulisan tangan (cepat)
+Lire un texte imprimé ¦ Đọc chữ in ¦ Baca teks cetak
+Mieux voir ¦ Nhìn rõ hơn ¦ Lihat lebih jelas
+Remettre l’image comme au départ ¦ Đưa ảnh về như lúc đầu ¦ Kembalikan gambar seperti semula
+Cacher les numéros de ligne ¦ Ẩn số dòng ¦ Sembunyikan nomor baris
+Montrer les numéros de ligne ¦ Hiện số dòng ¦ Tampilkan nomor baris
+Encre pâle ¦ Mực nhạt ¦ Tinta pudar
+contraste local + netteté ¦ tương phản cục bộ + độ nét ¦ kontras lokal + ketajaman
+Papier jauni ou taché ¦ Giấy ố vàng hoặc có vết bẩn ¦ Kertas menguning atau bernoda
+effacer le fond + canal bleu ¦ xóa nền + kênh xanh lam ¦ hapus latar + kanal biru
+Verso vu par transparence ¦ Mặt sau thấy xuyên qua giấy ¦ Halaman belakang yang tembus
+miroir + seuil ¦ lật gương + ngưỡng ¦ cermin + ambang
+Position ¦ Vị trí ¦ Posisi
+Autres outils ¦ Công cụ khác ¦ Alat lain
+Contraste local ¦ Tương phản cục bộ ¦ Kontras lokal
+rayon ¦ bán kính ¦ jari-jari
+Canal rouge seul ¦ Chỉ kênh đỏ ¦ Kanal merah saja
+Canal vert seul ¦ Chỉ kênh xanh lục ¦ Kanal hijau saja
+Canal bleu seul ¦ Chỉ kênh xanh lam ¦ Kanal biru saja
+Seuil noir et blanc (0 = sans) ¦ Ngưỡng đen trắng (0 = không có) ¦ Ambang hitam putih (0 = tanpa)
+Niveaux (noir, blanc, gamma) ¦ Mức (đen, trắng, gamma) ¦ Level (hitam, putih, gamma)
+Point noir ¦ Điểm đen ¦ Titik hitam
+noir ¦ đen ¦ hitam
+Point blanc ¦ Điểm trắng ¦ Titik putih
+blanc ¦ trắng ¦ putih
+Gamma ¦ Gamma ¦ Gamma
+Remettre l’image comme au départ (tous les réglages de l’image à zéro) ¦ Đưa ảnh về như lúc đầu (mọi thiết lập của ảnh về không) ¦ Kembalikan gambar seperti semula (semua pengaturan gambar ke nol)
+Recettes ¦ Công thức ¦ Resep
+Des recettes en un clic, et tous les réglages de l’image : contraste local, netteté, canal, seuil, niveaux, redresser… ¦ Công thức chỉ một lần bấm, và mọi thiết lập của ảnh: tương phản cục bộ, độ nét, kênh, ngưỡng, mức, làm thẳng… ¦ Resep sekali klik, dan semua pengaturan gambar: kontras lokal, ketajaman, kanal, ambang, level, meluruskan…
+Tous les réglages ¦ Mọi thiết lập ¦ Semua pengaturan
+Montrer {label} ¦ Hiện {label} ¦ Tampilkan {label}
+Une barre courte ; des recettes en un clic et les autres réglages dans le panneau « 🎚️ Mieux voir », rangés en trois rubriques ¦ Một thanh ngắn; công thức một lần bấm và các thiết lập khác trong bảng “🎚️ Nhìn rõ hơn”, chia làm ba mục ¦ Bilah pendek; resep sekali klik dan pengaturan lain di panel “🎚️ Lihat lebih jelas”, dalam tiga bagian
+Barre courte + « 🎚️ Mieux voir » (conseillé) ¦ Thanh ngắn + “🎚️ Nhìn rõ hơn” (khuyên dùng) ¦ Bilah pendek + “🎚️ Lihat lebih jelas” (disarankan)
+Barre complète ¦ Thanh đầy đủ ¦ Bilah lengkap
+Numéros de ligne dans la marge du texte (conseillé) ¦ Số dòng ở lề văn bản (khuyên dùng) ¦ Nomor baris di margin teks (disarankan)
+PERSONNALISER ¦ TÙY CHỈNH ¦ SESUAIKAN
+« 🔬 Lecture approfondie (IA) » sur une page déjà lue montre les deux textes côte à côte, et tu gardes le meilleur. Relis toujours : un modèle peut se tromper sur les noms. ¦ “🔬 Đọc chuyên sâu (AI)” trên một trang đã đọc sẽ hiện hai văn bản cạnh nhau, và bạn giữ bản tốt hơn. Luôn đọc lại: mô hình có thể đọc sai tên người. ¦ “🔬 Pembacaan mendalam (AI)” pada halaman yang sudah dibaca menampilkan kedua teks berdampingan, dan kamu menyimpan yang lebih baik. Selalu periksa ulang: model bisa salah membaca nama.
+Atelier de transcription : barre d’outils ¦ Xưởng chép văn bản: thanh công cụ ¦ Bengkel transkripsi: bilah alat
+La barre au-dessus de l’image de l’acte : une barre courte et le panneau « 🎚️ Mieux voir » (conseillé), ou la barre complète ; les numéros de ligne du texte ; les boutons et réglages montrés, cachés et rangés. Aussi avec « ⚙️ » dans l’outil. ¦ Thanh phía trên ảnh giấy tờ: một thanh ngắn và bảng “🎚️ Nhìn rõ hơn” (khuyên dùng), hoặc thanh đầy đủ; số dòng của văn bản; các nút và thiết lập được hiện, ẩn và sắp xếp. Cũng bằng “⚙️” trong công cụ. ¦ Bilah di atas gambar akta: bilah pendek dan panel “🎚️ Lihat lebih jelas” (disarankan), atau bilah lengkap; nomor baris teks; tombol dan pengaturan yang ditampilkan, disembunyikan, dan diurutkan. Juga dengan “⚙️” di alat.
+Dans l’Atelier de transcription (Listes → Outils de modification → 📜 Atelier de transcription, ou « 📜 Ouvrir dans l’Atelier » sur une image) : « ✨ Lire ▾ » → « ✍️ Lire l’écriture à la main (rapide) ». Tout se passe sur cet ordinateur, sans Internet. ¦ Trong Xưởng chép văn bản (Danh sách → Công cụ chỉnh sửa → 📜 Xưởng chép văn bản, hoặc “📜 Mở trong Xưởng” trên một ảnh): “✨ Đọc ▾” → “✍️ Đọc chữ viết tay (nhanh)”. Mọi thứ diễn ra trên máy tính này, không cần Internet. ¦ Di Bengkel transkripsi (Daftar → Alat penyuntingan → 📜 Bengkel transkripsi, atau “📜 Buka di Bengkel” pada gambar): “✨ Baca ▾” → “✍️ Baca tulisan tangan (cepat)”. Semuanya terjadi di komputer ini, tanpa Internet.
+Ensuite, dans l’Atelier de transcription : « ✨ Lire ▾ » → « 🔬 Lecture approfondie (IA) » sur une page déjà lue montre les deux lectures côte à côte, et tu gardes la meilleure. ¦ Sau đó, trong Xưởng chép văn bản: “✨ Đọc ▾” → “🔬 Đọc chuyên sâu (AI)” trên một trang đã đọc sẽ hiện hai bản đọc cạnh nhau, và bạn giữ bản tốt hơn. ¦ Lalu, di Bengkel transkripsi: “✨ Baca ▾” → “🔬 Pembacaan mendalam (AI)” pada halaman yang sudah dibaca menampilkan kedua bacaan berdampingan, dan kamu menyimpan yang lebih baik.
+Quelques secondes par page, sur cet ordinateur. Toute la page ou la zone choisie (▭) ; chaque ligne est reliée à sa zone de l’image, les mots peu sûrs surlignés. S’installe une fois (Réglages). ¦ Vài giây mỗi trang, trên máy tính này. Cả trang hoặc vùng đã chọn (▭); mỗi dòng được liên kết với vùng của nó trên ảnh, các từ chưa chắc được tô sáng. Cài đặt một lần (Cài đặt). ¦ Beberapa detik per halaman, di komputer ini. Seluruh halaman atau area yang dipilih (▭); setiap baris ditautkan ke areanya di gambar, kata yang meragukan disorot. Dipasang sekali (Pengaturan).
+Pour un texte imprimé ou tapé (journaux, fiches matricules) : rapide, rien à installer, chaque ligne reliée à sa zone. Ne sait pas lire l’écriture à la main. ¦ Cho chữ in hoặc đánh máy (báo, hồ sơ quân dịch): nhanh, không cần cài gì, mỗi dòng liên kết với vùng của nó. Không đọc được chữ viết tay. ¦ Untuk teks cetak atau ketikan (koran, catatan militer): cepat, tidak ada yang perlu dipasang, setiap baris ditautkan ke areanya. Tidak bisa membaca tulisan tangan.
+Plus lente (de 20 s à quelques minutes par page) mais meilleure sur une écriture difficile : un modèle d’IA qui tourne sur cet ordinateur (Ollama, plusieurs Go à télécharger une fois). Les lignes se relient ensuite à l’image (▤). ¦ Chậm hơn (từ 20 giây đến vài phút mỗi trang) nhưng tốt hơn với chữ viết khó: một mô hình AI chạy trên máy tính này (Ollama, vài GB cần tải về một lần). Các dòng sau đó được liên kết với ảnh (▤). ¦ Lebih lambat (dari 20 detik sampai beberapa menit per halaman) tetapi lebih baik untuk tulisan yang sulit: model AI yang berjalan di komputer ini (Ollama, beberapa GB untuk diunduh sekali). Baris-barisnya lalu ditautkan ke gambar (▤).
+L’Atelier de transcription s’ouvre sur une image. ¦ Xưởng chép văn bản mở trên một ảnh. ¦ Bengkel transkripsi terbuka pada sebuah gambar.
+L’Atelier de transcription n’est pas encore chargé. ¦ Xưởng chép văn bản chưa được tải. ¦ Bengkel transkripsi belum dimuat.
+L’Atelier de transcription : l’image du dos à gauche, le texte à droite, lecture automatique, repérage des noms ¦ Xưởng chép văn bản: ảnh mặt sau bên trái, chữ bên phải, đọc tự động, tìm tên ¦ Bengkel transkripsi: gambar sisi belakang di kiri, teks di kanan, pembacaan otomatis, pencarian nama
+Les transcriptions des actes (📜 Atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris. ¦ Bản chép của giấy tờ (📜 Xưởng chép văn bản) và của tệp đa phương tiện: những gì đi sau (hoặc trước) từ bắt đầu. Chỉ lấy những đoạn câu hữu ích. ¦ Transkripsi akta (📜 Bengkel transkripsi) dan media: apa yang mengikuti (atau mendahului) kata awal. Hanya potongan kalimat yang berguna yang diambil.
+atelier|Lire ¦ Đọc ¦ Baca
