@@ -3974,6 +3974,8 @@
 :root[data-lc-density] .h-tf-as legend{padding:0 calc(4px * var(--lc-sp))}
 :root[data-lc-density] .h-tf-sugg{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .h-tf-prev{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-zop{gap:calc(6px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-zop{padding:calc(2px * var(--lc-sp)) calc(10px * var(--lc-sp))}
 /* heritage-diagram-genea.css */
 :root[data-lc-density] .gn-net-tools{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .gn-app fieldset{padding:calc(6px * var(--lc-sp)) calc(10px * var(--lc-sp))}

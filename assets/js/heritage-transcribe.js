@@ -210,6 +210,11 @@
         readSt = {ocr: true, htr: !!(h && h.ready && (h.models || []).some(m => m.present)), deep: !!(d && d.local_only !== false && d.running && (d.models || []).some(m => m.present))}; readStAt = Date.now(); return readSt;
     }
 
+    /* 🎨 opacité des cadres de couleur (0 à 100 %, retenue sur cet ordinateur ; 100 = comme avant) */
+    const ZOP_KEY = 'genealogie-tx-zone-opacity';
+    const zop = () => { try { const v = Number(localStorage.getItem(ZOP_KEY)); return localStorage.getItem(ZOP_KEY) === null || !Number.isFinite(v) ? 1 : Math.min(1, Math.max(0, v / 100)); } catch (_) { return 1; } };
+    const zopHtml = () => `<label class="h-tx-zop" title="${esc(i18n('Opacité des cadres de couleur (0 = presque invisibles)'))}">${esc(i18n('Cadres'))} <input type="range" min="0" max="100" step="5" value="${Math.round(zop() * 100)}" data-tx-zop aria-label="${esc(i18n('Opacité des cadres de couleur (0 = presque invisibles)'))}"></label>`;
+
     /* ═════════ L'atelier ═════════ */
     async function open(ctx = {}) {
         const TV = ext.txView; // « 🎚️ Mieux voir » et la barre réglable (heritage-transcribe-view.js)
@@ -230,7 +235,7 @@
             <div class="h-tx-main">
                 <nav class="h-tx-rail" data-tx-rail aria-label="${esc(i18n('Outils'))}"><button type="button" data-tx-tool="pan" title="${esc(i18n('Déplacer l’image, ou barre d’espace'))}" aria-label="${esc(i18n('Déplacer l’image'))}" data-shortcut="H">✋</button><button type="button" data-tx-tool="zone" title="${esc(i18n('Dessiner une zone : choisis un passage dans le texte, puis dessine son rectangle sur l’image (les deux restent liés)'))}" aria-label="${esc(i18n('Dessiner une zone'))}" data-shortcut="Z">▭</button><button type="button" data-tx-cmd="loupe" title="${esc(i18n('Loupe qui suit la souris (la molette change le grossissement)'))}" aria-label="${esc(i18n('Loupe'))}" data-shortcut="L">🔍</button><button type="button" data-tx-cmd="rot" title="${esc(i18n('Tourner l’image de 90°'))}" aria-label="${esc(i18n('Tourner de 90°'))}">⟳</button><button type="button" data-tx-cmd="image" title="${esc(i18n('Choisir l’image de l’acte (base ou ordinateur)'))}" aria-label="${esc(i18n('Image de l’acte'))}">🖼️</button></nav>
                 <section class="h-tx-left">
-                    <div class="h-tx-barwrap" data-tx-barwrap>${TV.toolbarHtml(t.data.view)}</div>
+                    <div class="h-tx-barwrap" data-tx-barwrap>${TV.toolbarHtml(t.data.view)}</div>${zopHtml()}
                     <div class="h-tx-stage" data-tx-stage tabindex="-1"><svg data-tx-svg><g data-tx-world><image data-tx-img/><g data-tx-zones></g><g data-tx-handles></g><rect data-tx-draw class="h-tx-draw" hidden/></g></svg><canvas class="h-tx-loupe" data-tx-loupe hidden aria-hidden="true"></canvas><p class="h-tx-empty" data-tx-empty>${i18n('Choisis l’image de l’acte : « 🖼️ Image… » (une photo de la base, ou un fichier de l’ordinateur).')}</p></div>
                     <div class="h-tx-zonebar" data-tx-zonebar hidden></div>
                 </section>
@@ -366,10 +371,11 @@
         const colorOf = (z, i) => z.c || COLORS[i % COLORS.length];
         function paintZoneRects() {
             const g = $('[data-tx-zones]'), sw = 2 / zoom;
-            g.innerHTML = t.data.zones.map((z, i) => `<rect data-tx-zone="${esc(z.id)}"${selZone === z.id ? ' class="is-sel"' : ''} x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" fill="${colorOf(z, i)}" fill-opacity="${selZone === z.id ? .38 : .2}" stroke="${colorOf(z, i)}" stroke-width="${selZone === z.id ? sw * 2 : sw}"><title>${esc(t.body.slice(z.s, z.e).slice(0, 120) || z.note || i18n('Zone non reliée'))}${selZone === z.id ? ` ${i18n('— glisse pour la déplacer, tire une poignée pour la redimensionner (flèches, Maj + flèches)')}` : ''}</title></rect>`).join('');
+            g.innerHTML = t.data.zones.map((z, i) => `<rect data-tx-zone="${esc(z.id)}"${selZone === z.id ? ' class="is-sel"' : ''} x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" fill="${colorOf(z, i)}" fill-opacity="${(selZone === z.id ? .38 : .2) * zop()}" stroke="${colorOf(z, i)}" stroke-opacity="${selZone === z.id ? 1 : Math.max(.08, zop())}" stroke-width="${selZone === z.id ? sw * 2 : sw}"><title>${esc(t.body.slice(z.s, z.e).slice(0, 120) || z.note || i18n('Zone non reliée'))}${selZone === z.id ? ` ${i18n('— glisse pour la déplacer, tire une poignée pour la redimensionner (flèches, Maj + flèches)')}` : ''}</title></rect>`).join('');
             paintHandles();
         }
         function drawZones() { paintZoneRects(); paintMirror(); paintZoneBar(); paintTxBar(); }
+        dlg.addEventListener('input', e => { if (!e.target.matches?.('[data-tx-zop]')) return; try { localStorage.setItem(ZOP_KEY, String(Math.round(Number(e.target.value) || 0))); } catch (_) {} paintZoneRects(); });
         /* ─── la zone choisie : 8 poignées (coins et milieux), toujours de la même taille à l'écran ─── */
         // les poignées sont nommées dans l'image (nw = coin haut-gauche de l'image) ; leur curseur suit leur direction à l'écran
         const HANDLES = [['n', .5, 0], ['e', 1, .5], ['s', .5, 1], ['w', 0, .5], ['nw', 0, 0], ['ne', 1, 0], ['se', 1, 1], ['sw', 0, 1]]; // les coins par-dessus
@@ -518,11 +524,11 @@
             if (e.pointerType === 'mouse' && e.button !== 0 && e.button !== 1) return;
             const hd = e.target.closest('[data-tx-h]'), zr = e.target.closest('[data-tx-zone]'), mainBtn = e.button === 0 && !space;
             if (mainBtn && hd && selZone) { const z = t.data.zones.find(q => q.id === selZone); if (z) { stage.focus({preventScroll: true}); drag = {edit: hd.dataset.txH, z, orig: {x: z.x, y: z.y, w: z.w, h: z.h}, R0: {x: z.x, y: z.y, w: z.w, h: z.h}, p0: toImg(e), c0: [e.clientX, e.clientY], before: cloneZones(), moved: false}; stage.dataset.drag = hd.style.cursor.replace('-resize', ''); e.preventDefault(); return; } }
-            if (mainBtn && zr && (tool !== 'zone' || zr.dataset.txZone === selZone)) { // un clic sur une zone la choisit ; glisser la déplace
+            if (mainBtn && zr && ((tool === 'zone' && zr.dataset.txZone === selZone) || e.altKey)) { // ▭ : glisser la zone choisie la déplace ; ✋ : Alt + glisser (un glisser simple déplace l'image)
                 const z = pickZone(zr.dataset.txZone); if (z) { drag = {edit: 'move', z, orig: {x: z.x, y: z.y, w: z.w, h: z.h}, R0: {x: z.x, y: z.y, w: z.w, h: z.h}, p0: toImg(e), c0: [e.clientX, e.clientY], before: cloneZones(), moved: false}; e.preventDefault(); return; }
             }
             if (tool === 'zone' && mainBtn) { const [x, y] = toImg(e); drag = {zone: true, x0: x, y0: y, x1: x, y1: y}; return; }
-            drag = {pan: true, sx: e.clientX, sy: e.clientY, px: panX, py: panY};
+            drag = {pan: true, sx: e.clientX, sy: e.clientY, px: panX, py: panY, pick: mainBtn && zr ? zr.dataset.txZone : null}; // ✋ sur une zone : un clic la choisit, glisser déplace l'image
         });
         svg.addEventListener('pointermove', e => {
             if (pointers.has(e.pointerId)) pointers.set(e.pointerId, {x: e.clientX, y: e.clientY});
@@ -541,6 +547,7 @@
         const endPointer = e => {
             pointers.delete(e.pointerId); if (pinch) { if (pointers.size < 2) pinch = null; drag = null; return; }
             const d = drag; drag = null; delete stage.dataset.drag; $('[data-tx-draw]').hidden = true; if (!d) return;
+            if (d.pan) { if (d.pick && e.type !== 'pointercancel' && Math.hypot(e.clientX - d.sx, e.clientY - d.sy) < 5) pickZone(d.pick); return; }
             if (d.edit) { if (d.moved && e.type !== 'pointercancel') { hist.undo.push(d.before); hist.redo = []; touch(); drawZones(); status(d.edit === 'move' ? i18n('Zone déplacée (⌘Z pour annuler)') : i18n('Zone redimensionnée (⌘Z pour annuler)')); } else if (d.moved) { Object.assign(d.z, d.orig); drawZones(); } return; }
             if (!d.zone || e.type === 'pointercancel') return;
             const x = clamp(Math.min(d.x0, d.x1), 0, imgW), y = clamp(Math.min(d.y0, d.y1), 0, imgH), w = Math.min(imgW - x, Math.abs(d.x1 - d.x0)), h = Math.min(imgH - y, Math.abs(d.y1 - d.y0));

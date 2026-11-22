@@ -19,3 +19,5 @@ Lecture approfondie (IA) ¦ Detaljno čitanje (UI) ¦ Poglobljeno branje (UI)
 Impossible de suivre la lecture : {x} ¦ Nije moguće pratiti čitanje: {x} ¦ Branja ni mogoče spremljati: {x}
 Le programme de lecture n’a pas démarré. ¦ Program za čitanje nije se pokrenuo. ¦ Program za branje se ni zagnal.
 Acte de notoriété ¦ Akt o poznatosti ¦ Listina o notoričnosti
+Cadres ¦ Okviri ¦ Okvirji
+Opacité des cadres de couleur (0 = presque invisibles) ¦ Neprozirnost obojenih okvira (0 = gotovo nevidljivi) ¦ Prekrivnost barvnih okvirjev (0 = skoraj nevidni)
