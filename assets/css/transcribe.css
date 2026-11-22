@@ -48,6 +48,11 @@
 .h-tx-better .h-tx-chanw{display:grid;grid-template-columns:118px 1fr;align-items:center;gap:8px;width:100%}
 .h-tx-better .h-tx-ck{font-size:13px}
 .h-tx-better .h-tx-rub-act{display:flex;gap:8px;flex-wrap:wrap}
+.h-tx-better .h-tx-recipes{display:grid;gap:4px}
+.h-tx-better .h-tx-recipe{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 10px;text-align:left;padding:6px 8px}
+.h-tx-better .h-tx-recipe small{color:#6e6e73;font-size:12px}
+.h-tx-better .h-tx-recipe.is-active{border-color:#1473e6;box-shadow:inset 0 0 0 1px #1473e6}
+.h-tx-better .h-tx-allt{margin:10px 0 0;padding-top:8px;border-top:1px solid #eee;font-weight:600;font-size:13px}
 .h-tx-better .h-tx-rub-act .h-tx-ctl{width:auto;flex:1}
 .h-tx-better .h-tx-rub-act button{width:100%;padding:6px 8px;font-weight:600}
 .h-tx-better button{border:1px solid #d6d6db;background:#fff;border-radius:6px;padding:3px 8px;cursor:pointer;font:inherit;color:inherit}
@@ -79,7 +84,8 @@
 }
 :root[data-theme="dark"] .h-tx-ctl+.h-tx-ctl{border-color:#3a3f46}
 :root[data-theme="dark"] .h-tx-better{background:#24272c;border-color:#3a3f46;box-shadow:0 12px 32px rgba(0,0,0,.6)}
-:root[data-theme="dark"] .h-tx-better h4{color:#a1a1a6}
+:root[data-theme="dark"] .h-tx-better h4,:root[data-theme="dark"] .h-tx-better .h-tx-recipe small{color:#a1a1a6}
+:root[data-theme="dark"] .h-tx-better .h-tx-allt{border-color:#3a3f46}
 :root[data-theme="dark"] .h-tx-better .h-tx-rub+.h-tx-rub{border-color:#3a3f46}
 :root[data-theme="dark"] .h-tx-better button{background:#2c3036;border-color:#3a3f46;color:#e6e6e6}
 :root[data-theme="dark"] .h-tx-better .h-tx-seg button.is-active,:root[data-theme="dark"] .h-tx-tools .h-tx-seg button.is-active{background:#1473e6;border-color:#1473e6;color:#fff}

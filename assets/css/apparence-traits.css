@@ -3395,6 +3395,8 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .h-tx-better, :root .h-tx-better:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d6d6db}
 :root.lc-frame .h-tx-better .h-tx-rub+.h-tx-rub, :root .h-tx-better .h-tx-rub+.h-tx-rub:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid #eee}
 :root.lc-frame .h-tx-better .h-tx-ctl, :root .h-tx-better .h-tx-ctl:is([data-lc-lines], [data-lc-lines] *) {border-left:0}
+:root.lc-frame .h-tx-better .h-tx-recipe.is-active, :root .h-tx-better .h-tx-recipe.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
+:root.lc-frame .h-tx-better .h-tx-allt, :root .h-tx-better .h-tx-allt:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid #eee}
 :root.lc-frame .h-tx-better button, :root .h-tx-better button:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d6d6db}
 :root.lc-frame .h-tx-better .h-tx-seg button.is-active, :root .h-tx-better .h-tx-seg button.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
 :root.lc-frame .h-tx-loupe, :root .h-tx-loupe:is([data-lc-lines], [data-lc-lines] *) {border:3px solid #fff}
@@ -3402,6 +3404,7 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .h-txb-seg button.is-active, :root .h-txb-seg button.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
 :root[data-theme="dark"].lc-frame .h-tx-ctl+.h-tx-ctl, :root[data-theme="dark"] .h-tx-ctl+.h-tx-ctl:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-tx-better, :root[data-theme="dark"] .h-tx-better:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .h-tx-better .h-tx-allt, :root[data-theme="dark"] .h-tx-better .h-tx-allt:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-tx-better .h-tx-rub+.h-tx-rub, :root[data-theme="dark"] .h-tx-better .h-tx-rub+.h-tx-rub:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-tx-better button, :root[data-theme="dark"] .h-tx-better button:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 :root[data-theme="dark"].lc-frame .h-tx-better .h-tx-seg button.is-active, :root[data-theme="dark"] .h-tx-better .h-tx-seg button.is-active:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-tx-tools .h-tx-seg button.is-active, :root[data-theme="dark"] .h-tx-tools .h-tx-seg button.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}

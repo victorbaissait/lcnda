@@ -5468,6 +5468,10 @@
 :root[data-lc-density] .h-tx-better .h-tx-pair{gap:calc(4px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-better .h-tx-chanw{gap:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-better .h-tx-rub-act{gap:calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-better .h-tx-recipes{gap:calc(4px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-better .h-tx-recipe{gap:calc(2px * var(--lc-sp)) calc(10px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-better .h-tx-recipe{padding:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
+:root[data-lc-density] .h-tx-better .h-tx-allt{padding-top:calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-better .h-tx-rub-act button{padding:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-better button{padding:calc(3px * var(--lc-sp)) calc(8px * var(--lc-sp))}
 :root[data-lc-density] .h-tx-useenh{padding:calc(6px * var(--lc-sp)) calc(8px * var(--lc-sp))}

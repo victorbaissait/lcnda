@@ -316,6 +316,7 @@
             const v = t.data.view;
             dlg.querySelectorAll('[data-tx-barwrap] [data-tx-view]').forEach(i => { if (i.type === 'checkbox') i.checked = !!v[i.dataset.txView]; else i.value = String(v[i.dataset.txView]); });
             dlg.querySelectorAll('[data-tx-chan]').forEach(b => { const on = b.dataset.txChan === v.channel; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
+            dlg.querySelectorAll('[data-tx-recipe]').forEach(b => { const on = TV.recipeOn(v, b.dataset.txRecipe); b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
             paintBadge();
         }
         function paintBadge() { const b = $('[data-tx-badge]'); if (!b) return; const n = TV.changedCount(t.data.view, TV.panelKeys(TV.barCfg(), narrow)); b.hidden = !n; b.textContent = String(n); b.title = n ? i18n(n > 1 ? '{n} réglages actifs dans « Mieux voir »' : '{n} réglage actif dans « Mieux voir »', {n}) : ''; }
@@ -940,6 +941,10 @@
         dlg.addEventListener('click', async e => {
             const tl = e.target.closest('[data-tx-tool]'); if (tl) return setTool(tl.dataset.txTool);
             const chan = e.target.closest('[data-tx-chan]'); if (chan) { setView('channel', chan.dataset.txChan); syncControls(); return; }
+            const rcp = e.target.closest('[data-tx-recipe]'); if (rcp) { // 🎚️ une recette en un clic, puis on ajuste ; « ↶ Annuler » sur le message
+                const before = {...t.data.view}, id = rcp.dataset.txRecipe, r = TV.RECIPES.find(x => x[0] === id); if (!r) return;
+                const put = v => { t.data.view = TV.viewOf(v); syncControls(); geom({keepCenter: !fitOn}); if (fitOn) applyFit(fitMode); else applyView(); applyImage(); touch(); };
+                put(TV.recipeView(before, id)); A().undoToast?.(i18n('Recette « {name} » posée sur l’image', {name: r[2]}), {undo: () => put(before), redo: () => put(TV.recipeView(before, id))}); return; }
             const ch = e.target.closest('[data-tx-char]'); if (ch) { const s = area.selectionStart, en = area.selectionEnd, c = ch.dataset.txChar; area.setRangeText(c, s, en, 'end'); area.dispatchEvent(new Event('input')); area.focus(); return; }
             if (e.target.closest('[data-tx-zlink]')) { const z = t.data.zones.find(q => q.id === selZone), s = area.selectionStart, en = area.selectionEnd; if (!z) return; if (en <= s) return toast(i18n('Choisis d’abord un passage dans le texte.'), 'error'); snap(); z.s = s; z.e = en; touch(); drawZones(); return; }
             if (e.target.closest('[data-tx-zdel]')) return deleteZone();

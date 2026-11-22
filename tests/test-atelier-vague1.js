@@ -45,7 +45,7 @@ $pdo->exec("INSERT INTO media(id,title,filename,thumbnail,media_type) VALUES(1,'
 act_transcriptions_ensure($pdo);
 $a = $pdo->prepare("INSERT INTO act_transcriptions(id,title,kind,media_id,body,data_json,updated_at) VALUES(?,?,?,?,?,?,?)");
 $a->execute([1, 'Baptême de Jean MAZAUD, 1790', 'bapteme', 1, getenv('TX_BODY'), getenv('TX_DATA'), '2026-01-01']);
-echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX_BODY: BODY, TX_DATA: JSON.stringify({zones, people: [], status: 'doing'})}});
+echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX_BODY: BODY, TX_DATA: JSON.stringify({zones, people: [], status: 'doing', view: {contrast: 130, clahe: 30}})}});
     if (seed.status !== 0 || !/"ok"/.test(seed.stdout)) { console.error(seed.stderr || seed.stdout); process.exit(1); }
     const port = await new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
     const proc = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-S', `127.0.0.1:${port}`, '-t', root, path.join(root, 'router.php')], {cwd: root, env, stdio: 'ignore'});
@@ -92,6 +92,38 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
         });
         await shot('v1-sombre-1440.png');
         await theme(''); await sleep(200);
+
+        /* ─── 2. barre courte + « 🎚️ Mieux voir » par défaut, trois recettes ─── */
+        const view = () => p.evaluate(() => ({...document.querySelector('dialog.h-tx-dlg').txApi.get().data.view}));
+        const bar = () => p.evaluate(() => { const b = document.querySelector('dialog.h-tx-dlg [data-tx-bar]'); return {layout: b.dataset.layout, h: Math.round(b.getBoundingClientRect().height), w: Math.round(b.getBoundingClientRect().width), kids: [...b.children].map(c => (c.dataset.txItem || c.className) + ':' + Math.round(c.getBoundingClientRect().width)).join(' '), better: !!b.querySelector('[data-tx-cmd="better"]'), ranges: [...b.querySelectorAll('input[type=range]')].filter(i => !i.closest('[data-tx-panel]')).length}; });
+        await t('barre courte par défaut : une ligne, « 🎚️ Mieux voir ▾ », les curseurs fins rangés dans le panneau', async () => {
+            const b = await bar(); assert.equal(b.layout, 'B'); assert.ok(b.better); assert.ok(b.h <= 48, 'hauteur ' + JSON.stringify(b)); assert.ok(b.ranges <= 2, 'curseurs dans la barre : ' + b.ranges);
+        });
+        await t('les réglages retenus pour cet acte reviennent à l’ouverture (rien de perdu)', async () => { const v = await view(); assert.equal(v.contrast, 130); assert.equal(v.clahe, 30); });
+        await t('« 🎚️ Mieux voir » : trois recettes en un clic, chacune avec ce qu’elle fait ; ↶ Annuler remet les réglages de l’acte', async () => {
+            await p.click('dialog.h-tx-dlg [data-tx-cmd="better"]');
+            const r = await p.evaluate(() => [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-panel] [data-tx-recipe]')].map(b => ({id: b.dataset.txRecipe, text: b.textContent.trim(), vis: b.getBoundingClientRect().width > 0})));
+            assert.deepEqual(r.map(x => x.id), ['pale', 'paper', 'verso']); assert.ok(r.every(x => x.vis && /\+/.test(x.text)), JSON.stringify(r));
+            await shot('v1-mieux-voir.png');
+            await p.click('dialog.h-tx-dlg [data-tx-recipe="paper"]'); await sleep(300);
+            let v = await view(); assert.equal(v.bg, true); assert.equal(v.channel, 'b'); assert.equal(v.clahe, 0); assert.equal(v.contrast, 100);
+            assert.equal(await p.getAttribute('dialog.h-tx-dlg [data-tx-recipe="paper"]', 'aria-pressed'), 'true');
+            assert.equal(await p.getAttribute('dialog.h-tx-dlg [data-tx-recipe="pale"]', 'aria-pressed'), 'false');
+            await p.evaluate(() => [...document.querySelectorAll('.ui-toast')].filter(x => /Recette/.test(x.textContent)).at(-1).querySelector('.ui-toast-acts button').click()); await sleep(300);
+            v = await view(); assert.equal(v.contrast, 130); assert.equal(v.clahe, 30); assert.equal(v.bg, false);
+            await p.click('dialog.h-tx-dlg [data-tx-recipe="pale"]'); await sleep(300);
+            v = await view(); assert.ok(v.clahe > 0 && v.sharp > 0, JSON.stringify(v));
+            await p.keyboard.press('Escape');
+        });
+        await t('l’ancienne barre complète reste un réglage ; une barre gardée d’avant passe à la barre courte', async () => {
+            await p.evaluate(() => { const T = window.LCNDA_EXT.txView, c = T.barCfg(); c.layout = 'A'; T.saveBar(c); }); await sleep(200);
+            let b = await bar(); assert.equal(b.layout, 'A'); assert.ok(b.ranges >= 6, 'barre complète : ' + b.ranges);
+            await p.evaluate(() => { localStorage.setItem('genealogie-transcribe-bar', JSON.stringify({layout: 'A', order: [], hidden: []})); window.dispatchEvent(new CustomEvent('lcnda-txbar-change')); }); await sleep(200);
+            b = await bar(); assert.equal(b.layout, 'B');
+            const html = await p.evaluate(() => window.LCNDA_EXT.transcribePrefs.html());
+            assert.ok(/data-txb-layout="B"[^>]*>[^<]*conseillé/.test(html), 'barre courte « (conseillé) » dans le réglage');
+            await p.evaluate(() => localStorage.removeItem('genealogie-transcribe-bar'));
+        });
 
         await t('aucune erreur JavaScript', async () => { assert.deepStrictEqual(errs, []); });
     } finally {

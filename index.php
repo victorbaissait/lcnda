@@ -65,7 +65,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/graphs.css?v=1">
     <link rel="stylesheet" href="assets/css/apparence.css?v=7">
     <link rel="stylesheet" href="assets/css/sections.css?v=3">
-    <link rel="stylesheet" href="assets/css/transcribe.css?v=7">
+    <link rel="stylesheet" href="assets/css/transcribe.css?v=8">
     <link rel="stylesheet" href="assets/css/photomaps.css?v=9">
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=3">
     <link rel="stylesheet" href="assets/css/meteo.css?v=2">
@@ -106,8 +106,8 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/editeurs.css?v=4">
     <link rel="stylesheet" href="assets/css/versions.css?v=1">
     <link rel="stylesheet" href="assets/css/premier.css?v=2">
-    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=25" id="lc-frame-css" media="not all">
-    <link rel="stylesheet" href="assets/css/designs-gen.css?v=26" id="lc-designs-gen" media="not all">
+    <link rel="stylesheet" href="assets/css/apparence-traits.css?v=26" id="lc-frame-css" media="not all">
+    <link rel="stylesheet" href="assets/css/designs-gen.css?v=27" id="lc-designs-gen" media="not all">
     <link rel="stylesheet" href="assets/css/designs.css?v=13">
     <link rel="stylesheet" href="assets/css/a-trier.css?v=1">
     <script>/* 🎨 Designs au choix (app-designs.js) : le style choisi est posé avant le premier dessin, sans clignotement */
@@ -1481,7 +1481,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-creations.js?v=5" defer></script>
 <script src="assets/js/heritage-onglets-documents.js?v=8" defer></script>
 <script src="assets/js/heritage-onglets-catalogue.js?v=2" defer></script>
-<script src="assets/js/heritage-transcribe-view.js?v=8" defer></script>
+<script src="assets/js/heritage-transcribe-view.js?v=9" defer></script>
 <script src="assets/js/heritage-transcribe-acte-core.js?v=3" defer></script>
 <script src="assets/js/heritage-transcribe-acte.js?v=7" defer></script>
 <script src="assets/js/heritage-transcribe-trouve.js?v=1" defer></script>
