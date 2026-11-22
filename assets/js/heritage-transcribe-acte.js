@@ -63,7 +63,8 @@
     const gb = n => `${(n / 1e9).toLocaleString(document.documentElement.lang || 'fr', {maximumFractionDigits: 1})} Go`;
     /**
      * o.getImage() : l'image à lire (base64 PNG / JPEG, la zone recadrée) ; o.lang : la langue du texte ;
-     * o.htrText : le texte déjà lu à la main (pour comparer) ; o.onKeep(text, from) : met le texte choisi dans la transcription.
+     * o.htrText : le texte déjà lu à la main (pour comparer) ; o.onKeep(text, from) : met le texte choisi dans la transcription ;
+     * o.onCompare(zone) : ajoute ce qu'il faut sous les deux textes (corrections proposées, case « ▤ Relier les lignes à l'image »).
      */
     async function openDeep(o = {}) {
         let st = null, job = null, timer = 0, model = '';
@@ -118,6 +119,7 @@
             out.innerHTML = `<h4>${esc(two ? i18n('Les deux lectures côte à côte') : i18n('Le texte lu'))}</h4><div class="h-txa-cmp2${two ? '' : ' is-one'}">
                 ${two ? `<div><b>✍ ${esc(i18n('Écriture à la main'))}</b><textarea data-txa-t="htr" spellcheck="false">${esc(o.htrText)}</textarea><button type="button" class="button small secondary" data-txa-keep="htr">✓ ${esc(i18n('Garder celle-ci'))}</button></div>` : ''}
                 <div><b>🔍 ${esc(i18n('Lecture approfondie'))}</b><textarea data-txa-t="deep" spellcheck="false">${esc(deepText)}</textarea><button type="button" class="button small" data-txa-keep="deep">✓ ${esc(two ? i18n('Garder celle-ci') : i18n('Mettre dans le texte'))}</button></div></div>`;
+            o.onCompare?.(out); // 🪄 corrections proposées et ▤ « Relier les lignes à l'image » (app-lignes-alignement.js, posés par l'Atelier)
         }
         box.addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b) return;

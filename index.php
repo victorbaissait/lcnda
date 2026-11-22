@@ -1483,8 +1483,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-onglets-catalogue.js?v=2" defer></script>
 <script src="assets/js/heritage-transcribe-view.js?v=8" defer></script>
 <script src="assets/js/heritage-transcribe-acte-core.js?v=1" defer></script>
-<script src="assets/js/heritage-transcribe-acte.js?v=4" defer></script>
-<script src="assets/js/heritage-transcribe.js?v=39" defer></script>
+<script src="assets/js/heritage-transcribe-acte.js?v=5" defer></script>
+<script src="assets/js/heritage-transcribe.js?v=40" defer></script>
 <script src="assets/js/heritage-photomaps-time.js?v=2" defer></script>
 <script src="assets/js/heritage-photomaps.js?v=15" defer></script>
 <script src="assets/js/heritage-transcribe-list.js?v=5" defer></script>
@@ -1571,6 +1571,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-visite.js?v=2" defer></script>
 <script src="assets/js/app-a-trier.js?v=1" defer></script>
 <script src="assets/js/app-htr-correction.js?v=1" defer></script>
+<script src="assets/js/app-lignes-alignement.js?v=1" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');
