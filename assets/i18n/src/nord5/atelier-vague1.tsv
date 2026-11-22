@@ -1,0 +1,69 @@
+fr ¦ hr ¦ sl
+# 📜 Atelier de transcription, vague 1 « Ranger » (barre courte, ✨ Lire ▾, numéros de ligne, symboles, nom unique)
+Langue du texte : sert à la lecture automatique, et « 📖 Aide à la lecture » s’ouvre sur cette langue ¦ Jezik teksta: služi za automatsko čitanje, a „📖 Pomoć pri čitanju” otvara se na tom jeziku ¦ Jezik besedila: rabi se za samodejno branje, »📖 Pomoč pri branju« pa se odpre v tem jeziku
+Paroisse, commune ¦ Župa, općina ¦ Župnija, občina
+Loupe ¦ Povećalo ¦ Povečevalno steklo
+Lire le texte de l’image : écriture à la main, texte imprimé, ou lecture approfondie par l’IA ¦ Pročitaj tekst sa slike: rukopis, tiskani tekst ili detaljno čitanje pomoću UI ¦ Preberi besedilo s slike: rokopis, tiskano besedilo ali poglobljeno branje z UI
+Zoom : {now}. Clic : {next} (puis {then}, {last}) ¦ Zum: {now}. Klik: {next} (zatim {then}, {last}) ¦ Povečava: {now}. Klik: {next} (nato {then}, {last})
+Note (mot illisible, signature…) ¦ Bilješka (nečitljiva riječ, potpis…) ¦ Opomba (nečitljiva beseda, podpis…)
+La personne reste dans l’acte, sans fiche reliée ¦ Osoba ostaje u ispravi, bez povezanog zapisa ¦ Oseba ostane v listini, brez povezanega zapisa
+Relier… ¦ Poveži… ¦ Poveži…
+Retirer de l’acte ¦ Ukloni iz isprave ¦ Odstrani iz listine
+Mots connus ({lang}) ¦ Poznate riječi ({lang}) ¦ Znane besede ({lang})
+Ouvrir dans 📖 Aide à la lecture ¦ Otvori u 📖 Pomoć pri čitanju ¦ Odpri v 📖 Pomoč pri branju
+Image puis texte ¦ Slika pa tekst ¦ Slika, nato besedilo
+Texte seul ¦ Samo tekst ¦ Samo besedilo
+Recette « {name} » posée sur l’image ¦ Recept „{name}” primijenjen na sliku ¦ Recept »{name}« uporabljen na sliki
+L’image est déjà comme au départ ¦ Slika je već kao na početku ¦ Slika je že kot na začetku
+Image remise comme au départ ¦ Slika vraćena kao na početku ¦ Slika ponastavljena kot na začetku
+Mots : {n} ¦ Riječi: {n} ¦ Besede: {n}
+À installer ¦ Za instalaciju ¦ Za namestitev
+Lire l’écriture à la main (rapide) ¦ Pročitaj rukopis (brzo) ¦ Preberi rokopis (hitro)
+Lire un texte imprimé ¦ Pročitaj tiskani tekst ¦ Preberi tiskano besedilo
+Mieux voir ¦ Bolje vidjeti ¦ Bolje videti
+Remettre l’image comme au départ ¦ Vrati sliku kao na početku ¦ Ponastavi sliko kot na začetku
+Cacher les numéros de ligne ¦ Sakrij brojeve redaka ¦ Skrij številke vrstic
+Montrer les numéros de ligne ¦ Prikaži brojeve redaka ¦ Pokaži številke vrstic
+Encre pâle ¦ Blijeda tinta ¦ Bledo črnilo
+contraste local + netteté ¦ lokalni kontrast + oštrina ¦ lokalni kontrast + ostrina
+Papier jauni ou taché ¦ Požutjeli ili umrljani papir ¦ Porumenel ali umazan papir
+effacer le fond + canal bleu ¦ obriši pozadinu + plavi kanal ¦ izbriši ozadje + modri kanal
+Verso vu par transparence ¦ Poleđina koja se prozire ¦ Hrbtna stran, ki presveti
+miroir + seuil ¦ zrcaljenje + prag ¦ zrcaljenje + prag
+Position ¦ Položaj ¦ Položaj
+Autres outils ¦ Ostali alati ¦ Druga orodja
+Contraste local ¦ Lokalni kontrast ¦ Lokalni kontrast
+rayon ¦ polumjer ¦ polmer
+Canal rouge seul ¦ Samo crveni kanal ¦ Samo rdeči kanal
+Canal vert seul ¦ Samo zeleni kanal ¦ Samo zeleni kanal
+Canal bleu seul ¦ Samo plavi kanal ¦ Samo modri kanal
+Seuil noir et blanc (0 = sans) ¦ Crno-bijeli prag (0 = bez) ¦ Črno-beli prag (0 = brez)
+Niveaux (noir, blanc, gamma) ¦ Razine (crna, bijela, gama) ¦ Ravni (črna, bela, gama)
+Point noir ¦ Crna točka ¦ Črna točka
+noir ¦ crna ¦ črna
+Point blanc ¦ Bijela točka ¦ Bela točka
+blanc ¦ bijela ¦ bela
+Gamma ¦ Gama ¦ Gama
+Remettre l’image comme au départ (tous les réglages de l’image à zéro) ¦ Vrati sliku kao na početku (sve postavke slike na nulu) ¦ Ponastavi sliko kot na začetku (vse nastavitve slike na nič)
+Recettes ¦ Recepti ¦ Recepti
+Des recettes en un clic, et tous les réglages de l’image : contraste local, netteté, canal, seuil, niveaux, redresser… ¦ Recepti jednim klikom i sve postavke slike: lokalni kontrast, oštrina, kanal, prag, razine, ispravljanje… ¦ Recepti z enim klikom in vse nastavitve slike: lokalni kontrast, ostrina, kanal, prag, ravni, poravnava…
+Tous les réglages ¦ Sve postavke ¦ Vse nastavitve
+Montrer {label} ¦ Prikaži {label} ¦ Pokaži {label}
+Une barre courte ; des recettes en un clic et les autres réglages dans le panneau « 🎚️ Mieux voir », rangés en trois rubriques ¦ Kratka traka; recepti jednim klikom i ostale postavke u ploči „🎚️ Bolje vidjeti”, u tri odjeljka ¦ Kratka vrstica; recepti z enim klikom in druge nastavitve v plošči »🎚️ Bolje videti«, v treh razdelkih
+Barre courte + « 🎚️ Mieux voir » (conseillé) ¦ Kratka traka + „🎚️ Bolje vidjeti” (preporučeno) ¦ Kratka vrstica + »🎚️ Bolje videti« (priporočeno)
+Barre complète ¦ Puna traka ¦ Polna vrstica
+Numéros de ligne dans la marge du texte (conseillé) ¦ Brojevi redaka na rubu teksta (preporučeno) ¦ Številke vrstic na robu besedila (priporočeno)
+PERSONNALISER ¦ PRILAGODI ¦ PRILAGODI
+« 🔬 Lecture approfondie (IA) » sur une page déjà lue montre les deux textes côte à côte, et tu gardes le meilleur. Relis toujours : un modèle peut se tromper sur les noms. ¦ „🔬 Detaljno čitanje (UI)” na već pročitanoj stranici prikazuje oba teksta jedan uz drugi, a ti zadržavaš bolji. Uvijek provjeri: model može pogriješiti u imenima. ¦ »🔬 Poglobljeno branje (UI)« na že prebrani strani pokaže obe besedili drugo ob drugem, ti pa obdržiš boljše. Vedno preveri: model se lahko zmoti pri imenih.
+Atelier de transcription : barre d’outils ¦ Radionica prijepisa: alatna traka ¦ Delavnica prepisa: orodna vrstica
+La barre au-dessus de l’image de l’acte : une barre courte et le panneau « 🎚️ Mieux voir » (conseillé), ou la barre complète ; les numéros de ligne du texte ; les boutons et réglages montrés, cachés et rangés. Aussi avec « ⚙️ » dans l’outil. ¦ Traka iznad slike isprave: kratka traka i ploča „🎚️ Bolje vidjeti” (preporučeno) ili puna traka; brojevi redaka teksta; gumbi i postavke prikazani, skriveni i poredani. I preko „⚙️” u alatu. ¦ Vrstica nad sliko listine: kratka vrstica in plošča »🎚️ Bolje videti« (priporočeno) ali polna vrstica; številke vrstic besedila; gumbi in nastavitve prikazani, skriti in razvrščeni. Tudi z »⚙️« v orodju.
+Dans l’Atelier de transcription (Listes → Outils de modification → 📜 Atelier de transcription, ou « 📜 Ouvrir dans l’Atelier » sur une image) : « ✨ Lire ▾ » → « ✍️ Lire l’écriture à la main (rapide) ». Tout se passe sur cet ordinateur, sans Internet. ¦ U Radionici prijepisa (Popisi → Alati za uređivanje → 📜 Radionica prijepisa, ili „📜 Otvori u Radionici” na slici): „✨ Pročitaj ▾” → „✍️ Pročitaj rukopis (brzo)”. Sve se odvija na ovom računalu, bez interneta. ¦ V Delavnici prepisa (Seznami → Orodja za urejanje → 📜 Delavnica prepisa ali »📜 Odpri v Delavnici« na sliki): »✨ Preberi ▾« → »✍️ Preberi rokopis (hitro)«. Vse poteka na tem računalniku, brez interneta.
+Ensuite, dans l’Atelier de transcription : « ✨ Lire ▾ » → « 🔬 Lecture approfondie (IA) » sur une page déjà lue montre les deux lectures côte à côte, et tu gardes la meilleure. ¦ Zatim u Radionici prijepisa: „✨ Pročitaj ▾” → „🔬 Detaljno čitanje (UI)” na već pročitanoj stranici prikazuje oba čitanja jedno uz drugo, a ti zadržavaš bolje. ¦ Nato v Delavnici prepisa: »✨ Preberi ▾« → »🔬 Poglobljeno branje (UI)« na že prebrani strani pokaže obe branji drugo ob drugem, ti pa obdržiš boljše.
+Quelques secondes par page, sur cet ordinateur. Toute la page ou la zone choisie (▭) ; chaque ligne est reliée à sa zone de l’image, les mots peu sûrs surlignés. S’installe une fois (Réglages). ¦ Nekoliko sekundi po stranici, na ovom računalu. Cijela stranica ili odabrano područje (▭); svaki redak povezan je sa svojim područjem slike, nesigurne riječi istaknute. Instalira se jednom (Postavke). ¦ Nekaj sekund na stran, na tem računalniku. Vsa stran ali izbrano območje (▭); vsaka vrstica je povezana s svojim območjem slike, negotove besede poudarjene. Namesti se enkrat (Nastavitve).
+Pour un texte imprimé ou tapé (journaux, fiches matricules) : rapide, rien à installer, chaque ligne reliée à sa zone. Ne sait pas lire l’écriture à la main. ¦ Za tiskani ili tipkani tekst (novine, vojni matični listovi): brzo, ništa za instalirati, svaki redak povezan sa svojim područjem. Ne zna čitati rukopis. ¦ Za tiskano ali tipkano besedilo (časopisi, vojaški matični listi): hitro, nič za namestiti, vsaka vrstica povezana s svojim območjem. Ne zna brati rokopisa.
+Plus lente (de 20 s à quelques minutes par page) mais meilleure sur une écriture difficile : un modèle d’IA qui tourne sur cet ordinateur (Ollama, plusieurs Go à télécharger une fois). Les lignes se relient ensuite à l’image (▤). ¦ Sporije (od 20 s do nekoliko minuta po stranici), ali bolje za težak rukopis: model UI koji radi na ovom računalu (Ollama, nekoliko GB za jednokratno preuzimanje). Redci se zatim povezuju sa slikom (▤). ¦ Počasnejše (od 20 s do nekaj minut na stran), a boljše pri težkem rokopisu: model UI, ki teče na tem računalniku (Ollama, nekaj GB za enkraten prenos). Vrstice se nato povežejo s sliko (▤).
+L’Atelier de transcription s’ouvre sur une image. ¦ Radionica prijepisa otvara se na slici. ¦ Delavnica prepisa se odpre na sliki.
+L’Atelier de transcription n’est pas encore chargé. ¦ Radionica prijepisa još nije učitana. ¦ Delavnica prepisa še ni naložena.
+L’Atelier de transcription : l’image du dos à gauche, le texte à droite, lecture automatique, repérage des noms ¦ Radionica prijepisa: slika poleđine lijevo, tekst desno, automatsko čitanje, pronalaženje imena ¦ Delavnica prepisa: slika hrbtne strani levo, besedilo desno, samodejno branje, iskanje imen
+Les transcriptions des actes (📜 Atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris. ¦ Prijepisi isprava (📜 Radionica prijepisa) i medija: ono što slijedi (ili prethodi) početnoj riječi. Uzimaju se samo korisni dijelovi rečenica. ¦ Prepisi listin (📜 Delavnica prepisa) in medijev: kar sledi začetni besedi (ali je pred njo). Vzamejo se samo uporabni deli stavkov.
+atelier|Lire ¦ Pročitaj ¦ Preberi

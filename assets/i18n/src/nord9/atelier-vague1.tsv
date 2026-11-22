@@ -1,0 +1,69 @@
+fr ¦ lb
+# 📜 Atelier de transcription, vague 1 « Ranger » (barre courte, ✨ Lire ▾, numéros de ligne, symboles, nom unique)
+Langue du texte : sert à la lecture automatique, et « 📖 Aide à la lecture » s’ouvre sur cette langue ¦ Sprooch vum Text: fir d’automatescht Liesen, an „📖 Lieshëllef“ geet an dëser Sprooch op
+Paroisse, commune ¦ Par, Gemeng
+Loupe ¦ Lupp
+Lire le texte de l’image : écriture à la main, texte imprimé, ou lecture approfondie par l’IA ¦ Den Text vum Bild liesen: Handschrëft, gedréckten Text oder grëndlecht Liesen mat KI
+Zoom : {now}. Clic : {next} (puis {then}, {last}) ¦ Zoom: {now}. Klick: {next} (dann {then}, {last})
+Note (mot illisible, signature…) ¦ Notiz (onliesbaart Wuert, Ënnerschrëft…)
+La personne reste dans l’acte, sans fiche reliée ¦ D’Persoun bleift am Akt, ouni verlinkte Fiche
+Relier… ¦ Verlinken…
+Retirer de l’acte ¦ Aus dem Akt ewechhuelen
+Mots connus ({lang}) ¦ Bekannte Wierder ({lang})
+Ouvrir dans 📖 Aide à la lecture ¦ An 📖 Lieshëllef opmaachen
+Image puis texte ¦ Bild, dann Text
+Texte seul ¦ Nëmmen Text
+Recette « {name} » posée sur l’image ¦ Rezept „{name}“ op d’Bild ugewannt
+L’image est déjà comme au départ ¦ D’Bild ass schonn wéi am Ufank
+Image remise comme au départ ¦ Bild zréckgesat wéi am Ufank
+Mots : {n} ¦ Wierder: {n}
+À installer ¦ Ze installéieren
+Lire l’écriture à la main (rapide) ¦ Handschrëft liesen (séier)
+Lire un texte imprimé ¦ Gedréckten Text liesen
+Mieux voir ¦ Besser gesinn
+Remettre l’image comme au départ ¦ D’Bild zrécksetzen wéi am Ufank
+Cacher les numéros de ligne ¦ Zeilennummeren ausblennen
+Montrer les numéros de ligne ¦ Zeilennummeren weisen
+Encre pâle ¦ Blass Tënt
+contraste local + netteté ¦ lokale Kontrast + Schäerft
+Papier jauni ou taché ¦ Vergiilt oder fleckegt Pabeier
+effacer le fond + canal bleu ¦ Hannergrond läschen + bloe Kanal
+Verso vu par transparence ¦ Récksäit, déi duerchschéngt
+miroir + seuil ¦ Spigel + Schwell
+Position ¦ Positioun
+Autres outils ¦ Aner Instrumenter
+Contraste local ¦ Lokale Kontrast
+rayon ¦ Radius
+Canal rouge seul ¦ Nëmmen de rouden Kanal
+Canal vert seul ¦ Nëmmen de gréngen Kanal
+Canal bleu seul ¦ Nëmmen de bloen Kanal
+Seuil noir et blanc (0 = sans) ¦ Schwaarz-wäiss-Schwell (0 = ouni)
+Niveaux (noir, blanc, gamma) ¦ Niveauen (schwaarz, wäiss, Gamma)
+Point noir ¦ Schwaarzpunkt
+noir ¦ schwaarz
+Point blanc ¦ Wäisspunkt
+blanc ¦ wäiss
+Gamma ¦ Gamma
+Remettre l’image comme au départ (tous les réglages de l’image à zéro) ¦ D’Bild zrécksetzen wéi am Ufank (all Astellunge vum Bild op null)
+Recettes ¦ Rezepter
+Des recettes en un clic, et tous les réglages de l’image : contraste local, netteté, canal, seuil, niveaux, redresser… ¦ Rezepter mat engem Klick an all Astellunge vum Bild: lokale Kontrast, Schäerft, Kanal, Schwell, Niveauen, riichten…
+Tous les réglages ¦ All Astellungen
+Montrer {label} ¦ {label} weisen
+Une barre courte ; des recettes en un clic et les autres réglages dans le panneau « 🎚️ Mieux voir », rangés en trois rubriques ¦ Eng kuerz Leescht; Rezepter mat engem Klick an déi aner Astellungen am Beräich „🎚️ Besser gesinn“, an dräi Rubriken
+Barre courte + « 🎚️ Mieux voir » (conseillé) ¦ Kuerz Leescht + „🎚️ Besser gesinn“ (recommandéiert)
+Barre complète ¦ Komplett Leescht
+Numéros de ligne dans la marge du texte (conseillé) ¦ Zeilennummeren um Rand vum Text (recommandéiert)
+PERSONNALISER ¦ UPASSEN
+« 🔬 Lecture approfondie (IA) » sur une page déjà lue montre les deux textes côte à côte, et tu gardes le meilleur. Relis toujours : un modèle peut se tromper sur les noms. ¦ „🔬 Grëndlecht Liesen (KI)“ op enger Säit, déi scho gelies ass, weist béid Texter niewentenee, an du behäls de bessere. Liesen ëmmer no: e Modell ka sech bei Nimm iren.
+Atelier de transcription : barre d’outils ¦ Transkriptiouns-Atelier: Toolleescht
+La barre au-dessus de l’image de l’acte : une barre courte et le panneau « 🎚️ Mieux voir » (conseillé), ou la barre complète ; les numéros de ligne du texte ; les boutons et réglages montrés, cachés et rangés. Aussi avec « ⚙️ » dans l’outil. ¦ D’Leescht iwwer dem Bild vum Akt: eng kuerz Leescht an de Beräich „🎚️ Besser gesinn“ (recommandéiert), oder déi komplett Leescht; d’Zeilennummere vum Text; d’Knäppercher an Astellunge gewisen, verstoppt a geuerdent. Och mat „⚙️“ am Instrument.
+Dans l’Atelier de transcription (Listes → Outils de modification → 📜 Atelier de transcription, ou « 📜 Ouvrir dans l’Atelier » sur une image) : « ✨ Lire ▾ » → « ✍️ Lire l’écriture à la main (rapide) ». Tout se passe sur cet ordinateur, sans Internet. ¦ Am Transkriptiouns-Atelier (Lëschten → Beaarbechtungsinstrumenter → 📜 Transkriptiouns-Atelier, oder „📜 Am Atelier opmaachen“ op engem Bild): „✨ Liesen ▾“ → „✍️ Handschrëft liesen (séier)“. Alles geschitt op dësem Computer, ouni Internet.
+Ensuite, dans l’Atelier de transcription : « ✨ Lire ▾ » → « 🔬 Lecture approfondie (IA) » sur une page déjà lue montre les deux lectures côte à côte, et tu gardes la meilleure. ¦ Duerno am Transkriptiouns-Atelier: „✨ Liesen ▾“ → „🔬 Grëndlecht Liesen (KI)“ op enger Säit, déi scho gelies ass, weist béid Liesungen niewentenee, an du behäls déi besser.
+Quelques secondes par page, sur cet ordinateur. Toute la page ou la zone choisie (▭) ; chaque ligne est reliée à sa zone de l’image, les mots peu sûrs surlignés. S’installe une fois (Réglages). ¦ E puer Sekonnen d’Säit, op dësem Computer. Déi ganz Säit oder de gewielte Beräich (▭); all Zeil gëtt mat hirem Beräich vum Bild verlinkt, onsécher Wierder markéiert. Gëtt eemol installéiert (Astellungen).
+Pour un texte imprimé ou tapé (journaux, fiches matricules) : rapide, rien à installer, chaque ligne reliée à sa zone. Ne sait pas lire l’écriture à la main. ¦ Fir gedréckten oder getippten Text (Zeitungen, Militärregësteren): séier, näischt ze installéieren, all Zeil mat hirem Beräich verlinkt. Kann keng Handschrëft liesen.
+Plus lente (de 20 s à quelques minutes par page) mais meilleure sur une écriture difficile : un modèle d’IA qui tourne sur cet ordinateur (Ollama, plusieurs Go à télécharger une fois). Les lignes se relient ensuite à l’image (▤). ¦ Méi lues (vun 20 s bis e puer Minutten d’Säit), mä besser bei schwiereger Handschrëft: e KI-Modell, dat op dësem Computer leeft (Ollama, e puer GB eemol erofzelueden). D’Zeile ginn duerno mam Bild verlinkt (▤).
+L’Atelier de transcription s’ouvre sur une image. ¦ Den Transkriptiouns-Atelier geet op engem Bild op.
+L’Atelier de transcription n’est pas encore chargé. ¦ Den Transkriptiouns-Atelier ass nach net gelueden.
+L’Atelier de transcription : l’image du dos à gauche, le texte à droite, lecture automatique, repérage des noms ¦ Den Transkriptiouns-Atelier: d’Bild vun der Récksäit lénks, den Text riets, automatescht Liesen, Nimm erkennen
+Les transcriptions des actes (📜 Atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris. ¦ D’Transkriptioune vun den Akten (📜 Transkriptiouns-Atelier) a Medien: wat nom Startwuert kënnt (oder virdrun). Nëmmen déi nëtzlech Saz-Stécker ginn iwwerholl.
+atelier|Lire ¦ Liesen

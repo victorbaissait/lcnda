@@ -1,0 +1,69 @@
+fr ¦ is
+# 📜 Atelier de transcription, vague 1 « Ranger » (barre courte, ✨ Lire ▾, numéros de ligne, symboles, nom unique)
+Langue du texte : sert à la lecture automatique, et « 📖 Aide à la lecture » s’ouvre sur cette langue ¦ Tungumál textans: notað við sjálfvirkan lestur, og „📖 Lestrarhjálp“ opnast á þessu tungumáli
+Paroisse, commune ¦ Sókn, sveitarfélag
+Loupe ¦ Stækkunargler
+Lire le texte de l’image : écriture à la main, texte imprimé, ou lecture approfondie par l’IA ¦ Lesa texta myndarinnar: handskrift, prentaðan texta eða ítarlegan lestur með gervigreind
+Zoom : {now}. Clic : {next} (puis {then}, {last}) ¦ Aðdráttur: {now}. Smellur: {next} (síðan {then}, {last})
+Note (mot illisible, signature…) ¦ Athugasemd (ólæsilegt orð, undirskrift…)
+La personne reste dans l’acte, sans fiche reliée ¦ Manneskjan er áfram í skjalinu, án tengdrar færslu
+Relier… ¦ Tengja…
+Retirer de l’acte ¦ Fjarlægja úr skjalinu
+Mots connus ({lang}) ¦ Þekkt orð ({lang})
+Ouvrir dans 📖 Aide à la lecture ¦ Opna í 📖 Lestrarhjálp
+Image puis texte ¦ Mynd, svo texti
+Texte seul ¦ Aðeins texti
+Recette « {name} » posée sur l’image ¦ Uppskriftin „{name}“ sett á myndina
+L’image est déjà comme au départ ¦ Myndin er þegar eins og í byrjun
+Image remise comme au départ ¦ Mynd sett aftur eins og í byrjun
+Mots : {n} ¦ Orð: {n}
+À installer ¦ Á eftir að setja upp
+Lire l’écriture à la main (rapide) ¦ Lesa handskrift (hratt)
+Lire un texte imprimé ¦ Lesa prentaðan texta
+Mieux voir ¦ Sjá betur
+Remettre l’image comme au départ ¦ Setja myndina aftur eins og í byrjun
+Cacher les numéros de ligne ¦ Fela línunúmer
+Montrer les numéros de ligne ¦ Sýna línunúmer
+Encre pâle ¦ Fölt blek
+contraste local + netteté ¦ staðbundin birtuskil + skerpa
+Papier jauni ou taché ¦ Gulnaður eða flekkóttur pappír
+effacer le fond + canal bleu ¦ fjarlægja bakgrunn + blá rás
+Verso vu par transparence ¦ Bakhlið sem skín í gegn
+miroir + seuil ¦ spegla + þröskuldur
+Position ¦ Staðsetning
+Autres outils ¦ Önnur verkfæri
+Contraste local ¦ Staðbundin birtuskil
+rayon ¦ radíus
+Canal rouge seul ¦ Aðeins rauð rás
+Canal vert seul ¦ Aðeins græn rás
+Canal bleu seul ¦ Aðeins blá rás
+Seuil noir et blanc (0 = sans) ¦ Svart-hvítur þröskuldur (0 = enginn)
+Niveaux (noir, blanc, gamma) ¦ Stig (svart, hvítt, gamma)
+Point noir ¦ Svartpunktur
+noir ¦ svart
+Point blanc ¦ Hvítpunktur
+blanc ¦ hvítt
+Gamma ¦ Gamma
+Remettre l’image comme au départ (tous les réglages de l’image à zéro) ¦ Setja myndina aftur eins og í byrjun (allar myndstillingar á núll)
+Recettes ¦ Uppskriftir
+Des recettes en un clic, et tous les réglages de l’image : contraste local, netteté, canal, seuil, niveaux, redresser… ¦ Uppskriftir með einum smelli og allar myndstillingar: staðbundin birtuskil, skerpa, rás, þröskuldur, stig, rétta af…
+Tous les réglages ¦ Allar stillingar
+Montrer {label} ¦ Sýna {label}
+Une barre courte ; des recettes en un clic et les autres réglages dans le panneau « 🎚️ Mieux voir », rangés en trois rubriques ¦ Stutt stika; uppskriftir með einum smelli og aðrar stillingar í spjaldinu „🎚️ Sjá betur“, í þremur hlutum
+Barre courte + « 🎚️ Mieux voir » (conseillé) ¦ Stutt stika + „🎚️ Sjá betur“ (mælt með)
+Barre complète ¦ Full stika
+Numéros de ligne dans la marge du texte (conseillé) ¦ Línunúmer á spássíu textans (mælt með)
+PERSONNALISER ¦ SÉRSNÍÐA
+« 🔬 Lecture approfondie (IA) » sur une page déjà lue montre les deux textes côte à côte, et tu gardes le meilleur. Relis toujours : un modèle peut se tromper sur les noms. ¦ „🔬 Ítarlegur lestur (gervigreind)“ á síðu sem þegar hefur verið lesin sýnir báða textana hlið við hlið, og þú heldur þeim betri. Prófarkalestu alltaf: líkan getur ruglast á nöfnum.
+Atelier de transcription : barre d’outils ¦ Uppskriftarsmiðja: verkfærastika
+La barre au-dessus de l’image de l’acte : une barre courte et le panneau « 🎚️ Mieux voir » (conseillé), ou la barre complète ; les numéros de ligne du texte ; les boutons et réglages montrés, cachés et rangés. Aussi avec « ⚙️ » dans l’outil. ¦ Stikan fyrir ofan mynd skjalsins: stutt stika og spjaldið „🎚️ Sjá betur“ (mælt með), eða full stika; línunúmer textans; hnappar og stillingar sýnd, falin og raðað. Einnig með „⚙️“ í verkfærinu.
+Dans l’Atelier de transcription (Listes → Outils de modification → 📜 Atelier de transcription, ou « 📜 Ouvrir dans l’Atelier » sur une image) : « ✨ Lire ▾ » → « ✍️ Lire l’écriture à la main (rapide) ». Tout se passe sur cet ordinateur, sans Internet. ¦ Í Uppskriftarsmiðjunni (Listar → Breytingatól → 📜 Uppskriftarsmiðja, eða „📜 Opna í Smiðjunni“ á mynd): „✨ Lesa ▾“ → „✍️ Lesa handskrift (hratt)“. Allt gerist á þessari tölvu, án internets.
+Ensuite, dans l’Atelier de transcription : « ✨ Lire ▾ » → « 🔬 Lecture approfondie (IA) » sur une page déjà lue montre les deux lectures côte à côte, et tu gardes la meilleure. ¦ Síðan, í Uppskriftarsmiðjunni: „✨ Lesa ▾“ → „🔬 Ítarlegur lestur (gervigreind)“ á síðu sem þegar hefur verið lesin sýnir báða lestrana hlið við hlið, og þú heldur þeim betri.
+Quelques secondes par page, sur cet ordinateur. Toute la page ou la zone choisie (▭) ; chaque ligne est reliée à sa zone de l’image, les mots peu sûrs surlignés. S’installe une fois (Réglages). ¦ Nokkrar sekúndur á síðu, á þessari tölvu. Öll síðan eða valið svæði (▭); hver lína tengd sínu svæði á myndinni, óviss orð auðkennd. Sett upp einu sinni (Stillingar).
+Pour un texte imprimé ou tapé (journaux, fiches matricules) : rapide, rien à installer, chaque ligne reliée à sa zone. Ne sait pas lire l’écriture à la main. ¦ Fyrir prentaðan eða vélritaðan texta (dagblöð, herskrár): hratt, ekkert að setja upp, hver lína tengd sínu svæði. Getur ekki lesið handskrift.
+Plus lente (de 20 s à quelques minutes par page) mais meilleure sur une écriture difficile : un modèle d’IA qui tourne sur cet ordinateur (Ollama, plusieurs Go à télécharger une fois). Les lignes se relient ensuite à l’image (▤). ¦ Hægari (frá 20 s upp í nokkrar mínútur á síðu) en betri á erfiða handskrift: gervigreindarlíkan sem keyrir á þessari tölvu (Ollama, nokkur GB að sækja einu sinni). Línurnar tengjast síðan myndinni (▤).
+L’Atelier de transcription s’ouvre sur une image. ¦ Uppskriftarsmiðjan opnast á mynd.
+L’Atelier de transcription n’est pas encore chargé. ¦ Uppskriftarsmiðjan er ekki hlaðin enn.
+L’Atelier de transcription : l’image du dos à gauche, le texte à droite, lecture automatique, repérage des noms ¦ Uppskriftarsmiðjan: mynd bakhliðar til vinstri, textinn til hægri, sjálfvirkur lestur, nafnaleit
+Les transcriptions des actes (📜 Atelier de transcription) et des médias : ce qui suit (ou précède) le mot de départ. Seuls les bouts de phrase utiles sont pris. ¦ Uppskriftir skjala (📜 Uppskriftarsmiðja) og miðla: það sem fylgir (eða fer á undan) upphafsorðinu. Aðeins gagnlegir setningabútar eru teknir.
+atelier|Lire ¦ Lesa
