@@ -631,6 +631,8 @@ try {
         'slideshow' => json_response(slideshow_get($pdo, safe_int($_GET['id'] ?? 0))),
         'act_transcriptions' => json_response(['items' => act_transcriptions_list($pdo)]),
         'act_transcriptions_page' => json_response(act_transcriptions_page($pdo, $_GET)), // Listes → Transcriptions d'actes (lecture seule, page par page)
+        'act_transcription_versions' => json_response(['items' => act_transcription_versions($pdo, safe_int($_GET['act_id'] ?? 0))]), // 🕘 Versions du texte d'un acte
+        'act_transcription_version' => json_response(act_transcription_version($pdo, safe_int($_GET['id'] ?? 0))),
         'act_transcription' => json_response(act_transcription_get($pdo, safe_int($_GET['id'] ?? 0))),
         'act_people_details' => json_response(['people' => act_people_details($pdo, array_map('intval', explode(',', (string) ($_GET['ids'] ?? ''))))]), // 📜 ⇆ Comparer
         'vector_map_places' => json_response(vector_map_places($pdo, (float) ($_GET['n'] ?? 0), (float) ($_GET['s'] ?? 0), (float) ($_GET['w'] ?? 0), (float) ($_GET['e'] ?? 0))),
@@ -10117,6 +10119,10 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'rename_slideshow' => rename_slideshow($pdo,$data),
             'delete_act_transcription' => delete_act_transcription($pdo,$data),
             'rename_act_transcription' => rename_act_transcription($pdo,$data),
+            'save_act_transcription_version' => save_act_transcription_version($pdo,$data), // 🕘 Versions du texte d'un acte
+            'delete_act_transcription_version' => delete_act_transcription_version($pdo,$data),
+            'restore_act_transcription_version' => restore_act_transcription_version($pdo,$data),
+            'rename_act_transcription_version' => rename_act_transcription_version($pdo,$data),
             'act_link_person' => act_link_person($pdo,$data), // 👤 « Relier » un nom relevé dans l'Atelier (fiche → 📜 Actes et transcriptions)
             'act_match_people' => act_transcription_match_people($pdo, is_array($data['names'] ?? null) ? $data['names'] : []),
             'act_import_check' => act_import_check($pdo,$data), // 📜 Ce que l'app a trouvé : fiches ressemblantes (lib/transcription_actes.php)

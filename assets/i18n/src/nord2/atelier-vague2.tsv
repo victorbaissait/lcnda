@@ -30,3 +30,18 @@ C’était la dernière ligne. ¦ To bol posledný riadok. ¦ Det var den siste 
 Relire ligne à ligne ¦ Kontrolovať riadok po riadku ¦ Gå gjennom linje for linje
 Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Kontrolovať riadok po riadku na celej obrazovke: výrez obrázka nad každým riadkom ¦ Gå gjennom linje for linje i fullskjerm: bildeutsnittet over hver linje
 Relecture ligne à ligne en plein écran (conseillé) ¦ Kontrola riadok po riadku na celej obrazovke (odporúčané) ¦ Gjennomgang linje for linje i fullskjerm (anbefalt)
+# — 🕘 Versions, 🔍 Chercher / Remplacer, ⌨️ touches
+Chercher dans le texte ¦ Hľadať v texte ¦ Søk i teksten
+Chercher et remplacer ¦ Hľadať a nahradiť ¦ Søk og erstatt
+« {q} » → « {by} » : {n} ¦ „{q}“ → „{by}“: {n} ¦ «{q}» → «{by}»: {n}
+Avant « Remplacer » ¦ Pred „Nahradiť“ ¦ Før «Erstatt»
+Avant « Tout remplacer » ¦ Pred „Nahradiť všetko“ ¦ Før «Erstatt alle»
+Avant « Accepter les propositions sûres » ¦ Pred „Prijať isté návrhy“ ¦ Før «Godta de sikre forslagene»
+Avant la lecture mise dans le texte ¦ Pred vložením prečítaného do textu ¦ Før lesingen ble satt inn i teksten
+Résultat suivant, résultat d’avant ¦ Ďalší výsledok, predchádzajúci výsledok ¦ Neste treff, forrige treff
+Ligne suivante, ligne d’avant : l’image suit sa zone ¦ Ďalší riadok, predchádzajúci riadok: obrázok ide za jeho oblasťou ¦ Neste linje, forrige linje: bildet følger området
+Déplacer l’image, en restant appuyé ¦ Posunúť obrázok, pri podržaní ¦ Flytt bildet, hold inne
+Déplacer la zone choisie (⇧ : l’agrandir) ¦ Posunúť vybranú oblasť (⇧: zväčšiť ju) ¦ Flytt det valgte området (⇧: forstørr det)
+Supprimer la zone choisie ¦ Odstrániť vybranú oblasť ¦ Slett det valgte området
+Zoom avant, zoom arrière ¦ Priblížiť, oddialiť ¦ Zoom inn, zoom ut
+Cette liste des touches ¦ Tento zoznam klávesov ¦ Denne listen over taster

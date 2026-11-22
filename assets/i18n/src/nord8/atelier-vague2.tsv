@@ -30,3 +30,18 @@ C’était la dernière ligne. ¦ Bu son satırdı.
 Relire ligne à ligne ¦ Satır satır gözden geçir
 Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Tam ekranda satır satır gözden geçir: her satırın üstünde resim parçası
 Relecture ligne à ligne en plein écran (conseillé) ¦ Tam ekranda satır satır gözden geçirme (önerilen)
+# — 🕘 Versions, 🔍 Chercher / Remplacer, ⌨️ touches
+Chercher dans le texte ¦ Metinde ara
+Chercher et remplacer ¦ Ara ve değiştir
+« {q} » → « {by} » : {n} ¦ “{q}” → “{by}”: {n}
+Avant « Remplacer » ¦ “Değiştir” öncesi
+Avant « Tout remplacer » ¦ “Tümünü değiştir” öncesi
+Avant « Accepter les propositions sûres » ¦ “Kesin önerileri kabul et” öncesi
+Avant la lecture mise dans le texte ¦ Okunan metne eklenmeden önce
+Résultat suivant, résultat d’avant ¦ Sonraki sonuç, önceki sonuç
+Ligne suivante, ligne d’avant : l’image suit sa zone ¦ Sonraki satır, önceki satır: resim alanını izler
+Déplacer l’image, en restant appuyé ¦ Resmi kaydır, basılı tutarak
+Déplacer la zone choisie (⇧ : l’agrandir) ¦ Seçilen alanı kaydır (⇧: büyüt)
+Supprimer la zone choisie ¦ Seçilen alanı sil
+Zoom avant, zoom arrière ¦ Yakınlaştır, uzaklaştır
+Cette liste des touches ¦ Bu tuş listesi

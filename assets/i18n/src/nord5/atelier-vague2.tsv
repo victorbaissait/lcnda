@@ -30,3 +30,18 @@ C’était la dernière ligne. ¦ To je bio posljednji redak. ¦ To je bila zadn
 Relire ligne à ligne ¦ Provjeri redak po redak ¦ Preglej vrstico za vrstico
 Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Provjeri redak po redak preko cijelog zaslona: isječak slike iznad svakog retka ¦ Preglej vrstico za vrstico v celozaslonskem načinu: izrez slike nad vsako vrstico
 Relecture ligne à ligne en plein écran (conseillé) ¦ Provjera redak po redak preko cijelog zaslona (preporučeno) ¦ Pregled vrstico za vrstico v celozaslonskem načinu (priporočeno)
+# — 🕘 Versions, 🔍 Chercher / Remplacer, ⌨️ touches
+Chercher dans le texte ¦ Traži u tekstu ¦ Išči v besedilu
+Chercher et remplacer ¦ Traži i zamijeni ¦ Išči in zamenjaj
+« {q} » → « {by} » : {n} ¦ „{q}” → „{by}”: {n} ¦ »{q}« → »{by}«: {n}
+Avant « Remplacer » ¦ Prije „Zamijeni” ¦ Pred »Zamenjaj«
+Avant « Tout remplacer » ¦ Prije „Zamijeni sve” ¦ Pred »Zamenjaj vse«
+Avant « Accepter les propositions sûres » ¦ Prije „Prihvati sigurne prijedloge” ¦ Pred »Sprejmi zanesljive predloge«
+Avant la lecture mise dans le texte ¦ Prije nego što je pročitano stavljeno u tekst ¦ Preden je bilo prebrano vstavljeno v besedilo
+Résultat suivant, résultat d’avant ¦ Sljedeći rezultat, prethodni rezultat ¦ Naslednji zadetek, prejšnji zadetek
+Ligne suivante, ligne d’avant : l’image suit sa zone ¦ Sljedeći redak, prethodni redak: slika prati njegovo područje ¦ Naslednja vrstica, prejšnja vrstica: slika sledi njenemu območju
+Déplacer l’image, en restant appuyé ¦ Pomakni sliku, držeći pritisnuto ¦ Premakni sliko, ob držanju
+Déplacer la zone choisie (⇧ : l’agrandir) ¦ Pomakni odabrano područje (⇧: povećaj ga) ¦ Premakni izbrano območje (⇧: povečaj ga)
+Supprimer la zone choisie ¦ Izbriši odabrano područje ¦ Izbriši izbrano območje
+Zoom avant, zoom arrière ¦ Povećaj, smanji ¦ Povečaj, pomanjšaj
+Cette liste des touches ¦ Ovaj popis tipki ¦ Ta seznam tipk

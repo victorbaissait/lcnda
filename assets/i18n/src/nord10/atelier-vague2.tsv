@@ -30,3 +30,18 @@ C’était la dernière ligne. ¦ Ky ishte rreshti i fundit. ¦ Din kienet l-aħ
 Relire ligne à ligne ¦ Rishiko rresht pas rreshti ¦ Iċċekkja linja b’linja
 Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Rishiko rresht pas rreshti në ekran të plotë: copa e imazhit mbi çdo rresht ¦ Iċċekkja linja b’linja fuq l-iskrin kollu: il-biċċa tal-istampa fuq kull linja
 Relecture ligne à ligne en plein écran (conseillé) ¦ Rishikim rresht pas rreshti në ekran të plotë (këshillohet) ¦ Ċekkjar linja b’linja fuq l-iskrin kollu (rakkomandat)
+# — 🕘 Versions, 🔍 Chercher / Remplacer, ⌨️ touches
+Chercher dans le texte ¦ Kërko në tekst ¦ Fittex fit-test
+Chercher et remplacer ¦ Kërko dhe zëvendëso ¦ Fittex u ibdel
+« {q} » → « {by} » : {n} ¦ «{q}» → «{by}»: {n} ¦ “{q}” → “{by}”: {n}
+Avant « Remplacer » ¦ Para «Zëvendëso» ¦ Qabel “Ibdel”
+Avant « Tout remplacer » ¦ Para «Zëvendëso të gjitha» ¦ Qabel “Ibdel kollox”
+Avant « Accepter les propositions sûres » ¦ Para «Prano propozimet e sigurta» ¦ Qabel “Aċċetta l-proposti żguri”
+Avant la lecture mise dans le texte ¦ Para se leximi të vihej në tekst ¦ Qabel ma l-qari tqiegħed fit-test
+Résultat suivant, résultat d’avant ¦ Rezultati tjetër, rezultati i mëparshëm ¦ Ir-riżultat li jmiss, ir-riżultat ta’ qabel
+Ligne suivante, ligne d’avant : l’image suit sa zone ¦ Rreshti tjetër, rreshti i mëparshëm: imazhi ndjek zonën e tij ¦ Il-linja li jmiss, il-linja ta’ qabel: l-istampa ssegwi ż-żona tagħha
+Déplacer l’image, en restant appuyé ¦ Lëviz imazhin, duke e mbajtur shtypur ¦ Ċaqlaq l-istampa, waqt li żżomm magħfus
+Déplacer la zone choisie (⇧ : l’agrandir) ¦ Lëviz zonën e zgjedhur (⇧: zmadhoje) ¦ Ċaqlaq iż-żona magħżula (⇧: kabbarha)
+Supprimer la zone choisie ¦ Fshi zonën e zgjedhur ¦ Ħassar iż-żona magħżula
+Zoom avant, zoom arrière ¦ Zmadho, zvogëlo ¦ Żum ’il ġewwa, żum ’il barra
+Cette liste des touches ¦ Kjo listë tastesh ¦ Din il-lista ta’ tasti

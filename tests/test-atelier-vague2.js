@@ -223,6 +223,73 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
             await p.waitForSelector('dialog.h-txr-dlg[open]'); await p.keyboard.press('Escape'); await sleep(200);
         });
 
+        /* ─── 4. 🕘 Versions, 🔍 Chercher / Remplacer, ⌨️ touches ─── */
+        const versionsOf = () => p.evaluate(async () => (await window.LCNDA_APP.api('act_transcription_versions', {act_id: 1})).items);
+        const saveAct = async () => { await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="save"]').click()); await p.waitForFunction(() => /Enregistré/.test(document.querySelector('dialog.h-tx-dlg [data-tx-status]').textContent), null, {timeout: 8000}); };
+        await t('🕘 versions : une version à chaque enregistrement où le texte a changé (pas de doublon)', async () => {
+            const v0 = await versionsOf(); assert.ok(v0.length >= 1 && v0[0].label === 'Enregistré', JSON.stringify(v0));
+            await saveAct(); assert.equal((await versionsOf()).length, v0.length, 'même texte : pas de nouvelle version');
+            await setBody((await body()).replace('Delpeiroux curé', 'Delpeyroux curé')); await saveAct();
+            const v1 = await versionsOf(); assert.equal(v1.length, v0.length + 1); assert.equal(v1[0].lines, 7);
+        });
+        await t('🕘 versions : Fichier → Versions… ouvre la fenêtre commune ; ↺ Revenir remet le texte d’avant (l’actuel gardé), ↶ Annuler', async () => {
+            await p.evaluate(() => [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-menus] button')].find(b => b.textContent.trim() === 'Fichier').click()); await p.waitForSelector('.ui-actmenu');
+            await p.evaluate(() => [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].find(b => /Versions…/.test(b.textContent)).click());
+            await p.waitForSelector('dialog.ui-vers[open] [data-vers-row]'); await sleep(400);
+            const rows = await p.evaluate(() => [...document.querySelectorAll('dialog.ui-vers [data-vers-row]')].map(r => r.dataset.versRow + ':' + r.querySelector('.ui-vers-nm').textContent + ':' + r.querySelector('small').textContent));
+            assert.ok(rows[0].startsWith('now:') && rows.length >= 3, rows.join(' | ')); assert.match(rows[1], /Enregistré:.*7 lignes/);
+            await shot('v2-versions.png');
+            const old = rows[2].split(':')[0];
+            await p.click(`dialog.ui-vers [data-vers-row="${old}"]`); await p.waitForSelector('dialog.ui-vers [data-vers-act="restore"]');
+            await p.click('dialog.ui-vers [data-vers-act="restore"]'); await sleep(800);
+            assert.match((await body()).split('\n')[6], /Delpeiroux/, 'le texte de la version d’avant');
+            const v = await versionsOf(); assert.ok(v.some(x => /^Avant le retour/.test(x.label)), 'l’état d’avant gardé comme version');
+            assert.ok(await lastToastUndo(/Revenu à/)); await sleep(500);
+            assert.match((await body()).split('\n')[6], /Delpeyroux/, '↶ Annuler : le texte d’après revient');
+            await p.evaluate(() => document.querySelector('dialog.ui-vers [data-vers-close]').click()); await sleep(200);
+        });
+        const findState = () => p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), f = d.querySelector('[data-tx-find]');
+            return {open: !f.hidden, rep: !d.querySelector('[data-tx-frep]').hidden, count: d.querySelector('[data-tx-fcount]').textContent, hits: d.querySelectorAll('[data-tx-mirror] .h-tx-hit').length, cur: d.querySelectorAll('[data-tx-mirror] .h-tx-hit.is-cur').length,
+                focus: document.activeElement?.matches('[data-tx-fq]') ? 'q' : document.activeElement?.matches('[data-tx-fr]') ? 'r' : '', sel: (a => a.value.slice(a.selectionStart, a.selectionEnd))(d.querySelector('[data-tx-body]'))}; });
+        await t('🔍 ⌘F dans le texte : la case de recherche, les résultats surlignés, Entrée / ⇧ Entrée', async () => {
+            await p.evaluate(() => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); a.focus(); a.setSelectionRange(0, 0); });
+            await p.keyboard.press('ControlOrMeta+f'); await sleep(150);
+            let f = await findState(); assert.ok(f.open && !f.rep && f.focus === 'q', JSON.stringify(f));
+            await p.keyboard.type('MAZAUD'); await sleep(150); f = await findState();
+            assert.equal(f.count, '1 sur 2'); assert.equal(f.hits, 2); assert.equal(f.cur, 1);
+            await p.keyboard.press('Enter'); f = await findState(); assert.equal(f.count, '2 sur 2'); assert.equal(f.sel, 'MAZAUD');
+            await p.keyboard.press('Shift+Enter'); assert.equal((await findState()).count, '1 sur 2');
+            await p.click(`${D} [data-tx-f="case"]`); await p.fill(`${D} [data-tx-fq]`, 'mazaud'); await sleep(100); assert.equal((await findState()).count, 'Aucun résultat');
+            await p.click(`${D} [data-tx-f="case"]`); await sleep(100); assert.equal((await findState()).hits, 2, 'sans Aa : majuscules et minuscules pareilles');
+            await shot('v2-chercher.png');
+        });
+        await t('🔍 ⌥⌘F : remplacer ; « Tout remplacer » (les zones suivent), puis « ↶ Annuler » ; Échap ferme', async () => {
+            await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-body]').focus());
+            await p.keyboard.press('ControlOrMeta+Alt+f'); await sleep(150); let f = await findState(); assert.ok(f.open && f.rep, JSON.stringify(f));
+            await p.fill(`${D} [data-tx-fq]`, 'MAZAUD'); await p.fill(`${D} [data-tx-fr]`, 'MAZAULT'); await sleep(100);
+            await p.click(`${D} [data-tx-f="all"]`); await sleep(300);
+            const b = (await body()).split('\n'); assert.match(b[2], /Pierre MAZAULT,/); assert.match(b[5], /^Anne MAZAULT,/); assert.equal((await findState()).count, 'Aucun résultat');
+            const z = await p.evaluate(() => { const x = document.querySelector('dialog.h-tx-dlg').txApi.get(); return ['z3', 'z6'].map(id => { const q = x.data.zones.find(y => y.id === id); return x.body.slice(q.s, q.e); }); });
+            assert.deepEqual(z, [b[2], b[5]], 'chaque zone garde sa ligne entière');
+            assert.ok(await lastToastUndo(/MAZAULT/)); await sleep(300);
+            assert.equal((await body()).split('\n')[2], LINES[2]);
+            await p.fill(`${D} [data-tx-fq]`, 'labr'); await p.fill(`${D} [data-tx-fr]`, 'laboureur'); await p.click(`${D} [data-tx-f="one"]`); await sleep(200);
+            assert.equal((await body()).split('\n')[2], LINES[2].replace('labr', 'laboureur')); await p.evaluate(() => document.querySelector('dialog.h-tx-dlg').txApi.get());
+            await setBody((await body()).replace('laboureur', 'labr'));
+            await p.focus(`${D} [data-tx-fq]`); await p.keyboard.press('Escape'); await sleep(100);
+            f = await findState(); assert.ok(!f.open && !f.hits, JSON.stringify(f));
+        });
+        await t('⌨️ ⌘/ (et ?) : la liste des touches de l’Atelier ; ⌥↓ choisit la ligne suivante et l’image va à sa zone', async () => {
+            await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-body]').focus()); await p.keyboard.press('ControlOrMeta+/');
+            await p.waitForSelector('[data-tx-keys]'); const rows = await p.evaluate(() => [...document.querySelectorAll('[data-tx-keys] tr')].map(r => r.textContent));
+            for (const w of ['Chercher dans le texte', 'Chercher et remplacer', 'Relire ligne à ligne', 'Enregistrer', 'Dessiner une zone']) assert.ok(rows.some(r => r.includes(w)), w + ' : ' + rows.join(' | '));
+            await shot('v2-touches.png'); await p.keyboard.press('Escape'); await sleep(200);
+            await p.click(`${D} [data-tx-step="fix"]`); await p.keyboard.press('?'); await p.waitForSelector('[data-tx-keys]'); await p.keyboard.press('Escape'); await sleep(200);
+            await p.evaluate(() => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); a.focus(); a.setSelectionRange(3, 3); }); await p.keyboard.press('Alt+ArrowDown'); await sleep(150);
+            const s = await findState(); assert.equal(s.sel, LINES[1]); assert.equal(await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-zones] rect.is-sel')?.dataset.txZone), 'z2');
+            await p.keyboard.press('Alt+ArrowUp'); await sleep(100); assert.equal((await findState()).sel, LINES[0]);
+        });
+
         await t('aucune erreur JavaScript', async () => { assert.deepStrictEqual(errs, []); });
     } finally {
         await browser.close(); proc.kill(); fs.rmSync(tmp, {recursive: true, force: true});

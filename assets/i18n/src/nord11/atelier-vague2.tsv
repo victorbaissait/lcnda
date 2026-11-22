@@ -30,3 +30,18 @@ C’était la dernière ligne. ¦ Đó là dòng cuối cùng. ¦ Itu baris tera
 Relire ligne à ligne ¦ Đọc lại từng dòng ¦ Periksa baris demi baris
 Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Đọc lại từng dòng toàn màn hình: mảnh hình ảnh phía trên mỗi dòng ¦ Periksa baris demi baris dalam layar penuh: potongan gambar di atas setiap baris
 Relecture ligne à ligne en plein écran (conseillé) ¦ Đọc lại từng dòng toàn màn hình (khuyên dùng) ¦ Pemeriksaan baris demi baris dalam layar penuh (disarankan)
+# — 🕘 Versions, 🔍 Chercher / Remplacer, ⌨️ touches
+Chercher dans le texte ¦ Tìm trong văn bản ¦ Cari di teks
+Chercher et remplacer ¦ Tìm và thay thế ¦ Cari dan ganti
+« {q} » → « {by} » : {n} ¦ “{q}” → “{by}”: {n} ¦ “{q}” → “{by}”: {n}
+Avant « Remplacer » ¦ Trước “Thay thế” ¦ Sebelum “Ganti”
+Avant « Tout remplacer » ¦ Trước “Thay thế tất cả” ¦ Sebelum “Ganti semua”
+Avant « Accepter les propositions sûres » ¦ Trước “Chấp nhận các đề xuất chắc chắn” ¦ Sebelum “Terima usulan yang pasti”
+Avant la lecture mise dans le texte ¦ Trước khi đưa phần đọc vào văn bản ¦ Sebelum hasil baca dimasukkan ke teks
+Résultat suivant, résultat d’avant ¦ Kết quả tiếp theo, kết quả trước ¦ Hasil berikutnya, hasil sebelumnya
+Ligne suivante, ligne d’avant : l’image suit sa zone ¦ Dòng tiếp theo, dòng trước: hình ảnh đi theo vùng của dòng ¦ Baris berikutnya, baris sebelumnya: gambar mengikuti areanya
+Déplacer l’image, en restant appuyé ¦ Di chuyển hình ảnh, giữ phím ¦ Geser gambar, sambil ditahan
+Déplacer la zone choisie (⇧ : l’agrandir) ¦ Di chuyển vùng đã chọn (⇧: phóng to) ¦ Geser area yang dipilih (⇧: perbesar)
+Supprimer la zone choisie ¦ Xóa vùng đã chọn ¦ Hapus area yang dipilih
+Zoom avant, zoom arrière ¦ Phóng to, thu nhỏ ¦ Perbesar, perkecil
+Cette liste des touches ¦ Danh sách phím này ¦ Daftar tombol ini

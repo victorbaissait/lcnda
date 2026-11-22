@@ -30,3 +30,18 @@ C’était la dernière ligne. ¦ Se oli viimeinen rivi. ¦ Ez volt az utolsó s
 Relire ligne à ligne ¦ Tarkista rivi riviltä ¦ Átnézés soronként
 Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Tarkista rivi riviltä koko näytöllä: kuvan pala jokaisen rivin yläpuolella ¦ Soronkénti átnézés teljes képernyőn: a képrészlet minden sor fölött
 Relecture ligne à ligne en plein écran (conseillé) ¦ Rivikohtainen tarkistus koko näytöllä (suositus) ¦ Soronkénti átnézés teljes képernyőn (ajánlott)
+# — 🕘 Versions, 🔍 Chercher / Remplacer, ⌨️ touches
+Chercher dans le texte ¦ Hae tekstistä ¦ Keresés a szövegben
+Chercher et remplacer ¦ Hae ja korvaa ¦ Keresés és csere
+« {q} » → « {by} » : {n} ¦ ”{q}” → ”{by}”: {n} ¦ „{q}” → „{by}”: {n}
+Avant « Remplacer » ¦ Ennen ”Korvaa” ¦ A „Csere” előtt
+Avant « Tout remplacer » ¦ Ennen ”Korvaa kaikki” ¦ Az „Összes cseréje” előtt
+Avant « Accepter les propositions sûres » ¦ Ennen ”Hyväksy varmat ehdotukset” ¦ A „Biztos javaslatok elfogadása” előtt
+Avant la lecture mise dans le texte ¦ Ennen kuin luettu lisättiin tekstiin ¦ Mielőtt a beolvasott szöveg a szövegbe került
+Résultat suivant, résultat d’avant ¦ Seuraava tulos, edellinen tulos ¦ Következő találat, előző találat
+Ligne suivante, ligne d’avant : l’image suit sa zone ¦ Seuraava rivi, edellinen rivi: kuva seuraa sen aluetta ¦ Következő sor, előző sor: a kép követi a területét
+Déplacer l’image, en restant appuyé ¦ Siirrä kuvaa pitämällä painettuna ¦ Kép mozgatása, lenyomva tartva
+Déplacer la zone choisie (⇧ : l’agrandir) ¦ Siirrä valittua aluetta (⇧: suurenna sitä) ¦ A kijelölt terület mozgatása (⇧: nagyítás)
+Supprimer la zone choisie ¦ Poista valittu alue ¦ A kijelölt terület törlése
+Zoom avant, zoom arrière ¦ Lähennä, loitonna ¦ Nagyítás, kicsinyítés
+Cette liste des touches ¦ Tämä näppäinluettelo ¦ Ez a billentyűlista

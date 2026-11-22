@@ -30,3 +30,18 @@ C’était la dernière ligne. ¦ Tai buvo paskutinė eilutė. ¦ Tā bija pēd�
 Relire ligne à ligne ¦ Peržiūrėti eilutė po eilutės ¦ Pārskatīt rindu pa rindai ¦ Vaata üle rida-realt
 Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Peržiūrėti eilutė po eilutės visame ekrane: vaizdo dalis virš kiekvienos eilutės ¦ Pārskatīt rindu pa rindai pilnekrānā: attēla gabals virs katras rindas ¦ Vaata üle rida-realt täisekraanil: pildilõik iga rea kohal
 Relecture ligne à ligne en plein écran (conseillé) ¦ Peržiūra eilutė po eilutės visame ekrane (rekomenduojama) ¦ Pārskatīšana rindu pa rindai pilnekrānā (ieteicams) ¦ Rida-realt ülevaatus täisekraanil (soovitatav)
+# — 🕘 Versions, 🔍 Chercher / Remplacer, ⌨️ touches
+Chercher dans le texte ¦ Ieškoti tekste ¦ Meklēt tekstā ¦ Otsi tekstist
+Chercher et remplacer ¦ Ieškoti ir pakeisti ¦ Meklēt un aizstāt ¦ Otsi ja asenda
+« {q} » → « {by} » : {n} ¦ „{q}“ → „{by}“: {n} ¦ “{q}” → “{by}”: {n} ¦ „{q}“ → „{by}“: {n}
+Avant « Remplacer » ¦ Prieš „Pakeisti“ ¦ Pirms “Aizstāt” ¦ Enne „Asenda“
+Avant « Tout remplacer » ¦ Prieš „Pakeisti viską“ ¦ Pirms “Aizstāt visu” ¦ Enne „Asenda kõik“
+Avant « Accepter les propositions sûres » ¦ Prieš „Priimti tikrus pasiūlymus“ ¦ Pirms “Pieņemt drošos ieteikumus” ¦ Enne „Võta kindlad soovitused vastu“
+Avant la lecture mise dans le texte ¦ Prieš įdedant nuskaitytą tekstą ¦ Pirms nolasītais tika ielikts tekstā ¦ Enne loetu lisamist teksti
+Résultat suivant, résultat d’avant ¦ Kitas rezultatas, ankstesnis rezultatas ¦ Nākamais rezultāts, iepriekšējais rezultāts ¦ Järgmine tulemus, eelmine tulemus
+Ligne suivante, ligne d’avant : l’image suit sa zone ¦ Kita eilutė, ankstesnė eilutė: vaizdas seka jos sritį ¦ Nākamā rinda, iepriekšējā rinda: attēls seko tās apgabalam ¦ Järgmine rida, eelmine rida: pilt järgib selle ala
+Déplacer l’image, en restant appuyé ¦ Perkelti vaizdą, laikant nuspaustą ¦ Pārvietot attēlu, turot nospiestu ¦ Liiguta pilti, all hoides
+Déplacer la zone choisie (⇧ : l’agrandir) ¦ Perkelti pasirinktą sritį (⇧: padidinti) ¦ Pārvietot izvēlēto apgabalu (⇧: palielināt to) ¦ Liiguta valitud ala (⇧: suurenda seda)
+Supprimer la zone choisie ¦ Ištrinti pasirinktą sritį ¦ Dzēst izvēlēto apgabalu ¦ Kustuta valitud ala
+Zoom avant, zoom arrière ¦ Priartinti, nutolinti ¦ Tuvināt, tālināt ¦ Suurenda, vähenda
+Cette liste des touches ¦ Šis klavišų sąrašas ¦ Šis taustiņu saraksts ¦ See klahvide loend

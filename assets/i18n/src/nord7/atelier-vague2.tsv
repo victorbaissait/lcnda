@@ -30,3 +30,18 @@ C’était la dernière ligne. ¦ Þetta var síðasta línan.
 Relire ligne à ligne ¦ Yfirfara línu fyrir línu
 Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Yfirfara línu fyrir línu á öllum skjánum: myndbúturinn fyrir ofan hverja línu
 Relecture ligne à ligne en plein écran (conseillé) ¦ Yfirferð línu fyrir línu á öllum skjánum (mælt með)
+# — 🕘 Versions, 🔍 Chercher / Remplacer, ⌨️ touches
+Chercher dans le texte ¦ Leita í textanum
+Chercher et remplacer ¦ Leita og skipta út
+« {q} » → « {by} » : {n} ¦ „{q}“ → „{by}“: {n}
+Avant « Remplacer » ¦ Fyrir „Skipta út“
+Avant « Tout remplacer » ¦ Fyrir „Skipta öllu út“
+Avant « Accepter les propositions sûres » ¦ Fyrir „Samþykkja öruggar tillögur“
+Avant la lecture mise dans le texte ¦ Áður en lesturinn var settur í textann
+Résultat suivant, résultat d’avant ¦ Næsta niðurstaða, fyrri niðurstaða
+Ligne suivante, ligne d’avant : l’image suit sa zone ¦ Næsta lína, fyrri lína: myndin fylgir svæði hennar
+Déplacer l’image, en restant appuyé ¦ Færa myndina, haldið niðri
+Déplacer la zone choisie (⇧ : l’agrandir) ¦ Færa valið svæði (⇧: stækka það)
+Supprimer la zone choisie ¦ Eyða völdu svæði
+Zoom avant, zoom arrière ¦ Auka aðdrátt, minnka aðdrátt
+Cette liste des touches ¦ Þessi listi yfir lykla

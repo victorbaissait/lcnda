@@ -235,3 +235,26 @@
 .h-txr-hint{color:#9aa0aa;flex:1 1 260px;min-width:0}
 :root[data-theme="dark"] .h-txr-line{background:#24272c;color:#eceef2}
 @media (max-width:700px){.h-txr-body{padding:12px}.h-txr-line{font-size:17px}.h-txr-hint{display:none}.h-txr-top{padding:8px 12px}}
+/* ─── 🔍 Chercher / Remplacer dans le texte (⌘F, ⌥⌘F) ─── */
+.h-tx-find{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;padding:5px 8px;background:#f5f8ff;border-bottom:1px solid #d6e2fb;flex:none}
+.h-tx-find[hidden],.h-tx-frep[hidden]{display:none}
+.h-tx-find input{flex:1 1 150px;min-width:0;padding:4px 8px;border:1px solid #c9ced8;border-radius:6px;font:inherit;background:#fff;color:inherit}
+.h-tx-find button{border:1px solid #d6d6db;background:#fff;border-radius:6px;padding:3px 8px;cursor:pointer;font:inherit;color:inherit;min-width:28px}
+.h-tx-find button:hover{border-color:#1473e6}
+.h-tx-find button.is-active,.h-tx-find button[aria-pressed=true]{background:#1473e6;border-color:#1473e6;color:#fff}
+.h-tx-fcount{font-size:12px;color:#6e6e73;font-variant-numeric:tabular-nums;white-space:nowrap}
+.h-tx-fcount.is-none{color:#c62828}
+.h-tx-frep{display:flex;flex:1 1 100%;gap:6px;align-items:center;flex-wrap:wrap;min-width:0}
+.h-tx-fclose{margin-left:auto}
+.h-tx-mirror .h-tx-hit{background:#ffe27a;box-shadow:0 0 0 1px #d4a800;border-radius:2px}
+.h-tx-mirror .h-tx-hit.is-cur{background:#ff9f1a;box-shadow:0 0 0 2px #c05f00}
+.h-tx-keys{width:100%;border-collapse:collapse;font-size:13px}
+.h-tx-keys td{padding:5px 8px;border-bottom:1px solid #e3e5ea;vertical-align:middle}
+.h-tx-keys td:first-child{white-space:nowrap;width:1%}
+:root[data-theme="dark"] .h-tx-find{background:#1c2433;border-color:#2f3a4a}
+:root[data-theme="dark"] .h-tx-find input,:root[data-theme="dark"] .h-tx-find button{background:#2c3036;border-color:#3a3f46;color:#e6e6e6}
+:root[data-theme="dark"] .h-tx-find button.is-active,:root[data-theme="dark"] .h-tx-find button[aria-pressed=true]{background:#1473e6;border-color:#1473e6;color:#fff}
+:root[data-theme="dark"] .h-tx-fcount{color:#a1a1a6}
+:root[data-theme="dark"] .h-tx-mirror .h-tx-hit{background:#6b5400;box-shadow:0 0 0 1px #c9a400}
+:root[data-theme="dark"] .h-tx-mirror .h-tx-hit.is-cur{background:#a35a00;box-shadow:0 0 0 2px #ffb347}
+:root[data-theme="dark"] .h-tx-keys td{border-color:#3a3f46}

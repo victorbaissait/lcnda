@@ -243,6 +243,8 @@
                         <span class="h-tx-pane" role="tabpanel" id="h-tx-pane-add" data-tx-pane="add" hidden><button type="button" data-tx-cmd="found" title="${esc(i18n('L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches'))}">✓ ${i18n('Ajouter à la généalogie')}…</button><small class="muted h-tx-panehint">${esc(i18n("L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches"))}</small></span>
                         <span class="spacer"></span><button type="button" class="h-tx-stepnext" data-tx-stepnext title="${esc(i18n('Étape suivante'))}">${esc(i18n('Étape suivante'))} ›</button></div></div>
                     <div class="h-tx-chars">${SPECIAL.map(c => `<button type="button" data-tx-char="${esc(c)}" title="${esc(i18n('Insérer {c}', {c: esc(c)}))}">${esc(c)}</button>`).join('')}</div>
+                    <div class="h-tx-find" data-tx-find hidden role="search" aria-label="${esc(i18n('Chercher dans le texte'))}"><input type="search" data-tx-fq placeholder="${esc(i18n('Chercher…'))}" aria-label="${esc(i18n('Chercher'))}" spellcheck="false" autocomplete="off" data-ui-off><span class="h-tx-fcount" data-tx-fcount aria-live="polite"></span><button type="button" data-tx-f="prev" title="${esc(i18n('Précédent'))}" aria-label="${esc(i18n('Précédent'))}" data-shortcut="⇧↩">↑</button><button type="button" data-tx-f="next" title="${esc(i18n('Suivant'))}" aria-label="${esc(i18n('Suivant'))}" data-shortcut="↩">↓</button><button type="button" data-tx-f="case" aria-pressed="false" title="${esc(i18n('Majuscules et minuscules comptent'))}">Aa</button><button type="button" data-tx-f="rep" aria-pressed="false" title="${esc(i18n('Chercher et remplacer'))}" data-shortcut="⌥⌘F">⇄</button><button type="button" class="h-tx-fclose" data-tx-f="close" title="${esc(i18n('Fermer'))}" aria-label="${esc(i18n('Fermer'))}">×</button>
+                        <span class="h-tx-frep" data-tx-frep hidden><input type="text" data-tx-fr placeholder="${esc(i18n('Remplacer par…'))}" aria-label="${esc(i18n('Remplacer par…'))}" spellcheck="false" autocomplete="off" data-ui-off><button type="button" data-tx-f="one">${esc(i18n('Remplacer'))}</button><button type="button" data-tx-f="all">${esc(i18n('Tout remplacer'))}</button></span></div>
                     <div class="h-tx-editor${TV.lineNos() ? ' has-ln' : ''}" data-tx-editor><div class="h-tx-mirror" data-tx-mirror aria-hidden="true"></div><textarea data-tx-body spellcheck="false" placeholder="${esc(i18n('La transcription, ligne à ligne comme sur l’acte. Choisis un passage, puis dessine sa zone sur l’image (▭ Zone) : les deux restent liés.'))}">${esc(t.body)}</textarea></div>
                     <div class="h-tx-fixbar" data-tx-fixbar hidden></div>
                     <p class="h-tx-docnote" data-tx-docnote hidden>📄 ${esc(i18n('Ce texte est celui du document : il se voit dans la visionneuse, la page du document et la fiche des personnes reliées.'))}</p>
@@ -392,7 +394,14 @@
         function paintOverlay() { const sw = 2 / zoom; $('[data-tx-zones]')?.querySelectorAll('rect').forEach(r => r.setAttribute('stroke-width', r.classList.contains('is-sel') ? sw * 2 : sw)); paintHandles(); }
         /* 🪄 les corrections proposées sur le texte de l'Atelier : soulignées dans le miroir, un clic dans le texte → le menu */
         let txFix = [], txFixOn = false, txFixT = 0; const txFixUndo = [], txKept = new Set();
-        const fixSeg = (text, a, b) => { let h = '', q = a; txFix.filter(f => f.e > a && f.s < b).forEach(f => { const s0 = Math.max(a, f.s), e0 = Math.min(b, f.e); if (s0 < q) return; h += esc(text.slice(q, s0)) + `<u class="h-tx-fix${f.sure ? ' is-sure' : ''}">${esc(text.slice(s0, e0))}</u>`; q = e0; }); return h + esc(text.slice(q, b)); }; // un mot coupé par le bord d'une zone : souligné des deux côtés
+        /* ce qu'on dessine dans le texte, par-dessus les couleurs des lignes : 🔍 les résultats de la recherche, 🪄 les corrections proposées,
+         * les abréviations connues (soulignées en pointillé) ; un mot coupé par le bord d'une zone : marqué des deux côtés */
+        let findHits = [], findCur = -1, abbrevs = [];
+        const decos = () => [...findHits.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-hit${i === findCur ? ' is-cur' : ''}">`, c: '</span>', w: 0})),
+            ...txFix.map(f => ({s: f.s, e: f.e, o: `<u class="h-tx-fix${f.sure ? ' is-sure' : ''}">`, c: '</u>', w: 1})),
+            ...abbrevs.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-ab" data-ab="${i}">`, c: '</span>', w: 2}))].sort((x, y) => x.s - y.s || x.w - y.w);
+        let curDecos = [];
+        const fixSeg = (text, a, b) => { let h = '', q = a; curDecos.filter(f => f.e > a && f.s < b).forEach(f => { const s0 = Math.max(a, f.s), e0 = Math.min(b, f.e); if (s0 < q) return; h += esc(text.slice(q, s0)) + f.o + esc(text.slice(s0, e0)) + f.c; q = e0; }); return h + esc(text.slice(q, b)); };
         async function runFix({quiet = false} = {}) {
             if (!window.LCNDA_HTRFIX) { if (!quiet) toast(i18n('Les corrections proposées ne sont pas chargées.'), 'error'); return; }
             const lex = await fixLexicon($('[data-tx-lang]').value, $('[data-tx="place"]').value); if (!lex || !dlg.isConnected) return;
@@ -419,7 +428,7 @@
             const b = e.target.closest('[data-txfix]'); if (!b) return; const k = b.dataset.txfix;
             if (k === 'close') { txFixOn = false; txFix = []; paintMirror(); paintTxFix(); return; }
             if (k === 'undo') { const old = txFixUndo.pop(); if (old != null) { area.value = old; area.dispatchEvent(new Event('input')); runFix({quiet: true}); } return; }
-            if (k === 'accept') { const sure = txFix.filter(f => f.sure); if (sure.length) setTxText(window.LCNDA_HTRFIX.applySure(area.value, sure), A().plural ? A().plural(sure.length, 'proposition sûre acceptée', 'propositions sûres acceptées') : String(sure.length)); }
+            if (k === 'accept') { const sure = txFix.filter(f => f.sure); if (sure.length) versionBefore('Avant « Accepter les propositions sûres »'); if (sure.length) setTxText(window.LCNDA_HTRFIX.applySure(area.value, sure), A().plural ? A().plural(sure.length, 'proposition sûre acceptée', 'propositions sûres acceptées') : String(sure.length)); }
         });
         area.addEventListener('click', e => {
             if (!txFix.length || area.selectionStart !== area.selectionEnd) return;
@@ -429,7 +438,7 @@
                 addLex: () => addToLexicon(fx.word, () => runFix({quiet: true}))});
         });
         function paintMirror() {
-            const text = area.value, marks = [];
+            const text = area.value, marks = []; curDecos = decos();
             t.data.zones.forEach((z, i) => { if (z.e > z.s) marks.push({s: z.s, e: z.e, c: colorOf(z, i), on: selZone === z.id}); });
             found.forEach(f => marks.push({s: f.s, e: f.e, cls: `is-${f.type}`}));
             marks.sort((a, b) => a.s - b.s); let h = '', pos = 0;
@@ -471,7 +480,7 @@
             const shift = r => { const f = v => v >= oldEnd ? v + delta : v > p ? Math.max(p, Math.min(v, p + (now.length - q - p))) : v; r.s = f(r.s); r.e = Math.max(r.s, f(r.e)); };
             t.data.zones.forEach(shift); t.data.people.forEach(shift); found.forEach(shift); [...hist.undo, ...hist.redo].forEach(list => list.forEach(shift));
             txFix.forEach(shift); txFix = txFix.filter(f => now.slice(f.s, f.e) === f.word); if (txFixOn) { clearTimeout(txFixT); txFixT = setTimeout(() => runFix({quiet: true}), 900); }
-            before = now; t.body = now; touch(); paintMirror(); paintPeople();
+            before = now; t.body = now; touch(); if (!findBar.hidden) findRun({keep: true}); paintMirror(); paintPeople();
         });
         area.addEventListener('scroll', () => { mirror.scrollTop = area.scrollTop; });
         // un clic dans le texte : la zone qui contient cet endroit s'allume
@@ -626,6 +635,89 @@
                 replace: (s, e, str) => { area.setRangeText(str, s, e, 'end'); area.dispatchEvent(new Event('input')); },
                 reviewed: () => t.data.reviewed || [], setReviewed: list => { t.data.reviewed = list.slice(-5000); touch(); flowSoon(60); },
                 onClose: l => { flushCommit(); if (phone()) showPtab('text', false); if (!l) return; selectText(l); const z = t.data.zones.find(q => q.e > q.s && q.s < l.e && l.s < q.e); if (z) { selZone = z.id; drawZones(); reveal(z); } }});
+        }
+        /* ─── 🔍 Chercher / Remplacer dans le texte (⌘F, ⌥⌘F) : les résultats surlignés, Entrée / ⇧ Entrée, « Tout remplacer » et ↶ Annuler ─── */
+        const fq = $('[data-tx-fq]'), fr = $('[data-tx-fr]'), findBar = $('[data-tx-find]');
+        let findCase = false;
+        function findRun({keep = false} = {}) {
+            const q = findBar.hidden ? '' : fq.value, text = area.value, out = [];
+            if (q) { const hay = findCase ? text : text.toLocaleLowerCase(), nd = findCase ? q : q.toLocaleLowerCase(); let i = 0; while ((i = hay.indexOf(nd, i)) >= 0 && out.length < 5000) { out.push({s: i, e: i + nd.length}); i += Math.max(1, nd.length); } }
+            const was = findHits[findCur]; findHits = out;
+            findCur = !out.length ? -1 : keep && was ? Math.max(0, out.findIndex(h => h.s >= was.s)) : Math.max(0, out.findIndex(h => h.s >= area.selectionStart));
+            if (findCur < 0 && out.length) findCur = 0;
+            $('[data-tx-fcount]').textContent = q ? (out.length ? i18n('{n} sur {total}', {n: findCur + 1, total: out.length}) : i18n('Aucun résultat')) : '';
+            $('[data-tx-fcount]').classList.toggle('is-none', !!q && !out.length); paintMirror();
+        }
+        /** montrer le résultat en cours : choisi dans le texte (sans y aller), le texte défile jusqu'à lui */
+        function findShow() { const h = findHits[findCur]; if (!h) return; area.setSelectionRange(h.s, h.e); const lineH = parseFloat(getComputedStyle(area).lineHeight) || 20; area.scrollTop = Math.max(0, (area.value.slice(0, h.s).split('\n').length - 3) * lineH); mirror.scrollTop = area.scrollTop; $('[data-tx-fcount]').textContent = i18n('{n} sur {total}', {n: findCur + 1, total: findHits.length}); paintMirror(); }
+        const findStep = d => { if (!findHits.length) return; findCur = (findCur + d + findHits.length) % findHits.length; findShow(); };
+        function openFind(replace = false) {
+            const sel = area.value.slice(area.selectionStart, area.selectionEnd);
+            findBar.hidden = false; if (sel && !/\n/.test(sel) && sel.length < 80) fq.value = sel;
+            if (replace) $('[data-tx-frep]').hidden = false; $('[data-tx-f="rep"]').setAttribute('aria-pressed', String(!$('[data-tx-frep]').hidden));
+            if (phone()) showPtab('text', false);
+            (replace && fq.value ? fr : fq).focus(); (replace && fq.value ? fr : fq).select(); findRun(); if (findHits.length) findShow();
+        }
+        function closeFind() { findBar.hidden = true; findHits = []; findCur = -1; paintMirror(); area.focus(); }
+        /** remplacer : chaque remplacement est une petite modification (les zones et les personnes suivent leur passage) */
+        const replaceAt = (h, str) => { area.setRangeText(str, h.s, h.e, 'end'); area.dispatchEvent(new Event('input')); };
+        function replaceOne() { const h = findHits[findCur]; if (!h) return; versionBefore('Avant « Remplacer »'); replaceAt(h, fr.value); findRun({keep: true}); findShow(); }
+        function replaceAll() {
+            if (!findHits.length) return; const n = findHits.length, q = fq.value, by = fr.value, snapBefore = snapText();
+            versionBefore('Avant « Tout remplacer »'); flushCommit();
+            [...findHits].reverse().forEach(h => replaceAt(h, by)); flushCommit(); findRun();
+            const after = snapText();
+            A().undoToast?.(i18n('« {q} » → « {by} » : {n}', {q, by, n: plural(n, 'remplacement', 'remplacements')}), {undo: () => { putText(snapBefore); findRun(); }, redo: () => { putText(after); findRun(); }});
+        }
+        findBar.addEventListener('input', e => { if (e.target === fq) findRun(); });
+        findBar.addEventListener('click', e => { const b = e.target.closest('[data-tx-f]'); if (!b) return; const k = b.dataset.txF;
+            if (k === 'next' || k === 'prev') return findStep(k === 'next' ? 1 : -1);
+            if (k === 'case') { findCase = !findCase; b.setAttribute('aria-pressed', String(findCase)); b.classList.toggle('is-active', findCase); return findRun({keep: true}); }
+            if (k === 'rep') { const rp = $('[data-tx-frep]'); rp.hidden = !rp.hidden; b.setAttribute('aria-pressed', String(!rp.hidden)); if (!rp.hidden) fr.focus(); return; }
+            if (k === 'one') return replaceOne(); if (k === 'all') return replaceAll(); if (k === 'close') return closeFind(); });
+        findBar.addEventListener('keydown', e => {
+            if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); return closeFind(); }
+            if (e.key === 'Enter' && e.target === fq) { e.preventDefault(); e.stopPropagation(); return findStep(e.shiftKey ? -1 : 1); }
+            if (e.key === 'Enter' && e.target === fr) { e.preventDefault(); e.stopPropagation(); return (e.metaKey || e.ctrlKey) ? replaceAll() : replaceOne(); }
+        });
+        /* ─── 🕘 Versions du texte (la fenêtre commune, app-versions.js ; serveur : act_transcription_versions) ─── */
+        const snapText = () => ({body: area.value, zones: t.data.zones.map(z => ({...z})), people: t.data.people.map(p => ({...p})), reviewed: [...(t.data.reviewed || [])]});
+        function putText(x) { flushCommit(); area.value = x.body; before = x.body; t.body = x.body; t.data.zones = (x.zones || []).map(z => ({...z})); t.data.people = (x.people || []).map(p => ({...p})); t.data.reviewed = [...(x.reviewed || [])];
+            if (!t.data.zones.some(z => z.id === selZone)) selZone = null; txFix = []; touch(); drawZones(); paintPeople(); if (!findBar.hidden) findRun(); flushCommit(); }
+        /** juste avant un gros changement (tout remplacer, propositions sûres, lecture mise dans le texte) : une version automatique, si l'acte est enregistré */
+        function versionBefore(label) { if (!t.id || !area.value.trim()) return; post('save_act_transcription_version', {act_id: t.id, label, body: area.value, data: {zones: t.data.zones, people: t.data.people, reviewed: t.data.reviewed || []}, auto: 1}).catch(() => {}); }
+        async function openVersions() {
+            if (!UI.openVersions) return toast(i18n('La fenêtre des versions n’est pas chargée.'), 'error');
+            if (!t.id) { await save(); if (!t.id) return; }
+            const full = new Map(), get = async id => { if (!full.has(id)) full.set(id, await api('act_transcription_version', {id})); return full.get(id); };
+            const info = (lines, words) => `${plural(lines, 'ligne')} · ${plural(words, 'mot')}`, nowLines = () => area.value.split('\n').filter(l => l.trim()).length;
+            const dataOf = () => ({zones: t.data.zones, people: t.data.people, reviewed: t.data.reviewed || []});
+            return UI.openVersions({title: $('[data-tx="title"]').value || i18n('Acte'), tool: i18n('Atelier de transcription'), kind: 'text',
+                list: async () => ((await api('act_transcription_versions', {act_id: t.id})).items || []).map(v => ({...v, label: i18n(v.label), auto: !!v.auto, info: info(v.lines, v.words)})),
+                now: () => ({info: info(nowLines(), (area.value.match(/\S+/g) || []).length), hint: i18n('le texte à l’écran')}),
+                preview: async v => ({text: v ? (await get(v.id)).body : area.value}),
+                keepNow: label => post('save_act_transcription_version', {act_id: t.id, label, body: area.value, data: dataOf(), auto: 1}),
+                restore: async v => { const x = await get(v.id), was = snapText(), to = {body: x.body, zones: x.data?.zones || [], people: x.data?.people || [], reviewed: x.data?.reviewed || []}; putText(to);
+                    return {undo: () => putText(was), redo: () => putText(to)}; },
+                rename: (v, label) => post('rename_act_transcription_version', {id: v.id, label}),
+                remove: async v => { const r = await post('delete_act_transcription_version', {id: v.id}); full.delete(v.id); return {undo: () => post('restore_act_transcription_version', {version: (r.result || r).version})}; },
+                saveNow: async () => { const name = await A().askText({title: `🕘 ${i18n('Nouvelle version')}`, message: i18n('Un nom pour cette version (facultatif) :'), value: '', okLabel: i18n('Enregistrer')}); if (name === null) return;
+                    await post('save_act_transcription_version', {act_id: t.id, label: String(name || '').trim().slice(0, 120), body: area.value, data: dataOf(), auto: 0}); }});
+        }
+        /* ─── ⌨️ les touches de l'Atelier (⌘/ ou ?) ─── */
+        function showKeys() {
+            const K = A().keys, kk = s => (K?.html ? K.html(s) : `<kbd>${esc(s)}</kbd>`);
+            const rows = [['⌘S', 'Enregistrer'], ['⌘Z', 'Annuler'], ['⇧⌘Z', 'Rétablir'], ['⌘F', 'Chercher dans le texte'], ['⌥⌘F', 'Chercher et remplacer'], ['↩ / ⇧↩', 'Résultat suivant, résultat d’avant'],
+                ...(TV.reviewMode?.() ? [['R', 'Relire ligne à ligne']] : []), ['⌥↓ / ⌥↑', 'Ligne suivante, ligne d’avant : l’image suit sa zone'], ['H', 'Déplacer l’image'], ['Espace', 'Déplacer l’image, en restant appuyé'], ['Z', 'Dessiner une zone'], ['L', 'Loupe'],
+                ['← → ↑ ↓', 'Déplacer la zone choisie (⇧ : l’agrandir)'], ['Suppr', 'Supprimer la zone choisie'], ['⌘0', 'Ajuster à la fenêtre'], ['⌘1', '100 %'], ['⌘+ / ⌘−', 'Zoom avant, zoom arrière'], ['⌘P', 'Imprimer'], ['⌘/ / ?', 'Cette liste des touches'], ['Échap', 'Fermer']];
+            ext.openDialog({eyebrow: i18n('Atelier de transcription').toUpperCase(), title: `⌨️ ${i18n('Raccourcis clavier')}`, submitLabel: i18n('Fermer'),
+                body: `<table class="h-tx-keys" data-tx-keys><tbody>${rows.map(([k, l]) => `<tr><td>${k.split(' / ').map(kk).join(' / ')}</td><td>${esc(i18n(l))}</td></tr>`).join('')}</tbody></table><p class="ui-hint">${esc(i18n('Sur PC et Linux : Ctrl au lieu de ⌘, Alt au lieu de ⌥.'))}</p>`, onSubmit: () => {}});
+        }
+        /** ⌥↓ / ⌥↑ dans le texte : la ligne suivante ou d'avant est choisie, l'image va à sa zone */
+        function lineStep(d) {
+            const v = area.value, c = d > 0 ? area.selectionEnd : area.selectionStart, start = v.lastIndexOf('\n', c - 1) + 1;
+            let s = d > 0 ? v.indexOf('\n', c) + 1 : v.lastIndexOf('\n', start - 2) + 1; if (d > 0 && s === 0) return; if (d < 0 && start === 0) return;
+            const e = v.indexOf('\n', s) < 0 ? v.length : v.indexOf('\n', s); selectText({s, e}); const z = t.data.zones.find(q => q.e > q.s && q.s < e && s < q.e); if (z) { selZone = z.id; drawZones(); reveal(z); }
         }
         let lastExtract = null, lastUnsure = 0, lastRich = null;
         async function runDetect() {
@@ -871,7 +963,7 @@
                 onSubmit: f => {
                     const kept = [...f.querySelectorAll('.h-htr-rev > li')].filter(li => li.querySelector('[data-htr-keep]').checked).map(li => ({l: lines[Number(li.dataset.i)], text: li.querySelector('[data-htr-line]').textContent.replace(/\s+/g, ' ').trim()})).filter(k => k.text);
                     if (!kept.length) { toast(i18n('Aucune ligne gardée.')); return; }
-                    let text = area.value; if (text.trim()) text += '\n\n';
+                    versionBefore('Avant la lecture mise dans le texte'); let text = area.value; if (text.trim()) text += '\n\n';
                     const made = [];
                     kept.forEach(({l, text: line}) => { const s = text.length; text += line + '\n'; if (l.bbox) { const [x0, y0, x1, y1] = l.bbox; made.push({id: zid(), x: x0 + ox, y: y0 + oy, w: x1 - x0, h: y1 - y0, s, e: s + line.length, note: l.conf != null && l.conf < UNSURE ? i18n('Lu automatiquement (sûr à {x} %)', {x: pct(l.conf)}) : '', c: '', src: 'htr'}); } });
                     area.value = text; before = text; t.body = text; snap(); t.data.zones.push(...made); touch(); drawZones();
@@ -1124,6 +1216,11 @@
             if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); save(); return; }
             if (e.key === 'Escape' && e.target.closest?.('[data-tx-panel]')) { e.preventDefault(); e.stopPropagation(); togglePanel(false); $('[data-tx-cmd="better"]')?.focus(); return; }
             if (e.key === 'Escape' && $('[data-tx-readpanel]') && !$('[data-tx-readpanel]').hidden) { e.preventDefault(); e.stopPropagation(); toggleRead(false); $('[data-tx-cmd="readmenu"]')?.focus(); return; }
+            { const mk = e.metaKey || e.ctrlKey; // 🔍 ⌘F, ⌥⌘F (et Ctrl+H) ; ⌨️ ⌘/ ; ⌥↓ ⌥↑ dans le texte
+              if (mk && !e.shiftKey && (e.code === 'KeyF' || e.key.toLowerCase() === 'f')) { e.preventDefault(); e.stopPropagation(); openFind(e.altKey); return; }
+              if (e.ctrlKey && !e.metaKey && !e.altKey && e.key.toLowerCase() === 'h' && e.target === area) { e.preventDefault(); e.stopPropagation(); openFind(true); return; }
+              if (mk && (e.key === '/' || e.code === 'Slash')) { e.preventDefault(); e.stopPropagation(); showKeys(); return; }
+              if (e.altKey && !mk && (e.key === 'ArrowDown' || e.key === 'ArrowUp') && e.target === area) { e.preventDefault(); e.stopPropagation(); lineStep(e.key === 'ArrowDown' ? 1 : -1); return; } }
             if (e.target.closest?.('[data-tx-ptabs]') && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { e.preventDefault(); e.stopPropagation(); const ks = ['image', 'text', 'people'], i = ks.indexOf(e.target.closest('[data-tx-ptab]')?.dataset.txPtab); showPtab(ks[(i + (e.key === 'ArrowRight' ? 1 : 2)) % 3]); return; }
             if (e.target.closest?.('[data-tx-steps]') && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { e.preventDefault(); e.stopPropagation(); const ks = STEPS.map(s => s[0]), i = ks.indexOf(e.target.closest('[data-tx-step]')?.dataset.txStep); showStep(ks[(i + (e.key === 'ArrowRight' ? 1 : ks.length - 1)) % ks.length]); return; } // C5 : les flèches d'un onglet à l'autre
             if (e.target.closest?.('input, textarea, select')) return;
@@ -1132,6 +1229,7 @@
             if (mod && (k === 'z' || k === 'y')) { e.preventDefault(); undoZones(k === 'y' || e.shiftKey); return; } // ⌘Z, ⇧⌘Z
             if (mod || e.altKey && !e.key.startsWith('Arrow')) return;
             if (e.key === ' ' && !space) { space = true; stage.dataset.tool = 'pan'; e.preventDefault(); }
+            if (e.key === '?' && !e.metaKey && !e.ctrlKey) { e.preventDefault(); showKeys(); return; }
             if (k === 'r' && !e.shiftKey && TV.reviewMode?.()) { e.preventDefault(); openReview(); return; }
             if (k === 'z') setTool('zone'); if (k === 'h') setTool('pan'); if (k === 'l') { $('[data-tx-cmd="loupe"]') ? $('[data-tx-cmd="loupe"]').click() : (loupe.on = !loupe.on, lc.hidden = !loupe.on); return; }
             if (e.key === 'Escape' && $('[data-tx-panel]') && !$('[data-tx-panel]').hidden) { e.preventDefault(); e.stopPropagation(); togglePanel(false); $('[data-tx-cmd="better"]')?.focus(); return; }
@@ -1162,8 +1260,8 @@
         dlg.addEventListener('click', e => { const hb = e.target.closest('[data-tx-hist]'); if (hb) undoZones(hb.dataset.txHist === 'redo'); });
         const cmdOf = k => () => { const b = document.createElement('button'); b.type = 'button'; b.hidden = true; b.dataset.txCmd = k; dlg.appendChild(b); b.click(); b.remove(); };
         UI.editorMenus?.($('[data-tx-menus]'), {
-            Fichier: () => [{icon: '💾', label: i18n('Enregistrer'), shortcut: '⌘S', run: cmdOf('save')}, {icon: '⤓', label: i18n('Exporter (texte, PDF, imprimer)…'), run: cmdOf('export')}, '-', {icon: '🖼️', label: i18n('Image de l’acte…'), run: cmdOf('image')}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
-            Édition: () => [{icon: '↶', label: i18n('Annuler'), shortcut: '⌘Z', disabled: !HX?.canUndo(), run: () => undoZones(false)}, {icon: '↷', label: i18n('Rétablir'), shortcut: '⇧⌘Z', disabled: !HX?.canRedo(), run: () => undoZones(true)}, '-', {icon: '📋', label: i18n('Copier le texte'), run: cmdOf('copy')}, {icon: '🧩', label: i18n('Modèle d’acte'), run: cmdOf('template')}],
+            Fichier: () => [{icon: '💾', label: i18n('Enregistrer'), shortcut: '⌘S', run: cmdOf('save')}, {icon: '⤓', label: i18n('Exporter (texte, PDF, imprimer)…'), run: cmdOf('export')}, '-', {icon: '🖼️', label: i18n('Image de l’acte…'), run: cmdOf('image')}, {icon: '🕘', label: `${i18n('Versions')}…`, run: () => openVersions()}, '-', {icon: '×', label: i18n('Fermer'), run: cmdOf('close')}],
+            Édition: () => [{icon: '↶', label: i18n('Annuler'), shortcut: '⌘Z', disabled: !HX?.canUndo(), run: () => undoZones(false)}, {icon: '↷', label: i18n('Rétablir'), shortcut: '⇧⌘Z', disabled: !HX?.canRedo(), run: () => undoZones(true)}, '-', {icon: '📋', label: i18n('Copier le texte'), run: cmdOf('copy')}, {icon: '🔍', label: `${i18n('Chercher et remplacer')}…`, shortcut: '⌘F', run: () => openFind(true)}, {icon: '🧩', label: i18n('Modèle d’acte'), run: cmdOf('template')}],
             // K1 : les lectures, Repérer et « Ajouter à la généalogie » sont des outils (plus dans Édition) ; un symbole = une action (K11)
             Outils: () => [{icon: '✋', label: i18n('Déplacer l’image'), shortcut: 'H', run: () => setTool('pan')}, {icon: '▭', label: i18n('Dessiner une zone'), shortcut: 'Z', run: () => setTool('zone')}, {icon: '🔍', label: i18n('Loupe'), shortcut: 'L', run: cmdOf('loupe')}, '-',
                 {icon: '✍️', label: i18n('Lire l’écriture à la main (rapide)'), run: cmdOf('htr')}, {icon: '🖨', label: i18n('Lire un texte imprimé'), run: cmdOf('ocr')}, {icon: '🔬', label: `${i18n('Lecture approfondie (IA)')}…`, run: cmdOf('deep')}, {icon: '▤', label: i18n('Relier les lignes à l’image'), run: cmdOf('lines')}, '-',
@@ -1171,7 +1269,7 @@
                 {icon: '📖', label: i18n('Aide à la lecture…'), run: cmdOf('aide')}, {icon: '🪙', label: i18n('Convertisseur d’autrefois…'), run: () => ext.autrefois?.open()}],
             Affichage: () => [{icon: '⤢', label: i18n('Ajuster à la fenêtre'), shortcut: '⌘0', run: () => txBar?.zoom.fit()}, {icon: '↔', label: i18n('Toute la largeur (pour lire)'), run: () => imgW && applyFit('width')}, {label: '100 %', shortcut: '⌘1', run: () => txBar?.zoom.actual()}, {icon: '＋', label: i18n('Zoom avant'), shortcut: '⌘+', run: () => txBar?.zoom.in()}, {icon: '−', label: i18n('Zoom arrière'), shortcut: '⌘−', run: () => txBar?.zoom.out()}, '-',
                 {icon: '⟳', label: i18n('Tourner de 90°'), run: cmdOf('rot')}, $('[data-tx-cmd="better"]') ? {icon: '🎚️', label: `${i18n('Mieux voir')}…`, run: () => togglePanel(true)} : null, {icon: '↺', label: i18n('Remettre l’image comme au départ'), run: cmdOf('resetview')}, '-',
-                TV.reviewMode?.() ? {icon: '👁', label: i18n('Relire ligne à ligne'), shortcut: 'R', run: cmdOf('review')} : null, {icon: '№', label: TV.lineNos() ? i18n('Cacher les numéros de ligne') : i18n('Montrer les numéros de ligne'), run: () => TV.setLineNos(!TV.lineNos())}]});
+                TV.reviewMode?.() ? {icon: '👁', label: i18n('Relire ligne à ligne'), shortcut: 'R', run: cmdOf('review')} : null, {icon: '№', label: TV.lineNos() ? i18n('Cacher les numéros de ligne') : i18n('Montrer les numéros de ligne'), run: () => TV.setLineNos(!TV.lineNos())}, '-', {icon: '⌨️', label: i18n('Raccourcis clavier'), shortcut: '⌘/', run: () => showKeys()}]});
         UI.editorRail?.($('[data-tx-rail]'), {breaks: ['[data-tx-cmd="loupe"]', '[data-tx-cmd="image"]']});
         if (UI.editorStatus) { // K18 : l'image à gauche, l'aide de l'outil au milieu, le zoom à droite (⌘ + molette, ⌘0, ⌘1)
             txBar = UI.editorStatus({zoom: {get: () => zoom, set: k => { if (!imgW) return; const r = stage.getBoundingClientRect(); zoomAt(k, r.width / 2, r.height / 2); }, fit: () => imgW && applyFit('page'), min: .02, max: 20}});

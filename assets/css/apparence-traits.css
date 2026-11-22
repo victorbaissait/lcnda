@@ -3441,6 +3441,16 @@ html.side-right:not(.is-screen-embed).lc-frame .sidebar-reopen, html.side-right:
 :root.lc-frame .h-txr-top, :root .h-txr-top:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #3a3f46}
 :root.lc-frame .h-txr-line, :root .h-txr-line:is([data-lc-lines], [data-lc-lines] *) {border:2px solid #5b93ff}
 :root.lc-frame .h-txr-bar, :root .h-txr-bar:is([data-lc-lines], [data-lc-lines] *) {border-top:1px solid #3a3f46}
+:root.lc-frame .h-tx-find, :root .h-tx-find:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #d6e2fb}
+:root.lc-frame .h-tx-find input, :root .h-tx-find input:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #c9ced8}
+:root.lc-frame .h-tx-find button, :root .h-tx-find button:is([data-lc-lines], [data-lc-lines] *) {border:1px solid #d6d6db}
+:root.lc-frame .h-tx-find button:hover, :root .h-tx-find button:hover:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
+:root.lc-frame .h-tx-find button.is-active, :root .h-tx-find button.is-active:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .h-tx-find button[aria-pressed=true], :root .h-tx-find button[aria-pressed=true]:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
+:root.lc-frame .h-tx-keys td, :root .h-tx-keys td:is([data-lc-lines], [data-lc-lines] *) {border-bottom:1px solid #e3e5ea}
+:root[data-theme="dark"].lc-frame .h-tx-find, :root[data-theme="dark"] .h-tx-find:is([data-lc-lines], [data-lc-lines] *) {border-color:#2f3a4a}
+:root[data-theme="dark"].lc-frame .h-tx-find input, :root[data-theme="dark"] .h-tx-find input:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-tx-find button, :root[data-theme="dark"] .h-tx-find button:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
+:root[data-theme="dark"].lc-frame .h-tx-find button.is-active, :root[data-theme="dark"] .h-tx-find button.is-active:is([data-lc-lines], [data-lc-lines] *), :root[data-theme="dark"].lc-frame .h-tx-find button[aria-pressed=true], :root[data-theme="dark"] .h-tx-find button[aria-pressed=true]:is([data-lc-lines], [data-lc-lines] *) {border-color:#1473e6}
+:root[data-theme="dark"].lc-frame .h-tx-keys td, :root[data-theme="dark"] .h-tx-keys td:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}
 /* photomaps.css */
 :root.lc-frame .pm-filter, :root .pm-filter:is([data-lc-lines], [data-lc-lines] *), :root.lc-frame .pm-chip, :root .pm-chip:is([data-lc-lines], [data-lc-lines] *) {border:1.5px solid var(--line-color)}
 :root.lc-frame .pm-filter.is-active, :root .pm-filter.is-active:is([data-lc-lines], [data-lc-lines] *) {border-color:var(--lc-frame-color)}

@@ -30,3 +30,18 @@ C’était la dernière ligne. ¦ To byl poslední řádek. ¦ Det var sista rad
 Relire ligne à ligne ¦ Kontrolovat řádek po řádku ¦ Granska rad för rad ¦ Gennemse linje for linje
 Relire ligne à ligne en plein écran : le morceau d’image au-dessus de chaque ligne ¦ Kontrolovat řádek po řádku na celé obrazovce: výřez obrázku nad každým řádkem ¦ Granska rad för rad i helskärm: bildbiten ovanför varje rad ¦ Gennemse linje for linje i fuld skærm: billedudsnittet over hver linje
 Relecture ligne à ligne en plein écran (conseillé) ¦ Kontrola řádek po řádku na celé obrazovce (doporučeno) ¦ Granskning rad för rad i helskärm (rekommenderas) ¦ Gennemsyn linje for linje i fuld skærm (anbefalet)
+# — 🕘 Versions, 🔍 Chercher / Remplacer, ⌨️ touches
+Chercher dans le texte ¦ Hledat v textu ¦ Sök i texten ¦ Søg i teksten
+Chercher et remplacer ¦ Hledat a nahradit ¦ Sök och ersätt ¦ Søg og erstat
+« {q} » → « {by} » : {n} ¦ „{q}“ → „{by}“: {n} ¦ ”{q}” → ”{by}”: {n} ¦ »{q}« → »{by}«: {n}
+Avant « Remplacer » ¦ Před „Nahradit“ ¦ Före ”Ersätt” ¦ Før »Erstat«
+Avant « Tout remplacer » ¦ Před „Nahradit vše“ ¦ Före ”Ersätt alla” ¦ Før »Erstat alle«
+Avant « Accepter les propositions sûres » ¦ Před „Přijmout jisté návrhy“ ¦ Före ”Godta de säkra förslagen” ¦ Før »Godkend de sikre forslag«
+Avant la lecture mise dans le texte ¦ Před vložením přečteného do textu ¦ Innan läsningen lades in i texten ¦ Før læsningen blev sat ind i teksten
+Résultat suivant, résultat d’avant ¦ Další výsledek, předchozí výsledek ¦ Nästa träff, föregående träff ¦ Næste resultat, forrige resultat
+Ligne suivante, ligne d’avant : l’image suit sa zone ¦ Další řádek, předchozí řádek: obrázek jde za jeho oblastí ¦ Nästa rad, föregående rad: bilden följer dess område ¦ Næste linje, forrige linje: billedet følger dens område
+Déplacer l’image, en restant appuyé ¦ Posunout obrázek, při podržení ¦ Flytta bilden, håll nedtryckt ¦ Flyt billedet, mens den holdes nede
+Déplacer la zone choisie (⇧ : l’agrandir) ¦ Posunout vybranou oblast (⇧: zvětšit ji) ¦ Flytta det valda området (⇧: förstora det) ¦ Flyt det valgte område (⇧: forstør det)
+Supprimer la zone choisie ¦ Smazat vybranou oblast ¦ Ta bort det valda området ¦ Slet det valgte område
+Zoom avant, zoom arrière ¦ Přiblížit, oddálit ¦ Zooma in, zooma ut ¦ Zoom ind, zoom ud
+Cette liste des touches ¦ Tento seznam kláves ¦ Den här listan med tangenter ¦ Denne liste over taster
