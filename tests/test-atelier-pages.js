@@ -444,7 +444,11 @@ echo json_encode(['ok' => 1]);`, {TX_SOLO: SOLO, TX_SOLO_DATA: JSON.stringify({z
         await t('🔬 sur la page affichée (page 2) : la fenêtre dit la page, et compare avec le texte de cette page seulement', async () => {
             await p.click(`${D} [data-tx-page="1"]`); await sleep(500);
             const seg2 = (await tx()).body.split(/\n— page \d —\n/)[1].trim();
-            await p.click(`${D} [data-tx-cmd="readmenu"]`); await p.check(`${D} [data-tx-readscope] input[value="page"]`); await p.click(`${D} [data-tx-readpanel] [data-tx-cmd="deep"]`);
+            await p.click(`${D} [data-tx-cmd="readmenu"]`);
+            const pr = await p.$eval(`${D} [data-tx-pread]`, e => e.textContent);
+            const counts = (await tx()).body.split(/\n— page \d —\n/).map(x => x.split('\n').filter(l => l.trim()).length);
+            assert.match(pr, /^Lignes déjà écrites — /, pr); assert.deepEqual([...pr.matchAll(/ : (\d+)/g)].map(m => Number(m[1])), counts, 'l’état de chaque page : ' + pr);
+            await p.check(`${D} [data-tx-readscope] input[value="page"]`); await p.click(`${D} [data-tx-readpanel] [data-tx-cmd="deep"]`);
             await p.waitForSelector('[data-txa-read]', {timeout: 15000}); await p.click('[data-txa-read]');
             await p.waitForSelector('[data-txa-t="htr"]', {timeout: 30000});
             const o = await p.evaluate(() => ({left: document.querySelector('[data-txa-t="htr"]').value, h: document.querySelector('[data-txa-out] h4').textContent}));

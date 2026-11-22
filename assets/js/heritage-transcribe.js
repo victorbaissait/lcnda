@@ -200,7 +200,7 @@
     function readPanelHtml() {
         const opt = ([k, ic, label, what]) => `<button type="button" class="h-tx-readopt" data-tx-cmd="${k}" role="menuitem"><span class="h-tx-readt">${ic} <b>${esc(i18n(label))}</b><span class="h-tx-readst" data-tx-readst="${k}"></span></span><small>${esc(i18n(what))}</small></button>`;
         return `<div class="h-tx-readpanel" data-tx-readpanel hidden role="menu" aria-label="${esc(i18n('Lire', {ctx: 'atelier'}))}">${READS.map(opt).join('')}
-            <div class="h-tx-readscope" data-tx-readscope hidden role="radiogroup" aria-label="${esc(i18n('Plusieurs pages'))}"><label><input type="radio" name="txreadscope" value="page" checked> ${esc(i18n('Sur la page affichée'))}</label><label><input type="radio" name="txreadscope" value="all"> ${esc(i18n('Sur toutes les pages'))}</label></div>
+            <div class="h-tx-readscope" data-tx-readscope hidden role="radiogroup" aria-label="${esc(i18n('Plusieurs pages'))}"><label><input type="radio" name="txreadscope" value="page" checked> ${esc(i18n('Sur la page affichée'))}</label><label><input type="radio" name="txreadscope" value="all"> ${esc(i18n('Sur toutes les pages'))}</label><small class="h-tx-pread" data-tx-pread></small></div>
             <div class="h-tx-readmore"><button type="button" class="h-tx-readopt h-tx-readline" data-tx-cmd="lines" role="menuitem" title="${esc(i18n('Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis'))}">▤ ${esc(i18n('Relier les lignes à l’image'))}</button>
             <label class="h-tx-readlang">🌐 ${esc(i18n('Langue du texte'))} <select data-tx-lang title="${esc(i18n('Langue du texte : sert à la lecture automatique, et « 📖 Aide à la lecture » s’ouvre sur cette langue'))}">${txLangs().map(([v, l]) => `<option value="${esc(v)}" ${txLang() === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
             <label class="ui-toggle h-tx-useenh" title="${esc(i18n('La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine'))}"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}><i></i>${i18n('Lire et exporter l’image améliorée')}</label></div></div>`;
@@ -1487,9 +1487,20 @@
         dlg.addEventListener('pointerdown', e => { const pn = $('[data-tx-panel]'); if (pn && !pn.hidden && !e.target.closest('[data-tx-item="better"]')) togglePanel(false);
             const rp = $('[data-tx-readpanel]'); if (rp && !rp.hidden && !e.target.closest('.h-tx-readw')) toggleRead(false); });
         /* ─── « ✨ Lire ▾ » : le menu des trois lectures, avec l'état de chacune ─── */
+        // 📑 l'état de chaque page sous « Sur la page affichée / Sur toutes les pages » : « Page 1 : 39 lignes · Page 2 : vide »
+        function pageLines(i) {
+            const n = v => String(v || '').split('\n').filter(x => x.trim()).length;
+            if (pageForm === 'one') { const sg = PG.segments(area.value)[(t.data.pages || []).map(Number).indexOf(Number(PAGES[i]?.media_id))]; return sg ? n(area.value.slice(sg.s, sg.e)) : 0; }
+            return i === pageIx ? n(area.value) : n(perSet?.[i]?.body ?? PAGES[i]?.transcription);
+        }
+        function paintPageRead() {
+            const el = $('[data-tx-pread]'); if (!el) return;
+            el.textContent = PAGES.length > 1 ? `${i18n('Lignes déjà écrites')} — ${PAGES.map((p, i) => `${pageName(p, i)} : ${pageLines(i)}`).join(' · ')}` : '';
+        }
         function toggleRead(open) {
             const pn = $('[data-tx-readpanel]'), b = $('[data-tx-cmd="readmenu"]'); if (!pn) return; const on = open ?? pn.hidden; pn.hidden = !on; b.setAttribute('aria-expanded', String(on)); b.classList.toggle('is-active', on);
             if (!on) return; pn.querySelector('.h-tx-readopt:not(:disabled)')?.focus();
+            paintPageRead();
             readStates().then(st => { if (!dlg.isConnected) return; pn.querySelectorAll('[data-tx-readst]').forEach(el => { const ok = st[el.dataset.txReadst];
                 el.innerHTML = UI.badge ? UI.badge(ok ? i18n('Installé') : i18n('À installer'), ok ? 'green' : 'yellow') : esc(ok ? i18n('Installé') : i18n('À installer')); el.dataset.state = ok ? 'ok' : 'todo'; }); });
         }

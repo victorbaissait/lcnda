@@ -315,6 +315,8 @@
 .h-tx-readscope{display:flex;flex-wrap:wrap;gap:4px 12px;padding:6px 10px;font-size:12.5px;border-bottom:1px solid var(--line,#e3e3e3)}
 .h-tx-readscope[hidden]{display:none}
 .h-tx-readscope label{display:inline-flex;align-items:center;gap:5px;cursor:pointer}
+.h-tx-pread{flex-basis:100%;color:var(--muted,#5b6170)}
+.h-tx-pread:empty{display:none}
 :root[data-theme="dark"] .h-tx-pages{background:#1f2124;border-color:#44474d}
 :root[data-theme="dark"] .h-tx-page{background:#2a2c30;border-color:#4a4d53}
 :root[data-theme="dark"] .h-tx-page b,:root[data-theme="dark"] .h-tx-pagesinfo{color:#a9adb5}

@@ -69,4 +69,5 @@ Chaque gros outil : maquette d'abord.
     - 🕘 Versions, chercher / remplacer : préciser si on cherche dans la page ou dans toutes (choix).
     (+ points 14 et 16 : Lire et Relire ligne à ligne.)
     - ✅ FAIT le 22 novembre : la fenêtre « Lecture approfondie » dit la page (« Page 2 (2 sur 4) · Lecture approfondie… 36 s », et dans le titre de la comparaison) ; elle compare avec le texte de la page affichée seulement (avant : tout le document) ; « Garder celle-ci » sur le texte déjà là ne l'ajoute plus une deuxième fois.
+    - ✅ FAIT le 22 novembre : « ✨ Lire ▾ » montre « Lignes déjà écrites — Page 1 : 39 · Page 2 : 0 ».
     - À surveiller : test-atelier-pages.js échoue parfois quand plusieurs essais tournent en même temps (visionneuse, lenteur) ; seul, il passe.
