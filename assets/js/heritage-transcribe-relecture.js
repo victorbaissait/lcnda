@@ -16,7 +16,8 @@
     /** l'empreinte d'une ligne (FNV-1a, base 36) : les espaces en trop ne comptent pas */
     const lineKey = s => { let h = 0x811c9dc5; for (const ch of String(s).replace(/\s+/g, ' ').trim()) { h ^= ch.codePointAt(0); h = Math.imul(h, 0x01000193) >>> 0; } return h.toString(36); };
     /** les lignes du texte : {n (numéro dans la marge), s, e, text} ; seulement celles qui ont des lettres */
-    const linesOf = text => { const out = []; let at = 0; String(text).split('\n').forEach((l, i) => { if (l.trim()) out.push({n: i + 1, s: at, e: at + l.length, text: l}); at += l.length + 1; }); return out; };
+    const PAGE_MARK = /^—[ \t]*[\p{L}.]+[ \t]+\d+[^\n—]*—[ \t]*$/u; // 📑 « — page 2 — » (un acte en plusieurs pages) : un repère, pas une ligne de l’acte
+    const linesOf = text => { const out = []; let at = 0; String(text).split('\n').forEach((l, i) => { if (l.trim() && !PAGE_MARK.test(l)) out.push({n: i + 1, s: at, e: at + l.length, text: l}); at += l.length + 1; }); return out; };
     /** combien de lignes relues (pour l'avancement) */
     const reviewedCount = (text, keys) => { const set = new Set(keys || []); const ls = linesOf(text); return {done: ls.filter(l => set.has(lineKey(l.text))).length, total: ls.length}; };
 

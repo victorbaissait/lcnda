@@ -21,3 +21,14 @@ Annexe ¦ Liite ¦ Melléklet
 Une de ces pages est déjà dans un autre document : retire-la d’abord de celui-ci (une page n’appartient qu’à un seul ensemble). ¦ Yksi näistä sivuista on jo toisessa asiakirjassa: poista se ensin sieltä (sivu kuuluu vain yhteen kokonaisuuteen). ¦ Az egyik oldal már egy másik dokumentumhoz tartozik: előbb onnan vedd ki (egy oldal csak egy csoporthoz tartozhat).
 Une des pages n’est plus dans les médias : rien n’a été changé. ¦ Yksi sivuista ei ole enää mediassa: mitään ei muutettu. ¦ Az egyik oldal már nincs a médiában: semmi sem változott.
 Trop de pages dans un même document (200 au plus). ¦ Liian monta sivua yhdessä asiakirjassa (enintään 200). ¦ Túl sok oldal egy dokumentumban (legfeljebb 200).
+# — 2. l’Atelier ouvre toutes les pages (onglets, un seul texte ou un texte par page, ✨ Lire)
+Plusieurs pages ¦ Useita sivuja ¦ Több oldal
+Sur la page affichée ¦ Näytetyllä sivulla ¦ A megjelenített oldalon
+Sur toutes les pages ¦ Kaikilla sivuilla ¦ Az összes oldalon
+Un seul texte, coupé par « — page 2 — » ¦ Yksi teksti, jaettu merkillä ”— sivu 2 —” ¦ Egyetlen szöveg, „— oldal 2 —” jelekkel tagolva
+Un seul texte, coupé par « — page 2 — » (conseillé) ¦ Yksi teksti, jaettu merkillä ”— sivu 2 —” (suositeltu) ¦ Egyetlen szöveg, „— oldal 2 —” jelekkel tagolva (ajánlott)
+Un texte par page ¦ Yksi teksti sivua kohden ¦ Oldalanként egy szöveg
+— page {n} — ¦ — sivu {n} — ¦ — oldal {n} —
+Toutes les pages sont lues (à relire) ¦ Kaikki sivut on luettu (tarkistettava) ¦ Minden oldal beolvasva (ellenőrizendő)
+Réglage gardé : il vaut pour les documents pas encore commencés ; celui-ci garde sa forme. ¦ Asetus tallennettu: se koskee vielä aloittamattomia asiakirjoja; tämä säilyttää muotonsa. ¦ Beállítás megtartva: a még el nem kezdett dokumentumokra vonatkozik; ez megtartja a formáját.
+Cette page fait partie d’un acte en plusieurs pages : son texte se modifie dans l’Atelier de transcription. ¦ Tämä sivu kuuluu monisivuiseen asiakirjaan: sen tekstiä muokataan Litterointipajassa. ¦ Ez az oldal egy több oldalas irat része: a szövege az Átíróműhelyben módosítható.

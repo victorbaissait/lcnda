@@ -304,3 +304,18 @@
 .lb-pages .dpg-head h3{font-size:.9rem}
 :root[data-theme="dark"] .dpg-row{background:#26282c;border-color:#44474d}
 :root[data-theme="dark"] .dpg-thumb{background:#1d1f22;border-color:#44474d}
+/* 📑 l'Atelier sur un document en plusieurs pages : les onglets des pages au-dessus de l'image, « Sur toutes les pages » dans ✨ Lire ▾ */
+.h-tx-pages{display:flex;align-items:center;gap:4px;flex-wrap:nowrap;overflow-x:auto;padding:4px 6px;border-bottom:1px solid var(--line,#ddd);background:var(--soft-bg,#f4f5f7);scrollbar-width:thin}
+.h-tx-pages[hidden]{display:none}
+.h-tx-page{flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line,#ccc);border-radius:7px;background:#fff;padding:3px 9px;font:inherit;font-size:12.5px;cursor:pointer;white-space:nowrap;color:inherit}
+.h-tx-page b{font-size:11px;color:var(--muted,#666)}
+.h-tx-page.is-on{border-color:var(--blue,#0066cc);box-shadow:inset 0 -3px 0 var(--blue,#0066cc);font-weight:600}
+.h-tx-pagesinfo{margin-left:auto;font-size:11.5px;color:var(--muted,#666);white-space:nowrap;padding-left:8px}
+.h-tx-pagesmore{flex:0 0 auto}
+.h-tx-readscope{display:flex;flex-wrap:wrap;gap:4px 12px;padding:6px 10px;font-size:12.5px;border-bottom:1px solid var(--line,#e3e3e3)}
+.h-tx-readscope[hidden]{display:none}
+.h-tx-readscope label{display:inline-flex;align-items:center;gap:5px;cursor:pointer}
+:root[data-theme="dark"] .h-tx-pages{background:#1f2124;border-color:#44474d}
+:root[data-theme="dark"] .h-tx-page{background:#2a2c30;border-color:#4a4d53}
+:root[data-theme="dark"] .h-tx-page b,:root[data-theme="dark"] .h-tx-pagesinfo{color:#a9adb5}
+@media (max-width:640px){.h-tx-pagesinfo{display:none}}

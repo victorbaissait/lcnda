@@ -397,8 +397,8 @@
             try {
                 let acts = []; try { acts = (await A().api('act_transcriptions_media', {media_id: d.id})).items || []; } catch (_) { acts = []; }
                 const again = async () => { cache.delete(d.id); await load(true); if (A().state?.module === 'documents') { paintList(); if (cur === d.id) showDoc(d.id); } };
-                if (b.dataset.ongTxopen && Number(b.dataset.ongTxopen)) await ext.openActTranscriber({id: Number(b.dataset.ongTxopen), onClose: again});
-                else if (acts.length) await ext.openActTranscriber({id: acts[0].id, onClose: again});
+                if (b.dataset.ongTxopen && Number(b.dataset.ongTxopen)) await ext.openActTranscriber({id: Number(b.dataset.ongTxopen), page: d.id, onClose: again});
+                else if (acts.length) await ext.openActTranscriber({id: acts[0].id, page: d.id, onClose: again}); // 📑 une page d'un acte en plusieurs pages : l'Atelier s'ouvre sur elle
                 else await ext.openActTranscriber({mediaId: d.id, filename: d.filename, title: d.title || '', text: d.transcription || '', onClose: again});
             } catch (err) { console.error(err); A().toast(T('L’Atelier de transcription n’a pas pu s’ouvrir : {x}', {x: String(err?.message || err).slice(0, 200)}), 'error'); }
             finally { b.disabled = false; }
