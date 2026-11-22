@@ -32,3 +32,4 @@ Deux mots collés ¦ Dvě slepená slova ¦ Två hopskrivna ord ¦ To ord skreve
 Après « mil {x} », on attend « cent » ¦ Po „mil {x}“ se čeká „cent“ ¦ Efter ”mil {x}” väntas ”cent” ¦ Efter »mil {x}« forventes »cent«
 Dans une date en toutes lettres : « {x} » ¦ V datu psaném slovy: „{x}“ ¦ I ett datum skrivet med bokstäver: ”{x}” ¦ I en dato skrevet med bogstaver: »{x}«
 Un mois, dans une date ¦ Měsíc v datu ¦ En månad, i ett datum ¦ En måned, i en dato
+À cet endroit : « {where} » (ligne {n}) ¦ Na tomto místě: „{where}“ (řádek {n}) ¦ På det här stället: ”{where}” (rad {n}) ¦ På dette sted: »{where}« (linje {n})

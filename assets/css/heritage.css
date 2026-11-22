@@ -437,6 +437,8 @@ mark.h-htr-unsure.is-fixed{background:transparent;box-shadow:inset 0 -2px #2e854
 .h-htr-fixbar .spacer,.h-tx-fixbar .spacer{flex:1}
 .h-htr-fixbar .h-fix-level select,.h-tx-fixbar .h-fix-level select,.h-htr-fixset .h-fix-level select{margin-left:4px}
 .h-htr-fixset-row{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.h-txl-spot{position:absolute;pointer-events:none;border-radius:3px;background:rgba(123,77,214,.22);box-shadow:0 0 0 2px #7b4dd6;z-index:2}
+:root[data-theme="dark"] .h-txl-spot{background:rgba(185,156,255,.28);box-shadow:0 0 0 2px #b99cff}
 .h-tx-mirror u.h-tx-fix{text-decoration:underline wavy #7b4dd6;text-decoration-thickness:1.5px;text-underline-offset:3px}
 .h-tx-mirror u.h-tx-fix.is-sure{text-decoration-style:solid;text-decoration-thickness:2px}
 :root[data-theme="dark"] .h-htr-fix,:root[data-theme="dark"] .h-tx-mirror u.h-tx-fix{text-decoration-color:#b99cff}

@@ -162,7 +162,8 @@
     async function fixLexicon(lang, place = '') {
         const F = window.LCNDA_HTRFIX; if (!F) return null;
         if (!fixNames) fixNames = A().api('htr_lexicon').catch(() => ({}));
-        const names = await fixNames, pers = personalLex(), key = `${lang}|${place}|${pers.join('\u0001')}`;
+        const dico = await F.loadDico?.().catch(() => null); // 📖 le dictionnaire général du français, chargé une fois (un mot juste n'est jamais remplacé)
+        const names = await fixNames, pers = personalLex(), key = `${lang}|${place}|${dico ? 1 : 0}|${pers.join('\u0001')}`;
         if (fixCache?.key !== key) fixCache = {key, lex: F.buildLexicon({lang, names, personal: pers, place})};
         return fixCache.lex;
     }

@@ -32,3 +32,4 @@ Deux mots collés ¦ Kaksi yhteen kirjoitettua sanaa ¦ Két egybeírt szó
 Après « mil {x} », on attend « cent » ¦ Sanojen ”mil {x}” jälkeen odotetaan sanaa ”cent” ¦ A „mil {x}” után „cent” várható
 Dans une date en toutes lettres : « {x} » ¦ Kirjaimin kirjoitetussa päivämäärässä: ”{x}” ¦ Betűvel írt dátumban: „{x}”
 Un mois, dans une date ¦ Kuukausi päivämäärässä ¦ Egy hónap, dátumban
+À cet endroit : « {where} » (ligne {n}) ¦ Tässä kohdassa: ”{where}” (rivi {n}) ¦ Ezen a helyen: „{where}” ({n}. sor)
