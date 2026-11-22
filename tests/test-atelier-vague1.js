@@ -125,6 +125,38 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: {...env, TX
             await p.evaluate(() => localStorage.removeItem('genealogie-transcribe-bar'));
         });
 
+        /* ─── 3. un seul bouton « ✨ Lire ▾ » ─── */
+        const readPanel = () => p.evaluate(() => { const pn = document.querySelector('dialog.h-tx-dlg [data-tx-readpanel]'), r = pn.getBoundingClientRect();
+            return {open: !pn.hidden && r.width > 0, left: Math.round(r.left), right: Math.round(r.right), items: [...pn.querySelectorAll('.h-tx-readopt[data-tx-cmd]')].map(b => ({cmd: b.dataset.txCmd, title: b.querySelector('b')?.textContent || b.textContent.trim(), what: b.querySelector('small')?.textContent || '', st: b.querySelector('[data-tx-readst]')?.dataset.state || '', stText: b.querySelector('[data-tx-readst]')?.textContent || ''}))}; });
+        await t('« ✨ Lire ▾ » : un seul bouton à droite, plus trois boutons de lecture qui se ressemblent', async () => {
+            const o = await p.evaluate(() => { const d = document.querySelector('dialog.h-tx-dlg'), vis = el => el.getBoundingClientRect().width > 0;
+                return {read: [...d.querySelectorAll('[data-tx-cmd="readmenu"]')].filter(vis).map(b => b.textContent.trim()), loose: [...d.querySelectorAll('[data-tx-cmd="ocr"], [data-tx-cmd="htr"], [data-tx-cmd="deep"], [data-tx-lang], [data-tx-useenh]')].filter(el => !el.closest('[data-tx-readpanel]')).length}; });
+            assert.equal(o.read.length, 1); assert.match(o.read[0], /^✨ Lire ▾$/); assert.equal(o.loose, 0, 'les lectures, la langue et l’image améliorée sont dans le menu');
+        });
+        await t('le menu : trois lectures, chacune avec une phrase qui dit la différence et son état (installé / à installer)', async () => {
+            await p.click('dialog.h-tx-dlg [data-tx-cmd="readmenu"]');
+            await p.waitForFunction(() => [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-readst]')].every(x => x.dataset.state), null, {timeout: 15000});
+            const r = await readPanel(); assert.ok(r.open);
+            assert.deepEqual(r.items.map(x => x.cmd), ['htr', 'ocr', 'deep', 'lines']);
+            assert.deepEqual(r.items.slice(0, 3).map(x => x.title), ['Lire l’écriture à la main (rapide)', 'Lire un texte imprimé', 'Lecture approfondie (IA)']);
+            const [htr, ocr, deep] = r.items;
+            assert.match(htr.what, /secondes/); assert.match(htr.what, /reliée à sa zone/); assert.match(htr.what, /S’installe/);
+            assert.match(ocr.what, /imprimé/); assert.match(ocr.what, /rien à installer/); assert.match(ocr.what, /écriture à la main/);
+            assert.match(deep.what, /lente/); assert.match(deep.what, /Ollama/); assert.match(deep.what, /relient ensuite/);
+            assert.equal(ocr.st, 'ok'); assert.match(ocr.stText, /Installé/i); assert.equal(htr.st, 'todo'); assert.match(htr.stText, /À installer/i); assert.equal(deep.st, 'todo');
+            assert.ok(await p.evaluate(() => !!document.querySelector('dialog.h-tx-dlg [data-tx-readpanel] select[data-tx-lang]') && !!document.querySelector('dialog.h-tx-dlg [data-tx-readpanel] .ui-toggle [data-tx-useenh]')), 'la langue et « image améliorée » dans le menu');
+            await shot('v1-lire-menu.png');
+            await theme('dark'); await sleep(150); await shot('v1-lire-menu-sombre.png'); await theme('');
+            await p.keyboard.press('Escape'); await sleep(100); assert.equal((await readPanel()).open, false, 'Échap ferme le menu');
+        });
+        await t('une entrée du menu lance sa lecture et ferme le menu (Lecture approfondie → sa fenêtre)', async () => {
+            await p.click('dialog.h-tx-dlg [data-tx-cmd="readmenu"]'); await p.click('dialog.h-tx-dlg [data-tx-readpanel] [data-tx-cmd="deep"]');
+            await p.waitForFunction(() => document.querySelector('[data-txa-deep]'), null, {timeout: 15000});
+            assert.equal((await readPanel()).open, false);
+            await p.evaluate(() => { const d = document.querySelector('[data-txa-deep]').closest('dialog'); d.querySelector('[data-x], .modal-head .icon-button')?.click(); }); await sleep(300);
+            await p.evaluate(() => document.querySelector('[data-txa-deep]')?.closest('dialog')?.close());
+        });
+
         await t('aucune erreur JavaScript', async () => { assert.deepStrictEqual(errs, []); });
     } finally {
         await browser.close(); proc.kill(); fs.rmSync(tmp, {recursive: true, force: true});

@@ -185,6 +185,28 @@
     };
     ext.htrFix = {fixOn, fixLevel, personalLex, fixSettingsHtml, bindFixSettings, lexicon: fixLexicon, addToLexicon, menu: fixMenu, KEYS: {FIX_KEY, FIX_LEVEL_KEY, FIX_LEX_KEY}};
 
+    /* ═════════ « ✨ Lire ▾ » : un seul bouton, trois lectures expliquées (maquette atelier-transcription-idees.html, P2) ═════════ */
+    // [commande, symbole, nom, ce qui la distingue] — la lecture à la main d'abord : c'est la plus utile pour les registres
+    const READS = [
+        ['htr', '✍️', 'Lire l’écriture à la main (rapide)', 'Quelques secondes par page, sur cet ordinateur. Toute la page ou la zone choisie (▭) ; chaque ligne est reliée à sa zone de l’image, les mots peu sûrs surlignés. S’installe une fois (Réglages).'],
+        ['ocr', '🖨', 'Lire un texte imprimé', 'Pour un texte imprimé ou tapé (journaux, fiches matricules) : rapide, rien à installer, chaque ligne reliée à sa zone. Ne sait pas lire l’écriture à la main.'],
+        ['deep', '🔬', 'Lecture approfondie (IA)', 'Plus lente (de 20 s à quelques minutes par page) mais meilleure sur une écriture difficile : un modèle d’IA qui tourne sur cet ordinateur (Ollama, plusieurs Go à télécharger une fois). Les lignes se relient ensuite à l’image (▤).'],
+    ];
+    function readPanelHtml() {
+        const opt = ([k, ic, label, what]) => `<button type="button" class="h-tx-readopt" data-tx-cmd="${k}" role="menuitem"><span class="h-tx-readt">${ic} <b>${esc(i18n(label))}</b><span class="h-tx-readst" data-tx-readst="${k}"></span></span><small>${esc(i18n(what))}</small></button>`;
+        return `<div class="h-tx-readpanel" data-tx-readpanel hidden role="menu" aria-label="${esc(i18n('Lire'))}">${READS.map(opt).join('')}
+            <div class="h-tx-readmore"><button type="button" class="h-tx-readopt h-tx-readline" data-tx-cmd="lines" role="menuitem" title="${esc(i18n('Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis'))}">▤ ${esc(i18n('Relier les lignes à l’image'))}</button>
+            <label class="h-tx-readlang">🌐 ${esc(i18n('Langue du texte'))} <select data-tx-lang title="${esc(i18n('Langue du texte : sert à la lecture automatique, et « 📖 Aide à la lecture » s’ouvre sur cette langue'))}">${txLangs().map(([v, l]) => `<option value="${esc(v)}" ${txLang() === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+            <label class="ui-toggle h-tx-useenh" title="${esc(i18n('La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine'))}"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}><i></i>${i18n('Lire et exporter l’image améliorée')}</label></div></div>`;
+    }
+    /** l'état de chaque lecture : installée ou à installer (demandé à l'ouverture du menu, gardé une minute) */
+    let readSt = null, readStAt = 0;
+    async function readStates() {
+        if (readSt && Date.now() - readStAt < 60000) return readSt;
+        const [h, d] = await Promise.all([api('htr_setup_status').catch(() => null), api('tx_deep_status').catch(() => null)]);
+        readSt = {ocr: true, htr: !!(h && h.ready && (h.models || []).some(m => m.present)), deep: !!(d && d.local_only !== false && d.running && (d.models || []).some(m => m.present))}; readStAt = Date.now(); return readSt;
+    }
+
     /* ═════════ L'atelier ═════════ */
     async function open(ctx = {}) {
         const TV = ext.txView; // « 🎚️ Mieux voir » et la barre réglable (heritage-transcribe-view.js)
@@ -208,10 +230,9 @@
                     <div class="h-tx-zonebar" data-tx-zonebar hidden></div>
                 </section>
                 <section class="h-tx-right">
-                    <div class="h-tx-tools"><button type="button" data-tx-cmd="ocr" title="${esc(i18n('Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne)'))}">🔎 ${i18n('Lire (imprimé)')}</button><button type="button" data-tx-cmd="htr" title="${esc(i18n('Lire l’écriture à la main : toute la page, ou seulement la zone choisie (▭). Le texte est proposé ligne par ligne, à relire.'))}" data-help="${esc(i18n('La lecture d’une écriture à la main (HTR), sur cet ordinateur : le texte est proposé ligne par ligne à côté de l’image, les mots peu sûrs surlignés. Elle s’installe une fois dans les Réglages. Relis toujours : elle se trompe sur les noms.'))}" data-help-faq="Lire l’acte">✨ ${i18n('Lire l’acte')}</button><button type="button" data-tx-cmd="deep" class="h-tx-deepbtn" title="${esc(i18n('Un modèle « vision » ouvert qui tourne sur ton ordinateur (Ollama) : lit mieux les écritures difficiles, plus lent'))}">🔍 ${i18n('Lecture approfondie (IA)')}</button><button type="button" data-tx-cmd="lines" title="${esc(i18n('Relier chaque ligne du texte à sa ligne sur l’image (zones de couleur, clic ligne ↔ zone) : après la lecture approfondie, ou sur un texte déjà mis'))}">▤ ${i18n('Relier les lignes à l’image')}</button><span class="h-tx-htrrun" data-tx-htrrun hidden>${window.LCNDA_UI.spinner('', {inline: true})}<button type="button" class="button small secondary" data-tx-cmd="htrstop" title="${esc(i18n('Arrêter la lecture'))}">■ ${i18n('Arrêter')}</button></span>
-                        <select data-tx-lang title="${esc(i18n('Langue du texte : sert à la lecture automatique, et « 📜 Aide à la lecture » s’ouvre sur cette langue'))}">${txLangs().map(([v, l]) => `<option value="${esc(v)}" ${txLang() === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>
+                    <div class="h-tx-tools"><span class="h-tx-readw"><button type="button" class="h-tx-readbtn" data-tx-cmd="readmenu" aria-haspopup="true" aria-expanded="false" title="${esc(i18n('Lire le texte de l’image : écriture à la main, texte imprimé, ou lecture approfondie par l’IA'))}">✨ ${esc(i18n('Lire'))} ▾</button>${readPanelHtml()}</span><span class="h-tx-htrrun" data-tx-htrrun hidden>${window.LCNDA_UI.spinner('', {inline: true})}<button type="button" class="button small secondary" data-tx-cmd="htrstop" title="${esc(i18n('Arrêter la lecture'))}">■ ${i18n('Arrêter')}</button></span>
                         <button type="button" data-tx-cmd="template" title="${esc(i18n('Un modèle d’acte à compléter'))}">📋 ${i18n('Modèle')}</button><button type="button" data-tx-cmd="aide" title="${esc(i18n('Le latin des registres, les abréviations, les anciennes lettres (ſ, ꝑ…) et des exercices : choisis d’abord un mot dans le texte pour le chercher'))}">📜 ${i18n('Aide à la lecture')}</button><button type="button" data-tx-cmd="fix" title="${esc(i18n('Proposer des corrections pour les mots mal lus (un mot souligné : clique-le pour choisir)'))}">🪄 ${i18n('Corrections')}</button><button type="button" data-tx-cmd="detect" title="${esc(i18n('Repérer les noms, dates, lieux et métiers'))}" data-help="${esc(i18n('Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.'))}">🧭 ${i18n('Repérer')}</button><span class="spacer"></span>
-                        <span class="h-tx-extra"><button type="button" data-tx-cmd="found" title="${esc(i18n('L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches'))}">🧭 ${i18n('Ce que l’app a trouvé…')}</button><button type="button" data-tx-cmd="copy">📋 ${i18n('Copier le texte')}</button><label class="ui-toggle h-tx-useenh" title="${esc(i18n('La lecture (imprimé et manuscrit) et l’export prennent l’image avec les réglages « Mieux voir » (contraste, netteté, canal, seuil…), sinon l’image d’origine'))}"><input type="checkbox" data-tx-useenh ${useEnh() ? 'checked' : ''}><i></i>${i18n('Lire et exporter l’image améliorée')}</label></span></div>
+                        <span class="h-tx-extra"><button type="button" data-tx-cmd="found" title="${esc(i18n('L’événement, les personnes et leurs liens, la source : relier, comparer ou créer les fiches'))}">🧭 ${i18n('Ce que l’app a trouvé…')}</button><button type="button" data-tx-cmd="copy">📋 ${i18n('Copier le texte')}</button></span></div>
                     <div class="h-tx-chars">${SPECIAL.map(c => `<button type="button" data-tx-char="${esc(c)}" title="${esc(i18n('Insérer {c}', {c: esc(c)}))}">${esc(c)}</button>`).join('')}</div>
                     <div class="h-tx-editor"><div class="h-tx-mirror" data-tx-mirror aria-hidden="true"></div><textarea data-tx-body spellcheck="false" placeholder="${esc(i18n('La transcription, ligne à ligne comme sur l’acte. Choisis un passage, puis dessine sa zone sur l’image (▭ Zone) : les deux restent liés.'))}">${esc(t.body)}</textarea></div>
                     <div class="h-tx-fixbar" data-tx-fixbar hidden></div>
@@ -950,6 +971,8 @@
             if (e.target.closest('[data-tx-zdel]')) return deleteZone();
             const c = e.target.closest('[data-tx-cmd]'); if (!c) return; c.closest('details')?.removeAttribute('open');
             const k = c.dataset.txCmd;
+            if (k === 'readmenu') { toggleRead(); return; }
+            if (c.closest('[data-tx-readpanel]')) toggleRead(false);
             if (k === 'close') return close();
             if (k === 'save') return save();
             if (k === 'image') return pickImage();
@@ -997,7 +1020,15 @@
             if (e.target.matches('[data-tx-lang]')) { try { localStorage.setItem(TX_LANG_KEY, e.target.value); } catch (_) {} if (found.length) paintPeople(); } }); // la langue : retenue, et les mots connus suivent
         /* ─── « 🎚️ Mieux voir » (disposition B) : un panneau qui s'ouvre sous son bouton ─── */
         const togglePanel = (open) => { const pn = $('[data-tx-panel]'), b = $('[data-tx-cmd="better"]'); if (!pn) return; const on = open ?? pn.hidden; pn.hidden = !on; b.setAttribute('aria-expanded', String(on)); b.classList.toggle('is-active', on); };
-        dlg.addEventListener('pointerdown', e => { const pn = $('[data-tx-panel]'); if (pn && !pn.hidden && !e.target.closest('[data-tx-item="better"]')) togglePanel(false); });
+        dlg.addEventListener('pointerdown', e => { const pn = $('[data-tx-panel]'); if (pn && !pn.hidden && !e.target.closest('[data-tx-item="better"]')) togglePanel(false);
+            const rp = $('[data-tx-readpanel]'); if (rp && !rp.hidden && !e.target.closest('.h-tx-readw')) toggleRead(false); });
+        /* ─── « ✨ Lire ▾ » : le menu des trois lectures, avec l'état de chacune ─── */
+        function toggleRead(open) {
+            const pn = $('[data-tx-readpanel]'), b = $('[data-tx-cmd="readmenu"]'); if (!pn) return; const on = open ?? pn.hidden; pn.hidden = !on; b.setAttribute('aria-expanded', String(on)); b.classList.toggle('is-active', on);
+            if (!on) return; pn.querySelector('.h-tx-readopt:not(:disabled)')?.focus();
+            readStates().then(st => { if (!dlg.isConnected) return; pn.querySelectorAll('[data-tx-readst]').forEach(el => { const ok = st[el.dataset.txReadst];
+                el.innerHTML = UI.badge ? UI.badge(ok ? i18n('Installé') : i18n('À installer'), ok ? 'green' : 'yellow') : esc(ok ? i18n('Installé') : i18n('À installer')); el.dataset.state = ok ? 'ok' : 'todo'; }); });
+        }
         /* ─── la barre se redessine quand on la règle (⚙️, ou Réglages) ─── */
         let narrow = false; const isNarrow = () => ($('.h-tx-left')?.getBoundingClientRect().width || 1000) < 620;
         function renderBar() { narrow = isNarrow(); $('[data-tx-barwrap]').innerHTML = TV.toolbarHtml(t.data.view, TV.barCfg(), {narrow}); setTool(tool); paintZoomLabel(); paintBadge(); paintLoupeBtn(); }
@@ -1025,6 +1056,7 @@
             if (!dlg.open || [...document.querySelectorAll('dialog[open]')].at(-1) !== dlg) return; // une fenêtre par-dessus (confirmation…) garde ses touches
             if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); save(); return; }
             if (e.key === 'Escape' && e.target.closest?.('[data-tx-panel]')) { e.preventDefault(); e.stopPropagation(); togglePanel(false); $('[data-tx-cmd="better"]')?.focus(); return; }
+            if (e.key === 'Escape' && $('[data-tx-readpanel]') && !$('[data-tx-readpanel]').hidden) { e.preventDefault(); e.stopPropagation(); toggleRead(false); $('[data-tx-cmd="readmenu"]')?.focus(); return; }
             if (e.target.closest?.('input, textarea, select')) return;
             if (e.target.closest?.('button, [contenteditable="true"]') && (e.key === ' ' || e.key === 'Enter')) return;
             const mod = e.metaKey || e.ctrlKey, k = e.key.toLowerCase();

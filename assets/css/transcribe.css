@@ -48,6 +48,21 @@
 .h-tx-better .h-tx-chanw{display:grid;grid-template-columns:118px 1fr;align-items:center;gap:8px;width:100%}
 .h-tx-better .h-tx-ck{font-size:13px}
 .h-tx-better .h-tx-rub-act{display:flex;gap:8px;flex-wrap:wrap}
+/* ✨ Lire ▾ : un seul bouton, le menu des trois lectures */
+.h-tx-readw{position:relative;display:inline-flex}
+.h-tx-tools .h-tx-readbtn{font-weight:600}
+.h-tx-tools .h-tx-readbtn.is-active{background:#1473e6;color:#fff;border-color:#1473e6}
+.h-tx-readpanel{position:absolute;left:0;top:calc(100% + 6px);z-index:20;width:min(440px,calc(100vw - 32px));max-height:calc(100vh - 150px);overflow:auto;background:#fff;border:1px solid #d6d6db;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,.22);padding:6px;display:grid;gap:2px}
+.h-tx-readpanel[hidden]{display:none}
+.h-tx-tools .h-tx-readpanel .h-tx-readopt{display:grid;gap:2px;width:100%;text-align:left;border:0;border-radius:8px;background:none;padding:8px 10px;white-space:normal;cursor:pointer;font:inherit;color:inherit}
+.h-tx-tools .h-tx-readpanel .h-tx-readopt:hover,.h-tx-tools .h-tx-readpanel .h-tx-readopt:focus-visible{background:#f0f5ff}
+.h-tx-readt{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.h-tx-readst{margin-left:auto}
+.h-tx-readopt small{color:#6e6e73;font-size:12px;line-height:1.4}
+.h-tx-readmore{border-top:1px solid #eee;margin-top:4px;padding:6px 4px 2px;display:grid;gap:8px}
+.h-tx-tools .h-tx-readpanel .h-tx-readline{padding:6px}
+.h-tx-readlang{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;padding:0 6px}
+.h-tx-readpanel .h-tx-useenh{padding:0 6px;white-space:normal}
 .h-tx-better .h-tx-recipes{display:grid;gap:4px}
 .h-tx-better .h-tx-recipe{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 10px;text-align:left;padding:6px 8px}
 .h-tx-better .h-tx-recipe small{color:#6e6e73;font-size:12px}
@@ -86,6 +101,11 @@
 :root[data-theme="dark"] .h-tx-better{background:#24272c;border-color:#3a3f46;box-shadow:0 12px 32px rgba(0,0,0,.6)}
 :root[data-theme="dark"] .h-tx-better h4,:root[data-theme="dark"] .h-tx-better .h-tx-recipe small{color:#a1a1a6}
 :root[data-theme="dark"] .h-tx-better .h-tx-allt{border-color:#3a3f46}
+:root[data-theme="dark"] .h-tx-readpanel{background:#24272c;border-color:#3a3f46;box-shadow:0 12px 32px rgba(0,0,0,.6)}
+:root[data-theme="dark"] .h-tx-tools .h-tx-readpanel .h-tx-readopt{background:none}
+:root[data-theme="dark"] .h-tx-tools .h-tx-readpanel .h-tx-readopt:hover,:root[data-theme="dark"] .h-tx-tools .h-tx-readpanel .h-tx-readopt:focus-visible{background:#2f3a4a}
+:root[data-theme="dark"] .h-tx-readopt small{color:#a1a1a6}
+:root[data-theme="dark"] .h-tx-readmore{border-color:#3a3f46}
 :root[data-theme="dark"] .h-tx-better .h-tx-rub+.h-tx-rub{border-color:#3a3f46}
 :root[data-theme="dark"] .h-tx-better button{background:#2c3036;border-color:#3a3f46;color:#e6e6e6}
 :root[data-theme="dark"] .h-tx-better .h-tx-seg button.is-active,:root[data-theme="dark"] .h-tx-tools .h-tx-seg button.is-active{background:#1473e6;border-color:#1473e6;color:#fff}

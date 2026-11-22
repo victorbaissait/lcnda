@@ -181,7 +181,9 @@ const freePort = () => new Promise(res => { const s = net.createServer(); s.list
                 // f. 390 px : les commandes sorties de l'ancien « Plus ▾ » (Ce que l'app a trouvé, Copier, image améliorée) restent dans l'écran
                 await p.setViewportSize({ width: 390, height: 844 });
                 await p.evaluate(() => window.LCNDA_EXT.openActTranscriber({ mediaId: 1, filename: 'acte.png', title: 'T' })); await p.waitForTimeout(1200);
-                out.more390 = await p.evaluate(() => { const els = [...document.querySelectorAll('dialog.h-tx-dlg .h-tx-extra > *')]; if (!els.length) return [-1, 9999]; const rs = els.map(e => e.getBoundingClientRect()); return [Math.round(Math.min(...rs.map(r => r.left))), Math.round(Math.max(...rs.map(r => r.right)))]; });
+                // « image améliorée » est dans le menu « ✨ Lire ▾ » (vague 1) : on l'ouvre, l'interrupteur compte avec les autres
+                await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-cmd="readmenu"]').click()); await p.waitForTimeout(200);
+                out.more390 = await p.evaluate(() => { const els = [...document.querySelectorAll('dialog.h-tx-dlg .h-tx-extra > *'), document.querySelector('dialog.h-tx-dlg .h-tx-useenh')].filter(Boolean); if (els.length < 3 || els.some(e => !e.getBoundingClientRect().width)) return [-1, 9999]; const rs = els.map(e => e.getBoundingClientRect()); return [Math.round(Math.min(...rs.map(r => r.left))), Math.round(Math.max(...rs.map(r => r.right)))]; });
                 out.errs = errs;
             } finally { await browser.close(); }
         }
