@@ -197,8 +197,8 @@ $pdo->exec("INSERT INTO media(title, media_type, filename) VALUES('Naissance Gar
         await shot('txl-2-zones-kraken.png');
         // clic ligne → zone : le curseur dans la 2e ligne allume sa zone ; clic zone → ligne : le texte de la zone est choisi
         out.lineToZone = await p.evaluate(t => { const d = document.querySelector('dialog.h-tx-dlg'), a = d.querySelector('[data-tx-body]'), at = a.value.indexOf(t) + 3; a.focus(); a.setSelectionRange(at, at); a.dispatchEvent(new MouseEvent('click', { bubbles: true })); const r = d.querySelector('[data-tx-zones] rect.is-sel'); return r ? +r.getAttribute('y') : -1; }, IMG[1].slice(0, 20));
+        await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-tool="pan"]')?.click()); await sleep(800); // l'image glisse jusqu'à la zone allumée : on attend qu'elle soit arrivée
         const r6 = await p.evaluate(y => { const r = [...document.querySelectorAll('dialog.h-tx-dlg [data-tx-zones] rect')].find(x => +x.getAttribute('y') === y); const b = r.getBoundingClientRect(); return { x: b.x + b.width / 2, y: b.y + b.height / 2 }; }, BOX[6][1]);
-        await p.evaluate(() => document.querySelector('dialog.h-tx-dlg [data-tx-tool="pan"]')?.click());
         await p.mouse.click(r6.x, r6.y); await sleep(200);
         out.zoneToLine = await p.evaluate(() => { const a = document.querySelector('dialog.h-tx-dlg [data-tx-body]'); return a.value.slice(a.selectionStart, a.selectionEnd); });
         // ↶ Annuler (le message) : plus de zone

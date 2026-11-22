@@ -845,7 +845,11 @@
             const put = list => () => { snap(); t.data.zones = list.map(z => ({...z})); if (!t.data.zones.some(z => z.id === selZone)) selZone = null; touch(); drawZones(); };
             const msg = [`▤ ${i18n('Lignes reliées à l’image : {x}', {x: A().plural ? A().plural(made.length, 'zone') : made.length})}`, r.doubt ? i18n('à vérifier (❔) : {n}', {n: r.doubt}) : '', r.missing.length ? i18n('sans zone : {n}', {n: r.missing.length}) : '',
                 B.how === 'htr' ? i18n('d’après la lecture rapide') : i18n('d’après un découpage simple de l’image')].filter(Boolean).join(' · ');
-            status(msg); (A().undoToast || toast)(msg, {undo: put(prev), redo: put(next)});
+            status(msg); const note = (A().undoToast || toast)(msg, {undo: put(prev), redo: put(next)});
+            // le texte de toutes ces lignes remplacé ou effacé : le message « ↶ Annuler » n'a plus de sens et s'en va
+            const was = new Map(made.map(m => [m.id, area.value.slice(m.s, m.e)]));
+            const gone = () => { if (!note?.isConnected) { area.removeEventListener('input', gone); return; } if (!t.data.zones.some(z => was.has(z.id) && z.e > z.s && area.value.slice(z.s, z.e) === was.get(z.id))) { note.close?.(); area.removeEventListener('input', gone); } };
+            area.addEventListener('input', gone);
             dlg.dataset.txLines = JSON.stringify({zones: made.length, doubt: r.doubt, missing: r.missing.length, how: B.how, mode: r.mode}); // pour les essais
             return r;
         }
