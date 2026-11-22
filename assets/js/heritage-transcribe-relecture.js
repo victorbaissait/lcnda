@@ -32,7 +32,7 @@
         dlg.innerHTML = `<div class="h-txr" role="document">
             <header class="h-txr-top"><b>👁 ${esc(i18n('Relecture'))}</b><span class="h-txr-title" data-i18n-off>${esc(ctx.title || '')}</span><span class="h-txr-pos" data-txr-pos></span>
                 <span class="h-txr-prog" data-txr-prog><span class="h-txr-progbar"><b data-txr-progfill></b></span><small data-txr-done></small></span><span class="spacer"></span>
-                <button type="button" class="button small secondary" data-txr="close" title="${esc(i18n('Fermer'))} (Échap)">× ${esc(i18n('Fermer'))}</button></header>
+                <button type="button" class="button small secondary" data-txr="close" title="${esc(i18n('Fermer'))}" data-shortcut="Échap">× ${esc(i18n('Fermer'))}</button></header>
             <div class="h-txr-body">
                 <p class="h-txr-ctx" data-txr-prev data-i18n-off></p>
                 <div class="h-txr-band" data-txr-band><canvas data-txr-img role="img" aria-label="${esc(i18n('Le morceau d’image de la ligne'))}"></canvas><p class="h-txr-noimg" data-txr-noimg hidden>${esc(i18n('Pas de zone pour cette ligne : dessine-la sur l’image (▭), elle restera reliée.'))}</p></div>
