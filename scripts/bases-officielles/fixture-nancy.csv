@@ -1,0 +1,6 @@
+Nom conflit,Nom,Prenoms,Grade,Corps,Numero matricule,Date de naissance,Departement de naissance,Commune de naissance,Date de deces,Pays de deces,Departement de deces,Commune de deces,Mort pour la France
+1GM,LACOMBE,Charles Louis,Soldat,26e R.I.,1362 - Nancy,18/07/1886,Meurthe-et-Moselle,Nancy,26/08/1914,France,Meurthe-et-Moselle,Vitrimont,Oui
+1GM,ACKERMANN  ,Marcel Emile Marie,Zouave,3e R.Z.,834 - Toul,15/02/1897,Meurthe-et-Moselle,Nancy,16/04/1917,France,Marne,Cormicy-La Neuville,Oui
+1GM,ADAM,Charles Ernest Maurice,Capitaine,26e R.I.,2385 - Seine,02/04/1876,Somme,Amiens,15/08/1914,France,Meurthe-et-Moselle,Juvrecourt,Oui
+2GM,ADAMY,Adolphe Antoine,Soldat,148e R.I.F.,692 - Sarreguemines,13/03/1906,Moselle,Amneville,10/05/1940,France,Ardennes,Dom-le-Mesnil,Oui
+"1GM,CARY,Auguste Emile,Soldat,18e B.C.P.,400 - Toul,28/11/1895,Meurthe-et-Moselle,Nancy,08/07/1917,France,Aisne,""Ferme du Pantheon, Chemin des Dames"",Oui"

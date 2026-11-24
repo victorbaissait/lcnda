@@ -99,6 +99,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/archives-en-ligne.css?v=1">
     <link rel="stylesheet" href="assets/css/semaine.css?v=3">
     <link rel="stylesheet" href="assets/css/ou-chercher.css?v=2">
+    <link rel="stylesheet" href="assets/css/ou-chercher-monde.css?v=1">
     <link rel="stylesheet" href="assets/css/archives-dispo.css?v=1">
     <link rel="stylesheet" href="assets/css/recherche-fr.css?v=2">
     <link rel="stylesheet" href="assets/css/preuve.css?v=1">
@@ -1418,9 +1419,12 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-archives-en-ligne.js?v=2" defer></script>
 <script src="assets/js/heritage-journal.js?v=4" defer></script>
 <script src="assets/js/heritage-semaine.js?v=5" defer></script>
-<script src="assets/js/app-ou-chercher-core.js?v=4" defer></script>
+<script src="assets/js/app-ou-chercher-core.js?v=5" defer></script>
 <script src="assets/js/app-ou-chercher-sortes.js?v=1" defer></script>
-<script src="assets/js/heritage-ou-chercher.js?v=3" defer></script>
+<script src="assets/js/heritage-ou-chercher.js?v=4" defer></script>
+<script src="assets/js/app-ou-chercher-monde.js?v=1" defer></script>
+<script src="assets/js/app-ou-chercher-openarch.js?v=1" defer></script>
+<script src="assets/js/heritage-ou-chercher-plus.js?v=1" defer></script>
 <script src="assets/js/heritage-preuve.js?v=4" defer></script>
 <script src="assets/js/heritage-biographie.js?v=4" defer></script>
 <script src="assets/js/heritage-journee.js?v=1" defer></script>

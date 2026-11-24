@@ -403,7 +403,7 @@ def main():
         out = a.dossier_fixture or a.dossier
         os.makedirs(out, exist_ok=True)
         rep = build_mpf(out, out, os.path.join(HERE, 'fixture-canope.csv'), os.path.join(HERE, 'fixture-nancy.csv'), fixture=True)
-        rep.update(build_leonore(out, out, os.path.join(HERE, 'fixture-leonore.csv'), fixture=True, web={'19800035/1281/47851': '204770'}))
+        rep.update(build_leonore(out, out, os.path.join(HERE, 'fixture-leonore.csv'), fixture=True, web={'19800035/1303/50521': '3'}))
         print(json.dumps(rep, ensure_ascii=False, indent=1))
         return
     out = a.dossier; cache = os.path.join(out, 'cache')

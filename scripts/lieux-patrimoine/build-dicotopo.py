@@ -46,7 +46,7 @@ def log(*a):
 
 
 class Fetcher:
-    def __init__(self, cache, offline=None, pause=0.3):
+    def __init__(self, cache, offline=None, pause=0.2):
         self.cache, self.offline, self.pause, self.calls = cache, offline, pause, 0
         os.makedirs(cache, exist_ok=True)
 
@@ -84,43 +84,35 @@ def q(query, size=PAGE, number=1):
     return '/search?' + urllib.parse.urlencode({'query': query, 'page[size]': size, 'page[number]': number, 'without-relationships': ''})
 
 
-def count(F, query):
-    return int(F.get(q(query, 1))['meta']['total-count'])
-
-
-def fetch_all(F, query, depth_prefix, dep, kind):
-    """tous les documents d'une recherche, en la découpant par début de code INSEE tant qu'elle dépasse une page"""
-    n = count(F, query)
-    if n == 0:
-        return []
+def fetch_all(F, query, prefix, dep, kind):
+    """tous les documents d'une recherche : par pages de 1 000 (la fenêtre de l'API s'arrête à 10 000) ; au-delà, ou si des
+    documents manquent (ordre instable d'une page à l'autre), la recherche est découpée par début de code INSEE"""
+    first = F.get(q(query))
+    n = int(first['meta']['total-count'])
+    docs = {str(d['id']): d for d in first['data']}
     if n <= PAGE:
-        return F.get(q(query))['data']
-    if len(depth_prefix) < 5:
-        out = []
-        for d in '0123456789AB' if len(depth_prefix) == 2 and dep in ('2A', '2B') else '0123456789':
-            out += fetch_all(F, f'dep-id:{dep} AND type:{kind} AND localization-insee-code:{depth_prefix}{d}*', depth_prefix + d, dep, kind)
-        return out
-    # une seule commune avec plus de 1 000 réponses : par pages (la fenêtre de l'API s'arrête à 10 000)
-    out = []
-    for page in range(1, min(10, (n + PAGE - 1) // PAGE) + 1):
-        out += F.get(q(query, PAGE, page))['data']
-    return out
+        return list(docs.values())
+    if n <= 10 * PAGE:
+        for page in range(2, (n + PAGE - 1) // PAGE + 1):
+            docs.update({str(d['id']): d for d in F.get(q(query, PAGE, page))['data']})
+        if len(docs) >= n or prefix is None or len(prefix) >= 5:
+            return list(docs.values())
+    if prefix is None or len(prefix) >= 5:
+        log(f'   ⚠ {query} : {len(docs)} reçus sur {n}')
+        return list(docs.values())
+    for d in '0123456789AB' if len(prefix) == 2 and dep in ('2A', '2B') else '0123456789':
+        for x in fetch_all(F, f'dep-id:{dep} AND type:{kind} AND localization-insee-code:{prefix}{d}*', prefix + d, dep, kind):
+            docs[str(x['id'])] = x
+    return list(docs.values())
 
 
 def dep_docs(F, dep, kind):
-    docs = fetch_all(F, f'dep-id:{dep} AND type:{kind} AND localization-insee-code:{dep}*', dep, dep, kind)
-    rest = f'dep-id:{dep} AND type:{kind} AND NOT localization-insee-code:{dep}*'
-    n = count(F, rest)
-    if n:
-        for page in range(1, min(10, (n + PAGE - 1) // PAGE) + 1):
-            docs += F.get(q(rest, PAGE, page))['data']
-    total = count(F, f'dep-id:{dep} AND type:{kind}')
-    seen = {}
-    for d in docs:
-        seen[str(d['id'])] = d
-    if len(seen) < total:
-        log(f'   ⚠ {dep} {kind} : {len(seen)} reçus sur {total} annoncés')
-    return list(seen.values())
+    docs = {str(d['id']): d for d in fetch_all(F, f'dep-id:{dep} AND type:{kind} AND localization-insee-code:{dep}*', dep, dep, kind)}
+    docs.update({str(d['id']): d for d in fetch_all(F, f'dep-id:{dep} AND type:{kind} AND NOT localization-insee-code:{dep}*', None, dep, kind)})
+    total = int(F.get(q(f'dep-id:{dep} AND type:{kind}', 1))['meta']['total-count'])
+    if len(docs) < total:
+        log(f'   ⚠ {dep} {kind} : {len(docs)} reçus sur {total} annoncés')
+    return list(docs.values())
 
 
 SC = re.compile(r'<span class="sc">(.*?)</span>', re.S)
