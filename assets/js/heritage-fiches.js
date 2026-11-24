@@ -216,6 +216,9 @@
             case 'text': return b.text ? `<div class="h-fi-text">${md(b.text)}</div>` : '<p class="muted">Texte vide : ✎ pour l’écrire.</p>';
             case 'quote': return b.text ? `<figure class="h-fi-quote"><blockquote>${esc(b.text).replace(/\n/g, '<br>')}</blockquote>${b.source ? `<figcaption>— ${esc(b.source)}</figcaption>` : ''}</figure>` : '<p class="muted">Citation vide : ✎ pour l’écrire.</p>';
             case 'images': { const ms = mediaOf(b); return ms.length ? `<div class="h-fi-imgs is-${esc(b.layout || 'grid')}">${ext.thumbs ? ext.thumbs('fiche-' + b.id, ms) : ms.map(m => A().mediaThumbHtml(m)).join('')}</div>${b.caption ? `<p class="h-fi-caption">${esc(b.caption)}</p>` : ''}` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🖼️</span><span class="empty-line-text">Aucune image : ✎ pour en ajouter (de l’ordinateur ou déjà dans l’app).</span></p>'; }
+            case 'auto': { const ps = (b.ids || []).map(i => cur.people?.[i]).filter(Boolean), crit = [b.occupation && i18n('métier : {x}', {x: b.occupation}), b.place && i18n('lieu : {x}', {x: b.place}), (b.from || b.to) && `${b.from || '…'} – ${b.to || '…'}`].filter(Boolean).join(' · ');
+                if (!crit) return `<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">🤖</span><span class="empty-line-text">${esc(i18n('Rien de choisi : ✎ pour dire qui montrer (un métier, un lieu, une période).'))}</span></p>`;
+                return `<p class="h-fi-autocrit muted">🤖 ${esc(crit)} · ${esc(A().plural(ps.length, i18n('personne')))}${ps.length >= (Number(b.limit) || 60) ? ` ${esc(i18n('(les premières)'))}` : ''}</p>` + blockBody({...b, type: 'people', ids: b.ids || []}); }
             case 'people': { const ps = (b.ids || []).map(i => cur.people?.[i]).filter(Boolean); return (ps.length ? `<div class="h-fi-people">${ps.map(p => `<button type="button" class="h-fi-person" data-h-person="${Number(p.id)}"><span class="h-fi-ini ${p.gender === 'female' ? 'is-f' : p.gender === 'male' ? 'is-m' : ''}">${esc(((p.first_name || '')[0] || '') + ((p.last_name || '')[0] || ''))}</span><span><strong>${esc(`${p.first_name || ''} ${p.last_name || ''}`.trim())}</strong><small>${esc([p.birth_year || p.death_year ? `${p.birth_year || '?'} – ${p.death_year || '?'}` : '', p.occupation].filter(Boolean).join(' · '))}</small></span></button>`).join('')}</div>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">👤</span><span class="empty-line-text">Aucune personne : ✎ pour en ajouter.</span></p>') + (b.note ? `<p class="h-fi-caption">${esc(b.note)}</p>` : ''); }
             case 'dates': return (b.rows || []).length ? `<ol class="h-fi-dates">${b.rows.map(r => `<li><span>${esc(r.date)}</span><p>${esc(r.text)}</p></li>`).join('')}</ol>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📅</span><span class="empty-line-text">Aucune date : ✎ pour en ajouter.</span></p>';
             case 'links': return (b.rows || []).length ? `<ul class="h-fi-links">${b.rows.map(r => `<li>${r.url ? `<a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">${esc(r.label || r.url)}</a>` : esc(r.label)}${r.note ? ` <small class="muted">— ${esc(r.note)}</small>` : ''}</li>`).join('')}</ul>` : '<p class="empty-line"><span class="empty-line-ico" aria-hidden="true">📭</span><span class="empty-line-text">Aucun lien : ✎ pour en ajouter.</span></p>';
@@ -235,31 +238,52 @@
         const c = cur;
         const blocks = c.blocks.map((b, i) => {
             const tools = editing ? `<span class="h-fi-tools"><button type="button" class="h-bt h-fi-arrow" data-fi-up="${i}" title="Avant">↑</button><button type="button" class="h-bt h-fi-arrow" data-fi-down="${i}" title="Après">↓</button><button type="button" class="h-bt" data-fi-edit="${i}" title="Modifier">✎</button><button type="button" class="h-bt" data-fi-dup="${i}" title="Dupliquer">⧉</button><button type="button" class="h-bt" data-fi-del="${i}" title="Supprimer">🗑</button></span>`
-                : (['screen'].includes(b.type) ? `<button type="button" class="button small secondary" data-ct-open-screen="${esc(b.target)}" title="Ouvrir en grand">↗</button>` : '') + `<button type="button" class="h-bt h-fi-quickedit" data-fi-edit="${i}" title="Modifier">✎</button>`;
+                : (['screen'].includes(b.type) ? `<button type="button" class="button small secondary" data-ct-open-screen="${esc(b.target)}" title="Ouvrir en grand">↗</button>` : '') + (kiosk() ? '' : `<button type="button" class="h-bt h-fi-quickedit" data-fi-edit="${i}" title="Modifier">✎</button>`);
             if (b.type === 'divider') return `<div class="span-12 h-fi-divider" data-fi-block="${i}" style="${b.color ? `--fi-c:${esc(b.color)}` : ''}"><h3>${esc(b.title || 'Intertitre')}</h3>${tools}</div>`;
             const html = A().card(i + 1, '\u0001', '', blockBody(b), 'span-' + (b.width || '12'), tools).replace('\u0001', `${kindOf(b.type)[1]} ${esc(titleOf(b))}`);
             return html.replace('<section class="card', `<section data-fi-block="${i}" style="${b.color ? `--fi-c:${esc(b.color)}` : ''}" class="h-fi-block ${b.color ? 'has-color' : ''} card`);
         }).join('');
+        if (kiosk()) editing = false;
+        const ro = kiosk(), bt = (attrs, label, cls = 'secondary') => `<button type="button" class="button ${cls}" ${attrs}>${esc(i18n(label))}</button>`;
+        // R1 : l'en-tête commun ; R4 : ⤓ Exporter ▾ et 🖨 Imprimer en haut à droite ; R6 : rien à modifier en consultation
+        const head = UIx().pageHeader ? UIx().pageHeader({where: c.template ? i18n('⭐ Modèle de fiche') : undefined, icon: c.icon || '📒', title: c.title, help: c.subtitle ? esc(c.subtitle) : '', detail: true, cls: 'h-fi-head',
+            primary: ro ? '' : `<button type="button" class="button ${editing ? '' : 'secondary'}" data-fi-mode>${esc(i18n(editing ? '✓ Terminé' : '✏️ Organiser'))}</button>`,
+            actions: [ro ? '' : bt('data-fi-add', '＋ Bloc'), c.template && !ro ? bt('data-fi-use', '＋ Créer une fiche avec ce modèle', '') : '', bt('data-fi-export', '⤓ Exporter ▾'), bt('data-fi-print', '🖨 Imprimer')].filter(Boolean),
+            more: [ro ? '' : `<button type="button" data-fi-props>${esc(i18n('⚙️ Titre, icône, couleur'))}</button>`, ro ? '' : `<button type="button" data-fi-copy>${esc(i18n('⧉ Dupliquer'))}</button>`, ro ? '' : `<button type="button" data-fi-versions>${esc(i18n('🕘 Versions'))}${c.versions ? ` (${c.versions})` : ''}</button>`, ro ? '' : `<button type="button" class="danger" data-fi-delete>${esc(i18n('🗑 Supprimer'))}</button>`].filter(Boolean)})
+            : `<header class="page-header h-fi-head"><div><h2>${esc(c.icon || '📒')} ${esc(c.title)}</h2></div></header>`;
+        const cited = (c.cited_in || []);
         A().$('#workspace').innerHTML = `<section class="page h-fi ${editing ? 'is-editing' : ''}" style="${c.color ? `--fi-c:${esc(c.color)}` : ''}">
-            <header class="page-header h-fi-head"><div><span class="eyebrow">${c.template ? '⭐ MODÈLE DE FICHE' : 'FICHE'}</span><h2>${esc(c.icon || '📒')} ${esc(c.title)}</h2>${c.subtitle ? `<p>${esc(c.subtitle)}</p>` : ''}</div>
-                <div class="page-actions"><button type="button" class="button ${editing ? '' : 'secondary'}" data-fi-mode>${editing ? '✓ Terminé' : '✏️ Organiser'}</button><button type="button" class="button secondary" data-fi-add>＋ Bloc</button><button type="button" class="button secondary" data-fi-props>⚙️ Titre, icône, couleur</button><button type="button" class="button secondary" data-fi-print>🖨 Imprimer</button>${c.template ? '<button type="button" class="button" data-fi-use>＋ Créer une fiche avec ce modèle</button>' : ''}<button type="button" class="button secondary" data-fi-copy title="Copie complète, même ordre de blocs, ou modèle">⧉ Dupliquer</button><button type="button" class="button secondary danger" data-fi-delete>Supprimer</button></div></header>
-            <div class="card-grid h-fi-grid">${blocks || A().empty('Fiche vide : « ＋ Bloc » pour ajouter du texte, des images, des personnes, une carte, une liste…')}</div>
+            ${head}
+            <div class="card-grid h-fi-grid">${blocks || A().empty(ro ? i18n('Fiche vide.') : 'Fiche vide : « ＋ Bloc » pour ajouter du texte, des images, des personnes, une carte, une liste…')}</div>
             ${editing ? '<div class="h-fi-addrow"><button type="button" class="button" data-fi-add>＋ Ajouter un bloc</button></div>' : ''}
+            ${c.template ? '' : `<section class="card h-fi-cited" data-fi-cited><h3>↩ ${esc(i18n('Cité dans'))} <small class="muted">${cited.length}</small></h3>${cited.length ? `<ul class="h-fi-citedlist">${cited.map(x => `<li><button type="button" class="table-link" data-fi-cite-go="${esc(x.kind)}:${Number(x.id)}">${esc(x.label)}</button>${x.via ? ` <small class="muted">${esc(i18n('({x})', {x: i18n(x.via)}))}</small>` : ''}</li>`).join('')}</ul>` : `<p class="muted">${esc(i18n('Rien ne renvoie encore à cette fiche : écris son titre (« {t} ») dans une note de personne ou de lieu, une enquête, ou une autre fiche.', {t: c.title}))}</p>`}</section>`}
         </section>`;
         const ws = A().$('#workspace');
         ws.querySelectorAll('[data-fi-photomap]').forEach(el => { let c = {}; try { c = JSON.parse(el.dataset.fiPhotomap || '{}'); } catch (_) {} if (ext.photomapEmbed) ext.photomapEmbed(el, c); else el.innerHTML = '<p class="muted">Carte de photos indisponible.</p>'; });
         ws.querySelectorAll('[data-fi-widget]').forEach(el => { if (ext.renderCustomWidgetInto) ext.renderCustomWidgetInto(el, el.dataset.fiWidget).catch?.(() => { el.innerHTML = '<p class="muted">Ce widget n’existe plus.</p>'; }); else el.innerHTML = '<p class="muted">Widget indisponible.</p>'; });
         A().bindTableLinks?.();
+        pageFind(ws.querySelector('.h-fi'));
         ws.querySelector('.h-fi').addEventListener('click', async e => {
             const t = e.target.closest('button'); if (!t) return;
             const d = t.dataset, i = Number(d.fiUp ?? d.fiDown ?? d.fiEdit ?? d.fiDel ?? d.fiDup ?? -1);
+            if (kiosk() && (d.fiMode !== undefined || d.fiAdd !== undefined || d.fiProps !== undefined || d.fiEdit !== undefined || d.fiDelete !== undefined || d.fiCopy !== undefined || d.fiUse !== undefined || d.fiVersions !== undefined)) return toast(i18n('Mode consultation : rien ne peut être modifié.'), 'error');
             if (d.fiMode !== undefined) { editing = !editing; return renderSheet(token); }
             if (d.fiAdd !== undefined) return addBlock();
             if (d.fiProps !== undefined) return editProps();
             if (d.fiPrint !== undefined) return printSheet();
+            if (d.fiExport !== undefined) return exportMenu(t);
+            if (d.fiVersions !== undefined) { t.closest('details')?.removeAttribute('open'); return openVersions(); }
+            if (d.fiCiteGo !== undefined) return citeGo(d.fiCiteGo);
             if (d.fiCopy !== undefined) return duplicateSheet();
             if (d.fiUse !== undefined) { const r = await post('save_topic_sheet', {title: 'Nouvelle fiche', subtitle: '', icon: c.icon, color: c.color, blocks: emptyBlocks(c.blocks, true)}); toast('Fiche créée avec ce modèle : change son titre dans « ⚙️ Titre, icône, couleur ».'); S().ficheId = Number(r.result?.id || r.id); editing = true; return A().setModule('fiches'); }
-            if (d.fiDelete !== undefined) { if (!await A().confirmBox(c.template ? i18n('Supprimer le modèle « {nm} » ? (les fiches déjà créées avec lui ne changent pas)', {nm: c.title}) : i18n('Supprimer la fiche « {nm} » ? (les images restent dans les médias de l’app)', {nm: c.title}), {title: c.template ? 'Supprimer le modèle' : 'Supprimer la fiche', okLabel: c.template ? 'Supprimer le modèle' : 'Supprimer la fiche'})) return; await post('delete_topic_sheet', {id: c.id}); toast(c.template ? 'Modèle supprimé.' : 'Fiche supprimée.'); S().ficheId = 0; return A().setModule('fiches'); }
+            if (d.fiDelete !== undefined) { // R7 : supprimée tout de suite, « ↶ Annuler » la remet (même numéro, images et étiquettes)
+                t.closest('details')?.removeAttribute('open');
+                try { await post('delete_topic_sheet', {id: c.id}); } catch (err) { return toast(err.message, 'error'); }
+                const id = c.id; S().ficheId = 0; sheets = sheets.filter(x => x.id !== id);
+                A().undoToast?.(c.template ? i18n('Modèle « {nm} » supprimé', {nm: c.title}) : i18n('Fiche « {nm} » supprimée', {nm: c.title}), {
+                    undo: async () => { await post('save_topic_sheet', {undelete: id}); await loadList(); if (S().module === 'fiches') { S().ficheId = id; A().setModule('fiches'); } },
+                    redo: async () => { await post('delete_topic_sheet', {id}); await loadList(); if (S().module === 'fiches' && Number(S().ficheId) === id) { S().ficheId = 0; A().setModule('fiches'); } }});
+                return A().setModule('fiches'); }
             if (d.fiUp !== undefined && i > 0) { [c.blocks[i - 1], c.blocks[i]] = [c.blocks[i], c.blocks[i - 1]]; await save(); return renderSheet(token); }
             if (d.fiDown !== undefined && i < c.blocks.length - 1) { [c.blocks[i + 1], c.blocks[i]] = [c.blocks[i], c.blocks[i + 1]]; await save(); return renderSheet(token); }
             if (d.fiDup !== undefined) { const b = JSON.parse(JSON.stringify(c.blocks[i])); b.id = uid(); c.blocks.splice(i + 1, 0, b); await save(); return renderSheet(token); }
@@ -272,6 +296,84 @@
         });
     }
     const refresh = () => A().setModule('fiches');
+
+    /* R13 — « Chercher dans cette page » : sur une fiche de 6 blocs ou plus, cache les blocs qui ne contiennent pas le texte */
+    function pageFind(page) {
+        if (!page || page.querySelector('.h-fi-find')) return;
+        const blocks = () => [...page.querySelectorAll('[data-fi-block]')]; if (blocks().length < 6) return;
+        const box = document.createElement('div'); box.className = 'h-fi-find ui-l6'; box.setAttribute('role', 'search');
+        const sf = UIx().searchField ? UIx().searchField({placeholder: i18n('Chercher dans cette page…'), label: i18n('Chercher dans cette page')}) : null;
+        const input = sf ? sf.input : Object.assign(document.createElement('input'), {type: 'search', placeholder: i18n('Chercher dans cette page…')});
+        input.dataset.fiFind = '1'; box.appendChild(sf || input);
+        const info = document.createElement('small'); info.className = 'ui-l6-info'; info.setAttribute('aria-live', 'polite'); box.appendChild(info);
+        const apply = () => { const q = foldT(input.value.trim()); let hit = 0; blocks().forEach(el => { const ok = !q || foldT(el.textContent).includes(q); el.classList.toggle('h-fi-find-off', !ok); if (ok) hit++; }); info.textContent = q ? i18n('{n} sur {all}', {n: hit, all: blocks().length}) : ''; };
+        input.addEventListener('input', () => { clearTimeout(input._t); input._t = setTimeout(apply, 120); }); input.addEventListener('search', apply);
+        const head = page.querySelector(':scope > .page-header'); if (head) head.after(box); else page.prepend(box);
+    }
+    /* ↩ Cité dans : ouvrir ce qui renvoie à la fiche */
+    function citeGo(v) {
+        const [kind, id] = String(v).split(':'), n = Number(id);
+        if (kind === 'person') return A().openPersonById?.(n);
+        if (kind === 'sheet') { S().ficheId = n; editing = false; return A().setModule('fiches'); }
+        if (kind === 'investigation') { S().currentInvestigationId = n; return A().setModule('enquetes'); }
+        if (kind === 'place') return ext.shortcuts?.openTarget ? ext.shortcuts.openTarget(`place:${n}`) : A().setModule('carte');
+    }
+    /* ⤓ Exporter : la fiche en Markdown (.md) ou en page web (.html, un seul fichier) ; 🖨 Imprimer reste à côté */
+    function sheetMarkdown(c) {
+        const out = [`# ${c.icon ? c.icon + ' ' : ''}${c.title}`, c.subtitle ? `_${c.subtitle}_` : ''];
+        c.blocks.forEach(b => {
+            if (b.type === 'divider') { out.push(`## ${b.title || ''}`); return; }
+            out.push(`### ${titleOf(b)}`);
+            if (b.type === 'text') out.push(String(b.text || ''));
+            else if (b.type === 'quote') out.push(String(b.text || '').split('\n').map(l => `> ${l}`).join('\n') + (b.source ? `\n>\n> — ${b.source}` : ''));
+            else if (b.type === 'dates') out.push((b.rows || []).map(r => `- **${r.date}** — ${r.text}`).join('\n'));
+            else if (b.type === 'links') out.push((b.rows || []).map(r => `- ${r.url ? `[${r.label || r.url}](${r.url})` : r.label}${r.note ? ` — ${r.note}` : ''}`).join('\n'));
+            else if (b.type === 'people' || b.type === 'auto') out.push((b.ids || []).map(i => cur.people?.[i]).filter(Boolean).map(p => `- ${`${p.first_name || ''} ${p.last_name || ''}`.trim()}${p.birth_year || p.death_year ? ` (${p.birth_year || '?'}–${p.death_year || '?'})` : ''}`).join('\n'));
+            else if (b.type === 'images') out.push(mediaOf(b).map(m => `![${m.title || ''}](media/${encodeURIComponent(m.filename || '')})`).join('\n') + (b.caption ? `\n\n_${b.caption}_` : ''));
+            else out.push(i18n('_(écran de l’app : à voir dans LCNDA)_'));
+        });
+        return out.filter(x => x !== '').join('\n\n') + '\n';
+    }
+    function sheetHtml(c) {
+        const abs = u => new URL(u, location.href).href;
+        const body = c.blocks.map(b => {
+            if (b.type === 'divider') return `<h2>${esc(b.title || '')}</h2>`;
+            let inner = '';
+            if (b.type === 'images') inner = mediaOf(b).filter(m => /\.(jpe?g|png|gif|webp)$/i.test(m.filename || '')).map(m => `<img src="${esc(abs('media/' + encodeURIComponent(m.filename)))}" alt="${esc(m.title || '')}">`).join('') + (b.caption ? `<p><i>${esc(b.caption)}</i></p>` : '');
+            else if (['screen', 'widget', 'diagram', 'photomap'].includes(b.type)) inner = `<p><i>${esc(i18n('(écran de l’app : à voir dans LCNDA)'))}</i></p>`;
+            else inner = blockBody(b).replace(/<button[^>]*>/g, '<div class="p">').replace(/<\/button>/g, '</div>');
+            return `<section><h3>${esc(titleOf(b))}</h3>${inner}</section>`;
+        }).join('');
+        return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(c.title)}</title><style>body{font-family:Georgia,serif;max-width:860px;margin:2rem auto;padding:0 16px;color:#111;line-height:1.5}h2{border-bottom:2px solid #111}img{max-width:100%;margin:4px 0}blockquote{border-left:3px solid #999;margin:0;padding-left:12px;font-style:italic}.p{margin:2px 0}@media (prefers-color-scheme:dark){body{background:#111;color:#eee}h2{border-color:#eee}}</style></head><body><h1>${esc(c.icon || '')} ${esc(c.title)}</h1>${c.subtitle ? `<p><i>${esc(c.subtitle)}</i></p>` : ''}${body}<footer><small>${esc(i18n('Fiche exportée de LCNDA le {d}', {d: new Date().toLocaleDateString('fr-FR')}))}</small></footer></body></html>`;
+    }
+    function download(text, name, type) {
+        const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], {type})); a.download = name;
+        document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000);
+    }
+    function exportMenu(anchor) {
+        const c = cur, base = A().safeExportFilename ? A().safeExportFilename(c.title, 'fiche') : 'fiche';
+        const items = [{icon: '📝', label: i18n('Markdown (.md)'), run: () => { download(sheetMarkdown(c), `${base}.md`, 'text/markdown;charset=utf-8'); toast(i18n('Fiche exportée en Markdown.'), 'success'); }},
+            {icon: '🌐', label: i18n('Page web (.html)'), run: () => { download(sheetHtml(c), `${base}.html`, 'text/html;charset=utf-8'); toast(i18n('Fiche exportée en page web.'), 'success'); }},
+            '-', {icon: '🖨', label: i18n('PDF (par 🖨 Imprimer)'), run: () => printSheet()}];
+        if (UIx().menuAt) UIx().menuAt(anchor, items, {title: i18n('⤓ Exporter la fiche')}); else items[0].run();
+    }
+    ext.fiches.exportMarkdown = () => (cur ? sheetMarkdown(cur) : ''); ext.fiches.exportHtml = () => (cur ? sheetHtml(cur) : ''); // (essais)
+    /* 🕘 Versions (L3, app-versions.js) : l'état d'avant chaque enregistrement ; « ↺ Revenir » garde l'état actuel d'abord */
+    function openVersions() {
+        const c = cur, U = UIx(); if (!U.openVersions) return toast(i18n('La fenêtre « Versions » n’est pas encore chargée.'), 'error');
+        const textOf = d => [d.title, d.subtitle, d.text].filter(Boolean).join('\n\n');
+        U.openVersions({title: c.title, tool: i18n('Fiche'), kind: 'text',
+            list: async () => ((await post('save_topic_sheet', {id: c.id, versions_of: c.id})).result?.versions || []).map(v => ({id: v.id, label: v.reason === 'auto' ? '' : v.reason === 'avant retour' ? i18n('Avant un retour en arrière') : v.reason, created_at: v.saved_at, auto: v.reason === 'auto', info: `${v.title} · ${A().plural(v.blocks, 'bloc')}`})),
+            now: {info: `${c.title} · ${A().plural(c.blocks.length, 'bloc')}`},
+            preview: async v => { if (!v) return {text: textOf({title: c.title, subtitle: c.subtitle, text: (c.blocks || []).map(b => [b.title, b.text, b.source, b.caption, b.note, ...(b.rows || []).map(r => Object.values(r).join(' '))].filter(Boolean).join('\n')).join('\n')})}; const d = await api('topic_sheet', {id: c.id, version: v.id}); return {text: textOf(d)}; },
+            keepNow: async label => { await post('save_topic_sheet', {id: c.id, keep_version: 1, label: label || i18n('gardée')}); },
+            saveNow: async () => { await post('save_topic_sheet', {id: c.id, keep_version: 1, label: i18n('gardée à la main')}); },
+            restore: async v => {
+                const r = (await post('save_topic_sheet', {id: c.id, restore_version: v.id})).result || {};
+                if (S().module === 'fiches') refresh();
+                return {undo: r.snapshot ? async () => { await post('save_topic_sheet', {id: c.id, restore_version: r.snapshot}); if (S().module === 'fiches') refresh(); } : null};
+            }});
+    }
 
     /* ─── Ajouter un bloc ─── */
     function addBlock() {
@@ -306,6 +408,10 @@
             <label>Hauteur<select name="height">${ext.appScreen.heights.map(([v, l]) => `<option value="${v}" ${String(b.height) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label><label class="checkbox-line"><input type="checkbox" name="sidebar" ${b.sidebar ? 'checked' : ''}> avec sa colonne de gauche (menus de l’écran)</label>
             <p class="muted">Mes listes, les listes de l’app, la carte, les arbres, les statistiques, la fiche d’une personne, un village… : tout écran de l’app se met dans la fiche, à jour.</p>` : '<p class="muted">Écrans indisponibles.</p>';
         if (b.type === 'diagram') { const items = ext.diagramItems?.() || []; body = `<label>Diagramme<select name="diagram"><option value="">— choisir —</option>${items.map(([id, l]) => `<option value="${id}" ${Number(b.diagram) === Number(id) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><p><button type="button" class="button small secondary" data-fi-dgnew>＋ Nouveau diagramme</button></p><p class="muted">Graphiques → Mes diagrammes : le bloc montre toujours sa dernière version.</p>`; }
+        if (b.type === 'auto') body = `<p class="muted">${esc(i18n('La liste se refait toute seule à chaque ouverture : les personnes de la base qui ont ce métier, ou un événement dans ce lieu, pendant cette période.'))}</p>
+            <div class="form-grid"><label>${esc(i18n('Métier'))}<input name="occupation" value="${esc(b.occupation || '')}" maxlength="120" placeholder="${esc(i18n('ex. sabotier'))}"></label><label>${esc(i18n('Lieu'))}<input name="place" value="${esc(b.place || '')}" maxlength="120" placeholder="${esc(i18n('ex. Naves'))}"></label>
+            <label>${esc(i18n('De l’année'))}<input name="from" type="number" min="0" max="2999" value="${b.from || ''}" placeholder="1800"></label><label>${esc(i18n('À l’année'))}<input name="to" type="number" min="0" max="2999" value="${b.to || ''}" placeholder="1900"></label>
+            <label>${esc(i18n('Combien au plus'))}<input name="limit" type="number" min="5" max="300" value="${Number(b.limit) || 60}"></label><label>${esc(i18n('Note'))} <small>(${esc(i18n('facultatif'))})</small><input name="note" value="${esc(b.note || '')}" maxlength="2000"></label></div>`;
         if (b.type === 'photomap') body = ext.photomapConfigHtml ? ext.photomapConfigHtml(b.config || {}) : '<p class="muted">Cartes de photos indisponibles.</p>';
         if (b.type === 'widget') {
             // 📈 le menu de choix commun (sorte « graph », tous mes widgets) ; le champ caché garde l'identifiant cw_…
@@ -333,6 +439,7 @@
                 if (b.type === 'dates' || b.type === 'links') b.rows = [...form.querySelectorAll('.h-fi-row')].map(r => Object.fromEntries([...r.querySelectorAll('[data-k]')].map(x => [x.dataset.k, x.value.trim()]))).filter(r => Object.values(r).some(Boolean));
                 if (b.type === 'links' && b.rows.some(r => r.url && !/^https?:\/\//i.test(r.url))) { toast('Une adresse doit commencer par http:// ou https://', 'error'); return false; }
                 if (b.type === 'people') { b.ids = String(f.fi_people || '').split(',').map(Number).filter(Boolean); b.note = f.note || ''; }
+                if (b.type === 'auto') { Object.assign(b, {occupation: String(f.occupation || '').trim(), place: String(f.place || '').trim(), from: Number(f.from) || 0, to: Number(f.to) || 0, limit: Number(f.limit) || 60, note: f.note || ''}); if (!b.occupation && !b.place && !b.from && !b.to) { toast(i18n('Choisis au moins un métier, un lieu ou une période.'), 'error'); return false; } }
                 if (b.type === 'screen') { let target = f.target || 'module:carte'; const pid = Number(form.elements.fi_person?.value) || 0; if (target.startsWith('person:')) target = pid ? 'person:' + pid : 'module:personnes'; b.target = target; b.personName = (form.querySelector('.h-dialog-body') || form).dataset.fiPersonName ?? (pid ? b.personName || '' : ''); b.height = Number(f.height) || 560; b.sidebar = !!form.elements.sidebar?.checked; }
                 if (b.type === 'widget') b.widget = f.widget || '';
                 if (b.type === 'photomap') b.config = ext.photomapConfigRead ? ext.photomapConfigRead(form) : {};
@@ -434,5 +541,24 @@
         draw();
         ws.querySelectorAll('[data-fi-listnew]').forEach(b => b.addEventListener('click', newSheet));
     };
+    /* 📒 sur la fiche d'une personne, dans le bloc « Cité dans » : les Fiches où elle figure (bloc « Personnes ») */
+    let sheetsAt = 0;
+    ext.afterPerson = ext.afterPerson || [];
+    ext.afterPerson.push(async detail => {
+        const pid = Number(detail?.person?.id) || 0; if (!pid) return;
+        if (Date.now() - sheetsAt > 30000) { await loadList(); sheetsAt = Date.now(); }
+        const hits = sheets.filter(x => (x.people_ids || []).map(Number).includes(pid));
+        if (!hits.length || Number(S().currentPersonId) !== pid || document.querySelector('#workspace [data-fi-pcited]')) return;
+        let host = document.querySelector('#workspace section[data-pblock="mentions"]');
+        if (!host) { // pas de bloc « Cité dans » (rien d'autre ne la cite) : une petite carte à la fin des blocs
+            const any = document.querySelector('#workspace section[data-pblock]'); if (!any) return;
+            any.parentElement.insertAdjacentHTML('beforeend', A().card('📒', i18n('Cité dans'), hits.length, '', 'span-6').replace('<section class="card', '<section data-fi-pcard class="card'));
+            host = any.parentElement.lastElementChild;
+        }
+        const box = document.createElement('div'); box.className = 'h-fi-pcited'; box.dataset.fiPcited = '';
+        box.innerHTML = `<h4>📒 ${esc(i18n('Dans les Fiches'))} <small class="muted">${hits.length}</small></h4><ul>${hits.map(x => `<li><button type="button" class="table-link" data-fi-popen="${x.id}">${esc(`${x.icon || '📒'} ${x.title}`)}</button></li>`).join('')}</ul>`;
+        box.addEventListener('click', e => { const b = e.target.closest('[data-fi-popen]'); if (!b) return; S().ficheId = Number(b.dataset.fiPopen); editing = false; A().setModule('fiches'); });
+        (host.querySelector(':scope > .card-body') || host).appendChild(box);
+    });
     ext.fichesInternals = {md}; // pour les essais
 })();

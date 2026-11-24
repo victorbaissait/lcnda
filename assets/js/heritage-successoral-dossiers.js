@@ -168,7 +168,7 @@
             else if (t.matches('[data-sf-away]')) { const [g, id] = t.dataset.sfAway.split(':'); closeMenu(); const c = away.find(x => x.base.id === g && x.id === Number(id)); openElsewhere(g, c, 'filter'); }
         });
     }
-    function openBoard() { const st = A().state; store.set('lcnda-succ-view', 'cases'); if (ext.successoral?.openCase) { ext.successoral.openCase(0); } else { st.listType = 'successoral'; A().setModule('listes'); } }
+    function openBoard() { const st = A().state; store.set('genealogie-succ-view', 'cases'); if (ext.successoral?.openCase) { ext.successoral.openCase(0); } else { st.listType = 'successoral'; A().setModule('listes'); } }
     async function paintBanner() {
         const ws = document.getElementById('workspace'); if (!ws) return;
         let bn = ws.querySelector(':scope > .succ-fbanner');
@@ -645,10 +645,14 @@
         const notaries = [...new Set(rows.map(r => r.notary).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'fr'));
         const offices = [...new Map(rows.filter(r => r.here && r.office).map(r => [r.office.id, r.office])).values()].sort((a, b) => a.name.localeCompare(b.name, 'fr')); // 🏛 l'étude de chaque dossier
         const bases = (d.bases || []).filter(b => b.cases.length);
+        // 👥 qui est chargé de chaque dossier (heritage-successoral-audit.js) : filtre « Mes dossiers » et nom sur la ligne
+        let asg = {items: [], names: [], me: ''}; try { asg = (await ext.succAudit?.assignments?.()) || asg; } catch (_) {}
+        const whoOf = r => (r.here ? (asg.items.find(x => x.case_id === Number(r.id) && x.task === '')?.who || '') : '');
         const bar = UI().listBar({key: 'succ:board', search: {placeholder: i18n('Chercher… (n°, défunt, notaire)')}, view: {dflt: 'list', what: 'dossiers'},
             filters: [{id: 'state', label: i18n('État'), type: 'check', options: [['late', i18n('Échéance passée')], ...['recherche', 'trouves', 'remis', 'clos', 'ouvert', 'archive'].map(k => [k, stateLabel(k)])]},
                 {id: 'base', label: i18n('Rangé dans'), type: 'select', options: [['', i18n('Toutes les généalogies')], ...bases.map(b => [b.id || '_main', b.name])]},
                 {id: 'notary', label: i18n('Notaire'), type: 'select', options: [['', i18n('Tous les notaires')], ...notaries.map(n => [n, n])]},
+                ...(asg.names.length || asg.me ? [{id: 'who', label: i18n('Chargé du dossier'), type: 'select', options: [['', i18n('Tout le monde')], ...(asg.me ? [['__me', i18n('👤 Mes dossiers ({name})', {name: asg.me})]] : []), ...asg.names.map(n => [n, n]), ['__none', i18n('Personne de chargé')]]}] : []),
                 ...(offices.length ? [{id: 'office', label: i18n('Étude de notaire'), type: 'select', options: [['', i18n('Toutes les études')], ...offices.map(o => [String(o.id), o.name])]}] : [])], // 🏛 heritage-complements.js
             sort: {options: [['due', i18n('Prochaine échéance (retards d’abord)')], ['low', i18n('Avancement le plus bas')], ['recent', i18n('Les plus récents')], ['num', i18n('N° de dossier')]], value: 'due'}, onChange: st => draw(st)});
         body.innerHTML = `${lockNote}${bad.length ? UI().notice('warn', i18n('⚠️ illisible : {names}', {names: bad.map(b => b.name).join(', ')})) : ''}<div data-succ-bitems></div><div class="succ-bsel" data-succ-bsel hidden></div>`;
@@ -663,7 +667,8 @@
         function draw(st = bar.state) {
             let list = rows.filter(r => M.text(st.q, r.number, r.title, r.deceased, r.notary, r.base.name)
                 && (!st.filters.state?.length || st.filters.state.some(s => (s === 'late' ? r.late > 0 : r.state === s)))
-                && (!st.filters.base || (r.base.id || '_main') === st.filters.base) && (!st.filters.notary || r.notary === st.filters.notary) && (!st.filters.office || String(r.office?.id || '') === st.filters.office));
+                && (!st.filters.base || (r.base.id || '_main') === st.filters.base) && (!st.filters.notary || r.notary === st.filters.notary) && (!st.filters.office || String(r.office?.id || '') === st.filters.office)
+                && (!st.filters.who || (st.filters.who === '__none' ? !whoOf(r) : whoOf(r) === (st.filters.who === '__me' ? asg.me : st.filters.who))));
             const due = r => (r.late ? '0' : '1') + String(r.next_due || '9999');
             list = st.sort === 'low' ? [...list].sort((a, b) => (a.progress ?? -1) - (b.progress ?? -1)) : st.sort === 'recent' ? UI().sortItems(list, 'recent') : st.sort === 'num' ? [...list].sort((a, b) => String(a.number).localeCompare(String(b.number), 'fr', {numeric: true})) : [...list].sort((a, b) => due(a).localeCompare(due(b)) || String(a.number).localeCompare(String(b.number), 'fr', {numeric: true}));
             shown = list;
@@ -674,12 +679,12 @@
             const open = r => (r.here ? `data-succ-open="${r.id}"` : `data-succ-away="${esc(r.key)}"`);
             if (st.view === 'cards') {
                 box.innerHTML = UI().cardsHtml(list.map(r => ({thumb: '<span class="ui-card-ico" aria-hidden="true">⚖️</span>', name: `${r.number} ${r.deceased || r.title}`, open: open(r), attrs: `data-succ-brow="${esc(r.key)}"`,
-                    lines: [{html: bar100(r.progress)}, [r.notary, dueTxt(r) !== '—' ? i18n('Échéance : {d}', {d: dueTxt(r)}) : ''].filter(Boolean).join(' · ')],
+                    lines: [{html: bar100(r.progress)}, [r.notary, dueTxt(r) !== '—' ? i18n('Échéance : {d}', {d: dueTxt(r)}) : '', whoOf(r) ? `👤 ${whoOf(r)}` : ''].filter(Boolean).join(' · ')],
                     badges: [{text: stateLabel(r.state), kind: stateKind(r.state)}, r.late ? {text: i18n('Échéance passée'), kind: 'red'} : null, {text: (r.base.main ? '🌳 ' : '⚖️ ') + r.base.name, kind: 'grey'}].filter(Boolean),
                     quick: chk(r)})));
             } else {
                 box.innerHTML = `<div class="succ-scroll"><table class="succ-table succ-board"><thead><tr><th></th><th>${esc(i18n('Dossier'))}</th><th>${esc(i18n('État'))}</th><th>${esc(i18n('Notaire'))}</th><th>${esc(i18n('Prochaine échéance'))}</th><th>${esc(i18n('Héritiers'))}</th><th>${esc(i18n('Pièces'))}</th><th>${esc(i18n('Temps'))}</th><th>${esc(i18n('Avancement'))}</th><th>${esc(i18n('Rangé dans'))}</th></tr></thead>
-                    <tbody>${list.map(r => `<tr data-succ-brow="${esc(r.key)}" class="${r.late ? 'is-late' : ''}"><td>${chk(r)}</td><td><button type="button" class="table-link" ${open(r)}><b>${esc(r.number)}</b> ${esc(r.deceased || r.title)}</button></td>
+                    <tbody>${list.map(r => `<tr data-succ-brow="${esc(r.key)}" class="${r.late ? 'is-late' : ''}"><td>${chk(r)}</td><td><button type="button" class="table-link" ${open(r)}><b>${esc(r.number)}</b> ${esc(r.deceased || r.title)}</button>${whoOf(r) ? ` <small class="succ-who" data-succ-who="${r.id}">👤 ${esc(whoOf(r))}</small>` : ''}</td>
                         <td>${badge(stateLabel(r.state), stateKind(r.state))}</td><td>${r.here && r.office ? `<button type="button" class="table-link" data-compl-etude="${Number(r.office.id)}" title="${esc(i18n('↗ Ouvrir'))}">${esc(r.office.name)}${r.office.notary ? ` · ${esc(r.office.notary)}` : ''}</button>` : `${esc(r.notary || '—')}${r.notary_typed ? ` ${badge(i18n('texte'), 'grey')}` : ''}`}</td><td class="${r.late ? 'succ-late' : ''}">${esc(dueTxt(r))}</td><td>${esc(heirsTxt(r))}</td>
                         <td>${r.pieces ? esc(`${r.pieces.have} / ${r.pieces.total}`) : '—'}</td><td>${esc(timeTxt(r.minutes))}</td><td class="succ-bpct">${bar100(r.progress)}</td><td>${where(r)}</td></tr>`).join('')}</tbody></table></div>
                     <p class="ui-hint succ-swipe">${esc(i18n('↔ Faire glisser le tableau.'))}</p>`;

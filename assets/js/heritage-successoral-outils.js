@@ -168,7 +168,7 @@
     window.addEventListener('storage', e => { if (e.key === CKEY) paintChrono(); }); // deux fenêtres de l'app : un seul chronomètre
 
     /* ══════════ B2. 🔔 Les échéances du jour ══════════ */
-    const BKEY = 'lcnda-succ-bell'; // {rappels: false, notify: false, scope: 'all' | 'here'} (ce navigateur)
+    const BKEY = 'genealogie-succ-bell'; // {rappels: false, notify: false, scope: 'all' | 'here'} (ce navigateur)
     const bellCfg = () => ({rappels: false, notify: false, scope: 'all', ...(store.get(BKEY, {}) || {})});
     const bellBtn = () => document.getElementById('succ-bell-open');
     let bell = {items: [], errors: [], at: 0, busy: null, open: false, foldWeek: true};

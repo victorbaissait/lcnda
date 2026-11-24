@@ -1077,7 +1077,8 @@ function meteo_api_get(PDO $pdo, string $action, array $q): array
         'meteo_today' => meteo_today_data($pdo, $q),
         'meteo_place' => meteo_place_data($pdo, safe_int($q['id'] ?? 0)),
         'meteo_altitude' => ['m' => meteo_altitude((float) ($q['lat'] ?? 0), (float) ($q['lon'] ?? 0))],
-        'meteo_dl_info' => meteo_dl_info(),
+        // sans internet (ou rien encore en ligne) : une réponse normale qui le dit, pas une erreur du serveur
+        'meteo_dl_info' => (static function () { try { return meteo_dl_info(); } catch (RuntimeException $e) { return ['version' => '', 'packs' => (object) [], 'offline' => true, 'error' => $e->getMessage()]; } })(),
         'meteo_dl_resume' => meteo_dl_resume((string) ($q['id'] ?? '')),
         default => throw new RuntimeException('Action météo inconnue.'),
     };

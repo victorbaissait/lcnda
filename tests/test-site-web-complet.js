@@ -191,17 +191,20 @@ echo 'ok';`], { cwd: appRoot, encoding: 'utf8', env });
         /* ═════ Insertion (menu) et blocs ═════ */
         group = 'Blocs (menu Insertion et panneau ＋ Blocs)';
         const BLOCKS = await page.evaluate(() => window.LCNDA_EXT.siteKit.BLOCKS.map(b => [b.key, b.label, b.group]));
+        const GROUPS = Object.fromEntries(await page.evaluate(() => window.LCNDA_EXT.siteKit.GROUPS));
         for (const [key, label, g] of BLOCKS) {
             await cmd(`${label} (${key})`, async () => {
                 await page.click('[data-sw-view="visual"]');
                 const n0 = await count('[data-lc-name], [data-lc-block]');
                 await pick('footer'); // posé après l'élément choisi
-                if (key === 'diagram') { await page.click('.sw-dlg [data-ui-menu="Insertion"]'); await page.locator('.ui-actmenu .ui-actmenu-i', { hasText: label }).first().click(); await page.click('dialog[open] [data-dg-way="pick"]'); }
-                else await menu('Insertion', label);
+                // Insertion : les blocs de la page tout de suite, les autres familles dans un second petit menu (le menu tient dans l'écran depuis les blocs vidéo, son, dessin…)
+                if (g === 'page') await menu('Insertion', label);
+                else { await menu('Insertion', GROUPS[g]); await page.locator('.ui-actmenu .ui-actmenu-i', { hasText: label }).first().click(); await wait(300); }
+                if (key === 'diagram') await page.click('dialog[open] [data-dg-way="pick"]');
                 // les blocs qui demandent quelque chose (🎧 ce qu'on entend, ✒️ un SVG collé, 📝 quel document)
-                if (key === 'audio') { await page.waitForSelector('dialog[open] textarea'); await page.fill('dialog[open] textarea', 'Bonjour.'); await page.click('dialog[open] [type=submit]'); }
-                if (key === 'drawing') { await page.click('dialog[open] [data-lc-way="paste"]'); await page.waitForSelector('dialog[open] textarea'); await page.fill('dialog[open] textarea', '<svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="4"/></svg>'); await page.click('dialog[open] [type=submit]'); }
-                if (key === 'document') { await page.waitForSelector('dialog[open] [name="lc-pick"]'); await page.click('dialog[open] [type=submit]'); }
+                if (key === 'audio') { await page.waitForSelector('dialog.h-modal[open] textarea[name="lc-long"]'); await page.fill('dialog.h-modal[open] textarea[name="lc-long"]', 'Bonjour.'); await page.click('dialog.h-modal[open] [type=submit]'); }
+                if (key === 'drawing') { await page.click('dialog.h-modal[open] [data-lc-way="paste"]'); await page.waitForSelector('dialog.h-modal[open] textarea[name="lc-long"]'); await page.fill('dialog.h-modal[open] textarea[name="lc-long"]', '<svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="4"/></svg>'); await page.click('dialog.h-modal[open] [type=submit]'); }
+                if (key === 'document') { await page.waitForSelector('dialog.h-modal[open] [name="lc-pick"]'); await page.click('dialog.h-modal[open] [type=submit]'); }
                 await until(() => count('[data-lc-name], [data-lc-block]'), n => n > n0, 4000);
                 must(await count('[data-lc-name], [data-lc-block]') > n0, 'rien de posé');
                 if (g === 'genea') { await until(() => frame().evaluate(() => document.body.textContent), t => !/⏳/.test(t), 15000); must(!/⏳|Bloc inconnu|impossible/.test(await frame().evaluate(() => document.body.textContent)), 'bloc pas rempli'); }

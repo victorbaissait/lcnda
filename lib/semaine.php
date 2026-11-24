@@ -120,6 +120,7 @@ function semaine_rappels(PDO $pdo): array
             'done_label' => i18n_t('Fait'), 'snooze' => 'date'];
     }
     if (function_exists('succ_semaine_items')) { try { $out = array_merge($out, succ_semaine_items($pdo)); } catch (Throwable $_) {} } // ⚖️ échéances des dossiers de succession (lib/successoral.php)
+    if (function_exists('dna_semaine_items')) { try { $out = array_merge($out, dna_semaine_items($pdo)); } catch (Throwable $_) {} } // 🧬 correspondances ADN à relancer (lib/dna.php)
     return $out;
 }
 

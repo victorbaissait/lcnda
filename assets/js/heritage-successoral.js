@@ -35,6 +35,8 @@
     const simple = () => document.documentElement.classList.contains('ms-open');
     const hidden = () => kiosk() || simple();
     const store = {get(k, d) { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v ?? d; } catch (_) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} }};
+    // R8 : les réglages de l'onglet sont des « genealogie-* » (suivent la base, la sauvegarde, l'autre ordinateur) ; l'ancienne valeur est reprise une fois
+    ['tab', 'famtab', 'view', 'npages', 'bell'].forEach(k => { try { const o = 'lcnda-succ-' + k, n = 'genealogie-succ-' + k, v = localStorage.getItem(o); if (v != null) { if (localStorage.getItem(n) == null) localStorage.setItem(n, v); localStorage.removeItem(o); } } catch (_) {} });
     const usageOn = () => { const c = store.get('genealogie-usage', null); return Array.isArray(c?.usages) && c.usages.includes('successoral'); };
     const law = html => S().lawLinks(html); // chaque « art. 738 » devient un lien vers Légifrance
     const tx = (s, v) => law(esc(i18n(s, v)));
@@ -76,7 +78,7 @@
 
     const VIEWS0 = [['cases', 'Dossiers'], ['heirs', 'Héritiers à contacter'], ['mail', 'Courriers']]; // le sélecteur en haut de la liste (retenu : « lcnda-succ-view »)
     const viewsOf = () => (P2().views ? P2().views(VIEWS0) : VIEWS0); // + 📈 Activité
-    let cur = {id: 0, data: null, R: null, tab: store.get('lcnda-succ-tab', 'dossier'), where: 'list', pieceView: 'heir', view: store.get('lcnda-succ-view', 'cases')};
+    let cur = {id: 0, data: null, R: null, tab: store.get('genealogie-succ-tab', 'dossier'), where: 'list', pieceView: 'heir', view: store.get('genealogie-succ-view', 'cases')};
     const ws = () => document.getElementById('workspace');
     const sameTurn = token => token === undefined || !A().state || token === A().state.workspaceToken;
     /** ouvrir un dossier (0 = la liste), dans l'onglet ⚖️ Successions s'il est montré, sinon dans Listes */
@@ -370,6 +372,7 @@
         if (own[cur.tab]) own[cur.tab](body, D, R, P_); else P2().tab?.(cur.tab, body, D, R, P_); // 📞 Échanges
         try { P2().after?.(cur.tab, body, D, R, P_); } catch (e) { console.error(e); } // ⚖️ ajouts des outils de plus à chaque onglet
         try { ext.complEtudes?.after?.(cur.tab, body, D); } catch (e) { console.error(e); } // 🏛 📁 Dossier → « Étude de notaire » (heritage-complements.js)
+        try { ext.succAudit?.after?.(cur.tab, body, D, R, P_); } catch (e) { console.error(e); } // 👥 chargé du dossier, 🛡 conflits, 🔎 lire une pièce, 📜 tableau de dévolution (heritage-successoral-audit.js)
     }
 
     /* ── 🗂 Les onglets d'un dossier (maquette docs/design/dossier-et-transcriptions.html, A ; essai tests/test-dossier-onglets.js) :
@@ -435,7 +438,7 @@
         });
     }
     /** ouvrir un onglet (retenu ; en familles, la famille retient son dernier onglet) */
-    const goTab = k => { cur.tab = k; store.set('lcnda-succ-tab', k); const f = FAMS.find(x => x[2].includes(k)) || FAMS.at(-1); store.set('lcnda-succ-famtab', {...store.get('lcnda-succ-famtab', {}), [f[0]]: k}); render(); };
+    const goTab = k => { cur.tab = k; store.set('genealogie-succ-tab', k); const f = FAMS.find(x => x[2].includes(k)) || FAMS.at(-1); store.set('genealogie-succ-famtab', {...store.get('genealogie-succ-famtab', {}), [f[0]]: k}); render(); };
     const openTabsSetting = () => { const b = document.createElement('button'); b.type = 'button'; b.hidden = true; b.dataset.sp2Setlink = 'tabs_layout'; document.body.appendChild(b); b.click(); b.remove(); };
     /** 📁 Dossier, en bas : où en est le dossier, cliquable (au lieu des boutons des onglets une deuxième fois) */
     function recapHtml(D, R, P_) {
@@ -778,7 +781,7 @@
     /* ── 🖨 Tableau généalogique pour le notaire : tableau, arbre, 🧾 chaîne de filiation (B4), liste des pièces ── */
     const abbr = (D, key) => { const a = D.acts?.[key]; const k = key[0]; const l = {N: i18n('N.'), D: i18n('D.'), M: i18n('M.'), V: i18n('Div.'), R: i18n('Ren.')}[k] || ''; return a ? [l, a.place, a.year].filter(Boolean).join(' ') : `${l} ${i18n('(à fournir)')}`; };
     const NPAGES = [['table', 'Tableau'], ['tree', 'Arbre'], ['chain', 'Chaîne par héritier'], ['pieces', 'Liste des pièces']];
-    const npages = () => ({table: true, tree: true, chain: true, pieces: true, ...(store.get('lcnda-succ-npages', {}) || {})}); // cochées d'office (la chaîne aussi)
+    const npages = () => ({table: true, tree: true, chain: true, pieces: true, ...(store.get('genealogie-succ-npages', {}) || {})}); // cochées d'office (la chaîne aussi)
     /** la qualité d'un héritier, avec les représentés (« nièce, repr. Louise ») */
     const qualityOf = (R, r) => { const rep = []; let x = R.rows.find(y => y.id === r.id); while (x?.parent) { const pr = R.rows.find(y => y.id === x.parent); if (!pr) break; rep.unshift(pr.name.split(' ')[0]); x = pr; } return r.kin + (rep.length ? ', ' + i18n('repr. {who}', {who: rep.length > 1 ? i18n('{a} et {b}', {a: rep.slice(0, -1).join(', '), b: rep[rep.length - 1]}) : rep[0]}) : '') + (r.unknown ? ' — ' + i18n('existence à ce jour non établie') : ''); };
     /** 🧾 la chaîne de filiation : pour chaque héritier, du défunt vers lui, chaque acte avec sa cote ; aucun texte de loi recopié */
@@ -827,7 +830,7 @@
                 <div class="succ-npreview" data-i18n-off>${notaryHtml(D, R, P_, {addresses: withAddr, pages: pg})}</div>
                 <p class="ui-hint">${esc(i18n('Aucune photo ni note privée : les noms, les qualités, les parts et les sources. Pas d’adresse sauf si la case est cochée.'))}</p></section>`;
             body.querySelector('[data-succ-naddr]').addEventListener('change', e => { withAddr = e.target.checked; paint(); });
-            body.querySelectorAll('[data-succ-npage]').forEach(c => c.addEventListener('change', () => { store.set('lcnda-succ-npages', {...npages(), [c.dataset.succNpage]: c.checked}); paint(); }));
+            body.querySelectorAll('[data-succ-npage]').forEach(c => c.addEventListener('change', () => { store.set('genealogie-succ-npages', {...npages(), [c.dataset.succNpage]: c.checked}); paint(); }));
             body.querySelector('[data-succ-nprint]').addEventListener('click', () => printNotary(D, R, P_, {addresses: withAddr}));
             body.querySelector('[data-succ-nwp]').addEventListener('click', () => { ext.openTextDoc?.({data: ext.textDocTools?.dataOf ? ext.textDocTools.dataOf(notaryHtml(D, R, P_, {addresses: withAddr, pages: npages()}).replace(/<section[^>]*>/g, '').replace(/<\/section>/g, '')) : null, name: i18n('Tableau généalogique — {n}', {n: D.number})}); journal(D, 'pdf', i18n('Tableau pour le notaire : ouvert dans le traitement de texte')); });
             body.querySelector('[data-succ-nmedia]').addEventListener('click', async e => {
@@ -1035,7 +1038,7 @@
         const del = t.closest('[data-succ-del]'); if (del) { e.preventDefault(); return deleteCase(del.dataset.succDel); }
         if (t.closest('[data-succ-b8all]')) { e.preventDefault(); return ext.openAccessLog?.(); } // 📜 tous les dossiers (app-verrou.js)
         const lo = t.closest('[data-succ-loi]'); if (lo) { e.preventDefault(); return lawDialog(lo.dataset.succLoi === 'case' && cur.data?.id === cur.id ? cur.data : null); }
-        const vw = t.closest('[data-succ-view]'); if (vw) { e.preventDefault(); cur.view = vw.dataset.succView; store.set('lcnda-succ-view', cur.view); return render(); }
+        const vw = t.closest('[data-succ-view]'); if (vw) { e.preventDefault(); cur.view = vw.dataset.succView; store.set('genealogie-succ-view', cur.view); return render(); }
         const full = t.closest('[data-succ-full]'); if (full) { e.preventDefault(); t.closest('dialog')?.close?.(); A().state.listType = full.dataset.succFull === 'courriers' ? 'courriers' : 'living_contacts'; return A().setModule('listes'); }
         const hw = t.closest('[data-succ-hwrite]'); if (hw) { e.preventDefault(); const [cid, pid] = hw.dataset.succHwrite.split(':').map(Number); const c = board.cases.get(cid); if (!c) return; return letterDialog(c.D, c.R, c.D.courriers.some(x => x.person_id === pid && x.kind !== 'acte') ? 'relance' : 'contact', pid); }
         const ha = t.closest('[data-succ-haddr]'); if (ha) { e.preventDefault(); const [cid, pid] = ha.dataset.succHaddr.split(':').map(Number); const c = board.cases.get(cid); const a = c?.D.addresses?.[pid]; return openLiving(a?.contact_id || 0, pid, c ? nameOf(c.D, pid) : ''); }
@@ -1046,7 +1049,7 @@
         if (!cur.data || !t.closest('[data-succ-case], dialog')) return;
         const D = cur.data, R = cur.R;
         const tab = t.closest('[data-succ-tab]'); if (tab) { t.closest('dialog')?.close?.(); return goTab(tab.dataset.succTab); }
-        const fam = t.closest('[data-succ-fam]'); if (fam) { const f = famsOf(tabsOf()).find(x => x[0] === fam.dataset.succFam); if (!f) return; const last = store.get('lcnda-succ-famtab', {})[f[0]]; return goTab(f[2].includes(last) ? last : f[2][0]); }
+        const fam = t.closest('[data-succ-fam]'); if (fam) { const f = famsOf(tabsOf()).find(x => x[0] === fam.dataset.succFam); if (!f) return; const last = store.get('genealogie-succ-famtab', {})[f[0]]; return goTab(f[2].includes(last) ? last : f[2][0]); }
         if (t.closest('[data-succ-dlgo]')) { t.closest('[data-succ-case]')?.querySelector('.succ-deadlines')?.scrollIntoView({behavior: 'smooth', block: 'center'}); return; }
         const em = t.closest('[data-succ-eur-mode]'); if (em) { OUT().setEuroMode?.(em.dataset.succEurMode); return render(); }
         const fed = t.closest('[data-succ-fee-edit]'); if (fed) { const f = D.fees.find(x => x.id === Number(fed.dataset.succFeeEdit)); if (f) feeDialog(D, f.kind, f); return; }

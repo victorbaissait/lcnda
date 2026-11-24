@@ -489,7 +489,7 @@
         const refresh = async () => { try { st = await api('meteo_status'); } catch (_) {} cache.clear(); draw(); };
         dlRedraw = draw; dlRefresh = refresh;
         // ce qui est en ligne (taille de chaque pack), et les téléchargements interrompus à reprendre
-        api('meteo_dl_info').then(r => { DL.online = r.packs || {}; DL.err = ''; }).catch(x => { DL.online = {}; DL.err = x.message; }).finally(async () => {
+        api('meteo_dl_info').then(r => { DL.online = r.packs || {}; DL.err = r.error || ''; }).catch(x => { DL.online = {}; DL.err = x.message; }).finally(async () => {
             const ids = dlSaved(); for (const [k, id] of Object.entries(ids)) { if (DL.run[k]) continue; try { const r = await api('meteo_dl_resume', {id}); if (r.exists) DL.paused[k] = {id, received: r.received, size: r.size}; else dlForget(k); } catch (_) {} }
             if (ws.querySelector('.wx-settings')) draw(); });
         if (ws.__wxBound !== true) {
