@@ -265,6 +265,18 @@
    "old": 29396,
    "places": 12613,
    "size": 763692
+  },
+  "43": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Haute-Loire",
+    "bibl": "Chassaing (Augustin) et Jacotin (Antoine), Dictionnaire topographique du département de la Haute-Loire, Paris, 1907.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k392965"
+   },
+   "communes": 277,
+   "label": "Haute-Loire",
+   "old": 17370,
+   "places": 9269,
+   "size": 441763
   }
  },
  "licence": "Licence Ouverte 2.0 (Etalab), équivalente à CC BY 4.0",
