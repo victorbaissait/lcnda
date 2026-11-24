@@ -1001,6 +1001,7 @@ function site_defaults_allowed_keys(): array
     // même liste que SITE_DEFAULT_KEYS (assets/js/app.js) : une clé absente d'ici est jetée sans rien dire
     return [
         'genealogie-meteo', // 🌦 Météo d’autrefois
+        'genealogie-elections', // 🗳 Élections d’autrefois
         'genealogie-menu-names',
         'genealogie-menu-icons',
         'genealogie-lightbox-sections',
