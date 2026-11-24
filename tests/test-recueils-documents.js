@@ -150,16 +150,22 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.click('#workspace [data-ong-recbar] [data-ong-wsrec=""]').catch(() => {});
         });
         await t('📚 en bas de la colonne : « Voir la liste des recueils » ferme le document ouvert et montre les recueils à droite, dans Documents', async () => {
-            await p.waitForSelector('#sidebar-content [data-ong-allrec]');
+            await p.waitForSelector('#sidebar-footer [data-ong-allrec]');
             await p.click('#sidebar-content .ong-list [data-ong-doc="5"]'); await p.waitForFunction(() => /#documents\/5/.test(location.hash), null, {timeout: 10000});
-            assert.ok(await p.isVisible('#sidebar-content [data-ong-allrec]'), 'le bouton est visible en bas');
-            await p.click('#sidebar-content [data-ong-allrec]');
+            assert.ok(await p.isVisible('#sidebar-footer [data-ong-allrec]'), 'le bouton est visible en bas');
+            assert.equal(await p.textContent('#sidebar-footer [data-ong-allrec-n]'), '1 recueil', 'le nombre de recueils');
+            const pos = await p.evaluate(() => { const c = document.querySelector('#sidebar-footer [data-ong-count]').getBoundingClientRect(), b = document.querySelector('#sidebar-footer [data-ong-allrec]').getBoundingClientRect(), l = document.querySelector('#sidebar-content').getBoundingClientRect(); return {under: b.top >= c.bottom - 1, below: b.top >= l.bottom - 1}; });
+            assert.deepEqual(pos, {under: true, below: true}, 'sous « N documents », sous la liste (il ne cache rien)');
+            if (process.env.SHOT) await p.screenshot({path: process.env.SHOT + '-foot.png'});
+            await p.click('#sidebar-footer [data-ong-allrec]');
             await p.waitForSelector('#workspace [data-ong-reccard]', {timeout: 15000});
             assert.equal(await p.evaluate(() => window.LCNDA_APP.state.module), 'documents', 'on reste dans Documents');
             assert.equal(await p.evaluate(() => location.hash), '#documents');
+            // dans chaque façon de ranger : d'A → Z, il passe en « Recueils » et montre la liste à droite
             await p.click('#sidebar-content [data-ong-mode="az"]'); await sleep(300);
-            assert.equal(await p.$('#sidebar-content [data-ong-allrec]'), null, 'seulement en mode Recueils');
-            await p.click('#sidebar-content [data-ong-mode="recueils"]'); await p.waitForSelector('#sidebar-content [data-ong-allrec]');
+            await p.click('#sidebar-content .ong-list [data-ong-doc="5"]'); await p.waitForFunction(() => /#documents\/5/.test(location.hash), null, {timeout: 10000});
+            await p.click('#sidebar-footer [data-ong-allrec]'); await p.waitForSelector('#workspace [data-ong-reccard]', {timeout: 15000});
+            assert.equal(await p.evaluate(() => document.querySelector('#sidebar-content [data-ong-mode].is-active')?.dataset.ongMode), 'recueils');
         });
         await t('chercher par recueil : son nom dans « Chercher… », et le filtre « Recueil »', async () => {
             await p.click('#sidebar-content [data-ong-mode="az"]');

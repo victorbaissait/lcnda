@@ -216,6 +216,6 @@ button.ong-uname:hover, button.ong-uname:focus-visible { border-style: solid; bo
 .ong-tdoc { display: grid; gap: 2px; justify-items: center; width: 110px; flex: none; border: 2px solid var(--line, #c9ced8); background: var(--surface, #fff); padding: 6px; cursor: pointer; text-align: center; }
 .ong-tdoc img, .ong-tdoc .ong-ico { width: 90px; height: 90px; object-fit: cover; display: grid; place-items: center; font-size: 30px; }
 .ong-tdoc small { font-size: 11.5px; line-height: 1.2; max-height: 2.4em; overflow: hidden; overflow-wrap: anywhere; }
-/* 📚 en bas de la colonne (mode Recueils) : la liste des recueils à droite */
-.ong-allrec { position: sticky; bottom: 0; padding: 10px 0 4px; background: var(--surface, #fff); z-index: 2; }
-.ong-allrec .button { width: 100%; justify-content: center; }
+/* 📚 pied de la colonne (mode Recueils) : la liste des recueils à droite */
+#sidebar-footer .ong-allrec { display: flex; width: 100%; justify-content: center; align-items: baseline; gap: 8px; margin: 8px 0 0; font-size: 14px; }
+#sidebar-footer .ong-allrec-n { font-size: 12px; font-weight: 400; opacity: .75; }
