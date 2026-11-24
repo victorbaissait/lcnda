@@ -1317,7 +1317,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-audio-studio.js?v=6" defer></script>
 <script src="assets/js/heritage-audio-multi.js?v=3" defer></script>
 <script src="assets/js/heritage-calendars.js?v=22" defer></script>
-<script src="assets/js/heritage-horloges.js?v=3" defer></script>
+<script src="assets/js/heritage-horloges.js?v=4" defer></script>
 <script src="assets/js/heritage-assemble.js?v=11" defer></script>
 <script src="assets/js/heritage-columns.js?v=9" defer></script>
 <script src="assets/js/heritage-atelier-widgets.js?v=8" defer></script>

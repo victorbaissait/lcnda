@@ -103,6 +103,15 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => [...document.querySelectorAll('.ui-toast')].reverse().find(x => /Couleurs des fuseaux/.test(x.textContent)).querySelector('button').click()); await sleep(500);
             assert.strictEqual(await fillOf(60), 'rgb(18, 52, 86)', '↶ Annuler');
             await p.evaluate(() => localStorage.removeItem('genealogie-horloges-couleurs')); void f0;
+            // 📋 quels pays et régions pour chaque fuseau : se montre, se cherche, retenu
+            await p.click('.hz-page [data-hz-who] > summary'); await sleep(200);
+            assert.strictEqual(await p.evaluate(() => localStorage.getItem('genealogie-horloges-pays')), 'true');
+            const who = await p.evaluate(() => Object.fromEntries([...document.querySelectorAll('[data-hz-who-off]')].map(sec => [sec.dataset.hzWhoOff, [...sec.querySelectorAll('[data-hz-who-n]')].map(x => x.textContent)])));
+            assert.ok(who['60'].includes('Algérie') && who['60'].some(n => /^France/.test(n)), 'UTC+1 : la France, l’Algérie');
+            assert.ok(who['-300'].some(n => /États-Unis \(New York\)/.test(n)) && who['-360'].some(n => /États-Unis \(Chicago\)/.test(n)), 'les régions des États-Unis');
+            assert.ok(who['330'].includes('Inde'));
+            await p.fill('.hz-page [data-hz-who-q]', 'japon'); await sleep(100);
+            assert.deepStrictEqual(await p.evaluate(() => [...document.querySelectorAll('[data-hz-who-off]')].filter(x => !x.hidden).map(x => x.dataset.hzWhoOff)), ['540']);
             await p.click('.hz-page [data-hz-mapmode="bands"]'); await p.waitForSelector('.hz-map.is-bands .hz-bl');
             assert.strictEqual(await p.evaluate(() => localStorage.getItem('genealogie-horloges-carte')), '"bands"');
             await p.click('.hz-page [data-hz-mapmode="real"]'); await p.waitForSelector('.hz-map.is-real');

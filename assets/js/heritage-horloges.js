@@ -253,12 +253,12 @@
     }
 
     /* ── 🗺 la carte des fuseaux : par pays et régions (l'heure légale, été compris) ou en bandes de 15°, la nuit en grisé, les villes ── */
-    const MAPMODE_KEY = 'genealogie-horloges-carte';
+    const MAPMODE_KEY = 'genealogie-horloges-carte', WHO_KEY = 'genealogie-horloges-pays';
     async function mapHtml(cities, t = Date.now(), mode = ls.get(MAPMODE_KEY, 'real')) {
         const W = 960, H = 470, X = lon => (lon + 180) / 360 * W, Y = lat => (90 - lat) / 180 * H;
         // un contour qui passe la ligne de changement de date (-180 ↔ 180) : on lève le crayon au lieu de traverser toute la carte
         const ring = r => { let s = '', jumped = false; for (let i = 0; i < r.length; i += 2) { const jump = i && Math.abs(r[i] - r[i - 2]) > 180; if (jump) jumped = true; s += (i && !jump ? 'L' : 'M') + X(r[i]).toFixed(1) + ' ' + Y(r[i + 1]).toFixed(1); } return jumped ? s : s + 'Z'; };
-        let land = '', used = new Map(), clipDefs = '', clipSeq = 0; const CP = colorPrefs();
+        let land = '', used = new Map(), clipDefs = '', clipSeq = 0; const CP = colorPrefs(), who = new Map(); // fuseau → {pays ou région → fuseau IANA}
         try {
             const G = await ext.diagramCartes?.load('monde-50m');
             land = (G?.zones || []).map(z => {
@@ -276,7 +276,7 @@
                     byTz.forEach((ranges, tz) => { const id = 'hzc' + (++clipSeq); clipDefs += `<clipPath id="${id}">${ranges.map(([x0, x1, y0]) => `<rect x="${(X(x0) - .3).toFixed(1)}" y="${(Y(y0 + 2) - .3).toFixed(1)}" width="${(X(x1) - X(x0) + .6).toFixed(1)}" height="${(Y(y0) - Y(y0 + 2) + .6).toFixed(1)}"/>`).join('')}</clipPath>`;
                         if (!groups.has(tz)) groups.set(tz, []); groups.get(tz).push({clip: id, d: dd}); });
                 });
-                return [...groups].map(([tz, ds]) => { const off = tz && SET(tz) ? offsetOf(tz, t) : null; if (off !== null) used.set(off, (used.get(off) || 0) + 1);
+                return [...groups].map(([tz, ds]) => { const off = tz && SET(tz) ? offsetOf(tz, t) : null; if (off !== null) { used.set(off, (used.get(off) || 0) + 1); if (!who.has(off)) who.set(off, new Map()); const multi = Object.values(groups).length > 1 || groups.size > 1 || ['US', 'CA', 'RU', 'BR', 'AU', 'MX', 'ID', 'CD', 'MN', 'GL', 'FR', 'PT', 'ES', 'NL', 'CL', 'EC', 'NZ', 'KI', 'FM', 'PF'].includes(z.id); const nm = multi ? `${z.name} (${tz.split('/').pop().replace(/_/g, ' ')})` : z.name; who.get(off).set(nm, tz); }
                     const fill = off === null ? '#e6e3da' : offColor(off, CP), title = `<title>${esc(z.name)}${tz ? ` — ${esc(tz)} (UTC${off >= 0 ? '+' : '−'}${Math.floor(Math.abs(off) / 60)}${Math.abs(off) % 60 ? ':' + pad(Math.abs(off) % 60) : ''})` : ''}</title>`;
                     const plain = ds.filter(x => typeof x === 'string').join(''), clipped = ds.filter(x => typeof x !== 'string');
                     return (plain ? `<path d="${plain}" style="fill:${fill}" data-hz-off="${off ?? ''}">${title}</path>` : '') + clipped.map(cd => `<path d="${cd.d}" style="fill:${fill}" data-hz-off="${off ?? ''}" clip-path="url(#${cd.clip})">${title}</path>`).join(''); }).join('');
@@ -289,7 +289,12 @@
         const fmtOff = o => `${o >= 0 ? '+' : '−'}${Math.floor(Math.abs(o) / 60)}${Math.abs(o) % 60 ? ':' + pad(Math.abs(o) % 60) : ''}`;
         const legend = mode === 'real' ? `<div class="hz-legend">${[...used.keys()].sort((a, b) => a - b).map(o => `<button type="button" class="hz-leg" data-hz-leg="${o}" title="${esc(T('Changer sa couleur'))}"><i style="background:${offColor(o, CP)}"></i>UTC${fmtOff(o)}</button>`).join('')}<button type="button" class="button small secondary" data-hz-colors data-hz-used="${[...used.keys()].join(',')}">🎨 ${esc(T('Couleurs des fuseaux'))}</button></div>` : '';
         const seg = `<div class="segmented hz-mapmode">${[['real', T('Par pays et régions (heure légale)')], ['bands', T('Fuseaux théoriques (bandes de 15°)')]].map(([k, l]) => `<button type="button" class="${mode === k ? 'is-active' : ''}" data-hz-mapmode="${k}" aria-pressed="${mode === k}">${esc(l)}</button>`).join('')}</div>`;
-        return `${seg}<svg viewBox="0 0 ${W} ${H}" class="hz-map is-${mode}" role="img" aria-label="${esc(T('Carte des fuseaux horaires'))}"><defs>${clips}</defs><rect width="${W}" height="${H}" class="hz-sea"/>${bands}<g class="hz-land">${land}</g><path class="hz-night" d="${night}"/>${dots}</svg>${legend}
+        // 📋 sous la carte : quels pays et régions pour chaque fuseau (se montre et se cache, retenu)
+        const coll = new Intl.Collator(root.LCNDA_I18N?.lang || 'fr');
+        const table = mode === 'real' && who.size ? `<details class="hz-who" data-hz-who ${ls.get(WHO_KEY, false) ? 'open' : ''}><summary>📋 ${esc(T('Quels pays et régions pour chaque fuseau'))} <small class="muted">${esc(T('{n} fuseaux', {n: String(who.size)}))}</small></summary>
+            <input type="search" class="hz-who-q" data-hz-who-q placeholder="${esc(T('Chercher un pays, une région, un fuseau…'))}">
+            <div class="hz-who-list">${[...who.keys()].sort((x, y) => x - y).map(o => `<section data-hz-who-off="${o}"><h4><i style="background:${offColor(o, CP)}"></i>${esc(fmtOffset(o))}</h4><p>${[...who.get(o).keys()].sort(coll.compare).map(n => `<span data-hz-who-n="${esc(n.toLowerCase())}">${esc(n)}</span>`).join('')}</p></section>`).join('')}</div></details>` : '';
+        return `${seg}<svg viewBox="0 0 ${W} ${H}" class="hz-map is-${mode}" role="img" aria-label="${esc(T('Carte des fuseaux horaires'))}"><defs>${clips}</defs><rect width="${W}" height="${H}" class="hz-sea"/>${bands}<g class="hz-land">${land}</g><path class="hz-night" d="${night}"/>${dots}</svg>${legend}${table}
             <p class="muted hz-note">${esc(mode === 'real' ? T('Chaque pays à son heure légale d’aujourd’hui (heure d’été comprise) ; les grands pays sont découpés par régions, de façon approchée. Survole un pays pour son fuseau.') : T('Les bandes montrent les fuseaux théoriques (15° chacun) ; l’heure réelle de chaque pays peut en différer (heure légale, heure d’été).'))}</p>`;
     }
 
@@ -346,9 +351,11 @@
             <div class="segmented hz-views" role="tablist">${views.map(([k, l]) => `<button type="button" class="${view === k ? 'is-active' : ''}" data-hz-view="${k}" aria-pressed="${view === k}">${esc(l)}</button>`).join('')}</div>
             <div class="hz-body" data-hz-body>${body}</div></section>`;
         startTick();
+        ws.querySelector('[data-hz-who-q]')?.addEventListener('input', e => { const q = e.target.value.trim().toLowerCase(); ws.querySelectorAll('[data-hz-who-off]').forEach(sec => { let any = false; sec.querySelectorAll('[data-hz-who-n]').forEach(x => { const on = !q || x.dataset.hzWhoN.includes(q) || sec.querySelector('h4').textContent.toLowerCase().includes(q); x.hidden = !on; if (on) any = true; }); sec.hidden = !any; }); });
         const again = () => render(A().state?.workspaceToken);
         ws.querySelector('.hz-page').addEventListener('click', e => {
             const v = e.target.closest('[data-hz-view]'); if (v) { ls.set(VIEW_KEY, v.dataset.hzView); return again(); }
+            const sm = e.target.closest('[data-hz-who] > summary'); if (sm) { setTimeout(() => ls.set(WHO_KEY, !!sm.parentNode.open), 0); return; }
             const mm = e.target.closest('[data-hz-mapmode]'); if (mm) { ls.set(MAPMODE_KEY, mm.dataset.hzMapmode); return again(); }
             const cl = e.target.closest('[data-hz-colors],[data-hz-leg]'); if (cl) { const used = [...ws.querySelectorAll('[data-hz-leg]')].map(b => Number(b.dataset.hzLeg)); const dg = colorsDialog(used, again); if (cl.dataset.hzLeg !== undefined) dg.querySelector(`[data-hzc-off="${cl.dataset.hzLeg}"]`)?.focus(); return; }
             if (e.target.closest('[data-hz-add]')) return addDialog(again);
@@ -456,6 +463,9 @@
 .hz-colors{width:min(900px,96vw)}.hz-pals{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px}.hz-pal{display:grid;gap:4px;text-align:left;border:2px solid var(--line,#c9ced8);background:var(--surface,#fff);padding:6px 8px;cursor:pointer;font:600 13px system-ui}.hz-pal.is-on{border-color:var(--accent,#055dff);box-shadow:inset 0 0 0 1px var(--accent,#055dff)}
 .hz-pal-sw{display:flex;height:14px}.hz-pal-sw i{flex:1}.hz-offs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}.hz-off{display:flex;align-items:center;gap:6px;font-size:13px;border:1px solid var(--line,#e4e6ea);padding:3px 6px}.hz-off.is-used{font-weight:800}.hz-off.is-own{border-color:var(--accent,#055dff)}.hz-off input{width:34px;height:24px;padding:0}.hz-atlas{display:flex;gap:8px;align-items:center}.hz-legend i{width:14px;height:10px;display:inline-block;border:1px solid rgba(0,0,0,.2)}.hz-night{fill:rgba(20,25,45,.32)}.hz-dot circle{fill:#c0392b;stroke:#fff;stroke-width:1.5}.hz-dot text{font:600 11px system-ui;fill:#111;paint-order:stroke;stroke:#fff;stroke-width:3px}
 .hz-note{font-size:12.5px;margin:6px 0 0}
+.hz-who{margin:10px 0 0;border:2px solid var(--ink,#111);background:var(--surface,#fff);padding:8px 12px}.hz-who summary{cursor:pointer;font-weight:800}.hz-who-q{width:100%;margin:8px 0}
+.hz-who-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:6px 18px;max-height:420px;overflow:auto}.hz-who-list h4{margin:6px 0 2px;display:flex;align-items:center;gap:6px;font-size:13px}.hz-who-list h4 i{width:14px;height:10px;border:1px solid rgba(0,0,0,.2)}.hz-who-list p{margin:0;font-size:12.5px;line-height:1.45}
+.hz-who-list span[hidden]{display:none}.hz-who-list p span:not([hidden]) ~ span:not([hidden])::before{content:", "}
 .hz-add{width:min(620px,96vw)}.hz-add [data-hz-q]{width:100%}.hz-res{list-style:none;padding:0;margin:8px 0;max-height:46vh;overflow:auto}.hz-pick{display:block;width:100%;text-align:left;padding:6px 8px;border:0;border-bottom:1px solid var(--line,#e4e6ea);background:none;cursor:pointer}.hz-pick:hover{background:var(--surface-2,#f4f5f7)}
 .hz-style{width:min(980px,96vw)}.hz-sgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}.hz-sform{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px}.hz-sform label{display:grid;gap:3px;font-size:13px}.hz-sform .ui-toggle{display:flex}
 .hz-col input{width:60px;height:30px}.hz-presets{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}.hz-prev{border:2px dashed var(--line,#c9ced8);padding:10px;align-self:start}
