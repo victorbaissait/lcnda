@@ -2157,6 +2157,7 @@
                 if (!r?.filename) return; so.src = url(r.filename); if (r.media_id) so.mediaId = r.media_id; dirty = true; await rebuild(); drawTl(); drawRush(); toast(i18n('« {name} » est revenu du Studio son, nettoyé.', {name: so.title})); }});
         });
         // le Studio son ouvre un nouveau montage avec son son déjà posé (Fichier → 🎬 Ouvrir dans le montage)
+        if (ext._montageSeedVisual) { const sd = ext._montageSeedVisual; ext._montageSeedVisual = null; const si = await pushSource({src: url(sd.filename), title: sd.title, media: {id: sd.mediaId}}, 'image'); if (si !== null) placeRush(si, 'v1', null); drawTl(); toast(i18n('« {t} » ajoutée au montage.', {t: sd.title})); } // 📤 une image envoyée par le vectoriel ou la retouche (heritage-envoyer.js)
         if (ext._montageSeed && !proj) { const sd = ext._montageSeed; ext._montageSeed = null; const si = await pushSource({src: url(sd.filename), title: sd.title, media: {id: sd.mediaId}}, 'audio'); if (si !== null) placeRush(si, 'a', 0); drawTl(); }
         dl.addEventListener('change', schedHist); dl.addEventListener('pointerup', schedHist); // images clés, glisser sur la frise…
         if (start === 'add' || (proj && !P.v1.length)) $('[data-mt-tab="rush"]')?.click(); // un nouveau montage commence par ses rushes

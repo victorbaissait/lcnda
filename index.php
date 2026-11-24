@@ -1311,7 +1311,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-decennales.js?v=4" defer></script>
 <script src="assets/js/heritage-addrmap.js?v=14" defer></script>
 <script src="assets/js/heritage-audio-engine.js?v=4" defer></script>
-<script src="assets/js/heritage-studio-av.js?v=80" defer></script>
+<script src="assets/js/heritage-studio-av.js?v=81" defer></script>
 <script src="assets/js/heritage-montage-plus.js?v=7" defer></script>
 <script src="assets/js/heritage-audio-quick.js?v=6" defer></script>
 <script src="assets/js/heritage-audio-studio.js?v=6" defer></script>
@@ -1344,7 +1344,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-boards.js?v=53" defer></script>
 <script src="assets/js/heritage-dnd.js?v=12" defer></script>
 <script src="assets/js/heritage-retouch-rotation.js?v=2" defer></script>
-<script src="assets/js/heritage-studio.js?v=116" defer></script>
+<script src="assets/js/heritage-studio.js?v=117" defer></script>
 <script src="assets/js/heritage-retouch-plus.js?v=2" defer></script>
 <script src="assets/js/heritage-retouch-fluidite.js?v=3" defer></script>
 <script src="assets/js/heritage-retouch-gomme.js?v=3" defer></script>
@@ -1375,7 +1375,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-diagrams.js?v=37" defer></script>
 <script src="assets/js/heritage-diagram-options.js?v=6" defer></script>
 <script src="assets/js/heritage-diagram-genea.js?v=9" defer></script>
-<script src="assets/js/heritage-vector.js?v=40" defer></script>
+<script src="assets/js/heritage-vector.js?v=41" defer></script>
 <script src="assets/js/heritage-vector-plus.js?v=3" defer></script>
 <script src="assets/js/heritage-vector-map.js?v=20" defer></script>
 <script src="assets/js/heritage-vector-tree.js?v=15" defer></script>
@@ -1562,7 +1562,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-frontieres.js?v=2" defer></script>
 <script src="assets/js/heritage-anim-render.js?v=2" defer></script>
 <script src="assets/js/heritage-anim-export.js?v=1" defer></script>
-<script src="assets/js/heritage-anim-studio.js?v=3" defer></script>
+<script src="assets/js/heritage-anim-studio.js?v=4" defer></script>
+<script src="assets/js/heritage-envoyer.js?v=1" defer></script>
 <script src="assets/js/heritage-dna.js?v=23" defer></script>
 <script src="assets/js/heritage-press-ads.js?v=11" defer></script>
 <script src="assets/js/museum-viewer.js?v=10" defer></script>

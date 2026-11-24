@@ -58,13 +58,16 @@
     };
 
     /* ═════ ouvrir le Studio ═════ */
-    async function open({id = 0, diagram = null, template = '', onClose = null, toMontage = null} = {}) {
+    async function open({id = 0, diagram = null, template = '', onClose = null, toMontage = null, image = null} = {}) {
         if (!RN() || !EX()) return A().toast(T('Le Studio d’animation n’est pas encore chargé : réessaie dans un instant.'), 'error');
         let P = {id: 0, title: T('Mon film'), data: newProject()};
         if (id) { try { const r = await A().api('anim_project', {id}); P = {id: r.project.id, title: r.project.title, data: {...newProject(), ...(r.project.data || {})}}; } catch (e) { return A().toast(e.message, 'error'); } }
         else if (diagram?.spec) { P.title = diagram.name || T('Mon diagramme animé'); P.data.scenes = [newScene('diagram', {spec: diagram.spec, name: diagram.name || T('Diagramme'), title: diagram.name || ''})]; }
         else if (template && TEMPLATES[template]) { P.data.scenes = TEMPLATES[template](); P.title = P.data.scenes.find(s => s.title)?.title || P.title; }
+        else if (image?.filename) { P.title = image.title || T('Mon film'); P.data.scenes = []; }
         else P.data.scenes = [newScene('title', {title: T('Mon film')})];
+        // 📤 une image envoyée par le vectoriel ou la retouche (heritage-envoyer.js) : une scène « photo » à la fin, zoom doux
+        if (image?.filename) { P.data.scenes.push(newScene('image', {media: {id: image.id, filename: image.filename, title: image.title}, name: image.title || T('Photo')})); P.dirtyFromSend = true; }
         studio(P, onClose, toMontage);
     }
     ext.openAnimStudio = open;

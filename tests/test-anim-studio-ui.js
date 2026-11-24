@@ -206,6 +206,21 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env});
             await sleep(1500); await p.keyboard.press('Escape'); await sleep(300);
             if (await p.$('.an-dlg')) await p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => { d.close(); d.parentNode?.removeChild(d); }));
         });
+        await t('📤 une image du vectoriel ou de la retouche : envoyée vers un nouveau film (scène photo) et vers un nouveau montage (Vidéo 1), rangée dans les médias', async () => {
+            const mkBlob = () => p.evaluate(async () => { const c = document.createElement('canvas'); c.width = 320; c.height = 200; const g = c.getContext('2d'); g.fillStyle = '#2a5fa8'; g.fillRect(0, 0, 320, 200); window.__bl = await new Promise(r => c.toBlob(r, 'image/png')); });
+            assert.match(require('fs').readFileSync(require('path').join(__dirname, '../assets/js/heritage-vector.js'), 'utf8'), /\['tosend', '📤 Envoyer vers le Montage vidéo ou le Studio d’animation…'\]/);
+            assert.match(require('fs').readFileSync(require('path').join(__dirname, '../assets/js/heritage-studio.js'), 'utf8'), /\['send', '📤 Envoyer vers le Montage vidéo ou le Studio d’animation…'\]/);
+            await mkBlob(); await p.evaluate(() => window.LCNDA_EXT.sendImage(window.__bl, {title: 'Carte de Malvialle', to: 'anim-new'}));
+            await p.waitForSelector('.an-dlg [data-an-sc="0"]', {timeout: 20000});
+            const sc = await p.evaluate(() => window.LCNDA_EXT.__anim.P.data.scenes.map(s => [s.type, s.media?.filename ? 'ok' : '', s.name]));
+            assert.deepEqual(sc, [['image', 'ok', 'Carte de Malvialle']]);
+            await p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => { d.close(); d.parentNode?.removeChild(d); }));
+            await mkBlob(); await p.evaluate(() => window.LCNDA_EXT.sendImage(window.__bl, {title: 'Arbre retouché', to: 'montage-new'}));
+            await p.waitForFunction(() => { const m = document.querySelector('dialog[open]')?.__montage; return m && m.P.v1?.length === 1 && m.P.sources?.length === 1; }, null, {timeout: 20000});
+            const mt = await p.evaluate(() => { const m = document.querySelector('dialog[open]').__montage; return [m.P.sources[0].kind, m.P.sources[0].title, !!m.P.sources[0].mediaId]; });
+            assert.deepEqual(mt, ['image', 'Arbre retouché', true]);
+            await p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => { d.close(); d.parentNode?.removeChild(d); }));
+        });
         await t('aucune erreur JavaScript', async () => { assert.deepEqual(errs, []); });
     } finally { await browser.close(); proc.kill(); }
     console.log(fails ? `${fails} essai(s) en échec` : 'Le Studio d’animation marche.');
