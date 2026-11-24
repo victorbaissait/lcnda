@@ -190,7 +190,8 @@ function playOut(st, guard = 60000) {
     });
 
     console.log('Patiences');
-    const OLD = 108, NEW = ['agnessorel', 'whitehorse', 'fourseasons', 'chameleon', 'canfield2', 'forecell', 'freefan', 'mrsmop', 'blackwidow', 'threeblindmice', 'gypsy', 'irmgard', 'queenie', 'brisbane', 'blockade', 'fortunesfavor', 'midshipman', 'martha', 'morehead', 'montana', 'nestor', 'simplepairs', 'allinarow'];
+    const OLD = 210, // 108 d’origine + 102 ajoutées ensuite (tests/test-patiences.js les vérifie toutes)
+    NEW = ['agnessorel', 'whitehorse', 'fourseasons', 'chameleon', 'canfield2', 'forecell', 'freefan', 'mrsmop', 'blackwidow', 'threeblindmice', 'gypsy', 'irmgard', 'queenie', 'brisbane', 'blockade', 'fortunesfavor', 'midshipman', 'martha', 'morehead', 'montana', 'nestor', 'simplepairs', 'allinarow'];
     await t(`${P.GAMES.length} patiences (${OLD} + ${NEW.length}), noms et règles tous différents`, () => {
         assert.equal(P.GAMES.length, OLD + NEW.length); NEW.forEach(k => assert.ok(P.get(k), k));
         assert.equal(new Set(P.GAMES.map(g => g.k)).size, P.GAMES.length); assert.equal(new Set(P.GAMES.map(g => g.name)).size, P.GAMES.length);

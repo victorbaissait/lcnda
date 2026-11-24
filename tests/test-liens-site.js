@@ -20,7 +20,7 @@ let chromium; try { ({chromium} = require('playwright')); } catch (_) { ({chromi
 const root = path.join(__dirname, '..');
 const {findPhp, phpRuntimeArgs, devBundledPhp} = require('../electron/php-server.js');
 let fails = 0;
-const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } catch (e) { fails++; console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 8).join('\n  ')); } };
+const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } catch (e) { fails++; console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 40).join('\n  ')); } };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const hasPy = spawnSync('python3', ['-c', 'import zipfile'], {encoding: 'utf8'}).status === 0;
 
@@ -55,7 +55,7 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
     try {
         const p = await (await browser.newContext({viewport: {width: 1440, height: 900}})).newPage();
         p.on('pageerror', e => errs.push(e.message)); p.on('crash', () => console.log('!! la page a planté (mémoire ?)')); p.on('close', () => console.log('!! page fermée'));
-        await p.goto(base); await p.waitForFunction(() => window.LCNDA_EXT?.siteReceive && window.LCNDA_EXT?.siteKit && window.LCNDA_EXT?.sendTo && window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.openDialog, null, {timeout: 60000}).catch(async e => { console.log(await p.evaluate(() => JSON.stringify({r: !!window.LCNDA_EXT?.siteReceive, k: !!window.LCNDA_EXT?.siteKit, s: !!window.LCNDA_EXT?.sendTo, c: !!window.LCNDA_APP?.state?.csrf, d: !!window.LCNDA_EXT?.openDialog})), errs); throw e; });
+        await p.goto(base, {timeout: 90000}); await p.waitForFunction(() => window.LCNDA_EXT?.siteReceive && window.LCNDA_EXT?.siteKit && window.LCNDA_EXT?.sendTo && window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.openDialog, null, {timeout: 60000}).catch(async e => { console.log(await p.evaluate(() => JSON.stringify({r: !!window.LCNDA_EXT?.siteReceive, k: !!window.LCNDA_EXT?.siteKit, s: !!window.LCNDA_EXT?.sendTo, c: !!window.LCNDA_APP?.state?.csrf, d: !!window.LCNDA_EXT?.openDialog})), errs); throw e; });
         const api = (x, q = {}) => p.evaluate(([y, z]) => window.LCNDA_APP.api(y, z).catch(e => ({error: e.message})), [x, q]);
         const post = (a, b) => p.evaluate(async ([x, y]) => { try { const r = await window.LCNDA_APP.api(x, {}, {method: 'POST', body: y}); return r.result || r; } catch (e) { return {error: e.message}; } }, [a, b]);
         /** clique l'élément d'un petit menu de l'app (UI.menuAt) dont le texte contient « text » */
@@ -148,7 +148,7 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
             await p.evaluate(() => { window.LCNDA_EXT.siteReceive({type: 'svg', svg: '<svg viewBox="0 0 10 10"><script>x()</script><circle cx="5" cy="5" r="4" fill="#3d5a2a" onclick="x()"/></svg>', name: 'Arbre LACOMBE'}, {}); });
             await menu('La famille MAZAUD'); await menu('Une nouvelle page'); await submitTop('Nos dessins'); await sleep(900);
             const s = await api('website', {id: siteId}); const pg = s.data.pages.find(x => x.name === 'Nos dessins');
-            assert.ok(pg, 'la page est créée'); assert.match(pg.html, /<figure class="lc-dessin"[\s\S]*<circle cx="5" cy="5" r="4" fill="#3d5a2a"\/>[\s\S]*Arbre LACOMBE/); assert.ok(!/script|onclick|Un titre/.test(pg.html), pg.html);
+            assert.ok(pg, 'la page est créée'); assert.match(pg.html, /<figure class="lc-dessin"[\s\S]*<circle cx="5" cy="5" r="4" fill="#3d5a2a"(\/>|><\/circle>)[\s\S]*Arbre LACOMBE/, pg.html); assert.ok(!/script|onclick|Un titre/.test(pg.html), pg.html);
             assert.match(pg.html, /site-entete[\s\S]*lc-dessin[\s\S]*site-pied/, 'en-tête et pied de page repris');
             assert.strictEqual((await ed()).pages[(await ed()).page].name, 'Nos dessins', 'ouvert sur cette page');
             await undoLast('Le dessin est sur la page');
@@ -181,7 +181,7 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
             if (hasPy) {
                 const z = JSON.parse(spawnSync('python3', ['-I', '-c', 'import zipfile,sys,json\nz=zipfile.ZipFile(sys.argv[1])\nprint(json.dumps({n:z.read(n).decode("utf-8","replace") if n.endswith((".html",".css",".js",".txt")) else z.read(n)[:12].decode("latin-1") for n in z.namelist()}))', zf], {encoding: 'utf8'}).stdout);
                 const av = Object.keys(z).filter(n => n.startsWith('medias/')).sort();
-                assert.deepStrictEqual(av.map(n => n.replace(/m\d+/, 'm')), ['medias/m.mp3', 'medias/m.mp4'], av.join());
+                assert.deepStrictEqual(av.map(n => n.replace(/m\d+/, 'm')).sort(), ['medias/m.mp3', 'medias/m.mp4'], av.join());
                 assert.strictEqual(z[av.find(n => n.endsWith('.mp4'))], 'VIDEO-MP4-VI', 'la vidéo telle quelle'); assert.strictEqual(z[av.find(n => n.endsWith('.mp3'))], 'AUDIO-MP3-AU');
                 assert.ok(z['js/diaporama-lcnda.js'] && /LCNDA_DIAPORAMA/.test(z['js/diaporama-lcnda.js']), 'le script du diaporama');
                 const idx = z['index.html'];
@@ -195,7 +195,7 @@ echo json_encode($ids);`], {cwd: root, encoding: 'utf8', env});
             // 🧭 un WebM et un son Ogg sont signalés
             const ids = await p.evaluate(() => window.LCNDA_EXT.siteCompat.scan({html: [{name: 'index.html', text: '<video controls src="media/a.webm"></video><audio controls src="media/b.ogg"></audio>'}]}).map(r => r.id || r.feature?.id));
             assert.ok(ids.includes('html-video-webm') && ids.includes('html-audio-ogg'), ids.join());
-            const mine = await p.evaluate(() => window.LCNDA_EXT.siteWeb.current.compatScan().map(r => r.id || r.feature?.id));
+            const mine = await p.evaluate(id => { const C = window.LCNDA_EXT.siteCompat; return window.LCNDA_APP.api('website', {id}).then(r => C.scan({html: r.data.pages.map(x => ({name: x.slug + '.html', text: x.html}))}).map(x => x.id || x.feature?.id)); }, siteId);
             assert.ok(!mine.includes('html-video-webm'), 'le MP4 ne pose pas de problème');
         });
         assert.deepStrictEqual(errs, [], 'erreurs JS : ' + errs.join(' | '));

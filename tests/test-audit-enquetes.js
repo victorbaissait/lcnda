@@ -19,7 +19,7 @@ let chromium; try { ({chromium} = require('playwright')); } catch (_) { ({chromi
 const root = path.join(__dirname, '..');
 const {findPhp, phpRuntimeArgs, devBundledPhp} = require('../electron/php-server.js');
 let fails = 0;
-const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } catch (e) { fails++; console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 8).join('\n  ')); } };
+const t = async (name, fn) => { if (process.env.ENQ_ONLY && !new RegExp(process.env.ENQ_ONLY).test(name)) return; try { await fn(); console.log('✓ ' + name); } catch (e) { fails++; console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 8).join('\n  ')); } };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 (async () => {
@@ -295,7 +295,156 @@ echo json_encode($ids + ['inv' => $inv, 'inv2' => $inv2, 'bat' => $bat, 'media' 
             await p.setViewportSize({width: 1440, height: 900});
         });
         await ctx.close();
-        if (process.env.ENQ_DNA !== '0') await require('./test-audit-enquetes-adn.js').run({browser, base, php, t, sleep, root, path, errs});
+        if (process.env.ENQ_DNA !== '0') /* ═════════ 🧬 ADN ═════════ */
+        {
+            const ctx2 = await browser.newContext({viewport: {width: 1440, height: 900}});
+            await ctx2.addInitScript(() => { try { localStorage.setItem('genealogie-menu-adn', '1'); localStorage.setItem('genealogie-menu-hidden', '[]'); localStorage.setItem('genealogie-adn-prefs', JSON.stringify({ack: true})); } catch (_) {} });
+            const p = await ctx2.newPage();
+            p.on('pageerror', e => errs.push(e.message));
+            await p.goto(base); await p.waitForFunction(() => window.LCNDA_APP?.state?.csrf && window.LCNDA_EXT?.adn, null, {timeout: 30000});
+            await p.addStyleTag({path: path.join(root, 'assets/css/audit-enquetes.css')});
+            const api = (x, q = {}) => p.evaluate(([y, z]) => window.LCNDA_APP.api(y, z).catch(e => ({error: e.message})), [x, q]);
+            const post = (a, b) => p.evaluate(async ([x, y]) => { try { const r = await window.LCNDA_APP.api(x, {}, {method: 'POST', body: y}); return r.result ?? r; } catch (e) { return {error: e.message}; } }, [a, b]);
+            const toastUndo = async re => { await p.waitForFunction(r => [...document.querySelectorAll('.ui-toast')].some(x => new RegExp(r).test(x.textContent) && x.querySelector('button')), re, {timeout: 10000});
+                await p.evaluate(r => [...document.querySelectorAll('.ui-toast')].reverse().find(x => new RegExp(r).test(x.textContent) && x.querySelector('button')).querySelector('button').click(), re); await sleep(1000); };
+            const go = async sec => { await p.evaluate(s => { window.LCNDA_APP.state.adnTab = s; window.LCNDA_APP.setModule('adn'); }, sec); await p.waitForSelector(`.h-dna-page[data-dna-sec="${sec}"]`, {timeout: 20000}); await sleep(300); };
+            const menuLabels = () => p.evaluate(() => [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].map(b => b.textContent.trim()));
+            const pickMenu = re => p.evaluate(r => [...document.querySelectorAll('.ui-actmenu .ui-actmenu-i')].find(x => new RegExp(r).test(x.textContent)).click(), re);
+            const count = sql => php(`echo $pdo->query("${sql}")->fetchColumn();`);
+            // trois frères et sœurs testés, des correspondances, un groupe
+            const kA = (await post('save_dna_kit', {person_id: ID.pierre, company: 'MyHeritage DNA', test_type: 'autosomal'})).id;
+            const kB = (await post('save_dna_kit', {person_id: ID.marie, company: 'MyHeritage DNA', test_type: 'autosomal'})).id;
+            const kC = (await post('save_dna_kit', {person_id: ID.jean, company: 'MyHeritage DNA', test_type: 'autosomal'})).id;
+            const g1 = (await post('save_dna_group', {name: 'Branche LACOMBE (Naves)', color: '#e15759'})).id;
+            const mk = async (name, cm, extra = {}) => (await post('save_dna_match', {kit_id: kA, name, shared_cm: cm, segments: 8, longest_cm: 40, status: 'todo', groups: [], data: {}, ...extra})).id;
+            const mPaul = await mk('Paul DURAND', 230, {groups: [g1]}), mLucie = await mk('Lucie LACOMBE', 120, {groups: [g1]}), mAnne = await mk('Anne MAZAUD', 80), mSis = await mk('Marie LACOMBE', 2600);
+            await post('save_dna_segments', {kit_id: kA, rows: [{match_id: mSis, chromosome: '1', start: 10, end: 60, cm: 70}, {match_id: mPaul, chromosome: '2', start: 30, end: 50, cm: 25}]});
+
+            await t('ADN : la colonne rangée en groupes (comme Listes et Réglages), case « Chercher », « Réordonner »', async () => {
+                await go('home');
+                await p.waitForSelector('#sidebar-content .mt-groups [data-mt-search]');
+                assert.strictEqual(await p.$$eval('#sidebar-content details.mt-group', d => d.length), 5);
+                assert.ok(await p.$('#sidebar-footer [data-dna-reorder]') || await p.$('[data-dna-reorder]'));
+                await p.click('#sidebar-content [data-side-value="phasing"]'); await p.waitForSelector('.h-dna-page[data-dna-sec="phasing"]', {timeout: 20000});
+                assert.ok(await p.$('.h-dna-page .page-header [data-dna-print]'), '🖨 Imprimer sur chaque rubrique');
+            });
+            await t('ADN : « ⋯ » d’une correspondance = clic droit ; 🔔 relancer dans 30 jours, « À relancer », ✓ a répondu (↶)', async () => {
+                await go('matches');
+                await p.click(`[data-dna-rmenu="${mAnne}"]`); await p.waitForSelector('.ui-actmenu'); const a = await menuLabels(); await p.keyboard.press('Escape'); await sleep(200);
+                await p.click(`tr[data-dna-row="${mAnne}"] td.c-cm`, {button: 'right'}); await p.waitForSelector('.ui-actmenu'); const b = await menuLabels();
+                assert.deepStrictEqual(b, a); assert.ok(a[0].includes('Ouvrir') && a[1].includes('Modifier') && a.at(-1).includes('Supprimer'), a.join(' | '));
+                await pickMenu('Relancer dans 30'); await sleep(800);
+                const m = (await api('dna')).matches.find(x => x.id === mAnne);
+                assert.match(m.data.follow_up, /^\d{4}-\d{2}-\d{2}$/); assert.strictEqual(m.status, 'contacted', 'relancer : contactée');
+                assert.strictEqual((await api('dna_plus', {op: 'follow_ups'})).items[0].name, 'Anne MAZAUD');
+                await go('home'); await p.waitForSelector(`[data-dna-followups] [data-dna-fdone="${mAnne}"]`);
+                await p.click(`[data-dna-fdone="${mAnne}"]`); await sleep(800);
+                let m2 = (await api('dna')).matches.find(x => x.id === mAnne); assert.strictEqual(m2.status, 'replied'); assert.ok(!m2.data.follow_up);
+                await toastUndo('a répondu');
+                m2 = (await api('dna')).matches.find(x => x.id === mAnne); assert.strictEqual(m2.status, 'contacted', '↶'); assert.ok(m2.data.follow_up);
+                assert.match(php('echo json_encode(dna_semaine_items($pdo));'), /^\[\]$|Anne/, 'pour 🗓 Ma semaine');
+            });
+            await t('ADN : correspondance supprimée tout de suite (pas de question), « ↶ Annuler » la remet avec ses segments', async () => {
+                await go('matches');
+                await p.click(`[data-dna-rmenu="${mPaul}"]`); await p.waitForSelector('.ui-actmenu'); await pickMenu('Supprimer'); await sleep(800);
+                assert.strictEqual(await p.$('dialog[open]'), null);
+                assert.strictEqual(count(`SELECT count(*) FROM dna_matches WHERE id=${mPaul}`), '0');
+                await toastUndo('supprimée');
+                assert.strictEqual(count(`SELECT count(*) FROM dna_matches WHERE id=${mPaul}`), '1');
+                assert.strictEqual(count(`SELECT count(*) FROM dna_segments WHERE match_id=${mPaul}`), '1', 'ses segments');
+                assert.strictEqual(count(`SELECT group_ids FROM dna_matches WHERE id=${mPaul}`), String(g1), 'son groupe');
+            });
+            await t('ADN : groupe et test supprimés + ↶ (groupe : ses correspondances y reviennent ; test : tout revient)', async () => {
+                await go('groups'); await p.click(`[data-dna-gmenu="${g1}"]`); await p.waitForSelector('.ui-actmenu'); await pickMenu('Supprimer'); await sleep(800);
+                assert.strictEqual(count(`SELECT count(*) FROM dna_groups`), '0'); assert.strictEqual(count(`SELECT group_ids FROM dna_matches WHERE id=${mLucie}`), '');
+                await toastUndo('Groupe');
+                assert.strictEqual(count(`SELECT group_ids FROM dna_matches WHERE id=${mLucie}`), String(g1));
+                await go('kits'); await p.click(`[data-dna-kmenu="${kA}"]`); await p.waitForSelector('.ui-actmenu'); await pickMenu('Supprimer'); await sleep(800);
+                assert.strictEqual(count(`SELECT count(*) FROM dna_matches`), '0');
+                await toastUndo('Test');
+                assert.strictEqual(count(`SELECT count(*) FROM dna_matches`), '4'); assert.strictEqual(count(`SELECT count(*) FROM dna_segments`), '2');
+                // plusieurs cochées
+                const r = await post('bulk_dna_matches', {ids: [mAnne, mLucie], delete: 1}); assert.strictEqual(r.undo.matches.length, 2);
+                await post('dna_plus', {op: 'restore', undo: r.undo}); assert.strictEqual(count(`SELECT count(*) FROM dna_matches`), '4');
+            });
+            await t('ADN : mots d’état (À faire · En cours · En pause · Terminé)', async () => {
+                const st = await p.evaluate(() => window.LCNDA_EXT.dnaInternals.STATUSES.map(x => x[1]));
+                assert.ok(st.some(x => /^À faire/.test(x)) && st.some(x => /^En cours/.test(x)) && st.some(x => /^En pause/.test(x)) && st.some(x => /^Terminé/.test(x)), st.join(' | '));
+            });
+            await t('📈 endogamie : branche cochée → cM corrigés, relation réajustée ; calculateur', async () => {
+                await go('settings');
+                await p.selectOption('[data-dna-endo-f]', '0.55'); await p.check(`[data-dna-endo-g="${g1}"]`); await sleep(900);
+                const pr = await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-adn-prefs')).endo); assert.deepStrictEqual([pr.factor, pr.groups], [0.55, [g1]]);
+                await go('matches');
+                assert.match(await p.textContent(`tr[data-dna-row="${mPaul}"] td.c-guess`), /≈/);
+                const v = await p.evaluate(() => { const I = window.LCNDA_EXT.dnaInternals; return [Math.round(I.cmFor({shared_cm: 200, groups: [Number(JSON.parse(localStorage.getItem('genealogie-adn-prefs')).endo.groups[0])], kit_id: 0})), I.cmFor({shared_cm: 200, groups: [], kit_id: 0})]; });
+                assert.deepStrictEqual(v, [110, 200]);
+                await p.evaluate(() => { window.LCNDA_APP.state.adnFilter.calc = '400'; }); await go('calc');
+                await p.check('[data-dna-calc-endo]'); await p.waitForSelector('[data-dna-calc-corr]', {timeout: 10000});
+                assert.match(await p.textContent('[data-dna-calc-corr]'), /400 cM comptés comme 220 cM/);
+            });
+            await t('🧪 correspondances partagées : matrice A × B, un clic les relie (↶), coller une liste', async () => {
+                await go('shared'); await p.waitForSelector('[data-sm-matrix]');
+                const cell = `[data-sm-cell="${mPaul}:${mLucie}"]`;
+                assert.ok(await p.$eval(cell, c => c.classList.contains('is-off')));
+                await p.click(cell); await p.waitForFunction(s => document.querySelector(s)?.classList.contains('is-on'), cell, {timeout: 10000});
+                assert.ok((await api('dna')).matches.find(x => x.id === mLucie).data.shared_matches.includes('Paul DURAND'), 'noté chez les deux');
+                await toastUndo('se correspondent');
+                await p.waitForFunction(s => document.querySelector(s)?.classList.contains('is-off'), cell, {timeout: 10000});
+                const r = await post('dna_plus', {op: 'import_shared', kit_id: kA, pairs: [['Anne MAZAUD', 'paul durand'], ['Anne MAZAUD', 'Inconnu X']]});
+                assert.strictEqual(r.n, 1); assert.deepStrictEqual(r.unknown, ['Inconnu X']);
+                const sp = await p.evaluate(() => [...window.LCNDA_EXT.dnaInternals.sharedPairs([{name: 'A', data: {shared_matches: ['b']}}, {name: 'B', data: {}}, {name: 'C', data: {}}])]);
+                assert.deepStrictEqual(sp, ['0|1']);
+            });
+            await t('🧬 phasage visuel : trois frères et sœurs, un morceau donné à un grand-parent, ce qui est reconstitué (↶)', async () => {
+                const pr = await post('dna_plus', {op: 'save_phasing', name: 'Fratrie MAZAUD', data: {siblings: [{kit_id: kA, name: 'Pierre'}, {kit_id: kB, name: 'Marie'}, {kit_id: kC, name: 'Jean'}], segments: [], crossovers: []}});
+                await p.evaluate(id => { window.LCNDA_APP.state.adnFilter.phase = id; }, pr.id);
+                await go('phasing'); await p.waitForSelector('[data-ph-svg]', {timeout: 20000});
+                assert.strictEqual(await p.$$eval('[data-ph-sib]', r => r.length), 3);
+                await p.selectOption('[data-ph-who]', '1'); await p.selectOption('[data-ph-gp]', 'PGF'); await p.fill('[data-ph-a]', '0'); await p.fill('[data-ph-b]', '100');
+                await p.click('[data-ph-add]'); await p.waitForSelector('[data-ph-seg]', {timeout: 10000});
+                assert.match(await p.textContent('[data-ph-union="PGF"]'), /^3[,.]5 %$/, '100 Mb sur 2 881 Mb');
+                const ph = (await api('dna_plus', {op: 'phasing'})).projects[0]; assert.deepStrictEqual(ph.data.segments[0], {chr: '1', sib: 1, side: 'p', start: 0, end: 100, gp: 'PGF'});
+                // un clic sur le morceau : le donner à la grand-mère paternelle
+                const box = await (await p.$('[data-ph-seg]')).boundingBox(); await p.mouse.click(box.x + 5, box.y + 5); await p.waitForSelector('.ui-actmenu');
+                await pickMenu('Grand-mère paternelle'); await sleep(900);
+                assert.strictEqual((await api('dna_plus', {op: 'phasing'})).projects[0].data.segments[0].gp, 'PGM');
+                await toastUndo('Morceau changé');
+                assert.strictEqual((await api('dna_plus', {op: 'phasing'})).projects[0].data.segments[0].gp, 'PGF');
+                // les segments partagés entre Pierre et Marie s'affichent
+                assert.ok(await p.$eval('[data-ph-svg]', s => /Pierre × Marie/.test(s.textContent)), 'comparaison Pierre × Marie');
+                await p.click('[data-ph-del]'); await sleep(800); assert.strictEqual((await api('dna_plus', {op: 'phasing'})).projects.length, 0);
+                await toastUndo('Phasage'); assert.strictEqual((await api('dna_plus', {op: 'phasing'})).projects.length, 1);
+            });
+            await t('ADN : ⤓ Exporter ▾ (tableur, PDF, imprimer, fichier) ; chercher dans cette page', async () => {
+                await go('matches'); await p.click('[data-dna-export]'); await p.waitForSelector('dialog.ui-export[open]');
+                assert.deepStrictEqual(await p.$$eval('dialog.ui-export[open] .ui-export-fmt', b => b.map(x => x.dataset.fmt)), ['csv', 'pdf', 'print', 'file']);
+                await p.evaluate(() => document.querySelectorAll('dialog[open]').forEach(d => d.close())); await sleep(300);
+                await go('learn'); await p.waitForSelector('.h-dna-find input');
+                await p.fill('.h-dna-find input', 'Leeds'); await sleep(400);
+                assert.strictEqual(await p.$$eval('.h-dna-learn:not(.enq-find-off)', d => d.length), 1);
+            });
+            await t('ADN en consultation : ni ＋, ni import, ni suppression ; la fiche d’une correspondance en lecture seule', async () => {
+                await p.evaluate(() => document.body.classList.add('is-kiosk'));
+                await go('matches');
+                for (const sel of ['[data-dna-newmatch]', '[data-dna-import]', '[data-dna-chk]', '.h-dna-bulk']) assert.strictEqual(await p.$(`.h-dna-page ${sel}`), null, sel);
+                await p.click(`[data-dna-rmenu="${mAnne}"]`); await p.waitForSelector('.ui-actmenu'); assert.ok(!(await menuLabels()).some(x => /Supprimer|Modifier|Relancer/.test(x))); await p.keyboard.press('Escape'); await sleep(200);
+                await p.click(`[data-dna-match="${mAnne}"]`); await p.waitForSelector('dialog[open] [name=shared_cm]');
+                assert.ok(await p.$eval('dialog[open] [name=shared_cm]', i => i.disabled)); assert.strictEqual(await p.$('dialog[open] [data-h-delete]'), null);
+                await p.evaluate(() => { document.querySelectorAll('dialog[open]').forEach(d => d.close()); document.body.classList.remove('is-kiosk'); });
+                await go('kits'); assert.ok(await p.$('[data-dna-newkit]'));
+            });
+            await t('ADN 390 px : rien ne déborde (correspondances, phasage)', async () => {
+                await p.setViewportSize({width: 390, height: 800});
+                for (const sec of ['matches', 'phasing', 'settings']) {
+                    await go(sec); await sleep(500);
+                    const over = await p.evaluate(() => [...document.querySelectorAll('#workspace .page *')].filter(e => { const r = e.getBoundingClientRect(); return r.width && r.right > window.innerWidth + 2 && !e.closest('.data-table-wrap,svg,.ui-actmenu,.h-dna-shared-matrix'); }).slice(0, 5).map(e => `${e.tagName}.${e.className} r=${Math.round(e.getBoundingClientRect().right)}`));
+                    assert.deepStrictEqual(over, [], sec);
+                }
+                await p.setViewportSize({width: 1440, height: 900});
+            });
+            await ctx2.close();
+        }
         assert.deepStrictEqual(errs, [], 'erreurs JS : ' + errs.join(' | '));
     } catch (e) { fails++; console.log('✗ ' + (e.stack || e)); }
     finally { await browser.close(); proc.kill(); fs.rmSync(tmp, {recursive: true, force: true}); }

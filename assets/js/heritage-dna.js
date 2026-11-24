@@ -964,6 +964,8 @@
     }, async bind(root) {
         const f = filt();
         if (!phase) { await loadPhase(); if (S().adnTab === 'phasing') go('phasing'); return; }
+        if (Number(f.phase) && !(phase.projects || []).some(x => x.id === Number(f.phase)) && !f.phRetry) { f.phRetry = 1; await loadPhase(true); if (S().adnTab === 'phasing') go('phasing'); return; } // un phasage fait ailleurs
+        f.phRetry = 0;
         const list = phase.projects || [], pr = list.find(x => x.id === Number(f.phase)) || list[0] || null;
         const save = async (msg, before) => { try { await post('dna_plus', {op: 'save_phasing', id: pr.id, name: pr.name, data: pr.data}); await loadPhase(true); go('phasing');
             if (msg && before) undoToast(msg, {undo: async () => { await post('dna_plus', {op: 'save_phasing', id: pr.id, name: pr.name, data: before}); await loadPhase(true); go('phasing'); }}); } catch (e) { toast(e.message, 'error'); } };

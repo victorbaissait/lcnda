@@ -76,8 +76,9 @@
     function cleanSvg(text, {name = '', prefix = ''} = {}) {
         const src = String(text || '').replace(/^\uFEFF/, '').trim(); if (!src || src.length > 1800000) return '';
         const m = /<svg\b[\s\S]*<\/svg\s*>/i.exec(src); if (!m) return '';
-        let doc = new DOMParser().parseFromString(m[0], 'image/svg+xml');
-        if (doc.getElementsByTagName('parsererror').length) { const h = new DOMParser().parseFromString(`<!doctype html><body>${m[0]}`, 'text/html').querySelector('svg'); if (!h) return ''; doc = new DOMParser().parseFromString(new XMLSerializer().serializeToString(h), 'image/svg+xml'); if (doc.getElementsByTagName('parsererror').length) return ''; }
+        const txt = /^<svg\b[^>]*\sxmlns\s*=/i.test(m[0]) ? m[0] : m[0].replace(/^<svg\b/i, '<svg xmlns="http://www.w3.org/2000/svg"'); // un SVG collé sans xmlns : ses formes sont bien du SVG
+        let doc = new DOMParser().parseFromString(txt, 'image/svg+xml');
+        if (doc.getElementsByTagName('parsererror').length) { const h = new DOMParser().parseFromString(`<!doctype html><body>${txt}`, 'text/html').querySelector('svg'); if (!h) return ''; doc = new DOMParser().parseFromString(new XMLSerializer().serializeToString(h), 'image/svg+xml'); if (doc.getElementsByTagName('parsererror').length) return ''; }
         const svg = doc.documentElement; if (!svg || svg.localName.toLowerCase() !== 'svg') return '';
         const pre = prefix || `d${Math.random().toString(36).slice(2, 7)}`, ids = new Map();
         [...svg.querySelectorAll('*')].reverse().forEach(el => {
