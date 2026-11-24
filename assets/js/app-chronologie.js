@@ -169,7 +169,8 @@
     function eventInnerHtml(event) {
         const age = state.timeline.ages !== false && event._age ? ` <span class="chrono-age" title="${escapeHtml(T('Âge à cet événement'))}">🎂 ${escapeHtml(event._age)}</span>` : '';
         const warn = event._anomaly ? `<p class="chrono-anomaly" role="note">🚨 ${escapeHtml(event._anomaly.join(' · '))}</p>` : '';
-        return `<strong>${escapeHtml(event.type)} · <button class="table-link" data-open-person="${Number(event.person_id) || ''}">${escapeHtml(eventName(event))}</button>${age}</strong><p>${escapeHtml([event.date_text, event.place].filter(Boolean).join(' — '))}</p>${warn}<button type="button" class="chrono-more icon-button" data-chrono-more title="${escapeHtml(T('Plus d’actions'))}" aria-label="${escapeHtml(T('Plus d’actions'))}">⋯</button>`;
+        const lock = A().privateEventBadge?.(event) || ''; // 🔒 événement confidentiel : la pastille, pour le propriétaire
+        return `<strong>${escapeHtml(event.type)} · <button class="table-link" data-open-person="${Number(event.person_id) || ''}">${escapeHtml(eventName(event))}</button>${age}</strong>${lock}<p>${escapeHtml([event.date_text, event.place].filter(Boolean).join(' — '))}</p>${warn}<button type="button" class="chrono-more icon-button" data-chrono-more title="${escapeHtml(T('Plus d’actions'))}" aria-label="${escapeHtml(T('Plus d’actions'))}">⋯</button>`;
     }
     function timelineRowsHtml(events) {
         return events.length ? `<div class="timeline">${events.map(event => `<article class="timeline-row${event._anomaly ? ' is-anomaly' : ''}" ${eventAttrs(event)}><div class="timeline-year">${event.year}</div><span class="timeline-node" style="--event-color:${escapeHtml(event.color)}"></span><div class="timeline-card">${eventInnerHtml(event)}</div></article>`).join('')}</div>` : emptyState({text: T('Aucun événement daté dans cette sélection.'), icon: '🕰️', hint: T('Ajoute des dates aux événements des fiches, ou montre d’autres sortes d’événements.')});
@@ -191,7 +192,7 @@
         const hist = state.timeline.history ? historicalTimelineEvents().filter(h => !h.hidden && h.end_year >= from && h.start_year <= to).map(h => `<span class="chrono-band" style="left:${x(h.start_year)}px;width:${Math.max(3, x(h.end_year + 1) - x(h.start_year))}px" title="${escapeHtml(`${h.label} (${h.start_year}${h.end_year > h.start_year ? '-' + h.end_year : ''})`)}"></span>`).join('') : '';
         const rows = [...people.values()].sort((a, b) => Math.min(...a.events.map(e => +e.year)) - Math.min(...b.events.map(e => +e.year))).map(row => {
             const ys = row.events.map(e => Number(e.year)).filter(Boolean), y0 = Math.min(...ys), y1 = Math.max(...ys);
-            const dots = row.events.map(e => `<span class="chrono-dot${e._anomaly ? ' is-anomaly' : ''}" style="left:${x(+e.year) - x(y0)}px;--event-color:${escapeHtml(e.color || '#888')}" ${eventAttrs(e)} title="${escapeHtml([e.type, e.date_text, e.place, e._age ? '🎂 ' + e._age : '', e._anomaly ? '🚨 ' + e._anomaly.join(' · ') : ''].filter(Boolean).join(' · '))}"></span>`).join('');
+            const dots = row.events.map(e => `<span class="chrono-dot${e._anomaly ? ' is-anomaly' : ''}" style="left:${x(+e.year) - x(y0)}px;--event-color:${escapeHtml(e.color || '#888')}" ${eventAttrs(e)} title="${escapeHtml([Number(e.is_private) ? '🔒' : '', e.type, e.date_text, e.place, e._age ? '🎂 ' + e._age : '', e._anomaly ? '🚨 ' + e._anomaly.join(' · ') : ''].filter(Boolean).join(' · '))}"></span>`).join('');
             return `<div class="chrono-bar-row" data-lane="${row.lane}"><button type="button" class="table-link chrono-bar-name" ${row.pid ? `data-open-person="${row.pid}"` : ''}>${escapeHtml(row.name)}</button><div class="chrono-bar-track" style="width:${width}px"><span class="chrono-bar" style="left:${x(y0)}px;width:${Math.max(6, x(y1) - x(y0))}px">${dots}</span></div></div>`;
         }).join('');
         return `<div class="chrono-bars" data-chrono-bars style="--chrono-width:${width}px"><div class="chrono-bars-tools no-export"><button type="button" class="button small secondary" data-chrono-zoom="-1" title="${escapeHtml(T('Voir plus d’années'))}">－</button><button type="button" class="button small secondary" data-chrono-zoom="1" title="${escapeHtml(T('Agrandir une période'))}">＋</button><small>${escapeHtml(T('⌘ ou Ctrl + molette : agrandir là où est la souris.'))}</small></div><div class="chrono-bars-scroll"><div class="chrono-bars-inner"><div class="chrono-ruler" style="width:${width}px">${ticks.join('')}</div><div class="chrono-bands" style="width:${width}px">${hist}</div>${rows || emptyState({text: T('Aucun événement daté dans cette sélection.'), icon: '📏'})}</div></div></div>`;
@@ -339,7 +340,7 @@
             const d = await api('place_monograph', {place_id: placeId, year_from: from || '', show_digests: 0, show_battues: 0, show_cemetery: 0});
             const evs = (d.events || []).filter(e => e.year != null && e.year !== '');
             evs.forEach(e => { if (seen.has(e.id)) return; seen.add(e.id); const couple = !e.person_id && (e.partner1_id || e.partner2_id);
-                out.push({id: e.id, year: Number(e.year), date_text: e.date_text || String(e.year), type: e.type_label, color: colorByLabel(e.type_label), person_id: Number(e.person_id || e.partner1_id || e.partner2_id) || 0,
+                out.push({id: e.id, is_private: Number(e.is_private) || 0, year: Number(e.year), date_text: e.date_text || String(e.year), type: e.type_label, color: colorByLabel(e.type_label), person_id: Number(e.person_id || e.partner1_id || e.partner2_id) || 0,
                     first_name: couple ? [e.partner1_name, e.partner2_name].filter(Boolean).join(' & ') : (e.person_name || ''), last_name: '', place: d.place?.name || ''}); });
             if ((d.events || []).length < 100) break;
             const last = Math.max(...evs.map(e => Number(e.year)));
@@ -377,7 +378,8 @@
     }
     function filtered(events) {
         const st = bar?.state || {q: state.timeline.q || '', filters: {kinds: state.timeline.kinds || []}}, kinds = st.filters?.kinds || [], q = fold(st.q || '').trim();
-        return (events || []).filter(e => (!kinds.length || kinds.includes(kindOf(e))) && (!q || fold([e.type, eventName(e), e.date_text, e.place, e.year, e._age].join(' ')).includes(q)));
+        return (events || []).filter(e => !(kiosk() && Number(e.is_private)) && (!kinds.length || kinds.includes(kindOf(e))) // 🔒 un événement confidentiel n'est pas montré en consultation
+             && (!q || fold([e.type, eventName(e), e.date_text, e.place, e.year, e._age].join(' ')).includes(q)));
     }
     function draw() {
         if (!cache || state.module !== 'chronologie') return;

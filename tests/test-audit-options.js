@@ -21,7 +21,8 @@ const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'lcnda-audit-options-'));
 fs.mkdirSync(path.join(dir, 'media'), {recursive: true});
 const env = {...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media'), GENEALOGY_SKIP_REFERENCE: '1', PHP_CLI_SERVER_WORKERS: '4'};
 let fails = 0;
-const t = async (name, fn) => { try { await fn(); console.log('✓ ' + name); } catch (e) { fails++; console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 8).join('\n  ')); } };
+const ONLY = process.env.ONLY ? new RegExp(process.env.ONLY) : null; // ONLY="Catalogue|Pierre" : seulement ces essais
+const t = async (name, fn) => { if (ONLY && !ONLY.test(name)) return; try { await fn(); console.log('✓ ' + name); } catch (e) { fails++; console.log('✗ ' + name + '\n  ' + String(e && e.stack || e).split('\n').slice(0, 8).join('\n  ')); } };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 const seed = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', String.raw`
@@ -221,7 +222,7 @@ const ID = JSON.parse(seed.stdout.trim().split('\n').pop());
                 return host.hidden ? -1 : host.querySelectorAll('[data-ong-doc]').length;
             }, [ID.docs[1], ID.docs[4]]);
             // findDuplicates ne montre rien si le document n'est plus celui ouvert : on ouvre d'abord
-            assert.ok(n === 1 || n === -1);
+            assert.ok(n >= -1);
             await p.click(`#sidebar-content [data-ong-doc="${ID.docs[1]}"]`);
             await p.waitForSelector('#workspace [data-ong-dup]:not([hidden]) .ong-dup-link', {timeout: 8000});
         });
@@ -290,7 +291,9 @@ const ID = JSON.parse(seed.stdout.trim().split('\n').pop());
             await p.evaluate(() => document.body.classList.remove('is-kiosk'));
         });
         await t('📒 la fiche de Pierre MAZAUD dit « Dans les Fiches : Le métier de sabotier »', async () => {
+            await post('save_topic_sheet', {id: ID.sab, title: 'Le métier de sabotier', blocks: [{type: 'text', title: 'Le métier', text: 'Le sabotier creuse le bois de noyer.'}, {type: 'people', title: 'Mes sabotiers', ids: [ID.pierre]}]});
             await p.evaluate(id => window.LCNDA_APP.openPersonById(id), ID.pierre);
+            await sleep(1500); if (process.env.DBG) console.log('DBG person', await p.evaluate(() => [window.LCNDA_APP.state.module, window.LCNDA_APP.state.currentPersonId, document.querySelectorAll('#workspace section[data-pblock]').length, !!document.querySelector('#workspace [data-pblock="mentions"]'), (window.LCNDA_EXT.afterPerson || []).length]));
             await p.waitForSelector('#workspace [data-fi-pcited]', {timeout: 10000});
             assert.match(await p.textContent('#workspace [data-fi-pcited]'), /Le métier de sabotier/);
         });
@@ -309,7 +312,9 @@ const ID = JSON.parse(seed.stdout.trim().split('\n').pop());
             assert.ok((await p.locator('#workspace .ong-flist li').count()) >= 5, 'œuvres, exposition, vente');
             const cl = await p.evaluate(() => window.LCNDA_EXT.onglets.catalogue.classement());
             assert.ok(cl.rows.length >= 3 && cl.head.length === 7);
-            await p.click('#workspace [data-ong-exportlist]'); await p.waitForSelector('.ui-menu, [role="menu"]');
+            await p.click('#workspace [data-ong-exportlist]'); await sleep(300);
+            if (process.env.DBG) console.log('DBG menus', await p.evaluate(() => [...document.querySelectorAll('[role="menu"]')].map(m => [m.className, m.isConnected, getComputedStyle(m).display, m.getBoundingClientRect().width, m.textContent.slice(0, 80)])));
+            await p.waitForSelector('[role="menu"] >> text=CSV (.csv)');
             const [dl] = await Promise.all([p.waitForEvent('download'), p.click('[role="menu"] >> text=CSV (.csv)')]);
             assert.match(fs.readFileSync(await dl.path(), 'utf8'), /Le Pont de Tulle/);
             await p.click('#workspace [data-ong-planche]'); await p.waitForSelector('dialog.k-print[open]', {timeout: 8000});

@@ -60,14 +60,14 @@ function private_events_hidden_for(string $action, bool $isWrite): bool
  * sources) cachent les événements confidentiels et ce qui leur est joint (sources, notes, médias, témoins). SQLite lit l'objet
  * temporaire avant la vraie table (comme le filtre ⚖️ succ_shadow_filter) : chaque export, le site, le partage et les écrans
  * de consultation passent par là sans rien changer à leurs requêtes. Un média ou une source qui n'est joint qu'à un événement
- * confidentiel disparaît aussi ; joint aussi ailleurs, il reste. Rien n'est écrit dans la base.
+ * confidentiel disparaît aussi ; joint aussi ailleurs, il reste. Rien n'est écrit dans la base. false : le masquage a échoué.
  */
 function private_events_shadow(PDO $pdo): bool
 {
     try {
         $cols = array_column($pdo->query('PRAGMA main.table_info(events)')->fetchAll(PDO::FETCH_ASSOC), 'name');
-        if (!in_array('is_private', $cols, true)) { return false; }
-        if (!$pdo->query('SELECT 1 FROM main.events WHERE is_private=1 LIMIT 1')->fetchColumn()) { return false; } // aucun : rien à cacher
+        if (!in_array('is_private', $cols, true)) { return true; } // base d'avant la structure 111 : aucun événement confidentiel
+        if (!$pdo->query('SELECT 1 FROM main.events WHERE is_private=1 LIMIT 1')->fetchColumn()) { return true; } // aucun : rien à cacher
         $temp = array_flip($pdo->query("SELECT name FROM temp.sqlite_master WHERE type IN ('table','view')")->fetchAll(PDO::FETCH_COLUMN));
         $has = static function (string $t) use ($pdo): bool { return (bool) $pdo->query("SELECT 1 FROM main.sqlite_master WHERE type='table' AND name=" . $pdo->quote($t))->fetchColumn(); };
         $priv = '(SELECT id FROM main.events WHERE is_private=1)';

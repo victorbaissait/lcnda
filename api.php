@@ -208,6 +208,10 @@ try {
     }
     if ($action === 'bootstrap') { access_log_purge($pdo); } // 📜 les lignes plus vieilles que la durée réglée (une fois par jour)
     if (str_starts_with((string) $action, 'sd_')) { json_response(sd_dispatch($pdo, (string) $action, is_array($payload) ? $payload : [], $isWrite)); } // 🔄 deux ordinateurs
+    // 🔒 événements confidentiels (lib/heritage_tools.php) : jamais dans un export, le partage ou le site ; cachés en consultation
+    if (is_string($action) && private_events_hidden_for($action, $isWrite) && !private_events_shadow($pdo) && in_array($action, PRIVATE_EVENT_EXPORT_ACTIONS, true)) {
+        json_response(['error' => 'Export impossible : les événements confidentiels n’ont pas pu être retirés. Réessaie dans un instant.'], 503);
+    }
 
     // La structure de la base (tables, colonnes, types d’événements de base) est mise à jour une seule fois
     // par numéro de version dans lib/migrations.php, à l’ouverture de la base (db()).
@@ -2890,7 +2894,7 @@ function map_data(PDO $pdo): never
         // Mode précis : uniquement les événements avec coordonnées manuelles
         // La commune n'a pas besoin d'être géocodée : on utilise precise_lat/lon directement
         $where.=' AND e.precise_lat IS NOT NULL AND e.precise_lon IS NOT NULL';
-        $sql = "SELECT e.id,e.year,e.date_text,e.address,t.label AS type_label,t.gedcom_tag,COALESCE(p.id,p1.id,p2.id) AS person_id,
+        $sql = "SELECT e.id,COALESCE(e.is_private,0) AS is_private,e.year,e.date_text,e.address,t.label AS type_label,t.gedcom_tag,COALESCE(p.id,p1.id,p2.id) AS person_id,
             COALESCE(NULLIF(trim(p.first_name),''),trim(COALESCE(p1.first_name,'')||CASE WHEN p2.id IS NOT NULL THEN ' & '||COALESCE(p2.first_name,'') ELSE '' END)) AS first_name,
             COALESCE(NULLIF(trim(p.last_name),''),trim(COALESCE(p1.last_name,'')||CASE WHEN p2.id IS NOT NULL AND COALESCE(p2.last_name,'')<>COALESCE(p1.last_name,'') THEN ' / '||COALESCE(p2.last_name,'') ELSE '' END)) AS last_name,
             pl.id AS place_id,pl.name,pl.subdivision,pl.county,pl.state,pl.country,
@@ -2908,7 +2912,7 @@ function map_data(PDO $pdo): never
             {$where} ORDER BY e.year LIMIT :limit";
     } else {
         // Mode ville ou combiné : on requiert les coords de la commune
-        $sql = "SELECT e.id,e.year,e.date_text,e.address,t.label AS type_label,t.gedcom_tag,COALESCE(p.id,p1.id,p2.id) AS person_id,
+        $sql = "SELECT e.id,COALESCE(e.is_private,0) AS is_private,e.year,e.date_text,e.address,t.label AS type_label,t.gedcom_tag,COALESCE(p.id,p1.id,p2.id) AS person_id,
             COALESCE(NULLIF(trim(p.first_name),''),trim(COALESCE(p1.first_name,'')||CASE WHEN p2.id IS NOT NULL THEN ' & '||COALESCE(p2.first_name,'') ELSE '' END)) AS first_name,
             COALESCE(NULLIF(trim(p.last_name),''),trim(COALESCE(p1.last_name,'')||CASE WHEN p2.id IS NOT NULL AND COALESCE(p2.last_name,'')<>COALESCE(p1.last_name,'') THEN ' / '||COALESCE(p2.last_name,'') ELSE '' END)) AS last_name,
             pl.id AS place_id,pl.name,pl.subdivision,pl.county,pl.state,pl.country,pl.latitude,pl.longitude,
@@ -4316,7 +4320,7 @@ function place_monograph_data(PDO $pdo): never
     if ($yearTo) { $eventWhere[] = 'e.year<=?'; $eventParams[] = $yearTo; }
     if ($eventTypeId) { $eventWhere[] = 'e.event_type_id=?'; $eventParams[] = $eventTypeId; }
     // Événement de couple (mariage…) : les deux conjoints, chacun avec son bouton « Ouvrir »
-    $eventSql = "SELECT e.id,e.person_id,e.date_text,e.year,e.title,e.description,t.label AS type_label,
+    $eventSql = "SELECT e.id,e.person_id,e.date_text,e.year,COALESCE(e.is_private,0) AS is_private,e.title,e.description,t.label AS type_label,
         trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) AS person_name,
         f.partner1_id, trim(COALESCE(p1.first_name,'')||' '||COALESCE(p1.last_name,'')) AS partner1_name,
         f.partner2_id, trim(COALESCE(p2.first_name,'')||' '||COALESCE(p2.last_name,'')) AS partner2_name
@@ -6013,7 +6017,7 @@ function timeline_data(PDO $pdo, int $id): never
     $marks=implode(',',array_fill(0,count($ids),'?'));
     // les événements de couple (mariage, divorce…) comptent aussi, une seule fois même si les deux conjoints sont là
     $couple="trim(COALESCE(p1.first_name,'')||' '||COALESCE(p1.last_name,''))||CASE WHEN p2.id IS NOT NULL THEN ' & '||trim(COALESCE(p2.first_name,'')||' '||COALESCE(p2.last_name,'')) ELSE '' END";
-    $sql="SELECT e.id,e.date_text,e.year,t.label AS type,t.color,COALESCE(p.id,CASE WHEN f.partner1_id IN ($marks) THEN f.partner1_id ELSE f.partner2_id END) AS person_id,CASE WHEN p.id IS NULL THEN $couple ELSE p.first_name END AS first_name,CASE WHEN p.id IS NULL THEN '' ELSE p.last_name END AS last_name,pl.name AS place
+    $sql="SELECT e.id,e.date_text,e.year,COALESCE(e.is_private,0) AS is_private,t.label AS type,t.color,COALESCE(p.id,CASE WHEN f.partner1_id IN ($marks) THEN f.partner1_id ELSE f.partner2_id END) AS person_id,CASE WHEN p.id IS NULL THEN $couple ELSE p.first_name END AS first_name,CASE WHEN p.id IS NULL THEN '' ELSE p.last_name END AS last_name,pl.name AS place
         FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN families f ON f.id=e.family_id LEFT JOIN persons p1 ON p1.id=f.partner1_id LEFT JOIN persons p2 ON p2.id=f.partner2_id LEFT JOIN places pl ON pl.id=e.place_id
         WHERE (e.person_id IN ($marks) OR f.partner1_id IN ($marks) OR f.partner2_id IN ($marks)) AND e.year IS NOT NULL ORDER BY e.year,e.id";
     $stmt=$pdo->prepare($sql);$stmt->execute([...$ids,...$ids,...$ids,...$ids]);

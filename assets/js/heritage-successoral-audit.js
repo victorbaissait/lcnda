@@ -85,8 +85,8 @@
         const t = String(text || '').replace(/\s+/g, ' ');
         const uniq = a => [...new Set(a.map(x => x.trim()).filter(Boolean))].slice(0, 12);
         const dates = uniq([...t.matchAll(new RegExp(`\\b(\\d{1,2}(?:er)?\\s+(?:${MONTHS})\\s+\\d{4}|\\d{1,2}[/.]\\d{1,2}[/.]\\d{4}|(?:l['’]an\\s+)?(?:mil\\s+)?[a-zéèûô-]+\\s+cent\\s+[a-zéèûô\\s-]{3,40}?(?=[,.;]))`, 'gi'))].map(m => m[1]));
-        const names = uniq([...t.matchAll(/\b([A-ZÉÈÀÂÎÔÛÇ][a-zéèêàâîôûç]+(?:[- ][A-ZÉÈÀÂÎÔÛÇ][a-zéèêàâîôûç]+)?\s+[A-ZÉÈÀÂÎÔÛÇ]{2,}(?:[- ][A-ZÉÈÀÂÎÔÛÇ]{2,})?)\b/g)].map(m => m[1]));
-        const places = uniq([...t.matchAll(/\b(?:à|a|en la commune de|commune de|demeurant à|né[e]? à|décédé[e]? à)\s+([A-ZÉÈÀÂÎÔÛ][\wéèêàâîôûç'-]+(?:[- ](?:sur|sous|en|le|la|les|de|du|d')?[- ]?[A-ZÉÈÀÂÎÔÛ][\wéèêàâîôûç'-]+)*)/g)].map(m => m[1]));
+        const names = uniq([...t.matchAll(/\b([A-ZÉÈÀÂÎÔÛÇ][a-zéèêàâîôûç]+(?:-[A-ZÉÈÀÂÎÔÛÇ][a-zéèêàâîôûç]+)?\s+[A-ZÉÈÀÂÎÔÛÇ]{2,}(?:[- ][A-ZÉÈÀÂÎÔÛÇ]{2,})?)\b/g)].map(m => m[1]));
+        const places = uniq([...t.matchAll(/\b(?:à|en la commune de|commune de|demeurant à|né[e]? à|décédé[e]? à)\s+([A-ZÉÈÀÂÎÔÛ][a-zA-ZéèêàâîôûçÉÈÀÂÎÔÛ'-]*[a-zéèêàâîôûç])/g)].map(m => m[1]));
         return {dates, names, places};
     }
     ext.succAuditPropose = propose; // (essais)
