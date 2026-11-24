@@ -231,8 +231,8 @@
     /** vague 2 : 👁 la relecture ligne à ligne en plein écran (décision 7 : un réglage, conseillé oui) ; les abréviations connues soulignées (conseillé oui) */
     const flag = key => () => { try { return localStorage.getItem(key) !== '0'; } catch (_) { return true; } };
     const setFlag = key => on => { try { localStorage.setItem(key, on ? '1' : '0'); } catch (_) {} window.dispatchEvent(new CustomEvent('lcnda-txbar-change')); };
-    const RV_KEY = 'genealogie-tx-relecture', AB_KEY = 'genealogie-tx-abrev';
-    const reviewMode = flag(RV_KEY), setReviewMode = setFlag(RV_KEY), abbrevOn = flag(AB_KEY), setAbbrevOn = setFlag(AB_KEY);
+    const RV_KEY = 'genealogie-tx-relecture', AB_KEY = 'genealogie-tx-abrev', AM_KEY = 'genealogie-tx-montants';
+    const reviewMode = flag(RV_KEY), setReviewMode = setFlag(RV_KEY), abbrevOn = flag(AB_KEY), setAbbrevOn = setFlag(AB_KEY), amountsOn = flag(AM_KEY), setAmountsOn = setFlag(AM_KEY);
     const BAR_KEY = 'genealogie-transcribe-bar', SETS_KEY = 'genealogie-toolbar-sets', SETS_ID = 'transcribe';
     const readJson = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v && typeof v === 'object' ? v : d; } catch (_) { return d; } };
     const writeJson = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (_) { toast(i18n('Plus de place pour garder ce réglage.'), 'error'); return false; } };
@@ -282,6 +282,7 @@
                 <button type="button" data-txb-layout="A" class="${B ? '' : 'is-active'}" aria-pressed="${!B}" title="${esc(i18n('Tous les réglages dans la barre ; elle passe à la ligne s’il le faut'))}">${esc(i18n('Barre complète'))}</button></span></div>
             <label class="ui-toggle h-txb-ln"><input type="checkbox" data-txb-ln ${lineNos() ? 'checked' : ''}><i></i>${esc(i18n('Numéros de ligne dans la marge du texte (conseillé)'))}</label>
             <label class="ui-toggle h-txb-ab"><input type="checkbox" data-txb-ab ${abbrevOn() ? 'checked' : ''}><i></i>${esc(i18n('Abréviations connues soulignées, leur sens au survol (conseillé)'))}</label>
+            <label class="ui-toggle h-txb-am"><input type="checkbox" data-txb-am ${amountsOn() ? 'checked' : ''}><i></i>${esc(i18n('Sommes et mesures anciennes soulignées : en euros d’aujourd’hui et en mètres au survol (conseillé)'))}</label>
             <label class="ui-toggle h-txb-rv"><input type="checkbox" data-txb-rv ${reviewMode() ? 'checked' : ''}><i></i>${esc(i18n('Relecture ligne à ligne en plein écran (conseillé)'))}</label>
             <div data-presets-slot="txb"></div>
             <p class="muted">${i18n('Coche ce qu’on montre (👁), range avec ↑ ↓ (ou en glissant ⠿){x}. Gardé aussitôt ; l’outil ouvert suit tout de suite.', {x: B ? i18n(', et choisis ce qui va dans la barre ou dans le panneau « 🎚️ Mieux voir »') : ''})}</p>
@@ -314,7 +315,7 @@
             if (e.target.closest('[data-txb-reset]')) { const before = readJson(BAR_KEY, null); try { localStorage.removeItem(BAR_KEY); } catch (_) {} window.dispatchEvent(new CustomEvent('lcnda-txbar-change')); redraw2();
                 A().undoToast?.(i18n('Barre de la transcription remise comme au départ'), {undo: () => { if (before) saveBar(before); redraw2(); }, redo: () => { try { localStorage.removeItem(BAR_KEY); } catch (_) {} window.dispatchEvent(new CustomEvent('lcnda-txbar-change')); redraw2(); }}); return; }
         });
-        box.addEventListener('change', e => { if (e.target.matches('[data-txb-ln]')) { setLineNos(e.target.checked); return; } if (e.target.matches('[data-txb-rv]')) { setReviewMode(e.target.checked); return; } if (e.target.matches('[data-txb-ab]')) { setAbbrevOn(e.target.checked); return; } if (e.target.closest('[data-txb-list]')) keep(); });
+        box.addEventListener('change', e => { if (e.target.matches('[data-txb-ln]')) { setLineNos(e.target.checked); return; } if (e.target.matches('[data-txb-rv]')) { setReviewMode(e.target.checked); return; } if (e.target.matches('[data-txb-ab]')) { setAbbrevOn(e.target.checked); return; } if (e.target.matches('[data-txb-am]')) { setAmountsOn(e.target.checked); return; } if (e.target.closest('[data-txb-list]')) keep(); });
     }
     /** ⚙️ dans l'outil : la même liste, dans une fenêtre */
     function openBarDialog(parent) {
@@ -327,7 +328,7 @@
         dlg.addEventListener('close', () => dlg.remove()); dlg.showModal();
     }
 
-    ext.txView = {DEFAULT_VIEW, viewOf, needsPixels, cssFilter, changedCount, CHANGED, enhancer, toolbarHtml, barCfg, saveBar, cleanBar, panelKeys, badgeKeys, openBarDialog, ITEMS, DEFAULT_PANEL, RECIPES, recipeView, recipeOn, lineNos, setLineNos, reviewMode, setReviewMode, abbrevOn, setAbbrevOn};
+    ext.txView = {DEFAULT_VIEW, viewOf, needsPixels, cssFilter, changedCount, CHANGED, enhancer, toolbarHtml, barCfg, saveBar, cleanBar, panelKeys, badgeKeys, openBarDialog, ITEMS, DEFAULT_PANEL, RECIPES, recipeView, recipeOn, lineNos, setLineNos, reviewMode, setReviewMode, abbrevOn, setAbbrevOn, amountsOn, setAmountsOn};
     // Réglages → Montage, retouche, mise en page et son → « 📜 Atelier de transcription : barre d’outils »
     ext.transcribePrefs = {html: () => prefsHtml(), bind: (box, redraw) => prefsBind(box, redraw)};
 })();

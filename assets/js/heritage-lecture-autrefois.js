@@ -245,8 +245,14 @@
                 <div class="af-cards"><div><small>${i18n('Dans la monnaie de {y}', {y})}</small><b>${esc(w.nativeText)}</b></div><div><small>${i18n('En pain')}</small><b>🥖 ${nf(w.bread, w.bread < 10 ? 1 : 0)} kg</b></div>${w.days != null ? `<div><small>${i18n('En journées de travail')}</small><b>🔨 ${nf(w.days, 1)}</b><small>${i18n('d’un journalier en {y}', {y})}</small></div>` : ''}</div>
                 ${w.warn.map(t => UI().notice ? UI().notice('warn', t.charAt(0).toUpperCase() + t.slice(1) + '.') : '').join('')}
                 <details class="af-steps"><summary>${i18n('Le calcul, pas à pas')}</summary><ol>${w.steps.map(s => `<li>${esc(s)}</li>`).join('')}</ol><p class="ui-hint">${i18n('Source :')} <a href="${esc(F().SOURCE_URL)}" target="_blank" rel="noopener noreferrer">${esc(F().SOURCE)}</a>. Parités exactes : 1 livre = 20 sous = 240 deniers · 81 livres = 80 francs (franc germinal, 1795) · 1 nouveau franc = 100 anciens francs (1960) · 1 € = 6,55957 F (1999).</p></details>
-`;
+                ${pricesHtml(y)}`;
         }
+        /** 💰 les prix sourcés de l'année (assets/data/prix-reference.json, le même fichier que « Une journée dans la vie de… ») */
+        function pricesHtml(y) {
+            const list = window.LCNDA_MONTANTS && ext.prixReference ? window.LCNDA_MONTANTS.prices(y, ext.prixReference) : [];
+            return list.length ? `<h4 class="af-h">${i18n('Les prix de cette année-là')}</h4><ul class="af-prices">${list.map(p => `<li>${esc(p.text)} <small class="muted">— ${esc(p.source)}</small></li>`).join('')}</ul>` : '';
+        }
+        if (!ext.prixReference) window.LCNDA_MONTANTS?.loadPrices?.()?.then(() => { if (host.isConnected && st.tab === 'argent') drawMoney(); }); // le fichier des prix de l'app (app-montants-core.js)
         function drawMeasure() {
             const inp = $('[data-af-measure]'), out = $('[data-af-out="mesures"]');
             const r = inp.value.trim() ? F().readMeasure(inp.value, st.region) : null;
@@ -257,7 +263,7 @@
             out.innerHTML = `<div class="af-big"><small>${esc(r.kindName)} · ${esc(r.region)}</small><strong>${r.approx ? '≈ ' : '= '}${esc(r.metric)}</strong>${r.approx ? badge(i18n('Valeur approchée'), 'yellow') : ''}${copyBtn(txt)}</div>
                 ${r.units.length ? `<h4 class="af-h">${i18n('Dans les autres mesures de la région')}</h4><table class="af-table"><tbody>${r.units.map(u => `<tr><td>${u.approx ? '≈ ' : ''}${nf(u.value, u.value < 10 ? 3 : 1)}</td><td>${esc(u.label)}${u.note ? ` <small class="muted">(${esc(u.note)})</small>` : ''}</td></tr>`).join('')}</tbody></table>` : ''}
                 ${r.elsewhere.length ? `<h4 class="af-h">${i18n('La même mesure ailleurs (pour 1)')}</h4><table class="af-table"><tbody>${r.elsewhere.map(u => `<tr><td>${u.approx ? '≈ ' : ''}${esc(u.metric)}</td><td>${esc(u.label)} <small class="muted">— ${esc(u.region)}</small></td></tr>`).join('')}</tbody></table>` : ''}
-`;
+                ${r.src ? `<p class="ui-hint af-src">${i18n('Source :')} ${r.url ? `<a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">${esc(r.src)} ↗</a>` : esc(r.src)}</p>` : ''}`;
         }
         function drawDate() {
             const inp = $('[data-af-date]'), out = $('[data-af-out="calendrier"]');
@@ -297,7 +303,7 @@
         return ext.openDialog({eyebrow: 'OUTILS · CONVERTIR', title: `🪙 ${i18n('Convertisseur d’autrefois')}`, wide: true, submitLabel: i18n('Fermer'), onSubmit: () => true,
             body: '<div data-af-host></div>', onOpen: dg => { dg.classList.add('af-dialog'); mountConverter(dg.querySelector('[data-af-host]'), {tab, value, year}); setTimeout(() => dg.querySelector('.af-pane:not([hidden]) input')?.focus(), 30); }});
     }
-    ext.autrefois = {open: openConverter, mount: mountConverter, yearOf};
+        ext.autrefois = {open: openConverter, mount: mountConverter, yearOf};
 
     /* ═════════ Les entrées ═════════ */
     // n'importe quel bouton : data-la-open="mot cherché" (ou vide), data-autrefois-open="argent|mesures|calendrier" (+ data-autrefois-value)

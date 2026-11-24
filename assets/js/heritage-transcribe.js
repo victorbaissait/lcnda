@@ -583,7 +583,7 @@
         let findHits = [], findCur = -1, abbrevs = [];
         const decos = () => [...findHits.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-hit${i === findCur ? ' is-cur' : ''}">`, c: '</span>', w: 0})),
             ...txFix.map(f => ({s: f.s, e: f.e, o: `<u class="h-tx-fix${f.sure ? ' is-sure' : ''}">`, c: '</u>', w: 1})),
-            ...abbrevs.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-ab" data-ab="${i}">`, c: '</span>', w: 2}))].sort((x, y) => x.s - y.s || x.w - y.w);
+            ...abbrevs.map((f, i) => ({s: f.s, e: f.e, o: `<span class="h-tx-ab${f.amount ? ' is-amount' : ''}" data-ab="${i}">`, c: '</span>', w: 2}))].sort((x, y) => x.s - y.s || x.w - y.w);
         let curDecos = [];
         const fixSeg = (text, a, b) => { let h = '', q = a; curDecos.filter(f => f.e > a && f.s < b).forEach(f => { const s0 = Math.max(a, f.s), e0 = Math.min(b, f.e); if (s0 < q) return; h += esc(text.slice(q, s0)) + f.o + esc(text.slice(s0, e0)) + f.c; q = e0; }); return h + esc(text.slice(q, b)); };
         async function runFix({quiet = false} = {}) {
@@ -634,7 +634,10 @@
                 addLex: () => addToLexicon(fx.word, () => runFix({quiet: true}))});
         });
         function paintMirror() {
-            const text = area.value, marks = []; abbrevs = TV.abbrevOn?.() && window.LCNDA_AIDE_LECTURE?.abbrevs ? window.LCNDA_AIDE_LECTURE.abbrevs(text, aideLang($('[data-tx-lang]')?.value || '')) : []; curDecos = decos();
+            const text = area.value, marks = []; abbrevs = TV.abbrevOn?.() && window.LCNDA_AIDE_LECTURE?.abbrevs ? window.LCNDA_AIDE_LECTURE.abbrevs(text, aideLang($('[data-tx-lang]')?.value || '')) : [];
+            // 💰📏 les sommes et les mesures anciennes (app-montants-core.js) : soulignées comme les abréviations, leur valeur au survol
+            if (TV.amountsOn?.() && window.LCNDA_MONTANTS) { const am = window.LCNDA_MONTANTS.scan(text).filter(h => !abbrevs.some(a => h.s < a.e && h.e > a.s)); abbrevs = [...abbrevs, ...am.map(h => ({s: h.s, e: h.e, word: h.raw, amount: h}))].sort((x, y) => x.s - y.s); }
+            curDecos = decos();
             t.data.zones.forEach((z, i) => { if (z.e > z.s) marks.push({s: z.s, e: z.e, c: colorOf(z, i), on: selZone === z.id}); });
             found.forEach(f => marks.push({s: f.s, e: f.e, cls: `is-${f.type}`}));
             marks.sort((a, b) => a.s - b.s); let h = '', pos = 0;
@@ -987,11 +990,20 @@
                 return UI.menuAt?.(b, Object.entries(STATE).map(([k, [l]]) => ({icon: k === cur ? '●' : '○', label: i18n(l), run: () => setState(k)})), {title: i18n('État')}); } });
         /* ─── abréviations connues (F4) : soulignées en pointillé, leur sens au survol ou au toucher (données de « 📖 Aide à la lecture ») ─── */
         const abTip = $('[data-tx-abtip]'); let abShown = -1, abHide = 0;
+        /** 💰📏 la bulle d'une somme ou d'une mesure : l'année de l'acte, la région des mesures d'après le lieu (« (35) ») ou celle du Convertisseur */
+        function amountInfo(h) {
+            const MT = window.LCNDA_MONTANTS, cm = ext.calendarMore; if (!MT) return null; if (!ext.prixReference) MT.loadPrices?.();
+            const ym = String($('[data-tx="date_text"]')?.value || '').match(/\b(1[2-9]\d{2}|20[0-2]\d)\b/), dm = String($('[data-tx="place"]')?.value || '').match(/\((\d{2}|2[AB])\)/i);
+            let region = dm && cm?.regionOfDept ? cm.regionOfDept(dm[1]) : ''; if (!region) { try { region = JSON.parse(localStorage.getItem('lcnda-autrefois-region') || '"paris"'); } catch (_) { region = 'paris'; } }
+            return MT.explain(h, {year: ym ? Number(ym[1]) : 0, region, wageSols: A().journalierWageSols, calendarMore: cm, prices: ext.prixReference});
+        }
         const abAt = (x, y) => { let hit = -1; mirror.querySelectorAll('.h-tx-ab').forEach(sp => { if (hit >= 0) return; for (const r of sp.getClientRects()) if (x >= r.left && x <= r.right && y >= r.top - 2 && y <= r.bottom + 2) { hit = Number(sp.dataset.ab); return; } }); return hit; };
         function showAb(i) {
             const a = abbrevs[i]; if (!a) return hideAb(); clearTimeout(abHide); if (abShown === i && !abTip.hidden) return; abShown = i;
             const sp = mirror.querySelector(`.h-tx-ab[data-ab="${i}"]`); if (!sp) return;
-            abTip.innerHTML = `<b data-i18n-off>${esc(a.word)}</b> = <span data-i18n-off>${esc(a.item.d)}</span>${a.item.ex ? `<small data-i18n-off>${esc(a.item.ex)}</small>` : ''}<button type="button" class="link-button" data-tx-abopen>${esc(i18n('Ouvrir dans 📖 Aide à la lecture'))}</button>`;
+            if (a.amount) { const x = amountInfo(a.amount); if (!x) return hideAb();
+                abTip.innerHTML = `<b>${a.amount.type === 'money' ? '💰' : '📏'} ${esc(x.title)}</b>${x.lines.map(l => `<span class="h-tx-amline">${esc(l)}</span>`).join('')}${x.source ? `<small>${esc(i18n('Source'))} : ${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.source)} ↗</a>` : esc(x.source)}</small>` : ''}<button type="button" class="link-button" data-tx-abopen>${esc(i18n('Voir le calcul dans 🪙 le Convertisseur d’autrefois'))}</button>`; }
+            else abTip.innerHTML = `<b data-i18n-off>${esc(a.word)}</b> = <span data-i18n-off>${esc(a.item.d)}</span>${a.item.ex ? `<small data-i18n-off>${esc(a.item.ex)}</small>` : ''}<button type="button" class="link-button" data-tx-abopen>${esc(i18n('Ouvrir dans 📖 Aide à la lecture'))}</button>`;
             abTip.hidden = false; const ed = $('[data-tx-editor]').getBoundingClientRect(), r = sp.getClientRects()[0] || sp.getBoundingClientRect(), w = abTip.offsetWidth, h = abTip.offsetHeight;
             const left = Math.max(4, Math.min(ed.width - w - 4, r.left - ed.left)), below = r.bottom - ed.top + 4; abTip.style.left = `${left}px`; abTip.style.top = `${below + h > ed.height ? Math.max(4, r.top - ed.top - h - 4) : below}px`;
             dlg.dataset.txAb = a.word;
@@ -1001,7 +1013,7 @@
         area.addEventListener('mousemove', e => { if (!abbrevs.length) return; cancelAnimationFrame(abRaf); abRaf = requestAnimationFrame(() => { const i = abAt(e.clientX, e.clientY); if (i >= 0) showAb(i); else if (!abTip.hidden) { clearTimeout(abHide); abHide = setTimeout(hideAb, 350); } }); });
         area.addEventListener('mouseleave', () => { clearTimeout(abHide); abHide = setTimeout(hideAb, 350); });
         abTip.addEventListener('mouseenter', () => clearTimeout(abHide)); abTip.addEventListener('mouseleave', () => { abHide = setTimeout(hideAb, 250); });
-        abTip.addEventListener('click', e => { if (!e.target.closest('[data-tx-abopen]')) return; const a = abbrevs[abShown]; hideAb(); if (a) ext.readingAid?.open({q: String(a.item.t).split(',')[0].trim(), lang: aideLang($('[data-tx-lang]').value)}); });
+        abTip.addEventListener('click', e => { if (!e.target.closest('[data-tx-abopen]')) return; const a = abbrevs[abShown]; hideAb(); if (a?.amount) { const x = amountInfo(a.amount); if (x) ext.autrefois?.open({tab: x.convert.tab, value: x.convert.value, year: x.convert.year}); return; } if (a) ext.readingAid?.open({q: String(a.item.t).split(',')[0].trim(), lang: aideLang($('[data-tx-lang]').value)}); });
         // au toucher (ou un clic) : le mot touché montre sa bulle (sauf s'il a une correction proposée : son menu passe d'abord)
         area.addEventListener('click', () => { if (!abbrevs.length || area.selectionStart !== area.selectionEnd) return hideAb(); const c = area.selectionStart; if (txFix.some(f => c >= f.s && c <= f.e)) return; const i = abbrevs.findIndex(a => c >= a.s && c <= a.e); if (i >= 0) showAb(i); else hideAb(); });
         area.addEventListener('input', hideAb); area.addEventListener('scroll', hideAb);

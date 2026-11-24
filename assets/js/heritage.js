@@ -768,11 +768,17 @@
         const wage = A().journalierWageSols(year);
         return wage ? sols / wage : null;
     }
+    /** 💰 en euros d'aujourd'hui (🪙 Convertisseur d'autrefois, app-autrefois-engine.js) ; null sans année */
+    function euroToday(value, currency, year) {
+        const F = window.LCNDA_AUTREFOIS; if (!F || !year || !value) return null;
+        const w = F.worth({ok: true, kind: currency === 'livre' ? 'deniers' : currency === 'nf' ? 'nf' : 'franc', value: currency === 'livre' ? Number(value) * 240 : Number(value)}, year);
+        return w ? w.euros : null;
+    }
     function probateSummaryHtml(inv) {
-        const days = workDays(inv.net, inv.currency, inv.year);
+        const days = workDays(inv.net, inv.currency, inv.year), eur = euroToday(inv.net, inv.currency, inv.year);
         const cats = Object.entries(inv.by_category || {}).sort((a, b) => b[1] - a[1]).slice(0, 4);
         return `<article class="h-record"><header><div><strong>📜 Inventaire ${inv.date_text ? 'du ' + esc(inv.date_text) : ''}</strong>${LC(inv.labels)}${inv.notary ? ` <small>— ${esc(inv.notary)}</small>` : ''}${inv.person_name ? `<div>${personLink(inv.person_id, inv.person_name)}</div>` : ''}</div>${tools(`data-h-open-list="probate" data-h-edit="${inv.id}"`, `data-h-probate-delete="${inv.id}"`, 'cet inventaire')}</header>
-            <p class="h-probate-total">${i18n('Total : <strong>{x}</strong>', {x: esc(moneyText(inv.total, inv.currency))})}${inv.debts ? ` · ${i18n('dettes {x}', {x: esc(moneyText(inv.debts, inv.currency))})} · ${i18n('net <strong>{x}</strong>', {x: esc(moneyText(inv.net, inv.currency))})}` : ''}${days ? ` · ${i18n('≈ <strong>{n} journées de travail</strong> d’un journalier ({y} années)', {n: fmt(days), y: fmt(days / 250, 1)})}` : ''}</p>
+            <p class="h-probate-total">${i18n('Total : <strong>{x}</strong>', {x: esc(moneyText(inv.total, inv.currency))})}${inv.debts ? ` · ${i18n('dettes {x}', {x: esc(moneyText(inv.debts, inv.currency))})} · ${i18n('net <strong>{x}</strong>', {x: esc(moneyText(inv.net, inv.currency))})}` : ''}${days ? ` · ${i18n('≈ <strong>{n} journées de travail</strong> d’un journalier ({y} années)', {n: fmt(days), y: fmt(days / 250, 1)})}` : ''}${eur != null ? ` · ${i18n('<strong>{x}</strong> d’aujourd’hui', {x: esc(window.LCNDA_AUTREFOIS.euroText(eur))})}` : ''}</p>
             ${cats.length ? `<p class="muted">${cats.map(([k, v]) => `${esc(probateCategories[k] || k)} : ${esc(moneyText(v, inv.currency))}`).join(' · ')}</p>` : ''}${thumbs('probate-' + inv.id, inv.media)}</article>`;
     }
     ext.personBlocks.probate = (index, detail) => {
@@ -999,7 +1005,7 @@
         if (editing) bindProbateForm(editing);
     };
     function probateItemRow(it = {}) {
-        return `<tr class="h-item-row"><td><input name="room" value="${esc(it.room || '')}" list="h-rooms" placeholder="Cuisine"></td><td><select name="category">${Object.entries(probateCategories).map(([k, l]) => `<option value="${k}" ${it.category === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></td><td><input name="description" value="${esc(it.description || '')}" placeholder="Une table de noyer avec ses deux bancs"></td><td><input name="quantity" value="${esc(it.quantity || '')}" placeholder="1" class="h-narrow"></td><td><input name="value_text" value="${esc(it.value_text || '')}" placeholder="3 l 10 s" class="h-narrow"></td><td><button type="button" class="button small secondary" data-h-row-remove aria-label="Retirer">✕</button></td></tr>`;
+        return `<tr class="h-item-row"><td><input name="room" value="${esc(it.room || '')}" list="h-rooms" placeholder="Cuisine"></td><td><select name="category">${Object.entries(probateCategories).map(([k, l]) => `<option value="${k}" ${it.category === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></td><td><input name="description" value="${esc(it.description || '')}" placeholder="Une table de noyer avec ses deux bancs"></td><td><input name="quantity" value="${esc(it.quantity || '')}" placeholder="1" class="h-narrow"></td><td><input name="value_text" value="${esc(it.value_text || '')}" placeholder="3 l 10 s" class="h-narrow"></td><td class="h-item-eur" data-h-item-eur></td><td><button type="button" class="button small secondary" data-h-row-remove aria-label="Retirer">✕</button></td></tr>`;
     }
     function probateFormHtml(inv) {
         const f = k => esc(inv[k] || '');
@@ -1008,7 +1014,7 @@
             <label>Notaire<input name="notary" value="${f('notary')}" placeholder="Me Dubois, notaire à Tulle"></label><label>Lieu<input name="place_text" value="${f('place_text')}"></label>
             <label>Monnaie<select name="currency"><option value="livre" ${inv.currency === 'livre' ? 'selected' : ''}>Livres tournois (l, s, d)</option><option value="franc" ${inv.currency === 'franc' ? 'selected' : ''}>Francs</option><option value="nf" ${inv.currency === 'nf' ? 'selected' : ''}>Nouveaux francs (1960-2001)</option></select></label><label>Cote<input name="reference" value="${f('reference')}" placeholder="AD19, 3 E 1234"></label></div>
             <h4>Objets, pièce par pièce</h4><p class="muted">Valeur : « 12 l 5 s 3 d » (livres, sols, deniers), « 12 livres 5 sols », ou un nombre (« 152,50 »). La catégorie « Dettes » est déduite du total.</p>
-            <table class="data-table h-items"><thead><tr><th>Pièce</th><th>Catégorie</th><th>Objet</th><th>Qté</th><th>Valeur</th><th></th></tr></thead><tbody data-h-rows="items">${(inv.items?.length ? inv.items : [{}, {}, {}]).map(probateItemRow).join('')}</tbody></table>
+            <table class="data-table h-items"><thead><tr><th>Pièce</th><th>Catégorie</th><th>Objet</th><th>Qté</th><th>Valeur</th><th title="${esc(i18n('Ordre de grandeur : indice des prix de l’INSEE après 1901, prix des denrées avant'))}">${i18n('≈ € d’aujourd’hui')}</th><th></th></tr></thead><tbody data-h-rows="items">${(inv.items?.length ? inv.items : [{}, {}, {}]).map(probateItemRow).join('')}</tbody></table>
             <datalist id="h-rooms"><option>Cuisine</option><option>Chambre</option><option>Grenier</option><option>Cave</option><option>Écurie</option><option>Étable</option><option>Grange</option><option>Boutique</option><option>Atelier</option><option>Cour</option></datalist>
             <p><button type="button" class="button small secondary" data-h-item-add>＋ Ligne</button> <button type="button" class="button small secondary" data-h-item-add5>+ 5 lignes</button> <strong class="h-probate-live"></strong></p>
             <label class="h-block-label">Notes<textarea name="notes" rows="2">${f('notes')}</textarea></label>
@@ -1020,9 +1026,11 @@
         bindMediaEditor(form); form.scrollIntoView({block: 'start'});
         const live = () => {
             const cur = form.elements.currency.value; let total = 0, debts = 0;
-            form.querySelectorAll('.h-item-row').forEach(r => { const v = parseAmount(r.querySelector('[name=value_text]').value) || 0; if (r.querySelector('[name=category]').value === 'dettes') debts += v; else total += v; });
-            const year = yearOf(form.elements.date_text.value), days = workDays(total - debts, cur, year);
-            form.querySelector('.h-probate-live').textContent = `${i18n('Total {x}', {x: moneyText(total, cur)})}${debts ? ` − ${i18n('dettes {x}', {x: moneyText(debts, cur)})} = ${moneyText(total - debts, cur)}` : ''}${days ? ` ≈ ${i18n('{n} journées de travail', {n: fmt(days)})}` : ''}`;
+            const year = yearOf(form.elements.date_text.value);
+            form.querySelectorAll('.h-item-row').forEach(r => { const v = parseAmount(r.querySelector('[name=value_text]').value) || 0; if (r.querySelector('[name=category]').value === 'dettes') debts += v; else total += v;
+                const ce = r.querySelector('[data-h-item-eur]'), eu = v ? euroToday(v, cur, year) : null; if (ce) ce.textContent = eu != null ? window.LCNDA_AUTREFOIS.euroText(eu) : ''; });
+            const days = workDays(total - debts, cur, year), eur = euroToday(total - debts, cur, year);
+            form.querySelector('.h-probate-live').textContent = `${i18n('Total {x}', {x: moneyText(total, cur)})}${debts ? ` − ${i18n('dettes {x}', {x: moneyText(debts, cur)})} = ${moneyText(total - debts, cur)}` : ''}${days ? ` ≈ ${i18n('{n} journées de travail', {n: fmt(days)})}` : ''}${eur != null ? ` · ${i18n('{x} d’aujourd’hui', {x: window.LCNDA_AUTREFOIS.euroText(eur)})}` : ''}`;
         };
         form.addEventListener('input', live); live();
         form.querySelector('[data-h-item-add]').addEventListener('click', () => { form.querySelector('[data-h-rows=items]').insertAdjacentHTML('beforeend', probateItemRow()); });

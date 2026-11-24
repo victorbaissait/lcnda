@@ -228,7 +228,7 @@
         grain: [['l', 'litre', 1], ['hl', 'hectolitre', 100]], liq: [['l', 'litre', 1], ['hl', 'hectolitre', 100]]};
     const KINDS = {long: 'Longueurs', surf: 'Surfaces', grain: 'Grains (matières sèches)', liq: 'Liquides (vin, cidre, huile)'};
     const REGIONS = [
-        {id: 'paris', label: 'Paris, Île-de-France (mesures du roi)', units: [
+        {id: 'paris', label: 'Paris, Île-de-France (mesures du roi)', deps: ['75','77','78','91','92','93','94','95','60','28','45','10','51','02'], src: 'Tables de comparaison des anciennes mesures (an X, 1802) et loi du 19 frimaire an VIII ; unités de la Coutume de Paris', url: 'https://fr.wikipedia.org/w/index.php?search=Unités+de+mesure+de+l%27Ancien+Régime&go=Lire', units: [
             ['ligne', 'ligne', 'long', 0.0022558], ['pouce', 'pouce', 'long', 0.027070], ['pied', 'pied du roi', 'long', 0.324839], ['aune', 'aune de Paris', 'long', 1.18845],
             ['toise', 'toise', 'long', 1.949036], ['perche', 'perche de Paris (18 pieds)', 'long', 5.847102], ['perche_ef', 'perche des eaux et forêts (22 pieds)', 'long', 7.146458],
             ['lieue', 'lieue de Paris (2 000 toises)', 'long', 3898.07], ['lieue_poste', 'lieue de poste (2 200 toises)', 'long', 4287.88],
@@ -239,46 +239,48 @@
             ['roquille', 'roquille', 'liq', 0.0291], ['demiard', 'demi-setier ou demiard', 'liq', 0.2328], ['chopine', 'chopine', 'liq', 0.4656], ['pinte', 'pinte de Paris', 'liq', 0.9313],
             ['velte', 'velte ou setier de vin (8 pintes)', 'liq', 7.45], ['quartaut', 'quartaut ou quarteau (72 pintes)', 'liq', 67.05], ['feuillette', 'feuillette (144 pintes)', 'liq', 134.1], ['muid_vin', 'muid de vin (288 pintes)', 'liq', 268.2],
         ]},
-        {id: 'lyon', label: 'Lyon, Lyonnais', units: [
+        {id: 'lyon', label: 'Lyon, Lyonnais', deps: ['69','01','42'], src: 'Tables de comparaison des mesures du département du Rhône (an X) ; valeurs approchées', url: 'https://fr.wikipedia.org/w/index.php?search=Anciennes+unités+de+mesure+de+Lyon&go=Lire', units: [
             ['pied', 'pied de ville de Lyon', 'long', 0.3425, true], ['aune', 'aune de Lyon', 'long', 1.191, true],
             ['bicheree', 'bicherée (terre semée d’un bichet)', 'surf', 1293, true],
             ['bichet', 'bichet', 'grain', 32.5, true], ['pot', 'pot de Lyon', 'liq', 1.04, true], ['anee', 'ânée de vin', 'liq', 93, true],
         ]},
-        {id: 'bretagne', label: 'Bretagne (Rennes)', units: [
+        {id: 'bretagne', label: 'Bretagne (Rennes)', deps: ['22','29','35','44','56'], src: 'Tables de comparaison des mesures d’Ille-et-Vilaine (an X–an XI) ; valeurs approchées hors de Rennes', url: 'https://fr.wikipedia.org/w/index.php?search=Unités+de+mesure+de+l%27Ancien+Régime&go=Lire', units: [
             ['pied', 'pied du roi', 'long', 0.324839], ['corde', 'corde (24 pieds)', 'long', 7.796],
             ['corde2', 'corde carrée', 'surf', 60.78], ['hommee', 'hommée (vigne, pré)', 'surf', 500, true, 'très variable'], ['journal', 'journal (80 cordes)', 'surf', 4862.4],
             ['boisseau', 'boisseau de Rennes', 'grain', 40, true, 'très variable d’une ville à l’autre'], ['barrique', 'barrique (Nantes)', 'liq', 228, true],
         ]},
-        {id: 'normandie', label: 'Normandie (Rouen)', units: [
+        {id: 'normandie', label: 'Normandie (Rouen)', deps: ['14','27','50','61','76'], src: 'Tables de comparaison des mesures de la Seine-Inférieure (an X)', url: 'https://fr.wikipedia.org/w/index.php?search=Vergée&go=Lire', units: [
             ['pied', 'pied du roi', 'long', 0.324839], ['perche', 'perche (22 pieds)', 'long', 7.146458],
             ['perche2', 'perche carrée', 'surf', 51.0719], ['vergee', 'vergée (40 perches)', 'surf', 2042.88], ['acre', 'acre (4 vergées)', 'surf', 8171.5],
             ['pot', 'pot (2 pintes, cidre)', 'liq', 1.86, true],
         ]},
-        {id: 'bourgogne', label: 'Bourgogne (Dijon, Beaune)', units: [
+        {id: 'bourgogne', label: 'Bourgogne (Dijon, Beaune)', deps: ['21','71','89','58'], src: 'Tables de comparaison des mesures de la Côte-d’Or (an X)', url: 'https://fr.wikipedia.org/w/index.php?search=Ouvrée&go=Lire', units: [
             ['pied', 'pied du roi', 'long', 0.324839], ['perche', 'perche de Bourgogne (9 pieds ½)', 'long', 3.08597],
             ['perche2', 'perche carrée', 'surf', 9.5232], ['ouvree', 'ouvrée (vigne, 45 perches)', 'surf', 428.5], ['journal', 'journal ou soiture (360 perches)', 'surf', 3428.4],
             ['quarteau', 'quarteau', 'liq', 57], ['feuillette', 'feuillette', 'liq', 114], ['piece', 'pièce de Bourgogne', 'liq', 228], ['queue', 'queue (2 pièces)', 'liq', 456],
         ]},
-        {id: 'provence', label: 'Provence (Marseille)', units: [
+        {id: 'provence', label: 'Provence (Marseille)', deps: ['13','83','84','04','06'], src: 'Tables de comparaison des mesures des Bouches-du-Rhône (an X)', url: 'https://fr.wikipedia.org/w/index.php?search=Canne+(unité)&go=Lire', units: [
             ['pan', 'pan', 'long', 0.2514], ['canne', 'canne (8 pans)', 'long', 2.0116],
             ['canne2', 'canne carrée', 'surf', 4.0465], ['seteree', 'sétérée', 'surf', 2000, true, 'très variable (de 1 500 à 3 000 m² selon le lieu)'],
             ['millerole', 'millerole (huile, vin)', 'liq', 64.39],
         ]},
-        {id: 'lorraine', label: 'Lorraine (Nancy)', units: [
+        {id: 'lorraine', label: 'Lorraine (Nancy)', deps: ['54','55','57','88'], src: 'Tables de comparaison des mesures de la Meurthe (an X)', url: 'https://fr.wikipedia.org/w/index.php?search=Anciennes+unités+de+mesure+lorraines&go=Lire', units: [
             ['pied', 'pied de Lorraine', 'long', 0.28586], ['toise', 'toise de Lorraine (10 pieds)', 'long', 2.8586], ['aune', 'aune de Lorraine', 'long', 0.6395, true],
             ['toise2', 'toise carrée de Lorraine', 'surf', 8.1716], ['jour', 'jour ou journal (250 toises carrées)', 'surf', 2042.9],
         ]},
-        {id: 'alsace', label: 'Alsace (Strasbourg)', units: [
+        {id: 'alsace', label: 'Alsace (Strasbourg)', deps: ['67','68'], src: 'Tables de comparaison des mesures du Bas-Rhin (an X) ; valeurs approchées', url: 'https://fr.wikipedia.org/w/index.php?search=Unités+de+mesure+alsaciennes&go=Lire', units: [
             ['pied', 'pied de Strasbourg', 'long', 0.28877], ['aune', 'aune (Elle) de Strasbourg', 'long', 0.578, true],
             ['arpent', 'arpent (Acker)', 'surf', 2000, true], ['ohm', 'ohm (vin)', 'liq', 47, true, 'de 45 à 50 litres selon le lieu'],
         ]},
-        {id: 'flandre', label: 'Flandre (Lille)', units: [
+        {id: 'flandre', label: 'Flandre (Lille)', deps: ['59','62'], src: 'Tables de comparaison des mesures du Nord (an X) ; valeurs approchées', url: 'https://fr.wikipedia.org/w/index.php?search=Bonnier&go=Lire', units: [
             ['pied', 'pied de Lille', 'long', 0.297, true], ['aune', 'aune de Lille', 'long', 0.694, true],
             ['mesure', 'mesure', 'surf', 3546, true], ['bonnier', 'bonnier (4 mesures)', 'surf', 14185, true],
             ['rasiere', 'rasière (blé)', 'grain', 70, true],
         ]},
     ];
     const regionById = id => REGIONS.find(r => r.id === id) || REGIONS[0];
+    /** la région des mesures d'un département (« 35 » → bretagne) ; '' si aucune */
+    const regionOfDept = d => (REGIONS.find(r => (r.deps || []).includes(String(d || '').toUpperCase().padStart(2, '0'))) || {}).id || '';
     const unitOf = (region, id) => {
         const r = regionById(region), u = r.units.find(x => x[0] === id);
         if (u) return {id: u[0], label: u[1], kind: u[2], value: u[3], approx: !!u[4], note: u[5] || ''};
@@ -330,7 +332,7 @@
     }
 
     ext.calendarMore = {jdnG, jdnJ, fromG, fromJ, parseDate, weekday, calendarFor, dateDiff, ymdDiff, birthRange, ageAt, easter, movableFeasts,
-        generationsBetween, generationsBack, ancestors, sunTimes, canonicalTime, canonicalFromText, clock, convertMeasure, REGIONS, COINS, coinValue, lsd};
+        generationsBetween, generationsBack, ancestors, sunTimes, canonicalTime, canonicalFromText, clock, convertMeasure, REGIONS, regionOfDept, COINS, coinValue, lsd};
 
     /* ═════════════ Cadres ═════════════ */
     const panel = (id, title, help, body, note = '') => `<section class="maintenance-panel h-cm-panel" id="${id}"><h3>${i18n(title)}</h3><p>${i18n(help)}</p>${body}${note ? `<p class="muted h-cm-note">${i18n(note)}</p>` : ''}</section>`;

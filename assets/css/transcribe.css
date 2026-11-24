@@ -362,3 +362,9 @@
 .tx-gut.is-on>textarea{padding-left:44px!important}
 .tx-gut-mirror{position:absolute;overflow:hidden;white-space:pre-wrap;overflow-wrap:anywhere;color:transparent;pointer-events:none;border-style:solid;border-color:transparent;box-sizing:border-box;z-index:1}
 .tx-gut:not(.is-on) .tx-gut-mirror{display:none}
+/* 💰📏 sommes et mesures anciennes (app-montants-core.js) : soulignées en vert, leur valeur au survol */
+.h-tx-mirror .h-tx-ab.is-amount{border-bottom:2px dotted #1e8a4c}
+:root[data-theme="dark"] .h-tx-mirror .h-tx-ab.is-amount{border-bottom-color:#6fd39a}
+.h-tx-amline{display:block}
+.af-prices{margin:4px 0 0;padding-left:18px}
+.af-prices li{margin:2px 0}
