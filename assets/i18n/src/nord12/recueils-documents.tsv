@@ -1,0 +1,54 @@
+fr ¦ ru ¦ uk
+# 📚 Recueils depuis Documents, chercher par recueil, sorte d’acte, lieu et rayon (heritage-recueil-docs.js, heritage-onglets-documents.js)
+{n} déjà dans ce recueil ¦ {n} уже в этом сборнике ¦ {n} уже в цій збірці
+pas des images, laissés de côté : {n} ¦ не изображения, пропущено: {n} ¦ не зображення, пропущено: {n}
+Choisis au moins un document. ¦ Выбери хотя бы один документ. ¦ Вибери хоча б один документ.
+📚 RECUEIL ¦ 📚 СБОРНИК ¦ 📚 ЗБІРКА
+📚 Faire le recueil ¦ 📚 Создать сборник ¦ 📚 Створити збірку
+Les documents restent à leur place dans Documents : le recueil les regroupe, il ne les déplace pas. Un document en plusieurs pages y entre avec toutes ses pages. ¦ Документы остаются на своих местах в «Документах»: сборник их объединяет, но не перемещает. Многостраничный документ входит в него со всеми своими страницами. ¦ Документи залишаються на своїх місцях у «Документах»: збірка їх об’єднує, але не переміщує. Багатосторінковий документ входить до неї з усіма своїми сторінками.
+Nom du recueil ¦ Название сборника ¦ Назва збірки
+ex. Registre de Sancoins, 1870-1872 ¦ напр. Метрическая книга Сансуэна, 1870–1872 ¦ напр. Метрична книга Сансуена, 1870–1872
+ex. 3 E 1234 ¦ напр. 3 E 1234 ¦ напр. 3 E 1234
+ex. Sancoins ¦ напр. Сансуэн ¦ напр. Сансуен
+ex. 1870-1872 ¦ напр. 1870–1872 ¦ напр. 1870–1872
+L’ordre des pages ¦ Порядок страниц ¦ Порядок сторінок
+glisse ⠿ ou utilise ↑ ↓ ¦ перетащи ⠿ или используй ↑ ↓ ¦ перетягни ⠿ або використай ↑ ↓
+Recueil « {t} » fait : {x} ¦ Сборник «{t}» создан: {x} ¦ Збірку «{t}» створено: {x}
+Recueil « {t} » ¦ Сборник «{t}» ¦ Збірка «{t}»
+Ajouter {x} à un recueil ¦ Добавить {x} в сборник ¦ Додати {x} до збірки
+Ajouter « {t} » à un recueil ¦ Добавить «{t}» в сборник ¦ Додати «{t}» до збірки
+Les pages vont à la fin du recueil, dans l’ordre ; un document déjà dans ce recueil n’est pas remis. ¦ Страницы идут в конец сборника, по порядку; документ, который уже есть в этом сборнике, повторно не добавляется. ¦ Сторінки йдуть у кінець збірки, по порядку; документ, який уже є в цій збірці, повторно не додається.
+Chercher un recueil… ¦ Найти сборник… ¦ Знайти збірку…
+Nouveau recueil avec ces documents… ¦ Новый сборник с этими документами… ¦ Нова збірка з цими документами…
+Choisis un recueil. ¦ Выбери сборник. ¦ Вибери збірку.
+Rien à ajouter : {x} ¦ Нечего добавить: {x} ¦ Нічого додати: {x}
+Ajouté à « {t} » : {x} ¦ Добавлено в «{t}»: {x} ¦ Додано до «{t}»: {x}
+page {n} ¦ стр. {n} ¦ с. {n}
+Dans les recueils ¦ В сборниках ¦ У збірках
+Dans le recueil ¦ В сборнике ¦ У збірці
+page {n} sur {t} ¦ стр. {n} из {t} ¦ с. {n} з {t}
+(une autre page de ce document) ¦ (другая страница этого документа) ¦ (інша сторінка цього документа)
+📚 Ouvrir le recueil ¦ 📚 Открыть сборник ¦ 📚 Відкрити збірку
+à {n} km autour ¦ в радиусе {n} км ¦ у радіусі {n} км
+« {x} » n’a pas encore de coordonnées : seuls les documents de ce lieu sont montrés (ajoute-les dans Lieux pour chercher autour). ¦ У «{x}» пока нет координат: показаны только документы этого места (добавь их в «Местах», чтобы искать вокруг). ¦ У «{x}» ще немає координат: показано лише документи цього місця (додай їх у «Місцях», щоб шукати довкола).
+Dans aucun recueil ¦ Ни в одном сборнике ¦ У жодній збірці
+p. {n} ¦ с. {n} ¦ с. {n}
+choisi n° {n} ¦ выбран № {n} ¦ вибрано № {n}
+{x}, dans l’ordre des clics ¦ {x}, в порядке нажатий ¦ {x}, у порядку натискань
+Clique sur les documents à prendre, dans l’ordre des pages. ¦ Нажимай на документы, которые нужно взять, в порядке страниц. ¦ Натискай на документи, які треба взяти, у порядку сторінок.
+📚 Faire un recueil avec {x} ¦ 📚 Создать сборник из: {x} ¦ 📚 Створити збірку з: {x}
+📚 Faire un recueil ¦ 📚 Создать сборник ¦ 📚 Створити збірку
+📚 Ajouter à un recueil… ¦ 📚 Добавить в сборник… ¦ 📚 Додати до збірки…
+Tout choisir (ceux montrés) ¦ Выбрать все (показанные) ¦ Вибрати всі (показані)
+☑ Choisir plusieurs ¦ ☑ Выбрать несколько ¦ ☑ Вибрати кілька
+Les recueils ne sont pas encore chargés : réessaie dans un instant. ¦ Сборники ещё не загружены: попробуй ещё раз через мгновение. ¦ Збірки ще не завантажено: спробуй ще раз за мить.
+Ville ou lieu ¦ Город или место ¦ Місто або місце
+Dans un rayon de (km) ¦ В радиусе (км) ¦ У радіусі (км)
+ex. 20 (vide : le lieu seul) ¦ напр. 20 (пусто: только это место) ¦ напр. 20 (порожньо: лише це місце)
+ex. Registre de Sancoins ¦ напр. Метрическая книга Сансуэна ¦ напр. Метрична книга Сансуена
+Actes de notoriété ¦ Акты о известности ¦ Акти про відомість
+Documents militaires ¦ Военные документы ¦ Військові документи
+📚 Dans un recueil ¦ 📚 В сборнике ¦ 📚 У збірці
+📚 Recueils ¦ 📚 Сборники ¦ 📚 Збірки
+Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z, 👤 par personne, 📚 par recueil ou en 📁 dossiers), la fiche à droite. ¦ Медиафайлы и архивные документы твоей базы, как люди: список слева (А → Я, 👤 по людям, 📚 по сборникам или в 📁 папках), карточка справа. ¦ Медіафайли та архівні документи твоєї бази, як люди: список ліворуч (А → Я, 👤 за людьми, 📚 за збірками або в 📁 теках), картка праворуч.
+=document choisi ¦ выбранный документ|выбранных документа|выбранных документов ¦ вибраний документ|вибрані документи|вибраних документів

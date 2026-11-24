@@ -1,0 +1,54 @@
+fr ¦ fi ¦ hu
+# 📚 Recueils depuis Documents, chercher par recueil, sorte d’acte, lieu et rayon (heritage-recueil-docs.js, heritage-onglets-documents.js)
+{n} déjà dans ce recueil ¦ {n} jo tässä kokoelmassa ¦ {n} már ebben a gyűjteményben
+pas des images, laissés de côté : {n} ¦ ei kuvia, jätetty pois: {n} ¦ nem képek, kihagyva: {n}
+Choisis au moins un document. ¦ Valitse vähintään yksi asiakirja. ¦ Válassz legalább egy dokumentumot.
+📚 RECUEIL ¦ 📚 KOKOELMA ¦ 📚 GYŰJTEMÉNY
+📚 Faire le recueil ¦ 📚 Tee kokoelma ¦ 📚 Gyűjtemény készítése
+Les documents restent à leur place dans Documents : le recueil les regroupe, il ne les déplace pas. Un document en plusieurs pages y entre avec toutes ses pages. ¦ Asiakirjat pysyvät paikallaan Asiakirjoissa: kokoelma ryhmittelee ne, se ei siirrä niitä. Monisivuinen asiakirja tulee mukaan kaikkine sivuineen. ¦ A dokumentumok a helyükön maradnak a Dokumentumokban: a gyűjtemény csoportosítja, nem mozgatja őket. A többoldalas dokumentum minden oldalával együtt kerül bele.
+Nom du recueil ¦ Kokoelman nimi ¦ A gyűjtemény neve
+ex. Registre de Sancoins, 1870-1872 ¦ esim. Sancoinsin rekisteri, 1870-1872 ¦ pl. Sancoins-i anyakönyv, 1870-1872
+ex. 3 E 1234 ¦ esim. 3 E 1234 ¦ pl. 3 E 1234
+ex. Sancoins ¦ esim. Sancoins ¦ pl. Sancoins
+ex. 1870-1872 ¦ esim. 1870-1872 ¦ pl. 1870-1872
+L’ordre des pages ¦ Sivujen järjestys ¦ Az oldalak sorrendje
+glisse ⠿ ou utilise ↑ ↓ ¦ vedä ⠿ tai käytä ↑ ↓ ¦ húzd ⠿ vagy használd: ↑ ↓
+Recueil « {t} » fait : {x} ¦ Kokoelma ”{t}” tehty: {x} ¦ A(z) „{t}” gyűjtemény elkészült: {x}
+Recueil « {t} » ¦ Kokoelma ”{t}” ¦ A(z) „{t}” gyűjtemény
+Ajouter {x} à un recueil ¦ Lisää {x} kokoelmaan ¦ {x} hozzáadása egy gyűjteményhez
+Ajouter « {t} » à un recueil ¦ Lisää ”{t}” kokoelmaan ¦ „{t}” hozzáadása egy gyűjteményhez
+Les pages vont à la fin du recueil, dans l’ordre ; un document déjà dans ce recueil n’est pas remis. ¦ Sivut menevät kokoelman loppuun, järjestyksessä; jo tässä kokoelmassa olevaa asiakirjaa ei lisätä uudelleen. ¦ Az oldalak a gyűjtemény végére kerülnek, sorrendben; az ebben a gyűjteményben már szereplő dokumentum nem kerül be újra.
+Chercher un recueil… ¦ Hae kokoelmaa… ¦ Gyűjtemény keresése…
+Nouveau recueil avec ces documents… ¦ Uusi kokoelma näistä asiakirjoista… ¦ Új gyűjtemény ezekkel a dokumentumokkal…
+Choisis un recueil. ¦ Valitse kokoelma. ¦ Válassz egy gyűjteményt.
+Rien à ajouter : {x} ¦ Ei mitään lisättävää: {x} ¦ Nincs mit hozzáadni: {x}
+Ajouté à « {t} » : {x} ¦ Lisätty kokoelmaan ”{t}”: {x} ¦ Hozzáadva ehhez: „{t}”: {x}
+page {n} ¦ sivu {n} ¦ {n}. oldal
+Dans les recueils ¦ Kokoelmissa ¦ A gyűjteményekben
+Dans le recueil ¦ Kokoelmassa ¦ A gyűjteményben
+page {n} sur {t} ¦ sivu {n}/{t} ¦ {n}. oldal / {t}
+(une autre page de ce document) ¦ (tämän asiakirjan toinen sivu) ¦ (a dokumentum egy másik oldala)
+📚 Ouvrir le recueil ¦ 📚 Avaa kokoelma ¦ 📚 Gyűjtemény megnyitása
+à {n} km autour ¦ {n} km:n säteellä ¦ {n} km-es körzetben
+« {x} » n’a pas encore de coordonnées : seuls les documents de ce lieu sont montrés (ajoute-les dans Lieux pour chercher autour). ¦ Paikalla ”{x}” ei ole vielä koordinaatteja: vain tämän paikan asiakirjat näytetään (lisää ne Paikkoihin, niin voit hakea ympäristöstä). ¦ A(z) „{x}” helynek még nincsenek koordinátái: csak az ehhez a helyhez tartozó dokumentumok látszanak (add meg őket a Helyeknél, hogy a környéken is kereshess).
+Dans aucun recueil ¦ Ei missään kokoelmassa ¦ Egyik gyűjteményben sem
+p. {n} ¦ s. {n} ¦ {n}. o.
+choisi n° {n} ¦ valittu nro {n} ¦ kiválasztva: {n}.
+{x}, dans l’ordre des clics ¦ {x}, napsautusjärjestyksessä ¦ {x}, a kattintások sorrendjében
+Clique sur les documents à prendre, dans l’ordre des pages. ¦ Napsauta otettavia asiakirjoja sivujen järjestyksessä. ¦ Kattints a felveendő dokumentumokra, az oldalak sorrendjében.
+📚 Faire un recueil avec {x} ¦ 📚 Tee kokoelma: {x} ¦ 📚 Gyűjtemény készítése: {x}
+📚 Faire un recueil ¦ 📚 Tee kokoelma ¦ 📚 Gyűjtemény készítése
+📚 Ajouter à un recueil… ¦ 📚 Lisää kokoelmaan… ¦ 📚 Hozzáadás egy gyűjteményhez…
+Tout choisir (ceux montrés) ¦ Valitse kaikki (näytetyt) ¦ Mind kiválasztása (a látható)
+☑ Choisir plusieurs ¦ ☑ Valitse useita ¦ ☑ Több kiválasztása
+Les recueils ne sont pas encore chargés : réessaie dans un instant. ¦ Kokoelmia ei ole vielä ladattu: yritä hetken kuluttua uudelleen. ¦ A gyűjtemények még nem töltődtek be: próbáld újra egy pillanat múlva.
+Ville ou lieu ¦ Kaupunki tai paikka ¦ Város vagy hely
+Dans un rayon de (km) ¦ Säteellä (km) ¦ Körzetben (km)
+ex. 20 (vide : le lieu seul) ¦ esim. 20 (tyhjä: vain paikka) ¦ pl. 20 (üres: csak a hely)
+ex. Registre de Sancoins ¦ esim. Sancoinsin rekisteri ¦ pl. Sancoins-i anyakönyv
+Actes de notoriété ¦ Tunnettuusasiakirjat ¦ Közismertségi okiratok
+Documents militaires ¦ Sotilasasiakirjat ¦ Katonai dokumentumok
+📚 Dans un recueil ¦ 📚 Kokoelmassa ¦ 📚 Gyűjteményben
+📚 Recueils ¦ 📚 Kokoelmat ¦ 📚 Gyűjtemények
+Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z, 👤 par personne, 📚 par recueil ou en 📁 dossiers), la fiche à droite. ¦ Tietokantasi mediat ja arkistokappaleet, kuten henkilöt: luettelo vasemmalla (A → Ö, 👤 henkilöittäin, 📚 kokoelmittain tai 📁 kansioissa), kortti oikealla. ¦ Az adatbázisod médiái és levéltári darabjai, mint a személyek: a lista balra (A → Z, 👤 személyenként, 📚 gyűjteményenként vagy 📁 mappákban), az adatlap jobbra.
+=document choisi ¦ valittu asiakirja|valittua asiakirjaa ¦ kiválasztott dokumentum|kiválasztott dokumentum

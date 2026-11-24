@@ -160,3 +160,32 @@ button.ong-uname:hover, button.ong-uname:focus-visible { border-style: solid; bo
 .dl-empty { margin: 6px 0 0; font-size: .92em; }
 .lb-links { margin-top: 10px; }
 .dl-inv { margin-top: 14px; }
+
+/* 📚 Documents : 4 façons de ranger (A → Z, Par personne, Recueils, Dossiers) en grille 2 × 2, pour ne pas serrer la colonne */
+.ong-modebar .segmented.ong-mode.is-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.ong-modebar .segmented.ong-mode.is-grid button { flex: none; width: auto; margin: 0; padding-left: 4px; padding-right: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; overflow-wrap: normal; letter-spacing: -.01em; }
+.ong-rh { width: 100%; text-align: left; cursor: pointer; border: 0; background: none; font: inherit; color: inherit; }
+.ong-rh:hover, .ong-rh:focus-visible { background: var(--surface-2, rgba(0,0,0,.05)); }
+.ong-pnum { font-weight: 600; color: var(--muted, #667); margin-right: 2px; }
+/* ☑ Choisir plusieurs : le numéro dans l'ordre des clics */
+.ong-pickbar { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; position: sticky; top: 0; z-index: 3; margin: 0 0 10px; padding: 8px 10px; border: 2px solid var(--ink, #111); background: var(--surface, #fff); }
+.ong-pickbar .spacer { flex: 1; }
+.ong-pickcount { font-weight: 600; }
+[data-ong-card].is-picking, .ong-docrow.is-picking { position: relative; }
+[data-ong-card].is-picked { outline: 3px solid var(--accent, #2457ff); outline-offset: 1px; }
+.ong-docrow.is-picked { background: var(--accent-soft, #e6ecff); }
+.ong-pickn { position: absolute; top: 6px; left: 6px; z-index: 2; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 12px; background: var(--accent, #2457ff); color: #fff; font-weight: 700; font-size: 13px; display: inline-flex; align-items: center; justify-content: center; }
+/* 📚 Dans le recueil */
+.rd-place + .rd-place { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line, #ddd); }
+.rd-place p { margin: 0 0 6px; }
+.rd-nav { display: flex; flex-wrap: wrap; gap: 6px; }
+/* la fenêtre « Nouveau recueil » */
+.rd-list { list-style: none; margin: 0; padding: 0; max-height: 46vh; overflow: auto; border: 1px solid var(--line, #ddd); }
+.rd-item { display: flex; align-items: center; gap: 8px; padding: 4px 8px; border-bottom: 1px solid var(--line, #eee); background: var(--surface, #fff); }
+.rd-n { min-width: 22px; text-align: right; font-weight: 600; }
+.rd-th img { width: 36px; height: 36px; object-fit: cover; display: block; }
+.rd-th > span { display: inline-block; width: 36px; text-align: center; }
+.rd-t { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rd-h { margin: 14px 0 6px; font-size: 1rem; }
+.rd-picks { display: grid; gap: 2px; max-height: 46vh; overflow: auto; }
+.rd-q { width: 100%; margin-bottom: 8px; }

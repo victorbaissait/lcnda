@@ -1,0 +1,54 @@
+fr ¦ el ¦ bg
+# 📚 Recueils depuis Documents, chercher par recueil, sorte d’acte, lieu et rayon (heritage-recueil-docs.js, heritage-onglets-documents.js)
+{n} déjà dans ce recueil ¦ {n} ήδη σε αυτή τη συλλογή ¦ {n} вече в този сборник
+pas des images, laissés de côté : {n} ¦ δεν είναι εικόνες, παραλείφθηκαν: {n} ¦ не са изображения, пропуснати: {n}
+Choisis au moins un document. ¦ Διάλεξε τουλάχιστον ένα έγγραφο. ¦ Избери поне един документ.
+📚 RECUEIL ¦ 📚 ΣΥΛΛΟΓΗ ¦ 📚 СБОРНИК
+📚 Faire le recueil ¦ 📚 Φτιάξε τη συλλογή ¦ 📚 Направи сборника
+Les documents restent à leur place dans Documents : le recueil les regroupe, il ne les déplace pas. Un document en plusieurs pages y entre avec toutes ses pages. ¦ Τα έγγραφα μένουν στη θέση τους στα Έγγραφα: η συλλογή τα ομαδοποιεί, δεν τα μετακινεί. Ένα έγγραφο με πολλές σελίδες μπαίνει με όλες τις σελίδες του. ¦ Документите остават на мястото си в „Документи“: сборникът ги групира, не ги мести. Документ с няколко страници влиза с всичките си страници.
+Nom du recueil ¦ Όνομα της συλλογής ¦ Име на сборника
+ex. Registre de Sancoins, 1870-1872 ¦ π.χ. Μητρώο του Sancoins, 1870-1872 ¦ напр. Регистър на Сансоен, 1870–1872
+ex. 3 E 1234 ¦ π.χ. 3 E 1234 ¦ напр. 3 E 1234
+ex. Sancoins ¦ π.χ. Sancoins ¦ напр. Сансоен
+ex. 1870-1872 ¦ π.χ. 1870-1872 ¦ напр. 1870–1872
+L’ordre des pages ¦ Η σειρά των σελίδων ¦ Редът на страниците
+glisse ⠿ ou utilise ↑ ↓ ¦ σύρε ⠿ ή χρησιμοποίησε ↑ ↓ ¦ плъзни ⠿ или използвай ↑ ↓
+Recueil « {t} » fait : {x} ¦ Η συλλογή «{t}» έγινε: {x} ¦ Сборникът „{t}“ е направен: {x}
+Recueil « {t} » ¦ Συλλογή «{t}» ¦ Сборник „{t}“
+Ajouter {x} à un recueil ¦ Πρόσθεσε {x} σε μια συλλογή ¦ Добави {x} към сборник
+Ajouter « {t} » à un recueil ¦ Πρόσθεσε το «{t}» σε μια συλλογή ¦ Добави „{t}“ към сборник
+Les pages vont à la fin du recueil, dans l’ordre ; un document déjà dans ce recueil n’est pas remis. ¦ Οι σελίδες πάνε στο τέλος της συλλογής, με τη σειρά· ένα έγγραφο που είναι ήδη σε αυτή τη συλλογή δεν ξαναμπαίνει. ¦ Страниците отиват в края на сборника, по ред; документ, който вече е в този сборник, не се добавя отново.
+Chercher un recueil… ¦ Αναζήτηση συλλογής… ¦ Търси сборник…
+Nouveau recueil avec ces documents… ¦ Νέα συλλογή με αυτά τα έγγραφα… ¦ Нов сборник с тези документи…
+Choisis un recueil. ¦ Διάλεξε μια συλλογή. ¦ Избери сборник.
+Rien à ajouter : {x} ¦ Τίποτα για προσθήκη: {x} ¦ Няма какво да се добави: {x}
+Ajouté à « {t} » : {x} ¦ Προστέθηκε στο «{t}»: {x} ¦ Добавено към „{t}“: {x}
+page {n} ¦ σελίδα {n} ¦ стр. {n}
+Dans les recueils ¦ Στις συλλογές ¦ В сборниците
+Dans le recueil ¦ Στη συλλογή ¦ В сборника
+page {n} sur {t} ¦ σελίδα {n} από {t} ¦ стр. {n} от {t}
+(une autre page de ce document) ¦ (άλλη σελίδα αυτού του εγγράφου) ¦ (друга страница от този документ)
+📚 Ouvrir le recueil ¦ 📚 Άνοιξε τη συλλογή ¦ 📚 Отвори сборника
+à {n} km autour ¦ σε ακτίνα {n} χλμ. ¦ в радиус {n} км
+« {x} » n’a pas encore de coordonnées : seuls les documents de ce lieu sont montrés (ajoute-les dans Lieux pour chercher autour). ¦ Το «{x}» δεν έχει ακόμη συντεταγμένες: εμφανίζονται μόνο τα έγγραφα αυτού του τόπου (πρόσθεσέ τες στους Τόπους για να ψάχνεις γύρω του). ¦ „{x}“ още няма координати: показват се само документите от това място (добави ги в „Места“, за да търсиш наоколо).
+Dans aucun recueil ¦ Σε καμία συλλογή ¦ В нито един сборник
+p. {n} ¦ σ. {n} ¦ с. {n}
+choisi n° {n} ¦ επιλεγμένο αρ. {n} ¦ избран № {n}
+{x}, dans l’ordre des clics ¦ {x}, με τη σειρά των κλικ ¦ {x}, по реда на щракванията
+Clique sur les documents à prendre, dans l’ordre des pages. ¦ Κάνε κλικ στα έγγραφα που θέλεις να πάρεις, με τη σειρά των σελίδων. ¦ Щракни върху документите, които искаш да вземеш, по реда на страниците.
+📚 Faire un recueil avec {x} ¦ 📚 Φτιάξε μια συλλογή με {x} ¦ 📚 Направи сборник с {x}
+📚 Faire un recueil ¦ 📚 Φτιάξε μια συλλογή ¦ 📚 Направи сборник
+📚 Ajouter à un recueil… ¦ 📚 Πρόσθεσε σε μια συλλογή… ¦ 📚 Добави към сборник…
+Tout choisir (ceux montrés) ¦ Επίλεξε όλα (όσα φαίνονται) ¦ Избери всички (показаните)
+☑ Choisir plusieurs ¦ ☑ Επίλεξε πολλά ¦ ☑ Избери няколко
+Les recueils ne sont pas encore chargés : réessaie dans un instant. ¦ Οι συλλογές δεν έχουν φορτωθεί ακόμη: δοκίμασε ξανά σε λίγο. ¦ Сборниците още не са заредени: опитай пак след миг.
+Ville ou lieu ¦ Πόλη ή τόπος ¦ Град или място
+Dans un rayon de (km) ¦ Σε ακτίνα (χλμ.) ¦ В радиус (км)
+ex. 20 (vide : le lieu seul) ¦ π.χ. 20 (κενό: μόνο ο τόπος) ¦ напр. 20 (празно: само мястото)
+ex. Registre de Sancoins ¦ π.χ. Μητρώο του Sancoins ¦ напр. Регистър на Сансоен
+Actes de notoriété ¦ Πράξεις συμβολαιογραφικής βεβαίωσης ¦ Актове за известност
+Documents militaires ¦ Στρατιωτικά έγγραφα ¦ Военни документи
+📚 Dans un recueil ¦ 📚 Σε μια συλλογή ¦ 📚 В сборник
+📚 Recueils ¦ 📚 Συλλογές ¦ 📚 Сборници
+Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z, 👤 par personne, 📚 par recueil ou en 📁 dossiers), la fiche à droite. ¦ Τα πολυμέσα και τα αρχειακά τεκμήρια της βάσης σου, όπως τα άτομα: η λίστα αριστερά (Α → Ω, 👤 ανά άτομο, 📚 ανά συλλογή ή σε 📁 φακέλους), η καρτέλα δεξιά. ¦ Медиите и архивните документи от твоята база, като хората: списъкът вляво (А → Я, 👤 по хора, 📚 по сборници или в 📁 папки), картонът вдясно.
+=document choisi ¦ επιλεγμένο έγγραφο|επιλεγμένα έγγραφα ¦ избран документ|избрани документа

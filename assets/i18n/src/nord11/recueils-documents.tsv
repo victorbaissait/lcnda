@@ -1,0 +1,54 @@
+fr ¦ vi ¦ id
+# 📚 Recueils depuis Documents, chercher par recueil, sorte d’acte, lieu et rayon (heritage-recueil-docs.js, heritage-onglets-documents.js)
+{n} déjà dans ce recueil ¦ {n} đã có trong tuyển tập này ¦ {n} sudah ada di kumpulan ini
+pas des images, laissés de côté : {n} ¦ không phải hình ảnh, bị bỏ qua: {n} ¦ bukan gambar, dilewati: {n}
+Choisis au moins un document. ¦ Hãy chọn ít nhất một tài liệu. ¦ Pilih setidaknya satu dokumen.
+📚 RECUEIL ¦ 📚 TUYỂN TẬP ¦ 📚 KUMPULAN
+📚 Faire le recueil ¦ 📚 Tạo tuyển tập ¦ 📚 Buat kumpulan
+Les documents restent à leur place dans Documents : le recueil les regroupe, il ne les déplace pas. Un document en plusieurs pages y entre avec toutes ses pages. ¦ Các tài liệu vẫn ở nguyên chỗ trong Tài liệu: tuyển tập gom chúng lại, không di chuyển chúng. Một tài liệu nhiều trang sẽ vào cùng tất cả các trang của nó. ¦ Dokumen tetap di tempatnya di Dokumen: kumpulan mengelompokkannya, tidak memindahkannya. Dokumen dengan beberapa halaman masuk bersama semua halamannya.
+Nom du recueil ¦ Tên tuyển tập ¦ Nama kumpulan
+ex. Registre de Sancoins, 1870-1872 ¦ vd. Sổ bộ Sancoins, 1870-1872 ¦ mis. Register Sancoins, 1870-1872
+ex. 3 E 1234 ¦ vd. 3 E 1234 ¦ mis. 3 E 1234
+ex. Sancoins ¦ vd. Sancoins ¦ mis. Sancoins
+ex. 1870-1872 ¦ vd. 1870-1872 ¦ mis. 1870-1872
+L’ordre des pages ¦ Thứ tự các trang ¦ Urutan halaman
+glisse ⠿ ou utilise ↑ ↓ ¦ kéo ⠿ hoặc dùng ↑ ↓ ¦ seret ⠿ atau gunakan ↑ ↓
+Recueil « {t} » fait : {x} ¦ Đã tạo tuyển tập “{t}”: {x} ¦ Kumpulan “{t}” dibuat: {x}
+Recueil « {t} » ¦ Tuyển tập “{t}” ¦ Kumpulan “{t}”
+Ajouter {x} à un recueil ¦ Thêm {x} vào một tuyển tập ¦ Tambahkan {x} ke sebuah kumpulan
+Ajouter « {t} » à un recueil ¦ Thêm “{t}” vào một tuyển tập ¦ Tambahkan “{t}” ke sebuah kumpulan
+Les pages vont à la fin du recueil, dans l’ordre ; un document déjà dans ce recueil n’est pas remis. ¦ Các trang được đặt ở cuối tuyển tập, theo thứ tự; tài liệu đã có trong tuyển tập này sẽ không được thêm lại. ¦ Halaman masuk ke akhir kumpulan, berurutan; dokumen yang sudah ada di kumpulan ini tidak dimasukkan lagi.
+Chercher un recueil… ¦ Tìm một tuyển tập… ¦ Cari kumpulan…
+Nouveau recueil avec ces documents… ¦ Tuyển tập mới với các tài liệu này… ¦ Kumpulan baru dengan dokumen-dokumen ini…
+Choisis un recueil. ¦ Hãy chọn một tuyển tập. ¦ Pilih sebuah kumpulan.
+Rien à ajouter : {x} ¦ Không có gì để thêm: {x} ¦ Tidak ada yang ditambahkan: {x}
+Ajouté à « {t} » : {x} ¦ Đã thêm vào “{t}”: {x} ¦ Ditambahkan ke “{t}”: {x}
+page {n} ¦ trang {n} ¦ halaman {n}
+Dans les recueils ¦ Trong các tuyển tập ¦ Di kumpulan-kumpulan
+Dans le recueil ¦ Trong tuyển tập ¦ Di kumpulan
+page {n} sur {t} ¦ trang {n} / {t} ¦ halaman {n} dari {t}
+(une autre page de ce document) ¦ (một trang khác của tài liệu này) ¦ (halaman lain dari dokumen ini)
+📚 Ouvrir le recueil ¦ 📚 Mở tuyển tập ¦ 📚 Buka kumpulan
+à {n} km autour ¦ trong bán kính {n} km ¦ dalam radius {n} km
+« {x} » n’a pas encore de coordonnées : seuls les documents de ce lieu sont montrés (ajoute-les dans Lieux pour chercher autour). ¦ “{x}” chưa có tọa độ: chỉ hiện các tài liệu của nơi này (thêm tọa độ trong Địa điểm để tìm xung quanh). ¦ “{x}” belum punya koordinat: hanya dokumen dari tempat ini yang ditampilkan (tambahkan di Tempat supaya kamu bisa mencari di sekitarnya).
+Dans aucun recueil ¦ Không thuộc tuyển tập nào ¦ Tidak di kumpulan mana pun
+p. {n} ¦ tr. {n} ¦ hlm. {n}
+choisi n° {n} ¦ đã chọn số {n} ¦ dipilih no. {n}
+{x}, dans l’ordre des clics ¦ {x}, theo thứ tự bấm ¦ {x}, sesuai urutan klik
+Clique sur les documents à prendre, dans l’ordre des pages. ¦ Bấm vào các tài liệu cần lấy, theo thứ tự các trang. ¦ Klik dokumen yang ingin kamu ambil, sesuai urutan halaman.
+📚 Faire un recueil avec {x} ¦ 📚 Tạo tuyển tập với {x} ¦ 📚 Buat kumpulan dengan {x}
+📚 Faire un recueil ¦ 📚 Tạo tuyển tập ¦ 📚 Buat kumpulan
+📚 Ajouter à un recueil… ¦ 📚 Thêm vào một tuyển tập… ¦ 📚 Tambahkan ke sebuah kumpulan…
+Tout choisir (ceux montrés) ¦ Chọn tất cả (đang hiện) ¦ Pilih semua (yang ditampilkan)
+☑ Choisir plusieurs ¦ ☑ Chọn nhiều ¦ ☑ Pilih beberapa
+Les recueils ne sont pas encore chargés : réessaie dans un instant. ¦ Các tuyển tập chưa được tải: hãy thử lại sau giây lát. ¦ Kumpulan belum dimuat: coba lagi sebentar lagi.
+Ville ou lieu ¦ Thành phố hoặc địa điểm ¦ Kota atau tempat
+Dans un rayon de (km) ¦ Trong bán kính (km) ¦ Dalam radius (km)
+ex. 20 (vide : le lieu seul) ¦ vd. 20 (để trống: chỉ nơi đó) ¦ mis. 20 (kosong: tempat itu saja)
+ex. Registre de Sancoins ¦ vd. Sổ bộ Sancoins ¦ mis. Register Sancoins
+Actes de notoriété ¦ Văn bản xác nhận công chứng ¦ Akta notorietas
+Documents militaires ¦ Tài liệu quân sự ¦ Dokumen militer
+📚 Dans un recueil ¦ 📚 Trong một tuyển tập ¦ 📚 Di sebuah kumpulan
+📚 Recueils ¦ 📚 Tuyển tập ¦ 📚 Kumpulan
+Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z, 👤 par personne, 📚 par recueil ou en 📁 dossiers), la fiche à droite. ¦ Tư liệu và hiện vật lưu trữ trong dữ liệu của bạn, bày như với người: danh sách bên trái (A → Z, 👤 theo người, 📚 theo tuyển tập hoặc theo 📁 thư mục), hồ sơ bên phải. ¦ Media dan dokumen arsip di basis datamu, ditata seperti orang: daftar di kiri (A → Z, 👤 per orang, 📚 per kumpulan atau dalam 📁 folder), profil di kanan.
+=document choisi ¦ tài liệu đã chọn ¦ dokumen dipilih

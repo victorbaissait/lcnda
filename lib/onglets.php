@@ -90,6 +90,66 @@ function onglets_media_places(PDO $pdo): array
     return $out;
 }
 
+/**
+ * 📍 les lieux de chaque document, avec leurs coordonnées quand on les connaît (chercher « autour d'une ville, à X km ») :
+ * le lieu du média, ceux des événements et recensements reliés, et le lieu écrit dans ses actes de l'Atelier (s'il est dans Lieux).
+ * [media_id => [{id, name, lat, lon}]] (6 au plus par document)
+ */
+function onglets_media_geo(PDO $pdo): array
+{
+    $out = [];
+    $put = static function (int $mid, array $r) use (&$out) {
+        $name = trim((string) ($r['name'] ?? '')); if ($name === '' || count($out[$mid] ?? []) >= 6) { return; }
+        foreach ($out[$mid] ?? [] as $x) { if ((int) $x['id'] === (int) ($r['id'] ?? 0) && $x['id'] || mb_strtolower($x['name']) === mb_strtolower($name)) { return; } }
+        $lat = $r['latitude'] ?? null; $lon = $r['longitude'] ?? null;
+        $out[$mid][] = ['id' => (int) ($r['id'] ?? 0), 'name' => mb_substr($name, 0, 120), 'lat' => is_numeric($lat) ? round((float) $lat, 5) : null, 'lon' => is_numeric($lon) ? round((float) $lon, 5) : null];
+    };
+    try {
+        if (onglets_has_col($pdo, 'media', 'place_id')) {
+            foreach ($pdo->query('SELECT m.id AS media_id, p.id, p.name, p.latitude, p.longitude FROM media m JOIN places p ON p.id=m.place_id') as $r) { $put((int) $r['media_id'], $r); }
+        }
+        $sql = "SELECT ml.media_id, p.id, p.name, p.latitude, p.longitude FROM media_links ml
+            LEFT JOIN events e ON ml.entity_type='event' AND e.id=ml.entity_id LEFT JOIN census_records cr ON ml.entity_type='census' AND cr.id=ml.entity_id
+            JOIN places p ON p.id=COALESCE(e.place_id, cr.place_id) ORDER BY ml.position, ml.id";
+        foreach ($pdo->query($sql) as $r) { $put((int) $r['media_id'], $r); }
+    } catch (Throwable $e) {}
+    try {
+        act_transcriptions_ensure($pdo);
+        $byName = [];
+        foreach ($pdo->query("SELECT id, name, latitude, longitude FROM places WHERE trim(COALESCE(name,''))<>'' ORDER BY (latitude IS NULL), id") as $p) {
+            $k = mb_strtolower(trim(explode(',', (string) $p['name'])[0])); $byName[$k] ??= $p;
+        }
+        foreach ($pdo->query("SELECT media_id, place FROM act_transcriptions WHERE media_id IS NOT NULL AND trim(place)<>'' ORDER BY id") as $a) {
+            $k = mb_strtolower(trim(explode(',', (string) $a['place'])[0]));
+            $put((int) $a['media_id'], $byName[$k] ?? ['id' => 0, 'name' => (string) $a['place']]);
+        }
+    } catch (Throwable $e) {}
+    return $out;
+}
+
+/** 📜 les sortes d'actes de chaque document (Atelier : naissance, mariage…) et l'année de son premier acte : [media_id => {kinds, year}] */
+function onglets_media_acts(PDO $pdo): array
+{
+    $out = [];
+    try {
+        act_transcriptions_ensure($pdo);
+        foreach ($pdo->query('SELECT media_id, kind, date_text FROM act_transcriptions WHERE media_id IS NOT NULL ORDER BY id') as $a) {
+            $mid = (int) $a['media_id']; $out[$mid] ??= ['kinds' => [], 'year' => 0];
+            $k = (string) $a['kind']; if ($k !== '' && $k !== 'apreciser' && !in_array($k, $out[$mid]['kinds'], true)) { $out[$mid]['kinds'][] = $k; }
+            if (!$out[$mid]['year']) { $out[$mid]['year'] = (int) (onglets_year((string) $a['date_text']) ?? 0); }
+        }
+    } catch (Throwable $e) {}
+    return $out;
+}
+
+/** un lieu de la base et ses coordonnées (le centre de « à X km autour de ») */
+function onglets_place_point(PDO $pdo, int $id): array
+{
+    $s = $pdo->prepare('SELECT id, name, latitude, longitude FROM places WHERE id=?'); $s->execute([$id]); $p = $s->fetch(PDO::FETCH_ASSOC);
+    if (!$p) { throw new RuntimeException('Lieu introuvable.'); }
+    return ['id' => (int) $p['id'], 'name' => (string) $p['name'], 'lat' => is_numeric($p['latitude']) ? (float) $p['latitude'] : null, 'lon' => is_numeric($p['longitude']) ? (float) $p['longitude'] : null];
+}
+
 /** la liste : une ligne courte par document (la colonne de gauche, A → Z ou dossiers) */
 function onglets_documents(PDO $pdo): array
 {
@@ -106,18 +166,25 @@ function onglets_documents(PDO $pdo): array
     if ($more) { array_pop($rows); }
     $people = onglets_media_people($pdo);
     $places = onglets_media_places($pdo);
-    $docs = array_map(static function (array $r) use ($people, $places) {
+    $geo = onglets_media_geo($pdo);
+    $acts = onglets_media_acts($pdo);
+    $docs = array_map(static function (array $r) use ($people, $places, $geo, $acts) {
         $id = (int) $r['id'];
         $title = trim((string) $r['title']) ?: trim((string) $r['document_title']) ?: trim((string) $r['filename']) ?: 'Document sans titre';
         $pp = $people[$id] ?? [];
         return ['id' => $id, 'title' => mb_substr($title, 0, 200), 'media_type' => (string) $r['media_type'], 'filename' => (string) $r['filename'], 'thumbnail' => (string) $r['thumbnail'],
-            'date_text' => mb_substr((string) $r['date_text'], 0, 80), 'year' => onglets_year((string) $r['date_text']), 'cote' => mb_substr((string) $r['cote'], 0, 80),
+            'date_text' => mb_substr((string) $r['date_text'], 0, 80), 'year' => onglets_year((string) $r['date_text']) ?: (($acts[$id]['year'] ?? 0) ?: null), 'cote' => mb_substr((string) $r['cote'], 0, 80),
             'subject' => (string) $r['subject'], 'corr' => (string) $r['corr'], 'has_tr' => (int) $r['has_tr'], 'created_at' => (string) $r['created_at'],
             'series' => mb_substr((string) $r['series'], 0, 120), 'links' => (int) $r['links'], 'place' => mb_substr($places[$id] ?? '', 0, 120),
             // les noms montrés sous le titre et cherchés par « Chercher… » (bornés ; en consultation, sans vivants ni fiches confidentielles)
+            'geo' => $geo[$id] ?? [], 'kinds' => $acts[$id]['kinds'] ?? [],
             'people' => array_slice(array_map(static fn($p) => ['id' => $p['id'], 'name' => mb_substr($p['name'], 0, 80), 'last' => mb_substr($p['last'], 0, 60), 'first' => mb_substr($p['first'], 0, 60)], $pp), 0, ONGLETS_MAX_DOC_PEOPLE), 'people_count' => count($pp)];
     }, $rows);
-    return ['documents' => $docs, 'total' => count($docs), 'more' => $more, 'readonly' => onglets_kiosk()];
+    // 📚 les recueils où est chaque document (chercher et filtrer par recueil, « 📚 Recueils » dans la colonne)
+    $rx = function_exists('recueil_doc_index') ? recueil_doc_index($pdo) : ['recueils' => [], 'of' => []];
+    foreach ($docs as &$d) { $d['recueils'] = $rx['of'][$d['id']] ?? []; }
+    unset($d);
+    return ['documents' => $docs, 'total' => count($docs), 'more' => $more, 'readonly' => onglets_kiosk(), 'recueils' => $rx['recueils']];
 }
 
 /** la fiche complète d'un document (à droite) */
@@ -225,6 +292,7 @@ function onglets_api_get(PDO $pdo, array $g): array
         'documents' => onglets_documents($pdo),
         'document' => onglets_document($pdo, safe_int($g['id'] ?? 0)),
         'artists' => onglets_artists($pdo),
+        'place_point' => onglets_place_point($pdo, safe_int($g['id'] ?? 0)),
         default => throw new RuntimeException('Demande inconnue.'),
     };
 }

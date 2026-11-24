@@ -1,0 +1,54 @@
+fr ¦ is
+# 📚 Recueils depuis Documents, chercher par recueil, sorte d’acte, lieu et rayon (heritage-recueil-docs.js, heritage-onglets-documents.js)
+{n} déjà dans ce recueil ¦ {n} þegar í þessu safnriti
+pas des images, laissés de côté : {n} ¦ ekki myndir, sleppt: {n}
+Choisis au moins un document. ¦ Veldu að minnsta kosti eitt skjal.
+📚 RECUEIL ¦ 📚 SAFNRIT
+📚 Faire le recueil ¦ 📚 Búa til safnritið
+Les documents restent à leur place dans Documents : le recueil les regroupe, il ne les déplace pas. Un document en plusieurs pages y entre avec toutes ses pages. ¦ Skjölin haldast á sínum stað í Skjölum: safnritið flokkar þau saman, það færir þau ekki. Skjal með mörgum síðum fer inn með öllum sínum síðum.
+Nom du recueil ¦ Heiti safnritsins
+ex. Registre de Sancoins, 1870-1872 ¦ t.d. Kirkjubók Sancoins, 1870-1872
+ex. 3 E 1234 ¦ t.d. 3 E 1234
+ex. Sancoins ¦ t.d. Sancoins
+ex. 1870-1872 ¦ t.d. 1870-1872
+L’ordre des pages ¦ Röð síðnanna
+glisse ⠿ ou utilise ↑ ↓ ¦ dragðu ⠿ eða notaðu ↑ ↓
+Recueil « {t} » fait : {x} ¦ Safnritið „{t}“ búið til: {x}
+Recueil « {t} » ¦ Safnritið „{t}“
+Ajouter {x} à un recueil ¦ Bæta {x} í safnrit
+Ajouter « {t} » à un recueil ¦ Bæta „{t}“ í safnrit
+Les pages vont à la fin du recueil, dans l’ordre ; un document déjà dans ce recueil n’est pas remis. ¦ Síðurnar fara aftast í safnritið, í röð; skjal sem er þegar í þessu safnriti er ekki sett inn aftur.
+Chercher un recueil… ¦ Leita að safnriti…
+Nouveau recueil avec ces documents… ¦ Nýtt safnrit með þessum skjölum…
+Choisis un recueil. ¦ Veldu safnrit.
+Rien à ajouter : {x} ¦ Ekkert að bæta við: {x}
+Ajouté à « {t} » : {x} ¦ Bætt í „{t}“: {x}
+page {n} ¦ síða {n}
+Dans les recueils ¦ Í safnritunum
+Dans le recueil ¦ Í safnritinu
+page {n} sur {t} ¦ síða {n} af {t}
+(une autre page de ce document) ¦ (önnur síða þessa skjals)
+📚 Ouvrir le recueil ¦ 📚 Opna safnritið
+à {n} km autour ¦ innan {n} km
+« {x} » n’a pas encore de coordonnées : seuls les documents de ce lieu sont montrés (ajoute-les dans Lieux pour chercher autour). ¦ „{x}“ hefur engin hnit enn: aðeins skjöl frá þessum stað eru sýnd (bættu þeim við í Stöðum til að leita í kring).
+Dans aucun recueil ¦ Í engu safnriti
+p. {n} ¦ bls. {n}
+choisi n° {n} ¦ valið nr. {n}
+{x}, dans l’ordre des clics ¦ {x}, í smellaröð
+Clique sur les documents à prendre, dans l’ordre des pages. ¦ Smelltu á skjölin sem þú vilt taka, í röð síðnanna.
+📚 Faire un recueil avec {x} ¦ 📚 Búa til safnrit með {x}
+📚 Faire un recueil ¦ 📚 Búa til safnrit
+📚 Ajouter à un recueil… ¦ 📚 Bæta í safnrit…
+Tout choisir (ceux montrés) ¦ Velja öll (sýnd)
+☑ Choisir plusieurs ¦ ☑ Velja mörg
+Les recueils ne sont pas encore chargés : réessaie dans un instant. ¦ Safnritin eru ekki hlaðin enn: reyndu aftur eftir augnablik.
+Ville ou lieu ¦ Bær eða staður
+Dans un rayon de (km) ¦ Innan radíuss (km)
+ex. 20 (vide : le lieu seul) ¦ t.d. 20 (autt: aðeins staðurinn)
+ex. Registre de Sancoins ¦ t.d. Kirkjubók Sancoins
+Actes de notoriété ¦ Vottorð um almenna vitneskju
+Documents militaires ¦ Herskjöl
+📚 Dans un recueil ¦ 📚 Í safnriti
+📚 Recueils ¦ 📚 Safnrit
+Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z, 👤 par personne, 📚 par recueil ou en 📁 dossiers), la fiche à droite. ¦ Miðlarnir og skjalagögnin í gagnagrunninum þínum, eins og einstaklingarnir: listinn til vinstri (A → Ö, 👤 eftir einstaklingi, 📚 eftir safnriti eða í 📁 möppum), spjaldið til hægri.
+=document choisi ¦ valið skjal|valin skjöl

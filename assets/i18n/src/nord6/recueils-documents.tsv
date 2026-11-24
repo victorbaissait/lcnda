@@ -1,0 +1,54 @@
+fr ¦ lt ¦ lv ¦ et
+# 📚 Recueils depuis Documents, chercher par recueil, sorte d’acte, lieu et rayon (heritage-recueil-docs.js, heritage-onglets-documents.js)
+{n} déjà dans ce recueil ¦ {n} jau šiame rinkinyje ¦ {n} jau šajā krājumā ¦ {n} juba selles kogumikus
+pas des images, laissés de côté : {n} ¦ ne paveikslėliai, praleista: {n} ¦ nav attēli, izlaisti: {n} ¦ pole pildid, välja jäetud: {n}
+Choisis au moins un document. ¦ Pasirink bent vieną dokumentą. ¦ Izvēlies vismaz vienu dokumentu. ¦ Vali vähemalt üks dokument.
+📚 RECUEIL ¦ 📚 RINKINYS ¦ 📚 KRĀJUMS ¦ 📚 KOGUMIK
+📚 Faire le recueil ¦ 📚 Sudaryti rinkinį ¦ 📚 Izveidot krājumu ¦ 📚 Tee kogumik
+Les documents restent à leur place dans Documents : le recueil les regroupe, il ne les déplace pas. Un document en plusieurs pages y entre avec toutes ses pages. ¦ Dokumentai lieka savo vietoje Dokumentuose: rinkinys juos sugrupuoja, bet neperkelia. Kelių puslapių dokumentas įeina su visais savo puslapiais. ¦ Dokumenti paliek savā vietā Dokumentos: krājums tos sagrupē, nevis pārvieto. Vairāku lappušu dokuments tajā nonāk ar visām lappusēm. ¦ Dokumendid jäävad oma kohale Dokumentides: kogumik rühmitab need, see ei liiguta neid. Mitmeleheküljeline dokument tuleb kõigi oma lehekülgedega.
+Nom du recueil ¦ Rinkinio pavadinimas ¦ Krājuma nosaukums ¦ Kogumiku nimi
+ex. Registre de Sancoins, 1870-1872 ¦ pvz. Sancoins registras, 1870–1872 ¦ piem., Sancoins reģistrs, 1870–1872 ¦ nt Sancoinsi register, 1870–1872
+ex. 3 E 1234 ¦ pvz. 3 E 1234 ¦ piem., 3 E 1234 ¦ nt 3 E 1234
+ex. Sancoins ¦ pvz. Sancoins ¦ piem., Sancoins ¦ nt Sancoins
+ex. 1870-1872 ¦ pvz. 1870–1872 ¦ piem., 1870–1872 ¦ nt 1870–1872
+L’ordre des pages ¦ Puslapių tvarka ¦ Lappušu secība ¦ Lehekülgede järjekord
+glisse ⠿ ou utilise ↑ ↓ ¦ tempk ⠿ arba naudok ↑ ↓ ¦ velc ⠿ vai izmanto ↑ ↓ ¦ lohista ⠿ või kasuta ↑ ↓
+Recueil « {t} » fait : {x} ¦ Rinkinys „{t}“ sudarytas: {x} ¦ Krājums “{t}” izveidots: {x} ¦ Kogumik „{t}“ tehtud: {x}
+Recueil « {t} » ¦ Rinkinys „{t}“ ¦ Krājums “{t}” ¦ Kogumik „{t}“
+Ajouter {x} à un recueil ¦ Pridėti {x} į rinkinį ¦ Pievienot {x} krājumam ¦ Lisa {x} kogumikku
+Ajouter « {t} » à un recueil ¦ Pridėti „{t}“ į rinkinį ¦ Pievienot “{t}” krājumam ¦ Lisa „{t}“ kogumikku
+Les pages vont à la fin du recueil, dans l’ordre ; un document déjà dans ce recueil n’est pas remis. ¦ Puslapiai keliauja į rinkinio pabaigą, iš eilės; dokumentas, kuris jau yra šiame rinkinyje, nepridedamas dar kartą. ¦ Lappuses nonāk krājuma beigās, secīgi; dokuments, kas jau ir šajā krājumā, netiek pievienots vēlreiz. ¦ Leheküljed lähevad kogumiku lõppu, järjekorras; dokumenti, mis on juba selles kogumikus, uuesti ei lisata.
+Chercher un recueil… ¦ Ieškoti rinkinio… ¦ Meklēt krājumu… ¦ Otsi kogumikku…
+Nouveau recueil avec ces documents… ¦ Naujas rinkinys su šiais dokumentais… ¦ Jauns krājums ar šiem dokumentiem… ¦ Uus kogumik nende dokumentidega…
+Choisis un recueil. ¦ Pasirink rinkinį. ¦ Izvēlies krājumu. ¦ Vali kogumik.
+Rien à ajouter : {x} ¦ Nėra ką pridėti: {x} ¦ Nav ko pievienot: {x} ¦ Pole midagi lisada: {x}
+Ajouté à « {t} » : {x} ¦ Pridėta į „{t}“: {x} ¦ Pievienots krājumam “{t}”: {x} ¦ Lisatud kogumikku „{t}“: {x}
+page {n} ¦ {n} psl. ¦ {n}. lpp. ¦ lk {n}
+Dans les recueils ¦ Rinkiniuose ¦ Krājumos ¦ Kogumikes
+Dans le recueil ¦ Rinkinyje ¦ Krājumā ¦ Kogumikus
+page {n} sur {t} ¦ {n} psl. iš {t} ¦ {n}. lpp. no {t} ¦ lk {n} / {t}
+(une autre page de ce document) ¦ (kitas šio dokumento puslapis) ¦ (cita šī dokumenta lappuse) ¦ (selle dokumendi teine lehekülg)
+📚 Ouvrir le recueil ¦ 📚 Atverti rinkinį ¦ 📚 Atvērt krājumu ¦ 📚 Ava kogumik
+à {n} km autour ¦ {n} km spinduliu ¦ {n} km rādiusā ¦ {n} km raadiuses
+« {x} » n’a pas encore de coordonnées : seuls les documents de ce lieu sont montrés (ajoute-les dans Lieux pour chercher autour). ¦ „{x}“ dar neturi koordinačių: rodomi tik šios vietos dokumentai (pridėk jas skiltyje Vietos, kad ieškotum aplinkui). ¦ “{x}” vēl nav koordinātu: rāda tikai šīs vietas dokumentus (pievieno tās sadaļā Vietas, lai meklētu apkārtnē). ¦ Kohal „{x}“ pole veel koordinaate: näidatakse ainult selle koha dokumente (lisa need Kohtades, et otsida ümbrusest).
+Dans aucun recueil ¦ Nė viename rinkinyje ¦ Nevienā krājumā ¦ Mitte üheski kogumikus
+p. {n} ¦ {n} psl. ¦ {n}. lpp. ¦ lk {n}
+choisi n° {n} ¦ pasirinkta Nr. {n} ¦ izvēlēts nr. {n} ¦ valitud nr {n}
+{x}, dans l’ordre des clics ¦ {x}, paspaudimų tvarka ¦ {x}, klikšķu secībā ¦ {x}, klõpsude järjekorras
+Clique sur les documents à prendre, dans l’ordre des pages. ¦ Spausk dokumentus, kuriuos nori paimti, puslapių tvarka. ¦ Klikšķini uz dokumentiem, ko ņemt, lappušu secībā. ¦ Klõpsa dokumente, mida tahad võtta, lehekülgede järjekorras.
+📚 Faire un recueil avec {x} ¦ 📚 Sudaryti rinkinį iš: {x} ¦ 📚 Izveidot krājumu: {x} ¦ 📚 Tee kogumik: {x}
+📚 Faire un recueil ¦ 📚 Sudaryti rinkinį ¦ 📚 Izveidot krājumu ¦ 📚 Tee kogumik
+📚 Ajouter à un recueil… ¦ 📚 Pridėti į rinkinį… ¦ 📚 Pievienot krājumam… ¦ 📚 Lisa kogumikku…
+Tout choisir (ceux montrés) ¦ Pasirinkti visus (rodomus) ¦ Izvēlēties visus (redzamos) ¦ Vali kõik (näidatud)
+☑ Choisir plusieurs ¦ ☑ Pasirinkti kelis ¦ ☑ Izvēlēties vairākus ¦ ☑ Vali mitu
+Les recueils ne sont pas encore chargés : réessaie dans un instant. ¦ Rinkiniai dar neįkelti: pabandyk po akimirkos. ¦ Krājumi vēl nav ielādēti: mēģini vēlreiz pēc brīža. ¦ Kogumikud pole veel laaditud: proovi kohe uuesti.
+Ville ou lieu ¦ Miestas ar vieta ¦ Pilsēta vai vieta ¦ Linn või koht
+Dans un rayon de (km) ¦ Spinduliu (km) ¦ Rādiusā (km) ¦ Raadiuses (km)
+ex. 20 (vide : le lieu seul) ¦ pvz. 20 (tuščia: tik ta vieta) ¦ piem., 20 (tukšs: tikai vieta) ¦ nt 20 (tühi: ainult koht)
+ex. Registre de Sancoins ¦ pvz. Sancoins registras ¦ piem., Sancoins reģistrs ¦ nt Sancoinsi register
+Actes de notoriété ¦ Žinomumo aktai ¦ Notorietātes akti ¦ Teadaolevuse aktid
+Documents militaires ¦ Kariniai dokumentai ¦ Militārie dokumenti ¦ Sõjaväedokumendid
+📚 Dans un recueil ¦ 📚 Rinkinyje ¦ 📚 Krājumā ¦ 📚 Kogumikus
+📚 Recueils ¦ 📚 Rinkiniai ¦ 📚 Krājumi ¦ 📚 Kogumikud
+Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z, 👤 par personne, 📚 par recueil ou en 📁 dossiers), la fiche à droite. ¦ Tavo bazės medija ir archyvo dokumentai, kaip ir asmenys: sąrašas kairėje (A → Z, 👤 pagal asmenį, 📚 pagal rinkinį arba 📁 aplankais), kortelė dešinėje. ¦ Tavas datubāzes mediji un arhīva vienības, tāpat kā personas: saraksts pa kreisi (A → Z, 👤 pēc personas, 📚 pēc krājuma vai 📁 mapēs), kartīte pa labi. ¦ Sinu andmebaasi meedia ja arhiivisäilikud, nagu isikudki: loend vasakul (A → Z, 👤 isikute kaupa, 📚 kogumike kaupa või 📁 kaustades), kaart paremal.
+=document choisi ¦ pasirinktas dokumentas|pasirinkti dokumentai|pasirinktų dokumentų ¦ izvēlēti dokumenti|izvēlēts dokuments|izvēlēti dokumenti ¦ valitud dokument|valitud dokumenti

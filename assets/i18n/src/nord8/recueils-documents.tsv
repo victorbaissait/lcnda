@@ -1,0 +1,54 @@
+fr ¦ tr
+# 📚 Recueils depuis Documents, chercher par recueil, sorte d’acte, lieu et rayon (heritage-recueil-docs.js, heritage-onglets-documents.js)
+{n} déjà dans ce recueil ¦ {n} zaten bu derlemede
+pas des images, laissés de côté : {n} ¦ resim değil, dışarıda bırakıldı: {n}
+Choisis au moins un document. ¦ En az bir belge seç.
+📚 RECUEIL ¦ 📚 DERLEME
+📚 Faire le recueil ¦ 📚 Derlemeyi oluştur
+Les documents restent à leur place dans Documents : le recueil les regroupe, il ne les déplace pas. Un document en plusieurs pages y entre avec toutes ses pages. ¦ Belgeler Belgeler’deki yerlerinde kalır: derleme onları bir araya getirir, taşımaz. Birden çok sayfalı bir belge tüm sayfalarıyla girer.
+Nom du recueil ¦ Derlemenin adı
+ex. Registre de Sancoins, 1870-1872 ¦ ör. Sancoins kütüğü, 1870-1872
+ex. 3 E 1234 ¦ ör. 3 E 1234
+ex. Sancoins ¦ ör. Sancoins
+ex. 1870-1872 ¦ ör. 1870-1872
+L’ordre des pages ¦ Sayfaların sırası
+glisse ⠿ ou utilise ↑ ↓ ¦ ⠿ sürükle ya da ↑ ↓ kullan
+Recueil « {t} » fait : {x} ¦ “{t}” derlemesi oluşturuldu: {x}
+Recueil « {t} » ¦ “{t}” derlemesi
+Ajouter {x} à un recueil ¦ {x} bir derlemeye ekle
+Ajouter « {t} » à un recueil ¦ “{t}” belgesini bir derlemeye ekle
+Les pages vont à la fin du recueil, dans l’ordre ; un document déjà dans ce recueil n’est pas remis. ¦ Sayfalar derlemenin sonuna, sırayla gider; bu derlemede zaten olan bir belge yeniden eklenmez.
+Chercher un recueil… ¦ Derleme ara…
+Nouveau recueil avec ces documents… ¦ Bu belgelerle yeni derleme…
+Choisis un recueil. ¦ Bir derleme seç.
+Rien à ajouter : {x} ¦ Eklenecek bir şey yok: {x}
+Ajouté à « {t} » : {x} ¦ “{t}” derlemesine eklendi: {x}
+page {n} ¦ sayfa {n}
+Dans les recueils ¦ Derlemelerde
+Dans le recueil ¦ Derlemede
+page {n} sur {t} ¦ sayfa {n} / {t}
+(une autre page de ce document) ¦ (bu belgenin başka bir sayfası)
+📚 Ouvrir le recueil ¦ 📚 Derlemeyi aç
+à {n} km autour ¦ {n} km çevresinde
+« {x} » n’a pas encore de coordonnées : seuls les documents de ce lieu sont montrés (ajoute-les dans Lieux pour chercher autour). ¦ “{x}” için henüz koordinat yok: yalnızca bu yerin belgeleri gösteriliyor (çevresinde aramak için Yerler’de ekle).
+Dans aucun recueil ¦ Hiçbir derlemede değil
+p. {n} ¦ s. {n}
+choisi n° {n} ¦ seçilen no. {n}
+{x}, dans l’ordre des clics ¦ {x}, tıklama sırasıyla
+Clique sur les documents à prendre, dans l’ordre des pages. ¦ Alınacak belgelere sayfaların sırasıyla tıkla.
+📚 Faire un recueil avec {x} ¦ 📚 {x} ile bir derleme oluştur
+📚 Faire un recueil ¦ 📚 Bir derleme oluştur
+📚 Ajouter à un recueil… ¦ 📚 Bir derlemeye ekle…
+Tout choisir (ceux montrés) ¦ Hepsini seç (gösterilenler)
+☑ Choisir plusieurs ¦ ☑ Birkaç tane seç
+Les recueils ne sont pas encore chargés : réessaie dans un instant. ¦ Derlemeler henüz yüklenmedi: birazdan yeniden dene.
+Ville ou lieu ¦ Şehir ya da yer
+Dans un rayon de (km) ¦ Yarıçap (km)
+ex. 20 (vide : le lieu seul) ¦ ör. 20 (boş: yalnızca yer)
+ex. Registre de Sancoins ¦ ör. Sancoins kütüğü
+Actes de notoriété ¦ Şöhret senetleri
+Documents militaires ¦ Askerî belgeler
+📚 Dans un recueil ¦ 📚 Bir derlemede
+📚 Recueils ¦ 📚 Derlemeler
+Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z, 👤 par personne, 📚 par recueil ou en 📁 dossiers), la fiche à droite. ¦ Veritabanındaki medya ve arşiv parçaları, kişiler gibi: solda liste (A → Z, 👤 kişiye göre, 📚 derlemeye göre ya da 📁 klasörler hâlinde), sağda kart.
+=document choisi ¦ seçilen belge|seçilen belge

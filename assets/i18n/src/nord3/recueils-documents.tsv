@@ -1,0 +1,54 @@
+fr ¦ ro
+# 📚 Recueils depuis Documents, chercher par recueil, sorte d’acte, lieu et rayon (heritage-recueil-docs.js, heritage-onglets-documents.js)
+{n} déjà dans ce recueil ¦ {n} deja în această culegere
+pas des images, laissés de côté : {n} ¦ nu sunt imagini, lăsate deoparte: {n}
+Choisis au moins un document. ¦ Alege cel puțin un document.
+📚 RECUEIL ¦ 📚 CULEGERE
+📚 Faire le recueil ¦ 📚 Fă culegerea
+Les documents restent à leur place dans Documents : le recueil les regroupe, il ne les déplace pas. Un document en plusieurs pages y entre avec toutes ses pages. ¦ Documentele rămân la locul lor în Documente: culegerea le grupează, nu le mută. Un document cu mai multe pagini intră cu toate paginile lui.
+Nom du recueil ¦ Numele culegerii
+ex. Registre de Sancoins, 1870-1872 ¦ ex. Registrul din Sancoins, 1870-1872
+ex. 3 E 1234 ¦ ex. 3 E 1234
+ex. Sancoins ¦ ex. Sancoins
+ex. 1870-1872 ¦ ex. 1870-1872
+L’ordre des pages ¦ Ordinea paginilor
+glisse ⠿ ou utilise ↑ ↓ ¦ trage ⠿ sau folosește ↑ ↓
+Recueil « {t} » fait : {x} ¦ Culegerea „{t}” făcută: {x}
+Recueil « {t} » ¦ Culegerea „{t}”
+Ajouter {x} à un recueil ¦ Adaugă {x} într-o culegere
+Ajouter « {t} » à un recueil ¦ Adaugă „{t}” într-o culegere
+Les pages vont à la fin du recueil, dans l’ordre ; un document déjà dans ce recueil n’est pas remis. ¦ Paginile merg la sfârșitul culegerii, în ordine; un document care e deja în această culegere nu e pus din nou.
+Chercher un recueil… ¦ Caută o culegere…
+Nouveau recueil avec ces documents… ¦ Culegere nouă cu aceste documente…
+Choisis un recueil. ¦ Alege o culegere.
+Rien à ajouter : {x} ¦ Nimic de adăugat: {x}
+Ajouté à « {t} » : {x} ¦ Adăugat în „{t}”: {x}
+page {n} ¦ pagina {n}
+Dans les recueils ¦ În culegeri
+Dans le recueil ¦ În culegere
+page {n} sur {t} ¦ pagina {n} din {t}
+(une autre page de ce document) ¦ (altă pagină a acestui document)
+📚 Ouvrir le recueil ¦ 📚 Deschide culegerea
+à {n} km autour ¦ pe o rază de {n} km
+« {x} » n’a pas encore de coordonnées : seuls les documents de ce lieu sont montrés (ajoute-les dans Lieux pour chercher autour). ¦ „{x}” nu are încă coordonate: sunt arătate doar documentele din acest loc (adaugă-le în Locuri ca să cauți în jur).
+Dans aucun recueil ¦ În nicio culegere
+p. {n} ¦ p. {n}
+choisi n° {n} ¦ ales nr. {n}
+{x}, dans l’ordre des clics ¦ {x}, în ordinea clicurilor
+Clique sur les documents à prendre, dans l’ordre des pages. ¦ Dă clic pe documentele de luat, în ordinea paginilor.
+📚 Faire un recueil avec {x} ¦ 📚 Fă o culegere cu {x}
+📚 Faire un recueil ¦ 📚 Fă o culegere
+📚 Ajouter à un recueil… ¦ 📚 Adaugă într-o culegere…
+Tout choisir (ceux montrés) ¦ Alege tot (cele arătate)
+☑ Choisir plusieurs ¦ ☑ Alege mai multe
+Les recueils ne sont pas encore chargés : réessaie dans un instant. ¦ Culegerile nu sunt încă încărcate: încearcă din nou peste o clipă.
+Ville ou lieu ¦ Oraș sau loc
+Dans un rayon de (km) ¦ Pe o rază de (km)
+ex. 20 (vide : le lieu seul) ¦ ex. 20 (gol: doar locul)
+ex. Registre de Sancoins ¦ ex. Registrul din Sancoins
+Actes de notoriété ¦ Acte de notorietate
+Documents militaires ¦ Documente militare
+📚 Dans un recueil ¦ 📚 Într-o culegere
+📚 Recueils ¦ 📚 Culegeri
+Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z, 👤 par personne, 📚 par recueil ou en 📁 dossiers), la fiche à droite. ¦ Fișierele media și piesele de arhivă din baza ta, ca persoanele: lista în stânga (A → Z, 👤 pe persoane, 📚 pe culegeri sau în 📁 dosare), fișa în dreapta.
+=document choisi ¦ document ales|documente alese|de documente alese

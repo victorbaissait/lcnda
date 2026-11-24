@@ -1,0 +1,54 @@
+fr ¦ lb
+# 📚 Recueils depuis Documents, chercher par recueil, sorte d’acte, lieu et rayon (heritage-recueil-docs.js, heritage-onglets-documents.js)
+{n} déjà dans ce recueil ¦ {n} schonn an dëser Sammlung
+pas des images, laissés de côté : {n} ¦ keng Biller, ewechgelooss: {n}
+Choisis au moins un document. ¦ Wiel mindestens een Dokument.
+📚 RECUEIL ¦ 📚 SAMMLUNG
+📚 Faire le recueil ¦ 📚 Sammlung maachen
+Les documents restent à leur place dans Documents : le recueil les regroupe, il ne les déplace pas. Un document en plusieurs pages y entre avec toutes ses pages. ¦ D’Dokumenter bleiwen op hirer Plaz an Dokumenter: d’Sammlung gruppéiert se, si réckelt se net. En Dokument mat e puer Säite kënnt mat all senge Säiten eran.
+Nom du recueil ¦ Numm vun der Sammlung
+ex. Registre de Sancoins, 1870-1872 ¦ z. B. Register vu Sancoins, 1870-1872
+ex. 3 E 1234 ¦ z. B. 3 E 1234
+ex. Sancoins ¦ z. B. Sancoins
+ex. 1870-1872 ¦ z. B. 1870-1872
+L’ordre des pages ¦ D’Reiefolleg vun de Säiten
+glisse ⠿ ou utilise ↑ ↓ ¦ zéi ⠿ oder benotz ↑ ↓
+Recueil « {t} » fait : {x} ¦ Sammlung „{t}“ gemaach: {x}
+Recueil « {t} » ¦ Sammlung „{t}“
+Ajouter {x} à un recueil ¦ {x} bei eng Sammlung derbäisetzen
+Ajouter « {t} » à un recueil ¦ „{t}“ bei eng Sammlung derbäisetzen
+Les pages vont à la fin du recueil, dans l’ordre ; un document déjà dans ce recueil n’est pas remis. ¦ D’Säite kommen um Enn vun der Sammlung, an der Reiefolleg; en Dokument, dat schonn an dëser Sammlung ass, gëtt net nach eng Kéier derbäigesat.
+Chercher un recueil… ¦ Eng Sammlung sichen…
+Nouveau recueil avec ces documents… ¦ Nei Sammlung mat dësen Dokumenter…
+Choisis un recueil. ¦ Wiel eng Sammlung.
+Rien à ajouter : {x} ¦ Näischt derbäizesetzen: {x}
+Ajouté à « {t} » : {x} ¦ Bei „{t}“ derbäigesat: {x}
+page {n} ¦ Säit {n}
+Dans les recueils ¦ An de Sammlungen
+Dans le recueil ¦ An der Sammlung
+page {n} sur {t} ¦ Säit {n} vu {t}
+(une autre page de ce document) ¦ (eng aner Säit vun dësem Dokument)
+📚 Ouvrir le recueil ¦ 📚 Sammlung opmaachen
+à {n} km autour ¦ am Ëmkrees vun {n} km
+« {x} » n’a pas encore de coordonnées : seuls les documents de ce lieu sont montrés (ajoute-les dans Lieux pour chercher autour). ¦ „{x}“ huet nach keng Koordinaten: just d’Dokumenter vun dëser Plaz ginn ugewisen (setz se bei Plazen derbäi, fir am Ëmkrees ze sichen).
+Dans aucun recueil ¦ A kenger Sammlung
+p. {n} ¦ S. {n}
+choisi n° {n} ¦ gewielt Nr. {n}
+{x}, dans l’ordre des clics ¦ {x}, an der Reiefolleg vun de Klicken
+Clique sur les documents à prendre, dans l’ordre des pages. ¦ Klick op d’Dokumenter, déi s du huele wëlls, an der Reiefolleg vun de Säiten.
+📚 Faire un recueil avec {x} ¦ 📚 Sammlung mat {x} maachen
+📚 Faire un recueil ¦ 📚 Sammlung maachen
+📚 Ajouter à un recueil… ¦ 📚 Bei eng Sammlung derbäisetzen…
+Tout choisir (ceux montrés) ¦ All wielen (déi ugewisen)
+☑ Choisir plusieurs ¦ ☑ Méi wielen
+Les recueils ne sont pas encore chargés : réessaie dans un instant. ¦ D’Sammlunge sinn nach net gelueden: probéier et gläich nach eng Kéier.
+Ville ou lieu ¦ Stad oder Plaz
+Dans un rayon de (km) ¦ Am Ëmkrees vun (km)
+ex. 20 (vide : le lieu seul) ¦ z. B. 20 (eidel: just d’Plaz)
+ex. Registre de Sancoins ¦ z. B. Register vu Sancoins
+Actes de notoriété ¦ Akte vun der Notorietéit
+Documents militaires ¦ Militäresch Dokumenter
+📚 Dans un recueil ¦ 📚 An enger Sammlung
+📚 Recueils ¦ 📚 Sammlungen
+Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z, 👤 par personne, 📚 par recueil ou en 📁 dossiers), la fiche à droite. ¦ D’Medien an d’Archivstécker vun denger Datebank, wéi bei de Persounen: d’Lëscht lénks (A → Z, 👤 no Persoun, 📚 no Sammlung oder an 📁 Dossieren), d’Fiche riets.
+=document choisi ¦ gewielt Dokument|gewielt Dokumenter

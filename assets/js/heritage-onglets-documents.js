@@ -71,7 +71,7 @@
     const personKey = p => `${fold(p.last || p.name)} ${fold(p.first)}`;
 
     /* ─── les données ─── */
-    let docs = null, loading = null, failed = '', cur = 0, shown = STEP, bar = null, cache = new Map();
+    let recs = [], centers = new Map(), docs = null, loading = null, failed = '', cur = 0, shown = STEP, bar = null, cache = new Map();
     {   // « #documents/12 » : la fiche n° 12 (lien, ← → du navigateur)
         const m = location.hash.match(/^#documents\/(\d{1,12})\b/);
         cur = m ? Number(m[1]) : Number(readPref().cur) || 0;
@@ -79,12 +79,14 @@
     let stale = false; // un média ajouté ou changé ailleurs (lcnda:media-changed) : la liste et le cache sont à relire
     async function load(force = false) {
         if (docs && !force && !stale) return docs;
-        if (!loading) { stale = false; loading = A().api('onglets', {op: 'documents'}).then(r => { docs = (r.documents || []).map(d => ({...d, sort: sortOf(d)})); failed = ''; return docs; })
+        if (!loading) { stale = false; loading = A().api('onglets', {op: 'documents'}).then(r => { recs = r.recueils || []; docs = (r.documents || []).map(d => ({...d, sort: sortOf(d)})); failed = ''; return docs; })
             .catch(e => { failed = e.message || 'Les documents n’ont pas pu se charger.'; docs = null; return []; }).finally(() => { loading = null; }); }
         return loading;
     }
     ext.documentItems = () => (docs || []).map(d => [String(d.id), `${sortMeta(d.sort)[1]} ${d.title}`]); // pour le glisser des dossiers
     const byId = id => (docs || []).find(d => d.id === Number(id)) || null;
+    const recOf = id => recs.find(r => r.id === Number(id)) || null;
+    const recNames = d => (d.recueils || []).map(x => recOf(x.id)?.title || '').filter(Boolean);
 
     /* ─── filtrer, trier ─── */
     const filters = () => [
@@ -92,9 +94,34 @@
         {id: 'tr', label: 'Transcription', type: 'radio', options: [['', 'Tous'], ['tr', '✅ Déjà transcrits'], ['notr', '📝 Pas encore transcrits']], dflt: ''},
         {id: 'from', group: 'Année', label: 'À partir de', type: 'text', placeholder: 'ex. 1900', chipPrefix: 'Depuis'},
         {id: 'to', group: 'Année', label: 'Jusqu’à', type: 'text', placeholder: 'ex. 1920', chipPrefix: 'Jusqu’à'},
-        {id: 'place', label: 'Lieu', type: 'text', placeholder: 'ex. Lyon', chipPrefix: 'Lieu :'},
+        {id: 'akind', label: 'Sorte d’acte', type: 'check', options: AKINDS.map(([k, l]) => [k, l])},
+        {id: 'place', group: 'Lieu', label: 'Ville ou lieu', type: 'place', placeholder: 'ex. Sancoins', chipPrefix: 'Lieu :'},
+        {id: 'km', group: 'Lieu', label: 'Dans un rayon de (km)', type: 'text', placeholder: 'ex. 20 (vide : le lieu seul)', chip: v => (kmOf(v) ? T('à {n} km autour', {n: String(kmOf(v))}) : '')},
+        {id: 'rec', group: 'Recueil', label: 'Recueil', type: 'radio', options: [['', 'Tous'], ['in', '📚 Dans un recueil'], ['out', 'Dans aucun recueil']], dflt: ''},
+        {id: 'recname', group: 'Recueil', label: 'Nom du recueil', type: 'text', placeholder: 'ex. Registre de Sancoins', chipPrefix: '📚'},
         {id: 'person', label: 'Personne', type: 'person', chipPrefix: 'Avec'},
         {id: 'loose', label: 'Rangement', type: 'check', text: 'Rattachés à aucune fiche', chipLabel: 'Sans fiche'}];
+    /* 📜 la sorte d'acte : celle choisie dans l'Atelier, sinon devinée d'après le titre (« Naissance de… ») */
+    const AKINDS = [['naissance', 'Naissances', /\bnaissance|\bne le\b|\bnee le\b/], ['bapteme', 'Baptêmes', /\bbapt/], ['mariage', 'Mariages', /\bmariage|\bmarie le\b/], ['deces', 'Décès', /\bdeces\b|\bdecede/],
+        ['sepulture', 'Sépultures', /\bsepulture|\binhum/], ['notarial', 'Actes notariés', /\bnotari|\bcontrat de mariage|\btestament|\binventaire/], ['notoriete', 'Actes de notoriété', /\bnotoriete/],
+        ['recensement', 'Recensements', /\brecensement/], ['militaire', 'Documents militaires', /\bmilitaire|\bmatricule|\bregiment/], ['lettre', 'Lettres', /\blettre|\bcourrier/]];
+    const kindsOf = d => ((d.kinds || []).length ? d.kinds : AKINDS.filter(k => k[2].test(fold(d.title))).map(k => k[0]));
+    const kmOf = v => { const n = Number(String(v || '').replace(',', '.').match(/\d+(?:\.\d+)?/)?.[0]); return n > 0 ? Math.min(n, 2000) : 0; };
+    const dist = (a, b) => { const r = x => x * Math.PI / 180, dl = r(b.lat - a.lat), dn = r(b.lon - a.lon); const h = Math.sin(dl / 2) ** 2 + Math.cos(r(a.lat)) * Math.cos(r(b.lat)) * Math.sin(dn / 2) ** 2; return 12742 * Math.asin(Math.min(1, Math.sqrt(h))); };
+    const placeWord = t => fold(String(t || '').replace(/^txt:/, '').split(',')[0]).trim();
+    /** le document est-il à ce lieu (ou à X km autour) ? le centre et ses coordonnées sont lus une fois (onglets place_point) */
+    let warnedNoGeo = 0;
+    function placeOk(d, v, km) {
+        const geo = d.geo || [], pid = v && typeof v === 'object' ? Number(v.id) : 0, w = placeWord(pid ? v.title : v);
+        if (pid && geo.some(g => g.id === pid)) return true;
+        if (pid && km) {
+            const c = centers.get(pid);
+            if (c === undefined) { centers.set(pid, null); A().api('onglets', {op: 'place_point', id: pid}).then(p => { centers.set(pid, p); paintList(); paintWorkspaceList(); }).catch(() => centers.set(pid, {lat: null})); }
+            else if (c && c.lat != null) return geo.some(g => g.lat != null && dist(c, g) <= km);
+            else if (c && warnedNoGeo !== pid) { warnedNoGeo = pid; A().toast(T('« {x} » n’a pas encore de coordonnées : seuls les documents de ce lieu sont montrés (ajoute-les dans Lieux pour chercher autour).', {x: v.title || ''})); }
+        }
+        return !!w && [d.place, ...geo.map(g => g.name)].some(n => placeWord(n) === w || fold(n).includes(w));
+    }
     const SORT_OPTS = [['az', 'A → Z'], ['za', 'Z → A'], ['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['cote', 'Par cote'], ['date', 'Par date du document']];
     function filtered() {
         const st = bar?.state || {q: '', filters: {}, sort: 'az'}, f = st.filters || {};
@@ -102,12 +129,16 @@
         const y1 = Number(String(f.from || '').match(/\d{3,4}/)?.[0]) || 0, y2 = Number(String(f.to || '').match(/\d{3,4}/)?.[0]) || 0;
         const pid = f.person && typeof f.person === 'object' ? Number(f.person.id) : 0, pname = !pid && f.person ? fold(String(f.person).replace(/^txt:/, '')) : '';
         let list = (docs || []).filter(d => {
-            if (words.length) { const hay = fold([d.title, d.cote, d.date_text, d.place, d.series, ...(d.people || []).map(p => p.name)].join(' ')); if (!words.every(w => hay.includes(w))) return false; }
+            if (words.length) { const hay = fold([d.title, d.cote, d.date_text, d.place, d.series, ...(d.people || []).map(p => p.name), ...recNames(d), ...(d.geo || []).map(g => g.name), ...kindsOf(d).map(k => AKINDS.find(x => x[0] === k)?.[1] || '')].join(' ')); if (!words.every(w => hay.includes(w))) return false; }
             if (Array.isArray(f.sort) && f.sort.length && !f.sort.includes(d.sort)) return false;
             if (f.tr === 'tr' && !d.has_tr) return false;
             if (f.tr === 'notr' && d.has_tr) return false;
             if ((y1 || y2) && (!d.year || (y1 && d.year < y1) || (y2 && d.year > y2))) return false;
-            if (f.place && !fold(d.place).includes(fold(f.place))) return false;
+            if (f.place && !placeOk(d, f.place, kmOf(f.km))) return false;
+            if (Array.isArray(f.akind) && f.akind.length && !kindsOf(d).some(k => f.akind.includes(k))) return false;
+            if (f.rec === 'in' && !(d.recueils || []).length) return false;
+            if (f.rec === 'out' && (d.recueils || []).length) return false;
+            if (f.recname && !recNames(d).some(n => fold(n).includes(fold(f.recname)))) return false;
             if (pid && !(d.people || []).some(p => p.id === pid)) return false;
             if (pname && !(d.people || []).some(p => fold(p.name).includes(pname))) return false;
             if (f.loose && d.links) return false;
@@ -124,7 +155,7 @@
     /* ─── la colonne de gauche ─── */
     const rowHtml = (d, letter = letterOf(d.title)) => `<button type="button" class="side-menu-item ong-row ong-docrow${d.id === cur ? ' is-active' : ''}" data-ong-doc="${d.id}" data-letter="${esc(letter)}">
         <span class="ong-thumb">${thumbOf(d)}</span><span class="ong-txt"><strong>${esc(d.title)}</strong>${subLines(d, {cote: bar?.state?.sort === 'cote'})}</span></button>`;
-    const MODES = [['az', 'A → Z'], ['people', '👤 Par personne'], ['folders', '📁 Dossiers']];
+    const MODES = [['az', 'A → Z'], ['people', '👤 Par personne'], ['recueils', '📚 Recueils'], ['folders', '📁 Dossiers']];
     const modeOf = () => (MODES.some(m => m[0] === readPref().mode) ? readPref().mode : 'az');
     function underMenu(btn) {
         const u = under();
@@ -142,7 +173,7 @@
     function sidebar(content, footer) {
         const mode = modeOf();
         content.innerHTML = `<div class="ong-side" data-ong-side="documents" data-no-reorder>
-            <div class="ong-modebar"><div class="segmented ong-mode" role="tablist" aria-label="Façon de ranger">${MODES.map(([k, l]) => `<button type="button" class="${mode === k ? 'is-active' : ''}" data-ong-mode="${k}" aria-pressed="${mode === k}">${l}</button>`).join('')}</div>
+            <div class="ong-modebar"><div class="segmented ong-mode is-grid" role="tablist" aria-label="Façon de ranger">${MODES.map(([k, l]) => `<button type="button" class="${mode === k ? 'is-active' : ''}" data-ong-mode="${k}" aria-pressed="${mode === k}">${l}</button>`).join('')}</div>
             <button type="button" class="icon-button small ong-opts" data-ong-under aria-label="Sous le titre" title="Sous le titre">⋯</button></div>
             <div class="ong-bar" data-ong-bar></div>
             <div class="ong-letters" data-ong-letters ${mode === 'folders' ? 'hidden' : ''}></div><div class="ong-list" data-ong-list>${UI().skeleton ? UI().skeleton(6) : '<div class="loading-block">Chargement…</div>'}</div></div>`;
@@ -156,7 +187,8 @@
             const m = e.target.closest('[data-ong-mode]'); if (m) { writePref({mode: m.dataset.ongMode}); shown = STEP; A().renderSidebar(); return; }
             const o = e.target.closest('[data-ong-under]'); if (o) { underMenu(o); return; }
             const l = e.target.closest('[data-ong-letter]'); if (l && !l.disabled) { jumpTo(l.dataset.ongLetter); return; }
-            const r = e.target.closest('[data-ong-doc]'); if (r) { select(Number(r.dataset.ongDoc)); return; }
+            const rh = e.target.closest('[data-ong-rec]'); if (rh) { ext.openRecueil?.(Number(rh.dataset.ongRec)); return; }
+            const r = e.target.closest('[data-ong-doc]'); if (r) { if (pick.on && !cur) { togglePick(Number(r.dataset.ongDoc)); return; } select(Number(r.dataset.ongDoc)); return; }
             const more = e.target.closest('[data-ong-more]'); if (more) { shown += STEP; paintList(); }
         }, {signal});
         content.addEventListener('contextmenu', e => { // K14 : le menu de la ligne à l'endroit de la souris
@@ -168,7 +200,7 @@
             const all = [...content.querySelectorAll('[data-ong-doc]')].filter(x => x.offsetParent), i = all.indexOf(r), nx = all[i + (e.key === 'ArrowDown' ? 1 : -1)];
             if (nx) { e.preventDefault(); nx.focus(); select(Number(nx.dataset.ongDoc), {keepFocus: true}); }
         }, {signal});
-        load().then(() => { if (A().state?.module === sig) paintList(); });
+        load().then(() => { if (A().state?.module === sig) { paintList(); paintWorkspaceList(); } }); // une barre neuve (filtres relus) : les vignettes suivent aussi
     }
     /** 👤 Par personne : [{p, letter, docs}] (nom de famille puis prénom), puis « Sans personne » */
     function groupsByPerson(list) {
@@ -181,6 +213,16 @@
     /** ce que la colonne montre, dans l'ordre : titres de lettre, noms (Par personne), lignes */
     function entries(list, mode, st) {
         const out = [];
+        if (mode === 'recueils') { // 📚 chaque recueil, ses documents dans l'ordre des pages ; « Dans aucun recueil » à la fin
+            const keep = new Set(list.map(d => d.id)), none = list.filter(d => !(d.recueils || []).length);
+            recs.forEach(r => {
+                const ds = (docs || []).filter(d => keep.has(d.id) && (d.recueils || []).some(x => x.id === r.id)).map(d => ({d, num: d.recueils.find(x => x.id === r.id).num})).sort((a, b) => a.num - b.num);
+                if (!ds.length && (bar?.state?.q || Object.keys(bar?.state?.filters || {}).length)) return;
+                out.push({rh: r, n: ds.length}); ds.forEach(x => out.push({d: x.d, letter: '#', num: x.num}));
+            });
+            if (none.length) { out.push({rh: null, n: none.length}); none.forEach(d => out.push({d, letter: '#'})); }
+            return out;
+        }
         if (mode === 'people') {
             let last = null;
             groupsByPerson(list).forEach(g => {
@@ -232,22 +274,50 @@
         for (const e of all) {
             if (e.d && rows >= shown) break;
             if (e.lh) html += `<div class="section-label ong-lh" data-ong-lh="${esc(e.lh)}">${esc(e.lh)}</div>`;
+            else if (e.rh !== undefined) html += e.rh ? `<button type="button" class="ong-ph ong-rh" data-ong-rec="${e.rh.id}" title="${esc(T('📚 Ouvrir le recueil'))}"><span>${esc(e.rh.icon || '📚')} ${esc(e.rh.title)}</span><small>${e.n}</small></button>` : `<div class="ong-ph"><span>${esc(T('Dans aucun recueil'))}</span><small>${e.n}</small></div>`;
             else if (e.ph) html += `<div class="ong-ph" data-ong-ph="${e.ph.p ? e.ph.p.id : 0}"><span>${e.ph.p ? `👤 ${esc(e.ph.p.name)}` : esc(T('Sans personne'))}</span><small>${e.ph.docs.length}</small></div>`;
-            else { html += rowHtml(e.d, e.letter); rows++; }
+            else { html += e.num ? rowHtml(e.d, e.letter).replace('<strong>', `<strong><span class="ong-pnum">${esc(T('p. {n}', {n: String(e.num)}))}</span> `) : rowHtml(e.d, e.letter); rows++; }
         }
+        queueMicrotask(() => pick.on && paintPick());
         box.innerHTML = `<div class="side-menu ong-menu">${html}</div>${total > shown ? `<button type="button" class="ui-more" data-ong-more>Voir les ${Math.min(STEP, total - shown)} suivants ↓</button>` : ''}`;
     }
 
     /* ─── à droite : la liste en vignettes (rien de choisi) ou la fiche ─── */
     let wsShown = 24;
+    /* ☑ Choisir plusieurs (maquette documents-lies-recueils, partie 3) : l'ordre des clics est l'ordre des pages du recueil */
+    const pick = {on: false, ids: []};
+    function togglePick(id) { const i = pick.ids.indexOf(id); if (i >= 0) pick.ids.splice(i, 1); else pick.ids.push(id); paintPick(); }
+    function paintPick() {
+        const barEl = document.querySelector('#workspace [data-ong-pickbar]'), btn = document.querySelector('#workspace [data-ong-pick]');
+        if (btn) { btn.classList.toggle('is-active', pick.on); btn.setAttribute('aria-pressed', String(pick.on)); }
+        document.querySelectorAll('#workspace [data-ong-cards] [data-ong-card], #sidebar-content .ong-list [data-ong-doc]').forEach(el => {
+            const id = Number(el.dataset.ongCard || el.dataset.ongDoc), n = pick.on ? pick.ids.indexOf(id) + 1 : 0;
+            el.classList.toggle('is-picked', n > 0); el.classList.toggle('is-picking', pick.on); el.querySelector(':scope > .ong-pickn')?.remove();
+            if (n) el.insertAdjacentHTML('afterbegin', `<span class="ong-pickn" aria-label="${esc(T('choisi n° {n}', {n: String(n)}))}">${n}</span>`);
+            el.querySelectorAll('[data-ong-doc]').forEach(x => (pick.on ? x.setAttribute('aria-pressed', String(n > 0)) : x.removeAttribute('aria-pressed')));
+            if (el.matches('[data-ong-doc]')) { if (pick.on) el.setAttribute('aria-pressed', String(n > 0)); else el.removeAttribute('aria-pressed'); }
+        });
+        if (!barEl) return;
+        barEl.hidden = !pick.on; if (!pick.on) return;
+        const n = pick.ids.length;
+        const what = plural(n, 'document choisi', 'documents choisis');
+        barEl.innerHTML = `<span class="ong-pickcount">${n ? esc(n > 1 ? T('{x}, dans l’ordre des clics', {x: what}) : what) : esc(T('Clique sur les documents à prendre, dans l’ordre des pages.'))}</span><span class="spacer"></span>
+            <button type="button" class="button small" data-ong-pick-make ${n ? '' : 'disabled'}>${esc(n > 1 ? T('📚 Faire un recueil avec {x}', {x: plural(n, 'document', 'documents')}) : T('📚 Faire un recueil'))}</button>
+            <button type="button" class="button small secondary" data-ong-pick-add ${n ? '' : 'disabled'}>${esc(T('📚 Ajouter à un recueil…'))}</button>
+            <button type="button" class="button small secondary" data-ong-pick-all>${esc(T('Tout choisir (ceux montrés)'))}</button>
+            ${n ? `<button type="button" class="button small secondary" data-ong-pick-none>${esc(T('Tout enlever'))}</button>` : ''}
+            <button type="button" class="icon-button small" data-ong-pick-close aria-label="${esc(T('Fermer'))}" title="${esc(T('Fermer'))}">×</button>`;
+    }
+    async function afterRecueil() { cache.clear(); await load(true); if (A().state?.module !== 'documents') return; paintList(); paintWorkspaceList(); if (cur && document.querySelector(`#workspace [data-ong-id="${cur}"]`)) showDoc(cur); }
     function paintWorkspaceList() {
         const box = document.querySelector('#workspace [data-ong-cards]'); if (!box || cur) return;
         const list = filtered();
         if (!(docs || []).length) { box.innerHTML = A().emptyState({icon: '📄', text: 'Aucun document pour l’instant', hint: 'Les photos, actes, lettres et papiers ajoutés aux fiches (ou importés) arrivent ici, sans rien ressaisir.', action: kiosk() ? null : {label: '⤒ Importer des documents', attrs: 'data-empty-click="[data-ong-import]"'}}); return; }
         if (!list.length) { box.innerHTML = A().emptyState({icon: '🔎', text: 'Rien ne correspond', hint: 'Change les mots cherchés ou retire un filtre dans la colonne de gauche.'}); return; }
-        box.innerHTML = UI().cardsHtml ? UI().cardsHtml(list.slice(0, wsShown).map(d => ({thumb: thumbOf(d), name: d.title, open: `data-ong-doc="${d.id}"`, lines: cardLines(d),
+        box.innerHTML = UI().cardsHtml ? UI().cardsHtml(list.slice(0, wsShown).map(d => ({thumb: thumbOf(d), name: d.title, open: `data-ong-doc="${d.id}"`, attrs: `data-ong-card="${d.id}"`, lines: cardLines(d),
             badges: [{text: sortMeta(d.sort)[2], kind: 'grey'}, ...(d.has_tr ? [{text: 'Transcrit', kind: 'green'}] : [])], when: d.created_at, whenLabel: 'Ajouté'}))) : '';
         if (list.length > wsShown && UI().moreButton) box.appendChild(UI().moreButton({remaining: list.length - wsShown, step: 24, onClick: () => { wsShown += 24; paintWorkspaceList(); }}));
+        paintPick();
     }
     async function render(token) {
         const ws = document.getElementById('workspace'); if (!ws) return;
@@ -258,10 +328,10 @@
         if (cur) return showDoc(cur, token);
         const ro = kiosk();
         ws.innerHTML = `<section class="page ong-page" data-ong-page="documents">${UI().pageHeader ? UI().pageHeader({title: 'Documents', icon: '📄',
-            help: 'Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z, 👤 par personne ou en 📁 dossiers), la fiche à droite.',
+            help: 'Les médias et pièces d’archives de ta base, comme les personnes : la liste à gauche (A → Z, 👤 par personne, 📚 par recueil ou en 📁 dossiers), la fiche à droite.',
             primary: ro ? '' : '<button type="button" class="button" data-ong-import>⤒ Importer des documents</button>',
-            actions: ['<button type="button" class="button secondary" data-ong-medias>↗ Listes → Médias</button>']}) : '<h1>Documents</h1>'}
-            ${failed ? `<div class="ui-msg is-error">⛔ ${esc(failed)}</div>` : ''}${lost ? `<div class="ong-lost" data-ong-lost>${A().empty(`Document introuvable (n° ${lost}) : il n’existe pas, ou plus (supprimé ?). Choisis-en un ci-dessous.`, {icon: '🔍'})}</div>` : ''}<div class="ong-cards" data-ong-cards></div></section>`;
+            actions: [ro ? '' : `<button type="button" class="button secondary" data-ong-pick aria-pressed="${pick.on}">${esc(T('☑ Choisir plusieurs'))}</button>`, '<button type="button" class="button secondary" data-ong-medias>↗ Listes → Médias</button>'].filter(Boolean)}) : '<h1>Documents</h1>'}
+            ${failed ? `<div class="ui-msg is-error">⛔ ${esc(failed)}</div>` : ''}${lost ? `<div class="ong-lost" data-ong-lost>${A().empty(`Document introuvable (n° ${lost}) : il n’existe pas, ou plus (supprimé ?). Choisis-en un ci-dessous.`, {icon: '🔍'})}</div>` : ''}<div class="ong-pickbar" data-ong-pickbar hidden></div><div class="ong-cards" data-ong-cards></div></section>`;
         paintWorkspaceList();
     }
     function hashFor(id) { return id ? `#documents/${id}` : '#documents'; }
@@ -327,7 +397,7 @@
         const path = folderPath(id), when = UI().when || (x => esc(x));
         const readDate = d.date_text && UI().readDate ? UI().readDate(d.date_text) : null;
         const help = [kindWord({...d, sort}), d.date_text, d.places?.[0]?.name, d.pages && `${d.pages} p.`].filter(Boolean).join(' · ');
-        const more = ['<button type="button" data-ong-dl>⤓ Télécharger</button>', '<button type="button" data-ong-print>🖨 Imprimer</button>', `<button type="button" data-ong-view>↗ Ouvrir le média</button>`];
+        const more = [...(!ro && isImg && ext.recueilDocs ? [`<button type="button" data-ong-recadd>${esc(T('📚 Ajouter à un recueil…'))}</button>`] : []), '<button type="button" data-ong-dl>⤓ Télécharger</button>', '<button type="button" data-ong-print>🖨 Imprimer</button>', `<button type="button" data-ong-view>↗ Ouvrir le média</button>`];
         const field = (k, v, raw = false) => v ? `<dt>${esc(k)}</dt><dd>${raw ? v : esc(v)}</dd>` : '';
         const ppl = d.people || [];
         ws.innerHTML = `<section class="page ong-page ong-docpage" data-ong-page="document" data-ong-id="${id}">
@@ -351,6 +421,7 @@
                     ${field('Fichier', d.filename)}
                 </dl>${!d.cote && !d.date_text && !ro ? `<p class="ong-hint">${A().empty ? A().empty('Pas encore de date ni de cote : « ✎ Modifier » pour les écrire.', {icon: '✎'}) : ''}</p>` : ''}</div>
             </div>
+            <section class="card ong-sec ong-recsec" data-ong-recueil hidden></section>
             <section class="card ong-sec ong-pagessec" data-ong-pages hidden></section>
             <section class="card ong-sec ong-linkssec" data-ong-links hidden></section>
             ${d.description ? `<section class="card ong-sec"><h3>Notes</h3><p class="ong-pre">${esc(d.description)}</p></section>` : ''}
@@ -362,6 +433,8 @@
         // 📑 les autres pages du même document (recto / verso, page 1…N, annexe : heritage-pages.js), montrées ensemble ; ＋ Relier une autre page…
         const pg = ws.querySelector('[data-ong-pages]');
         if (pg && ext.mediaPages) ext.mediaPages.mount(pg, id, {ro, onOpen: pid => { if (Number(pid) !== Number(id)) select(Number(pid)); }});
+        const rc = ws.querySelector('[data-ong-recueil]'); // 📚 « Dans le recueil … page 12 » : la page d'avant, la suivante (heritage-recueil-docs.js)
+        if (rc && ext.recueilDocs) ext.recueilDocs.mountPlace(rc, id, {ro, onOpen: did => { if (Number(did) !== Number(id)) select(Number(did)); }});
         const lk = ws.querySelector('[data-ong-links]'); // 🔗 documents liés (heritage-liens.js) : un clic ouvre l'autre document ici
         if (lk && ext.docLinks) ext.docLinks.mount(lk, id, {ro, onOpen: did => { if (Number(did) !== Number(id)) select(Number(did)); }});
         const img = ws.querySelector('[data-ong-img]');
@@ -374,6 +447,18 @@
     document.addEventListener('click', async e => {
         const page = e.target.closest?.('#workspace [data-ong-page]'); if (!page || A().state?.module !== 'documents') return;
         const b = e.target.closest('button, a'); if (!b) return;
+        if (b.matches('[data-ong-pick]')) { pick.on = !pick.on; if (!pick.on) pick.ids = []; paintPick(); return; }
+        if (b.matches('[data-ong-pick-close]')) { pick.on = false; pick.ids = []; paintPick(); return; }
+        if (b.matches('[data-ong-pick-none]')) { pick.ids = []; paintPick(); return; }
+        if (b.matches('[data-ong-pick-all]')) { filtered().slice(0, wsShown).forEach(x => { if (!pick.ids.includes(x.id)) pick.ids.push(x.id); }); paintPick(); return; }
+        if (b.matches('[data-ong-pick-make], [data-ong-pick-add]')) {
+            if (!ext.recueilDocs) return A().toast(T('Les recueils ne sont pas encore chargés : réessaie dans un instant.'), 'error');
+            const chosen = pick.ids.map(byId).filter(Boolean);
+            const done = async () => { pick.on = false; pick.ids = []; await afterRecueil(); paintPick(); };
+            if (b.matches('[data-ong-pick-make]')) ext.recueilDocs.create(chosen, {onDone: done}); else ext.recueilDocs.addTo(chosen, {onDone: done});
+            return;
+        }
+        if (pick.on && !cur && b.matches('[data-ong-doc]')) { e.preventDefault(); togglePick(Number(b.dataset.ongDoc)); return; }
         let d = cache.get(cur);
         // la page affichée peut venir d'avant un vidage du cache (ouverture de l'app, média changé ailleurs) : on relit le document au lieu de ne rien faire
         if (!d && !b.matches('[data-ong-doc], [data-ong-back], [data-ong-medias], [data-ong-import]')) {
@@ -418,6 +503,7 @@
             finally { b.disabled = false; }
             return;
         }
+        if (b.matches('[data-ong-recadd]')) { ext.recueilDocs?.addTo([{...d, id: d.id || cur}], {onDone: afterRecueil}); return; }
         if (b.matches('[data-ong-dl]')) { if (!d.filename) return; const a = Object.assign(document.createElement('a'), {href: `media/${encodeURIComponent(d.filename)}`, download: d.filename}); document.body.appendChild(a); a.click(); a.remove(); return; }
         if (b.matches('[data-ong-print]')) { UI().printPage ? UI().printPage(d.title) : A().toast('L’impression n’est pas disponible.', 'error'); return; }
         if (b.matches('[data-ong-wp]')) {
