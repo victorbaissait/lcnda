@@ -66,7 +66,7 @@ function recueil_toc_list(PDO $pdo, int $rid): array
         $list = $kids[$pid] ?? [];
         // dans un même parent : par première page, puis l'ordre choisi
         usort($list, static fn($a, $b) => [$a['from_num'] ?: PHP_INT_MAX, $a['position'], $a['id']] <=> [$b['from_num'] ?: PHP_INT_MAX, $b['position'], $b['id']]);
-        foreach ($list as $r) { $r['level'] = $level; $r['children'] = count($kids[$r['id']] ?? []); $out[] = $r; if ($level < 12) { $walk($r['id'], $level + 1); } }
+        foreach ($list as $r) { $r['level'] = $level; $r['children'] = count($kids[$r['id']] ?? []); $out[] = $r; if ($level < 200) { $walk($r['id'], $level + 1); } } // autant de niveaux qu'on veut (sous-sous-sous-chapitres…) ; une boucle est refusée à l'enregistrement
     };
     $walk(0, 1);
     return ['items' => $out, 'warnings' => recueil_toc_warnings($pdo, $rid, $out)];
@@ -150,7 +150,7 @@ function save_recueil_toc(PDO $pdo, array $data): array
         if (!$pr || (int) $pr['recueil_id'] !== $rid) { throw new RuntimeException('Le chapitre parent n’est pas dans ce recueil.'); }
         if ($pr['kind'] === 'element') { throw new RuntimeException('Un passage décrit ne peut pas contenir de chapitre : choisis un chapitre.'); }
         // pas de boucle : le parent ne doit pas être dans les descendants de cette ligne
-        for ($x = $parent, $n = 0; $x && $n < 50; $n++) { if ($id && $x === $id) { throw new RuntimeException('Un chapitre ne peut pas être dans lui-même.'); } $q = $pdo->prepare('SELECT parent_id FROM recueil_toc WHERE id=?'); $q->execute([$x]); $x = (int) $q->fetchColumn(); }
+        for ($x = $parent, $n = 0; $x && $n < 250; $n++) { if ($id && $x === $id) { throw new RuntimeException('Un chapitre ne peut pas être dans lui-même.'); } $q = $pdo->prepare('SELECT parent_id FROM recueil_toc WHERE id=?'); $q->execute([$x]); $x = (int) $q->fetchColumn(); }
     }
     $pos = static fn($v) => in_array($v, RECUEIL_TOC_POS, true) ? $v : '';
     $kinds = defined('TRANSCRIPTION_KINDS') ? TRANSCRIPTION_KINDS : [];

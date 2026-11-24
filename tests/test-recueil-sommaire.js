@@ -174,6 +174,28 @@ echo json_encode(['ok' => 1, 'rid' => $r['id'], 'lid' => $l['id'], 'ids' => $ids
             const r = await post('recueil_reorder', {recueil_id: lid, by: 'cote'}); assert.deepEqual(r.order, [lids[1], lids[2], lids[0]]);
             assert.ok(!(await p.evaluate(id => { window.LCNDA_APP.state.hRecueil = {id, tab: 'pages', page: 0}; return false; }, rid)));
         });
+        await t('sous-sous-sous-chapitres et ainsi de suite : 6 niveaux, le choix « Niveau 1 · 2 · … · 6 », chaque niveau se replie', async () => {
+            let parent = 0; const made = [];
+            for (const [i, title] of ['Partie A', 'Livre 1', 'Cahier I', 'Feuillet a', 'Section α', 'Détail ω'].entries()) {
+                const r = await post('save_recueil_toc', {recueil_id: lid, parent_id: parent, title, page_from: lids[0], page_to: lids[0]}); assert.ok(r.id > 0, JSON.stringify(r)); made.push(r.id); parent = r.id;
+            }
+            const items = (await api('recueil_toc', {id: lid})).items;
+            assert.deepEqual(items.map(r => [r.title, r.level]), [['Partie A', 1], ['Livre 1', 2], ['Cahier I', 3], ['Feuillet a', 4], ['Section α', 5], ['Détail ω', 6]]);
+            await p.evaluate(id => { const A = window.LCNDA_APP; A.state.hRecueil = {id, tab: 'sommaire', page: 0, view: 'grid', q: ''}; A.state.listType = 'recueils'; A.setModule('listes'); }, lid);
+            await p.waitForSelector('.rs-tree .rs-li', {timeout: 20000});
+            assert.deepEqual(await p.evaluate(() => [...document.querySelectorAll('[data-rs-level]')].map(b => b.textContent)), ['Niveau 1', '2', '3', '4', '5', '6', '+ passages']);
+            const shown = () => p.evaluate(() => [...document.querySelectorAll('.rs-tree > .rs-li .rs-title')].map(x => x.textContent));
+            assert.equal((await shown()).length, 6);
+            await p.click('[data-rs-level="4"]'); await sleep(200); assert.deepEqual(await shown(), ['Partie A', 'Livre 1', 'Cahier I', 'Feuillet a']);
+            await p.click('[data-rs-level="all"]'); await sleep(200);
+            await p.click(`[data-rs-fold="${made[2]}"]`); await sleep(200); assert.deepEqual(await shown(), ['Partie A', 'Livre 1', 'Cahier I'], 'replier « Cahier I » cache les 3 niveaux dessous');
+            await p.click(`[data-rs-fold="${made[2]}"]`); await sleep(200);
+            const ind = await p.evaluate(() => [...document.querySelectorAll('.rs-tree > .rs-li')].map(li => parseFloat(getComputedStyle(li).paddingLeft)));
+            assert.ok(ind.every((x, i) => !i || x > ind[i - 1]), 'chaque niveau plus en retrait : ' + ind);
+            const ead = (await api('recueils_ead')).xml; assert.match(ead, /Partie A.*Livre 1.*Cahier I.*Feuillet a.*Section α.*Détail ω(<\/unittitle>.*?<\/c>){0,1}/s);
+            assert.equal((ead.match(/<c /g) || []).length, (ead.match(/<\/c>/g) || []).length, 'EAD : chaque niveau bien fermé');
+            await post('recueil_toc_remove', {recueil_id: lid, ids: [made[0]]});
+        });
         await t('migration 107 rejouable ; un recueil supprimé emporte son sommaire', async () => {
             const r = php(`require 'lib/bootstrap.php'; $p = db(); schema_v107($p); schema_v107($p); delete_recueil($p, ['id' => ${rid}]); echo $p->query('PRAGMA user_version')->fetchColumn(), ' ', SCHEMA_VERSION, ' ', $p->query('SELECT count(*) FROM recueil_toc')->fetchColumn();`);
             const m = r.stdout.match(/^(\d+) (\d+) 0$/); assert.ok(m && m[1] === m[2] && Number(m[1]) >= 107, r.stdout + r.stderr);

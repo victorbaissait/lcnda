@@ -183,3 +183,7 @@
 .rp-legend i.rp-tr { background: #d4a800; } .rp-legend i.rp-rel { background: #1a7f37; }
 .rp-msg, .rp-goal { margin: 2px 0; font-size: 13px; }
 .rp-goal.is-late { color: #c62828; font-weight: 700; } .rp-goal.is-ok { color: #1a7f37; font-weight: 700; }
+
+/* 📑 autant de niveaux qu'on veut : le retrait grandit, sans jamais pousser la ligne hors de l'écran */
+.rs-li { padding-left: min(calc(var(--lv, 0) * 22px), 45%); }
+.rs-level { flex-wrap: wrap; }
