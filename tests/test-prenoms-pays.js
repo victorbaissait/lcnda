@@ -171,7 +171,7 @@ echo json_encode(['ok' => 1]);`);
             assert.strictEqual((await api('prenoms_pays_person', {id: 3})).why, 'hidden');
             assert.strictEqual((await api('prenoms_pays_person', {id: 6})).why, 'years');
         });
-        await t('la case « Montrer la petite ligne » : décochée, plus de ligne (↶ Annuler la remet)', async () => {
+        await t('la case « Montrer la petite ligne » : décochée, plus de ligne sur la fiche', async () => {
             await openPage(); await p.waitForSelector('[data-ppx-fiche]', {timeout: 20000});
             await p.click('[data-ppx-fiche]'); await sleep(300);
             assert.strictEqual(await p.evaluate(() => JSON.parse(localStorage.getItem('genealogie-prenoms-pays')).fiche), false);

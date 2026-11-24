@@ -256,7 +256,9 @@ echo json_encode(['n' => $n, 'b' => $b, 'est' => INSEE_MAJ_ROW_BYTES]);`);
             await p.click('[data-im-box] [data-im-pause]');
             await p.waitForSelector('[data-im-box] [data-im-resume]', {timeout: 20000});
             assert.strictEqual((await api('insee_maj_status')).job.status, 'paused');
-            await p.reload(); await ready(); await sleep(9000); // le démarrage de l'app (8 s) : une installation en pause ne repart pas toute seule
+            await p.reload(); await ready();
+            await p.evaluate(() => window.LCNDA_APP.setModule('personnes'));
+            await sleep(9000); // le démarrage de l'app (8 s) : une installation en pause ne repart pas toute seule
             assert.strictEqual((await api('insee_maj_status')).job.status, 'paused');
             assert.ok(await p.$('#im-chip [data-im-resume]'), 'la pastille en bas de l’écran le rappelle');
             await openInsee();
@@ -324,7 +326,7 @@ echo json_encode(['n' => $n, 'b' => $b, 'est' => INSEE_MAJ_ROW_BYTES]);`);
             await p.waitForSelector('.confirm-box-dialog');
             assert.match(await p.textContent('.confirm-box-dialog'), /700 fiches seront retirées/);
             await p.click('.confirm-box-dialog [data-cb-ok]');
-            await p.waitForFunction(() => /Décès de 2022 retirés/.test([...document.querySelectorAll('.ui-toast')].map(x => x.textContent).join(' ')), null, {timeout: 20000});
+            await p.waitForFunction(() => /Décès de 2022 retirés/.test([...document.querySelectorAll('.ui-toast')].map(x => x.textContent).join(' ')), null, {timeout: 20000}).catch(async e => { throw new Error(e.message + ' | ' + await toasts()); });
             assert.ok(!(await api('insee_maj_status')).installed.years.some(y => y.year === 2022));
             await p.evaluate(() => [...document.querySelectorAll('.ui-toast')].find(x => /2022 retirés/.test(x.textContent)).querySelector('.ui-toast-btn').click());
             await p.waitForFunction(() => /installés/.test([...document.querySelectorAll('.ui-toast')].map(x => x.textContent).join(' ')), null, {timeout: 60000});

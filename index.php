@@ -80,6 +80,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/shortcuts.css?v=3">
     <link rel="stylesheet" href="assets/css/meteo.css?v=4">
     <link rel="stylesheet" href="assets/css/histoire.css?v=1">
+    <link rel="stylesheet" href="assets/css/prenoms-pays.css?v=1">
     <link rel="stylesheet" href="assets/css/place-photos.css?v=1">
     <link rel="stylesheet" href="assets/css/journee.css?v=1">
     <link rel="stylesheet" href="assets/css/suivi.css?v=4">
@@ -1296,7 +1297,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-graphiques.js?v=28" defer></script>
 <script src="assets/js/app-side-folders.js?v=3" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
-<script src="assets/js/heritage.js?v=45" defer></script>
+<script src="assets/js/heritage.js?v=46" defer></script>
 <script src="assets/js/app-selection.js?v=2" defer></script>
 <script src="assets/js/app-sources-liste.js?v=2" defer></script>
 <script src="assets/js/heritage-tools.js?v=22" defer></script>
@@ -1451,6 +1452,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-diagram-adn-chiffres.js?v=9" defer></script>
 <script src="assets/js/heritage-diagram-cartes2.js?v=7" defer></script>
 <script src="assets/js/heritage-prenoms-france.js?v=5" defer></script>
+<script src="assets/js/heritage-prenoms-pays.js?v=1" defer></script>
 <script src="assets/js/heritage-diagram-cartes-plus.js?v=4" defer></script>
 <script src="assets/js/heritage-diagram-cartes-plus2.js?v=6" defer></script><!-- 🗺️ vague 2 : métiers, lignées, aire de vie, parrains, crises -->
 <script src="assets/js/heritage-diagram-graphique.js?v=12" defer></script>

@@ -18,6 +18,10 @@ on:
         description: 'Petit pack d’essai seulement (quelques prénoms)'
         type: boolean
         default: false
+  # un envoi qui touche ce fichier fait seulement connaître l'atelier à GitHub (rien n'est fabriqué)
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/prenoms.yml']
 
 permissions:
   contents: write
@@ -28,6 +32,7 @@ concurrency:
 
 jobs:
   pack:
+    if: github.event_name != 'push'
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     steps:
