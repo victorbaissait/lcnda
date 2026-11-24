@@ -264,7 +264,7 @@ def step_people(w, countries):
 def step_details(w, people):
     det = {}
     ids = sorted(people)
-    for n, part in enumerate(chunks(ids, 300)):
+    for n, part in enumerate(chunks(ids, 400)):
         q = f'''SELECT ?p (SAMPLE(?lfr) AS ?fr) (SAMPLE(?len) AS ?en) (SAMPLE(?famL) AS ?fam) (SAMPLE(?b) AS ?b) (SAMPLE(?bp) AS ?bp)
           (SAMPLE(?d) AS ?d) (SAMPLE(?dp) AS ?dp) (SAMPLE(?dpl) AS ?dpl) (SAMPLE(?occ) AS ?occ) (SAMPLE(?frw) AS ?frw) (SAMPLE(?enw) AS ?enw) WHERE {{
           VALUES ?p {{ {values('Q%d' % i for i in part)} }}
@@ -278,20 +278,20 @@ def step_details(w, people):
           OPTIONAL {{ ?frw schema:about ?p ; schema:isPartOf <https://fr.wikipedia.org/> . }}
           OPTIONAL {{ ?enw schema:about ?p ; schema:isPartOf <https://en.wikipedia.org/> . }}
         }} GROUP BY ?p'''
-        rows = w.ask(q, f'det{n:05d}')
+        rows = w.ask(q, f'det4-{n:05d}')
         if rows is None:  # paquet trop lourd : en deux moitiés
             rows = []
-            for half in chunks(part, 100):
+            for half in chunks(part, 200):
                 q2 = q.replace(values('Q%d' % i for i in part), values('Q%d' % i for i in half))
                 rows += w.ask(q2, f'det{n:05d}h{half[0]}') or []
         for r in rows:
             det[qnum(r['p'])] = r
         if n % 50 == 0:
-            log(f'  détails : {min((n + 1) * 300, len(ids))}/{len(ids)}')
+            log(f'  détails : {min((n + 1) * 400, len(ids))}/{len(ids)}')
     return det
 
 
-def step_places(w, place_ids):
+def step_places(w, place_ids, tag='pl'):
     out = {}
     names = collections.defaultdict(list)
     ids = sorted(i for i in place_ids if i)
@@ -303,7 +303,7 @@ def step_places(w, place_ids):
           OPTIONAL {{ ?pl wdt:P625 ?co . }}
           OPTIONAL {{ ?pl wdt:P17 ?c . }}
         }} GROUP BY ?pl'''
-        for r in w.ask(q, f'pl{n:05d}') or []:
+        for r in w.ask(q, f'{tag}{n:05d}') or []:
             out[qnum(r['pl'])] = r
         q = f'''SELECT ?pl ?k ?name ?s ?e WHERE {{
           VALUES ?pl {{ {values('Q%d' % i for i in part)} }}
@@ -311,7 +311,7 @@ def step_places(w, place_ids):
           UNION {{ ?pl wdt:P1449 ?name . BIND("n" AS ?k) }}
           UNION {{ ?pl wdt:P1813 ?name . BIND("s" AS ?k) }}
         }}'''
-        for r in w.ask(q, f'pln{n:05d}') or []:
+        for r in w.ask(q, f'{tag}n{n:05d}') or []:
             names[qnum(r['pl'])].append(r)
         if n % 50 == 0:
             log(f'  lieux : {min((n + 1) * 300, len(ids))}/{len(ids)}')
@@ -593,6 +593,7 @@ def main():
     ap.add_argument('--cache', default=os.path.join(os.getcwd(), 'wikidata-sortie', 'cache'))
     ap.add_argument('--test', action='store_true', help='Belgique et Luxembourg seulement')
     ap.add_argument('--max-mo', type=float, default=15, help='taille totale permise (Mo), 15 par défaut')
+    ap.add_argument('--max-personnes', type=int, default=150000, help='combien de personnes au plus (150 000 par défaut)')
     ap.add_argument('--hors-ligne', action='store_true', help='ne lit que le cache (aucune question au service)')
     a = ap.parse_args()
     global OUT
@@ -602,9 +603,23 @@ def main():
     built = time.strftime('%Y-%m-%d')
     countries = {'Q31': 1, 'Q32': 1} if a.test else step_countries(w)
     people = step_people(w, countries)
+    # d'abord les lieux de naissance : on ne garde que les personnes nées dans la zone (Europe, Amériques, Afrique
+    # francophone), puis les plus connues jusqu'à --max-personnes (langue française d'abord) — avant les détails, qui coûtent cher
+    places, pnames = step_places(w, set(v[1] for v in people.values()), 'pl')
+    def scoped(v):
+        pt = point((places.get(v[1]) or {}).get('co'))
+        return bool(pt and in_scope(*pt))
+    keep = sorted((p for p, v in people.items() if scoped(v)), key=lambda p: (-people[p][2], -people[p][0]))
+    franco = [p for p in keep if people[p][2]]
+    others = [p for p in keep if not people[p][2]][:max(0, a.max_personnes - len(franco))]
+    people = {p: people[p] for p in franco + others}
+    log(f'Personnes nées dans la zone, retenues : {len(people)} ({len(franco)} de langue française)'
+        + (f', autres : au moins {people[others[-1]][0]} pages Wikipédia' if others else ''))
     det = step_details(w, people)
-    pids = set(v[1] for v in people.values()) | set(qnum(r.get('dpl')) for r in det.values())
-    places, pnames = step_places(w, pids)
+    more = set(qnum(r.get('dpl')) for r in det.values()) - set(places) - {0}
+    p2, n2 = step_places(w, more, 'pld')
+    places.update(p2)
+    pnames.update(n2)
     occ = step_occupations(w, set(qnum(r.get('occ')) for r in det.values()) - {0})
     events = [] if a.test else step_events(w)
     oldrows = [] if a.test else step_oldnames(w)
