@@ -360,7 +360,7 @@ def manifest(folder):
 def essai(folder):
     """petits packs d'ESSAI pour les tests (noms inventés, marqués fixture) — jamais montrés comme de vraies données"""
     os.makedirs(folder, exist_ok=True)
-    rows = [('la Croix MAZAUD', fold('la Croix MAZAUD'), 'Lieu-dit habité', '15014', 45.10, 2.50, 1), ('Bois LACOMBE', fold('Bois LACOMBE'), 'Lieu-dit non habité', '15014', 45.11, 2.51, 0),
+    rows = [('la Croix MAZAUD', fold('la Croix MAZAUD'), 'Lieu-dit habité', '15014', 44.930, 2.440, 1), ('Bois LACOMBE', fold('Bois LACOMBE'), 'Lieu-dit non habité', '15014', 44.935, 2.455, 0),
             ('Moulin DURAND', fold('Moulin DURAND'), 'Moulin', '15998', 45.12, 2.52, 1)]
     db = os.path.join(folder, 'tmp.sqlite')
     n = write_lieuxdits_db(db, '15', rows, {'15014': 'Aurillac', '15998': 'Autre-Essai'}, fixture=True)

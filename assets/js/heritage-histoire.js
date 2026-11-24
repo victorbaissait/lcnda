@@ -132,13 +132,13 @@
         return row('🌋', `<b>${i18n('Séismes')}</b><ul class="hist-ul">${lines}</ul>`, i18n('EPICA v1.1, INGV (CC BY 4.0), 1000–1899'), `<small class="muted hist-hyp">${esc(rule)}${after ? ' ' + esc(i18n('Le catalogue s’arrête en 1899.')) : ''}</small>`);
     }
 
-    function floodLines(d) {
+    function floodLines(d, here = false) {
         const f = d.floods || {}, out = [];
         if ((f.bdhi || []).length) out.push(row('🌊', `<b>${i18n('Inondations')}</b><ul class="hist-ul">${f.bdhi.map(x => `<li>${esc(x.year)} : ${esc(x.title)}${x.place ? ` (${esc(x.place)})` : ` <span class="muted">(${esc(i18n('dans le département'))})</span>`}</li>`).join('')}</ul>`, i18n('Géorisques, base historique des inondations (BDHI), Licence Ouverte')));
         if ((f.monde || []).length) out.push(row('🌊', `<ul class="hist-ul">${f.monde.map(x => `<li>${esc(x.year)} : ${esc(x.title)}${x.desc ? ` — ${esc(x.desc)}` : ''}</li>`).join('')}</ul>`, f.monde[0].src || i18n('Le monde autour (LCNDA)')));
         if ((f.catnat || []).length) {
             const list = f.catnat.slice(-6).map(x => `<li>${esc(isoTxt(x.date))} : ${esc(x.label.toLowerCase())}${x.place ? ` (${esc(x.place)})` : ''}</li>`).join('');
-            out.push(row('🏛', `${i18n('{n} reconnue(s) depuis 1982 dans ses communes, de son vivant', {n: `<b>${A().plural ? A().plural(f.catnat.length, 'catastrophe naturelle', 'catastrophes naturelles') : f.catnat.length}</b>`})}${f.catnat.length > 6 ? ` (${i18n('les 6 dernières')})` : ''} :<ul class="hist-ul">${list}</ul>`, i18n('Géorisques, arrêtés CatNat (GASPAR), Licence Ouverte')));
+            out.push(row('🏛', `${i18n(here ? '{n} reconnue(s) ici depuis 1982' : '{n} reconnue(s) depuis 1982 dans ses communes, de son vivant', {n: `<b>${A().plural ? A().plural(f.catnat.length, 'catastrophe naturelle', 'catastrophes naturelles') : f.catnat.length}</b>`})}${f.catnat.length > 6 ? ` (${i18n('les 6 dernières')})` : ''} :<ul class="hist-ul">${list}</ul>`, i18n('Géorisques, arrêtés CatNat (GASPAR), Licence Ouverte')));
         }
         return out.join('');
     }
@@ -170,6 +170,30 @@
     }
 
     (ext.afterPerson = ext.afterPerson || []).push(() => { document.querySelectorAll('#workspace [data-hist-life]').forEach(fill); });
+
+    /** 📜 Monographie de commune : la population de la commune (courbe), le train, les séismes et les inondations des années
+     *  de la famille (hist_place). Rien à dire (ou pack absent) → false, et la partie est passée. */
+    async function placeInto(host, placeId, {from = 0, to = 0} = {}) {
+        let d; try { d = await api('hist_place', {id: Number(placeId), from: from || '', to: to || ''}); } catch (_) { return false; }
+        if (!d?.installed || !host.isConnected) return false;
+        const out = [], c = d.commune, ser = c?.series || {};
+        const ys = Object.keys(ser).map(Number).sort((a, b) => a - b);
+        if (ys.length) {
+            const last = ys[ys.length - 1], top = ys.reduce((a, y) => (ser[y] > ser[a] ? y : a), ys[0]);
+            const txt = i18n('{c} comptait {a} habitants en {y1} et {b} en {y2}', {c: `<b>${esc(c.nom)}</b>`, a: `<b>${nf(ser[ys[0]])}</b>`, y1: ys[0], b: `<b>${nf(ser[last])}</b>`, y2: last})
+                + (top !== ys[0] && top !== last ? ` ; ${i18n('le plus : {n} en {y}', {n: nf(ser[top]), y: top})}` : '') + '.';
+            out.push(row('👥', txt, i18n('Insee, recensements de la population (communes au 1er janvier 2025)'), curve({years: ys, values: ys.map(y => ser[y]), at: [], commune: c.nom})));
+        }
+        const t = d.train;
+        if (t?.first) out.push(row('🚂', t.first.km < 3 ? i18n('Le train arrive à {w} en {y}.', {w: esc(t.first.nom), y: t.first.ouverture}) : i18n('La gare la plus proche, {g} ({km} km), ouvre en {y}.', {g: esc(t.first.nom), km: String(Math.round(t.first.km)), y: t.first.ouverture}), i18n('Wikidata (dates d’ouverture, incomplètes) · Un siècle de gares, R. Jeansoulin (ODbL)')));
+        else if (t?.closest) out.push(row('🚂', i18n('Pas de gare datée à moins de 20 km ; la plus proche connue : {g} ({km} km), ouverte en {y}.', {g: esc(t.closest.nom), km: String(Math.round(t.closest.km)), y: t.closest.ouverture}), i18n('Wikidata (dates d’ouverture, incomplètes) · Un siècle de gares, R. Jeansoulin (ODbL)')));
+        if ((d.quakes || []).length) out.push(row('🌋', `<b>${i18n('Séismes sans doute ressentis ici')}</b><ul class="hist-ul">${d.quakes.map(x => `<li>${i18n('Séisme du {d} ({z}) : épicentre {where}, intensité {io} à l’épicentre.', {d: dayTxt(x.day, x.month, x.year), z: esc(x.zone || '?'), where: x.km < 1 ? i18n('ici') : i18n('à {km} km', {km: x.km}), io: ioTxt(x.io)})}</li>`).join('')}</ul>`, i18n('EPICA v1.1, INGV (CC BY 4.0), 1000–1899')));
+        out.push(floodLines(d, true));
+        const html = out.join('');
+        if (!html) return false;
+        host.innerHTML = `<div class="hist-life">${html}</div>`;
+        return true;
+    }
 
     function openSettings(autoStart = false) {
         const st = A().state; if (!st) return;
@@ -310,5 +334,5 @@
         const T = A()?.defaultMaintenanceTabs; if (Array.isArray(T) && !T.some(t => t[0] === 'histoire')) { const i = T.findIndex(t => t[0] === 'meteo'); T.splice(i < 0 ? T.length : i + 1, 0, ['histoire', '25k2', '🏘 Histoire du lieu']); }
     };
     boot(); document.addEventListener('DOMContentLoaded', boot, {once: true});
-    ext.histoire = {fill, openAbout, openSettings, dl: {run: dlRun, state: DL}};
+    ext.histoire = {fill, placeInto, openAbout, openSettings, dl: {run: dlRun, state: DL}};
 })();

@@ -512,7 +512,7 @@ function hist_person_data(PDO $pdo, int $id): array
 }
 
 /** GET hist_place&id= → la population et le train d'un lieu (pour la fiche du lieu) */
-function hist_place_data(PDO $pdo, int $id): array
+function hist_place_data(PDO $pdo, int $id, ?int $from = null, ?int $to = null): array
 {
     $s = $pdo->prepare('SELECT * FROM places WHERE id=?'); $s->execute([$id]); $pl = $s->fetch(PDO::FETCH_ASSOC);
     if (!$pl) { throw new RuntimeException('Lieu introuvable.'); }
@@ -521,6 +521,14 @@ function hist_place_data(PDO $pdo, int $id): array
     $c = hist_commune($h, $pl);
     $out = ['installed' => true, 'place' => (string) $pl['name'], 'commune' => $c ? ['code' => $c['code'], 'nom' => $c['nom'], 'match' => $c['match'], 'series' => hist_pop_series($h, $c)] : null];
     if (hist_has_pos($pl)) { $out['train'] = hist_train_at($h, (float) $pl['lat'], (float) $pl['lon']); }
+    // 📜 Monographie de commune : séismes ressentis et inondations ici, sur les années demandées (celles de la famille)
+    if ($from !== null && $to !== null && $to >= $from) {
+        $one = ['id' => $id, 'name' => (string) $pl['name'], 'lat' => hist_has_pos($pl) ? (float) $pl['lat'] : null, 'lon' => hist_has_pos($pl) ? (float) $pl['lon'] : null, 'code' => $c['code'] ?? '', 'dep' => hist_place_dept($pl)];
+        $out['span'] = [$from, $to];
+        $out['quakes'] = $one['lat'] !== null ? hist_quakes($h, [$one], $from, $to) : [];
+        $out['floods'] = hist_floods($h, [$one], $from, $to);
+        $out['rules'] = ['felt_km' => HIST_FELT_KM];
+    }
     return $out;
 }
 
@@ -840,7 +848,7 @@ function hist_api_get(PDO $pdo, string $action, array $q): array
         'hist_status' => hist_status_data(),
         'hist_about' => hist_about_data(),
         'hist_person' => hist_person_data($pdo, safe_int($q['id'] ?? 0)),
-        'hist_place' => hist_place_data($pdo, safe_int($q['id'] ?? 0)),
+        'hist_place' => hist_place_data($pdo, safe_int($q['id'] ?? 0), safe_int($q['from'] ?? 0) ?: null, safe_int($q['to'] ?? 0) ?: null),
         'hist_fhmd_status' => hist_fhmd_status($pdo),
         // sans internet (ou rien encore en ligne) : une réponse normale qui le dit, pas une erreur du serveur
         'hist_dl_info' => (static function () { try { return hist_dl_info(); } catch (RuntimeException $e) { return ['version' => '', 'packs' => (object) [], 'offline' => true, 'error' => $e->getMessage()]; } })(),
