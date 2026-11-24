@@ -120,7 +120,7 @@ BOX_4 = (51.6, -5.5, 41.2, 10.6)          # France, Belgique, Suisse, Luxembourg
 BOX_EUROPE = (71.5, -25.0, 34.0, 45.0)
 COUNTRY_BOXES = {'FR': (51.1, -5.2, 41.3, 9.6), 'BE': (51.55, 2.5, 49.45, 6.45), 'CH': (47.85, 5.9, 45.8, 10.5), 'LU': (50.2, 5.7, 49.4, 6.55)}
 DEPARTEMENTS = [f'{i:02d}' for i in range(1, 96) if i != 20] + ['2A', '2B'] + ['971', '972', '973', '974', '975', '976', '984', '985', '986', '987', '988']
-UA = 'LCNDA-meteo/1.0 (+https://github.com ; fabricant des données météo d’une app de généalogie)'
+UA = 'LCNDA-meteo/1.0 (+https://github.com/victorbaissait/lcnda ; meteo data builder for a genealogy app)'  # en ASCII seulement : un en-tête HTTP n'accepte pas les accents ni ’
 
 
 class Stop(Exception):

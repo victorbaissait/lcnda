@@ -62,8 +62,13 @@ jobs:
 
       - name: Fabriquer (5 h 20 au plus ; la suite à la prochaine fois)
         id: build
-        continue-on-error: true
-        run: timeout 19200 python3 scripts/meteo/build-meteo.py "${{ steps.q.outputs.quoi }}" --sans-era5 --dossier meteo-sortie
+        run: |
+          set +e
+          timeout 19200 python3 scripts/meteo/build-meteo.py "${{ steps.q.outputs.quoi }}" --sans-era5 --dossier meteo-sortie
+          rc=$?
+          if [ $rc -eq 0 ]; then echo "fini=oui" >> "$GITHUB_OUTPUT"; exit 0; fi
+          if [ $rc -eq 124 ]; then echo "fini=non" >> "$GITHUB_OUTPUT"; exit 0; fi
+          exit $rc
 
       - name: Garder le travail pour la prochaine fois
         if: always()
@@ -73,7 +78,7 @@ jobs:
           key: meteo-${{ steps.q.outputs.quoi }}-${{ github.run_id }}
 
       - name: Déposer le pack dans la version « meteo-donnees »
-        if: steps.build.outcome == 'success'
+        if: steps.build.outputs.fini == 'oui'
         env:
           GH_TOKEN: ${{ github.token }}
           Q: ${{ steps.q.outputs.quoi }}
@@ -105,6 +110,6 @@ jobs:
           cat meteo-manifest.json
 
       - name: Pas encore fini
-        if: steps.build.outcome != 'success'
+        if: steps.build.outputs.fini == 'non'
         run: |
           echo "::notice::La fabrication n'est pas finie (6 h au plus par machine). Relance « Données météo », elle reprendra où elle s'est arrêtée."
