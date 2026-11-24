@@ -491,9 +491,11 @@ try {
         try { json_response(meteo_api_post((string) $action, $payload, $_GET)); }
         catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); }
     }
+    if ($isWrite && preg_match('/^gov_(dl|pack)_/', (string) $action)) { require_once __DIR__ . '/lib/gov.php'; try { json_response(gov_api_post((string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } } // 🏰 Lieux anciens (GOV) : installer / retirer le pack (fichiers à part : lib/gov.php)
     if ($isWrite && (str_starts_with((string) $action, 'elections_dl_') || str_starts_with((string) $action, 'elections_pack_'))) { require_once __DIR__ . '/lib/elections.php'; try { json_response(elections_api_post((string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } } // 🗳 Élections d'autrefois : installer / retirer le pack (lib/elections.php)
     // 🏘 Histoire du lieu : installer / retirer le pack, tables de frdata.org (fichiers à part : lib/histoire.php)
     if ($isWrite && preg_match('/^hist_(dl|pack|fhmd)_/', (string) $action)) { require_once __DIR__ . '/lib/histoire.php'; try { json_response(hist_api_post((string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } }
+    if ($isWrite && in_array($action, ['cplus_keep', 'cplus_keep_undo', 'cplus_cache_clear', 'cplus_cache_restore'], true)) { require_once __DIR__ . '/lib/commune_plus.php'; try { json_response(cplus_api_post($pdo, (string) $action, $payload)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], $e instanceof LcndaBadInput ? 422 : 502); } } // 🪦🖼️⛪📰 Autour du village (lib/commune_plus.php)
     if ($isWrite && str_starts_with((string) $action, 'lieux_')) { require_once __DIR__ . '/lib/lieux_a_placer.php'; } // 📍 Lieux à placer (écritures dans handle_write)
     if ($isWrite && !in_array($action, $uploadActions, true)) {
         handle_write($pdo, $action, $payload);
@@ -698,6 +700,7 @@ try {
         'biography_day' => json_response(bio_day($pdo, safe_int($_GET['id'] ?? 0), $_GET)), // ⏳ Une journée dans la vie de… (lib/biographie_journee.php)
         'biography_day_events' => json_response(['events' => bio_day_events($pdo, safe_int($_GET['id'] ?? 0))]), // ⏳ les dates proposées
         'world_around' => json_response(world_around($pdo, safe_int($_GET['id'] ?? 0), $_GET)), // 🌍 lib/monde_autour.php
+        'ciel_heure_ctx' => (static function () use ($pdo) { require_once __DIR__ . '/lib/ciel_heure.php'; json_response(ciel_heure_ctx($pdo, $_GET)); })(), // 🕰️ la vraie heure de l'acte, 🌌 ciel de naissance : date lue et lieu (lib/ciel_heure.php)
         'world_events' => json_response(world_events_list($pdo, $_GET)),
         'grands_mouvements' => json_response(mouvements_list($pdo, $_GET)), // 🌍 lib/mouvements.php
         'listes_plus' => (static function () use ($pdo) { require_once __DIR__ . '/lib/listes_plus.php'; json_response(lp_get($pdo, $_GET)); })(), // 📋 Listes en plus : 📚 Sources, 💍 Familles, 🔤 Noms de famille, 📝 Notes (lib/listes_plus.php, lib/sources_gestion.php)
@@ -781,9 +784,11 @@ try {
         'suivi' => json_response(suivi_get($pdo, $_GET)), // 🐾 Suivi des animaux (lib/suivi.php)
         'report_info' => (static function () use ($pdo) { require_once __DIR__ . '/lib/signaler.php'; json_response(report_info($pdo)); })(), // 🐞 Signaler un problème : version, système, nombres seulement (lib/signaler.php)
         'mode_simple_data' => (static function () use ($pdo) { require_once __DIR__ . '/lib/mode_simple.php'; json_response(mode_simple_data($pdo)); })(), // 🧓 Mode simple : personnes, unions, photos (lecture seule, lib/mode_simple.php)
+        'gov_status', 'gov_about', 'gov_search', 'gov_object', 'gov_place', 'gov_events', 'gov_dl_info', 'gov_dl_resume' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/gov.php'; json_response(gov_api_get($pdo, (string) $action, $_GET)); })(), // 🏰 Lieux anciens (GOV) (lib/gov.php)
         'meteo_status', 'meteo_about', 'meteo_events', 'meteo_event', 'meteo_person', 'meteo_point', 'meteo_time', 'meteo_today', 'meteo_place', 'meteo_altitude', 'meteo_dl_info', 'meteo_dl_resume' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/meteo.php'; json_response(meteo_api_get($pdo, (string) $action, $_GET)); })(), // 🌦 Météo d'autrefois (lib/meteo.php) : fichiers à part, lecture seule
         'elections_status', 'elections_person', 'elections_dl_info', 'elections_dl_resume' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/elections.php'; try { json_response(elections_api_get($pdo, (string) $action, $_GET)); } catch (RuntimeException $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🗳 Élections d'autrefois (lib/elections.php)
         'hist_status', 'hist_about', 'hist_person', 'hist_place', 'hist_fhmd_status', 'hist_dl_info', 'hist_dl_resume' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/histoire.php'; try { json_response(hist_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🏘 Histoire du lieu (lib/histoire.php) : pack à part, lecture seule
+        'cplus_cemeteries', 'cplus_images', 'cplus_church', 'cplus_newspapers', 'cplus_about' => (static function () use ($pdo, $action) { require_once __DIR__ . '/lib/commune_plus.php'; try { json_response(cplus_api_get($pdo, (string) $action, $_GET)); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🪦🖼️⛪📰 Autour du village (lib/commune_plus.php) : en ligne à la demande, gardé sur l'ordinateur
         'frontieres_status' => (static function () use ($pdo) { require_once __DIR__ . '/lib/cartes_plus.php'; json_response(cp_front_status($pdo)); })(), // 🏛 Frontières anciennes : installé ? tailles, empreintes
         'frontieres_remote' => (static function () { require_once __DIR__ . '/lib/cartes_plus.php'; try { json_response(cp_front_remote()); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); } })(), // 🏛 adresses et tailles annoncées
         'frontieres_communes' => (static function () { require_once __DIR__ . '/lib/cartes_plus.php'; json_response(cp_front_communes($_GET)); })(), // 🏛 communes disparues d'un cadre de la carte
@@ -10030,6 +10035,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'socface_undo' => socface_undo($pdo,$data), // 🧾 SocFace : ↶ Annuler un import
             'socface_verify' => socface_verify($pdo,$data), // 🧾 SocFace : « Vérifié sur l'image »
             'socface_fix' => socface_fix($pdo,$data), // 🧾 SocFace : correction d'une lecture choisie dans « 🔍 Vérifier cette ligne » // ✅ ⚙️ Seuils du contrôle
+            'gov_place_link', 'gov_place_add', 'gov_place_add_undo' => (static function () use ($pdo, $data, $action) { require_once __DIR__ . '/lib/gov.php'; return gov_api_write($pdo, (string) $action, $data); })(), // 🏰 lieu relié à GOV, « Ajouter ce lieu à ma base » et ↶ Annuler
             'meteo_place_altitude' => (static function () use ($pdo, $data) { require_once __DIR__ . '/lib/meteo.php'; return meteo_place_altitude_save($pdo, $data); })(), // 🌦 ⛰ altitude d’un lieu (saisie ou « ↺ » carte du relief)
             'bulk_group' => bulk_group($pdo,$data),
             'save_branch' => save_branch($pdo,$data),

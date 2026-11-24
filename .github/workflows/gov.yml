@@ -1,0 +1,101 @@
+# 🏰 Fabrication du pack « Lieux anciens (GOV) », déposé dans la version « gov-donnees » du dépôt.
+#
+# L'app n'embarque rien de GOV : Réglages → 🏰 Lieux anciens (GOV) → « ⤓ Installer » télécharge le pack depuis cette
+# version (lib/gov.php), le vérifie (empreinte sha256) puis le range.
+#
+# Lancer : pousser une étiquette « gov-1 » (le chiffre ne sert qu'à relancer), ou onglet « Actions » → « Lieux anciens (GOV) »
+# → « Run workflow » (le menu « zone » : centre = Allemagne, Autriche, Suisse, Tchéquie, Pologne… ; europe = toute l'Europe).
+# Le programme lit le service public de GOV (gov.genealogy.net/api) doucement (3 requêtes à la fois, une pause) : la première
+# fois, cela dépasse les 6 h d'une machine GitHub ; le travail est gardé en cache (gov-sortie) et la fois suivante reprend
+# où elle s'était arrêtée. Relancer jusqu'à ce que le pack soit déposé.
+# Avant tout, le programme lit la licence des données (GenWiki « GOV/Webservice ») et s'arrête si elle n'est plus une CC BY-SA.
+# Le pack est coupé en morceaux de 1 900 Mo au plus ; gov-manifest.json dit les morceaux, la taille et l'empreinte.
+
+name: Lieux anciens (GOV)
+
+on:
+  workflow_dispatch:
+    inputs:
+      zone:
+        description: 'La zone à lire'
+        type: choice
+        options: [centre, europe]
+        default: centre
+  push:
+    tags: ['gov-*']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gov-donnees
+  cancel-in-progress: false
+
+jobs:
+  pack:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Reprendre le travail déjà fait
+        uses: actions/cache/restore@v4
+        with:
+          path: gov-sortie
+          key: gov-${{ inputs.zone || 'centre' }}-${{ github.run_id }}
+          restore-keys: gov-${{ inputs.zone || 'centre' }}-
+
+      - name: Fabriquer (5 h 20 au plus ; la suite à la prochaine fois)
+        id: build
+        run: |
+          set +e
+          timeout 19200 python3 scripts/gov/build-gov.py --zone "${{ inputs.zone || 'centre' }}" --dossier gov-sortie
+          rc=$?
+          if [ $rc -eq 0 ]; then echo "fini=oui" >> "$GITHUB_OUTPUT"; exit 0; fi
+          if [ $rc -eq 124 ]; then echo "fini=non" >> "$GITHUB_OUTPUT"; exit 0; fi
+          exit $rc
+
+      - name: Garder le travail pour la prochaine fois
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: gov-sortie
+          key: gov-${{ inputs.zone || 'centre' }}-${{ github.run_id }}
+
+      - name: Déposer le pack dans la version « gov-donnees »
+        if: steps.build.outputs.fini == 'oui'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ZONE: ${{ inputs.zone || 'centre' }}
+        run: |
+          set -e
+          f=gov-sortie/gov-pack.lcgov
+          test -s "$f"
+          mkdir -p envoi && cd envoi
+          split -b 1900M -d -a 3 "../$f" "gov-pack.lcgov."
+          size=$(stat -c %s "../$f"); sum=$(sha256sum "../$f" | cut -d' ' -f1)
+          gh release view gov-donnees --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || \
+            gh release create gov-donnees --repo "$GITHUB_REPOSITORY" --title "Lieux anciens (GOV)" --prerelease \
+              --notes "Le pack des lieux anciens d'Allemagne et d'Europe centrale, téléchargé par l'app (Réglages → 🏰 Lieux anciens (GOV) → ⤓ Installer). Données : GOV – Geschichtliches Orts-Verzeichnis (gov.genealogy.net), Verein für Computergenealogie e. V., licence CC BY-SA (voir https://wiki.genealogy.net/GOV/Webservice). Ce pack est sous la même licence."
+          for a in $(gh release view gov-donnees --repo "$GITHUB_REPOSITORY" --json assets --jq ".assets[].name" | grep -E '^gov-pack\.lcgov\.[0-9]{3}$' || true); do
+            gh release delete-asset gov-donnees "$a" --repo "$GITHUB_REPOSITORY" --yes
+          done
+          python3 - "$size" "$sum" "$ZONE" <<'PY'
+          import json, os, sys, datetime
+          size, sha, zone = int(sys.argv[1]), sys.argv[2], sys.argv[3]
+          parts = sorted(p for p in os.listdir('.') if p.split('.')[-1].isdigit())
+          m = {'version': datetime.date.today().strftime('%Y-%m'), 'packs': {'gov': {'size': size, 'sha256': sha, 'zone': zone, 'built': datetime.date.today().isoformat(),
+               'parts': [{'name': p, 'size': os.path.getsize(p)} for p in parts]}}}
+          json.dump(m, open('gov-manifest.json', 'w'), indent=1)
+          PY
+          gh release upload gov-donnees --repo "$GITHUB_REPOSITORY" --clobber $(ls | grep -E '\.[0-9]{3}$') gov-manifest.json
+          cat gov-manifest.json
+
+      - name: Pas encore fini
+        if: steps.build.outputs.fini == 'non'
+        run: |
+          echo "::notice::La lecture de GOV n'est pas finie (6 h au plus par machine). Relance « Lieux anciens (GOV) », elle reprendra où elle s'est arrêtée."

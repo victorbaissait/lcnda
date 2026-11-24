@@ -214,7 +214,10 @@ def load_objects(work):
             for line in f:
                 line = line.strip()
                 if line:
-                    o = json.loads(line)
+                    try:
+                        o = json.loads(line)
+                    except ValueError:  # dernière ligne coupée par un arrêt : relue la prochaine fois
+                        continue
                     if o.get('id'):
                         objs[o['id']] = o
     return objs

@@ -188,7 +188,7 @@ function ouc_oa_search(PDO $pdo, array $g): array
     $rows = [];
     foreach ($docs as $d) { if (is_array($d) && ($r = ouc_oa_row($d))) { $rows[] = $r; } }
     $found = (int) ($j['response']['number_found'] ?? count($rows));
-    $said = $q['name'] . (isset($q['eventtype']) ? ' · ' . $type : '') . ($place !== '' ? ' · ' . $place : '') . ($start ? ' · +' . $start : '');
+    $said = $q['name'] . (isset($q['eventtype']) ? ' · ' . i18n_t(['birth' => 'naissances', 'baptism' => 'baptêmes', 'marriage' => 'mariages', 'death' => 'décès', 'burial' => 'inhumations'][$type] ?? $type) : '') . ($place !== '' ? ' · ' . $place : '') . ($start ? ' · +' . $start : '');
     $pdo->prepare('DELETE FROM ouc_oa_searches WHERE person_id=? AND query=?')->execute([$pid, $said]); // la même recherche refaite : une seule ligne, à la date du jour
     $pdo->prepare('INSERT INTO ouc_oa_searches(person_id, query, found) VALUES(?,?,?)')->execute([$pid, $said, $found]);
     return ['person' => $p, 'query' => ['first' => $first, 'last' => $last, 'y1' => $y1, 'y2' => $y2, 'type' => $type, 'place' => $place, 'start' => $start, 'how' => $how, 'with' => $with, 'sent' => $q['name']],
@@ -334,7 +334,8 @@ function ouc_oa_add(PDO $pdo, array $d): array
     $ids = ['sources' => [], 'source_links' => [], 'events' => []];
     $notes = [];
     $batch = 'oa-' . bin2hex(random_bytes(6));
-    $pdo->beginTransaction();
+    $own = !$pdo->inTransaction(); // api.php ouvre déjà une transaction pour chaque écriture
+    if ($own) { $pdo->beginTransaction(); }
     try {
         $pdo->prepare('INSERT INTO sources(title, author, agency, publication, url, text) VALUES(?,?,?,?,?,?)')
             ->execute([mb_substr('Open Archives — ' . $what, 0, 240), '', mb_substr($archive, 0, 200), 'Open Archives (openarchieven.nl)', $rec['url'], implode("\n\n", $lines)]);
@@ -365,8 +366,8 @@ function ouc_oa_add(PDO $pdo, array $d): array
         $pdo->prepare("INSERT INTO ouc_oa_marks(person_id, rec_key, verdict, batch) VALUES(?,?,'added',?) ON CONFLICT(person_id, rec_key) DO UPDATE SET verdict='added', batch=excluded.batch, created_at=CURRENT_TIMESTAMP")
             ->execute([$pid, $rec['key'], $batch]);
         if (function_exists('log_change')) { log_change($pdo, 'person', $pid, 'update', 'Open Archives : source ajoutée (à vérifier) — ' . $what); }
-        $pdo->commit();
-    } catch (Throwable $e) { if ($pdo->inTransaction()) { $pdo->rollBack(); } throw $e; }
+        if ($own) { $pdo->commit(); }
+    } catch (Throwable $e) { if ($own && $pdo->inTransaction()) { $pdo->rollBack(); } throw $e; }
     return ['batch' => $batch, 'source_id' => $ids['sources'][0], 'event_ids' => $ids['events'], 'notes' => $notes, 'what' => $what, 'prev_mark' => $prev];
 }
 
@@ -379,7 +380,8 @@ function ouc_oa_undo(PDO $pdo, array $d): array
     if (!$row) { throw new RuntimeException(i18n_t('Cet ajout est déjà annulé, ou introuvable.')); }
     $pid = (int) $row['person_id']; $ids = json_decode((string) $row['ids'], true) ?: [];
     assert_person_unlocked($pdo, $pid);
-    $pdo->beginTransaction();
+    $own = !$pdo->inTransaction(); // api.php ouvre déjà une transaction pour chaque écriture
+    if ($own) { $pdo->beginTransaction(); }
     try {
         foreach (array_map('intval', $ids['source_links'] ?? []) as $id) { $pdo->prepare('DELETE FROM source_links WHERE id=?')->execute([$id]); }
         foreach (array_map('intval', $ids['events'] ?? []) as $id) {
@@ -393,8 +395,8 @@ function ouc_oa_undo(PDO $pdo, array $d): array
         $pdo->prepare("UPDATE ouc_oa_adds SET undone_at=CURRENT_TIMESTAMP WHERE batch=?")->execute([$batch]);
         $pdo->prepare("DELETE FROM ouc_oa_marks WHERE person_id=? AND rec_key=? AND batch=?")->execute([$pid, (string) $row['rec_key'], $batch]);
         if (function_exists('log_change')) { log_change($pdo, 'person', $pid, 'update', 'Open Archives : ajout annulé — ' . (string) $row['summary']); }
-        $pdo->commit();
-    } catch (Throwable $e) { if ($pdo->inTransaction()) { $pdo->rollBack(); } throw $e; }
+        if ($own) { $pdo->commit(); }
+    } catch (Throwable $e) { if ($own && $pdo->inTransaction()) { $pdo->rollBack(); } throw $e; }
     return ['ok' => true, 'person_id' => $pid];
 }
 

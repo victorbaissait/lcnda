@@ -197,7 +197,9 @@
 
     /* ═════════════════════════ 🪙 Convertisseur d'autrefois ═════════════════════════ */
     const AF_TAB = 'lcnda-autrefois-tab', AF_REGION = 'lcnda-autrefois-region';
-    const AF_TABS = [['argent', '💰 Argent'], ['mesures', '📏 Mesures anciennes'], ['calendrier', `📅 ${i18n('Calendrier républicain')}`]];
+    const AF_BASE = [['argent', '💰 Argent'], ['mesures', '📏 Mesures anciennes'], ['calendrier', `📅 ${i18n('Calendrier républicain')}`]];
+    /* onglets en plus, posés par d'autres fichiers : ext.autrefoisTabs.push({id, label, mount(pane, {year, value})}) (ex. 💶 Ailleurs en Europe, heritage-prix-europe.js) */
+    const afExtra = () => (Array.isArray(ext.autrefoisTabs) ? ext.autrefoisTabs.filter(x => x && x.id && typeof x.mount === 'function') : []);
     /** l'année d'un texte : « 1780 », « vers 1780 », « 12 mars 1780 », « an X » (an X = 1801-1802 : on garde 1802, comme les champs de date) */
     function yearOf(text) {
         const s = String(text || '').toLowerCase(); let m;
@@ -208,6 +210,7 @@
     function mountConverter(host, {tab = '', value = '', year = ''} = {}) {
         if (!F()) { host.innerHTML = emptyLine(i18n('Le convertisseur n’a pas pu se charger (fichier app-autrefois-engine.js manquant ?).'), '⚠️'); return null; }
         const st = {tab: tab || store.get(AF_TAB, 'argent'), region: store.get(AF_REGION, 'paris')};
+        const extra = afExtra(), AF_TABS = [...AF_BASE, ...extra.map(x => [x.id, x.label])];
         if (!AF_TABS.some(([k]) => k === st.tab)) st.tab = 'argent';
         host.classList.add('af');
         const regs = F().regions();
@@ -228,6 +231,7 @@
                 <div class="af-fields"><label class="af-field af-wide"><span>${i18n('La date (républicaine ou de tous les jours)')}</span><input type="text" data-af-date autocomplete="off" spellcheck="false" placeholder="12 thermidor an II, 14 juillet 1794, 14/07/1794…" value="${esc(init.calendrier)}"><span data-af-date-hint></span></label></div>
                 <p class="af-examples">Exemples : ${['9 thermidor an II', '18 brumaire an VIII', i18n('1er vendémiaire an I'), '14 juillet 1794', '25/12/1800'].map(s => `<button type="button" class="link-button" data-af-ex-date="${esc(s)}">${esc(s)}</button>`).join(' · ')}</p>
                 <div class="af-out" data-af-out="calendrier" aria-live="polite"></div></section>
+            ${extra.map(x => `<section class="af-pane" data-af-pane="${esc(x.id)}" data-af-extra></section>`).join('')}
             <p class="af-source ui-hint">${i18n('Tout est calculé ici, sans internet. Argent : {x} à partir de 1901 ; avant, un ordre de grandeur. Les résultats sont des repères (≈), pas des valeurs exactes.', {x: esc(F().SOURCE)})}</p>`;
         const $ = s => host.querySelector(s);
         const copyBtn = text => `<button type="button" class="button small secondary af-copy" data-af-copy="${esc(text)}">📋 ${i18n('Copier')}</button>`;
@@ -279,7 +283,9 @@
         function show() {
             host.querySelectorAll('[data-af-tab]').forEach(b => { const on = b.dataset.afTab === st.tab; b.classList.toggle('is-active', on); b.setAttribute('aria-selected', String(on)); });
             host.querySelectorAll('[data-af-pane]').forEach(p => { p.hidden = p.dataset.afPane !== st.tab; });
-            if (st.tab === 'argent') drawMoney(); else if (st.tab === 'mesures') drawMeasure(); else drawDate();
+            const x = extra.find(t => t.id === st.tab);
+            if (x) { const pane = host.querySelector(`[data-af-pane="${st.tab}"]`); if (!pane.dataset.afMounted) { pane.dataset.afMounted = '1'; try { x.mount(pane, {year: year || '', value: x.id === tab ? value : ''}); } catch (e) { pane.innerHTML = emptyLine(e.message || String(e), '⚠️'); } } }
+            else if (st.tab === 'argent') drawMoney(); else if (st.tab === 'mesures') drawMeasure(); else drawDate();
         }
         host.addEventListener('input', e => {
             if (e.target.matches('[data-af-sum], [data-af-year]')) drawMoney();

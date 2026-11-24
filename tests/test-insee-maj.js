@@ -73,7 +73,7 @@ echo json_encode(['ok' => 1]);`], {cwd: root, encoding: 'utf8', env: envFor(tmp,
 }
 function envFor(tmp, site, more = {}) {
     return {...process.env, GENEALOGY_DATA_DIR: tmp, GENEALOGY_MEDIA_DIR: path.join(tmp, 'media'), GENEALOGY_SKIP_REFERENCE: '1', GENEALOGY_TEST: '1', LCNDA_TEST_INSEE_DIR: site,
-        LCNDA_TEST_INSEE_CHUNK: '150000', LCNDA_TEST_INSEE_LINES: '400', LCNDA_TEST_INSEE_SECONDS: '0.05', ...more};
+        LCNDA_TEST_INSEE_CHUNK: '150000', LCNDA_TEST_INSEE_LINES: '400', LCNDA_TEST_INSEE_SECONDS: '0.0001', ...more};
 }
 // un appel PHP = un processus à part (comme une requête ; fermer l'app entre deux ne change rien)
 function php(tmp, site, code, more = {}) {
@@ -212,7 +212,7 @@ echo json_encode(['n' => $n, 'b' => $b, 'est' => INSEE_MAJ_ROW_BYTES]);`);
     mkSite(site2, V1, V1_EXTRA);
     setupData(tmp2);
     const port = await new Promise(res => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
-    const proc = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-S', `127.0.0.1:${port}`, '-t', root, path.join(root, 'router.php')], {cwd: root, env: {...envFor(tmp2, site2, {LCNDA_TEST_INSEE_SECONDS: '0.3', LCNDA_TEST_INSEE_CHUNK: '60000', LCNDA_TEST_INSEE_LINES: '200'}), PHP_CLI_SERVER_WORKERS: '4'}, stdio: 'ignore'});
+    const proc = spawn(phpPath, [...phpRuntimeArgs(phpPath), '-S', `127.0.0.1:${port}`, '-t', root, path.join(root, 'router.php')], {cwd: root, env: {...envFor(tmp2, site2, {LCNDA_TEST_INSEE_SECONDS: '0.0001', LCNDA_TEST_INSEE_CHUNK: '30000', LCNDA_TEST_INSEE_LINES: '100'}), PHP_CLI_SERVER_WORKERS: '4'}, stdio: 'ignore'});
     const base = `http://127.0.0.1:${port}/`;
     for (let i = 0; i < 100; i++) { try { await fetch(base + 'api.php?action=kiosk_state'); break; } catch (_) { await sleep(100); } }
     const browser = await chromium.launch();

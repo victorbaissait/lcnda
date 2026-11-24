@@ -73,6 +73,9 @@ function insee_remote_files(PDO $pdo, ?array $resources = null): array
         $f['imported_at'] = $imported[strtolower($f['name'])] ?? $imported['#' . $f['key']] ?? '';
         $f['imported'] = $f['imported_at'] !== '';
         $f['superseded'] = ($f['month'] || $f['quarter']) && isset($years[$f['year']]); // le fichier de l'année les contient
+        if ($f['quarter'] && !$f['superseded']) { // un trimestre dont les mois sont publiés (ou importés) ferait doublon avec eux
+            foreach (range($f['quarter'] * 3 - 2, $f['quarter'] * 3) as $m) { $mk = sprintf('%04d-m%02d', $f['year'], $m); if (isset($byPeriod[$mk]) || isset($imported['#' . $mk])) { $f['superseded'] = true; } }
+        }
         if ($f['imported'] && $f['order'] > $maxImported) { $maxImported = $f['order']; }
     }
     unset($f);
@@ -586,13 +589,13 @@ function insee_maj_step(PDO $pdo): array
     $deadline = microtime(true) + insee_maj_budget();
     $wait = 0;
     try {
-        while (microtime(true) < $deadline && $job['status'] === 'running') {
+        do { // au moins un petit pas à chaque appel
             $item = $job['items'][$job['idx']] ?? null;
             if (!$item) { $job['status'] = 'done'; $job['finished_at'] = date('c'); break; }
             if ($job['phase'] === 'download') { $wait = insee_maj_do_download($pdo, $job, $deadline); if ($wait) { break; } }
             elseif ($job['phase'] === 'import') { insee_maj_do_import($pdo, $job, $deadline); }
             elseif ($job['phase'] === 'cleanup') { insee_maj_do_cleanup($pdo, $job, $deadline); }
-        }
+        } while (microtime(true) < $deadline && $job['status'] === 'running');
     } catch (Throwable $e) {
         if ($pdo->inTransaction()) { $pdo->rollBack(); }
         $job = insee_maj_kv_get($pdo, 'job') ?? $job; // l'avancée sûre est celle de la base
@@ -749,7 +752,7 @@ function insee_maj_do_import(PDO $pdo, array &$job, float $deadline): void
     $batch = max(1, (int) (insee_maj_test_dir() !== '' ? (getenv('LCNDA_TEST_INSEE_LINES') ?: 2000) : 2000));
     fseek($fh, (int) $job['offset']);
     $eof = false;
-    while (!$eof && microtime(true) < $deadline) {
+    do {
         $pdo->beginTransaction();
         for ($n = 0; $n < $batch; $n++) {
             $line = fgets($fh);
@@ -780,7 +783,7 @@ function insee_maj_do_import(PDO $pdo, array &$job, float $deadline): void
         }
         insee_maj_kv_set($pdo, 'job', $job);
         $pdo->commit();
-    }
+    } while (!$eof && microtime(true) < $deadline);
     fclose($fh);
 }
 
@@ -794,7 +797,9 @@ function insee_maj_do_cleanup(PDO $pdo, array &$job, float $deadline): void
         $p = insee_file_period(strtolower(trim(explode(' / ', (string) $r['filename'])[0])));
         if ($p && $p['year'] === (int) $item['year'] && ($p['month'] || $p['quarter'])) { $old[(int) $r['id']] = (string) $r['filename']; }
     }
-    while ($old && microtime(true) < $deadline) {
+    $first = true;
+    while ($old && ($first || microtime(true) < $deadline)) {
+        $first = false;
         $id = array_key_first($old);
         $del = $pdo->prepare('DELETE FROM insee_deces WHERE id IN (SELECT id FROM insee_deces WHERE source_import_id=? LIMIT 20000)'); $del->execute([$id]);
         if ($del->rowCount() > 0) { continue; }
