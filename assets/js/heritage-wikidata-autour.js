@@ -198,7 +198,7 @@
         }
         if (day?.length) {
             const ex = day.filter(r => r.exact), other = day.filter(r => !r.exact);
-            if (ex.length) count.push(`🎂 ${esc(i18n('né le même jour que {n}', {n: ex[0].name}))}`);
+            if (ex.length) count.push(`🎂 ${esc(i18n(life.gender === 'female' ? 'née le même jour que {n}' : 'né le même jour que {n}', {n: ex[0].name}))}`);
             if (ex.length) parts.push(`<section><h4>🎂 ${esc(i18n('Nés le même jour ({d})', {d: dateFr(life.ymd)}))}</h4>${list(ex, r => li(`<b>${esc(r.name)}</b>`, r.place, r.q, r.fl), 'day')}</section>`);
             if (other.length) parts.push(`<section><h4>🎂 ${esc(i18n('Nés un {d}, une autre année', {d: dateFr(life.ymd).replace(/ \d+$/, '')}))}</h4><ul>${other.map(r => li(`<b>${esc(r.name)}</b> <small>${esc(String(yearOf(r.b)))}</small>`, r.place, r.q, r.fl)).join('')}</ul></section>`);
         }
@@ -208,7 +208,7 @@
                 <p class="wda-src">${esc(i18n('Même nom de famille seulement : ce n’est pas une preuve de parenté.'))}</p></section>`);
         }
         if (events?.length) {
-            count.push(`🗺 ${esc(i18n(events.length === 1 ? '1 grand événement près de chez lui' : '{n} grands événements près de chez lui', {n: String(events.length)}))}`);
+            count.push(`🗺 ${esc(i18n(events.length === 1 ? '1 grand événement près de ses lieux de vie' : '{n} grands événements près de ses lieux de vie', {n: String(events.length)}))}`);
             parts.push(`<section><h4>🗺 ${esc(i18n('Pendant sa vie, à moins de {k} km', {k: String(Number(s.km) || 30)}))}</h4>${list(events, r => li(`<b>${esc(r.name)}</b> <small>${esc(dateFr(r.date))}${r.end && yearOf(r.end) !== yearOf(r.date) ? `–${esc(String(yearOf(r.end)))}` : ''}</small>`,
                 [i18n('à {k} km de {p}', {k: String(Math.round(r.km)), p: r.near || '?'}), r.age >= 0 ? i18n('à {n} ans', {n: String(r.age)}) : ''].filter(Boolean).join(' · '), r.q, r.fl, i18n(KIND[r.kind] || r.kind)), 'events')}</section>`);
         }
@@ -313,7 +313,7 @@
                     ${tg('place', '📍 Célèbres nés au même endroit')}
                     ${tg('day', '🎂 Nés le même jour')}
                     ${tg('names', '👥 Célèbres du même nom (simple homonyme)')}
-                    ${tg('events', '🗺 Grands événements près de chez lui pendant sa vie')}
+                    ${tg('events', '🗺 Grands événements près de ses lieux, pendant sa vie')}
                     <div class="wda-line"><span>${esc(i18n('Jusqu’à quelle distance'))}</span><select data-wda-km>${kmOpts}</select></div>
                     ${tg('hint', '🏷 Reconnaître les anciens noms de lieux', 'Quand tu tapes « Lemberg » dans un lieu : « ancien nom officiel de Lviv ».')}
                     </div>

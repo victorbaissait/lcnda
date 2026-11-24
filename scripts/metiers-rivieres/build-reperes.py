@@ -20,6 +20,7 @@ import datetime
 import gzip
 import io
 import json
+import os
 import re
 import sys
 import time
@@ -30,6 +31,7 @@ BASE = 'https://www.reperesdecrues.developpement-durable.gouv.fr'
 EXPORT = BASE + '/recherche/recherche_repere/export/csv'
 DEPS = [f'{i:02d}' for i in range(1, 96) if i != 20] + ['2A', '2B', '971', '972', '973', '974', '976']
 CAP = 500
+FAILED = []
 
 
 def log(*a):
@@ -41,7 +43,8 @@ def fetch(dep, d1=None, d2=None):
     if d1:
         q += [('date_crue_debut', d1), ('date_crue_fin', d2)]
     url = EXPORT + '?' + urllib.parse.urlencode(q)
-    for attempt in range(4):
+    time.sleep(0.5)
+    for attempt in range(3):
         try:
             req = urllib.request.Request(url, headers={'User-Agent': 'LCNDA-build (genealogie; donnees ouvertes)'})
             with urllib.request.urlopen(req, timeout=300) as r:
@@ -63,15 +66,32 @@ def mid(d1, d2):
     return datetime.date.fromordinal(m).isoformat(), datetime.date.fromordinal(m + 1).isoformat()
 
 
-def collect(dep):
-    head, rows = fetch(dep)
+def collect(dep, cache=None):
+    if cache:
+        f = os.path.join(cache, f'{dep}.json')
+        if os.path.exists(f):
+            return tuple(json.load(open(f, encoding='utf-8')))
+    try:
+        head, rows = fetch(dep)
+    except RuntimeError:
+        head, rows = None, [None] * CAP  # la demande entière échoue : on la coupe par dates
     if len(rows) < CAP:
-        return head, rows
+        return save(cache, dep, head, rows)
     out = []
     stack = [('1000-01-01', datetime.date.today().isoformat())]
     while stack:
         d1, d2 = stack.pop()
-        _, part = fetch(dep, d1, d2)
+        try:
+            h, part = fetch(dep, d1, d2)
+            head = head or h
+        except RuntimeError:
+            if datetime.date.fromisoformat(d2).toordinal() - datetime.date.fromisoformat(d1).toordinal() > 366:
+                a, b = mid(d1, d2)
+                stack += [(d1, a), (b, d2)]
+                continue
+            log('  ! tranche sautée', dep, d1, d2)
+            FAILED.append(f'{dep} {d1}..{d2}')
+            continue
         if len(part) >= CAP and d1 != d2:
             a, b = mid(d1, d2)
             stack += [(d1, a), (b, d2)]
@@ -79,7 +99,14 @@ def collect(dep):
         if len(part) >= CAP:
             log('  ! plus de 500 repères le même jour', dep, d1)
         out += part
-    return head, out
+    return save(cache, dep, head or [], out)
+
+
+def save(cache, dep, head, rows):
+    if cache and head:
+        os.makedirs(cache, exist_ok=True)
+        json.dump([head, rows], open(os.path.join(cache, f'{dep}.json'), 'w', encoding='utf-8'))
+    return head, rows
 
 
 def num(s):
@@ -93,10 +120,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--dep', action='append')
     ap.add_argument('--sortie', default='assets/data/reperes-crues.json.gz')
+    ap.add_argument('--cache', default='', help='dossier où garder les réponses (reprise)')
     a = ap.parse_args()
     seen, rows = set(), []
     for dep in a.dep or DEPS:
-        head, part = collect(dep)
+        head, part = collect(dep, a.cache)
+        if not head:
+            log(dep, 'rien')
+            continue
         ix = {h: i for i, h in enumerate(head)}
         n = 0
         for r in part:
@@ -127,6 +158,8 @@ def main():
     with gzip.open(a.sortie, 'wt', encoding='utf-8', compresslevel=9) as f:
         json.dump(out, f, ensure_ascii=False, separators=(',', ':'))
     log('écrit', a.sortie, len(rows), 'repères')
+    if FAILED:
+        log('tranches manquantes :', FAILED)
 
 
 if __name__ == '__main__':

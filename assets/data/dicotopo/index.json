@@ -145,6 +145,54 @@
    "old": 42273,
    "places": 23704,
    "size": 1024111
+  },
+  "24": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Dordogne",
+    "bibl": "Gourgues (Alexis de), Dictionnaire topographique du département de la Dordogne, Paris, 1873.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k39292s"
+   },
+   "communes": 571,
+   "label": "Dordogne",
+   "old": 9586,
+   "places": 18551,
+   "size": 540479
+  },
+  "26": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de la Drôme",
+    "bibl": "Brun-Durand (Justin), Dictionnaire topographique du département de la Drôme, Paris, 1891.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k392934"
+   },
+   "communes": 370,
+   "label": "Drôme",
+   "old": 11618,
+   "places": 12385,
+   "size": 418436
+  },
+  "27": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique de l’Eure",
+    "bibl": "Poret de Blosseville (Ernest), Dictionnaire topographique du département de l’Eure, Paris, 1877.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k39294g"
+   },
+   "communes": 676,
+   "label": "Eure",
+   "old": 7908,
+   "places": 11628,
+   "size": 419161
+  },
+  "28": {
+   "bibl": {
+    "abbr": "Dictionnaire topographique d’Eure-et-Loir",
+    "bibl": "Merlet (Lucien), Dictionnaire topographique du département d’Eure-et-Loir, Paris, 1861.",
+    "gallica": "https://gallica.bnf.fr/ark:/12148/bpt6k36741j"
+   },
+   "communes": 412,
+   "label": "Eure-et-Loir",
+   "old": 8107,
+   "places": 7270,
+   "size": 268305
   }
  },
  "licence": "Licence Ouverte 2.0 (Etalab), équivalente à CC BY 4.0",

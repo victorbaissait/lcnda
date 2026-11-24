@@ -112,7 +112,7 @@ function adnl_person(PDO $pdo, int $pid): array
     elseif ((string) $p['living_status'] === 'living') { $why = 'living'; }
     elseif ((string) $p['living_status'] !== 'deceased' && !$dy && !($by && $by <= (int) date('Y') - 110)) { $why = 'living'; } // peut-être vivant : jamais
     elseif ($first === '' || $last === '' || !$by) { $why = 'incomplete'; }
-    return ['id' => (int) $p['id'], 'first' => $first, 'last' => $last, 'birth' => $by, 'death' => $dy, 'why' => $why, 'locked' => (int) ($p['is_locked'] ?? 0) === 1];
+    return ['id' => (int) $p['id'], 'first' => $first, 'last' => $last, 'birth' => $by, 'death' => $dy, 'gender' => (string) ($p['gender'] ?? ''), 'why' => $why, 'locked' => (int) ($p['is_locked'] ?? 0) === 1];
 }
 
 function adnl_fold(string $s): string
@@ -222,7 +222,8 @@ SELECT DISTINCT ?m ?t ?d WHERE { ?e marcrel:aut <http://data.bnf.fr/ark:/12148/'
             if (isset($seen[$key])) { continue; } $seen[$key] = true;
             $y = preg_match('/\b(1[0-9]{3}|20[0-9]{2})\b/', (string) ($w['d'] ?? ''), $m) ? (int) $m[1] : null;
             $mark = adnl_ark((string) ($w['m'] ?? ''));
-            $c['works'][] = ['t' => mb_substr($t, 0, 300), 'y' => $y, 'url' => $mark !== '' ? 'https://catalogue.bnf.fr/ark:/12148/' . $mark : ''];
+            $host = str_starts_with($mark, 'cc') ? 'https://archivesetmanuscrits.bnf.fr/ark:/12148/' : 'https://catalogue.bnf.fr/ark:/12148/'; // cc… : un manuscrit
+            $c['works'][] = ['t' => mb_substr($t, 0, 300), 'y' => $y, 'url' => $mark !== '' ? $host . $mark : ''];
         }
         if (count($c['works']) > ADNL_MAX_WORKS) { $c['works'] = array_slice($c['works'], 0, ADNL_MAX_WORKS); $c['works_more'] = true; }
         usort($c['works'], static fn($a, $b) => ($a['y'] ?? 9999) <=> ($b['y'] ?? 9999));
@@ -236,7 +237,7 @@ function adnl_lookup(PDO $pdo, int $pid, bool $fresh = false, bool $cachedOnly =
 {
     adnl_schema($pdo);
     $p = adnl_person($pdo, $pid);
-    $base = ['person' => ['id' => $p['id'], 'first' => $p['first'], 'last' => $p['last'], 'birth' => $p['birth'], 'locked' => $p['locked']], 'eligible' => $p['why'] === '', 'reason' => $p['why'],
+    $base = ['person' => ['id' => $p['id'], 'first' => $p['first'], 'last' => $p['last'], 'birth' => $p['birth'], 'gender' => $p['gender'], 'locked' => $p['locked']], 'eligible' => $p['why'] === '', 'reason' => $p['why'],
         'candidates' => [], 'fetched_at' => null, 'cached' => false, 'searched' => false, 'credit' => ADNL_CREDIT, 'licence_url' => 'https://data.bnf.fr/fr/licence'];
     if ($p['why'] !== '') { return $base; }
     $key = 'a1|' . adnl_fold($p['last']) . '|' . adnl_fold($p['first']) . '|' . $p['birth'];

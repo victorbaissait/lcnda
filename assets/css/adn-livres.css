@@ -1,0 +1,20 @@
+/* 🦴 ADN ancien et 📚 auteurs de la BnF (assets/js/heritage-adn-livres.js) : le moins possible, sur le modèle des blocs voisins */
+.adnl-anc{margin-top:.6em;display:grid;gap:.6em}
+.adnl-lead{margin:0 0 .2em}
+.adnl-fold>summary{cursor:pointer;font-size:.9em;margin:.2em 0}
+.adnl-fold[open]>summary{margin-bottom:.5em}
+.adnl-map{margin:.4em 0;max-width:640px}
+.adnl-list{list-style:none;margin:0;padding:0;display:grid;gap:.35em}
+.adnl-list li{display:flex;gap:.5em;align-items:flex-start}
+.adnl-list li small{display:block;opacity:.75}
+.adnl-n{flex:0 0 auto;min-width:1.6em;height:1.6em;border-radius:50%;background:#4e79a7;color:#fff;font-size:.8em;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+.adnl-src{display:block;font-size:.8em;opacity:.7;margin-top:.3em}
+.adnl-origin{margin:.2em 0}
+.adnl-book{margin:.3em 0}
+.adnl-book>p{margin:0;display:flex;flex-wrap:wrap;gap:.3em .5em;align-items:baseline}
+.adnl-acts{display:inline-flex;gap:.4em}
+.adnl-works{margin:.3em 0;padding-left:1.2em}
+.adnl-in-so6{margin-top:.4em}
+.adnl-batch-bar{display:flex;flex-wrap:wrap;gap:.5em;align-items:center}
+.adnl-err{color:var(--danger,#b00020)}
+.adnl-set .card{margin-bottom:12px}

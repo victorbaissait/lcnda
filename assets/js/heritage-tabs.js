@@ -54,7 +54,7 @@
     const loadVillages = async () => { try { villages = (await A().api('villages')).villages || []; } catch (_) { villages = []; } return villages; };
     const placeKind = t => { const m = String(t || '').match(/^(village|monograph):/); return m ? m[1] : ''; };
     const placeKey = t => String(t || '').replace(/^(village|monograph):/, '');
-    const placeSections = kind => kind === 'village' ? (ext.villageSections?.() || []).map(([k, l]) => [k, l]) : MONO_SECTIONS;
+    const placeSections = kind => kind === 'village' ? (ext.villageSections?.() || []).map(([k, l]) => [k, l]) : (ext.monographSectionList?.() || MONO_SECTIONS); // 📜 avec les parties ajoutées (heritage-monographie-plus.js)
     function placeLayout(layout, kind) {
         const secs = placeSections(kind).map(x => x[0]), l = layout && typeof layout === 'object' ? layout : {};
         const order = [...new Set((Array.isArray(l.order) ? l.order : []).filter(k => secs.includes(k)))];
